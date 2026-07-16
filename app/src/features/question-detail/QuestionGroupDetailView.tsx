@@ -1,74 +1,75 @@
 /**
- * QuestionGroupDetailView — decision quick-look card.
+ * QuestionGroupDetailView — 「这题值不值得进我的卷」判断台。
  *
- * Retired the "网站现场生产" surface (跑 AI 解析/保存、主题划分/绑定、难度
- * 标定、AI ops-trace) per ADR-0015. detail-slim (owner 2026-07-08) then
- * retired the remaining C2-era production scaffolding — the per-question
- * answer-compare mini-box, its summary stats, and the AI answer-verification
- * results section — because production verification now runs in the import
- * pipeline, not on this page. This is now a pure read-only 决策速览卡:
- * passage, questions, already-saved parse results (layered behind
- * AnalysisDisclosure), bound topic labels, 加入草稿卷, whole-paper /
- * per-group analysis entry points, and (owner-only) 编辑/删除 as
- * low-frequency correction tools.
+ * detail-page-redesign (2026-07-15, spec docs/specs/2026-07-15-detail-page-
+ * redesign-design.md, owner approved via 原型 `?detailVariant=paper-peek`
+ * 实点通过): full rewrite off the old「详情长页」(hero + passage + 逐题
+ * 题干答案 + AnalysisDisclosure 折叠解析) into 速览头 + 一张纸露一角:
  *
- * Pure props-driven, zero internal useState — App.tsx keeps the READ-only
- * state (populated by `openDetail`'s回填 + the AI Enhancement panel's
- * sync-into-open-detail branch) and passes it down.
+ *   返回找题
+ *   ┌ 速览头（meta 行 / 标题 / 大意 / chips / 话题丸 / 动作行）───┐
+ *   ├ 一张纸（该题组 PaperSurface 只读挂载，默认露一角 ~340px，
+ *   │ 底部白→白渐隐 + 展开丸；展开=完整卷面原貌，可收起）──────┤
  *
- * Owner gating: when `isOwnerView` is false (member), the hidden — not
- * disabled — surfaces are: 编辑/删除 and the topic-label confidence
- * percentage (ui-boundary-trim, owner 2026-07-07 / audit Q2). Everything
- * else (passage, questions, saved parse displays, bound topic labels +
- * reason, 加入草稿卷, the whole-paper preview entry, and the per-group
- * analysis entry) stays visible to both member and owner.
+ * 负空间（结构性保证，非自律）：
+ *   - 解析不放 — 卷面挂载只读（lectureFocus=null / onFocusIntent noop /
+ *     无 answers·evidence），AnalysisDisclosure 在本页整体退役。
+ *   - 生产不放 — ADR-0015 既有结论，维持。
+ *   - 管理不放 — 编辑/删除 owner-only 保留但收次位（低频纠错兜底）。
+ *
+ * Internal state (4 useState, all narrow/deliberate — this component stays
+ * otherwise props-driven):
+ *   1-2. `load` / `expanded` — 一张纸 mount: async paper-asset fetch +
+ *        build（五个现有 adapter 之一）+ 展开/收起 toggle.
+ *   3-4. `similarPassagesOpen` / `similarPassagesRequest` — 相似篇章 fetch-
+ *        on-expand panel (carried over verbatim from similar-passages-entry
+ *        E6 — App.tsx has no host fetch to piggyback on for either group).
  */
-import { useEffect, useState, type MouseEvent } from 'react'
+import { useEffect, useState, type CSSProperties, type MouseEvent, type ReactNode } from 'react'
 import {
   ArrowLeft,
   BookOpen,
+  ChevronDown,
+  ChevronUp,
   Eye,
   Pencil,
   Plus,
   Repeat,
-  Tag,
   Trash2,
 } from 'lucide-react'
-import type {
-  ClozeParseQuestionGroupResult,
-  GrammarParseQuestionGroupResult,
-  QuestionGroupCard,
-  QuestionGroupDetail,
-  ReadingParseQuestionGroupResult,
-  SevenChoicesParseQuestionGroupResult,
-  VerifyQuestionGroupResult,
-} from '../../domain/questionBank'
+import type { QuestionGroupCard, QuestionGroupDetail, ReadingParseQuestionGroupResult } from '../../domain/questionBank'
 import { sourceTypeLabel } from '../../domain/questionBank'
-import { labelOf } from '../../workbench/detail/readingProfileLabels'
-import { AnalysisDisclosure } from './AnalysisDisclosure'
 import { compactGroupMeta } from './detailHelpers'
 import { buildPaperBrowseLectureHref, parsePaperIdFromHref } from '../../concierge/paperSurfaceHref'
-import {
-  buildPassageSegments,
-  FIGURE_PLACEHOLDER_TEXT,
-  type PaperFigureManifestEntry,
-} from './passageFigureSegments'
 import { fetchSimilarPassages } from '../../services/similarQuestions.ts'
 import {
   SimilarPassagesPanel,
   similarPassagesRecipeSummary,
   type SimilarPassagesRequestState,
 } from '../similar-passages/SimilarPassagesPanel'
-// PROTOTYPE(detail paper-peek): throwaway 试衣间，赢家折回后整删（含本 import）
+import { PaperSurface } from '../../shared-ui/papersurface/PaperSurface'
+import { paperSurfaceTokens } from '../../../../shared/papersurface/tokens.mjs'
+import { WritingPaperPage } from '../paper-intelligence/WritingPaperPage'
 import {
-  DetailPaperPeekPrototype,
-  DetailPeekSwitcher,
-  useDetailPeekVariant,
-} from './DetailPaperPeekPrototype'
+  buildPaperAssetSurfaceModel,
+  type PaperAssetSurfaceModel,
+  type ReviewedReadingChoiceAnalysisV1,
+  type PaperFigureManifestEntry,
+} from '../paper-intelligence/paperAssetSurfaceAdapter.ts'
+import {
+  buildSevenChoicesSurfaceModel,
+  type SevenChoicesSurfaceModel,
+  type ReviewedSevenChoicesAnalysisV1,
+} from '../paper-intelligence/sevenChoicesSurfaceAdapter.ts'
+import { buildClozePaperView, type ClozePaperViewModel } from '../paper-intelligence/clozePaperViewAdapter.ts'
+import {
+  buildGrammarFillPaperView,
+  type GrammarFillPaperViewModel,
+} from '../paper-intelligence/grammarFillPaperViewAdapter.ts'
+import { buildWritingPaperView, type WritingPaperViewModel } from '../paper-intelligence/writingPaperViewAdapter.ts'
+import { FACET_FRAMEWORKS } from '../paper-intelligence/grammarFillFacetRegistry.ts'
+import type { PaperAssetV1, PaperContentBlock } from '../../domain/paperAsset.ts'
 import './QuestionGroupDetailView.css'
-
-type AsyncStatus = 'idle' | 'loading' | 'loaded' | 'error'
-type SaveStatus = 'idle' | 'saving' | 'saved' | 'error'
 
 // similar-passages-entry (E6, was similar-entrypoints E3): the four
 // groupTypes the v2 passages recipe supports (program.md Q5 — writing
@@ -77,10 +78,8 @@ type SaveStatus = 'idle' | 'saving' | 'saved' | 'error'
 // type's existing string values.
 const SIMILAR_SUPPORTED_GROUP_TYPES = new Set(['reading', 'cloze', 'seven_choices', 'grammar_cloze'])
 
-// similar-passages-entry (E6): one-line, purely presentational recipe
 export type QuestionGroupDetailViewProps = {
   isOwnerView: boolean
-  defaultAiModel: string
 
   detail: {
     selectedDetail: QuestionGroupDetail | null
@@ -88,57 +87,25 @@ export type QuestionGroupDetailViewProps = {
     detailError: string
   }
 
-  verify: {
-    verifyResult: VerifyQuestionGroupResult | null
-    verifyStatus: AsyncStatus
-    verifyError: string
-  }
-
-  clozeParse: {
-    result: ClozeParseQuestionGroupResult | null
-    status: AsyncStatus
-    error: string
-    saveStatus: SaveStatus
-    saveError: string
-  }
-
-  sevenChoicesParse: {
-    result: SevenChoicesParseQuestionGroupResult | null
-    status: AsyncStatus
-    error: string
-    saveStatus: SaveStatus
-    saveError: string
-  }
-
-  grammarParse: {
-    result: GrammarParseQuestionGroupResult | null
-    status: AsyncStatus
-    error: string
-    saveStatus: SaveStatus
-    saveError: string
-  }
-
+  /** chips 数据契约（阅读）：已存 reading parse 的 per-question questionType
+   * 计数。缺失（尚未解析）时 chips 为空——不发明"未解析"占位文案。 */
   readingParse: {
     result: ReadingParseQuestionGroupResult | null
-    status: AsyncStatus
-    error: string
-    saveStatus: SaveStatus
-    saveError: string
   }
 
   onBack: () => void
   onEdit: (detail: QuestionGroupDetail) => void
   onDelete: (detail: QuestionGroupDetail) => void
   onAddToBasket: (detail: QuestionGroupDetail) => void
-  /** 刀B: opens the whole-paper preview page (paper-browse), scrolled to
-   * this group — 挑题态, no lecture. Only rendered when the group has a
+  /** opens the whole-paper preview page (paper-browse), scrolled to this
+   * group — 挑题态, no lecture. Only rendered when the group has a
    * paperSurfaceHref (its paper has a paper-asset). */
   onOpenPaperBrowse: (detail: QuestionGroupDetail) => void
-  /** flow-panel 刀 3: opens the whole-paper preview page in 讲评态,
-   * anchored to this group with its first analyzed question预选 — the SPA
-   * fast-path for「看解析」(plain left-click). The `<a href>` fallback
-   * (buildPaperBrowseLectureHref) still lands on the same state via a full
-   * navigation, so 中键/新标签 stays correct even without this handler. */
+  /** opens the whole-paper preview page in 讲评态, anchored to this group
+   * with its first analyzed question预选 — the SPA fast-path for「讲评」
+   * (plain left-click). The `<a href>` fallback (buildPaperBrowseLectureHref)
+   * still lands on the same state via a full navigation, so 中键/新标签
+   * stays correct even without this handler. */
   onOpenPaperBrowseLecture: (detail: QuestionGroupDetail) => void
   /** similar-passages-entry (E6): full corpus lookup, used to resolve a
    * 相似篇章 candidate's groupId to a full QuestionGroupCard (for 加入草稿卷
@@ -151,19 +118,84 @@ export type QuestionGroupDetailViewProps = {
   onAddSimilarToBasket: (card: QuestionGroupCard) => void
 }
 
+// ── 一张纸：题组模型（按 groupType 走五个现有 adapter 之一） ────────────
+
+type Chip = { label: string; count?: number }
+
+type PeekModel =
+  | { kind: 'reading'; model: PaperAssetSurfaceModel }
+  | { kind: 'sevenChoices'; model: SevenChoicesSurfaceModel }
+  | { kind: 'cloze'; model: ClozePaperViewModel }
+  | { kind: 'grammarFill'; model: GrammarFillPaperViewModel; chips: Chip[] }
+  | { kind: 'writing'; model: WritingPaperViewModel }
+
+type LoadState =
+  | { status: 'loading' }
+  | { status: 'error'; message: string }
+  | { status: 'ready'; model: PeekModel }
+
+// grammar-fill-analysis-v1.json 的 schemaVersion 字段值是 "grammar-fill-
+// analysis-v2"（D1 grammar-facets-v2 就地重铸内容，磁盘文件名未改——见
+// server/search/teachingFacets.mjs 的 analysisConfigs 注释）。spec 文中
+// "grammar-fill-analysis-v2.json" 指的是这份 v2 语义的内容，不是另一个文件；
+// 这里按磁盘实际文件名读取，不发明第二套路径。
+type GrammarFillAnalysisFileV2 = {
+  schemaVersion?: string
+  blanks?: Record<string, { facetKey?: string | null }>
+}
+
+function buildGrammarFacetChips(analysis: GrammarFillAnalysisFileV2, questionIds: string[]): Chip[] {
+  const counts = new Map<string, number>()
+  for (const qid of questionIds) {
+    const facetKey = analysis.blanks?.[qid]?.facetKey
+    if (!facetKey) continue
+    const label = FACET_FRAMEWORKS[facetKey]?.labelZh ?? facetKey
+    counts.set(label, (counts.get(label) ?? 0) + 1)
+  }
+  return [...counts.entries()].map(([label, count]) => ({ label, count }))
+}
+
+// chips 数据契约（阅读）：questionType 覆盖率——缺失显示「未标注」不造假
+// （原型实测该字段部分组缺失）。完形/七选五一期只显示题数（无对应成熟
+// 考点维度，不占位不造假）。语法填空走 buildGrammarFacetChips（见上）。
+function buildTypeChips(
+  detail: QuestionGroupDetail,
+  readingParse: ReadingParseQuestionGroupResult | null,
+  grammarChips: Chip[] | null,
+): Chip[] {
+  if (detail.groupType === 'reading') {
+    if (!readingParse?.questions?.length) return []
+    const counts = new Map<string, number>()
+    for (const q of readingParse.questions) {
+      const type = (q.questionType || '').trim() || '未标注'
+      counts.set(type, (counts.get(type) ?? 0) + 1)
+    }
+    return [...counts.entries()].map(([label, count]) => ({ label, count }))
+  }
+  if (detail.groupType === 'grammar_cloze') {
+    return grammarChips ?? []
+  }
+  if (detail.groupType === 'cloze' || detail.groupType === 'seven_choices') {
+    return [{ label: `${detail.questionCount} 题` }]
+  }
+  return []
+}
+
+const psTokenStyle: CSSProperties & Record<`--${string}`, string | number> = {
+  '--ps-font-stack': paperSurfaceTokens.paperFontStack,
+  '--ps-font-stack-heading': paperSurfaceTokens.paperFontStackHeading,
+  '--ps-font-size': paperSurfaceTokens.paperFontSizePx,
+  '--ps-line-height': paperSurfaceTokens.paperLineHeight,
+  '--ps-passage-indent': paperSurfaceTokens.passageIndent,
+  '--ps-page-margin-x': paperSurfaceTokens.pageMarginX,
+  '--ps-page-margin-top': paperSurfaceTokens.pageMarginTop,
+}
+
 export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
   const {
     isOwnerView,
     detail: { selectedDetail, detailStatus, detailError },
-    verify: { verifyResult, verifyStatus, verifyError },
-    clozeParse: { result: clozeParseResult, status: clozeParseStatus, error: clozeParseError },
-    sevenChoicesParse: {
-      result: sevenChoicesParseResult,
-      status: sevenChoicesParseStatus,
-      error: sevenChoicesParseError,
-    },
-    grammarParse: { result: grammarParseResult, status: grammarParseStatus, error: grammarParseError },
-    readingParse: { result: readingParseResult, status: readingParseStatus, error: readingParseError },
+    readingParse: { result: readingParseResult },
     onBack,
     onEdit,
     onDelete,
@@ -174,62 +206,102 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
     onAddSimilarToBasket,
   } = props
 
-  // figure-render cut (fig-token P0): the ONE deliberate, narrow exception
-  // to this component's "Pure props-driven, zero internal useState" header
-  // invariant (see file header comment). Every other render surface this
-  // cut touches (PaperSurface, print/PDF, DOCX) resolves its figures from
-  // data already threaded in by its host; the detail page has no such host
-  // fetch to piggyback on within this cut's Allowed scope (App.tsx is out
-  // of scope — see the completion report's "beyond the plan's literal
-  // Allowed list" note). Best-effort: any fetch/parse failure, or a group
-  // with no paperSurfaceHref to derive a paperId from, silently degrades
-  // to `figures: []` — buildPassageSegments then short-circuits to the
-  // EXACT pre-cut single-`<pre>` render (raw marker text, unchanged).
+  // ── 一张纸：async 挂载（paper-asset fetch → 五个现有 adapter 之一） ──
   const paperId = parsePaperIdFromHref(selectedDetail?.paperSurfaceHref)
-  const [figuresState, setFiguresState] = useState<{
-    paperId: string | null
-    assetBase: string
-    figures: PaperFigureManifestEntry[]
-  }>({ paperId: null, assetBase: '', figures: [] })
+  const [load, setLoad] = useState<LoadState>({ status: 'loading' })
+  const [expanded, setExpanded] = useState(false)
+
   useEffect(() => {
-    if (!paperId) return
-    let cancelled = false
-    async function loadManifest(): Promise<void> {
-      let assetBase = `/paper-assets/${paperId}/latest`
-      let figures: PaperFigureManifestEntry[] = []
-      try {
-        let res = await fetch(`${assetBase}/figures/manifest.json`)
-        if (!res.ok) {
-          assetBase = `/paper-assets/${paperId}`
-          res = await fetch(`${assetBase}/figures/manifest.json`)
-        }
-        if (res.ok) {
-          const manifest = (await res.json()) as { figures?: PaperFigureManifestEntry[] }
-          figures = Array.isArray(manifest.figures) ? manifest.figures : []
-        }
-      } catch {
-        /* graceful degradation — figures stays [] */
-      }
-      if (!cancelled) setFiguresState({ paperId, assetBase, figures })
+    setExpanded(false)
+    if (!selectedDetail) return
+    const detail = selectedDetail
+    if (!paperId) {
+      setLoad({ status: 'error', message: '该题组暂无卷面资产——去整卷预览或等待生产线补齐。' })
+      return
     }
-    void loadManifest()
+    let cancelled = false
+    async function loadModel(): Promise<void> {
+      try {
+        let base = `/paper-assets/${paperId}/latest`
+        let res = await fetch(`${base}/paper-asset.json`)
+        if (!res.ok) {
+          base = `/paper-assets/${paperId}`
+          res = await fetch(`${base}/paper-asset.json`)
+        }
+        if (!res.ok) throw new Error('卷面暂未就绪，可点击「看整卷」预览原卷。')
+        const asset = (await res.json()) as PaperAssetV1
+        const block = asset.content.blocks.find(
+          (b): b is Extract<PaperContentBlock, { type: 'group' }> =>
+            b.type === 'group' && b.groupId === detail.id,
+        )
+        const group = block ? asset.content.groups[block.groupId] : undefined
+        if (!block || !group) throw new Error('本题组不在该卷面资产内，可点击「看整卷」预览原卷。')
+
+        let figures: PaperFigureManifestEntry[] = []
+        try {
+          const figRes = await fetch(`${base}/figures/manifest.json`)
+          if (figRes.ok) {
+            const manifest = (await figRes.json()) as { figures?: PaperFigureManifestEntry[] }
+            figures = Array.isArray(manifest.figures) ? manifest.figures : []
+          }
+        } catch {
+          /* best-effort：零图卷零断言 */
+        }
+
+        let model: PeekModel
+        if (group.groupType === 'reading') {
+          const aRes = await fetch(`${base}/analyses/reading-choice-analysis-v1.json`)
+          if (!aRes.ok) throw new Error('未找到已审阅阅读解析，可点击「看整卷」预览原卷。')
+          const analysis = (await aRes.json()) as ReviewedReadingChoiceAnalysisV1
+          model = {
+            kind: 'reading',
+            model: buildPaperAssetSurfaceModel({ asset, analysis, groupId: block.groupId, figures, assetBase: base }),
+          }
+        } else if (group.groupType === 'sevenChoices') {
+          const aRes = await fetch(`${base}/analyses/seven-choices-analysis-v1.json`)
+          if (!aRes.ok) throw new Error('未找到已审阅七选五解析，可点击「看整卷」预览原卷。')
+          const analysis = (await aRes.json()) as ReviewedSevenChoicesAnalysisV1
+          model = { kind: 'sevenChoices', model: buildSevenChoicesSurfaceModel({ asset, analysis, groupId: block.groupId }) }
+        } else if (group.groupType === 'cloze') {
+          model = { kind: 'cloze', model: buildClozePaperView({ asset, groupId: block.groupId }) }
+        } else if (group.groupType === 'grammarFill') {
+          let grammarChips: Chip[] = []
+          try {
+            const gRes = await fetch(`${base}/analyses/grammar-fill-analysis-v1.json`)
+            if (gRes.ok) {
+              const analysis = (await gRes.json()) as GrammarFillAnalysisFileV2
+              if (analysis.schemaVersion === 'grammar-fill-analysis-v2') {
+                grammarChips = buildGrammarFacetChips(analysis, detail.questions.map((q) => q.id))
+              }
+            }
+          } catch {
+            /* best-effort：chips 数据源缺失就不显示，不造假 */
+          }
+          model = {
+            kind: 'grammarFill',
+            model: buildGrammarFillPaperView({ asset, groupId: block.groupId }),
+            chips: grammarChips,
+          }
+        } else if (group.groupType === 'writing') {
+          model = { kind: 'writing', model: buildWritingPaperView({ asset, groupId: block.groupId }) }
+        } else {
+          throw new Error(`该题型（${group.groupType}）暂不支持卷面预览。`)
+        }
+        if (!cancelled) setLoad({ status: 'ready', model })
+      } catch (e) {
+        if (!cancelled) setLoad({ status: 'error', message: e instanceof Error ? e.message : String(e) })
+      }
+    }
+    setLoad({ status: 'loading' })
+    void loadModel()
     return (): void => {
       cancelled = true
     }
-  }, [paperId])
-  const activeFigures = figuresState.paperId === paperId ? figuresState.figures : []
-  const activeFiguresAssetBase = figuresState.paperId === paperId ? figuresState.assetBase : ''
+  }, [paperId, selectedDetail?.id])
 
-  // similar-passages-entry (E6): the SECOND deliberate, narrow exception to
-  // this component's "Pure props-driven, zero internal useState" header
-  // invariant (the figuresState fetch above is the first) — same rationale:
-  // no host fetch to piggyback on for this cut's Scope. "相似篇章" is a
-  // per-group ad hoc fetch (fetch on 展开, not on mount), so it can't live as
-  // a prop the way questionGroupById/onAddSimilarToBasket do (those two ARE
-  // ordinary props — the panel's own request lifecycle is what's local).
+  // ── 相似篇章：fetch-on-expand 原地展开面板（similar-passages-entry E6） ──
   const [similarPassagesOpen, setSimilarPassagesOpen] = useState(false)
   const [similarPassagesRequest, setSimilarPassagesRequest] = useState<SimilarPassagesRequestState | null>(null)
-  // 换题（selectedDetail 变化）时收起并清空——不复用别的题组的候选结果。
   useEffect(() => {
     setSimilarPassagesOpen(false)
     setSimilarPassagesRequest(null)
@@ -255,44 +327,49 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
       return
     }
     setSimilarPassagesOpen(true)
-    // 收起不清结果——只在从未取过（或换了题组，见上面的 reset effect）时才发请求。
     if (!similarPassagesRequest) void loadSimilarPassages(selectedDetail.id)
   }
 
-  // These useMemos previously lived in App.tsx (App.tsx:1261-1293 pre-cut);
-  // per PA MF-2 they are NOT props — recomputed here from the passed-in
-  // parse/verify results so App.tsx doesn't need to hand over 5 extra maps.
-  const readingParseByQuestionNo = (() => {
-    const map = new Map<string, ReadingParseQuestionGroupResult['questions'][number]>()
-    readingParseResult?.questions.forEach((item) => {
-      map.set(String(item.questionNo).trim(), item)
-    })
-    return map
-  })()
-  const clozeParseByQuestionNo = (() => {
-    const byNo = new Map<string, ClozeParseQuestionGroupResult['questions'][number]>()
-    clozeParseResult?.questions.forEach((item) => {
-      byNo.set(String(item.questionNo).trim(), item)
-    })
-    return byNo
-  })()
-  const sevenChoicesParseByQuestionNo = (() => {
-    const byNo = new Map<string, SevenChoicesParseQuestionGroupResult['questions'][number]>()
-    sevenChoicesParseResult?.questions.forEach((item) => {
-      byNo.set(String(item.questionNo).trim(), item)
-    })
-    return byNo
-  })()
-  const grammarParseByQuestionNo = (() => {
-    const map = new Map<string, GrammarParseQuestionGroupResult['questions'][number]>()
-    grammarParseResult?.questions.forEach((item) => {
-      map.set(String(item.questionNo).trim(), item)
-    })
-    return map
-  })()
+  if (!selectedDetail) {
+    return (
+      <div className="detail-view">
+        <button className="back-button" type="button" onClick={onBack}>
+          <ArrowLeft size={16} />
+          返回找题
+        </button>
+        {detailStatus === 'loading' && <p className="detail-message">正在读取题组详情...</p>}
+        {detailStatus === 'error' && <p className="detail-message error">{detailError}</p>}
+      </div>
+    )
+  }
 
-  // PROTOTYPE(detail paper-peek): `?detailVariant=` 试衣间态，赢家折回后整删
-  const [detailVariant, setDetailVariant] = useDetailPeekVariant()
+  const grammarChips = load.status === 'ready' && load.model.kind === 'grammarFill' ? load.model.chips : null
+  const chips = buildTypeChips(selectedDetail, readingParseResult, grammarChips)
+
+  let paperBody: ReactNode = null
+  if (load.status === 'loading') {
+    paperBody = <div className="peek-paper-placeholder">卷面加载中…</div>
+  } else if (load.status === 'error') {
+    paperBody = <div className="peek-paper-placeholder">{load.message}</div>
+  } else {
+    const entry = load.model
+    const surfaceData = entry.model.surfaceData
+    const surfaceEl = (
+      <PaperSurface
+        textMap={surfaceData.textMap}
+        annotations={[]}
+        evidence={surfaceData.evidence}
+        questions={surfaceData.questions}
+        optionBank={entry.kind === 'sevenChoices' ? entry.model.options : undefined}
+        mode="lecture"
+        lectureFocus={null}
+        readingFocusBySection={{}}
+        onFocusIntent={() => {}}
+      />
+    )
+    paperBody =
+      entry.kind === 'writing' ? <WritingPaperPage pageModel={entry.model.pageModel}>{surfaceEl}</WritingPaperPage> : surfaceEl
+  }
 
   return (
     <div className="detail-view">
@@ -301,590 +378,138 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
         返回找题
       </button>
 
-      {detailStatus === 'loading' && <p className="detail-message">正在读取题组详情...</p>}
-      {detailStatus === 'error' && <p className="detail-message error">{detailError}</p>}
-
-      {/* PROTOTYPE(detail paper-peek): 形态 B「速览头+一张纸露一角」，
-          原版渲染原样保留在下面的分支 */}
-      {selectedDetail && detailStatus === 'loaded' && detailVariant === 'paper-peek' && (
-        <DetailPaperPeekPrototype
-          detail={selectedDetail}
-          readingParse={readingParseResult}
-          onAddToBasket={onAddToBasket}
-          onOpenPaperBrowse={onOpenPaperBrowse}
-          onOpenPaperBrowseLecture={onOpenPaperBrowseLecture}
-        />
-      )}
-      <DetailPeekSwitcher current={detailVariant} onChange={setDetailVariant} />
-
-      {selectedDetail && detailStatus === 'loaded' && detailVariant === 'original' && (
-        <>
-          <article className="detail-hero">
-            <div>
-              <div className="source-line">
-                <span>{compactGroupMeta(selectedDetail.groupType, selectedDetail.questionCount)}</span>
-              </div>
-              <h3>{selectedDetail.title}</h3>
-              <p>{selectedDetail.summary}</p>
-            </div>
-            <div className="detail-actions">
-              <span className="source-type">{sourceTypeLabel[selectedDetail.sourceType]}</span>
-              {isOwnerView && (
-                <button className="detail-button" type="button" onClick={() => onEdit(selectedDetail)}>
-                  <Pencil size={16} />
-                  编辑
-                </button>
-              )}
-              {isOwnerView && (
-                <button
-                  className="detail-button danger"
-                  type="button"
-                  onClick={() => onDelete(selectedDetail)}
-                  aria-label="删除题组"
-                >
-                  <Trash2 size={16} />
-                  删除
-                </button>
-              )}
-              {selectedDetail.paperSurfaceHref && (
-                <button
-                  className="detail-button"
-                  type="button"
-                  onClick={() => onOpenPaperBrowse(selectedDetail)}
-                >
-                  <Eye size={16} />
-                  看整卷
-                </button>
-              )}
-              {selectedDetail.hasPaperSurfaceAnalysis &&
-                selectedDetail.paperSurfaceHref &&
-                selectedDetail.paperSurfaceLabel && (
-                // flow-panel 刀 3: 直达解析面迁移进整卷页讲评态（不再是老
-                // 解析页 ?view=paper-intelligence&surface=paper 直链——
-                // 导航目标由 classic-retire-2 断言把守，本条与上方的挑题态
-                // 入口是两个不同目的地）。href 走共享换算 helper 保持中键/
-                // 新标签可用；主点击拦截走 SPA openPaperBrowseLecture
-                // （带 questionId+lecture，同页内导航，不整页刷新）。
-                <a
-                  className="detail-button"
-                  href={buildPaperBrowseLectureHref(selectedDetail.paperSurfaceHref) || selectedDetail.paperSurfaceHref}
-                  data-ra-entry="detail-view"
-                  data-ra-group-id={selectedDetail.id}
-                  onClick={(event: MouseEvent<HTMLAnchorElement>) => {
-                    if (event.defaultPrevented || event.button !== 0) return
-                    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
-                    event.preventDefault()
-                    onOpenPaperBrowseLecture(selectedDetail)
-                  }}
-                >
-                  <BookOpen size={16} />
-                  {selectedDetail.paperSurfaceLabel}
-                </a>
-              )}
-              {/* similar-passages-entry (E6, was similar-entrypoints E3
-                  「配相似」深链): 只有配方收录的四类题型(program.md Q5)且有
-                  paperSurfaceHref 才渲染，写作组/无 href 组隐藏式降级（与
-                  「看解析」一致，不做 disabled 态）。点击 = hero 下方原地
-                  展开候选面板（不再深链讲评态）。 */}
-              {SIMILAR_SUPPORTED_GROUP_TYPES.has(selectedDetail.groupType) && selectedDetail.paperSurfaceHref && (
-                <button
-                  className="detail-button"
-                  type="button"
-                  data-ra-entry="detail-view-similar"
-                  data-ra-group-id={selectedDetail.id}
-                  onClick={handleToggleSimilarPassages}
-                >
-                  <Repeat size={16} />
-                  相似篇章
-                </button>
-              )}
-              <button
-                className="add-button"
-                type="button"
-                onClick={() => onAddToBasket(selectedDetail)}
-                disabled={selectedDetail.draftPaperButtonState === 'disabled'}
-                title={
-                  selectedDetail.draftPaperButtonState === 'disabled'
-                    ? selectedDetail.printUnavailableReason || '暂不可组卷'
-                    : undefined
-                }
-              >
-                <Plus size={16} />
-                {selectedDetail.draftPaperButtonState === 'in_current_draft'
-                  ? '已在草稿卷中'
-                  : selectedDetail.draftPaperButtonState === 'disabled'
-                    ? '暂不可组卷'
-                    : '加入草稿卷'}
-              </button>
-            </div>
-          </article>
-
-          {similarPassagesOpen && similarPassagesRequest && (
-            <SimilarPassagesPanel
-              recipeSummary={similarPassagesRecipeSummary(selectedDetail.groupType)}
-              request={similarPassagesRequest}
-              questionGroupById={questionGroupById}
-              onAdd={onAddSimilarToBasket}
-              onCollapse={() => setSimilarPassagesOpen(false)}
-              onRetry={() => selectedDetail && void loadSimilarPassages(selectedDetail.id)}
-            />
-          )}
-
-          <section className="detail-section" aria-label="篇章信息">
-            <div className="detail-section-title">
-              <span>Passage</span>
-              <h3>{selectedDetail.passage.title}</h3>
-            </div>
-            <div className="detail-facts">
-              {selectedDetail.passage.theme && <span>主题：{selectedDetail.passage.theme}</span>}
-              {selectedDetail.passage.discourseType && <span>语篇：{selectedDetail.passage.discourseType}</span>}
-              {selectedDetail.passage.wordCount ? <span>词数：{selectedDetail.passage.wordCount}</span> : null}
-            </div>
-            {buildPassageSegments(selectedDetail.passage.materialText, activeFigures).map((segment, index) => {
-              if (segment.kind === 'figure') {
-                return (
-                  <div key={index} className="passage-figure">
-                    <img
-                      className="passage-figure-image"
-                      src={`${activeFiguresAssetBase}/figures/${segment.figure.file}`}
-                      alt={segment.figure.figureId}
-                    />
-                    <pre className="passage-text passage-figure-flattened-text detail-passage-text">
-                      {segment.flattenedText}
-                    </pre>
-                  </div>
-                )
-              }
-              if (segment.kind === 'placeholder') {
-                return (
-                  <div key={index} className="passage-figure-placeholder">
-                    {FIGURE_PLACEHOLDER_TEXT}
-                  </div>
-                )
-              }
-              return (
-                <pre key={index} className="passage-text detail-passage-text">
-                  {segment.text || '暂无完整原文。后续导入 DOCX/PDF/OCR 时会补到这里。'}
-                </pre>
-              )
-            })}
-          </section>
-
-          <section className="detail-section" aria-label="题组说明">
-            <div className="detail-section-title">
-              <span>Instruction</span>
-              <h3>题组说明</h3>
-            </div>
-            <div className="instruction-summary">
-              <p className="detail-copy">{selectedDetail.instruction || '暂无题组说明。'}</p>
-            </div>
-            <div className="tag-row">
-              {selectedDetail.tags.map((tag) => (
-                <span className="tag" key={tag}>
-                  <Tag size={13} />
-                  {tag}
+      <section className="peek-root" aria-label="题组速览">
+        <header className="peek-hero">
+          <div className="peek-meta-line">
+            <span>{compactGroupMeta(selectedDetail.groupType, selectedDetail.questionCount)}</span>
+            <span className="peek-meta-dot">·</span>
+            <span>{sourceTypeLabel[selectedDetail.sourceType]}</span>
+          </div>
+          <h3 className="peek-title">{selectedDetail.title}</h3>
+          {selectedDetail.summary && <p className="peek-summary">{selectedDetail.summary}</p>}
+          {chips.length > 0 && (
+            <div className="peek-chips" aria-label="题型/考点分布">
+              {chips.map((chip) => (
+                <span key={chip.label} className="peek-chip">
+                  {chip.label}
+                  {chip.count !== undefined && <b> ×{chip.count}</b>}
                 </span>
               ))}
             </div>
-          </section>
-
-          <section className="detail-section" aria-label="话题标签">
-            <div className="topic-label-header">
-              <div className="detail-section-title">
-                <span>Topic Labels</span>
-                <h3>话题标签</h3>
-              </div>
+          )}
+          {selectedDetail.topicLabels?.length > 0 && (
+            <div className="peek-topics" aria-label="话题标签">
+              {selectedDetail.topicLabels.map((topicLabel) => (
+                <span key={topicLabel.label} className="peek-topic">
+                  {topicLabel.label}
+                </span>
+              ))}
             </div>
-            {selectedDetail.topicLabels?.length ? (
-              <div className="topic-label-list" aria-label="已绑定话题标签">
-                {selectedDetail.topicLabels.map((topicLabel) => (
-                  <div className="topic-label-item" key={topicLabel.label}>
-                    <div>
-                      <span>{topicLabel.label}</span>
-                      {topicLabel.reason ? <small>{topicLabel.reason}</small> : null}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <p className="detail-copy">暂无话题标签。</p>
+          )}
+
+          <div className="peek-actions">
+            <button
+              className="peek-btn peek-btn--primary"
+              type="button"
+              onClick={() => onAddToBasket(selectedDetail)}
+              disabled={selectedDetail.draftPaperButtonState === 'disabled'}
+              title={
+                selectedDetail.draftPaperButtonState === 'disabled'
+                  ? selectedDetail.printUnavailableReason || '暂不可组卷'
+                  : undefined
+              }
+            >
+              <Plus size={15} />
+              {selectedDetail.draftPaperButtonState === 'in_current_draft'
+                ? '已在草稿卷中'
+                : selectedDetail.draftPaperButtonState === 'disabled'
+                  ? '暂不可组卷'
+                  : '加入草稿卷'}
+            </button>
+            {selectedDetail.paperSurfaceHref && (
+              <button className="peek-btn" type="button" onClick={() => onOpenPaperBrowse(selectedDetail)}>
+                <Eye size={15} />
+                看整卷
+              </button>
             )}
-          </section>
+            {selectedDetail.hasPaperSurfaceAnalysis &&
+              selectedDetail.paperSurfaceHref &&
+              selectedDetail.paperSurfaceLabel && (
+              <a
+                className="peek-btn"
+                href={buildPaperBrowseLectureHref(selectedDetail.paperSurfaceHref) || selectedDetail.paperSurfaceHref}
+                data-ra-entry="detail-view"
+                data-ra-group-id={selectedDetail.id}
+                onClick={(event: MouseEvent<HTMLAnchorElement>) => {
+                  if (event.defaultPrevented || event.button !== 0) return
+                  if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
+                  event.preventDefault()
+                  onOpenPaperBrowseLecture(selectedDetail)
+                }}
+              >
+                <BookOpen size={15} />
+                {selectedDetail.paperSurfaceLabel}
+              </a>
+            )}
+            {SIMILAR_SUPPORTED_GROUP_TYPES.has(selectedDetail.groupType) && selectedDetail.paperSurfaceHref && (
+              <button
+                className="peek-btn"
+                type="button"
+                data-ra-entry="detail-view-similar"
+                data-ra-group-id={selectedDetail.id}
+                onClick={handleToggleSimilarPassages}
+              >
+                <Repeat size={15} />
+                相似篇章
+              </button>
+            )}
+            {isOwnerView && (
+              <button className="peek-btn peek-btn--minor" type="button" onClick={() => onEdit(selectedDetail)}>
+                <Pencil size={14} />
+                编辑
+              </button>
+            )}
+            {isOwnerView && (
+              <button
+                className="peek-btn peek-btn--minor peek-btn--danger"
+                type="button"
+                onClick={() => onDelete(selectedDetail)}
+                aria-label="删除题组"
+              >
+                <Trash2 size={14} />
+                删除
+              </button>
+            )}
+          </div>
+        </header>
 
-          {selectedDetail.groupType === 'reading' &&
-            (readingParseStatus === 'error' || verifyStatus === 'error' || readingParseResult || verifyResult) && (
-            <section className="detail-section" aria-label="AI 阅读解析与对比">
-              <div className="detail-section-title">
-                <span>Reading AI</span>
-                <h3>AI 解析与答案对比</h3>
-              </div>
+        {similarPassagesOpen && similarPassagesRequest && (
+          <SimilarPassagesPanel
+            recipeSummary={similarPassagesRecipeSummary(selectedDetail.groupType)}
+            request={similarPassagesRequest}
+            questionGroupById={questionGroupById}
+            onAdd={onAddSimilarToBasket}
+            onCollapse={() => setSimilarPassagesOpen(false)}
+            onRetry={() => selectedDetail && void loadSimilarPassages(selectedDetail.id)}
+          />
+        )}
 
-              {readingParseResult && (
-                <>
-                  <p className="detail-message" style={{ marginBottom: 12 }}>
-                    {readingParseResult.parsedCount} / {readingParseResult.questionCount} 题已解析
-                    {readingParseResult.unmatchedQuestionNos.length > 0
-                      ? ` · 未匹配题号：${readingParseResult.unmatchedQuestionNos.join('、')}`
-                      : ''}
-                  </p>
-                  {readingParseResult.articleAnalysis && (
-                    <AnalysisDisclosure label="脉络与重要词块">
-                      <p className="detail-message" style={{ marginBottom: 12 }}>
-                        脉络：{readingParseResult.articleAnalysis.framework || '待补'} ·{' '}
-                        {readingParseResult.articleAnalysis.summary || '待补'}
-                      </p>
-                      {readingParseResult.articleAnalysis.keyChunks && readingParseResult.articleAnalysis.keyChunks.length > 0 && (
-                        <div className="parse-mapping" style={{ marginBottom: 12 }}>
-                          <strong>重要词块</strong>
-                          <ul>
-                            {readingParseResult.articleAnalysis.keyChunks.map((chunk) => (
-                              <li key={`${chunk.chunk}-${chunk.pos || ''}`}>
-                                {chunk.chunk}
-                                {chunk.phonetic ? ` (${chunk.phonetic})` : ''}
-                                {chunk.pos ? `·${chunk.pos}` : ''}
-                                {chunk.reason ? `：${chunk.reason}` : ''}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      )}
-                    </AnalysisDisclosure>
-                  )}
-                </>
-              )}
-
-              {verifyResult && (
-                <p className="detail-message">
-                  {verifyResult.verifiedCount} / {verifyResult.questionCount} 题完成对比，{verifyResult.results.filter((r) => r.verdict === 'correct').length}
-                  题建议正确；{verifyResult.results.filter((r) => r.verdict !== 'correct').length} 题建议复核。
-                  {verifyResult.calledCount !== undefined ? ` 已调 DeepSeek：${verifyResult.calledCount} 题` : ''}
-                </p>
-              )}
-
-              {verifyStatus === 'error' && <p className="form-error">{verifyError}</p>}
-              {readingParseStatus === 'error' && !readingParseResult && <p className="form-error">{readingParseError}</p>}
-            </section>
+        <div className={`peek-paper${expanded ? ' peek-paper--expanded' : ''}`} style={psTokenStyle}>
+          <div className="peek-paper-clip">{paperBody}</div>
+          {load.status === 'ready' && !expanded && (
+            <button className="peek-expand" type="button" onClick={() => setExpanded(true)}>
+              <ChevronDown size={15} />
+              展开卷面
+            </button>
           )}
-
-          {selectedDetail.groupType === 'cloze' && (clozeParseResult || clozeParseStatus === 'error') && (
-            <section className="detail-section" aria-label="AI 完形填空解析">
-              <div className="detail-section-title">
-                <span>Cloze AI</span>
-                <h3>AI 解析</h3>
-              </div>
-
-              {clozeParseResult && (
-                <>
-                  <p className="detail-message" style={{ marginBottom: 12 }}>
-                    {clozeParseResult.parsedCount} / {clozeParseResult.questionCount} 题已解析
-                    {clozeParseResult.answerLine ? ` · ${clozeParseResult.answerLine}` : ''}
-                  </p>
-                  {(clozeParseResult.storySummary || clozeParseResult.condensedStory) && (
-                    <AnalysisDisclosure label="故事大意与串词成篇">
-                      {clozeParseResult.storySummary && (
-                        <p className="detail-message" style={{ marginBottom: 12 }}>
-                          故事大意：{clozeParseResult.storySummary}
-                        </p>
-                      )}
-                      {clozeParseResult.condensedStory && (
-                        <div className="parse-mapping" style={{ marginBottom: 12 }}>
-                          <strong>串词成篇</strong>
-                          <p>{clozeParseResult.condensedStory}</p>
-                        </div>
-                      )}
-                    </AnalysisDisclosure>
-                  )}
-                </>
-              )}
-
-              {clozeParseStatus === 'error' && !clozeParseResult && <p className="form-error">{clozeParseError}</p>}
-            </section>
+          {load.status === 'ready' && expanded && (
+            <button className="peek-expand peek-expand--collapse" type="button" onClick={() => setExpanded(false)}>
+              <ChevronUp size={15} />
+              收起卷面
+            </button>
           )}
-
-          {selectedDetail.groupType === 'seven_choices' &&
-            (sevenChoicesParseResult || sevenChoicesParseStatus === 'error') && (
-            <section className="detail-section" aria-label="AI 七选五解析">
-              <div className="detail-section-title">
-                <span>Seven AI</span>
-                <h3>AI 解析</h3>
-              </div>
-
-              {sevenChoicesParseResult && (
-                <>
-                  <p className="detail-message" style={{ marginBottom: 12 }}>
-                    {sevenChoicesParseResult.parsedCount} / {sevenChoicesParseResult.questionCount} 题已解析
-                    {sevenChoicesParseResult.answerLine ? ` · ${sevenChoicesParseResult.answerLine}` : ''}
-                  </p>
-                  {sevenChoicesParseResult.articleSummary && (
-                    <AnalysisDisclosure label="文章主旨">
-                      <p className="detail-message" style={{ marginBottom: 12 }}>
-                        文章主旨：{sevenChoicesParseResult.articleSummary}
-                      </p>
-                    </AnalysisDisclosure>
-                  )}
-                </>
-              )}
-
-              {sevenChoicesParseStatus === 'error' && !sevenChoicesParseResult && <p className="form-error">{sevenChoicesParseError}</p>}
-            </section>
-          )}
-
-          <section className="detail-section" aria-label="小题列表">
-            <div className="detail-section-title">
-              <span>Questions</span>
-              <h3>小题与答案</h3>
-            </div>
-
-            <div className="question-list">
-                {selectedDetail.questions.map((question) => {
-                const questionNo = String(question.questionNo).trim()
-                const readingParseItem = readingParseByQuestionNo.get(questionNo)
-                const clozeParseItem = clozeParseByQuestionNo.get(questionNo)
-                const sevenChoicesParseItem = sevenChoicesParseByQuestionNo.get(questionNo)
-                const grammarParseItem = grammarParseByQuestionNo.get(questionNo)
-                const showAi = selectedDetail.groupType === 'reading'
-                const showClozeAi = selectedDetail.groupType === 'cloze'
-                const showSevenChoicesAi = selectedDetail.groupType === 'seven_choices'
-                const showGrammarAi = selectedDetail.groupType === 'grammar_cloze'
-
-                return (
-                  <article className="question-item" id={`question-${question.id}`} key={question.id}>
-                    <div className="question-topline">
-                      <span>第 {question.questionNo} 题</span>
-                      <span>{question.questionType}</span>
-                      <span>{question.score} 分</span>
-                    </div>
-                    <p className="question-stem detail-question-stem-serif">{question.stem}</p>
-                    {question.options.length > 0 && (
-                      <div className="option-list">
-                        {question.options.map((option) => (
-                          <div className="option-item" key={option.id}>
-                            <strong>{option.label}</strong>
-                            <span>{option.content}</span>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                    <div className="answer-box">
-                      <p>答案：{question.answer || '待补'}</p>
-                    </div>
-
-                    {showAi && readingParseItem && (
-                      <div className="question-ai-block">
-                        {readingParseItem.answer && (
-                          <p className="question-ai-answer-line">
-                            <strong>AI 推荐答案：</strong>
-                            {readingParseItem.answer}
-                          </p>
-                        )}
-                        <AnalysisDisclosure>
-                          <div className="question-ai-parse">
-                            <div className="question-ai-section-title">
-                              <span>AI 阅读解析</span>
-                            </div>
-                            <p>
-                              <strong>题目翻译：</strong>
-                              {readingParseItem.questionTranslation || '未返回'}
-                            </p>
-                            <p>
-                              <strong>题型策略：</strong>
-                              {readingParseItem.strategy || '待返回'}
-                            </p>
-                            {readingParseItem.locationSentence && (
-                              <p>
-                                <strong>定位句：</strong>
-                                {readingParseItem.locationSentence}
-                                {readingParseItem.locationSentenceTranslation
-                                  ? ` / ${readingParseItem.locationSentenceTranslation}`
-                                  : ''}
-                              </p>
-                            )}
-                            {readingParseItem.answerSentence && (
-                              <p>
-                                <strong>答案句：</strong>
-                                {readingParseItem.answerSentence}
-                              </p>
-                            )}
-                            <p>
-                              <strong>AI 解析：</strong>
-                              {readingParseItem.explanation || '未返回'}
-                            </p>
-                            {readingParseItem.languageFeatures && (
-                              <p>
-                                <strong>语言特征：</strong>
-                                {readingParseItem.languageFeatures}
-                              </p>
-                            )}
-                            {readingParseItem.synonymMappings && readingParseItem.synonymMappings.length > 0 && (
-                              <div className="parse-mapping">
-                                <strong>同义替换</strong>
-                                <ul>
-                                  {readingParseItem.synonymMappings.map((mapping) => (
-                                    <li key={`${question.questionNo}-${mapping.text}`}>
-                                      <span>{mapping.text}</span>
-                                      <b>=</b>
-                                      <span>{mapping.replacement}</span>
-                                    </li>
-                                  ))}
-                                </ul>
-                              </div>
-                            )}
-                            {readingParseItem.distractorAnalysis && readingParseItem.distractorAnalysis.length > 0 && (
-                              <div className="parse-mapping">
-                                <strong>干扰项分析</strong>
-                                <ul>
-                                  {readingParseItem.distractorAnalysis.map((item) => (
-                                    <li key={`${question.questionNo}-${item.option}`}>
-                                      {item.option}（{labelOf(readingDistractorTypeLabel, item.type)}）：{item.reason}
-                                    </li>
-                                  ))}
-                                </ul>
-                              </div>
-                            )}
-                          </div>
-                        </AnalysisDisclosure>
-                      </div>
-                    )}
-                    {showClozeAi && clozeParseItem && (
-                      <div className="question-ai-block">
-                        <p className="question-ai-answer-line">
-                          <strong>AI 推荐答案：</strong>
-                          {clozeParseItem.answer || '未返回'}
-                          {clozeParseItem.answerText ? ` · ${clozeParseItem.answerText}` : ''}
-                          {clozeParseItem.answerMeaning ? `（${clozeParseItem.answerMeaning}）` : ''}
-                        </p>
-                        <AnalysisDisclosure>
-                          <div className="question-ai-parse">
-                            <div className="question-ai-section-title">
-                              <span>AI 完形填空解析</span>
-                            </div>
-                            <p>
-                              <strong>AI 解析：</strong>
-                              {clozeParseItem.analysis || '未返回'}
-                            </p>
-                            {clozeParseItem.distractorAnalysis && clozeParseItem.distractorAnalysis.length > 0 && (
-                              <div className="parse-mapping">
-                                <strong>干扰项分析</strong>
-                                <ul>
-                                  {clozeParseItem.distractorAnalysis.map((item) => (
-                                    <li key={`${question.questionNo}-${item.option || item.text}`}>
-                                      {item.option ? `${item.option}. ` : ''}
-                                      {item.text ? `${item.text}：` : ''}
-                                      {item.reason}
-                                    </li>
-                                  ))}
-                                </ul>
-                              </div>
-                            )}
-                          </div>
-                        </AnalysisDisclosure>
-                      </div>
-                    )}
-                    {showSevenChoicesAi && sevenChoicesParseItem && (
-                      <div className="question-ai-block">
-                        <p className="question-ai-answer-line">
-                          <strong>AI 推荐答案：</strong>
-                          {sevenChoicesParseItem.answer || '未返回'}
-                          {sevenChoicesParseItem.optionText ? ` · ${sevenChoicesParseItem.optionText}` : ''}
-                        </p>
-                        <AnalysisDisclosure>
-                          <div className="question-ai-parse">
-                            <div className="question-ai-section-title">
-                              <span>AI 七选五解析</span>
-                            </div>
-                            {sevenChoicesParseItem.optionTranslation && (
-                              <p>
-                                <strong>选项翻译：</strong>
-                                {sevenChoicesParseItem.optionTranslation}
-                              </p>
-                            )}
-                            {sevenChoicesParseItem.positionContext && (
-                              <p>
-                                <strong>位置与上下文：</strong>
-                                {sevenChoicesParseItem.positionContext}
-                              </p>
-                            )}
-                            <p>
-                              <strong>AI 解析：</strong>
-                              {sevenChoicesParseItem.analysis || '未返回'}
-                            </p>
-                          </div>
-                        </AnalysisDisclosure>
-                      </div>
-                    )}
-                    {showGrammarAi && grammarParseItem && (
-                      <div className="question-ai-block">
-                        <p className="question-ai-answer-line">
-                          <strong>AI 推荐答案：</strong>
-                          {grammarParseItem.answer || '未返回'}
-                        </p>
-                        <AnalysisDisclosure>
-                          <div className="question-ai-parse">
-                            <div className="question-ai-section-title">
-                              <span>AI 语法填空解析</span>
-                            </div>
-                            {grammarParseItem.hintMeaning && (
-                              <p>
-                                <strong>提示词意思：</strong>
-                                {grammarParseItem.hintMeaning}
-                              </p>
-                            )}
-                            <p>
-                              <strong>AI 解析：</strong>
-                              {grammarParseItem.analysis || '未返回'}
-                            </p>
-                            {grammarParseItem.sentenceTranslation && (
-                              <p>
-                                <strong>挖空句翻译：</strong>
-                                {grammarParseItem.sentenceTranslation}
-                              </p>
-                            )}
-                          </div>
-                        </AnalysisDisclosure>
-                      </div>
-                    )}
-                  </article>
-                )
-              })}
-            </div>
-          </section>
-
-          {selectedDetail.groupType === 'grammar_cloze' && (grammarParseResult || grammarParseStatus === 'error') && (
-            <section className="detail-section" aria-label="AI 语法填空解析">
-              <div className="detail-section-title">
-                <span>Grammar AI</span>
-                <h3>AI 解析</h3>
-              </div>
-
-              {grammarParseResult && (
-                <>
-                  <p className="detail-message" style={{ marginBottom: 12 }}>
-                    {grammarParseResult.parsedCount} / {grammarParseResult.questionCount} 空已解析
-                  </p>
-                  {grammarParseResult.fullTranslation && (
-                    <AnalysisDisclosure label="全文翻译">
-                      <div className="parse-mapping" style={{ marginBottom: 12 }}>
-                        <strong>全文翻译</strong>
-                        <p>{grammarParseResult.fullTranslation}</p>
-                      </div>
-                    </AnalysisDisclosure>
-                  )}
-                </>
-              )}
-
-              {grammarParseStatus === 'error' && !grammarParseResult && <p className="form-error">{grammarParseError}</p>}
-            </section>
-          )}
-
-        </>
-      )}
+        </div>
+      </section>
     </div>
   )
-}
-
-const readingDistractorTypeLabel: Record<string, string> = {
-  '0': '正确项',
-  '1': '细节词误导',
-  '2': '无中生有',
-  '3': '常识干扰',
 }

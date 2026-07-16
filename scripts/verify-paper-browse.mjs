@@ -437,10 +437,15 @@ assert(
   /onOpenPaperBrowse:\s*\(detail:\s*QuestionGroupDetail\)\s*=>\s*void/.test(detailViewSrc),
   'missing onOpenPaperBrowse in props type',
 )
+// detail-page-redesign (2026-07-15): the plain-substring count grew stale —
+// the new「一张纸」degradation placeholder copy (spec 错误与边角: "带去整卷
+// 预览指引") legitimately says "看整卷" a few more times as user-facing
+// guidance text in error messages, not as additional buttons. Narrowed to
+// counting the actual button JSX.
 assert(
   'QuestionGroupDetailView renders exactly one 看整卷 button',
-  (detailViewSrc.match(/看整卷/g) || []).length === 1,
-  'expected exactly one 看整卷 occurrence',
+  (detailViewSrc.match(/<button[\s\S]{0,120}?>\s*<Eye[^/]*\/>\s*看整卷/g) || []).length === 1,
+  'expected exactly one 看整卷 button element',
 )
 assert(
   '看整卷 button is gated on selectedDetail.paperSurfaceHref',
@@ -918,10 +923,19 @@ assert(
   'missing optionBank wiring in PaperIntelligencePaperSurfaceHarness.tsx',
 )
 
+// C6 originally kept the detail page out of PaperSurface scope entirely.
+// detail-page-redesign (2026-07-15, spec docs/specs/2026-07-15-detail-page-
+// redesign-design.md 数据契约「一张纸」) deliberately brings PaperSurface
+// INTO the detail page — a read-only mount, same adapters/data-shape as
+// paper-browse (「所见即所印」) — so this assertion flips from "absent" to
+// "present, and pinned read-only" (the read-only pinning itself is asserted
+// in scripts/verify-detail-redesign.mjs, this repo's dedicated verify for
+// this cut; kept as a light presence re-check here since it directly
+// contradicts what C6 used to guarantee).
 assert(
-  'QuestionGroupDetailView.tsx does not import PaperSurface (C6 — detail page stays out of scope)',
-  !/from\s*['"][^'"]*shared-ui\/papersurface\/PaperSurface['"]/.test(detailViewSrcForOptionBank),
-  'QuestionGroupDetailView.tsx unexpectedly imports PaperSurface',
+  'QuestionGroupDetailView.tsx imports PaperSurface (C6 superseded by detail-page-redesign — 一张纸 read-only mount, pinning asserted in verify-detail-redesign.mjs)',
+  /from\s*['"][^'"]*shared-ui\/papersurface\/PaperSurface['"]/.test(detailViewSrcForOptionBank),
+  'QuestionGroupDetailView.tsx no longer imports PaperSurface',
 )
 
 const { buildSevenChoicesSurfaceModel } = await import(

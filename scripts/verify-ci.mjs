@@ -91,6 +91,7 @@ const registry = {
   'scripts/verify-draft-student-field.mjs',
   'scripts/verify-genre-truth.mjs',
   'scripts/verify-draft-paper-docx.mjs',
+  'scripts/verify-detail-redesign.mjs',
   ],
 }
 
