@@ -56,6 +56,12 @@ import {
   FIGURE_PLACEHOLDER_TEXT,
   type PaperFigureManifestEntry,
 } from './passageFigureSegments'
+// PROTOTYPE(detail paper-peek): throwaway 试衣间，赢家折回后整删（含本 import）
+import {
+  DetailPaperPeekPrototype,
+  DetailPeekSwitcher,
+  useDetailPeekVariant,
+} from './DetailPaperPeekPrototype'
 import './QuestionGroupDetailView.css'
 
 type AsyncStatus = 'idle' | 'loading' | 'loaded' | 'error'
@@ -236,6 +242,9 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
     return map
   })()
 
+  // PROTOTYPE(detail paper-peek): `?detailVariant=` 试衣间态，赢家折回后整删
+  const [detailVariant, setDetailVariant] = useDetailPeekVariant()
+
   return (
     <div className="detail-view">
       <button className="back-button" type="button" onClick={onBack}>
@@ -246,7 +255,20 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
       {detailStatus === 'loading' && <p className="detail-message">正在读取题组详情...</p>}
       {detailStatus === 'error' && <p className="detail-message error">{detailError}</p>}
 
-      {selectedDetail && detailStatus === 'loaded' && (
+      {/* PROTOTYPE(detail paper-peek): 形态 B「速览头+一张纸露一角」，
+          原版渲染原样保留在下面的分支 */}
+      {selectedDetail && detailStatus === 'loaded' && detailVariant === 'paper-peek' && (
+        <DetailPaperPeekPrototype
+          detail={selectedDetail}
+          readingParse={readingParseResult}
+          onAddToBasket={onAddToBasket}
+          onOpenPaperBrowse={onOpenPaperBrowse}
+          onOpenPaperBrowseLecture={onOpenPaperBrowseLecture}
+        />
+      )}
+      <DetailPeekSwitcher current={detailVariant} onChange={setDetailVariant} />
+
+      {selectedDetail && detailStatus === 'loaded' && detailVariant === 'original' && (
         <>
           <article className="detail-hero">
             <div>

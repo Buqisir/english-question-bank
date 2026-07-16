@@ -6,6 +6,14 @@ Last updated: 2026-07-15（grammar-facets-v2(D1) + similar-v2-engine(E5)
 在新端点语义下是死路，E6 改指前不部署。同日 paper-browse 目录 rail
 分段面板重铸上线，**生产 6b76ec5**）
 
+下一步队列（2026-07-15 收状态）：① E6/E7——「配相似」CTA 改指篇章相似
+端点 + 前端 reasons 文案表/类型收账（解部署门，D1/E5 随之见生产，D1 数据
+文件走 git 同步无需停服 apply）；② 详情页重设计正式刀——spec 已 approved
+（`docs/specs/2026-07-15-detail-page-redesign-design.md`，原型
+`?detailVariant=paper-peek` DEV-only 在库可试）；③ 挂账：no-hint 3 空疑似
+导入期数据损伤（2020-ii 057/063/064，回源卷查证小刀）、CR watch 若干
+（谓语推导副本收拢、vp-driver README 残句等，见两把刀 cr.md）。
+
 ## 现在是什么
 
 - **已上线** https://eqbank.cc：邀请制登录（ADR-0012）、owner/member

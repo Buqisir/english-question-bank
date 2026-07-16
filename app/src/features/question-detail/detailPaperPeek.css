@@ -1,0 +1,228 @@
+/**
+ * PROTOTYPE — throwaway，随 DetailPaperPeekPrototype.tsx 一起整删。
+ *
+ * 详情页是工具页（中性 token 体系 + 墨绿签名）；纸卡按「暖纸卡浮中性页」
+ * 判例（DESIGN.md §2 my-space 微缩 A4 先例）自带纸面样式浮在中性壳上。
+ */
+
+.pdp-root {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* ── 速览头（工具侧，中性） ───────────────────────────────── */
+
+.pdp-hero {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pdp-meta-line {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.pdp-meta-dot {
+  color: var(--line-strong);
+}
+
+.pdp-title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 650;
+  color: var(--ink-strong);
+  text-wrap: balance;
+}
+
+.pdp-summary {
+  margin: 0;
+  max-width: 68ch;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--ink);
+}
+
+.pdp-chips,
+.pdp-topics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.pdp-chip {
+  font-size: 12px;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 3px 10px;
+  background: var(--panel);
+}
+
+.pdp-chip b {
+  font-weight: 600;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+
+.pdp-chip--placeholder {
+  color: var(--muted);
+  border-style: dashed;
+  background: transparent;
+}
+
+.pdp-topic {
+  font-size: 12px;
+  color: var(--eqb-color-primary, #2c6e56);
+  background: var(--eqb-color-primary-soft, #eaf1ed);
+  border-radius: 999px;
+  padding: 3px 10px;
+}
+
+.pdp-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.pdp-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  padding: 7px 14px;
+  border-radius: 6px;
+  border: 1px solid var(--line-strong);
+  background: var(--panel);
+  color: var(--ink);
+  cursor: pointer;
+  transition: background var(--motion-fast) var(--ease-hover);
+}
+
+.pdp-btn:hover {
+  background: var(--surface-strong);
+}
+
+/* 本条覆盖 .pdp-btn 的中性底/边：主操作按钮走墨绿签名（The Green-Pen Rule 的
+ * 正当小面积用法——当前主操作） */
+.pdp-btn--primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.pdp-btn--primary:hover {
+  background: var(--eqb-color-primary-deep, #1e4a3a);
+}
+
+/* ── 一张纸（露一角） ─────────────────────────────────────── */
+
+.pdp-paper {
+  position: relative;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(30, 30, 28, 0.06);
+  overflow: hidden;
+}
+
+.pdp-paper-clip {
+  max-height: 340px;
+  overflow: hidden;
+}
+
+/* 露一角的下缘渐隐：白纸淡出到白纸（卡内自体渐隐，不透出页底色，
+ * 读作"纸还没完"） */
+.pdp-paper:not(.pdp-paper--expanded) .pdp-paper-clip::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 96px;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff 85%);
+  pointer-events: none;
+}
+
+.pdp-paper--expanded .pdp-paper-clip {
+  max-height: none;
+  padding-bottom: 48px;
+}
+
+.pdp-expand {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12.5px;
+  padding: 5px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  background: var(--panel);
+  color: var(--ink);
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(30, 30, 28, 0.06);
+}
+
+.pdp-expand:hover {
+  background: var(--surface-strong);
+}
+
+.pdp-paper-placeholder {
+  padding: 40px 24px 64px;
+  font-size: 13.5px;
+  color: var(--muted);
+  text-align: center;
+}
+
+/* ── DEV 切换丸（不参与评审） ─────────────────────────────── */
+
+.pdp-switcher {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--ink-strong, #1e1e1c);
+  color: var(--surface, #f6f6f4);
+  border-radius: 999px;
+  padding: 5px 14px;
+  font-size: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.pdp-switcher span {
+  opacity: 0.55;
+}
+
+.pdp-switcher .pdp-switcher-on {
+  opacity: 1;
+  font-weight: 650;
+}
+
+.pdp-switcher button {
+  background: none;
+  border: none;
+  color: inherit;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 999px;
+}
+
+.pdp-switcher button:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
