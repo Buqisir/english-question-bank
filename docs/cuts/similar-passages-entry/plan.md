@@ -104,9 +104,11 @@ loading / error+重试。
 ## 裁决点清单（PM 断点锚）
 
 - [x] 裁1 plan 落锤 + commit（本文件）
-- [ ] 裁2 DEV 回执审读 + 主代理亲跑复核（worktree：tsc + verify:all +
-      DP-2 脚本，原始退出码）
-- [ ] 裁3 fresh CR（Opus/high）MF 处置
-- [ ] 裁4 merge 主树 + main CI 绿 + 契约锁收回（删 contract-unlock）
+- [x] 裁2 DEV 回执审读 + 主代理亲跑复核（2026-07-15：verify:all 78/1/0
+      exit 0 + DP-2 20 checks exit 0，均主代理亲跑；三个 verify 脚本改动
+      亲读——精确计数制未放水）
+- [x] 裁3 fresh CR APPROVE 0MF/4SW（cr.md）；SW-1/2/4 当场收 + 复验全绿，
+      SW-3 不收（诚实冗余）
+- [x] 裁4 merge 主树 d306b8a + 契约锁收回；main CI 见 push 后 watch
 - [ ] 裁5 owner DP-3（归并 D1/E5/E6 三刀一并实点）→ **部署同批解门**
       （强制裁决点；D1 数据文件走 git 同步无需停服 apply）
