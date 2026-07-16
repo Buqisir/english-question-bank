@@ -46,4 +46,4 @@ boundary / teaching interpretation: **no**。CR-lite。
 
 - [x] DP-1 诊断报告 + 加固方案 owner 拍板（2026-07-16「同意」）
 - [x] DP-2 加固落地 + verify 全绿（本文件 Verification 三条，2026-07-16）
-- [ ] DP-3 merge + main CI 绿；生产部署（与 gf-2020-ii-hint-repair 凑车）
+- [x] DP-3 merge + main CI 绿（run 29491435311 双证）+ 生产部署 6264f6a（2026-07-16，health ok、eqbank.cc 200，与修伤刀同车）

@@ -13,8 +13,8 @@ plan `docs/cuts/design-canon-v2/`；owner 过目条文待做）；
 ~~no-hint 3 空疑似导入期数据损伤~~ ✅ 2026-07-16 收官（实核 **7 空**
 带伤仅 2020-ii 一卷，回源 docx sha256 对证 passage 完好、损伤仅
 analysis 三字段；owner 判例表逐空拍板后修复 + verify baseline 刷新为
-修后真值，`docs/cuts/gf-2020-ii-hint-repair/`；生产 analysis 仍带伤
-待随下次部署）、CR watch 若干（谓语推导副本收拢、vp-driver README
+修后真值，`docs/cuts/gf-2020-ii-hint-repair/`；**生产已部署 6264f6a**
+且实证 057 修后数据+.bak 归零）、CR watch 若干（谓语推导副本收拢、vp-driver README
 残句等，见各刀 cr.md）。
 
 ## 现在是什么
@@ -362,6 +362,8 @@ analysis 三字段；owner 判例表逐空拍板后修复 + verify baseline 刷�
   md5 全等）、签名无活洞；现场 6→7 最经济解释=学生/教师版对比错位。
   suggestion 缓存键追加断篇集合哈希（同签名断篇变则裁决自愈重算）。
   诊断记录+可重跑 loop 入档 `docs/cuts/pagination-determinism-diag/`。
+  **生产已部署 6264f6a**（health ok、eqbank.cc 200，owner 拍板同车带上
+  修伤刀与 .bak 清理）。
 - **相似题配方 v2（2026-07-15 四题型全拍板 ✅，施工队列就绪）**：
   逐题型重谈完成，v1 三裁决点全消解（词性/话题对调→词性不进配方；
   阅读话题不同+20→废止；七选五衔接机制→小题相似整个不做）。总表+
