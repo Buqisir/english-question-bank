@@ -18,19 +18,25 @@
  *   3. Zero rogue types unsuspended — "latest 零野类型" reframed per the
  *      Forbidden rule (this cut may never rewrite `primaryType` itself): no
  *      rogueType finding is missing its suspension.
- *   4. Real-module behavior (badge/row), against a self-contained synthetic
- *      fixture so this proof does not depend on what the current corpus
- *      happens to contain — `buildPaperAssetSurfaceModel` (client adapter)
- *      hides trapLabel/trapSecondaryLabel/trapSubtype for both levels, keeps
- *      trapExplanation + trapEvidenceRows for badge, clears them (and sets
- *      trapRowSuspended) for row; an un-suspended control option keeps its
- *      label. `loadGroupAnalysisTexts` (server analysisText.mjs) skips a
- *      row-suspended option's explanation from the "干扰项：" line, keeps a
- *      badge-suspended one.
+ *   4. Real-module behavior, against a self-contained synthetic fixture so
+ *      this proof does not depend on what the current corpus happens to
+ *      contain — `buildPaperAssetSurfaceModel` (client adapter) is a PLAIN
+ *      PASSTHROUGH (plan.md contract: adapter only transmits `trapSuspension`,
+ *      it never hides trapLabel/trapExplanation/etc. itself — that gating
+ *      decision belongs to the consumer) plus a general (suspension-agnostic)
+ *      crash fix for an unrecognized primaryType. PaperAssetAnalysisPanel.tsx
+ *      (the actual gating owner) is checked by static source assertion here
+ *      (repo convention for .tsx display logic with no jsdom harness) and by
+ *      real rendered behavior in DP-2. `loadGroupAnalysisTexts` (server
+ *      analysisText.mjs, which does its own gating directly) is checked as a
+ *      real module call: skips a row-suspended option's explanation from the
+ *      "干扰项：" line, keeps a badge-suspended one.
  *   5. Real-module behavior, against the actual live corpus — the one
  *      confirmed rogueType/badge record (`paper-2023-i` q-2023-i-025/B)
- *      renders with no trapLabel and a non-empty trapExplanation through the
- *      real adapter, not a synthetic stand-in.
+ *      passes its suspension through the real adapter with a non-empty
+ *      trapExplanation (describeTrap does not crash), not a synthetic
+ *      stand-in; the panel-level badge-hiding is proven in DP-2 against this
+ *      exact record.
  */
 
 import { existsSync, mkdtempSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs'
@@ -285,20 +291,54 @@ function buildFixtureAnalysis(groupId, questionId) {
   const optionC = view.options.find((o) => o.label === 'C')
   const optionD = view.options.find((o) => o.label === 'D')
 
-  assert('fixture badge option B: trapLabel hidden', optionB.trapLabel === null)
-  assert('fixture badge option B: trapSecondaryLabel hidden', optionB.trapSecondaryLabel === null)
-  assert('fixture badge option B: trapSubtype hidden', optionB.trapSubtype === null)
-  assert('fixture badge option B: trapExplanation still shown', optionB.trapExplanation === 'BADGE_EXPLANATION_MARKER')
-  assert('fixture badge option B: trapRowSuspended is false', optionB.trapRowSuspended === false)
+  // Adapter contract (plan.md): a plain passthrough of `trap.suspension` as
+  // `trapSuspension` — it does NOT hide trapLabel/trapSecondaryLabel/
+  // trapSubtype/trapExplanation/trapEvidenceRows itself (that gating
+  // decision belongs to the consumer: PaperAssetAnalysisPanel.tsx below via
+  // static source check, and analysisText.mjs's own real-module check
+  // further down). What the adapter DOES own: never crashing on an
+  // unrecognized primaryType (describeTrap's former assertNever throw,
+  // fixed generally — not suspension-gated) and transmitting the
+  // suspension level/reason faithfully.
+  assert('fixture badge option B: trapSuspension passthrough is {level:"badge", reason:...}', optionB.trapSuspension?.level === 'badge' && optionB.trapSuspension?.reason === 'labelExplanationContradiction')
+  assert('fixture badge option B: trapLabel NOT hidden by the adapter (panel\'s job)', typeof optionB.trapLabel === 'string' && optionB.trapLabel.length > 0)
+  assert('fixture badge option B: trapExplanation computed (adapter does not crash/gate)', optionB.trapExplanation === 'BADGE_EXPLANATION_MARKER')
 
-  assert('fixture row option C: trapLabel hidden', optionC.trapLabel === null)
-  assert('fixture row option C: trapExplanation cleared (no usable explanation)', optionC.trapExplanation === null)
-  assert('fixture row option C: trapEvidenceRows cleared', optionC.trapEvidenceRows.length === 0)
-  assert('fixture row option C: trapRowSuspended is true', optionC.trapRowSuspended === true)
+  assert('fixture row option C: trapSuspension passthrough is {level:"row", reason:...}', optionC.trapSuspension?.level === 'row' && optionC.trapSuspension?.reason === 'structuralIncompleteness')
+  assert('fixture row option C: trapExplanation still computed by the adapter (ROW_EXPLANATION_MARKER field was present)', optionC.trapExplanation === 'ROW_EXPLANATION_MARKER')
 
-  assert('fixture control option D (unsuspended): trapLabel still shown', typeof optionD.trapLabel === 'string' && optionD.trapLabel.length > 0)
-  assert('fixture control option D (unsuspended): trapExplanation still shown', optionD.trapExplanation === 'CONTROL_EXPLANATION_MARKER')
-  assert('fixture control option D (unsuspended): trapRowSuspended is false', optionD.trapRowSuspended === false)
+  assert('fixture control option D (unsuspended): trapSuspension is null', optionD.trapSuspension === null)
+  assert('fixture control option D (unsuspended): trapLabel present', typeof optionD.trapLabel === 'string' && optionD.trapLabel.length > 0)
+  assert('fixture control option D (unsuspended): trapExplanation present', optionD.trapExplanation === 'CONTROL_EXPLANATION_MARKER')
+}
+
+// ── PaperAssetAnalysisPanel.tsx (panel) — static source check ─────────────
+// This repo's convention for .tsx display logic (verify-analysis-layering.mjs,
+// verify-reading-analysis-retire.mjs): "no jsdom/testing-library harness
+// exists" for these panels, so gating logic is proven by source assertion
+// here, and REAL rendered behavior (badge hides the type badge, keeps the
+// explanation; a normal option still shows its badge) is proven in DP-2
+// (docs/cuts/r2-trap-audit/qa/dp2-r2-trap-audit.mjs) against real corpus
+// data (paper-2023-i's one confirmed rogueType/badge record). The `row`
+// level has zero real instances in the corpus today (this cut's own scan:
+// structuralIncompleteness hit 0/1395) — DP-2 cannot behaviorally exercise
+// a case that does not exist on disk, so this static check is the only
+// proof available for the row branch until a real one appears; noted as a
+// self-review blind spot in the completion report.
+{
+  const panelSrc = readFileSync(path.join(rootDir, 'app/src/features/paper-intelligence/PaperAssetAnalysisPanel.tsx'), 'utf8')
+  assert(
+    'PaperAssetAnalysisPanel.tsx reads option.trapSuspension (gating lives here, not the adapter)',
+    panelSrc.includes('option.trapSuspension'),
+  )
+  assert(
+    'PaperAssetAnalysisPanel.tsx hides the type badge for badge/row suspension',
+    /hideTypeBadgeAndMeta[\s\S]{0,80}option\.trapLabel/.test(panelSrc) || /!hideTypeBadgeAndMeta && option\.trapLabel/.test(panelSrc),
+  )
+  assert(
+    'PaperAssetAnalysisPanel.tsx skips the ENTIRE trap detail block for row-level suspension (整行不显)',
+    /hideTrapDetailEntirely \? null/.test(panelSrc),
+  )
 }
 
 // ── analysisText.mjs (server) — real module, temp on-disk fixture ─────────
@@ -351,11 +391,17 @@ function buildFixtureAnalysis(groupId, questionId) {
       const { buildPaperAssetSurfaceModel } = await import('../app/src/features/paper-intelligence/paperAssetSurfaceAdapter.ts')
       const model = buildPaperAssetSurfaceModel({ asset, analysis, groupId })
       const optionB = model.analysisByQuestionId[questionId]?.options.find((o) => o.label === 'B')
-      assert(`${paperId}/${questionId}/B (live rogueType/badge record): trapLabel hidden`, optionB?.trapLabel === null)
+      assert(
+        `${paperId}/${questionId}/B (live rogueType/badge record): trapSuspension passthrough is {level:'badge', reason:'rogueType'}`,
+        optionB?.trapSuspension?.level === 'badge' && optionB?.trapSuspension?.reason === 'rogueType',
+      )
       assert(
         `${paperId}/${questionId}/B (live rogueType/badge record): trapExplanation non-empty (describeTrap did not crash on the rogue primaryType)`,
         typeof optionB?.trapExplanation === 'string' && optionB.trapExplanation.length > 0,
       )
+      // The type badge/兼有/细分 hiding itself is PaperAssetAnalysisPanel.tsx's
+      // gating decision, not this adapter's — proven against this exact real
+      // record in DP-2 (dp2-r2-trap-audit.mjs's ① scenario, real browser).
     }
   } else {
     assert(`${paperId}: fixture paper present for live-corpus badge assertion`, false, 'paper-2023-i missing — update this block if the corpus paper set changed')

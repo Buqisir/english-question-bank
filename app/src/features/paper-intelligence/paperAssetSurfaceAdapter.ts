@@ -80,15 +80,17 @@ export type PaperAssetOptionAnalysisView = {
   trapExplanation: string | null
   trapEvidenceRows: PaperAssetEvidenceRowView[]
   /**
-   * r2-trap-audit摘牌机制 — true only for `suspension.level === 'row'`
-   * (子结构坏死、无可用解释): the panel renders nothing at all for this
-   * option's trap detail (整行不显), rather than an empty "干扰解析"
-   * section. `badge`-level suspension does not set this — it only hides
-   * the type badge/兼有/细分 above (trapLabel/trapSecondaryLabel/
-   * trapSubtype already come back `null` for it), the explanation still
-   * shows.
+   * r2-trap-audit摘牌机制 — plain passthrough of `trap.suspension`, `null`
+   * when the trap is not suspended. This is intentionally NOT interpreted
+   * here: the adapter is a contract file (plan.md: "只许做 suspension 字段
+   * 透传所需的最小改动；panel/analysisText 的门控逻辑不进 adapter") — every
+   * field above (trapLabel/trapSecondaryLabel/trapSubtype/trapExplanation/
+   * trapEvidenceRows) is computed exactly as it was pre-cut, unconditionally.
+   * `badge` (标签贴错，解释仍可用) vs `row` (子结构坏死，整行不显) display
+   * gating is PaperAssetAnalysisPanel.tsx's job (and analysisText.mjs's job
+   * for the teacher-version text join), each reading this field itself.
    */
-  trapRowSuspended: boolean
+  trapSuspension: { level: 'badge' | 'row'; reason: string } | null
 }
 
 export type PaperAssetQuestionAnalysisView = {
@@ -462,29 +464,34 @@ function buildAnalysisViews(
           },
         )
         const trap = row?.status === 'wrong' ? row.trap : undefined
-        // r2-trap-audit 摘牌门控: `row` 整行不显 (badge/兼有/细分/解释/证据
-        // 一律不透传), `badge` 只隐类型标签与兼有/细分、解释与证据行照旧。
-        const isRowSuspended = trap?.suspension?.level === 'row'
-        const isBadgeSuspended = trap?.suspension?.level === 'badge'
-        const showTypeMeta = Boolean(trap) && !isRowSuspended && !isBadgeSuspended
+        // r2-trap-audit — adapter contract stays a plain field passthrough
+        // (plan.md: adapter only does the minimal change the suspension
+        // field needs to transmit; the badge/row display DECISION belongs
+        // to the consumer — PaperAssetAnalysisPanel.tsx for the panel,
+        // analysisText.mjs for the teacher-version text join — not here).
+        // trapLabel/trapSecondaryLabel/trapSubtype/trapExplanation/
+        // trapEvidenceRows below are computed exactly as pre-cut, for every
+        // option regardless of suspension; only `trapSuspension` is new.
         return {
           label: option.label,
           text: option.text,
           translationZh: row?.optionTranslationZh ?? '',
           status: row?.status ?? 'wrong',
-          trapLabel: showTypeMeta && trap
+          trapLabel: trap
             ? trapLabels[trap.primaryType] ?? trap.primaryType
             : null,
           trapPrimaryType: trap?.primaryType ?? null,
-          trapSecondaryLabel: showTypeMeta && trap?.secondaryType
+          trapSecondaryLabel: trap?.secondaryType
             ? trapLabels[trap.secondaryType] ?? trap.secondaryType
             : null,
-          trapSubtype: showTypeMeta && trap && 'subtype' in trap ? formatTrapSubtype(trap.subtype) : null,
-          trapExplanation: row && row.status === 'wrong' && trap && !isRowSuspended
+          trapSubtype: trap && 'subtype' in trap ? formatTrapSubtype(trap.subtype) : null,
+          trapExplanation: row && row.status === 'wrong' && trap
             ? describeTrap(row)
             : null,
-          trapEvidenceRows: isRowSuspended ? [] : trapEvidenceRows,
-          trapRowSuspended: isRowSuspended,
+          trapEvidenceRows,
+          trapSuspension: trap?.suspension
+            ? { level: trap.suspension.level, reason: trap.suspension.reason }
+            : null,
         }
       }),
       locationParaphrases: questionAnalysis.locationParaphrases,
@@ -512,16 +519,6 @@ function formatTrapSubtype(subtype: string): string {
 function describeTrap(option: OptionAnalysisItem): string {
   const trap = option.trap
   if (!trap) return ''
-  // r2-trap-audit `badge`-suspended traps include the one confirmed 野类型
-  // record (`primaryType: 'timeOrderReversal'`, schema gate 漏网) whose
-  // `primaryType` does not match any of the five known variants below — the
-  // exhaustive switch's `assertNever` would throw for it. Badge suspension
-  // means "label wrong, explanation still usable" (plan.md), so read the
-  // explanation field generically instead of switching on the (untrusted)
-  // primaryType — this never runs for the normal, non-suspended path below.
-  if (trap.suspension?.level === 'badge') {
-    return describeTrapFieldsSafe(trap)
-  }
   switch (trap.primaryType) {
     case 'sourceLexicalTrap':
       return trap.relationNote
@@ -531,18 +528,27 @@ function describeTrap(option: OptionAnalysisItem): string {
       return trap.explanation
     case 'unsupportedClaim':
       return trap.explanation
+    default:
+      // r2-trap-audit — general robustness fix, independent of suspension:
+      // the corpus can (and, per this cut's own scan, does — the confirmed
+      // `primaryType: 'timeOrderReversal'` record) contain a primaryType
+      // outside the five variants above (schema gate 漏网, rogueType per
+      // trap-audit-lib.mjs). The switch above used to fall through to an
+      // exhaustiveness assertNever() that THROWS for any such value — this
+      // adapter is a display-layer read, so it degrades to a best-effort
+      // field read (mirroring the five known shapes' own field names)
+      // instead of crashing the whole model build. Whether that field is
+      // shown at all in the panel is still the panel's own suspension-level
+      // gating decision (trapSuspension.level === 'badge' → shown, 'row' →
+      // hidden), not this function's.
+      return readTrapExplanationFieldsBestEffort(trap)
   }
-  return assertNever(trap)
 }
 
-function describeTrapFieldsSafe(trap: TrapDiagnosis): string {
+function readTrapExplanationFieldsBestEffort(trap: TrapDiagnosis): string {
   if ('relationNote' in trap && trap.relationNote) return trap.relationNote
   if ('explanation' in trap && trap.explanation) return trap.explanation
   return ''
-}
-
-function assertNever(value: never): never {
-  throw new Error(`[C6a-4] unhandled trap diagnosis: ${JSON.stringify(value)}`)
 }
 
 function buildShellReport(input: {
