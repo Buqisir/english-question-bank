@@ -64,6 +64,7 @@ const registry = {
   'scripts/verify-i16b-theme-labels-backfill.mjs',
   'scripts/verify-grammar-facets-v2.mjs',
   'scripts/verify-similar-v2.mjs',
+  'scripts/verify-similar-workbench-swap.mjs',
   'scripts/verify-search-thinking-toggle.mjs',
   'scripts/verify-h11a-http-client.mjs',
   'scripts/verify-h12a-entry-modal.mjs',

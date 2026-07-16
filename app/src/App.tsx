@@ -954,6 +954,7 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
         onBackToWorkbench={draftPaperOnBackToWorkbench}
         onDraftChanged={() => void refreshQuestionGroups()}
         shellNav={shellNav}
+        questionGroupById={questionGroupById}
       />
     )
   }

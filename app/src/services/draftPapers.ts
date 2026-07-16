@@ -35,6 +35,31 @@ export async function fetchCurrentDraftPaper(create = true): Promise<DraftPaper>
   return data.draftPaper
 }
 
+// similar-workbench-swap (E7): thin wrapper around the specific-draft-paper
+// sibling of addGroupToCurrentDraftPaper above (`POST /api/draft-papers/:id/items`,
+// already existed in server/draft-paper/draftPaperRoutes.mjs pre-cut — no
+// server change here, Forbidden). Takes an explicit `insertIndex` (0-based
+// slot the new item lands at) and `pageBreakBefore` so the swap drawer's
+// 替换/加入 actions can place the candidate at an exact position instead of
+// always appending — same options shape draftPaperStore.mjs's
+// addGroupToDraftPaper/restoreDraftPaperItem already accept server-side.
+export async function addGroupToDraftPaper(
+  draftPaperId: string,
+  groupId: string,
+  options: { insertIndex?: number; pageBreakBefore?: boolean } = {},
+): Promise<DraftPaper> {
+  const response = await fetch(apiPath(`/api/draft-papers/${encodeURIComponent(draftPaperId)}/items`), {
+    body: JSON.stringify({ groupId, ...options }),
+    headers: { 'content-type': 'application/json' },
+    method: 'POST',
+  })
+  if (!response.ok) {
+    throw new Error(await readError(response, `Failed to add group to draft paper: ${response.status}`))
+  }
+  const data = (await response.json()) as { draftPaper: DraftPaper }
+  return data.draftPaper
+}
+
 export async function fetchDraftPaper(id: string, versionType: 'student' | 'teacher' = 'student'): Promise<DraftPaper> {
   const response = await fetch(
     apiPath(`/api/draft-papers/${encodeURIComponent(id)}?versionType=${versionType}`),

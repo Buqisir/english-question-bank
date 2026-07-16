@@ -105,7 +105,14 @@ console.log('== negative grep: old error-string pattern has zero residue ==')
   // draft-docx added a 14th: exportDocx's try/catch block routes its
   // failure through describeError('导出 DOCX', error), mirroring exportPdf's
   // existing catch — also bumps catchBlocks below from 12 to 13.
-  assert('DraftPaperWorkbench.tsx uses describeError at all 14 call sites', workbenchCount === 14, `found ${workbenchCount}`)
+  // similar-workbench-swap (E7, plan.md 施工要点 5 授权清单) added 4 more —
+  // the swap drawer's fetch (describeError('加载相似篇章', error), Promise
+  // .catch style like draft-desk-b step3's pagination fetch above, so it
+  // does not bump catchBlocks either) plus three real try/catch blocks:
+  // applySwapReplace ('替换题组'), undoSwapReplace ('撤销替换'), and
+  // applySwapAdd ('加入草稿卷') — same pattern this gate exists to enforce,
+  // bumping the total from 14 to 18.
+  assert('DraftPaperWorkbench.tsx uses describeError at all 18 call sites', workbenchCount === 18, `found ${workbenchCount}`)
 }
 
 console.log('== MySpacePage failure-state recovery + de-duplication ==')
@@ -138,7 +145,11 @@ console.log('== DraftPaperWorkbench: errors do not clear work in progress ==')
   // describeError call-site comment above.
   // draft-docx added a 13th: exportDocx — see the describeError call-site
   // comment above.
-  assert('found catch(error) blocks to inspect', catchBlocks.length === 13, `found ${catchBlocks.length}`)
+  // similar-workbench-swap (E7) added 3 more real try/catch blocks:
+  // applySwapReplace, undoSwapReplace, applySwapAdd — see the describeError
+  // call-site comment above (the swap drawer's OWN fetch is a Promise
+  // .catch, not a try/catch, so it doesn't count here) — 13 to 16.
+  assert('found catch(error) blocks to inspect', catchBlocks.length === 16, `found ${catchBlocks.length}`)
   const clearsState = catchBlocks.filter((block) => /setDraftPaper\(null\)|setTitleDraft\(''\)/.test(block))
   assert('no catch(error) block clears draftPaper or titleDraft', clearsState.length === 0, `${clearsState.length} block(s) clear state`)
 }
