@@ -80,8 +80,10 @@
 
 ## 裁决点清单（PM 断点锚）
 
-- [ ] 裁1 plan 落锤 + commit
-- [ ] 裁2 流水线收口审读（DEV 回执 + verify 原始退出码 + CR verdict）
-- [ ] 裁3 CR MF 处置
-- [ ] 裁4 merge 主树 + main CI 绿
+- [x] 裁1 plan 落锤 + commit（56da789）
+- [x] 裁2 流水线收口审读（verify 四命令真实退出码全 0；ABORT 系截图
+      再生成——已立 DP2_SCREENSHOTS 门控惯例根治，dispatch-protocols.md）
+- [x] 裁3 fresh CR APPROVE 1MF/3SW；MF-1 主代理当场修（先加后删安全序+
+      撤销坐标+DP-2 场景⑦回归锚，44/44 绿+verify:all 80 绿复验）
+- [x] 裁4 merge 主树 + main CI 见 push 后 watch
 - [ ] 裁5 owner DP-3（含替换/撤销手感 + 动作语义两条否决权）→ 部署
