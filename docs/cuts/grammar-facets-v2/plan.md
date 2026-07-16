@@ -56,10 +56,12 @@
   404）、`scripts/import-pipeline/vp-driver.mjs`、
   `verify-i16c-grammar-verb-axes.mjs`（断言迁移/退役逐条处置入 cut-note）、
   盘上各卷 sidecar 文件清理（带备份，回滚路径与 33 份分析文件同批）。
-- **复用指针**（PA C-1）：三字段推导不从零写——改造
-  `analyzeGrammarFillVerbProfile.mjs` 的
-  `classifyFiniteVerbFormDeterministic` / `extractFiniteVerbBlanks`
-  （agreement 换新定义重算）。
+- **复用指针**（PA C-1；路径笔误更正 2026-07-15，真身在
+  `server/paper-import-ai/analyzeGrammarFillVerbProfile.mjs`）：三字段推导
+  不从零写——改造其 `classifyFiniteVerbFormDeterministic` /
+  `extractFiniteVerbBlanks`（agreement 换新定义重算）。注（段 1 实况）：
+  step1 脚本因"禁碰消费方"已内置一套独立推导；步 3 sweep 时以 analysis-v2
+  真值对齐/收编该共享模块，二者行为差异须在 verify 中显式断言。
 
 ## 步骤
 
