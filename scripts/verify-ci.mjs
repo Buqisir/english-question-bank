@@ -63,7 +63,7 @@ const registry = {
   'scripts/verify-i16a-teaching-dimension-search.mjs',
   'scripts/verify-i16b-theme-labels-backfill.mjs',
   'scripts/verify-i16c-grammar-verb-axes.mjs',
-  'scripts/verify-similar-questions.mjs',
+  'scripts/verify-similar-v2.mjs',
   'scripts/verify-search-thinking-toggle.mjs',
   'scripts/verify-h11a-http-client.mjs',
   'scripts/verify-h12a-entry-modal.mjs',
