@@ -240,14 +240,24 @@ For teaching-domain decisions, preserve the Super Teacher judgment layer:
   `docs/cuts/<CUT>/qa/` 且可按需重跑（它是该刀行为契约的可执行形态；
   owner 采纳 2026-07-14，首例 home-blank `qa/dp2-five-acts.mjs`）.
 
-## AI 协作准则底座(Matt 外脑)
+## AI 协作准则底座(Coding Brain 外脑)
 
-本文件的协作各节是 Matt Pocock「AI 协作准则」在本项目的特化落地(且更
-细)。通用底座 + 完整门道见外脑(每周更新;新门道先在那沉淀、本文件按需
+本文件的协作各节是 Coding Brain 外脑门道在本项目的特化落地(且更细)。
+通用底座 + 完整门道见外脑(每周更新;新门道先在那沉淀、本文件按需
 吸收;与外脑冲突时,以本文件的项目特化为准。**绝对路径仅本机可读**——
 远程 / CI / 云端代理不可依赖此文件):
 
-`/Users/huangxuewei/Coding Brain/操作层/Matt操作手册.md`
+- **实时锚(权威,每次 ingest 自动最新,优先看这个)**:
+  `/Users/huangxuewei/Coding Brain/wiki/overview.md`
+  (+ `wiki/门道.base` 动态门道表)
+- 编译版手册(开箱即用祈使摘要,secondary、可能滞后,以 overview 为准):
+  写代码 → `操作层/Matt操作手册.md`;
+  有品味的 UI/动画 → `操作层/用AI做有品味的UI手册.md`(Emil Kowalski)。
+
+Coding Brain 是领域级外脑(住户 = Matt Pocock 写代码协作 + Emil
+Kowalski UI/设计工程,以后更多);指针指向 overview 而非某份手册,
+外脑一更新顺指针即最新。(本节为 owner 亲笔改动的补录——原稿曾滞留
+stash,2026-07-16 收悬空时落地。)
 
 外脑里有、本文件不复述、但同样适用:讲 why 不只讲 what;别靠训练集猜
 (intrinsic > extrinsic——读代码 / 文件 / `use your search tool` 把信息拉
