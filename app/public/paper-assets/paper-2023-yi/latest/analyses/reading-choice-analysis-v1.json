@@ -449,7 +449,12 @@
           "trap": {
             "primaryType": "unsupportedClaim",
             "claim": "By creating settings in the corn fields.",
-            "explanation": "原文仅提到爱荷华是'corn state'，并未提及作者在玉米地里'布置场景'拍摄，属无中生有。"
+            "explanation": "原文仅提到爱荷华是'corn state'，并未提及作者在玉米地里'布置场景'拍摄，属无中生有。",
+            "suspension": {
+              "level": "badge",
+              "reason": "labelExplanationContradiction",
+              "suspendedAt": "2026-07-16"
+            }
           }
         }
       ],

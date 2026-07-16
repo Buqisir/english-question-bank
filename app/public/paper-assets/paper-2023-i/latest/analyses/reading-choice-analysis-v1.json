@@ -573,7 +573,12 @@
             "sourceHighlight": "formed their own ecosystem. After a few weeks, John added the sludge",
             "optionText": "To build an ecosystem.",
             "optionHighlight": "To build an ecosystem.",
-            "explanation": "原文是先形成生态系统、之后才加入污泥，建立生态系统是加污泥之前已完成的步骤，而非加污泥的目的，选项颠倒了先后关系。"
+            "explanation": "原文是先形成生态系统、之后才加入污泥，建立生态系统是加污泥之前已完成的步骤，而非加污泥的目的，选项颠倒了先后关系。",
+            "suspension": {
+              "level": "badge",
+              "reason": "rogueType",
+              "suspendedAt": "2026-07-16"
+            }
           },
           "trapEvidence": [
             {

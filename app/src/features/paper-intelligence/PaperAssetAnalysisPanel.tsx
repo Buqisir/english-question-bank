@@ -66,6 +66,13 @@ export function PaperAssetAnalysisPanel({
             : option.trapEvidenceRows[0]?.evidenceId ?? null
           const hasUnsupportedNoLine =
             option.trapPrimaryType === 'unsupportedClaim' && option.trapEvidenceRows.length === 0
+          // r2-trap-audit 摘牌门控 (显示决定就在这个消费方里做，adapter 只透传
+          // `trapSuspension` 原始字段，plan.md 契约面约束): `badge` 隐类型标签+
+          // 兼有/细分，解释与证据行照旧；`row` 整个「干扰解析」区块不显——
+          // 宁缺勿假，不留一个空 h4。
+          const trapSuspensionLevel = option.trapSuspension?.level ?? null
+          const hideTypeBadgeAndMeta = trapSuspensionLevel === 'badge' || trapSuspensionLevel === 'row'
+          const hideTrapDetailEntirely = trapSuspensionLevel === 'row'
 
           return (
             <li
@@ -95,7 +102,7 @@ export function PaperAssetAnalysisPanel({
                   <span className="pi-ps-analysis-option-badge pi-ps-analysis-option-badge--correct">
                     ✓
                   </span>
-                ) : option.trapLabel ? (
+                ) : !hideTypeBadgeAndMeta && option.trapLabel ? (
                   <span className="pi-ps-analysis-option-badge pi-ps-analysis-option-badge--trap">
                     {option.trapLabel}
                   </span>
@@ -141,12 +148,12 @@ export function PaperAssetAnalysisPanel({
                         </div>
                       )}
                     </>
-                  ) : (
+                  ) : hideTrapDetailEntirely ? null : (
                     <>
                       <h4>干扰解析</h4>
                       <div className="pi-ps-analysis-trap-meta">
-                        {option.trapSecondaryLabel && <span>兼有：{option.trapSecondaryLabel}</span>}
-                        {option.trapSubtype && <span>细分：{option.trapSubtype}</span>}
+                        {!hideTypeBadgeAndMeta && option.trapSecondaryLabel && <span>兼有：{option.trapSecondaryLabel}</span>}
+                        {!hideTypeBadgeAndMeta && option.trapSubtype && <span>细分：{option.trapSubtype}</span>}
                       </div>
                       {option.trapExplanation && (
                         <p className="pi-ps-analysis-explanation">{option.trapExplanation}</p>

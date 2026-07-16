@@ -880,7 +880,12 @@
           "trap": {
             "primaryType": "unsupportedClaim",
             "claim": "By introducing a concept.",
-            "explanation": "第四段Then用的是生活化的类比（physical exercise），并未提出或引入任何新的术语或概念，\"introducing a concept\"在原文没有依据，属无中生有。"
+            "explanation": "第四段Then用的是生活化的类比（physical exercise），并未提出或引入任何新的术语或概念，\"introducing a concept\"在原文没有依据，属无中生有。",
+            "suspension": {
+              "level": "badge",
+              "reason": "labelExplanationContradiction",
+              "suspendedAt": "2026-07-16"
+            }
           }
         }
       ],

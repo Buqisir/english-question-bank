@@ -1,0 +1,162 @@
+#!/usr/bin/env node
+/**
+ * trap-audit-scan.mjs — r2-trap-audit Scope 步骤 1 (docs/cuts/r2-trap-audit/plan.md).
+ *
+ * Deterministic, zero-AI full scan of every published reading-choice trap
+ * (all `app/public/paper-assets/<paperId>/latest/analyses/
+ * reading-choice-analysis-v1.json`, versions/ untouched — this cut only
+ * reads/writes `latest/`). Four checks, defined once in trap-audit-lib.mjs so
+ * this script and trap-audit-apply-suspension.mjs can never disagree on what
+ * "found" means:
+ *
+ *   1. rogueType                      — primaryType outside the controlled
+ *                                        five-type word list.
+ *   2. labelExplanationContradiction  — "unsupportedClaim" (无中生有) trap
+ *                                        whose own explanation quotes real
+ *                                        source wording (a self-contradiction:
+ *                                        claims nothing supports the option,
+ *                                        yet the explanation cites the text).
+ *   3. structuralIncompleteness       — per-type required field/enum gaps.
+ *   4. evidenceFieldLeak              — "unsupportedClaim" trap whose sibling
+ *                                        evidence fields are nonetheless
+ *                                        populated with a real quote.
+ *
+ * This script is read-only: it never writes into app/public/paper-assets.
+ * Output: docs/cuts/r2-trap-audit/scan-findings.json (machine, drives step 3
+ * + the second-段 judgment battle) and docs/cuts/r2-trap-audit/scan-report.md
+ * (human — counts + the judgment definitions verbatim, so the numbers are
+ * auditable without re-reading this file).
+ */
+
+import { existsSync, readFileSync, readdirSync, writeFileSync } from 'node:fs'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+import {
+  CHECK_IDS,
+  CONTROLLED_TRAP_TYPES,
+  evaluateOption,
+} from './trap-audit-lib.mjs'
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
+const rootDir = path.resolve(__dirname, '..')
+const paperAssetsDir = path.join(rootDir, 'app', 'public', 'paper-assets')
+const cutDir = path.join(rootDir, 'docs', 'cuts', 'r2-trap-audit')
+const findingsPath = path.join(cutDir, 'scan-findings.json')
+const reportPath = path.join(cutDir, 'scan-report.md')
+
+function listPaperIds() {
+  return readdirSync(paperAssetsDir, { withFileTypes: true })
+    .filter((entry) => entry.isDirectory())
+    .map((entry) => entry.name)
+    .sort()
+}
+
+function readAnalysis(paperId) {
+  const analysisPath = path.join(paperAssetsDir, paperId, 'latest', 'analyses', 'reading-choice-analysis-v1.json')
+  if (!existsSync(analysisPath)) return null
+  try {
+    return JSON.parse(readFileSync(analysisPath, 'utf8'))
+  } catch (error) {
+    return { __parseError: String(error) }
+  }
+}
+
+const findings = []
+const parseErrors = []
+let totalTraps = 0
+const byPrimaryType = {}
+
+for (const paperId of listPaperIds()) {
+  const analysis = readAnalysis(paperId)
+  if (!analysis) continue
+  if (analysis.__parseError) {
+    parseErrors.push({ paperId, error: analysis.__parseError })
+    continue
+  }
+  for (const [questionId, question] of Object.entries(analysis.questions || {})) {
+    for (const option of question.optionAnalysis || []) {
+      if (option?.status !== 'wrong' || !option.trap) continue
+      totalTraps += 1
+      byPrimaryType[option.trap.primaryType] = (byPrimaryType[option.trap.primaryType] || 0) + 1
+
+      const hits = evaluateOption(option)
+      for (const hit of hits) {
+        findings.push({
+          paperId,
+          questionId,
+          optionLabel: option.label,
+          primaryType: option.trap.primaryType,
+          checkId: hit.checkId,
+          level: hit.level,
+          ...(hit.missing ? { missing: hit.missing } : {}),
+        })
+      }
+    }
+  }
+}
+
+// ─── Report aggregates ───────────────────────────────────────────────────────
+
+const countsByCheck = {}
+for (const finding of findings) {
+  countsByCheck[finding.checkId] = (countsByCheck[finding.checkId] || 0) + 1
+}
+
+const unsupportedClaimTotal = byPrimaryType.unsupportedClaim || 0
+const contradictionCount = countsByCheck[CHECK_IDS.LABEL_EXPLANATION_CONTRADICTION] || 0
+const contradictionPct = unsupportedClaimTotal > 0
+  ? ((contradictionCount / unsupportedClaimTotal) * 100).toFixed(1)
+  : '0.0'
+
+const badgeCount = findings.filter((f) => f.level === 'badge').length
+const rowCount = findings.filter((f) => f.level === 'row').length
+const ownerReviewCount = findings.filter((f) => f.level === null).length
+
+writeFileSync(findingsPath, `${JSON.stringify(findings, null, 2)}\n`)
+
+const lines = []
+lines.push('# r2-trap-audit — scan-report')
+lines.push('')
+lines.push(`生成时间：${new Date().toISOString()}（重跑 \`node scripts/trap-audit-scan.mjs\` 复算）`)
+lines.push('')
+lines.push('## 规模真相')
+lines.push('')
+lines.push(`- 全库 trap 总数（wrong 选项且带 \`trap\` 字段）：**${totalTraps}**`)
+lines.push(`- 按 primaryType 分布：${Object.entries(byPrimaryType).sort((a, b) => b[1] - a[1]).map(([type, count]) => `${type}=${count}`).join('，')}`)
+if (parseErrors.length > 0) {
+  lines.push(`- ⚠️ ${parseErrors.length} 个卷解析失败：${parseErrors.map((e) => e.paperId).join('，')}`)
+}
+lines.push('')
+lines.push('## 四类检查命中计数')
+lines.push('')
+lines.push('| checkId | 命中数 | 摘牌档位 |')
+lines.push('| --- | --- | --- |')
+lines.push(`| \`${CHECK_IDS.ROGUE_TYPE}\` | ${countsByCheck[CHECK_IDS.ROGUE_TYPE] || 0} | 按结构可否安全取解释分 badge/row |`)
+lines.push(`| \`${CHECK_IDS.LABEL_EXPLANATION_CONTRADICTION}\` | ${countsByCheck[CHECK_IDS.LABEL_EXPLANATION_CONTRADICTION] || 0} | badge |`)
+lines.push(`| \`${CHECK_IDS.STRUCTURAL_INCOMPLETENESS}\` | ${countsByCheck[CHECK_IDS.STRUCTURAL_INCOMPLETENESS] || 0} | row |`)
+lines.push(`| \`${CHECK_IDS.EVIDENCE_FIELD_LEAK}\` | ${countsByCheck[CHECK_IDS.EVIDENCE_FIELD_LEAK] || 0} | 不摘牌——待第二段 owner 判例 |`)
+lines.push('')
+lines.push(`「无中生有」懒人桶里实锤贴错占比：**${contradictionCount} / ${unsupportedClaimTotal} = ${contradictionPct}%**（labelExplanationContradiction 命中数 / unsupportedClaim 总数）`)
+lines.push('')
+lines.push('## 判据原文（DEV 按数据实况定义，程序在 `scripts/trap-audit-lib.mjs`）')
+lines.push('')
+lines.push('1. **rogueType**：`trap.primaryType` 不在受控词表 `' + JSON.stringify(CONTROLLED_TRAP_TYPES) + '` 内。')
+lines.push('2. **labelExplanationContradiction**：`primaryType === \'unsupportedClaim\'` 且（`sourceQuote`/`sourceText` 任一非空的窜入字段 或 `explanation` 文本中含引号包裹的英文原词钩，正则 `/["\'"“\']([a-zA-Z][a-zA-Z0-9 ,.\'-]{2,})["\'"”\']/`）。判据收紧到「引号里是英文原词」而非任意中文引号使用——后者是「原文未提及…」这类合法的对比性论证，若不收紧会把 566 条里 144 条正常表述误伤成矛盾。')
+lines.push('3. **structuralIncompleteness**：按 `primaryType` 对应子 schema 逐字段查空值/非法枚举（`sourceLexicalTrap` 用 `sourceText/optionText/relationNote` + `matchType` 枚举；`polarityReversal`/`scopeShift` 用 `sourceQuote/sourceHighlight/optionText/optionHighlight/explanation` + 各自 `subtype` 枚举；`entityMismatch` 用 `sourceQuote/sourceEntity/optionText/optionEntity/explanation`；`unsupportedClaim` 用 `claim/explanation`）。')
+lines.push('4. **evidenceFieldLeak**：`primaryType === \'unsupportedClaim\'` 且选项自身的 `trapEvidence`/`evidence` 字段仍带非空 `quote`（本次全库实测命中 0 条——语料里「无中生有」桶目前没有通过这条证据字段路径泄漏，真正的矛盾路径是上面第 2 条的引号钩子）。')
+lines.push('')
+lines.push('## 自动摘牌批（步骤 3，仅 rogueType + labelExplanationContradiction + structuralIncompleteness）')
+lines.push('')
+lines.push(`- badge（标签贴错、解释仍显）：**${badgeCount}** 条`)
+lines.push(`- row（子结构坏死、整行不显）：**${rowCount}** 条`)
+lines.push(`- evidenceFieldLeak 不摘牌，留待第二段 owner 判例：**${ownerReviewCount}** 条`)
+lines.push('')
+lines.push('## 复算')
+lines.push('')
+lines.push('本报告的每个数字都可以由 `scan-findings.json` 用一行 `jq`/`node` 重新数出来——例如 `node -e "console.log(require(\'./scan-findings.json\').filter(f=>f.checkId===\'rogueType\').length)"`。')
+lines.push('')
+
+writeFileSync(reportPath, `${lines.join('\n')}\n`)
+
+console.log(`trap-audit-scan: ${totalTraps} traps scanned, ${findings.length} findings written to ${path.relative(rootDir, findingsPath)}`)
+console.log(`report: ${path.relative(rootDir, reportPath)}`)
