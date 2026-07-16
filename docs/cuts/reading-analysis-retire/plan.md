@@ -106,13 +106,15 @@
 ## 裁决点清单（PM 断点锚）
 
 - [x] 裁0：owner 发令「准备孤儿退役刀」（2026-07-16）。
-- [ ] 裁1：owner 过目 plan（尤其自愈契约两条默认：带 paperId 落讲评态、
-  其余落主页）→ 拍板开工。
-- [ ] 裁2：DEV 流水线完成，verify 步四命令（tsc / 新 verify /
-  verify:all / DP-2）真实退出码全 0——含 narrow+full 时该步即主代理
-  复核本身，收口只盯 main CI。
-- [ ] 裁3：fresh Opus CR（冷读 diff，重点核：保留清单零误伤、A 类改锚
-  未放宽、PA-lite 降档理由仍成立）。
+- [x] 裁1：owner 拍板开工（2026-07-16「听你的推荐」）——自愈契约两条
+  默认照准：带 paperId 落讲评态、其余落主页，不留解析器兼容层。
+- [x] 裁2：DEV 完成（c3c2c44，103 删/17 改/2 增），主代理在 worktree
+  亲跑四命令真实退出码全 0（tsc / narrow 44 / verify:all 82-1-0 /
+  DP-2 21），契约面 7 Adapter diff 亲核为单行 import 改写（2026-07-16）。
+  注：本刀碰契约面，按 dispatch-protocols 路由卡走常规管线非 Workflow。
+- [x] 裁3：fresh Opus CR APPROVE，0 MF / 3 SW / 1 NTH（cr.md）。越界
+  2 文件裁为正当自然清理；SW1=自愈静态锚偏宽由 DP-2 行为测兜底，
+  DP-2 保持常驻（qa/ 已入档可重跑）。
 - [ ] 裁4：merge + main CI 绿。
 - [ ] 裁5：owner DP-3（QA 表：旧 URL 自愈两条 + 讲评态/详情页回归两条）
   → 拍板部署生产。
