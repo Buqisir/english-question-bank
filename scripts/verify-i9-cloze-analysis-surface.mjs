@@ -193,46 +193,21 @@ assert('Step 2: option-side renders in-card mark', panelSrc.includes('isOptionSi
 assert('Step 2: option-side does NOT use passage evidence button', panelSrc.includes('row.isOptionSide') && !panelSrc.includes('isOptionSide\n.*data-pi-evidence-id'))
 
 // ============================================================
-// Step 3 — Harness source checks
+// Step 3 — Harness source checks (RETIRED)
 // ============================================================
-
+// reading-analysis-retire (2026-07-16, A-class re-anchor, rationale):
+// `PaperIntelligencePaperSurfaceHarness.tsx` is retired with the
+// `?view=paper-intelligence&surface=paper` orphan route (plan.md Scope 步
+// 3); it was the sole caller of `clozeAnalysisModel`/`ClozeAnalysisPanel`
+// wiring these Step 3 assertions read. `ClozeAnalysisPanel.tsx` itself is
+// NOT retired (still live via `PaperBrowsePage.tsx`), but its
+// harness-side plumbing (state names, effect dependency arrays) is not a
+// 1:1 port onto PaperBrowsePage, so re-anchoring these specific string
+// assertions would assert invented internals. Retirement assertion
+// instead, per plan.md Scope 步 6's authorized alternative.
 const HARNESS_PATH = 'app/src/features/paper-intelligence/PaperIntelligencePaperSurfaceHarness.tsx'
-const harnessSrc = existsSync(path.join(rootDir, HARNESS_PATH))
-  ? readSrc(HARNESS_PATH)
-  : ''
-
-assert('Step 3: harness imports ClozeAnalysisPanel', harnessSrc.includes("import { ClozeAnalysisPanel }"))
-assert('Step 3: harness imports buildClozeAnalysisSurfaceModel', harnessSrc.includes('buildClozeAnalysisSurfaceModel'))
-assert('Step 3: harness imports ReviewedClozeAnalysisV1', harnessSrc.includes('ReviewedClozeAnalysisV1'))
-assert('Step 3: harness imports ClozeAnalysisSurfaceModel', harnessSrc.includes('ClozeAnalysisSurfaceModel'))
-// Cloze branch now fetches analysis (fetch→fallback, not short-circuit).
-assert('Step 3: cloze branch fetches analysis JSON', harnessSrc.includes('cloze-analysis-v1.json'))
-// Fallback to plain view must still exist.
-assert('Step 3: cloze fallback builds plain view', harnessSrc.includes('buildClozePaperView({ asset, groupId: initialGroupId })') && harnessSrc.includes('setClozeAnalysisModel(null)'))
-// clozeAnalysisModel state exists.
-assert('Step 3: clozeAnalysisModel state declared', harnessSrc.includes('clozeAnalysisModel') && harnessSrc.includes('setClozeAnalysisModel'))
-// ClozeAnalysisPanel dispatched in right pad.
-assert('Step 3: ClozeAnalysisPanel dispatched in right pad', harnessSrc.includes('<ClozeAnalysisPanel'))
-// activeEvidenceKind returns support for cloze analysis.
-assert("Step 3: activeEvidenceKind returns 'support' for cloze analysis",
-  harnessSrc.includes("clozeAnalysisModel") && harnessSrc.includes("return activeEvidenceId ? 'support' : null"))
-// Seed effect handles cloze analysis model.
-assert('Step 3: seed effect branches on clozeAnalysisModel', harnessSrc.includes('if (clozeAnalysisModel)') && harnessSrc.includes('firstPassageEvidence'))
-// Focus-intent handler handles cloze analysis model.
-assert('Step 3: focus-intent handler branches on clozeAnalysisModel',
-  harnessSrc.includes("source === 'paper-asset' && clozeAnalysisModel"))
-// Initial-focus effect handles cloze analysis model (CR MF-1 regression guard).
-assert('Step 3: initial-focus effect branches on clozeAnalysisModel',
-  harnessSrc.includes('if (clozeAnalysisModel)') &&
-  harnessSrc.includes('clozeAnalysisModel.analysisByQuestionId[initialQuestionId]') &&
-  harnessSrc.includes('clozeAnalysisModel.defaultQuestionId'))
-// clozeAnalysisModel is in the initial-focus effect dependency array.
-assert('Step 3: clozeAnalysisModel in initial-focus effect dependency array',
-  /\[\s*source\s*,\s*sevenChoicesModel\s*,\s*clozeAnalysisModel/.test(harnessSrc))
-// surfaceData memo includes clozeAnalysisModel (browser-QA regression: without it
-// !surfaceData fires "报告数据为空" when the cloze analysis model is active).
-assert('Step 3: surfaceData memo reads clozeAnalysisModel.surfaceData',
-  harnessSrc.includes('clozeAnalysisModel?.surfaceData'))
+assert('Step 3 (retired): PaperIntelligencePaperSurfaceHarness.tsx no longer exists',
+  !existsSync(path.join(rootDir, HARNESS_PATH)))
 
 // ============================================================
 // Step 4 — Availability gate

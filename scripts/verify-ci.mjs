@@ -94,6 +94,7 @@ const registry = {
   'scripts/verify-genre-truth.mjs',
   'scripts/verify-draft-paper-docx.mjs',
   'scripts/verify-detail-redesign.mjs',
+  'scripts/verify-reading-analysis-retire.mjs',
   ],
 }
 

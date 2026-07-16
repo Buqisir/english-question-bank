@@ -365,31 +365,23 @@ try {
   assert('Step 2: evidence buttons carry data-pi-evidence-kind support', panelSrc.includes('data-pi-evidence-kind="support"'))
 
   // ============================================================
-  // Step 3 — Harness source checks
+  // Step 3 — Harness source checks (RETIRED)
   // ============================================================
-
+  // reading-analysis-retire (2026-07-16, A-class re-anchor, rationale):
+  // `PaperIntelligencePaperSurfaceHarness.tsx` — the sole consumer these
+  // Step 3 assertions read source out of — is retired along with the whole
+  // `?view=paper-intelligence&surface=paper` orphan route (plan.md Scope
+  // 步 3). `GrammarFillAnalysisPanel.tsx` itself is NOT retired (still live
+  // via `PaperBrowsePage.tsx`'s per-groupType analysis panels), but its
+  // harness-side wiring (grammarFillAnalysisModel state, fetch→fallback
+  // dispatch, focus-intent branch) doesn't carry over 1:1 to
+  // PaperBrowsePage's own state shape, so re-anchoring these specific
+  // string assertions to it would assert invented internals rather than a
+  // real contract. Retirement assertion instead of re-anchoring, per
+  // plan.md Scope 步 6's authorized alternative.
   const HARNESS_PATH = 'app/src/features/paper-intelligence/PaperIntelligencePaperSurfaceHarness.tsx'
-  const harnessSrc = existsSync(path.join(rootDir, HARNESS_PATH)) ? readSrc(HARNESS_PATH) : ''
-  assert('Step 3: harness imports GrammarFillAnalysisPanel', harnessSrc.includes('import { GrammarFillAnalysisPanel }'))
-  assert('Step 3: harness imports buildGrammarFillAnalysisSurfaceModel', harnessSrc.includes('buildGrammarFillAnalysisSurfaceModel'))
-  assert('Step 3: grammarFillAnalysisModel state declared', harnessSrc.includes('grammarFillAnalysisModel') && harnessSrc.includes('setGrammarFillAnalysisModel'))
-  assert('Step 3: grammarFill branch fetches analysis JSON', harnessSrc.includes('grammar-fill-analysis-v1.json'))
-  assert('Step 3: grammarFill fallback builds plain view + clears analysis model',
-    harnessSrc.includes('buildGrammarFillPaperView({ asset, groupId: initialGroupId })') &&
-    harnessSrc.includes('setGrammarFillAnalysisModel(null)'))
-  assert('Step 3: GrammarFillAnalysisPanel dispatched in right pad', harnessSrc.includes('<GrammarFillAnalysisPanel'))
-  assert('Step 3: activeEvidenceKind branches on grammarFillAnalysisModel',
-    /if \(grammarFillAnalysisModel\)\s*\{\s*return activeEvidenceId \? 'support' : null/.test(harnessSrc) ||
-    (harnessSrc.includes('grammarFillAnalysisModel') && harnessSrc.includes("return activeEvidenceId ? 'support' : null")))
-  assert('Step 3: analysisView memo early-returns null for grammarFillAnalysisModel',
-    harnessSrc.includes('if (grammarFillAnalysisModel) return null'))
-  assert('Step 3: surfaceData memo reads grammarFillAnalysisModel.surfaceData',
-    harnessSrc.includes('grammarFillAnalysisModel?.surfaceData'))
-  assert('Step 3: initial-focus effect handles grammarFillAnalysisModel',
-    harnessSrc.includes('grammarFillAnalysisModel.analysisByQuestionId[initialQuestionId]') &&
-    harnessSrc.includes('grammarFillAnalysisModel.defaultQuestionId'))
-  assert('Step 3: focus-intent handler branches on grammarFillAnalysisModel',
-    harnessSrc.includes("source === 'paper-asset' && grammarFillAnalysisModel"))
+  assert('Step 3 (retired): PaperIntelligencePaperSurfaceHarness.tsx no longer exists',
+    !existsSync(path.join(rootDir, HARNESS_PATH)))
 
   // ============================================================
   // Step 4 — Availability gate (runtime)

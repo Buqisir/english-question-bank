@@ -3,45 +3,62 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
 import { AuthGate } from './auth/AuthGate.tsx'
-import { ReadingAnalysisDemoRoute } from './features/reading-analysis/ReadingAnalysisDemoRoute.tsx'
-import { parseReadingAnalysisRoute } from './features/reading-analysis/readingAnalysisRoute.ts'
-import { parsePaperIntelligenceRoute } from './features/paper-intelligence/paperIntelligenceRoute.ts'
 
 /**
- * Tiny client-side router. The main app is unchanged; the URL is consulted
- * once at boot to decide whether to render the Reading Analysis view,
- * Paper Intelligence preview (via App shell), or the default App.
+ * reading-analysis-retire (2026-07-16): boot-time self-heal for the two
+ * retired orphan routes — `?view=reading-analysis` (+ `?demo=` /
+ * `#reading-analysis` aliases) and `?view=paper-intelligence` (both the
+ * default preview and the `surface=paper` harness). Neither route parser
+ * nor either feature survives this cut (see
+ * docs/cuts/reading-analysis-retire/reachability.md §2); any old URL still
+ * pointing at them must not dead-end on a blank/broken screen.
  *
- * Dispatch:
- *   - `?view=paper-intelligence&paperId=…`    → App shell renders PI preview
- *   - `?view=reading-analysis[&groupId=…]`    → product entry
- *   - `?demo=reading-analysis` / `#reading-analysis` → dev/demo alias
- *   - anything else                           → `<App />`
+ * Self-heal contract (owner-ratified, plan.md Scope 步 1):
+ *   - `?view=paper-intelligence&paperId=<id>` (with or without
+ *     `surface=paper`) → replaceState to
+ *     `?view=paper-browse&paperId=<id>&lecture=1` (the live 整卷页讲评态).
+ *   - `?view=paper-intelligence` with no `paperId`, or
+ *     `?view=reading-analysis` / `?demo=reading-analysis` /
+ *     `#reading-analysis` → replaceState to the bare home URL.
  *
- * Paper Intelligence route is parsed here and forwarded to App as a prop
- * so App can supply basket-related context to PaperIntelligencePreview.
+ * Runs once, synchronously, before the first render — `history.replaceState`
+ * so the broken URL never enters browser history (nothing to Back into).
  */
-const piRoute =
-  typeof window === 'undefined'
-    ? { kind: 'none' as const }
-    : parsePaperIntelligenceRoute(window.location)
+function healRetiredOrphanRoutes(): void {
+  if (typeof window === 'undefined') return
+  const { location, history } = window
+  const params = new URLSearchParams(location.search)
+  const view = params.get('view')
 
-const raRoute =
-  typeof window === 'undefined'
-    ? { kind: 'app' as const }
-    : parseReadingAnalysisRoute(window.location)
-
-function RootComponent() {
-  if (raRoute.kind === 'reading-analysis') {
-    return <ReadingAnalysisDemoRoute />
+  if (view === 'paper-intelligence') {
+    const paperId = params.get('paperId')?.trim()
+    if (paperId) {
+      const next = new URLSearchParams()
+      next.set('view', 'paper-browse')
+      next.set('paperId', paperId)
+      next.set('lecture', '1')
+      history.replaceState(history.state, '', `${location.pathname}?${next.toString()}`)
+    } else {
+      history.replaceState(history.state, '', location.pathname)
+    }
+    return
   }
-  return <App piRoute={piRoute} />
+
+  if (
+    view === 'reading-analysis' ||
+    params.get('demo') === 'reading-analysis' ||
+    location.hash === '#reading-analysis'
+  ) {
+    history.replaceState(history.state, '', location.pathname)
+  }
 }
+
+healRetiredOrphanRoutes()
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <AuthGate>
-      <RootComponent />
+      <App />
     </AuthGate>
   </StrictMode>,
 )

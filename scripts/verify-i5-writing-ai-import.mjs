@@ -423,9 +423,17 @@ function assertPackageBuilder() {
 function assertRouteContract() {
   assert('I5 writing adapter file exists', existsSync(path.join(repoRoot, 'app/src/features/paper-intelligence/writingPaperViewAdapter.ts')))
 
-  const harnessSource = readRepoFile('app/src/features/paper-intelligence/PaperIntelligencePaperSurfaceHarness.tsx')
-  assert('I5 harness imports writing adapter', harnessSource.includes('writingPaperViewAdapter'))
-  assert('I5 harness routes writing groups', harnessSource.includes("groupType === 'writing'"))
+  // reading-analysis-retire (2026-07-16, A-class re-anchor, rationale):
+  // `PaperIntelligencePaperSurfaceHarness.tsx` (the former consumer this
+  // assertion read source out of) is retired with the
+  // `?view=paper-intelligence&surface=paper` orphan route (plan.md Scope
+  // 步 3). `writingPaperViewAdapter.ts` itself is NOT retired — it's a live
+  // PaperSurface adapter consumed by `PaperBrowsePage.tsx` (整卷页讲评态)
+  // and `QuestionGroupDetailView.tsx`, per reachability.md §2 — so the
+  // assertion re-anchors to that live consumer instead of retiring.
+  const paperBrowseSource = readRepoFile('app/src/features/paper-browse/PaperBrowsePage.tsx')
+  assert('I5 PaperBrowsePage imports writing adapter', paperBrowseSource.includes('writingPaperViewAdapter'))
+  assert('I5 PaperBrowsePage routes writing groups', paperBrowseSource.includes("groupType === 'writing'"))
 
   const publisherSource = readRepoFile('server/paper-import/publisher.mjs')
   assert('I5 publisher has getWritingGroups', publisherSource.includes('getWritingGroups'))

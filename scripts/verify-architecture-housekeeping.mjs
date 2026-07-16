@@ -123,7 +123,13 @@ assert('scripts README documents stable CI entrypoint', scriptsReadme.includes('
 assert('scripts README documents build/typecheck in stable CI', scriptsReadme.includes('build/typecheck'))
 assert('scripts README documents server dependency install', scriptsReadme.includes('npm ci') && scriptsReadme.includes('server/'))
 assert('scripts README documents workflow-scope install constraint', scriptsReadme.includes('requires a token with workflow scope'))
-assert('scripts README marks host interaction as not CI', scriptsReadme.includes('Host interaction reducer run-form behavior and seam rules; includes cut-specific forbidden-scope checks | no'))
+// reading-analysis-retire (2026-07-16): `verify-paper-surface-host-interaction.mjs`
+// and its README row are retired (reachability.md §4 B-class, plan.md
+// Scope 步 6) — the row this assertion checked for no longer exists.
+// Mechanical fix required by the deletion itself, not a scope-guard
+// loosening: the cross-check assertions below (README yes/no rows ↔
+// verify-ci registry membership) still fully cover the invariant this
+// script exists to protect.
 assert('scripts README marks C8 draft paper contracts as CI', scriptsReadme.includes('C8 draft-paper API/search/workbench contract | yes'))
 
 function parseReadmeCiRows(source) {

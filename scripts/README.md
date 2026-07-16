@@ -53,6 +53,7 @@ must be confirmed green (AGENTS.md RM gate).
 | `verify-genre-truth.mjs` | r1-genre-truth: `genre-decisions.json` 273/273 覆盖 + 无重复 + 全落五类枚举 (记叙/说明/议论/应用/新闻) + confidence/rationale 完整性；DB `passages.discourse_type` 无题型名旧值残留（依赖 `genre-truth-apply.mjs --write`，owner gate R1-DP1/R1-DP2 前预期为红，见 cut 完成报告）；`publisher.mjs` 源码防回归（ON CONFLICT 分支不再写 discourse_type、INSERT 分支为新 passage 写字面量 null 而非 `group.groupType`） | yes |
 | `verify-draft-paper-docx.mjs` | draft-docx: `POST /api/draft-papers/:id/docx` 行为断言——temp-DB seed 起 API（端口 9895）→ 两个 versionType 响应均为 PK zip（DOCX magic）→ document.xml 含题干/大题头 marker → teacher 版含【解析】、student 版不含 → 未知 id / 跨用户归属均 404 | yes |
 | `verify-detail-redesign.mjs` | detail-page-redesign (2026-07-15 owner approved spec, 原型 `?detailVariant=paper-peek` 实点通过): source assertions — `QuestionGroupDetailView.tsx` 零 `AnalysisDisclosure` 挂载（负空间①结构性保证）；唯一 `PaperSurface` 挂载钉死只读形态（`lectureFocus={null}` + no-op `onFocusIntent` + `mode="lecture"`）；原型三件（`DetailPaperPeekPrototype.tsx`/`detailPaperPeek.css`/`?detailVariant=` 接线）app/src 下代码零残留（历史说明性注释豁免）；语法填空 facetKey→registry 全命中（对真实 paper-960d0f8d 的 `grammar-fill-analysis-v1.json`，schemaVersion `grammar-fill-analysis-v2`，复用 D1 registry 完备性）；阅读 chips 走 questionType 真值计数 + 缺失「未标注」分支（无 parse 结果时 0 chips，不造假占位）；完形/七选五 chips 一期只显示题数 | yes |
+| `verify-reading-analysis-retire.mjs` | reading-analysis-retire (2026-07-16): 孤儿支退役证——`features/reading-analysis/` 整目录 + `paper-intelligence/` 内 14 个孤儿文件 + `adapter/`/`evidence/` 目录 + 两个 route 文件 + `app/public/reports/paper-intelligence/` 静态镜像全部不存在；`App.tsx`/`main.tsx` 源码零 `paper-intelligence` 路由挂载分支；存活面（`PaperBrowsePage.tsx` 仍 import `paperIntelligence.css` + evidence 动线两文件、7 个活 `*Adapter.ts` 的 `PaperSurfaceData` import 指向新落点 `paperIntelligenceTypes.ts`，tsc 全量证实际可解析）；`main.tsx` 静态自愈改写断言（行为证据见同刀 DP-2） | yes |
 
 ## Core data and import
 
@@ -61,7 +62,6 @@ must be confirmed green (AGENTS.md RM gate).
 | `verify-paper-asset-v1.mjs` | `paper-asset-v1` fixture and source-faithfulness contract | yes |
 | `verify-c7-paper-import-contracts.mjs` | C7 schema / offline validator contracts | yes |
 | `verify-c7-paper-import-publish.mjs` | C7 publish atomicity and storage protocol | yes |
-| `verify-i1-paper-import-splitter.mjs` | I1 DOCX reading splitter endpoint and parser contract | no |
 | `verify-i1-paper-import-analysis.mjs` | I1 owner-only analysis / publish endpoints, provider seam, JSON preview, and C7 package bridge contract | yes |
 | `verify-i2-seven-choices-ai-import.mjs` | I2 七选五 AI 导题接入：splitter / analysis / package / route contracts | yes |
 | `verify-i3-cloze-ai-import.mjs` | I3 完形填空 AI 导题接入：splitter / package / route contracts | yes |
@@ -88,34 +88,8 @@ must be confirmed green (AGENTS.md RM gate).
 
 | Script | Scope | Runs in CI? |
 | --- | --- | --- |
-| `verify-paper-surface-module-v1.mjs` | Shared PaperSurface module contract; includes historical forbidden-scope checks | no |
-| `verify-paper-surface-host-interaction.mjs` | Host interaction reducer run-form behavior and seam rules; includes cut-specific forbidden-scope checks | no |
 | `verify-paper-surface-mjs-declaration-parity.mjs` | `.mjs` declaration parity | yes |
-| `verify-paper-intelligence-paper-surface-harness.mjs` | Paper Intelligence harness contract | no |
-| `verify-paper-intelligence-paper-surface-evidence.mjs` | Evidence-line behavior | no |
-| `verify-paper-intelligence-paper-surface-insight.mjs` | Insight panel behavior | no |
-| `verify-paper-intelligence-route-integration.mjs` | Paper Intelligence route integration | no |
 | `verify-i0e-seven-choices-entry.mjs` | I0-E 七选五 PaperSurface entry availability and label gate | yes |
-
-## C5 / C6 reading-analysis cuts
-
-| Script | Scope |
-| --- | --- |
-| `verify-c5a-paragraph-structure-anchors.mjs` | Confirmed paragraph structure anchors |
-| `verify-c5b-structure-brace.mjs` | Structure brace geometry and controls |
-| `verify-c5b-po-qa-contract.mjs` | C5b PO QA contract |
-| `verify-c6a-2-reading-a-analysis.mjs` | Reading A reviewed analysis |
-| `verify-c6a3-reading-analysis-bridge.mjs` | Search card to PaperSurface route bridge |
-| `verify-c6a4-paper-asset-analysis-loader.mjs` | Paper asset analysis loader |
-| `verify-c6a5-search-entry-e2e.mjs` | Search entry end-to-end path |
-| `verify-c6a6a-reading-b-analysis.mjs` | Reading B analysis data |
-| `verify-c6a6b-open-reading-b-analysis-entry.mjs` | Reading B entry gate |
-| `verify-c6a7-reading-c-analysis.mjs` | Reading C analysis data |
-| `verify-c6a8-reading-d-analysis.mjs` | Reading D analysis data |
-| `verify-c6a9-open-reading-cd-analysis-entry.mjs` | Reading C/D entry gate |
-| `verify-c6a10-concierge-local-search.mjs` | Concierge local search |
-| `verify-c6b1-option-anchored-analysis.mjs` | Option-anchored analysis panel |
-| `verify-c6b2-analysis-entry-gate.mjs` | Data-driven analysis availability gate |
 
 ## Draft paper / export
 
@@ -162,16 +136,6 @@ must be confirmed green (AGENTS.md RM gate).
 | `verify-reorder-suggest.mjs` | reorder-suggest (docs/cuts/reorder-suggest/plan.md): Phase A (pure, no Chromium) — `buildReorderCandidates` determinism/hard-cap-6/dedup (candidates identical to the current order or to each other are dropped, `pageBreakBefore` travels with its moved item, only the first 2 broken groups by CURRENT POSITION are used), plus `proposeReorder`/`evaluateCandidateOrder` exercised against a REAL `derivePageBreakSuggestions`/`evaluatePageBreakAcrossPages` (imported for real) fed synthetic contract-shaped fixtures via stub render deps (same "real judgment fn + synthetic contract HTML" style as `verify-print-form.mjs`'s own fixture) — an a3 fixture where a swap zeroes out a real 翻面 break (and the RETURNED order is independently re-dry-run to reconfirm zero breaks — 真值验证过才亮, not just trusted), and an a4 fixture where the break is intrinsic to one group's own content (unfixable by any reorder) so `proposeReorder` correctly returns null (宁缺勿假). Phase B (live dev server + real Chromium, plan.md "沿用 verify-a3-imposition e2e 段模式"): seeds the same 10-real-reading-group fixture as `verify-a3-imposition.mjs`, then asserts `GET .../reorder-suggestion` is zero-DB-write (`draft_papers`/`draft_paper_items` row snapshots byte-identical before/after), never pollutes the real pagination cache (a `GET .../pagination` call before/after is byte-identical with `reused: true` on the second), returns a well-shaped `{ suggestion }` (either `null` or `{ order, move, brokenGroupId }`; `order` a true permutation of the draft's own item ids when non-null), 404s an unknown draftPaperId with the same message the pagination route uses (M0-4 not-found convention), and — when this run's fixture happens to produce a card (same "if present, else skip" escape hatch `verify-a3-imposition.mjs`'s own seam-suggestion click uses) — a real click on 调整顺序 → triggers a successful PATCH that changes the item order, and a real click on 撤销 restores the original order. Requires server's playwright-core Chromium (`chromiumPool.mjs`, via `getDraftPaperPagination`) plus `app`'s Playwright browser for the clicks — **runs as its own step in the `e2e` job** (`.github/workflows/verify.yml`) after both Chromium installs, same wiring as `verify-a3-imposition.mjs` | no |
 | `verify-a3-imposition.mjs` | a3-imposition (docs/cuts/a3-imposition/plan.md): Phase A (real DOMParser via `app`'s Playwright, synthetic 7-page DOM-contract fixture, no dev server) — `buildA4PreviewHtml`'s own source is byte-identical to the pre-cut version (裁点4 a4 zero-diff), `applyA3Imposition` face/sheet pairing (7 pages -> faces (1,2)(3,4)(5,6)(7,留白), 2 sheets), prototype.html 方案C wording (面标签/对折线/翻面⟲/换张✂), every seam's `data-seam-before-group` independently cross-checked against `evaluatePageBreakAcrossPages`'s firstPage%4 rule. Phase B (live dev server, real Playwright clicks — plan.md "必须真点实证,不许只靠源码断言"): seeds 10 real reading groups to force multi-page pagination, then in A3 mode drives real clicks on the persistent overlay 下移 button (asserts the PATCH succeeds), a rail item (asserts the desk actually scrolls), a real scroll top->bottom (asserts scrollspy's active rail item changes), and — when the fixture produces one — the seam suggestion pill (asserts the same `pageBreakBefore` PATCH manual 前置分页 sends); plus a 900px-viewport no-horizontal-overflow check and an A3->A4 toggle-back check. Requires TWO real Chromium binaries (CR SW-3 correction): the script's own clicks use `app`'s Playwright browser, and Phase B's dev server renders pagination through server's playwright-core (`chromiumPool.mjs`) — **runs as its own step in the `e2e` job** (`.github/workflows/verify.yml`) after BOTH install steps ("Install Playwright Chromium" + "Install server pagination Chromium"); do not reorder above either | no |
 
-## Concierge and reading-analysis legacy
-
-| Script | Scope |
-| --- | --- |
-| `verify-reading-analysis-route.mjs` | Legacy reading-analysis route |
-| `verify-reading-analysis-selector.mjs` | Reading-analysis selector |
-| `verify-reading-analysis-view-state.mjs` | Reading-analysis view state |
-| `verify-reading-analysis-linking.mjs` | Reading-analysis linking |
-| `verify-reading-analysis-annotation.mjs` | Reading-analysis annotation behavior |
-
 ## Process / workflow gates
 
 | Script | Scope |
@@ -186,10 +150,6 @@ must be confirmed green (AGENTS.md RM gate).
 | `verify-dev-completion-report-contract.mjs` | DEV completion report contract (steering ↔ template consistency) |
 | `verify-i0c-seven-choices-analysis-v1.mjs` | I0-C 七选五 analysis v1 asset contract |
 | `verify-i0d-seven-choices-surface.mjs` | I0-D 七选五 surface render contract |
-| `verify-paper-intelligence-cut-d1.mjs` | Older Paper Intelligence D1 contract |
-| `verify-paper-intelligence-preview.mjs` | Paper Intelligence preview |
-| `verify-paper-intelligence-interactive-preview.mjs` | Interactive preview |
-| `verify-paper-intelligence-evidence-audit.mjs` | Evidence audit |
 | `verify-paper-surface-interaction-model-doc.mjs` | PaperSurface interaction model doc |
 | `verify-paper-surface-textmap-adapter-plan.mjs` | Text-map adapter plan |
 | `verify-paper-surface-tokens.mjs` | Token contract |

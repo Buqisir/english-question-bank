@@ -1,12 +1,12 @@
 import { segmentPaperText } from '../../../../shared/papersurface/segmentPaperText.mjs'
 import type { PaperTextMap } from '../../../../shared/papersurface/types'
 import type { PaperAssetV1 } from '../../domain/paperAsset.ts'
-import type { PaperSurfaceData } from './adapter/index.ts'
 import { grammarFillBlankPattern } from '../../shared-ui/papersurface/grammarFillBlank.ts'
 import type {
   AiInitialBand,
   LoadBar,
   PaperIntelligenceReport,
+  PaperSurfaceData,
   PassageOutline,
   PassageReport,
   PassageStructure,

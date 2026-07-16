@@ -338,9 +338,17 @@ function assertRouteContract() {
     assert('I4 grammar-fill adapter file exists', false)
   }
 
-  const harnessSource = readRepoFile('app/src/features/paper-intelligence/PaperIntelligencePaperSurfaceHarness.tsx')
-  assert('I4 harness imports grammar-fill adapter', harnessSource.includes('grammarFillPaperViewAdapter'))
-  assert('I4 harness routes grammar-fill groups', harnessSource.includes("groupType === 'grammarFill'"))
+  // reading-analysis-retire (2026-07-16, A-class re-anchor, rationale):
+  // `PaperIntelligencePaperSurfaceHarness.tsx` (the former consumer this
+  // assertion read source out of) is retired with the
+  // `?view=paper-intelligence&surface=paper` orphan route (plan.md Scope
+  // 步 3). `grammarFillPaperViewAdapter.ts` itself is NOT retired — it's a
+  // live PaperSurface adapter consumed by `PaperBrowsePage.tsx` (整卷页讲评
+  // 态) and `QuestionGroupDetailView.tsx`, per reachability.md §2 — so the
+  // assertion re-anchors to that live consumer instead of retiring.
+  const paperBrowseSource = readRepoFile('app/src/features/paper-browse/PaperBrowsePage.tsx')
+  assert('I4 PaperBrowsePage imports grammar-fill adapter', paperBrowseSource.includes('grammarFillPaperViewAdapter'))
+  assert('I4 PaperBrowsePage routes grammar-fill groups', paperBrowseSource.includes("groupType === 'grammarFill'"))
 
   const publisherSource = readRepoFile('server/paper-import/publisher.mjs')
   assert('I4 publisher has getGrammarFillGroups', publisherSource.includes('getGrammarFillGroups'))

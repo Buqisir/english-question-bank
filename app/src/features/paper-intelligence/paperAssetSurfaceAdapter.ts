@@ -29,10 +29,10 @@ import type {
   OptionAnalysisItem,
   LocationParaphrase,
 } from '../../domain/paperAsset.ts'
-import type { PaperSurfaceData } from './adapter/index.ts'
 import type {
   LoadBar,
   PaperIntelligenceReport,
+  PaperSurfaceData,
   PassageStructure,
   QuestionAnalysis,
 } from './paperIntelligenceTypes.ts'

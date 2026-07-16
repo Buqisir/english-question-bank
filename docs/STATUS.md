@@ -98,8 +98,10 @@ analysis 三字段；owner 判例表逐空拍板后修复 + verify baseline 刷�
   022c634**：jslk 已离 serve 路径=备份 501 绝根（次日备份日志终证）。
   **账单**：docx 流水线 277k；fixture 两轮流水线+CR ~376k（首轮 DEV 在
   停手条件正确刹车→契约修订判例）；主代理出场 ~8。**owner DP-3 全过（2026-07-14
-  归并场，生产导 DOCX 双版本），本刀闭环**；13 个 c6a*/c6b* 僵尸 smoke
-  主线即红已实证→随 reading-analysis 退役刀处决。
+  归并场，生产导 DOCX 双版本），本刀闭环**；~~13 个 c6a*/c6b* 僵尸 smoke
+  主线即红已实证→随 reading-analysis 退役刀处决~~ ✅ 2026-07-16（实数
+  **12** 个，非 13——reading-analysis-retire 刀图谱侦察时更正并随刀
+  删除，均不在 verify-ci registry 内，删除不动 CI 数字）。
 - 2026-07-14：**home-blank 收官（主页纯空白大搜索框）**（merge da4c49a，
   fresh CR APPROVE 0MF/3SW 当场收，DP-2 五幕 37 断言全绿 + verify:all 77
   绿 + main CI 双证）：静止态=居中词标+大框+真值 whisper（原型 D）、提交
@@ -288,8 +290,9 @@ analysis 三字段；owner 判例表逐空拍板后修复 + verify baseline 刷�
   仍整卡显影；原型三案拍板方案A，dd6dc4c，CI 绿 + **owner QA 过**）：
   写作卡选中罩上缘下移到提示起始线（量高 --pb-writing-cut-top），
   写作例外撤销、前组底线回归、写作组自身入底线账——不变量全站成立，
-  写作不再例外。挂账：老解析页 harness 卷面 fig-token 残口（watch
-  ledger，随孤儿支退役刀收）。**六刀已于 2026-07-10 部署生产**
+  写作不再例外。挂账：~~老解析页 harness 卷面 fig-token 残口~~ ✅
+  2026-07-16 随 reading-analysis 孤儿支退役刀收（watch ledger 已标
+  RESOLVED——该页随刀整体删除，残口自灭）。**六刀已于 2026-07-10 部署生产**
   （e6644e2，分步流程：pull→install→build→restart，health ok、
   eqbank.cc 200；draft-depassage-letter owner QA 本地已过——QA 中撞上
   草稿卷含空号坏组 group-960d0f8d-grammar-fill 被新硬断言正确拒渲，
@@ -445,9 +448,11 @@ analysis 三字段；owner 判例表逐空拍板后修复 + verify baseline 刷�
   owner 圈了即立刀。三项低置信待 owner 实物复核（题号句点/语法
   空线长/边距名义值），不阻塞。
 - UI 复评（2026-07-08，六刀后）：26 → **31/40**（快照
-  `.impeccable/critique/`）。剩余：[P1] 两个未迁移解析孪生面
+  `.impeccable/critique/`）。剩余：~~[P1] 两个未迁移解析孪生面
   （`?view=reading-analysis` 暖色孤岛 + PI 默认 Preview 面含 backstage
-  AI 标，URL 直达可见）——**归 reading-analysis 孤儿支退役刀一并收**；
+  AI 标，URL 直达可见）——归 reading-analysis 孤儿支退役刀一并收~~ ✅
+  2026-07-16（两个孪生面随孤儿支退役刀整体删除，产品面不复存在，两条
+  P1 随之注销——不是"迁移"而是"面本身没了"）；
   [P2] 效率轴（键盘捷径/批量加卷）owner 圈了再动；[P3] 返回措辞一主
   两例外。
 - branch-audit 小活候选：仓库存 33 根**未合并**历史分支（I16-*/c6a-*/
