@@ -10,8 +10,12 @@ Last updated: 2026-07-16（similar-workbench-swap(E7) 收官 + **生产
 plan `docs/cuts/design-canon-v2/`；owner 过目条文待做）；
 ② small 挂账：~~serve 路径 44 个 .bak 清理~~ ✅ 2026-07-16（ea6568a，
 44 删 + consistency verify 新增 no-backup-files 断言负例验牙，CI 绿）、
-no-hint 3 空疑似导入期数据损伤（2020-ii 057/063/064，回源卷查证小刀）、
-CR watch 若干（谓语推导副本收拢、vp-driver README 残句等，见各刀 cr.md）。
+~~no-hint 3 空疑似导入期数据损伤~~ ✅ 2026-07-16 收官（实核 **7 空**
+带伤仅 2020-ii 一卷，回源 docx sha256 对证 passage 完好、损伤仅
+analysis 三字段；owner 判例表逐空拍板后修复 + verify baseline 刷新为
+修后真值，`docs/cuts/gf-2020-ii-hint-repair/`；生产 analysis 仍带伤
+待随下次部署）、CR watch 若干（谓语推导副本收拢、vp-driver README
+残句等，见各刀 cr.md）。
 
 ## 现在是什么
 

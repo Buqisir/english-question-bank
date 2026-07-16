@@ -134,26 +134,30 @@ assert(
 )
 
 // Req 3: distribution vs step1 real-measured baseline (docs/cuts/grammar-facets-v2/step1-samples.md), ±2 tolerance
+// Refreshed 2026-07-16 (gf-2020-ii-hint-repair): 7 blanks of paper-2020-ii
+// had import-damaged hint=null and sat in wrong no-hint buckets; the step1
+// measurement baked that damage in. Post-repair truth below (owner-adjudicated
+// table in docs/cuts/gf-2020-ii-hint-repair/plan.md).
 const BASELINE_FACET_COUNTS = {
-  'grammar-fill.given.verb.non-finite': 62,
-  'grammar-fill.given.verb.finite': 52,
+  'grammar-fill.given.verb.non-finite': 63,
+  'grammar-fill.given.verb.finite': 54,
   'grammar-fill.no-hint.preposition': 29,
-  'grammar-fill.no-hint.article': 26,
-  'grammar-fill.no-hint.conjunction.coordinating': 25,
+  'grammar-fill.no-hint.article': 23,
+  'grammar-fill.no-hint.conjunction.coordinating': 24,
   'grammar-fill.no-hint.conjunction.relative-clause': 20,
-  'grammar-fill.given.noun.number': 17,
-  'grammar-fill.given.conversion.noun-to-adjective': 15,
-  'grammar-fill.given.conversion.verb-to-noun': 14,
+  'grammar-fill.given.noun.number': 18,
+  'grammar-fill.given.conversion.noun-to-adjective': 16,
+  'grammar-fill.given.conversion.verb-to-noun': 15,
   'grammar-fill.given.conversion.adjective-to-adverb': 13,
   'grammar-fill.given.adjective.comparison': 12,
-  'grammar-fill.given.pronoun': 9,
+  'grammar-fill.given.pronoun': 10,
   'grammar-fill.given.conversion.adjective-to-noun': 8,
   'grammar-fill.no-hint.conjunction.noun-clause': 8,
   'grammar-fill.given.conversion.verb-to-adjective': 8,
-  'grammar-fill.no-hint.conjunction.adverbial-clause': 5,
+  'grammar-fill.no-hint.conjunction.adverbial-clause': 3,
   'grammar-fill.given.noun.genitive': 3,
   'grammar-fill.given.numeral': 2,
-  'grammar-fill.no-hint.pronoun': 1,
+  'grammar-fill.no-hint.pronoun': 0,
   'grammar-fill.given.conversion.noun-to-noun': 1,
 }
 for (const [key, expected] of Object.entries(BASELINE_FACET_COUNTS)) {
@@ -168,7 +172,7 @@ assert(
     (facetCounts['grammar-fill.given.conversion.verb-to-adverb'] || 0) <= 2,
 )
 
-const BASELINE_ROLE_COUNTS = { adverbial: 26, attributive: 17, object: 11, 'object-complement': 3, subject: 2, 'subject-complement': 2, predicative: 1 }
+const BASELINE_ROLE_COUNTS = { adverbial: 26, attributive: 17, object: 11, 'object-complement': 3, subject: 3, 'subject-complement': 2, predicative: 1 }
 for (const [role, expected] of Object.entries(BASELINE_ROLE_COUNTS)) {
   const actual = roleCounts[role] || 0
   assert(`Req 3: role ${role} count within ±2 of step1 baseline ${expected}`, Math.abs(actual - expected) <= 2, `actual: ${actual}`)
