@@ -186,7 +186,7 @@ async function main() {
       const paperBox = await page.locator('.peek-paper').boundingBox()
       ok(`①-${label} 一张纸可见且非零尺寸（几何断言）`, paperBox != null && paperBox.width > 200 && paperBox.height > 40, JSON.stringify(paperBox))
     }
-    await page.screenshot({ path: path.join(qaDir, 'dp2-01-reading.png') })
+    if (process.env.DP2_SCREENSHOTS === '1') await page.screenshot({ path: path.join(qaDir, 'dp2-01-reading.png') })
 
     // grammar_cloze chips: real facetKey→registry label, real count.
     await gotoDetail(page, GRAMMAR_GROUP)
@@ -235,7 +235,7 @@ async function main() {
       collapsedBox != null && collapsedBox.height < expandedBox.height - 20,
       `expanded=${expandedBox?.height} collapsed=${collapsedBox?.height}`,
     )
-    await page.screenshot({ path: path.join(qaDir, 'dp2-02-peek-expand.png') })
+    if (process.env.DP2_SCREENSHOTS === '1') await page.screenshot({ path: path.join(qaDir, 'dp2-02-peek-expand.png') })
 
     // ── 无标签组（group-2026-i-reading-a，dev DB 内零 topic-label 行）──
     await gotoDetail(page, NO_LABEL_GROUP)

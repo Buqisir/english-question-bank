@@ -182,7 +182,7 @@ async function main() {
     ok('① 候选卡带 reason chips', firstCardChips > 0, `chips=${firstCardChips}`)
     const poolNoteText = await page.locator('.similar-passages-panel .similar-pool-note').textContent()
     ok('① 池子诚实条渲染（"还剩 N 组"）', /还剩\s*\d+\s*组/.test(poolNoteText || ''), poolNoteText)
-    await page.screenshot({ path: path.join(qaDir, 'dp2-01-detail-panel.png') })
+    if (process.env.DP2_SCREENSHOTS === '1') await page.screenshot({ path: path.join(qaDir, 'dp2-01-detail-panel.png') })
 
     // ── ④ 面板「＋加入草稿卷」→ basket 计数 +1 + toast ──
     const beforeCount = await basketCount(page)
@@ -243,7 +243,7 @@ async function main() {
     ok('② rail 渲染非-error 态', (await page.locator('.similar-rail-error').count()) === 0)
     const railHead = await page.locator('.similar-rail-head').textContent()
     ok('② rail 头行文案「相似篇章 · 完形填空」', (railHead || '').includes('相似篇章') && (railHead || '').includes('完形填空'), railHead)
-    await page.screenshot({ path: path.join(qaDir, 'dp2-02-cloze-rail.png') })
+    if (process.env.DP2_SCREENSHOTS === '1') await page.screenshot({ path: path.join(qaDir, 'dp2-02-cloze-rail.png') })
 
     // ── ⑤ cloze 旧 similar=1 深链 → 自动进篇章结果 ──
     await page.goto(
@@ -290,7 +290,7 @@ async function main() {
     await rowB.locator('.similar-passages-panel').waitFor({ timeout: 15_000 })
     ok('③ 切到卡 B 后卡 A 自动收起', (await rowA.locator('.similar-passages-panel').count()) === 0)
     pass('③ 卡 B 候选面板展开，只有一张卡展开（切卡自动收起）')
-    await page.screenshot({ path: path.join(qaDir, 'dp2-03-search-card.png') })
+    if (process.env.DP2_SCREENSHOTS === '1') await page.screenshot({ path: path.join(qaDir, 'dp2-03-search-card.png') })
 
     ok('No page errors across all scenarios', pageErrors.length === 0, pageErrors.join('\n'))
   } finally {

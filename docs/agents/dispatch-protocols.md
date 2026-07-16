@@ -53,6 +53,10 @@ owner 的**语义判断**(= 裁决点),其余为确定段:
   扇出;③verify 复核代理回执带**原始退出码**,红或工作树有残留即中止;
   ④主代理只出现在裁决点。
 - 浏览器 QA:headless(Playwright)段可进脚本;owner 实点 QA 是裁决点。
+- **DP-2 截图写盘用 `DP2_SCREENSHOTS=1` 门控**(2026-07-16 立,连续两刀
+  实撞):截图像素不确定,verify 复核代理重跑 DP-2 会再生成截图弄脏工作
+  树,触发流水线残留 ABORT 假刹。惯例:脚本默认不写截图,DEV 出档证据时
+  开一次环境变量;verifyCmds 里的 DP-2 命令保持平跑。
 - session 关闭即丢 workflow 缓存(resume 仅同 session):长跑批设计成
   分批落盘,断点友好。
 - 流水线 worktree 由主代理预建,并在各 agent prompt 里传同一路径——
