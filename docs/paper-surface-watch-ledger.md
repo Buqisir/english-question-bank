@@ -318,3 +318,12 @@ figure-render 刀修的 `paperAssetSurfaceAdapter` 四路径。补刀方向：�
 harness 路径同样穿 figures/manifest（或该页随 reading-analysis 孤儿支
 退役刀一并处置——它已非页内入口可达，仅 URL 直达）。P0 同类，但面
 是半退役页，优先级由 owner 定。
+
+**RESOLVED by reading-analysis-retire (2026-07-16).** 该页（连同
+`PaperIntelligencePaperSurfaceHarness.tsx`、`piToPaperTextMap` adapter 所在
+的 `adapter/`、`evidence/` 目录整体）随孤儿支退役刀一并删除——残口自灭，
+不再需要给 harness 路径补穿 figures/manifest。旧
+`?view=paper-intelligence&surface=paper&paperId=<id>` URL 现由 main.tsx
+boot-time replaceState 自愈到整卷页讲评态（`?view=paper-browse&paperId=
+<id>&lecture=1`），该活面本就走 figure-render 刀修过的
+`paperAssetSurfaceAdapter` 四路径，字节级不受这个残口影响。

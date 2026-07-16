@@ -116,13 +116,18 @@ assert("Step 2: rail path falls through when blankFocus is null or renderer !== 
   /if \(blankFocus\?\.renderer === 'grammar-fill'\)\s*\{\s*return renderTextWithGrammarFillBlanks/.test(psSrc))
 
 // ============================================================
-// Step 3 — harness wiring (source)
+// Step 3 — harness wiring (source) — RETIRED
 // ============================================================
-
+// reading-analysis-retire (2026-07-16, A-class re-anchor, rationale):
+// `PaperIntelligencePaperSurfaceHarness.tsx` is retired with the
+// `?view=paper-intelligence&surface=paper` orphan route (plan.md Scope 步
+// 3); it was the sole caller of `blankFocusMode`. Retirement assertion
+// instead of re-anchoring — PaperBrowsePage's lecture-mode blank-focus
+// wiring is a distinct state shape, not a 1:1 port of this string — per
+// plan.md Scope 步 6's authorized alternative.
 const HARNESS = 'app/src/features/paper-intelligence/PaperIntelligencePaperSurfaceHarness.tsx'
-const hSrc = readSrc(HARNESS)
-assert('Step 3: harness passes blankFocusMode in-passage iff grammarFillAnalysisModel',
-  hSrc.includes("blankFocusMode={grammarFillAnalysisModel ? 'in-passage' : 'rail'}"))
+assert('Step 3 (retired): PaperIntelligencePaperSurfaceHarness.tsx no longer exists',
+  !existsSync(path.join(rootDir, HARNESS)))
 
 // ============================================================
 // CSS affordance present

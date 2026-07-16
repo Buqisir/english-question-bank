@@ -30,10 +30,14 @@ const BASELINE = {
   'features/my-space/MySpacePage.css': { '10px': 1, '2px': 1 },
   'features/paper-browse/paperBrowsePage.css': { '10px': 1, '12px': 1 },
   'features/paper-intelligence/paperIntelligence.css': { '10px': 2, '12px': 3, '2px': 1, '3px': 5 },
-  'features/paper-intelligence/paperIntelligencePaperSurfaceHarness.css': { '2px': 1, '3px': 3, '5px': 6 },
   'features/paper-intelligence/paperSurfaceLectureHighlights.css': { '3px': 1 },
-  'features/reading-analysis/readingAnalysis.css': { '2px': 2, '5px': 2 },
 }
+// reading-analysis-retire (2026-07-16): the two baseline entries above for
+// `paperIntelligencePaperSurfaceHarness.css` and
+// `features/reading-analysis/readingAnalysis.css` are deleted, not just
+// zeroed — both stylesheets are retired along with the orphan routes
+// (plan.md Scope 步 2/3). Ratchet tightened per this script's own
+// "baseline entries fully cleaned on disk" self-check.
 
 function cssFiles(dir) {
   const out = []

@@ -248,7 +248,7 @@
  *         card instead (⑤-⑦; ⑧-⑨ are the two writing sections, covered by
  *         the CSS-only path in items 49-50).
  */
-import { readFileSync } from 'node:fs'
+import { existsSync, readFileSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { findWritingBlockRange } from '../app/src/features/paper-intelligence/writingPageModel.mjs'
@@ -370,10 +370,15 @@ assert(
   'branch ordered after the default workbench render',
 )
 assert(
+  // reading-analysis-retire (2026-07-16, A-class re-anchor, rationale):
+  // this assertion used to also require paperBrowseRoute's branch to sit
+  // before `if (currentPiRoute.kind === 'paper-intelligence') {` — that
+  // branch and the `currentPiRoute` state it read are retired along with
+  // the `?view=paper-intelligence` orphan route (plan.md Scope 步 1), so
+  // the ordering check narrows to the two routes that still exist.
   'paperBrowseRoute branch appears alongside draftPaperRoute/mySpaceRouteActive branches',
   appSrc.indexOf('if (draftPaperRoute.active)') <
-    appSrc.indexOf('if (paperBrowseRoute.active') &&
-    appSrc.indexOf('if (paperBrowseRoute.active') < appSrc.indexOf("if (currentPiRoute.kind === 'paper-intelligence') {"),
+    appSrc.indexOf('if (paperBrowseRoute.active'),
   'branch not ordered with the other route early-returns',
 )
 
@@ -872,7 +877,6 @@ assert(
 
 // ─── 18-21. seven-options-on-paper: 七选五 A-G option pool on screen ───
 
-const harnessSrc = read('app/src/features/paper-intelligence/PaperIntelligencePaperSurfaceHarness.tsx')
 const paperSurfaceTypesSrc = read('shared/papersurface/types.d.ts')
 const detailViewSrcForOptionBank = detailViewSrc
 
@@ -917,10 +921,14 @@ assert(
   /optionBank=\{entry\.kind === 'sevenChoices' \? entry\.model\.options : undefined\}/.test(pageSrc),
   'missing optionBank wiring in PaperBrowsePage.tsx',
 )
+// reading-analysis-retire (2026-07-16, A-class re-anchor, rationale): the
+// mirrored "PaperIntelligencePaperSurfaceHarness.tsx wires optionBank from
+// sevenChoicesModel?.options" assertion that used to live here is retired
+// along with the harness (plan.md Scope 步 3) — the assertion above already
+// covers the one surviving consumer, PaperBrowsePage.tsx.
 assert(
-  "PaperIntelligencePaperSurfaceHarness.tsx wires optionBank from sevenChoicesModel?.options (C4/C5)",
-  /optionBank=\{sevenChoicesModel\?\.options\}/.test(harnessSrc),
-  'missing optionBank wiring in PaperIntelligencePaperSurfaceHarness.tsx',
+  'PaperIntelligencePaperSurfaceHarness.tsx no longer exists (optionBank wiring retired with it)',
+  !existsSync(path.join(rootDir, 'app/src/features/paper-intelligence/PaperIntelligencePaperSurfaceHarness.tsx')),
 )
 
 // C6 originally kept the detail page out of PaperSurface scope entirely.
@@ -1176,9 +1184,6 @@ assert(
 const lectureHighlightsCssSrc = read(
   'app/src/features/paper-intelligence/paperSurfaceLectureHighlights.css',
 )
-const harnessCssSrc = read(
-  'app/src/features/paper-intelligence/paperIntelligencePaperSurfaceHarness.css',
-)
 assert(
   'paperBrowsePage.css @imports the shared paperSurfaceLectureHighlights.css',
   /@import\s*["']\.\.\/paper-intelligence\/paperSurfaceLectureHighlights\.css["']/.test(pageCssSrc),
@@ -1318,21 +1323,18 @@ assert(
     !/\.paper-browse-shell \.pi-line-path--trap/.test(pageCssSrc),
   'paperBrowsePage.css still declares the support/trap palette locally — not a single source',
 )
+// reading-analysis-retire (2026-07-16, A-class re-anchor, rationale): the
+// two assertions that used to read `paperIntelligencePaperSurfaceHarness.css`
+// here (its shared-file @import + its option-card/jump-chip selector) are
+// retired along with that stylesheet and its sole consumer, the harness
+// (plan.md Scope 步 3). `paperSurfaceLectureHighlights.css` is the shared
+// single source of truth these rules moved INTO — its half of the contract
+// is still fully checked above (@import + selector assertions against
+// `lectureHighlightsCssSrc`); only the now-deleted second consumer's mirror
+// checks are dropped.
 assert(
-  'paperIntelligencePaperSurfaceHarness.css @imports the shared paperSurfaceLectureHighlights.css and no longer hand-copies the support/trap palette or the seven-choices overlay/mark base rules itself',
-  /@import\s*["']\.\/paperSurfaceLectureHighlights\.css["']/.test(harnessCssSrc) &&
-    !/\.pi-ps-harness-shell \.pi-line-path--support/.test(harnessCssSrc) &&
-    !/\.pi-ps-harness-shell \.pi-line-path--trap/.test(harnessCssSrc) &&
-    !/\.pi-seven-blank-overlay\s*\{/.test(harnessCssSrc) &&
-    !/\.pi-seven-clue-mark\s*\{/.test(harnessCssSrc),
-  'harness stylesheet missing the shared-file @import, or still hand-copies rules that should have moved',
-)
-assert(
-  'paperIntelligencePaperSurfaceHarness.css still declares .pi-seven-option-card[data-seven-color] (untouched consumer, not accidentally deleted with the clue-mark selector it used to share a rule with)',
-  /\.pi-seven-option-card\[data-seven-color='0'\][\s\S]{0,20}\.pi-seven-option-jump-chip\[data-seven-color='0'\]\s*\{/.test(
-    harnessCssSrc,
-  ),
-  'option-card/jump-chip color-variant rule is missing — may have been deleted along with the clue-mark extraction',
+  'paperIntelligencePaperSurfaceHarness.css no longer exists (its half of the shared-stylesheet contract retired with it)',
+  !existsSync(path.join(rootDir, 'app/src/features/paper-intelligence/paperIntelligencePaperSurfaceHarness.css')),
 )
 assert(
   'paperBrowsePage.css hides the evidence line below the 1200px docked-三栏 breakpoint (drawer geometry is not meaningful)',
@@ -1409,12 +1411,33 @@ assert(
     /setPaperBrowseRoute\(\{\s*\n\s*active:\s*view\s*===\s*['"]paper-browse['"]/.test(appSrc),
   'missing the popstate listener or it does not sync all four route states',
 )
+// reading-analysis-retire (2026-07-16, A-class re-anchor, rationale): the
+// popstate handler's `view === 'paper-intelligence' || view ===
+// 'reading-analysis'` full-reload short-circuit is retired along with both
+// routes (plan.md Scope 步 1) — neither route pushes a history entry a user
+// could Back/Forward into any more, so there is nothing left for popstate to
+// fall back on. The self-heal contract that replaces it lives at BOOT, in
+// main.tsx, via `history.replaceState` (so the broken URL never enters
+// history in the first place): re-anchor the assertion there instead.
+const mainSrc = read('app/src/main.tsx')
 assert(
-  'popstate handler falls back to a full reload for view=paper-intelligence / view=reading-analysis (routes this component cannot assemble from state)',
-  /view\s*===\s*['"]paper-intelligence['"]\s*\|\|\s*view\s*===\s*['"]reading-analysis['"][\s\S]{0,80}window\.location\.reload\(\)/.test(
-    appSrc,
-  ),
-  'missing the reload fallback for SPA-uncarried views',
+  'App.tsx no longer short-circuits popstate on the retired paper-intelligence/reading-analysis views',
+  !/view\s*===\s*['"]paper-intelligence['"]\s*\|\|\s*view\s*===\s*['"]reading-analysis['"]/.test(appSrc),
+  'App.tsx still references the retired view values in its popstate handler',
+)
+assert(
+  'main.tsx self-heals ?view=paper-intelligence&paperId=<id> to the paper-browse lecture view via replaceState',
+  /view\s*===\s*['"]paper-intelligence['"][\s\S]{0,400}history\.replaceState[\s\S]{0,200}view['"'`]?\s*,\s*['"]paper-browse['"]/.test(
+    mainSrc,
+  ) || (mainSrc.includes("'paper-intelligence'") && mainSrc.includes("'paper-browse'") && mainSrc.includes('replaceState')),
+  'main.tsx does not self-heal the old paper-intelligence URL to paper-browse',
+)
+assert(
+  'main.tsx self-heals ?view=reading-analysis / ?demo=reading-analysis / #reading-analysis to the home URL via replaceState',
+  mainSrc.includes("'reading-analysis'") &&
+    mainSrc.includes("'#reading-analysis'") &&
+    mainSrc.includes('replaceState'),
+  'main.tsx does not self-heal the retired reading-analysis URL aliases',
 )
 assert(
   // similar-entrypoints (E3) adds `similar` to the stripped-param list too —

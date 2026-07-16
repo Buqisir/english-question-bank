@@ -6,7 +6,6 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import './App.css'
 import { questionGroups as sampleQuestionGroups } from './data/sampleQuestionGroups'
 import {
-  groupTypeLabel,
   type QuestionGroupCard,
   type QuestionGroupDetail,
   type ReadingParseQuestionGroupResult,
@@ -24,14 +23,6 @@ import {
   backfillTopicLabels,
   type BackfillTopicLabelsResult,
 } from './services/questionGroups'
-import { PaperIntelligencePreview } from './features/paper-intelligence/PaperIntelligencePreview'
-import type { PaperIntelligenceRouteMatch } from './features/paper-intelligence/paperIntelligenceRoute'
-// Issue #21-C1: PaperSurface harness replaces the old prototype on
-// `?view=paper-intelligence&surface=paper`. Default PI route is
-// unchanged when the surface field is absent. There is no compat
-// branch for the legacy `surface=print` value — it falls back to
-// default like any other unknown surface.
-import { PaperIntelligencePaperSurfaceHarness } from './features/paper-intelligence/PaperIntelligencePaperSurfaceHarness'
 import { PaperBrowsePage } from './features/paper-browse/PaperBrowsePage'
 import { DraftPaperWorkbench } from './features/draft-paper/DraftPaperWorkbench'
 import { MySpacePage } from './features/my-space/MySpacePage'
@@ -74,22 +65,12 @@ const DEFAULT_AI_MODEL = DEEPSEEK_MODELS[0].value
 // verify-paper-browse.mjs's `[^{]*\{` body-extraction regex.
 type OpenPaperBrowseOptions = { questionId?: string | null; lecture?: boolean; similar?: boolean }
 
-function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
-  // ─── Cut C: in-app PI ↔ workbench navigation ───
-  // main.tsx parses the URL once at boot and passes the result in via the
-  // `piRoute` prop. That snapshot can never change after mount on its own,
-  // so we keep an internal `currentPiRoute` mirror that the App actually
-  // reads. `onBackToWorkbench` (below) flips this mirror to `{ kind: 'none' }`
-  // and rewrites the URL via `history.replaceState` — no full page reload,
-  // no `window.location.href` assignment, no `window.location.reload`.
-  // Workbench fetch effects depend on `currentPiRoute.kind` so they fire
-  // exactly once when the user returns from PI.
+function App() {
   const currentUser = useCurrentUser()
   // M0-3 (docs/cuts/m0-3-role-gate/plan.md 2b): AuthGate is the only place that
   // translates open-mode/owner/member into this boolean — consume it directly,
   // never re-derive from `currentUser`.
   const isOwnerView = useIsOwnerView()
-  const [currentPiRoute, setCurrentPiRoute] = useState<PaperIntelligenceRouteMatch>(piRoute)
   const [adminRouteActive, setAdminRouteActive] = useState(() => {
     if (!isOwnerView) return false
     if (typeof window === 'undefined') return false
@@ -251,20 +232,7 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     }
   }, [paperExports])
 
-  // ─── PI-route guard: skip workbench-only fetches while the App shell is
-  // rendering Paper Intelligence ───
-  // When the Paper Intelligence route is active, the App shell does NOT show
-  // any of the workbench panels (question bank list, imports, paper sets,
-  // workflows). The corresponding effects below would fire useless GETs
-  // against /api/* on PI-only sessions; reviewers flagged this as a P0 watch
-  // on Cut A. We early-return inside each effect callback so hooks remain
-  // unconditionally called (React's rules-of-hooks) but no fetch fires while
-  // currentPiRoute.kind === 'paper-intelligence'. Each effect's dependency
-  // list includes currentPiRoute.kind so Cut C return-to-workbench (which
-  // flips the in-app currentPiRoute to { kind: 'none' }) retriggers the
-  // normal load WITHOUT a full-page reload.
   useEffect(() => {
-    if (currentPiRoute.kind === 'paper-intelligence') return
     let ignore = false
 
     refreshQuestionGroups(() => ignore)
@@ -272,7 +240,7 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     return () => {
       ignore = true
     }
-  }, [currentPiRoute.kind, refreshQuestionGroups])
+  }, [refreshQuestionGroups])
 
   // Close insertion menu on outside click or Escape
   const closeInsertionMenu = paperDraft.setOpenInsertionIndex
@@ -521,90 +489,6 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     }
   }
 
-  // ─── Paper Intelligence bridge props (Cut B) ───
-  const piBasketIds = useMemo(
-    () => new Set(basket.map((item) => item.id)),
-    [basket],
-  )
-  const piAvailableQuestionGroupIds = useMemo(
-    () => new Set(questionGroups.map((group) => group.id)),
-    [questionGroups],
-  )
-  // Real basket bridge: PaperIntelligencePreview only knows a questionGroupId
-  // (it does NOT know about QuestionGroupCard or paperDraft). Resolution from
-  // id → card → paperDraft.addGroups happens here. PI preview enforces button
-  // state guards (basketIds / availableQuestionGroupIds) so this handler will
-  // only ever be invoked for ids that actually resolve.
-  //
-  // Cut C P0 watch: the deps list intentionally pins the SPECIFIC handler
-  // (`addGroups`) instead of the whole `paperDraft` object — `paperDraft`
-  // is rebuilt every render and would force this useCallback to invalidate
-  // on every render, defeating the point of memoization. `addGroups` is
-  // stabilized via `useCallback` inside `usePaperDraft`, so identity stays
-  // constant across renders.
-  const { addGroups: paperDraftAddGroups } = paperDraft
-  const piOnAddQuestionGroup = useCallback(
-    (questionGroupId: string) => {
-      const card = questionGroupById.get(questionGroupId)
-      if (!card) return
-      paperDraftAddGroups([card])
-    },
-    [questionGroupById, paperDraftAddGroups],
-  )
-  const piOnBackToWorkbench = useCallback(() => {
-    // Cut C: in-app return-to-workbench. Three contracts:
-    //   1. Strip Paper Intelligence route params from the URL WITHOUT a full
-    //      page reload — never use window.location.href / reload.
-    //   2. Flip currentPiRoute → { kind: 'none' } so App re-renders the
-    //      default workbench; the previously-guarded fetch effects retrigger.
-    //   3. Do NOT open the basket drawer, do NOT auto-save the Paper Set.
-    //      Assembly Basket and localStorage are preserved automatically because
-    //      we never touch usePaperDraft state here.
-    if (typeof window !== 'undefined' && window.history && typeof window.history.replaceState === 'function') {
-      try {
-        const url = new URL(window.location.href)
-        for (const param of ['view', 'source', 'paperId', 'surface', 'groupId', 'questionId', 'version']) {
-          url.searchParams.delete(param)
-        }
-        const nextSearch = url.searchParams.toString()
-        const nextUrl = `${url.pathname}${nextSearch ? `?${nextSearch}` : ''}${url.hash || ''}`
-        window.history.replaceState(window.history.state, '', nextUrl)
-      } catch {
-        /* swallow — URL rewrite is best-effort; state flip below is what
-         * actually unmounts PI. */
-      }
-    }
-    setCurrentPiRoute({ kind: 'none' })
-  }, [])
-  const piBasketCount = basket.length
-
-  /*
-   * Issue #20: PI top bar now exposes a "草稿卷 N" button that opens a
-   * read-only popover listing what's in the Assembly Basket. PI must
-   * stay decoupled from BasketItem / QuestionGroupCard / usePaperDraft
-   * (Cut B / Cut C boundary), so we project a pure `BasketPreviewItem`
-   * array here. Total score is pre-computed (basket items store a
-   * per-question `score`; teachers expect the panel total).
-   *
-   * Order is preserved from `basket`, which is the authoritative
-   * insertion order owned by paperDraft. No sorting / filtering is
-   * applied — the popover should match exactly what the workbench
-   * basket would show.
-   */
-  const piBasketPreviewItems = useMemo(
-    () =>
-      basket.map((item) => ({
-        id: item.id,
-        paperSection: item.section,
-        passageTitle: item.passageTitle,
-        groupTypeLabel: groupTypeLabel[item.groupType],
-        questionCount: item.questionCount,
-        totalScore: item.score * item.questionCount,
-        sourcePaperName: item.paperName,
-      })),
-    [basket],
-  )
-
   const currentDraftPaperId = useMemo(
     () => questionGroups.find((group) => group.currentDraftPaperId)?.currentDraftPaperId || null,
     [questionGroups],
@@ -658,7 +542,6 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
       window.history.pushState(window.history.state, '', `${url.pathname}?${url.searchParams.toString()}${url.hash || ''}`)
     }
     setMySpaceRouteActive(false)
-    setCurrentPiRoute({ kind: 'none' })
     setPaperBrowseRoute({ active: false, paperId: null, focusGroupId: null, questionId: null, lecture: false, similar: false })
     setDraftPaperRoute({
       active: true,
@@ -726,7 +609,6 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
       window.history.pushState(window.history.state, '', `${url.pathname}?${url.searchParams.toString()}${url.hash || ''}`)
     }
     setMySpaceRouteActive(false)
-    setCurrentPiRoute({ kind: 'none' })
     setDraftPaperRoute({ active: false, draftPaperId: null, focusGroupId: null })
     setPaperBrowseRoute({ active: true, paperId, focusGroupId: focusGroupId || null, questionId, lecture, similar })
   }, [])
@@ -784,25 +666,21 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
   // is the other half, replaying the same boot-read parse (main.tsx /
   // this component's four useState initializers above) whenever the user
   // navigates via the browser's own Back/Forward instead of an in-app
-  // callback. `view=paper-intelligence` and `view=reading-analysis` are NOT
-  // routes this component can render from state — main.tsx picks between
-  // <App> and <ReadingAnalysisDemoRoute> at boot, and currentPiRoute is only
-  // ever populated from the `piRoute` prop main.tsx passes in at that same
-  // boot moment (see the comment on the `currentPiRoute` useState above) —
-  // so landing on either of those two URLs via popstate falls back to a full
-  // reload instead of assembling a route this component has no state path
-  // for. Verified surface is paper-browse Back/Forward (per plan); the other
-  // three routes (admin/my-space/draft-paper) are synced too but their
+  // callback. Verified surface is paper-browse Back/Forward (per plan); the
+  // other three routes (admin/my-space/draft-paper) are synced too but their
   // in-page state debt is out of this cut's scope.
+  //
+  // reading-analysis-retire (2026-07-16): the `view === 'paper-intelligence'
+  // || view === 'reading-analysis'` full-reload short-circuit that used to
+  // live here is retired along with both routes. Neither route pushes a
+  // history entry a user could Back/Forward into any more — main.tsx
+  // self-heals the URL via `replaceState` at boot, before this listener (or
+  // any render) ever runs.
   useEffect(() => {
     function onPopState(): void {
       if (typeof window === 'undefined') return
       const params = new URLSearchParams(window.location.search)
       const view = params.get('view')
-      if (view === 'paper-intelligence' || view === 'reading-analysis') {
-        window.location.reload()
-        return
-      }
       setAdminRouteActive(isOwnerView && view === 'admin')
       setMySpaceRouteActive(view === 'my-space')
       setBrowseRouteActive(view === 'browse')
@@ -819,7 +697,6 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
         lecture: params.get('lecture') === '1',
         similar: params.get('similar') === '1',
       })
-      setCurrentPiRoute({ kind: 'none' })
       // C3a — replay the detail view the same way boot does (writeUrl:
       // false — the browser already owns this history entry). Any other
       // `view` value (including none, i.e. back to the plain list) falls
@@ -887,7 +764,6 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
     setDraftPaperRoute({ active: false, draftPaperId: null, focusGroupId: null })
     setPaperBrowseRoute({ active: false, paperId: null, focusGroupId: null, questionId: null, lecture: false, similar: false })
     setMySpaceRouteActive(true)
-    setCurrentPiRoute({ kind: 'none' })
   }, [])
 
   const mySpaceOnBackToWorkbench = useCallback(() => {
@@ -984,39 +860,6 @@ function App({ piRoute }: { piRoute: PaperIntelligenceRouteMatch }) {
         onOpenDraftPaperWorkbench={(draftPaperId) => openDraftPaperWorkbench(draftPaperId)}
         onBackToWorkbench={paperBrowseOnBackToWorkbench}
         shellNav={shellNav}
-      />
-    )
-  }
-
-  if (currentPiRoute.kind === 'paper-intelligence') {
-    // Issue #21-C1: when the URL carries `&surface=paper`, render the
-    // PaperSurface harness (production PaperSurface module + PI adapter).
-    // Default surface (no `surface=` param, or any unknown value including
-    // the retired `surface=print`) keeps the existing render path untouched.
-    // The route parser normalizes unknown values to `'default'`, so this
-    // branch is the only place the harness is reachable from.
-    if (currentPiRoute.surface === 'paper') {
-      return (
-        <PaperIntelligencePaperSurfaceHarness
-          paperId={currentPiRoute.paperId}
-          source={currentPiRoute.source}
-          groupId={currentPiRoute.groupId}
-          questionId={currentPiRoute.questionId}
-          version={currentPiRoute.version}
-          onBackToWorkbench={piOnBackToWorkbench}
-          shellNav={shellNav}
-        />
-      )
-    }
-    return (
-      <PaperIntelligencePreview
-        paperId={currentPiRoute.paperId}
-        basketIds={piBasketIds}
-        availableQuestionGroupIds={piAvailableQuestionGroupIds}
-        onAddQuestionGroup={piOnAddQuestionGroup}
-        basketCount={piBasketCount}
-        basketPreviewItems={piBasketPreviewItems}
-        onBackToWorkbench={piOnBackToWorkbench}
       />
     )
   }

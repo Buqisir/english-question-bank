@@ -3,6 +3,8 @@
  * Read-only — these types are never written to any database.
  */
 
+import type { PaperTextMap, PaperQuestion, PaperEvidence } from '../../../../shared/papersurface/types'
+
 export type LoadEvidence = {
   quote: string
   note?: string
@@ -170,4 +172,22 @@ export type PaperIntelligenceReport = {
   sourcePaper: SourcePaperMeta
   passages: PassageReport[]
   paperLevelNotes?: string
+}
+
+/**
+ * PaperSurfaceData — the data-props shape the shared PaperSurface module
+ * consumes (`textMap` / `questions` / `evidence`), independent of who builds
+ * it. Migrated here from the retired `adapter/index.ts` barrel
+ * (reading-analysis-retire, 2026-07-16): the barrel's only runtime function
+ * (`buildPaperSurfaceDataFromPi`) was exercised solely by the retired
+ * `PaperIntelligencePaperSurfaceHarness`, but this *type* is `import type`-ed
+ * by the 7 live PaperSurface adapters below it (`paperAssetSurfaceAdapter.ts`
+ * et al.) as the shape they each build and return. Depends only on the
+ * shared PaperSurface contract types, not on any adapter/evidence runtime
+ * module — so it moves cleanly without dragging retired code along.
+ */
+export type PaperSurfaceData = {
+  textMap: PaperTextMap
+  questions: PaperQuestion[]
+  evidence: PaperEvidence[]
 }

@@ -36,11 +36,15 @@ type GateState =
   | { status: 'unauthenticated' }
 
 // Single mount point for the whole app's auth boundary (plan.md decision 7 /
-// pa.md MF-3): wraps `<RootComponent />` at the createRoot().render() call in
-// main.tsx, so both of RootComponent's branches (App and
-// ReadingAnalysisDemoRoute) sit behind this gate — including the
-// `?view=reading-analysis` route, which must show the login page rather than
-// content when forced mode is on and the visitor has no session.
+// pa.md MF-3): wraps `<App />` at the createRoot().render() call in
+// main.tsx, so the whole app sits behind this gate — it must show the login
+// page rather than content when forced mode is on and the visitor has no
+// session.
+// reading-analysis-retire (2026-07-16): this gate used to also wrap a
+// second RootComponent branch (`ReadingAnalysisDemoRoute`, mounted on
+// `?view=reading-analysis`). That branch and its route parser are retired;
+// main.tsx now self-heals the old URL to the home route before render, so
+// `<App />` is the only child this gate ever wraps.
 export function AuthGate({ children }: { children: ReactNode }) {
   const [state, setState] = useState<GateState>({ status: 'loading' })
 

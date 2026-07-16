@@ -35,11 +35,11 @@ import type {
   PaperTextRange,
 } from '../../../../shared/papersurface/types'
 import type { PaperAssetV1 } from '../../domain/paperAsset.ts'
-import type { PaperSurfaceData } from './adapter/index.ts'
 import { FACET_FRAMEWORKS, type FrameworkBody } from './grammarFillFacetRegistry.ts'
 import type {
   LoadBar,
   PaperIntelligenceReport,
+  PaperSurfaceData,
   PassageStructure,
 } from './paperIntelligenceTypes.ts'
 
