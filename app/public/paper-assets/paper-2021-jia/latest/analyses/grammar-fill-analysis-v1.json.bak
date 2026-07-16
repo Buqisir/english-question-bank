@@ -1,0 +1,233 @@
+{
+  "schemaVersion": "grammar-fill-analysis-v1",
+  "paperId": "paper-2021-jia",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-2021-jia-grammar-fill"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "grammar-fill-analysis-v1",
+    "reviewStatus": "reviewed",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-2021-jia-grammar-fill": {
+      "overview": "记叙文：作者游览西安城墙、骑行环城一圈的经历。"
+    }
+  },
+  "blanks": {
+    "q-2021-jia-061": {
+      "blankId": "blank-2021-jia-061",
+      "blankNo": 61,
+      "blankType": "given",
+      "hint": "build",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "was built",
+      "role": null,
+      "path": null,
+      "reason": "本句无其他谓语，空格是谓语动词。主语 It（指城墙）是被建造的对象，用被动语态；下文 originally 及与 has now been restored 的时间对比锁定一般过去时，故填 was built。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "originally to protect the city",
+          "signalSide": "passage",
+          "relation": "城墙是被建造的，逻辑主语被动，定语态为被动。"
+        },
+        {
+          "type": "time-marker",
+          "signalText": "completely restored",
+          "signalSide": "passage",
+          "relation": "now 完成时与最初建造形成今昔对比，建造发生在过去，定一般过去时。"
+        }
+      ],
+      "teachingNote": "先用 N+1 判出这是谓语，再认主语判语态、找时间标志定时态。"
+    },
+    "q-2021-jia-062": {
+      "blankId": "blank-2021-jia-062",
+      "blankNo": 62,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.preposition",
+      "answer": "in",
+      "role": null,
+      "path": null,
+      "reason": "空后是表示朝代时段的名词 the Tang dynasty，需介词引出时间状语；表示在某个朝代/时代用介词 in，故填 in。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "the Tang dynasty",
+          "signalSide": "passage",
+          "relation": "朝代名词作时间，前面需介词 in 构成 in the Tang dynasty。"
+        }
+      ],
+      "teachingNote": "空后是时间名词且无连词新谓语时，补介词构成介词短语，朝代/时代用 in。"
+    },
+    "q-2021-jia-063": {
+      "blankId": "blank-2021-jia-063",
+      "blankNo": 63,
+      "blankType": "given",
+      "hint": "walk",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "to walk",
+      "role": "subject",
+      "path": "fast",
+      "reason": "It is possible 是形式主语句型，真正主语在后，用不定式作真主语；固定句式 It is possible to do 锁定 to walk。",
+      "evidence": [
+        {
+          "type": "collocation",
+          "signalText": "It is possible",
+          "signalSide": "passage",
+          "relation": "It is possible to do 固定句型，it 为形式主语，真主语用不定式。"
+        }
+      ],
+      "teachingNote": "见 It is + adj 形式主语句，真主语位置直接用 to do。"
+    },
+    "q-2021-jia-064": {
+      "blankId": "blank-2021-jia-064",
+      "blankNo": 64,
+      "blankType": "given",
+      "hint": "spend",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "spending",
+      "role": "object",
+      "path": "fast",
+      "reason": "空前是介词 After，介词后接动词须用动名词作宾语，故填 spending。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "After",
+          "signalSide": "passage",
+          "relation": "After 在此作介词，其后动词须变动名词作介词宾语。"
+        }
+      ],
+      "teachingNote": "介词后动词一律变动名词（-ing）作宾语。"
+    },
+    "q-2021-jia-065": {
+      "blankId": "blank-2021-jia-065",
+      "blankNo": 65,
+      "blankType": "given",
+      "hint": "good",
+      "facetKey": "grammar-fill.given.adjective",
+      "answer": "better",
+      "role": null,
+      "path": null,
+      "reason": "空后有比较标志 than，需用形容词比较级；good 的比较级是 better，故填 better。",
+      "evidence": [
+        {
+          "type": "comparison",
+          "signalText": "than to ride on a piece of history",
+          "signalSide": "passage",
+          "relation": "than 是比较标志，触发形容词用比较级 better。"
+        }
+      ],
+      "teachingNote": "见 than 等比较标志，形容词变比较级（good→better）。"
+    },
+    "q-2021-jia-066": {
+      "blankId": "blank-2021-jia-066",
+      "blankNo": 66,
+      "blankType": "given",
+      "hint": "hire",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "hired",
+      "role": null,
+      "path": null,
+      "reason": "本句无其他谓语，空是谓语动词。主语 We 主动租车，全文叙述过去经历，用一般过去时，故填 hired。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "We",
+          "signalSide": "passage",
+          "relation": "We 主动租车，语态为主动。"
+        },
+        {
+          "type": "time-marker",
+          "signalText": "It took us about 3 hours",
+          "signalSide": "passage",
+          "relation": "下文 took 等过去时叙事，定一般过去时。"
+        }
+      ],
+      "teachingNote": "缺谓语时认主语判语态，全文记叙过去用一般过去时。"
+    },
+    "q-2021-jia-067": {
+      "blankId": "blank-2021-jia-067",
+      "blankNo": 67,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.coordinating",
+      "answer": "but",
+      "role": null,
+      "path": null,
+      "reason": "前后“old and shaky”与“did the job”语义转折，并列两个并列分句，需转折并列连词，故填 but/yet。",
+      "evidence": [
+        {
+          "type": "parallel",
+          "signalText": "old and",
+          "signalSide": "passage",
+          "relation": "车又旧又晃却能用，前后语义相反，需转折并列连词连接两个分句。"
+        }
+      ],
+      "teachingNote": "前后语义相反且各有主谓时，用转折并列连词 but/yet。"
+    },
+    "q-2021-jia-068": {
+      "blankId": "blank-2021-jia-068",
+      "blankNo": 68,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.article",
+      "answer": "the",
+      "role": null,
+      "path": null,
+      "reason": "all __ way around 是固定表达 all the way around（一路绕……一圈），名词 way 前需定冠词 the。",
+      "evidence": [
+        {
+          "type": "collocation",
+          "signalText": "go all",
+          "signalSide": "passage",
+          "relation": "all the way around 固定搭配，way 前用定冠词 the。"
+        }
+      ],
+      "teachingNote": "固定搭配 all the way 中 way 前用 the。"
+    },
+    "q-2021-jia-069": {
+      "blankId": "blank-2021-jia-069",
+      "blankNo": 69,
+      "blankType": "given",
+      "hint": "watchtower",
+      "facetKey": "grammar-fill.given.noun",
+      "answer": "watchtowers",
+      "role": null,
+      "path": null,
+      "reason": "与前面复数名词 the different gates 并列，可数名词应用复数，故填 watchtowers。",
+      "evidence": [
+        {
+          "type": "parallel",
+          "signalText": "different gates",
+          "signalSide": "passage",
+          "relation": "与复数 gates 由 and 并列，watchtower 须用复数。"
+        }
+      ],
+      "teachingNote": "与复数名词并列的可数名词也用复数。"
+    },
+    "q-2021-jia-070": {
+      "blankId": "blank-2021-jia-070",
+      "blankNo": 70,
+      "blankType": "given",
+      "hint": "day",
+      "facetKey": "grammar-fill.given.derivation.noun-to-adj",
+      "answer": "daily",
+      "role": null,
+      "path": null,
+      "reason": "空格后是名词 routines，前面需形容词作定语；名词 day 派生为形容词 daily（日常的），故填 daily。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "routines",
+          "signalSide": "passage",
+          "relation": "routines 是被修饰名词，前面需形容词，day 派生为 daily。"
+        }
+      ],
+      "teachingNote": "名词前的修饰空格需形容词，名词 day 派生为形容词 daily。"
+    }
+  }
+}

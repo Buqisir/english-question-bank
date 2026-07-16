@@ -93,6 +93,14 @@ export type GrammarFillBlankAnalysis = {
   reason: string
   evidence: GrammarFillEvidenceItem[]
   teachingNote: string
+  // D1 (grammar-facets-v2): present on finite-verb blanks (tense/voice/
+  // agreementSensitive) or non-finite blanks (form) — not yet surfaced in
+  // this panel's UI (MF-3 boundary: registry data table only), declared
+  // here so the adapter's input type matches the real on-disk v2 shape.
+  tense?: string | null
+  voice?: string | null
+  agreementSensitive?: boolean | null
+  form?: string | null
 }
 
 export type GrammarFillGroupAnalysis = {
@@ -100,7 +108,7 @@ export type GrammarFillGroupAnalysis = {
 }
 
 export type ReviewedGrammarFillAnalysisV1 = {
-  schemaVersion: 'grammar-fill-analysis-v1'
+  schemaVersion: 'grammar-fill-analysis-v2'
   paperId: string
   sourceAssetVersion: number
   targetGroups: string[]
@@ -200,8 +208,8 @@ export function buildGrammarFillAnalysisSurfaceModel(input: {
 }): GrammarFillAnalysisSurfaceModel {
   const { asset, analysis, groupId } = input
 
-  if (analysis.schemaVersion !== 'grammar-fill-analysis-v1') {
-    throw new Error('[I14] analysis schemaVersion must be grammar-fill-analysis-v1.')
+  if (analysis.schemaVersion !== 'grammar-fill-analysis-v2') {
+    throw new Error('[I14] analysis schemaVersion must be grammar-fill-analysis-v2.')
   }
   if (analysis.paperId !== asset.paper.paperId) {
     throw new Error('[I14] grammar-fill analysis paperId does not match paper asset.')

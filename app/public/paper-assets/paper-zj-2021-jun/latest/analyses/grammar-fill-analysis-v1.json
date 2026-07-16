@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "grammar-fill-analysis-v1",
+  "schemaVersion": "grammar-fill-analysis-v2",
   "paperId": "paper-zj-2021-jun",
   "sourceAssetVersion": 1,
   "targetGroups": [
@@ -41,7 +41,10 @@
           "relation": "主语为第三人称单数 home，决定助动词用 has。"
         }
       ],
-      "teachingNote": "见到 since + 过去时间点引导从句，主句谓语优先考虑现在完成时。"
+      "teachingNote": "见到 since + 过去时间点引导从句，主句谓语优先考虑现在完成时。",
+      "tense": "present-perfect",
+      "voice": "active",
+      "agreementSensitive": true
     },
     "q-zj-2021-jun-057": {
       "blankId": "blank-zj-2021-jun-057",
@@ -74,7 +77,7 @@
       "blankNo": 58,
       "blankType": "given",
       "hint": "marry",
-      "facetKey": "grammar-fill.given.derivation.verb-to-noun",
+      "facetKey": "grammar-fill.given.conversion.verb-to-noun",
       "answer": "marriage",
       "role": null,
       "path": null,
@@ -100,7 +103,7 @@
       "blankNo": 59,
       "blankType": "given",
       "hint": "small",
-      "facetKey": "grammar-fill.given.adjective",
+      "facetKey": "grammar-fill.given.adjective.comparison",
       "answer": "smaller",
       "role": null,
       "path": null,
@@ -145,7 +148,10 @@
           "relation": "邻句 was 表明叙述用一般过去时，故用 was painted。"
         }
       ],
-      "teachingNote": "主语是动作承受者用被动；时态随上下文叙述时间确定。"
+      "teachingNote": "主语是动作承受者用被动；时态随上下文叙述时间确定。",
+      "tense": "past",
+      "voice": "passive",
+      "agreementSensitive": true
     },
     "q-zj-2021-jun-061": {
       "blankId": "blank-zj-2021-jun-061",
@@ -211,7 +217,8 @@
           "relation": "动作'种花'是来访的目的，符合不定式作目的状语条件，故用 to plant。"
         }
       ],
-      "teachingNote": "句中已有谓语、后接动作表目的时，用不定式 to do 作目的状语。"
+      "teachingNote": "句中已有谓语、后接动作表目的时，用不定式 to do 作目的状语。",
+      "form": "to-do"
     },
     "q-zj-2021-jun-064": {
       "blankId": "blank-zj-2021-jun-064",
@@ -251,7 +258,10 @@
           "relation": "and 并列两个谓语，前一谓语 rented 为过去式，呼应用 sold。"
         }
       ],
-      "teachingNote": "and 并列谓语时，时态须与前一动词保持一致。"
+      "teachingNote": "and 并列谓语时，时态须与前一动词保持一致。",
+      "tense": "past",
+      "voice": "active",
+      "agreementSensitive": false
     }
   }
 }

@@ -55,34 +55,41 @@ The hint word's POS = entry into which `given` sub-facet:
 
 | Hint POS | Default facet | Exception |
 | --- | --- | --- |
-| verb (原形) | `given.verb` → then N+1 判谓/非谓（分词 `-ed`/`-ing` 作表/定/状/宾补 → `non-finite` + `role`） | blank needs noun → `verb-to-noun`；blank needs a **non-participle** adjective (`-able`/`-ous`/`-ful`/`-ive`, `a-`) → `verb-to-adj` |
-| noun | `given.noun` | if blank needs a different POS → `given.derivation.*` |
-| adjective | `given.adjective` | if blank needs a different POS → `given.derivation.*` |
+| verb (原形) | `given.verb` → then N+1 判谓/非谓（分词 `-ed`/`-ing` 作表/定/状/宾补/主补 → `non-finite` + `role`） | blank needs noun → `conversion.verb-to-noun`；blank needs a **non-participle** adjective (`-able`/`-ous`/`-ful`/`-ive`, `a-`) → `conversion.verb-to-adjective`；blank needs an adverb → `conversion.verb-to-adverb` |
+| noun | genitive (`'s`) → `given.noun.genitive`；regular plural of the hint → `given.noun.number` | blank needs a different POS or a same-POS derived word (e.g. occupational `-er`/`-or`) → `given.conversion.noun-to-noun` / `noun-to-adjective` / `noun-to-verb` |
+| adjective | comparative/superlative of the hint → `given.adjective.comparison` | blank needs an adverb (`-ly`) → `given.conversion.adjective-to-adverb`；blank needs a noun → `given.conversion.adjective-to-noun` |
 | pronoun | `given.pronoun` | — |
 | numeral | `given.numeral` | — |
 
-**Derivation exception (PO-confirmed):** when the blank needs a POS different from the hint's POS, use `grammar-fill.given.derivation.*`:
-- `noun-to-adj`: hint is noun, blank needs adjective
-- `verb-to-noun`: hint is verb, blank needs noun
-- `verb-to-adj`: hint is verb, blank needs a **non-participle** adjective derived by a true adjective suffix (`-able`/`-ous`/`-ful`/`-ive`) or the `a-` prefix (remark→remarkable / harm→harmful / sleep→asleep). 分词 `-ed`/`-ing` 不入此叶 — see 判定口令 below.
-- `adjective-to-noun`: hint is adjective, blank needs noun (介词后 / 缺主宾 / 限定词后 → 名词；常见后缀 `-ity` curious→curiosity / `-ness` happy→happiness / `-ce` confident→confidence / `-ment`)
+**词形转换（`given.conversion.<src>-to-<dst>`, 2026-07-15 owner 拍板"词性转换"→"词形转换"重铸，方向矩阵制，8 向）：** use ONLY when the blank's POS genuinely differs from the hint's POS (or, for `noun-to-noun`, is a same-POS derived word) — NOT when it's the hint's own inflection (plural/genitive/comparison/finite-tense/non-finite-role, all of which have their own dedicated facet above):
+- `noun-to-noun`: hint is noun, blank is a different noun derived from it (e.g. occupational suffix `-er`/`-or`: photograph→photographer)
+- `noun-to-adjective`: hint is noun, blank needs an adjective
+- `noun-to-verb`: hint is noun, blank needs a verb
+- `adjective-to-adverb`: hint is adjective, blank needs an adverb (`-ly`)
+- `adjective-to-noun`: hint is adjective, blank needs a noun (介词后 / 缺主宾 / 限定词后 → 名词；常见后缀 `-ity`/`-ty` curious→curiosity, `-ness` happy→happiness, `-ce`/`-cy` confident→confidence／accurate→accuracy, `-ment`)
+- `verb-to-adjective`: hint is verb, blank needs a **non-participle** adjective derived by a true adjective suffix (`-able`/`-ous`/`-ful`/`-ive`) or the `a-` prefix (remark→remarkable / harm→harmful / sleep→asleep). 分词 `-ed`/`-ing` 不入此叶 — see 判定口令 below.
+- `verb-to-noun`: hint is verb, blank needs a noun
+- `verb-to-adverb`: hint is verb, blank needs an adverb
 
-**判定口令（given 动词 + 答案是 `-ed`/`-ing` → 句法功能优先）:** 先判该空的句法 **role**（表语 predicative / 定语 attributive / 状语 adverbial / 宾补 object-complement / 主补 subject-complement）→ 归 `grammar-fill.given.verb.non-finite` + `role`。**只有**答案是非分词形容词后缀（`-able`/`-ous`/`-ful`/`-ive`）或 `a-` 前缀派生时，才用 `grammar-fill.given.derivation.verb-to-adj`。即情感/状态分词 `excited`（was excited）/ `educated`（become educated）/ `closed`（stays closed）作表语、`aching`/`existing`/`recognized` 作定语、`astonished`（leaving us ~）作宾补，一律是 `non-finite` + `role`，**不是** `verb-to-adj`。
+**判定口令（given 动词 + 答案是 `-ed`/`-ing` → 句法功能优先）:** 先判该空的句法 **role**（表语 predicative / 定语 attributive / 状语 adverbial / 宾补 object-complement / 主补 subject-complement，见下"成分七格"）→ 归 `grammar-fill.given.verb.non-finite` + `role`。**只有**答案是非分词形容词后缀（`-able`/`-ous`/`-ful`/`-ive`）或 `a-` 前缀派生时，才用 `grammar-fill.given.conversion.verb-to-adjective`。即情感/状态分词 `excited`（was excited）/ `educated`（become educated）/ `closed`（stays closed）作表语、`aching`/`existing`/`recognized` 作定语、`astonished`（leaving us ~）作宾补，一律是 `non-finite` + `role`，**不是** `verb-to-adjective`。
 
-**Adjective → adverb:** this is the `grammar-fill.given.adjective` facet's primary action (变副词), NOT `derivation`.
+**名词的数 / 名词的格 / 形容词比较等级（三个独立考点，非"词形转换"——词性不变，讲评语言是"考复数/考所有格/考比较级"）：**
+- `given.noun.number`：hint 的规则单复数变化（含 -y→-ies / -f(e)→-ves 等规则变化）
+- `given.noun.genitive`：hint 的所有格（`'s`）
+- `given.adjective.comparison`：hint 的比较级/最高级（含不规则 better/worse/further/more/most 等）
 
 ### `given.verb` sub-facet: finite vs. non-finite
 
 Use **N+1 rule**: count predicates in the clause. If the verb slot is a predicate slot → `finite`; if already filled → `non-finite`.
 
-- **`grammar-fill.given.verb.finite`** — 谓语动词. Framework: ① find subject (number/person) ② judge voice (active/passive) ③ judge tense (time-marker words lock tense).
-- **`grammar-fill.given.verb.non-finite`** — 非谓语动词. Framework: ① judge position → identify syntactic role (`role` field) ② fast-path (subject/object/predicative/object-complement: fixed collocation/pattern locks one table row → judge voice only) or slow-path (attributive/adverbial: test `to-inf` condition first → if met, judge voice; else remove `to-inf` row → judge voice ± aspect).
+- **`grammar-fill.given.verb.finite`** — 谓语动词. Framework: ① find subject (number/person) ② judge voice (active/passive) ③ judge tense (time-marker words lock tense). `tense`/`voice`/`agreementSensitive` are stamped server-side from your `answer`, deterministically — do NOT output them yourself.
+- **`grammar-fill.given.verb.non-finite`** — 非谓语动词. Framework: ① judge position → identify syntactic role (`role` field, 成分七格 below) ② fast-path (subject/object/predicative/object-complement/subject-complement: fixed collocation/pattern locks one table row → judge voice only) or slow-path (attributive/adverbial: test `to-inf` condition first → if met, judge voice; else remove `to-inf` row → judge voice ± aspect). `form` (to-do/doing/done) is stamped server-side from your `answer` — do NOT output it yourself.
 
 ### `role` and `path` (non-finite only)
 
-For **`grammar-fill.given.verb.non-finite`**, add:
+For **`grammar-fill.given.verb.non-finite`**, add — **成分七格终稿（2026-07-15 owner 补主补拍板）**:
 
-- `role` ∈ `subject` / `predicative` / `object` / `attributive` / `adverbial` / `object-complement` / `subject-complement`
+- `role` ∈ `subject`（主语）/ `predicative`（表语，系动词后）/ `object`（宾语）/ `attributive`（定语）/ `adverbial`（状语）/ `object-complement`（宾语补足语，如 tell sb to do / wait for sth to do）/ `subject-complement`（**主语补足语 = 宾补的被动**，如 be expected to do、be left doing — NOT a synonym for "表语"; a 系动词 + 表语 blank is `predicative`, never `subject-complement`）
 - `path` ∈ `fast` (fixed collocation/situation directly locks one row) / `slow` (walk the table: test to-inf first, then voice, then aspect)
 
 For every other facet: `"role": null, "path": null`.
@@ -108,13 +115,13 @@ For every other facet: `"role": null, "path": null`.
 
 ```json
 {
-  "schemaVersion": "grammar-fill-analysis-v1",
+  "schemaVersion": "grammar-fill-analysis-v2",
   "paperId": "paper-...",
   "sourceAssetVersion": 1,
   "targetGroups": ["group-...-grammar-fill"],
   "meta": {
     "generatedBy": "external-ai",
-    "promptVersion": "grammar-fill-analysis-v1",
+    "promptVersion": "grammar-fill-analysis-v2",
     "reviewStatus": "reviewed"
   },
   "groups": {
@@ -140,7 +147,7 @@ Every `blanks[questionId]` MUST include:
 - `blankNo` — integer blank number (56–65)
 - `blankType` — exactly `given` or `no-hint` (from input)
 - `hint` — the given base word (string) for `given` blanks; `null` for `no-hint` blanks (from input)
-- `facetKey` — exactly one of the **17 leaf** keys listed below
+- `facetKey` — exactly one of the **22 leaf** keys listed below
 - `answer` — the produced form/word; MUST equal the answer key
 - `role` — required string iff `facetKey === "grammar-fill.given.verb.non-finite"` else `null`
 - `path` — required string iff `facetKey === "grammar-fill.given.verb.non-finite"` else `null`
@@ -148,19 +155,26 @@ Every `blanks[questionId]` MUST include:
 - `evidence` — array with ≥1 item
 - `teachingNote` — 中文一句：可迁移的解题动作
 
-## The 17 Valid `facetKey` Leaves
+Do NOT output `tense`/`voice`/`agreementSensitive` (finite verb) or `form` (non-finite verb) yourself — the server stamps these deterministically from `answer` after your response.
 
-Use ONLY these exact string values. Do NOT use parent nodes (`grammar-fill`, `grammar-fill.given`, `grammar-fill.given.verb`, `grammar-fill.given.derivation`, `grammar-fill.no-hint`, `grammar-fill.no-hint.conjunction`) — they are NOT valid facetKeys.
+## The 22 Valid `facetKey` Leaves
+
+Use ONLY these exact string values. Do NOT use parent nodes (`grammar-fill`, `grammar-fill.given`, `grammar-fill.given.verb`, `grammar-fill.given.conversion`, `grammar-fill.no-hint`, `grammar-fill.no-hint.conjunction`) — they are NOT valid facetKeys. (The old `grammar-fill.given.noun` / `grammar-fill.given.adjective` / `grammar-fill.given.derivation.*` leaves from v1 are retired — do NOT use them.)
 
 ```
 grammar-fill.given.verb.finite
 grammar-fill.given.verb.non-finite
-grammar-fill.given.noun
-grammar-fill.given.adjective
-grammar-fill.given.derivation.noun-to-adj
-grammar-fill.given.derivation.verb-to-noun
-grammar-fill.given.derivation.verb-to-adj
-grammar-fill.given.derivation.adjective-to-noun
+grammar-fill.given.conversion.noun-to-noun
+grammar-fill.given.conversion.noun-to-adjective
+grammar-fill.given.conversion.noun-to-verb
+grammar-fill.given.conversion.adjective-to-adverb
+grammar-fill.given.conversion.adjective-to-noun
+grammar-fill.given.conversion.verb-to-adjective
+grammar-fill.given.conversion.verb-to-noun
+grammar-fill.given.conversion.verb-to-adverb
+grammar-fill.given.noun.number
+grammar-fill.given.noun.genitive
+grammar-fill.given.adjective.comparison
 grammar-fill.given.pronoun
 grammar-fill.given.numeral
 grammar-fill.no-hint.preposition
@@ -232,7 +246,8 @@ Do NOT guess or invent. Write the exact form you determined from your syntactic 
 
 - Do NOT output chat JSON or markdown.
 - Do NOT invent blank IDs, question IDs, or group IDs.
-- Do NOT use parent facet keys (`grammar-fill`, `grammar-fill.given`, `grammar-fill.given.verb`, `grammar-fill.given.derivation`, `grammar-fill.no-hint`, `grammar-fill.no-hint.conjunction`).
+- Do NOT use parent facet keys (`grammar-fill`, `grammar-fill.given`, `grammar-fill.given.verb`, `grammar-fill.given.conversion`, `grammar-fill.no-hint`, `grammar-fill.no-hint.conjunction`), nor the retired v1 leaves (`grammar-fill.given.noun`, `grammar-fill.given.adjective`, `grammar-fill.given.derivation.*`).
+- Do NOT output `tense`, `voice`, `agreementSensitive`, or `form` — the server stamps these.
 - Do NOT include `role` or `path` for any facet other than `grammar-fill.given.verb.non-finite`.
 - Do NOT include a blank marker (`  56  ` or `(wear)` token) in any `signalText`.
 - Do NOT add `distractorGlosses` (grammar fill has no A–D options).

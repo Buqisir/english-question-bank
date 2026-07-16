@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "grammar-fill-analysis-v1",
+  "schemaVersion": "grammar-fill-analysis-v2",
   "paperId": "paper-2021-jia",
   "sourceAssetVersion": 1,
   "targetGroups": [
@@ -41,7 +41,10 @@
           "relation": "now 完成时与最初建造形成今昔对比，建造发生在过去，定一般过去时。"
         }
       ],
-      "teachingNote": "先用 N+1 判出这是谓语，再认主语判语态、找时间标志定时态。"
+      "teachingNote": "先用 N+1 判出这是谓语，再认主语判语态、找时间标志定时态。",
+      "tense": "past",
+      "voice": "passive",
+      "agreementSensitive": true
     },
     "q-2021-jia-062": {
       "blankId": "blank-2021-jia-062",
@@ -81,7 +84,8 @@
           "relation": "It is possible to do 固定句型，it 为形式主语，真主语用不定式。"
         }
       ],
-      "teachingNote": "见 It is + adj 形式主语句，真主语位置直接用 to do。"
+      "teachingNote": "见 It is + adj 形式主语句，真主语位置直接用 to do。",
+      "form": "to-do"
     },
     "q-2021-jia-064": {
       "blankId": "blank-2021-jia-064",
@@ -101,14 +105,15 @@
           "relation": "After 在此作介词，其后动词须变动名词作介词宾语。"
         }
       ],
-      "teachingNote": "介词后动词一律变动名词（-ing）作宾语。"
+      "teachingNote": "介词后动词一律变动名词（-ing）作宾语。",
+      "form": "doing"
     },
     "q-2021-jia-065": {
       "blankId": "blank-2021-jia-065",
       "blankNo": 65,
       "blankType": "given",
       "hint": "good",
-      "facetKey": "grammar-fill.given.adjective",
+      "facetKey": "grammar-fill.given.adjective.comparison",
       "answer": "better",
       "role": null,
       "path": null,
@@ -147,7 +152,10 @@
           "relation": "下文 took 等过去时叙事，定一般过去时。"
         }
       ],
-      "teachingNote": "缺谓语时认主语判语态，全文记叙过去用一般过去时。"
+      "teachingNote": "缺谓语时认主语判语态，全文记叙过去用一般过去时。",
+      "tense": "past",
+      "voice": "active",
+      "agreementSensitive": false
     },
     "q-2021-jia-067": {
       "blankId": "blank-2021-jia-067",
@@ -194,7 +202,7 @@
       "blankNo": 69,
       "blankType": "given",
       "hint": "watchtower",
-      "facetKey": "grammar-fill.given.noun",
+      "facetKey": "grammar-fill.given.noun.number",
       "answer": "watchtowers",
       "role": null,
       "path": null,
@@ -214,7 +222,7 @@
       "blankNo": 70,
       "blankType": "given",
       "hint": "day",
-      "facetKey": "grammar-fill.given.derivation.noun-to-adj",
+      "facetKey": "grammar-fill.given.conversion.noun-to-adjective",
       "answer": "daily",
       "role": null,
       "path": null,

@@ -1,0 +1,257 @@
+{
+  "schemaVersion": "grammar-fill-analysis-v1",
+  "paperId": "paper-zj-2021-jun",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-zj-2021-jun-grammar-fill"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "grammar-fill-analysis-v1",
+    "reviewStatus": "reviewed",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-zj-2021-jun-grammar-fill": {
+      "overview": "记叙·说明性短文：介绍美国伊利诺伊州斯普林菲尔德林肯故居的历史、修复与林肯一家在此的生活。"
+    }
+  },
+  "blanks": {
+    "q-zj-2021-jun-056": {
+      "blankId": "blank-zj-2021-jun-056",
+      "blankNo": 56,
+      "blankType": "given",
+      "hint": "prove",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "has proved",
+      "role": null,
+      "path": null,
+      "reason": "主句缺谓语，主语 home 为第三人称单数；句末 since it opened 是现在完成时的标志，故用 has proved/has proven。",
+      "evidence": [
+        {
+          "type": "time-marker",
+          "signalText": "since it opened to the public",
+          "signalSide": "passage",
+          "relation": "since 引导的时间状语锁定现在完成时 has + 过去分词。"
+        },
+        {
+          "type": "subject",
+          "signalText": "Lincoln’s home in downtown Springfield",
+          "signalSide": "passage",
+          "relation": "主语为第三人称单数 home，决定助动词用 has。"
+        }
+      ],
+      "teachingNote": "见到 since + 过去时间点引导从句，主句谓语优先考虑现在完成时。"
+    },
+    "q-zj-2021-jun-057": {
+      "blankId": "blank-zj-2021-jun-057",
+      "blankNo": 57,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.preposition",
+      "answer": "for",
+      "role": null,
+      "path": null,
+      "reason": "bought it ___ 1,200 表示以某价钱买下，buy sth. for + 钱数是固定搭配，故填 for。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "they bought it",
+          "signalSide": "passage",
+          "relation": "buy 后接表价钱的金额时用介词 for（花多少钱买）。"
+        },
+        {
+          "type": "collocation",
+          "signalText": "1,200 and some land",
+          "signalSide": "passage",
+          "relation": "后接具体金额，buy ... for + 价钱锁定介词 for。"
+        }
+      ],
+      "teachingNote": "表示'花多少钱买某物'用 buy sth. for + 价钱。"
+    },
+    "q-zj-2021-jun-058": {
+      "blankId": "blank-zj-2021-jun-058",
+      "blankNo": 58,
+      "blankType": "given",
+      "hint": "marry",
+      "facetKey": "grammar-fill.given.derivation.verb-to-noun",
+      "answer": "marriage",
+      "role": null,
+      "path": null,
+      "reason": "空格在形容词性物主代词 their 与名词 ceremony 之间作定语，需把动词 marry 变名词 marriage（婚礼仪式）。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "ceremony",
+          "signalSide": "passage",
+          "relation": "其后的名词 ceremony 表明空格处需名词构成名词修饰名词的定语。"
+        },
+        {
+          "type": "determiner",
+          "signalText": "performed their",
+          "signalSide": "passage",
+          "relation": "物主代词 their 后接名词，提示动词 marry 须派生为名词 marriage。"
+        }
+      ],
+      "teachingNote": "物主代词与名词之间常需名词，动词要先派生为对应名词形式。"
+    },
+    "q-zj-2021-jun-059": {
+      "blankId": "blank-zj-2021-jun-059",
+      "blankNo": 59,
+      "blankType": "given",
+      "hint": "small",
+      "facetKey": "grammar-fill.given.adjective",
+      "answer": "smaller",
+      "role": null,
+      "path": null,
+      "reason": "much 修饰、其后又有 than，构成比较结构，故形容词 small 用比较级 smaller。",
+      "evidence": [
+        {
+          "type": "comparison",
+          "signalText": "than it is today",
+          "signalSide": "passage",
+          "relation": "than 是比较级的标志，要求 small 变为 smaller。"
+        },
+        {
+          "type": "comparison",
+          "signalText": "much",
+          "signalSide": "passage",
+          "relation": "much 用来修饰比较级，进一步锁定 smaller。"
+        }
+      ],
+      "teachingNote": "看到 than 且前有 much 等修饰词，形容词用比较级。"
+    },
+    "q-zj-2021-jun-060": {
+      "blankId": "blank-zj-2021-jun-060",
+      "blankNo": 60,
+      "blankType": "given",
+      "hint": "paint",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "was painted",
+      "role": null,
+      "path": null,
+      "reason": "本句缺谓语，主语 home 与 paint 是被动关系（房子被刷成白色），结合上下文过去时态，用 was painted。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "The little home",
+          "signalSide": "passage",
+          "relation": "主语 home 是 paint 的承受者，构成被动语态。"
+        },
+        {
+          "type": "time-marker",
+          "signalText": "It was sweet and fresh",
+          "signalSide": "passage",
+          "relation": "邻句 was 表明叙述用一般过去时，故用 was painted。"
+        }
+      ],
+      "teachingNote": "主语是动作承受者用被动；时态随上下文叙述时间确定。"
+    },
+    "q-zj-2021-jun-061": {
+      "blankId": "blank-zj-2021-jun-061",
+      "blankNo": 61,
+      "blankType": "given",
+      "hint": "she",
+      "facetKey": "grammar-fill.given.pronoun",
+      "answer": "herself",
+      "role": null,
+      "path": null,
+      "reason": "a reflection of ___ 指房子是她本人的写照，与句子主语 her house 所指的 Mary 一致，故用反身代词 herself。",
+      "evidence": [
+        {
+          "type": "antecedent",
+          "signalText": "her house was a reflection of",
+          "signalSide": "passage",
+          "relation": "reflection 所指对象与主人 Mary 同一，须用反身代词 herself 表'她本人'。"
+        }
+      ],
+      "teachingNote": "当指代对象与句中主体为同一人时，用反身代词。"
+    },
+    "q-zj-2021-jun-062": {
+      "blankId": "blank-zj-2021-jun-062",
+      "blankNo": 62,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.coordinating",
+      "answer": "neither",
+      "role": null,
+      "path": null,
+      "reason": "空格后有 nor 与 her husband 并列两个主语，构成 neither ... nor 固定并列结构，故填 neither。",
+      "evidence": [
+        {
+          "type": "parallel",
+          "signalText": "nor her husband",
+          "signalSide": "passage",
+          "relation": "后面的 nor 提示前面应为 neither，组成 neither ... nor 并列连词。"
+        }
+      ],
+      "teachingNote": "句中出现 nor 连接并列成分时，前面常补 neither 构成 neither...nor。"
+    },
+    "q-zj-2021-jun-063": {
+      "blankId": "blank-zj-2021-jun-063",
+      "blankNo": 63,
+      "blankType": "given",
+      "hint": "plant",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "to plant",
+      "role": "adverbial",
+      "path": "slow",
+      "reason": "句子主谓 came over 已完整，plant 作目的状语表'过来是为了种花'，故用动词不定式 to plant。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "often came over",
+          "signalSide": "passage",
+          "relation": "前已有谓语 came over，plant 只能作非谓语；表来此的目的用 to do。"
+        },
+        {
+          "type": "clause-frame",
+          "signalText": "flowers in the front yard",
+          "signalSide": "passage",
+          "relation": "动作'种花'是来访的目的，符合不定式作目的状语条件，故用 to plant。"
+        }
+      ],
+      "teachingNote": "句中已有谓语、后接动作表目的时，用不定式 to do 作目的状语。"
+    },
+    "q-zj-2021-jun-064": {
+      "blankId": "blank-zj-2021-jun-064",
+      "blankNo": 64,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.article",
+      "answer": "The",
+      "role": null,
+      "path": null,
+      "reason": "姓氏复数 Lincolns 表'林肯一家'，特指这家人，前须加定冠词，句首大写为 The。",
+      "evidence": [
+        {
+          "type": "collocation",
+          "signalText": "Lincolns enlarged the house",
+          "signalSide": "passage",
+          "relation": "'the + 姓氏复数'表示某一家人，故在 Lincolns 前加定冠词 The。"
+        }
+      ],
+      "teachingNote": "the + 姓氏复数表示'某一家人/某姓夫妇'。"
+    },
+    "q-zj-2021-jun-065": {
+      "blankId": "blank-zj-2021-jun-065",
+      "blankNo": 65,
+      "blankType": "given",
+      "hint": "sell",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "sold",
+      "role": null,
+      "path": null,
+      "reason": "and 连接的并列谓语，前一动词 rented 为一般过去时，sell 须与之时态一致，用 sold。",
+      "evidence": [
+        {
+          "type": "parallel",
+          "signalText": "they rented the house and",
+          "signalSide": "passage",
+          "relation": "and 并列两个谓语，前一谓语 rented 为过去式，呼应用 sold。"
+        }
+      ],
+      "teachingNote": "and 并列谓语时，时态须与前一动词保持一致。"
+    }
+  }
+}

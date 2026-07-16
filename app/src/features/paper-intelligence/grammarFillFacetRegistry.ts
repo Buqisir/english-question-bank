@@ -6,9 +6,19 @@
  *
  * PO teaching IP — fidelity is load-bearing. Do NOT paraphrase.
  *
- * Drift guard: the 17 keys here MUST exactly equal the server-side
- *   server/paper-import-ai/grammar-fill-facets-v1.json keys.
- *   The verifier (verify-i14-grammar-fill-analysis-surface.mjs) asserts this.
+ * D1 (grammar-facets-v2, 2026-07-15 owner-locked semantics —
+ * docs/cuts/similar-questions/program.md §语法填空考点粒度终稿 /
+ * §词形转换重铸): old `given.noun` / `given.adjective` /
+ * `given.derivation.*` (17-leaf v1) retired — split into `given.noun.number`
+ * / `given.noun.genitive` / `given.adjective.comparison` (三个新独立考点，
+ * 词性不变不算转换) + `given.conversion.<src>-to-<dst>` 词形转换八向矩阵.
+ * The split entries below reuse the original v1 prose verbatim where it maps
+ * 1:1 (fidelity preserved), only reorganized under the new key names.
+ *
+ * Drift guard: the 22 keys here MUST exactly equal the server-side
+ *   server/paper-import-ai/grammar-fill-facets-v2.json keys.
+ *   The verifier (verify-i14-grammar-fill-analysis-surface.mjs /
+ *   verify-grammar-facets-v2.mjs) asserts this.
  *
  * Only `grammar-fill.given.verb.non-finite` uses `table` (the 形变表).
  */
@@ -73,36 +83,61 @@ export const FACET_FRAMEWORKS: Record<string, FacetFrameworkEntry> = {
     },
   },
 
-  'grammar-fill.given.noun': {
-    labelZh: '名词',
+  'grammar-fill.given.noun.number': {
+    labelZh: '名词的数',
     framework: {
       steps: [
-        '考点一｜变复数（数）：由限定词（a/the/数词/this·these）、of 结构、谓语单复数（主谓一致回指）、可数/不可数线索确定单复数。',
-        '考点二｜变所有格（\'s）：由语境判定是否需要所有格。',
+        '由限定词（a/the/数词/this·these）、of 结构、谓语单复数（主谓一致回指）、可数/不可数线索确定单复数。',
       ],
       notes: [
         '高考考向：单复数由限定词/谓语/语境决定；不可数名词不加复数。',
-        '注：提示词是名词但空需别的词性 → 走 derivation。',
+        '注：提示词是名词但空需别的词性/别的名词派生 → 走 given.conversion.noun-to-*。',
       ],
     },
   },
 
-  'grammar-fill.given.adjective': {
-    labelZh: '形容词',
+  'grammar-fill.given.noun.genitive': {
+    labelZh: '名词的格',
     framework: {
       steps: [
-        '考点一｜优先考虑变副词（形→副）：若空在修饰形容词/副词/动词/整句 → 变副词。这是给定形容词的默认首选。',
-        '考点二｜比较级 / 最高级：① 识别明显提示词 than / far / even / the+最高级；② 结合句意考虑暗含比较。',
+        '由语境判定是否需要所有格（\'s）——通常是"谁的/属于谁"的所属关系。',
       ],
       notes: [
-        '高考考向：暗含比较（无明显 than 也要比较级）；变副词的修饰对象判定。',
-        '答案逻辑：给定形容词 → {副词 | 比较级 | 最高级 | 原级}，由句法（修饰对象）+ 比较标志决定。',
+        '高考考向：所有格与 of 短语属格的取舍；语境判所属而非泛泛描述。',
       ],
     },
   },
 
-  'grammar-fill.given.derivation.noun-to-adj': {
-    labelZh: '词性转换（名词→形容词）',
+  'grammar-fill.given.adjective.comparison': {
+    labelZh: '形容词比较等级',
+    framework: {
+      steps: [
+        '比较级 / 最高级：① 识别明显提示词 than / far / even / the+最高级；② 结合句意考虑暗含比较（无明显 than 也可能需要比较级）。',
+        '不规则比较级/最高级需单独记忆（good→better→best、bad→worse→worst、far→further/farther…）。',
+      ],
+      notes: [
+        '高考考向：暗含比较（无明显 than 也要比较级）。',
+        '答案逻辑：给定形容词 → {比较级 | 最高级}，由比较标志 + 句意决定；词性不变，不是词形转换。',
+      ],
+    },
+  },
+
+  'grammar-fill.given.conversion.noun-to-noun': {
+    labelZh: '词形转换（名词→名词）',
+    framework: {
+      steps: [
+        '第一步｜由空的句法位置/搭配判定目标含义：仍是名词，但需要一个由提示词派生出的不同名词（同词性，不同的词）。',
+        '第二步｜把提示词（名词）派生为目标名词的正确形式（常见：职业/身份后缀 -er/-or，如 photograph→photographer）。',
+      ],
+      notes: [
+        '高考考向：职业/身份名词化（-er/-or）等同词性派生，与"变复数/变所有格"（数/格，词形不变）区分。',
+        '识别信号：空仍是名词，但不是提示词本身的单复数/所有格变化，而是另一个派生词。',
+      ],
+    },
+  },
+
+  'grammar-fill.given.conversion.noun-to-adjective': {
+    labelZh: '词形转换（名词→形容词）',
     framework: {
       steps: [
         '第一步｜由空的句法位置/搭配判定目标词性：缺定语/表语 → 形容词。',
@@ -115,8 +150,63 @@ export const FACET_FRAMEWORKS: Record<string, FacetFrameworkEntry> = {
     },
   },
 
-  'grammar-fill.given.derivation.verb-to-noun': {
-    labelZh: '词性转换（动词→名词）',
+  'grammar-fill.given.conversion.noun-to-verb': {
+    labelZh: '词形转换（名词→动词）',
+    framework: {
+      steps: [
+        '第一步｜由空的句法位置判定目标词性：空在谓语/非谓语动词位置 → 动词。',
+        '第二步｜把提示词（名词）派生/转用为动词的正确形式，再按谓语/非谓语规则变形。',
+      ],
+      notes: [
+        '高考真题库中此方向罕见（预留位）——如实标注，池子小属正常，不强行凑例。',
+        '识别信号：空需要的词性 ≠ 提示词词性（名词），且目标词性为动词。',
+      ],
+    },
+  },
+
+  'grammar-fill.given.conversion.adjective-to-adverb': {
+    labelZh: '词形转换（形容词→副词）',
+    framework: {
+      steps: [
+        '若空在修饰形容词/副词/动词/整句 → 变副词。这是给定形容词最常见的转换方向。',
+      ],
+      notes: [
+        '高考考向：变副词的修饰对象判定（修饰动词/形容词/副词/整句）。',
+        '答案逻辑：给定形容词 → 副词（通常 -ly），由句法（修饰对象）决定。',
+      ],
+    },
+  },
+
+  'grammar-fill.given.conversion.adjective-to-noun': {
+    labelZh: '词形转换（形容词→名词）',
+    framework: {
+      steps: [
+        '第一步｜由空的句法位置/搭配判定目标词性：介词后 / 缺主宾 / 限定词后 → 名词。',
+        '第二步｜把提示词（形容词）派生为名词的正确形式（常见后缀 -ity/-ty：curious→curiosity、accurate→accuracy；-ness：happy→happiness、rich→richness；-ce/-cy：confident→confidence、absent→absence；-ment）。',
+      ],
+      notes: [
+        '高考考向：介词 + 抽象名词搭配（with curiosity / in surprise / with pride / in silence）；形容词名化后缀。',
+        '识别信号：空需要的词性 ≠ 提示词词性（形容词），且目标词性为名词。',
+      ],
+    },
+  },
+
+  'grammar-fill.given.conversion.verb-to-adjective': {
+    labelZh: '词形转换（动词→形容词）',
+    framework: {
+      steps: [
+        '第一步｜由空的句法位置/搭配判定目标词性：缺定语/表语 → 形容词。',
+        '第二步｜把提示词（动词）派生为非分词形容词的正确形式（真形容词后缀 -able/-ous/-ful/-ive 或 a- 前缀：remark→remarkable / harm→harmful / sleep→asleep）。',
+      ],
+      notes: [
+        '收窄（PO 2026-06-19，句法功能优先）：仅取非分词形容词派生；情感/状态分词（excited/educated/closed/astonished）作表语/定语/宾补/主补一律归 grammar-fill.given.verb.non-finite + role，不入此叶。',
+        '识别信号：空需要的词性 ≠ 提示词词性（动词），且目标词性为非分词形容词（-able/-ous/-ful/-ive、a-）。',
+      ],
+    },
+  },
+
+  'grammar-fill.given.conversion.verb-to-noun': {
+    labelZh: '词形转换（动词→名词）',
     framework: {
       steps: [
         '第一步｜由空的句法位置/搭配判定目标词性：缺主宾 → 名词。',
@@ -129,30 +219,16 @@ export const FACET_FRAMEWORKS: Record<string, FacetFrameworkEntry> = {
     },
   },
 
-  'grammar-fill.given.derivation.verb-to-adj': {
-    labelZh: '词性转换（动词→形容词）',
+  'grammar-fill.given.conversion.verb-to-adverb': {
+    labelZh: '词形转换（动词→副词）',
     framework: {
       steps: [
-        '第一步｜由空的句法位置/搭配判定目标词性：缺定语/表语 → 形容词。',
-        '第二步｜把提示词（动词）派生为非分词形容词的正确形式（真形容词后缀 -able/-ous/-ful/-ive 或 a- 前缀：remark→remarkable / harm→harmful / sleep→asleep）。',
+        '第一步｜由空的句法位置判定目标词性：修饰动词/形容词/副词/整句 → 副词。',
+        '第二步｜把提示词（动词）派生为副词的正确形式（通常先派生形容词再加 -ly）。',
       ],
       notes: [
-        '收窄（PO 2026-06-19，句法功能优先）：仅取非分词形容词派生；情感/状态分词（excited/educated/closed/astonished）作表语/定语/宾补一律归 grammar-fill.given.verb.non-finite + role，不入此叶。',
-        '识别信号：空需要的词性 ≠ 提示词词性（动词），且目标词性为非分词形容词（-able/-ous/-ful/-ive、a-）。',
-      ],
-    },
-  },
-
-  'grammar-fill.given.derivation.adjective-to-noun': {
-    labelZh: '词性转换（形容词→名词）',
-    framework: {
-      steps: [
-        '第一步｜由空的句法位置/搭配判定目标词性：介词后 / 缺主宾 / 限定词后 → 名词。',
-        '第二步｜把提示词（形容词）派生为名词的正确形式（常见后缀 -ity：curious→curiosity；-ness：happy→happiness；-ce：confident→confidence；-ment）。',
-      ],
-      notes: [
-        '高考考向：介词 + 抽象名词搭配（with curiosity / in surprise / with pride / in silence）；形容词名化后缀。',
-        '识别信号：空需要的词性 ≠ 提示词词性（形容词），且目标词性为名词。',
+        '高考真题库中此方向罕见（预留位）——如实标注，池子小属正常，不强行凑例。',
+        '识别信号：空需要的词性 ≠ 提示词词性（动词），且目标词性为副词。',
       ],
     },
   },

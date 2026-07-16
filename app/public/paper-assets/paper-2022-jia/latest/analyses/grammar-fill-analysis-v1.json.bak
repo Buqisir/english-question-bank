@@ -1,0 +1,233 @@
+{
+  "schemaVersion": "grammar-fill-analysis-v1",
+  "paperId": "paper-2022-jia",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-2022-jia-grammar-fill"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "grammar-fill-analysis-v1",
+    "reviewStatus": "reviewed",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-2022-jia-grammar-fill": {
+      "overview": "新闻报道：一位北京视障男子徒步丈量「一带一路」路线、沿途捡垃圾倡导环保的事迹。"
+    }
+  },
+  "blanks": {
+    "q-2022-jia-061": {
+      "blankId": "blank-2022-jia-061",
+      "blankNo": 61,
+      "blankType": "given",
+      "hint": "journey",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "to journey",
+      "role": "attributive",
+      "path": "slow",
+      "reason": "本句已有谓语 hiked，空处为非谓语。as a first step 后接不定式表示「迈出第一步去做某事」，用动词不定式作 step 的后置定语兼表目的，故填 to journey。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "as a first step",
+          "signalSide": "passage",
+          "relation": "step 为被修饰名词，后接不定式表示要去做的事，锁定 to + 动词原形。"
+        }
+      ],
+      "teachingNote": "名词后表示将要做或用来做的动作，用 to 不定式作后置定语。"
+    },
+    "q-2022-jia-062": {
+      "blankId": "blank-2022-jia-062",
+      "blankNo": 62,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.relative-clause",
+      "answer": "who",
+      "role": null,
+      "path": null,
+      "reason": "空前为先行词 the man Cao Shengkang（指人），空后 lost his eyesight 缺主语，引导定语从句并在从句中作主语，用 who。",
+      "evidence": [
+        {
+          "type": "antecedent",
+          "signalText": "the man Cao Shengkang",
+          "signalSide": "passage",
+          "relation": "指人的先行词，从句缺主语，定语从句关系代词用 who。"
+        },
+        {
+          "type": "clause-frame",
+          "signalText": "lost his eyesight",
+          "signalSide": "passage",
+          "relation": "从句谓语前缺主语，关系词在从句中作主语。"
+        }
+      ],
+      "teachingNote": "先行词指人且从句缺主语，关系代词用 who。"
+    },
+    "q-2022-jia-063": {
+      "blankId": "blank-2022-jia-063",
+      "blankNo": 63,
+      "blankType": "given",
+      "hint": "hold",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "held",
+      "role": "attributive",
+      "path": "slow",
+      "reason": "the Forum 与 hold 是被动关系（论坛被举办），且无新谓语，用过去分词作后置定语，故填 held。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "the Belt and Road Forum for International Cooperation",
+          "signalSide": "passage",
+          "relation": "被修饰名词 Forum 与 hold 为被动关系，用过去分词作定语。"
+        }
+      ],
+      "teachingNote": "名词与其动作是被动关系且无谓语时，用过去分词作后置定语。"
+    },
+    "q-2022-jia-064": {
+      "blankId": "blank-2022-jia-064",
+      "blankNo": 64,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.article",
+      "answer": "A",
+      "role": null,
+      "path": null,
+      "reason": "friend of his 表示他的一位朋友，泛指单数可数名词且首次提及，句首大写，故填不定冠词 A。",
+      "evidence": [
+        {
+          "type": "of-phrase",
+          "signalText": "friend of his, Wu Fan",
+          "signalSide": "passage",
+          "relation": "名词 + of his 双重所有格，表示他的一位朋友，用不定冠词。"
+        }
+      ],
+      "teachingNote": "名词 + of 物主代词表示某人之一时，前面用不定冠词 a/an。"
+    },
+    "q-2022-jia-065": {
+      "blankId": "blank-2022-jia-065",
+      "blankNo": 65,
+      "blankType": "given",
+      "hint": "protect",
+      "facetKey": "grammar-fill.given.derivation.verb-to-noun",
+      "answer": "protection",
+      "role": null,
+      "path": null,
+      "reason": "形容词 environmental 后需名词作 promote 的宾语，把动词 protect 派生为名词 protection。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "promote environmental",
+          "signalSide": "passage",
+          "relation": "形容词 environmental 后须接名词，动词需派生为名词 protection。"
+        }
+      ],
+      "teachingNote": "形容词后、动词宾语位缺名词，把动词派生为名词。"
+    },
+    "q-2022-jia-066": {
+      "blankId": "blank-2022-jia-066",
+      "blankNo": 66,
+      "blankType": "given",
+      "hint": "meaning",
+      "facetKey": "grammar-fill.given.derivation.noun-to-adj",
+      "answer": "meaningful",
+      "role": null,
+      "path": null,
+      "reason": "make + 宾语 + 形容词构成宾补，且有 more 修饰，需形容词，把名词 meaning 派生为形容词 meaningful。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "make the hiking trip even more",
+          "signalSide": "passage",
+          "relation": "make 接形容词作宾补，more 也只修饰形容词，名词需派生为 meaningful。"
+        }
+      ],
+      "teachingNote": "make + 宾语 + 形容词的宾补位、且有 more 修饰，缺形容词时由名词派生。"
+    },
+    "q-2022-jia-067": {
+      "blankId": "blank-2022-jia-067",
+      "blankNo": 67,
+      "blankType": "given",
+      "hint": "walk",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "has walked",
+      "role": null,
+      "path": null,
+      "reason": "本分句缺谓语，主语 Cao 为第三人称单数；时间状语 In the last five years 锁定现在完成时，故填 has walked。",
+      "evidence": [
+        {
+          "type": "time-marker",
+          "signalText": "In the last five years",
+          "signalSide": "passage",
+          "relation": "in the last + 时间段标志现在完成时。"
+        },
+        {
+          "type": "subject",
+          "signalText": "Cao",
+          "signalSide": "passage",
+          "relation": "主语为第三人称单数，助动词用 has。"
+        }
+      ],
+      "teachingNote": "in the last + 时间段是现在完成时的标志词。"
+    },
+    "q-2022-jia-068": {
+      "blankId": "blank-2022-jia-068",
+      "blankNo": 68,
+      "blankType": "given",
+      "hint": "high",
+      "facetKey": "grammar-fill.given.adjective",
+      "answer": "highest",
+      "role": null,
+      "path": null,
+      "reason": "Africa's ... mountain 指在非洲范围内最高的山，所有格限定单数名词，暗含最高级，用形容词 highest。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "Africa’s",
+          "signalSide": "passage",
+          "relation": "所有格限定加上全非洲范围暗含最高级，形容词用 highest。"
+        }
+      ],
+      "teachingNote": "在某一范围内表示最……的，形容词用最高级。"
+    },
+    "q-2022-jia-069": {
+      "blankId": "blank-2022-jia-069",
+      "blankNo": 69,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.preposition",
+      "answer": "from",
+      "role": null,
+      "path": null,
+      "reason": "与后面的 to Kashgar 呼应，构成 from ... to ... 表示从……到……，故填 from。",
+      "evidence": [
+        {
+          "type": "collocation",
+          "signalText": "Xi’an to Kashgar",
+          "signalSide": "passage",
+          "relation": "后有 to，构成 from ... to ... 固定搭配表起止。"
+        }
+      ],
+      "teachingNote": "看到 to 表终点，前面常配 from 构成 from...to... 起止结构。"
+    },
+    "q-2022-jia-070": {
+      "blankId": "blank-2022-jia-070",
+      "blankNo": 70,
+      "blankType": "given",
+      "hint": "plan",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "planning",
+      "role": "adverbial",
+      "path": "slow",
+      "reason": "主句已有谓语 flew，空处为非谓语；plan 与主语 He 是主动关系，用现在分词作伴随状语，故填 planning。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "He flew 4,700 kilometers",
+          "signalSide": "passage",
+          "relation": "逻辑主语 He 与 plan 主动关系，主句已有谓语 flew，非谓语用现在分词作状语。"
+        }
+      ],
+      "teachingNote": "主句已有谓语，逻辑主语与该动作主动且伴随发生时，用现在分词作状语。"
+    }
+  }
+}

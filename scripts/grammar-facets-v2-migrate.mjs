@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * grammar-facets-v2 — D1 step 1: dry-run preview / bucketing script.
+ * grammar-facets-v2 — D1 step 1/3: dry-run preview + step-3 write-back.
  *
  * Reads the 33 latest `grammar-fill-analysis-v1` files, re-derives each
  * blank's v2 facetKey + new fields per docs/cuts/grammar-facets-v2/plan.md
@@ -8,20 +8,35 @@
  * §语法填空考点粒度终稿), and writes a preview + suspects list + owner
  * sampling material.
  *
- * THIS STEP IS DRY-RUN ONLY:
+ * Default mode is DRY-RUN ONLY:
  *   - does NOT write back into any analysis file
- *   - does NOT touch analysisConfigs / similar engine / teachingFacets /
- *     any consumer code
  *   - is fully deterministic (no AI calls) — anything the rules cannot
  *     decide goes to suspects.md for owner judgement, never guessed.
  *
- * Run: node scripts/grammar-facets-v2-migrate.mjs
+ * `--write` mode (step 3, post owner sign-off 2026-07-15 — the 8 suspects'
+ * owner-decided disposition is IDENTICAL to this script's own proposed
+ * facetKey/role for every one of them, verified by hand against
+ * docs/cuts/grammar-facets-v2/suspects.md, so no extra override table is
+ * needed): rewrites each of the 33 on-disk files in place —
+ *   - `schemaVersion` bumped to `grammar-fill-analysis-v2`
+ *   - each blank's `facetKey` (+ `role` for non-finite) updated to its v2
+ *     value, `tense`/`voice`/`agreementSensitive` added for finite verbs,
+ *     `form` added for non-finite verbs
+ *   - a `.bak` copy of the pre-migration file is written alongside (never
+ *     overwritten by a later `--write` run if one already exists, so the
+ *     backup always holds the true v1 original)
+ * Still does NOT touch analysisConfigs / similar engine / teachingFacets /
+ * any consumer code — that is a separate, same-commit edit (plan step 3).
+ *
+ * Run: node scripts/grammar-facets-v2-migrate.mjs [--write]
  */
 
-import { readFileSync, writeFileSync } from 'node:fs'
+import { existsSync, readFileSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { globSync } from 'node:fs'
+
+const WRITE = process.argv.includes('--write')
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const REPO_ROOT = path.join(__dirname, '..')
@@ -308,6 +323,25 @@ function paperIdFromPath(filePath) {
   return m ? m[1] : null
 }
 
+/** Build the v2 on-disk blank object from the original v1 blank + this
+ * script's own computed classification (processBlank's `entry`). Preserves
+ * every other original field (blankId/blankNo/blankType/hint/answer/path/
+ * reason/evidence/teachingNote/...) via spread — only facetKey/role are
+ * overwritten and tense/voice/agreementSensitive/form are added. */
+function buildV2Blank(oldBlank, entry) {
+  const v2 = { ...oldBlank, facetKey: entry.newFacetKey }
+  if (entry.newFacetKey === 'grammar-fill.given.verb.finite') {
+    v2.tense = entry.tense
+    v2.voice = entry.voice
+    v2.agreementSensitive = entry.agreementSensitive
+  }
+  if (entry.newFacetKey === 'grammar-fill.given.verb.non-finite') {
+    v2.role = entry.role
+    v2.form = entry.form
+  }
+  return v2
+}
+
 function processBlank({ paperId, questionId, blank }) {
   const oldFacetKey = blank.facetKey
   const hint = blank.hint
@@ -393,16 +427,31 @@ function run() {
   const previewByQuestionId = {}
   const suspects = []
   let totalBlanks = 0
+  let filesWritten = 0
 
   for (const file of files) {
     const paperId = paperIdFromPath(file)
     const data = JSON.parse(readFileSync(file, 'utf8'))
     const blanks = data.blanks || {}
+    const newBlanks = WRITE ? {} : null
     for (const [questionId, blank] of Object.entries(blanks)) {
       totalBlanks += 1
       const { entry, suspect } = processBlank({ paperId, questionId, blank })
       previewByQuestionId[questionId] = entry
       if (suspect) suspects.push(suspect)
+      if (WRITE) newBlanks[questionId] = buildV2Blank(blank, entry)
+    }
+
+    if (WRITE) {
+      const backupPath = `${file}.bak`
+      // Never clobber an existing backup on a re-run — it must always hold
+      // the true pre-migration v1 original.
+      if (!existsSync(backupPath)) {
+        writeFileSync(backupPath, JSON.stringify(data, null, 2) + '\n', 'utf8')
+      }
+      const newData = { ...data, schemaVersion: 'grammar-fill-analysis-v2', blanks: newBlanks }
+      writeFileSync(file, JSON.stringify(newData, null, 2) + '\n', 'utf8')
+      filesWritten += 1
     }
   }
 
@@ -518,8 +567,9 @@ function run() {
   console.log(`\nwrote ${PREVIEW_PATH}`)
   console.log(`wrote ${SUSPECTS_PATH}`)
   console.log(`wrote ${SAMPLES_PATH}`)
+  if (WRITE) console.log(`\n--write: rewrote ${filesWritten} analysis files to grammar-fill-analysis-v2 (each backed up to .bak)`)
 
-  return { totalBlanks, suspectCount: suspects.length }
+  return { totalBlanks, suspectCount: suspects.length, filesWritten }
 }
 
 run()

@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "grammar-fill-analysis-v1",
+  "schemaVersion": "grammar-fill-analysis-v2",
   "paperId": "paper-960d0f8d",
   "sourceAssetVersion": 1,
   "targetGroups": [
@@ -75,14 +75,15 @@
           "relation": "by 短语提示被动语态，说明是被身体吸收。"
         }
       ],
-      "teachingNote": "介词后用 doing；若逻辑主语承受动作，则用 being done。"
+      "teachingNote": "介词后用 doing；若逻辑主语承受动作，则用 being done。",
+      "form": "doing"
     },
     "q-960d0f8d-058": {
       "blankId": "blank-960d0f8d-058",
       "blankNo": 58,
       "blankType": "given",
       "hint": "study",
-      "facetKey": "grammar-fill.given.noun",
+      "facetKey": "grammar-fill.given.noun.number",
       "answer": "Studies",
       "role": null,
       "path": null,
@@ -128,7 +129,7 @@
       "blankNo": 60,
       "blankType": "given",
       "hint": "recommend",
-      "facetKey": "grammar-fill.given.derivation.verb-to-adj",
+      "facetKey": "grammar-fill.given.conversion.verb-to-adjective",
       "answer": "recommended",
       "role": null,
       "path": null,
@@ -167,14 +168,17 @@
           "relation": "present 作表语，前面需要 be 动词构成系表结构。"
         }
       ],
-      "teachingNote": "定语从句中关系代词作主语时，谓语数要和先行词保持一致。"
+      "teachingNote": "定语从句中关系代词作主语时，谓语数要和先行词保持一致。",
+      "tense": "present",
+      "voice": "active",
+      "agreementSensitive": true
     },
     "q-960d0f8d-062": {
       "blankId": "blank-960d0f8d-062",
       "blankNo": 62,
       "blankType": "given",
       "hint": "sense",
-      "facetKey": "grammar-fill.given.derivation.noun-to-adj",
+      "facetKey": "grammar-fill.given.conversion.noun-to-adjective",
       "answer": "sensible",
       "role": null,
       "path": null,
@@ -252,7 +256,7 @@
       "blankNo": 65,
       "blankType": "given",
       "hint": "easy",
-      "facetKey": "grammar-fill.given.adjective",
+      "facetKey": "grammar-fill.given.adjective.comparison",
       "answer": "easier",
       "role": null,
       "path": null,

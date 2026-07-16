@@ -36,7 +36,6 @@ import { createPaperSurfaceAnalysisAvailability } from './search/paperSurfaceAva
 import { createTeachingFacetIndex, createTeachingFacetRoutes } from './search/teachingFacets.mjs'
 import { createSimilarQuestionsStore, createSimilarQuestionsRoutes } from './search/similarQuestions.mjs'
 import { createTopicLabelBackfillRoutes } from './topic-labels/topicLabelBackfillRoutes.mjs'
-import { createVerbProfileBackfillRoutes } from './grammar-verb-profile/verbProfileBackfillRoutes.mjs'
 import { parseJsonFromString, getDeepSeekMessageText, collectDeepSeekMessageTexts, parseLooseVerifyResult, extractVerifyResultFromPayload, extractReadingParsePayloadFromPayload, extractFirstJson, safeTruncate } from './ai-providers/jsonExtraction.mjs'
 import { createCompletionRunner } from './ai-providers/completionRunner.mjs'
 import { createDailyLimitCounter, resolveDailyLimit } from './ai-providers/dailyLimitCounter.mjs'
@@ -512,7 +511,9 @@ const serverRoutes = [
   ...createTeachingFacetRoutes(),
   ...createSimilarQuestionsRoutes(),
   ...createTopicLabelBackfillRoutes(),
-  ...createVerbProfileBackfillRoutes(),
+  // D1 (grammar-facets-v2): I16·C verb-profile sidecar + its backfill route
+  // retired — tense/voice/agreementSensitive now live on the grammar-fill-
+  // analysis-v2 blank entry itself (server/search/teachingFacets.mjs).
 ]
 
 const EMPTY_DRAFT_CONTEXT = { currentDraftPaperId: null, groupIds: new Set() }

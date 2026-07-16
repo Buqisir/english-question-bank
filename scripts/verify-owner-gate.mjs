@@ -133,8 +133,11 @@ const GATED_ROUTES = [
   // server/topic-labels/topicLabelBackfillRoutes.mjs (1; whole module)
   { method: 'POST', path: '/api/topic-labels/backfill', body: {} },
 
-  // server/grammar-verb-profile/verbProfileBackfillRoutes.mjs (1; whole module, D4)
-  { method: 'POST', path: '/api/grammar-fill/verb-profiles/backfill', body: {} },
+  // server/grammar-verb-profile/verbProfileBackfillRoutes.mjs (D4) — route
+  // retired in D1 (grammar-facets-v2): tense/voice/agreementSensitive now
+  // live on the analysis-v2 blank entry directly, no sidecar backfill route
+  // to gate. verify-grammar-facets-v2.mjs asserts the path now 404s for
+  // everyone instead.
 
   // server/question-bank/questionGroupRoutes.mjs (9 of its routes; GETs excluded)
   { method: 'POST', path: '/api/question-groups', body: {} },

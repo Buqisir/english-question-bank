@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "grammar-fill-analysis-v1",
+  "schemaVersion": "grammar-fill-analysis-v2",
   "paperId": "paper-zj-2026-jan",
   "sourceAssetVersion": 1,
   "targetGroups": [
@@ -24,7 +24,7 @@
       "hint": "finish",
       "facetKey": "grammar-fill.given.verb.non-finite",
       "answer": "to finish",
-      "role": "object",
+      "role": "object-complement",
       "path": "fast",
       "reason": "本句已有谓语 wait（waiting for a microwave），微波炉与 finish 之间为「等微波炉去做完加热」，wait for sb./sth. to do 为固定搭配，逻辑宾语后接动词不定式作宾语补足语，故用 to finish。",
       "evidence": [
@@ -35,7 +35,8 @@
           "relation": "wait for sth. to do 固定搭配，for 的宾语后接不定式，锁定 to finish。"
         }
       ],
-      "teachingNote": "见 wait for sb./sth. + 动词原形空，立即想到 to do 不定式作补足语。"
+      "teachingNote": "见 wait for sb./sth. + 动词原形空，立即想到 to do 不定式作补足语。",
+      "form": "to-do"
     },
     "q-zj-2026-jan-057": {
       "blankId": "blank-zj-2026-jan-057",
@@ -68,7 +69,7 @@
       "blankNo": 58,
       "blankType": "given",
       "hint": "number",
-      "facetKey": "grammar-fill.given.noun",
+      "facetKey": "grammar-fill.given.noun.number",
       "answer": "numbers",
       "role": null,
       "path": null,
@@ -107,14 +108,15 @@
           "relation": "watch 后直接带宾语 the microwave，主动伴随，故用 -ing 形式。"
         }
       ],
-      "teachingNote": "名词 + 动词构成独立主格作伴随状语，主动关系用现在分词。"
+      "teachingNote": "名词 + 动词构成独立主格作伴随状语，主动关系用现在分词。",
+      "form": "doing"
     },
     "q-zj-2026-jan-060": {
       "blankId": "blank-zj-2026-jan-060",
       "blankNo": 60,
       "blankType": "given",
       "hint": "excite",
-      "facetKey": "grammar-fill.given.derivation.verb-to-noun",
+      "facetKey": "grammar-fill.given.conversion.verb-to-noun",
       "answer": "excitement",
       "role": null,
       "path": null,
@@ -179,7 +181,8 @@
           "relation": "「我」是被放在购物车里被推，逻辑主语与 push 为被动，用 being pushed。"
         }
       ],
-      "teachingNote": "remember + 动名词；逻辑主语被动时用 being done。"
+      "teachingNote": "remember + 动名词；逻辑主语被动时用 being done。",
+      "form": "doing"
     },
     "q-zj-2026-jan-063": {
       "blankId": "blank-zj-2026-jan-063",
@@ -232,7 +235,7 @@
       "blankNo": 65,
       "blankType": "given",
       "hint": "seeming",
-      "facetKey": "grammar-fill.given.adjective",
+      "facetKey": "grammar-fill.given.conversion.adjective-to-adverb",
       "answer": "seemingly",
       "role": null,
       "path": null,

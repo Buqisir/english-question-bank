@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "grammar-fill-analysis-v1",
+  "schemaVersion": "grammar-fill-analysis-v2",
   "paperId": "paper-2020-i",
   "sourceAssetVersion": 1,
   "targetGroups": [
@@ -22,7 +22,7 @@
       "blankNo": 56,
       "blankType": "given",
       "hint": "wealth",
-      "facetKey": "grammar-fill.given.derivation.noun-to-adj",
+      "facetKey": "grammar-fill.given.conversion.noun-to-adjective",
       "answer": "wealthy",
       "role": null,
       "path": null,
@@ -75,7 +75,10 @@
           "relation": "本空是整句的谓语，主语为复数 objects，与构成核心藏品为主动关系，故用过去式 formed。"
         }
       ],
-      "teachingNote": "句中没有谓语时，提示动词要变为谓语，按主语和时间确定时态语态。"
+      "teachingNote": "句中没有谓语时，提示动词要变为谓语，按主语和时间确定时态语态。",
+      "tense": "past",
+      "voice": "active",
+      "agreementSensitive": false
     },
     "q-2020-i-059": {
       "blankId": "blank-2020-i-059",
@@ -115,7 +118,10 @@
           "relation": "主语 The parts 是被叫作的对象，与 call 为被动关系，故用 are called。"
         }
       ],
-      "teachingNote": "主语是动作承受者时谓语用被动语态，按主语数定 be 动词。"
+      "teachingNote": "主语是动作承受者时谓语用被动语态，按主语数定 be 动词。",
+      "tense": "present",
+      "voice": "passive",
+      "agreementSensitive": true
     },
     "q-2020-i-061": {
       "blankId": "blank-2020-i-061",
@@ -135,7 +141,10 @@
           "relation": "主语中心词 a small part 为单数第三人称，谓语 be 用单数现在式 is。"
         }
       ],
-      "teachingNote": "of 短语作主语时看中心词的数，单数中心词谓语用 is。"
+      "teachingNote": "of 短语作主语时看中心词的数，单数中心词谓语用 is。",
+      "tense": "present",
+      "voice": "active",
+      "agreementSensitive": true
     },
     "q-2020-i-062": {
       "blankId": "blank-2020-i-062",
@@ -175,14 +184,15 @@
           "relation": "本空与前面 living 由 or 并列，同作 imagine 的宾语，故用 -ing 形式 walking。"
         }
       ],
-      "teachingNote": "imagine 后接 -ing 作宾语，并列结构要保持形式一致。"
+      "teachingNote": "imagine 后接 -ing 作宾语，并列结构要保持形式一致。",
+      "form": "doing"
     },
     "q-2020-i-064": {
       "blankId": "blank-2020-i-064",
       "blankNo": 64,
       "blankType": "given",
       "hint": "accurate",
-      "facetKey": "grammar-fill.given.derivation.verb-to-noun",
+      "facetKey": "grammar-fill.given.conversion.adjective-to-noun",
       "answer": "accuracy",
       "role": null,
       "path": null,

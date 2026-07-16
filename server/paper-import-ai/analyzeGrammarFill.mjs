@@ -6,10 +6,15 @@ import { createAnalyzerProviderShell, readPromptFile, rewriteApiPrompt } from '.
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '../..')
 const promptPath = path.join(rootDir, 'prompts/grammar-fill-analysis-v1.md')
-const facetsPath = path.join(__dirname, 'grammar-fill-facets-v1.json')
+const facetsPath = path.join(__dirname, 'grammar-fill-facets-v2.json')
 
 // ============================================================
-// Registry: 17 leaf facets
+// Registry: 22 leaf facets (D1 grammar-facets-v2, 2026-07-15 owner-locked
+// semantics — docs/cuts/similar-questions/program.md §语法填空考点粒度终稿).
+// Old `given.noun` / `given.adjective` / `given.derivation.*` (17-leaf v1
+// registry, grammar-fill-facets-v1.json) retired: 词形转换 8-way
+// `given.conversion.<src>-to-<dst>` + 3 new split-off leaves
+// (`given.noun.number` / `given.noun.genitive` / `given.adjective.comparison`).
 // ============================================================
 
 const FACET_REGISTRY = JSON.parse(readFileSync(facetsPath, 'utf8'))
@@ -21,7 +26,7 @@ const PARENT_FACET_KEYS = new Set([
   'grammar-fill',
   'grammar-fill.given',
   'grammar-fill.given.verb',
-  'grammar-fill.given.derivation',
+  'grammar-fill.given.conversion',
   'grammar-fill.no-hint',
   'grammar-fill.no-hint.conjunction',
 ])
@@ -162,7 +167,7 @@ export function buildGrammarFillAnalysisMessages({ paper, group }) {
     {
       role: 'user',
       content: [
-        'Create exactly one grammar-fill-analysis-v1 JSON object for the target group below.',
+        'Create exactly one grammar-fill-analysis-v2 JSON object for the target group below.',
         'Return JSON text only. The first character must be { and the final character must be }.',
         '',
         'Structured input:',
@@ -178,7 +183,7 @@ export function buildGrammarFillAnalysisMessages({ paper, group }) {
 
 export function validateGrammarFillShape(analysis, { paper, group }) {
   if (!analysis || typeof analysis !== 'object' || Array.isArray(analysis)) throw new Error('AI 未返回 JSON 对象。')
-  if (analysis.schemaVersion !== 'grammar-fill-analysis-v1') throw new Error('AI JSON schemaVersion 不正确。')
+  if (analysis.schemaVersion !== 'grammar-fill-analysis-v2') throw new Error('AI JSON schemaVersion 不正确。')
   if (analysis.paperId !== paper.paperId) throw new Error('AI JSON paperId 与当前试卷不一致。')
   if (Number(analysis.sourceAssetVersion || 0) < 1) throw new Error('AI JSON sourceAssetVersion 无效。')
   if (!Array.isArray(analysis.targetGroups) || analysis.targetGroups.length !== 1 || analysis.targetGroups[0] !== group.groupId) {
@@ -231,7 +236,7 @@ export function validateGrammarFillShape(analysis, { paper, group }) {
       throw new Error(`${questionId}: facetKey "${facetKey}" 是父节点，不是合法叶节点。`)
     }
     if (!LEAF_FACET_KEYS.has(facetKey)) {
-      throw new Error(`${questionId}: facetKey "${facetKey}" 不在 17 个合法叶节点中。`)
+      throw new Error(`${questionId}: facetKey "${facetKey}" 不在 ${LEAF_FACET_KEYS.size} 个合法叶节点中。`)
     }
 
     // C2: leaf blank_type must match blank's blankType
@@ -320,6 +325,101 @@ function isRetryableGrammarFillError(error) {
 }
 
 // ============================================================
+// D1 (grammar-facets-v2) verb axes — server-side deterministic derivation,
+// never asked of the AI (owner 2026-07-15: "三特征全部从 answer 推导").
+// Intentionally a separate small copy of
+// scripts/grammar-facets-v2-migrate.mjs's deriveVerbAxes/deriveNonFiniteForm
+// (same owner-locked rules), not an import: the migrate script's copy is
+// already run + owner-verified against the frozen 33-file migration output
+// (docs/cuts/grammar-facets-v2/step1-samples.md) and must not shift after
+// the fact; this copy is the twin for NEW imports going forward. Any future
+// behavior drift between the two must be caught by
+// scripts/verify-grammar-facets-v2.mjs, not silently reconciled here.
+// ============================================================
+
+const BE_ANY = new Set(['am', 'is', 'are', 'was', 'were', 'be', 'been', 'being'])
+const BE_PRESENT = new Set(['am', 'is', 'are'])
+const BE_PAST = new Set(['was', 'were'])
+const HAVE_PRESENT = new Set(['have', 'has'])
+const MODAL = new Set(['will', 'shall', 'can', 'could', 'may', 'might', 'must', 'should', 'would'])
+const AGREEMENT_SENSITIVE_TOKENS = new Set(['is', 'am', 'are', 'was', 'were', 'has', 'have', 'does'])
+
+function tokenizeAnswer(value) {
+  return String(value || '')
+    .toLowerCase()
+    .replace(/[.,!?;:"'()]/g, ' ')
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean)
+}
+
+function deriveVerbAxes({ hint, answer }) {
+  const t = tokenizeAnswer(answer)
+  if (t.length === 0) return null
+  const lead = t[0]
+  const hintLemma = String(hint || '').toLowerCase().trim()
+  const isBeHint = hintLemma === 'be'
+
+  const hasIng = t.some((x) => x.endsWith('ing'))
+  const hasBe = t.some((x) => BE_ANY.has(x))
+  const hasHavePresent = t.some((x) => HAVE_PRESENT.has(x))
+  const hasHad = t.includes('had')
+  const hasModal = t.some((x) => MODAL.has(x))
+  const last = t[t.length - 1]
+
+  let tense = null
+  if (hasModal) tense = 'other'
+  else if (hasBe && hasIng) tense = 'progressive'
+  else if (hasHavePresent) tense = 'present-perfect'
+  else if (hasHad) tense = 'past-perfect'
+  else if (t.some((x) => BE_PRESENT.has(x))) tense = 'present'
+  else if (t.some((x) => BE_PAST.has(x))) tense = 'past'
+  else if (lead === 'be') tense = 'other'
+  else if (t.length === 1 && lead === hintLemma) tense = 'other'
+  else if (/s$/.test(lead)) tense = 'present'
+  else if (/ed$/.test(lead) || lead !== hintLemma) tense = 'past'
+  else tense = null
+  if (!tense) return null
+
+  let voice
+  if (isBeHint) voice = 'active'
+  else if (hasBe && !last.endsWith('ing')) voice = 'passive'
+  else voice = 'active'
+
+  const agreementSensitive =
+    t.some((x) => AGREEMENT_SENSITIVE_TOKENS.has(x)) || (/^[a-z]+s$/.test(last) && !AGREEMENT_SENSITIVE_TOKENS.has(last))
+
+  return { tense, voice, agreementSensitive }
+}
+
+function deriveNonFiniteForm(answer) {
+  const a = String(answer || '').trim()
+  if (/^to\b/i.test(a)) return 'to-do'
+  if (/^being\b/i.test(a) || /ing$/i.test(a)) return 'doing'
+  return 'done'
+}
+
+/** Stamp tense/voice/agreementSensitive (finite) or form (non-finite) onto
+ * every blank, deterministically from answer/hint — never AI-authored. When
+ * the deterministic rule cannot decide (should not happen on real data; see
+ * migrate script comment), the field is left null rather than guessed. */
+function stampVerbAxes(analysis) {
+  const blanks = analysis?.blanks
+  if (!blanks || typeof blanks !== 'object') return
+  for (const blank of Object.values(blanks)) {
+    if (!blank || typeof blank !== 'object') continue
+    if (blank.facetKey === 'grammar-fill.given.verb.finite') {
+      const axes = deriveVerbAxes({ hint: blank.hint, answer: blank.answer })
+      blank.tense = axes?.tense ?? null
+      blank.voice = axes?.voice ?? null
+      blank.agreementSensitive = axes ? axes.agreementSensitive : null
+    } else if (blank.facetKey === 'grammar-fill.given.verb.non-finite') {
+      blank.form = deriveNonFiniteForm(blank.answer)
+    }
+  }
+}
+
+// ============================================================
 // Meta stamping — server-side, never trust model self-report
 // ============================================================
 
@@ -330,11 +430,12 @@ function stampGrammarFillMeta(analysis, { providerResult, providerId }) {
     ...prior,
     generatedBy: 'external-ai',
     model: optionalString(providerResult?.model) || String(providerId || ''),
-    promptVersion: 'grammar-fill-analysis-v1',
+    promptVersion: 'grammar-fill-analysis-v2',
     reviewStatus: 'reviewed',
     reviewedBy: '',
     reviewedAt: new Date().toISOString().slice(0, 10),
   }
+  stampVerbAxes(analysis)
 }
 
 // ============================================================

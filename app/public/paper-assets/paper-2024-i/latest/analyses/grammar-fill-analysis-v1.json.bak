@@ -1,0 +1,245 @@
+{
+  "schemaVersion": "grammar-fill-analysis-v1",
+  "paperId": "paper-2024-i",
+  "sourceAssetVersion": 5,
+  "targetGroups": [
+    "group-2024-i-grammar-fill"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "grammar-fill-analysis-v1",
+    "reviewStatus": "reviewed",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-2024-i-grammar-fill": {
+      "overview": "说明文：介绍 Heatherwick 工作室在 Woolbeding 花园建造的玻璃温室 Glasshouse 及其呈现丝绸之路对英国园艺影响的丝路花园。"
+    }
+  },
+  "blanks": {
+    "q-2024-i-056": {
+      "blankId": "blank-2024-i-056",
+      "blankNo": 56,
+      "blankType": "given",
+      "hint": "engineer",
+      "facetKey": "grammar-fill.given.derivation.verb-to-noun",
+      "answer": "engineering",
+      "role": null,
+      "path": null,
+      "reason": "空前有 The latest、空后有名词 techniques，需要一个修饰 techniques 的成分；engineer 在此作定语，转为名词 engineering（工程的）与 techniques 构成复合名词。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "techniques are applied",
+          "signalSide": "passage",
+          "relation": "被修饰核心名词 techniques 前需名词作定语，engineer 变 engineering。"
+        },
+        {
+          "type": "determiner",
+          "signalText": "The latest",
+          "signalSide": "passage",
+          "relation": "限定词 The latest 后接名词词组，确认此处为名词修饰名词结构。"
+        }
+      ],
+      "teachingNote": "提示词与紧跟的名词组成名词词组时，把动词/原形提示词派生为名词作定语。"
+    },
+    "q-2024-i-057": {
+      "blankId": "blank-2024-i-057",
+      "blankNo": 57,
+      "blankType": "given",
+      "hint": "function",
+      "facetKey": "grammar-fill.given.derivation.noun-to-adj",
+      "answer": "functional",
+      "role": null,
+      "path": null,
+      "reason": "空在冠词 this 与名词 structure 之间，需形容词作定语；名词 function 派生为形容词 functional（实用的、有功能的）修饰 structure。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "structure that is also beautiful",
+          "signalSide": "passage",
+          "relation": "被修饰名词 structure 前的定语位置需要形容词，function 变 functional。"
+        }
+      ],
+      "teachingNote": "冠词/指示词与名词之间的空缺要求定语形容词，把名词提示词派生为形容词。"
+    },
+    "q-2024-i-058": {
+      "blankId": "blank-2024-i-058",
+      "blankNo": 58,
+      "blankType": "given",
+      "hint": "give",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "to give",
+      "role": "adverbial",
+      "path": "slow",
+      "reason": "主句 These sepals open 已有谓语，本空为非谓语；open ... to do 表目的（为了给室内植物阳光和新鲜空气），用动词不定式作目的状语。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "These sepals open on warm days",
+          "signalSide": "passage",
+          "relation": "主句已有谓语 open，空处表打开的目的，用 to-inf 作目的状语。"
+        }
+      ],
+      "teachingNote": "句子已有谓语、空处表目的时，非谓语用 to do 作目的状语。"
+    },
+    "q-2024-i-059": {
+      "blankId": "blank-2024-i-059",
+      "blankNo": 59,
+      "blankType": "given",
+      "hint": "close",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "closed",
+      "role": "subject-complement",
+      "path": "fast",
+      "reason": "stays 为系动词，本空作主语补足语描述 structure 的状态；结构被关闭，用过去分词 closed 表被动/状态（保持关闭着）。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "the structure stays",
+          "signalSide": "passage",
+          "relation": "系动词 stays 后接表语，主语 structure 被关闭，用过去分词 closed。"
+        }
+      ],
+      "teachingNote": "系动词 stay/remain 后表被动状态时，用过去分词作表语。"
+    },
+    "q-2024-i-060": {
+      "blankId": "blank-2024-i-060",
+      "blankNo": 60,
+      "blankType": "given",
+      "hint": "walk",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "walks",
+      "role": null,
+      "path": null,
+      "reason": "本句主语 the Silk Route Garden 后缺谓语，本空为谓语动词；主语为第三人称单数、陈述一般现状，用一般现在时 walks（walk sb through 引领某人走过）。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "the Silk Route Garden around the greenhouse",
+          "signalSide": "passage",
+          "relation": "主语为第三人称单数，谓语用单数 walks。"
+        }
+      ],
+      "teachingNote": "整句缺谓语时本空为谓语动词，按主语数与时态确定动词形式。"
+    },
+    "q-2024-i-061": {
+      "blankId": "blank-2024-i-061",
+      "blankNo": 61,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.article",
+      "answer": "the",
+      "role": null,
+      "path": null,
+      "reason": "for ___ first time 为固定搭配 for the first time（第一次），序数词 first 前用定冠词 the。",
+      "evidence": [
+        {
+          "type": "collocation",
+          "signalText": "came to Britain for",
+          "signalSide": "passage",
+          "relation": "固定搭配 for the first time，序数词 first 前用定冠词 the。"
+        }
+      ],
+      "teachingNote": "序数词 first 前及 for the first time 这类固定搭配用定冠词 the。"
+    },
+    "q-2024-i-062": {
+      "blankId": "blank-2024-i-062",
+      "blankNo": 62,
+      "blankType": "given",
+      "hint": "favourite",
+      "facetKey": "grammar-fill.given.noun",
+      "answer": "favorites",
+      "role": null,
+      "path": null,
+      "reason": "空前 modern Western 作定语、空后 such as 列举具体植物，本空需名词且为可数复数；favourite 用作名词复数 favorites（人们喜爱之物）。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "modern Western",
+          "signalSide": "passage",
+          "relation": "前面形容词定语需要被修饰的名词中心词，favourite 作名词。"
+        },
+        {
+          "type": "collocation",
+          "signalText": "such as rosemary, lavender and fennel",
+          "signalSide": "passage",
+          "relation": "such as 列举多种植物，说明中心名词为复数 favorites。"
+        }
+      ],
+      "teachingNote": "形容词定语后缺中心名词、且列举多项时，提示词作名词且用复数。"
+    },
+    "q-2024-i-063": {
+      "blankId": "blank-2024-i-063",
+      "blankNo": 63,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.preposition",
+      "answer": "as",
+      "role": null,
+      "path": null,
+      "reason": "stand as 为固定搭配（作为/堪称），The Glasshouse stands ___ a great achievement，介词用 as（作为当代设计的伟大成就）。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "The Glasshouse stands",
+          "signalSide": "passage",
+          "relation": "stand as 固定搭配，后接名词词组 a great achievement，介词用 as。"
+        }
+      ],
+      "teachingNote": "stand/serve 等动词后表身份用介词 as。"
+    },
+    "q-2024-i-064": {
+      "blankId": "blank-2024-i-064",
+      "blankNo": 64,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.relative-clause",
+      "answer": "which",
+      "role": null,
+      "path": null,
+      "reason": "先行词为 the Silk Route，空后 brought 缺主语，本空引导定语从句并作从句主语，指物用关系代词 which/that。",
+      "evidence": [
+        {
+          "type": "antecedent",
+          "signalText": "the Silk Route",
+          "signalSide": "passage",
+          "relation": "先行词指物 the Silk Route，定语从句中作主语用 which/that。"
+        },
+        {
+          "type": "clause-frame",
+          "signalText": "brought the plants from their native habitat",
+          "signalSide": "passage",
+          "relation": "从句谓语 brought 前缺主语，需关系代词作主语。"
+        }
+      ],
+      "teachingNote": "先行词指物且从句缺主语时，用 which/that 引导定语从句作主语。"
+    },
+    "q-2024-i-065": {
+      "blankId": "blank-2024-i-065",
+      "blankNo": 65,
+      "blankType": "given",
+      "hint": "rich",
+      "facetKey": "grammar-fill.given.noun",
+      "answer": "richness",
+      "role": null,
+      "path": null,
+      "reason": "the ___ of gardening 中，冠词 the 与 of 短语之间需名词；形容词 rich 派生为名词 richness（丰富）作 define 的宾语中心词。",
+      "evidence": [
+        {
+          "type": "of-phrase",
+          "signalText": "of gardening in England",
+          "signalSide": "passage",
+          "relation": "the + 空 + of 结构要求名词中心词，rich 变 richness。"
+        },
+        {
+          "type": "determiner",
+          "signalText": "much of the",
+          "signalSide": "passage",
+          "relation": "限定词 the 后需名词，形容词 rich 派生为名词 richness。"
+        }
+      ],
+      "teachingNote": "the ... of 结构中间的空需名词，把形容词提示词派生为名词。"
+    }
+  }
+}

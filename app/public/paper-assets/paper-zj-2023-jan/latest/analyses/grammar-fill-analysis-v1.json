@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "grammar-fill-analysis-v1",
+  "schemaVersion": "grammar-fill-analysis-v2",
   "paperId": "paper-zj-2023-jan",
   "sourceAssetVersion": 1,
   "targetGroups": [
@@ -48,7 +48,7 @@
       "blankNo": 57,
       "blankType": "given",
       "hint": "original",
-      "facetKey": "grammar-fill.given.adjective",
+      "facetKey": "grammar-fill.given.conversion.adjective-to-adverb",
       "answer": "originally",
       "role": null,
       "path": null,
@@ -87,7 +87,8 @@
           "relation": "by 引出施动者，印证 surround 与 Forbidden City 为被动关系，用 surrounded"
         }
       ],
-      "teachingNote": "主句谓语齐全，逻辑主语承受动作时，用过去分词作定语/状语。"
+      "teachingNote": "主句谓语齐全，逻辑主语承受动作时，用过去分词作定语/状语。",
+      "form": "done"
     },
     "q-zj-2023-jan-059": {
       "blankId": "blank-zj-2023-jan-059",
@@ -113,7 +114,10 @@
           "relation": "明朝语境为过去叙述，锁定一般过去时"
         }
       ],
-      "teachingNote": "句子缺谓语先判语态再判时态：被动且过去用 were + 过去分词。"
+      "teachingNote": "句子缺谓语先判语态再判时态：被动且过去用 were + 过去分词。",
+      "tense": "past",
+      "voice": "passive",
+      "agreementSensitive": true
     },
     "q-zj-2023-jan-060": {
       "blankId": "blank-zj-2023-jan-060",
@@ -139,14 +143,17 @@
           "relation": "频度副词 often 提示这里需要一个谓语动词，且为习常的过去叙述"
         }
       ],
-      "teachingNote": "句子缺谓语且主语主动发出动作，用一般过去时主动形式。"
+      "teachingNote": "句子缺谓语且主语主动发出动作，用一般过去时主动形式。",
+      "tense": "past",
+      "voice": "active",
+      "agreementSensitive": false
     },
     "q-zj-2023-jan-061": {
       "blankId": "blank-zj-2023-jan-061",
       "blankNo": 61,
       "blankType": "given",
       "hint": "space",
-      "facetKey": "grammar-fill.given.derivation.noun-to-adj",
+      "facetKey": "grammar-fill.given.conversion.noun-to-adjective",
       "answer": "spacious",
       "role": null,
       "path": null,
@@ -166,7 +173,7 @@
       "blankNo": 62,
       "blankType": "given",
       "hint": "simple",
-      "facetKey": "grammar-fill.given.adjective",
+      "facetKey": "grammar-fill.given.adjective.comparison",
       "answer": "simpler",
       "role": null,
       "path": null,
@@ -218,7 +225,7 @@
       "blankNo": 64,
       "blankType": "given",
       "hint": "event",
-      "facetKey": "grammar-fill.given.noun",
+      "facetKey": "grammar-fill.given.noun.number",
       "answer": "events",
       "role": null,
       "path": null,

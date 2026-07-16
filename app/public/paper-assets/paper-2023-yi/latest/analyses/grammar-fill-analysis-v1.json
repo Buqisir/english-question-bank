@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "grammar-fill-analysis-v1",
+  "schemaVersion": "grammar-fill-analysis-v2",
   "paperId": "paper-2023-yi",
   "sourceAssetVersion": 1,
   "targetGroups": [
@@ -55,7 +55,8 @@
           "relation": "被修饰名词 system 与 build 是被动关系，用过去分词作前置定语"
         }
       ],
-      "teachingNote": "提示词为动词、空格作名词定语且与该名词为被动关系时，用过去分词。"
+      "teachingNote": "提示词为动词、空格作名词定语且与该名词为被动关系时，用过去分词。",
+      "form": "done"
     },
     "q-2023-yi-063": {
       "blankId": "blank-2023-yi-063",
@@ -88,7 +89,7 @@
       "blankNo": 64,
       "blankType": "given",
       "hint": "wonder",
-      "facetKey": "grammar-fill.given.noun",
+      "facetKey": "grammar-fill.given.noun.number",
       "answer": "wonders",
       "role": null,
       "path": null,
@@ -147,7 +148,8 @@
           "relation": "逻辑主语 I 主动多次到访，且先于主句动作，用 Having done 完成式分词作状语"
         }
       ],
-      "teachingNote": "句首作状语、逻辑主语主动且动作先于主句时，用 Having done 现在分词完成式。"
+      "teachingNote": "句首作状语、逻辑主语主动且动作先于主句时，用 Having done 现在分词完成式。",
+      "form": "done"
     },
     "q-2023-yi-067": {
       "blankId": "blank-2023-yi-067",
@@ -173,7 +175,10 @@
           "relation": "回顾过去十年的经历，谓语用一般过去时，与被动合成 was amazed"
         }
       ],
-      "teachingNote": "amaze/surprise 等\"使\"类动词，人作主语表感受时用 be done 被动；时态由语境时间标志锁定。"
+      "teachingNote": "amaze/surprise 等\"使\"类动词，人作主语表感受时用 be done 被动；时态由语境时间标志锁定。",
+      "tense": "past",
+      "voice": "passive",
+      "agreementSensitive": true
     },
     "q-2023-yi-068": {
       "blankId": "blank-2023-yi-068",
@@ -193,14 +198,15 @@
           "relation": "spend time (in) doing sth 固定搭配，空格用 doing 形式"
         }
       ],
-      "teachingNote": "spend time/money (in) doing sth 固定搭配，后接动词用 -ing 形式。"
+      "teachingNote": "spend time/money (in) doing sth 固定搭配，后接动词用 -ing 形式。",
+      "form": "doing"
     },
     "q-2023-yi-069": {
       "blankId": "blank-2023-yi-069",
       "blankNo": 69,
       "blankType": "given",
       "hint": "remark",
-      "facetKey": "grammar-fill.given.derivation.noun-to-adj",
+      "facetKey": "grammar-fill.given.conversion.noun-to-adjective",
       "answer": "remarkable",
       "role": null,
       "path": null,
@@ -245,7 +251,10 @@
           "relation": "单数主语 development，一般现在时陈述事实，谓语用 means"
         }
       ],
-      "teachingNote": "找准被插入定语从句隔开的真正主语，按其单复数与时态确定谓语形式。"
+      "teachingNote": "找准被插入定语从句隔开的真正主语，按其单复数与时态确定谓语形式。",
+      "tense": "present",
+      "voice": "active",
+      "agreementSensitive": true
     }
   }
 }

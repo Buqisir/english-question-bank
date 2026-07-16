@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "grammar-fill-analysis-v1",
+  "schemaVersion": "grammar-fill-analysis-v2",
   "paperId": "paper-2023-ii",
   "sourceAssetVersion": 1,
   "targetGroups": [
@@ -22,7 +22,7 @@
       "blankNo": 56,
       "blankType": "given",
       "hint": "arrive",
-      "facetKey": "grammar-fill.given.derivation.verb-to-noun",
+      "facetKey": "grammar-fill.given.conversion.verb-to-noun",
       "answer": "arrival",
       "role": null,
       "path": null,
@@ -48,7 +48,7 @@
       "blankNo": 57,
       "blankType": "given",
       "hint": "confidence",
-      "facetKey": "grammar-fill.given.derivation.noun-to-adj",
+      "facetKey": "grammar-fill.given.conversion.noun-to-adjective",
       "answer": "confident",
       "role": null,
       "path": null,
@@ -127,14 +127,15 @@
           "relation": "被修饰名词主动来访问，定语用现在分词 visiting。"
         }
       ],
-      "teachingNote": "作定语且逻辑主语主动时，括号动词变现在分词。"
+      "teachingNote": "作定语且逻辑主语主动时，括号动词变现在分词。",
+      "form": "doing"
     },
     "q-2023-ii-061": {
       "blankId": "blank-2023-ii-061",
       "blankNo": 61,
       "blankType": "given",
       "hint": "interview",
-      "facetKey": "grammar-fill.given.noun",
+      "facetKey": "grammar-fill.given.noun.number",
       "answer": "interviews",
       "role": null,
       "path": null,
@@ -186,7 +187,7 @@
       "blankNo": 63,
       "blankType": "given",
       "hint": "basic",
-      "facetKey": "grammar-fill.given.adjective",
+      "facetKey": "grammar-fill.given.conversion.adjective-to-adverb",
       "answer": "Basically",
       "role": null,
       "path": null,
@@ -251,7 +252,10 @@
           "relation": "grew 为过去式，呼应主句用一般过去时。"
         }
       ],
-      "teachingNote": "句子缺谓语且时间标志为过去时，动词用一般过去式。"
+      "teachingNote": "句子缺谓语且时间标志为过去时，动词用一般过去式。",
+      "tense": "past",
+      "voice": "active",
+      "agreementSensitive": false
     }
   }
 }

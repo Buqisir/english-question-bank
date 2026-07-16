@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "grammar-fill-analysis-v1",
+  "schemaVersion": "grammar-fill-analysis-v2",
   "paperId": "paper-zj-2020-jul",
   "sourceAssetVersion": 1,
   "targetGroups": [
@@ -107,7 +107,10 @@
           "relation": "并列分句 were born 为一般过去时，呼应本空也用过去时。"
         }
       ],
-      "teachingNote": "谓语空先认主语与动词的主被动关系，再由全文时态锁定时态（此处过去被动）。"
+      "teachingNote": "谓语空先认主语与动词的主被动关系，再由全文时态锁定时态（此处过去被动）。",
+      "tense": "past",
+      "voice": "passive",
+      "agreementSensitive": true
     },
     "q-zj-2020-jul-060": {
       "blankId": "blank-zj-2020-jul-060",
@@ -127,7 +130,8 @@
           "relation": "被修饰名词 power 接不定式作定语（the power to do sth），故用 to change。"
         }
       ],
-      "teachingNote": "名词 power/ability/chance 等后接不定式作定语，直接走快路填 to do。"
+      "teachingNote": "名词 power/ability/chance 等后接不定式作定语，直接走快路填 to do。",
+      "form": "to-do"
     },
     "q-zj-2020-jul-061": {
       "blankId": "blank-zj-2020-jul-061",
@@ -153,14 +157,17 @@
           "relation": "主语 people 主动发出 discover 的动作，用主动语态。"
         }
       ],
-      "teachingNote": "『by + 过去时间点』+『到那时已…』的语境，谓语用过去完成时 had done。"
+      "teachingNote": "『by + 过去时间点』+『到那时已…』的语境，谓语用过去完成时 had done。",
+      "tense": "past-perfect",
+      "voice": "active",
+      "agreementSensitive": false
     },
     "q-zj-2020-jul-062": {
       "blankId": "blank-zj-2020-jul-062",
       "blankNo": 62,
       "blankType": "given",
       "hint": "season",
-      "facetKey": "grammar-fill.given.noun",
+      "facetKey": "grammar-fill.given.noun.number",
       "answer": "seasons",
       "role": null,
       "path": null,
@@ -205,7 +212,8 @@
           "relation": "逻辑主语 they 主动发出 make 的动作，用现在分词表主动伴随。"
         }
       ],
-      "teachingNote": "状语非谓语先测有无目的/将来含义（无则排除 to do），主动伴随用 doing，并可与上文并列结构呼应。"
+      "teachingNote": "状语非谓语先测有无目的/将来含义（无则排除 to do），主动伴随用 doing，并可与上文并列结构呼应。",
+      "form": "doing"
     },
     "q-zj-2020-jul-064": {
       "blankId": "blank-zj-2020-jul-064",
@@ -251,7 +259,10 @@
           "relation": "宾语从句谓语 worked 为一般过去时，呼应主句也用过去时 meant。"
         }
       ],
-      "teachingNote": "谓语空确认主被动后，依全文叙事时态（过去）定时态。"
+      "teachingNote": "谓语空确认主被动后，依全文叙事时态（过去）定时态。",
+      "tense": "past",
+      "voice": "active",
+      "agreementSensitive": false
     }
   }
 }
