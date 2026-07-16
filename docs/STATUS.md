@@ -5,9 +5,9 @@ Last updated: 2026-07-16（detail-page-redesign 收官合入 main：详情页
 DP-3 + 部署**。前一日：E6 收官 + D1/E5/E6 三刀同批部署生产 e0e2315，
 部署门关账，生产双 verify 全绿）
 
-下一步队列（2026-07-16 收状态）：① 详情页重设计 owner DP-3 + 部署
-（qa-checklist.md 在 cut 目录）；② E7 工作台⇄换篇（原型场景 2，独立
-刀）；③ design-canon-v2（账本详条）；④ 挂账：no-hint 3 空
+下一步队列（2026-07-16 收状态）：① E7 工作台⇄换篇（原型场景 2，独立
+刀）；② design-canon-v2（账本详条）；③ small 挂账：serve 路径 44 个
+.bak 清理（账本详条）、no-hint 3 空
 疑似导入期数据损伤（2020-ii 057/063/064，回源卷查证小刀）、CR watch
 若干（谓语推导副本收拢、vp-driver README 残句等，见各刀 cr.md）。
 
@@ -39,8 +39,9 @@ DP-3 + 部署**。前一日：E6 收官 + D1/E5/E6 三刀同批部署生产 e0e2
   话题丸+动作行；一张纸=五 adapter 只读挂载露一角 ~340px 展开可收）、
   AnalysisDisclosure 本页退役、原型三件整删、E6 相似篇章随迁、App.tsx
   死代码连带清理（CR 确认无误伤）、三 verify 锚授权更新+新 verify 进 CI。
-  spec 文件名笔误（-v2→磁盘 -v1）实核更正。**待 owner DP-3 + 部署**
-  （裁5）。**账单**：流水线 295k + CR 88k；主代理出场 ~4。
+  spec 文件名笔误（-v2→磁盘 -v1）实核更正。**owner DP-3 全过（2026-07-16
+  「过关」，11 行 QA 表）；生产已部署 c677817**（health ok、eqbank.cc
+  200），本刀闭环。**账单**：流水线 295k + CR 88k；主代理出场 ~4。
 - 2026-07-15：**similar-passages-entry（E6）收官**（merge d306b8a，fresh CR
   APPROVE 0MF/4SW（SW-1/2/4 当场收、SW-3 不收），verify:all 78 绿×2 +
   DP-2 20 断言×2 主代理亲跑 + main CI 双证）：共享「相似篇章」候选面板

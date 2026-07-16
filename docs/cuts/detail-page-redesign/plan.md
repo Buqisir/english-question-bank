@@ -91,4 +91,4 @@
 - [x] 裁3 fresh CR APPROVE 0MF/3SW（cr.md；盲区四条：接受/接受/复核
       通过/无误伤；SW1 真值 chips 待后台补数据后 owner 扫一眼闭环）
 - [x] 裁4 merge 主树 + main CI 见 push 后 watch
-- [ ] 裁5 owner DP-3（Chrome 实点四题型 + 边角）→ 部署（强制裁决点）
+- [x] 裁5 owner DP-3 全过（2026-07-16「过关」，11 行 QA 表实点）→ 生产已部署 c677817（health ok、eqbank.cc 200）。本刀闭环。
