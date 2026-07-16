@@ -38,6 +38,13 @@ analysis 三字段；owner 判例表逐空拍板后修复 + verify baseline 刷�
 
 ## 主线焦点
 
+- 2026-07-16：**reading-analysis-retire 收官（孤儿支退役）**（merge
+  af21f7c，fresh CR APPROVE 0MF/3SW，主代理 worktree 亲跑四命令真实
+  退出码全 0 + main CI 双证）：RA 全支 + PI 两子面三层退净（122 文件
+  净删 3.1 万行），旧 URL 自愈（带 paperId 落讲评态/其余落主页），
+  PaperSurfaceData 类型链手术零深耦合；五项挂账销账见各节勾。**账单**：
+  Explore 图谱 149k + DEV 341k + CR 89k；主代理出场 ~6。**待 owner
+  DP-3（裁5）+ 部署**。
 - 2026-07-16：**similar-workbench-swap（E7）收官**（merge 933711d→main，
   fresh CR APPROVE 1MF/3SW，流水线 verify 四命令真实退出码全 0 + main CI
   双证）：贴纸操作条 ⇄ → rail 目录原地切候选抽屉（替换承位保分页可撤销/

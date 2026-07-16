@@ -115,7 +115,8 @@
 - [x] 裁3：fresh Opus CR APPROVE，0 MF / 3 SW / 1 NTH（cr.md）。越界
   2 文件裁为正当自然清理；SW1=自愈静态锚偏宽由 DP-2 行为测兜底，
   DP-2 保持常驻（qa/ 已入档可重跑）。
-- [ ] 裁4：merge + main CI 绿。
+- [x] 裁4：merge af21f7c + main CI 绿（watch 退出码 0 + conclusion:
+  success 双证，2026-07-16）；worktree/分支/契约锁已清。
 - [ ] 裁5：owner DP-3（QA 表：旧 URL 自愈两条 + 讲评态/详情页回归两条）
   → 拍板部署生产。
 
@@ -126,5 +127,5 @@
 
 ## 账单
 
-（收官时填：流水线 tok + CR tok + 主代理出场次数。准备阶段已花：
-Explore 图谱 149k。）
+Explore 图谱 149k + DEV 341k + CR 89k ≈ 579k 子代理 tok；主代理出场
+~6（立案/派工/复核/CR 收/merge+CI/收尾）。
