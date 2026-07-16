@@ -56,6 +56,19 @@ function renderableAssetPath(paperId) {
   return null
 }
 
+// Backup-suffixed files (foo.bak, foo.bak.20260716, foo.orig, editor foo~)
+// anywhere under a paper dir. paper-assets is a public serve path — backups
+// belong outside it.
+function listBackupFiles(dir) {
+  const found = []
+  for (const entry of readdirSync(dir, { withFileTypes: true })) {
+    const full = path.join(dir, entry.name)
+    if (entry.isDirectory()) found.push(...listBackupFiles(full))
+    else if (/(\.bak(\.|$)|\.orig$|~$)/.test(entry.name)) found.push(path.relative(paperAssetsDir, full))
+  }
+  return found
+}
+
 console.log('verify: DB ↔ paper-assets consistency')
 console.log()
 
@@ -96,6 +109,15 @@ for (const paperId of diskPaperIds) {
     `${paperId}: no stale latest-swap residue`,
     residue.length === 0,
     residue.join(', '),
+  )
+
+  // Backup files must never sit in the serve path (jslk backup-501 incident
+  // class; 44 grammar-facets-v2 migration .bak leftovers cleaned 2026-07-16).
+  const backups = listBackupFiles(path.join(paperAssetsDir, paperId))
+  assert(
+    `${paperId}: no backup files in serve path`,
+    backups.length === 0,
+    backups.join(', '),
   )
 }
 
