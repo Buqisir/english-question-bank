@@ -86,4 +86,4 @@
 - [x] 裁3 fresh CR APPROVE 1MF/3SW；MF-1 主代理当场修（先加后删安全序+
       撤销坐标+DP-2 场景⑦回归锚，44/44 绿+verify:all 80 绿复验）
 - [x] 裁4 merge 主树 + main CI 见 push 后 watch
-- [ ] 裁5 owner DP-3（含替换/撤销手感 + 动作语义两条否决权）→ 部署
+- [x] 裁5 owner DP-3 全过（2026-07-16，9 行 QA 表实点，两条语义未否决）→ 生产已部署 2b5c2b0（health ok、eqbank.cc 200）。本刀闭环，相似题 v2 program 全线闭环。

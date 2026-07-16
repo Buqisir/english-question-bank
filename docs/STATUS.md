@@ -1,13 +1,11 @@
 # 当前状态（medium / large cut 收官时更新）
 
-Last updated: 2026-07-16（similar-workbench-swap(E7) 收官合入 main：
-工作台⇄换篇，CR APPROVE 1MF 当场修 + CI 绿，**待 owner DP-3 + 部署**
-（可与详情页重设计归并一场：详情页 DP-3 已过、生产已上 c677817）。
-相似题 v2 四刀 D1/E5/E6/E7 至此全收官）
+Last updated: 2026-07-16（similar-workbench-swap(E7) 收官 + **生产
+部署 2b5c2b0**（owner DP-3 全过后拍板）：health ok、eqbank.cc 200。
+相似题 v2 四刀 D1/E5/E6/E7 全线闭环，全部在生产）
 
-下一步队列（2026-07-16 收状态）：① E7 owner DP-3 + 部署（对照单
-qa-checklist.md 在 cut 目录）；② design-canon-v2（账本详条）；③ small
-挂账：serve 路径 44 个 .bak 清理（账本详条）、no-hint 3 空
+下一步队列（2026-07-16 收状态）：① design-canon-v2（账本详条）；
+② small 挂账：serve 路径 44 个 .bak 清理（账本详条）、no-hint 3 空
 疑似导入期数据损伤（2020-ii 057/063/064，回源卷查证小刀）、CR watch
 若干（谓语推导副本收拢、vp-driver README 残句等，见各刀 cr.md）。
 
@@ -41,7 +39,8 @@ qa-checklist.md 在 cut 目录）；② design-canon-v2（账本详条）；③ 
   顺带立惯例：DP-2 截图 DP2_SCREENSHOTS 门控（两刀假刹根治）。**待
   owner DP-3 + 部署**（裁5，替换/撤销手感 + 动作语义两条否决权）。
   **账单**：流水线 347k + CR 64k + 主代理 MF 收账亲改；出场 ~5。
-  相似题 v2 program（D1/E5/E6/E7）全收官。
+  **owner DP-3 全过（2026-07-16，9 行 QA 表，两条语义未否决）；生产已
+  部署 2b5c2b0**，本刀闭环。相似题 v2 program（D1/E5/E6/E7）全线闭环。
 - 2026-07-16：**detail-page-redesign 收官（详情页重设计：速览头+一张纸
   露一角）**（merge 后 docs ba80bd6，fresh CR APPROVE 0MF/3SW，流水线
   verify 四命令真实退出码全 0（新 verify 15/verify:all 79/DP-2 41 双跑）
