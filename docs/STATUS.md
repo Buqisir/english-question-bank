@@ -1,14 +1,13 @@
 # 当前状态（medium / large cut 收官时更新）
 
-Last updated: 2026-07-15（similar-passages-entry(E6) 收官 + **D1/E5/E6
-三刀同批部署生产 e0e2315**（owner 拍板）：health ok、eqbank.cc 200、
-生产实跑 verify-similar-v2 83/83 + verify-grammar-facets-v2 67/67 全绿；
-owner DP-3 五项对照单全过（现场打回 1 条当场修，见 E6 条）。部署门关账）
+Last updated: 2026-07-16（detail-page-redesign 收官合入 main：详情页
+重设计=速览头+一张纸露一角，CR APPROVE 0MF/3SW + CI 绿，**待 owner
+DP-3 + 部署**。前一日：E6 收官 + D1/E5/E6 三刀同批部署生产 e0e2315，
+部署门关账，生产双 verify 全绿）
 
-下一步队列（2026-07-15 收状态）：① 详情页重设计正式刀——
-spec 已 approved（`docs/specs/2026-07-15-detail-page-redesign-design.md`，
-动作行已补录「相似篇章」，原型 `?detailVariant=paper-peek` DEV-only 在库
-可试）；② E7 工作台⇄换篇（原型场景 2，独立刀）；③ 挂账：no-hint 3 空
+下一步队列（2026-07-16 收状态）：① 详情页重设计 owner DP-3 + 部署
+（qa-checklist.md 在 cut 目录）；② E7 工作台⇄换篇（原型场景 2，独立
+刀）；③ design-canon-v2（账本详条）；④ 挂账：no-hint 3 空
 疑似导入期数据损伤（2020-ii 057/063/064，回源卷查证小刀）、CR watch
 若干（谓语推导副本收拢、vp-driver README 残句等，见各刀 cr.md）。
 
@@ -33,6 +32,15 @@ spec 已 approved（`docs/specs/2026-07-15-detail-page-redesign-design.md`，
 
 ## 主线焦点
 
+- 2026-07-16：**detail-page-redesign 收官（详情页重设计：速览头+一张纸
+  露一角）**（merge 后 docs ba80bd6，fresh CR APPROVE 0MF/3SW，流水线
+  verify 四命令真实退出码全 0（新 verify 15/verify:all 79/DP-2 41 双跑）
+  + main CI 双证）：QuestionGroupDetailView 重写（速览头 meta/大意/chips/
+  话题丸+动作行；一张纸=五 adapter 只读挂载露一角 ~340px 展开可收）、
+  AnalysisDisclosure 本页退役、原型三件整删、E6 相似篇章随迁、App.tsx
+  死代码连带清理（CR 确认无误伤）、三 verify 锚授权更新+新 verify 进 CI。
+  spec 文件名笔误（-v2→磁盘 -v1）实核更正。**待 owner DP-3 + 部署**
+  （裁5）。**账单**：流水线 295k + CR 88k；主代理出场 ~4。
 - 2026-07-15：**similar-passages-entry（E6）收官**（merge d306b8a，fresh CR
   APPROVE 0MF/4SW（SW-1/2/4 当场收、SW-3 不收），verify:all 78 绿×2 +
   DP-2 20 断言×2 主代理亲跑 + main CI 双证）：共享「相似篇章」候选面板
@@ -327,6 +335,12 @@ spec 已 approved（`docs/specs/2026-07-15-detail-page-redesign-design.md`，
   `docs/status-archive/2026-07-early.md`。
 
 ## 开放账本（立刀候选，owner 圈了再动）
+
+- **serve 路径 .bak 清理（small，2026-07-16 详情页刀顺带发现）**：
+  `app/public/paper-assets/**/analyses/` 里 44 个 git 跟踪的 D1 遗留
+  `.bak`（grammar-fill-analysis/verb-profile 备份）——量小当前无害，但
+  备份文件不该在 public serve 路径（jslk 备份 501 判例的同类）；顺带
+  评估 publisher 是否该有「.bak 不进 assets」门禁。
 
 - **design-canon-v2（owner 已圈 2026-07-15，排详情页重设计刀后）**：读
   vercel.com/design.md（Geist agent 可读设计系统）对照我们 DESIGN.md 的
