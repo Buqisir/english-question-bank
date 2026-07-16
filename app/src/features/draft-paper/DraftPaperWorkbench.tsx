@@ -1,8 +1,9 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
-import { Archive, ArrowDown, ArrowUp, FileDown, FileText, FolderPlus, MoreHorizontal, Printer, RotateCcw, SeparatorHorizontal, Trash2 } from 'lucide-react'
+import { Archive, ArrowDown, ArrowLeftRight, ArrowUp, FileDown, FileText, FolderPlus, MoreHorizontal, Printer, RotateCcw, SeparatorHorizontal, Trash2 } from 'lucide-react'
 import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
-import type { DraftPaper, DraftPaperItem, DraftPaperSummary, DraftPrintForm, MySpaceFolder } from '../../domain/questionBank'
+import type { DraftPaper, DraftPaperItem, DraftPaperSummary, DraftPrintForm, GroupType, MySpaceFolder, QuestionGroupCard } from '../../domain/questionBank'
 import {
+  addGroupToDraftPaper,
   deleteDraftPaperItem,
   downloadDraftPaperDocx,
   downloadDraftPaperPdf,
@@ -26,14 +27,23 @@ import {
   ASSEMBLY_BASKET_STORAGE_KEY,
   parseAssemblyBasket,
 } from '../../paperAssembly/basketPersistence'
+import { fetchSimilarPassages } from '../../services/similarQuestions.ts'
 import { describeError } from '../shared/errorCopy'
 import { scrollBehavior } from '../shared/reducedMotionScroll.ts'
 import { useToastPresence, usePresence } from '../shared/useToastPresence.ts'
+import { similarPassagesRecipeSummary, type SimilarPassagesRequestState } from '../similar-passages/SimilarPassagesPanel'
 import { DraftPaperRail } from './DraftPaperRail'
 import { A3_FACE_NATIVE_WIDTH_PX, applyA3Imposition, buildA4PreviewHtml } from './draftPaperPreviewHtml'
 import './DraftPaperWorkbench.css'
 
 type DraftVersionType = 'student' | 'teacher'
+
+// similar-workbench-swap (E7, plan.md 施工要点 2 "⇄ 入口 gate"): the four v2
+// engine groupTypes findSimilarPassages actually scores against
+// (docs/cuts/similar-v2-engine/plan.md) — writing (and every other
+// groupType) never renders the ⇄ button at all (隐藏式降级, same convention
+// similar-passages-entry/E6 already established for its own CTA).
+const SWAP_SUPPORTED_GROUP_TYPES = new Set<GroupType>(['reading', 'cloze', 'seven_choices', 'grammar_cloze'])
 
 export type DraftPaperWorkbenchProps = {
   draftPaperId?: string | null
@@ -41,6 +51,12 @@ export type DraftPaperWorkbenchProps = {
   onBackToWorkbench: () => void
   onDraftChanged?: () => void
   shellNav: AppTopbarNav
+  /* similar-workbench-swap (E7): full corpus lookup, same map App.tsx already
+     builds for similar-passages-entry's other two consumers
+     (QuestionGroupDetailView, ConciergeGroupCard) — threaded through here so
+     the swap drawer can tell a "thin" candidate (paper asset analyzed, DB
+     not yet synced) from a real one, SW-3 parity. */
+  questionGroupById: Map<string, QuestionGroupCard>
 }
 
 type RemovedDraftItem = {
@@ -83,7 +99,7 @@ function moveItemTo(items: DraftPaperItem[], draggedId: string, targetId: string
 }
 
 export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode {
-  const { draftPaperId, focusGroupId, onBackToWorkbench, onDraftChanged, shellNav } = props
+  const { draftPaperId, focusGroupId, onBackToWorkbench, onDraftChanged, shellNav, questionGroupById } = props
   const [draftPaper, setDraftPaper] = useState<DraftPaper | null>(null)
   const [recentDrafts, setRecentDrafts] = useState<DraftPaperSummary[]>([])
   const [titleDraft, setTitleDraft] = useState('')
@@ -192,6 +208,28 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   // suggestion pill inside draft-group-actions exactly as before (裁点4).
   const [seamAnchors, setSeamAnchors] = useState<Record<string, number>>({})
 
+  // similar-workbench-swap (E7, plan.md "抽屉"): `swapSeedItemId` is null in
+  // 目录态, a DraftPaperItem.id in 抽屉态 — never a groupId, since 替换 needs
+  // the ITEM (position + pageBreakBefore), not just which group seeded the
+  // search. `swapRequest` mirrors similar-passages-entry's own
+  // SimilarPassagesRequestState (fetchSimilarPassages is the exact same
+  // client call E6 already makes) and is always set together with opening a
+  // seed (never null while swapSeedItemId is non-null).
+  const [swapSeedItemId, setSwapSeedItemId] = useState<string | null>(null)
+  const [swapRequest, setSwapRequest] = useState<SimilarPassagesRequestState | null>(null)
+  const [swapAddToastMessage, setSwapAddToastMessage] = useState<string | null>(null)
+  const swapAddToastTimerRef = useRef<number | null>(null)
+  const swapAddToastPresence = useToastPresence(swapAddToastMessage, 120)
+  // 替换 undo snapshot — same 8s-timer + toast-presence shape as
+  // reorderUndoSnapshot above, and same 撤销快照互斥 lifecycle (plan.md 施工
+  // 要点 4/5, DP-2 script ⑥): any OTHER item mutation (including the OTHER
+  // kind of undo snapshot being created) clears this first — see
+  // clearReplaceUndo/clearReorderUndo below, called in pairs everywhere
+  // either kind of edit happens.
+  const [replaceUndoSnapshot, setReplaceUndoSnapshot] = useState<{ removed: RemovedDraftItem; addedItemId: string } | null>(null)
+  const replaceUndoTimerRef = useRef<number | null>(null)
+  const replaceUndoToastPresence = usePresence(replaceUndoSnapshot !== null, 120)
+
   const loadRecentDrafts = useCallback(() => {
     fetchDraftPapers().then(setRecentDrafts).catch(() => setRecentDrafts([]))
   }, [])
@@ -240,6 +278,8 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       if (undoTimerRef.current) window.clearTimeout(undoTimerRef.current)
       if (savedToastTimerRef.current) window.clearTimeout(savedToastTimerRef.current)
       if (reorderUndoTimerRef.current) window.clearTimeout(reorderUndoTimerRef.current)
+      if (swapAddToastTimerRef.current) window.clearTimeout(swapAddToastTimerRef.current)
+      if (replaceUndoTimerRef.current) window.clearTimeout(replaceUndoTimerRef.current)
     }
   }, [loadDraft])
 
@@ -325,6 +365,21 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   // — the same filtered, ordered list server/draft-paper/
   // paginationDomContract.mjs positionally tags `data-group-id` with.
   const nonMissingItems = useMemo(() => draftPaper?.items.filter((item) => !item.groupMissing) ?? [], [draftPaper])
+
+  // similar-workbench-swap (E7): the seed item behind the currently-open
+  // drawer, if any — re-derived from draftPaper on every render rather than
+  // cached, so a 替换 that lands mid-flight (updating draftPaper) never
+  // leaves this pointing at a stale item.
+  const swapSeedItem = useMemo(
+    () => (swapSeedItemId ? draftPaper?.items.find((entry) => entry.id === swapSeedItemId) ?? null : null),
+    [draftPaper, swapSeedItemId],
+  )
+  // similar-workbench-swap (E7, plan.md "候选已在本草稿卷：动作禁用"): every
+  // groupId already occupying a slot in this draft paper, seed included —
+  // findSimilarPassages already excludes the seed's own group from its pool
+  // server-side, so this is really about a DIFFERENT candidate that's
+  // already elsewhere in the same volume.
+  const draftGroupIds = useMemo(() => new Set((draftPaper?.items ?? []).map((entry) => entry.groupId)), [draftPaper])
 
   // reorder-suggest (plan.md 施工契约 3 "卡"): assembles the card's copy from
   // two SEPARATE real sources — the existing 断篇 reason (pageBreakSuggestions,
@@ -801,9 +856,20 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     setReorderUndoSnapshot(null)
   }
 
+  // similar-workbench-swap (E7): 替换's own undo-snapshot clearer, same
+  // shape/lifecycle as clearReorderUndo above — called in the exact same
+  // set of "other mutation" handlers (撤销快照互斥: only one of the two
+  // snapshot kinds is ever live, since creating either one clears both).
+  function clearReplaceUndo() {
+    if (replaceUndoTimerRef.current) window.clearTimeout(replaceUndoTimerRef.current)
+    replaceUndoTimerRef.current = null
+    setReplaceUndoSnapshot(null)
+  }
+
   function moveItem(itemId: string, direction: -1 | 1) {
     if (!draftPaper) return
     clearReorderUndo()
+    clearReplaceUndo()
     const nextItems = reorderItems(draftPaper.items, itemId, direction)
     if (nextItems === draftPaper.items) return
     setDraftPaper({ ...draftPaper, items: nextItems })
@@ -813,6 +879,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   function handleDrop(targetId: string) {
     if (!draftPaper || !draggedItemId) return
     clearReorderUndo()
+    clearReplaceUndo()
     const nextItems = moveItemTo(draftPaper.items, draggedItemId, targetId)
     setDraggedItemId(null)
     if (nextItems === draftPaper.items) return
@@ -823,6 +890,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   async function togglePageBreak(item: DraftPaperItem, nextValue: boolean) {
     if (!draftPaper) return
     clearReorderUndo()
+    clearReplaceUndo()
     setSaveStatus('saving')
     try {
       const next = await patchDraftPaperItem(draftPaper.id, item.id, { pageBreakBefore: nextValue })
@@ -839,6 +907,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   async function deleteItem(item: DraftPaperItem) {
     if (!draftPaper) return
     clearReorderUndo()
+    clearReplaceUndo()
     setSaveStatus('saving')
     try {
       const result = await deleteDraftPaperItem(draftPaper.id, item.id)
@@ -862,6 +931,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   async function undoDelete() {
     if (!draftPaper || !removedItem) return
     clearReorderUndo()
+    clearReplaceUndo()
     setSaveStatus('saving')
     try {
       const next = await restoreDraftPaperItem(draftPaper.id, removedItem)
@@ -885,6 +955,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   // separate re-verification step needed here).
   async function applyReorderSuggestion() {
     if (!draftPaper || !reorderSuggestion) return
+    clearReplaceUndo()
     const snapshot = draftPaper.items
     const byId = new Map(draftPaper.items.map((item) => [item.id, item]))
     const orderedItems = reorderSuggestion.order
@@ -911,6 +982,162 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     setReorderUndoSnapshot(null)
     setDraftPaper({ ...draftPaper, items: snapshot })
     await persistItems(snapshot)
+  }
+
+  // similar-workbench-swap (E7, plan.md "⇄ 入口"): opens/closes/retargets
+  // the swap drawer. Clicking a DIFFERENT sticker's ⇄ while one is already
+  // open re-targets straight to the new seed (no intermediate 收起) —
+  // clicking the CURRENT seed's own ⇄ (or the drawer's 返回目录 button,
+  // wired to the same handler below) collapses back to the directory.
+  function loadSwapCandidates(groupId: string) {
+    setSwapRequest({ status: 'loading' })
+    fetchSimilarPassages(groupId)
+      .then((data) => setSwapRequest({ status: 'ready', data }))
+      .catch((error) => setSwapRequest({ status: 'error', message: describeError('加载相似篇章', error) }))
+  }
+
+  function handleSwapToggle(item: DraftPaperItem) {
+    if (swapSeedItemId === item.id) {
+      setSwapSeedItemId(null)
+      setSwapRequest(null)
+      return
+    }
+    setSwapSeedItemId(item.id)
+    loadSwapCandidates(item.groupId)
+  }
+
+  function handleSwapCollapse() {
+    setSwapSeedItemId(null)
+    setSwapRequest(null)
+  }
+
+  function handleSwapRetry() {
+    if (!swapSeedItem) return
+    loadSwapCandidates(swapSeedItem.groupId)
+  }
+
+  // similar-workbench-swap (E7, plan.md 施工要点 4 "替换这篇"): 候选组接管
+  // 原贴纸的位置与 pageBreakBefore — 分页是位置意图，随槽位不随内容. No
+  // single PATCH covers "swap this slot's content" (updateDraftPaper's
+  // `items` field only ever touches order/pageBreakBefore on EXISTING item
+  // ids — Forbidden keeps server/** untouched, so no new endpoint either),
+  // so this is delete-then-insert-at-the-same-index through the two
+  // service calls that already exist (deleteDraftPaperItem +
+  // addGroupToDraftPaper) — both go through services/draftPapers.ts, never
+  // a bespoke bypass fetch (verify anchor: "非旁路 fetch").
+  async function applySwapReplace(candidateGroupId: string) {
+    if (!draftPaper || !swapSeedItem) return
+    const seedIndex = draftPaper.items.findIndex((entry) => entry.id === swapSeedItem.id)
+    if (seedIndex < 0) return
+    clearReorderUndo()
+    clearReplaceUndo()
+    const pageBreakBefore = swapSeedItem.pageBreakBefore
+    setSaveStatus('saving')
+    setSaveError('')
+    try {
+      // CR MF-1：先加后删（两跳非原子的安全序）——加入失败=卷面零变化可
+      // 直接重试；加入成功而删除失败=可见的相邻重复（老师手动移除即自愈），
+      // 绝不静默丢种子。旧的先删后加序在「删成功→加失败」时静默丢种子题、
+      // 且重试因删已删项必然报错，只能刷新才暴露丢失。
+      const inserted = await addGroupToDraftPaper(draftPaper.id, candidateGroupId, {
+        insertIndex: seedIndex,
+        pageBreakBefore,
+      })
+      let deleteResult
+      try {
+        deleteResult = await deleteDraftPaperItem(draftPaper.id, swapSeedItem.id)
+      } catch (error) {
+        // 半截态如实入面：新篇已在种子旁，种子未删——呈现重复而非丢失，
+        // 不设撤销快照（状态不是一次完整替换）。
+        setDraftPaper(inserted)
+        setTitleDraft(inserted.title)
+        setSaveStatus('error')
+        setSaveError(describeError('替换第二步（移除原篇）', error) + '——新篇已加入，原篇仍在卷中，可手动移除原篇完成替换')
+        onDraftChanged?.()
+        setSwapSeedItemId(null)
+        setSwapRequest(null)
+        return
+      }
+      setDraftPaper(deleteResult.draftPaper)
+      setTitleDraft(deleteResult.draftPaper.title)
+      setSaveStatus('saved')
+      onDraftChanged?.()
+      const addedItem = inserted.items.find((entry) => entry.groupId === candidateGroupId)
+      if (addedItem) {
+        setReplaceUndoSnapshot({
+          // 撤销坐标用「操作前」的种子 orderIndex（1-based，restore 端点
+          // 语义，store 内 -1 换算 insertIndex）：先加后删序下
+          // deleteResult.removed.orderIndex 已被插入推后一位，按它恢复会
+          // 错一格——撤销路径先删新篇再复原种子，正确落点是操作前原位。
+          removed: {
+            groupId: deleteResult.removed.groupId,
+            orderIndex: swapSeedItem.orderIndex,
+            pageBreakBefore,
+          },
+          addedItemId: addedItem.id,
+        })
+        if (replaceUndoTimerRef.current) window.clearTimeout(replaceUndoTimerRef.current)
+        replaceUndoTimerRef.current = window.setTimeout(() => setReplaceUndoSnapshot(null), 8000)
+      }
+      // 替换后收起回目录 — the seed itemId this drawer was anchored to no
+      // longer exists (it's the item just deleted above), so there is no
+      // valid "keep browsing more replacements for this same slot" state to
+      // stay open in.
+      setSwapSeedItemId(null)
+      setSwapRequest(null)
+    } catch (error) {
+      setSaveStatus('error')
+      setSaveError(describeError('替换题组', error))
+    }
+  }
+
+  async function undoSwapReplace() {
+    if (!draftPaper || !replaceUndoSnapshot) return
+    const snapshot = replaceUndoSnapshot
+    if (replaceUndoTimerRef.current) window.clearTimeout(replaceUndoTimerRef.current)
+    replaceUndoTimerRef.current = null
+    setReplaceUndoSnapshot(null)
+    setSaveStatus('saving')
+    setSaveError('')
+    try {
+      await deleteDraftPaperItem(draftPaper.id, snapshot.addedItemId)
+      const restored = await restoreDraftPaperItem(draftPaper.id, snapshot.removed)
+      setDraftPaper(restored)
+      setTitleDraft(restored.title)
+      setSaveStatus('saved')
+      onDraftChanged?.()
+    } catch (error) {
+      setSaveStatus('error')
+      setSaveError(describeError('撤销替换', error))
+    }
+  }
+
+  // similar-workbench-swap (E7, plan.md 施工要点 4 "加入"): inserted right
+  // AFTER the seed item — "老师就在这个位置工作，邻插不跳尾" — never at the
+  // volume's end. No undo (C8/E2/E6 convention: 删除本就有撤销兜底), so the
+  // drawer stays open afterward (unlike 替换 above, the seed item itself is
+  // untouched — nothing invalidates the drawer's own anchor).
+  async function applySwapAdd(candidateGroupId: string) {
+    if (!draftPaper || !swapSeedItem) return
+    const seedIndex = draftPaper.items.findIndex((entry) => entry.id === swapSeedItem.id)
+    if (seedIndex < 0) return
+    clearReorderUndo()
+    clearReplaceUndo()
+    setSaveStatus('saving')
+    setSaveError('')
+    try {
+      const next = await addGroupToDraftPaper(draftPaper.id, candidateGroupId, { insertIndex: seedIndex + 1 })
+      setDraftPaper(next)
+      setTitleDraft(next.title)
+      setSaveStatus('saved')
+      onDraftChanged?.()
+      if (swapAddToastTimerRef.current) window.clearTimeout(swapAddToastTimerRef.current)
+      setSwapAddToastMessage('已加入草稿卷')
+      swapAddToastTimerRef.current = window.setTimeout(() => setSwapAddToastMessage(null), 2200)
+    } catch (error) {
+      setSaveStatus('error')
+      setSaveError(describeError('加入草稿卷', error))
+    }
   }
 
   async function exportPdf() {
@@ -1360,6 +1587,22 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
                       建议前置分页 · 跨页断篇
                     </button>
                   )}
+                  {/* similar-workbench-swap (E7, plan.md 施工要点 2 "⇄ 入口
+                      gate"): only the four v2-supported groupTypes get a
+                      button here — writing (and every other groupType)
+                      hides it entirely, same 隐藏式降级 convention as E6's
+                      own CTA. */}
+                  {item.questionGroup && SWAP_SUPPORTED_GROUP_TYPES.has(item.questionGroup.groupType) && (
+                    <button
+                      type="button"
+                      aria-label={swapSeedItemId === item.id ? '收起换篇' : '换一篇相似篇章'}
+                      title={swapSeedItemId === item.id ? '收起换篇' : '换一篇相似篇章'}
+                      aria-pressed={swapSeedItemId === item.id}
+                      onClick={() => handleSwapToggle(item)}
+                    >
+                      <ArrowLeftRight size={14} />
+                    </button>
+                  )}
                   <button
                     type="button"
                     aria-label="上移"
@@ -1431,6 +1674,21 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
             onMoveItem={moveItem}
             onDeleteItem={deleteItem}
             metaText={pagesMetaText}
+            swapDrawer={
+              swapSeedItem && swapRequest
+                ? {
+                    seedTitle: swapSeedItem.questionGroup?.passageTitle || swapSeedItem.questionGroup?.title || swapSeedItem.groupId,
+                    recipeSummary: similarPassagesRecipeSummary(swapSeedItem.questionGroup?.groupType || 'reading'),
+                    request: swapRequest,
+                    existingGroupIds: draftGroupIds,
+                    questionGroupById,
+                    onCollapse: handleSwapCollapse,
+                    onRetry: handleSwapRetry,
+                    onReplace: (groupId) => void applySwapReplace(groupId),
+                    onAdd: (groupId) => void applySwapAdd(groupId),
+                  }
+                : null
+            }
           />
         </section>
       </main>
@@ -1456,6 +1714,25 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
           <button type="button" onClick={() => void undoReorderSuggestion()}>
             <RotateCcw size={14} /> 撤销
           </button>
+        </div>
+      )}
+      {/* similar-workbench-swap (E7, plan.md "替换这篇...可撤销"): same
+          undo-toast shape as reorderUndoToastPresence above, keyed off
+          replaceUndoSnapshot's own presence. */}
+      {replaceUndoToastPresence.mounted && (
+        <div className="draft-undo-toast" role="status" data-visible={replaceUndoToastPresence.visible}>
+          <span>已替换这篇</span>
+          <button type="button" onClick={() => void undoSwapReplace()}>
+            <RotateCcw size={14} /> 撤销
+          </button>
+        </div>
+      )}
+      {/* similar-workbench-swap (E7, plan.md "加入...沿用「已加入」语言，
+          无撤销"): plain toast, no action button — mirrors
+          SimilarPassagesPanel's own handleAdd toast shape/timer (2200ms). */}
+      {swapAddToastPresence.rendered && (
+        <div className="draft-undo-toast" role="status" data-visible={swapAddToastPresence.visible}>
+          <span>{swapAddToastPresence.rendered}</span>
         </div>
       )}
       {savedToastPresence.rendered && (

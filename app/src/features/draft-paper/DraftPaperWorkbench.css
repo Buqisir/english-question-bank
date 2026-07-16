@@ -565,6 +565,19 @@
   border-color: var(--eqb-color-primary);
 }
 
+/* similar-workbench-swap (E7, plan.md "抽屉"): the swap drawer's own wrapper
+   — everything inside it reuses paperBrowsePage.css's `.similar-*` token
+   language verbatim (head/sub/rcard/chip/btn/pool-note, DESIGN.md §7 — no
+   new color literal here either), this rule only gives it the same flex
+   layout `.similar-passages-panel` uses minus that class's dashed
+   border-top/margin-top (which assumed sitting BELOW other panel content —
+   here the drawer fully replaces the rail's directory list instead). */
+.draft-swap-drawer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 /* 右 rail = 整卷页目录语言（参照 paperBrowsePage.css 的
    .paper-browse-rail-item 族：暖墨、无边框、hover 洗底、active 加深），
    sticky top 值沿用本文件既有的 .draft-outline-panel 先例。 */

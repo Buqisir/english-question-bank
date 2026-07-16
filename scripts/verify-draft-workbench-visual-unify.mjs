@@ -173,7 +173,13 @@ const hexMatches = [...cssSrcNoComments.matchAll(/#[0-9a-fA-F]{6}\b|#[0-9a-fA-F]
 // rules (+42 lines, token/color-mix-based only, no new hex literal) were
 // inserted right after `.draft-warning`, above both later pins — pushes
 // L398→440, L655→697; L165 sits above the edited region and is unaffected.
-const WHITELISTED_LINES = new Set([165, 440, 697])
+// similar-workbench-swap (E7): the `.draft-swap-drawer` wrapper rule
+// (+13 lines, no hex literal — its own children reuse paperBrowsePage.css's
+// `.similar-*` classes, not this file) was inserted right above the
+// `.draft-paper-rail` comment block, between the L440 pin and the
+// `.draft-undo-toast` pin — pushes L697→710; L165/L440 sit above the
+// edited region and are unaffected.
+const WHITELISTED_LINES = new Set([165, 440, 710])
 
 const unexpectedHex = hexMatches.filter(
   (m) => !(m.value.toLowerCase() === '#ffffff' && WHITELISTED_LINES.has(m.line)),

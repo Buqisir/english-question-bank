@@ -105,7 +105,16 @@ console.log('== negative grep: old error-string pattern has zero residue ==')
   // draft-docx added a 14th: exportDocx's try/catch block routes its
   // failure through describeError('导出 DOCX', error), mirroring exportPdf's
   // existing catch — also bumps catchBlocks below from 12 to 13.
-  assert('DraftPaperWorkbench.tsx uses describeError at all 14 call sites', workbenchCount === 14, `found ${workbenchCount}`)
+  // similar-workbench-swap (E7, plan.md 施工要点 5 授权清单) added 4 more —
+  // the swap drawer's fetch (describeError('加载相似篇章', error), Promise
+  // .catch style like draft-desk-b step3's pagination fetch above, so it
+  // does not bump catchBlocks either) plus three real try/catch blocks:
+  // applySwapReplace ('替换题组'), undoSwapReplace ('撤销替换'), and
+  // applySwapAdd ('加入草稿卷') — same pattern this gate exists to enforce,
+  // bumping the total from 14 to 18. similar-workbench-swap CR MF-1 修
+  // （替换改先加后删安全序）新增内层半截态 catch 的第 19 个调用点
+  // （「替换第二步（移除原篇）」）。
+  assert('DraftPaperWorkbench.tsx uses describeError at all 19 call sites', workbenchCount === 19, `found ${workbenchCount}`)
 }
 
 console.log('== MySpacePage failure-state recovery + de-duplication ==')
@@ -138,7 +147,13 @@ console.log('== DraftPaperWorkbench: errors do not clear work in progress ==')
   // describeError call-site comment above.
   // draft-docx added a 13th: exportDocx — see the describeError call-site
   // comment above.
-  assert('found catch(error) blocks to inspect', catchBlocks.length === 13, `found ${catchBlocks.length}`)
+  // similar-workbench-swap (E7) added 3 more real try/catch blocks:
+  // applySwapReplace, undoSwapReplace, applySwapAdd — see the describeError
+  // call-site comment above (the swap drawer's OWN fetch is a Promise
+  // .catch, not a try/catch, so it doesn't count here) — 13 to 16.
+  // 17 = 16 + similar-workbench-swap MF-1 的内层半截态 catch（add 成功
+  // delete 失败路径，如实呈现重复不清 draftPaper——下一断言照常覆盖它）。
+  assert('found catch(error) blocks to inspect', catchBlocks.length === 17, `found ${catchBlocks.length}`)
   const clearsState = catchBlocks.filter((block) => /setDraftPaper\(null\)|setTitleDraft\(''\)/.test(block))
   assert('no catch(error) block clears draftPaper or titleDraft', clearsState.length === 0, `${clearsState.length} block(s) clear state`)
 }
