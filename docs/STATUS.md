@@ -45,9 +45,12 @@ analysis 三字段；owner 判例表逐空拍板后修复 + verify baseline 刷�
   定义原话 + CL-1~7 入 rulings.md，审卷页就地标注）→ 回牌 3/改判重铸 5
   → 机审吸收判例（R6+白名单），suspension 归零，**第二段战役当场收官**。
   **账单**：audit DEV 255k+CR 71k；rulings DEV 152k+CR-2 77k；图卡与判例
-  主代理亲做；出场 ~10。**待 owner DP-3（裁4②）+ 部署**（与孤儿退役刀
-  后续同批）。插曲：本机 brew 半升级致 node dyld 断裂，重装 node 修复
-  （25→26.5）。
+  主代理亲做；出场 ~10。**DP-3+部署已完成（2026-07-16）**：owner 委托
+  主代理亲验（「这些你能做的」）——数据层 latest/ 8/8 + 全库 suspension 0
+  + 讲评面浏览器亲眼 8/8 + 教师版 DOCX 三重验证全过；deploy-remote.sh
+  上产 0387283（eqb+caddy active、health ok、eqbank.cc 200；retire 刀
+  已先在产线 c82643f，本批实上 R2 双刀）。插曲：本机 brew 半升级致
+  node dyld 断裂，重装 node 修复（25→26.5）。
 - 2026-07-16：**reading-analysis-retire 收官（孤儿支退役）**（merge
   af21f7c，fresh CR APPROVE 0MF/3SW，主代理 worktree 亲跑四命令真实
   退出码全 0 + main CI 双证）：RA 全支 + PI 两子面三层退净（122 文件

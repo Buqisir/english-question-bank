@@ -102,14 +102,18 @@
   亲跑四命令全绿 + main CI 双证）：回牌 3 / 改判重铸 5（忠实度 CR 逐条
   核 + 引文防幻造实证）、机审吸收判例（R6 假阳修复 + adjudications
   白名单互指 rulings.md）、库内 suspension 归零。
-- [ ] 裁4②：owner DP-3（QA 表改版：回牌题徽章恢复、改判题显新标签、
+- [x] 裁4②：owner DP-3（QA 表改版：回牌题徽章恢复、改判题显新标签、
   DOCX 正常）→ 拍板部署生产。
   - DP-3 owner 委托主代理亲验（2026-07-16「这些你能做的」）：数据层
     latest/ 8/8 判例落地 + 全库 suspension 0；讲评面浏览器亲眼 8/8
     （回牌 3 徽章恢复、改判 5 显新标签：词钩×3/对象错配/无中生有）；
     教师版 DOCX 导出 zip+XML+textutil 三重过、判例题组内容完整（
     【解析】=paperId 指针系 publisher.mjs 既有设计，非本刀回归）。
-    **QA 全过，仅剩 owner 拍板部署**（与孤儿退役刀同批）。
+  - 部署（2026-07-16 owner「发」）：deploy-remote.sh 一键上产
+    0387283——server FF pull c82643f→0387283、build 成、eqb+caddy
+    active、health ok、eqbank.cc 200。retire 刀已先在产线（c82643f
+    含 af21f7c），本批实上 R2 双刀。生产资产端点 401 系 enforced
+    模式正常（未登录不放内容），部署完整性以 FF+build 为证。
 
 ## Verify（RM 闸口径）
 
