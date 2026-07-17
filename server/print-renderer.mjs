@@ -28,11 +28,17 @@
  * (never substring) via the shared `resolveFigureMarker` — same rule
  * `paperAssetSurfaceAdapter.ts` and `docxRenderer.mjs` enforce, so the three
  * surfaces can never drift on which unit counts as "this line IS a figure".
+ *
+ * heading-fidelity cut (刀⑤ SW-B 销账, docs/cuts/heading-fidelity/plan.md):
+ * `.section-header` 拆 part/section 两态 (headingKind.mjs 单源判定, shared
+ * with docxRenderer.mjs) — 10.5pt 一律不放大, 部标题黑体加粗顶格 / 节标题
+ * 宋体常规缩进 2 字符; h1 卷名 → 20pt (标准唯一放大项).
  */
 
 import path from 'node:path'
 import { paperSurfaceTokens } from '../shared/papersurface/tokens.mjs'
 import { paperBlankPattern } from '../shared/papersurface/blankPattern.mjs'
+import { headingKind } from '../shared/papersurface/headingKind.mjs'
 import { resolveFigureMarker } from '../shared/figures/resolveFigureMarker.mjs'
 import { resolveGroupFigures } from './figures/paperFigures.mjs'
 
@@ -316,7 +322,11 @@ export function buildPrintHtml({
     let groupNum = 0
     for (const block of blocks) {
       if (block.type === 'section_header' && block.title) {
-        sections.push(`<h2 class="section-header">${escapeHtml(block.title)}</h2>`)
+        // heading-fidelity cut (Locked Decision 1/2): 部/节判定单源 —
+        // 部标题(第X部分…)黑体加粗顶格, 节标题(第X节…)宋体常规缩进 2 字符.
+        // 层级靠字重与缩进区分, 两态共用 10.5pt (标准 §2/§4 一律不放大字号).
+        const kind = headingKind(block.title)
+        sections.push(`<h2 class="section-header section-header--${kind}">${escapeHtml(block.title)}</h2>`)
       } else if (block.type === 'page_break') {
         sections.push('<div class="page-break"></div>')
       } else if (block.type === 'question_group' && block.questionGroupId) {
@@ -502,7 +512,9 @@ body {
 
 .paper-header h1 {
   font-family: ${paperSurfaceTokens.paperFontStackHeading};
-  font-size: 18pt;
+  /* heading-fidelity cut (标准 §2): 卷名「英语」20pt — the standard's
+     ONLY size-up heading; every other heading tier stays 10.5pt. */
+  font-size: 20pt;
   font-weight: bold;
   margin: 0 0 0.3em;
 }
@@ -512,12 +524,28 @@ body {
   color: #555;
 }
 
+/* heading-fidelity cut (标准 §2/§4, Locked Decision 2): 部/节共用
+   base rule (spacing / break behavior), 字重字体缩进按 --part / --section
+   两态拆分 (headingKind.mjs 单源判定) — 层级靠字重与缩进区分, 两态一律
+   10.5pt, 不放大字号 (12pt 旧值退场). */
 .section-header {
-  font-family: ${paperSurfaceTokens.paperFontStackHeading};
-  font-size: 12pt;
-  font-weight: bold;
+  font-size: 10.5pt;
   margin: 1.2em 0 0.6em;
+}
+
+.section-header--part {
+  font-family: ${paperSurfaceTokens.paperFontStackHeading};
+  font-weight: bold;
   text-indent: 0;
+  padding-left: 0;
+}
+
+.section-header--section {
+  font-family: ${paperSurfaceTokens.paperFontStackZh};
+  font-weight: normal;
+  text-indent: 0;
+  /* 标准 §4: 节标题缩进 2 字符 (10.5pt 下 1 字符 ≈ 10.5pt → 21pt). */
+  padding-left: 21pt;
 }
 
 .page-break {
@@ -537,9 +565,11 @@ body {
 }
 
 /* draft-depassage-letter cut (owner 拍板 2026-07-09): 大题号徽标+题型标签
-   ("N、题型（每题 N 分）") — 练习单气质, 与 .section-header (12pt)
-   区分字号半级, 比 .group-meta 更醒目 (它是主标, group-meta 是源卷归属
-   附注)。 */
+   ("N、题型（每题 N 分）") — 练习单气质, 比 .group-meta 更醒目 (它是主标,
+   group-meta 是源卷归属附注)。heading-fidelity cut: .section-header 的两
+   态 (part/section) 均归 10.5pt 后, .group-header 11pt 不再是"半字号区分"
+   的下位关系 — 它是 .group-header 自家不属于本刀账上的既有值 (Locked
+   Decision 4), 与 .section-header 现值无字号级差含义, 仅历史注记留存。 */
 .group-header {
   font-family: ${paperSurfaceTokens.paperFontStackHeading};
   font-size: 11pt;

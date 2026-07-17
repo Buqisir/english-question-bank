@@ -124,6 +124,43 @@ console.log('\nTest 3: CSS contract checks')
   assert('body font-family sourced from tokens (Times New Roman + STSong)', html.includes('"Times New Roman", Times, "SimSun", "Songti SC", "STSong", serif'), '')
 }
 
+// --- Test 3b: heading-fidelity (刀⑤ SW-B 销账) — part/section split, h1 20pt ---
+console.log('\nTest 3b: heading-fidelity — part/section-header split, h1 卷名 20pt')
+{
+  const headingBlocks = [
+    { type: 'section_header', title: '第一部分 阅读理解（共两节，满分50分）' },
+    { type: 'question_group', questionGroupId: 'g1', score: 2.5 },
+    { type: 'section_header', title: '第一节（共15小题；每小题2.5分，满分37.5分）' },
+    { type: 'question_group', questionGroupId: 'g2', score: 2 },
+  ]
+  const html = buildPrintHtml({ title: '2025 英语', versionType: 'student', printStyle: 'exam', items, blocks: headingBlocks, questionNumberStart: 1 })
+
+  // ① h1 卷名 20pt (标准唯一放大项), heading font stack maintained.
+  const h1Rule = html.match(/\.paper-header h1 \{[^}]*\}/)?.[0] || ''
+  assert('① h1 (卷名) CSS rule is 20pt', /font-size:\s*20pt/.test(h1Rule), h1Rule)
+  assert('① h1 rule no longer 18pt (old value retired)', !/font-size:\s*18pt/.test(h1Rule), h1Rule)
+
+  // ② part heading (第X部分…): section-header--part class, no 12pt residue.
+  assert('② part title carries section-header--part class', html.includes('<h2 class="section-header section-header--part">第一部分 阅读理解'), '')
+  const partRule = html.match(/\.section-header--part \{[^}]*\}/)?.[0] || ''
+  assert('② .section-header--part is bold, heading (Hei) font stack, no left indent', /font-weight:\s*bold/.test(partRule) && /SimHei/.test(partRule) && /padding-left:\s*0/.test(partRule), partRule)
+
+  // ③ section heading (第X节…): section-header--section class, Song stack, indented 21pt.
+  assert('③ section title carries section-header--section class', html.includes('<h2 class="section-header section-header--section">第一节'), '')
+  const sectionRule = html.match(/\.section-header--section \{[^}]*\}/)?.[0] || ''
+  assert('③ .section-header--section is regular weight, Song(SimSun) font stack, padding-left 21pt (2 字符)', !/font-weight:\s*bold/.test(sectionRule) && /SimSun/.test(sectionRule) && /padding-left:\s*21pt/.test(sectionRule), sectionRule)
+
+  // ④ shared base rule: both states sit at 10.5pt, no 12pt residue anywhere.
+  const baseRule = html.match(/\n\.section-header \{[^}]*\}/)?.[0] || ''
+  assert('④ .section-header base rule is 10.5pt (no 12pt residue)', /font-size:\s*10\.5pt/.test(baseRule), baseRule)
+  assert('④ no bare 12pt .section-header residue anywhere in emitted CSS', !/\.section-header\s*\{[^}]*font-size:\s*12pt/.test(html), '')
+
+  // ⑤ negative: a title matching neither pattern falls back to 'part' (Locked Decision 1).
+  const fallbackBlocks = [{ type: 'section_header', title: '写作' }, { type: 'question_group', questionGroupId: 'g1', score: 2.5 }]
+  const fallbackHtml = buildPrintHtml({ title: 'X', versionType: 'student', printStyle: 'exam', items, blocks: fallbackBlocks, questionNumberStart: 1 })
+  assert('⑤ non-matching title falls back to section-header--part (conservative default)', fallbackHtml.includes('<h2 class="section-header section-header--part">写作</h2>'), '')
+}
+
 // --- Test 6: Blank-marker styling (刀⑤ render-fidelity Chunk B / PA F2) ---
 console.log('\nTest 6: Blank-marker styling (paperBlankPattern, real marker shapes)')
 {

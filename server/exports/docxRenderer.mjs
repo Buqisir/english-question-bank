@@ -33,6 +33,12 @@
 // convention: an underlined run of padding spaces + centered number (2+2 for
 // cloze/grammar_cloze, 3+3 for seven_choices) — the "Word 授课/命题场景按
 // 空格法" note in the standard, mirroring Chunk B's HTML widths.
+//
+// heading-fidelity cut (刀⑤ SW-B 销账, docs/cuts/heading-fidelity/plan.md):
+// section_header run size 24/28 → 21 (10.5pt) split part/section via
+// `docxSectionHeaderParagraph` (headingKind.mjs 单源判定, shared with
+// print-renderer.mjs); 篇章标题 (detail.passage.title) size 22 → 21; 卷名
+// title run size 32 → 40 (20pt, 标准唯一放大项), both document builders.
 
 import { execFileSync } from 'node:child_process'
 import {
@@ -48,6 +54,7 @@ import { tmpdir } from 'node:os'
 import path from 'node:path'
 
 import { paperBlankPattern } from '../../shared/papersurface/blankPattern.mjs'
+import { headingKind } from '../../shared/papersurface/headingKind.mjs'
 import { resolveFigureMarker } from '../../shared/figures/resolveFigureMarker.mjs'
 import { resolveGroupFigures } from '../figures/paperFigures.mjs'
 
@@ -151,6 +158,21 @@ function paragraph(content = '', options = {}) {
   ].join('')
 
   return `<w:p>${properties ? `<w:pPr>${properties}</w:pPr>` : ''}${children}</w:p>`
+}
+
+// heading-fidelity cut (标准 §2/§4, Locked Decision 1/2/3): 部/节判定单源
+// (headingKind.mjs) 共用于两处 builder 的 section_header 渲染 — part:
+// Hei(中黑) bold 顶格; section: Song(书宋) regular 缩进 2 字符
+// (w:ind w:left="420", 与 pushDocxPassageLine 现有 firstLineIndent: 420
+// 同一 twips 值)。两态一律 size 21 (10.5pt), 不放大字号 (旧值 24/28
+// 退场)。`spacingOptions` (before/after/keepNext) 由各 builder 传入,
+// 两处历史间距值不同, 本刀不动间距, 只归标题字体/字号/缩进。
+function docxSectionHeaderParagraph(title, spacingOptions) {
+  const kind = headingKind(title)
+  if (kind === 'section') {
+    return paragraph([run(title, { size: 21 })], { ...spacingOptions, indentLeft: 420 })
+  }
+  return paragraph([run(title, { bold: true, size: 21, heading: true })], spacingOptions)
 }
 
 function docxSimpleTable(rows, { colWidths = [], headerShading = 'E5E7EB', bodyShading = 'F9FAFB' } = {}) {
@@ -759,7 +781,9 @@ function buildExamDocumentXml({ title, versionType, items, blocks, questionNumbe
   const body = []
 
   // Header: centered title, no metadata line
-  body.push(paragraph([run(title || '英语试题', { bold: true, size: 32 })], { align: 'center', after: 60 }))
+  // heading-fidelity cut (标准 §2, Locked Decision 3): 卷名唯一放大项 —
+  // size 40 (20pt), 与 print-renderer.mjs 的 h1 (20pt) 同规格。
+  body.push(paragraph([run(title || '英语试题', { bold: true, size: 40 })], { align: 'center', after: 60 }))
   if (versionType === 'teacher') {
     body.push(paragraph([run('（教师版 含答案解析）', { size: 20, color: '666666' })], { align: 'center', after: 200 }))
   } else {
@@ -808,7 +832,7 @@ function buildExamDocumentXml({ title, versionType, items, blocks, questionNumbe
 
     for (const block of blocks) {
       if (block.type === 'section_header' && block.title) {
-        body.push(paragraph([run(block.title, { bold: true, size: 24, heading: true })], { before: 280, after: 120, keepNext: true }))
+        body.push(docxSectionHeaderParagraph(block.title, { before: 280, after: 120, keepNext: true }))
       } else if (block.type === 'page_break') {
         body.push('<w:p><w:r><w:br w:type="page"/></w:r></w:p>')
       } else if (block.type === 'question_group' && block.questionGroupId) {
@@ -821,9 +845,10 @@ function buildExamDocumentXml({ title, versionType, items, blocks, questionNumbe
         // draft-depassage-letter (docs/cuts/draft-depassage-letter/plan.md):
         // retires the paper-passage-letter cut's A-D letter derivation —
         // 草稿卷是练习单非仿真卷, A/B/C/D 是源卷结构属性不该带走。取而代之
-        // 渲染大题号徽标+题型标签, 跨 section_header 不重置。size 22 (11pt) —
-        // 半级低于 section_header 的 24 (12pt), 与 print-renderer.mjs 的
-        // .group-header (11pt) 同规格。
+        // 渲染大题号徽标+题型标签, 跨 section_header 不重置。size 22 (11pt)
+        // — 属 .group-header 自家既有值 (heading-fidelity Locked Decision 4,
+        // 不属于本刀账上); section_header 归一 10.5pt 后两者已无字号级差
+        // 含义, 仅历史注记留存。
         // draft-numbering-style v2 (owner 拍板 2026-07-10 二轮改判): 大题号
         // 由阿拉伯数字改汉字, 避免与全卷连续的小题阿拉伯号同型撞层级。
         groupNum += 1
@@ -1003,7 +1028,9 @@ function buildDocumentXml({ title, versionType, items, blocks, questionNumberSta
   const totalScore = items.reduce((sum, item) => sum + item.detail.questions.length * item.score, 0)
   const body = [
     paragraph([run('ENGLISH QUESTION SET', { bold: true, size: 20, color: '6D737B' })], { align: 'center', after: 80 }),
-    paragraph([run(title, { bold: true, size: 32, heading: true })], { align: 'center', after: 100 }),
+    // heading-fidelity cut (标准 §2, Locked Decision 3): 卷名唯一放大项 —
+    // size 40 (20pt), 与 print-renderer.mjs 的 h1 (20pt) 同规格。
+    paragraph([run(title, { bold: true, size: 40, heading: true })], { align: 'center', after: 100 }),
     paragraph(`${versionLabel} · ${items.length} 题组 · ${totalQuestions} 小题 · ${totalScore.toFixed(1)} 分`, {
       align: 'center',
       after: 260,
@@ -1020,9 +1047,7 @@ function buildDocumentXml({ title, versionType, items, blocks, questionNumberSta
 
     for (const block of blocks) {
       if (block.type === 'section_header' && block.title) {
-        body.push(
-          paragraph([run(block.title, { bold: true, size: 28, heading: true })], { before: 300, after: 120, keepNext: true }),
-        )
+        body.push(docxSectionHeaderParagraph(block.title, { before: 300, after: 120, keepNext: true }))
       } else if (block.type === 'page_break') {
         body.push('<w:p><w:r><w:br w:type="page"/></w:r></w:p>')
       } else if (block.type === 'question_group' && block.questionGroupId) {
@@ -1048,7 +1073,9 @@ function buildDocumentXml({ title, versionType, items, blocks, questionNumberSta
         if (versionType === 'teacher' && note) {
           body.push(paragraph(`讲评备注：${note}`, { after: 120, shading: 'EEF2F4', size: 21 }))
         }
-        body.push(paragraph([run(detail.passage.title, { bold: true, size: 22 })], { after: 60, keepNext: true }))
+        // heading-fidelity cut (标准 §2, Locked Decision 3): 篇章标题
+        // size 22 → 21 (10.5pt, 不放大字号); Times bold 居中维持不动.
+        body.push(paragraph([run(detail.passage.title, { bold: true, size: 21 })], { after: 60, keepNext: true }))
         {
           const figuresInfo = getFiguresInfo(block.questionGroupId)
           passageLines.forEach((line) => {
@@ -1120,7 +1147,9 @@ function buildDocumentXml({ title, versionType, items, blocks, questionNumberSta
       if (versionType === 'teacher' && note) {
         body.push(paragraph(`讲评备注：${note}`, { after: 120, shading: 'EEF2F4', size: 21 }))
       }
-      body.push(paragraph([run(detail.passage.title, { bold: true, size: 22 })], { after: 60, keepNext: true }))
+      // heading-fidelity cut (标准 §2, Locked Decision 3): 篇章标题
+      // size 22 → 21 (10.5pt, 不放大字号); Times bold 居中维持不动.
+      body.push(paragraph([run(detail.passage.title, { bold: true, size: 21 })], { after: 60, keepNext: true }))
 
       {
         const figuresInfo = getFiguresInfo(detail.id)

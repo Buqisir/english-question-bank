@@ -668,6 +668,69 @@ function assertWritingBoxStarters() {
   }
 }
 
+// heading-fidelity cut (刀⑤ SW-B 销账, docs/cuts/heading-fidelity/plan.md):
+// section_header part/section split (headingKind.mjs 单源判定), 篇章标题
+// size 22 → 21, 卷名 title run size 32 → 40 (20pt) — both document builders
+// (exam + handout).
+function assertHeadingFidelity() {
+  const renderer = makeRenderer()
+  const sectionHeaderBlocks = [
+    { type: 'section_header', title: '第一部分 阅读理解（共两节，满分50分）' },
+    { type: 'question_group', questionGroupId: 'g-reading', sectionTitle: '阅读理解 A', score: 2 },
+    { type: 'section_header', title: '第一节（共15小题；每小题2.5分，满分37.5分）' },
+    { type: 'question_group', questionGroupId: 'g-grammar', sectionTitle: '语法填空', score: 1.5 },
+  ]
+
+  for (const printStyle of ['exam', 'handout']) {
+    const xml = renderer.buildDocumentXml({ title: '2025 英语', versionType: 'student', items: ITEMS, blocks: sectionHeaderBlocks, questionNumberStart: 1, printStyle })
+
+    // ① 卷名 title run: size 40 (20pt), the standard's only size-up heading.
+    assert(`(${printStyle}) 卷名 title run is size 40 (20pt)`, xml.includes('<w:t xml:space="preserve">2025 英语</w:t>') && /<w:rPr>[^<]*(?:<w:[^>]+>)*<w:b\/>(?:<w:[^>]+>)*<w:sz w:val="40"\/>[^>]*<\/w:rPr><w:t xml:space="preserve">2025 英语<\/w:t>/.test(xml), '')
+
+    // ② part heading (第X部分…): bold, SimHei rFonts, size 21, no w:ind.
+    const partRunMatch = xml.match(/<w:p>(?:(?!<w:p>).)*?第一部分 阅读理解（共两节，满分50分）(?:(?!<\/w:p>).)*?<\/w:p>/s)
+    const partParagraph = partRunMatch ? partRunMatch[0] : ''
+    assert(`(${printStyle}) part heading paragraph found`, partParagraph !== '', '')
+    assert(`(${printStyle}) part heading rFonts is SimHei/黑体`, /w:ascii="SimHei"[^>]*w:eastAsia="黑体"/.test(partParagraph), partParagraph)
+    assert(`(${printStyle}) part heading is bold, size 21 (10.5pt)`, /<w:b\/>/.test(partParagraph) && /<w:sz w:val="21"\/>/.test(partParagraph), partParagraph)
+    assert(`(${printStyle}) part heading paragraph has no w:ind (顶格, no indent)`, !/<w:ind /.test(partParagraph), partParagraph)
+
+    // ③ section heading (第X节…): regular weight, default (Times/宋体)
+    // rFonts, size 21, w:ind w:left="420" (2 字符缩进).
+    const sectionRunMatch = xml.match(/<w:p>(?:(?!<w:p>).)*?第一节（共15小题；每小题2\.5分，满分37\.5分）(?:(?!<\/w:p>).)*?<\/w:p>/s)
+    const sectionParagraph = sectionRunMatch ? sectionRunMatch[0] : ''
+    assert(`(${printStyle}) section heading paragraph found`, sectionParagraph !== '', '')
+    assert(`(${printStyle}) section heading rFonts is Times New Roman/宋体 (not SimHei)`, /w:ascii="Times New Roman"[^>]*w:eastAsia="宋体"/.test(sectionParagraph), sectionParagraph)
+    assert(`(${printStyle}) section heading is regular weight (no w:b), size 21`, !/<w:b\/>/.test(sectionParagraph) && /<w:sz w:val="21"\/>/.test(sectionParagraph), sectionParagraph)
+    assert(`(${printStyle}) section heading paragraph has w:ind w:left="420" (2 字符缩进)`, /<w:ind w:left="420"\/>/.test(sectionParagraph), sectionParagraph)
+
+    // ④ 篇章标题 (detail.passage.title, "Reading Passage"): only the
+    // handout builder renders it (exam builder has no 篇章标题 row at all —
+    // out of this cut's scope to add one). bold, size 21 (was 22/11pt).
+    if (printStyle === 'handout') {
+      assert(`(${printStyle}) 篇章标题 "Reading Passage" run is bold, size 21 (10.5pt)`, /<w:rPr>(?:<w:[^>]+>)*<w:b\/>(?:<w:[^>]+>)*<w:sz w:val="21"\/>(?:<w:[^>]+>)*<\/w:rPr><w:t xml:space="preserve">Reading Passage<\/w:t>/.test(xml), '')
+    }
+
+    // ⑤ negative: no residual old sizes (24/28 section_header, 32 卷名)
+    // anywhere in the emitted document.xml — the pre-cut values fully retired.
+    assert(`(${printStyle}) no residual w:sz 24 (old exam section_header value)`, !xml.includes('<w:sz w:val="24"/>'), '')
+    assert(`(${printStyle}) no residual w:sz 28 (old handout section_header value)`, !xml.includes('<w:sz w:val="28"/>'), '')
+    assert(`(${printStyle}) no residual w:sz 32 (old 卷名 title value)`, !xml.includes('<w:sz w:val="32"/>'), '')
+  }
+
+  // ⑥ negative: a title matching neither 部/节 pattern falls back to 'part'
+  // (Locked Decision 1, conservative default).
+  {
+    const fallbackBlocks = [
+      { type: 'section_header', title: '写作' },
+      { type: 'question_group', questionGroupId: 'g-reading', sectionTitle: '阅读理解 A', score: 2 },
+    ]
+    const xml = renderer.buildDocumentXml({ title: 'X', versionType: 'student', items: ITEMS, blocks: fallbackBlocks, questionNumberStart: 1, printStyle: 'exam' })
+    const fallbackParagraph = (xml.match(/<w:p>(?:(?!<w:p>).)*?写作(?:(?!<\/w:p>).)*?<\/w:p>/s) || [''])[0]
+    assert('⑥ non-matching title falls back to part styling (SimHei/黑体, bold, no w:ind)', /w:ascii="SimHei"[^>]*w:eastAsia="黑体"/.test(fallbackParagraph) && /<w:b\/>/.test(fallbackParagraph) && !/<w:ind /.test(fallbackParagraph), fallbackParagraph)
+  }
+}
+
 // ============================================================
 // Main
 // ============================================================
@@ -683,6 +746,7 @@ async function main() {
   await assertRealAssetBlankCounts()
   assertRealAssetFigureEmbed()
   assertWritingBoxStarters()
+  assertHeadingFidelity()
 
   // draft-numbering-style cr.md MF-1: negative case — the exam-style DOCX
   // path must REJECT a blank/question count mismatch (2 in-text blanks vs 3
