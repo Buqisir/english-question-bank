@@ -479,11 +479,13 @@ analysis 三字段；owner 判例表逐空拍板后修复 + verify baseline 刷�
   P1 随之注销——不是"迁移"而是"面本身没了"）；
   [P2] 效率轴（键盘捷径/批量加卷）owner 圈了再动；[P3] 返回措辞一主
   两例外。
-- branch-audit：**owner 已圈（2026-07-16），扫描+初判完成暂停中**——
-  全量 ~180 refs 两指标扫毕（ahead + patch-unique），~147 根零损失可删、
-  33 根逐支初判（A 组可删 / B 组 4 项需核对，含金样卷参考图抢救核查），
-  执行 runbook 已入档 `docs/cuts/branch-audit/audit-2026-07-16.md`，
-  下次会话照 runbook 直接执行，不必重扫。零改动：分支一根未动。
+- ~~branch-audit~~ ✅ 2026-07-16 执行收官：bundle 兜底备份后，本地 32 +
+  远端 124 根全删，复扫归零（两端仅剩 main）。B 组 4 项逐支核毕，唯一
+  抢救物 = 七选五选项修复 34 行补丁（bug 实核未修，存
+  `docs/cuts/branch-audit/rescued-seven-choices-option-repair.patch`，
+  随导题管线 agent 化刀评估吸收）；金样卷 12 图字节级已在 main、I20
+  旧 PO 决策已被 main 内 06-19 决策推翻、i14/i15 判决 ±0 在档。
+  执行记录见 `docs/cuts/branch-audit/audit-2026-07-16.md`。
 - 圈点注解工具（不立刀，复活条件钉死 2026-07-14）：Claude Code 面板
   选取器已覆盖当前打回需求（首战：header-unify shell 冷缝，owner 实指
   →零猜图定位）；仅当 单次 DP-3 打回≥半打条目 或 M2 同事开始给反馈

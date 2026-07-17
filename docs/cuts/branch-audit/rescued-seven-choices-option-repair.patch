@@ -1,0 +1,92 @@
+From 241a42d777f8851c8f0c9d2f385385ed122d8b8f Mon Sep 17 00:00:00 2001
+From: Buqisir <72449113+Buqisir@users.noreply.github.com>
+Date: Fri, 29 May 2026 19:19:05 -0700
+Subject: [PATCH] [WIP] fix(I2): repair seven-choices option bank on
+ duplicate/missing label
+
+DO NOT MERGE. Parked work pending a real DOCX fixture.
+
+When a seven-choices option bank has exactly one duplicate label and one
+missing label, reindex A-G in order and emit a seven_choices_option_label_repaired
+warning. Also threads a warnings array onto the parsed seven-choices group
+(conforming to the existing group.warnings contract the draft UI already reads).
+
+Deferred because the repair heuristic is only safe when the real cause is a
+label typo, not a genuinely missing option. Needs a real fixture proving the
+heuristic does not mislabel before landing. Verify-i2 is not yet green
+(package-builder bit-rot, see I-series CI-greening cut).
+---
+ server/paper-import-ai/docxSplitter.mjs | 37 +++++++++++++++++++++++--
+ 1 file changed, 34 insertions(+), 3 deletions(-)
+
+diff --git a/server/paper-import-ai/docxSplitter.mjs b/server/paper-import-ai/docxSplitter.mjs
+index a3e88fd..bba80c8 100644
+--- a/server/paper-import-ai/docxSplitter.mjs
++++ b/server/paper-import-ai/docxSplitter.mjs
+@@ -781,22 +781,52 @@ function parseSevenChoicesOptionBank(lines) {
+   }
+   if (optionLines.length < SEVEN_CHOICES_LABELS.length) return null
+ 
+-  const options = {}
++  const parsedLines = []
+   for (const line of optionLines) {
+     const match = normalizeLine(line).match(/^([A-G])[\.．、]\s*(.+)$/)
+     if (match) {
+       const label = match[1]
+       const text = compactOptionText(match[2])
+-      if (text && !options[label]) options[label] = text
++      if (text) parsedLines.push({ label, text })
+     }
+   }
+ 
++  const options = {}
++  for (const option of parsedLines) {
++    if (!options[option.label]) options[option.label] = option.text
++  }
++
+   const missingLabels = SEVEN_CHOICES_LABELS.filter((label) => !options[label])
+-  if (missingLabels.length > 0) return null
++  if (missingLabels.length > 0) {
++    const labelCounts = parsedLines.reduce((counts, option) => {
++      counts[option.label] = (counts[option.label] || 0) + 1
++      return counts
++    }, {})
++    const duplicateLabels = Object.entries(labelCounts)
++      .filter(([, count]) => count > 1)
++      .map(([label]) => label)
++    if (parsedLines.length !== SEVEN_CHOICES_LABELS.length || missingLabels.length !== 1 || duplicateLabels.length !== 1) {
++      return null
++    }
++    const repairedOptions = {}
++    parsedLines.forEach((option, index) => {
++      repairedOptions[SEVEN_CHOICES_LABELS[index]] = option.text
++    })
++    return {
++      optionBank: SEVEN_CHOICES_LABELS.map((label) => ({ label, text: repairedOptions[label] })),
++      passageLines: lines.slice(0, splitIndex),
++      warnings: [{
++        reason: 'seven_choices_option_label_repaired',
++        missingLabel: missingLabels[0],
++        duplicateLabel: duplicateLabels[0],
++      }],
++    }
++  }
+ 
+   return {
+     optionBank: SEVEN_CHOICES_LABELS.map((label) => ({ label, text: options[label] })),
+     passageLines: lines.slice(0, splitIndex),
++    warnings: [],
+   }
+ }
+ 
+@@ -843,6 +873,7 @@ function parseSevenChoicesGroup(sectionLines, { answerMap, paperTail }) {
+       order: 4,
+       paragraphs,
+       optionBank: parsed.optionBank,
++      warnings: parsed.warnings,
+       questions,
+       blankIds: questions.map((q) => q.blankId),
+     },
+-- 
+2.50.1 (Apple Git-155)
+
