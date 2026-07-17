@@ -50,7 +50,9 @@ CR-lite。
    面包屑真值 + 删除键同排 + aria-label）——`qa/dp2-content-trust.mjs`
    入档可重跑
 4. [x] merge → main CI 绿（run 29579840222，conclusion=success 双证）
-5. [ ] DP-3 owner 目检（Chrome 实看详情页/整卷页/个人空间）→ 部署
+5. [x] DP-3/部署：owner 拍板直接上产（2026-07-17「落，生产部署」；
+   目检以生产实用后置，报障即修）。生产 5cabb5c：title 真值 +
+   PNG 86718 字节一致均服务器侧实证。
 
 ## Verification
 
