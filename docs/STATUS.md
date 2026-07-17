@@ -1,8 +1,8 @@
 # 当前状态（medium / large cut 收官时更新）
 
-Last updated: 2026-07-17（dash-normalize-bank 全库破折号批修收官，
-**生产已部署 466a494** + 生产库 114 行归一带备份复跑归零：health ok、
-eqbank.cc 200）
+Last updated: 2026-07-17（heading-fidelity 收官，**生产已部署
+6eb9c3a**：health ok、eqbank.cc 200。刀⑤ render-fidelity 新账四项
+至此全清）
 
 下一步队列（2026-07-16 收状态）：① ~~design-canon-v2~~ ✅ 2026-07-16
 收官（Geist 对照三条入宪：文案法 §9 / 间距节奏法 §8 / 圆角单一家族
@@ -39,6 +39,14 @@ analysis 三字段；owner 判例表逐空拍板后修复 + verify baseline 刷�
 
 ## 主线焦点
 
+- 2026-07-17：**heading-fidelity 收官（部/节标题字号归一，刀⑤ SW-B
+  销账）**（merge 6eb9c3a，流水线 fresh CR APPROVE 1MF 当场收[qa-notes
+  归档不实订正]，verify 真退出码全 0 + main CI 绿）：print/DOCX 标题
+  10.5pt 归标（§4 不放大，卷名 20pt 唯一例外原 18pt）、部/节分家
+  （部=中黑顶格/节=书宋缩进 2 字符，headingKind.mjs 单源双面共用）、
+  草稿卷大题头 B 形态零触碰。**owner DP-3 手感三项过；生产 6eb9c3a**。
+  **账单**：流水线 268k；主代理出场 ~3。SW 挂账：篇章标题档全活路径
+  无渲染面（handout 死码既有态）见 cr.md。**刀⑤新账①②③④全清**。
 - 2026-07-17：**dash-normalize-bank 收官（全库破折号批修）**（merge
   466a494，CR-lite，verify:all 83 绿 + R2 复算逐项一致 + main CI 绿）：
   「英文em全带空格」规律全库证伪 → 116 唯一位点逐个人判成三类判法
@@ -489,7 +497,8 @@ analysis 三字段；owner 判例表逐空拍板后修复 + verify baseline 刷�
   A-G 候选句~~ ✅（数据早经后续刀补齐实核；validator 守门随
   dash-optionbank-gate 收，2026-07-16）~~②写作框段首语~~ ✅
   writing-box-starters 收官~~④破折号归一~~ ✅ 同日收（均见主线焦点）
-  ；**仅剩 ③部标题字号归一小刀**。三项低置信待 owner 实物复核
+  ~~③部标题字号归一~~ ✅ 2026-07-17
+  heading-fidelity 收官——**四项全清**。三项低置信待 owner 实物复核
   （题号句点/语法空线长/边距名义值），不阻塞。
 - UI 复评（2026-07-08，六刀后）：26 → **31/40**（快照
   `.impeccable/critique/`）。剩余：~~[P1] 两个未迁移解析孪生面

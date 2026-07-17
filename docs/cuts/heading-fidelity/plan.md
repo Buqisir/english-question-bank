@@ -72,5 +72,5 @@ section_header run size 24（12pt，两处 builder），篇章标题 size 22
   （DEV 2026-07-17：verify-print-renderer 92/92、verify-h5g-docx-renderer
   148/148、verify-draft-paper-docx 16/16、`pnpm -C app run verify:all`
   83 pass/1 skip(off-repo fixture)/0 fail；样张见 qa/qa-notes.md）
-- [ ] DP-3 owner 实卷目检（渲染刀铁律）：部/节字重缩进层级对不对眼、
-  10.5pt 后标题会不会显得弱、卷名 20pt 观感
+- [x] DP-3 owner 实卷目检 ✅ 2026-07-17「没问题」（PDF+DOCX 样张，
+  部/节层级、10.5pt 强弱、卷名 20pt 三项手感全过）
