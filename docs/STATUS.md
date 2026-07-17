@@ -1,8 +1,8 @@
 # 当前状态（medium / large cut 收官时更新）
 
-Last updated: 2026-07-16 晚（writing-box-starters + dash-optionbank-gate
-双刀收官，**生产已部署 48c1116** + 生产库 normalize SQL 已应用带备份：
-health ok、eqbank.cc 200）
+Last updated: 2026-07-17（dash-normalize-bank 全库破折号批修收官，
+**生产已部署 466a494** + 生产库 114 行归一带备份复跑归零：health ok、
+eqbank.cc 200）
 
 下一步队列（2026-07-16 收状态）：① ~~design-canon-v2~~ ✅ 2026-07-16
 收官（Geist 对照三条入宪：文案法 §9 / 间距节奏法 §8 / 圆角单一家族
@@ -39,6 +39,14 @@ analysis 三字段；owner 判例表逐空拍板后修复 + verify baseline 刷�
 
 ## 主线焦点
 
+- 2026-07-17：**dash-normalize-bank 收官（全库破折号批修）**（merge
+  466a494，CR-lite，verify:all 83 绿 + R2 复算逐项一致 + main CI 绿）：
+  「英文em全带空格」规律全库证伪 → 116 唯一位点逐个人判成三类判法
+  （复合词连字符 13 组[回源 raw 实锤源卷自带]/区间 en-dash 不空 4 组/
+  从句「 – 」默认），33 卷 asset 75 文件 + DB 119 行，残留双侧归零、
+  幂等零变化、quote 断链零新增。工具固化 `scripts/normalize-dashes.mjs`
+  （--db-only 供产线）。**生产 466a494 + 库 114 行带备份复跑归零**。
+  主代理直做零子代理。详见 `docs/cuts/dash-normalize-bank/cut-note.md`。
 - 2026-07-16 晚：**writing-box-starters + dash-optionbank-gate 双刀收官**
   （merge a6227a2/22cfb2a，流水线 fresh CR APPROVE 0MF/5SW + 数据刀
   CR-lite，verify 真退出码全 0×2 + main CI 双证；刀⑤新账 ①②④ 三项
