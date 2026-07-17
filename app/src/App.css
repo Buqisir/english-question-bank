@@ -4232,21 +4232,18 @@ button:disabled {
   align-items: flex-start;
   gap: 8px;
   margin: 16px 0 0;
-  /* home-editorial round 2 — emil 展开处方: 200ms ease-out on mount (the
-     panel is conditionally rendered, not height-transitioned; the global
-     prefers-reduced-motion reset already covers this animation). */
-  animation: concierge-filter-panel-in var(--motion-slow) var(--ease-out);
+  /* 复评工艺账 keyframe→transition：入退同轴（data-visible + usePresence
+     延迟卸载），退出（本规则 motion-micro）快于入场（[data-visible='true']
+     覆盖回原 motion-slow 展开处方；global reduced-motion reset covers）。 */
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity var(--motion-micro) var(--ease-out), transform var(--motion-micro) var(--ease-out);
 }
 
-@keyframes concierge-filter-panel-in {
-  from {
-    opacity: 0;
-    transform: translateY(-4px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.concierge-filter-row[data-visible='true'] {
+  opacity: 1;
+  transform: translateY(0);
+  transition-duration: var(--motion-slow);
 }
 
 .concierge-filter-dim-row {

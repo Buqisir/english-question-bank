@@ -179,7 +179,13 @@ const hexMatches = [...cssSrcNoComments.matchAll(/#[0-9a-fA-F]{6}\b|#[0-9a-fA-F]
 // `.draft-paper-rail` comment block, between the L440 pin and the
 // `.draft-undo-toast` pin — pushes L697→710; L165/L440 sit above the
 // edited region and are unaffected.
-const WHITELISTED_LINES = new Set([165, 440, 710])
+// craft-polish: re-pinned again — the export/more menu keyframe→transition
+// rewrite (keyframe block -14 lines, data-visible rules +18 lines) and the
+// `.draft-reorder-suggestion` side-stripe→full-border comment (+2, no new
+// hex) land between L165 and the later pins — net +8 pushes L440→448,
+// L710→718; `.draft-export-menu-trigger`'s at L165 sits above every edited
+// region and is unaffected.
+const WHITELISTED_LINES = new Set([165, 448, 718])
 
 const unexpectedHex = hexMatches.filter(
   (m) => !(m.value.toLowerCase() === '#ffffff' && WHITELISTED_LINES.has(m.line)),

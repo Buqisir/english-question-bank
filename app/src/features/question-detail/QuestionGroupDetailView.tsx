@@ -25,7 +25,7 @@
  *        on-expand panel (carried over verbatim from similar-passages-entry
  *        E6 — App.tsx has no host fetch to piggyback on for either group).
  */
-import { useEffect, useState, type CSSProperties, type MouseEvent, type ReactNode } from 'react'
+import { useEffect, useRef, useState, type CSSProperties, type MouseEvent, type ReactNode } from 'react'
 import {
   ArrowLeft,
   BookOpen,
@@ -210,9 +210,42 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
   const paperId = parsePaperIdFromHref(selectedDetail?.paperSurfaceHref)
   const [load, setLoad] = useState<LoadState>({ status: 'loading' })
   const [expanded, setExpanded] = useState(false)
+  // 复评工艺账（2026-07-17 C 路）：340px→none 不可插值，展开曾是硬跳。
+  // 量高手风琴：过渡目标用 scrollHeight 实测值，播完放开成 none（后续内容
+  // 增高不被夹）；收起先钉住当前高再回落 340。reduced-motion 由全局
+  // kill-switch 覆盖（过渡即时，行为同旧）。
+  const clipRef = useRef<HTMLDivElement | null>(null)
+  const clipTimerRef = useRef<number | null>(null)
+
+  function toggleExpanded(next: boolean): void {
+    const clip = clipRef.current
+    if (clip) {
+      if (clipTimerRef.current !== null) window.clearTimeout(clipTimerRef.current)
+      clip.style.maxHeight = `${clip.scrollHeight}px`
+      if (next) {
+        // 260ms > --motion-slow(220ms)：过渡播完后放开
+        clipTimerRef.current = window.setTimeout(() => {
+          clip.style.maxHeight = 'none'
+          clipTimerRef.current = null
+        }, 260)
+      } else {
+        void clip.offsetHeight
+        clip.style.maxHeight = ''
+      }
+    }
+    setExpanded(next)
+  }
+
+  useEffect(
+    () => () => {
+      if (clipTimerRef.current !== null) window.clearTimeout(clipTimerRef.current)
+    },
+    [],
+  )
 
   useEffect(() => {
     setExpanded(false)
+    if (clipRef.current) clipRef.current.style.maxHeight = ''
     if (!selectedDetail) return
     const detail = selectedDetail
     if (!paperId) {
@@ -495,15 +528,17 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
         )}
 
         <div className={`peek-paper${expanded ? ' peek-paper--expanded' : ''}`} style={psTokenStyle}>
-          <div className="peek-paper-clip">{paperBody}</div>
+          <div className="peek-paper-clip" ref={clipRef}>
+            {paperBody}
+          </div>
           {load.status === 'ready' && !expanded && (
-            <button className="peek-expand" type="button" onClick={() => setExpanded(true)}>
+            <button className="peek-expand" type="button" onClick={() => toggleExpanded(true)}>
               <ChevronDown size={15} />
               展开卷面
             </button>
           )}
           {load.status === 'ready' && expanded && (
-            <button className="peek-expand peek-expand--collapse" type="button" onClick={() => setExpanded(false)}>
+            <button className="peek-expand peek-expand--collapse" type="button" onClick={() => toggleExpanded(false)}>
               <ChevronUp size={15} />
               收起卷面
             </button>

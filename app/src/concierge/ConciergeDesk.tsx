@@ -31,6 +31,7 @@ import type {
   ConciergeRetrievalView,
 } from './useConciergeDesk.ts'
 import { fetchSimilarPassages } from '../services/similarQuestions.ts'
+import { usePresence } from '../features/shared/useToastPresence.ts'
 import type { SimilarPassagesRequestState } from '../features/similar-passages/SimilarPassagesPanel'
 import './ConciergeDesk.css'
 
@@ -348,6 +349,9 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
   // above (which only governs the nested 地区/来源 progressive disclosure
   // once the panel itself is open).
   const [filterPanelExpanded, setFilterPanelExpanded] = useState(false)
+  // 复评工艺账（2026-07-17 C 路）：面板入场有 keyframe、关闭裸卸载。
+  // usePresence 延迟卸载补退场，退（motion-micro）快于入（motion-slow）。
+  const filterPanelPresence = usePresence(filterPanelExpanded, 80)
   const filterPanelId = useId()
   const activeFilterCount = [
     filters.groupType,
@@ -690,8 +694,13 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
           home-editorial round 2 — 好默认: additionally gated on the
           command-line "筛选" toggle (`filterPanelExpanded`), default
           collapsed. */}
-      {!dataLoading && (state.kind === 'empty' || state.kind === 'results') && filterPanelExpanded && (
-        <div className="concierge-filter-row" id={filterPanelId} aria-label="结构化筛选">
+      {!dataLoading && (state.kind === 'empty' || state.kind === 'results') && filterPanelPresence.mounted && (
+        <div
+          className="concierge-filter-row"
+          id={filterPanelId}
+          aria-label="结构化筛选"
+          data-visible={filterPanelPresence.visible}
+        >
           {visibleFilterDims.map((dimension) => (
             <div key={dimension} className="concierge-filter-dim-row">
               <span className="concierge-filter-dim-label">{FILTER_DIM_LABEL[dimension]}</span>

@@ -140,6 +140,11 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   // "⋯" menu in the head row — same disclosure pattern as exportMenuOpen
   // above (outside-click + Escape dismiss effect below).
   const [moreMenuOpen, setMoreMenuOpen] = useState(false)
+  // 复评工艺账（2026-07-17 C 路）：菜单入场有 keyframe、关闭裸卸载=可感的
+  // 不对称。与 toast/模态同走 usePresence——退（motion-micro）快于入
+  // （motion-fast），播完 exit 再卸载。
+  const exportMenuPresence = usePresence(exportMenuOpen, 80)
+  const moreMenuPresence = usePresence(moreMenuOpen, 80)
   const titleSaveTimerRef = useRef<number | null>(null)
   const undoTimerRef = useRef<number | null>(null)
   const focusedOnceRef = useRef(false)
@@ -1333,8 +1338,8 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       >
         导出
       </button>
-      {exportMenuOpen && (
-        <div className="draft-export-menu-panel" role="menu">
+      {exportMenuPresence.mounted && (
+        <div className="draft-export-menu-panel" role="menu" data-visible={exportMenuPresence.visible}>
           <button
             type="button"
             role="menuitem"
@@ -1415,8 +1420,8 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
             >
               <MoreHorizontal size={16} />
             </button>
-            {moreMenuOpen && (
-              <div className="draft-more-menu-panel" role="menu">
+            {moreMenuPresence.mounted && (
+              <div className="draft-more-menu-panel" role="menu" data-visible={moreMenuPresence.visible}>
                 <label className="draft-student-field">
                   <span>学生（可选）</span>
                   <input

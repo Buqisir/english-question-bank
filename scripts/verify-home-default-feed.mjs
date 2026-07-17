@@ -366,9 +366,14 @@ console.log('\nTest 25: home-editorial round 2 — 命令行一行 (search + thi
   const desk = readSrc('app/src/concierge/ConciergeDesk.tsx')
   assert('concierge-command-bar wraps the intent bar', /concierge-command-bar/.test(desk), '')
   assert('filter panel state defaults collapsed', /const \[filterPanelExpanded, setFilterPanelExpanded\] = useState\(false\)/.test(desk), '')
+  // craft-polish 锚授权更新: the render guard now goes through
+  // usePresence(filterPanelExpanded, …).mounted for the exit transition —
+  // default-collapsed semantics unchanged (presence wraps the same
+  // filterPanelExpanded state, asserted separately above).
   assert(
-    'filter row additionally gated on filterPanelExpanded (好默认: default collapsed)',
-    /state\.kind === ['"]results['"]\) && filterPanelExpanded && \(/.test(desk),
+    'filter row additionally gated on filterPanelExpanded via presence (好默认: default collapsed)',
+    /state\.kind === ['"]results['"]\) && filterPanelPresence\.mounted && \(/.test(desk) &&
+      /const filterPanelPresence = usePresence\(filterPanelExpanded, \d+\)/.test(desk),
     '',
   )
   assert('command-line filter toggle carries aria-expanded={filterPanelExpanded}', /aria-expanded=\{filterPanelExpanded\}/.test(desk), '')

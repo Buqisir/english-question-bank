@@ -36,7 +36,9 @@ if (await page.locator('#login-username').count()) {
   await page.fill('#login-username', USER)
   await page.fill('#login-password', PASS)
   await page.click('button.login-submit')
-  await page.waitForLoadState('networkidle')
+  // networkidle 会在登录 POST 在飞时提前放行，下一个 goto 把它打断
+  // （2026-07-17 实测）——等「退出」钮这个登录态确定性信号。
+  await page.locator('button', { hasText: '退出' }).first().waitFor({ timeout: 15000 })
 }
 
 // ①② 详情页

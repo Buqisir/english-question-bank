@@ -175,22 +175,14 @@
   transform: scale(0.97);
 }
 
-/* emil-processing: entrance for the dropdown — same mount-only keyframe
-   convention as pi-basket-preview-popover / paper-insertion-menu, since
-   this panel fully unmounts via `{exportMenuOpen && ...}`. Origin sits at
-   the trigger's right edge (panel is right-anchored via `right: 0`). */
-@keyframes draft-export-menu-panel-in {
-  from {
-    opacity: 0;
-    transform: translateY(-2px) scale(0.98);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
+/* 复评工艺账 keyframe→transition：入退同轴（data-visible + usePresence
+   延迟卸载），退出（本规则 motion-micro）快于入场（[data-visible='true']
+   覆盖成 motion-fast）。Origin sits at the trigger's right edge (panel is
+   right-anchored via `right: 0`). */
 .draft-export-menu-panel {
+  opacity: 0;
+  transform: translateY(-2px) scale(0.98);
+  transition: opacity var(--motion-micro) var(--ease-out), transform var(--motion-micro) var(--ease-out);
   background: var(--panel);
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -206,7 +198,12 @@
   top: 100%;
   transform-origin: top right;
   z-index: 20;
-  animation: draft-export-menu-panel-in var(--motion-fast) var(--ease-out);
+}
+
+.draft-export-menu-panel[data-visible='true'] {
+  opacity: 1;
+  transform: scale(1);
+  transition-duration: var(--motion-fast);
 }
 
 .draft-export-menu-panel button {
@@ -279,7 +276,16 @@
   top: 100%;
   transform-origin: top right;
   z-index: 20;
-  animation: draft-export-menu-panel-in var(--motion-fast) var(--ease-out);
+  /* 复评工艺账：同 .draft-export-menu-panel 的入退对称制 */
+  opacity: 0;
+  transform: translateY(-2px) scale(0.98);
+  transition: opacity var(--motion-micro) var(--ease-out), transform var(--motion-micro) var(--ease-out);
+}
+
+.draft-more-menu-panel[data-visible='true'] {
+  opacity: 1;
+  transform: scale(1);
+  transition-duration: var(--motion-fast);
 }
 
 /* Locked Decision 5 窄屏退化补充: only shown ≤980px, where the wide-row
@@ -321,8 +327,10 @@
 .draft-reorder-suggestion {
   align-items: center;
   background: color-mix(in srgb, var(--eqb-color-danger) 8%, var(--eqb-color-paper));
-  border-left: 3px solid var(--eqb-color-danger);
-  border-radius: 0 8px 8px 0;
+  /* 复评工艺账：side-stripe（border-left 3px）→ 全边框+对称圆角，警示由
+     底色 tint 承担（安静卡本意不变；改动 shipped 视觉，DP-3 owner 有否决权） */
+  border: 1px solid color-mix(in srgb, var(--eqb-color-danger) 35%, transparent);
+  border-radius: 8px;
   color: var(--paper-ink);
   display: flex;
   font-size: 13.5px;

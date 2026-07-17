@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
+import { scrollBehavior } from '../shared/reducedMotionScroll.ts'
 import type {
   SevenChoicesChainView,
   SevenChoicesMechanismSignal,
@@ -59,7 +60,7 @@ export function SevenChoicesAnalysisPanel({
     const target = optionCardRefs.current[label]
     target?.scrollIntoView({
       block: 'center',
-      behavior: 'smooth',
+      behavior: scrollBehavior(),
     })
     flashOption(label)
   }
