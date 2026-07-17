@@ -67,7 +67,7 @@ continuationStarters`，如 paper-2026-i 两句俱在），屏幕写作页已显
 ## DP 裁决点清单
 
 - [x] DP-1 立项（owner 2026-07-16「听你的建议」圈定本刀先行）
-- [ ] DP-2 流水线 verify 全绿（真实退出码）+ DEV 用 paper-2026-i 真
+- [x] DP-2 流水线 verify 全绿（真实退出码）+ DEV 用 paper-2026-i 真
   asset 出 PDF/DOCX 样张入档 `docs/cuts/writing-box-starters/qa/`
-- [ ] DP-3 owner 实卷目检（渲染刀铁律，刀⑤教训）：PDF+DOCX 双版本看
+- [ ] DP-3 owner 实卷目检（样张已入档 qa/，等 owner）——（渲染刀铁律，刀⑤教训）：PDF+DOCX 双版本看
   段首语位置/字体/不撞框/第二句 50% 处起笔
