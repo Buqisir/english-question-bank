@@ -285,15 +285,15 @@
             },
             {
               "paragraphId": "para-2023-ii-reading-a-9",
-              "text": "Enhance your photography skills — join Yellowstone’s park photographer for a hands-on program to inspire new and creative ways of enjoying the beauty and wonder of Yellowstone."
+              "text": "Enhance your photography skills – join Yellowstone’s park photographer for a hands-on program to inspire new and creative ways of enjoying the beauty and wonder of Yellowstone."
             },
             {
               "paragraphId": "para-2023-ii-reading-a-10",
-              "text": "6/19 — Waterfalls &Wide Angles: meet at Artist Point."
+              "text": "6/19 – Waterfalls &Wide Angles: meet at Artist Point."
             },
             {
               "paragraphId": "para-2023-ii-reading-a-11",
-              "text": "7/10 — Wildflowers &White Balance: meet at Washburn Trailhead in Chittenden parking area."
+              "text": "7/10 – Wildflowers &White Balance: meet at Washburn Trailhead in Chittenden parking area."
             }
           ]
         }
@@ -347,15 +347,15 @@
           "paragraphs": [
             {
               "paragraphId": "para-2023-ii-reading-c-1",
-              "text": "Reading Art: Art for Book Lovers is a celebration of an everyday object — the book, represented here in almost three hundred artworks from museums around the world. The image of the reader appears throughout history, in art made long before books as we now know them came into being. In artists’ representations of books and reading, we see moments of shared humanity that go beyond culture and time."
+              "text": "Reading Art: Art for Book Lovers is a celebration of an everyday object – the book, represented here in almost three hundred artworks from museums around the world. The image of the reader appears throughout history, in art made long before books as we now know them came into being. In artists’ representations of books and reading, we see moments of shared humanity that go beyond culture and time."
             },
             {
               "paragraphId": "para-2023-ii-reading-c-2",
-              "text": "In this “book of books,” artworks are selected and arranged in a way that emphasizes these connections between different eras and cultures. We see scenes of children learning to read at home or at school, with the book as a focus for relations between the generations. Adults are portrayed (描绘) alone in many settings and poses —absorbed in a volume, deep in thought or lost in a moment of leisure. These scenes may have been painted hundreds of years ago, but they record moments we can all relate to."
+              "text": "In this “book of books,” artworks are selected and arranged in a way that emphasizes these connections between different eras and cultures. We see scenes of children learning to read at home or at school, with the book as a focus for relations between the generations. Adults are portrayed (描绘) alone in many settings and poses – absorbed in a volume, deep in thought or lost in a moment of leisure. These scenes may have been painted hundreds of years ago, but they record moments we can all relate to."
             },
             {
               "paragraphId": "para-2023-ii-reading-c-3",
-              "text": "Books themselves may be used symbolically in paintings to demonstrate the intellect (才智) , wealth or faith of the subject. Before the wide use of the printing press, books were treasured objects and could be works of art in their own right. More recently, as books have become inexpensive or even throwaway, artists have used them as the raw material for artworks — transforming covers, pages or even complete volumes into paintings and sculptures."
+              "text": "Books themselves may be used symbolically in paintings to demonstrate the intellect (才智) , wealth or faith of the subject. Before the wide use of the printing press, books were treasured objects and could be works of art in their own right. More recently, as books have become inexpensive or even throwaway, artists have used them as the raw material for artworks – transforming covers, pages or even complete volumes into paintings and sculptures."
             },
             {
               "paragraphId": "para-2023-ii-reading-c-4",
@@ -2238,7 +2238,7 @@
             "status": "wrong",
             "trap": {
               "primaryType": "entityMismatch",
-              "sourceQuote": "Enhance your photography skills — join Yellowstone’s park photographer for a hands-on program to inspire new and creative ways of enjoying the beauty and wonder of Yellowstone.",
+              "sourceQuote": "Enhance your photography skills – join Yellowstone’s park photographer for a hands-on program to inspire new and creative ways of enjoying the beauty and wonder of Yellowstone.",
               "sourceEntity": "Photography Workshops",
               "optionText": "Basic photography skills.",
               "optionEntity": "the short talk at Artist Point",
@@ -2298,7 +2298,7 @@
             "status": "wrong",
             "trap": {
               "primaryType": "entityMismatch",
-              "sourceQuote": "6/19 — Waterfalls &Wide Angles: meet at Artist Point.",
+              "sourceQuote": "6/19 – Waterfalls &Wide Angles: meet at Artist Point.",
               "sourceEntity": "6/19 workshop",
               "optionText": "Artist Point.",
               "optionEntity": "the July 10 photography workshop",
@@ -2307,7 +2307,7 @@
             "trapEvidence": [
               {
                 "paragraphId": "para-2023-ii-reading-a-10",
-                "quote": "6/19 — Waterfalls &Wide Angles: meet at Artist Point.",
+                "quote": "6/19 – Waterfalls &Wide Angles: meet at Artist Point.",
                 "anchor": "Artist Point 属 6/19 场次"
               }
             ]
@@ -2320,7 +2320,7 @@
               {
                 "role": "primary",
                 "paragraphId": "para-2023-ii-reading-a-11",
-                "quote": "7/10 — Wildflowers &White Balance: meet at Washburn Trailhead in Chittenden parking area.",
+                "quote": "7/10 – Wildflowers &White Balance: meet at Washburn Trailhead in Chittenden parking area.",
                 "anchor": "7/10 场次在 Washburn Trailhead 集合"
               }
             ]
@@ -2370,7 +2370,7 @@
           {
             "sourceText": "the July 10 photography workshop",
             "sourceRole": "stem",
-            "targetText": "7/10 — Wildflowers &White Balance: meet at Washburn Trailhead in Chittenden parking area.",
+            "targetText": "7/10 – Wildflowers &White Balance: meet at Washburn Trailhead in Chittenden parking area.",
             "targetParagraphId": "para-2023-ii-reading-a-11",
             "relationType": "locationCue",
             "note": "题干 July 10 对应原文日期写法 7/10，定位到该场摄影工作坊的集合信息。"
@@ -2737,7 +2737,7 @@
               {
                 "role": "primary",
                 "paragraphId": "para-2023-ii-reading-c-1",
-                "quote": "Reading Art: Art for Book Lovers is a celebration of an everyday object — the book, represented here in almost three hundred artworks from museums around the world.",
+                "quote": "Reading Art: Art for Book Lovers is a celebration of an everyday object – the book, represented here in almost three hundred artworks from museums around the world.",
                 "anchor": "开篇介绍《Reading Art》这本书"
               },
               {
@@ -2784,7 +2784,7 @@
             "trap": {
               "primaryType": "scopeShift",
               "subtype": "overstatement",
-              "sourceQuote": "More recently, as books have become inexpensive or even throwaway, artists have used them as the raw material for artworks — transforming covers, pages or even complete volumes into paintings and sculptures.",
+              "sourceQuote": "More recently, as books have become inexpensive or even throwaway, artists have used them as the raw material for artworks – transforming covers, pages or even complete volumes into paintings and sculptures.",
               "sourceHighlight": "transforming covers, pages or even complete volumes into paintings and sculptures",
               "optionText": "A review of modern paintings.",
               "optionHighlight": "A review of modern paintings",
@@ -2803,7 +2803,7 @@
           {
             "sourceText": "An introduction to a book.",
             "sourceRole": "correctOption",
-            "targetText": "Reading Art: Art for Book Lovers is a celebration of an everyday object — the book, represented here in almost three hundred artworks from museums around the world.",
+            "targetText": "Reading Art: Art for Book Lovers is a celebration of an everyday object – the book, represented here in almost three hundred artworks from museums around the world.",
             "targetParagraphId": "para-2023-ii-reading-c-1",
             "relationType": "locationCue",
             "note": "正确选项 An introduction to a book 对应原文开篇直接介绍《Reading Art》这本书的内容与选材，是典型的图书导言（introduction）写法。"

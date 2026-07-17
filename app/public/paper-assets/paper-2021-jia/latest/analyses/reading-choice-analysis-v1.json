@@ -1011,7 +1011,7 @@
             {
               "role": "primary",
               "paragraphId": "para-2021-jia-reading-d-3",
-              "quote": "When contributions were made by geniuses outside the club—women, or people of a different color or belief—they were unacknowledged and rejected by others.",
+              "quote": "When contributions were made by geniuses outside the club – women, or people of a different color or belief – they were unacknowledged and rejected by others.",
               "anchor": "俱乐部之外的天才贡献被忽视和拒绝"
             },
             {
@@ -1039,7 +1039,7 @@
           "trap": {
             "primaryType": "polarityReversal",
             "subtype": "oppositeAttitude",
-            "sourceQuote": "When contributions were made by geniuses outside the club—women, or people of a different color or belief—they were unacknowledged and rejected by others.",
+            "sourceQuote": "When contributions were made by geniuses outside the club – women, or people of a different color or belief – they were unacknowledged and rejected by others.",
             "sourceHighlight": "unacknowledged and rejected",
             "optionText": "They're objective.",
             "optionHighlight": "objective",
@@ -1252,7 +1252,7 @@
             {
               "role": "supporting",
               "paragraphId": "para-2021-jia-reading-d-3",
-              "quote": "When contributions were made by geniuses outside the club—women, or people of a different color or belief",
+              "quote": "When contributions were made by geniuses outside the club – women, or people of a different color or belief",
               "anchor": "天才也来自俱乐部之外的多元群体"
             }
           ]

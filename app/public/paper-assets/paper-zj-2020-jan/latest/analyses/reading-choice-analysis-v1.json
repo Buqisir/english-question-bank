@@ -179,7 +179,7 @@
           "status": "wrong",
           "trap": {
             "primaryType": "entityMismatch",
-            "sourceQuote": "My mother shared this feeling of mine... I remember her reading a magazine while taking the part of the Wolf in a game of “Little Red Riding Hood” with my brother’s two daughters. She’d just look up at the right time, long enough to answer—in character—“The better to eat you with, my dear,” and go back to her place in the magazine.",
+            "sourceQuote": "My mother shared this feeling of mine... I remember her reading a magazine while taking the part of the Wolf in a game of “Little Red Riding Hood” with my brother’s two daughters. She’d just look up at the right time, long enough to answer – in character – “The better to eat you with, my dear,” and go back to her place in the magazine.",
             "sourceEntity": "My mother（母亲）",
             "optionText": "Humorous.",
             "optionEntity": "Mrs. Calloway",
@@ -896,15 +896,15 @@
           "status": "wrong",
           "trap": {
             "primaryType": "sourceLexicalTrap",
-            "sourceText": "This particular study examined 11 to 14—year—olds living in two—parent homes.",
+            "sourceText": "This particular study examined 11 to 14-year-olds living in two-parent homes.",
             "optionText": "Children aged from 11 to 14.",
             "matchType": "exact",
-            "relationNote": "原文 11 to 14—year—olds 指的是“本次研究已经考察”的对象，而非“未来研究”的对象；选项借这一年龄段的原文词钩误导，把已研究群体当成未来研究群体。"
+            "relationNote": "原文 11 to 14-year-olds 指的是“本次研究已经考察”的对象，而非“未来研究”的对象；选项借这一年龄段的原文词钩误导，把已研究群体当成未来研究群体。"
           },
           "trapEvidence": [
             {
               "paragraphId": "para-zj-2020-jan-reading-c-6",
-              "quote": "This particular study examined 11 to 14—year—olds living in two—parent homes.",
+              "quote": "This particular study examined 11 to 14-year-olds living in two-parent homes.",
               "anchor": "本研究已考察 11–14 岁孩子"
             }
           ]
@@ -926,7 +926,7 @@
           "trap": {
             "primaryType": "unsupportedClaim",
             "claim": "Mothers in two-parent homes can be a focus of future studies.",
-            "explanation": "原文虽提到 two—parent homes，但只是说明本研究对象生活在双亲家庭，并未提出把“双亲家庭中的母亲”作为未来研究方向；该群体在未来研究语境中原文未提及。"
+            "explanation": "原文虽提到 two-parent homes，但只是说明本研究对象生活在双亲家庭，并未提出把“双亲家庭中的母亲”作为未来研究方向；该群体在未来研究语境中原文未提及。"
           }
         }
       ],

@@ -1242,7 +1242,7 @@
           "trap": {
             "primaryType": "scopeShift",
             "subtype": "overstatement",
-            "sourceQuote": "the research didn’t include all types of plastics. The team focused only on three common types — polystyrene, polyethylene and polypropylene",
+            "sourceQuote": "the research didn’t include all types of plastics. The team focused only on three common types – polystyrene, polyethylene and polypropylene",
             "sourceHighlight": "three common types",
             "optionText": "The type of plastic in water.",
             "optionHighlight": "The type of plastic in water",
@@ -1307,7 +1307,7 @@
             {
               "role": "supporting",
               "paragraphId": "para-2025-i-reading-d-4",
-              "quote": "reducing microplastic exposure — a task that’s becoming increasingly difficult",
+              "quote": "reducing microplastic exposure – a task that’s becoming increasingly difficult",
               "anchor": "减少微塑料暴露愈发困难"
             }
           ]
@@ -1329,7 +1329,7 @@
           "trap": {
             "primaryType": "scopeShift",
             "subtype": "overgeneralization",
-            "sourceQuote": "reducing microplastic exposure — a task that’s becoming increasingly difficult",
+            "sourceQuote": "reducing microplastic exposure – a task that’s becoming increasingly difficult",
             "sourceHighlight": "increasingly difficult",
             "optionText": "The difficulty in treating polluted water.",
             "optionHighlight": "difficulty in treating polluted water",

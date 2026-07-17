@@ -293,7 +293,7 @@
             },
             {
               "paragraphId": "para-2024-i-reading-a-11",
-              "text": "UPCOMING EVENTS \n Time \n Meeting Location \n Sunday, Jan. 15   10:00 am — 1:00 pm \n Battery Alexander Trailhead \n Sunday, Jan. 22   10:00 am — 2:30 pm \n Stinson Beach Parking Lot \n Sunday, Jan. 29   9:30 am — 2:30 pm \n Coyote Ridge Trailhead"
+              "text": "UPCOMING EVENTS \n Time \n Meeting Location \n Sunday, Jan. 15   10:00 am – 1:00 pm \n Battery Alexander Trailhead \n Sunday, Jan. 22   10:00 am – 2:30 pm \n Stinson Beach Parking Lot \n Sunday, Jan. 29   9:30 am – 2:30 pm \n Coyote Ridge Trailhead"
             }
           ]
         }
@@ -347,7 +347,7 @@
             },
             {
               "paragraphId": "para-2024-i-reading-c-2",
-              "text": "When reading texts of several hundred words or more, learning is generally more successful when it’s on paper than onscreen. A large amount of research confirms this finding. The benefits of print reading particularly shine through when experimenters move from posing simple tasks — like identifying the main idea in a reading passage — to ones that require mental abstraction — such as drawing inferences from a text."
+              "text": "When reading texts of several hundred words or more, learning is generally more successful when it’s on paper than onscreen. A large amount of research confirms this finding. The benefits of print reading particularly shine through when experimenters move from posing simple tasks – like identifying the main idea in a reading passage – to ones that require mental abstraction – such as drawing inferences from a text."
             },
             {
               "paragraphId": "para-2024-i-reading-c-3",
@@ -359,7 +359,7 @@
             },
             {
               "paragraphId": "para-2024-i-reading-c-5",
-              "text": "Audio (音频) and video can feel more engaging than text, and so university teachers increasingly turn to these technologies — say, assigning an online talk instead of an article by the same person. However, psychologists have demonstrated that when adults read news stories, they remember more of the content than if they listen to or view identical pieces."
+              "text": "Audio (音频) and video can feel more engaging than text, and so university teachers increasingly turn to these technologies – say, assigning an online talk instead of an article by the same person. However, psychologists have demonstrated that when adults read news stories, they remember more of the content than if they listen to or view identical pieces."
             },
             {
               "paragraphId": "para-2024-i-reading-c-6",
@@ -406,7 +406,7 @@
             },
             {
               "paragraphId": "para-2024-i-reading-d-7",
-              "text": "“Quite a lot,” Daru explained. “Biodiversity apps can use our study results to inform users of oversampled areas and lead them to places — and even species — that are not well-sampled. To improve the quality of observational data, biodiversity apps can also encourage users to have an expert confirm the identification of their uploaded image.”"
+              "text": "“Quite a lot,” Daru explained. “Biodiversity apps can use our study results to inform users of oversampled areas and lead them to places – and even species – that are not well-sampled. To improve the quality of observational data, biodiversity apps can also encourage users to have an expert confirm the identification of their uploaded image.”"
             }
           ]
         }
@@ -526,11 +526,11 @@
           "paragraphs": [
             {
               "paragraphId": "para-2024-i-cloze-title",
-              "text": "I’ve been motivated — and demotivated — by other folks’ achievements all my life."
+              "text": "I’ve been motivated – and demotivated – by other folks’ achievements all my life."
             },
             {
               "paragraphId": "para-2024-i-cloze-p1",
-              "text": "When I was a teenager, a neighborhood friend __41__ a marathon race. Feeling motivated, I started running __42__ , but then two things happened. First, a girl I met one day told me she was __43__ for a “super,” referring to a 52.4-mile double marathon. Then, the next day I went on my longest run — 15 miles. To be honest, I __44__ it! Between the girl making my __45__ seem small and the pure boredom of jogging, I decided that the only __46__ I’d ever run again is if a big dog was running after me!"
+              "text": "When I was a teenager, a neighborhood friend __41__ a marathon race. Feeling motivated, I started running __42__ , but then two things happened. First, a girl I met one day told me she was __43__ for a “super,” referring to a 52.4-mile double marathon. Then, the next day I went on my longest run – 15 miles. To be honest, I __44__ it! Between the girl making my __45__ seem small and the pure boredom of jogging, I decided that the only __46__ I’d ever run again is if a big dog was running after me!"
             },
             {
               "paragraphId": "para-2024-i-cloze-p2",
@@ -2729,7 +2729,7 @@
               {
                 "role": "secondary",
                 "paragraphId": "para-2024-i-reading-c-2",
-                "quote": "to ones that require mental abstraction — such as drawing inferences from a text.",
+                "quote": "to ones that require mental abstraction – such as drawing inferences from a text.",
                 "anchor": "需心理抽象的任务中优势更明显"
               }
             ]
@@ -3203,8 +3203,8 @@
             "trap": {
               "primaryType": "scopeShift",
               "subtype": "conditionRemoved",
-              "sourceQuote": "Biodiversity apps can use our study results to inform users of oversampled areas and lead them to places — and even species — that are not well-sampled.",
-              "sourceHighlight": "lead them to places — and even species — that are not well-sampled",
+              "sourceQuote": "Biodiversity apps can use our study results to inform users of oversampled areas and lead them to places – and even species – that are not well-sampled.",
+              "sourceHighlight": "lead them to places – and even species – that are not well-sampled",
               "optionText": "Review data from certain areas.",
               "optionHighlight": "Review data from certain areas",
               "explanation": "原文建议是告知用户过度采样区域并引导其前往采样不足的地方，而非审查（review）特定区域的数据，选项偷换了建议的具体内容。"
@@ -3212,7 +3212,7 @@
             "trapEvidence": [
               {
                 "paragraphId": "para-2024-i-reading-d-7",
-                "quote": "Biodiversity apps can use our study results to inform users of oversampled areas and lead them to places — and even species — that are not well-sampled.",
+                "quote": "Biodiversity apps can use our study results to inform users of oversampled areas and lead them to places – and even species – that are not well-sampled.",
                 "anchor": "引导用户前往采样不足之处"
               }
             ]
@@ -3265,7 +3265,7 @@
               {
                 "role": "primary",
                 "paragraphId": "para-2024-i-reading-d-7",
-                "quote": "Biodiversity apps can use our study results to inform users of oversampled areas and lead them to places — and even species — that are not well-sampled.",
+                "quote": "Biodiversity apps can use our study results to inform users of oversampled areas and lead them to places – and even species – that are not well-sampled.",
                 "anchor": "告知用户并引导前往采样不足之处"
               },
               {
@@ -3281,7 +3281,7 @@
           {
             "sourceText": "Give guidance to citizen scientists",
             "sourceRole": "correctOption",
-            "targetText": "inform users of oversampled areas and lead them to places — and even species — that are not well-sampled",
+            "targetText": "inform users of oversampled areas and lead them to places – and even species – that are not well-sampled",
             "targetParagraphId": "para-2024-i-reading-d-7",
             "relationType": "paraphrase",
             "note": "正确选项 Give guidance 是原文 inform users... and lead them to places 的同义替换；结合第五段 users 即 citizen scientists，可知指导对象为公民科学家。"

@@ -1082,7 +1082,7 @@
             {
               "role": "primary",
               "paragraphId": "para-2021-yi-reading-d-1",
-              "quote": "That’s why I have a membership at the coworking space across the street—so I can focus.",
+              "quote": "That’s why I have a membership at the coworking space across the street – so I can focus.",
               "anchor": "so I can focus"
             }
           ]
@@ -1165,7 +1165,7 @@
           "trap": {
             "primaryType": "polarityReversal",
             "subtype": "oppositeTrend",
-            "sourceQuote": "the right level of background noise—not too loud and not total silence—may actually improve one’s creative thinking ability",
+            "sourceQuote": "the right level of background noise – not too loud and not total silence – may actually improve one’s creative thinking ability",
             "sourceHighlight": "not total silence",
             "optionText": "Total silence.",
             "optionHighlight": "Total silence",
@@ -1174,7 +1174,7 @@
           "trapEvidence": [
             {
               "paragraphId": "para-2021-yi-reading-d-3",
-              "quote": "the right level of background noise—not too loud and not total silence—may actually improve one’s creative thinking ability",
+              "quote": "the right level of background noise – not too loud and not total silence – may actually improve one’s creative thinking ability",
               "anchor": "not total silence"
             }
           ]
@@ -1206,13 +1206,13 @@
             {
               "role": "primary",
               "paragraphId": "para-2021-yi-reading-d-2",
-              "quote": "the participants in the 70 decibels group—those exposed to a level of noise similar to background chatter in a coffee shop—significantly outperformed the other groups",
+              "quote": "the participants in the 70 decibels group – those exposed to a level of noise similar to background chatter in a coffee shop – significantly outperformed the other groups",
               "anchor": "70 decibels group ... significantly outperformed"
             },
             {
               "role": "support",
               "paragraphId": "para-2021-yi-reading-d-3",
-              "quote": "since the results at 70 decibels were significant, the study also suggests that the right level of background noise—not too loud and not total silence—may actually improve one’s creative thinking ability",
+              "quote": "since the results at 70 decibels were significant, the study also suggests that the right level of background noise – not too loud and not total silence – may actually improve one’s creative thinking ability",
               "anchor": "results at 70 decibels were significant"
             }
           ]
@@ -1241,7 +1241,7 @@
         {
           "sourceText": "Which level of background noise may promote creative thinking ability?",
           "sourceRole": "stem",
-          "targetText": "the participants in the 70 decibels group—those exposed to a level of noise similar to background chatter in a coffee shop—significantly outperformed the other groups",
+          "targetText": "the participants in the 70 decibels group – those exposed to a level of noise similar to background chatter in a coffee shop – significantly outperformed the other groups",
           "targetParagraphId": "para-2021-yi-reading-d-2",
           "relationType": "locationCue",
           "note": "题干的 promote creative thinking ability 对应原文 70 分贝组 significantly outperformed the other groups（明显胜过其他组），据此定位答案为70分贝。"

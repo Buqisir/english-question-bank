@@ -334,7 +334,7 @@
           "status": "wrong",
           "trap": {
             "primaryType": "entityMismatch",
-            "sourceQuote": "Tickets: £12—£96Jodie’s Fitness Summer Classes",
+            "sourceQuote": "Tickets: £12–£96Jodie’s Fitness Summer Classes",
             "sourceEntity": "£12",
             "optionText": "£12.",
             "optionEntity": "£12.",
@@ -343,7 +343,7 @@
           "trapEvidence": [
             {
               "paragraphId": "para-2021-ii-reading-a-5",
-              "quote": "Tickets: £12—£96",
+              "quote": "Tickets: £12–£96",
               "anchor": "音乐节票价区间"
             }
           ]
@@ -367,7 +367,7 @@
           "status": "wrong",
           "trap": {
             "primaryType": "entityMismatch",
-            "sourceQuote": "Tickets: £12—£96Jodie’s Fitness Summer Classes",
+            "sourceQuote": "Tickets: £12–£96Jodie’s Fitness Summer Classes",
             "sourceEntity": "£96",
             "optionText": "£96.",
             "optionEntity": "£96.",
@@ -376,7 +376,7 @@
           "trapEvidence": [
             {
               "paragraphId": "para-2021-ii-reading-a-5",
-              "quote": "Tickets: £12—£96",
+              "quote": "Tickets: £12–£96",
               "anchor": "音乐节票价区间"
             }
           ]
@@ -407,7 +407,7 @@
           "trap": {
             "primaryType": "scopeShift",
             "subtype": "overstatement",
-            "sourceQuote": "Dates: 1 June—31 July",
+            "sourceQuote": "Dates: 1 June – 31 July",
             "sourceHighlight": "1 June",
             "optionText": "Harrogate Music Festival.",
             "optionHighlight": "Harrogate Music Festival.",
@@ -416,7 +416,7 @@
           "trapEvidence": [
             {
               "paragraphId": "para-2021-ii-reading-a-4",
-              "quote": "Dates: 1 June—31 July",
+              "quote": "Dates: 1 June – 31 July",
               "anchor": "音乐节起始日6月1日"
             }
           ]
@@ -428,7 +428,7 @@
           "trap": {
             "primaryType": "scopeShift",
             "subtype": "overstatement",
-            "sourceQuote": "Dates: 23 May—11 July",
+            "sourceQuote": "Dates: 23 May – 11 July",
             "sourceHighlight": "23 May",
             "optionText": "Jodie's Fitness Summer Classes.",
             "optionHighlight": "Jodie's Fitness Summer Classes.",
@@ -437,7 +437,7 @@
           "trapEvidence": [
             {
               "paragraphId": "para-2021-ii-reading-a-8",
-              "quote": "Dates: 23 May—11 July",
+              "quote": "Dates: 23 May – 11 July",
               "anchor": "健身课程起始日5月23日"
             }
           ]
@@ -449,7 +449,7 @@
           "trap": {
             "primaryType": "scopeShift",
             "subtype": "overstatement",
-            "sourceQuote": "Dates: 12 June—12 July",
+            "sourceQuote": "Dates: 12 June – 12 July",
             "sourceHighlight": "12 June",
             "optionText": "Felt Picture Making.",
             "optionHighlight": "Felt Picture Making.",
@@ -458,7 +458,7 @@
           "trapEvidence": [
             {
               "paragraphId": "para-2021-ii-reading-a-12",
-              "quote": "Dates: 12 June—12 July",
+              "quote": "Dates: 12 June – 12 July",
               "anchor": "毛毡画起始日6月12日"
             }
           ]
@@ -471,7 +471,7 @@
             {
               "role": "primary",
               "paragraphId": "para-2021-ii-reading-a-16",
-              "quote": "Dates: 7 May—10 June",
+              "quote": "Dates: 7 May – 10 June",
               "anchor": "展览起始日5月7日"
             }
           ]
@@ -481,7 +481,7 @@
         {
           "sourceText": "starts earliest",
           "sourceRole": "stem",
-          "targetText": "Dates: 7 May—10 June",
+          "targetText": "Dates: 7 May – 10 June",
           "targetParagraphId": "para-2021-ii-reading-a-16",
           "relationType": "calculation",
           "note": "题干 starts earliest 需比较各活动 Dates 起始日，数学展览的 7 May 早于 1 June、23 May、12 June，故最早。"
@@ -909,7 +909,7 @@
           "status": "wrong",
           "trap": {
             "primaryType": "entityMismatch",
-            "sourceQuote": "children are talking to someone they are inspired by—their eyes are shining and their faces light up",
+            "sourceQuote": "children are talking to someone they are inspired by – their eyes are shining and their faces light up",
             "sourceEntity": "children are talking to someone they are inspired by",
             "optionText": "It opens children's mind.",
             "optionEntity": "the teaching of the arts opens children's mind",
@@ -1036,7 +1036,7 @@
             {
               "role": "secondary",
               "paragraphId": "para-2021-ii-reading-c-3",
-              "quote": "getting artists of any sort—whether an up-and-coming local musician or a major movie star—into schools to work with and inspire children",
+              "quote": "getting artists of any sort – whether an up-and-coming local musician or a major movie star – into schools to work with and inspire children",
               "anchor": "把各类艺术家请进学校"
             }
           ]
@@ -1307,7 +1307,7 @@
           "trap": {
             "primaryType": "polarityReversal",
             "subtype": "oppositeAttitude",
-            "sourceQuote": "Years of experience in the industry—and failed attempts to use technology—have convinced him that the best way to check cattle is with a man on a horse.",
+            "sourceQuote": "Years of experience in the industry – and failed attempts to use technology – have convinced him that the best way to check cattle is with a man on a horse.",
             "sourceHighlight": "Years of experience in the industry",
             "optionText": "He is inexperienced in using robots.",
             "optionHighlight": "inexperienced",
@@ -1316,7 +1316,7 @@
           "trapEvidence": [
             {
               "paragraphId": "para-2021-ii-reading-d-4",
-              "quote": "Years of experience in the industry—and failed attempts to use technology—have convinced him that the best way to check cattle is with a man on a horse.",
+              "quote": "Years of experience in the industry – and failed attempts to use technology – have convinced him that the best way to check cattle is with a man on a horse.",
               "anchor": "多年经验且尝试过技术"
             }
           ]

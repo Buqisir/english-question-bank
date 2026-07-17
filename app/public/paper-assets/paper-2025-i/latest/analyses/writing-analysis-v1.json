@@ -33,7 +33,7 @@
     "group-2025-i-writing-continuation": {
       "writing": {
         "taskType": "continuation",
-        "modelAnswer": "I realized it was me who was at fault. I had awaited an apology, too proud to see the truth. My brother had lost his wife, his health was failing, and Toby was the one companion keeping him going — yet I had shut that faithful dog out in the rain, and my brother out with him. Shame washed over me as cold as that evening downpour. Had a tidy backyard mattered more than my own brother? No sooner had the thought struck than I knew what to do.\nWith the biscuits my wife had made, I arrived at my brother's door. Before I could knock, Toby came bounding around the corner, his tail moving happily, and pressed his wet nose into my hand as if he had forgiven me long ago. My brother followed, and neither of us spoke. \"I should have called you that very night,\" I said, my voice shaking. His eyes softened, and he pulled me into a long, silent hug. Around us circled Toby — the ball of fire that had once divided us, now bringing us together.",
+        "modelAnswer": "I realized it was me who was at fault. I had awaited an apology, too proud to see the truth. My brother had lost his wife, his health was failing, and Toby was the one companion keeping him going – yet I had shut that faithful dog out in the rain, and my brother out with him. Shame washed over me as cold as that evening downpour. Had a tidy backyard mattered more than my own brother? No sooner had the thought struck than I knew what to do.\nWith the biscuits my wife had made, I arrived at my brother's door. Before I could knock, Toby came bounding around the corner, his tail moving happily, and pressed his wet nose into my hand as if he had forgiven me long ago. My brother followed, and neither of us spoke. \"I should have called you that very night,\" I said, my voice shaking. His eyes softened, and he pulled me into a long, silent hug. Around us circled Toby – the ball of fire that had once divided us, now bringing us together.",
         "continuationDesign": {
           "theme": "放下傲慢与控制欲、体谅至亲的孤独：亲情比体面的“井井有条”更重要。",
           "paragraphs": [
@@ -43,7 +43,7 @@
         },
         "highlightExpressions": [
           {
-            "text": "Toby was the one companion keeping him going — yet I had shut that faithful dog out in the rain, and my brother out with him",
+            "text": "Toby was the one companion keeping him going – yet I had shut that faithful dog out in the rain, and my brother out with him",
             "note": "心理+情节翻转句：用破折号制造转折，前半化用原文‘陪伴/支撑’的信息、后半用 shut...out 的平行结构（dog out / brother out）点出‘我’真正赶走的是弟弟。迁移到‘醒悟自己伤害了至亲’类续写，把抽象自责落到具体动作与对比上。"
           },
           {
@@ -59,7 +59,7 @@
             "note": "动作链+独立主格+虚拟：came bounding…and pressed… 串起连续动作，his tail moving happily 为独立主格补充画面，as if he had forgiven 用虚拟赋予动物以情感。迁移到写动物/人物登场的生动瞬间，一句话兼顾动作、细节与情绪暗示。"
           },
           {
-            "text": "Around us circled Toby — the ball of fire that had once divided us, now bringing us together",
+            "text": "Around us circled Toby – the ball of fire that had once divided us, now bringing us together",
             "note": "点题呼应句（全倒装 + 同位语对比）：Around us circled… 部分倒装聚焦镜头，破折号后用‘曾分裂—如今团聚’的对照直接回扣原文核心意象 ball of fire。迁移到结尾用原文反复出现的意象完成首尾呼应与主题升华。"
           }
         ]

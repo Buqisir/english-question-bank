@@ -813,7 +813,7 @@
             {
               "role": "primary",
               "paragraphId": "para-2024-jia-reading-c-1",
-              "quote": "The Saint Lukas train doesn’t accept passengers — it accepts only the sick.",
+              "quote": "The Saint Lukas train doesn’t accept passengers – it accepts only the sick.",
               "anchor": "accepts only the sick"
             },
             {
@@ -856,10 +856,10 @@
         {
           "sourceText": "different from other trains",
           "sourceRole": "stem",
-          "targetText": "The Saint Lukas train doesn’t accept passengers — it accepts only the sick.",
+          "targetText": "The Saint Lukas train doesn’t accept passengers – it accepts only the sick.",
           "targetParagraphId": "para-2024-jia-reading-c-1",
           "relationType": "locationCue",
-          "note": "题干问与普通列车的不同，原文用 doesn’t accept passengers — it accepts only the sick 点明其不载乘客、只接病人的独特之处。"
+          "note": "题干问与普通列车的不同，原文用 doesn’t accept passengers – it accepts only the sick 点明其不载乘客、只接病人的独特之处。"
         }
       ]
     },

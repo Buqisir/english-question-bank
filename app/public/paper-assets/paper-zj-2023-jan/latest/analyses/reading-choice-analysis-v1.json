@@ -30,27 +30,27 @@
           },
           {
             "paragraphId": "para-zj-2023-jan-reading-a-2",
-            "summary": "面向 5—13 岁儿童的全日制营地。",
+            "summary": "面向 5 – 13 岁儿童的全日制营地。",
             "function": "说明适用年龄。"
           },
           {
             "paragraphId": "para-zj-2023-jan-reading-a-3",
-            "summary": "时间为 7 月 8—26 日的周一至周五，每天 9 点至 16 点。",
+            "summary": "时间为 7 月 8 – 26 日的周一至周五，每天 9 点至 16 点。",
             "function": "说明总体开放时间。"
           },
           {
             "paragraphId": "para-zj-2023-jan-reading-a-4",
-            "summary": "第 1 周：7 月 8—12 日。",
+            "summary": "第 1 周：7 月 8 – 12 日。",
             "function": "列出可报名的第一周。"
           },
           {
             "paragraphId": "para-zj-2023-jan-reading-a-5",
-            "summary": "第 2 周：7 月 15—19 日。",
+            "summary": "第 2 周：7 月 15 – 19 日。",
             "function": "列出可报名的第二周。"
           },
           {
             "paragraphId": "para-zj-2023-jan-reading-a-6",
-            "summary": "第 3 周：7 月 22—26 日。",
+            "summary": "第 3 周：7 月 22 – 26 日。",
             "function": "列出可报名的第三周。"
           },
           {
@@ -441,7 +441,7 @@
           "targetText": "a three-hour morning class engaging with a morning theme (9 am to 12 noon) and a one-hour lunch break, followed by another three-hour class",
           "targetParagraphId": "para-zj-2023-jan-reading-a-10",
           "relationType": "calculation",
-          "note": "题干问 hours of class，须排除 one-hour lunch break：每天 3+3=6 小时课，Monday--Friday 共 5 天，6×5=30 小时。"
+          "note": "题干问 hours of class，须排除 one-hour lunch break：每天 3+3=6 小时课，Monday – Friday 共 5 天，6×5=30 小时。"
         }
       ]
     },

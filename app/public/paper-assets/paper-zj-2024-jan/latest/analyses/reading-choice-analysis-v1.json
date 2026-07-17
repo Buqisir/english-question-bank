@@ -745,7 +745,7 @@
           "status": "wrong",
           "trap": {
             "primaryType": "entityMismatch",
-            "sourceQuote": "But farmers in east-central Alberta — downwind (下风处)   of the hail project flights — worry that precious moisture (水分) is being stolen from their thirsty land by the cloud seeding.",
+            "sourceQuote": "But farmers in east-central Alberta – downwind (下风处)   of the hail project flights – worry that precious moisture (水分) is being stolen from their thirsty land by the cloud seeding.",
             "sourceEntity": "farmers worry that precious moisture is being stolen",
             "optionText": "Conserve moisture in the soil.",
             "optionEntity": "Conserve moisture in the soil",
@@ -828,7 +828,7 @@
             {
               "role": "primary",
               "paragraphId": "para-zj-2024-jan-reading-c-1",
-              "quote": "But farmers in east-central Alberta — downwind (下风处)   of the hail project flights — worry that precious moisture (水分) is being stolen from their thirsty land by the cloud seeding.",
+              "quote": "But farmers in east-central Alberta – downwind (下风处)   of the hail project flights – worry that precious moisture (水分) is being stolen from their thirsty land by the cloud seeding.",
               "anchor": "中东部农民担心水分被偷走"
             },
             {

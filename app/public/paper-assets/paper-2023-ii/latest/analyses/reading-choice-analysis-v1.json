@@ -327,7 +327,7 @@
           "status": "wrong",
           "trap": {
             "primaryType": "entityMismatch",
-            "sourceQuote": "Enhance your photography skills — join Yellowstone’s park photographer for a hands-on program to inspire new and creative ways of enjoying the beauty and wonder of Yellowstone.",
+            "sourceQuote": "Enhance your photography skills – join Yellowstone’s park photographer for a hands-on program to inspire new and creative ways of enjoying the beauty and wonder of Yellowstone.",
             "sourceEntity": "Photography Workshops",
             "optionText": "Basic photography skills.",
             "optionEntity": "the short talk at Artist Point",
@@ -387,7 +387,7 @@
           "status": "wrong",
           "trap": {
             "primaryType": "entityMismatch",
-            "sourceQuote": "6/19 — Waterfalls &Wide Angles: meet at Artist Point.",
+            "sourceQuote": "6/19 – Waterfalls &Wide Angles: meet at Artist Point.",
             "sourceEntity": "6/19 workshop",
             "optionText": "Artist Point.",
             "optionEntity": "the July 10 photography workshop",
@@ -396,7 +396,7 @@
           "trapEvidence": [
             {
               "paragraphId": "para-2023-ii-reading-a-10",
-              "quote": "6/19 — Waterfalls &Wide Angles: meet at Artist Point.",
+              "quote": "6/19 – Waterfalls &Wide Angles: meet at Artist Point.",
               "anchor": "Artist Point 属 6/19 场次"
             }
           ]
@@ -409,7 +409,7 @@
             {
               "role": "primary",
               "paragraphId": "para-2023-ii-reading-a-11",
-              "quote": "7/10 — Wildflowers &White Balance: meet at Washburn Trailhead in Chittenden parking area.",
+              "quote": "7/10 – Wildflowers &White Balance: meet at Washburn Trailhead in Chittenden parking area.",
               "anchor": "7/10 场次在 Washburn Trailhead 集合"
             }
           ]
@@ -459,7 +459,7 @@
         {
           "sourceText": "the July 10 photography workshop",
           "sourceRole": "stem",
-          "targetText": "7/10 — Wildflowers &White Balance: meet at Washburn Trailhead in Chittenden parking area.",
+          "targetText": "7/10 – Wildflowers &White Balance: meet at Washburn Trailhead in Chittenden parking area.",
           "targetParagraphId": "para-2023-ii-reading-a-11",
           "relationType": "locationCue",
           "note": "题干 July 10 对应原文日期写法 7/10，定位到该场摄影工作坊的集合信息。"
@@ -826,7 +826,7 @@
             {
               "role": "primary",
               "paragraphId": "para-2023-ii-reading-c-1",
-              "quote": "Reading Art: Art for Book Lovers is a celebration of an everyday object — the book, represented here in almost three hundred artworks from museums around the world.",
+              "quote": "Reading Art: Art for Book Lovers is a celebration of an everyday object – the book, represented here in almost three hundred artworks from museums around the world.",
               "anchor": "开篇介绍《Reading Art》这本书"
             },
             {
@@ -873,7 +873,7 @@
           "trap": {
             "primaryType": "scopeShift",
             "subtype": "overstatement",
-            "sourceQuote": "More recently, as books have become inexpensive or even throwaway, artists have used them as the raw material for artworks — transforming covers, pages or even complete volumes into paintings and sculptures.",
+            "sourceQuote": "More recently, as books have become inexpensive or even throwaway, artists have used them as the raw material for artworks – transforming covers, pages or even complete volumes into paintings and sculptures.",
             "sourceHighlight": "transforming covers, pages or even complete volumes into paintings and sculptures",
             "optionText": "A review of modern paintings.",
             "optionHighlight": "A review of modern paintings",
@@ -892,7 +892,7 @@
         {
           "sourceText": "An introduction to a book.",
           "sourceRole": "correctOption",
-          "targetText": "Reading Art: Art for Book Lovers is a celebration of an everyday object — the book, represented here in almost three hundred artworks from museums around the world.",
+          "targetText": "Reading Art: Art for Book Lovers is a celebration of an everyday object – the book, represented here in almost three hundred artworks from museums around the world.",
           "targetParagraphId": "para-2023-ii-reading-c-1",
           "relationType": "locationCue",
           "note": "正确选项 An introduction to a book 对应原文开篇直接介绍《Reading Art》这本书的内容与选材，是典型的图书导言（introduction）写法。"

@@ -132,9 +132,9 @@
       "evidence": [
         {
           "type": "collocation-partner",
-          "signalText": "difficult—and often",
+          "signalText": "difficult – and often",
           "signalSide": "context-before",
-          "targetText": "difficult—and often dangerous",
+          "targetText": "difficult – and often dangerous",
           "relation": "and often 把空格与 difficult 并列，需填与“困难”同向且更进一步的负面形容词 dangerous。"
         },
         {

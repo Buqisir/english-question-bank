@@ -398,7 +398,7 @@
           "status": "wrong",
           "trap": {
             "primaryType": "sourceLexicalTrap",
-            "sourceText": "fur—coat—wearing film stars",
+            "sourceText": "fur-coat-wearing film stars",
             "optionText": "To see famous film stars.",
             "matchType": "wordFamily",
             "relationNote": "原文出现 film stars 仅用于说明保护者并非来向穿皮草的影星泼红漆，选项借用 film stars 一词制造干扰，实际并非聚集目的。"
@@ -406,7 +406,7 @@
           "trapEvidence": [
             {
               "paragraphId": "para-2020-bing-reading-b-1",
-              "quote": "But they weren’t there to throw red paint on fur—coat—wearing film stars.",
+              "quote": "But they weren’t there to throw red paint on fur-coat-wearing film stars.",
               "anchor": "they weren’t there to throw red paint on film stars"
             }
           ]
@@ -418,8 +418,8 @@
           "trap": {
             "primaryType": "polarityReversal",
             "subtype": "oppositeAction",
-            "sourceQuote": "But they weren’t there to throw red paint on fur—coat—wearing film stars.",
-            "sourceHighlight": "weren’t there to throw red paint on fur—coat—wearing film stars",
+            "sourceQuote": "But they weren’t there to throw red paint on fur-coat-wearing film stars.",
+            "sourceHighlight": "weren’t there to throw red paint on fur-coat-wearing film stars",
             "optionText": "To oppose wearing fur coats.",
             "optionHighlight": "To oppose wearing fur coats",
             "explanation": "原文明确说他们并不是来向穿皮草的影星泼红漆（即并非来抗议穿皮草），选项却说他们是来反对穿皮草，与原文相反。"
@@ -427,7 +427,7 @@
           "trapEvidence": [
             {
               "paragraphId": "para-2020-bing-reading-b-1",
-              "quote": "But they weren’t there to throw red paint on fur—coat—wearing film stars.",
+              "quote": "But they weren’t there to throw red paint on fur-coat-wearing film stars.",
               "anchor": "weren’t there to … fur-coat-wearing film stars"
             }
           ]
@@ -450,7 +450,7 @@
             {
               "role": "primary",
               "paragraphId": "para-2020-bing-reading-b-1",
-              "quote": "one activist, dressed in a full—body monkey suit, had arrived with a sign praising the filmmakers:“Thanks for not using real apes (猿) !”",
+              "quote": "one activist, dressed in a full-body monkey suit, had arrived with a sign praising the filmmakers:“Thanks for not using real apes (猿) !”",
               "anchor": "a sign praising the filmmakers: Thanks for not using real apes"
             }
           ]
@@ -503,7 +503,7 @@
             {
               "role": "primary",
               "paragraphId": "para-2020-bing-reading-b-2",
-              "quote": "The creative team behind Apes used motion—capture (动作捕捉) technology to create digitalized animals",
+              "quote": "The creative team behind Apes used motion – capture (动作捕捉) technology to create digitalized animals",
               "anchor": "used motion-capture technology to create digitalized animals"
             },
             {
@@ -549,7 +549,7 @@
         {
           "sourceText": "The creation of digitalized apes.",
           "sourceRole": "correctOption",
-          "targetText": "used motion—capture (动作捕捉) technology to create digitalized animals",
+          "targetText": "used motion – capture (动作捕捉) technology to create digitalized animals",
           "targetParagraphId": "para-2020-bing-reading-b-2",
           "relationType": "paraphrase",
           "note": "选项 creation of digitalized apes 对应原文 create digitalized animals 及末句 a realisticlooking ape，是段落主旨的同义概括。"
@@ -633,7 +633,7 @@
             {
               "role": "primary",
               "paragraphId": "para-2020-bing-reading-b-4",
-              "quote": "it’s the off—set training and living conditions that are raising concerns",
+              "quote": "it’s the off-set training and living conditions that are raising concerns",
               "anchor": "off-set training and living conditions that are raising concerns"
             },
             {
@@ -650,7 +650,7 @@
           "status": "wrong",
           "trap": {
             "primaryType": "sourceLexicalTrap",
-            "sourceText": "it’s the off—set training and living conditions that are raising concerns",
+            "sourceText": "it’s the off-set training and living conditions that are raising concerns",
             "optionText": "They should take further training.",
             "matchType": "wordFamily",
             "relationNote": "原文 training 是指片场外的训练与生活条件令人担忧，选项借 training 一词制造干扰，曲解为动物应接受进一步训练。"
@@ -658,7 +658,7 @@
           "trapEvidence": [
             {
               "paragraphId": "para-2020-bing-reading-b-4",
-              "quote": "it’s the off—set training and living conditions that are raising concerns",
+              "quote": "it’s the off-set training and living conditions that are raising concerns",
               "anchor": "off-set training and living conditions"
             }
           ]
@@ -688,7 +688,7 @@
         {
           "sourceText": "They may be badly treated.",
           "sourceRole": "correctOption",
-          "targetText": "it’s the off—set training and living conditions that are raising concerns",
+          "targetText": "it’s the off-set training and living conditions that are raising concerns",
           "targetParagraphId": "para-2020-bing-reading-b-4",
           "relationType": "paraphrase",
           "note": "由 off-set training and living conditions are raising concerns 及海外拍摄 not monitored as closely 可推断动物演员可能受到不当对待（badly treated）。"
@@ -1059,8 +1059,8 @@
           "trap": {
             "primaryType": "scopeShift",
             "subtype": "understatement",
-            "sourceQuote": "Cattle—raising people in East Africa and northern Europe have gained a mutation (突变) that helps them digest milk as adults.",
-            "sourceHighlight": "Cattle—raising people in East Africa and northern Europe",
+            "sourceQuote": "Cattle-raising people in East Africa and northern Europe have gained a mutation (突变) that helps them digest milk as adults.",
+            "sourceHighlight": "Cattle-raising people in East Africa and northern Europe",
             "optionText": "Environmental adaptation of cattle raisers.",
             "optionHighlight": "cattle raisers",
             "explanation": "养牛者只是第一段众多例子之一，把整段举例的总目的缩小为单个例子，以偏概全，未抓住'人类进化'这一总观点。"
@@ -1068,7 +1068,7 @@
           "trapEvidence": [
             {
               "paragraphId": "para-2020-bing-reading-d-1",
-              "quote": "Cattle—raising people in East Africa and northern Europe have gained a mutation (突变) that helps them digest milk as adults.",
+              "quote": "Cattle-raising people in East Africa and northern Europe have gained a mutation (突变) that helps them digest milk as adults.",
               "anchor": "养牛者只是其中一例"
             }
           ]

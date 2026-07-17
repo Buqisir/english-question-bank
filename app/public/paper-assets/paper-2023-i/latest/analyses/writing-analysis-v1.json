@@ -33,7 +33,7 @@
     "group-2023-i-writing-continuation": {
       "writing": {
         "taskType": "continuation",
-        "modelAnswer": "A few weeks later, when I almost forgot the contest, there came the news. My teacher rushed in, waving an envelope, his eyes shining. \"First place!\" he cried. For a moment I froze, my heart pounding wildly. Then it hit me — I had won. Yet what flooded my mind was not the prize, but those long nights of rewriting, racing forward like Revere's horse whenever I longed to quit.\nI went to my teacher's office after the award presentation. He looked up, and that warm laugh I knew so well filled the room. \"I told you that you had a good shot,\" he said. I meant to thank him for the prize, but other words slipped out: \"Thank you for making me love writing.\" Like Revere's horse, I had been tired and full of doubts, yet I had kept going — and somewhere along that road, a painful chore had quietly turned into joy.",
+        "modelAnswer": "A few weeks later, when I almost forgot the contest, there came the news. My teacher rushed in, waving an envelope, his eyes shining. \"First place!\" he cried. For a moment I froze, my heart pounding wildly. Then it hit me – I had won. Yet what flooded my mind was not the prize, but those long nights of rewriting, racing forward like Revere's horse whenever I longed to quit.\nI went to my teacher's office after the award presentation. He looked up, and that warm laugh I knew so well filled the room. \"I told you that you had a good shot,\" he said. I meant to thank him for the prize, but other words slipped out: \"Thank you for making me love writing.\" Like Revere's horse, I had been tired and full of doubts, yet I had kept going – and somewhere along that road, a painful chore had quietly turned into joy.",
         "continuationDesign": {
           "theme": "比起赢，更珍贵的是像 Revere 的马一样坚持后，写作从痛苦变成了热爱——而点燃这一切的是老师的信任。",
           "paragraphs": [
@@ -59,7 +59,7 @@
             "note": "非谓语作状语+原文意象比喻：用现在分词短语作伴随状语，把\"我\"的坚持比作奔马，直接回扣原文核心意象。把抽象的\"努力坚持\"具象成一个原文已有的画面，是续写呼应原文的高分手法。"
           },
           {
-            "text": "yet I had kept going — and somewhere along that road, a painful chore had quietly turned into joy",
+            "text": "yet I had kept going – and somewhere along that road, a painful chore had quietly turned into joy",
             "note": "转折收束+点题：用 yet 承前面的\"累与怀疑\"，再以\"painful→joy\"的转变点出主旨(呼应原文 difficult and painful 与 enjoyment of writing)。结尾升华句模板：先认怂困难，再用一个安静的转变收束情感。"
           }
         ]

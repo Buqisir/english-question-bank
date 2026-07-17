@@ -229,7 +229,7 @@
             },
             {
               "paragraphId": "para-2021-jia-reading-c-2",
-              "text": "Southbank, at an eastern bend in the Thames, is the center of British skateboarding, where the continuous crashing of skateboards left your head ringing. I loved it. I soon made friends with the local skaters. We spoke our own language. And my favorite: Safe. Safe meant cool. It meant hello. It meant don’t worry about it. Once, when trying a certain trick on the beam (横杆) , I fell onto the stones, damaging a nerve in my hand, and Toby came over, helping me up: Safe, man. Safe. A few minutes later, when I landed the trick, my friends beat their boards loud, shouting: “Safe! Safe! Safe!” And that’s what mattered—landing tricks, being a good skater."
+              "text": "Southbank, at an eastern bend in the Thames, is the center of British skateboarding, where the continuous crashing of skateboards left your head ringing. I loved it. I soon made friends with the local skaters. We spoke our own language. And my favorite: Safe. Safe meant cool. It meant hello. It meant don’t worry about it. Once, when trying a certain trick on the beam (横杆) , I fell onto the stones, damaging a nerve in my hand, and Toby came over, helping me up: Safe, man. Safe. A few minutes later, when I landed the trick, my friends beat their boards loud, shouting: “Safe! Safe! Safe!” And that’s what mattered – landing tricks, being a good skater."
             },
             {
               "paragraphId": "para-2021-jia-reading-c-3",
@@ -268,7 +268,7 @@
             },
             {
               "paragraphId": "para-2021-jia-reading-d-3",
-              "text": "In the sciences and arts, those praised as geniuses were most often white men, of European origin. Perhaps this is not a surprise. It’s said that history is written by the victors, and those victors set the standards for admission to the genius club. When contributions were made by geniuses outside the club—women, or people of a different color or belief—they were unacknowledged and rejected by others."
+              "text": "In the sciences and arts, those praised as geniuses were most often white men, of European origin. Perhaps this is not a surprise. It’s said that history is written by the victors, and those victors set the standards for admission to the genius club. When contributions were made by geniuses outside the club – women, or people of a different color or belief – they were unacknowledged and rejected by others."
             },
             {
               "paragraphId": "para-2021-jia-reading-d-4",
@@ -353,7 +353,7 @@
             },
             {
               "paragraphId": "para-2021-jia-seven-p5",
-              "text": "• Put different types of clothing on different surfaces in the room. __39__ 4  . Place a few mirrors around your room so people can see how things look when they try them on. One of the ground rules of the swap should be that everyone must try on the clothes before they take them—things always look different when you put them on."
+              "text": "• Put different types of clothing on different surfaces in the room. __39__ 4  . Place a few mirrors around your room so people can see how things look when they try them on. One of the ground rules of the swap should be that everyone must try on the clothes before they take them – things always look different when you put them on."
             },
             {
               "paragraphId": "para-2021-jia-seven-p6",
@@ -422,7 +422,7 @@
             },
             {
               "paragraphId": "para-2021-jia-cloze-p2",
-              "text": "That’s when things went __49__ . “I remember walking down the long __50__ and opening the door to my room to find an entire flock of seagulls,” Burchill said in a recent letter of __51__ to the 4-star hotel. “The seagulls immediately went __52__ . They rushed to the window, 30 or 40 birds all trying to __53__ at the same time, and pepperoni—everywhere. The curtains were falling down, the lamps were falling down. It was a real __54__ .”"
+              "text": "That’s when things went __49__ . “I remember walking down the long __50__ and opening the door to my room to find an entire flock of seagulls,” Burchill said in a recent letter of __51__ to the 4-star hotel. “The seagulls immediately went __52__ . They rushed to the window, 30 or 40 birds all trying to __53__ at the same time, and pepperoni – everywhere. The curtains were falling down, the lamps were falling down. It was a real __54__ .”"
             },
             {
               "paragraphId": "para-2021-jia-cloze-p3",
@@ -2874,7 +2874,7 @@
               {
                 "role": "primary",
                 "paragraphId": "para-2021-jia-reading-d-3",
-                "quote": "When contributions were made by geniuses outside the club—women, or people of a different color or belief—they were unacknowledged and rejected by others.",
+                "quote": "When contributions were made by geniuses outside the club – women, or people of a different color or belief – they were unacknowledged and rejected by others.",
                 "anchor": "俱乐部之外的天才贡献被忽视和拒绝"
               },
               {
@@ -2902,7 +2902,7 @@
             "trap": {
               "primaryType": "polarityReversal",
               "subtype": "oppositeAttitude",
-              "sourceQuote": "When contributions were made by geniuses outside the club—women, or people of a different color or belief—they were unacknowledged and rejected by others.",
+              "sourceQuote": "When contributions were made by geniuses outside the club – women, or people of a different color or belief – they were unacknowledged and rejected by others.",
               "sourceHighlight": "unacknowledged and rejected",
               "optionText": "They're objective.",
               "optionHighlight": "objective",
@@ -3115,7 +3115,7 @@
               {
                 "role": "supporting",
                 "paragraphId": "para-2021-jia-reading-d-3",
-                "quote": "When contributions were made by geniuses outside the club—women, or people of a different color or belief",
+                "quote": "When contributions were made by geniuses outside the club – women, or people of a different color or belief",
                 "anchor": "天才也来自俱乐部之外的多元群体"
               }
             ]

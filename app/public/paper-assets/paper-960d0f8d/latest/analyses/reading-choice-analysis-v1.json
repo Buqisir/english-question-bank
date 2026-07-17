@@ -244,7 +244,7 @@
           "trapEvidence": [
             {
               "paragraphId": "para-960d0f8d-reading-a-p4",
-              "quote": "With all the fancy fashion frames out there, it can be easy to overlook what really matters—the lenses（镜片）.",
+              "quote": "With all the fancy fashion frames out there, it can be easy to overlook what really matters – the lenses（镜片）.",
               "anchor": "fashion frames versus lenses"
             }
           ]
@@ -293,7 +293,7 @@
         {
           "sourceText": "key selling point",
           "sourceRole": "stem",
-          "targetText": "what really matters—the lenses（镜片）",
+          "targetText": "what really matters – the lenses（镜片）",
           "targetParagraphId": "para-960d0f8d-reading-a-p4",
           "relationType": "paraphrase",
           "note": "题干的 key selling point 对应原文强调的 what really matters，定位到产品真正重要的是 lenses。"
@@ -1265,7 +1265,7 @@
             {
               "role": "primary",
               "paragraphId": "para-960d0f8d-reading-d-p2",
-              "quote": "These customers are then rewarded—usually in the form of a credit on their utility bill—in return for allowing their DER to provide energy to the grid when necessary.",
+              "quote": "These customers are then rewarded – usually in the form of a credit on their utility bill – in return for allowing their DER to provide energy to the grid when necessary.",
               "anchor": "a credit on their utility bill"
             }
           ]
@@ -1286,7 +1286,7 @@
           "status": "wrong",
           "trap": {
             "primaryType": "entityMismatch",
-            "sourceQuote": "These customers are then rewarded—usually in the form of a credit on their utility bill—in return for allowing their DER to provide energy to the grid when necessary.",
+            "sourceQuote": "These customers are then rewarded – usually in the form of a credit on their utility bill – in return for allowing their DER to provide energy to the grid when necessary.",
             "sourceEntity": "a credit on their utility bill",
             "optionText": "By receiving direct cash payments.",
             "optionEntity": "direct cash payments",
@@ -1295,7 +1295,7 @@
           "trapEvidence": [
             {
               "paragraphId": "para-960d0f8d-reading-d-p2",
-              "quote": "These customers are then rewarded—usually in the form of a credit on their utility bill—in return for allowing their DER to provide energy to the grid when necessary.",
+              "quote": "These customers are then rewarded – usually in the form of a credit on their utility bill – in return for allowing their DER to provide energy to the grid when necessary.",
               "anchor": "credit on their utility bill"
             }
           ]
@@ -1305,7 +1305,7 @@
         {
           "sourceText": "rewarded",
           "sourceRole": "stem",
-          "targetText": "rewarded—usually in the form of a credit on their utility bill",
+          "targetText": "rewarded – usually in the form of a credit on their utility bill",
           "targetParagraphId": "para-960d0f8d-reading-d-p2",
           "relationType": "locationCue",
           "note": "题干用 rewarded 提问，原文直接出现 rewarded，并用 in the form of a credit on their utility bill 说明奖励形式。"
@@ -1421,7 +1421,7 @@
           "status": "wrong",
           "trap": {
             "primaryType": "entityMismatch",
-            "sourceQuote": "VPPs are a network of distributed energy resources (DERs)一energy solutions such as solar and battery systems, smart thermostats, and electric vehicles installed at or close to homes and businesses—that can help balance electricity demand and supply.",
+            "sourceQuote": "VPPs are a network of distributed energy resources (DERs)一energy solutions such as solar and battery systems, smart thermostats, and electric vehicles installed at or close to homes and businesses – that can help balance electricity demand and supply.",
             "sourceEntity": "distributed energy resources (DERs)",
             "optionText": "A power plant increases output on a hot day.",
             "optionEntity": "A power plant",
@@ -1430,7 +1430,7 @@
           "trapEvidence": [
             {
               "paragraphId": "para-960d0f8d-reading-d-p1",
-              "quote": "VPPs are a network of distributed energy resources (DERs)一energy solutions such as solar and battery systems, smart thermostats, and electric vehicles installed at or close to homes and businesses—that can help balance electricity demand and supply.",
+              "quote": "VPPs are a network of distributed energy resources (DERs)一energy solutions such as solar and battery systems, smart thermostats, and electric vehicles installed at or close to homes and businesses – that can help balance electricity demand and supply.",
               "anchor": "network of distributed energy resources"
             }
           ]
@@ -1442,7 +1442,7 @@
           "trap": {
             "primaryType": "scopeShift",
             "subtype": "conditionRemoved",
-            "sourceQuote": "These customers are then rewarded—usually in the form of a credit on their utility bill—in return for allowing their DER to provide energy to the grid when necessary.",
+            "sourceQuote": "These customers are then rewarded – usually in the form of a credit on their utility bill – in return for allowing their DER to provide energy to the grid when necessary.",
             "sourceHighlight": "provide energy to the grid when necessary",
             "optionText": "A factory builds a solar farm to power itself.",
             "optionHighlight": "to power itself",
@@ -1451,7 +1451,7 @@
           "trapEvidence": [
             {
               "paragraphId": "para-960d0f8d-reading-d-p2",
-              "quote": "These customers are then rewarded—usually in the form of a credit on their utility bill—in return for allowing their DER to provide energy to the grid when necessary.",
+              "quote": "These customers are then rewarded – usually in the form of a credit on their utility bill – in return for allowing their DER to provide energy to the grid when necessary.",
               "anchor": "provide energy to the grid"
             }
           ]
@@ -1483,13 +1483,13 @@
             {
               "role": "primary",
               "paragraphId": "para-960d0f8d-reading-d-p2",
-              "quote": "These customers are then rewarded—usually in the form of a credit on their utility bill—in return for allowing their DER to provide energy to the grid when necessary.",
+              "quote": "These customers are then rewarded – usually in the form of a credit on their utility bill – in return for allowing their DER to provide energy to the grid when necessary.",
               "anchor": "provide energy to the grid when necessary"
             },
             {
               "role": "secondary",
               "paragraphId": "para-960d0f8d-reading-d-p1",
-              "quote": "VPPs are a network of distributed energy resources (DERs)一energy solutions such as solar and battery systems, smart thermostats, and electric vehicles installed at or close to homes and businesses—that can help balance electricity demand and supply.",
+              "quote": "VPPs are a network of distributed energy resources (DERs)一energy solutions such as solar and battery systems, smart thermostats, and electric vehicles installed at or close to homes and businesses – that can help balance electricity demand and supply.",
               "anchor": "battery systems"
             }
           ]

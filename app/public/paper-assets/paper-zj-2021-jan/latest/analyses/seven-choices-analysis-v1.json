@@ -150,7 +150,7 @@
       "contextEvidence": {
         "paragraphId": "para-zj-2021-jan-seven-p3",
         "beforeQuote": "Grocery stores try to have enough employees at checkout to get all their customers through with minimum delay.",
-        "afterQuote": "Any small interruption—a price check, a chatty customer—can have downstream effects, holding up an entire line."
+        "afterQuote": "Any small interruption – a price check, a chatty customer – can have downstream effects, holding up an entire line."
       },
       "mechanismSignals": [
         {
@@ -295,7 +295,7 @@
       ],
       "contextEvidence": {
         "paragraphId": "para-zj-2021-jan-seven-p5",
-        "beforeQuote": "Make all customers stand in one long, snaking line—called a serpentine line—and serve each person at the front with the next available register.",
+        "beforeQuote": "Make all customers stand in one long, snaking line – called a serpentine line – and serve each person at the front with the next available register.",
         "afterQuote": "This is what they do at most banks and fast-food restaurants."
       },
       "mechanismSignals": [
@@ -303,7 +303,7 @@
           "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
           "signalText": "this method",
           "signalSide": "option",
-          "targetText": "Make all customers stand in one long, snaking line—called a serpentine line",
+          "targetText": "Make all customers stand in one long, snaking line – called a serpentine line",
           "relation": "this method 回指空前介绍的\"蛇形队列\"做法，构成指代衔接。"
         },
         {

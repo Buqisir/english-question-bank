@@ -223,7 +223,7 @@
       },
       {
         "type": "instruction",
-        "text": "Paragraph 1: When I brought my paycheck home, it was 199—my dad wanted to talk to me.\n\nParagraph 2: Paragraph 2:"
+        "text": "Paragraph 1: When I brought my paycheck home, it was 199 – my dad wanted to talk to me.\n\nParagraph 2: Paragraph 2:"
       },
       {
         "type": "answerBox",
@@ -245,11 +245,11 @@
           "paragraphs": [
             {
               "paragraphId": "para-zj-2021-jun-reading-a-1",
-              "text": "Leslie Nielsen’s childhood was a difficult one, but he had one particular shining star in his life—his uncle, who was a well-known actor. The admiration and respect his uncle earned inspired Nielsen to make a career (职业) in acting. Even though he often felt he would be discovered to be a no-talent, he moved forward, gaining a scholarship to the Neighborhood Playhouse and making his first television appearance a few years later in 1948. However, becoming a full-time, successful actor would still be an uphill battle for another eight years until he landed a number of film roles that finally got him noticed."
+              "text": "Leslie Nielsen’s childhood was a difficult one, but he had one particular shining star in his life – his uncle, who was a well-known actor. The admiration and respect his uncle earned inspired Nielsen to make a career (职业) in acting. Even though he often felt he would be discovered to be a no-talent, he moved forward, gaining a scholarship to the Neighborhood Playhouse and making his first television appearance a few years later in 1948. However, becoming a full-time, successful actor would still be an uphill battle for another eight years until he landed a number of film roles that finally got him noticed."
             },
             {
               "paragraphId": "para-zj-2021-jun-reading-a-2",
-              "text": "But even then, what he had wasn’t quite what he wanted. Nielsen always felt he should be doing comedy but his good looks and distinguished voice kept him busy in dramatic roles. It wasn’t until 1980—32 years into his career—that he landed the role it would seem he was made for in Airplane! That movie led him into the second half of his career where his comedic presence alone could make a movie a financial success even when movie reviewers would not rate it highly."
+              "text": "But even then, what he had wasn’t quite what he wanted. Nielsen always felt he should be doing comedy but his good looks and distinguished voice kept him busy in dramatic roles. It wasn’t until 1980 – 32 years into his career – that he landed the role it would seem he was made for in Airplane! That movie led him into the second half of his career where his comedic presence alone could make a movie a financial success even when movie reviewers would not rate it highly."
             },
             {
               "paragraphId": "para-zj-2021-jun-reading-a-3",
@@ -276,7 +276,7 @@
           "paragraphs": [
             {
               "paragraphId": "para-zj-2021-jun-reading-b-1",
-              "text": "We live in a town with three beaches. There are two parks less than 10 minutes’ walk from home where neighbourhood children gather to play. However, what my children want to do after school is pick up a screen—any screen—and stare at it for hours. They are not alone. Today’s children spend an average of four and a half hours a day looking at screens, split between watching television and using the Internet."
+              "text": "We live in a town with three beaches. There are two parks less than 10 minutes’ walk from home where neighbourhood children gather to play. However, what my children want to do after school is pick up a screen – any screen – and stare at it for hours. They are not alone. Today’s children spend an average of four and a half hours a day looking at screens, split between watching television and using the Internet."
             },
             {
               "paragraphId": "para-zj-2021-jun-reading-b-2",
@@ -1519,7 +1519,7 @@
         "title": "读后续写",
         "instruction": "My dad, George, only had an eighth grade education. A quiet man, he didn’t understand my world of school activities. From age 14, he worked. And his dad, Albert, took the money my dad earned and used it to pay family expenses.\nI didn’t really understand his world either: He was a livestock trucker, and I thought that I would surpass (超过) anything he had accomplished by the time I walked across the stage at high school graduation.\nSummers in the mid-70s were spent at home shooting baskets, hitting a baseball, or throwing a football, preparing for my future as a quarterback on a football team. In poor weather, I read about sports or practiced my trombone (长号) .\nThe summer before my eighth grade I was one of a group of boys that a neighboring farmer hired to work in his field. He explained our basic task, the tractor fired up and we were off, riding down the field looking for weeds to spray with chemicals. After a short way, the farmer stopped and pointed at a weed which we missed. Then we began again. This happened over and over, but we soon learned to identify different grasses like cockleburs, lamb’s-quarters, foxtails, and the king of weeds, the pretty purple thistle. It was tiring work, but I looked forward to the pay, even though I wasn’t sure how much it would amount to.\nAt home, my dad said, “A job’s a big step to growing up. I’m glad you will be contributing to the household.” My dad’s words made me realize that my earnings might not be mine to do with as I wished.\nMy labors lasted about two weeks, and the farmer said there might be more work, but I wasn’t interested. I decided it was not fair that I had to contribute my money.",
         "continuationStarters": [
-          "When I brought my paycheck home, it was 199—my dad wanted to talk to me.",
+          "When I brought my paycheck home, it was 199 – my dad wanted to talk to me.",
           "Paragraph 2:"
         ],
         "materialText": "My dad, George, only had an eighth grade education. A quiet man, he didn’t understand my world of school activities. From age 14, he worked. And his dad, Albert, took the money my dad earned and used it to pay family expenses.\n\nI didn’t really understand his world either: He was a livestock trucker, and I thought that I would surpass (超过) anything he had accomplished by the time I walked across the stage at high school graduation.\n\nSummers in the mid-70s were spent at home shooting baskets, hitting a baseball, or throwing a football, preparing for my future as a quarterback on a football team. In poor weather, I read about sports or practiced my trombone (长号) .\n\nThe summer before my eighth grade I was one of a group of boys that a neighboring farmer hired to work in his field. He explained our basic task, the tractor fired up and we were off, riding down the field looking for weeds to spray with chemicals. After a short way, the farmer stopped and pointed at a weed which we missed. Then we began again. This happened over and over, but we soon learned to identify different grasses like cockleburs, lamb’s-quarters, foxtails, and the king of weeds, the pretty purple thistle. It was tiring work, but I looked forward to the pay, even though I wasn’t sure how much it would amount to.\n\nAt home, my dad said, “A job’s a big step to growing up. I’m glad you will be contributing to the household.” My dad’s words made me realize that my earnings might not be mine to do with as I wished.\n\nMy labors lasted about two weeks, and the farmer said there might be more work, but I wasn’t interested. I decided it was not fair that I had to contribute my money.",
@@ -2294,7 +2294,7 @@
               {
                 "role": "primary",
                 "paragraphId": "para-zj-2021-jun-reading-b-1",
-                "quote": "what my children want to do after school is pick up a screen—any screen—and stare at it for hours",
+                "quote": "what my children want to do after school is pick up a screen – any screen – and stare at it for hours",
                 "anchor": "放学后只想盯着屏幕看好几个小时"
               },
               {

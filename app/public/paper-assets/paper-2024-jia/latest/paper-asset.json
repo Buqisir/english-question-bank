@@ -253,7 +253,7 @@
           "paragraphs": [
             {
               "paragraphId": "para-2024-jia-reading-c-1",
-              "text": "The Saint Lukas train doesn’t accept passengers — it accepts only the sick. The Saint Lukas is one of five government-sponsored medical trains that travel to remote towns in central and eastern Russia. Each stop lasts an average of two days, and during that time the doctors and nurses on board provide rural (乡村) populations with basic medical care, X-ray scans and prescriptions."
+              "text": "The Saint Lukas train doesn’t accept passengers – it accepts only the sick. The Saint Lukas is one of five government-sponsored medical trains that travel to remote towns in central and eastern Russia. Each stop lasts an average of two days, and during that time the doctors and nurses on board provide rural (乡村) populations with basic medical care, X-ray scans and prescriptions."
             },
             {
               "paragraphId": "para-2024-jia-reading-c-2",
@@ -296,7 +296,7 @@
             },
             {
               "paragraphId": "para-2024-jia-reading-d-3",
-              "text": "But writing the end — that’s hard. It’s hard for writers because endings carry so much weight with readers. You have to balance creating an ending that’s unpredictable, but doesn’t seem to come from nowhere, one that fits what’s right for the characters."
+              "text": "But writing the end – that’s hard. It’s hard for writers because endings carry so much weight with readers. You have to balance creating an ending that’s unpredictable, but doesn’t seem to come from nowhere, one that fits what’s right for the characters."
             },
             {
               "paragraphId": "para-2024-jia-reading-d-4",
@@ -304,7 +304,7 @@
             },
             {
               "paragraphId": "para-2024-jia-reading-d-5",
-              "text": "This issue won’t tell you what your ending should be — that’s up to you and the story you’re telling — but it might provide what you need to get there."
+              "text": "This issue won’t tell you what your ending should be – that’s up to you and the story you’re telling – but it might provide what you need to get there."
             }
           ]
         }
@@ -377,7 +377,7 @@
             },
             {
               "paragraphId": "para-2024-jia-seven-p4",
-              "text": "__40__  5   A healthy breakfast can start your metabolism (新陈代谢) , while eating small, healthy meals keeps your energy up all day. Avoid eating late at night. Try to eat dinner earlier and fast for 14 — 16 hours until breakfast the next morning. Studies suggest that eating only when you’re most active and giving your digestive system a long break each day may help to regulate weight."
+              "text": "__40__  5   A healthy breakfast can start your metabolism (新陈代谢) , while eating small, healthy meals keeps your energy up all day. Avoid eating late at night. Try to eat dinner earlier and fast for 14 – 16 hours until breakfast the next morning. Studies suggest that eating only when you’re most active and giving your digestive system a long break each day may help to regulate weight."
             }
           ]
         }
@@ -442,7 +442,7 @@
             },
             {
               "paragraphId": "para-2024-jia-cloze-p2",
-              "text": "Born just before WWII, my grandmother __43__ an entirely different childhood lifestyle from mine. She did not have a chance to go to __44__ . Like in typical families, where boys were __45__ much more than girls, my grandma had to stay at home to do __46__ . The only opportunity (机会) she could seize to __47__ was when her brother was having Chinese __48__ with the family tutor. She would sit quietly at the far end of the long dinner table, listening __49__ . This training taught her to read and write her Chinese upside down — a skill that has turned out to be quite __50__ , especially whenever we share the newspaper. On most weekends, my grandmother, a young girl then, and her brother would go to the __51__ . There, they would walk through deep water, sit down cross-legged underwater and hold their __52__ while they watched all action going on around them. This is something I __53__ — her ability to open her __54__ underwater and still sit comfortably on the seabed."
+              "text": "Born just before WWII, my grandmother __43__ an entirely different childhood lifestyle from mine. She did not have a chance to go to __44__ . Like in typical families, where boys were __45__ much more than girls, my grandma had to stay at home to do __46__ . The only opportunity (机会) she could seize to __47__ was when her brother was having Chinese __48__ with the family tutor. She would sit quietly at the far end of the long dinner table, listening __49__ . This training taught her to read and write her Chinese upside down – a skill that has turned out to be quite __50__ , especially whenever we share the newspaper. On most weekends, my grandmother, a young girl then, and her brother would go to the __51__ . There, they would walk through deep water, sit down cross-legged underwater and hold their __52__ while they watched all action going on around them. This is something I __53__ – her ability to open her __54__ underwater and still sit comfortably on the seabed."
             },
             {
               "paragraphId": "para-2024-jia-cloze-p3",
@@ -487,7 +487,7 @@
             },
             {
               "paragraphId": "para-2024-jia-grammar-fill-p1",
-              "text": "What should  __65__ (do) with such a beautiful place? They wondered out loud. This area, with  __66__ (it) unique and breathtaking natural beauty, must be well preserved  __67__all people of the nation to enjoy — as a national park. They all agreed and vowed (承诺) to promote the idea at the  __68__ (complete) of their journey. Their promotional work paid off. Two years later, 18 years before Wyoming became a state, Yellowstone became the first national park in the United States and the world. Yellowstone was the  __69__ (large) United States national park — 2.2 million acres — until Wrangell-Saint Elias in southern Alaska,  __70__became a national monument in 1978, took the honors as a national park in 1980 with 12.3 million acres."
+              "text": "What should  __65__ (do) with such a beautiful place? They wondered out loud. This area, with  __66__ (it) unique and breathtaking natural beauty, must be well preserved  __67__all people of the nation to enjoy – as a national park. They all agreed and vowed (承诺) to promote the idea at the  __68__ (complete) of their journey. Their promotional work paid off. Two years later, 18 years before Wyoming became a state, Yellowstone became the first national park in the United States and the world. Yellowstone was the  __69__ (large) United States national park – 2.2 million acres – until Wrangell-Saint Elias in southern Alaska,  __70__became a national monument in 1978, took the honors as a national park in 1980 with 12.3 million acres."
             }
           ]
         }
@@ -2680,7 +2680,7 @@
               {
                 "role": "primary",
                 "paragraphId": "para-2024-jia-reading-c-1",
-                "quote": "The Saint Lukas train doesn’t accept passengers — it accepts only the sick.",
+                "quote": "The Saint Lukas train doesn’t accept passengers – it accepts only the sick.",
                 "anchor": "accepts only the sick"
               },
               {
@@ -2723,10 +2723,10 @@
           {
             "sourceText": "different from other trains",
             "sourceRole": "stem",
-            "targetText": "The Saint Lukas train doesn’t accept passengers — it accepts only the sick.",
+            "targetText": "The Saint Lukas train doesn’t accept passengers – it accepts only the sick.",
             "targetParagraphId": "para-2024-jia-reading-c-1",
             "relationType": "locationCue",
-            "note": "题干问与普通列车的不同，原文用 doesn’t accept passengers — it accepts only the sick 点明其不载乘客、只接病人的独特之处。"
+            "note": "题干问与普通列车的不同，原文用 doesn’t accept passengers – it accepts only the sick 点明其不载乘客、只接病人的独特之处。"
           }
         ]
       },

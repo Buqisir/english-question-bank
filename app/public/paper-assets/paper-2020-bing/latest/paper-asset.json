@@ -210,11 +210,11 @@
           "paragraphs": [
             {
               "paragraphId": "para-2020-bing-reading-b-1",
-              "text": "When Rise of the Planet of the Apes was first shown to the public last month, a group of excited animal activists gathered on Hollywood Boulevard. But they weren’t there to throw red paint on fur—coat—wearing film stars. Instead, one activist, dressed in a full—body monkey suit, had arrived with a sign praising the filmmakers:“Thanks for not using real apes (猿) !”"
+              "text": "When Rise of the Planet of the Apes was first shown to the public last month, a group of excited animal activists gathered on Hollywood Boulevard. But they weren’t there to throw red paint on fur-coat-wearing film stars. Instead, one activist, dressed in a full-body monkey suit, had arrived with a sign praising the filmmakers:“Thanks for not using real apes (猿) !”"
             },
             {
               "paragraphId": "para-2020-bing-reading-b-2",
-              "text": "The creative team behind Apes used motion—capture (动作捕捉) technology to create digitalized animals, spending tens of millions of dollars on technology that records an actor’s performance and later processes it with computer graphics to create a final image (图像) . In this case, one of a realisticlooking ape."
+              "text": "The creative team behind Apes used motion – capture (动作捕捉) technology to create digitalized animals, spending tens of millions of dollars on technology that records an actor’s performance and later processes it with computer graphics to create a final image (图像) . In this case, one of a realisticlooking ape."
             },
             {
               "paragraphId": "para-2020-bing-reading-b-3",
@@ -222,7 +222,7 @@
             },
             {
               "paragraphId": "para-2020-bing-reading-b-4",
-              "text": "In some cases, it’s not so much the treatment of the animals on set in the studio that has activists worried; it’s the off—set training and living conditions that are raising concerns. And there are questions about the films made outside the States, which sometimes are not monitored as closely as productions filmed in the States."
+              "text": "In some cases, it’s not so much the treatment of the animals on set in the studio that has activists worried; it’s the off-set training and living conditions that are raising concerns. And there are questions about the films made outside the States, which sometimes are not monitored as closely as productions filmed in the States."
             }
           ]
         }
@@ -249,7 +249,7 @@
             },
             {
               "paragraphId": "para-2020-bing-reading-c-3",
-              "text": "Four years ago they all moved into a three-storey Victorian house in Bristol—one of a growing number of multigenerational families in the UK living together under the same roof. They share a front door and a washing machine, but Rita Whitehead has her own kitchen, bathroom, bedroom and living room on the ground floor."
+              "text": "Four years ago they all moved into a three-storey Victorian house in Bristol – one of a growing number of multigenerational families in the UK living together under the same roof. They share a front door and a washing machine, but Rita Whitehead has her own kitchen, bathroom, bedroom and living room on the ground floor."
             },
             {
               "paragraphId": "para-2020-bing-reading-c-4",
@@ -288,11 +288,11 @@
           "paragraphs": [
             {
               "paragraphId": "para-2020-bing-reading-d-1",
-              "text": "We are the products of evolution, and not just evolution that occurred billions of years ago. As scientists look deeper into our genes (基因) , they are finding examples of human evolution in just the past few thousand years. People in Ethiopian highlands have adapted to living at high altitudes. Cattle—raising people in East Africa and northern Europe have gained a mutation (突变) that helps them digest milk as adults."
+              "text": "We are the products of evolution, and not just evolution that occurred billions of years ago. As scientists look deeper into our genes (基因) , they are finding examples of human evolution in just the past few thousand years. People in Ethiopian highlands have adapted to living at high altitudes. Cattle-raising people in East Africa and northern Europe have gained a mutation (突变) that helps them digest milk as adults."
             },
             {
               "paragraphId": "para-2020-bing-reading-d-2",
-              "text": "On Thursday in an article published in Cell, a team of researchers reported a new kind of adaptation—not to air or to food, but to the ocean. A group of seadwelling people in Southeast Asia have evolved into better divers. The Bajau, as these people are known, number in the hundreds of thousands in Indonesia, Malaysia and the Philippines. They have traditionally lived on houseboats; in recent times, they’ve also built houses on stilts (支柱) in coastal waters.”They are simply a stranger to the land,” said Rodney C. Jubilado, a University of Hawaii researcher who studies the Bajau."
+              "text": "On Thursday in an article published in Cell, a team of researchers reported a new kind of adaptation – not to air or to food, but to the ocean. A group of seadwelling people in Southeast Asia have evolved into better divers. The Bajau, as these people are known, number in the hundreds of thousands in Indonesia, Malaysia and the Philippines. They have traditionally lived on houseboats; in recent times, they’ve also built houses on stilts (支柱) in coastal waters.”They are simply a stranger to the land,” said Rodney C. Jubilado, a University of Hawaii researcher who studies the Bajau."
             },
             {
               "paragraphId": "para-2020-bing-reading-d-3",
@@ -471,7 +471,7 @@
           "paragraphs": [
             {
               "paragraphId": "para-2020-bing-grammar-fill-title",
-              "text": "In ancient China lived an artist __61__paintings were almost lifelike. The artist’s reputation had made him proud. One day the emperor wanted to get his portrait (画像) done so he called all great artists to come and present their __62__ (fine) work, so that he could choose the best. The artist was sure he would __63__ (choose) , but when he presented his masterpiece to the emperor’s chief minister, the old man laughed. The wise old man told him to travel to the Li River—perhaps he could learn a little from the greatest artist in the world."
+              "text": "In ancient China lived an artist __61__paintings were almost lifelike. The artist’s reputation had made him proud. One day the emperor wanted to get his portrait (画像) done so he called all great artists to come and present their __62__ (fine) work, so that he could choose the best. The artist was sure he would __63__ (choose) , but when he presented his masterpiece to the emperor’s chief minister, the old man laughed. The wise old man told him to travel to the Li River – perhaps he could learn a little from the greatest artist in the world."
             },
             {
               "paragraphId": "para-2020-bing-grammar-fill-p1",
@@ -2253,7 +2253,7 @@
             "status": "wrong",
             "trap": {
               "primaryType": "sourceLexicalTrap",
-              "sourceText": "fur—coat—wearing film stars",
+              "sourceText": "fur-coat-wearing film stars",
               "optionText": "To see famous film stars.",
               "matchType": "wordFamily",
               "relationNote": "原文出现 film stars 仅用于说明保护者并非来向穿皮草的影星泼红漆，选项借用 film stars 一词制造干扰，实际并非聚集目的。"
@@ -2261,7 +2261,7 @@
             "trapEvidence": [
               {
                 "paragraphId": "para-2020-bing-reading-b-1",
-                "quote": "But they weren’t there to throw red paint on fur—coat—wearing film stars.",
+                "quote": "But they weren’t there to throw red paint on fur-coat-wearing film stars.",
                 "anchor": "they weren’t there to throw red paint on film stars"
               }
             ]
@@ -2273,8 +2273,8 @@
             "trap": {
               "primaryType": "polarityReversal",
               "subtype": "oppositeAction",
-              "sourceQuote": "But they weren’t there to throw red paint on fur—coat—wearing film stars.",
-              "sourceHighlight": "weren’t there to throw red paint on fur—coat—wearing film stars",
+              "sourceQuote": "But they weren’t there to throw red paint on fur-coat-wearing film stars.",
+              "sourceHighlight": "weren’t there to throw red paint on fur-coat-wearing film stars",
               "optionText": "To oppose wearing fur coats.",
               "optionHighlight": "To oppose wearing fur coats",
               "explanation": "原文明确说他们并不是来向穿皮草的影星泼红漆（即并非来抗议穿皮草），选项却说他们是来反对穿皮草，与原文相反。"
@@ -2282,7 +2282,7 @@
             "trapEvidence": [
               {
                 "paragraphId": "para-2020-bing-reading-b-1",
-                "quote": "But they weren’t there to throw red paint on fur—coat—wearing film stars.",
+                "quote": "But they weren’t there to throw red paint on fur-coat-wearing film stars.",
                 "anchor": "weren’t there to … fur-coat-wearing film stars"
               }
             ]
@@ -2305,7 +2305,7 @@
               {
                 "role": "primary",
                 "paragraphId": "para-2020-bing-reading-b-1",
-                "quote": "one activist, dressed in a full—body monkey suit, had arrived with a sign praising the filmmakers:“Thanks for not using real apes (猿) !”",
+                "quote": "one activist, dressed in a full-body monkey suit, had arrived with a sign praising the filmmakers:“Thanks for not using real apes (猿) !”",
                 "anchor": "a sign praising the filmmakers: Thanks for not using real apes"
               }
             ]
@@ -2358,7 +2358,7 @@
               {
                 "role": "primary",
                 "paragraphId": "para-2020-bing-reading-b-2",
-                "quote": "The creative team behind Apes used motion—capture (动作捕捉) technology to create digitalized animals",
+                "quote": "The creative team behind Apes used motion – capture (动作捕捉) technology to create digitalized animals",
                 "anchor": "used motion-capture technology to create digitalized animals"
               },
               {
@@ -2404,7 +2404,7 @@
           {
             "sourceText": "The creation of digitalized apes.",
             "sourceRole": "correctOption",
-            "targetText": "used motion—capture (动作捕捉) technology to create digitalized animals",
+            "targetText": "used motion – capture (动作捕捉) technology to create digitalized animals",
             "targetParagraphId": "para-2020-bing-reading-b-2",
             "relationType": "paraphrase",
             "note": "选项 creation of digitalized apes 对应原文 create digitalized animals 及末句 a realisticlooking ape，是段落主旨的同义概括。"
@@ -2488,7 +2488,7 @@
               {
                 "role": "primary",
                 "paragraphId": "para-2020-bing-reading-b-4",
-                "quote": "it’s the off—set training and living conditions that are raising concerns",
+                "quote": "it’s the off-set training and living conditions that are raising concerns",
                 "anchor": "off-set training and living conditions that are raising concerns"
               },
               {
@@ -2505,7 +2505,7 @@
             "status": "wrong",
             "trap": {
               "primaryType": "sourceLexicalTrap",
-              "sourceText": "it’s the off—set training and living conditions that are raising concerns",
+              "sourceText": "it’s the off-set training and living conditions that are raising concerns",
               "optionText": "They should take further training.",
               "matchType": "wordFamily",
               "relationNote": "原文 training 是指片场外的训练与生活条件令人担忧，选项借 training 一词制造干扰，曲解为动物应接受进一步训练。"
@@ -2513,7 +2513,7 @@
             "trapEvidence": [
               {
                 "paragraphId": "para-2020-bing-reading-b-4",
-                "quote": "it’s the off—set training and living conditions that are raising concerns",
+                "quote": "it’s the off-set training and living conditions that are raising concerns",
                 "anchor": "off-set training and living conditions"
               }
             ]
@@ -2543,7 +2543,7 @@
           {
             "sourceText": "They may be badly treated.",
             "sourceRole": "correctOption",
-            "targetText": "it’s the off—set training and living conditions that are raising concerns",
+            "targetText": "it’s the off-set training and living conditions that are raising concerns",
             "targetParagraphId": "para-2020-bing-reading-b-4",
             "relationType": "paraphrase",
             "note": "由 off-set training and living conditions are raising concerns 及海外拍摄 not monitored as closely 可推断动物演员可能受到不当对待（badly treated）。"
@@ -2914,8 +2914,8 @@
             "trap": {
               "primaryType": "scopeShift",
               "subtype": "understatement",
-              "sourceQuote": "Cattle—raising people in East Africa and northern Europe have gained a mutation (突变) that helps them digest milk as adults.",
-              "sourceHighlight": "Cattle—raising people in East Africa and northern Europe",
+              "sourceQuote": "Cattle-raising people in East Africa and northern Europe have gained a mutation (突变) that helps them digest milk as adults.",
+              "sourceHighlight": "Cattle-raising people in East Africa and northern Europe",
               "optionText": "Environmental adaptation of cattle raisers.",
               "optionHighlight": "cattle raisers",
               "explanation": "养牛者只是第一段众多例子之一，把整段举例的总目的缩小为单个例子，以偏概全，未抓住'人类进化'这一总观点。"
@@ -2923,7 +2923,7 @@
             "trapEvidence": [
               {
                 "paragraphId": "para-2020-bing-reading-d-1",
-                "quote": "Cattle—raising people in East Africa and northern Europe have gained a mutation (突变) that helps them digest milk as adults.",
+                "quote": "Cattle-raising people in East Africa and northern Europe have gained a mutation (突变) that helps them digest milk as adults.",
                 "anchor": "养牛者只是其中一例"
               }
             ]

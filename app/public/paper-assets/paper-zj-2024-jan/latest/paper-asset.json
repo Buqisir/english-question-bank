@@ -296,7 +296,7 @@
           "paragraphs": [
             {
               "paragraphId": "para-zj-2024-jan-reading-b-1",
-              "text": "When was the last time you used a telephone box? I mean to make an actual phone call — not to shelter from the rain. Ages ago, right? The last time I used a phone box for its intended purpose was…2006. I was conducting auditions (试演) for my play in my tiny old shared house in London. Hoping to impress some talented actors to come and work for me for nothing, I spread some throws over the sofas and lit candles to make it seem a bit more ”young professional”."
+              "text": "When was the last time you used a telephone box? I mean to make an actual phone call – not to shelter from the rain. Ages ago, right? The last time I used a phone box for its intended purpose was…2006. I was conducting auditions (试演) for my play in my tiny old shared house in London. Hoping to impress some talented actors to come and work for me for nothing, I spread some throws over the sofas and lit candles to make it seem a bit more ”young professional”."
             },
             {
               "paragraphId": "para-zj-2024-jan-reading-b-2",
@@ -331,7 +331,7 @@
           "paragraphs": [
             {
               "paragraphId": "para-zj-2024-jan-reading-c-1",
-              "text": "On September 7, 1991, the costliest hailstorm (雹暴) in Canadian history hit Calgary’s southern suburbs. As a result, since 1996 a group of insurance companies have spent about 2 million per year on the Alberta Hail Suppression Project. Airplanes seed threatening storm cells with a chemical to make small ice crystals (冰晶) fall as rain before they can grow into dangerous hailstones. But farmers in east-central Alberta — downwind (下风处)   of the hail project flights — worry that precious moisture (水分) is being stolen from their thirsty land by the cloud seeding."
+              "text": "On September 7, 1991, the costliest hailstorm (雹暴) in Canadian history hit Calgary’s southern suburbs. As a result, since 1996 a group of insurance companies have spent about 2 million per year on the Alberta Hail Suppression Project. Airplanes seed threatening storm cells with a chemical to make small ice crystals (冰晶) fall as rain before they can grow into dangerous hailstones. But farmers in east-central Alberta – downwind (下风处)   of the hail project flights – worry that precious moisture (水分) is being stolen from their thirsty land by the cloud seeding."
             },
             {
               "paragraphId": "para-zj-2024-jan-reading-c-2",
@@ -370,11 +370,11 @@
             },
             {
               "paragraphId": "para-zj-2024-jan-reading-d-2",
-              "text": "As adults we face a version of the marshmallow test every day. We’re not tempted (诱惑) by sugary treats, but by our computers, phones, and tablets — all the devices that connect us to the global delivery system for various types of information that do to us what marshmallows do to preschoolers."
+              "text": "As adults we face a version of the marshmallow test every day. We’re not tempted (诱惑) by sugary treats, but by our computers, phones, and tablets – all the devices that connect us to the global delivery system for various types of information that do to us what marshmallows do to preschoolers."
             },
             {
               "paragraphId": "para-zj-2024-jan-reading-d-3",
-              "text": "We are tempted by sugary treats because our ancestors lived in a calorie-poor world, and our brains developed a response mechanism to these treats that reflected their value — a feeling of reward and satisfaction. But as we’ve reshaped the world around us, dramatically reducing the cost and effort involved in obtaining calories, we still have the same brains we had thousands of years ago, and this mismatch is at the heart of why so many of us struggle to resist tempting foods that we know we shouldn’t eat."
+              "text": "We are tempted by sugary treats because our ancestors lived in a calorie-poor world, and our brains developed a response mechanism to these treats that reflected their value – a feeling of reward and satisfaction. But as we’ve reshaped the world around us, dramatically reducing the cost and effort involved in obtaining calories, we still have the same brains we had thousands of years ago, and this mismatch is at the heart of why so many of us struggle to resist tempting foods that we know we shouldn’t eat."
             },
             {
               "paragraphId": "para-zj-2024-jan-reading-d-4",
@@ -543,7 +543,7 @@
             },
             {
               "paragraphId": "para-zj-2024-jan-grammar-fill-p1",
-              "text": "Of course, shops are not charities — they price goods in the way  __58__will make them the most money. If most of their customers are happy to buy larger quantities, that’s  __59__they’ll promote. But that leaves the solo (单独) customers out of pocket and disappointed."
+              "text": "Of course, shops are not charities – they price goods in the way  __58__will make them the most money. If most of their customers are happy to buy larger quantities, that’s  __59__they’ll promote. But that leaves the solo (单独) customers out of pocket and disappointed."
             },
             {
               "paragraphId": "para-zj-2024-jan-grammar-fill-p2",
@@ -2612,7 +2612,7 @@
             "status": "wrong",
             "trap": {
               "primaryType": "entityMismatch",
-              "sourceQuote": "But farmers in east-central Alberta — downwind (下风处)   of the hail project flights — worry that precious moisture (水分) is being stolen from their thirsty land by the cloud seeding.",
+              "sourceQuote": "But farmers in east-central Alberta – downwind (下风处)   of the hail project flights – worry that precious moisture (水分) is being stolen from their thirsty land by the cloud seeding.",
               "sourceEntity": "farmers worry that precious moisture is being stolen",
               "optionText": "Conserve moisture in the soil.",
               "optionEntity": "Conserve moisture in the soil",
@@ -2695,7 +2695,7 @@
               {
                 "role": "primary",
                 "paragraphId": "para-zj-2024-jan-reading-c-1",
-                "quote": "But farmers in east-central Alberta — downwind (下风处)   of the hail project flights — worry that precious moisture (水分) is being stolen from their thirsty land by the cloud seeding.",
+                "quote": "But farmers in east-central Alberta – downwind (下风处)   of the hail project flights – worry that precious moisture (水分) is being stolen from their thirsty land by the cloud seeding.",
                 "anchor": "中东部农民担心水分被偷走"
               },
               {

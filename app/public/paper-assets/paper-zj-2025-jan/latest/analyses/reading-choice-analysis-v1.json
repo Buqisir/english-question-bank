@@ -316,7 +316,7 @@
           "status": "wrong",
           "trap": {
             "primaryType": "entityMismatch",
-            "sourceQuote": "Items are picked up at one of our libraries—the one you selected in the ILL Request Form.",
+            "sourceQuote": "Items are picked up at one of our libraries – the one you selected in the ILL Request Form.",
             "sourceEntity": "one of our libraries",
             "optionText": "Pick it up at the lending library.",
             "optionEntity": "the lending library",
@@ -325,7 +325,7 @@
           "trapEvidence": [
             {
               "paragraphId": "para-zj-2025-jan-reading-a-9",
-              "quote": "Items are picked up at one of our libraries—the one you selected in the ILL Request Form.",
+              "quote": "Items are picked up at one of our libraries – the one you selected in the ILL Request Form.",
               "anchor": "picked up at one of our libraries"
             }
           ]
@@ -491,7 +491,7 @@
             {
               "role": "primary",
               "paragraphId": "para-zj-2025-jan-reading-b-1",
-              "quote": "It really messed up my relationship with food — something that took me years to overcome.",
+              "quote": "It really messed up my relationship with food – something that took me years to overcome.",
               "anchor": "童年喂养方式损害了她与食物的关系"
             },
             {
@@ -537,7 +537,7 @@
         {
           "sourceText": "She is critical of the way she was fed.",
           "sourceRole": "correctOption",
-          "targetText": "It really messed up my relationship with food — something that took me years to overcome.",
+          "targetText": "It really messed up my relationship with food – something that took me years to overcome.",
           "targetParagraphId": "para-zj-2025-jan-reading-b-1",
           "relationType": "paraphrase",
           "note": "选项 critical of the way she was fed 对应原文 messed up my relationship with food，作者把童年喂养方式说成是对她造成伤害、花数年才克服，体现批评态度。"
@@ -559,7 +559,7 @@
           "trap": {
             "primaryType": "polarityReversal",
             "subtype": "oppositeAttitude",
-            "sourceQuote": "the kids themselves decide what and how much they want to consume — even if that means occasionally eating more cookies than carrots.",
+            "sourceQuote": "the kids themselves decide what and how much they want to consume – even if that means occasionally eating more cookies than carrots.",
             "sourceHighlight": "occasionally eating more cookies than carrots",
             "optionText": "Allowing kids to eat cookies occasionally.",
             "optionHighlight": "Allowing kids to eat cookies occasionally",
@@ -672,7 +672,7 @@
           "trap": {
             "primaryType": "polarityReversal",
             "subtype": "oppositeAction",
-            "sourceQuote": "the kids themselves decide what and how much they want to consume — even if that means occasionally eating more cookies than carrots.",
+            "sourceQuote": "the kids themselves decide what and how much they want to consume – even if that means occasionally eating more cookies than carrots.",
             "sourceHighlight": "decide what and how much they want to consume",
             "optionText": "Eat up what is provided for them.",
             "optionHighlight": "Eat up what is provided for them",
@@ -1282,7 +1282,7 @@
             {
               "role": "primary",
               "paragraphId": "para-zj-2025-jan-reading-d-4",
-              "quote": "if an object’s name was meant to sound genderless, like Miuu, participants would still assign a gender to it — they would assume Miuu was a “he” or “she.”",
+              "quote": "if an object’s name was meant to sound genderless, like Miuu, participants would still assign a gender to it – they would assume Miuu was a “he” or “she.”",
               "anchor": "人们仍主动赋予性别"
             }
           ]
@@ -1292,7 +1292,7 @@
         {
           "sourceText": "Gender is rooted in people's mind.",
           "sourceRole": "correctOption",
-          "targetText": "participants would still assign a gender to it — they would assume Miuu was a “he” or “she.”",
+          "targetText": "participants would still assign a gender to it – they would assume Miuu was a “he” or “she.”",
           "targetParagraphId": "para-zj-2025-jan-reading-d-4",
           "relationType": "paraphrase",
           "note": "选项 rooted in people's mind 对应原文 participants would still assign a gender、assume Miuu was a “he” or “she”，说明性别观念深植人心，故人们总会赋予物品性别。"
@@ -1330,7 +1330,7 @@
             {
               "role": "secondary",
               "paragraphId": "para-zj-2025-jan-reading-d-5",
-              "quote": "anthropomorphized products could be created to take on stereotype-inconsistent roles — a male robot that assists with nursing or a female robot that helps do calculations, for instance.",
+              "quote": "anthropomorphized products could be created to take on stereotype-inconsistent roles – a male robot that assists with nursing or a female robot that helps do calculations, for instance.",
               "anchor": "性别化产品承担反刻板印象角色的益处"
             }
           ]
@@ -1361,7 +1361,7 @@
           "trap": {
             "primaryType": "scopeShift",
             "subtype": "understatement",
-            "sourceQuote": "Similarly, anthropomorphized products could be created to take on stereotype-inconsistent roles — a male robot that assists with nursing or a female robot that helps do calculations, for instance.",
+            "sourceQuote": "Similarly, anthropomorphized products could be created to take on stereotype-inconsistent roles – a male robot that assists with nursing or a female robot that helps do calculations, for instance.",
             "sourceHighlight": "stereotype-inconsistent roles",
             "optionText": "The stereotypes of men and women.",
             "optionHighlight": "The stereotypes of men and women",

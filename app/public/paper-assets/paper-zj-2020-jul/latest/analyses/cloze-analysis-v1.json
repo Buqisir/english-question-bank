@@ -416,7 +416,7 @@
         },
         {
           "type": "repetition-echo",
-          "signalText": "fast—flowing traffic",
+          "signalText": "fast-flowing traffic",
           "signalSide": "context-after",
           "targetText": "the motorway",
           "relation": "下文 fast-flowing traffic 描述高速车流，复现 motorway 这一场景。"
@@ -625,7 +625,7 @@
       "evidence": [
         {
           "type": "collocation-partner",
-          "signalText": "with fast—flowing traffic",
+          "signalText": "with fast-flowing traffic",
           "signalSide": "context-after",
           "targetText": "the busy road",
           "relation": "with fast-flowing traffic 直接说明这是车流繁忙的路，busy 与之对应。"

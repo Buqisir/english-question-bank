@@ -817,7 +817,7 @@
             {
               "role": "secondary",
               "paragraphId": "para-2024-i-reading-c-2",
-              "quote": "to ones that require mental abstraction — such as drawing inferences from a text.",
+              "quote": "to ones that require mental abstraction – such as drawing inferences from a text.",
               "anchor": "需心理抽象的任务中优势更明显"
             }
           ]
@@ -1291,8 +1291,8 @@
           "trap": {
             "primaryType": "scopeShift",
             "subtype": "conditionRemoved",
-            "sourceQuote": "Biodiversity apps can use our study results to inform users of oversampled areas and lead them to places — and even species — that are not well-sampled.",
-            "sourceHighlight": "lead them to places — and even species — that are not well-sampled",
+            "sourceQuote": "Biodiversity apps can use our study results to inform users of oversampled areas and lead them to places – and even species – that are not well-sampled.",
+            "sourceHighlight": "lead them to places – and even species – that are not well-sampled",
             "optionText": "Review data from certain areas.",
             "optionHighlight": "Review data from certain areas",
             "explanation": "原文建议是告知用户过度采样区域并引导其前往采样不足的地方，而非审查（review）特定区域的数据，选项偷换了建议的具体内容。"
@@ -1300,7 +1300,7 @@
           "trapEvidence": [
             {
               "paragraphId": "para-2024-i-reading-d-7",
-              "quote": "Biodiversity apps can use our study results to inform users of oversampled areas and lead them to places — and even species — that are not well-sampled.",
+              "quote": "Biodiversity apps can use our study results to inform users of oversampled areas and lead them to places – and even species – that are not well-sampled.",
               "anchor": "引导用户前往采样不足之处"
             }
           ]
@@ -1353,7 +1353,7 @@
             {
               "role": "primary",
               "paragraphId": "para-2024-i-reading-d-7",
-              "quote": "Biodiversity apps can use our study results to inform users of oversampled areas and lead them to places — and even species — that are not well-sampled.",
+              "quote": "Biodiversity apps can use our study results to inform users of oversampled areas and lead them to places – and even species – that are not well-sampled.",
               "anchor": "告知用户并引导前往采样不足之处"
             },
             {
@@ -1369,7 +1369,7 @@
         {
           "sourceText": "Give guidance to citizen scientists",
           "sourceRole": "correctOption",
-          "targetText": "inform users of oversampled areas and lead them to places — and even species — that are not well-sampled",
+          "targetText": "inform users of oversampled areas and lead them to places – and even species – that are not well-sampled",
           "targetParagraphId": "para-2024-i-reading-d-7",
           "relationType": "paraphrase",
           "note": "正确选项 Give guidance 是原文 inform users... and lead them to places 的同义替换；结合第五段 users 即 citizen scientists，可知指导对象为公民科学家。"

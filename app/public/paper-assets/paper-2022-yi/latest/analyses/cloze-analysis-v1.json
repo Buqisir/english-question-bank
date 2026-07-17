@@ -13,7 +13,7 @@
   },
   "groups": {
     "group-2022-yi-cloze": {
-      "overview": "夹叙夹议的科普说明文：通过 USC 实验室对 2—4 岁幼儿的躲猫猫实验，论证幼儿“无效躲藏”并非出于自我中心，而是源于他们对“相互看见/相互承认”的认知信念。",
+      "overview": "夹叙夹议的科普说明文：通过 USC 实验室对 2 – 4 岁幼儿的躲猫猫实验，论证幼儿“无效躲藏”并非出于自我中心，而是源于他们对“相互看见/相互承认”的认知信念。",
       "affectiveArc": "由对幼儿“笨拙躲藏”的常见质疑切入，经实验逐步推翻旧解释，走向对幼儿认知的重新肯定，整体由质疑转向理解与肯定。"
     }
   },
@@ -272,7 +272,7 @@
       "signatureFacet": "cloze.signature.noun.semantic-field",
       "correctFit": {
         "optionLabel": "B",
-        "reason": "上文是把 2—4 岁幼儿带入实验室，故每个“孩子”与一名成人坐下；下文 asked the child 复现 child，确定主语是 child。"
+        "reason": "上文是把 2 – 4 岁幼儿带入实验室，故每个“孩子”与一名成人坐下；下文 asked the child 复现 child，确定主语是 child。"
       },
       "distractorGlosses": [
         {
@@ -307,9 +307,9 @@
         },
         {
           "type": "semantic-field",
-          "signalText": "young children aged 2—4",
+          "signalText": "young children aged 2 – 4",
           "signalSide": "context-before",
-          "relation": "上文受试对象是 2—4 岁幼儿，话题词呼应 child。"
+          "relation": "上文受试对象是 2 – 4 岁幼儿，话题词呼应 child。"
         }
       ],
       "teachingNote": "名词空可由上下文重复出现的同一指称词直接锁定。"
