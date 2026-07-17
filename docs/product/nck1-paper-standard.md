@@ -75,9 +75,10 @@ cloze + grammar_cloze + writing×2),听力原料另存(§4)。
 ## 6. 校验(gate)要求
 
 发布闸必须能校验:9 题组齐全、题号段正确、每题分值符合 §1、
-客观题答案数量齐(§3)、听力原料区存在且非空(§4)、含图表篇的
-figures 原料齐全(§8)。现有 publish gate 覆盖不到的项,刀②补
-verify 锁,不得靠人眼。
+客观题答案数量齐(§3)、七选五 optionBank 恰好 A–G 七句非空候选句
+(可作答卷面硬前提,owner 拍板 2026-07-16,validator blocking 已
+落地)、听力原料区存在且非空(§4)、含图表篇的 figures 原料齐全
+(§8)。现有 publish gate 覆盖不到的项,刀②补 verify 锁,不得靠人眼。
 
 ## 7. 变更管理
 
