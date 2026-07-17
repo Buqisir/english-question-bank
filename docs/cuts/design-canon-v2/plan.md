@@ -58,5 +58,6 @@ owner 已圈（2026-07-15）：读 vercel.com/design.md（Geist agent 可读设�
 - [x] DP-2 主代理 CR-lite 冷读 0MF + verify-radius-family 正例绿/负例
   双红（新文件族外值 & 祖父文件超 baseline 均咬人）+ housekeeping 73 +
   verify:all 82/0/0 真退出码（2026-07-16）
-- [ ] DP-3 owner 过目三条新法条文（docs 刀无浏览器 QA；文案法措辞
-  owner 有事后否决权）
+- [x] DP-3 owner 过目三条新法条文（docs 刀无浏览器 QA；文案法措辞
+  owner 有事后否决权）——**owner 过（2026-07-16「没问题」，三条全读
+  零否决），本刀闭环**

@@ -7,7 +7,8 @@ Last updated: 2026-07-16（similar-workbench-swap(E7) 收官 + **生产
 下一步队列（2026-07-16 收状态）：① ~~design-canon-v2~~ ✅ 2026-07-16
 收官（Geist 对照三条入宪：文案法 §9 / 间距节奏法 §8 / 圆角单一家族
 §5 + verify-radius-family 守门挂 CI，32 处族外值祖父化 ratchet；
-plan `docs/cuts/design-canon-v2/`；owner 过目条文待做）；
+plan `docs/cuts/design-canon-v2/`；owner 过目条文 ✅ 2026-07-16
+「没问题」零否决，本刀闭环）；
 ② small 挂账：~~serve 路径 44 个 .bak 清理~~ ✅ 2026-07-16（ea6568a，
 44 删 + consistency verify 新增 no-backup-files 断言负例验牙，CI 绿）、
 ~~no-hint 3 空疑似导入期数据损伤~~ ✅ 2026-07-16 收官（实核 **7 空**
