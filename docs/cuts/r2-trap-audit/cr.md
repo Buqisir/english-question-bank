@@ -76,3 +76,43 @@
 - 我只读了 7 条命中的 **explanation 文本**，未读对应**原文段落+选项全文**，故「真贴错 / 假阳」的逐条归属是基于解释措辞的推断，非定论——这恰恰印证 MF-1：这类判断需要 owner 看原文，不该被机审当实锤自动定案。
 - `describeTrap` 我推断 main 对 paper-2023-i「已活崩」，但未在 main 实跑 buildPaperAssetSurfaceModel 复现崩溃（worktree 在 main 只读，且任务限定不重跑）；若该消费方在 main 有上层 try/catch 兜底，则「顺带修真崩」的表述应弱化为「消除潜在抛错」。
 - 「144 避坑数」「1395 总数」「63 断言全绿」我采信主代理已核的重跑，未亲自复算。
+
+---
+
+## CR-2：r2-trap-rulings（判例落地）— fresh CR 冷读（2026-07-16）
+
+**Verdict: APPROVE**（0 Must Fix / 3 Should Watch / 2 Nice-to-have）。
+
+本刀执行 rulings.md CL-1~7 的 8/8 处置：回牌 ×3（纯撤 suspension）、改判 ×5（重铸子 schema）。改判 5 条的教学语义逐条对照判例**忠实**、无发明原判例外的论断；三处 sourceText 与 entityMismatch 的 sourceQuote 均已对 paper-asset 语料实证为**原文真串**（无幻造引文）。verify 46 断言实测为真检（recomputability / 白名单防腐 / 重铸完整性 / suspension=0 / 真模块行为），DP-2 反转为真 DOM 断言。Forbidden：app/src 与 server 零 diff、versions/ 零触碰、回牌 3 条纯 suspension 键删。上一刀 plan.md Forbidden 里「不改 primaryType」是**第一段**的相位边界——本刀正是其裁4 点名的「第二段判例战役另立刀」，改判由 owner rulings 授权，不构成 scope drift。
+
+### Findings
+
+**Must Fix：无。**
+
+**Should Watch（不挡合并）**
+
+- **SW-A｜matchType 枚举表意不足 = schema 债（对应重点复核 2②）。** 枚举仅 `exact|wordFamily`；DEV 把 CL-3 近场景联想（dinner→cook）与 CL-4 句式复现（too big→too fast）都映成 `wordFamily`。**裁：可接受，挂账。** 理由：① `matchType` 全程不进 UI（`paperAssetSurfaceAdapter.ts` 只 surface `relationNote`，见 524/549），教师/学生看到的是 relationNote 全文，两条 relationNote 均忠实写明「近场景联想」「句式复现」——**教学内容零失真**；② 为 2 条扩枚举违反 owner 自己的 CL-7 razor（量少不动 schema）。挂账：第二段若积累到有量的近场景/句式复现类，再定是否补 `nearScene`/`syntacticEcho` 枚举值。
+- **SW-B｜R6 排除条件 `claim.includes(quoted)` 的召回边界（对应重点复核 3）。** 判据用「引文是 claim 子串」而非 CL-6 字面的「引文=选项自身文本」。**裁：子串是对的、非过宽 bug。** CL-6 实例本身就是子串命中（`"introducing a concept"` ⊂ claim `"By introducing a concept."`），改成严格相等反而会**漏掉**真正的 CL-6。理论过宽情形（某真贴错的原文钩短语恰好也含于 option claim → 被静默排除）方向安全：只少报候选、不误摘、owner 懒人桶日常讲评兜底。挂账：新卷导入后重跑 scan、人核，防语料增长带来新的假阴。
+- **SW-C｜row 档仍无真语料/真渲染证（承 CR-1 SW-2）。** 本刀把 8 条 suspension 全撤，全库 `suspension` 计数归 0，摘牌机制（badge 隐藏 / row 整块 null）现**零真数据行驶**，仅靠 verify group 6 合成 fixture 真模块调用护住。本刀未新增 row 路径风险，属继承挂账：下一批机器可证伪实锤命中产生真 suspension 时，补一次真渲染证。
+
+**Nice-to-have**
+
+- **NTH-1｜entityMismatch 的 sourceQuote 尾部丢词。** zj-2020-jan q021-C 的 sourceQuote 结尾 `...in the magazine.`，原文实为 `...in the magazine article.`（丢 "article"）；中段省略号合法、无捏造。entityMismatch 的 sourceQuote 不参与高亮精配，影响可忽略；若后续加 source-highlight 精配消费方需回填。
+- **NTH-2｜scan-report「R6…findings 从 7 降到 2」措辞把 R6 与 4 条改判的净效果并算。** R6 单独只移除 zj-2020-jul 1 条（7→6），降到 2 是叠加 4 条改判后的 raw labelExplanationContradiction 命中数（2022-jia+2024-ii，均已白名单）。数值 2 正确，仅归因措辞略糊；纯文档，非载重。
+
+### 七项焦点逐条结论
+
+1. **改判 5 条重铸忠实度**：**通过。** 逐条对判例：CL-2 corn（sourceText `the corn state`=原文真串，matchType exact，relationNote 忠实）；CL-3 dinner→cook（sourceText `dinner time` 真串，relationNote 写明近场景联想）；CL-4 too big/bright（sourceText `too big, too bright` 真串，relationNote 写明句式复现）；CL-5 entityMismatch（sourceQuote 对 paper-asset 实证为真、母亲/Mrs.Calloway 主体归属忠实、张冠李戴定性符判例）；CL-7 unsupportedClaim（claim=选项文本、explanation 纯中文无英文引号钩、不再触发启发式）。**无发明原判例外的论断，无幻造引文。**
+2. **DEV 自主裁定 ×2**：① CL-7 删除 sibling `trapEvidence`——**裁：正当。** 非仅「语料惯例 0/566」：`server/paper-import/validator.mjs:387` 硬规则「unsupportedClaim 不允许 trapEvidence，normalized 输出直接 delete + warning」——改判为 unsupportedClaim 后**保留 trapEvidence 反而违规**。教学证据损失是 owner CL-7 改判（explanation-only 无中生有）的既定代价，且面板对 unsupportedClaim+0 evidence 行为既有正常分支（`PaperAssetAnalysisPanel.tsx:68`），无异常空态。② matchType→wordFamily 映射——见 SW-A，可接受挂账。
+3. **R6 修复正确性**：**通过，非过宽。** 见 SW-B。排除逻辑用子串是对的（CL-6 实例即子串），召回边界记 SW。
+4. **白名单机制**：**通过。** adjudications.json 2 条与 rulings.md CL-1 note 互指完整；scanner（trap-audit-scan.mjs）与 verify（group 1）**双侧独立各自 import evaluateOption + isAdjudicated 重算**，对称；防腐断言在位——verify group 3 断言每条白名单项 (a) ruling CL-N 在 rulings.md 存在 `### CL-N` 标题、(b) **仍是 evaluateOption 的真实 raw 命中**（不 stale）。2022-jia/2024-ii 经核实仍 raw 命中；zj-2020-jul 已被 R6 机器排除、正确地**不**入白名单。
+5. **verify 非假绿**：**通过。** 46 断言均行为真检：group1 白名单过滤后 live 重扫 == committed findings.json 逐字节；group4 重铸完整性复用 lib 的 `REQUIRED_FIELDS_BY_TYPE`（与扫描器同表，不会漂移），实测 5 条重铸各 0 missing；group5 全库 suspension=0；group6 合成 fixture 真调 `buildPaperAssetSurfaceModel`/`loadGroupAnalysisTexts`；group7 CL-7 记录过真 adapter 断言 trapSuspension=null（徽章恢复）+ trapExplanation 非空（describeTrap 不崩于重铸 shape）+ trapLabel present。DP-2 ① 反转为「徽章恢复显『无中生有』+ 几何可见 + 解释在」、①b 新增「2023-yi 显『原文词钩干扰』」，均 waitFor+boundingBox+innerText 相等真 DOM 断言。（未重跑，采信主代理已核真实退出码 tsc/46/verify:all 83-1-0/DP-2 18。）
+6. **Forbidden**：**全遵守。** `git diff main...r2-trap-rulings -- app/src/** server/**` 空；versions/ 零 diff；回牌 3 条（2022-jia/2024-ii/zj-2020-jul）为纯 suspension 键删，explanation/primaryType 逐字节未动（抽核 zj-2020-jul 复认通过）。改判改 primaryType 属本刀 rulings 授权，不受第一段 Forbidden 约束。
+7. **scan-report 判后状态诚实性**：**通过。** 「判后状态」节所列 findings 0 / 白名单 2 / suspension 0 / 8-8 处置清单，与 scan-findings.json（`[]`）、adjudications.json（2 条）、全库 suspension 实数（0）逐项对帐一致，历史扫描节未被改写。唯一措辞糊点见 NTH-2。
+
+### Self-Review Blind Spots（喂后续 Big CR / owner 裁真）
+
+- 教学语义忠实度我以**判例 note + relationNote/explanation 文本 + sourceText/sourceQuote 是否原文真串**三方交叉判定；未通读每卷完整原文段落与全部选项，故「忠实」是强证据推断而非全文复核——owner DP-3 逐条过目时仍应亲眼确认 CL-3/CL-4 的联想/句式定性对学生是否讲得通。
+- verify 46 断言与 DP-2 18 我**读断言语义为真**，但**未在本会话重跑**（任务限定 + 主树只读），采信主代理已核真实退出码；若 CI 复跑出任何红，以 CI 为准。
+- R6 过宽的理论假阴我构造了情形但**未在现语料找到实例**（现语料该类为 0）；「安全方向」结论依赖「懒人桶日常讲评兜底」这一 owner 既定运营模型成立。
+- entityMismatch sourceQuote 丢 "article" 我判为无害，前提是「无 source-highlight 精配消费方」——我核了当前 adapter 只读 relationNote/explanation，但未穷举未来 print/DOCX 是否会引 entityMismatch.sourceQuote 做精配。
