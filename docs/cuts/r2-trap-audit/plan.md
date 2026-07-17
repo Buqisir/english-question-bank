@@ -95,11 +95,15 @@
   非虚假，裁4 逐条裁后误摘回牌）。SW-1=describeTrap 穷尽性守卫
   丢失、SW-2=row 档无真语料 DOM 证，均挂账。
 - [ ] 裁3：merge + main CI 绿。
-- [ ] 裁4：owner 三件事一起拍：① **逐条过目 7 条启发式命中**（坐标
-  在 scan-findings.json，裁真贴错/假阳/边界——误摘者回牌）；
-  ② DP-3（QA 表：摘牌题徽章不显/解释在、正常题照显、DOCX 正常）
-  → 部署；③ **第二段判例战役范围**（懒人桶重分类打多深）——战役
-  另立刀，不进本刀。
+- [x] 裁4①③：owner 判例 8/8 落判（2026-07-16，审卷页 ruling-card.html
+  当场裁；词钩 owner 定义 + CL-1~7 入 rulings.md）；**第二段战役当场
+  收官**——机审真数不支持全量重分类，剩余懒人桶讲评撞到再报。落地刀
+  r2-trap-rulings 同日收（merge 8179a5b，CR-2 APPROVE 0MF/3SW，主代理
+  亲跑四命令全绿 + main CI 双证）：回牌 3 / 改判重铸 5（忠实度 CR 逐条
+  核 + 引文防幻造实证）、机审吸收判例（R6 假阳修复 + adjudications
+  白名单互指 rulings.md）、库内 suspension 归零。
+- [ ] 裁4②：owner DP-3（QA 表改版：回牌题徽章恢复、改判题显新标签、
+  DOCX 正常）→ 拍板部署生产。
 
 ## Verify（RM 闸口径）
 

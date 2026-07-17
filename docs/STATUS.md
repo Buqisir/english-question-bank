@@ -38,6 +38,16 @@ analysis 三字段；owner 判例表逐空拍板后修复 + verify baseline 刷�
 
 ## 主线焦点
 
+- 2026-07-16：**R2 干扰项双刀收官（r2-trap-audit + r2-trap-rulings）**
+  （merge db46b41/8179a5b，CR APPROVE 1MF当场收/0MF，主代理亲跑四命令
+  全绿×2 + main CI 双证×2）：R2 目的重定向（相似题尾巴注销→讲评可信）；
+  1395 全扫（实锤远低抽检外推）→ 摘牌 8 → owner 判例 8/8 落判（词钩
+  定义原话 + CL-1~7 入 rulings.md，审卷页就地标注）→ 回牌 3/改判重铸 5
+  → 机审吸收判例（R6+白名单），suspension 归零，**第二段战役当场收官**。
+  **账单**：audit DEV 255k+CR 71k；rulings DEV 152k+CR-2 77k；图卡与判例
+  主代理亲做；出场 ~10。**待 owner DP-3（裁4②）+ 部署**（与孤儿退役刀
+  后续同批）。插曲：本机 brew 半升级致 node dyld 断裂，重装 node 修复
+  （25→26.5）。
 - 2026-07-16：**reading-analysis-retire 收官（孤儿支退役）**（merge
   af21f7c，fresh CR APPROVE 0MF/3SW，主代理 worktree 亲跑四命令真实
   退出码全 0 + main CI 双证）：RA 全支 + PI 两子面三层退净（122 文件
