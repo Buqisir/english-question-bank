@@ -230,6 +230,56 @@ console.log('\nTest 7: Writing answer box sizing')
   assert('exactly 2 writing-answer-box elements emitted', boxCount === 2, `got ${boxCount}`)
 }
 
+// --- Test 7b: writing-box-starters (owner 拍板 2026-07-16) ---
+console.log('\nTest 7b: Writing answer box — continuation starters printed')
+{
+  const STARTER_1 = 'Daniel and Rachel suggested that Emily continue her journey by train.'
+  const STARTER_2 = 'Three days later, Emily returned to get her car.'
+
+  // Negative-first (验牙): no starters on this asset yet → box stays empty,
+  // confirming the assertion below actually distinguishes the two states.
+  const noStarterItems = [
+    { detail: { id: 'g-cont', title: '读后续写', groupType: 'writing', passage: { materialText: 'Once upon a time.' }, questions: [] }, score: 25 },
+  ]
+  const noStarterBlocks = [{ type: 'question_group', questionGroupId: 'g-cont', score: 25 }]
+  const emptyHtml = buildPrintHtml({ title: 'Writing', versionType: 'student', printStyle: 'exam', items: noStarterItems, blocks: noStarterBlocks, questionNumberStart: 1 })
+  const emptyBoxMatch = emptyHtml.match(/<div class="writing-answer-box"[^>]*>([\s\S]*?)<\/div>/)
+  assert('① no writingTask/no starters: box has no starter-line elements (still empty box, red-before-green)', emptyBoxMatch?.[1] === '', emptyBoxMatch?.[1])
+
+  const withStarterItems = [
+    {
+      detail: {
+        id: 'g-app', title: '应用文写作', groupType: 'writing', passage: { materialText: '请写一篇短文。' }, questions: [],
+        writingTask: { taskType: 'application' },
+      },
+      score: 25,
+    },
+    {
+      detail: {
+        id: 'g-cont', title: '读后续写', groupType: 'writing', passage: { materialText: 'Once upon a time.' }, questions: [],
+        writingTask: { taskType: 'continuation', continuationStarters: [STARTER_1, STARTER_2] },
+      },
+      score: 25,
+    },
+  ]
+  const withStarterBlocks = [
+    { type: 'question_group', questionGroupId: 'g-app', score: 25 },
+    { type: 'question_group', questionGroupId: 'g-cont', score: 25 },
+  ]
+  const html = buildPrintHtml({ title: 'Writing', versionType: 'student', printStyle: 'exam', items: withStarterItems, blocks: withStarterBlocks, questionNumberStart: 1 })
+
+  const contBoxMatch = html.match(/<div class="writing-answer-box" style="width:145mm[^"]*">([\s\S]*?)<\/div>/)
+  const contBoxInner = contBoxMatch ? contBoxMatch[1] : ''
+  assert('② 续写框含两句 starter 文本, 且在 .writing-answer-box 内', contBoxInner.includes(STARTER_1) && contBoxInner.includes(STARTER_2), contBoxInner)
+  assert('② starter 原文照印, 不加 "Paragraph 1:" 前缀', !contBoxInner.includes('Paragraph 1:') && !contBoxInner.includes('Paragraph 2:'), contBoxInner)
+  assert('② first starter line hugs box top (writing-starter-line--1)', /writing-starter-line--1">Daniel and Rachel/.test(contBoxInner), contBoxInner)
+  assert('② second starter line at box 50% (writing-starter-line--2)', /writing-starter-line--2">Three days later/.test(contBoxInner), contBoxInner)
+
+  const appBoxMatch = html.match(/<div class="writing-answer-box" style="width:144mm[^"]*">([\s\S]*?)<\/div>/)
+  const appBoxInner = appBoxMatch ? appBoxMatch[1] : ''
+  assert('③ 应用文框仍空 (无 writing-starter-line)', appBoxInner === '', appBoxInner)
+}
+
 // --- Test 4: Handout style ---
 console.log('\nTest 4: Handout style')
 {

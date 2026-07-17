@@ -233,11 +233,27 @@ function isContinuationWriting(detail) {
   return /续写/.test(String(detail.title || detail.passage?.title || ''))
 }
 
+// writing-box-starters (owner 拍板 2026-07-16, Locked Decision 2): a
+// continuation box with a valid `detail.writingTask.continuationStarters`
+// (>=2 entries) prints each of the first two starter sentences at its
+// paragraph's own starting position — first hugging the box's top inner
+// lining, second at the box's 50% height mark — verbatim, no "Paragraph N:"
+// prefix (real-paper form; stored data for known assets carries none, but
+// this never adds one regardless). Missing/short starters (or an
+// application box, which never carries starters) fall through to the
+// pre-cut empty box unchanged.
 function renderWritingAnswerBox(detail) {
   const continuation = isContinuationWriting(detail)
   const widthMm = continuation ? 145 : 144
   const heightMm = continuation ? 57 : 65
-  return `<div class="writing-answer-box" style="width:${widthMm}mm;height:${heightMm}mm;"></div>`
+  const starters = continuation ? detail.writingTask?.continuationStarters : null
+  const starterLines =
+    Array.isArray(starters) && starters.length >= 2
+      ? [starters[0], starters[1]]
+          .map((text, i) => `<p class="writing-starter-line writing-starter-line--${i + 1}">${escapeHtml(text)}</p>`)
+          .join('')
+      : ''
+  return `<div class="writing-answer-box" style="width:${widthMm}mm;height:${heightMm}mm;">${starterLines}</div>`
 }
 
 export function buildPrintHtml({
@@ -661,10 +677,30 @@ body {
   display: inline-block;
 }
 
-/* standard §8 — 写作答题区: 应用文/读后续写各一个细边框素框, 框内无横线/提示行. */
+/* standard §8 — 写作答题区: 应用文/读后续写各一个细边框素框, 框内无横线/提示行.
+   writing-box-starters (owner 拍板 2026-07-16): 读后续写框内印两句段首语,
+   各在自己段落的起笔位置(第一句贴框顶内衬, 第二句在框高 50% 处), position:
+   relative 承载子行的 absolute 定位; 应用文框维持空框(无 starter 子元素时
+   与刀前字节一致)。 */
 .writing-answer-box {
   border: 0.48pt solid #000;
   margin: 1em auto 0;
+  position: relative;
+}
+
+.writing-starter-line {
+  position: absolute;
+  left: 3mm;
+  right: 3mm;
+  margin: 0;
+}
+
+.writing-starter-line--1 {
+  top: 1mm;
+}
+
+.writing-starter-line--2 {
+  top: 50%;
 }
 
 /* Exam density: tighter */

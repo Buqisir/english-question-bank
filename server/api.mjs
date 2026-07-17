@@ -1694,9 +1694,18 @@ function buildQuestionDetailsFromPaperAsset(asset, group, dbQuestions) {
   })
 }
 
+// writing-box-starters (owner 拍板 2026-07-16, Locked Decision 1): expose the
+// group's own writing task (taskType + continuationStarters) as a read-only,
+// additive `detail.writingTask` field — sourced from the asset's existing
+// `content.writingTasks` map, no schema/DB change. Only attached when the
+// group carries a `writingTaskId` AND that id resolves in the asset; every
+// consumer keeps using optional chaining, so groups without a hit (e.g.
+// non-writing groups, or an asset missing the task) are unaffected.
 function applyPaperAssetToQuestionGroupDetail(baseDetail, asset, group, dbQuestions) {
   const materialText = paperAssetParagraphText(group)
   const groupType = normalizePaperAssetGroupType(group?.groupType) || baseDetail.groupType
+  const writingTaskId = group?.writingTaskId
+  const writingTask = writingTaskId ? asset?.content?.writingTasks?.[writingTaskId] : null
   return {
     ...baseDetail,
     groupType,
@@ -1706,6 +1715,9 @@ function applyPaperAssetToQuestionGroupDetail(baseDetail, asset, group, dbQuesti
       title: String(group?.title || baseDetail.passage.title || '').trim(),
     },
     questions: buildQuestionDetailsFromPaperAsset(asset, group, dbQuestions),
+    ...(writingTask
+      ? { writingTask: { taskType: writingTask.taskType, continuationStarters: writingTask.continuationStarters } }
+      : {}),
   }
 }
 

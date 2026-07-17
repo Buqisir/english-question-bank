@@ -609,6 +609,65 @@ function assertRealAssetFigureEmbed() {
   assert('a group with no paper-asset match never emits a <w:drawing>', !noFigureXml.includes('<w:drawing>'))
 }
 
+// ------------------------------------------------------------------
+// writing-box-starters (owner 拍板 2026-07-16) — 续写答题框由单格改两行
+// 表格, 每行印一句段首语; 应用文框维持空框; 学生版/教师版都印 (段首语是
+// 题面不是答案). Negative-first (验牙): no `writingTask` on the detail →
+// still a single-cell empty-paragraph table (pre-cut byte shape), proving
+// this assertion actually distinguishes the two states before asserting
+// the happy path.
+// ------------------------------------------------------------------
+const STARTER_1 = 'Daniel and Rachel suggested that Emily continue her journey by train.'
+const STARTER_2 = 'Three days later, Emily returned to get her car.'
+
+function assertWritingBoxStarters() {
+  const renderer = makeRenderer()
+
+  // ① No starters (no writingTask at all) → box stays the pre-cut single
+  // empty-cell table — red-before-green control.
+  {
+    const detail = { id: 'g-cont', title: '读后续写', groupType: 'writing', passage: { materialText: 'Once upon a time.' }, questions: [] }
+    const items = [{ detail, note: '', score: 25, sectionTitle: '' }]
+    const blocks = [{ type: 'question_group', questionGroupId: 'g-cont', score: 25 }]
+    const xml = renderer.buildDocumentXml({ title: 'T', versionType: 'student', items, blocks, questionNumberStart: 1, printStyle: 'exam' })
+    assert('① no writingTask: continuation box is still a single empty-paragraph <w:tc><w:p/></w:tc> (red-before-green)', xml.includes('<w:tc><w:tcPr><w:tcW w:w="8220" w:type="dxa"/></w:tcPr><w:p/></w:tc>'), '')
+    assert('① no writingTask: no starter text leaks into document.xml', !xml.includes(STARTER_1) && !xml.includes(STARTER_2), '')
+  }
+
+  // ② Continuation box with starters + application box alongside (no
+  // starters ever attach to `application`) — both versionType (学生版/
+  // 教师版都印, 段首语是题面不是答案).
+  for (const versionType of ['student', 'teacher']) {
+    const appDetail = {
+      id: 'g-app', title: '应用文写作', groupType: 'writing', passage: { materialText: '请写一篇短文。' }, questions: [],
+      writingTask: { taskType: 'application' },
+    }
+    const contDetail = {
+      id: 'g-cont', title: '读后续写', groupType: 'writing', passage: { materialText: 'Once upon a time.' }, questions: [],
+      writingTask: { taskType: 'continuation', continuationStarters: [STARTER_1, STARTER_2] },
+    }
+    const items = [
+      { detail: appDetail, note: '', score: 25, sectionTitle: '' },
+      { detail: contDetail, note: '', score: 25, sectionTitle: '' },
+    ]
+    const blocks = [
+      { type: 'question_group', questionGroupId: 'g-app', score: 25 },
+      { type: 'question_group', questionGroupId: 'g-cont', score: 25 },
+    ]
+    const xml = renderer.buildDocumentXml({ title: 'T', versionType, items, blocks, questionNumberStart: 1, printStyle: 'exam' })
+
+    assert(`② (${versionType}) continuation box document.xml contains starter 1 verbatim, no "Paragraph 1:" prefix`, xml.includes(`<w:t xml:space="preserve">${STARTER_1}</w:t>`), '')
+    assert(`② (${versionType}) continuation box document.xml contains starter 2 verbatim, no "Paragraph 2:" prefix`, xml.includes(`<w:t xml:space="preserve">${STARTER_2}</w:t>`), '')
+    assert(`② (${versionType}) continuation box is a TWO-ROW table (2 trHeight rows summing to the §8 145×57mm total)`, (xml.match(/<w:trHeight w:val="\d+" w:hRule="exact"\/>/g) || []).filter((h) => xml.includes(h)).length >= 2, '')
+
+    // ③ Application box (no starters) stays the single empty-cell table —
+    // find its own <w:tbl> (the first one, application group renders first).
+    const firstTblEnd = xml.indexOf('</w:tbl>')
+    const appTbl = xml.slice(0, firstTblEnd + '</w:tbl>'.length)
+    assert(`③ (${versionType}) application box (no starters) stays empty <w:tc><w:p/></w:tc>`, appTbl.includes('<w:p/></w:tc>') && !appTbl.includes(STARTER_1), appTbl)
+  }
+}
+
 // ============================================================
 // Main
 // ============================================================
@@ -623,6 +682,7 @@ async function main() {
   assertApiIntegration()
   await assertRealAssetBlankCounts()
   assertRealAssetFigureEmbed()
+  assertWritingBoxStarters()
 
   // draft-numbering-style cr.md MF-1: negative case — the exam-style DOCX
   // path must REJECT a blank/question count mismatch (2 in-text blanks vs 3

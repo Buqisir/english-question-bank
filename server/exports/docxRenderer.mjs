@@ -281,7 +281,17 @@ function mmToTwips(mm) {
   return Math.round((mm * 1440) / 25.4)
 }
 
-/** standard \u00a78: \u5355\u683c\u8fb9\u6846\u8868\u683c (0.48pt \u7ec6\u8fb9\u6846\u7d20\u6846, \u6846\u5185\u65e0\u6a2a\u7ebf/\u63d0\u793a\u884c). */
+/**
+ * standard \u00a78: \u5355\u683c\u8fb9\u6846\u8868\u683c (0.48pt \u7ec6\u8fb9\u6846\u7d20\u6846, \u6846\u5185\u65e0\u6a2a\u7ebf/\u63d0\u793a\u884c).
+ * writing-box-starters (owner \u62cd\u677f 2026-07-16, Locked Decision 3): a continuation
+ * box with a valid `detail.writingTask.continuationStarters` (>=2 entries)
+ * becomes a TWO-ROW table (each \u2248 half the \u00a78 total height, no `insideH`
+ * border added so the two rows still read as one framed box) \u2014 each row's
+ * first paragraph prints one starter sentence verbatim (rFonts Times /
+ * size 21, same standard as the body runs), no "Paragraph N:" prefix.
+ * Missing/short starters (or an application box, which never carries
+ * starters) fall through to the pre-cut single empty-cell table unchanged.
+ */
 function docxWritingAnswerBox(detail) {
   const continuation = isContinuationWriting(detail)
   const widthMm = continuation ? 145 : 144
@@ -289,7 +299,21 @@ function docxWritingAnswerBox(detail) {
   const widthTwips = mmToTwips(widthMm)
   const heightTwips = mmToTwips(heightMm)
 
-  return `<w:tbl><w:tblPr><w:tblW w:w="${widthTwips}" w:type="dxa"/><w:tblBorders><w:top w:val="single" w:sz="4" w:space="0" w:color="000000"/><w:left w:val="single" w:sz="4" w:space="0" w:color="000000"/><w:bottom w:val="single" w:sz="4" w:space="0" w:color="000000"/><w:right w:val="single" w:sz="4" w:space="0" w:color="000000"/></w:tblBorders><w:tblLayout w:type="fixed"/></w:tblPr><w:tblGrid><w:gridCol w:w="${widthTwips}"/></w:tblGrid><w:tr><w:trPr><w:trHeight w:val="${heightTwips}" w:hRule="exact"/></w:trPr><w:tc><w:tcPr><w:tcW w:w="${widthTwips}" w:type="dxa"/></w:tcPr><w:p/></w:tc></w:tr></w:tbl>`
+  const tblPrGrid = `<w:tblPr><w:tblW w:w="${widthTwips}" w:type="dxa"/><w:tblBorders><w:top w:val="single" w:sz="4" w:space="0" w:color="000000"/><w:left w:val="single" w:sz="4" w:space="0" w:color="000000"/><w:bottom w:val="single" w:sz="4" w:space="0" w:color="000000"/><w:right w:val="single" w:sz="4" w:space="0" w:color="000000"/></w:tblBorders><w:tblLayout w:type="fixed"/></w:tblPr><w:tblGrid><w:gridCol w:w="${widthTwips}"/></w:tblGrid>`
+
+  const starters = continuation ? detail.writingTask?.continuationStarters : null
+  const validStarters = Array.isArray(starters) && starters.length >= 2 ? [starters[0], starters[1]] : null
+
+  if (!validStarters) {
+    return `<w:tbl>${tblPrGrid}<w:tr><w:trPr><w:trHeight w:val="${heightTwips}" w:hRule="exact"/></w:trPr><w:tc><w:tcPr><w:tcW w:w="${widthTwips}" w:type="dxa"/></w:tcPr><w:p/></w:tc></w:tr></w:tbl>`
+  }
+
+  const rowHeight1 = Math.round(heightTwips / 2)
+  const rowHeight2 = heightTwips - rowHeight1
+  const starterRow = (text, rowHeightTwips) =>
+    `<w:tr><w:trPr><w:trHeight w:val="${rowHeightTwips}" w:hRule="exact"/></w:trPr><w:tc><w:tcPr><w:tcW w:w="${widthTwips}" w:type="dxa"/></w:tcPr>${paragraph(text, { size: 21 })}</w:tc></w:tr>`
+
+  return `<w:tbl>${tblPrGrid}${starterRow(validStarters[0], rowHeight1)}${starterRow(validStarters[1], rowHeight2)}</w:tbl>`
 }
 
 function docxQuestionStem(detail, question) {
