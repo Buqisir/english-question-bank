@@ -4,19 +4,16 @@ Last updated: 2026-07-17（heading-fidelity 收官，**生产已部署
 6eb9c3a**：health ok、eqbank.cc 200。刀⑤ render-fidelity 新账四项
 至此全清）
 
-下一步队列（2026-07-16 收状态）：① ~~design-canon-v2~~ ✅ 2026-07-16
-收官（Geist 对照三条入宪：文案法 §9 / 间距节奏法 §8 / 圆角单一家族
-§5 + verify-radius-family 守门挂 CI，32 处族外值祖父化 ratchet；
-plan `docs/cuts/design-canon-v2/`；owner 过目条文 ✅ 2026-07-16
-「没问题」零否决，本刀闭环）；
-② small 挂账：~~serve 路径 44 个 .bak 清理~~ ✅ 2026-07-16（ea6568a，
-44 删 + consistency verify 新增 no-backup-files 断言负例验牙，CI 绿）、
-~~no-hint 3 空疑似导入期数据损伤~~ ✅ 2026-07-16 收官（实核 **7 空**
-带伤仅 2020-ii 一卷，回源 docx sha256 对证 passage 完好、损伤仅
-analysis 三字段；owner 判例表逐空拍板后修复 + verify baseline 刷新为
-修后真值，`docs/cuts/gf-2020-ii-hint-repair/`；**生产已部署 6264f6a**
-且实证 057 修后数据+.bak 归零）、CR watch 若干（谓语推导副本收拢、vp-driver README
-残句等，见各刀 cr.md）。
+下一步队列（2026-07-17 收状态，均未圈、owner 圈了再动）：
+① **R3 写作双 facet**（解析字段路线图下一站，program 在
+`docs/cuts/analysis-fields/program.md`）；② **taxonomy 模块化抽出**
+（engine-rewire deferred 交接）；③ **导题管线 agent 化**（07-07 提出，
+排 UI 大改后；`docs/cuts/branch-audit/rescued-seven-choices-option-repair.patch`
+待评估吸收）；④ UI 效率轴（键盘捷径/批量加卷，P2）。
+small 挂账：CR watch 若干（谓语推导副本收拢、vp-driver README 残句、
+r2 versions/ 断言本机环境脆、篇章标题档全活路径无渲染面——见各刀
+cr.md）。2026-07-16 队列旧项（design-canon-v2/.bak 清理/hint 修伤）
+均已 ✅，记录在主线焦点与 status-archive。
 
 ## 现在是什么
 
