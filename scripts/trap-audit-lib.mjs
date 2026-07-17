@@ -64,11 +64,30 @@ const QUOTED_ENGLISH_HOOK = /["'“']([a-zA-Z][a-zA-Z0-9 ,.'-]{2,})["'”']/
  * sourceText fields, but the check still defends against a stray leaked key
  * of either name (copy-paste from another trap shape) in addition to the
  * quoted-hook text pattern this corpus actually contains.
+ *
+ * R6 (rulings.md CL-6, 2026-07-16 判例): the quoted-hook pattern alone is a
+ * false-positive magnet when the quoted substring is just the option's own
+ * text being quoted back to explain why it is unsupported (e.g. an
+ * explanation that says `"introducing a concept" 在原文没有依据` where
+ * "introducing a concept" is lifted verbatim from `trap.claim` itself, not
+ * from the source passage). That is not a self-contradiction — it is the
+ * legitimate rhetorical move of restating the option before rejecting it.
+ * So a quoted-hook match is excluded when it is a case-insensitive substring
+ * of the option's own `claim` text. This does NOT cover every legitimate
+ * quote-of-original-passage-text case (owner ruling CL-1: quoting the
+ * passage's own wording for contrast is also legitimate but not mechanically
+ * distinguishable from a real word-hook) — those residual cases are handled
+ * by the adjudications.json whitelist at the scanner layer, not here.
  */
 export function isLabelExplanationContradiction(trap) {
   if (!trap || trap.primaryType !== 'unsupportedClaim') return false
   if (nonEmpty(trap.sourceQuote) || nonEmpty(trap.sourceText)) return true
-  return QUOTED_ENGLISH_HOOK.test(String(trap.explanation || ''))
+  const match = QUOTED_ENGLISH_HOOK.exec(String(trap.explanation || ''))
+  if (!match) return false
+  const quoted = match[1].trim().toLowerCase()
+  const claim = String(trap.claim || '').toLowerCase()
+  if (claim.includes(quoted)) return false
+  return true
 }
 
 /**

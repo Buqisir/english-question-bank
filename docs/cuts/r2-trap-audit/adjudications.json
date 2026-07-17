@@ -1,0 +1,18 @@
+[
+  {
+    "paperId": "paper-2022-jia",
+    "questionId": "q-2022-jia-028",
+    "optionLabel": "D",
+    "checkId": "labelExplanationContradiction",
+    "ruling": "CL-1",
+    "note": "选项自身词句（promise）在原文无原词无同义替换；解释引原文短语（take the plunge）是合法的对比论证，不构成词钩证据——owner 回牌，维持 unsupportedClaim。"
+  },
+  {
+    "paperId": "paper-2024-ii",
+    "questionId": "q-2024-ii-032",
+    "optionLabel": "A",
+    "checkId": "labelExplanationContradiction",
+    "ruling": "CL-1",
+    "note": "选项自身词句（poorly educated）在原文无原词无同义替换；解释引原文短语（wrong hands）是合法的对比论证，不构成词钩证据——owner 回牌，维持 unsupportedClaim。"
+  }
+]

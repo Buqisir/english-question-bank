@@ -1160,14 +1160,11 @@
           "optionTranslationZh": "他在家帮忙做饭。",
           "status": "wrong",
           "trap": {
-            "primaryType": "unsupportedClaim",
-            "claim": "He helped to cook at home.",
-            "explanation": "原文未提及作者早年在家帮忙做饭，第一段只提到\"dinner time\"这一用餐场景词，并无作者下厨的相关信息。",
-            "suspension": {
-              "level": "badge",
-              "reason": "labelExplanationContradiction",
-              "suspendedAt": "2026-07-16"
-            }
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "dinner time",
+            "optionText": "He helped to cook at home.",
+            "matchType": "wordFamily",
+            "relationNote": "原文第一段只提到“dinner time”这一用餐场景词，“dinner”与选项的“cook”属同场景高频伴随词联想，但原文并无作者本人下厨的相关信息，选项据此臆造下厨行为，属词钩干扰项。"
           }
         }
       ],

@@ -567,26 +567,10 @@
           "optionTranslationZh": "为了建立一个生态系统。",
           "status": "wrong",
           "trap": {
-            "primaryType": "timeOrderReversal",
-            "subtype": "timeOrderReversal",
-            "sourceQuote": "these different kinds of life got used to one another and formed their own ecosystem. After a few weeks, John added the sludge.",
-            "sourceHighlight": "formed their own ecosystem. After a few weeks, John added the sludge",
-            "optionText": "To build an ecosystem.",
-            "optionHighlight": "To build an ecosystem.",
-            "explanation": "原文是先形成生态系统、之后才加入污泥，建立生态系统是加污泥之前已完成的步骤，而非加污泥的目的，选项颠倒了先后关系。",
-            "suspension": {
-              "level": "badge",
-              "reason": "rogueType",
-              "suspendedAt": "2026-07-16"
-            }
-          },
-          "trapEvidence": [
-            {
-              "paragraphId": "para-2023-i-reading-b-3",
-              "quote": "these different kinds of life got used to one another and formed their own ecosystem. After a few weeks, John added the sludge.",
-              "anchor": "先建生态系统，后加污泥"
-            }
-          ]
+            "primaryType": "unsupportedClaim",
+            "claim": "To build an ecosystem.",
+            "explanation": "原文显示生态系统的形成是加入污泥之前已经完成的状态，而不是加污泥这一动作要达成的目的；原文并未把建立生态系统表述为目的，选项对目的的这一声称在原文中没有依据，属无中生有。"
+          }
         },
         {
           "label": "C",
