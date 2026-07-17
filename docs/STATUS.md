@@ -4,12 +4,16 @@ Last updated: 2026-07-17（heading-fidelity 收官，**生产已部署
 6eb9c3a**：health ok、eqbank.cc 200。刀⑤ render-fidelity 新账四项
 至此全清）
 
-下一步队列（2026-07-17 收状态，均未圈、owner 圈了再动）：
+下一步队列（2026-07-17 刷新，均未圈、owner 圈了再动）：
 ① **R3 写作双 facet**（解析字段路线图下一站，program 在
-`docs/cuts/analysis-fields/program.md`）；② **taxonomy 模块化抽出**
-（engine-rewire deferred 交接）；③ **导题管线 agent 化**（07-07 提出，
-排 UI 大改后；`docs/cuts/branch-audit/rescued-seven-choices-option-repair.patch`
-待评估吸收）；④ UI 效率轴（键盘捷径/批量加卷，P2）。
+`docs/cuts/analysis-fields/program.md`）；② **导题管线 agent 化**
+（07-07 提出，排 UI 大改后；
+`docs/cuts/branch-audit/rescued-seven-choices-option-repair.patch`
+待评估吸收）；③ UI 效率轴（键盘捷径/批量加卷，P2）。
+~~taxonomy 模块化抽出~~ **撤刀**（2026-07-17 owner 拍板，不挂复活
+条件）：立刀的两个解锁目标均已消失——跨主题群加分被配方 v2 废止
+（同话题硬门槛）、阶梯推 v3（similar-questions program「远期杠杆」
+条目是唯一活账）；taxonomy 现零外部消费者，真做 v3/R3 时随刀抽即可。
 small 挂账：CR watch 若干（谓语推导副本收拢、vp-driver README 残句、
 r2 versions/ 断言本机环境脆、篇章标题档全活路径无渲染面——见各刀
 cr.md）。2026-07-16 队列旧项（design-canon-v2/.bak 清理/hint 修伤）
