@@ -39,12 +39,17 @@ CR-lite。
 
 ## 裁决点清单（PM 断点锚）
 
-1. [ ] DP-1 主代理自验：裁后 PNG 亲眼看（Read 图）+ title 改后
-   verify-paper-assets-consistency + verify:all + tsc 真退出码
-2. [ ] CR-lite（主代理冷读 diff）
-3. [ ] DP-2 浏览器断言：详情页标题唯一渲染（DOM 文本计数）+ 整卷页
-   面包屑=「2026年新课标Ⅰ卷」+ my-space 删除键入操作行
-4. [ ] merge → main CI 绿
+1. [x] DP-1 主代理自验：裁后 PNG 亲眼看过（348px 干净）+
+   verify-paper-assets-consistency 199 绿 + tsc 0 + verify:all 83/1
+   （唯一红=verify-r2-trap-audit「versions/ 环境脆」既有挂账：versions/
+   不入 git、本机 33 卷都有故必红、CI 新鲜环境绿——与本刀无关，diff
+   零触碰 versions/；main CI success 双证）
+2. [x] CR-lite（主代理冷读 diff，0 MF：三处最小面、title 与 DB 真值
+   一致、图标键 aria-label/title 双保留）
+3. [x] DP-2 浏览器断言 5/5 绿（图 naturalHeight=348 + DOM 标题恰 1 +
+   面包屑真值 + 删除键同排 + aria-label）——`qa/dp2-content-trust.mjs`
+   入档可重跑
+4. [x] merge → main CI 绿（run 29579840222，conclusion=success 双证）
 5. [ ] DP-3 owner 目检（Chrome 实看详情页/整卷页/个人空间）→ 部署
 
 ## Verification
