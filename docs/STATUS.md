@@ -1,8 +1,8 @@
 # 当前状态（medium / large cut 收官时更新）
 
-Last updated: 2026-07-16（similar-workbench-swap(E7) 收官 + **生产
-部署 2b5c2b0**（owner DP-3 全过后拍板）：health ok、eqbank.cc 200。
-相似题 v2 四刀 D1/E5/E6/E7 全线闭环，全部在生产）
+Last updated: 2026-07-16 晚（writing-box-starters + dash-optionbank-gate
+双刀收官，**生产已部署 48c1116** + 生产库 normalize SQL 已应用带备份：
+health ok、eqbank.cc 200）
 
 下一步队列（2026-07-16 收状态）：① ~~design-canon-v2~~ ✅ 2026-07-16
 收官（Geist 对照三条入宪：文案法 §9 / 间距节奏法 §8 / 圆角单一家族
@@ -39,6 +39,16 @@ analysis 三字段；owner 判例表逐空拍板后修复 + verify baseline 刷�
 
 ## 主线焦点
 
+- 2026-07-16 晚：**writing-box-starters + dash-optionbank-gate 双刀收官**
+  （merge a6227a2/22cfb2a，流水线 fresh CR APPROVE 0MF/5SW + 数据刀
+  CR-lite，verify 真退出码全 0×2 + main CI 双证；刀⑤新账 ①②④ 三项
+  销账）：续写答题框内印段首语（print+DOCX 双面、第二句 50% 起笔）、
+  paper-2026-i 破折号归一 22 处（38 处判例扫描，中文 16 处合规保留，
+  quote 断链 0）、七选五 optionBank validator blocking 守门。**owner
+  DP-3 四样张目检过；生产 48c1116 + 库 SQL 已应用**。**账单**：流水线
+  257k；数据刀主代理直做。挂账：全库破折号批修候选（15 卷 ~120 处，
+  牵 R2 基线须单独立刀）、r2 versions/ 断言本机环境脆、nck1 §6 增补
+  条文待 owner 拍板——见 `docs/cuts/dash-optionbank-gate/cut-note.md`。
 - 2026-07-16：**R2 干扰项双刀收官（r2-trap-audit + r2-trap-rulings）**
   （merge db46b41/8179a5b，CR APPROVE 1MF当场收/0MF，主代理亲跑四命令
   全绿×2 + main CI 双证×2）：R2 目的重定向（相似题尾巴注销→讲评可信）；
@@ -467,10 +477,11 @@ analysis 三字段；owner 判例表逐空拍板后修复 + verify baseline 刷�
   线长于完形 3:2 实测定谳）。广东 QA 单数值口径废止。~~刀⑤渲染
   保真~~ ✅ **实为 2026-07-08 已收官**（PR #278，CR APPROVE，生产
   b391f20 批；「施工图就绪圈了即立刀」系陈账，2026-07-16 owner
-  再圈时核出更正）。刀⑤真正活账=其 cut-note 新账：①七选五 A-G
-  候选句未入库（paper-2026-i 数据缺口+nck1 强制字段）②写作框
-  段首语印框内（需 server 暴露数据，小刀）③部标题字号归一跟进
-  小刀④paper-2026-i 破折号归一小刀。三项低置信待 owner 实物复核
+  再圈时核出更正）。刀⑤真正活账=其 cut-note 新账：~~①七选五
+  A-G 候选句~~ ✅（数据早经后续刀补齐实核；validator 守门随
+  dash-optionbank-gate 收，2026-07-16）~~②写作框段首语~~ ✅
+  writing-box-starters 收官~~④破折号归一~~ ✅ 同日收（均见主线焦点）
+  ；**仅剩 ③部标题字号归一小刀**。三项低置信待 owner 实物复核
   （题号句点/语法空线长/边距名义值），不阻塞。
 - UI 复评（2026-07-08，六刀后）：26 → **31/40**（快照
   `.impeccable/critique/`）。剩余：~~[P1] 两个未迁移解析孪生面
