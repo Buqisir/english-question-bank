@@ -67,7 +67,10 @@ section_header run size 24（12pt，两处 builder），篇章标题 size 22
 ## DP 裁决点清单
 
 - [x] DP-1 立项（owner 2026-07-17 圈定「③部标题字号归一」）
-- [ ] DP-2 流水线 verify 全绿（真实退出码）+ DEV 出 PDF/DOCX 样张
+- [x] DP-2 流水线 verify 全绿（真实退出码）+ DEV 出 PDF/DOCX 样张
   （含 部+节+篇章标题 同框页）入档 `docs/cuts/heading-fidelity/qa/`
+  （DEV 2026-07-17：verify-print-renderer 92/92、verify-h5g-docx-renderer
+  148/148、verify-draft-paper-docx 16/16、`pnpm -C app run verify:all`
+  83 pass/1 skip(off-repo fixture)/0 fail；样张见 qa/qa-notes.md）
 - [ ] DP-3 owner 实卷目检（渲染刀铁律）：部/节字重缩进层级对不对眼、
   10.5pt 后标题会不会显得弱、卷名 20pt 观感
