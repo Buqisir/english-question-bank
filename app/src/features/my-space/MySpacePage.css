@@ -343,6 +343,8 @@
   border-color: var(--eqb-color-border);
   color: var(--eqb-color-danger);
   margin-left: auto;
+  /* 图标紧凑型：三键同排装得下，不再换行孤行（2026-07-17 复评收账） */
+  padding: 6px 8px;
 }
 
 .my-space-card-actions .my-space-card-danger:hover:not(:disabled) {

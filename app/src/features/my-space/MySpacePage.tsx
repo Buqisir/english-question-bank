@@ -280,10 +280,12 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
                           <button
                             type="button"
                             className="my-space-card-danger"
+                            aria-label="删除"
+                            title="删除"
                             disabled={busyId === artifact.id}
                             onClick={() => requestDeleteArtifact(artifact)}
                           >
-                            <Trash2 size={14} /> 删除
+                            <Trash2 size={14} />
                           </button>
                         </div>
                       </article>
