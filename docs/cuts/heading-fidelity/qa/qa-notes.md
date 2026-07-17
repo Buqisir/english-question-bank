@@ -3,12 +3,16 @@
 `heading-fidelity-sample.pdf` / `heading-fidelity-sample.docx` 由
 `server/print-renderer.mjs` / `server/exports/docxRenderer.mjs`
 (exam printStyle, student versionType) 生成，固定 fixture（非真实卷号）——
-只为让 owner 在同一页内目检部/节/篇章标题三级层次，不是真实组卷产物。
+只为让 owner 在同一页内目检部/节/卷名层次，不是真实组卷产物。
 
 页面结构（`blocks` 顺序）：
 
 1. `section_header`「第一部分 阅读（共两节，满分50分）」→ **部标题**
-2. `question_group`（阅读理解 A，含篇章标题「A New Way to Learn」）→ **篇章标题**
+2. `question_group`（阅读理解 A）——注：**样张不含篇章标题**。exam 路径
+   （print-renderer 与 exam DOCX builder）本就不渲染 `passage.title`，
+   篇章标题档只存在于 handout 死码分支（draft-depassage-letter 既有
+   状态，非本刀引入）；本刀对其 size 22→21 的修正由 verify 断言直驱
+   覆盖（`assertHeadingFidelity()`），无可目检活面。CR MF-1 订正。
 3. `section_header`「第一节（共15小题；每小题2.5分，满分37.5分）」→ **节标题**
 4. `question_group`（语法填空）
 

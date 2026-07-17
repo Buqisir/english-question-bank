@@ -518,7 +518,7 @@ console.log('\nTest 8: Real paper-2026-i asset payload — behavioral blank coun
       // CSS contract: .group-header is bold, visually lighter than .section-header.
       const groupHeaderCssRule = buildPrintHtml({ title: 'CSS', versionType: 'student', printStyle: 'exam', items: [], blocks: [], questionNumberStart: 1 }).match(/\.group-header \{[^}]*\}/)?.[0] || ''
       assert(
-        '.group-header CSS rule is bold, font-size 11pt (half-step below .section-header 12pt)',
+        '.group-header CSS rule is bold, font-size 11pt (draft 大题头 B 形态，owner 拍板保留，独立于 .section-header 10.5pt)',
         /font-weight:\s*bold/.test(groupHeaderCssRule) && /font-size:\s*11pt/.test(groupHeaderCssRule),
         groupHeaderCssRule,
       )
