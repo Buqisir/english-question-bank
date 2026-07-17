@@ -104,6 +104,12 @@
   白名单互指 rulings.md）、库内 suspension 归零。
 - [ ] 裁4②：owner DP-3（QA 表改版：回牌题徽章恢复、改判题显新标签、
   DOCX 正常）→ 拍板部署生产。
+  - DP-3 owner 委托主代理亲验（2026-07-16「这些你能做的」）：数据层
+    latest/ 8/8 判例落地 + 全库 suspension 0；讲评面浏览器亲眼 8/8
+    （回牌 3 徽章恢复、改判 5 显新标签：词钩×3/对象错配/无中生有）；
+    教师版 DOCX 导出 zip+XML+textutil 三重过、判例题组内容完整（
+    【解析】=paperId 指针系 publisher.mjs 既有设计，非本刀回归）。
+    **QA 全过，仅剩 owner 拍板部署**（与孤儿退役刀同批）。
 
 ## Verify（RM 闸口径）
 
