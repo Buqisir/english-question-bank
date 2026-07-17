@@ -192,19 +192,19 @@
             {
               "role": "primary",
               "paragraphId": "para-2026-i-reading-a-3",
-              "quote": "Los Angeles Rams v Dallas Cowboys — Saturday, August 9",
+              "quote": "Los Angeles Rams v Dallas Cowboys – Saturday, August 9",
               "anchor": "8月9日 Rams 对 Cowboys"
             },
             {
               "role": "secondary",
               "paragraphId": "para-2026-i-reading-a-3",
-              "quote": "Los Angeles Chargers v Los Angeles Rams — Saturday, August 16",
+              "quote": "Los Angeles Chargers v Los Angeles Rams – Saturday, August 16",
               "anchor": "8月16日 Chargers 对 Rams"
             },
             {
               "role": "secondary",
               "paragraphId": "para-2026-i-reading-a-3",
-              "quote": "Los Angeles Rams v Houston Texans — Sunday, August 24",
+              "quote": "Los Angeles Rams v Houston Texans – Sunday, August 24",
               "anchor": "8月24日 Rams 对 Texans"
             }
           ]
@@ -223,7 +223,7 @@
           "trapEvidence": [
             {
               "paragraphId": "para-2026-i-reading-a-3",
-              "quote": "Los Angeles Chargers v New Orleans Saints — Sunday, August 10",
+              "quote": "Los Angeles Chargers v New Orleans Saints – Sunday, August 10",
               "anchor": "Chargers 仅两场之一"
             }
           ]
@@ -242,7 +242,7 @@
           "trapEvidence": [
             {
               "paragraphId": "para-2026-i-reading-a-3",
-              "quote": "Los Angeles Chargers v New Orleans Saints — Sunday, August 10",
+              "quote": "Los Angeles Chargers v New Orleans Saints – Sunday, August 10",
               "anchor": "Saints 仅一场"
             }
           ]
@@ -252,7 +252,7 @@
         {
           "sourceText": "the most games",
           "sourceRole": "stem",
-          "targetText": "Los Angeles Rams v Houston Texans — Sunday, August 24",
+          "targetText": "Los Angeles Rams v Houston Texans – Sunday, August 24",
           "targetParagraphId": "para-2026-i-reading-a-3",
           "relationType": "calculation",
           "note": "题干 the most games 需统计各队出赛场次：Rams 在 8 月 9、16、24 日共出现三次，为最多。"

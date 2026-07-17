@@ -438,6 +438,26 @@ function buildStructurePreview(asset) {
   }))
 }
 
+const SEVEN_CHOICES_OPTION_LABELS = ['A', 'B', 'C', 'D', 'E', 'F', 'G']
+
+// 七选五 A-G 候选句是可作答卷面的硬前提（刀⑤ render-fidelity 实证缺口：
+// paper-2026-i 首导时 optionBank 缺失、卷面无法复原），blocking 强制。
+function validateSevenChoicesOptionBank({ asset, blockingIssues }) {
+  for (const group of Object.values(asset?.content?.groups || {})) {
+    if (group?.groupType !== 'sevenChoices') continue
+    const optionBank = Array.isArray(group.optionBank) ? group.optionBank : []
+    const labels = optionBank.map((option) => String(option?.label || '').trim())
+    const missing = SEVEN_CHOICES_OPTION_LABELS.filter((label) => !labels.includes(label))
+    const emptyText = optionBank.filter((option) => !String(option?.text || '').trim()).length
+    if (missing.length > 0 || emptyText > 0 || optionBank.length !== SEVEN_CHOICES_OPTION_LABELS.length) {
+      blockingIssues.push(issue('blocking', 'sevenChoices.optionBankIncomplete', `${group.groupId}: 七选五 optionBank 必须为 A-G 七句非空候选句(现 ${optionBank.length} 条${missing.length > 0 ? `,缺 ${missing.join('/')}` : ''}${emptyText > 0 ? `,${emptyText} 条空文本` : ''})。`, {
+        suggestedFix: '在 paper-asset.content.groups.<七选五组>.optionBank 补齐 A-G 候选句全文。',
+        groupId: group.groupId,
+      }))
+    }
+  }
+}
+
 function validateNonReadingCompleteness({ asset, answerKey, warnings }) {
   for (const group of Object.values(asset?.content?.groups || {})) {
     const isReadingChoiceGroup = group?.groupType === 'reading' && readingChoiceSuffixPattern.test(group.groupId)
@@ -553,6 +573,7 @@ function validateParsedBundle(parsedFiles, warnings, blockingIssues) {
     warnings.push(issue('warning', 'grammarFillAnalysis.paperIdMismatch', 'grammar-fill-analysis paperId 与 paper-asset 不一致，将以 paper-asset 为准。'))
   }
 
+  validateSevenChoicesOptionBank({ asset: paperAsset, blockingIssues })
   validateNonReadingCompleteness({ asset: paperAsset, answerKey, warnings })
 
   return {

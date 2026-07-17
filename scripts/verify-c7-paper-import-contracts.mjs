@@ -195,6 +195,28 @@ assert(
   warningCodes(nonReadingMissingQuestion).has('nonReading.questionMissing'),
 )
 
+const sevenChoicesMissingOption = validatePaperImportPackage(
+  mutateJsonFile(fixtureFiles, 'paper-asset.json', (json) => {
+    json.content.groups['group-2024-jslk-seven-choices'].optionBank.pop()
+  }),
+)
+assert('seven-choices optionBank missing a label is blocking', !sevenChoicesMissingOption.ok)
+assert(
+  'seven-choices incomplete optionBank reports sevenChoices.optionBankIncomplete',
+  codes(sevenChoicesMissingOption).has('sevenChoices.optionBankIncomplete'),
+)
+
+const sevenChoicesEmptyOptionText = validatePaperImportPackage(
+  mutateJsonFile(fixtureFiles, 'paper-asset.json', (json) => {
+    json.content.groups['group-2024-jslk-seven-choices'].optionBank[0].text = '  '
+  }),
+)
+assert('seven-choices optionBank empty text is blocking', !sevenChoicesEmptyOptionText.ok)
+assert(
+  'seven-choices empty option text reports sevenChoices.optionBankIncomplete',
+  codes(sevenChoicesEmptyOptionText).has('sevenChoices.optionBankIncomplete'),
+)
+
 const arrayJson = validatePaperImportPackage([
   ...fixtureFiles.filter((file) => file.fileName !== 'answer-key.json'),
   { fileName: 'answer-key.json', buffer: Buffer.from('[]\n') },
