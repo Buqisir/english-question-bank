@@ -1,26 +1,50 @@
 #!/usr/bin/env node
 /**
  * verify-r2-trap-audit.mjs — r2-trap-audit cut (docs/cuts/r2-trap-audit/plan.md
- * Scope 步骤 4).
+ * Scope 步骤 4), updated post rulings.md 判例战役收官 (2026-07-16, CL-1~CL-7).
  *
- * Five groups of assertions:
- *   1. Recomputability — re-running the same read-only judgment logic
- *      (trap-audit-lib.mjs) against the live app/public/paper-assets corpus
- *      reproduces the committed scan-findings.json byte-for-byte (modulo key
- *      order), and scan-report.md's headline counts match. This is the "报告
- *      数字必须可由 findings.json 复算" requirement.
- *   2. Applied-batch integrity — every auto-suspend-eligible finding
- *      (rogueType / labelExplanationContradiction / structuralIncompleteness)
- *      has a `suspension` field on the matching trap in the live corpus with
- *      a legal `level` (badge|row) and `reason` (a real checkId); every
- *      evidenceFieldLeak finding has NOT been suspended (owner-review-only
- *      bucket, plan.md Forbidden boundary).
- *   3. Zero rogue types unsuspended — "latest 零野类型" reframed per the
- *      Forbidden rule (this cut may never rewrite `primaryType` itself): no
- *      rogueType finding is missing its suspension.
- *   4. Real-module behavior, against a self-contained synthetic fixture so
+ * Groups of assertions:
+ *   1. Recomputability, whitelist-adjusted — re-running the same read-only
+ *      judgment logic (trap-audit-lib.mjs) against the live
+ *      app/public/paper-assets corpus, MINUS any hit that
+ *      docs/cuts/r2-trap-audit/adjudications.json marks as owner-adjudicated
+ *      (rulings.md CL-1: legitimate quote-of-original-text-for-contrast,
+ *      still mechanically indistinguishable from a real word-hook after the
+ *      R6 fix), reproduces the committed scan-findings.json byte-for-byte
+ *      (modulo key order); scan-report.md's headline counts match. This is
+ *      the "报告数字必须可由 findings.json 复算" requirement, now adjudication-
+ *      aware since the scanner itself filters adjudicated hits out of
+ *      scan-findings.json (trap-audit-scan.mjs).
+ *   2. Applied-batch integrity — for every RAW (pre-whitelist) auto-suspend-
+ *      eligible finding: if it is owner-adjudicated, the ruling already
+ *      resolved it (回牌 = suspension removed, label kept; no live
+ *      auto-suspend-eligible finding in this corpus is currently an
+ *      unresolved improve-type ruling), so it must have NO suspension left;
+ *      otherwise it must still carry a legal suspension (level/reason). Every
+ *      evidenceFieldLeak finding has NOT been suspended regardless (owner-
+ *      review-only bucket, plan.md Forbidden boundary).
+ *   3. Adjudications integrity — every entry in adjudications.json points to
+ *      a `ruling` (CL-N) that actually exists as a "### CL-N" heading in
+ *      rulings.md, and the exact (paperId/questionId/optionLabel/checkId)
+ *      it names is still a real raw hit of evaluateOption() against the live
+ *      corpus (the whitelist entry isn't stale / doesn't reference a record
+ *      that no longer produces that hit).
+ *   4. Recast trap structural completeness — the five trap objects rulings.md
+ *      改判 into a different primaryType (2023-yi/q024-D, 2025-ii/q032-D,
+ *      960d0f8d/q026-C → sourceLexicalTrap; zj-2020-jan/q021-C →
+ *      entityMismatch; 2023-i/q025-B → unsupportedClaim) each pass
+ *      structuralIncompletenessFields() with zero missing fields (reusing
+ *      trap-audit-lib.mjs's own per-type shape, so this can never drift from
+ *      what the scanner itself checks).
+ *   5. Zero suspension left in the whole corpus — all 8 items in the ruling
+ *      batch (rulings.md「本批处置清单」) had their `suspension` field
+ *      removed, whether the disposition was 回牌 (label kept) or 改判
+ *      (trap object recast); no other item in the corpus was ever suspended
+ *      (plan.md step 3 auto-suspend batch was exactly these 8).
+ *   6. Real-module behavior, against a self-contained synthetic fixture so
  *      this proof does not depend on what the current corpus happens to
- *      contain — `buildPaperAssetSurfaceModel` (client adapter) is a PLAIN
+ *      contain (the corpus itself has zero live suspended records post-
+ *      ruling) — `buildPaperAssetSurfaceModel` (client adapter) is a PLAIN
  *      PASSTHROUGH (plan.md contract: adapter only transmits `trapSuspension`,
  *      it never hides trapLabel/trapExplanation/etc. itself — that gating
  *      decision belongs to the consumer) plus a general (suspension-agnostic)
@@ -30,13 +54,11 @@
  *      real rendered behavior in DP-2. `loadGroupAnalysisTexts` (server
  *      analysisText.mjs, which does its own gating directly) is checked as a
  *      real module call: skips a row-suspended option's explanation from the
- *      "干扰项：" line, keeps a badge-suspended one.
- *   5. Real-module behavior, against the actual live corpus — the one
- *      confirmed rogueType/badge record (`paper-2023-i` q-2023-i-025/B)
- *      passes its suspension through the real adapter with a non-empty
- *      trapExplanation (describeTrap does not crash), not a synthetic
- *      stand-in; the panel-level badge-hiding is proven in DP-2 against this
- *      exact record.
+ *      "干扰项：" line, keeps a badge-suspended one. This fixture is the ONLY
+ *      proof of the suspension-gating mechanism now that the corpus has no
+ *      live suspended record — the mechanism itself is untouched by this
+ *      cut's data rulings, just currently unexercised by real data (noted in
+ *      the completion report as an intentional, not accidental, gap).
  */
 
 import { existsSync, mkdtempSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs'
@@ -47,6 +69,7 @@ import {
   AUTO_SUSPEND_CHECK_IDS,
   CHECK_IDS,
   evaluateOption,
+  structuralIncompletenessFields,
 } from './trap-audit-lib.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
@@ -55,6 +78,8 @@ const paperAssetsDir = path.join(rootDir, 'app', 'public', 'paper-assets')
 const cutDir = path.join(rootDir, 'docs', 'cuts', 'r2-trap-audit')
 const findingsPath = path.join(cutDir, 'scan-findings.json')
 const reportPath = path.join(cutDir, 'scan-report.md')
+const adjudicationsPath = path.join(cutDir, 'adjudications.json')
+const rulingsPath = path.join(cutDir, 'rulings.md')
 
 let passed = 0
 let failed = 0
@@ -86,7 +111,15 @@ function readJson(filePath) {
   return JSON.parse(readFileSync(filePath, 'utf8'))
 }
 
-const liveFindings = []
+const adjudications = existsSync(adjudicationsPath) ? readJson(adjudicationsPath) : []
+function isAdjudicated(finding) {
+  return adjudications.some((item) => item.paperId === finding.paperId
+    && item.questionId === finding.questionId
+    && item.optionLabel === finding.optionLabel
+    && item.checkId === finding.checkId)
+}
+
+const rawLiveFindings = []
 let liveTotalTraps = 0
 for (const paperId of listPaperIds()) {
   const analysisPath = path.join(paperAssetsDir, paperId, 'latest', 'analyses', 'reading-choice-analysis-v1.json')
@@ -97,7 +130,7 @@ for (const paperId of listPaperIds()) {
       if (option?.status !== 'wrong' || !option.trap) continue
       liveTotalTraps += 1
       for (const hit of evaluateOption(option)) {
-        liveFindings.push({
+        rawLiveFindings.push({
           paperId,
           questionId,
           optionLabel: option.label,
@@ -111,6 +144,11 @@ for (const paperId of listPaperIds()) {
   }
 }
 
+// scan-findings.json is written AFTER the scanner filters out adjudicated
+// hits (trap-audit-scan.mjs) — so the committed file only ever contains
+// unresolved findings. Reproduce that same filter here before comparing.
+const liveFindings = rawLiveFindings.filter((f) => !isAdjudicated(f))
+
 assert('scan-findings.json exists (committed by trap-audit-scan.mjs)', existsSync(findingsPath))
 assert('scan-report.md exists (committed by trap-audit-scan.mjs)', existsSync(reportPath))
 
@@ -120,7 +158,7 @@ if (existsSync(findingsPath)) {
     .map((f) => JSON.stringify(f, Object.keys(f).sort()))
     .sort()
   assert(
-    'live corpus re-scan reproduces committed scan-findings.json exactly (recomputability)',
+    'live corpus re-scan (whitelist-filtered) reproduces committed scan-findings.json exactly (recomputability)',
     JSON.stringify(normalize(liveFindings)) === JSON.stringify(normalize(committedFindings)),
     `live=${liveFindings.length} findings, committed=${committedFindings.length} findings — run \`node scripts/trap-audit-scan.mjs\` again and commit the refreshed output if the corpus changed`,
   )
@@ -135,20 +173,28 @@ if (existsSync(reportPath)) {
 }
 
 // ============================================================
-// 2. Applied-batch integrity on the live corpus
+// 2. Applied-batch integrity on the live corpus (RAW findings, pre-whitelist)
 // ============================================================
 
 const LEGAL_LEVELS = new Set(['badge', 'row'])
 const LEGAL_REASONS = new Set(Object.values(CHECK_IDS))
 
-for (const finding of liveFindings) {
+for (const finding of rawLiveFindings) {
   const analysisPath = path.join(paperAssetsDir, finding.paperId, 'latest', 'analyses', 'reading-choice-analysis-v1.json')
   const analysis = readJson(analysisPath)
   const option = analysis.questions?.[finding.questionId]?.optionAnalysis?.find((item) => item.label === finding.optionLabel)
   const suspension = option?.trap?.suspension
   const label = `${finding.paperId}/${finding.questionId}/${finding.optionLabel} (${finding.checkId})`
 
-  if (AUTO_SUSPEND_CHECK_IDS.has(finding.checkId)) {
+  if (!AUTO_SUSPEND_CHECK_IDS.has(finding.checkId)) {
+    // evidenceFieldLeak — plan.md Forbidden: this cut never suspends this
+    // bucket, it is the second-段 owner judgment battle's job.
+    assert(`${label}: evidenceFieldLeak finding is NOT auto-suspended (owner-review-only)`, !suspension)
+  } else if (isAdjudicated(finding)) {
+    // rulings.md CL-1: owner ruled this a false-positive-shaped edge case —
+    // 回牌, suspension removed, label/content kept as-is.
+    assert(`${label}: owner-adjudicated finding (rulings.md) has had its suspension removed (回牌)`, !suspension)
+  } else {
     assert(`${label}: auto-suspend-eligible finding has a suspension field`, Boolean(suspension))
     if (suspension) {
       assert(`${label}: suspension.level is legal (badge|row)`, LEGAL_LEVELS.has(suspension.level), `got ${suspension.level}`)
@@ -156,22 +202,8 @@ for (const finding of liveFindings) {
       assert(`${label}: suspension.reason matches this finding's checkId`, suspension.reason === finding.checkId)
       assert(`${label}: suspension.level matches this finding's judged level`, suspension.level === finding.level)
     }
-  } else {
-    // evidenceFieldLeak — plan.md Forbidden: this cut never suspends this
-    // bucket, it is the second-段 owner judgment battle's job.
-    assert(`${label}: evidenceFieldLeak finding is NOT auto-suspended (owner-review-only)`, !suspension)
   }
 }
-
-assert(
-  'zero rogueType findings missing their suspension ("latest 零野类型" reframed: primaryType itself is never rewritten, plan.md Forbidden)',
-  liveFindings.filter((f) => f.checkId === CHECK_IDS.ROGUE_TYPE).every((f) => {
-    const analysisPath = path.join(paperAssetsDir, f.paperId, 'latest', 'analyses', 'reading-choice-analysis-v1.json')
-    const analysis = readJson(analysisPath)
-    const option = analysis.questions?.[f.questionId]?.optionAnalysis?.find((item) => item.label === f.optionLabel)
-    return Boolean(option?.trap?.suspension)
-  }),
-)
 
 // versions/ untouched — this cut only ever reads/writes latest/.
 const versionsDirs = listPaperIds()
@@ -180,7 +212,70 @@ const versionsDirs = listPaperIds()
 assert('no versions/ directory was created or modified by this cut (none existed pre-cut; none exist now)', versionsDirs.length === 0)
 
 // ============================================================
-// 4. Real-module behavior — self-contained synthetic fixture
+// 3. Adjudications integrity (docs/cuts/r2-trap-audit/adjudications.json)
+// ============================================================
+
+const rulingsText = existsSync(rulingsPath) ? readFileSync(rulingsPath, 'utf8') : ''
+for (const item of adjudications) {
+  const label = `${item.paperId}/${item.questionId}/${item.optionLabel} (${item.checkId})`
+  assert(
+    `adjudication ${label}: ruling pointer "${item.ruling}" exists as a "### ${item.ruling} " heading in rulings.md`,
+    new RegExp(`^### ${item.ruling} `, 'm').test(rulingsText),
+  )
+  assert(
+    `adjudication ${label}: still a real raw hit of evaluateOption() against the live corpus (not stale)`,
+    rawLiveFindings.some((f) => f.paperId === item.paperId
+      && f.questionId === item.questionId
+      && f.optionLabel === item.optionLabel
+      && f.checkId === item.checkId),
+  )
+}
+
+// ============================================================
+// 4. Recast trap structural completeness (rulings.md 改判 ×5)
+// ============================================================
+
+const recastTargets = [
+  { paperId: 'paper-2023-yi', questionId: 'q-2023-yi-024', optionLabel: 'D', primaryType: 'sourceLexicalTrap', ruling: 'CL-2' },
+  { paperId: 'paper-2025-ii', questionId: 'q-2025-ii-032', optionLabel: 'D', primaryType: 'sourceLexicalTrap', ruling: 'CL-3' },
+  { paperId: 'paper-960d0f8d', questionId: 'q-960d0f8d-026', optionLabel: 'C', primaryType: 'sourceLexicalTrap', ruling: 'CL-4' },
+  { paperId: 'paper-zj-2020-jan', questionId: 'q-zj-2020-jan-021', optionLabel: 'C', primaryType: 'entityMismatch', ruling: 'CL-5' },
+  { paperId: 'paper-2023-i', questionId: 'q-2023-i-025', optionLabel: 'B', primaryType: 'unsupportedClaim', ruling: 'CL-7' },
+]
+
+for (const target of recastTargets) {
+  const analysisPath = path.join(paperAssetsDir, target.paperId, 'latest', 'analyses', 'reading-choice-analysis-v1.json')
+  const analysis = readJson(analysisPath)
+  const option = analysis.questions?.[target.questionId]?.optionAnalysis?.find((item) => item.label === target.optionLabel)
+  const trap = option?.trap
+  const label = `${target.paperId}/${target.questionId}/${target.optionLabel} (${target.ruling})`
+  assert(`recast ${label}: trap.primaryType is now "${target.primaryType}"`, trap?.primaryType === target.primaryType)
+  assert(`recast ${label}: no missing/invalid fields per ${target.primaryType}'s sub-schema`, structuralIncompletenessFields(trap).length === 0, `missing: ${JSON.stringify(structuralIncompletenessFields(trap))}`)
+  assert(`recast ${label}: no suspension left (改判 lifts the badge)`, !trap?.suspension)
+  if (target.primaryType === 'unsupportedClaim') {
+    assert(`recast ${label}: explanation carries no quoted-English-hook (would re-trigger labelExplanationContradiction)`, !evaluateOption(option).some((h) => h.checkId === CHECK_IDS.LABEL_EXPLANATION_CONTRADICTION))
+  }
+}
+
+// ============================================================
+// 5. Zero suspension left anywhere in the corpus
+// ============================================================
+
+let liveSuspensionCount = 0
+for (const paperId of listPaperIds()) {
+  const analysisPath = path.join(paperAssetsDir, paperId, 'latest', 'analyses', 'reading-choice-analysis-v1.json')
+  if (!existsSync(analysisPath)) continue
+  const analysis = readJson(analysisPath)
+  for (const question of Object.values(analysis.questions || {})) {
+    for (const option of question.optionAnalysis || []) {
+      if (option?.trap?.suspension) liveSuspensionCount += 1
+    }
+  }
+}
+assert('zero suspension records left in the live corpus (all 8 batch items resolved by rulings.md)', liveSuspensionCount === 0, `found ${liveSuspensionCount}`)
+
+// ============================================================
+// 6. Real-module behavior — self-contained synthetic fixture
 // ============================================================
 
 function buildFixtureAsset(groupId, questionId) {
@@ -374,7 +469,11 @@ function buildFixtureAnalysis(groupId, questionId) {
 }
 
 // ============================================================
-// 5. Real-module behavior — actual live corpus (the one confirmed rogueType case)
+// 7. Real-module behavior — actual live corpus, the CL-7 recast record
+//    (paper-2023-i/q-2023-i-025/B: was the corpus's one confirmed rogueType/
+//    badge record pre-ruling; rulings.md CL-7 改判 it to unsupportedClaim
+//    and lifted the suspension — this now proves the adapter still renders
+//    it cleanly with NO suspension passthrough, not a synthetic stand-in)
 // ============================================================
 
 {
@@ -392,19 +491,20 @@ function buildFixtureAnalysis(groupId, questionId) {
       const model = buildPaperAssetSurfaceModel({ asset, analysis, groupId })
       const optionB = model.analysisByQuestionId[questionId]?.options.find((o) => o.label === 'B')
       assert(
-        `${paperId}/${questionId}/B (live rogueType/badge record): trapSuspension passthrough is {level:'badge', reason:'rogueType'}`,
-        optionB?.trapSuspension?.level === 'badge' && optionB?.trapSuspension?.reason === 'rogueType',
+        `${paperId}/${questionId}/B (CL-7 recast record, post-ruling): trapSuspension is null (badge lifted)`,
+        optionB?.trapSuspension === null,
       )
       assert(
-        `${paperId}/${questionId}/B (live rogueType/badge record): trapExplanation non-empty (describeTrap did not crash on the rogue primaryType)`,
+        `${paperId}/${questionId}/B (CL-7 recast record, post-ruling): trapExplanation non-empty (describeTrap does not crash on the recast unsupportedClaim shape)`,
         typeof optionB?.trapExplanation === 'string' && optionB.trapExplanation.length > 0,
       )
-      // The type badge/兼有/细分 hiding itself is PaperAssetAnalysisPanel.tsx's
-      // gating decision, not this adapter's — proven against this exact real
-      // record in DP-2 (dp2-r2-trap-audit.mjs's ① scenario, real browser).
+      assert(
+        `${paperId}/${questionId}/B (CL-7 recast record, post-ruling): trapLabel present (type badge no longer suppressed)`,
+        typeof optionB?.trapLabel === 'string' && optionB.trapLabel.length > 0,
+      )
     }
   } else {
-    assert(`${paperId}: fixture paper present for live-corpus badge assertion`, false, 'paper-2023-i missing — update this block if the corpus paper set changed')
+    assert(`${paperId}: fixture paper present for live-corpus recast assertion`, false, 'paper-2023-i missing — update this block if the corpus paper set changed')
   }
 }
 

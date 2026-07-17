@@ -43,6 +43,19 @@ const paperAssetsDir = path.join(rootDir, 'app', 'public', 'paper-assets')
 const cutDir = path.join(rootDir, 'docs', 'cuts', 'r2-trap-audit')
 const findingsPath = path.join(cutDir, 'scan-findings.json')
 const reportPath = path.join(cutDir, 'scan-report.md')
+const adjudicationsPath = path.join(cutDir, 'adjudications.json')
+
+// 已判白名单（rulings.md 判例战役产物）：一条机审命中若在这里挂了号，说明
+// owner 已经过目裁过它是假阳/合法对比论证，不是真贴错——扫描器跳过上报，
+// 不再进 scan-findings.json（该命中仍会被 evaluateOption 判定为"命中"，
+// 白名单只影响这里的报告产出，不影响 trap-audit-lib.mjs 的判据本身）。
+const adjudications = existsSync(adjudicationsPath) ? JSON.parse(readFileSync(adjudicationsPath, 'utf8')) : []
+function isAdjudicated(finding) {
+  return adjudications.some((item) => item.paperId === finding.paperId
+    && item.questionId === finding.questionId
+    && item.optionLabel === finding.optionLabel
+    && item.checkId === finding.checkId)
+}
 
 function listPaperIds() {
   return readdirSync(paperAssetsDir, { withFileTypes: true })
@@ -62,6 +75,7 @@ function readAnalysis(paperId) {
 }
 
 const findings = []
+const adjudicatedFindings = []
 const parseErrors = []
 let totalTraps = 0
 const byPrimaryType = {}
@@ -81,7 +95,7 @@ for (const paperId of listPaperIds()) {
 
       const hits = evaluateOption(option)
       for (const hit of hits) {
-        findings.push({
+        const finding = {
           paperId,
           questionId,
           optionLabel: option.label,
@@ -89,7 +103,12 @@ for (const paperId of listPaperIds()) {
           checkId: hit.checkId,
           level: hit.level,
           ...(hit.missing ? { missing: hit.missing } : {}),
-        })
+        }
+        if (isAdjudicated(finding)) {
+          adjudicatedFindings.push(finding)
+        } else {
+          findings.push(finding)
+        }
       }
     }
   }
@@ -154,6 +173,35 @@ lines.push('')
 lines.push('## 复算')
 lines.push('')
 lines.push('本报告的每个数字都可以由 `scan-findings.json` 用一行 `jq`/`node` 重新数出来——例如 `node -e "console.log(require(\'./scan-findings.json\').filter(f=>f.checkId===\'rogueType\').length)"`。')
+lines.push('')
+
+// ─── 判后状态（rulings.md 判例战役收官后追加，本节内容不改写上面的历史扫描
+//     记录——上面各节仍是第一段落刀完工时的机审真相）─────────────────────────
+let liveSuspensionCount = 0
+for (const paperId of listPaperIds()) {
+  const analysis = readAnalysis(paperId)
+  if (!analysis || analysis.__parseError) continue
+  for (const question of Object.values(analysis.questions || {})) {
+    for (const option of question.optionAnalysis || []) {
+      if (option?.trap?.suspension) liveSuspensionCount += 1
+    }
+  }
+}
+
+lines.push('## 判后状态（rulings.md 判例战役收官，2026-07-16）')
+lines.push('')
+lines.push('- **R6 修复**：`labelExplanationContradiction`（`trap-audit-lib.mjs`）新增排除条件——引号钩命中的英文短语若是选项自身 `claim` 文本的子串（大小写不敏感），判定为「解释复述选项自身文本以驳斥之」的合法论证，不算自相矛盾。修复后 `paper-zj-2020-jul` q029-D（命中串 `introducing a concept` 即选项 `claim` 子串）不再命中，findings 从 7 降到 2。')
+lines.push(`- **已判白名单**（\`docs/cuts/r2-trap-audit/adjudications.json\`，R6 修后仍会被启发式抓的边界例——owner 已裁合法，扫描器跳过上报）：**${adjudications.length}** 条`)
+for (const item of adjudications) {
+  lines.push(`  - ${item.paperId}/${item.questionId}/${item.optionLabel}（${item.checkId}，判例 ${item.ruling}）：${item.note}`)
+}
+lines.push('- **本批处置清单（8/8，rulings.md 判例 CL-1~CL-7）**：')
+lines.push('  - 回牌 ×3（撤 suspension，标签/内容不动）：2022甲 q028-D、2024-II q032-A（CL-1）；浙江20-7月 q029-D（CL-6，R6 修后机器已不再命中）')
+lines.push('  - 改判 sourceLexicalTrap ×3（重铸子 schema + 撤 suspension）：2023乙 q024-D、2025-II q032-D、960d0f8d q026-C（CL-2/CL-3/CL-4）')
+lines.push('  - 改判 entityMismatch ×1（重铸子 schema + 撤 suspension）：浙江20-1月 q021-C（CL-5）')
+lines.push('  - 改判 unsupportedClaim ×1（重铸子 schema、explanation 不含英文引号钩 + 撤 suspension）：2023-I q025-B（CL-7，`timeOrderReversal` 单例不转正）')
+lines.push(`- **当前库 suspension 计数：${liveSuspensionCount}**（8 条摘牌全部经 owner 裁后撤销——回牌 3 条撤 suspension 标签维持，改判 5 条撤 suspension 重铸子 schema；摘牌机制本身保留，等下一批机器可证伪的实锤命中）`)
+lines.push(`- **scan-findings.json 判后状态：${findings.length} 条**（白名单生效后剩余的未处理命中——本批全部 8 条已落判，故为 0；已判的 ${adjudicatedFindings.length} 条命中未消失于 evaluateOption()，只是被扫描器按白名单跳过上报，机审判据本身不因白名单而改变判定）`)
 lines.push('')
 
 writeFileSync(reportPath, `${lines.join('\n')}\n`)

@@ -785,12 +785,7 @@
           "trap": {
             "primaryType": "unsupportedClaim",
             "claim": "Stick to a promise.",
-            "explanation": "原文未提及任何承诺，\"take the plunge\"指下决心去做需要勇气的事，与\"信守承诺\"无关，属无中生有。",
-            "suspension": {
-              "level": "badge",
-              "reason": "labelExplanationContradiction",
-              "suspendedAt": "2026-07-16"
-            }
+            "explanation": "原文未提及任何承诺，\"take the plunge\"指下决心去做需要勇气的事，与\"信守承诺\"无关，属无中生有。"
           }
         }
       ],

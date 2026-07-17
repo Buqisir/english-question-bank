@@ -1275,12 +1275,7 @@
           "trap": {
             "primaryType": "unsupportedClaim",
             "claim": "If read by someone poorly educated.",
-            "explanation": "原文未提及读者“受教育程度低”。“wrong hands”指动机或意图不当，与读者学历无关。",
-            "suspension": {
-              "level": "badge",
-              "reason": "labelExplanationContradiction",
-              "suspendedAt": "2026-07-16"
-            }
+            "explanation": "原文未提及读者“受教育程度低”。“wrong hands”指动机或意图不当，与读者学历无关。"
           }
         },
         {

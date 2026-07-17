@@ -178,14 +178,12 @@
           "optionTranslationZh": "幽默的。",
           "status": "wrong",
           "trap": {
-            "primaryType": "unsupportedClaim",
-            "claim": "Mrs. Calloway is humorous.",
-            "explanation": "原文未提及 Mrs. Calloway 有任何幽默之处；文中的幽默情节（扮大灰狼说“The better to eat you with”）属于第四段的“母亲”，与图书管理员无关。",
-            "suspension": {
-              "level": "badge",
-              "reason": "labelExplanationContradiction",
-              "suspendedAt": "2026-07-16"
-            }
+            "primaryType": "entityMismatch",
+            "sourceQuote": "My mother shared this feeling of mine... I remember her reading a magazine while taking the part of the Wolf in a game of “Little Red Riding Hood” with my brother’s two daughters. She’d just look up at the right time, long enough to answer—in character—“The better to eat you with, my dear,” and go back to her place in the magazine.",
+            "sourceEntity": "My mother（母亲）",
+            "optionText": "Humorous.",
+            "optionEntity": "Mrs. Calloway",
+            "explanation": "原文确实存在幽默情节（扮演大灰狼说出“The better to eat you with, my dear”），但这段幽默描写属于“母亲”（第四段），并非图书管理员 Mrs. Calloway；选项把母亲身上的特征安到了 Mrs. Calloway 头上，属张冠李戴，不是无中生有。"
           }
         },
         {

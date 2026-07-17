@@ -707,14 +707,11 @@
           "optionTranslationZh": "它有扩张过快的风险。",
           "status": "wrong",
           "trap": {
-            "primaryType": "unsupportedClaim",
-            "claim": "It runs the risk of expanding too fast.",
-            "explanation": "原文虽说The Lantern“too big, too bright”，但这是积极强调其影响和不可关闭，并未提及扩张过快的风险。",
-            "suspension": {
-              "level": "badge",
-              "reason": "labelExplanationContradiction",
-              "suspendedAt": "2026-07-16"
-            }
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "too big, too bright",
+            "optionText": "It runs the risk of expanding too fast.",
+            "matchType": "wordFamily",
+            "relationNote": "原文用“too big, too bright”这一“too ___”程度句式积极强调 The Lantern 影响力大、无法被关停；选项复用同一“too ___”句式改造出“too fast”（扩张过快的风险），但原文并未表达扩张过快的风险，属句式复现型词钩干扰项。"
           }
         },
         {

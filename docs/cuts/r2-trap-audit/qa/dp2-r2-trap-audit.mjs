@@ -1,12 +1,17 @@
 #!/usr/bin/env node
 // r2-trap-audit DP-2 — browser QA against the wt-r2-trap-audit worktree,
-// plan.md Scope 步骤 5's three scenarios, on REAL already-published data
-// (paper-2023-i — this cut's own scan found its q-2023-i-025/B is the one
-// confirmed rogueType/badge record, `primaryType: 'timeOrderReversal'`):
+// updated post rulings.md 判例战役收官 (2026-07-16, CL-1~CL-7): the corpus's
+// one confirmed rogueType/badge record (paper-2023-i/q-2023-i-025/B) was
+// CL-7 改判 to unsupportedClaim and its suspension lifted — it is no longer
+// a摘牌 example, so ① is reversed to prove the badge is BACK and shows the
+// correct recast label. A second real改判 record (paper-2023-yi/q-2023-yi-
+// 024/D, CL-2 → sourceLexicalTrap) is added as a fresh recast-card scenario.
 //
-//   ① 摘牌 badge 题实点讲评面板 —— 类型徽章不显、解释仍在
+//   ① 改判恢复题（原摘牌记录，现已回牌/改判）—— 类型徽章恢复显示「无中生有」
 //      (group-2023-i-reading-b / q-2023-i-025 / option B)
-//   ② 正常题（未摘牌）—— 类型徽章照显 (regression control)
+//   ①b 改判词钩卡实点 —— 类型徽章显示「原文词钩干扰」
+//      (group-2023-yi-reading-b / q-2023-yi-024 / option D)
+//   ② 正常题（从未摘牌过）—— 类型徽章照显 (regression control)
 //      (group-2023-i-reading-a / q-2023-i-021 / option C)
 //   ③ 教师版讲评输出含正常题的干扰项行（真实 API 调用，非合成）——
 //      reuses the same authenticated Playwright context (page.request
@@ -47,13 +52,20 @@ const OWNER_USERNAME = 'qa-r2-trap-audit-owner'
 const OWNER_PASSWORD = 'qa-r2-trap-audit-owner-pw-1'
 
 const PAPER_ID = 'paper-2023-i'
-const BADGE_GROUP = 'group-2023-i-reading-b'
-const BADGE_QID = 'q-2023-i-025'
-const BADGE_OPTION = 'B'
+const RECAST_GROUP = 'group-2023-i-reading-b'
+const RECAST_QID = 'q-2023-i-025'
+const RECAST_OPTION = 'B'
+const RECAST_TRAP_LABEL = '无中生有'
 const NORMAL_GROUP = 'group-2023-i-reading-a'
 const NORMAL_QID = 'q-2023-i-021'
 const NORMAL_OPTION = 'C'
 const NORMAL_EXPLANATION_SNIPPET = '导览游需要购票'
+
+const YI_PAPER_ID = 'paper-2023-yi'
+const YI_RECAST_GROUP = 'group-2023-yi-reading-b'
+const YI_RECAST_QID = 'q-2023-yi-024'
+const YI_RECAST_OPTION = 'D'
+const YI_RECAST_TRAP_LABEL = '原文词钩干扰'
 
 let passed = 0
 const pass = (name) => { passed += 1; console.log(`PASS ${name}`) }
@@ -107,9 +119,9 @@ async function login(page) {
   await page.waitForFunction(() => !document.querySelector('#login-username'), { timeout: 15_000 })
 }
 
-async function openOptionDetail(page, { groupId, questionId, optionLabel }) {
+async function openOptionDetail(page, { paperId = PAPER_ID, groupId, questionId, optionLabel }) {
   await page.goto(
-    `http://127.0.0.1:${vitePort}/?view=paper-browse&paperId=${PAPER_ID}&focusGroupId=${groupId}&questionId=${questionId}&lecture=1`,
+    `http://127.0.0.1:${vitePort}/?view=paper-browse&paperId=${paperId}&focusGroupId=${groupId}&questionId=${questionId}&lecture=1`,
     { waitUntil: 'networkidle' },
   )
   await page.locator('.pi-ps-analysis').waitFor({ timeout: 15_000 })
@@ -145,18 +157,40 @@ async function main() {
   try {
     await login(page)
 
-    // ── ① 摘牌 badge 题 —— 类型徽章不显、解释仍在 ──
+    // ── ① 改判恢复题（原摘牌记录，现已改判 CL-7 unsupportedClaim）——
+    //    类型徽章恢复显示「无中生有」、解释仍在 ──
     {
-      const optionRow = await openOptionDetail(page, { groupId: BADGE_GROUP, questionId: BADGE_QID, optionLabel: BADGE_OPTION })
-      const badgeCount = await optionRow.locator('.pi-ps-analysis-option-badge--trap').count()
-      ok('① badge 摘牌题：类型徽章不显示', badgeCount === 0, `badge elements found: ${badgeCount}`)
+      const optionRow = await openOptionDetail(page, { groupId: RECAST_GROUP, questionId: RECAST_QID, optionLabel: RECAST_OPTION })
+      const badge = optionRow.locator('.pi-ps-analysis-option-badge--trap')
+      await badge.waitFor({ timeout: 15_000 })
+      const badgeText = (await badge.innerText()).trim()
+      ok(`① 改判恢复题：类型徽章恢复显示「${RECAST_TRAP_LABEL}」`, badgeText === RECAST_TRAP_LABEL, `got "${badgeText}"`)
+      const badgeBox = await badge.boundingBox()
+      ok('① 徽章元素几何可见（非零尺寸）', badgeBox != null && badgeBox.width > 5 && badgeBox.height > 5, JSON.stringify(badgeBox))
       const explanationLocator = optionRow.locator('.pi-ps-analysis-explanation')
       await explanationLocator.waitFor({ timeout: 15_000 })
       const explanationText = (await explanationLocator.innerText()).trim()
-      ok('① badge 摘牌题：解释文案仍在且非空', explanationText.length > 0, explanationText)
+      ok('① 改判恢复题：解释文案仍在且非空', explanationText.length > 0, explanationText)
       const explanationBox = await explanationLocator.boundingBox()
       ok('① 解释元素几何可见（非零尺寸）', explanationBox != null && explanationBox.width > 10 && explanationBox.height > 5, JSON.stringify(explanationBox))
-      if (process.env.DP2_SCREENSHOTS === '1') await page.screenshot({ path: path.join(qaDir, 'dp2-01-badge-suspended.png') })
+      if (process.env.DP2_SCREENSHOTS === '1') await page.screenshot({ path: path.join(qaDir, 'dp2-01-badge-restored.png') })
+    }
+
+    // ── ①b 改判词钩卡实点（CL-2 → sourceLexicalTrap）—— 类型徽章显示
+    //    「原文词钩干扰」——2023乙 q024-D ──
+    {
+      const optionRow = await openOptionDetail(page, { paperId: YI_PAPER_ID, groupId: YI_RECAST_GROUP, questionId: YI_RECAST_QID, optionLabel: YI_RECAST_OPTION })
+      const badge = optionRow.locator('.pi-ps-analysis-option-badge--trap')
+      await badge.waitFor({ timeout: 15_000 })
+      const badgeText = (await badge.innerText()).trim()
+      ok(`①b 改判词钩卡：类型徽章显示「${YI_RECAST_TRAP_LABEL}」`, badgeText === YI_RECAST_TRAP_LABEL, `got "${badgeText}"`)
+      const badgeBox = await badge.boundingBox()
+      ok('①b 徽章元素几何可见（非零尺寸）', badgeBox != null && badgeBox.width > 5 && badgeBox.height > 5, JSON.stringify(badgeBox))
+      const explanationLocator = optionRow.locator('.pi-ps-analysis-explanation')
+      await explanationLocator.waitFor({ timeout: 15_000 })
+      const explanationText = (await explanationLocator.innerText()).trim()
+      ok('①b 改判词钩卡：解释文案（relationNote）非空', explanationText.length > 0, explanationText)
+      if (process.env.DP2_SCREENSHOTS === '1') await page.screenshot({ path: path.join(qaDir, 'dp2-01b-recast-lexical.png') })
     }
 
     // ── ② 正常题（未摘牌）—— 类型徽章照显 (regression control) ──

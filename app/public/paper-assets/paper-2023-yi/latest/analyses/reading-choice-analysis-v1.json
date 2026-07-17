@@ -447,14 +447,11 @@
           "optionTranslationZh": "通过在玉米地里布置场景。",
           "status": "wrong",
           "trap": {
-            "primaryType": "unsupportedClaim",
-            "claim": "By creating settings in the corn fields.",
-            "explanation": "原文仅提到爱荷华是'corn state'，并未提及作者在玉米地里'布置场景'拍摄，属无中生有。",
-            "suspension": {
-              "level": "badge",
-              "reason": "labelExplanationContradiction",
-              "suspendedAt": "2026-07-16"
-            }
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "the corn state",
+            "optionText": "By creating settings in the corn fields.",
+            "matchType": "exact",
+            "relationNote": "原文提到爱荷华是“the corn state”（玉米之州），“corn”一词在原文确实复现；但选项据此臆造作者“在玉米地里布置场景”这一具体拍摄行为，原文并未描述——是原词复现但选项内容本身错误的词钩干扰项。"
           }
         }
       ],
