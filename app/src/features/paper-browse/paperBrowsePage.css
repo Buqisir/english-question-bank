@@ -18,6 +18,10 @@
  * paperSurfaceLectureHighlights.css 头部注释。 */
 @import "../paper-intelligence/paperSurfaceLectureHighlights.css";
 
+/* lecture-css-restore: 讲评右栏五解析面板样式（retire 刀误删复原，
+ * 生前同款加载链——见该文件头部出处注释）。 */
+@import "../paper-intelligence/lectureAnalysisPanels.css";
+
 .paper-browse-page {
   display: flex;
   flex-direction: column;
