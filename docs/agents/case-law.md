@@ -22,9 +22,11 @@
   ts/tsx/mjs/html，零生产者才删；撞名假阳性要人眼辨——同日 small-ledger
   刀实践即抓到 `paper-passage` 命中全是 paper-passage-letter 刀名撞名、
   `detail-message` 实为活类保留）。→ 固化 **AGENTS.md Gates** 一行；
-  普适级（删除时低估共享面是 agent 天性），回流母版——**回流挂起**：
-  执行时实核 `~/.claude/skills/project-os/` 已不在本机（全盘搜索零命
-  中），母版去向待 owner 确认后补回流。
+  普适级（删除时低估共享面是 agent 天性），回流母版——回流时实核母版
+  失踪（v1 存于 `~/.claude2/skills/`，随该 CLAUDE_CONFIG_DIR 目录整体
+  删除陪葬，本机四条恢复路全断）→ owner 拍板重蒸馏：**v2.0 已重建**
+  （2026-07-18，从本仓源头 + essay-grading scaffold 幸存件；判例已
+  回流），并吸取教训配了远端 `github.com/Buqisir/project-os`（私库）。
 
 ## 2026-07-14
 

@@ -21,8 +21,9 @@ Last updated: 2026-07-17 晚（三路复评 31/40 + 三小刀收官 + 九组标�
 完的一次性冻结历史，in-code 07-15 拍板取代 cr.md 建议；死文件
 analyzeGrammarFillVerbProfile.mjs 退役入墓碑清单）。
 ~~判例候选~~ ✅ 2026-07-17 owner 拍板「入宪+回流」：删共享 CSS 前必须
-做类消费清单 sweep——已入 case-law + AGENTS.md Gates；**回流挂起**：
-project-os 母版已不在本机（全盘零命中），去向待 owner 确认。
+做类消费清单 sweep——已入 case-law + AGENTS.md Gates；~~回流挂起~~ ✅
+2026-07-18 母版重蒸馏 v2.0（v1 随 ~/.claude2 整目录删除陪葬；从本仓+
+essay-grading 幸存件重建，判例已回流，远端 Buqisir/project-os 私库）。
 
 ## 现在是什么
 
