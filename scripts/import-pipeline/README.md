@@ -54,11 +54,10 @@ Claude-driven、确定性切卷 + AI 解析 + 原子发布的离线工具。**�
 
 - **`topic-driver.mjs list|list-unlabeled|build <id>|persist <id> <labelsJson>`** — 主题标签(#190)。`list-unlabeled` 圈出所有无标签题组(后续导入卷的回填范围;`list` 仍是当年 108 组的老口径);`build` 打印 `buildTopicLabelMessages` 的 messages(喂 Claude);`persist` normalize + `bindTopicLabelsToQuestionGroup` 落库。扇出同样用 ad-hoc Workflow(一组一 Sonnet agent 自写结果文件)。
 - **`persist-dir.mjs <dir>`** — 批量把 `labels-out/<groupId>.json` 落库。
-- **`vp-driver.mjs list|persist`** — 动词维度(时态/语态/主谓一致,#189)。
 
 ## 硬纪律
 
-- **发布/落库串行**:`02-publish --publish` 与 `topic/vp persist` **直写 SQLite**(`data/question-bank.sqlite`)。批量前**先停 API** 释放写锁:`lsof -ti :8787 | xargs kill`;发完**重启 API 刷缓存**(直连发布不 invalidate 路由缓存):`nohup node --env-file-if-exists=.env server/api.mjs &`(别用裸 `node ... &`,工具退出会回收子进程)。
+- **发布/落库串行**:`02-publish --publish` 与 `topic persist` **直写 SQLite**(`data/question-bank.sqlite`)。批量前**先停 API** 释放写锁:`lsof -ti :8787 | xargs kill`;发完**重启 API 刷缓存**(直连发布不 invalidate 路由缓存):`nohup node --env-file-if-exists=.env server/api.mjs &`(别用裸 `node ... &`,工具退出会回收子进程)。
 - **新格式先 `01-split` 便宜预检**(无 AI)再扇出解析,别盲批量产垃圾。
 - **DB / 中间数据 gitignored**:`papers/<id>/` 只跟踪 `config.json`;`groups.json`/`full.txt`/`analyze-*`/`analysis-*`/`labels-out/` 是可再生产物,见本目录 `.gitignore`。
 

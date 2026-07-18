@@ -52,7 +52,7 @@ function findAnalysisFiles() {
   return files
 }
 
-// ── shared tokenizer (same normalization as analyzeGrammarFillVerbProfile.mjs) ──
+// ── shared tokenizer (same normalization as the retired analyzeGrammarFillVerbProfile.mjs) ──
 function tokenize(value) {
   return String(value || '')
     .toLowerCase()
@@ -82,7 +82,7 @@ const VALID_VOICE = new Set(['active', 'passive'])
 /**
  * Derive {tense, voice, agreementSensitive} purely from the answer string
  * (+ hint lemma for the `be`-as-main-verb case). Reuses the same token-set
- * approach as server/paper-import-ai/analyzeGrammarFillVerbProfile.mjs's
+ * approach as the retired analyzeGrammarFillVerbProfile.mjs's
  * classifyFiniteVerbFormDeterministic (PA C-1 "复用不重造"), but is NOT a
  * copy-paste of that function: it is decoupled from the old subject-context
  * `agreement` axis (which required AI fallback for `have`-led forms) since

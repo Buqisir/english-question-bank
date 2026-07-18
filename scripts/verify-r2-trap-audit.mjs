@@ -61,6 +61,7 @@
  *      the completion report as an intentional, not accidental, gap).
  */
 
+import { execSync } from 'node:child_process'
 import { existsSync, mkdtempSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
 import { tmpdir } from 'node:os'
@@ -205,11 +206,12 @@ for (const finding of rawLiveFindings) {
   }
 }
 
-// versions/ untouched — this cut only ever reads/writes latest/.
-const versionsDirs = listPaperIds()
-  .map((paperId) => path.join(paperAssetsDir, paperId, 'versions'))
-  .filter((dir) => existsSync(dir))
-assert('no versions/ directory was created or modified by this cut (none existed pre-cut; none exist now)', versionsDirs.length === 0)
+// versions/ untouched — this cut only ever reads/writes latest/. versions/
+// is a gitignored local import artifact (present on the owner's machine,
+// absent on CI checkouts), so assert from the git view — same verdict in
+// both environments — instead of on-disk existence.
+const trackedVersionsFiles = execSync('git ls-files -- "app/public/paper-assets/*/versions/*"', { cwd: rootDir, encoding: 'utf8' }).trim()
+assert('no versions/ path is git-tracked (cut diff cannot touch versions/; gitignore holds)', trackedVersionsFiles === '')
 
 // ============================================================
 // 3. Adjudications integrity (docs/cuts/r2-trap-audit/adjudications.json)

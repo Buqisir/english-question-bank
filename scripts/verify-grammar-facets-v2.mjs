@@ -295,6 +295,9 @@ const RETIRED_FILES = [
   'server/grammar-verb-profile/backfillVerbProfiles.mjs',
   'scripts/import-pipeline/vp-driver.mjs',
   'scripts/verify-i16c-grammar-verb-axes.mjs',
+  // small-ledger sweep 2026-07-17: zero live callers since the sidecar
+  // retirement (grammar-facets-v2 cr.md item 3)
+  'server/paper-import-ai/analyzeGrammarFillVerbProfile.mjs',
 ]
 for (const relPath of RETIRED_FILES) {
   assert(`Req 6: retired file absent: ${relPath}`, !existsSync(path.join(rootDir, relPath)))

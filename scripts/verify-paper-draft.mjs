@@ -77,17 +77,14 @@ function makeDraftDriver({ onDraftEdited } = {}) {
   let basket = []
   let paperBlocks = []
   let selectedPaperBlockId = null
-  let openInsertionIndex = null
   const fire = (reason) => onDraftEdited && onDraftEdited(reason)
 
   return {
     get basket() { return basket },
     get paperBlocks() { return paperBlocks },
     get selectedPaperBlockId() { return selectedPaperBlockId },
-    get openInsertionIndex() { return openInsertionIndex },
 
     setSelectedPaperBlockId(v) { selectedPaperBlockId = v },
-    setOpenInsertionIndex(v) { openInsertionIndex = v },
 
     // ── add ──
     addGroups(groups) {
@@ -102,7 +99,6 @@ function makeDraftDriver({ onDraftEdited } = {}) {
 
     // ── remove (basket-driven) ──
     removeGroup(id) {
-      openInsertionIndex = null
       const before = basket.length
       basket = basket.filter((i) => i.id !== id)
       paperBlocks = paperBlocks.filter(
@@ -113,7 +109,6 @@ function makeDraftDriver({ onDraftEdited } = {}) {
 
     // ── clear ──
     clear() {
-      openInsertionIndex = null
       selectedPaperBlockId = null
       basket = []
       paperBlocks = []
@@ -185,7 +180,6 @@ function makeDraftDriver({ onDraftEdited } = {}) {
     replaceDraft({ basket: nextBasket, layout }) {
       basket = nextBasket
       selectedPaperBlockId = null
-      openInsertionIndex = null
       if (layout) {
         paperBlocks = layout.blocks
       } else {
@@ -195,7 +189,6 @@ function makeDraftDriver({ onDraftEdited } = {}) {
 
     // ── removeBlock (mirrors usePaperBlocks.removeBlock) ──
     removeBlock(blockId) {
-      openInsertionIndex = null
       const block = paperBlocks.find((b) => b.id === blockId)
       if (!block) return
       if (block.type === 'question_group') {
@@ -315,13 +308,11 @@ console.log('\nTest 2: Invariants 1–12 (driven through Paper Draft model)')
   assert('removing section_header block does NOT fire onDraftEdited', events.length === eventsAfterReplace, '')
 
   // clear: invariant 6
-  draft.setOpenInsertionIndex(7)
   draft.setSelectedPaperBlockId('block-X')
   draft.clear()
   assert('invariant 6: clear empties basket', draft.basket.length === 0, '')
   assert('invariant 6: clear empties paperBlocks', draft.paperBlocks.length === 0, '')
   assert('invariant 6: clear resets selection', draft.selectedPaperBlockId === null, '')
-  assert('invariant 6: clear resets insertion', draft.openInsertionIndex === null, '')
   assert('clear fires onDraftEdited("clear")', events.at(-1) === 'clear', '')
 
   // replaceDraft (with layout): invariant 10 + invariant 11

@@ -147,7 +147,6 @@ function App() {
   const {
     basket,
     paperBlocks,
-    openInsertionIndex,
     paperTitle,
     questionNumberStart,
     paperExportStyle,
@@ -241,27 +240,6 @@ function App() {
       ignore = true
     }
   }, [refreshQuestionGroups])
-
-  // Close insertion menu on outside click or Escape
-  const closeInsertionMenu = paperDraft.setOpenInsertionIndex
-  useEffect(() => {
-    if (openInsertionIndex === null) return
-    function handleClick(e: MouseEvent) {
-      const target = e.target as HTMLElement
-      if (!target.closest('.paper-insertion-seam')) {
-        closeInsertionMenu(null)
-      }
-    }
-    function handleKeyDown(e: KeyboardEvent) {
-      if (e.key === 'Escape') closeInsertionMenu(null)
-    }
-    document.addEventListener('pointerdown', handleClick)
-    document.addEventListener('keydown', handleKeyDown)
-    return () => {
-      document.removeEventListener('pointerdown', handleClick)
-      document.removeEventListener('keydown', handleKeyDown)
-    }
-  }, [openInsertionIndex, closeInsertionMenu])
 
   const questionGroupById = useMemo(() => new Map(questionGroups.map((group) => [group.id, group])), [questionGroups])
   // readingParseByQuestionNo / clozeParseByQuestionNo / sevenChoicesParseByQuestionNo /

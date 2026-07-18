@@ -14,11 +14,14 @@ Last updated: 2026-07-17 晚（三路复评 31/40 + 三小刀收官 + 九组标�
 ~~taxonomy 模块化抽出~~ **撤刀**（2026-07-17 owner 拍板，不挂复活
 条件）：两解锁目标均已消失——跨主题群加分被配方 v2 废止、阶梯推 v3；
 零外部消费者，真做 v3/R3 时随刀抽即可。
-small 挂账：谓语推导副本收拢、vp-driver README 残句、r2 versions/
-断言本机环境脆（本日三刀 verify:all 反复实证：versions/ 不入 git 故
-本机必红 CI 绿，修法=断言只看本刀 diff）、PaperBlockCanvas.tsx 零消费
-者死代码（含 insertion menu，随清理刀删）、**判例候选待 owner 点头**：
-删共享 CSS 前必须做类消费清单 sweep（lecture-css-restore 事故背书）。
+~~small 挂账四项~~ ✅ 2026-07-17 small-ledger 清扫刀收官：vp-driver
+残句清、versions/ 断言改 git 视角（本机 CI 同判，verify:all 85 全绿
+首次本机实证）、PaperBlockCanvas 死链全删（组件+insertion 态+CSS 882
+行，逐类消费 sweep 过）、谓语推导**判决=不收拢**（migrate 副本系已跑
+完的一次性冻结历史，in-code 07-15 拍板取代 cr.md 建议；死文件
+analyzeGrammarFillVerbProfile.mjs 退役入墓碑清单）。
+**判例候选待 owner 点头**：删共享 CSS 前必须做类消费清单 sweep
+（lecture-css-restore 事故背书）。
 
 ## 现在是什么
 

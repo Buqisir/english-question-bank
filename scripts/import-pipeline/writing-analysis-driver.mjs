@@ -1,5 +1,5 @@
 // I18/I19 — Writing analysis backfill driver (application + continuation writing groups).
-// Mirrors vp-driver.mjs: two modes driven by process.argv[2].
+// Two modes driven by process.argv[2].
 //
 // Phase 1:  node writing-analysis-driver.mjs list [application|continuation|all]
 //   Scans 12 ALLOWED papers for un-analysed writing groups of the given type.

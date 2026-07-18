@@ -1462,11 +1462,7 @@ button:disabled {
 
 .paper-section-head h4,
 .paper-section-head p,
-.paper-instruction,
-.paper-passage h5,
-.paper-passage pre,
-.paper-question p,
-.teacher-answer p {
+.paper-instruction {
   margin: 0;
 }
 
@@ -1482,79 +1478,10 @@ button:disabled {
   line-height: 1.55;
 }
 
-.paper-passage {
-  display: grid;
-  gap: 8px;
-  padding: 14px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: var(--surface);
-}
-
-.paper-passage h5 {
-  font-size: 14px;
-}
-
-.paper-passage pre {
-  color: var(--ink);
-  font: inherit;
-  font-size: 14px;
-  line-height: 1.75;
-  white-space: pre-wrap;
-}
-
-.paper-question-list {
-  display: grid;
-  gap: 16px;
-  margin: 0;
-  padding-left: 24px;
-}
-
-.paper-question {
-  padding-left: 3px;
-}
-
-.paper-question p {
-  color: var(--ink-strong);
-  font-size: 14px;
-  font-weight: 700;
-  line-height: 1.6;
-}
-
-.paper-options {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 7px 16px;
-  margin-top: 8px;
-}
-
-.paper-options-inline {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px 24px;
-}
-
-.paper-options div {
-  display: flex;
-  gap: 7px;
-  color: var(--ink);
-  font-size: 14px;
-  line-height: 1.45;
-}
-
 .student-answer-space {
   height: 42px;
   margin-top: 10px;
   border-bottom: 1px solid var(--line-strong);
-}
-
-.teacher-answer {
-  display: grid;
-  gap: 5px;
-  margin-top: 10px;
-  padding: 10px;
-  border-radius: 8px;
-  background: var(--surface-strong);
 }
 
 .paper-ai-parse {
@@ -1583,17 +1510,6 @@ button:disabled {
   background: var(--blue-soft);
   color: var(--blue-text);
   font-size: 12px;
-}
-
-.teacher-answer strong {
-  color: var(--ink-strong);
-  font-size: 14px;
-}
-
-.teacher-answer p {
-  color: var(--ink);
-  font-size: 13px;
-  line-height: 1.55;
 }
 
 .save-button {
@@ -2347,8 +2263,7 @@ button:disabled {
   .group-card,
   .detail-hero,
   .workflow-overview,
-  .workflow-stage-grid,
-  .paper-options {
+  .workflow-stage-grid {
     grid-template-columns: 1fr;
   }
 
@@ -2948,114 +2863,6 @@ button:disabled {
   margin-right: 4px;
 }
 
-/* Paper Canvas Blocks */
-.paper-canvas-block {
-  position: relative;
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  padding: 14px 16px;
-  margin-bottom: 10px;
-  cursor: pointer;
-  transition: border-color var(--motion-base) var(--ease-hover), box-shadow var(--motion-base) var(--ease-hover);
-}
-
-.paper-canvas-block:hover {
-  border-color: var(--line-strong);
-}
-
-.paper-canvas-block.selected {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 2px var(--accent-glow);
-}
-
-.paper-canvas-pb {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 8px 16px;
-  border-style: dashed;
-  background: var(--surface);
-}
-
-.paper-canvas-pb span {
-  color: var(--muted);
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-}
-
-.paper-canvas-qg {
-  background: var(--panel);
-}
-
-.paper-canvas-qg-head {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.paper-canvas-qg-range {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 36px;
-  padding: 3px 7px;
-  border-radius: 6px;
-  background: var(--accent);
-  color: #fff;
-  font-size: 12px;
-  font-weight: 800;
-}
-
-.paper-canvas-qg-meta {
-  display: grid;
-  gap: 2px;
-  min-width: 0;
-}
-
-.paper-canvas-qg-meta strong {
-  color: var(--ink-strong);
-  font-size: 14px;
-  font-weight: 700;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.paper-canvas-qg-meta span {
-  color: var(--muted);
-  font-size: 12px;
-  font-weight: 700;
-}
-
-.paper-canvas-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-  margin-top: 8px;
-  padding-top: 8px;
-  border-top: 1px solid var(--line);
-}
-
-.paper-canvas-actions button {
-  min-height: 26px;
-  padding: 0 8px;
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  background: var(--surface-strong);
-  color: var(--muted);
-  font-size: 11px;
-  font-weight: 700;
-  transition: color var(--motion-fast) var(--ease-hover), border-color var(--motion-fast) var(--ease-hover), background var(--motion-fast) var(--ease-hover);
-}
-
-.paper-canvas-actions button:hover {
-  color: var(--ink);
-  border-color: var(--line-strong);
-  background: var(--line);
-}
-
 /* Block Settings Panel */
 .block-settings-panel {
   display: grid;
@@ -3136,133 +2943,6 @@ button:disabled {
   min-height: 28px;
   padding: 0 8px;
   font-size: 11px;
-}
-
-/* Paper Insertion Seams */
-.paper-insertion-seam {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 16px;
-  margin: -4px 0;
-  z-index: 1;
-}
-
-.paper-insertion-seam::before {
-  content: '';
-  position: absolute;
-  left: 20%;
-  right: 20%;
-  top: 50%;
-  height: 0;
-  border-top: 1px solid transparent;
-  transition: border-color var(--motion-base) var(--ease-hover);
-}
-
-.paper-insertion-seam:hover::before,
-.paper-insertion-seam.open::before {
-  border-color: var(--line-strong);
-}
-
-.paper-insertion-trigger {
-  display: none;
-  align-items: center;
-  justify-content: center;
-  width: 22px;
-  height: 22px;
-  border-radius: 999px;
-  border: 1px solid var(--line);
-  background: var(--panel);
-  color: var(--muted);
-  font-size: 14px;
-  font-weight: 700;
-  line-height: 1;
-  cursor: pointer;
-  z-index: 2;
-  transition: border-color var(--motion-fast) var(--ease-hover), color var(--motion-fast) var(--ease-hover), background var(--motion-fast) var(--ease-hover);
-}
-
-.paper-insertion-seam:hover .paper-insertion-trigger,
-.paper-insertion-seam.open .paper-insertion-trigger {
-  display: inline-flex;
-}
-
-.paper-insertion-seam.open .paper-insertion-trigger {
-  border-color: var(--accent);
-  color: var(--accent);
-  background: var(--surface-strong);
-}
-
-/* emil-processing: menu entrance — mirrors pi-basket-preview-popover's
-   mount-only keyframe convention (element fully unmounts/remounts via
-   `{isOpen && ...}`, so a fire-once animation is enough, no exit needed). */
-@keyframes paper-insertion-menu-in {
-  from {
-    opacity: 0;
-    transform: translateX(-50%) translateY(-2px) scale(0.98);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(-50%) scale(1);
-  }
-}
-
-.paper-insertion-menu {
-  display: flex;
-  gap: 4px;
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  transform-origin: top center;
-  margin-top: 4px;
-  padding: 4px 6px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: var(--panel);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-  z-index: 10;
-  white-space: nowrap;
-  animation: paper-insertion-menu-in var(--motion-fast) var(--ease-out);
-}
-
-.paper-insertion-menu button {
-  min-height: 26px;
-  padding: 0 10px;
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  background: var(--surface-strong);
-  color: var(--ink);
-  font-size: 12px;
-  font-weight: 700;
-  transition: border-color var(--motion-fast) var(--ease-hover), color var(--motion-fast) var(--ease-hover);
-}
-
-.paper-insertion-menu button:hover:not(:disabled) {
-  border-color: var(--accent);
-  color: var(--accent);
-}
-
-.paper-insertion-menu button:disabled {
-  color: var(--muted);
-  opacity: 0.5;
-}
-
-.paper-insertion-seam.empty-canvas {
-  height: auto;
-  margin: 20px 0;
-  padding: 16px;
-}
-
-.paper-insertion-seam.empty-canvas .paper-insertion-menu {
-  position: static;
-  transform: none;
-  margin-top: 0;
-  box-shadow: none;
-  border: 1px dashed var(--line-strong);
-  /* 静态内联布局，非浮层弹出，不套用浮层入场动效 */
-  animation: none;
 }
 
 /* ========================================================================

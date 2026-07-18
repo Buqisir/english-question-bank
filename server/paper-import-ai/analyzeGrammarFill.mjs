@@ -332,9 +332,11 @@ function isRetryableGrammarFillError(error) {
 // (same owner-locked rules), not an import: the migrate script's copy is
 // already run + owner-verified against the frozen 33-file migration output
 // (docs/cuts/grammar-facets-v2/step1-samples.md) and must not shift after
-// the fact; this copy is the twin for NEW imports going forward. Any future
-// behavior drift between the two must be caught by
-// scripts/verify-grammar-facets-v2.mjs, not silently reconciled here.
+// the fact; THIS copy is the single live source for NEW imports going
+// forward (small-ledger ruling 2026-07-17: the migrate twin is a frozen
+// historical record of a completed one-shot migration, never re-run, so the
+// two are not consolidated and no drift surface exists between them —
+// editing the rules for future imports means editing here only).
 // ============================================================
 
 const BE_ANY = new Set(['am', 'is', 'are', 'was', 'were', 'be', 'been', 'being'])

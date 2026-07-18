@@ -26,7 +26,7 @@
  *   5. Removing a `question_group` block via paperBlocks.removeBlock removes
  *      the matching basket item (handled inside usePaperBlocks; the basket-only
  *      onRemoveQuestionGroup callback we pass cannot leave a stale block).
- *   6. clear() resets basket, paperBlocks, selection, and insertion state.
+ *   6. clear() resets basket, paperBlocks, and selection state.
  *   7. moveGroup syncs basket order and the corresponding question_group block.
  *   8. updateGroupScore syncs basket score and block score.
  *   9. updateGroupMeta only mutates basket (sectionTitle / note).
@@ -81,10 +81,8 @@ export type UsePaperDraftResult = {
   basket: BasketItem[]
   paperBlocks: PaperBlock[]
   selectedPaperBlockId: string | null
-  openInsertionIndex: number | null
 
   setSelectedPaperBlockId: (id: string | null) => void
-  setOpenInsertionIndex: (index: number | null) => void
 
   // Basket-level edit ops (these fire onDraftEdited when something changes)
   addGroups: (groups: QuestionGroupCard[]) => BasketItem[] // returns the freshly added items (de-duped)
@@ -105,9 +103,6 @@ export type UsePaperDraftResult = {
   removeBlock: (blockId: string) => void
   moveBlock: (blockId: string, direction: -1 | 1) => void
   updateSectionHeaderTitle: (blockId: string, title: string) => void
-  insertBlockAt: (index: number, type: 'section_header' | 'page_break') => void
-  insertSectionHeaderBefore: (blockId: string) => void
-  insertPageBreakAfter: (blockId: string) => void
 
   // External-driven sync — used by handleDeleteQuestionGroup (which deletes
   // the underlying source group from the question bank). No fire.
@@ -221,7 +216,6 @@ export function usePaperDraft(input: UsePaperDraftInput = {}): UsePaperDraftResu
 
   const removeGroup = useCallback(
     (questionGroupId: string) => {
-      blocks.setOpenInsertionIndex(null)
       const before = basketRef.current
       const next = before.filter((item) => item.id !== questionGroupId)
       const removed = next.length !== before.length
@@ -235,7 +229,6 @@ export function usePaperDraft(input: UsePaperDraftInput = {}): UsePaperDraftResu
   )
 
   const clear = useCallback(() => {
-    blocks.setOpenInsertionIndex(null)
     commitBasket([])
     blocks.resetBlocks()
     fire('clear')
@@ -299,7 +292,6 @@ export function usePaperDraft(input: UsePaperDraftInput = {}): UsePaperDraftResu
     ({ basket: nextBasket, layout }: ReplaceDraftInput) => {
       commitBasket(nextBasket)
       blocks.setSelectedPaperBlockId(null)
-      blocks.setOpenInsertionIndex(null)
       if (layout) {
         blocks.setBlocks(layout.blocks)
       } else {
@@ -346,9 +338,7 @@ export function usePaperDraft(input: UsePaperDraftInput = {}): UsePaperDraftResu
     basket,
     paperBlocks: blocks.paperBlocks,
     selectedPaperBlockId: blocks.selectedPaperBlockId,
-    openInsertionIndex: blocks.openInsertionIndex,
     setSelectedPaperBlockId: blocks.setSelectedPaperBlockId,
-    setOpenInsertionIndex: blocks.setOpenInsertionIndex,
     addGroups,
     removeGroup,
     clear,
@@ -359,9 +349,6 @@ export function usePaperDraft(input: UsePaperDraftInput = {}): UsePaperDraftResu
     removeBlock: blocks.removeBlock,
     moveBlock: blocks.moveBlock,
     updateSectionHeaderTitle: blocks.updateSectionHeaderTitle,
-    insertBlockAt: blocks.insertBlockAt,
-    insertSectionHeaderBefore: blocks.insertSectionHeaderBefore,
-    insertPageBreakAfter: blocks.insertPageBreakAfter,
     externalRemoveByGroupId,
     patchBasketItemFromSavedGroup,
     paperTitle,
