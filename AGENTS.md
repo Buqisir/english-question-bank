@@ -105,6 +105,9 @@ rise, move the daily default back to high.
   server / call the real API / import the real module) over source-regex
   assertions. A behavioral assertion may retire the matching regex
   assertion in the same cut; no bulk cleanup — natural turnover only.
+- 删共享 CSS / 样式前必须先做类消费清单 sweep：每个将删类名全仓 grep
+  生产者（ts/tsx/mjs/html），零生产者方可删，撞名假阳性人眼辨
+  （判例 2026-07-17）。
 
 ### Session reading contract
 

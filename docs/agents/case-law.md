@@ -12,6 +12,20 @@
 `~/.claude/skills/project-os/assets/case-law-universal.md`(仅本机;
 该 skill 目录自带 git,回流后一行 commit)。项目特有判例不回流。
 
+## 2026-07-17
+
+- **删共享 CSS 误伤事故（lecture-css-restore 背书，owner 点头入宪
+  2026-07-17）**：retire 刀删"疑似 harness 专用" CSS，未逐类核消费者，
+  误杀五个活讲评面板的共用样式——组件裸奔上产，owner 报障后 941 行
+  VERBATIM 复活 + 防回归 verify 进 CI。修法：**删任何共享 CSS/样式前，
+  必须对每个将删类名做全仓类消费清单 sweep**（grep 生产者含
+  ts/tsx/mjs/html，零生产者才删；撞名假阳性要人眼辨——同日 small-ledger
+  刀实践即抓到 `paper-passage` 命中全是 paper-passage-letter 刀名撞名、
+  `detail-message` 实为活类保留）。→ 固化 **AGENTS.md Gates** 一行；
+  普适级（删除时低估共享面是 agent 天性），回流母版——**回流挂起**：
+  执行时实核 `~/.claude/skills/project-os/` 已不在本机（全盘搜索零命
+  中），母版去向待 owner 确认后补回流。
+
 ## 2026-07-14
 
 - **CI watch 管道吞码事故（trust-cracks 收口实撞）**：主代理
