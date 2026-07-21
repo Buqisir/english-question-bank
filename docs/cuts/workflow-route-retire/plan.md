@@ -123,5 +123,6 @@ Browser QA：不需要（process / docs-only，无用户可见产品改动）。
   `agent-entrypoint.md` 按需。
 - [x] DP-4 fresh Terra DEV 完成，PM 亲跑验证：`tsc` 退出 0；
   `verify:all` PASS 84 / SKIP 1 / FAIL 0。
-- [ ] DP-5 fresh Sol CR APPROVE，Must Fix 清零。
+- [x] DP-5 fresh Sol CR Round 2 APPROVE，5 个 Must Fix 全部闭环，
+  open Must Fix = 0。
 - [ ] DP-6 PM + RM artifact gate → merge → main CI → STATUS 收官。

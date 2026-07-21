@@ -15,12 +15,13 @@
   artifact-gate fixtures, and `tsc` exit 0 passed. PM-run full `verify:all`:
   PASS 84 / SKIP 1 / FAIL 0 (documented absent off-repo I16a fixture). Browser
   QA is not required because this is process / docs-only.
-- Follow-up / watch: fresh CR must re-review all five Must Fixes. **SW-1:** an
-  artifact-gate PASS proves only that `cr.md` exists and is non-empty; RM must
-  read the verdict and confirm every Must Fix is closed before merge.
+- Follow-up / watch: Round 2 fresh CR is APPROVE with open Must Fix = 0.
+  **SW-1:** an artifact-gate PASS proves only that `cr.md` exists and is
+  non-empty; RM must read its verdict and confirm every Must Fix is closed
+  before merge.
 - Start date: 2026-07-21
 - Merge date: pending
 - PA rounds: 0
-- Routine CR rounds: 1
+- Routine CR rounds: 2
 - Big CR rounds: 0
-- Must Fix count: 5
+- Must Fix count: 5 raised / 5 closed / 0 open
