@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>applied-writing-lecture · 讲评模式原型 — 手写批注（mdtask 风格）</title>
+<!-- 手写字体：英文 Shantell Sans（mdtask 同款）；中文 霞鹜文楷屏幕版 / 龙藏（可切换） -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Shantell+Sans:wght@400;500;600&family=Long+Cang&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-screen-webfont@1.7.0/style.css" rel="stylesheet">
+<style>
+  :root {
+    --paper: #faf9f4;
+    --ink-text: #1a1a1a;
+    --ink-green: #2c6e56;   /* 审题结构（左手边） */
+    --ink-orange: #b95f27;  /* 亮点句式（右手边） */
+    --muted: #8a8478;
+    --hand-cn: 'LXGW WenKai Screen', 'LXGW WenKai', cursive;
+  }
+  body.pen-longcang { --hand-cn: 'Long Cang', cursive; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: #efeee8;
+    color: var(--ink-text);
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, 'PingFang SC', sans-serif;
+  }
+  .hand { font-family: 'Shantell Sans', var(--hand-cn); }
+
+  /* ── 顶部说明 + 控制台 ─────────────────────────────── */
+  header {
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 20px 24px 8px;
+  }
+  header h1 { font-size: 16px; margin: 0 0 4px; }
+  header p.sub { font-size: 12.5px; color: #6a6a64; margin: 0 0 12px; max-width: 72em; line-height: 1.6; }
+  .controls {
+    display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+    padding: 8px 0 4px;
+  }
+  .controls button {
+    font: 600 13px/1 Inter, 'PingFang SC', sans-serif;
+    color: #2c6e56; background: #fff;
+    border: 1px solid #cfe4da; border-radius: 6px;
+    padding: 7px 14px; cursor: pointer;
+  }
+  .controls button:hover { background: #f2f8f5; }
+  .controls button:disabled { color: #b9b4a8; border-color: #e2dfd6; cursor: default; background: #fff; }
+  .controls button.primary { background: #2c6e56; color: #fff; border-color: #2c6e56; }
+  .controls .counter { font-size: 13px; color: #6a6a64; font-variant-numeric: tabular-nums; min-width: 3.5em; }
+  .controls .sep { width: 1px; height: 20px; background: #d8d5ca; margin: 0 4px; }
+  .controls label { font-size: 12.5px; color: #6a6a64; display: inline-flex; align-items: center; gap: 4px; cursor: pointer; }
+
+  /* ── 舞台：左批注边 | 卷面答题框 | 右批注边 ‖ 审题卡 rail ── */
+  .world {
+    max-width: 1500px; margin: 8px auto 60px; padding: 0 24px;
+    display: flex; gap: 20px; align-items: flex-start;
+  }
+  .stage {
+    position: relative;
+    flex: 1 1 auto;
+    min-width: 0;
+    background: var(--paper);
+    border: 1px solid #e2dfd6;
+    border-radius: 2px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    padding: 34px 0 44px;
+  }
+  .ink-overlay {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    overflow: visible;
+  }
+
+  .section-line {
+    width: var(--letter-w);
+    margin: 0 auto 10px;
+    font: 700 14px/1.6 'Songti SC', 'STSong', serif;
+  }
+  /* 卷面答题框（复刻 .pi-writing-answer-box 的味道） */
+  .answer-box {
+    position: relative;
+    width: var(--letter-w);
+    margin: 0 auto;
+    border: 1px solid #1a1a1a;
+    padding: 1.25rem 1.5rem;
+    background: transparent;
+  }
+  :root { --letter-w: 620px; }
+
+  /* 信件排版 = 三轮返工后的定稿规则 */
+  .letter {
+    font-family: 'Times New Roman', 'Songti SC', 'STSong', serif;
+    font-size: 15px;
+    line-height: 2.05;   /* 讲评模式行距略松，给批注线留空气 */
+  }
+  .letter p { margin: 0 0 0.35em; }
+  .letter p.body { text-indent: 2em; }
+  .letter p.closing { text-align: right; margin: 0; }
+
+  /* 锚句：不变色（DP-3 拍板）。讲评批注的下划线由 SVG 手绘，不用 CSS。 */
+  .anchor { cursor: default; }
+
+  /* ── 手写批注（无卡片、无边框——直接写在纸边上，mdtask 式） ── */
+  .note {
+    position: absolute;
+    width: var(--note-w);
+    font-family: 'Shantell Sans', var(--hand-cn);
+    font-size: 13px;
+    line-height: 1.55;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 380ms ease-out, transform 380ms ease-out;
+    pointer-events: none;
+  }
+  :root { --note-w: 240px; }
+  .note.show { opacity: 1; transform: translateY(0) rotate(var(--tilt, 0deg)); }
+  .note .label {
+    display: block;
+    font-weight: 600;
+    font-size: 13.5px;
+    margin-bottom: 2px;
+  }
+  .note .body { display: block; }
+  .note .extra { display: block; font-size: 12px; opacity: 0.75; margin-top: 3px; }
+  .note.green { color: var(--ink-green); }
+  .note.orange { color: var(--ink-orange); }
+  .note.left { text-align: right; }
+  .note.right { text-align: left; }
+
+  svg path.stroke { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  svg path.green { stroke: var(--ink-green); }
+  svg path.orange { stroke: var(--ink-orange); }
+
+  /* ── 右侧：审题卡瘦 rail（示意「审题卡只在右边」的新布局） ── */
+  .rail {
+    flex: 0 0 250px;
+    background: #fbfaf6;
+    border: 1px solid #e2dfd6;
+    border-radius: 8px;
+    padding: 14px 14px 16px;
+    font-size: 12.5px;
+  }
+  .rail h3 { margin: 0 0 8px; font-size: 13px; }
+  .rail h4 { margin: 10px 0 4px; font-size: 11px; color: var(--ink-green); letter-spacing: 0.04em; }
+  .rail .cells { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+  .rail .cell { background: #fff; border: 1px solid #e2dfd6; border-radius: 4px; padding: 4px 6px; }
+  .rail .cell b { display: block; font-size: 10px; color: var(--muted); font-weight: 600; }
+  .rail .cell span { font-size: 11.5px; }
+  .rail ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 3px; }
+  .rail li, .rail .qa { background: #fff; border: 1px solid #e2dfd6; border-radius: 4px; padding: 4px 6px; font-size: 11.5px; }
+  .rail .qa b { display: block; font-size: 10px; color: var(--muted); font-weight: 600; }
+
+  /* ── 页脚开放问题 ── */
+  .open-questions {
+    max-width: 1500px; margin: 0 auto 40px; padding: 0 24px;
+    font-size: 12.5px; color: #6a6a64; line-height: 1.7;
+  }
+  .open-questions b { color: #444; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>讲评模式原型 · 手写批注（mdtask 风格移植）</h1>
+  <p class="sub">
+    新构想：框内不再翻页——左边只有一篇范文，点开进讲评模式；审题要点（墨绿笔，写在左页边）与亮点句式（橙笔，写在右页边）
+    从原句拉出手绘线、以手写体写在纸边上。字体：英文 Shantell Sans（mdtask 同款）+ 中文霞鹜文楷（可切龙藏笔迹）。
+    数据为 2024-I 真卡真 marks/highlights。审题卡按新构想只留在右侧 rail（右栏现状保留）。
+  </p>
+  <div class="controls">
+    <button id="btn-prev">← 上一笔</button>
+    <button id="btn-next" class="primary">下一笔 →</button>
+    <span class="counter" id="counter">0 / 9</span>
+    <button id="btn-all">全部展开</button>
+    <button id="btn-clear">收起批注</button>
+    <span class="sep"></span>
+    <label><input type="radio" name="pen" value="wenkai" checked> 文楷笔迹</label>
+    <label><input type="radio" name="pen" value="longcang"> 龙藏笔迹</label>
+  </div>
+</header>
+
+<div class="world">
+  <div class="stage" id="stage">
+    <svg class="ink-overlay" id="ink" aria-hidden="true"></svg>
+    <div class="section-line">第一节（满分15分）</div>
+    <div class="answer-box">
+      <div class="letter" id="letter"></div>
+    </div>
+    <!-- 手写批注节点由 JS 生成，绝对定位在 stage 两侧页边 -->
+  </div>
+
+  <aside class="rail">
+    <h3>审题卡</h3>
+    <h4>基础五定</h4>
+    <div class="cells">
+      <div class="cell"><b>文体</b><span>邮件</span></div>
+      <div class="cell"><b>话题</b><span>公园美术课</span></div>
+      <div class="cell"><b>读者</b><span>英国朋友 Chris（平辈、熟人、当时不在场）</span></div>
+      <div class="cell"><b>人称</b><span>I ↔ you</span></div>
+      <div class="cell"><b>主时态</b><span>过去时为主（经历）+ 现在时（感想）</span></div>
+      <div class="cell"><b>判型</b><span>描述类</span></div>
+    </div>
+    <h4>圈要点、编号</h4>
+    <ul><li>① 你完成的作品</li><li>② 你的感想</li></ul>
+    <h4>读者三问</h4>
+    <div class="qa" style="margin-bottom:3px"><b>读者是谁？</b>Chris 是外国朋友、当时不在场</div>
+    <div class="qa" style="margin-bottom:3px"><b>他最关心什么？</b>你到底画了什么、那节课有意思在哪</div>
+    <div class="qa"><b>他要什么具体信息？</b>作品得能「看见」——画的是什么、什么颜色、什么样子</div>
+    <h4>价值落点</h4>
+    <div class="qa">在公园上美术课 = 在生活里发现美（自然与艺术的相遇）</div>
+  </aside>
+</div>
+
+<div class="open-questions">
+  <b>开放问题（拍板用）：</b>
+  ① 页边宽度从哪来——真实卷面里答题框两侧白边各约 190px，批注要不要在讲评模式把信纸温和收窄？
+  ② 逐笔节奏（课堂讲一条出一条）和全部展开，默认哪个？
+  ③ 左=审题结构、右=亮点句式的分边规则可以吗？
+  ④ 双色墨（墨绿/橙）还是全用一色红笔更像老师批改？
+  ⑤ 点句子直达对应批注要不要（本原型未做，只有顺序步进）？
+</div>
+
+<script>
+// ── 2024-I 真数据（app/public/paper-assets/paper-2024-i/.../writing-analysis-v1.json） ──
+const LETTER_LINES = [
+  "Dear Chris,",
+  "I'm writing to share with you an art class I had in a park last Friday.",
+  "Instead of copying pictures in the classroom, we sat on the grass and painted what we saw. I chose the small lake and finished a painting of it, with sunlight dancing on the water and boats resting by the bank. Our teacher liked its lively colours so much that she put it up in our classroom.",
+  "More importantly, the class taught me to slow down and notice the beauty around me. Nature, as I now see, is the best art teacher.",
+  "How I wish you had been there!",
+  "Yours,",
+  "Li Hua",
+];
+
+// 审题要点（marks）→ 左页边，墨绿。label = 卡格名「值」。
+const MARKS = [
+  { text: "I'm writing to share with you an art class I had in a park last Friday.",
+    label: "判型「描述类」",
+    note: "分享经历的邮件开门见山——一句话点出何时何地一堂什么课。" },
+  { text: "Instead of copying pictures in the classroom, we sat on the grass and painted what we saw.",
+    label: "他要什么具体信息",
+    note: "先给场景，Chris 才看得懂后面的作品从哪来。" },
+  { text: "I chose the small lake and finished a painting of it, with sunlight dancing on the water and boats resting by the bank.",
+    label: "要点①「完成的作品」",
+    note: "画了什么 + 两笔画面细节，一句写实。" },
+  { text: "Our teacher liked its lively colours so much that she put it up in our classroom.",
+    label: "主时态「一般过去时」",
+    note: "上周五的事全程过去时（liked / put），叙事不跳档。" },
+  { text: "More importantly, the class taught me to slow down and notice the beauty around me.",
+    label: "他最关心什么 · 要点②",
+    note: "这堂课改变了我什么——Chris 读到这句才算收到这封信的分量。" },
+];
+
+// 亮点句式（highlights）→ 右页边，橙。extra = 迁移句。
+const HIGHLIGHTS = [
+  { text: "Instead of copying pictures in the classroom, we sat on the grass and painted what we saw.",
+    label: "Instead of doing... 对比开场",
+    note: "凸显这次经历的特别之处。",
+    extra: "迁移：Instead of having class indoors, we... / Instead of reading about it, we tried it ourselves." },
+  { text: "with sunlight dancing on the water and boats resting by the bank",
+    label: "with + 名词 + doing",
+    note: "复合结构给画面加细节，dancing / resting 把静景写活。",
+    extra: "迁移：with music playing / with everyone laughing。" },
+  { text: "Our teacher liked its lively colours so much that she put it up in our classroom.",
+    label: "so...that 结果句",
+    note: "自然带出他人评价，替代干巴巴的 My painting was good。",
+    extra: "迁移：enjoyed it so much that... / was so moved that...。" },
+  { text: "the class taught me to slow down and notice the beauty around me",
+    label: "无灵主语 + taught me to...",
+    note: "写感想的高分框架，比 I think I learned... 紧凑有力。",
+    extra: "迁移：The trip / The experience / The failure taught me to...。" },
+];
+
+// ── 信件渲染（greeting / body 首行缩进 / 末两行右对齐 = 三轮定稿规则） ──
+const letterEl = document.getElementById('letter');
+LETTER_LINES.forEach((line, i) => {
+  const p = document.createElement('p');
+  p.className = i === 0 ? 'greeting' : i >= LETTER_LINES.length - 2 ? 'closing' : 'body';
+  p.textContent = line;
+  letterEl.appendChild(p);
+});
+
+// 锚定：在文本节点里找 target 子串并包 span（marks 先包段级，highlights 可嵌套其中）。
+function wrapText(root, target, cls) {
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+  let node;
+  while ((node = walker.nextNode())) {
+    const idx = node.data.indexOf(target);
+    if (idx === -1) continue;
+    const range = document.createRange();
+    range.setStart(node, idx);
+    range.setEnd(node, idx + target.length);
+    const span = document.createElement('span');
+    span.className = 'anchor ' + cls;
+    range.surroundContents(span);
+    return span;
+  }
+  return null;
+}
+
+// 批注清单：讲评顺序 = 先审题结构（文序）再亮点句式（文序）。
+const ANNOTATIONS = [];
+MARKS.forEach((m, i) => {
+  const span = wrapText(letterEl, m.text, 'mk-' + i);
+  ANNOTATIONS.push({ ...m, span, side: 'left', color: 'green', underline: 'straight', baseOffset: 3 });
+});
+HIGHLIGHTS.forEach((h, i) => {
+  const span = wrapText(letterEl, h.text, 'hl-' + i);
+  ANNOTATIONS.push({ ...h, span, side: 'right', color: 'orange', underline: 'wavy', baseOffset: 7 });
+});
+
+// 手写批注 DOM
+const stage = document.getElementById('stage');
+ANNOTATIONS.forEach((a, i) => {
+  const div = document.createElement('div');
+  div.className = `note ${a.color} ${a.side}`;
+  div.style.setProperty('--tilt', ((i * 37) % 5 - 2) * 0.55 + 'deg'); // 手放的微倾，确定性
+  div.innerHTML = `<span class="label">${a.label}</span><span class="body">${a.note}</span>` +
+    (a.extra ? `<span class="extra">${a.extra}</span>` : '');
+  stage.appendChild(div);
+  a.el = div;
+});
+
+// ── SVG 手绘线 ────────────────────────────────────────
+const ink = document.getElementById('ink');
+const SS = 'http://www.w3.org/2000/svg';
+
+function stagePoint(x, y) {
+  const s = stage.getBoundingClientRect();
+  return [x - s.left, y - s.top];
+}
+// 微抖直线（审题）：沿途 2 个轻微控制点
+function straightPath(x0, y0, x1, y1, seed) {
+  const dx = (x1 - x0) / 3;
+  const j = (n) => ((seed * 7919 + n * 104729) % 100) / 100 - 0.5; // 确定性抖动
+  return `M ${x0} ${y0} C ${x0 + dx} ${y0 + j(1) * 2.2}, ${x1 - dx} ${y1 + j(2) * 2.2}, ${x1} ${y1}`;
+}
+// 波浪线（亮点）
+function wavyPath(x0, y, x1) {
+  const wl = 9, amp = 1.7;
+  let d = `M ${x0} ${y}`;
+  for (let x = x0; x < x1; x += wl) {
+    const half = Math.min(wl, x1 - x) / 2;
+    d += ` q ${half / 1} ${-amp * 2}, ${half * 2} 0`;
+  }
+  return d;
+}
+// 拉线：从句边到批注。控制点全部压在纸外页边区，保证线一出句子就离纸，
+// 大纵向落差时也只在页边空白里弯，绝不横穿信纸文字。
+function leaderPath(x0, y0, x1, y1, side, boxEdge, seed) {
+  const j = ((seed * 31 + 17) % 7) - 3;
+  const c1x = side === 'left' ? boxEdge - 30 + j : boxEdge + 30 + j;
+  const c2x = side === 'left' ? x1 + 26 : x1 - 26;
+  return `M ${x0} ${y0} C ${c1x} ${y0}, ${c2x} ${y1}, ${x1} ${y1}`;
+}
+
+function drawPath(d, colorCls, width, animate) {
+  const p = document.createElementNS(SS, 'path');
+  p.setAttribute('d', d);
+  p.setAttribute('class', `stroke ${colorCls}`);
+  p.setAttribute('stroke-width', width);
+  ink.appendChild(p);
+  if (animate) {
+    const len = p.getTotalLength();
+    p.style.strokeDasharray = len;
+    p.style.strokeDashoffset = len;
+    p.getBoundingClientRect(); // reflow
+    p.style.transition = 'stroke-dashoffset 420ms ease-out';
+    p.style.strokeDashoffset = 0;
+  }
+  return p;
+}
+
+// ── 展开状态 + 布局 ───────────────────────────────────
+let shown = 0; // 前 shown 条可见
+const total = ANNOTATIONS.length;
+
+function layout(animateLast) {
+  ink.innerHTML = '';
+  const stageRect = stage.getBoundingClientRect();
+  const box = document.querySelector('.answer-box').getBoundingClientRect();
+  const noteW = 240, gap = 26, minGapY = 14;
+  const nextY = { left: 0, right: 0 };
+
+  ANNOTATIONS.forEach((a, i) => {
+    const visible = i < shown;
+    a.el.classList.toggle('show', visible);
+    if (!visible) return;
+    const isLast = i === shown - 1;
+    const anim = animateLast && isLast;
+    const rects = Array.from(a.span.getClientRects());
+    if (!rects.length) return;
+
+    // 1. 下划线（逐行）
+    rects.forEach((r, k) => {
+      const [x0, y] = stagePoint(r.left, r.bottom + a.baseOffset - 4);
+      const x1 = stagePoint(r.right, 0)[0];
+      const d = a.underline === 'wavy' ? wavyPath(x0, y, x1) : straightPath(x0, y, x1, y, i * 3 + k);
+      drawPath(d, a.color, 1.25, anim);
+    });
+
+    // 2. 批注定位（贴近首行 y，同侧顺排防重叠）
+    const first = rects[0];
+    const anchorY = stagePoint(0, (first.top + first.bottom) / 2)[1];
+    const top = Math.max(anchorY - 10, nextY[a.side]);
+    a.el.style.top = top + 'px';
+    if (a.side === 'left') {
+      a.el.style.left = (box.left - stageRect.left - noteW - gap) + 'px';
+    } else {
+      a.el.style.left = (box.right - stageRect.left + gap) + 'px';
+    }
+    nextY[a.side] = top + a.el.offsetHeight + minGapY;
+
+    // 3. 拉线：从「离本侧纸边最近的那一行」的行端出发（左=最靠左的行首，
+    // 右=最靠右的行尾），线立即出纸、在页边空白里弯到批注。
+    let sx, sy, ex, ey;
+    if (a.side === 'left') {
+      const r = rects.reduce((p, c) => (c.left < p.left ? c : p));
+      [sx, sy] = stagePoint(r.left - 4, r.bottom + a.baseOffset - 5);
+      const boxEdge = box.left - stageRect.left;
+      ex = boxEdge - gap + 18;
+      ey = top + 9;
+      drawPath(leaderPath(sx, sy, ex, ey, 'left', boxEdge, i), a.color, 1.1, anim);
+    } else {
+      const r = rects.reduce((p, c) => (c.right > p.right ? c : p));
+      [sx, sy] = stagePoint(r.right + 4, r.bottom + a.baseOffset - 5);
+      const boxEdge = box.right - stageRect.left;
+      ex = boxEdge + gap - 18;
+      ey = top + 9;
+      drawPath(leaderPath(sx, sy, ex, ey, 'right', boxEdge, i), a.color, 1.1, anim);
+    }
+  });
+  // 画布高度跟随批注（最后几条批注可能长过信纸）
+  const maxBottom = Math.max(
+    box.bottom - stageRect.top,
+    ...ANNOTATIONS.filter((_, i) => i < shown).map((a) => parseFloat(a.el.style.top || 0) + a.el.offsetHeight),
+  );
+  stage.style.minHeight = maxBottom + 44 + 'px';
+  document.getElementById('counter').textContent = `${shown} / ${total}`;
+  document.getElementById('btn-prev').disabled = shown === 0;
+  document.getElementById('btn-next').disabled = shown === total;
+}
+
+document.getElementById('btn-next').addEventListener('click', () => { if (shown < total) { shown++; layout(true); } });
+document.getElementById('btn-prev').addEventListener('click', () => { if (shown > 0) { shown--; layout(false); } });
+document.getElementById('btn-all').addEventListener('click', () => { shown = total; layout(false); });
+document.getElementById('btn-clear').addEventListener('click', () => { shown = 0; layout(false); });
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight') document.getElementById('btn-next').click();
+  if (e.key === 'ArrowLeft') document.getElementById('btn-prev').click();
+});
+document.querySelectorAll('input[name="pen"]').forEach((r) => {
+  r.addEventListener('change', () => {
+    document.body.classList.toggle('pen-longcang', r.value === 'longcang' && r.checked);
+    requestAnimationFrame(() => layout(false));
+  });
+});
+window.addEventListener('resize', () => layout(false));
+// 字体加载完成后重排一次（手写体行高变化会挪动批注）
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => layout(false));
+layout(false);
+</script>
+</body>
+</html>
