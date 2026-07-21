@@ -1,0 +1,866 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>应用文讲评解析 · 交互形态原型（THROWAWAY PROTOTYPE）</title>
+    <!--
+      PROTOTYPE — throwaway. 回答的问题：应用文解析在讲评态摆哪、怎么开？
+      三案同路由 ?variant= 切换（底部浮条 / ←→ 键）：
+        A 题下展开 · B 答题框放大 · C 右栏基线（现架构对照）
+      内容结构按 01 票拍板：审题卡六格 → 范文+审题点标志 → 亮点表达。
+      数据：paper-2022-i（2022 新高考 I 卷邀请信）真实题面 / 范文 / 亮点。
+      ★ 已拍板（owner 2026-07-20）：B2 中选（入口双手势；右栏显组级概览）；
+        A / B / C 落选留档对照。决议全文见 ticket 02。
+    -->
+    <style>
+      :root {
+        --ink: #2c3033;
+        --muted: #6f777d;
+        --surface: #f1f0ec;
+        --panel: #ffffff;
+        --line: #e0ded6;
+        --lecture-accent: #b4452e;        /* 讲评红笔 */
+        --lecture-accent-soft: #f7e4dd;
+        --lecture-tint: #faf7f0;          /* 解析区纸感底 */
+        --green: #059669;
+        --ps-font-stack: "Times New Roman", Times, "SimSun", "Songti SC", "STSong", serif;
+        --ps-font-heading: "SimHei", "Heiti SC", "STHeiti", sans-serif;
+        --ui-font: Inter, ui-sans-serif, system-ui, -apple-system, "PingFang SC",
+          "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background: var(--surface);
+        color: var(--ink);
+        font-family: var(--ui-font);
+      }
+
+      /* ============ 三栏壳（仿 paper-browse 讲评态 88px 1fr 380px） ============ */
+      .shell {
+        display: grid;
+        grid-template-columns: 88px 1fr 380px;
+        gap: 24px;
+        padding: 24px 24px 120px;
+        transition: grid-template-columns 0.3s ease;
+        min-height: 100vh;
+      }
+      .shell--right-collapsed { grid-template-columns: 88px 1fr; }
+      .shell--right-collapsed .lecture-panel { display: none; }
+
+      .rail {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        height: calc(100vh - 48px);
+        position: sticky;
+        top: 24px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        padding-top: 16px;
+      }
+      .rail i {
+        width: 40px; height: 40px; border-radius: 10px;
+        background: #eceae4; display: block;
+      }
+      .rail i.on { background: var(--lecture-accent-soft); }
+
+      /* ============ 卷面（A4 写作卡，真 token：794px / 宋体Times 14px 1.714） ============ */
+      .paper-col { min-width: 0; }
+      .a4 {
+        width: 794px;
+        max-width: 100%;
+        margin: 0 auto;
+        background: #fff;
+        color: #111;
+        font-family: var(--ps-font-stack);
+        font-size: 14px;
+        line-height: 1.714;
+        padding: 79px 91px;
+        box-shadow: rgba(0,0,0,0.063) 0 1px 0 0, rgba(0,0,0,0.08) 0 12px 32px 0;
+        position: relative;
+      }
+      .pw-part {
+        font-family: var(--ps-font-heading);
+        font-size: 14px;
+        font-weight: 700;
+        margin: 0 0 4px;
+      }
+      .pw-section {
+        font-family: var(--ps-font-heading);
+        font-size: 14px;
+        font-weight: 700;
+        margin: 0 0 8px;
+      }
+      .pw-instruction { margin: 0 0 14px; white-space: pre-line; }
+
+      /* 答题框（书信体 --letter：min-height 246px ≈ 65mm） */
+      .answer-box {
+        border: 1px solid #1a1a1a;
+        min-height: 246px;
+        padding: 1.25rem 1.5rem;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        transition: min-height 0.25s ease, background 0.25s ease;
+      }
+      .answer-given { margin: 0; }
+      .answer-bottom { margin-top: auto; text-align: right; }
+
+      /* 讲评态入口手势①：答题框可点 */
+      .lecture-on .answer-box.clickable { cursor: pointer; }
+      .lecture-on .answer-box.clickable:hover { background: #fbfaf6; }
+      .box-hint {
+        position: absolute;
+        right: 10px; bottom: 8px;
+        font-family: var(--ui-font);
+        font-size: 12px;
+        color: var(--lecture-accent);
+        opacity: 0;
+        transition: opacity 0.15s;
+        pointer-events: none;
+      }
+      .lecture-on .answer-box.clickable:hover .box-hint { opacity: 1; }
+
+      /* 讲评态入口手势②：写作卡右上「解析」钮（仅屏显元素，UI 字体） */
+      .analysis-toggle {
+        position: absolute;
+        top: 40px; right: 40px;
+        font-family: var(--ui-font);
+        font-size: 12px;
+        letter-spacing: 0.05em;
+        color: var(--lecture-accent);
+        background: #fff;
+        border: 1px solid var(--lecture-accent);
+        border-radius: 999px;
+        padding: 4px 14px;
+        cursor: pointer;
+        display: none;
+      }
+      .lecture-on .analysis-toggle { display: inline-block; }
+      .analysis-toggle:hover { background: var(--lecture-accent-soft); }
+
+      /* ============ 解析内容（三块共用，A/B/C 各自容器） ============ */
+      .wa {
+        font-family: var(--ui-font);
+        font-size: 0.875rem;
+        line-height: 1.6;
+        color: var(--ink);
+      }
+      .wa-head {
+        display: flex;
+        align-items: baseline;
+        gap: 0.5rem;
+        padding-bottom: 0.5rem;
+        margin-bottom: 0.75rem;
+        border-bottom: 1px solid #e8e5dc;
+      }
+      .wa-head-title { font-weight: 700; font-size: 0.9375rem; }
+      .wa-head-badge {
+        margin-left: auto;
+        font-size: 0.6875rem;
+        color: var(--muted);
+        border: 1px dashed #cfccc2;
+        border-radius: 4px;
+        padding: 1px 6px;
+        white-space: nowrap;
+      }
+      .wa-close {
+        font-size: 0.75rem;
+        color: var(--muted);
+        background: none;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 2px 10px;
+        cursor: pointer;
+        margin-left: 0.5rem;
+      }
+      .wa-close:hover { color: var(--lecture-accent); border-color: var(--lecture-accent); }
+      .wa-sec-title {
+        font-size: 0.8125rem;
+        font-weight: 700;
+        margin: 1rem 0 0.5rem;
+        color: var(--ink);
+      }
+      .wa-sec-title small { font-weight: 400; color: var(--muted); margin-left: 0.375rem; }
+
+      /* ① 审题卡六格 */
+      .wa-card {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 6px;
+      }
+      .wa-card--narrow { grid-template-columns: 1fr 1fr; }
+      .wa-cell {
+        background: #fff;
+        border: 1px solid #e2dfd6;
+        border-radius: 4px;
+        padding: 0.45rem 0.6rem;
+        transition: background 0.15s, border-color 0.15s;
+      }
+      .wa-cell b {
+        display: block;
+        font-size: 0.6875rem;
+        color: var(--muted);
+        font-weight: 600;
+        margin-bottom: 2px;
+        letter-spacing: 0.03em;
+      }
+      .wa-cell span { font-size: 0.8125rem; }
+      .wa-cell.hot {
+        background: var(--lecture-accent-soft);
+        border-color: var(--lecture-accent);
+      }
+
+      /* ② 范文 + 审题点标志（范文正文用卷面衬线，讲评标志用红笔） */
+      .wa-model {
+        font-family: var(--ps-font-stack);
+        font-size: 14px;
+        line-height: 1.714;
+        color: #111;
+      }
+      .wa-model p { margin: 0 0 0.4em; }
+      .wa-model .salute { margin-bottom: 0.4em; }
+      .wa-model .sign { text-align: right; margin: 0; }
+      .wa-mark {
+        font-family: var(--ui-font);
+        font-size: 12px;
+        color: var(--lecture-accent);
+        background: none;
+        border: none;
+        padding: 0 1px;
+        cursor: pointer;
+        vertical-align: 1px;
+      }
+      .wa-mark:hover, .wa-mark.on { background: var(--lecture-accent-soft); border-radius: 3px; }
+      .wa-anchor.on { background: var(--lecture-accent-soft); }
+      .wa-marknote {
+        display: none;
+        font-family: var(--ui-font);
+        font-size: 0.8125rem;
+        color: var(--ink);
+        background: var(--lecture-tint);
+        border-left: 3px solid var(--lecture-accent);
+        border-radius: 0 4px 4px 0;
+        padding: 0.4rem 0.6rem;
+        margin: 0.25rem 0 0.5rem;
+      }
+      .wa-marknote.on { display: block; }
+      .wa-marknote b { color: var(--lecture-accent); font-weight: 600; }
+      .wa-legend {
+        font-size: 0.75rem;
+        color: var(--muted);
+        margin-top: 0.5rem;
+      }
+
+      /* ③ 亮点表达 */
+      .wa-hl { list-style: none; margin: 0; padding: 0; }
+      .wa-hl li {
+        padding: 0.45rem 0.6rem;
+        border-radius: 4px;
+        margin-bottom: 0.375rem;
+        background: #fff;
+        border: 1px solid #e8e5dc;
+      }
+      .wa-hl-text {
+        margin: 0 0 0.2rem;
+        font-family: var(--ps-font-stack);
+        font-size: 13.5px;
+        color: #111;
+      }
+      .wa-hl-text::before { content: "★ "; color: var(--green); font-size: 0.75rem; }
+      .wa-hl-note { margin: 0; font-size: 0.8125rem; color: #55534c; }
+
+      /* ============ A 案：题下展开（写作卡下方独立讲评区块） ============ */
+      .inline-below {
+        width: 794px;
+        max-width: 100%;
+        margin: 0 auto;
+        background: var(--lecture-tint);
+        border-top: 2px dashed var(--lecture-accent);
+        box-shadow: rgba(0,0,0,0.05) 0 8px 24px 0;
+        padding: 20px 91px 28px;
+        display: none;
+      }
+      .inline-below.open { display: block; }
+
+      /* ============ B 案：答题框放大成解析区 ============ */
+      .answer-box.expanded {
+        min-height: 0;
+        background: var(--lecture-tint);
+        display: block;
+        cursor: default;
+      }
+      .box-analysis { display: none; }
+      .answer-box.expanded .box-analysis { display: block; }
+      .answer-box.expanded .box-empty { display: none !important; }
+
+      /* ============ B2 案：框内翻页（一次一块，横滑切换） ============ */
+      .wa-tabs {
+        display: flex;
+        gap: 4px;
+        margin: 0.75rem 0 0.75rem;
+      }
+      .wa-tabs button {
+        font-family: var(--ui-font);
+        font-size: 0.8125rem;
+        color: var(--muted);
+        background: none;
+        border: none;
+        border-bottom: 2px solid transparent;
+        padding: 4px 10px 6px;
+        cursor: pointer;
+        transition: color 0.2s;
+      }
+      .wa-tabs button:hover { color: var(--ink); }
+      .wa-tabs button.on {
+        color: var(--lecture-accent);
+        font-weight: 600;
+        border-bottom-color: var(--lecture-accent);
+      }
+      .wa-viewport {
+        overflow: hidden;
+        transition: height 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+        touch-action: pan-y;
+      }
+      .wa-track {
+        display: flex;
+        transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      .wa-track.dragging { transition: none; }
+      .wa-slide {
+        flex: 0 0 100%;
+        min-width: 0;
+        opacity: 0.2;
+        transition: opacity 0.28s ease;
+        align-self: flex-start;
+        padding-bottom: 4px;
+      }
+      .wa-slide.on { opacity: 1; }
+      .wa-dots {
+        display: flex;
+        justify-content: center;
+        gap: 6px;
+        margin-top: 0.75rem;
+      }
+      .wa-dots i {
+        width: 6px; height: 6px;
+        border-radius: 3px;
+        background: #d8d2c6;
+        cursor: pointer;
+        transition: all 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      .wa-dots i.on { width: 18px; background: var(--lecture-accent); }
+
+      /* ============ 右栏讲评栏（380px，仿 .paper-browse-lecture-panel） ============ */
+      .lecture-panel {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 16px 16px 72px;
+        position: sticky;
+        top: 24px;
+        height: calc(100vh - 48px);
+        overflow-y: auto;
+        min-width: 0;
+      }
+      .lecture-title { font-size: 15px; font-weight: 700; margin: 0 0 12px; }
+      .lecture-empty { font-size: 13px; color: #6a6a64; }
+      .overview-item {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 10px 12px;
+        margin-bottom: 8px;
+        font-size: 13px;
+      }
+      .overview-item b { display: block; font-size: 13px; }
+      .overview-item span { color: var(--muted); font-size: 12px; }
+
+      /* C 案：右栏里的解析（窄版复用 .wa，缩小范文字号） */
+      .lecture-panel .wa-model { font-size: 13px; line-height: 1.65; }
+
+      /* ============ 原型控制件（明显非产品 UI） ============ */
+      .proto-bar {
+        position: fixed;
+        left: 50%;
+        bottom: 20px;
+        transform: translateX(-50%);
+        background: #24272a;
+        color: #fff;
+        border-radius: 999px;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        padding: 6px 10px;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+        z-index: 50;
+        font-size: 13px;
+        user-select: none;
+      }
+      .proto-bar button {
+        background: none;
+        border: none;
+        color: #fff;
+        font-size: 15px;
+        cursor: pointer;
+        padding: 4px 8px;
+        border-radius: 999px;
+      }
+      .proto-bar button:hover { background: #3a3f43; }
+      .proto-label { min-width: 200px; text-align: center; font-weight: 600; }
+      .proto-sub {
+        display: flex;
+        gap: 4px;
+        margin-left: 8px;
+        padding-left: 10px;
+        border-left: 1px solid #4a5054;
+      }
+      .proto-sub button {
+        font-size: 12px;
+        color: #c8cdd0;
+        padding: 3px 9px;
+      }
+      .proto-sub button.on { background: #4a5054; color: #fff; }
+      .proto-info-btn { font-size: 13px !important; }
+
+      .proto-notes {
+        position: fixed;
+        right: 20px;
+        bottom: 76px;
+        width: 380px;
+        max-height: 70vh;
+        overflow-y: auto;
+        background: #fffdf7;
+        border: 1px solid #d8d4c8;
+        border-radius: 12px;
+        box-shadow: 0 12px 32px rgba(0,0,0,0.18);
+        padding: 16px 18px;
+        font-size: 13px;
+        line-height: 1.6;
+        z-index: 49;
+        display: none;
+      }
+      .proto-notes.open { display: block; }
+      .proto-notes h3 { margin: 0 0 8px; font-size: 14px; }
+      .proto-notes h4 { margin: 12px 0 4px; font-size: 13px; color: var(--lecture-accent); }
+      .proto-notes ul { margin: 4px 0; padding-left: 18px; }
+      .proto-notes li { margin-bottom: 3px; }
+    </style>
+  </head>
+  <body class="lecture-on">
+    <div class="shell" id="shell">
+      <!-- 左 rail（示意） -->
+      <aside class="rail" aria-hidden="true">
+        <i></i><i></i><i></i><i class="on"></i>
+      </aside>
+
+      <!-- 中：卷面 -->
+      <main class="paper-col">
+        <div class="a4" id="paperCard">
+          <button class="analysis-toggle" id="btnToggle" type="button">解析</button>
+          <h2 class="pw-part">第四部分 写作（共两节，满分40分）</h2>
+          <h3 class="pw-section">第一节（满分15分）</h3>
+          <p class="pw-instruction">假定你是校广播站英语节目"Talk and Talk"的负责人李华，请给外教Caroline写邮件邀请她做一次访谈。内容包括：
+（1）节目介绍；
+（2）访谈的时间和话题。
+注意：
+（1）写作词数应为80左右；
+（2）可适当增加细节，以使行文连贯。</p>
+
+          <!-- 答题框（书信体） -->
+          <div class="answer-box clickable" id="answerBox">
+            <!-- 空框态（A/C 案恒显；B 案展开后隐藏） -->
+            <div class="box-empty" id="boxEmpty" style="display:flex; flex-direction:column; flex:1 1 auto;">
+              <div><p class="answer-given">Dear Caroline,</p></div>
+              <div class="answer-bottom">
+                <p class="answer-given">Yours sincerely,</p>
+                <p class="answer-given">Li Hua</p>
+              </div>
+              <span class="box-hint" id="boxHint">点击查看解析</span>
+            </div>
+            <!-- B 案：框内解析区 -->
+            <div class="box-analysis wa" id="boxAnalysis"></div>
+          </div>
+        </div>
+
+        <!-- A 案：题下讲评区块 -->
+        <section class="inline-below wa" id="inlineBelow"></section>
+      </main>
+
+      <!-- 右：讲评栏 -->
+      <aside class="lecture-panel" id="lecturePanel">
+        <h2 class="lecture-title" id="panelTitle">讲评</h2>
+        <div id="panelBody"></div>
+      </aside>
+    </div>
+
+    <!-- 原型说明 -->
+    <div class="proto-notes" id="protoNotes">
+      <h3>原型说明（已拍板 2026-07-20）</h3>
+      <p style="margin:0 0 8px;padding:6px 8px;background:#e7f3ec;border-radius:6px;"><b>拍板结果：B2 框内翻页中选</b>；入口双手势都留（点答题框 / 「解析」钮）；解析展开时右栏保留显组级概览。A / B / C 落选留档。</p>
+      <p style="margin:0;">问题：<b>应用文解析在讲评态摆哪、怎么开？</b>内容三块已按 01 票拍板（审题卡六格 → 范文+标志 → 亮点），本原型只裁交互形态。</p>
+      <h4>三案（←→ 键或底部浮条切换）</h4>
+      <ul>
+        <li><b>A 题下展开</b>：解析是写作卡下方接出的讲评区块，答题框保持原样。</li>
+        <li><b>B 答题框放大</b>：点解析后答题框自身变成解析区，范文写进信框里（Dear…Yours 之间），题目在上。</li>
+        <li><b>B2 框内翻页</b>：B 的基础上，框内一次只住一块——顶部页签 + 底部小点点 + 横滑/拖拽/←→ 键翻页（B2 展开时 ←→ 归翻页，切案请用浮条箭头）。</li>
+        <li><b>C 右栏基线</b>：现架构对照——解析进右侧 380px 讲评栏（点卷面写作卡打开）。</li>
+      </ul>
+      <h4>已接线的裁点，请顺手试</h4>
+      <ul>
+        <li><b>入口手势</b>（A/B）：①点答题框本身；②写作卡右上「解析」钮。两种都通，拍板留哪种（或都留）。</li>
+        <li><b>右栏显示什么</b>（A/B）：浮条上「概览 / 收起」可切。「完全不动」在纯写作页与概览等价，未单列。</li>
+        <li><b>标志联动</b>：范文里红色〔判〕〔读〕〔时〕〔点〕〔清〕可点/悬停——亮对应卡格 + 一句讲解。这是"卡↔文互指"验收口诀的屏上形态。</li>
+      </ul>
+      <h4>纪律（不用拍，已内置）</h4>
+      <ul>
+        <li>解析仅讲评态屏显：不进打印 / DOCX / 学生版（Super Teacher Boundary）。</li>
+        <li>内容为 paper-2022-i 真实数据；审题卡格内容为原型示意，补产时按课堂真源产。</li>
+      </ul>
+    </div>
+
+    <!-- 变体切换浮条 -->
+    <div class="proto-bar">
+      <button id="btnPrev" title="上一案（←）">◀</button>
+      <div class="proto-label" id="protoLabel">A — 题下展开</div>
+      <button id="btnNext" title="下一案（→）">▶</button>
+      <div class="proto-sub" id="rightSub">
+        <span style="font-size:12px;color:#8a9094;align-self:center;">右栏</span>
+        <button id="modeOverview">概览</button>
+        <button id="modeCollapsed">收起</button>
+      </div>
+      <div class="proto-sub">
+        <button class="proto-info-btn" id="btnInfo" title="原型说明">ⓘ 说明</button>
+      </div>
+    </div>
+
+    <script>
+      /* ---------- 解析内容（三块，A/B/C 共用模板） ---------- */
+      const CELLS = [
+        { id: 'c1', label: '判型', text: '邀请函（给外教的邮件）' },
+        { id: 'c2', label: '读者 · 最想要的一句话', text: 'Caroline 一眼读到：请你来 Talk and Talk 做一次访谈' },
+        { id: 'c3', label: '读者 · 落纸清单', text: '节目是什么 / 访谈时间 / 访谈话题' },
+        { id: 'c4', label: '主时态', text: '一般现在时；邀约处用 would / could 客气情态' },
+        { id: 'c5', label: '要点编号', text: '① 节目介绍　② 时间　③ 话题' },
+        { id: 'c6', label: '价值落点', text: '她的留学经历正是听众好奇的——让她感到被需要' },
+      ];
+
+      /* 范文句 + 审题点标志（每篇最多 5 个；标志→卡格 1:1 指回） */
+      const MODEL = [
+        { kind: 'salute', text: 'Dear Caroline,' },
+        { kind: 'para', chunks: [
+          { text: 'I am Li Hua, host of Talk and Talk, an English programme broadcast every Friday afternoon by our school radio station. ' },
+          { text: 'On behalf of all our listeners, I am writing to warmly invite you to be our guest for an interview.',
+            mark: '判', cell: 'c1',
+            note: '判型落纸：邀请函第一段必须亮明来意——I am writing to warmly invite you… 就是这一句。' },
+        ]},
+        { kind: 'para', chunks: [
+          { text: 'Our programme aims to widen students’ horizons and improve their spoken English through relaxed conversations. ',
+            mark: '点', cell: 'c5',
+            note: '要点①「节目介绍」落纸：一句话说清节目是什么、为谁办。' },
+          { text: 'We sincerely hope you could share your experience of studying abroad, a topic we are all genuinely curious about. ',
+            mark: '清', cell: 'c3',
+            note: '落纸清单「访谈话题」落纸：话题点到，还顺手用同位语给了价值。' },
+          { text: 'As for the time, next Tuesday afternoon would be ideal, but please feel free to suggest another slot that suits you better.',
+            mark: '时', cell: 'c4',
+            note: '主时态卡格落纸：邀约用 would 情态把时间说得客气、留余地。' },
+        ]},
+        { kind: 'para', chunks: [
+          { text: 'It would be a great honour to have you join us. ',
+            mark: '读', cell: 'c2',
+            note: '读者变焦：结尾抬高对方——Caroline 读到的是"被需要、被尊重"。' },
+          { text: 'Looking forward to your reply.' },
+        ]},
+        { kind: 'sign', text: 'Yours sincerely,<br/>Li Hua' },
+      ];
+
+      const HIGHLIGHTS = [
+        { text: 'On behalf of all our listeners, I am writing to warmly invite you to be our guest for an interview.',
+          note: '代表集体发出邀请的开头点目的句。On behalf of… 抬高郑重感、I am writing to… 直接亮明写信目的。迁移：把 listeners 换成 students / our class，invite 换成 thank / ask 即可开篇。' },
+        { text: 'We sincerely hope you could share your experience of studying abroad, a topic we are all genuinely curious about.',
+          note: '委婉请求 + 同位语点明价值。sincerely hope you could… 用情态过去式把请求说得客气；同位语解释为何想请对方。迁移：share your experience of… 后接任意话题。' },
+        { text: 'please feel free to suggest another slot that suits you better',
+          note: '给对方时间/选择余地的得体让步句。please feel free to… 把决定权交给对方。迁移：choose a date / pick a way that suits you better。' },
+        { text: 'It would be a great honour to have you join us.',
+          note: '结尾抬高对方、表达期待的得体收束句。面向师长/嘉宾的高分礼貌框架。迁移：to receive your reply / to work with you。' },
+      ];
+
+      function renderCard(narrow) {
+        return '<div class="wa-card' + (narrow ? ' wa-card--narrow' : '') + '">' +
+          CELLS.map(c =>
+            '<div class="wa-cell" data-cell="' + c.id + '"><b>' + c.label + '</b><span>' + c.text + '</span></div>'
+          ).join('') + '</div>';
+      }
+
+      function renderModel() {
+        let html = '<div class="wa-model">';
+        for (const blockItem of MODEL) {
+          if (blockItem.kind === 'salute') { html += '<p class="salute">' + blockItem.text + '</p>'; continue; }
+          if (blockItem.kind === 'sign') { html += '<p class="sign">' + blockItem.text + '</p>'; continue; }
+          html += '<p>';
+          for (const ch of blockItem.chunks) {
+            if (ch.mark) {
+              html += '<span class="wa-anchor" data-anchor="' + ch.cell + '">' + ch.text + '</span>' +
+                '<button class="wa-mark" type="button" data-cell="' + ch.cell + '" data-note="' + ch.note + '" data-tag="' + ch.mark + '">〔' + ch.mark + '〕</button>';
+            } else {
+              html += ch.text;
+            }
+          }
+          html += '</p>';
+          html += '<div class="wa-marknote" data-notefor="para"></div>';
+        }
+        html += '</div>';
+        html += '<p class="wa-legend">图例：〔判〕判型　〔读〕读者变焦　〔时〕主时态　〔点〕要点编号　〔清〕落纸清单　——点标志亮对应卡格</p>';
+        return html;
+      }
+
+      function renderHighlights() {
+        return '<ul class="wa-hl">' + HIGHLIGHTS.map(h =>
+          '<li><p class="wa-hl-text">' + h.text + '</p><p class="wa-hl-note">' + h.note + '</p></li>'
+        ).join('') + '</ul>';
+      }
+
+      function renderAnalysis(opts) {
+        const narrow = !!(opts && opts.narrow);
+        const withClose = !!(opts && opts.withClose);
+        const paged = !!(opts && opts.paged);
+        let html = '';
+        html += '<div class="wa-head">' +
+          '<span class="wa-head-title">讲评 · 应用文解析</span>' +
+          '<span class="wa-head-badge">仅讲评屏显 · 不进打印/学生版</span>' +
+          (withClose ? '<button class="wa-close" type="button" data-close>收起</button>' : '') +
+          '</div>';
+        if (paged) {
+          html += '<div class="wa-tabs">' +
+            '<button type="button" data-go="0" class="on">① 审题卡</button>' +
+            '<button type="button" data-go="1">② 范文 · 标志</button>' +
+            '<button type="button" data-go="2">③ 亮点表达</button>' +
+            '</div>';
+          html += '<div class="wa-viewport"><div class="wa-track">' +
+            '<section class="wa-slide on">' + renderCard(narrow) + '</section>' +
+            '<section class="wa-slide">' + renderModel() + '</section>' +
+            '<section class="wa-slide">' + renderHighlights() + '</section>' +
+            '</div></div>';
+          html += '<div class="wa-dots"><i class="on" data-go="0"></i><i data-go="1"></i><i data-go="2"></i></div>';
+          return html;
+        }
+        html += '<h4 class="wa-sec-title">① 审题卡<small>课堂通用六格</small></h4>' + renderCard(narrow);
+        html += '<h4 class="wa-sec-title">② 范文 · 审题点标志<small>卡上每格指得出一句，文上每个标志指得回一格</small></h4>' + renderModel();
+        html += '<h4 class="wa-sec-title">③ 亮点表达<small>可迁移的高分句块</small></h4>' + renderHighlights();
+        return html;
+      }
+
+      /* B2 翻页器：滑动 + 高度跟随 + 拖拽/横滑/键盘 */
+      let pagedCtl = null;
+      function initCarousel(scope) {
+        const viewport = scope.querySelector('.wa-viewport');
+        const track = scope.querySelector('.wa-track');
+        const slides = [...scope.querySelectorAll('.wa-slide')];
+        const tabs = [...scope.querySelectorAll('.wa-tabs button')];
+        const dots = [...scope.querySelectorAll('.wa-dots i')];
+        let cur = 0, lock = false;
+
+        function syncHeight() {
+          viewport.style.height = slides[cur].offsetHeight + 'px';
+        }
+        function go(i) {
+          cur = Math.max(0, Math.min(slides.length - 1, i));
+          track.style.transform = 'translateX(-' + cur * 100 + '%)';
+          slides.forEach((s, k) => s.classList.toggle('on', k === cur));
+          tabs.forEach((t, k) => t.classList.toggle('on', k === cur));
+          dots.forEach((d, k) => d.classList.toggle('on', k === cur));
+          syncHeight();
+        }
+        [...tabs, ...dots].forEach(el =>
+          el.addEventListener('click', () => go(Number(el.dataset.go))));
+
+        /* 触控板横滑（防抖锁） */
+        viewport.addEventListener('wheel', (e) => {
+          if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
+          e.preventDefault();
+          if (lock || Math.abs(e.deltaX) < 24) return;
+          lock = true; setTimeout(() => { lock = false; }, 420);
+          go(cur + (e.deltaX > 0 ? 1 : -1));
+        }, { passive: false });
+
+        /* 指针拖拽（跟手，松手吸附） */
+        let downX = null;
+        viewport.addEventListener('pointerdown', (e) => {
+          if (e.target.closest('button')) return;
+          downX = e.clientX;
+          track.classList.add('dragging');
+        });
+        window.addEventListener('pointermove', (e) => {
+          if (downX === null) return;
+          const dx = e.clientX - downX;
+          track.style.transform = 'translateX(calc(-' + cur * 100 + '% + ' + dx + 'px))';
+        });
+        window.addEventListener('pointerup', (e) => {
+          if (downX === null) return;
+          const dx = e.clientX - downX;
+          downX = null;
+          track.classList.remove('dragging');
+          if (Math.abs(dx) > 60) go(cur + (dx < 0 ? 1 : -1)); else go(cur);
+        });
+
+        requestAnimationFrame(syncHeight);
+        pagedCtl = { go: (d) => go(cur + d), syncHeight };
+      }
+
+      /* ---------- 状态与接线 ---------- */
+      const VARIANTS = [
+        { key: 'A', name: '题下展开 ✗落选' },
+        { key: 'B', name: '答题框放大 ✗落选' },
+        { key: 'B2', name: '框内翻页 ✓中选 2026-07-20' },
+        { key: 'C', name: '右栏基线 ✗落选' },
+      ];
+      const state = {
+        variant: new URLSearchParams(location.search).get('variant') || 'A',
+        open: false,          // A/B：解析是否展开；C：右栏是否已选中写作组
+        rightMode: 'overview', // overview | collapsed （A/B 案的右栏裁点）
+      };
+      if (!VARIANTS.some(v => v.key === state.variant)) state.variant = 'A';
+
+      const $ = (id) => document.getElementById(id);
+      const shell = $('shell'), answerBox = $('answerBox'), boxAnalysis = $('boxAnalysis');
+      const inlineBelow = $('inlineBelow'), panelBody = $('panelBody'), panelTitle = $('panelTitle');
+
+      function overviewHtml(hint) {
+        return '<div class="overview-item"><b>第四部分 写作</b><span>第一节 应用文（15分）· 第二节 读后续写（25分）</span></div>' +
+          '<p class="lecture-empty">' + hint + '</p>';
+      }
+
+      function render() {
+        const v = state.variant;
+        // reset
+        pagedCtl = null;
+        inlineBelow.classList.remove('open'); inlineBelow.innerHTML = '';
+        answerBox.classList.remove('expanded'); boxAnalysis.innerHTML = '';
+        answerBox.classList.toggle('clickable', true);
+        shell.classList.remove('shell--right-collapsed');
+        $('rightSub').style.display = (v === 'C') ? 'none' : 'flex';
+
+        if (v === 'A') {
+          if (state.open) {
+            inlineBelow.innerHTML = renderAnalysis({ withClose: true });
+            inlineBelow.classList.add('open');
+          }
+          applyRightMode();
+        } else if (v === 'B' || v === 'B2') {
+          if (state.open) {
+            boxAnalysis.innerHTML = renderAnalysis({ withClose: true, paged: v === 'B2' });
+            answerBox.classList.add('expanded');
+            answerBox.classList.remove('clickable');
+            if (v === 'B2') initCarousel(boxAnalysis);
+          }
+          applyRightMode();
+        } else { // C
+          if (state.open) {
+            panelTitle.textContent = '应用文写作 · 解析';
+            panelBody.innerHTML = renderAnalysis({ narrow: true });
+          } else {
+            panelTitle.textContent = '讲评';
+            panelBody.innerHTML = overviewHtml('点击卷面上的写作卡，右栏显示解析。');
+          }
+        }
+        $('protoLabel').textContent = v + ' — ' + VARIANTS.find(x => x.key === v).name;
+        $('modeOverview').classList.toggle('on', state.rightMode === 'overview');
+        $('modeCollapsed').classList.toggle('on', state.rightMode === 'collapsed');
+        const url = new URL(location.href);
+        url.searchParams.set('variant', v);
+        history.replaceState(null, '', url);
+        wireMarks();
+      }
+
+      function applyRightMode() {
+        if (state.rightMode === 'collapsed') {
+          shell.classList.add('shell--right-collapsed');
+        } else {
+          shell.classList.remove('shell--right-collapsed');
+          panelTitle.textContent = '讲评';
+          panelBody.innerHTML = overviewHtml(state.open
+            ? '解析已在卷面展开（右栏保持组级概览）。'
+            : '本页为写作部分。点击答题框或「解析」查看讲评。');
+        }
+      }
+
+      /* 标志 ↔ 卡格联动 */
+      function wireMarks() {
+        document.querySelectorAll('.wa-mark').forEach(markBtn => {
+          const cellId = markBtn.dataset.cell;
+          const scope = markBtn.closest('.wa');
+          const cell = () => scope.querySelector('.wa-cell[data-cell="' + cellId + '"]');
+          const anchor = () => scope.querySelector('.wa-anchor[data-anchor="' + cellId + '"]');
+          markBtn.addEventListener('mouseenter', () => { cell()?.classList.add('hot'); anchor()?.classList.add('on'); });
+          markBtn.addEventListener('mouseleave', () => {
+            if (!markBtn.classList.contains('on')) { cell()?.classList.remove('hot'); anchor()?.classList.remove('on'); }
+          });
+          markBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const wasOn = markBtn.classList.contains('on');
+            scope.querySelectorAll('.wa-mark.on').forEach(b => b.classList.remove('on'));
+            scope.querySelectorAll('.wa-cell.hot').forEach(c => c.classList.remove('hot'));
+            scope.querySelectorAll('.wa-anchor.on').forEach(a => a.classList.remove('on'));
+            scope.querySelectorAll('.wa-marknote.on').forEach(n => n.classList.remove('on'));
+            if (!wasOn) {
+              markBtn.classList.add('on'); cell()?.classList.add('hot'); anchor()?.classList.add('on');
+              const noteEl = markBtn.parentElement.nextElementSibling;
+              if (noteEl && noteEl.classList.contains('wa-marknote')) {
+                const c = CELLS.find(x => x.id === cellId);
+                noteEl.innerHTML = '<b>〔' + markBtn.dataset.tag + '〕→ ' + c.label +
+                  '「' + c.text + '」</b>　' + markBtn.dataset.note;
+                noteEl.classList.add('on');
+              }
+              if (!pagedCtl) cell()?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+            }
+            pagedCtl?.syncHeight();
+          });
+        });
+        document.querySelectorAll('[data-close]').forEach(btn =>
+          btn.addEventListener('click', (e) => { e.stopPropagation(); state.open = false; render(); }));
+      }
+
+      /* 入口手势 */
+      answerBox.addEventListener('click', () => {
+        if ((state.variant === 'B' || state.variant === 'B2') && state.open) return;
+        state.open = true; render();
+      });
+      $('btnToggle').addEventListener('click', () => { state.open = !state.open; render(); });
+      $('paperCard').addEventListener('click', (e) => {
+        if (state.variant === 'C' && !e.target.closest('.answer-box') && !e.target.closest('.analysis-toggle')) {
+          state.open = true; render();
+        }
+      });
+      document.addEventListener('keydown', (e) => {
+        if (/INPUT|TEXTAREA/.test(document.activeElement.tagName)) return;
+        if (e.key === 'Escape' && state.open) { state.open = false; render(); }
+        /* B2 展开时 ←→ 归翻页器；切案用底部浮条 */
+        if (state.variant === 'B2' && state.open && pagedCtl) {
+          if (e.key === 'ArrowLeft') pagedCtl.go(-1);
+          if (e.key === 'ArrowRight') pagedCtl.go(1);
+          return;
+        }
+        if (e.key === 'ArrowLeft') cycle(-1);
+        if (e.key === 'ArrowRight') cycle(1);
+      });
+
+      /* 变体切换 */
+      function cycle(dir) {
+        const i = VARIANTS.findIndex(v => v.key === state.variant);
+        state.variant = VARIANTS[(i + dir + VARIANTS.length) % VARIANTS.length].key;
+        state.open = false;
+        render();
+      }
+      $('btnPrev').addEventListener('click', () => cycle(-1));
+      $('btnNext').addEventListener('click', () => cycle(1));
+      $('modeOverview').addEventListener('click', () => { state.rightMode = 'overview'; render(); });
+      $('modeCollapsed').addEventListener('click', () => { state.rightMode = 'collapsed'; render(); });
+      $('btnInfo').addEventListener('click', () => $('protoNotes').classList.toggle('open'));
+
+      render();
+    </script>
+  </body>
+</html>
