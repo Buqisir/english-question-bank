@@ -69,15 +69,20 @@ fresh Sol PA
      `AGENTS.md` Dispatch map。
 5. 同步现行角色合同、persona 和 cut 模板：
    - 移除 Medium / Large 的 CR-lite 降档规则。
+   - Medium / Large 的 fresh CR 写入 `cr.md`，作为 RM 必需
+     artifact；PA 仍是按触发条件需要。
    - 保持 PA、DEV、CR 为不同 fresh context。
    - `.claude/agents/*.md` 保留 Claude 合法 frontmatter
      `model: opus|sonnet`，仅在正文说明它们是 Claude compatibility
      profile，不是当前 Codex 档位。
-6. 在 `docs/agents/case-law.md` 追加 2026-07-21 owner 裁决：
+6. 同步 `scripts/verify-cut-artifacts.mjs` 与 `scripts/README.md`：
+   Medium / Large 的 RM gate 缺少非空 `cr.md` 必须失败；
+   用临时 fixture 证明“缺 CR 失败 / 有 CR 通过”。
+7. 在 `docs/agents/case-law.md` 追加 2026-07-21 owner 裁决：
    Workflow 标准刀路由退役、Medium / Large 恢复 fresh CR、
    entrypoint 按需、PM + RM 合一与 Sol / Terra 档位定本。
    历史判例和历史 cut 原文保留。
-7. 收官写短 `cut-note.md`；merge 后由 PM + RM 更新
+8. 收官写短 `cut-note.md`；merge 后由 PM + RM 更新
    `docs/STATUS.md`。
 
 ## Forbidden
@@ -85,7 +90,8 @@ fresh Sol PA
 - 不碰 `app/`、`server/`、`schemas/`、数据文件、产品 UI 或生产配置。
 - 不修改 `.github/workflows/**`。
 - 不改 small / medium / large 的风险定义、PA 不可逆触发、
-  QA 可见性触发、artifact gate 或合并后 main CI 门禁。
+  QA 可见性触发或合并后 main CI 门禁；RM artifact gate
+  只允许因 fresh CR 改为更严，不得降级。
 - 不改历史 cut、STATUS 历史条目或旧 handoff 中的 Workflow 叙述。
 - 不碰在飞 `applied-writing-lecture` worktree。
 
@@ -99,9 +105,12 @@ fresh Sol PA
    风险与条件门禁；`agent-entrypoint.md` 为按需规则。
 4. Ruby YAML 解析 `.claude/agents/*.md` frontmatter，每个 `model`
    仍为合法单值 `opus` 或 `sonnet`。
-5. `node scripts/verify-cut-artifacts.mjs docs/cuts/workflow-route-retire medium`
-6. `git diff --check github/main...HEAD`
-7. `pnpm -C app run verify:all`
+5. 临时 fixture：Medium 缺 `cr.md` 时 artifact gate 退出非零；
+   补齐非空 `cr.md` 后退出 0。
+6. fresh CR 落盘后：
+   `node scripts/verify-cut-artifacts.mjs docs/cuts/workflow-route-retire medium`
+7. `git diff --check github/main...HEAD`
+8. `pnpm -C app run verify:all`
 
 Browser QA：不需要（process / docs-only，无用户可见产品改动）。
 
