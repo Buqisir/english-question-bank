@@ -125,4 +125,5 @@ Browser QA：不需要（process / docs-only，无用户可见产品改动）。
   `verify:all` PASS 84 / SKIP 1 / FAIL 0。
 - [x] DP-5 fresh Sol CR Round 2 APPROVE，5 个 Must Fix 全部闭环，
   open Must Fix = 0。
-- [ ] DP-6 PM + RM artifact gate → merge → main CI → STATUS 收官。
+- [x] DP-6 PM + RM artifact gate → merge `dfabfab` → main CI
+  `29856827902` 全绿 → STATUS 收官。

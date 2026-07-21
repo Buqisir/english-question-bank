@@ -1,7 +1,7 @@
 # 当前状态（medium / large cut 收官时更新）
 
-Last updated: 2026-07-17 晚（三路复评 31/40 + 三小刀收官 + 九组标签，
-**生产已部署 5cabb5c** 含库 SQL：health ok、eqbank.cc 200）
+Last updated: 2026-07-21（workflow-route-retire 收官；
+**生产仍为 5cabb5c**：本刀仅改协作规则，不触发生产部署）
 
 下一步队列（2026-07-17 晚刷新，均未圈、owner 圈了再动）：
 ① **R3 写作双 facet**（解析字段路线图下一站，program 在
@@ -48,6 +48,11 @@ essay-grading 幸存件重建，判例已回流，远端 Buqisir/project-os 私�
 
 ## 主线焦点
 
+- 2026-07-21：**workflow-route-retire 收官**（PR #286，merge
+  `dfabfab`，fresh CR Round 2 APPROVE，5/5 Must Fix 闭环，main CI 全绿）：
+  标准刀 Workflow 路由退役，改为 PM 分阶段直接派工；PM+RM 合一但门禁
+  不降，Medium/Large 恢复 fresh CR，现行 Codex 档位统一为 Sol/Terra。
+  **账单**：子代理 token 工具未回传（DEV 1 轮、CR 2 轮）；主代理出场 ~6。
 - 2026-07-17 晚：**lecture-css-restore 收官（讲评面板样式失踪案）+
   paper-2026-i 九组话题标签 + 生产部署 5cabb5c**（merge 155489f，CI 绿）：
   retire 刀删 harness CSS 误伤五个活讲评面板（owner 报障→组件裸奔实锤）
