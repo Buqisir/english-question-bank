@@ -25,28 +25,29 @@
           }
         ],
         "reviewCard": {
-          "genre": "经历分享邮件（给英国朋友 Chris）",
-          "readerWant": "Chris 一眼读到：公园美术课上你画了什么、这堂课带给你什么",
-          "readerChecklist": [
-            "课是怎么上的（公园写生）",
-            "完成的作品",
-            "你的感想"
-          ],
-          "tense": "一般过去时叙事；感想句用一般现在时",
+          "form": "邮件",
+          "topic": "公园美术课",
+          "reader": "英国朋友 Chris（平辈、熟人、当时不在场）",
+          "person": "I ↔ you",
+          "tense": "过去时为主（经历）+ 现在时（感想）",
+          "type": "描述类",
           "points": [
             "① 你完成的作品",
             "② 你的感想"
           ],
-          "value": "把课堂的新鲜和快乐分享给朋友——让 Chris 隔着信也看得见这堂课"
+          "readerWho": "Chris 是外国朋友、当时不在场",
+          "readerCares": "你到底画了什么、那节课有意思在哪",
+          "readerWants": "作品得能「看见」——画的是什么、什么颜色、什么样子",
+          "value": "在公园上美术课 = 在生活里发现美（自然与艺术的相遇）"
         },
         "reviewMarks": [
           {
-            "grid": "genre",
+            "grid": "type",
             "text": "I'm writing to share with you an art class I had in a park last Friday.",
             "note": "判型落纸：分享经历的邮件开门见山——一句话点出何时何地一堂什么课，题目给定的首句承担的正是这个功能。"
           },
           {
-            "grid": "readerChecklist",
+            "grid": "wants",
             "text": "Instead of copying pictures in the classroom, we sat on the grass and painted what we saw.",
             "note": "清单「课是怎么上的」落纸：先给场景，Chris 才看得懂后面的作品从哪来。"
           },
@@ -61,7 +62,7 @@
             "note": "主时态落纸：上周五的事全程一般过去时（liked / put），叙事不跳档。"
           },
           {
-            "grid": "readerWant",
+            "grid": "cares",
             "text": "More importantly, the class taught me to slow down and notice the beauty around me.",
             "note": "读者最想要的一句话落纸：要点②感想——这堂课改变了我什么，Chris 读到这句才算收到这封信的分量。"
           }

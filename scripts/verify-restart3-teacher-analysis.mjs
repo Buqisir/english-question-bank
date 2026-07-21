@@ -306,14 +306,19 @@ function makeApplicationCandidate(overrides = {}) {
       { text: 'Yours sincerely,', note: 'note C' },
     ],
     reviewCard: {
-      genre: '邀请函',
-      readerWant: '请你来做客',
-      readerChecklist: ['时间', '话题'],
+      form: '邮件',
+      topic: '邀请做客',
+      reader: 'Caroline（师长）',
+      person: 'I ↔ you',
       tense: '一般现在时',
+      type: '描述类（邀请）',
       points: ['①介绍', '②时间'],
+      readerWho: 'Caroline，收信时判断来不来',
+      readerCares: '来做什么',
+      readerWants: '时间',
       value: '被需要',
     },
-    reviewMarks: [{ grid: 'genre', text: 'I am writing to invite you.', note: '判型落纸' }],
+    reviewMarks: [{ grid: 'type', text: 'I am writing to invite you.', note: '判型落纸' }],
     ...overrides,
   }
 }
@@ -335,6 +340,28 @@ assert(
   'application candidate with an empty reviewCard grid field throws',
   throwsOn({ ...makeApplicationCandidate(), reviewCard: { ...makeApplicationCandidate().reviewCard, tense: '' } }),
 )
+// DP-3 owner QA rework (decisions.md §6): reviewCard is now a flat 11-field
+// 课堂真卡四节 shape — every one of the 11 fields (points checked separately
+// as a 1–5 item array below) must be present and non-empty.
+for (const field of [
+  'form', 'topic', 'reader', 'person', 'tense', 'type',
+  'readerWho', 'readerCares', 'readerWants', 'value',
+]) {
+  assert(
+    `application candidate missing reviewCard.${field} throws (11-field hard gate)`,
+    throwsOn({
+      ...makeApplicationCandidate(),
+      reviewCard: { ...makeApplicationCandidate().reviewCard, [field]: '' },
+    }),
+  )
+}
+assert(
+  'application candidate with reviewCard.points over the 1–5 budget throws',
+  throwsOn({
+    ...makeApplicationCandidate(),
+    reviewCard: { ...makeApplicationCandidate().reviewCard, points: Array.from({ length: 6 }, (_, i) => `点${i}`) },
+  }),
+)
 assert(
   'application candidate missing reviewMarks entirely throws',
   throwsOn({ ...makeApplicationCandidate(), reviewMarks: undefined }),
@@ -344,7 +371,7 @@ assert(
   throwsOn({
     ...makeApplicationCandidate(),
     reviewMarks: Array.from({ length: 6 }, () => ({
-      grid: 'genre',
+      grid: 'type',
       text: 'I am writing to invite you.',
       note: 'n',
     })),
@@ -354,14 +381,14 @@ assert(
   'application candidate with an out-of-enum reviewMarks[].grid throws',
   throwsOn({
     ...makeApplicationCandidate(),
-    reviewMarks: [{ grid: 'value', text: 'I am writing to invite you.', note: 'n' }],
+    reviewMarks: [{ grid: 'genre', text: 'I am writing to invite you.', note: 'n' }],
   }),
 )
 assert(
   'application candidate whose reviewMarks[].text is not a modelAnswer substring throws',
   throwsOn({
     ...makeApplicationCandidate(),
-    reviewMarks: [{ grid: 'genre', text: 'this sentence is not in the model answer', note: 'n' }],
+    reviewMarks: [{ grid: 'type', text: 'this sentence is not in the model answer', note: 'n' }],
   }),
 )
 assert(

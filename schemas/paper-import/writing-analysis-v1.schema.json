@@ -53,22 +53,27 @@
               },
               "reviewCard": {
                 "type": "object",
-                "required": ["genre", "readerWant", "readerChecklist", "tense", "points", "value"],
+                "required": [
+                  "form", "topic", "reader", "person", "tense", "type",
+                  "points", "readerWho", "readerCares", "readerWants", "value"
+                ],
                 "additionalProperties": true,
                 "properties": {
-                  "genre": { "type": "string", "minLength": 1 },
-                  "readerWant": { "type": "string", "minLength": 1 },
-                  "readerChecklist": {
-                    "type": "array",
-                    "minItems": 1,
-                    "items": { "type": "string", "minLength": 1 }
-                  },
+                  "form": { "type": "string", "minLength": 1 },
+                  "topic": { "type": "string", "minLength": 1 },
+                  "reader": { "type": "string", "minLength": 1 },
+                  "person": { "type": "string", "minLength": 1 },
                   "tense": { "type": "string", "minLength": 1 },
+                  "type": { "type": "string", "minLength": 1 },
                   "points": {
                     "type": "array",
                     "minItems": 1,
+                    "maxItems": 5,
                     "items": { "type": "string", "minLength": 1 }
                   },
+                  "readerWho": { "type": "string", "minLength": 1 },
+                  "readerCares": { "type": "string", "minLength": 1 },
+                  "readerWants": { "type": "string", "minLength": 1 },
                   "value": { "type": "string", "minLength": 1 }
                 }
               },
@@ -82,7 +87,7 @@
                   "additionalProperties": true,
                   "properties": {
                     "grid": {
-                      "enum": ["genre", "readerWant", "tense", "points", "readerChecklist"]
+                      "enum": ["type", "tense", "points", "cares", "wants"]
                     },
                     "text": { "type": "string", "minLength": 1 },
                     "note": { "type": "string", "minLength": 1 }

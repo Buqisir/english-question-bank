@@ -9,12 +9,14 @@
 讲评流：审题 → 结构 → 范文 → 亮点（结构不单列，融进审题卡 + 范文标志）。
 三块按讲评流排：
 
-1. **审题卡六格**（照搬 owner 课堂通用审题卡，同术语）：判型／读者两档
-   变焦（最想要的一句话 → 落纸清单）／主时态／要点编号／价值落点。
-   —— 需新字段 `reviewCard`。
-2. **范文 + 审题点标志**：范文全文（现有 `modelAnswer`）；句上打审题点
-   标志〔判〕〔读〕〔时〕〔点〕〔清〕（每篇 1–5 个），点/悬停显对应卡格
-   + 一句讲解。—— 需新字段 `reviewMarks`。
+1. **审题卡**（照搬 owner 课堂通用审题卡，同术语）——**2026-07-21 DP-3
+   owner QA 拍板已改为课堂真卡四节：基础五定 / 圈要点、编号 / 读者三问 /
+   价值落点，取代下方本节原描述的六格，定本见 §6。** —— 需新字段
+   `reviewCard`。
+2. **范文 + 审题点讲解**：范文全文（现有 `modelAnswer`）；句上锚点讲评标注
+   （每篇 1–5 个）——**2026-07-21 起显性字模按钮与图例已删除（见 §6 ③），
+   锚句本身可点，点开在段落下方就地展开讲解条（含对应卡格内容）。**
+   —— 需新字段 `reviewMarks`。
    验收口诀（课堂原话，也是重产 gate 标准）：**卡上每格能在范文里指出
    一句；范文每个标志指得回一格。指不回去 = 卡填空了或文跑题了。**
 3. **亮点表达**：维持现状（`highlightExpressions`，约 5 条），不收紧、
@@ -44,6 +46,7 @@ CI/远程不可依赖）；DEV 所需字段语义已全部落在本文件与 pla
 **v1 内增量可选字段，不升 v2**（同壳护住 16 组续写数据，零迁移；
 `persistWritingAnalysisGroup` 按组 merge，重产一卷换一组）：
 
+（2026-07-21 已被 §6 新 shape 取代）
 ```
 writing.reviewCard = {
   genre: string             // 判型
@@ -98,3 +101,60 @@ writing.reviewMarks = [   // 1–5 条
    全量解析搬进卷面，右栏再渲全量是重复（负空间纪律）；共用类仍由
    continuation 分支持有，不产死类。陷阱备忘：`pi-writing-section` 靠
    卷面同名类巧合过 verify 子串检查，动类名时别误伤。
+
+## 6. Owner QA 拍板（2026-07-21，DP-3 首轮返工）
+
+owner 对 DP-2 首轮实现验收后要求返工，逐条拍板如下（全部照做，不做别的）：
+
+1. **审题卡改课堂通用真卡四节**：原 §1/§3 的六格（判型/读者两档变焦/
+   主时态/要点编号/价值落点）作废，改为按 owner 课堂真卡四节重排——
+   「基础五定」（文体/话题/读者/人称/主时态/判型，六个 label+值）、
+   「圈要点、编号」（①②…，1–5 条）、「读者三问」（读者是谁？/他最关心
+   什么？/他要什么具体信息？）、「价值落点」（一句话）。讲评态显填好版
+   （值直接渲数据，非空态可点交互）。四节标题用小绿字。
+2. **判型写详细**：`reviewCard.type` 不再是单字判型代号，要求写详细
+   （如「描述类（邀请）」「描述类」），可带括注说明子类。
+3. **范文页显性标志去掉，点开才解释**：句上的〔判〕〔读〕〔时〕〔点〕
+   〔清〕字模按钮与图例/legend 全部删除。锚句本身可点，affordance 仅
+   一条极淡虚线下划线（muted 绿，低调），无其他视觉标记。点锚句 → 在
+   该句所在段落下方就地展开讲解条（note + 对应卡格内容，grid→卡格映射
+   改为 type→判型、tense→主时态、points→圈要点、cares→他最关心什么、
+   wants→他要什么具体信息）；再点或点别处收起。数据层 `reviewMarks`
+   结构本身不变（text/note 仍为 modelAnswer 归一化子串锚点），只是屏显
+   不再暴露字模。
+4. **选中/激活一律不变色**：锚句激活态不加任何背景色（唯一允许的激活
+   指示是虚线↔实线下划线切换）；讲解条 `.pi-writing-review-marknote`
+   底色从 `#faf7f0` 改白底（保留绿色左边线）；`.pi-writing-answer-box
+   --clickable:hover` 从 `#fbfaf6` 改中性 `rgba(0,0,0,0.03)`；卡页六格
+   的「卡↔文互指亮格」交互（原 `.pi-writing-review-cell--hot`）随四节
+   重构一并撤除——卡页不再随范文页 activeMark 变色。
+5. **§3 的 `reviewCard` 新 shape 定本**（取代 §3 代码块原六格 shape，
+   schema 仍 v1、不升版）：
+
+   ```
+   writing.reviewCard = {
+     form: string         // 基础五定·文体
+     topic: string        // 基础五定·话题
+     reader: string        // 基础五定·读者
+     person: string        // 基础五定·人称
+     tense: string          // 基础五定·主时态
+     type: string           // 基础五定·判型（写详细，可带括注）
+     points: string[]       // 圈要点、编号（①②…，1–5 条）
+     readerWho: string      // 读者三问·读者是谁
+     readerCares: string    // 读者三问·他最关心什么
+     readerWants: string    // 读者三问·他要什么具体信息
+     value: string          // 价值落点（一句话）
+   }
+   writing.reviewMarks[].grid: 'type' | 'tense' | 'points' | 'cares' | 'wants'
+   ```
+
+   两道「挂出必有卡」门同步改口：①`validateWritingAnalysisCandidate`
+   application 分支硬 gate 改为 11 字段全非空校验（`points` 额外校验
+   1–5 条非空字符串）+ `reviewMarks` grid 枚举改新五值；②前端渲染门
+   （无 `reviewCard` → unavailable）判定逻辑不变，只是字段形状换了。
+
+6. **两卷试点数据重灌**（paper-2022-i / paper-2024-i 的 application
+   组）：`modelAnswer` / `highlightExpressions` 不动，`reviewMarks` 保留
+   原 text/note、grid 按映射改写，`reviewCard` 整体替换为 owner 提供的
+   课堂参考卡原文，走真产线 `runVocabGate` + `validateWritingAnalysisCandidate`
+   + `persistWritingAnalysisGroup` 重新落盘（不手改 JSON）。

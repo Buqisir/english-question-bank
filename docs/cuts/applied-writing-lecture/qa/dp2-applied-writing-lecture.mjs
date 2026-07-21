@@ -140,9 +140,16 @@ async function main() {
     await answerBox.click()
     const reviewRoot = page.locator('.pi-writing-review').first()
     await reviewRoot.waitFor({ timeout: 10_000 })
-    const cardSlide = page.locator('.pi-writing-review-slide.on .pi-writing-review-card').first()
+    const cardSlide = page.locator('.pi-writing-review-slide.on .pi-writing-review-card-sections').first()
     await cardSlide.waitFor({ timeout: 10_000 })
-    ok('① 点答题框 → 框放大成解析区，先见审题卡六格', (await page.locator('.pi-writing-review-cell').count()) === 6)
+    // DP-3 owner QA rework (decisions.md §6): 审题卡换成课堂真卡四节——
+    // 基础五定 / 圈要点、编号 / 读者三问 / 价值落点，四节标题都要出现。
+    const sectionTitleTexts = await page.locator('.pi-writing-review-slide.on .pi-writing-review-section-title').allTextContents()
+    ok(
+      '① 点答题框 → 框放大成解析区，先见审题卡四节（基础五定/圈要点/读者三问/价值落点）',
+      ['基础五定', '圈要点', '读者三问', '价值落点'].every((title) => sectionTitleTexts.some((t) => t.includes(title))),
+      JSON.stringify(sectionTitleTexts),
+    )
     const boxBoxAfterOpen = await page.locator('.pi-writing-answer-box--review-open').first().boundingBox()
     ok('① 展开态答题框几何可见（非零尺寸）', boxBoxAfterOpen != null && boxBoxAfterOpen.width > 200 && boxBoxAfterOpen.height > 80, JSON.stringify(boxBoxAfterOpen))
 
@@ -151,22 +158,35 @@ async function main() {
     await page.locator('.pi-writing-review-slide.on .pi-writing-review-model').first().waitFor({ timeout: 10_000 })
     ok('② 页签点击「② 范文 · 标志」→ 对应块变为 on（框内翻页生效）',
       (await page.locator('.pi-writing-review-dots i.on').first().getAttribute('class') || '').length > 0)
-    ok('② 范文区渲染标志按钮（判/读/时/点/清 legend）', (await page.locator('.pi-writing-review-mark').count()) >= 1)
+    // DP-3 owner QA rework (decisions.md §6): 范文页显性字模〔判〕已删除
+    // ——锚句本身可点，不再有单独的标志按钮/图例。
+    ok('② 范文区不再出现〔判〕字模', !(await page.locator('.pi-writing-review-slide.on .pi-writing-review-model').first().textContent() || '').includes('〔判〕'))
+    ok('② 范文区没有独立的标志按钮/图例元素（.pi-writing-review-mark / .pi-writing-review-legend 已删除）',
+      (await page.locator('.pi-writing-review-mark').count()) === 0 && (await page.locator('.pi-writing-review-legend').count()) === 0)
+    ok('② 范文区锚句渲染为可点句（.pi-writing-review-anchor）', (await page.locator('.pi-writing-review-anchor').count()) >= 1)
 
     // ←→ 键翻到 ③ 亮点表达
     await page.keyboard.press('ArrowRight')
     await page.locator('.pi-writing-review-slide.on .pi-writing-review-highlights').first().waitFor({ timeout: 10_000 })
     ok('② ←→ 键翻页生效（从②翻到③亮点表达）', (await page.locator('.pi-writing-review-slide.on .pi-writing-review-highlights').count()) === 1)
 
-    // 胶囊点点点回①，再验证标志↔卡格互指
+    // 胶囊点点点回②，点开锚句 → 讲解条就地展开；激活态无背景色，唯一指示是虚线↔实线下划线。
     await page.locator('.pi-writing-review-dots i').nth(1).click()
-    const firstMark = page.locator('.pi-writing-review-mark').first()
-    await firstMark.waitFor({ timeout: 10_000 })
-    await firstMark.click()
-    const hotCell = page.locator('.pi-writing-review-cell--hot')
-    await hotCell.waitFor({ timeout: 10_000 })
-    ok('③ 点击标志 → 对应卡格高亮（卡↔文互指生效）', (await hotCell.count()) >= 1)
-    ok('③ 标志讲解条内嵌显示（跨页不用翻回）', (await page.locator('.pi-writing-review-marknote').count()) === 1)
+    const firstAnchor = page.locator('.pi-writing-review-anchor').first()
+    await firstAnchor.waitFor({ timeout: 10_000 })
+    await firstAnchor.click()
+    const markNote = page.locator('.pi-writing-review-marknote')
+    await markNote.waitFor({ timeout: 10_000 })
+    ok('③ 点击锚句 → 讲解条就地展开（含对应卡格内容）', (await markNote.count()) === 1)
+    const anchorBg = await firstAnchor.evaluate((el) => getComputedStyle(el).backgroundColor)
+    ok('③ 激活锚句无背景色（computed background-color 透明/白）',
+      anchorBg === 'rgba(0, 0, 0, 0)' || anchorBg === 'transparent' || anchorBg === 'rgb(255, 255, 255)', anchorBg)
+    const anchorUnderlineStyle = await firstAnchor.evaluate((el) => getComputedStyle(el).textDecorationStyle)
+    ok('③ 激活锚句下划线变实线（唯一允许的激活指示）', anchorUnderlineStyle === 'solid', anchorUnderlineStyle)
+    // 再点同一锚句收起讲解条。
+    await firstAnchor.click()
+    await page.waitForFunction(() => !document.querySelector('.pi-writing-review-marknote'), { timeout: 10_000 })
+    ok('③ 再点同一锚句 → 讲解条收起', (await markNote.count()) === 0)
 
     // Esc 收起
     await page.keyboard.press('Escape')

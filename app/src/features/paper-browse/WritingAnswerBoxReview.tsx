@@ -8,8 +8,16 @@
  * 全部新类名 pi-writing-review-*（本刀小板 1：白名单账目零变动，全批留
  * 续写渲染刀）。仅讲评态挂载，讲评栏之外（打印/PDF/DOCX/学生版）从不
  * import 本文件 —— Super Teacher Boundary 天然成立。
+ *
+ * DP-3 owner QA 返工（2026-07-21，decisions.md §6）：
+ *   - 审题卡换成课堂通用真卡四节（基础五定 / 圈要点编号 / 读者三问 /
+ *     价值落点），讲评态显填好版，值直接渲数据，卡页本身不再随 activeMark
+ *     变色——唯一允许的激活指示是范文页锚句的虚线↔实线下划线切换。
+ *   - 范文页删掉〔判〕〔读〕〔时〕〔点〕〔清〕字模按钮与图例：锚句本身可
+ *     点（极淡虚线下划线 affordance），点开在该句所在段落下方就地展开
+ *     讲解条（含对应卡格内容），再点/点别处收起。
  */
-import { useLayoutEffect, useRef, useState, type ReactNode } from 'react'
+import { Fragment, useLayoutEffect, useRef, useState, type ReactNode } from 'react'
 import type {
   ApplicationWritingAnalysis,
   HighlightExpression,
@@ -30,48 +38,38 @@ export type WritingAnswerBoxReviewProps = {
   onClose: () => void
 }
 
-type CardCellId = ReviewGrid | 'value'
-
-const CARD_CELLS: ReadonlyArray<{ id: CardCellId; label: string }> = [
-  { id: 'genre', label: '判型' },
-  { id: 'readerWant', label: '读者 · 最想要的一句话' },
-  { id: 'readerChecklist', label: '读者 · 落纸清单' },
+// 基础五定六格（decisions.md §6）：label 用课堂真卡中文名。
+const BASICS_CELLS: ReadonlyArray<{ id: 'form' | 'topic' | 'reader' | 'person' | 'tense' | 'type'; label: string }> = [
+  { id: 'form', label: '文体' },
+  { id: 'topic', label: '话题' },
+  { id: 'reader', label: '读者' },
+  { id: 'person', label: '人称' },
   { id: 'tense', label: '主时态' },
-  { id: 'points', label: '要点编号' },
-  { id: 'value', label: '价值落点' },
+  { id: 'type', label: '判型' },
 ]
 
-// 屏显字模映射（decisions.md §3）：价值落点格无标志——真源如此，标志只有五种。
-const MARK_TAG: Record<ReviewGrid, string> = {
-  genre: '判',
-  readerWant: '读',
-  tense: '时',
-  points: '点',
-  readerChecklist: '清',
-}
-
-const CARD_LABEL: Record<ReviewGrid, string> = {
-  genre: '判型',
-  readerWant: '读者 · 最想要的一句话',
-  readerChecklist: '读者 · 落纸清单',
+// 讲解条 grid → 卡格映射（decisions.md §6 owner 拍板）：
+// type→判型、tense→主时态、points→圈要点、cares→他最关心什么、wants→他要什么具体信息。
+const MARK_CELL_LABEL: Record<ReviewGrid, string> = {
+  type: '判型',
   tense: '主时态',
-  points: '要点编号',
+  points: '圈要点',
+  cares: '他最关心什么',
+  wants: '他要什么具体信息',
 }
 
-function cellText(card: ReviewCard, id: CardCellId): string {
-  switch (id) {
-    case 'genre':
-      return card.genre
-    case 'readerWant':
-      return card.readerWant
-    case 'readerChecklist':
-      return card.readerChecklist.join(' / ')
+function markCellValue(card: ReviewCard, grid: ReviewGrid): string {
+  switch (grid) {
+    case 'type':
+      return card.type
     case 'tense':
       return card.tense
     case 'points':
       return card.points.join('　')
-    case 'value':
-      return card.value
+    case 'cares':
+      return card.readerCares
+    case 'wants':
+      return card.readerWants
     default:
       return ''
   }
@@ -145,7 +143,6 @@ export function WritingAnswerBoxReview({
     <div className="pi-writing-review" onClick={(event) => event.stopPropagation()}>
       <div className="pi-writing-review-head">
         <span className="pi-writing-review-head-title">讲评 · 应用文解析</span>
-        <span className="pi-writing-review-head-badge">仅讲评屏显 · 不进打印/学生版</span>
         <button type="button" className="pi-writing-review-close" onClick={onClose}>
           收起
         </button>
@@ -181,7 +178,7 @@ export function WritingAnswerBoxReview({
               slideRefs.current[0] = el
             }}
           >
-            {renderCard(reviewCard, activeMarkIndex, reviewMarks)}
+            {renderCard(reviewCard)}
           </section>
           <section
             className={['pi-writing-review-slide', clampedPage === 1 ? 'on' : ''].filter(Boolean).join(' ')}
@@ -196,7 +193,16 @@ export function WritingAnswerBoxReview({
               activeMarkIndex,
               onEnter: (i) => setHoverMarkIndex(i),
               onLeave: (i) => setHoverMarkIndex((prev) => (prev === i ? null : prev)),
-              onClick: (i) => setLockedMarkIndex((prev) => (prev === i ? null : i)),
+              // click 收起后清掉 hover 预览态，避免鼠标仍停留在锚句上时 hover
+              // 预览把刚收起的讲解条又顶回来（hover 只在无锁定/无刚收起时预览）。
+              onToggle: (i) => {
+                setHoverMarkIndex(null)
+                setLockedMarkIndex((prev) => (prev === i ? null : i))
+              },
+              onClickOutside: () => {
+                setHoverMarkIndex(null)
+                setLockedMarkIndex(null)
+              },
             })}
           </section>
           <section
@@ -219,24 +225,58 @@ export function WritingAnswerBoxReview({
   )
 }
 
-function renderCard(card: ReviewCard, activeMarkIndex: number | null, marks: ReviewMark[]): ReactNode {
-  const activeGrid = activeMarkIndex != null ? marks[activeMarkIndex]?.grid : null
+// 讲评态显填好版：值直接渲数据，卡页本身不带任何激活/高亮态（decisions.md
+// §6 D：唯一允许的激活指示在范文页锚句下划线，卡页不参与）。
+function renderCard(card: ReviewCard): ReactNode {
   return (
-    <div className="pi-writing-review-card">
-      {CARD_CELLS.map((cell) => (
-        <div
-          key={cell.id}
-          className={['pi-writing-review-cell', activeGrid === cell.id ? 'pi-writing-review-cell--hot' : ''].filter(Boolean).join(' ')}
-          data-review-cell={cell.id}
-        >
-          <b>{cell.label}</b>
-          <span>{cellText(card, cell.id)}</span>
+    <div className="pi-writing-review-card-sections">
+      <section className="pi-writing-review-section">
+        <h4 className="pi-writing-review-section-title">基础五定</h4>
+        <div className="pi-writing-review-card">
+          {BASICS_CELLS.map((cell) => (
+            <div key={cell.id} className="pi-writing-review-cell">
+              <b>{cell.label}</b>
+              <span>{card[cell.id]}</span>
+            </div>
+          ))}
         </div>
-      ))}
+      </section>
+      <section className="pi-writing-review-section">
+        <h4 className="pi-writing-review-section-title">圈要点、编号</h4>
+        <ul className="pi-writing-review-points">
+          {card.points.map((point, i) => (
+            <li key={i}>{point}</li>
+          ))}
+        </ul>
+      </section>
+      <section className="pi-writing-review-section">
+        <h4 className="pi-writing-review-section-title">读者三问</h4>
+        <div className="pi-writing-review-reader-qa">
+          <div className="pi-writing-review-cell">
+            <b>读者是谁？</b>
+            <span>{card.readerWho}</span>
+          </div>
+          <div className="pi-writing-review-cell">
+            <b>他最关心什么？</b>
+            <span>{card.readerCares}</span>
+          </div>
+          <div className="pi-writing-review-cell">
+            <b>他要什么具体信息？</b>
+            <span>{card.readerWants}</span>
+          </div>
+        </div>
+      </section>
+      <section className="pi-writing-review-section">
+        <h4 className="pi-writing-review-section-title">价值落点</h4>
+        <p className="pi-writing-review-value">{card.value}</p>
+      </section>
     </div>
   )
 }
 
+// 范文页（decisions.md §6 C）：不再有〔判〕〔读〕〔时〕〔点〕〔清〕字模按钮或
+// 图例——锚句本身可点，affordance 只有一条极淡虚线下划线；点开在该句所在
+// 段落下方就地展开讲解条（note + 对应卡格内容），再点/点别处收起。
 function renderModel(args: {
   modelAnswer: string
   card: ReviewCard
@@ -244,29 +284,30 @@ function renderModel(args: {
   activeMarkIndex: number | null
   onEnter: (index: number) => void
   onLeave: (index: number) => void
-  onClick: (index: number) => void
+  onToggle: (index: number) => void
+  onClickOutside: () => void
 }): ReactNode {
-  const { modelAnswer, card, marks, activeMarkIndex, onEnter, onLeave, onClick } = args
+  const { modelAnswer, card, marks, activeMarkIndex, onEnter, onLeave, onToggle, onClickOutside } = args
   const lines = modelAnswer.split('\n').filter((line) => line.trim().length > 0)
-  const activeMark = activeMarkIndex != null ? marks[activeMarkIndex] : null
   return (
-    <div className="pi-writing-review-model">
-      {lines.map((line, lineIndex) => (
-        <p key={lineIndex}>
-          {renderLineWithMarks({ line, marks, activeMarkIndex, onEnter, onLeave, onClick })}
-        </p>
-      ))}
-      {activeMark && (
-        <div className="pi-writing-review-marknote">
-          <b>
-            〔{MARK_TAG[activeMark.grid]}〕→ {CARD_LABEL[activeMark.grid]}「{cellText(card, activeMark.grid)}」
-          </b>{' '}
-          {activeMark.note}
-        </div>
-      )}
-      <p className="pi-writing-review-legend">
-        图例：〔判〕判型　〔读〕读者变焦　〔时〕主时态　〔点〕要点编号　〔清〕落纸清单　——点标志亮对应卡格
-      </p>
+    <div className="pi-writing-review-model" onClick={onClickOutside}>
+      {lines.map((line, lineIndex) => {
+        const { nodes, containsActive } = renderLineWithMarks({ line, marks, activeMarkIndex, onEnter, onLeave, onToggle })
+        const activeMark = containsActive && activeMarkIndex != null ? marks[activeMarkIndex] : null
+        return (
+          <Fragment key={lineIndex}>
+            <p>{nodes}</p>
+            {activeMark && (
+              <div className="pi-writing-review-marknote">
+                <b>
+                  {MARK_CELL_LABEL[activeMark.grid]}「{markCellValue(card, activeMark.grid)}」
+                </b>{' '}
+                {activeMark.note}
+              </div>
+            )}
+          </Fragment>
+        )
+      })}
     </div>
   )
 }
@@ -277,9 +318,9 @@ function renderLineWithMarks(args: {
   activeMarkIndex: number | null
   onEnter: (index: number) => void
   onLeave: (index: number) => void
-  onClick: (index: number) => void
-}): ReactNode {
-  const { line, marks, activeMarkIndex, onEnter, onLeave, onClick } = args
+  onToggle: (index: number) => void
+}): { nodes: ReactNode[]; containsActive: boolean } {
+  const { line, marks, activeMarkIndex, onEnter, onLeave, onToggle } = args
   type Range = { start: number; end: number; markIndex: number }
   const ranges: Range[] = []
   marks.forEach((mark, markIndex) => {
@@ -291,38 +332,31 @@ function renderLineWithMarks(args: {
 
   const nodes: ReactNode[] = []
   let cursor = 0
+  let containsActive = false
   for (const range of ranges) {
     if (range.start < cursor) continue
     if (range.start > cursor) nodes.push(line.slice(cursor, range.start))
-    const mark = marks[range.markIndex]
     const isOn = activeMarkIndex === range.markIndex
-    nodes.push(
-      <span
-        key={`a${range.markIndex}`}
-        className={['pi-writing-review-anchor', isOn ? 'pi-writing-review-anchor--on' : ''].filter(Boolean).join(' ')}
-      >
-        {line.slice(range.start, range.end)}
-      </span>,
-    )
+    if (isOn) containsActive = true
     nodes.push(
       <button
-        key={`m${range.markIndex}`}
+        key={`a${range.markIndex}`}
         type="button"
-        className={['pi-writing-review-mark', isOn ? 'on' : ''].filter(Boolean).join(' ')}
+        className={['pi-writing-review-anchor', isOn ? 'pi-writing-review-anchor--on' : ''].filter(Boolean).join(' ')}
         onMouseEnter={() => onEnter(range.markIndex)}
         onMouseLeave={() => onLeave(range.markIndex)}
         onClick={(event) => {
           event.stopPropagation()
-          onClick(range.markIndex)
+          onToggle(range.markIndex)
         }}
       >
-        〔{MARK_TAG[mark.grid]}〕
+        {line.slice(range.start, range.end)}
       </button>,
     )
     cursor = range.end
   }
   if (cursor < line.length) nodes.push(line.slice(cursor))
-  return nodes
+  return { nodes, containsActive }
 }
 
 function renderHighlights(items: HighlightExpression[]): ReactNode {

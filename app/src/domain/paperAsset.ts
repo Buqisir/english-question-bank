@@ -255,18 +255,24 @@ export type ApplicationWritingAnalysis = {
   reviewMarks?: ReviewMark[]
 }
 
-// ─── Review Card / Marks (applied-writing-lecture D1) ────────────────────────
+// ─── Review Card / Marks (applied-writing-lecture D1, reshaped in DP-3 owner
+// QA rework 2026-07-21 — decisions.md §6: flat 11-field 课堂真卡四节shape) ───
 
 export type ReviewCard = {
-  genre: string
-  readerWant: string
-  readerChecklist: string[]
+  form: string
+  topic: string
+  reader: string
+  person: string
   tense: string
+  type: string
   points: string[]
+  readerWho: string
+  readerCares: string
+  readerWants: string
   value: string
 }
 
-export type ReviewGrid = 'genre' | 'readerWant' | 'tense' | 'points' | 'readerChecklist'
+export type ReviewGrid = 'type' | 'tense' | 'points' | 'cares' | 'wants'
 
 export type ReviewMark = {
   grid: ReviewGrid

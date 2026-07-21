@@ -25,24 +25,24 @@
           }
         ],
         "reviewCard": {
-          "genre": "邀请函（给外教的邮件）",
-          "readerWant": "Caroline 一眼读到：请你来 Talk and Talk 做一次访谈",
-          "readerChecklist": [
-            "节目是什么",
-            "访谈时间",
-            "访谈话题"
-          ],
-          "tense": "一般现在时；邀约处用 would / could 客气情态",
+          "form": "邮件",
+          "topic": "邀请外教做访谈",
+          "reader": "外教 Caroline（师长，客气一点）",
+          "person": "I/we ↔ you",
+          "tense": "一般现在 + 将来",
+          "type": "描述类（邀请）",
           "points": [
             "① 节目介绍",
-            "② 时间",
-            "③ 话题"
+            "② 访谈的时间和话题"
           ],
-          "value": "她的留学经历正是听众好奇的——让她感到被需要"
+          "readerWho": "外教 Caroline，收信时要判断来不来",
+          "readerCares": "节目是什么样、要她做什么",
+          "readerWants": "时间、话题",
+          "value": "请她来不是「求你帮忙」，而是「你的经验对同学们有真帮助」——把邀请写成她的价值。"
         },
         "reviewMarks": [
           {
-            "grid": "genre",
+            "grid": "type",
             "text": "On behalf of all our listeners, I am writing to warmly invite you to be our guest for an interview.",
             "note": "判型落纸：邀请函第一段必须亮明来意——I am writing to warmly invite you… 就是这一句。"
           },
@@ -52,7 +52,7 @@
             "note": "要点①「节目介绍」落纸：一句话说清节目是什么、为谁办。"
           },
           {
-            "grid": "readerChecklist",
+            "grid": "wants",
             "text": "We sincerely hope you could share your experience of studying abroad, a topic we are all genuinely curious about.",
             "note": "落纸清单「访谈话题」落纸：话题点到，还顺手用同位语给了价值。"
           },
@@ -62,7 +62,7 @@
             "note": "主时态卡格落纸：邀约用 would 情态把时间说得客气、留余地。"
           },
           {
-            "grid": "readerWant",
+            "grid": "cares",
             "text": "It would be a great honour to have you join us.",
             "note": "读者变焦：结尾抬高对方——Caroline 读到的是\"被需要、被尊重\"。"
           }

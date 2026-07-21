@@ -141,7 +141,7 @@
   transition: background var(--motion-fast) var(--ease-hover), min-height var(--motion-slow) var(--ease-hover);
 }
 .pi-writing-answer-box--clickable:hover {
-  background: #fbfaf6;
+  background: rgba(0, 0, 0, 0.03);
 }
 
 /* 讲评态入口手势②：写作卡右上「解析」钮（仅屏显 UI 字体，绝不进导出）。 */
@@ -183,11 +183,11 @@
   opacity: 1;
 }
 
-/* 展开态：答题框变成解析区容器——纸感底、块级布局（不再是给答案预留空白
-   的书信框），框高由 .pi-writing-review-viewport 的高度过渡驱动。 */
+/* 展开态：答题框变成解析区容器——卷面同款白底、块级布局（不再是给答案
+   预留空白的书信框），框高由 .pi-writing-review-viewport 的高度过渡驱动。 */
 .pi-writing-answer-box--review-open {
   cursor: default;
-  background: #faf7f0;
+  background: #fff;
   display: block;
   min-height: 0;
 }
@@ -211,16 +211,8 @@
   font-weight: 700;
   font-size: 0.9375rem;
 }
-.pi-writing-review-head-badge {
-  margin-left: auto;
-  font-size: 0.6875rem;
-  color: #8a8478;
-  border: 1px dashed #cfccc2;
-  border-radius: 4px;
-  padding: 1px 6px;
-  white-space: nowrap;
-}
 .pi-writing-review-close {
+  margin-left: auto;
   font-size: 0.75rem;
   color: #6a6a64;
   background: none;
@@ -307,7 +299,22 @@
   background: #2c6e56;
 }
 
-/* ① 审题卡六格 */
+/* ① 审题卡——课堂通用真卡四节（decisions.md §6，DP-3 owner QA 返工
+   2026-07-21）：基础五定 / 圈要点编号 / 读者三问 / 价值落点，讲评态显填
+   好版，值直接渲数据，卡页本身不带任何激活/高亮态。 */
+.pi-writing-review-card-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.pi-writing-review-section-title {
+  margin: 0 0 0.375rem;
+  font-family: var(--ui-font, Inter, ui-sans-serif, system-ui, -apple-system, 'PingFang SC', sans-serif);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #2c6e56;
+  letter-spacing: 0.04em;
+}
 .pi-writing-review-card {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -318,7 +325,6 @@
   border: 1px solid #e2dfd6;
   border-radius: 4px;
   padding: 0.45rem 0.6rem;
-  transition: background var(--motion-fast) var(--ease-hover), border-color var(--motion-fast) var(--ease-hover);
 }
 .pi-writing-review-cell b {
   display: block;
@@ -331,12 +337,38 @@
 .pi-writing-review-cell span {
   font-size: 0.8125rem;
 }
-.pi-writing-review-cell--hot {
-  background: #eaf3ee;
-  border-color: #2c6e56;
+.pi-writing-review-points {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.pi-writing-review-points li {
+  font-size: 0.8125rem;
+  background: #fff;
+  border: 1px solid #e2dfd6;
+  border-radius: 4px;
+  padding: 0.4rem 0.6rem;
+}
+.pi-writing-review-reader-qa {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.pi-writing-review-value {
+  margin: 0;
+  font-size: 0.8125rem;
+  background: #fff;
+  border: 1px solid #e2dfd6;
+  border-radius: 4px;
+  padding: 0.45rem 0.6rem;
 }
 
-/* ② 范文·标志（范文正文沿用卷面衬线字体，讲评标志用 UI 字体绿笔） */
+/* ② 范文·标志（范文正文沿用卷面衬线字体）。DP-3 owner QA 返工：删掉
+   〔判〕〔读〕〔时〕〔点〕〔清〕字模按钮与图例——锚句本身可点，affordance
+   只有一条极淡虚线下划线（激活态改实线），选中/激活一律不加背景色。 */
 .pi-writing-review-model {
   font-family: var(--ps-font-stack);
   font-size: var(--ps-font-size);
@@ -346,29 +378,28 @@
 .pi-writing-review-model p {
   margin: 0 0 0.4em;
 }
-.pi-writing-review-mark {
-  font-family: var(--ui-font, Inter, ui-sans-serif, system-ui, -apple-system, 'PingFang SC', sans-serif);
-  font-size: 12px;
-  color: #2c6e56;
+.pi-writing-review-anchor {
+  font: inherit;
+  color: inherit;
   background: none;
   border: none;
-  padding: 0 1px;
+  padding: 0;
+  margin: 0;
   cursor: pointer;
-  vertical-align: 1px;
-}
-.pi-writing-review-mark:hover,
-.pi-writing-review-mark.on {
-  background: #eaf3ee;
-  border-radius: 4px;
+  text-decoration: underline;
+  text-decoration-style: dashed;
+  text-decoration-color: rgba(44, 110, 86, 0.4);
+  text-underline-offset: 2px;
 }
 .pi-writing-review-anchor--on {
-  background: #eaf3ee;
+  text-decoration-style: solid;
+  text-decoration-color: #2c6e56;
 }
 .pi-writing-review-marknote {
   font-family: var(--ui-font, Inter, ui-sans-serif, system-ui, -apple-system, 'PingFang SC', sans-serif);
   font-size: 0.8125rem;
   color: #221b15;
-  background: #faf7f0;
+  background: #fff;
   border-left: 3px solid #2c6e56;
   border-radius: 0 4px 4px 0;
   padding: 0.4rem 0.6rem;
@@ -377,11 +408,6 @@
 .pi-writing-review-marknote b {
   color: #2c6e56;
   font-weight: 600;
-}
-.pi-writing-review-legend {
-  font-size: 0.75rem;
-  color: #8a8478;
-  margin-top: 0.5rem;
 }
 
 /* ③ 亮点表达 */

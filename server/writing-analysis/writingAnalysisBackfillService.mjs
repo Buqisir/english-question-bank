@@ -22,9 +22,18 @@ import { resolvePaperAssetReadPaths } from '../paper-import/storage.mjs'
 const WRITING_ANALYSIS_FILENAME = 'writing-analysis-v1.json'
 const WRITING_ANALYSIS_SCHEMA_VERSION = 'writing-analysis-v1'
 
-// applied-writing-lecture (D1/D2/decisions.md §3): the five reviewCard grids a
-// reviewMarks[].grid may point at (value/价值落点 has no mark — 真源如此).
-const REVIEW_GRIDS = ['genre', 'readerWant', 'tense', 'points', 'readerChecklist']
+// applied-writing-lecture (D1/D2, reshaped decisions.md §6 — DP-3 owner QA
+// rework 2026-07-21): the five reviewCard grids a reviewMarks[].grid may
+// point at (type→判型, tense→主时态, points→圈要点、编号, cares→读者三问·他
+// 最关心什么, wants→读者三问·他要什么具体信息).
+const REVIEW_GRIDS = ['type', 'tense', 'points', 'cares', 'wants']
+
+// The 11 flat reviewCard fields, minus `points` which is validated separately
+// as a 1–5 item non-empty-string array (decisions.md §6).
+const REVIEW_CARD_STRING_FIELDS = [
+  'form', 'topic', 'reader', 'person', 'tense', 'type',
+  'readerWho', 'readerCares', 'readerWants', 'value',
+]
 
 // Path to guokao-vocab-checker skill check.py
 const VOCAB_CHECKER_SCRIPT = path.join(
@@ -300,31 +309,30 @@ export function validateWritingAnalysisCandidate(candidate) {
   }
 
   // Hard: application review card / marks (applied-writing-lecture D2 —
-  // 「挂出必有卡」两道门之一;「六格全非空;标志 1–5 条、grid 枚举五值、text
-  // 必须为 modelAnswer 子串」, decisions.md §3). Schema keeps these fields
-  // optional (v1 additive, protects the 22 already-persisted groups) — this
-  // gate is what makes them mandatory for anything freshly produced through
-  // this pipeline going forward.
+  // 「挂出必有卡」两道门之一, reshaped decisions.md §6 — DP-3 owner QA rework
+  // 2026-07-21: flat 11-field 课堂真卡; 11 字段全非空; 标志 1–5 条、grid 枚举
+  // 新五值、text 必须为 modelAnswer 子串. Schema keeps these fields optional
+  // (v1 additive, protects the 22 already-persisted groups) — this gate is
+  // what makes them mandatory for anything freshly produced through this
+  // pipeline going forward.
   if (candidate.taskType === 'application') {
     const card = candidate.reviewCard
     if (!card || typeof card !== 'object') {
       throw new Error('reviewCard is missing or not an object.')
     }
-    for (const field of ['genre', 'readerWant', 'tense', 'value']) {
+    for (const field of REVIEW_CARD_STRING_FIELDS) {
       if (!card[field] || typeof card[field] !== 'string' || !card[field].trim()) {
         throw new Error(`reviewCard.${field} is empty or missing.`)
       }
     }
-    for (const field of ['readerChecklist', 'points']) {
-      if (!Array.isArray(card[field]) || card[field].length === 0) {
-        throw new Error(`reviewCard.${field} must be a non-empty array.`)
-      }
-      card[field].forEach((item, i) => {
-        if (!item || typeof item !== 'string' || !item.trim()) {
-          throw new Error(`reviewCard.${field}[${i}] is empty or missing.`)
-        }
-      })
+    if (!Array.isArray(card.points) || card.points.length === 0 || card.points.length > 5) {
+      throw new Error(`reviewCard.points must be a non-empty array of 1–5 items, got ${Array.isArray(card.points) ? card.points.length : typeof card.points}.`)
     }
+    card.points.forEach((item, i) => {
+      if (!item || typeof item !== 'string' || !item.trim()) {
+        throw new Error(`reviewCard.points[${i}] is empty or missing.`)
+      }
+    })
 
     const marks = candidate.reviewMarks
     if (!Array.isArray(marks)) {
@@ -470,18 +478,24 @@ export function persistWritingAnalysisGroup({ paperAssetsDir }, work, analysis) 
       highlightExpressions: analysis.highlightExpressions.map(({ text, note }) => ({ text, note })),
     }
   } else {
-    // application: three-field projection + D1 reviewCard/reviewMarks
+    // application: three-field projection + D1 reviewCard/reviewMarks,
+    // reshaped decisions.md §6 (DP-3 owner QA rework 2026-07-21)
     // (validateWritingAnalysisCandidate already gated both non-empty above).
     writingEntry = {
       taskType: analysis.taskType,
       modelAnswer: analysis.modelAnswer,
       highlightExpressions: analysis.highlightExpressions.map(({ text, note }) => ({ text, note })),
       reviewCard: {
-        genre: analysis.reviewCard.genre,
-        readerWant: analysis.reviewCard.readerWant,
-        readerChecklist: [...analysis.reviewCard.readerChecklist],
+        form: analysis.reviewCard.form,
+        topic: analysis.reviewCard.topic,
+        reader: analysis.reviewCard.reader,
+        person: analysis.reviewCard.person,
         tense: analysis.reviewCard.tense,
+        type: analysis.reviewCard.type,
         points: [...analysis.reviewCard.points],
+        readerWho: analysis.reviewCard.readerWho,
+        readerCares: analysis.reviewCard.readerCares,
+        readerWants: analysis.reviewCard.readerWants,
         value: analysis.reviewCard.value,
       },
       reviewMarks: analysis.reviewMarks.map(({ grid, text, note }) => ({ grid, text, note })),

@@ -1499,7 +1499,6 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
       <div className="pi-writing-review">
         <div className="pi-writing-review-head">
           <span className="pi-writing-review-head-title">讲评 · 应用文解析</span>
-          <span className="pi-writing-review-head-badge">仅讲评屏显 · 不进打印/学生版</span>
           <button type="button" className="pi-writing-review-close" onClick={() => setWritingReview(null)}>
             收起
           </button>
