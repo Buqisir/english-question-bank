@@ -297,6 +297,63 @@
       .answer-box.expanded .box-analysis { display: block; }
       .answer-box.expanded .box-empty { display: none !important; }
 
+      /* ============ B2 案：框内翻页（一次一块，横滑切换） ============ */
+      .wa-tabs {
+        display: flex;
+        gap: 4px;
+        margin: 0.75rem 0 0.75rem;
+      }
+      .wa-tabs button {
+        font-family: var(--ui-font);
+        font-size: 0.8125rem;
+        color: var(--muted);
+        background: none;
+        border: none;
+        border-bottom: 2px solid transparent;
+        padding: 4px 10px 6px;
+        cursor: pointer;
+        transition: color 0.2s;
+      }
+      .wa-tabs button:hover { color: var(--ink); }
+      .wa-tabs button.on {
+        color: var(--lecture-accent);
+        font-weight: 600;
+        border-bottom-color: var(--lecture-accent);
+      }
+      .wa-viewport {
+        overflow: hidden;
+        transition: height 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+        touch-action: pan-y;
+      }
+      .wa-track {
+        display: flex;
+        transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      .wa-track.dragging { transition: none; }
+      .wa-slide {
+        flex: 0 0 100%;
+        min-width: 0;
+        opacity: 0.2;
+        transition: opacity 0.28s ease;
+        align-self: flex-start;
+        padding-bottom: 4px;
+      }
+      .wa-slide.on { opacity: 1; }
+      .wa-dots {
+        display: flex;
+        justify-content: center;
+        gap: 6px;
+        margin-top: 0.75rem;
+      }
+      .wa-dots i {
+        width: 6px; height: 6px;
+        border-radius: 3px;
+        background: #d8d2c6;
+        cursor: pointer;
+        transition: all 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      .wa-dots i.on { width: 18px; background: var(--lecture-accent); }
+
       /* ============ 右栏讲评栏（380px，仿 .paper-browse-lecture-panel） ============ */
       .lecture-panel {
         background: var(--panel);
@@ -447,6 +504,7 @@
       <ul>
         <li><b>A 题下展开</b>：解析是写作卡下方接出的讲评区块，答题框保持原样。</li>
         <li><b>B 答题框放大</b>：点解析后答题框自身变成解析区，范文写进信框里（Dear…Yours 之间），题目在上。</li>
+        <li><b>B2 框内翻页</b>：B 的基础上，框内一次只住一块——顶部页签 + 底部小点点 + 横滑/拖拽/←→ 键翻页（B2 展开时 ←→ 归翻页，切案请用浮条箭头）。</li>
         <li><b>C 右栏基线</b>：现架构对照——解析进右侧 380px 讲评栏（点卷面写作卡打开）。</li>
       </ul>
       <h4>已接线的裁点，请顺手试</h4>
@@ -566,23 +624,95 @@
       function renderAnalysis(opts) {
         const narrow = !!(opts && opts.narrow);
         const withClose = !!(opts && opts.withClose);
-        const modelAsLetter = !!(opts && opts.modelAsLetter);
+        const paged = !!(opts && opts.paged);
         let html = '';
         html += '<div class="wa-head">' +
           '<span class="wa-head-title">讲评 · 应用文解析</span>' +
           '<span class="wa-head-badge">仅讲评屏显 · 不进打印/学生版</span>' +
           (withClose ? '<button class="wa-close" type="button" data-close>收起</button>' : '') +
           '</div>';
+        if (paged) {
+          html += '<div class="wa-tabs">' +
+            '<button type="button" data-go="0" class="on">① 审题卡</button>' +
+            '<button type="button" data-go="1">② 范文 · 标志</button>' +
+            '<button type="button" data-go="2">③ 亮点表达</button>' +
+            '</div>';
+          html += '<div class="wa-viewport"><div class="wa-track">' +
+            '<section class="wa-slide on">' + renderCard(narrow) + '</section>' +
+            '<section class="wa-slide">' + renderModel() + '</section>' +
+            '<section class="wa-slide">' + renderHighlights() + '</section>' +
+            '</div></div>';
+          html += '<div class="wa-dots"><i class="on" data-go="0"></i><i data-go="1"></i><i data-go="2"></i></div>';
+          return html;
+        }
         html += '<h4 class="wa-sec-title">① 审题卡<small>课堂通用六格</small></h4>' + renderCard(narrow);
         html += '<h4 class="wa-sec-title">② 范文 · 审题点标志<small>卡上每格指得出一句，文上每个标志指得回一格</small></h4>' + renderModel();
         html += '<h4 class="wa-sec-title">③ 亮点表达<small>可迁移的高分句块</small></h4>' + renderHighlights();
         return html;
       }
 
+      /* B2 翻页器：滑动 + 高度跟随 + 拖拽/横滑/键盘 */
+      let pagedCtl = null;
+      function initCarousel(scope) {
+        const viewport = scope.querySelector('.wa-viewport');
+        const track = scope.querySelector('.wa-track');
+        const slides = [...scope.querySelectorAll('.wa-slide')];
+        const tabs = [...scope.querySelectorAll('.wa-tabs button')];
+        const dots = [...scope.querySelectorAll('.wa-dots i')];
+        let cur = 0, lock = false;
+
+        function syncHeight() {
+          viewport.style.height = slides[cur].offsetHeight + 'px';
+        }
+        function go(i) {
+          cur = Math.max(0, Math.min(slides.length - 1, i));
+          track.style.transform = 'translateX(-' + cur * 100 + '%)';
+          slides.forEach((s, k) => s.classList.toggle('on', k === cur));
+          tabs.forEach((t, k) => t.classList.toggle('on', k === cur));
+          dots.forEach((d, k) => d.classList.toggle('on', k === cur));
+          syncHeight();
+        }
+        [...tabs, ...dots].forEach(el =>
+          el.addEventListener('click', () => go(Number(el.dataset.go))));
+
+        /* 触控板横滑（防抖锁） */
+        viewport.addEventListener('wheel', (e) => {
+          if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
+          e.preventDefault();
+          if (lock || Math.abs(e.deltaX) < 24) return;
+          lock = true; setTimeout(() => { lock = false; }, 420);
+          go(cur + (e.deltaX > 0 ? 1 : -1));
+        }, { passive: false });
+
+        /* 指针拖拽（跟手，松手吸附） */
+        let downX = null;
+        viewport.addEventListener('pointerdown', (e) => {
+          if (e.target.closest('button')) return;
+          downX = e.clientX;
+          track.classList.add('dragging');
+        });
+        window.addEventListener('pointermove', (e) => {
+          if (downX === null) return;
+          const dx = e.clientX - downX;
+          track.style.transform = 'translateX(calc(-' + cur * 100 + '% + ' + dx + 'px))';
+        });
+        window.addEventListener('pointerup', (e) => {
+          if (downX === null) return;
+          const dx = e.clientX - downX;
+          downX = null;
+          track.classList.remove('dragging');
+          if (Math.abs(dx) > 60) go(cur + (dx < 0 ? 1 : -1)); else go(cur);
+        });
+
+        requestAnimationFrame(syncHeight);
+        pagedCtl = { go: (d) => go(cur + d), syncHeight };
+      }
+
       /* ---------- 状态与接线 ---------- */
       const VARIANTS = [
         { key: 'A', name: '题下展开' },
         { key: 'B', name: '答题框放大' },
+        { key: 'B2', name: '答题框放大 · 框内翻页' },
         { key: 'C', name: '右栏基线（现架构）' },
       ];
       const state = {
@@ -604,6 +734,7 @@
       function render() {
         const v = state.variant;
         // reset
+        pagedCtl = null;
         inlineBelow.classList.remove('open'); inlineBelow.innerHTML = '';
         answerBox.classList.remove('expanded'); boxAnalysis.innerHTML = '';
         answerBox.classList.toggle('clickable', true);
@@ -616,11 +747,12 @@
             inlineBelow.classList.add('open');
           }
           applyRightMode();
-        } else if (v === 'B') {
+        } else if (v === 'B' || v === 'B2') {
           if (state.open) {
-            boxAnalysis.innerHTML = renderAnalysis({ withClose: true, modelAsLetter: true });
+            boxAnalysis.innerHTML = renderAnalysis({ withClose: true, paged: v === 'B2' });
             answerBox.classList.add('expanded');
             answerBox.classList.remove('clickable');
+            if (v === 'B2') initCarousel(boxAnalysis);
           }
           applyRightMode();
         } else { // C
@@ -675,12 +807,14 @@
               markBtn.classList.add('on'); cell()?.classList.add('hot'); anchor()?.classList.add('on');
               const noteEl = markBtn.parentElement.nextElementSibling;
               if (noteEl && noteEl.classList.contains('wa-marknote')) {
-                noteEl.innerHTML = '<b>〔' + markBtn.dataset.tag + '〕→ ' +
-                  CELLS.find(c => c.id === cellId).label + '</b>　' + markBtn.dataset.note;
+                const c = CELLS.find(x => x.id === cellId);
+                noteEl.innerHTML = '<b>〔' + markBtn.dataset.tag + '〕→ ' + c.label +
+                  '「' + c.text + '」</b>　' + markBtn.dataset.note;
                 noteEl.classList.add('on');
               }
-              cell()?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+              if (!pagedCtl) cell()?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
             }
+            pagedCtl?.syncHeight();
           });
         });
         document.querySelectorAll('[data-close]').forEach(btn =>
@@ -689,7 +823,7 @@
 
       /* 入口手势 */
       answerBox.addEventListener('click', () => {
-        if (state.variant === 'B' && state.open) return;
+        if ((state.variant === 'B' || state.variant === 'B2') && state.open) return;
         state.open = true; render();
       });
       $('btnToggle').addEventListener('click', () => { state.open = !state.open; render(); });
@@ -701,6 +835,12 @@
       document.addEventListener('keydown', (e) => {
         if (/INPUT|TEXTAREA/.test(document.activeElement.tagName)) return;
         if (e.key === 'Escape' && state.open) { state.open = false; render(); }
+        /* B2 展开时 ←→ 归翻页器；切案用底部浮条 */
+        if (state.variant === 'B2' && state.open && pagedCtl) {
+          if (e.key === 'ArrowLeft') pagedCtl.go(-1);
+          if (e.key === 'ArrowRight') pagedCtl.go(1);
+          return;
+        }
         if (e.key === 'ArrowLeft') cycle(-1);
         if (e.key === 'ArrowRight') cycle(1);
       });
