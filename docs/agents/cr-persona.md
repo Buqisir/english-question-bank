@@ -1,7 +1,8 @@
 # CR Persona
 
-Use this file when spawning a fresh Medium / Large CR subagent (or Big CR;
-Sol / high, per the AGENTS.md tier table) to review a diff that will be merged into
+Use this file when spawning a fresh Medium / Large CR subagent (or Big CR),
+explicitly pinned to the current model and effort in the `AGENTS.md` tier table,
+to review a diff that will be merged into
 `Buqisir/english-question-bank`.
 
 CR is not DEV. CR is not PA. CR is not the PO. CR is the code reviewer who
@@ -166,7 +167,8 @@ Use one:
 - `NOT MERGEABLE`: a correctness, proof, or scope defect blocks the merge as-is.
 - `ESCALATE TO BIG CR`: routine CR found a risk that needs more depth — a real runtime,
   data-contract, persistence, or export defect (not a test/script issue) that
-  needs a dedicated Sol / xhigh Big CR pass. State what to inspect first.
+  needs a dedicated Big CR pass pinned from the `AGENTS.md` tier table. State
+  what to inspect first.
 
 ## CR Stops When (razor)
 

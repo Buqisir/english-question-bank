@@ -11,12 +11,13 @@ DEV / verify / CR 包进后台 Workflow，也不设置 verify agent 代位 PM �
 
 **路由决策卡（开刀 10 秒走完）：**
 
-1. 单动作 small？→ PM 直接完成，或直接派一名 Terra DEV；PM 冷读 CR-lite
+1. 单动作 small？→ PM 直接完成，或直接派一名 fresh DEV；PM 冷读 CR-lite
    收口。
 2. medium / large？→ 先确认 committed `plan.md` 与预建 worktree；需要 PA
-   时先派 fresh Sol PA，然后直接派 fresh Terra DEV。
+   时先派 fresh PA，然后直接派 fresh DEV。所有派工按 `AGENTS.md` 当前
+   tier table 显式 pin model + effort。
 3. PM 在 DEV worktree 亲跑计划规定的 narrow verify、`tsc` 与
-   `pnpm -C app run verify:all`，确认真实退出码后，派 fresh Sol CR；CR 将
+   `pnpm -C app run verify:all`，确认真实退出码后，派 fresh CR；CR 将
    结论写入 `docs/cuts/<CUT>/cr.md`。
 4. PM + RM 只在 fresh CR 的 `cr.md` 落盘后运行 artifact gate，再处理 merge、
    main CI 和 STATUS。
@@ -30,8 +31,8 @@ QA / 拍板、Must Fix 处置永远由 PM 直接处理。
 
 - plan 预写充分仍是前提；不足先补 plan。探索刀或 owner 观感紧迭代刀，
   逐步直接派工并把新裁决落盘。
-- 每个 subagent 显式钉 Codex native model + effort（DEV=Terra/medium，
-  PA=Sol/high，CR=Sol/high）；严禁默认继承，也不做未经计划的并行扇出。
+- 每个 subagent 按 `AGENTS.md` 当前 tier table 显式钉 model + effort，包含
+  该角色的升级例外；严禁默认继承，也不做未经计划的并行扇出。
 - PM 亲自消费 verify 的原始退出码；红码或工作树有残留即中止。
 - 浏览器 QA 可由 DEV / QA 运行，但 owner 实点 QA 是裁决点。
 - **DP-2 截图写盘用 `DP2_SCREENSHOTS=1` 门控**（2026-07-16 立）：截图像素

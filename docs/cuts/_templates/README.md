@@ -24,7 +24,7 @@ docs/cuts/<cut-id>/
                 # written / updated by the PM hat before PA and after PA
                 # follow-up (historical cuts may use the legacy `goal.md`)
   decisions.md  # accepted product / architecture decisions, when decisions exist
-  pa.md         # formal PA report; written by a fresh Sol PA context when triggered
+  pa.md         # formal PA report; written by a fresh PA context when triggered
   cr.md         # fresh CR report; required for every medium / large RM gate
   cut-note.md   # large-cut closeout record
   handoff.md    # only when work crosses agent/session/day boundaries

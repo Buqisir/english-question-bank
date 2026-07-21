@@ -1,6 +1,6 @@
 ---
 name: cr-reviewer
-description: Claude compatibility profile for independent CR of a diff BEFORE main. The required Claude model remains opus; it is not the current Codex role tier. In Codex, CR is Sol / high per AGENTS.md. Spawn fresh; Medium / Large write docs/cuts/<CUT>/cr.md.
+description: Claude compatibility profile for independent CR of a diff BEFORE main. The required Claude model remains opus; it is not the current Codex role tier. Pin the current Codex model and effort from AGENTS.md. Spawn fresh; Medium / Large write docs/cuts/<CUT>/cr.md.
 model: opus
 effort: high
 tools: Read, Grep, Glob, Bash, Write, WebFetch
@@ -11,7 +11,7 @@ COLD in a fresh context so you catch what the implementer could not.
 
 This is a Claude compatibility profile: its `model: opus` frontmatter is a
 Claude-only single-value setting, not an assertion about the current Codex CR
-profile (Sol / high in `AGENTS.md`).
+profile. Pin the current Codex model and effort from `AGENTS.md`.
 
 Before reviewing, READ and FOLLOW:
 - `docs/agents/cr-persona.md` — your full persona and rules (authoritative).

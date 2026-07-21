@@ -16,8 +16,8 @@ turning small fixes into rituals.
 
 Current roles, models, and execution sequence are authoritative only in the
 `AGENTS.md` Dispatch map. This protocol defines risk tier, upgrade conditions,
-QA, artifact, handoff, and size gates. Historical cut records naming 阿澈 /
-external agents are read as the matching hat.
+QA, artifact, handoff, and size gates. Historical cut records naming 小川 /
+external agents are read as 阿澈 wearing the matching hat.
 
 ---
 
@@ -84,10 +84,10 @@ Upgrade a small cut to medium if:
 Examples: small interaction, limited CSS behavior, a known UI bug, a
 single harness change with bounded blast radius.
 
-Formal PA is added by the irreversibility trigger (§7), not by tier. When PA is
-skipped on a medium cut that touches a product boundary, the plan header must
-record the PA-lite downgrade reason, and CR must review it. Medium's fresh CR
-report is `cr.md`, required by the RM artifact gate.
+PA follows the `AGENTS.md` Dispatch map: Large or irreversible work requires
+fresh PA before DEV. Only the PA-lite downgrade cases listed there may apply;
+the plan header records the reason and CR reviews it. Medium's fresh CR report
+is `cr.md`, required by the RM artifact gate.
 
 Medium cuts are "adjust one local mechanism" work.
 
@@ -360,12 +360,11 @@ not image quality; the product question is unclear.
 
 ## 7. PA discipline
 
-PA triggers on **irreversibility, not tier**: run formal PA when a cut touches
-an irreversible surface or changes the
-semantics of a data contract — schema, migrations, export formats,
-anchor protocols, cross-cut architecture. Purely additive schema
-touches and reversible product-surface work may downgrade to PA-lite;
-the downgrade reason goes in the plan header and CR must review it.
+PA requirements follow the `AGENTS.md` Dispatch map: Large cuts and work that
+touches an irreversible surface or changes data-contract semantics require a
+fresh PA before DEV. Only the PA-lite downgrade cases explicitly listed in that
+map may apply; the downgrade reason goes in the plan header and CR must review
+whether it still holds.
 
 Formal PA output goes to `docs/cuts/<CUT>/pa.md` and ends with:
 

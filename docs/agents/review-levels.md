@@ -8,7 +8,8 @@ First principles decide **why** a cut needs review. Razor discipline decides **w
 
 - **PO**: product owner / final acceptance.
 - **PA**: plan architect. Reviews roadmap, scope, architecture, and product boundary before implementation. Runs as a fresh subagent context so PM and PA are separated; follows `docs/agents/pa-persona.md`.
-- **DEV**: implementation agent. Runs as a pinned Terra / medium subagent by default.
+- **DEV**: implementation agent. Runs as a fresh subagent explicitly pinned from
+  the current `AGENTS.md` tier table.
 - **CR**: code reviewer. Medium / Large CR runs as a fresh subagent context following `docs/agents/cr-persona.md`; it must not have implemented the code (reviewer ≠ implementer). CR-lite is only the PM's Small-cut cold read.
 - **QA**: product / browser / visual acceptance. The orchestrator does first QA for UI direction and user-visible quality; the owner does final PO QA.
 - **RM**: release manager. 阿澈's PM + RM main-agent session owns release execution; Medium / Large run the artifact gate and final sanity check after fresh CR and before merge.
@@ -98,7 +99,11 @@ to downgrade the Medium / Large fresh-CR gate.
 - Do not downgrade tree-trunk work just because the diff looks small. Data contracts and runtime surface boundaries can be high risk even with few lines.
 - One tree-trunk DEV at a time. Parallel agents may work on leaves: docs, inventories, QA checklists, examples, migration research, or static review prep.
 - Night work should bias toward low-risk cleanup, docs, merge administration, and planning notes. Avoid major architecture decisions late at night.
-- Current operating reality (authority: `AGENTS.md` "Current Operating Reality"): 阿澈 wears PM / UI-direction / RM (Sol / max); PA and CR use fresh Sol contexts and DEV uses a fresh Terra context, so reviewer ≠ implementer and PM ≠ PA. Role contracts and gates do not downgrade. The owner does PO QA, not code review.
+- Current operating reality (authority: `AGENTS.md` "Current Operating Reality"):
+  阿澈 wears PM / UI-direction / RM; PA, DEV, and CR use separate fresh contexts,
+  each explicitly pinned from the current tier table, so reviewer ≠ implementer
+  and PM ≠ PA. Role contracts and gates do not downgrade. The owner does PO QA,
+  not code review.
 - Multi-agent handoff context is repo-first. PA / CR prompts and
   reports, DEV goal prompts, decisions, handoffs, QA contracts, and Cut
   Notes should be written to named repo paths. Chat messages route the

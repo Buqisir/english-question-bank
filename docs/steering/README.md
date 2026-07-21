@@ -50,8 +50,9 @@ Hard rule:
 - Risk tiers, upgrade triggers, QA, artifacts, handoffs, and size gates are
   defined here; current roles, models, and execution sequence are only in the
   `AGENTS.md` Dispatch map.
-- Formal PA is added by the irreversibility trigger (protocol §7), not by tier.
-  A PA-lite downgrade is recorded in the plan header and reviewed by CR.
+- PA follows the `AGENTS.md` Dispatch map: Large or irreversible work requires
+  fresh PA before DEV. Only the PA-lite downgrade cases listed there may apply;
+  the reason is recorded in the plan header and reviewed by CR.
 - Medium / Large require fresh CR and its `cr.md` before the RM artifact gate;
   CR-lite is only a Small-cut PM cold read.
 - `plan.md` is the default Medium / Large route; add an entrypoint only when the

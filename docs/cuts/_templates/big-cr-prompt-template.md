@@ -3,7 +3,7 @@
 Cut: `<CUT_ID>` — `<CUT_NAME>`
 Review type: Big CR
 PR: `<PR_NUMBER>` (`<HEAD_BRANCH>`)
-Output: `docs/cuts/<CUT_DIR>/<OUTPUT_FILE>.md`
+Output: `docs/cuts/<CUT_DIR>/cr.md`
 
 ## Assignment
 
@@ -78,15 +78,19 @@ Do not write a partial Big CR report after an escalation.
 Write the full report to:
 
 ```text
-docs/cuts/<CUT_DIR>/<OUTPUT_FILE>.md
+docs/cuts/<CUT_DIR>/cr.md
 ```
+
+If a routine CR already wrote this canonical report, Big CR updates the same
+file and preserves the prior findings and `Self-Review Blind Spots` before
+adding its deeper review.
 
 Worktree check before writing:
 
 - Target repo root: `<ABSOLUTE_REPO_ROOT>`
 - Target branch / PR: `<BRANCH_OR_PR>`
 - Target absolute report path:
-  `<ABSOLUTE_REPO_ROOT>/docs/cuts/<CUT_DIR>/<OUTPUT_FILE>.md`
+  `<ABSOLUTE_REPO_ROOT>/docs/cuts/<CUT_DIR>/cr.md`
 - Before writing, confirm `pwd`, `git rev-parse --show-toplevel`, and
   branch. If they do not match the target repo root and target branch /
   PR, stop with `ESCALATION: BRANCH CONFLICT` instead of writing in a

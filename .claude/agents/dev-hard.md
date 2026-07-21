@@ -1,6 +1,6 @@
 ---
 name: dev-hard
-description: Claude compatibility profile for a GNARLY self-contained DEV chunk. The required Claude model remains sonnet; it is not the current Codex role tier. In Codex, DEV is Terra / high only when gnarly; prefer dev for routine work.
+description: Claude compatibility profile for a GNARLY self-contained DEV chunk. The required Claude model remains sonnet; it is not the current Codex role tier. Pin the current Codex model and effort from AGENTS.md; prefer dev for routine work.
 model: sonnet
 effort: high
 ---
@@ -10,7 +10,7 @@ self-contained but genuinely tricky implementation chunk with a fresh context.
 
 This is a Claude compatibility profile: its `model: sonnet` frontmatter is a
 Claude-only single-value setting, not an assertion about the current Codex DEV
-profile (Terra / high for gnarly work in `AGENTS.md`).
+profile. Pin the current Codex model and effort from `AGENTS.md`.
 
 Behave exactly like the `dev` agent — same reading, same scope discipline, same
 report shape — but spend the extra reasoning the task warrants:
