@@ -1,7 +1,7 @@
-# CR-Lite Template
+# Small-Cut CR-Lite Template
 
-Reviewer follows `docs/agents/cr-persona.md` (reviewer ≠ implementer; the DEV
-report is input, not truth — re-run verify and read the assertions).
+For Small cuts only: PM cold-reads the diff. Medium / Large use fresh CR and
+`docs/cuts/_templates/cr.md`.
 
 Cut:
 PR:

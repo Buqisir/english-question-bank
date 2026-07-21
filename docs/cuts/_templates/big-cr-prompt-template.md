@@ -3,7 +3,7 @@
 Cut: `<CUT_ID>` — `<CUT_NAME>`
 Review type: Big CR
 PR: `<PR_NUMBER>` (`<HEAD_BRANCH>`)
-Output: `docs/cuts/<CUT_DIR>/<OUTPUT_FILE>.md`
+Output: `docs/cuts/<CUT_DIR>/cr.md`
 
 ## Assignment
 
@@ -17,7 +17,7 @@ regressions. Do not redesign the product during review.
 
 Keep this list cut-specific and at most 5 files.
 
-- `docs/cuts/<CUT_DIR>/agent-entrypoint.md`
+- `docs/cuts/<CUT_DIR>/agent-entrypoint.md`（仅当该文件存在）
 - `docs/cuts/<CUT_DIR>/decisions.md`
 - `docs/cuts/<CUT_DIR>/plan.md`
 - `<CUT_SPECIFIC_FILE>`
@@ -78,15 +78,19 @@ Do not write a partial Big CR report after an escalation.
 Write the full report to:
 
 ```text
-docs/cuts/<CUT_DIR>/<OUTPUT_FILE>.md
+docs/cuts/<CUT_DIR>/cr.md
 ```
+
+If a routine CR already wrote this canonical report, Big CR updates the same
+file and preserves the prior findings and `Self-Review Blind Spots` before
+adding its deeper review.
 
 Worktree check before writing:
 
 - Target repo root: `<ABSOLUTE_REPO_ROOT>`
 - Target branch / PR: `<BRANCH_OR_PR>`
 - Target absolute report path:
-  `<ABSOLUTE_REPO_ROOT>/docs/cuts/<CUT_DIR>/<OUTPUT_FILE>.md`
+  `<ABSOLUTE_REPO_ROOT>/docs/cuts/<CUT_DIR>/cr.md`
 - Before writing, confirm `pwd`, `git rev-parse --show-toplevel`, and
   branch. If they do not match the target repo root and target branch /
   PR, stop with `ESCALATION: BRANCH CONFLICT` instead of writing in a
@@ -102,13 +106,13 @@ Include:
 - Should Watch
 - PA -> `plan.md` disposition checklist status, when a PA checklist
   exists
-- CR-lite `Self-Review Blind Spots`, when a CR-lite report exists
+- prior / routine CR `Self-Review Blind Spots`, when a CR report exists
 - verify / QA gaps
 - scope notes
 - recommendation
 
 Before broad review, first inspect any PA -> `plan.md` disposition
-checklist and any CR-lite `Self-Review Blind Spots`. Then continue with
+checklist and any prior / routine CR `Self-Review Blind Spots`. Then continue with
 normal risk-based Big CR.
 
 If CR opens or changes decisions, state the required `decisions.md`

@@ -8,10 +8,11 @@ First principles decide **why** a cut needs review. Razor discipline decides **w
 
 - **PO**: product owner / final acceptance.
 - **PA**: plan architect. Reviews roadmap, scope, architecture, and product boundary before implementation. Runs as a fresh subagent context so PM and PA are separated; follows `docs/agents/pa-persona.md`.
-- **DEV**: implementation agent. Runs as a pinned DEV subagent (Sonnet, per the AGENTS.md tier table) by default.
-- **CR**: code reviewer. Routine CR-lite and Big CR both run as fresh subagent contexts following `docs/agents/cr-persona.md`. CR must run in a context that did not implement the code (reviewer ≠ implementer).
+- **DEV**: implementation agent. Runs as a fresh subagent explicitly pinned from
+  the current `AGENTS.md` tier table.
+- **CR**: code reviewer. Medium / Large CR runs as a fresh subagent context following `docs/agents/cr-persona.md`; it must not have implemented the code (reviewer ≠ implementer). CR-lite is only the PM's Small-cut cold read.
 - **QA**: product / browser / visual acceptance. The orchestrator does first QA for UI direction and user-visible quality; the owner does final PO QA.
-- **RM**: release manager. The orchestrator owns RM / release execution; medium / large cuts run the RM artifact gate and final sanity check in the CR + RM session before the merge executes.
+- **RM**: release manager. 阿澈's PM + RM main-agent session owns release execution; Medium / Large run the artifact gate and final sanity check after fresh CR and before merge.
 
 ## Default Rule
 
@@ -66,19 +67,11 @@ Use these to prevent review from expanding forever.
 - No blocking user-visible experience issue remains.
 - Polish items are recorded as follow-up, not absorbed into the current cut.
 
-## Hit-Rate Adaptive Depth（命中率降档，owner 拍板 2026-07-10）
+## Review depth
 
-评审深度跟实测命中率走，不跟焦虑走：
-
-- **降档**：同一刀类（如纯 UI polish / 纯 docs / 纯 CSS token 替换）连续
-  **3 把** fresh CR 均 0 Must Fix，则该类默认降为 CR-lite（主代理冷读
-  diff），并保留**随机抽查**：每 3-4 把该类刀抽 1 把仍走 fresh CR。
-- **回升**：抽查或任何渠道在该类命中 1 个 Must Fix，该类**立即**回到
-  fresh CR 默认档，重新累计。
-- **不适用**：L4 高危面（数据/迁移/导出/print）、首次触碰的新面、以及
-  AGENTS 不可逆触发器覆盖的刀——这些永不降档。
-- 判断依据就是 STATUS 收官行里的 CR 结论记录（"CR APPROVE 0 MF"），
-  不另建表。降档决定由主代理在派工时一句话记录在 plan/派工 prompt 里。
+CR-lite is only a Small-cut PM cold read. Medium / Large always retain fresh CR;
+Big CR is added only for risk or an explicit owner request. Do not use hit-rate
+to downgrade the Medium / Large fresh-CR gate.
 
 同法理扩展到 **owner PO QA**（owner 拍板 2026-07-11）：
 
@@ -95,7 +88,7 @@ Use these to prevent review from expanding forever.
 - **Should Watch**: record and monitor; do not automatically turn it into a task.
 - **Follow-up Gate**: must be resolved before a named future stage.
 - **Nice-to-have**: do not schedule unless PO explicitly asks.
-- **Self-Review Blind Spots**: when CR-lite feeds a later Big CR, CR-lite must
+- **Self-Review Blind Spots**: when a review feeds a later Big CR, it must
   list the places the implementer / reviewer suspects are weak but cannot
   confidently judge; Big CR inspects those first, then continues normal
   risk-based review.
@@ -106,7 +99,11 @@ Use these to prevent review from expanding forever.
 - Do not downgrade tree-trunk work just because the diff looks small. Data contracts and runtime surface boundaries can be high risk even with few lines.
 - One tree-trunk DEV at a time. Parallel agents may work on leaves: docs, inventories, QA checklists, examples, migration research, or static review prep.
 - Night work should bias toward low-risk cleanup, docs, merge administration, and planning notes. Avoid major architecture decisions late at night.
-- Current operating reality (authority: `AGENTS.md` "Current Operating Reality"): one orchestrator (the main agent) wears the PM / UI-direction / RM hats; PA, DEV, and CR run in fresh subagent contexts so reviewer ≠ implementer and PM ≠ PA. When one context must cover multiple hats, record the exception — role contracts and gates do not downgrade. The owner does PO QA, not code review.
+- Current operating reality (authority: `AGENTS.md` "Current Operating Reality"):
+  阿澈 wears PM / UI-direction / RM; PA, DEV, and CR use separate fresh contexts,
+  each explicitly pinned from the current tier table, so reviewer ≠ implementer
+  and PM ≠ PA. Role contracts and gates do not downgrade. The owner does PO QA,
+  not code review.
 - Multi-agent handoff context is repo-first. PA / CR prompts and
   reports, DEV goal prompts, decisions, handoffs, QA contracts, and Cut
   Notes should be written to named repo paths. Chat messages route the

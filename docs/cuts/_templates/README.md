@@ -5,7 +5,7 @@ match this convention.
 
 ## Default Directory
 
-Medium and large cuts may use:
+Medium and large cuts must use:
 
 ```text
 docs/cuts/<cut-id>/
@@ -24,8 +24,8 @@ docs/cuts/<cut-id>/
                 # written / updated by the PM hat before PA and after PA
                 # follow-up (historical cuts may use the legacy `goal.md`)
   decisions.md  # accepted product / architecture decisions, when decisions exist
-  pa.md         # formal PA report; written by 小川 PA by default
-  cr.md         # formal CR / Big CR report; required for large/high-risk CR
+  pa.md         # formal PA report; written by a fresh PA context when triggered
+  cr.md         # fresh CR report; required for every medium / large RM gate
   cut-note.md   # large-cut closeout record
   handoff.md    # only when work crosses agent/session/day boundaries
 ```
@@ -33,6 +33,8 @@ docs/cuts/<cut-id>/
 Optional files by work type:
 
 ```text
+  agent-entrypoint.md # optional routing file: only for multi-stage, long-running,
+                      # parallel, cross-session handoff, or independent reading navigation
   qa-checklist.md  # owner PO QA 对照单(user-visible cuts;3-5 项操作+预期,
                    # 模板 _templates/qa-checklist.md)
   rulings.md       # 判例裁决战役的判例集(数据质量类;模板
@@ -65,16 +67,16 @@ used as document names in new cuts.
 - For medium / large cuts where PA is used, the PA subagent writes
   `pa.md` before DEV; the PM hat then records PA disposition in
   `plan.md` under `PA Follow-Up Decisions`.
-- Formal CR / Big CR reports use `cr.md`.
-- CR-lite findings for routine small / medium PRs may live in the PR
-description or the final agent summary instead of `cr.md`.
+- Fresh Medium / Large CR (and Big CR) reports use `cr.md`.
+- CR-lite is only for Small cuts and may live in the PR description or final
+  agent summary instead of `cr.md`.
 - PA-lite findings may be compressed into `plan.md` / `decisions.md` instead of
 creating `pa.md`, unless the review itself is an important handoff artifact.
 
 ## Commit Rules
 
 - Commit `plan.md` before starting medium / large DEV.
-- Commit `pa.md` / `cr.md` when they are formal external review records.
+- Commit `pa.md` when PA is used and `cr.md` for every Medium / Large fresh CR.
 - Commit `cut-note.md` before closing a large cut.
 - Do not commit prompt files merely because they existed in chat; commit them
 only when future agents need to rerun, audit, or resume from them.
@@ -88,10 +90,9 @@ INSUFFICIENT`.
 Medium cuts:
 
 - `plan.md`
+- `cr.md`
 - `pa.md` when PA was used; for explicitly tiny PA-lite, findings may be
   recorded in `plan.md` / `decisions.md`
-- `cr.md`, or PR-description / final-summary CR record when Big CR was
-  triggered
 
 Large cuts additionally require:
 
@@ -102,8 +103,8 @@ Large cuts additionally require:
 1. Small cuts do not create `docs/cuts/<cut-id>/` by default.
 2. Medium / large cuts must commit `plan.md` before DEV starts.
 3. Formal PA reports are named `pa.md`.
-4. Formal CR / Big CR reports are named `cr.md`.
-5. Routine CR-lite can stay in the PR description or final agent summary.
+4. Medium / Large fresh CR reports are named `cr.md` and required before RM.
+5. Small-cut CR-lite can stay in the PR description or final agent summary.
 6. Prompt archive files are optional and named `pa-prompt.md` or `cr-prompt.md`.
 7. External AI input should be folded into a prompt or goal file unless it is a
    durable standalone artifact.

@@ -47,21 +47,16 @@ PaperSurface, Paper Intelligence, data-model, or multi-agent work.
 Hard rule:
 
 - Pick process by risk tier, not anxiety.
-- Small cuts use:
-  `Sync -> fix/DEV -> verify -> CR-lite -> RM`.
-- Medium cuts use:
-  `Sync -> PM grill -> plan.md -> DEV -> CR-lite
-  -> browser QA -> PO QA -> RM`.
-  Formal PA is added by the irreversibility trigger (protocol §7), not
-  by tier; a PA-lite downgrade is recorded in the plan header and CR
-  reviews the reason.
-- Large cuts use:
-  `Sync -> PM grill -> mockups (when spatial risk) -> PA (pa.md)
-  -> PM compression -> DEV -> CR-lite -> Big CR / browser QA
-  -> PO QA -> RM -> Cut Note`.
-- All hats are worn by the orchestrator; independence comes from fresh
-  subagent contexts (see `AGENTS.md` roles + tier table). Role
-  contracts and gates do not downgrade based on who wears the hat.
+- Risk tiers, upgrade triggers, QA, artifacts, handoffs, and size gates are
+  defined here; current roles, models, and execution sequence are only in the
+  `AGENTS.md` Dispatch map.
+- PA follows the `AGENTS.md` Dispatch map: Large or irreversible work requires
+  fresh PA before DEV. Only the PA-lite downgrade cases listed there may apply;
+  the reason is recorded in the plan header and reviewed by CR.
+- Medium / Large require fresh CR and its `cr.md` before the RM artifact gate;
+  CR-lite is only a Small-cut PM cold read.
+- `plan.md` is the default Medium / Large route; add an entrypoint only when the
+  routing conditions in the protocol require one.
 - The owner is PO and final product QA, not code reviewer.
 - Treat GitHub `main` and PR heads as the shared truth. Subagent reports
   are not truth until the main agent verifies remote state.

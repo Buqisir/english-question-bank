@@ -14,11 +14,10 @@ make agents write code faster; the goal is to protect teacher value,
 PaperSurface readability, repo state truth, and rework cost without
 turning small fixes into rituals.
 
-Roles: one orchestrator (the main agent) wearing hats — PM, PA, DEV,
-CR, QA, RM — with independence coming from fresh subagent contexts,
-not separate people. See `AGENTS.md` "Current Operating Reality" for
-the authoritative role and tier table. Historical cut records naming
-`阿澈` / external agents are read as the matching hat.
+Current roles, models, and execution sequence are authoritative only in the
+`AGENTS.md` Dispatch map. This protocol defines risk tier, upgrade conditions,
+QA, artifact, handoff, and size gates. Historical cut records naming 小川 /
+external agents are read as 阿澈 wearing the matching hat.
 
 ---
 
@@ -47,11 +46,8 @@ Use the smallest process that covers the risk.
 Examples: typo, docs wording, verify-only update, narrow bug with one
 obvious fix.
 
-Default flow:
-
-```text
-Sync -> fix/DEV -> verify -> CR-lite -> RM
-```
+Execution sequence: use the `AGENTS.md` Dispatch map. Small cuts may use PM
+CR-lite; no Small-cut artifact ceremony is required by default.
 
 Small cuts are "tighten a screw" work.
 
@@ -88,16 +84,10 @@ Upgrade a small cut to medium if:
 Examples: small interaction, limited CSS behavior, a known UI bug, a
 single harness change with bounded blast radius.
 
-Default flow:
-
-```text
-Sync -> PM grill -> plan.md -> DEV -> CR-lite -> browser QA -> PO QA -> RM
-```
-
-Formal PA is added by the irreversibility trigger (§7), not by tier.
-When PA is skipped on a medium cut that touches a product boundary, the
-plan header must record the PA-lite downgrade reason, and CR must
-review that reason.
+PA follows the `AGENTS.md` Dispatch map: Large or irreversible work requires
+fresh PA before DEV. Only the PA-lite downgrade cases listed there may apply;
+the plan header records the reason and CR reviews it. Medium's fresh CR report
+is `cr.md`, required by the RM artifact gate.
 
 Medium cuts are "adjust one local mechanism" work.
 
@@ -145,13 +135,9 @@ Examples: PaperSurface layout, rail/drawer/overlay behavior, data model,
 anchor protocol, evidence geometry, import/export flow, or any sequence
 where a wrong direction would create substantial rework.
 
-Default flow:
-
-```text
-Sync -> PM grill -> mockups (when spatial risk) -> PA (pa.md)
--> PM compression -> DEV -> CR-lite -> Big CR / browser QA
--> PO QA -> RM -> Cut Note
-```
+Execution sequence: use the `AGENTS.md` Dispatch map. Large cuts retain their
+PA trigger, browser / PO QA conditions, fresh CR, and Cut Note gate; Big CR is
+an additional risk or owner-triggered depth, not a replacement for routine CR.
 
 ## 2.5 Size gates and cut records
 
@@ -180,10 +166,10 @@ ordered PRs.
 
 ### Cut entrypoint and handoff
 
-Medium and large cuts must have a stable routing file before review
-subagents or long-running DEV begins — for most cuts `plan.md` itself
-is enough; add `agent-entrypoint.md` only when a cut has enough moving
-parts that routing needs its own file:
+Medium and large cuts must have a stable routing file before review subagents or
+long-running DEV begins — for most cuts `plan.md` itself is enough. Add
+`agent-entrypoint.md` only for multi-stage, long-running, parallel, cross-session
+handoff, or independent reading navigation:
 
 ```text
 docs/cuts/<CUT>/agent-entrypoint.md
@@ -268,10 +254,9 @@ merge; do not paper over the gap in chat.
 Medium cut checklist:
 
 - `docs/cuts/<CUT>/plan.md` exists and is non-empty.
+- Fresh CR's `docs/cuts/<CUT>/cr.md` exists and is non-empty.
 - If PA was used, `docs/cuts/<CUT>/pa.md` exists and is non-empty; if
   PA was downgraded, the plan header records the reason.
-- If Big CR was triggered, either `docs/cuts/<CUT>/cr.md` exists and is
-  non-empty or the PR description contains the Big CR record.
 
 Large cut extra checklist:
 
@@ -340,28 +325,12 @@ After a process brake, continue only when one of these is true:
 Do not soften this into "noted" or silently execute the shortcut. The
 point is to protect the owner from over-commanding during momentum.
 
-## 4. Hats
+## 4. Gate responsibilities
 
-All hats are worn by the orchestrator; independence comes from fresh
-subagent contexts (see `AGENTS.md` tier table for models):
-
-- **PM hat**: grill, `plan.md`, PA compression, dispatch, acceptance.
-- **PA hat** (fresh Opus subagent): plan review before DEV when the
-  irreversibility trigger fires; never writes implementation patches.
-- **DEV hat** (fresh Sonnet subagent): implements from the committed
-  `plan.md`; must not redesign product direction silently; stops and
-  reports if the work requires forbidden files or a changed product
-  decision.
-- **CR hat** (fresh Opus subagent): cold-read of the diff; finds bugs,
-  scope leaks, regressions; must not quietly redesign the feature — if
-  product direction is wrong, route back to PM.
-- **QA**: the main agent runs browser QA for user-visible changes;
-  static verify never substitutes for it. The owner (PO) runs final
-  product QA and says "走" before RM merge; the PO does not read code.
-- **RM hat**: artifact gate, merge, post-merge `main` CI confirmation.
-
-PA, DEV, and CR must be different (fresh) contexts. Review gates never
-downgrade because of who wears the hat.
+The `AGENTS.md` Dispatch map assigns roles and sequence. These conditions do
+not downgrade: PA, DEV, and CR remain different fresh contexts; the main agent
+runs browser QA for visible changes; the owner (PO) runs final product QA; RM
+owns the artifact gate, merge, and post-merge main-CI confirmation.
 
 ## 5. Grill before visual work
 
@@ -391,12 +360,11 @@ not image quality; the product question is unclear.
 
 ## 7. PA discipline
 
-PA triggers on **irreversibility, not tier**: run formal PA (fresh Opus
-subagent) when a cut touches an irreversible surface or changes the
-semantics of a data contract — schema, migrations, export formats,
-anchor protocols, cross-cut architecture. Purely additive schema
-touches and reversible product-surface work may downgrade to PA-lite;
-the downgrade reason goes in the plan header and CR must review it.
+PA requirements follow the `AGENTS.md` Dispatch map: Large cuts and work that
+touches an irreversible surface or changes data-contract semantics require a
+fresh PA before DEV. Only the PA-lite downgrade cases explicitly listed in that
+map may apply; the downgrade reason goes in the plan header and CR must review
+whether it still holds.
 
 Formal PA output goes to `docs/cuts/<CUT>/pa.md` and ends with:
 
@@ -436,17 +404,16 @@ CR should not become a second design session. If the implementation
 exposes a product flaw, stop and route back to PM instead of quietly
 changing the design in review.
 
-Every mergeable PR needs a CR-lite record, even when the change is
-docs-only. For small cuts this can be a short PR-body section. For
-medium / large cuts, write it to the cut directory.
+Every mergeable PR needs a review record. Small cuts may use a PM CR-lite
+record in the PR body. Medium / Large require an independent fresh CR report at
+`docs/cuts/<CUT>/cr.md`; it is required before the RM artifact gate.
 
-CR-lite must include:
+Every review report must include:
 
 - changed-scope summary
 - Must Fix findings, if any
 - verify evidence
-- Self-Review Blind Spots, when the CR-lite author also implemented or
-  is close to the implementation
+- Self-Review Blind Spots when the reviewer is close to the implementation
 - residual risk
 - a short "failure / attack angle" paragraph: how this change could
   fail, be misunderstood, or be misused by a future agent
@@ -455,9 +422,9 @@ The failure / attack angle is not a security theater exercise. It is a
 forcing function to review process holes, stale assumptions, fallback
 paths, and misleading green checks before RM.
 
-Self-Review Blind Spots are not extra tasks. They are the places the
-author suspects may hide a problem but cannot confidently judge. If a
-later Big CR runs, it should inspect those first.
+Self-Review Blind Spots are not extra tasks. They are the places the author
+suspects may hide a problem but cannot confidently judge. A later Big CR inspects
+them first.
 
 Big CR should not repeat a full manual forbidden-scope audit when a
 passing verify script already covers it. In that case, the report says

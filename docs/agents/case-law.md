@@ -12,6 +12,16 @@
 `~/.claude/skills/project-os/assets/case-law-universal.md`(仅本机;
 该 skill 目录自带 git,回流后一行 commit)。项目特有判例不回流。
 
+## 2026-07-21
+
+- **Workflow 标准刀路由退役（owner 裁决）**：标准刀不再进入
+  `.claude/workflows/cut-pipeline.js`。PM 恢复逐阶段直接派 DEV / CR，亲跑
+  narrow + `tsc` + full verify；不以 verify agent 代位复核。Medium / Large
+  恢复 fresh CR，`cr.md` 成为 RM 必需 artifact；entrypoint 按需，默认路由是
+  `plan.md`。PM 与 RM 合一为阿澈（Codex Sol / max）；PA=Sol / high（不可逆
+  才 xhigh）、DEV=Terra / medium（gnarly 才 high）、CR=Sol / high（Big CR
+  才 xhigh）。旧 Workflow 判例、历史 cuts 与 STATUS 仅作历史记录。
+
 ## 2026-07-17
 
 - **删共享 CSS 误伤事故（lecture-css-restore 背书，owner 点头入宪
