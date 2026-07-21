@@ -12,10 +12,17 @@
  * DP-3 owner QA 返工（2026-07-21，decisions.md §6）：
  *   - 审题卡换成课堂通用真卡四节（基础五定 / 圈要点编号 / 读者三问 /
  *     价值落点），讲评态显填好版，值直接渲数据，卡页本身不再随 activeMark
- *     变色——唯一允许的激活指示是范文页锚句的虚线↔实线下划线切换。
+ *     变色。
  *   - 范文页删掉〔判〕〔读〕〔时〕〔点〕〔清〕字模按钮与图例：锚句本身可
  *     点（极淡虚线下划线 affordance），点开在该句所在段落下方就地展开
  *     讲解条（含对应卡格内容），再点/点别处收起。
+ *
+ * DP-3 二轮返工（owner QA「不合格」三点）：
+ *   - 选中彻底不变色（中性色也不要）——锚句样式恒定，激活只由讲解条表达；
+ *   - 范文按信件排版：锚句改行内流（消 button UA 居中），正文段首行缩进，
+ *     结尾敬语+署名右对齐；
+ *   - 删 hover 预览（讲解条插入顶开文字→鼠标脱锚→收起→抖动循环的 bug 根源），
+ *     讲解条只认 click。
  */
 import { Fragment, useLayoutEffect, useRef, useState, type ReactNode } from 'react'
 import type {
@@ -84,11 +91,11 @@ export function WritingAnswerBoxReview({
   const { reviewCard, reviewMarks, highlightExpressions, modelAnswer } = analysis
   const clampedPage = Math.max(0, Math.min(2, page))
 
-  // 卡↔文互指: click 锁定一个标志(再点同一个取消)，hover 只在无锁定时预览
-  // ——镜像 prototype.html 的 wireMarks() 语义。
+  // 锚句讲解只认 click（再点同一句/点别处收起）。不做 hover 预览——预览会
+  // 就地插入讲解条把文字顶开，鼠标随之脱离锚句又触发收起，形成抖动循环
+  // （DP-3 二轮 owner QA：「句子跳来跳去」实锤）。
   const [lockedMarkIndex, setLockedMarkIndex] = useState<number | null>(null)
-  const [hoverMarkIndex, setHoverMarkIndex] = useState<number | null>(null)
-  const activeMarkIndex = lockedMarkIndex ?? hoverMarkIndex
+  const activeMarkIndex = lockedMarkIndex
 
   const viewportRef = useRef<HTMLDivElement | null>(null)
   const trackRef = useRef<HTMLDivElement | null>(null)
@@ -191,18 +198,8 @@ export function WritingAnswerBoxReview({
               card: reviewCard,
               marks: reviewMarks,
               activeMarkIndex,
-              onEnter: (i) => setHoverMarkIndex(i),
-              onLeave: (i) => setHoverMarkIndex((prev) => (prev === i ? null : prev)),
-              // click 收起后清掉 hover 预览态，避免鼠标仍停留在锚句上时 hover
-              // 预览把刚收起的讲解条又顶回来（hover 只在无锁定/无刚收起时预览）。
-              onToggle: (i) => {
-                setHoverMarkIndex(null)
-                setLockedMarkIndex((prev) => (prev === i ? null : i))
-              },
-              onClickOutside: () => {
-                setHoverMarkIndex(null)
-                setLockedMarkIndex(null)
-              },
+              onToggle: (i) => setLockedMarkIndex((prev) => (prev === i ? null : i)),
+              onClickOutside: () => setLockedMarkIndex(null),
             })}
           </section>
           <section
@@ -277,26 +274,32 @@ function renderCard(card: ReviewCard): ReactNode {
 // 范文页（decisions.md §6 C）：不再有〔判〕〔读〕〔时〕〔点〕〔清〕字模按钮或
 // 图例——锚句本身可点，affordance 只有一条极淡虚线下划线；点开在该句所在
 // 段落下方就地展开讲解条（note + 对应卡格内容），再点/点别处收起。
+// 排版按信件（DP-3 二轮 owner QA）：称呼行顶格、正文段首行缩进、
+// 结尾敬语+署名（末两行）右对齐——与卷面答题框 givenBottom 同一惯例。
+function letterLineClass(lineIndex: number, lineCount: number): string {
+  if (lineIndex >= lineCount - 2) return 'pi-writing-review-model-closing'
+  if (lineIndex === 0) return 'pi-writing-review-model-greeting'
+  return 'pi-writing-review-model-body'
+}
+
 function renderModel(args: {
   modelAnswer: string
   card: ReviewCard
   marks: ReviewMark[]
   activeMarkIndex: number | null
-  onEnter: (index: number) => void
-  onLeave: (index: number) => void
   onToggle: (index: number) => void
   onClickOutside: () => void
 }): ReactNode {
-  const { modelAnswer, card, marks, activeMarkIndex, onEnter, onLeave, onToggle, onClickOutside } = args
+  const { modelAnswer, card, marks, activeMarkIndex, onToggle, onClickOutside } = args
   const lines = modelAnswer.split('\n').filter((line) => line.trim().length > 0)
   return (
     <div className="pi-writing-review-model" onClick={onClickOutside}>
       {lines.map((line, lineIndex) => {
-        const { nodes, containsActive } = renderLineWithMarks({ line, marks, activeMarkIndex, onEnter, onLeave, onToggle })
+        const { nodes, containsActive } = renderLineWithMarks({ line, marks, activeMarkIndex, onToggle })
         const activeMark = containsActive && activeMarkIndex != null ? marks[activeMarkIndex] : null
         return (
           <Fragment key={lineIndex}>
-            <p>{nodes}</p>
+            <p className={letterLineClass(lineIndex, lines.length)}>{nodes}</p>
             {activeMark && (
               <div className="pi-writing-review-marknote">
                 <b>
@@ -316,11 +319,9 @@ function renderLineWithMarks(args: {
   line: string
   marks: ReviewMark[]
   activeMarkIndex: number | null
-  onEnter: (index: number) => void
-  onLeave: (index: number) => void
   onToggle: (index: number) => void
 }): { nodes: ReactNode[]; containsActive: boolean } {
-  const { line, marks, activeMarkIndex, onEnter, onLeave, onToggle } = args
+  const { line, marks, activeMarkIndex, onToggle } = args
   type Range = { start: number; end: number; markIndex: number }
   const ranges: Range[] = []
   marks.forEach((mark, markIndex) => {
@@ -338,13 +339,14 @@ function renderLineWithMarks(args: {
     if (range.start > cursor) nodes.push(line.slice(cursor, range.start))
     const isOn = activeMarkIndex === range.markIndex
     if (isOn) containsActive = true
+    // 选中不变色（DP-3 二轮 owner QA：中性色也不要）——点开与否只由
+    // 讲解条的出现/消失表达，锚句样式恒定，故不挂激活态 class。
     nodes.push(
       <button
         key={`a${range.markIndex}`}
         type="button"
-        className={['pi-writing-review-anchor', isOn ? 'pi-writing-review-anchor--on' : ''].filter(Boolean).join(' ')}
-        onMouseEnter={() => onEnter(range.markIndex)}
-        onMouseLeave={() => onLeave(range.markIndex)}
+        className="pi-writing-review-anchor"
+        aria-expanded={isOn}
         onClick={(event) => {
           event.stopPropagation()
           onToggle(range.markIndex)

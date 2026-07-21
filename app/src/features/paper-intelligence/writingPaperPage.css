@@ -252,6 +252,17 @@
   font-weight: 600;
   border-bottom-color: #2c6e56;
 }
+/* UA 蓝色 focus ring 在卷面上极突兀（DP-3 二轮 QA 截图实锤，←→ 键翻页
+   会触发）——换成品牌色细虚线，仅键盘 focus 时出现。 */
+.pi-writing-review-tabs button:focus,
+.pi-writing-review-anchor:focus {
+  outline: none;
+}
+.pi-writing-review-tabs button:focus-visible,
+.pi-writing-review-anchor:focus-visible {
+  outline: 1px dashed rgba(44, 110, 86, 0.5);
+  outline-offset: 2px;
+}
 
 /* 框内翻页轨道——高度跟随当前块，320ms ease-out（拍板值）。 */
 .pi-writing-review-viewport {
@@ -366,9 +377,10 @@
   padding: 0.45rem 0.6rem;
 }
 
-/* ② 范文·标志（范文正文沿用卷面衬线字体）。DP-3 owner QA 返工：删掉
-   〔判〕〔读〕〔时〕〔点〕〔清〕字模按钮与图例——锚句本身可点，affordance
-   只有一条极淡虚线下划线（激活态改实线），选中/激活一律不加背景色。 */
+/* ② 范文·标志（范文正文沿用卷面衬线字体）。DP-3 二轮返工：锚句可点的
+   affordance 只有一条极淡虚线下划线，且选中/激活彻底不变色（中性色也
+   不要）——点开与否只由讲解条的出现表达。排版按信件：称呼顶格、正文段
+   首行缩进、结尾敬语+署名右对齐（与卷面答题框 givenBottom 同惯例）。 */
 .pi-writing-review-model {
   font-family: var(--ps-font-stack);
   font-size: var(--ps-font-size);
@@ -378,7 +390,21 @@
 .pi-writing-review-model p {
   margin: 0 0 0.4em;
 }
+.pi-writing-review-model-body {
+  text-indent: 2em;
+}
+.pi-writing-review-model-closing {
+  text-align: right;
+  margin: 0;
+}
+/* display/text-align 双保险消掉 button UA 样式：inline-block + 居中会把
+   每个锚句打成独立居中块，整封信碎掉（DP-3 二轮 owner QA「格式难看/
+   句子跳」的元凶之一）。行内流之后锚句跨行断行与普通文本一致。 */
 .pi-writing-review-anchor {
+  appearance: none;
+  -webkit-appearance: none;
+  display: inline;
+  text-align: inherit;
   font: inherit;
   color: inherit;
   background: none;
@@ -390,10 +416,6 @@
   text-decoration-style: dashed;
   text-decoration-color: rgba(44, 110, 86, 0.4);
   text-underline-offset: 2px;
-}
-.pi-writing-review-anchor--on {
-  text-decoration-style: solid;
-  text-decoration-color: #2c6e56;
 }
 .pi-writing-review-marknote {
   font-family: var(--ui-font, Inter, ui-sans-serif, system-ui, -apple-system, 'PingFang SC', sans-serif);

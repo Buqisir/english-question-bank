@@ -170,19 +170,34 @@ async function main() {
     await page.locator('.pi-writing-review-slide.on .pi-writing-review-highlights').first().waitFor({ timeout: 10_000 })
     ok('② ←→ 键翻页生效（从②翻到③亮点表达）', (await page.locator('.pi-writing-review-slide.on .pi-writing-review-highlights').count()) === 1)
 
-    // 胶囊点点点回②，点开锚句 → 讲解条就地展开；激活态无背景色，唯一指示是虚线↔实线下划线。
+    // 胶囊点点点回②，点开锚句 → 讲解条就地展开；DP-3 二轮：选中彻底不变色
+    // （中性色也不要）——锚句样式恒定（虚线下划线不变实线、无背景色、行内流），
+    // 点开与否只由讲解条表达。
     await page.locator('.pi-writing-review-dots i').nth(1).click()
     const firstAnchor = page.locator('.pi-writing-review-anchor').first()
     await firstAnchor.waitFor({ timeout: 10_000 })
+    const anchorStyleBefore = await firstAnchor.evaluate((el) => {
+      const s = getComputedStyle(el)
+      return `${s.backgroundColor}|${s.textDecorationStyle}|${s.textDecorationColor}|${s.display}`
+    })
     await firstAnchor.click()
     const markNote = page.locator('.pi-writing-review-marknote')
     await markNote.waitFor({ timeout: 10_000 })
     ok('③ 点击锚句 → 讲解条就地展开（含对应卡格内容）', (await markNote.count()) === 1)
-    const anchorBg = await firstAnchor.evaluate((el) => getComputedStyle(el).backgroundColor)
-    ok('③ 激活锚句无背景色（computed background-color 透明/白）',
-      anchorBg === 'rgba(0, 0, 0, 0)' || anchorBg === 'transparent' || anchorBg === 'rgb(255, 255, 255)', anchorBg)
-    const anchorUnderlineStyle = await firstAnchor.evaluate((el) => getComputedStyle(el).textDecorationStyle)
-    ok('③ 激活锚句下划线变实线（唯一允许的激活指示）', anchorUnderlineStyle === 'solid', anchorUnderlineStyle)
+    const anchorStyleAfter = await firstAnchor.evaluate((el) => {
+      const s = getComputedStyle(el)
+      return `${s.backgroundColor}|${s.textDecorationStyle}|${s.textDecorationColor}|${s.display}`
+    })
+    ok('③ 激活锚句样式恒定不变色（bg/下划线/display 点开前后一致）',
+      anchorStyleBefore === anchorStyleAfter, `${anchorStyleBefore} -> ${anchorStyleAfter}`)
+    ok('③ 锚句为行内流（display:inline，非 UA inline-block 居中块）',
+      anchorStyleAfter.endsWith('|inline'), anchorStyleAfter)
+    // 信件排版：正文段首行缩进、末两行（敬语+署名）右对齐。
+    const bodyIndent = await page.locator('.pi-writing-review-model-body').first().evaluate((el) => getComputedStyle(el).textIndent)
+    ok('③ 信件排版：正文段首行缩进（text-indent 非 0）', bodyIndent !== '0px', bodyIndent)
+    ok('③ 信件排版：结尾敬语+署名右对齐（.pi-writing-review-model-closing ×2）',
+      (await page.locator('.pi-writing-review-model-closing').count()) === 2 &&
+        (await page.locator('.pi-writing-review-model-closing').first().evaluate((el) => getComputedStyle(el).textAlign)) === 'right')
     // 再点同一锚句收起讲解条。
     await firstAnchor.click()
     await page.waitForFunction(() => !document.querySelector('.pi-writing-review-marknote'), { timeout: 10_000 })
