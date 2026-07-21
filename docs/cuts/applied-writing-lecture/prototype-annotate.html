@@ -4,19 +4,27 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>applied-writing-lecture · 讲评模式原型 — 手写批注（mdtask 风格）</title>
-<!-- 手写字体：英文 Shantell Sans（mdtask 同款）；中文 霞鹜文楷屏幕版 / 龙藏（可切换） -->
+<!-- 手写字体：英文 Shantell Sans（mdtask 同款）；中文候选五款可切换——
+     小赖体（濑户系，@chinese-fonts CDN）/ 悠哉体（lxgw）/ 站酷快乐体
+     （Google Fonts）/ 霞鹜文楷屏幕版 / 龙藏 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Shantell+Sans:wght@400;500;600&family=Long+Cang&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Shantell+Sans:wght@400;500;600&family=Long+Cang&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-screen-webfont@1.7.0/style.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@chinese-fonts/xiaolai@3.0.0/dist/Xiaolai/result.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@chinese-fonts/yozai@3.0.0/dist/Yozai-Regular/result.css" rel="stylesheet">
 <style>
   :root {
     --paper: #faf9f4;
     --ink-text: #1a1a1a;
-    --ink-green: #2c6e56;   /* 审题结构（左手边） */
-    --ink-orange: #b95f27;  /* 亮点句式（右手边） */
+    --ink-green: #2f8f5b;   /* 审题结构（左手边）— mdtask 原版 green */
+    --ink-orange: #c45a38;  /* 亮点句式（右手边）— mdtask 原版 red */
     --muted: #8a8478;
-    --hand-cn: 'LXGW WenKai Screen', 'LXGW WenKai', cursive;
+    --hand-cn: 'Xiaolai SC', cursive;
   }
+  body.pen-xiaolai  { --hand-cn: 'Xiaolai SC', cursive; }
+  body.pen-yozai    { --hand-cn: 'Yozai', cursive; }
+  body.pen-kuaile   { --hand-cn: 'ZCOOL KuaiLe', cursive; }
+  body.pen-wenkai   { --hand-cn: 'LXGW WenKai Screen', 'LXGW WenKai', cursive; }
   body.pen-longcang { --hand-cn: 'Long Cang', cursive; }
   * { box-sizing: border-box; }
   body {
@@ -177,8 +185,11 @@
     <button id="btn-all">全部展开</button>
     <button id="btn-clear">收起批注</button>
     <span class="sep"></span>
-    <label><input type="radio" name="pen" value="wenkai" checked> 文楷笔迹</label>
-    <label><input type="radio" name="pen" value="longcang"> 龙藏笔迹</label>
+    <label><input type="radio" name="pen" value="xiaolai" checked> 小赖体</label>
+    <label><input type="radio" name="pen" value="yozai"> 悠哉体</label>
+    <label><input type="radio" name="pen" value="kuaile"> 站酷快乐体</label>
+    <label><input type="radio" name="pen" value="wenkai"> 文楷</label>
+    <label><input type="radio" name="pen" value="longcang"> 龙藏</label>
   </div>
 </header>
 
@@ -317,7 +328,7 @@ const stage = document.getElementById('stage');
 ANNOTATIONS.forEach((a, i) => {
   const div = document.createElement('div');
   div.className = `note ${a.color} ${a.side}`;
-  div.style.setProperty('--tilt', ((i * 37) % 5 - 2) * 0.55 + 'deg'); // 手放的微倾，确定性
+  div.style.setProperty('--tilt', (-3 + ((i * 37) % 5 - 2) * 0.7) + 'deg'); // mdtask 标签统一约 -4deg 微倾，加确定性微差
   div.innerHTML = `<span class="label">${a.label}</span><span class="body">${a.note}</span>` +
     (a.extra ? `<span class="extra">${a.extra}</span>` : '');
   stage.appendChild(div);
@@ -348,13 +359,24 @@ function wavyPath(x0, y, x1) {
   }
   return d;
 }
-// 拉线：从句边到批注。控制点全部压在纸外页边区，保证线一出句子就离纸，
-// 大纵向落差时也只在页边空白里弯，绝不横穿信纸文字。
-function leaderPath(x0, y0, x1, y1, side, boxEdge, seed) {
+// 箭头（mdtask 工艺 1:1）：批注 → 句子方向的一条不对称贝塞尔 + 开口 V 头
+// （两笔短线，stroke 1.5 圆头，如 'M30 10 L40 6 L36 16' 的形制）。控制点
+// 全部压在纸外页边区——线只在页边空白里弯，绝不横穿信纸文字。
+function leaderPath(nx, ny, tx, ty, side, seed) {
   const j = ((seed * 31 + 17) % 7) - 3;
-  const c1x = side === 'left' ? boxEdge - 30 + j : boxEdge + 30 + j;
-  const c2x = side === 'left' ? x1 + 26 : x1 - 26;
-  return `M ${x0} ${y0} C ${c1x} ${y0}, ${c2x} ${y1}, ${x1} ${y1}`;
+  // c1 沿批注水平送出，c2 在目标下方页边内收弯——形成 mdtask 式的甩尾弧
+  const c1x = side === 'left' ? nx + 30 + j : nx - 30 + j;
+  const c2x = side === 'left' ? tx - 24 : tx + 24;
+  const c2y = ty + 20;
+  return { d: `M ${nx} ${ny} C ${c1x} ${ny}, ${c2x} ${c2y}, ${tx} ${ty}`, c2: [c2x, c2y] };
+}
+function arrowHeadPath(tx, ty, fromX, fromY) {
+  // 尖端切向 = c2 → 终点方向；两翼各退 7px、张角 ±29°（mdtask V 头比例）
+  const ang = Math.atan2(ty - fromY, tx - fromX);
+  const L = 7, spread = 0.5;
+  const p1 = [tx - L * Math.cos(ang - spread), ty - L * Math.sin(ang - spread)];
+  const p2 = [tx - L * Math.cos(ang + spread), ty - L * Math.sin(ang + spread)];
+  return `M ${p1[0]} ${p1[1]} L ${tx} ${ty} L ${p2[0]} ${p2[1]}`;
 }
 
 function drawPath(d, colorCls, width, animate) {
@@ -399,7 +421,7 @@ function layout(animateLast) {
       const [x0, y] = stagePoint(r.left, r.bottom + a.baseOffset - 4);
       const x1 = stagePoint(r.right, 0)[0];
       const d = a.underline === 'wavy' ? wavyPath(x0, y, x1) : straightPath(x0, y, x1, y, i * 3 + k);
-      drawPath(d, a.color, 1.25, anim);
+      drawPath(d, a.color, 1.4, anim);
     });
 
     // 2. 批注定位（贴近首行 y，同侧顺排防重叠）
@@ -414,24 +436,23 @@ function layout(animateLast) {
     }
     nextY[a.side] = top + a.el.offsetHeight + minGapY;
 
-    // 3. 拉线：从「离本侧纸边最近的那一行」的行端出发（左=最靠左的行首，
-    // 右=最靠右的行尾），线立即出纸、在页边空白里弯到批注。
-    let sx, sy, ex, ey;
+    // 3. 箭头：从批注飞向句子（箭头尖指着下划线行端）。目标行取「离本侧
+    // 纸边最近的那一行」（左=最靠左的行首，右=最靠右的行尾）。
+    let tx, ty, nx, ny;
     if (a.side === 'left') {
       const r = rects.reduce((p, c) => (c.left < p.left ? c : p));
-      [sx, sy] = stagePoint(r.left - 4, r.bottom + a.baseOffset - 5);
-      const boxEdge = box.left - stageRect.left;
-      ex = boxEdge - gap + 18;
-      ey = top + 9;
-      drawPath(leaderPath(sx, sy, ex, ey, 'left', boxEdge, i), a.color, 1.1, anim);
+      [tx, ty] = stagePoint(r.left - 6, r.bottom + a.baseOffset - 3);
+      nx = box.left - stageRect.left - gap + 16;
+      ny = top + 9;
     } else {
       const r = rects.reduce((p, c) => (c.right > p.right ? c : p));
-      [sx, sy] = stagePoint(r.right + 4, r.bottom + a.baseOffset - 5);
-      const boxEdge = box.right - stageRect.left;
-      ex = boxEdge + gap - 18;
-      ey = top + 9;
-      drawPath(leaderPath(sx, sy, ex, ey, 'right', boxEdge, i), a.color, 1.1, anim);
+      [tx, ty] = stagePoint(r.right + 6, r.bottom + a.baseOffset - 3);
+      nx = box.right - stageRect.left + gap - 16;
+      ny = top + 9;
     }
+    const lead = leaderPath(nx, ny, tx, ty, a.side, i);
+    drawPath(lead.d, a.color, 1.5, anim);
+    drawPath(arrowHeadPath(tx, ty, lead.c2[0], lead.c2[1]), a.color, 1.5, anim);
   });
   // 画布高度跟随批注（最后几条批注可能长过信纸）
   const maxBottom = Math.max(
@@ -452,9 +473,13 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'ArrowRight') document.getElementById('btn-next').click();
   if (e.key === 'ArrowLeft') document.getElementById('btn-prev').click();
 });
+const PENS = ['xiaolai', 'yozai', 'kuaile', 'wenkai', 'longcang'];
 document.querySelectorAll('input[name="pen"]').forEach((r) => {
   r.addEventListener('change', () => {
-    document.body.classList.toggle('pen-longcang', r.value === 'longcang' && r.checked);
+    if (!r.checked) return;
+    PENS.forEach((p) => document.body.classList.toggle('pen-' + p, p === r.value));
+    // 字体替换会改批注行高——字体就绪后重排
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => layout(false));
     requestAnimationFrame(() => layout(false));
   });
 });
