@@ -10,7 +10,8 @@
         A 题下展开 · B 答题框放大 · C 右栏基线（现架构对照）
       内容结构按 01 票拍板：审题卡六格 → 范文+审题点标志 → 亮点表达。
       数据：paper-2022-i（2022 新高考 I 卷邀请信）真实题面 / 范文 / 亮点。
-      拍板后：结论进 ticket 02 决议，本文件按需快照进 docs/cuts/<CUT>/prototype.html。
+      ★ 已拍板（owner 2026-07-20）：B2 中选（入口双手势；右栏显组级概览）；
+        A / B / C 落选留档对照。决议全文见 ticket 02。
     -->
     <style>
       :root {
@@ -498,7 +499,8 @@
 
     <!-- 原型说明 -->
     <div class="proto-notes" id="protoNotes">
-      <h3>原型说明（拍板用）</h3>
+      <h3>原型说明（已拍板 2026-07-20）</h3>
+      <p style="margin:0 0 8px;padding:6px 8px;background:#e7f3ec;border-radius:6px;"><b>拍板结果：B2 框内翻页中选</b>；入口双手势都留（点答题框 / 「解析」钮）；解析展开时右栏保留显组级概览。A / B / C 落选留档。</p>
       <p style="margin:0;">问题：<b>应用文解析在讲评态摆哪、怎么开？</b>内容三块已按 01 票拍板（审题卡六格 → 范文+标志 → 亮点），本原型只裁交互形态。</p>
       <h4>三案（←→ 键或底部浮条切换）</h4>
       <ul>
@@ -710,10 +712,10 @@
 
       /* ---------- 状态与接线 ---------- */
       const VARIANTS = [
-        { key: 'A', name: '题下展开' },
-        { key: 'B', name: '答题框放大' },
-        { key: 'B2', name: '答题框放大 · 框内翻页' },
-        { key: 'C', name: '右栏基线（现架构）' },
+        { key: 'A', name: '题下展开 ✗落选' },
+        { key: 'B', name: '答题框放大 ✗落选' },
+        { key: 'B2', name: '框内翻页 ✓中选 2026-07-20' },
+        { key: 'C', name: '右栏基线 ✗落选' },
       ];
       const state = {
         variant: new URLSearchParams(location.search).get('variant') || 'A',
