@@ -405,8 +405,8 @@ CR should not become a second design session. If the implementation
 exposes a product flaw, stop and route back to PM instead of quietly
 changing the design in review.
 
-Every mergeable PR needs independent review. Small cuts may use a PM CR-lite
-record in the PR body. Medium / Large use a fresh CR report at
+Every mergeable PR needs a review record. Small cuts may use a PM CR-lite
+record in the PR body. Medium / Large require an independent fresh CR report at
 `docs/cuts/<CUT>/cr.md`; it is required before the RM artifact gate.
 
 Every review report must include:

@@ -161,9 +161,10 @@ any memory system.
 - For product / engineering cuts, follow
   `docs/steering/cut-workflow-protocol.md`: pick small / medium / large
   process by risk, sync first, and avoid turning small fixes into process
-  rituals or large cuts into rushed DEV work. The authoritative tier-flow
-  text is protocol §2; review gates follow
-  `docs/agents/review-levels.md` — do not restate either here.
+  rituals or large cuts into rushed DEV work. Protocol §2 is authoritative for
+  risk-tier criteria and upgrade rules; roles, models, and execution sequence
+  are authoritative only in this file's Dispatch map. Review gates follow
+  `docs/agents/review-levels.md`.
 - Medium / large cuts use repo-routed context, not chat-only context:
   substantive multi-agent context lives in repo files. `plan.md` is the default
   routing entry; add `docs/cuts/<CUT>/agent-entrypoint.md` only for multi-stage,
@@ -177,7 +178,7 @@ any memory system.
   标注中选/落选档，让决策记录自带结论（owner 采纳 2026-07-14，出处
   mini-app-spec 讨论）. Chat only routes
   agents to those files and states the next action.
-- Agent entrypoints split reading into `Must Read` (cut-specific, short)
+- When present, agent entrypoints split reading into `Must Read` (cut-specific, short)
   and `Background` (skippable when already loaded in the same session).
 - PA / Big CR agents may stop with an escalation signal instead of a
   partial report: `CONTEXT INSUFFICIENT`, `BRANCH CONFLICT`,
@@ -265,9 +266,9 @@ stash,2026-07-16 收悬空时落地。)
   and touching none of the four → proceed directly.
 - Hat contracts and role definitions live in
   `docs/agents/review-levels.md` (阿澈 wears PM + RM; independence from
-  fresh contexts, not names — PA, DEV, and CR are always different
-  sessions: `pa.md` first, PM-hat compression into `plan.md`, then DEV,
-  then a fresh CR; role contracts and gates never downgrade). Big CR is
+  fresh contexts, not names — PA runs fresh and before DEV only when its trigger
+  fires; DEV and CR are always different fresh contexts; role contracts and
+  gates never downgrade). Big CR is
   triggered by risk or explicit owner request, not by a default gate.
   Review prompt templates for durable PA / Big CR handoffs:
   `docs/cuts/_templates/pa-prompt-template.md` /

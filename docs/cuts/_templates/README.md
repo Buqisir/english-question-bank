@@ -5,7 +5,7 @@ match this convention.
 
 ## Default Directory
 
-Medium and large cuts may use:
+Medium and large cuts must use:
 
 ```text
 docs/cuts/<cut-id>/
@@ -33,6 +33,8 @@ docs/cuts/<cut-id>/
 Optional files by work type:
 
 ```text
+  agent-entrypoint.md # optional routing file: only for multi-stage, long-running,
+                      # parallel, cross-session handoff, or independent reading navigation
   qa-checklist.md  # owner PO QA 对照单(user-visible cuts;3-5 项操作+预期,
                    # 模板 _templates/qa-checklist.md)
   rulings.md       # 判例裁决战役的判例集(数据质量类;模板
