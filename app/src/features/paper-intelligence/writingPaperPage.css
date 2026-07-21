@@ -138,7 +138,7 @@
 /* 讲评态入口手势①：答题框本身可点（挑题态/续写组永远不挂这个 modifier）。 */
 .pi-writing-answer-box--clickable {
   cursor: pointer;
-  transition: background 0.15s ease, min-height 0.25s ease;
+  transition: background var(--motion-fast) var(--ease-hover), min-height var(--motion-slow) var(--ease-hover);
 }
 .pi-writing-answer-box--clickable:hover {
   background: #fbfaf6;
@@ -176,7 +176,7 @@
   font-size: 12px;
   color: #2c6e56;
   opacity: 0;
-  transition: opacity 0.15s;
+  transition: opacity var(--motion-fast) var(--ease-hover);
   pointer-events: none;
 }
 .pi-writing-answer-box--clickable:hover .pi-writing-review-hint {
@@ -250,7 +250,7 @@
   border-bottom: 2px solid transparent;
   padding: 4px 10px 6px;
   cursor: pointer;
-  transition: color 0.2s;
+  transition: color var(--motion-fast) var(--ease-hover);
 }
 .pi-writing-review-tabs button:hover {
   color: #221b15;
@@ -264,12 +264,12 @@
 /* 框内翻页轨道——高度跟随当前块，320ms ease-out（拍板值）。 */
 .pi-writing-review-viewport {
   overflow: hidden;
-  transition: height 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: height 0.32s cubic-bezier(0.22, 1, 0.36, 1); /* token-exempt: B2 320ms 拍板值，decisions.md §2 signature moment */
   touch-action: pan-y;
 }
 .pi-writing-review-track {
   display: flex;
-  transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1); /* token-exempt: B2 320ms 拍板值，decisions.md §2 signature moment */
 }
 .pi-writing-review-track--dragging {
   transition: none;
@@ -278,7 +278,7 @@
   flex: 0 0 100%;
   min-width: 0;
   opacity: 0.2;
-  transition: opacity 0.28s ease;
+  transition: opacity var(--motion-base) var(--ease-hover);
   align-self: flex-start;
   padding-bottom: 4px;
 }
@@ -296,11 +296,11 @@
 .pi-writing-review-dots i {
   width: 6px;
   height: 6px;
-  border-radius: 3px;
+  border-radius: 4px;
   background: #d8d2c6;
   cursor: pointer;
   display: block;
-  transition: all 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: width var(--motion-base) var(--ease-out), background var(--motion-base) var(--ease-hover);
 }
 .pi-writing-review-dots i.on {
   width: 18px;
@@ -318,7 +318,7 @@
   border: 1px solid #e2dfd6;
   border-radius: 4px;
   padding: 0.45rem 0.6rem;
-  transition: background 0.15s, border-color 0.15s;
+  transition: background var(--motion-fast) var(--ease-hover), border-color var(--motion-fast) var(--ease-hover);
 }
 .pi-writing-review-cell b {
   display: block;
@@ -359,7 +359,7 @@
 .pi-writing-review-mark:hover,
 .pi-writing-review-mark.on {
   background: #eaf3ee;
-  border-radius: 3px;
+  border-radius: 4px;
 }
 .pi-writing-review-anchor--on {
   background: #eaf3ee;
