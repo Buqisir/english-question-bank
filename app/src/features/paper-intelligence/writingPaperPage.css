@@ -390,6 +390,9 @@
 .pi-writing-review-model p {
   margin: 0 0 0.4em;
 }
+.pi-writing-review-model-greeting {
+  text-indent: 0;
+}
 .pi-writing-review-model-body {
   text-indent: 2em;
 }
@@ -430,6 +433,24 @@
 .pi-writing-review-marknote b {
   color: #2c6e56;
   font-weight: 600;
+}
+
+/* 右栏常驻审题卡（DP-3 三轮 owner 拍板）——复用框内卡节类名，窄栏下
+   基础五定降 2 列。 */
+.pi-writing-review-rail .pi-writing-review-card {
+  grid-template-columns: repeat(2, 1fr);
+}
+.pi-writing-review-rail-title {
+  margin: 0 0 0.5rem;
+  font-family: var(--ui-font, Inter, ui-sans-serif, system-ui, -apple-system, 'PingFang SC', sans-serif);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: #221b15;
+}
+.pi-writing-review-rail-hint {
+  margin: 0.75rem 0 0;
+  font-size: 0.75rem;
+  color: #8a8478;
 }
 
 /* ③ 亮点表达 */

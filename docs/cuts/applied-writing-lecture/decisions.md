@@ -158,3 +158,27 @@ owner 对 DP-2 首轮实现验收后要求返工，逐条拍板如下（全部�
    原 text/note、grid 按映射改写，`reviewCard` 整体替换为 owner 提供的
    课堂参考卡原文，走真产线 `runVocabGate` + `validateWritingAnalysisCandidate`
    + `persistWritingAnalysisGroup` 重新落盘（不手改 JSON）。
+
+## 7. Owner QA 拍板（2026-07-21，DP-3 二轮「不合格」返工）
+
+Owner 携两张截图判二轮 QA 不合格，四点拍板（commit `692be4c` +
+右栏一笔）：
+
+1. **选中彻底不变色（中性色也不要）**——收紧 §6.4：锚句激活连
+   「虚线↔实线」切换也撤掉，样式恒定，点开与否只由讲解条的出现/消失
+   表达。页签/锚句的 UA 蓝色 focus ring 同判（截图实锤），换品牌色
+   细虚线且仅 `:focus-visible` 出现。
+2. **范文按信件排版**——「格式不符合信件格式，太难看」根因：锚句
+   `<button>` 的 UA `inline-block + text-align:center` 把每个锚句打成
+   独立居中块，整封信碎掉。改行内流（`display:inline` +
+   `text-align:inherit`），并按信件成形：称呼顶格、正文段首行缩进
+   2em、结尾敬语+署名（末两行）右对齐（与卷面答题框 givenBottom 同
+   惯例）。
+3. **句子跳动 = bug 实锤**——hover 预览就地插入讲解条把文字顶开→
+   鼠标脱离锚句→收起→再 hover 的抖动循环。删除 hover 预览整条通道，
+   讲解条只认 click（§6.3「点开」语义收严为唯一入口）。
+4. **右栏常驻审题卡**（owner 四选一拍板，取代 §5 小板 2 的「右栏只留
+   一句指引」）：解析在讲评态下右栏固定渲染填好版审题卡四节（复用
+   框内 renderCard，窄栏基础五定降 2 列），底部一行小字指引范文/亮点
+   在卷面框内看；未发布卷右栏与 B2 同显「解析未发布」。落选档：讲解
+   条镜像放大 / 右栏收起卷面加宽 / 常驻亮点表达。

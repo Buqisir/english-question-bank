@@ -222,8 +222,21 @@ export function WritingAnswerBoxReview({
   )
 }
 
+// DP-3 三轮 owner 拍板：讲评态下右栏常驻审题卡——讲范文·标志时学生随时
+// 对照，不用翻回第①页；也把解析打开后右栏只剩一句指引的大片空白用起来。
+// 复用框内 renderCard，同一份数据同一套类名（narrow rail 降 2 列见 CSS）。
+export function WritingReviewRailCard({ card }: { card: ReviewCard }): ReactNode {
+  return (
+    <div className="pi-writing-review-rail">
+      <h3 className="pi-writing-review-rail-title">审题卡</h3>
+      {renderCard(card)}
+      <p className="pi-writing-review-rail-hint">范文 · 标志与亮点表达在卷面答题框内查看。</p>
+    </div>
+  )
+}
+
 // 讲评态显填好版：值直接渲数据，卡页本身不带任何激活/高亮态（decisions.md
-// §6 D：唯一允许的激活指示在范文页锚句下划线，卡页不参与）。
+// §6 D：卡页不参与激活指示）。
 function renderCard(card: ReviewCard): ReactNode {
   return (
     <div className="pi-writing-review-card-sections">

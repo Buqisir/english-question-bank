@@ -64,7 +64,7 @@ import { PaperSurface } from '../../shared-ui/papersurface/PaperSurface'
 import { paperSurfaceTokens } from '../../../../shared/papersurface/tokens.mjs'
 import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
 import { WritingPaperPage } from '../paper-intelligence/WritingPaperPage'
-import { WritingAnswerBoxReview } from './WritingAnswerBoxReview'
+import { WritingAnswerBoxReview, WritingReviewRailCard } from './WritingAnswerBoxReview'
 import {
   buildPaperAssetSurfaceModel,
   type PaperAssetSurfaceModel,
@@ -1681,15 +1681,14 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
 
     if (group.groupType === 'writing') {
       if (lectureEntry?.kind === 'writing') {
-        // D5 小板 2: application 组的全量解析已搬进卷面 B2 答题框内嵌区
-        // （decisions.md §5）——右栏只留一句指引，不重复渲染。continuation
+        // D5 小板 2 + DP-3 三轮拍板: application 组的全量解析在卷面 B2 答题框
+        // 内嵌区（decisions.md §5），右栏常驻审题卡对照教学——不重复渲范文/
+        // 亮点。未发布（无 reviewCard）与 B2 内同一份降级。continuation
         // 组原样保留（B2 只覆盖 application）。
         if (lectureEntry.analysis.taskType === 'application') {
-          return (
-            <p className="paper-browse-lecture-empty">
-              解析已在卷面答题框中打开，点击框内查看审题卡 / 范文标志 / 亮点表达。
-            </p>
-          )
+          const railCard = lectureEntry.analysis.reviewCard
+          if (railCard) return <WritingReviewRailCard card={railCard} />
+          return <p className="paper-browse-lecture-empty">解析未发布</p>
         }
         return <WritingAnalysisPanel analysis={lectureEntry.analysis} />
       }

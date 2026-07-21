@@ -212,10 +212,13 @@ async function main() {
 
     if (process.env.DP2_SCREENSHOTS === '1') await page.screenshot({ path: path.join(qaDir, 'dp2-01-b2-open.png') })
 
-    // ── ④ 右栏概览瘦身 ──
-    const overviewHint = page.locator('.paper-browse-lecture-panel').getByText('解析已在卷面答题框中打开', { exact: false })
-    await overviewHint.waitFor({ timeout: 10_000 })
-    ok('④ 右栏 application 组只显标题+指引，不再渲全量解析', (await overviewHint.count()) >= 1)
+    // ── ④ 右栏常驻审题卡（DP-3 三轮 owner 拍板），不重复渲范文/亮点 ──
+    const railCard = page.locator('.paper-browse-lecture-panel .pi-writing-review-rail')
+    await railCard.waitFor({ timeout: 10_000 })
+    ok('④ 右栏 application 组常驻审题卡（.pi-writing-review-rail 挂载且几何可见）',
+      Boolean(await railCard.boundingBox()))
+    ok('④ 右栏审题卡四节齐（基础五定/圈要点/读者三问/价值落点）',
+      (await railCard.locator('.pi-writing-review-section').count()) === 4)
     ok('④ 右栏没有渲染范文全文（全量面板类未挂载）', (await page.locator('.pi-writing-model-answer').count()) === 0)
 
     // ── ④ 无卡卷（paper-zj-2026-jan, 22 组存量之一）「解析未发布」双落点一致 ──

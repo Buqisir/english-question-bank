@@ -1,10 +1,15 @@
 # applied-writing-lecture · Handoff（2026-07-21，会话切换）
 
+> 2026-07-21 更新：DP-3 二轮 owner QA「不合格」→ 三轮返工已落
+> （选中零变色/信件排版/hover 抖动根除 + 右栏常驻审题卡，拍板全文
+> decisions.md §7）。主代理复核：tsc 0、DP-2 24/24、verify:all
+> 84P/1S/0F。待 owner 三轮 QA。delta CR 范围扩为 `fdfd868..HEAD`。
+
 ## 现在停在哪
 
 **裁决点 DP-3（owner PO QA）进行中，其余全部干净。** 分支
 `applied-writing-lecture`（worktree `../wt-applied-writing-lecture`），
-HEAD `2be7923`，工作树 clean，未合并未 push。
+工作树 clean，未合并未 push。
 
 ## 已完成 & 已验证
 
