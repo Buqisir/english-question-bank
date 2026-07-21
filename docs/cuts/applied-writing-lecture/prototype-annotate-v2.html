@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>applied-writing-lecture · 讲评模式原型 v2 — 内嵌行间批注 + 两页横滑</title>
+<!-- 手写字体拍板：中文小赖体 + 英文 Shantell Sans（mdtask 同款） -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Shantell+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@chinese-fonts/xiaolai@3.0.0/dist/Xiaolai/result.css" rel="stylesheet">
+<style>
+  :root {
+    --paper: #faf9f4;
+    --ink-text: #1a1a1a;
+    --ink-green: #2f8f5b;   /* 审题要点页 */
+    --ink-orange: #c45a38;  /* 亮点句式页 */
+    --muted: #8a8478;
+    --hand: 'Shantell Sans', 'Xiaolai SC', cursive;
+    --box-w-closed: 620px;
+    --box-w-open: 920px;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: #efeee8;
+    color: var(--ink-text);
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, 'PingFang SC', sans-serif;
+  }
+
+  header { max-width: 1480px; margin: 0 auto; padding: 20px 24px 8px; }
+  header h1 { font-size: 16px; margin: 0 0 4px; }
+  header p.sub { font-size: 12.5px; color: #6a6a64; margin: 0 0 10px; max-width: 76em; line-height: 1.6; }
+  .controls { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding: 6px 0; }
+  .controls button {
+    font: 600 13px/1 Inter, 'PingFang SC', sans-serif;
+    color: #2c6e56; background: #fff;
+    border: 1px solid #cfe4da; border-radius: 6px;
+    padding: 7px 14px; cursor: pointer;
+  }
+  .controls button:hover { background: #f2f8f5; }
+  .controls button:disabled { color: #b9b4a8; border-color: #e2dfd6; cursor: default; }
+  .controls button.primary { background: #2c6e56; color: #fff; border-color: #2c6e56; }
+  .controls .counter { font-size: 13px; color: #6a6a64; font-variant-numeric: tabular-nums; min-width: 3.2em; }
+
+  .world { max-width: 1480px; margin: 8px auto 60px; padding: 0 24px; display: flex; gap: 20px; align-items: flex-start; }
+  .paper-col {
+    position: relative; flex: 1 1 auto; min-width: 0;
+    background: var(--paper); border: 1px solid #e2dfd6; border-radius: 2px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    padding: 34px 0 48px;
+  }
+  .section-line { width: var(--box-w-closed); margin: 0 auto 10px; font: 700 14px/1.6 'Songti SC', 'STSong', serif; transition: width 320ms ease-out; }
+  .paper-col.open .section-line { width: var(--box-w-open); }
+
+  /* 答题框：点开讲评 → 变宽（320ms，同 B2 拍板节奏） */
+  .answer-box {
+    width: var(--box-w-closed);
+    margin: 0 auto;
+    border: 1px solid #1a1a1a;
+    padding: 1.1rem 1.5rem 1.4rem;
+    transition: width 320ms ease-out;
+    cursor: pointer;
+  }
+  .paper-col.open .answer-box { width: var(--box-w-open); cursor: default; }
+
+  /* 框头（仅讲评态显示）：标题 + 页签 + 收起 —— 镜像 B2 */
+  .review-head { display: none; align-items: center; gap: 14px; padding-bottom: 8px; border-bottom: 1px solid #e2dfd6; margin-bottom: 10px; }
+  .paper-col.open .review-head { display: flex; }
+  .review-head .title { font-size: 14px; font-weight: 700; }
+  .review-tabs { display: flex; gap: 4px; flex: 1; }
+  .review-tabs button {
+    font: 500 13px/1 Inter, 'PingFang SC', sans-serif;
+    color: #6a6a64; background: none; border: none;
+    border-bottom: 2px solid transparent;
+    padding: 4px 10px 6px; cursor: pointer;
+  }
+  .review-tabs button:focus { outline: none; }
+  .review-tabs button:focus-visible { outline: 1px dashed rgba(44,110,86,.5); outline-offset: 2px; }
+  .review-tabs button.on { color: #2c6e56; font-weight: 600; border-bottom-color: #2c6e56; }
+  .review-close { font: 500 12px/1 Inter, 'PingFang SC', sans-serif; color: #6a6a64; background: none; border: 1px solid #d8d5ca; border-radius: 999px; padding: 5px 12px; cursor: pointer; }
+  .hint { font-family: var(--hand); font-size: 13px; color: var(--muted); text-align: center; margin: 8px 0 0; }
+  .paper-col.open .hint { display: none; }
+
+  /* 两页横滑轨道（镜像 B2：transform 翻页 + 高度跟随） */
+  .review-viewport { overflow: hidden; }
+  .review-track { display: flex; width: 200%; transition: transform 320ms ease-out, height 320ms ease-out; }
+  .review-track.dragging { transition: none; }
+  /* overflow hidden：批注/箭头偶有 1-2px 越界，翻页时不从相邻滑块缝里露头 */
+  .review-slide { width: 50%; flex: 0 0 50%; position: relative; overflow: hidden; }
+
+  /* 信件：闭合态行距正常；讲评态行距撑开，行间放批注 */
+  .letter {
+    font-family: 'Times New Roman', 'Songti SC', 'STSong', serif;
+    font-size: 15px;
+    line-height: 2.0;
+    transition: line-height 320ms ease-out;
+  }
+  .paper-col.open .letter { line-height: 3.55; }
+  /* 亮点句式页批注更长（含迁移句，常换行成两行），行距单独放宽一档 */
+  .paper-col.open .review-slide[data-page="hl"] .letter { line-height: 4.05; }
+  .letter p { margin: 0; }
+  .letter p.body { text-indent: 2em; }
+  .letter p.closing { text-align: right; }
+  .anchor { cursor: default; }
+
+  .ink-overlay { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
+  svg path.stroke { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  svg path.green { stroke: var(--ink-green); }
+  svg path.orange { stroke: var(--ink-orange); }
+
+  /* 行间手写批注（内嵌式）：写在撑开的行距里 */
+  .note {
+    position: absolute;
+    font-family: var(--hand);
+    font-size: 12.5px;
+    line-height: 1.4;
+    max-width: 92%;
+    opacity: 0;
+    transform: translateY(5px);
+    transition: opacity 360ms ease-out, transform 360ms ease-out;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+  .note.wrap { white-space: normal; }
+  .note.show { opacity: 1; transform: translateY(0) rotate(var(--tilt, -2deg)); }
+  .note b { font-weight: 600; }
+  .note .extra { font-size: 11.5px; opacity: 0.75; }
+  .note.green { color: var(--ink-green); }
+  .note.orange { color: var(--ink-orange); }
+
+  /* 胶囊点点（镜像 B2） */
+  .dots { display: none; justify-content: center; gap: 6px; padding-top: 12px; }
+  .paper-col.open .dots { display: flex; }
+  .dots i { width: 6px; height: 6px; border-radius: 999px; background: #d8d5ca; cursor: pointer; transition: all 200ms; }
+  .dots i.on { width: 18px; background: #2c6e56; }
+
+  .rail {
+    flex: 0 0 250px; background: #fbfaf6; border: 1px solid #e2dfd6; border-radius: 8px;
+    padding: 14px 14px 16px; font-size: 12.5px;
+  }
+  .rail h3 { margin: 0 0 8px; font-size: 13px; }
+  .rail h4 { margin: 10px 0 4px; font-size: 11px; color: #2c6e56; letter-spacing: 0.04em; }
+  .rail .cells { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+  .rail .cell, .rail li, .rail .qa { background: #fff; border: 1px solid #e2dfd6; border-radius: 4px; padding: 4px 6px; }
+  .rail .cell b, .rail .qa b { display: block; font-size: 10px; color: var(--muted); font-weight: 600; }
+  .rail .cell span, .rail li, .rail .qa { font-size: 11.5px; }
+  .rail ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 3px; }
+
+  .open-questions { max-width: 1480px; margin: 0 auto 40px; padding: 0 24px; font-size: 12.5px; color: #6a6a64; line-height: 1.7; }
+  .open-questions b { color: #444; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>讲评模式原型 v2 · 内嵌行间批注 + 审题/亮点两页横滑</h1>
+  <p class="sub">
+    新拍板落地：字体=小赖体+Shantell Sans；点开讲评 → 答题框变宽（620→920px）+ 行距撑开（2.0→3.55），
+    审题要点直接写进行与行之间（内嵌式，不再拉去页边）；「① 审题要点」「② 亮点句式」两页横滑
+    （页签 / 点点 / 横滑 / ←→ 键，镜像 B2 手势）。点答题框任意处进讲评，「收起」退出。
+  </p>
+  <div class="controls">
+    <button id="btn-open" class="primary">点开讲评</button>
+    <button id="btn-prev" disabled>← 上一笔</button>
+    <button id="btn-next" disabled>下一笔 →</button>
+    <span class="counter" id="counter">–</span>
+    <button id="btn-all" disabled>全部展开</button>
+    <button id="btn-clear" disabled>收起批注</button>
+  </div>
+</header>
+
+<div class="world">
+  <div class="paper-col" id="paperCol">
+    <div class="section-line">第一节（满分15分）</div>
+    <div class="answer-box" id="answerBox">
+      <div class="review-head">
+        <span class="title">讲评 · 应用文解析</span>
+        <div class="review-tabs" id="tabs">
+          <button type="button" class="on">① 审题要点</button>
+          <button type="button">② 亮点句式</button>
+        </div>
+        <button type="button" class="review-close" id="btn-close">收起</button>
+      </div>
+      <div class="review-viewport" id="viewport">
+        <div class="review-track" id="track">
+          <section class="review-slide" data-page="marks">
+            <svg class="ink-overlay"></svg>
+            <div class="letter"></div>
+          </section>
+          <section class="review-slide" data-page="hl">
+            <svg class="ink-overlay"></svg>
+            <div class="letter"></div>
+          </section>
+        </div>
+      </div>
+      <div class="dots" id="dots"><i class="on"></i><i></i></div>
+    </div>
+    <p class="hint">点击答题框查看讲评</p>
+  </div>
+
+  <aside class="rail">
+    <h3>审题卡</h3>
+    <h4>基础五定</h4>
+    <div class="cells">
+      <div class="cell"><b>文体</b><span>邮件</span></div>
+      <div class="cell"><b>话题</b><span>公园美术课</span></div>
+      <div class="cell"><b>读者</b><span>英国朋友 Chris（平辈、熟人、当时不在场）</span></div>
+      <div class="cell"><b>人称</b><span>I ↔ you</span></div>
+      <div class="cell"><b>主时态</b><span>过去时为主（经历）+ 现在时（感想）</span></div>
+      <div class="cell"><b>判型</b><span>描述类</span></div>
+    </div>
+    <h4>圈要点、编号</h4>
+    <ul><li>① 你完成的作品</li><li>② 你的感想</li></ul>
+    <h4>读者三问</h4>
+    <div class="qa" style="margin-bottom:3px"><b>读者是谁？</b>Chris 是外国朋友、当时不在场</div>
+    <div class="qa" style="margin-bottom:3px"><b>他最关心什么？</b>你到底画了什么、那节课有意思在哪</div>
+    <div class="qa"><b>他要什么具体信息？</b>作品得能「看见」——画的是什么、什么颜色、什么样子</div>
+    <h4>价值落点</h4>
+    <div class="qa">在公园上美术课 = 在生活里发现美（自然与艺术的相遇）</div>
+  </aside>
+</div>
+
+<div class="open-questions">
+  <b>开放问题（拍板用）：</b>
+  ① 行距 3.55 的撑开幅度（批注一两行内嵌刚好）行不行，还是想再松/再紧？
+  ② 亮点句式页去留——建议保留为第②页：审题页讲「该写什么」，亮点页讲「怎么写得好、能迁移」，时间紧第②页可以不翻但内容不删。
+  ③ 批注前的小箭头要不要（现在有 mdtask 式短箭头指着句首）？
+  ④ 变宽 920px 在真实卷面（纸宽约 1010px）里占比可以吗？
+</div>
+
+<script>
+const LETTER_LINES = [
+  "Dear Chris,",
+  "I'm writing to share with you an art class I had in a park last Friday.",
+  "Instead of copying pictures in the classroom, we sat on the grass and painted what we saw. I chose the small lake and finished a painting of it, with sunlight dancing on the water and boats resting by the bank. Our teacher liked its lively colours so much that she put it up in our classroom.",
+  "More importantly, the class taught me to slow down and notice the beauty around me. Nature, as I now see, is the best art teacher.",
+  "How I wish you had been there!",
+  "Yours,",
+  "Li Hua",
+];
+
+const MARKS = [
+  { text: "I'm writing to share with you an art class I had in a park last Friday.",
+    label: "判型「描述类」", note: "分享经历的邮件开门见山——一句话点出何时何地一堂什么课。" },
+  { text: "Instead of copying pictures in the classroom, we sat on the grass and painted what we saw.",
+    label: "他要什么具体信息", note: "先给场景，Chris 才看得懂后面的作品从哪来。" },
+  { text: "I chose the small lake and finished a painting of it, with sunlight dancing on the water and boats resting by the bank.",
+    label: "要点①「完成的作品」", note: "画了什么 + 两笔画面细节，一句写实。" },
+  { text: "Our teacher liked its lively colours so much that she put it up in our classroom.",
+    label: "主时态「一般过去时」", note: "上周五的事全程过去时（liked / put），叙事不跳档。" },
+  { text: "More importantly, the class taught me to slow down and notice the beauty around me.",
+    label: "他最关心什么 · 要点②", note: "这堂课改变了我什么——Chris 读到这句才算收到分量。" },
+];
+
+const HIGHLIGHTS = [
+  { text: "Instead of copying pictures in the classroom, we sat on the grass and painted what we saw.",
+    label: "Instead of doing... 对比开场", note: "凸显这次经历的特别之处。",
+    extra: "迁移：Instead of having class indoors, we... / Instead of reading about it, we tried it ourselves." },
+  { text: "with sunlight dancing on the water and boats resting by the bank",
+    label: "with + 名词 + doing", note: "复合结构给画面加细节，dancing / resting 把静景写活。",
+    extra: "迁移：with music playing / with everyone laughing。" },
+  { text: "Our teacher liked its lively colours so much that she put it up in our classroom.",
+    label: "so...that 结果句", note: "自然带出他人评价，替代干巴巴的 My painting was good。",
+    extra: "迁移：enjoyed it so much that... / was so moved that...。" },
+  { text: "the class taught me to slow down and notice the beauty around me",
+    label: "无灵主语 + taught me to...", note: "写感想的高分框架，比 I think I learned... 紧凑有力。",
+    extra: "迁移：The trip / The experience / The failure taught me to...。" },
+];
+
+const PAGES = [
+  { key: 'marks', items: MARKS, color: 'green', underline: 'straight', baseOffset: 3 },
+  { key: 'hl', items: HIGHLIGHTS, color: 'orange', underline: 'wavy', baseOffset: 5 },
+];
+
+// ── 每页各渲染一份信件 + 包锚句 ──────────────────────
+function wrapText(root, target, cls) {
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+  let node;
+  while ((node = walker.nextNode())) {
+    const idx = node.data.indexOf(target);
+    if (idx === -1) continue;
+    const range = document.createRange();
+    range.setStart(node, idx);
+    range.setEnd(node, idx + target.length);
+    const span = document.createElement('span');
+    span.className = 'anchor ' + cls;
+    range.surroundContents(span);
+    return span;
+  }
+  return null;
+}
+
+const slides = Array.from(document.querySelectorAll('.review-slide'));
+PAGES.forEach((page, pi) => {
+  const letterEl = slides[pi].querySelector('.letter');
+  LETTER_LINES.forEach((line, i) => {
+    const p = document.createElement('p');
+    p.className = i === 0 ? 'greeting' : i >= LETTER_LINES.length - 2 ? 'closing' : 'body';
+    p.textContent = line;
+    letterEl.appendChild(p);
+  });
+  page.annos = page.items.map((item, i) => {
+    const span = wrapText(letterEl, item.text, `a-${page.key}-${i}`);
+    const div = document.createElement('div');
+    div.className = `note ${page.color}`;
+    div.style.setProperty('--tilt', (-2 + ((i * 37) % 5 - 2) * 0.5) + 'deg');
+    div.innerHTML = `<b>${item.label}</b>　${item.note}` + (item.extra ? `　<span class="extra">${item.extra}</span>` : '');
+    slides[pi].appendChild(div);
+    return { ...item, span, el: div };
+  });
+  page.svg = slides[pi].querySelector('svg');
+  page.slide = slides[pi];
+  page.shown = 0;
+});
+
+// ── SVG 笔画（mdtask 工艺） ─────────────────────────
+const SS = 'http://www.w3.org/2000/svg';
+function straightPath(x0, y0, x1, seed) {
+  const dx = (x1 - x0) / 3;
+  const j = (n) => ((seed * 7919 + n * 104729) % 100) / 100 - 0.5;
+  return `M ${x0} ${y0} C ${x0 + dx} ${y0 + j(1) * 2.2}, ${x1 - dx} ${y0 + j(2) * 2.2}, ${x1} ${y0}`;
+}
+function wavyPath(x0, y, x1) {
+  const wl = 9, amp = 1.7;
+  let d = `M ${x0} ${y}`;
+  for (let x = x0; x < x1; x += wl) {
+    const half = Math.min(wl, x1 - x) / 2;
+    d += ` q ${half} ${-amp * 2}, ${half * 2} 0`;
+  }
+  return d;
+}
+function drawPath(svg, d, colorCls, width, animate) {
+  const p = document.createElementNS(SS, 'path');
+  p.setAttribute('d', d);
+  p.setAttribute('class', `stroke ${colorCls}`);
+  p.setAttribute('stroke-width', width);
+  svg.appendChild(p);
+  if (animate) {
+    const len = p.getTotalLength();
+    p.style.strokeDasharray = len;
+    p.style.strokeDashoffset = len;
+    p.getBoundingClientRect();
+    p.style.transition = 'stroke-dashoffset 420ms ease-out';
+    p.style.strokeDashoffset = 0;
+  }
+  return p;
+}
+// mdtask 短箭头：从批注首字前上方甩向句首（V 头指着下划线起点）
+function arrowTo(svg, tx, ty, fromX, fromY, colorCls, anim) {
+  const d = `M ${fromX} ${fromY} C ${fromX + 4} ${fromY - 8}, ${tx - 10} ${ty + 10}, ${tx} ${ty}`;
+  drawPath(svg, d, colorCls, 1.4, anim);
+  const ang = Math.atan2(ty - (ty + 10), tx - (tx - 10));
+  const L = 6, s = 0.5;
+  const p1 = [tx - L * Math.cos(ang - s), ty - L * Math.sin(ang - s)];
+  const p2 = [tx - L * Math.cos(ang + s), ty - L * Math.sin(ang + s)];
+  drawPath(svg, `M ${p1[0]} ${p1[1]} L ${tx} ${ty} L ${p2[0]} ${p2[1]}`, colorCls, 1.4, anim);
+}
+
+// ── 布局：下划线逐行画，批注放进锚句末行下方的行距空隙 ──
+let open = false;
+let pageIndex = 0;
+
+function layoutPage(page, animateLast) {
+  page.svg.innerHTML = '';
+  const slideRect = page.slide.getBoundingClientRect();
+  page.annos.forEach((a, i) => {
+    const visible = open && i < page.shown;
+    a.el.classList.toggle('show', visible);
+    if (!visible) return;
+    const anim = animateLast && i === page.shown - 1;
+    const rects = Array.from(a.span.getClientRects());
+    if (!rects.length) return;
+    rects.forEach((r, k) => {
+      const x0 = r.left - slideRect.left, x1 = r.right - slideRect.left;
+      const y = r.bottom - slideRect.top + page.baseOffset - 4;
+      const d = page.underline === 'wavy' ? wavyPath(x0, y, x1) : straightPath(x0, y, x1, i * 3 + k);
+      drawPath(page.svg, d, page.color, 1.4, anim);
+    });
+    // 批注进锚句「末行」下方空隙，x 对齐末行左端；装不下时先整体左移保
+    // 一行，再不行换行铺（nowrap 的 offsetWidth 被 max-width 封顶，必须用
+    // scrollWidth 量自然宽，否则长批注会被裁在框边——v2 首测实锤）。
+    const last = rects[rects.length - 1];
+    const slideW = page.slide.clientWidth;
+    let nx = last.left - slideRect.left + 14;
+    const ny = last.bottom - slideRect.top + page.baseOffset + 3;
+    a.el.classList.remove('wrap');
+    a.el.style.left = '0px';
+    a.el.style.top = '0px';
+    a.el.style.maxWidth = '';
+    const natural = a.el.scrollWidth + 2;
+    if (nx + natural > slideW - 8) {
+      if (natural <= slideW - 16) {
+        nx = Math.max(8, slideW - 8 - natural);
+      } else {
+        a.el.classList.add('wrap');
+        nx = Math.max(8, Math.min(nx, 40));
+        a.el.style.maxWidth = (slideW - nx - 8) + 'px';
+      }
+    }
+    a.el.style.left = nx + 'px';
+    a.el.style.top = ny + 'px';
+    // 短箭头：批注首字前 → 批注正上方那一行（锚句末行）的下划线起点。
+    // 用末行而非首行——跨行锚句用首行会从批注长距离斜穿正文（v2 首测实锤）。
+    arrowTo(page.svg, Math.max(2, last.left - slideRect.left - 3), last.bottom - slideRect.top + page.baseOffset - 4,
+      nx - 6, ny + 8, page.color, anim);
+  });
+}
+
+function syncHeight() {
+  const track = document.getElementById('track');
+  const active = PAGES[pageIndex].slide;
+  track.style.height = active.scrollHeight + 'px';
+}
+
+function refresh(animateLast) {
+  PAGES.forEach((p) => layoutPage(p, animateLast && p === PAGES[pageIndex]));
+  syncHeight();
+  const page = PAGES[pageIndex];
+  document.getElementById('counter').textContent = open ? `${page.shown} / ${page.annos.length}` : '–';
+  document.getElementById('btn-prev').disabled = !open || page.shown === 0;
+  document.getElementById('btn-next').disabled = !open || page.shown === page.annos.length;
+  document.getElementById('btn-all').disabled = !open;
+  document.getElementById('btn-clear').disabled = !open;
+  document.getElementById('btn-open').textContent = open ? '已在讲评' : '点开讲评';
+  document.getElementById('btn-open').disabled = open;
+}
+
+// ── 讲评开合 ────────────────────────────────────────
+const paperCol = document.getElementById('paperCol');
+function setOpen(next) {
+  open = next;
+  paperCol.classList.toggle('open', open);
+  if (open) { PAGES.forEach((p) => { p.shown = p.annos.length; }); } // 默认全开，课堂逐笔用清空+下一笔
+  // 等宽度/行距 320ms 过渡结束后再排批注
+  setTimeout(() => refresh(false), 340);
+  refresh(false);
+}
+document.getElementById('answerBox').addEventListener('click', (e) => {
+  if (!open && !e.target.closest('button')) setOpen(true);
+});
+// 宽度/行距过渡结束后再校一次排版——setTimeout(340) 偶尔量在动画中途，
+// 会把 track 高度冻在半程（v2 首测实锤）。
+document.getElementById('answerBox').addEventListener('transitionend', (e) => {
+  if (e.propertyName === 'width' || e.propertyName === 'line-height') refresh(false);
+});
+document.getElementById('btn-open').addEventListener('click', () => setOpen(true));
+document.getElementById('btn-close').addEventListener('click', () => setOpen(false));
+
+// ── 翻页（页签/点点/横滑/拖拽/←→，镜像 B2） ────────
+const track = document.getElementById('track');
+const tabs = Array.from(document.querySelectorAll('#tabs button'));
+const dots = Array.from(document.querySelectorAll('#dots i'));
+function go(next) {
+  pageIndex = Math.max(0, Math.min(1, next));
+  track.style.transform = `translateX(-${pageIndex * 50}%)`;
+  tabs.forEach((t, i) => t.classList.toggle('on', i === pageIndex));
+  dots.forEach((d, i) => d.classList.toggle('on', i === pageIndex));
+  refresh(false);
+}
+tabs.forEach((t, i) => t.addEventListener('click', () => go(i)));
+dots.forEach((d, i) => d.addEventListener('click', () => go(i)));
+const viewport = document.getElementById('viewport');
+viewport.addEventListener('wheel', (e) => {
+  if (!open) return;
+  if (Math.abs(e.deltaX) <= Math.abs(e.deltaY) || Math.abs(e.deltaX) < 24) return;
+  e.preventDefault();
+  go(pageIndex + (e.deltaX > 0 ? 1 : -1));
+}, { passive: false });
+let drag = null;
+viewport.addEventListener('pointerdown', (e) => { if (open) { drag = { x: e.clientX }; track.classList.add('dragging'); } });
+viewport.addEventListener('pointermove', (e) => {
+  if (!drag) return;
+  track.style.transform = `translateX(calc(-${pageIndex * 50}% + ${e.clientX - drag.x}px))`;
+});
+window.addEventListener('pointerup', (e) => {
+  if (!drag) return;
+  const dx = e.clientX - drag.x;
+  drag = null;
+  track.classList.remove('dragging');
+  track.style.transform = `translateX(-${pageIndex * 50}%)`;
+  if (Math.abs(dx) > 60) go(pageIndex + (dx < 0 ? 1 : -1));
+});
+document.addEventListener('keydown', (e) => {
+  if (!open) return;
+  if (e.key === 'ArrowRight') go(pageIndex + 1);
+  if (e.key === 'ArrowLeft') go(pageIndex - 1);
+  if (e.key === 'Escape') setOpen(false);
+});
+
+// ── 逐笔 ────────────────────────────────────────────
+document.getElementById('btn-next').addEventListener('click', () => { const p = PAGES[pageIndex]; if (p.shown < p.annos.length) { p.shown++; layoutPage(p, true); syncHeight(); refresh(true); } });
+document.getElementById('btn-prev').addEventListener('click', () => { const p = PAGES[pageIndex]; if (p.shown > 0) { p.shown--; refresh(false); } });
+document.getElementById('btn-all').addEventListener('click', () => { PAGES[pageIndex].shown = PAGES[pageIndex].annos.length; refresh(false); });
+document.getElementById('btn-clear').addEventListener('click', () => { PAGES[pageIndex].shown = 0; refresh(false); });
+
+window.addEventListener('resize', () => refresh(false));
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => refresh(false));
+refresh(false);
+</script>
+</body>
+</html>
