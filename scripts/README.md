@@ -142,7 +142,7 @@ must be confirmed green (AGENTS.md RM gate).
 
 | Script | Scope |
 | --- | --- |
-| `verify-cut-artifacts.mjs` | RM artifact gate: `node scripts/verify-cut-artifacts.mjs <cut-dir> <tier>` checks required cut artifacts exist non-empty before medium / large merges |
+| `verify-cut-artifacts.mjs` | RM artifact gate: `node scripts/verify-cut-artifacts.mjs <cut-dir> <tier>` checks required cut artifacts exist non-empty before medium / large merges: a plan-like execution contract and fresh CR's `cr.md`; large cuts also require `cut-note.md`; PA remains conditional on its trigger |
 | `verify-c8-forbidden-scope.mjs` | C8 cut-specific forbidden-scope audit (historical) |
 
 ## Miscellaneous / older Paper Intelligence cuts

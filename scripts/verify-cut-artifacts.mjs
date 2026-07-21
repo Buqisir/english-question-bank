@@ -81,11 +81,10 @@ if (tier === 'large') {
   assert('cut-note.md 存在且非空 (large)', nonEmptyFile(path.join(cutDir, 'cut-note.md')))
 }
 
-// 条件性 artifact(脚本无法判断是否触发了 PA / Big CR)→ 只提示,不算 FAIL。
+// fresh CR 是 medium / large 的必需 merge gate；PA 仍按触发条件需要，脚本无法判断。
 const hasPa = readdirSync(cutDir).some((f) => /pa[-.]/.test(f) && nonEmptyFile(path.join(cutDir, f)))
-const hasCr = readdirSync(cutDir).some((f) => /cr[-.]/.test(f) && nonEmptyFile(path.join(cutDir, f)))
+assert('cr.md 存在且非空 (medium+ fresh CR)', nonEmptyFile(path.join(cutDir, 'cr.md')))
 if (!hasPa) console.warn('NOTE 没看到 PA 记录 —— 若本 cut 用了 PA,确认 PA-lite 已记进计划文件。')
-if (!hasCr) console.warn('NOTE 没看到 CR 记录 —— 若触发了 Big CR,确认 CR 记在 PR 描述 / final summary。')
 
 console.log(`\nartifact gate (${tier}): PASS ${passed}, FAIL ${failed}`)
 process.exit(failed > 0 ? 1 : 0)

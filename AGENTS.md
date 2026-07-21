@@ -10,75 +10,65 @@ duplicating rules. 本文件是**宪法**:只写现行有效法条的最终形�
 **血书元规则**:新硬法条须真实事故或 owner 拍板背书才入宪法,预防性规则
 默认不进;修法时把叙事移进判例库,正文不留历史沉积。
 
-Historical docs (cut records, ADRs) may still name `阿澈` or external
-agents — read each as 小川 wearing the matching hat (PM / UI-direction /
+Historical docs (cut records, ADRs) may still name 小川 or external
+agents — read each as 阿澈 wearing the matching hat (PM / UI-direction /
 CR / RM); do not mass-rename history.
 
 ## Current Operating Reality
 
 ### Roles
 
-- Orchestrator: **小川** as the main agent (Fable tier), first responsible
-  person with full change authority (owner grant, 2026-07-02). The main
-  agent does direction, decomposition, dispatch, and final acceptance — not
-  bulk implementation.
-- Execution runs in subagents / workflow agents. **Every spawned agent pins
-  its model explicitly; never inherit the main-agent tier.** Mechanical
-  work = Sonnet; judgment-heavy review = Opus.
+- Orchestrator: **阿澈** is the main agent and wears **PM + RM** (Codex native
+  **Sol / max**), first responsible person with full change authority. The main
+  agent does direction, decomposition, direct dispatch, verification, release
+  gates, and final acceptance — not bulk implementation.
+- Execution runs in directly dispatched subagents. **Every spawned agent pins
+  its model explicitly; never inherits the main-agent tier.** DEV = Terra;
+  judgment-heavy PA / CR = Sol.
 - **Independence = fresh, un-anchored context + role persona.** PA, DEV,
   and CR stay separate contexts; review gates never downgrade.
-- UI direction / 审美 is delegated to 小川 (owner, 2026-07-02) per
+- UI direction / 审美 is delegated to 阿澈 per
   `PRODUCT.md` brand personality. The owner is PO: final product QA and
   post-hoc veto over any shipped visual decision — not code review.
 
 ### Dispatch map (scales with cut size)
 
-- small: main agent fixes directly, or one Sonnet DEV subagent; CR-lite by
+- small: main agent fixes directly, or one fresh Terra DEV subagent; CR-lite by
   the main agent; no ceremony files.
-- medium: lean committed `plan.md` → Sonnet DEV subagent → fresh Opus CR
-  (cold-read of the diff) → main agent verify + acceptance + merge.
+- medium: committed `plan.md` → fresh Terra DEV → PM runs narrow + `tsc` + full
+  verify → fresh Sol CR (cold-read, writes `cr.md`) → required QA / PO QA →
+  PM + RM acceptance, merge, main CI, STATUS.
 - large, or touches an irreversible surface / data-contract semantics
   (schema, migration, export, anchor protocol, cross-cut architecture):
-  add a fresh Opus PA before DEV; committed `plan.md`; `cut-note.md` at
-  closeout. Purely additive schema touches and reversible product-surface
+  add a fresh Sol PA → PM compression into `plan.md` → fresh Terra DEV → PM
+  verify → fresh Sol CR (Big CR only by trigger, writes `cr.md`) → required QA /
+  PO QA → PM + RM closeout. `cut-note.md` is required at closeout. Purely
+  additive schema touches and reversible product-surface
   work may downgrade to PA-lite — the downgrade reason goes in the plan
   header and CR must review whether it still holds. 原型已 owner 逐裁点
   拍板的刀同此:方向审查已由原型过程完成,formal PA 默认降 PA-lite
   (owner, 2026-07-12)。
-- Workflow 路由(裁决点切段:确定段进脚本、裁决点回主代理;例行刀整刀
-  流水线;批量机械扇出);并行刀硬条件三条;worktree 纪律(含断点锚):
-  细则全文在 `docs/agents/dispatch-protocols.md`,派工前必读,不得凭
-  记忆派工。
-- CR-lite(主代理直接冷读 diff)适用于 small 刀与低风险 polish;CR 只
-  复核未证实项,已被 CI / verify 证实的不重跑。
+- Direct dispatch route (PM stages DEV / CR directly; decision points, batch
+  tasks, parallel cuts, worktrees, and checkpoint discipline): read
+  `docs/agents/dispatch-protocols.md` before dispatching.
+- CR-lite (the PM's cold read) is for Small cuts only. Every Medium / Large cut
+  receives a fresh CR; its non-empty `cr.md` is an RM artifact-gate requirement.
 
 ### Tier / effort defaults
 
 | Role | Tier | Effort |
 | --- | --- | --- |
-| Orchestrator (PM + acceptance) | main agent | medium (escalation below) |
-| PA | Opus | high (xhigh only for large / contract / irreversible cuts) |
-| DEV | Sonnet | medium (high only when the implementation is gnarly) |
-| CR + RM | Opus | high |
+| PM + RM (main agent) | Sol | max |
+| PA | Sol | high (xhigh only for irreversible work) |
+| DEV | Terra | medium (high only when the implementation is gnarly) |
+| CR | Sol | high (xhigh only for Big CR) |
 
-`high` is the default ceiling; `max` / `xhigh` by exception, not standing.
-Do not run DEV on Opus-max, or PA / CR on Sonnet-low, and never let a
-subagent default to the main-agent model.
-
-Main-agent effort escalation (owner, 2026-07-08): daily default is medium.
-Effort is owner-controlled, so on a High trigger the main agent MUST
-proactively remind the owner to switch up — never silently continue on
-medium. The three High triggers: (1) production-irreversible operations;
-(2) writing a contract-level plan with no PA backstop; (3) route /
-direction-level discussion (no process gate catches a wrong answer; error
-cost measured in weeks). Suggest xhigh only for one-way-door decisions
-(changing data-contract semantics, overturning an ADR); max has no standing
-use. Rollback gauge: if CR Must Fix items of the "plan factual error" kind
-rise, move the daily default back to high.
+Never let a subagent default to the main-agent profile.
 
 ### Gates
 
-- RM artifact gate (medium / large, in the CR + RM session): required
+- RM artifact gate (medium / large, run by the PM + RM main agent after fresh
+  CR writes `cr.md`): required
   artifacts exist (`node scripts/verify-cut-artifacts.mjs <cut-dir> <tier>`)
   and the relevant `verify-i*.mjs` pass before merge.
 - Before any merge to `main`, the full suite must be proven green — either
@@ -97,10 +87,8 @@ rise, move the daily default back to high.
   runs the cut's narrow verify script(s) + `tsc` **and one full
   `verify:all`** in the DEV worktree pre-merge; post-merge proof of the
   combined tree is the watched `main` CI run — no local full re-run in the
-  main tree unless the merge overlapped interim main commits.
-  cut-pipeline 流水线刀:verify 步的 verifyCmds 含 narrow + full 全套时,
-  该步即此复核本身,主代理收口不再本地重跑,只盯 main CI
-  (owner, 2026-07-12)。
+  main tree unless the merge overlapped interim main commits. Verify is never
+  delegated as a substitute for the main agent's release review.
 - Verify convention: new contracts prefer behavioral assertions (start the
   server / call the real API / import the real module) over source-regex
   assertions. A behavioral assertion may retire the matching regex
@@ -177,8 +165,10 @@ any memory system.
   text is protocol §2; review gates follow
   `docs/agents/review-levels.md` — do not restate either here.
 - Medium / large cuts use repo-routed context, not chat-only context:
-  substantive multi-agent context lives in repo files. Create / update
-  `docs/cuts/<CUT>/agent-entrypoint.md`, and follow
+  substantive multi-agent context lives in repo files. `plan.md` is the default
+  routing entry; add `docs/cuts/<CUT>/agent-entrypoint.md` only for multi-stage,
+  long-running, parallel, cross-session handoff, or independent reading
+  navigation. Follow
   `docs/cuts/_templates/README.md` for the artifact set and naming rules
   (`plan.md` / `pa.md` / `cr.md` / `cut-note.md` / prompt archives; small
   cuts create no ceremony; `goal` / `loop` are reserved names). Prototype
@@ -274,7 +264,7 @@ stash,2026-07-16 收悬空时落地。)
   contract, product boundary, or teaching interpretation: yes/no`. Small
   and touching none of the four → proceed directly.
 - Hat contracts and role definitions live in
-  `docs/agents/review-levels.md` (all hats worn by 小川; independence from
+  `docs/agents/review-levels.md` (阿澈 wears PM + RM; independence from
   fresh contexts, not names — PA, DEV, and CR are always different
   sessions: `pa.md` first, PM-hat compression into `plan.md`, then DEV,
   then a fresh CR; role contracts and gates never downgrade). Big CR is
@@ -283,9 +273,10 @@ stash,2026-07-16 收悬空时落地。)
   `docs/cuts/_templates/pa-prompt-template.md` /
   `big-cr-prompt-template.md`.
 - Default flow: **PM grill before DEV** whenever product behavior is still
-  fuzzy; **PA before DEV** per the irreversibility trigger (Dispatch map);
-  **CR-lite after DEV** for any PR that will be merged; **QA before RM**
-  only for user-visible or visual / interaction changes.
+  fuzzy; **PA before DEV** per the irreversibility trigger; **fresh CR after
+  DEV** for Medium / Large (**CR-lite only Small**); **QA before RM** only for
+  user-visible or visual / interaction changes. The execution sequence is the
+  Dispatch map above.
 - **裁决点清单(owner, 2026-07-11)**:medium / large 刀若主代理有步间
   裁决点(MF 判定、owner 拍板转达、QA 闸),`plan.md` 列「裁决点清单」
   并在施工中勾选——这是 PM 层的断点锚:会话中断后,接手者凭它定位 PM
@@ -315,16 +306,15 @@ stash,2026-07-16 收悬空时落地。)
   do not assume `origin`. Before PA, CR, QA, and RM, the responsible hat
   must fetch and confirm local / remote state — never treat a report as
   truth until the baseline, diff, and pushed commits are verified.
-- External-agent rules are dormant (小川-only); archived in
+- External-agent rules are dormant; archived in
   `docs/agents/external-agents.md`. Re-activate from there if reintroduced.
 
 ## UI Collaboration
 
-- UI direction / polish is delegated to 小川 (owner reassignment,
-  2026-07-02, recorded here per the "reassigns it in repo context" rule);
+- UI direction / polish is delegated to 阿澈;
   the PO keeps final product QA and may veto or overturn any shipped
   visual decision.
-- 小川 edits CSS / pure display components only within the assigned DEV
+- 阿澈 edits CSS / pure display components only within the assigned DEV
   scope; never contract-level files (domain · schema · `*Adapter.ts` ·
   PaperSurface · `server/**` · verify scripts · paper-assets ·
   print / export styling) unless the PM hat assigns that scope in a

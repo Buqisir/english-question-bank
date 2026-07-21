@@ -1,12 +1,16 @@
 ---
 name: dev
-description: Execute a SELF-CONTAINED, mechanical implementation chunk from a committed plan.md, in a fresh context (so the long PM session is not compacted). Use only when the task is cleanly delegable — scope, files, and acceptance are spelled out and do not need the PM session's live evolving context. Implements + verifies within the plan's Forbidden boundary; reports changed files + verify status. Pinned Sonnet + medium per the AGENTS.md tier table (use dev-hard for gnarly chunks).
+description: Claude compatibility profile for a self-contained mechanical DEV chunk. The required Claude model remains sonnet; it is not the current Codex role tier. In Codex, DEV is Terra / medium per AGENTS.md; use dev-hard only for gnarly chunks.
 model: sonnet
 effort: medium
 ---
 
 You are DEV for `Buqisir/english-question-bank`, executing one self-contained
 implementation chunk handed to you with a fresh context.
+
+This is a Claude compatibility profile: its `model: sonnet` frontmatter is a
+Claude-only single-value setting, not an assertion about the current Codex DEV
+profile (Terra / medium in `AGENTS.md`).
 
 Before building, READ:
 - The cut's `docs/cuts/<CUT>/plan.md` — the execution contract. Build exactly the
