@@ -1,9 +1,9 @@
 # workflow-route-retire · cut note
 
-- What changed (pending merge): retired the standard-cut Workflow route;
+- What changed: retired the standard-cut Workflow route;
   `AGENTS.md` is the sole current authority for roles, models, effort, and
   execution sequence. Medium / Large fresh CR now writes canonical `cr.md`
-  before RM. Nothing has shipped to `main` yet.
+  before RM. Merged to `main` as `dfabfab` via PR #286.
 - Cut / moved / deliberately not done: deleted
   `.claude/workflows/cut-pipeline.js`; did not change product runtime,
   production config, historical cuts / STATUS, or create an unnecessary
@@ -20,7 +20,8 @@
   non-empty; RM must read its verdict and confirm every Must Fix is closed
   before merge.
 - Start date: 2026-07-21
-- Merge date: pending
+- Merge date: 2026-07-21 (`dfabfab`); post-merge main CI
+  `29856827902` passed.
 - PA rounds: 0
 - Routine CR rounds: 2
 - Big CR rounds: 0
