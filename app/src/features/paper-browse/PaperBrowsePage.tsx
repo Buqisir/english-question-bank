@@ -64,6 +64,7 @@ import { PaperSurface } from '../../shared-ui/papersurface/PaperSurface'
 import { paperSurfaceTokens } from '../../../../shared/papersurface/tokens.mjs'
 import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
 import { WritingPaperPage } from '../paper-intelligence/WritingPaperPage'
+import { WritingAnswerBoxReview } from './WritingAnswerBoxReview'
 import {
   buildPaperAssetSurfaceModel,
   type PaperAssetSurfaceModel,
@@ -161,6 +162,12 @@ type LectureSelection = {
   evidenceId: string | null
   optionLabel: string | null
 }
+
+// applied-writing-lecture D4: B2 框内翻页开关态——与 lectureSelection 完全
+// 独立（decisions.md「右栏保留，显组级概览，不收起」——B2 开合不驱动右栏，
+// 右栏继续跟 scrollspy/panelGroupId 走）。null = 未展开；一次只有一个写作
+// 组的框能展开。
+type WritingReviewState = { groupId: string; page: number } | null
 
 // similar-rail (E2/E6): a snapshot of the seed that a fetch was made for,
 // captured at CTA-click time — kept separate from the live `lectureSelection`
@@ -323,6 +330,8 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
   const [lectureAnalysisLoading, setLectureAnalysisLoading] = useState(false)
   // 刀 2: 讲评态下的显式点题选择；null = 跟随 scrollspy 显示组级概览。
   const [lectureSelection, setLectureSelection] = useState<LectureSelection | null>(null)
+  // applied-writing-lecture D4: B2 框内翻页开关态（见 WritingReviewState 定义）。
+  const [writingReview, setWritingReview] = useState<WritingReviewState>(null)
   const [openSevenChoiceQuestionIds, setOpenSevenChoiceQuestionIds] = useState<string[]>([])
   // similar-rail (E2): 讲评栏 body 的视图态 — 'analysis'(解析)/'similar'
   // (配相似结果列表)。只在 selectLectureQuestion 换题或用户点「返回解析」
@@ -374,6 +383,13 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     }
   }, [])
 
+  // applied-writing-lecture D4: 讲评关闭时 B2 解析区一并复位——`review.available`
+  // 已经在 lectureOpen=false 时挂 undefined（见 renderGroupBody），这里只是
+  // 让 state 本身也归零，避免下次开讲评时残留上次翻到的页。
+  useEffect(() => {
+    if (!lectureOpen) setWritingReview(null)
+  }, [lectureOpen])
+
   // 刀 3 小尾巴 ①: 标记程序化滚动即将发生，抑制 scrollspy 的 clear effect
   // 一段沉降窗口（覆盖 smooth 滚动动画时长；深链的 auto 滚动虽然瞬时，仍给
   // 同款窗口——IntersectionObserver 的 entries 回调本身是异步的，即使跳转
@@ -402,15 +418,34 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
   useEffect(() => {
     if (!lectureOpen) return
     function onKeyDown(event: KeyboardEvent): void {
-      if (event.key !== 'Escape') return
-      setLectureOpen(false)
-      lectureHandleRef.current?.focus()
+      if (/INPUT|TEXTAREA/.test(document.activeElement?.tagName || '')) return
+      if (event.key === 'Escape') {
+        // applied-writing-lecture D4: B2 展开时 Esc 先收起解析区（卷面复原），
+        // 不直接连带关掉整个讲评栏——镜像 prototype.html 的两级 Esc 语义。
+        if (writingReview) {
+          setWritingReview(null)
+          return
+        }
+        setLectureOpen(false)
+        lectureHandleRef.current?.focus()
+        return
+      }
+      // B2 展开时 ←→ 归翻页器（prototype.html 同款：三块循环内翻页，不切
+      // 到别的写作组/别的手势）。
+      if (writingReview && (event.key === 'ArrowLeft' || event.key === 'ArrowRight')) {
+        event.preventDefault()
+        setWritingReview((prev) =>
+          prev
+            ? { ...prev, page: Math.max(0, Math.min(2, prev.page + (event.key === 'ArrowLeft' ? -1 : 1))) }
+            : prev,
+        )
+      }
     }
     document.addEventListener('keydown', onKeyDown)
     return (): void => {
       document.removeEventListener('keydown', onKeyDown)
     }
-  }, [lectureOpen])
+  }, [lectureOpen, writingReview])
 
   // 刀 3: 讲评开合 / 点题选择 → URL replaceState 同步（不产生历史条目——
   // App.tsx 的 pushState 只发生在 openPaperBrowse 本身，页内互动一律
@@ -472,6 +507,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     setLectureAnalysisFetched(false)
     setLectureAnalysisLoading(false)
     setLectureSelection(null)
+    setWritingReview(null)
     setOpenSevenChoiceQuestionIds([])
 
     async function load(): Promise<void> {
@@ -682,7 +718,13 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
           const raw = res.ok ? ((await res.json()) as WritingAnalysisFilePayload) : null
           for (const groupId of writingGroupIds) {
             const writing = raw?.groups?.[groupId]?.writing
-            entries[groupId] = writing ? { kind: 'writing', analysis: writing } : { kind: 'unavailable' }
+            // D3 前端下架门: application 组无 reviewCard 视同 unavailable
+            // （旧 22 组存量解析即刻停显，护住数据文件本身不删——
+            // decisions.md §3「挂出必有卡」两道门之二）。continuation 组
+            // 不受影响（从不产 reviewCard，字段语义上不适用）。
+            const isPublished =
+              Boolean(writing) && (writing!.taskType !== 'application' || Boolean(writing!.reviewCard))
+            entries[groupId] = isPublished ? { kind: 'writing', analysis: writing! } : { kind: 'unavailable' }
           }
         } catch {
           for (const groupId of writingGroupIds) entries[groupId] = { kind: 'unavailable' }
@@ -1404,9 +1446,67 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
       />
     )
     if (entry.kind === 'writing') {
-      return <WritingPaperPage pageModel={entry.model.pageModel}>{surfaceEl}</WritingPaperPage>
+      // applied-writing-lecture D4: B2 双手势入口只对应用文任务开——续写组
+      // 从不产 reviewCard/reviewMarks（decisions.md §3），B2 与它无关，讲评栏
+      // 组级概览路径（renderLectureAnalysisPanel continuation 分支）原样保留。
+      const writingTaskId = asset?.content.groups[groupId]?.writingTaskId
+      const taskType = writingTaskId ? asset?.content.writingTasks?.[writingTaskId]?.taskType : undefined
+      const reviewAvailable = lectureOpen && taskType === 'application'
+      return (
+        <WritingPaperPage
+          pageModel={entry.model.pageModel}
+          review={
+            reviewAvailable
+              ? {
+                  available: true,
+                  open: writingReview?.groupId === groupId,
+                  onOpen: () => setWritingReview({ groupId, page: 0 }),
+                  onClose: () => setWritingReview(null),
+                  content: renderWritingReviewContent(groupId),
+                }
+              : undefined
+          }
+        >
+          {surfaceEl}
+        </WritingPaperPage>
+      )
     }
     return surfaceEl
+  }
+
+  // applied-writing-lecture D4: B2 框内内容——已发布(有 reviewCard)走真carousel，
+  // 未发布/加载中走与 cloze/grammarFill/写作续写组一致的「解析未发布」空态，
+  // 镜像 renderLectureAnalysisPanel 的降级文案（D3 下架门同一份判定结果）。
+  function renderWritingReviewContent(groupId: string): ReactNode {
+    const lectureEntry = lectureAnalysisByGroupId[groupId]
+    const page = writingReview?.groupId === groupId ? writingReview.page : 0
+    const analysis = lectureEntry?.kind === 'writing' ? lectureEntry.analysis : null
+    const published =
+      analysis && analysis.taskType === 'application' && analysis.reviewCard && analysis.reviewMarks
+        ? { ...analysis, reviewCard: analysis.reviewCard, reviewMarks: analysis.reviewMarks }
+        : null
+    if (published) {
+      return (
+        <WritingAnswerBoxReview
+          analysis={published}
+          page={page}
+          onSetPage={(next) => setWritingReview({ groupId, page: next })}
+          onClose={() => setWritingReview(null)}
+        />
+      )
+    }
+    return (
+      <div className="pi-writing-review">
+        <div className="pi-writing-review-head">
+          <span className="pi-writing-review-head-title">讲评 · 应用文解析</span>
+          <span className="pi-writing-review-head-badge">仅讲评屏显 · 不进打印/学生版</span>
+          <button type="button" className="pi-writing-review-close" onClick={() => setWritingReview(null)}>
+            收起
+          </button>
+        </div>
+        <p className="paper-browse-lecture-empty">{lectureAnalysisLoading ? '解析加载中…' : '解析未发布'}</p>
+      </div>
+    )
   }
 
   // one-sheet-paper: `mergedInstructionText` folds a single-group section's
@@ -1582,6 +1682,16 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
 
     if (group.groupType === 'writing') {
       if (lectureEntry?.kind === 'writing') {
+        // D5 小板 2: application 组的全量解析已搬进卷面 B2 答题框内嵌区
+        // （decisions.md §5）——右栏只留一句指引，不重复渲染。continuation
+        // 组原样保留（B2 只覆盖 application）。
+        if (lectureEntry.analysis.taskType === 'application') {
+          return (
+            <p className="paper-browse-lecture-empty">
+              解析已在卷面答题框中打开，点击框内查看审题卡 / 范文标志 / 亮点表达。
+            </p>
+          )
+        }
         return <WritingAnalysisPanel analysis={lectureEntry.analysis} />
       }
       return (

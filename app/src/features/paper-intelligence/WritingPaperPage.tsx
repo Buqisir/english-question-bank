@@ -11,6 +11,21 @@ import './writingPaperPage.css'
 // The answer box renders its border + any given lines (continuation starters);
 // the empty writing space inside is intentionally not sized in this cut.
 
+export type WritingPaperPageReviewProps = {
+  /** true when the講評态「解析」入口双手势 (点答题框 / 「解析」钮) should be
+   * live for this group — applied-writing-lecture D4 gates this on
+   * `lectureOpen && taskType === 'application'` at the call site
+   * (PaperBrowsePage.tsx); continuation groups never get this prop. */
+  available: boolean
+  open: boolean
+  onOpen: () => void
+  onClose: () => void
+  /** Rendered inside the answer box in place of the given salutation/signature
+   * lines when `open` — owned entirely by the caller (B2 三块翻页
+   * carousel), this component stays a dumb chrome host. */
+  content: ReactNode
+}
+
 /**
  * Extended CSSProperties to allow CSS custom properties on the root.
  */
@@ -36,12 +51,25 @@ const writingPageTokenStyle: WritingPageStyle = {
 export function WritingPaperPage({
   pageModel,
   children,
+  review,
 }: {
   pageModel: WritingPageModel
   children: ReactNode
+  /** applied-writing-lecture D4: B2 内嵌解析区接线 — undefined for any
+   * group the caller doesn't wire review for (挑题态、非应用文写作组）. */
+  review?: WritingPaperPageReviewProps
 }) {
   return (
     <div className="pi-writing-page" data-pi-writing-page="" style={writingPageTokenStyle}>
+      {review?.available && (
+        <button
+          type="button"
+          className="pi-writing-review-toggle"
+          onClick={review.open ? review.onClose : review.onOpen}
+        >
+          解析
+        </button>
+      )}
       {pageModel.blocks.map((block, index) => {
         switch (block.kind) {
           case 'partHeading':
@@ -52,27 +80,46 @@ export function WritingPaperPage({
             return <p key={index} className="pi-writing-instruction">{block.text}</p>
           case 'passage':
             return <div key={index} className="pi-writing-passage">{children}</div>
-          case 'answerBox':
+          case 'answerBox': {
+            const isReviewOpen = Boolean(review?.available && review.open)
+            const boxClassName = [
+              'pi-writing-answer-box',
+              block.givenBottom.length > 0 ? 'pi-writing-answer-box--letter' : '',
+              review?.available ? 'pi-writing-answer-box--clickable' : '',
+              isReviewOpen ? 'pi-writing-answer-box--review-open' : '',
+            ]
+              .filter(Boolean)
+              .join(' ')
             return (
               <div
                 key={index}
-                className={block.givenBottom.length > 0 ? 'pi-writing-answer-box pi-writing-answer-box--letter' : 'pi-writing-answer-box'}
+                className={boxClassName}
                 aria-label={block.label}
+                data-pi-writing-answerbox={review?.available ? '' : undefined}
+                onClick={review?.available && !review.open ? review.onOpen : undefined}
               >
-                <div className="pi-writing-answer-top">
-                  {block.givenTop.map((line, lineIndex) => (
-                    <p key={`t${lineIndex}`} className="pi-writing-answer-given">{line}</p>
-                  ))}
-                </div>
-                {block.givenBottom.length > 0 && (
-                  <div className="pi-writing-answer-bottom">
-                    {block.givenBottom.map((line, lineIndex) => (
-                      <p key={`b${lineIndex}`} className="pi-writing-answer-given pi-writing-answer-given--tight">{line}</p>
-                    ))}
-                  </div>
+                {isReviewOpen ? (
+                  review!.content
+                ) : (
+                  <>
+                    <div className="pi-writing-answer-top">
+                      {block.givenTop.map((line, lineIndex) => (
+                        <p key={`t${lineIndex}`} className="pi-writing-answer-given">{line}</p>
+                      ))}
+                    </div>
+                    {block.givenBottom.length > 0 && (
+                      <div className="pi-writing-answer-bottom">
+                        {block.givenBottom.map((line, lineIndex) => (
+                          <p key={`b${lineIndex}`} className="pi-writing-answer-given pi-writing-answer-given--tight">{line}</p>
+                        ))}
+                      </div>
+                    )}
+                    {review?.available && <span className="pi-writing-review-hint">点击查看解析</span>}
+                  </>
                 )}
               </div>
             )
+          }
           default:
             return null
         }

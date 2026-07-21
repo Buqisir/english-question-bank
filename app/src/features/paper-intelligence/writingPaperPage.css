@@ -126,3 +126,285 @@
 .pi-writing-answer-box--letter .pi-writing-answer-top .pi-writing-answer-given {
   min-height: 0;
 }
+
+/* ============================================================================
+   applied-writing-lecture D4 — B2 框内翻页内嵌解析区。
+   全部新类名 `pi-writing-review-*`（本刀小板 1：白名单账目零变动）。仅在
+   讲评态渲染，从不进打印/PDF/DOCX/学生版（这些管线从不 import 这个 CSS
+   模块之外的任何 React 组件树）。像素/交互对齐
+   docs/cuts/applied-writing-lecture/prototype.html 的 B2 案。
+   ========================================================================= */
+
+/* 讲评态入口手势①：答题框本身可点（挑题态/续写组永远不挂这个 modifier）。 */
+.pi-writing-answer-box--clickable {
+  cursor: pointer;
+  transition: background 0.15s ease, min-height 0.25s ease;
+}
+.pi-writing-answer-box--clickable:hover {
+  background: #fbfaf6;
+}
+
+/* 讲评态入口手势②：写作卡右上「解析」钮（仅屏显 UI 字体，绝不进导出）。 */
+.pi-writing-review-toggle {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.5rem;
+  font-family: var(--ui-font, Inter, ui-sans-serif, system-ui, -apple-system, 'PingFang SC', sans-serif);
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  color: #2c6e56;
+  background: #fff;
+  border: 1px solid #2c6e56;
+  border-radius: 999px;
+  padding: 4px 14px;
+  cursor: pointer;
+}
+.pi-writing-review-toggle:hover {
+  background: #eaf3ee;
+}
+/* .pi-writing-page needs position:relative for the toggle to anchor —
+   inherited from the A4 sheet's own box, harmless (no prior positioning). */
+.pi-writing-page {
+  position: relative;
+}
+
+.pi-writing-review-hint {
+  position: absolute;
+  right: 10px;
+  bottom: 8px;
+  font-family: var(--ui-font, Inter, ui-sans-serif, system-ui, -apple-system, 'PingFang SC', sans-serif);
+  font-size: 12px;
+  color: #2c6e56;
+  opacity: 0;
+  transition: opacity 0.15s;
+  pointer-events: none;
+}
+.pi-writing-answer-box--clickable:hover .pi-writing-review-hint {
+  opacity: 1;
+}
+
+/* 展开态：答题框变成解析区容器——纸感底、块级布局（不再是给答案预留空白
+   的书信框），框高由 .pi-writing-review-viewport 的高度过渡驱动。 */
+.pi-writing-answer-box--review-open {
+  cursor: default;
+  background: #faf7f0;
+  display: block;
+  min-height: 0;
+}
+
+.pi-writing-review {
+  font-family: var(--ui-font, Inter, ui-sans-serif, system-ui, -apple-system, 'PingFang SC', sans-serif);
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: #221b15;
+}
+
+.pi-writing-review-head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
+  border-bottom: 1px solid #e8e5dc;
+}
+.pi-writing-review-head-title {
+  font-weight: 700;
+  font-size: 0.9375rem;
+}
+.pi-writing-review-head-badge {
+  margin-left: auto;
+  font-size: 0.6875rem;
+  color: #8a8478;
+  border: 1px dashed #cfccc2;
+  border-radius: 4px;
+  padding: 1px 6px;
+  white-space: nowrap;
+}
+.pi-writing-review-close {
+  font-size: 0.75rem;
+  color: #6a6a64;
+  background: none;
+  border: 1px solid #e0ded6;
+  border-radius: 999px;
+  padding: 2px 10px;
+  cursor: pointer;
+  margin-left: 0.5rem;
+}
+.pi-writing-review-close:hover {
+  color: #2c6e56;
+  border-color: #2c6e56;
+}
+
+/* 顶部页签 */
+.pi-writing-review-tabs {
+  display: flex;
+  gap: 4px;
+  margin: 0 0 0.75rem;
+}
+.pi-writing-review-tabs button {
+  font-family: var(--ui-font, Inter, ui-sans-serif, system-ui, -apple-system, 'PingFang SC', sans-serif);
+  font-size: 0.8125rem;
+  color: #6a6a64;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: 4px 10px 6px;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.pi-writing-review-tabs button:hover {
+  color: #221b15;
+}
+.pi-writing-review-tabs button.on {
+  color: #2c6e56;
+  font-weight: 600;
+  border-bottom-color: #2c6e56;
+}
+
+/* 框内翻页轨道——高度跟随当前块，320ms ease-out（拍板值）。 */
+.pi-writing-review-viewport {
+  overflow: hidden;
+  transition: height 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+  touch-action: pan-y;
+}
+.pi-writing-review-track {
+  display: flex;
+  transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.pi-writing-review-track--dragging {
+  transition: none;
+}
+.pi-writing-review-slide {
+  flex: 0 0 100%;
+  min-width: 0;
+  opacity: 0.2;
+  transition: opacity 0.28s ease;
+  align-self: flex-start;
+  padding-bottom: 4px;
+}
+.pi-writing-review-slide.on {
+  opacity: 1;
+}
+
+/* 底部胶囊小点点 */
+.pi-writing-review-dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 0.75rem;
+}
+.pi-writing-review-dots i {
+  width: 6px;
+  height: 6px;
+  border-radius: 3px;
+  background: #d8d2c6;
+  cursor: pointer;
+  display: block;
+  transition: all 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.pi-writing-review-dots i.on {
+  width: 18px;
+  background: #2c6e56;
+}
+
+/* ① 审题卡六格 */
+.pi-writing-review-card {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+.pi-writing-review-cell {
+  background: #fff;
+  border: 1px solid #e2dfd6;
+  border-radius: 4px;
+  padding: 0.45rem 0.6rem;
+  transition: background 0.15s, border-color 0.15s;
+}
+.pi-writing-review-cell b {
+  display: block;
+  font-size: 0.6875rem;
+  color: #8a8478;
+  font-weight: 600;
+  margin-bottom: 2px;
+  letter-spacing: 0.03em;
+}
+.pi-writing-review-cell span {
+  font-size: 0.8125rem;
+}
+.pi-writing-review-cell--hot {
+  background: #eaf3ee;
+  border-color: #2c6e56;
+}
+
+/* ② 范文·标志（范文正文沿用卷面衬线字体，讲评标志用 UI 字体绿笔） */
+.pi-writing-review-model {
+  font-family: var(--ps-font-stack);
+  font-size: var(--ps-font-size);
+  line-height: var(--ps-line-height);
+  color: #111;
+}
+.pi-writing-review-model p {
+  margin: 0 0 0.4em;
+}
+.pi-writing-review-mark {
+  font-family: var(--ui-font, Inter, ui-sans-serif, system-ui, -apple-system, 'PingFang SC', sans-serif);
+  font-size: 12px;
+  color: #2c6e56;
+  background: none;
+  border: none;
+  padding: 0 1px;
+  cursor: pointer;
+  vertical-align: 1px;
+}
+.pi-writing-review-mark:hover,
+.pi-writing-review-mark.on {
+  background: #eaf3ee;
+  border-radius: 3px;
+}
+.pi-writing-review-anchor--on {
+  background: #eaf3ee;
+}
+.pi-writing-review-marknote {
+  font-family: var(--ui-font, Inter, ui-sans-serif, system-ui, -apple-system, 'PingFang SC', sans-serif);
+  font-size: 0.8125rem;
+  color: #221b15;
+  background: #faf7f0;
+  border-left: 3px solid #2c6e56;
+  border-radius: 0 4px 4px 0;
+  padding: 0.4rem 0.6rem;
+  margin: 0.25rem 0 0.5rem;
+}
+.pi-writing-review-marknote b {
+  color: #2c6e56;
+  font-weight: 600;
+}
+.pi-writing-review-legend {
+  font-size: 0.75rem;
+  color: #8a8478;
+  margin-top: 0.5rem;
+}
+
+/* ③ 亮点表达 */
+.pi-writing-review-highlights {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.pi-writing-review-highlights li {
+  padding: 0.45rem 0.6rem;
+  border-radius: 4px;
+  margin-bottom: 0.375rem;
+  background: #fff;
+  border: 1px solid #e8e5dc;
+}
+.pi-writing-review-highlight-text {
+  margin: 0 0 0.2rem;
+  font-family: var(--ps-font-stack);
+  font-size: 13.5px;
+  color: #111;
+}
+.pi-writing-review-highlight-note {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: #55534c;
+}

@@ -248,6 +248,30 @@ export type ApplicationWritingAnalysis = {
   taskType: 'application'
   modelAnswer: string
   highlightExpressions: HighlightExpression[]
+  // applied-writing-lecture (D1): additive v1 optional fields — B2 卷面内嵌
+  // 讲评区消费。旧存量解析（无这两个字段）在前端下架门被视同 unavailable
+  // （见 PaperBrowsePage.tsx 的 writing lecture-analysis fetch effect）。
+  reviewCard?: ReviewCard
+  reviewMarks?: ReviewMark[]
+}
+
+// ─── Review Card / Marks (applied-writing-lecture D1) ────────────────────────
+
+export type ReviewCard = {
+  genre: string
+  readerWant: string
+  readerChecklist: string[]
+  tense: string
+  points: string[]
+  value: string
+}
+
+export type ReviewGrid = 'genre' | 'readerWant' | 'tense' | 'points' | 'readerChecklist'
+
+export type ReviewMark = {
+  grid: ReviewGrid
+  text: string
+  note: string
 }
 
 export type ContinuationWritingAnalysis = {

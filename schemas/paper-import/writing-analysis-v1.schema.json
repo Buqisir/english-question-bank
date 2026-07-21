@@ -50,6 +50,44 @@
                     "items": { "type": "string", "minLength": 1 }
                   }
                 }
+              },
+              "reviewCard": {
+                "type": "object",
+                "required": ["genre", "readerWant", "readerChecklist", "tense", "points", "value"],
+                "additionalProperties": true,
+                "properties": {
+                  "genre": { "type": "string", "minLength": 1 },
+                  "readerWant": { "type": "string", "minLength": 1 },
+                  "readerChecklist": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": { "type": "string", "minLength": 1 }
+                  },
+                  "tense": { "type": "string", "minLength": 1 },
+                  "points": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": { "type": "string", "minLength": 1 }
+                  },
+                  "value": { "type": "string", "minLength": 1 }
+                }
+              },
+              "reviewMarks": {
+                "type": "array",
+                "minItems": 1,
+                "maxItems": 5,
+                "items": {
+                  "type": "object",
+                  "required": ["grid", "text", "note"],
+                  "additionalProperties": true,
+                  "properties": {
+                    "grid": {
+                      "enum": ["genre", "readerWant", "tense", "points", "readerChecklist"]
+                    },
+                    "text": { "type": "string", "minLength": 1 },
+                    "note": { "type": "string", "minLength": 1 }
+                  }
+                }
               }
             },
             "if": {

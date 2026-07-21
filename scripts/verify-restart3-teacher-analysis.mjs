@@ -282,6 +282,93 @@ assert(
   !/\bdb\.(prepare|exec)\(/.test(read('server/draft-paper/analysisText.mjs')),
 )
 
+/* ───────────────────── 6. applied-writing-lecture: missing-card hard gate ─────────────────────
+ * D6: assert the "missing reviewCard/reviewMarks → downstream unavailable" path is enforced at
+ * the production gate (validateWritingAnalysisCandidate), not just hoped for by the frontend.
+ * A candidate that reaches persistWritingAnalysisGroup without a reviewCard must never happen —
+ * the gate throws first, so the frontend's "no card → 解析未发布" branch (PaperBrowsePage.tsx)
+ * is the correct behavior for any application group whose analysis file predates this cut.
+ */
+
+console.log('\n-- 6. applied-writing-lecture: application reviewCard/reviewMarks hard gate --')
+
+const { validateWritingAnalysisCandidate } = await import(
+  path.join(rootDir, 'server', 'writing-analysis', 'writingAnalysisBackfillService.mjs')
+)
+
+function makeApplicationCandidate(overrides = {}) {
+  return {
+    taskType: 'application',
+    modelAnswer: 'Dear Caroline,\nI am writing to invite you.\nYours sincerely,\nLi Hua',
+    highlightExpressions: [
+      { text: 'I am writing to invite you.', note: 'note A' },
+      { text: 'Dear Caroline,', note: 'note B' },
+      { text: 'Yours sincerely,', note: 'note C' },
+    ],
+    reviewCard: {
+      genre: '邀请函',
+      readerWant: '请你来做客',
+      readerChecklist: ['时间', '话题'],
+      tense: '一般现在时',
+      points: ['①介绍', '②时间'],
+      value: '被需要',
+    },
+    reviewMarks: [{ grid: 'genre', text: 'I am writing to invite you.', note: '判型落纸' }],
+    ...overrides,
+  }
+}
+
+function throwsOn(candidate) {
+  try {
+    validateWritingAnalysisCandidate(candidate)
+    return false
+  } catch {
+    return true
+  }
+}
+
+assert(
+  'application candidate missing reviewCard entirely throws (missing-card path)',
+  throwsOn({ ...makeApplicationCandidate(), reviewCard: undefined }),
+)
+assert(
+  'application candidate with an empty reviewCard grid field throws',
+  throwsOn({ ...makeApplicationCandidate(), reviewCard: { ...makeApplicationCandidate().reviewCard, tense: '' } }),
+)
+assert(
+  'application candidate missing reviewMarks entirely throws',
+  throwsOn({ ...makeApplicationCandidate(), reviewMarks: undefined }),
+)
+assert(
+  'application candidate with 6 reviewMarks (over the 1–5 budget) throws',
+  throwsOn({
+    ...makeApplicationCandidate(),
+    reviewMarks: Array.from({ length: 6 }, () => ({
+      grid: 'genre',
+      text: 'I am writing to invite you.',
+      note: 'n',
+    })),
+  }),
+)
+assert(
+  'application candidate with an out-of-enum reviewMarks[].grid throws',
+  throwsOn({
+    ...makeApplicationCandidate(),
+    reviewMarks: [{ grid: 'value', text: 'I am writing to invite you.', note: 'n' }],
+  }),
+)
+assert(
+  'application candidate whose reviewMarks[].text is not a modelAnswer substring throws',
+  throwsOn({
+    ...makeApplicationCandidate(),
+    reviewMarks: [{ grid: 'genre', text: 'this sentence is not in the model answer', note: 'n' }],
+  }),
+)
+assert(
+  'a fully-formed application candidate (reviewCard + reviewMarks present) passes the gate',
+  !throwsOn(makeApplicationCandidate()),
+)
+
 /* ───────────────────── summary ───────────────────── */
 
 console.log(`\nRestart cut ③ verify: ${passed} passed, ${failed} failed`)

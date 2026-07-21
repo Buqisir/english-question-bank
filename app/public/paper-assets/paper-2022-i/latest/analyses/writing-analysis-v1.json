@@ -23,6 +23,49 @@
             "text": "It would be a great honour to have you join us.",
             "note": "结尾抬高对方、表达期待的得体收束句。It would be a great honour to... 是面向师长/嘉宾的高分礼貌框架。迁移：to have you join us 可换成 to receive your reply / to work with you，用于邀请、致谢、请求类结尾。"
           }
+        ],
+        "reviewCard": {
+          "genre": "邀请函（给外教的邮件）",
+          "readerWant": "Caroline 一眼读到：请你来 Talk and Talk 做一次访谈",
+          "readerChecklist": [
+            "节目是什么",
+            "访谈时间",
+            "访谈话题"
+          ],
+          "tense": "一般现在时；邀约处用 would / could 客气情态",
+          "points": [
+            "① 节目介绍",
+            "② 时间",
+            "③ 话题"
+          ],
+          "value": "她的留学经历正是听众好奇的——让她感到被需要"
+        },
+        "reviewMarks": [
+          {
+            "grid": "genre",
+            "text": "On behalf of all our listeners, I am writing to warmly invite you to be our guest for an interview.",
+            "note": "判型落纸：邀请函第一段必须亮明来意——I am writing to warmly invite you… 就是这一句。"
+          },
+          {
+            "grid": "points",
+            "text": "Our programme aims to widen students' horizons and improve their spoken English through relaxed conversations.",
+            "note": "要点①「节目介绍」落纸：一句话说清节目是什么、为谁办。"
+          },
+          {
+            "grid": "readerChecklist",
+            "text": "We sincerely hope you could share your experience of studying abroad, a topic we are all genuinely curious about.",
+            "note": "落纸清单「访谈话题」落纸：话题点到，还顺手用同位语给了价值。"
+          },
+          {
+            "grid": "tense",
+            "text": "As for the time, next Tuesday afternoon would be ideal, but please feel free to suggest another slot that suits you better.",
+            "note": "主时态卡格落纸：邀约用 would 情态把时间说得客气、留余地。"
+          },
+          {
+            "grid": "readerWant",
+            "text": "It would be a great honour to have you join us.",
+            "note": "读者变焦：结尾抬高对方——Caroline 读到的是\"被需要、被尊重\"。"
+          }
         ]
       }
     },

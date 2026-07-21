@@ -22,6 +22,10 @@ import { resolvePaperAssetReadPaths } from '../paper-import/storage.mjs'
 const WRITING_ANALYSIS_FILENAME = 'writing-analysis-v1.json'
 const WRITING_ANALYSIS_SCHEMA_VERSION = 'writing-analysis-v1'
 
+// applied-writing-lecture (D1/D2/decisions.md §3): the five reviewCard grids a
+// reviewMarks[].grid may point at (value/价值落点 has no mark — 真源如此).
+const REVIEW_GRIDS = ['genre', 'readerWant', 'tense', 'points', 'readerChecklist']
+
 // Path to guokao-vocab-checker skill check.py
 const VOCAB_CHECKER_SCRIPT = path.join(
   process.env.HOME || process.env.USERPROFILE || '',
@@ -295,6 +299,66 @@ export function validateWritingAnalysisCandidate(candidate) {
     }
   }
 
+  // Hard: application review card / marks (applied-writing-lecture D2 —
+  // 「挂出必有卡」两道门之一;「六格全非空;标志 1–5 条、grid 枚举五值、text
+  // 必须为 modelAnswer 子串」, decisions.md §3). Schema keeps these fields
+  // optional (v1 additive, protects the 22 already-persisted groups) — this
+  // gate is what makes them mandatory for anything freshly produced through
+  // this pipeline going forward.
+  if (candidate.taskType === 'application') {
+    const card = candidate.reviewCard
+    if (!card || typeof card !== 'object') {
+      throw new Error('reviewCard is missing or not an object.')
+    }
+    for (const field of ['genre', 'readerWant', 'tense', 'value']) {
+      if (!card[field] || typeof card[field] !== 'string' || !card[field].trim()) {
+        throw new Error(`reviewCard.${field} is empty or missing.`)
+      }
+    }
+    for (const field of ['readerChecklist', 'points']) {
+      if (!Array.isArray(card[field]) || card[field].length === 0) {
+        throw new Error(`reviewCard.${field} must be a non-empty array.`)
+      }
+      card[field].forEach((item, i) => {
+        if (!item || typeof item !== 'string' || !item.trim()) {
+          throw new Error(`reviewCard.${field}[${i}] is empty or missing.`)
+        }
+      })
+    }
+
+    const marks = candidate.reviewMarks
+    if (!Array.isArray(marks)) {
+      throw new Error('reviewMarks must be an array.')
+    }
+    if (marks.length < 1 || marks.length > 5) {
+      throw new Error(`reviewMarks must have 1–5 items, got ${marks.length}.`)
+    }
+    const normAnswerForMarks = normalizeForSubstring(candidate.modelAnswer)
+    for (let i = 0; i < marks.length; i++) {
+      const mark = marks[i]
+      if (!mark || typeof mark !== 'object') {
+        throw new Error(`reviewMarks[${i}] is not an object.`)
+      }
+      if (!REVIEW_GRIDS.includes(mark.grid)) {
+        throw new Error(`reviewMarks[${i}].grid must be one of ${REVIEW_GRIDS.join(', ')}, got: ${mark.grid}`)
+      }
+      if (!mark.text || typeof mark.text !== 'string' || !mark.text.trim()) {
+        throw new Error(`reviewMarks[${i}].text is empty or missing.`)
+      }
+      if (!mark.note || typeof mark.note !== 'string' || !mark.note.trim()) {
+        throw new Error(`reviewMarks[${i}].note is empty or missing.`)
+      }
+      const normMarkText = normalizeForSubstring(mark.text)
+      if (!normAnswerForMarks.includes(normMarkText)) {
+        throw new Error(
+          `reviewMarks[${i}].text not found in modelAnswer after normalization.\n` +
+            `  text:   ${JSON.stringify(mark.text)}\n` +
+            `  answer: ${JSON.stringify(candidate.modelAnswer).slice(0, 200)}`
+        )
+      }
+    }
+  }
+
   // Hard: highlightExpressions length 3–5
   const hx = candidate.highlightExpressions
   if (!Array.isArray(hx)) {
@@ -406,11 +470,21 @@ export function persistWritingAnalysisGroup({ paperAssetsDir }, work, analysis) 
       highlightExpressions: analysis.highlightExpressions.map(({ text, note }) => ({ text, note })),
     }
   } else {
-    // application: original three-field projection
+    // application: three-field projection + D1 reviewCard/reviewMarks
+    // (validateWritingAnalysisCandidate already gated both non-empty above).
     writingEntry = {
       taskType: analysis.taskType,
       modelAnswer: analysis.modelAnswer,
       highlightExpressions: analysis.highlightExpressions.map(({ text, note }) => ({ text, note })),
+      reviewCard: {
+        genre: analysis.reviewCard.genre,
+        readerWant: analysis.reviewCard.readerWant,
+        readerChecklist: [...analysis.reviewCard.readerChecklist],
+        tense: analysis.reviewCard.tense,
+        points: [...analysis.reviewCard.points],
+        value: analysis.reviewCard.value,
+      },
+      reviewMarks: analysis.reviewMarks.map(({ grid, text, note }) => ({ grid, text, note })),
     }
   }
 
