@@ -16,7 +16,7 @@ starts.
 
 Keep this list cut-specific and at most 5 files.
 
-- `docs/cuts/<CUT_DIR>/agent-entrypoint.md`
+- `docs/cuts/<CUT_DIR>/agent-entrypoint.md`（仅当该文件存在）
 - `docs/cuts/<CUT_DIR>/plan.md`
 - `docs/cuts/<CUT_DIR>/decisions.md`
 - `<CUT_SPECIFIC_FILE>`

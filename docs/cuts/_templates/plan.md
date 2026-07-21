@@ -28,8 +28,8 @@ WHAT/WHY，不是实现步骤>
 
 ## 参考实现（可偏离，偏离须在完成报告里说明）
 
-<给 DEV 的建议做法、候选落点、文案建议。DEV 档位越强这段越薄：
-Sonnet DEV 可以给到清单级；Opus/Fable 档 DEV 只留意图与边界，
+<给 DEV 的建议做法、候选落点、文案建议。机械 DEV 可给到清单级；
+判断更重的 gnarly DEV 只留意图与边界；具体模型 / effort 只看 AGENTS.md。
 自选决策进完成报告供 CR 复核>
 
 - <suggestion 1>
