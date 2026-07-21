@@ -20,9 +20,10 @@ styling。此路径仍需主代理轻量 sanity check,不是零评审。
 
 ## 升级触发
 
-任一命中即升级为常规 UI CR-lite + 浏览器 / PO QA:TSX 改动、新交互、新
+任一命中即升级为常规 UI 风险分级 + 浏览器 / PO QA：TSX 改动、新交互、新
 selector 结构、布局 / 滚动 / 定位变化、A4 / PaperSurface / print-preview
-影响、响应式影响、或 owner 反馈"怪 / 不舒服 / 不像 A4"。
+影响、响应式影响、或 owner 反馈"怪 / 不舒服 / 不像 A4"。评审按
+`AGENTS.md` Dispatch map：Small 才可 CR-lite；Medium / Large 必须 fresh CR。
 
 ## UI 分支流程
 
