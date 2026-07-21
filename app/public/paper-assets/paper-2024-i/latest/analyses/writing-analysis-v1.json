@@ -5,23 +5,65 @@
     "group-2024-i-writing-application": {
       "writing": {
         "taskType": "application",
-        "modelAnswer": "Dear Chris,\nI'm writing to share with you an art class I had in a park last Friday.\nOur teacher led us to a quiet corner by the lake and let us paint whatever caught our eye. I chose an old willow tree leaning over the water, with a few ducks swimming beneath it. At first I struggled to mix the green, but after trying again and again, I got the soft colour I wanted. When I added the ripples around the ducks, the whole picture came alive.\nPainting outdoors taught me something the classroom never could: I rarely stop to really look at the ordinary things around me. That willow had stood there for years, yet I had walked past it without truly seeing it. How I wish you had been there with me!\nYours,\nLi Hua",
+        "modelAnswer": "Dear Chris,\nI'm writing to share with you an art class I had in a park last Friday.\nInstead of copying pictures in the classroom, we sat on the grass and painted what we saw. I chose the small lake and finished a painting of it, with sunlight dancing on the water and boats resting by the bank. Our teacher liked its lively colours so much that she put it up in our classroom.\nMore importantly, the class taught me to slow down and notice the beauty around me. Nature, as I now see, is the best art teacher.\nHow I wish you had been there!\nYours,\nLi Hua",
         "highlightExpressions": [
           {
-            "text": "At first I struggled to mix the green, but after trying again and again, I got the soft colour I wanted.",
-            "note": "记叙类应用文的'过程小转折'框架：先点出一处困难，再用 after trying again and again 制造坚持，最后落到结果。把 mix the green / the soft colour 换成任意任务内容（如调试程序、学一道菜、练一个动作），就能让过程有画面、有起伏，避免流水账。"
+            "text": "Instead of copying pictures in the classroom, we sat on the grass and painted what we saw.",
+            "note": "Instead of doing... 对比开场，凸显这次经历的特别之处。迁移到任何「与往常不同」的活动分享：Instead of having class indoors, we... / Instead of reading about it, we tried it ourselves."
           },
           {
-            "text": "Painting outdoors taught me something the classroom never could:",
-            "note": "引出'感想/领悟'的高级框架句，比 I learned a lot 高一档。结构是 'X(这件事) taught me something Y(平时的场景) never could:'，冒号后直接说领悟。换成 This trip / The volunteer work taught me something textbooks never could 即可迁移到任何'分享经历+谈收获'的题。"
+            "text": "with sunlight dancing on the water and boats resting by the bank",
+            "note": "with + 名词 + doing 复合结构给画面加细节，dancing / resting 把静景写活。迁移：描写任何场景都可挂一串 with 结构：with music playing / with everyone laughing。"
           },
           {
-            "text": "That willow had stood there for years, yet I had walked past it without truly seeing it.",
-            "note": "用过去完成时 + yet 做对比，写'它一直在那儿、我却一直忽略'的反思，让感想从具体事物里长出来而不空泛。框架 'X had been there ..., yet I had ... without ...' 可迁移到任何'习以为常却被重新看见'的领悟。"
+            "text": "Our teacher liked its lively colours so much that she put it up in our classroom.",
+            "note": "so...that 结果句自然带出他人评价，替代干巴巴的 My painting was good。迁移：换动词即可用于任何成果反馈：enjoyed it so much that... / was so moved that...。"
           },
           {
-            "text": "How I wish you had been there with me!",
-            "note": "分享类邮件写给朋友的亲切结尾：wish + 过去完成虚拟语气，表达'真希望你也在'，自然拉近关系、邀请对方共情。换成 How I wish you could have seen it! 等即可用于一切向朋友分享经历的收尾，是得体、够得着的选择性必修级亮点（不堆砌、只用这一处）。"
+            "text": "the class taught me to slow down and notice the beauty around me",
+            "note": "无灵主语 + taught me to... 是写感想的高分框架，比 I think I learned... 紧凑有力。迁移：The trip / The experience / The failure taught me to...。"
+          }
+        ],
+        "reviewCard": {
+          "genre": "经历分享邮件（给英国朋友 Chris）",
+          "readerWant": "Chris 一眼读到：公园美术课上你画了什么、这堂课带给你什么",
+          "readerChecklist": [
+            "课是怎么上的（公园写生）",
+            "完成的作品",
+            "你的感想"
+          ],
+          "tense": "一般过去时叙事；感想句用一般现在时",
+          "points": [
+            "① 你完成的作品",
+            "② 你的感想"
+          ],
+          "value": "把课堂的新鲜和快乐分享给朋友——让 Chris 隔着信也看得见这堂课"
+        },
+        "reviewMarks": [
+          {
+            "grid": "genre",
+            "text": "I'm writing to share with you an art class I had in a park last Friday.",
+            "note": "判型落纸：分享经历的邮件开门见山——一句话点出何时何地一堂什么课，题目给定的首句承担的正是这个功能。"
+          },
+          {
+            "grid": "readerChecklist",
+            "text": "Instead of copying pictures in the classroom, we sat on the grass and painted what we saw.",
+            "note": "清单「课是怎么上的」落纸：先给场景，Chris 才看得懂后面的作品从哪来。"
+          },
+          {
+            "grid": "points",
+            "text": "I chose the small lake and finished a painting of it, with sunlight dancing on the water and boats resting by the bank.",
+            "note": "要点①「完成的作品」落纸：画了什么 + 两笔画面细节，一句写实。"
+          },
+          {
+            "grid": "tense",
+            "text": "Our teacher liked its lively colours so much that she put it up in our classroom.",
+            "note": "主时态落纸：上周五的事全程一般过去时（liked / put），叙事不跳档。"
+          },
+          {
+            "grid": "readerWant",
+            "text": "More importantly, the class taught me to slow down and notice the beauty around me.",
+            "note": "读者最想要的一句话落纸：要点②感想——这堂课改变了我什么，Chris 读到这句才算收到这封信的分量。"
           }
         ]
       }

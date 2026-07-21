@@ -5,7 +5,7 @@
     "group-2022-i-writing-application": {
       "writing": {
         "taskType": "application",
-        "modelAnswer": "Dear Caroline,\nI am Li Hua, host of Talk and Talk, an English programme broadcast every Friday afternoon by our school radio station. On behalf of all our listeners, I am writing to warmly invite you to be our guest for an interview.\nOur programme aims to widen students' horizons and improve their spoken English through relaxed conversations. We sincerely hope you could share your experience of studying abroad, a topic we are all genuinely curious about. As for the time, next Tuesday afternoon would be ideal, but please feel free to suggest another slot that suits you better.\nIt would be a great honour to have you join us. Looking forward to your reply.\nYours sincerely,\nLi Hua",
+        "modelAnswer": "Dear Caroline,\nI am Li Hua, host of Talk and Talk, an English programme broadcast every Friday afternoon by our school radio station. On behalf of all our listeners, I am writing to warmly invite you to be our guest for an interview.\nOur programme aims to help students see a wider world and improve their spoken English through relaxed conversations. We sincerely hope you could share your experience of studying abroad, a topic we are all genuinely curious about. As for the time, next Tuesday afternoon would be ideal, but please feel free to suggest another time that suits you better.\nIt would be a great honour to have you join us. Looking forward to your reply.\nYours sincerely,\nLi Hua",
         "highlightExpressions": [
           {
             "text": "On behalf of all our listeners, I am writing to warmly invite you to be our guest for an interview.",
@@ -16,7 +16,7 @@
             "note": "委婉请求 + 同位语点明价值。sincerely hope you could... 用情态过去式把请求说得客气；逗号后的同位语 a topic... 解释为何想请对方做这件事。迁移：share your experience of... 后接任意话题，同位语可换成 a skill / a story we'd love to learn。"
           },
           {
-            "text": "please feel free to suggest another slot that suits you better",
+            "text": "please feel free to suggest another time that suits you better",
             "note": "给对方时间/选择余地的得体让步句。please feel free to... 把决定权交给对方，that suits you better 定语从句体现体贴。迁移到任何需对方配合时间/方案的邮件：换成 choose a date / pick a way that suits you better。"
           },
           {
@@ -48,7 +48,7 @@
           },
           {
             "grid": "points",
-            "text": "Our programme aims to widen students' horizons and improve their spoken English through relaxed conversations.",
+            "text": "Our programme aims to help students see a wider world and improve their spoken English through relaxed conversations.",
             "note": "要点①「节目介绍」落纸：一句话说清节目是什么、为谁办。"
           },
           {
@@ -58,7 +58,7 @@
           },
           {
             "grid": "tense",
-            "text": "As for the time, next Tuesday afternoon would be ideal, but please feel free to suggest another slot that suits you better.",
+            "text": "As for the time, next Tuesday afternoon would be ideal, but please feel free to suggest another time that suits you better.",
             "note": "主时态卡格落纸：邀约用 would 情态把时间说得客气、留余地。"
           },
           {
