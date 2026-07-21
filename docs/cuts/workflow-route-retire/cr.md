@@ -7,11 +7,16 @@ Date: 2026-07-21
 
 ## Changed Scope
 
-- Reviewed `github/main` `1e8e11ed65d4942df02aa7b495722c10ef507a5c0`
-  through branch HEAD `087c8a5c6fa82ad2bd0be916c0dd6488405010ad`: 25 files
-  limited to collaboration rules, agent compatibility profiles, cut templates,
-  the artifact verifier/index, this cut's records, and deletion of
+- Round 1 reviewed `github/main`
+  `1e8e11ed65d4942df02aa7b495722c10ef507a5c0` through branch HEAD
+  `087c8a5c6fa82ad2bd0be916c0dd6488405010ad`: 25 files limited to
+  collaboration rules, agent compatibility profiles, cut templates, the
+  artifact verifier/index, this cut's records, and deletion of
   `.claude/workflows/cut-pipeline.js`.
+- Round 2 reviewed the 13-file fix delta
+  `160fed5fd3c5286b4e1ec7052bf0425868faf42c...bd91c21b4ea343efe52eb844c38db73698c12b6a`
+  and the full 26-file current diff from the same `github/main` baseline through
+  HEAD `bd91c21b4ea343efe52eb844c38db73698c12b6a`.
 - No diff under `app/`, `server/`, `schemas/`, `data/`, `.github/workflows/`,
   `docs/STATUS.md`, or the applied-writing worktree/scope.
 
@@ -63,6 +68,27 @@ Date: 2026-07-21
     consume the recommendation and close every Must Fix rather than treat the
     artifact-gate PASS as a merge verdict.
 
+## Round 2 Disposition
+
+- **MF-1 CLOSED.** Both steering files now defer PA routing to `AGENTS.md` and
+  state that Large or irreversible work requires fresh PA, with only the
+  Dispatch-map PA-lite downgrade cases allowed.
+- **MF-2 CLOSED.** Historical compatibility now correctly maps records naming
+  小川 to 阿澈 wearing the matching hat.
+- **MF-3 CLOSED.** `pa-persona.md` removes the same-context waiver and states
+  that fresh PM/PA separation has no prose exception.
+- **MF-4 CLOSED.** Current non-`AGENTS.md` rule, persona, compatibility-profile,
+  and template surfaces point to the authoritative tier table rather than
+  copying exact Sol/Terra + effort values. Dispatch explicitly includes role
+  upgrade exceptions through that pointer; Claude frontmatter remains valid.
+- **MF-5 CLOSED.** `cut-note.md` now contains every protocol-required field:
+  shipped/pending status, deliberate exclusions, wrong assumptions,
+  verify/browser-QA disposition, follow-up/watch, dates, review rounds, and
+  Must-Fix count.
+- **Additional focus CLOSED.** Big CR now writes and updates canonical
+  `docs/cuts/<CUT>/cr.md`, preserving prior findings and blind spots. No new
+  Must Fix was found. **Open Must Fix: 0.**
+
 ## Self-Review Blind Spots
 
 - Per assignment, CR did not repeat `pnpm -C app run verify:all` or `tsc`; the
@@ -94,6 +120,28 @@ Date: 2026-07-21
 - Other: PM-reported full `verify:all` PASS 84 / SKIP 1 / FAIL 0; not repeated
   by CR. Skip is the documented absent off-repo I16a fixture.
 
+### Round 2 Delta Evidence
+
+- Fetched `github/main`; baseline remained
+  `1e8e11ed65d4942df02aa7b495722c10ef507a5c0`; branch and DEV fix HEAD matched
+  the assignment; worktree was clean before Round 2 review.
+- Targeted current-surface scan: zero exact `Sol|Terra` tier/effort copies
+  outside `AGENTS.md` in `.claude/agents`, `docs/agents`, `docs/steering`, and
+  `docs/cuts/_templates`; no positive standard-cut `cut-pipeline` route; no
+  mandatory entrypoint rule; no Medium/Large CR-lite route.
+- Big CR template requires canonical `docs/cuts/<CUT_DIR>/cr.md` in its header,
+  output path, and absolute-path check; arbitrary `OUTPUT_FILE` is absent.
+- Ruby YAML parse: all four `.claude/agents/*.md` `model` values are scalar
+  strings in `opus|sonnet` (4/4 pass).
+- `node --check scripts/verify-cut-artifacts.mjs` exit 0.
+- Current cut artifact gate: PASS 3 / FAIL 0. Independent fixture remained
+  missing `cr.md` exit 1, whitespace-empty exit 1, non-empty exit 0.
+- `git diff --check 160fed5...bd91c21` and
+  `git diff --check github/main...HEAD` both exited 0.
+- Delta and full current diff contain no forbidden `app/`, `server/`,
+  `schemas/`, `data/`, `.github/workflows/`, `docs/STATUS.md`, or
+  applied-writing scope.
+
 ## Failure / Attack Angle
 
 - A future reversible Large cut can follow steering, skip the fresh PA required
@@ -101,13 +149,18 @@ Date: 2026-07-21
   persona's same-context exception. An irreversible cut can additionally be
   dispatched at `high` rather than `xhigh`. All three paths look compliant in
   isolation, so green verification would not expose the process regression.
+- **Round 2:** that attack path is closed: steering defers to the Dispatch map,
+  the same-context waiver is gone, and model/effort dispatch reads the complete
+  authoritative tier table. The remaining misuse case is SW-1: treating
+  artifact presence as approval despite the report verdict.
 
 ## Residual Risk
 
 - Runtime/product risk is negligible because the diff is docs/process-only.
-  Merge risk remains blocking until the five current-rule contradictions and
-  incomplete record above are corrected and cold-read again.
+  The five Round 1 blockers are closed. PM closeout should refresh the Cut Note's
+  round/disposition counters and plan DP-5 after this Round 2 approval; that is
+  closeout bookkeeping, not an open implementation Must Fix.
 
 ## Recommendation
 
-- **NOT MERGEABLE** — 5 Must Fix findings remain open.
+- **APPROVE** — Round 2 closes all 5 Round 1 Must Fix findings; open Must Fix: 0.
