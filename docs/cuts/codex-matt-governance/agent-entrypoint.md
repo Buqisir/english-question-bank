@@ -457,7 +457,7 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
 ## Fix Re-review Dispatch
 
 - Dispatch ID: `codex-matt-governance-fix-rereview-20260722-01`
-- State: `provisioning`
+- State: `release-authorized`
 - Expected base/head: `35ed4098b33ca31b5e9013508d2768ecde398bc1`
 - Pending-dispatch commit: `a30971d5fc80bd1795958d09158a4366067c07da`
 - Checkout: fresh isolated detached worktree
@@ -474,6 +474,14 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
 - Task creation: exactly one independently addressable fresh Codex task was
   created with explicit `model=gpt-5.6-sol` and `thinking=high`; write-held
   bootstrap is active.
+- Bootstrap proof: successor reported the exact isolated worktree and detached
+  pending-dispatch HEAD `a30971d5fc80bd1795958d09158a4366067c07da`, clean
+  state, and entrypoint-only read; no successor write was made.
+- Released predecessor-final HEAD: this commit; the ACTIVATE/RELEASE message
+  supplies its exact hash, and verification makes no later worktree write.
+- Predecessor closure: verification evidence and the sole re-review successor
+  entry are durable; this verification task waits only for activation
+  acknowledgement and never for the re-review result.
 - Output: `docs/cuts/codex-matt-governance/cr.md`
 - Authorization: exactly one fresh no-DEV-history formal re-review after
   verification result writeback; no implementation, QA, RM, merge, push,
