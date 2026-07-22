@@ -501,7 +501,7 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
 ## Fix DEV 2 Dispatch
 
 - Dispatch ID: `codex-matt-governance-fix2-dev-20260722-01`
-- State: `active`
+- State: `result-recorded`
 - Expected base/head: `076c1ff9ce46eb2933eee93ae7a782cfa945f2b1`
 - Pending-dispatch commit: `739c1d44582cdf052a968f3fef218a94050529e4`
 - Checkout: existing isolated detached worktree
@@ -545,15 +545,43 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
   result
 - Output: fixes limited to canonical re-review Must Fix R1-R3 and durable DEV
   evidence
+- Result commit: `8cb228e9ce51f147eda2188c93b6fdeb9144d103`
+- DEV self-check: `git diff --check` passed before the result commit; R1's
+  current-rule relay owners now point to fresh direct successors, and R2's live
+  entrypoint state names this task as the sole active role. R3 is reserved for
+  the fresh verification matrix and is not claimed as DEV verification.
 - Authorization: exactly one fresh fix-DEV task plus one fresh
   non-implementing verification successor after durable fix writeback; no
   CR/QA/RM/merge/push/production, product/runtime, scripts/workflows,
   skills/plugins/trackers, main-checkout, or applied-writing-lecture action
 
+## Fix DEV 2 Verification Dispatch
+
+- Dispatch ID: `codex-matt-governance-fix2-verification-20260722-01`
+- State: `dispatch-pending`
+- Expected base/head: `8cb228e9ce51f147eda2188c93b6fdeb9144d103`
+- Checkout: this isolated detached worktree
+  `/Users/huangxuewei/.codex/worktrees/governance-fix-rereview-20260722`
+- Next role: fresh non-implementing verification for the Fix DEV 2 exact head
+- Configured model: `gpt-5.6-terra`
+- Selected model: `gpt-5.6-terra`
+- Thinking: `medium`
+- Route reason: exact-head governance evidence and lifecycle matrix
+- Availability/substitution evidence: configured primary selected from the
+  finite `[gpt-5.6-terra]` eligibility set; no substitution
+- Output: append-only exact-head evidence in
+  `docs/cuts/codex-matt-governance/verification.md` and this task's own
+  lifecycle fields
+- One-successor authorization: exactly this fresh verification task after
+  durable Fix DEV 2 writeback; no other successor by Fix DEV 2
+- Authorization: verification only; no implementation, CR, QA, RM, merge,
+  push, production, scripts/workflows, product/runtime, server/schema/data,
+  skills/plugins/trackers, main-checkout, or applied-writing-lecture action
+
 ## Next Action
 
-Fix DEV 2 closes only canonical re-review Must Fix R1-R3, records its result,
-then creates exactly one fresh non-implementing verification successor under
-the write-held/final-commit/release protocol. After activation acknowledgement,
-Fix DEV 2 performs no later worktree write and exits without waiting for the
-verification result; no ancestor task resumes.
+Provision exactly one fresh write-held verification successor for the Fix DEV 2
+result, then record its readiness and release the predecessor-final commit.
+After the successor acknowledges activation, Fix DEV 2 performs no later
+worktree write and exits without waiting for the verification result; no
+ancestor task resumes.
