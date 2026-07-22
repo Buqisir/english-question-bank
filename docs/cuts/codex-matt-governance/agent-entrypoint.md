@@ -454,6 +454,25 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
   production, product/runtime, scripts/workflows, skills/plugins/trackers,
   main-checkout, or applied-writing-lecture action
 
+## Fix Re-review Dispatch
+
+- Dispatch ID: `codex-matt-governance-fix-rereview-20260722-01`
+- State: `dispatch-pending`
+- Expected base/head: `35ed4098b33ca31b5e9013508d2768ecde398bc1`
+- Next role: fresh formal re-review; no DEV history
+- Configured model: `gpt-5.6-sol`
+- Selected model: `gpt-5.6-sol`
+- Thinking: `high`
+- Route reason: the plan's Fresh CR / re-review / RM route requires Sol/high;
+  this successor must cold-read the fix and the fresh verification evidence.
+- Availability/substitution evidence: configured primary selected; finite
+  same-family/same-grade candidate set is `[gpt-5.6-sol]`; no substitution.
+- Output: `docs/cuts/codex-matt-governance/cr.md`
+- Authorization: exactly one fresh no-DEV-history formal re-review after
+  verification result writeback; no implementation, QA, RM, merge, push,
+  production, scripts/workflows, product/runtime, server/schema/data,
+  skills/plugins/trackers, main-checkout, or applied-writing-lecture action.
+
 ## Next Action
 
 Wait for the sole write-held verification successor's bootstrap acknowledgement,
