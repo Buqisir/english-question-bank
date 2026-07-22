@@ -12,9 +12,8 @@
 
 ## Current Stage
 
-**The top-level fresh formal re-review recorded `NOT MERGEABLE`; its initial
-Fix DEV creation failed before task creation, and the one bounded corrected
-retry is dispatch-pending.**
+**The top-level fresh formal re-review recorded `NOT MERGEABLE`; its sole
+top-level fresh Fix DEV successor is release-authorized under write hold.**
 
 The manual-fallback Fix DEV 3 task and its mistakenly spawned verification
 subagent are write-closed. The verification subagent completed valid exact-head
@@ -772,11 +771,10 @@ create any later relay task.
 
 ## Next Action
 
-Create the one bounded corrected Fix DEV retry from the valid dedicated ref
-recorded below, then obtain its bootstrap readiness proof. It must remain
-write-held until this re-review's final release commit, repair only canonical
-R2-R3, hand to one top-level fresh verification successor, and exit without
-waiting for the verification result.
+Activate exactly the release-authorized Fix DEV successor below. It must adopt
+and re-prove this predecessor-final commit, record a machine-current first-write
+activation, repair only canonical R2-R3, hand to one top-level fresh
+verification successor, and exit without waiting for the verification result.
 
 ## Topology Recovery Record
 
@@ -831,14 +829,14 @@ waiting for the verification result.
 - Result artifact: `docs/cuts/codex-matt-governance/cr.md`
 - Result commit: `4659073b8b17249d73a318f0d951f9efc1e882c7`
 - Verdict: `NOT MERGEABLE`; two unresolved Must Fix findings R2-R3
-- Role result state: `result-recorded`; this task remains sole writer only
-  through the direct successor's write-held provisioning and release
+- Role result state: `closed` by the final release-authorizing commit below;
+  this task performs no later repository write
 
 ## Top-level Fix DEV 4 Dispatch
 
 - Dispatch ID:
   `codex-matt-governance-fix4-top-level-dev-20260722-01`
-- State: `dispatch-pending`
+- State: `release-authorized`
 - Project: `english-question-bank`
 - Source branch/ref: `codex/codex-matt-governance`
 - Expected result base:
@@ -876,6 +874,23 @@ waiting for the verification result.
 - Task creation: the initial call passed explicit `model=gpt-5.6-terra` and
   `thinking=medium` but failed before a thread existed; exactly one bounded
   corrected retry is authorized after the no-child proof above
+- Corrected retry queued entry:
+  `client-new-thread:3a40e6ec-c51a-4793-af5f-2c7ab696d0e4`
+- Returned top-level task:
+  `019f8ae9-1ed5-7a92-9f64-0ee0d92a0dac` (`local`)
+- Successor worktree:
+  `/Users/huangxuewei/.codex/worktrees/1b94/english-question-bank`
+- Bootstrap proof: successor reported clean detached HEAD
+  `f00e76a6630ac333bbfc16cbb9b6f81594aab64c`, read only this entrypoint,
+  made no edit or other repository read, and remains write-held
+- Release record: this predecessor's final worktree commit; ACTIVATE/RELEASE
+  carries its exact hash and this re-review performs no later repository write
+- Released predecessor-final HEAD: this commit; the exact hash is supplied in
+  ACTIVATE/RELEASE and recorded by the successor in its first-write activation
+- Predecessor closure: canonical verdict, failed initial creation evidence,
+  corrected sole successor entry, and bootstrap proof are durable; this
+  re-review ends after the successor's activation acknowledgement and never
+  waits for the Fix DEV result
 - Output: activation and bounded correction in
   `docs/cuts/codex-matt-governance/agent-entrypoint.md`, plus the reusable
   `docs/cuts/_templates/agent-entrypoint.md` lifecycle contract only if needed;
