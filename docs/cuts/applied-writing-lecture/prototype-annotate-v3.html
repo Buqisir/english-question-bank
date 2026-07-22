@@ -352,6 +352,15 @@
 
     .variant-label { padding: 0 10px; text-align: center; font-size: 11px; }
     .variant-label b { margin-right: 5px; color: #2f8161; }
+    .variant-decision {
+      margin-left: 7px;
+      padding: 2px 6px;
+      color: #796f68;
+      background: #f1efec;
+      border-radius: 999px;
+      font-size: 9px;
+    }
+    .variant-decision.selected { color: #267a5b; background: #e8f2ed; }
 
     @media (max-width: 1260px) {
       .shell { grid-template-columns: 64px var(--paper-width); }
@@ -446,7 +455,7 @@
 
   <div class="variant-switcher" aria-label="原型布局切换">
     <button id="variantPrev" type="button" aria-label="上一种布局">←</button>
-    <div class="variant-label"><b id="variantKey">A</b><span id="variantName">全局空白求交</span></div>
+    <div class="variant-label"><b id="variantKey">A</b><span id="variantName">全局空白求交</span><span class="variant-decision selected" id="variantDecision">中选</span></div>
     <button id="variantNext" type="button" aria-label="下一种布局">→</button>
   </div>
 
@@ -486,14 +495,17 @@
     const VARIANTS = {
       A: {
         name: '全局空白求交',
+        decision: '中选',
         copy: '先让近处批注就近落笔，再在整张白纸内联合安排其余批注；宁可轻移批注，也不无故拉长箭头。'
       },
       B: {
         name: '页边车道优先',
+        decision: '落选',
         copy: '目标附近有空槽时仍就近落笔；其余批注优先送到答题框外、白纸以内的左右页边。'
       },
       C: {
         name: '锚句近邻优先',
+        decision: '落选',
         copy: '优先使用句尾和段末空槽，把批注压到对应英文附近；箭头最短，但页面会更活泼、更密。'
       }
     };
@@ -1190,7 +1202,10 @@
       const meta = VARIANTS[variant];
       document.getElementById('variantKey').textContent = variant;
       document.getElementById('variantName').textContent = meta.name;
-      document.getElementById('algorithmTitle').textContent = `${variant} · ${meta.name}`;
+      const decision = document.getElementById('variantDecision');
+      decision.textContent = meta.decision;
+      decision.classList.toggle('selected', meta.decision === '中选');
+      document.getElementById('algorithmTitle').textContent = `${variant} · ${meta.name} · ${meta.decision}`;
       document.getElementById('algorithmCopy').textContent = meta.copy;
       const url = new URL(location.href);
       url.searchParams.set('variant', variant);

@@ -134,11 +134,17 @@ not silently cover essay text or allow crossed leaders.
 
 ## Rendering boundary
 
-This cut changes placement, not ink style. The existing rendering remains:
+The accepted ink behavior keeps annotation marks varied without making their
+meaning ambiguous:
 
-- under 20 px: one-stroke pointing flick;
-- approximately 20–46 px: short asymmetric leader;
-- farther away: single shallow leader with a one-sided head;
+- every annotation independently receives either a plain leader or an arrow;
+- the choice is deterministic for the current layout seed and may change only
+  after “重新寻位” changes that seed;
+- when an arrow is used, it always points from the English source toward the
+  Chinese annotation;
+- plain leaders keep no arrowhead and remain intentionally lightweight;
+- extremely short connections use a compact hand-drawn leader so the mark is
+  still visible at normal scale;
 - no elbows, S curves, symmetric technical heads, or underline extensions.
 
 ## Acceptance
@@ -164,3 +170,10 @@ At the current 1470 × 719 browser viewport with `?variant=A`:
 - No additional variants, interactions, animation, persistence, or geometry
   library.
 - No hard-coded coordinates or label-specific placement rules.
+
+## QA verdict
+
+Owner QA passed on 2026-07-21. Variant A, “全局空白求交”, is selected.
+Variants B and C are rejected. The accepted prototype keeps all annotations
+always visible across two pages, uses Xiaolai SC for Chinese and Shantell Sans
+for English, and mixes plain leaders with arrows that point toward annotations.
