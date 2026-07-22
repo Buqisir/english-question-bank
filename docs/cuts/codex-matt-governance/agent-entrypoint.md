@@ -142,7 +142,7 @@ business code, or change the `applied-writing-lecture` worktree.
 ## PA Recheck Dispatch
 
 - Dispatch ID: `codex-matt-governance-pa3-20260722-01`
-- State: `release-authorized`
+- State: `active`
 - Project: `local-8a1aff1b944a0aa921d1f6b55296afd6`
 - Checkout: existing worktree
   `/Users/huangxuewei/Projects/wt-codex-matt-governance`
@@ -175,9 +175,14 @@ business code, or change the `applied-writing-lecture` worktree.
 - Release record: this is the predecessor's final worktree commit; the
   ACTIVATE/RELEASE message carries its exact hash, and the predecessor performs
   no later worktree write
-- Activation state: successor must re-prove the released exact HEAD and clean
-  state, then use its first permitted write to record `active` plus sole-writer
-  proof durably before acknowledging activation
+- Released predecessor-final HEAD:
+  `9974a5c52fbc521956303ae388568d497458c2bb`
+- Activation proof: successor re-proved the exact worktree, branch
+  `codex/codex-matt-governance`, released predecessor-final HEAD above, and a
+  clean state before its first permitted write
+- Sole-writer state: acquired; predecessor is write-closed and this PA recheck
+  is the only active writer in the shared worktree
+- Activation record: this commit
 - Output: append-only recheck in
   `docs/cuts/codex-matt-governance/pa.md`
 - Authorization: one PA recheck plus exactly one in-scope direct successor
