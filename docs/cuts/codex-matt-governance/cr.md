@@ -385,3 +385,139 @@ failures as compliant.
 then repeat fresh exact-head verification and a fresh no-DEV-history re-review.
 No browser or owner QA is required. Do not route to RM until the canonical CR
 has zero Must Fix findings.
+
+---
+
+## Fix DEV 2 Re-review — 2026-07-22
+
+Role: fresh formal re-review; no DEV history and no implementation performed
+
+- Re-review activation: `bf6842c0952c927753c01943e37c3305f64839b0`
+- Released verification predecessor-final HEAD:
+  `c140afbf0acce3e88d560430c8299e5bbd59589a`
+- Reviewed Fix DEV 2 result:
+  `8cb228e9ce51f147eda2188c93b6fdeb9144d103`
+- Exact fix diff:
+  `git diff 076c1ff9ce46eb2933eee93ae7a782cfa945f2b1..8cb228e9ce51f147eda2188c93b6fdeb9144d103`
+- Evidence input: `Fix DEV 2 exact-head verification` in `verification.md`,
+  including every recorded failure
+
+### Verdict
+
+**NOT MERGEABLE — 3 unresolved Must Fix findings.**
+
+Fix DEV 2 stayed inside the ratified documentation allowlist and corrected the
+headline QA/RM ownership statements it touched. It did not remove all current
+positive ancestor/PM+RM ownership, the fresh verifier recorded the live
+lifecycle smoke red, and both required integration commands are red. The
+verification matrix therefore cannot close R1-R3 or DP-6.
+
+### Changed Scope
+
+- Fix delta: five documentation/current-rule paths, all allowed by `plan.md`.
+- Forbidden product/runtime, scripts/workflows, skills/plugins/trackers,
+  production, main checkout, and `applied-writing-lecture` scopes: untouched.
+- No application, schema, data-contract, or user-visible behavior changed.
+
+### Findings
+
+#### Must Fix R1 — Current positive rules still revive the ancestor PM/RM owner
+
+The changed headline rules now assign QA and RM to fresh direct successors, but
+other current executable instructions still say the opposite:
+
+- `docs/agents/review-levels.md:29` says the orchestrator resumes after PA to
+  compress the plan, rather than PA handing to a fresh PM plan-revision task;
+  `:83-84` assigns sampled browser QA to the main agent; and `:107-112`
+  explicitly says 阿澈 wears PM / UI-direction / RM.
+- `docs/agents/pa-persona.md:13-17` and
+  `docs/agents/cr-persona.md:26-29` still declare that 阿澈 wears the PM / RM
+  hats. These are active personas, not historical records.
+- `docs/steering/README.md:131-135` still routes the completion protocol as a
+  DEV-subagent report surface without limiting that wording to role-internal
+  assistance.
+
+These statements conflict with HR-6/HR-10 and the fresh-direct-RM law now added
+to `AGENTS.md`. They also falsify `verification.md:143-145`, whose relay scan
+and authority map report PASS without accounting for these current surfaces.
+R1 is not closed.
+
+#### Must Fix R2 — The live lifecycle smoke remains red
+
+The verifier bound its evidence to Fix DEV 2 and explicitly records at
+`verification.md:147` that the top-level Current Stage, Must Read, Stage
+Contract, and Next Action still named Fix DEV 2/provisioning while verification
+was active. Inspection of released predecessor-final
+`cfa316391de64b1dde0af20e05e5f681a2fd5f6e` confirms that mismatch: its
+top-level stage still calls Fix DEV 2 the sole writer and its Next Action still
+asks to provision/release the already-active verifier.
+
+That is the exact HR-2/HR-7/HR-10 failure R2 required the fix to remove. Later
+append-only dispatch blocks do not turn the failed transition into a green live
+smoke. The next fix must make each released/activated frontier yield one current
+role and one unique next action, then obtain fresh recorded lifecycle evidence.
+
+#### Must Fix R3 — Required verification is red and contains false-positive passes
+
+The fresh evidence records:
+
+- `pnpm -C app exec tsc --noEmit` -> raw exit `254`, FAIL (`tsc` unavailable);
+- `pnpm -C app run verify:all` -> raw exit `1`, FAIL (preflight typecheck exit
+  `127`);
+- live lifecycle -> FAIL; and
+- relay ownership / authority-map -> PASS despite the R1 contradictions above.
+
+The plan requires real green exact-head integration proof plus a truthful
+current-positive scan, cross-file authority map, and live lifecycle smoke.
+Missing dependencies explain the command failures but do not waive them;
+ordinary environment failure stays in the repair/verification loop. R3 remains
+open until the rules/lifecycle are corrected and a fresh verifier records the
+full matrix and integration commands green against the new head.
+
+### Standards
+
+Hard violations: R1 preserves contradictory current authorities for relay
+ownership; R2 leaves the executable routing artifact unable to name one live
+frontier; R3 presents red and factually incomplete proof. Judgment-call smell:
+the same PM/RM ownership fact remains duplicated across constitutional,
+review-level, persona, and steering files and has drifted again.
+
+### Spec
+
+All three assigned requirements remain partial. There is no scope creep or
+forbidden-surface change. The Fix DEV 2 edits are directionally correct, but
+they do not satisfy canonical R1-R3 or the plan's verification contract.
+
+### Verification / Attack Evidence
+
+- Merge base `076c1ff..8cb228e` -> exact `076c1ff...`.
+- `git diff --check 076c1ff..8cb228e` -> PASS, exit `0`.
+- Changed-path allowlist -> PASS; five of five paths allowed.
+- Exact model authority and changed-link resolution -> accepted from fresh
+  evidence; no contrary attack finding.
+- Current-positive relay/authority attack -> FAIL; see R1.
+- Live lifecycle -> FAIL in fresh evidence; see R2.
+- `tsc` / full `verify:all` -> FAIL in fresh evidence; see R3.
+- Browser/owner QA -> not required for this docs-only governance cut.
+
+A future task can still read an active persona or review-level rule, retain a
+PM/RM ancestor through release, and believe it followed the repository. It can
+also trust the green authority-map row even though the cited current positive
+rules contradict it, or route from a stale top-level Next Action.
+
+### Self-Review Blind Spots / Follow-up Gate
+
+- This re-review did not install dependencies or duplicate the failed full
+  suite; the plan assigns repair and new exact-head evidence to the next
+  fix/verification loop.
+- RM must still create non-empty `cut-note.md` and run the Large artifact gate
+  after, and only after, canonical CR reaches zero Must Fix.
+
+### Recommendation
+
+**NOT MERGEABLE.** Create exactly one fresh fix-DEV successor bounded to
+R1-R3. It must reconcile every current positive PM/RM/DEV-relay owner, repair
+the live frontier fields without rewriting historical evidence, and restore
+the normal worktree dependencies needed by fresh verification. Then run one
+fresh exact-head verification and one fresh no-DEV-history re-review. Do not
+route to RM yet; browser and owner QA remain not required.

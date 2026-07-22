@@ -12,16 +12,16 @@
 
 ## Current Stage
 
-**Fresh formal re-review is write-held after Fix DEV 2 verification recorded
-its exact-head evidence; it becomes sole writer only after this final release
-commit and its durable activation.**
+**Fresh formal re-review recorded `NOT MERGEABLE`; exactly one fresh Fix DEV 3
+successor is the unique next role for unresolved R1-R3.**
 
 Fix DEV 2 result `8cb228e9ce51f147eda2188c93b6fdeb9144d103` has fresh
-verification evidence in `verification.md`: routing/authority/link/scope
-checks passed, while dependency-dependent integration proof and the prior live
-lifecycle check are recorded red. The re-review alone cold-reads those facts
-and writes the next canonical verdict. No implementation, QA, RM, merge, push,
-production, workflow/script, skill/plugin/tracker, main-checkout, or
+verification evidence in `verification.md`. Canonical `cr.md` now records that
+current positive PM/RM ownership still conflicts, the live lifecycle is red,
+and required `tsc` / full-suite evidence is red. This re-review may create only
+one bounded fresh Fix DEV 3 successor and then exits after durable activation
+acknowledgement. No implementation, QA, RM, merge, push, production,
+workflow/script, skill/plugin/tracker, main-checkout, or
 applied-writing-lecture action is authorized.
 
 ## Must Read
@@ -597,7 +597,7 @@ change the `applied-writing-lecture` worktree.
 ## Fix DEV 2 Verification Re-review Dispatch
 
 - Dispatch ID: `codex-matt-governance-fix2-verification-rereview-20260722-01`
-- State: `active`
+- State: `result-recorded`
 - Expected base/head: `8cb228e9ce51f147eda2188c93b6fdeb9144d103`
 - Checkout: this isolated detached worktree
   `/Users/huangxuewei/.codex/worktrees/governance-fix-rereview-20260722`
@@ -618,7 +618,6 @@ change the `applied-writing-lecture` worktree.
 - Bootstrap proof: successor reported this exact isolated worktree, detached
   pending-dispatch HEAD `1400ea88af8686fb52e4bb8b65bf5ba89cb7c69c`, clean
   state, and entrypoint-only read; no successor write was made.
-- State: `release-authorized`.
 - Release record: this predecessor-final commit; ACTIVATE/RELEASE carries its
   exact hash, and verification makes no later worktree write.
 - Released predecessor-final HEAD:
@@ -627,7 +626,13 @@ change the `applied-writing-lecture` worktree.
   and clean state re-proved before the first permitted write.
 - Sole-writer state: acquired; verification is write-closed and this fresh
   formal re-review is the only active writer in the isolated worktree.
-- Activation record: this commit.
+- Activation record: `bf6842c0952c927753c01943e37c3305f64839b0`.
+- Reviewed Fix DEV 2 result:
+  `8cb228e9ce51f147eda2188c93b6fdeb9144d103`.
+- Verdict: `NOT MERGEABLE`; three unresolved Must Fix findings R1-R3.
+- Result commit: this commit.
+- Role result state: `result-recorded`; exactly one fresh Fix DEV 3 successor
+  is required by the canonical verdict and plan relay table.
 - Predecessor closure: verification evidence and the sole re-review successor
   entry are durable; verification waits only for activation acknowledgement,
   never for the re-review result.
@@ -636,7 +641,7 @@ change the `applied-writing-lecture` worktree.
 
 ## Next Action
 
-Release the one recorded fresh formal re-review successor with this exact
-predecessor-final commit. After activation acknowledgement, this verification
-task performs no later worktree write and exits without waiting for the
-re-review result; no ancestor task resumes.
+Create exactly one fresh Fix DEV 3 successor bounded to canonical R1-R3 under
+the write-held/final-commit/release protocol. After its durable activation
+acknowledgement, this re-review performs no later worktree write and exits
+without waiting for the fix result; no ancestor task resumes.
