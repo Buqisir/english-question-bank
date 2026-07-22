@@ -1080,22 +1080,42 @@
       return `M ${wing.x} ${wing.y} Q ${control.x} ${control.y}, ${tx} ${ty}`;
     }
 
-    function microArrow(route, seed) {
-      const dx = route.tip.x - route.start.x;
-      const dy = route.tip.y - route.start.y;
-      const chord = Math.max(1, Math.hypot(dx, dy));
-      const direction = { x: dx / chord, y: dy / chord };
+    function microArrow(route, noteRect, seed) {
+      const noteCenter = {
+        x: (noteRect.left + noteRect.right) / 2,
+        y: (noteRect.top + noteRect.bottom) / 2
+      };
+      const vertical = route.tip.y >= noteRect.bottom || route.tip.y <= noteRect.top;
+      const lead = vertical
+        ? {
+            x: route.tip.x + (noteCenter.x >= route.tip.x ? 15 : -15),
+            y: route.tip.y + (route.tip.y >= noteRect.bottom ? 2.8 : -2.8)
+          }
+        : {
+            x: route.tip.x + (noteCenter.x >= route.tip.x ? 21 : -21),
+            y: noteCenter.y <= route.tip.y
+              ? Math.max(route.tip.y + 4, noteRect.bottom + 3)
+              : Math.min(route.tip.y - 4, noteRect.top - 3)
+          };
+      const dx = route.tip.x - lead.x;
+      const dy = route.tip.y - lead.y;
+      const length = Math.max(1, Math.hypot(dx, dy));
+      const direction = { x: dx / length, y: dy / length };
       const normal = { x: -direction.y, y: direction.x };
       const side = seed % 2 ? 1 : -1;
-      const wing = {
-        x: route.tip.x - direction.x * 2.6 + normal.x * side * 7.4,
-        y: route.tip.y - direction.y * 2.6 + normal.y * side * 7.4
+      const shaftControl = {
+        x: (lead.x + route.tip.x) / 2 + normal.x * side * 1.4,
+        y: (lead.y + route.tip.y) / 2 + normal.y * side * 1.4
       };
-      const control = {
+      const wing = {
+        x: route.tip.x - direction.x * 5.2 + normal.x * side * 3.2,
+        y: route.tip.y - direction.y * 5.2 + normal.y * side * 3.2
+      };
+      const wingControl = {
         x: (wing.x + route.tip.x) / 2 + normal.x * side * .8,
         y: (wing.y + route.tip.y) / 2 + normal.y * side * .8
       };
-      return `${route.d} Q ${control.x} ${control.y}, ${wing.x} ${wing.y}`;
+      return `M ${lead.x} ${lead.y} Q ${shaftControl.x} ${shaftControl.y}, ${route.tip.x} ${route.tip.y} Q ${wingControl.x} ${wingControl.y}, ${wing.x} ${wing.y}`;
     }
 
     function drawUnderline(rects, seed) {
@@ -1118,10 +1138,10 @@
     function drawLeader(placement, order) {
       const route = placement.slot.route;
       const flick = route.mode === 'flick';
-      const micro = flick && route.length < 10;
+      const micro = flick && route.length < 8;
       const arc = makePath(
-        micro ? microArrow(route, order) : route.d,
-        micro ? 1.56 : flick ? 1.48 : route.near ? 1.12 : 1.22,
+        micro ? microArrow(route, placement.slot.rect, order) : route.d,
+        micro ? 1.64 : flick ? 1.48 : route.near ? 1.12 : 1.22,
         ink,
         micro ? 'leader-arc leader-flick leader-micro' : flick ? 'leader-arc leader-flick' : 'leader-arc'
       );
