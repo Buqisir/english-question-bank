@@ -1148,8 +1148,7 @@
       const route = placement.slot.route;
       const flick = route.mode === 'flick';
       const micro = flick && route.length < 8;
-      const primaryReviewNote = pageIndex === 0 && placement.entry.index === 0;
-      const arrowed = primaryReviewNote || micro || (placement.entry.index * 5 + pageIndex + layoutSeed) % 3 === 0;
+      const arrowed = (placement.entry.index * 5 + pageIndex + layoutSeed) % 3 === 0;
       const microPath = micro ? microLeader(placement.slot.rect, placement.entry.anchorRects, order) : null;
       const arc = makePath(
         micro ? microPath.shaft : route.d,
