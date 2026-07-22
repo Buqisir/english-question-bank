@@ -1064,63 +1064,66 @@
       return path;
     }
 
-    function arrowFlick(tx, ty, fromX, fromY, seed) {
-      const angle = Math.atan2(ty - fromY, tx - fromX);
-      const side = seed % 2 ? 1 : -1;
-      const length = 8.2 + (seed % 3) * .65;
-      const spread = .56 * side;
-      const wing = {
-        x: tx - length * Math.cos(angle + spread),
-        y: ty - length * Math.sin(angle + spread)
+    function openArrowHead(tip, from, seed) {
+      const dx = tip.x - from.x;
+      const dy = tip.y - from.y;
+      const length = Math.max(1, Math.hypot(dx, dy));
+      const direction = { x: dx / length, y: dy / length };
+      const normal = { x: -direction.y, y: direction.x };
+      const hand = seed % 2 ? .35 : -.25;
+      const wingA = {
+        x: tip.x - direction.x * 5.8 + normal.x * (3 + hand),
+        y: tip.y - direction.y * 5.8 + normal.y * (3 + hand)
       };
-      const control = {
-        x: (wing.x + tx) / 2 + Math.cos(angle + Math.PI / 2) * side * 1.2,
-        y: (wing.y + ty) / 2 + Math.sin(angle + Math.PI / 2) * side * 1.2
+      const wingB = {
+        x: tip.x - direction.x * 5 - normal.x * (2.6 - hand),
+        y: tip.y - direction.y * 5 - normal.y * (2.6 - hand)
       };
-      return `M ${wing.x} ${wing.y} Q ${control.x} ${control.y}, ${tx} ${ty}`;
+      return `M ${wingA.x} ${wingA.y} Q ${(wingA.x + tip.x) / 2} ${(wingA.y + tip.y) / 2}, ${tip.x} ${tip.y} Q ${(wingB.x + tip.x) / 2} ${(wingB.y + tip.y) / 2}, ${wingB.x} ${wingB.y}`;
     }
 
-    function microArrow(route, noteRect, seed) {
+    function microLeader(noteRect, anchorRects, seed) {
       const noteCenter = {
         x: (noteRect.left + noteRect.right) / 2,
         y: (noteRect.top + noteRect.bottom) / 2
       };
-      const horizontal = Math.abs(noteCenter.x - route.tip.x) >= Math.abs(noteCenter.y - route.tip.y);
-      const tip = { ...route.tip };
-      if (horizontal) tip.x += noteCenter.x >= route.tip.x ? -5.5 : 5.5;
-      else tip.y += noteCenter.y >= route.tip.y ? -5.5 : 5.5;
-      const lead = !horizontal
+      const anchor = anchorRects.reduce((best, rect) => rectGap(noteRect, rect) < rectGap(noteRect, best) ? rect : best);
+      const anchorCenter = {
+        x: (anchor.left + anchor.right) / 2,
+        y: (anchor.top + anchor.bottom) / 2
+      };
+      const horizontal = Math.abs(noteCenter.x - anchorCenter.x) >= Math.abs(noteCenter.y - anchorCenter.y);
+      const source = horizontal
         ? {
-            x: tip.x + (noteCenter.x >= tip.x ? 7 : -7),
-            y: tip.y + (noteCenter.y >= tip.y ? 19 : -19)
+            x: noteCenter.x >= anchorCenter.x ? anchor.right : anchor.left,
+            y: anchor.bottom + 1.5
           }
         : {
-            x: tip.x + (noteCenter.x >= tip.x ? 19 : -19),
-            y: noteCenter.y <= tip.y
-              ? Math.max(tip.y + 8, noteRect.bottom + 7)
-              : Math.min(tip.y - 8, noteRect.top - 7)
+            x: clamp(noteCenter.x, anchor.left + 5, anchor.right - 5),
+            y: noteCenter.y >= anchorCenter.y ? anchor.bottom + 1.5 : anchor.top - 1.5
           };
-      const dx = tip.x - lead.x;
-      const dy = tip.y - lead.y;
+      const end = horizontal
+        ? {
+            x: noteCenter.x >= anchorCenter.x ? noteRect.left - 2 : noteRect.right + 2,
+            y: noteCenter.y <= source.y ? noteRect.bottom + 2 : noteRect.top - 2
+          }
+        : {
+            x: noteCenter.x <= source.x ? noteRect.right + 2 : noteRect.left - 2,
+            y: noteCenter.y >= anchorCenter.y ? noteRect.top - 2 : noteRect.bottom + 2
+          };
+      const dx = end.x - source.x;
+      const dy = end.y - source.y;
       const length = Math.max(1, Math.hypot(dx, dy));
-      const direction = { x: dx / length, y: dy / length };
-      const normal = { x: -direction.y, y: direction.x };
+      const normal = { x: -dy / length, y: dx / length };
       const side = seed % 2 ? 1 : -1;
-      const shaftControl = {
-        x: (lead.x + tip.x) / 2 + normal.x * side * 1.1,
-        y: (lead.y + tip.y) / 2 + normal.y * side * 1.1
-      };
-      const wingA = {
-        x: tip.x - direction.x * 5.8 + normal.x * 3.1,
-        y: tip.y - direction.y * 5.8 + normal.y * 3.1
-      };
-      const wingB = {
-        x: tip.x - direction.x * 4.9 - normal.x * 2.7,
-        y: tip.y - direction.y * 4.9 - normal.y * 2.7
+      const control = {
+        x: (source.x + end.x) / 2 + normal.x * side,
+        y: (source.y + end.y) / 2 + normal.y * side
       };
       return {
-        shaft: `M ${lead.x} ${lead.y} Q ${shaftControl.x} ${shaftControl.y}, ${tip.x} ${tip.y}`,
-        head: `M ${wingA.x} ${wingA.y} Q ${(wingA.x + tip.x) / 2} ${(wingA.y + tip.y) / 2}, ${tip.x} ${tip.y} Q ${(wingB.x + tip.x) / 2} ${(wingB.y + tip.y) / 2}, ${wingB.x} ${wingB.y}`
+        shaft: `M ${source.x} ${source.y} Q ${control.x} ${control.y}, ${end.x} ${end.y}`,
+        end,
+        control
       };
     }
 
@@ -1145,9 +1148,11 @@
       const route = placement.slot.route;
       const flick = route.mode === 'flick';
       const micro = flick && route.length < 8;
-      const microPaths = micro ? microArrow(route, placement.slot.rect, order) : null;
+      const primaryReviewNote = pageIndex === 0 && placement.entry.index === 0;
+      const arrowed = primaryReviewNote || micro || (placement.entry.index * 5 + pageIndex + layoutSeed) % 3 === 0;
+      const microPath = micro ? microLeader(placement.slot.rect, placement.entry.anchorRects, order) : null;
       const arc = makePath(
-        micro ? microPaths.shaft : route.d,
+        micro ? microPath.shaft : route.d,
         micro ? 1.4 : flick ? 1.48 : route.near ? 1.12 : 1.22,
         ink,
         micro ? 'leader-arc leader-flick leader-micro' : flick ? 'leader-arc leader-flick' : 'leader-arc'
@@ -1157,12 +1162,12 @@
       arc.dataset.hits = String(route.hits);
       arc.dataset.near = String(route.near);
       arc.dataset.mode = route.mode;
-      arc.dataset.gesture = micro ? 'micro-arrow' : route.mode;
+      arc.dataset.gesture = arrowed ? 'arrow-to-note' : 'plain-line';
       arc.dataset.noteIndex = String(placement.entry.index);
-      if (micro) {
-        makePath(microPaths.head, 1.48, ink, 'leader-head leader-micro-head');
-      } else if (!flick) {
-        makePath(arrowFlick(route.tip.x, route.tip.y, route.control.x, route.control.y, order), 1.55, ink, 'leader-head');
+      if (arrowed) {
+        const end = micro ? microPath.end : route.start;
+        const from = micro ? microPath.control : route.control;
+        makePath(openArrowHead(end, from, order), 1.48, ink, 'leader-head');
       }
     }
 
