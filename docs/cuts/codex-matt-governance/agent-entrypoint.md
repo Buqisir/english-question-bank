@@ -221,7 +221,7 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
 ## DEV Dispatch
 
 - Dispatch ID: `codex-matt-governance-dev-20260722-01`
-- State: `provisioning`
+- State: `release-authorized`
 - Project: `local-8a1aff1b944a0aa921d1f6b55296afd6`
 - Checkout: existing worktree
   `/Users/huangxuewei/Projects/wt-codex-matt-governance`
@@ -433,6 +433,14 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
   from this dispatch, including the exact result commit above
 - One-successor authorization: exactly this verification task, then no further
   successor by fix DEV
+- Bootstrap proof: successor reported its isolated worktree, detached pending
+  head `49a3da95f72122ebaae8b80541f3a17cfd9b59e4`, clean state, entrypoint-only
+  read, and write-held readiness; no successor write was made
+- Release record: this predecessor-final commit; the ACTIVATE/RELEASE message
+  carries its exact hash, and fix DEV makes no later worktree write
+- Predecessor closure: fix result and sole verification successor entry are
+  durable; fix DEV waits only for activation acknowledgement, never for the
+  verification result
 - Output: fixes limited to canonical CR Must Fix 1-5 and durable DEV evidence
 - Authorization: one fresh fix-DEV task plus exactly one fresh non-implementing
   verification successor after durable fix writeback; no CR/QA/RM/merge/push/
