@@ -12,8 +12,9 @@
 
 ## Current Stage
 
-**The top-level fresh formal re-review recorded `NOT MERGEABLE`; its sole
-top-level fresh Fix DEV successor is provisioning under write hold.**
+**The top-level fresh formal re-review recorded `NOT MERGEABLE`; its initial
+Fix DEV creation failed before task creation, and the one bounded corrected
+retry is dispatch-pending.**
 
 The manual-fallback Fix DEV 3 task and its mistakenly spawned verification
 subagent are write-closed. The verification subagent completed valid exact-head
@@ -771,11 +772,11 @@ create any later relay task.
 
 ## Next Action
 
-Resolve the queued Fix DEV task to an independently addressable thread and
-obtain its bootstrap readiness proof. It must remain write-held until this
-re-review's final release commit, then repair only canonical R2-R3, hand to one
-top-level fresh verification successor, and exit without waiting for the
-verification result.
+Create the one bounded corrected Fix DEV retry from the valid dedicated ref
+recorded below, then obtain its bootstrap readiness proof. It must remain
+write-held until this re-review's final release commit, repair only canonical
+R2-R3, hand to one top-level fresh verification successor, and exit without
+waiting for the verification result.
 
 ## Topology Recovery Record
 
@@ -837,16 +838,23 @@ verification result.
 
 - Dispatch ID:
   `codex-matt-governance-fix4-top-level-dev-20260722-01`
-- State: `provisioning`
+- State: `dispatch-pending`
 - Project: `english-question-bank`
 - Source branch/ref: `codex/codex-matt-governance`
 - Expected result base:
   `4659073b8b17249d73a318f0d951f9efc1e882c7`
 - Pending-dispatch commit:
   `29402b50565c91542a790635c5f7dfe8f97a28f1`
-- Provisioned starting ref:
-  `29402b50565c91542a790635c5f7dfe8f97a28f1` (exact detached commit descended
-  from source branch `codex/codex-matt-governance`)
+- Initial starting-state argument:
+  `29402b50565c91542a790635c5f7dfe8f97a28f1`
+- Initial creation result: failed before thread creation; worktree setup
+  returned `fatal: invalid reference:
+  29402b50565c91542a790635c5f7dfe8f97a28f1`
+- No-child proof: repeated exact dispatch-ID task-list searches returned zero
+  threads, and the queued client ID was not readable as a thread
+- Bounded corrected retry ref:
+  `codex/codex-matt-governance-fix4-top-level` (created from this retry
+  checkpoint; descendant of source branch `codex/codex-matt-governance`)
 - Next role: top-level fresh Fix DEV for canonical R2-R3 only
 - Configured model: `gpt-5.6-terra`
 - Selected model: `gpt-5.6-terra`
@@ -865,9 +873,9 @@ verification result.
 - Queued client task:
   `client-new-thread:e2814690-0fd2-43c4-93de-8e5d9a9d091a`
 - Host: `local`
-- Task creation: exactly one top-level project worktree task was queued with
-  explicit `model=gpt-5.6-terra` and `thinking=medium`; no duplicate task or
-  retry exists
+- Task creation: the initial call passed explicit `model=gpt-5.6-terra` and
+  `thinking=medium` but failed before a thread existed; exactly one bounded
+  corrected retry is authorized after the no-child proof above
 - Output: activation and bounded correction in
   `docs/cuts/codex-matt-governance/agent-entrypoint.md`, plus the reusable
   `docs/cuts/_templates/agent-entrypoint.md` lifecycle contract only if needed;
