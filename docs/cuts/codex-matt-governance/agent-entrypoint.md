@@ -639,6 +639,33 @@ change the `applied-writing-lecture` worktree.
 - Authorization: exactly one fresh no-DEV-history formal re-review successor;
   no implementation, QA, RM, merge, push, or production action.
 
+## Fix DEV 3 Dispatch
+
+- Dispatch ID: `codex-matt-governance-fix3-dev-20260722-01`
+- State: `dispatch-pending`
+- Expected base/head: `50bcd1dfb2c01a051809ca29cbbc63c73d1cad53`
+- Checkout: this isolated detached worktree
+  `/Users/huangxuewei/.codex/worktrees/governance-fix-rereview-20260722`
+- Next role: fresh Fix DEV 3 for canonical re-review Must Fix R1-R3
+- Configured model: `gpt-5.6-terra`
+- Selected model: `gpt-5.6-terra`
+- Thinking: `medium`
+- Route reason: bounded docs-only correction of three still-open findings; no
+  complex, cross-module, or implementation-escalation trigger
+- Availability/substitution evidence: the current task-creation capability
+  exposes `gpt-5.6-terra` with `medium`; configured primary selected from the
+  finite `[gpt-5.6-terra]` eligibility set with no substitution
+- Prompt-template digest:
+  `ef42d6f8b9e7e48e7b4cb6f5323f2c0d5dcdc9614ac53def24a6f5e7808ae1d3`
+- Digest scope: stable write-held Fix DEV 3 prompt with a
+  `<PENDING_DISPATCH_HEAD>` placeholder; the exact commit from this record is
+  supplied in the creation call
+- Output: fixes limited to canonical R1-R3 and durable DEV evidence
+- Authorization: exactly one fresh Fix DEV 3 task plus one fresh
+  non-implementing verification successor after durable fix writeback; no
+  CR/QA/RM/merge/push/production, product/runtime, scripts/workflows,
+  skills/plugins/trackers, main-checkout, or applied-writing-lecture action
+
 ## Next Action
 
 Create exactly one fresh Fix DEV 3 successor bounded to canonical R1-R3 under
