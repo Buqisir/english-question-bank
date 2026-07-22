@@ -12,8 +12,8 @@
 
 ## Current Stage
 
-**Topology recovery checkpoint is recorded; one top-level fresh formal
-re-review is the sole next action.**
+**The top-level fresh formal re-review is activated as the sole current
+writer.**
 
 The manual-fallback Fix DEV 3 task and its mistakenly spawned verification
 subagent are write-closed. The verification subagent completed valid exact-head
@@ -793,3 +793,36 @@ not wait for the review result.
   authority
 - Forbidden fallback: no `spawn_agent`, subagent, fork, inherited DEV history,
   or long-lived parent wait
+
+## Top-level Fix DEV 3 Formal Re-review Activation
+
+- Dispatch ID:
+  `codex-matt-governance-fix3-top-level-rereview-20260722-01`
+- State: `active`
+- Top-level task identity:
+  `019f8ada-1f77-7ba2-8b3b-b8fb10060ded` (`local`)
+- Queued entry:
+  `client-new-thread:6924bd57-9b46-4c94-8cc7-ee344cdfa4a8`
+- Project: `english-question-bank`
+- Checkout: fresh project worktree
+  `/Users/huangxuewei/.codex/worktrees/10fd/english-question-bank`
+- Source branch: `codex/codex-matt-governance`
+- Checkout state at activation: detached exact released checkpoint
+  `6e96ad495b5fc2853a5921ae72f271a0264493c1`; the source-branch ref pointed
+  to the same commit; worktree clean
+- Role: top-level fresh no-DEV-history formal re-review only
+- Configured model: `gpt-5.6-sol`
+- Selected model: `gpt-5.6-sol`
+- Thinking: `high`
+- Route reason: Large governance-contract fresh CR/re-review; configured
+  primary selected with no substitution
+- Topology-recovery activation: legal top-level recovery successor activated;
+  the invalid recursive re-review subagent remains interrupted and is not
+  revived or reused
+- Sole-writer state: acquired; the recovery predecessor is write-closed and
+  this top-level formal re-review is the only active repository writer
+- Authorization: append the canonical formal re-review verdict, then create
+  exactly one top-level direct successor and stop; no implementation, QA/RM,
+  merge, push, production, product/runtime/server/schema/data, scripts/
+  workflows, skills/plugins/trackers, main-checkout, or
+  applied-writing-lecture action
