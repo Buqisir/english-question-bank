@@ -32,6 +32,7 @@ Historical relay records live in `relay-history.md` and are non-authoritative.
 - Attempted route: `gpt-5.6-terra` with `medium`
 - Created task identity: `none`
 - Fallback used: `none`
+- Retry policy: `no retry in this task`
 
 ## Next Action
 
