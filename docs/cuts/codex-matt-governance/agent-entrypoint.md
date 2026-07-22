@@ -558,7 +558,7 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
 ## Fix DEV 2 Verification Dispatch
 
 - Dispatch ID: `codex-matt-governance-fix2-verification-20260722-01`
-- State: `release-authorized`
+- State: `active`
 - Expected base/head: `8cb228e9ce51f147eda2188c93b6fdeb9144d103`
 - Checkout: this isolated detached worktree
   `/Users/huangxuewei/.codex/worktrees/governance-fix-rereview-20260722`
@@ -579,7 +579,13 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
   state, and entrypoint-only read; no successor write was made.
 - Release record: this predecessor-final commit; ACTIVATE/RELEASE carries its
   exact hash, and Fix DEV 2 makes no later worktree write.
-- Released predecessor-final HEAD: this commit
+- Released predecessor-final HEAD:
+  `cfa316391de64b1dde0af20e05e5f681a2fd5f6e`
+- Activation proof: exact isolated worktree root, detached released HEAD above,
+  and clean state re-proved before the first permitted write.
+- Sole-writer state: acquired; Fix DEV 2 is write-closed and this fresh
+  verification task is the only active writer in the isolated worktree.
+- Activation record: this commit.
 - Predecessor closure: Fix DEV 2's result and sole verification successor entry
   are durable; Fix DEV 2 waits only for activation acknowledgement and never
   for the verification result.
