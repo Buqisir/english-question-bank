@@ -12,8 +12,8 @@
 
 ## Current Stage
 
-**Fresh formal CR recorded `NOT MERGEABLE`; one fresh fix-DEV successor is the
-unique next action.**
+**Fresh formal CR recorded `NOT MERGEABLE`; the sole fresh fix-DEV successor is
+ready-held and release-authorized by this predecessor's final commit.**
 
 The CR cold-read
 `3889d67099c6211daa5cbbb79cb93bf49e4e5cc6..113db39f8119536e27aa4344f4bfcdfdbd7d3365`,
@@ -22,7 +22,11 @@ verification evidence. The diff stayed inside the allowed documentation scope,
 but five Must Fix findings remain: direct-relay role drift, conflicting
 verification ownership, incomplete Auto-Next artifacts, red/incomplete required
 verification, and stale live entrypoint state. Canonical findings are committed
-in `cr.md`. No implementation, QA, RM, merge, push, production, workflow/script,
+in `cr.md`. The fix-DEV successor proved its isolated worktree, pending HEAD,
+clean state, and entrypoint-only read without writing. This commit closes the CR
+role and is its final worktree write; the successor becomes sole writer only
+after exact-HEAD release/re-proof and its own durable activation record. No
+implementation, QA, RM, merge, push, production, workflow/script,
 skill/plugin/tracker, main-checkout, or applied-writing-lecture action occurred.
 
 ## Must Read
@@ -315,7 +319,7 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
 ## CR Dispatch
 
 - Dispatch ID: `codex-matt-governance-cr-20260722-01`
-- State: `result-recorded`
+- State: `closed`
 - Project: `local-8a1aff1b944a0aa921d1f6b55296afd6`
 - Checkout: fresh isolated worktree from branch `codex/codex-matt-governance`
 - Expected base/head: `65017c22152b309e989ea80d867035a6e69c3d6a`
@@ -351,6 +355,10 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
 - Verdict: `NOT MERGEABLE`; five unresolved Must Fix findings
 - Role result state: `result-recorded`; exactly one fresh fix-DEV successor is
   required by the canonical verdict and the plan relay table
+- Result commit: `64fafef0c5c6bbb913bc4c721535950fc76250ba`
+- Role completion: closed by this predecessor-final commit; CR performs no later
+  worktree write and waits only for the direct successor's durable activation
+  acknowledgement, never for the fix result
 - Output: `docs/cuts/codex-matt-governance/cr.md`
 - Authorization: one formal CR only. No implementation, QA, RM, merge, push,
   production, or downstream supervision. On Must Fix, record the canonical CR
@@ -360,7 +368,7 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
 ## Fix DEV Dispatch
 
 - Dispatch ID: `codex-matt-governance-fix-dev-20260722-01`
-- State: `provisioning`
+- State: `release-authorized`
 - Project: `local-8a1aff1b944a0aa921d1f6b55296afd6`
 - Checkout: fresh isolated worktree from this exact pending-dispatch commit
 - Expected base/head: `64fafef0c5c6bbb913bc4c721535950fc76250ba`
@@ -385,6 +393,15 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
 - Task entry: created as exactly one independently addressable fresh Codex task
   with explicit `model=gpt-5.6-terra` and `thinking=medium`; write-held
   bootstrap remains active
+- Bootstrap proof: successor reported isolated worktree
+  `/Users/huangxuewei/.codex/worktrees/167f/english-question-bank`, detached
+  pending-dispatch HEAD `501d1892580b2c166afc79980eceb0f045df8740`, clean
+  state, and entrypoint-only read; no successor edit was made
+- Release record: this is the CR predecessor's final worktree commit. The
+  ACTIVATE/RELEASE message carries its exact hash; CR makes no later worktree
+  write and exits after activation acknowledgement
+- Predecessor closure: the canonical CR verdict and sole fix-DEV successor entry
+  are durable; CR never waits for or collects the fix result
 - Output: fixes limited to canonical CR Must Fix 1-5 and durable DEV evidence
 - Authorization: one fresh fix-DEV task plus exactly one fresh non-implementing
   verification successor after durable fix writeback; no CR/QA/RM/merge/push/
@@ -393,8 +410,8 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
 
 ## Next Action
 
-Create exactly one independently addressable fix-DEV task from this pending
-commit with the write-held prompt above. After bootstrap readiness, record its
-identity and readiness, make the CR's final `release-authorized` commit, release
-that exact HEAD, and exit after the successor's durable activation
-acknowledgement without waiting for the fix result.
+Send ACTIVATE/RELEASE with this exact predecessor-final commit to the write-held
+fix-DEV successor. It re-proves that HEAD and clean state, durably records
+activation as sole writer, and acknowledges. CR performs no later worktree write
+and exits immediately after that acknowledgement without waiting for the fix
+result; no ancestor task resumes.
