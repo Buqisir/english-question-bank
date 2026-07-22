@@ -15,11 +15,12 @@ edited.
 - Baseline commit: `e4ae78607411d265768a0253c5c63b5f3c0d726b`
 - Branch: `codex/codex-matt-governance`
 - Worktree: `/Users/huangxuewei/Projects/wt-codex-matt-governance`
-- Current stage: initial PA compressed; fresh model-routing addendum PA next
+- Current stage: current PM complete; sole model-routing/relay addendum PA
+  successor active
 - Current source-of-truth entry:
   `docs/cuts/codex-matt-governance/agent-entrypoint.md`
-- Current rules remain unchanged until the addendum PA finishes and PM records
-  any final dispositions in this plan.
+- Current rules remain unchanged until the one-way successor chain completes
+  PA disposition, DEV, verification, fresh CR, and RM.
 
 ## Goal
 
@@ -59,6 +60,12 @@ context degradation without weakening any EQB risk gate.
   result, it creates and starts the next fresh Codex task in the correct project
   and checkout, sends the complete next-stage instruction, propagates this
   authorization, and then ends the old task.
+- Auto-Next is a one-way relay, never a long-lived coordinator supervising
+  downstream roles. Each task owns one current role and creates at most one
+  direct successor; after the successor entry is durable and activation is
+  acknowledged, the predecessor ends without waiting for the successor's
+  result. Repository artifacts and commits, not a surviving PM conversation,
+  coordinate the whole feature.
 - Auto-Next pauses only for human QA or a named stop condition. Grilling that
   needs an owner answer stays in the current task; after the answer is recorded,
   the same task continues automatically without asking the owner to create or
@@ -127,7 +134,7 @@ Every stage has one explicit role owner and one primary deliverable:
 | Wayfinder / PM | fresh task per map/ticket-routing stage; does not implement | map, tickets, spec routing, plan compression, unique next action |
 | PA | fresh task or explicitly empty-history fresh subagent; did not author PM contract | `pa.md`; cannot implement or approve its own plan changes |
 | DEV / fix DEV | genuinely new task per implementation/fix ticket | code/docs assigned by ticket, commit, DEV self-check and narrow evidence |
-| PM verification | fresh non-implementing task, or a surviving PM coordinator that did not edit the reviewed head | consumes real exit codes, binds evidence to exact head, updates `verification.md` |
+| PM verification | fresh non-implementing task; no surviving ancestor coordinator | consumes real exit codes, binds evidence to exact head, updates `verification.md` |
 | formal CR / re-review | genuinely new no-DEV-history task | cold-read diff and contracts; canonical `cr.md` verdict |
 | QA coordinator | non-implementing task that owns the `human-QA` pause | checklist, tested commit, QA evidence and resume/failure transition |
 | RM | non-implementing closeout task after approved CR/QA | artifact gate, merge, main CI, compact STATUS, terminal completion |
@@ -136,6 +143,7 @@ Changing a role label inside one inherited context never establishes
 independence. Initial formal CR and required re-review may not be a continuation,
 handoff, or fork of DEV/fix history. If a fresh subagent mechanism is used, it
 must explicitly start with empty history; default inheritance is forbidden.
+No task stays alive to supervise later roles; each row hands off once and exits.
 
 ## Tracked Map and Ticket State Machine
 
@@ -212,8 +220,10 @@ gesture:
 7. Commit the `active` transition, then activate the child. Before any write the
    child proves `pwd`, repo root, branch, HEAD, and clean/expected status; any
    mismatch stops with `BRANCH CONFLICT`.
-8. Record result commit and `closed`/`failed`; the parent ends only after the
-   child acknowledges activation or the durable failure path is recorded.
+8. After the child acknowledges activation, record the predecessor role as
+   `closed` with the successor entry and end immediately. The predecessor must
+   not wait for or collect the child's result. On creation/activation failure,
+   record `failed` and follow only the bounded fallback path.
 
 Retries are idempotent. Search the dispatch ID before every retry; an ambiguous
 create result never authorizes a duplicate. Persistent failure means the
@@ -231,11 +241,12 @@ which the owner replies. It presents 3–5 concrete actions with what to open,
 expected observations, pass criteria, and how to report a failure.
 
 On `QA 完成，继续`, it records the tested commit and evidence, evaluates the
-criteria, leaves `human-QA`, and resumes Auto-Next. On failure it records a
-defect ticket against that commit, dispatches fresh repair DEV, requires
-independent PM verification of the repair head, creates a fresh no-DEV-history
-re-review that updates/preserves canonical `cr.md`, then returns to
-`human-QA` naming the new commit. An old pass cannot be reused for a new head.
+criteria, dispatches one fresh RM task, records that entry, and exits. On
+failure it records a defect ticket against that commit, dispatches one fresh
+repair DEV, records that entry, and exits. The one-way relay then proceeds
+repair DEV -> fresh verification -> fresh no-DEV-history re-review -> new QA
+coordinator, preserving canonical `cr.md`. The new QA task names the new commit;
+an old pass cannot be reused for a new head.
 
 The only non-QA owner-stop states are `contract-conflict`,
 `missing-authority`, `irreversible-production`, `dispatch-failed`, and
@@ -279,7 +290,7 @@ Every active role may update only the machine routing/result fields for its own
 stage in the entrypoint/ticket; it may not rewrite another role's substantive
 artifact or verdict.
 
-## Nine Hard Rules to Ratify
+## Ten Hard Rules to Ratify
 
 These are the only new constitutional outcomes. The eventual `AGENTS.md`
 wording should be concise final-form law; explanation and examples belong in
@@ -338,7 +349,8 @@ state, exact artifact pointers, verified branch/base/head, evidence, remaining
 gates, and one unique next action. It then automatically creates and starts a
 fresh Codex task in the correct project/checkout, sends a self-contained
 instruction including this Auto-Next authorization, records the new task
-entry, and ends the old task. The owner is never asked to create a task, copy a
+entry, and ends the old task after activation acknowledgement without waiting
+for that successor's result. The owner is never asked to create a task, copy a
 Next prompt, choose a skill, or restate prior context. At human QA, Auto-Next
 must pause without creating a task, present a concrete checklist, and resume
 automatically after `QA 完成，继续`; a failed QA creates the repair path and
@@ -371,6 +383,42 @@ are forbidden. PA, DEV, CR, verification, QA preparation, and RM are routed
 independently. If the configured model is unavailable, the dispatcher queries
 current availability and records a same-grade family successor; it never
 silently downgrades the role tier.
+
+### HR-10 — One-way relay; no long-lived coordinator
+
+Each task has one current role and may create at most one direct successor.
+PM/Wayfinder hands off and exits; PA hands off and exits; DEV hands to fresh
+verification and exits; verification hands to fresh CR and exits; CR hands to
+one fix/QA/RM successor and exits; QA pauses only for owner QA, then hands to
+one fix DEV or RM successor and exits; RM closes without a successor. An
+ancestor task may wait only for its direct successor's creation and activation
+acknowledgement, never for its completion, and may not supervise or dispatch
+later roles. Global coordination lives solely in tracked repository state,
+commits, task entries, and evidence—not in a surviving PM or Wayfinder session.
+
+## One-Way Relay Topology
+
+There is no persistent orchestrator task that waits for PA, DEV, verification,
+CR, QA, or RM. Each fresh task reconstructs only its role context from the map,
+ticket, spec, plan, `agent-entrypoint.md`, commits, and verification evidence;
+it writes its own result, dispatches **zero or one** direct successor, records
+that entry, and exits.
+
+| Current role | Its only direct successor |
+| --- | --- |
+| PM / Wayfinder | fresh PA, research/decision ticket, spec, or DEV task selected by the durable frontier |
+| PA | fresh PM plan-revision task when Must Fix remains; otherwise fresh DEV |
+| DEV / fix DEV | fresh non-implementing verification task |
+| verification | fresh no-DEV-history CR / re-review |
+| CR / re-review | fresh fix DEV when Must Fix remains; otherwise fresh QA preparation/coordinator or RM when no human QA is required |
+| QA coordinator | no successor while awaiting owner; after `QA 完成，继续`, fresh RM; failed QA instead dispatches one fresh fix DEV |
+| RM | none; close the cut and report terminal completion |
+
+The predecessor may wait only for creation/provisioning and activation
+acknowledgement of that one successor. It must not wait for the successor's
+deliverable, collect its final report, create the task after that successor, or
+retain a background wait loop. The successor receives the full scoped
+Auto-Next authorization so it, not an ancestor task, owns the following relay.
 
 ## Seven Conflicts the Implementation Must Resolve
 
@@ -597,42 +645,31 @@ before DEV; DEV cannot expand the list on its own.
 - No DEV, rule-text edit, PA self-implementation, CR, merge, or push during the
   current PM stage.
 
-## Implementation Order After PA
+## Relay Order After This PM Task
 
-1. **Fresh PA only**: the initial fresh PA cold-read this plan and current rules,
-   wrote canonical `pa.md`, and returned seven Must Fix items with no open PO
-   decision. Because the owner then added model routing, a second fresh PA must
-   review only the compressed dispositions plus that addendum before DEV.
-2. **PM compression**: record every PA Must Fix under `PA Follow-Up Decisions`,
-   update this plan and the entrypoint, and commit before the addendum review.
-3. **Fresh PA addendum review**: create a new PA task with explicit routing from
-   the owner-locked authority input; it appends its verdict to canonical
-   `pa.md`. PM closes any new Must Fix before declaring DEV ready.
-4. **Fresh DEV**: Auto-Next independently classifies DEV and passes its explicit
-   model/thinking selection. The new implementation task has no PA/PM
-   conversation history and edits only the allowed current-rule surfaces,
-   starting with `docs/agents/model-routing.md`, then concise `AGENTS.md` law,
-   the detailed steering guide, tracker operations, cut/dispatch/review
-   protocols, current templates/personas, and case law.
-5. **Fresh PM verification**: Auto-Next independently routes a non-implementing
-   verification task; it confirms scope, contradiction scans, Markdown/artifact
-   integrity, `tsc`, and one full verify with real exit codes bound to the
-   implementation head.
-6. **Fresh CR**: Auto-Next independently routes a genuinely new task without
-   DEV history and passes explicit model/thinking values.
-   CR cold-reads the full diff on Standards and Spec axes, explicitly attacks
-   all seven conflicts, writes canonical `cr.md`, and blocks on Must Fix.
-7. **Must Fix loop if needed**: Auto-Next creates a fresh fix task, PM
-   re-verifies the changed head, then creates a fresh re-review task for the fix
-   delta and full current diff.
-8. **Fresh RM closeout**: Auto-Next independently routes RM, writes
-   `cut-note.md`, consumes the CR verdict (not merely file presence), runs the
-   Large artifact gate, merges, watches `main` CI, and adds a compact STATUS
-   entry.
-9. **Three-cut evaluation**: apply the active topology only to the next new
-   qualifying cuts; after three, review task length, handoff count, duplicate
-   verification, CR Must Fixes, and owner navigation burden. Any rule change
-   from that review requires its own governance decision.
+This is the durable cut route for **future successor tasks**, not a todo list
+owned or supervised by the current PM task:
+
+1. The current PM records the addendum-PA dispatch, activates that one successor,
+   and exits.
+2. The fresh PA appends its verdict to canonical `pa.md`. If Must Fix remains,
+   PA creates one fresh PM plan-revision task; if none remains, PA creates one
+   fresh DEV task. PA then exits.
+3. The fresh plan-revision task, if needed, closes only the recorded PA gaps,
+   then creates one new PA recheck and exits.
+4. Fresh DEV edits only the allowed current-rule surfaces, commits its result,
+   creates one fresh non-implementing verification task, and exits.
+5. Fresh verification binds all required evidence to the exact implementation
+   head, creates one fresh no-DEV-history CR, and exits.
+6. Fresh CR writes canonical `cr.md`; it creates one fresh fix DEV when Must Fix
+   exists, otherwise one fresh RM task because this governance cut needs no
+   human QA, then exits. A fix DEV repeats DEV -> verification -> re-review.
+7. Fresh RM writes `cut-note.md`, consumes the approved verdict, runs the Large
+   artifact gate, merges, watches `main` CI, updates compact STATUS, reports
+   terminal completion, and creates no successor.
+8. The first three new qualifying cuts then use this active topology; their
+   tracked state records the evaluation metrics without reviving a supervisor
+   task.
 
 ## Verification Contract
 
@@ -658,6 +695,10 @@ before DEV; DEV cannot expand the list on its own.
    - multi-task exit state is durable before automatic task creation;
    - normal completion creates the next task automatically and does not ask the
      owner to copy a prompt, select a capability, or restate context;
+   - each task has one current role, creates at most one direct successor, and
+     exits after activation without waiting for downstream completion;
+   - no PM/Wayfinder/ancestor task retains a wait loop or dispatches later
+     roles on a successor's behalf;
    - fresh CR/re-review tasks do not inherit DEV conversation history;
    - human QA pauses task creation and `QA 完成，继续` resumes it;
    - only the five owner stop conditions and human QA interrupt Auto-Next;
@@ -679,7 +720,7 @@ before DEV; DEV cannot expand the list on its own.
 ### CR focus
 
 - Reproduce the authority map rather than trusting DEV's summary.
-- Compare every proposed current-rule statement against the nine hard rules
+- Compare every proposed current-rule statement against the ten hard rules
   and seven conflict dispositions.
 - Verify no same-context waiver reappears for PA or CR.
 - Verify `docs/agents/model-routing.md` is the one exact model/thinking authority,
@@ -693,7 +734,8 @@ before DEV; DEV cannot expand the list on its own.
   unsupported parallel coordination.
 - Verify Auto-Next includes correct project/checkout targeting, durable task
   entry recording, authorization propagation, true fresh-CR isolation, human
-  QA pause/resume, failure fallback, and terminal completion.
+  QA pause/resume, one-successor relay exit, no long-lived coordinator, failure
+  fallback, and terminal completion.
 
 ### QA disposition
 
@@ -729,6 +771,9 @@ The PA must answer these directly:
 8. Can every eventual constitutional sentence be written as final-form law,
    with narrative, model examples, fixed context numbers, and skill catalogues
    kept out of `AGENTS.md`?
+9. Does the one-way relay guarantee one current role, at most one direct
+   successor, predecessor exit after activation, QA-only pause, and no surviving
+   PM/Wayfinder task that waits for or dispatches downstream roles?
 
 PA output must include verdict, Must Fix, Must Fix → `plan.md` disposition
 checklist, Should Watch, allowed/forbidden file corrections, verification
@@ -756,13 +801,14 @@ corrections, DEV readiness, and at most three open PO decisions.
   entrypoint template, includes the seven omitted current surfaces and optional
   ledger, forbids scripts/agent definitions, and `Role Write Ownership` limits
   each role's writes.
-- [ ] **Owner model-routing addendum:** a second fresh PA must confirm
+- [ ] **Owner model-routing and one-way-relay addendum:** a second fresh PA must confirm
   `Owner-Locked Model Routing`, HR-9, C-4, the enriched dispatch fields, the
-  sole-authority file, verification scans, and updated allowlist before DEV.
+  sole-authority file, HR-10, the no-coordinator relay, verification scans, and
+  updated allowlist before DEV.
 
 The initial seven Must Fix items are dispositioned with zero PO questions. DEV
-remains blocked only on the fresh model-routing addendum review and any Must Fix
-that review discovers.
+remains blocked only on the fresh model-routing/one-way-relay addendum review
+and any Must Fix that review discovers.
 
 ## Decision-Point Checklist
 
@@ -775,8 +821,8 @@ that review discovers.
 - [x] DP-2 — Fresh PA wrote `pa.md`, returned seven Must Fix items, and left zero
   PO decisions.
 - [ ] DP-3 — PM has dispositioned all seven initial Must Fix items; fresh PA
-  addendum review must approve the owner-locked model-routing change before DEV
-  readiness is declared.
+  addendum review must approve the owner-locked model-routing and one-way-relay
+  changes before DEV readiness is declared.
 - [ ] DP-4 — Fresh DEV implements only the allowed rule/document surfaces.
 - [ ] DP-5 — PM verifies scope and the exact implementation head with real exit
   codes.

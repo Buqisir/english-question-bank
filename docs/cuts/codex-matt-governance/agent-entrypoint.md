@@ -12,14 +12,16 @@
 
 ## Current Stage
 
-**Initial PA compressed; owner model-routing addendum awaits fresh PA review.**
+**Current PM complete; the sole fresh PA successor is active.**
 
 The initial fresh PA returned seven Must Fix items and no owner decisions. PM
 has dispositioned all seven in `plan.md`. The owner then locked Codex-native
 role routing: every Auto-Next creation must independently choose and explicitly
 pass model + thinking from one authority file, never a default or inherited
-tier. A second fresh PA reviews only the compressed dispositions and this added
-contract. No current collaboration rule, business code, product surface,
+tier. The owner also requires one-way relay, one role per task, at most one
+direct successor, and no long-lived coordinator. A second fresh PA reviews the
+compressed dispositions and these addenda. No current collaboration rule,
+business code, product surface,
 production configuration, or in-flight cut has been changed.
 
 ## Must Read
@@ -48,14 +50,20 @@ The next task wears only the PA hat and is explicitly routed as the Large
 governance PA tier. It must:
 
 1. fetch and confirm the baseline, branch, worktree, and diff;
-2. cold-read all nine hard rules, seven named conflicts, and initial PA
+2. cold-read all ten hard rules, seven named conflicts, and initial PA
    dispositions;
 3. attack the sole model-routing authority, explicit model/thinking dispatch,
-   independent PA/DEV/CR/RM selection, and recorded same-grade successor path;
+   independent PA/DEV/CR/RM selection, recorded same-grade successor path, and
+   the one-way relay/no-long-lived-coordinator contract;
 4. append a model-routing addendum verdict to
    `docs/cuts/codex-matt-governance/pa.md` without rewriting the initial PA;
 5. return at most three unresolved PO decisions;
-6. map every Must Fix to the exact `plan.md` disposition required before DEV.
+6. map every Must Fix to the exact `plan.md` disposition required before DEV;
+7. after committing `pa.md`, create exactly one direct successor and then exit:
+   a fresh PM plan-revision task (`gpt-5.6-sol` + `high`) if Must Fix remains,
+   otherwise fresh DEV (`gpt-5.6-terra` + `medium`). Explicitly pass both
+   parameters, record the successor here, propagate Auto-Next authorization,
+   and never ask this PM task to resume.
 
 The PA must not edit current rules, implement the plan, install or initialize
 skills or tracker infrastructure, touch business code, or change the
@@ -70,7 +78,7 @@ skills or tracker infrastructure, touch business code, or change the
 ## Active Dispatch
 
 - Dispatch ID: `codex-matt-governance-pa2-20260722`
-- State: `dispatch-pending`
+- State: `active`
 - Project: `local-8a1aff1b944a0aa921d1f6b55296afd6`
 - Checkout: existing worktree
   `/Users/huangxuewei/Projects/wt-codex-matt-governance`
@@ -83,15 +91,19 @@ skills or tracker infrastructure, touch business code, or change the
   model-routing law
 - Prompt digest:
   `dc994dab6c2b4f30ae051d55cecaa622afdfb223d644d74c1d6ddaddc83d8092`
+- Thread: `019f8a7f-7d63-79c2-a713-35d4ff35243f` (`local`)
+- Bootstrap proof: worktree/branch correct; `HEAD` contained the expected plan
+  head; tree clean; child acknowledged ready before activation
+- Activation record: this commit; exact commit supplied in ACTIVATE message
 - Output: append-only addendum in
   `docs/cuts/codex-matt-governance/pa.md`
-- Authorization: one PA writeback task only; no implementation, merge,
-  production, infrastructure, or further task creation
+- Authorization: one PA writeback plus exactly one direct Auto-Next successor;
+  no implementation by PA, merge, production, infrastructure, or downstream
+  supervision
 
 ## Next Action
 
-The active PM task must commit the compressed plan, then create and start a
-fresh PA task in the EQB project with **explicit Sol model + xhigh thinking**,
-route it to this branch/worktree and entrypoint, and record that choice plus the
-Large-governance upgrade reason. Do not start DEV until the addendum review is
-complete and PM has dispositioned every new Must Fix.
+The current PM task has created its one fresh PA successor with **explicit Sol
+model + xhigh thinking** and recorded the Large-governance upgrade reason. It
+must send ACTIVATE with the new head and then end without waiting for PA output.
+The PA task owns the next relay and follows its Stage Contract above.
