@@ -221,7 +221,7 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
 ## DEV Dispatch
 
 - Dispatch ID: `codex-matt-governance-dev-20260722-01`
-- State: `result-recorded`
+- State: `provisioning`
 - Project: `local-8a1aff1b944a0aa921d1f6b55296afd6`
 - Checkout: existing worktree
   `/Users/huangxuewei/Projects/wt-codex-matt-governance`
@@ -420,7 +420,19 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
   text were confirmed present. `bash scripts/setup-worktree.sh` restored the
   normal dependencies. Formal exact-head verification remains delegated to the
   required fresh verification successor.
-- Result commit: this commit
+- Result commit: `49a3da95f72122ebaae8b80541f3a17cfd9b59e4`
+- Verification successor dispatch ID:
+  `codex-matt-governance-fix-verification-20260722-01`
+- Next role: fresh non-implementing verification
+- Successor task: `/root/governance_fix_verification`
+- Configured model / selected model / thinking: `gpt-5.6-terra` /
+  `gpt-5.6-terra` / `medium`
+- Availability/substitution evidence: requested model and thinking were passed
+  explicitly at creation; configured primary selected with no substitution
+- Prompt digest: successor receives the bounded write-held verification prompt
+  from this dispatch, including the exact result commit above
+- One-successor authorization: exactly this verification task, then no further
+  successor by fix DEV
 - Output: fixes limited to canonical CR Must Fix 1-5 and durable DEV evidence
 - Authorization: one fresh fix-DEV task plus exactly one fresh non-implementing
   verification successor after durable fix writeback; no CR/QA/RM/merge/push/
@@ -429,9 +441,9 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
 
 ## Next Action
 
-The active sole writer closes canonical CR Must Fix 1-5, commits the bounded
-fix and DEV evidence, then creates exactly one fresh non-implementing
-verification successor under the write-held/final-commit/release protocol.
+Wait for the sole write-held verification successor's bootstrap acknowledgement,
+then record `ready-held`, make the predecessor-final `release-authorized`
+commit, release that exact HEAD, and exit after activation acknowledgement.
 fix-DEV successor. It re-proves that HEAD and clean state, durably records
 activation as sole writer, and acknowledges. CR performs no later worktree write
 and exits immediately after that acknowledgement without waiting for the fix
