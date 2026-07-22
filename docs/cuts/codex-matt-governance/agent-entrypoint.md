@@ -12,21 +12,20 @@
 
 ## Current Stage
 
-**Current PM complete; the sole fresh PA successor is active.**
+**Fresh PA addendum complete; the sole PM plan-revision successor is pending.**
 
-The initial fresh PA returned seven Must Fix items and no owner decisions. PM
-has dispositioned all seven in `plan.md`. The owner then locked Codex-native
-role routing: every Auto-Next creation must independently choose and explicitly
-pass model + thinking from one authority file, never a default or inherited
-tier. The owner also requires one-way relay, one role per task, at most one
-direct successor, and no long-lived coordinator. A second fresh PA reviews the
-compressed dispositions and these addenda. No current collaboration rule,
-business code, product surface,
-production configuration, or in-flight cut has been changed.
+The second fresh PA approved the owner-locked model-routing and one-way-relay
+direction but found four executable protocol gaps: same-grade substitution is
+not mechanically bounded, relay stages still admit a parent-owned subagent,
+activation permits a shared-worktree writer race, and a zero-Must-Fix PA route
+can leave an orphaned plan blocker. The canonical addendum is committed in
+`pa.md` with zero owner decisions. No current collaboration rule, business
+code, product surface, production configuration, or in-flight cut has been
+changed.
 
 ## Must Read
 
-Read no more than these five files before starting the addendum PA:
+Read no more than these five files before starting the PM plan revision:
 
 1. `docs/cuts/codex-matt-governance/plan.md`
 2. `docs/cuts/codex-matt-governance/pa.md`
@@ -46,39 +45,34 @@ Open only when needed to check a named conflict or artifact convention:
 
 ## Stage Contract
 
-The next task wears only the PA hat and is explicitly routed as the Large
-governance PA tier. It must:
+The next task wears only the PM plan-revision hat. It must:
 
-1. fetch and confirm the baseline, branch, worktree, and diff;
-2. cold-read all ten hard rules, seven named conflicts, and initial PA
-   dispositions;
-3. attack the sole model-routing authority, explicit model/thinking dispatch,
-   independent PA/DEV/CR/RM selection, recorded same-grade successor path, and
-   the one-way relay/no-long-lived-coordinator contract;
-4. append a model-routing addendum verdict to
-   `docs/cuts/codex-matt-governance/pa.md` without rewriting the initial PA;
-5. return at most three unresolved PO decisions;
-6. map every Must Fix to the exact `plan.md` disposition required before DEV;
-7. after committing `pa.md`, create exactly one direct successor and then exit:
-   a fresh PM plan-revision task (`gpt-5.6-sol` + `high`) if Must Fix remains,
-   otherwise fresh DEV (`gpt-5.6-terra` + `medium`). Explicitly pass both
-   parameters, record the successor here, propagate Auto-Next authorization,
-   and never ask this PM task to resume.
+1. fetch and confirm the baseline, branch, worktree, exact activated head, and
+   clean state;
+2. cold-read the latest plan and the addendum in canonical `pa.md`;
+3. disposition AMF-1 through AMF-4 in their exact normative plan sections,
+   including their observable verification clauses;
+4. edit only `plan.md` plus its own machine routing/completion fields here;
+5. commit the plan revision without editing `pa.md` or current rules; and
+6. create exactly one fresh PA recheck successor with explicit
+   `gpt-5.6-sol` + `xhigh`, propagate Auto-Next authorization, activate it with
+   sole-writer ordering, then exit without waiting for its verdict.
 
-The PA must not edit current rules, implement the plan, install or initialize
-skills or tracker infrastructure, touch business code, or change the
-`applied-writing-lecture` worktree.
+The PM revision must not edit current rules, implement the plan, rewrite PA
+findings, install or initialize skills or tracker infrastructure, touch
+business code, or change the `applied-writing-lecture` worktree.
 
 ## Current Outputs
 
 - PM contract: `docs/cuts/codex-matt-governance/plan.md`
 - Initial PA: `docs/cuts/codex-matt-governance/pa.md`
-- Next artifact: addendum section in the same canonical `pa.md`
+- PA addendum commit: `e9e4f0e0f363e83f69bda7e88f8c96d67dad058e`
+- Next artifact: AMF-1 through AMF-4 dispositions in `plan.md`
 
-## Active Dispatch
+## Completed PA Dispatch
 
 - Dispatch ID: `codex-matt-governance-pa2-20260722`
-- State: `active`
+- State: `result-recorded`
 - Project: `local-8a1aff1b944a0aa921d1f6b55296afd6`
 - Checkout: existing worktree
   `/Users/huangxuewei/Projects/wt-codex-matt-governance`
@@ -97,13 +91,36 @@ skills or tracker infrastructure, touch business code, or change the
 - Activation record: this commit; exact commit supplied in ACTIVATE message
 - Output: append-only addendum in
   `docs/cuts/codex-matt-governance/pa.md`
-- Authorization: one PA writeback plus exactly one direct Auto-Next successor;
-  no implementation by PA, merge, production, infrastructure, or downstream
+- Result commit: `e9e4f0e0f363e83f69bda7e88f8c96d67dad058e`
+- Verdict: `APPROVE WITH MUST FIX`; AMF-1 through AMF-4; zero PO decisions
+
+## Successor Dispatch
+
+- Dispatch ID: `codex-matt-governance-pm-revision-20260722-01`
+- State: `dispatch-pending`
+- Project: `local-8a1aff1b944a0aa921d1f6b55296afd6`
+- Checkout: existing worktree
+  `/Users/huangxuewei/Projects/wt-codex-matt-governance`
+- Branch: `codex/codex-matt-governance`
+- Expected base/head: `e9e4f0e0f363e83f69bda7e88f8c96d67dad058e`
+- Next role: `PM plan revision`
+- Model: `gpt-5.6-sol`
+- Thinking: `high`
+- Route reason: fresh PM/spec judgment is required to disposition four
+  governance-contract Must Fix items; this is not DEV or review work
+- Prompt digest:
+  `0faa69f6b76206fa0aa1d1af13eca8a2f1380d4a6873e447c534c0d620999027`
+- Source task: `019f8a7f-7d63-79c2-a713-35d4ff35243f` (`local`)
+- Thread: pending
+- Output: `docs/cuts/codex-matt-governance/plan.md`
+- Authorization: one PM plan revision plus exactly one fresh PA-recheck
+  successor after durable writeback; no current-rule implementation, DEV,
+  verification, CR, RM, merge, production, infrastructure, or downstream
   supervision
 
 ## Next Action
 
-The current PM task has created its one fresh PA successor with **explicit Sol
-model + xhigh thinking** and recorded the Large-governance upgrade reason. It
-must send ACTIVATE with the new head and then end without waiting for PA output.
-The PA task owns the next relay and follows its Stage Contract above.
+The PA task must commit this pending dispatch, create one fresh PM plan-revision
+task with **explicit Sol model + high thinking**, durably record its task entry
+and activation, then end after acknowledgement. The successor owns the next
+relay and follows the Stage Contract above; no ancestor task resumes.
