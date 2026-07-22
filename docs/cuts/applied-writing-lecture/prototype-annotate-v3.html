@@ -225,6 +225,7 @@
     }
 
     .ink-layer .leader-arc { opacity: .84; }
+    .ink-layer .leader-flick { opacity: .96; }
     .ink-layer .leader-head { opacity: .98; }
 
     .note {
@@ -906,13 +907,21 @@
 
     function drawLeader(placement, order) {
       const route = placement.slot.route;
-      const arc = makePath(route.d, route.near ? 1.12 : 1.22, ink, 'leader-arc');
+      const flick = route.mode === 'flick';
+      const arc = makePath(
+        route.d,
+        flick ? 1.48 : route.near ? 1.12 : 1.22,
+        ink,
+        flick ? 'leader-arc leader-flick' : 'leader-arc'
+      );
       arc.dataset.length = route.length.toFixed(1);
       arc.dataset.gap = route.gap.toFixed(1);
       arc.dataset.near = String(route.near);
       arc.dataset.mode = route.mode;
       arc.dataset.noteIndex = String(placement.entry.index);
-      makePath(arrowFlick(route.tip.x, route.tip.y, route.control.x, route.control.y, order), 1.55, ink, 'leader-head');
+      if (!flick) {
+        makePath(arrowFlick(route.tip.x, route.tip.y, route.control.x, route.control.y, order), 1.55, ink, 'leader-head');
+      }
     }
 
     function drawDebug(obstacles, placements) {
