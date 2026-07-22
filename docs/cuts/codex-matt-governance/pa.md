@@ -419,3 +419,209 @@ surfaces and the live Auto-Next transition evidence.
 
 **0.** All seven blockers are technical/process-contract dispositions inside
 the already ratified owner direction; none should be routed back to the owner.
+
+---
+
+## Model Routing and One-Way Relay Addendum Review
+
+Date: 2026-07-22
+Role: second fresh PA only; no implementation performed
+
+### Addendum Verdict
+
+**APPROVE WITH MUST FIX. DEV remains blocked.**
+
+- Reviewed worktree:
+  `/Users/huangxuewei/Projects/wt-codex-matt-governance`
+- Reviewed branch: `codex/codex-matt-governance`
+- Fetched remote baseline / merge-base:
+  `github/main` at `e4ae78607411d265768a0253c5c63b5f3c0d726b`
+- Reviewed active-record HEAD:
+  `8e0df527ec42eeec9e734f83ae785cbd5b3fd55b`
+- Pre-review tree state: clean; branch ahead of `github/main` by six commits;
+  diff limited to this cut's `agent-entrypoint.md`, `plan.md`, and `pa.md`.
+- Initial PA dispositions: all seven are present in the named normative plan
+  sections and remain directionally sound.
+- Ten-hard-rule verdict: HR-1 through HR-5 and HR-7 through HR-9 are coherent in
+  direction. HR-6 and HR-10 still conflict at one relay boundary, and the
+  dispatch/readiness mechanics leave three additional executable gaps.
+- Addendum Must Fix count: **4**.
+- Open PO Decisions: **0**.
+
+The single-authority design is correct: `AGENTS.md` should retain only stable
+explicit-routing law, while `docs/agents/model-routing.md` owns the one current
+role/model/thinking matrix. Explicit task-creation parameters and independent
+PA/DEV/verification/CR/QA/RM selection are also correctly required. The
+remaining blockers are bounded protocol defects, not a need to reopen the
+owner's model choices or one-way-relay direction.
+
+### Addendum Must Fix Before DEV
+
+#### AMF-1 — Bound “same-grade successor” with a mechanically checkable eligibility contract
+
+The plan requires runtime discovery to choose a same-grade Sol/Terra successor
+when the configured model is unavailable, but it never defines how a dispatcher
+proves that a discovered model is same-grade. “Same-grade” is therefore still a
+judgment call outside the sole authority and can silently broaden into an
+unapproved tier change.
+
+Before DEV, `plan.md` must require `docs/agents/model-routing.md` to own one
+mechanically checkable substitution contract: either an ordered family-scoped
+successor allowlist or an equivalent explicit family/grade eligibility rule.
+Availability discovery may only intersect the runtime's supported models and
+thinking levels with that contract. If no eligible same-grade candidate exists,
+the task records `missing-authority` / `dispatch-failed` and stops under the
+existing bounded fallback; it must not invent a substitute or weaken thinking.
+
+The durable dispatch record must distinguish configured model, selected model,
+supported-thinking evidence, availability source, family/grade proof, and the
+substitution reason. Verification must prove that this eligibility contract
+lives only in `model-routing.md`, that every role independently applies it, and
+that an unavailable-primary example cannot select an out-of-family or
+lower-thinking candidate.
+
+#### AMF-2 — Remove the fresh-subagent loophole from direct relay successors
+
+HR-6 and `Role and Fresh-Task Topology` still allow PA to be an ordinary fresh
+subagent, while HR-7/HR-10 require an independently addressable direct successor
+whose predecessor exits after activation. A child subagent whose lifecycle and
+result return are owned by the parent task can force that parent to remain alive;
+that recreates the coordinator the owner just prohibited. The old current-rule
+phrasing also makes this the most likely compatibility shortcut during DEV.
+
+Before DEV, the plan must distinguish **role-internal assistance** from a
+**one-way relay boundary**. Every Auto-Next relay stage must use a genuinely new,
+independently addressable Codex task (or a future capability proven to have the
+same independent lifecycle and durable task entry). A fresh subagent may be used
+only inside one bounded role when an existing rule permits it; it cannot count as
+the PA/DEV/verification/formal-CR/QA/RM direct successor. Formal CR and re-review
+remain no-DEV-history new tasks. Replace C-5's ambiguous
+“implementation-ticket PM task” with the fresh non-implementing verification
+role used by the relay table.
+
+The current-positive-instruction scan must reject any protocol/persona/template
+that offers a parent-owned subagent as the Auto-Next successor or asks an
+ancestor PM/Wayfinder task to collect that child's result.
+
+#### AMF-3 — Close the activation/closure race before sharing a worktree
+
+`Auto-Next Dispatch Protocol` step 7 activates the child, then step 8 waits for
+its acknowledgement and writes the predecessor's `closed` transition. After
+activation the child is no longer explicitly write-held, so it may edit or
+commit in the same worktree while the predecessor is still changing the
+entrypoint. The predecessor's final commit also changes the HEAD that the child
+just proved. This creates exactly the concurrent-write and stale-head window
+that bootstrap/activation was intended to prevent.
+
+Before DEV, the plan must choose one canonical race-free ordering. The child
+must remain explicitly **write-held** through readiness acknowledgement; the
+predecessor then makes its final durable successor/predecessor-state commit and
+sends a release instruction, after which the child re-proves the final expected
+HEAD and becomes the sole writer. Equivalently, the plan may use another ordering
+that proves the predecessor performs no worktree write after child release. In
+either form, `active`, acknowledgement, `closed`, and write release must have
+unambiguous meanings; there may be no interval in which both tasks are allowed
+to write.
+
+The live Auto-Next smoke must record the pending/ready-or-provisioning/final-head/
+released transitions and prove that the successor's first write occurred only
+after the predecessor's last worktree commit. A successful task-creation call or
+chat acknowledgement alone is not that proof.
+
+#### AMF-4 — Make zero-Must-Fix PA approval sufficient without an orphaned plan gate
+
+The one-way table says PA creates DEV directly when no Must Fix remains, and
+role ownership correctly forbids PA from rewriting `plan.md`. But
+`PA Follow-Up Decisions`, DP-3, and the following readiness paragraph still
+leave the addendum checkbox unchecked and say DEV is blocked until the addendum
+review is approved in the plan. On a clean PA approval, no PM plan-revision task
+exists to update those plan fields, so a direct DEV successor starts against a
+contract that still declares itself blocked.
+
+Before DEV, the plan must make the latest canonical addendum verdict in `pa.md`
+plus its durable entrypoint completion state the authoritative zero-Must-Fix
+gate. Convert the addendum checkbox and DP-3 from a post-PA mutable plan duty to
+a derived condition, or otherwise remove the need for PA to edit substantive
+plan text. A PM plan-revision successor remains mandatory only when Must Fix
+exists. Verification must reject a route that dispatches DEV while any
+independent plan-owned blocker still reads unresolved.
+
+### Addendum Must Fix -> `plan.md` Disposition Checklist
+
+- [ ] **AMF-1 -> `Owner-Locked Model Routing`, `Auto-Next Dispatch Protocol`,
+  C-4, Verification Contract:** define the sole-authority successor eligibility
+  rule, no-candidate stop, full substitution evidence, and an unavailable-model
+  verification case.
+- [ ] **AMF-2 -> HR-6, `Role and Fresh-Task Topology`, HR-10,
+  `One-Way Relay Topology`, C-5, Verification Contract:** reserve direct relay
+  stages for independently addressable new tasks; confine subagents to
+  role-internal assistance; use one fresh verification-role name throughout.
+- [ ] **AMF-3 -> `Tracked Map and Ticket State Machine`, `Auto-Next Dispatch
+  Protocol`, HR-7, HR-10, Role Write Ownership, Verification Contract:** define
+  the write-hold/final-commit/release order and prove no shared-worktree writer
+  overlap or post-proof HEAD drift.
+- [ ] **AMF-4 -> `Relay Order After This PM Task`, `PA Follow-Up Decisions`,
+  DP-3, Verification Contract:** make canonical zero-Must-Fix PA approval a
+  derived DEV-ready condition without a forbidden PA plan edit or a surviving
+  PM coordinator.
+
+Each item must be dispositioned in the named normative section before a fresh
+PA recheck. “Accepted” or a checked summary without the rule text does not close
+the item.
+
+### Addendum Should Watch
+
+1. `Wayfinder remains responsible` must mean continuity of the tracked role and
+   map, never continuity of one Wayfinder conversation. HR-10 currently supplies
+   that interpretation; implementation wording should preserve it.
+2. This governance cut bootstraps before `model-routing.md` exists. Its recorded
+   PA/PM-revision routes are valid only because the owner and durable stage
+   contract supply explicit model and thinking. Do not generalize this bootstrap
+   exception after the authority file is implemented.
+3. Historical plan tables and dispatch-specific records may contain concrete
+   selections, but current-positive scans must distinguish those records from a
+   second reusable runtime routing table.
+
+### Addendum Allowed / Forbidden Scope Corrections
+
+No additional file is required. All four dispositions belong in `plan.md` and
+the already allowed future current-rule surfaces. Keep the existing whole-cut
+allowlist and per-role ownership matrix. In particular, this PA writes only this
+append-only addendum plus its own entrypoint routing/completion fields; it does
+not edit the plan or any current rule.
+
+All forbidden scopes remain unchanged: no business/runtime code, scripts,
+workflow configuration, skill/plugin/tracker installation, user-level
+configuration, production action, main-checkout user change, or
+`wt-applied-writing-lecture` edit.
+
+### Addendum Verification Corrections
+
+Before DEV readiness, the revised plan must add four observable checks:
+
+1. same-grade substitution is accepted only by the sole authority's mechanical
+   eligibility rule and preserves the requested thinking capability;
+2. no Auto-Next relay stage uses a parent-owned subagent or inherited/forked
+   history as its direct successor;
+3. the live transition records a write-held readiness acknowledgement, the
+   predecessor's final worktree commit, release, and the successor's re-proof of
+   that exact final HEAD before its first write; and
+4. a zero-Must-Fix PA verdict leaves no unchecked plan-owned blocker before the
+   direct DEV dispatch.
+
+The existing exact-head verification, single-authority scan, explicit
+model/thinking dispatch scan, role-independence scan, allowed-path audit,
+artifact gate, `tsc`, full proof, and post-merge main CI remain required.
+
+### Addendum DEV Readiness
+
+**NOT READY.** A fresh PM plan-revision task must disposition AMF-1 through
+AMF-4, then create one fresh PA recheck and exit. DEV may begin only after that
+recheck returns no unresolved Must Fix and the derived readiness contract is
+satisfied.
+
+### Addendum Open PO Decisions
+
+**0.** The four blockers are mechanical consequences of the owner's already
+locked single-authority and one-way-relay decisions. They do not require a new
+product/process choice from the owner.
