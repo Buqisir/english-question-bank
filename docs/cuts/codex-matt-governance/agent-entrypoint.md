@@ -402,6 +402,13 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
   write and exits after activation acknowledgement
 - Predecessor closure: the canonical CR verdict and sole fix-DEV successor entry
   are durable; CR never waits for or collects the fix result
+- Released predecessor-final HEAD:
+  `7de771587ef02eef9aadac1acb4ac6bb87d012c7`
+- Activation proof: exact isolated worktree root, detached released HEAD above,
+  and clean state re-proved before the first permitted write
+- Sole-writer state: acquired; predecessor is write-closed and this fix DEV is
+  the only active writer in the isolated worktree
+- Activation record: this commit
 - Output: fixes limited to canonical CR Must Fix 1-5 and durable DEV evidence
 - Authorization: one fresh fix-DEV task plus exactly one fresh non-implementing
   verification successor after durable fix writeback; no CR/QA/RM/merge/push/
