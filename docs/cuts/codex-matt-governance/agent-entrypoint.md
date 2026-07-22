@@ -696,7 +696,7 @@ changes to the `applied-writing-lecture` worktree.
 ## Fix DEV 3 Verification Dispatch
 
 - Dispatch ID: `codex-matt-governance-fix3-verification-20260722-01`
-- State: `dispatch-pending`
+- State: `release-authorized`
 - Expected base/head: `b1169a6978aef1e475360b725a8bd96265ef3a39`
 - Checkout: this isolated detached worktree
   `/Users/huangxuewei/.codex/worktrees/governance-fix-rereview-20260722`
@@ -730,6 +730,26 @@ changes to the `applied-writing-lecture` worktree.
 - Successor route: one fresh no-DEV-history formal re-review task is the sole
   direct successor and must remain write-held until this verifier's final
   release-authorizing commit.
+- Verification result record: `dae33f802707806f757aac4a55240a0d34ada985`.
+- Re-review successor dispatch ID:
+  `codex-matt-governance-fix3-rereview-20260722-01`
+- Next role: fresh no-DEV-history formal re-review
+- Configured model / selected model / thinking: `gpt-5.6-sol` /
+  `gpt-5.6-sol` / `high`
+- Availability/substitution evidence: the configured primary was explicitly
+  selected from the finite `[gpt-5.6-sol]` eligible set; no substitution.
+- Returned task identity: `/root/fix3_verification/fix3_rereview`
+- Task entry: created as exactly one fresh, independently addressable task with
+  explicit model and thinking; write-held bootstrap was active.
+- Bootstrap proof: successor reported this exact isolated worktree, detached
+  pending-dispatch HEAD `dae33f802707806f757aac4a55240a0d34ada985`, clean
+  state, and entrypoint-only read; no successor write, verification, or further
+  repository read was made.
+- Release record: this predecessor-final commit; the ACTIVATE/RELEASE message
+  carries its exact hash, and this verifier makes no later worktree write.
+- Sole-writer state: this verifier is write-closed on committing this record;
+  the write-held re-review successor becomes sole writer only after re-proving
+  this exact released HEAD and recording its activation.
 - Output: append-only exact-head evidence in
   `docs/cuts/codex-matt-governance/verification.md` and this task's lifecycle
   fields
