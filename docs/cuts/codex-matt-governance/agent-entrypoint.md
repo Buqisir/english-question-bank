@@ -12,8 +12,9 @@
 
 ## Current Stage
 
-**The top-level fresh formal re-review recorded `NOT MERGEABLE`; its sole
-top-level fresh Fix DEV successor is release-authorized under write hold.**
+**Top-level Fix DEV 4 is active for canonical R2-R3 only. It owns the sole
+bounded documentation correction and then one top-level fresh, non-implementing
+verification transition.**
 
 The manual-fallback Fix DEV 3 task and its mistakenly spawned verification
 subagent are write-closed. The verification subagent completed valid exact-head
@@ -24,12 +25,11 @@ visible top-level task owns only this recovery checkpoint and the creation of
 one independently addressable top-level fresh formal re-review; it will not
 wait for that review result.
 
-Canonical `cr.md` recorded unresolved R1-R3; Fix DEV 3 implemented the bounded
-repair at `b1169a6978aef1e475360b725a8bd96265ef3a39`, restored normal
-dependencies, and passed fresh exact-head verification. The next top-level task
-owns formal re-review only. No implementation, QA, RM, merge, push, production,
-workflow/script edit, skill/plugin/tracker, main-checkout, or
-applied-writing-lecture action is authorized in that review task.
+The top-level formal re-review result at
+`4659073b8b17249d73a318f0d951f9efc1e882c7` left R2-R3 unresolved. This task
+may correct only those findings; it must not write `cr.md` or
+`verification.md`. After its durable fix commit, it creates and releases one
+top-level fresh verifier, then ends without waiting for verification.
 
 ## Must Read
 
@@ -771,10 +771,11 @@ create any later relay task.
 
 ## Next Action
 
-Activate exactly the release-authorized Fix DEV successor below. It must adopt
-and re-prove this predecessor-final commit, record a machine-current first-write
-activation, repair only canonical R2-R3, hand to one top-level fresh
-verification successor, and exit without waiting for the verification result.
+Cold-read the required R2-R3 evidence and allowed documentation targets,
+implement only the canonical fixes, self-check the exact result head, then
+create, release, and obtain activation acknowledgement from exactly one
+top-level fresh non-implementing verification successor. Do not wait for its
+result.
 
 ## Topology Recovery Record
 
@@ -874,6 +875,23 @@ verification successor, and exit without waiting for the verification result.
 - Task creation: the initial call passed explicit `model=gpt-5.6-terra` and
   `thinking=medium` but failed before a thread existed; exactly one bounded
   corrected retry is authorized after the no-child proof above
+- Activation state: `active`
+- Activation task identity: `019f8ae9-1ed5-7a92-9f64-0ee0d92a0dac` (`local`)
+- Activated role: top-level fresh Fix DEV for canonical R2-R3 only
+- Explicit route: `gpt-5.6-terra` / `medium`
+- Released predecessor-final HEAD:
+  `80b256abc31d3fb2375b7dcfd37a8c7063d95d47`
+- Activation re-proof: this worktree is
+  `/Users/huangxuewei/.codex/worktrees/1b94/english-question-bank`, detached
+  at the released exact HEAD above, clean, and descended from
+  `f00e76a6630ac333bbfc16cbb9b6f81594aab64c`.
+- Sole-writer state: acquired; predecessor
+  `019f8ada-1f77-7ba2-8b3b-b8fb10060ded` is write-closed and this Fix DEV is
+  the only active repository writer.
+- Unique direct transition: after durable R2-R3 writeback, create exactly one
+  top-level fresh non-implementing verification successor, release it only
+  from this task's final handoff commit, obtain activation acknowledgement, and
+  stop without waiting for a verification result.
 - Corrected retry queued entry:
   `client-new-thread:3a40e6ec-c51a-4793-af5f-2c7ab696d0e4`
 - Returned top-level task:
