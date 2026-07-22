@@ -693,9 +693,30 @@ edits, skill/plugin/tracker work, main-checkout edits, or changes to the
   CR/QA/RM/merge/push/production, product/runtime, scripts/workflows,
   skills/plugins/trackers, main-checkout, or applied-writing-lecture action
 
+## Fix DEV 3 Verification Dispatch
+
+- Dispatch ID: `codex-matt-governance-fix3-verification-20260722-01`
+- State: `dispatch-pending`
+- Expected base/head: `b1169a6978aef1e475360b725a8bd96265ef3a39`
+- Checkout: this isolated detached worktree
+  `/Users/huangxuewei/.codex/worktrees/governance-fix-rereview-20260722`
+- Next role: fresh non-implementing verification for the Fix DEV 3 exact head
+- Configured model: `gpt-5.6-terra`
+- Selected model: `gpt-5.6-terra`
+- Thinking: `medium`
+- Route reason: exact-head governance verification and lifecycle evidence
+- Availability/substitution evidence: configured primary selected from the
+  finite `[gpt-5.6-terra]` eligibility set; no substitution
+- Output: append-only exact-head evidence in
+  `docs/cuts/codex-matt-governance/verification.md` and this task's lifecycle
+  fields
+- Authorization: verification only. It must not implement, perform CR, QA, RM,
+  merge, push, production, workflow/script edits, skill/plugin/tracker work,
+  main-checkout work, or applied-writing-lecture work. After durable evidence,
+  it may create exactly one fresh no-DEV-history formal re-review successor.
+
 ## Next Action
 
-The active manual-fallback Fix DEV 3 task implements only R1-R3, restores the
-normal worktree dependencies, commits its bounded result, then creates exactly
-one fresh non-implementing verification successor with the recorded
-write-held/final-commit/release protocol. No other role or transition is live.
+Provision exactly the one write-held Fix DEV 3 verification successor above.
+After it proves readiness, this predecessor records the exact final release
+head, sends activation, and exits without another worktree write.
