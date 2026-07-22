@@ -56,13 +56,19 @@ Skim only if unfamiliar or not already loaded in this session.
 ## Relay Lifecycle
 
 - Dispatch ID:
-- State: `ready | dispatch-pending | provisioning | ready-held |
-  release-authorized | active | result-recorded | closed | failed`
+- State: `ready | claimed | dispatch-pending | provisioning | ready-held |
+  release-authorized | active | result-recorded | human-QA | blocked | closed |
+  failed`
 - Expected project root / branch / head:
 - Next role and output:
 - Configured model / selected model / thinking:
 - Availability, eligibility, and substitution evidence:
+- Returned task identity / prompt digest:
+- Released predecessor-final HEAD:
+- Activation commit / result commit:
+- Evidence pointer:
 - One-successor authorization and stop boundary:
+- Unique next action / recovery action:
 
 For a shared worktree, a successor is write-held until it re-proves the
 predecessor's released exact HEAD and clean state. Its first permitted write is

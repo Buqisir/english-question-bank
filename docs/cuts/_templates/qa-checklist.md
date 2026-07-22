@@ -25,6 +25,8 @@ Deploy: <本地 dev / 生产 URL + commit>
 
 owner QA: <过 / 不过(哪一项)>;日期: <YYYY-MM-DD>
 
-Auto-Next pause: QA pass records the tested exact commit then dispatches fresh
-RM; a failure records the item then dispatches fresh fix DEV. A QA pass never
-carries to a new head.
+Auto-Next pause: QA pass records the tested exact commit then waits for the
+literal owner instruction `QA 完成，继续` before dispatching fresh RM. A failure
+records `QA failed | exact commit | checklist item | observed result | expected
+result | reproduction` then dispatches fresh fix DEV. A QA pass never carries
+to a new head.

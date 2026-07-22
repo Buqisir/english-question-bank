@@ -7,12 +7,12 @@ First principles decide **why** a cut needs review. Razor discipline decides **w
 ## Roles
 
 - **PO**: product owner / final acceptance.
-- **PA**: plan architect. Reviews roadmap, scope, architecture, and product boundary before implementation. Runs as a fresh subagent context so PM and PA are separated; follows `docs/agents/pa-persona.md`.
+- **PA**: plan architect. Reviews roadmap, scope, architecture, and product boundary before implementation in a fresh independently addressable task; follows `docs/agents/pa-persona.md`.
 - **DEV**: implementation agent. Runs as a fresh independently addressable task
   explicitly pinned from `docs/agents/model-routing.md`.
 - **verification**: fresh non-implementing task after DEV; consumes real exit
   codes and binds evidence to the exact implementation head before fresh CR.
-- **CR**: code reviewer. Medium / Large CR runs as a fresh subagent context following `docs/agents/cr-persona.md`; it must not have implemented the code (reviewer ≠ implementer). CR-lite is only the PM's Small-cut cold read.
+- **CR**: code reviewer. Medium / Large CR runs as a fresh independently addressable no-DEV-history task following `docs/agents/cr-persona.md`; it must not have implemented the code (reviewer ≠ implementer). CR-lite is only the PM's Small-cut cold read.
 - **QA**: product / browser / visual acceptance. The orchestrator does first QA for UI direction and user-visible quality; the owner does final PO QA.
 - **RM**: release manager. 阿澈's PM + RM main-agent session owns release execution; Medium / Large run the artifact gate and final sanity check after fresh CR and before merge.
 
@@ -102,8 +102,9 @@ to downgrade the Medium / Large fresh-CR gate.
 - One tree-trunk DEV at a time. Parallel agents may work on leaves: docs, inventories, QA checklists, examples, migration research, or static review prep.
 - Night work should bias toward low-risk cleanup, docs, merge administration, and planning notes. Avoid major architecture decisions late at night.
 - Current operating reality (authority: `AGENTS.md` "Current Operating Reality"):
-  阿澈 wears PM / UI-direction / RM; PA, DEV, and CR use separate fresh contexts,
-  each explicitly pinned from the current tier table, so reviewer ≠ implementer
+  阿澈 wears PM / UI-direction / RM; PA, DEV, and CR use separate fresh,
+  independently addressable contexts, each explicitly pinned from
+  `docs/agents/model-routing.md`, so reviewer ≠ implementer
   and PM ≠ PA. Role contracts and gates do not downgrade. The owner does PO QA,
   not code review.
 - Multi-agent handoff context is repo-first. PA / CR prompts and

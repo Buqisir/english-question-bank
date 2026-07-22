@@ -21,40 +21,20 @@ than supervising the successor. If availability has no authority-eligible model
 with the requested thinking, record `missing-authority` / `dispatch-failed` and
 do not create a task.
 
-## 直接派工路由（owner 裁决 2026-07-21）
+## Direct dispatch routing
 
-标准刀由 PM 逐阶段直接派工：读回执、作必要裁决、再派下一步。不要把
-DEV / verify / CR 包进后台 Workflow，也不设置 verify agent 代位 PM 复核。
+Small single-action work may be completed directly or sent to one fresh DEV
+task, then receives PM CR-lite. Medium/Large work starts from committed
+`plan.md` and follows the one-way Auto-Next relay above: PA when required,
+fresh DEV, fresh verification, fresh CR, then QA or RM. Each direct successor
+is independently addressable and selects explicit `model` and `thinking` only
+from `docs/agents/model-routing.md`; no predecessor reads a result and routes a
+later stage. Verification owns the plan-named real exit codes; CR checks their
+exact-head binding and runs only named attack checks. Human QA and owner
+decisions pause the relay under the recorded stop conditions.
 
-**路由决策卡（开刀 10 秒走完）：**
-
-1. 单动作 small？→ PM 直接完成，或直接派一名 fresh DEV；PM 冷读 CR-lite
-   收口。
-2. medium / large？→ 先确认 committed `plan.md` 与预建 worktree；需要 PA
-   时先派 fresh PA，然后直接派 fresh DEV。所有派工按 `AGENTS.md` 当前
-   tier table 显式 pin model + effort。
-3. DEV durable writeback 后派 fresh non-implementing verification；它消费计划
-   规定的 narrow verify、`tsc` 与 full verify 的真实退出码并绑定 exact HEAD，
-   然后派 fresh CR；CR 将
-   结论写入 `docs/cuts/<CUT>/cr.md`。
-4. PM + RM 只在 fresh CR 的 `cr.md` 落盘后运行 artifact gate，再处理 merge、
-   main CI 和 STATUS。
-5. 批量跑批？→ 走第二适用类（小切片试跑 → 报量 → 全量分批落盘，见文末）。
-
-**裁决点仍须显式列出。** 开刀时标出 PM / owner 需要读内容才能下的语义
-判断；它们是 PM 的断点锚，裁决结论写入 cut artifact。merge / 生产操作、owner
-QA / 拍板、Must Fix 处置永远由 PM 直接处理。
-
-硬前提与边界：
-
-- plan 预写充分仍是前提；不足先补 plan。探索刀或 owner 观感紧迭代刀，
-  逐步直接派工并把新裁决落盘。
-- 每个 subagent 按 `AGENTS.md` 当前 tier table 显式钉 model + effort，包含
-  该角色的升级例外；严禁默认继承，也不做未经计划的并行扇出。
-- PM 亲自消费 verify 的原始退出码；红码或工作树有残留即中止。
-- 浏览器 QA 可由 DEV / QA 运行，但 owner 实点 QA 是裁决点。
-- **DP-2 截图写盘用 `DP2_SCREENSHOTS=1` 门控**（2026-07-16 立）：截图像素
-  不确定，复跑 DP-2 可能弄脏工作树。默认平跑；DEV 出档证据时才开一次环境变量。
+Decision points still belong in tracked cut artifacts. Merge, production, and
+human QA retain their existing authorities. Batch work follows the next section.
 
 **批量跑批**(第二适用类;真实场景 = analysis-fields R1/R2、数据健康
 批修;R1/R2 首战后按实战修订本节)。**第零问:这批活需要 AI 吗?**

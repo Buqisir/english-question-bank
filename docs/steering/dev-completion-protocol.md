@@ -55,6 +55,9 @@ instead) ONLY when the task is explicitly tagged with one of:
 - `spike-only` — exploratory work, no integration intent
 - `plan-only` — planning artifacts, code may not even be committed
 - `review-only` — only inspecting existing code, no edits expected
+- `auto-next` — durable result plus one fresh verification successor under the
+  entrypoint release protocol; do not push, open a PR, merge, or wait for that
+  successor
 
 When the exception applies, the completion report still must give
 the branch URL in the form

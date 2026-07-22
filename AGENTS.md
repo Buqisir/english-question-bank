@@ -79,13 +79,13 @@ requested thinking. Never rely on a runtime default or inherited profile.
   owner 2026-07-12), 挂账 pointers; detail lives in the cut dir;
   entries older than ~two weeks roll into `docs/status-archive/`).
 - 复核纪律:**DEV self-reported green is never accepted at face value.**
-  The main agent re-runs verification itself, with real exit codes (never
-  piped through anything that swallows them). Division of labor: main agent
-  runs the cut's narrow verify script(s) + `tsc` **and one full
-  `verify:all`** in the DEV worktree pre-merge; post-merge proof of the
-  combined tree is the watched `main` CI run — no local full re-run in the
-  main tree unless the merge overlapped interim main commits. Verify is never
-  delegated as a substitute for the main agent's release review.
+  A fresh non-implementing verification task runs the plan-named checks with
+  real exit codes and binds the evidence to the exact implementation head.
+  Fresh CR attacks that evidence without duplicating an unchanged full run;
+  RM consumes it and reruns only when the evidence is missing, the head
+  changed, an overlapping rebase/merge occurred, or the plan names a release
+  check. Post-merge proof remains the watched `main` CI run. Verification is
+  independent evidence, never a substitute for CR or RM release review.
 - Verify convention: new contracts prefer behavioral assertions (start the
   server / call the real API / import the real module) over source-regex
   assertions. A behavioral assertion may retire the matching regex

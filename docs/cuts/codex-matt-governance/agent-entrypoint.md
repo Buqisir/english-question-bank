@@ -283,7 +283,7 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
 ## Verification Dispatch
 
 - Dispatch ID: `codex-matt-governance-verification-20260722-01`
-- State: `active`
+- State: `closed`
 - Project: `local-8a1aff1b944a0aa921d1f6b55296afd6`
 - Checkout: existing worktree
   `/Users/huangxuewei/Projects/wt-codex-matt-governance`
@@ -310,8 +310,14 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
   the first permitted write
 - Sole-writer state: acquired; predecessor is write-closed and verification is
   the only active writer in the shared worktree
-- Activation record: this commit
+- Activation record: `2f9bb8dc2d52a203b89d80135f1f4789c7e66a99`
 - Output: `docs/cuts/codex-matt-governance/verification.md`
+- Result commit: `65017c22152b309e989ea80d867035a6e69c3d6a`
+- Result: verification evidence recorded; one fresh no-DEV-history CR successor
+  was created
+- Role completion: closed by predecessor-final release commit
+  `8181f22abe128b306f66d9522787e5556685d125`; verification made no later
+  worktree write and did not wait for the CR result
 - Authorization: exactly one fresh no-DEV-history CR successor after durable
   verification writeback; no implementation, CR verdict, QA, RM, merge, push,
   production, or downstream supervision by verification
@@ -368,7 +374,7 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
 ## Fix DEV Dispatch
 
 - Dispatch ID: `codex-matt-governance-fix-dev-20260722-01`
-- State: `release-authorized`
+- State: `result-recorded`
 - Project: `local-8a1aff1b944a0aa921d1f6b55296afd6`
 - Checkout: fresh isolated worktree from this exact pending-dispatch commit
 - Expected base/head: `64fafef0c5c6bbb913bc4c721535950fc76250ba`
@@ -408,7 +414,13 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
   and clean state re-proved before the first permitted write
 - Sole-writer state: acquired; predecessor is write-closed and this fix DEV is
   the only active writer in the isolated worktree
-- Activation record: this commit
+- Activation record: `a13a501ccc913d4c19a89af09d586b27d24d7ee9`
+- DEV self-check: `git diff --check` passed; the targeted current-positive
+  conflict scan returned zero matches; lifecycle-template fields and QA resume
+  text were confirmed present. `bash scripts/setup-worktree.sh` restored the
+  normal dependencies. Formal exact-head verification remains delegated to the
+  required fresh verification successor.
+- Result commit: this commit
 - Output: fixes limited to canonical CR Must Fix 1-5 and durable DEV evidence
 - Authorization: one fresh fix-DEV task plus exactly one fresh non-implementing
   verification successor after durable fix writeback; no CR/QA/RM/merge/push/
@@ -417,7 +429,9 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
 
 ## Next Action
 
-Send ACTIVATE/RELEASE with this exact predecessor-final commit to the write-held
+The active sole writer closes canonical CR Must Fix 1-5, commits the bounded
+fix and DEV evidence, then creates exactly one fresh non-implementing
+verification successor under the write-held/final-commit/release protocol.
 fix-DEV successor. It re-proves that HEAD and clean state, durably records
 activation as sole writer, and acknowledges. CR performs no later worktree write
 and exits immediately after that acknowledgement without waiting for the fix

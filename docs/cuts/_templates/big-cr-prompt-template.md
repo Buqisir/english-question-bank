@@ -126,16 +126,12 @@ Last synced: <date> after Big CR.
 Open review items: <N> (see <report> §<section>)
 ```
 
-## Chat Reply Format
+## Relay Completion
 
-After writing the repo file, reply in chat with only:
-
-- Report path
-- Absolute report path
-- Git branch
-- Git status entry for report file
-- Verdict
-- Must Fix count
-- Should Watch count
-
-If blocked, use one `ESCALATION:` line instead.
+After durable report writeback, record result commit, verdict, evidence pointer,
+and exactly one unique next action in the entrypoint. Create at most one
+independently addressable write-held successor, record its identity and prompt
+digest, make the predecessor-final `release-authorized` commit, release that
+exact head, and exit after the successor's activation acknowledgement. If human
+QA is next, record `human-QA` and pause instead. On a named stop condition,
+record `blocked` with the recovery action; do not improvise a second successor.

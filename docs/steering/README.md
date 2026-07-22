@@ -86,7 +86,7 @@ Hard rule:
 
 File: `docs/agents/pa-persona.md`
 
-Use when spawning a PA subagent.
+Use when creating a fresh independently addressable PA task.
 
 Hard rule:
 
