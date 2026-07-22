@@ -12,12 +12,13 @@
 
 ## Current Stage
 
-**PM plan complete; waiting for fresh PA.**
+**Final owner ratification recorded; Auto-Next must create fresh PA now.**
 
-The owner has approved the two-axis reconciliation direction. This cut has
-only created its durable PM routing artifacts. No current collaboration rule,
-business code, product surface, production configuration, or in-flight cut has
-been changed.
+The owner has finally approved the two-axis model, Wayfinder total navigation,
+owner/Agent responsibility boundary, and task-to-task Auto-Next. This cut has
+still only changed its durable PM routing artifacts. No current collaboration
+rule, business code, product surface, production configuration, or in-flight
+cut has been changed.
 
 ## Must Read
 
@@ -44,7 +45,7 @@ Open only when needed to check a named conflict or artifact convention:
 The next task wears only the PA hat. It must:
 
 1. fetch and confirm the baseline, branch, worktree, and diff;
-2. cold-read the two-axis contract and all five named conflicts;
+2. cold-read the eight hard rules and all seven named conflicts;
 3. test the proposed file ownership and verification plan for contradictions;
 4. write the full PA verdict to
    `docs/cuts/codex-matt-governance/pa.md`;
@@ -62,6 +63,8 @@ skills or tracker infrastructure, touch business code, or change the
 
 ## Next Action
 
-Open a fresh task for PA only. Do not start DEV until PA is complete and the PM
-has recorded every Must Fix disposition under `PA Follow-Up Decisions` in
-`plan.md`.
+The active PM task must automatically create and start a fresh PA task in the
+EQB project, route it to this branch/worktree and entrypoint, propagate the
+owner's Auto-Next authorization, then end. Do not start DEV until PA is complete
+and the PM has recorded every Must Fix disposition under
+`PA Follow-Up Decisions` in `plan.md`.
