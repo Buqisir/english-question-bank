@@ -12,7 +12,8 @@
 
 ## Current Stage
 
-**PM plan revision complete; the sole fresh PA recheck dispatch is pending.**
+**PM plan revision closed; the fresh PA recheck is write-held and
+release-authorized by the predecessor's final worktree commit.**
 
 The second fresh PA approved the owner-locked model-routing and one-way-relay
 direction but found four executable protocol gaps: same-grade substitution is
@@ -100,7 +101,7 @@ business code, or change the `applied-writing-lecture` worktree.
 ## Successor Dispatch
 
 - Dispatch ID: `codex-matt-governance-pm-revision-20260722-01`
-- State: `result-recorded`
+- State: `closed`
 - Project: `local-8a1aff1b944a0aa921d1f6b55296afd6`
 - Checkout: existing worktree
   `/Users/huangxuewei/Projects/wt-codex-matt-governance`
@@ -131,6 +132,8 @@ business code, or change the `applied-writing-lecture` worktree.
 - Result commit: `ff7d2b39e21a54c13d27b96f258001b98667ebc6`
 - Result: AMF-1 through AMF-4 dispositioned; DP-3/readiness made derived
   without pre-approving PA
+- Closure: the PM result and sole PA-recheck successor are durable; after the
+  final release-authorizing commit below this PM makes no later worktree write
 - Authorization: one PM plan revision plus exactly one fresh PA-recheck
   successor after durable writeback; no current-rule implementation, DEV,
   verification, CR, RM, merge, production, infrastructure, or downstream
@@ -139,7 +142,7 @@ business code, or change the `applied-writing-lecture` worktree.
 ## PA Recheck Dispatch
 
 - Dispatch ID: `codex-matt-governance-pa3-20260722-01`
-- State: `provisioning`
+- State: `release-authorized`
 - Project: `local-8a1aff1b944a0aa921d1f6b55296afd6`
 - Checkout: existing worktree
   `/Users/huangxuewei/Projects/wt-codex-matt-governance`
@@ -163,6 +166,18 @@ business code, or change the `applied-writing-lecture` worktree.
 - Creation evidence: the first API call was rejected before creation for an
   invalid argument shape; the one bounded corrected retry returned the thread
   above, so no ambiguous or duplicate task exists
+- Bootstrap proof: successor reported exact worktree and branch, clean status,
+  pending-dispatch HEAD
+  `9516f6b5283147dbc4763d297cd160bb39dba7fe`, and that it read only this
+  entrypoint; successor remains write-held
+- Provisioning record commit:
+  `1561b172ce8a49c9c7c47addb4eeab32f145f48f`
+- Release record: this is the predecessor's final worktree commit; the
+  ACTIVATE/RELEASE message carries its exact hash, and the predecessor performs
+  no later worktree write
+- Activation state: successor must re-prove the released exact HEAD and clean
+  state, then use its first permitted write to record `active` plus sole-writer
+  proof durably before acknowledging activation
 - Output: append-only recheck in
   `docs/cuts/codex-matt-governance/pa.md`
 - Authorization: one PA recheck plus exactly one in-scope direct successor
@@ -172,8 +187,8 @@ business code, or change the `applied-writing-lecture` worktree.
 
 ## Next Action
 
-Wait for the fresh PA task's bootstrap proof while it remains write-held. Then
-make the predecessor's final worktree commit recording readiness, closure, and
-release authorization; send that exact HEAD in ACTIVATE/RELEASE. End after the
-successor durably records activation and acknowledges; do not wait for its
-verdict and do not resume any ancestor task.
+Send ACTIVATE/RELEASE with this exact predecessor-final HEAD to the write-held
+PA recheck. The successor re-proves that HEAD, durably records activation as
+sole writer, and acknowledges. This PM performs no later worktree write and
+ends immediately after that acknowledgement without waiting for the verdict;
+no ancestor task resumes.
