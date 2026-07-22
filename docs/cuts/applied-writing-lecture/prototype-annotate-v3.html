@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>应用文讲评 · 真实卷面空白寻位 v3</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shantell+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@chinese-fonts/xiaolai@3.0.0/dist/Xiaolai/result.css" rel="stylesheet">
+  <style>
+    :root {
+      --paper-width: 794px;
+      --answer-width: 612px;
+      --page-margin: 91px;
+      --paper: #fff;
+      --desk: #f1efe9;
+      --ink: #171917;
+      --muted: #77756e;
+      --line: #dedbd2;
+      --green: #267a5b;
+      --orange: #c45d37;
+      --ui: Inter, ui-sans-serif, system-ui, -apple-system, "PingFang SC", sans-serif;
+      --cn-hand: "Xiaolai SC", "Kaiti SC", cursive;
+      --en-hand: "Shantell Sans", cursive;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { min-height: 100%; }
+
+    body {
+      margin: 0;
+      min-width: 1180px;
+      color: var(--ink);
+      background: var(--desk);
+      font-family: var(--ui);
+    }
+
+    button { font: inherit; }
+
+    .appbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      height: 48px;
+      padding: 0 24px;
+      color: #494b47;
+      background: rgba(249, 248, 244, .94);
+      border-bottom: 1px solid #e2dfd7;
+      backdrop-filter: blur(10px);
+    }
+
+    .appbar strong { margin-right: 14px; color: #232622; font-size: 14px; }
+    .appbar span { font-size: 12px; }
+    .appbar .spacer { flex: 1; }
+
+    .ghost-button {
+      padding: 5px 10px;
+      color: #5c655f;
+      background: #fff;
+      border: 1px solid #d9d7cf;
+      border-radius: 999px;
+      cursor: pointer;
+      font-size: 11px;
+    }
+
+    .ghost-button:hover { border-color: #8fa99e; }
+
+    .shell {
+      display: grid;
+      grid-template-columns: 88px var(--paper-width) 380px;
+      gap: 24px;
+      width: max-content;
+      margin: 0 auto;
+      padding: 24px 24px 88px;
+      align-items: start;
+    }
+
+    .nav-rail {
+      position: sticky;
+      top: 72px;
+      padding: 9px 6px;
+      background: #fbfaf7;
+      border: 1px solid #dfdcd4;
+      border-radius: 8px;
+      box-shadow: 0 5px 18px rgba(33, 36, 33, .04);
+    }
+
+    .nav-rail button {
+      display: block;
+      width: 100%;
+      padding: 6px 4px;
+      color: #75746e;
+      background: none;
+      border: 0;
+      border-radius: 999px;
+      font-size: 11px;
+    }
+
+    .nav-rail button.on { color: #fff; background: #2b2d2a; }
+
+    .paper {
+      position: relative;
+      width: var(--paper-width);
+      min-height: 748px;
+      padding: 22px var(--page-margin) 38px;
+      overflow: hidden;
+      background: var(--paper);
+      box-shadow: 0 1px 0 #0000000c, 0 12px 32px #00000012;
+    }
+
+    .exam-head { font-family: "Songti SC", "STSong", serif; }
+    .exam-head h2 { margin: 0 0 17px; font-size: 15px; line-height: 1.5; }
+    .exam-head h3 { margin: 0 0 12px; font-size: 14px; font-weight: 500; }
+
+    .prompt {
+      margin-bottom: 12px;
+      font-family: "Songti SC", "STSong", serif;
+      font-size: 12px;
+      line-height: 1.75;
+    }
+
+    .prompt p { margin: 0 0 2px; }
+    .prompt .indent { padding-left: 2em; }
+    .prompt .notice { margin-top: 8px; }
+
+    .paper-stage {
+      --page-ink: var(--green);
+      position: relative;
+      width: var(--paper-width);
+      height: 472px;
+      margin-left: calc(var(--page-margin) * -1);
+      overflow: hidden;
+    }
+
+    .paper-stage[data-page="1"] { --page-ink: var(--orange); }
+
+    .answer-frame {
+      position: absolute;
+      z-index: 1;
+      top: 0;
+      left: var(--page-margin);
+      width: var(--answer-width);
+      height: 458px;
+      padding: 17px 24px 15px;
+      background: #fff;
+      border: 1px solid #1b1c1b;
+    }
+
+    .review-titlebar {
+      display: flex;
+      align-items: baseline;
+      height: 33px;
+      border-bottom: 1px solid #e6e2da;
+    }
+
+    .review-titlebar strong { font-size: 13px; }
+    .review-titlebar span { margin-left: auto; color: #85827a; font-size: 10px; }
+
+    .review-tabs {
+      display: flex;
+      height: 40px;
+      margin-bottom: 3px;
+    }
+
+    .review-tab {
+      position: relative;
+      padding: 0 12px;
+      color: #77746d;
+      background: none;
+      border: 0;
+      cursor: pointer;
+      font-size: 11px;
+    }
+
+    .review-tab.on { color: var(--page-ink); font-weight: 700; }
+
+    .review-tab.on::after {
+      position: absolute;
+      right: 10px;
+      bottom: 0;
+      left: 10px;
+      height: 2px;
+      background: var(--page-ink);
+      content: "";
+    }
+
+    .letter {
+      color: #171917;
+      font-family: var(--en-hand);
+      font-size: 13px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 1.58;
+      letter-spacing: -.012em;
+    }
+
+    .letter p { margin: 0 0 4px; }
+    .letter .body { text-indent: 2em; }
+    .letter .closing { margin: 0; text-align: right; }
+    .anchor { position: relative; }
+
+    .ink-layer,
+    .debug-layer,
+    .note-layer {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .ink-layer { z-index: 2; overflow: visible; }
+    .debug-layer { z-index: 2; display: none; }
+    .note-layer { z-index: 3; }
+
+    .ink-layer path {
+      fill: none;
+      stroke: var(--page-ink);
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      vector-effect: non-scaling-stroke;
+    }
+
+    .ink-layer .leader-arc { opacity: .84; }
+    .ink-layer .leader-head { opacity: .98; }
+
+    .note {
+      position: absolute;
+      width: var(--note-width, 214px);
+      color: var(--page-ink);
+      font-family: var(--cn-hand);
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 1.28;
+      letter-spacing: .015em;
+      transform: none;
+    }
+
+    .note b { display: inline; margin-right: .45em; font-weight: 600; }
+    .note-extra { display: block; margin-top: 1px; font-size: 11px; opacity: .76; }
+    .note-en { font-family: var(--en-hand); letter-spacing: -.01em; }
+
+    .note .slot-tag {
+      display: none;
+      position: absolute;
+      top: -11px;
+      left: 0;
+      color: var(--page-ink);
+      font: 8px/1 var(--ui);
+    }
+
+    body.debug .debug-layer { display: block; }
+
+    body.debug .note {
+      outline: 1px dashed color-mix(in srgb, var(--page-ink) 50%, transparent);
+      outline-offset: 3px;
+    }
+
+    body.debug .note .slot-tag { display: block; }
+
+    .stage-status {
+      position: absolute;
+      z-index: 4;
+      right: 99px;
+      bottom: 1px;
+      display: flex;
+      gap: 5px;
+      color: #6f746f;
+      font-size: 9px;
+    }
+
+    .stage-status span {
+      padding: 3px 6px;
+      background: rgba(255,255,255,.9);
+      border: 1px solid #e2e0d8;
+      border-radius: 999px;
+    }
+
+    .lecture-rail {
+      position: sticky;
+      top: 72px;
+      height: calc(100vh - 96px);
+      padding: 17px 16px;
+      overflow: auto;
+      background: #fbfaf7;
+      border: 1px solid #dfdcd4;
+      border-radius: 8px;
+      box-shadow: 0 7px 22px rgba(37, 41, 38, .05);
+      font-size: 12px;
+    }
+
+    .lecture-rail h2 { margin: 0 0 12px; font-size: 14px; }
+    .lecture-rail h3 { margin: 12px 0 6px; font-size: 12px; }
+    .lecture-rail h4 { margin: 10px 0 5px; color: #2c7257; font-size: 10px; letter-spacing: .05em; }
+
+    .facts { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; }
+
+    .fact,
+    .rail-row {
+      padding: 7px 8px;
+      background: #fff;
+      border: 1px solid #dfdcd4;
+      border-radius: 4px;
+      line-height: 1.35;
+    }
+
+    .fact small,
+    .rail-row small { display: block; margin-bottom: 2px; color: #87837a; font-size: 9px; }
+    .rail-row { margin-bottom: 5px; }
+
+    .algorithm-note {
+      margin-top: 14px;
+      padding: 10px;
+      color: #4c5d55;
+      background: #edf2ee;
+      border-radius: 5px;
+      font-size: 10px;
+      line-height: 1.55;
+    }
+
+    .algorithm-note b { display: block; margin-bottom: 3px; color: #275e49; }
+
+    .variant-switcher {
+      position: fixed;
+      z-index: 30;
+      top: 7px;
+      left: 50%;
+      display: grid;
+      grid-template-columns: 34px minmax(210px, auto) 34px;
+      align-items: center;
+      color: #38413c;
+      background: rgba(255,255,255,.92);
+      border: 1px solid #d8ddd9;
+      border-radius: 999px;
+      box-shadow: 0 3px 12px rgba(30,36,32,.08);
+      transform: translateX(-50%);
+    }
+
+    .variant-switcher button {
+      height: 34px;
+      color: #38413c;
+      background: none;
+      border: 0;
+      cursor: pointer;
+    }
+
+    .variant-label { padding: 0 10px; text-align: center; font-size: 11px; }
+    .variant-label b { margin-right: 5px; color: #2f8161; }
+
+    @media (max-width: 1260px) {
+      .shell { grid-template-columns: 64px var(--paper-width); }
+      .lecture-rail { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <!-- THROWAWAY PROTOTYPE: three placement strategies on the real 794/612 paper geometry, switchable via ?variant=. -->
+  <header class="appbar">
+    <strong>2024年新课标Ⅰ卷 · 应用文写作</strong>
+    <span>真实卷面尺寸原型 · 中文小赖 / 英文 Shantell Sans</span>
+    <span class="spacer"></span>
+    <button class="ghost-button" id="repack" type="button">重新寻位</button>
+    <button class="ghost-button" id="debug" type="button">显示算法</button>
+  </header>
+
+  <main class="shell">
+    <nav class="nav-rail" aria-label="目录">
+      <button type="button">21–23</button>
+      <button type="button">24–27</button>
+      <button type="button">28–31</button>
+      <button type="button">32–35</button>
+      <button type="button">36–40</button>
+      <button type="button">41–55</button>
+      <button type="button">56–65</button>
+      <button class="on" type="button">应用文</button>
+      <button type="button">读后续写</button>
+    </nav>
+
+    <section class="paper" id="paper">
+      <div class="exam-head">
+        <h2>第四部分 写作（共两节，满分40分）</h2>
+        <h3>第一节（满分15分）</h3>
+      </div>
+      <div class="prompt">
+        <p>假定你是李华，上周五你们班在公园上了一堂美术课。请你给英国朋友Chris写一封邮件分享这次经历，内容包括：</p>
+        <p class="indent">（1）你完成的作品；　（2）你的感想。</p>
+        <p class="notice">注意：（1）写作词数应为80个左右；（2）请按如下格式在答题卡的相应位置作答。</p>
+      </div>
+
+      <div class="paper-stage" id="stage" data-page="0">
+        <div class="answer-frame" id="answerFrame">
+          <div class="review-titlebar" id="reviewTitlebar">
+            <strong>讲评 · 应用文解析</strong>
+            <span>卷面不增高</span>
+          </div>
+          <div class="review-tabs" id="reviewTabs">
+            <button class="review-tab on" type="button" data-page="0">① 审题要点</button>
+            <button class="review-tab" type="button" data-page="1">② 亮点句式</button>
+          </div>
+          <article class="letter" id="letter" aria-label="英文范文"></article>
+        </div>
+        <svg class="ink-layer" id="ink" aria-hidden="true"></svg>
+        <svg class="debug-layer" id="debugLayer" aria-hidden="true"></svg>
+        <div class="note-layer" id="noteLayer" aria-live="polite"></div>
+        <div class="stage-status">
+          <span id="packed">空白寻位 –/–</span>
+          <span>纸 794 · 框 612 · 页边 91</span>
+          <span id="fontStatus">小赖 + Shantell</span>
+        </div>
+      </div>
+    </section>
+
+    <aside class="lecture-rail" aria-label="讲评">
+      <h2>应用文写作</h2>
+      <h3>审题卡</h3>
+      <h4>基础五定</h4>
+      <div class="facts">
+        <div class="fact"><small>文体</small>邮件</div>
+        <div class="fact"><small>话题</small>公园美术课</div>
+        <div class="fact"><small>读者</small>英国朋友 Chris</div>
+        <div class="fact"><small>人称</small>I ↔ you</div>
+        <div class="fact"><small>主时态</small>过去时为主</div>
+        <div class="fact"><small>判型</small>描述类</div>
+      </div>
+      <h4>圈要点、编号</h4>
+      <div class="rail-row">① 你完成的作品</div>
+      <div class="rail-row">② 你的感想</div>
+      <h4>读者三问</h4>
+      <div class="rail-row"><small>他最关心什么？</small>你到底画了什么、那节课有意思在哪</div>
+      <div class="rail-row"><small>他要什么具体信息？</small>作品得能「看见」——画的是什么、什么颜色、什么样子</div>
+      <h4>价值落点</h4>
+      <div class="rail-row">在公园上美术课 = 在生活里发现美</div>
+      <div class="algorithm-note">
+        <b id="algorithmTitle">A · 全局空白求交</b>
+        <span id="algorithmCopy">逐行测量英文占位；在整张白纸内计算可容纳整条批注的最大空白矩形，再联合安排所有批注。</span>
+      </div>
+    </aside>
+  </main>
+
+  <div class="variant-switcher" aria-label="原型布局切换">
+    <button id="variantPrev" type="button" aria-label="上一种布局">←</button>
+    <div class="variant-label"><b id="variantKey">A</b><span id="variantName">全局空白求交</span></div>
+    <button id="variantNext" type="button" aria-label="下一种布局">→</button>
+  </div>
+
+  <script>
+    const LETTER_LINES = [
+      'Dear Chris,',
+      "I'm writing to share with you an art class I had in a park last Friday.",
+      'Instead of copying pictures in the classroom, we sat on the grass and painted what we saw.',
+      'I chose the small lake and finished a painting of it, with sunlight dancing on the water and boats resting by the bank.',
+      'Our teacher liked its lively colours so much that she put it up in our classroom.',
+      'More importantly, the class taught me to slow down and notice the beauty around me. Nature, as I now see, is the best art teacher.',
+      'How I wish you had been there!',
+      'Yours,',
+      'Li Hua'
+    ];
+
+    const PAGES = [
+      {
+        key: 'review',
+        items: [
+          { text: LETTER_LINES[1], label: '判型「描述类」', note: '开门交代何时、何地、做了什么。' },
+          { text: LETTER_LINES[2], label: '读者 · 具体信息', note: '先给真实场景，Chris 才知道作品从哪来。' },
+          { text: 'I chose the small lake and finished a painting of it', label: '要点① · 完成的作品', note: '先点明画了什么，再补画面细节。' },
+          { text: LETTER_LINES[4], label: '主时态 · 一般过去时', note: '上周五的经历稳定用过去时，不跳档。' },
+          { text: 'the class taught me to slow down and notice the beauty around me', label: '要点② · 你的感想', note: '经历带来的改变，落到“发现身边的美”。' }
+        ]
+      },
+      {
+        key: 'highlight',
+        items: [
+          { text: 'Instead of copying pictures in the classroom', label: '<span class="note-en">Instead of doing...</span> 对比开场', note: '凸显这次经历与平常不同。', extra: '<span class="note-en">Instead of reading about it, we tried it ourselves.</span>' },
+          { text: 'with sunlight dancing on the water and boats resting by the bank', label: '<span class="note-en">with + 名词 + doing</span>', note: '<span class="note-en">dancing / resting</span> 把静景写活。', extra: '<span class="note-en">with music playing / with everyone laughing</span>' },
+          { text: LETTER_LINES[4], label: '<span class="note-en">so...that</span> 结果句', note: '自然带出他人评价，替代干巴巴的 <span class="note-en">It was good</span>。' },
+          { text: 'the class taught me to slow down and notice the beauty around me', label: '无灵主语 + <span class="note-en">taught me to...</span>', note: '紧凑地写出经历对人的改变。', extra: '<span class="note-en">The trip / failure taught me to...</span>' }
+        ]
+      }
+    ];
+
+    const VARIANTS = {
+      A: {
+        name: '全局空白求交',
+        copy: '先让近处批注就近落笔，再在整张白纸内联合安排其余批注；宁可轻移批注，也不无故拉长箭头。'
+      },
+      B: {
+        name: '页边车道优先',
+        copy: '优先把批注送到答题框外、白纸以内的左右页边；箭头沿框边车道进入，秩序最强、路径更长。'
+      },
+      C: {
+        name: '锚句近邻优先',
+        copy: '优先使用句尾和段末空槽，把批注压到对应英文附近；箭头最短，但页面会更活泼、更密。'
+      }
+    };
+
+    const stage = document.getElementById('stage');
+    const answerFrame = document.getElementById('answerFrame');
+    const letter = document.getElementById('letter');
+    const noteLayer = document.getElementById('noteLayer');
+    const ink = document.getElementById('ink');
+    const debugLayer = document.getElementById('debugLayer');
+    const packed = document.getElementById('packed');
+    const variantKeys = Object.keys(VARIANTS);
+    let pageIndex = 0;
+    let renderNonce = 0;
+    let layoutSeed = 0;
+    let variant = new URLSearchParams(location.search).get('variant') || 'A';
+    if (!VARIANTS[variant]) variant = 'A';
+
+    function renderLetter() {
+      letter.innerHTML = '';
+      LETTER_LINES.forEach((line, index) => {
+        const p = document.createElement('p');
+        p.className = index === 0 ? 'greeting' : index >= LETTER_LINES.length - 2 ? 'closing' : 'body';
+        p.textContent = line;
+        letter.appendChild(p);
+      });
+    }
+
+    function wrapText(root, target, className) {
+      const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+      let node;
+      while ((node = walker.nextNode())) {
+        const index = node.data.indexOf(target);
+        if (index < 0) continue;
+        const range = document.createRange();
+        range.setStart(node, index);
+        range.setEnd(node, index + target.length);
+        const span = document.createElement('span');
+        span.className = `anchor ${className}`;
+        range.surroundContents(span);
+        return span;
+      }
+      return null;
+    }
+
+    function relativeRect(rect, rootRect) {
+      return {
+        left: rect.left - rootRect.left,
+        right: rect.right - rootRect.left,
+        top: rect.top - rootRect.top,
+        bottom: rect.bottom - rootRect.top,
+        width: rect.width,
+        height: rect.height
+      };
+    }
+
+    function inflate(rect, amount) {
+      return {
+        left: rect.left - amount,
+        right: rect.right + amount,
+        top: rect.top - amount,
+        bottom: rect.bottom + amount
+      };
+    }
+
+    function overlaps(a, b, pad = 0) {
+      return !(a.right + pad <= b.left || a.left >= b.right + pad || a.bottom + pad <= b.top || a.top >= b.bottom + pad);
+    }
+
+    function pointInRect(point, rect, pad = 0) {
+      return point.x >= rect.left - pad && point.x <= rect.right + pad && point.y >= rect.top - pad && point.y <= rect.bottom + pad;
+    }
+
+    function quadraticPoint(route, t) {
+      const mt = 1 - t;
+      return {
+        x: mt * mt * route.start.x + 2 * mt * t * route.control.x + t * t * route.tip.x,
+        y: mt * mt * route.start.y + 2 * mt * t * route.control.y + t * t * route.tip.y
+      };
+    }
+
+    function rectGap(a, b) {
+      const dx = a.right < b.left ? b.left - a.right : b.right < a.left ? a.left - b.right : 0;
+      const dy = a.bottom < b.top ? b.top - a.bottom : b.bottom < a.top ? a.top - b.bottom : 0;
+      return Math.hypot(dx, dy);
+    }
+
+    function clamp(value, min, max) {
+      return Math.max(min, Math.min(value, max));
+    }
+
+    function closestConnectorPoints(note, anchor, seed) {
+      const xOverlap = Math.min(note.right - 10, anchor.right - 3) - Math.max(note.left + 10, anchor.left + 3);
+      const yOverlap = Math.min(note.bottom - 7, anchor.bottom - 3) - Math.max(note.top + 7, anchor.top + 3);
+      const hand = seed % 2 ? 1 : -1;
+      let startX;
+      let startY;
+      let tipX;
+      let tipY;
+
+      if (note.right < anchor.left) {
+        startX = note.right + 2;
+        tipX = anchor.left - 6;
+      } else if (note.left > anchor.right) {
+        startX = note.left - 2;
+        tipX = anchor.right + 6;
+      } else {
+        tipX = (Math.max(note.left + 10, anchor.left + 3) + Math.min(note.right - 10, anchor.right - 3)) / 2;
+        startX = clamp(tipX + hand * 8, note.left + 10, note.right - 10);
+      }
+
+      if (note.bottom < anchor.top) {
+        startY = note.bottom + 2;
+        tipY = anchor.top - 6;
+      } else if (note.top > anchor.bottom) {
+        startY = note.top - 2;
+        tipY = anchor.bottom + 6;
+      } else {
+        tipY = (Math.max(note.top + 7, anchor.top + 3) + Math.min(note.bottom - 7, anchor.bottom - 3)) / 2;
+        startY = clamp(tipY + hand * 5, note.top + 7, note.bottom - 7);
+      }
+
+      if (xOverlap < 0 && yOverlap >= 0) startY = clamp(tipY + hand * 5, note.top + 7, note.bottom - 7);
+      if (yOverlap < 0 && xOverlap >= 0) startX = clamp(tipX + hand * 8, note.left + 10, note.right - 10);
+
+      return {
+        start: { x: startX, y: startY },
+        tip: { x: tipX, y: tipY },
+        gap: rectGap(note, anchor)
+      };
+    }
+
+    function connectorFor(noteRect, anchorRects, obstacles, seed) {
+      const routes = [];
+      const widestAnchor = Math.max(...anchorRects.map(rect => rect.width));
+      const meaningfulAnchors = anchorRects.length > 1
+        ? anchorRects.filter(rect => rect.width >= Math.min(48, widestAnchor * .18))
+        : anchorRects;
+
+      (meaningfulAnchors.length ? meaningfulAnchors : anchorRects).forEach(anchor => {
+        const points = closestConnectorPoints(noteRect, anchor, seed);
+        const { start, tip, gap } = points;
+
+        const chordX = tip.x - start.x;
+        const chordY = tip.y - start.y;
+        const length = Math.max(1, Math.hypot(chordX, chordY));
+        const normal = { x: -chordY / length, y: chordX / length };
+        const preferredSign = seed % 2 ? 1 : -1;
+        const near = gap <= 56;
+        const idealBow = near ? 3 : Math.min(8, Math.max(4, length * .035));
+        const bows = near
+          ? [preferredSign * 3, -preferredSign * 3, 0]
+          : [preferredSign * 5, -preferredSign * 5, preferredSign * 8, -preferredSign * 8, 0];
+        const routeObstacles = obstacles.filter(rect => !overlaps(rect, anchor, -1));
+
+        bows.forEach(bow => {
+          if (near && length > gap + 24) return;
+          const middle = { x: (start.x + tip.x) / 2, y: (start.y + tip.y) / 2 };
+          const route = {
+            start,
+            tip,
+            control: { x: middle.x + normal.x * bow * 2, y: middle.y + normal.y * bow * 2 },
+            bow,
+            length,
+            gap,
+            near
+          };
+          route.samples = [];
+          let hits = 0;
+          for (let t = .06; t <= .88; t += .035) {
+            const point = quadraticPoint(route, t);
+            route.samples.push(point);
+            if (routeObstacles.some(rect => pointInRect(point, rect, 1))) hits += 1;
+          }
+          route.hits = hits;
+          route.score = hits * 1800 + length * (near ? .28 : .2) + Math.abs(Math.abs(bow) - idealBow) * .5;
+          route.d = `M ${start.x} ${start.y} Q ${route.control.x} ${route.control.y}, ${tip.x} ${tip.y}`;
+          routes.push(route);
+        });
+      });
+
+      routes.sort((a, b) => a.score - b.score);
+      return routes[0];
+    }
+
+    function segmentDirection(a, b, c) {
+      return (c.x - a.x) * (b.y - a.y) - (c.y - a.y) * (b.x - a.x);
+    }
+
+    function segmentsCross(a, b, c, d) {
+      const abC = segmentDirection(a, b, c);
+      const abD = segmentDirection(a, b, d);
+      const cdA = segmentDirection(c, d, a);
+      const cdB = segmentDirection(c, d, b);
+      return ((abC > 0 && abD < 0) || (abC < 0 && abD > 0)) &&
+        ((cdA > 0 && cdB < 0) || (cdA < 0 && cdB > 0));
+    }
+
+    function routesCross(a, b) {
+      const pointsA = [a.start, ...a.samples, a.tip];
+      const pointsB = [b.start, ...b.samples, b.tip];
+      for (let i = 0; i < pointsA.length - 1; i += 1) {
+        for (let j = 0; j < pointsB.length - 1; j += 1) {
+          if (segmentsCross(pointsA[i], pointsA[i + 1], pointsB[j], pointsB[j + 1])) return true;
+        }
+      }
+      return false;
+    }
+
+    function getTextRects(stageRect) {
+      const rects = [];
+      const walker = document.createTreeWalker(letter, NodeFilter.SHOW_TEXT);
+      let node;
+      while ((node = walker.nextNode())) {
+        if (!node.data.trim()) continue;
+        const range = document.createRange();
+        range.selectNodeContents(node);
+        for (const rect of range.getClientRects()) {
+          if (rect.width > 1 && rect.height > 1) rects.push(inflate(relativeRect(rect, stageRect), 5));
+        }
+      }
+      return rects;
+    }
+
+    function subtractIntervals(base, occupied) {
+      let free = [base];
+      for (const block of occupied.sort((a, b) => a.left - b.left)) {
+        const next = [];
+        for (const interval of free) {
+          if (block.right <= interval.left || block.left >= interval.right) {
+            next.push(interval);
+            continue;
+          }
+          if (block.left > interval.left) next.push({ left: interval.left, right: Math.min(block.left, interval.right) });
+          if (block.right < interval.right) next.push({ left: Math.max(block.right, interval.left), right: interval.right });
+        }
+        free = next;
+      }
+      return free;
+    }
+
+    function noteMarkup(item, index) {
+      const el = document.createElement('div');
+      el.className = 'note';
+      el.style.setProperty('--note-width', pageIndex === 0 ? '204px' : '224px');
+      el.innerHTML = `<span class="slot-tag">slot ${index + 1}</span><b>${item.label}</b><span>${item.note}</span>${item.extra ? `<span class="note-extra">${item.extra}</span>` : ''}`;
+      noteLayer.appendChild(el);
+      return el;
+    }
+
+    function slotKind(rect, answer) {
+      if (rect.right <= answer.left) return '纸边·左';
+      if (rect.left >= answer.right) return '纸边·右';
+      if (rect.left < answer.left || rect.right > answer.right) return '跨框空白';
+      return '行间空白';
+    }
+
+    function candidateSlots(entry, anchorRects, obstacles, answer) {
+      const width = entry.el.offsetWidth;
+      const height = entry.el.offsetHeight;
+      const stageWidth = stage.clientWidth;
+      const stageHeight = stage.clientHeight - 14;
+      const anchorCenter = {
+        x: anchorRects.reduce((sum, rect) => sum + (rect.left + rect.right) / 2, 0) / anchorRects.length,
+        y: anchorRects.reduce((sum, rect) => sum + (rect.top + rect.bottom) / 2, 0) / anchorRects.length
+      };
+      const all = [];
+
+      for (let y = 6; y <= stageHeight - height - 6; y += 4) {
+        const verticalBlocks = obstacles
+          .filter(rect => rect.bottom > y && rect.top < y + height)
+          .map(rect => ({ left: Math.max(6, rect.left), right: Math.min(stageWidth - 6, rect.right) }));
+        const free = subtractIntervals({ left: 6, right: stageWidth - 6 }, verticalBlocks);
+
+        for (const interval of free) {
+          if (interval.right - interval.left < width) continue;
+          const nearest = Math.max(interval.left, Math.min(anchorCenter.x - width / 2, interval.right - width));
+          const positions = [interval.left, nearest, interval.right - width];
+          for (const x of positions) {
+            const rect = { left: x, right: x + width, top: y, bottom: y + height };
+            const kind = slotKind(rect, answer);
+            const cx = x + width / 2;
+            const cy = y + height / 2;
+            const distance = Math.hypot((cx - anchorCenter.x) * .72, (cy - anchorCenter.y) * 1.18);
+            const roomy = Math.min(40, (interval.right - interval.left - width) * .12);
+            let strategy = 0;
+            if (variant === 'A') strategy = kind === '跨框空白' ? -22 : kind.startsWith('纸边') ? -12 : 0;
+            if (variant === 'B') strategy = kind.startsWith('纸边') ? -95 : kind === '跨框空白' ? -58 : 44;
+            if (variant === 'C') strategy = kind === '行间空白' ? -72 : kind === '跨框空白' ? -22 : 38;
+            const jitter = ((entry.index * 37 + Math.round(x) * 3 + Math.round(y) + layoutSeed * 19) % 13) * .35;
+            const route = connectorFor(rect, anchorRects, obstacles, entry.index + layoutSeed);
+            all.push({
+              x,
+              y,
+              rect,
+              kind,
+              route,
+              score: distance - roomy + strategy + jitter + route.score,
+              anchorCenter
+            });
+          }
+        }
+      }
+
+      const deduped = new Map();
+      all.sort((a, b) => a.score - b.score).forEach(slot => {
+        const key = `${Math.round(slot.x / 8)}:${Math.round(slot.y / 8)}:${slot.kind}`;
+        if (!deduped.has(key)) deduped.set(key, slot);
+      });
+      return [...deduped.values()].sort((a, b) => a.score - b.score).slice(0, 44);
+    }
+
+    function solveGlobally(entries, obstacles, answer) {
+      entries.forEach(entry => {
+        entry.anchorRects = Array.from(entry.anchor.getClientRects()).map(rect => relativeRect(rect, stage.getBoundingClientRect()));
+        entry.candidates = candidateSlots(entry, entry.anchorRects, obstacles, answer);
+      });
+
+      const ordered = [...entries].sort((a, b) => a.candidates.length - b.candidates.length || b.el.offsetHeight - a.el.offsetHeight);
+      let states = [{ placements: [], cost: 0 }];
+
+      for (const entry of ordered) {
+        const next = [];
+        for (const state of states) {
+          for (const slot of entry.candidates.slice(0, 96)) {
+            if (state.placements.some(placed => overlaps(slot.rect, placed.slot.rect, 8))) continue;
+            const routeHitsNote = state.placements.some(placed =>
+              slot.route.samples.some(point => pointInRect(point, placed.slot.rect, 5)) ||
+              placed.slot.route.samples.some(point => pointInRect(point, slot.rect, 5))
+            );
+            if (routeHitsNote) continue;
+            if (state.placements.some(placed => routesCross(slot.route, placed.slot.route))) continue;
+            const sameKind = state.placements.filter(placed => placed.slot.kind === slot.kind).length;
+            const sameBand = state.placements.filter(placed => Math.abs(placed.slot.y - slot.y) < 12).length;
+            let orderPenalty = 0;
+            state.placements.forEach(placed => {
+              const noteOrder = (slot.rect.left + slot.rect.right) / 2 - (placed.slot.rect.left + placed.slot.rect.right) / 2;
+              const targetOrder = slot.route.tip.x - placed.slot.route.tip.x;
+              if (Math.abs(noteOrder) > 20 && Math.abs(targetOrder) > 20 && noteOrder * targetOrder < 0) orderPenalty += 120;
+              const noteVerticalOrder = (slot.rect.top + slot.rect.bottom) / 2 -
+                (placed.slot.rect.top + placed.slot.rect.bottom) / 2;
+              const targetVerticalOrder = slot.route.tip.y - placed.slot.route.tip.y;
+              if (Math.abs(noteVerticalOrder) > 18 && Math.abs(targetVerticalOrder) > 12 &&
+                noteVerticalOrder * targetVerticalOrder < 0) orderPenalty += 260;
+            });
+            let routeCrowding = 0;
+            state.placements.forEach(placed => {
+              for (const a of slot.route.samples) {
+                if (placed.slot.route.samples.some(b => Math.hypot(a.x - b.x, a.y - b.y) < 6)) routeCrowding += 1;
+              }
+            });
+            next.push({
+              placements: [...state.placements, { entry, slot }],
+              cost: state.cost + slot.score + sameKind * 8 + sameBand * 11 +
+                routeCrowding * 18 + orderPenalty
+            });
+          }
+        }
+        next.sort((a, b) => a.cost - b.cost);
+        states = next.slice(0, 900);
+        if (!states.length) break;
+      }
+
+      return states[0]?.placements || [];
+    }
+
+    function makePath(d, width = 1.35, target = ink, className = '') {
+      const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      path.setAttribute('d', d);
+      path.setAttribute('stroke-width', String(width));
+      if (className) path.setAttribute('class', className);
+      target.appendChild(path);
+      return path;
+    }
+
+    function arrowFlick(tx, ty, fromX, fromY, seed) {
+      const angle = Math.atan2(ty - fromY, tx - fromX);
+      const side = seed % 2 ? 1 : -1;
+      const length = 8.2 + (seed % 3) * .65;
+      const spread = .56 * side;
+      const wing = {
+        x: tx - length * Math.cos(angle + spread),
+        y: ty - length * Math.sin(angle + spread)
+      };
+      const control = {
+        x: (wing.x + tx) / 2 + Math.cos(angle + Math.PI / 2) * side * 1.2,
+        y: (wing.y + ty) / 2 + Math.sin(angle + Math.PI / 2) * side * 1.2
+      };
+      return `M ${wing.x} ${wing.y} Q ${control.x} ${control.y}, ${tx} ${ty}`;
+    }
+
+    function drawUnderline(rects, seed) {
+      rects.forEach((rect, index) => {
+        const y = rect.bottom + 1.5;
+        if (pageIndex === 0) {
+          const wobble = ((seed * 5 + index * 3) % 3) - 1;
+          makePath(`M ${rect.left} ${y} C ${rect.left + rect.width * .32} ${y + wobble}, ${rect.left + rect.width * .7} ${y - wobble}, ${rect.right} ${y}`, 1.15);
+        } else {
+          let d = `M ${rect.left} ${y}`;
+          for (let x = rect.left; x < rect.right; x += 9) {
+            const span = Math.min(9, rect.right - x);
+            d += ` q ${span / 4} -2.3, ${span / 2} 0 q ${span / 4} 2.3, ${span / 2} 0`;
+          }
+          makePath(d, 1.15);
+        }
+      });
+    }
+
+    function nearestAnchorRect(slot, rects) {
+      const cx = (slot.rect.left + slot.rect.right) / 2;
+      const cy = (slot.rect.top + slot.rect.bottom) / 2;
+      return rects.reduce((best, rect) => {
+        const bx = Math.max(rect.left, Math.min(cx, rect.right));
+        const by = Math.max(rect.top, Math.min(cy, rect.bottom));
+        const d = Math.hypot(cx - bx, cy - by);
+        return !best || d < best.distance ? { rect, distance: d } : best;
+      }, null).rect;
+    }
+
+    function drawLeader(placement, answer, order) {
+      const route = placement.slot.route;
+      const arc = makePath(route.d, route.near ? 1.12 : 1.22, ink, 'leader-arc');
+      arc.dataset.length = route.length.toFixed(1);
+      arc.dataset.gap = route.gap.toFixed(1);
+      arc.dataset.near = String(route.near);
+      arc.dataset.noteIndex = String(placement.entry.index);
+      makePath(arrowFlick(route.tip.x, route.tip.y, route.control.x, route.control.y, order), 1.55, ink, 'leader-head');
+    }
+
+    function drawDebug(obstacles, placements) {
+      debugLayer.innerHTML = '';
+      const ns = 'http://www.w3.org/2000/svg';
+      [...obstacles, ...placements.map(item => item.slot.rect)].forEach((rect, index) => {
+        const node = document.createElementNS(ns, 'rect');
+        node.setAttribute('x', rect.left);
+        node.setAttribute('y', rect.top);
+        node.setAttribute('width', rect.right - rect.left);
+        node.setAttribute('height', rect.bottom - rect.top);
+        node.setAttribute('fill', index < obstacles.length ? 'rgba(190,72,51,.06)' : 'rgba(38,122,91,.06)');
+        node.setAttribute('stroke', index < obstacles.length ? 'rgba(190,72,51,.22)' : 'rgba(38,122,91,.3)');
+        node.setAttribute('stroke-dasharray', '2 3');
+        debugLayer.appendChild(node);
+      });
+    }
+
+    function updateVariantUi() {
+      const meta = VARIANTS[variant];
+      document.getElementById('variantKey').textContent = variant;
+      document.getElementById('variantName').textContent = meta.name;
+      document.getElementById('algorithmTitle').textContent = `${variant} · ${meta.name}`;
+      document.getElementById('algorithmCopy').textContent = meta.copy;
+      const url = new URL(location.href);
+      url.searchParams.set('variant', variant);
+      history.replaceState({}, '', url);
+    }
+
+    async function renderPage(nextPage) {
+      pageIndex = nextPage;
+      packed.textContent = '正在寻位…';
+      packed.style.color = '#6f746f';
+      stage.dataset.page = String(pageIndex);
+      document.querySelectorAll('[data-page]').forEach(control => {
+        control.classList.toggle('on', Number(control.dataset.page) === pageIndex);
+      });
+      renderLetter();
+      noteLayer.innerHTML = '';
+      ink.innerHTML = '';
+      debugLayer.innerHTML = '';
+
+      const items = PAGES[pageIndex].items;
+      const anchors = items.map((item, index) => wrapText(letter, item.text, `anchor-${index}`));
+      const nonce = ++renderNonce;
+      if (document.fonts?.ready) await document.fonts.ready;
+      await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+      if (nonce !== renderNonce) return;
+
+      const stageRect = stage.getBoundingClientRect();
+      const answer = relativeRect(answerFrame.getBoundingClientRect(), stageRect);
+      const headerBottom = relativeRect(document.getElementById('reviewTabs').getBoundingClientRect(), stageRect).bottom + 3;
+      const obstacles = getTextRects(stageRect);
+      obstacles.push({ left: answer.left + 17, right: answer.right - 17, top: answer.top + 10, bottom: headerBottom });
+
+      const entries = items.map((item, index) => ({ item, index, anchor: anchors[index], el: noteMarkup(item, index) }));
+      entries.forEach(entry => { entry.el.style.visibility = 'hidden'; entry.el.style.left = '0px'; entry.el.style.top = '0px'; });
+      const placements = solveGlobally(entries, obstacles, answer);
+
+      placements.forEach((placement, order) => {
+        const { entry, slot } = placement;
+        entry.el.style.left = `${slot.x}px`;
+        entry.el.style.top = `${slot.y}px`;
+        entry.el.style.visibility = 'visible';
+        entry.el.querySelector('.slot-tag').textContent = `${slot.kind} · ${Math.round(slot.score)}`;
+        drawUnderline(entry.anchorRects, entry.index);
+        drawLeader(placement, answer, order);
+      });
+      drawDebug(obstacles, placements);
+      packed.textContent = `空白寻位 ${placements.length}/${items.length}`;
+      packed.style.color = placements.length === items.length ? '#267a5b' : '#b34f37';
+    }
+
+    function cycleVariant(direction) {
+      const current = variantKeys.indexOf(variant);
+      variant = variantKeys[(current + direction + variantKeys.length) % variantKeys.length];
+      updateVariantUi();
+      renderPage(pageIndex);
+    }
+
+    document.querySelectorAll('[data-page]').forEach(control => {
+      control.addEventListener('click', () => renderPage(Number(control.dataset.page)));
+    });
+    document.getElementById('repack').addEventListener('click', () => {
+      layoutSeed += 1;
+      renderPage(pageIndex);
+    });
+    document.getElementById('debug').addEventListener('click', event => {
+      document.body.classList.toggle('debug');
+      event.currentTarget.textContent = document.body.classList.contains('debug') ? '隐藏算法' : '显示算法';
+    });
+    document.getElementById('variantPrev').addEventListener('click', () => cycleVariant(-1));
+    document.getElementById('variantNext').addEventListener('click', () => cycleVariant(1));
+    window.addEventListener('keydown', event => {
+      if (['INPUT', 'TEXTAREA'].includes(document.activeElement?.tagName) || document.activeElement?.isContentEditable) return;
+      if (event.key === 'ArrowLeft') cycleVariant(-1);
+      if (event.key === 'ArrowRight') cycleVariant(1);
+      if (event.key === '1') renderPage(0);
+      if (event.key === '2') renderPage(1);
+    });
+    window.addEventListener('resize', () => renderPage(pageIndex));
+
+    updateVariantUi();
+    renderPage(0);
+  </script>
+</body>
+</html>
