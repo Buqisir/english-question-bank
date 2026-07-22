@@ -7,7 +7,7 @@ Historical relay records live in `relay-history.md` and are non-authoritative.
 
 - Cut id: `codex-matt-governance`
 - Cut size: `large governance`
-- Lifecycle state: `handoff-ready`
+- Lifecycle state: `blocked`
 - Active role: `none`
 - Source branch: `codex/codex-matt-governance-fix4-verification`
 - Current worktree: `/Users/huangxuewei/.codex/worktrees/305a/english-question-bank`
@@ -16,6 +16,7 @@ Historical relay records live in `relay-history.md` and are non-authoritative.
 ## Current evidence
 
 - Migration result: `live state converged; historical relay retained separately`
+- Dispatch result: `top-level task creation rejected for invalid arguments; no task was created`
 - Owner-approved migration contract:
   `docs/cuts/codex-matt-governance/migration-entry.md`
 - Owner-approved convergence decision:
@@ -25,17 +26,14 @@ Historical relay records live in `relay-history.md` and are non-authoritative.
 - Machine check:
   `node scripts/verify-codex-matt-governance-live-state.mjs`
 
-## Direct successor authorization
+## Blocker
 
-- Authorized role: `fresh verification`
-- Topology: `exactly one top-level create_thread successor`
-- Configured model: `gpt-5.6-terra`
-- Thinking: `medium`
-- Scope: `verification only; no DEV, CR verdict, QA, RM, merge, push, or production action`
-- Required output: `docs/cuts/codex-matt-governance/verification.md`
-- Successor first-write requirement: `set lifecycle state to active and append activation evidence`
+- Category: `task creation argument validation`
+- Attempted route: `gpt-5.6-terra` with `medium`
+- Created task identity: `none`
+- Fallback used: `none`
 
 ## Next Action
 
-1. Create exactly one top-level fresh verification successor from this result
-   commit, with `gpt-5.6-terra` and `medium`, then end without waiting.
+1. Resolve the top-level task-creation argument schema, then re-authorize one
+   fresh verification successor from this blocked state.
