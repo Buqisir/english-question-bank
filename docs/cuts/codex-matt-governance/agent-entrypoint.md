@@ -215,7 +215,7 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
 ## DEV Dispatch
 
 - Dispatch ID: `codex-matt-governance-dev-20260722-01`
-- State: `active`
+- State: `result-recorded`
 - Project: `local-8a1aff1b944a0aa921d1f6b55296afd6`
 - Checkout: existing worktree
   `/Users/huangxuewei/Projects/wt-codex-matt-governance`
@@ -259,7 +259,11 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
   clean state before its first permitted write
 - Sole-writer state: acquired; predecessor is write-closed and this DEV is the
   only active writer in the shared worktree
-- Activation record: this commit
+- Activation record: `b8129bea0dbbb45e6f80f4c567b9ce4a10d2ae05`
+- Result commit: `113db39f8119536e27aa4344f4bfcdfdbd7d3365`
+- DEV self-check: `git diff --check` passed before the implementation commit;
+  the changed-path list contained only allowlisted collaboration-rule and
+  documentation surfaces. Formal verification is intentionally delegated.
 - Predecessor closure: canonical PA result and the sole DEV successor entry are
   durable; this PA waits only for the successor's durable activation
   acknowledgement and never for the DEV result
@@ -269,6 +273,27 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
   verification successor after durable DEV writeback; no formal verification,
   CR, QA, RM, merge, push, production, infrastructure, or downstream
   supervision by DEV
+
+## Verification Dispatch
+
+- Dispatch ID: `codex-matt-governance-verification-20260722-01`
+- State: `dispatch-pending`
+- Project: `local-8a1aff1b944a0aa921d1f6b55296afd6`
+- Checkout: existing worktree
+  `/Users/huangxuewei/Projects/wt-codex-matt-governance`
+- Branch: `codex/codex-matt-governance`
+- Expected base/head: `113db39f8119536e27aa4344f4bfcdfdbd7d3365`
+- Next role: fresh non-implementing verification
+- Configured model: `gpt-5.6-terra`
+- Selected model: `gpt-5.6-terra`
+- Thinking: `medium`
+- Route reason: exact-head verification evidence; model-routing default
+- Availability/substitution evidence: configured primary selected; same-family,
+  same-grade finite eligibility set is `[gpt-5.6-terra]`; no substitution
+- Output: `docs/cuts/codex-matt-governance/verification.md`
+- Authorization: exactly one fresh no-DEV-history CR successor after durable
+  verification writeback; no implementation, CR verdict, QA, RM, merge, push,
+  production, or downstream supervision by verification
 
 ## Next Action
 

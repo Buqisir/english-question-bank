@@ -941,7 +941,9 @@ plan-owned contradiction.
   latest canonical PA recheck records zero unresolved Must Fix and the durable
   entrypoint records that verdict's result/completion state. Until that evidence
   exists, a DEV dispatch is invalid; PA must not edit `plan.md` to create it.
-- [ ] DP-4 — Fresh DEV implements only the allowed rule/document surfaces.
+- [x] DP-4 — Fresh DEV implemented only the allowed rule/document surfaces in
+  `113db39f8119536e27aa4344f4bfcdfdbd7d3365`; formal verification remains the
+  next fresh role.
 - [ ] DP-5 — Fresh verification verifies scope and the exact implementation
   head with real exit codes.
 - [ ] DP-6 — Fresh CR writes `cr.md`; all Must Fix findings close.
