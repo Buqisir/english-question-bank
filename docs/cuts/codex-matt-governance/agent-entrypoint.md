@@ -12,20 +12,21 @@
 
 ## Current Stage
 
-**Manual-fallback Fix DEV 3 is active.** It is the sole successor after the
-automatic creation call and its one permitted retry both returned `agent thread
-limit reached` without creating a child task.
+**Fix DEV 3 verification is release-authorized.** The manual-fallback Fix DEV
+3 task is write-closed after its bounded result; the fresh verification
+successor is the only next role and remains write-held until it re-proves this
+predecessor-final commit.
 
-Canonical `cr.md` records unresolved R1-R3. This task alone may correct their
-allowed current-rule and lifecycle surfaces, restore normal worktree
-dependencies for fresh verification, commit bounded DEV evidence, and create
-one fresh non-implementing verification successor. No CR, QA, RM, merge, push,
-production, workflow/script edit, skill/plugin/tracker, main-checkout, or
-applied-writing-lecture action is authorized.
+Canonical `cr.md` recorded unresolved R1-R3; Fix DEV 3 implemented the bounded
+repair at `b1169a6978aef1e475360b725a8bd96265ef3a39` and restored normal
+dependencies. The fresh verification successor now owns exact-head evidence.
+No implementation, CR, QA, RM, merge, push, production, workflow/script edit,
+skill/plugin/tracker, main-checkout, or applied-writing-lecture action is
+authorized.
 
 ## Must Read
 
-Before Fix DEV 3 implementation, read these current inputs:
+Before verification, read these current inputs:
 
 1. `docs/cuts/codex-matt-governance/cr.md`
 2. `docs/cuts/codex-matt-governance/plan.md`
@@ -49,21 +50,21 @@ Open only when needed to check a named conflict or artifact convention:
 
 ## Stage Contract
 
-This task wears only the manual-fallback Fix DEV 3 hat. After exact-HEAD
-activation, it must:
+This task wears only the fresh non-implementing verification hat. After
+exact-HEAD activation, it must:
 
 1. re-prove the baseline, branch, worktree, released exact head, and clean
    state, then durably record its own activation before any substantive write;
-2. read the Must Read set and every current-rule target before editing;
-3. implement only R1-R3, restore normal dependencies through the repository's
-   setup path, and commit DEV self-check evidence; and
-4. create exactly one fresh non-implementing verification successor through
+2. read the Must Read set, bind the plan-named governance matrix to the exact
+   implementation head with real exit codes, and append evidence only to
+   `verification.md`;
+3. create exactly one fresh no-DEV-history formal re-review successor through
    write-held -> final-commit -> release, then exit after its durable activation
    acknowledgement.
 
-The task must not perform CR, QA, RM, merge, push, production, workflow/script
-edits, skill/plugin/tracker work, main-checkout edits, or changes to the
-`applied-writing-lecture` worktree.
+The task must not implement, perform CR, QA, RM, merge, push, production,
+workflow/script edits, skill/plugin/tracker work, main-checkout edits, or
+changes to the `applied-writing-lecture` worktree.
 
 ## Current Outputs
 
@@ -79,7 +80,7 @@ edits, skill/plugin/tracker work, main-checkout edits, or changes to the
 - Verification evidence: `docs/cuts/codex-matt-governance/verification.md`
 - Formal CR result commit: `64fafef0c5c6bbb913bc4c721535950fc76250ba`
 - Formal CR verdict: `NOT MERGEABLE`; five unresolved Must Fix findings
-- Current artifact: bounded Fix DEV 3 implementation for canonical R1-R3
+- Current artifact: fresh exact-head verification of Fix DEV 3 result
 
 ## Completed PA Dispatch
 
@@ -675,10 +676,9 @@ edits, skill/plugin/tracker work, main-checkout edits, or changes to the
   `/Users/huangxuewei/.codex/worktrees/governance-fix-rereview-20260722`,
   detached HEAD `3d1c6722169f750dd4096c9547f8d0e22fce90b9`, and clean state
   re-proved before this first permitted write.
-- State: `active`
-- Sole-writer state: acquired; the failed automatic dispatch has no child, all
-  predecessors are write-closed, and this manual fallback is the only active
-  writer in the isolated worktree.
+- State: `closed`
+- Sole-writer state: released; the failed automatic dispatch had no child, and
+  this manual fallback is write-closed after provisioning its sole successor.
 - DEV self-check: `git diff --check` passed; the changed-path list is limited
   to plan-allowlisted current-rule and cut-entrypoint surfaces; the
   current-positive ownership scan found no remaining ancestor PM/RM or DEV
@@ -696,7 +696,7 @@ edits, skill/plugin/tracker work, main-checkout edits, or changes to the
 ## Fix DEV 3 Verification Dispatch
 
 - Dispatch ID: `codex-matt-governance-fix3-verification-20260722-01`
-- State: `dispatch-pending`
+- State: `release-authorized`
 - Expected base/head: `b1169a6978aef1e475360b725a8bd96265ef3a39`
 - Checkout: this isolated detached worktree
   `/Users/huangxuewei/.codex/worktrees/governance-fix-rereview-20260722`
@@ -707,6 +707,18 @@ edits, skill/plugin/tracker work, main-checkout edits, or changes to the
 - Route reason: exact-head governance verification and lifecycle evidence
 - Availability/substitution evidence: configured primary selected from the
   finite `[gpt-5.6-terra]` eligibility set; no substitution
+- Returned task identity: `/root/fix3_verification`
+- Task entry: created as exactly one fresh, independently addressable task with
+  explicit `model=gpt-5.6-terra` and `thinking=medium`; write-held bootstrap
+  was active.
+- Bootstrap proof: successor reported this exact isolated worktree, detached
+  pending-dispatch HEAD `df9f54348350d8bd85d0922574264788b98bbd50`, clean
+  state, and entrypoint-only read; no successor write, verification, or further
+  repository read was made.
+- Release record: this predecessor-final commit. The ACTIVATE/RELEASE message
+  carries its exact hash; Fix DEV 3 makes no later worktree write.
+- Sole-writer state: Fix DEV 3 is write-closed; verification becomes sole writer
+  only after re-proving this exact released HEAD and recording activation.
 - Output: append-only exact-head evidence in
   `docs/cuts/codex-matt-governance/verification.md` and this task's lifecycle
   fields
@@ -717,6 +729,6 @@ edits, skill/plugin/tracker work, main-checkout edits, or changes to the
 
 ## Next Action
 
-Provision exactly the one write-held Fix DEV 3 verification successor above.
-After it proves readiness, this predecessor records the exact final release
-head, sends activation, and exits without another worktree write.
+Activate exactly the release-authorized Fix DEV 3 verification successor. It
+must re-prove this predecessor-final HEAD, record its active sole-writer state,
+and then perform only its verification role.
