@@ -670,14 +670,14 @@
             if (routeObstacles.some(rect => pointInRect(point, rect, 1))) hits += 1;
           }
           route.hits = hits;
-          route.score = hits * 1800 + length * (near ? .28 : .2) +
+          route.score = hits * 12 + length * (near ? .28 : .2) +
             Math.abs(Math.abs(bow) - idealBow) * .5;
           route.d = `M ${start.x} ${start.y} Q ${route.control.x} ${route.control.y}, ${tip.x} ${tip.y}`;
           routes.push(route);
         });
       });
 
-      routes.sort((a, b) => a.score - b.score);
+      routes.sort((a, b) => a.hits - b.hits || a.score - b.score);
       return routes[0];
     }
 
@@ -737,6 +737,84 @@
       return free;
     }
 
+    function boundsOf(rects) {
+      return rects.reduce((bounds, rect) => ({
+        left: Math.min(bounds.left, rect.left),
+        right: Math.max(bounds.right, rect.right),
+        top: Math.min(bounds.top, rect.top),
+        bottom: Math.max(bounds.bottom, rect.bottom)
+      }), { left: Infinity, right: -Infinity, top: Infinity, bottom: -Infinity });
+    }
+
+    function anchorCenterOf(rects) {
+      const totalWidth = rects.reduce((sum, rect) => sum + rect.width, 0) || 1;
+      return {
+        x: rects.reduce((sum, rect) => sum + (rect.left + rect.right) / 2 * rect.width, 0) / totalWidth,
+        y: rects.reduce((sum, rect) => sum + (rect.top + rect.bottom) / 2 * rect.width, 0) / totalWidth
+      };
+    }
+
+    function prunePockets(pockets) {
+      const deduped = new Map();
+      pockets.forEach(pocket => {
+        const key = `${Math.round(pocket.left)}:${Math.round(pocket.right)}:${Math.round(pocket.top)}:${Math.round(pocket.bottom)}`;
+        if (!deduped.has(key)) deduped.set(key, pocket);
+      });
+      const unique = [...deduped.values()];
+      return unique.filter((pocket, index) => !unique.some((other, otherIndex) =>
+        index !== otherIndex &&
+        other.left <= pocket.left && other.right >= pocket.right &&
+        other.top <= pocket.top && other.bottom >= pocket.bottom &&
+        (other.left < pocket.left || other.right > pocket.right || other.top < pocket.top || other.bottom > pocket.bottom)
+      ));
+    }
+
+    function placementPockets(width, height, obstacles) {
+      const step = 4;
+      const stageWidth = stage.clientWidth;
+      const stageHeight = stage.clientHeight - 14;
+      let active = [];
+      const finished = [];
+
+      for (let y = 6; y <= stageHeight - height - 6; y += step) {
+        const verticalBlocks = obstacles
+          .filter(rect => rect.bottom > y && rect.top < y + height)
+          .map(rect => ({ left: Math.max(6, rect.left), right: Math.min(stageWidth - 6, rect.right) }));
+        const domains = subtractIntervals({ left: 6, right: stageWidth - 6 }, verticalBlocks)
+          .filter(interval => interval.right - interval.left >= width)
+          .map(interval => ({ left: interval.left, right: interval.right - width }));
+        const next = [];
+        const extended = new Set();
+
+        domains.forEach(domain => {
+          next.push({ left: domain.left, right: domain.right, top: y, bottom: y });
+          active.forEach((pocket, index) => {
+            const left = Math.max(pocket.left, domain.left);
+            const right = Math.min(pocket.right, domain.right);
+            if (right < left) return;
+            extended.add(index);
+            next.push({ left, right, top: pocket.top, bottom: y });
+          });
+        });
+
+        active.forEach((pocket, index) => {
+          if (!extended.has(index)) finished.push(pocket);
+        });
+        active = prunePockets(next);
+      }
+
+      finished.push(...active);
+      return prunePockets(finished)
+        .map((pocket, index) => ({
+          ...pocket,
+          id: index,
+          openWidth: pocket.right - pocket.left + width,
+          openHeight: pocket.bottom - pocket.top + height
+        }))
+        .sort((a, b) => b.openWidth * b.openHeight - a.openWidth * a.openHeight)
+        .slice(0, 80);
+    }
+
     function noteMarkup(item, index) {
       const el = document.createElement('div');
       el.className = 'note';
@@ -753,75 +831,175 @@
       return '行间空白';
     }
 
-    function candidateSlots(entry, anchorRects, obstacles, answer) {
-      const width = entry.el.offsetWidth;
-      const height = entry.el.offsetHeight;
-      const stageWidth = stage.clientWidth;
-      const stageHeight = stage.clientHeight - 14;
-      const anchorCenter = {
-        x: anchorRects.reduce((sum, rect) => sum + (rect.left + rect.right) / 2, 0) / anchorRects.length,
-        y: anchorRects.reduce((sum, rect) => sum + (rect.top + rect.bottom) / 2, 0) / anchorRects.length
+    function slotLane(rect, contentBounds) {
+      if (rect.right <= contentBounds.left + 8) return 'left';
+      if (rect.left >= contentBounds.right - 8) return 'right';
+      if (rect.bottom <= contentBounds.top + 4) return 'above';
+      if (rect.top >= contentBounds.bottom - 4) return 'below';
+      return 'inner';
+    }
+
+    function candidateWidths(entry) {
+      const base = parseFloat(getComputedStyle(entry.el).width);
+      return [...new Set([base, base * .82, base * .66, 96]
+        .map(width => Math.round(width)))]
+        .sort((a, b) => b - a);
+    }
+
+    function candidatePositions(pocket, width, height, anchorCenter) {
+      const nearest = {
+        x: clamp(anchorCenter.x - width / 2, pocket.left, pocket.right),
+        y: clamp(anchorCenter.y - height / 2, pocket.top, pocket.bottom)
       };
+      const fineStep = Math.max(20, Math.round(height * .4));
+      const breathingStep = height + 9;
+      return [
+        nearest,
+        { x: nearest.x, y: clamp(nearest.y - fineStep, pocket.top, pocket.bottom) },
+        { x: nearest.x, y: clamp(nearest.y + fineStep, pocket.top, pocket.bottom) },
+        { x: nearest.x, y: clamp(nearest.y - breathingStep, pocket.top, pocket.bottom) },
+        { x: nearest.x, y: clamp(nearest.y + breathingStep, pocket.top, pocket.bottom) },
+        { x: pocket.left, y: pocket.top },
+        { x: pocket.right, y: pocket.top },
+        { x: pocket.left, y: pocket.bottom },
+        { x: pocket.right, y: pocket.bottom }
+      ];
+    }
+
+    function candidateSlots(entry, anchorRects, obstacles, answer, contentBounds) {
+      const anchorCenter = anchorCenterOf(anchorRects);
+      const anchorTop = Math.min(...anchorRects.map(rect => rect.top));
+      const anchorBottom = Math.max(...anchorRects.map(rect => rect.bottom));
       const all = [];
+      const widths = candidateWidths(entry);
+      const baseWidth = widths[0];
+      entry.el.style.width = `${baseWidth}px`;
+      const baseHeight = entry.el.offsetHeight;
 
-      for (let y = 6; y <= stageHeight - height - 6; y += 4) {
-        const verticalBlocks = obstacles
-          .filter(rect => rect.bottom > y && rect.top < y + height)
-          .map(rect => ({ left: Math.max(6, rect.left), right: Math.min(stageWidth - 6, rect.right) }));
-        const free = subtractIntervals({ left: 6, right: stageWidth - 6 }, verticalBlocks);
-
-        for (const interval of free) {
-          if (interval.right - interval.left < width) continue;
-          const nearest = Math.max(interval.left, Math.min(anchorCenter.x - width / 2, interval.right - width));
-          const positions = [interval.left, nearest, interval.right - width];
-          for (const x of positions) {
+      widths.forEach(width => {
+        entry.el.style.width = `${width}px`;
+        const height = entry.el.offsetHeight;
+        const pockets = placementPockets(width, height, obstacles);
+        pockets.forEach(pocket => {
+          candidatePositions(pocket, width, height, anchorCenter).forEach(position => {
+            const { x, y } = position;
             const rect = { left: x, right: x + width, top: y, bottom: y + height };
             const kind = slotKind(rect, answer);
+            const lane = slotLane(rect, contentBounds);
             const cx = x + width / 2;
             const cy = y + height / 2;
             const distance = Math.hypot((cx - anchorCenter.x) * .72, (cy - anchorCenter.y) * 1.18);
-            const roomy = Math.min(40, (interval.right - interval.left - width) * .12);
+            const slackX = pocket.right - pocket.left;
+            const slackY = pocket.bottom - pocket.top;
+            const openness = Math.min(82, Math.sqrt(Math.max(0, slackX) * Math.max(4, slackY + 4)) * .24 +
+              (slackX + slackY) * .045);
+            const clearance = Math.min(x - pocket.left, pocket.right - x, y - pocket.top, pocket.bottom - y);
+            const aboveTarget = rect.bottom <= anchorTop + 5;
+            let direction = lane === 'below' ? 38 : 0;
+            if (entry.readingOrder === 0) {
+              if (aboveTarget) direction -= 118;
+              else if (cy > anchorBottom + 80) direction += 96;
+              else direction += 24;
+            } else if (cy > anchorBottom + 130) {
+              direction += (cy - anchorBottom - 130) * .22;
+            }
+            if (entry.fullSpan && entry.readingOrder > 0) {
+              if (entry.readingProgress >= .5) {
+                if (lane === 'left') direction -= 104;
+                else if (lane === 'right') direction += 52;
+              } else {
+                if (lane === 'right') direction -= 76;
+                else if (lane === 'left') direction += 38;
+              }
+            }
             let strategy = 0;
             if (variant === 'A') strategy = kind === '跨框空白' ? -22 : kind.startsWith('纸边') ? -12 : 0;
             if (variant === 'B') strategy = kind.startsWith('纸边') ? -52 : kind === '跨框空白' ? -36 : 18;
             if (variant === 'C') strategy = kind === '行间空白' ? -72 : kind === '跨框空白' ? -22 : 38;
             const jitter = ((entry.index * 37 + Math.round(x) * 3 + Math.round(y) + layoutSeed * 19) % 13) * .35;
             const route = connectorFor(rect, anchorRects, obstacles, entry.index + layoutSeed);
-            if (!route) continue;
+            if (!route || route.hits > 0) return;
+            const shapePenalty = (baseWidth - width) * .22 + Math.max(0, height - baseHeight) * .3;
+            const proximityBonus = route.mode === 'flick' ? -28 : route.mode === 'short' ? -5 : 0;
             all.push({
               x,
               y,
+              width,
+              height,
               rect,
               kind,
+              lane,
+              pocketId: pocket.id,
               route,
-              score: distance - roomy + strategy + jitter + route.score,
+              score: distance - openness - Math.min(18, Math.max(0, clearance) * .35) +
+                direction + strategy + shapePenalty + proximityBonus + jitter + route.score,
               anchorCenter
             });
-          }
-        }
-      }
+          });
+        });
+      });
+      entry.el.style.width = `${baseWidth}px`;
 
       const deduped = new Map();
       all.sort((a, b) => a.score - b.score).forEach(slot => {
-        const key = `${Math.round(slot.x / 8)}:${Math.round(slot.y / 8)}:${slot.kind}`;
+        const key = `${Math.round(slot.x / 8)}:${Math.round(slot.y / 8)}:${Math.round(slot.width / 12)}:${slot.lane}`;
         if (!deduped.has(key)) deduped.set(key, slot);
       });
-      return [...deduped.values()].sort((a, b) => a.score - b.score).slice(0, 44);
+      const sorted = [...deduped.values()].sort((a, b) => a.score - b.score);
+      const diverse = new Map();
+      sorted.slice(0, 32).forEach(slot => diverse.set(`${slot.x}:${slot.y}:${slot.width}`, slot));
+      const laneCounts = new Map();
+      const pocketSeen = new Set();
+      sorted.forEach(slot => {
+        const laneCount = laneCounts.get(slot.lane) || 0;
+        if (laneCount < 8) {
+          diverse.set(`${slot.x}:${slot.y}:${slot.width}`, slot);
+          laneCounts.set(slot.lane, laneCount + 1);
+        }
+        const pocketKey = `${slot.width}:${slot.pocketId}`;
+        if (!pocketSeen.has(pocketKey) && pocketSeen.size < 24) {
+          diverse.set(`${slot.x}:${slot.y}:${slot.width}`, slot);
+          pocketSeen.add(pocketKey);
+        }
+      });
+      return [...diverse.values()].sort((a, b) => a.score - b.score).slice(0, 88);
     }
 
-    function solveGlobally(entries, obstacles, answer) {
+    function compareLayoutStates(a, b) {
+      return a.maxRegret - b.maxRegret ||
+        a.orderPenalty - b.orderPenalty ||
+        a.totalRegret - b.totalRegret ||
+        a.cost - b.cost;
+    }
+
+    function solveGlobally(entries, obstacles, answer, contentBounds) {
       entries.forEach(entry => {
         entry.anchorRects = Array.from(entry.anchor.getClientRects()).map(rect => relativeRect(rect, stage.getBoundingClientRect()));
-        entry.candidates = candidateSlots(entry, entry.anchorRects, obstacles, answer);
+        entry.anchorCenter = anchorCenterOf(entry.anchorRects);
+      });
+
+      [...entries]
+        .sort((a, b) => a.anchorCenter.y - b.anchorCenter.y || a.anchorCenter.x - b.anchorCenter.x)
+        .forEach((entry, index) => {
+          entry.readingOrder = index;
+          entry.readingProgress = entries.length > 1 ? index / (entries.length - 1) : 0;
+          const paragraphLength = entry.anchor.parentElement.textContent.trim().length;
+          entry.fullSpan = entry.item.text.length >= paragraphLength * .88;
+        });
+
+      entries.forEach(entry => {
+        entry.candidates = candidateSlots(entry, entry.anchorRects, obstacles, answer, contentBounds);
+        const bestScore = entry.candidates[0]?.score ?? 0;
+        entry.candidates.forEach(slot => { slot.regret = slot.score - bestScore; });
       });
 
       const ordered = [...entries].sort((a, b) => a.candidates.length - b.candidates.length || b.el.offsetHeight - a.el.offsetHeight);
-      let states = [{ placements: [], cost: 0 }];
+      let states = [{ placements: [], maxRegret: 0, totalRegret: 0, orderPenalty: 0, cost: 0 }];
 
       for (const entry of ordered) {
         const next = [];
         for (const state of states) {
-          for (const slot of entry.candidates.slice(0, 96)) {
+          for (const slot of entry.candidates) {
             if (state.placements.some(placed => overlaps(slot.rect, placed.slot.rect, 8))) continue;
             const routeHitsNote = state.placements.some(placed =>
               slot.route.samples.some(point => pointInRect(point, placed.slot.rect, 5)) ||
@@ -829,6 +1007,17 @@
             );
             if (routeHitsNote) continue;
             if (state.placements.some(placed => routesCross(slot.route, placed.slot.route))) continue;
+            const laneInversion = state.placements.some(placed => {
+              if (placed.slot.lane !== slot.lane) return false;
+              const slotCenterX = (slot.rect.left + slot.rect.right) / 2;
+              const placedCenterX = (placed.slot.rect.left + placed.slot.rect.right) / 2;
+              if (Math.abs(slotCenterX - placedCenterX) > Math.min(slot.rect.right - slot.rect.left, 168)) return false;
+              const anchorOrder = entry.anchorCenter.y - placed.entry.anchorCenter.y;
+              const noteOrder = (slot.rect.top + slot.rect.bottom) / 2 -
+                (placed.slot.rect.top + placed.slot.rect.bottom) / 2;
+              return Math.abs(anchorOrder) > 10 && Math.abs(noteOrder) > 12 && anchorOrder * noteOrder < 0;
+            });
+            if (laneInversion) continue;
             const sameKind = state.placements.filter(placed => placed.slot.kind === slot.kind).length;
             const sameBand = state.placements.filter(placed => Math.abs(placed.slot.y - slot.y) < 12).length;
             let orderPenalty = 0;
@@ -836,11 +1025,6 @@
               const noteOrder = (slot.rect.left + slot.rect.right) / 2 - (placed.slot.rect.left + placed.slot.rect.right) / 2;
               const targetOrder = slot.route.tip.x - placed.slot.route.tip.x;
               if (Math.abs(noteOrder) > 20 && Math.abs(targetOrder) > 20 && noteOrder * targetOrder < 0) orderPenalty += 120;
-              const noteVerticalOrder = (slot.rect.top + slot.rect.bottom) / 2 -
-                (placed.slot.rect.top + placed.slot.rect.bottom) / 2;
-              const targetVerticalOrder = slot.route.tip.y - placed.slot.route.tip.y;
-              if (Math.abs(noteVerticalOrder) > 18 && Math.abs(targetVerticalOrder) > 12 &&
-                noteVerticalOrder * targetVerticalOrder < 0) orderPenalty += 260;
             });
             let routeCrowding = 0;
             state.placements.forEach(placed => {
@@ -850,13 +1034,16 @@
             });
             next.push({
               placements: [...state.placements, { entry, slot }],
+              maxRegret: Math.max(state.maxRegret, slot.regret),
+              totalRegret: state.totalRegret + slot.regret,
+              orderPenalty: state.orderPenalty + orderPenalty,
               cost: state.cost + slot.score + sameKind * 8 + sameBand * 11 +
                 routeCrowding * 18 + orderPenalty
             });
           }
         }
-        next.sort((a, b) => a.cost - b.cost);
-        states = next.slice(0, 900);
+        next.sort(compareLayoutStates);
+        states = next.slice(0, 1200);
         if (!states.length) break;
       }
 
@@ -916,6 +1103,7 @@
       );
       arc.dataset.length = route.length.toFixed(1);
       arc.dataset.gap = route.gap.toFixed(1);
+      arc.dataset.hits = String(route.hits);
       arc.dataset.near = String(route.near);
       arc.dataset.mode = route.mode;
       arc.dataset.noteIndex = String(placement.entry.index);
@@ -974,19 +1162,35 @@
       const stageRect = stage.getBoundingClientRect();
       const answer = relativeRect(answerFrame.getBoundingClientRect(), stageRect);
       const headerBottom = relativeRect(document.getElementById('reviewTabs').getBoundingClientRect(), stageRect).bottom + 3;
-      const obstacles = getTextRects(stageRect);
+      const textObstacles = getTextRects(stageRect);
+      const contentBounds = boundsOf(textObstacles);
+      const obstacles = [...textObstacles];
       obstacles.push({ left: answer.left + 17, right: answer.right - 17, top: answer.top + 10, bottom: headerBottom });
 
       const entries = items.map((item, index) => ({ item, index, anchor: anchors[index], el: noteMarkup(item, index) }));
       entries.forEach(entry => { entry.el.style.visibility = 'hidden'; entry.el.style.left = '0px'; entry.el.style.top = '0px'; });
-      const placements = solveGlobally(entries, obstacles, answer);
+      const placements = solveGlobally(entries, obstacles, answer, contentBounds);
+      entries.forEach(entry => {
+        entry.el.dataset.candidates = JSON.stringify(entry.candidates.slice(0, 12).map(slot => ({
+          x: Math.round(slot.x),
+          y: Math.round(slot.y),
+          lane: slot.lane,
+          pocket: slot.pocketId,
+          width: slot.width,
+          height: slot.height,
+          score: Math.round(slot.score),
+          hits: slot.route.hits,
+          length: Math.round(slot.route.length)
+        })));
+      });
 
       placements.forEach((placement, order) => {
         const { entry, slot } = placement;
+        entry.el.style.width = `${slot.width}px`;
         entry.el.style.left = `${slot.x}px`;
         entry.el.style.top = `${slot.y}px`;
         entry.el.style.visibility = 'visible';
-        entry.el.querySelector('.slot-tag').textContent = `${slot.kind} · ${Math.round(slot.score)}`;
+        entry.el.querySelector('.slot-tag').textContent = `${slot.lane} · 后悔 ${Math.round(slot.regret)}`;
         drawUnderline(entry.anchorRects, entry.index);
         drawLeader(placement, order);
       });

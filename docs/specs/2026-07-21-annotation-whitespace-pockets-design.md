@@ -54,8 +54,10 @@ appropriate for this deterministic teaching surface.
    these rectangles remain hard obstacles.
 3. At a 4 px vertical step, subtract obstacles from the paper width to obtain
    free horizontal intervals.
-4. Merge intervals on adjacent rows when their overlap can still contain the
-   narrowest annotation. Each merged run becomes a two-dimensional pocket with
+4. Measure each annotation at a small set of readable widths, from its normal
+   line length down to a narrow handwritten-margin shape. Merge intervals on
+   adjacent rows when their overlap can still contain that measured shape.
+   Each merged run becomes a two-dimensional pocket with
    `left`, `right`, `top`, `bottom`, `width`, `height`, and `area`.
 5. Remove contained duplicates and pockets too small for any annotation.
 
@@ -64,14 +66,18 @@ model of vertical openness. It avoids a new geometry dependency.
 
 ### Generate human placement candidates
 
-For each note that fits a pocket, generate at most five candidates:
+For each measured note shape that fits a pocket, generate candidates at:
 
 - the point in the pocket nearest the target phrase;
+- nearby positions above and below that point, at a fraction and a full note
+  height, so several notes can share a tall margin without colliding;
 - top-left and top-right, inset by the paper safety padding;
 - bottom-left and bottom-right, inset by the same padding.
 
 Deduplicate candidates that land within 8 px. Keep at least one candidate per
 spatial lane so an early low score cannot erase a different useful direction.
+Normal-width notes receive a small shape advantage; narrow wrapping is used
+only when it unlocks a genuinely closer side pocket.
 
 The lanes are `above`, `left`, `right`, `inner`, and `below`, defined relative
 to the English letter bounds rather than the answer-frame border.
