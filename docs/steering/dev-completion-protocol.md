@@ -5,8 +5,9 @@ inclusion: auto
 # DEV completion protocol
 
 Scope: applies to implementation work in the
-`Buqisir/english-question-bank` repository, whoever performs it (main
-agent or DEV subagent) — the completion contract does not downgrade.
+`Buqisir/english-question-bank` repository, whoever performs it as the direct
+DEV role (or permitted role-internal assistance) — the completion contract does
+not downgrade.
 Authoritative — agents must follow this protocol unless the user
 overrides it inline for a specific task.
 

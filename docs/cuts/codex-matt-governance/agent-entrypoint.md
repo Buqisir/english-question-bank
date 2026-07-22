@@ -12,22 +12,20 @@
 
 ## Current Stage
 
-**Fresh formal re-review recorded `NOT MERGEABLE`; automatic Fix DEV 3 dispatch
-failed after the one permitted retry, and no successor task exists.**
+**Manual-fallback Fix DEV 3 is active.** It is the sole successor after the
+automatic creation call and its one permitted retry both returned `agent thread
+limit reached` without creating a child task.
 
-Fix DEV 2 result `8cb228e9ce51f147eda2188c93b6fdeb9144d103` has fresh
-verification evidence in `verification.md`. Canonical `cr.md` now records that
-current positive PM/RM ownership still conflicts, the live lifecycle is red,
-and required `tsc` / full-suite evidence is red. This re-review may create only
-one bounded fresh Fix DEV 3 successor, but the runtime rejected both the initial
-creation and the single bounded retry with `agent thread limit reached`. The
-dispatch is durably failed without an ambiguous child. No implementation, QA,
-RM, merge, push, production, workflow/script, skill/plugin/tracker,
-main-checkout, or applied-writing-lecture action is authorized.
+Canonical `cr.md` records unresolved R1-R3. This task alone may correct their
+allowed current-rule and lifecycle surfaces, restore normal worktree
+dependencies for fresh verification, commit bounded DEV evidence, and create
+one fresh non-implementing verification successor. No CR, QA, RM, merge, push,
+production, workflow/script edit, skill/plugin/tracker, main-checkout, or
+applied-writing-lecture action is authorized.
 
 ## Must Read
 
-After re-review activation, read these current inputs before reviewing:
+Before Fix DEV 3 implementation, read these current inputs:
 
 1. `docs/cuts/codex-matt-governance/cr.md`
 2. `docs/cuts/codex-matt-governance/plan.md`
@@ -51,22 +49,21 @@ Open only when needed to check a named conflict or artifact convention:
 
 ## Stage Contract
 
-This task wears only the fresh formal re-review hat. After write-held bootstrap
-and exact-HEAD activation, it must:
+This task wears only the manual-fallback Fix DEV 3 hat. After exact-HEAD
+activation, it must:
 
 1. re-prove the baseline, branch, worktree, released exact head, and clean
    state, then durably record its own activation before any substantive write;
-2. cold-read the Must Read set, Fix DEV 2 diff, and evidence without
-   implementation history;
-3. append only a formal standards/spec verdict to canonical `cr.md`, deciding
-   whether its Must Fix findings are closed; and
-4. create at most one direct successor only as the verdict and one-way relay
-   require, then exit after durable activation acknowledgement.
+2. read the Must Read set and every current-rule target before editing;
+3. implement only R1-R3, restore normal dependencies through the repository's
+   setup path, and commit DEV self-check evidence; and
+4. create exactly one fresh non-implementing verification successor through
+   write-held -> final-commit -> release, then exit after its durable activation
+   acknowledgement.
 
-The re-review must not implement, independently duplicate unchanged full
-verification, perform QA/RM, merge, push, touch production, install or
-initialize skills/plugins/trackers, modify main-checkout user changes, or
-change the `applied-writing-lecture` worktree.
+The task must not perform CR, QA, RM, merge, push, production, workflow/script
+edits, skill/plugin/tracker work, main-checkout edits, or changes to the
+`applied-writing-lecture` worktree.
 
 ## Current Outputs
 
@@ -82,7 +79,7 @@ change the `applied-writing-lecture` worktree.
 - Verification evidence: `docs/cuts/codex-matt-governance/verification.md`
 - Formal CR result commit: `64fafef0c5c6bbb913bc4c721535950fc76250ba`
 - Formal CR verdict: `NOT MERGEABLE`; five unresolved Must Fix findings
-- Next artifact: bounded fix-DEV implementation for canonical CR Must Fix 1-5
+- Current artifact: bounded Fix DEV 3 implementation for canonical R1-R3
 
 ## Completed PA Dispatch
 
@@ -365,7 +362,7 @@ change the `applied-writing-lecture` worktree.
 ## Fix DEV Dispatch
 
 - Dispatch ID: `codex-matt-governance-fix-dev-20260722-01`
-- State: `result-recorded`
+- State: `closed`
 - Project: `local-8a1aff1b944a0aa921d1f6b55296afd6`
 - Checkout: fresh isolated worktree from this exact pending-dispatch commit
 - Expected base/head: `64fafef0c5c6bbb913bc4c721535950fc76250ba`
@@ -497,7 +494,7 @@ change the `applied-writing-lecture` worktree.
 ## Fix DEV 2 Dispatch
 
 - Dispatch ID: `codex-matt-governance-fix2-dev-20260722-01`
-- State: `result-recorded`
+- State: `closed`
 - Expected base/head: `076c1ff9ce46eb2933eee93ae7a782cfa945f2b1`
 - Pending-dispatch commit: `739c1d44582cdf052a968f3fef218a94050529e4`
 - Checkout: existing isolated detached worktree
@@ -554,7 +551,7 @@ change the `applied-writing-lecture` worktree.
 ## Fix DEV 2 Verification Dispatch
 
 - Dispatch ID: `codex-matt-governance-fix2-verification-20260722-01`
-- State: `result-recorded`
+- State: `closed`
 - Expected base/head: `8cb228e9ce51f147eda2188c93b6fdeb9144d103`
 - Checkout: this isolated detached worktree
   `/Users/huangxuewei/.codex/worktrees/governance-fix-rereview-20260722`
@@ -598,7 +595,7 @@ change the `applied-writing-lecture` worktree.
 ## Fix DEV 2 Verification Re-review Dispatch
 
 - Dispatch ID: `codex-matt-governance-fix2-verification-rereview-20260722-01`
-- State: `result-recorded`
+- State: `closed`
 - Expected base/head: `8cb228e9ce51f147eda2188c93b6fdeb9144d103`
 - Checkout: this isolated detached worktree
   `/Users/huangxuewei/.codex/worktrees/governance-fix-rereview-20260722`
@@ -645,7 +642,7 @@ change the `applied-writing-lecture` worktree.
 ## Fix DEV 3 Dispatch
 
 - Dispatch ID: `codex-matt-governance-fix3-dev-20260722-01`
-- State: `dispatch-failed`
+- Initial automatic state: `dispatch-failed`
 - Expected base/head: `50bcd1dfb2c01a051809ca29cbbc63c73d1cad53`
 - Checkout: this isolated detached worktree
   `/Users/huangxuewei/.codex/worktrees/governance-fix-rereview-20260722`
@@ -682,6 +679,14 @@ change the `applied-writing-lecture` worktree.
 - Sole-writer state: acquired; the failed automatic dispatch has no child, all
   predecessors are write-closed, and this manual fallback is the only active
   writer in the isolated worktree.
+- DEV self-check: `git diff --check` passed; the changed-path list is limited
+  to plan-allowlisted current-rule and cut-entrypoint surfaces; the
+  current-positive ownership scan found no remaining ancestor PM/RM or DEV
+  relay owner in those rule targets; and the entrypoint has one `active` state
+  with all completed relay records closed.
+- Dependency setup: `bash scripts/setup-worktree.sh` completed successfully,
+  restoring the normal `app` and `server` dependency directories required by
+  the fresh verifier.
 - Output: fixes limited to canonical R1-R3 and durable DEV evidence
 - Authorization: exactly one fresh Fix DEV 3 task plus one fresh
   non-implementing verification successor after durable fix writeback; no
@@ -690,7 +695,7 @@ change the `applied-writing-lecture` worktree.
 
 ## Next Action
 
-Use the one complete fallback prompt emitted with this dispatch-failed result
-to create a fresh Fix DEV 3 task when runtime capacity is available. The new
-task must start write-held from this final commit and follow the recorded
-one-way release protocol; do not retry or route another role from this task.
+The active manual-fallback Fix DEV 3 task implements only R1-R3, restores the
+normal worktree dependencies, commits its bounded result, then creates exactly
+one fresh non-implementing verification successor with the recorded
+write-held/final-commit/release protocol. No other role or transition is live.

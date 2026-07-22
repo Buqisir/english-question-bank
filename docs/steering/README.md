@@ -132,7 +132,7 @@ Hard rule:
 
 File: `dev-completion-protocol.md`
 
-Use for DEV subagent completion reports on file-changing work.
+Use for DEV completion reports on file-changing work.
 
 Hard rule:
 

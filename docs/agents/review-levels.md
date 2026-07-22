@@ -26,7 +26,7 @@ First principles decide **why** a cut needs review. Razor discipline decides **w
   2. **Visibility**: Can a teacher/user see it? If yes, use QA.
   3. **Runtime risk**: Does it enter runtime code? If yes, use CR.
   4. **Evidence fit**: Prefer static verify when it proves the risk. Do not run heavy gates that cannot observe the changed surface.
-- Use **PA before DEV** per the AGENTS.md Current Operating Reality trigger: large cuts, or touches to an irreversible surface / data-contract semantics; purely additive, reversible work may downgrade to PA-lite with the reason recorded in the plan header (CR reviews the downgrade). PA writes `docs/cuts/<CUT>/pa.md`; the orchestrator then compresses PA follow-up decisions into `plan.md` before DEV.
+- Use **PA before DEV** per the AGENTS.md Current Operating Reality trigger: large cuts, or touches to an irreversible surface / data-contract semantics; purely additive, reversible work may downgrade to PA-lite with the reason recorded in the plan header (CR reviews the downgrade). PA writes `docs/cuts/<CUT>/pa.md`; when a revision is needed, PA relays to one fresh PM plan-revision task, which records the follow-up decisions in `plan.md` before DEV.
 - Use **CR after DEV** for any PR that will be merged.
 - Use **QA before RM** only when the change is user-visible or affects visual / interaction behavior.
 - Docs-only and type-only cuts do not need browser QA.
@@ -81,7 +81,8 @@ to downgrade the Medium / Large fresh-CR gate.
 同法理扩展到 **owner PO QA**（owner 拍板 2026-07-11）：
 
 - 同一刀类 owner QA 连续 **3 把**零发现，该类降为**抽查**：每 3-4 把抽
-  1 把仍请 owner 实点，其余由主代理浏览器 QA 代位、对照单归档。
+  1 把仍请 owner 实点，其余由该刀的 fresh direct QA coordinator 做浏览器
+  QA、对照单归档。
 - 任何渠道（抽查 / 使用中发现 / 生产事故）命中 1 个 owner 级发现，该类
   **立即**回到每把必 QA，重新累计。
 - 不适用面同上（L4 高危面 / 首次触碰的新面 / 不可逆触发器覆盖的刀）
@@ -105,11 +106,11 @@ to downgrade the Medium / Large fresh-CR gate.
 - One tree-trunk DEV at a time. Parallel agents may work on leaves: docs, inventories, QA checklists, examples, migration research, or static review prep.
 - Night work should bias toward low-risk cleanup, docs, merge administration, and planning notes. Avoid major architecture decisions late at night.
 - Current operating reality (authority: `AGENTS.md` "Current Operating Reality"):
-  阿澈 wears PM / UI-direction / RM; PA, DEV, and CR use separate fresh,
-  independently addressable contexts, each explicitly pinned from
-  `docs/agents/model-routing.md`, so reviewer ≠ implementer
-  and PM ≠ PA. Role contracts and gates do not downgrade. The owner does PO QA,
-  not code review.
+  阿澈 provides PM direction / UI direction, while every relay role — including
+  PM plan revision, PA, DEV, verification, CR, QA, and RM — is its own fresh
+  direct task pinned from `docs/agents/model-routing.md`. No ancestor remains
+  to perform RM or consume a successor's result. The owner does PO QA, not code
+  review.
 - Multi-agent handoff context is repo-first. PA / CR prompts and
   reports, DEV goal prompts, decisions, handoffs, QA contracts, and Cut
   Notes should be written to named repo paths. Chat messages route the

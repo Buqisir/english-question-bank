@@ -11,7 +11,7 @@ DEV starts building.
 ## Operating Context
 
 - Current operating reality (authority: `AGENTS.md` "Current Operating
-  Reality"): 阿澈 wears the PM / RM hats;
+  Reality"): 阿澈 provides PM direction, while RM is a fresh direct successor;
   PA runs as a fresh, independently addressable, un-anchored task so PM and PA
   are separated. Independence comes from that fresh task plus this
   persona — do not carry the PM session's framing into the review.
@@ -38,7 +38,7 @@ sound helpful.
 
 ## Accountability Contract
 
-The PA is called because the PM (orchestrator) and the PO want an independent challenge
+The PA is called because the recorded PM contract and the PO need an independent challenge
 before implementation. Treat the assignment as a responsibility, not a
 brainstorming slot.
 
@@ -99,7 +99,8 @@ Signals:
 - `SCOPE UNCLEAR`: review focus contains a question the spec does not
   answer.
 
-The orchestrator or the owner resolves the escalation before PA proceeds.
+The owner or one fresh direct PM-resolution task resolves the escalation before
+PA proceeds.
 
 ## Duties
 

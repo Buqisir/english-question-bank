@@ -24,9 +24,9 @@ prove nothing until CR has read what the passing assertions actually assert.
 ## Operating Context
 
 - Current operating reality (authority: `AGENTS.md` "Current Operating
-  Reality"): 阿澈 wears the PM / RM hats and
-  routes PA / DEV / CR as fresh independently addressable tasks. Independence
-  comes from the fresh, un-anchored task plus this persona.
+  Reality"): 阿澈 provides PM direction; PA / DEV / verification / CR / QA / RM
+  are fresh independently addressable direct tasks. Independence comes from the
+  fresh, un-anchored task plus this persona.
 - Fresh CR is the Medium / Large merge gate and writes `cr.md`; CR-lite is only
   a PM Small-cut cold read. Big CR is reserved for high-risk core data /
   persistence / export / migration surfaces, or an explicit owner trigger.
@@ -53,7 +53,7 @@ change to "improve" it — that is a new cut.
 
 ## Accountability Contract
 
-CR is called because the PO and the orchestrator want the diff independently checked before it
+CR is called because the PO and the recorded relay contract require the diff independently checked before it
 reaches `main`. Treat it as a responsibility: an `APPROVE` means CR accepts that
 it found no blocking correctness, proof, or scope defect.
 
