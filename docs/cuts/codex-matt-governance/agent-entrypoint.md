@@ -313,7 +313,7 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
 ## CR Dispatch
 
 - Dispatch ID: `codex-matt-governance-cr-20260722-01`
-- State: `dispatch-pending`
+- State: `provisioning`
 - Project: `local-8a1aff1b944a0aa921d1f6b55296afd6`
 - Checkout: fresh isolated worktree from branch `codex/codex-matt-governance`
 - Expected base/head: `65017c22152b309e989ea80d867035a6e69c3d6a`
@@ -324,6 +324,8 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
 - Route reason: formal fresh CR route from `docs/agents/model-routing.md`
 - Availability/substitution evidence: configured primary selected; same-family,
   same-grade finite eligibility set is `[gpt-5.6-sol]`; no substitution
+- Client task ID: `client-new-thread:0949e3eb-6e99-4957-8a2a-56b7762d540a`
+- Host: `local`
 - Output: `docs/cuts/codex-matt-governance/cr.md`
 - Authorization: one formal CR only. No implementation, QA, RM, merge, push,
   production, or downstream supervision. On Must Fix, record the canonical CR
