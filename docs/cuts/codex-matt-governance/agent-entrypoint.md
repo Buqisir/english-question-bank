@@ -7,11 +7,11 @@ Historical relay records live in `relay-history.md` and are non-authoritative.
 
 - Cut id: `codex-matt-governance`
 - Cut size: `large governance`
-- Lifecycle state: `handoff-ready`
-- Active role: `none`
-- Source branch: `codex/codex-matt-governance-fix4-verification`
-- Current worktree: `/Users/huangxuewei/.codex/worktrees/305a/english-question-bank`
-- Released input head: `35b15ddcc9765f1cef729e7d8ec6d8af166e1e0b`
+- Lifecycle state: `active`
+- Active role: `fresh verification`
+- Source branch: `codex/codex-matt-governance-live-state-migration-20260722-01`
+- Current worktree: `/Users/huangxuewei/.codex/worktrees/692a/english-question-bank`
+- Released input head: `c59fdd57e2ce301af0e2d97c276cdad46d4d4ed2`
 
 ## Current evidence
 
@@ -35,17 +35,11 @@ Historical relay records live in `relay-history.md` and are non-authoritative.
 - Fallback used: `none`
 - Retry policy: `one corrected creation call only`
 
-## Direct successor authorization
+## Activation evidence
 
-- Authorized role: `fresh verification`
-- Topology: `exactly one top-level create_thread successor`
-- Configured model: `gpt-5.6-terra`
-- Thinking: `medium`
-- Scope: `verification only; no DEV, CR verdict, QA, RM, merge, push, or production action`
-- Required output: `docs/cuts/codex-matt-governance/verification.md`
-- Successor first-write requirement: `set lifecycle state to active and append activation evidence`
+- Fresh verification activated for the authorized verification-only scope.
 
 ## Next Action
 
-1. Create exactly one top-level fresh verification successor from this result
-   commit, with `gpt-5.6-terra` and `medium`, then end without waiting.
+1. Complete the authorized fresh verification and record its exact-head evidence
+   in `docs/cuts/codex-matt-governance/verification.md`.

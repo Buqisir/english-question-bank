@@ -1,5 +1,36 @@
 # codex-matt-governance · verification
 
+## Live-state migration exact-head verification — 2026-07-22
+
+Role: fresh verification only. This entry records live-state and Git evidence;
+it is not a CR verdict and performs no DEV, QA, RM, merge, push, or production
+action.
+
+### Bound input and activation
+
+- Released input head: `c59fdd57e2ce301af0e2d97c276cdad46d4d4ed2`
+- At task intake, `HEAD` was exactly that commit, `git status --short` was
+  empty, and `git cat-file -e <head>^{commit}` succeeded.
+- After `git fetch github --prune`, the fetched `github/main` baseline and
+  merge-base for the input head both resolved to
+  `e4ae78607411d265768a0253c5c63b5f3c0d726b`.
+- The live state is activated for this fresh verification in
+  `agent-entrypoint.md`; its source branch, active worktree, and released input
+  head now match this authorized task context. The input head is an ancestor of
+  the current `HEAD`.
+
+### Structured state and permitted migration scope
+
+| Check | Raw exit | Result |
+| --- | ---: | --- |
+| `node scripts/verify-codex-matt-governance-live-state.mjs` | 0 | PASS — active-state compatibility, single action, and released-input Git relation are valid. |
+| `git diff --check 35b15dd..c59fdd5` | 0 | PASS — migration delta is whitespace-clean. |
+| allowed-path comparison for `35b15dd..c59fdd5` | 0 | PASS — only this cut's permitted artifacts and the minimal live-state check surfaces changed: `agent-entrypoint.md`, `relay-history.md`, `scripts/README.md`, `scripts/verify-ci.mjs`, and `scripts/verify-codex-matt-governance-live-state.mjs`. |
+
+The machine check reads structured live-state fields from `agent-entrypoint.md`;
+this verification did not read, infer from, or review `relay-history.md`.
+
+
 Date: 2026-07-22
 Role: fresh non-implementing verification only; no CR, QA, RM, merge, or
 implementation performed.
