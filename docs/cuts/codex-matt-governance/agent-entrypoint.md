@@ -597,7 +597,7 @@ change the `applied-writing-lecture` worktree.
 ## Fix DEV 2 Verification Re-review Dispatch
 
 - Dispatch ID: `codex-matt-governance-fix2-verification-rereview-20260722-01`
-- State: `dispatch-pending`
+- State: `active`
 - Expected base/head: `8cb228e9ce51f147eda2188c93b6fdeb9144d103`
 - Checkout: this isolated detached worktree
   `/Users/huangxuewei/.codex/worktrees/governance-fix-rereview-20260722`
@@ -621,6 +621,13 @@ change the `applied-writing-lecture` worktree.
 - State: `release-authorized`.
 - Release record: this predecessor-final commit; ACTIVATE/RELEASE carries its
   exact hash, and verification makes no later worktree write.
+- Released predecessor-final HEAD:
+  `c140afbf0acce3e88d560430c8299e5bbd59589a`.
+- Activation proof: exact isolated worktree root, detached released HEAD above,
+  and clean state re-proved before the first permitted write.
+- Sole-writer state: acquired; verification is write-closed and this fresh
+  formal re-review is the only active writer in the isolated worktree.
+- Activation record: this commit.
 - Predecessor closure: verification evidence and the sole re-review successor
   entry are durable; verification waits only for activation acknowledgement,
   never for the re-review result.
