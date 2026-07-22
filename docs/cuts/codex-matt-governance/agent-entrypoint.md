@@ -215,7 +215,7 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
 ## DEV Dispatch
 
 - Dispatch ID: `codex-matt-governance-dev-20260722-01`
-- State: `release-authorized`
+- State: `active`
 - Project: `local-8a1aff1b944a0aa921d1f6b55296afd6`
 - Checkout: existing worktree
   `/Users/huangxuewei/Projects/wt-codex-matt-governance`
@@ -251,9 +251,15 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
   and no successor edit
 - Provisioning record commit:
   `5655b115bc0b4b91f19855973046b9fcb4f05a42`
-- Release record: this is the predecessor's final worktree commit; the
-  ACTIVATE/RELEASE message carries its exact hash, and this PA performs no later
-  worktree write
+- Release record: predecessor-final worktree commit
+  `be9f9c9e37330fcc4906ee5f0ec2e373f4d1744b`; ACTIVATE/RELEASE carried this
+  exact hash, and the PA performs no later worktree write
+- Activation proof: DEV re-proved the exact worktree, branch
+  `codex/codex-matt-governance`, released predecessor-final HEAD above, and a
+  clean state before its first permitted write
+- Sole-writer state: acquired; predecessor is write-closed and this DEV is the
+  only active writer in the shared worktree
+- Activation record: this commit
 - Predecessor closure: canonical PA result and the sole DEV successor entry are
   durable; this PA waits only for the successor's durable activation
   acknowledgement and never for the DEV result
