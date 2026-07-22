@@ -109,3 +109,47 @@ whitespace check, large artifact gate, and live lifecycle smoke each have the
 raw failures above. A fresh no-DEV-history formal re-review must decide their
 effect against the plan and canonical CR contract; this verification task does
 not repair or review them.
+
+## Fix DEV 2 exact-head verification — 2026-07-22T16:57:11Z
+
+Role: fresh non-implementing verification only. This section records real
+evidence, not a CR verdict.
+
+### Bound heads and environment
+
+- Re-review base: `076c1ff9ce46eb2933eee93ae7a782cfa945f2b1`
+- Fix DEV 2 result verified: `8cb228e9ce51f147eda2188c93b6fdeb9144d103`
+- Fix DEV 2 predecessor-final release:
+  `cfa316391de64b1dde0af20e05e5f681a2fd5f6e`
+- Verification activation: `d1461531b68b5693fd4f5fb0e1ef110e237e55fc`
+- Worktree: `/Users/huangxuewei/.codex/worktrees/governance-fix-rereview-20260722`
+- Status at command start: clean. The activation commit only records this
+  verification lifecycle; it does not change the Fix DEV 2 result surfaces.
+
+### Required command evidence
+
+| Command | Raw exit | Result | Note |
+| --- | ---: | --- | --- |
+| `git diff --check 076c1ff..8cb228e` | 0 | PASS | The bounded Fix DEV 2 delta has no whitespace errors. |
+| `git diff --check github/main...HEAD` | 0 | PASS | The exact released/activated verification head has no whitespace errors. |
+| `pnpm -C app exec tsc --noEmit` | 254 | FAIL | `tsc` was not found; this isolated worktree has no `app/node_modules`. |
+| `pnpm -C app run verify:all` | 1 | FAIL | Preflight app build/typecheck exited 127 because `tsc` was not found. |
+
+### Governance matrix
+
+| Required check | Result | Evidence |
+| --- | --- | --- |
+| Fix scope | PASS | `076c1ff..8cb228e` changes only `AGENTS.md`, `review-levels.md`, `steering/README.md`, `cut-workflow-protocol.md`, and this cut's entrypoint; all are plan-allowed current-rule/cut surfaces. |
+| Current-positive relay ownership / zero-Must-Fix routing check | PASS | Targeted sweep found no current rule that counts a parent-owned subagent as the PA/DEV/verification/CR/QA/RM relay successor; the remaining template mention is the required negative boundary. |
+| Exact model authority | PASS | Outside cut/history records, exact route IDs occur only in `docs/agents/model-routing.md`; current rules point to that authority. |
+| Cross-file authority map | PASS | `AGENTS.md` assigns fresh direct RM/verification gates; `review-levels.md` assigns fresh QA/RM roles; steering README and cut protocol assign evidence/remote checks to the active role; `codex-matt-workflow.md` remains the one-way relay description; `model-routing.md` is the sole exact model/thinking table. |
+| Changed routing links | PASS | `model-routing.md`, `codex-matt-workflow.md`, `dispatch-protocols.md`, `review-levels.md`, `pa-persona.md`, and `cr-persona.md` all resolve at their recorded paths. |
+| Live lifecycle | FAIL | The top-level `Current Stage`, `Must Read`, `Stage Contract`, and `Next Action` still name Fix DEV 2/provisioning even though this verification task is active. The durable verification block correctly records activation, but the entrypoint does not yield one current role/action. |
+
+### Evidence handoff
+
+The R1 routing/authority/link/scope checks are green. Required integration
+proof is red solely because dependencies are absent from this isolated
+worktree, and the live lifecycle check is red. A fresh no-DEV-history formal
+re-review must decide those results against the canonical plan and CR; this
+verification task performs no repair or verdict.

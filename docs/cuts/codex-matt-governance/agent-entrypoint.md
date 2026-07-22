@@ -598,6 +598,23 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
   push, production, scripts/workflows, product/runtime, server/schema/data,
   skills/plugins/trackers, main-checkout, or applied-writing-lecture action
 
+## Fix DEV 2 Verification Re-review Dispatch
+
+- Dispatch ID: `codex-matt-governance-fix2-verification-rereview-20260722-01`
+- State: `dispatch-pending`
+- Expected base/head: `8cb228e9ce51f147eda2188c93b6fdeb9144d103`
+- Checkout: this isolated detached worktree
+  `/Users/huangxuewei/.codex/worktrees/governance-fix-rereview-20260722`
+- Next role: fresh formal re-review; no DEV history
+- Configured model: `gpt-5.6-sol`
+- Selected model: pending runtime availability check
+- Thinking: `high`
+- Route reason: the sole routing authority assigns fresh CR / re-review to
+  Sol/high; this task must cold-read the Fix DEV 2 result and fresh evidence.
+- Output: `docs/cuts/codex-matt-governance/cr.md`
+- Authorization: exactly one fresh no-DEV-history formal re-review successor;
+  no implementation, QA, RM, merge, push, or production action.
+
 ## Next Action
 
 Provision exactly one fresh write-held verification successor for the Fix DEV 2
