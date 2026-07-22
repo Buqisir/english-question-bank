@@ -457,8 +457,11 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
 ## Fix Re-review Dispatch
 
 - Dispatch ID: `codex-matt-governance-fix-rereview-20260722-01`
-- State: `dispatch-pending`
+- State: `provisioning`
 - Expected base/head: `35ed4098b33ca31b5e9013508d2768ecde398bc1`
+- Pending-dispatch commit: `a30971d5fc80bd1795958d09158a4366067c07da`
+- Checkout: fresh isolated detached worktree
+  `/Users/huangxuewei/.codex/worktrees/governance-fix-rereview-20260722`
 - Next role: fresh formal re-review; no DEV history
 - Configured model: `gpt-5.6-sol`
 - Selected model: `gpt-5.6-sol`
@@ -467,6 +470,10 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
   this successor must cold-read the fix and the fresh verification evidence.
 - Availability/substitution evidence: configured primary selected; finite
   same-family/same-grade candidate set is `[gpt-5.6-sol]`; no substitution.
+- Successor task: `/root/governance_fix_verification/governance_fix_rereview`
+- Task creation: exactly one independently addressable fresh Codex task was
+  created with explicit `model=gpt-5.6-sol` and `thinking=high`; write-held
+  bootstrap is active.
 - Output: `docs/cuts/codex-matt-governance/cr.md`
 - Authorization: exactly one fresh no-DEV-history formal re-review after
   verification result writeback; no implementation, QA, RM, merge, push,
