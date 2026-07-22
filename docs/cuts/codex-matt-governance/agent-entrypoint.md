@@ -12,31 +12,28 @@
 
 ## Current Stage
 
-**Fresh PA recheck closed; the sole fresh DEV successor is ready-held and
-release-authorized by this predecessor's final worktree commit.**
+**Fresh formal CR recorded `NOT MERGEABLE`; one fresh fix-DEV successor is the
+unique next action.**
 
-The third fresh PA cold-read the AMF-1 through AMF-4 normative dispositions and
-their observable verification clauses, then recorded `APPROVE` with zero
-unresolved Must Fix and zero PO decisions in canonical `pa.md`. The exact PA
-result commit is recorded below, so the plan's derived DEV-readiness condition
-is satisfied without a substantive PA edit to `plan.md`. No current
-collaboration rule, business code, product surface, production configuration,
-or in-flight cut has changed. The DEV successor has proved its bootstrap state
-without writing. This commit closes the PA role and is its final worktree
-write; after release, DEV becomes sole writer only after exact-HEAD re-proof
-and its own durable activation record.
+The CR cold-read
+`3889d67099c6211daa5cbbb79cb93bf49e4e5cc6..113db39f8119536e27aa4344f4bfcdfdbd7d3365`,
+the canonical plan/PA contract, current positive rules, templates, and exact-head
+verification evidence. The diff stayed inside the allowed documentation scope,
+but five Must Fix findings remain: direct-relay role drift, conflicting
+verification ownership, incomplete Auto-Next artifacts, red/incomplete required
+verification, and stale live entrypoint state. Canonical findings are committed
+in `cr.md`. No implementation, QA, RM, merge, push, production, workflow/script,
+skill/plugin/tracker, main-checkout, or applied-writing-lecture action occurred.
 
 ## Must Read
 
-After DEV activation, read these current inputs before implementation:
+After fix-DEV activation, read these current inputs before implementation:
 
-1. `docs/cuts/codex-matt-governance/plan.md`
-2. `docs/cuts/codex-matt-governance/pa.md`
+1. `docs/cuts/codex-matt-governance/cr.md`
+2. `docs/cuts/codex-matt-governance/plan.md`
 3. `AGENTS.md`
-4. `docs/steering/README.md`
-5. `docs/steering/cut-workflow-protocol.md`
-6. `docs/agents/dispatch-protocols.md`
-7. `docs/agents/review-levels.md`
+4. `docs/agents/model-routing.md`
+5. `docs/steering/codex-matt-workflow.md`
 
 Before editing any other allowed current-rule surface, read that target's
 current contents. Background files remain conditional rather than session tax.
@@ -53,16 +50,17 @@ Open only when needed to check a named conflict or artifact convention:
 
 ## Stage Contract
 
-The next task wears only the DEV hat. After write-held bootstrap and exact-HEAD
-activation, it must:
+The next task wears only the fix-DEV hat. After write-held bootstrap and
+exact-HEAD activation, it must:
 
 1. re-prove the baseline, branch, worktree, released exact head, and clean
    state, then durably record its own activation before any substantive write;
 2. read the Must Read set above and the current contents of each target before
    editing it;
-3. implement the ratified plan only within `Allowed Modification Scope After
-   PA`, keeping `docs/agents/model-routing.md` the sole exact model/thinking
-   authority and preserving every existing risk gate;
+3. close only Must Fix 1-5 from canonical `cr.md` within the plan's allowed
+   current-rule/template/entrypoint surfaces, keeping
+   `docs/agents/model-routing.md` the sole exact model/thinking authority and
+   preserving every existing risk gate;
 4. follow the worktree checkpoint discipline, commit its implementation and
    DEV self-check evidence, and avoid writing PA/CR verdicts or claiming formal
    verification; and
@@ -70,7 +68,7 @@ activation, it must:
    verification successor under the same one-way write-held/final-commit/
    release protocol, then exit after durable activation acknowledgement.
 
-The DEV task must not expand the allowlist, edit business/runtime/product or
+The fix-DEV task must not expand the allowlist, edit business/runtime/product or
 workflow/script surfaces, perform formal verification/CR/QA/RM, merge, push,
 touch production, install or initialize skills/plugins/trackers, modify the
 main checkout's user changes, or change the `applied-writing-lecture` worktree.
@@ -85,7 +83,11 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
   `3889d67099c6211daa5cbbb79cb93bf49e4e5cc6`
 - Fresh PA recheck verdict: `APPROVE`; zero unresolved Must Fix; zero PO
   decisions
-- Next artifact: DEV implementation on the allowed current-rule surfaces
+- DEV implementation: `113db39f8119536e27aa4344f4bfcdfdbd7d3365`
+- Verification evidence: `docs/cuts/codex-matt-governance/verification.md`
+- Formal CR result commit: `64fafef0c5c6bbb913bc4c721535950fc76250ba`
+- Formal CR verdict: `NOT MERGEABLE`; five unresolved Must Fix findings
+- Next artifact: bounded fix-DEV implementation for canonical CR Must Fix 1-5
 
 ## Completed PA Dispatch
 
@@ -355,10 +357,38 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
   verdict and create only the one fresh fix-DEV successor allowed by the plan;
   otherwise create only the one fresh RM successor.
 
+## Fix DEV Dispatch
+
+- Dispatch ID: `codex-matt-governance-fix-dev-20260722-01`
+- State: `dispatch-pending`
+- Project: `local-8a1aff1b944a0aa921d1f6b55296afd6`
+- Checkout: fresh isolated worktree from this exact pending-dispatch commit
+- Expected base/head: `64fafef0c5c6bbb913bc4c721535950fc76250ba`
+- Pending-dispatch commit: this commit
+- Next role: fresh fix DEV
+- Configured model: `gpt-5.6-terra`
+- Selected model: `gpt-5.6-terra`
+- Thinking: `medium`
+- Route reason: bounded docs-only correction of five formal-CR findings; no
+  complex/cross-module/repeated-failure upgrade trigger
+- Availability/substitution evidence: current Codex task creation exposes
+  `gpt-5.6-terra` with `medium`; authority candidate set is
+  `[gpt-5.6-terra]`; configured primary selected with no substitution
+- Prompt-template digest:
+  `ac134b1edb945159180b6e6126217dab7ffbcfe30d2bfa84324c821e43b865bc`
+- Digest scope: stable write-held fix-DEV prompt with a
+  `<PENDING_DISPATCH_HEAD>` placeholder; the exact commit is supplied at task
+  creation
+- Output: fixes limited to canonical CR Must Fix 1-5 and durable DEV evidence
+- Authorization: one fresh fix-DEV task plus exactly one fresh non-implementing
+  verification successor after durable fix writeback; no CR/QA/RM/merge/push/
+  production, product/runtime, scripts/workflows, skills/plugins/trackers,
+  main-checkout, or applied-writing-lecture action
+
 ## Next Action
 
-Send ACTIVATE/RELEASE with this exact predecessor-final HEAD to the write-held
-DEV successor. The successor re-proves that HEAD, durably records activation as
-sole writer, and acknowledges. This PA performs no later worktree write and
-ends immediately after that acknowledgement without waiting for the DEV result;
-no ancestor task resumes.
+Create exactly one independently addressable fix-DEV task from this pending
+commit with the write-held prompt above. After bootstrap readiness, record its
+identity and readiness, make the CR's final `release-authorized` commit, release
+that exact HEAD, and exit after the successor's durable activation
+acknowledgement without waiting for the fix result.
