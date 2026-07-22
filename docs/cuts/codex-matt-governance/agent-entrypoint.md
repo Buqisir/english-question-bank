@@ -277,7 +277,7 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
 ## Verification Dispatch
 
 - Dispatch ID: `codex-matt-governance-verification-20260722-01`
-- State: `provisioning`
+- State: `release-authorized`
 - Project: `local-8a1aff1b944a0aa921d1f6b55296afd6`
 - Checkout: existing worktree
   `/Users/huangxuewei/Projects/wt-codex-matt-governance`
@@ -294,6 +294,12 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
 - Task entry: created as one independently addressable fresh Codex task with
   explicit `model=gpt-5.6-terra` and `thinking=medium`; write-held bootstrap
   active
+- Bootstrap proof: successor reported the exact worktree and branch, pending
+  dispatch HEAD `10c40442423fdd7e3c950f8e2aea695b136a72c6`, clean state, and
+  entrypoint-only read; it remains write-held
+- Release record: this is the predecessor's final worktree commit. The
+  ACTIVATE/RELEASE message carries its exact hash; DEV makes no later worktree
+  write and waits only for durable activation acknowledgement
 - Output: `docs/cuts/codex-matt-governance/verification.md`
 - Authorization: exactly one fresh no-DEV-history CR successor after durable
   verification writeback; no implementation, CR verdict, QA, RM, merge, push,
