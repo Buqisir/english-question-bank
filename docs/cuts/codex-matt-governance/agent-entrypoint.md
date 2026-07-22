@@ -12,8 +12,8 @@
 
 ## Current Stage
 
-**Fresh PA recheck approved; its exact result is durable and the sole fresh DEV
-dispatch is pending.**
+**Fresh PA recheck closed; the sole fresh DEV successor is ready-held and
+release-authorized by this predecessor's final worktree commit.**
 
 The third fresh PA cold-read the AMF-1 through AMF-4 normative dispositions and
 their observable verification clauses, then recorded `APPROVE` with zero
@@ -21,9 +21,10 @@ unresolved Must Fix and zero PO decisions in canonical `pa.md`. The exact PA
 result commit is recorded below, so the plan's derived DEV-readiness condition
 is satisfied without a substantive PA edit to `plan.md`. No current
 collaboration rule, business code, product surface, production configuration,
-or in-flight cut has changed. This PA remains the sole worktree writer only
-through the direct DEV successor's write-held bootstrap and exact-HEAD
-activation acknowledgement.
+or in-flight cut has changed. The DEV successor has proved its bootstrap state
+without writing. This commit closes the PA role and is its final worktree
+write; after release, DEV becomes sole writer only after exact-HEAD re-proof
+and its own durable activation record.
 
 ## Must Read
 
@@ -155,7 +156,7 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
 ## PA Recheck Dispatch
 
 - Dispatch ID: `codex-matt-governance-pa3-20260722-01`
-- State: `active`
+- State: `closed`
 - Project: `local-8a1aff1b944a0aa921d1f6b55296afd6`
 - Checkout: existing worktree
   `/Users/huangxuewei/Projects/wt-codex-matt-governance`
@@ -195,14 +196,15 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
   clean state before its first permitted write
 - Sole-writer state: acquired; predecessor is write-closed and this PA recheck
   is the only active writer in the shared worktree
-- Activation record: this commit
+- Activation record:
+  `921287aadbbecec8b292fa303e0b4fc2a40d8bec`
 - Result commit: `3889d67099c6211daa5cbbb79cb93bf49e4e5cc6`
 - Verdict: `APPROVE`; zero unresolved Must Fix; zero PO decisions
 - Role result state: `result-recorded`; the canonical verdict commit above is
   the exact result bound to DEV readiness
-- Role completion: substantive PA review is complete; this task remains only as
-  the sole-writer routing predecessor until its direct successor durably
-  activates
+- Role completion: closed by this predecessor-final commit; the PA performs no
+  later worktree write and waits only for its direct successor's activation
+  acknowledgement
 - Output: append-only recheck in
   `docs/cuts/codex-matt-governance/pa.md`
 - Authorization: one PA recheck plus exactly one in-scope direct successor
@@ -213,7 +215,7 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
 ## DEV Dispatch
 
 - Dispatch ID: `codex-matt-governance-dev-20260722-01`
-- State: `provisioning`
+- State: `release-authorized`
 - Project: `local-8a1aff1b944a0aa921d1f6b55296afd6`
 - Checkout: existing worktree
   `/Users/huangxuewei/Projects/wt-codex-matt-governance`
@@ -243,6 +245,18 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
 - Task entry: created as one independently addressable fresh Codex task with
   explicit `model=gpt-5.6-terra` and `thinking=medium`; write-held bootstrap
   active
+- Bootstrap proof: successor reported exact worktree and branch, current HEAD
+  `5655b115bc0b4b91f19855973046b9fcb4f05a42`, ancestor pending-dispatch commit
+  `24b156d0cb863615c168d483f8f56c0de07ad3fe`, clean state, entrypoint-only read,
+  and no successor edit
+- Provisioning record commit:
+  `5655b115bc0b4b91f19855973046b9fcb4f05a42`
+- Release record: this is the predecessor's final worktree commit; the
+  ACTIVATE/RELEASE message carries its exact hash, and this PA performs no later
+  worktree write
+- Predecessor closure: canonical PA result and the sole DEV successor entry are
+  durable; this PA waits only for the successor's durable activation
+  acknowledgement and never for the DEV result
 - Output: implementation limited to `plan.md`'s allowed collaboration-rule and
   documentation surfaces
 - Authorization: one DEV task plus exactly one fresh non-implementing
@@ -252,9 +266,8 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
 
 ## Next Action
 
-Commit this unique DEV dispatch, create exactly one fresh DEV task with explicit
-`gpt-5.6-terra` + `medium`, and keep it write-held through bootstrap proof.
-Then perform predecessor-final-commit -> exact-HEAD release -> durable successor
-activation/acknowledgement. This PA performs no later worktree write after
-release and ends immediately after acknowledgement without waiting for the DEV
-result; no ancestor task resumes.
+Send ACTIVATE/RELEASE with this exact predecessor-final HEAD to the write-held
+DEV successor. The successor re-proves that HEAD, durably records activation as
+sole writer, and acknowledges. This PA performs no later worktree write and
+ends immediately after that acknowledgement without waiting for the DEV result;
+no ancestor task resumes.
