@@ -949,3 +949,47 @@ plan-owned contradiction.
 - [ ] DP-6 — Fresh CR writes `cr.md`; all Must Fix findings close.
 - [ ] DP-7 — RM artifact gate, merge, main CI, compact STATUS, and three-cut
   evaluation pointer complete.
+
+## Owner-Approved Live-State Convergence — 2026-07-22
+
+This decision supersedes this cut's prior lifecycle-detail and historical-prose
+requirements where they conflict. It is a one-time minimal migration, not a
+new process redesign.
+
+- `agent-entrypoint.md` becomes the sole authoritative live-state snapshot
+  (target: 40–80 lines). It contains only one state, active role, source
+  branch, current worktree, released input head, one Next Action, zero or one
+  direct-successor authorization, and current evidence pointers.
+- The only live states are `active`, `handoff-ready`, `human-QA`, `blocked`,
+  and `closed`, with the owner-approved compatibility table recorded in
+  `migration-entry.md`. Live state never records its own current commit hash.
+- `released_input_head` is the predecessor release commit verified on entry. It
+  must exist in this repository and be an ancestor of current HEAD; detached
+  worktrees are valid when their source branch, worktree, and ancestry prove
+  the stated input relation.
+- All prior entrypoint content is preserved verbatim in append-only
+  `relay-history.md`, explicitly non-authoritative for live routing. The source
+  is the last committed entrypoint at `9ec43198eba2f3381e52af9aec7c5481b5d8109b`.
+  The interrupted uncommitted verifier draft is excluded and is not evidence.
+- The machine check reads only structured live-state fields and verifies the
+  approved compatibility, Git relation, one-successor top-level `create_thread`
+  rule, and permitted scope. It must not scan historical prose or infer state
+  from wording.
+- Handoff is one result commit that moves live-state to `handoff-ready`; it
+  then creates one top-level successor from that commit and ends. Only a failed
+  creation may produce a later `blocked` commit. The successor's first commit
+  moves live-state to `active` and appends activation evidence to the ledger.
+- Fresh verification checks only live-state/Git reality, current-rule relay
+  safety, and plan-required commands. Fresh re-review may raise Must Fix only
+  for a wrong role/worktree/branch/input HEAD, multiple live roles/successors,
+  subagent relay, wrong model route, or a closed role retaining write/dispatch
+  authority. Wording, historical prose, formatting, and theoretical
+  consistency are non-blocking.
+- Stop after this migration, a passing fresh verification, and a re-review with
+  no error-relay risk. Then route directly to RM; no Fix DEV 4/5 or additional
+  re-review cycle may be opened for non-substantive concerns.
+
+**Approved execution topology:** this task creates exactly one top-level
+migration DEV and exits. Migration DEV -> fresh verification -> fresh
+re-review -> RM is a one-way top-level relay. No PA, subagent, or surviving
+coordinator is permitted.
