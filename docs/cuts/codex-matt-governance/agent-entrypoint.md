@@ -313,7 +313,7 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
 ## CR Dispatch
 
 - Dispatch ID: `codex-matt-governance-cr-20260722-01`
-- State: `active`
+- State: `result-recorded`
 - Project: `local-8a1aff1b944a0aa921d1f6b55296afd6`
 - Checkout: fresh isolated worktree from branch `codex/codex-matt-governance`
 - Expected base/head: `65017c22152b309e989ea80d867035a6e69c3d6a`
@@ -342,7 +342,13 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
   and clean state re-proved before the first permitted write
 - Sole-writer state: acquired; predecessor is write-closed and this CR is the
   only active writer in the isolated worktree
-- Activation record: this commit
+- Activation record: `aef4c427603dc12e0434f6dd8981275f57d60379`
+- Reviewed DEV diff:
+  `3889d67099c6211daa5cbbb79cb93bf49e4e5cc6..113db39f8119536e27aa4344f4bfcdfdbd7d3365`
+- Result artifact: `docs/cuts/codex-matt-governance/cr.md`
+- Verdict: `NOT MERGEABLE`; five unresolved Must Fix findings
+- Role result state: `result-recorded`; exactly one fresh fix-DEV successor is
+  required by the canonical verdict and the plan relay table
 - Output: `docs/cuts/codex-matt-governance/cr.md`
 - Authorization: one formal CR only. No implementation, QA, RM, merge, push,
   production, or downstream supervision. On Must Fix, record the canonical CR
