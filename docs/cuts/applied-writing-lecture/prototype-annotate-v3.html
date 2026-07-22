@@ -982,7 +982,6 @@
 
     function compareLayoutStates(a, b) {
       return a.maxRegret - b.maxRegret ||
-        a.orderPenalty - b.orderPenalty ||
         a.totalRegret - b.totalRegret ||
         a.connectorCost - b.connectorCost ||
         a.tieBreak - b.tieBreak;
@@ -1011,7 +1010,7 @@
       });
 
       const ordered = [...entries].sort((a, b) => a.candidates.length - b.candidates.length || b.el.offsetHeight - a.el.offsetHeight);
-      let states = [{ placements: [], maxRegret: 0, totalRegret: 0, orderPenalty: 0, connectorCost: 0, tieBreak: 0 }];
+      let states = [{ placements: [], maxRegret: 0, totalRegret: 0, connectorCost: 0, tieBreak: 0 }];
 
       for (const entry of ordered) {
         const next = [];
@@ -1032,12 +1031,6 @@
               return Math.abs(anchorOrder) > 10 && Math.abs(noteOrder) > 12 && anchorOrder * noteOrder < 0;
             });
             if (laneInversion) continue;
-            let orderPenalty = 0;
-            state.placements.forEach(placed => {
-              const noteOrder = (slot.rect.left + slot.rect.right) / 2 - (placed.slot.rect.left + placed.slot.rect.right) / 2;
-              const targetOrder = slot.route.tip.x - placed.slot.route.tip.x;
-              if (Math.abs(noteOrder) > 20 && Math.abs(targetOrder) > 20 && noteOrder * targetOrder < 0) orderPenalty += 120;
-            });
             let routeCrowding = 0;
             state.placements.forEach(placed => {
               for (const a of slot.route.samples) {
@@ -1048,7 +1041,6 @@
               placements: [...state.placements, { entry, slot }],
               maxRegret: Math.max(state.maxRegret, slot.regret),
               totalRegret: state.totalRegret + slot.regret,
-              orderPenalty: state.orderPenalty + orderPenalty,
               connectorCost: state.connectorCost + slot.route.score + routeCrowding * 18,
               tieBreak: state.tieBreak + slot.tieBreak
             });
