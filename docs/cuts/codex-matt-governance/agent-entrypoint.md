@@ -12,21 +12,28 @@
 
 ## Current Stage
 
-**Fix DEV 3 verification evidence is result-recorded and dispatch-pending.**
-The manual-fallback Fix DEV 3 task is write-closed; this verifier has bound the
-exact-head matrix and is the sole writer until it creates its one fresh,
-write-held no-DEV-history formal re-review successor.
+**Topology recovery checkpoint is recorded; one top-level fresh formal
+re-review is the sole next action.**
+
+The manual-fallback Fix DEV 3 task and its mistakenly spawned verification
+subagent are write-closed. The verification subagent completed valid exact-head
+evidence at `dae33f802707806f757aac4a55240a0d34ada985`. Its recursively spawned
+re-review subagent was interrupted before its first write, produced no verdict
+or repository change, and is not a legal Auto-Next successor. The current
+visible top-level task owns only this recovery checkpoint and the creation of
+one independently addressable top-level fresh formal re-review; it will not
+wait for that review result.
 
 Canonical `cr.md` recorded unresolved R1-R3; Fix DEV 3 implemented the bounded
-repair at `b1169a6978aef1e475360b725a8bd96265ef3a39` and restored normal
-dependencies. The fresh verification successor now owns exact-head evidence.
-No implementation, CR, QA, RM, merge, push, production, workflow/script edit,
-skill/plugin/tracker, main-checkout, or applied-writing-lecture action is
-authorized.
+repair at `b1169a6978aef1e475360b725a8bd96265ef3a39`, restored normal
+dependencies, and passed fresh exact-head verification. The next top-level task
+owns formal re-review only. No implementation, QA, RM, merge, push, production,
+workflow/script edit, skill/plugin/tracker, main-checkout, or
+applied-writing-lecture action is authorized in that review task.
 
 ## Must Read
 
-Before verification, read these current inputs:
+Before formal re-review, read these current inputs:
 
 1. `docs/cuts/codex-matt-governance/cr.md`
 2. `docs/cuts/codex-matt-governance/plan.md`
@@ -50,21 +57,22 @@ Open only when needed to check a named conflict or artifact convention:
 
 ## Stage Contract
 
-This task wears only the fresh non-implementing verification hat. After
+The next task wears only the fresh no-DEV-history formal re-review hat. After
 exact-HEAD activation, it must:
 
 1. re-prove the baseline, branch, worktree, released exact head, and clean
    state, then durably record its own activation before any substantive write;
-2. read the Must Read set, bind the plan-named governance matrix to the exact
-   implementation head with real exit codes, and append evidence only to
-   `verification.md`;
-3. create exactly one fresh no-DEV-history formal re-review successor through
-   write-held -> final-commit -> release, then exit after its durable activation
-   acknowledgement.
+2. cold-read the Fix DEV 3 diff, canonical plan and CR history, and the fresh
+   exact-head evidence without inheriting any DEV conversation;
+3. append the formal verdict to canonical `cr.md`; if Must Fix remains, create
+   one top-level fix DEV successor, otherwise create one top-level RM successor;
+4. end after the unique successor is durably created and started, without
+   waiting for its result.
 
-The task must not implement, perform CR, QA, RM, merge, push, production,
+The task must not implement, perform QA/RM, merge, push, production,
 workflow/script edits, skill/plugin/tracker work, main-checkout edits, or
-changes to the `applied-writing-lecture` worktree.
+changes to the `applied-writing-lecture` worktree. A subagent may not be its
+successor or create any later relay task.
 
 ## Current Outputs
 
@@ -760,5 +768,28 @@ changes to the `applied-writing-lecture` worktree.
 
 ## Next Action
 
-Create exactly one fresh no-DEV-history formal re-review successor through the
-write-held -> final-commit -> release protocol; this verifier then exits.
+The current visible top-level recovery task creates exactly one independently
+addressable top-level fresh formal re-review with `gpt-5.6-sol` and `high`,
+targeted at branch `codex/codex-matt-governance` containing this checkpoint.
+The new task must cold-read the Fix DEV 3 result and verification evidence,
+write canonical `cr.md`, create at most one top-level direct successor, and
+exit. The recovery task ends immediately after successful creation and does
+not wait for the review result.
+
+## Topology Recovery Record
+
+- Invalid verification subagent: `/root/fix3_verification`
+- Valid evidence result: `dae33f802707806f757aac4a55240a0d34ada985`
+- Invalid recursive re-review subagent:
+  `/root/fix3_verification/fix3_rereview`
+- Recursive re-review state: interrupted before activation write; no repository
+  change and no CR verdict
+- Last recursive-chain commit retained as evidence:
+  `d06c3359fc7e074f81bd37c4421e7c753ce5ffa1`
+- Recovery owner: current visible top-level Codex task
+- Legal successor: one `create_thread` top-level fresh formal re-review in the
+  `english-question-bank` project
+- Explicit route: `gpt-5.6-sol`, `high`; fresh CR route from the sole model
+  authority
+- Forbidden fallback: no `spawn_agent`, subagent, fork, inherited DEV history,
+  or long-lived parent wait
