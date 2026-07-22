@@ -12,8 +12,8 @@
 
 ## Current Stage
 
-**The top-level fresh formal re-review recorded `NOT MERGEABLE`; one top-level
-fresh Fix DEV successor is dispatch-pending.**
+**The top-level fresh formal re-review recorded `NOT MERGEABLE`; its sole
+top-level fresh Fix DEV successor is provisioning under write hold.**
 
 The manual-fallback Fix DEV 3 task and its mistakenly spawned verification
 subagent are write-closed. The verification subagent completed valid exact-head
@@ -771,8 +771,8 @@ create any later relay task.
 
 ## Next Action
 
-Provision exactly one independently addressable top-level fresh Fix DEV task
-with `gpt-5.6-terra` and `medium`. It must remain write-held until this
+Resolve the queued Fix DEV task to an independently addressable thread and
+obtain its bootstrap readiness proof. It must remain write-held until this
 re-review's final release commit, then repair only canonical R2-R3, hand to one
 top-level fresh verification successor, and exit without waiting for the
 verification result.
@@ -837,13 +837,16 @@ verification result.
 
 - Dispatch ID:
   `codex-matt-governance-fix4-top-level-dev-20260722-01`
-- State: `dispatch-pending`
+- State: `provisioning`
 - Project: `english-question-bank`
 - Source branch/ref: `codex/codex-matt-governance`
 - Expected result base:
   `4659073b8b17249d73a318f0d951f9efc1e882c7`
-- Pending-dispatch commit: this commit; its exact hash is supplied to the
-  write-held task and recorded on provisioning
+- Pending-dispatch commit:
+  `29402b50565c91542a790635c5f7dfe8f97a28f1`
+- Provisioned starting ref:
+  `29402b50565c91542a790635c5f7dfe8f97a28f1` (exact detached commit descended
+  from source branch `codex/codex-matt-governance`)
 - Next role: top-level fresh Fix DEV for canonical R2-R3 only
 - Configured model: `gpt-5.6-terra`
 - Selected model: `gpt-5.6-terra`
@@ -859,6 +862,12 @@ verification result.
 - Digest scope: stable write-held Fix DEV prompt with a
   `<PENDING_DISPATCH_HEAD>` placeholder; the exact pending commit is supplied
   at task creation
+- Queued client task:
+  `client-new-thread:e2814690-0fd2-43c4-93de-8e5d9a9d091a`
+- Host: `local`
+- Task creation: exactly one top-level project worktree task was queued with
+  explicit `model=gpt-5.6-terra` and `thinking=medium`; no duplicate task or
+  retry exists
 - Output: activation and bounded correction in
   `docs/cuts/codex-matt-governance/agent-entrypoint.md`, plus the reusable
   `docs/cuts/_templates/agent-entrypoint.md` lifecycle contract only if needed;
