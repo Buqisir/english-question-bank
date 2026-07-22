@@ -18,13 +18,12 @@ CR / RM); do not mass-rename history.
 
 ### Roles
 
-- Orchestrator: **阿澈** is the main agent and wears **PM + RM** (Codex native
-  **Sol / max**), first responsible person with full change authority. The main
-  agent does direction, decomposition, direct dispatch, verification, release
-  gates, and final acceptance — not bulk implementation.
-- Execution runs in directly dispatched subagents. **Every spawned agent pins
-  its model explicitly; never inherits the main-agent tier.** DEV = Terra;
-  judgment-heavy PA / CR = Sol.
+- Orchestrator: **阿澈** is the main agent and wears **PM + RM**, first
+  responsible person with full change authority. The main agent does direction,
+  decomposition, acceptance, and release gates — not bulk implementation.
+- Execution runs in fresh, independently addressable tasks. Every direct relay
+  successor has one role and an explicit `model` and `thinking` selection from
+  `docs/agents/model-routing.md`; it never inherits the predecessor selection.
 - **Independence = fresh, un-anchored context + role persona.** PA, DEV,
   and CR stay separate contexts; review gates never downgrade.
 - UI direction / 审美 is delegated to 阿澈 per
@@ -33,37 +32,35 @@ CR / RM); do not mass-rename history.
 
 ### Dispatch map (scales with cut size)
 
-- small: main agent fixes directly, or one fresh Terra DEV subagent; CR-lite by
+- small: main agent fixes directly, or one fresh DEV task; CR-lite by
   the main agent; no ceremony files.
-- medium: committed `plan.md` → fresh Terra DEV → PM runs narrow + `tsc` + full
-  verify → fresh Sol CR (cold-read, writes `cr.md`) → required QA / PO QA →
-  PM + RM acceptance, merge, main CI, STATUS.
+- medium: committed `plan.md` → fresh DEV → fresh non-implementing verification
+  → fresh CR (cold-read, writes `cr.md`) → required QA / PO QA → RM acceptance,
+  merge, main CI, STATUS.
 - large, or touches an irreversible surface / data-contract semantics
   (schema, migration, export, anchor protocol, cross-cut architecture):
-  add a fresh Sol PA → PM compression into `plan.md` → fresh Terra DEV → PM
-  verify → fresh Sol CR (Big CR only by trigger, writes `cr.md`) → required QA /
+  add a fresh PA → PM compression into `plan.md` → fresh DEV → fresh
+  verification → fresh CR (Big CR only by trigger, writes `cr.md`) → required QA /
   PO QA → PM + RM closeout. `cut-note.md` is required at closeout. Purely
   additive schema touches and reversible product-surface
   work may downgrade to PA-lite — the downgrade reason goes in the plan
   header and CR must review whether it still holds. 原型已 owner 逐裁点
   拍板的刀同此:方向审查已由原型过程完成,formal PA 默认降 PA-lite
   (owner, 2026-07-12)。
-- Direct dispatch route (PM stages DEV / CR directly; decision points, batch
-  tasks, parallel cuts, worktrees, and checkpoint discipline): read
-  `docs/agents/dispatch-protocols.md` before dispatching.
+- Routing, exact model/thinking selection, direct relay lifecycle, decision
+  points, and worktree discipline: read `docs/agents/model-routing.md`,
+  `docs/steering/codex-matt-workflow.md`, and `docs/agents/dispatch-protocols.md`
+  before dispatching.
 - CR-lite (the PM's cold read) is for Small cuts only. Every Medium / Large cut
   receives a fresh CR; its non-empty `cr.md` is an RM artifact-gate requirement.
 
-### Tier / effort defaults
+### Routing law
 
-| Role | Tier | Effort |
-| --- | --- | --- |
-| PM + RM (main agent) | Sol | max |
-| PA | Sol | high (xhigh only for irreversible work) |
-| DEV | Terra | medium (high only when the implementation is gnarly) |
-| CR | Sol | high (xhigh only for Big CR) |
-
-Never let a subagent default to the main-agent profile.
+`docs/agents/model-routing.md` is the single exact model/thinking authority.
+Every dispatch independently selects its role, passes both values explicitly,
+records availability and substitution evidence, and stops with
+`missing-authority` / `dispatch-failed` when no eligible candidate supports the
+requested thinking. Never rely on a runtime default or inherited profile.
 
 ### Gates
 

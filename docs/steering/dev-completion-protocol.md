@@ -15,6 +15,11 @@ This document was written in response to the agreed rule口径
 emails fire reliably for every shippable change. The owner relies
 on those emails as the primary signal that work is ready for review.
 
+For an Auto-Next cut, a DEV task's required completion is durable result and
+one fresh non-implementing verification successor under the entrypoint's
+write-hold/release protocol. It must not push, open a PR, merge, or wait for
+that successor unless the cut explicitly grants those later release actions.
+
 ---
 
 ## 1. Default flow (must)

@@ -8,6 +8,9 @@ Output: `docs/cuts/<CUT_DIR>/pa.md`
 
 Act as PA only. Do not implement. Do not patch files.
 
+This is a fresh independently addressable PA task, not a fork, handoff, or
+parent-owned subagent standing in for the required relay role.
+
 Review whether this cut is ready for DEV. Find direction,
 boundary, data-contract, verification, and rework risks before work
 starts.

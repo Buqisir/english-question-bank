@@ -19,6 +19,10 @@ Current roles, models, and execution sequence are authoritative only in the
 QA, artifact, handoff, and size gates. Historical cut records naming 小川 /
 external agents are read as 阿澈 wearing the matching hat.
 
+For multi-task topology, use `codex-matt-workflow.md`. Context size does not
+alter Small/Medium/Large/irreversible gates; every required fresh role remains a
+separate task under the one-way Auto-Next relay.
+
 ---
 
 ## 1. First principles

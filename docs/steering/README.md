@@ -15,6 +15,14 @@ product rules, not casual suggestions.
 
 ## Required steering notes
 
+### Codex × Matt workflow
+
+File: `codex-matt-workflow.md`
+
+Use for multi-task cuts, Wayfinder routing, or Auto-Next. It defines the
+context-topology axis and one-way relay lifecycle; it never waives the risk
+gates in `AGENTS.md` and `cut-workflow-protocol.md`.
+
 ### Product scope discipline
 
 File: `product-scope-discipline.md`

@@ -9,6 +9,9 @@ Output: `docs/cuts/<CUT_DIR>/cr.md`
 
 Act as CR only. Do not implement. Do not patch files.
 
+This is a fresh independently addressable no-DEV-history review task. It is not
+a continuation, fork, handoff, or parent-owned subagent standing in for CR.
+
 Review the pushed PR against the accepted plan. Find bugs, scope leaks,
 missing tests, stale assumptions, data-contract drift, and behavioral
 regressions. Do not redesign the product during review.

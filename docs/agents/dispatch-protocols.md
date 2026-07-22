@@ -4,6 +4,23 @@
 并行刀 / worktree DEV 前),不在 session 必读税内。法条来历见
 `docs/agents/case-law.md`。
 
+## Auto-Next direct relay
+
+The current standard route is a one-way relay, not a PM wait loop. Read
+`docs/agents/model-routing.md` before each task creation; independently select
+the next role, explicitly pass `model` and `thinking`, and retain the required
+risk gates. Each task owns one role and may create only one fresh,
+independently addressable successor after durable writeback. Parent-owned
+subagents cannot satisfy a relay role.
+
+For a shared worktree the only safe order is dispatch-pending -> provisioning
+-> ready-held -> predecessor-final `release-authorized` commit -> release exact
+HEAD -> successor re-proof -> successor first-write `active` commit ->
+acknowledgement. The predecessor makes no later worktree write and exits rather
+than supervising the successor. If availability has no authority-eligible model
+with the requested thinking, record `missing-authority` / `dispatch-failed` and
+do not create a task.
+
 ## 直接派工路由（owner 裁决 2026-07-21）
 
 标准刀由 PM 逐阶段直接派工：读回执、作必要裁决、再派下一步。不要把
@@ -16,8 +33,9 @@ DEV / verify / CR 包进后台 Workflow，也不设置 verify agent 代位 PM �
 2. medium / large？→ 先确认 committed `plan.md` 与预建 worktree；需要 PA
    时先派 fresh PA，然后直接派 fresh DEV。所有派工按 `AGENTS.md` 当前
    tier table 显式 pin model + effort。
-3. PM 在 DEV worktree 亲跑计划规定的 narrow verify、`tsc` 与
-   `pnpm -C app run verify:all`，确认真实退出码后，派 fresh CR；CR 将
+3. DEV durable writeback 后派 fresh non-implementing verification；它消费计划
+   规定的 narrow verify、`tsc` 与 full verify 的真实退出码并绑定 exact HEAD，
+   然后派 fresh CR；CR 将
    结论写入 `docs/cuts/<CUT>/cr.md`。
 4. PM + RM 只在 fresh CR 的 `cr.md` 落盘后运行 artifact gate，再处理 merge、
    main CI 和 STATUS。
