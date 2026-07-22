@@ -12,8 +12,8 @@
 
 ## Current Stage
 
-**The top-level fresh formal re-review is activated as the sole current
-writer.**
+**The top-level fresh formal re-review recorded `NOT MERGEABLE`; one top-level
+fresh Fix DEV successor is dispatch-pending.**
 
 The manual-fallback Fix DEV 3 task and its mistakenly spawned verification
 subagent are write-closed. The verification subagent completed valid exact-head
@@ -57,22 +57,25 @@ Open only when needed to check a named conflict or artifact convention:
 
 ## Stage Contract
 
-The next task wears only the fresh no-DEV-history formal re-review hat. After
+The next task wears only the fresh Fix DEV hat for canonical R2-R3. After
 exact-HEAD activation, it must:
 
 1. re-prove the baseline, branch, worktree, released exact head, and clean
    state, then durably record its own activation before any substantive write;
-2. cold-read the Fix DEV 3 diff, canonical plan and CR history, and the fresh
-   exact-head evidence without inheriting any DEV conversation;
-3. append the formal verdict to canonical `cr.md`; if Must Fix remains, create
-   one top-level fix DEV successor, otherwise create one top-level RM successor;
-4. end after the unique successor is durably created and started, without
-   waiting for its result.
+2. cold-read the canonical plan and CR history, the Fix DEV 3 result, the false
+   lifecycle PASS identified by the top-level re-review, and every allowed
+   lifecycle target before editing;
+3. implement only R2-R3 so the activation first-write commit makes the
+   top-level current stage and unique next action machine-current, strengthening
+   the reusable entrypoint lifecycle contract only if needed; and
+4. create exactly one top-level fresh non-implementing verification successor
+   after durable writeback, then exit after its activation acknowledgement.
 
-The task must not implement, perform QA/RM, merge, push, production,
-workflow/script edits, skill/plugin/tracker work, main-checkout edits, or
-changes to the `applied-writing-lecture` worktree. A subagent may not be its
-successor or create any later relay task.
+The task must not write `cr.md` or `verification.md`, perform CR/QA/RM, merge,
+push, production, product/runtime/server/schema/data work, workflow/script
+edits, skill/plugin/tracker work, main-checkout edits, or changes to the
+`applied-writing-lecture` worktree. A subagent may not be its successor or
+create any later relay task.
 
 ## Current Outputs
 
@@ -768,13 +771,11 @@ successor or create any later relay task.
 
 ## Next Action
 
-The current visible top-level recovery task creates exactly one independently
-addressable top-level fresh formal re-review with `gpt-5.6-sol` and `high`,
-targeted at branch `codex/codex-matt-governance` containing this checkpoint.
-The new task must cold-read the Fix DEV 3 result and verification evidence,
-write canonical `cr.md`, create at most one top-level direct successor, and
-exit. The recovery task ends immediately after successful creation and does
-not wait for the review result.
+Provision exactly one independently addressable top-level fresh Fix DEV task
+with `gpt-5.6-terra` and `medium`. It must remain write-held until this
+re-review's final release commit, then repair only canonical R2-R3, hand to one
+top-level fresh verification successor, and exit without waiting for the
+verification result.
 
 ## Topology Recovery Record
 
@@ -798,7 +799,7 @@ not wait for the review result.
 
 - Dispatch ID:
   `codex-matt-governance-fix3-top-level-rereview-20260722-01`
-- State: `active`
+- State: `result-recorded`
 - Top-level task identity:
   `019f8ada-1f77-7ba2-8b3b-b8fb10060ded` (`local`)
 - Queued entry:
@@ -825,4 +826,46 @@ not wait for the review result.
   exactly one top-level direct successor and stop; no implementation, QA/RM,
   merge, push, production, product/runtime/server/schema/data, scripts/
   workflows, skills/plugins/trackers, main-checkout, or
+  applied-writing-lecture action
+- Result artifact: `docs/cuts/codex-matt-governance/cr.md`
+- Result commit: `4659073b8b17249d73a318f0d951f9efc1e882c7`
+- Verdict: `NOT MERGEABLE`; two unresolved Must Fix findings R2-R3
+- Role result state: `result-recorded`; this task remains sole writer only
+  through the direct successor's write-held provisioning and release
+
+## Top-level Fix DEV 4 Dispatch
+
+- Dispatch ID:
+  `codex-matt-governance-fix4-top-level-dev-20260722-01`
+- State: `dispatch-pending`
+- Project: `english-question-bank`
+- Source branch/ref: `codex/codex-matt-governance`
+- Expected result base:
+  `4659073b8b17249d73a318f0d951f9efc1e882c7`
+- Pending-dispatch commit: this commit; its exact hash is supplied to the
+  write-held task and recorded on provisioning
+- Next role: top-level fresh Fix DEV for canonical R2-R3 only
+- Configured model: `gpt-5.6-terra`
+- Selected model: `gpt-5.6-terra`
+- Thinking: `medium`
+- Route reason: bounded docs-only correction of two lifecycle/evidence
+  findings; no complex, cross-module, or repeated-implementation-failure
+  upgrade trigger
+- Availability/substitution evidence: the current top-level task-creation
+  capability exposes `gpt-5.6-terra` with `medium`; configured primary selected
+  from the finite `[gpt-5.6-terra]` eligibility set with no substitution
+- Prompt-template digest:
+  `c4d4528bc26c35a9bae5afe7b2e93f2551c50f9d258a4d7d8097f6685031a198`
+- Digest scope: stable write-held Fix DEV prompt with a
+  `<PENDING_DISPATCH_HEAD>` placeholder; the exact pending commit is supplied
+  at task creation
+- Output: activation and bounded correction in
+  `docs/cuts/codex-matt-governance/agent-entrypoint.md`, plus the reusable
+  `docs/cuts/_templates/agent-entrypoint.md` lifecycle contract only if needed;
+  no `cr.md` or `verification.md` write by Fix DEV
+- One-successor authorization: after durable Fix DEV writeback, create exactly
+  one independently addressable top-level fresh non-implementing verification
+  successor; no subagent, fork, or inherited-context fallback
+- Stop boundary: no CR/QA/RM/merge/push/production, product/runtime/server/
+  schema/data, scripts/workflows, skills/plugins/trackers, main-checkout, or
   applied-writing-lecture action
