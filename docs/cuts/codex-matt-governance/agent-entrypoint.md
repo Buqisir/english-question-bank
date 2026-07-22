@@ -12,7 +12,7 @@
 
 ## Current Stage
 
-**Fresh PA addendum complete; the sole PM plan-revision successor is pending.**
+**Fresh PA addendum closed; the sole PM plan-revision successor is active.**
 
 The second fresh PA approved the owner-locked model-routing and one-way-relay
 direction but found four executable protocol gaps: same-grade substitution is
@@ -72,7 +72,7 @@ business code, or change the `applied-writing-lecture` worktree.
 ## Completed PA Dispatch
 
 - Dispatch ID: `codex-matt-governance-pa2-20260722`
-- State: `result-recorded`
+- State: `closed`
 - Project: `local-8a1aff1b944a0aa921d1f6b55296afd6`
 - Checkout: existing worktree
   `/Users/huangxuewei/Projects/wt-codex-matt-governance`
@@ -97,7 +97,7 @@ business code, or change the `applied-writing-lecture` worktree.
 ## Successor Dispatch
 
 - Dispatch ID: `codex-matt-governance-pm-revision-20260722-01`
-- State: `provisioning`
+- State: `active`
 - Project: `local-8a1aff1b944a0aa921d1f6b55296afd6`
 - Checkout: existing worktree
   `/Users/huangxuewei/Projects/wt-codex-matt-governance`
@@ -113,7 +113,17 @@ business code, or change the `applied-writing-lecture` worktree.
 - Source task: `019f8a7f-7d63-79c2-a713-35d4ff35243f` (`local`)
 - Thread: `019f8a8a-e719-7071-acf3-3758290977cb` (`local`)
 - Task entry: created with explicit `model=gpt-5.6-sol` and `thinking=high`;
-  bootstrap hold in effect pending readiness proof and durable activation
+  bootstrap hold respected
+- Bootstrap proof: child reported exact worktree and branch, pending-dispatch
+  HEAD `f3d1f2b843b82f442946825b4061825121976c10`, and only the expected
+  parent-owned provisioning write; child made no edit
+- Provisioning record commit:
+  `92a9bb657f657c95d5f97c8702a1a0cfc5c554d8`
+- Activation record: this is the predecessor's final worktree commit; ACTIVATE
+  carries its exact hash, the successor re-proves that hash before its first
+  write, and the predecessor performs no later worktree write
+- Predecessor closure: PA result and sole successor entry are durable; PA waits
+  only for activation acknowledgement and never for the PM result
 - Output: `docs/cuts/codex-matt-governance/plan.md`
 - Authorization: one PM plan revision plus exactly one fresh PA-recheck
   successor after durable writeback; no current-rule implementation, DEV,
@@ -122,7 +132,7 @@ business code, or change the `applied-writing-lecture` worktree.
 
 ## Next Action
 
-The PA task must commit this pending dispatch, create one fresh PM plan-revision
-task with **explicit Sol model + high thinking**, durably record its task entry
-and activation, then end after acknowledgement. The successor owns the next
-relay and follows the Stage Contract above; no ancestor task resumes.
+Send ACTIVATE with this final predecessor HEAD to the fresh PM plan-revision
+task, then end after its activation acknowledgement. The successor owns the
+next relay and follows the Stage Contract above; no ancestor task resumes and
+this PA task makes no further worktree write.
