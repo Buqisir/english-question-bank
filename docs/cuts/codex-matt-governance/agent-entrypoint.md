@@ -67,6 +67,27 @@ skills or tracker infrastructure, touch business code, or change the
 - Initial PA: `docs/cuts/codex-matt-governance/pa.md`
 - Next artifact: addendum section in the same canonical `pa.md`
 
+## Active Dispatch
+
+- Dispatch ID: `codex-matt-governance-pa2-20260722`
+- State: `dispatch-pending`
+- Project: `local-8a1aff1b944a0aa921d1f6b55296afd6`
+- Checkout: existing worktree
+  `/Users/huangxuewei/Projects/wt-codex-matt-governance`
+- Branch: `codex/codex-matt-governance`
+- Expected plan head: `54dc21016414f78167faccd34a260f7464d730f0`
+- Next role: `PA`
+- Model: `gpt-5.6-sol`
+- Thinking: `xhigh`
+- Upgrade reason: Large governance cut plus contract-level Auto-Next
+  model-routing law
+- Prompt digest:
+  `dc994dab6c2b4f30ae051d55cecaa622afdfb223d644d74c1d6ddaddc83d8092`
+- Output: append-only addendum in
+  `docs/cuts/codex-matt-governance/pa.md`
+- Authorization: one PA writeback task only; no implementation, merge,
+  production, infrastructure, or further task creation
+
 ## Next Action
 
 The active PM task must commit the compressed plan, then create and start a
