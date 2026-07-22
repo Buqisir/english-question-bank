@@ -521,3 +521,151 @@ the live frontier fields without rewriting historical evidence, and restore
 the normal worktree dependencies needed by fresh verification. Then run one
 fresh exact-head verification and one fresh no-DEV-history re-review. Do not
 route to RM yet; browser and owner QA remain not required.
+
+---
+
+## Top-level Fix DEV 3 Formal Re-review — 2026-07-22
+
+Role: top-level fresh formal re-review; no DEV history and no implementation
+performed
+
+- Top-level task:
+  `019f8ada-1f77-7ba2-8b3b-b8fb10060ded` (`local`)
+- Re-review activation: `be903f01976382598bb7ea8f5ecc10302157bb1e`
+- Topology-recovery checkpoint:
+  `6e96ad495b5fc2853a5921ae72f271a0264493c1`
+- Reviewed Fix DEV 3 result:
+  `b1169a6978aef1e475360b725a8bd96265ef3a39`
+- Exact fix diff:
+  `git diff 3d1c6722169f750dd4096c9547f8d0e22fce90b9..b1169a6978aef1e475360b725a8bd96265ef3a39`
+- Evidence input:
+  `dae33f802707806f757aac4a55240a0d34ada985`
+
+### Verdict
+
+**NOT MERGEABLE — 2 unresolved Must Fix findings (R2-R3).**
+
+Fix DEV 3 stayed inside the ratified governance/documentation allowlist and
+closed the remaining current-positive ancestor/subagent ownership conflict.
+The restored `tsc` and full `verify:all` evidence is green. The live activation
+smoke is still red, however, and the verification matrix records that red
+transition as PASS. Canonical DP-6 therefore remains open.
+
+### Changed Scope
+
+- Fix DEV 3 delta: six governance/cut-document paths, all allowed by
+  `plan.md`.
+- Forbidden product/runtime, server/schema/data, scripts/workflows,
+  skills/plugins/trackers, production, main checkout, and
+  `applied-writing-lecture` surfaces: untouched.
+- No application, data-contract, or user-visible behavior changed.
+
+### Findings
+
+#### R1 closure — Current-positive relay ownership is now coherent
+
+The independent attack scan found no current PA/DEV/verification/CR/QA/RM
+route that counts a parent-owned subagent or surviving ancestor coordinator as
+the direct successor. `AGENTS.md`, `review-levels.md`, PA/CR personas,
+`dispatch-protocols.md`, and steering now assign relay roles to fresh direct
+tasks and point exact routing to `model-routing.md`. Remaining main-agent or
+subagent wording is limited to Small-cut direct/CR-lite work, role-internal
+assistance, non-relay batch/worktree discipline, or negative boundaries. R1 is
+closed.
+
+#### Must Fix R2 — The activation commit still exposes two live frontiers
+
+The exact verifier activation commit
+`cf9991e09bb8c25ea9035537157713ca0a01773b` is internally contradictory:
+
+- its top-level `Current Stage` still says Fix DEV 3 verification is
+  `release-authorized` and remains write-held pending re-proof
+  (`agent-entrypoint.md` at that commit, lines 15-18);
+- its canonical `Next Action` still instructs the predecessor to activate that
+  verifier (lines 734-738); while
+- the same commit's verification dispatch block records the verifier's
+  exact-HEAD re-proof, sole-writer acquisition, and `State: active`
+  (lines 699 and 722-725).
+
+The later evidence commit repairs the top-level prose, but it cannot make the
+successor's first-write activation record machine-current retroactively. The
+prior R2 explicitly required each released/activated frontier to yield one
+current role and one unique next action. Fix DEV 3 has not supplied that green
+live transition.
+
+#### Must Fix R3 — The governance matrix contains a material false PASS
+
+`verification.md` records `Live lifecycle | PASS` and states that the
+activation commit's `Next Action` names the unique dispatch-pending transition.
+The exact commit inspected above proves the opposite: its `Next Action` still
+names the already-completed activation transition. The integration commands,
+scope, routing ownership, exact-model authority, authority map, and links are
+otherwise green, but a factually false lifecycle row cannot close the
+plan-required behavioral evidence gate.
+
+Fresh direct verification must bind a truthful matrix to the corrected head
+and capture a genuinely machine-current activation transition. A later repair
+of prose is not a substitute for the required first-write lifecycle proof.
+
+### Standards
+
+R2 violates the durable single-frontier/unique-next-action contract in HR-2,
+HR-7, HR-10, and the Auto-Next protocol. R3 violates the plan's evidence
+contract by certifying a state the referenced commit does not contain. No
+remaining standards violation was found in the R1 current-rule ownership
+surfaces.
+
+### Spec
+
+Canonical R1 is closed. R2 remains open because the live activation transition
+is ambiguous at the exact first-write commit. R3 remains open because the
+governance matrix is factually wrong despite green integration commands. No
+scope creep or forbidden-surface change was found.
+
+### Verification / Attack Evidence
+
+- `git diff --check 3d1c672..b1169a6` -> PASS, exit `0`.
+- Fix changed-path allowlist -> PASS; six of six paths allowed.
+- Current-positive relay/ancestor ownership attack -> PASS; no contradictory
+  direct-relay owner found.
+- Exact-model authority and changed routing links -> accepted; the attack scan
+  found no contrary current authority.
+- `tsc` / full `verify:all` -> accepted from unchanged exact-head evidence:
+  raw exits `0` / `0`, summary PASS 84 / SKIP 1 / FAIL 0.
+- Live lifecycle -> FAIL at exact activation commit `cf9991e`; see R2.
+- Governance-matrix truthfulness -> FAIL; see R3.
+- Browser/owner QA -> not required for this docs-only governance cut.
+
+The full integration suite was not duplicated: no application/current-rule
+content changed after the bound Fix DEV 3 result, and the named attack here is
+the lifecycle/evidence contradiction that the existing full suite cannot
+observe.
+
+### Failure / Attack Angle
+
+A future task can read the exact activation commit, follow the top-level
+`Next Action`, and attempt to activate an already-active verifier. A later
+reviewer can then trust the green matrix row and approve that double-frontier
+state without opening the referenced commit. This is the same machine-routing
+failure R2/R3 were meant to eliminate.
+
+### Self-Review Blind Spots / Follow-up Gate
+
+- The verification and recursive re-review tasks in the failed topology were
+  parent-owned subagents and do not become valid relay successors through this
+  review. The topology-recovery contract permits consuming their exact command
+  evidence only; this top-level task supplies the legal fresh formal review.
+- RM must still create non-empty `cut-note.md`, run the Large artifact gate,
+  merge, watch `main` CI, and update compact STATUS only after canonical CR has
+  zero Must Fix.
+
+### Recommendation
+
+**NOT MERGEABLE.** Create exactly one independently addressable top-level
+fresh Fix DEV successor, explicitly routed from `model-routing.md` as
+`gpt-5.6-terra` / `medium`, bounded to R2-R3. It must make the live entrypoint
+yield one machine-current stage and unique next action at activation (strengthen
+the reusable lifecycle contract only if needed), then hand off to one fresh
+top-level direct verification task that records a truthful full governance
+matrix. That verifier must hand to one fresh top-level no-DEV-history re-review.
+Do not route to RM yet; no browser or owner QA is required.
