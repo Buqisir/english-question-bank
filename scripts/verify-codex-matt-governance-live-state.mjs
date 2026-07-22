@@ -50,10 +50,10 @@ if (!/^1\. /.test(nextAction.trim()) || /^\d+\. /gm.test(nextAction.trim().repla
 const successorPresent = authorization.length > 0
 if (lifecycle === 'handoff-ready') {
   if (activeRole !== 'none') fail('handoff-ready requires Active role: none')
-  if (!successorPresent || authorizedRole !== 'fresh verification') fail('handoff-ready requires one fresh verification successor')
+  if (!successorPresent || authorizedRole !== 'fresh no-DEV-history formal re-review') fail('handoff-ready requires one fresh no-DEV-history formal re-review successor')
   if (topology !== 'exactly one top-level create_thread successor') fail('handoff-ready successor must be top-level create_thread')
-  if (model !== 'gpt-5.6-terra' || thinking !== 'medium') fail('verification route must be gpt-5.6-terra/medium')
-  if (!scope.startsWith('verification only;')) fail('successor scope must be verification only')
+  if (model !== 'gpt-5.6-sol' || thinking !== 'high') fail('formal re-review route must be gpt-5.6-sol/high')
+  if (!scope.startsWith('formal re-review only;')) fail('successor scope must be formal re-review only')
 } else if (lifecycle === 'active') {
   if (activeRole === 'none') fail('active requires exactly one active role')
   if (successorPresent) fail('active cannot retain successor authorization')
