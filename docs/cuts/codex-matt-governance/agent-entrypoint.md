@@ -20,10 +20,9 @@ The manual-fallback Fix DEV 3 task and its mistakenly spawned verification
 subagent are write-closed. The verification subagent completed valid exact-head
 evidence at `dae33f802707806f757aac4a55240a0d34ada985`. Its recursively spawned
 re-review subagent was interrupted before its first write, produced no verdict
-or repository change, and is not a legal Auto-Next successor. The current
-visible top-level task owns only this recovery checkpoint and the creation of
-one independently addressable top-level fresh formal re-review; it will not
-wait for that review result.
+or repository change, and is not a legal Auto-Next successor. The topology
+recovery is historical; its legal top-level formal re-review completed and
+released this active Fix DEV successor.
 
 The top-level formal re-review result at
 `4659073b8b17249d73a318f0d951f9efc1e882c7` left R2-R3 unresolved. This task
@@ -707,7 +706,7 @@ create any later relay task.
 ## Fix DEV 3 Verification Dispatch
 
 - Dispatch ID: `codex-matt-governance-fix3-verification-20260722-01`
-- State: `release-authorized`
+- State: `closed`
 - Expected base/head: `b1169a6978aef1e475360b725a8bd96265ef3a39`
 - Checkout: this isolated detached worktree
   `/Users/huangxuewei/.codex/worktrees/governance-fix-rereview-20260722`
@@ -837,7 +836,7 @@ result.
 
 - Dispatch ID:
   `codex-matt-governance-fix4-top-level-dev-20260722-01`
-- State: `release-authorized`
+- State: `active`
 - Project: `english-question-bank`
 - Source branch/ref: `codex/codex-matt-governance`
 - Expected result base:
