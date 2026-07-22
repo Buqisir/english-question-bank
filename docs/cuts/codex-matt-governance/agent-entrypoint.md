@@ -12,10 +12,10 @@
 
 ## Current Stage
 
-**Fix DEV 3 verification is release-authorized.** The manual-fallback Fix DEV
-3 task is write-closed after its bounded result; the fresh verification
-successor is the only next role and remains write-held until it re-proves this
-predecessor-final commit.
+**Fix DEV 3 verification evidence is result-recorded and dispatch-pending.**
+The manual-fallback Fix DEV 3 task is write-closed; this verifier has bound the
+exact-head matrix and is the sole writer until it creates its one fresh,
+write-held no-DEV-history formal re-review successor.
 
 Canonical `cr.md` recorded unresolved R1-R3; Fix DEV 3 implemented the bounded
 repair at `b1169a6978aef1e475360b725a8bd96265ef3a39` and restored normal
@@ -696,7 +696,7 @@ changes to the `applied-writing-lecture` worktree.
 ## Fix DEV 3 Verification Dispatch
 
 - Dispatch ID: `codex-matt-governance-fix3-verification-20260722-01`
-- State: `active`
+- State: `dispatch-pending`
 - Expected base/head: `b1169a6978aef1e475360b725a8bd96265ef3a39`
 - Checkout: this isolated detached worktree
   `/Users/huangxuewei/.codex/worktrees/governance-fix-rereview-20260722`
@@ -723,6 +723,13 @@ changes to the `applied-writing-lecture` worktree.
   above, and clean state re-proved before this first permitted write.
 - Sole-writer state: acquired; Fix DEV 3 is write-closed and this verification
   task is the sole active writer in the isolated worktree.
+- Verification result: the bound Fix DEV 3 implementation head passed the
+  required typecheck, full `verify:all`, scope, current-positive relay,
+  authority-map, changed-link, and live-lifecycle evidence matrix recorded in
+  `verification.md`; no CR verdict is made by this task.
+- Successor route: one fresh no-DEV-history formal re-review task is the sole
+  direct successor and must remain write-held until this verifier's final
+  release-authorizing commit.
 - Output: append-only exact-head evidence in
   `docs/cuts/codex-matt-governance/verification.md` and this task's lifecycle
   fields
@@ -733,6 +740,5 @@ changes to the `applied-writing-lecture` worktree.
 
 ## Next Action
 
-Activate exactly the release-authorized Fix DEV 3 verification successor. It
-must re-prove this predecessor-final HEAD, record its active sole-writer state,
-and then perform only its verification role.
+Create exactly one fresh no-DEV-history formal re-review successor through the
+write-held -> final-commit -> release protocol; this verifier then exits.

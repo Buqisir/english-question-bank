@@ -153,3 +153,49 @@ proof is red solely because dependencies are absent from this isolated
 worktree, and the live lifecycle check is red. A fresh no-DEV-history formal
 re-review must decide those results against the canonical plan and CR; this
 verification task performs no repair or verdict.
+
+## Fix DEV 3 exact-head verification — 2026-07-22T17:15:50Z
+
+Role: fresh non-implementing verification only. This section records evidence,
+not a CR verdict.
+
+### Bound heads and worktree
+
+- Fix DEV 3 implementation result: `b1169a6978aef1e475360b725a8bd96265ef3a39`
+- Fix DEV 3 predecessor-final release:
+  `75e8116d3ec452704a86879967c55a6739a44d7a`
+- Verification activation: `cf9991e09bb8c25ea9035537157713ca0a01773b`
+- Baseline: `github/main` and merge-base both resolve to
+  `e4ae78607411d265768a0253c5c63b5f3c0d726b`.
+- Worktree: `/Users/huangxuewei/.codex/worktrees/governance-fix-rereview-20260722`
+  (detached HEAD). Status was clean at command start and remains clean before
+  this evidence write. The activation delta changes only this cut's entrypoint,
+  so rule and application content remains bound to the implementation result.
+
+### Required command evidence
+
+| Command | Raw exit | Result | Note |
+| --- | ---: | --- | --- |
+| `git diff --check 3d1c672..b1169a6` | 0 | PASS | Bounded Fix DEV 3 delta has no whitespace errors. |
+| `git diff --check b1169a6..cf9991e` | 0 | PASS | Activation delta has no whitespace errors. |
+| `git diff --check github/main...HEAD` | 0 | PASS | Full exact activated-head range is whitespace-clean. |
+| `pnpm -C app exec tsc --noEmit` | 0 | PASS | Runs against restored worktree dependencies. |
+| `pnpm -C app run verify:all` | 0 | PASS | Summary: PASS 84 / SKIP 1 / FAIL 0. |
+
+### Governance matrix
+
+| Required check | Result | Evidence |
+| --- | --- | --- |
+| Fix scope | PASS | `3d1c672..b1169a6` changes only `cr-persona.md`, `pa-persona.md`, `review-levels.md`, `steering/README.md`, `dev-completion-protocol.md`, and this cut's entrypoint; all are plan-allowed governance/cut surfaces. The full `github/main...HEAD` range contains only governance docs, templates, and this cut's tracked artifacts. |
+| Current-positive / zero-Must-Fix relay routing | PASS | The targeted sweep found only negative-boundary statements that parent-owned subagents cannot satisfy relay roles, or Small-cut direct-main exceptions; no current PA/DEV/verification/CR/QA/RM relay route assigns a parent-owned subagent or surviving coordinator as its successor. |
+| Exact model authority | PASS | Concrete route values occur only in `docs/agents/model-routing.md`; current rule surfaces point to that authority. |
+| Cross-file authority map | PASS | `AGENTS.md` retains stable role/gate law; `review-levels.md`, PA/CR personas, and steering route PA/DEV/verification/CR/QA/RM as fresh direct successors; `codex-matt-workflow.md` defines the one-way lifecycle; `model-routing.md` remains the sole exact model/thinking authority. |
+| Changed routing links | PASS | `model-routing.md`, `codex-matt-workflow.md`, `dispatch-protocols.md`, `review-levels.md`, `pa-persona.md`, and `cr-persona.md` resolve at their recorded paths. |
+| Live lifecycle | PASS | The verifier's activation record is the sole active state in its activation commit; the live frontier now advances to `dispatch-pending` for its one direct re-review successor. Completed predecessor records are closed and `Next Action` names that unique transition. |
+
+### Evidence handoff
+
+The exact implementation content and activated verification head are green for
+the plan-named matrix. This verifier makes no review determination. A fresh
+no-DEV-history formal re-review must cold-read the corrected diff and this
+evidence before deciding canonical `cr.md`.
