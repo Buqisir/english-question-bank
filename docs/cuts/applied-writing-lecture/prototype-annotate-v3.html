@@ -359,6 +359,7 @@
 </head>
 <body>
   <!-- THROWAWAY PROTOTYPE: three placement strategies on the real 794/612 paper geometry, switchable via ?variant=. -->
+  <!-- The switcher stays in the header because the bottom strip is part of the annotation search area being evaluated. -->
   <header class="appbar">
     <strong>2024年新课标Ⅰ卷 · 应用文写作</strong>
     <span>真实卷面尺寸原型 · 中文小赖 / 英文 Shantell Sans</span>
@@ -462,7 +463,6 @@
 
     const PAGES = [
       {
-        key: 'review',
         items: [
           { text: LETTER_LINES[1], label: '判型「描述类」', note: '开门交代何时、何地、做了什么。' },
           { text: LETTER_LINES[2], label: '读者 · 具体信息', note: '先给真实场景，Chris 才知道作品从哪来。' },
@@ -472,7 +472,6 @@
         ]
       },
       {
-        key: 'highlight',
         items: [
           { text: 'Instead of copying pictures in the classroom', label: '<span class="note-en">Instead of doing...</span> 对比开场', note: '凸显这次经历与平常不同。', extra: '<span class="note-en">Instead of reading about it, we tried it ourselves.</span>' },
           { text: 'with sunlight dancing on the water and boats resting by the bank', label: '<span class="note-en">with + 名词 + doing</span>', note: '<span class="note-en">dancing / resting</span> 把静景写活。', extra: '<span class="note-en">with music playing / with everyone laughing</span>' },
@@ -489,7 +488,7 @@
       },
       B: {
         name: '页边车道优先',
-        copy: '优先把批注送到答题框外、白纸以内的左右页边；箭头沿框边车道进入，秩序最强、路径更长。'
+        copy: '目标附近有空槽时仍就近落笔；其余批注优先送到答题框外、白纸以内的左右页边。'
       },
       C: {
         name: '锚句近邻优先',
@@ -628,8 +627,9 @@
     function connectorFor(noteRect, anchorRects, obstacles, seed) {
       const routes = [];
       const widestAnchor = Math.max(...anchorRects.map(rect => rect.width));
+      const shortFragmentWidth = Math.min(48, widestAnchor * .18);
       const meaningfulAnchors = anchorRects.length > 1
-        ? anchorRects.filter(rect => rect.width >= Math.min(48, widestAnchor * .18))
+        ? anchorRects.filter(rect => rect.width >= shortFragmentWidth)
         : anchorRects;
 
       (meaningfulAnchors.length ? meaningfulAnchors : anchorRects).forEach(anchor => {
@@ -642,14 +642,14 @@
         const normal = { x: -chordY / length, y: chordX / length };
         const preferredSign = seed % 2 ? 1 : -1;
         const near = gap <= 56;
+        const flick = near && length < 20;
         const idealBow = near ? 3 : Math.min(8, Math.max(4, length * .035));
         const bows = near
           ? [preferredSign * 3, -preferredSign * 3, 0]
           : [preferredSign * 5, -preferredSign * 5, preferredSign * 8, -preferredSign * 8, 0];
         const routeObstacles = obstacles.filter(rect => !overlaps(rect, anchor, -1));
-
         bows.forEach(bow => {
-          if (near && length > gap + 24) return;
+          if (near && (length > gap + 24 || length > 46)) return;
           const middle = { x: (start.x + tip.x) / 2, y: (start.y + tip.y) / 2 };
           const route = {
             start,
@@ -658,7 +658,8 @@
             bow,
             length,
             gap,
-            near
+            near,
+            mode: flick ? 'flick' : near ? 'short' : 'long'
           };
           route.samples = [];
           let hits = 0;
@@ -668,7 +669,8 @@
             if (routeObstacles.some(rect => pointInRect(point, rect, 1))) hits += 1;
           }
           route.hits = hits;
-          route.score = hits * 1800 + length * (near ? .28 : .2) + Math.abs(Math.abs(bow) - idealBow) * .5;
+          route.score = hits * 1800 + length * (near ? .28 : .2) +
+            Math.abs(Math.abs(bow) - idealBow) * .5;
           route.d = `M ${start.x} ${start.y} Q ${route.control.x} ${route.control.y}, ${tip.x} ${tip.y}`;
           routes.push(route);
         });
@@ -780,10 +782,11 @@
             const roomy = Math.min(40, (interval.right - interval.left - width) * .12);
             let strategy = 0;
             if (variant === 'A') strategy = kind === '跨框空白' ? -22 : kind.startsWith('纸边') ? -12 : 0;
-            if (variant === 'B') strategy = kind.startsWith('纸边') ? -95 : kind === '跨框空白' ? -58 : 44;
+            if (variant === 'B') strategy = kind.startsWith('纸边') ? -52 : kind === '跨框空白' ? -36 : 18;
             if (variant === 'C') strategy = kind === '行间空白' ? -72 : kind === '跨框空白' ? -22 : 38;
             const jitter = ((entry.index * 37 + Math.round(x) * 3 + Math.round(y) + layoutSeed * 19) % 13) * .35;
             const route = connectorFor(rect, anchorRects, obstacles, entry.index + layoutSeed);
+            if (!route) continue;
             all.push({
               x,
               y,
@@ -901,23 +904,13 @@
       });
     }
 
-    function nearestAnchorRect(slot, rects) {
-      const cx = (slot.rect.left + slot.rect.right) / 2;
-      const cy = (slot.rect.top + slot.rect.bottom) / 2;
-      return rects.reduce((best, rect) => {
-        const bx = Math.max(rect.left, Math.min(cx, rect.right));
-        const by = Math.max(rect.top, Math.min(cy, rect.bottom));
-        const d = Math.hypot(cx - bx, cy - by);
-        return !best || d < best.distance ? { rect, distance: d } : best;
-      }, null).rect;
-    }
-
-    function drawLeader(placement, answer, order) {
+    function drawLeader(placement, order) {
       const route = placement.slot.route;
       const arc = makePath(route.d, route.near ? 1.12 : 1.22, ink, 'leader-arc');
       arc.dataset.length = route.length.toFixed(1);
       arc.dataset.gap = route.gap.toFixed(1);
       arc.dataset.near = String(route.near);
+      arc.dataset.mode = route.mode;
       arc.dataset.noteIndex = String(placement.entry.index);
       makePath(arrowFlick(route.tip.x, route.tip.y, route.control.x, route.control.y, order), 1.55, ink, 'leader-head');
     }
@@ -986,7 +979,7 @@
         entry.el.style.visibility = 'visible';
         entry.el.querySelector('.slot-tag').textContent = `${slot.kind} · ${Math.round(slot.score)}`;
         drawUnderline(entry.anchorRects, entry.index);
-        drawLeader(placement, answer, order);
+        drawLeader(placement, order);
       });
       drawDebug(obstacles, placements);
       packed.textContent = `空白寻位 ${placements.length}/${items.length}`;

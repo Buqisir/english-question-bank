@@ -28,14 +28,17 @@ Use proximity before routing:
 - A nearby leader is one short, slightly asymmetric stroke. Its arrowhead is a
   single quick flick rather than a symmetric technical arrowhead.
 - If the note is close enough that alignment already makes the relationship
-  unambiguous, a short pointing flick may replace a full arrow.
+  unambiguous, a pointing flick under 20 px may replace a full arrow.
 - A long shallow leader is reserved for notes that cannot be placed near their
   target without covering the essay or another note.
 
 ## Placement and routing
 
 For each note candidate, calculate the rectangular gap between the note box
-and every rectangle belonging to its target phrase.
+and every meaningful line rectangle belonging to its target phrase. Ignore a
+wrapped tail narrower than 48 px or 18% of the widest line when a fuller line
+from the same phrase exists; a fragment such as `me.` is not a useful teaching
+target by itself.
 
 1. Prefer the target rectangle with the smallest unobstructed gap.
 2. Start at the nearest boundary point of the note, not its center.
