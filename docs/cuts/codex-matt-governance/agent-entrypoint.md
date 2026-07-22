@@ -12,27 +12,28 @@
 
 ## Current Stage
 
-**Fix DEV 2 is the sole active role, correcting canonical re-review Must Fix
-R1-R3 before one fresh non-implementing verification successor.**
+**Fresh formal re-review is write-held after Fix DEV 2 verification recorded
+its exact-head evidence; it becomes sole writer only after this final release
+commit and its durable activation.**
 
-The fresh re-review recorded canonical `NOT MERGEABLE` at
-`076c1ff9ce46eb2933eee93ae7a782cfa945f2b1`, limited to R1 direct-relay
-ownership, R2 lifecycle state, and R3 verification completeness. Its
-predecessor-final release `9afe6732ffb9910160bca35e3bdb28cb068aa390` was
-re-proved clean, and this Fix DEV 2 task recorded activation
-`2f1a66917474c3c6e47ea4139811eb123381026c`; it is the only active writer.
-No CR, QA, RM, merge, push, production, workflow/script, skill/plugin/tracker,
-main-checkout, or applied-writing-lecture action is authorized.
+Fix DEV 2 result `8cb228e9ce51f147eda2188c93b6fdeb9144d103` has fresh
+verification evidence in `verification.md`: routing/authority/link/scope
+checks passed, while dependency-dependent integration proof and the prior live
+lifecycle check are recorded red. The re-review alone cold-reads those facts
+and writes the next canonical verdict. No implementation, QA, RM, merge, push,
+production, workflow/script, skill/plugin/tracker, main-checkout, or
+applied-writing-lecture action is authorized.
 
 ## Must Read
 
-After Fix DEV 2 activation, read these current inputs before implementation:
+After re-review activation, read these current inputs before reviewing:
 
 1. `docs/cuts/codex-matt-governance/cr.md`
 2. `docs/cuts/codex-matt-governance/plan.md`
 3. `AGENTS.md`
 4. `docs/agents/model-routing.md`
 5. `docs/steering/codex-matt-workflow.md`
+6. `docs/cuts/codex-matt-governance/verification.md`
 
 Before editing any other allowed current-rule surface, read that target's
 current contents. Background files remain conditional rather than session tax.
@@ -49,28 +50,22 @@ Open only when needed to check a named conflict or artifact convention:
 
 ## Stage Contract
 
-This task wears only the Fix DEV 2 hat. After write-held bootstrap and
-exact-HEAD activation, it must:
+This task wears only the fresh formal re-review hat. After write-held bootstrap
+and exact-HEAD activation, it must:
 
 1. re-prove the baseline, branch, worktree, released exact head, and clean
    state, then durably record its own activation before any substantive write;
-2. read the Must Read set above and the current contents of each target before
-   editing it;
-3. close only Must Fix R1-R3 from canonical `cr.md` within the plan's allowed
-   current-rule/template/entrypoint surfaces, keeping
-   `docs/agents/model-routing.md` the sole exact model/thinking authority and
-   preserving every existing risk gate;
-4. follow the worktree checkpoint discipline, commit its implementation and
-   DEV self-check evidence, and avoid writing PA/CR verdicts or claiming formal
-   verification; and
-5. create exactly one independently addressable fresh non-implementing
-   verification successor under the same one-way write-held/final-commit/
-   release protocol, then exit after durable activation acknowledgement.
+2. cold-read the Must Read set, Fix DEV 2 diff, and evidence without
+   implementation history;
+3. append only a formal standards/spec verdict to canonical `cr.md`, deciding
+   whether its Must Fix findings are closed; and
+4. create at most one direct successor only as the verdict and one-way relay
+   require, then exit after durable activation acknowledgement.
 
-The fix-DEV task must not expand the allowlist, edit business/runtime/product or
-workflow/script surfaces, perform formal verification/CR/QA/RM, merge, push,
-touch production, install or initialize skills/plugins/trackers, modify the
-main checkout's user changes, or change the `applied-writing-lecture` worktree.
+The re-review must not implement, independently duplicate unchanged full
+verification, perform QA/RM, merge, push, touch production, install or
+initialize skills/plugins/trackers, modify main-checkout user changes, or
+change the `applied-writing-lecture` worktree.
 
 ## Current Outputs
 
@@ -558,7 +553,7 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
 ## Fix DEV 2 Verification Dispatch
 
 - Dispatch ID: `codex-matt-governance-fix2-verification-20260722-01`
-- State: `active`
+- State: `result-recorded`
 - Expected base/head: `8cb228e9ce51f147eda2188c93b6fdeb9144d103`
 - Checkout: this isolated detached worktree
   `/Users/huangxuewei/.codex/worktrees/governance-fix-rereview-20260722`
@@ -585,7 +580,8 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
   and clean state re-proved before the first permitted write.
 - Sole-writer state: acquired; Fix DEV 2 is write-closed and this fresh
   verification task is the only active writer in the isolated worktree.
-- Activation record: this commit.
+- Activation record: `d1461531b68b5693fd4f5fb0e1ef110e237e55fc`.
+- Result record: `1400ea88af8686fb52e4bb8b65bf5ba89cb7c69c`.
 - Predecessor closure: Fix DEV 2's result and sole verification successor entry
   are durable; Fix DEV 2 waits only for activation acknowledgement and never
   for the verification result.
@@ -607,18 +603,33 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
   `/Users/huangxuewei/.codex/worktrees/governance-fix-rereview-20260722`
 - Next role: fresh formal re-review; no DEV history
 - Configured model: `gpt-5.6-sol`
-- Selected model: pending runtime availability check
+- Selected model: `gpt-5.6-sol`
 - Thinking: `high`
 - Route reason: the sole routing authority assigns fresh CR / re-review to
   Sol/high; this task must cold-read the Fix DEV 2 result and fresh evidence.
 - Output: `docs/cuts/codex-matt-governance/cr.md`
+- Successor task:
+  `/root/governance_fix_verification/governance_fix_rereview/governance_fix2_dev/fix2_verification/fix2_formal_rereview`
+- Task entry: exactly one independently addressable fresh Codex task was
+  created with explicit `model=gpt-5.6-sol` and `thinking=high`; write-held
+  bootstrap was active.
+- Availability/substitution evidence: configured primary selected from the
+  finite `[gpt-5.6-sol]` eligibility set; no substitution.
+- Bootstrap proof: successor reported this exact isolated worktree, detached
+  pending-dispatch HEAD `1400ea88af8686fb52e4bb8b65bf5ba89cb7c69c`, clean
+  state, and entrypoint-only read; no successor write was made.
+- State: `release-authorized`.
+- Release record: this predecessor-final commit; ACTIVATE/RELEASE carries its
+  exact hash, and verification makes no later worktree write.
+- Predecessor closure: verification evidence and the sole re-review successor
+  entry are durable; verification waits only for activation acknowledgement,
+  never for the re-review result.
 - Authorization: exactly one fresh no-DEV-history formal re-review successor;
   no implementation, QA, RM, merge, push, or production action.
 
 ## Next Action
 
-Provision exactly one fresh write-held verification successor for the Fix DEV 2
-result, then record its readiness and release the predecessor-final commit.
-After the successor acknowledges activation, Fix DEV 2 performs no later
-worktree write and exits without waiting for the verification result; no
-ancestor task resumes.
+Release the one recorded fresh formal re-review successor with this exact
+predecessor-final commit. After activation acknowledgement, this verification
+task performs no later worktree write and exits without waiting for the
+re-review result; no ancestor task resumes.
