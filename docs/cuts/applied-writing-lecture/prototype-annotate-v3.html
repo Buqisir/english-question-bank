@@ -226,6 +226,7 @@
 
     .ink-layer .leader-arc { opacity: .84; }
     .ink-layer .leader-flick { opacity: .96; }
+    .ink-layer .leader-micro { opacity: 1; }
     .ink-layer .leader-head { opacity: .98; }
 
     .note {
@@ -1079,6 +1080,24 @@
       return `M ${wing.x} ${wing.y} Q ${control.x} ${control.y}, ${tx} ${ty}`;
     }
 
+    function microArrow(route, seed) {
+      const dx = route.tip.x - route.start.x;
+      const dy = route.tip.y - route.start.y;
+      const chord = Math.max(1, Math.hypot(dx, dy));
+      const direction = { x: dx / chord, y: dy / chord };
+      const normal = { x: -direction.y, y: direction.x };
+      const side = seed % 2 ? 1 : -1;
+      const wing = {
+        x: route.tip.x - direction.x * 2.6 + normal.x * side * 7.4,
+        y: route.tip.y - direction.y * 2.6 + normal.y * side * 7.4
+      };
+      const control = {
+        x: (wing.x + route.tip.x) / 2 + normal.x * side * .8,
+        y: (wing.y + route.tip.y) / 2 + normal.y * side * .8
+      };
+      return `${route.d} Q ${control.x} ${control.y}, ${wing.x} ${wing.y}`;
+    }
+
     function drawUnderline(rects, seed) {
       rects.forEach((rect, index) => {
         const y = rect.bottom + 1.5;
@@ -1099,17 +1118,19 @@
     function drawLeader(placement, order) {
       const route = placement.slot.route;
       const flick = route.mode === 'flick';
+      const micro = flick && route.length < 10;
       const arc = makePath(
-        route.d,
-        flick ? 1.48 : route.near ? 1.12 : 1.22,
+        micro ? microArrow(route, order) : route.d,
+        micro ? 1.56 : flick ? 1.48 : route.near ? 1.12 : 1.22,
         ink,
-        flick ? 'leader-arc leader-flick' : 'leader-arc'
+        micro ? 'leader-arc leader-flick leader-micro' : flick ? 'leader-arc leader-flick' : 'leader-arc'
       );
       arc.dataset.length = route.length.toFixed(1);
       arc.dataset.gap = route.gap.toFixed(1);
       arc.dataset.hits = String(route.hits);
       arc.dataset.near = String(route.near);
       arc.dataset.mode = route.mode;
+      arc.dataset.gesture = micro ? 'micro-arrow' : route.mode;
       arc.dataset.noteIndex = String(placement.entry.index);
       if (!flick) {
         makePath(arrowFlick(route.tip.x, route.tip.y, route.control.x, route.control.y, order), 1.55, ink, 'leader-head');
