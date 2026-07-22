@@ -776,6 +776,29 @@ create, release, and obtain activation acknowledgement from exactly one
 top-level fresh non-implementing verification successor. Do not wait for its
 result.
 
+## Top-level Fix DEV 4 Verification Activation
+
+- Dispatch ID:
+  `codex-matt-governance-fix4-top-level-verification-20260722-01`
+- State: `active`
+- Activation task identity: `019f8af3-2420-73f1-a61a-ac76e2e98a45` (`local`)
+- Role: top-level fresh non-implementing verification only; no DEV history
+- Configured model / selected model / thinking: `gpt-5.6-sol` /
+  `gpt-5.6-sol` / `high`
+- Activation checkpoint: `e0332a9a3338755b8f5c53672fc8bd098d13aa74`
+- Activation re-proof: detached at the exact checkpoint above and clean before
+  this first permitted write.
+- Sole-writer state: acquired; Fix DEV 4 is write-closed and this verifier is
+  the sole active repository writer.
+- Unique direct transition: after durable exact-head verification evidence,
+  create, release, and obtain activation acknowledgement from exactly one
+  top-level fresh no-DEV-history formal re-review successor. This verifier then
+  stops without awaiting a verdict.
+- Authorization: write this activation record and append exact-head evidence
+  only to `docs/cuts/codex-matt-governance/verification.md`; no implementation,
+  CR verdict, QA, RM, merge, push, production, workflow/script, or product
+  surface action.
+
 ## Topology Recovery Record
 
 - Invalid verification subagent: `/root/fix3_verification`
