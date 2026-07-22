@@ -507,6 +507,7 @@
     const variantKeys = Object.keys(VARIANTS);
     let pageIndex = 0;
     let renderNonce = 0;
+    let fontRefreshQueued = false;
     let layoutSeed = 0;
     let variant = new URLSearchParams(location.search).get('variant') || 'A';
     if (!VARIANTS[variant]) variant = 'A';
@@ -812,7 +813,7 @@
           openHeight: pocket.bottom - pocket.top + height
         }))
         .sort((a, b) => b.openWidth * b.openHeight - a.openWidth * a.openHeight)
-        .slice(0, 48);
+        .slice(0, 24);
     }
 
     function noteMarkup(item, index) {
@@ -898,7 +899,7 @@
             const openness = Math.min(82, Math.sqrt(Math.max(0, slackX) * Math.max(4, slackY + 4)) * .24 +
               (slackX + slackY) * .045);
             const clearance = Math.min(x - pocket.left, pocket.right - x, y - pocket.top, pocket.bottom - y);
-            const aboveTarget = rect.bottom <= anchorTop + 5;
+            const aboveTarget = rect.bottom <= anchorTop + 6;
             let directionPenalty = lane === 'below' ? 38 : 0;
             if (entry.readingOrder === 0) {
               if (aboveTarget) directionPenalty -= 118;
@@ -924,7 +925,7 @@
             const route = connectorFor(rect, anchorRects, obstacles, entry.index);
             if (!route || route.hits > 0) return;
             const shapePenalty = (baseWidth - width) * .22 + Math.max(0, height - baseHeight) * .3;
-            const proximityBonus = route.mode === 'flick' ? -28 : route.mode === 'short' ? -5 : 0;
+            const proximityBonus = route.mode === 'flick' ? -31 : route.mode === 'short' ? -5 : 0;
             all.push({
               x,
               y,
@@ -945,10 +946,13 @@
       });
       entry.el.style.width = `${baseWidth}px`;
 
-      const narrowestWidth = widths[widths.length - 1];
-      const eligible = all.filter(slot =>
-        slot.width !== narrowestWidth || slot.lane === 'left' || slot.lane === 'right'
-      );
+      const baseLanes = new Set(all.filter(slot => slot.width === baseWidth).map(slot => slot.lane));
+      const eligible = all.filter(slot => {
+        if (slot.width === baseWidth) return true;
+        const isSidePocket = slot.lane === 'left' || slot.lane === 'right';
+        const unlocksLane = !baseLanes.has(slot.lane);
+        return isSidePocket && unlocksLane && slot.route.near;
+      });
       const deduped = new Map();
       eligible.sort((a, b) => a.score - b.score || a.tieBreak - b.tieBreak).forEach(slot => {
         const key = `${Math.round(slot.x / 8)}:${Math.round(slot.y / 8)}:${Math.round(slot.width / 12)}:${slot.lane}`;
@@ -956,31 +960,31 @@
       });
       const sorted = [...deduped.values()].sort((a, b) => a.score - b.score || a.tieBreak - b.tieBreak);
       const diverse = new Map();
-      sorted.slice(0, 24).forEach(slot => diverse.set(`${slot.x}:${slot.y}:${slot.width}`, slot));
+      sorted.slice(0, 18).forEach(slot => diverse.set(`${slot.x}:${slot.y}:${slot.width}`, slot));
       const laneCounts = new Map();
       const pocketSeen = new Set();
       sorted.forEach(slot => {
         const laneCount = laneCounts.get(slot.lane) || 0;
-        if (laneCount < 8) {
+        if (laneCount < 6) {
           diverse.set(`${slot.x}:${slot.y}:${slot.width}`, slot);
           laneCounts.set(slot.lane, laneCount + 1);
         }
         const pocketKey = `${slot.width}:${slot.pocketId}`;
-        if (!pocketSeen.has(pocketKey) && pocketSeen.size < 24) {
+        if (!pocketSeen.has(pocketKey) && pocketSeen.size < 16) {
           diverse.set(`${slot.x}:${slot.y}:${slot.width}`, slot);
           pocketSeen.add(pocketKey);
         }
       });
       return [...diverse.values()]
         .sort((a, b) => a.score - b.score || a.tieBreak - b.tieBreak)
-        .slice(0, 56);
+        .slice(0, 40);
     }
 
     function compareLayoutStates(a, b) {
       return a.maxRegret - b.maxRegret ||
         a.orderPenalty - b.orderPenalty ||
         a.totalRegret - b.totalRegret ||
-        a.cost - b.cost ||
+        a.connectorCost - b.connectorCost ||
         a.tieBreak - b.tieBreak;
     }
 
@@ -1007,7 +1011,7 @@
       });
 
       const ordered = [...entries].sort((a, b) => a.candidates.length - b.candidates.length || b.el.offsetHeight - a.el.offsetHeight);
-      let states = [{ placements: [], maxRegret: 0, totalRegret: 0, orderPenalty: 0, cost: 0, tieBreak: 0 }];
+      let states = [{ placements: [], maxRegret: 0, totalRegret: 0, orderPenalty: 0, connectorCost: 0, tieBreak: 0 }];
 
       for (const entry of ordered) {
         const next = [];
@@ -1028,8 +1032,6 @@
               return Math.abs(anchorOrder) > 10 && Math.abs(noteOrder) > 12 && anchorOrder * noteOrder < 0;
             });
             if (laneInversion) continue;
-            const sameKind = state.placements.filter(placed => placed.slot.kind === slot.kind).length;
-            const sameBand = state.placements.filter(placed => Math.abs(placed.slot.y - slot.y) < 12).length;
             let orderPenalty = 0;
             state.placements.forEach(placed => {
               const noteOrder = (slot.rect.left + slot.rect.right) / 2 - (placed.slot.rect.left + placed.slot.rect.right) / 2;
@@ -1047,15 +1049,14 @@
               maxRegret: Math.max(state.maxRegret, slot.regret),
               totalRegret: state.totalRegret + slot.regret,
               orderPenalty: state.orderPenalty + orderPenalty,
-              cost: state.cost + slot.score + sameKind * 8 + sameBand * 11 +
-                routeCrowding * 18 + orderPenalty,
+              connectorCost: state.connectorCost + slot.route.score + routeCrowding * 18,
               tieBreak: state.tieBreak + slot.tieBreak
             });
           }
         }
         next.sort(compareLayoutStates);
         if (!next.length) break;
-        states = next.slice(0, 420);
+        states = next.slice(0, 180);
       }
 
       return states[0]?.placements || [];
@@ -1151,6 +1152,7 @@
     }
 
     async function renderPage(nextPage) {
+      const startedAt = performance.now();
       pageIndex = nextPage;
       packed.textContent = '正在寻位…';
       packed.style.color = '#6f746f';
@@ -1165,8 +1167,16 @@
 
       const items = PAGES[pageIndex].items;
       const anchors = items.map((item, index) => wrapText(letter, item.text, `anchor-${index}`));
+      const entries = items.map((item, index) => ({ item, index, anchor: anchors[index], el: noteMarkup(item, index) }));
+      entries.forEach(entry => { entry.el.style.visibility = 'hidden'; entry.el.style.left = '0px'; entry.el.style.top = '0px'; });
       const nonce = ++renderNonce;
-      if (document.fonts?.ready) await document.fonts.ready;
+      if (document.fonts && document.fonts.status !== 'loaded' && !fontRefreshQueued) {
+        fontRefreshQueued = true;
+        document.fonts.ready.then(() => {
+          fontRefreshQueued = false;
+          renderPage(pageIndex);
+        });
+      }
       await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
       if (nonce !== renderNonce) return;
 
@@ -1178,8 +1188,6 @@
       const obstacles = [...textObstacles];
       obstacles.push({ left: answer.left + 17, right: answer.right - 17, top: answer.top + 10, bottom: headerBottom });
 
-      const entries = items.map((item, index) => ({ item, index, anchor: anchors[index], el: noteMarkup(item, index) }));
-      entries.forEach(entry => { entry.el.style.visibility = 'hidden'; entry.el.style.left = '0px'; entry.el.style.top = '0px'; });
       const placements = solveGlobally(entries, obstacles, answer, contentBounds);
       entries.forEach(entry => {
         entry.el.dataset.candidates = JSON.stringify(entry.candidates.slice(0, 12).map(slot => ({
@@ -1208,6 +1216,8 @@
       drawDebug(obstacles, placements);
       packed.textContent = `空白寻位 ${placements.length}/${items.length}`;
       packed.style.color = placements.length === items.length ? '#267a5b' : '#b34f37';
+      stage.dataset.renderMs = String(Math.round(performance.now() - startedAt));
+      if (!stage.dataset.firstRenderMs) stage.dataset.firstRenderMs = stage.dataset.renderMs;
     }
 
     function cycleVariant(direction) {
