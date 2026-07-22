@@ -1,8 +1,8 @@
 # codex-matt-governance · formal CR
 
-Date: 2026-07-22  
-Role: fresh formal CR; no DEV history and no implementation performed  
-Reviewer activation: `aef4c427603dc12e0434f6dd8981275f57d60379`  
+Date: 2026-07-22
+Role: fresh formal CR; no DEV history and no implementation performed
+Reviewer activation: `aef4c427603dc12e0434f6dd8981275f57d60379`
 Released predecessor-final HEAD: `8181f22abe128b306f66d9522787e5556685d125`
 
 ## Reviewed Contract and Diff
@@ -227,3 +227,161 @@ scripts/workflows, skills/plugins/trackers, production, main checkout changes,
 or `wt-applied-writing-lecture`. Then run fresh verification against the new
 exact head and a fresh no-DEV-history re-review. No browser or owner QA is
 required for this cut.
+
+---
+
+## Fix Re-review — 2026-07-22
+
+Role: fresh formal re-review; no DEV history and no implementation performed
+
+- Re-review activation: `aa672b46cb7169a35ac7c17feb6354a984ddd5f3`
+- Released verification predecessor-final HEAD:
+  `18d6da32969621c53e9b11da5cc3261422643be8`
+- Reviewed fix result:
+  `49a3da95f72122ebaae8b80541f3a17cfd9b59e4`
+- Exact fix diff:
+  `git diff 64fafef0c5c6bbb913bc4c721535950fc76250ba..49a3da95f72122ebaae8b80541f3a17cfd9b59e4`
+- Evidence input: the append-only fix section in `verification.md`, including
+  every recorded failure
+
+### Verdict
+
+**NOT MERGEABLE — 3 unresolved Must Fix findings.**
+
+The bounded fix stayed inside the ratified documentation allowlist. The sole
+exact model/thinking authority, template relay fields, QA resume literal,
+`tsc`, and full `verify:all` proof are now green. However, the current positive
+rules still expose mutually exclusive relay owners, the live entrypoint still
+cannot yield one current stage/action, and the required governance verification
+matrix remains incomplete and contains a false-negative scan result.
+
+### Changed Scope
+
+- Fix delta: 13 documentation/current-rule paths, all allowed by `plan.md`.
+- Forbidden product/runtime, scripts/workflows, skills/plugins/trackers,
+  production, main checkout, and `applied-writing-lecture` scopes: untouched.
+- No application, schema, data-contract, or user-visible behavior changed.
+
+### Findings
+
+#### Must Fix R1 — Current positive rules still define two incompatible relay owners
+
+The plan's HR-6/HR-10 and one-way topology require every PA/DEV/verification/
+CR/QA/RM relay role to be a new independently addressable task, with no
+surviving parent coordinator. The fix updates several pointers but leaves
+current executable instructions that recreate the old topology:
+
+- `AGENTS.md:21-23,44,67-70` assigns PM + RM and the RM artifact gate to the
+  main-agent session, while the plan requires CR to hand to a fresh RM task and
+  exit.
+- `docs/agents/review-levels.md:16-17` assigns first QA and RM release execution
+  to the orchestrator/main-agent session rather than the fresh direct successor.
+- `docs/steering/cut-workflow-protocol.md:173-174,295-301` still calls PA/CR
+  role contexts "review subagents"; `:334-337` simultaneously assigns browser
+  QA to the main agent.
+- `docs/steering/README.md:69-70` says subagent reports become truth only after
+  the main agent verifies remote state, reviving an ancestor consumer after the
+  direct role already owns that check.
+
+These are current positive rules, not historical evidence or the permitted
+negative statement that a parent-owned subagent cannot satisfy a relay role.
+Reconcile them with the one-way, independently addressable task contract and
+leave each role's remote/evidence checks with that active role.
+
+#### Must Fix R2 — The live entrypoint remains stale and machine-ambiguous
+
+Fresh verification correctly records this failure, and the released entrypoint
+still demonstrates it:
+
+- `agent-entrypoint.md:15-30,34-73` says the pre-fix CR is current and the
+  ready-held fix DEV is next.
+- `:224` regresses the already completed original DEV to `release-authorized`.
+- `:447` leaves the fix-verification activation as `this commit` instead of its
+  durable activation commit.
+- `:498-504` asks for the already completed verification/fix-DEV release and
+  contains concatenated predecessor text, even while `:460-486` records this
+  re-review as the sole active writer.
+
+This fails HR-2/HR-7/HR-10 and the artifact contract. The next fix must make the
+top-level stage, every completed stage record relevant to the live frontier,
+and `Next Action` agree on exactly one role and transition.
+
+#### Must Fix R3 — Required governance verification is incomplete and one scan is factually wrong
+
+The fix verification proves `tsc` and full `verify:all` green, but it does not
+close the plan's governance evidence contract:
+
+- `verification.md:92-95` claims every remaining `subagent` mention is negative,
+  historical, or non-relay; the current positive examples in Must Fix R1
+  directly disprove that result.
+- The fix section does not record the plan-required zero-Must-Fix routing check
+  or a cross-file authority map, and it does not account for the contradictory
+  main-agent/role-owner statements above.
+- The recorded live lifecycle smoke is red (`verification.md:98-103`) and
+  therefore cannot close the Auto-Next behavioral gate.
+
+After R1-R2 are corrected, fresh verification must rerun and record the full
+plan-named current-positive, zero-Must-Fix, authority-map, link, scope, and live
+lifecycle checks with real results bound to the new exact implementation head.
+
+### Standards
+
+Hard violations: R1 violates the repository's single-authority and one-way
+relay laws; R2 violates the machine-actionable entrypoint lifecycle; R3 violates
+the plan-named proof contract. Judgment-call smell: relay ownership remains
+duplicated across constitutional, gate-level, steering, and persona surfaces,
+and that duplication has already drifted.
+
+### Spec
+
+Missing/partial requirements: canonical CR Must Fix 1, 4, and 5 remain partial
+through R1-R3. No scope creep or forbidden-surface change was found. Canonical
+Must Fix 3's reusable template/QA requirements are sufficiently closed.
+
+### Verification Evidence
+
+- `git diff --check 64fafef..49a3da9` -> PASS, exit `0`.
+- Fix changed-path allowlist -> PASS; 13/13 paths allowed.
+- Exact-model authority -> PASS; concrete current route values remain confined
+  to `docs/agents/model-routing.md`.
+- `pnpm -C app exec tsc --noEmit` -> PASS in fresh verification.
+- `pnpm -C app run verify:all` -> PASS 84 / SKIP 1 / FAIL 0 in fresh
+  verification.
+- Current-positive authority scan -> FAIL under the re-review attack check;
+  see R1.
+- Live lifecycle smoke -> FAIL as recorded by fresh verification; see R2.
+- Browser/owner QA -> not required for this docs-only governance cut.
+
+The recorded artifact-gate failure caused only by missing `cut-note.md` is not a
+fix-DEV blocker: the canonical plan assigns RM to write `cut-note.md` and then
+run the Large artifact gate. It remains a mandatory RM follow-up gate.
+
+### Failure / Attack Angle
+
+A future agent can read `AGENTS.md` or `review-levels.md`, keep a PM/root session
+alive through RM, or treat a review subagent as the PA/CR relay. Another task can
+read the live entrypoint and release an already completed predecessor instead
+of acting on the current frontier. The existing scan would falsely certify both
+failures as compliant.
+
+### Self-Review Blind Spots
+
+- This re-review did not duplicate the unchanged successful `tsc` or full-suite
+  run; the fresh verifier bound both to the fix result and no product/runtime
+  file changed afterward.
+- Historical cut/case-law language was excluded from current-positive findings.
+- No implementation, QA, RM, merge, push, or production action was performed.
+
+### Should Watch / Follow-up Gate
+
+1. RM must create non-empty `cut-note.md` before rerunning the Large artifact
+   gate; the current absence is expected before RM, not permission to waive it.
+2. Historical concrete model selections remain evidence only and must not become
+   a second runtime routing table.
+
+### Recommendation
+
+**NOT MERGEABLE.** Create exactly one fresh fix-DEV successor scoped to R1-R3,
+then repeat fresh exact-head verification and a fresh no-DEV-history re-review.
+No browser or owner QA is required. Do not route to RM until the canonical CR
+has zero Must Fix findings.

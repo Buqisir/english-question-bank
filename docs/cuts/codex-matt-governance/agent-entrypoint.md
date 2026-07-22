@@ -457,7 +457,7 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
 ## Fix Re-review Dispatch
 
 - Dispatch ID: `codex-matt-governance-fix-rereview-20260722-01`
-- State: `active`
+- State: `result-recorded`
 - Expected base/head: `35ed4098b33ca31b5e9013508d2768ecde398bc1`
 - Pending-dispatch commit: `a30971d5fc80bd1795958d09158a4366067c07da`
 - Checkout: fresh isolated detached worktree
@@ -483,7 +483,14 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
   and clean state re-proved before the first permitted write.
 - Sole-writer state: acquired; verification is write-closed and this fresh
   formal re-review is the only active writer in the isolated worktree.
-- Activation record: this commit.
+- Activation record: `aa672b46cb7169a35ac7c17feb6354a984ddd5f3`.
+- Reviewed fix result:
+  `49a3da95f72122ebaae8b80541f3a17cfd9b59e4`
+- Result artifact: `docs/cuts/codex-matt-governance/cr.md`
+- Verdict: `NOT MERGEABLE`; three unresolved re-review Must Fix findings.
+- Result commit: this commit.
+- Role result state: `result-recorded`; exactly one fresh fix-DEV successor is
+  required by the canonical verdict and the plan relay table.
 - Predecessor closure: verification evidence and the sole re-review successor
   entry are durable; this verification task waits only for activation
   acknowledgement and never for the re-review result.
@@ -495,10 +502,7 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
 
 ## Next Action
 
-Wait for the sole write-held verification successor's bootstrap acknowledgement,
-then record `ready-held`, make the predecessor-final `release-authorized`
-commit, release that exact HEAD, and exit after activation acknowledgement.
-fix-DEV successor. It re-proves that HEAD and clean state, durably records
-activation as sole writer, and acknowledges. CR performs no later worktree write
-and exits immediately after that acknowledgement without waiting for the fix
-result; no ancestor task resumes.
+Create exactly one fresh fix-DEV successor for canonical re-review Must Fix
+R1-R3 under the write-held/final-commit/release protocol. After its activation
+acknowledgement, this re-review performs no later worktree write and exits
+without waiting for the fix result; no ancestor task resumes.
