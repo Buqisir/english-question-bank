@@ -1085,37 +1085,43 @@
         x: (noteRect.left + noteRect.right) / 2,
         y: (noteRect.top + noteRect.bottom) / 2
       };
-      const vertical = route.tip.y >= noteRect.bottom || route.tip.y <= noteRect.top;
-      const lead = vertical
+      const horizontal = Math.abs(noteCenter.x - route.tip.x) >= Math.abs(noteCenter.y - route.tip.y);
+      const tip = { ...route.tip };
+      if (horizontal) tip.x += noteCenter.x >= route.tip.x ? -5.5 : 5.5;
+      else tip.y += noteCenter.y >= route.tip.y ? -5.5 : 5.5;
+      const lead = !horizontal
         ? {
-            x: route.tip.x + (noteCenter.x >= route.tip.x ? 15 : -15),
-            y: route.tip.y + (route.tip.y >= noteRect.bottom ? 2.8 : -2.8)
+            x: tip.x + (noteCenter.x >= tip.x ? 7 : -7),
+            y: tip.y + (noteCenter.y >= tip.y ? 19 : -19)
           }
         : {
-            x: route.tip.x + (noteCenter.x >= route.tip.x ? 21 : -21),
-            y: noteCenter.y <= route.tip.y
-              ? Math.max(route.tip.y + 4, noteRect.bottom + 3)
-              : Math.min(route.tip.y - 4, noteRect.top - 3)
+            x: tip.x + (noteCenter.x >= tip.x ? 19 : -19),
+            y: noteCenter.y <= tip.y
+              ? Math.max(tip.y + 8, noteRect.bottom + 7)
+              : Math.min(tip.y - 8, noteRect.top - 7)
           };
-      const dx = route.tip.x - lead.x;
-      const dy = route.tip.y - lead.y;
+      const dx = tip.x - lead.x;
+      const dy = tip.y - lead.y;
       const length = Math.max(1, Math.hypot(dx, dy));
       const direction = { x: dx / length, y: dy / length };
       const normal = { x: -direction.y, y: direction.x };
       const side = seed % 2 ? 1 : -1;
       const shaftControl = {
-        x: (lead.x + route.tip.x) / 2 + normal.x * side * 1.4,
-        y: (lead.y + route.tip.y) / 2 + normal.y * side * 1.4
+        x: (lead.x + tip.x) / 2 + normal.x * side * 1.1,
+        y: (lead.y + tip.y) / 2 + normal.y * side * 1.1
       };
-      const wing = {
-        x: route.tip.x - direction.x * 5.2 + normal.x * side * 3.2,
-        y: route.tip.y - direction.y * 5.2 + normal.y * side * 3.2
+      const wingA = {
+        x: tip.x - direction.x * 5.8 + normal.x * 3.1,
+        y: tip.y - direction.y * 5.8 + normal.y * 3.1
       };
-      const wingControl = {
-        x: (wing.x + route.tip.x) / 2 + normal.x * side * .8,
-        y: (wing.y + route.tip.y) / 2 + normal.y * side * .8
+      const wingB = {
+        x: tip.x - direction.x * 4.9 - normal.x * 2.7,
+        y: tip.y - direction.y * 4.9 - normal.y * 2.7
       };
-      return `M ${lead.x} ${lead.y} Q ${shaftControl.x} ${shaftControl.y}, ${route.tip.x} ${route.tip.y} Q ${wingControl.x} ${wingControl.y}, ${wing.x} ${wing.y}`;
+      return {
+        shaft: `M ${lead.x} ${lead.y} Q ${shaftControl.x} ${shaftControl.y}, ${tip.x} ${tip.y}`,
+        head: `M ${wingA.x} ${wingA.y} Q ${(wingA.x + tip.x) / 2} ${(wingA.y + tip.y) / 2}, ${tip.x} ${tip.y} Q ${(wingB.x + tip.x) / 2} ${(wingB.y + tip.y) / 2}, ${wingB.x} ${wingB.y}`
+      };
     }
 
     function drawUnderline(rects, seed) {
@@ -1139,9 +1145,10 @@
       const route = placement.slot.route;
       const flick = route.mode === 'flick';
       const micro = flick && route.length < 8;
+      const microPaths = micro ? microArrow(route, placement.slot.rect, order) : null;
       const arc = makePath(
-        micro ? microArrow(route, placement.slot.rect, order) : route.d,
-        micro ? 1.64 : flick ? 1.48 : route.near ? 1.12 : 1.22,
+        micro ? microPaths.shaft : route.d,
+        micro ? 1.4 : flick ? 1.48 : route.near ? 1.12 : 1.22,
         ink,
         micro ? 'leader-arc leader-flick leader-micro' : flick ? 'leader-arc leader-flick' : 'leader-arc'
       );
@@ -1152,7 +1159,9 @@
       arc.dataset.mode = route.mode;
       arc.dataset.gesture = micro ? 'micro-arrow' : route.mode;
       arc.dataset.noteIndex = String(placement.entry.index);
-      if (!flick) {
+      if (micro) {
+        makePath(microPaths.head, 1.48, ink, 'leader-head leader-micro-head');
+      } else if (!flick) {
         makePath(arrowFlick(route.tip.x, route.tip.y, route.control.x, route.control.y, order), 1.55, ink, 'leader-head');
       }
     }
