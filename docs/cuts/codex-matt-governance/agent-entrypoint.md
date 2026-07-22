@@ -558,7 +558,7 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
 ## Fix DEV 2 Verification Dispatch
 
 - Dispatch ID: `codex-matt-governance-fix2-verification-20260722-01`
-- State: `dispatch-pending`
+- State: `release-authorized`
 - Expected base/head: `8cb228e9ce51f147eda2188c93b6fdeb9144d103`
 - Checkout: this isolated detached worktree
   `/Users/huangxuewei/.codex/worktrees/governance-fix-rereview-20260722`
@@ -569,6 +569,20 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
 - Route reason: exact-head governance evidence and lifecycle matrix
 - Availability/substitution evidence: configured primary selected from the
   finite `[gpt-5.6-terra]` eligibility set; no substitution
+- Successor task:
+  `/root/governance_fix_verification/governance_fix_rereview/governance_fix2_dev/fix2_verification`
+- Task entry: exactly one independently addressable fresh Codex task was
+  created with explicit `model=gpt-5.6-terra` and `thinking=medium`; write-held
+  bootstrap was active.
+- Bootstrap proof: successor reported the exact isolated worktree, detached
+  pending-dispatch HEAD `6d6ebdb9e90e76ffa8a38d4d1493b7061dff860b`, clean
+  state, and entrypoint-only read; no successor write was made.
+- Release record: this predecessor-final commit; ACTIVATE/RELEASE carries its
+  exact hash, and Fix DEV 2 makes no later worktree write.
+- Released predecessor-final HEAD: this commit
+- Predecessor closure: Fix DEV 2's result and sole verification successor entry
+  are durable; Fix DEV 2 waits only for activation acknowledgement and never
+  for the verification result.
 - Output: append-only exact-head evidence in
   `docs/cuts/codex-matt-governance/verification.md` and this task's own
   lifecycle fields
