@@ -625,3 +625,111 @@ satisfied.
 **0.** The four blockers are mechanical consequences of the owner's already
 locked single-authority and one-way-relay decisions. They do not require a new
 product/process choice from the owner.
+
+## AMF-1 through AMF-4 Fresh PA Recheck
+
+Date: 2026-07-22
+Role: third fresh PA; recheck only; no implementation or current-rule edit
+
+### Recheck Verdict
+
+**APPROVE. Zero unresolved Must Fix.**
+
+- Reviewed worktree:
+  `/Users/huangxuewei/Projects/wt-codex-matt-governance`
+- Reviewed branch: `codex/codex-matt-governance`
+- Fetched remote baseline / merge-base:
+  `github/main` at `e4ae78607411d265768a0253c5c63b5f3c0d726b`
+- Reviewed PM revision commit:
+  `ff7d2b39e21a54c13d27b96f258001b98667ebc6`
+- Released predecessor-final HEAD:
+  `9974a5c52fbc521956303ae388568d497458c2bb`
+- PA activation record:
+  `921287aadbbecec8b292fa303e0b4fc2a40d8bec`
+- Pre-recheck tree state: clean; branch ahead of `github/main` by fifteen
+  commits; diff limited to this cut's `agent-entrypoint.md`, `plan.md`, and
+  `pa.md`.
+- Open PO Decisions: **0**.
+
+The checked PM dispositions were treated only as an index. This recheck
+cold-read the normative clauses and their observable verification requirements,
+then compared the actual `e9e4f0e..ff7d2b3` plan diff. Each addendum blocker is
+closed by executable rule text rather than by the checked summary itself.
+
+### AMF -> Normative `plan.md` Disposition Checklist
+
+- [x] **AMF-1 closed.** `Owner-Locked Model Routing` makes
+  `model-routing.md` the sole current substitution authority and requires an
+  ordered finite same-family/same-grade eligibility contract, requested-thinking
+  support, an empty-intersection stop, and complete configured/selected-model
+  evidence. `Auto-Next Dispatch Protocol` steps 2 and 4 apply that contract per
+  dispatch; C-4 repeats the authority boundary without creating a second table.
+- [x] **AMF-2 closed.** `Role and Fresh-Task Topology`, HR-6, HR-10,
+  `One-Way Relay Topology`, C-5, and C-6 require each direct relay successor to
+  be a new independently addressable Codex task. Parent-owned subagents are
+  limited to permitted role-internal assistance and cannot satisfy PA, DEV,
+  verification, formal-CR/re-review, QA, or RM relay boundaries. The
+  non-implementing role is consistently named `verification`.
+- [x] **AMF-3 closed.** `Tracked Map and Ticket State Machine` defines
+  `ready-held`, `release-authorized`, and sole-writer `active`; `Auto-Next
+  Dispatch Protocol` steps 5-9 require bootstrap hold, predecessor-final commit,
+  exact-HEAD release, successor re-proof, first-write durable activation, and no
+  predecessor write after release. HR-7, HR-10, Role Write Ownership, and C-6
+  preserve the same order.
+- [x] **AMF-4 closed.** `Relay Order After This PM Task` items 2-3, `PA
+  Follow-Up Decisions`, DP-3, and the zero-Must-Fix routing check make DEV
+  readiness derive from the latest canonical zero-Must-Fix PA verdict plus the
+  durable entrypoint result/completion record. No substantive PA plan edit or
+  orphaned mutable checkbox is required, and no independent plan-owned blocker
+  remains unresolved.
+
+### Verification Corrections
+
+No further plan correction is required. The revised Verification Contract now
+contains one observable clause for each addendum blocker:
+
+1. its current-rule scan rejects out-of-family, lower-grade, and lower-thinking
+   substitution and requires `missing-authority` / `dispatch-failed` when the
+   eligible intersection is empty;
+2. the scan rejects parent-owned subagents and inherited/forked history as
+   direct relay successors;
+3. the live Auto-Next smoke binds write-held readiness, predecessor-final HEAD,
+   release, exact-HEAD re-proof, successor first write, acknowledgement, and
+   absence of overlapping writers; and
+4. the zero-Must-Fix route accepts DEV only when canonical `pa.md` and the
+   durable entrypoint completion record agree, while rejecting any independent
+   plan blocker.
+
+The live PM-to-PA handoff also exercised the specified race-free ordering:
+release named `9974a5c5...`, this PA re-proved that exact clean HEAD, and its
+first write was the activation record `921287aa...`. That observation supports
+executability but does not replace the future DEV/verification task's required
+cut-level evidence.
+
+### Allowed / Forbidden Scope Recheck
+
+No correction is required. The existing whole-cut allowlist is sufficient and
+the per-role ownership matrix remains the controlling write boundary. All
+forbidden scopes remain unchanged, including product/runtime code, scripts,
+workflow configuration, skill/plugin/tracker installation, production, the
+main checkout's user changes, and `wt-applied-writing-lecture`.
+
+### DEV Readiness
+
+**READY after durable completion binding.** This canonical recheck has zero
+unresolved Must Fix and requires no PM plan-revision successor. DEV may be
+dispatched directly once the durable entrypoint records this verdict's exact
+commit as the PA result/completion record. The owner-locked bootstrap exception
+applies only because `docs/agents/model-routing.md` does not exist yet; DEV must
+implement that authority and must not generalize the exception afterward.
+
+### Should Watch
+
+1. Preserve “Wayfinder remains responsible” as continuity of the tracked role
+   and map, never as a surviving coordinator conversation.
+2. Treat concrete model selections in this historical plan and dispatch records
+   as evidence, not as a second current runtime routing table.
+
+### Open PO Decisions
+
+**0.** No new owner choice is required.
