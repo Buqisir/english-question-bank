@@ -12,29 +12,33 @@
 
 ## Current Stage
 
-**PM plan revision closed; the fresh PA recheck is write-held and
-release-authorized by the predecessor's final worktree commit.**
+**Fresh PA recheck approved; its exact result is durable and the sole fresh DEV
+dispatch is pending.**
 
-The second fresh PA approved the owner-locked model-routing and one-way-relay
-direction but found four executable protocol gaps: same-grade substitution is
-not mechanically bounded, relay stages still admit a parent-owned subagent,
-activation permits a shared-worktree writer race, and a zero-Must-Fix PA route
-can leave an orphaned plan blocker. The canonical addendum is committed in
-`pa.md` with zero owner decisions. No current collaboration rule, business
-code, product surface, production configuration, or in-flight cut has been
-changed. PM has now dispositioned AMF-1 through AMF-4 in the normative plan;
-the checked disposition mapping does not pre-approve the required fresh PA
-recheck.
+The third fresh PA cold-read the AMF-1 through AMF-4 normative dispositions and
+their observable verification clauses, then recorded `APPROVE` with zero
+unresolved Must Fix and zero PO decisions in canonical `pa.md`. The exact PA
+result commit is recorded below, so the plan's derived DEV-readiness condition
+is satisfied without a substantive PA edit to `plan.md`. No current
+collaboration rule, business code, product surface, production configuration,
+or in-flight cut has changed. This PA remains the sole worktree writer only
+through the direct DEV successor's write-held bootstrap and exact-HEAD
+activation acknowledgement.
 
 ## Must Read
 
-Read no more than these five files before starting the PM plan revision:
+After DEV activation, read these current inputs before implementation:
 
 1. `docs/cuts/codex-matt-governance/plan.md`
 2. `docs/cuts/codex-matt-governance/pa.md`
 3. `AGENTS.md`
-4. `docs/agents/dispatch-protocols.md`
-5. `docs/agents/review-levels.md`
+4. `docs/steering/README.md`
+5. `docs/steering/cut-workflow-protocol.md`
+6. `docs/agents/dispatch-protocols.md`
+7. `docs/agents/review-levels.md`
+
+Before editing any other allowed current-rule surface, read that target's
+current contents. Background files remain conditional rather than session tax.
 
 ## Background
 
@@ -48,22 +52,27 @@ Open only when needed to check a named conflict or artifact convention:
 
 ## Stage Contract
 
-The next task wears only the PM plan-revision hat. It must:
+The next task wears only the DEV hat. After write-held bootstrap and exact-HEAD
+activation, it must:
 
-1. fetch and confirm the baseline, branch, worktree, exact activated head, and
-   clean state;
-2. cold-read the latest plan and the addendum in canonical `pa.md`;
-3. disposition AMF-1 through AMF-4 in their exact normative plan sections,
-   including their observable verification clauses;
-4. edit only `plan.md` plus its own machine routing/completion fields here;
-5. commit the plan revision without editing `pa.md` or current rules; and
-6. create exactly one fresh PA recheck successor with explicit
-   `gpt-5.6-sol` + `xhigh`, propagate Auto-Next authorization, activate it with
-   sole-writer ordering, then exit without waiting for its verdict.
+1. re-prove the baseline, branch, worktree, released exact head, and clean
+   state, then durably record its own activation before any substantive write;
+2. read the Must Read set above and the current contents of each target before
+   editing it;
+3. implement the ratified plan only within `Allowed Modification Scope After
+   PA`, keeping `docs/agents/model-routing.md` the sole exact model/thinking
+   authority and preserving every existing risk gate;
+4. follow the worktree checkpoint discipline, commit its implementation and
+   DEV self-check evidence, and avoid writing PA/CR verdicts or claiming formal
+   verification; and
+5. create exactly one independently addressable fresh non-implementing
+   verification successor under the same one-way write-held/final-commit/
+   release protocol, then exit after durable activation acknowledgement.
 
-The PM revision must not edit current rules, implement the plan, rewrite PA
-findings, install or initialize skills or tracker infrastructure, touch
-business code, or change the `applied-writing-lecture` worktree.
+The DEV task must not expand the allowlist, edit business/runtime/product or
+workflow/script surfaces, perform formal verification/CR/QA/RM, merge, push,
+touch production, install or initialize skills/plugins/trackers, modify the
+main checkout's user changes, or change the `applied-writing-lecture` worktree.
 
 ## Current Outputs
 
@@ -71,7 +80,11 @@ business code, or change the `applied-writing-lecture` worktree.
 - Initial PA: `docs/cuts/codex-matt-governance/pa.md`
 - PA addendum commit: `e9e4f0e0f363e83f69bda7e88f8c96d67dad058e`
 - PM revision commit: `ff7d2b39e21a54c13d27b96f258001b98667ebc6`
-- Next artifact: append-only PA recheck verdict in `pa.md`
+- Fresh PA recheck commit:
+  `3889d67099c6211daa5cbbb79cb93bf49e4e5cc6`
+- Fresh PA recheck verdict: `APPROVE`; zero unresolved Must Fix; zero PO
+  decisions
+- Next artifact: DEV implementation on the allowed current-rule surfaces
 
 ## Completed PA Dispatch
 
@@ -183,6 +196,13 @@ business code, or change the `applied-writing-lecture` worktree.
 - Sole-writer state: acquired; predecessor is write-closed and this PA recheck
   is the only active writer in the shared worktree
 - Activation record: this commit
+- Result commit: `3889d67099c6211daa5cbbb79cb93bf49e4e5cc6`
+- Verdict: `APPROVE`; zero unresolved Must Fix; zero PO decisions
+- Role result state: `result-recorded`; the canonical verdict commit above is
+  the exact result bound to DEV readiness
+- Role completion: substantive PA review is complete; this task remains only as
+  the sole-writer routing predecessor until its direct successor durably
+  activates
 - Output: append-only recheck in
   `docs/cuts/codex-matt-governance/pa.md`
 - Authorization: one PA recheck plus exactly one in-scope direct successor
@@ -190,10 +210,49 @@ business code, or change the `applied-writing-lecture` worktree.
   verification, CR, QA, RM, merge, production, infrastructure, or downstream
   supervision
 
+## DEV Dispatch
+
+- Dispatch ID: `codex-matt-governance-dev-20260722-01`
+- State: `dispatch-pending`
+- Project: `local-8a1aff1b944a0aa921d1f6b55296afd6`
+- Checkout: existing worktree
+  `/Users/huangxuewei/Projects/wt-codex-matt-governance`
+- Branch: `codex/codex-matt-governance`
+- Expected base/head:
+  `3889d67099c6211daa5cbbb79cb93bf49e4e5cc6`
+- Pending-dispatch commit: this commit
+- Next role: `DEV`
+- Configured model: `gpt-5.6-terra`
+- Selected model: `gpt-5.6-terra`
+- Thinking: `medium`
+- Route reason: ordinary docs-only governance implementation; no complex or
+  repeated-failure upgrade trigger
+- Bootstrap authority: owner-locked exception from canonical `plan.md` and the
+  PA verdict above because `docs/agents/model-routing.md` does not exist yet;
+  DEV must create that authority and may not generalize this exception
+- Availability/substitution evidence: requested model and `medium` are exposed
+  by the current task-creation capability; no substitution
+- Prompt-template digest:
+  `03877359e7e330c8e7230a9ac89697eee0fdc72e49c6df14f61df506aa1b3340`
+- Digest scope: stable DEV prompt template with a
+  `<PENDING_DISPATCH_HEAD>` placeholder; the exact commit from this record is
+  supplied in the creation call
+- Predecessor task: `019f8a93-3c06-7a92-9980-058fd205b1f8` (`local`)
+- Thread: pending creation
+- Task entry: pending one independently addressable fresh Codex task;
+  write-held bootstrap required
+- Output: implementation limited to `plan.md`'s allowed collaboration-rule and
+  documentation surfaces
+- Authorization: one DEV task plus exactly one fresh non-implementing
+  verification successor after durable DEV writeback; no formal verification,
+  CR, QA, RM, merge, push, production, infrastructure, or downstream
+  supervision by DEV
+
 ## Next Action
 
-Send ACTIVATE/RELEASE with this exact predecessor-final HEAD to the write-held
-PA recheck. The successor re-proves that HEAD, durably records activation as
-sole writer, and acknowledges. This PM performs no later worktree write and
-ends immediately after that acknowledgement without waiting for the verdict;
-no ancestor task resumes.
+Commit this unique DEV dispatch, create exactly one fresh DEV task with explicit
+`gpt-5.6-terra` + `medium`, and keep it write-held through bootstrap proof.
+Then perform predecessor-final-commit -> exact-HEAD release -> durable successor
+activation/acknowledgement. This PA performs no later worktree write after
+release and ends immediately after acknowledgement without waiting for the DEV
+result; no ancestor task resumes.
