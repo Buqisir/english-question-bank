@@ -538,6 +538,13 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
 - Release record: this is the re-review predecessor's final worktree commit.
   The ACTIVATE/RELEASE message carries its exact hash; re-review makes no later
   worktree write and exits after activation acknowledgement
+- Released predecessor-final HEAD:
+  `9afe6732ffb9910160bca35e3bdb28cb068aa390`
+- Activation proof: exact isolated worktree root, detached released HEAD above,
+  and clean state re-proved before the first permitted write
+- Sole-writer state: acquired; the re-review predecessor is write-closed and
+  this Fix DEV 2 task is the only active writer in the shared worktree
+- Activation record: this commit
 - Predecessor closure: the canonical re-review verdict and sole fix-DEV
   successor entry are durable; re-review never waits for or collects the fix
   result
