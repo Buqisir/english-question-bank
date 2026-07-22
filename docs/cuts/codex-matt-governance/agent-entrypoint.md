@@ -12,17 +12,18 @@
 
 ## Current Stage
 
-**Fresh formal re-review recorded `NOT MERGEABLE`; exactly one fresh Fix DEV 3
-successor is the unique next role for unresolved R1-R3.**
+**Fresh formal re-review recorded `NOT MERGEABLE`; automatic Fix DEV 3 dispatch
+failed after the one permitted retry, and no successor task exists.**
 
 Fix DEV 2 result `8cb228e9ce51f147eda2188c93b6fdeb9144d103` has fresh
 verification evidence in `verification.md`. Canonical `cr.md` now records that
 current positive PM/RM ownership still conflicts, the live lifecycle is red,
 and required `tsc` / full-suite evidence is red. This re-review may create only
-one bounded fresh Fix DEV 3 successor and then exits after durable activation
-acknowledgement. No implementation, QA, RM, merge, push, production,
-workflow/script, skill/plugin/tracker, main-checkout, or
-applied-writing-lecture action is authorized.
+one bounded fresh Fix DEV 3 successor, but the runtime rejected both the initial
+creation and the single bounded retry with `agent thread limit reached`. The
+dispatch is durably failed without an ambiguous child. No implementation, QA,
+RM, merge, push, production, workflow/script, skill/plugin/tracker,
+main-checkout, or applied-writing-lecture action is authorized.
 
 ## Must Read
 
@@ -630,9 +631,11 @@ change the `applied-writing-lecture` worktree.
 - Reviewed Fix DEV 2 result:
   `8cb228e9ce51f147eda2188c93b6fdeb9144d103`.
 - Verdict: `NOT MERGEABLE`; three unresolved Must Fix findings R1-R3.
-- Result commit: this commit.
+- Result commit: `50bcd1dfb2c01a051809ca29cbbc63c73d1cad53`.
 - Role result state: `result-recorded`; exactly one fresh Fix DEV 3 successor
   is required by the canonical verdict and plan relay table.
+- Role completion: stops at the durable `dispatch-failed` record below; no
+  successor exists and this re-review makes no later worktree write.
 - Predecessor closure: verification evidence and the sole re-review successor
   entry are durable; verification waits only for activation acknowledgement,
   never for the re-review result.
@@ -642,7 +645,7 @@ change the `applied-writing-lecture` worktree.
 ## Fix DEV 3 Dispatch
 
 - Dispatch ID: `codex-matt-governance-fix3-dev-20260722-01`
-- State: `dispatch-pending`
+- State: `dispatch-failed`
 - Expected base/head: `50bcd1dfb2c01a051809ca29cbbc63c73d1cad53`
 - Checkout: this isolated detached worktree
   `/Users/huangxuewei/.codex/worktrees/governance-fix-rereview-20260722`
@@ -660,6 +663,12 @@ change the `applied-writing-lecture` worktree.
 - Digest scope: stable write-held Fix DEV 3 prompt with a
   `<PENDING_DISPATCH_HEAD>` placeholder; the exact commit from this record is
   supplied in the creation call
+- Creation evidence: the initial creation call and the single bounded retry
+  both returned `agent thread limit reached`; the dispatch ID search/list
+  showed no child task, and no ambiguous create result exists
+- Returned task identity: none
+- Failure reason: runtime concurrency capacity remained exhausted after one
+  completed-chain ancestor was interrupted; protocol forbids another retry
 - Output: fixes limited to canonical R1-R3 and durable DEV evidence
 - Authorization: exactly one fresh Fix DEV 3 task plus one fresh
   non-implementing verification successor after durable fix writeback; no
@@ -668,7 +677,7 @@ change the `applied-writing-lecture` worktree.
 
 ## Next Action
 
-Create exactly one fresh Fix DEV 3 successor bounded to canonical R1-R3 under
-the write-held/final-commit/release protocol. After its durable activation
-acknowledgement, this re-review performs no later worktree write and exits
-without waiting for the fix result; no ancestor task resumes.
+Use the one complete fallback prompt emitted with this dispatch-failed result
+to create a fresh Fix DEV 3 task when runtime capacity is available. The new
+task must start write-held from this final commit and follow the recorded
+one-way release protocol; do not retry or route another role from this task.
