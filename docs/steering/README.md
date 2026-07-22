@@ -66,8 +66,9 @@ Hard rule:
 - `plan.md` is the default Medium / Large route; add an entrypoint only when the
   routing conditions in the protocol require one.
 - The owner is PO and final product QA, not code reviewer.
-- Treat GitHub `main` and PR heads as the shared truth. Subagent reports
-  are not truth until the main agent verifies remote state.
+- Treat GitHub `main` and PR heads as the shared truth. The active relay role
+  verifies and records the remote state required by its own gate; an exited
+  predecessor does not re-consume that evidence.
 - Use `docs/cuts/_templates/pa-prompt-template.md` and
   `docs/cuts/_templates/big-cr-prompt-template.md` when a PA / Big CR
   handoff needs durable repo-routed instructions; do not hand-write

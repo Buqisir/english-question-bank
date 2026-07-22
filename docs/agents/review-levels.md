@@ -13,8 +13,11 @@ First principles decide **why** a cut needs review. Razor discipline decides **w
 - **verification**: fresh non-implementing task after DEV; consumes real exit
   codes and binds evidence to the exact implementation head before fresh CR.
 - **CR**: code reviewer. Medium / Large CR runs as a fresh independently addressable no-DEV-history task following `docs/agents/cr-persona.md`; it must not have implemented the code (reviewer ≠ implementer). CR-lite is only the PM's Small-cut cold read.
-- **QA**: product / browser / visual acceptance. The orchestrator does first QA for UI direction and user-visible quality; the owner does final PO QA.
-- **RM**: release manager. 阿澈's PM + RM main-agent session owns release execution; Medium / Large run the artifact gate and final sanity check after fresh CR and before merge.
+- **QA**: product / browser / visual acceptance. A fresh direct QA coordinator
+  owns the `human-QA` pause and its evidence; the owner does final PO QA.
+- **RM**: release manager. A fresh direct RM successor owns release execution;
+  Medium / Large run the artifact gate and final sanity check after fresh CR /
+  required QA and before merge.
 
 ## Default Rule
 

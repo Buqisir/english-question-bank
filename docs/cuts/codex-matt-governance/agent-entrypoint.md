@@ -12,26 +12,21 @@
 
 ## Current Stage
 
-**Fresh formal CR recorded `NOT MERGEABLE`; the sole fresh fix-DEV successor is
-ready-held and release-authorized by this predecessor's final commit.**
+**Fix DEV 2 is the sole active role, correcting canonical re-review Must Fix
+R1-R3 before one fresh non-implementing verification successor.**
 
-The CR cold-read
-`3889d67099c6211daa5cbbb79cb93bf49e4e5cc6..113db39f8119536e27aa4344f4bfcdfdbd7d3365`,
-the canonical plan/PA contract, current positive rules, templates, and exact-head
-verification evidence. The diff stayed inside the allowed documentation scope,
-but five Must Fix findings remain: direct-relay role drift, conflicting
-verification ownership, incomplete Auto-Next artifacts, red/incomplete required
-verification, and stale live entrypoint state. Canonical findings are committed
-in `cr.md`. The fix-DEV successor proved its isolated worktree, pending HEAD,
-clean state, and entrypoint-only read without writing. This commit closes the CR
-role and is its final worktree write; the successor becomes sole writer only
-after exact-HEAD release/re-proof and its own durable activation record. No
-implementation, QA, RM, merge, push, production, workflow/script,
-skill/plugin/tracker, main-checkout, or applied-writing-lecture action occurred.
+The fresh re-review recorded canonical `NOT MERGEABLE` at
+`076c1ff9ce46eb2933eee93ae7a782cfa945f2b1`, limited to R1 direct-relay
+ownership, R2 lifecycle state, and R3 verification completeness. Its
+predecessor-final release `9afe6732ffb9910160bca35e3bdb28cb068aa390` was
+re-proved clean, and this Fix DEV 2 task recorded activation
+`2f1a66917474c3c6e47ea4139811eb123381026c`; it is the only active writer.
+No CR, QA, RM, merge, push, production, workflow/script, skill/plugin/tracker,
+main-checkout, or applied-writing-lecture action is authorized.
 
 ## Must Read
 
-After fix-DEV activation, read these current inputs before implementation:
+After Fix DEV 2 activation, read these current inputs before implementation:
 
 1. `docs/cuts/codex-matt-governance/cr.md`
 2. `docs/cuts/codex-matt-governance/plan.md`
@@ -54,14 +49,14 @@ Open only when needed to check a named conflict or artifact convention:
 
 ## Stage Contract
 
-The next task wears only the fix-DEV hat. After write-held bootstrap and
+This task wears only the Fix DEV 2 hat. After write-held bootstrap and
 exact-HEAD activation, it must:
 
 1. re-prove the baseline, branch, worktree, released exact head, and clean
    state, then durably record its own activation before any substantive write;
 2. read the Must Read set above and the current contents of each target before
    editing it;
-3. close only Must Fix 1-5 from canonical `cr.md` within the plan's allowed
+3. close only Must Fix R1-R3 from canonical `cr.md` within the plan's allowed
    current-rule/template/entrypoint surfaces, keeping
    `docs/agents/model-routing.md` the sole exact model/thinking authority and
    preserving every existing risk gate;
@@ -221,7 +216,7 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
 ## DEV Dispatch
 
 - Dispatch ID: `codex-matt-governance-dev-20260722-01`
-- State: `release-authorized`
+- State: `closed`
 - Project: `local-8a1aff1b944a0aa921d1f6b55296afd6`
 - Checkout: existing worktree
   `/Users/huangxuewei/Projects/wt-codex-matt-governance`
@@ -444,7 +439,7 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
   and clean state re-proved before the first permitted write
 - Sole-writer state: acquired; fix DEV is write-closed and verification is the
   only active writer in the isolated worktree
-- Activation record: this commit
+- Activation record: `1b1c1ace4bfaf50373af34e0054adf8f51d7ea7a`
 - Predecessor closure: fix result and sole verification successor entry are
   durable; fix DEV waits only for activation acknowledgement, never for the
   verification result
@@ -494,9 +489,9 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
 - Role completion: closed by this predecessor-final commit; re-review performs
   no later worktree write and waits only for its direct successor's durable
   activation acknowledgement, never for the fix result.
-- Predecessor closure: verification evidence and the sole re-review successor
-  entry are durable; this verification task waits only for activation
-  acknowledgement and never for the re-review result.
+- Predecessor closure: the re-review verdict and the sole Fix DEV 2 successor
+  entry are durable; this re-review waits only for activation acknowledgement
+  and never for the fix result.
 - Output: `docs/cuts/codex-matt-governance/cr.md`
 - Authorization: exactly one fresh no-DEV-history formal re-review after
   verification result writeback; no implementation, QA, RM, merge, push,
@@ -506,7 +501,7 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
 ## Fix DEV 2 Dispatch
 
 - Dispatch ID: `codex-matt-governance-fix2-dev-20260722-01`
-- State: `release-authorized`
+- State: `active`
 - Expected base/head: `076c1ff9ce46eb2933eee93ae7a782cfa945f2b1`
 - Pending-dispatch commit: `739c1d44582cdf052a968f3fef218a94050529e4`
 - Checkout: existing isolated detached worktree
@@ -544,7 +539,7 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
   and clean state re-proved before the first permitted write
 - Sole-writer state: acquired; the re-review predecessor is write-closed and
   this Fix DEV 2 task is the only active writer in the shared worktree
-- Activation record: this commit
+- Activation record: `2f1a66917474c3c6e47ea4139811eb123381026c`
 - Predecessor closure: the canonical re-review verdict and sole fix-DEV
   successor entry are durable; re-review never waits for or collects the fix
   result
@@ -557,7 +552,8 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
 
 ## Next Action
 
-Create exactly one fresh fix-DEV successor for canonical re-review Must Fix
-R1-R3 under the write-held/final-commit/release protocol. After its activation
-acknowledgement, this re-review performs no later worktree write and exits
-without waiting for the fix result; no ancestor task resumes.
+Fix DEV 2 closes only canonical re-review Must Fix R1-R3, records its result,
+then creates exactly one fresh non-implementing verification successor under
+the write-held/final-commit/release protocol. After activation acknowledgement,
+Fix DEV 2 performs no later worktree write and exits without waiting for the
+verification result; no ancestor task resumes.

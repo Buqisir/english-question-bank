@@ -18,9 +18,10 @@ CR / RM); do not mass-rename history.
 
 ### Roles
 
-- Orchestrator: **阿澈** is the main agent and wears **PM + RM**, first
-  responsible person with full change authority. The main agent does direction,
-  decomposition, acceptance, and release gates — not bulk implementation.
+- Orchestrator: **阿澈** is the main agent and PM, first responsible person for
+  direction and decomposition — not bulk implementation or a surviving release
+  coordinator. Medium / Large release execution belongs to the fresh direct RM
+  successor after CR / required QA.
 - Execution runs in fresh, independently addressable tasks. Every direct relay
   successor has one role and an explicit `model` and `thinking` selection from
   `docs/agents/model-routing.md`; it never inherits the predecessor selection.
@@ -41,7 +42,7 @@ CR / RM); do not mass-rename history.
   (schema, migration, export, anchor protocol, cross-cut architecture):
   add a fresh PA → PM compression into `plan.md` → fresh DEV → fresh
   verification → fresh CR (Big CR only by trigger, writes `cr.md`) → required QA /
-  PO QA → PM + RM closeout. `cut-note.md` is required at closeout. Purely
+  PO QA → fresh RM closeout. `cut-note.md` is required at closeout. Purely
   additive schema touches and reversible product-surface
   work may downgrade to PA-lite — the downgrade reason goes in the plan
   header and CR must review whether it still holds. 原型已 owner 逐裁点
@@ -64,8 +65,8 @@ requested thinking. Never rely on a runtime default or inherited profile.
 
 ### Gates
 
-- RM artifact gate (medium / large, run by the PM + RM main agent after fresh
-  CR writes `cr.md`): required
+- RM artifact gate (medium / large, run by the fresh direct RM successor after
+  fresh CR / required QA): required
   artifacts exist (`node scripts/verify-cut-artifacts.mjs <cut-dir> <tier>`)
   and the relevant `verify-i*.mjs` pass before merge.
 - Before any merge to `main`, the full suite must be proven green — either
@@ -262,8 +263,8 @@ stash,2026-07-16 收悬空时落地。)
   contract, product boundary, or teaching interpretation: yes/no`. Small
   and touching none of the four → proceed directly.
 - Hat contracts and role definitions live in
-  `docs/agents/review-levels.md` (阿澈 wears PM + RM; independence from
-  fresh contexts, not names — PA runs fresh and before DEV only when its trigger
+  `docs/agents/review-levels.md` (PM direction and each relay role have
+  distinct fresh contexts; PA runs fresh and before DEV only when its trigger
   fires; DEV and CR are always different fresh contexts; role contracts and
   gates never downgrade). Big CR is
   triggered by risk or explicit owner request, not by a default gate.
