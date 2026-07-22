@@ -696,7 +696,7 @@ changes to the `applied-writing-lecture` worktree.
 ## Fix DEV 3 Verification Dispatch
 
 - Dispatch ID: `codex-matt-governance-fix3-verification-20260722-01`
-- State: `release-authorized`
+- State: `active`
 - Expected base/head: `b1169a6978aef1e475360b725a8bd96265ef3a39`
 - Checkout: this isolated detached worktree
   `/Users/huangxuewei/.codex/worktrees/governance-fix-rereview-20260722`
@@ -717,8 +717,12 @@ changes to the `applied-writing-lecture` worktree.
   repository read was made.
 - Release record: this predecessor-final commit. The ACTIVATE/RELEASE message
   carries its exact hash; Fix DEV 3 makes no later worktree write.
-- Sole-writer state: Fix DEV 3 is write-closed; verification becomes sole writer
-  only after re-proving this exact released HEAD and recording activation.
+- Released predecessor-final HEAD:
+  `75e8116d3ec452704a86879967c55a6739a44d7a`
+- Activation re-proof: exact isolated worktree root, detached released HEAD
+  above, and clean state re-proved before this first permitted write.
+- Sole-writer state: acquired; Fix DEV 3 is write-closed and this verification
+  task is the sole active writer in the isolated worktree.
 - Output: append-only exact-head evidence in
   `docs/cuts/codex-matt-governance/verification.md` and this task's lifecycle
   fields
