@@ -457,7 +457,7 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
 ## Fix Re-review Dispatch
 
 - Dispatch ID: `codex-matt-governance-fix-rereview-20260722-01`
-- State: `result-recorded`
+- State: `closed`
 - Expected base/head: `35ed4098b33ca31b5e9013508d2768ecde398bc1`
 - Pending-dispatch commit: `a30971d5fc80bd1795958d09158a4366067c07da`
 - Checkout: fresh isolated detached worktree
@@ -488,9 +488,12 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
   `49a3da95f72122ebaae8b80541f3a17cfd9b59e4`
 - Result artifact: `docs/cuts/codex-matt-governance/cr.md`
 - Verdict: `NOT MERGEABLE`; three unresolved re-review Must Fix findings.
-- Result commit: this commit.
+- Result commit: `076c1ff9ce46eb2933eee93ae7a782cfa945f2b1`.
 - Role result state: `result-recorded`; exactly one fresh fix-DEV successor is
   required by the canonical verdict and the plan relay table.
+- Role completion: closed by this predecessor-final commit; re-review performs
+  no later worktree write and waits only for its direct successor's durable
+  activation acknowledgement, never for the fix result.
 - Predecessor closure: verification evidence and the sole re-review successor
   entry are durable; this verification task waits only for activation
   acknowledgement and never for the re-review result.
@@ -503,9 +506,9 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
 ## Fix DEV 2 Dispatch
 
 - Dispatch ID: `codex-matt-governance-fix2-dev-20260722-01`
-- State: `dispatch-pending`
+- State: `release-authorized`
 - Expected base/head: `076c1ff9ce46eb2933eee93ae7a782cfa945f2b1`
-- Pending-dispatch commit: this commit
+- Pending-dispatch commit: `739c1d44582cdf052a968f3fef218a94050529e4`
 - Checkout: existing isolated detached worktree
   `/Users/huangxuewei/.codex/worktrees/governance-fix-rereview-20260722`
 - Next role: fresh fix DEV for canonical re-review Must Fix R1-R3
@@ -524,6 +527,20 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
   supplied in the creation call
 - Predecessor task:
   `/root/governance_fix_verification/governance_fix_rereview`
+- Successor task:
+  `/root/governance_fix_verification/governance_fix_rereview/governance_fix2_dev`
+- Task entry: created as exactly one independently addressable fresh Codex task
+  with explicit `model=gpt-5.6-terra` and `thinking=medium`; write-held
+  bootstrap remains active
+- Bootstrap proof: successor reported the exact isolated worktree, detached
+  pending-dispatch HEAD `739c1d44582cdf052a968f3fef218a94050529e4`, clean
+  state, and entrypoint-only read; no successor write was made
+- Release record: this is the re-review predecessor's final worktree commit.
+  The ACTIVATE/RELEASE message carries its exact hash; re-review makes no later
+  worktree write and exits after activation acknowledgement
+- Predecessor closure: the canonical re-review verdict and sole fix-DEV
+  successor entry are durable; re-review never waits for or collects the fix
+  result
 - Output: fixes limited to canonical re-review Must Fix R1-R3 and durable DEV
   evidence
 - Authorization: exactly one fresh fix-DEV task plus one fresh
