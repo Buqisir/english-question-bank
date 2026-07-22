@@ -669,6 +669,19 @@ change the `applied-writing-lecture` worktree.
 - Returned task identity: none
 - Failure reason: runtime concurrency capacity remained exhausted after one
   completed-chain ancestor was interrupted; protocol forbids another retry
+- Manual fallback task identity: `/root` (manual fallback; no child task)
+- Manual-fallback reason: authorized after the initial creation and its one
+  permitted retry both failed with `agent thread limit reached`; this fallback
+  is the sole successor.
+- Released predecessor-final HEAD: `3d1c6722169f750dd4096c9547f8d0e22fce90b9`
+- Activation re-proof: exact checkout
+  `/Users/huangxuewei/.codex/worktrees/governance-fix-rereview-20260722`,
+  detached HEAD `3d1c6722169f750dd4096c9547f8d0e22fce90b9`, and clean state
+  re-proved before this first permitted write.
+- State: `active`
+- Sole-writer state: acquired; the failed automatic dispatch has no child, all
+  predecessors are write-closed, and this manual fallback is the only active
+  writer in the isolated worktree.
 - Output: fixes limited to canonical R1-R3 and durable DEV evidence
 - Authorization: exactly one fresh Fix DEV 3 task plus one fresh
   non-implementing verification successor after durable fix writeback; no
