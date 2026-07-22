@@ -213,14 +213,15 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
 ## DEV Dispatch
 
 - Dispatch ID: `codex-matt-governance-dev-20260722-01`
-- State: `dispatch-pending`
+- State: `provisioning`
 - Project: `local-8a1aff1b944a0aa921d1f6b55296afd6`
 - Checkout: existing worktree
   `/Users/huangxuewei/Projects/wt-codex-matt-governance`
 - Branch: `codex/codex-matt-governance`
 - Expected base/head:
   `3889d67099c6211daa5cbbb79cb93bf49e4e5cc6`
-- Pending-dispatch commit: this commit
+- Pending-dispatch commit:
+  `24b156d0cb863615c168d483f8f56c0de07ad3fe`
 - Next role: `DEV`
 - Configured model: `gpt-5.6-terra`
 - Selected model: `gpt-5.6-terra`
@@ -238,9 +239,10 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
   `<PENDING_DISPATCH_HEAD>` placeholder; the exact commit from this record is
   supplied in the creation call
 - Predecessor task: `019f8a93-3c06-7a92-9980-058fd205b1f8` (`local`)
-- Thread: pending creation
-- Task entry: pending one independently addressable fresh Codex task;
-  write-held bootstrap required
+- Thread: `019f8a99-4647-7d61-92c7-3cba63e1d613` (`local`)
+- Task entry: created as one independently addressable fresh Codex task with
+  explicit `model=gpt-5.6-terra` and `thinking=medium`; write-held bootstrap
+  active
 - Output: implementation limited to `plan.md`'s allowed collaboration-rule and
   documentation surfaces
 - Authorization: one DEV task plus exactly one fresh non-implementing
