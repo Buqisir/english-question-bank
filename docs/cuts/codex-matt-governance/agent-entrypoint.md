@@ -277,7 +277,7 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
 ## Verification Dispatch
 
 - Dispatch ID: `codex-matt-governance-verification-20260722-01`
-- State: `dispatch-pending`
+- State: `provisioning`
 - Project: `local-8a1aff1b944a0aa921d1f6b55296afd6`
 - Checkout: existing worktree
   `/Users/huangxuewei/Projects/wt-codex-matt-governance`
@@ -290,6 +290,10 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
 - Route reason: exact-head verification evidence; model-routing default
 - Availability/substitution evidence: configured primary selected; same-family,
   same-grade finite eligibility set is `[gpt-5.6-terra]`; no substitution
+- Thread: `019f8a9d-c684-7fa2-beec-eb50a4988e87` (`local`)
+- Task entry: created as one independently addressable fresh Codex task with
+  explicit `model=gpt-5.6-terra` and `thinking=medium`; write-held bootstrap
+  active
 - Output: `docs/cuts/codex-matt-governance/verification.md`
 - Authorization: exactly one fresh no-DEV-history CR successor after durable
   verification writeback; no implementation, CR verdict, QA, RM, merge, push,
