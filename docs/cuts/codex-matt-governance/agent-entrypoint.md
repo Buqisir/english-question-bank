@@ -360,11 +360,11 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
 ## Fix DEV Dispatch
 
 - Dispatch ID: `codex-matt-governance-fix-dev-20260722-01`
-- State: `dispatch-pending`
+- State: `provisioning`
 - Project: `local-8a1aff1b944a0aa921d1f6b55296afd6`
 - Checkout: fresh isolated worktree from this exact pending-dispatch commit
 - Expected base/head: `64fafef0c5c6bbb913bc4c721535950fc76250ba`
-- Pending-dispatch commit: this commit
+- Pending-dispatch commit: `501d1892580b2c166afc79980eceb0f045df8740`
 - Next role: fresh fix DEV
 - Configured model: `gpt-5.6-terra`
 - Selected model: `gpt-5.6-terra`
@@ -379,6 +379,12 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
 - Digest scope: stable write-held fix-DEV prompt with a
   `<PENDING_DISPATCH_HEAD>` placeholder; the exact commit is supplied at task
   creation
+- Client task ID: `client-new-thread:afefbe81-4e9d-4d7b-be9a-7e2e461f3b1f`
+- Host: `local`
+- Thread: `019f8aab-cc40-7e70-9698-f4f71141aa7b` (`local`)
+- Task entry: created as exactly one independently addressable fresh Codex task
+  with explicit `model=gpt-5.6-terra` and `thinking=medium`; write-held
+  bootstrap remains active
 - Output: fixes limited to canonical CR Must Fix 1-5 and durable DEV evidence
 - Authorization: one fresh fix-DEV task plus exactly one fresh non-implementing
   verification successor after durable fix writeback; no CR/QA/RM/merge/push/
