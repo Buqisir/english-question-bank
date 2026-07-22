@@ -12,7 +12,7 @@
 
 ## Current Stage
 
-**Fresh PA addendum closed; the sole PM plan-revision successor is active.**
+**PM plan revision complete; the sole fresh PA recheck dispatch is pending.**
 
 The second fresh PA approved the owner-locked model-routing and one-way-relay
 direction but found four executable protocol gaps: same-grade substitution is
@@ -21,7 +21,9 @@ activation permits a shared-worktree writer race, and a zero-Must-Fix PA route
 can leave an orphaned plan blocker. The canonical addendum is committed in
 `pa.md` with zero owner decisions. No current collaboration rule, business
 code, product surface, production configuration, or in-flight cut has been
-changed.
+changed. PM has now dispositioned AMF-1 through AMF-4 in the normative plan;
+the checked disposition mapping does not pre-approve the required fresh PA
+recheck.
 
 ## Must Read
 
@@ -67,7 +69,8 @@ business code, or change the `applied-writing-lecture` worktree.
 - PM contract: `docs/cuts/codex-matt-governance/plan.md`
 - Initial PA: `docs/cuts/codex-matt-governance/pa.md`
 - PA addendum commit: `e9e4f0e0f363e83f69bda7e88f8c96d67dad058e`
-- Next artifact: AMF-1 through AMF-4 dispositions in `plan.md`
+- PM revision commit: `ff7d2b39e21a54c13d27b96f258001b98667ebc6`
+- Next artifact: append-only PA recheck verdict in `pa.md`
 
 ## Completed PA Dispatch
 
@@ -97,7 +100,7 @@ business code, or change the `applied-writing-lecture` worktree.
 ## Successor Dispatch
 
 - Dispatch ID: `codex-matt-governance-pm-revision-20260722-01`
-- State: `active`
+- State: `result-recorded`
 - Project: `local-8a1aff1b944a0aa921d1f6b55296afd6`
 - Checkout: existing worktree
   `/Users/huangxuewei/Projects/wt-codex-matt-governance`
@@ -125,14 +128,47 @@ business code, or change the `applied-writing-lecture` worktree.
 - Predecessor closure: PA result and sole successor entry are durable; PA waits
   only for activation acknowledgement and never for the PM result
 - Output: `docs/cuts/codex-matt-governance/plan.md`
+- Result commit: `ff7d2b39e21a54c13d27b96f258001b98667ebc6`
+- Result: AMF-1 through AMF-4 dispositioned; DP-3/readiness made derived
+  without pre-approving PA
 - Authorization: one PM plan revision plus exactly one fresh PA-recheck
   successor after durable writeback; no current-rule implementation, DEV,
   verification, CR, RM, merge, production, infrastructure, or downstream
   supervision
 
+## PA Recheck Dispatch
+
+- Dispatch ID: `codex-matt-governance-pa3-20260722-01`
+- State: `dispatch-pending`
+- Project: `local-8a1aff1b944a0aa921d1f6b55296afd6`
+- Checkout: existing worktree
+  `/Users/huangxuewei/Projects/wt-codex-matt-governance`
+- Branch: `codex/codex-matt-governance`
+- Expected base/head: `ff7d2b39e21a54c13d27b96f258001b98667ebc6`
+- Next role: `PA recheck`
+- Configured model: `gpt-5.6-sol`
+- Selected model: `gpt-5.6-sol`
+- Thinking: `xhigh`
+- Upgrade reason: Large contract-level governance PA recheck
+- Availability/substitution evidence: requested model and `xhigh` are exposed
+  by the current task-creation capability; no substitution
+- Prompt digest:
+  `7c08f2e51abe76cebe68c027529e3adbbe881f20b5cb7f7840b20d49902d7784`
+- Predecessor task: `019f8a8a-e719-7071-acf3-3758290977cb` (`local`)
+- Thread: pending creation
+- Task entry: pending one independently addressable fresh Codex task;
+  write-held bootstrap required
+- Output: append-only recheck in
+  `docs/cuts/codex-matt-governance/pa.md`
+- Authorization: one PA recheck plus exactly one in-scope direct successor
+  after durable writeback; no implementation by PA, current-rule edit,
+  verification, CR, QA, RM, merge, production, infrastructure, or downstream
+  supervision
+
 ## Next Action
 
-Send ACTIVATE with this final predecessor HEAD to the fresh PM plan-revision
-task, then end after its activation acknowledgement. The successor owns the
-next relay and follows the Stage Contract above; no ancestor task resumes and
-this PA task makes no further worktree write.
+Commit this pending dispatch, create exactly one fresh PA recheck task with
+explicit `gpt-5.6-sol` + `xhigh`, keep it write-held through bootstrap proof,
+then perform the predecessor-final-commit -> exact-HEAD release -> durable
+successor activation/acknowledgement handoff. End without waiting for its
+verdict; no ancestor task resumes.
