@@ -313,7 +313,7 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
 ## CR Dispatch
 
 - Dispatch ID: `codex-matt-governance-cr-20260722-01`
-- State: `provisioning`
+- State: `release-authorized`
 - Project: `local-8a1aff1b944a0aa921d1f6b55296afd6`
 - Checkout: fresh isolated worktree from branch `codex/codex-matt-governance`
 - Expected base/head: `65017c22152b309e989ea80d867035a6e69c3d6a`
@@ -326,6 +326,16 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
   same-grade finite eligibility set is `[gpt-5.6-sol]`; no substitution
 - Client task ID: `client-new-thread:0949e3eb-6e99-4957-8a2a-56b7762d540a`
 - Host: `local`
+- Thread: `019f8aa0-ba65-7cb2-b2ce-595e236392dc` (`local`)
+- Bootstrap proof: successor reported its provisioned worktree, detached HEAD
+  `27685c0ab3c32e2e8281a9de779e99283e1c9f4d`, clean state, and entrypoint-only
+  read; no edit was made and it remains write-held
+- Release record: this is the predecessor's final worktree commit. The
+  ACTIVATE/RELEASE message carries its exact hash; verification makes no later
+  worktree write and exits after the activation acknowledgement
+- Predecessor closure: verification evidence and the sole CR successor entry
+  are durable; this verification task performs no later worktree write and
+  never waits for the CR result
 - Output: `docs/cuts/codex-matt-governance/cr.md`
 - Authorization: one formal CR only. No implementation, QA, RM, merge, push,
   production, or downstream supervision. On Must Fix, record the canonical CR
