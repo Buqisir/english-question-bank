@@ -97,7 +97,7 @@ business code, or change the `applied-writing-lecture` worktree.
 ## Successor Dispatch
 
 - Dispatch ID: `codex-matt-governance-pm-revision-20260722-01`
-- State: `dispatch-pending`
+- State: `provisioning`
 - Project: `local-8a1aff1b944a0aa921d1f6b55296afd6`
 - Checkout: existing worktree
   `/Users/huangxuewei/Projects/wt-codex-matt-governance`
@@ -111,7 +111,9 @@ business code, or change the `applied-writing-lecture` worktree.
 - Prompt digest:
   `0faa69f6b76206fa0aa1d1af13eca8a2f1380d4a6873e447c534c0d620999027`
 - Source task: `019f8a7f-7d63-79c2-a713-35d4ff35243f` (`local`)
-- Thread: pending
+- Thread: `019f8a8a-e719-7071-acf3-3758290977cb` (`local`)
+- Task entry: created with explicit `model=gpt-5.6-sol` and `thinking=high`;
+  bootstrap hold in effect pending readiness proof and durable activation
 - Output: `docs/cuts/codex-matt-governance/plan.md`
 - Authorization: one PM plan revision plus exactly one fresh PA-recheck
   successor after durable writeback; no current-rule implementation, DEV,
