@@ -457,7 +457,7 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
 ## Fix Re-review Dispatch
 
 - Dispatch ID: `codex-matt-governance-fix-rereview-20260722-01`
-- State: `release-authorized`
+- State: `active`
 - Expected base/head: `35ed4098b33ca31b5e9013508d2768ecde398bc1`
 - Pending-dispatch commit: `a30971d5fc80bd1795958d09158a4366067c07da`
 - Checkout: fresh isolated detached worktree
@@ -477,8 +477,13 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
 - Bootstrap proof: successor reported the exact isolated worktree and detached
   pending-dispatch HEAD `a30971d5fc80bd1795958d09158a4366067c07da`, clean
   state, and entrypoint-only read; no successor write was made.
-- Released predecessor-final HEAD: this commit; the ACTIVATE/RELEASE message
-  supplies its exact hash, and verification makes no later worktree write.
+- Released predecessor-final HEAD:
+  `18d6da32969621c53e9b11da5cc3261422643be8`
+- Activation proof: exact isolated worktree root, detached released HEAD above,
+  and clean state re-proved before the first permitted write.
+- Sole-writer state: acquired; verification is write-closed and this fresh
+  formal re-review is the only active writer in the isolated worktree.
+- Activation record: this commit.
 - Predecessor closure: verification evidence and the sole re-review successor
   entry are durable; this verification task waits only for activation
   acknowledgement and never for the re-review result.
