@@ -15,12 +15,11 @@ edited.
 - Baseline commit: `e4ae78607411d265768a0253c5c63b5f3c0d726b`
 - Branch: `codex/codex-matt-governance`
 - Worktree: `/Users/huangxuewei/Projects/wt-codex-matt-governance`
-- Current stage: PM contract updated with final owner ratification; Auto-Next
-  dispatches fresh PA next
+- Current stage: initial PA compressed; fresh model-routing addendum PA next
 - Current source-of-truth entry:
   `docs/cuts/codex-matt-governance/agent-entrypoint.md`
-- Current rules remain unchanged until PA finishes and PM dispositions are
-  recorded in this plan.
+- Current rules remain unchanged until the addendum PA finishes and PM records
+  any final dispositions in this plan.
 
 ## Goal
 
@@ -43,9 +42,10 @@ context degradation without weakening any EQB risk gate.
 
 - The two axes are orthogonal. Risk tier never follows context size, and
   context topology never waives a risk gate.
-- `AGENTS.md` remains the only authority for roles, model/effort defaults, and
-  execution sequence. Other current rule files point to it instead of copying
-  model tables.
+- `AGENTS.md` remains the constitutional authority for role separation and the
+  hard requirement that every dispatch selects an explicit model and thinking
+  level. The one exact, mutable routing table lives in
+  `docs/agents/model-routing.md`; no other current rule file copies it.
 - Small and genuinely single-context work keeps the current direct-dispatch
   fast path. Ticketing and Wayfinder are situational, not universal ceremony.
 - Wayfinder is the PM and total navigator for a large/foggy feature. It remains
@@ -76,7 +76,210 @@ context degradation without weakening any EQB risk gate.
   project routing must remain sufficient even when a named generic skill is
   not exposed in a given harness.
 
-## Eight Hard Rules to Ratify
+## Owner-Locked Model Routing
+
+This section records the owner's ratified input for this governance cut. Once
+implemented, `docs/agents/model-routing.md` is the sole current authority for
+the concrete model IDs, thinking levels, role matrix, upgrades, and successor
+substitution. This historical plan must not be used as a runtime lookup table.
+
+| Next role | Required family and thinking | Upgrade rule |
+| --- | --- | --- |
+| Wayfinder, PM, grilling, domain modeling, spec | Sol + high | none by default |
+| ordinary code research / factual investigation | Terra + medium | architecture boundary, schema, data contract, or irreversible design -> Sol + high |
+| PA | Sol + high | Large, contract-level, or irreversible PA -> Sol + xhigh |
+| DEV / fix DEV | Terra + medium | genuinely complex, cross-module, or repeated-failure implementation -> Terra + high |
+| fresh CR / re-review / RM | Sol + high | no inheritance from DEV or prior role |
+| QA preparation, verification evidence, mechanical state updates | Terra + medium | human QA remains owner-only |
+| Small, clear-boundary direct modification | Terra + medium | normal risk escalation still applies |
+
+`max` and `ultra` are not standing choices and require explicit owner direction.
+Every Auto-Next dispatch independently classifies the next role, reads the
+single authority, and passes both concrete `model` and `thinking` parameters to
+task creation. Omitting either parameter, relying on a runtime default, or
+inheriting the previous task's selection is forbidden. If the configured model
+is unavailable, the dispatcher queries the current available models, chooses a
+same-grade successor in the required Sol/Terra family, records the substitution
+and evidence, and never silently downgrades the role tier.
+
+## Two-Axis Routing Matrix
+
+The two axes select different units and are evaluated independently:
+
+| Axis | Selects | Never selects |
+| --- | --- | --- |
+| EQB risk axis | Small / Medium / Large / irreversible gates: PA, independent CR, QA, RM, merge and release proof | ticket count, whether a map is needed, or how many work slices fit in one context |
+| Context topology axis | one bounded work slice, a serial ticket graph, or a Wayfinder-led multi-task feature | permission to remove/combine a risk-required role gate or change risk tier |
+
+`One bounded task` means one clear work/decision slice, not one conversation
+containing PM, DEV, verification, and CR. A bounded slice still receives every
+fresh role context required by its risk tier. Conversely, several tickets or a
+Wayfinder map do not make a cut Large on the risk axis. Wayfinder is mandatory
+for a **large feature spanning several work slices**; this is distinct from a
+single bounded cut merely classified Large because its surface is risky.
+
+## Role and Fresh-Task Topology
+
+Every stage has one explicit role owner and one primary deliverable:
+
+| Stage | Context requirement | Deliverable / authority |
+| --- | --- | --- |
+| Wayfinder / PM | fresh task per map/ticket-routing stage; does not implement | map, tickets, spec routing, plan compression, unique next action |
+| PA | fresh task or explicitly empty-history fresh subagent; did not author PM contract | `pa.md`; cannot implement or approve its own plan changes |
+| DEV / fix DEV | genuinely new task per implementation/fix ticket | code/docs assigned by ticket, commit, DEV self-check and narrow evidence |
+| PM verification | fresh non-implementing task, or a surviving PM coordinator that did not edit the reviewed head | consumes real exit codes, binds evidence to exact head, updates `verification.md` |
+| formal CR / re-review | genuinely new no-DEV-history task | cold-read diff and contracts; canonical `cr.md` verdict |
+| QA coordinator | non-implementing task that owns the `human-QA` pause | checklist, tested commit, QA evidence and resume/failure transition |
+| RM | non-implementing closeout task after approved CR/QA | artifact gate, merge, main CI, compact STATUS, terminal completion |
+
+Changing a role label inside one inherited context never establishes
+independence. Initial formal CR and required re-review may not be a continuation,
+handoff, or fork of DEV/fix history. If a fresh subagent mechanism is used, it
+must explicitly start with empty history; default inheritance is forbidden.
+
+## Tracked Map and Ticket State Machine
+
+Wayfinder is the stable PM/navigation **role and topology name**, not a required
+skill identifier. The runtime resolves a compatible current capability; when
+none is exposed, it executes the same contract directly from repository rules.
+
+Minimum tracked layout:
+
+```text
+docs/cuts/<CUT>/
+├── agent-entrypoint.md
+├── wayfinder/
+│   ├── map.md
+│   ├── tickets/<D-ID>.md
+│   └── assets/
+├── tickets/
+│   ├── index.md
+│   └── <I-ID>.md
+├── spec.md
+├── plan.md
+└── verification.md
+```
+
+Ticketed but non-Wayfinder cuts use `tickets/index.md` plus one file per
+ticket. Wayfinder cuts additionally use the low-resolution map and detailed
+decision tickets/assets. During the first three cuts exactly one ticket may be
+active/claimed; no file-level wording claims parallel-safe locking.
+
+Required ticket fields: stable ID/title, type/role, state, blockers,
+acceptance, owner questions if any, base/expected head, result and result
+commit, evidence pointer, dispatch ID/state, next role, explicit model, explicit
+thinking level, upgrade/substitution reason, output path, authorization scope,
+and unique next action. Allowed state transitions are:
+
+```text
+blocked -> ready -> claimed -> result-recorded -> dispatch-pending
+dispatch-pending -> provisioning -> active -> closed
+active -> human-QA -> result-recorded | failed
+active -> failed -> ready | blocked
+```
+
+The map is only an index: each closed decision appears as one gist plus a link;
+detail lives once in its ticket/asset. `spec.md` records the stable IDs and
+revisions/commits of every closed decision ticket and asset it consumed. A
+fresh spec task must read those sources rather than synthesizing only the
+current conversation.
+
+## Auto-Next Dispatch Protocol
+
+Auto-Next is an idempotent two-phase state transition, not a best-effort chat
+gesture:
+
+1. Resolve the saved EQB project identity from the authoritative repo root.
+2. Classify the next role, read `docs/agents/model-routing.md`, query current
+   model availability, and lock the explicit model, thinking level, upgrade
+   reason, and any same-grade successor substitution. This decision is made
+   independently for every task and never inherits the parent selection.
+3. Resolve checkout strategy: either bootstrap into an existing named
+   worktree with mandatory no-write `cd`, or provision a new worktree pinned to
+   the named branch/ref and expected head.
+4. Write and commit a unique dispatch ID in the active ticket/entrypoint with
+   state `dispatch-pending`, expected project root, branch, base/head, role,
+   explicit model, explicit thinking level, upgrade/substitution reason,
+   output path, capability requirements, prompt digest, and one-task
+   authorization scope.
+5. Create one fresh task with a hold/bootstrap instruction carrying the
+   dispatch ID, role, model, thinking level, and reason. Pass both `model` and
+   `thinking` explicitly to task creation. The child may inspect only enough to
+   locate the durable record; it must not write before activation.
+6. Record returned host/thread/client ID and provisioning state. If only a
+   queued client ID exists, keep polling until a thread is identifiable or the
+   failure path is proven.
+7. Commit the `active` transition, then activate the child. Before any write the
+   child proves `pwd`, repo root, branch, HEAD, and clean/expected status; any
+   mismatch stops with `BRANCH CONFLICT`.
+8. Record result commit and `closed`/`failed`; the parent ends only after the
+   child acknowledges activation or the durable failure path is recorded.
+
+Retries are idempotent. Search the dispatch ID before every retry; an ambiguous
+create result never authorizes a duplicate. Persistent failure means the
+initial attempt plus one retry have failed **after proving no child exists**.
+Then record the concrete failure and emit one self-contained fallback prompt in
+a copyable code block. Propagated authorization is least-privilege: it permits
+one next in-scope task after durable writeback and carries the same stop rules;
+it never grants merge, production, scope expansion, or irreversible-operation
+authority.
+
+## Human QA Pause and Resume
+
+The QA coordinator enters `human-QA`, creates no child, and remains the task to
+which the owner replies. It presents 3–5 concrete actions with what to open,
+expected observations, pass criteria, and how to report a failure.
+
+On `QA 完成，继续`, it records the tested commit and evidence, evaluates the
+criteria, leaves `human-QA`, and resumes Auto-Next. On failure it records a
+defect ticket against that commit, dispatches fresh repair DEV, requires
+independent PM verification of the repair head, creates a fresh no-DEV-history
+re-review that updates/preserves canonical `cr.md`, then returns to
+`human-QA` naming the new commit. An old pass cannot be reused for a new head.
+
+The only non-QA owner-stop states are `contract-conflict`,
+`missing-authority`, `irreversible-production`, `dispatch-failed`, and
+`rule-conflict`. Search, test, build, implementation, or ordinary review
+failure stays inside the automatic ticket/fix loop.
+
+## Verification Evidence Levels
+
+- Every implementation/fix ticket runs its named narrow checks. A
+  non-implementing PM verifier consumes the real, unpiped exit codes and binds
+  them to the exact result commit.
+- `tsc` runs at plan-defined integration points and after a relevant fix.
+- One cut-level full `verify:all` runs at the final combined implementation
+  head before initial formal CR, unless exact-head PR CI is the permitted proof.
+- `docs/cuts/<CUT>/verification.md` records command, raw exit code, base,
+  verified commit, worktree status, evidence source, timestamp, and invalidation
+  reason when applicable.
+- Any later commit invalidates exact-head evidence. The new head receives the
+  required narrow/`tsc` checks and either a new full run or exact-head CI proof
+  under the unchanged merge gate.
+- Fresh CR checks evidence/head binding and only adds narrow attack checks; it
+  does not duplicate an unchanged full run without a named trigger.
+- RM reruns only for missing evidence, changed head, overlapping rebase/merge,
+  or a plan-named release check. Post-merge `main` CI remains mandatory.
+
+## Role Write Ownership
+
+The whole-cut allowlist is not a shared write grant:
+
+| Role | May write |
+| --- | --- |
+| PM / Wayfinder | map/tickets/spec/plan decisions, `agent-entrypoint.md` routing block, `verification.md` coordination state |
+| PA | `pa.md` only, plus its own task/dispatch completion fields |
+| DEV / fix DEV | assigned current-rule/code surfaces, its ticket result, commit and DEV evidence; never PA/CR verdicts |
+| PM verifier | `verification.md`, verified-head and next-routing fields |
+| CR / re-review | canonical `cr.md`, its review ticket result and routing fields; never implementation |
+| QA coordinator | QA checklist/evidence, QA ticket state and routing fields |
+| RM | `cut-note.md`, closeout routing state, and compact `docs/STATUS.md` only at closeout |
+
+Every active role may update only the machine routing/result fields for its own
+stage in the entrypoint/ticket; it may not rewrite another role's substantive
+artifact or verdict.
+
+## Nine Hard Rules to Ratify
 
 These are the only new constitutional outcomes. The eventual `AGENTS.md`
 wording should be concise final-form law; explanation and examples belong in
@@ -157,6 +360,18 @@ fails, the current task records the failure and emits one complete copyable
 fallback prompt. When every ticket, spec criterion, CR, QA, and closeout gate
 is complete, it reports `本次功能已经全部完成。` and creates no further task.
 
+### HR-9 — Explicit, independent role-tier routing
+
+Auto-Next must classify the next role and explicitly select both model and
+thinking level from the repository's single model-routing authority before it
+creates a task. The task-creation call, durable dispatch record,
+`agent-entrypoint.md`, and child prompt all carry that selection and its upgrade
+or substitution reason. Runtime defaults and inheritance from the parent task
+are forbidden. PA, DEV, CR, verification, QA preparation, and RM are routed
+independently. If the configured model is unavailable, the dispatcher queries
+current availability and records a same-grade family successor; it never
+silently downgrades the role tier.
+
 ## Seven Conflicts the Implementation Must Resolve
 
 ### C-1 — Local scratch tracker vs durable cross-task truth
@@ -208,23 +423,32 @@ Required resolution:
 - Must Fix implementation occurs in a new fix task; subsequent review reads the
   prior `cr.md` and the fixed diff without inheriting implementation chat.
 
-### C-4 — Drift-prone model/skill names vs capability-based authority
+### C-4 — Drift-prone model/skill names vs single routing authority
 
-The target workflow explanation risks restating model/effort choices and fixed
-skill names that can drift independently of current repository authority and
-available capabilities.
+The target workflow needs explicit Codex-native model/thinking selection, while
+concrete model IDs and named skills can drift. Copying a routing table across
+constitutional law, steering, personas, templates, and prompts would create
+conflicting current authorities.
 
 Required resolution:
 
-- exact roles, models, effort defaults, and upgrade exceptions appear only in
-  `AGENTS.md`;
-- steering, personas, templates, and dispatch instructions point to the
-  current tier table;
-- owner-facing commands and stable hard rules name the required capability,
-  while the detailed runtime protocol discovers and invokes the newest
-  compatible available implementation;
-- unavailable named skills must degrade to a natural-language equivalent, not
-  to owner routing or infrastructure setup;
+- `AGENTS.md` contains only the stable law: every dispatch independently
+  classifies the next role and explicitly selects model/thinking from the sole
+  routing authority; omission, defaults, and inheritance are forbidden;
+- `docs/agents/model-routing.md` is the only current file containing the exact
+  role -> concrete model ID -> thinking table, upgrade triggers, unavailable
+  model successor rule, and prohibition on standing `max`/`ultra`;
+- steering, personas, templates, dispatch records, and prompts point to that
+  authority and record only the selection used for the specific dispatch;
+- task creation passes both parameters explicitly, and PA/DEV/CR/RM selections
+  are independent even when adjacent tasks use different families;
+- if a configured model is unavailable, runtime capability discovery chooses a
+  same-grade Sol/Terra successor and records the replacement instead of silently
+  weakening the role;
+- owner-facing commands and stable hard rules name required capabilities rather
+  than making the owner remember a skill catalogue; an unavailable named skill
+  degrades to the capability contract, not owner routing or infrastructure
+  setup; and
 - historical cut records remain untouched and are not mistaken for current
   positive instructions.
 
@@ -323,14 +547,22 @@ coherent contract:
 - `docs/steering/README.md`
 - `docs/steering/cut-workflow-protocol.md`
 - `docs/agents/dispatch-protocols.md`
+- `docs/agents/model-routing.md` (create the single exact Codex model/thinking
+  authority)
 - `docs/agents/review-levels.md`
 - `docs/agents/issue-tracker.md`
+- `docs/agents/pa-persona.md`
+- `docs/agents/cr-persona.md`
 - `docs/cuts/_templates/README.md`
-- `docs/cuts/_templates/agent-entrypoint-template.md` (create the reusable
+- `docs/cuts/_templates/agent-entrypoint.md` (update the existing canonical
   machine-actionable Auto-Next entry contract)
+- `docs/cuts/_templates/pa-prompt-template.md`
+- `docs/cuts/_templates/big-cr-prompt-template.md`
+- `docs/cuts/_templates/qa-checklist.md`
+- `docs/steering/dev-completion-protocol.md`
 - `docs/agents/case-law.md`
 - this cut's `plan.md`, `pa.md`, `cr.md`, `cut-note.md`, and
-  `agent-entrypoint.md`
+  `agent-entrypoint.md`, plus optional tracked `verification.md`
 - `docs/STATUS.md` only at RM closeout, within its compact-entry cap
 
 PA may remove a listed file from scope or require an additional current-rule
@@ -343,6 +575,7 @@ before DEV; DEV cannot expand the list on its own.
   product UI, tests of business behavior, deployment, secrets, or production
   configuration.
 - No changes to `.github/workflows/**`.
+- No changes under `scripts/**` or `.claude/agents/**`.
 - No skill/plugin installation, initialization, copying, bridging, symlink
   changes, user-level configuration, label creation, GitHub Issues, or tracker
   provisioning.
@@ -352,7 +585,9 @@ before DEV; DEV cannot expand the list on its own.
   fresh-CR requirement, browser/owner QA triggers, RM artifact gate, merge
   authority, production brakes, or post-merge main-CI requirement except the
   narrowly specified cross-task verification-evidence rule in C-5.
-- No second current model/effort table outside `AGENTS.md`.
+- No second current exact model/thinking table outside
+  `docs/agents/model-routing.md`; `AGENTS.md` contains only the stable routing
+  law and pointer.
 - No mass rewrite of historical cuts, archived STATUS entries, old handoffs,
   prior role names, or historical Workflow descriptions.
 - No modification of the current main checkout's user changes.
@@ -364,30 +599,37 @@ before DEV; DEV cannot expand the list on its own.
 
 ## Implementation Order After PA
 
-1. **Fresh PA only**: the current task automatically creates a fresh PA task;
-   PA cold-reads this plan, the five current rule sources, and all seven
-   conflicts, then writes `pa.md` with verdict and Must Fix mapping.
-2. **PM compression**: resolve at most three PO decisions, record every PA Must
-   Fix under `PA Follow-Up Decisions`, update this plan and the entrypoint, and
-   commit before DEV.
-3. **Fresh DEV**: Auto-Next creates a new implementation task with no PA/PM
-   conversation history. DEV edits only the allowed current-rule surfaces,
-   starting with the authority map (`AGENTS.md` final law), then the detailed
-   steering guide, tracker operations, cut/dispatch/review protocols,
-   entrypoint template, and case law.
-4. **PM verification**: confirm scope, contradiction scans, Markdown/artifact
+1. **Fresh PA only**: the initial fresh PA cold-read this plan and current rules,
+   wrote canonical `pa.md`, and returned seven Must Fix items with no open PO
+   decision. Because the owner then added model routing, a second fresh PA must
+   review only the compressed dispositions plus that addendum before DEV.
+2. **PM compression**: record every PA Must Fix under `PA Follow-Up Decisions`,
+   update this plan and the entrypoint, and commit before the addendum review.
+3. **Fresh PA addendum review**: create a new PA task with explicit routing from
+   the owner-locked authority input; it appends its verdict to canonical
+   `pa.md`. PM closes any new Must Fix before declaring DEV ready.
+4. **Fresh DEV**: Auto-Next independently classifies DEV and passes its explicit
+   model/thinking selection. The new implementation task has no PA/PM
+   conversation history and edits only the allowed current-rule surfaces,
+   starting with `docs/agents/model-routing.md`, then concise `AGENTS.md` law,
+   the detailed steering guide, tracker operations, cut/dispatch/review
+   protocols, current templates/personas, and case law.
+5. **Fresh PM verification**: Auto-Next independently routes a non-implementing
+   verification task; it confirms scope, contradiction scans, Markdown/artifact
    integrity, `tsc`, and one full verify with real exit codes bound to the
    implementation head.
-5. **Fresh CR**: Auto-Next creates a genuinely new task without DEV history.
+6. **Fresh CR**: Auto-Next independently routes a genuinely new task without
+   DEV history and passes explicit model/thinking values.
    CR cold-reads the full diff on Standards and Spec axes, explicitly attacks
    all seven conflicts, writes canonical `cr.md`, and blocks on Must Fix.
-6. **Must Fix loop if needed**: Auto-Next creates a fresh fix task, PM
+7. **Must Fix loop if needed**: Auto-Next creates a fresh fix task, PM
    re-verifies the changed head, then creates a fresh re-review task for the fix
    delta and full current diff.
-7. **RM closeout**: write `cut-note.md`, consume the CR verdict (not merely file
-   presence), run the Large artifact gate, merge, watch `main` CI, and add a
-   compact STATUS entry.
-8. **Three-cut evaluation**: apply the active topology only to the next new
+8. **Fresh RM closeout**: Auto-Next independently routes RM, writes
+   `cut-note.md`, consumes the CR verdict (not merely file presence), runs the
+   Large artifact gate, merges, watches `main` CI, and adds a compact STATUS
+   entry.
+9. **Three-cut evaluation**: apply the active topology only to the next new
    qualifying cuts; after three, review task length, handoff count, duplicate
    verification, CR Must Fixes, and owner navigation burden. Any rule change
    from that review requires its own governance decision.
@@ -401,7 +643,14 @@ before DEV; DEV cannot expand the list on its own.
    collaboration/cut files; forbidden product/runtime paths count must be zero.
 3. Targeted current-rule scan proves:
    - risk tier and context topology are described as independent axes;
-   - `AGENTS.md` remains the only exact model/effort authority;
+   - `AGENTS.md` contains only the stable explicit-routing law and points to
+     `docs/agents/model-routing.md` as the sole exact authority;
+   - no second current model/thinking table exists;
+   - every task-creation route passes explicit model and thinking values and
+     records role, selection, and upgrade/substitution reason;
+   - PA, DEV, verification, CR, QA preparation, and RM select independently;
+   - unavailable configured models trigger a recorded same-grade successor
+     lookup rather than silent downgrade;
    - Small direct dispatch remains available;
    - Medium/Large fresh CR and canonical `cr.md` remain mandatory;
    - `.scratch/` is not a multi-task shared source of truth;
@@ -430,10 +679,13 @@ before DEV; DEV cannot expand the list on its own.
 ### CR focus
 
 - Reproduce the authority map rather than trusting DEV's summary.
-- Compare every proposed current-rule statement against the eight hard rules
+- Compare every proposed current-rule statement against the nine hard rules
   and seven conflict dispositions.
 - Verify no same-context waiver reappears for PA or CR.
-- Verify exact model/effort copies do not drift outside `AGENTS.md`.
+- Verify `docs/agents/model-routing.md` is the one exact model/thinking authority,
+  `AGENTS.md` contains only stable law, and no current table copy drifts.
+- Verify Auto-Next explicitly passes both parameters and adjacent role tasks
+  never inherit one another's selection.
 - Verify artifact presence is never treated as an APPROVE verdict.
 - Verify the cross-task evidence rule does not allow DEV self-report or a stale
   commit to pass RM.
@@ -470,7 +722,11 @@ The PA must answer these directly:
 6. Are C-6/C-7 executable with current Codex task-creation capabilities while
    remaining capability-based and safely degradable when a capability is
    absent?
-7. Can every eventual constitutional sentence be written as final-form law,
+7. Does the model-routing addendum establish exactly one mutable authority,
+   explicit `model` + `thinking` creation parameters, independent role
+   selection, and recorded same-grade successor substitution without copying
+   the table into `AGENTS.md` or other current protocols?
+8. Can every eventual constitutional sentence be written as final-form law,
    with narrative, model examples, fixed context numbers, and skill catalogues
    kept out of `AGENTS.md`?
 
@@ -480,8 +736,33 @@ corrections, DEV readiness, and at most three open PO decisions.
 
 ## PA Follow-Up Decisions
 
-Pending fresh PA. DEV is blocked until this section records every Must Fix
-disposition and the entrypoint advances to DEV-ready.
+- [x] **MF-1:** `Two-Axis Routing Matrix` defines a bounded work slice separately
+  from risk-required fresh gates and distinguishes feature size from risk tier.
+- [x] **MF-2:** `Tracked Map and Ticket State Machine` makes Wayfinder a stable
+  role/topology, locks tracked paths, serial claims, states, required fields,
+  and consumed-decision revisions for spec synthesis.
+- [x] **MF-3:** `Role and Fresh-Task Topology` assigns each role and deliverable,
+  requires a non-implementing verifier, and forbids continuation/handoff/fork
+  history for initial CR and re-review.
+- [x] **MF-4:** `Auto-Next Dispatch Protocol` locks project/checkout resolution,
+  pending/provisioning/active states, hold/activate order, idempotent retry,
+  scoped authorization, and durable completion/failure.
+- [x] **MF-5:** `Human QA Pause and Resume` assigns the paused coordinator and
+  defines pass, failed-QA repair, independent verification, fresh re-review,
+  return-to-QA, and all five durable exceptional stop states.
+- [x] **MF-6:** `Verification Evidence Levels` separates per-ticket narrow proof
+  from one exact-final-head full proof and defines evidence reuse/invalidation.
+- [x] **MF-7:** `Allowed Modification Scope` uses the existing canonical
+  entrypoint template, includes the seven omitted current surfaces and optional
+  ledger, forbids scripts/agent definitions, and `Role Write Ownership` limits
+  each role's writes.
+- [ ] **Owner model-routing addendum:** a second fresh PA must confirm
+  `Owner-Locked Model Routing`, HR-9, C-4, the enriched dispatch fields, the
+  sole-authority file, verification scans, and updated allowlist before DEV.
+
+The initial seven Must Fix items are dispositioned with zero PO questions. DEV
+remains blocked only on the fresh model-routing addendum review and any Must Fix
+that review discovers.
 
 ## Decision-Point Checklist
 
@@ -491,8 +772,11 @@ disposition and the entrypoint advances to DEV-ready.
   at `e4ae786`, and updated the durable entrypoint/plan for final owner
   ratification without changing current rules or the in-flight
   application-writing cut.
-- [ ] DP-2 — Fresh PA writes `pa.md` and leaves at most three PO decisions.
-- [ ] DP-3 — PM records every PA Must Fix disposition and declares DEV ready.
+- [x] DP-2 — Fresh PA wrote `pa.md`, returned seven Must Fix items, and left zero
+  PO decisions.
+- [ ] DP-3 — PM has dispositioned all seven initial Must Fix items; fresh PA
+  addendum review must approve the owner-locked model-routing change before DEV
+  readiness is declared.
 - [ ] DP-4 — Fresh DEV implements only the allowed rule/document surfaces.
 - [ ] DP-5 — PM verifies scope and the exact implementation head with real exit
   codes.

@@ -12,21 +12,23 @@
 
 ## Current Stage
 
-**Final owner ratification recorded; Auto-Next must create fresh PA now.**
+**Initial PA compressed; owner model-routing addendum awaits fresh PA review.**
 
-The owner has finally approved the two-axis model, Wayfinder total navigation,
-owner/Agent responsibility boundary, and task-to-task Auto-Next. This cut has
-still only changed its durable PM routing artifacts. No current collaboration
-rule, business code, product surface, production configuration, or in-flight
-cut has been changed.
+The initial fresh PA returned seven Must Fix items and no owner decisions. PM
+has dispositioned all seven in `plan.md`. The owner then locked Codex-native
+role routing: every Auto-Next creation must independently choose and explicitly
+pass model + thinking from one authority file, never a default or inherited
+tier. A second fresh PA reviews only the compressed dispositions and this added
+contract. No current collaboration rule, business code, product surface,
+production configuration, or in-flight cut has been changed.
 
 ## Must Read
 
-Read no more than these five files before starting PA:
+Read no more than these five files before starting the addendum PA:
 
 1. `docs/cuts/codex-matt-governance/plan.md`
-2. `AGENTS.md`
-3. `docs/steering/cut-workflow-protocol.md`
+2. `docs/cuts/codex-matt-governance/pa.md`
+3. `AGENTS.md`
 4. `docs/agents/dispatch-protocols.md`
 5. `docs/agents/review-levels.md`
 
@@ -42,13 +44,16 @@ Open only when needed to check a named conflict or artifact convention:
 
 ## Stage Contract
 
-The next task wears only the PA hat. It must:
+The next task wears only the PA hat and is explicitly routed as the Large
+governance PA tier. It must:
 
 1. fetch and confirm the baseline, branch, worktree, and diff;
-2. cold-read the eight hard rules and all seven named conflicts;
-3. test the proposed file ownership and verification plan for contradictions;
-4. write the full PA verdict to
-   `docs/cuts/codex-matt-governance/pa.md`;
+2. cold-read all nine hard rules, seven named conflicts, and initial PA
+   dispositions;
+3. attack the sole model-routing authority, explicit model/thinking dispatch,
+   independent PA/DEV/CR/RM selection, and recorded same-grade successor path;
+4. append a model-routing addendum verdict to
+   `docs/cuts/codex-matt-governance/pa.md` without rewriting the initial PA;
 5. return at most three unresolved PO decisions;
 6. map every Must Fix to the exact `plan.md` disposition required before DEV.
 
@@ -59,12 +64,13 @@ skills or tracker infrastructure, touch business code, or change the
 ## Current Outputs
 
 - PM contract: `docs/cuts/codex-matt-governance/plan.md`
-- Next artifact: `docs/cuts/codex-matt-governance/pa.md`
+- Initial PA: `docs/cuts/codex-matt-governance/pa.md`
+- Next artifact: addendum section in the same canonical `pa.md`
 
 ## Next Action
 
-The active PM task must automatically create and start a fresh PA task in the
-EQB project, route it to this branch/worktree and entrypoint, propagate the
-owner's Auto-Next authorization, then end. Do not start DEV until PA is complete
-and the PM has recorded every Must Fix disposition under
-`PA Follow-Up Decisions` in `plan.md`.
+The active PM task must commit the compressed plan, then create and start a
+fresh PA task in the EQB project with **explicit Sol model + xhigh thinking**,
+route it to this branch/worktree and entrypoint, and record that choice plus the
+Large-governance upgrade reason. Do not start DEV until the addendum review is
+complete and PM has dispositioned every new Must Fix.
