@@ -139,12 +139,14 @@ business code, or change the `applied-writing-lecture` worktree.
 ## PA Recheck Dispatch
 
 - Dispatch ID: `codex-matt-governance-pa3-20260722-01`
-- State: `dispatch-pending`
+- State: `provisioning`
 - Project: `local-8a1aff1b944a0aa921d1f6b55296afd6`
 - Checkout: existing worktree
   `/Users/huangxuewei/Projects/wt-codex-matt-governance`
 - Branch: `codex/codex-matt-governance`
 - Expected base/head: `ff7d2b39e21a54c13d27b96f258001b98667ebc6`
+- Pending-dispatch commit:
+  `9516f6b5283147dbc4763d297cd160bb39dba7fe`
 - Next role: `PA recheck`
 - Configured model: `gpt-5.6-sol`
 - Selected model: `gpt-5.6-sol`
@@ -155,9 +157,12 @@ business code, or change the `applied-writing-lecture` worktree.
 - Prompt digest:
   `7c08f2e51abe76cebe68c027529e3adbbe881f20b5cb7f7840b20d49902d7784`
 - Predecessor task: `019f8a8a-e719-7071-acf3-3758290977cb` (`local`)
-- Thread: pending creation
-- Task entry: pending one independently addressable fresh Codex task;
-  write-held bootstrap required
+- Thread: `019f8a93-3c06-7a92-9980-058fd205b1f8` (`local`)
+- Task entry: created as one independently addressable fresh Codex task with
+  explicit `model=gpt-5.6-sol` and `thinking=xhigh`; write-held bootstrap active
+- Creation evidence: the first API call was rejected before creation for an
+  invalid argument shape; the one bounded corrected retry returned the thread
+  above, so no ambiguous or duplicate task exists
 - Output: append-only recheck in
   `docs/cuts/codex-matt-governance/pa.md`
 - Authorization: one PA recheck plus exactly one in-scope direct successor
@@ -167,8 +172,8 @@ business code, or change the `applied-writing-lecture` worktree.
 
 ## Next Action
 
-Commit this pending dispatch, create exactly one fresh PA recheck task with
-explicit `gpt-5.6-sol` + `xhigh`, keep it write-held through bootstrap proof,
-then perform the predecessor-final-commit -> exact-HEAD release -> durable
-successor activation/acknowledgement handoff. End without waiting for its
-verdict; no ancestor task resumes.
+Wait for the fresh PA task's bootstrap proof while it remains write-held. Then
+make the predecessor's final worktree commit recording readiness, closure, and
+release authorization; send that exact HEAD in ACTIVATE/RELEASE. End after the
+successor durably records activation and acknowledges; do not wait for its
+verdict and do not resume any ancestor task.
