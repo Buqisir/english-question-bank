@@ -438,6 +438,13 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
   read, and write-held readiness; no successor write was made
 - Release record: this predecessor-final commit; the ACTIVATE/RELEASE message
   carries its exact hash, and fix DEV makes no later worktree write
+- Released predecessor-final HEAD:
+  `ada3c414797cdd0c1cb69e23aa8f0b0a571cbbc1`
+- Activation proof: exact isolated worktree root, detached released HEAD above,
+  and clean state re-proved before the first permitted write
+- Sole-writer state: acquired; fix DEV is write-closed and verification is the
+  only active writer in the isolated worktree
+- Activation record: this commit
 - Predecessor closure: fix result and sole verification successor entry are
   durable; fix DEV waits only for activation acknowledgement, never for the
   verification result
