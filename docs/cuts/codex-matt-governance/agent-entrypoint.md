@@ -313,7 +313,7 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
 ## CR Dispatch
 
 - Dispatch ID: `codex-matt-governance-cr-20260722-01`
-- State: `release-authorized`
+- State: `active`
 - Project: `local-8a1aff1b944a0aa921d1f6b55296afd6`
 - Checkout: fresh isolated worktree from branch `codex/codex-matt-governance`
 - Expected base/head: `65017c22152b309e989ea80d867035a6e69c3d6a`
@@ -336,6 +336,13 @@ main checkout's user changes, or change the `applied-writing-lecture` worktree.
 - Predecessor closure: verification evidence and the sole CR successor entry
   are durable; this verification task performs no later worktree write and
   never waits for the CR result
+- Released predecessor-final HEAD:
+  `8181f22abe128b306f66d9522787e5556685d125`
+- Activation proof: exact isolated worktree root, detached released HEAD above,
+  and clean state re-proved before the first permitted write
+- Sole-writer state: acquired; predecessor is write-closed and this CR is the
+  only active writer in the isolated worktree
+- Activation record: this commit
 - Output: `docs/cuts/codex-matt-governance/cr.md`
 - Authorization: one formal CR only. No implementation, QA, RM, merge, push,
   production, or downstream supervision. On Must Fix, record the canonical CR
