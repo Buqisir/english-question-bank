@@ -669,3 +669,71 @@ the reusable lifecycle contract only if needed), then hand off to one fresh
 top-level direct verification task that records a truthful full governance
 matrix. That verifier must hand to one fresh top-level no-DEV-history re-review.
 Do not route to RM yet; no browser or owner QA is required.
+
+---
+
+## Live-state Migration Formal Re-review — 2026-07-22
+
+Role: top-level fresh no-DEV-history formal re-review only; no implementation,
+QA, RM, merge, push, production action, downstream dispatch, or supervision
+performed.
+
+- Reviewed handoff head:
+  `6964890e536c042fa3787ad482dd6864f6603693`
+- Source branch:
+  `codex/codex-matt-governance-live-state-migration-20260722-01`
+- Released verification input:
+  `c59fdd57e2ce301af0e2d97c276cdad46d4d4ed2`
+- Contract inputs: canonical `plan.md`, sole-authority live state in
+  `agent-entrypoint.md`, the top `Live-state migration exact-head verification`
+  section in `verification.md`, the current migration/handoff diff, and this
+  canonical CR. Historical relay prose and older verification sections were
+  not used for live routing or as blocking evidence.
+
+### Verdict
+
+**MERGEABLE — zero unresolved Must Fix findings. Route directly to fresh RM.**
+
+The owner-approved live-state convergence supersedes the earlier lifecycle-
+prose objections recorded above. The current structured state and exact Git
+reality now yield one safe relay: the completed verifier is closed, no role is
+active, and exactly one top-level fresh formal re-review successor is
+authorized with the required route and bounded scope.
+
+### Error-relay Review
+
+- **Role / topology — PASS.** `Lifecycle state: handoff-ready` and
+  `Active role: none` close the verifier. One direct-successor authorization
+  remains, for a `fresh no-DEV-history formal re-review`, and its topology is
+  exactly one top-level `create_thread` successor. No subagent or fork was used
+  for this re-review.
+- **Worktree / branch / input head — PASS.** Before any write, the review
+  worktree was clean at the exact handoff head. The source branch resolved to
+  that same commit. The live-state worktree
+  `/Users/huangxuewei/.codex/worktrees/692a/english-question-bank` was also
+  clean at that exact commit; its detached state is permitted by the approved
+  convergence contract. The released input head exists and is an ancestor of
+  the reviewed head.
+- **Model route — PASS.** The authorization records `gpt-5.6-sol` with `high`
+  for the fresh formal re-review, matching the required CR/re-review route.
+- **Single authority — PASS.** The live entrypoint contains one lifecycle
+  state, one active-role field, one successor authorization, and one numbered
+  Next Action. The closed verifier retains neither write authority nor
+  dispatch authority.
+- **Current diff / machine evidence — PASS.** The migration changes only the
+  current entrypoint, the non-authoritative history carrier, the new top
+  verification evidence, and the minimal registered live-state checker.
+  `node scripts/verify-codex-matt-governance-live-state.mjs`,
+  `git diff --check 35b15dd..HEAD`, and the released-input ancestor check all
+  returned exit `0` at the handoff head.
+
+### Findings
+
+No Must Fix finding falls within the authorized blocking categories. Wording,
+historical prose, formatting, and theoretical consistency were intentionally
+not promoted into blockers.
+
+### Recommendation
+
+Proceed directly to one fresh RM task under the repository's RM route. This
+re-review does not create, wait for, or supervise that task.
