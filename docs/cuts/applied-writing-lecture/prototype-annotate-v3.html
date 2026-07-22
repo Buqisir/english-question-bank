@@ -812,7 +812,7 @@
           openHeight: pocket.bottom - pocket.top + height
         }))
         .sort((a, b) => b.openWidth * b.openHeight - a.openWidth * a.openHeight)
-        .slice(0, 80);
+        .slice(0, 48);
     }
 
     function noteMarkup(item, index) {
@@ -866,7 +866,7 @@
       ];
     }
 
-    function candidateSlots(entry, anchorRects, obstacles, answer, contentBounds) {
+    function candidateSlots(entry, anchorRects, obstacles, answer, contentBounds, pocketCache) {
       const anchorCenter = anchorCenterOf(anchorRects);
       const anchorTop = Math.min(...anchorRects.map(rect => rect.top));
       const anchorBottom = Math.max(...anchorRects.map(rect => rect.bottom));
@@ -879,7 +879,11 @@
       widths.forEach(width => {
         entry.el.style.width = `${width}px`;
         const height = entry.el.offsetHeight;
-        const pockets = placementPockets(width, height, obstacles);
+        const pocketKey = `${width}:${height.toFixed(2)}`;
+        if (!pocketCache.has(pocketKey)) {
+          pocketCache.set(pocketKey, placementPockets(width, height, obstacles));
+        }
+        const pockets = pocketCache.get(pocketKey);
         pockets.forEach(pocket => {
           candidatePositions(pocket, width, height, anchorCenter).forEach(position => {
             const { x, y } = position;
@@ -895,29 +899,29 @@
               (slackX + slackY) * .045);
             const clearance = Math.min(x - pocket.left, pocket.right - x, y - pocket.top, pocket.bottom - y);
             const aboveTarget = rect.bottom <= anchorTop + 5;
-            let direction = lane === 'below' ? 38 : 0;
+            let directionPenalty = lane === 'below' ? 38 : 0;
             if (entry.readingOrder === 0) {
-              if (aboveTarget) direction -= 118;
-              else if (cy > anchorBottom + 80) direction += 96;
-              else direction += 24;
+              if (aboveTarget) directionPenalty -= 118;
+              else if (cy > anchorBottom + 80) directionPenalty += 96;
+              else directionPenalty += 24;
             } else if (cy > anchorBottom + 130) {
-              direction += (cy - anchorBottom - 130) * .22;
+              directionPenalty += (cy - anchorBottom - 130) * .22;
             }
             if (entry.fullSpan && entry.readingOrder > 0) {
               if (entry.readingProgress >= .5) {
-                if (lane === 'left') direction -= 104;
-                else if (lane === 'right') direction += 52;
+                if (lane === 'left') directionPenalty -= 104;
+                else if (lane === 'right') directionPenalty += 52;
               } else {
-                if (lane === 'right') direction -= 76;
-                else if (lane === 'left') direction += 38;
+                if (lane === 'right') directionPenalty -= 76;
+                else if (lane === 'left') directionPenalty += 38;
               }
             }
-            let strategy = 0;
-            if (variant === 'A') strategy = kind === '跨框空白' ? -22 : kind.startsWith('纸边') ? -12 : 0;
-            if (variant === 'B') strategy = kind.startsWith('纸边') ? -52 : kind === '跨框空白' ? -36 : 18;
-            if (variant === 'C') strategy = kind === '行间空白' ? -72 : kind === '跨框空白' ? -22 : 38;
-            const jitter = ((entry.index * 37 + Math.round(x) * 3 + Math.round(y) + layoutSeed * 19) % 13) * .35;
-            const route = connectorFor(rect, anchorRects, obstacles, entry.index + layoutSeed);
+            let variantPenalty = 0;
+            if (variant === 'A') variantPenalty = kind === '跨框空白' ? -22 : kind.startsWith('纸边') ? -12 : 0;
+            if (variant === 'B') variantPenalty = kind.startsWith('纸边') ? -52 : kind === '跨框空白' ? -36 : 18;
+            if (variant === 'C') variantPenalty = kind === '行间空白' ? -72 : kind === '跨框空白' ? -22 : 38;
+            const tieBreak = ((entry.index * 37 + Math.round(x) * 3 + Math.round(y) + layoutSeed * 19) % 13) * .35;
+            const route = connectorFor(rect, anchorRects, obstacles, entry.index);
             if (!route || route.hits > 0) return;
             const shapePenalty = (baseWidth - width) * .22 + Math.max(0, height - baseHeight) * .3;
             const proximityBonus = route.mode === 'flick' ? -28 : route.mode === 'short' ? -5 : 0;
@@ -932,7 +936,8 @@
               pocketId: pocket.id,
               route,
               score: distance - openness - Math.min(18, Math.max(0, clearance) * .35) +
-                direction + strategy + shapePenalty + proximityBonus + jitter + route.score,
+                directionPenalty + variantPenalty + shapePenalty + proximityBonus + route.score,
+              tieBreak,
               anchorCenter
             });
           });
@@ -940,14 +945,18 @@
       });
       entry.el.style.width = `${baseWidth}px`;
 
+      const narrowestWidth = widths[widths.length - 1];
+      const eligible = all.filter(slot =>
+        slot.width !== narrowestWidth || slot.lane === 'left' || slot.lane === 'right'
+      );
       const deduped = new Map();
-      all.sort((a, b) => a.score - b.score).forEach(slot => {
+      eligible.sort((a, b) => a.score - b.score || a.tieBreak - b.tieBreak).forEach(slot => {
         const key = `${Math.round(slot.x / 8)}:${Math.round(slot.y / 8)}:${Math.round(slot.width / 12)}:${slot.lane}`;
         if (!deduped.has(key)) deduped.set(key, slot);
       });
-      const sorted = [...deduped.values()].sort((a, b) => a.score - b.score);
+      const sorted = [...deduped.values()].sort((a, b) => a.score - b.score || a.tieBreak - b.tieBreak);
       const diverse = new Map();
-      sorted.slice(0, 32).forEach(slot => diverse.set(`${slot.x}:${slot.y}:${slot.width}`, slot));
+      sorted.slice(0, 24).forEach(slot => diverse.set(`${slot.x}:${slot.y}:${slot.width}`, slot));
       const laneCounts = new Map();
       const pocketSeen = new Set();
       sorted.forEach(slot => {
@@ -962,14 +971,17 @@
           pocketSeen.add(pocketKey);
         }
       });
-      return [...diverse.values()].sort((a, b) => a.score - b.score).slice(0, 88);
+      return [...diverse.values()]
+        .sort((a, b) => a.score - b.score || a.tieBreak - b.tieBreak)
+        .slice(0, 56);
     }
 
     function compareLayoutStates(a, b) {
       return a.maxRegret - b.maxRegret ||
         a.orderPenalty - b.orderPenalty ||
         a.totalRegret - b.totalRegret ||
-        a.cost - b.cost;
+        a.cost - b.cost ||
+        a.tieBreak - b.tieBreak;
     }
 
     function solveGlobally(entries, obstacles, answer, contentBounds) {
@@ -987,14 +999,15 @@
           entry.fullSpan = entry.item.text.length >= paragraphLength * .88;
         });
 
+      const pocketCache = new Map();
       entries.forEach(entry => {
-        entry.candidates = candidateSlots(entry, entry.anchorRects, obstacles, answer, contentBounds);
+        entry.candidates = candidateSlots(entry, entry.anchorRects, obstacles, answer, contentBounds, pocketCache);
         const bestScore = entry.candidates[0]?.score ?? 0;
         entry.candidates.forEach(slot => { slot.regret = slot.score - bestScore; });
       });
 
       const ordered = [...entries].sort((a, b) => a.candidates.length - b.candidates.length || b.el.offsetHeight - a.el.offsetHeight);
-      let states = [{ placements: [], maxRegret: 0, totalRegret: 0, orderPenalty: 0, cost: 0 }];
+      let states = [{ placements: [], maxRegret: 0, totalRegret: 0, orderPenalty: 0, cost: 0, tieBreak: 0 }];
 
       for (const entry of ordered) {
         const next = [];
@@ -1009,9 +1022,6 @@
             if (state.placements.some(placed => routesCross(slot.route, placed.slot.route))) continue;
             const laneInversion = state.placements.some(placed => {
               if (placed.slot.lane !== slot.lane) return false;
-              const slotCenterX = (slot.rect.left + slot.rect.right) / 2;
-              const placedCenterX = (placed.slot.rect.left + placed.slot.rect.right) / 2;
-              if (Math.abs(slotCenterX - placedCenterX) > Math.min(slot.rect.right - slot.rect.left, 168)) return false;
               const anchorOrder = entry.anchorCenter.y - placed.entry.anchorCenter.y;
               const noteOrder = (slot.rect.top + slot.rect.bottom) / 2 -
                 (placed.slot.rect.top + placed.slot.rect.bottom) / 2;
@@ -1038,13 +1048,14 @@
               totalRegret: state.totalRegret + slot.regret,
               orderPenalty: state.orderPenalty + orderPenalty,
               cost: state.cost + slot.score + sameKind * 8 + sameBand * 11 +
-                routeCrowding * 18 + orderPenalty
+                routeCrowding * 18 + orderPenalty,
+              tieBreak: state.tieBreak + slot.tieBreak
             });
           }
         }
         next.sort(compareLayoutStates);
-        states = next.slice(0, 1200);
-        if (!states.length) break;
+        if (!next.length) break;
+        states = next.slice(0, 420);
       }
 
       return states[0]?.placements || [];
