@@ -3,7 +3,7 @@
 The owner creates top-level tasks manually. This table is a cost/quality
 recommendation to include in `Next`, not a dispatch authority or state machine.
 
-| Work | Recommended model | Thinking |
+| Work | Recommended model | Effort |
 | --- | --- | --- |
 | Ask Matt, Wayfinder, grilling, domain modeling, spec | `gpt-5.6-sol` | `high` |
 | Ordinary code research | `gpt-5.6-terra` | `medium` |

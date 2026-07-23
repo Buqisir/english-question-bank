@@ -40,7 +40,8 @@ Next：新开顶层任务
 Worktree: <absolute path>
 Branch: <branch>
 Expected HEAD: <commit>
-Recommended model: <model / thinking>
+Model: <model>
+Effort: <low | medium | high | xhigh>
 Prompt:
 <complete prompt>
 ```

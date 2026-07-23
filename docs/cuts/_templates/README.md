@@ -60,6 +60,6 @@ next ready ticket task.
 
 - Commit the spec/tickets before the first implementation task.
 - Each implementation task commits one ticket and leaves the worktree clean.
-- `Next` repeats the exact worktree, branch, HEAD, model recommendation, and
+- `Next` repeats the exact worktree, branch, HEAD, model, effort, and
   complete prompt.
 - Files and git preserve continuity; no live-state or dispatch file is needed.

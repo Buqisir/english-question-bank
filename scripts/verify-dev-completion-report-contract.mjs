@@ -47,7 +47,8 @@ for (const field of [
   'Worktree:',
   'Branch:',
   'Expected HEAD:',
-  'Recommended model:',
+  'Model:',
+  'Effort:',
   'Prompt:',
 ]) {
   assert(steering.includes(field) && template.includes(field), `Next field present: ${field}`)
