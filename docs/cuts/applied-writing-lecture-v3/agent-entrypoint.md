@@ -1,7 +1,7 @@
 # applied-writing-lecture-v3 · Live Entrypoint
 
-State: ready-for-dev
-Active role: fresh PM plan-revision (releasing one fresh DEV)
+State: active
+Active role: fresh DEV implementation
 Source branch: `codex/applied-writing-lecture-v3-20260722-01`
 Worktree: Codex-managed detached worktree
 Released PA result head: `e5d8dec9c76b35d581bc61e96b41681e3c7c7529`
@@ -26,6 +26,11 @@ Release evidence: after `git fetch github` on 2026-07-23,
 `github/codex/applied-writing-lecture-v3-20260722-01` and worktree `HEAD`
 resolved exactly to `9f87000cc51f59b985d420471d095230fa35f02a`;
 the released head was an ancestor of `HEAD`, and the worktree was clean.
+DEV activation evidence: after `git fetch github` on 2026-07-23,
+repo root is `/Users/huangxuewei/.codex/worktrees/f8ab/english-question-bank`,
+`github/codex/applied-writing-lecture-v3-20260722-01` and worktree `HEAD`
+resolved exactly to released head `30625c980d78fe900cd0c4f076a0829fdb6deaba`,
+that released head is an ancestor of `HEAD`, and the worktree was clean.
 
 ## Current objective
 
@@ -38,10 +43,10 @@ revise the approved visual direction.
 ## Must read
 
 1. `agent-entrypoint.md`
-2. `pa.md`
-3. `plan.md`
-4. `decisions.md`
-5. `spec.md`
+2. `plan.md`
+3. `decisions.md`
+4. `spec.md`
+5. `pilot-content/README.md`
 
 ## Source of truth
 
@@ -53,46 +58,43 @@ revise the approved visual direction.
 
 ## Relay
 
-- Dispatch ID: `AWL-V3-PM-REV-20260722-01`
-- Current role: fresh PM plan-revision releasing the approved contract
-- Next role: exactly one fresh DEV
-- Output: revised `plan.md` dispositions plus linked decisions/spec/pilot
-  content packet and live routing
-- Configured / selected model: `gpt-5.6-sol` / `gpt-5.6-sol`
+- Dispatch ID: `AWL-V3-DEV-20260723-01`
+- Current role: fresh DEV implementation
+- Output: exact 16-file runtime/data implementation plus cut-local result and
+  verification artifacts, all bound to one exact DEV head
+- Configured / selected model: `gpt-5.6-terra` / `gpt-5.6-terra`
 - Thinking: `high`
-- Availability source: current Codex task-creation capability lists
-  `gpt-5.6-sol` with `high`; model-routing PM route is Sol/high, no substitution
-- Successor dispatch: `AWL-V3-DEV-20260723-01`; independently selected
-  `gpt-5.6-terra` / `high`. The current task-creation capability lists that
-  exact combination. DEV is upgraded from its Terra/medium default because
-  this counted implementation is a cross-module schema, persistence,
-  paper-host geometry, browser, and subset-font contract.
-- One-successor boundary: PM creates exactly one fresh DEV from a newly
-  released exact head, confirms activation, then exits without awaiting result
-- Stop boundary: named escalation or failed task creation -> record `blocked`
+- Availability source: the task-creation capability list supplied
+  `gpt-5.6-terra` with `high`; no substitution
+- Successor boundary: after its durable result, DEV releases exactly one fresh
+  non-implementing verification successor; DEV does not await it
+- Stop boundary: named escalation, 17th runtime/data file, or failed successor
+  task creation -> record `blocked`
 
 ## Goal / slice
 
 - Goal: close AWL-V3-01, then unlock AWL-V3-02.
-- Current slice: formal PA result and PM plan-revision release only.
-- Not this slice: runtime edits, payload edits, QA, merge, deployment, bulk data.
+- Current slice: exact counted production implementation.
+- Not this slice: product-direction or teaching-copy decisions, QA, merge,
+  deployment, bulk data, or AWL-V3-02.
 
 ## Allowed scope
 
-- PM plan-revision may edit only `docs/cuts/applied-writing-lecture-v3/**`
-  except canonical `pa.md`.
-- Branch/push/thread state needed for the one-way PM handoff.
+- The exact 16 runtime/data paths in `plan.md`, plus
+  `docs/cuts/applied-writing-lecture-v3/**` for DEV routing/result/verification
+  artifacts.
+- Branch/push/thread state needed for the one-way DEV handoff.
 
 ## Forbidden scope
 
-- All runtime, schema, paper-asset, production, and preserved archive-worktree
-  files.
-- More than one successor or any subagent used as the formal PM role.
+- Any 17th runtime/data file without PM disposition; PaperSurface, print/export,
+  student, continuation, routes/auth/production config, remaining application
+  assets, and preserved archive-worktree files.
+- More than one successor or any subagent used as the formal verification role.
 
 ## Next Action
 
-1. PM rechecks the two packet hashes, records the owner verdict, and releases
-   a clean exact head containing 5/5 closed Must Fix dispositions and zero
-   blocking PO decisions.
-2. PM independently selects the DEV route, creates exactly one fresh DEV,
-   confirms its activation, and exits without awaiting implementation.
+1. DEV implements the locked exact 16-file route without changing the two
+   pilot teaching packets or owner-approved prototype contract.
+2. DEV commits its result, then releases exactly one fresh verification task
+   with the exact DEV head and does not await it.

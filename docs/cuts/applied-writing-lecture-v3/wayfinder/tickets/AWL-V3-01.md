@@ -2,9 +2,9 @@
 
 Type / role: Wayfinder -> PM contract -> formal PA -> DEV -> verification ->
 fresh CR -> QA -> RM
-State: ready-for-dev
+State: active
 Blockers: none
-Claimed by: fresh PM plan-revision (releasing one fresh DEV)
+Claimed by: fresh DEV implementation
 Base head: `github/main@1deec0f`
 Owner-approved DEV plan head:
 `9f87000cc51f59b985d420471d095230fa35f02a`
@@ -32,27 +32,29 @@ existing print/student isolation?
 
 ## Routing
 
-Current role: fresh PM plan-revision releasing the approved contract
-Next role: exactly one fresh DEV
-Configured model: `gpt-5.6-sol`
-Selected model: `gpt-5.6-sol`
+Current role: fresh DEV implementation
+Next role: exactly one fresh non-implementing verification task
+Configured model: `gpt-5.6-terra`
+Selected model: `gpt-5.6-terra`
 Thinking: `high`
-Availability / substitution: task-creation capability lists Sol/high; no
+Availability / substitution: task-creation capability lists Terra/high; no
 substitution
-Dispatch ID / state: `AWL-V3-PM-REV-20260722-01` / ready-for-dev
-Authorization scope: PM plan-revision may edit cut docs except canonical
-`pa.md`; no runtime implementation
-Successor dispatch: `AWL-V3-DEV-20260723-01`; `gpt-5.6-terra` / `high`,
-explicitly available in the current task-creation capability. High is selected
-over the DEV default medium because the exact 16-file route spans schema,
-persistence, paper-host geometry, browser behavior, and subset fonts.
+Dispatch ID / state: `AWL-V3-DEV-20260723-01` / active
+Activation evidence: after `git fetch github` on 2026-07-23, repo root is
+`/Users/huangxuewei/.codex/worktrees/f8ab/english-question-bank`; source ref
+`github/codex/applied-writing-lecture-v3-20260722-01` and `HEAD` resolve
+exactly to released head `30625c980d78fe900cd0c4f076a0829fdb6deaba`; that
+head is an ancestor of `HEAD`, and the worktree is clean.
+Authorization scope: the exact 16 runtime/data paths named in `plan.md` plus
+cut-local DEV routing/result/verification artifacts; no seventeenth
+runtime/data file without PM disposition.
 
 ## Unique Next Action
 
-1. PM commits and pushes the owner verdict, 5/5 closed Must Fix dispositions,
-   zero blocking PO decisions, and the exact counted implementation route.
-2. PM creates exactly one fresh DEV from that released head, confirms
-   activation, and immediately exits without awaiting implementation.
+1. DEV implements the locked exact 16-file production route and records
+   exact-head results.
+2. DEV releases exactly one fresh non-implementing verification task from its
+   committed result, then exits without awaiting it.
 
 ## Result
 
