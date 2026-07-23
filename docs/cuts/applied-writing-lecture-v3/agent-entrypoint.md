@@ -1,7 +1,7 @@
 # applied-writing-lecture-v3 · Live Entrypoint
 
-State: verification-active
-Active role: fresh non-implementing verification
+State: verification-complete; release-gate-non-green
+Active role: none
 Source branch: `codex/applied-writing-lecture-v3-20260722-01`
 Worktree: Codex-managed detached worktree
 Released PA result head: `e5d8dec9c76b35d581bc61e96b41681e3c7c7529`
@@ -75,6 +75,18 @@ revise the approved visual direction.
   if live artifacts authorize it; it must not await that successor.
 - Stop boundary: named escalation, changed released head, or an unauthorized
   runtime/data scope -> record `blocked`.
+
+## Verification result
+
+Fresh verification dispatch `AWL-V3-VERIFY-20260723-01` recorded its cold-run
+against release runtime/data head `017164dc4697f6131747202b9a0c51b7d3593829`
+in `verification.md`. Scope (exact 16 runtime/data files), locked packets,
+restart3, CSS, payload parity, and DP-2 pass. The release gate is non-green:
+the plan-named `npm -C app exec tsc -- --noEmit` exits 1, and
+`pnpm -C app run verify:all` independently reports `PASS 82 / SKIP 1 / FAIL 3`
+at `verify-similar-v2`, `verify-paper-assets-consistency`, and
+`verify-genre-truth`. Verification repairs nothing. Per the plan's P4 route,
+one fresh CR may now cold-read this exact evidence; no merge is authorized.
 
 ## Goal / slice
 

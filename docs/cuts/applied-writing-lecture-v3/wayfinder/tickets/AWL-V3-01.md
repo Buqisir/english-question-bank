@@ -2,9 +2,9 @@
 
 Type / role: Wayfinder -> PM contract -> formal PA -> DEV -> verification ->
 fresh CR -> QA -> RM
-State: verification-active
-Blockers: none
-Claimed by: fresh non-implementing verification
+State: verification-complete; release-gate-non-green
+Blockers: release gate non-green (plan-named TypeScript command and full suite)
+Claimed by: none
 Base head: `github/main@1deec0f`
 Owner-approved DEV plan head:
 `9f87000cc51f59b985d420471d095230fa35f02a`
@@ -32,14 +32,14 @@ existing print/student isolation?
 
 ## Routing
 
-Current role: fresh non-implementing verification
-Next role: none until verification has durably recorded the live release-gate result
-Configured model: `gpt-5.6-terra`
-Selected model: `gpt-5.6-terra`
-Thinking: `medium`
-Availability / substitution: task-creation capability lists Terra/medium; no
+Current role: none; fresh verification completed
+Next role: exactly one fresh CR cold-read; it may not repair runtime/data
+Configured model: `gpt-5.6-sol`
+Selected model: `gpt-5.6-sol`
+Thinking: `high`
+Availability / substitution: task-creation capability lists Sol/high; no
 substitution; same configured family/grade
-Dispatch ID / state: `AWL-V3-VERIFY-20260723-01` / active
+Dispatch ID / state: `AWL-V3-CR-20260723-01` / dispatch-pending
 Activation evidence: after `git fetch github` on 2026-07-23, repo root is
 `/Users/huangxuewei/.codex/worktrees/f8ab/english-question-bank`; source ref
 `github/codex/applied-writing-lecture-v3-20260722-01` and `HEAD` resolve
@@ -51,6 +51,13 @@ Terra/medium; no substitution; same configured family/grade.
 Authorization scope: the exact 16 runtime/data paths named in `plan.md` plus
 cut-local DEV routing/result/verification artifacts; no seventeenth
 runtime/data file without PM disposition.
+Verification result: `verification.md` binds cold-run evidence to released
+runtime/data head `017164dc4697f6131747202b9a0c51b7d3593829`. Scope, locked
+packets, restart3, CSS, payload parity, and DP-2 pass. The named release gate
+remains non-green: `npm -C app exec tsc -- --noEmit` exits 1 and the independent
+full suite reports `PASS 82 / SKIP 1 / FAIL 3` at `similar-v2`, paper-assets
+consistency, and genre truth. These failures are not repaired or attributed by
+verification; merge remains unauthorized.
 
 ## Unique Next Action
 
