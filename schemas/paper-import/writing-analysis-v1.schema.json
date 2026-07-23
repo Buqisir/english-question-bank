@@ -7,7 +7,10 @@
   "required": ["schemaVersion", "paperId", "groups"],
   "properties": {
     "schemaVersion": { "const": "writing-analysis-v1" },
-    "paperId": { "type": "string", "pattern": "^paper-[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "paperId": {
+      "type": "string",
+      "pattern": "^paper-[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
     "meta": { "type": "object" },
     "groups": {
       "type": "object",
@@ -33,7 +36,29 @@
                   "additionalProperties": true,
                   "properties": {
                     "text": { "type": "string", "minLength": 1 },
-                    "note": { "type": "string", "minLength": 1 }
+                    "note": { "type": "string", "minLength": 1 },
+                    "lectureAnnotation": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": ["label", "note"],
+                      "properties": {
+                        "label": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 24
+                        },
+                        "note": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 28
+                        },
+                        "transferExample": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 52
+                        }
+                      }
+                    }
                   }
                 }
               },
@@ -48,6 +73,58 @@
                     "minItems": 2,
                     "maxItems": 2,
                     "items": { "type": "string", "minLength": 1 }
+                  }
+                }
+              },
+              "reviewCard": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "form",
+                  "topic",
+                  "reader",
+                  "person",
+                  "tense",
+                  "type",
+                  "points",
+                  "readerWho",
+                  "readerCares",
+                  "readerWants",
+                  "value"
+                ],
+                "properties": {
+                  "form": { "type": "string", "minLength": 1 },
+                  "topic": { "type": "string", "minLength": 1 },
+                  "reader": { "type": "string", "minLength": 1 },
+                  "person": { "type": "string", "minLength": 1 },
+                  "tense": { "type": "string", "minLength": 1 },
+                  "type": { "type": "string", "minLength": 1 },
+                  "points": {
+                    "type": "array",
+                    "minItems": 2,
+                    "maxItems": 2,
+                    "items": { "type": "string", "minLength": 1 }
+                  },
+                  "readerWho": { "type": "string", "minLength": 1 },
+                  "readerCares": { "type": "string", "minLength": 1 },
+                  "readerWants": { "type": "string", "minLength": 1 },
+                  "value": { "type": "string", "minLength": 1 }
+                }
+              },
+              "reviewMarks": {
+                "type": "array",
+                "minItems": 5,
+                "maxItems": 5,
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["grid", "text", "note"],
+                  "properties": {
+                    "grid": {
+                      "enum": ["type", "tense", "points", "cares", "wants"]
+                    },
+                    "text": { "type": "string", "minLength": 1 },
+                    "note": { "type": "string", "minLength": 1 }
                   }
                 }
               }

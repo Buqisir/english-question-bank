@@ -19,7 +19,9 @@
  *    per the plan) does not throat/crash the loader.
  */
 
-import { existsSync, readFileSync } from 'node:fs'
+import { existsSync, mkdtempSync, readFileSync, rmSync } from 'node:fs'
+import { isDeepStrictEqual } from 'node:util'
+import os from 'node:os'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -281,6 +283,70 @@ assert(
   'analysisText.mjs never writes the DB (no db.prepare/UPDATE/INSERT calls)',
   !/\bdb\.(prepare|exec)\(/.test(read('server/draft-paper/analysisText.mjs')),
 )
+
+/* ───────────────────── 6. application lecture publish contract ───────────────────── */
+
+console.log('\n-- 6. application lecture publish contract --')
+
+const { validateWritingAnalysisCandidate, persistWritingAnalysisGroup } = await import(
+  path.join(rootDir, 'server', 'writing-analysis', 'writingAnalysisBackfillService.mjs')
+)
+
+function candidateFor(year) {
+  return JSON.parse(read(`docs/cuts/applied-writing-lecture-v3/pilot-content/paper-${year}-i.application.json`))
+}
+
+function rejects(name, mutate) {
+  const candidate = candidateFor('2024')
+  mutate(candidate)
+  let threw = false
+  try { validateWritingAnalysisCandidate(candidate) } catch { threw = true }
+  assert(name, threw)
+}
+
+for (const year of ['2022', '2024']) {
+  const candidate = candidateFor(year)
+  let threw = false
+  try { validateWritingAnalysisCandidate(candidate) } catch { threw = true }
+  assert(`${year} locked packet passes real application validator`, !threw)
+}
+
+rejects('normalized-only review anchor is rejected', (candidate) => { candidate.reviewMarks[0].text = candidate.reviewMarks[0].text.replace('share', 'share  ') })
+rejects('normalized-only highlighted anchor is rejected', (candidate) => { candidate.highlightExpressions[0].text = candidate.highlightExpressions[0].text.replace('At first', 'At  first') })
+rejects('partial review card is rejected', (candidate) => { delete candidate.reviewCard.reader })
+rejects('wrong point cardinality is rejected', (candidate) => { candidate.reviewCard.points = ['only one'] })
+rejects('wrong review grid order is rejected', (candidate) => { candidate.reviewMarks[1].grid = 'tense' })
+rejects('duplicate non-point grid is rejected', (candidate) => { candidate.reviewMarks[3].grid = 'type' })
+rejects('wrong highlight annotation count is rejected', (candidate) => { delete candidate.highlightExpressions[0].lectureAnnotation })
+rejects('partial highlight annotation is rejected', (candidate) => { delete candidate.highlightExpressions[0].lectureAnnotation.note })
+rejects('trim failure is rejected', (candidate) => { candidate.highlightExpressions[0].lectureAnnotation.label = ' leading' })
+rejects('HTML failure is rejected', (candidate) => { candidate.highlightExpressions[0].lectureAnnotation.note = '<b>markup</b>' })
+rejects('Markdown failure is rejected', (candidate) => { candidate.highlightExpressions[0].lectureAnnotation.note = '**markdown**' })
+rejects('newline failure is rejected', (candidate) => { candidate.highlightExpressions[0].lectureAnnotation.note = 'one\ntwo' })
+rejects('code-point limit failure is rejected', (candidate) => { candidate.highlightExpressions[0].lectureAnnotation.label = 'a'.repeat(25) })
+
+const legacy = candidateFor('2024')
+delete legacy.reviewCard
+delete legacy.reviewMarks
+legacy.highlightExpressions.forEach((item) => delete item.lectureAnnotation)
+let legacyThrew = false
+try { validateWritingAnalysisCandidate(legacy) } catch { legacyThrew = true }
+assert('legacy application without every v3 field remains valid but unpublished', !legacyThrew)
+
+const tempAssets = mkdtempSync(path.join(os.tmpdir(), 'awl-v3-verify-'))
+try {
+  const candidate = candidateFor('2022')
+  const { filePath } = persistWritingAnalysisGroup({ paperAssetsDir: tempAssets }, { paperId: 'paper-2022-i', groupId: 'group-2022-i-writing-application' }, candidate)
+  const persisted = JSON.parse(readFileSync(filePath, 'utf8'))
+  assert('persistence keeps the complete locked lecture payload', isDeepStrictEqual(persisted.groups['group-2022-i-writing-application'].writing, candidate))
+  const continuation = { taskType: 'continuation', modelAnswer: 'x '.repeat(120), continuationDesign: { theme: 'theme', paragraphs: ['one', 'two'] }, highlightExpressions: [{ text: 'x', note: 'one' }, { text: 'x', note: 'two' }, { text: 'x', note: 'three' }] }
+  validateWritingAnalysisCandidate(continuation)
+  persistWritingAnalysisGroup({ paperAssetsDir: tempAssets }, { paperId: 'paper-2022-i', groupId: 'group-2022-i-writing-continuation' }, continuation)
+  const storedContinuation = JSON.parse(readFileSync(filePath, 'utf8')).groups['group-2022-i-writing-continuation'].writing
+  assert('continuation persistence excludes application lecture fields', !('reviewCard' in storedContinuation) && !storedContinuation.highlightExpressions.some((item) => 'lectureAnnotation' in item))
+} finally {
+  rmSync(tempAssets, { recursive: true, force: true })
+}
 
 /* ───────────────────── summary ───────────────────── */
 

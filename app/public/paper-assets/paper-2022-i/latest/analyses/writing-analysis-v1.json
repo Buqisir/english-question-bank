@@ -6,22 +6,46 @@
       "writing": {
         "taskType": "application",
         "modelAnswer": "Dear Caroline,\nI am Li Hua, host of Talk and Talk, an English programme broadcast every Friday afternoon by our school radio station. On behalf of all our listeners, I am writing to warmly invite you to be our guest for an interview.\nOur programme aims to widen students' horizons and improve their spoken English through relaxed conversations. We sincerely hope you could share your experience of studying abroad, a topic we are all genuinely curious about. As for the time, next Tuesday afternoon would be ideal, but please feel free to suggest another slot that suits you better.\nIt would be a great honour to have you join us. Looking forward to your reply.\nYours sincerely,\nLi Hua",
+        "reviewCard": {
+          "form": "邀请邮件",
+          "topic": "邀请外教参加校广播访谈",
+          "reader": "外教 Caroline",
+          "person": "第一人称为主，第二人称指向对方",
+          "tense": "一般现在时为主",
+          "type": "邀请类",
+          "points": ["节目介绍", "访谈时间和话题"],
+          "readerWho": "外教与受邀嘉宾",
+          "readerCares": "节目价值与访谈安排",
+          "readerWants": "目的明确、安排具体、保留协商余地",
+          "value": "让对方清楚为何受邀、需要分享什么以及如何回复"
+        },
+        "reviewMarks": [
+          { "grid": "type", "text": "invite you to be our guest for an interview", "note": "开篇直接亮明邀请目的，不让读者猜。" },
+          { "grid": "cares", "text": "please feel free to suggest another slot that suits you better", "note": "给出调整余地，回应对方对时间安排的关切。" },
+          { "grid": "points", "text": "Our programme aims to widen students' horizons and improve their spoken English through relaxed conversations.", "note": "先介绍节目做什么、有什么价值。" },
+          { "grid": "tense", "text": "We sincerely hope you could share your experience of studying abroad", "note": "一般现在时说明邀请，could 让请求更委婉。" },
+          { "grid": "points", "text": "next Tuesday afternoon would be ideal", "note": "话题之后给出具体时间，第二个要点完整落地。" }
+        ],
         "highlightExpressions": [
           {
             "text": "On behalf of all our listeners, I am writing to warmly invite you to be our guest for an interview.",
-            "note": "代表集体发出邀请的开头点目的句。On behalf of... 抬高郑重感、I am writing to... 直接亮明写信目的。迁移到任何邀请/感谢/请求类应用文：把 listeners 换成 students/teachers/our class，invite 换成 thank/ask 等即可开篇。"
+            "note": "代表集体发出邀请的开头点目的句。On behalf of... 抬高郑重感、I am writing to... 直接亮明写信目的。迁移到任何邀请/感谢/请求类应用文：把 listeners 换成 students/teachers/our class，invite 换成 thank/ask 等即可开篇。",
+            "lectureAnnotation": { "label": "On behalf of... 正式开篇", "note": "代表集体发出邀请，目的清楚又正式。", "transferExample": "On behalf of our class, I am writing to thank you." }
           },
           {
             "text": "We sincerely hope you could share your experience of studying abroad, a topic we are all genuinely curious about.",
-            "note": "委婉请求 + 同位语点明价值。sincerely hope you could... 用情态过去式把请求说得客气；逗号后的同位语 a topic... 解释为何想请对方做这件事。迁移：share your experience of... 后接任意话题，同位语可换成 a skill / a story we'd love to learn。"
+            "note": "委婉请求 + 同位语点明价值。sincerely hope you could... 用情态过去式把请求说得客气；逗号后的同位语 a topic... 解释为何想请对方做这件事。迁移：share your experience of... 后接任意话题，同位语可换成 a skill / a story we'd love to learn。",
+            "lectureAnnotation": { "label": "hope you could... 委婉请求", "note": "先礼貌提出请求，再说明话题价值。", "transferExample": "We hope you could share a skill with our class." }
           },
           {
             "text": "please feel free to suggest another slot that suits you better",
-            "note": "给对方时间/选择余地的得体让步句。please feel free to... 把决定权交给对方，that suits you better 定语从句体现体贴。迁移到任何需对方配合时间/方案的邮件：换成 choose a date / pick a way that suits you better。"
+            "note": "给对方时间/选择余地的得体让步句。please feel free to... 把决定权交给对方，that suits you better 定语从句体现体贴。迁移到任何需对方配合时间/方案的邮件：换成 choose a date / pick a way that suits you better。",
+            "lectureAnnotation": { "label": "feel free to... 留出余地", "note": "把调整权交给对方，邀请更体贴。", "transferExample": "Please feel free to choose a time that suits you." }
           },
           {
             "text": "It would be a great honour to have you join us.",
-            "note": "结尾抬高对方、表达期待的得体收束句。It would be a great honour to... 是面向师长/嘉宾的高分礼貌框架。迁移：to have you join us 可换成 to receive your reply / to work with you，用于邀请、致谢、请求类结尾。"
+            "note": "结尾抬高对方、表达期待的得体收束句。It would be a great honour to... 是面向师长/嘉宾的高分礼貌框架。迁移：to have you join us 可换成 to receive your reply / to work with you，用于邀请、致谢、请求类结尾。",
+            "lectureAnnotation": { "label": "It would be... 礼貌收束", "note": "抬高对方价值，得体表达期待。", "transferExample": "It would be a pleasure to hear from you." }
           }
         ]
       }

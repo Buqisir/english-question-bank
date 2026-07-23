@@ -6,22 +6,46 @@
       "writing": {
         "taskType": "application",
         "modelAnswer": "Dear Chris,\nI'm writing to share with you an art class I had in a park last Friday.\nOur teacher led us to a quiet corner by the lake and let us paint whatever caught our eye. I chose an old willow tree leaning over the water, with a few ducks swimming beneath it. At first I struggled to mix the green, but after trying again and again, I got the soft colour I wanted. When I added the ripples around the ducks, the whole picture came alive.\nPainting outdoors taught me something the classroom never could: I rarely stop to really look at the ordinary things around me. That willow had stood there for years, yet I had walked past it without truly seeing it. How I wish you had been there with me!\nYours,\nLi Hua",
+        "reviewCard": {
+          "form": "分享邮件",
+          "topic": "分享一次公园美术课经历",
+          "reader": "英国朋友 Chris",
+          "person": "第一人称",
+          "tense": "一般过去时为主",
+          "type": "分享类",
+          "points": ["完成的作品", "个人感想"],
+          "readerWho": "英国朋友",
+          "readerCares": "作品画面与经历变化",
+          "readerWants": "具体细节与真实感受",
+          "value": "让朋友看见这次经历，并理解它带来的新发现"
+        },
+        "reviewMarks": [
+          { "grid": "type", "text": "I'm writing to share with you an art class I had in a park last Friday.", "note": "开篇直接交代分享目的、事件和时间。" },
+          { "grid": "cares", "text": "When I added the ripples around the ducks, the whole picture came alive.", "note": "用具体变化让朋友看见作品，不只听到“画得很好”。" },
+          { "grid": "points", "text": "I chose an old willow tree leaning over the water, with a few ducks swimming beneath it.", "note": "先点明画了什么，再补进可见的画面细节。" },
+          { "grid": "tense", "text": "At first I struggled to mix the green, but after trying again and again, I got the soft colour I wanted.", "note": "上周五的经历稳定使用一般过去时。" },
+          { "grid": "points", "text": "Painting outdoors taught me something the classroom never could", "note": "感想从亲身经历中生长，不空喊“学到很多”。" }
+        ],
         "highlightExpressions": [
           {
             "text": "At first I struggled to mix the green, but after trying again and again, I got the soft colour I wanted.",
-            "note": "记叙类应用文的'过程小转折'框架：先点出一处困难，再用 after trying again and again 制造坚持，最后落到结果。把 mix the green / the soft colour 换成任意任务内容（如调试程序、学一道菜、练一个动作），就能让过程有画面、有起伏，避免流水账。"
+            "note": "记叙类应用文的'过程小转折'框架：先点出一处困难，再用 after trying again and again 制造坚持，最后落到结果。把 mix the green / the soft colour 换成任意任务内容（如调试程序、学一道菜、练一个动作），就能让过程有画面、有起伏，避免流水账。",
+            "lectureAnnotation": { "label": "At first... but... 过程转折", "note": "困难—尝试—结果，让经历有起伏。", "transferExample": "At first I struggled, but practice helped." }
           },
           {
             "text": "Painting outdoors taught me something the classroom never could:",
-            "note": "引出'感想/领悟'的高级框架句，比 I learned a lot 高一档。结构是 'X(这件事) taught me something Y(平时的场景) never could:'，冒号后直接说领悟。换成 This trip / The volunteer work taught me something textbooks never could 即可迁移到任何'分享经历+谈收获'的题。"
+            "note": "引出'感想/领悟'的高级框架句，比 I learned a lot 高一档。结构是 'X(这件事) taught me something Y(平时的场景) never could:'，冒号后直接说领悟。换成 This trip / The volunteer work taught me something textbooks never could 即可迁移到任何'分享经历+谈收获'的题。",
+            "lectureAnnotation": { "label": "经历 + taught me... 引出感想", "note": "用经历作主语，自然带出真正收获。", "transferExample": "The visit taught me to notice small things." }
           },
           {
             "text": "That willow had stood there for years, yet I had walked past it without truly seeing it.",
-            "note": "用过去完成时 + yet 做对比，写'它一直在那儿、我却一直忽略'的反思，让感想从具体事物里长出来而不空泛。框架 'X had been there ..., yet I had ... without ...' 可迁移到任何'习以为常却被重新看见'的领悟。"
+            "note": "用过去完成时 + yet 做对比，写'它一直在那儿、我却一直忽略'的反思，让感想从具体事物里长出来而不空泛。框架 'X had been there ..., yet I had ... without ...' 可迁移到任何'习以为常却被重新看见'的领悟。",
+            "lectureAnnotation": { "label": "had done..., yet... 前后对照", "note": "过去完成时对照“早已存在”和“曾经忽略”。", "transferExample": "The tree had stood there, yet I had not noticed it." }
           },
           {
             "text": "How I wish you had been there with me!",
-            "note": "分享类邮件写给朋友的亲切结尾：wish + 过去完成虚拟语气，表达'真希望你也在'，自然拉近关系、邀请对方共情。换成 How I wish you could have seen it! 等即可用于一切向朋友分享经历的收尾，是得体、够得着的选择性必修级亮点（不堆砌、只用这一处）。"
+            "note": "分享类邮件写给朋友的亲切结尾：wish + 过去完成虚拟语气，表达'真希望你也在'，自然拉近关系、邀请对方共情。换成 How I wish you could have seen it! 等即可用于一切向朋友分享经历的收尾，是得体、够得着的选择性必修级亮点（不堆砌、只用这一处）。",
+            "lectureAnnotation": { "label": "How I wish... 分享式收尾", "note": "用愿望拉近朋友距离，亲切不生硬。", "transferExample": "How I wish you had seen it with me!" }
           }
         ]
       }

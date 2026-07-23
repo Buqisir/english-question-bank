@@ -78,18 +78,9 @@ import {
   type SevenChoicesSurfaceModel,
   type ReviewedSevenChoicesAnalysisV1,
 } from '../paper-intelligence/sevenChoicesSurfaceAdapter.ts'
-import {
-  buildClozePaperView,
-  type ClozePaperViewModel,
-} from '../paper-intelligence/clozePaperViewAdapter.ts'
-import {
-  buildGrammarFillPaperView,
-  type GrammarFillPaperViewModel,
-} from '../paper-intelligence/grammarFillPaperViewAdapter.ts'
-import {
-  buildWritingPaperView,
-  type WritingPaperViewModel,
-} from '../paper-intelligence/writingPaperViewAdapter.ts'
+import { buildClozePaperView, type ClozePaperViewModel } from '../paper-intelligence/clozePaperViewAdapter.ts'
+import { buildGrammarFillPaperView, type GrammarFillPaperViewModel } from '../paper-intelligence/grammarFillPaperViewAdapter.ts'
+import { buildWritingPaperView, type WritingPaperViewModel } from '../paper-intelligence/writingPaperViewAdapter.ts'
 import {
   buildClozeAnalysisSurfaceModel,
   type ClozeAnalysisSurfaceModel,
@@ -107,27 +98,20 @@ import { PaperAssetAnalysisPanel } from '../paper-intelligence/PaperAssetAnalysi
 import { ClozeAnalysisPanel } from '../paper-intelligence/ClozeAnalysisPanel'
 import { GrammarFillAnalysisPanel } from '../paper-intelligence/GrammarFillAnalysisPanel'
 import { WritingAnalysisPanel } from '../paper-intelligence/WritingAnalysisPanel'
+import { WritingAnswerBoxReview, isPublishedWritingLecture } from './WritingAnswerBoxReview'
+import { WritingReviewAnnotationStage } from './WritingReviewAnnotationStage'
 // 刀 2 修复轮 ③: 阅读跨栏证据动线 —— import-only 复用解析页 harness 同款
 // 组件（见 PaperIntelligencePaperSurfaceHarness.tsx ~1567 行的接线），零
 // 修改。只对阅读题组接入（卷面显影原则：完形/语法填空原位型只给证据高亮，
 // 七选五混血用衔接句高亮，均不做动线——见 plan.md「卷面显影原则」）。
 import { PaperIntelligenceEvidenceLine } from '../paper-intelligence/preview/paperIntelligenceEvidenceLine'
 import '../paper-intelligence/paperIntelligence.css'
-import type {
-  AnswerKeyEntry,
-  PaperAssetV1,
-  PaperContentBlock,
-  PaperContentGroup,
-  WritingAnalysis,
-} from '../../domain/paperAsset.ts'
+import type { AnswerKeyEntry, PaperAssetV1, PaperContentBlock, PaperContentGroup, WritingAnalysis } from '../../domain/paperAsset.ts'
 import type { QuestionGroupCard } from '../../domain/questionBank'
 import type { LectureFocus, PaperSurfaceFocusIntent } from '../../../../shared/papersurface/types'
 import { fetchSimilarPassages, fetchSimilarQuestions } from '../../services/similarQuestions.ts'
 import { scrollBehavior } from '../shared/reducedMotionScroll.ts'
-import {
-  SimilarQuestionsRailView,
-  type SimilarRailRequestState,
-} from './SimilarQuestionsRailView'
+import { SimilarQuestionsRailView, type SimilarRailRequestState } from './SimilarQuestionsRailView'
 import './paperBrowsePage.css'
 
 type GroupModel =
@@ -316,11 +300,11 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
   // 才翻开（会闪一下挑题态）。
   const [lectureOpen, setLectureOpen] = useState(() => Boolean(lecture))
   // 刀 2: 讲评态首次打开时按需补拉的 cloze/grammarFill/writing 解析。
-  const [lectureAnalysisByGroupId, setLectureAnalysisByGroupId] = useState<
-    Record<string, LectureAnalysisEntry>
-  >({})
+  const [lectureAnalysisByGroupId, setLectureAnalysisByGroupId] = useState<Record<string, LectureAnalysisEntry>>({})
   const [lectureAnalysisFetched, setLectureAnalysisFetched] = useState(false)
   const [lectureAnalysisLoading, setLectureAnalysisLoading] = useState(false)
+  const [activeWritingLectureGroupId, setActiveWritingLectureGroupId] = useState<string | null>(null)
+  const [writingCanvasIsFull, setWritingCanvasIsFull] = useState(false)
   // 刀 2: 讲评态下的显式点题选择；null = 跟随 scrollspy 显示组级概览。
   const [lectureSelection, setLectureSelection] = useState<LectureSelection | null>(null)
   const [openSevenChoiceQuestionIds, setOpenSevenChoiceQuestionIds] = useState<string[]>([])
@@ -412,6 +396,23 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     }
   }, [lectureOpen])
 
+  useLayoutEffect(() => {
+    const scroller = scrollerRef.current
+    if (!lectureOpen || !scroller) {
+      setWritingCanvasIsFull(false)
+      return
+    }
+    const measure = () => setWritingCanvasIsFull(Math.abs(scroller.getBoundingClientRect().width - 794) < 0.5)
+    measure()
+    const observer = new ResizeObserver(measure)
+    observer.observe(scroller)
+    return () => observer.disconnect()
+  }, [lectureOpen, asset])
+
+  useEffect(() => {
+    if (!lectureOpen) setActiveWritingLectureGroupId(null)
+  }, [lectureOpen])
+
   // 刀 3: 讲评开合 / 点题选择 → URL replaceState 同步（不产生历史条目——
   // App.tsx 的 pushState 只发生在 openPaperBrowse 本身，页内互动一律
   // replaceState）。关讲评清 lecture/questionId；讲评开着且有显式选题时把
@@ -490,9 +491,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
         const groupBlocks = loadedAsset.content.blocks.filter(
           (block): block is Extract<PaperContentBlock, { type: 'group' }> => block.type === 'group',
         )
-        const groupTypes = new Set(
-          groupBlocks.map((block) => loadedAsset.content.groups[block.groupId]?.groupType),
-        )
+        const groupTypes = new Set(groupBlocks.map((block) => loadedAsset.content.groups[block.groupId]?.groupType))
 
         let readingAnalysis: ReviewedReadingChoiceAnalysisV1 | null = null
         if (groupTypes.has('reading')) {
@@ -523,7 +522,9 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
         try {
           const res = await fetch(`${resolvedBase}/figures/manifest.json`)
           if (res.ok) {
-            const manifest = (await res.json()) as { figures?: PaperFigureManifestEntry[] }
+            const manifest = (await res.json()) as {
+              figures?: PaperFigureManifestEntry[]
+            }
             loadedFigures = Array.isArray(manifest.figures) ? manifest.figures : []
           }
         } catch {
@@ -563,20 +564,32 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
             } else if (group.groupType === 'cloze') {
               models[block.groupId] = {
                 kind: 'cloze',
-                model: buildClozePaperView({ asset: loadedAsset, groupId: block.groupId }),
+                model: buildClozePaperView({
+                  asset: loadedAsset,
+                  groupId: block.groupId,
+                }),
               }
             } else if (group.groupType === 'grammarFill') {
               models[block.groupId] = {
                 kind: 'grammarFill',
-                model: buildGrammarFillPaperView({ asset: loadedAsset, groupId: block.groupId }),
+                model: buildGrammarFillPaperView({
+                  asset: loadedAsset,
+                  groupId: block.groupId,
+                }),
               }
             } else if (group.groupType === 'writing') {
               models[block.groupId] = {
                 kind: 'writing',
-                model: buildWritingPaperView({ asset: loadedAsset, groupId: block.groupId }),
+                model: buildWritingPaperView({
+                  asset: loadedAsset,
+                  groupId: block.groupId,
+                }),
               }
             } else {
-              models[block.groupId] = { kind: 'unsupported', groupType: group.groupType }
+              models[block.groupId] = {
+                kind: 'unsupported',
+                groupType: group.groupType,
+              }
             }
           } catch (e) {
             models[block.groupId] = {
@@ -621,9 +634,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
         (block): block is Extract<PaperContentBlock, { type: 'group' }> => block.type === 'group',
       )
       const groupIdsByType = (groupType: string): string[] =>
-        groupBlocks
-          .map((block) => block.groupId)
-          .filter((groupId) => loadedAsset.content.groups[groupId]?.groupType === groupType)
+        groupBlocks.map((block) => block.groupId).filter((groupId) => loadedAsset.content.groups[groupId]?.groupType === groupType)
 
       const entries: Record<string, LectureAnalysisEntry> = {}
 
@@ -640,7 +651,11 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
             try {
               entries[groupId] = {
                 kind: 'cloze',
-                model: buildClozeAnalysisSurfaceModel({ asset: loadedAsset, analysis: raw, groupId }),
+                model: buildClozeAnalysisSurfaceModel({
+                  asset: loadedAsset,
+                  analysis: raw,
+                  groupId,
+                }),
               }
             } catch {
               entries[groupId] = { kind: 'unavailable' }
@@ -664,7 +679,11 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
             try {
               entries[groupId] = {
                 kind: 'grammarFill',
-                model: buildGrammarFillAnalysisSurfaceModel({ asset: loadedAsset, analysis: raw, groupId }),
+                model: buildGrammarFillAnalysisSurfaceModel({
+                  asset: loadedAsset,
+                  analysis: raw,
+                  groupId,
+                }),
               }
             } catch {
               entries[groupId] = { kind: 'unavailable' }
@@ -709,17 +728,19 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
   useEffect(() => {
     if (focusAppliedRef.current) return
     if (loading || !asset) return
-    const targetGroupId = focusGroupId || (questionId ? asset.content.questions[questionId]?.groupId ?? null : null)
+    const targetGroupId = focusGroupId || (questionId ? (asset.content.questions[questionId]?.groupId ?? null) : null)
     if (!targetGroupId) return
     const scroller = scrollerRef.current
     if (!scroller) return
-    const target = scroller.querySelector<HTMLElement>(
-      `[data-paper-browse-anchor="${cssAttr(targetGroupId)}"]`,
-    )
+    const target = scroller.querySelector<HTMLElement>(`[data-paper-browse-anchor="${cssAttr(targetGroupId)}"]`)
     if (!target) return
     focusAppliedRef.current = true
     suppressScrollspyClear()
-    target.scrollIntoView({ block: 'start', inline: 'nearest', behavior: 'auto' })
+    target.scrollIntoView({
+      block: 'start',
+      inline: 'nearest',
+      behavior: 'auto',
+    })
   }, [focusGroupId, questionId, loading, asset])
 
   // 刀 3: 入口带态的 questionId 预选——asset 加载完成后走
@@ -735,8 +756,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     if (!targetGroupId) return
     const group = asset.content.groups[targetGroupId]
     if (!group) return
-    const needsLectureAnalysis =
-      group.groupType === 'cloze' || group.groupType === 'grammarFill' || group.groupType === 'writing'
+    const needsLectureAnalysis = group.groupType === 'cloze' || group.groupType === 'grammarFill' || group.groupType === 'writing'
     if (needsLectureAnalysis && !lectureAnalysisFetched) return
     deepLinkQuestionAppliedRef.current = true
     // cloze/grammarFill/writing 组等 lectureAnalysisFetched 落地时，可能已
@@ -789,7 +809,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
       groupId: targetGroupId,
       groupTitle: group.title,
       // 篇章模式种子=整个题组，不带题号（CR SW-2）
-      questionNo: deepLinkMode === 'passages' ? null : questionMeta.questionNo ?? null,
+      questionNo: deepLinkMode === 'passages' ? null : (questionMeta.questionNo ?? null),
       groupTypeLabel: SIMILAR_GROUP_TYPE_LABEL[group.groupType] ?? group.groupType,
       recipeSummary: SIMILAR_RECIPE_SUMMARY[group.groupType] ?? '',
     })
@@ -874,7 +894,13 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     // 不变量「静息线集合 == 选中线集合」——节末题组（下一块不是可剪题组
     // 单元）的选中罩下缘在静息时必须有对应淡线，否则选中线凭空出现。
     const bottomLineGroupIndices = new Set<number>()
-    if (!asset) return { scissorGroupIndices, mergedGroupByInstructionIndex, skipIndices, bottomLineGroupIndices }
+    if (!asset)
+      return {
+        scissorGroupIndices,
+        mergedGroupByInstructionIndex,
+        skipIndices,
+        bottomLineGroupIndices,
+      }
     const blocks = asset.content.blocks
 
     const sectionGroupCounts = new Map<string, number>()
@@ -898,7 +924,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
       if (block.type !== 'group') continue
       const group = asset.content.groups[block.groupId]
       if (!group || group.groupType === 'writing') continue
-      const count = sectionId ? sectionGroupCounts.get(sectionId) ?? 0 : 0
+      const count = sectionId ? (sectionGroupCounts.get(sectionId) ?? 0) : 0
       if (count > 1) {
         scissorGroupIndices.add(i)
         continue
@@ -906,7 +932,10 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
       if (count === 1) {
         const prev = blocks[i - 1]
         if (prev && prev.type === 'instruction') {
-          mergedGroupByInstructionIndex.set(i - 1, { groupId: block.groupId, instructionText: prev.text })
+          mergedGroupByInstructionIndex.set(i - 1, {
+            groupId: block.groupId,
+            instructionText: prev.text,
+          })
           skipIndices.add(i)
         } else {
           scissorGroupIndices.add(i)
@@ -938,11 +967,15 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
       const next = blocks[afterIdx]
       const nextHasRestingTopLine =
         next != null &&
-        (next.type === 'instruction' ||
-          (next.type === 'group' && asset.content.groups[next.groupId]?.groupType !== 'writing'))
+        (next.type === 'instruction' || (next.type === 'group' && asset.content.groups[next.groupId]?.groupType !== 'writing'))
       if (!nextHasRestingTopLine) bottomLineGroupIndices.add(i)
     }
-    return { scissorGroupIndices, mergedGroupByInstructionIndex, skipIndices, bottomLineGroupIndices }
+    return {
+      scissorGroupIndices,
+      mergedGroupByInstructionIndex,
+      skipIndices,
+      bottomLineGroupIndices,
+    }
   }, [asset])
 
   // rail scrollspy — highlight the topmost anchor currently visible in the
@@ -960,9 +993,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     if (loading || !asset) return
     const scroller = scrollerRef.current
     if (!scroller) return
-    const anchorEls = Array.from(
-      scroller.querySelectorAll<HTMLElement>('[data-paper-browse-anchor]'),
-    )
+    const anchorEls = Array.from(scroller.querySelectorAll<HTMLElement>('[data-paper-browse-anchor]'))
     if (anchorEls.length === 0) return
     const order = anchorEls.map((el) => el.getAttribute('data-paper-browse-anchor') || '')
     const visible = new Set<string>()
@@ -1021,12 +1052,14 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     if (groupModels[lectureSelection.groupId]?.kind !== 'reading') return
     const scroller = scrollerRef.current
     if (!scroller) return
-    const target = scroller.querySelector<HTMLElement>(
-      `[data-paper-evidence-id="${cssAttr(lectureSelection.evidenceId)}"]`,
-    )
+    const target = scroller.querySelector<HTMLElement>(`[data-paper-evidence-id="${cssAttr(lectureSelection.evidenceId)}"]`)
     if (!target) return
     suppressScrollspyClear()
-    target.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: scrollBehavior() })
+    target.scrollIntoView({
+      block: 'nearest',
+      inline: 'nearest',
+      behavior: scrollBehavior(),
+    })
   }, [lectureOpen, lectureSelection, groupModels])
 
   // rail-panel（owner 拍板 2026-07-15，原型 B「分段面板」胜出——四变体实拍
@@ -1037,7 +1070,12 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
   const railParts = useMemo(() => {
     if (!asset) return []
     type RailGroup = { anchor: string; title: string; range: string }
-    const parts: Array<{ anchor: string; name: string; score: string | null; groups: RailGroup[] }> = []
+    const parts: Array<{
+      anchor: string
+      name: string
+      score: string | null
+      groups: RailGroup[]
+    }> = []
     // 部分标题原文形如「第三部分 语言运用(共两节，满分30分)」：括号段只留
     // 满分数字，前缀「第X部分」剥掉——分值/序数是卷面措辞，不是导航信息。
     const stripParens = (s: string) => s.replace(/[（(][^（()）]*[）)]/g, '').trim()
@@ -1088,10 +1126,11 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
   // 刀 2: 讲评栏的目标题组 —— 显式点题选中的题组优先，否则退回 scrollspy
   // 当前锚点(仅当锚点本身就是一个题组 id 时)。
   const panelGroupId = useMemo(() => {
+    if (activeWritingLectureGroupId) return activeWritingLectureGroupId
     if (lectureSelection) return lectureSelection.groupId
     if (activeAnchor && asset?.content.groups[activeAnchor]) return activeAnchor
     return null
-  }, [lectureSelection, activeAnchor, asset])
+  }, [activeWritingLectureGroupId, lectureSelection, activeAnchor, asset])
 
   // 刀 2: 当前显式选中题的 lectureFocus —— 只喂给 panelGroupId 对应那组的
   // PaperSurface 挂载，其余题组永远拿 null（讲评开着也不跨组高亮）。
@@ -1114,6 +1153,12 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
   // 下与题组容器同款效果（两者都是 viewport-relative，差值不受页面滚动
   // 影响，只随 hook 自身的 resize/effect-dep 重算刷新，见 hook 内部）。
   const panelGroupModel = panelGroupId ? groupModels[panelGroupId] : undefined
+
+  useEffect(() => {
+    if (activeWritingLectureGroupId && activeAnchor && activeAnchor !== activeWritingLectureGroupId) {
+      setActiveWritingLectureGroupId(null)
+    }
+  }, [activeWritingLectureGroupId, activeAnchor])
   const sevenChoiceOverlay = useSevenChoicesPaperHighlights({
     enabled: lectureOpen && panelGroupModel?.kind === 'sevenChoices',
     leftScrollerRef: scrollerRef,
@@ -1138,24 +1183,27 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     if (panelGroupId !== lectureSelection.groupId) return { questionId: null, evidenceId: null, kind: null }
     if (panelGroupModel?.kind !== 'reading') return { questionId: null, evidenceId: null, kind: null }
     const evidenceId = lectureSelection.evidenceId
-    const kind = evidenceId ? panelGroupModel.model.evidenceKindById[evidenceId] ?? null : null
+    const kind = evidenceId ? (panelGroupModel.model.evidenceKindById[evidenceId] ?? null) : null
     return { questionId: lectureSelection.questionId, evidenceId, kind }
   }, [lectureOpen, lectureSelection, panelGroupId, panelGroupModel])
 
   function scrollToAnchor(anchor: string): void {
+    setActiveAnchor(anchor)
+    if (activeWritingLectureGroupId && activeWritingLectureGroupId !== anchor) setActiveWritingLectureGroupId(null)
     const scroller = scrollerRef.current
     if (!scroller) return
     // 每次都从 ref 取活节点：冷加载沉降期 scroller 容器本身也可能被
     // 替换，闭包捕获的旧节点 detached 后 querySelector 永远查空。
-    const queryTarget = () =>
-      scrollerRef.current?.querySelector<HTMLElement>(
-        `[data-paper-browse-anchor="${cssAttr(anchor)}"]`,
-      ) ?? null
+    const queryTarget = () => scrollerRef.current?.querySelector<HTMLElement>(`[data-paper-browse-anchor="${cssAttr(anchor)}"]`) ?? null
     // CR D-MF1：retire-then-replace——先退掉仍在跑的上一轮巡检。
     scrollSettleCancelRef.current?.()
     const target = queryTarget()
     suppressScrollspyClear()
-    target?.scrollIntoView({ block: 'start', inline: 'nearest', behavior: scrollBehavior() })
+    target?.scrollIntoView({
+      block: 'start',
+      inline: 'nearest',
+      behavior: scrollBehavior(),
+    })
     // 留观① QA 定性后按实修（triage 拍板「再现按竞态修」）：两种真实
     // 失效都收——① 冷加载沉降期题组模型异步落地，scrollIntoView 只按
     // 当下位置算一次，目标被后续布局推走；② smooth 滚动动画由渲染帧
@@ -1197,7 +1245,11 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
         stillChecks = Math.abs(top - lastTop) < 1 ? stillChecks + 1 : 0
         lastTop = top
         if (stillChecks >= 3 && Math.abs(top) > 4) {
-          el.scrollIntoView({ block: 'start', inline: 'nearest', behavior: 'auto' })
+          el.scrollIntoView({
+            block: 'start',
+            inline: 'nearest',
+            behavior: 'auto',
+          })
           stillChecks = 0
         }
       }
@@ -1255,7 +1307,12 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
       })
       return
     }
-    setLectureSelection({ groupId, questionId, evidenceId: null, optionLabel: null })
+    setLectureSelection({
+      groupId,
+      questionId,
+      evidenceId: null,
+      optionLabel: null,
+    })
   }
 
   function handleGroupFocusIntent(groupId: string, intent: PaperSurfaceFocusIntent): void {
@@ -1281,10 +1338,16 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     try {
       if (seed.mode === 'passages') {
         const response = await fetchSimilarPassages(seed.groupId)
-        setSimilarRequest({ status: 'ready', data: { kind: 'passages', response } })
+        setSimilarRequest({
+          status: 'ready',
+          data: { kind: 'passages', response },
+        })
       } else {
         const response = await fetchSimilarQuestions(seed.questionId)
-        setSimilarRequest({ status: 'ready', data: { kind: 'questions', response } })
+        setSimilarRequest({
+          status: 'ready',
+          data: { kind: 'questions', response },
+        })
       }
     } catch (error) {
       setSimilarRequest({
@@ -1335,11 +1398,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
       return <div className="paper-browse-placeholder">该题组暂不可预览：{entry.message}</div>
     }
     if (entry.kind === 'unsupported') {
-      return (
-        <div className="paper-browse-placeholder">
-          该题型（{entry.groupType}）本页暂不支持预览。
-        </div>
-      )
+      return <div className="paper-browse-placeholder">该题型（{entry.groupType}）本页暂不支持预览。</div>
     }
 
     // 刀 2: 讲评态里，cloze/grammarFill 若已成功拉到解析，卷面挂载切到
@@ -1404,7 +1463,35 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
       />
     )
     if (entry.kind === 'writing') {
-      return <WritingPaperPage pageModel={entry.model.pageModel}>{surfaceEl}</WritingPaperPage>
+      const lectureEntry = lectureAnalysisByGroupId[groupId]
+      const lectureAnalysis =
+        lectureEntry?.kind === 'writing' && isPublishedWritingLecture(lectureEntry.analysis) ? lectureEntry.analysis : null
+      const available = lectureAnalysis !== null
+      const stageActive =
+        lectureOpen && activeWritingLectureGroupId === groupId && panelGroupId === groupId && available && writingCanvasIsFull
+      const status = !lectureAnalysisFetched ? 'loading' : available ? 'available' : 'unavailable'
+      return (
+        <WritingPaperPage
+          pageModel={entry.model.pageModel}
+          answerBoxContent={
+            stageActive && lectureAnalysis ? (
+              <WritingReviewAnnotationStage analysis={lectureAnalysis} />
+            ) : (
+              <WritingAnswerBoxReview
+                status={status}
+                onOpen={() => {
+                  setActiveAnchor(groupId)
+                  setActiveWritingLectureGroupId(groupId)
+                  setLectureOpen(true)
+                  scrollToAnchor(groupId)
+                }}
+              />
+            )
+          }
+        >
+          {surfaceEl}
+        </WritingPaperPage>
+      )
     }
     return surfaceEl
   }
@@ -1429,25 +1516,22 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
   function renderGroupCard(
     groupId: string,
     index: number,
-    options?: { mergedInstructionText?: string; showScissorLine?: boolean; showBottomScissorLine?: boolean },
+    options?: {
+      mergedInstructionText?: string
+      showScissorLine?: boolean
+      showBottomScissorLine?: boolean
+    },
   ): ReactNode {
     const group = asset?.content.groups[groupId]
     const entry = groupModels[groupId]
     const card = questionGroupById.get(groupId)
     // 写作卡的选中罩上缘另行定位（--pb-writing-cut-top，见上方量高 effect
     // 与 paperBrowsePage.css），用 modifier class 圈出来。
-    const cardClassName =
-      entry?.kind === 'writing'
-        ? 'paper-browse-group-card paper-browse-group-card--writing'
-        : 'paper-browse-group-card'
+    const cardClassName = entry?.kind === 'writing' ? 'paper-browse-group-card paper-browse-group-card--writing' : 'paper-browse-group-card'
 
     return (
       <Fragment key={`group-${index}`}>
-        <section
-          className={cardClassName}
-          data-paper-browse-anchor={groupId}
-          aria-label={group?.title || groupId}
-        >
+        <section className={cardClassName} data-paper-browse-anchor={groupId} aria-label={group?.title || groupId}>
           {card && (
             <div className="paper-browse-group-actions">
               <button
@@ -1455,11 +1539,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
                 className="add-button"
                 onClick={() => onAddGroupsToBasket([card])}
                 disabled={card.draftPaperButtonState === 'disabled'}
-                title={
-                  card.draftPaperButtonState === 'disabled'
-                    ? card.printUnavailableReason || '暂不可组卷'
-                    : undefined
-                }
+                title={card.draftPaperButtonState === 'disabled' ? card.printUnavailableReason || '暂不可组卷' : undefined}
               >
                 {card.draftPaperButtonState === 'in_current_draft'
                   ? '已在草稿卷中'
@@ -1476,9 +1556,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
             <div className="paper-browse-scissor-line paper-browse-scissor-line--bottom" aria-hidden="true" />
           )}
           {options?.mergedInstructionText && (
-            <p className="paper-browse-instruction paper-browse-instruction--merged">
-              {options.mergedInstructionText}
-            </p>
+            <p className="paper-browse-instruction paper-browse-instruction--merged">{options.mergedInstructionText}</p>
           )}
           {renderGroupBody(groupId, entry)}
         </section>
@@ -1527,7 +1605,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     }
 
     if (group.groupType === 'reading' && entry?.kind === 'reading') {
-      const analysis = activeQuestionId ? entry.model.analysisByQuestionId[activeQuestionId] ?? null : null
+      const analysis = activeQuestionId ? (entry.model.analysisByQuestionId[activeQuestionId] ?? null) : null
       return (
         <PaperAssetAnalysisPanel
           analysis={analysis}
@@ -1542,9 +1620,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
 
     if (group.groupType === 'cloze') {
       if (lectureEntry?.kind === 'cloze') {
-        const analysis = activeQuestionId
-          ? lectureEntry.model.analysisByQuestionId[activeQuestionId] ?? null
-          : null
+        const analysis = activeQuestionId ? (lectureEntry.model.analysisByQuestionId[activeQuestionId] ?? null) : null
         return (
           <ClozeAnalysisPanel
             analysis={analysis}
@@ -1555,16 +1631,12 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
           />
         )
       }
-      return (
-        <p className="paper-browse-lecture-empty">{lectureAnalysisLoading ? '解析加载中…' : '解析未发布'}</p>
-      )
+      return <p className="paper-browse-lecture-empty">{lectureAnalysisLoading ? '解析加载中…' : '解析未发布'}</p>
     }
 
     if (group.groupType === 'grammarFill') {
       if (lectureEntry?.kind === 'grammarFill') {
-        const analysis = activeQuestionId
-          ? lectureEntry.model.analysisByQuestionId[activeQuestionId] ?? null
-          : null
+        const analysis = activeQuestionId ? (lectureEntry.model.analysisByQuestionId[activeQuestionId] ?? null) : null
         return (
           <GrammarFillAnalysisPanel
             analysis={analysis}
@@ -1575,18 +1647,26 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
           />
         )
       }
-      return (
-        <p className="paper-browse-lecture-empty">{lectureAnalysisLoading ? '解析加载中…' : '解析未发布'}</p>
-      )
+      return <p className="paper-browse-lecture-empty">{lectureAnalysisLoading ? '解析加载中…' : '解析未发布'}</p>
     }
 
     if (group.groupType === 'writing') {
       if (lectureEntry?.kind === 'writing') {
+        if (isPublishedWritingLecture(lectureEntry.analysis)) {
+          const card = lectureEntry.analysis.reviewCard!
+          return (
+            <div className="awl-review-card">
+              <p>审题卡</p>
+              <strong>{card.type}</strong>
+              <span>{card.readerCares}</span>
+              <span>{card.tense}</span>
+              <span>{card.points.join(' · ')}</span>
+            </div>
+          )
+        }
         return <WritingAnalysisPanel analysis={lectureEntry.analysis} />
       }
-      return (
-        <p className="paper-browse-lecture-empty">{lectureAnalysisLoading ? '解析加载中…' : '解析未发布'}</p>
-      )
+      return <p className="paper-browse-lecture-empty">{lectureAnalysisLoading ? '解析加载中…' : '解析未发布'}</p>
     }
 
     return <p className="paper-browse-lecture-empty">解析未发布</p>
@@ -1633,9 +1713,9 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     const range = buildGroupRangeLabel(asset, group)
     const answerRow = buildAnswerRowText(asset, group)
     const hasActiveQuestion = Boolean(lectureSelection && lectureSelection.groupId === groupId)
-    const activeQuestionId = hasActiveQuestion ? lectureSelection?.questionId ?? null : null
-    const activeEvidenceId = hasActiveQuestion ? lectureSelection?.evidenceId ?? null : null
-    const activeOptionLabel = hasActiveQuestion ? lectureSelection?.optionLabel ?? null : null
+    const activeQuestionId = hasActiveQuestion ? (lectureSelection?.questionId ?? null) : null
+    const activeEvidenceId = hasActiveQuestion ? (lectureSelection?.evidenceId ?? null) : null
+    const activeOptionLabel = hasActiveQuestion ? (lectureSelection?.optionLabel ?? null) : null
     return (
       <div className="paper-browse-lecture-body">
         <h4 className="paper-browse-lecture-title">
@@ -1667,7 +1747,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
               onClick={() => {
                 const mode = SIMILAR_PASSAGES_MODE_GROUP_TYPES.has(group.groupType) ? 'passages' : 'questions'
                 // 篇章模式种子=整个题组，不带题号（CR SW-2）
-                const questionNo = mode === 'passages' ? null : asset.content.questions[activeQuestionId]?.questionNo ?? null
+                const questionNo = mode === 'passages' ? null : (asset.content.questions[activeQuestionId]?.questionNo ?? null)
                 handleSimilarCtaClick({
                   mode,
                   questionId: activeQuestionId,
@@ -1692,21 +1772,13 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     switch (block.type) {
       case 'partHeading':
         return (
-          <h2
-            key={`part-${index}`}
-            className="paper-browse-part-heading"
-            data-paper-browse-anchor={block.partId}
-          >
+          <h2 key={`part-${index}`} className="paper-browse-part-heading" data-paper-browse-anchor={block.partId}>
             {block.text}
           </h2>
         )
       case 'sectionHeading':
         return (
-          <h3
-            key={`section-${index}`}
-            className="paper-browse-section-heading"
-            data-paper-browse-anchor={block.sectionId}
-          >
+          <h3 key={`section-${index}`} className="paper-browse-section-heading" data-paper-browse-anchor={block.sectionId}>
             {block.text}
           </h3>
         )
@@ -1775,15 +1847,10 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     <div className="paper-browse-page">
       <AppTopbar {...shellNav} pageTitle={asset.paper.title} onBack={onBackToWorkbench} />
       <div
-        className={`paper-browse-shell${
-          lectureOpen ? ' paper-browse-shell--lecture-open' : ''
-        }`}
+        className={`paper-browse-shell${lectureOpen ? ' paper-browse-shell--lecture-open' : ''}`}
         ref={shellRef}
       >
-        <nav
-          className={`paper-browse-rail${lectureOpen ? ' paper-browse-rail--compact' : ''}`}
-          aria-label="目录"
-        >
+        <nav className={`paper-browse-rail${lectureOpen ? ' paper-browse-rail--compact' : ''}`} aria-label="目录">
           {lectureOpen ? (
             // 讲评态 rail 收窄给卷面让宽：只留题组项（题号区间），部分头
             // 隐去；完整名走 title tooltip。卡片语言与挑题态同款（owner
@@ -1816,11 +1883,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
                 <div key={part.anchor} className="paper-browse-rail-part">
                   {part.name && (
                     <div className="paper-browse-rail-part-head">
-                      <button
-                        type="button"
-                        className="paper-browse-rail-part-name"
-                        onClick={() => scrollToAnchor(part.anchor)}
-                      >
+                      <button type="button" className="paper-browse-rail-part-name" onClick={() => scrollToAnchor(part.anchor)}>
                         {part.name}
                       </button>
                       {part.score && <span className="paper-browse-rail-part-score">{part.score}</span>}
@@ -1832,9 +1895,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
                       <button
                         key={g.anchor}
                         type="button"
-                        className={`paper-browse-rail-group${
-                          isActive ? ' paper-browse-rail-group--active' : ''
-                        }`}
+                        className={`paper-browse-rail-group${isActive ? ' paper-browse-rail-group--active' : ''}`}
                         aria-current={isActive ? 'true' : undefined}
                         onClick={() => scrollToAnchor(g.anchor)}
                       >
@@ -1850,9 +1911,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
         </nav>
         <div className="paper-browse-content" ref={scrollerRef} style={paperBrowseContentStyle}>
           {asset.content.blocks.map((block, index) =>
-            writingSkipIndices.has(index) || scissorPlan.skipIndices.has(index)
-              ? null
-              : renderBlock(block, index),
+            writingSkipIndices.has(index) || scissorPlan.skipIndices.has(index) ? null : renderBlock(block, index),
           )}
           {/*
             刀 2 修复轮 ②: 七选五衔接句高亮覆盖层。渲染条件与 hook 的
@@ -1919,9 +1978,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
       <button
         type="button"
         ref={lectureHandleRef}
-        className={`paper-browse-lecture-handle${
-          lectureOpen ? ' paper-browse-lecture-handle--open' : ''
-        }`}
+        className={`paper-browse-lecture-handle${lectureOpen ? ' paper-browse-lecture-handle--open' : ''}`}
         onClick={() => setLectureOpen((open) => !open)}
         aria-pressed={lectureOpen}
         aria-expanded={lectureOpen}

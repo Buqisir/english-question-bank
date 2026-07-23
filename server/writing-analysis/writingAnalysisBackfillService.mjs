@@ -25,7 +25,7 @@ const WRITING_ANALYSIS_SCHEMA_VERSION = 'writing-analysis-v1'
 // Path to guokao-vocab-checker skill check.py
 const VOCAB_CHECKER_SCRIPT = path.join(
   process.env.HOME || process.env.USERPROFILE || '',
-  '.claude/skills/guokao-vocab-checker/scripts/check.py'
+  '.claude/skills/guokao-vocab-checker/scripts/check.py',
 )
 
 // ─── normalize helpers ───────────────────────────────────────────────────────
@@ -49,7 +49,67 @@ function normalizeForSubstring(s) {
 // ─── count words (rough: split on whitespace) ───────────────────────────────
 
 function wordCount(text) {
-  return String(text || '').trim().split(/\s+/).filter(Boolean).length
+  return String(text || '')
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean).length
+}
+
+function hasLiteralLogicalLineAnchor(modelAnswer, text) {
+  return typeof text === 'string' && text.length > 0 && modelAnswer.split(/\r?\n/).some((line) => line.includes(text))
+}
+
+function isPlainSingleLine(value, maxCodePoints) {
+  if (typeof value !== 'string' || !value || value !== value.trim()) return false
+  if (/\r|\n|<[^>]*>|[`*_\[\]]/.test(value)) return false
+  return [...value].length <= maxCodePoints
+}
+
+function assertApplicationLecturePayload(candidate) {
+  const hasAnyV3Field =
+    candidate.reviewCard !== undefined ||
+    candidate.reviewMarks !== undefined ||
+    candidate.highlightExpressions.some((item) => item?.lectureAnnotation !== undefined)
+  if (!hasAnyV3Field) return
+
+  const card = candidate.reviewCard
+  if (!card || typeof card !== 'object') throw new Error('application reviewCard is missing or malformed.')
+  const cardKeys = ['form', 'topic', 'reader', 'person', 'tense', 'type', 'readerWho', 'readerCares', 'readerWants', 'value']
+  for (const key of cardKeys) {
+    if (typeof card[key] !== 'string' || !card[key].trim()) throw new Error(`reviewCard.${key} is empty or missing.`)
+  }
+  if (!Array.isArray(card.points) || card.points.length !== 2 || card.points.some((point) => typeof point !== 'string' || !point.trim())) {
+    throw new Error('reviewCard.points must contain exactly two non-empty items.')
+  }
+
+  const marks = candidate.reviewMarks
+  const grids = ['type', 'cares', 'points', 'tense', 'points']
+  if (!Array.isArray(marks) || marks.length !== grids.length) throw new Error('reviewMarks must contain exactly five marks.')
+  marks.forEach((mark, index) => {
+    if (!mark || mark.grid !== grids[index]) throw new Error(`reviewMarks[${index}] must use grid ${grids[index]}.`)
+    if (typeof mark.note !== 'string' || !mark.note.trim()) throw new Error(`reviewMarks[${index}].note is empty or missing.`)
+    if (!hasLiteralLogicalLineAnchor(candidate.modelAnswer, mark.text)) {
+      throw new Error(`reviewMarks[${index}].text must be a literal logical-line anchor.`)
+    }
+  })
+
+  const annotated = candidate.highlightExpressions.filter((item) => item?.lectureAnnotation !== undefined)
+  if (annotated.length !== 4) throw new Error('application lecture payload requires exactly four highlight annotations.')
+  annotated.forEach((item, index) => {
+    const annotation = item.lectureAnnotation
+    if (
+      !annotation ||
+      typeof annotation !== 'object' ||
+      !isPlainSingleLine(annotation.label, 24) ||
+      !isPlainSingleLine(annotation.note, 28) ||
+      (annotation.transferExample !== undefined && !isPlainSingleLine(annotation.transferExample, 52))
+    ) {
+      throw new Error(`highlightExpressions lectureAnnotation ${index} is malformed.`)
+    }
+    if (!hasLiteralLogicalLineAnchor(candidate.modelAnswer, item.text)) {
+      throw new Error(`highlightExpressions lectureAnnotation ${index} must use a literal logical-line anchor.`)
+    }
+  })
 }
 
 // ─── listWritingAnalysisWork ─────────────────────────────────────────────────
@@ -152,7 +212,7 @@ export function runVocabGate({ textToCheck, allowlistText }) {
   if (!existsSync(VOCAB_CHECKER_SCRIPT)) {
     throw new Error(
       `[vocab-gate] FAIL-HARD: guokao-vocab-checker skill not found at ${VOCAB_CHECKER_SCRIPT}. ` +
-      `Ensure the skill is installed before running the vocab gate. Never silent-pass.`
+        `Ensure the skill is installed before running the vocab gate. Never silent-pass.`,
     )
   }
 
@@ -222,9 +282,17 @@ if suspect:
     return { clean, genuineOov, suspect, raw: raw.trim() }
   } finally {
     for (const f of [textFile, allowlistFile]) {
-      try { rmSync(f, { force: true }) } catch { /* ignore */ }
+      try {
+        rmSync(f, { force: true })
+      } catch {
+        /* ignore */
+      }
     }
-    try { rmSync(path.join(tmpDir, `${tmpId}.gate.py`), { force: true }) } catch { /* ignore */ }
+    try {
+      rmSync(path.join(tmpDir, `${tmpId}.gate.py`), { force: true })
+    } catch {
+      /* ignore */
+    }
   }
 }
 
@@ -273,6 +341,13 @@ export function validateWritingAnalysisCandidate(candidate) {
 
   // Hard: continuation-specific structural checks (MF-1)
   if (candidate.taskType === 'continuation') {
+    if (
+      candidate.reviewCard !== undefined ||
+      candidate.reviewMarks !== undefined ||
+      candidate.highlightExpressions.some((item) => item?.lectureAnnotation !== undefined)
+    ) {
+      throw new Error('continuation payload must not contain application lecture fields.')
+    }
     const cd = candidate.continuationDesign
     if (!cd || typeof cd !== 'object') {
       throw new Error('continuationDesign is missing or not an object.')
@@ -284,9 +359,7 @@ export function validateWritingAnalysisCandidate(candidate) {
       throw new Error('continuationDesign.paragraphs must be an array.')
     }
     if (cd.paragraphs.length !== 2) {
-      throw new Error(
-        `continuationDesign.paragraphs must have exactly 2 items, got ${cd.paragraphs.length}.`
-      )
+      throw new Error(`continuationDesign.paragraphs must have exactly 2 items, got ${cd.paragraphs.length}.`)
     }
     for (let i = 0; i < 2; i++) {
       if (!cd.paragraphs[i] || typeof cd.paragraphs[i] !== 'string' || !cd.paragraphs[i].trim()) {
@@ -322,24 +395,22 @@ export function validateWritingAnalysisCandidate(candidate) {
       throw new Error(
         `highlightExpressions[${i}].text not found in modelAnswer after normalization.\n` +
           `  text:   ${JSON.stringify(item.text)}\n` +
-          `  answer: ${JSON.stringify(candidate.modelAnswer).slice(0, 200)}`
+          `  answer: ${JSON.stringify(candidate.modelAnswer).slice(0, 200)}`,
       )
     }
   }
+
+  if (candidate.taskType === 'application') assertApplicationLecturePayload(candidate)
 
   // Soft: word count warning (SW-2: continuation floor = 120, application floor = 60)
   const wc = wordCount(candidate.modelAnswer)
   if (candidate.taskType === 'continuation') {
     if (wc < 120 || wc > 200) {
-      console.warn(
-        `[writing-analysis] WARNING: continuation modelAnswer word count ${wc} is outside expected range [120, 200].`
-      )
+      console.warn(`[writing-analysis] WARNING: continuation modelAnswer word count ${wc} is outside expected range [120, 200].`)
     }
   } else {
     if (wc < 60 || wc > 180) {
-      console.warn(
-        `[writing-analysis] WARNING: application modelAnswer word count ${wc} is outside expected range [60, 180].`
-      )
+      console.warn(`[writing-analysis] WARNING: application modelAnswer word count ${wc} is outside expected range [60, 180].`)
     }
   }
 }
@@ -398,19 +469,30 @@ export function persistWritingAnalysisGroup({ paperAssetsDir }, work, analysis) 
       modelAnswer: analysis.modelAnswer,
       continuationDesign: {
         theme: analysis.continuationDesign.theme,
-        paragraphs: [
-          analysis.continuationDesign.paragraphs[0],
-          analysis.continuationDesign.paragraphs[1],
-        ],
+        paragraphs: [analysis.continuationDesign.paragraphs[0], analysis.continuationDesign.paragraphs[1]],
       },
       highlightExpressions: analysis.highlightExpressions.map(({ text, note }) => ({ text, note })),
     }
   } else {
-    // application: original three-field projection
+    // Application keeps the original outer analysis fields and, when present,
+    // transports the complete v3 lecture object without re-authoring it.
     writingEntry = {
       taskType: analysis.taskType,
       modelAnswer: analysis.modelAnswer,
-      highlightExpressions: analysis.highlightExpressions.map(({ text, note }) => ({ text, note })),
+      highlightExpressions: analysis.highlightExpressions.map(({ text, note, lectureAnnotation }) => ({
+        text,
+        note,
+        ...(lectureAnnotation ? { lectureAnnotation: { ...lectureAnnotation } } : {}),
+      })),
+      ...(analysis.reviewCard
+        ? {
+            reviewCard: {
+              ...analysis.reviewCard,
+              points: [...analysis.reviewCard.points],
+            },
+          }
+        : {}),
+      ...(analysis.reviewMarks ? { reviewMarks: analysis.reviewMarks.map((mark) => ({ ...mark })) } : {}),
     }
   }
 

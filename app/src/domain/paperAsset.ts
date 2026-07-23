@@ -248,6 +248,8 @@ export type ApplicationWritingAnalysis = {
   taskType: 'application'
   modelAnswer: string
   highlightExpressions: HighlightExpression[]
+  reviewCard?: ReviewCard
+  reviewMarks?: ReviewMark[]
 }
 
 export type ContinuationWritingAnalysis = {
@@ -265,6 +267,33 @@ export type ContinuationDesign = {
 export type HighlightExpression = {
   text: string
   note: string
+  lectureAnnotation?: LectureAnnotation
+}
+
+export type ReviewCard = {
+  form: string
+  topic: string
+  reader: string
+  person: string
+  tense: string
+  type: string
+  points: [string, string]
+  readerWho: string
+  readerCares: string
+  readerWants: string
+  value: string
+}
+
+export type ReviewMark = {
+  grid: 'type' | 'tense' | 'points' | 'cares' | 'wants'
+  text: string
+  note: string
+}
+
+export type LectureAnnotation = {
+  label: string
+  note: string
+  transferExample?: string
 }
 
 // ─── Group Analysis ─────────────────────────────────────────────────────────────
@@ -303,15 +332,7 @@ export type SkillClassification = {
   secondary?: 'inference'
 }
 
-export type ReadingSkillPrimary =
-  | 'detail'
-  | 'inference'
-  | 'mainIdea'
-  | 'wordMeaning'
-  | 'authorPurpose'
-  | 'attitude'
-  | 'title'
-  | 'structure'
+export type ReadingSkillPrimary = 'detail' | 'inference' | 'mainIdea' | 'wordMeaning' | 'authorPurpose' | 'attitude' | 'title' | 'structure'
 
 // ─── Option Analysis ────────────────────────────────────────────────────────────
 
@@ -333,19 +354,9 @@ export type CorrectOptionEvidence = {
 
 // ─── Trap Diagnosis ─────────────────────────────────────────────────────────────
 
-export type TrapDiagnosis =
-  | SourceLexicalTrap
-  | PolarityReversal
-  | ScopeShift
-  | EntityMismatch
-  | UnsupportedClaim
+export type TrapDiagnosis = SourceLexicalTrap | PolarityReversal | ScopeShift | EntityMismatch | UnsupportedClaim
 
-export type TrapPrimaryType =
-  | 'sourceLexicalTrap'
-  | 'polarityReversal'
-  | 'scopeShift'
-  | 'entityMismatch'
-  | 'unsupportedClaim'
+export type TrapPrimaryType = 'sourceLexicalTrap' | 'polarityReversal' | 'scopeShift' | 'entityMismatch' | 'unsupportedClaim'
 
 /**
  * r2-trap-audit — 摘牌机制（纯增量字段，2026-07-16）。机审判定为
@@ -373,12 +384,7 @@ export type SourceLexicalTrap = {
 }
 
 export type PolarityReversalSubtype =
-  | 'oppositeAction'
-  | 'oppositeAttitude'
-  | 'oppositeTrend'
-  | 'causeEffectReversal'
-  | 'timeOrderReversal'
-  | 'negationReversal'
+  'oppositeAction' | 'oppositeAttitude' | 'oppositeTrend' | 'causeEffectReversal' | 'timeOrderReversal' | 'negationReversal'
 
 export type PolarityReversal = {
   primaryType: 'polarityReversal'
@@ -392,11 +398,7 @@ export type PolarityReversal = {
   suspension?: TrapSuspension
 }
 
-export type ScopeShiftSubtype =
-  | 'overgeneralization'
-  | 'overstatement'
-  | 'understatement'
-  | 'conditionRemoved'
+export type ScopeShiftSubtype = 'overgeneralization' | 'overstatement' | 'understatement' | 'conditionRemoved'
 
 export type ScopeShift = {
   primaryType: 'scopeShift'

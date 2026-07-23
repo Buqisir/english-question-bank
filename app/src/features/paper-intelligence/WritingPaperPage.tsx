@@ -36,22 +36,40 @@ const writingPageTokenStyle: WritingPageStyle = {
 export function WritingPaperPage({
   pageModel,
   children,
+  answerBoxContent,
 }: {
   pageModel: WritingPageModel
   children: ReactNode
+  answerBoxContent?: ReactNode
 }) {
   return (
     <div className="pi-writing-page" data-pi-writing-page="" style={writingPageTokenStyle}>
       {pageModel.blocks.map((block, index) => {
         switch (block.kind) {
           case 'partHeading':
-            return <h2 key={index} className="pi-writing-part">{block.text}</h2>
+            return (
+              <h2 key={index} className="pi-writing-part">
+                {block.text}
+              </h2>
+            )
           case 'sectionHeading':
-            return <h3 key={index} className="pi-writing-section">{block.text}</h3>
+            return (
+              <h3 key={index} className="pi-writing-section">
+                {block.text}
+              </h3>
+            )
           case 'instruction':
-            return <p key={index} className="pi-writing-instruction">{block.text}</p>
+            return (
+              <p key={index} className="pi-writing-instruction">
+                {block.text}
+              </p>
+            )
           case 'passage':
-            return <div key={index} className="pi-writing-passage">{children}</div>
+            return (
+              <div key={index} className="pi-writing-passage">
+                {children}
+              </div>
+            )
           case 'answerBox':
             return (
               <div
@@ -59,17 +77,25 @@ export function WritingPaperPage({
                 className={block.givenBottom.length > 0 ? 'pi-writing-answer-box pi-writing-answer-box--letter' : 'pi-writing-answer-box'}
                 aria-label={block.label}
               >
-                <div className="pi-writing-answer-top">
-                  {block.givenTop.map((line, lineIndex) => (
-                    <p key={`t${lineIndex}`} className="pi-writing-answer-given">{line}</p>
-                  ))}
-                </div>
-                {block.givenBottom.length > 0 && (
-                  <div className="pi-writing-answer-bottom">
-                    {block.givenBottom.map((line, lineIndex) => (
-                      <p key={`b${lineIndex}`} className="pi-writing-answer-given pi-writing-answer-given--tight">{line}</p>
-                    ))}
-                  </div>
+                {answerBoxContent ?? (
+                  <>
+                    <div className="pi-writing-answer-top">
+                      {block.givenTop.map((line, lineIndex) => (
+                        <p key={`t${lineIndex}`} className="pi-writing-answer-given">
+                          {line}
+                        </p>
+                      ))}
+                    </div>
+                    {block.givenBottom.length > 0 && (
+                      <div className="pi-writing-answer-bottom">
+                        {block.givenBottom.map((line, lineIndex) => (
+                          <p key={`b${lineIndex}`} className="pi-writing-answer-given pi-writing-answer-given--tight">
+                            {line}
+                          </p>
+                        ))}
+                      </div>
+                    )}
+                  </>
                 )}
               </div>
             )
