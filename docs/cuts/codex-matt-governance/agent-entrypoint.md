@@ -102,7 +102,22 @@ Historical relay records live in `relay-history.md` and are non-authoritative.
 - Scope: `bind real exit-code evidence to the exact Fix DEV head only`
 - Forbidden: `implementation, README changes, verifier/governance changes, product/runtime, production, and wt-applied-writing-lecture`
 
+## CR dispatch
+
+- Dispatch id: `codex-matt-governance-readme-ci-fix-cr-20260722-01`
+- State: `dispatch-pending`
+- Role: `fresh CR`
+- Configured model: `gpt-5.6-sol`
+- Requested thinking: `high`
+- Availability source: `Codex create_thread capability on local host`
+- Supported-thinking evidence: `gpt-5.6-sol supports high`
+- Eligibility proof: `configured primary is the sole same-family/same-grade candidate`
+- Substitution reason: `none`
+- Scope: `cold-read the README CI registry parity fix and exact-head verification evidence`
+- Forbidden: `implementation, README changes, verifier/governance changes, product/runtime, production, and wt-applied-writing-lecture`
+
 ## Next Action
 
-1. Record and provision exactly one fresh CR successor, then release the
-   verification-final commit under the write-held protocol.
+1. Create exactly one top-level fresh CR successor, record its ready-held
+   proof in the predecessor-final release commit, release that exact commit,
+   then end this verification task without awaiting the result.
