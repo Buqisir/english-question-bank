@@ -737,3 +737,92 @@ not promoted into blockers.
 
 Proceed directly to one fresh RM task under the repository's RM route. This
 re-review does not create, wait for, or supervise that task.
+
+---
+
+## README CI Registry Parity Fix Fresh CR — 2026-07-22
+
+Role: top-level fresh CR only. No implementation, README/verifier/governance
+rule change, product/runtime change, QA, RM, merge, push, production action, or
+write to `wt-applied-writing-lecture` was performed.
+
+- Reviewed implementation head:
+  `d6c65eb52cc30c382c6d7253e64f00c73565262e`
+- Released CR input:
+  `0318460c48fa36c8c8dda0eb397f9a1eb2b93b1b`
+- Source branch:
+  `codex/codex-matt-governance-readme-ci-fix-20260722-01`
+- Fetched `github/main` and merge-base:
+  `e4ae78607411d265768a0253c5c63b5f3c0d726b`
+
+### Changed Scope
+
+- Implementation scope is exactly `scripts/README.md`: the three-row Process /
+  workflow gates table gains the existing `Runs in CI?` contract, marking the
+  registered live-state verifier `yes` and the two non-registry scripts `no`.
+- Other commits between the released Fix DEV input and this CR input change only
+  this cut's live routing state. Forbidden product/runtime, production,
+  plugin/skill, main-checkout user-work, and applied-writing-lecture surfaces
+  are untouched.
+
+### Findings
+
+#### Standards
+
+- Must Fix: none. The unchanged housekeeping guard parses every README table
+  with a `Runs in CI?` column and checks `yes` rows, `no` rows, and the executable
+  `verify-ci --list-json` registry bidirectionally. The fix supplies the missing
+  table contract; it does not weaken, bypass, or edit the guard.
+- Should Watch: none.
+
+#### Spec
+
+- Must Fix: none. The RM blocker was specifically that
+  `verify-codex-matt-governance-live-state.mjs` was registered in
+  `verify-ci.mjs` but lacked a README `Runs in CI? = yes` field. The reviewed
+  row now records exactly that fact, while the adjacent non-CI scripts are
+  truthfully marked `no`.
+- Should Watch: none. No unrequested implementation behavior or governance
+  redesign is present.
+
+### Self-Review Blind Spots
+
+- This narrow CR did not duplicate `verify:all`. The exact-head verification
+  task proved the changed documentation/registry contract, while RM must rerun
+  the full release gate because the release head changed after its earlier red
+  run.
+
+### Verification Evidence
+
+- Committed exact-head evidence binds `git diff --check` exit `0` and
+  `verify-architecture-housekeeping.mjs` exit `0` (PASS 72 / FAIL 0) to
+  `d6c65eb52cc30c382c6d7253e64f00c73565262e`.
+- CR attack rerun: `git diff --check 670052f..d6c65eb` exited `0`;
+  `node scripts/verify-architecture-housekeeping.mjs` exited `0` with PASS 72 /
+  FAIL 0.
+- Independent registry inspection: `verify-ci --list-json` includes the
+  live-state verifier and excludes `verify-cut-artifacts.mjs` and
+  `verify-c8-forbidden-scope.mjs`, matching the three README values exactly.
+- Remote baseline refresh succeeded; `github/main` and the merge-base both
+  resolve to `e4ae78607411d265768a0253c5c63b5f3c0d726b`.
+- Build/browser QA: not repeated / not required for this docs-only parity fix.
+
+### Failure / Attack Angle
+
+A fake fix could merely label the live-state verifier `yes` while leaving it
+absent from the executable CI registry, or label a non-CI script `yes`. The
+unchanged housekeeping guard obtains the live registry by executing
+`verify-ci.mjs --list-json` and checks both directions plus the `no` rows; the
+reviewed values match that runtime registry, so neither false-green path is
+present.
+
+### Residual Risk
+
+- The full release suite has not yet been rerun at the post-fix head. Repository
+  law assigns that changed-head release proof to fresh RM; failure there still
+  blocks merge.
+
+### Recommendation
+
+**APPROVE — zero unresolved Must Fix findings. Route exactly once to a fresh
+top-level RM successor using `gpt-5.6-sol` / `high`.**

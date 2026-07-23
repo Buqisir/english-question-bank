@@ -43,6 +43,9 @@ Historical relay records live in `relay-history.md` and are non-authoritative.
 - CR activation preflight: this worktree and repository root match; it was
   clean; `HEAD` and the named source branch both resolved to
   `0318460c48fa36c8c8dda0eb397f9a1eb2b93b1b`.
+- README CI-registry parity fresh CR verdict: `APPROVE`; zero unresolved Must
+  Fix findings. Canonical report:
+  `docs/cuts/codex-matt-governance/cr.md#readme-ci-registry-parity-fix-fresh-cr--2026-07-22`.
 
 ## RM stop record
 
@@ -128,5 +131,5 @@ Historical relay records live in `relay-history.md` and are non-authoritative.
 
 ## Next Action
 
-1. Cold-read the README CI registry parity fix and exact-head verification,
-   write the canonical CR verdict, then relay exactly one fresh RM successor.
+1. Record and release exactly one top-level fresh RM successor under the
+   write-held / predecessor-final-commit protocol, then end this CR task.
