@@ -2,9 +2,9 @@
 
 Type / role: Wayfinder -> PM contract -> formal PA -> DEV -> verification ->
 fresh CR -> QA -> RM
-State: active
-Blockers: none
-Claimed by: fresh formal PA (`AWL-V3-PA-20260722-01`)
+State: dispatch-pending
+Blockers: formal PA 5 Must Fix + 3 blocking PO decisions
+Claimed by: none; formal PA result committed
 Base head: `github/main@1deec0f`
 Expected head: `64a6784a71b70edb23da745ca24d945982a8a6bc`
 Output path: `docs/cuts/applied-writing-lecture-v3/`
@@ -31,21 +31,22 @@ existing print/student isolation?
 
 ## Routing
 
-Current role: fresh formal PA
-Next role: pending PA verdict
+Current role: none; formal PA result committed
+Next role: fresh PM plan-revision
 Configured model: `gpt-5.6-sol`
 Selected model: `gpt-5.6-sol`
 Thinking: `high`
 Availability / substitution: task-creation capability lists Sol/high; no
 substitution
-Dispatch ID / state: `AWL-V3-PA-20260722-01` / active
-Authorization scope: PA may write `pa.md` and routing/result fields only; no
-runtime implementation
+Dispatch ID / state: `AWL-V3-PM-REV-20260722-01` / dispatch-pending
+Authorization scope: PM plan-revision may edit cut docs except canonical
+`pa.md`; no runtime implementation
 
 ## Unique Next Action
 
-1. Complete the formal PA cold read and write `pa.md`; then create exactly one
-   eligible successor or durably record a named escalation.
+1. Create one fresh PM plan-revision at the predecessor-final exact HEAD. It
+   closes the five PA dispositions and three blocking PO decisions or durably
+   records a named stop; DEV remains forbidden meanwhile.
 
 ## Result
 
@@ -55,4 +56,7 @@ new data contract and a paper-local anchor/geometry protocol. The rejected B2
 runtime remains excluded. PA activation re-proved that
 `github/codex/applied-writing-lecture-v3-20260722-01` resolved to released head
 `64a6784a71b70edb23da745ca24d945982a8a6bc`, that it was an ancestor of
-worktree `HEAD`, and that the worktree was clean.
+worktree `HEAD`, and that the worktree was clean. Formal PA result
+`e5d8dec9c76b35d581bc61e96b41681e3c7c7529` is
+`APPROVE WITH MUST FIX`: 5 unresolved Must Fix and 3 blocking PO decisions;
+the only legal successor is fresh PM plan-revision.

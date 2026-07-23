@@ -169,7 +169,8 @@ Missing dependencies are environment evidence, not an implementation verdict.
 
 - [x] DP-0 Wayfinder found first unfinished ticket and its production blocker.
 - [x] DP-1 PM compressed approved prototype + real payload into current contract.
-- [ ] DP-2 fresh formal PA verdict; every Must Fix has plan disposition.
+- [x] DP-2 fresh formal PA verdict; `pa.md` records
+  `APPROVE WITH MUST FIX` (5 unresolved Must Fix, 3 blocking PO decisions).
 - [ ] DP-3 DEV exact-head implementation complete.
 - [ ] DP-4 fresh verification exact-head PASS.
 - [ ] DP-5 fresh CR 0 unresolved Must Fix.
@@ -178,5 +179,8 @@ Missing dependencies are environment evidence, not an implementation verdict.
 
 ## PA follow-up decisions
 
-Pending fresh PA. DEV dispatch is forbidden until canonical `pa.md` records
-`APPROVE FOR DEV` with zero unresolved Must Fix and zero blocking PO decisions.
+Formal PA result is committed at
+`e5d8dec9c76b35d581bc61e96b41681e3c7c7529`. A fresh PM plan-revision must
+record one disposition for every item in `pa.md`'s
+`Must Fix -> Plan Disposition Checklist`. Current closure is 0/5 and blocking
+PO decisions are 3. DEV dispatch remains forbidden.
