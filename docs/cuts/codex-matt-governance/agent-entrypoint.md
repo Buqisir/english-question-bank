@@ -7,11 +7,11 @@ Historical relay records live in `relay-history.md` and are non-authoritative.
 
 - Cut id: `codex-matt-governance`
 - Cut size: `large governance`
-- Lifecycle state: `release-authorized`
-- Active role: `fresh non-implementing verification`
+- Lifecycle state: `active`
+- Active role: `fresh CR`
 - Source branch: `codex/codex-matt-governance-readme-ci-fix-20260722-01`
-- Current worktree: `/Users/huangxuewei/.codex/worktrees/60db/english-question-bank`
-- Released input head: `d6c65eb52cc30c382c6d7253e64f00c73565262e`
+- Current worktree: `/Users/huangxuewei/.codex/worktrees/144f/english-question-bank`
+- Released input head: `0318460c48fa36c8c8dda0eb397f9a1eb2b93b1b`
 
 ## Current evidence
 
@@ -40,6 +40,9 @@ Historical relay records live in `relay-history.md` and are non-authoritative.
   `d6c65eb52cc30c382c6d7253e64f00c73565262e`: `git diff --check` exited 0;
   `node scripts/verify-architecture-housekeeping.mjs` exited 0
   (PASS 72 / FAIL 0).
+- CR activation preflight: this worktree and repository root match; it was
+  clean; `HEAD` and the named source branch both resolved to
+  `0318460c48fa36c8c8dda0eb397f9a1eb2b93b1b`.
 
 ## RM stop record
 
@@ -81,7 +84,7 @@ Historical relay records live in `relay-history.md` and are non-authoritative.
 ## Verification dispatch
 
 - Dispatch id: `codex-matt-governance-readme-ci-fix-verification-20260722-01`
-- State: `active`
+- State: `closed`
 - Role: `fresh non-implementing verification`
 - Configured model: `gpt-5.6-terra`
 - Requested thinking: `medium`
@@ -105,7 +108,7 @@ Historical relay records live in `relay-history.md` and are non-authoritative.
 ## CR dispatch
 
 - Dispatch id: `codex-matt-governance-readme-ci-fix-cr-20260722-01`
-- State: `release-authorized`
+- State: `active`
 - Role: `fresh CR`
 - Configured model: `gpt-5.6-sol`
 - Requested thinking: `high`
@@ -119,10 +122,11 @@ Historical relay records live in `relay-history.md` and are non-authoritative.
 - Successor worktree: `/Users/huangxuewei/.codex/worktrees/144f/english-question-bank`
 - Ready-held proof: `clean detached worktree; HEAD and named source branch both resolved to 23464685f1f5240f783a70511a3807a937e9308a`
 - Release contract: `predecessor-final commit carries this record; no later verification worktree write`
+- Activation proof: `released input adopted cleanly; sole writer acquired by fresh CR`
 - Scope: `cold-read the README CI registry parity fix and exact-head verification evidence`
 - Forbidden: `implementation, README changes, verifier/governance changes, product/runtime, production, and wt-applied-writing-lecture`
 
 ## Next Action
 
-1. Release this predecessor-final commit to the recorded fresh CR task, then
-   end this verification task without waiting for its result.
+1. Cold-read the README CI registry parity fix and exact-head verification,
+   write the canonical CR verdict, then relay exactly one fresh RM successor.
