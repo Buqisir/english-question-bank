@@ -1,8 +1,8 @@
 # codex-matt-governance · cut note
 
 Cut: `codex-matt-governance`
-Status: RM closeout in progress; canonical re-review is MERGEABLE with zero
-unresolved Must Fix
+Status: RM blocked by the final full-suite release gate; canonical re-review
+remains MERGEABLE with zero unresolved Must Fix
 PR / branch: `codex/codex-matt-governance-live-state-migration-20260722-01`
 Start date: 2026-07-22
 Merge date: 2026-07-22
@@ -28,6 +28,9 @@ Bugs / blockers found:
 - RM initially found a dirty, divergent main checkout with an overlapping
   untracked file. Owner-authorized recovery preserved it on local branch
   `codex/rescue-main-pre-governance-20260722-01` before cleaning `main`.
+- Final RM verification found one CI registry/documentation mismatch: the new
+  live-state verifier is in `verify-ci.mjs`, but its `scripts/README.md` entry
+  lacks the required `Runs in CI? = yes` field.
 
 Pitfalls / wrong assumptions:
 - “Wayfinder remains responsible” means continuity of the tracked role and
@@ -49,8 +52,11 @@ Verify evidence:
 - Fresh verification is recorded in `verification.md`, including exact-head
   live-state/Git checks and the earlier full suite PASS 84 / SKIP 1 / FAIL 0.
 - Canonical `cr.md` ends with MERGEABLE and zero unresolved Must Fix.
-- RM must still pass the Large artifact gate, current-head release checks, and
-  post-merge `main` CI before terminal closure.
+- RM TypeScript check passed. The Large artifact gate passed 4 / failed 0.
+- `verify:all` returned PASS 84 / SKIP 1 / FAIL 1; the isolated housekeeping
+  rerun returned PASS 71 / FAIL 1 for the same README registry mismatch.
+- A fresh Fix DEV, verification, re-review, and fresh RM are required before
+  merge; post-merge `main` CI remains mandatory.
 
 Watch / next:
 - The first three new qualifying Medium/Large cuts must exercise the serial
