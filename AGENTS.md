@@ -59,8 +59,11 @@ Next：新开顶层任务
 Worktree: <absolute path>
 Branch: <branch>
 Expected HEAD: <commit>
+Spec: <exact path | not applicable>
+Ticket: <exact path | not applicable>
+Fixed point: <commit | not applicable>
 Model: <model>
-Effort: <low | medium | high | xhigh>
+Effort: <low | medium | high | xhigh | max | ultra>
 Prompt:
 <complete copyable prompt>
 ```
@@ -83,9 +86,27 @@ Do not merely name a skill or ticket in `Next`. Include the exact artifact,
 worktree, branch, expected commit, and prompt so the owner does not have to
 remember routing details.
 
+Fill every task-applicable Spec, Ticket, and Fixed point anchor. Use
+`not applicable` only when an anchor genuinely does not apply; repeat the exact
+paths and commits so the owner does not have to find or remember them.
+
 Human QA is the one intentional pause. Give the owner a checklist of at most
-five actions and wait in the same task. After `QA 完成`, return the next
-copyable instruction or `DONE`.
+five actions and wait in the same task:
+
+```text
+Next：等待人工 QA
+Worktree: <absolute path>
+Branch: <branch>
+Expected HEAD: <commit>
+Spec: <exact path | not applicable>
+Ticket: <exact path | not applicable>
+Fixed point: <commit | not applicable>
+QA checklist: <inline 3-5 checks or exact path>
+Prompt:
+请按以上清单完成 owner QA。完成后回复“QA 完成”；若失败，逐条描述实际结果。
+```
+
+After `QA 完成`, return the next copyable instruction or `DONE`.
 
 ### Context hygiene
 

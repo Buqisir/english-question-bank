@@ -230,21 +230,85 @@ assert(
 
 const refactorRoadmap = read('docs/architecture/refactor-roadmap-2026-06.md')
 const refactorHandoff = read('docs/architecture/refactor-handoff-2026-06.md')
+function normalizeGovernanceProse(source) {
+  return source
+    .normalize('NFKC')
+    .toLowerCase()
+    .replace(/[`*_/#:()[\]{}"'“”‘’.,;!?—–→+-]+/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+}
+
+const retiredAuthorityPatterns = [
+  {
+    label: 'current or living authority',
+    pattern: /\b(current|living|live|active|operative|present|authoritative|controlling|governing|canonical)\s+(roadmap|handoff|plan|instructions?|workflow|source)\b/,
+  },
+  {
+    label: 'agent-created relay successor',
+    pattern: /\b(agent|automation|bot|claude|coordinator|dev|implementer|maintainer|relay|reviewer|rm)\s+(creates?|opens?|starts?|spawns?|dispatches?|initiates?|launches?)\s+(the\s+)?(next|following|subsequent|successor)\s+(task|phase|stage)\b/,
+  },
+  {
+    label: 'passive agent-created relay successor',
+    pattern: /\b(next|following|subsequent|successor)\s+(task|phase|stage)\s+(is|gets|will be)\s+(created|opened|started|spawned|dispatched|initiated|launched)\s+by\s+(an?\s+)?(agent|automation|bot|claude|coordinator|dev|implementer|maintainer|relay|reviewer|rm)\b/,
+  },
+  {
+    label: 'delegated or agent-initiated integration',
+    pattern: /\b(agent|automation|bot|claude|coordinator|delegate|delegated|dev|implementer|maintainer|reviewer|rm)\s+(is\s+)?(authorized|allowed|assigned|empowered|entitled|permitted)?\s*(may|can|should|will|to)?\s*(merge|land|integrate|push|publish|release|ship)\b/,
+  },
+  {
+    label: 'integration assigned to an agent role',
+    pattern: /\b(merge|land|integrate|push|publish|release|ship)\s+(is\s+|gets\s+|will be\s+)?(assigned|authorized|delegated|entrusted|permitted)?\s*(by|per|through|to|via)\s+(an?\s+)?(agent|automation|bot|claude|coordinator|delegate|delegated|dev|implementer|maintainer|reviewer|rm)\b/,
+  },
+  {
+    label: 'solo merge permission',
+    pattern: /\b(mergeable|shippable|releasable)\s+(alone|by|solo|without)\b/,
+  },
+]
+
+function retiredAuthorityFinding(source) {
+  const normalized = normalizeGovernanceProse(source)
+  return retiredAuthorityPatterns.find(({ pattern }) => pattern.test(normalized))
+}
+
+for (const sample of [
+  'Status: Living roadmap',
+  'This is the active plan.',
+  'Status: present roadmap.',
+  'The coordinator opens the following phase.',
+  'The reviewer initiates the subsequent stage.',
+  'The maintainer opens the next task.',
+  'The next task is launched by an implementer.',
+  'An agent may land the branch.',
+  'The implementer is authorized to merge.',
+  'Integrate via delegated RM.',
+  'Merge is delegated to RM.',
+  'This change is shippable solo.',
+]) {
+  assert(
+    `housekeeping catches retired authority paraphrase: ${sample}`,
+    Boolean(retiredAuthorityFinding(sample)),
+  )
+}
+
 for (const [name, source] of [
   ['refactor roadmap', refactorRoadmap],
   ['refactor handoff', refactorHandoff],
 ]) {
   assert(
     `${name} is explicitly historical and non-authoritative`,
-    source.includes('Status: Historical record') &&
-      source.includes('does not authorize') &&
-      source.includes('owner manually opens'),
+    source.includes('Status: Historical technical record — non-authoritative.') &&
+      normalizeGovernanceProse(source).includes('owner opens a new top level task'),
+  )
+  const retiredFinding = retiredAuthorityFinding(source)
+  assert(
+    `${name} cannot restore current/living, relay-successor, or delegated integration authority`,
+    !retiredFinding,
+    retiredFinding ? `matched ${retiredFinding.label}` : '',
   )
   assert(
-    `${name} cannot restore relay or delegated RM`,
-    !source.includes('Status: Living roadmap') &&
-      !source.includes('merge per delegated RM') &&
-      !source.includes('DEV via a fresh Opus agent'),
+    `${name} contains no reusable legacy workflow recipe`,
+    !/\b(worktree cleanup|fresh[- ]agent|automatic cr|automatic rm|push →|squash[- ]merge|the recipe)\b/i.test(source),
   )
 }
 

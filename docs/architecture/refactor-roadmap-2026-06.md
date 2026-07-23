@@ -1,288 +1,92 @@
 # Refactor Roadmap — api.mjs / App.tsx Decomposition (2026-06)
 
-Status: Historical record — non-authoritative technical inventory from 2026-06.
-It preserves completed decisions and deferred refactor candidates, but does not authorize
-fresh DEV subagents, automatic CR/RM relay, delegated merges, or any current action.
-For renewed work, the owner manually opens each top-level task under
-`docs/steering/codex-matt-workflow.md`; current state comes from `docs/STATUS.md`.
+Status: Historical technical record — non-authoritative.
+This is a compact inventory of technical decisions and unresolved candidates,
+not a work queue. If a candidate is revived, the owner opens a new top-level
+task under `docs/steering/codex-matt-workflow.md` after checking
+`docs/STATUS.md`.
 
-## How this was produced
+## Architectural constraints
 
-A 9-reader discovery workflow mapped every region of `server/api.mjs` (11,096 lines),
-`app/src/App.tsx` (7,186 lines), and the frontend feature/service layout; a synthesis
-pass clustered 51 candidate seams into 19 narrow behavior-preserving cuts; an independent
-razor-critic verified load-bearing claims against the tree and pushed back on 3 cuts.
+- Preserve API responses, status codes, database schema, prompts, AI-parse
+  output, UI, PaperSurface, print rendering, and reading-analysis behavior.
+- Prefer a deep module whose interface is smaller than the state it hides.
+  File-size reduction alone is not a seam.
+- Extracted server modules receive dependencies through `createX({ ... })` and
+  never import `server/api.mjs`.
+- Keep prompt constants byte-identical. Inject them across a seam instead of
+  relocating or re-indenting them.
+- Verification should invoke the extracted behavior and remain hermetic.
 
-## Discipline (inherited from H1/H3/H5 — do not relax)
+## Completed decisions
 
-- **Behavior-preserving ONLY.** No change to API responses, status codes, DB schema,
-  prompts, AI-parse output, UI, PaperSurface, print rendering, or reading-analysis.
-- **Deep-module-or-skip.** "It makes the file smaller" is NOT justification. A cut earns
-  its place only if the extracted module's interface is *smaller than the state it carries*.
-  20 shallow seams were rejected — see the deferred list; do not re-propose them.
-- **Factory seam.** Extracted server modules take deps via `createX({ ... })` and never
-  import back from `server/api.mjs` (no cycle).
-- **One revertable PR per cut, gated by a run-form `verify-*.mjs`.**
+The June lane completed H4-A, H5-B through H5-L, H6-A, H10-A/B, H11-A PR1,
+H11-B, H12-A, and H12-B PR1. Their detailed objectives, seams, and verification
+evidence live in the matching cut records and git history.
 
-## Historical execution policy (retained as evidence, not current instruction)
+Two reslices remain important technical context:
 
-- **Former “mergeable solo” lane:** non-visual server cuts once used
-  plan → DEV → fresh CR → verify:all → delegated merge. This describes the June
-  record only and grants no present merge or relay authority.
-- **Former owner-held lane:** contract-sensitive or user-visible work stopped
-  for owner review. Any revived work now follows the current manual top-level
-  task, review, QA, and ship contracts.
-- api.mjs-touching cuts are **sequential** (shared file). Independent-file cuts may interleave.
+- H10-B separated dead-route removal from extraction of the three live
+  AI-proxy routes so request IDs and error envelopes remained independently
+  checkable.
+- H12-B separated the self-contained `DifficultyProfileGrid` from the
+  interleaved review/calibration controls.
 
-## Critic reslices (binding)
+## Genuinely unresolved candidates
 
-- **H10-B**: `/api/ai/parse-reading` and `/api/ai/verify-trace` have **zero app/src callers**;
-  parse-reading is redundant with the live `POST /api/question-groups/:id/reading-parse`.
-  → PR1 deletes the dead blocks (mergeable after confirming no script/curl caller);
-  PR2 extracts only the 3 LIVE blocks (verify-question-group / semantic-search / steward).
-- **H11-A**: the `::1` host unification is a **behavior change**, not a dedup. → 3 PRs:
-  (1) httpClient dedup preserving each caller's CURRENT host form verbatim (mergeable);
-  (2) separate owner-acknowledged `::1` change; (3) cssAttr dedup gated on byte-identical bodies.
-- **H12-B**: read-only halves are interleaved with teacher-difficulty controls → secretly
-  several. → PR1 `DifficultyProfileGrid` (clean), PR2 `DifficultyReviewPanel` only after
-  controls sever cleanly.
+### H12-B PR2 — `DifficultyReviewPanel`
 
-| P | Cut | Title | Risk | Mergeable solo | Size | Deps | Critic |
-|---|-----|-------|------|----------------|------|------|--------|
-| 1 | H4-A | Delete 4 proven-dead module exports | non-visual-server | ✅ | small | — | KEEP |
-| 2 | H10-A | Extract paper-set CRUD + paper-workflow routes (route owner) | contract-sensitive | 🔒 owner | small | — | KEEP |
-| 3 | H5-B | Extract import file/bundle/batch LISTING + dir-scan module | non-visual-server | ✅ | medium | — | KEEP |
-| 4 | H5-C | Extract AI-completion JSON/verify extraction leaf | contract-sensitive | ✅ | medium | — | KEEP |
-| 5 | H11-A | Extract shared frontend httpClient + cssAttr util | non-visual-server | ✅ | small | — | RESLICE |
-| 6 | H10-B | Extract AI-proxy routes (semantic-search/steward/verify/parse-reading/verify-trace) | contract-sensitive | 🔒 owner | medium | — | RESLICE |
-| 7 | H11-B | Extract PaperImportAi untyped-analysis view helpers | non-visual-server | ✅ | small | — | KEEP |
-| 8 | H5-D | Extract AI-completion transport + retry/fallback runner | non-visual-server | ✅ | medium | H5-C | KEEP |
-| 9 | H5-E | Extract verify-question-group owner | non-visual-server | ✅ | small | H5-D | KEEP |
-| 10 | H5-F | Extract legacy DOCX import-draft / answer-alignment pipeline implementation | contract-sensitive | 🔒 owner | large | — | KEEP |
-| 11 | H5-G | Extract DOCX OOXML renderer | user-visible | 🔒 owner | large | — | KEEP |
-| 12 | H5-H | Extract semantic-search recall + rerank service | contract-sensitive | 🔒 owner | medium | H5-D | KEEP |
-| 13 | H5-I | Extract question-bank steward service | contract-sensitive | 🔒 owner | medium | H5-D,H5-H | KEEP |
-| 14 | H5-J | Extract reading-difficulty domain normalizer | contract-sensitive | 🔒 owner | medium | — | KEEP |
-| 15 | H5-K | Extract synonym-difficulty local-Qwen classifier | contract-sensitive | 🔒 owner | large | H5-D | KEEP |
-| 16 | H5-L | Extract DeepSeek per-type parse owners (reading/cloze/grammar/seven-choices) | contract-sensitive | 🔒 owner | large | H5-D,H5-J,H5-K | KEEP |
-| 17 | H6-A | Extract AI-analyzer provider-call shell (import-side dedup) | contract-sensitive | 🔒 owner | medium | — | KEEP |
-| 18 | H12-A | Extract App.tsx EntryModal (manual 录题/编辑题组 form) | user-visible | 🔒 owner | medium | — | KEEP |
-| 19 | H12-B | Extract App.tsx read-only difficulty review + profile panels | user-visible | 🔒 owner | large | — | RESLICE |
+The read-only review/calibration UI is interleaved with teacher controls and
+mutators. Reconsider only if the controls sever cleanly through a narrow
+interface while preserving the `totalQuestions` scoping and calibration
+output.
 
-## Per-cut detail
+### H11-A PR2 — `::1` host behavior
 
-### H4-A — Delete 4 proven-dead module exports  (P1)
-- **Objective:** Remove four exported symbols that are read nowhere in server/scripts/app/tests, shrinking surface with zero behavior change.
-- **Scope files:** `server/my-space/mySpace.mjs`, `server/paper-import-ai/analyzeReading.mjs`, `server/paper-import-ai/analyzeGrammarFillVerbProfile.mjs`, `server/paper-import/storage.mjs`
-- **Forbidden:** `server/api.mjs`
-- **Moves:** Delete MY_SPACE_ARTIFACT_TYPES (mySpace.mjs:5), PAPER_IMPORT_AI_PROVIDERS (analyzeReading.mjs:13), VERB_AXES (analyzeGrammarFillVerbProfile.mjs:25), readLatestPaperAssetVersion (storage.mjs:246). No factory seam; pure leaf deletions. readLatestPaperAssetVersion's internal callees (resolvePaperAssetReadPaths/readJsonMaybe) stay.
-- **Seam justification:** Not an extraction — confirmed dead code. grep across server/app/src/scripts (excluding node_modules and .claude/worktrees) shows each name only at its definition line, zero reads. Lowest-risk possible cut; clears noise before deeper work.
-- **Verify strategy:** Run scripts/verify-ci.mjs (full registry) — must stay green; the four names are imported by no verify script. Optionally a one-shot grep assertion that each symbol has zero references post-delete.
-- **Risk:** non-visual-server · **Mergeable while owner away:** yes · **Depends on:** none
-- **Critic verdict:** KEEP — Deletion not extraction. Confirmed all 4 symbols (MY_SPACE_ARTIFACT_TYPES, PAPER_IMPORT_AI_PROVIDERS, VERB_AXES, readLatestPaperAssetVersion) appear only at their definition line, zero reads. Behavior-preserving, verify-ci-green plus a grep assertion. One revertable unit, honestly mergeable. Nit: grep for barrel/index re-exports before deleting.
+The paper-import clients and other request clients historically used different
+host allowlists. Adding `::1` is a behavior change, not deduplication. It needs
+an explicit product decision and focused network-host verification.
 
-### H10-A — Extract paper-set CRUD + paper-workflow routes (route owner)  (P2)
-- **Objective:** Lift the inline /api/paper-sets and /api/paper-workflows dispatch blocks out of the legacy if-chain into a createPaperSetRoutes() module, mirroring createQuestionGroupRoutes.
-- **Scope files:** `server/api.mjs`, `server/paper-sets/routes.mjs`
-- **Forbidden:** `app/src`, `server/exports/exportImplementation.mjs`, `server/print-renderer.mjs`
-- **Moves:** Move inline blocks at api.mjs:10986-11020 (GET /api/paper-sets, GET /api/paper-workflows, GET/POST/PUT /api/paper-sets/:id) into server/paper-sets/routes.mjs as defineRoute entries returned by createPaperSetRoutes(); append to serverRoutes (api.mjs:434-446). Add listPaperSets/getPaperSet/createPaperSet/listPaperWorkflowStatuses to serverContext (60-107). Heavy store fns stay as module closures in api.mjs (inject by reference). Preserve 200/201/404 status codes and the POST-create vs PUT-merge branch exactly.
-- **Seam justification:** Cohesive route-owner for the entire paper-set REST surface; the module needs only 4 named entry points on context while hiding the paper_sets/paper_items SQL + workflow aggregator behind them. H1 explicitly skipped paper-set routes; this completes that lane. Lower risk than ai-proxy (no prompt/audit surface).
-- **Verify strategy:** New scripts/verify-h10a-paper-set-routes.mjs: boot server against a fixture DB, assert GET list/get (404 on missing), POST 201, PUT 200 with merged id, and byte-identical response JSON vs pre-cut; assert no serverRoutes pattern now shadows another. PA/owner sign-off on the paper_sets/paper_items data-contract assertions.
-- **Risk:** contract-sensitive · **Mergeable while owner away:** NO — needs owner PA/QA · **Depends on:** none
-- **Critic verdict:** KEEP — Inline paper-set blocks (10986-11020) call fns at 5004/5300/4859/5208. Module needs only 4 named context entries while heavy paper_sets SQL stays injected by reference; interface smaller than carried state, mirrors createQuestionGroupRoutes. Contract-sensitive + NOT mergeable honest. Preserve POST-201 vs PUT-200 (both call createPaperSet) and 404 byte-identical.
+### H11-A PR3 — `cssAttr` deduplication
 
-### H5-B — Extract import file/bundle/batch LISTING + dir-scan module  (P3)
-- **Objective:** Move the pure DB-read + fs-scan import listing/readiness helpers behind the 4 serverContext entry points into server/imports/importListing.mjs.
-- **Scope files:** `server/api.mjs`, `server/imports/importListing.mjs`
-- **Forbidden:** `app/src`, `server/exports`, `server/paper-import-ai`
-- **Moves:** Move rowToImportFile/rowToImportFileParse/listImportFiles/deriveImportBundleReadiness/buildImportBundle(QualityWarnings)/listImportBundles/rowToImportBatch(Item)/listImportBatches/expandLocalPath/inferBatch*/collectImportBatchFiles/updateImportBatchStats/getImportBatch/scanImportDirectory (api.mjs ~1781-2298) into createImportListingImplementation({ openDatabase, requiredString, optionalString, requiredEnum, randomUUID, sanitizeFileName, inferImportFileType }). Expose listImportFiles/listImportBundles/listImportBatches/scanImportDirectory + getImportBatch/updateImportBatchStats; runImportBatch (stays in api.mjs for now) imports getImportBatch/updateImportBatchStats from the new module via the factory result. Confirm buildDraftSourceQualityWarnings/normalizePaperAssetQuestions liveness before carrying.
-- **Seam justification:** Self-contained read/scan concern: ~500 lines of row mappers, title regexes, quality heuristics and recursive fs walking collapse to 4 clean serverContext entries. Non-visual-server (feeds legacyImportRoutes JSON), so Claude-mergeable after a stub-free run-form verify. Mirrors the legacyImportRoutes home in server/imports/.
-- **Verify strategy:** New scripts/verify-h5b-import-listing.mjs: against a fixture DB + temp scan dir, call the legacy-import list endpoints and assert listImportFiles/Bundles/Batches + scanImportDirectory output is byte-identical before/after the move (no AI stub needed). Plus scripts/verify-h1f-legacy-import-routes.mjs must stay green.
-- **Risk:** non-visual-server · **Mergeable while owner away:** yes · **Depends on:** none
-- **Critic verdict:** KEEP — Confirmed 1781-2298 has zero AI calls and no central-read-hub coupling; ~500 lines of row-mappers/regex/fs-walk collapse to 4 serverContext entries. Interface smaller than state, not line-count chasing. Byte-identical-verifiable, no AI stub. Enforce: runImportBatch back-imports getImportBatch/updateImportBatchStats via the factory RESULT, not a top-level api.mjs import (no cycle).
+Unify only after proving all three implementations byte-identical. Treat any
+escaping difference as behavior, not cleanup.
 
-### H5-C — Extract AI-completion JSON/verify extraction leaf  (P4)
-- **Objective:** Move the pure provider-payload-to-text + balanced-JSON + verify-verdict normalization functions into server/ai-providers/jsonExtraction.mjs as a dependency-free leaf.
-- **Scope files:** `server/api.mjs`, `server/ai-providers/jsonExtraction.mjs`
-- **Forbidden:** `app/src`, `server/ai-providers/deepseek.mjs`, `server/ai-providers/chatCompletions.mjs`, `server/prompts`
-- **Moves:** Move parseJsonFromString/isPlainObject/extractBalancedJsonCandidates/parseJsonObject/normalizeVerifyVerdict/inferVerifyVerdictFromText/getDeepSeekMessageText/collectDeepSeekMessageTexts/parseLooseVerifyResult/extractJsonCandidates/extractVerifyResultFromPayload/extractReadingParsePayloadFromPayload/normalizeVerifyResultObject/extractFirstJson/safeTruncate (api.mjs ~6625-7233) into a plain-export module (no factory; zero injected state). PRESERVE all three divergent inline normalizeVerifyVerdict variants byte-for-byte. Delete the genuinely-dead extractBalancedJson (6637) as a flagged line-item, NOT silently.
-- **Seam justification:** Pure-function island: tiny public surface (extractFirstJson/extractVerifyResultFromPayload/extractReadingParsePayloadFromPayload/parseLoose.../getDeepSeekMessageText/safeTruncate) hides ~190 lines of brace-balancing and multilingual verdict matching. Zero injected deps; table-driven string fixtures verify it with no provider stub. Must land before H5-D (completionRunner injects it).
-- **Verify strategy:** New scripts/verify-h5c-json-extraction.mjs: golden table-driven fixtures over the verify-verdict vocabulary (correct/answer_wrong/explanation_wrong/both_wrong/uncertain/skipped) + nested payload shapes asserting identical output to pre-cut; assert extractBalancedJson removal does not touch extractBalancedJsonCandidates. Pure imports, no server boot.
-- **Risk:** contract-sensitive · **Mergeable while owner away:** yes · **Depends on:** none
-- **Critic verdict:** KEEP — Confirmed dead extractBalancedJson (6637) distinct from live extractBalancedJsonCandidates (6686, called 6762/7065). 3 normalizeVerifyVerdict variants; cut preserves all three byte-for-byte and deletes the dead fn as a flagged item. Zero injected deps, table-driven verify, no server boot. Must precede H5-D. Do NOT unify the three variants (verify contract).
+### Paper Intelligence report loader
 
-### H11-A — Extract shared frontend httpClient + cssAttr util  (P5)
-- **Objective:** Collapse 5x duplicated apiPath/API_ORIGIN, 2x decodeHeaderValue, ~30 fetch error-extraction blocks and 3x cssAttr into shared modules, fixing the ::1 host-resolution drift.
-- **Scope files:** `app/src/services/httpClient.ts`, `app/src/services/questionGroups.ts`, `app/src/services/paperImportAi.ts`, `app/src/services/paperImport.ts`, `app/src/services/draftPapers.ts`, `app/src/services/mySpace.ts`, `app/src/features/paper-intelligence/cssAttr.ts`, `app/src/features/paper-intelligence/PaperIntelligencePaperSurfaceHarness.tsx`, `app/src/features/paper-intelligence/PaperIntelligencePreview.tsx`, `app/src/features/paper-intelligence/useSevenChoicesPaperHighlights.ts`
-- **Forbidden:** `server`, `shared/papersurface`, `app/src/features/paper-intelligence/*Adapter.ts`
-- **Moves:** New app/src/services/httpClient.ts exporting apiPath/requestJson/decodeHeaderValue; each service re-imports (deletes its local copy). Unified host check MUST use the ::1-inclusive form (strict superset). New cssAttr.ts (or shared dom util) with the byte-identical 5-line CSS.escape helper; 3 call sites re-import.
-- **Seam justification:** Real dedup that DELETES lines and removes a correctness drift (the ::1 fork), not pass-through churn. Interface (path,init)->json is far simpler than the repeated try/parse/throw it hides. cssAttr is a security-relevant escape used in live querySelector strings — removing 3x drift is genuine. Non-visual-server: no DOM/render change, only request plumbing + a pure escape.
-- **Verify strategy:** New scripts/verify-h11a-http-client.mjs: import httpClient, assert apiPath host resolution for 127.0.0.1/localhost/::1/remote and that requestJson maps a server {error} body to a thrown Error; assert cssAttr output matches CSS.escape. Plus app verify:all (verify-ci.mjs) green. No browser needed (logic-level).
-- **Risk:** non-visual-server · **Mergeable while owner away:** yes · **Depends on:** none
-- **Critic verdict:** RESLICE — Confirmed only paperImport/paperImportAi use the 2-element host form; questionGroups/mySpace/draftPapers already include ::1. Unifying on ::1-inclusive CHANGES behavior under a ::1 hostname; a strict superset is still a behavior change under behavior-preserving ONLY, so labeling it non-visual-server mergeable is dishonest. Also bundles httpClient plumbing with cssAttr (a security-relevant DOM escape) in one PR, violating single-revertable-unit.
-  - **Reslice:** Three PRs: (1) httpClient.ts dedup preserving each caller's CURRENT host form verbatim (behavior-preserving, Claude-mergeable); (2) a separate explicitly-flagged PR adding ::1 to paperImport/paperImportAi (behavior change, owner-acknowledged, not a dedup); (3) cssAttr dedup gated on the 3 bodies being byte-identical.
+The harness loader remains a plausible deep seam: four scalar states could
+collapse into one load-result union that hides fetch sequencing. It remains
+contract-sensitive because it assembles PaperSurface input, and the existing
+`verify-c6a4` source assertions would need a deliberate update.
 
-### H10-B — Extract AI-proxy routes (semantic-search/steward/verify/parse-reading/verify-trace)  (P6)
-- **Objective:** Move the 5 inline /api/ai/* dispatch blocks into createAiProxyRoutes(), preserving the request-id header contract and the verify-trace audit reader.
-- **Scope files:** `server/api.mjs`, `server/ai-proxy/routes.mjs`
-- **Forbidden:** `app/src`, `server/prompts`, `server/ai-providers`
-- **Moves:** Move inline blocks at api.mjs:10944-10984 + 11022-11078 into server/ai-proxy/routes.mjs (createAiProxyRoutes() returning defineRoute entries). Add semanticSearchQuestionGroups/questionBankStewardSearch/verifyQuestionGroup to serverContext (parseReadingByQuestionGroup already there); add a thin readVerifyTraceEvents(traceId) helper to api.mjs + context (keeps fs out of the module). Heavy DeepSeek fns DO NOT move. Preserve x-verify-request-id / x-parse-request-id headers on success AND 500 paths, and the {error,requestId} envelope. Resolve the parse-reading duplicate-endpoint question first (drop if dead).
-- **Seam justification:** Route module's interface is genuinely smaller than carried state: 5 routes call one context.fn each, but the verify/parse blocks own real behavior (requestId mint + custom header + bespoke try/catch) — not the pass-through churn H3 rejects. H1 explicitly skipped AI-proxy; this is the prime remaining route-owner target.
-- **Verify strategy:** New scripts/verify-h10b-ai-proxy-routes.mjs with a stub DeepSeek provider (I8/I13 precedent): assert status codes unchanged, x-verify/x-parse-request-id headers emitted on success + 500, response JSON envelope (matches[]/provider/model/pipeline/keyFingerprint/totalLatencyMs) byte-identical, and verify-trace returns {traceId,events:[...]} filtered correctly. PA/owner sign-off on the frontend data-contract assertions.
-- **Risk:** contract-sensitive · **Mergeable while owner away:** NO — needs owner PA/QA · **Depends on:** none
-- **Critic verdict:** RESLICE — Partly DEAD code. grep shows zero app/src callers for /api/ai/parse-reading and /api/ai/verify-trace; parse-reading is redundant with the live path-based POST /api/question-groups/:id/reading-parse (questionGroupRoutes.mjs:63 -> context.parseReadingByQuestionGroup). Relocating dead code as a route owner is the exact anti-pattern H1/H3 warn against.
-  - **Reslice:** PR1 (Claude-mergeable after confirming no script/curl caller): delete the dead /api/ai/parse-reading block; investigate and likely delete /api/ai/verify-trace. PR2 (contract-sensitive, owner): extract only the 3 LIVE blocks (verify-question-group, semantic-search, steward) into createAiProxyRoutes(), preserving x-verify-request-id on success AND 500 and the {error,requestId} envelope. Coordinate ordering with H5-E.
+## Rejected seams
 
-### H11-B — Extract PaperImportAi untyped-analysis view helpers  (P7)
-- **Objective:** Move the ~14 pure readers/label-maps over the untyped AI analysis blob into a standalone anti-corruption module.
-- **Scope files:** `app/src/features/paper-import-ai/paperImportAiAnalysisView.ts`, `app/src/features/paper-import-ai/PaperImportAiWorkbench.tsx`
-- **Forbidden:** `server`, `shared/papersurface`, `app/src/services/paperImportAi.ts`
-- **Moves:** Move asRecord/asArray/textOf/statusLabel/trapTypeLabel/relationTypeLabel/skillText/optionNote/correctLabelFromAnalysis/answerState/groupLetter/firstPassageLine/reasonLabel/formatSize (PaperImportAiWorkbench.tsx:45-137) into paperImportAiAnalysisView.ts; component + AnalysisReadablePreview + publish-gating booleans re-import. No React/DOM/fetch in the moved code.
-- **Seam justification:** Self-contained anti-corruption layer over an untyped Record<string,unknown>: simple unknown->string/boolean signatures hide all defensive narrowing. Zero React coupling means a trivial fixture-blob run-form verify. Genuine interface narrowing, not file-shrink churn.
-- **Verify strategy:** New scripts/verify-h11b-paper-import-ai-view.mjs: import the module, feed representative analysis-blob fixtures (incl. missing/malformed fields), assert each reader/label output is identical to pre-cut. Plus verify-ci.mjs green.
-- **Risk:** non-visual-server · **Mergeable while owner away:** yes · **Depends on:** none
-- **Critic verdict:** KEEP — ~14 pure unknown->string/boolean readers over an untyped Record blob, zero React/DOM/fetch coupling; interface far smaller than the defensive narrowing hidden. Fixture-blob run-form verify, no browser. Fences off server/ and paperImportAi.ts. One revertable unit; really non-visual frontend but risk semantics right. Pre-flight: grep none of the 14 are imported by *Adapter.ts or PaperSurface (GATE-1/MF-1 textMap contract).
+Do not re-propose these without new structural evidence:
 
-### H5-D — Extract AI-completion transport + retry/fallback runner  (P8)
-- **Objective:** Move the DeepSeek/local-Qwen transport, retry loop, and thinking-mode fallback orchestrator into server/ai-providers/completionRunner.mjs behind callDeepSeekWithFallback.
-- **Scope files:** `server/api.mjs`, `server/ai-providers/completionRunner.mjs`
-- **Forbidden:** `app/src`, `server/ai-providers/deepseek.mjs`, `server/ai-providers/chatCompletions.mjs`, `server/prompts`
-- **Moves:** Move buildDeepSeekRequestOptions/delay/callDeepSeekCompletion/buildLocalQwenRequestOptions/callLocalQwenCompletion/callDeepSeekWithFallback (api.mjs 6280-7476) + the model/key helpers normalizeDeepSeekModel/isLocalQwenModel/normalizeAiChatModel/describeAiKeySource/describeKeySource (private) into createCompletionRunner({ fetch, ...H5-C extraction strategies, getDeepSeekMessageText, collectDeepSeekMessageTexts }). Keep api.mjs flash-default normalizeDeepSeekModel — do NOT de-dup against server/ai-providers/deepseek.mjs (pro-default; divergent behavior). Expose callDeepSeekWithFallback/callLocalQwenCompletion to ~10 call sites.
-- **Seam justification:** Interface is narrow (callDeepSeekWithFallback(context,onParseError)->{parsed,rawText,latencyMs}) while hiding provider dispatch, 2 HTTP clients, retry/abort/timeout, thinking-mode fallback, schema-aware parse selection. Injects only parse strategies (from H5-C) + 2 text helpers. The reusable provider-transport seam the AI-parse domains depend on.
-- **Verify strategy:** New scripts/verify-h5d-completion-runner.mjs with a stub fetch (I8/I13 precedent): assert retry count/delay behavior, provider routing (DeepSeek vs local-Qwen), thinking-mode fallback path, and that the returned envelope is identical to pre-cut for fixed stubbed responses. Assert the flash-default model normalization is preserved.
-- **Risk:** non-visual-server · **Mergeable while owner away:** yes · **Depends on:** H5-C
-- **Critic verdict:** KEEP — callDeepSeekWithFallback hides 2 HTTP clients, retry/abort/timeout, thinking-mode fallback, schema-aware parse selection — smaller than carried state. Folds 5 model/key helpers in as private and REFUSES to de-dup the divergent flash-default normalizeDeepSeekModel (divergence verified at 6301 vs deepseek.mjs:5). Stub-fetch verify. mergeableByClaude technically honest, but its role is unlocking the spine, so sequence AFTER the three clean early wins. dependsOn H5-C correct.
+- **Central question-group read hub**: too many callers and injected
+  collaborators; the interface would carry nearly as much state as the body.
+- **Paper-asset card/overlay builders**: four independent entry points and a
+  coupled print-readiness contract make the split shallow.
+- **Saved parse-result readers/writers**: readers and persistence owners are
+  split across the composition root and tied to detail response shape.
+- **Generic validators**: one-to-three-line helpers whose shared interface would
+  equal their implementation.
+- **Composition root / `serverContext`**: wiring is its purpose; relocating it
+  only moves references.
+- **Question-group CRUD and paper-set persistence**: SQL and transaction state
+  would remain exposed through a wide factory boundary.
+- **Prompt constant relocation**: high blast radius with no interface reduction.
+- **`App.tsx` parse-handler and import-workbench state webs**: a hook would
+  return more state and callbacks than it hides.
+- **PaperSurface adapter consolidation**: same-named helpers diverge in
+  text-map and paragraph-scoping behavior.
+- **Type barrels and trivial leaf helpers**: import churn or pass-through
+  abstraction without hidden complexity.
 
-### H5-E — Extract verify-question-group owner  (P9)
-- **Objective:** Move verifyQuestionGroup + callDeepSeekVerify into server/ai-verify/verifyQuestionGroupService.mjs behind a factory, preserving the verify-audit JSONL shape.
-- **Scope files:** `server/api.mjs`, `server/ai-verify/verifyQuestionGroupService.mjs`
-- **Forbidden:** `app/src`, `server/prompts`
-- **Moves:** Move verifyQuestionGroup/callDeepSeekVerify (api.mjs 10682-10919) into createVerifyImplementation({ callDeepSeekWithFallback, getQuestionGroupDetail, appendVerifyAudit, describeKeySource, normalizeDeepSeekModel }). Inject appendVerifyAudit unchanged (the GET /api/ai/verify-trace route reads its JSONL). Add/keep verifyQuestionGroup on serverContext.
-- **Seam justification:** Just 2 fns, clean surface verifyQuestionGroup(groupId,apiKey,model,requestId,thinkingMode)->{results,verifiedCount}; hides per-question loop, verify prompt, and dense audit-event emission. Self-contained (no cross-cluster coupling). Textbook route-owner; the only contract to preserve is the audit JSONL shape.
-- **Verify strategy:** New scripts/verify-h5e-verify-question-group.mjs: stub callDeepSeekWithFallback, assert the verdict envelope + the emitted audit JSONL lines (every HTTP/parse/success/error boundary) are byte-identical to pre-cut, and that verify-trace can still read them back.
-- **Risk:** non-visual-server · **Mergeable while owner away:** yes · **Depends on:** H5-D
-- **Critic verdict:** KEEP — 2 fns (verifyQuestionGroup 10682 + callDeepSeekVerify), clean surface hiding the per-question loop + verify prompt + audit emission. Contract to preserve is the verify-audit JSONL read back by the live GET /api/ai/verify-trace; verify asserts byte-identical lines. dependsOn H5-D right. Coordinate ordering with H10-B since verifyQuestionGroup is called from the inline /api/ai/verify-question-group block.
+## Verification lessons
 
-### H5-F — Extract legacy DOCX import-draft / answer-alignment pipeline implementation  (P10)
-- **Objective:** Move the whole deterministic legacy-import pipeline behind the existing 12-function context interface into server/imports/legacyImportImplementation.mjs.
-- **Scope files:** `server/api.mjs`, `server/imports/legacyImportImplementation.mjs`
-- **Forbidden:** `app/src`, `server/exports`, `server/paper-import-ai`, `scripts/review/rules/import-splitter.md`
-- **Moves:** Move ~1791-4486 (splitter grammar, DOCX OOXML text extraction, batch-IO state machine, draft assembly, answer-alignment incl. applyAnswerAlignment write-back) into createLegacyImportImplementation({ openDatabase, rootDir, importDir, timestampPrefix, requiredString, optionalString, requiredEnum }), mirroring createExportImplementation. Spread its result into serverContext exactly as exportImplementation. Do NOT pull normalizeOptions/createQuestionGroup (4488+). PRESERVE the parseCompactAnswerEntries questionNo===57 hack and the shouldUpdateExplanation=false design verbatim. Internal splitter/batch/answer-alignment stay private (do NOT fragment).
-- **Seam justification:** Deep module: the seam is exactly the 12 functions already enumerated in serverContext and consumed purely via context.* by the already-extracted legacyImportRoutes.mjs. Behind it ~2700 lines of regex grammar, OOXML walking, batch state machine, answer-merge heuristics no caller touches. The H5 'AI coupling' deferral is stale — grep confirms ZERO provider calls; fully deterministic. Completes H1-F.
-- **Verify strategy:** New scripts/verify-h5f-legacy-import-impl.mjs (stub DB, no AI stub): (1) draft-regression over answer-version fixtures asserting warningBundles=0/noOptGroups=0 and the import-splitter.md healthy split shape; (2) move-equivalence — call generateImportBundleDraft + generateAnswerAlignmentDraft on fixed extracted_text fixtures and assert byte-identical JSON before/after. Plus verify-h1f green. PA sign-off (applyAnswerAlignment writes questions.answer).
-- **Risk:** contract-sensitive · **Mergeable while owner away:** NO — needs owner PA/QA · **Depends on:** none
-- **Critic verdict:** KEEP — Strongest large cut. Confirmed 1791-4486 makes zero provider calls, so the AI-coupling deferral is stale. Seam is the 12 fns already in serverContext consumed via context.* by the extracted legacyImportRoutes.mjs; ~2700 lines stay private. Mirrors createExportImplementation. Preserves the questionNo===57 hack and shouldUpdateExplanation=false verbatim, does NOT pull normalizeOptions/createQuestionGroup. Contract-sensitive + NOT mergeable honest (writes questions.answer). Move-equivalence verify right.
-
-### H5-G — Extract DOCX OOXML renderer  (P11)
-- **Objective:** Move buildDocumentXml/writeDocxPackage/convertDocxToPdf and their helpers into server/exports/docxRenderer.mjs, consumed by the existing export implementation.
-- **Scope files:** `server/api.mjs`, `server/exports/docxRenderer.mjs`
-- **Forbidden:** `app/src`, `shared/papersurface`, `server/print-renderer.mjs`
-- **Moves:** Move the docx helper block (api.mjs 5431-6254: escapeXml/run/paragraph/docx* renderers/buildExamDocumentXml/buildDocumentXml/writeDocxPackage/findSoffice/convertDocxToPdf) into docxRenderer.mjs; co-move/inject groupTypeLabels const + readingDistractorTypeLabel fn (trivial label maps). Import the 3 entry fns into api.mjs and pass them into createExportImplementation unchanged (wiring already declares them at 51-59). Keep soffice/zip shell-outs in the module. Preserve the legacy-fallback branches and V1 footer TODO verbatim.
-- **Seam justification:** ~810 lines of WordprocessingML string-building + LibreOffice plumbing collapse behind the 3-function interface createExportImplementation ALREADY declares as injected deps. Print-renderer.mjs is the exact precedent. Pure relocate; no circular dep (needs only 2 trivial label maps).
-- **Verify strategy:** Existing run-form coverage: scripts/verify-h5a-export-implementation.mjs, verify-exam-export.mjs, verify-paper-export-flow.mjs, verify-print-pdf-export-flow.mjs, verify-paper-blocks-numbering.mjs exercise buildDocumentXml/writeDocxPackage end-to-end. Strings move verbatim (byte-identical .docx). Owner browser + PO QA required before merge (produces the printed .docx/.pdf).
-- **Risk:** user-visible · **Mergeable while owner away:** NO — needs owner PA/QA · **Depends on:** none
-- **Critic verdict:** KEEP — ~810 lines collapse behind the 3-function interface createExportImplementation ALREADY declares as injected deps (verified 51-59); the seam pre-exists, no new circular dep (needs 2 trivial label maps). print-renderer.mjs is the precedent. user-visible + NOT mergeable while owner away honest. Confirm the existing export verify scripts diff output .docx BYTES, not just exit 0.
-
-### H5-H — Extract semantic-search recall + rerank service  (P12)
-- **Objective:** Move the semantic-search pipeline into server/search/semanticSearchService.mjs behind one query entry point.
-- **Scope files:** `server/api.mjs`, `server/search/semanticSearchService.mjs`
-- **Forbidden:** `app/src`, `server/prompts`
-- **Moves:** Move DEEPSEEK_SEMANTIC_RERANK_PROMPT + formatSemanticSearchCandidateForDeepSeek/normalizeSemanticSearchRankings/buildSemanticSearchMatchesFromRankings/scoreSemanticSearchCandidate/buildSemanticSearchCandidatePool/normalizeReadingSearchSignalQuestion/buildReadingSearchSignals/getReadingSearchSignalsForQuestionGroups/semanticSearchQuestionGroups (api.mjs ~9618-10680) into createSemanticSearchImplementation({ openDatabase, selectQuestionGroupCards, callDeepSeekWithFallback, describeKeySource, constants }). Confirm formatQuestionGroupForSemanticSearch is dead (grep) and drop if so. Add semanticSearchQuestionGroups to serverContext. Must precede H5-I (steward injects it). Decide clamp01 shared-util home first.
-- **Seam justification:** Public surface is one fn semanticSearchQuestionGroups(query,apiKey,requestId,thinkingMode)->{matches,pipeline}; hides the whole prefilter/score/rerank/signals pipeline (~14 helpers + reading_parse_results SQL read). server/search/ already exists as the home.
-- **Verify strategy:** New scripts/verify-h5h-semantic-search.mjs with stub DeepSeek: against fixture cards + reading_parse_results, assert the matches[] envelope (ids/scores/reasons/pipeline) is byte-identical to pre-cut. PA/owner sign-off (matches feed the AI-mode home UI, ADR-0007/I16).
-- **Risk:** contract-sensitive · **Mergeable while owner away:** NO — needs owner PA/QA · **Depends on:** H5-D
-- **Critic verdict:** KEEP — One fn semanticSearchQuestionGroups (10580) hides ~14 prefilter/score/rerank/signals helpers + the rerank prompt + reading_parse_results SQL. server/search/ is the home. dependsOn H5-D, precedes H5-I — ordering right. Contract-sensitive + NOT mergeable honest. Enforce its pre-flights: confirm formatQuestionGroupForSemanticSearch dead before dropping; do NOT spin a shallow util module just for clamp01; prompt moves only if byte-identical.
-
-### H5-I — Extract question-bank steward service  (P13)
-- **Objective:** Move the NL->intent-plan->filtered-search steward into server/search/questionBankStewardService.mjs, injecting semantic search.
-- **Scope files:** `server/api.mjs`, `server/search/questionBankStewardService.mjs`
-- **Forbidden:** `app/src`, `server/prompts`
-- **Moves:** Move QUESTION_BANK_STEWARD_PROMPT + normalizeStewardArray/inferSteward*/normalizeQuestionBankStewardPlan/shouldForceStewardClarification/buildStewardSemanticQuery/buildQuestionBankStewardMessage/matchStewardFilter/applyStewardFiltersToMatches/planQuestionBankStewardSearch/questionBankStewardSearch (api.mjs 9640-10233) into createQuestionBankStewardImplementation({ callDeepSeekWithFallback, semanticSearchQuestionGroups, describeKeySource, constants }). semanticSearchQuestionGroups injected (no back-import). Dedup the twice-declared difficulty alias maps within the module. Add questionBankStewardSearch to serverContext.
-- **Seam justification:** Public surface is questionBankStewardSearch(message,...); hides the plan-normalization + heuristic-inference + filter matrix. Injecting semantic search keeps it acyclic. Pairs with H5-H in server/search/.
-- **Verify strategy:** New scripts/verify-h5i-steward.mjs with stub DeepSeek + injected stub semanticSearch: assert the plan/filter/message envelope is byte-identical to pre-cut across representative NL queries. PA/owner sign-off (steward output surfaces in AI-mode home, MEMORY I16).
-- **Risk:** contract-sensitive · **Mergeable while owner away:** NO — needs owner PA/QA · **Depends on:** H5-D, H5-H
-- **Critic verdict:** KEEP — questionBankStewardSearch (10174) hides plan-normalization + heuristic inference + filter matrix + steward prompt. Injecting semanticSearchQuestionGroups (call verified at 10207) keeps it acyclic. dependsOn [H5-D,H5-H] right. Correctly de-dups the twice-declared difficulty alias maps WITHIN the module (internal, not cross-module behavior change). Stub-verify byte-identical plan/filter/message envelope. One revertable unit.
-
-### H5-J — Extract reading-difficulty domain normalizer  (P14)
-- **Objective:** Move the surfaceQuestion/synonymDifficulty/difficultyProfile normalizers + their private heuristic predicates and enum sets into server/reading-analysis/readingDifficultyNormalizer.mjs.
-- **Scope files:** `server/api.mjs`, `server/reading-analysis/readingDifficultyNormalizer.mjs`
-- **Forbidden:** `app/src`, `server/prompts`, `shared/papersurface`
-- **Moves:** Move normalizeReadingSurfaceQuestion/normalizeReadingDifficultyProfile/normalizeReadingSynonymDifficulty + the READING_* enum sets + READING_SURFACE_CARD_OVERRIDES + the 14 stem/option heuristic predicates (api.mjs 7478-8104, 7572-7864) into createReadingDifficultyNormalizer({ optionalString, normalizeAnswerValue, cleanDraftText, loadSynonymDifficultyKnowledge, normalizeSynonymCardId, normalizeSynonymConfidence, normalizeSynonymBoolean, uniqueSynonymFlags }). Heuristic predicates stay file-private (NOT separate exports). Preserve the T-card override matrix and giant nested ternary verbatim.
-- **Seam justification:** Public interface is 3 normalizers consumed at exactly one place (normalizeReadingParseQuestion). Behind them: the ~12-branch T-card override matrix, six-dimension scoring with floor logic, word_meaning blocker filtering. Carried complexity vastly exceeds the interface; the 14 predicates are its private vocabulary (folding them in avoids 14-export pass-through churn).
-- **Verify strategy:** New scripts/verify-h5j-reading-difficulty.mjs: golden-output fixtures over the T-card override cases + six-dimension profile asserting byte-identical normalizer output to pre-cut (no provider needed — pure normalization). PA review of the T-card override matrix (drives DB ai_difficulty_score + UI).
-- **Risk:** contract-sensitive · **Mergeable while owner away:** NO — needs owner PA/QA · **Depends on:** none
-- **Critic verdict:** KEEP — 3 public normalizers consumed at one place (normalizeReadingParseQuestion) hide the ~12-branch T-card override matrix + six-dimension scoring + word_meaning blocker filtering; cut keeps the 14 heuristic predicates FILE-PRIVATE rather than exporting them — correct discipline avoiding pass-through churn. Golden-output fixtures, no provider. Contract-sensitive + NOT mergeable honest. Couples to H5-K via injected loadSynonymDifficultyKnowledge; the spine handles ordering. Interface reduction is real.
-
-### H5-K — Extract synonym-difficulty local-Qwen classifier  (P15)
-- **Objective:** Move the T1-T10 synonym-difficulty classifier into server/ai-parse/synonymDifficultyService.mjs, exporting the knowledge-card formatter reading-parse needs.
-- **Scope files:** `server/api.mjs`, `server/ai-parse/synonymDifficultyService.mjs`
-- **Forbidden:** `app/src`, `server/prompts`
-- **Moves:** Move loadSynonymDifficultyKnowledge + ~27 helpers (routing heuristics, white-list normalization, trigger logic, knowledge-card cache) + classifySynonymDifficultyQuestion/generateSynonymDifficultyByQuestionGroup + formatSynonymDifficultyKnowledgeForReadingPrompt (api.mjs 8621-9236) into createSynonymDifficultyImplementation({ callLocalQwenCompletion, getQuestionGroupDetail, knowledgePath, flags, normalizeAnswerValue, isEntityPurposeMentionStem }). EXPORT formatSynonymDifficultyKnowledgeForReadingPrompt so H5-L injects it (one-way dep, no cycle). Keep generateSynonymDifficultyByQuestionGroup on serverContext.
-- **Seam justification:** ~615 lines / ~27 single-use helpers collapse to one public fn + one exported formatter. Routing heuristics, white-list normalization, trigger logic and knowledge-card cache are hidden state behind a tiny interface. Must land on/before H5-L (reading-parse depends on its formatter).
-- **Verify strategy:** New scripts/verify-h5k-synonym-difficulty.mjs with stub local-Qwen (I8/I13 stub precedent): assert per-group classification envelope + white-list enforcement + deepseek/review triggers are byte-identical to pre-cut. PA sign-off (T-card output is reading-analysis domain contract).
-- **Risk:** contract-sensitive · **Mergeable while owner away:** NO — needs owner PA/QA · **Depends on:** H5-D
-- **Critic verdict:** KEEP — ~615 lines / ~27 single-use helpers collapse to one public fn + one EXPORTED formatter consumed one-way by H5-L (acyclic). dependsOn H5-D right. The synonym-difficulty route is gated behind QUESTION_BANK_ENABLE_LOCAL_QWEN (410 when off, questionGroupRoutes.mjs:127) so its own blast radius is small, BUT the exported formatter feeds the always-on reading-parse path (H5-L) — verify it byte-identical in isolation, independent of the gate. estSize large realistic.
-
-### H5-L — Extract DeepSeek per-type parse owners (reading/cloze/grammar/seven-choices)  (P16)
-- **Objective:** Move the 4 per-type parse owners into server/ai-parse/questionGroupParseService.mjs behind a uniform factory.
-- **Scope files:** `server/api.mjs`, `server/ai-parse/questionGroupParseService.mjs`
-- **Forbidden:** `app/src`, `server/prompts`
-- **Moves:** Move formatQuestionForReadingParse/callDeepSeekParseReading/parseReadingByQuestionGroup + the cloze/grammar/seven-choices format+call+parse owners (api.mjs 8462-9558) into createQuestionGroupParseImplementation({ callDeepSeekWithFallback, getQuestionGroupDetail, describeKeySource, normalizeDeepSeekModel, formatSynonymDifficultyKnowledgeForReadingPrompt (from H5-K), normalizeReadingParseQuestion (from H5-J), prompts }). Keep parse{Reading,Cloze,Grammar,SevenChoices}ByQuestionGroup on serverContext. Do NOT refactor the shared envelope preamble in place (response contract). Prompt constants stay frozen — inject, don't move.
-- **Seam justification:** Interface is 4 route-owner fns (groupId,apiKey,model,requestId,thinkingMode)->result envelope; hides 4 prompt builders, per-type formatters, normalizers, fallback wiring, key-source/latency plumbing. The 4 owners share identical structure + dep set. Biggest single AI-parse move.
-- **Verify strategy:** New scripts/verify-h5l-question-group-parse.mjs with stub DeepSeek (I8/I13 precedent): assert each parse-result envelope (questionGroupId/title/parsedCount/keyMask/latency/questions...) is byte-identical to pre-cut; assert the saved payload_json shape is unchanged (read back by getReadingSearchSignalsForQuestionGroups). PA sign-off (saved + drives reading-analysis display + search signals).
-- **Risk:** contract-sensitive · **Mergeable while owner away:** NO — needs owner PA/QA · **Depends on:** H5-D, H5-J, H5-K
-- **Critic verdict:** KEEP — 4 route-owner fns sharing identical structure + dep set, hiding 4 prompt builders + per-type formatters + normalizers + fallback wiring. INJECTS the frozen prompt constants (inject-don't-move — the H3 discipline avoiding the highest-blast-radius data relocation) plus H5-K's formatter + H5-J's normalizer. dependsOn [H5-D,H5-J,H5-K] is the correct full spine. Verify asserts BOTH response envelope AND persisted payload_json. LAST cut to attempt; deepest in the spine.
-
-### H6-A — Extract AI-analyzer provider-call shell (import-side dedup)  (P17)
-- **Objective:** Collapse the byte-identical provider-call + retry orchestration repeated across the 4 import-analysis modules into one factory, injecting per-type prompt/validate/retry-regex.
-- **Scope files:** `server/paper-import-ai/analyzerProviderShell.mjs`, `server/paper-import-ai/analyzeReading.mjs`, `server/paper-import-ai/analyzeCloze.mjs`, `server/paper-import-ai/analyzeGrammarFill.mjs`, `server/paper-import-ai/analyzeSevenChoices.mjs`
-- **Forbidden:** `server/api.mjs`, `app/src`
-- **Moves:** Extract the byte-identical callProvider/callProviderWithRetry/normalizeProviderId/readApiPrompt/stampMeta region into createAnalyzerProviderShell({ promptPath, buildPromptInput, validate, isRetryable, promptVersion }). Each analyzer re-imports and passes its OWN buildPromptInput + isRetryableAnalysisError regex (these genuinely differ per type — inject, do NOT unify). Do NOT touch the verbProfile readApiPrompt (name collision, divergent body).
-- **Seam justification:** Real deep dedup: callProviderWithRetry/callProvider/normalizeProviderId/readApiPrompt are byte-identical across the 4 analyzers (diff-confirmed in map). Interface (5 injected params) is smaller than the hidden provider-selection/retry/JSON-extraction/prompt-rewrite complexity. What varies (buildPromptInput, retry regex) is correctly the injected seam.
-- **Verify strategy:** Existing scripts/verify-i2-seven-choices-ai-import.mjs / verify-i3-cloze-ai-import.mjs / verify-i4-grammar-fill-ai-import.mjs / verify-i8-cloze-analysis.mjs / verify-i13-grammar-fill-analysis.mjs (all in verify-ci.mjs, all stub-provider) must stay green; they exercise these analyzers end-to-end. PA + owner (carries retry-regex + answerKey-blanking judgment-independence).
-- **Risk:** contract-sensitive · **Mergeable while owner away:** NO — needs owner PA/QA · **Depends on:** none
-- **Critic verdict:** KEEP — Real DEEP dedup: claims callProvider/callProviderWithRetry/normalizeProviderId/readApiPrompt/stampMeta byte-identical across the 4 analyzers and INJECTS what differs (buildPromptInput, isRetryable) rather than unifying — the right boundary. Fences off the divergent verbProfile readApiPrompt. Reuses existing stub-provider verify (i2/i3/i4/i8/i13 in verify-ci). Contract-sensitive + owner honest. Enforce: diff the 4 callProvider bodies byte-for-byte before extracting. Independent of the api.mjs spine (server/paper-import-ai/), so it can run in PARALLEL early.
-
-### H12-A — Extract App.tsx EntryModal (manual 录题/编辑题组 form)  (P18)
-- **Objective:** Move the controlled Manual Entry form modal out of App.tsx into a self-contained component with a 5-prop interface.
-- **Scope files:** `app/src/workbench/EntryModal.tsx`, `app/src/App.tsx`
-- **Forbidden:** `server`, `shared/papersurface`, `app/src/features/paper-intelligence`, `app/src/paperAssembly`
-- **Moves:** Move the entry-form state (isEntryOpen/entryMode/editingGroupId/entryForm/entryStatus/entryError) + updateEntryField/updateEntryQuestion/add/removeEntryQuestion + EntryForm JSX (App.tsx ~6000-6266 + handlers ~1898-2019) into EntryModal.tsx with props {open, mode, initialDetail, onClose, onSaved(savedCard)}. handleEntrySubmit's cross-cutting writeback stays in App behind onSaved; service calls (createQuestionGroup/updateQuestionGroup) injected or imported. Keep aiRunIdRef semantics untouched (not in this cluster).
-- **Seam justification:** The form owns ~7 internal state slices + ~5 mutators touched nowhere else in App; external contract is a 5-prop interface far smaller than the EntryForm/EntryQuestionForm state machine it hides. The single cleanest deep extraction in App.tsx.
-- **Verify strategy:** app verify:all (node ../scripts/verify-ci.mjs) green; then owner browser QA: open create + edit flows, add/remove questions, submit, confirm the saved card propagates into list/basket/detail exactly as before. NOT mergeable while owner away.
-- **Risk:** user-visible · **Mergeable while owner away:** NO — needs owner PA/QA · **Depends on:** none
-- **Critic verdict:** KEEP — EntryModal owns ~7 state slices + ~5 mutators touched nowhere else, behind a 5-prop interface smaller than the EntryForm state machine — the one clean deep App.tsx extraction, correctly distinguished from the rejected state-web hooks. user-visible + NOT mergeable while owner away honest. Risk: ensure the savedCard shape passed to onSaved is byte-identical to the prior inline computation or list/basket/detail propagation drifts. Owner browser QA only; stage for QA.
-
-### H12-B — Extract App.tsx read-only difficulty review + profile panels  (P19)
-- **Objective:** Move the read-only difficulty-review-panel, calibration-report and 6-dim profile grid into deep presentational components keyed on {questions, readingParseByQuestionNo}.
-- **Scope files:** `app/src/workbench/detail/DifficultyReviewPanel.tsx`, `app/src/workbench/detail/DifficultyProfileGrid.tsx`, `app/src/App.tsx`
-- **Forbidden:** `server`, `shared/papersurface`, `app/src/paperAssembly`, `app/src/features/paper-intelligence/*Adapter.ts`
-- **Moves:** Move the difficulty-review IIFE + calibration-report IIFE + difficulty-profile-grid (App.tsx ~4569-5335, read-only halves only) into DifficultyReviewPanel.tsx + DifficultyProfileGrid.tsx, consuming {questions, readingParseByQuestionNo} and importing computeCalibrationPreview/getReasonLabel/label-maps directly. Leave the teacher-difficulty CONTROLS (draft state + onSave) in App or pass drafts/onSaveDifficulty as props. Preserve pixel-exact rendering of AI difficultyProfile/calibration. Note the totalQuestions shadowing.
-- **Seam justification:** The review/calibration IIFEs are large self-contained pure computations over (questions x readingParse) producing read-only UI; their interface is just 2 inputs, hiding complex calibration display. Genuine deep-presentational seam + biggest line win that is also a real interface reduction.
-- **Verify strategy:** app verify:all + scripts/verify-calibration-preview.mjs green; then owner browser QA: open a reading detail, confirm difficulty review queue, calibration report and 6-dim profile render pixel-identical to pre-cut (contract-sensitive AI-output mirroring). NOT mergeable while owner away.
-- **Risk:** user-visible · **Mergeable while owner away:** NO — needs owner PA/QA · **Depends on:** none
-- **Critic verdict:** RESLICE — The review/calibration IIFEs are real deep pure computations over 2 inputs. BUT in 4569-5335 the read-only halves are INTERLEAVED with the teacher-difficulty CONTROLS; the roadmap's own hedge (read-only halves only / leave controls in App or pass props) signals it is not cleanly severable in one PR — the secretly-several smell, compounded by estSize large and the totalQuestions shadowing note.
-  - **Reslice:** PR1: extract DifficultyProfileGrid.tsx (6-dim grid) keyed on {questions, readingParseByQuestionNo}, the most self-contained read-only piece. PR2: extract DifficultyReviewPanel.tsx (review + calibration) only after confirming the teacher-difficulty CONTROLS sever cleanly as drafts/onSaveDifficulty props. Both user-visible, owner QA + verify-calibration-preview.mjs, not mergeable while owner away.
-
-## Deferred / rejected (do NOT re-propose without new evidence)
-
-- CARD/DETAIL READ-HUB (selectQuestionGroupCards/getQuestionGroupDetail, api.mjs ~285-1643): SKIP. The application's central read seam — 8+ call sites plus 3 already-extracted modules (draftPaperStore, exports, draft-paper) inject it. Extraction forces a factory injecting ~7 collaborators (openDatabase, 5 getSaved* parse readers, topic-labels, paper-surface availability, draft context, paper-asset overlay); the seam carries as much surface as it hides. Wide-not-deep; revisit only after its collaborators are modularized.
-- PAPER-ASSET CARD/OVERLAY BUILDERS (api.mjs ~301-1343): SKIP (shallow). Cohesive disk-read concern with a home in paper-import/, but findPaperAssetGroup/getPaperAssetPrintReady/buildPaperAssetQuestionGroupCard/listPaperAssetAnalysisGroupCards are each called individually (4 entry points) so the module surface ~= internals; and getPaperAssetPrintReady is co-dependent with isGroupPrintReady (DB path) — splitting scatters the print-ready contract. Do NOT split the two print-ready fns.
-- SAVED AI PARSE-RESULT READERS/WRITERS (api.mjs ~715-1188): SKIP (shallow). The cluster is split — getSavedReadingParseResult feeds getQuestionGroupDetail while its writer/parser live at 8295/8550 (different region); normalizers depend on normalizeAnswerValue from import-parse. A clean extraction must span 715-848 + 8295-8600 and is tightly bound to getQuestionGroupDetail's response shape. Do NOT move a getSaved* reader without its writer/parser.
-- DIFFICULTY-RATING VALIDATORS + SAVE (api.mjs ~1645-1779): SKIP. Only ~120 lines of difficulty-specific logic, entangled with the generic validators (requiredString/optionalString/requiredEnum/nullableIntegerInRange) that the whole file depends on. The real prerequisite is a shared validators module; too small + cross-wired to be deep alone.
-- GENERIC VALIDATORS -> server/validators.mjs: DEFERRED as a standalone cut. Tempting prerequisite, but on its own it is shallow pass-through (1-3 line pure fns; interface == bodies). Only worth doing if it unblocks a concrete cut that is otherwise blocked; the proposed deep cuts (import-listing, parse owners) inject the validators they need directly, so this is not on the critical path. Fold opportunistically.
-- COMPOSITION ROOT / serverContext / serverRoutes / ensureDatabaseShape (api.mjs ~39-713): SKIP. The wiring harness — its job is to reference everything, so interface == dependencies by definition. H3 rejects pass-through churn, which relocating serverContext/serverRoutes would be. ensureDatabaseShape (DDL) is the only sub-piece with a smaller interface but it is contract-sensitive (schema) and already delegates per-domain DDL. Leave as the composition root.
-- QUESTION GROUP CRUD WRITES (api.mjs 4488-4857): SKIP (shallow). ~370 lines but the factory must inject openDatabase + selectQuestionGroupCards + normalizeTags and the module still owns raw INSERT/UPDATE SQL across 6 tables + transaction choreography — interface ~= state, no hidden-complexity win. Contract-sensitive (schema + AI-parse-adjacent payload). File-size reduction alone is insufficient per DEEP-MODULE-OR-SKIP.
-- PAPER SET PERSISTENCE + WORKFLOW STATUS ENGINE (api.mjs 4859-5429): SKIP for now. listPaperWorkflowStatuses is an aggregator needing 5+ injected deps (listImportBundles/buildObjectiveBankStatus/findExportFile/selectPaperSetSummaries/objectivePaperSections) — seam carries more than it hides. Its callers are inline branches, not a route module, until H10-A lands; revisit Paper Workflow status as a read-model only after its routes are modularized.
-- SAVE-READING-PARSE PERSISTENCE OWNER (api.mjs 8106-8433): SKIP (premature). Real DB-owning unit but carries raw SQL for 4 tables + a getter trio that lives elsewhere; pulling just saveReadingParseResult would inject ~6 db-bound selectors and split SQL awkwardly. Defer to a later persistence-layer cut, not the AI-infra lane.
-- MODEL-NORMALIZATION + KEY-SOURCE HELPERS (api.mjs 6301-6623): FOLD into H5-D as private helpers, not a separate cut. Five trivial pure string fns; standalone is textbook shallow. TRAP: api.mjs normalizeDeepSeekModel (flash-default) DIVERGES from server/ai-providers/deepseek.mjs (pro-default) — do NOT de-dup; that is a behavior change.
-- DEEPSEEK_*_PROMPT STRING CONSTANTS (api.mjs 6326-6615): SKIP. Moving ~290 lines of prompt text is data-relocation, not a deep module, and is the highest-blast-radius change (frozen AI-parse contract; whitespace drift changes model output). If ever moved, byte-identical isolated PR with prompt-diff verification owned by PA — not in this roadmap.
-- PASSAGE-SUMMARY + TOPIC-LABEL GENERATION/BIND/LIST (api.mjs ~9560-10578): SKIP/defer (shallow). Two thin orchestrators (~3-4 fns each) that mostly delegate one DeepSeek call + one normalize + one small DB write; the topic-label half already has its durable backfill seam (server/topic-labels/backfillTopicLabels.mjs). Interface ~= carried complexity. Relocate opportunistically only when topic-labels is touched for another reason.
-- TOPIC-LABEL TAXONOMY + NORMALIZE/PERSIST (api.mjs ~132-1019): DEFERRED (deep but split + contract-sensitive). A genuine deep module (390 lines of taxonomy/alias tables collapse to ~4 fns) and the intended home exists, BUT it is split across the file (taxonomy at 132-1019 vs bind/generate/list at 10497-10578) and a clean cut must reunite them. Taxonomy is a published label vocabulary (ADR-0010-adjacent) needing PA sign-off. Worth doing as its own H5-x cut later, after the parse domain settles; not front-loaded because it is contract-sensitive and not mergeable solo.
-- PI SURFACE-ADAPTER SHELL/textMap/findAllTextRanges MERGE (paperAssetSurfaceAdapter/sevenChoices/clozeAnalysis/grammarFill...): SKIP (trap). The same-named bodies DIVERGE meaningfully (two buildClozeTextMap variants produce different textMaps; findAllTextRanges has different paragraphId scoping; buildShellReport carries per-type prompt/run/region/question-synthesis). Merging forces a parameter bag ~= body width AND touches the contract-sensitive PaperSurface textMap (GATE-1/MF-1). Only emptyLoads/ZERO_LOAD_BAR is safely shared and too small to justify a cut.
-- questionBank.ts TYPE BARREL + questionGroups.ts CLIENT SHARDING: SKIP. questionBank.ts is declaration-only (no logic to hide); sharding the 70-type barrel is pure import-path churn H3 rejects. questionGroups.ts's ~40 fetch wrappers have no shared hidden state — the right fix is the shared requestJson helper (H11-A), which de-dups in place; per-domain sub-files would just be name-spacing with churned imports.
-- APP.tsx AI DETAIL-PARSE HANDLER WEB (~2314-2957, ~30 state slices + aiRunIdRef): SKIP (#1 do-not-naively-extract trap). Any hook would RETURN all ~30 state slices (consumed by detail JSX line-by-line) AND take selectedDetail/setSelectedDetail/setQuestionGroups/api creds — interface strictly LARGER than body. The run-id race guard couples openDetail to every handler. Prerequisite: collapse the 4x *Parse (result/status/error/saveStatus/saveError) quintuple into one discriminated union FIRST (separate PR).
-- APP.tsx IMPORT WORKBENCH MODAL (~6268-7186, ~25 state slices): SKIP. Interface (a useImportWorkbench hook would surface ~25 slices + ~16 handlers + injected refreshQuestionGroups/paperDraft/savedPapers) is not smaller than the body. Strategically, features/paper-import + features/paper-import-ai already exist as the modern replacement routes — this legacy modal is likely soon-superseded; confirm with owner before investing.
-- APP.tsx WORKFLOW VIEW / DATA-FETCH EFFECTS / WORKBENCH ROUTER / STEWARD CHAT / MODULE-SCOPE LABEL RELOCATION: SKIP/defer (shallow). WorkflowView needs ~12 callbacks + 6 state slices; data-fetch effects share refreshQuestionGroups (called from ~12 handlers) so a hook's return == its body; the router hook would return 5 flags + currentPiRoute + ~8 callbacks (thin wrapper); steward chat's output IS shared search state read by filteredGroups (no clean callback boundary); module-scope label/util relocation is pure file-shrink (~730 lines, ~40 exports == its own surface). The 9x duplicated URL-rewrite blocks are a low-risk DRY-only cleanup, not a deep seam — worth at most a tiny navigateRoute() helper, not a module.
-- OVER-EXPORTED INTERNAL HELPERS + TRIVIAL DUPLICATED LEAF HELPERS (routeError x6/optionalString x6/readJsonFile x3/sha256 x2/cloneJson x2; firstTextFromChatCompletion etc.): SKIP. De-exporting live functions is cosmetic churn with risk of breaking a future verify import for ~zero value. The trivial-helper dedup is 1-3 line pure fns whose shared-module interface == the bodies (no hidden complexity) — classic pass-through churn H3 rejects. NOTE the 6th routeError (paper-import-ai/routes.mjs) has an extra 'message' in error branch (divergent — never blind-merge). Only fold optionalString opportunistically into H6-A if convenient.
-- PREVIEW LEGACY REPORT LOADER (PaperIntelligencePreview.tsx 150-225) + HARNESS LOADER (PaperIntelligencePaperSurfaceHarness.tsx 289-631): the harness loader is a genuine deep cut (4 scalars -> 1 LoadResult union hiding ~340 lines of fetch sequencing) and SHOULD become a future cut, but it is contract-sensitive (sequences PaperSurface contract data) and user-visible-adjacent, and verify-c6a4 string-matches harness source (mechanical update needed). Deferred from this batch to keep the early roadmap mergeable-while-owner-away; propose as a dedicated PI-loader cut next round. The Preview loader rides along with it (shallow standalone).
+- Prompt interiors need direct byte/content assertions.
+- Free-identifier review must be paired with stubbed invocation.
+- Registered verifiers must not depend on a local branch ref.
+- Move-equivalence checks should cover response envelopes and persisted payload
+  shapes, not only successful process exit.
