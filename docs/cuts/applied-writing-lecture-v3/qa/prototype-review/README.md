@@ -48,12 +48,15 @@ The live owner-review browser is intentionally left with two tabs, one real
 paper per packet. Each starts on `① 审题要点`; the owner can click
 `② 亮点句式` inside the paper.
 
-Owner visual adjustment on 2026-07-23: in the 2024 review view, the `要点②`
-note now uses the collision-free lower-left whitespace inside the answer frame
-(`2024-point2-lower-left.png`). The English anchor does not move; its leader
-still binds the note to the original sentence. The materially longer 2022
-packet has no equivalent collision-free lower-left candidate and therefore
-retains Variant A's global-solver fallback.
+Owner visual adjustment on 2026-07-23: the attempted 2024 lower-left `要点②`
+placement (`2024-point2-lower-left.png`) proved the pocket was geometrically
+free but humanly wrong: its 163 px leader crossed too much empty paper. The
+accepted follow-up rule caps that preference at a 72 px connector, so this
+packet returns to the nearer global-solver placement. Review-view micro leaders
+now visibly enter the underline and always point toward the note, fixing the
+two ambiguous left-margin ticks without moving any English source text.
+`2024-short-directional-leaders.png` is the resulting owner-review state;
+`2024-point2-lower-left.png` remains only the rejected comparison.
 
 ## Renderer precheck
 

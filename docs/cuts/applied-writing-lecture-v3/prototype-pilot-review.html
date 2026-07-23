@@ -1163,7 +1163,8 @@
         slot.rect.left <= answer.left + answer.width * .45 &&
         slot.rect.right <= answer.right - 12 &&
         slot.rect.top >= contentBounds.bottom + 18 &&
-        slot.rect.bottom <= answer.bottom - 8
+        slot.rect.bottom <= answer.bottom - 8 &&
+        slot.route.length <= 72
       );
       const placementPool = isSecondPointReview && lowerLeftInside.length
         ? lowerLeftInside
@@ -1309,7 +1310,9 @@
       const horizontal = Math.abs(noteCenter.x - anchorCenter.x) >= Math.abs(noteCenter.y - anchorCenter.y);
       const source = horizontal
         ? {
-            x: noteCenter.x >= anchorCenter.x ? anchor.right : anchor.left,
+            x: noteCenter.x >= anchorCenter.x
+              ? Math.max(anchor.left + 5, anchor.right - 18)
+              : Math.min(anchor.right - 5, anchor.left + 18),
             y: anchor.bottom + 1.5
           }
         : {
@@ -1361,8 +1364,9 @@
     function drawLeader(placement, order) {
       const route = placement.slot.route;
       const flick = route.mode === 'flick';
-      const micro = flick && route.length < 8;
-      const arrowed = (placement.entry.index * 5 + pageIndex + layoutSeed) % 3 === 0;
+      const micro = flick && route.length < 12;
+      const arrowed = pageIndex === 0 ||
+        (placement.entry.index * 5 + pageIndex + layoutSeed) % 3 === 0;
       const microPath = micro ? microLeader(placement.slot.rect, placement.entry.anchorRects, order) : null;
       const arc = makePath(
         micro ? microPath.shaft : route.d,

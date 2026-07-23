@@ -66,9 +66,13 @@ not owner approval. Required result:
 - leaders exist, do not cross or traverse text; arrows point source -> note;
 - same seed reproduces placement; reseed changes only placement/leader mix;
 - on review view, the fifth fixed-grid mark (`points[1]` / `要点②`) prefers a
-  collision-free lower-left pocket inside the answer frame when one exists,
-  while its literal English anchor remains in the essay's original reading
-  order; otherwise the global solver remains authoritative;
+  collision-free lower-left pocket inside the answer frame only when its
+  connector is `<= 72 px`, while its literal English anchor remains in the
+  essay's original reading order; otherwise the nearer global-solver placement
+  remains authoritative;
+- review-view adjacent micro leaders start visibly inside the matching
+  underline and always carry an arrowhead toward the note; a tiny ambiguous
+  tick and a half-page leader are both rejection cases;
 - persisted outer model answer, review card/marks, highlight text/long note, and
   array order do not drift.
 - when a base-width note has no side-lane candidate, a narrower note may enter

@@ -168,12 +168,14 @@ No commit after `f64038f` on removed worktrees is live authorization.
   invented in this cut.
 - Owner visual adjustment (2026-07-23): on review view, the fixed fifth mark
   (`points[1]`, rendered as `要点②`) prefers valid lower-left whitespace inside
-  the answer frame. The 2024 pilot has that pocket and uses it; a packet without
-  a collision-free pocket stays with the global solver. The English source
-  always stays in the original essay flow and its leader still points from that
-  literal anchor to the note. This is one semantic placement preference in the
-  locked five-mark class, not a hard-coded coordinate or permission to move
-  source text.
+  the answer frame only when the connector remains human-scale (`<= 72 px`).
+  The 2024 bottom pocket failed that handwriting test and therefore returns to
+  the nearer global-solver placement. The English source always stays in the
+  original essay flow. Review-view micro leaders deliberately begin slightly
+  inside the underlined anchor and always finish with an arrowhead at the note,
+  so adjacent margin notes visibly bind to their source instead of reading as
+  stray ticks. This is a semantic placement/gesture rule, not a hard-coded
+  coordinate or permission to move source text.
 
 ## D8 — Locked pilot teaching content
 
