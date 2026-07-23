@@ -6,7 +6,7 @@ State: human-decision
 Blockers: owner visual “过关” on both tabs of both real-packet prototype states
 Claimed by: fresh PM plan-revision (write-held)
 Base head: `github/main@1deec0f`
-Expected head: `8081cabc9dbf63d182fdab5a3172eb0394a8d08c`
+Expected head: `b91514ab18d5a4d35904c4b70378c8d68a9d4562`
 Output path: `docs/cuts/applied-writing-lecture-v3/`
 
 ## Question

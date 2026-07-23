@@ -1,7 +1,7 @@
 # 应用文讲评渲染 v3 · Wayfinder Map
 
-State: human-decision (owner visual verdict on the real-packet prototype
-pending)
+State: human-decision (owner visual verdict on real-packet prototype head
+`b91514ab18d5a4d35904c4b70378c8d68a9d4562` pending)
 Current ticket: [AWL-V3-01 终版批注原型生产化](tickets/AWL-V3-01.md)
 
 ## Notes

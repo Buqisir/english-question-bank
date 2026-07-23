@@ -6,7 +6,8 @@ Source branch: `codex/applied-writing-lecture-v3-20260722-01`
 Worktree: Codex-managed detached worktree
 Released PA result head: `e5d8dec9c76b35d581bc61e96b41681e3c7c7529`
 Released PM plan-revision head: `eefa1305f326c0d25c4fcb6b5122ea8e75323051`
-Revised contract head: `8081cabc9dbf63d182fdab5a3172eb0394a8d08c`
+Real-packet owner-review head:
+`b91514ab18d5a4d35904c4b70378c8d68a9d4562`
 Activation evidence: after `git fetch github`,
 `github/codex/applied-writing-lecture-v3-20260722-01` resolved exactly to
 `eefa1305f326c0d25c4fcb6b5122ea8e75323051`; that released head is an ancestor
@@ -14,6 +15,9 @@ of the current `HEAD` (which also equals it), and the worktree was clean.
 Evidence: `plan.md` records 4/5 closed Must Fix dispositions and one remaining
 blocking PO decision: owner personal visual “过关” on both tabs of both exact
 packets in `prototype-pilot-review.html`.
+Live-host evidence at that head measures the real lecture-open page as
+`canvas 794 / answer 612 / rail 380` at 1470 × 719 and
+`canvas 628 / answer 446 / rail 380` at 1200 × 719, with no overlap.
 Successor authorization: none while human decision is pending; fresh DEV is
 forbidden.
 
