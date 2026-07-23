@@ -6,6 +6,8 @@ Source branch: `codex/applied-writing-lecture-v3-20260722-01`
 Worktree: Codex-managed detached worktree
 Released PA result head: `e5d8dec9c76b35d581bc61e96b41681e3c7c7529`
 Released PM plan-revision head: `eefa1305f326c0d25c4fcb6b5122ea8e75323051`
+Released owner-approved DEV plan head:
+`9f87000cc51f59b985d420471d095230fa35f02a`
 Owner-approved real-packet prototype head:
 `4208c672373433b1b357228c55af1645f5ccbb7e`
 Activation evidence: after `git fetch github`,
@@ -20,6 +22,10 @@ Live-host evidence at that head measures the real lecture-open page as
 `canvas 628 / answer 446 / rail 380` at 1200 × 719, with no overlap.
 Successor authorization: exactly one fresh DEV from the next released exact
 head; no other successor is authorized.
+Release evidence: after `git fetch github` on 2026-07-23,
+`github/codex/applied-writing-lecture-v3-20260722-01` and worktree `HEAD`
+resolved exactly to `9f87000cc51f59b985d420471d095230fa35f02a`;
+the released head was an ancestor of `HEAD`, and the worktree was clean.
 
 ## Current objective
 

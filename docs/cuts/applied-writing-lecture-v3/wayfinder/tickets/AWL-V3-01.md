@@ -6,7 +6,8 @@ State: ready-for-dev
 Blockers: none
 Claimed by: fresh PM plan-revision (releasing one fresh DEV)
 Base head: `github/main@1deec0f`
-Expected head: next committed and pushed PM closure head
+Owner-approved DEV plan head:
+`9f87000cc51f59b985d420471d095230fa35f02a`
 Output path: `docs/cuts/applied-writing-lecture-v3/`
 
 ## Question
@@ -87,4 +88,6 @@ note.
 The owner personally passed the final real-site prototype on 2026-07-23 at
 exact head `4208c672373433b1b357228c55af1645f5ccbb7e`. MF-1 is closed; the formal
 PA disposition count is 5/5 and blocking PO decisions are zero. Exactly one
-fresh DEV is now authorized.
+fresh DEV is now authorized. After `git fetch github`, the owner-approved plan
+release recheck proved remote source ref, local `HEAD`, and released head all
+equal `9f87000cc51f59b985d420471d095230fa35f02a`; the worktree was clean.
