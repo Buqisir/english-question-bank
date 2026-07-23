@@ -7,11 +7,11 @@ Historical relay records live in `relay-history.md` and are non-authoritative.
 
 - Cut id: `codex-matt-governance`
 - Cut size: `large governance`
-- Lifecycle state: `blocked`
-- Active role: `none`
+- Lifecycle state: `active`
+- Active role: `RM recovery dispatcher`
 - Source branch: `codex/codex-matt-governance-live-state-migration-20260722-01`
 - Current worktree: `/Users/huangxuewei/.codex/worktrees/d483/english-question-bank`
-- Released input head: `fce640d2c075f3ec6c443f42d491a1bd65ba8617`
+- Released input head: `9d8137764bcce0f5fd1f0cfba8439d2e674c149f`
 
 ## Current evidence
 
@@ -46,7 +46,22 @@ Historical relay records live in `relay-history.md` and are non-authoritative.
 - Preserved scope: no production change or write to
   `wt-applied-writing-lecture` is authorized.
 
+## Fix DEV dispatch
+
+- Dispatch id: `codex-matt-governance-readme-ci-fix-20260722-01`
+- State: `dispatch-pending`
+- Role: `fresh Fix DEV`
+- Configured model: `gpt-5.6-terra`
+- Selected model: `gpt-5.6-terra`
+- Requested thinking: `medium`
+- Availability source: `Codex create_thread capability on local host`
+- Supported-thinking evidence: `gpt-5.6-terra supports medium`
+- Eligibility proof: `configured primary is the sole same-family/same-grade candidate`
+- Substitution reason: `none`
+- Scope: `scripts/README.md CI registry parity only, plus own routing state`
+- Forbidden: `all external-audit observations, governance rule redesign, product/runtime, production, and wt-applied-writing-lecture`
+
 ## Next Action
 
-1. Route one fresh Fix DEV for the single CI registry/documentation parity
-   failure, then repeat verification, re-review, and fresh RM closeout.
+1. Create exactly one top-level write-held fresh Fix DEV for the recorded
+   dispatch, then release it from the predecessor's final commit.
