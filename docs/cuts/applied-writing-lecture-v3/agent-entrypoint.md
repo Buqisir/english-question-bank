@@ -1,18 +1,21 @@
 # applied-writing-lecture-v3 · Live Entrypoint
 
-State: handoff-ready
-Active role: none (Wayfinder / PM result committed; write authority closed)
+State: active
+Active role: fresh formal PA (`AWL-V3-PA-20260722-01`)
 Source branch: `codex/applied-writing-lecture-v3-20260722-01`
-Worktree: `/Users/huangxuewei/Projects/wt-applied-writing-lecture-v3`
-Released input head: `def933be06aa171710bfb6d012a7639e30e245e7`
-Evidence: `verification.md`, PM baseline + PM contract commit
-Successor authorization: exactly one fresh formal PA, dispatch
-`AWL-V3-PA-20260722-01`
+Worktree: Codex-managed detached worktree
+Released input head: `64a6784a71b70edb23da745ca24d945982a8a6bc`
+Activation evidence: `github/codex/applied-writing-lecture-v3-20260722-01`
+resolved exactly to the released input head; that head was an ancestor of
+worktree `HEAD`; worktree was clean after `git fetch github --prune`.
+Successor authorization: pending formal PA verdict; this PA owns exactly one
+Auto-Next transition.
 
 ## Current objective
 
-Cold-read the committed production contract in a fresh formal PA task. The
-predecessor PM has no remaining write authority and no DEV is authorized.
+Cold-read the committed production contract as the active fresh formal PA.
+The predecessor PM has no remaining write authority and no DEV is authorized
+until the PA verdict permits it.
 
 ## Must read
 
@@ -33,7 +36,8 @@ predecessor PM has no remaining write authority and no DEV is authorized.
 ## Relay
 
 - Dispatch ID: `AWL-V3-PA-20260722-01`
-- Next role: fresh formal PA
+- Current role: fresh formal PA
+- Next role: pending PA verdict
 - Output: `docs/cuts/applied-writing-lecture-v3/pa.md`
 - Configured / selected model: `gpt-5.6-sol` / `gpt-5.6-sol`
 - Thinking: `high`
@@ -61,6 +65,5 @@ predecessor PM has no remaining write authority and no DEV is authorized.
 
 ## Next Action
 
-1. Create exactly one fresh formal PA from this branch; successor re-proves the
-   released exact HEAD, records `active` in its first commit, writes `pa.md`,
-   and owns the next Auto-Next transition.
+1. Complete the formal PA cold read, write `pa.md`, and record exactly one
+   eligible Auto-Next transition or a named escalation.
