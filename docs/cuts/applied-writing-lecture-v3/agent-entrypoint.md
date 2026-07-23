@@ -1,6 +1,6 @@
 # applied-writing-lecture-v3 · Live Entrypoint
 
-State: handoff-ready
+State: blocked
 Active role: none
 Source branch: `codex/applied-writing-lecture-v3-20260722-01`
 Released CR input head: `43703387e4edce5790753250f19b1401ef6a10bb`
@@ -8,6 +8,15 @@ Runtime/data review head: `017164dc4697f6131747202b9a0c51b7d3593829`
 Baseline: `github/main@1deec0fce29852556bb60e0b2fd8a1fb6075f2d4`
 Evidence: `verification.md`, `dev-result.md`, and the diff from baseline to the
 runtime/data review head.
+Activation evidence (2026-07-23): fetched `github`; remote source head is
+`8e2819b269a391d0da4a9ce369b8469696de4dad`; released CR input
+`43703387e4edce5790753250f19b1401ef6a10bb` is its ancestor; the allowed
+runtime/data paths have no diff from
+`017164dc4697f6131747202b9a0c51b7d3593829` to the remote source head; the CR
+worktree was clean before this activation write.
+Fresh CR result (2026-07-23): `cr.md` records **NOT MERGEABLE** with six
+unresolved Must Fix findings. The original verification remains non-green.
+No QA, RM, merge, deployment, or successor role is authorized by this CR.
 
 ## Current objective
 
@@ -68,11 +77,11 @@ Its first write changes this entrypoint to `active` and records that evidence.
 
 ## Successor authorization
 
-Exactly one fresh top-level CR task is authorized. No other task, role,
-subagent, merge, QA, RM, or deployment is authorized from this state.
+No successor is authorized by the fresh CR. PM must first disposition the six
+Must Fix findings in `cr.md` and explicitly release the next bounded role.
 
 ## Next Action
 
-1. Create `AWL-V3-CR-20260723-01` as one new top-level Codex task from the
-   source branch with `gpt-5.6-sol` / `high`; receive its task ID, then this
-   task exits without waiting for the CR result.
+1. PM reads `cr.md`, records bounded dispositions for all six Must Fix
+   findings, and decides whether the existing 16-file exception can still hold.
+2. Only after a committed PM release may one fresh DEV remediation task start.
