@@ -1,7 +1,8 @@
 # applied-writing-lecture-v3 · Current Decisions
 
 Last synced: 2026-07-22 after formal-PA plan revision.
-Open blocking PO decisions: 1 (exact two-pilot teaching-content confirmation).
+Open blocking PO decisions: 1 (owner visual “过关” on the real-packet
+prototype).
 
 ## D1 — Teacher task
 
@@ -153,12 +154,17 @@ No commit after `f64038f` on removed worktrees is live authorization.
 - This replacement is lecture-only DOM. Student mode and every print, PDF,
   DOCX, export, non-lecture, unavailable, and loading path retain the current
   exam-format answer box and never receive annotation fonts/content.
-- The approved prototype is a fixed desktop canvas with `body min-width:
-  1180px`; production therefore supports v3 only at viewport width >= 1180 CSS
-  px. At 1180–1199 px the current right rail may remain its existing drawer,
-  but the paper stage stays 794 px and does not reflow. Below 1180 px the stage
-  does not mount; the original 246 px answer box remains. No horizontal-scroll
-  canvas, scaled stage, wrapped annotation layout, or mobile variant may be
+- The host is the website's existing `.paper-browse-content` paper canvas.
+  Opening lecture reflows that canvas and the 380 px rail side-by-side; the rail
+  does not cover the paper. Real-page measurement at 1470 × 719 is
+  `canvas 794 / nested writing 612 / answer 612 × 246 / rail 380`, exactly
+  matching the prototype's outer/inner widths.
+- V3 availability follows the measured canvas, not a fixed viewport guess:
+  mount only when the reflowed paper canvas is its full 794 CSS px. Below that
+  canvas width, preserve the existing responsive 246 px answer box and current
+  lecture rail behavior. Local 1200 × 719 evidence was
+  `canvas 628 / answer 446 / rail 380`, side-by-side without overlap.
+  No horizontal-scroll canvas, scaled stage, overflow, or mobile variant may be
   invented in this cut.
 
 ## D8 — Locked pilot teaching content
@@ -172,5 +178,7 @@ Their current model answers and outer long-highlight fields are byte-for-byte
 bound to `github/main@1deec0fce29852556bb60e0b2fd8a1fb6075f2d4`.
 The new review/lecture teaching copy passed PM checks for prompt fit, grammar,
 register, reader relationship, purpose, literal anchors, length, and Gaokao
-vocabulary. Owner teaching confirmation remains a hard DEV precondition; DEV
-may transport confirmed content but may not invent or rewrite it.
+vocabulary. `prototype-pilot-review.html` renders both packets in the real
+794 / 612 canvas shape, and machine precheck reports `5/5 + 4/4` for each.
+The owner's personal visual “过关” remains the hard DEV precondition; DEV may
+transport approved content but may not invent or rewrite it.

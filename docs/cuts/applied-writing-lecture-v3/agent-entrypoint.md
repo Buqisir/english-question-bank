@@ -12,17 +12,18 @@ Activation evidence: after `git fetch github`,
 `eefa1305f326c0d25c4fcb6b5122ea8e75323051`; that released head is an ancestor
 of the current `HEAD` (which also equals it), and the worktree was clean.
 Evidence: `plan.md` records 4/5 closed Must Fix dispositions and one remaining
-blocking PO decision: owner teaching confirmation of the exact two-pilot
-content packets.
+blocking PO decision: owner personal visual “过关” on both tabs of both exact
+packets in `prototype-pilot-review.html`.
 Successor authorization: none while human decision is pending; fresh DEV is
 forbidden.
 
 ## Current objective
 
-Wait for owner confirmation of the two exact pilot teaching-content packets at
-SHA-256 `5618d515…b65037` and `39fd2fcd…bea35af`. DEV is forbidden until the PM
-records that decision, 5/5 closed Must Fix items, and zero blocking PO
-decisions.
+Wait for the owner to inspect 2022 / 2024 in both prototype tabs and explicitly
+say “过关”. The packets remain SHA-256 `5618d515…b65037` and
+`39fd2fcd…bea35af`; machine `5/5` / `4/4` is precheck only. DEV is forbidden
+until PM records the owner verdict, 5/5 closed Must Fix items, and zero blocking
+PO decisions.
 
 ## Must read
 
@@ -43,9 +44,9 @@ decisions.
 ## Relay
 
 - Dispatch ID: `AWL-V3-PM-REV-20260722-01`
-- Current role: fresh PM plan-revision in human-decision pause
-- Next role: owner PO teaching confirmation; then one fresh DEV only if the
-  counts become 5/5 and zero
+- Current role: fresh PM plan-revision in owner-visual-review pause
+- Next role: owner PO visual prototype verdict; then one fresh DEV only if the
+  owner says “过关” and the counts become 5/5 and zero
 - Output: revised `plan.md` dispositions plus linked decisions/spec/pilot
   content packet and live routing
 - Configured / selected model: `gpt-5.6-sol` / `gpt-5.6-sol`
@@ -76,6 +77,7 @@ decisions.
 
 ## Next Action
 
-1. Owner accepts or edits both exact pilot packets.
-2. PM records the decision and re-runs packet hashes/contracts. Only at 5/5 and
-   zero may it independently route and Auto-Next to one fresh DEV.
+1. Owner opens `prototype-pilot-review.html`, inspects both packets and both
+   tabs, and says whether it passes.
+2. PM records the visual verdict and re-runs packet hashes/contracts. Only at
+   5/5 and zero may it independently route and Auto-Next to one fresh DEV.

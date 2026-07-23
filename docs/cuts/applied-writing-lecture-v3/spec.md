@@ -11,7 +11,8 @@ Revision: `AWL-V3-SPEC-2` (2026-07-22 formal-PA disposition)
 | Handwritten leader spec | `f64038f:docs/specs/2026-07-21-human-handwritten-leader-design.md` | leader rendering contract |
 | Current decisions | this branch `decisions.md` | production data mapping and scope |
 | Current production baseline | `github/main@1deec0fce29852556bb60e0b2fd8a1fb6075f2d4` | runtime and two-pilot payload truth |
-| Locked pilot candidates | `pilot-content/paper-2022-i.application.json`, `pilot-content/paper-2024-i.application.json` | exact proposed teaching content; owner confirmation pending |
+| Locked pilot candidates | `pilot-content/paper-2022-i.application.json`, `pilot-content/paper-2024-i.application.json` | exact proposed teaching content |
+| Real-packet owner-review prototype | `prototype-pilot-review.html` | Variant A + actual site-shell boundary; owner visual verdict pending |
 
 The three `f64038f` files are available on
 `github/codex/applied-writing-lecture-prototype-archive-20260722`. Historical
@@ -51,10 +52,11 @@ mount the stage.
 ## Production-shaped parity gate
 
 Before renderer work, two locked pilots (`paper-2022-i`, `paper-2024-i`) must
-receive owner teaching confirmation, pass the real validator + persistence
-projection, and then feed an equivalent 794 × 472 annotation harness. DEV reads
-the exact candidates under `pilot-content/`; it does not author copy. Required
-result:
+receive the owner's personal visual “过关” in `prototype-pilot-review.html`,
+pass the real validator + persistence projection, and then feed an equivalent
+794 × 472 annotation harness. DEV reads the exact candidates under
+`pilot-content/`; it does not author copy. Machine `5/5` / `4/4` is a precheck,
+not owner approval. Required result:
 
 - review view `5/5`, highlight view `4/4`;
 - every anchor resolves literally in a single rendered answer line;
@@ -63,6 +65,8 @@ result:
 - same seed reproduces placement; reseed changes only placement/leader mix;
 - persisted outer model answer, review card/marks, highlight text/long note, and
   array order do not drift.
+- when a base-width note has no side-lane candidate, a narrower note may enter
+  if it unlocks a left/right lane; connector safety still rejects text hits.
 
 If parity needs a taller paper, cards, drawers, click-to-expand, copy
 truncation, heuristic string splitting, hard-coded positions, or more solver
@@ -116,11 +120,15 @@ harness, and browser behavior must reject the whole stage for every row below:
 - At 1470 × 719 the exact prototype acceptance applies. The fixed host is
   794 × 472 with a 612 × 458 inner frame; the 91 px paper gutters remain
   available to the solver.
-- Minimum supported v3 viewport is 1180 CSS px, inherited from the selected
-  prototype. At 1180–1199 px the current lecture rail may use its existing
-  drawer, while the stage remains 794 px. Below 1180 px, do not mount the
-  stage; preserve the original 246 px answer box. Do not scale, reflow,
-  horizontally scroll, or invent a mobile annotation variant.
+- The responsive boundary is the real paper canvas, not a guessed viewport
+  number. After the existing lecture shell reflows, mount v3 only when
+  `.paper-browse-content` measures its full 794 CSS px; its nested writing
+  content and answer box then measure 612 px. If the live canvas is below
+  794 px, do not mount the stage and preserve that canvas's current responsive
+  246 px answer box. Local reproduction evidence: 1470 × 719 yielded
+  `794 / 612 / 380` for canvas / answer / rail; 1200 × 719 yielded
+  `628 / 446 / 380`, still side-by-side with no overlap. Do not scale,
+  horizontally overflow, or invent a separate mobile annotation variant.
 
 ## Explicit non-goals
 

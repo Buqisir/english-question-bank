@@ -29,7 +29,9 @@ to the original model-answer sentences without breaking the essay reading flow.
    Shantell Sans is only English annotation/transfer ink.
 7. The lecture-only host replaces 246 px with the fixed 794 × 472 stage
    (612 × 458 frame) for the active available group; teardown restores 246 px.
-8. Backend authors/persists; website consumes; continuation and exports remain
+8. V3 mounts only when the real `.paper-browse-content` canvas measures its
+   full 794 CSS px; the viewport number is evidence, not the product contract.
+9. Backend authors/persists; website consumes; continuation and exports remain
    unchanged.
 
 ## Implementation slices
@@ -58,10 +60,11 @@ to the original model-answer sentences without breaking the essay reading flow.
 
 ### P2 — Two locked pilot payloads and parity harness
 
-- Owner must first confirm the exact candidates in `pilot-content/README.md`
-  and the two linked JSON objects at SHA-256 `5618d515…b65037` (2022) and
-  `39fd2fcd…bea35af` (2024). This is a hard DEV gate; teaching copy is not
-  delegated to DEV.
+- Owner must first inspect both exact candidates in the interactive
+  `prototype-pilot-review.html` (both tabs for 2022 and 2024) and explicitly
+  say the prototype passes. The linked JSON objects remain bound to SHA-256
+  `5618d515…b65037` (2022) and `39fd2fcd…bea35af` (2024). This visual owner
+  verdict is the hard DEV gate; teaching copy is not delegated to DEV.
 - After confirmation, DEV writes those exact objects for `paper-2022-i` and
   `paper-2024-i` through the real validator +
   `persistWritingAnalysisGroup`; no hand-edited final JSON and no copy changes.
@@ -88,11 +91,19 @@ to the original model-answer sentences without breaking the essay reading flow.
   and 612 × 458 frame while active. The stage may use the paper's 91 px gutters
   but may never grow taller. Closing restores 246 px; print/export/student DOM
   never sees the replacement.
-- Support the stage only at viewport width >= 1180 CSS px. At 1180–1199 the
-  current rail drawer remains; below 1180 keep the 246 px box and do not mount,
-  scale, reflow, scroll, or invent a mobile stage.
+- Measure the real `.paper-browse-content` canvas after the existing lecture
+  shell reflow. Mount only when that canvas is 794 CSS px (its production cap);
+  the nested writing content/answer width is then 612 px. When the live canvas
+  is narrower, keep its current responsive 246 px answer box and do not mount,
+  scale, overflow, or invent a mobile stage. Local real-page evidence at
+  1470 × 719 was `canvas 794 / answer 612 / rail 380`; at 1200 × 719 it was
+  `canvas 628 / answer 446 / rail 380`, with no overlap in either state.
 - Port Variant A's DOM measurement, two-dimensional pockets, fair allocation,
   leader rules, font-ready measurement, deterministic seed, and reseed behavior.
+  The real-packet prototype adds one exact feasibility rule: a narrower note
+  candidate may enter when it unlocks a left/right lane; it does not also need
+  the connector's `near` classification. This produced 2022 `5/5` without
+  changing copy, height, coordinates, or annotation typography.
   Keep solver internal; do not export scoring internals as product contracts.
 - Self-host one payload-codepoint-subset WOFF2 each for Xiaolai and Shantell
   Sans, with separate OFLs and one source/version/build record. Xiaolai source
@@ -190,8 +201,8 @@ Pre-DEV / P1-P2:
 - `node --check server/writing-analysis/writingAnalysisBackfillService.mjs`
 - `node scripts/verify-restart3-teacher-analysis.mjs`
 - payload parity harness: two pilots, 5/5 + 4/4 + geometry/anchor invariants.
-- owner teaching confirmation recorded in
-  `pilot-content/README.md` for both exact candidate hashes.
+- owner visual prototype verdict recorded in `pilot-content/README.md` for both
+  exact candidate hashes and all four packet/tab states.
 
 DEV completion:
 
@@ -218,8 +229,11 @@ Missing dependencies are environment evidence, not an implementation verdict.
 5. With the 2024 stage open, scroll/select continuation and the other writing
    group: the application stage unmounts, active group/rail agree, and returning
    does not restore stale tab/seed state.
-6. At 1180 px the fixed 794 × 472 stage remains exact with the current rail
-   drawer; at 1179 px the stage does not mount and the 246 px box remains.
+6. With the real lecture shell open, a measured 794 px canvas mounts the exact
+   794 × 472 stage and 612 × 458 frame. One CSS pixel below the canvas cap does
+   not mount v3 and retains the responsive 246 px box. QA records the viewport
+   only as reproduction evidence; no fixed viewport breakpoint substitutes for
+   the canvas measurement.
 7. Close lecture and export student/teacher print/PDF/DOCX smoke: no annotation
    DOM/content leaks; Esc returns the original paper flow.
 
@@ -242,8 +256,9 @@ Missing dependencies are environment evidence, not an implementation verdict.
 - [x] DP-1 PM compressed approved prototype + real payload into current contract.
 - [x] DP-2 fresh formal PA verdict; `pa.md` records
   `APPROVE WITH MUST FIX` (5 unresolved Must Fix, 3 blocking PO decisions).
-- [ ] DP-2A owner confirms both exact pilot teaching-content packets; this is
-  the only remaining blocking PO decision.
+- [ ] DP-2A owner personally inspects both tabs of both real-packet states in
+  `prototype-pilot-review.html` and explicitly says “过关”; this is the only
+  remaining blocking PO decision. Machine `5/5` / `4/4` is precheck only.
 - [ ] DP-3 DEV exact-head implementation complete.
 - [ ] DP-4 fresh verification exact-head PASS.
 - [ ] DP-5 fresh CR 0 unresolved Must Fix.
@@ -261,7 +276,9 @@ record one disposition for every item in `pa.md`'s
   exist under `pilot-content/`, teaching interpretation is `yes`, current outer
   payload fields are byte-for-byte preserved, PM grammar/register/
   relationship/purpose/vocabulary checks pass, and P2 forbids DEV-authored
-  teaching copy. **Open only on owner confirmation of both exact packets.**
+  teaching copy. The real-packet Variant A prototype and four screenshots exist
+  under this cut and machine precheck is 2022 `5/5 + 4/4`, 2024 `5/5 + 4/4`.
+  **Open only on the owner's personal visual inspection and explicit “过关”.**
 - [x] **MF-2 — fixed mark class:** D3/P1 support exactly two points and the
   prototype-backed grid order
   `[type, cares, points, tense, points]`; all other point counts, grid orders,
@@ -272,8 +289,9 @@ record one disposition for every item in `pa.md`'s
   highlight anchors, including malformed-present fixtures.
 - [x] **MF-4 — active host/state:** D5/D7 and P3 lock the answer-box trigger,
   explicit active writing group, mount predicate, teardown, loading/
-  unavailable behavior, 246/472 replacement, 612 × 458 frame, and 1180/1179
-  narrow boundary. The selected prototype—not DEV—settles the host.
+  unavailable behavior, 246/472 replacement, 612 × 458 frame, and
+  `canvasWidth === 794` / `< 794` boundary. The live site canvas and selected
+  prototype—not DEV—settle the host.
 - [x] **MF-5 — counted route:** one PM-approved PR contains exactly 16
   runtime/data files, with atomic rollback and exact-head verification
   boundaries above; a seventeenth file stops before write.
@@ -281,5 +299,5 @@ record one disposition for every item in `pa.md`'s
 Disposition closure is **4/5** and blocking PO decisions are **1**. The other
 two formal-PA PO decisions are closed by the already selected prototype: its
 fixed 794 × 472 replacement host and exact two-point five-mark order. DEV
-dispatch remains forbidden until the owner teaching confirmation closes MF-1,
-making the counts 5/5 and zero.
+dispatch remains forbidden until the owner personally passes the real-packet
+prototype, closing MF-1 and making the counts 5/5 and zero.

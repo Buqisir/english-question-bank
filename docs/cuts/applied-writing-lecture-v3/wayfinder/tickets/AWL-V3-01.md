@@ -3,7 +3,7 @@
 Type / role: Wayfinder -> PM contract -> formal PA -> DEV -> verification ->
 fresh CR -> QA -> RM
 State: human-decision
-Blockers: owner confirmation of two exact pilot teaching-content packets
+Blockers: owner visual “过关” on both tabs of both real-packet prototype states
 Claimed by: fresh PM plan-revision (write-held)
 Base head: `github/main@1deec0f`
 Expected head: `8081cabc9dbf63d182fdab5a3172eb0394a8d08c`
@@ -31,8 +31,8 @@ existing print/student isolation?
 
 ## Routing
 
-Current role: fresh PM plan-revision in human-decision pause
-Next role: owner PO teaching confirmation; then fresh DEV only at 5/5 and zero
+Current role: fresh PM plan-revision in owner-visual-review pause
+Next role: owner PO visual prototype verdict; then fresh DEV only at 5/5 and zero
 Configured model: `gpt-5.6-sol`
 Selected model: `gpt-5.6-sol`
 Thinking: `high`
@@ -44,10 +44,10 @@ Authorization scope: PM plan-revision may edit cut docs except canonical
 
 ## Unique Next Action
 
-1. Owner accepts or edits both exact pilot packets at hashes recorded in
-   `pilot-content/README.md`.
-2. PM records the decision; only 5/5 closed Must Fix and zero blocking PO
-   decisions authorize one fresh DEV.
+1. Owner inspects 2022 / 2024 and both tabs in
+   `prototype-pilot-review.html`, then explicitly says whether it passes.
+2. PM records that visual verdict; only 5/5 closed Must Fix and zero blocking
+   PO decisions authorize one fresh DEV.
 
 ## Result
 
@@ -68,6 +68,9 @@ the worktree was clean. Dispatch `AWL-V3-PM-REV-20260722-01` is active.
 PM revision `8081cabc9dbf63d182fdab5a3172eb0394a8d08c` adds both
 production-shaped pilot packets, closes MF-2 through MF-5, narrows the review
 contract to the prototype's exact two-point class, locks literal availability,
-active-group teardown, 794 × 472 / 612 × 458 host geometry, 1180 px boundary,
-Times New Roman essay font, and the exact 16-file route. MF-1 remains open only
-for owner teaching confirmation; state is `human-decision`, with no DEV task.
+active-group teardown, 794 × 472 / 612 × 458 host geometry, Times New Roman
+essay font, and the exact 16-file route. Live-site recheck corrected the
+responsive contract: lecture rail and paper are side-by-side, and v3 keys off
+the real paper canvas reaching its 794 px cap instead of a guessed viewport.
+MF-1 remains open only for the owner's visual prototype verdict; state is
+`human-decision`, with no DEV task.

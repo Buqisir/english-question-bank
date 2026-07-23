@@ -1,6 +1,6 @@
 # Applied-writing lecture v3 · Locked pilot content
 
-Status: **owner teaching confirmation pending**
+Status: **owner visual prototype review pending**
 
 These are exact pre-DEV candidate objects, not runtime assets:
 
@@ -22,10 +22,14 @@ These are exact pre-DEV candidate objects, not runtime assets:
   `lectureAnnotation` objects are the proposed new teaching content. They do
   not reuse the approved prototype's old 2024 letter or its old teaching copy.
 
-## Teaching interpretation gate
+## Owner prototype gate
 
-The owner must confirm both packets before DEV may write them through the real
-validator and persistence projection. Confirmation covers:
+The owner must personally inspect `../prototype-pilot-review.html`, switch
+between 2022 / 2024 and both `审题要点` / `亮点句式` tabs, and explicitly say
+“过关” before DEV may write the packets through the real validator and
+persistence projection. Machine `5/5` / `4/4` only proves all notes were
+placed; it cannot substitute for the owner's visual judgment. The verdict
+covers:
 
 1. review-card judgments match the prompt and current model answer;
 2. every review note teaches a visible function, not a decorative label;

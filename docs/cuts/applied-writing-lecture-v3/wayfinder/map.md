@@ -1,7 +1,7 @@
 # 应用文讲评渲染 v3 · Wayfinder Map
 
-State: human-decision (PM revision at `8081cabc`; exact pilot teaching
-confirmation pending)
+State: human-decision (owner visual verdict on the real-packet prototype
+pending)
 Current ticket: [AWL-V3-01 终版批注原型生产化](tickets/AWL-V3-01.md)
 
 ## Notes
@@ -29,12 +29,17 @@ Current ticket: [AWL-V3-01 终版批注原型生产化](tickets/AWL-V3-01.md)
 - The selected prototype already fixes the 794 × 472 replacement host and the
   two-point grid order. Owner clarified that essay text stays Times New Roman;
   only annotation English uses Shantell Sans.
+- Live local website measurement confirms lecture rail and paper reflow
+  side-by-side. The host is the existing canvas: at 1470 × 719 it is
+  794 px with a 612 px writing interior; v3 availability follows that measured
+  canvas width rather than a guessed viewport breakpoint.
 
 ## Frontier
 
 1. [AWL-V3-01 终版批注原型生产化](tickets/AWL-V3-01.md) — PM has closed
-   MF-2..MF-5; MF-1 waits only on owner confirmation of the two exact pilot
-   teaching-content packets. No DEV task exists.
+   MF-2..MF-5; MF-1 waits only on the owner's personal visual “过关” after
+   inspecting 2022 / 2024 and both tabs in `prototype-pilot-review.html`. No
+   DEV task exists.
 2. [AWL-V3-02 22 组应用文解析全套重产](tickets/AWL-V3-02.md) — blocked by
    AWL-V3-01 closeout and its published production contract.
 
