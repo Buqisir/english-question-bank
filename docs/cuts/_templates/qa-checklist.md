@@ -15,18 +15,16 @@ Deploy: <本地 dev / 生产 URL + commit>
 | 2 |  |  |  |  |
 | 3 |  |  |  |  |
 
-## 已知不在本刀范围
+## 已知不在本次范围
 
 <QA 中可能看到、但不属于本刀的已知问题,防误报;给指针>
 
-- <watch ledger / data-health 项指针>
+- <相关 issue / data-health 指针>
 
 ## 结论
 
 owner QA: <过 / 不过(哪一项)>;日期: <YYYY-MM-DD>
 
-Auto-Next pause: QA pass records the tested exact commit then waits for the
-literal owner instruction `QA 完成，继续` before dispatching fresh RM. A failure
-records `QA failed | exact commit | checklist item | observed result | expected
-result | reproduction` then dispatches fresh fix DEV. A QA pass never carries
-to a new head.
+QA task stays open for the owner response. After `QA 完成`, it returns the one
+copyable ship prompt. On failure, it returns one copyable fresh fix-ticket
+prompt. It never creates either task.

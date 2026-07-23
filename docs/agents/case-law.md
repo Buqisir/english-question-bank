@@ -12,6 +12,21 @@
 `~/.claude/skills/project-os/assets/case-law-universal.md`(仅本机;
 该 skill 目录自带 git,回流后一行 commit)。项目特有判例不回流。
 
+## 2026-07-23
+
+- **Auto-Next 全面退役，Matt 原生手工开发接管（owner 拍板）**：迁移到
+  Codex 后，为了模拟长期主协调 Agent，项目叠加 direct successor、
+  live-state、relay ledger、独立 verification/CR/RM 与模型派发证据。
+  实战出现顶层任务误开成 subagent、错误拓扑沿链继承，以及围绕
+  `agent-entrypoint.md` 措辞反复修验审、流程工作超过产品工作的失控。
+  Owner 决定不再修补自动接力：owner 手工创建每个顶层任务；普通功能走
+  Matt 的 `grill-with-docs → to-spec → to-tickets → fresh implement per
+  ticket`；巨大迷雾才 Wayfinder；skill 内部明确规定的 research/review
+  worker 可用，但永不成为 successor；高风险面只额外加一次独立顶层
+  review。→ 固化 `AGENTS.md`、
+  `docs/steering/codex-matt-workflow.md`、
+  `docs/agents/dispatch-protocols.md`。
+
 ## 2026-07-21
 
 - **Workflow 标准刀路由退役（owner 裁决）**：标准刀不再进入

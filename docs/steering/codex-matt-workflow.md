@@ -1,34 +1,267 @@
-# Codex × Matt two-axis workflow
+# EQB × Matt development workflow
 
-Risk and context topology are independent. Risk selects Small / Medium / Large
-/ irreversible gates. Context selects one bounded slice, a serial ticket graph,
-or a Wayfinder map; it never waives a risk gate.
+This is the practical guide for developing EQB with Matt Pocock's current
+skills. It replaces the retired Auto-Next relay.
 
-Wayfinder is a role and tracked map, not a required skill name. For foggy,
-large features it owns the durable frontier through decisions, tickets, spec,
-review, QA, and closeout; it is not a surviving coordinator conversation.
+## The one picture
 
-## Auto-Next relay
+```text
+small and clear
+  └─ implement now → verify → review → commit → DONE
 
-Each task owns one role, writes its durable result, and creates at most one
-independently addressable fresh direct successor. A parent-owned subagent may
-assist a role only; it never satisfies a PA, DEV, verification, formal CR,
-QA, or RM boundary. Initial CR/re-review has no DEV history.
+normal feature
+  └─ grill-with-docs → to-spec → to-tickets
+                         └─ fresh implement task per ticket
+                         └─ owner QA when visible
+                         └─ ship
 
-For a shared worktree: record `dispatch-pending`; create the write-held child;
-record `provisioning` then `ready-held`; make the predecessor's final commit
-with `release-authorized`; release its exact hash; the child re-proves that
-hash and clean state, makes its first permitted `active` record, acknowledges,
-and becomes sole writer. The predecessor then exits without a further write or
-waiting for the result. States are `blocked -> ready -> claimed ->
-result-recorded -> dispatch-pending -> provisioning -> ready-held ->
-release-authorized -> active -> closed`; failures are durable.
+huge and foggy
+  └─ Wayfinder map
+       └─ one fresh task per decision ticket
+       └─ to-spec → to-tickets → implement
+```
 
-Dispatchers read [model routing](../agents/model-routing.md), record explicit
-model/thinking and availability evidence, and do not create a task when no
-eligible candidate exists. Human QA pauses the relay; `QA 完成，继续` resumes
-with RM, while failed QA dispatches fresh fix DEV -> verification -> re-review.
+The owner opens every top-level task manually. An agent never creates the next
+task.
 
-Tracked multi-task truth lives under `docs/cuts/<CUT>/`; `.scratch/` is never
-shared state. The first three qualifying Medium/Large cuts use serial tracked
-topology as an evaluation gate.
+## What “manual” means
+
+Manual applies to the boundary between top-level tasks:
+
+- no Auto-Next;
+- no `create_thread` / fork / subagent successor;
+- no long-lived coordinator waiting for later roles;
+- one writer task at a time in a feature worktree;
+- every completed task returns one copyable `Next`.
+
+It does not disable the internal design of a Matt skill. `/research` may use a
+background researcher. `/code-review` may use two independent reviewers for
+Standards and Spec. Those workers finish inside the current skill and report
+back to it. They never become the next ticket or phase.
+
+## Pick the entry point
+
+| Situation | Entry |
+| --- | --- |
+| Small, clear, reversible | `/implement` now |
+| Feature fits one planning context | `/grill-with-docs` |
+| UI or state question needs something runnable | `/handoff` → `/prototype` → `/handoff` back |
+| Multi-session build | `/to-spec` → `/to-tickets` |
+| Huge and foggy | `/wayfinder` |
+| Difficult bug | `/diagnosing-bugs` |
+| Raw incoming issues | `/triage` |
+| Codebase health | `/improve-codebase-architecture` |
+| Unsure | `Ask Matt` |
+
+## Planning thread
+
+For a normal feature, keep `/grill-with-docs`, `/to-spec`, and `/to-tickets` in
+one unbroken planning task while the context remains sharp.
+
+During grilling:
+
+- the agent finds code facts itself;
+- the owner decides product and teaching questions;
+- resolved domain terms go to `CONTEXT.md`;
+- irreversible decisions become ADRs;
+- a runnable uncertainty detours through a prototype;
+- the planning task does not implement production code.
+
+When the owner confirms shared understanding:
+
+```text
+把当前共识整理为 EQB 的 spec。不要重新拷问已经决定的问题。
+```
+
+After the spec:
+
+```text
+读取刚生成的 spec，把它切成 tracer-bullet tickets，写清 blocking edges。
+每张票必须能在一个 fresh implementation task 内独立验收。
+```
+
+The planning task commits the spec and tickets, leaves the feature worktree
+clean, then returns the exact first implementation prompt.
+
+## Wayfinder
+
+Use Wayfinder only when even the route to a spec is unclear.
+
+Charting:
+
+```text
+用 Wayfinder 规划“<goal>”。只建立 map 和当前看得见的 decision tickets；
+不要同时解决 ticket。结束时给我唯一 Next。
+```
+
+Resolving:
+
+```text
+继续这个 Wayfinder，解决下一张 frontier ticket。只解决一张。
+结束时更新 map，并给我唯一 Next。
+```
+
+One decision ticket equals one top-level task. When no open frontier or fog
+remains, the next task synthesizes every closed decision into `spec.md`, then
+creates implementation tickets. Wayfinder produces decisions, not production
+code.
+
+## Implementation
+
+Each implementation ticket starts in a fresh top-level task against the same
+sequential feature worktree:
+
+```text
+在 <worktree> 的 <branch> 上实现 <ticket>。
+先确认工作树干净且 HEAD 为 <commit>。只做这张票。
+使用 /implement；按已确认 seam 做 TDD，运行相关验证，让 code-review
+检查 Standards 和 Spec，然后提交。不要创建下一顶层任务。
+结束时给我唯一 Next。
+```
+
+`/implement` owns the complete ticket loop:
+
+```text
+understand → red/green vertical slices → relevant checks
+→ Standards + Spec review → fix findings → commit
+```
+
+Do not bolt a standing PA, verification, CR, or RM relay onto every ticket.
+
+## Independent review trigger
+
+Open one fresh top-level `/code-review` task before shipping when the change
+touches:
+
+- schema or data-contract semantics;
+- migrations, permissions, authentication, or persistence;
+- PaperSurface anchors;
+- print, PDF, DOCX, or export;
+- production configuration;
+- cross-cut architecture or an irreversible decision;
+- repeated implementation failure or an explicit owner request.
+
+Prompt:
+
+```text
+在 <worktree> 对 <fixed-point>...HEAD 运行独立 /code-review。
+读取 <spec> 和全部完成 tickets。只评审，不实现，不创建下一顶层任务。
+结束时给我唯一 Next。
+```
+
+The skill may use its bounded internal Standards and Spec reviewers. That is
+review implementation, not task relay.
+
+## QA and shipping
+
+For a user-visible change, the current task prepares at most five owner checks
+and waits:
+
+```text
+请按下面清单完成 owner QA。完成后回复“QA 完成”；
+若失败，逐条描述实际结果。
+```
+
+After QA succeeds, the owner manually starts the ship task:
+
+```text
+在 <worktree> 收口并发布当前 initiative。
+确认工作树、提交和必要 review/QA 证据；运行缺失的 release checks，
+推送/合并，确认 main CI，更新 STATUS。不要创建下一任务。
+全部完成后回复 DONE。
+```
+
+The ship task is an action, not a persistent RM persona.
+
+## Fresh task versus current task
+
+Start a fresh top-level task for:
+
+- each Wayfinder decision ticket;
+- each implementation ticket;
+- an independent high-risk review;
+- shipping;
+- a handoff caused by context degradation.
+
+Stay in the current task for:
+
+- one Wayfinder ticket's grilling rounds;
+- `/grill-with-docs` → `/to-spec` → `/to-tickets`;
+- one ticket's TDD and code-review loop;
+- owner QA and the owner's `QA 完成` reply.
+
+## Context stop signals
+
+Use `/handoff` and stop when the agent:
+
+- asks a settled question again;
+- forgets an explicit out-of-scope item;
+- rereads the same files without producing new evidence;
+- mixes tickets or roles;
+- expands the process to compensate for confusion;
+- spends more time narrating coordination than building the product.
+
+Do not wait for a numeric token threshold.
+
+## Existing work already in flight
+
+Do not restart or re-document an active feature merely because the workflow
+changed.
+
+- Treat its accepted `plan.md` as the source spec.
+- Keep completed PA/CR/verification artifacts as historical evidence.
+- Ignore its `agent-entrypoint.md` for routing.
+- Finish the current bounded implementation or QA step.
+- At that boundary, return a manual `Next` for the remaining ticket/phase.
+- Create new `tickets/` only when the remaining work genuinely needs more than
+  one fresh implementation context.
+
+For `applied-writing-lecture`, this means preserving the accepted decisions and
+current implementation branch, then continuing the next unfinished slice in a
+fresh manual task. Do not rerun Wayfinder or re-grill settled teaching/UI
+decisions.
+
+## Required `Next`
+
+New top-level task:
+
+```text
+Next：新开顶层任务
+Worktree: <absolute path>
+Branch: <branch>
+Expected HEAD: <commit>
+Recommended model: <model / thinking>
+Prompt:
+<complete prompt, including exact spec/ticket/fixed point>
+```
+
+Same task:
+
+```text
+Next：留在当前任务
+Prompt:
+<complete prompt>
+```
+
+Nothing remains:
+
+```text
+DONE
+```
+
+## Example: 应用文讲评渲染
+
+1. Wayfinder decides who can see commentary, the teaching sequence, export
+   boundaries, and pilot scope. Each decision is one fresh task.
+2. A planning task synthesizes the decisions into `spec.md`: teacher
+   commentary mode only; 审题 → 范文映射 → 亮点; browser host overlay only;
+   excluded from print/PDF/DOCX; one pilot paper.
+3. `/to-tickets` creates vertical slices such as published-card loading,
+   answer-area/rail rendering, export exclusion, and pilot acceptance.
+4. Each ticket runs in a fresh `/implement` task. The skill performs TDD,
+   relevant verification, its two-axis code review, fixes, and commit.
+5. Because export boundaries are involved, one fresh top-level `/code-review`
+   checks the complete diff against the fixed point.
+6. The owner performs the five-item browser QA in the same QA task.
+7. A manually opened ship task merges, watches `main` CI, updates STATUS, and
+   returns `DONE`.

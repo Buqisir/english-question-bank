@@ -142,8 +142,7 @@ must be confirmed green (AGENTS.md RM gate).
 
 | Script | Scope | Runs in CI? |
 | --- | --- | --- |
-| `verify-cut-artifacts.mjs` | RM artifact gate: `node scripts/verify-cut-artifacts.mjs <cut-dir> <tier>` checks required cut artifacts exist non-empty before medium / large merges: a plan-like execution contract and fresh CR's `cr.md`; large cuts also require `cut-note.md`; PA remains conditional on its trigger | no |
-| `verify-codex-matt-governance-live-state.mjs` | codex-matt-governance live-state migration: parses only the structured fields in that cut's `agent-entrypoint.md`; checks state compatibility, one top-level `create_thread` formal re-review successor, required re-review route, one Next Action, and that `released_input_head` exists and is an ancestor of `HEAD`. It never reads or infers facts from `relay-history.md`. | yes |
+| `verify-cut-artifacts.mjs` | Multi-session contract check: `node scripts/verify-cut-artifacts.mjs <cut-dir> <tier>` requires a non-empty `spec.md` or legacy plan for medium/large work; Matt-native flow has no standing CR/RM/cut-note artifact gate | no |
 | `verify-c8-forbidden-scope.mjs` | C8 cut-specific forbidden-scope audit (historical) | no |
 
 ## Miscellaneous / older Paper Intelligence cuts

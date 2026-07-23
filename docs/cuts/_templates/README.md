@@ -1,113 +1,65 @@
-# Cut Artifact Naming
+# Matt-native feature artifacts
 
-These rules apply to new cuts. Do not rename historical cut artifacts just to
-match this convention.
+These conventions apply to new work. Historical cuts keep their original files
+and terminology.
 
-## Default Directory
+## Small work
 
-Medium and large cuts must use:
+Do not create a cut directory by default. The diff, commit, and final result are
+enough.
 
-```text
-docs/cuts/<cut-id>/
-```
-
-Small cuts should usually not create a cut directory. Use chat, a PR
-description, or the code diff unless the work needs durable handoff.
-
-## Standard Files
-
-Use the smallest file set that preserves the work:
+## Normal multi-session work
 
 ```text
-docs/cuts/<cut-id>/
-  plan.md       # DEV execution contract; required before medium/large DEV
-                # written / updated by the PM hat before PA and after PA
-                # follow-up (historical cuts may use the legacy `goal.md`)
-  decisions.md  # accepted product / architecture decisions, when decisions exist
-  pa.md         # formal PA report; written by a fresh PA context when triggered
-  cr.md         # fresh CR report; required for every medium / large RM gate
-  cut-note.md   # large-cut closeout record
-  handoff.md    # only when work crosses agent/session/day boundaries
+docs/cuts/<feature>/
+  spec.md
+  tickets/
+    01-<title>.md
 ```
 
-Optional files by work type:
+Use `_templates/spec.md` and `_templates/ticket.md` when a starting shape helps.
+Do not fill sections merely to satisfy ceremony.
+
+## Huge/foggy work
+
+Add:
 
 ```text
-  agent-entrypoint.md # optional routing file: only for multi-stage, long-running,
-                      # parallel, cross-session handoff, or independent reading navigation
-  qa-checklist.md  # owner PO QA 对照单(user-visible cuts;3-5 项操作+预期,
-                   # 模板 _templates/qa-checklist.md)
-  rulings.md       # 判例裁决战役的判例集(数据质量类;模板
-                   # _templates/case-ruling.md)
+docs/cuts/<feature>/wayfinder/
+  map.md
+  tickets/
 ```
 
-Multi-cut programs (拆刀成序列的大 effort) keep one map file at
-`docs/cuts/<program>/program.md`(模板 `_templates/program.md`)。两条硬纪律:
-**尚未成形区**只收「问题还提不精确」的迷雾,能问精确就立刀,不许预切;
-**明确出界区**永不毕业——被裁出目的地的事只能重划目的地另立 effort。
+The map is an index; decision detail lives in its ticket. One top-level task
+resolves one decision ticket.
 
-Optional prompt archive files:
+## Optional artifacts
+
+Create only when the work needs them:
 
 ```text
-  pa-prompt.md  # only when a one-off PA prompt must be preserved
-  cr-prompt.md  # only when a one-off CR / Big CR prompt must be preserved
+decisions.md       # accepted decisions not already clear in spec/ADR
+research/          # sprint-bound primary-source research
+prototype.html     # owner-accepted visual contract
+review.md          # independent high-risk review worth preserving
+qa/                # durable browser/owner QA evidence
+handoff.md         # exceptional context handoff
+cut-note.md        # material release learning
 ```
 
-If external AI input material is substantial and worth preserving, prefer
-including it inside `pa-prompt.md`, `cr-prompt.md`, or `plan.md` rather than
-creating another generic context file. Avoid vague names such as `context.md`.
+`agent-entrypoint.md`, relay ledgers, PA/CR prompts, standing `plan.md`,
+RM artifact files, and watch ledgers are retired for new work.
 
-The names `goal` and `loop` are reserved for run-mode commands and must not be
-used as document names in new cuts.
+## Ticket state
 
-## Review Naming
+Ticket status is `ready`, `in-progress`, `done`, or `blocked`. The Result
+section records commit and verification evidence. The owner manually opens the
+next ready ticket task.
 
-- Do not encode `lite` / `big` in filenames by default.
-- Formal PA reports use `pa.md` whether the review was light or deep.
-- For medium / large cuts where PA is used, the fresh PA task writes
-  `pa.md` before DEV; the PM hat then records PA disposition in
-  `plan.md` under `PA Follow-Up Decisions`.
-- Fresh Medium / Large CR (and Big CR) reports use `cr.md`.
-- CR-lite is only for Small cuts and may live in the PR description or final
-  agent summary instead of `cr.md`.
-- PA-lite findings may be compressed into `plan.md` / `decisions.md` instead of
-creating `pa.md`, unless the review itself is an important handoff artifact.
+## Commit and handoff
 
-## Commit Rules
-
-- Commit `plan.md` before starting medium / large DEV.
-- Commit `pa.md` when PA is used and `cr.md` for every Medium / Large fresh CR.
-- Commit `cut-note.md` before closing a large cut.
-- Do not commit prompt files merely because they existed in chat; commit them
-only when future agents need to rerun, audit, or resume from them.
-
-## RM Artifact Gate
-
-Before RM merge, required artifacts must exist and be non-empty. Missing
-required artifacts stop the merge with `ESCALATION: CONTEXT
-INSUFFICIENT`.
-
-Medium cuts:
-
-- `plan.md`
-- `cr.md`
-- `pa.md` when PA was used; for explicitly tiny PA-lite, findings may be
-  recorded in `plan.md` / `decisions.md`
-
-Large cuts additionally require:
-
-- `cut-note.md`
-
-## Hard Rules
-
-1. Small cuts do not create `docs/cuts/<cut-id>/` by default.
-2. Medium / large cuts must commit `plan.md` before DEV starts.
-3. Formal PA reports are named `pa.md`.
-4. Medium / Large fresh CR reports are named `cr.md` and required before RM.
-5. Small-cut CR-lite can stay in the PR description or final agent summary.
-6. Prompt archive files are optional and named `pa-prompt.md` or `cr-prompt.md`.
-7. External AI input should be folded into a prompt or goal file unless it is a
-   durable standalone artifact.
-8. RM merge stops when required medium / large artifacts are missing or empty.
-10. Large cuts need `cut-note.md` before closeout.
-11. Keep the file set minimal; do not fill templates just to satisfy ceremony.
+- Commit the spec/tickets before the first implementation task.
+- Each implementation task commits one ticket and leaves the worktree clean.
+- `Next` repeats the exact worktree, branch, HEAD, model recommendation, and
+  complete prompt.
+- Files and git preserve continuity; no live-state or dispatch file is needed.

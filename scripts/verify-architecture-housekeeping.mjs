@@ -31,16 +31,11 @@ assert('GitHub Actions workflow install note exists', existsSync(path.join(rootD
 assert('code-style doc exists', existsSync(path.join(rootDir, 'docs/code-style.md')))
 assert('shared UI token file exists', existsSync(path.join(rootDir, 'app/src/shared-ui/tokens.css')))
 assert('CI verify entrypoint exists', existsSync(path.join(rootDir, 'scripts/verify-ci.mjs')))
-assert('agent entrypoint template exists', existsSync(path.join(rootDir, 'docs/cuts/_templates/agent-entrypoint.md')))
+assert('Matt spec template exists', existsSync(path.join(rootDir, 'docs/cuts/_templates/spec.md')))
+assert('Matt ticket template exists', existsSync(path.join(rootDir, 'docs/cuts/_templates/ticket.md')))
 assert('handoff template exists', existsSync(path.join(rootDir, 'docs/cuts/_templates/handoff.md')))
 assert('cut note template exists', existsSync(path.join(rootDir, 'docs/cuts/_templates/cut-note.md')))
 assert('decisions template exists', existsSync(path.join(rootDir, 'docs/cuts/_templates/decisions.md')))
-assert('PA prompt template exists', existsSync(path.join(rootDir, 'docs/cuts/_templates/pa-prompt-template.md')))
-assert('Big CR prompt template exists', existsSync(path.join(rootDir, 'docs/cuts/_templates/big-cr-prompt-template.md')))
-assert('CR-lite template exists', existsSync(path.join(rootDir, 'docs/cuts/_templates/cr-lite.md')))
-assert('watch ledger template exists', existsSync(path.join(rootDir, 'docs/cuts/_templates/watch-ledger.md')))
-assert('H2 cut note exists', existsSync(path.join(rootDir, 'docs/cuts/H2-workflow-verify-ci-discipline/cut-note.md')))
-assert('H2 handoff exists', existsSync(path.join(rootDir, 'docs/cuts/H2-workflow-verify-ci-discipline/handoff.md')))
 
 const workflowTemplate = read('docs/ci/verify-workflow-template.yml')
 assert('workflow template installs app dependencies with pnpm', workflowTemplate.includes('pnpm install --frozen-lockfile'))
@@ -62,8 +57,10 @@ const agentInstructions = read('AGENTS.md')
 const issueTracker = read('docs/agents/issue-tracker.md')
 assert('CLAUDE delegates to AGENTS single source', claudeInstructions.includes('Read `AGENTS.md`') && claudeInstructions.includes('single source of truth'))
 assert('CLAUDE does not duplicate browser rules', !claudeInstructions.includes('Codex in-app browser'))
-assert('AGENTS declares single source of truth', agentInstructions.includes('single source of truth for agent rules'))
-assert('issue tracker doc marks scratch as local-only', issueTracker.includes('gitignored local scratch space') && issueTracker.includes('must not be treated as shared source of truth'))
+assert('AGENTS declares single source of truth', agentInstructions.includes('single source of truth for current project rules'))
+assert('issue tracker keeps fresh-task truth in tracked files', issueTracker.includes('tracked local Markdown') && issueTracker.includes('never durable'))
+assert('project does not vendor stale Matt skills', !existsSync(path.join(rootDir, '.claude/skills/tdd/SKILL.md')) && !existsSync(path.join(rootDir, '.claude/skills/grill-with-docs/SKILL.md')))
+assert('project does not expose retired relay agents', !existsSync(path.join(rootDir, '.claude/agents/dev.md')) && !existsSync(path.join(rootDir, '.claude/agents/cr-reviewer.md')))
 
 const appPackage = read('app/package.json')
 assert('app exposes verify:all script', appPackage.includes('"verify:all": "node ../scripts/verify-ci.mjs"'))
@@ -212,47 +209,19 @@ assert('code-style documents CSS token policy', codeStyle.includes('app/src/shar
 assert('code-style documents build/typecheck in stable suite', codeStyle.includes('including app build/typecheck'))
 
 const cutWorkflow = read('docs/steering/cut-workflow-protocol.md')
-assert('workflow protocol requires CR-lite failure angle', cutWorkflow.includes('failure / attack angle'))
-assert('workflow protocol defines watch ledger destination', cutWorkflow.includes('docs/cuts/<CUT>/watch-ledger.md'))
-assert('workflow protocol names PA prompt template', cutWorkflow.includes('pa-prompt-template.md'))
-assert('workflow protocol names Big CR prompt template', cutWorkflow.includes('big-cr-prompt-template.md'))
-assert('workflow protocol requires layered reading', cutWorkflow.includes('Must Read') && cutWorkflow.includes('Background'))
+assert('workflow protocol follows Matt planning chain', cutWorkflow.includes('grill-with-docs') && cutWorkflow.includes('to-spec') && cutWorkflow.includes('to-tickets'))
+assert('workflow protocol assigns one fresh implementation task per ticket', cutWorkflow.includes('one fresh top-level `/implement` task per ready ticket'))
+assert('workflow protocol reserves Wayfinder for fog', cutWorkflow.includes('Wayfinder') && cutWorkflow.includes('Huge and foggy'))
 assert('workflow protocol defines escalation signals', cutWorkflow.includes('CONTEXT INSUFFICIENT') && cutWorkflow.includes('SPEC CONTRADICTS'))
-assert('workflow protocol requires large-cut handoff with cut note', cutWorkflow.includes('docs/cuts/<CUT>/cut-note.md') && cutWorkflow.includes('docs/cuts/<CUT>/handoff.md'))
-assert('workflow protocol delegates covered forbidden scope to verify', cutWorkflow.includes('Covered by verify; spot-checked <N> files.'))
+assert('workflow protocol routes final shipping to the owner', cutWorkflow.includes('owner manually opens one ship task'))
 
-const agentEntrypointTemplate = read('docs/cuts/_templates/agent-entrypoint.md')
-assert('agent entrypoint template splits Must Read and Background', agentEntrypointTemplate.includes('## Must Read') && agentEntrypointTemplate.includes('## Background'))
-assert('agent entrypoint template includes escalation signals', agentEntrypointTemplate.includes('ESCALATION: <SIGNAL>') && agentEntrypointTemplate.includes('BRANCH CONFLICT'))
-
-
-const crLiteTemplate = read('docs/cuts/_templates/cr-lite.md')
-assert('CR-lite template includes failure angle section', crLiteTemplate.includes('## Failure / Attack Angle'))
-
-
-const paPromptTemplate = read('docs/cuts/_templates/pa-prompt-template.md')
-assert('PA prompt template has layered reading and escalation', paPromptTemplate.includes('## Must Read') && paPromptTemplate.includes('## Background') && paPromptTemplate.includes('ESCALATION: <SIGNAL>'))
-assert('PA prompt template requires repo output path', paPromptTemplate.includes('Write the full report to:'))
-
-const bigCrPromptTemplate = read('docs/cuts/_templates/big-cr-prompt-template.md')
-assert('Big CR prompt template has layered reading and escalation', bigCrPromptTemplate.includes('## Must Read') && bigCrPromptTemplate.includes('## Background') && bigCrPromptTemplate.includes('ESCALATION: <SIGNAL>'))
-assert('Big CR prompt template avoids duplicate forbidden-scope audit', bigCrPromptTemplate.includes('Covered by verify; spot-checked <N> files.'))
+const mattWorkflow = read('docs/steering/codex-matt-workflow.md')
+assert('Matt workflow forbids automatic top-level task creation', mattWorkflow.includes('never creates the next'))
+assert('Matt workflow defines one copyable Next', mattWorkflow.includes('Next：新开顶层任务') && mattWorkflow.includes('Expected HEAD:'))
+assert('Matt workflow separates internal workers from relay', mattWorkflow.includes('internal Standards and Spec reviewers') && mattWorkflow.includes('never become the next ticket or phase'))
 
 const handoffTemplate = read('docs/cuts/_templates/handoff.md')
 assert('handoff template captures next-cut lessons', handoffTemplate.includes('Things The Next Cut Must Know') && handoffTemplate.includes('Evidence:') && handoffTemplate.includes('Rule:'))
-
-const watchLedgerTemplate = read('docs/cuts/_templates/watch-ledger.md')
-assert('watch ledger template includes status vocabulary', watchLedgerTemplate.includes('converted-to-follow-up'))
-
-const paPersona = read('docs/agents/pa-persona.md')
-assert('PA persona documents escalation signals', paPersona.includes('## Escalation Signals') && paPersona.includes('SCOPE UNCLEAR'))
-
-const h2Entrypoint = read('docs/cuts/H2-workflow-verify-ci-discipline/agent-entrypoint.md')
-const h2CutNote = read('docs/cuts/H2-workflow-verify-ci-discipline/cut-note.md')
-const h2Handoff = read('docs/cuts/H2-workflow-verify-ci-discipline/handoff.md')
-assert('H2 entrypoint is closed', h2Entrypoint.includes('Stage: Closed. Do not add H2-D.'))
-assert('H2 cut note routes away from H2-D', h2CutNote.includes('Do not add H2-D.'))
-assert('H2 handoff routes future housekeeping away from H2', h2Handoff.includes('Do not create H2-D.'))
 
 if (failed > 0) {
   console.error(`\nArchitecture housekeeping verify FAILED: ${passed} passed, ${failed} failed`)

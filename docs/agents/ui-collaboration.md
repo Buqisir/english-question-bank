@@ -20,13 +20,14 @@ styling。此路径仍需主代理轻量 sanity check,不是零评审。
 
 ## 升级触发
 
-任一命中即升级为常规 UI 风险分级 + 浏览器 / PO QA：TSX 改动、新交互、新
-selector 结构、布局 / 滚动 / 定位变化、A4 / PaperSurface / print-preview
-影响、响应式影响、或 owner 反馈"怪 / 不舒服 / 不像 A4"。评审按
-`AGENTS.md` Dispatch map：Small 才可 CR-lite；Medium / Large 必须 fresh CR。
+任一命中即升级为常规 UI 风险分级 + 浏览器 / owner QA：TSX 改动、新交互、
+新 selector 结构、布局 / 滚动 / 定位变化、A4 / PaperSurface /
+print-preview 影响、响应式影响、或 owner 反馈"怪 / 不舒服 / 不像 A4"。
+普通 UI 由 `/implement` 完成评审；触及 PaperSurface、print/export 或其他
+高风险边界时，再手工新开独立顶层 `/code-review`。
 
 ## UI 分支流程
 
-从最新 `main` 开分支,commit 并 push,然后报告:branch、commit、changed
-files、visual intent、QA status。多代理 UI 工作不直推 `main`,除非 owner
-明确要快路径。
+从最新 `main` 开分支，commit 后报告 worktree、branch、HEAD、changed
+files、visual intent、QA status，并返回唯一可复制 `Next`。同一 UI
+worktree 同时只允许一个顶层写任务。

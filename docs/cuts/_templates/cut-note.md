@@ -3,10 +3,7 @@
 Cut:
 Start date:
 Merge date:
-PA rounds:
-Big CR rounds:
 Must Fix count:
-Token / cost notes:
 
 ## Shipped
 
@@ -20,7 +17,7 @@ Token / cost notes:
 
 - 
 
-## Rules That Prevented Rework
+## Decisions That Prevented Rework
 
 - 
 
@@ -28,16 +25,11 @@ Token / cost notes:
 
 - Static verify:
 - Browser QA:
-- PO QA:
+- Owner QA:
 
 ## Watch / Follow-Up
 
-- Watch ledger:
-- Follow-up gates:
-
-## Handoff
-
-- Next-cut handoff:
+- Follow-up:
 
 ## Next Cut
 

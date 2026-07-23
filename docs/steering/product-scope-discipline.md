@@ -18,7 +18,7 @@ point, backlog it, or cut it.
 
 ## 1. The hard question
 
-For every visible feature, PM / PA / CR must ask:
+For every visible feature, planning, implementation, and review must ask:
 
 - What is the teacher trying to do right now?
 - Does this information help that task immediately?
@@ -32,7 +32,7 @@ Do not accept "we have the data" as a reason to show the data.
 ## 2. Pushback rule
 
 If the user proposes adding or keeping a dense feature because it
-feels advanced, PM should challenge it directly.
+feels advanced, the current agent should challenge it directly.
 
 Use this tone:
 
@@ -42,7 +42,7 @@ Use this tone:
 - recommend cutting or moving the feature when the current surface
   gets noisy
 
-The PM should not merely say "good idea" when a proposal risks
+The agent should not merely say "good idea" when a proposal risks
 turning a focused workbench into an AI dashboard.
 
 ## 3. PaperSurface-specific rule
@@ -93,7 +93,7 @@ Push back when any of these happen:
   teacher workbench
 - QA keeps finding "it is visible but it blocks / crowds / confuses"
   bugs
-- the team keeps asking for more mockups or another PA pass because
+- the team keeps asking for more mockups or another review pass because
   nobody has made the product decision
 - a DEV implementation needs increasingly fragile width, z-index,
   resize, or zoom workarounds to preserve a visual idea
@@ -113,8 +113,8 @@ Prefer these moves:
 - cut the feature if it creates more UI debt than teacher value
 - stop after two inconclusive visual rounds and return to the teacher
   task instead of generating more variants
-- stop before DEV when PA leaves more than three unresolved PO
-  decisions
+- stop before implementation when more than three owner decisions remain
+  unresolved
 
 Example:
 

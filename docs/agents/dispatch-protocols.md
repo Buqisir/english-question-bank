@@ -1,75 +1,72 @@
-# 派工操作规程(Dispatch Protocols)
+# Manual task routing
 
-宪法 `AGENTS.md` Dispatch map 的操作细则。**派工时才读**(开中大型刀 /
-并行刀 / worktree DEV 前),不在 session 必读税内。法条来历见
-`docs/agents/case-law.md`。
+The owner is the only dispatcher.
 
-## Auto-Next direct relay
+## Top-level tasks
 
-The current standard route is a one-way relay, not a PM wait loop. Read
-`docs/agents/model-routing.md` before each task creation; independently select
-the next role, explicitly pass `model` and `thinking`, and retain the required
-risk gates. Each task owns one role and may create only one fresh,
-independently addressable successor after durable writeback. Parent-owned
-subagents cannot satisfy a relay role.
+An agent must not create, fork, spawn, or supervise the next top-level task.
+It completes its bounded work, commits durable results, leaves the worktree
+clean, and returns one copyable `Next`.
 
-For a shared worktree the only safe order is dispatch-pending -> provisioning
--> ready-held -> predecessor-final `release-authorized` commit -> release exact
-HEAD -> successor re-proof -> successor first-write `active` commit ->
-acknowledgement. The predecessor makes no later worktree write and exits rather
-than supervising the successor. If availability has no authority-eligible model
-with the requested thinking, record `missing-authority` / `dispatch-failed` and
-do not create a task.
+A subagent cannot be a successor phase. Bounded workers explicitly required by
+a current Matt skill or product runbook are allowed only inside that bounded
+operation and return to the current task.
 
-## Direct dispatch routing
+## Sequential feature worktree
 
-Small single-action work may be completed directly or sent to one fresh DEV
-task, then receives PM CR-lite. Medium/Large work starts from committed
-`plan.md` and follows the one-way Auto-Next relay above: PA when required,
-fresh DEV, fresh verification, fresh CR, then QA or RM. Each direct successor
-is independently addressable and selects explicit `model` and `thinking` only
-from `docs/agents/model-routing.md`; no predecessor reads a result and routes a
-later stage. Verification owns the plan-named real exit codes; CR checks their
-exact-head binding and runs only named attack checks. Human QA and owner
-decisions pause the relay under the recorded stop conditions.
+Multi-ticket work uses one explicit feature worktree sequentially:
 
-Decision points still belong in tracked cut artifacts. Merge, production, and
-human QA retain their existing authorities. Batch work follows the next section.
+1. The planning task records the absolute worktree path, branch, and clean HEAD.
+2. The owner waits for that task to finish.
+3. The owner opens the next top-level task and pastes the returned `Next`.
+4. The next task verifies `pwd`, repository root, branch, clean status, and
+   expected HEAD before writing.
+5. It completes one ticket, commits, and returns the new exact HEAD.
 
-**批量跑批**(第二适用类;真实场景 = analysis-fields R1/R2、数据健康
-批修;R1/R2 首战后按实战修订本节)。**第零问:这批活需要 AI 吗?**
-规则能写死 → 纯 node 脚本,零 token;单元要语义判断 → agent 扇出
-(判据:单元独立 / 逻辑可预写 / 小切片试跑估成本再全量 / 产出分批落盘;
-预估 >25 agent 或 >1.5M token 先报量);要判断力 → 判例裁决制
-(机审初筛 + owner 裁边界)。
+Never let two top-level tasks write the same worktree concurrently. No
+lifecycle file, activation commit, release commit, claim ledger, or task
+acknowledgement is required; the human task boundary is the lock.
 
-## 并行刀硬条件三条(固化 2026-07-08)
+If the expected worktree, branch, or HEAD does not match, stop without writing:
 
-多把刀可并行施工,硬条件:
+```text
+BLOCKED — worktree/branch/HEAD does not match the handoff.
+```
 
-1. 派工前主代理核对文件面**零交集**;有交点必须在两边 plan 里钉死边界;
-2. 每个 DEV 独立 git worktree,**严禁两个 DEV 共用一个工作目录**;
-3. 施工并行、收口串行:CR → rebase → 合并 → CI 逐把收,后合并者负责
-   rebase。
+## `Next`
 
-DEV prompt 中禁用 `git stash`(主树可能有他人未提交内容)。
+```text
+Next：新开顶层任务
+Worktree: <absolute path>
+Branch: <branch>
+Expected HEAD: <commit>
+Recommended model: <model / thinking>
+Prompt:
+<complete prompt>
+```
 
-## Worktree 纪律(血书 2026-07-09,两次实撞)
+The prompt must name the exact spec, ticket, fixed point, and allowed action.
+The owner should not have to find or remember them.
 
-1. DEV 的一切操作(git / 编辑 / 构建 / verify)只许发生在自己的 worktree
-   目录,动手前先 `pwd` 自证;**严禁对主仓库路径跑任何写命令**(含
-   `git -C <主树>`)。
-2. 主代理侧同款:**合并永远在主树执行**——在 worktree 里 merge 自己分支
-   只会得到假成功。
-3. DEV 直接用 worktree 自带分支干活,不必另建品牌分支;收口命名由主代理
-   在 merge message 里处理。
-4. **断点锚**:DEV 在实现完成、进入自验前先打一个 checkpoint commit(如
-   `wip(<cut>): impl complete, pre-QA`)——会话中断后接手者凭它定位断点;
-   最终收口 commit 照常。
+## Batch and parallel work
 
-worktree DEV 开工第一步跑 `bash scripts/setup-worktree.sh`(装 app/server
-依赖 + 从主树复制 gitignored 本地库;幂等)。不要即兴自装——server 用 npm
-不用 pnpm,装错会产出不该存在的 lockfile。
+Parallel work is exceptional. Use it only when units are truly independent and
+the owner explicitly asks for parallelism.
 
-崩溃遗留的 locked worktree 处置:`git worktree unlock` → 抢救分支(续派
-DEV 或合并)→ 收口后 `git worktree remove`。
+- each writer gets a different worktree and non-overlapping file surface;
+- each task still owns one ticket;
+- results merge serially;
+- no task becomes a coordinator for the others.
+
+Rule-based batch work should be a deterministic script, not an agent fan-out.
+Semantic batch work needs a small costed pilot before scaling.
+
+## Repository facts
+
+- Remote: `github`
+- App package manager: pnpm
+- Server package manager: npm
+- Fresh worktree setup: `bash scripts/setup-worktree.sh`
+- Never use `git stash` to hide another task's work.
+- Merge in the intended integration worktree, not inside a disposable ticket
+  worktree.

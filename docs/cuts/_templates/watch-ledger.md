@@ -1,18 +1,4 @@
-# Watch Ledger Template
+# Retired template
 
-Cut:
-Last updated:
-
-Use this file when PA / CR produces more than three Should Watch items, or when
-watch items need to survive across PR boundaries.
-
-| ID | Source | Watch Item | Owner | Status | Destination / Gate |
-| --- | --- | --- | --- | --- | --- |
-| SW1 |  |  |  | open |  |
-
-Status values:
-
-- `open`
-- `monitoring`
-- `converted-to-follow-up`
-- `closed`
+Do not create initiative-level watch ledgers. Put a real follow-up into a
+ticket/backlog, or leave a non-blocking note in the current result.

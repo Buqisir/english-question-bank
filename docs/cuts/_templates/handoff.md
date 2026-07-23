@@ -33,4 +33,12 @@ PR:
 
 ## Next Action
 
-One concrete next step:
+```text
+Next：新开顶层任务
+Worktree: <absolute path>
+Branch: <branch>
+Expected HEAD: <commit>
+Recommended model: <model / thinking>
+Prompt:
+<one complete next step>
+```
