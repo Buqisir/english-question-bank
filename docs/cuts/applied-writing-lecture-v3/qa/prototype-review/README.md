@@ -1,6 +1,6 @@
 # Real-packet prototype review evidence
 
-Status: **machine precheck PASS; owner visual verdict pending**
+Status: **machine precheck PASS; owner visual verdict PASS**
 
 ## Live host measurement
 
@@ -79,6 +79,7 @@ Standalone renderer screenshots:
 
 These counts and injected-site screenshots prove only that all required
 annotations were placed inside the fixed stage hosted by the real canvas.
-They do not approve the teaching copy, visual balance, or classroom usability.
-MF-1 closes only after the owner personally inspects all four injected real-site
-states and explicitly says “过关”.
+The owner separately supplied the teaching/visual/classroom judgment by
+personally inspecting the final real-site prototype and explicitly saying
+“过关” on 2026-07-23. The exact approved prototype head is
+`4208c672373433b1b357228c55af1645f5ccbb7e`; MF-1 is closed.

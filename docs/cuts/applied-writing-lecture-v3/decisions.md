@@ -1,8 +1,7 @@
 # applied-writing-lecture-v3 · Current Decisions
 
-Last synced: 2026-07-22 after formal-PA plan revision.
-Open blocking PO decisions: 1 (owner visual “过关” on the real-packet
-prototype).
+Last synced: 2026-07-23 after owner visual prototype approval.
+Open blocking PO decisions: 0.
 
 ## D1 — Teacher task
 
@@ -193,5 +192,8 @@ vocabulary. The runtime-only owner-review harness injects
 `PaperBrowsePage`: both use the actual 794 px canvas and 91 px answer offset,
 the actual 380 px lecture rail remains side-by-side, and the 628 px narrow host
 is rejected before injection. Machine precheck reports `5/5 + 4/4` for each.
-The owner's personal visual “过关” remains the hard DEV precondition; DEV may
-transport approved content but may not invent or rewrite it.
+The owner personally inspected the final real-site prototype and said “过关”
+on 2026-07-23 at exact head
+`4208c672373433b1b357228c55af1645f5ccbb7e`. That hard precondition is
+satisfied. DEV may transport approved content but may not invent or rewrite
+it.

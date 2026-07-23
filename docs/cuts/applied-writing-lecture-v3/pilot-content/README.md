@@ -1,6 +1,6 @@
 # Applied-writing lecture v3 · Locked pilot content
 
-Status: **owner visual prototype review pending**
+Status: **owner visual prototype review PASS**
 
 These are exact pre-DEV candidate objects, not runtime assets:
 
@@ -24,13 +24,15 @@ These are exact pre-DEV candidate objects, not runtime assets:
 
 ## Owner prototype gate
 
-The owner must personally inspect the two prepared real local
+The owner personally inspected the two prepared real local
 `PaperBrowsePage` tabs, one for 2022 and one for 2024, and switch each injected
 paper between `审题要点` / `亮点句式`. The selected Variant A renderer is
 injected only into the current browser; the real website still supplies the
 paper canvas, lecture rail, navigation, and scroll, and refresh restores it.
-The owner must explicitly say “过关” before DEV may write the packets through
-the real validator and persistence projection. Machine `5/5` / `4/4` only
+The owner explicitly said “过关” on 2026-07-23 at exact prototype head
+`4208c672373433b1b357228c55af1645f5ccbb7e`; DEV may now write these exact
+packets through the real validator and persistence projection. Machine
+`5/5` / `4/4` only
 proves all notes were placed; it cannot substitute for the owner's visual
 judgment. The verdict covers:
 

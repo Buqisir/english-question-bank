@@ -1,7 +1,7 @@
 # 应用文讲评渲染 v3 · Wayfinder Map
 
-State: human-decision (owner visual verdict on real-packet prototype head
-`6ba221a267b6b4d2e5235e2d742cf607811b78aa` pending)
+State: ready-for-dev (owner passed real-packet prototype head
+`4208c672373433b1b357228c55af1645f5ccbb7e`)
 Current ticket: [AWL-V3-01 终版批注原型生产化](tickets/AWL-V3-01.md)
 
 ## Notes
@@ -37,9 +37,8 @@ Current ticket: [AWL-V3-01 终版批注原型生产化](tickets/AWL-V3-01.md)
 ## Frontier
 
 1. [AWL-V3-01 终版批注原型生产化](tickets/AWL-V3-01.md) — PM has closed
-   MF-2..MF-5; MF-1 waits only on the owner's personal visual “过关” after
-   inspecting both views of 2022 / 2024 temporarily injected into their real
-   local paper pages. No DEV task exists.
+   MF-1..MF-5 with zero blocking PO decisions. Owner passed both views of the
+   2022 / 2024 real-site prototype; exactly one fresh DEV is authorized.
 2. [AWL-V3-02 22 组应用文解析全套重产](tickets/AWL-V3-02.md) — blocked by
    AWL-V3-01 closeout and its published production contract.
 

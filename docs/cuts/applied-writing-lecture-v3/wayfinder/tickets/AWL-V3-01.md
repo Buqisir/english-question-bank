@@ -2,11 +2,11 @@
 
 Type / role: Wayfinder -> PM contract -> formal PA -> DEV -> verification ->
 fresh CR -> QA -> RM
-State: human-decision
-Blockers: owner visual “过关” on both views of both injected real-paper states
-Claimed by: fresh PM plan-revision (write-held)
+State: ready-for-dev
+Blockers: none
+Claimed by: fresh PM plan-revision (releasing one fresh DEV)
 Base head: `github/main@1deec0f`
-Expected head: `6ba221a267b6b4d2e5235e2d742cf607811b78aa`
+Expected head: next committed and pushed PM closure head
 Output path: `docs/cuts/applied-writing-lecture-v3/`
 
 ## Question
@@ -31,23 +31,27 @@ existing print/student isolation?
 
 ## Routing
 
-Current role: fresh PM plan-revision in owner-visual-review pause
-Next role: owner PO visual prototype verdict; then fresh DEV only at 5/5 and zero
+Current role: fresh PM plan-revision releasing the approved contract
+Next role: exactly one fresh DEV
 Configured model: `gpt-5.6-sol`
 Selected model: `gpt-5.6-sol`
 Thinking: `high`
 Availability / substitution: task-creation capability lists Sol/high; no
 substitution
-Dispatch ID / state: `AWL-V3-PM-REV-20260722-01` / human-decision
+Dispatch ID / state: `AWL-V3-PM-REV-20260722-01` / ready-for-dev
 Authorization scope: PM plan-revision may edit cut docs except canonical
 `pa.md`; no runtime implementation
+Successor dispatch: `AWL-V3-DEV-20260723-01`; `gpt-5.6-terra` / `high`,
+explicitly available in the current task-creation capability. High is selected
+over the DEV default medium because the exact 16-file route spans schema,
+persistence, paper-host geometry, browser behavior, and subset fonts.
 
 ## Unique Next Action
 
-1. Owner inspects the prepared 2022 / 2024 real-site tabs and both paper-local
-   views, then explicitly says whether it passes.
-2. PM records that visual verdict; only 5/5 closed Must Fix and zero blocking
-   PO decisions authorize one fresh DEV.
+1. PM commits and pushes the owner verdict, 5/5 closed Must Fix dispositions,
+   zero blocking PO decisions, and the exact counted implementation route.
+2. PM creates exactly one fresh DEV from that released head, confirms
+   activation, and immediately exits without awaiting implementation.
 
 ## Result
 
@@ -80,5 +84,7 @@ injection. The exact injected owner-review artifact head is
 half-page lower-left leader, restored `要点②` near its source, and made every
 review micro leader visibly enter its underline with an arrowhead toward the
 note.
-MF-1 remains open only for the owner's visual prototype verdict; state is
-`human-decision`, with no DEV task.
+The owner personally passed the final real-site prototype on 2026-07-23 at
+exact head `4208c672373433b1b357228c55af1645f5ccbb7e`. MF-1 is closed; the formal
+PA disposition count is 5/5 and blocking PO decisions are zero. Exactly one
+fresh DEV is now authorized.

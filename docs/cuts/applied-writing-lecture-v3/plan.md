@@ -259,9 +259,11 @@ Missing dependencies are environment evidence, not an implementation verdict.
 - [x] DP-1 PM compressed approved prototype + real payload into current contract.
 - [x] DP-2 fresh formal PA verdict; `pa.md` records
   `APPROVE WITH MUST FIX` (5 unresolved Must Fix, 3 blocking PO decisions).
-- [ ] DP-2A owner personally inspects both views of both real packets injected
+- [x] DP-2A owner personally inspects both views of both real packets injected
   into the real local `PaperBrowsePage` and explicitly says “过关”; this is the only
   remaining blocking PO decision. Machine `5/5` / `4/4` is precheck only.
+  Owner passed the final prototype at exact head
+  `4208c672373433b1b357228c55af1645f5ccbb7e` on 2026-07-23.
 - [ ] DP-3 DEV exact-head implementation complete.
 - [ ] DP-4 fresh verification exact-head PASS.
 - [ ] DP-5 fresh CR 0 unresolved Must Fix.
@@ -275,7 +277,7 @@ Formal PA result is committed at
 record one disposition for every item in `pa.md`'s
 `Must Fix -> Plan Disposition Checklist`.
 
-- [ ] **MF-1 — packet + teaching gate:** exact production-shaped packets now
+- [x] **MF-1 — packet + teaching gate:** exact production-shaped packets now
   exist under `pilot-content/`, teaching interpretation is `yes`, current outer
   payload fields are byte-for-byte preserved, PM grammar/register/
   relationship/purpose/vocabulary checks pass, and P2 forbids DEV-authored
@@ -284,7 +286,9 @@ record one disposition for every item in `pa.md`'s
   host measured `canvas 794 / answer offset 91` for both packets and machine
   precheck is 2022 `5/5 + 4/4`, 2024 `5/5 + 4/4`. Injection correctly refused
   the 628 px narrow canvas.
-  **Open only on the owner's personal visual inspection and explicit “过关”.**
+  Owner personally inspected the final real-site state and explicitly said
+  “过关” on 2026-07-23 at exact prototype head
+  `4208c672373433b1b357228c55af1645f5ccbb7e`.
 - [x] **MF-2 — fixed mark class:** D3/P1 support exactly two points and the
   prototype-backed grid order
   `[type, cares, points, tense, points]`; all other point counts, grid orders,
@@ -302,8 +306,9 @@ record one disposition for every item in `pa.md`'s
   runtime/data files, with atomic rollback and exact-head verification
   boundaries above; a seventeenth file stops before write.
 
-Disposition closure is **4/5** and blocking PO decisions are **1**. The other
-two formal-PA PO decisions are closed by the already selected prototype: its
-fixed 794 × 472 replacement host and exact two-point five-mark order. DEV
-dispatch remains forbidden until the owner personally passes the real-packet
-prototype, closing MF-1 and making the counts 5/5 and zero.
+Disposition closure is **5/5** and blocking PO decisions are **0**. The
+selected prototype fixes the 794 × 472 replacement host and exact two-point
+five-mark order; the owner passed the two-packet real-site prototype after the
+final short directional-leader adjustment. The implementation route is now
+authorized for exactly one fresh DEV and remains bounded to the exact 16-file
+gate above.
