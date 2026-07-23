@@ -7,10 +7,10 @@ Historical relay records live in `relay-history.md` and are non-authoritative.
 
 - Cut id: `codex-matt-governance`
 - Cut size: `large governance`
-- Lifecycle state: `active`
-- Active role: `fresh RM`
+- Lifecycle state: `closed`
+- Active role: `none`
 - Source branch: `codex/codex-matt-governance-readme-ci-fix-20260722-01`
-- Current worktree: `/Users/huangxuewei/.codex/worktrees/d677/english-question-bank`
+- Current worktree: `/Users/huangxuewei/Projects/english-question-bank`
 - Released input head: `5b8aa8bf35428211d401bb29552a0bc19a6fd68b`
 
 ## Current evidence
@@ -49,6 +49,14 @@ Historical relay records live in `relay-history.md` and are non-authoritative.
 - Fresh RM activation preflight: current worktree and repository root match;
   the worktree was clean; detached `HEAD` and the named source branch both
   resolved to released input head `5b8aa8bf35428211d401bb29552a0bc19a6fd68b`.
+- Fresh RM changed-head release proof at `599572df019062d7e044cc288d080a37a9c03855`:
+  `git diff --check` 0; large artifact gate PASS 4 / FAIL 0; live-state check 0;
+  TypeScript 0; `verify:all` PASS 85 / SKIP 1 / FAIL 0.
+- Main checkout was clean and exactly aligned with `github/main` at
+  `e4ae78607411d265768a0253c5c63b5f3c0d726b`; merge commit
+  `a2730a87480a8c124dd97de55fe6961a23c5128d` was pushed to `main`.
+- Post-merge GitHub Actions run `29973653722` completed green for both
+  `verify` and `e2e` against exact merge head `a2730a87480a8c124dd97de55fe6961a23c5128d`.
 
 ## RM stop record
 
@@ -135,7 +143,7 @@ Historical relay records live in `relay-history.md` and are non-authoritative.
 ## RM dispatch
 
 - Dispatch id: `codex-matt-governance-readme-ci-fix-rm-20260722-01`
-- State: `active`
+- State: `closed`
 - Role: `top-level fresh RM closeout only`
 - Configured model: `gpt-5.6-sol`
 - Selected model: `gpt-5.6-sol`
@@ -156,12 +164,10 @@ Historical relay records live in `relay-history.md` and are non-authoritative.
 - Successor worktree: `/Users/huangxuewei/.codex/worktrees/d677/english-question-bank`
 - Ready-held proof: `clean detached worktree; HEAD and named source branch both resolved to 976664f64bd8872dd7336195dde94717d8bcb381; required RM inputs read; zero repository writes`
 - Activation proof: `released predecessor-final input 5b8aa8bf35428211d401bb29552a0bc19a6fd68b adopted cleanly; sole writer acquired by fresh RM`
+- Result: `ACCEPTED; merged to main at a2730a87480a8c124dd97de55fe6961a23c5128d; post-merge verify and e2e green`
 - Scope: `fresh RM acceptance, changed-head release verification, merge, main CI, compact STATUS, and terminal cut closeout only`
 - Forbidden: `implementation, README or governance-rule changes, product/runtime, production configuration, plugins/skills, main-checkout user-work overwrite, and wt-applied-writing-lecture`
 
 ## Next Action
 
-1. Run changed-head large artifact and full release proof with real exit codes;
-   if green, perform RM acceptance and merge only from a clean main checkout
-   aligned exactly with `github/main`, confirm post-merge main CI green, update
-   compact STATUS, and close the cut.
+1. Cut closed; no successor, production action, or deployment is authorized.

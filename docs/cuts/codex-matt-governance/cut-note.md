@@ -1,11 +1,11 @@
 # codex-matt-governance · cut note
 
 Cut: `codex-matt-governance`
-Status: RM blocked by the final full-suite release gate; canonical re-review
-remains MERGEABLE with zero unresolved Must Fix
-PR / branch: `codex/codex-matt-governance-live-state-migration-20260722-01`
+Status: CLOSED — fresh RM accepted and merged; post-merge main CI green
+PR / branch: `codex/codex-matt-governance-readme-ci-fix-20260722-01`
 Start date: 2026-07-22
 Merge date: 2026-07-22
+Merge commit: `a2730a87480a8c124dd97de55fe6961a23c5128d`
 Rounds: PA 3; formal CR / re-review 5; explicitly escalated Big CR 0
 Must Fix: PA surfaced 11 across two blocking rounds; CR surfaced 13 across four
 blocking rounds; final unresolved count 0
@@ -28,9 +28,10 @@ Bugs / blockers found:
 - RM initially found a dirty, divergent main checkout with an overlapping
   untracked file. Owner-authorized recovery preserved it on local branch
   `codex/rescue-main-pre-governance-20260722-01` before cleaning `main`.
-- Final RM verification found one CI registry/documentation mismatch: the new
+- The first RM verification found one CI registry/documentation mismatch: the new
   live-state verifier is in `verify-ci.mjs`, but its `scripts/README.md` entry
-  lacks the required `Runs in CI? = yes` field.
+  lacked the required `Runs in CI? = yes` field; the bounded Fix DEV / fresh
+  verification / fresh CR loop corrected and approved it before final RM.
 
 Pitfalls / wrong assumptions:
 - “Wayfinder remains responsible” means continuity of the tracked role and
@@ -49,14 +50,14 @@ Good decisions:
   collaboration rules and documentation.
 
 Verify evidence:
-- Fresh verification is recorded in `verification.md`, including exact-head
-  live-state/Git checks and the earlier full suite PASS 84 / SKIP 1 / FAIL 0.
-- Canonical `cr.md` ends with MERGEABLE and zero unresolved Must Fix.
-- RM TypeScript check passed. The Large artifact gate passed 4 / failed 0.
-- `verify:all` returned PASS 84 / SKIP 1 / FAIL 1; the isolated housekeeping
-  rerun returned PASS 71 / FAIL 1 for the same README registry mismatch.
-- A fresh Fix DEV, verification, re-review, and fresh RM are required before
-  merge; post-merge `main` CI remains mandatory.
+- Exact-head README parity verification is recorded in the live entrypoint;
+  canonical fresh CR ends APPROVE with zero unresolved Must Fix.
+- Final RM at `599572d`: `git diff --check` 0; Large artifact gate PASS 4 /
+  FAIL 0; live-state check 0; TypeScript 0; `verify:all` PASS 85 / SKIP 1 /
+  FAIL 0.
+- Main was clean and exactly aligned with `github/main` before merge. GitHub
+  Actions run `29973653722` completed green for both `verify` and `e2e` on
+  merge head `a2730a8`.
 
 Watch / next:
 - The first three new qualifying Medium/Large cuts must exercise the serial

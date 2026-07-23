@@ -1,6 +1,6 @@
 # 当前状态（medium / large cut 收官时更新）
 
-Last updated: 2026-07-21（workflow-route-retire 收官；
+Last updated: 2026-07-22（codex-matt-governance 收官；
 **生产仍为 5cabb5c**：本刀仅改协作规则，不触发生产部署）
 
 下一步队列（2026-07-17 晚刷新，均未圈、owner 圈了再动）：
@@ -48,6 +48,10 @@ essay-grading 幸存件重建，判例已回流，远端 Buqisir/project-os 私�
 
 ## 主线焦点
 
+- 2026-07-22：**codex-matt-governance 收官**（merge `a2730a8`，README parity fresh CR APPROVE 0MF；RM changed-head artifact 4/0、verify:all 85/1/0；main CI verify+e2e 双绿）：
+  风险档与上下文拓扑正式拆轴；`model-routing.md` 成为唯一精确模型/Thinking 权威。
+  标准执行改为独立可寻址的一次一角色 relay，fresh verification/CR/RM 门禁不降；live state 与历史分离。
+  **账单**：子代理 token 工具未回传（PA 3 轮、formal CR/re-review 5 轮及修复流水线）；主代理出场次数未在旧 relay 记录统计。详情见 `docs/cuts/codex-matt-governance/`。
 - 2026-07-21：**workflow-route-retire 收官**（PR #286，merge
   `dfabfab`，fresh CR Round 2 APPROVE，5/5 Must Fix 闭环，main CI 全绿）：
   标准刀 Workflow 路由退役，改为 PM 分阶段直接派工；PM+RM 合一但门禁
