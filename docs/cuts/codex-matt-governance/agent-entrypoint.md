@@ -36,6 +36,10 @@ Historical relay records live in `relay-history.md` and are non-authoritative.
 - Verification activation preflight: this worktree and repository root match;
   it was clean; `HEAD` and the named source branch both resolved to
   `d6c65eb52cc30c382c6d7253e64f00c73565262e`.
+- README CI-registry parity verification at released input head
+  `d6c65eb52cc30c382c6d7253e64f00c73565262e`: `git diff --check` exited 0;
+  `node scripts/verify-architecture-housekeeping.mjs` exited 0
+  (PASS 72 / FAIL 0).
 
 ## RM stop record
 
@@ -93,10 +97,12 @@ Historical relay records live in `relay-history.md` and are non-authoritative.
 - Ready-held proof: `fresh verification proved clean worktree; HEAD and named source branch both resolved to 45e55710621202eb94aec5c630e31d2ef76d8ef2`
 - Release contract: `predecessor-final commit carries this record; no later Fix DEV worktree write`
 - Activation proof: `released input adopted cleanly; sole writer acquired by fresh verification`
+- Result: `PASS`; exact implementation head verified:
+  `d6c65eb52cc30c382c6d7253e64f00c73565262e`.
 - Scope: `bind real exit-code evidence to the exact Fix DEV head only`
 - Forbidden: `implementation, README changes, verifier/governance changes, product/runtime, production, and wt-applied-writing-lecture`
 
 ## Next Action
 
-1. Run the named verification checks against the released input head, record
-   their real exit codes, commit the result, then relay exactly one fresh CR.
+1. Record and provision exactly one fresh CR successor, then release the
+   verification-final commit under the write-held protocol.
