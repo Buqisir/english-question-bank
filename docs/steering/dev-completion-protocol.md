@@ -38,10 +38,39 @@ Next：新开顶层任务
 Worktree: <absolute path>
 Branch: <branch>
 Expected HEAD: <commit>
+Spec: <exact path | not applicable>
+Ticket: <exact path | not applicable>
+Fixed point: <commit | not applicable>
 Model: <model>
-Effort: <low | medium | high | xhigh>
+Effort: <low | medium | high | xhigh | max | ultra>
 Prompt:
 <complete copyable prompt naming exact artifacts and action>
+```
+
+Fill all applicable anchors for the task type. Implementation names its spec
+and ticket; independent review names its spec, completed tickets, and fixed
+point; QA names its accepted spec/prototype and checklist; shipping names its
+review/QA evidence and integration fixed point. Use `not applicable` only when
+an anchor genuinely does not apply. Repeat exact paths and commits: the owner
+should not have to find or remember any artifact.
+
+Normal defaults remain `low`, `medium`, or `high`. `xhigh`, `max`, and `ultra`
+are legal only with explicit owner direction and evidence that a lower effort
+was inadequate, as defined by `docs/agents/model-routing.md`.
+
+Wait for owner QA in the current task:
+
+```text
+Next：等待人工 QA
+Worktree: <absolute path>
+Branch: <branch>
+Expected HEAD: <commit>
+Spec: <exact path | not applicable>
+Ticket: <exact path | not applicable>
+Fixed point: <commit | not applicable>
+QA checklist: <inline 3-5 checks or exact path>
+Prompt:
+请按以上清单完成 owner QA。完成后回复“QA 完成”；若失败，逐条描述实际结果。
 ```
 
 Continue the current task:
@@ -70,6 +99,7 @@ from a block.
 
 ## QA
 
-For visible work, prepare at most five owner checks and wait in the same task.
+For visible work, return `Next：等待人工 QA` with at most five owner checks and
+wait in the same task.
 After `QA 完成`, return the ship/follow-up instruction. A failed QA result
 returns one fresh fix-ticket prompt.

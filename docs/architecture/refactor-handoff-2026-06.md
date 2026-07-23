@@ -1,8 +1,12 @@
 # Refactor Handoff — api.mjs / App.tsx Decomposition (2026-06-08)
 
-Pick-up doc for a fresh session continuing the systematic refactor. Read this + the **roadmap**
-(`docs/architecture/refactor-roadmap-2026-06.md`) + the memory file
-(`memory/refactor-decomposition-2026-06.md`). Then continue from "Remaining cuts" below.
+Status: Historical record — non-authoritative session handoff from 2026-06.
+This file preserves technical decisions, completed work, and deferred refactor
+information. It does not authorize fresh DEV subagents, automatic CR/RM relay,
+agent-created successors, or agent-initiated merge. If the owner revives an
+item, the owner manually opens each top-level task under
+`docs/steering/codex-matt-workflow.md`; confirm current state in
+`docs/STATUS.md` and write a current spec/ticket before implementation.
 
 ## STATUS: sequential api.mjs lane COMPLETE (2026-06-08 session 2)
 
@@ -104,10 +108,11 @@ the next (avoids api.mjs + verify-ci conflicts). Dependency order:
 **Rejected (do NOT re-propose):** the 20 shallow seams in the roadmap's deferred list (read-hub, CRUD SQL,
 type-barrel, App.tsx state-webs, surface-adapter merge, …).
 
-## THE RECIPE (per cut — proven across 13 merges)
+## HISTORICAL RECIPE (evidence only; do not execute as current policy)
 
 1. **Branch off latest main.** Re-derive current line numbers (the file shrinks each cut).
-2. **DEV via a fresh Opus agent** (decoupled from CR — see gotcha): `Agent` tool, `subagent_type: dev-hard`,
+2. **Former fresh-Opus DEV step** (retained to explain the June record, not
+   authorized now): `Agent` tool, `subagent_type: dev-hard`,
    `model: opus`, `isolation: worktree`, `run_in_background: true`. Prompt = SETUP (symlink node_modules,
    commit to a named branch, don't push) + the HARD LESSONS + the roadmap cut id + "report free-text:
    committed?/files/seam/byte-identity proof/verify counts/blocker". (Inline `script` workflows also work;
@@ -163,7 +168,7 @@ type-barrel, App.tsx state-webs, surface-adapter merge, …).
 
 ## Pointers
 
-- Roadmap (source of truth, per-cut detail): `docs/architecture/refactor-roadmap-2026-06.md`
+- Historical roadmap technical inventory: `docs/architecture/refactor-roadmap-2026-06.md`
 - Per-cut plans committed: `docs/cuts/H5-server-implementation-extraction/plan-h5-{b,c,d,e}-*.md`
 - Memory: `memory/refactor-decomposition-2026-06.md` (lessons + lane state)
 - Reusable single-cut workflow script (inline-spec pattern, args-free):

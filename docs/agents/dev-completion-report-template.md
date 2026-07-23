@@ -19,10 +19,34 @@ Next：新开顶层任务
 Worktree: <absolute path>
 Branch: <branch>
 Expected HEAD: <commit>
+Spec: <exact path | not applicable>
+Ticket: <exact path | not applicable>
+Fixed point: <commit | not applicable>
 Model: <model>
-Effort: <low | medium | high | xhigh>
+Effort: <low | medium | high | xhigh | max | ultra>
 Prompt:
 <complete copyable prompt>
+```
+
+Fill all applicable anchors for the task type. Use `not applicable` only when
+an anchor genuinely does not apply. Repeat exact paths and commits; the owner
+should not have to find or remember any artifact.
+
+Normal defaults are `low`, `medium`, or `high`. `xhigh`, `max`, and `ultra`
+require explicit owner direction and evidence that a lower effort was
+inadequate.
+
+```text
+Next：等待人工 QA
+Worktree: <absolute path>
+Branch: <branch>
+Expected HEAD: <commit>
+Spec: <exact path | not applicable>
+Ticket: <exact path | not applicable>
+Fixed point: <commit | not applicable>
+QA checklist: <inline 3-5 checks or exact path>
+Prompt:
+请按以上清单完成 owner QA。完成后回复“QA 完成”；若失败，逐条描述实际结果。
 ```
 
 ```text

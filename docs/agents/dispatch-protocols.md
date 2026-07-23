@@ -40,14 +40,21 @@ Next：新开顶层任务
 Worktree: <absolute path>
 Branch: <branch>
 Expected HEAD: <commit>
+Spec: <exact path | not applicable>
+Ticket: <exact path | not applicable>
+Fixed point: <commit | not applicable>
 Model: <model>
-Effort: <low | medium | high | xhigh>
+Effort: <low | medium | high | xhigh | max | ultra>
 Prompt:
 <complete prompt>
 ```
 
-The prompt must name the exact spec, ticket, fixed point, and allowed action.
-The owner should not have to find or remember them.
+Fill all applicable anchors for the task type. Use `not applicable` only for an
+anchor that genuinely does not apply. The block and prompt must repeat every
+relevant exact artifact and allowed action; the owner should not have to find or
+remember them. Normal effort defaults are `low`/`medium`/`high`;
+`xhigh`/`max`/`ultra` require explicit owner direction and lower-effort
+inadequacy evidence under `model-routing.md`.
 
 ## Batch and parallel work
 

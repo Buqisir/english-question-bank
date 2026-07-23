@@ -220,6 +220,34 @@ assert('Matt workflow forbids automatic top-level task creation', mattWorkflow.i
 assert('Matt workflow defines one copyable Next', mattWorkflow.includes('Next：新开顶层任务') && mattWorkflow.includes('Expected HEAD:'))
 assert('Matt workflow separates internal workers from relay', mattWorkflow.includes('internal Standards and Spec reviewers') && mattWorkflow.includes('never become the next ticket or phase'))
 
+const status = read('docs/STATUS.md')
+assert(
+  'STATUS routes current work through Matt-native manual tasks',
+  status.includes('Matt-native 手工顶层任务流程') &&
+    status.includes('取代 2026-07-22') &&
+    status.includes('不得路由当前工作'),
+)
+
+const refactorRoadmap = read('docs/architecture/refactor-roadmap-2026-06.md')
+const refactorHandoff = read('docs/architecture/refactor-handoff-2026-06.md')
+for (const [name, source] of [
+  ['refactor roadmap', refactorRoadmap],
+  ['refactor handoff', refactorHandoff],
+]) {
+  assert(
+    `${name} is explicitly historical and non-authoritative`,
+    source.includes('Status: Historical record') &&
+      source.includes('does not authorize') &&
+      source.includes('owner manually opens'),
+  )
+  assert(
+    `${name} cannot restore relay or delegated RM`,
+    !source.includes('Status: Living roadmap') &&
+      !source.includes('merge per delegated RM') &&
+      !source.includes('DEV via a fresh Opus agent'),
+  )
+}
+
 const handoffTemplate = read('docs/cuts/_templates/handoff.md')
 assert('handoff template captures next-cut lessons', handoffTemplate.includes('Things The Next Cut Must Know') && handoffTemplate.includes('Evidence:') && handoffTemplate.includes('Rule:'))
 

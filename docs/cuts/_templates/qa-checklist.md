@@ -28,3 +28,16 @@ owner QA: <过 / 不过(哪一项)>;日期: <YYYY-MM-DD>
 QA task stays open for the owner response. After `QA 完成`, it returns the one
 copyable ship prompt. On failure, it returns one copyable fresh fix-ticket
 prompt. It never creates either task.
+
+```text
+Next：等待人工 QA
+Worktree: <absolute path>
+Branch: <branch>
+Expected HEAD: <commit>
+Spec: <exact path | not applicable>
+Ticket: <exact path | not applicable>
+Fixed point: <commit | not applicable>
+QA checklist: <this exact path>
+Prompt:
+请按本对照单完成 owner QA。完成后回复“QA 完成”；若失败，逐条描述实际结果。
+```

@@ -1,7 +1,10 @@
 # Refactor Roadmap — api.mjs / App.tsx Decomposition (2026-06)
 
-Status: Living roadmap. Source of truth for the systematic refactor lane begun 2026-06-07.
-Owner away during execution; 小川 executes the mergeable non-visual lane, stages the rest.
+Status: Historical record — non-authoritative technical inventory from 2026-06.
+It preserves completed decisions and deferred refactor candidates, but does not authorize
+fresh DEV subagents, automatic CR/RM relay, delegated merges, or any current action.
+For renewed work, the owner manually opens each top-level task under
+`docs/steering/codex-matt-workflow.md`; current state comes from `docs/STATUS.md`.
 
 ## How this was produced
 
@@ -21,12 +24,14 @@ razor-critic verified load-bearing claims against the tree and pushed back on 3 
   import back from `server/api.mjs` (no cycle).
 - **One revertable PR per cut, gated by a run-form `verify-*.mjs`.**
 
-## Execution policy while owner is away
+## Historical execution policy (retained as evidence, not current instruction)
 
-- **Mergeable solo = ✅** (non-visual-server, fully run-form verifiable): 小川 takes
-  plan → DEV → fresh CR → verify:all → merge per delegated RM.
-- **🔒 owner**: contract-sensitive or user-visible. 小川 prepares plan/branch + proof but
-  does **not** merge; left for owner PA / browser+PO QA.
+- **Former “mergeable solo” lane:** non-visual server cuts once used
+  plan → DEV → fresh CR → verify:all → delegated merge. This describes the June
+  record only and grants no present merge or relay authority.
+- **Former owner-held lane:** contract-sensitive or user-visible work stopped
+  for owner review. Any revived work now follows the current manual top-level
+  task, review, QA, and ship contracts.
 - api.mjs-touching cuts are **sequential** (shared file). Independent-file cuts may interleave.
 
 ## Critic reslices (binding)

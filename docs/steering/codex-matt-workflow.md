@@ -158,6 +158,15 @@ For a user-visible change, the current task prepares at most five owner checks
 and waits:
 
 ```text
+Next：等待人工 QA
+Worktree: <absolute path>
+Branch: <branch>
+Expected HEAD: <commit>
+Spec: <exact path | not applicable>
+Ticket: <exact path | not applicable>
+Fixed point: <commit | not applicable>
+QA checklist: <inline 3-5 checks or exact path>
+Prompt:
 请按下面清单完成 owner QA。完成后回复“QA 完成”；
 若失败，逐条描述实际结果。
 ```
@@ -230,11 +239,21 @@ Next：新开顶层任务
 Worktree: <absolute path>
 Branch: <branch>
 Expected HEAD: <commit>
+Spec: <exact path | not applicable>
+Ticket: <exact path | not applicable>
+Fixed point: <commit | not applicable>
 Model: <model>
-Effort: <low | medium | high | xhigh>
+Effort: <low | medium | high | xhigh | max | ultra>
 Prompt:
-<complete prompt, including exact spec/ticket/fixed point>
+<complete prompt>
 ```
+
+Fill all applicable anchors for the task type; do not mechanically demand an
+irrelevant spec, ticket, or fixed point. Use `not applicable` only when it truly
+does not apply, and repeat every relevant path/commit in the block so the owner
+never has to find or remember an artifact. Normal effort defaults are
+`low`/`medium`/`high`; `xhigh`/`max`/`ultra` require explicit owner direction
+and lower-effort inadequacy evidence under `model-routing.md`.
 
 Same task:
 
