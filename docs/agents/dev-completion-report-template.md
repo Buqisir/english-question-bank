@@ -14,8 +14,10 @@ Use verify summaries only. No raw command logs or implementation diary.
 
 End with exactly one of:
 
+For a new top-level task, put the instruction to open the task outside the
+fence. The copyable block starts directly with `Worktree:`:
+
 ```text
-Next：新开顶层任务
 Worktree: <absolute path>
 Branch: <branch>
 Expected HEAD: <commit>

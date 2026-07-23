@@ -50,7 +50,6 @@ function assertStructuredBlock(name, source, marker, fields) {
 }
 
 const newTaskFields = [
-  'Next：新开顶层任务',
   'Worktree:',
   'Branch:',
   'Expected HEAD:',
@@ -110,7 +109,7 @@ const newTaskDocuments = [
   ['handoff template', handoff],
 ]
 const newTaskBlocks = newTaskDocuments.map(([name, source]) =>
-  assertStructuredBlock(name, source, 'Next：新开顶层任务', newTaskFields),
+  assertStructuredBlock(name, source, 'Worktree:', newTaskFields),
 )
 const qaDocuments = [
   ['AGENTS.md', agents],

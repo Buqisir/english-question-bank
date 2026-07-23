@@ -54,8 +54,11 @@ and planned in one healthy context.
 
 Finish with a short result summary and exactly one exit:
 
+When the next step needs a new top-level task, put
+`请新开顶层任务，并将下面代码块直接粘贴：` outside the fence. The copyable
+block starts directly with `Worktree:`:
+
 ```text
-Next：新开顶层任务
 Worktree: <absolute path>
 Branch: <branch>
 Expected HEAD: <commit>
@@ -82,9 +85,9 @@ If the initiative is finished, end with:
 DONE
 ```
 
-Do not merely name a skill or ticket in `Next`. Include the exact artifact,
-worktree, branch, expected commit, and prompt so the owner does not have to
-remember routing details.
+Do not merely name a skill or ticket in a new-task block. Include the exact
+artifact, worktree, branch, expected commit, and prompt so the owner does not
+have to remember routing details.
 
 Fill every task-applicable Spec, Ticket, and Fixed point anchor. Use
 `not applicable` only when an anchor genuinely does not apply; repeat the exact

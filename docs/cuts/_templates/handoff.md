@@ -33,8 +33,10 @@ PR:
 
 ## Next Action
 
+Put the instruction to open the new top-level task outside the fence. The
+copyable block starts directly with `Worktree:`:
+
 ```text
-Next：新开顶层任务
 Worktree: <absolute path>
 Branch: <branch>
 Expected HEAD: <commit>

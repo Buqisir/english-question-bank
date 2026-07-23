@@ -217,7 +217,7 @@ assert('workflow protocol routes final shipping to the owner', cutWorkflow.inclu
 
 const mattWorkflow = read('docs/steering/codex-matt-workflow.md')
 assert('Matt workflow forbids automatic top-level task creation', mattWorkflow.includes('never creates the next'))
-assert('Matt workflow defines one copyable Next', mattWorkflow.includes('Next：新开顶层任务') && mattWorkflow.includes('Expected HEAD:'))
+assert('Matt workflow defines one directly pasteable next-task block', mattWorkflow.includes('New top-level task:') && mattWorkflow.includes('Worktree:') && mattWorkflow.includes('Expected HEAD:'))
 assert('Matt workflow separates internal workers from relay', mattWorkflow.includes('internal Standards and Spec reviewers') && mattWorkflow.includes('never become the next ticket or phase'))
 
 const status = read('docs/STATUS.md')

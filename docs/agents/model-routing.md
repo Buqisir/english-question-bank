@@ -19,7 +19,7 @@ genuinely difficult or a lower setting has shown visible quality loss.
 
 `xhigh`, `max`, and `ultra` require explicit owner direction and evidence that
 the lower setting is inadequate. They are never a ritual attached to a role,
-cut size, or final review.
+task size, or final review.
 
 If a route is unavailable, tell the owner and recommend the closest sensible
 choice. Do not log availability probes, build substitution ledgers, or create a

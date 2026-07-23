@@ -33,10 +33,12 @@ If the expected worktree, branch, or HEAD does not match, stop without writing:
 BLOCKED — worktree/branch/HEAD does not match the handoff.
 ```
 
-## `Next`
+## New top-level task
+
+Put the instruction to open the task outside the fence. The copyable block
+starts directly with `Worktree:`:
 
 ```text
-Next：新开顶层任务
 Worktree: <absolute path>
 Branch: <branch>
 Expected HEAD: <commit>

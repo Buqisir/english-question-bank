@@ -234,8 +234,10 @@ decisions.
 
 New top-level task:
 
+Write the instruction to open a new task outside the fence. The copyable block
+starts directly with `Worktree:`:
+
 ```text
-Next：新开顶层任务
 Worktree: <absolute path>
 Branch: <branch>
 Expected HEAD: <commit>

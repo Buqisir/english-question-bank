@@ -33,8 +33,10 @@ Then provide exactly one exit.
 
 New top-level task:
 
+Write `请新开顶层任务，并将下面代码块直接粘贴：` outside the fence. Keep
+the routing label out of the copyable prompt:
+
 ```text
-Next：新开顶层任务
 Worktree: <absolute path>
 Branch: <branch>
 Expected HEAD: <commit>
