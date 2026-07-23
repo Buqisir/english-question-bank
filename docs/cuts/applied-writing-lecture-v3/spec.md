@@ -1,6 +1,6 @@
 # applied-writing-lecture-v3 · Product and Payload Spec
 
-Revision: `AWL-V3-SPEC-1` (2026-07-22)
+Revision: `AWL-V3-SPEC-2` (2026-07-22 formal-PA disposition)
 
 ## Stable source set
 
@@ -10,7 +10,8 @@ Revision: `AWL-V3-SPEC-1` (2026-07-22)
 | Whitespace placement spec | `f64038f:docs/specs/2026-07-21-annotation-whitespace-pockets-design.md` | geometry contract |
 | Handwritten leader spec | `f64038f:docs/specs/2026-07-21-human-handwritten-leader-design.md` | leader rendering contract |
 | Current decisions | this branch `decisions.md` | production data mapping and scope |
-| Current production baseline | `github/main@1deec0f` | runtime truth |
+| Current production baseline | `github/main@1deec0fce29852556bb60e0b2fd8a1fb6075f2d4` | runtime and two-pilot payload truth |
+| Locked pilot candidates | `pilot-content/paper-2022-i.application.json`, `pilot-content/paper-2024-i.application.json` | exact proposed teaching content; owner confirmation pending |
 
 The three `f64038f` files are available on
 `github/codex/applied-writing-lecture-prototype-archive-20260722`. Historical
@@ -22,32 +23,38 @@ Before: application writing analysis is fetched only when lecture mode opens
 and rendered as a full `WritingAnalysisPanel` in the right rail. The answer box
 is inert. Current assets have only model answer + long highlight analysis.
 
-After: clicking the application answer box or its lecture entry opens a
-paper-local, two-view annotation stage over the original model answer. View 1
-shows five review annotations; view 2 shows four short highlight annotations.
-The right rail keeps the filled review card. Closing lecture mode removes all
-annotation DOM and does not affect print/student output.
+After: at supported desktop width, clicking an application answer box opens
+lecture mode, makes that exact group active, and—only after a complete valid
+payload is available—replaces its on-screen 246 px answer-box region with the
+fixed paper-local 794 × 472 stage. View 1 shows five review annotations; view 2
+shows four short highlight annotations. The right rail keeps the filled review
+card. Closing lecture or moving the active panel to another group removes all
+annotation DOM, clears view/seed state, and restores the 246 px answer box.
+Loading, unavailable, narrow-unsupported, print, export, and student paths never
+mount the stage.
 
 ## Visible-unit traceability
 
 | Visible unit | Approved size / shape | Production source | Allowed transformation |
 | --- | --- | --- | --- |
-| English essay | full letter, original reading order | `modelAnswer` | split into visual lines/paragraphs only; no rewriting |
+| English essay | full letter, original reading order, existing Times New Roman paper face | `modelAnswer` | split into logical lines/paragraphs only; no rewriting and no Shantell override |
 | Review English anchor | literal source phrase | `reviewMarks[].text` | locate only; no normalization-only render path |
 | Review handwritten title | one short teaching label | `reviewMarks[].grid` + `reviewCard` mapping in decisions D3 | deterministic formatting only |
 | Review handwritten note | one short Chinese explanation | `reviewMarks[].note` | escape + typography only; no truncation |
-| Highlight English anchor | literal source phrase | `highlightExpressions[].text` | locate only |
+| Highlight English anchor | literal source phrase in one logical answer line | `highlightExpressions[].text` | locate only; no normalization-only render path |
 | Highlight handwritten title | short manual label | `.lectureAnnotation.label` | escape + Chinese/English typography only |
 | Highlight handwritten note | short manual explanation | `.lectureAnnotation.note` | escape + typography only |
-| Optional transfer line | one short example | `.lectureAnnotation.transferExample` | omit when absent; never invent |
+| Optional transfer line | one short example in Shantell Sans | `.lectureAnnotation.transferExample` | omit when absent; never invent |
 | Leader / arrow | one light handwritten connector | DOM geometry + deterministic session seed | Variant A algorithm only |
 | Review rail | filled four-section card | `reviewCard` | narrow two-column formatting only |
 
 ## Production-shaped parity gate
 
 Before renderer work, two locked pilots (`paper-2022-i`, `paper-2024-i`) must
-pass the real validator + persistence projection and then feed an equivalent
-794 px annotation harness. Required result:
+receive owner teaching confirmation, pass the real validator + persistence
+projection, and then feed an equivalent 794 × 472 annotation harness. DEV reads
+the exact candidates under `pilot-content/`; it does not author copy. Required
+result:
 
 - review view `5/5`, highlight view `4/4`;
 - every anchor resolves literally in a single rendered answer line;
@@ -61,17 +68,59 @@ If parity needs a taller paper, cards, drawers, click-to-expand, copy
 truncation, heuristic string splitting, hard-coded positions, or more solver
 complexity, stop with `SPEC CONTRADICTS`.
 
-## Accessibility and responsive boundary
+## Publish / availability symmetry
+
+One backend/frontend contract governs the complete application lecture:
+
+- `reviewCard.points` is exactly two items;
+- `reviewMarks.grid` is exactly
+  `[type, cares, points, tense, points]`, with point occurrences mapping to
+  indices 0 and 1;
+- all five review anchors and all four annotated highlight anchors are
+  non-empty literal substrings wholly contained in one logical model-answer
+  line;
+- exactly four of 3–5 highlight expressions carry complete, length-valid,
+  trim-clean, single-line, plain-text `lectureAnnotation` objects;
+- persistence preserves the complete application object and outer
+  model-answer/highlight fields; continuation projection cannot retain any
+  v3 nested field.
+
+Backend validation, persistence projection, frontend availability, parity
+harness, and browser behavior must reject the whole stage for every row below:
+
+| Malformed-present family | Required result |
+| --- | --- |
+| normalized-only review or highlight anchor | unavailable; zero stage DOM |
+| partial `reviewCard`, `reviewMarks`, or `lectureAnnotation` object | unavailable; zero stage DOM |
+| wrong point count, mark count, highlight annotation count, grid order, duplicate non-point grid, or point mapping | unavailable; zero stage DOM |
+| leading/trailing whitespace, markup, Markdown, newline, empty or over-limit short value | unavailable; zero stage DOM |
+| application v3 nested object entering continuation projection | rejected before persist; unchanged continuation output |
+| legacy payload with every v3 field absent | unavailable; original answer box and `解析未发布` |
+
+## Active group, accessibility, and responsive boundary
+
+- The answer-box action sets `activeWritingLectureGroupId = groupId` and opens
+  lecture. The stage predicate is exactly
+  `lectureOpen && activeWritingLectureGroupId === groupId && application &&
+  available && panelGroupId === groupId`.
+- Payload loading keeps the ordinary answer box and may show `解析加载中…`;
+  unavailable/malformed keeps it and shows `解析未发布`. No partial stage exists.
+- Esc, lecture close, another group selection, or scrollspy ownership moving to
+  continuation/another group clears the active writing id, both view/seed
+  states, and annotation DOM before the new rail body is shown.
 
 - Tabs/segmented control are keyboard reachable and expose the active two-view
   state; left/right keys never escape `0..1`.
 - `重新寻位` has a real button label. Reduced-motion disables nonessential
   animated movement without changing final geometry.
-- At the approved desktop QA viewport (1470 x 719) the exact prototype
-  acceptance applies. At the product's supported narrower lecture layout,
-  annotations must remain readable and inside paper; if 794 px cannot be
-  preserved without redesign, PA/DEV must stop rather than invent a mobile
-  variant.
+- At 1470 × 719 the exact prototype acceptance applies. The fixed host is
+  794 × 472 with a 612 × 458 inner frame; the 91 px paper gutters remain
+  available to the solver.
+- Minimum supported v3 viewport is 1180 CSS px, inherited from the selected
+  prototype. At 1180–1199 px the current lecture rail may use its existing
+  drawer, while the stage remains 794 px. Below 1180 px, do not mount the
+  stage; preserve the original 246 px answer box. Do not scale, reflow,
+  horizontally scroll, or invent a mobile annotation variant.
 
 ## Explicit non-goals
 
@@ -81,3 +130,5 @@ complexity, stop with `SPEC CONTRADICTS`.
 - No PaperSurface, export, print, PDF, DOCX, student-view, route, or production
   deployment changes.
 - No generic annotation engine or geometry dependency.
+- No one-, three-, four-, or five-point review-card publishing class in this
+  cut.
