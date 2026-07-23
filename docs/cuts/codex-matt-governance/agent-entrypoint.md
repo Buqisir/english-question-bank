@@ -74,7 +74,7 @@ Historical relay records live in `relay-history.md` and are non-authoritative.
 ## Verification dispatch
 
 - Dispatch id: `codex-matt-governance-readme-ci-fix-verification-20260722-01`
-- State: `provisioning`
+- State: `ready-held`
 - Role: `fresh non-implementing verification`
 - Configured model: `gpt-5.6-terra`
 - Requested thinking: `medium`
@@ -87,6 +87,7 @@ Historical relay records live in `relay-history.md` and are non-authoritative.
 - Created thread: `019f8c98-6670-7223-ac59-2e6f0e2f916e`
 - Host: `local`
 - Successor worktree: `/Users/huangxuewei/.codex/worktrees/60db/english-question-bank`
+- Ready-held proof: `fresh verification proved clean worktree; HEAD and named source branch both resolved to 45e55710621202eb94aec5c630e31d2ef76d8ef2`
 - Scope: `bind real exit-code evidence to the exact Fix DEV head only`
 - Forbidden: `implementation, README changes, verifier/governance changes, product/runtime, production, and wt-applied-writing-lecture`
 
