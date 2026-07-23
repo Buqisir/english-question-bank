@@ -1,7 +1,7 @@
 # applied-writing-lecture-v3 · Live Entrypoint
 
-State: active
-Active role: fresh DEV implementation
+State: release-authorized
+Active role: none; fresh verification is the sole authorized successor
 Source branch: `codex/applied-writing-lecture-v3-20260722-01`
 Worktree: Codex-managed detached worktree
 Released PA result head: `e5d8dec9c76b35d581bc61e96b41681e3c7c7529`
@@ -92,9 +92,16 @@ revise the approved visual direction.
   assets, and preserved archive-worktree files.
 - More than one successor or any subagent used as the formal verification role.
 
+## DEV result
+
+DEV implementation commit: `9c2a240a1e2f30cb1a1734907d1400075c7bec6f`.
+`dev-result.md` binds the exact 16-file gate and all DEV evidence. The locked
+packets retain their required SHA-256 values; no forbidden scope was changed.
+
 ## Next Action
 
-1. DEV implements the locked exact 16-file route without changing the two
-   pilot teaching packets or owner-approved prototype contract.
-2. DEV commits its result, then releases exactly one fresh verification task
-   with the exact DEV head and does not await it.
+1. Dispatch exactly one fresh non-implementing verification task from this
+   release-authorized head.
+2. Verification re-proves the remote/release/clean activation evidence before
+   its first write, records real exit codes against the released exact head in
+   `verification.md`, and then exits to its own uniquely authorized successor.

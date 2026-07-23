@@ -2,7 +2,7 @@
 
 Type / role: Wayfinder -> PM contract -> formal PA -> DEV -> verification ->
 fresh CR -> QA -> RM
-State: active
+State: release-authorized
 Blockers: none
 Claimed by: fresh DEV implementation
 Base head: `github/main@1deec0f`
@@ -32,14 +32,14 @@ existing print/student isolation?
 
 ## Routing
 
-Current role: fresh DEV implementation
+Current role: none; DEV result is release-authorized
 Next role: exactly one fresh non-implementing verification task
 Configured model: `gpt-5.6-terra`
 Selected model: `gpt-5.6-terra`
-Thinking: `high`
-Availability / substitution: task-creation capability lists Terra/high; no
-substitution
-Dispatch ID / state: `AWL-V3-DEV-20260723-01` / active
+Thinking: `medium`
+Availability / substitution: task-creation capability lists Terra/medium; no
+substitution; same configured family/grade
+Dispatch ID / state: `AWL-V3-VERIFY-20260723-01` / dispatch-pending
 Activation evidence: after `git fetch github` on 2026-07-23, repo root is
 `/Users/huangxuewei/.codex/worktrees/f8ab/english-question-bank`; source ref
 `github/codex/applied-writing-lecture-v3-20260722-01` and `HEAD` resolve
@@ -51,10 +51,10 @@ runtime/data file without PM disposition.
 
 ## Unique Next Action
 
-1. DEV implements the locked exact 16-file production route and records
-   exact-head results.
-2. DEV releases exactly one fresh non-implementing verification task from its
-   committed result, then exits without awaiting it.
+1. Fresh verification re-proves the released exact head and clean worktree,
+   then makes its first durable `active` record.
+2. Verification binds the plan-named commands to that exact head and records
+   the full-suite release-gate result without repairing unrelated cuts.
 
 ## Result
 
@@ -93,3 +93,10 @@ PA disposition count is 5/5 and blocking PO decisions are zero. Exactly one
 fresh DEV is now authorized. After `git fetch github`, the owner-approved plan
 release recheck proved remote source ref, local `HEAD`, and released head all
 equal `9f87000cc51f59b985d420471d095230fa35f02a`; the worktree was clean.
+Fresh DEV implementation commit `9c2a240a1e2f30cb1a1734907d1400075c7bec6f`
+ships the exact 16 runtime/data files plus cut-local DP-2 and payload-parity
+evidence. `dev-result.md` records restart3 148/0, CSS pass, payload parity
+2022/2024 5/5 + 4/4, DP-2 pass, and paper-browse 197/0. The full suite is not
+green: it reports 82 pass, 1 skip, and three out-of-cut failures (`similar-v2`,
+paper-assets consistency, genre truth). Fresh verification is the only
+authorized next role and must bind that evidence to the released exact head.
