@@ -1,6 +1,7 @@
 # 应用文讲评渲染 v3 · Wayfinder Map
 
-State: active (AWL-V3-01 formal PA result recorded; PM plan revision pending)
+State: human-decision (PM revision at `8081cabc`; exact pilot teaching
+confirmation pending)
 Current ticket: [AWL-V3-01 终版批注原型生产化](tickets/AWL-V3-01.md)
 
 ## Notes
@@ -25,11 +26,15 @@ Current ticket: [AWL-V3-01 终版批注原型生产化](tickets/AWL-V3-01.md)
 - Production must add a faithful short highlight-annotation payload; existing
   long `highlightExpressions[].note` remains the full analysis and is not
   truncated or rewritten at runtime.
+- The selected prototype already fixes the 794 × 472 replacement host and the
+  two-point grid order. Owner clarified that essay text stays Times New Roman;
+  only annotation English uses Shantell Sans.
 
 ## Frontier
 
-1. [AWL-V3-01 终版批注原型生产化](tickets/AWL-V3-01.md) — formal PA
-   `APPROVE WITH MUST FIX`; fresh PM plan-revision is the unique next role.
+1. [AWL-V3-01 终版批注原型生产化](tickets/AWL-V3-01.md) — PM has closed
+   MF-2..MF-5; MF-1 waits only on owner confirmation of the two exact pilot
+   teaching-content packets. No DEV task exists.
 2. [AWL-V3-02 22 组应用文解析全套重产](tickets/AWL-V3-02.md) — blocked by
    AWL-V3-01 closeout and its published production contract.
 

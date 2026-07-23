@@ -1,25 +1,28 @@
 # applied-writing-lecture-v3 · Live Entrypoint
 
-State: active
-Active role: fresh PM plan-revision
+State: human-decision
+Active role: fresh PM plan-revision (write-held except owner-decision record)
 Source branch: `codex/applied-writing-lecture-v3-20260722-01`
 Worktree: Codex-managed detached worktree
 Released PA result head: `e5d8dec9c76b35d581bc61e96b41681e3c7c7529`
 Released PM plan-revision head: `eefa1305f326c0d25c4fcb6b5122ea8e75323051`
+Revised contract head: `8081cabc9dbf63d182fdab5a3172eb0394a8d08c`
 Activation evidence: after `git fetch github`,
 `github/codex/applied-writing-lecture-v3-20260722-01` resolved exactly to
 `eefa1305f326c0d25c4fcb6b5122ea8e75323051`; that released head is an ancestor
 of the current `HEAD` (which also equals it), and the worktree was clean.
-Evidence: `pa.md` (`APPROVE WITH MUST FIX`; 5 unresolved Must Fix; 3
-blocking PO decisions)
-Successor authorization: exactly one fresh PM plan-revision, dispatch
-`AWL-V3-PM-REV-20260722-01`
+Evidence: `plan.md` records 4/5 closed Must Fix dispositions and one remaining
+blocking PO decision: owner teaching confirmation of the exact two-pilot
+content packets.
+Successor authorization: none while human decision is pending; fresh DEV is
+forbidden.
 
 ## Current objective
 
-Revise the production contract to close every formal-PA disposition. DEV is
-forbidden until the PM plan revision records 5/5 closed Must Fix items and
-zero blocking PO decisions.
+Wait for owner confirmation of the two exact pilot teaching-content packets at
+SHA-256 `5618d515…b65037` and `39fd2fcd…bea35af`. DEV is forbidden until the PM
+records that decision, 5/5 closed Must Fix items, and zero blocking PO
+decisions.
 
 ## Must read
 
@@ -40,15 +43,17 @@ zero blocking PO decisions.
 ## Relay
 
 - Dispatch ID: `AWL-V3-PM-REV-20260722-01`
-- Current role: fresh PM plan-revision
-- Next role: unresolved until the PA disposition and PO-decision gates close
+- Current role: fresh PM plan-revision in human-decision pause
+- Next role: owner PO teaching confirmation; then one fresh DEV only if the
+  counts become 5/5 and zero
 - Output: revised `plan.md` dispositions plus linked decisions/spec/pilot
   content packet and live routing
 - Configured / selected model: `gpt-5.6-sol` / `gpt-5.6-sol`
 - Thinking: `high`
 - Availability source: current Codex task-creation capability lists
   `gpt-5.6-sol` with `high`; model-routing PM route is Sol/high, no substitution
-- One-successor boundary: PM plan-revision only; no DEV dispatch from this PA
+- One-successor boundary: create no task while paused; after approval, PM may
+  create exactly one fresh DEV from a newly released exact head
 - Stop boundary: named escalation or failed task creation -> record `blocked`
 
 ## Goal / slice
@@ -71,6 +76,6 @@ zero blocking PO decisions.
 
 ## Next Action
 
-1. PM plan-revision closes all five PA dispositions and all three blocking PO
-   decisions, or durably records a human-decision pause. DEV remains forbidden
-   until both counts are zero.
+1. Owner accepts or edits both exact pilot packets.
+2. PM records the decision and re-runs packet hashes/contracts. Only at 5/5 and
+   zero may it independently route and Auto-Next to one fresh DEV.

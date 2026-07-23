@@ -2,11 +2,11 @@
 
 Type / role: Wayfinder -> PM contract -> formal PA -> DEV -> verification ->
 fresh CR -> QA -> RM
-State: active
-Blockers: formal PA 5 Must Fix + 3 blocking PO decisions
-Claimed by: fresh PM plan-revision
+State: human-decision
+Blockers: owner confirmation of two exact pilot teaching-content packets
+Claimed by: fresh PM plan-revision (write-held)
 Base head: `github/main@1deec0f`
-Expected head: `eefa1305f326c0d25c4fcb6b5122ea8e75323051`
+Expected head: `8081cabc9dbf63d182fdab5a3172eb0394a8d08c`
 Output path: `docs/cuts/applied-writing-lecture-v3/`
 
 ## Question
@@ -31,22 +31,23 @@ existing print/student isolation?
 
 ## Routing
 
-Current role: fresh PM plan-revision
-Next role: unresolved until the PA disposition and PO-decision gates close
+Current role: fresh PM plan-revision in human-decision pause
+Next role: owner PO teaching confirmation; then fresh DEV only at 5/5 and zero
 Configured model: `gpt-5.6-sol`
 Selected model: `gpt-5.6-sol`
 Thinking: `high`
 Availability / substitution: task-creation capability lists Sol/high; no
 substitution
-Dispatch ID / state: `AWL-V3-PM-REV-20260722-01` / active
+Dispatch ID / state: `AWL-V3-PM-REV-20260722-01` / human-decision
 Authorization scope: PM plan-revision may edit cut docs except canonical
 `pa.md`; no runtime implementation
 
 ## Unique Next Action
 
-1. PM plan-revision closes the five PA dispositions and three blocking PO
-   decisions or durably records a human-decision pause; DEV remains forbidden
-   meanwhile.
+1. Owner accepts or edits both exact pilot packets at hashes recorded in
+   `pilot-content/README.md`.
+2. PM records the decision; only 5/5 closed Must Fix and zero blocking PO
+   decisions authorize one fresh DEV.
 
 ## Result
 
@@ -64,3 +65,9 @@ head `eefa1305f326c0d25c4fcb6b5122ea8e75323051` re-proved after
 `git fetch github` that the remote source ref resolves exactly to that commit,
 that it is an ancestor of the current `HEAD` (which also equals it), and that
 the worktree was clean. Dispatch `AWL-V3-PM-REV-20260722-01` is active.
+PM revision `8081cabc9dbf63d182fdab5a3172eb0394a8d08c` adds both
+production-shaped pilot packets, closes MF-2 through MF-5, narrows the review
+contract to the prototype's exact two-point class, locks literal availability,
+active-group teardown, 794 × 472 / 612 × 458 host geometry, 1180 px boundary,
+Times New Roman essay font, and the exact 16-file route. MF-1 remains open only
+for owner teaching confirmation; state is `human-decision`, with no DEV task.
