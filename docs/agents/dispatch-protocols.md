@@ -58,6 +58,11 @@ remember them. Normal effort defaults are `low`/`medium`/`high`;
 `xhigh`/`max`/`ultra` require explicit owner direction and lower-effort
 inadequacy evidence under `model-routing.md`.
 
+If this task implements or fixes an implementation ticket, `Prompt:` must
+explicitly say to use `/implement`; that skill owns TDD, relevant checks,
+Standards + Spec `/code-review`, fixes, and commit. A result-only final message
+without one canonical exit is invalid.
+
 ## Batch and parallel work
 
 Parallel work is exceptional. Use it only when units are truly independent and

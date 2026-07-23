@@ -31,6 +31,12 @@ Do not paste raw command logs or an implementation diary.
 
 Then provide exactly one exit.
 
+A result-only final message is invalid. If the new top-level task implements or
+fixes an implementation ticket, its `Prompt:` must explicitly say to use
+`/implement`; `/implement` owns TDD, relevant checks, Standards + Spec
+`/code-review`, fixes, and commit. Do not ask the owner to invoke those steps
+separately.
+
 New top-level task:
 
 Write `请新开顶层任务，并将下面代码块直接粘贴：` outside the fence. Keep

@@ -201,7 +201,17 @@ Stay in the current task for:
 
 ## Context stop signals
 
-Use `/handoff` and stop when the agent:
+At the end of a phase, choose one path in this order:
+
+1. enough smart context, or a simple remainder: continue the current task;
+2. disposable context: clear and start clean;
+3. crossing to another agent, directory, or colleague: `/handoff`;
+4. bounded AFK work that needs no human input: use an internal worker that
+   reports back to the current task;
+5. valuable context, no boundary crossing, and continued human involvement:
+   compact and continue the same ticket.
+
+Treat the current context as degraded when the agent:
 
 - asks a settled question again;
 - forgets an explicit out-of-scope item;
@@ -210,7 +220,8 @@ Use `/handoff` and stop when the agent:
 - expands the process to compensate for confusion;
 - spends more time narrating coordination than building the product.
 
-Do not wait for a numeric token threshold.
+Do not wait for a numeric token threshold. A subagent is never the next ticket
+or phase.
 
 ## Existing work already in flight
 
@@ -256,6 +267,11 @@ does not apply, and repeat every relevant path/commit in the block so the owner
 never has to find or remember an artifact. Normal effort defaults are
 `low`/`medium`/`high`; `xhigh`/`max`/`ultra` require explicit owner direction
 and lower-effort inadequacy evidence under `model-routing.md`.
+
+A result-only final message is invalid. If the next task implements or fixes an
+implementation ticket, its `Prompt:` must explicitly say to use `/implement`;
+that skill owns TDD, relevant checks, Standards + Spec `/code-review`, fixes,
+and commit.
 
 Same task:
 

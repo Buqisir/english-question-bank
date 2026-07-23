@@ -14,6 +14,11 @@ Use verify summaries only. No raw command logs or implementation diary.
 
 End with exactly one of:
 
+A result-only final message is invalid. If the next task implements or fixes an
+implementation ticket, its `Prompt:` must explicitly say to use `/implement`;
+that skill owns TDD, relevant checks, Standards + Spec `/code-review`, fixes,
+and commit.
+
 For a new top-level task, put the instruction to open the task outside the
 fence. The copyable block starts directly with `Worktree:`:
 

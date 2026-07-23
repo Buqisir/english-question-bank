@@ -8,6 +8,20 @@ Historical cut records may describe older PM / PA / DEV / CR / RM relays,
 Auto-Next, subagent dispatch, or `agent-entrypoint.md`. They are evidence of
 how earlier work ran, not instructions for new work.
 
+## Non-negotiable final check
+
+Before sending any final message:
+
+- end with exactly one exit: a new-top-level-task block, `Next：留在当前任务`,
+  `Next：等待人工 QA`, or `DONE`; a result-only final message is invalid;
+- if the next task implements or fixes an implementation ticket, its `Prompt:`
+  must explicitly say to use `/implement`, which owns TDD, relevant checks,
+  Standards + Spec `/code-review`, fixes, and commit;
+- keep that ticket's implementation, TDD, ordinary review, and fixes in the
+  same top-level task until it passes, blocks on a real decision, or waits for
+  owner QA. Do not ask the owner to invoke `/tdd` or ordinary `/code-review`
+  separately.
+
 ## Matt-native collaboration
 
 The owner is the orchestrator. Agents do bounded work; they do not manage a
@@ -121,9 +135,14 @@ After `QA 完成`, return the next copyable instruction or `DONE`.
   Before handing off, commit the current result, leave the worktree clean, and
   put its exact path, branch, and HEAD in `Next`. Only one top-level task writes
   that worktree at a time.
-- Do not compact mid-phase. If the agent repeats settled questions, forgets
-  scope, rereads the same files without progress, confuses the current ticket,
-  or discusses process more than product, use `/handoff` and stop.
+- At a phase boundary, continue in the current task while the context remains
+  sharp or the remainder is simple. If it cannot continue: clear only when the
+  context is disposable; use `/handoff` only when crossing to another agent,
+  directory, or colleague; use a bounded subagent only for AFK work that
+  reports back here; otherwise compact the valuable context and continue the
+  same ticket. Repeated settled questions, forgotten scope, mixed tickets,
+  rereading without progress, or more process talk than product work are the
+  behavioral stop signals.
 - Do not treat a numeric context-window estimate as a hard threshold. The
   behavior above is the stop signal.
 

@@ -160,6 +160,31 @@ assert(
     steering.includes('next top-level task'),
   'implementation task cannot dispatch a successor',
 )
-assert(steering.includes('DONE'), 'terminal DONE exists')
+
+section('non-negotiable exit')
+
+const exitContractDocuments = [
+  ['AGENTS.md', agents],
+  ['completion protocol', steering],
+  ['completion template', template],
+  ['Matt workflow', workflow],
+]
+for (const [name, source] of exitContractDocuments) {
+  const normalized = compact(source)
+  assert(source.includes('result-only final message is invalid'), `${name} rejects result-only finals`)
+  assert(source.includes('Next：留在当前任务'), `${name} includes same-task Next`)
+  assert(source.includes('Next：等待人工 QA'), `${name} includes owner-QA Next`)
+  assert(source.includes('DONE'), `${name} includes terminal DONE`)
+  assert(
+    normalized.includes('implements or fixes an implementation ticket') &&
+      normalized.includes('must explicitly say to use `/implement`'),
+    `${name} requires explicit /implement in implementation or fix Next`,
+  )
+}
+assert(
+  agents.includes("same top-level task until it passes") &&
+    workflow.includes("one ticket's TDD and code-review loop"),
+  'one ticket keeps implementation and ordinary review in one task',
+)
 
 summary()

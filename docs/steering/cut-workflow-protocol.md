@@ -151,8 +151,12 @@ Shipping is an action, not a standing RM persona.
 
 ## 10. Context and handoff
 
-Use `/handoff` at a phase boundary or when the agent repeats settled questions,
-forgets scope, mixes tickets, or stalls in rereading. Do not compact mid-phase.
+At a phase boundary, continue while the context remains sharp or the remainder
+is simple. If it cannot continue: clear disposable context; use `/handoff` only
+to cross to another agent, directory, or colleague; use a bounded internal
+worker only for AFK work that reports back; otherwise compact valuable context
+and continue the same ticket. Repeated settled questions, forgotten scope,
+mixed tickets, or stalled rereading are behavioral stop signals.
 
 The next top-level task is always opened manually by the owner. Historical
 `agent-entrypoint.md`, relay ledgers, and Auto-Next lifecycle records never
