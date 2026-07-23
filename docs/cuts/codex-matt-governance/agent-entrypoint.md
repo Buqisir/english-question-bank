@@ -71,7 +71,21 @@ Historical relay records live in `relay-history.md` and are non-authoritative.
 - Scope: `scripts/README.md CI registry parity only, plus own routing state`
 - Forbidden: `all external-audit observations, governance rule redesign, product/runtime, production, and wt-applied-writing-lecture`
 
+## Verification dispatch
+
+- Dispatch id: `codex-matt-governance-readme-ci-fix-verification-20260722-01`
+- State: `dispatch-pending`
+- Role: `fresh non-implementing verification`
+- Configured model: `gpt-5.6-terra`
+- Requested thinking: `medium`
+- Availability source: `Codex create_thread capability on local host`
+- Supported-thinking evidence: `gpt-5.6-terra supports medium`
+- Eligibility proof: `configured primary is the sole same-family/same-grade candidate`
+- Substitution reason: `none`
+- Scope: `bind real exit-code evidence to the exact Fix DEV head only`
+- Forbidden: `implementation, README changes, verifier/governance changes, product/runtime, production, and wt-applied-writing-lecture`
+
 ## Next Action
 
-1. Correct the bounded `scripts/README.md` CI registry-parity defect, verify,
-   commit, and relay exactly one fresh verification successor.
+1. Create exactly one top-level fresh verification successor and release the
+   final Fix DEV commit under the write-held protocol.
