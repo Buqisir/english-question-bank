@@ -15,6 +15,14 @@ product rules, not casual suggestions.
 
 ## Required steering notes
 
+### Codex × Matt workflow
+
+File: `codex-matt-workflow.md`
+
+Use for multi-task cuts, Wayfinder routing, or Auto-Next. It defines the
+context-topology axis and one-way relay lifecycle; it never waives the risk
+gates in `AGENTS.md` and `cut-workflow-protocol.md`.
+
 ### Product scope discipline
 
 File: `product-scope-discipline.md`
@@ -58,8 +66,9 @@ Hard rule:
 - `plan.md` is the default Medium / Large route; add an entrypoint only when the
   routing conditions in the protocol require one.
 - The owner is PO and final product QA, not code reviewer.
-- Treat GitHub `main` and PR heads as the shared truth. Subagent reports
-  are not truth until the main agent verifies remote state.
+- Treat GitHub `main` and PR heads as the shared truth. The active relay role
+  verifies and records the remote state required by its own gate; an exited
+  predecessor does not re-consume that evidence.
 - Use `docs/cuts/_templates/pa-prompt-template.md` and
   `docs/cuts/_templates/big-cr-prompt-template.md` when a PA / Big CR
   handoff needs durable repo-routed instructions; do not hand-write
@@ -78,7 +87,7 @@ Hard rule:
 
 File: `docs/agents/pa-persona.md`
 
-Use when spawning a PA subagent.
+Use when creating a fresh independently addressable PA task.
 
 Hard rule:
 
@@ -123,7 +132,7 @@ Hard rule:
 
 File: `dev-completion-protocol.md`
 
-Use for DEV subagent completion reports on file-changing work.
+Use for DEV completion reports on file-changing work.
 
 Hard rule:
 

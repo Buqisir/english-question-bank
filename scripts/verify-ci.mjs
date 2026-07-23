@@ -97,6 +97,7 @@ const registry = {
   'scripts/verify-detail-redesign.mjs',
   'scripts/verify-reading-analysis-retire.mjs',
   'scripts/verify-r2-trap-audit.mjs',
+  'scripts/verify-codex-matt-governance-live-state.mjs',
   ],
 }
 

@@ -9,6 +9,13 @@ Date:
 
 State the smallest current objective in one paragraph.
 
+## Current Stage
+
+Name exactly one active role and its sole authorized transition. In the first
+activation commit, and again in every result/dispatch handoff commit, update
+this section and `## Next Action` together so no completed or write-held stage
+appears as the live frontier.
+
 ## Prerequisites (check before acting)
 
 Run these checks before reading or writing the next artifact:
@@ -52,6 +59,33 @@ Skim only if unfamiliar or not already loaded in this session.
 - Base commit:
 - PR:
 - Latest accepted artifact:
+
+## Relay Lifecycle
+
+- Dispatch ID:
+- State: `ready | claimed | dispatch-pending | provisioning | ready-held |
+  release-authorized | active | result-recorded | human-QA | blocked | closed |
+  failed`
+- Expected project root / branch / head:
+- Next role and output:
+- Configured model / selected model / thinking:
+- Availability, eligibility, and substitution evidence:
+- Returned task identity / prompt digest:
+- Released predecessor-final HEAD:
+- Activation commit / result commit:
+- Evidence pointer:
+- One-successor authorization and stop boundary:
+- Unique next action / recovery action:
+
+For a shared worktree, a successor is write-held until it re-proves the
+predecessor's released exact HEAD and clean state. Its first permitted write is
+the durable `active` record; the predecessor makes no later write after release.
+
+## Next Action
+
+State exactly one machine-actionable next step. It must agree with `## Current
+Stage` and the live Relay Lifecycle state; historical evidence belongs in its
+completed dispatch record rather than this section.
 
 ## Goal / PR Split
 

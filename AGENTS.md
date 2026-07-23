@@ -18,13 +18,13 @@ CR / RM); do not mass-rename history.
 
 ### Roles
 
-- Orchestrator: **阿澈** is the main agent and wears **PM + RM** (Codex native
-  **Sol / max**), first responsible person with full change authority. The main
-  agent does direction, decomposition, direct dispatch, verification, release
-  gates, and final acceptance — not bulk implementation.
-- Execution runs in directly dispatched subagents. **Every spawned agent pins
-  its model explicitly; never inherits the main-agent tier.** DEV = Terra;
-  judgment-heavy PA / CR = Sol.
+- Orchestrator: **阿澈** is the main agent and PM, first responsible person for
+  direction and decomposition — not bulk implementation or a surviving release
+  coordinator. Medium / Large release execution belongs to the fresh direct RM
+  successor after CR / required QA.
+- Execution runs in fresh, independently addressable tasks. Every direct relay
+  successor has one role and an explicit `model` and `thinking` selection from
+  `docs/agents/model-routing.md`; it never inherits the predecessor selection.
 - **Independence = fresh, un-anchored context + role persona.** PA, DEV,
   and CR stay separate contexts; review gates never downgrade.
 - UI direction / 审美 is delegated to 阿澈 per
@@ -33,42 +33,40 @@ CR / RM); do not mass-rename history.
 
 ### Dispatch map (scales with cut size)
 
-- small: main agent fixes directly, or one fresh Terra DEV subagent; CR-lite by
+- small: main agent fixes directly, or one fresh DEV task; CR-lite by
   the main agent; no ceremony files.
-- medium: committed `plan.md` → fresh Terra DEV → PM runs narrow + `tsc` + full
-  verify → fresh Sol CR (cold-read, writes `cr.md`) → required QA / PO QA →
-  PM + RM acceptance, merge, main CI, STATUS.
+- medium: committed `plan.md` → fresh DEV → fresh non-implementing verification
+  → fresh CR (cold-read, writes `cr.md`) → required QA / PO QA → RM acceptance,
+  merge, main CI, STATUS.
 - large, or touches an irreversible surface / data-contract semantics
   (schema, migration, export, anchor protocol, cross-cut architecture):
-  add a fresh Sol PA → PM compression into `plan.md` → fresh Terra DEV → PM
-  verify → fresh Sol CR (Big CR only by trigger, writes `cr.md`) → required QA /
-  PO QA → PM + RM closeout. `cut-note.md` is required at closeout. Purely
+  add a fresh PA → PM compression into `plan.md` → fresh DEV → fresh
+  verification → fresh CR (Big CR only by trigger, writes `cr.md`) → required QA /
+  PO QA → fresh RM closeout. `cut-note.md` is required at closeout. Purely
   additive schema touches and reversible product-surface
   work may downgrade to PA-lite — the downgrade reason goes in the plan
   header and CR must review whether it still holds. 原型已 owner 逐裁点
   拍板的刀同此:方向审查已由原型过程完成,formal PA 默认降 PA-lite
   (owner, 2026-07-12)。
-- Direct dispatch route (PM stages DEV / CR directly; decision points, batch
-  tasks, parallel cuts, worktrees, and checkpoint discipline): read
-  `docs/agents/dispatch-protocols.md` before dispatching.
+- Routing, exact model/thinking selection, direct relay lifecycle, decision
+  points, and worktree discipline: read `docs/agents/model-routing.md`,
+  `docs/steering/codex-matt-workflow.md`, and `docs/agents/dispatch-protocols.md`
+  before dispatching.
 - CR-lite (the PM's cold read) is for Small cuts only. Every Medium / Large cut
   receives a fresh CR; its non-empty `cr.md` is an RM artifact-gate requirement.
 
-### Tier / effort defaults
+### Routing law
 
-| Role | Tier | Effort |
-| --- | --- | --- |
-| PM + RM (main agent) | Sol | max |
-| PA | Sol | high (xhigh only for irreversible work) |
-| DEV | Terra | medium (high only when the implementation is gnarly) |
-| CR | Sol | high (xhigh only for Big CR) |
-
-Never let a subagent default to the main-agent profile.
+`docs/agents/model-routing.md` is the single exact model/thinking authority.
+Every dispatch independently selects its role, passes both values explicitly,
+records availability and substitution evidence, and stops with
+`missing-authority` / `dispatch-failed` when no eligible candidate supports the
+requested thinking. Never rely on a runtime default or inherited profile.
 
 ### Gates
 
-- RM artifact gate (medium / large, run by the PM + RM main agent after fresh
-  CR writes `cr.md`): required
+- RM artifact gate (medium / large, run by the fresh direct RM successor after
+  fresh CR / required QA): required
   artifacts exist (`node scripts/verify-cut-artifacts.mjs <cut-dir> <tier>`)
   and the relevant `verify-i*.mjs` pass before merge.
 - Before any merge to `main`, the full suite must be proven green — either
@@ -82,13 +80,13 @@ Never let a subagent default to the main-agent profile.
   owner 2026-07-12), 挂账 pointers; detail lives in the cut dir;
   entries older than ~two weeks roll into `docs/status-archive/`).
 - 复核纪律:**DEV self-reported green is never accepted at face value.**
-  The main agent re-runs verification itself, with real exit codes (never
-  piped through anything that swallows them). Division of labor: main agent
-  runs the cut's narrow verify script(s) + `tsc` **and one full
-  `verify:all`** in the DEV worktree pre-merge; post-merge proof of the
-  combined tree is the watched `main` CI run — no local full re-run in the
-  main tree unless the merge overlapped interim main commits. Verify is never
-  delegated as a substitute for the main agent's release review.
+  A fresh non-implementing verification task runs the plan-named checks with
+  real exit codes and binds the evidence to the exact implementation head.
+  Fresh CR attacks that evidence without duplicating an unchanged full run;
+  RM consumes it and reruns only when the evidence is missing, the head
+  changed, an overlapping rebase/merge occurred, or the plan names a release
+  check. Post-merge proof remains the watched `main` CI run. Verification is
+  independent evidence, never a substitute for CR or RM release review.
 - Verify convention: new contracts prefer behavioral assertions (start the
   server / call the real API / import the real module) over source-regex
   assertions. A behavioral assertion may retire the matching regex
@@ -265,8 +263,8 @@ stash,2026-07-16 收悬空时落地。)
   contract, product boundary, or teaching interpretation: yes/no`. Small
   and touching none of the four → proceed directly.
 - Hat contracts and role definitions live in
-  `docs/agents/review-levels.md` (阿澈 wears PM + RM; independence from
-  fresh contexts, not names — PA runs fresh and before DEV only when its trigger
+  `docs/agents/review-levels.md` (PM direction and each relay role have
+  distinct fresh contexts; PA runs fresh and before DEV only when its trigger
   fires; DEV and CR are always different fresh contexts; role contracts and
   gates never downgrade). Big CR is
   triggered by risk or explicit owner request, not by a default gate.

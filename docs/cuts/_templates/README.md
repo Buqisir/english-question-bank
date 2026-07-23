@@ -64,7 +64,7 @@ used as document names in new cuts.
 
 - Do not encode `lite` / `big` in filenames by default.
 - Formal PA reports use `pa.md` whether the review was light or deep.
-- For medium / large cuts where PA is used, the PA subagent writes
+- For medium / large cuts where PA is used, the fresh PA task writes
   `pa.md` before DEV; the PM hat then records PA disposition in
   `plan.md` under `PA Follow-Up Decisions`.
 - Fresh Medium / Large CR (and Big CR) reports use `cr.md`.

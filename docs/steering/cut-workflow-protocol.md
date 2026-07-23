@@ -19,6 +19,10 @@ Current roles, models, and execution sequence are authoritative only in the
 QA, artifact, handoff, and size gates. Historical cut records naming 小川 /
 external agents are read as 阿澈 wearing the matching hat.
 
+For multi-task topology, use `codex-matt-workflow.md`. Context size does not
+alter Small/Medium/Large/irreversible gates; every required fresh role remains a
+separate task under the one-way Auto-Next relay.
+
 ---
 
 ## 1. First principles
@@ -166,7 +170,7 @@ ordered PRs.
 
 ### Cut entrypoint and handoff
 
-Medium and large cuts must have a stable routing file before review subagents or
+Medium and large cuts must have a stable routing file before fresh review tasks or
 long-running DEV begins — for most cuts `plan.md` itself is enough. Add
 `agent-entrypoint.md` only for multi-stage, long-running, parallel, cross-session
 handoff, or independent reading navigation:
@@ -278,7 +282,8 @@ When a cut has more than three watch items, create or update
 ## 3. Source of truth and sync
 
 The remote GitHub `main` branch and the PR head are the shared truth.
-Agent reports are not truth until verified.
+The active role records the remote-state evidence required for its own gate;
+an exited predecessor does not consume or re-certify that result.
 
 Before PA / CR / QA / RM, the responsible hat must:
 
@@ -288,7 +293,7 @@ Before PA / CR / QA / RM, the responsible hat must:
 - confirm local checkout matches the branch being reviewed
 - confirm working tree cleanliness before merge-sensitive work
 
-Review subagents may escalate instead of writing partial reports:
+Fresh review tasks may escalate instead of writing partial reports:
 
 - `CONTEXT INSUFFICIENT`: required reading file is missing or empty.
 - `BRANCH CONFLICT`: target branch / PR cannot be inspected from the
@@ -328,9 +333,10 @@ point is to protect the owner from over-commanding during momentum.
 ## 4. Gate responsibilities
 
 The `AGENTS.md` Dispatch map assigns roles and sequence. These conditions do
-not downgrade: PA, DEV, and CR remain different fresh contexts; the main agent
-runs browser QA for visible changes; the owner (PO) runs final product QA; RM
-owns the artifact gate, merge, and post-merge main-CI confirmation.
+not downgrade: PA, DEV, and CR remain different fresh contexts; a fresh direct
+QA coordinator runs browser QA for visible changes; the owner (PO) runs final
+product QA; a fresh direct RM successor owns the artifact gate, merge, and
+post-merge main-CI confirmation.
 
 ## 5. Grill before visual work
 

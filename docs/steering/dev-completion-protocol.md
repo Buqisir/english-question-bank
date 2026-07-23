@@ -5,8 +5,9 @@ inclusion: auto
 # DEV completion protocol
 
 Scope: applies to implementation work in the
-`Buqisir/english-question-bank` repository, whoever performs it (main
-agent or DEV subagent) — the completion contract does not downgrade.
+`Buqisir/english-question-bank` repository, whoever performs it as the direct
+DEV role (or permitted role-internal assistance) — the completion contract does
+not downgrade.
 Authoritative — agents must follow this protocol unless the user
 overrides it inline for a specific task.
 
@@ -14,6 +15,11 @@ This document was written in response to the agreed rule口径
 ("DEV 完工默认开 PR、@me、报告里给链接") so GitHub notification
 emails fire reliably for every shippable change. The owner relies
 on those emails as the primary signal that work is ready for review.
+
+For an Auto-Next cut, a DEV task's required completion is durable result and
+one fresh non-implementing verification successor under the entrypoint's
+write-hold/release protocol. It must not push, open a PR, merge, or wait for
+that successor unless the cut explicitly grants those later release actions.
 
 ---
 
@@ -50,6 +56,9 @@ instead) ONLY when the task is explicitly tagged with one of:
 - `spike-only` — exploratory work, no integration intent
 - `plan-only` — planning artifacts, code may not even be committed
 - `review-only` — only inspecting existing code, no edits expected
+- `auto-next` — durable result plus one fresh verification successor under the
+  entrypoint release protocol; do not push, open a PR, merge, or wait for that
+  successor
 
 When the exception applies, the completion report still must give
 the branch URL in the form
