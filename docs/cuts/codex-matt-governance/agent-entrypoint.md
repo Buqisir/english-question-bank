@@ -7,11 +7,11 @@ Historical relay records live in `relay-history.md` and are non-authoritative.
 
 - Cut id: `codex-matt-governance`
 - Cut size: `large governance`
-- Lifecycle state: `release-authorized`
-- Active role: `fresh CR`
+- Lifecycle state: `active`
+- Active role: `fresh RM`
 - Source branch: `codex/codex-matt-governance-readme-ci-fix-20260722-01`
-- Current worktree: `/Users/huangxuewei/.codex/worktrees/144f/english-question-bank`
-- Released input head: `0318460c48fa36c8c8dda0eb397f9a1eb2b93b1b`
+- Current worktree: `/Users/huangxuewei/.codex/worktrees/d677/english-question-bank`
+- Released input head: `5b8aa8bf35428211d401bb29552a0bc19a6fd68b`
 
 ## Current evidence
 
@@ -46,6 +46,9 @@ Historical relay records live in `relay-history.md` and are non-authoritative.
 - README CI-registry parity fresh CR verdict: `APPROVE`; zero unresolved Must
   Fix findings. Canonical report:
   `docs/cuts/codex-matt-governance/cr.md#readme-ci-registry-parity-fix-fresh-cr--2026-07-22`.
+- Fresh RM activation preflight: current worktree and repository root match;
+  the worktree was clean; detached `HEAD` and the named source branch both
+  resolved to released input head `5b8aa8bf35428211d401bb29552a0bc19a6fd68b`.
 
 ## RM stop record
 
@@ -111,7 +114,7 @@ Historical relay records live in `relay-history.md` and are non-authoritative.
 ## CR dispatch
 
 - Dispatch id: `codex-matt-governance-readme-ci-fix-cr-20260722-01`
-- State: `active`
+- State: `closed`
 - Role: `fresh CR`
 - Configured model: `gpt-5.6-sol`
 - Requested thinking: `high`
@@ -132,7 +135,7 @@ Historical relay records live in `relay-history.md` and are non-authoritative.
 ## RM dispatch
 
 - Dispatch id: `codex-matt-governance-readme-ci-fix-rm-20260722-01`
-- State: `release-authorized`
+- State: `active`
 - Role: `top-level fresh RM closeout only`
 - Configured model: `gpt-5.6-sol`
 - Selected model: `gpt-5.6-sol`
@@ -152,10 +155,13 @@ Historical relay records live in `relay-history.md` and are non-authoritative.
 - Host: `local`
 - Successor worktree: `/Users/huangxuewei/.codex/worktrees/d677/english-question-bank`
 - Ready-held proof: `clean detached worktree; HEAD and named source branch both resolved to 976664f64bd8872dd7336195dde94717d8bcb381; required RM inputs read; zero repository writes`
+- Activation proof: `released predecessor-final input 5b8aa8bf35428211d401bb29552a0bc19a6fd68b adopted cleanly; sole writer acquired by fresh RM`
 - Scope: `fresh RM acceptance, changed-head release verification, merge, main CI, compact STATUS, and terminal cut closeout only`
 - Forbidden: `implementation, README or governance-rule changes, product/runtime, production configuration, plugins/skills, main-checkout user-work overwrite, and wt-applied-writing-lecture`
 
 ## Next Action
 
-1. Release this predecessor-final commit to the recorded fresh RM task, then
-   end this CR task without awaiting the RM result.
+1. Run changed-head large artifact and full release proof with real exit codes;
+   if green, perform RM acceptance and merge only from a clean main checkout
+   aligned exactly with `github/main`, confirm post-merge main CI green, update
+   compact STATUS, and close the cut.
