@@ -13,8 +13,8 @@ Activation evidence: after `git fetch github`,
 `eefa1305f326c0d25c4fcb6b5122ea8e75323051`; that released head is an ancestor
 of the current `HEAD` (which also equals it), and the worktree was clean.
 Evidence: `plan.md` records 4/5 closed Must Fix dispositions and one remaining
-blocking PO decision: owner personal visual “过关” on both tabs of both exact
-packets in `prototype-pilot-review.html`.
+blocking PO decision: owner personal visual “过关” on both views of both exact
+packets injected into the real local `PaperBrowsePage`.
 Live-host evidence at that head measures the real lecture-open page as
 `canvas 794 / answer 612 / rail 380` at 1470 × 719 and
 `canvas 628 / answer 446 / rail 380` at 1200 × 719, with no overlap.
@@ -23,8 +23,9 @@ forbidden.
 
 ## Current objective
 
-Wait for the owner to inspect 2022 / 2024 in both prototype tabs and explicitly
-say “过关”. The packets remain SHA-256 `5618d515…b65037` and
+Wait for the owner to inspect 2022 / 2024 in both real-site browser tabs,
+switch each paper between `① 审题要点` and `② 亮点句式`, and explicitly say
+“过关”. The packets remain SHA-256 `5618d515…b65037` and
 `39fd2fcd…bea35af`; machine `5/5` / `4/4` is precheck only. DEV is forbidden
 until PM records the owner verdict, 5/5 closed Must Fix items, and zero blocking
 PO decisions.
@@ -81,7 +82,9 @@ PO decisions.
 
 ## Next Action
 
-1. Owner opens `prototype-pilot-review.html`, inspects both packets and both
-   tabs, and says whether it passes.
+1. Owner inspects the two prepared real-site browser tabs, switches each paper
+   between `① 审题要点` and `② 亮点句式`, and says whether it passes. The
+   temporary injection is marked in the real lecture rail and refresh restores
+   the untouched site.
 2. PM records the visual verdict and re-runs packet hashes/contracts. Only at
    5/5 and zero may it independently route and Auto-Next to one fresh DEV.

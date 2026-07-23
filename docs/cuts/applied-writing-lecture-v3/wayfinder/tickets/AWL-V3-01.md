@@ -3,7 +3,7 @@
 Type / role: Wayfinder -> PM contract -> formal PA -> DEV -> verification ->
 fresh CR -> QA -> RM
 State: human-decision
-Blockers: owner visual “过关” on both tabs of both real-packet prototype states
+Blockers: owner visual “过关” on both views of both injected real-paper states
 Claimed by: fresh PM plan-revision (write-held)
 Base head: `github/main@1deec0f`
 Expected head: `b91514ab18d5a4d35904c4b70378c8d68a9d4562`
@@ -44,8 +44,8 @@ Authorization scope: PM plan-revision may edit cut docs except canonical
 
 ## Unique Next Action
 
-1. Owner inspects 2022 / 2024 and both tabs in
-   `prototype-pilot-review.html`, then explicitly says whether it passes.
+1. Owner inspects the prepared 2022 / 2024 real-site tabs and both paper-local
+   views, then explicitly says whether it passes.
 2. PM records that visual verdict; only 5/5 closed Must Fix and zero blocking
    PO decisions authorize one fresh DEV.
 
@@ -72,5 +72,9 @@ active-group teardown, 794 × 472 / 612 × 458 host geometry, Times New Roman
 essay font, and the exact 16-file route. Live-site recheck corrected the
 responsive contract: lecture rail and paper are side-by-side, and v3 keys off
 the real paper canvas reaching its 794 px cap instead of a guessed viewport.
+A runtime-only browser harness now injects the selected Variant A stage and
+locked review card into the actual 2022 / 2024 local paper pages; both
+full-canvas states pass `5/5 + 4/4`, while the 628 px narrow host refuses
+injection.
 MF-1 remains open only for the owner's visual prototype verdict; state is
 `human-decision`, with no DEV task.

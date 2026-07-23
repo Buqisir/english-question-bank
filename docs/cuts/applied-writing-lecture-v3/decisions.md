@@ -178,7 +178,10 @@ Their current model answers and outer long-highlight fields are byte-for-byte
 bound to `github/main@1deec0fce29852556bb60e0b2fd8a1fb6075f2d4`.
 The new review/lecture teaching copy passed PM checks for prompt fit, grammar,
 register, reader relationship, purpose, literal anchors, length, and Gaokao
-vocabulary. `prototype-pilot-review.html` renders both packets in the real
-794 / 612 canvas shape, and machine precheck reports `5/5 + 4/4` for each.
+vocabulary. The runtime-only owner-review harness injects
+`prototype-pilot-review.html?embedded=1` into each packet's real local
+`PaperBrowsePage`: both use the actual 794 px canvas and 91 px answer offset,
+the actual 380 px lecture rail remains side-by-side, and the 628 px narrow host
+is rejected before injection. Machine precheck reports `5/5 + 4/4` for each.
 The owner's personal visual “过关” remains the hard DEV precondition; DEV may
 transport approved content but may not invent or rewrite it.

@@ -38,8 +38,8 @@ Current ticket: [AWL-V3-01 终版批注原型生产化](tickets/AWL-V3-01.md)
 
 1. [AWL-V3-01 终版批注原型生产化](tickets/AWL-V3-01.md) — PM has closed
    MF-2..MF-5; MF-1 waits only on the owner's personal visual “过关” after
-   inspecting 2022 / 2024 and both tabs in `prototype-pilot-review.html`. No
-   DEV task exists.
+   inspecting both views of 2022 / 2024 temporarily injected into their real
+   local paper pages. No DEV task exists.
 2. [AWL-V3-02 22 组应用文解析全套重产](tickets/AWL-V3-02.md) — blocked by
    AWL-V3-01 closeout and its published production contract.
 

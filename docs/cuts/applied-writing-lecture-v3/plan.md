@@ -60,9 +60,12 @@ to the original model-answer sentences without breaking the essay reading flow.
 
 ### P2 — Two locked pilot payloads and parity harness
 
-- Owner must first inspect both exact candidates in the interactive
-  `prototype-pilot-review.html` (both tabs for 2022 and 2024) and explicitly
-  say the prototype passes. The linked JSON objects remain bound to SHA-256
+- Owner must first inspect both exact candidates temporarily injected into the
+  real local `PaperBrowsePage` (both paper-local views for 2022 and 2024) and
+  explicitly say the prototype passes. `prototype-pilot-review.html?embedded=1`
+  supplies only the selected Variant A stage; the real site supplies the
+  canvas, navigation, scroll, and lecture rail. The linked JSON objects remain
+  bound to SHA-256
   `5618d515…b65037` (2022) and `39fd2fcd…bea35af` (2024). This visual owner
   verdict is the hard DEV gate; teaching copy is not delegated to DEV.
 - After confirmation, DEV writes those exact objects for `paper-2022-i` and
@@ -256,8 +259,8 @@ Missing dependencies are environment evidence, not an implementation verdict.
 - [x] DP-1 PM compressed approved prototype + real payload into current contract.
 - [x] DP-2 fresh formal PA verdict; `pa.md` records
   `APPROVE WITH MUST FIX` (5 unresolved Must Fix, 3 blocking PO decisions).
-- [ ] DP-2A owner personally inspects both tabs of both real-packet states in
-  `prototype-pilot-review.html` and explicitly says “过关”; this is the only
+- [ ] DP-2A owner personally inspects both views of both real packets injected
+  into the real local `PaperBrowsePage` and explicitly says “过关”; this is the only
   remaining blocking PO decision. Machine `5/5` / `4/4` is precheck only.
 - [ ] DP-3 DEV exact-head implementation complete.
 - [ ] DP-4 fresh verification exact-head PASS.
@@ -276,8 +279,11 @@ record one disposition for every item in `pa.md`'s
   exist under `pilot-content/`, teaching interpretation is `yes`, current outer
   payload fields are byte-for-byte preserved, PM grammar/register/
   relationship/purpose/vocabulary checks pass, and P2 forbids DEV-authored
-  teaching copy. The real-packet Variant A prototype and four screenshots exist
-  under this cut and machine precheck is 2022 `5/5 + 4/4`, 2024 `5/5 + 4/4`.
+  teaching copy. The real-packet Variant A renderer, runtime-only injection
+  harness, and four injected-site screenshots exist under this cut; the real
+  host measured `canvas 794 / answer offset 91` for both packets and machine
+  precheck is 2022 `5/5 + 4/4`, 2024 `5/5 + 4/4`. Injection correctly refused
+  the 628 px narrow canvas.
   **Open only on the owner's personal visual inspection and explicit “过关”.**
 - [x] **MF-2 — fixed mark class:** D3/P1 support exactly two points and the
   prototype-backed grid order

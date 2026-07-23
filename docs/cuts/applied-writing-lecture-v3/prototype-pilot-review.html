@@ -8,6 +8,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Shantell+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/@chinese-fonts/xiaolai@3.0.0/dist/Xiaolai/result.css" rel="stylesheet">
+  <script>
+    if (new URLSearchParams(location.search).get('embedded') === '1') {
+      document.documentElement.classList.add('embedded');
+    }
+  </script>
   <style>
     :root {
       --paper-width: 794px;
@@ -427,6 +432,52 @@
         margin: 0 auto;
       }
     }
+
+    /* Runtime-injected owner review: the real local PaperBrowsePage remains
+       the host. This document contributes only the 794×472 lecture stage. */
+    html.embedded,
+    html.embedded body {
+      width: 794px;
+      height: 472px;
+      min-height: 0;
+      overflow: hidden;
+      background: transparent;
+    }
+
+    html.embedded .appbar,
+    html.embedded .nav-rail,
+    html.embedded .exam-head,
+    html.embedded .prompt,
+    html.embedded .lecture-rail,
+    html.embedded .variant-switcher,
+    html.embedded .fallback-answer,
+    html.embedded .stage-status {
+      display: none !important;
+    }
+
+    html.embedded .shell {
+      display: block;
+      width: 794px;
+      height: 472px;
+      margin: 0;
+      padding: 0;
+    }
+
+    html.embedded .paper {
+      width: 794px;
+      max-width: none;
+      min-height: 0;
+      height: 472px;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      box-shadow: none;
+    }
+
+    html.embedded .paper-stage {
+      display: block;
+      margin-left: 0;
+    }
   </style>
 </head>
 <body>
@@ -651,7 +702,8 @@
     const debugLayer = document.getElementById('debugLayer');
     const packed = document.getElementById('packed');
     const pilotKeys = Object.keys(PILOTS);
-    let pageIndex = 0;
+    const requestedPage = Number(new URLSearchParams(location.search).get('page'));
+    let pageIndex = requestedPage === 1 ? 1 : 0;
     let renderNonce = 0;
     let fontRefreshQueued = false;
     let layoutSeed = 0;
@@ -1492,7 +1544,7 @@
 
     updateVariantUi();
     updatePilotUi();
-    if (updateViewportMode()) renderPage(0);
+    if (updateViewportMode()) renderPage(pageIndex);
   </script>
 </body>
 </html>

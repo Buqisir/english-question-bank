@@ -24,12 +24,15 @@ These are exact pre-DEV candidate objects, not runtime assets:
 
 ## Owner prototype gate
 
-The owner must personally inspect `../prototype-pilot-review.html`, switch
-between 2022 / 2024 and both `审题要点` / `亮点句式` tabs, and explicitly say
-“过关” before DEV may write the packets through the real validator and
-persistence projection. Machine `5/5` / `4/4` only proves all notes were
-placed; it cannot substitute for the owner's visual judgment. The verdict
-covers:
+The owner must personally inspect the two prepared real local
+`PaperBrowsePage` tabs, one for 2022 and one for 2024, and switch each injected
+paper between `审题要点` / `亮点句式`. The selected Variant A renderer is
+injected only into the current browser; the real website still supplies the
+paper canvas, lecture rail, navigation, and scroll, and refresh restores it.
+The owner must explicitly say “过关” before DEV may write the packets through
+the real validator and persistence projection. Machine `5/5` / `4/4` only
+proves all notes were placed; it cannot substitute for the owner's visual
+judgment. The verdict covers:
 
 1. review-card judgments match the prompt and current model answer;
 2. every review note teaches a visible function, not a decorative label;

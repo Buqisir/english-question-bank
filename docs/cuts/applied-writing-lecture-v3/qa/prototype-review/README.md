@@ -18,25 +18,57 @@ reaching its 794 px cap. A viewport number is reproduction evidence only:
 this local Chrome instance first reached the 794 px canvas at 1366 px because
 its document scrollbar consumed 8 px.
 
-## Prototype precheck
+## Real-site injected owner review
+
+The owner-review surface now runs inside the real local `PaperBrowsePage`.
+`inject-live-site.playwright.mjs` performs a runtime-only browser injection:
+
+- keeps the real navigation, 794 px paper canvas, 380 px lecture rail, scrolling,
+  and responsive shell;
+- temporarily hides only the current application answer box and inserts the
+  selected Variant A 794 × 472 stage at its real 91 px paper offset;
+- replaces only the visible lecture-rail children with the matching locked
+  review card;
+- writes no runtime source, payload, database, local storage, or server state;
+- exposes `撤销注入`; refresh also restores the untouched real page.
+
+The injection succeeded for both `paper-2022-i` and `paper-2024-i` at the real
+`canvas 794 / answer offset 91` host. At a real 628 px canvas it stopped before
+injection with the narrow-boundary message instead of scaling or covering the
+paper.
+
+Injected-site screenshots:
+
+- `injected-2022-review.png`
+- `injected-2022-highlight.png`
+- `injected-2024-review.png`
+- `injected-2024-highlight.png`
+
+The live owner-review browser is intentionally left with two tabs, one real
+paper per packet. Each starts on `① 审题要点`; the owner can click
+`② 亮点句式` inside the paper.
+
+## Renderer precheck
 
 `prototype-pilot-review.html` keeps Variant A, uses Times New Roman for the
 model answer, Xiaolai for Chinese annotation ink, and Shantell Sans only for
-English inside annotations / transfer examples.
+English inside annotations / transfer examples. Its `embedded=1` mode supplies
+only the paper-local stage; the real website supplies the host.
 
 | Packet | Review | Highlight |
 | --- | ---: | ---: |
 | 2022 invitation | 5/5 | 4/4 |
 | 2024 sharing | 5/5 | 4/4 |
 
-Screenshots:
+Standalone renderer screenshots:
 
 - `2022-0.png` — 2022 review
 - `2022-1.png` — 2022 highlight
 - `2024-0.png` — 2024 review
 - `2024-1.png` — 2024 highlight
 
-These counts only prove that all required annotations were placed inside the
-fixed canvas. They do not approve the teaching copy, visual balance, or
-classroom usability. MF-1 closes only after the owner personally inspects all
-four states and explicitly says “过关”.
+These counts and injected-site screenshots prove only that all required
+annotations were placed inside the fixed stage hosted by the real canvas.
+They do not approve the teaching copy, visual balance, or classroom usability.
+MF-1 closes only after the owner personally inspects all four injected real-site
+states and explicitly says “过关”.

@@ -12,7 +12,7 @@ Revision: `AWL-V3-SPEC-2` (2026-07-22 formal-PA disposition)
 | Current decisions | this branch `decisions.md` | production data mapping and scope |
 | Current production baseline | `github/main@1deec0fce29852556bb60e0b2fd8a1fb6075f2d4` | runtime and two-pilot payload truth |
 | Locked pilot candidates | `pilot-content/paper-2022-i.application.json`, `pilot-content/paper-2024-i.application.json` | exact proposed teaching content |
-| Real-packet owner-review prototype | `prototype-pilot-review.html` | Variant A + actual site-shell boundary; owner visual verdict pending |
+| Real-packet owner-review prototype | real local `PaperBrowsePage` + `qa/prototype-review/inject-live-site.playwright.mjs` + `prototype-pilot-review.html?embedded=1` | runtime-only injection of Variant A into the actual canvas/rail; owner visual verdict pending |
 
 The three `f64038f` files are available on
 `github/codex/applied-writing-lecture-prototype-archive-20260722`. Historical
@@ -52,9 +52,11 @@ mount the stage.
 ## Production-shaped parity gate
 
 Before renderer work, two locked pilots (`paper-2022-i`, `paper-2024-i`) must
-receive the owner's personal visual “过关” in `prototype-pilot-review.html`,
-pass the real validator + persistence projection, and then feed an equivalent
-794 × 472 annotation harness. DEV reads the exact candidates under
+receive the owner's personal visual “过关” while Variant A is temporarily
+injected into their real local `PaperBrowsePage`, pass the real validator +
+persistence projection, and then feed an equivalent 794 × 472 annotation
+harness. The embedded prototype supplies only the stage; canvas/rail/scroll are
+the real site. DEV reads the exact candidates under
 `pilot-content/`; it does not author copy. Machine `5/5` / `4/4` is a precheck,
 not owner approval. Required result:
 
