@@ -211,7 +211,7 @@ DEV completion:
 
 - `node scripts/verify-restart3-teacher-analysis.mjs`
 - `node scripts/verify-lecture-panel-css.mjs`
-- `npm -C app exec tsc -- --noEmit`
+- `pnpm -C app exec tsc --noEmit`
 - `pnpm -C app run verify:all`
 - `node docs/cuts/applied-writing-lecture-v3/qa/dp2-applied-writing-lecture-v3.mjs`
 - `git diff --check`
@@ -264,8 +264,10 @@ Missing dependencies are environment evidence, not an implementation verdict.
   remaining blocking PO decision. Machine `5/5` / `4/4` is precheck only.
   Owner passed the final prototype at exact head
   `4208c672373433b1b357228c55af1645f5ccbb7e` on 2026-07-23.
-- [ ] DP-3 DEV exact-head implementation complete.
-- [ ] DP-4 fresh verification exact-head PASS.
+- [x] DP-3 DEV exact-head implementation complete at `9c2a240`; the released
+  runtime/data tree is unchanged through `017164d`.
+- [ ] DP-4 fresh verification exact-head PASS. Evidence is complete but the
+  release gate remains non-green; see `verification.md`.
 - [ ] DP-5 fresh CR 0 unresolved Must Fix.
 - [ ] DP-6 browser QA + owner PO QA pass.
 - [ ] DP-7 fresh RM merge, main CI, STATUS/cut-note, AWL-V3-02 ready.

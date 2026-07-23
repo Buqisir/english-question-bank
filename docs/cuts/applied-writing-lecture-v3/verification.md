@@ -83,3 +83,34 @@ and `verify:all` exits 1 with the three independently reproduced out-of-cut
 failures. Cut-local behavioral, payload, CSS, DP-2 browser, scope, and locked
 packet checks pass. This is a gate condition for CR/RM/merge, not permission to
 alter runtime/data in verification.
+
+## PM handoff diagnosis — routing correction (2026-07-23)
+
+This diagnosis does not replace the fresh verification ledger or change its
+non-green verdict. It explains what the fresh CR must attack.
+
+- The plan-named `npm -C app exec tsc -- --noEmit` is not a valid project
+  typecheck in this environment: both the verifier and PM reproduction exit 1
+  after printing TypeScript CLI help. From `app/`, `pnpm exec tsc --noEmit`
+  exits 0. The full suite's build/typecheck phase also passed. `plan.md` now
+  names the working equivalent `pnpm -C app exec tsc --noEmit` for any future
+  exact-head verification; this does not rewrite the original exit code.
+- The verifier worktree's gitignored `data/question-bank.sqlite` is not the
+  current main checkout's database. It has SHA-256 `eed006fe...da0d8f40`,
+  9 passages, and source types `{real_exam, mock_exam, self_made}`. The main
+  checkout database has SHA-256 `6189c579...ceba435`, 273 passages, and source
+  types `{real_exam, mock_exam}`.
+- Against the verifier worktree database, the three isolated failures reproduce:
+  `verify-similar-v2` fails only its optional real-DB source-type corroboration;
+  `verify-paper-assets-consistency` reports all 33 served asset directories as
+  DB orphans; `verify-genre-truth` compares 273 decisions with the 9-passage
+  database. Against the current main checkout/database, the same three scripts
+  exit 0 (`83/0`, `199/0`, and `12/0`).
+- Clean CI checkouts omit the gitignored database, so these scripts skip their
+  local-DB corroboration phases. Fresh CR must decide whether the evidence is
+  sufficient or whether a new exact-head verification run in a prepared,
+  current-data worktree is a Must Fix. PM does not turn the original red result
+  green.
+- The release diff still has two independent `git diff --check` findings in the
+  imported OFL texts. They remain CR input, not silently waived license-file
+  exceptions.
