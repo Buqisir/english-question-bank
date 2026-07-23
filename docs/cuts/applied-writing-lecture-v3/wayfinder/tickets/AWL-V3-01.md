@@ -6,7 +6,7 @@ State: human-decision
 Blockers: owner visual “过关” on both views of both injected real-paper states
 Claimed by: fresh PM plan-revision (write-held)
 Base head: `github/main@1deec0f`
-Expected head: `b91514ab18d5a4d35904c4b70378c8d68a9d4562`
+Expected head: `f3d33aa4218a572469123d207fe499034b08963e`
 Output path: `docs/cuts/applied-writing-lecture-v3/`
 
 ## Question
@@ -75,6 +75,7 @@ the real paper canvas reaching its 794 px cap instead of a guessed viewport.
 A runtime-only browser harness now injects the selected Variant A stage and
 locked review card into the actual 2022 / 2024 local paper pages; both
 full-canvas states pass `5/5 + 4/4`, while the 628 px narrow host refuses
-injection.
+injection. The exact injected owner-review artifact head is
+`f3d33aa4218a572469123d207fe499034b08963e`.
 MF-1 remains open only for the owner's visual prototype verdict; state is
 `human-decision`, with no DEV task.
