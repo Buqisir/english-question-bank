@@ -8,10 +8,10 @@ Historical relay records live in `relay-history.md` and are non-authoritative.
 - Cut id: `codex-matt-governance`
 - Cut size: `large governance`
 - Lifecycle state: `active`
-- Active role: `fresh Fix DEV`
-- Source branch: `codex/codex-matt-governance-live-state-migration-20260722-01`
-- Current worktree: `/Users/huangxuewei/.codex/worktrees/a471/english-question-bank`
-- Released input head: `670052f2a5c7e8f4fcf69524aa9025bdc504ca83`
+- Active role: `fresh non-implementing verification`
+- Source branch: `codex/codex-matt-governance-readme-ci-fix-20260722-01`
+- Current worktree: `/Users/huangxuewei/.codex/worktrees/60db/english-question-bank`
+- Released input head: `d6c65eb52cc30c382c6d7253e64f00c73565262e`
 
 ## Current evidence
 
@@ -33,6 +33,9 @@ Historical relay records live in `relay-history.md` and are non-authoritative.
   field.
 - Fix DEV activation preflight: this worktree and repository root match; it was
   clean; `HEAD` and the source branch both resolved to the released input head.
+- Verification activation preflight: this worktree and repository root match;
+  it was clean; `HEAD` and the named source branch both resolved to
+  `d6c65eb52cc30c382c6d7253e64f00c73565262e`.
 
 ## RM stop record
 
@@ -51,7 +54,7 @@ Historical relay records live in `relay-history.md` and are non-authoritative.
 ## Fix DEV dispatch
 
 - Dispatch id: `codex-matt-governance-readme-ci-fix-20260722-01`
-- State: `active`
+- State: `closed`
 - Role: `fresh Fix DEV`
 - Configured model: `gpt-5.6-terra`
 - Selected model: `gpt-5.6-terra`
@@ -74,7 +77,7 @@ Historical relay records live in `relay-history.md` and are non-authoritative.
 ## Verification dispatch
 
 - Dispatch id: `codex-matt-governance-readme-ci-fix-verification-20260722-01`
-- State: `release-authorized`
+- State: `active`
 - Role: `fresh non-implementing verification`
 - Configured model: `gpt-5.6-terra`
 - Requested thinking: `medium`
@@ -89,10 +92,11 @@ Historical relay records live in `relay-history.md` and are non-authoritative.
 - Successor worktree: `/Users/huangxuewei/.codex/worktrees/60db/english-question-bank`
 - Ready-held proof: `fresh verification proved clean worktree; HEAD and named source branch both resolved to 45e55710621202eb94aec5c630e31d2ef76d8ef2`
 - Release contract: `predecessor-final commit carries this record; no later Fix DEV worktree write`
+- Activation proof: `released input adopted cleanly; sole writer acquired by fresh verification`
 - Scope: `bind real exit-code evidence to the exact Fix DEV head only`
 - Forbidden: `implementation, README changes, verifier/governance changes, product/runtime, production, and wt-applied-writing-lecture`
 
 ## Next Action
 
-1. Release the predecessor-final commit to the recorded fresh verification
-   task, then end this Fix DEV task without waiting for its result.
+1. Run the named verification checks against the released input head, record
+   their real exit codes, commit the result, then relay exactly one fresh CR.
