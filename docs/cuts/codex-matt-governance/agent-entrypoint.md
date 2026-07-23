@@ -8,10 +8,10 @@ Historical relay records live in `relay-history.md` and are non-authoritative.
 - Cut id: `codex-matt-governance`
 - Cut size: `large governance`
 - Lifecycle state: `active`
-- Active role: `RM recovery dispatcher`
+- Active role: `fresh Fix DEV`
 - Source branch: `codex/codex-matt-governance-live-state-migration-20260722-01`
-- Current worktree: `/Users/huangxuewei/.codex/worktrees/d483/english-question-bank`
-- Released input head: `9d8137764bcce0f5fd1f0cfba8439d2e674c149f`
+- Current worktree: `/Users/huangxuewei/.codex/worktrees/a471/english-question-bank`
+- Released input head: `670052f2a5c7e8f4fcf69524aa9025bdc504ca83`
 
 ## Current evidence
 
@@ -31,6 +31,8 @@ Historical relay records live in `relay-history.md` and are non-authoritative.
   `verify-architecture-housekeeping.mjs`: the live-state verifier is registered
   in `verify-ci.mjs` but its `scripts/README.md` row has no `Runs in CI? = yes`
   field.
+- Fix DEV activation preflight: this worktree and repository root match; it was
+  clean; `HEAD` and the source branch both resolved to the released input head.
 
 ## RM stop record
 
@@ -49,7 +51,7 @@ Historical relay records live in `relay-history.md` and are non-authoritative.
 ## Fix DEV dispatch
 
 - Dispatch id: `codex-matt-governance-readme-ci-fix-20260722-01`
-- State: `release-authorized`
+- State: `active`
 - Role: `fresh Fix DEV`
 - Configured model: `gpt-5.6-terra`
 - Selected model: `gpt-5.6-terra`
@@ -65,10 +67,11 @@ Historical relay records live in `relay-history.md` and are non-authoritative.
 - Successor worktree: `/Users/huangxuewei/.codex/worktrees/a471/english-question-bank`
 - Ready-held proof: `clean worktree; HEAD and source branch both resolved to d5b1808671e569e7cf0e1560b818eaa291036d03`
 - Release contract: `the predecessor-final commit carrying this record; no later predecessor worktree write`
+- Activation proof: `released input adopted cleanly; sole writer acquired by fresh Fix DEV`
 - Scope: `scripts/README.md CI registry parity only, plus own routing state`
 - Forbidden: `all external-audit observations, governance rule redesign, product/runtime, production, and wt-applied-writing-lecture`
 
 ## Next Action
 
-1. Release the predecessor-final commit to the recorded fresh Fix DEV, wait
-   only for its durable activation acknowledgement, then end this task.
+1. Correct the bounded `scripts/README.md` CI registry-parity defect, verify,
+   commit, and relay exactly one fresh verification successor.
