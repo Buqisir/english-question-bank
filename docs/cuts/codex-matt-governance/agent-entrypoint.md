@@ -58,6 +58,8 @@ Historical relay records live in `relay-history.md` and are non-authoritative.
 - Supported-thinking evidence: `gpt-5.6-terra supports medium`
 - Eligibility proof: `configured primary is the sole same-family/same-grade candidate`
 - Substitution reason: `none`
+- Creation attempt: `argument validation rejected duplicate projectId; no task created`
+- Retry policy: `one corrected creation call only`
 - Scope: `scripts/README.md CI registry parity only, plus own routing state`
 - Forbidden: `all external-audit observations, governance rule redesign, product/runtime, production, and wt-applied-writing-lecture`
 
