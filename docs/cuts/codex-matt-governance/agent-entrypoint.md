@@ -74,7 +74,7 @@ Historical relay records live in `relay-history.md` and are non-authoritative.
 ## Verification dispatch
 
 - Dispatch id: `codex-matt-governance-readme-ci-fix-verification-20260722-01`
-- State: `dispatch-pending`
+- State: `provisioning`
 - Role: `fresh non-implementing verification`
 - Configured model: `gpt-5.6-terra`
 - Requested thinking: `medium`
@@ -84,6 +84,9 @@ Historical relay records live in `relay-history.md` and are non-authoritative.
 - Substitution reason: `none`
 - Creation attempt: `argument validation rejected duplicate top-level projectId; no task created`
 - Retry policy: `one corrected creation call only`
+- Created thread: `019f8c98-6670-7223-ac59-2e6f0e2f916e`
+- Host: `local`
+- Successor worktree: `/Users/huangxuewei/.codex/worktrees/60db/english-question-bank`
 - Scope: `bind real exit-code evidence to the exact Fix DEV head only`
 - Forbidden: `implementation, README changes, verifier/governance changes, product/runtime, production, and wt-applied-writing-lecture`
 
