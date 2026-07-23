@@ -7,7 +7,7 @@ Worktree: Codex-managed detached worktree
 Released PA result head: `e5d8dec9c76b35d581bc61e96b41681e3c7c7529`
 Released PM plan-revision head: `eefa1305f326c0d25c4fcb6b5122ea8e75323051`
 Real-packet owner-review head:
-`cc10f2b182e21fc322b0fdf75aedb638e5de803c`
+`6ba221a267b6b4d2e5235e2d742cf607811b78aa`
 Activation evidence: after `git fetch github`,
 `github/codex/applied-writing-lecture-v3-20260722-01` resolved exactly to
 `eefa1305f326c0d25c4fcb6b5122ea8e75323051`; that released head is an ancestor
