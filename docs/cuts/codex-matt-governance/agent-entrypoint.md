@@ -7,36 +7,38 @@ Historical relay records live in `relay-history.md` and are non-authoritative.
 
 - Cut id: `codex-matt-governance`
 - Cut size: `large governance`
-- Lifecycle state: `handoff-ready`
-- Active role: `none`
+- Lifecycle state: `active`
+- Active role: `RM`
 - Source branch: `codex/codex-matt-governance-live-state-migration-20260722-01`
-- Current worktree: `/Users/huangxuewei/.codex/worktrees/692a/english-question-bank`
-- Released input head: `c59fdd57e2ce301af0e2d97c276cdad46d4d4ed2`
+- Current worktree: `/Users/huangxuewei/.codex/worktrees/d483/english-question-bank`
+- Released input head: `fce640d2c075f3ec6c443f42d491a1bd65ba8617`
 
 ## Current evidence
 
 - Live-state migration exact-head verification:
   `docs/cuts/codex-matt-governance/verification.md#live-state-migration-exact-head-verification--2026-07-22`
+- Canonical formal re-review verdict:
+  `docs/cuts/codex-matt-governance/cr.md#live-state-migration-formal-re-review--2026-07-22`
+- RM activation preflight: current worktree and repository root match; the
+  worktree was clean; `HEAD` and the source branch both resolved to the
+  released input head.
 
-## Dispatch recovery record
+## Active RM authority
 
-- Category: `task creation argument validation`
-- Attempted route: `gpt-5.6-terra` with `medium`
-- Created task identity: `none`
-- Fallback used: `none`
-- Retry policy: `one corrected creation call only`
-
-## Direct successor authorization
-
-- Authorized role: `fresh no-DEV-history formal re-review`
-- Topology: `exactly one top-level create_thread successor`
+- Role: `top-level fresh RM closeout only`
 - Configured model: `gpt-5.6-sol`
 - Thinking: `high`
-- Scope: `formal re-review only; no DEV, QA, RM, merge, push, or production action`
-- Required output: `docs/cuts/codex-matt-governance/cr.md`
+- Canonical verdict: `MERGEABLE with zero unresolved Must Fix`
+- Allowed writes: `cut-note.md`, RM closeout routing state, and compact
+  `docs/STATUS.md` at closeout.
+- Required gates: verify remote and baseline state, create the large-cut Cut
+  Note, run the artifact gate and any exact-head release checks, merge through
+  the authorized main-checkout route, confirm post-merge `main` CI, and close
+  the cut without a successor.
+- Forbidden actions: DEV fixes, subagent or fork succession, production
+  configuration changes, and any change to `wt-applied-writing-lecture`.
 
 ## Next Action
 
-1. Create exactly one top-level fresh no-DEV-history formal re-review successor
-   from this handoff-ready result, with `gpt-5.6-sol` and `high`, then end
-   without waiting.
+1. Complete the repository-required Large-cut RM closeout, then record the
+   terminal `closed` state with no successor.
