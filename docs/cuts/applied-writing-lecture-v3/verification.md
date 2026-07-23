@@ -23,5 +23,7 @@ come from the production React surface at the exact DEV head.
 
 ## Current verdict
 
-PM contract ready for fresh formal PA. No runtime verification has run and no
-DEV authorization exists.
+PM contract commit `def933be06aa171710bfb6d012a7639e30e245e7` is pushed on
+`github/codex/applied-writing-lecture-v3-20260722-01`; worktree was clean after
+push. Fresh formal PA is the unique next role. No runtime verification has run
+and no DEV authorization exists.

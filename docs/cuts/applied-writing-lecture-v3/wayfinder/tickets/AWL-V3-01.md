@@ -2,11 +2,11 @@
 
 Type / role: Wayfinder -> PM contract -> formal PA -> DEV -> verification ->
 fresh CR -> QA -> RM
-State: claimed
+State: dispatch-pending
 Blockers: none
 Claimed by: current Wayfinder / PM task
 Base head: `github/main@1deec0f`
-Expected head: PM contract commit on
+Expected head: predecessor-final PA release commit on
 `codex/applied-writing-lecture-v3-20260722-01`
 Output path: `docs/cuts/applied-writing-lecture-v3/`
 
@@ -32,20 +32,25 @@ existing print/student isolation?
 
 ## Routing
 
-Current role: Wayfinder / PM
-Next role: pending PM contract
-Configured model: pending
-Selected model: pending
-Thinking: pending
-Availability / substitution: pending
-Dispatch ID / state: none
-Authorization scope: map, spec, plan, entrypoint, verification coordination
+Current role: none; Wayfinder / PM result committed
+Next role: fresh formal PA
+Configured model: `gpt-5.6-sol`
+Selected model: `gpt-5.6-sol`
+Thinking: `high`
+Availability / substitution: task-creation capability lists Sol/high; no
+substitution
+Dispatch ID / state: `AWL-V3-PA-20260722-01` / dispatch-pending
+Authorization scope: PA may write `pa.md` and routing/result fields only; no
+runtime implementation
 
 ## Unique Next Action
 
-1. Produce and verify the tracked `spec.md`, `plan.md`, and live
-   `agent-entrypoint.md` against the approved artifact and current payload.
+1. Create one fresh formal PA at the predecessor-final exact HEAD; PA cold-reads
+   the contract and writes `pa.md` or a named escalation.
 
 ## Result
 
-Pending.
+PM contract recorded at `def933be06aa171710bfb6d012a7639e30e245e7`.
+Risk upgraded from medium to large after real payload mapping exposed both a
+new data contract and a paper-local anchor/geometry protocol. The rejected B2
+runtime remains excluded.

@@ -1,6 +1,6 @@
 # 应用文讲评渲染 v3 · Wayfinder Map
 
-State: active
+State: active (AWL-V3-01 PM result recorded; formal PA dispatch pending)
 Current ticket: [AWL-V3-01 终版批注原型生产化](tickets/AWL-V3-01.md)
 
 ## Notes
@@ -28,8 +28,8 @@ Current ticket: [AWL-V3-01 终版批注原型生产化](tickets/AWL-V3-01.md)
 
 ## Frontier
 
-1. [AWL-V3-01 终版批注原型生产化](tickets/AWL-V3-01.md) — claimed by the
-   current Wayfinder / PM task.
+1. [AWL-V3-01 终版批注原型生产化](tickets/AWL-V3-01.md) — PM contract
+   recorded; fresh formal PA is the unique next role.
 2. [AWL-V3-02 22 组应用文解析全套重产](tickets/AWL-V3-02.md) — blocked by
    AWL-V3-01 closeout and its published production contract.
 

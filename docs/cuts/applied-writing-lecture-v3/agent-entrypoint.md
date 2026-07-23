@@ -1,17 +1,18 @@
 # applied-writing-lecture-v3 · Live Entrypoint
 
-State: active
-Active role: Wayfinder / PM
+State: handoff-ready
+Active role: none (Wayfinder / PM result committed; write authority closed)
 Source branch: `codex/applied-writing-lecture-v3-20260722-01`
 Worktree: `/Users/huangxuewei/Projects/wt-applied-writing-lecture-v3`
-Released input head: `1deec0fce29852556bb60e0b2fd8a1fb6075f2d4`
-Evidence: `verification.md`, PM baseline
-Successor authorization: none until PM contract is committed
+Released input head: `def933be06aa171710bfb6d012a7639e30e245e7`
+Evidence: `verification.md`, PM baseline + PM contract commit
+Successor authorization: exactly one fresh formal PA, dispatch
+`AWL-V3-PA-20260722-01`
 
 ## Current objective
 
-Complete the production contract for the owner-approved Variant A annotation
-prototype and release exactly one fresh formal PA successor. Do not implement.
+Cold-read the committed production contract in a fresh formal PA task. The
+predecessor PM has no remaining write authority and no DEV is authorized.
 
 ## Must read
 
@@ -31,12 +32,13 @@ prototype and release exactly one fresh formal PA successor. Do not implement.
 
 ## Relay
 
-- Dispatch ID: pending PM contract commit
+- Dispatch ID: `AWL-V3-PA-20260722-01`
 - Next role: fresh formal PA
 - Output: `docs/cuts/applied-writing-lecture-v3/pa.md`
-- Configured / selected model: `gpt-5.6-sol` / pending availability check
+- Configured / selected model: `gpt-5.6-sol` / `gpt-5.6-sol`
 - Thinking: `high`
-- Availability source: current Codex task-creation capability; pending check
+- Availability source: current Codex task-creation capability lists
+  `gpt-5.6-sol` with `high`; same authority-listed family/grade, no substitution
 - One-successor boundary: PA only; no DEV dispatch from this task
 - Stop boundary: named escalation or failed task creation -> record `blocked`
 
@@ -59,5 +61,6 @@ prototype and release exactly one fresh formal PA successor. Do not implement.
 
 ## Next Action
 
-1. Verify and commit the PM contract, then move this entrypoint to
-   `handoff-ready` and provision one write-held fresh formal PA.
+1. Create exactly one fresh formal PA from this branch; successor re-proves the
+   released exact HEAD, records `active` in its first commit, writes `pa.md`,
+   and owns the next Auto-Next transition.
