@@ -40,18 +40,24 @@ to the original model-answer sentences without breaking the essay reading flow.
 
 - Extend `writing-analysis-v1.schema.json` and `paperAsset.ts` with additive
   optional `reviewCard`, `reviewMarks`, and nested `lectureAnnotation` shapes.
-- Strengthen `validateWritingAnalysisCandidate` for application only:
-  11 review-card fields, exactly two non-empty points, exactly five review marks
-  in `[type, cares, points, tense, points]`, occurrence-to-index mapping, literal
-  logical-line matches for all five review and all four annotated highlight
-  anchors, exactly four complete short highlight annotations, and
-  plain-text/trim/single-line/code-point limits.
+- Strengthen `validateWritingAnalysisCandidate` for application only and keep
+  its rejection matrix exactly symmetric with `isPublishedWritingLecture`:
+  all 10 scalar `reviewCard` strings plus both `points` strings are non-empty,
+  trim-clean, plain, single-line, and at most 80 Unicode code points; exactly
+  five `reviewMarks` use `[type, cares, points, tense, points]`, with literal,
+  trim-clean, plain, single-line anchors of at most 240 code points and notes
+  of at most 72 code points; point occurrences map to indices 0 and 1; exactly
+  four complete highlight annotations keep the existing `24 / 28 / 52`
+  code-point limits. Missing, partial, wrong-typed, trim-dirty, markup,
+  Markdown, newline, empty, over-limit, normalized-only, or cardinality/order
+  failures make the whole application lecture unavailable.
 - Persist those application fields without changing outer highlight values or
   order. Continuation projection must exclude/reject the new nested object.
 - Export one frontend availability predicate from
   `WritingAnswerBoxReview.tsx` and consume it in `PaperBrowsePage.tsx` and
-  `WritingReviewAnnotationStage.tsx`; missing or malformed-present payload
-  becomes `unavailable` before any stage mounts.
+  `WritingReviewAnnotationStage.tsx`; it must inspect every field named above,
+  not only `points`, mark notes, and nested highlight values. Missing or
+  malformed-present payload becomes `unavailable` before any stage mounts.
 - Add behavioral assertions to `verify-restart3-teacher-analysis.mjs` for good
   payload plus normalized-only review/highlight anchors, partial nested values,
   wrong point/mark/annotation counts, invalid grid order/duplicates/indexing,
@@ -79,14 +85,20 @@ to the original model-answer sentences without breaking the essay reading flow.
 
 ### P3 — Production renderer
 
-- Give `WritingPaperPage` optional lecture-only answer-box props. Clicking the
-  available/loading application box in `PaperBrowsePage` sets
+- Give `WritingPaperPage` application-only lecture props that preserve and
+  render the ordinary `answerBox` given-top/given-bottom content unless the
+  fixed stage is actually active. The trigger/status is an adjunct to that
+  ordinary content, never a replacement for it. `PaperBrowsePage` derives
+  application versus continuation from the source writing task, not from a
+  fetched analysis. Clicking the application affordance sets
   `activeWritingLectureGroupId = groupId` and opens lecture without changing the
-  print-facing page model or PaperSurface intent protocol.
+  print-facing page model or PaperSurface intent protocol. Continuation never
+  receives an AWL trigger, status, or `answerBoxContent` override.
 - Mount `WritingReviewAnnotationStage` only under
   `lectureOpen && activeWritingLectureGroupId === groupId && application &&
   available && panelGroupId === groupId`. Loading/unavailable/narrow-unsupported
-  keeps the original answer box and zero partial stage DOM.
+  and inactive states keep the complete original answer box and zero partial
+  stage DOM.
 - Esc/close and any scroll/selection transition to continuation/another group
   clear the active writing id, current tab, seed, and stage DOM before the new
   panel takes ownership.
@@ -103,6 +115,15 @@ to the original model-answer sentences without breaking the essay reading flow.
   `canvas 628 / answer 446 / rail 380`, with no overlap in either state.
 - Port Variant A's DOM measurement, two-dimensional pockets, fair allocation,
   leader rules, font-ready measurement, deterministic seed, and reseed behavior.
+  Preserve review grid/index metadata through placement so the fifth
+  `points[1]` mark can apply its locked lower-left preference only when the
+  connector is `<= 72 px`. Route candidates and every fallback sample leaders
+  against essay-text obstacles and already accepted leaders; unsafe crossings
+  or text traversal reject the candidate. Adjacent review anchors use the
+  approved micro-leader that begins inside the matching underline and ends
+  with an arrowhead at the note. If no complete safe layout exists, report an
+  explicit no-layout result to the host, render no partial notes/leaders, and
+  restore the ordinary answer box; never emit an unsafe fallback.
   The real-packet prototype adds one exact feasibility rule: a narrower note
   candidate may enter when it unlocks a left/right lane; it does not also need
   the connector's `near` classification. This produced 2022 `5/5` without
@@ -117,13 +138,24 @@ to the original model-answer sentences without breaking the essay reading flow.
   subsetting command; a coverage assertion proves every annotation code point.
   No CDN, package, lockfile, or font substitution.
 - Replace application right-rail full analysis with the filled review card +
-  quiet pointer. Continuation keeps `WritingAnalysisPanel` unchanged.
+  quiet pointer. The card must render the four approved sections:
+  `基础五定` (`form`, `topic`, `reader`, `person`, `tense`, `type`),
+  `圈要点、编号` (numbered `points[0..1]`), `读者三问`
+  (`readerWho`, `readerCares`, `readerWants`), and `价值落点` (`value`),
+  followed by the exact quiet pointer `批注已落在左侧原范文中`. Add real
+  `.awl-review-card` styling. The two stage tabs support bounded Left/Right
+  switching and focus. Mixed annotation labels/notes use Shantell Sans first
+  for covered Latin glyphs and Xiaolai as the CJK fallback; the essay remains
+  Times New Roman and stored text remains byte-for-byte unchanged.
+  Continuation keeps `WritingAnalysisPanel` unchanged.
 
 ### P4 — Verification, QA, and closeout
 
 - DP-2 archived browser contract uses real local API, Vite, `qa-local-owner`,
-  and real React DOM/geometry. It checks both pilots plus one legacy unpublished
-  application and one continuation regression.
+  and real React DOM/geometry. It checks both pilots, direct measured-canvas
+  794/793 behavior, every principal geometry/leader/font/keyboard/rail
+  invariant, the whole malformed-present mutation matrix, one legacy
+  unpublished application, and one continuation regression.
 - Fresh verification binds narrow commands and `verify:all` to exact DEV head.
 - Fresh CR attacks prototype fidelity, contract symmetry, geometry hard
   constraints, continuation/export isolation, and evidence binding.
@@ -184,6 +216,181 @@ box. Verification boundary is that exact 16-file DEV head: behavioral
 validator/persistence + payload parity + TypeScript/CSS/full suite + DP-2 all
 bind to it. Any seventeenth runtime/data file is a PM stop before write.
 
+## Fresh-CR remediation dispositions
+
+Authority: fresh CR `AWL-V3-CR-20260723-01` at live handoff
+`e49316b1d638c281bd189c85039d74f7f481a24e`. All MF-1 through MF-6 remain
+blocking and must close in one remediation head. The original
+`AWL-V3-VERIFY-20260723-01` ledger remains **RELEASE GATE NON-GREEN**; neither
+DEV nor PM may edit its recorded exit codes or describe it as green.
+
+### MF-1 — Preserve every inactive answer box
+
+- Exact fix: derive application/continuation from the source writing task;
+  continuation never receives the AWL override. Render the ordinary
+  given-top/given-bottom answer-box content first for application too, and
+  replace it only while the exact application stage mount predicate is true.
+  Non-lecture, inactive, loading, unavailable, 793 px, explicit no-layout, and
+  continuation states keep their real exam content and 246 px box. An
+  application trigger/status may coexist with that content but may not replace
+  or hide it.
+- Allowed implementation files:
+  `app/src/features/paper-browse/PaperBrowsePage.tsx`,
+  `app/src/features/paper-browse/WritingAnswerBoxReview.tsx`,
+  `app/src/features/paper-intelligence/WritingPaperPage.tsx`, and
+  `app/src/features/paper-intelligence/writingPaperPage.css`.
+- Executable acceptance:
+  `qa/dp2-applied-writing-lecture-v3.mjs` must group-scope every locator and
+  prove (a) the application salutation/signature survives each inactive state,
+  (b) both continuation starter paragraphs survive before and after an
+  application-stage visit, (c) continuation has no AWL trigger/status, and
+  (d) only an available active application on a measured 794 px canvas replaces
+  246 px with the stage. At least the continuation-content assertion must fail
+  against reviewed runtime/data head `017164d`.
+
+### MF-2 — One whole-payload rule, backend through browser
+
+- Exact fix: apply P1's complete field/type/trim/plain/single-line/code-point,
+  literal-anchor, count/order, and point-index rules identically in backend
+  validation and frontend availability. No `reviewCard` scalar, `points`
+  member, `reviewMarks` member, or nested annotation member may escape the
+  rule. A malformed-present value rejects persistence or makes the complete
+  application lecture unavailable; no partial rail or stage publishes.
+- Allowed implementation files:
+  `server/writing-analysis/writingAnalysisBackfillService.mjs`,
+  `scripts/verify-restart3-teacher-analysis.mjs`,
+  `app/src/features/paper-browse/WritingAnswerBoxReview.tsx`, and, only if the
+  declared shape itself must be tightened,
+  `schemas/paper-import/writing-analysis-v1.schema.json` /
+  `app/src/domain/paperAsset.ts`. Allowed evidence files:
+  `qa/payload-parity/verify.mjs` and
+  `qa/dp2-applied-writing-lecture-v3.mjs`.
+- Executable acceptance:
+  `verify-restart3-teacher-analysis.mjs` must table-drive deletion, null/wrong
+  type, trim, markup, Markdown, newline, empty, over-limit, normalized-only,
+  count/order, duplicate-grid, and point-index mutations across every field
+  family and prove backend rejection plus unchanged continuation projection.
+  DP-2 must route each representative malformed packet into the application
+  group, click that exact group's affordance when present, and assert its
+  ordinary answer box remains while that group has zero `.awl-stage`,
+  `.awl-note`, and leader DOM. The trim-dirty `reviewMarks[].note` and partial
+  `reviewCard` cases must demonstrably fail against `017164d`; an unrelated
+  continuation `解析未发布` element is never accepted as evidence.
+
+### MF-3 — Port Variant A geometry, including safe failure
+
+- Exact fix: port the frozen prototype's two-dimensional candidate generation,
+  fair allocation, route sampling, fifth-mark grid/index rule, injected
+  underline micro-leader, font-ready measurement, deterministic seed, and
+  reseed behavior. Every accepted route must avoid essay-text obstacles and
+  other accepted leaders. Fallbacks obey the same tests; if no complete safe
+  layout exists, the host restores the ordinary answer box with no partial
+  annotation DOM. Do not add height, copy changes, hard-coded pilot
+  coordinates, cards/drawers, truncation, or a different solver.
+- Allowed implementation files:
+  `app/src/features/paper-browse/WritingReviewAnnotationStage.tsx`,
+  `app/src/features/paper-browse/PaperBrowsePage.tsx`,
+  `app/src/features/paper-intelligence/WritingPaperPage.tsx`, and
+  `app/src/features/paper-intelligence/writingPaperPage.css`. Allowed evidence
+  file: `qa/dp2-applied-writing-lecture-v3.mjs`.
+- Executable acceptance:
+  for both locked pilots and both tabs, DP-2 must sample every SVG leader
+  against rendered essay rectangles, detect pairwise leader intersections,
+  prove source-to-note arrow direction, exact 5/5 and 4/4 completion, no
+  note/text or note/note collision, and no out-of-paper note. It must prove the
+  fifth 2022 `points[1]` lower-left placement has a connector `<= 72 px`, the
+  rejected 2024 long lower-left route is not forced, and an approved adjacent
+  review mark uses a visible micro-leader that starts inside its underline and
+  ends at its note. Reopening with the same seed must reproduce note positions
+  and path data; `重新寻位` may change only positions/path mix, not essay,
+  packet copy, counts, rail, or view. These assertions must fail the simplified
+  solver at `017164d`.
+
+### MF-4 — Restore approved rail, typography, and tab semantics
+
+- Exact fix: render every stored value in the four-section review card and the
+  exact quiet pointer named in P3; add `.awl-review-card` styling without
+  turning the rail into a second essay or AI dashboard. Apply Shantell-first /
+  Xiaolai-fallback annotation typography so mixed strings such as
+  `On behalf of... 正式开篇` and notes containing `could` use the approved
+  English face while Chinese remains Xiaolai. Add bounded Left/Right tab
+  handling with correct focus and `aria-selected`.
+- Allowed implementation files:
+  `app/src/features/paper-browse/PaperBrowsePage.tsx`,
+  `app/src/features/paper-browse/WritingReviewAnnotationStage.tsx`, and
+  `app/src/features/paper-intelligence/writingPaperPage.css`. Allowed evidence
+  file: `qa/dp2-applied-writing-lecture-v3.mjs`.
+- Executable acceptance:
+  DP-2 compares all rail headings and values to each locked JSON packet, finds
+  the quiet pointer, and confirms computed `.awl-review-card` layout is present.
+  It checks the font-family order on mixed label/note and transfer text while
+  the essay remains Times New Roman. From each tab, repeated ArrowLeft /
+  ArrowRight presses stay inside indices `0..1`, update `aria-selected`, and
+  move focus to the selected tab. The current sparse rail, Xiaolai-only mixed
+  note, and keyboard-inert tabs at `017164d` must fail these assertions.
+
+### MF-5 — Make DP-2 and font evidence attack the contract
+
+- Exact fix: strengthen the archived DP-2 beyond count/containment with all
+  MF-1/MF-3/MF-4 assertions above. Test the product boundary by directly
+  measuring/forcing the real `.paper-browse-content` canvas to 794 then 793 CSS
+  px after lecture reflow; a viewport size alone is not evidence. Add a
+  package-free executable WOFF2 cmap assertion to the existing parity harness:
+  read both generated cmap tables, derive responsible Chinese and English
+  code-point sets from the two locked packet annotation fields, and prove
+  Xiaolai covers every Chinese annotation code point and Shantell covers every
+  English annotation/transfer code point. The prose `173/173` and `33/33`
+  statement is not executable evidence.
+- Allowed implementation/evidence files:
+  `app/src/features/paper-browse/WritingReviewAnnotationStage.tsx`,
+  `app/src/features/paper-browse/PaperBrowsePage.tsx`,
+  `app/src/features/paper-intelligence/writingPaperPage.css`,
+  `qa/dp2-applied-writing-lecture-v3.mjs`, and
+  `qa/payload-parity/verify.mjs`. The two WOFF2 files are read-only locked
+  inputs; no package, lockfile, or seventeenth runtime helper is authorized.
+- Executable acceptance:
+  DP-2 records actual canvas width `794` with mounted stage and actual width
+  `793` with zero stage plus preserved 246 px content; geometry, seed/reseed,
+  rail, keyboard, mixed-font, and inactive-content checks all pass. The parity
+  harness reports the exact responsible/covered cmap sets for both faces and
+  exits non-zero for a fixture that removes one required mapping. A
+  source-text grep, hash-only check, browser fallback, or viewport proxy does
+  not satisfy this MF.
+
+### MF-6 — Produce a genuinely green new release proof
+
+- Exact fix: remove only the tracked trailing horizontal whitespace at
+  `app/public/fonts/applied-writing/OFL-Shantell-Sans.txt:21` and
+  `app/public/fonts/applied-writing/OFL-Xiaolai.txt:22`; license wording and
+  line order remain unchanged. Use the working project typecheck command. Set
+  up the fresh worktree with the repository script so full-suite database
+  checks see current prepared data, or rely on clean CI when it provides the
+  exact-head proof. Do not waive `git diff --check`, TypeScript, any full-suite
+  failure, or the fresh verification role.
+- Allowed implementation files: the two OFL files above. Allowed routing/result
+  artifacts: `agent-entrypoint.md` and `dev-result.md`. `verification.md` is
+  read-only to fix DEV; only the later fresh verification role may append a new
+  exact-head section, and its historical non-green block remains verbatim.
+- Executable acceptance at the remediation head:
+  `git diff --check 1deec0fce29852556bb60e0b2fd8a1fb6075f2d4..HEAD`,
+  `pnpm -C app exec tsc --noEmit`, and
+  `pnpm -C app run verify:all` each exit 0. The narrow behavioral, CSS, payload
+  parity/cmap, and DP-2 commands also exit 0. Fix DEV self-report is not release
+  proof: one fresh non-implementing verification successor must rerun the
+  plan-named commands, record real exit codes, and bind them to the exact
+  remediation runtime/data head before fresh re-review.
+
+### Size-gate disposition
+
+The **16-file exception remains valid**. Every runtime/data edit above is
+inside the existing 16-file baseline diff; the two pilot JSON files and two
+WOFF2 files remain byte-identical to their locked hashes, and the new attack
+checks stay under the already allowed cut-local QA directory. A required new
+runtime helper, package, lockfile, font, payload, or any other seventeenth
+runtime/data path is `SCOPE UNCLEAR` and stops before write for a new PM
+disposition. Fix DEV may not convert the broad 16-file exception into
+permission to touch all 16 files.
+
 ## Forbidden
 
 - `app/src/shared/papersurface/**`, PaperSurface types/intents, or
@@ -209,12 +416,14 @@ Pre-DEV / P1-P2:
 
 DEV completion:
 
+- `node --check server/writing-analysis/writingAnalysisBackfillService.mjs`
 - `node scripts/verify-restart3-teacher-analysis.mjs`
 - `node scripts/verify-lecture-panel-css.mjs`
 - `pnpm -C app exec tsc --noEmit`
-- `pnpm -C app run verify:all`
+- `node docs/cuts/applied-writing-lecture-v3/qa/payload-parity/verify.mjs`
 - `node docs/cuts/applied-writing-lecture-v3/qa/dp2-applied-writing-lecture-v3.mjs`
-- `git diff --check`
+- `pnpm -C app run verify:all`
+- `git diff --check 1deec0fce29852556bb60e0b2fd8a1fb6075f2d4..HEAD`
 
 Verification records real exit codes and exact HEAD in `verification.md`.
 Missing dependencies are environment evidence, not an implementation verdict.
@@ -266,6 +475,13 @@ Missing dependencies are environment evidence, not an implementation verdict.
   `4208c672373433b1b357228c55af1645f5ccbb7e` on 2026-07-23.
 - [x] DP-3 DEV exact-head implementation complete at `9c2a240`; the released
   runtime/data tree is unchanged through `017164d`.
+- [x] DP-3R fresh CR returned **NOT MERGEABLE** with six unresolved Must Fix;
+  fresh PM remediation disposition preserves Variant A, whole-payload
+  unavailability, DP-2, 794/793, executable font coverage, and every release
+  gate inside the continuing 16-file exception.
+- [ ] DP-3F fresh fix DEV produces one exact remediation head and releases one
+  fresh non-implementing verification successor; DEV does not rewrite the
+  original verification ledger.
 - [ ] DP-4 fresh verification exact-head PASS. Evidence is complete but the
   release gate remains non-green; see `verification.md`.
 - [ ] DP-5 fresh CR 0 unresolved Must Fix.

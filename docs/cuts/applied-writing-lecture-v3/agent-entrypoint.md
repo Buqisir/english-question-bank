@@ -1,7 +1,7 @@
 # applied-writing-lecture-v3 · Live Entrypoint
 
-State: handoff-ready
-Active role: none
+State: active
+Active role: fresh PM remediation disposition
 Source branch: `codex/applied-writing-lecture-v3-20260722-01`
 Released PM input head: `cdcc8f923488b57843a12f190b47746ffaa1aac3`
 Runtime/data review head: `017164dc4697f6131747202b9a0c51b7d3593829`
@@ -17,6 +17,12 @@ worktree was clean before this activation write.
 Fresh CR result (2026-07-23): `cr.md` records **NOT MERGEABLE** with six
 unresolved Must Fix findings. The original verification remains non-green.
 No QA, RM, merge, or deployment is authorized by this CR.
+PM remediation activation evidence (2026-07-23): fetched `github`; remote
+source head and live handoff commit are
+`e49316b1d638c281bd189c85039d74f7f481a24e`; released PM input
+`cdcc8f923488b57843a12f190b47746ffaa1aac3` is its ancestor; this PM worktree
+was clean before the activation write; `cr.md` still records exactly six
+unresolved Must Fix findings (MF-1 through MF-6).
 
 ## Current objective
 
