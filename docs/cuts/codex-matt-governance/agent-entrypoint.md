@@ -74,7 +74,7 @@ Historical relay records live in `relay-history.md` and are non-authoritative.
 ## Verification dispatch
 
 - Dispatch id: `codex-matt-governance-readme-ci-fix-verification-20260722-01`
-- State: `ready-held`
+- State: `release-authorized`
 - Role: `fresh non-implementing verification`
 - Configured model: `gpt-5.6-terra`
 - Requested thinking: `medium`
@@ -88,10 +88,11 @@ Historical relay records live in `relay-history.md` and are non-authoritative.
 - Host: `local`
 - Successor worktree: `/Users/huangxuewei/.codex/worktrees/60db/english-question-bank`
 - Ready-held proof: `fresh verification proved clean worktree; HEAD and named source branch both resolved to 45e55710621202eb94aec5c630e31d2ef76d8ef2`
+- Release contract: `predecessor-final commit carries this record; no later Fix DEV worktree write`
 - Scope: `bind real exit-code evidence to the exact Fix DEV head only`
 - Forbidden: `implementation, README changes, verifier/governance changes, product/runtime, production, and wt-applied-writing-lecture`
 
 ## Next Action
 
-1. Create exactly one top-level fresh verification successor and release the
-   final Fix DEV commit under the write-held protocol.
+1. Release the predecessor-final commit to the recorded fresh verification
+   task, then end this Fix DEV task without waiting for its result.
