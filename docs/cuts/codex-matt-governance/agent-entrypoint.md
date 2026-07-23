@@ -129,7 +129,29 @@ Historical relay records live in `relay-history.md` and are non-authoritative.
 - Scope: `cold-read the README CI registry parity fix and exact-head verification evidence`
 - Forbidden: `implementation, README changes, verifier/governance changes, product/runtime, production, and wt-applied-writing-lecture`
 
+## RM dispatch
+
+- Dispatch id: `codex-matt-governance-readme-ci-fix-rm-20260722-01`
+- State: `dispatch-pending`
+- Role: `top-level fresh RM closeout only`
+- Configured model: `gpt-5.6-sol`
+- Selected model: `gpt-5.6-sol`
+- Requested thinking: `high`
+- Availability source: `Codex create_thread capability on local host`
+- Supported-thinking evidence: `gpt-5.6-sol supports high`
+- Eligibility proof: `configured primary is the sole same-family/same-grade candidate`
+- Substitution reason: `none`
+- Project id: `local-8a1aff1b944a0aa921d1f6b55296afd6`
+- Expected project root: `/Users/huangxuewei/Projects/english-question-bank`
+- Source branch: `codex/codex-matt-governance-readme-ci-fix-20260722-01`
+- CR result head: `6ad316878e028aaa6d0bb435ce7722d18ff09179`
+- Bootstrap contract: `WRITE-HELD at the dispatch-pending commit carrying this record`
+- Release contract: `predecessor-final commit carries ready-held proof; no later CR worktree write`
+- Scope: `fresh RM acceptance, changed-head release verification, merge, main CI, compact STATUS, and terminal cut closeout only`
+- Forbidden: `implementation, README or governance-rule changes, product/runtime, production configuration, plugins/skills, main-checkout user-work overwrite, and wt-applied-writing-lecture`
+
 ## Next Action
 
-1. Record and release exactly one top-level fresh RM successor under the
-   write-held / predecessor-final-commit protocol, then end this CR task.
+1. Create exactly one top-level fresh RM successor in WRITE-HELD state, record
+   its ready-held proof in the predecessor-final commit, release that exact
+   commit, then end this CR task without awaiting the RM result.
