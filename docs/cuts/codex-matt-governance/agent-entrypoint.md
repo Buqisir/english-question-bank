@@ -7,7 +7,7 @@ Historical relay records live in `relay-history.md` and are non-authoritative.
 
 - Cut id: `codex-matt-governance`
 - Cut size: `large governance`
-- Lifecycle state: `active`
+- Lifecycle state: `release-authorized`
 - Active role: `fresh non-implementing verification`
 - Source branch: `codex/codex-matt-governance-readme-ci-fix-20260722-01`
 - Current worktree: `/Users/huangxuewei/.codex/worktrees/60db/english-question-bank`
@@ -105,7 +105,7 @@ Historical relay records live in `relay-history.md` and are non-authoritative.
 ## CR dispatch
 
 - Dispatch id: `codex-matt-governance-readme-ci-fix-cr-20260722-01`
-- State: `dispatch-pending`
+- State: `release-authorized`
 - Role: `fresh CR`
 - Configured model: `gpt-5.6-sol`
 - Requested thinking: `high`
@@ -113,11 +113,16 @@ Historical relay records live in `relay-history.md` and are non-authoritative.
 - Supported-thinking evidence: `gpt-5.6-sol supports high`
 - Eligibility proof: `configured primary is the sole same-family/same-grade candidate`
 - Substitution reason: `none`
+- Creation attempt: `created successfully`
+- Created thread: `019f8c9b-195f-7190-bcc9-f12fd71abfb3`
+- Host: `local`
+- Successor worktree: `/Users/huangxuewei/.codex/worktrees/144f/english-question-bank`
+- Ready-held proof: `clean detached worktree; HEAD and named source branch both resolved to 23464685f1f5240f783a70511a3807a937e9308a`
+- Release contract: `predecessor-final commit carries this record; no later verification worktree write`
 - Scope: `cold-read the README CI registry parity fix and exact-head verification evidence`
 - Forbidden: `implementation, README changes, verifier/governance changes, product/runtime, production, and wt-applied-writing-lecture`
 
 ## Next Action
 
-1. Create exactly one top-level fresh CR successor, record its ready-held
-   proof in the predecessor-final release commit, release that exact commit,
-   then end this verification task without awaiting the result.
+1. Release this predecessor-final commit to the recorded fresh CR task, then
+   end this verification task without waiting for its result.
