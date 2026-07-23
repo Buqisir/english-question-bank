@@ -166,6 +166,14 @@ No commit after `f64038f` on removed worktrees is live authorization.
   `canvas 628 / answer 446 / rail 380`, side-by-side without overlap.
   No horizontal-scroll canvas, scaled stage, overflow, or mobile variant may be
   invented in this cut.
+- Owner visual adjustment (2026-07-23): on review view, the fixed fifth mark
+  (`points[1]`, rendered as `要点②`) prefers valid lower-left whitespace inside
+  the answer frame. The 2024 pilot has that pocket and uses it; a packet without
+  a collision-free pocket stays with the global solver. The English source
+  always stays in the original essay flow and its leader still points from that
+  literal anchor to the note. This is one semantic placement preference in the
+  locked five-mark class, not a hard-coded coordinate or permission to move
+  source text.
 
 ## D8 — Locked pilot teaching content
 

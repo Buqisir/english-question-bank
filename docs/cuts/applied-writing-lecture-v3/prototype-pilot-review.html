@@ -1154,8 +1154,22 @@
         const unlocksLane = !baseLanes.has(slot.lane);
         return isSidePocket && unlocksLane;
       });
+      /* Owner QA 2026-07-23: in the fixed review grid the fifth mark is
+         points[1] / 要点②. Keep its English anchor in reading order, but use
+         the quiet lower-left whitespace inside the answer frame for the note. */
+      const isSecondPointReview = pageIndex === 0 && entry.index === 4;
+      const lowerLeftInside = eligible.filter(slot =>
+        slot.rect.left >= answer.left + 12 &&
+        slot.rect.left <= answer.left + answer.width * .45 &&
+        slot.rect.right <= answer.right - 12 &&
+        slot.rect.top >= contentBounds.bottom + 18 &&
+        slot.rect.bottom <= answer.bottom - 8
+      );
+      const placementPool = isSecondPointReview && lowerLeftInside.length
+        ? lowerLeftInside
+        : eligible;
       const deduped = new Map();
-      eligible.sort((a, b) => a.score - b.score || a.tieBreak - b.tieBreak).forEach(slot => {
+      placementPool.sort((a, b) => a.score - b.score || a.tieBreak - b.tieBreak).forEach(slot => {
         const key = `${Math.round(slot.x / 8)}:${Math.round(slot.y / 8)}:${Math.round(slot.width / 12)}:${slot.lane}`;
         if (!deduped.has(key)) deduped.set(key, slot);
       });

@@ -48,6 +48,13 @@ The live owner-review browser is intentionally left with two tabs, one real
 paper per packet. Each starts on `① 审题要点`; the owner can click
 `② 亮点句式` inside the paper.
 
+Owner visual adjustment on 2026-07-23: in the 2024 review view, the `要点②`
+note now uses the collision-free lower-left whitespace inside the answer frame
+(`2024-point2-lower-left.png`). The English anchor does not move; its leader
+still binds the note to the original sentence. The materially longer 2022
+packet has no equivalent collision-free lower-left candidate and therefore
+retains Variant A's global-solver fallback.
+
 ## Renderer precheck
 
 `prototype-pilot-review.html` keeps Variant A, uses Times New Roman for the

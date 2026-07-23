@@ -65,6 +65,10 @@ not owner approval. Required result:
 - every note stays inside paper; note-note and note-text do not overlap;
 - leaders exist, do not cross or traverse text; arrows point source -> note;
 - same seed reproduces placement; reseed changes only placement/leader mix;
+- on review view, the fifth fixed-grid mark (`points[1]` / `要点②`) prefers a
+  collision-free lower-left pocket inside the answer frame when one exists,
+  while its literal English anchor remains in the essay's original reading
+  order; otherwise the global solver remains authoritative;
 - persisted outer model answer, review card/marks, highlight text/long note, and
   array order do not drift.
 - when a base-width note has no side-lane candidate, a narrower note may enter
