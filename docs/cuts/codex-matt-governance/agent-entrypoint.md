@@ -49,7 +49,7 @@ Historical relay records live in `relay-history.md` and are non-authoritative.
 ## Fix DEV dispatch
 
 - Dispatch id: `codex-matt-governance-readme-ci-fix-20260722-01`
-- State: `dispatch-pending`
+- State: `release-authorized`
 - Role: `fresh Fix DEV`
 - Configured model: `gpt-5.6-terra`
 - Selected model: `gpt-5.6-terra`
@@ -60,10 +60,15 @@ Historical relay records live in `relay-history.md` and are non-authoritative.
 - Substitution reason: `none`
 - Creation attempt: `argument validation rejected duplicate projectId; no task created`
 - Retry policy: `one corrected creation call only`
+- Created thread: `019f8c94-7c3a-7232-aba8-5e00ec1a21c7`
+- Host: `local`
+- Successor worktree: `/Users/huangxuewei/.codex/worktrees/a471/english-question-bank`
+- Ready-held proof: `clean worktree; HEAD and source branch both resolved to d5b1808671e569e7cf0e1560b818eaa291036d03`
+- Release contract: `the predecessor-final commit carrying this record; no later predecessor worktree write`
 - Scope: `scripts/README.md CI registry parity only, plus own routing state`
 - Forbidden: `all external-audit observations, governance rule redesign, product/runtime, production, and wt-applied-writing-lecture`
 
 ## Next Action
 
-1. Create exactly one top-level write-held fresh Fix DEV for the recorded
-   dispatch, then release it from the predecessor's final commit.
+1. Release the predecessor-final commit to the recorded fresh Fix DEV, wait
+   only for its durable activation acknowledgement, then end this task.
