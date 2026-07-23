@@ -2,9 +2,9 @@
 
 Type / role: Wayfinder -> PM contract -> formal PA -> DEV -> verification ->
 fresh CR -> QA -> RM
-State: release-authorized
+State: verification-active
 Blockers: none
-Claimed by: fresh DEV implementation
+Claimed by: fresh non-implementing verification
 Base head: `github/main@1deec0f`
 Owner-approved DEV plan head:
 `9f87000cc51f59b985d420471d095230fa35f02a`
@@ -32,19 +32,22 @@ existing print/student isolation?
 
 ## Routing
 
-Current role: none; DEV result is release-authorized
-Next role: exactly one fresh non-implementing verification task
+Current role: fresh non-implementing verification
+Next role: none until verification has durably recorded the live release-gate result
 Configured model: `gpt-5.6-terra`
 Selected model: `gpt-5.6-terra`
 Thinking: `medium`
 Availability / substitution: task-creation capability lists Terra/medium; no
 substitution; same configured family/grade
-Dispatch ID / state: `AWL-V3-VERIFY-20260723-01` / dispatch-pending
+Dispatch ID / state: `AWL-V3-VERIFY-20260723-01` / active
 Activation evidence: after `git fetch github` on 2026-07-23, repo root is
 `/Users/huangxuewei/.codex/worktrees/f8ab/english-question-bank`; source ref
 `github/codex/applied-writing-lecture-v3-20260722-01` and `HEAD` resolve
-exactly to released head `30625c980d78fe900cd0c4f076a0829fdb6deaba`; that
+exactly to released head `017164dc4697f6131747202b9a0c51b7d3593829`; that
 head is an ancestor of `HEAD`, and the worktree is clean.
+Verification routing: configured / selected `gpt-5.6-terra` /
+`gpt-5.6-terra`; thinking `medium`; task-creation capability list supplied
+Terra/medium; no substitution; same configured family/grade.
 Authorization scope: the exact 16 runtime/data paths named in `plan.md` plus
 cut-local DEV routing/result/verification artifacts; no seventeenth
 runtime/data file without PM disposition.

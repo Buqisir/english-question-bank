@@ -1,7 +1,7 @@
 # applied-writing-lecture-v3 · Live Entrypoint
 
-State: release-authorized
-Active role: none; fresh verification is the sole authorized successor
+State: verification-active
+Active role: fresh non-implementing verification
 Source branch: `codex/applied-writing-lecture-v3-20260722-01`
 Worktree: Codex-managed detached worktree
 Released PA result head: `e5d8dec9c76b35d581bc61e96b41681e3c7c7529`
@@ -58,18 +58,23 @@ revise the approved visual direction.
 
 ## Relay
 
-- Dispatch ID: `AWL-V3-DEV-20260723-01`
-- Current role: fresh DEV implementation
-- Output: exact 16-file runtime/data implementation plus cut-local result and
-  verification artifacts, all bound to one exact DEV head
+- Dispatch ID: `AWL-V3-VERIFY-20260723-01`
+- Current role: fresh non-implementing verification
+- Output: cold-run plan-named verification against released exact head, bind
+  real exit codes in `verification.md`, and record the release-gate condition.
 - Configured / selected model: `gpt-5.6-terra` / `gpt-5.6-terra`
-- Thinking: `high`
-- Availability source: the task-creation capability list supplied
-  `gpt-5.6-terra` with `high`; no substitution
-- Successor boundary: after its durable result, DEV releases exactly one fresh
-  non-implementing verification successor; DEV does not await it
-- Stop boundary: named escalation, 17th runtime/data file, or failed successor
-  task creation -> record `blocked`
+- Thinking: `medium`
+- Availability source: task-creation capability list supplied `gpt-5.6-terra`
+  with `medium`; no substitution; same configured family/grade.
+- Verification activation evidence: after `git fetch github` on 2026-07-23,
+  repo root is `/Users/huangxuewei/.codex/worktrees/f8ab/english-question-bank`;
+  `github/codex/applied-writing-lecture-v3-20260722-01` and `HEAD` resolve
+  exactly to released head `017164dc4697f6131747202b9a0c51b7d3593829`; that
+  released head is an ancestor of `HEAD`, and the worktree is clean.
+- Successor boundary: verification may create at most one direct successor only
+  if live artifacts authorize it; it must not await that successor.
+- Stop boundary: named escalation, changed released head, or an unauthorized
+  runtime/data scope -> record `blocked`.
 
 ## Goal / slice
 
