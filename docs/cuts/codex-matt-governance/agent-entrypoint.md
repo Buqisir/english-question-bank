@@ -82,6 +82,8 @@ Historical relay records live in `relay-history.md` and are non-authoritative.
 - Supported-thinking evidence: `gpt-5.6-terra supports medium`
 - Eligibility proof: `configured primary is the sole same-family/same-grade candidate`
 - Substitution reason: `none`
+- Creation attempt: `argument validation rejected duplicate top-level projectId; no task created`
+- Retry policy: `one corrected creation call only`
 - Scope: `bind real exit-code evidence to the exact Fix DEV head only`
 - Forbidden: `implementation, README changes, verifier/governance changes, product/runtime, production, and wt-applied-writing-lecture`
 
