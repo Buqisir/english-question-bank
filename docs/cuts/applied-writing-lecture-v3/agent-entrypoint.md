@@ -1,10 +1,15 @@
 # applied-writing-lecture-v3 · Live Entrypoint
 
-State: release-authorized
-Active role: none (formal PA result committed; PA write authority closed)
+State: active
+Active role: fresh PM plan-revision
 Source branch: `codex/applied-writing-lecture-v3-20260722-01`
 Worktree: Codex-managed detached worktree
 Released PA result head: `e5d8dec9c76b35d581bc61e96b41681e3c7c7529`
+Released PM plan-revision head: `eefa1305f326c0d25c4fcb6b5122ea8e75323051`
+Activation evidence: after `git fetch github`,
+`github/codex/applied-writing-lecture-v3-20260722-01` resolved exactly to
+`eefa1305f326c0d25c4fcb6b5122ea8e75323051`; that released head is an ancestor
+of the current `HEAD` (which also equals it), and the worktree was clean.
 Evidence: `pa.md` (`APPROVE WITH MUST FIX`; 5 unresolved Must Fix; 3
 blocking PO decisions)
 Successor authorization: exactly one fresh PM plan-revision, dispatch
@@ -35,8 +40,8 @@ zero blocking PO decisions.
 ## Relay
 
 - Dispatch ID: `AWL-V3-PM-REV-20260722-01`
-- Current role: none; formal PA result committed
-- Next role: fresh PM plan-revision
+- Current role: fresh PM plan-revision
+- Next role: unresolved until the PA disposition and PO-decision gates close
 - Output: revised `plan.md` dispositions plus linked decisions/spec/pilot
   content packet and live routing
 - Configured / selected model: `gpt-5.6-sol` / `gpt-5.6-sol`
@@ -66,6 +71,6 @@ zero blocking PO decisions.
 
 ## Next Action
 
-1. Create exactly one fresh PM plan-revision from the predecessor-final exact
-   HEAD. It re-proves the released head, records `active` in its first commit,
-   closes the PA checklist or durably stops, and owns the next Auto-Next.
+1. PM plan-revision closes all five PA dispositions and all three blocking PO
+   decisions, or durably records a human-decision pause. DEV remains forbidden
+   until both counts are zero.
