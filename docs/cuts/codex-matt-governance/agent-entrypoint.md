@@ -7,7 +7,7 @@ Historical relay records live in `relay-history.md` and are non-authoritative.
 
 - Cut id: `codex-matt-governance`
 - Cut size: `large governance`
-- Lifecycle state: `active`
+- Lifecycle state: `release-authorized`
 - Active role: `fresh CR`
 - Source branch: `codex/codex-matt-governance-readme-ci-fix-20260722-01`
 - Current worktree: `/Users/huangxuewei/.codex/worktrees/144f/english-question-bank`
@@ -132,7 +132,7 @@ Historical relay records live in `relay-history.md` and are non-authoritative.
 ## RM dispatch
 
 - Dispatch id: `codex-matt-governance-readme-ci-fix-rm-20260722-01`
-- State: `dispatch-pending`
+- State: `release-authorized`
 - Role: `top-level fresh RM closeout only`
 - Configured model: `gpt-5.6-sol`
 - Selected model: `gpt-5.6-sol`
@@ -147,11 +147,15 @@ Historical relay records live in `relay-history.md` and are non-authoritative.
 - CR result head: `6ad316878e028aaa6d0bb435ce7722d18ff09179`
 - Bootstrap contract: `WRITE-HELD at the dispatch-pending commit carrying this record`
 - Release contract: `predecessor-final commit carries ready-held proof; no later CR worktree write`
+- Creation attempt: `created successfully`
+- Created thread: `019f8cb5-425c-7542-ad14-ea5432526679`
+- Host: `local`
+- Successor worktree: `/Users/huangxuewei/.codex/worktrees/d677/english-question-bank`
+- Ready-held proof: `clean detached worktree; HEAD and named source branch both resolved to 976664f64bd8872dd7336195dde94717d8bcb381; required RM inputs read; zero repository writes`
 - Scope: `fresh RM acceptance, changed-head release verification, merge, main CI, compact STATUS, and terminal cut closeout only`
 - Forbidden: `implementation, README or governance-rule changes, product/runtime, production configuration, plugins/skills, main-checkout user-work overwrite, and wt-applied-writing-lecture`
 
 ## Next Action
 
-1. Create exactly one top-level fresh RM successor in WRITE-HELD state, record
-   its ready-held proof in the predecessor-final commit, release that exact
-   commit, then end this CR task without awaiting the RM result.
+1. Release this predecessor-final commit to the recorded fresh RM task, then
+   end this CR task without awaiting the RM result.
