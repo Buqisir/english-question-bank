@@ -60,6 +60,15 @@ const groupPassage = {
   ],
 }
 
+const fallbackGroupPassage = {
+  paragraphs: [
+    { paragraphId: 'p1', text: 'Dear Chris,' },
+    { paragraphId: 'p2', text: 'I am writing to share a plan with you.' },
+    { paragraphId: 'p3', text: 'Yours,' },
+    { paragraphId: 'p4', text: 'Li Hua' },
+  ],
+}
+
 function modelAnswer(studentWordCount = 85) {
   return [
     ...given.top,
@@ -161,29 +170,46 @@ check('adapter falls back to a group-passage skeleton', () => {
     applicationGiven: undefined,
     instruction: '请按题组材料中的完整格式写一封邮件。',
   }
-  const fallbackPassage = {
-    paragraphs: [
-      { paragraphId: 'p1', text: 'Dear Chris,' },
-      { paragraphId: 'p2', text: 'I am writing to share a plan with you.' },
-      { paragraphId: 'p3', text: 'Yours,' },
-      { paragraphId: 'p4', text: 'Li Hua' },
-    ],
-  }
-  const taskText = buildCompleteApplicationTaskText(fallbackTask, fallbackPassage)
+  const taskText = buildCompleteApplicationTaskText(fallbackTask, fallbackGroupPassage)
   for (const expected of ['Dear Chris,', 'I am writing to share a plan with you.', 'Yours,', 'Li Hua']) {
     assert.ok(taskText.includes(expected), `missing ${expected}`)
   }
   assert.equal(validateApplicationModelAnswer({
     modelAnswer: fallbackModelAnswer(),
     writingTask: fallbackTask,
-    groupPassage: fallbackPassage,
+    groupPassage: fallbackGroupPassage,
   }).studentWordCount, 85)
   assert.throws(() => validateApplicationModelAnswer({
     modelAnswer: fallbackModelAnswer().replace('I am writing to share a plan with you.\n', ''),
     writingTask: fallbackTask,
-    groupPassage: fallbackPassage,
+    groupPassage: fallbackGroupPassage,
   }), /given text/)
 })
+
+for (const instruction of [
+  '请按给定格式写一封邮件。',
+  '请使用给定骨架完成写作。',
+  '请保留题组材料中的开头、结尾、称呼和署名。',
+  '请照抄给定开头、结尾、称呼和署名。',
+]) {
+  check(`adapter accepts an explicit group-passage skeleton requirement: ${instruction}`, () => {
+    const fallbackTask = {
+      ...writingTask,
+      applicationGiven: undefined,
+      instruction,
+    }
+    assert.equal(validateApplicationModelAnswer({
+      modelAnswer: fallbackModelAnswer(),
+      writingTask: fallbackTask,
+      groupPassage: fallbackGroupPassage,
+    }).studentWordCount, 85)
+    assert.throws(() => validateApplicationModelAnswer({
+      modelAnswer: fallbackModelAnswer().replace('I am writing to share a plan with you.\n', ''),
+      writingTask: fallbackTask,
+      groupPassage: fallbackGroupPassage,
+    }), /given text/)
+  })
+}
 
 check('adapter accepts a legacy applicationGiven title string from the stored asset shape', () => {
   const taskText = buildCompleteApplicationTaskText({
@@ -255,6 +281,48 @@ expectFailure(
         { paragraphId: 'p-letter-signature', text: 'Chris' },
       ],
     },
+  }),
+  /SPEC CONTRADICTS/,
+)
+
+expectFailure(
+  'validator fails closed when the instruction only describes a complete group-passage format for reading',
+  () => validateApplicationModelAnswer({
+    modelAnswer: fallbackModelAnswer(),
+    writingTask: {
+      ...writingTask,
+      applicationGiven: undefined,
+      instruction: '题组材料提供了完整格式，供你阅读。请回复 Chris 的来信。注意：写作词数应为80左右。',
+    },
+    groupPassage: fallbackGroupPassage,
+  }),
+  /SPEC CONTRADICTS/,
+)
+
+expectFailure(
+  'validator fails closed when the instruction says not to use the complete group-passage format',
+  () => validateApplicationModelAnswer({
+    modelAnswer: fallbackModelAnswer(),
+    writingTask: {
+      ...writingTask,
+      applicationGiven: undefined,
+      instruction: '不要使用题组材料中的完整格式，请自行写一封邮件。注意：写作词数应为80左右。',
+    },
+    groupPassage: fallbackGroupPassage,
+  }),
+  /SPEC CONTRADICTS/,
+)
+
+expectFailure(
+  'validator fails closed when a negated group-passage format requirement contains an adverb',
+  () => validateApplicationModelAnswer({
+    modelAnswer: fallbackModelAnswer(),
+    writingTask: {
+      ...writingTask,
+      applicationGiven: undefined,
+      instruction: '不要直接使用题组材料中的完整格式，请自行写一封邮件。注意：写作词数应为80左右。',
+    },
+    groupPassage: fallbackGroupPassage,
   }),
   /SPEC CONTRADICTS/,
 )

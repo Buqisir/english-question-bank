@@ -8,7 +8,9 @@ const SPEC_CONTRADICTS = 'SPEC CONTRADICTS: cannot reconstruct complete applicat
 const APPLICATION_CJK = /[　-〿㐀-䶿一-鿿豈-﫿＀-￯]/
 const APPLICATION_SALUTATION = /^(dear|to|hi|hello)\b/i
 const APPLICATION_CLOSING = /^(yours\s+sincerely|yours\s+faithfully|best\s+wishes|yours|sincerely|best|regards|cheers)\b/i
-const GROUP_PASSAGE_GIVEN_CUE = /(?:按|使用|采用).{0,24}(?:题组|材料|上文|下文|以下|上述).{0,24}(?:给定|完整)?(?:格式|骨架)|(?:保留|照抄).{0,24}(?:题组|材料|上文|下文|以下|上述).{0,24}(?:给定)?(?:格式|骨架|开头|结尾|称呼|署名)|(?:题组|材料|上文|下文|以下|上述).{0,24}(?:提供|给出).{0,12}(?:给定|完整)?(?:格式|骨架)|(?:题组|材料|上文|下文|以下|上述).{0,24}(?:中的|内的|里的).{0,12}(?:给定|完整)(?:格式|骨架)|\b(?:use|follow)\b.{0,40}\b(?:format|skeleton)\b|\b(?:keep|copy)\b.{0,40}\b(?:format|skeleton|opening|closing|salutation|signature)\b/i
+const GROUP_PASSAGE_FORMAT_REQUIREMENT = /(?:按|按照|使用|采用).{0,32}(?:(?:题组|材料|上文|下文|以下|上述).{0,16})?(?:给定|完整)(?:的)?(?:格式|骨架)|\b(?:use|follow)\b.{0,40}\b(?:given|provided|complete)\s+(?:format|skeleton)\b/i
+const GROUP_PASSAGE_PART_REQUIREMENT = /(?:保留|照抄).{0,32}(?:给定(?:的)?|(?:题组|材料|上文|下文|以下|上述).{0,16})?(?:格式|骨架|开头|结尾|称呼|署名)|\b(?:keep|copy)\b.{0,40}\b(?:given|provided)?\s*(?:format|skeleton|opening|closing|salutation|signature)\b/i
+const GROUP_PASSAGE_REQUIREMENT_NEGATION = /(?:不要|不得|不可|不应|无需|不用|不必|勿|禁止|避免).{0,12}(?:按|按照|使用|采用|保留|照抄)|\b(?:do\s+not|don't|must\s+not|should\s+not|without)\b.{0,20}\b(?:use|follow|keep|copy)\b/i
 
 function failContradicts(detail) {
   throw new Error(`${SPEC_CONTRADICTS}: ${detail}`)
@@ -90,6 +92,14 @@ function trailingGiven(source) {
   }
 }
 
+function authorizesGroupPassageGiven(instruction) {
+  const clauses = instruction.split(/[。；;!?！？，,\r\n]+/).map((clause) => clause.trim()).filter(Boolean)
+  return clauses.some((clause) => (
+    !GROUP_PASSAGE_REQUIREMENT_NEGATION.test(clause)
+    && (GROUP_PASSAGE_FORMAT_REQUIREMENT.test(clause) || GROUP_PASSAGE_PART_REQUIREMENT.test(clause))
+  ))
+}
+
 function inferredGiven(instruction, passage) {
   const inferred = []
   for (const [sourceName, source] of [['instruction', instruction], ['group passage', passage]]) {
@@ -107,7 +117,7 @@ function inferredGiven(instruction, passage) {
     if (
       sourceName === 'group passage'
       && newCandidates.length > 0
-      && !GROUP_PASSAGE_GIVEN_CUE.test(instruction)
+      && !authorizesGroupPassageGiven(instruction)
     ) {
       failContradicts('group passage may be background rather than a given skeleton; manual confirmation is required')
     }
