@@ -38,11 +38,13 @@ export function WritingPaperPage({
   pageModel,
   children,
   retainedModelAnswer,
+  retainedOfficialModelAnswer,
   onAnswerBoxActivate,
 }: {
   pageModel: WritingPageModel
   children: ReactNode
   retainedModelAnswer?: string
+  retainedOfficialModelAnswer?: string
   onAnswerBoxActivate?: () => void
 }) {
   const handleAnswerBoxKeyDown = onAnswerBoxActivate
@@ -82,7 +84,10 @@ export function WritingPaperPage({
                 onKeyDown={handleAnswerBoxKeyDown}
               >
                 {retainedModelAnswer !== undefined ? (
-                  <RetainedModelAnswer modelAnswer={retainedModelAnswer} />
+                  <RetainedModelAnswer
+                    modelAnswer={retainedModelAnswer}
+                    officialModelAnswer={retainedOfficialModelAnswer}
+                  />
                 ) : (
                   <>
                     <div className="pi-writing-answer-top">

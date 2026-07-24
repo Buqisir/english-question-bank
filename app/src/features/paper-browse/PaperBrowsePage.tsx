@@ -1436,6 +1436,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
         <WritingPaperPage
           pageModel={entry.model.pageModel}
           retainedModelAnswer={retainedLecture?.modelAnswer}
+          retainedOfficialModelAnswer={retainedLecture?.officialModelAnswer}
           onAnswerBoxActivate={answerBoxOpensLecture
             ? () => {
                 setLectureSelection(null)
@@ -1638,7 +1639,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
         if (retainedLecture?.reviewCard) {
           return <RetainedReviewCard reviewCard={retainedLecture.reviewCard} />
         }
-        if (lectureEntry.analysis.taskType === 'application') {
+        if (sourceTaskType === 'application' || lectureEntry.analysis.taskType === 'application') {
           return <p className="paper-browse-lecture-empty">解析未发布</p>
         }
         return <WritingAnalysisPanel analysis={lectureEntry.analysis} />

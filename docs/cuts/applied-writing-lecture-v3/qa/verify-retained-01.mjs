@@ -312,10 +312,20 @@ try {
     })
   }
 
+  check('a complete non-pilot application uses the same data-driven lecture availability', () => {
+    const groupId = 'group-retained-fixture-application'
+    assert.equal(retained.getRetainedWritingLecture({
+      lectureOpen: true,
+      panelGroupId: groupId,
+      groupId,
+      sourceTaskType: 'application',
+      analysis: validAnalysis,
+    }), validAnalysis)
+  })
+
   const unavailableStates = [
     ['closed lecture', { lectureOpen: false }],
     ['panel ownership moved', { panelGroupId: 'group-other' }],
-    ['non-pilot application', { groupId: 'group-other', panelGroupId: 'group-other' }],
     ['continuation source', { sourceTaskType: 'continuation' }],
     ['continuation analysis', { analysis: continuationCandidate() }],
     ['missing reviewCard', { analysis: applicationCandidate({ reviewCard: undefined }) }],

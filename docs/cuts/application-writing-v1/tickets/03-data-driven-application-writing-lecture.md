@@ -1,7 +1,7 @@
 # 03 — 数据驱动的应用文双范文讲评
 
-Status: blocked
-Blocked by: 01 — 扩展应用文解析兼容契约
+Status: done
+Blocked by: None — Ticket 01 is complete in this worktree.
 
 Spec: `docs/cuts/application-writing-v1/spec.md`
 Fixed point: Ticket 01 的完成 commit
@@ -84,6 +84,6 @@ git diff --check
 
 ## Result
 
-Commit:
-Verify:
-Notes:
+Commit: This commit; final HEAD is recorded in the completion handoff.
+Verify: Focused verifier proved red before implementation (4 expected failures, exit 1) and green after (12/12, exit 0); retained contract 120/120, paper-browse 196/196, restart3 teacher analysis 130/130, direct TypeScript check, and `pnpm -C app run verify:all` (PASS 84 / SKIP 1 / FAIL 0) all exited 0. `qa-local-owner` real-click QA covered a complete non-whitelist fixture, no-official, malformed, 2022-i/2024-i, continuation, narrow drawer, close, and ownership-switch restoration.
+Notes: Complete valid application payloads now control lecture availability; the left answer box shows AI then optional official model answer and the right side remains the existing ReviewCard. Application highlights stay hidden. Ordinary Standards review found no issues; Spec review found one application/continuation fallback leak, which was fixed with browser red-green evidence and passed focused re-review.

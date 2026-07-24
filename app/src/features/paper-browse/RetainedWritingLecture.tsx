@@ -63,7 +63,6 @@ export function getRetainedWritingLecture({
   if (
     !lectureOpen
     || panelGroupId !== groupId
-    || !isRetainedWritingPilotGroup(groupId)
     || sourceTaskType !== 'application'
     || analysis?.taskType !== 'application'
     || typeof analysis.modelAnswer !== 'string'
@@ -73,12 +72,46 @@ export function getRetainedWritingLecture({
   return analysis
 }
 
-export function RetainedModelAnswer({ modelAnswer }: { modelAnswer: string }): ReactNode {
+function RetainedModelAnswerSection({
+  label,
+  answer,
+  source,
+}: {
+  label: string
+  answer: string
+  source: 'ai' | 'official'
+}): ReactNode {
+  return (
+    <section className="retained-writing-answer-section" data-model-answer-source={source}>
+      <h4 className="retained-writing-answer-label">{label}</h4>
+      <div className="retained-writing-answer-copy">
+        {answer.split('\n').map((line, index) => (
+          <p key={index} className="retained-writing-answer-line">{line}</p>
+        ))}
+      </div>
+    </section>
+  )
+}
+
+export function RetainedModelAnswer({
+  modelAnswer,
+  officialModelAnswer,
+}: {
+  modelAnswer: string
+  officialModelAnswer?: string
+}): ReactNode {
+  const hasOfficialModelAnswer = typeof officialModelAnswer === 'string'
+    && officialModelAnswer.trim().length > 0
   return (
     <div className="retained-writing-answer">
-      {modelAnswer.split('\n').map((line, index) => (
-        <p key={index} className="retained-writing-answer-line">{line}</p>
-      ))}
+      <RetainedModelAnswerSection label="AI 参考范文" answer={modelAnswer} source="ai" />
+      {hasOfficialModelAnswer && (
+        <RetainedModelAnswerSection
+          label="官方范文"
+          answer={officialModelAnswer}
+          source="official"
+        />
+      )}
     </div>
   )
 }
