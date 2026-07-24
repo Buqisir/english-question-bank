@@ -21,7 +21,7 @@ const REVIEW_CARD_SCALAR_FIELDS = [
 const REVIEW_CARD_FIELDS = new Set<string>([...REVIEW_CARD_SCALAR_FIELDS, 'points'])
 const REVIEW_CARD_FORBIDDEN_TEXT = /[\r\n\u0085\u000B\u000C\u2028\u2029<>*_`~#[\]]/
 const REVIEW_CARD_MARKDOWN_LIST = /^(?:[-+*]|\d+[.)])\s/
-const REVIEW_CARD_MARKDOWN_THEMATIC_BREAK = /^---$/
+const REVIEW_CARD_MARKDOWN_THEMATIC_BREAK = /^-{3,}$/
 
 function isReviewCardText(value: unknown): value is string {
   return (

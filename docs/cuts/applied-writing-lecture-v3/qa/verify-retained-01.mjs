@@ -95,6 +95,8 @@ const invalidCards = [
   ['Markdown unordered list', { ...reviewCard, points: ['- first item', 'second item'] }],
   ['Markdown ordered list', { ...reviewCard, points: ['1. first item', 'second item'] }],
   ['Markdown thematic break', { ...reviewCard, value: '---' }],
+  ['Markdown four-hyphen thematic break', { ...reviewCard, value: '----' }],
+  ['Markdown long thematic break', { ...reviewCard, value: '-'.repeat(80) }],
   ['over 80 code points', { ...reviewCard, value: '字'.repeat(81) }],
   ['unknown field', { ...reviewCard, annotation: 'not allowed' }],
 ]
@@ -148,6 +150,8 @@ try {
     'Unicode vertical-tab multiline',
     'Unicode form-feed multiline',
     'Markdown thematic break',
+    'Markdown four-hyphen thematic break',
+    'Markdown long thematic break',
   ].includes(name))
   for (const [name, invalidReviewCard] of persistenceInvalidReviewCards) {
     check(`persistence rejects ${name} before creating a group`, () => {
