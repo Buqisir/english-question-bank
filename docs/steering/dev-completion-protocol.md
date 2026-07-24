@@ -59,8 +59,22 @@ Prompt:
 <complete copyable prompt naming exact artifacts and action>
 ```
 
-Resolve the actual absolute `SKILL.md` path from the active catalog. A slash
-command, bare skill name, or equivalent-flow instruction does not count. QA,
+Invocation availability and handoff referenceability are separate. Claim
+current-task invocation only for a skill in the active catalog or explicitly
+attached by the owner in this task. For a handoff, resolve the actual absolute
+`SKILL.md` from an owner-provided path or an existing global/project skill
+bridge, then verify one non-conflicting candidate: the file exists and is
+readable, the path is real and absolute, and frontmatter `name` matches.
+`disable-model-invocation: true` does not invalidate that verified
+explicit-only handoff reference.
+
+A handoff reference is not a current-task invocation and never authorizes task
+creation; the owner still opens the next task and pastes the block. Report
+ambiguity instead of guessing. Use `SKILL UNAVAILABLE` only for a required
+immediate invocation that is neither active nor attached, or when a required
+handoff has no unique verified real path. A slash command, bare skill name, or
+equivalent-flow instruction does not count. A non-Codex harness must declare
+`NATURAL-LANGUAGE FALLBACK` before using the documented equivalent. QA,
 `DONE`, and other no-skill exits omit the attachment.
 
 Fill all applicable anchors for the task type. Implementation names its spec

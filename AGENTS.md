@@ -74,16 +74,36 @@ attachment-first. Line one is the complete Markdown attachment for the actual
 entry skill, followed by one blank line and then the canonical fields.
 Implementation or fix tasks attach `$implement`; initial independent reviews
 and focused re-reviews attach `$code-review`. Ask Matt, Wayfinder, grilling, and
-other entry tasks attach the actual catalog skill they invoke, never a proxy or
-downstream skill. Only attach the entry skill: TDD and ordinary code review
-owned internally by `$implement` do not receive separate attachments.
+other entry tasks attach their actual entry skill, never a proxy or downstream
+skill. Only attach the entry skill: TDD and ordinary code review owned
+internally by `$implement` do not receive separate attachments.
 
 A bare `/implement`, bare `$implement`, or instruction to run an equivalent
-flow is not a skill attachment. Resolve the real absolute `SKILL.md` path from
-the current skill catalog when generating a `Next`; tracked examples use only
-generic paths. If the required skill is absent, report `SKILL UNAVAILABLE` and
-do not claim it ran. A non-Codex harness may use the documented natural-language
-equivalent only after explicitly declaring `NATURAL-LANGUAGE FALLBACK`.
+flow is not a skill attachment. Invocation availability and handoff
+referenceability are separate:
+
+- Claim a current-task skill invocation only when the skill is in the current
+  active catalog or the owner explicitly attached that `SKILL.md` in the
+  current task. Otherwise do not claim that it ran.
+- For a manual next-top-level-task attachment, resolve a candidate from an
+  owner-provided path or an existing global/project skill bridge. Verify that
+  there is exactly one non-conflicting candidate, its `SKILL.md` exists and is
+  readable, its path is a real absolute path, and its frontmatter `name`
+  matches the requested skill name. Report ambiguity instead of guessing.
+- `disable-model-invocation: true` may keep a skill out of the automatic
+  catalog but does not prevent a verified explicit-only skill from being
+  referenced in a handoff.
+- A handoff reference is not a current-task invocation and does not authorize
+  the agent to create the next task. The owner still opens it manually and
+  pastes the attachment-first block.
+
+Use `SKILL UNAVAILABLE` only when the current task must invoke a skill that is
+neither attached nor active, or when no unique verified real path can be
+resolved for a required handoff. Do not use it merely because an otherwise
+verified skill is explicit-only or absent from the automatic catalog. Tracked
+examples use only generic paths. A non-Codex harness may use the documented
+natural-language equivalent only after explicitly declaring
+`NATURAL-LANGUAGE FALLBACK`.
 
 When the next step needs a new top-level task, put
 `请新开顶层任务，并将下面代码块直接粘贴：` outside the fence. The copyable
@@ -300,11 +320,12 @@ copyrighted passages, or account/session information in reusable memory.
 
 The current collaboration router is `Ask Matt`. Matt skills are supplied by the
 user's global skill collection; this repository does not vendor copies because
-vendored copies drift. If a named skill is unavailable in a harness, follow the
-rules above: report `SKILL UNAVAILABLE` and do not claim invocation. A
-non-Codex harness must declare `NATURAL-LANGUAGE FALLBACK` before following the
-equivalent flow in `docs/steering/codex-matt-workflow.md`; never install
-infrastructure automatically.
+vendored copies drift. Apply the invocation and handoff-reference rules above
+before reporting `SKILL UNAVAILABLE`; never infer current-task invocation from
+a handoff attachment. A non-Codex harness must declare
+`NATURAL-LANGUAGE FALLBACK` before following the equivalent flow in
+`docs/steering/codex-matt-workflow.md`; never install infrastructure
+automatically.
 
 The Coding Brain knowledge source is
 `/Users/huangxuewei/Coding Brain/wiki/overview.md`. It is advisory and local;
