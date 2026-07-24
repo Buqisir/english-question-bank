@@ -14,9 +14,10 @@ Before sending any final message:
 
 - end with exactly one exit: a new-top-level-task block, `Next：留在当前任务`,
   `Next：等待人工 QA`, or `DONE`; a result-only final message is invalid;
-- if the next task implements or fixes an implementation ticket, its `Prompt:`
-  must explicitly say to use `/implement`, which owns TDD, relevant checks,
-  Standards + Spec `/code-review`, fixes, and commit;
+- if a new top-level task invokes a skill, its copyable block must attach that
+  skill in complete Markdown on line one; implementation and fix tasks attach
+  `$implement`, while independent review and focused re-review tasks attach
+  `$code-review`;
 - keep that ticket's implementation, TDD, ordinary review, and fixes in the
   same top-level task until it passes, blocks on a real decision, or waits for
   owner QA. Do not ask the owner to invoke `/tdd` or ordinary `/code-review`
@@ -68,11 +69,30 @@ and planned in one healthy context.
 
 Finish with a short result summary and exactly one exit:
 
+For every skill-required new top-level task, the copyable block is
+attachment-first. Line one is the complete Markdown attachment for the actual
+entry skill, followed by one blank line and then the canonical fields.
+Implementation or fix tasks attach `$implement`; initial independent reviews
+and focused re-reviews attach `$code-review`. Ask Matt, Wayfinder, grilling, and
+other entry tasks attach the actual catalog skill they invoke, never a proxy or
+downstream skill. Only attach the entry skill: TDD and ordinary code review
+owned internally by `$implement` do not receive separate attachments.
+
+A bare `/implement`, bare `$implement`, or instruction to run an equivalent
+flow is not a skill attachment. Resolve the real absolute `SKILL.md` path from
+the current skill catalog when generating a `Next`; tracked examples use only
+generic paths. If the required skill is absent, report `SKILL UNAVAILABLE` and
+do not claim it ran. A non-Codex harness may use the documented natural-language
+equivalent only after explicitly declaring `NATURAL-LANGUAGE FALLBACK`.
+
 When the next step needs a new top-level task, put
 `请新开顶层任务，并将下面代码块直接粘贴：` outside the fence. The copyable
-block starts directly with `Worktree:`:
+block uses this shape:
 
+<!-- skill-required-handoff -->
 ```text
+[$skill-name](/absolute/path/to/skill-name/SKILL.md)
+
 Worktree: <absolute path>
 Branch: <branch>
 Expected HEAD: <commit>
@@ -84,6 +104,8 @@ Effort: <low | medium | high | xhigh | max | ultra>
 Prompt:
 <complete copyable prompt>
 ```
+
+QA, `DONE`, and other exits that invoke no skill do not require an attachment.
 
 If the next instruction belongs in the current task:
 
@@ -164,7 +186,7 @@ Process strength follows actual risk, not diff size or anxiety.
   authentication, persistence, PaperSurface anchors, print / PDF / DOCX,
   production configuration, cross-cut architecture, or an irreversible
   decision. Record the decision in the spec or ADR and run one fresh top-level
-  `/code-review` against a fixed point before shipping.
+  `$code-review` lineage against a fixed point before shipping.
 - A prototype already accepted point-by-point by the owner is the visual
   contract. Preserve its layout, interaction, content granularity, and data
   mapping; do not quietly reinterpret it in implementation.
@@ -181,6 +203,22 @@ Before merging to `main`:
 There is no standing separate verification task, RM artifact gate, live-state
 file, dispatch ledger, or automatic successor. Missing or stale evidence is
 handled by rerunning the needed check, not by creating another role.
+
+### Independent review lineage
+
+- An initial independent review uses the implementation base as `Fixed point`
+  and reviews the complete range through the implementation `Expected HEAD`.
+- A focused re-review uses the previously reviewed HEAD as `Fixed point` and
+  the new fix HEAD as `Expected HEAD`.
+- A focused re-review checks only the prior Must Fix findings, the current fix
+  diff, and direct regressions. It does not reopen already reviewed history.
+- Continue blocking only for a concrete, substantive defect introduced or left
+  by the fix that makes the current implementation wrong, unsafe, or contrary
+  to the accepted spec. Wording, formatting, historical narrative,
+  theoretical boundaries, and unrelated improvements are not Must Fixes.
+- When no Must Fix remains, proceed immediately to owner QA or release. Do not
+  open another CR. “One fresh independent review” means one review lineage,
+  not a new full-range review after every fix.
 
 Prefer behavioral verification at a public seam. New source-regex assertions
 are a last resort. Before deleting shared CSS, inventory every producer of each
@@ -263,9 +301,10 @@ copyrighted passages, or account/session information in reusable memory.
 The current collaboration router is `Ask Matt`. Matt skills are supplied by the
 user's global skill collection; this repository does not vendor copies because
 vendored copies drift. If a named skill is unavailable in a harness, follow the
-equivalent natural-language flow in
-`docs/steering/codex-matt-workflow.md`; never install infrastructure
-automatically.
+rules above: report `SKILL UNAVAILABLE` and do not claim invocation. A
+non-Codex harness must declare `NATURAL-LANGUAGE FALLBACK` before following the
+equivalent flow in `docs/steering/codex-matt-workflow.md`; never install
+infrastructure automatically.
 
 The Coding Brain knowledge source is
 `/Users/huangxuewei/Coding Brain/wiki/overview.md`. It is advisory and local;

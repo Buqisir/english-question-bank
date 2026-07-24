@@ -35,10 +35,14 @@ BLOCKED — worktree/branch/HEAD does not match the handoff.
 
 ## New top-level task
 
-Put the instruction to open the task outside the fence. The copyable block
-starts directly with `Worktree:`:
+Put the instruction to open the task outside the fence. A skill-required task
+starts with the complete Markdown attachment for its actual entry skill, then
+one blank line:
 
+<!-- skill-required-handoff -->
 ```text
+[$skill-name](/absolute/path/to/skill-name/SKILL.md)
+
 Worktree: <absolute path>
 Branch: <branch>
 Expected HEAD: <commit>
@@ -58,10 +62,13 @@ remember them. Normal effort defaults are `low`/`medium`/`high`;
 `xhigh`/`max`/`ultra` require explicit owner direction and lower-effort
 inadequacy evidence under `model-routing.md`.
 
-If this task implements or fixes an implementation ticket, `Prompt:` must
-explicitly say to use `/implement`; that skill owns TDD, relevant checks,
-Standards + Spec `/code-review`, fixes, and commit. A result-only final message
-without one canonical exit is invalid.
+Implementation and fix tasks attach `$implement`. Independent review and
+focused re-review tasks attach `$code-review`. Ask Matt, Wayfinder, grilling,
+and other tasks attach the actual catalog entry skill. Do not separately attach
+TDD or ordinary review used inside `$implement`. A bare slash command, bare
+skill name, or equivalent-flow instruction is invalid. QA, `DONE`, and other
+no-skill exits need no attachment. A result-only final message without one
+canonical exit is invalid.
 
 ## Batch and parallel work
 

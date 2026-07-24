@@ -34,9 +34,12 @@ PR:
 ## Next Action
 
 Put the instruction to open the new top-level task outside the fence. The
-copyable block starts directly with `Worktree:`:
+copyable block below is attachment-first when the task invokes a skill:
 
+<!-- skill-required-handoff -->
 ```text
+[$skill-name](/absolute/path/to/skill-name/SKILL.md)
+
 Worktree: <absolute path>
 Branch: <branch>
 Expected HEAD: <commit>

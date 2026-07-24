@@ -15,14 +15,19 @@ Use verify summaries only. No raw command logs or implementation diary.
 End with exactly one of:
 
 A result-only final message is invalid. If the next task implements or fixes an
-implementation ticket, its `Prompt:` must explicitly say to use `/implement`;
-that skill owns TDD, relevant checks, Standards + Spec `/code-review`, fixes,
-and commit.
+implementation ticket, attach `$implement` as the entry skill. Initial
+independent review and focused re-review tasks attach `$code-review`. Only the
+entry skill is attached; `$implement` owns TDD, relevant checks, ordinary
+Standards + Spec review, fixes, and commit.
 
 For a new top-level task, put the instruction to open the task outside the
-fence. The copyable block starts directly with `Worktree:`:
+fence. If the task invokes a skill, line one is its complete Markdown
+attachment, followed by one blank line:
 
+<!-- skill-required-handoff -->
 ```text
+[$skill-name](/absolute/path/to/skill-name/SKILL.md)
+
 Worktree: <absolute path>
 Branch: <branch>
 Expected HEAD: <commit>
@@ -34,6 +39,10 @@ Effort: <low | medium | high | xhigh | max | ultra>
 Prompt:
 <complete copyable prompt>
 ```
+
+Resolve the real absolute skill path from the current catalog when generating
+a handoff. A slash command, bare skill name, or “equivalent flow” is not an
+attachment. QA, `DONE`, and other no-skill exits omit the attachment.
 
 Fill all applicable anchors for the task type. Use `not applicable` only when
 an anchor genuinely does not apply. Repeat exact paths and commits; the owner

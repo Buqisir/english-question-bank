@@ -39,6 +39,25 @@ background researcher. `/code-review` may use two independent reviewers for
 Standards and Spec. Those workers finish inside the current skill and report
 back to it. They never become the next ticket or phase.
 
+## Skill attachment at the task boundary
+
+When a new top-level task invokes a skill, its copyable block starts with the
+complete Markdown attachment for the actual entry skill, followed by one blank
+line. Implementation and fix tasks attach `$implement`; initial independent
+reviews and focused re-reviews attach `$code-review`. Ask Matt, Wayfinder,
+grilling, and other workflows attach their actual current catalog entry, not a
+proxy skill or a downstream skill.
+
+Only the entry skill is attached. TDD and ordinary Standards + Spec review
+inside `$implement` do not receive separate attachments. A bare slash command,
+bare `$skill-name`, or instruction to run an equivalent flow is not an
+attachment. Tracked examples use generic absolute paths; an agent generating a
+real `Next` resolves the current catalog's real absolute `SKILL.md` path.
+
+If the required skill is absent, report `SKILL UNAVAILABLE` and do not claim it
+ran. In a non-Codex harness, explicitly declare `NATURAL-LANGUAGE FALLBACK`
+before following the equivalent workflow in this document.
+
 ## Pick the entry point
 
 | Situation | Entry |
@@ -89,15 +108,39 @@ Use Wayfinder only when even the route to a spec is unclear.
 
 Charting:
 
+<!-- skill-required-handoff -->
 ```text
-用 Wayfinder 规划“<goal>”。只建立 map 和当前看得见的 decision tickets；
-不要同时解决 ticket。结束时给我唯一 Next。
+[$wayfinder](/absolute/path/to/wayfinder/SKILL.md)
+
+Worktree: <absolute path>
+Branch: <branch>
+Expected HEAD: <commit>
+Spec: not applicable
+Ticket: not applicable
+Fixed point: <commit>
+Model: <model>
+Effort: <low | medium | high | xhigh | max | ultra>
+Prompt:
+用附带的 Wayfinder skill 规划“<goal>”。只建立 map 和当前看得见的
+decision tickets；不要同时解决 ticket。结束时给我唯一 Next。
 ```
 
 Resolving:
 
+<!-- skill-required-handoff -->
 ```text
-继续这个 Wayfinder，解决下一张 frontier ticket。只解决一张。
+[$wayfinder](/absolute/path/to/wayfinder/SKILL.md)
+
+Worktree: <absolute path>
+Branch: <branch>
+Expected HEAD: <commit>
+Spec: <exact map path>
+Ticket: <exact decision ticket path>
+Fixed point: <commit>
+Model: <model>
+Effort: <low | medium | high | xhigh | max | ultra>
+Prompt:
+继续这个 Wayfinder，解决指定的 frontier ticket。只解决这一张。
 结束时更新 map，并给我唯一 Next。
 ```
 
@@ -111,12 +154,22 @@ code.
 Each implementation ticket starts in a fresh top-level task against the same
 sequential feature worktree:
 
+<!-- skill-required-handoff -->
 ```text
-在 <worktree> 的 <branch> 上实现 <ticket>。
-先确认工作树干净且 HEAD 为 <commit>。只做这张票。
-使用 /implement；按已确认 seam 做 TDD，运行相关验证，让 code-review
-检查 Standards 和 Spec，然后提交。不要创建下一顶层任务。
-结束时给我唯一 Next。
+[$implement](/absolute/path/to/implement/SKILL.md)
+
+Worktree: <absolute path>
+Branch: <branch>
+Expected HEAD: <commit>
+Spec: <exact spec path>
+Ticket: <exact ticket path>
+Fixed point: <commit>
+Model: <model>
+Effort: <low | medium | high | xhigh | max | ultra>
+Prompt:
+实现指定 ticket。先确认工作树干净且 HEAD 匹配，只做这张票。附带的
+$implement skill 负责 TDD、相关验证、Standards + Spec review、修复和提交。
+不要创建下一顶层任务；结束时给出唯一 Next。
 ```
 
 `/implement` owns the complete ticket loop:
@@ -143,14 +196,43 @@ touches:
 
 Prompt:
 
+<!-- skill-required-handoff -->
 ```text
-在 <worktree> 对 <fixed-point>...HEAD 运行独立 /code-review。
-读取 <spec> 和全部完成 tickets。只评审，不实现，不创建下一顶层任务。
-结束时给我唯一 Next。
+[$code-review](/absolute/path/to/code-review/SKILL.md)
+
+Worktree: <absolute path>
+Branch: <branch>
+Expected HEAD: <implementation HEAD>
+Spec: <exact spec path>
+Ticket: <completed ticket paths>
+Fixed point: <implementation base>
+Model: <model>
+Effort: <low | medium | high | xhigh | max | ultra>
+Prompt:
+使用附带的 $code-review 运行 initial independent review，检查
+<implementation base>...<implementation HEAD> 的 Standards 和 Spec。
+只评审，不实现，不创建下一顶层任务；结束时给出唯一 Next。
 ```
 
 The skill may use its bounded internal Standards and Spec reviewers. That is
 review implementation, not task relay.
+
+The first pass is the **Initial independent review**: `Fixed point` is the
+implementation base and `Expected HEAD` is the implementation HEAD. If it
+finds Must Fix defects, the fix task attaches `$implement`. The next
+**Focused re-review** attaches `$code-review`, uses the previously reviewed
+HEAD as `Fixed point`, and uses the new fix HEAD as `Expected HEAD`.
+
+A focused re-review checks only the previous Must Fix findings, the current fix
+diff, and direct regressions. It does not reopen the already reviewed history.
+Only a concrete, substantive defect in or left by that fix diff that makes the
+current implementation wrong, unsafe, or contrary to the accepted spec may
+keep blocking. Wording, formatting, historical narrative, theoretical
+boundaries, and unrelated improvements cannot be Must Fixes.
+
+When no Must Fix remains, move immediately to owner QA or shipping. Do not open
+another CR. “One fresh independent review” means one review lineage, not a
+fresh full-range review after every fix.
 
 ## QA and shipping
 
@@ -246,9 +328,12 @@ decisions.
 New top-level task:
 
 Write the instruction to open a new task outside the fence. The copyable block
-starts directly with `Worktree:`:
+is attachment-first when it invokes a skill:
 
+<!-- skill-required-handoff -->
 ```text
+[$skill-name](/absolute/path/to/skill-name/SKILL.md)
+
 Worktree: <absolute path>
 Branch: <branch>
 Expected HEAD: <commit>
@@ -269,9 +354,10 @@ never has to find or remember an artifact. Normal effort defaults are
 and lower-effort inadequacy evidence under `model-routing.md`.
 
 A result-only final message is invalid. If the next task implements or fixes an
-implementation ticket, its `Prompt:` must explicitly say to use `/implement`;
-that skill owns TDD, relevant checks, Standards + Spec `/code-review`, fixes,
-and commit.
+implementation ticket, attach `$implement`; initial independent review and
+focused re-review tasks attach `$code-review`. Only the entry skill is
+attached; `$implement` owns TDD, relevant checks, ordinary Standards + Spec
+review, fixes, and commit.
 
 Same task:
 

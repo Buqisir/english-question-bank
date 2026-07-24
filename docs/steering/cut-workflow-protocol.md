@@ -114,12 +114,24 @@ Stop rather than guess when:
 
 ## 7. Independent review
 
-High-risk work gets one fresh top-level `/code-review` against a fixed point
-after the relevant tickets are complete. Normal work relies on `/implement`'s
-review unless the owner requests another.
+High-risk work gets one fresh top-level `$code-review` lineage after the
+relevant tickets are complete. The initial independent review uses the
+implementation base as `Fixed point` and the implementation HEAD as
+`Expected HEAD`. Normal work relies on `$implement`'s review unless the owner
+requests another.
 
-Review ends when there are no substantive Must Fix findings. Do not create
-fix/verify/re-review cycles for wording, formatting, or historical prose.
+After a Must Fix repair, the focused re-review uses the previously reviewed
+HEAD as `Fixed point` and the new fix HEAD as `Expected HEAD`. It checks only
+the previous Must Fix, the fix diff, and direct regressions; it does not reopen
+reviewed history. Continue blocking only for a concrete, substantive defect in
+or left by the fix diff that makes the implementation wrong, unsafe, or
+contrary to the accepted spec.
+
+Review ends as soon as there are no substantive Must Fix findings, then moves
+to owner QA or shipping with no further CR. Wording, formatting, historical
+narrative, theoretical boundaries, and unrelated improvements do not block.
+One fresh independent review means one review lineage, not a new full review
+after every fix.
 
 ## 8. QA
 

@@ -32,17 +32,21 @@ Do not paste raw command logs or an implementation diary.
 Then provide exactly one exit.
 
 A result-only final message is invalid. If the new top-level task implements or
-fixes an implementation ticket, its `Prompt:` must explicitly say to use
-`/implement`; `/implement` owns TDD, relevant checks, Standards + Spec
-`/code-review`, fixes, and commit. Do not ask the owner to invoke those steps
-separately.
+fixes an implementation ticket, attach `$implement` as the entry skill.
+Initial independent review and focused re-review tasks attach `$code-review`.
+Only attach the entry skill; `$implement` owns TDD, relevant checks, ordinary
+Standards + Spec review, fixes, and commit.
 
 New top-level task:
 
 Write `请新开顶层任务，并将下面代码块直接粘贴：` outside the fence. Keep
-the routing label out of the copyable prompt:
+the routing label out of the copyable prompt. For a skill-required task, put
+its complete Markdown attachment on line one, then one blank line:
 
+<!-- skill-required-handoff -->
 ```text
+[$skill-name](/absolute/path/to/skill-name/SKILL.md)
+
 Worktree: <absolute path>
 Branch: <branch>
 Expected HEAD: <commit>
@@ -54,6 +58,10 @@ Effort: <low | medium | high | xhigh | max | ultra>
 Prompt:
 <complete copyable prompt naming exact artifacts and action>
 ```
+
+Resolve the actual absolute `SKILL.md` path from the active catalog. A slash
+command, bare skill name, or equivalent-flow instruction does not count. QA,
+`DONE`, and other no-skill exits omit the attachment.
 
 Fill all applicable anchors for the task type. Implementation names its spec
 and ticket; independent review names its spec, completed tickets, and fixed

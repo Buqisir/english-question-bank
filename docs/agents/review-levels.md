@@ -30,7 +30,8 @@ verification, CR, or RM task by habit.
 
 ## Level 2 — independent review
 
-Add one fresh top-level `/code-review` before shipping when the change touches:
+Add one fresh top-level `$code-review` lineage before shipping when the change
+touches:
 
 - schema or data-contract semantics;
 - migrations, permissions, authentication, persistence;
@@ -41,9 +42,11 @@ Add one fresh top-level `/code-review` before shipping when the change touches:
 - repeated implementation failure;
 - an explicit owner request.
 
-The review pins a fixed point, reads the accepted spec/tickets, and checks both
-Standards and Spec. The skill may use its internal independent reviewers. It
-does not implement fixes or create the fix task.
+The initial independent review pins the implementation base as `Fixed point`,
+uses the implementation HEAD as `Expected HEAD`, reads the accepted
+spec/tickets, and checks the complete range for both Standards and Spec. The
+skill may use its internal independent reviewers. It does not implement fixes
+or create the fix task.
 
 Only a substantive defect that can make the current change wrong, unsafe,
 unshippable, or outside the accepted spec is `Must Fix`. Wording, formatting,
@@ -51,8 +54,20 @@ historical prose, speculative polish, and theoretical consistency are not
 blocking.
 
 If review finds a Must Fix, its `Next` asks the owner to open one fresh fix
-implementation task. After the fix, rerun only the review/evidence invalidated
-by the change.
+implementation task with `$implement` attached. After the fix, a focused
+re-review attaches `$code-review`, pins the previously reviewed HEAD as
+`Fixed point`, and uses the new fix HEAD as `Expected HEAD`.
+
+The focused re-review checks only the previous Must Fix findings, the current
+fix diff, and direct regressions. It must not reopen already reviewed history.
+Only a concrete, substantive defect in or left by the fix diff that makes the
+current implementation wrong, unsafe, or contrary to the accepted spec can
+continue blocking. Wording, formatting, historical narrative, theoretical
+boundaries, and unrelated improvements are never Must Fixes.
+
+When no Must Fix remains, proceed immediately to owner QA or shipping; do not
+open another CR. “One fresh independent review” means one review lineage, not
+a new full review after every fix.
 
 ## QA
 
