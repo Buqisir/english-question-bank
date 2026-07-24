@@ -364,14 +364,16 @@ const REVIEW_CARD_SCALAR_FIELDS = [
   'value',
 ]
 const REVIEW_CARD_FIELDS = new Set([...REVIEW_CARD_SCALAR_FIELDS, 'points'])
+const REVIEW_CARD_FORBIDDEN_TEXT = /[\r\n\u2028\u2029<>*_`~#[\]]/
+const REVIEW_CARD_MARKDOWN_LIST = /^(?:[-+*]|\d+[.)])\s/
 
 function isReviewCardText(value) {
   return (
     typeof value === 'string'
     && value.length > 0
     && value === value.trim()
-    && !/[\r\n]/.test(value)
-    && !/[<>*_`~#[\]]/.test(value)
+    && !REVIEW_CARD_FORBIDDEN_TEXT.test(value)
+    && !REVIEW_CARD_MARKDOWN_LIST.test(value)
     && [...value].length <= 80
   )
 }
@@ -408,6 +410,8 @@ export function isCompleteReviewCard(value) {
  * @returns {{ filePath: string }}
  */
 export function persistWritingAnalysisGroup({ paperAssetsDir }, work, analysis) {
+  validateWritingAnalysisCandidate(analysis)
+
   const { paperId, groupId } = work
   const { baseDir } = resolvePaperAssetReadPaths(paperAssetsDir, paperId)
 

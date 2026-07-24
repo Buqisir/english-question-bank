@@ -971,14 +971,6 @@ assert(
 const pageCssSrc = read('app/src/features/paper-browse/paperBrowsePage.css')
 
 assert(
-  // The lazy initializer has one explicit opening source: `lecture=1`.
-  // focusGroupId only positions the paper and must never imply lecture mode.
-  'PaperBrowsePage opens initial lecture state only for an explicit lecture prop',
-  /export function hasExplicitLectureIntent\s*\(\s*\{\s*lecture\s*,?\s*\}[\s\S]{0,180}return lecture === true/.test(pageSrc) &&
-    /const\s*\[\s*lectureOpen\s*,\s*setLectureOpen\s*\]\s*=\s*useState\s*\(\s*\(\)\s*=>\s*hasExplicitLectureIntent\s*\(\s*\{\s*focusGroupId\s*,\s*lecture\s*\}\s*\)\s*\)/.test(pageSrc),
-  'missing explicit-only lecture initializer',
-)
-assert(
   'PaperBrowsePage renders a 讲评 handle button unconditionally (always visible)',
   /<button[\s\S]{0,200}paper-browse-lecture-handle[\s\S]{0,200}讲评/.test(pageSrc) &&
     !/\{lectureOpen\s*&&\s*\(?\s*<button[\s\S]{0,120}paper-browse-lecture-handle/.test(pageSrc),

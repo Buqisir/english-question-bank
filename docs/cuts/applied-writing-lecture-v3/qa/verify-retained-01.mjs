@@ -84,8 +84,13 @@ const invalidCards = [
   ['wrong point count', { ...reviewCard, points: ['one'] }],
   ['trim-dirty', { ...reviewCard, topic: ' dirty' }],
   ['multiline', { ...reviewCard, reader: 'first\nsecond' }],
+  ['carriage-return multiline', { ...reviewCard, reader: 'first\rsecond' }],
+  ['Unicode line-separator multiline', { ...reviewCard, reader: 'first\u2028second' }],
+  ['Unicode paragraph-separator multiline', { ...reviewCard, reader: 'first\u2029second' }],
   ['markup', { ...reviewCard, person: '<strong>first</strong>' }],
   ['Markdown', { ...reviewCard, tense: '**present**' }],
+  ['Markdown unordered list', { ...reviewCard, points: ['- first item', 'second item'] }],
+  ['Markdown ordered list', { ...reviewCard, points: ['1. first item', 'second item'] }],
   ['over 80 code points', { ...reviewCard, value: '字'.repeat(81) }],
   ['unknown field', { ...reviewCard, annotation: 'not allowed' }],
 ]
@@ -133,6 +138,19 @@ try {
   })
   check('application highlightExpressions preserve objects and order exactly', () => {
     assert.deepEqual(persistedApplication.highlightExpressions, highlights)
+  })
+  check('persistence rejects a malformed reviewCard before creating a group', () => {
+    const rejectedGroupId = 'group-retained-malformed-review-card'
+    assert.throws(
+      () => persistWritingAnalysisGroup(
+        { paperAssetsDir: tempRoot },
+        { paperId, groupId: rejectedGroupId },
+        applicationCandidate({ reviewCard: { ...reviewCard, points: ['- first item', 'second item'] } }),
+      ),
+      /reviewCard/,
+    )
+    const payloadAfterRejection = JSON.parse(readFileSync(filePath, 'utf8'))
+    assert.equal(payloadAfterRejection.groups[rejectedGroupId], undefined)
   })
 
   const continuationId = 'group-retained-continuation'
@@ -189,12 +207,26 @@ const schemaEnvelope = (writing) => ({
 check('JSON schema accepts a complete application reviewCard', () => {
   assert.equal(validateWritingAnalysisSchema(schemaEnvelope(applicationCandidate())), true)
 })
+check('JSON schema accepts a review-card scalar at the 80-code-point boundary', () => {
+  assert.equal(validateWritingAnalysisSchema(schemaEnvelope(applicationCandidate({
+    reviewCard: { ...reviewCard, value: '字'.repeat(80) },
+  }))), true)
+})
 check('JSON schema rejects reviewCard on continuation', () => {
   assert.equal(validateWritingAnalysisSchema(schemaEnvelope({
     ...continuationCandidate(),
     reviewCard,
   })), false)
 })
+
+for (const [name, invalidReviewCard] of invalidCards) {
+  if (invalidReviewCard === undefined) continue
+  check(`JSON schema rejects ${name} reviewCard`, () => {
+    assert.equal(validateWritingAnalysisSchema(schemaEnvelope(applicationCandidate({
+      reviewCard: invalidReviewCard,
+    }))), false)
+  })
+}
 
 const { createServer } = await import(
   pathToFileURL(path.join(repoRoot, 'app/node_modules/vite/dist/node/index.js')).href
@@ -225,6 +257,15 @@ try {
   )
   const validAnalysis = applicationCandidate()
 
+  check('frontend review-card guard accepts the 80-code-point boundary', () => {
+    assert.equal(retained.isCompleteReviewCard({ ...reviewCard, value: '字'.repeat(80) }), true)
+  })
+  for (const [name, invalidReviewCard] of invalidCards) {
+    check(`frontend review-card guard rejects ${name}`, () => {
+      assert.equal(retained.isCompleteReviewCard(invalidReviewCard), false)
+    })
+  }
+
   for (const [, groupId] of pilotAssets) {
     check(`${groupId} publishes retained lecture only in its active lecture state`, () => {
       assert.equal(retained.getRetainedWritingLecture({
@@ -247,6 +288,10 @@ try {
     ['malformed reviewCard', { analysis: applicationCandidate({ reviewCard: { ...reviewCard, value: null } }) }],
     ['blank model answer', { analysis: applicationCandidate({ modelAnswer: '   ' }) }],
     ['wrong-type model answer', { analysis: applicationCandidate({ modelAnswer: null }) }],
+    ...invalidCards.map(([name, invalidReviewCard]) => [
+      `${name} reviewCard`,
+      { analysis: applicationCandidate({ reviewCard: invalidReviewCard }) },
+    ]),
   ]
 
   for (const [name, overrides] of unavailableStates) {
