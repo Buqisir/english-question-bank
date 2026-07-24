@@ -1,7 +1,7 @@
 # 当前状态（medium / large cut 收官时更新）
 
-Last updated: 2026-07-23（Matt-native 流程冲突修复；
-**生产仍为 5cabb5c**：本刀仅改协作规则，不触发生产部署）
+Last updated: 2026-07-24（workflow skill attachment contract 发布；
+**生产仍为 5cabb5c**：本刀只改协作规则，不触发生产部署）
 
 下一步队列（2026-07-17 晚刷新，均未圈、owner 圈了再动）：
 ① **R3 写作双 facet**（解析字段路线图下一站，program 在
@@ -48,6 +48,9 @@ essay-grading 幸存件重建，判例已回流，远端 Buqisir/project-os 私�
 
 ## 主线焦点
 
+- 2026-07-24：**workflow skill contract 收口**：新顶层技能任务改为首行附完整 `SKILL.md` Markdown，
+  implementation/fix 与独立 review lineage 分别锁定 `$implement` / `$code-review`；review PASS、0 Must Fix，
+  合同 212/0、housekeeping 76/0、`verify:all` 84 PASS / 1 SKIP / 0 FAIL；生产不部署。
 - 2026-07-24：**retained application-writing pilot 发布门禁通过**：保留原作文讲评，
   由 plain model 生成结构化复习卡；独立 Standards + Spec review PASS（0 Must Fix）、
   owner QA 通过，`verify:all` 84 PASS / 1 SKIP / 0 FAIL；生产部署不在本次范围。
