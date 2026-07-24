@@ -85,12 +85,16 @@ const invalidCards = [
   ['trim-dirty', { ...reviewCard, topic: ' dirty' }],
   ['multiline', { ...reviewCard, reader: 'first\nsecond' }],
   ['carriage-return multiline', { ...reviewCard, reader: 'first\rsecond' }],
+  ['Unicode NEL multiline', { ...reviewCard, reader: 'first\u0085second' }],
+  ['Unicode vertical-tab multiline', { ...reviewCard, reader: 'first\u000Bsecond' }],
+  ['Unicode form-feed multiline', { ...reviewCard, reader: 'first\u000Csecond' }],
   ['Unicode line-separator multiline', { ...reviewCard, reader: 'first\u2028second' }],
   ['Unicode paragraph-separator multiline', { ...reviewCard, reader: 'first\u2029second' }],
   ['markup', { ...reviewCard, person: '<strong>first</strong>' }],
   ['Markdown', { ...reviewCard, tense: '**present**' }],
   ['Markdown unordered list', { ...reviewCard, points: ['- first item', 'second item'] }],
   ['Markdown ordered list', { ...reviewCard, points: ['1. first item', 'second item'] }],
+  ['Markdown thematic break', { ...reviewCard, value: '---' }],
   ['over 80 code points', { ...reviewCard, value: '字'.repeat(81) }],
   ['unknown field', { ...reviewCard, annotation: 'not allowed' }],
 ]
@@ -139,18 +143,44 @@ try {
   check('application highlightExpressions preserve objects and order exactly', () => {
     assert.deepEqual(persistedApplication.highlightExpressions, highlights)
   })
-  check('persistence rejects a malformed reviewCard before creating a group', () => {
-    const rejectedGroupId = 'group-retained-malformed-review-card'
-    assert.throws(
-      () => persistWritingAnalysisGroup(
+  const persistenceInvalidReviewCards = invalidCards.filter(([name]) => [
+    'Unicode NEL multiline',
+    'Unicode vertical-tab multiline',
+    'Unicode form-feed multiline',
+    'Markdown thematic break',
+  ].includes(name))
+  for (const [name, invalidReviewCard] of persistenceInvalidReviewCards) {
+    check(`persistence rejects ${name} before creating a group`, () => {
+      const rejectedGroupId = `group-retained-malformed-${name.replace(/[^a-z]+/gi, '-').toLowerCase()}`
+      assert.throws(
+        () => persistWritingAnalysisGroup(
+          { paperAssetsDir: tempRoot },
+          { paperId, groupId: rejectedGroupId },
+          applicationCandidate({ reviewCard: invalidReviewCard }),
+        ),
+        /reviewCard/,
+      )
+      const payloadAfterRejection = JSON.parse(readFileSync(filePath, 'utf8'))
+      assert.equal(payloadAfterRejection.groups[rejectedGroupId], undefined)
+    })
+  }
+  check('persistence does not duplicate the validator warning', () => {
+    const warnings = []
+    const originalWarn = console.warn
+    console.warn = (message) => warnings.push(message)
+    try {
+      const warningCandidate = applicationCandidate()
+      validateWritingAnalysisCandidate(warningCandidate)
+      persistWritingAnalysisGroup(
         { paperAssetsDir: tempRoot },
-        { paperId, groupId: rejectedGroupId },
-        applicationCandidate({ reviewCard: { ...reviewCard, points: ['- first item', 'second item'] } }),
-      ),
-      /reviewCard/,
-    )
-    const payloadAfterRejection = JSON.parse(readFileSync(filePath, 'utf8'))
-    assert.equal(payloadAfterRejection.groups[rejectedGroupId], undefined)
+        { paperId, groupId: 'group-retained-warning-once' },
+        warningCandidate,
+      )
+    } finally {
+      console.warn = originalWarn
+    }
+    assert.equal(warnings.length, 1)
+    assert.match(warnings[0], /application modelAnswer word count/)
   })
 
   const continuationId = 'group-retained-continuation'

@@ -1,6 +1,6 @@
 # RETAINED-01 · Plain model answer and review card pilot
 
-Status: ready
+Status: done
 
 Spec:
 `docs/cuts/applied-writing-lecture-v3/spec.md`
@@ -201,3 +201,9 @@ Arrival follow-up PASS. Ordinary scrolling, directory navigation, and a
 pilot entry, and the `讲评` handle open it. The focused verifier passed 35/35;
 both pilots passed 1470×719 and 390×844 browser checks without horizontal
 overflow.
+
+Review-finding closure PASS. Frontend, backend, JSON Schema, and persistence
+now fail closed for NEL, VT, FF, and `---`; persistence preserves its
+application review-card guard without re-running the driver's complete
+validator or warning path. The focused verifier passed 110/110; restart3,
+TypeScript, `verify:all`, and `git diff --check` passed before commit.
