@@ -126,3 +126,16 @@
 .pi-writing-answer-box--letter .pi-writing-answer-top .pi-writing-answer-given {
   min-height: 0;
 }
+
+.retained-writing-answer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  min-width: 0;
+}
+
+.retained-writing-answer-line {
+  margin: 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}

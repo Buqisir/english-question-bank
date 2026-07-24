@@ -107,6 +107,11 @@ import { PaperAssetAnalysisPanel } from '../paper-intelligence/PaperAssetAnalysi
 import { ClozeAnalysisPanel } from '../paper-intelligence/ClozeAnalysisPanel'
 import { GrammarFillAnalysisPanel } from '../paper-intelligence/GrammarFillAnalysisPanel'
 import { WritingAnalysisPanel } from '../paper-intelligence/WritingAnalysisPanel'
+import {
+  getRetainedWritingLecture,
+  isRetainedWritingPilotGroup,
+  RetainedReviewCard,
+} from './RetainedWritingLecture.tsx'
 // 刀 2 修复轮 ③: 阅读跨栏证据动线 —— import-only 复用解析页 harness 同款
 // 组件（见 PaperIntelligencePaperSurfaceHarness.tsx ~1567 行的接线），零
 // 修改。只对阅读题组接入（卷面显影原则：完形/语法填空原位型只给证据高亮，
@@ -202,6 +207,12 @@ export type PaperBrowsePageProps = {
   onOpenDraftPaperWorkbench: (draftPaperId?: string | null) => void
   onBackToWorkbench: () => void
   shellNav: AppTopbarNav
+}
+
+export function hasExplicitLectureIntent({
+  lecture,
+}: Pick<PaperBrowsePageProps, 'focusGroupId' | 'lecture'>): boolean {
+  return lecture === true
 }
 
 function cssAttr(value: string): string {
@@ -314,7 +325,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
   // prop（URL 的 lecture=1）种下初始值——lazy initializer 而非
   // useState(false) 是因为它必须在首次渲染就反映入口态，不能等一拍 effect
   // 才翻开（会闪一下挑题态）。
-  const [lectureOpen, setLectureOpen] = useState(() => Boolean(lecture))
+  const [lectureOpen, setLectureOpen] = useState(() => hasExplicitLectureIntent({ focusGroupId, lecture }))
   // 刀 2: 讲评态首次打开时按需补拉的 cloze/grammarFill/writing 解析。
   const [lectureAnalysisByGroupId, setLectureAnalysisByGroupId] = useState<
     Record<string, LectureAnalysisEntry>
@@ -1383,6 +1394,18 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     }
 
     const isPanelGroup = lectureOpen && panelGroupId === groupId
+    const writingGroup = asset?.content.groups[groupId]
+    const sourceTaskType = writingGroup?.writingTaskId
+      ? asset?.content.writingTasks?.[writingGroup.writingTaskId]?.taskType
+      : undefined
+    const writingLectureEntry = lectureAnalysisByGroupId[groupId]
+    const retainedLecture = getRetainedWritingLecture({
+      lectureOpen,
+      panelGroupId,
+      groupId,
+      sourceTaskType,
+      analysis: writingLectureEntry?.kind === 'writing' ? writingLectureEntry.analysis : undefined,
+    })
 
     const surfaceEl = (
       <PaperSurface
@@ -1404,7 +1427,27 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
       />
     )
     if (entry.kind === 'writing') {
-      return <WritingPaperPage pageModel={entry.model.pageModel}>{surfaceEl}</WritingPaperPage>
+      const answerBoxOpensLecture = (
+        !lectureOpen
+        && sourceTaskType === 'application'
+        && isRetainedWritingPilotGroup(groupId)
+      )
+      return (
+        <WritingPaperPage
+          pageModel={entry.model.pageModel}
+          retainedModelAnswer={retainedLecture?.modelAnswer}
+          onAnswerBoxActivate={answerBoxOpensLecture
+            ? () => {
+                setLectureSelection(null)
+                setSimilarView('analysis')
+                setActiveAnchor(groupId)
+                setLectureOpen(true)
+              }
+            : undefined}
+        >
+          {surfaceEl}
+        </WritingPaperPage>
+      )
     }
     return surfaceEl
   }
@@ -1582,6 +1625,22 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
 
     if (group.groupType === 'writing') {
       if (lectureEntry?.kind === 'writing') {
+        const sourceTaskType = group.writingTaskId
+          ? asset?.content.writingTasks?.[group.writingTaskId]?.taskType
+          : undefined
+        const retainedLecture = getRetainedWritingLecture({
+          lectureOpen,
+          panelGroupId,
+          groupId,
+          sourceTaskType,
+          analysis: lectureEntry.analysis,
+        })
+        if (retainedLecture?.reviewCard) {
+          return <RetainedReviewCard reviewCard={retainedLecture.reviewCard} />
+        }
+        if (lectureEntry.analysis.taskType === 'application') {
+          return <p className="paper-browse-lecture-empty">解析未发布</p>
+        }
         return <WritingAnalysisPanel analysis={lectureEntry.analysis} />
       }
       return (

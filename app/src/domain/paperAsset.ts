@@ -247,7 +247,22 @@ export type WritingAnalysis = ApplicationWritingAnalysis | ContinuationWritingAn
 export type ApplicationWritingAnalysis = {
   taskType: 'application'
   modelAnswer: string
+  reviewCard?: ReviewCard
   highlightExpressions: HighlightExpression[]
+}
+
+export type ReviewCard = {
+  form: string
+  topic: string
+  reader: string
+  person: string
+  tense: string
+  type: string
+  points: [string, string]
+  readerWho: string
+  readerCares: string
+  readerWants: string
+  value: string
 }
 
 export type ContinuationWritingAnalysis = {

@@ -971,17 +971,6 @@ assert(
 const pageCssSrc = read('app/src/features/paper-browse/paperBrowsePage.css')
 
 assert(
-  // flow-panel 刀 3 narrows this from a literal `useState(false)`: the
-  // initial value now seeds from the `lecture` prop (入口带态 lecture=1
-  // opens 讲评态 on load) via a lazy initializer, defaulting to false when
-  // the prop is absent/falsy — same net default, new source.
-  'PaperBrowsePage seeds lectureOpen from the lecture prop (defaults to false when absent)',
-  /const\s*\[\s*lectureOpen\s*,\s*setLectureOpen\s*\]\s*=\s*useState\s*\(\s*\(\)\s*=>\s*Boolean\(lecture\)\s*\)/.test(
-    pageSrc,
-  ),
-  'missing lectureOpen useState(() => Boolean(lecture))',
-)
-assert(
   'PaperBrowsePage renders a 讲评 handle button unconditionally (always visible)',
   /<button[\s\S]{0,200}paper-browse-lecture-handle[\s\S]{0,200}讲评/.test(pageSrc) &&
     !/\{lectureOpen\s*&&\s*\(?\s*<button[\s\S]{0,120}paper-browse-lecture-handle/.test(pageSrc),

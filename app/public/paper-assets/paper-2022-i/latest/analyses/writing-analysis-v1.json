@@ -6,6 +6,19 @@
       "writing": {
         "taskType": "application",
         "modelAnswer": "Dear Caroline,\nI am Li Hua, host of Talk and Talk, an English programme broadcast every Friday afternoon by our school radio station. On behalf of all our listeners, I am writing to warmly invite you to be our guest for an interview.\nOur programme aims to widen students' horizons and improve their spoken English through relaxed conversations. We sincerely hope you could share your experience of studying abroad, a topic we are all genuinely curious about. As for the time, next Tuesday afternoon would be ideal, but please feel free to suggest another slot that suits you better.\nIt would be a great honour to have you join us. Looking forward to your reply.\nYours sincerely,\nLi Hua",
+        "reviewCard": {
+          "form": "邀请邮件",
+          "topic": "邀请外教参加校广播访谈",
+          "reader": "外教 Caroline",
+          "person": "第一人称为主，第二人称指向对方",
+          "tense": "一般现在时为主",
+          "type": "邀请类",
+          "points": ["节目介绍", "访谈时间和话题"],
+          "readerWho": "外教与受邀嘉宾",
+          "readerCares": "节目价值与访谈安排",
+          "readerWants": "目的明确、安排具体、保留协商余地",
+          "value": "让对方清楚为何受邀、需要分享什么以及如何回复"
+        },
         "highlightExpressions": [
           {
             "text": "On behalf of all our listeners, I am writing to warmly invite you to be our guest for an interview.",

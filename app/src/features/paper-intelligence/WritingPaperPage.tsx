@@ -1,5 +1,6 @@
-import type { CSSProperties, ReactNode } from 'react'
+import type { CSSProperties, KeyboardEvent, ReactNode } from 'react'
 import type { WritingPageModel } from './writingPageModel'
+import { RetainedModelAnswer } from '../paper-browse/RetainedWritingLecture.tsx'
 import { paperSurfaceTokens } from '../../../../shared/papersurface/tokens.mjs'
 import './writingPaperPage.css'
 
@@ -36,10 +37,22 @@ const writingPageTokenStyle: WritingPageStyle = {
 export function WritingPaperPage({
   pageModel,
   children,
+  retainedModelAnswer,
+  onAnswerBoxActivate,
 }: {
   pageModel: WritingPageModel
   children: ReactNode
+  retainedModelAnswer?: string
+  onAnswerBoxActivate?: () => void
 }) {
+  const handleAnswerBoxKeyDown = onAnswerBoxActivate
+    ? (event: KeyboardEvent<HTMLDivElement>) => {
+        if (event.key !== 'Enter' && event.key !== ' ') return
+        event.preventDefault()
+        onAnswerBoxActivate()
+      }
+    : undefined
+
   return (
     <div className="pi-writing-page" data-pi-writing-page="" style={writingPageTokenStyle}>
       {pageModel.blocks.map((block, index) => {
@@ -56,20 +69,35 @@ export function WritingPaperPage({
             return (
               <div
                 key={index}
-                className={block.givenBottom.length > 0 ? 'pi-writing-answer-box pi-writing-answer-box--letter' : 'pi-writing-answer-box'}
-                aria-label={block.label}
+                className={[
+                  'pi-writing-answer-box',
+                  block.givenBottom.length > 0 ? 'pi-writing-answer-box--letter' : '',
+                  onAnswerBoxActivate ? 'pi-writing-answer-box--lecture-trigger' : '',
+                ].filter(Boolean).join(' ')}
+                aria-label={onAnswerBoxActivate ? `${block.label}，点击打开讲评` : block.label}
+                data-writing-lecture-trigger={onAnswerBoxActivate ? '' : undefined}
+                role={onAnswerBoxActivate ? 'button' : undefined}
+                tabIndex={onAnswerBoxActivate ? 0 : undefined}
+                onClick={onAnswerBoxActivate}
+                onKeyDown={handleAnswerBoxKeyDown}
               >
-                <div className="pi-writing-answer-top">
-                  {block.givenTop.map((line, lineIndex) => (
-                    <p key={`t${lineIndex}`} className="pi-writing-answer-given">{line}</p>
-                  ))}
-                </div>
-                {block.givenBottom.length > 0 && (
-                  <div className="pi-writing-answer-bottom">
-                    {block.givenBottom.map((line, lineIndex) => (
-                      <p key={`b${lineIndex}`} className="pi-writing-answer-given pi-writing-answer-given--tight">{line}</p>
-                    ))}
-                  </div>
+                {retainedModelAnswer !== undefined ? (
+                  <RetainedModelAnswer modelAnswer={retainedModelAnswer} />
+                ) : (
+                  <>
+                    <div className="pi-writing-answer-top">
+                      {block.givenTop.map((line, lineIndex) => (
+                        <p key={`t${lineIndex}`} className="pi-writing-answer-given">{line}</p>
+                      ))}
+                    </div>
+                    {block.givenBottom.length > 0 && (
+                      <div className="pi-writing-answer-bottom">
+                        {block.givenBottom.map((line, lineIndex) => (
+                          <p key={`b${lineIndex}`} className="pi-writing-answer-given pi-writing-answer-given--tight">{line}</p>
+                        ))}
+                      </div>
+                    )}
+                  </>
                 )}
               </div>
             )

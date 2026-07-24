@@ -23,6 +23,41 @@
             "properties": {
               "taskType": { "enum": ["application", "continuation"] },
               "modelAnswer": { "type": "string", "minLength": 1 },
+              "reviewCard": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "form",
+                  "topic",
+                  "reader",
+                  "person",
+                  "tense",
+                  "type",
+                  "points",
+                  "readerWho",
+                  "readerCares",
+                  "readerWants",
+                  "value"
+                ],
+                "properties": {
+                  "form": { "$ref": "#/$defs/reviewCardText" },
+                  "topic": { "$ref": "#/$defs/reviewCardText" },
+                  "reader": { "$ref": "#/$defs/reviewCardText" },
+                  "person": { "$ref": "#/$defs/reviewCardText" },
+                  "tense": { "$ref": "#/$defs/reviewCardText" },
+                  "type": { "$ref": "#/$defs/reviewCardText" },
+                  "points": {
+                    "type": "array",
+                    "minItems": 2,
+                    "maxItems": 2,
+                    "items": { "$ref": "#/$defs/reviewCardText" }
+                  },
+                  "readerWho": { "$ref": "#/$defs/reviewCardText" },
+                  "readerCares": { "$ref": "#/$defs/reviewCardText" },
+                  "readerWants": { "$ref": "#/$defs/reviewCardText" },
+                  "value": { "$ref": "#/$defs/reviewCardText" }
+                }
+              },
               "highlightExpressions": {
                 "type": "array",
                 "minItems": 3,
@@ -57,11 +92,20 @@
               "required": ["taskType"]
             },
             "then": {
-              "required": ["continuationDesign"]
+              "required": ["continuationDesign"],
+              "not": { "required": ["reviewCard"] }
             }
           }
         }
       }
+    }
+  },
+  "$defs": {
+    "reviewCardText": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80,
+      "pattern": "^(?!\\s)(?!.*\\s$)(?!.*[\\r\\n\\u0085\\u000B\\u000C\\u2028\\u2029<>*_`~#\\[\\]])(?![-+*]\\s)(?!\\d+[.)]\\s)(?!-{3,}$).+$"
     }
   }
 }

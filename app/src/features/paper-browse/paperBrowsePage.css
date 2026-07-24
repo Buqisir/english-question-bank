@@ -650,6 +650,183 @@
   overflow-x: auto;
 }
 
+.retained-writing-card {
+  overflow: hidden;
+  border: 1px solid var(--eqb-color-border);
+  border-radius: 8px;
+  background: var(--eqb-color-paper);
+  box-shadow: 0 1px 2px color-mix(in srgb, var(--eqb-color-text-strong) 6%, transparent);
+  color: var(--eqb-color-text);
+  font-size: 0.875rem;
+  line-height: 1.55;
+}
+
+.retained-writing-card-section {
+  padding: 16px;
+}
+
+.retained-writing-card-section + .retained-writing-card-section {
+  border-top: 1px solid var(--eqb-color-border-subtle);
+}
+
+.retained-writing-card-section h5 {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 12px;
+  color: var(--eqb-color-text-muted);
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.retained-writing-card-section h5::before {
+  width: 4px;
+  height: 4px;
+  border-radius: 999px;
+  background: var(--eqb-color-primary);
+  content: "";
+}
+
+.retained-writing-card-section dl {
+  margin: 0;
+}
+
+.retained-writing-card-row {
+  min-width: 0;
+}
+
+.retained-writing-card-row dt {
+  color: var(--eqb-color-text-muted);
+  font-size: 0.6875rem;
+  font-weight: 600;
+}
+
+.retained-writing-card-row dd {
+  margin: 0;
+  color: var(--eqb-color-text-strong);
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.retained-writing-card-section--basics dl {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px 16px;
+}
+
+.retained-writing-card-section--basics .retained-writing-card-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.retained-writing-card-section--points {
+  background: var(--eqb-color-paper);
+}
+
+.retained-writing-card-points {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  counter-reset: retained-writing-point;
+}
+
+.retained-writing-card-points li {
+  display: grid;
+  grid-template-columns: 24px minmax(0, 1fr);
+  align-items: start;
+  gap: 8px;
+  color: var(--eqb-color-text-strong);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  counter-increment: retained-writing-point;
+}
+
+.retained-writing-card-points li::before {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--eqb-color-primary) 10%, var(--eqb-color-paper));
+  color: var(--eqb-color-primary-text);
+  content: counter(retained-writing-point, decimal-leading-zero);
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.retained-writing-card-section--reader dl {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.retained-writing-card-section--reader .retained-writing-card-row {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr);
+  align-items: start;
+  gap: 8px;
+}
+
+/* Overrides the base retained row label color so the three reader prompts
+ * carry the card's restrained primary-ink emphasis without a filled chip. */
+.retained-writing-card-section--reader .retained-writing-card-row dt {
+  border-radius: 999px;
+  color: var(--eqb-color-primary-text);
+  line-height: 1.4;
+  padding: 4px 8px;
+  text-align: center;
+}
+
+.retained-writing-card-section--value {
+  background: var(--eqb-color-paper);
+}
+
+.retained-writing-card-value {
+  margin: 0;
+  border-left: 1px solid var(--eqb-color-primary);
+  border-radius: 0 4px 4px 0;
+  background: var(--eqb-color-paper);
+  color: var(--eqb-color-text-strong);
+  font-size: 0.8125rem;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+  padding: 8px 12px;
+}
+
+/* Overrides WritingPaperPage's static answer-box border only while the
+ * paper-browse pilot exposes that whole box as the lecture entry target. */
+.paper-browse-page .pi-writing-answer-box--lecture-trigger {
+  cursor: pointer;
+  transition:
+    border-color var(--motion-base) var(--ease-hover),
+    box-shadow var(--motion-base) var(--ease-hover);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .paper-browse-page .pi-writing-answer-box--lecture-trigger:hover {
+    border-color: var(--eqb-color-primary);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--eqb-color-primary) 22%, transparent);
+  }
+}
+
+.paper-browse-page .pi-writing-answer-box--lecture-trigger:active {
+  border-color: var(--eqb-color-primary);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--eqb-color-primary) 34%, transparent);
+}
+
+.paper-browse-page .pi-writing-answer-box--lecture-trigger:focus-visible {
+  outline: 2px solid var(--eqb-color-primary);
+  outline-offset: 3px;
+}
+
 .paper-browse-lecture-backdrop {
   display: none;
 }

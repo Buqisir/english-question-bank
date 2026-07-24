@@ -6,6 +6,19 @@
       "writing": {
         "taskType": "application",
         "modelAnswer": "Dear Chris,\nI'm writing to share with you an art class I had in a park last Friday.\nOur teacher led us to a quiet corner by the lake and let us paint whatever caught our eye. I chose an old willow tree leaning over the water, with a few ducks swimming beneath it. At first I struggled to mix the green, but after trying again and again, I got the soft colour I wanted. When I added the ripples around the ducks, the whole picture came alive.\nPainting outdoors taught me something the classroom never could: I rarely stop to really look at the ordinary things around me. That willow had stood there for years, yet I had walked past it without truly seeing it. How I wish you had been there with me!\nYours,\nLi Hua",
+        "reviewCard": {
+          "form": "分享邮件",
+          "topic": "分享一次公园美术课经历",
+          "reader": "英国朋友 Chris",
+          "person": "第一人称",
+          "tense": "一般过去时为主",
+          "type": "分享类",
+          "points": ["完成的作品", "个人感想"],
+          "readerWho": "英国朋友",
+          "readerCares": "作品画面与经历变化",
+          "readerWants": "具体细节与真实感受",
+          "value": "让朋友看见这次经历，并理解它带来的新发现"
+        },
         "highlightExpressions": [
           {
             "text": "At first I struggled to mix the green, but after trying again and again, I got the soft colour I wanted.",
