@@ -217,6 +217,12 @@ try {
   const retained = await vite.ssrLoadModule(
     '/src/features/paper-browse/RetainedWritingLecture.tsx',
   )
+  const writingPaperPage = await vite.ssrLoadModule(
+    '/src/features/paper-intelligence/WritingPaperPage.tsx',
+  )
+  const paperBrowsePage = await vite.ssrLoadModule(
+    '/src/features/paper-browse/PaperBrowsePage.tsx',
+  )
   const validAnalysis = applicationCandidate()
 
   for (const [, groupId] of pilotAssets) {
@@ -265,6 +271,62 @@ try {
     assert.doesNotMatch(answerHtml, /highlight|annotation|underline|arrow|leader|seed|geometry/)
   })
 
+  check('application answer box exposes one whole-box lecture trigger without adding a button', () => {
+    let activationCount = 0
+    const page = writingPaperPage.WritingPaperPage({
+      pageModel: {
+        blocks: [{
+          kind: 'answerBox',
+          label: '应用文答题区',
+          givenTop: ['Dear Caroline,'],
+          givenBottom: ['Yours sincerely,', 'Li Hua'],
+        }],
+      },
+      children: null,
+      onAnswerBoxActivate: () => {
+        activationCount += 1
+      },
+    })
+    const [answerBox] = page.props.children
+    assert.equal(answerBox.type, 'div')
+    assert.equal(answerBox.props['data-writing-lecture-trigger'], '')
+    assert.equal(answerBox.props.role, 'button')
+    assert.equal(answerBox.props.tabIndex, 0)
+    answerBox.props.onClick()
+    let prevented = false
+    answerBox.props.onKeyDown({
+      key: 'Enter',
+      preventDefault: () => {
+        prevented = true
+      },
+    })
+    assert.equal(activationCount, 2)
+    assert.equal(prevented, true)
+
+    const ordinaryPage = writingPaperPage.WritingPaperPage({
+      pageModel: {
+        blocks: [{
+          kind: 'answerBox',
+          label: '读后续写答题区',
+          givenTop: ['Paragraph 1 starter'],
+          givenBottom: [],
+        }],
+      },
+      children: null,
+    })
+    const [ordinaryAnswerBox] = ordinaryPage.props.children
+    assert.equal(ordinaryAnswerBox.props['data-writing-lecture-trigger'], undefined)
+    assert.equal(ordinaryAnswerBox.props.role, undefined)
+    assert.equal(ordinaryAnswerBox.props.onClick, undefined)
+  })
+
+  check('only an explicit lecture deep link opens the initial lecture state', () => {
+    const focusGroupId = 'group-2022-i-writing-application'
+    assert.equal(paperBrowsePage.hasExplicitLectureIntent({ focusGroupId, lecture: false }), false)
+    assert.equal(paperBrowsePage.hasExplicitLectureIntent({ focusGroupId, lecture: undefined }), false)
+    assert.equal(paperBrowsePage.hasExplicitLectureIntent({ focusGroupId: undefined, lecture: true }), true)
+  })
+
   const cardHtml = renderToStaticMarkup(
     createElement(retained.RetainedReviewCard, { reviewCard }),
   )
@@ -272,6 +334,10 @@ try {
     for (const heading of ['基础判断', '内容要点', '读者三问', '价值落点']) {
       assert.ok(cardHtml.includes(heading))
     }
+    assert.deepEqual(
+      [...cardHtml.matchAll(/data-review-section="([^"]+)"/g)].map((match) => match[1]),
+      ['basics', 'points', 'reader', 'value'],
+    )
     for (const value of [
       reviewCard.form,
       reviewCard.topic,

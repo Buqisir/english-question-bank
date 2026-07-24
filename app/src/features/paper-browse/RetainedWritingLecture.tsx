@@ -10,6 +10,10 @@ const RETAINED_PILOT_GROUP_IDS = new Set([
   'group-2024-i-writing-application',
 ])
 
+export function isRetainedWritingPilotGroup(groupId: string): boolean {
+  return RETAINED_PILOT_GROUP_IDS.has(groupId)
+}
+
 const REVIEW_CARD_SCALAR_FIELDS = [
   'form', 'topic', 'reader', 'person', 'tense', 'type',
   'readerWho', 'readerCares', 'readerWants', 'value',
@@ -55,7 +59,7 @@ export function getRetainedWritingLecture({
   if (
     !lectureOpen
     || panelGroupId !== groupId
-    || !RETAINED_PILOT_GROUP_IDS.has(groupId)
+    || !isRetainedWritingPilotGroup(groupId)
     || sourceTaskType !== 'application'
     || analysis?.taskType !== 'application'
     || typeof analysis.modelAnswer !== 'string'
@@ -87,7 +91,10 @@ function ReviewCardRow({ label, value }: { label: string; value: string }): Reac
 export function RetainedReviewCard({ reviewCard }: { reviewCard: ReviewCard }): ReactNode {
   return (
     <div className="retained-writing-card">
-      <section className="retained-writing-card-section">
+      <section
+        className="retained-writing-card-section retained-writing-card-section--basics"
+        data-review-section="basics"
+      >
         <h5>基础判断</h5>
         <dl>
           <ReviewCardRow label="体裁" value={reviewCard.form} />
@@ -98,13 +105,19 @@ export function RetainedReviewCard({ reviewCard }: { reviewCard: ReviewCard }): 
           <ReviewCardRow label="类型" value={reviewCard.type} />
         </dl>
       </section>
-      <section className="retained-writing-card-section">
+      <section
+        className="retained-writing-card-section retained-writing-card-section--points"
+        data-review-section="points"
+      >
         <h5>内容要点</h5>
         <ol className="retained-writing-card-points">
           {reviewCard.points.map((point, index) => <li key={index}>{point}</li>)}
         </ol>
       </section>
-      <section className="retained-writing-card-section">
+      <section
+        className="retained-writing-card-section retained-writing-card-section--reader"
+        data-review-section="reader"
+      >
         <h5>读者三问</h5>
         <dl>
           <ReviewCardRow label="是谁" value={reviewCard.readerWho} />
@@ -112,7 +125,10 @@ export function RetainedReviewCard({ reviewCard }: { reviewCard: ReviewCard }): 
           <ReviewCardRow label="期待" value={reviewCard.readerWants} />
         </dl>
       </section>
-      <section className="retained-writing-card-section">
+      <section
+        className="retained-writing-card-section retained-writing-card-section--value"
+        data-review-section="value"
+      >
         <h5>价值落点</h5>
         <p className="retained-writing-card-value">{reviewCard.value}</p>
       </section>

@@ -50,6 +50,12 @@ Do not implement any other ticket or broaden the pilot.
 9. Use a dedicated, collision-free CSS class family for the retained answer
    and card. Before changing or deleting any shared writing CSS, inventory all
    producers of the affected class names.
+10. Keep the existing right-side `讲评` handle and make each pilot application
+    answer box a whole-box lecture trigger. Do not render a visible button
+    inside the box. Reuse existing page state; continuation and non-pilot
+    answer boxes remain inert. Ordinary scrolling, directory navigation, and
+    `focusGroupId` may position the paper but must not open lecture mode;
+    `lecture=1` remains an explicit lecture entry point.
 
 ## Allowed writes
 
@@ -96,6 +102,10 @@ behavior fails at public or component seams:
   `解析未发布`;
 - closing lecture and switching to continuation/another group unmount retained
   content and restore the existing content;
+- activating either pilot application answer box opens the matching lecture
+  rail, while continuation and non-pilot answer boxes do not gain a trigger;
+- ordinary arrival, directory navigation, and a `focusGroupId` deep link do
+  not open lecture mode, while `lecture=1` still does; and
 - no forbidden annotation, leader, tab, seed, geometry, or custom-font DOM is
   present.
 
@@ -112,6 +122,8 @@ seam is available.
       unchanged.
 - [ ] Missing/malformed data fails closed, and lecture close/group switch
       restores the ordinary answer box.
+- [ ] The right-side `讲评` handle remains, and either pilot application answer
+      box opens its matching lecture rail without an inner button.
 - [ ] Continuation, student, PaperSurface, print, PDF, DOCX, and export behavior
       is unchanged.
 
@@ -133,9 +145,9 @@ reported as release-ready.
 
 Use `qa-local-owner` and keep the checklist to these five checks:
 
-1. Open `paper-2022-i` lecture mode and reach the application group: verify the
-   full plain answer on the left and the complete card—and nothing else—on the
-   right.
+1. Open `paper-2022-i` with lecture closed, click inside the application answer
+   box, and verify its matching lecture opens with the full plain answer on the
+   left and the complete card—and nothing else—on the right.
 2. Repeat for `paper-2024-i`; confirm no highlight, underline, arrow, tab,
    reseed, handwritten note, clipping, or horizontal overflow.
 3. Open one non-pilot application and one malformed-card fixture: verify the
@@ -170,3 +182,22 @@ malformed data retain the ordinary answer box; continuation and export paths
 remain unchanged. Red/green fixtures, TypeScript, focused writing/paper-browse,
 restart3, export-isolation checks, and real-browser wide/narrow interaction QA
 passed. A fresh fixed-point `/code-review` remains required before owner QA.
+
+UI follow-up PASS. The rejected four-equal-box stack is now one compact white
+analysis card with distinct facts, numbered points, reader prompts, and value
+emphasis, using the reading panel's neutral border and restrained ink-green accent.
+Both pilots passed 1440×900 and 390×844 browser checks with no horizontal
+overflow; lecture close and continuation switching restore ordinary content.
+
+Owner interaction amendment PASS. The retained card now uses an all-white
+surface, and each pilot application answer box opens its matching lecture rail
+as a whole-box target while the existing `讲评` handle remains. The focused
+verifier passed 34/34; `verify:all` passed 84 with one documented off-repo
+fixture skip. Real-browser checks covered both pilots at 1470×719 and 390×844
+without horizontal overflow, plus lecture close and group-switch restoration.
+
+Arrival follow-up PASS. Ordinary scrolling, directory navigation, and a
+`focusGroupId` deep link leave lecture closed; only `lecture=1`, the whole-box
+pilot entry, and the `讲评` handle open it. The focused verifier passed 35/35;
+both pilots passed 1470×719 and 390×844 browser checks without horizontal
+overflow.

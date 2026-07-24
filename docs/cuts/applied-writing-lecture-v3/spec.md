@@ -1,6 +1,6 @@
 # Applied Writing Lecture · Retained Pilot Spec
 
-Revision: `AWL-RETAINED-SPEC-1`
+Revision: `AWL-RETAINED-SPEC-2`
 
 Status: accepted for implementation ticketing
 
@@ -149,7 +149,7 @@ additional AI analysis appears below the card.
 
 ## State and responsive behavior
 
-The mount predicate is:
+The retained-content mount predicate remains:
 
 ```text
 lectureOpen
@@ -158,8 +158,22 @@ lectureOpen
 && complete retained payload
 ```
 
-No separate answer-box trigger, active-writing ID, tab state, seed, canvas
-measurement, or reseed state is introduced.
+The two pilot application answer boxes are also lecture entry points:
+
+- the existing right-side `讲评` handle remains unchanged;
+- before lecture mode opens, clicking anywhere inside a pilot application
+  answer box opens the existing lecture shell and assigns that writing group
+  to the rail;
+- no visible button or extra control is rendered inside the answer box;
+- keyboard activation is exposed through the same whole-box target; and
+- the entry reuses existing page state. It does not introduce an active-writing
+  ID, tab state, seed, canvas measurement, or reseed state.
+
+Opening an application group by ordinary scrolling, directory navigation, or
+`focusGroupId` only positions the paper; it must not open lecture mode. An
+explicit `lecture=1` deep link remains a lecture entry point.
+
+Continuation and non-pilot answer boxes remain inert.
 
 The existing lecture shell owns responsive behavior:
 
@@ -218,6 +232,8 @@ Implementation must prove:
    unchanged; and
 5. student and print/PDF/DOCX/export paths remain baseline-exact and receive no
    retained-lecture DOM or review-card behavior.
+6. each pilot application answer box opens its matching lecture rail when
+   activated, while the right-side `讲评` handle remains available.
 
 This work changes schema/data-contract semantics and guards export isolation.
 After the implementation ticket passes its own TDD, relevant checks, ordinary
