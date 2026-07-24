@@ -5,6 +5,9 @@ import { fileURLToPath } from 'node:url'
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
 const promptPath = path.join(repoRoot, 'prompts/application-writing-model-answer-v2.md')
 const SPEC_CONTRADICTS = 'SPEC CONTRADICTS: cannot reconstruct complete application task'
+const APPLICATION_CJK = /[　-〿㐀-䶿一-鿿豈-﫿＀-￯]/
+const APPLICATION_SALUTATION = /^(dear|to|hi|hello)\b/i
+const APPLICATION_CLOSING = /^(yours\s+sincerely|yours\s+faithfully|best\s+wishes|yours|sincerely|best|regards|cheers)\b/i
 
 function failContradicts(detail) {
   throw new Error(`${SPEC_CONTRADICTS}: ${detail}`)
@@ -69,9 +72,33 @@ function instructionAndPassage(writingTask, groupPassage) {
   return { instruction, passage }
 }
 
+function trailingGiven(source) {
+  const lines = source.split(/\r?\n/).map((line) => line.trim()).filter(Boolean)
+  let cut = lines.length
+  while (cut > 0 && !APPLICATION_CJK.test(lines[cut - 1])) cut -= 1
+  const candidate = lines.slice(cut)
+  if (candidate.length === 0 || cut === 0) return { given: [], ambiguous: false }
+
+  const firstIsSalutation = APPLICATION_SALUTATION.test(candidate[0])
+  const hasClosing = candidate.some((line) => APPLICATION_CLOSING.test(line))
+  const isSingleTitle = candidate.length === 1 && !/[.!?]$/.test(candidate[0])
+  const reliable = firstIsSalutation || hasClosing || isSingleTitle
+  return {
+    given: reliable ? candidate : [],
+    ambiguous: !reliable,
+  }
+}
+
 function inferredGiven(instruction, passage) {
   const source = [instruction, passage].filter(Boolean).join('\n')
+  const trailing = trailingGiven(source)
+  if (trailing.ambiguous) {
+    failContradicts('trailing English text may be an unstructured given opening; manual confirmation is required')
+  }
   const salutation = source.match(/\b(?:dear|hello|hi)\s+[^,\r\n]+,/i)?.[0]?.trim()
+  if (trailing.given.length > 0) {
+    return [...new Set([salutation, ...trailing.given].filter(Boolean))]
+  }
   const closing = source.match(/\b(?:yours(?:\s+sincerely)?|sincerely|best regards|best wishes|regards|love),?\s*(?:\r?\n\s*)?[A-Z][A-Za-z .'-]*/i)?.[0]?.trim()
   return [...new Set([salutation, closing].filter(Boolean))]
 }
@@ -136,14 +163,17 @@ export function validateApplicationModelAnswer({ modelAnswer, writingTask, group
   if (/\n\s*\n\s*\n/.test(answer)) throw new Error('application model answer has an obvious blank-line format error')
 
   const given = expectedGiven(writingTask, groupPassage)
-  let previousIndex = -1
+  let searchFrom = 0
   for (const text of given) {
-    const count = occurrences(answer, text)
-    if (count === 0) throw new Error(`application model answer is missing required given text: ${text}`)
-    if (count > 1) throw new Error(`application model answer repeated required given text: ${text}`)
-    const index = answer.indexOf(text)
-    if (index < previousIndex) throw new Error('application model answer puts required given text in the wrong order')
-    previousIndex = index
+    const index = answer.indexOf(text, searchFrom)
+    if (index === -1) throw new Error(`application model answer is missing required given text or puts it in the wrong order: ${text}`)
+    searchFrom = index + text.length
+  }
+  for (const text of new Set(given)) {
+    const requiredCount = given.reduce((total, fragment) => total + occurrences(fragment, text), 0)
+    if (occurrences(answer, text) > requiredCount) {
+      throw new Error(`application model answer repeated required given text: ${text}`)
+    }
   }
 
   const studentWordCount = wordCount(answer) - given.reduce((total, text) => total + wordCount(text), 0)

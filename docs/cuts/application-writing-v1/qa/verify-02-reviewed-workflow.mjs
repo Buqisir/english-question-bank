@@ -68,6 +68,16 @@ function modelAnswer(studentWordCount = 85) {
   ].join('\n')
 }
 
+function fallbackModelAnswer(studentWordCount = 85) {
+  return [
+    'Dear Chris,',
+    'I am writing to share a plan with you.',
+    Array.from({ length: studentWordCount }, () => 'useful').join(' '),
+    'Yours,',
+    'Li Hua',
+  ].join('\n')
+}
+
 const reviewCard = {
   form: '邮件',
   topic: '介绍校园计划',
@@ -100,32 +110,55 @@ check('adapter reconstructs instruction, word target, all given format, and grou
 })
 
 check('adapter falls back to an instruction-embedded skeleton', () => {
-  const taskText = buildCompleteApplicationTaskText({
+  const fallbackTask = {
     ...writingTask,
     applicationGiven: undefined,
     instruction: `请写一封邮件。\nDear Chris,\nI am writing to share a plan with you.\nYours,\nLi Hua`,
-  }, null)
+  }
+  const taskText = buildCompleteApplicationTaskText(fallbackTask, null)
   for (const expected of ['Dear Chris,', 'I am writing to share a plan with you.', 'Yours,', 'Li Hua']) {
     assert.ok(taskText.includes(expected), `missing ${expected}`)
   }
+  assert.equal(validateApplicationModelAnswer({
+    modelAnswer: fallbackModelAnswer(),
+    writingTask: fallbackTask,
+    groupPassage: null,
+  }).studentWordCount, 85)
+  assert.throws(() => validateApplicationModelAnswer({
+    modelAnswer: fallbackModelAnswer().replace('I am writing to share a plan with you.\n', ''),
+    writingTask: fallbackTask,
+    groupPassage: null,
+  }), /given text/)
 })
 
 check('adapter falls back to a group-passage skeleton', () => {
-  const taskText = buildCompleteApplicationTaskText({
+  const fallbackTask = {
     ...writingTask,
     applicationGiven: undefined,
     instruction: '请按题组材料中的完整格式写一封邮件。',
-  }, {
+  }
+  const fallbackPassage = {
     paragraphs: [
       { paragraphId: 'p1', text: 'Dear Chris,' },
       { paragraphId: 'p2', text: 'I am writing to share a plan with you.' },
       { paragraphId: 'p3', text: 'Yours,' },
       { paragraphId: 'p4', text: 'Li Hua' },
     ],
-  })
+  }
+  const taskText = buildCompleteApplicationTaskText(fallbackTask, fallbackPassage)
   for (const expected of ['Dear Chris,', 'I am writing to share a plan with you.', 'Yours,', 'Li Hua']) {
     assert.ok(taskText.includes(expected), `missing ${expected}`)
   }
+  assert.equal(validateApplicationModelAnswer({
+    modelAnswer: fallbackModelAnswer(),
+    writingTask: fallbackTask,
+    groupPassage: fallbackPassage,
+  }).studentWordCount, 85)
+  assert.throws(() => validateApplicationModelAnswer({
+    modelAnswer: fallbackModelAnswer().replace('I am writing to share a plan with you.\n', ''),
+    writingTask: fallbackTask,
+    groupPassage: fallbackPassage,
+  }), /given text/)
 })
 
 check('adapter accepts a legacy applicationGiven title string from the stored asset shape', () => {
@@ -161,6 +194,48 @@ check('adapter infers an inline salutation and closing before validating word co
     /given text/,
   )
 })
+
+check('validator keeps no-skeleton application articles compatible', () => {
+  const articleTask = {
+    ...writingTask,
+    applicationGiven: undefined,
+    instruction: '请写一篇介绍校园活动的短文。注意：写作词数应为80左右。',
+  }
+  const answer = Array.from({ length: 85 }, () => 'useful').join(' ')
+  assert.equal(validateApplicationModelAnswer({
+    modelAnswer: answer,
+    writingTask: articleTask,
+    groupPassage: null,
+  }).studentWordCount, 85)
+})
+
+for (const [sourceName, instruction, passage] of [
+  [
+    'instruction',
+    '请完成应用文。\nI am writing to invite you to our Open Day.',
+    null,
+  ],
+  [
+    'group passage',
+    '请完成题组材料中的应用文。',
+    {
+      paragraphs: [
+        { paragraphId: 'p-context', text: '请根据以上信息完成写作。' },
+        { paragraphId: 'p-opening', text: 'I am writing to invite you to our Open Day.' },
+      ],
+    },
+  ],
+]) {
+  expectFailure(
+    `validator fails closed when an opening-only ${sourceName} fallback is ambiguous`,
+    () => validateApplicationModelAnswer({
+      modelAnswer: Array.from({ length: 85 }, () => 'useful').join(' '),
+      writingTask: { ...writingTask, applicationGiven: undefined, instruction },
+      groupPassage: passage,
+    }),
+    /SPEC CONTRADICTS/,
+  )
+}
 
 expectFailure(
   'adapter fails closed with SPEC CONTRADICTS when the instruction is absent',

@@ -22,7 +22,7 @@ The stored asset's second `注意` item is incorrectly numbered as another `(2)`
 ## Generation and official transcription
 
 - The driver produced the task-local prompt from the byte-for-byte Appendix A authority.
-- The generated model answer was pure English composition text and passed the application machine gate with 100 student-written words (`recommended`).
+- The generated model answer was pure English composition text and passed the application machine gate with 90 student-written words (`recommended`) after deducting every given line, including the opening sentence.
 - The independent ten-point content review returned `PASS` with no findings.
 - The official model answer was transcribed only from the locked answer DOCX.
 - Recorded layout normalization: removed trailing paragraph spaces and renderer line wrapping; retained semantic paragraph breaks, the salutation, closing, signature, punctuation, spelling, and curly apostrophes without wording changes.

@@ -81,8 +81,16 @@ check('the persisted AI model answer passes the Ticket 02 machine gate', () => {
       writingTask,
       groupPassage: group.passage,
     }),
-    { studentWordCount: 100, wordCountStatus: 'recommended' },
+    { studentWordCount: 90, wordCountStatus: 'recommended' },
   )
+  assert.throws(() => validateApplicationModelAnswer({
+    modelAnswer: analysis.modelAnswer.replace(
+      'I’m Li Hua, a student reporter for our school newspaper.\n',
+      '',
+    ),
+    writingTask,
+    groupPassage: group.passage,
+  }), /given text/)
 })
 
 check('the persisted ReviewCard is complete and maps the two source points exactly', () => {

@@ -14,7 +14,7 @@
     "scoreBand13To15"
   ],
   "machineValidation": {
-    "studentWordCount": 100,
+    "studentWordCount": 90,
     "wordCountStatus": "recommended"
   },
   "verdict": "PASS",
