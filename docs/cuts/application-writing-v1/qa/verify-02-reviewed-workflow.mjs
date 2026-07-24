@@ -233,6 +233,32 @@ check('validator keeps no-skeleton application articles compatible', () => {
   }).studentWordCount, 85)
 })
 
+expectFailure(
+  'validator fails closed when a complete group-passage letter is background for a reply',
+  () => validateApplicationModelAnswer({
+    modelAnswer: [
+      'Dear Chris,',
+      Array.from({ length: 85 }, () => 'useful').join(' '),
+      'Yours,',
+      'Li Hua',
+    ].join('\n'),
+    writingTask: {
+      ...writingTask,
+      applicationGiven: undefined,
+      instruction: '请阅读题组材料提供的来信，注意开头和结尾，并给 Chris 回复。注意：写作词数应为80左右。',
+    },
+    groupPassage: {
+      paragraphs: [
+        { paragraphId: 'p-letter-salutation', text: 'Dear Li Hua,' },
+        { paragraphId: 'p-letter-body', text: 'How are you? I am planning to visit your school next month. Could you tell me about one activity I should join and explain why you recommend it?' },
+        { paragraphId: 'p-letter-closing', text: 'Yours,' },
+        { paragraphId: 'p-letter-signature', text: 'Chris' },
+      ],
+    },
+  }),
+  /SPEC CONTRADICTS/,
+)
+
 for (const [sourceName, instruction, passage] of [
   [
     'instruction',

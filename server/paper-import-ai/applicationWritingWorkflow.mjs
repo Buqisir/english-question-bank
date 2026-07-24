@@ -8,6 +8,7 @@ const SPEC_CONTRADICTS = 'SPEC CONTRADICTS: cannot reconstruct complete applicat
 const APPLICATION_CJK = /[　-〿㐀-䶿一-鿿豈-﫿＀-￯]/
 const APPLICATION_SALUTATION = /^(dear|to|hi|hello)\b/i
 const APPLICATION_CLOSING = /^(yours\s+sincerely|yours\s+faithfully|best\s+wishes|yours|sincerely|best|regards|cheers)\b/i
+const GROUP_PASSAGE_GIVEN_CUE = /(?:按|使用|采用).{0,24}(?:题组|材料|上文|下文|以下|上述).{0,24}(?:给定|完整)?(?:格式|骨架)|(?:保留|照抄).{0,24}(?:题组|材料|上文|下文|以下|上述).{0,24}(?:给定)?(?:格式|骨架|开头|结尾|称呼|署名)|(?:题组|材料|上文|下文|以下|上述).{0,24}(?:提供|给出).{0,12}(?:给定|完整)?(?:格式|骨架)|(?:题组|材料|上文|下文|以下|上述).{0,24}(?:中的|内的|里的).{0,12}(?:给定|完整)(?:格式|骨架)|\b(?:use|follow)\b.{0,40}\b(?:format|skeleton)\b|\b(?:keep|copy)\b.{0,40}\b(?:format|skeleton|opening|closing|salutation|signature)\b/i
 
 function failContradicts(detail) {
   throw new Error(`${SPEC_CONTRADICTS}: ${detail}`)
@@ -91,7 +92,8 @@ function trailingGiven(source) {
 
 function inferredGiven(instruction, passage) {
   const inferred = []
-  for (const source of [instruction, passage].filter(Boolean)) {
+  for (const [sourceName, source] of [['instruction', instruction], ['group passage', passage]]) {
+    if (!source) continue
     const trailing = trailingGiven(source)
     if (trailing.ambiguous) {
       failContradicts('trailing English text may be an unstructured given opening; manual confirmation is required')
@@ -101,9 +103,17 @@ function inferredGiven(instruction, passage) {
     const candidates = trailing.given.length > 0
       ? [salutation && !trailing.given.includes(salutation) ? salutation : null, ...trailing.given]
       : [salutation, closing]
-    inferred.push(...candidates.filter(Boolean))
+    const newCandidates = candidates.filter((candidate) => candidate && !inferred.includes(candidate))
+    if (
+      sourceName === 'group passage'
+      && newCandidates.length > 0
+      && !GROUP_PASSAGE_GIVEN_CUE.test(instruction)
+    ) {
+      failContradicts('group passage may be background rather than a given skeleton; manual confirmation is required')
+    }
+    inferred.push(...newCandidates)
   }
-  return [...new Set(inferred)]
+  return inferred
 }
 
 function expectedGiven(writingTask, groupPassage) {
