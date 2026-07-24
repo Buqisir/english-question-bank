@@ -650,6 +650,60 @@
   overflow-x: auto;
 }
 
+.retained-writing-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.retained-writing-card-section {
+  padding: 12px 14px;
+  border: 1px solid var(--paper-border);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.68);
+}
+
+.retained-writing-card-section h5 {
+  margin: 0 0 10px;
+  font-size: 0.92rem;
+}
+
+.retained-writing-card-section dl {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin: 0;
+}
+
+.retained-writing-card-row {
+  display: grid;
+  grid-template-columns: 3.5rem minmax(0, 1fr);
+  gap: 8px;
+}
+
+.retained-writing-card-row dt {
+  color: var(--text-muted);
+}
+
+.retained-writing-card-row dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.retained-writing-card-points {
+  margin: 0;
+  padding-left: 1.4rem;
+}
+
+.retained-writing-card-points li + li {
+  margin-top: 7px;
+}
+
+.retained-writing-card-value {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
 .paper-browse-lecture-backdrop {
   display: none;
 }

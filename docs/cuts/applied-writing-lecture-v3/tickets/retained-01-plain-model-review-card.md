@@ -161,3 +161,12 @@ Return a fresh top-level `/code-review` prompt with:
 - the implementation task's input fixed point;
 - the exact implementation HEAD; and
 - instructions to review the complete fixed-point diff without repairing it.
+
+## Implementation result
+
+PASS. Both pilot groups publish the complete plain model answer and four-section
+review card through one fail-closed availability guard. Legacy, missing, and
+malformed data retain the ordinary answer box; continuation and export paths
+remain unchanged. Red/green fixtures, TypeScript, focused writing/paper-browse,
+restart3, export-isolation checks, and real-browser wide/narrow interaction QA
+passed. A fresh fixed-point `/code-review` remains required before owner QA.

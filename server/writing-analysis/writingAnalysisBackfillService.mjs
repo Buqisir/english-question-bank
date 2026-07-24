@@ -273,6 +273,9 @@ export function validateWritingAnalysisCandidate(candidate) {
 
   // Hard: continuation-specific structural checks (MF-1)
   if (candidate.taskType === 'continuation') {
+    if (candidate.reviewCard !== undefined) {
+      throw new Error('reviewCard is only valid for application writing.')
+    }
     const cd = candidate.continuationDesign
     if (!cd || typeof cd !== 'object') {
       throw new Error('continuationDesign is missing or not an object.')
@@ -293,6 +296,8 @@ export function validateWritingAnalysisCandidate(candidate) {
         throw new Error(`continuationDesign.paragraphs[${i}] is empty or missing.`)
       }
     }
+  } else if (candidate.reviewCard !== undefined && !isCompleteReviewCard(candidate.reviewCard)) {
+    throw new Error('reviewCard is malformed.')
   }
 
   // Hard: highlightExpressions length 3–5
@@ -345,6 +350,42 @@ export function validateWritingAnalysisCandidate(candidate) {
 }
 
 // ─── persistWritingAnalysisGroup ─────────────────────────────────────────────
+
+const REVIEW_CARD_SCALAR_FIELDS = [
+  'form',
+  'topic',
+  'reader',
+  'person',
+  'tense',
+  'type',
+  'readerWho',
+  'readerCares',
+  'readerWants',
+  'value',
+]
+const REVIEW_CARD_FIELDS = new Set([...REVIEW_CARD_SCALAR_FIELDS, 'points'])
+
+function isReviewCardText(value) {
+  return (
+    typeof value === 'string'
+    && value.length > 0
+    && value === value.trim()
+    && !/[\r\n]/.test(value)
+    && !/[<>*_`~#[\]]/.test(value)
+    && [...value].length <= 80
+  )
+}
+
+export function isCompleteReviewCard(value) {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) return false
+  if (Object.keys(value).some((field) => !REVIEW_CARD_FIELDS.has(field))) return false
+  if (!REVIEW_CARD_SCALAR_FIELDS.every((field) => isReviewCardText(value[field]))) return false
+  return (
+    Array.isArray(value.points)
+    && value.points.length === 2
+    && value.points.every(isReviewCardText)
+  )
+}
 
 /**
  * Write (or merge into) the writing-analysis-v1.json envelope for one paper.
@@ -406,11 +447,12 @@ export function persistWritingAnalysisGroup({ paperAssetsDir }, work, analysis) 
       highlightExpressions: analysis.highlightExpressions.map(({ text, note }) => ({ text, note })),
     }
   } else {
-    // application: original three-field projection
+    // application: reviewCard is optional for legacy/non-pilot analyses.
     writingEntry = {
       taskType: analysis.taskType,
       modelAnswer: analysis.modelAnswer,
-      highlightExpressions: analysis.highlightExpressions.map(({ text, note }) => ({ text, note })),
+      ...(analysis.reviewCard !== undefined ? { reviewCard: analysis.reviewCard } : {}),
+      highlightExpressions: analysis.highlightExpressions,
     }
   }
 

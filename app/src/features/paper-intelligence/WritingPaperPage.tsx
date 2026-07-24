@@ -1,5 +1,6 @@
 import type { CSSProperties, ReactNode } from 'react'
 import type { WritingPageModel } from './writingPageModel'
+import { RetainedModelAnswer } from '../paper-browse/RetainedWritingLecture.tsx'
 import { paperSurfaceTokens } from '../../../../shared/papersurface/tokens.mjs'
 import './writingPaperPage.css'
 
@@ -36,9 +37,11 @@ const writingPageTokenStyle: WritingPageStyle = {
 export function WritingPaperPage({
   pageModel,
   children,
+  retainedModelAnswer,
 }: {
   pageModel: WritingPageModel
   children: ReactNode
+  retainedModelAnswer?: string
 }) {
   return (
     <div className="pi-writing-page" data-pi-writing-page="" style={writingPageTokenStyle}>
@@ -59,17 +62,23 @@ export function WritingPaperPage({
                 className={block.givenBottom.length > 0 ? 'pi-writing-answer-box pi-writing-answer-box--letter' : 'pi-writing-answer-box'}
                 aria-label={block.label}
               >
-                <div className="pi-writing-answer-top">
-                  {block.givenTop.map((line, lineIndex) => (
-                    <p key={`t${lineIndex}`} className="pi-writing-answer-given">{line}</p>
-                  ))}
-                </div>
-                {block.givenBottom.length > 0 && (
-                  <div className="pi-writing-answer-bottom">
-                    {block.givenBottom.map((line, lineIndex) => (
-                      <p key={`b${lineIndex}`} className="pi-writing-answer-given pi-writing-answer-given--tight">{line}</p>
-                    ))}
-                  </div>
+                {retainedModelAnswer !== undefined ? (
+                  <RetainedModelAnswer modelAnswer={retainedModelAnswer} />
+                ) : (
+                  <>
+                    <div className="pi-writing-answer-top">
+                      {block.givenTop.map((line, lineIndex) => (
+                        <p key={`t${lineIndex}`} className="pi-writing-answer-given">{line}</p>
+                      ))}
+                    </div>
+                    {block.givenBottom.length > 0 && (
+                      <div className="pi-writing-answer-bottom">
+                        {block.givenBottom.map((line, lineIndex) => (
+                          <p key={`b${lineIndex}`} className="pi-writing-answer-given pi-writing-answer-given--tight">{line}</p>
+                        ))}
+                      </div>
+                    )}
+                  </>
                 )}
               </div>
             )
