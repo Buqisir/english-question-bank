@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "writing-analysis-v1",
+  "paperId": "paper-960d0f8d",
+  "groups": {
+    "group-960d0f8d-writing-application": {
+      "writing": {
+        "taskType": "application",
+        "modelAnswer": "Dear Chris,\nI’m Li Hua, a student reporter for our school newspaper.\n\nWe are preparing a report on last Friday’s Open Day, and your English demonstration class attracted attention. Could you please tell me what the lesson focused on, how students took part, and which moments you considered its main highlights? Your comments would help us present the class accurately. We also took several photos of you interacting with students. May we use one of them in the school newspaper and on our website? I can send the photo to you for approval. Thank you, and I look forward to your reply.\n\nYours,\nLi Hua",
+        "officialModelAnswer": "Dear Chris,\nI’m Li Hua, a student reporter for our school newspaper. We are preparing our report on last Friday’s Open Day, and I’m writing to ask for a few details about the English demonstration class you taught.\n\nCould you please briefly describe what the class focused on and what students did or learned? It would also help if you could share one or two highlights that you think are worth mentioning. In addition, our photographers took photos of you interacting with students during the class, and I have attached a few for your review. May we have your permission to include them in our report on the school website and other official channels?\n\nThank you for your time, and I look forward to your reply.\n\nYours,\nLi Hua\n",
+        "reviewCard": {
+          "form": "邮件",
+          "topic": "校园开放日英语示范课报道",
+          "reader": "外教 Chris",
+          "person": "第一人称",
+          "tense": "一般过去时与一般现在时",
+          "type": "询问信",
+          "points": [
+            "询问示范课的内容与亮点",
+            "征求其出镜照片的使用授权"
+          ],
+          "readerWho": "英语示范课执教外教 Chris",
+          "readerCares": "报道是否准确且照片使用得到尊重",
+          "readerWants": "明确需回复的课程信息与授权请求",
+          "value": "让校园开放日报道准确并尊重肖像使用意愿"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "reviewRole": "independent-content-reviewer",
+  "generatorSeparated": true,
+  "criteria": [
+    "communicativePurpose",
+    "explicitPoints",
+    "readerInformation",
+    "formatAndGivenText",
+    "specificityAndRelevance",
+    "registerIdentityOccasionGenre",
+    "grammarCollocationSpellingPunctuation",
+    "sentenceVariety",
+    "wordCount",
+    "scoreBand13To15"
+  ],
+  "machineValidation": {
+    "studentWordCount": 100,
+    "wordCountStatus": "recommended"
+  },
+  "verdict": "PASS",
+  "findings": []
+}

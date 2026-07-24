@@ -1,7 +1,7 @@
 # 04 — 首篇真实应用文试点
 
-Status: blocked
-Blocked by: 02 — 从完整题面到复核通过的应用文解析工作流；03 — 数据驱动的应用文双范文讲评
+Status: done
+Blocked by: None — Tickets 02 and 03 are ancestors of the verified starting HEAD.
 
 Spec: `docs/cuts/application-writing-v1/spec.md`
 Fixed point: `4ed02871b2cd57872b3174c2aabfb781acfd3273`（完整独立审查的 implementation base）
@@ -76,18 +76,18 @@ SHA-256: cb59414336068de60c9949ee05e36182775e16d2930ec864975dcfd514bd402a
 
 ## Acceptance criteria
 
-- [ ] 两份源文件 SHA-256 与本票记录精确一致。
-- [ ] adapter 输出包含原题全部背景、内容要点、注意事项、word count 和给定书信格式，并通过人工逐行核对。
-- [ ] AI 参考范文由附录 A prompt 生成，机器校验全部通过。
-- [ ] 独立内容复核 verdict 为 `PASS`，无 Must Fix。
-- [ ] ReviewCard 两个 points 与原题两个内容要点一一对应，其余字段完整合法。
-- [ ] `officialModelAnswer` 与配套答案卷范文逐词一致，所有版面规范化均有记录。
-- [ ] 新 asset 使用 `writing-analysis-v1`，application 不生产 highlights，且不含 audit/review/raw-response 字段。
-- [ ] 真实 paper 在讲评态左侧依次显示完整 AI 参考范文与官方范文，右侧只显示 ReviewCard。
-- [ ] 关闭讲评恢复普通答题框；窄屏与宽屏无截断、缩放或横向溢出。
-- [ ] 2022-i/2024-i、continuation、挑题态、student/print/PDF/DOCX/export 无回归。
-- [ ] focused checks、TypeScript、`verify:all` 和 `git diff --check` 全绿，或如实记录任何原始红门。
-- [ ] implementation task 提交一个干净 pilot commit，并返回完整 fresh `$code-review` handoff；review 无 Must Fix 后才进入 owner QA。
+- [x] 两份源文件 SHA-256 与本票记录精确一致。
+- [x] adapter 输出包含原题全部背景、内容要点、注意事项、word count 和给定书信格式，并通过人工逐行核对。
+- [x] AI 参考范文由附录 A prompt 生成，机器校验全部通过。
+- [x] 独立内容复核 verdict 为 `PASS`，无 Must Fix。
+- [x] ReviewCard 两个 points 与原题两个内容要点一一对应，其余字段完整合法。
+- [x] `officialModelAnswer` 与配套答案卷范文逐词一致，所有版面规范化均有记录。
+- [x] 新 asset 使用 `writing-analysis-v1`，application 不生产 highlights，且不含 audit/review/raw-response 字段。
+- [x] 真实 paper 在讲评态左侧依次显示完整 AI 参考范文与官方范文，右侧只显示 ReviewCard。
+- [x] 关闭讲评恢复普通答题框；窄屏与宽屏无截断、缩放或横向溢出。
+- [x] 2022-i/2024-i、continuation、挑题态、student/print/PDF/DOCX/export 无回归。
+- [x] focused checks、TypeScript、`verify:all` 和 `git diff --check` 全绿，或如实记录任何原始红门。
+- [x] implementation task 提交一个干净 pilot commit，并返回完整 fresh `$code-review` handoff；review 无 Must Fix 后才进入 owner QA。
 
 ## Verification
 
@@ -126,6 +126,6 @@ Owner QA checklist：
 
 ## Result
 
-Commit:
-Verify:
-Notes:
+Commit: This commit; final HEAD is recorded in the completion handoff.
+Verify: Source SHA-256 2/2 matched; Ticket 04 8/8; Ticket 02 27/27; Ticket 03 12/12; paper browse 196/196; restart3 teacher analysis 130/130; TypeScript passed; `verify:all` PASS 84 / SKIP 1 / FAIL 0; `git diff --check` passed.
+Notes: Appendix A generation passed the machine gate at 100 student-written words. Independent content review and ReviewCard review passed with no findings. The official model answer is a recorded layout-only normalization of the locked answer DOCX. Real-click `qa-local-owner` QA passed at 1440×900 and 1000×800; evidence is under `docs/cuts/application-writing-v1/qa/`. The sole `verify:all` skip is its declared off-repo-fixture case. Owner QA remains gated on the fresh full-range independent review required above.
