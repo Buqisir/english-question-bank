@@ -137,7 +137,12 @@ export function listWritingAnalysisWork({ paperAssetsDir, warn = console.warn, t
         // Skip if already persisted
         if (existingGroups[groupId]?.writing) continue
 
-        work.push({ paperId, groupId, writingTask })
+        work.push({
+          paperId,
+          groupId,
+          writingTask,
+          ...(taskType === 'application' ? { groupPassage: group.passage } : {}),
+        })
       }
     } catch (error) {
       warn(`[writing-analysis] ignored invalid paper asset in ${paperId}:`, error)

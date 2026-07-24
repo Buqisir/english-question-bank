@@ -1,6 +1,6 @@
 # 02 — 从完整题面到复核通过的应用文解析工作流
 
-Status: ready
+Status: done
 Blocked by: None — Ticket 01 is complete in this worktree.
 
 Spec: `docs/cuts/application-writing-v1/spec.md`
@@ -76,6 +76,6 @@ git diff --check
 
 ## Result
 
-Commit:
-Verify:
-Notes:
+Commit: This commit; final HEAD is recorded in the completion handoff.
+Verify: Focused verifier proved red before implementation (`ERR_MODULE_NOT_FOUND`, exit 1) and green after implementation (`27/27`, exit 0); teacher-analysis regression `130/130` (exit 0); `pnpm -C app exec tsc --noEmit` (exit 0); final `pnpm -C app run verify:all` `PASS 84 / SKIP 1 / FAIL 0` (exit 0; skip is the suite's declared absent off-repo fixture); `git diff --check` (exit 0).
+Notes: Application now uses the Appendix A byte-for-byte prompt authority and separated pure-text/review work files. It fail-closes on invalid output, missing or non-PASS review, malformed task reconstruction, and missing or repeated given format; Ticket 01 remains the sole persistence projection. Existing string-title `applicationGiven` data and inline legacy letter skeletons are covered. Continuation retains its `.out.json`, prompt, vocab gate, validation, and persistence flow. No real model generation, real paper asset, UI, PaperSurface, print/PDF/DOCX/export, production configuration, or Tickets 03–04 work ran. Standards review passed; Spec review required two compatibility fixes, and focused re-review passed with no remaining Must Fix.
