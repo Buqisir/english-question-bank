@@ -131,6 +131,30 @@ check('adapter falls back to an instruction-embedded skeleton', () => {
   }), /given text/)
 })
 
+check('adapter keeps an instruction skeleton when a Chinese group passage follows it', () => {
+  const fallbackTask = {
+    ...writingTask,
+    applicationGiven: undefined,
+    instruction: `请写一封邮件，介绍校园计划并表达期待。\nDear Chris,\nI am writing to share a plan with you.\nYours,\nLi Hua`,
+  }
+  const fallbackPassage = {
+    paragraphs: [
+      { paragraphId: 'p-background', text: '活动将在周五下午的图书馆举行。' },
+      { paragraphId: 'p-reminder', text: '请结合以上背景完成写作。' },
+    ],
+  }
+  assert.equal(validateApplicationModelAnswer({
+    modelAnswer: fallbackModelAnswer(),
+    writingTask: fallbackTask,
+    groupPassage: fallbackPassage,
+  }).studentWordCount, 85)
+  assert.throws(() => validateApplicationModelAnswer({
+    modelAnswer: fallbackModelAnswer().replace('I am writing to share a plan with you.\n', ''),
+    writingTask: fallbackTask,
+    groupPassage: fallbackPassage,
+  }), /given text/)
+})
+
 check('adapter falls back to a group-passage skeleton', () => {
   const fallbackTask = {
     ...writingTask,

@@ -77,7 +77,7 @@ function trailingGiven(source) {
   let cut = lines.length
   while (cut > 0 && !APPLICATION_CJK.test(lines[cut - 1])) cut -= 1
   const candidate = lines.slice(cut)
-  if (candidate.length === 0 || cut === 0) return { given: [], ambiguous: false }
+  if (candidate.length === 0) return { given: [], ambiguous: false }
 
   const firstIsSalutation = APPLICATION_SALUTATION.test(candidate[0])
   const hasClosing = candidate.some((line) => APPLICATION_CLOSING.test(line))
@@ -90,17 +90,20 @@ function trailingGiven(source) {
 }
 
 function inferredGiven(instruction, passage) {
-  const source = [instruction, passage].filter(Boolean).join('\n')
-  const trailing = trailingGiven(source)
-  if (trailing.ambiguous) {
-    failContradicts('trailing English text may be an unstructured given opening; manual confirmation is required')
+  const inferred = []
+  for (const source of [instruction, passage].filter(Boolean)) {
+    const trailing = trailingGiven(source)
+    if (trailing.ambiguous) {
+      failContradicts('trailing English text may be an unstructured given opening; manual confirmation is required')
+    }
+    const salutation = source.match(/\b(?:dear|hello|hi)\s+[^,\r\n]+,/i)?.[0]?.trim()
+    const closing = source.match(/\b(?:yours(?:\s+sincerely)?|sincerely|best regards|best wishes|regards|love),?\s*(?:\r?\n\s*)?[A-Z][A-Za-z .'-]*/i)?.[0]?.trim()
+    const candidates = trailing.given.length > 0
+      ? [salutation && !trailing.given.includes(salutation) ? salutation : null, ...trailing.given]
+      : [salutation, closing]
+    inferred.push(...candidates.filter(Boolean))
   }
-  const salutation = source.match(/\b(?:dear|hello|hi)\s+[^,\r\n]+,/i)?.[0]?.trim()
-  if (trailing.given.length > 0) {
-    return [...new Set([salutation, ...trailing.given].filter(Boolean))]
-  }
-  const closing = source.match(/\b(?:yours(?:\s+sincerely)?|sincerely|best regards|best wishes|regards|love),?\s*(?:\r?\n\s*)?[A-Z][A-Za-z .'-]*/i)?.[0]?.trim()
-  return [...new Set([salutation, closing].filter(Boolean))]
+  return [...new Set(inferred)]
 }
 
 function expectedGiven(writingTask, groupPassage) {
