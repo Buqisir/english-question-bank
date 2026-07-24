@@ -48,6 +48,9 @@ essay-grading 幸存件重建，判例已回流，远端 Buqisir/project-os 私�
 
 ## 主线焦点
 
+- 2026-07-24：**retained application-writing pilot 发布门禁通过**：保留原作文讲评，
+  由 plain model 生成结构化复习卡；独立 Standards + Spec review PASS（0 Must Fix）、
+  owner QA 通过，`verify:all` 84 PASS / 1 SKIP / 0 FAIL；生产部署不在本次范围。
 - 2026-07-23：**Matt-native 手工顶层任务流程为当前路由，取代 2026-07-22 的 relay/live-state 流程**；owner 手工新开每个顶层任务，任务只返回一个可复制 `Next`。
   2026-07-22 的 governance/live-state、PA/verification/CR/RM 记录保留为历史证据，不得路由当前工作或授权自动接力、代理自行合并。
   当前规则见 `docs/steering/codex-matt-workflow.md` 与 `docs/agents/model-routing.md`；生产仍为 `5cabb5c`，本次只修协作合同。
