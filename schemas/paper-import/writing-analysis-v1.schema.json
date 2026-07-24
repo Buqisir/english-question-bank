@@ -18,11 +18,16 @@
         "properties": {
           "writing": {
             "type": "object",
-            "required": ["taskType", "modelAnswer", "highlightExpressions"],
+            "required": ["taskType", "modelAnswer"],
             "additionalProperties": true,
             "properties": {
               "taskType": { "enum": ["application", "continuation"] },
               "modelAnswer": { "type": "string", "minLength": 1 },
+              "officialModelAnswer": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "^[\\s\\S]*\\S[\\s\\S]*$"
+              },
               "reviewCard": {
                 "type": "object",
                 "additionalProperties": false,
@@ -87,14 +92,27 @@
                 }
               }
             },
-            "if": {
-              "properties": { "taskType": { "const": "continuation" } },
-              "required": ["taskType"]
-            },
-            "then": {
-              "required": ["continuationDesign"],
-              "not": { "required": ["reviewCard"] }
-            }
+            "oneOf": [
+              {
+                "properties": { "taskType": { "const": "application" } },
+                "required": ["taskType"],
+                "not": { "required": ["continuationDesign"] }
+              },
+              {
+                "properties": { "taskType": { "const": "continuation" } },
+                "required": [
+                  "taskType",
+                  "continuationDesign",
+                  "highlightExpressions"
+                ],
+                "not": {
+                  "anyOf": [
+                    { "required": ["reviewCard"] },
+                    { "required": ["officialModelAnswer"] }
+                  ]
+                }
+              }
+            ]
           }
         }
       }

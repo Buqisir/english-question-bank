@@ -1,10 +1,10 @@
 # 02 — 从完整题面到复核通过的应用文解析工作流
 
-Status: blocked
-Blocked by: 01 — 扩展应用文解析兼容契约
+Status: ready
+Blocked by: None — Ticket 01 is complete in this worktree.
 
 Spec: `docs/cuts/application-writing-v1/spec.md`
-Fixed point: Ticket 01 的完成 commit
+Fixed point: Ticket 01 completion commit (the final HEAD in its completion handoff)
 
 ## What to build
 

@@ -1,6 +1,6 @@
 # 01 — 扩展应用文解析兼容契约
 
-Status: ready
+Status: done
 Blocked by: None
 
 Spec: `docs/cuts/application-writing-v1/spec.md`
@@ -22,11 +22,17 @@ Fixed point: `4ed02871b2cd57872b3174c2aabfb781acfd3273`
 - 修改 application 的其他字段时，不得丢失已有 highlights、同卷其他 group、continuation 或 envelope meta。
 - `audit`、内容复核报告、模型原始回复和未知工作字段不得进入 paper asset。
 - 保持现有临时文件加原子 rename 写入纪律。
+- Owner 于 2026-07-24 确认新应用文不再生产亮点表达。本票允许旧
+  `WritingAnalysisPanel` 仅做 props 类型兼容，使扩展后的 domain type 可以
+  通过完整构建；不得改变该面板的渲染、交互、文案或样式。实际移除应用文
+  亮点表达展示仍归 Ticket 03。
 
 ## Forbidden
 
 - 不修改附录 A、生成 prompt、生成 builder 或 driver 工作文件协议。
-- 不修改任何 UI、PaperSurface、挑题态、路由、打印、PDF、DOCX 或 export。
+- 除上述 `WritingAnalysisPanel` props 类型兼容外，不修改任何 UI、
+  PaperSurface、挑题态、路由、打印、PDF、DOCX 或 export；本票不得改变
+  任何可见行为。
 - 不写或迁移任何真实 `writing-analysis-v1.json` 资产。
 - 不创建 `writing-analysis-v2`。
 - 不改变 continuation 的校验、投影、词数 warning、词汇 gate 或可见行为。
@@ -69,6 +75,6 @@ git diff --check
 
 ## Result
 
-Commit:
-Verify:
-Notes:
+Commit: This commit; final HEAD is recorded in the completion handoff.
+Verify: Focused fixture proved red on the old contract (`exit 1`) and green after implementation (`29/29`, `exit 0`); retained application contract `120/120` (`exit 0`); teacher-analysis regression `130/130` (`exit 0`); `pnpm -C app exec tsc --noEmit` (`exit 0`); final `pnpm -C app run verify:all` `PASS 84 / SKIP 1 / FAIL 0` (`exit 0`; the skip is the suite's declared missing off-repo fixture); `git diff --check` (`exit 0`).
+Notes: New application candidates omit highlights; historical application highlight objects, extension fields, and order are preserved on update. Owner clarified on 2026-07-24 that application highlights are being retired; this ticket only adds the build-safe legacy panel props type compatibility, with no JSX, text, style, interaction, or other visible UI change. Ordinary Standards and Spec review passed after focused re-review with no Must Fix. No generator, driver protocol, real paper asset, PaperSurface, print, export, remote, deployment, or Tickets 02–04 scope changed.

@@ -20,10 +20,18 @@
  */
 
 import type { ReactNode } from 'react'
-import type { WritingAnalysis } from '../../domain/paperAsset.ts'
+import type {
+  ApplicationWritingAnalysis,
+  ContinuationWritingAnalysis,
+  HighlightExpression,
+} from '../../domain/paperAsset.ts'
+
+type LegacyApplicationWritingAnalysis = ApplicationWritingAnalysis & {
+  highlightExpressions: HighlightExpression[]
+}
 
 export type WritingAnalysisPanelProps = {
-  analysis: WritingAnalysis
+  analysis: LegacyApplicationWritingAnalysis | ContinuationWritingAnalysis
 }
 
 export function WritingAnalysisPanel({ analysis }: WritingAnalysisPanelProps): ReactNode {

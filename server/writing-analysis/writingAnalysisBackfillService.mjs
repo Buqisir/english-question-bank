@@ -6,8 +6,9 @@
  *   validateWritingAnalysisCandidate — hard gate + soft warning
  *   persistWritingAnalysisGroup — write/merge writing-analysis-v1.json envelope
  *
- * MF-1 (I19): persistWritingAnalysisGroup projection branches by taskType;
- *   continuation stores {taskType, modelAnswer, continuationDesign, highlightExpressions}.
+ * persistWritingAnalysisGroup projection branches by taskType:
+ *   application supports optional officialModelAnswer/reviewCard/highlights;
+ *   continuation keeps {taskType, modelAnswer, continuationDesign, highlightExpressions}.
  * MF-2 (I19): vocab gate uses tracked paper-asset.json (materialText+starters) as allowlist;
  *   FAIL-HARD if guokao-vocab-checker skill is absent.
  * SW-2 (I19): continuation soft-warning floor is 120 (application keeps 60).
@@ -50,6 +51,22 @@ function normalizeForSubstring(s) {
 
 function wordCount(text) {
   return String(text || '').trim().split(/\s+/).filter(Boolean).length
+}
+
+function assertValidOfficialModelAnswer(analysis) {
+  if (analysis?.taskType === 'continuation' && analysis.officialModelAnswer !== undefined) {
+    throw new Error('officialModelAnswer is only valid for application writing.')
+  }
+  if (
+    analysis?.taskType === 'application'
+    && analysis.officialModelAnswer !== undefined
+    && (
+      typeof analysis.officialModelAnswer !== 'string'
+      || !analysis.officialModelAnswer.trim()
+    )
+  ) {
+    throw new Error('officialModelAnswer must be a non-empty string when provided.')
+  }
 }
 
 // ─── listWritingAnalysisWork ─────────────────────────────────────────────────
@@ -237,9 +254,9 @@ if suspect:
  * Application checks (plan Locked #5 / I18):
  *   - taskType === 'application'
  *   - modelAnswer non-empty
- *   - highlightExpressions length 3–5
- *   - each text non-empty AND (normalized) is a substring of modelAnswer
- *   - each note non-empty
+ *   - officialModelAnswer optional; when present, a trim-non-empty string
+ *   - highlightExpressions optional for new candidates
+ *   - when present, highlightExpressions keeps the existing 3–5 item checks
  *
  * Continuation checks (I19 MF-1):
  *   - taskType === 'continuation'
@@ -270,6 +287,7 @@ export function validateWritingAnalysisCandidate(candidate) {
   if (!candidate.modelAnswer || typeof candidate.modelAnswer !== 'string' || !candidate.modelAnswer.trim()) {
     throw new Error('modelAnswer is empty or missing.')
   }
+  assertValidOfficialModelAnswer(candidate)
 
   // Hard: continuation-specific structural checks (MF-1)
   if (candidate.taskType === 'continuation') {
@@ -296,39 +314,49 @@ export function validateWritingAnalysisCandidate(candidate) {
         throw new Error(`continuationDesign.paragraphs[${i}] is empty or missing.`)
       }
     }
-  } else if (candidate.reviewCard !== undefined && !isCompleteReviewCard(candidate.reviewCard)) {
-    throw new Error('reviewCard is malformed.')
+  } else {
+    if (candidate.continuationDesign !== undefined) {
+      throw new Error('continuationDesign is only valid for continuation writing.')
+    }
+    if (candidate.reviewCard !== undefined && !isCompleteReviewCard(candidate.reviewCard)) {
+      throw new Error('reviewCard is malformed.')
+    }
   }
 
-  // Hard: highlightExpressions length 3–5
-  const hx = candidate.highlightExpressions
-  if (!Array.isArray(hx)) {
-    throw new Error('highlightExpressions must be an array.')
-  }
-  if (hx.length < 3 || hx.length > 5) {
-    throw new Error(`highlightExpressions must have 3–5 items, got ${hx.length}.`)
-  }
-
-  // Hard: each item text non-empty + is substring of modelAnswer; note non-empty
-  const normAnswer = normalizeForSubstring(candidate.modelAnswer)
-  for (let i = 0; i < hx.length; i++) {
-    const item = hx[i]
-    if (!item || typeof item !== 'object') {
-      throw new Error(`highlightExpressions[${i}] is not an object.`)
+  // Hard: continuation requires highlights; application validates legacy
+  // highlights only when they are present.
+  const highlightExpressions = candidate.highlightExpressions
+  if (candidate.taskType === 'continuation' || highlightExpressions !== undefined) {
+    if (!Array.isArray(highlightExpressions)) {
+      throw new Error('highlightExpressions must be an array.')
     }
-    if (!item.text || typeof item.text !== 'string' || !item.text.trim()) {
-      throw new Error(`highlightExpressions[${i}].text is empty or missing.`)
-    }
-    if (!item.note || typeof item.note !== 'string' || !item.note.trim()) {
-      throw new Error(`highlightExpressions[${i}].note is empty or missing.`)
-    }
-    const normText = normalizeForSubstring(item.text)
-    if (!normAnswer.includes(normText)) {
+    if (highlightExpressions.length < 3 || highlightExpressions.length > 5) {
       throw new Error(
-        `highlightExpressions[${i}].text not found in modelAnswer after normalization.\n` +
-          `  text:   ${JSON.stringify(item.text)}\n` +
-          `  answer: ${JSON.stringify(candidate.modelAnswer).slice(0, 200)}`
+        `highlightExpressions must have 3–5 items, got ${highlightExpressions.length}.`
       )
+    }
+
+    // Hard: each item text non-empty + is substring of modelAnswer; note non-empty
+    const normAnswer = normalizeForSubstring(candidate.modelAnswer)
+    for (let i = 0; i < highlightExpressions.length; i++) {
+      const item = highlightExpressions[i]
+      if (!item || typeof item !== 'object') {
+        throw new Error(`highlightExpressions[${i}] is not an object.`)
+      }
+      if (!item.text || typeof item.text !== 'string' || !item.text.trim()) {
+        throw new Error(`highlightExpressions[${i}].text is empty or missing.`)
+      }
+      if (!item.note || typeof item.note !== 'string' || !item.note.trim()) {
+        throw new Error(`highlightExpressions[${i}].note is empty or missing.`)
+      }
+      const normText = normalizeForSubstring(item.text)
+      if (!normAnswer.includes(normText)) {
+        throw new Error(
+          `highlightExpressions[${i}].text not found in modelAnswer after normalization.\n` +
+            `  text:   ${JSON.stringify(item.text)}\n` +
+            `  answer: ${JSON.stringify(candidate.modelAnswer).slice(0, 200)}`
+        )
+      }
     }
   }
 
@@ -398,8 +426,9 @@ export function isCompleteReviewCard(value) {
  * overwritten. Only the contract fields are stored — audit and other
  * agent-side fields are discarded.
  *
- * MF-1 (I19): projection branches by taskType:
- *   - application: {taskType, modelAnswer, highlightExpressions}
+ * Projection branches by taskType:
+ *   - application: {taskType, modelAnswer, officialModelAnswer?, reviewCard?,
+ *     highlightExpressions?}
  *   - continuation: {taskType, modelAnswer, continuationDesign, highlightExpressions}
  *
  * Envelope merge preserves existing application groups when a continuation
@@ -412,6 +441,7 @@ export function isCompleteReviewCard(value) {
  * @returns {{ filePath: string }}
  */
 export function persistWritingAnalysisGroup({ paperAssetsDir }, work, analysis) {
+  assertValidOfficialModelAnswer(analysis)
   if (
     analysis?.taskType === 'application'
     && analysis.reviewCard !== undefined
@@ -459,12 +489,26 @@ export function persistWritingAnalysisGroup({ paperAssetsDir }, work, analysis) 
       highlightExpressions: analysis.highlightExpressions.map(({ text, note }) => ({ text, note })),
     }
   } else {
-    // application: reviewCard is optional for legacy/non-pilot analyses.
+    // application: new candidates may omit highlights. When updating an
+    // existing application, omission preserves historical highlight objects
+    // byte-for-byte at the JSON value level, including extension fields/order.
+    const existingWriting = existingGroups[groupId]?.writing
+    const highlightExpressions = analysis.highlightExpressions !== undefined
+      ? analysis.highlightExpressions
+      : (
+          existingWriting?.taskType === 'application'
+          && existingWriting.highlightExpressions !== undefined
+            ? existingWriting.highlightExpressions
+            : undefined
+        )
     writingEntry = {
       taskType: analysis.taskType,
       modelAnswer: analysis.modelAnswer,
+      ...(analysis.officialModelAnswer !== undefined
+        ? { officialModelAnswer: analysis.officialModelAnswer }
+        : {}),
       ...(analysis.reviewCard !== undefined ? { reviewCard: analysis.reviewCard } : {}),
-      highlightExpressions: analysis.highlightExpressions,
+      ...(highlightExpressions !== undefined ? { highlightExpressions } : {}),
     }
   }
 
