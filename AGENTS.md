@@ -13,7 +13,8 @@ how earlier work ran, not instructions for new work.
 Before sending any final message:
 
 - end with exactly one exit: a new-top-level-task block, `Next：留在当前任务`,
-  `Next：等待人工 QA`, or `DONE`; a result-only final message is invalid;
+  the canonical owner-QA handoff, or `DONE`; a result-only final message is
+  invalid;
 - if a new top-level task invokes a skill, its copyable block must attach that
   skill in complete Markdown on line one; implementation and fix tasks attach
   `$implement`, while independent review and focused re-review tasks attach
@@ -149,21 +150,26 @@ Fill every task-applicable Spec, Ticket, and Fixed point anchor. Use
 `not applicable` only when an anchor genuinely does not apply; repeat the exact
 paths and commits so the owner does not have to find or remember them.
 
-Human QA is the one intentional pause. Give the owner a checklist of at most
-five actions and wait in the same task:
+Human QA is the one intentional pause. The task that actually hands work to
+owner QA owns QA provisioning first: it verifies the exact worktree, branch,
+reviewed HEAD, and allowed worktree state; starts or reuses the correct local
+service from that worktree; prepares fixtures or real data, login, and route
+parameters; uses an available browser capability to open every required page;
+enters the first checklist item's business and interaction state; and confirms
+the page loaded without an obvious blocking runtime error.
 
-```text
-Next：等待人工 QA
-Worktree: <absolute path>
-Branch: <branch>
-Expected HEAD: <commit>
-Spec: <exact path | not applicable>
-Ticket: <exact path | not applicable>
-Fixed point: <commit | not applicable>
-QA checklist: <inline 3-5 checks or exact path>
-Prompt:
-请按以上清单完成 owner QA。完成后回复“QA 完成”；若失败，逐条描述实际结果。
-```
+This applies equally to throwaway prototypes, production implementation,
+post-fix re-QA, responsive QA, real-data acceptance, and owner QA after a fresh
+review. Opening and smoke-checking the page provisions QA; it does not replace
+the owner's visual or product verdict.
+
+Use the single canonical format in
+`docs/agents/owner-qa-handoff-template.md`. A ready handoff ends with its exact
+request sentence and is itself the required final exit. Do not wrap it in a
+copyable `Next：等待人工 QA` block and do not ask the owner to open another task
+just to begin QA. If login, data, service, port, or browser failure prevents
+opening the page, report `QA Ready: no`, the verified facts, and the shortest
+recovery action; do not claim to be waiting for owner QA.
 
 After `QA 完成`, return the next copyable instruction or `DONE`.
 
@@ -290,6 +296,11 @@ copyrighted passages, or account/session information in reusable memory.
 
 - User-visible changes require real-click browser QA. Static verification is
   not browser QA.
+- Whoever sends the owner-QA handoff must provision and directly open the exact
+  checkable page first, following
+  `docs/agents/owner-qa-handoff-template.md`. The owner does not start services,
+  find URLs or fixtures, reconstruct prototype state, choose a worktree, or
+  assemble route parameters.
 - Local browser QA uses `qa-local-owner` against the worktree's own gitignored
   database. Never place production QA credentials in scripts.
 - Throwaway QA scripts stay in session scratch. Durable behavior contracts may

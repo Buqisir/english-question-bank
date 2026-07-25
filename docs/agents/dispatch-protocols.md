@@ -84,6 +84,12 @@ bare slash command, bare skill name, or equivalent-flow instruction is invalid.
 QA, `DONE`, and other no-skill exits need no attachment. A result-only final
 message without one canonical exit is invalid.
 
+Owner QA is not a dispatched top-level task. The current task that sends the QA
+handoff must provision and directly open the exact page under
+`owner-qa-handoff-template.md`; it may not route service startup, fixtures,
+login, URL discovery, route state, or prototype restoration to the owner or a
+successor.
+
 ## Batch and parallel work
 
 Parallel work is exceptional. Use it only when units are truly independent and

@@ -17,6 +17,7 @@ const agents = readText(ROOT, 'AGENTS.md')
 const steering = readText(ROOT, 'docs/steering/dev-completion-protocol.md')
 const readme = readText(ROOT, 'docs/steering/README.md')
 const template = readText(ROOT, 'docs/agents/dev-completion-report-template.md')
+const ownerQa = readText(ROOT, 'docs/agents/owner-qa-handoff-template.md')
 const workflow = readText(ROOT, 'docs/steering/codex-matt-workflow.md')
 const dispatch = readText(ROOT, 'docs/agents/dispatch-protocols.md')
 const handoff = readText(ROOT, 'docs/cuts/_templates/handoff.md')
@@ -158,15 +159,17 @@ const newTaskFields = [
   'Prompt:',
 ]
 const humanQaFields = [
-  'Next：等待人工 QA',
+  'QA Ready: yes',
   'Worktree:',
   'Branch:',
-  'Expected HEAD:',
+  'HEAD:',
   'Spec:',
   'Ticket:',
   'Fixed point:',
-  'QA checklist:',
-  'Prompt:',
+  'Opened:',
+  'URL:',
+  'Initial state:',
+  'Checklist:',
 ]
 
 section('skill attachment contract')
@@ -391,6 +394,10 @@ section('documents')
 
 assert(template.includes('Ticket Completion Report Template'), 'template exists')
 assert(readme.includes('dev-completion-protocol.md'), 'steering index links protocol')
+assert(
+  readme.includes('owner-qa-handoff-template.md'),
+  'steering index links canonical owner-QA handoff',
+)
 assert(agents.includes('single source of truth'), 'AGENTS.md is read as the project SSOT')
 
 section('short result')
@@ -436,15 +443,71 @@ for (const [name, source] of newTaskDocuments) {
     )
   }
 }
-const qaDocuments = [
+const ownerQaBlock = assertStructuredBlock(
+  'owner QA template',
+  ownerQa,
+  'QA Ready: yes',
+  humanQaFields,
+)
+
+const qaReferenceDocuments = [
   ['AGENTS.md', agents],
   ['completion protocol', steering],
   ['completion template', template],
   ['Matt workflow', workflow],
+  ['cut workflow', cutWorkflow],
+  ['dispatch protocol', dispatch],
+  ['handoff template', handoff],
 ]
-for (const [name, source] of qaDocuments) {
-  assertStructuredBlock(name, source, 'Next：等待人工 QA', humanQaFields)
+for (const [name, source] of qaReferenceDocuments) {
+  assert(
+    source.includes('owner-qa-handoff-template.md'),
+    `${name} references the canonical owner-QA template`,
+  )
+  assert(
+    !fencedBlocks(source).some((block) =>
+      block.includes('Next：等待人工 QA'),
+    ),
+    `${name} does not duplicate the retired copyable owner-QA Next block`,
+  )
 }
+assert(
+  compact(ownerQa).includes('throwaway prototypes') &&
+    compact(ownerQa).includes('production implementation') &&
+    compact(ownerQa).includes('post-fix re-QA') &&
+    compact(ownerQa).includes('responsive checks') &&
+    compact(ownerQa).includes('real-data acceptance') &&
+    compact(ownerQa).includes('independent review passes'),
+  'canonical owner-QA scope covers prototypes, implementation, re-QA, responsive, real-data, and post-review handoffs',
+)
+assert(
+  ownerQa.includes('Opening and smoke-checking the page is provisioning') &&
+    ownerQa.includes('Only the owner may give the visual or product QA verdict'),
+  'page provisioning is distinct from owner acceptance',
+)
+assert(
+  compact(ownerQa).includes('do not ask the owner to open another top-level task') &&
+    dispatch.includes('Owner QA is not a dispatched top-level task'),
+  'owner QA starts in the current task without a new top-level task',
+)
+assert(
+  ownerQa.includes('report `QA Ready: no`') &&
+    ownerQa.includes('do not claim to be waiting for owner QA') &&
+    ownerQa.includes('shortest recovery action'),
+  'failed provisioning cannot claim QA readiness or owner wait',
+)
+assert(
+  ownerQaBlock.endsWith(
+    '请按清单检查。完成后回复“QA 完成”；若失败，请告诉我对应序号和实际现象。',
+  ),
+  'owner-QA handoff ends with the canonical response request',
+)
+assert(
+  !ownerQa.includes('Auto-Next') &&
+    !ownerQa.includes('relay state') &&
+    !ownerQa.includes('state machine'),
+  'owner-QA contract introduces no Auto-Next, relay, or state machine',
+)
 
 assert(
   agents.includes('task-applicable Spec, Ticket, and Fixed point anchor') &&
@@ -496,9 +559,12 @@ const exitContractDocuments = [
 ]
 for (const [name, source] of exitContractDocuments) {
   const normalized = compact(source)
-  assert(source.includes('result-only final message is invalid'), `${name} rejects result-only finals`)
+  assert(normalized.includes('result-only final message is invalid'), `${name} rejects result-only finals`)
   assert(source.includes('Next：留在当前任务'), `${name} includes same-task Next`)
-  assert(source.includes('Next：等待人工 QA'), `${name} includes owner-QA Next`)
+  assert(
+    source.includes('owner-qa-handoff-template.md'),
+    `${name} includes the canonical owner-QA exit`,
+  )
   assert(source.includes('DONE'), `${name} includes terminal DONE`)
   assert(
     /implement(?:ation|s)?.{0,140}fix(?:es)?.{0,140}attach(?:es)? `\$implement`/i.test(

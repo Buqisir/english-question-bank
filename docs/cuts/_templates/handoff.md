@@ -36,6 +36,11 @@ PR:
 Put the instruction to open the new top-level task outside the fence. The
 copyable block below is attachment-first when the task invokes a skill:
 
+This section is not an owner-QA handoff. Owner QA stays in the current task,
+which must provision and open the page using
+`docs/agents/owner-qa-handoff-template.md`; never use this template to defer QA
+setup to a successor.
+
 <!-- skill-required-handoff -->
 ```text
 [$skill-name](/absolute/path/to/skill-name/SKILL.md)

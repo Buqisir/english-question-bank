@@ -26,6 +26,14 @@ File: `dev-completion-protocol.md`
 
 Use it for the short ticket result and the single copyable `Next`.
 
+### Owner QA handoff
+
+File: `../agents/owner-qa-handoff-template.md`
+
+Use it for the single canonical QA provisioning contract and handoff format
+across prototypes, implementation, re-QA, responsive checks, real-data
+acceptance, and post-review owner QA.
+
 ### Issue tracker
 
 File: `../agents/issue-tracker.md`

@@ -91,6 +91,11 @@ Use `/handoff` → `/prototype` when conversation cannot settle a UI, interactio
 or state-model question. Keep the answer, not the prototype code. Snapshot an
 owner-approved visual prototype when implementation must preserve it.
 
+If a prototype task hands the result to owner QA, that same task must provision
+and directly open the exact prototype route and initial interaction state under
+`../agents/owner-qa-handoff-template.md`. Prototype status does not shift page
+setup to the owner or to another task.
+
 ## 6. Implementation contract
 
 Each ticket prompt names:
@@ -141,8 +146,12 @@ User-visible changes require:
 - comparison against the accepted spec/prototype;
 - an owner checklist of at most five actions.
 
-The QA task stays open for the owner's response. `QA 完成` advances to shipping;
-a failure produces one copyable fix prompt.
+Whoever sends the handoff first provisions services, data/login, route
+parameters, and the first checklist state, then opens and smoke-checks the
+exact page. The task stays open for the owner's response; opening the page is
+not the owner's acceptance verdict. `QA 完成` advances to closeout/shipping; a
+failure is recorded before the task decides whether it can fix the issue or
+must return one copyable fix prompt.
 
 ## 9. Ship
 

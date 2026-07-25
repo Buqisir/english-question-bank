@@ -88,20 +88,10 @@ Normal defaults remain `low`, `medium`, or `high`. `xhigh`, `max`, and `ultra`
 are legal only with explicit owner direction and evidence that a lower effort
 was inadequate, as defined by `docs/agents/model-routing.md`.
 
-Wait for owner QA in the current task:
-
-```text
-Next：等待人工 QA
-Worktree: <absolute path>
-Branch: <branch>
-Expected HEAD: <commit>
-Spec: <exact path | not applicable>
-Ticket: <exact path | not applicable>
-Fixed point: <commit | not applicable>
-QA checklist: <inline 3-5 checks or exact path>
-Prompt:
-请按以上清单完成 owner QA。完成后回复“QA 完成”；若失败，逐条描述实际结果。
-```
+Wait for owner QA in the current task only after that task has provisioned and
+opened the exact page. Use the canonical format and failure behavior in
+`../agents/owner-qa-handoff-template.md`; do not return a copyable QA `Next`
+prompt.
 
 Continue the current task:
 
@@ -129,7 +119,12 @@ from a block.
 
 ## QA
 
-For visible work, return `Next：等待人工 QA` with at most five owner checks and
-wait in the same task.
-After `QA 完成`, return the ship/follow-up instruction. A failed QA result
-returns one fresh fix-ticket prompt.
+For visible work, the current task provisions the environment, opens the exact
+page in the first checklist state, returns the canonical owner-QA handoff with
+at most five checks, and waits in the same task. This includes prototype,
+implementation, re-QA, responsive, real-data, and post-review handoffs.
+
+After `QA 完成`, record the result and return the ship/follow-up instruction. A
+failed QA result records the checklist number, actual behavior, and
+reproduction state before deciding whether the current task can fix it or a
+fresh fix task is required.

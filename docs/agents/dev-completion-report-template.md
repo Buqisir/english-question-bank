@@ -63,18 +63,11 @@ Normal defaults are `low`, `medium`, or `high`. `xhigh`, `max`, and `ultra`
 require explicit owner direction and evidence that a lower effort was
 inadequate.
 
-```text
-Next：等待人工 QA
-Worktree: <absolute path>
-Branch: <branch>
-Expected HEAD: <commit>
-Spec: <exact path | not applicable>
-Ticket: <exact path | not applicable>
-Fixed point: <commit | not applicable>
-QA checklist: <inline 3-5 checks or exact path>
-Prompt:
-请按以上清单完成 owner QA。完成后回复“QA 完成”；若失败，逐条描述实际结果。
-```
+For owner QA, provision and open the exact page in the current task, then use
+the single canonical handoff in `owner-qa-handoff-template.md`. The handoff is
+the exit; it is not a copyable `Next` prompt and does not create another task.
+If provisioning fails, report `QA Ready: no` and do not claim to be waiting for
+owner QA.
 
 ```text
 Next：留在当前任务

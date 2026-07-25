@@ -258,22 +258,10 @@ fresh full-range review after every fix.
 
 ## QA and shipping
 
-For a user-visible change, the current task prepares at most five owner checks
-and waits:
-
-```text
-Next：等待人工 QA
-Worktree: <absolute path>
-Branch: <branch>
-Expected HEAD: <commit>
-Spec: <exact path | not applicable>
-Ticket: <exact path | not applicable>
-Fixed point: <commit | not applicable>
-QA checklist: <inline 3-5 checks or exact path>
-Prompt:
-请按下面清单完成 owner QA。完成后回复“QA 完成”；
-若失败，逐条描述实际结果。
-```
+For a user-visible change, the current task provisions and directly opens the
+exact page in the first checklist state, then waits with at most five owner
+checks. The canonical format, scope, and failure behavior live only in
+`../agents/owner-qa-handoff-template.md`; QA is not a new top-level task.
 
 After QA succeeds, the owner manually starts the ship task:
 
