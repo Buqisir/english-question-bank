@@ -4,340 +4,194 @@ This repository builds the English Question Bank workbench at `eqbank.cc`.
 `AGENTS.md` is the single source of truth for current project rules.
 `CLAUDE.md` points here instead of duplicating them.
 
-Historical cut records may describe older PM / PA / DEV / CR / RM relays,
-Auto-Next, subagent dispatch, or `agent-entrypoint.md`. They are evidence of
-how earlier work ran, not instructions for new work.
+Historical cut records may describe retired PM / PA / DEV / CR / RM relays,
+Auto-Next, subagent dispatch, or `agent-entrypoint.md`. They are evidence, not
+instructions for current work.
 
-## Non-negotiable final check
+## Safety and scope
 
-Before sending any final message:
+- Work only inside the worktree, branch, fixed point, spec, and ticket named by
+  the owner. Verify them before writing.
+- Preserve unrelated changes. Do not stash, clean, reset, rebase, merge, or
+  delete another task's work.
+- Do not add unrequested features or revive historical initiatives.
+- Conversation is working memory. Durable scope, decisions, and evidence live
+  in tracked specs, tickets, ADRs, and commits.
+- Never store secrets, account data, private student data, or full copyrighted
+  passages in reusable memory.
 
-- end with exactly one exit: a new-top-level-task block, `Next：留在当前任务`,
-  the canonical owner-QA handoff, or `DONE`; a result-only final message is
-  invalid;
-- if a new top-level task invokes a skill, its copyable block must attach that
-  skill in complete Markdown on line one; implementation and fix tasks attach
-  `$implement`, while independent review and focused re-review tasks attach
-  `$code-review`;
-- keep that ticket's implementation, TDD, ordinary review, and fixes in the
-  same top-level task until it passes, blocks on a real decision, or waits for
-  owner QA. Do not ask the owner to invoke `/tdd` or ordinary `/code-review`
-  separately.
+## Default development path
 
-## Matt-native collaboration
+Use `Ask Matt` when routing is unclear.
 
-The owner is the orchestrator. Agents do bounded work; they do not manage a
-team or create the next top-level task.
+1. Small, clear, reversible work stays in the current task: understand,
+   implement, verify, review, and commit.
+2. A normal feature uses `/grill-with-docs`, `/to-spec`, and `/to-tickets` in
+   one planning context, then one fresh `/implement` task per ticket.
+3. A huge, foggy effort may use `/wayfinder`; each decision ticket still gets
+   a fresh owner-created task.
+4. Hard bugs enter through `/diagnosing-bugs`; raw requests through `/triage`;
+   architecture health work through `/improve-codebase-architecture`.
 
-### The default path
+Wayfinder is exceptional. Do not use it for work that fits one healthy
+planning context.
 
-Use `Ask Matt` as the router when the right flow is unclear.
+## Manual owner boundary
 
-1. A small, clear, local, reversible change stays in the current task:
-   understand it, implement it, verify it, review it, commit it.
-2. A normal feature starts with `/grill-with-docs`. Keep grilling, `/to-spec`,
-   and `/to-tickets` in one planning context while it remains sharp.
-3. Work each implementation ticket in a fresh top-level task with `/implement`.
-   One task owns one ticket. `/implement` may use `/tdd` and `/code-review` as
-   those skills specify, then commits the result.
-4. A huge, foggy effort starts with `/wayfinder`. Charting the map is one task;
-   every decision ticket gets its own fresh task. When the frontier is empty,
-   return to `/to-spec`, `/to-tickets`, and `/implement`.
-5. Hard bugs enter through `/diagnosing-bugs`; raw incoming requests enter
-   through `/triage`; architecture health work enters through
-   `/improve-codebase-architecture`.
+The owner is the orchestrator. An agent does bounded work and never creates,
+opens, runs, supervises, forks, or spawns the next top-level task. A bounded
+worker is allowed only when the active skill or runbook explicitly requires
+one, and it must report back to the current task.
 
-Wayfinder is exceptional. Do not use it for a feature that can be understood
-and planned in one healthy context.
+`dispatch` means creating, opening, running, or supervising a successor task;
+agents are forbidden to dispatch. `handoff` means generating the complete,
+copyable instruction that lets the owner open the declared successor; a
+completed non-terminal ticket must provide it.
 
-### Manual task boundary
+不得创建、打开或执行后继任务；但只要 initiative 尚未闭合，就必须生成并
+返回唯一后继任务的完整 handoff。“不得开始下一票”不得解释为“不得生成下一票
+handoff”。
 
-- Never call `create_thread`, `fork_thread`, `spawn_agent`, or an equivalent
-  mechanism to create the next top-level phase.
-- Never turn a successor phase into a subagent.
-- The owner manually opens every new top-level task after the current task has
-  finished.
-- A Matt skill or product runbook may use bounded internal workers only when it
-  explicitly requires them. `/research` may use a background researcher and
-  `/code-review` may use independent Standards and Spec reviewers. They report
-  back to the current task; they cannot become a successor, supervise later
-  work, or own the initiative.
-- Do not invent PM, PA, verification, CR, QA, or RM relay roles around ordinary
-  work. Add an independent review task only when the risk rules below require
-  one.
+Detailed task-boundary, attachment, blocker, and handoff rules have one owner:
+`docs/agents/dispatch-protocols.md`. The full new-task template exists only
+there. Owner QA has a separate single owner:
+`docs/agents/owner-qa-handoff-template.md`.
 
-### Final-message contract
+## Deterministic completion exit
 
-Finish with a short result summary and exactly one exit:
+Every final response contains a short result and exactly one legal exit:
 
-For every skill-required new top-level task, the copyable block is
-attachment-first. Line one is the complete Markdown attachment for the actual
-entry skill, followed by one blank line and then the canonical fields.
-Implementation or fix tasks attach `$implement`; initial independent reviews
-and focused re-reviews attach `$code-review`. Ask Matt, Wayfinder, grilling, and
-other entry tasks attach their actual entry skill, never a proxy or downstream
-skill. Only attach the entry skill: TDD and ordinary code review owned
-internally by `$implement` do not receive separate attachments.
+| Initiative state | Required exit |
+| --- | --- |
+| Current ticket still has work that can finish here | `Next：留在当前任务` |
+| Current ticket is complete and a required successor remains | Complete new top-level task handoff matching `Next on PASS` |
+| The page is provisioned and waiting for owner acceptance | Canonical owner-QA handoff |
+| All tickets, review, owner QA, and release closeout are complete | `DONE` |
 
-A bare `/implement`, bare `$implement`, or instruction to run an equivalent
-flow is not a skill attachment. Invocation availability and handoff
-referenceability are separate:
+`Terminal: no` makes `DONE` and “wait for the owner to arrange the next step”
+illegal. A result-only final is invalid. Before answering, read the ticket's
+`Terminal` and `Next on PASS`; do not infer a successor from conversation when
+the durable route exists.
 
-- Claim a current-task skill invocation only when the skill is in the current
-  active catalog or the owner explicitly attached that `SKILL.md` in the
-  current task. Otherwise do not claim that it ran.
-- For a manual next-top-level-task attachment, resolve a candidate from an
-  owner-provided path or an existing global/project skill bridge. Verify that
-  there is exactly one non-conflicting candidate, its `SKILL.md` exists and is
-  readable, its path is a real absolute path, and its frontmatter `name`
-  matches the requested skill name. Report ambiguity instead of guessing.
-- `disable-model-invocation: true` may keep a skill out of the automatic
-  catalog but does not prevent a verified explicit-only skill from being
-  referenced in a handoff.
-- A handoff reference is not a current-task invocation and does not authorize
-  the agent to create the next task. The owner still opens it manually and
-  pastes the attachment-first block.
+Implementation and fix handoffs attach `$implement`. Initial independent
+reviews and focused re-reviews attach `$code-review`. Only claim a skill was
+invoked in the current task when it was active or owner-attached. A verified
+explicit-only skill may still be referenced for a future handoff. The detailed
+availability rules and the only attachment-first template are in
+`docs/agents/dispatch-protocols.md`.
 
-Use `SKILL UNAVAILABLE` only when the current task must invoke a skill that is
-neither attached nor active, or when no unique verified real path can be
-resolved for a required handoff. Do not use it merely because an otherwise
-verified skill is explicit-only or absent from the automatic catalog. Tracked
-examples use only generic paths. A non-Codex harness may use the documented
-natural-language equivalent only after explicitly declaring
-`NATURAL-LANGUAGE FALLBACK`.
+Keep a ticket's implementation, TDD, ordinary Standards + Spec review, fixes,
+and commit in the same top-level task. Do not hand ordinary TDD or review back
+to the owner as separate work.
 
-When the next step needs a new top-level task, put
-`请新开顶层任务，并将下面代码块直接粘贴：` outside the fence. The copyable
-block uses this shape:
+## Worktrees and durable context
 
-<!-- skill-required-handoff -->
-```text
-[$skill-name](/absolute/path/to/skill-name/SKILL.md)
-
-Worktree: <absolute path>
-Branch: <branch>
-Expected HEAD: <commit>
-Spec: <exact path | not applicable>
-Ticket: <exact path | not applicable>
-Fixed point: <commit | not applicable>
-Model: <model>
-Effort: <low | medium | high | xhigh | max | ultra>
-Prompt:
-<complete copyable prompt>
-```
-
-QA, `DONE`, and other exits that invoke no skill do not require an attachment.
-
-If the next instruction belongs in the current task:
-
-```text
-Next：留在当前任务
-Prompt:
-<complete copyable prompt>
-```
-
-If the initiative is finished, end with:
-
-```text
-DONE
-```
-
-Do not merely name a skill or ticket in a new-task block. Include the exact
-artifact, worktree, branch, expected commit, and prompt so the owner does not
-have to remember routing details.
-
-Fill every task-applicable Spec, Ticket, and Fixed point anchor. Use
-`not applicable` only when an anchor genuinely does not apply; repeat the exact
-paths and commits so the owner does not have to find or remember them.
-
-Human QA is the one intentional pause. The task that actually hands work to
-owner QA owns QA provisioning first: it verifies the exact worktree, branch,
-reviewed HEAD, and allowed worktree state; starts or reuses the correct local
-service from that worktree; prepares fixtures or real data, login, and route
-parameters; uses an available browser capability to open every required page;
-enters the first checklist item's business and interaction state; and confirms
-the page loaded without an obvious blocking runtime error.
-
-This applies equally to throwaway prototypes, production implementation,
-post-fix re-QA, responsive QA, real-data acceptance, and owner QA after a fresh
-review. Opening and smoke-checking the page provisions QA; it does not replace
-the owner's visual or product verdict.
-
-Use the single canonical format in
-`docs/agents/owner-qa-handoff-template.md`. A ready handoff ends with its exact
-request sentence and is itself the required final exit. Do not wrap it in a
-copyable `Next：等待人工 QA` block and do not ask the owner to open another task
-just to begin QA. If login, data, service, port, or browser failure prevents
-opening the page, report `QA Ready: no`, the verified facts, and the shortest
-recovery action; do not claim to be waiting for owner QA.
-
-After `QA 完成`, return the next copyable instruction or `DONE`.
-
-### Context hygiene
-
-- Conversation is working memory; files and git are durable memory.
-- Multi-session work lives under `docs/cuts/<feature>/` as `spec.md`,
-  `tickets/`, optional Wayfinder artifacts, research assets, and QA evidence.
+- Multi-ticket initiatives use one explicit feature worktree sequentially.
+  Only one top-level task writes it at a time.
+- Before handoff, commit the bounded result, leave the worktree in the allowed
+  state, and report the exact absolute path, branch, and HEAD.
+- Store multi-session work under `docs/cuts/<feature>/` as `spec.md`,
+  `tickets/`, optional Wayfinder artifacts, research, and QA evidence.
   `.scratch/` is same-session scratch only.
-- A multi-ticket initiative uses one explicit feature worktree sequentially.
-  Before handing off, commit the current result, leave the worktree clean, and
-  put its exact path, branch, and HEAD in `Next`. Only one top-level task writes
-  that worktree at a time.
-- At a phase boundary, continue in the current task while the context remains
-  sharp or the remainder is simple. If it cannot continue: clear only when the
-  context is disposable; use `/handoff` only when crossing to another agent,
-  directory, or colleague; use a bounded subagent only for AFK work that
-  reports back here; otherwise compact the valuable context and continue the
-  same ticket. Repeated settled questions, forgotten scope, mixed tickets,
-  rereading without progress, or more process talk than product work are the
-  behavioral stop signals.
-- Do not treat a numeric context-window estimate as a hard threshold. The
-  behavior above is the stop signal.
+- If context remains sharp, continue the current ticket. If it does not,
+  compact valuable context or make a bounded handoff; do not invent a relay.
 
-### Model guidance
+## Risk, review, and release
 
-`docs/agents/model-routing.md` gives recommendations, not a dispatch state
-machine. Planning and independent review use the stronger reasoning route;
-ordinary research and implementation use the economical route. Put the
-recommendation in `Next`; the owner selects it when opening the task.
-
-## Risk and release
-
-Process strength follows actual risk, not diff size or anxiety.
+Process strength follows actual risk.
 
 - Small and reversible: `/implement` in the current task is enough.
-- Normal feature: spec when needed, tickets when multi-session, one fresh
-  `/implement` task per ticket, then owner QA if user-visible.
-- High risk: schema or data-contract semantics, migrations, permissions,
-  authentication, persistence, PaperSurface anchors, print / PDF / DOCX,
-  production configuration, cross-cut architecture, or an irreversible
-  decision. Record the decision in the spec or ADR and run one fresh top-level
-  `$code-review` lineage against a fixed point before shipping.
-- A prototype already accepted point-by-point by the owner is the visual
-  contract. Preserve its layout, interaction, content granularity, and data
-  mapping; do not quietly reinterpret it in implementation.
+- Normal feature: use a spec when needed, tickets when multi-session, and owner
+  QA when user-visible.
+- High risk includes schema or data-contract semantics, migrations,
+  permissions, authentication, persistence, PaperSurface anchors, print/PDF/
+  DOCX, production configuration, cross-cut architecture, and irreversible
+  decisions. Record the decision and run one fresh top-level `$code-review`
+  lineage against a fixed point before shipping.
+- An owner-accepted prototype is the visual contract. Preserve its layout,
+  interaction, content granularity, and data mapping.
 
 Before merging to `main`:
 
-- the implementation task must have run the narrowest relevant checks;
-- a high-risk change must have passed its independent top-level review;
-- a user-visible change must have passed real browser QA and owner QA;
-- `pnpm -C app run verify:all` or the PR CI must prove the full suite;
-- after merge, confirm the `main` CI run is green;
+- run the narrowest relevant checks;
+- pass the required independent review for high-risk work;
+- pass real-browser and owner QA for user-visible work;
+- prove the full suite with `pnpm -C app run verify:all` or PR CI;
+- after merge, confirm `main` CI is green;
 - update `docs/STATUS.md` in at most five lines for material releases.
 
-There is no standing separate verification task, RM artifact gate, live-state
-file, dispatch ledger, or automatic successor. Missing or stale evidence is
-handled by rerunning the needed check, not by creating another role.
+An initial independent review uses the implementation base as fixed point. A
+focused re-review uses the previously reviewed HEAD and checks only prior Must
+Fixes, the fix diff, and direct regressions. One fresh review means one review
+lineage. Once no Must Fix remains, proceed to QA or release rather than opening
+another full review.
 
-### Independent review lineage
+Prefer behavioral verification at a public seam. Source-regex assertions are a
+last resort. Before deleting shared CSS, inventory every producer and naming
+collision.
 
-- An initial independent review uses the implementation base as `Fixed point`
-  and reviews the complete range through the implementation `Expected HEAD`.
-- A focused re-review uses the previously reviewed HEAD as `Fixed point` and
-  the new fix HEAD as `Expected HEAD`.
-- A focused re-review checks only the prior Must Fix findings, the current fix
-  diff, and direct regressions. It does not reopen already reviewed history.
-- Continue blocking only for a concrete, substantive defect introduced or left
-  by the fix that makes the current implementation wrong, unsafe, or contrary
-  to the accepted spec. Wording, formatting, historical narrative,
-  theoretical boundaries, and unrelated improvements are not Must Fixes.
-- When no Must Fix remains, proceed immediately to owner QA or release. Do not
-  open another CR. “One fresh independent review” means one review lineage,
-  not a new full-range review after every fix.
+## Owner QA
 
-Prefer behavioral verification at a public seam. New source-regex assertions
-are a last resort. Before deleting shared CSS, inventory every producer of each
-class name and inspect naming collisions.
+User-visible changes require real-click browser QA. The task sending the QA
+handoff must provision and open the exact checkable state; the owner does not
+start services, find fixtures or URLs, reconstruct state, or choose a
+worktree. Follow `docs/agents/owner-qa-handoff-template.md`.
 
-## Working memory
+Local QA uses `qa-local-owner` with the worktree's gitignored database. Keep
+throwaway scripts in session scratch; durable behavior contracts may live
+under `docs/cuts/<feature>/qa/`. The owner has final product and visual
+acceptance.
 
-Harness memory is session-scoped and is never the source of project state.
-Durable decisions live in tracked files, commits, or ADRs. `docs/STATUS.md` is
-the project-state summary. Never store secrets, private student data, full
-copyrighted passages, or account/session information in reusable memory.
+## Product boundaries
 
-## Product posture
-
-- Preserve the core model:
-  `Source -> Passage -> Question Group -> Question -> Paper Set -> Export`.
-- Prefer teacher-operable workflows over abstract completeness.
-- The product is launched with invite-only login, owner/member roles,
-  per-user data isolation, a global AI daily limit, one HK host, and R2 backup.
-  Current server facts live in
-  `docs/cuts/launch-deploy/go-live-record.md`.
-- Do not run `scripts/pull-run-push.mjs` against production or change
-  production configuration unless that record is current.
-- Content production belongs in the backend agent and import/authoring
-  pipeline. The website consumes content: find, read, assemble, export. Do not
-  restore website import UI.
+- Preserve `Source -> Passage -> Question Group -> Question -> Paper Set ->
+  Export`.
+- Prefer teacher-operable workflows and passage-first teaching flow.
+- AI-derived information must serve a named teacher task and require human
+  confirmation.
+- Student versions hide answers and explanations; teacher versions include
+  them.
+- Paper authoring, PaperSurface, print/export, and import display follow
+  `docs/product/exam-paper-format-standards.md`.
+- PaperSurface insight defaults to a short passage map. Dense diagnostics need
+  separate product justification.
+- Content production belongs in the backend agent/import pipeline. The website
+  consumes content; do not restore website import UI.
 - Paper import starts at `docs/import/agent-runbook.md` and follows
   `docs/product/nck1-paper-standard.md`.
-- Open Design is for visual prototypes. Production code belongs under `app/`.
+- Open Design is for prototypes. Production UI belongs under `app/`.
 
-## Product and teaching boundaries
+Read `docs/steering/README.md` and the relevant steering note before product or
+UI decisions. UI direction follows `PRODUCT.md` and
+`docs/agents/ui-collaboration.md`. Visual polish must not alter domain, schema,
+adapters, PaperSurface, server code, paper assets, or print/export behavior.
+Contract-file writes remain guarded by
+`.claude/hooks/guard-contract-files.mjs`.
 
-- Read `docs/steering/README.md` and the relevant steering note before product
-  or UI decisions.
-- Before showing AI-derived information, name the teacher task it serves.
-  “The data exists” is not a product reason.
-- Paper authoring, PaperSurface, print/export, and import display obey
-  `docs/product/exam-paper-format-standards.md`.
-- PaperSurface insight defaults to a short passage map. Dense vocabulary,
-  grammar, evidence, difficulty, or AI diagnostic dashboards require a
-  separate product justification.
-- Evidence and classroom usability come before feature excitement.
-- Preserve passage-first teaching flow.
-- AI suggestions require human confirmation.
-- Student versions hide answers and explanations; teacher versions include
-  them for review and teaching.
+## Production posture
 
-## Browser and owner QA
-
-- User-visible changes require real-click browser QA. Static verification is
-  not browser QA.
-- Whoever sends the owner-QA handoff must provision and directly open the exact
-  checkable page first, following
-  `docs/agents/owner-qa-handoff-template.md`. The owner does not start services,
-  find URLs or fixtures, reconstruct prototype state, choose a worktree, or
-  assemble route parameters.
-- Local browser QA uses `qa-local-owner` against the worktree's own gitignored
-  database. Never place production QA credentials in scripts.
-- Throwaway QA scripts stay in session scratch. Durable behavior contracts may
-  live under `docs/cuts/<feature>/qa/`.
-- The owner has final product and visual acceptance and may veto a shipped
-  direction.
-
-## UI boundary
-
-- UI direction follows `PRODUCT.md` and
-  `docs/agents/ui-collaboration.md`.
-- Do not change domain, schema, adapters, PaperSurface, server code, verify
-  scripts, paper assets, or print/export behavior as a side effect of visual
-  polish.
-- Contract-file writes remain guarded by
-  `.claude/hooks/guard-contract-files.mjs`. Only unlock them when the accepted
-  spec assigns that scope.
+The product is live with invite-only login, owner/member roles, per-user data
+isolation, a global AI daily limit, one HK host, and R2 backup. Current server
+facts live in `docs/cuts/launch-deploy/go-live-record.md`. Do not run
+`scripts/pull-run-push.mjs` against production or change production
+configuration unless that record is current and the task authorizes it.
 
 ## Repository facts
 
-- The remote is named `github`, not `origin`.
+- Remote: `github` (not `origin`).
 - `app/` uses pnpm; `server/` uses npm.
-- A fresh worktree runs `bash scripts/setup-worktree.sh` before implementation.
-- Use one-line commit messages: scope plus one clear sentence.
-- Preserve unrelated user changes in dirty worktrees.
+- Fresh worktree setup: `bash scripts/setup-worktree.sh`.
+- Commit messages are one line: scope plus one clear sentence.
+- Preserve unrelated changes in dirty worktrees.
 
 ## Matt source
 
-The current collaboration router is `Ask Matt`. Matt skills are supplied by the
-user's global skill collection; this repository does not vendor copies because
-vendored copies drift. Apply the invocation and handoff-reference rules above
-before reporting `SKILL UNAVAILABLE`; never infer current-task invocation from
-a handoff attachment. A non-Codex harness must declare
-`NATURAL-LANGUAGE FALLBACK` before following the equivalent flow in
+Matt skills come from the owner's global collection; the repository does not
+vendor copies. `Ask Matt` is the current router. A non-Codex harness must
+declare `NATURAL-LANGUAGE FALLBACK` before following
 `docs/steering/codex-matt-workflow.md`; never install infrastructure
 automatically.
 
-The Coding Brain knowledge source is
-`/Users/huangxuewei/Coding Brain/wiki/overview.md`. It is advisory and local;
-remote agents must not depend on the absolute path.
+The advisory Coding Brain source is
+`/Users/huangxuewei/Coding Brain/wiki/overview.md`; remote agents must not
+depend on that absolute path.

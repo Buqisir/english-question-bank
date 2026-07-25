@@ -24,7 +24,9 @@ risk, then choose the smallest sufficient path.
 
 File: `dev-completion-protocol.md`
 
-Use it for the short ticket result and the single copyable `Next`.
+Use it for the short ticket result. Detailed dispatch/handoff boundaries,
+deterministic exit selection, and the only complete new-task handoff template
+live in `../agents/dispatch-protocols.md`.
 
 ### Owner QA handoff
 

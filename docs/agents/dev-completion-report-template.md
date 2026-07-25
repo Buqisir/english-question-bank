@@ -12,69 +12,14 @@ Risks: none | <short list>
 
 Use verify summaries only. No raw command logs or implementation diary.
 
-End with exactly one of:
+After the summary, return exactly one exit chosen from the ticket's `Terminal`
+and `Next on PASS`. The detailed decision policy, skill-attachment rules, and
+only complete new-task template live in `dispatch-protocols.md`.
 
-A result-only final message is invalid. If the next task implements or fixes an
-implementation ticket, attach `$implement` as the entry skill. Initial
-independent review and focused re-review tasks attach `$code-review`. Only the
-entry skill is attached; `$implement` owns TDD, relevant checks, ordinary
-Standards + Spec review, fixes, and commit.
+- unfinished current-ticket work stays in `Next：留在当前任务`;
+- a passed non-terminal ticket returns its declared successor handoff;
+- provisioned user-visible work uses `owner-qa-handoff-template.md`;
+- `DONE` is reserved for a fully closed initiative.
 
-For a new top-level task, put the instruction to open the task outside the
-fence. If the task invokes a skill, line one is its complete Markdown
-attachment, followed by one blank line:
-
-<!-- skill-required-handoff -->
-```text
-[$skill-name](/absolute/path/to/skill-name/SKILL.md)
-
-Worktree: <absolute path>
-Branch: <branch>
-Expected HEAD: <commit>
-Spec: <exact path | not applicable>
-Ticket: <exact path | not applicable>
-Fixed point: <commit | not applicable>
-Model: <model>
-Effort: <low | medium | high | xhigh | max | ultra>
-Prompt:
-<complete copyable prompt>
-```
-
-Do not confuse current-task invocation with handoff referenceability. Claim an
-invocation only when the skill is active or owner-attached in this task. A
-handoff may instead use an owner-provided path or an existing global/project
-skill bridge, including an explicit-only skill with
-`disable-model-invocation: true`, after verifying exactly one non-conflicting
-real absolute, readable `SKILL.md` whose frontmatter `name` matches.
-
-The handoff reference does not mean this task invoked the skill and does not
-authorize creation of the next task. Report ambiguity rather than guessing.
-Use `SKILL UNAVAILABLE` only when immediate invocation is required but the
-skill is neither active nor attached, or no unique verified handoff path
-exists. Preserve `NATURAL-LANGUAGE FALLBACK` for a declared non-Codex
-equivalent. A slash command, bare skill name, or “equivalent flow” is not an
-attachment. QA, `DONE`, and other no-skill exits omit the attachment.
-
-Fill all applicable anchors for the task type. Use `not applicable` only when
-an anchor genuinely does not apply. Repeat exact paths and commits; the owner
-should not have to find or remember any artifact.
-
-Normal defaults are `low`, `medium`, or `high`. `xhigh`, `max`, and `ultra`
-require explicit owner direction and evidence that a lower effort was
-inadequate.
-
-For owner QA, provision and open the exact page in the current task, then use
-the single canonical handoff in `owner-qa-handoff-template.md`. The handoff is
-the exit; it is not a copyable `Next` prompt and does not create another task.
-If provisioning fails, report `QA Ready: no` and do not claim to be waiting for
-owner QA.
-
-```text
-Next：留在当前任务
-Prompt:
-<complete copyable prompt>
-```
-
-```text
-DONE
-```
+Do not restate the successor ticket. Link it and use the short canonical prompt
+defined by `dispatch-protocols.md`.
