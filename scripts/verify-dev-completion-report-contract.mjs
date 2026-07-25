@@ -168,9 +168,19 @@ function completionExitErrors({
   const normalizedNextOnPass = nextOnPass?.trim().toLowerCase()
   const routesToOwnerQa = normalizedNextOnPass === 'owner qa'
   const routesToDone = normalizedNextOnPass === 'done'
+  const legalExitKind = !currentTaskComplete
+    ? 'same-task'
+    : initiativeClosed
+      ? 'done'
+      : ownerQaPending
+        ? 'owner-qa'
+        : 'new-task'
 
   if (!terminal && !nextOnPass?.trim()) {
     errors.push('Terminal: no requires Next on PASS')
+  }
+  if (legalExitKind === 'new-task' && !nextOnPass?.trim()) {
+    errors.push('completed ticket requires Next on PASS')
   }
   if (ownerQaPending && !currentTaskComplete) {
     errors.push(
@@ -202,14 +212,6 @@ function completionExitErrors({
     return errors
   }
 
-  const legalExitKind = !currentTaskComplete
-    ? 'same-task'
-    : initiativeClosed
-      ? 'done'
-      : ownerQaPending
-        ? 'owner-qa'
-        : 'new-task'
-
   if (exit.kind !== legalExitKind) {
     errors.push(`only legal exit is ${legalExitKind}`)
   }
@@ -220,8 +222,7 @@ function completionExitErrors({
     errors.push('completed ticket requires its successor handoff')
   }
   if (
-    !terminal &&
-    currentTaskComplete &&
+    legalExitKind === 'new-task' &&
     exit.kind === 'new-task' &&
     exit.target !== nextOnPass
   ) {
@@ -478,6 +479,29 @@ assert(
     exit: { kind: 'new-task', target: '' },
   }).some((error) => error.includes('Terminal: no requires Next on PASS')),
   'Terminal: no ticket requires a non-empty Next on PASS',
+)
+assert(
+  completionExitErrors({
+    terminal: true,
+    currentTaskComplete: true,
+    initiativeClosed: false,
+    nextOnPass: '',
+    exit: { kind: 'new-task', target: '' },
+  }).some((error) => error.includes('completed ticket requires Next on PASS')),
+  'Terminal: yes open initiative requires a non-empty Next on PASS',
+)
+assert(
+  completionExitErrors({
+    ...successorRoute,
+    terminal: true,
+    exit: {
+      kind: 'new-task',
+      target: 'docs/cuts/example/tickets/TICKET-03.md',
+    },
+  }).some((error) =>
+    error.includes('successor handoff must match Next on PASS'),
+  ),
+  'Terminal: yes open initiative rejects a mismatched successor handoff',
 )
 assert(
   ticketRouteErrors('Terminal: no\n').some((error) =>
