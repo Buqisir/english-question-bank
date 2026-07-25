@@ -1,6 +1,6 @@
 # 01 — 完形填空编译器核心规范化规则
 
-Status: ready
+Status: done
 Blocked by: None
 Spec: `docs/cuts/paper-normalization/spec.md`
 Worktree: `/Users/huangxuewei/Projects/wt-paper-normalization-20260724`
@@ -30,16 +30,16 @@ Initiative fixed point: `515a0f1317c95d197c98a81a36ce425b4948bde2`
 
 ## 验收
 
-- [ ] 真实 `paper-2026-i` cloze 41–55 的 marker/question/blank identity
+- [x] 真实 `paper-2026-i` cloze 41–55 的 marker/question/blank identity
       数量相等且一一对应；缺省的 optional blank records 可接受，q41
       canonical stem 为 `null`。
-- [ ] Options、普通 prose、group/paragraph/question/blank ids 与 source
+- [x] Options、普通 prose、group/paragraph/question/blank ids 与 source
       order 不变，raw marker 不进入 text node。
-- [ ] Deep-frozen source 运行后字节不变；同一输入重复运行的 semantic
+- [x] Deep-frozen source 运行后字节不变；同一输入重复运行的 semantic
       output、fingerprint 与 digest 稳定。
-- [ ] `1941`、`41 years`、`Question 41 asks ...`、`41. What ...` 不被当作
+- [x] `1941`、`41 years`、`Question 41 asks ...`、`41. What ...` 不被当作
       presentation stem 或 marker。
-- [ ] 缺 marker、重复 marker/questionNo、number/blankId mismatch、
+- [x] 缺 marker、重复 marker/questionNo、number/blankId mismatch、
       unsupported marker 与 overlapping span 均返回结构化 `needs_review`。
 
 ## 验证
@@ -62,6 +62,17 @@ Initiative fixed point: `515a0f1317c95d197c98a81a36ce425b4948bde2`
   修复与一个 clean commit。
 - Ticket 状态改为 `done`，并填写以下结果；不得开始 Ticket 02。
 
-Commit:
+Commit: this Ticket 01 checkpoint (exact SHA in handoff)
 Verify:
+- focused compiler 0; paper-asset v1 0; paper-assets consistency 0;
+- cloze import 0; blank rendering 0; paper browse 0;
+- app build 0; git diff --check 0;
+- final verify:all 0 (85 pass / 1 declared skip / 0 fail).
 Notes:
+- Optional cloze blank records may be absent and are identity-checked when present.
+- Standards review had only the pre-closeout ticket-result finding. Spec P1 for
+  stray unsupported marker-like text was fixed test-first; focused re-review passed.
+- The first full verify exited 1 because the new CI verifier lacked its README
+  registration; registration was added and the final rerun exited 0.
+- Declared skip: verify-i16a-teaching-dimension-search.mjs (off-repo fixture absent).
+- No browser or owner QA required for this ticket.
