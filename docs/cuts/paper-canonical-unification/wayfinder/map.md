@@ -1,7 +1,7 @@
 # EQB 试卷 Canonical 大一统 — Wayfinder Map
 
 Status: charted
-Next on PASS: `docs/cuts/paper-canonical-unification/wayfinder/tickets/11-continuation-writing-canonical-variant.md`
+Next on PASS: `docs/cuts/paper-canonical-unification/wayfinder/tickets/12-listening-raw-inactive-slot.md`
 Terminal: no
 
 ## Notes
@@ -49,6 +49,7 @@ Terminal: no
 - [定义七选五 canonical variant 与双卷 proof 合同](tickets/08-seven-choices-canonical-variant.md) — 以五组 Question/Blank identity、一组 shared A–G bank 与跨 renderer occurrence conformance 消除 raw-marker 回编及重复/嵌套 bank。
 - [定义阅读 canonical variant 与图表 proof 合同](tickets/09-reading-canonical-variant.md) — 以单一有序 rich-content stream、Reading 标题角色、原生表格/图像与共享 A–D plan 消除 marker/flattened 回编并锁定四面 semantic/anchor parity。
 - [定义应用文 canonical variant 与 given skeleton 合同](tickets/10-application-writing-canonical-variant.md) — 以完整 prompt 语义视图、source-provided Given Skeleton 与单一 answer-region occurrence 禁止 genre/background 猜骨架并锁定四面 parity。
+- [定义读后续写 canonical variant 与 starters 合同](tickets/11-continuation-writing-canonical-variant.md) — 以 two-starter / plot-led 两个 exact family contract、source-proven 零 starter 与单一 answer-region occurrence 锁定三面 parity 并 fail closed 三条目污染。
 
 ## Fog
 
