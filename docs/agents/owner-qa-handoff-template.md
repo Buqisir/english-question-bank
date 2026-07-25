@@ -53,8 +53,8 @@ Checklist:
 请按清单检查。完成后回复“QA 完成”；若失败，请告诉我对应序号和实际现象。
 ```
 
-This handoff is the canonical owner-QA exit. Do not wrap it in
-`Next：等待人工 QA`, do not ask the owner to copy a prompt, and do not ask the
+This handoff is the canonical owner-QA exit. Do not wrap it in a retired
+copyable QA `Next`, do not ask the owner to copy a prompt, and do not ask the
 owner to open another top-level task merely to begin QA.
 
 If provisioning fails because of login, missing data, service failure, port

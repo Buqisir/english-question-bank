@@ -25,6 +25,8 @@ Each ticket contains:
 
 Status: ready | in-progress | done | blocked
 Blocked by: <ticket titles or None>
+Next on PASS: <ticket path | independent review | owner QA | release | DONE>
+Terminal: yes | no
 
 ## What to build
 
@@ -43,7 +45,9 @@ Notes:
 
 Tickets are worked blockers-first. The owner manually starts one fresh
 top-level `/implement` task per ready ticket. The implementation task updates
-only its ticket status/result plus the code it owns.
+only its ticket status/result plus the code it owns. New tickets use
+`Next on PASS` and `Terminal` to declare their deterministic completion route;
+the detailed exit policy lives in `dispatch-protocols.md`.
 
 ## Wayfinder
 

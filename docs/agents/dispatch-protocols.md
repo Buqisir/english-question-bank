@@ -1,43 +1,73 @@
-# Manual task routing
+# Manual task routing and completion exits
 
-The owner is the only dispatcher.
+This file is the single canonical owner of EQB's detailed top-level task
+boundary, completion-exit policy, and new-task handoff format.
 
-## Top-level tasks
+## Dispatch and handoff
 
-An agent must not create, fork, spawn, or supervise the next top-level task.
-It completes its bounded work, commits durable results, leaves the worktree
-clean, and returns one copyable `Next`.
+`dispatch` means creating, opening, starting, running, supervising, or waiting
+on a successor top-level task. Only the owner dispatches.
 
-A subagent cannot be a successor phase. Bounded workers explicitly required by
-a current Matt skill or product runbook are allowed only inside that bounded
-operation and return to the current task.
+`handoff` means returning one complete, copyable instruction for the owner to
+open the required successor. Generating a handoff does not create or run the
+successor.
 
-## Sequential feature worktree
+An agent must not dispatch a successor, but a completed ticket must hand off
+its declared successor whenever the initiative remains open. “Do not start the
+next ticket” never means “omit the next-ticket handoff.”
 
-Multi-ticket work uses one explicit feature worktree sequentially:
+Subagents cannot be successor phases. Bounded workers explicitly required by a
+current skill or runbook may work only inside that operation and must report
+back to the current task.
 
-1. The planning task records the absolute worktree path, branch, and clean HEAD.
-2. The owner waits for that task to finish.
-3. The owner opens the next top-level task and pastes the returned `Next`.
-4. The next task verifies `pwd`, repository root, branch, clean status, and
-   expected HEAD before writing.
-5. It completes one ticket, commits, and returns the new exact HEAD.
+## Durable route on every ticket
 
-Never let two top-level tasks write the same worktree concurrently. No
-lifecycle file, activation commit, release commit, claim ledger, or task
-acknowledgement is required; the human task boundary is the lock.
-
-If the expected worktree, branch, or HEAD does not match, stop without writing:
+New tickets declare:
 
 ```text
-BLOCKED — worktree/branch/HEAD does not match the handoff.
+Next on PASS: <ticket path | independent review | owner QA | release | DONE>
+Terminal: yes | no
 ```
 
-## New top-level task
+`Terminal: no` requires a non-empty `Next on PASS`. The agent reads these
+fields before its final response and does not improvise the route from chat
+history. `Terminal: yes` permits `DONE` only after every ticket, required
+review, owner QA, and release closeout is actually complete.
 
-Put the instruction to open the task outside the fence. A skill-required task
-starts with the complete Markdown attachment for its actual entry skill, then
-one blank line:
+## Exactly one completion exit
+
+Choose from current initiative state:
+
+| State | Only legal exit |
+| --- | --- |
+| Work remains on the current ticket and can be completed here | `Next：留在当前任务` with a concrete prompt |
+| Current ticket passed and `Next on PASS` names a required successor | New top-level task handoff below, matching that route |
+| The exact page is provisioned and owner acceptance is pending | `owner-qa-handoff-template.md` |
+| The whole initiative, including review, QA, and release closeout, is complete | `DONE` |
+
+A result-only final is invalid. For `Terminal: no`, both `DONE` and a
+same-task response that merely waits for the owner to arrange the next step
+are invalid.
+
+If the current ticket is blocked:
+
+- use `SCOPE UNCLEAR` when a new owner product decision is required;
+- use `SPEC CONTRADICTS` when controlling artifacts conflict;
+- use `BRANCH CONFLICT` when worktree, branch, or HEAD differs from handoff;
+- state the verified blocker and shortest owner action;
+- use a new-task handoff only when the durable route or a real work boundary
+  requires one; otherwise remain in the current task.
+
+Do not repair a blocker by creating a coordinator, relay state, dispatch
+ledger, automatic successor, or new workflow platform.
+
+## New top-level task handoff
+
+Write `请新开顶层任务，并将下面代码块直接粘贴：` outside the fence. For a
+skill-required successor, line one is the complete Markdown attachment for its
+actual entry skill, followed by one blank line.
+
+This is the only complete new-task handoff template:
 
 <!-- skill-required-handoff -->
 ```text
@@ -52,63 +82,85 @@ Fixed point: <commit | not applicable>
 Model: <model>
 Effort: <low | medium | high | xhigh | max | ultra>
 Prompt:
-<complete prompt>
+Implement and only implement the linked ticket. Treat that ticket as the durable source of scope, acceptance, verification, boundaries, and Next on PASS; finish with the exit it declares.
 ```
 
-Fill all applicable anchors for the task type. Use `not applicable` only for an
-anchor that genuinely does not apply. The block and prompt must repeat every
-relevant exact artifact and allowed action; the owner should not have to find or
-remember them. Normal effort defaults are `low`/`medium`/`high`;
-`xhigh`/`max`/`ultra` require explicit owner direction and lower-effort
-inadequacy evidence under `model-routing.md`.
+Fill every applicable anchor. Use `not applicable` only when an anchor truly
+does not apply. Repeat exact paths and commits so the owner does not have to
+find or remember them.
 
-Implementation and fix tasks attach `$implement`. Independent review and
-focused re-review tasks attach `$code-review`. Ask Matt, Wayfinder, grilling,
-and other tasks attach the actual entry skill. Invocation availability and
-handoff referenceability are separate: claim current-task invocation only for
-an active or owner-attached skill, while a future handoff may reference a
-verified explicit-only skill even when `disable-model-invocation: true` keeps
-it out of the automatic catalog.
+Do not paste the next ticket's full body into `Prompt`. The linked ticket owns
+scope, acceptance, verification, and boundaries. The prompt should identify
+the action and require the task to finish according to `Next on PASS`; this
+prevents recursive prompt growth and constraint loss.
 
-Resolve a handoff path only from an owner-provided path or an existing
-global/project skill bridge. Require one non-conflicting candidate, a real
-absolute readable `SKILL.md`, and matching frontmatter `name`; report ambiguity
-instead of guessing. That reference neither means the current task invoked the
-skill nor authorizes the agent to create the next task. Use
-`SKILL UNAVAILABLE` only for an unavailable immediate invocation or when no
-unique verified handoff path exists. Preserve the declared
-`NATURAL-LANGUAGE FALLBACK` rule for non-Codex harnesses.
+Implementation and fix tasks attach `$implement`. Initial independent reviews
+and focused re-reviews attach `$code-review`. Ask Matt, Wayfinder, grilling,
+and other entry tasks attach their actual entry skill. Only attach the entry
+skill; do not separately attach TDD or ordinary review used by `$implement`.
 
-Do not separately attach TDD or ordinary review used inside `$implement`. A
-bare slash command, bare skill name, or equivalent-flow instruction is invalid.
-QA, `DONE`, and other no-skill exits need no attachment. A result-only final
-message without one canonical exit is invalid.
+A slash command, bare skill name, or “equivalent flow” is not an attachment.
+QA, `DONE`, and other no-skill exits need no attachment.
 
-Owner QA is not a dispatched top-level task. The current task that sends the QA
-handoff must provision and directly open the exact page under
-`owner-qa-handoff-template.md`; it may not route service startup, fixtures,
-login, URL discovery, route state, or prototype restoration to the owner or a
-successor.
+## Skill invocation versus handoff reference
 
-## Batch and parallel work
+Invocation availability and handoff referenceability are separate.
 
-Parallel work is exceptional. Use it only when units are truly independent and
-the owner explicitly asks for parallelism.
+- Claim current-task invocation only when the skill is in the active catalog
+  or the owner attached its `SKILL.md` in this task.
+- Resolve a future handoff only from an owner-provided path or an existing
+  global/project skill bridge.
+- Require exactly one non-conflicting candidate, a real absolute readable
+  `SKILL.md`, and matching frontmatter `name`.
+- `disable-model-invocation: true` may make a skill explicit-only but does not
+  invalidate a verified handoff reference.
+- A handoff reference is not a current-task invocation and never authorizes
+  task creation.
+- Report ambiguity rather than guessing. Use `SKILL UNAVAILABLE` only when an
+  immediate invocation is unavailable or no unique verified handoff path
+  exists.
+- A non-Codex harness must declare `NATURAL-LANGUAGE FALLBACK` before using the
+  documented equivalent.
 
-- each writer gets a different worktree and non-overlapping file surface;
-- each task still owns one ticket;
-- results merge serially;
-- no task becomes a coordinator for the others.
+Normal effort defaults are `low`, `medium`, or `high`.
+`xhigh`/`max`/`ultra` require explicit owner direction and evidence under
+`model-routing.md` that lower effort is inadequate.
 
-Rule-based batch work should be a deterministic script, not an agent fan-out.
-Semantic batch work needs a small costed pilot before scaling.
+## Sequential worktrees
 
-## Repository facts
+Multi-ticket work uses one explicit feature worktree sequentially:
+
+1. The handoff records absolute worktree, branch, clean HEAD, spec, ticket, and
+   fixed point.
+2. The owner opens the next task manually.
+3. The new task verifies those facts before writing.
+4. It completes one ticket, commits it, and returns the new exact HEAD.
+
+Never let two top-level tasks write the same worktree. The human task boundary
+is the lock; no lifecycle file, activation commit, claim ledger, or task
+acknowledgement is needed.
+
+If the expected worktree, branch, or HEAD differs, stop without writing:
+
+```text
+BRANCH CONFLICT — worktree/branch/HEAD does not match the handoff.
+```
+
+## Owner QA
+
+Owner QA is not a dispatched top-level task. The current task provisions and
+opens the exact page before handing it to the owner. The only full QA format
+and its failure behavior live in `owner-qa-handoff-template.md`.
+
+## Batch and repository facts
+
+Parallel work is exceptional and requires explicit owner direction. Each
+writer needs a separate worktree and non-overlapping file surface; results
+merge serially. Deterministic batch work belongs in a script, while semantic
+batch work needs a small costed pilot.
 
 - Remote: `github`
 - App package manager: pnpm
 - Server package manager: npm
 - Fresh worktree setup: `bash scripts/setup-worktree.sh`
 - Never use `git stash` to hide another task's work.
-- Merge in the intended integration worktree, not inside a disposable ticket
-  worktree.
