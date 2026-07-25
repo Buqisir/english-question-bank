@@ -209,6 +209,7 @@
 
 .ps-paper-blank-hint {
   white-space: nowrap;
+  text-indent: 0;
 }
 
 /* ─── I15: clickable in-passage grammar-fill blank ─────────────── *

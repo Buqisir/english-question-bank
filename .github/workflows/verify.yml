@@ -120,5 +120,8 @@ jobs:
       - name: Run reorder suggest verify
         run: node scripts/verify-reorder-suggest.mjs
 
+      - name: Run grammar-fill PaperSurface geometry verify
+        run: node scripts/verify-paper-normalization-grammar-fill-browser.mjs
+
       - name: Run golden path E2E smoke
         run: node scripts/smoke-golden-path.mjs
