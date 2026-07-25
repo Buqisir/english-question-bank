@@ -84,6 +84,7 @@ function renderProofGroups({
   items,
   blocks,
   versionType = 'student',
+  printStyle = 'exam',
   questionNumberStart,
   assetsDir = paperAssetsDir,
 }) {
@@ -96,7 +97,7 @@ function renderProofGroups({
   const xml = renderer.buildDocumentXml({
     title: 'Canonical DOCX',
     versionType,
-    printStyle: 'exam',
+    printStyle,
     items,
     blocks,
     questionNumberStart,
@@ -215,6 +216,27 @@ const teacherCombined = renderProofGroups({
   versionType: 'teacher',
   questionNumberStart: 41,
 })
+const handoutCombined = renderProofGroups({
+  items: combinedItems,
+  blocks: combinedBlocks,
+  versionType: 'student',
+  printStyle: 'handout',
+  questionNumberStart: 41,
+})
+const teacherHandoutCombined = renderProofGroups({
+  items: combinedItems,
+  blocks: combinedBlocks,
+  versionType: 'teacher',
+  printStyle: 'handout',
+  questionNumberStart: 41,
+})
+const itemsOnlyHandoutCombined = renderProofGroups({
+  items: combinedItems,
+  blocks: null,
+  versionType: 'student',
+  printStyle: 'handout',
+  questionNumberStart: 41,
+})
 
 assert.deepEqual(
   studentCombined.normalizationDiagnostics.map(
@@ -268,6 +290,55 @@ assert.equal(
   (studentCombined.xml.match(/<w:u w:val="single"\/>/g) || []).length,
   35,
 )
+assert.deepEqual(
+  handoutCombined.normalizationDiagnostics.map(
+    ({ source, groupId }) => ({ source, groupId }),
+  ),
+  [
+    { source: 'compatibility', groupId: clozeGroupId },
+    { source: 'compatibility', groupId: grammar2026GroupId },
+    { source: 'compatibility', groupId: grammar960GroupId },
+  ],
+)
+assert.equal(handoutCombined.xml.includes('__41__'), false)
+assert.equal(handoutCombined.xml.includes('__56__'), false)
+assert.equal(/\d{1,3}\._{2,}/.test(handoutCombined.xml), false)
+assert.equal(handoutCombined.xml.includes('41.  41'), false)
+assert.equal(handoutCombined.xml.includes('56.  56'), false)
+assert.equal(handoutCombined.xml.includes('A. fantasy'), true)
+assert.equal(handoutCombined.xml.includes('  41  '), true)
+assert.equal(handoutCombined.xml.includes('  75  '), true)
+assert.match(
+  handoutCombined.xml,
+  /<w:u w:val="single"\/>[^]*?<w:t xml:space="preserve">  67  <\/w:t><\/w:r><w:r>[^]*?<w:t xml:space="preserve">\(absorb\)<\/w:t>/,
+)
+assert.equal(
+  (handoutCombined.xml.match(/<w:u w:val="single"\/>/g) || []).length,
+  35,
+)
+assert.equal(teacherHandoutCombined.xml.includes('__41__'), false)
+assert.equal(teacherHandoutCombined.xml.includes('答案：'), true)
+assert.equal(teacherHandoutCombined.xml.includes('41.  41'), false)
+assert.deepEqual(
+  itemsOnlyHandoutCombined.normalizationDiagnostics.map(
+    ({ source, groupId }) => ({ source, groupId }),
+  ),
+  [
+    { source: 'compatibility', groupId: clozeGroupId },
+    { source: 'compatibility', groupId: grammar2026GroupId },
+    { source: 'compatibility', groupId: grammar960GroupId },
+  ],
+)
+assert.equal(itemsOnlyHandoutCombined.xml.includes('__41__'), false)
+assert.equal(itemsOnlyHandoutCombined.xml.includes('__56__'), false)
+assert.equal(itemsOnlyHandoutCombined.xml.includes('41.  41'), false)
+assert.equal(itemsOnlyHandoutCombined.xml.includes('  41  '), true)
+assert.equal(itemsOnlyHandoutCombined.xml.includes('  75  '), true)
+assert.equal(
+  (itemsOnlyHandoutCombined.xml.match(/<w:u w:val="single"\/>/g) || [])
+    .length,
+  35,
+)
 
 const sevenChoices = renderProofGroup({
   asset: paper2026,
@@ -293,8 +364,26 @@ try {
     questionNumberStart: 41,
     assetsDir: scratchDir,
   })
+  const handoutSidecarCloze = renderProofGroups({
+    items: [docxItemFromAsset(paper2026, clozeGroupId)],
+    blocks: [
+      {
+        type: 'question_group',
+        questionGroupId: clozeGroupId,
+        score: 1.5,
+      },
+    ],
+    printStyle: 'handout',
+    questionNumberStart: 41,
+    assetsDir: scratchDir,
+  })
   assert.equal(sidecarCloze.normalizationDiagnostics[0]?.source, 'sidecar')
   assert.equal(sidecarCloze.xml.includes('__41__'), false)
+  assert.equal(
+    handoutSidecarCloze.normalizationDiagnostics[0]?.source,
+    'sidecar',
+  )
+  assert.equal(handoutSidecarCloze.xml.includes('__41__'), false)
 
   const nonProofSidecarDir = path.join(scratchDir, 'non-proof-sidecar')
   const paper960SidecarResult = buildPaperNormalizedGroupsSidecar(paper960)
@@ -310,9 +399,37 @@ try {
     questionNumberStart: 41,
     assetsDir: nonProofSidecarDir,
   })
+  const handoutNonProofSidecar = renderProofGroups({
+    items: [docxItemFromAsset(paper960, 'group-960d0f8d-cloze')],
+    blocks: [
+      {
+        type: 'question_group',
+        questionGroupId: 'group-960d0f8d-cloze',
+        score: 1.5,
+      },
+    ],
+    printStyle: 'handout',
+    questionNumberStart: 41,
+    assetsDir: nonProofSidecarDir,
+  })
+  const itemsOnlyHandoutNonProofSidecar = renderProofGroups({
+    items: [docxItemFromAsset(paper960, 'group-960d0f8d-cloze')],
+    blocks: null,
+    printStyle: 'handout',
+    questionNumberStart: 41,
+    assetsDir: nonProofSidecarDir,
+  })
   assert.equal(nonProofSidecar.normalizationDiagnostics[0]?.status, 'legacy')
   assert.equal(
     nonProofSidecar.normalizationDiagnostics[0]?.reason,
+    'canonical_not_enabled_for_group',
+  )
+  assert.equal(
+    handoutNonProofSidecar.normalizationDiagnostics[0]?.reason,
+    'canonical_not_enabled_for_group',
+  )
+  assert.equal(
+    itemsOnlyHandoutNonProofSidecar.normalizationDiagnostics[0]?.reason,
     'canonical_not_enabled_for_group',
   )
 

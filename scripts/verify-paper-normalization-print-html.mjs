@@ -13,6 +13,7 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 import { buildPrintHtml } from '../server/print-renderer.mjs'
+import { createExportImplementation } from '../server/exports/exportImplementation.mjs'
 import {
   buildPaperNormalizedGroupsSidecar,
 } from '../server/paper-import/normalization.mjs'
@@ -91,6 +92,65 @@ function renderProofGroup({
     normalizationDiagnostics,
   })
   return { html, normalizationDiagnostics }
+}
+
+function exportProofGroup({
+  asset,
+  groupId,
+  questionNumberStart,
+  assetsDir = paperAssetsDir,
+  mutateDetail = null,
+}) {
+  const item = printItemFromAsset(asset, groupId)
+  if (mutateDetail) mutateDetail(item.detail)
+  const exportDir = mkdtempSync(
+    path.join(tmpdir(), 'paper-normalization-print-export-'),
+  )
+  try {
+    const implementation = createExportImplementation({
+      rootDir,
+      exportDir,
+      getQuestionGroupDetail: (requestedGroupId) =>
+        requestedGroupId === groupId ? item.detail : null,
+      buildDocumentXml: () => '',
+      writeDocxPackage: () => Buffer.alloc(0),
+      buildPrintHtml,
+      convertDocxToPdf: () => {},
+      renderPrintPdf({ pdfPath }) {
+        writeFileSync(pdfPath, Buffer.from('stable-print-pdf-bytes'))
+      },
+      timestampPrefix: () => 'fixed',
+      paperAssetsDir: assetsDir,
+    })
+    const input = {
+      title: asset.paper.title,
+      versionType: 'student',
+      printStyle: 'exam',
+      items: [{ questionGroupId: groupId, score: 1.5 }],
+      blocks: [
+        { type: 'question_group', questionGroupId: groupId, score: 1.5 },
+      ],
+      questionNumberStart,
+    }
+    const htmlResult = implementation.exportPrintHtml(input)
+    const pdfResult = implementation.exportPrintPdf(input)
+    assert.deepEqual(
+      pdfResult.normalizationDiagnostics,
+      htmlResult.normalizationDiagnostics,
+    )
+    assert.equal(
+      Buffer.from(pdfResult.body).toString('utf8'),
+      'stable-print-pdf-bytes',
+    )
+    for (const diagnostic of htmlResult.normalizationDiagnostics) {
+      if (diagnostic.reason) {
+        assert.equal(htmlResult.body.includes(diagnostic.reason), false)
+      }
+    }
+    return htmlResult.normalizationDiagnostics
+  } finally {
+    rmSync(exportDir, { recursive: true, force: true })
+  }
 }
 
 const paper2026 = readPaperAsset('paper-2026-i')
@@ -378,6 +438,92 @@ try {
     'canonical_not_enabled_for_group',
   )
   assert.equal(missing.html.includes('<span class="print-blank-num">41</span>'), true)
+
+  const hostDiagnostics = [
+    exportProofGroup({
+      asset: paper2026,
+      groupId: clozeGroupId,
+      questionNumberStart: 41,
+    }),
+    exportProofGroup({
+      asset: conflictingAsset,
+      groupId: grammar2026GroupId,
+      questionNumberStart: 56,
+      assetsDir: needsReviewDir,
+    }),
+    exportProofGroup({
+      asset: paper960,
+      groupId: legacyClozeGroupId,
+      questionNumberStart: 41,
+      assetsDir: nonProofSidecarDir,
+    }),
+    exportProofGroup({
+      asset: paper2026,
+      groupId: clozeGroupId,
+      questionNumberStart: 41,
+      assetsDir: staleDir,
+    }),
+    exportProofGroup({
+      asset: paper2026,
+      groupId: clozeGroupId,
+      questionNumberStart: 41,
+      assetsDir: invalidDir,
+    }),
+    exportProofGroup({
+      asset: paper2026,
+      groupId: clozeGroupId,
+      questionNumberStart: 41,
+      mutateDetail(detail) {
+        detail.questions[0].id = 'stale-question-id'
+      },
+    }),
+  ]
+  assert.deepEqual(
+    hostDiagnostics.map((diagnostics) => ({
+      status: diagnostics[0]?.status,
+      source: diagnostics[0]?.source,
+      artifact: diagnostics[0]?.artifact,
+      reason: diagnostics[0]?.reason,
+    })),
+    [
+      {
+        status: 'ready',
+        source: 'compatibility',
+        artifact: undefined,
+        reason: undefined,
+      },
+      {
+        status: 'legacy',
+        source: 'legacy',
+        artifact: undefined,
+        reason: 'compatibility_needs_review',
+      },
+      {
+        status: 'legacy',
+        source: 'legacy',
+        artifact: undefined,
+        reason: 'canonical_not_enabled_for_group',
+      },
+      {
+        status: 'ready',
+        source: 'compatibility',
+        artifact: 'rejected',
+        reason: undefined,
+      },
+      {
+        status: 'ready',
+        source: 'compatibility',
+        artifact: 'rejected',
+        reason: undefined,
+      },
+      {
+        status: 'legacy',
+        source: 'legacy',
+        artifact: undefined,
+        reason: 'canonical_print_input_mismatch',
+      },
+    ],
+  )
 } finally {
   rmSync(scratchDir, { recursive: true, force: true })
 }

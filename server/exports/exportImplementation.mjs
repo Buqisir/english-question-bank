@@ -233,11 +233,23 @@ export function createExportImplementation({
     const blocks = Array.isArray(input.blocks) ? input.blocks : null
 
     const images = []
-    const html = buildPrintHtml({ title, versionType, printStyle, items: exportItems, blocks, questionNumberStart, paperAssetsDir, imageMode, images })
+    const normalizationDiagnostics = []
+    const html = buildPrintHtml({
+      title,
+      versionType,
+      printStyle,
+      items: exportItems,
+      blocks,
+      questionNumberStart,
+      paperAssetsDir,
+      imageMode,
+      images,
+      normalizationDiagnostics,
+    })
     const versionLabel = versionType === 'student' ? '学生版' : '教师版'
     const fileName = `${title}-${versionLabel}-精排.html`
 
-    return { body: html, fileName, images }
+    return { body: html, fileName, images, normalizationDiagnostics }
   }
 
   function exportPrintPdf(input) {
@@ -265,7 +277,12 @@ export function createExportImplementation({
       const fileName = `${title}-${versionLabel}-精排.pdf`
       const outputPath = path.join(exportDir, `${timestampPrefix()}-${fileName}`)
       copyFileSync(pdfPath, outputPath)
-      return { body: readFileSync(outputPath), fileName, outputPath }
+      return {
+        body: readFileSync(outputPath),
+        fileName,
+        outputPath,
+        normalizationDiagnostics: htmlResult.normalizationDiagnostics,
+      }
     } finally {
       rmSync(tempDir, { recursive: true, force: true })
     }

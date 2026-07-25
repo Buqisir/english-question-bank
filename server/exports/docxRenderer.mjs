@@ -290,6 +290,150 @@ function canonicalGroupMatchesDocxDetail(canonicalGroup, detail) {
   )
 }
 
+function createCanonicalDocxGroupResolver(normalizationDiagnostics) {
+  const canonicalGroupCache = new Map()
+  return function getCanonicalDocxGroup(groupId, detail) {
+    if (
+      !paperAssetsDir
+      || !['cloze', 'grammar_cloze'].includes(detail.groupType)
+    ) {
+      return null
+    }
+    if (!canonicalGroupCache.has(groupId)) {
+      canonicalGroupCache.set(
+        groupId,
+        resolveCanonicalPrintGroup({ paperAssetsDir, groupId }),
+      )
+    }
+    const canonicalResolution = canonicalGroupCache.get(groupId)
+    let canonicalGroup =
+      canonicalResolution?.status === 'ready'
+        ? canonicalResolution.group
+        : null
+    if (
+      canonicalGroup
+      && !canonicalGroupMatchesDocxDetail(canonicalGroup, detail)
+    ) {
+      normalizationDiagnostics.push({
+        status: 'legacy',
+        source: 'legacy',
+        paperId: canonicalResolution.diagnostic.paperId,
+        groupId,
+        reason: 'canonical_docx_input_mismatch',
+      })
+      canonicalGroup = null
+    } else if (canonicalResolution?.diagnostic) {
+      normalizationDiagnostics.push(canonicalResolution.diagnostic)
+    }
+    return canonicalGroup
+  }
+}
+
+function canonicalDocxQuestion(canonicalQuestion, question) {
+  if (!canonicalQuestion) return question
+  return {
+    ...question,
+    stem: canonicalQuestion.stem ?? '',
+    options: canonicalQuestion.options.map((option) => ({
+      label: option.label,
+      content: option.text,
+    })),
+  }
+}
+
+function pushCanonicalDocxParagraphs(
+  body,
+  canonicalGroup,
+  questionNumberStart,
+  paragraphOptions,
+) {
+  const displayNumberByQuestionId = new Map(
+    canonicalGroup.questions.map((question, index) => [
+      question.questionId,
+      questionNumberStart + index,
+    ]),
+  )
+  canonicalGroup.paragraphs.forEach((canonicalParagraph) => {
+    body.push(
+      paragraph(
+        docxCanonicalParagraphRuns(
+          canonicalGroup,
+          canonicalParagraph,
+          displayNumberByQuestionId,
+        ),
+        paragraphOptions,
+      ),
+    )
+  })
+}
+
+function pushHandoutDocxQuestions(
+  body,
+  {
+    detail,
+    canonicalGroup,
+    versionType,
+    questionNumberStart,
+  },
+) {
+  const canonicalQuestionById = canonicalGroup
+    ? new Map(
+        canonicalGroup.questions.map((question) => [
+          question.questionId,
+          question,
+        ]),
+      )
+    : null
+  let questionNumber = questionNumberStart
+  detail.questions.forEach((question) => {
+    const canonicalQuestion = canonicalQuestionById?.get(question.id)
+    const docxQuestion = canonicalDocxQuestion(
+      canonicalQuestion,
+      question,
+    )
+    body.push(
+      paragraph(
+        [
+          run(`${questionNumber}. `, { bold: true, size: 21 }),
+          run(
+            canonicalQuestion
+              ? docxQuestion.stem
+              : docxQuestionStem(detail, docxQuestion),
+            { bold: true, size: 21 },
+          ),
+        ],
+        { before: 90, after: 70, keepNext: true },
+      ),
+    )
+    if (detail.groupType !== 'seven_choices') {
+      if (detail.groupType === 'cloze' && docxQuestion.options.length > 0) {
+        const inlineText = docxQuestion.options.map((option) =>
+          `${option.label}. ${option.content}`).join('  ')
+        body.push(
+          paragraph(inlineText, {
+            after: 60,
+            indentLeft: 360,
+            size: 21,
+          }),
+        )
+      } else {
+        docxQuestion.options.forEach((option) => {
+          body.push(
+            paragraph(`${option.label}. ${option.content}`, {
+              after: 40,
+              indentLeft: 360,
+              size: 21,
+            }),
+          )
+        })
+      }
+    }
+    pushDocxAnswerArea(body, detail, question, versionType)
+    questionNumber++
+  })
+  return questionNumber
+}
+
 /**
  * Renders one passage line as an array of `run()` calls (paragraph()'s
  * array-content branch), replacing every `paperBlankPattern` match
@@ -309,13 +453,10 @@ function canonicalGroupMatchesDocxDetail(canonicalGroup, detail) {
  * mjs's identical mechanism (round-1's group-local `(n)` form is retired \u2014
  * owner QA verdict B). When omitted (`null`, the default), behavior is
  * BYTE-IDENTICAL to pre-cut: the literal captured marker value is shown
- * bare \u2014 this is deliberate, not an oversight: the non-exam handout builder
- * (`buildDocumentXml`'s printStyle!=='exam' branch) never resets its
- * question numbering per group (draft-depassage-letter cut's SW-2 already
- * documented this exam/handout asymmetry as intentional \u2014 handout DOCX has
- * no UI path today), so remapping its blanks there would touch an unrelated
- * code path this cut doesn't need to fix. See callers below for which
- * branch passes what.
+ * bare. Canonical proof groups bypass this legacy helper in both exam and
+ * handout blocks paths; non-proof handout groups intentionally retain the
+ * established legacy behavior. See callers below for which branch passes
+ * what.
  */
 function docxPassageLineRuns(line, groupType, blankCounter = null) {
   const text = String(line ?? '')
@@ -837,21 +978,12 @@ function buildExamDocumentXml({
   normalizationDiagnostics,
 }) {
   const figuresCache = new Map()
-  const canonicalGroupCache = new Map()
+  const getCanonicalDocxGroup =
+    createCanonicalDocxGroupResolver(normalizationDiagnostics)
   function getFiguresInfo(groupId) {
     if (!paperAssetsDir) return null
     if (!figuresCache.has(groupId)) figuresCache.set(groupId, resolveGroupFigures(paperAssetsDir, groupId))
     return figuresCache.get(groupId)
-  }
-  function getCanonicalGroup(groupId) {
-    if (!paperAssetsDir) return null
-    if (!canonicalGroupCache.has(groupId)) {
-      canonicalGroupCache.set(
-        groupId,
-        resolveCanonicalPrintGroup({ paperAssetsDir, groupId }),
-      )
-    }
-    return canonicalGroupCache.get(groupId)
   }
   // draft-numbering-style v2 (owner 拍板 2026-07-10 二轮改判): small-question
   // numbering in the `blocks`-array path is WHOLE-PAPER continuous again
@@ -919,30 +1051,10 @@ function buildExamDocumentXml({
         const item = itemByGroupId.get(block.questionGroupId)
         if (!item) continue
         const { detail } = item
-        const canonicalResolution =
-          detail.groupType === 'cloze'
-          || detail.groupType === 'grammar_cloze'
-            ? getCanonicalGroup(block.questionGroupId)
-            : null
-        let canonicalGroup =
-          canonicalResolution?.status === 'ready'
-            ? canonicalResolution.group
-            : null
-        if (
-          canonicalGroup
-          && !canonicalGroupMatchesDocxDetail(canonicalGroup, detail)
-        ) {
-          normalizationDiagnostics.push({
-            status: 'legacy',
-            source: 'legacy',
-            paperId: canonicalResolution.diagnostic.paperId,
-            groupId: block.questionGroupId,
-            reason: 'canonical_docx_input_mismatch',
-          })
-          canonicalGroup = null
-        } else if (canonicalResolution?.diagnostic) {
-          normalizationDiagnostics.push(canonicalResolution.diagnostic)
-        }
+        const canonicalGroup = getCanonicalDocxGroup(
+          block.questionGroupId,
+          detail,
+        )
         const score = Number.isFinite(Number(block.score)) ? Number(block.score) : item.score
         const passageLines = normalizeDocxLines(detail.passage.materialText || detail.passage.summary || '')
 
@@ -972,24 +1084,12 @@ function buildExamDocumentXml({
 
         // Passage text
         if (canonicalGroup) {
-          const displayNumberByQuestionId = new Map(
-            canonicalGroup.questions.map((question, index) => [
-              question.questionId,
-              questionNum + index,
-            ]),
+          pushCanonicalDocxParagraphs(
+            body,
+            canonicalGroup,
+            questionNum,
+            { after: 60, firstLineIndent: 420 },
           )
-          canonicalGroup.paragraphs.forEach((canonicalParagraph) => {
-            body.push(
-              paragraph(
-                docxCanonicalParagraphRuns(
-                  canonicalGroup,
-                  canonicalParagraph,
-                  displayNumberByQuestionId,
-                ),
-                { after: 60, firstLineIndent: 420 },
-              ),
-            )
-          })
           body.push(paragraph('', { after: 80 }))
         } else if (passageLines.length > 0 && passageLines[0]) {
           const figuresInfo = getFiguresInfo(block.questionGroupId)
@@ -1034,16 +1134,10 @@ function buildExamDocumentXml({
           : null
         detail.questions.forEach((question) => {
           const canonicalQuestion = canonicalQuestionById?.get(question.id)
-          const docxQuestion = canonicalQuestion
-            ? {
-                ...question,
-                stem: canonicalQuestion.stem ?? '',
-                options: canonicalQuestion.options.map((option) => ({
-                  label: option.label,
-                  content: option.text,
-                })),
-              }
-            : question
+          const docxQuestion = canonicalDocxQuestion(
+            canonicalQuestion,
+            question,
+          )
           const stemText = String(docxQuestion.stem || '').trim()
           const hasOptions =
             Array.isArray(docxQuestion.options)
@@ -1153,19 +1247,11 @@ function examOptionTable(rows) {
 // header comment above `buildExamDocumentXml`. Defaults to a throwaway
 // array so a caller that doesn't need image bytes (e.g. an existing test
 // stub) can still call this with the exact pre-cut argument shape.
-// draft-numbering-style (docs/cuts/draft-numbering-style/plan.md): everything
-// BELOW this line (the printStyle!=='exam' "Handout style" branch and its
-// own legacy items-array fallback) is DELIBERATELY left untouched — no
-// group-local numbering reset, no `(n)` format, no blank remap. This mirrors
-// draft-depassage-letter cut's SW-2 finding (docs/cuts/draft-depassage-letter/
-// cr.md): this handout DOCX path has no UI-reachable caller today
-// (`usePaperDraft.ts` defaults `paperExportStyle` to 'exam' and no component
-// ever calls `setPaperExportStyle('handout')`), and unlike the exam builder
-// it was never given the `n、题型` 大题头 either — extending THIS cut's
-// group-local-reset + blank-remap to a numbering scheme that stays globally
-// continuous would introduce a NEW mismatch instead of fixing one. If this
-// path ever gains a real caller, it needs its own numbering-parity pass —
-// not a silent side effect of a different builder's blocks-branch.
+// Handout keeps its existing headings, spacing, numbering, answer areas, and
+// public blocks/items entry shapes. Both paths share only the proof canonical
+// selector/translator with exam style, so enabled cloze/grammar groups never
+// parse raw markers while every other asset stays on the structured legacy
+// path.
 function buildDocumentXml({ title, versionType, items, blocks, questionNumberStart, printStyle, images = [], normalizationDiagnostics = [] }) {
   if (printStyle === 'exam') {
     return buildExamDocumentXml({
@@ -1179,6 +1265,8 @@ function buildDocumentXml({ title, versionType, items, blocks, questionNumberSta
     })
   }
   const figuresCache = new Map()
+  const getCanonicalDocxGroup =
+    createCanonicalDocxGroupResolver(normalizationDiagnostics)
   function getFiguresInfo(groupId) {
     if (!paperAssetsDir) return null
     if (!figuresCache.has(groupId)) figuresCache.set(groupId, resolveGroupFigures(paperAssetsDir, groupId))
@@ -1216,9 +1304,12 @@ function buildDocumentXml({ title, versionType, items, blocks, questionNumberSta
         const item = itemByGroupId.get(block.questionGroupId)
         if (!item) continue
         const { detail, note, sectionTitle } = item
+        const canonicalGroup = getCanonicalDocxGroup(
+          block.questionGroupId,
+          detail,
+        )
         // Prefer block.score (from PaperExportBlock) over item.score
         const score = Number.isFinite(Number(block.score)) ? Number(block.score) : item.score
-        const passageLines = normalizeDocxLines(detail.passage.materialText || detail.passage.summary || '暂无完整原文。')
 
         body.push(
           paragraph(
@@ -1238,7 +1329,19 @@ function buildDocumentXml({ title, versionType, items, blocks, questionNumberSta
         // heading-fidelity cut (标准 §2, Locked Decision 3): 篇章标题
         // size 22 → 21 (10.5pt, 不放大字号); Times bold 居中维持不动.
         body.push(paragraph([run(detail.passage.title, { bold: true, size: 21 })], { after: 60, keepNext: true }))
-        {
+        if (canonicalGroup) {
+          pushCanonicalDocxParagraphs(
+            body,
+            canonicalGroup,
+            questionNum,
+            { after: 80, indentLeft: 240, firstLineIndent: 420 },
+          )
+        } else {
+          const passageLines = normalizeDocxLines(
+            detail.passage.materialText
+            || detail.passage.summary
+            || '暂无完整原文。',
+          )
           const figuresInfo = getFiguresInfo(block.questionGroupId)
           passageLines.forEach((line) => {
             pushDocxPassageLine(body, line, detail.groupType, figuresInfo, images, { after: 80, indentLeft: 240, firstLineIndent: 420 })
@@ -1259,39 +1362,23 @@ function buildDocumentXml({ title, versionType, items, blocks, questionNumberSta
           }
         }
 
-        detail.questions.forEach((question) => {
-          body.push(
-            paragraph(
-              [
-                run(`${questionNum}. `, { bold: true, size: 21 }),
-                run(docxQuestionStem(detail, question), { bold: true, size: 21 }),
-              ],
-              { before: 90, after: 70, keepNext: true },
-            ),
-          )
-          if (detail.groupType !== 'seven_choices') {
-            if (detail.groupType === 'cloze' && question.options.length > 0) {
-              const inlineText = question.options.map((o) => `${o.label}. ${o.content}`).join('  ')
-              body.push(paragraph(inlineText, { after: 60, indentLeft: 360, size: 21 }))
-            } else {
-              question.options.forEach((option) => {
-                body.push(paragraph(`${option.label}. ${option.content}`, { after: 40, indentLeft: 360, size: 21 }))
-              })
-            }
-          }
-          pushDocxAnswerArea(body, detail, question, versionType)
-          questionNum++
+        questionNum = pushHandoutDocxQuestions(body, {
+          detail,
+          canonicalGroup,
+          versionType,
+          questionNumberStart: questionNum,
         })
       }
     }
   } else {
-    // Legacy fallback: render by items array (flat question group list without block structure).
-    // This path is kept for backward compatibility with older saved paper sets that don't have blocks.
+    // Items-only entry: render a flat question-group list without block structure.
+    // This path is kept for backward compatibility with older saved paper sets that don't have blocks;
+    // allowlisted proof groups still consume canonical semantics before the legacy fallback.
     // Once all clients send blocks, this branch can be removed.
     let legacyQuestionNum = startNum
     items.forEach((item, groupIndex) => {
       const { detail, note, score, sectionTitle } = item
-      const passageLines = normalizeDocxLines(detail.passage.materialText || detail.passage.summary || '暂无完整原文。')
+      const canonicalGroup = getCanonicalDocxGroup(detail.id, detail)
 
       body.push(
         paragraph(
@@ -1313,7 +1400,19 @@ function buildDocumentXml({ title, versionType, items, blocks, questionNumberSta
       // size 22 → 21 (10.5pt, 不放大字号); Times bold 居中维持不动.
       body.push(paragraph([run(detail.passage.title, { bold: true, size: 21 })], { after: 60, keepNext: true }))
 
-      {
+      if (canonicalGroup) {
+        pushCanonicalDocxParagraphs(
+          body,
+          canonicalGroup,
+          legacyQuestionNum,
+          { after: 80, indentLeft: 240, firstLineIndent: 420 },
+        )
+      } else {
+        const passageLines = normalizeDocxLines(
+          detail.passage.materialText
+          || detail.passage.summary
+          || '暂无完整原文。',
+        )
         const figuresInfo = getFiguresInfo(detail.id)
         passageLines.forEach((line) => {
           pushDocxPassageLine(body, line, detail.groupType, figuresInfo, images, { after: 80, indentLeft: 240, firstLineIndent: 420 })
@@ -1335,30 +1434,11 @@ function buildDocumentXml({ title, versionType, items, blocks, questionNumberSta
         }
       }
 
-      detail.questions.forEach((question) => {
-        body.push(
-          paragraph(
-            [
-              run(`${legacyQuestionNum}. `, { bold: true, size: 21 }),
-              run(docxQuestionStem(detail, question), { bold: true, size: 21 }),
-            ],
-            { before: 90, after: 70, keepNext: true },
-          ),
-        )
-
-        if (detail.groupType !== 'seven_choices') {
-          if (detail.groupType === 'cloze' && question.options.length > 0) {
-            const inlineText = question.options.map((o) => `${o.label}. ${o.content}`).join('  ')
-            body.push(paragraph(inlineText, { after: 60, indentLeft: 360, size: 21 }))
-          } else {
-            question.options.forEach((option) => {
-              body.push(paragraph(`${option.label}. ${option.content}`, { after: 40, indentLeft: 360, size: 21 }))
-            })
-          }
-        }
-
-        pushDocxAnswerArea(body, detail, question, versionType)
-        legacyQuestionNum++
+      legacyQuestionNum = pushHandoutDocxQuestions(body, {
+        detail,
+        canonicalGroup,
+        versionType,
+        questionNumberStart: legacyQuestionNum,
       })
     })
   }
