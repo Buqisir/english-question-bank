@@ -1,7 +1,7 @@
 # EQB 试卷 Canonical 大一统 — Wayfinder Map
 
 Status: charted
-Next on PASS: `docs/cuts/paper-canonical-unification/wayfinder/tickets/09-reading-canonical-variant.md`
+Next on PASS: `docs/cuts/paper-canonical-unification/wayfinder/tickets/10-application-writing-canonical-variant.md`
 Terminal: no
 
 ## Notes
@@ -47,6 +47,7 @@ Terminal: no
 - [定义题组通用 envelope 与 rich content nodes](tickets/07-rich-content-and-group-envelope.md) — 以封闭 shared envelope、family-discriminated option owner 与最小 rich-content 网格/媒体模型消除重复 bank 和 renderer 语义回编。
 - [定义 A–D 选项整组择形算法与金样卷 parity](tickets/07a-abcd-option-layout-selector.md) — 以 pinned shaping、固定 twip tabs 与 whole-set fallback 让三类 renderer 共用同一 4/2/1 placement plan，并对不可渲染单列内容 fail closed。
 - [定义七选五 canonical variant 与双卷 proof 合同](tickets/08-seven-choices-canonical-variant.md) — 以五组 Question/Blank identity、一组 shared A–G bank 与跨 renderer occurrence conformance 消除 raw-marker 回编及重复/嵌套 bank。
+- [定义阅读 canonical variant 与图表 proof 合同](tickets/09-reading-canonical-variant.md) — 以单一有序 rich-content stream、Reading 标题角色、原生表格/图像与共享 A–D plan 消除 marker/flattened 回编并锁定四面 semantic/anchor parity。
 
 ## Fog
 
