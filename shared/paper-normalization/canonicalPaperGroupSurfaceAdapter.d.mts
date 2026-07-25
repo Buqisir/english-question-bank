@@ -1,6 +1,6 @@
 /**
- * Type declarations for `canonicalClozeSurfaceAdapter.mjs`.
- * Keep this file in sync with `canonicalClozeSurfaceAdapter.d.ts`.
+ * Type declarations for `canonicalPaperGroupSurfaceAdapter.mjs`.
+ * Keep this file in sync with `canonicalPaperGroupSurfaceAdapter.d.ts`.
  */
 
 import type {
@@ -35,18 +35,18 @@ export type CanonicalSurfaceParagraph = {
   }>
 }
 
-export type CanonicalClozeSurfaceData = {
+export type CanonicalPaperGroupSurfaceData = {
   readonly textMap: PaperTextMap
   readonly semanticParagraphs: ReadonlyArray<CanonicalSurfaceParagraph>
   readonly questions: ReadonlyArray<PaperQuestion>
   readonly evidence: ReadonlyArray<PaperEvidence>
 }
 
-export type CanonicalClozeSurfaceResult =
+export type CanonicalPaperGroupSurfaceResult =
   | {
       readonly status: 'ready'
       readonly semanticDigest: string
-      readonly surfaceData: CanonicalClozeSurfaceData
+      readonly surfaceData: CanonicalPaperGroupSurfaceData
     }
   | {
       readonly status: 'not_enabled'
@@ -66,6 +66,19 @@ export type CanonicalClozeSurfaceResult =
         readonly issues: ReadonlyArray<PaperGroupNormalizationIssue>
       }
     }
+
+export type CanonicalClozeSurfaceData = CanonicalPaperGroupSurfaceData
+export type CanonicalClozeSurfaceResult = CanonicalPaperGroupSurfaceResult
+
+export function formatCanonicalBlankVisibleText(
+  questionNo: string,
+  hint: string | null,
+): string
+
+export function buildCanonicalPaperGroupSurfaceData(input: {
+  asset: unknown
+  groupId: string
+}): CanonicalPaperGroupSurfaceResult
 
 export function buildCanonicalClozeSurfaceData(input: {
   asset: unknown

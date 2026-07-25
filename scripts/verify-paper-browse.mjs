@@ -656,29 +656,24 @@ const grammarFillParagraphText960 = grammarFillModel960.surfaceData.textMap.para
   .flatMap((p) => p.sentences.map((s) => s.text))
   .join(' ')
 assert(
-  '960d0f8d grammarFill: stored old-form blank "56._____" is gone from the rail-mode textMap',
+  '960d0f8d grammarFill: stored old-form blank "56._____" is gone from the canonical textMap',
   !/\d{1,3}\._{2,}/.test(grammarFillParagraphText960),
   grammarFillParagraphText960.slice(0, 120),
 )
+const grammarFillSemanticBlanks960 = grammarFillModel960.surfaceData.semanticParagraphs
+  ?.flatMap((paragraph) => paragraph.sentences)
+  .flatMap((sentence) => sentence.nodes)
+  .filter((node) => node.type === 'blank')
 assert(
-  '960d0f8d grammarFill: rail-mode textMap now carries __56__ (paperBlankPattern form)',
-  /__56__/.test(grammarFillParagraphText960),
-  grammarFillParagraphText960.slice(0, 120),
+  '960d0f8d grammarFill: PaperBrowse model exposes ten canonical semantic blanks',
+  grammarFillModel960.normalization?.status === 'ready' &&
+    grammarFillSemanticBlanks960?.length === 10,
+  JSON.stringify(grammarFillModel960.normalization),
 )
 assert(
-  '960d0f8d grammarFill: normalized blank keeps its (hint) — "__57__ (absorb)"',
-  /__57__\s*\(absorb\)/.test(grammarFillParagraphText960),
-  grammarFillParagraphText960.slice(0, 120),
-)
-
-// The harness's clickable I15 in-passage path is built by a *different*
-// adapter (grammarFillAnalysisSurfaceAdapter.ts) that never calls
-// buildGrammarFillPaperView, so normalizing this textMap cannot break it.
-assert(
-  "grammarFillAnalysisSurfaceAdapter.ts (harness's I15 in-passage adapter) does not import buildGrammarFillPaperView — the normalize-for-rail transform is isolated to the rail path",
-  !read('app/src/features/paper-intelligence/grammarFillAnalysisSurfaceAdapter.ts').includes(
-    'buildGrammarFillPaperView',
-  ),
+  '960d0f8d grammarFill: canonical blank 57 keeps its single absorb hint',
+  grammarFillSemanticBlanks960?.find((blank) => blank.questionNo === '57')?.hint === 'absorb',
+  JSON.stringify(grammarFillSemanticBlanks960?.find((blank) => blank.questionNo === '57')),
 )
 
 // ─── 13. Real paper-960d0f8d fixture: writing-block dedup ───

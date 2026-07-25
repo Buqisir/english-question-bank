@@ -17,6 +17,7 @@ const registry = {
   'scripts/verify-paper-normalization-grammar-fill.mjs',
   'scripts/verify-paper-normalization-cloze-surface.mjs',
   'scripts/verify-paper-normalization-cloze-analysis.mjs',
+  'scripts/verify-paper-normalization-grammar-fill-surface.mjs',
   'scripts/verify-paper-surface-mjs-declaration-parity.mjs',
   'scripts/verify-c7-paper-import-contracts.mjs',
   'scripts/verify-c7-paper-import-publish.mjs',

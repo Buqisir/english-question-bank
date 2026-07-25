@@ -1,5 +1,5 @@
 import { segmentPaperText } from '../../../../shared/papersurface/segmentPaperText.mjs'
-import { buildCanonicalClozeSurfaceData } from '../../../../shared/paper-normalization/canonicalClozeSurfaceAdapter.mjs'
+import { buildCanonicalClozeSurfaceData } from '../../../../shared/paper-normalization/canonicalPaperGroupSurfaceAdapter.mjs'
 import type { PaperTextMap } from '../../../../shared/papersurface/types'
 import type { PaperAssetV1 } from '../../domain/paperAsset.ts'
 import type {

@@ -36,6 +36,10 @@ import type {
 } from '../../../../shared/papersurface/types'
 import type { PaperAssetV1 } from '../../domain/paperAsset.ts'
 import { FACET_FRAMEWORKS, type FrameworkBody } from './grammarFillFacetRegistry.ts'
+import {
+  buildGrammarFillPaperView,
+  type GrammarFillPaperViewModel,
+} from './grammarFillPaperViewAdapter.ts'
 import type {
   LoadBar,
   PaperIntelligenceReport,
@@ -158,6 +162,7 @@ export type GrammarFillAnalysisSurfaceModel = {
   analysisByQuestionId: Record<string, GrammarFillBlankAnalysisView>
   groupView: GrammarFillGroupView | null
   defaultQuestionId: string | null
+  normalization: GrammarFillPaperViewModel['normalization']
 }
 
 // ─── Role / path label maps ────────────────────────────────────────────────────
@@ -221,10 +226,15 @@ export function buildGrammarFillAnalysisSurfaceModel(input: {
   }
 
   const questionIds = group.questionIds ?? []
+  const plainModel = buildGrammarFillPaperView({ asset, groupId })
+  const canonicalReady = plainModel.normalization.status === 'ready'
 
-  // Build textMap using per-paragraph construction (GATE-1 MF-1 consistency).
-  // sentenceId = `${paragraphId}-s{i}` — same convention as cloze adapter.
-  const textMap = buildGrammarFillAnalysisTextMap(asset, group)
+  // Canonical compatibility reuses the exact plain-view TextMap and semantic
+  // nodes. Non-enabled/needs-review groups retain the established legacy
+  // analysis model.
+  const textMap = canonicalReady
+    ? plainModel.surfaceData.textMap
+    : buildGrammarFillAnalysisTextMap(asset, group)
 
   const passageStructure: PassageStructure = {
     section: GRAMMAR_FILL_SECTION,
@@ -236,10 +246,30 @@ export function buildGrammarFillAnalysisSurfaceModel(input: {
   }
 
   // Build questions for PaperSurface left column.
-  const questions = buildQuestions(asset, questionIds)
+  const questions = canonicalReady
+    ? [...plainModel.surfaceData.questions]
+    : buildQuestions(asset, questionIds)
+
+  if (canonicalReady) {
+    for (const questionId of questionIds) {
+      const expectedBlankId = asset.content.questions[questionId]?.blankId
+      const analysisBlankId = analysis.blanks[questionId]?.blankId
+      if (analysisBlankId && analysisBlankId !== expectedBlankId) {
+        throw new Error(
+          `[GRAMMAR_FILL_ANALYSIS_ANCHOR_MISMATCH] ${questionId} analysis blank is `
+          + `${analysisBlankId}; canonical blank is ${expectedBlankId}.`,
+        )
+      }
+    }
+  }
 
   // Build passage-side evidence ranges from analysis.blanks using tolerant match.
-  const { evidence } = buildEvidence(analysis, questionIds, textMap)
+  const { evidence } = buildEvidence(
+    analysis,
+    questionIds,
+    textMap,
+    canonicalReady,
+  )
 
   // Build per-blank analysis views.
   const analysisByQuestionId = buildAnalysisViews(asset, analysis, questionIds)
@@ -252,10 +282,13 @@ export function buildGrammarFillAnalysisSurfaceModel(input: {
   return {
     report: buildShellReport(asset, group, groupId),
     passageStructures: { [GRAMMAR_FILL_SECTION]: passageStructure },
-    surfaceData: { textMap, questions, evidence },
+    surfaceData: canonicalReady
+      ? { ...plainModel.surfaceData, evidence }
+      : { textMap, questions, evidence },
     analysisByQuestionId,
     groupView,
     defaultQuestionId: questionIds[0] ?? null,
+    normalization: plainModel.normalization,
   }
 }
 
@@ -320,6 +353,7 @@ function buildEvidence(
   analysis: ReviewedGrammarFillAnalysisV1,
   questionIds: string[],
   textMap: PaperTextMap,
+  failOnUnresolved: boolean,
 ): { evidence: PaperEvidence[] } {
   const evidence: PaperEvidence[] = []
 
@@ -333,6 +367,11 @@ function buildEvidence(
       // Both 'passage' and 'stem' signals are searched in the passage text.
       const evidenceId = `${questionId}-evidence-${i + 1}`
       const ranges = findAllTextRangesTolerant(textMap, item.signalText)
+      if (failOnUnresolved && ranges.length === 0) {
+        throw new Error(
+          `[GRAMMAR_FILL_EVIDENCE_UNRESOLVED] ${evidenceId} has no range in canonical visible text.`,
+        )
+      }
       for (const range of ranges) {
         evidence.push({
           id: evidenceId,

@@ -133,7 +133,10 @@ import {
   SimilarQuestionsRailView,
   type SimilarRailRequestState,
 } from './SimilarQuestionsRailView'
-import { applyPaperSurfaceFocusIntent } from './paperBrowseFocusIntent'
+import {
+  applyPaperSurfaceFocusIntent,
+  shouldClearLectureSelectionForActiveGroup,
+} from './paperBrowseFocusIntent'
 import './paperBrowsePage.css'
 
 type GroupModel =
@@ -1017,7 +1020,28 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
   useEffect(() => {
     if (isProgrammaticScrollRef.current) return
     if (!activeAnchor || !asset?.content.groups[activeAnchor]) return
-    setLectureSelection((prev) => (prev && prev.groupId !== activeAnchor ? null : prev))
+    setLectureSelection((prev) => {
+      if (!prev) return prev
+      const scroller = scrollerRef.current
+      const selectedGroup = scroller?.querySelector<HTMLElement>(
+        `[data-paper-browse-anchor="${cssAttr(prev.groupId)}"]`,
+      )
+      const selectedRect = selectedGroup?.getBoundingClientRect()
+      const scrollerRect = scroller?.getBoundingClientRect()
+      const selectedGroupVisible = Boolean(
+        selectedRect
+        && scrollerRect
+        && selectedRect.bottom > scrollerRect.top
+        && selectedRect.top < scrollerRect.bottom,
+      )
+      return shouldClearLectureSelectionForActiveGroup({
+        activeGroupId: activeAnchor,
+        selectedGroupId: prev.groupId,
+        selectedGroupVisible,
+      })
+        ? null
+        : prev
+    })
   }, [activeAnchor, asset])
 
   // 刀 2 修复轮 ①: 阅读 parity — 点题/点证据后把命中的原文证据句滚入视野，
@@ -1275,6 +1299,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
       groupId,
       intent,
       suppressScrollspyClear,
+      activateGroup: setActiveAnchor,
       selectLectureQuestion,
     })
   }

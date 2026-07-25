@@ -43,7 +43,7 @@ import type {
 } from '../../../../shared/papersurface/types'
 import type {
   CanonicalSurfaceParagraph,
-} from '../../../../shared/paper-normalization/canonicalClozeSurfaceAdapter.mjs'
+} from '../../../../shared/paper-normalization/canonicalPaperGroupSurfaceAdapter.mjs'
 
 /**
  * Extended CSSProperties to allow CSS custom properties on the root.

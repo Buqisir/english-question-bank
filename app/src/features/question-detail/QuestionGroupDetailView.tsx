@@ -134,6 +134,27 @@ type LoadState =
   | { status: 'error'; message: string }
   | { status: 'ready'; model: PeekModel }
 
+export function QuestionGroupPaperSurface({ entry }: { entry: PeekModel }) {
+  const surfaceData = entry.model.surfaceData
+  const surfaceEl = (
+    <PaperSurface
+      textMap={surfaceData.textMap}
+      semanticParagraphs={surfaceData.semanticParagraphs}
+      annotations={[]}
+      evidence={surfaceData.evidence}
+      questions={surfaceData.questions}
+      optionBank={entry.kind === 'sevenChoices' ? entry.model.options : undefined}
+      mode="lecture"
+      lectureFocus={null}
+      readingFocusBySection={{}}
+      onFocusIntent={() => {}}
+    />
+  )
+  return entry.kind === 'writing'
+    ? <WritingPaperPage pageModel={entry.model.pageModel}>{surfaceEl}</WritingPaperPage>
+    : surfaceEl
+}
+
 // grammar-fill-analysis-v1.json 的 schemaVersion 字段值是 "grammar-fill-
 // analysis-v2"（D1 grammar-facets-v2 就地重铸内容，磁盘文件名未改——见
 // server/search/teachingFacets.mjs 的 analysisConfigs 注释）。spec 文中
@@ -386,22 +407,7 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
     paperBody = <div className="peek-paper-placeholder">{load.message}</div>
   } else {
     const entry = load.model
-    const surfaceData = entry.model.surfaceData
-    const surfaceEl = (
-      <PaperSurface
-        textMap={surfaceData.textMap}
-        annotations={[]}
-        evidence={surfaceData.evidence}
-        questions={surfaceData.questions}
-        optionBank={entry.kind === 'sevenChoices' ? entry.model.options : undefined}
-        mode="lecture"
-        lectureFocus={null}
-        readingFocusBySection={{}}
-        onFocusIntent={() => {}}
-      />
-    )
-    paperBody =
-      entry.kind === 'writing' ? <WritingPaperPage pageModel={entry.model.pageModel}>{surfaceEl}</WritingPaperPage> : surfaceEl
+    paperBody = <QuestionGroupPaperSurface entry={entry} />
   }
 
   return (

@@ -5,7 +5,8 @@ import type {
   CanonicalSurfaceBlankNode,
   CanonicalSurfaceParagraph,
   CanonicalSurfaceTextNode,
-} from '../../../../shared/paper-normalization/canonicalClozeSurfaceAdapter.mjs'
+} from '../../../../shared/paper-normalization/canonicalPaperGroupSurfaceAdapter.mjs'
+import { formatCanonicalBlankVisibleText } from '../../../../shared/paper-normalization/canonicalPaperGroupSurfaceAdapter.mjs'
 import type { PaperEvidence } from '../../../../shared/papersurface/types'
 
 type CanonicalBlankFocus = {
@@ -94,7 +95,7 @@ export function renderCanonicalPaperSentenceContent(
       return renderedText
     }
 
-    const isClickable = blankFocus?.renderer === 'paper-blank'
+    const isClickable = blankFocus !== null
     const isActive = blankFocus?.activeQuestionId === node.questionId
     const className = isClickable
       ? isActive
@@ -172,5 +173,5 @@ function canonicalNodeVisibleText(
   node: CanonicalSurfaceTextNode | CanonicalSurfaceBlankNode,
 ): string {
   if (node.type === 'text') return node.text
-  return `${node.questionNo}${node.hint ? ` (${node.hint})` : ''}`
+  return formatCanonicalBlankVisibleText(node.questionNo, node.hint)
 }

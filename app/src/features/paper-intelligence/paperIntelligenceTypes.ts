@@ -4,7 +4,7 @@
  */
 
 import type { PaperTextMap, PaperQuestion, PaperEvidence } from '../../../../shared/papersurface/types'
-import type { CanonicalSurfaceParagraph } from '../../../../shared/paper-normalization/canonicalClozeSurfaceAdapter.mjs'
+import type { CanonicalSurfaceParagraph } from '../../../../shared/paper-normalization/canonicalPaperGroupSurfaceAdapter.mjs'
 
 export type LoadEvidence = {
   quote: string

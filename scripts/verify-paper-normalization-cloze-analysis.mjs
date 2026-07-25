@@ -96,7 +96,8 @@ try {
       ? applyPaperSurfaceFocusIntent({
           groupId,
           intent: { kind: 'request-lecture-focus', questionId },
-          suppressScrollspyClear: () => trace.push('suppress-scrollspy-clear'),
+          suppressScrollspyClear: (durationMs) => trace.push(`suppress-scrollspy-clear:${durationMs}`),
+          activateGroup: (selectedGroupId) => trace.push(`activate:${selectedGroupId}`),
           selectLectureQuestion: (selectedGroupId, selectedId) => {
             trace.push(`select:${selectedGroupId}:${selectedId}`)
             selectedQuestionId = selectedId
@@ -109,7 +110,8 @@ try {
     const result = dispatchFocus(blank.questionId)
     assert.equal(result.handled, true)
     assert.deepEqual(result.trace, [
-      'suppress-scrollspy-clear',
+      'suppress-scrollspy-clear:undefined',
+      `activate:${groupId}`,
       `select:${groupId}:${blank.questionId}`,
     ])
     assert.equal(selectedQuestionId, blank.questionId)

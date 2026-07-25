@@ -1,9 +1,15 @@
 import { segmentPaperText } from '../papersurface/segmentPaperText.mjs'
 import { normalizePaperGroup } from './normalizePaperGroup.mjs'
 
-const PROOF_PAPER_ID = 'paper-2026-i'
-const PROOF_GROUP_ID = 'group-2026-i-cloze'
-const CLOZE_SECTION = '完形填空'
+const COMPATIBILITY_GROUPS = new Set([
+  'paper-2026-i:group-2026-i-cloze',
+  'paper-2026-i:group-2026-i-grammar-fill',
+  'paper-960d0f8d:group-960d0f8d-grammar-fill',
+])
+const SECTION_BY_GROUP_TYPE = Object.freeze({
+  cloze: '完形填空',
+  grammarFill: '语法填空',
+})
 
 function compatibilityDiagnostic(asset, groupId) {
   return {
@@ -34,13 +40,17 @@ function exactSourceSlice(asset, groupId) {
   }
 }
 
+export function formatCanonicalBlankVisibleText(questionNo, hint) {
+  return `${questionNo}${hint ? `(${hint})` : ''}`
+}
+
 function displayTextForNode(node, questionNoById) {
   if (node.type === 'text') return node.text
   const questionNo = questionNoById.get(node.questionId)
   if (questionNo === undefined) {
     throw new Error(`Canonical blank references missing question ${node.questionId}`)
   }
-  return `${questionNo}${node.hint ? ` (${node.hint})` : ''}`
+  return formatCanonicalBlankVisibleText(questionNo, node.hint)
 }
 
 function sliceSemanticNodes(displaySegments, start, end) {
@@ -68,6 +78,10 @@ function sliceSemanticNodes(displaySegments, start, end) {
 }
 
 function buildParagraphModels(canonicalGroup) {
+  const section = SECTION_BY_GROUP_TYPE[canonicalGroup.groupType]
+  if (!section) {
+    throw new Error(`Unsupported canonical surface group type ${canonicalGroup.groupType}`)
+  }
   const questionNoById = new Map(
     canonicalGroup.questions.map((question) => [
       question.questionId,
@@ -122,12 +136,12 @@ function buildParagraphModels(canonicalGroup) {
     return {
       textMapParagraph: {
         id: paragraph.paragraphId,
-        section: CLOZE_SECTION,
+        section,
         sentences: segmented.sentences,
       },
       semanticParagraph: {
         id: paragraph.paragraphId,
-        section: CLOZE_SECTION,
+        section,
         groupType: canonicalGroup.groupType,
         sentences: semanticSentences,
       },
@@ -136,13 +150,14 @@ function buildParagraphModels(canonicalGroup) {
 }
 
 /**
- * Compatibility adapter for the single Ticket 02 proof group.
+ * Compatibility adapter for the explicitly allowlisted proof groups.
  *
  * It returns a discriminated result so hosts can retain their legacy model
  * when compatibility is not enabled or normalization fails closed.
  */
-export function buildCanonicalClozeSurfaceData({ asset, groupId }) {
-  if (asset?.paper?.paperId !== PROOF_PAPER_ID || groupId !== PROOF_GROUP_ID) {
+export function buildCanonicalPaperGroupSurfaceData({ asset, groupId }) {
+  const paperId = asset?.paper?.paperId ?? ''
+  if (!COMPATIBILITY_GROUPS.has(`${paperId}:${groupId}`)) {
     return {
       status: 'not_enabled',
       diagnostic: compatibilityDiagnostic(asset, groupId),
@@ -176,7 +191,7 @@ export function buildCanonicalClozeSurfaceData({ asset, groupId }) {
         semanticParagraphs: paragraphModels.map((model) => model.semanticParagraph),
         questions: normalized.group.questions.map((question, order) => ({
           id: question.questionId,
-          section: CLOZE_SECTION,
+          section: SECTION_BY_GROUP_TYPE[normalized.group.groupType],
           order,
           questionNo: String(question.questionNo),
           stem: question.stem ?? '',
@@ -204,4 +219,11 @@ export function buildCanonicalClozeSurfaceData({ asset, groupId }) {
       },
     }
   }
+}
+
+/**
+ * Ticket 02 compatibility name retained for existing cloze consumers.
+ */
+export function buildCanonicalClozeSurfaceData(input) {
+  return buildCanonicalPaperGroupSurfaceData(input)
 }

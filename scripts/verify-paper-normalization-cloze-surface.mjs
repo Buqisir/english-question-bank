@@ -5,7 +5,7 @@ import { createServer } from '../app/node_modules/vite/dist/node/index.js'
 
 import {
   buildCanonicalClozeSurfaceData,
-} from '../shared/paper-normalization/canonicalClozeSurfaceAdapter.mjs'
+} from '../shared/paper-normalization/canonicalPaperGroupSurfaceAdapter.mjs'
 import {
   paperBlankRuling,
 } from '../shared/papersurface/blankRuling.mjs'
