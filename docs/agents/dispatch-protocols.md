@@ -82,17 +82,19 @@ Fixed point: <commit | not applicable>
 Model: <model>
 Effort: <low | medium | high | xhigh | max | ultra>
 Prompt:
-Implement and only implement the linked ticket. Treat that ticket as the durable source of scope, acceptance, verification, boundaries, and Next on PASS; finish with the exit it declares.
+Use the attached entry skill to perform its actual entry action, and only that action, for the linked artifact or stated goal. Treat the declared artifact as the durable source of scope, acceptance, verification, boundaries, and Next on PASS; finish with the exit it declares.
 ```
 
 Fill every applicable anchor. Use `not applicable` only when an anchor truly
 does not apply. Repeat exact paths and commits so the owner does not have to
 find or remember them.
 
-Do not paste the next ticket's full body into `Prompt`. The linked ticket owns
-scope, acceptance, verification, and boundaries. The prompt should identify
-the action and require the task to finish according to `Next on PASS`; this
-prevents recursive prompt growth and constraint loss.
+Do not paste the next ticket's full body into `Prompt`. The linked artifact
+owns scope, acceptance, verification, and boundaries. Name the actual entry
+action: implement for `$implement`, review for `$code-review`, route for Ask
+Matt, map for Wayfinder, or the corresponding action for another entry skill.
+Require the task to finish according to `Next on PASS`; this prevents
+recursive prompt growth and constraint loss.
 
 Implementation and fix tasks attach `$implement`. Initial independent reviews
 and focused re-reviews attach `$code-review`. Ask Matt, Wayfinder, grilling,

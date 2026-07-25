@@ -159,13 +159,59 @@ function completionExitErrors({
   terminal,
   currentTaskComplete,
   initiativeClosed,
+  ownerQaPending = false,
   nextOnPass,
   exit,
 }) {
   const errors = []
+  const exitKinds = new Set(['same-task', 'new-task', 'owner-qa', 'done'])
+  const normalizedNextOnPass = nextOnPass?.trim().toLowerCase()
+  const routesToOwnerQa = normalizedNextOnPass === 'owner qa'
+  const routesToDone = normalizedNextOnPass === 'done'
 
   if (!terminal && !nextOnPass?.trim()) {
     errors.push('Terminal: no requires Next on PASS')
+  }
+  if (ownerQaPending && !currentTaskComplete) {
+    errors.push(
+      'owner QA cannot be pending before the current task completes',
+    )
+  }
+  if (initiativeClosed && ownerQaPending) {
+    errors.push('closed initiative cannot also be waiting for owner QA')
+  }
+  if (initiativeClosed && !currentTaskComplete) {
+    errors.push('closed initiative requires a completed current task')
+  }
+  if (initiativeClosed && (!terminal || !routesToDone)) {
+    errors.push(
+      'closed initiative requires Terminal: yes and Next on PASS: DONE',
+    )
+  }
+  if (ownerQaPending && !routesToOwnerQa) {
+    errors.push('owner-QA pending requires Next on PASS: owner QA')
+  }
+  if (currentTaskComplete && routesToOwnerQa && !ownerQaPending) {
+    errors.push('Next on PASS: owner QA requires owner-QA pending')
+  }
+  if (currentTaskComplete && routesToDone && !initiativeClosed) {
+    errors.push('Next on PASS: DONE requires a closed initiative')
+  }
+  if (!exitKinds.has(exit.kind)) {
+    errors.push(`unknown completion exit: ${exit.kind}`)
+    return errors
+  }
+
+  const legalExitKind = !currentTaskComplete
+    ? 'same-task'
+    : initiativeClosed
+      ? 'done'
+      : ownerQaPending
+        ? 'owner-qa'
+        : 'new-task'
+
+  if (exit.kind !== legalExitKind) {
+    errors.push(`only legal exit is ${legalExitKind}`)
   }
   if (exit.kind === 'done' && !initiativeClosed) {
     errors.push('DONE requires a closed initiative')
@@ -242,6 +288,7 @@ const successorRoute = {
   terminal: false,
   currentTaskComplete: true,
   initiativeClosed: false,
+  ownerQaPending: false,
   nextOnPass: 'docs/cuts/example/tickets/TICKET-02.md',
 }
 const exitErrors = (exit) => completionExitErrors({ ...successorRoute, exit })
@@ -266,14 +313,161 @@ assert(
   'completed non-terminal ticket accepts the declared successor handoff',
 )
 assert(
+  exitErrors({ kind: 'owner-qa' }).some((error) =>
+    error.includes('only legal exit is new-task'),
+  ),
+  'completed non-terminal ticket rejects owner-QA handoff',
+)
+assert(
+  exitErrors({ kind: 'unexpected' }).some((error) =>
+    error.includes('unknown completion exit'),
+  ),
+  'completion exits are closed to the declared four kinds',
+)
+for (const exit of [
+  { kind: 'new-task', target: successorRoute.nextOnPass },
+  { kind: 'owner-qa' },
+  { kind: 'done' },
+]) {
+  assert(
+    completionExitErrors({
+      ...successorRoute,
+      currentTaskComplete: false,
+      exit,
+    }).some((error) => error.includes('only legal exit is same-task')),
+    `unfinished current ticket rejects ${exit.kind}`,
+  )
+}
+assert(
   completionExitErrors({
-    terminal: true,
-    currentTaskComplete: true,
-    initiativeClosed: true,
-    nextOnPass: 'DONE',
+    ...successorRoute,
+    currentTaskComplete: false,
+    exit: { kind: 'same-task' },
+  }).length === 0,
+  'unfinished current ticket accepts same-task',
+)
+const ownerQaRoute = {
+  terminal: false,
+  currentTaskComplete: true,
+  initiativeClosed: false,
+  ownerQaPending: true,
+  nextOnPass: 'owner QA',
+}
+for (const exit of [
+  { kind: 'same-task' },
+  { kind: 'new-task', target: ownerQaRoute.nextOnPass },
+  { kind: 'done' },
+]) {
+  assert(
+    completionExitErrors({ ...ownerQaRoute, exit }).some((error) =>
+      error.includes('only legal exit is owner-qa'),
+    ),
+    `owner-QA pending rejects ${exit.kind}`,
+  )
+}
+assert(
+  completionExitErrors({
+    ...ownerQaRoute,
+    exit: { kind: 'owner-qa' },
+  }).length === 0,
+  'owner-QA pending accepts owner-QA handoff',
+)
+assert(
+  completionExitErrors({
+    ...ownerQaRoute,
+    currentTaskComplete: false,
+    exit: { kind: 'same-task' },
+  }).some((error) =>
+    error.includes('owner QA cannot be pending before the current task completes'),
+  ),
+  'owner-QA pending rejects an unfinished current ticket state',
+)
+assert(
+  completionExitErrors({
+    ...ownerQaRoute,
+    nextOnPass: successorRoute.nextOnPass,
+    exit: { kind: 'owner-qa' },
+  }).some((error) =>
+    error.includes('owner-QA pending requires Next on PASS: owner QA'),
+  ),
+  'owner-QA pending rejects a ticket-successor route',
+)
+assert(
+  completionExitErrors({
+    ...successorRoute,
+    nextOnPass: ownerQaRoute.nextOnPass,
+    exit: { kind: 'new-task', target: ownerQaRoute.nextOnPass },
+  }).some((error) =>
+    error.includes('Next on PASS: owner QA requires owner-QA pending'),
+  ),
+  'owner-QA route rejects a non-pending owner-QA state',
+)
+const closedRoute = {
+  terminal: true,
+  currentTaskComplete: true,
+  initiativeClosed: true,
+  ownerQaPending: false,
+  nextOnPass: 'DONE',
+}
+for (const exit of [
+  { kind: 'same-task' },
+  { kind: 'new-task', target: 'DONE' },
+  { kind: 'owner-qa' },
+]) {
+  assert(
+    completionExitErrors({ ...closedRoute, exit }).some((error) =>
+      error.includes('only legal exit is done'),
+    ),
+    `closed initiative rejects ${exit.kind}`,
+  )
+}
+assert(
+  completionExitErrors({
+    ...closedRoute,
     exit: { kind: 'done' },
   }).length === 0,
   'closed initiative accepts DONE',
+)
+assert(
+  completionExitErrors({
+    ...closedRoute,
+    ownerQaPending: true,
+    exit: { kind: 'done' },
+  }).some((error) =>
+    error.includes('closed initiative cannot also be waiting for owner QA'),
+  ),
+  'closed initiative rejects an owner-QA pending state',
+)
+assert(
+  completionExitErrors({
+    ...closedRoute,
+    currentTaskComplete: false,
+    exit: { kind: 'same-task' },
+  }).some((error) =>
+    error.includes('closed initiative requires a completed current task'),
+  ),
+  'closed initiative rejects an unfinished current ticket state',
+)
+assert(
+  completionExitErrors({
+    ...closedRoute,
+    terminal: false,
+    nextOnPass: successorRoute.nextOnPass,
+    exit: { kind: 'done' },
+  }).some((error) =>
+    error.includes('closed initiative requires Terminal: yes and Next on PASS: DONE'),
+  ),
+  'closed initiative rejects a non-terminal ticket-successor route',
+)
+assert(
+  completionExitErrors({
+    ...closedRoute,
+    initiativeClosed: false,
+    exit: { kind: 'new-task', target: 'DONE' },
+  }).some((error) =>
+    error.includes('Next on PASS: DONE requires a closed initiative'),
+  ),
+  'completed DONE route rejects an open initiative state',
 )
 assert(
   completionExitErrors({
@@ -359,9 +553,13 @@ assert(
   'canonical fields keep their required order',
 )
 assert(
-  canonicalBlock.includes('Implement and only implement the linked ticket') &&
+  canonicalBlock.includes('actual entry action') &&
     canonicalBlock.includes('Next on PASS'),
-  'canonical prompt is short and routes through the linked ticket',
+  'canonical prompt adapts to the actual entry action and durable route',
+)
+assert(
+  !canonicalBlock.includes('Implement and only implement'),
+  'canonical prompt does not mislabel every entry action as implementation',
 )
 assert(
   !canonicalBlock.split('\n')[0].includes('/Users/huangxuewei'),
