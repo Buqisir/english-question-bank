@@ -48,6 +48,10 @@ essay-grading 幸存件重建，判例已回流，远端 Buqisir/project-os 私�
 
 ## 主线焦点
 
+- 2026-07-25：**paper-normalization 发布门禁通过**：cloze/grammarFill canonical group 已成为
+  PaperSurface、Print HTML 与 DOCX proof consumer 的共享语义事实；Print/PDF/DOCX 实物 owner QA 通过，
+  Phase B focused re-review Standards + Spec PASS（0 Must Fix），`verify:all`
+  92 PASS / 1 declared SKIP / 0 FAIL；本次不修改生产配置、不部署生产。
 - 2026-07-25：**workflow completion-exit contract 发布**：严格区分 owner `dispatch` 与 agent `handoff`；
   非终态票必须按 durable `Next on PASS` 返回唯一后继，只有全 initiative 闭合才可 `DONE`；
   新任务与 owner-QA 完整模板各归单一 canonical owner，skill attachment/reference 规则保持；
