@@ -14,6 +14,7 @@ const registry = {
   scripts: [
   'scripts/verify-paper-asset-v1.mjs',
   'scripts/verify-paper-normalization-cloze.mjs',
+  'scripts/verify-paper-normalization-grammar-fill.mjs',
   'scripts/verify-paper-normalization-cloze-surface.mjs',
   'scripts/verify-paper-normalization-cloze-analysis.mjs',
   'scripts/verify-paper-surface-mjs-declaration-parity.mjs',

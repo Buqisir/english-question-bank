@@ -218,6 +218,105 @@ function scanClozeParagraph(paragraph, paragraphIndex) {
   return { issues, markers }
 }
 
+function scanGrammarFillParagraph(paragraph, paragraphIndex) {
+  const sourcePath = `group.passage.paragraphs[${paragraphIndex}].text`
+  const issues = []
+  const markers = []
+  const dialectSpans = []
+  const dialectPatterns = [
+    {
+      name: 'embedded',
+      pattern: /(?=(?<![\p{L}\p{N}_])(__([1-9]\d{0,2})__(?!_)(?: \(([^()\r\n]*)\))?))/gu,
+    },
+    {
+      name: 'label',
+      pattern: /(?=(?<![\p{L}\p{N}._])(([1-9]\d{0,2})\._____(?:\(([^()\r\n]*)\))?))/gu,
+    },
+  ]
+
+  for (const dialect of dialectPatterns) {
+    let match
+    while ((match = dialect.pattern.exec(paragraph.text)) !== null) {
+      const raw = match[1]
+      dialectSpans.push({
+        dialect: dialect.name,
+        questionNo: Number(match[2]),
+        hint: match[3] || null,
+        raw,
+        sourcePath,
+        start: match.index,
+        end: match.index + raw.length,
+        paragraphId: paragraph.paragraphId,
+        paragraphIndex,
+      })
+      dialect.pattern.lastIndex = match.index + 1
+    }
+  }
+
+  dialectSpans.sort((left, right) => left.start - right.start || right.end - left.end)
+  for (let index = 1; index < dialectSpans.length; index++) {
+    const previous = dialectSpans[index - 1]
+    const current = dialectSpans[index]
+    if (current.start < previous.end) {
+      issues.push(
+        issue(
+          'OVERLAPPING_SOURCE_SPAN',
+          sourcePath,
+          `GrammarFill marker spans overlap at ${current.start}-${previous.end}`,
+        ),
+      )
+      issues.push(
+        issue(
+          'AMBIGUOUS_MARKER',
+          sourcePath,
+          'GrammarFill marker text has more than one overlapping interpretation',
+        ),
+      )
+    }
+  }
+
+  for (const marker of dialectSpans) {
+    const suffix = paragraph.text.slice(marker.end)
+    const hasUnsupportedAdjacentHint =
+      (marker.dialect === 'embedded' &&
+        marker.hint === null &&
+        /^(?:\(| +\()/.test(suffix)) ||
+      (marker.dialect === 'label' && marker.hint === null && /^ +\(/.test(suffix))
+    const hasUnsupportedTrailingToken = /^[\p{L}\p{N}_]/u.test(suffix)
+    if (hasUnsupportedAdjacentHint || hasUnsupportedTrailingToken) {
+      issues.push(
+        issue(
+          'UNSUPPORTED_MARKER',
+          sourcePath,
+          `GrammarFill marker at ${marker.start} is not anchored to a complete token`,
+        ),
+      )
+    }
+    markers.push(marker)
+  }
+
+  const underscoreRunPattern = /_{2,}/g
+  let underscoreRun
+  while ((underscoreRun = underscoreRunPattern.exec(paragraph.text)) !== null) {
+    const runStart = underscoreRun.index
+    const runEnd = runStart + underscoreRun[0].length
+    const belongsToSupportedMarker = markers.some(
+      (marker) => marker.start <= runStart && marker.end >= runEnd,
+    )
+    if (!belongsToSupportedMarker) {
+      issues.push(
+        issue(
+          'UNSUPPORTED_MARKER',
+          sourcePath,
+          `Unsupported grammarFill underscore run at ${runStart}-${runEnd}`,
+        ),
+      )
+    }
+  }
+
+  return { issues, markers }
+}
+
 function validateInput(input) {
   const issues = []
   if (!isRecord(input)) {
@@ -264,7 +363,7 @@ function validateCanonicalGroup(group) {
 
   if (
     group.schemaVersion !== CANONICAL_SCHEMA_VERSION ||
-    group.groupType !== 'cloze' ||
+    !['cloze', 'grammarFill'].includes(group.groupType) ||
     questionsById.size !== group.questions.length
   ) {
     issues.push(
@@ -379,12 +478,12 @@ export function normalizePaperGroup(input) {
 
   const { group, questions, blanks = {} } = input
   const issues = []
-  if (group.groupType !== 'cloze') {
+  if (!['cloze', 'grammarFill'].includes(group.groupType)) {
     issues.push(
       issue(
         'UNSUPPORTED_GROUP_TYPE',
         'group.groupType',
-        `Ticket 01 supports cloze, received ${JSON.stringify(group.groupType)}`,
+        `Supported group types are cloze and grammarFill, received ${JSON.stringify(group.groupType)}`,
       ),
     )
   }
@@ -401,7 +500,7 @@ export function normalizePaperGroup(input) {
     group.blankIds.some((blankId) => typeof blankId !== 'string' || blankId.length === 0) ||
     !Array.isArray(group.passage?.paragraphs)
   ) {
-    issues.push(issue('INVALID_GROUP', 'group', 'Cloze group shape is incomplete'))
+    issues.push(issue('INVALID_GROUP', 'group', 'Supported group shape is incomplete'))
   }
   if (issues.length > 0) return needsReview(issues)
 
@@ -470,21 +569,32 @@ export function normalizePaperGroup(input) {
         ),
       )
     }
+    const optionsAreValid =
+      group.groupType === 'cloze'
+        ? Array.isArray(question.options) &&
+          question.options.every(
+            (option) =>
+              isRecord(option) &&
+              typeof option.label === 'string' &&
+              typeof option.text === 'string',
+          )
+        : question.options === undefined ||
+          (Array.isArray(question.options) &&
+            question.options.every(
+              (option) =>
+                isRecord(option) &&
+                typeof option.label === 'string' &&
+                typeof option.text === 'string',
+            ))
     if (
       typeof question.stem !== 'string' ||
-      !Array.isArray(question.options) ||
-      question.options.some(
-        (option) =>
-          !isRecord(option) ||
-          typeof option.label !== 'string' ||
-          typeof option.text !== 'string',
-      )
+      !optionsAreValid
     ) {
       issues.push(
         issue(
           'INVALID_QUESTION',
           `questions.${questionId}`,
-          `${questionId} requires a string stem and string label/text options`,
+          `${questionId} requires a string stem and valid options for ${group.groupType}`,
         ),
       )
     }
@@ -532,6 +642,19 @@ export function normalizePaperGroup(input) {
         ),
       )
     }
+    if (
+      isRecord(blank) &&
+      blank.prompt !== undefined &&
+      typeof blank.prompt !== 'string'
+    ) {
+      issues.push(
+        issue(
+          'INVALID_BLANK',
+          `blanks.${blankId}.prompt`,
+          `${blankId} prompt must be a string when present`,
+        ),
+      )
+    }
   }
 
   if (group.questionIds.length !== group.blankIds.length) {
@@ -570,7 +693,10 @@ export function normalizePaperGroup(input) {
       )
     }
     seenParagraphIds.add(paragraph.paragraphId)
-    const parsed = scanClozeParagraph(paragraph, index)
+    const parsed =
+      group.groupType === 'cloze'
+        ? scanClozeParagraph(paragraph, index)
+        : scanGrammarFillParagraph(paragraph, index)
     issues.push(...parsed.issues)
     return { paragraph, index, markers: parsed.markers }
   })
@@ -618,6 +744,20 @@ export function normalizePaperGroup(input) {
         ),
       )
     }
+    if (group.groupType === 'grammarFill') {
+      const blankId = group.blankIds[index]
+      const blankPrompt = blanks[blankId]?.prompt || null
+      if (marker.hint !== null && blankPrompt !== null && marker.hint !== blankPrompt) {
+        issues.push(
+          issue(
+            'HINT_CONFLICT',
+            marker.sourcePath,
+            `Marker hint ${JSON.stringify(marker.hint)} conflicts with ${blankId} prompt ${JSON.stringify(blankPrompt)}`,
+          ),
+        )
+      }
+      marker.canonicalHint = marker.hint ?? blankPrompt
+    }
   }
 
   if (issues.length > 0) return needsReview(issues)
@@ -651,7 +791,7 @@ export function normalizePaperGroup(input) {
         type: 'blank',
         questionId,
         blankId: group.blankIds[markerIndex],
-        hint: null,
+        hint: marker.canonicalHint ?? null,
         sourceSpan: {
           sourcePath: marker.sourcePath,
           start: marker.start,
