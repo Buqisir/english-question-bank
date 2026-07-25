@@ -5,6 +5,7 @@ import {
   cleanupPaperImportTempArtifacts,
   commitPaperImportLatestSwap,
   removePaperImportVersion,
+  recoverPaperImportLatestSwap,
   rollbackPaperImportLatestSwap,
   swapPaperImportLatest,
   writePaperImportVersion,
@@ -108,6 +109,33 @@ function getLatestDbAssetVersion(db, paperId) {
   const row = db.prepare('SELECT MAX(asset_version) AS version FROM paper_asset_versions WHERE paper_id = ?').get(paperId)
   const version = Number(row?.version)
   return Number.isInteger(version) && version > 0 ? version : 0
+}
+
+function getPublishedDbAssetVersions(db, paperId) {
+  const table = db.prepare(
+    "SELECT name FROM sqlite_master WHERE type = 'table' AND name = 'paper_asset_versions'",
+  ).get()
+  if (!table) return []
+  return db.prepare(
+    `
+    SELECT asset_version
+    FROM paper_asset_versions
+    WHERE paper_id = ? AND status = 'published'
+    ORDER BY asset_version
+    `,
+  ).all(paperId).map(({ asset_version: version }) => Number(version))
+}
+
+export function recoverInterruptedPaperImportPublish({
+  db,
+  paperAssetsDir,
+  paperId,
+}) {
+  return recoverPaperImportLatestSwap({
+    paperAssetsDir,
+    paperId,
+    publishedVersions: getPublishedDbAssetVersions(db, paperId),
+  })
 }
 
 function computeNextPublishVersion({ db, paperAssetsDir, paperId }) {
@@ -484,6 +512,7 @@ export function publishPaperImportPackage({
   }
 
   const paperId = validation.packageData.paperAsset.paper.paperId
+  recoverInterruptedPaperImportPublish({ db, paperAssetsDir, paperId })
   cleanupPaperImportTempArtifacts(paperAssetsDir)
   const version = computeNextPublishVersion({ db, paperAssetsDir, paperId })
   const readingGroups = getReadingChoiceGroups(validation.packageData.paperAsset).map((group) => ({
@@ -546,6 +575,9 @@ export function publishPaperImportPackage({
       deferCleanup: true,
       forceFailureAt: failurePoint,
     })
+    if (failurePoint === 'process-exit-after-latest-swap') {
+      process.exit(86)
+    }
     db.exec('COMMIT')
     dbCommitted = true
     try {

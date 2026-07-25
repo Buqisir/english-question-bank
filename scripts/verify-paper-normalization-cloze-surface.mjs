@@ -161,6 +161,44 @@ try {
   assert.equal((markup.match(/data-paper-blank-id=/g) ?? []).length, 15)
   assert.equal((markup.match(/class="ps-question-no"/g) ?? []).length, 15)
   assert.match(markup, /data-paper-blank-id="blank-2026-i-041"[^>]*>41<\/span>/)
+
+  const missingParagraphCompanion = model.surfaceData.semanticParagraphs.slice(1)
+  assert.throws(
+    () =>
+      renderToStaticMarkup(
+        createElement(PaperSurface, {
+          ...model.surfaceData,
+          semanticParagraphs: missingParagraphCompanion,
+          annotations: [],
+          mode: 'lecture',
+          lectureFocus: null,
+          readingFocusBySection: {},
+          onFocusIntent() {},
+        }),
+      ),
+    /CANONICAL_COMPANION_TEXT_MAP_MISMATCH/,
+  )
+
+  const missingSentenceCompanion = structuredClone(
+    model.surfaceData.semanticParagraphs,
+  )
+  missingSentenceCompanion[0].sentences =
+    missingSentenceCompanion[0].sentences.slice(1)
+  assert.throws(
+    () =>
+      renderToStaticMarkup(
+        createElement(PaperSurface, {
+          ...model.surfaceData,
+          semanticParagraphs: missingSentenceCompanion,
+          annotations: [],
+          mode: 'lecture',
+          lectureFocus: null,
+          readingFocusBySection: {},
+          onFocusIntent() {},
+        }),
+      ),
+    /CANONICAL_COMPANION_TEXT_MAP_MISMATCH/,
+  )
 } finally {
   await vite.close()
 }

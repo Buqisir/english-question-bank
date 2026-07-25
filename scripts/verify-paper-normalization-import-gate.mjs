@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import assert from 'node:assert/strict'
+import { spawnSync } from 'node:child_process'
 import {
   existsSync,
   mkdirSync,
@@ -17,6 +18,7 @@ import { DatabaseSync } from 'node:sqlite'
 
 import {
   publishPaperImportPackage,
+  recoverInterruptedPaperImportPublish,
 } from '../server/paper-import/publisher.mjs'
 import {
   makePublicValidationReport,
@@ -38,6 +40,19 @@ const fixtureDir = path.join(
 const schemaSql = readFileSync(path.join(rootDir, 'data/sql/schema.sql'), 'utf8')
 const paperId = 'paper-2024-jslk-english'
 const sidecarFileName = 'paper-normalized-groups-v1.json'
+
+const crashChildConfig = process.env.EQB_PAPER_IMPORT_CRASH_CHILD
+if (crashChildConfig) {
+  const { dbPath, paperAssetsDir } = JSON.parse(crashChildConfig)
+  const childDb = new DatabaseSync(dbPath)
+  publishPaperImportPackage({
+    files: readImportPackageFromDirectory(fixtureDir),
+    db: childDb,
+    paperAssetsDir,
+    failurePoint: 'process-exit-after-latest-swap',
+  })
+  throw new Error('Crash child returned without exiting')
+}
 
 function cloneFiles(files) {
   return files.map((file) => ({
@@ -121,6 +136,19 @@ function assertSidecarIsClean(sidecar) {
   ]) {
     assert.equal(serialized.includes(forbidden), false, `sidecar leaks ${forbidden}`)
   }
+}
+
+function runCrashChild({ dbPath, paperAssetsDir }) {
+  return spawnSync(process.execPath, [fileURLToPath(import.meta.url)], {
+    env: {
+      ...process.env,
+      EQB_PAPER_IMPORT_CRASH_CHILD: JSON.stringify({
+        dbPath,
+        paperAssetsDir,
+      }),
+    },
+    encoding: 'utf8',
+  })
 }
 
 const files = readImportPackageFromDirectory(fixtureDir)
@@ -268,6 +296,137 @@ try {
     )
     db.close()
   }
+
+  const crashRoot = path.join(tempRoot, 'process-exit-after-latest-swap')
+  mkdirSync(crashRoot, { recursive: true })
+  const crashAssets = path.join(crashRoot, 'paper-assets')
+  const crashDbPath = path.join(crashRoot, 'question-bank.sqlite')
+  const crashSeedDb = new DatabaseSync(crashDbPath)
+  crashSeedDb.exec(schemaSql)
+  const crashSeed = publishPaperImportPackage({
+    files,
+    db: crashSeedDb,
+    paperAssetsDir: crashAssets,
+  })
+  assert.equal(crashSeed.ok, true)
+  const crashLatest = path.join(crashAssets, paperId, 'latest')
+  const crashLatestBefore = snapshotTree(crashLatest)
+  const crashDbBefore = snapshotPublishedDb(crashSeedDb)
+  crashSeedDb.close()
+
+  const crashChild = runCrashChild({
+    dbPath: crashDbPath,
+    paperAssetsDir: crashAssets,
+  })
+  assert.equal(
+    crashChild.status,
+    86,
+    `crash child must exit after latest swap: ${crashChild.stderr}`,
+  )
+
+  const crashRestartDb = new DatabaseSync(crashDbPath)
+  assert.deepEqual(snapshotPublishedDb(crashRestartDb), crashDbBefore)
+  assert.equal(
+    existsSync(path.join(crashAssets, paperId, 'versions', 'v2')),
+    true,
+    'crash must occur after v2 and latest swap are durable',
+  )
+  assert.equal(
+    readJson(path.join(crashLatest, 'paper-asset.json')).paper.assetVersion,
+    2,
+    'crash must expose the post-swap latest before recovery',
+  )
+
+  const recovery = recoverInterruptedPaperImportPublish({
+    db: crashRestartDb,
+    paperAssetsDir: crashAssets,
+    paperId,
+  })
+  assert.equal(recovery.recovered, true)
+  assert.deepEqual(
+    snapshotTree(crashLatest),
+    crashLatestBefore,
+    'restart recovery must restore the old latest bytes',
+  )
+  assert.deepEqual(snapshotPublishedDb(crashRestartDb), crashDbBefore)
+  assert.equal(
+    existsSync(path.join(crashAssets, paperId, 'versions', 'v2')),
+    false,
+    'restart recovery must remove failed v2',
+  )
+
+  const crashRetry = publishPaperImportPackage({
+    files,
+    db: crashRestartDb,
+    paperAssetsDir: crashAssets,
+  })
+  assert.equal(crashRetry.publish.assetVersion, 2)
+  assert.equal(
+    readJson(path.join(crashLatest, 'paper-asset.json')).paper.assetVersion,
+    2,
+  )
+  assert.equal(
+    crashRestartDb.prepare(
+      'SELECT COUNT(*) AS count FROM paper_asset_versions WHERE paper_id = ?',
+    ).get(paperId).count,
+    2,
+  )
+  crashRestartDb.close()
+
+  const automaticRoot = path.join(tempRoot, 'automatic-restart-recovery')
+  mkdirSync(automaticRoot, { recursive: true })
+  const automaticAssets = path.join(automaticRoot, 'paper-assets')
+  const automaticDbPath = path.join(automaticRoot, 'question-bank.sqlite')
+  const automaticSeedDb = new DatabaseSync(automaticDbPath)
+  automaticSeedDb.exec(schemaSql)
+  assert.equal(
+    publishPaperImportPackage({
+      files,
+      db: automaticSeedDb,
+      paperAssetsDir: automaticAssets,
+    }).publish.assetVersion,
+    1,
+  )
+  automaticSeedDb.close()
+
+  const automaticCrashChild = runCrashChild({
+    dbPath: automaticDbPath,
+    paperAssetsDir: automaticAssets,
+  })
+  assert.equal(
+    automaticCrashChild.status,
+    86,
+    `automatic recovery child must exit after latest swap: ${automaticCrashChild.stderr}`,
+  )
+
+  const automaticRestartDb = new DatabaseSync(automaticDbPath)
+  const automaticRetry = publishPaperImportPackage({
+    files,
+    db: automaticRestartDb,
+    paperAssetsDir: automaticAssets,
+  })
+  assert.equal(
+    automaticRetry.publish.assetVersion,
+    2,
+    'public publish retry must automatically recover and reuse v2',
+  )
+  assert.equal(
+    automaticRestartDb.prepare(
+      'SELECT COUNT(*) AS count FROM paper_asset_versions WHERE paper_id = ?',
+    ).get(paperId).count,
+    2,
+  )
+  assert.equal(
+    readdirSync(path.join(automaticAssets, paperId)).some(
+      (entry) =>
+        entry === '.latest-swap.json'
+        || entry.startsWith('.latest-prev-')
+        || entry.startsWith('.latest-tmp-'),
+    ),
+    false,
+    'automatic recovery must leave no interrupted-swap artifacts',
+  )
+  automaticRestartDb.close()
 
   const consumerRoot = path.join(tempRoot, 'consumer')
   mkdirSync(consumerRoot, { recursive: true })

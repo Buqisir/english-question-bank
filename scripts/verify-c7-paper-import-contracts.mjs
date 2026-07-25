@@ -241,6 +241,19 @@ const c7RelevantPrefixes = [
   'server/paper-import-ai/',
   'test-fixtures/paper-import/',
 ]
+const phaseAPaperNormalizationAllowedFiles = new Set([
+  'app/src/shared-ui/papersurface/CanonicalPaperSentenceContent.tsx',
+  'app/src/shared-ui/papersurface/PaperSurface.css',
+  'app/src/shared-ui/papersurface/PaperSurface.tsx',
+  'app/src/shared-ui/papersurface/legacyPaperBlankRenderer.tsx',
+  'shared/papersurface/anchorKeys.d.mts',
+  'shared/papersurface/anchorKeys.d.ts',
+  'shared/papersurface/anchorKeys.mjs',
+  'shared/papersurface/blankRuling.d.mts',
+  'shared/papersurface/blankRuling.d.ts',
+  'shared/papersurface/blankRuling.mjs',
+  'shared/papersurface/tokens.mjs',
+])
 const forbiddenPrefixes = [
   'app/src/shared-ui/papersurface/',
   'shared/papersurface/',
@@ -252,13 +265,36 @@ const forbiddenPrefixes = [
   // which the validator + stripUnknownFields enforce separately.
   'server/print-renderer.mjs',
 ]
+function findForbiddenScopeChanges(files) {
+  return files.filter((file) =>
+    forbiddenPrefixes.some((prefix) => file.startsWith(prefix))
+    && !phaseAPaperNormalizationAllowedFiles.has(file),
+  )
+}
+
+assert(
+  'scope guard accepts the approved Phase A PaperSurface companion',
+  findForbiddenScopeChanges([
+    'app/src/shared-ui/papersurface/CanonicalPaperSentenceContent.tsx',
+  ]).length === 0,
+)
+assert(
+  'scope guard rejects unapproved PaperSurface changes',
+  findForbiddenScopeChanges([
+    'app/src/shared-ui/papersurface/UnrelatedFutureSurface.tsx',
+  ]).length === 1,
+)
+
 const shouldCheckForbiddenScope = changedFiles.some((file) =>
   c7RelevantPrefixes.some((prefix) => file.startsWith(prefix)),
 )
 if (shouldCheckForbiddenScope) {
-  for (const prefix of forbiddenPrefixes) {
-    assert(`forbidden scope untouched so far: ${prefix}`, !changedFiles.some((file) => file.startsWith(prefix)))
-  }
+  const forbiddenScopeChanges = findForbiddenScopeChanges(changedFiles)
+  assert(
+    'forbidden scope untouched outside approved Phase A files',
+    forbiddenScopeChanges.length === 0,
+    forbiddenScopeChanges.join(', '),
+  )
 } else {
   assert('forbidden scope skipped for non-C7 diff', true)
 }

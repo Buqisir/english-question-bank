@@ -19,6 +19,7 @@ const readingChoiceAnalysisFileName = 'reading-choice-analysis-v1.json'
 const sevenChoicesAnalysisFileName = 'seven-choices-analysis-v1.json'
 const clozeAnalysisFileName = 'cloze-analysis-v1.json'
 const grammarFillAnalysisFileName = 'grammar-fill-analysis-v1.json'
+const latestSwapJournalFileName = '.latest-swap.json'
 
 export function resolvePaperAssetReadPaths(paperAssetsDir, paperId, version = null) {
   const paperDir = path.join(paperAssetsDir, paperId)
@@ -263,6 +264,11 @@ export function swapPaperImportLatest({
   const tempLatest = path.join(paperDir, `.latest-tmp-${randomUUID()}`)
   const latestDir = path.join(paperDir, 'latest')
   const previousLatest = path.join(paperDir, `.latest-prev-${randomUUID()}`)
+  const journalPath = path.join(paperDir, latestSwapJournalFileName)
+
+  if (existsSync(journalPath)) {
+    throw new Error(`Interrupted latest swap must be recovered before publishing ${paperId}`)
+  }
 
   mkdirSync(path.join(tempLatest, 'analyses'), { recursive: true })
   for (const fileName of ['paper-asset.json', 'answer-key.json', 'import-meta.json']) {
@@ -300,6 +306,13 @@ export function swapPaperImportLatest({
 
   let movedPrevious = false
   try {
+    writeJson(journalPath, {
+      schemaVersion: 'paper-import-latest-swap-v1',
+      targetVersion: path.basename(versionDir),
+      tempLatest: path.basename(tempLatest),
+      previousLatest: path.basename(previousLatest),
+      hadLatest: existsSync(latestDir),
+    })
     if (existsSync(latestDir)) {
       renameSync(latestDir, previousLatest)
       movedPrevious = true
@@ -317,6 +330,7 @@ export function swapPaperImportLatest({
       if (movedPrevious && existsSync(previousLatest) && !existsSync(latestDir)) {
         renameSync(previousLatest, latestDir)
       }
+      if (existsSync(journalPath)) rmSync(journalPath, { force: true })
     } catch {
       // Preserve the original swap failure.
     }
@@ -328,12 +342,16 @@ export function swapPaperImportLatest({
     latestDir,
     previousLatest,
     movedPrevious,
+    journalPath,
   }
 }
 
 export function commitPaperImportLatestSwap(swap) {
   if (swap?.movedPrevious && existsSync(swap.previousLatest)) {
     rmSync(swap.previousLatest, { recursive: true, force: true })
+  }
+  if (swap?.journalPath && existsSync(swap.journalPath)) {
+    rmSync(swap.journalPath, { force: true })
   }
 }
 
@@ -345,6 +363,72 @@ export function rollbackPaperImportLatestSwap(swap) {
   if (swap.movedPrevious && existsSync(swap.previousLatest)) {
     renameSync(swap.previousLatest, swap.latestDir)
   }
+  if (swap.journalPath && existsSync(swap.journalPath)) {
+    rmSync(swap.journalPath, { force: true })
+  }
+}
+
+function readVersionFromAssetDir(dirPath) {
+  const assetPath = path.join(dirPath, 'paper-asset.json')
+  if (!existsSync(assetPath)) return null
+  const version = Number(JSON.parse(readFileSync(assetPath, 'utf8'))?.paper?.assetVersion)
+  return Number.isInteger(version) && version > 0 ? version : null
+}
+
+/**
+ * Reconcile a durable latest-swap journal against SQLite after a restart.
+ * SQLite is the commit authority: an uncommitted target is removed and the
+ * byte-preserved previous latest directory is restored.
+ */
+export function recoverPaperImportLatestSwap({
+  paperAssetsDir,
+  paperId,
+  publishedVersions,
+}) {
+  const paperDir = path.join(paperAssetsDir, paperId)
+  const journalPath = path.join(paperDir, latestSwapJournalFileName)
+  if (!existsSync(journalPath)) return { recovered: false }
+
+  const journal = JSON.parse(readFileSync(journalPath, 'utf8'))
+  if (
+    journal?.schemaVersion !== 'paper-import-latest-swap-v1'
+    || !/^v[1-9]\d*$/.test(journal.targetVersion)
+    || !/^\.latest-tmp-[a-f0-9-]+$/.test(journal.tempLatest)
+    || !/^\.latest-prev-[a-f0-9-]+$/.test(journal.previousLatest)
+  ) {
+    throw new Error(`Invalid interrupted latest-swap journal for ${paperId}`)
+  }
+
+  const targetVersion = Number(journal.targetVersion.slice(1))
+  const published = new Set(publishedVersions)
+  const latestDir = path.join(paperDir, 'latest')
+  const previousLatest = path.join(paperDir, journal.previousLatest)
+  const tempLatest = path.join(paperDir, journal.tempLatest)
+  const versionDir = path.join(paperDir, 'versions', journal.targetVersion)
+
+  if (published.has(targetVersion)) {
+    if (existsSync(previousLatest)) {
+      rmSync(previousLatest, { recursive: true, force: true })
+    }
+    if (existsSync(tempLatest)) rmSync(tempLatest, { recursive: true, force: true })
+    rmSync(journalPath, { force: true })
+    return { recovered: false, finalized: true, targetVersion }
+  }
+
+  const latestVersion = readVersionFromAssetDir(latestDir)
+  if (latestVersion === targetVersion) {
+    rmSync(latestDir, { recursive: true, force: true })
+  } else if (latestVersion !== null && existsSync(previousLatest)) {
+    throw new Error(`Ambiguous interrupted latest swap for ${paperId}`)
+  }
+
+  if (!existsSync(latestDir) && existsSync(previousLatest)) {
+    renameSync(previousLatest, latestDir)
+  }
+  if (existsSync(tempLatest)) rmSync(tempLatest, { recursive: true, force: true })
+  if (existsSync(versionDir)) rmSync(versionDir, { recursive: true, force: true })
+  rmSync(journalPath, { force: true })
+  return { recovered: true, targetVersion }
 }
 
 export function cleanupPaperImportTempArtifacts(paperAssetsDir) {

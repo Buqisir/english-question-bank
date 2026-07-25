@@ -133,6 +133,10 @@ export function PaperSurface(props: PaperSurfaceComponentProps): ReactNode {
     semanticParagraphs,
   } = props
 
+  if (semanticParagraphs !== undefined) {
+    assertCanonicalCompanionMatchesTextMap(textMap, semanticParagraphs)
+  }
+
   const handleQuestionClick = useCallback(
     (questionId: string) => {
       const intent: PaperSurfaceFocusIntent = {
@@ -309,6 +313,44 @@ export function PaperSurface(props: PaperSurfaceComponentProps): ReactNode {
       </article>
     </div>
   )
+}
+
+function assertCanonicalCompanionMatchesTextMap(
+  textMap: PaperTextMap,
+  semanticParagraphs: ReadonlyArray<CanonicalSurfaceParagraph>,
+): void {
+  const semanticByParagraphId = new Map(
+    semanticParagraphs.map((paragraph) => [paragraph.id, paragraph]),
+  )
+  if (
+    semanticByParagraphId.size !== semanticParagraphs.length
+    || semanticParagraphs.length !== textMap.paragraphs.length
+  ) {
+    throw new Error(
+      '[CANONICAL_COMPANION_TEXT_MAP_MISMATCH] Paragraph companions must map one-to-one.',
+    )
+  }
+
+  for (const paragraph of textMap.paragraphs) {
+    const semanticParagraph = semanticByParagraphId.get(paragraph.id)
+    if (!semanticParagraph) {
+      throw new Error(
+        `[CANONICAL_COMPANION_TEXT_MAP_MISMATCH] Missing paragraph ${paragraph.id}.`,
+      )
+    }
+    const semanticSentenceIds = semanticParagraph.sentences.map(({ id }) => id)
+    const textMapSentenceIds = paragraph.sentences.map(({ id }) => id)
+    if (
+      new Set(semanticSentenceIds).size !== semanticSentenceIds.length
+      || semanticSentenceIds.length !== textMapSentenceIds.length
+      || textMapSentenceIds.some((id) => !semanticSentenceIds.includes(id))
+    ) {
+      throw new Error(
+        `[CANONICAL_COMPANION_TEXT_MAP_MISMATCH] Paragraph ${paragraph.id} `
+        + 'sentence companions must map one-to-one.',
+      )
+    }
+  }
 }
 
 /* ─── Helper: find section for a sentence id ───────────────────── */
