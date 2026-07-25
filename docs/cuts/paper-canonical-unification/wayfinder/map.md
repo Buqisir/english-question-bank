@@ -1,7 +1,7 @@
 # EQB 试卷 Canonical 大一统 — Wayfinder Map
 
 Status: charted
-Next on PASS: `docs/cuts/paper-canonical-unification/wayfinder/tickets/05-canonical-compilation-module-interface.md`
+Next on PASS: `docs/cuts/paper-canonical-unification/wayfinder/tickets/06-paper-format-profile-and-plan.md`
 Terminal: no
 
 ## Notes
@@ -31,7 +31,8 @@ Terminal: no
 - Every resolution task reads `AGENTS.md`, `CONTEXT.md`, this map, and only its selected ticket plus the smallest authority/code surface it names.
 - Use `$wayfinder` for map operations, `$domain-modeling` when language changes, and `$codebase-design` for module interface and seam decisions. Research and prototype tickets use their matching entry skills when available.
 - Do not copy copyrighted passages, answers, student data, credentials, or source files into Wayfinder artifacts. Asset investigation records ids, hashes, shapes, counts, and minimal diagnostic excerpts only.
-- Charting created questions and blocking edges only. No ticket below has been claimed or resolved.
+- Tickets are claimed before resolution; closed answers live in their tickets
+  and appear below only as linked one-line gists.
 
 ## Decisions so far
 
@@ -41,6 +42,7 @@ Terminal: no
 - [盘点全库 latest 资产与所有生产消费变体](tickets/02-census-assets-producers-consumers.md) — 33 卷 census 定位 Seven shared-bank projection 与完形列对齐的最早错误层，并固化 1035 组 A–D measured proof、数据异常和迁移风险。
 - [确定模块化试卷标准与机器权威结构](tickets/03-executable-standard-authority.md) — 以唯一 human index 和带 digest 的机器 manifest 收拢标准，六类事实互斥归属并由 schema、语义 conformance 与跨 renderer gate 联合强制。
 - [定义 Source Capture 与清洗留痕合同](tickets/04-source-capture-normalization-ledger.md) — 以不可变 bytes/observations、pre-normalization Source Span 和 exact-only 变换台账分离证据与派生语义，并区分四类 fail-closed 阻断。
+- [设计 canonical compilation 深模块接口](tickets/05-canonical-compilation-module-interface.md) — 选择 one-shot evidence compiler：一个纯函数从 immutable source bytes 到整卷原子 canonical artifacts，blocked 分支只保留 Source Capture 与 Normalization Report。
 
 ## Fog
 
