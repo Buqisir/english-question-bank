@@ -3,7 +3,7 @@
 Status: open
 Type: prototype
 Claim: unclaimed
-Blocked by: 定义卷型模板与整卷装配单合同; 定义题组通用 envelope 与 rich content nodes
+Blocked by: 定义卷型模板与整卷装配单合同; 定义题组通用 envelope 与 rich content nodes; 定义 A–D 选项整组择形算法与金样卷 parity
 Next on PASS: `docs/cuts/paper-canonical-unification/wayfinder/tickets/09-reading-canonical-variant.md`
 Terminal: no
 Map: `docs/cuts/paper-canonical-unification/wayfinder/map.md`

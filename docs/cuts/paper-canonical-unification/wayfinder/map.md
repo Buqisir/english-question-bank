@@ -21,11 +21,13 @@ Terminal: no
   - represent listening in the whole-paper plan as `raw/inactive` without activating a website Question Group in this effort;
   - hard-gate new imports first, then migrate all 33 current `latest` assets; historical `versions/vN` remain immutable in the first migration;
   - preserve distinct NCK1, Zhejiang legacy, and national legacy profiles rather than rewriting real historical formats into one exam shape.
-- Accepted vertical order: standards/profile/plan foundation → seven choices → reading → application writing → continuation writing → listening raw/inactive → new-import rollout → all-`latest` migration and legacy retirement.
+- Accepted vertical order: standards/profile/plan foundation, including the shared A–D option-layout selector → seven choices → reading → application writing → continuation writing → listening raw/inactive → new-import rollout → all-`latest` migration and legacy retirement.
 - Existing cloze and grammar-fill work is the protocol reference, not proof that its current renderers are already correct. Owner-observed baseline failures must be reproduced and closed before the pattern is copied:
   - cloze options currently lose visual row/column alignment;
   - Seven Choices Print/PDF currently introduces an invalid per-blank A–D choice layer and repeats or nests the group's shared A–G option bank.
 - Treat the Seven Choices symptom as a semantic projection failure, not only visual polish: one group owns exactly one A–G option bank, while its five semantic blanks reference that shared bank. Treat cloze alignment as a renderer conformance failure unless the census proves an upstream structural cause.
+- Owner-confirmed A–D layout invariant, evidenced by NEEA reference page 4 questions 21–23 and page 9 cloze: choose one layout for the whole option set—four columns `A B C D`, two-by-two rows `A B` / `C D`, or one column `A` / `B` / `C` / `D`. Try the densest mode that fits; never let CSS auto-flow or one late option create a hybrid extra row. Exact typographic measurement, safety margin, and overlong one-column behavior remain for the dedicated prototype ticket.
+- The selected A–D layout is renderer-derived presentation, not Canonical Question Group semantics. The rule covers per-question A–D options; Seven Choices A–G and listening A–C keep their own family rulings.
 - Every resolution task reads `AGENTS.md`, `CONTEXT.md`, this map, and only its selected ticket plus the smallest authority/code surface it names.
 - Use `$wayfinder` for map operations, `$domain-modeling` when language changes, and `$codebase-design` for module interface and seam decisions. Research and prototype tickets use their matching entry skills when available.
 - Do not copy copyrighted passages, answers, student data, credentials, or source files into Wayfinder artifacts. Asset investigation records ids, hashes, shapes, counts, and minimal diagnostic excerpts only.
