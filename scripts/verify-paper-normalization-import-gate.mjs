@@ -27,6 +27,8 @@ import {
 } from '../server/paper-import/validator.mjs'
 import {
   readPaperAssetNormalizationBundle,
+  swapPaperImportLatest,
+  writePaperImportVersion,
 } from '../server/paper-import/storage.mjs'
 import {
   validatePaperNormalizedGroupsSidecar,
@@ -202,6 +204,34 @@ const tempRoot = mkdtempSync(
   path.join(tmpdir(), 'eqb-paper-normalization-import-gate-'),
 )
 try {
+  const directSwapAssets = path.join(tempRoot, 'direct-swap-paper-assets')
+  const directSwapPaperDir = path.join(directSwapAssets, paperId)
+  for (const version of [1, 2]) {
+    const { versionDir } = writePaperImportVersion({
+      paperAssetsDir: directSwapAssets,
+      packageData: validation.packageData,
+      validationReport: { ok: true },
+      publishReport: { ok: true },
+      version,
+    })
+    swapPaperImportLatest({
+      paperAssetsDir: directSwapAssets,
+      paperId,
+      versionDir,
+    })
+    assert.equal(
+      existsSync(path.join(directSwapPaperDir, '.latest-swap.json')),
+      false,
+      `direct swap v${version} must remove its completed journal`,
+    )
+  }
+  assert.equal(
+    readJson(path.join(directSwapPaperDir, 'latest', 'paper-asset.json')).paper
+      .assetVersion,
+    2,
+    'a second direct swap must succeed after the first completed swap',
+  )
+
   const invalidDb = new DatabaseSync(path.join(tempRoot, 'invalid.sqlite'))
   const invalidAssets = path.join(tempRoot, 'invalid-paper-assets')
   const invalidPublish = publishPaperImportPackage({

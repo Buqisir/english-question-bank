@@ -324,6 +324,9 @@ export function swapPaperImportLatest({
     if (!deferCleanup && movedPrevious) {
       rmSync(previousLatest, { recursive: true, force: true })
     }
+    if (!deferCleanup) {
+      rmSync(journalPath, { force: true })
+    }
   } catch (error) {
     try {
       if (existsSync(tempLatest)) rmSync(tempLatest, { recursive: true, force: true })
