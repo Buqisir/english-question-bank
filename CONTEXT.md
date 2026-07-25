@@ -61,8 +61,12 @@ The reviewed, teacher-facing explanation of why each correct answer fits — the
 _Avoid_: 解析 / explanation when the stored reviewed object is meant; answer key when only the answer is meant
 
 **Writing Task**:
-The writing-specific information carried by a writing Question Group: the task type (应用文 application / 读后续写 continuation), the word-count target, and, for continuation, the paragraph opening sentences and continuation material. A Writing Task is the attachment point for its Writing Analysis, since a writing group has no Questions to attach analysis to.
+The writing-specific information carried by a writing Question Group: the task type (应用文 application / 读后续写 continuation), complete prompt, communicative situation, content requirements, source word-count ruling, and any task-type-specific fixed response text or continuation material. A Writing Task is the attachment point for its Writing Analysis, since a writing group has no Questions to attach analysis to.
 _Avoid_: writing question, essay question when referring to this stored object; it is not a Question
+
+**Application Given Skeleton**:
+The fixed response text explicitly provided by the source for an application Writing Task, role-labelled as title, salutation, opening, closing, or signature and placed around the student's answer region. It is never inferred merely because the task asks for an email/letter or includes a background letter.
+_Avoid_: application format when the source provides no fixed text; inferred greeting; model-answer scaffold
 
 **Writing Analysis**:
 The reviewed, display-facing 讲评 for a Writing Task — the writing counterpart of the per-Question Analysis, attached at the writing group / Writing Task level (no Question reference, per ADR-0007). It is display content (read on the paper surface), not a search dimension. Its composition depends on the Writing Task's task type: an application Writing Analysis carries a **Model Answer** plus its **Highlight Expressions**; a continuation Writing Analysis additionally carries a **Continuation Design**. Scoring guidance, common-pitfall notes, and grouped vocabulary banks are out of scope.
@@ -156,6 +160,7 @@ own light axis); using "考点" loosely when one of these specific axes is meant
 - A **Question Group** belongs to exactly one **Passage**.
 - A **Question Group** contains many **Questions**.
 - A writing **Question Group** contains zero **Questions** and carries one **Writing Task**.
+- An application **Writing Task** may carry one source-provided **Application Given Skeleton**; its absence must not be filled from task genre or background material.
 - A **Question** can have zero or more **Options**.
 - A cloze **Question Group** contains many **Cloze Blanks**; each **Cloze Blank** maps one to one to one **Question**.
 - An **Analysis** attaches per **Question** / **Cloze Blank**, or to a **Writing Task**; it is never the answer authority.
