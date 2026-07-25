@@ -274,6 +274,28 @@ value.
 paper) and the corrected provenance block matches the paper's actual
 year/region/paperName.
 
+### 6a. Run the publish-time normalization gate (still zero writes)
+
+```bash
+node scripts/import-pipeline/verify-publish-gate.mjs <paperId>
+```
+
+This command builds the same package and calls `validatePaperImportPackage`
+without opening the DB or paper-assets root. Every `cloze` and `grammarFill`
+group must appear under `normalizationGroups` with `status: "ready"`. The gate
+uses the exact group/questions/blanks source slice and the shipped
+`normalizePaperGroup`; it does not generate a second interpretation of the
+markers.
+
+If a supported group reports `[normalization.needsReview]`, read its
+`normalizationIssues` (`groupId`, code, path, message), correct the source group
+in the build input, then rerun steps 3, 6, and 6a. Do not hand-edit a sidecar or
+publish around the gate. Validation failure is fail-closed: it creates no DB
+tables/rows, version directory, sidecar, or `latest`.
+
+**Done when:** the JSON output has `"ok": true`, `blockingCount: 0`, and every
+supported group is `ready`.
+
 ## 7. `verify-nck1-standard.mjs` (pre-publish pass)
 
 ```
@@ -312,7 +334,9 @@ the paper is considered import-complete.
 
 This is the ONLY step that writes to `data/question-bank.sqlite` and
 `app/public/paper-assets/<paperId>/**`. It calls shipped
-`publishPaperImportPackage` — untouched by this cut. Never run this against
+`publishPaperImportPackage`. A successful publish writes
+`paper-normalized-groups-v1.json` beside `paper-asset.json` in both
+`versions/vN/` and `latest/`; both files carry the same asset version. Never run this against
 production; there is no production flag here, this only ever targets the
 local dev DB path baked into `02-publish.mjs`.
 
@@ -326,6 +350,21 @@ status line — read those first, they name the exact file and error code
 (e.g. `package.docxCount`, `docx.invalidMagic`, `package.rejectedFileType`).
 Do not go spelunking in `validator.mjs` or write a throwaway diagnostic
 script; the printed list is the diagnosis.
+
+**Rollback and recovery:** version, sidecar, DB transaction, and latest swap
+share one publish attempt. A failure removes the incomplete `versions/vN`,
+rolls back the DB transaction, and restores the previous `latest` bytes.
+Correct the reported filesystem/DB cause, then rerun the same publish command;
+the retry reuses the correct next version number. Stale temp directories are
+also cleaned automatically at the start of the next publish. If a killed
+process left temp residue and you need an explicit local cleanup first, run:
+
+```bash
+node --input-type=module -e "import { cleanupPaperImportTempArtifacts } from './server/paper-import/storage.mjs'; console.log(cleanupPaperImportTempArtifacts('./app/public/paper-assets'))"
+```
+
+Never delete a completed `versions/vN` or replace `latest` by hand as a
+recovery step.
 
 ## 9. Attach listening + figures to the published asset tree
 

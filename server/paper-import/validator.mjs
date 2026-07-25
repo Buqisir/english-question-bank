@@ -3,6 +3,9 @@ import { createHash } from 'node:crypto'
 import { existsSync, readdirSync, readFileSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import {
+  buildPaperNormalizedGroupsSidecar,
+} from './normalization.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '../..')
@@ -595,6 +598,7 @@ export function validatePaperImportPackage(files, options = {}) {
   const docxFiles = []
   const jsonFiles = []
   const parsedFiles = []
+  let normalizationGroups = []
 
   if (!Array.isArray(files) || files.length === 0) {
     blockingIssues.push(issue('blocking', 'package.empty', '请上传一个完整试卷包。'))
@@ -707,6 +711,47 @@ export function validatePaperImportPackage(files, options = {}) {
     }
   }
 
+  if (normalized) {
+    const normalization = buildPaperNormalizedGroupsSidecar(
+      normalized.paperAsset,
+    )
+    normalizationGroups = normalization.entries
+    if (normalization.status === 'needs_review') {
+      for (const entry of normalization.entries) {
+        if (entry.status !== 'needs_review') continue
+        blockingIssues.push(
+          issue(
+            'blocking',
+            'normalization.needsReview',
+            `${entry.groupId}: normalization needs review。`,
+            {
+              groupId: entry.groupId,
+              groupType: entry.groupType,
+              normalizationIssues: entry.issues,
+              suggestedFix:
+                '按 normalization issue 修正 source group 后重新 dry-run；不得绕过 gate。',
+            },
+          ),
+        )
+      }
+      const unscopedIssues = normalization.issues.filter(
+        ({ groupId }) => !groupId,
+      )
+      if (unscopedIssues.length > 0) {
+        blockingIssues.push(
+          issue(
+            'blocking',
+            'normalization.sidecarInvalid',
+            'paper-normalized-groups-v1 sidecar runtime validation failed。',
+            { normalizationIssues: unscopedIssues },
+          ),
+        )
+      }
+    } else {
+      normalized.normalizedGroupsSidecar = normalization.sidecar
+    }
+  }
+
   const paperId = normalized?.paperAsset?.paper?.paperId || null
   const assetVersion = normalized?.paperAsset?.paper?.assetVersion || null
   const readingGroups = normalized ? getReadingChoiceGroups(normalized.paperAsset) : []
@@ -726,6 +771,7 @@ export function validatePaperImportPackage(files, options = {}) {
       questionIds: group.questionIds,
       defaultQuestionId: group.questionIds?.[0] || null,
     })),
+    normalizationGroups,
     packageData: normalized,
     limits: PAPER_IMPORT_LIMITS,
     generatedAt: options.now || new Date().toISOString(),
@@ -743,6 +789,7 @@ export function makePublicValidationReport(report) {
     blockingIssues: report.blockingIssues,
     structurePreview: report.structurePreview,
     readingGroups: report.readingGroups,
+    normalizationGroups: report.normalizationGroups,
     limits: report.limits,
     generatedAt: report.generatedAt,
   }

@@ -20,6 +20,7 @@ import os from 'node:os'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
+import { buildSupportedMarkerSequence } from './paper-normalization-test-helpers.mjs'
 import { analyzeGrammarFillImportCandidate, buildGrammarFillAnalysisMessages, validateGrammarFillShape } from '../server/paper-import-ai/analyzeGrammarFill.mjs'
 import { buildPaperImportAiPackageFiles } from '../server/paper-import-ai/packageBuilder.mjs'
 import { validatePaperImportPackage, PAPER_IMPORT_SCHEMA_VERSIONS } from '../server/paper-import/validator.mjs'
@@ -600,7 +601,10 @@ function gfPackageParseResult() {
       groupType: 'cloze',
       title: '完形填空',
       order: 5,
-      paragraphs: [{ id: 'para-i13-cloze-p1', text: 'The boy walked slowly into the room.' }],
+      paragraphs: [{
+        id: 'para-i13-cloze-p1',
+        text: `The boy walked ${buildSupportedMarkerSequence(41, clozeQuestionNos.length)} into the room.`,
+      }],
       questions: clozeQuestionNos.map((no, index) => ({
         id: `q-i13-package-${String(no).padStart(3, '0')}`,
         stem: String(no),
@@ -615,7 +619,10 @@ function gfPackageParseResult() {
       groupType: 'grammarFill',
       title: '语法填空',
       order: 6,
-      paragraphs: [{ id: 'para-i13-gf-p1', text: FIXTURE_PASSAGE_TEXT }],
+      paragraphs: [{
+        id: 'para-i13-gf-p1',
+        text: `Grammar fill passage with ${buildSupportedMarkerSequence(56, 10)}.`,
+      }],
       questions: [56, 57, 58, 59, 60, 61, 62, 63, 64, 65].map((no) => ({
         id: `q-i13-package-${String(no).padStart(3, '0')}`,
         stem: String(no),

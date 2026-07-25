@@ -664,7 +664,14 @@
           "blank-2024-jslk-054",
           "blank-2024-jslk-055"
         ],
-        "clozeText": "I was halfway across Indiana headed home to Kentucky when my car broke down.My phone was 41, too.I managed to get to a gas station,but it was Sunday in the early fall, and there was no 42 on duty.I was working my way through university then and had little money for 43 the car.\nI sat alongside my car for several hours trying to 44 the heat when an older gentleman 45 to fuel his car. He asked about my car, and I  46 my predicament (困境). To my 47 ,the gentleman told me that he had a daughter my age,and then he opened his trunk and 48 a tool set.\nRight then and there,this total  49 examined my engine,explaining as he worked that my spark plugs(火花塞)hadn’t been changed for so long that they were 50 to function.After about an hour,he 51 that my car was safe to finish the trip.\n52 came at the hands of a stranger.  53 his clothes,working on a hot September afternoon,this man 54  a college student from disaster,  just because she could have been his  55 ."
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2024-jslk-cloze-p1",
+              "text": "I was halfway across Indiana headed home to Kentucky when my car broke down.My phone was __41__, too.I managed to get to a gas station,but it was Sunday in the early fall, and there was no __42__ on duty.I was working my way through university then and had little money for __43__ the car.\nI sat alongside my car for several hours trying to __44__ the heat when an older gentleman __45__ to fuel his car. He asked about my car, and I  __46__ my predicament (困境). To my __47__ ,the gentleman told me that he had a daughter my age,and then he opened his trunk and __48__ a tool set.\nRight then and there,this total  __49__ examined my engine,explaining as he worked that my spark plugs(火花塞)hadn’t been changed for so long that they were __50__ to function.After about an hour,he __51__ that my car was safe to finish the trip.\n__52__ came at the hands of a stranger.  __53__ his clothes,working on a hot September afternoon,this man __54__  a college student from disaster,  just because she could have been his  __55__ ."
+            }
+          ]
+        }
       },
       "group-2024-jslk-grammar-fill": {
         "groupId": "group-2024-jslk-grammar-fill",
@@ -694,7 +701,14 @@
           "blank-2024-jslk-064",
           "blank-2024-jslk-065"
         ],
-        "grammarText": "Whenever you have to write a paper,a letter,or any other document for work or school, you probably head toward the computer. Now, most people reach for  56   (keyboard) faster than they pick up pens.In a Scottish primary school,however,Mr.Norman Lewis is taking a different approach. He feels that neat handwriting 57 (be) still an important skill,so he has his students write not only by hand but also  58 old-fashioned fountain pens.\nFountain pens 59 (use)in schools long ago and have been regaining popularity lately because they are refillable.Today, a writer 60 (simple) throws an empty pen away and gets 61 new one.\nSo far,Mr.Lewis is pleased with the results of his experiment.He reports that his students are taking more care with their work,and their self-confidence has improved as well. He is happy with the 62 (improve)he sees in his students’ writing 63 in his own writing.He knows that computers are here 64 (stay)and that they will not disappear. However,he believes that the practice with fountain pens helps students to focus,to write faster,and they can feel proud of 65 (they)."
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2024-jslk-grammar-fill-p1",
+              "text": "Whenever you have to write a paper,a letter,or any other document for work or school, you probably head toward the computer. Now, most people reach for __56__ (keyboard) faster than they pick up pens.In a Scottish primary school,however,Mr.Norman Lewis is taking a different approach. He feels that neat handwriting __57__ (be) still an important skill,so he has his students write not only by hand but also __58__ old-fashioned fountain pens.\nFountain pens __59__ (use) in schools long ago and have been regaining popularity lately because they are refillable.Today, a writer __60__ (simple) throws an empty pen away and gets __61__ new one.\nSo far,Mr.Lewis is pleased with the results of his experiment.He reports that his students are taking more care with their work,and their self-confidence has improved as well. He is happy with the __62__ (improve) he sees in his students’ writing __63__ in his own writing.He knows that computers are here __64__ (stay) and that they will not disappear. However,he believes that the practice with fountain pens helps students to focus,to write faster,and they can feel proud of __65__ (they)."
+            }
+          ]
+        }
       },
       "group-2024-jslk-writing-application": {
         "groupId": "group-2024-jslk-writing-application",

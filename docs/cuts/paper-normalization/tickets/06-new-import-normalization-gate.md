@@ -1,6 +1,6 @@
 # 06 — 新题入库 normalization gate
 
-Status: ready
+Status: done
 Blocked by: 01 — 完形填空编译器核心规范化规则; 04 — 语法填空编译器、输入方言与负例
 Spec: `docs/cuts/paper-normalization/spec.md`
 Worktree: `/Users/huangxuewei/Projects/wt-paper-normalization-20260724`
@@ -27,15 +27,15 @@ canonical entries；任一 supported group `needs_review` 时整次 publish
 
 ## 验收
 
-- [ ] Ready fixture 的 validation 报告含全部 supported entries；publish 在
+- [x] Ready fixture 的 validation 报告含全部 supported entries；publish 在
       `versions/vN` 与对应 `latest` 同时得到同 version sidecar。
-- [ ] Sidecar 不含 source PDF/DOCX、答案源、绝对路径、`generatedAt` 或
+- [x] Sidecar 不含 source PDF/DOCX、答案源、绝对路径、`generatedAt` 或
       renderer state；fingerprint 由 exact group slice 计算。
-- [ ] 任一 supported group `needs_review` 时 public validation 失败，
+- [x] 任一 supported group `needs_review` 时 public validation 失败，
       publisher 不建 DB table/row、不写 version/sidecar、不切 latest。
-- [ ] DB/write/latest 任一步失败时回滚新 version/sidecar，旧 latest bytes
+- [x] DB/write/latest 任一步失败时回滚新 version/sidecar，旧 latest bytes
       保持；下一次成功可复用正确 version sequence。
-- [ ] Stale assetVersion/fingerprint sidecar 被 consumer 拒绝；其他题型和
+- [x] Stale assetVersion/fingerprint sidecar 被 consumer 拒绝；其他题型和
       现有 import gates 无回归。
 
 ## 验证
@@ -60,6 +60,19 @@ Tickets 01 与 04 的 compiler 完成 commits。虽然逻辑上不依赖 UI tick
   commit。
 - Ticket 状态改为 `done` 并填写结果；不得自行开始独立审查或 Ticket 07。
 
-Commit:
-Verify:
-Notes:
+Commit: this Ticket 06 checkpoint (exact SHA in final handoff)
+Verify: focused normalization gate 通过；C7 publish、I1/I2/I3/I4/I5/I8/I13、
+paper-asset-v1、paper-assets consistency、cloze/grammar normalization 与
+`pnpm -C app run build` 均退出 0；`git diff --check` 退出 0。按约定仅运行
+一次 `pnpm -C app run verify:all`，真实结果为退出 1、PASS 86 / SKIP 1 /
+FAIL 4：I1/I2/I5 的旧正向 fixture marker 缺口已在该次运行后修复并各自
+复验退出 0；C7 剩余 2 条 forbidden-scope assertion 来自起始 HEAD 已存在的
+PaperSurface initiative diff。Declared skip 为缺少 off-repo I16A fixture；
+I4/I5 的 real DOCX 子测试也按 verifier 声明跳过本地缺失文件。
+Notes: 新 gate 复用 Tickets 01/04 compiler、exact source slice、
+sourceFingerprint 与 semanticDigest；sidecar 随 version/latest 原子发布。
+Focused verifier 证明 `needs_review` 零写入、version/sidecar/DB/latest 四个
+failure point 全回滚、旧 latest 全树 bytes 不变、retry version sequence
+正确，以及真实 storage consumer 拒绝 stale assetVersion/fingerprint。
+普通 Standards 与 Spec 双轴 review 的 findings 均已修复，focused re-review
+均 PASS；未启动 Phase A 独立审查或 Ticket 07。

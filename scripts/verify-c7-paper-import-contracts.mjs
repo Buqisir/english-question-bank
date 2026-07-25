@@ -81,6 +81,7 @@ const schemaFiles = [
   'schemas/paper-import/answer-key-v1.schema.json',
   'schemas/paper-import/import-meta-v1.schema.json',
   'schemas/paper-import/reading-choice-analysis-v1.schema.json',
+  'schemas/paper-import/paper-normalized-groups-v1.schema.json',
 ]
 
 for (const relPath of schemaFiles) {

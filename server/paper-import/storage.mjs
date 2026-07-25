@@ -9,6 +9,11 @@ import {
 } from 'node:fs'
 import path from 'node:path'
 import { randomUUID } from 'node:crypto'
+import {
+  buildPaperNormalizedGroupsSidecar,
+  PAPER_NORMALIZED_GROUPS_FILE_NAME,
+  validatePaperNormalizedGroupsSidecar,
+} from './normalization.mjs'
 
 const readingChoiceAnalysisFileName = 'reading-choice-analysis-v1.json'
 const sevenChoicesAnalysisFileName = 'seven-choices-analysis-v1.json'
@@ -22,6 +27,12 @@ export function resolvePaperAssetReadPaths(paperAssetsDir, paperId, version = nu
       baseDir: path.join(paperDir, 'versions', version),
       assetPath: path.join(paperDir, 'versions', version, 'paper-asset.json'),
       analysisPath: path.join(paperDir, 'versions', version, 'analyses', readingChoiceAnalysisFileName),
+      normalizedGroupsPath: path.join(
+        paperDir,
+        'versions',
+        version,
+        PAPER_NORMALIZED_GROUPS_FILE_NAME,
+      ),
     }
   }
   const latestBaseDir = path.join(paperDir, 'latest')
@@ -30,6 +41,10 @@ export function resolvePaperAssetReadPaths(paperAssetsDir, paperId, version = nu
       baseDir: latestBaseDir,
       assetPath: path.join(latestBaseDir, 'paper-asset.json'),
       analysisPath: path.join(latestBaseDir, 'analyses', readingChoiceAnalysisFileName),
+      normalizedGroupsPath: path.join(
+        latestBaseDir,
+        PAPER_NORMALIZED_GROUPS_FILE_NAME,
+      ),
     }
   }
   const versions = listPaperAssetVersions(paperAssetsDir, paperId)
@@ -39,12 +54,59 @@ export function resolvePaperAssetReadPaths(paperAssetsDir, paperId, version = nu
       baseDir: path.join(paperDir, 'versions', latestVersion),
       assetPath: path.join(paperDir, 'versions', latestVersion, 'paper-asset.json'),
       analysisPath: path.join(paperDir, 'versions', latestVersion, 'analyses', readingChoiceAnalysisFileName),
+      normalizedGroupsPath: path.join(
+        paperDir,
+        'versions',
+        latestVersion,
+        PAPER_NORMALIZED_GROUPS_FILE_NAME,
+      ),
     }
   }
   return {
     baseDir: paperDir,
     assetPath: path.join(paperDir, 'paper-asset.json'),
     analysisPath: path.join(paperDir, 'analyses', readingChoiceAnalysisFileName),
+    normalizedGroupsPath: path.join(
+      paperDir,
+      PAPER_NORMALIZED_GROUPS_FILE_NAME,
+    ),
+  }
+}
+
+export function readPaperAssetNormalizationBundle(
+  paperAssetsDir,
+  paperId,
+  version = null,
+) {
+  const paths = resolvePaperAssetReadPaths(paperAssetsDir, paperId, version)
+  const paperAsset = JSON.parse(readFileSync(paths.assetPath, 'utf8'))
+  if (!existsSync(paths.normalizedGroupsPath)) {
+    return {
+      ...paths,
+      paperAsset,
+      normalizedGroupsSidecar: null,
+    }
+  }
+
+  const normalizedGroupsSidecar = JSON.parse(
+    readFileSync(paths.normalizedGroupsPath, 'utf8'),
+  )
+  const validation = validatePaperNormalizedGroupsSidecar({
+    paperAsset,
+    sidecar: normalizedGroupsSidecar,
+  })
+  if (!validation.ok) {
+    const error = new Error(
+      `Rejected stale paper normalization sidecar: ${JSON.stringify(validation.issues)}`,
+    )
+    error.code = 'PAPER_NORMALIZED_GROUPS_SIDECAR_REJECTED'
+    throw error
+  }
+
+  return {
+    ...paths,
+    paperAsset,
+    normalizedGroupsSidecar,
   }
 }
 
@@ -94,7 +156,33 @@ function makeVersionedArtifacts(packageData, version) {
     : null
   if (grammarFillAnalysis) grammarFillAnalysis.sourceAssetVersion = version
 
-  return { paperAsset, answerKey, importMeta, readingAnalysis, scAnalysis, clozeAnalysis, grammarFillAnalysis }
+  const normalization = buildPaperNormalizedGroupsSidecar(paperAsset)
+  if (normalization.status !== 'ready') {
+    throw new Error(
+      `Versioned paper normalization failed: ${JSON.stringify(normalization.issues)}`,
+    )
+  }
+  const normalizedGroupsSidecar = normalization.sidecar
+  const sidecarValidation = validatePaperNormalizedGroupsSidecar({
+    paperAsset,
+    sidecar: normalizedGroupsSidecar,
+  })
+  if (!sidecarValidation.ok) {
+    throw new Error(
+      `Versioned normalization sidecar validation failed: ${JSON.stringify(sidecarValidation.issues)}`,
+    )
+  }
+
+  return {
+    paperAsset,
+    answerKey,
+    importMeta,
+    readingAnalysis,
+    scAnalysis,
+    clozeAnalysis,
+    grammarFillAnalysis,
+    normalizedGroupsSidecar,
+  }
 }
 
 export function writePaperImportVersion({
@@ -103,6 +191,7 @@ export function writePaperImportVersion({
   validationReport,
   publishReport,
   version,
+  forceFailureAt = null,
 }) {
   const paperId = packageData.paperAsset.paper.paperId
   const paperDir = path.join(paperAssetsDir, paperId)
@@ -123,6 +212,9 @@ export function writePaperImportVersion({
   try {
     writeFileSync(path.join(tempDir, 'raw', packageData.sourceDocx.fileName), packageData.sourceDocx.buffer)
     writeJson(path.join(tempDir, 'paper-asset.json'), artifacts.paperAsset)
+    if (forceFailureAt === 'version-write') {
+      throw new Error('Forced version-write failure')
+    }
     writeJson(path.join(tempDir, 'answer-key.json'), artifacts.answerKey)
     writeJson(path.join(tempDir, 'import-meta.json'), artifacts.importMeta)
     writeJson(path.join(tempDir, 'analyses', readingChoiceAnalysisFileName), artifacts.readingAnalysis)
@@ -135,6 +227,13 @@ export function writePaperImportVersion({
     if (artifacts.grammarFillAnalysis) {
       writeJson(path.join(tempDir, 'analyses', grammarFillAnalysisFileName), artifacts.grammarFillAnalysis)
     }
+    if (forceFailureAt === 'sidecar-write') {
+      throw new Error('Forced sidecar-write failure')
+    }
+    writeJson(
+      path.join(tempDir, PAPER_NORMALIZED_GROUPS_FILE_NAME),
+      artifacts.normalizedGroupsSidecar,
+    )
     writeJson(path.join(tempDir, 'validation-report.json'), validationReport)
     writeJson(path.join(tempDir, 'publish-report.json'), publishReport)
 
@@ -153,7 +252,13 @@ export function removePaperImportVersion({ paperAssetsDir, paperId, versionName 
   }
 }
 
-export function swapPaperImportLatest({ paperAssetsDir, paperId, versionDir }) {
+export function swapPaperImportLatest({
+  paperAssetsDir,
+  paperId,
+  versionDir,
+  deferCleanup = false,
+  forceFailureAt = null,
+}) {
   const paperDir = path.join(paperAssetsDir, paperId)
   const tempLatest = path.join(paperDir, `.latest-tmp-${randomUUID()}`)
   const latestDir = path.join(paperDir, 'latest')
@@ -188,6 +293,10 @@ export function swapPaperImportLatest({ paperAssetsDir, paperId, versionDir }) {
       readFileSync(grammarFillAnalysisPath),
     )
   }
+  writeFileSync(
+    path.join(tempLatest, PAPER_NORMALIZED_GROUPS_FILE_NAME),
+    readFileSync(path.join(versionDir, PAPER_NORMALIZED_GROUPS_FILE_NAME)),
+  )
 
   let movedPrevious = false
   try {
@@ -195,8 +304,13 @@ export function swapPaperImportLatest({ paperAssetsDir, paperId, versionDir }) {
       renameSync(latestDir, previousLatest)
       movedPrevious = true
     }
+    if (forceFailureAt === 'latest-swap') {
+      throw new Error('Forced latest-swap failure')
+    }
     renameSync(tempLatest, latestDir)
-    if (movedPrevious) rmSync(previousLatest, { recursive: true, force: true })
+    if (!deferCleanup && movedPrevious) {
+      rmSync(previousLatest, { recursive: true, force: true })
+    }
   } catch (error) {
     try {
       if (existsSync(tempLatest)) rmSync(tempLatest, { recursive: true, force: true })
@@ -209,7 +323,28 @@ export function swapPaperImportLatest({ paperAssetsDir, paperId, versionDir }) {
     throw error
   }
 
-  return latestDir
+  if (!deferCleanup) return latestDir
+  return {
+    latestDir,
+    previousLatest,
+    movedPrevious,
+  }
+}
+
+export function commitPaperImportLatestSwap(swap) {
+  if (swap?.movedPrevious && existsSync(swap.previousLatest)) {
+    rmSync(swap.previousLatest, { recursive: true, force: true })
+  }
+}
+
+export function rollbackPaperImportLatestSwap(swap) {
+  if (!swap) return
+  if (existsSync(swap.latestDir)) {
+    rmSync(swap.latestDir, { recursive: true, force: true })
+  }
+  if (swap.movedPrevious && existsSync(swap.previousLatest)) {
+    renameSync(swap.previousLatest, swap.latestDir)
+  }
 }
 
 export function cleanupPaperImportTempArtifacts(paperAssetsDir) {

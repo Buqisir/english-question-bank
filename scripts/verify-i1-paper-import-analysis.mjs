@@ -5,6 +5,7 @@ import { readFileSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
+import { buildSupportedMarkerSequence } from './paper-normalization-test-helpers.mjs'
 import { analyzeReadingImportCandidate } from '../server/paper-import-ai/analyzeReading.mjs'
 import { buildPaperImportAiPackageFiles } from '../server/paper-import-ai/packageBuilder.mjs'
 import { validatePaperImportPackage } from '../server/paper-import/validator.mjs'
@@ -143,7 +144,10 @@ function fixtureFourGroupParseResult() {
     groupType: 'cloze',
     title: '完形填空',
     order: 5,
-    paragraphs: [{ id: 'para-i1-step4-cloze-p1', text: 'Cloze passage about learning from mistakes.' }],
+    paragraphs: [{
+      id: 'para-i1-step4-cloze-p1',
+      text: `Cloze passage about learning from mistakes with ${buildSupportedMarkerSequence(41, 15)}.`,
+    }],
     questions: [41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55].map((n) => ({
       id: `q-i1-step4-${String(n).padStart(3, '0')}`,
       stem: String(n),
@@ -158,7 +162,10 @@ function fixtureFourGroupParseResult() {
     groupType: 'grammarFill',
     title: '语法填空',
     order: 6,
-    paragraphs: [{ id: 'para-i1-step4-gf-p1', text: 'Grammar fill passage about  56  (evolve) over time.' }],
+    paragraphs: [{
+      id: 'para-i1-step4-gf-p1',
+      text: `Grammar fill passage about ${buildSupportedMarkerSequence(56, 10)} over time.`,
+    }],
     questions: [56, 57, 58, 59, 60, 61, 62, 63, 64, 65].map((n) => ({
       id: `q-i1-step4-${String(n).padStart(3, '0')}`,
       stem: String(n),

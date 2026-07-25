@@ -3,6 +3,7 @@ import { createHash } from 'node:crypto'
 import { readFileSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { buildSupportedMarkerSequence } from './paper-normalization-test-helpers.mjs'
 import { parseReadingCandidatesFromText, parseReadingDocxBuffer } from '../server/paper-import-ai/docxSplitter.mjs'
 import { buildPaperImportAiPackageFiles } from '../server/paper-import-ai/packageBuilder.mjs'
 import { validatePaperImportPackage } from '../server/paper-import/validator.mjs'
@@ -147,7 +148,10 @@ function gfPackageFixture() {
       },
       clozeGroup: {
         groupId: 'group-i4-cloze', groupType: 'cloze', title: '完形填空', order: 5,
-        paragraphs: [{ id: 'para-i4-cloze-p1', text: 'Cloze passage.' }],
+        paragraphs: [{
+          id: 'para-i4-cloze-p1',
+          text: `Cloze passage with ${buildSupportedMarkerSequence(41, 15)}.`,
+        }],
         questions: [41,42,43,44,45,46,47,48,49,50,51,52,53,54,55].map(n => ({
           id: `q-i4-${String(n).padStart(3,'0')}`, stem: String(n),
           answerKey: 'B', blankId: `blank-i4-${String(n).padStart(3,'0')}`,
@@ -157,7 +161,10 @@ function gfPackageFixture() {
       },
       grammarFillGroup: {
         groupId: 'group-i4-grammar-fill', groupType: 'grammarFill', title: '语法填空', order: 6,
-        paragraphs: [{ id: 'para-i4-gf-p1', text: 'Grammar fill passage with  56  and  57  .' }],
+        paragraphs: [{
+          id: 'para-i4-gf-p1',
+          text: `Grammar fill passage with ${buildSupportedMarkerSequence(56, 10)}.`,
+        }],
         questions: [56,57,58,59,60,61,62,63,64,65].map(n => ({
           id: `q-i4-${String(n).padStart(3,'0')}`, stem: String(n),
           answerKey: 'word', blankId: `blank-i4-${String(n).padStart(3,'0')}`,

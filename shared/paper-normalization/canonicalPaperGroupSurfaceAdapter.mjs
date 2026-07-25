@@ -1,4 +1,5 @@
 import { segmentPaperText } from '../papersurface/segmentPaperText.mjs'
+import { buildExactPaperGroupSourceSlice } from './exactPaperGroupSourceSlice.mjs'
 import { normalizePaperGroup } from './normalizePaperGroup.mjs'
 
 const COMPATIBILITY_GROUPS = new Set([
@@ -16,27 +17,6 @@ function compatibilityDiagnostic(asset, groupId) {
     code: 'CANONICAL_COMPATIBILITY_NOT_ENABLED',
     paperId: asset?.paper?.paperId ?? '',
     groupId,
-  }
-}
-
-function exactSourceSlice(asset, groupId) {
-  const group = asset?.content?.groups?.[groupId]
-  const questionIds = Array.isArray(group?.questionIds) ? group.questionIds : []
-  const blankIds = Array.isArray(group?.blankIds) ? group.blankIds : []
-  return {
-    paperId: asset?.paper?.paperId,
-    sourceAssetVersion: asset?.paper?.assetVersion,
-    group,
-    questions: Object.fromEntries(
-      questionIds
-        .filter((questionId) => asset?.content?.questions?.[questionId] !== undefined)
-        .map((questionId) => [questionId, asset.content.questions[questionId]]),
-    ),
-    blanks: Object.fromEntries(
-      blankIds
-        .filter((blankId) => asset?.content?.blanks?.[blankId] !== undefined)
-        .map((blankId) => [blankId, asset.content.blanks[blankId]]),
-    ),
   }
 }
 
@@ -164,7 +144,9 @@ export function buildCanonicalPaperGroupSurfaceData({ asset, groupId }) {
     }
   }
 
-  const normalized = normalizePaperGroup(exactSourceSlice(asset, groupId))
+  const normalized = normalizePaperGroup(
+    buildExactPaperGroupSourceSlice(asset, groupId),
+  )
   if (normalized.status === 'needs_review') {
     return {
       status: 'needs_review',

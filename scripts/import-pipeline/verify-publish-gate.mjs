@@ -59,5 +59,6 @@ const out = {
   vKeys: Object.keys(v),
   blockingCount: blockArr.length,
   blocking: blockArr.map((i) => `${i.code || i.id || '?'}: ${i.message || ''}`).slice(0, 10),
+  normalizationGroups: v.normalizationGroups,
 }
 console.log(JSON.stringify(out, null, 2))

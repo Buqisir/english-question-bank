@@ -1,0 +1,159 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "paper-normalized-groups-v1.schema.json",
+  "title": "Paper Normalized Groups V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "paperId",
+    "sourceAssetVersion",
+    "normalizerVersion",
+    "groups"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "paper-normalized-groups-v1" },
+    "paperId": {
+      "type": "string",
+      "pattern": "^paper-[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "sourceAssetVersion": { "type": "integer", "minimum": 1 },
+    "normalizerVersion": { "const": "canonical-paper-group-v1" },
+    "groups": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "sourceFingerprint",
+          "semanticDigest",
+          "canonicalGroup"
+        ],
+        "properties": {
+          "sourceFingerprint": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "semanticDigest": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "canonicalGroup": { "$ref": "#/$defs/canonicalGroup" }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "sourceSpan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sourcePath", "start", "end"],
+      "properties": {
+        "sourcePath": { "type": "string", "minLength": 1 },
+        "start": { "type": "integer", "minimum": 0 },
+        "end": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "textNode": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "text", "sourceSpan"],
+      "properties": {
+        "type": { "const": "text" },
+        "text": { "type": "string" },
+        "sourceSpan": { "$ref": "#/$defs/sourceSpan" }
+      }
+    },
+    "blankNode": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "questionId",
+        "blankId",
+        "hint",
+        "sourceSpan"
+      ],
+      "properties": {
+        "type": { "const": "blank" },
+        "questionId": { "type": "string", "minLength": 1 },
+        "blankId": { "type": "string", "minLength": 1 },
+        "hint": { "type": ["string", "null"] },
+        "sourceSpan": { "$ref": "#/$defs/sourceSpan" }
+      }
+    },
+    "canonicalGroup": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "groupId",
+        "groupType",
+        "title",
+        "paragraphs",
+        "questions"
+      ],
+      "properties": {
+        "schemaVersion": { "const": "canonical-paper-group-v1" },
+        "groupId": { "type": "string", "minLength": 1 },
+        "groupType": { "enum": ["cloze", "grammarFill"] },
+        "title": { "type": "string" },
+        "paragraphs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["paragraphId", "nodes", "sourceSpan"],
+            "properties": {
+              "paragraphId": { "type": "string", "minLength": 1 },
+              "nodes": {
+                "type": "array",
+                "items": {
+                  "oneOf": [
+                    { "$ref": "#/$defs/textNode" },
+                    { "$ref": "#/$defs/blankNode" }
+                  ]
+                }
+              },
+              "sourceSpan": { "$ref": "#/$defs/sourceSpan" }
+            }
+          }
+        },
+        "questions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "questionId",
+              "questionNo",
+              "groupId",
+              "blankId",
+              "stem",
+              "options"
+            ],
+            "properties": {
+              "questionId": { "type": "string", "minLength": 1 },
+              "questionNo": { "type": "integer" },
+              "groupId": { "type": "string", "minLength": 1 },
+              "blankId": { "type": "string", "minLength": 1 },
+              "stem": { "type": ["string", "null"] },
+              "options": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["label", "text"],
+                  "properties": {
+                    "label": { "type": "string" },
+                    "text": { "type": "string" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

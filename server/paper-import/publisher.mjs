@@ -3,7 +3,9 @@ import path from 'node:path'
 import {
   computeNextPaperAssetVersion,
   cleanupPaperImportTempArtifacts,
+  commitPaperImportLatestSwap,
   removePaperImportVersion,
+  rollbackPaperImportLatestSwap,
   swapPaperImportLatest,
   writePaperImportVersion,
 } from './storage.mjs'
@@ -463,7 +465,13 @@ function buildQaLinks(paperId, version, readingGroups, scGroups, clozeGroups, gr
   return [...readingLinks, ...scLinks, ...clozeLinks, ...gfLinks, ...wLinks]
 }
 
-export function publishPaperImportPackage({ files, db, paperAssetsDir, forceDbFailure = false }) {
+export function publishPaperImportPackage({
+  files,
+  db,
+  paperAssetsDir,
+  forceDbFailure = false,
+  failurePoint = null,
+}) {
   const validation = validatePaperImportPackage(files)
   const publicValidation = makePublicValidationReport(validation)
   if (!validation.ok) {
@@ -498,6 +506,8 @@ export function publishPaperImportPackage({ files, db, paperAssetsDir, forceDbFa
   }
 
   let writtenVersion = null
+  let latestSwap = null
+  let dbCommitted = false
   try {
     writtenVersion = writePaperImportVersion({
       paperAssetsDir,
@@ -505,32 +515,44 @@ export function publishPaperImportPackage({ files, db, paperAssetsDir, forceDbFa
       validationReport: publicValidation,
       publishReport,
       version,
+      forceFailureAt: failurePoint,
     })
 
     db.exec('BEGIN')
     ensurePaperImportDatabaseShape(db)
-    if (forceDbFailure) {
-      throw new Error('Forced C7 DB failure for rollback proof')
-    }
     upsertPaperAssetToDb(db, {
       ...validation.packageData,
       paperAsset: writtenVersion.artifacts.paperAsset,
       answerKey: writtenVersion.artifacts.answerKey,
       readingAnalysis: writtenVersion.artifacts.readingAnalysis,
     }, version)
+    if (forceDbFailure || failurePoint === 'db-write') {
+      throw new Error(
+        forceDbFailure
+          ? 'Forced C7 DB failure for rollback proof'
+          : 'Forced db-write failure',
+      )
+    }
     db.prepare(
       `
       INSERT INTO paper_import_runs (id, paper_id, asset_version, status, validation_report_json, publish_report_json)
       VALUES (?, ?, ?, 'published', ?, ?)
       `,
     ).run(`pir-${randomUUID()}`, paperId, version, JSON.stringify(publicValidation), JSON.stringify(publishReport))
-    db.exec('COMMIT')
-
-    const latestDir = swapPaperImportLatest({
+    latestSwap = swapPaperImportLatest({
       paperAssetsDir,
       paperId,
       versionDir: writtenVersion.versionDir,
+      deferCleanup: true,
+      forceFailureAt: failurePoint,
     })
+    db.exec('COMMIT')
+    dbCommitted = true
+    try {
+      commitPaperImportLatestSwap(latestSwap)
+    } catch {
+      // A stale previous-latest directory is safe and is removed on the next run.
+    }
 
     return {
       ok: true,
@@ -538,15 +560,22 @@ export function publishPaperImportPackage({ files, db, paperAssetsDir, forceDbFa
       validation: publicValidation,
       publish: {
         ...publishReport,
-        latestDir,
+        latestDir: latestSwap.latestDir,
         versionDir: writtenVersion.versionDir,
       },
     }
   } catch (error) {
-    try {
-      db.exec('ROLLBACK')
-    } catch {
-      // The transaction may not have started or may already be rolled back.
+    if (!dbCommitted) {
+      try {
+        db.exec('ROLLBACK')
+      } catch {
+        // The transaction may not have started or may already be rolled back.
+      }
+      try {
+        rollbackPaperImportLatestSwap(latestSwap)
+      } catch {
+        // Preserve the original publish failure.
+      }
     }
     if (writtenVersion) {
       removePaperImportVersion({ paperAssetsDir, paperId, versionName: writtenVersion.versionName })

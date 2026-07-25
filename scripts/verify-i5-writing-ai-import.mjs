@@ -4,6 +4,8 @@ import { mkdirSync, mkdtempSync, rmSync, readFileSync, existsSync } from 'node:f
 import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+
+import { buildSupportedMarkerSequence } from './paper-normalization-test-helpers.mjs'
 import { parseReadingCandidatesFromText, parseReadingDocxBuffer } from '../server/paper-import-ai/docxSplitter.mjs'
 import { buildPaperImportAiPackageFiles } from '../server/paper-import-ai/packageBuilder.mjs'
 import { validatePaperImportPackage } from '../server/paper-import/validator.mjs'
@@ -212,7 +214,10 @@ function i5PackageFixture() {
       },
       clozeGroup: {
         groupId: 'group-i5-cloze', groupType: 'cloze', title: '完形填空', order: 5,
-        paragraphs: [{ id: 'para-i5-cloze-p1', text: 'Cloze passage.' }],
+        paragraphs: [{
+          id: 'para-i5-cloze-p1',
+          text: `Cloze passage with ${buildSupportedMarkerSequence(41, 15)}.`,
+        }],
         questions: [41,42,43,44,45,46,47,48,49,50,51,52,53,54,55].map(n => ({
           id: `q-i5-${String(n).padStart(3,'0')}`, stem: String(n),
           answerKey: 'B', blankId: `blank-i5-${String(n).padStart(3,'0')}`,
@@ -222,7 +227,10 @@ function i5PackageFixture() {
       },
       grammarFillGroup: {
         groupId: 'group-i5-grammar-fill', groupType: 'grammarFill', title: '语法填空', order: 6,
-        paragraphs: [{ id: 'para-i5-gf-p1', text: 'Grammar fill passage with  56  and  57  .' }],
+        paragraphs: [{
+          id: 'para-i5-gf-p1',
+          text: `Grammar fill passage with ${buildSupportedMarkerSequence(56, 10)}.`,
+        }],
         questions: [56,57,58,59,60,61,62,63,64,65].map(n => ({
           id: `q-i5-${String(n).padStart(3,'0')}`, stem: String(n),
           answerKey: 'word', blankId: `blank-i5-${String(n).padStart(3,'0')}`,
