@@ -9,8 +9,12 @@ The exam paper, mock paper, self-made material, or imported file family that a p
 _Avoid_: file, origin, paper when referring to provenance broadly
 
 **Source Capture**:
-The immutable, traceable capture of what an Import File actually contains before EQB interprets it as a paper structure.
+The immutable, traceable evidence package of exactly what one or more Import Files contain before EQB interprets them: original document bytes and digests plus ordered observations, document roles, provenance, and Source Spans. Source correction creates a new capture; normalized text, canonical structure, and Analysis never overwrite it.
 _Avoid_: canonical paper, cleaned paper, normalized asset
+
+**Source Span**:
+A typed address into one immutable Source Capture observation or binary artifact, bound to its source-document digest and pre-normalization coordinates. Canonical content and Transformation Records point back to Source Spans; normalized-text offsets are not Source Spans.
+_Avoid_: canonical path, normalized offset, mutable text range
 
 **Paper Format Profile**:
 A reusable, versioned definition of one legitimate paper family: its parts, sections, group slots, numbering, scoring, instructions, and answer regions.
@@ -25,8 +29,12 @@ The source-traceable semantic form of one Question Group after deterministic nor
 _Avoid_: raw group, renderer model, analysis payload
 
 **Normalization Report**:
-The durable account of source-to-canonical transformations, diagnostics, and `needs_review` outcomes for one paper compilation.
+The durable account of direct source lineage, Transformation Records, diagnostics, and fail-closed outcomes for one paper compilation.
 _Avoid_: validation report when no transformation provenance is recorded; AI analysis
+
+**Transformation Record**:
+One ordered ledger entry showing how source-backed evidence became a changed canonical value or relationship, retaining the versioned rule, exact input Source Spans, before/after state, target, and exactness proof. Heuristic or semantic-risk candidates are review diagnostics, not accepted Transformation Records.
+_Avoid_: source edit, cleanup history, AI analysis
 
 **Passage**:
 A complete English text, cloze text, writing prompt, listening script, or task material that provides the context for one or more question groups.
@@ -138,6 +146,7 @@ own light axis); using "考点" loosely when one of these specific axes is meant
 ## Relationships
 
 - A **Source Capture** can compile into one **Canonical Paper Plan**, many **Canonical Question Groups**, and one **Normalization Report**.
+- Every source-backed canonical value or relationship either maps directly to one or more **Source Spans** or is justified by an ordered **Transformation Record**.
 - A **Paper Format Profile** can be instantiated by many **Canonical Paper Plans**; each Canonical Paper Plan uses exactly one versioned Paper Format Profile.
 - A **Canonical Paper Plan** links its paper slots to **Canonical Question Groups** but does not contain their passage or question content.
 - A **Normalization Report** records the source-to-canonical outcome without becoming paper content or Analysis.
