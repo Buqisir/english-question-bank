@@ -241,7 +241,7 @@ const c7RelevantPrefixes = [
   'server/paper-import-ai/',
   'test-fixtures/paper-import/',
 ]
-const phaseAPaperNormalizationAllowedFiles = new Set([
+const paperNormalizationAllowedFiles = new Set([
   'app/src/shared-ui/papersurface/CanonicalPaperSentenceContent.tsx',
   'app/src/shared-ui/papersurface/PaperSurface.css',
   'app/src/shared-ui/papersurface/PaperSurface.tsx',
@@ -253,6 +253,9 @@ const phaseAPaperNormalizationAllowedFiles = new Set([
   'shared/papersurface/blankRuling.d.ts',
   'shared/papersurface/blankRuling.mjs',
   'shared/papersurface/tokens.mjs',
+  // paper-normalization Ticket 07: the proof-only Print HTML canonical
+  // consumer is the approved Phase B export boundary.
+  'server/print-renderer.mjs',
 ])
 const forbiddenPrefixes = [
   'app/src/shared-ui/papersurface/',
@@ -268,14 +271,15 @@ const forbiddenPrefixes = [
 function findForbiddenScopeChanges(files) {
   return files.filter((file) =>
     forbiddenPrefixes.some((prefix) => file.startsWith(prefix))
-    && !phaseAPaperNormalizationAllowedFiles.has(file),
+    && !paperNormalizationAllowedFiles.has(file),
   )
 }
 
 assert(
-  'scope guard accepts the approved Phase A PaperSurface companion',
+  'scope guard accepts approved paper-normalization companion files',
   findForbiddenScopeChanges([
     'app/src/shared-ui/papersurface/CanonicalPaperSentenceContent.tsx',
+    'server/print-renderer.mjs',
   ]).length === 0,
 )
 assert(
@@ -291,7 +295,7 @@ const shouldCheckForbiddenScope = changedFiles.some((file) =>
 if (shouldCheckForbiddenScope) {
   const forbiddenScopeChanges = findForbiddenScopeChanges(changedFiles)
   assert(
-    'forbidden scope untouched outside approved Phase A files',
+    'forbidden scope untouched outside approved paper-normalization files',
     forbiddenScopeChanges.length === 0,
     forbiddenScopeChanges.join(', '),
   )

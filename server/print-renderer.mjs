@@ -38,9 +38,11 @@
 import path from 'node:path'
 import { paperSurfaceTokens } from '../shared/papersurface/tokens.mjs'
 import { paperBlankPattern } from '../shared/papersurface/blankPattern.mjs'
+import { paperBlankRuling } from '../shared/papersurface/blankRuling.mjs'
 import { headingKind } from '../shared/papersurface/headingKind.mjs'
 import { resolveFigureMarker } from '../shared/figures/resolveFigureMarker.mjs'
 import { resolveGroupFigures } from './figures/paperFigures.mjs'
+import { resolveCanonicalPrintGroup } from './print-canonical-group-adapter.mjs'
 
 const groupTypeLabels = {
   reading: '阅读理解',
@@ -149,6 +151,47 @@ function renderPassageLineWithBlanks(line, groupType, blankCounter) {
     out += escapeHtml(text.slice(cursor))
   }
   return out
+}
+
+function renderCanonicalParagraph(canonicalGroup, paragraph, displayNumberByQuestionId) {
+  const blankWidthClass =
+    canonicalGroup.groupType === 'sevenChoices'
+      ? 'print-blank--seven'
+      : 'print-blank--short'
+  return paragraph.nodes.map((node) => {
+    if (node.type === 'text') return escapeHtml(node.text)
+    const displayNumber = displayNumberByQuestionId.get(node.questionId)
+    if (displayNumber === undefined) {
+      throw new Error(
+        `Canonical Print HTML blank references missing question ${node.questionId}`,
+      )
+    }
+    const hint = node.hint
+      ? `<span class="print-blank-hint">(${escapeHtml(node.hint)})</span>`
+      : ''
+    return `<span class="print-blank-unit"><span class="print-blank ${blankWidthClass}"><span class="print-blank-num">${displayNumber}</span></span>${hint}</span>`
+  }).join('')
+}
+
+function canonicalGroupMatchesPrintDetail(canonicalGroup, detail) {
+  const expectedGroupType =
+    canonicalGroup.groupType === 'grammarFill'
+      ? 'grammar_cloze'
+      : canonicalGroup.groupType
+  return (
+    detail.groupType === expectedGroupType
+    && canonicalGroup.questions.length === detail.questions.length
+    && canonicalGroup.questions.every(
+      (question, index) => question.questionId === detail.questions[index]?.id,
+    )
+  )
+}
+
+function cssBorderForBlankRuling(ruling) {
+  if (ruling.lineStyle !== 'single-thin') {
+    throw new Error(`Unsupported paper blank line style ${ruling.lineStyle}`)
+  }
+  return '0.48pt solid #000'
 }
 
 /** standard §8: 写作题组 (应用文 / 读后续写) get a bordered blank answer box. */
@@ -280,6 +323,7 @@ export function buildPrintHtml({
   paperAssetsDir = null,
   imageMode = 'web',
   images = [],
+  normalizationDiagnostics = [],
 }) {
   // draft-numbering-style v2 (owner 拍板 2026-07-10 二轮改判): small-question
   // numbering in the `blocks`-array path is WHOLE-PAPER continuous again
@@ -295,6 +339,7 @@ export function buildPrintHtml({
   // a directory scan, so it's memoized per groupId for the life of this
   // one buildPrintHtml call (never persisted across calls/requests).
   const figuresCache = new Map()
+  const canonicalGroupCache = new Map()
   function getFiguresInfo(groupId) {
     if (!paperAssetsDir) return null
     if (!figuresCache.has(groupId)) {
@@ -302,6 +347,18 @@ export function buildPrintHtml({
       figuresCache.set(groupId, resolved ? { ...resolved, paperAssetsDir } : null)
     }
     return figuresCache.get(groupId)
+  }
+
+  function getCanonicalGroup(groupId) {
+    if (!paperAssetsDir) return null
+    if (!canonicalGroupCache.has(groupId)) {
+      const resolved = resolveCanonicalPrintGroup({
+        paperAssetsDir,
+        groupId,
+      })
+      canonicalGroupCache.set(groupId, resolved)
+    }
+    return canonicalGroupCache.get(groupId)
   }
 
   const sections = []
@@ -333,6 +390,26 @@ export function buildPrintHtml({
         const item = itemByGroupId.get(block.questionGroupId)
         if (!item) continue
         const { detail } = item
+        const canonicalResolution = getCanonicalGroup(block.questionGroupId)
+        let canonicalGroup =
+          canonicalResolution?.status === 'ready'
+            ? canonicalResolution.group
+            : null
+        if (
+          canonicalGroup
+          && !canonicalGroupMatchesPrintDetail(canonicalGroup, detail)
+        ) {
+          normalizationDiagnostics.push({
+            status: 'legacy',
+            source: 'legacy',
+            paperId: canonicalResolution.diagnostic.paperId,
+            groupId: block.questionGroupId,
+            reason: 'canonical_print_input_mismatch',
+          })
+          canonicalGroup = null
+        } else if (canonicalResolution?.diagnostic) {
+          normalizationDiagnostics.push(canonicalResolution.diagnostic)
+        }
         const score = Number.isFinite(Number(block.score)) ? Number(block.score) : item.score
         const passage = (detail.passage.materialText || detail.passage.summary || '').trim()
 
@@ -364,7 +441,24 @@ export function buildPrintHtml({
         // `renderPassageLineWithBlanks`'s doc comment.
         const blankCounter = { next: questionNum }
 
-        if (passage) {
+        if (canonicalGroup) {
+          const displayNumberByQuestionId = new Map(
+            canonicalGroup.questions.map((question, index) => [
+              question.questionId,
+              questionNum + index,
+            ]),
+          )
+          groupHtml += `<div class="passage">${canonicalGroup.paragraphs
+            .map(
+              (paragraph) =>
+                `<p>${renderCanonicalParagraph(
+                  canonicalGroup,
+                  paragraph,
+                  displayNumberByQuestionId,
+                )}</p>`,
+            )
+            .join('')}</div>`
+        } else if (passage) {
           const figuresInfo = getFiguresInfo(block.questionGroupId)
           groupHtml += `<div class="passage">${passage.split(/\n/).map((line) => renderPassageLine(line, detail.groupType, figuresInfo, imageMode, images, blankCounter)).join('')}</div>`
         }
@@ -381,7 +475,7 @@ export function buildPrintHtml({
         // v2: base is `questionNum` (this group's first continuous number,
         // captured BEFORE the assertion — blankCounter was seeded to it),
         // not the round-1 constant `1`.
-        if (BLANK_BEARING_GROUP_TYPES.has(detail.groupType)) {
+        if (!canonicalGroup && BLANK_BEARING_GROUP_TYPES.has(detail.groupType)) {
           const blanksFound = blankCounter.next - questionNum
           if (blanksFound !== detail.questions.length) {
             throw new Error(
@@ -399,9 +493,23 @@ export function buildPrintHtml({
           groupHtml += renderWritingAnswerBox(detail)
         }
 
+        const canonicalQuestionById = canonicalGroup
+          ? new Map(canonicalGroup.questions.map((question) => [question.questionId, question]))
+          : null
         for (const question of detail.questions) {
-          const stemText = String(question.stem || '').trim()
-          const hasOptions = Array.isArray(question.options) && question.options.length > 0
+          const canonicalQuestion = canonicalQuestionById?.get(question.id)
+          const printQuestion = canonicalQuestion
+            ? {
+                ...question,
+                stem: canonicalQuestion.stem ?? '',
+                options: canonicalQuestion.options.map((option) => ({
+                  label: option.label,
+                  content: option.text,
+                })),
+              }
+            : question
+          const stemText = String(printQuestion.stem || '').trim()
+          const hasOptions = Array.isArray(printQuestion.options) && printQuestion.options.length > 0
           // 空题干:挖空题号已在文中(语法填空/完形/七选五)。有选项则题号与选项同行
           // (真卷完形形态);无选项且非教师版则整行不出(语法填空文后无内容)。
           if (!stemText && !hasOptions && !isTeacher) {
@@ -410,10 +518,10 @@ export function buildPrintHtml({
           }
           if (!stemText && hasOptions) {
             // 真卷完形形态:题号与选项同一行「41. A. xxx B. xxx C. xxx D. xxx」
-            groupHtml += `<div class="question"><p class="options-inline options-inline--numbered"><span class="qnum">${questionNum}.</span>${question.options.map((o) => `<span>${escapeHtml(o.label)}. ${escapeHtml(o.content)}</span>`).join('')}</p>`
+            groupHtml += `<div class="question"><p class="options-inline options-inline--numbered"><span class="qnum">${questionNum}.</span>${printQuestion.options.map((o) => `<span>${escapeHtml(o.label)}. ${escapeHtml(o.content)}</span>`).join('')}</p>`
           } else {
-            groupHtml += `<div class="question"><p class="stem"><span class="qnum">${questionNum}.</span> ${escapeHtml(question.stem)}</p>`
-            groupHtml += renderOptions(question.options, detail.groupType)
+            groupHtml += `<div class="question"><p class="stem"><span class="qnum">${questionNum}.</span> ${escapeHtml(printQuestion.stem)}</p>`
+            groupHtml += renderOptions(printQuestion.options, detail.groupType)
           }
           if (isTeacher) {
             groupHtml += `<div class="answer"><p><strong>【答案】</strong>${escapeHtml(question.answer || '待补')}</p>`
@@ -689,19 +797,23 @@ body {
 
 /* standard §6 — 挖空: 定长下划线 + 题号居中于线上, 线不得跨行断开.
    七选五 ≈4.6em (10.5pt 下 ≈48pt/17mm); 完形/语法填空 ≈3.3em (≈35pt/12mm). */
+.print-blank-unit {
+  white-space: ${paperBlankRuling.cloze.whiteSpace};
+}
+
 .print-blank {
   display: inline-block;
-  white-space: nowrap;
-  border-bottom: 0.48pt solid #000;
-  text-align: center;
+  white-space: ${paperBlankRuling.cloze.whiteSpace};
+  border-bottom: ${cssBorderForBlankRuling(paperBlankRuling.cloze)};
+  text-align: ${paperBlankRuling.cloze.numberAlignment};
   vertical-align: baseline;
   margin: 0 0.15em;
   /* inline-block 会继承段落首行缩进并作用于自身首行，把题号推出横线（owner QA 实测撞字），必须归零 */
   text-indent: 0;
 }
 
-.print-blank--short { width: 3.3em; }
-.print-blank--seven { width: 4.6em; }
+.print-blank--short { width: ${paperBlankRuling.cloze.width}; }
+.print-blank--seven { width: ${paperBlankRuling.sevenChoices.width}; }
 
 .print-blank-num {
   display: inline-block;

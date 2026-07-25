@@ -1,6 +1,6 @@
 # 07 — Print HTML 标准化消费
 
-Status: ready
+Status: done
 Blocked by: Tickets 01–06 complete; Phase A independent review + owner QA + full verify = GO
 Spec: `docs/cuts/paper-normalization/spec.md`
 Worktree: `/Users/huangxuewei/Projects/wt-paper-normalization-20260724`
@@ -26,13 +26,13 @@ shared blank ruling 输出，不再为这些 groups 解析 raw marker，同时�
 
 ## 验收
 
-- [ ] `paper-2026-i` cloze/grammarFill 与 `paper-960d0f8d` grammarFill 的
+- [x] `paper-2026-i` cloze/grammarFill 与 `paper-960d0f8d` grammarFill 的
       Print HTML 不读取/解析 proof raw marker，输出中无 raw label 或双题号。
-- [ ] Blank/question/hint/prose/options 与 screen semantic facts 一致；
+- [x] Blank/question/hint/prose/options 与 screen semantic facts 一致；
       3.3em/4.6em、centered-no-dot、single-thin、nowrap 正确。
-- [ ] Invalid/missing/stale canonical artifact fail closed or走明确 legacy
+- [x] Invalid/missing/stale canonical artifact fail closed or走明确 legacy
       fallback，不能半 canonical 半 marker。
-- [ ] Student/teacher output、block order、continuous numbering、page-break
+- [x] Student/teacher output、block order、continuous numbering、page-break
       suggestions、A4 page count 与 group span 不回归。
 
 ## 验证
@@ -57,6 +57,20 @@ worktree 默认先 07 后 08 顺序施工。
   与 clean commit。
 - Ticket 状态改为 `done` 并填写结果；不得开始 Ticket 08。
 
-Commit:
-Verify:
-Notes:
+Commit: this Ticket 07 checkpoint (exact SHA in final handoff)
+Verify: focused `buildPrintHtml` canonical consumer、existing print renderer
+（92/92）、PDF export（37/37）、pagination renderer（25/25）与 pagination DOM
+contract（32/32）、`pnpm -C app run build`、`git diff --check` 均 exit 0；
+Vivliostyle 生成 3 页 A4，三组 proof 各占 1 页；最终
+`pnpm -C app run verify:all` exit 0，`PASS 91 / SKIP 1 / FAIL 0`。唯一
+declared skip 为缺少 off-repo fixture 的
+`scripts/verify-i16a-teaching-dimension-search.mjs`；baseline failures: 0。
+Notes: Print HTML 只对 spec allowlist 的三组 proof 选择完整 valid sidecar
+或 approved compatibility canonical group；其他资产即使有 valid sidecar
+也保留结构化 legacy fallback。Canonical paragraph/question/hint 直接消费
+semantic nodes 与 shared blank ruling，不重解析 raw marker；detail 漂移、
+stale/invalid sidecar 与 `needs_review` 均拒绝半 canonical 输出。普通 review
+Standards PASS；Spec 的 non-proof sidecar gate、第三组 visual evidence 与
+ticket/full-verify 收口三项 Must Fix 均已修复。浏览器/Vivliostyle 证据见
+`docs/cuts/paper-normalization/qa/ticket-07-print-html-evidence.md`。Owner QA
+按计划延后到 Tickets 07–08 Phase B independent review 之后。
