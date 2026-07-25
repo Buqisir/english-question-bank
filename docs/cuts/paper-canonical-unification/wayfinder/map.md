@@ -1,7 +1,7 @@
 # EQB 试卷 Canonical 大一统 — Wayfinder Map
 
 Status: charted
-Next on PASS: `docs/cuts/paper-canonical-unification/wayfinder/tickets/02-census-assets-producers-consumers.md`
+Next on PASS: `docs/cuts/paper-canonical-unification/wayfinder/tickets/03-executable-standard-authority.md`
 Terminal: no
 
 ## Notes
@@ -38,6 +38,7 @@ Terminal: no
 <!-- Append one linked one-line gist only when a ticket closes. -->
 
 - [审计现有试卷标准的权威、缺口与矛盾](tickets/01-audit-current-authorities.md) — 现状由规范、admission 与 producer/consumer 三层共同决定；23 项证据显示来源、profile、plan/group、analysis 与 renderer 权威均未收拢。
+- [盘点全库 latest 资产与所有生产消费变体](tickets/02-census-assets-producers-consumers.md) — 33 卷 census 定位 Seven shared-bank projection 与完形列对齐的最早错误层，并固化 1035 组 A–D measured proof、数据异常和迁移风险。
 
 ## Fog
 
