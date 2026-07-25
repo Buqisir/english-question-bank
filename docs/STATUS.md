@@ -48,9 +48,10 @@ essay-grading 幸存件重建，判例已回流，远端 Buqisir/project-os 私�
 
 ## 主线焦点
 
-- 2026-07-24：**workflow skill contract 收口**：新顶层技能任务改为首行附完整 `SKILL.md` Markdown，
-  implementation/fix 与独立 review lineage 分别锁定 `$implement` / `$code-review`；review PASS、0 Must Fix，
-  合同 212/0、housekeeping 76/0、`verify:all` 84 PASS / 1 SKIP / 0 FAIL；生产不部署。
+- 2026-07-24：**workflow explicit-skill handoff contract 发布**：新顶层技能任务首行附完整 `SKILL.md` Markdown；
+  current-task invocation 与 verified handoff reference 明确分离，verified explicit-only skill 只可用于 handoff；
+  implementation/fix 与独立 review lineage 分别锁定 `$implement` / `$code-review`；合同 250/0、
+  housekeeping 76/0、`verify:all` 84 PASS / 1 SKIP / 0 FAIL；生产不部署。
 - 2026-07-24：**retained application-writing pilot 发布门禁通过**：保留原作文讲评，
   由 plain model 生成结构化复习卡；独立 Standards + Spec review PASS（0 Must Fix）、
   owner QA 通过，`verify:all` 84 PASS / 1 SKIP / 0 FAIL；生产部署不在本次范围。

@@ -40,8 +40,19 @@ Prompt:
 <complete copyable prompt>
 ```
 
-Resolve the real absolute skill path from the current catalog when generating
-a handoff. A slash command, bare skill name, or “equivalent flow” is not an
+Do not confuse current-task invocation with handoff referenceability. Claim an
+invocation only when the skill is active or owner-attached in this task. A
+handoff may instead use an owner-provided path or an existing global/project
+skill bridge, including an explicit-only skill with
+`disable-model-invocation: true`, after verifying exactly one non-conflicting
+real absolute, readable `SKILL.md` whose frontmatter `name` matches.
+
+The handoff reference does not mean this task invoked the skill and does not
+authorize creation of the next task. Report ambiguity rather than guessing.
+Use `SKILL UNAVAILABLE` only when immediate invocation is required but the
+skill is neither active nor attached, or no unique verified handoff path
+exists. Preserve `NATURAL-LANGUAGE FALLBACK` for a declared non-Codex
+equivalent. A slash command, bare skill name, or “equivalent flow” is not an
 attachment. QA, `DONE`, and other no-skill exits omit the attachment.
 
 Fill all applicable anchors for the task type. Use `not applicable` only when

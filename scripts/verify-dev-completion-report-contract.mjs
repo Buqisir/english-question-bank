@@ -2,6 +2,8 @@
  * Verifies the Matt-native ticket completion report and manual Next contract.
  */
 
+import { isAbsolute } from 'node:path'
+
 import {
   createVerifier,
   readText,
@@ -23,6 +25,11 @@ const reviewLevels = readText(ROOT, 'docs/agents/review-levels.md')
 const reviewOverlay = readText(ROOT, 'docs/agents/cr-persona.md')
 const cutWorkflow = readText(ROOT, 'docs/steering/cut-workflow-protocol.md')
 const compact = (source) => source.replace(/\s+/g, ' ')
+const textBetween = (source, startMarker, endMarker) => {
+  const start = source.indexOf(startMarker)
+  const end = source.indexOf(endMarker, start + startMarker.length)
+  return start >= 0 && end > start ? source.slice(start, end) : ''
+}
 const fencedBlocks = (source) =>
   [...source.matchAll(/```(?:text)?\n([\s\S]*?)```/g)].map((match) =>
     match[1].trim(),
@@ -76,6 +83,49 @@ function validateSkillHandoff(block, taskType) {
   }
 
   return errors
+}
+
+function frontmatterName(source) {
+  const frontmatter = source.match(/^---\n([\s\S]*?)\n---(?:\n|$)/)?.[1]
+  return frontmatter
+    ?.match(/^name:\s*["']?([^"'\n]+?)["']?\s*$/m)?.[1]
+    ?.trim()
+}
+
+function invocationAvailability(skill, { activeCatalog = [], ownerAttached = [] }) {
+  if (activeCatalog.includes(skill)) {
+    return { available: true, source: 'active catalog' }
+  }
+  if (ownerAttached.includes(skill)) {
+    return { available: true, source: 'owner attachment' }
+  }
+  return { available: false, code: 'SKILL UNAVAILABLE' }
+}
+
+function resolveHandoffReference(skill, candidates) {
+  const verified = new Map()
+
+  for (const candidate of candidates) {
+    if (
+      !['owner path', 'skill bridge'].includes(candidate.source) ||
+      !candidate.exists ||
+      !candidate.readable ||
+      !isAbsolute(candidate.path) ||
+      candidate.realPath !== candidate.path ||
+      frontmatterName(candidate.contents) !== skill
+    ) {
+      continue
+    }
+    verified.set(candidate.path, candidate)
+  }
+
+  if (verified.size === 0) {
+    return { available: false, code: 'SKILL UNAVAILABLE' }
+  }
+  if (verified.size > 1) {
+    return { available: false, code: 'SKILL AMBIGUOUS' }
+  }
+  return { available: true, path: [...verified.keys()][0] }
 }
 
 function assertStructuredBlock(name, source, marker, fields) {
@@ -263,6 +313,80 @@ assert(
   'workflow Wayfinder example attaches its actual entry skill',
 )
 
+section('skill invocation and handoff reference')
+
+const explicitOnlySkill = {
+  source: 'owner path',
+  path: '/absolute/path/to/implement/SKILL.md',
+  realPath: '/absolute/path/to/implement/SKILL.md',
+  exists: true,
+  readable: true,
+  contents: `---
+name: implement
+disable-model-invocation: true
+---
+Implement the ticket.`,
+}
+const explicitOnlyHandoff = resolveHandoffReference('implement', [
+  explicitOnlySkill,
+])
+
+assert(
+  invocationAvailability('implement', {
+    activeCatalog: ['implement'],
+  }).available,
+  'active-catalog skill can be invoked in the current task',
+)
+assert(
+  invocationAvailability('implement', {
+    ownerAttached: ['implement'],
+  }).available,
+  'owner-attached skill can be invoked in the current task',
+)
+assert(
+  !invocationAvailability('implement', {}).available,
+  'discoverable path alone cannot be reported as a current-task invocation',
+)
+assert(
+  explicitOnlyHandoff.available &&
+    explicitOnlyHandoff.path === explicitOnlySkill.path,
+  'verified explicit-only skill can be referenced in a handoff',
+)
+assert(
+  explicitOnlyHandoff.available &&
+    !invocationAvailability('implement', {}).available,
+  'handoff referenceability does not imply current-task invocation availability',
+)
+assert(
+  resolveHandoffReference('implement', []).code === 'SKILL UNAVAILABLE' &&
+    invocationAvailability('implement', {}).code === 'SKILL UNAVAILABLE',
+  'truly unavailable invocation or handoff still reports SKILL UNAVAILABLE',
+)
+assert(
+  resolveHandoffReference('implement', [
+    explicitOnlySkill,
+    {
+      ...explicitOnlySkill,
+      source: 'skill bridge',
+      path: '/other/absolute/path/to/implement/SKILL.md',
+      realPath: '/other/absolute/path/to/implement/SKILL.md',
+    },
+  ]).code === 'SKILL AMBIGUOUS',
+  'conflicting verified handoff candidates report ambiguity instead of guessing',
+)
+assert(
+  resolveHandoffReference('implement', [
+    {
+      ...explicitOnlySkill,
+      contents: explicitOnlySkill.contents.replace(
+        'name: implement',
+        'name: code-review',
+      ),
+    },
+  ]).code === 'SKILL UNAVAILABLE',
+  'handoff frontmatter name must match the requested skill',
+)
+
 section('documents')
 
 assert(template.includes('Ticket Completion Report Template'), 'template exists')
@@ -401,6 +525,82 @@ assert(
     workflow.includes('NATURAL-LANGUAGE FALLBACK'),
   'unavailable skills and non-Codex fallbacks are declared honestly',
 )
+const skillBoundarySections = [
+  [
+    'AGENTS.md',
+    textBetween(
+      agents,
+      'Invocation availability and handoff',
+      'When the next step needs',
+    ),
+  ],
+  [
+    'completion protocol',
+    textBetween(
+      steering,
+      'Invocation availability and handoff',
+      'Fill all applicable anchors',
+    ),
+  ],
+  [
+    'completion template',
+    textBetween(
+      template,
+      'Do not confuse current-task invocation',
+      'Fill all applicable anchors',
+    ),
+  ],
+  [
+    'Matt workflow',
+    textBetween(
+      workflow,
+      'Invocation availability and handoff',
+      '## Pick the entry point',
+    ),
+  ],
+  [
+    'dispatch protocol',
+    textBetween(
+      dispatch,
+      'Invocation availability and',
+      'Do not separately attach',
+    ),
+  ],
+]
+for (const [name, source] of skillBoundarySections) {
+  assert(Boolean(source), `${name} has a bounded skill-availability contract section`)
+  const normalized = compact(source)
+  assert(
+    normalized.includes('Invocation availability and handoff referenceability are separate') ||
+      normalized.includes('Invocation availability and handoff referenceability are different') ||
+      normalized.includes('Do not confuse current-task invocation with handoff referenceability'),
+    `${name} separates invocation availability from handoff referenceability`,
+  )
+  assert(
+    normalized.includes('active') &&
+      normalized.includes('owner') &&
+      normalized.includes('attached'),
+    `${name} limits current-task invocation claims to active or owner-attached skills`,
+  )
+  assert(
+    normalized.includes('disable-model-invocation: true') &&
+      normalized.includes('explicit-only'),
+    `${name} permits verified explicit-only handoff references`,
+  )
+  assert(
+    /not (?:a )?current-task invocation/i.test(normalized) ||
+      /does not mean (?:the|this) current task invoked/i.test(normalized) ||
+      /does not mean (?:the |this )?task invoked/i.test(normalized) ||
+      normalized.includes('neither means the current task invoked'),
+    `${name} says a handoff reference is not an invocation`,
+  )
+  assert(
+    normalized.includes('SKILL UNAVAILABLE') &&
+      normalized.includes('unique') &&
+      normalized.includes('verified'),
+    `${name} reserves SKILL UNAVAILABLE for a truly unavailable invocation or handoff`,
+  )
+}
 assert(
   compact(agents).includes('initial independent review') &&
     compact(agents).includes('focused re-review') &&

@@ -45,18 +45,40 @@ When a new top-level task invokes a skill, its copyable block starts with the
 complete Markdown attachment for the actual entry skill, followed by one blank
 line. Implementation and fix tasks attach `$implement`; initial independent
 reviews and focused re-reviews attach `$code-review`. Ask Matt, Wayfinder,
-grilling, and other workflows attach their actual current catalog entry, not a
-proxy skill or a downstream skill.
+grilling, and other workflows attach their actual entry skill, not a proxy
+skill or a downstream skill.
 
 Only the entry skill is attached. TDD and ordinary Standards + Spec review
 inside `$implement` do not receive separate attachments. A bare slash command,
 bare `$skill-name`, or instruction to run an equivalent flow is not an
-attachment. Tracked examples use generic absolute paths; an agent generating a
-real `Next` resolves the current catalog's real absolute `SKILL.md` path.
+attachment.
 
-If the required skill is absent, report `SKILL UNAVAILABLE` and do not claim it
-ran. In a non-Codex harness, explicitly declare `NATURAL-LANGUAGE FALLBACK`
-before following the equivalent workflow in this document.
+Invocation availability and handoff referenceability are different checks. A
+current task may claim that it invoked a skill only when that skill is in the
+active catalog or the owner explicitly attached its `SKILL.md` in this task.
+Being able to locate a file for a future handoff is not enough.
+
+For an owner-created next top-level task, resolve the entry skill from an
+owner-provided path or an existing global/project skill bridge. The attachment
+is valid only when resolution yields one non-conflicting candidate whose
+`SKILL.md` exists and is readable, whose path is a real absolute path, and
+whose frontmatter `name` matches the requested skill. Multiple conflicting
+candidates are ambiguous; report that ambiguity and do not guess. A skill with
+`disable-model-invocation: true` can therefore remain explicit-only and still
+be a valid verified handoff reference.
+
+Referencing that skill in `Next` does not mean the current task invoked it and
+does not authorize task creation. The owner still opens the next top-level task
+and pastes the attachment-first block manually. Tracked examples use generic
+absolute paths; real `Next` output uses the absolute path verified at that
+time.
+
+Report `SKILL UNAVAILABLE` only when a skill required for immediate invocation
+is neither active nor owner-attached, or when a required handoff has no unique
+verified real path. Do not report it merely because an otherwise verified
+skill is explicit-only or absent from the automatic catalog. In a non-Codex
+harness, explicitly declare `NATURAL-LANGUAGE FALLBACK` before following the
+equivalent workflow in this document.
 
 ## Pick the entry point
 

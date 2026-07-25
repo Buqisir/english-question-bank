@@ -64,11 +64,25 @@ inadequacy evidence under `model-routing.md`.
 
 Implementation and fix tasks attach `$implement`. Independent review and
 focused re-review tasks attach `$code-review`. Ask Matt, Wayfinder, grilling,
-and other tasks attach the actual catalog entry skill. Do not separately attach
-TDD or ordinary review used inside `$implement`. A bare slash command, bare
-skill name, or equivalent-flow instruction is invalid. QA, `DONE`, and other
-no-skill exits need no attachment. A result-only final message without one
-canonical exit is invalid.
+and other tasks attach the actual entry skill. Invocation availability and
+handoff referenceability are separate: claim current-task invocation only for
+an active or owner-attached skill, while a future handoff may reference a
+verified explicit-only skill even when `disable-model-invocation: true` keeps
+it out of the automatic catalog.
+
+Resolve a handoff path only from an owner-provided path or an existing
+global/project skill bridge. Require one non-conflicting candidate, a real
+absolute readable `SKILL.md`, and matching frontmatter `name`; report ambiguity
+instead of guessing. That reference neither means the current task invoked the
+skill nor authorizes the agent to create the next task. Use
+`SKILL UNAVAILABLE` only for an unavailable immediate invocation or when no
+unique verified handoff path exists. Preserve the declared
+`NATURAL-LANGUAGE FALLBACK` rule for non-Codex harnesses.
+
+Do not separately attach TDD or ordinary review used inside `$implement`. A
+bare slash command, bare skill name, or equivalent-flow instruction is invalid.
+QA, `DONE`, and other no-skill exits need no attachment. A result-only final
+message without one canonical exit is invalid.
 
 ## Batch and parallel work
 
