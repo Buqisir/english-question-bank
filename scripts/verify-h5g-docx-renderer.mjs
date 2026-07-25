@@ -435,7 +435,7 @@ function assertSourceGuards() {
   // `buildExamDocumentXml` in docxRenderer.mjs. The exact-signature regex
   // below is updated to match (natural turnover per AGENTS.md's verify
   // convention: a source-contract change this cut makes, not bulk cleanup).
-  assert('buildDocumentXml lives at module indent 0', /\nfunction buildDocumentXml\(\{ title, versionType, items, blocks, questionNumberStart, printStyle, images = \[\] \}\) \{/.test(src))
+  assert('buildDocumentXml lives at module indent 0', /\nfunction buildDocumentXml\(\{ title, versionType, items, blocks, questionNumberStart, printStyle, images = \[\], normalizationDiagnostics = \[\] \}\) \{/.test(src))
   assert('writeDocxPackage lives at module indent 0', /\nfunction writeDocxPackage\(\{ documentXml, outputPath, title, images = \[\] \}\) \{/.test(src))
   // 刀⑤ render-fidelity Chunk C resolves the V1 footer TODO — assert it's
   // actually gone and the real footer wiring (docxSectPr + footerReference)
@@ -454,7 +454,7 @@ function assertApiIntegration() {
   // Hoisted forwarding wrappers preserve the exact signatures. figure-render
   // cut: both gained the same `images = []` out-parameter as the docxRenderer
   // functions above (natural turnover, see that assertion's comment).
-  assert('buildDocumentXml wrapper preserves signature', /\nfunction buildDocumentXml\(\{ title, versionType, items, blocks, questionNumberStart, printStyle, images = \[\] \}\) \{\n\s*return buildDocumentXmlImpl\(\{ title, versionType, items, blocks, questionNumberStart, printStyle, images \}\)/.test(apiSrc))
+  assert('buildDocumentXml wrapper preserves signature', /\nfunction buildDocumentXml\(\{ title, versionType, items, blocks, questionNumberStart, printStyle, images = \[\], normalizationDiagnostics = \[\] \}\) \{\n\s*return buildDocumentXmlImpl\(\{ title, versionType, items, blocks, questionNumberStart, printStyle, images, normalizationDiagnostics \}\)/.test(apiSrc))
   assert('writeDocxPackage wrapper preserves signature', /\nfunction writeDocxPackage\(\{ documentXml, outputPath, title, images = \[\] \}\) \{\n\s*return writeDocxPackageImpl\(\{ documentXml, outputPath, title, images \}\)/.test(apiSrc))
   assert('convertDocxToPdf wrapper preserves signature', /\nfunction convertDocxToPdf\(docxPath, outputPath\) \{\n\s*return convertDocxToPdfImpl\(docxPath, outputPath\)/.test(apiSrc))
   // The heavy moved bodies are gone from api.mjs.

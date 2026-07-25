@@ -54,9 +54,11 @@ import { tmpdir } from 'node:os'
 import path from 'node:path'
 
 import { paperBlankPattern } from '../../shared/papersurface/blankPattern.mjs'
+import { paperBlankRuling } from '../../shared/papersurface/blankRuling.mjs'
 import { headingKind } from '../../shared/papersurface/headingKind.mjs'
 import { resolveFigureMarker } from '../../shared/figures/resolveFigureMarker.mjs'
 import { resolveGroupFigures } from '../figures/paperFigures.mjs'
+import { resolveCanonicalPrintGroup } from '../print-canonical-group-adapter.mjs'
 
 // draft-numbering-style (docs/cuts/draft-numbering-style/plan.md): the
 // three group types whose passage text carries literal in-text blank
@@ -227,6 +229,65 @@ function stripTrailingSpaces(line) {
 // centered inside an underlined run of padding spaces on each side.
 function docxBlankPaddingSpaces(groupType) {
   return groupType === 'seven_choices' ? '   ' : '  '
+}
+
+function docxBlankPaddingFromRuling(ruling) {
+  if (
+    ruling.lineStyle !== 'single-thin'
+    || ruling.numberAlignment !== 'center'
+    || ruling.numberSuffix !== ''
+    || ruling.whiteSpace !== 'nowrap'
+    || ruling.hintPlacement !== 'immediately-after'
+  ) {
+    throw new Error('Unsupported canonical DOCX blank ruling')
+  }
+  if (ruling.width === '3.3em') return '  '
+  if (ruling.width === '4.6em') return '   '
+  throw new Error(`Unsupported canonical DOCX blank width ${ruling.width}`)
+}
+
+function docxCanonicalParagraphRuns(
+  canonicalGroup,
+  canonicalParagraph,
+  displayNumberByQuestionId,
+) {
+  const ruling = paperBlankRuling[canonicalGroup.groupType]
+  if (!ruling) {
+    throw new Error(
+      `Missing canonical DOCX blank ruling for ${canonicalGroup.groupType}`,
+    )
+  }
+  const padding = docxBlankPaddingFromRuling(ruling)
+  return canonicalParagraph.nodes.flatMap((node) => {
+    if (node.type === 'text') return [run(node.text, { size: 21 })]
+    const displayNumber = displayNumberByQuestionId.get(node.questionId)
+    if (displayNumber === undefined) {
+      throw new Error(
+        `Canonical DOCX blank references missing question ${node.questionId}`,
+      )
+    }
+    return [
+      run(`${padding}${displayNumber}${padding}`, {
+        size: 21,
+        underline: true,
+      }),
+      ...(node.hint ? [run(`(${node.hint})`, { size: 21 })] : []),
+    ]
+  })
+}
+
+function canonicalGroupMatchesDocxDetail(canonicalGroup, detail) {
+  const expectedGroupType =
+    canonicalGroup.groupType === 'grammarFill'
+      ? 'grammar_cloze'
+      : canonicalGroup.groupType
+  return (
+    detail.groupType === expectedGroupType
+    && canonicalGroup.questions.length === detail.questions.length
+    && canonicalGroup.questions.every(
+      (question, index) => question.questionId === detail.questions[index]?.id,
+    )
+  )
 }
 
 /**
@@ -766,12 +827,31 @@ function pushDocxPassageLine(body, line, groupType, figuresInfo, images, textPar
 }
 
 // --- Exam-style renderer: formal Gaokao-style paper layout ---
-function buildExamDocumentXml({ title, versionType, items, blocks, questionNumberStart, images }) {
+function buildExamDocumentXml({
+  title,
+  versionType,
+  items,
+  blocks,
+  questionNumberStart,
+  images,
+  normalizationDiagnostics,
+}) {
   const figuresCache = new Map()
+  const canonicalGroupCache = new Map()
   function getFiguresInfo(groupId) {
     if (!paperAssetsDir) return null
     if (!figuresCache.has(groupId)) figuresCache.set(groupId, resolveGroupFigures(paperAssetsDir, groupId))
     return figuresCache.get(groupId)
+  }
+  function getCanonicalGroup(groupId) {
+    if (!paperAssetsDir) return null
+    if (!canonicalGroupCache.has(groupId)) {
+      canonicalGroupCache.set(
+        groupId,
+        resolveCanonicalPrintGroup({ paperAssetsDir, groupId }),
+      )
+    }
+    return canonicalGroupCache.get(groupId)
   }
   // draft-numbering-style v2 (owner 拍板 2026-07-10 二轮改判): small-question
   // numbering in the `blocks`-array path is WHOLE-PAPER continuous again
@@ -839,6 +919,30 @@ function buildExamDocumentXml({ title, versionType, items, blocks, questionNumbe
         const item = itemByGroupId.get(block.questionGroupId)
         if (!item) continue
         const { detail } = item
+        const canonicalResolution =
+          detail.groupType === 'cloze'
+          || detail.groupType === 'grammar_cloze'
+            ? getCanonicalGroup(block.questionGroupId)
+            : null
+        let canonicalGroup =
+          canonicalResolution?.status === 'ready'
+            ? canonicalResolution.group
+            : null
+        if (
+          canonicalGroup
+          && !canonicalGroupMatchesDocxDetail(canonicalGroup, detail)
+        ) {
+          normalizationDiagnostics.push({
+            status: 'legacy',
+            source: 'legacy',
+            paperId: canonicalResolution.diagnostic.paperId,
+            groupId: block.questionGroupId,
+            reason: 'canonical_docx_input_mismatch',
+          })
+          canonicalGroup = null
+        } else if (canonicalResolution?.diagnostic) {
+          normalizationDiagnostics.push(canonicalResolution.diagnostic)
+        }
         const score = Number.isFinite(Number(block.score)) ? Number(block.score) : item.score
         const passageLines = normalizeDocxLines(detail.passage.materialText || detail.passage.summary || '')
 
@@ -867,7 +971,27 @@ function buildExamDocumentXml({ title, versionType, items, blocks, questionNumbe
         const blankCounter = { next: questionNum }
 
         // Passage text
-        if (passageLines.length > 0 && passageLines[0]) {
+        if (canonicalGroup) {
+          const displayNumberByQuestionId = new Map(
+            canonicalGroup.questions.map((question, index) => [
+              question.questionId,
+              questionNum + index,
+            ]),
+          )
+          canonicalGroup.paragraphs.forEach((canonicalParagraph) => {
+            body.push(
+              paragraph(
+                docxCanonicalParagraphRuns(
+                  canonicalGroup,
+                  canonicalParagraph,
+                  displayNumberByQuestionId,
+                ),
+                { after: 60, firstLineIndent: 420 },
+              ),
+            )
+          })
+          body.push(paragraph('', { after: 80 }))
+        } else if (passageLines.length > 0 && passageLines[0]) {
           const figuresInfo = getFiguresInfo(block.questionGroupId)
           passageLines.forEach((line) => {
             pushDocxPassageLine(body, line, detail.groupType, figuresInfo, images, { after: 60, firstLineIndent: 420 }, blankCounter)
@@ -881,7 +1005,7 @@ function buildExamDocumentXml({ title, versionType, items, blocks, questionNumbe
         // do not refer to the same blank. Base is `questionNum` (this
         // group's first continuous number, captured BEFORE the assertion —
         // blankCounter was seeded to it), not the round-1 constant `1`.
-        if (BLANK_BEARING_GROUP_TYPES.has(detail.groupType)) {
+        if (!canonicalGroup && BLANK_BEARING_GROUP_TYPES.has(detail.groupType)) {
           const blanksFound = blankCounter.next - questionNum
           if (blanksFound !== detail.questions.length) {
             throw new Error(
@@ -900,9 +1024,30 @@ function buildExamDocumentXml({ title, versionType, items, blocks, questionNumbe
         }
 
         // Questions
+        const canonicalQuestionById = canonicalGroup
+          ? new Map(
+              canonicalGroup.questions.map((question) => [
+                question.questionId,
+                question,
+              ]),
+            )
+          : null
         detail.questions.forEach((question) => {
-          const stemText = String(question.stem || '').trim()
-          const hasOptions = Array.isArray(question.options) && question.options.length > 0
+          const canonicalQuestion = canonicalQuestionById?.get(question.id)
+          const docxQuestion = canonicalQuestion
+            ? {
+                ...question,
+                stem: canonicalQuestion.stem ?? '',
+                options: canonicalQuestion.options.map((option) => ({
+                  label: option.label,
+                  content: option.text,
+                })),
+              }
+            : question
+          const stemText = String(docxQuestion.stem || '').trim()
+          const hasOptions =
+            Array.isArray(docxQuestion.options)
+            && docxQuestion.options.length > 0
           // 与 print-renderer 同策（owner QA 2026-07-08）:空题干时挖空题号已在文中。
           // 有选项 → 题号与选项同行(真卷完形形态);无选项且学生版 → 整行不出。
           if (!stemText && !hasOptions && versionType !== 'teacher') {
@@ -910,16 +1055,25 @@ function buildExamDocumentXml({ title, versionType, items, blocks, questionNumbe
             return
           }
           if (!stemText && hasOptions) {
-            const inlineText = question.options.map((o) => `${o.label}. ${o.content}`).join('    ')
+            const inlineText = docxQuestion.options.map((o) => `${o.label}. ${o.content}`).join('    ')
             body.push(paragraph([run(`${questionNum}.  ${inlineText}`, { size: 21 })], { before: 60, after: 50 }))
           } else {
             body.push(
               paragraph(
-                [run(`${questionNum}.  ${docxQuestionStem(detail, question)}`, { size: 21 })],
+                [
+                  run(
+                    `${questionNum}.  ${
+                      canonicalQuestion
+                        ? docxQuestion.stem
+                        : docxQuestionStem(detail, docxQuestion)
+                    }`,
+                    { size: 21 },
+                  ),
+                ],
                 { before: 60, after: 50 },
               ),
             )
-            renderOptionsExam(body, question.options, detail.groupType)
+            renderOptionsExam(body, docxQuestion.options, detail.groupType)
           }
 
           // Teacher version: compact answer
@@ -1012,9 +1166,17 @@ function examOptionTable(rows) {
 // continuous would introduce a NEW mismatch instead of fixing one. If this
 // path ever gains a real caller, it needs its own numbering-parity pass —
 // not a silent side effect of a different builder's blocks-branch.
-function buildDocumentXml({ title, versionType, items, blocks, questionNumberStart, printStyle, images = [] }) {
+function buildDocumentXml({ title, versionType, items, blocks, questionNumberStart, printStyle, images = [], normalizationDiagnostics = [] }) {
   if (printStyle === 'exam') {
-    return buildExamDocumentXml({ title, versionType, items, blocks, questionNumberStart, images })
+    return buildExamDocumentXml({
+      title,
+      versionType,
+      items,
+      blocks,
+      questionNumberStart,
+      images,
+      normalizationDiagnostics,
+    })
   }
   const figuresCache = new Map()
   function getFiguresInfo(groupId) {

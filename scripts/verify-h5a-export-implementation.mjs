@@ -25,6 +25,17 @@ function documentXmlSummary({ title, versionType, printStyle, items, blocks, que
   ].join(':')
 }
 
+function documentXmlSummaryWithDiagnostic(input) {
+  input.normalizationDiagnostics.push({
+    status: 'legacy',
+    source: 'legacy',
+    paperId: 'paper-host-diagnostic',
+    groupId: 'group-host-diagnostic',
+    reason: 'host_diagnostic_probe',
+  })
+  return documentXmlSummary(input)
+}
+
 function htmlSummary({ title, versionType, printStyle, items, blocks, questionNumberStart }) {
   return [
     'html',
@@ -125,5 +136,33 @@ verifier.assert(
   apiSource.includes("from './exports/exportImplementation.mjs'") && apiSource.includes('createExportRoutes(exportImplementation)'),
   'api wires export implementation into export routes',
 )
+
+verifier.section('DOCX normalization diagnostic host seam')
+
+const diagnosticExportDir = mkdtempSync(path.join(tmpdir(), 'h5a-docx-diagnostic-'))
+try {
+  const implementation = createExportImplementation({
+    rootDir: root,
+    exportDir: diagnosticExportDir,
+    getQuestionGroupDetail: detailForGroup,
+    buildDocumentXml: documentXmlSummaryWithDiagnostic,
+    writeDocxPackage({ documentXml, outputPath }) {
+      writeFileSync(outputPath, Buffer.from(documentXml))
+      return readFileSync(outputPath)
+    },
+    buildPrintHtml: htmlSummary,
+    convertDocxToPdf(_docxPath, outputPath) {
+      writeFileSync(outputPath, Buffer.from('pdf'))
+    },
+    timestampPrefix: () => fixture.fixedTimestampPrefix,
+  })
+  const result = implementation.exportDocx(fixture.inputs.docxStudent)
+  verifier.assert(
+    result.normalizationDiagnostics?.[0]?.reason === 'host_diagnostic_probe',
+    'exportDocx returns structured normalization diagnostics to its host',
+  )
+} finally {
+  rmSync(diagnosticExportDir, { recursive: true, force: true })
+}
 
 verifier.summary()

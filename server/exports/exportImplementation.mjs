@@ -183,13 +183,15 @@ export function createExportImplementation({
     // populates while walking the passage — see docxRenderer.mjs's header
     // comment above buildExamDocumentXml for why it isn't a return value.
     const images = []
-    const documentXml = buildDocumentXml({ title, versionType, items: exportItems, blocks, questionNumberStart, printStyle, paperAssetsDir, images })
+    const normalizationDiagnostics = []
+    const documentXml = buildDocumentXml({ title, versionType, items: exportItems, blocks, questionNumberStart, printStyle, paperAssetsDir, images, normalizationDiagnostics })
     const body = writeDocxPackage({ documentXml, images, outputPath, title })
 
     return {
       body,
       fileName,
       outputPath,
+      normalizationDiagnostics,
     }
   }
 
@@ -207,6 +209,7 @@ export function createExportImplementation({
       body: readFileSync(outputPath),
       fileName,
       outputPath,
+      normalizationDiagnostics: docxResult.normalizationDiagnostics,
     }
   }
 
