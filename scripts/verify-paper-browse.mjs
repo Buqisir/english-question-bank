@@ -751,6 +751,9 @@ assert(
 
 const paperSurfaceSrc = read('app/src/shared-ui/papersurface/PaperSurface.tsx')
 const paperSurfaceCssSrc = read('app/src/shared-ui/papersurface/PaperSurface.css')
+const legacyPaperBlankRendererSrc = read(
+  'app/src/shared-ui/papersurface/legacyPaperBlankRenderer.tsx',
+)
 
 assert(
   'PaperSurface.tsx: empty stem + options collapses onto one line (ps-question-options-inline)',
@@ -775,6 +778,27 @@ for (const [label, model] of [
     JSON.stringify(model.surfaceData.questions.map((q) => ({ stem: q.stem, n: q.options.length }))),
   )
 }
+
+const canonicalClozeModel2026i = buildClozePaperView({
+  asset,
+  groupId: 'group-2026-i-cloze',
+})
+const canonicalClozeBlanks2026i = canonicalClozeModel2026i.surfaceData.semanticParagraphs
+  ?.flatMap((paragraph) => paragraph.sentences)
+  .flatMap((sentence) => sentence.nodes)
+  .filter((node) => node.type === 'blank')
+assert(
+  'paper-2026-i PaperBrowse cloze model exposes the 15 canonical semantic blanks consumed by PaperSurface',
+  canonicalClozeModel2026i.normalization?.status === 'ready' &&
+    canonicalClozeBlanks2026i?.length === 15 &&
+    canonicalClozeBlanks2026i.every(
+      (blank, index) => blank.questionNo === String(41 + index),
+    ),
+  JSON.stringify({
+    normalization: canonicalClozeModel2026i.normalization,
+    blankCount: canonicalClozeBlanks2026i?.length,
+  }),
+)
 
 // ─── 16. surface-question-policy: grammar rows suppressed ───
 
@@ -1768,18 +1792,18 @@ assert(
   "expected exactly 2 occurrences of the narrowed condition and zero remaining bare '!blankFocus' suppression checks",
 )
 assert(
-  "64. PaperSurface.tsx: 'paper-blank' mode has its own clickable-blank renderer (renderTextWithClickablePaperBlanks) isolated from I15's grammar-fill renderer, with a defensive static-span fallback when a blank number resolves to no question",
-  /function renderTextWithClickablePaperBlanks/.test(paperSurfaceSrc) &&
-    /blankFocus\?\.renderer === 'paper-blank'[\s\S]{0,40}renderTextWithClickablePaperBlanks/.test(paperSurfaceSrc) &&
+  "64. legacyPaperBlankRenderer.tsx: 'paper-blank' mode has its own clickable-blank renderer (renderTextWithClickablePaperBlanks) isolated from I15's grammar-fill renderer, with a defensive static-span fallback when a blank number resolves to no question",
+  /function renderTextWithClickablePaperBlanks/.test(legacyPaperBlankRendererSrc) &&
+    /blankFocus\?\.renderer === 'paper-blank'[\s\S]{0,40}renderTextWithClickablePaperBlanks/.test(legacyPaperBlankRendererSrc) &&
     /if \(questionId\) \{[\s\S]{0,700}\} else \{[\s\S]{0,120}<span key=\{key\} className="ps-paper-blank">/.test(
-      paperSurfaceSrc,
+      legacyPaperBlankRendererSrc,
     ),
   'missing the isolated paper-blank renderer or its non-interactive fallback span',
 )
 assert(
-  "65. PaperSurface.tsx: 'rail'/'in-passage' behavior is untouched — the historical static span renderer (paperBlankPattern loop, {match[1]} content, .ps-paper-blank class) and renderTextWithGrammarFillBlanks both still exist byte-for-byte",
-  /paperBlankPattern\.exec\(text\)\) !== null\) \{[\s\S]{0,200}\{match\[1\]\}/.test(paperSurfaceSrc) &&
-    /function renderTextWithGrammarFillBlanks/.test(paperSurfaceSrc),
+  "65. legacyPaperBlankRenderer.tsx: 'rail'/'in-passage' behavior is preserved — the historical static span renderer (paperBlankPattern loop, {match[1]} content, .ps-paper-blank class) and renderTextWithGrammarFillBlanks both remain",
+  /paperBlankPattern\.exec\(text\)\) !== null\) \{[\s\S]{0,200}\{match\[1\]\}/.test(legacyPaperBlankRendererSrc) &&
+    /function renderTextWithGrammarFillBlanks/.test(legacyPaperBlankRendererSrc),
   'the historical rail-mode static renderer or the grammar-fill renderer appears to have been disturbed',
 )
 assert(

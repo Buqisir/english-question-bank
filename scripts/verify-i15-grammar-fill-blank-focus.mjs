@@ -59,6 +59,9 @@ assert('Step 1: PA MF-2 — blankFocusMode declared in types.d.ts',
 
 const PS = 'app/src/shared-ui/papersurface/PaperSurface.tsx'
 const psSrc = readSrc(PS)
+const legacyRendererSrc = readSrc(
+  'app/src/shared-ui/papersurface/legacyPaperBlankRenderer.tsx',
+)
 assert('Step 1: PaperSurface destructures blankFocusMode default rail',
   /blankFocusMode\s*=\s*'rail'/.test(psSrc))
 // Rail suppressed ONLY in 'in-passage' mode (both list sites gated by
@@ -94,26 +97,27 @@ assert('Step 2: multi-blank paragraph captures all in order',
 // paperBlankPattern literal MUST be byte-unchanged (regression guard).
 // 刀⑤ render-fidelity Chunk B moved the literal out of PaperSurface.tsx into
 // shared/papersurface/blankPattern.mjs (server reuse, PA F2 / SW-3) —
-// PaperSurface.tsx now only imports it.
+// The legacy-only renderer imports it; the canonical renderer has no marker
+// parser dependency.
 const blankPatternSrc = readSrc('shared/papersurface/blankPattern.mjs')
-assert('Step 2: PaperSurface.tsx imports paperBlankPattern from shared/papersurface/blankPattern.mjs',
-  /import\s*\{\s*paperBlankPattern\s*\}\s*from\s*['"][./]*shared\/papersurface\/blankPattern\.mjs['"]/.test(psSrc))
+assert('Step 2: legacyPaperBlankRenderer.tsx imports paperBlankPattern from shared/papersurface/blankPattern.mjs',
+  /import\s*\{\s*paperBlankPattern\s*\}\s*from\s*['"][./]*shared\/papersurface\/blankPattern\.mjs['"]/.test(legacyRendererSrc))
 assert('Step 2: paperBlankPattern literal unchanged (regression guard)',
   blankPatternSrc.includes('export const paperBlankPattern = /(?:_{2,}|[\\u0020\\u00A0]{2,})\\s*(\\d{1,3})\\s*(?:_{2,}|[\\u0020\\u00A0]{2,})/g'))
 
 // In-passage blank renders a wired <button>; unmatched → non-interactive span (SW-2).
 assert('Step 2: in-passage blank is a <button> with aria-label 聚焦第',
-  psSrc.includes('aria-label={`聚焦第 ${blankNo} 题`}') && psSrc.includes('onClick={() => blankFocus.onQuestionClick(questionId)}'))
+  legacyRendererSrc.includes('aria-label={`聚焦第 ${blankNo} 题`}') && legacyRendererSrc.includes('onClick={() => blankFocus.onQuestionClick(questionId)}'))
 assert('Step 2: button active state from lectureFocus via activeQuestionId (SW-3)',
-  psSrc.includes('blankFocus.activeQuestionId === questionId') && psSrc.includes('aria-pressed={isActive}'))
+  legacyRendererSrc.includes('blankFocus.activeQuestionId === questionId') && legacyRendererSrc.includes('aria-pressed={isActive}'))
 assert('Step 2 SW-2: unmatched blank → non-interactive span (no dead button)',
-  psSrc.includes("className=\"ps-paper-blank-text\""))
+  legacyRendererSrc.includes("className=\"ps-paper-blank-text\""))
 // 'rail' path: renderer falls through to the historical span path (zero new
 // behavior) — dispatch narrowed to the 'grammar-fill' renderer specifically
 // [lecture-rail-scroll-fix, 2026-07-11] so a second clickable mode
 // ('paper-blank') can share BlankFocusContext without hijacking this branch.
 assert("Step 2: rail path falls through when blankFocus is null or renderer !== 'grammar-fill'",
-  /if \(blankFocus\?\.renderer === 'grammar-fill'\)\s*\{\s*return renderTextWithGrammarFillBlanks/.test(psSrc))
+  /if \(blankFocus\?\.renderer === 'grammar-fill'\)\s*\{\s*return renderTextWithGrammarFillBlanks/.test(legacyRendererSrc))
 
 // ============================================================
 // Step 3 — harness wiring (source) — RETIRED

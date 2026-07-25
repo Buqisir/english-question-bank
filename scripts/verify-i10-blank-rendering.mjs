@@ -5,7 +5,7 @@
  * Verifier for I10 — Blank Rendering (渲染格式 cut · 第一刀「空格渲染」).
  *
  * Asserts:
- *  1. Renamed symbols present in PaperSurface.tsx, PaperSurface.css, tokens files.
+ *  1. Renamed symbols present in the legacy renderer, PaperSurface.css, tokens files.
  *  2. Old (family-specific) names absent across all three files.
  *  3. paperBlankPattern extracted from source and tested behaviorally:
  *     - MUST match: cloze __41__, 七选五 _____36_____, grammar-fill 2-space variants.
@@ -38,6 +38,9 @@ function readSrc(relPath) {
 }
 
 const tsxSrc = readSrc('app/src/shared-ui/papersurface/PaperSurface.tsx')
+const legacyRendererSrc = readSrc(
+  'app/src/shared-ui/papersurface/legacyPaperBlankRenderer.tsx',
+)
 const cssSrc = readSrc('app/src/shared-ui/papersurface/PaperSurface.css')
 const tokensMjsSrc = readSrc('shared/papersurface/tokens.mjs')
 const tokensDtsSrc = readSrc('shared/papersurface/tokens.d.ts')
@@ -53,19 +56,19 @@ const blankPatternMjsSrc = readSrc('shared/papersurface/blankPattern.mjs')
 console.log('\nTest 1: Renamed symbols present')
 
 assert(
-  'PaperSurface.tsx contains paperBlankPattern',
-  tsxSrc.includes('paperBlankPattern'),
-  'paperBlankPattern not found in PaperSurface.tsx',
+  'legacyPaperBlankRenderer.tsx contains paperBlankPattern',
+  legacyRendererSrc.includes('paperBlankPattern'),
+  'paperBlankPattern not found in the legacy renderer',
 )
 assert(
-  'PaperSurface.tsx imports paperBlankPattern from shared/papersurface/blankPattern.mjs (刀⑤ Chunk B)',
-  /import\s*\{\s*paperBlankPattern\s*\}\s*from\s*['"][./]*shared\/papersurface\/blankPattern\.mjs['"]/.test(tsxSrc),
-  'PaperSurface.tsx must import the shared paperBlankPattern, not redeclare it locally',
+  'legacyPaperBlankRenderer.tsx imports paperBlankPattern from shared/papersurface/blankPattern.mjs (刀⑤ Chunk B)',
+  /import\s*\{\s*paperBlankPattern\s*\}\s*from\s*['"][./]*shared\/papersurface\/blankPattern\.mjs['"]/.test(legacyRendererSrc),
+  'the legacy renderer must import the shared paperBlankPattern, not redeclare it locally',
 )
 assert(
-  'PaperSurface.tsx contains renderTextWithPaperBlanks',
-  tsxSrc.includes('renderTextWithPaperBlanks'),
-  'renderTextWithPaperBlanks not found in PaperSurface.tsx',
+  'legacyPaperBlankRenderer.tsx contains renderLegacyPaperSentenceContent',
+  legacyRendererSrc.includes('renderLegacyPaperSentenceContent'),
+  'renderLegacyPaperSentenceContent not found in the legacy renderer',
 )
 assert(
   'PaperSurface.tsx injects --ps-paper-blank-width token',
@@ -94,8 +97,8 @@ assert(
 )
 assert(
   'tokens.mjs defines paperBlankWidth',
-  /paperBlankWidth:\s*['"]72px['"]/.test(tokensMjsSrc),
-  'paperBlankWidth: "72px" not found in tokens.mjs',
+  /paperBlankWidth:\s*['"]4\.6em['"]/.test(tokensMjsSrc),
+  'paperBlankWidth: "4.6em" not found in tokens.mjs',
 )
 assert(
   'tokens.d.ts declares readonly paperBlankWidth: string',

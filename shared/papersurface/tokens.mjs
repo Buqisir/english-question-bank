@@ -91,14 +91,11 @@ export const paperSurfaceTokens = Object.freeze({
   optionsGridColumns: '1fr 1fr',
   optionsGridGapX: '2em',
   /**
-   * 七选五 blank line width standard.
-   *
-   * Calibrated from the reviewed 2024 九省联考 sample: original blank
-   * line / body width ≈ 78px / 740px ≈ 10.5%. PaperSurface's A4
-   * body width is 794px - 56px * 2 = 682px, so the reusable target is
-   * 682px * 10.5% ≈ 72px.
+   * Legacy marker-consumer token for the shared 七选五 4.6em blank ruling.
+   * Canonical cloze and grammar-fill nodes select their 3.3em ruling
+   * directly from `blankRuling.mjs`.
    */
-  paperBlankWidth: '72px',
+  paperBlankWidth: '4.6em',
   /**
    * Standard §1: left/right page margin, 24mm. At A4 = 794px @ 96dpi
    * (794px / 210mm ≈ 3.781px/mm), 24mm ≈ 91px.

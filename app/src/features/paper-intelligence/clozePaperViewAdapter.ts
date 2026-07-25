@@ -1,4 +1,5 @@
 import { segmentPaperText } from '../../../../shared/papersurface/segmentPaperText.mjs'
+import { buildCanonicalClozeSurfaceData } from '../../../../shared/paper-normalization/canonicalClozeSurfaceAdapter.mjs'
 import type { PaperTextMap } from '../../../../shared/papersurface/types'
 import type { PaperAssetV1 } from '../../domain/paperAsset.ts'
 import type {
@@ -17,6 +18,19 @@ export type ClozePaperViewModel = {
   surfaceData: PaperSurfaceData
   analysisByQuestionId: Record<string, null>
   defaultQuestionId: string | null
+  normalization:
+    | { status: 'ready'; semanticDigest: string }
+    | {
+        status: 'legacy'
+        diagnostic:
+          | { code: 'CANONICAL_COMPATIBILITY_NOT_ENABLED'; paperId: string; groupId: string }
+          | {
+              code: 'CANONICAL_NORMALIZATION_NEEDS_REVIEW'
+              paperId: string
+              groupId: string
+              issues: ReadonlyArray<{ code: string; path: string; message: string }>
+            }
+      }
 }
 
 const CLOZE_SECTION = '完形填空'
@@ -36,6 +50,7 @@ export function buildClozePaperView(input: {
   }
 
   const questionIds = group.questionIds ?? []
+  const canonicalResult = buildCanonicalClozeSurfaceData({ asset, groupId })
   const textMap = buildClozeTextMap(asset, group)
   const passageStructure: PassageStructure = {
     section: CLOZE_SECTION,
@@ -80,6 +95,10 @@ export function buildClozePaperView(input: {
     questions: [],
   }
 
+  if (canonicalResult.status === 'needs_review') {
+    console.warn('[paper-normalization] cloze compatibility kept legacy path', canonicalResult.diagnostic)
+  }
+
   return {
     report: {
       schemaVersion: 'paper-intelligence-report-v1',
@@ -99,13 +118,20 @@ export function buildClozePaperView(input: {
       passages: [passageReport],
     },
     passageStructures: { [CLOZE_SECTION]: passageStructure },
-    surfaceData: {
-      textMap,
-      questions,
-      evidence: [],
-    },
+    surfaceData:
+      canonicalResult.status === 'ready'
+        ? canonicalResult.surfaceData
+        : {
+            textMap,
+            questions,
+            evidence: [],
+          },
     analysisByQuestionId: Object.fromEntries(questionIds.map((qid) => [qid, null])),
     defaultQuestionId: questionIds[0] ?? null,
+    normalization:
+      canonicalResult.status === 'ready'
+        ? { status: 'ready', semanticDigest: canonicalResult.semanticDigest }
+        : { status: 'legacy', diagnostic: canonicalResult.diagnostic },
   }
 }
 

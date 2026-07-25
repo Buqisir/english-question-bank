@@ -1,6 +1,6 @@
 # 02 — 完形填空普通卷面渲染与双题号消除
 
-Status: ready
+Status: done
 Blocked by: 01 — 完形填空编译器核心规范化规则
 Spec: `docs/cuts/paper-normalization/spec.md`
 Worktree: `/Users/huangxuewei/Projects/wt-paper-normalization-20260724`
@@ -29,13 +29,13 @@ slot 不再出现 `41. 41`。
 
 ## 验收
 
-- [ ] 41–55 的 passage blank 与 option line 均来自同一 canonical question；
+- [x] 41–55 的 passage blank 与 option line 均来自同一 canonical question；
       每个 slot 只投影一次，页面不含 `41. 41` 一类重复。
-- [ ] Canonical PaperSurface path 不 import raw-marker regex，不把 semantic
+- [x] Canonical PaperSurface path 不 import raw-marker regex，不把 semantic
       blank 序列化回字符串；legacy path 仍可服务非 proof 资产。
-- [ ] 普通挑题态与 PaperBrowse 卡片使用相同 semantic digest，既有选择、
+- [x] 普通挑题态与 PaperBrowse 卡片使用相同 semantic digest，既有选择、
       滚动、A4 paper hierarchy 与 sevenChoices `4.6em` 无回归。
-- [ ] Cloze blank 的 3.3em、居中无尾点、单细线和 nowrap 在真实 DOM 成立。
+- [x] Cloze blank 的 3.3em、居中无尾点、单细线和 nowrap 在真实 DOM 成立。
 
 ## 验证
 
@@ -57,6 +57,6 @@ Ticket 01 的完成 commit；实现开始时 handoff HEAD 必须精确匹配。
   evidence 与 clean commit。
 - Ticket 状态改为 `done` 并填写结果；不得开始 Ticket 03。
 
-Commit:
-Verify:
-Notes:
+Commit: this commit (exact SHA recorded in the implementation handoff)
+Verify: `node scripts/verify-paper-normalization-cloze-surface.mjs`; Ticket 01 compiler, PaperBrowse, I10 blank, PaperSurface token/declaration regressions; `pnpm -C app run build`; `git diff --check`; `pnpm -C app run verify:all` (`PASS 86 / SKIP 1 / FAIL 0`, declared off-repo fixture skip only). All commands exited 0.
+Notes: `paper-2026-i / group-2026-i-cloze` now selects the canonical compatibility path; `needs_review` reports a structured diagnostic and keeps the legacy model. Standards + Spec review found and fixed one shared Must Fix by isolating canonical semantic rendering from the legacy raw-marker renderer; focused re-review left no Must Fix. Real in-app browser QA proved 15 semantic blanks numbered 41–55, no raw `__41__` or `41. 41`, one option-line number per question, 3.3em/center/nowrap/single-line computed style, directory scroll landing, and q55 selection. Owner QA remains deferred to the Phase A review lineage.

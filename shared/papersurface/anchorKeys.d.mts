@@ -10,6 +10,7 @@ export type PaperSurfaceAnchorAttrs = {
   readonly paragraphId: 'data-paper-paragraph-id'
   readonly sentenceId: 'data-paper-sentence-id'
   readonly questionId: 'data-paper-question-id'
+  readonly blankId: 'data-paper-blank-id'
   readonly optionLabel: 'data-paper-option-label'
   readonly evidenceId: 'data-paper-evidence-id'
   readonly evidenceKind: 'data-paper-evidence-kind'

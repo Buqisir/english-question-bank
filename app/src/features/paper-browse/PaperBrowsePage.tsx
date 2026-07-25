@@ -1410,6 +1410,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     const surfaceEl = (
       <PaperSurface
         textMap={surfaceData.textMap}
+        semanticParagraphs={surfaceData.semanticParagraphs}
         annotations={[]}
         evidence={surfaceData.evidence}
         questions={surfaceData.questions}

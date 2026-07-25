@@ -4,6 +4,7 @@
  */
 
 import type { PaperTextMap, PaperQuestion, PaperEvidence } from '../../../../shared/papersurface/types'
+import type { CanonicalSurfaceParagraph } from '../../../../shared/paper-normalization/canonicalClozeSurfaceAdapter.mjs'
 
 export type LoadEvidence = {
   quote: string
@@ -188,6 +189,7 @@ export type PaperIntelligenceReport = {
  */
 export type PaperSurfaceData = {
   textMap: PaperTextMap
-  questions: PaperQuestion[]
-  evidence: PaperEvidence[]
+  semanticParagraphs?: ReadonlyArray<CanonicalSurfaceParagraph>
+  questions: ReadonlyArray<PaperQuestion>
+  evidence: ReadonlyArray<PaperEvidence>
 }

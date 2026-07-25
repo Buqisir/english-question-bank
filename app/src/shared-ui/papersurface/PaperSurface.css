@@ -194,10 +194,21 @@
   justify-content: center;
   width: var(--ps-paper-blank-width);
   white-space: nowrap;
+  text-align: center;
   border-bottom: 1px solid currentColor;
   font-variant-numeric: tabular-nums;
   line-height: 1.05;
   text-indent: 0;
+}
+
+.ps-paper-blank-unit {
+  display: inline-flex;
+  align-items: baseline;
+  white-space: nowrap;
+}
+
+.ps-paper-blank-hint {
+  white-space: nowrap;
 }
 
 /* ─── I15: clickable in-passage grammar-fill blank ─────────────── *

@@ -69,6 +69,9 @@ export const paperSurfaceAnchorAttrs = Object.freeze({
   /** Each question root in the question column carries a stable id. */
   questionId: 'data-paper-question-id',
 
+  /** Each semantic blank carries its stable canonical blank id. */
+  blankId: 'data-paper-blank-id',
+
   /** Each option button carries the option label (e.g. 'A', 'B', 'C',
    *  'D'). Combined with `questionId` to form the option key. */
   optionLabel: 'data-paper-option-label',

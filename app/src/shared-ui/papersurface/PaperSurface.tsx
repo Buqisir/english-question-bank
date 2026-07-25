@@ -24,8 +24,11 @@ import { useMemo, useCallback, type CSSProperties, type ReactNode } from 'react'
 import './PaperSurface.css'
 import { paperSurfaceTokens } from '../../../../shared/papersurface/tokens.mjs'
 import { paperSurfaceAnchorAttrs } from '../../../../shared/papersurface/anchorKeys.mjs'
-import { paperBlankPattern } from '../../../../shared/papersurface/blankPattern.mjs'
-import { grammarFillBlankPattern } from './grammarFillBlank.ts'
+import { renderCanonicalPaperSentenceContent } from './CanonicalPaperSentenceContent.tsx'
+import {
+  renderLegacyPaperSentenceContent,
+  type LegacyBlankFocusContext,
+} from './legacyPaperBlankRenderer.tsx'
 import type {
   PaperSurfaceProps,
   PaperTextMap,
@@ -38,6 +41,9 @@ import type {
   PaperSurfaceFocusIntent,
   LectureFocus,
 } from '../../../../shared/papersurface/types'
+import type {
+  CanonicalSurfaceParagraph,
+} from '../../../../shared/paper-normalization/canonicalClozeSurfaceAdapter.mjs'
 
 /**
  * Extended CSSProperties to allow CSS custom properties on the root.
@@ -77,16 +83,7 @@ const paperSurfaceTokenStyle: PaperSurfaceStyle = {
  * field must branch on `renderer`, not mere non-nullness, to decide
  * suppression).
  */
-type BlankFocusContext = {
-  /** Which blank pattern this focus context renders as buttons. */
-  renderer: 'grammar-fill' | 'paper-blank'
-  /** PaperQuestion.questionNo (as string) → questionId. */
-  questionIdByNo: Map<string, string>
-  /** The currently focused questionId, for the active blank state. */
-  activeQuestionId: string | null
-  /** Fires `request-lecture-focus` for the clicked blank's question. */
-  onQuestionClick: (questionId: string) => void
-} | null
+type BlankFocusContext = LegacyBlankFocusContext
 
 /**
  * lecture-rail-scroll-fix: `blankFocusMode` gains a third value,
@@ -110,6 +107,12 @@ type PaperSurfaceComponentProps = Omit<PaperSurfaceProps, 'blankFocusMode'> & {
    * in 'rail' mode.
    */
   readonly blankQuestionIdByNo?: Record<string, string>
+  /**
+   * Canonical visible content companion. When present, PaperSurface renders
+   * these semantic nodes directly while `textMap` remains the position
+   * oracle derived from the same canonical group.
+   */
+  readonly semanticParagraphs?: ReadonlyArray<CanonicalSurfaceParagraph>
 }
 
 export function PaperSurface(props: PaperSurfaceComponentProps): ReactNode {
@@ -127,6 +130,7 @@ export function PaperSurface(props: PaperSurfaceComponentProps): ReactNode {
     onFocusIntent,
     blankFocusMode = 'rail',
     blankQuestionIdByNo,
+    semanticParagraphs,
   } = props
 
   const handleQuestionClick = useCallback(
@@ -277,6 +281,7 @@ export function PaperSurface(props: PaperSurfaceComponentProps): ReactNode {
             activeEvidenceId={activeEvidenceId}
             onQuestionClick={handleQuestionClick}
             blankFocus={blankFocus}
+            semanticParagraphs={semanticParagraphs}
           />
         ))}
         {/* seven-options-on-paper: the 七选五 A-G candidate-sentence
@@ -332,6 +337,7 @@ type PaperSurfaceSectionProps = {
   activeEvidenceId: string | null
   onQuestionClick: (questionId: string) => void
   blankFocus: BlankFocusContext
+  semanticParagraphs?: ReadonlyArray<CanonicalSurfaceParagraph>
 }
 
 function PaperSurfaceSection({
@@ -344,6 +350,7 @@ function PaperSurfaceSection({
   activeEvidenceId,
   onQuestionClick,
   blankFocus,
+  semanticParagraphs,
 }: PaperSurfaceSectionProps): ReactNode {
   const paragraphs = useMemo(
     () => textMap.paragraphs.filter((p) => p.section === section),
@@ -393,6 +400,7 @@ function PaperSurfaceSection({
             annotationsBySentence={annotationsBySentence}
             activeEvidenceId={activeEvidenceId}
             blankFocus={blankFocus}
+            semanticParagraph={semanticParagraphs?.find((item) => item.id === para.id)}
           />
         ))}
       </div>
@@ -420,6 +428,7 @@ type PaperSurfaceParagraphProps = {
   annotationsBySentence: Map<string, PaperAnnotation[]>
   activeEvidenceId: string | null
   blankFocus: BlankFocusContext
+  semanticParagraph?: CanonicalSurfaceParagraph
 }
 
 function PaperSurfaceParagraph({
@@ -428,6 +437,7 @@ function PaperSurfaceParagraph({
   annotationsBySentence,
   activeEvidenceId,
   blankFocus,
+  semanticParagraph,
 }: PaperSurfaceParagraphProps): ReactNode {
   // figure-render cut (fig-token P0): `paragraph.figure` is set ONLY by
   // the adapter when this paragraph's WHOLE text is a manifest marker
@@ -465,6 +475,10 @@ function PaperSurfaceParagraph({
           annotationItems={annotationsBySentence.get(sentence.id)}
           activeEvidenceId={activeEvidenceId}
           blankFocus={blankFocus}
+          semanticNodes={
+            semanticParagraph?.sentences.find((item) => item.id === sentence.id)?.nodes
+          }
+          semanticGroupType={semanticParagraph?.groupType}
         />
       ))}
     </p>
@@ -479,6 +493,8 @@ type PaperSurfaceSentenceProps = {
   annotationItems?: PaperAnnotation[]
   activeEvidenceId: string | null
   blankFocus: BlankFocusContext
+  semanticNodes?: CanonicalSurfaceParagraph['sentences'][number]['nodes']
+  semanticGroupType?: CanonicalSurfaceParagraph['groupType']
 }
 
 function PaperSurfaceSentence({
@@ -487,6 +503,8 @@ function PaperSurfaceSentence({
   annotationItems,
   activeEvidenceId,
   blankFocus,
+  semanticNodes,
+  semanticGroupType,
 }: PaperSurfaceSentenceProps): ReactNode {
   // Resolve the active evidence (if any) that lives inside THIS
   // sentence. PaperSurface stays dumb: the active id and the
@@ -528,9 +546,16 @@ function PaperSurfaceSentence({
       className="ps-sentence"
       {...{ [paperSurfaceAnchorAttrs.sentenceId]: sentence.id }}
     >
-      {hasInlineActive && activeEv ? (
+      {semanticNodes && semanticGroupType ? (
+        renderCanonicalPaperSentenceContent(
+          semanticNodes,
+          sentence.id,
+          semanticGroupType,
+          blankFocus,
+        )
+      ) : hasInlineActive && activeEv ? (
         <>
-          {renderTextWithPaperBlanks(text.slice(0, activeStart), `${sentence.id}-pre`, blankFocus)}
+          {renderLegacyPaperSentenceContent(text.slice(0, activeStart), `${sentence.id}-pre`, blankFocus)}
           <mark
             className="ps-evidence-anchor ps-evidence-anchor--active"
             {...{
@@ -538,12 +563,12 @@ function PaperSurfaceSentence({
               [paperSurfaceAnchorAttrs.evidenceKind]: activeEv.kind,
             }}
           >
-            {renderTextWithPaperBlanks(text.slice(activeStart, activeEnd), `${sentence.id}-active`, blankFocus)}
+            {renderLegacyPaperSentenceContent(text.slice(activeStart, activeEnd), `${sentence.id}-active`, blankFocus)}
           </mark>
-          {renderTextWithPaperBlanks(text.slice(activeEnd), `${sentence.id}-post`, blankFocus)}
+          {renderLegacyPaperSentenceContent(text.slice(activeEnd), `${sentence.id}-post`, blankFocus)}
         </>
       ) : (
-        renderTextWithPaperBlanks(text, sentence.id, blankFocus)
+        renderLegacyPaperSentenceContent(text, sentence.id, blankFocus)
       )}
       {/*
         Neutral evidence anchors — invisible, zero-size span siblings.
@@ -583,177 +608,6 @@ function PaperSurfaceSentence({
       {' '}
     </span>
   )
-}
-
-function renderTextWithPaperBlanks(
-  text: string,
-  keyPrefix: string,
-  blankFocus: BlankFocusContext = null,
-): ReactNode {
-  // I15: in 'in-passage' mode (blankFocus.renderer === 'grammar-fill')
-  // grammar-fill blanks become clickable focus buttons.
-  if (blankFocus?.renderer === 'grammar-fill') {
-    return renderTextWithGrammarFillBlanks(text, keyPrefix, blankFocus)
-  }
-  // lecture-rail-scroll-fix: in 'paper-blank' mode cloze/七选五 blanks
-  // become clickable focus buttons (own branch, own pattern — the
-  // `paperBlankPattern` single source of truth, not grammarFillBlankPattern).
-  if (blankFocus?.renderer === 'paper-blank') {
-    return renderTextWithClickablePaperBlanks(text, keyPrefix, blankFocus)
-  }
-  // The 'rail'/omitted path (blankFocus null) is the historical static
-  // span renderer, byte-for-byte unchanged.
-  if (!paperBlankPattern.test(text)) return text
-  paperBlankPattern.lastIndex = 0
-  const nodes: ReactNode[] = []
-  let cursor = 0
-  let match: RegExpExecArray | null
-  let index = 0
-  while ((match = paperBlankPattern.exec(text)) !== null) {
-    if (match.index > cursor) {
-      nodes.push(text.slice(cursor, match.index))
-    }
-    nodes.push(
-      <span key={`${keyPrefix}-paper-blank-${index}`} className="ps-paper-blank">
-        {match[1]}
-      </span>,
-    )
-    cursor = match.index + match[0].length
-    index += 1
-  }
-  if (cursor < text.length) {
-    nodes.push(text.slice(cursor))
-  }
-  return nodes
-}
-
-/**
- * lecture-rail-scroll-fix — render cloze (`__41__`) / 七选五
- * (`_____36_____`) paper blanks as clickable focus buttons in
- * 'paper-blank' mode. Uses the SAME `paperBlankPattern` (single source
- * of truth, `shared/papersurface/blankPattern.mjs` — untouched) as the
- * static renderer above, and the same visible content (`match[1]`, the
- * bare blank number) so the button's rendered text is byte-identical
- * to the static span it replaces.
- *
- * A blank whose number resolves to no question (defensive — should not
- * happen given the page-layer's lectureOpen gating) falls back to the
- * existing static `.ps-paper-blank` span — never a dead button.
- */
-function renderTextWithClickablePaperBlanks(
-  text: string,
-  keyPrefix: string,
-  blankFocus: NonNullable<BlankFocusContext>,
-): ReactNode {
-  if (!paperBlankPattern.test(text)) return text
-  paperBlankPattern.lastIndex = 0
-  const nodes: ReactNode[] = []
-  let cursor = 0
-  let match: RegExpExecArray | null
-  let index = 0
-  while ((match = paperBlankPattern.exec(text)) !== null) {
-    if (match.index > cursor) {
-      nodes.push(text.slice(cursor, match.index))
-    }
-    const blankNo = match[1]
-    const questionId = blankFocus.questionIdByNo.get(blankNo) ?? null
-    const key = `${keyPrefix}-paper-blank-${index}`
-    if (questionId) {
-      const isActive = blankFocus.activeQuestionId === questionId
-      nodes.push(
-        <button
-          key={key}
-          type="button"
-          className={
-            isActive
-              ? 'ps-paper-blank ps-paper-blank--clickable ps-paper-blank--active'
-              : 'ps-paper-blank ps-paper-blank--clickable'
-          }
-          aria-pressed={isActive}
-          aria-label={`聚焦第 ${blankNo} 题`}
-          onClick={() => blankFocus.onQuestionClick(questionId)}
-        >
-          {blankNo}
-        </button>,
-      )
-    } else {
-      nodes.push(
-        <span key={key} className="ps-paper-blank">
-          {blankNo}
-        </span>,
-      )
-    }
-    cursor = match.index + match[0].length
-    index += 1
-  }
-  if (cursor < text.length) {
-    nodes.push(text.slice(cursor))
-  }
-  return nodes
-}
-
-/**
- * I15 — render grammar-fill blanks (`56._____`, `57._____(absorb)`) as
- * clickable focus buttons. ISOLATED from `paperBlankPattern` (cloze
- * `__41__` / 七选五 `_____36_____` are untouched). Anchored on the
- * underscore run so numeric noise (`2026`, `800g`, `3-5g`, `25-30g`)
- * never matches; the number BEFORE the dot+underscores is captured, so
- * `Increase intake 64._____ 3-5g` yields blankNo 64, not 3.
- *
- * A blank whose number resolves to no question renders as a styled,
- * NON-interactive span (never a dead button) — defensive, no throw.
- */
-function renderTextWithGrammarFillBlanks(
-  text: string,
-  keyPrefix: string,
-  blankFocus: NonNullable<BlankFocusContext>,
-): ReactNode {
-  grammarFillBlankPattern.lastIndex = 0
-  const nodes: ReactNode[] = []
-  let cursor = 0
-  let match: RegExpExecArray | null
-  let index = 0
-  while ((match = grammarFillBlankPattern.exec(text)) !== null) {
-    if (match.index > cursor) {
-      nodes.push(text.slice(cursor, match.index))
-    }
-    const blankNo = match[1]
-    const label = match[0]
-    const questionId = blankFocus.questionIdByNo.get(blankNo) ?? null
-    const key = `${keyPrefix}-gf-blank-${index}`
-    if (questionId) {
-      const isActive = blankFocus.activeQuestionId === questionId
-      nodes.push(
-        <button
-          key={key}
-          type="button"
-          className={
-            isActive
-              ? 'ps-paper-blank-button ps-paper-blank-button--active'
-              : 'ps-paper-blank-button'
-          }
-          aria-pressed={isActive}
-          aria-label={`聚焦第 ${blankNo} 题`}
-          onClick={() => blankFocus.onQuestionClick(questionId)}
-        >
-          {label}
-        </button>,
-      )
-    } else {
-      nodes.push(
-        <span key={key} className="ps-paper-blank-text">
-          {label}
-        </span>,
-      )
-    }
-    cursor = match.index + match[0].length
-    index += 1
-  }
-  if (index === 0) return text
-  if (cursor < text.length) {
-    nodes.push(text.slice(cursor))
-  }
-  return nodes
 }
 
 /* ─── Question list renderer ───────────────────────────────────── */
