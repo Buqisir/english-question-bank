@@ -552,6 +552,7 @@ function PaperSurfaceSentence({
           sentence.id,
           semanticGroupType,
           blankFocus,
+          activeEv,
         )
       ) : hasInlineActive && activeEv ? (
         <>

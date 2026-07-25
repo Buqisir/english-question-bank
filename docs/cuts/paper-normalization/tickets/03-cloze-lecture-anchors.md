@@ -1,6 +1,6 @@
 # 03 — 完形填空讲评态及题目锚点一致性
 
-Status: ready
+Status: done
 Blocked by: 02 — 完形填空普通卷面渲染与双题号消除
 Spec: `docs/cuts/paper-normalization/spec.md`
 Worktree: `/Users/huangxuewei/Projects/wt-paper-normalization-20260724`
@@ -27,13 +27,13 @@ range 与 lecture 开关不再依赖 raw marker 或另造 question/stem。
 
 ## 验收
 
-- [ ] 41–55 blank 均可点击并发出正确 `request-lecture-focus(questionId)`；
+- [x] 41–55 blank 均可点击并发出正确 `request-lecture-focus(questionId)`；
       active state 与当前 question 一致。
-- [ ] Plain、analysis、lecture 的 canonical group/digest 相同；analysis
+- [x] Plain、analysis、lecture 的 canonical group/digest 相同；analysis
       只增加 evidence/右栏数据。
-- [ ] 每个 evidence range 指向 canonical TextMap 中存在的 sentence/range；
+- [x] 每个 evidence range 指向 canonical TextMap 中存在的 sentence/range；
       unresolved anchor 为明确失败而不是空数组或静默 fallback。
-- [ ] 打开、切题、关闭、再次打开 lecture 后，题号、options、blank 与
+- [x] 打开、切题、关闭、再次打开 lecture 后，题号、options、blank 与
       evidence 不漂移，也不重新出现双题号。
 
 ## 验证
@@ -57,6 +57,27 @@ Ticket 02 的完成 commit。
   clean commit。
 - Ticket 状态改为 `done` 并填写结果；不得开始 Ticket 04。
 
-Commit:
+Commit: this commit — `feat(paper-normalization): align cloze lecture anchors with canonical surface`
 Verify:
+- `node scripts/verify-paper-normalization-cloze-analysis.mjs` — exit 0.
+- `node scripts/verify-i9-cloze-analysis-surface.mjs` — 51/51, exit 0.
+- `node scripts/verify-paper-normalization-cloze-surface.mjs` — exit 0.
+- `node scripts/verify-paper-browse.mjs` — 197/197, exit 0.
+- `node scripts/verify-i10-blank-rendering.mjs` — 41/41, exit 0.
+- `node scripts/verify-paper-surface-mjs-declaration-parity.mjs` — 25/25,
+  exit 0.
+- `pnpm -C app run build` and `git diff --check` — exit 0.
+- `pnpm -C app run verify:all` — exit 0; PASS 87 / SKIP 1 / FAIL 0.
+  Declared skip: `scripts/verify-i16a-teaching-dimension-search.mjs`
+  (off-repo fixture absent). Baseline failures: none.
 Notes:
+- Standards + Spec review and focused re-review passed with no remaining Must
+  Fix or Should Fix. Analysis now fails closed unless canonical normalization
+  is ready and semantic blank anchors exist.
+- Agent browser on `paper-2026-i` at 1440×900 clicked all passage blanks
+  41–55 and the q47 option line; every URL/panel/blank/question active state
+  matched. q41 evidence switched from `of how little people knew` to
+  `came quickly` on the same TextMap range. Closing lecture preserved
+  `scrollY` exactly (5294.5 → 5294.5); reopening and selecting q41 restored
+  its blank, option row, panel, and evidence mark. Browser warn/error log: 0.
+- Owner QA is intentionally deferred to the Phase A independent review.

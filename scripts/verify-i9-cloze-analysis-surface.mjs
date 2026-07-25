@@ -85,7 +85,10 @@ assert('Step 1: adapter exports ClozeAnalysisSurfaceModel type', adapterSrc.incl
 assert('Step 1: adapter exports ClozeBlankAnalysisView type', adapterSrc.includes('ClozeBlankAnalysisView'))
 assert('Step 1: adapter exports buildClozeAnalysisSurfaceModel', adapterSrc.includes('buildClozeAnalysisSurfaceModel'))
 assert('Step 1: adapter exports findAllTextRanges', adapterSrc.includes('findAllTextRanges'))
-assert('Step 1: adapter uses segmentPaperText', adapterSrc.includes('segmentPaperText'))
+assert(
+  'Step 1: adapter layers analysis onto buildClozePaperView canonical surface',
+  adapterSrc.includes('buildClozePaperView') && !adapterSrc.includes('segmentPaperText'),
+)
 assert('Step 1: adapter builds evidence with kind support', adapterSrc.includes("kind: 'support'"))
 assert('Step 1: adapter skips option-side for passage evidence', adapterSrc.includes("signalSide === 'option'") && adapterSrc.includes('continue'))
 assert('Step 1: adapter builds group view', adapterSrc.includes('groupView'))

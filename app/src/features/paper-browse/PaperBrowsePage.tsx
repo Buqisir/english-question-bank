@@ -133,6 +133,7 @@ import {
   SimilarQuestionsRailView,
   type SimilarRailRequestState,
 } from './SimilarQuestionsRailView'
+import { applyPaperSurfaceFocusIntent } from './paperBrowseFocusIntent'
 import './paperBrowsePage.css'
 
 type GroupModel =
@@ -1270,8 +1271,12 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
   }
 
   function handleGroupFocusIntent(groupId: string, intent: PaperSurfaceFocusIntent): void {
-    if (intent.kind !== 'request-lecture-focus') return
-    selectLectureQuestion(groupId, intent.questionId)
+    applyPaperSurfaceFocusIntent({
+      groupId,
+      intent,
+      suppressScrollspyClear,
+      selectLectureQuestion,
+    })
   }
 
   function handleLectureSelectEvidence(evidenceId: string): void {

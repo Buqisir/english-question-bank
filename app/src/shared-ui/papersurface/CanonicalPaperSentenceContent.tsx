@@ -1,4 +1,4 @@
-import type { CSSProperties, ReactNode } from 'react'
+import type { CSSProperties, ReactElement, ReactNode } from 'react'
 import { paperSurfaceAnchorAttrs } from '../../../../shared/papersurface/anchorKeys.mjs'
 import { paperBlankRuling } from '../../../../shared/papersurface/blankRuling.mjs'
 import type {
@@ -6,6 +6,7 @@ import type {
   CanonicalSurfaceParagraph,
   CanonicalSurfaceTextNode,
 } from '../../../../shared/paper-normalization/canonicalClozeSurfaceAdapter.mjs'
+import type { PaperEvidence } from '../../../../shared/papersurface/types'
 
 type CanonicalBlankFocus = {
   readonly renderer: 'grammar-fill' | 'paper-blank'
@@ -24,10 +25,73 @@ export function renderCanonicalPaperSentenceContent(
   keyPrefix: string,
   groupType: CanonicalSurfaceParagraph['groupType'],
   blankFocus: CanonicalBlankFocus,
+  activeEvidence?: PaperEvidence,
 ): ReactNode {
-  return nodes.map((node, index) => {
+  const visibleLength = nodes.reduce(
+    (length, node) => length + canonicalNodeVisibleText(node).length,
+    0,
+  )
+  if (
+    activeEvidence
+    && (
+      !Number.isInteger(activeEvidence.range.start)
+      || !Number.isInteger(activeEvidence.range.end)
+      || activeEvidence.range.start < 0
+      || activeEvidence.range.end <= activeEvidence.range.start
+      || activeEvidence.range.end > visibleLength
+    )
+  ) {
+    throw new Error(
+      `[CANONICAL_EVIDENCE_RANGE_OUT_OF_BOUNDS] ${activeEvidence.id} references `
+      + `${keyPrefix}[${activeEvidence.range.start},${activeEvidence.range.end}) `
+      + `with length ${visibleLength}.`,
+    )
+  }
+
+  let visibleOffset = 0
+  return nodes.flatMap((node, index) => {
+    const nodeStart = visibleOffset
+    const nodeEnd = nodeStart + canonicalNodeVisibleText(node).length
+    visibleOffset = nodeEnd
+
     if (node.type === 'text') {
-      return <span key={`${keyPrefix}-semantic-text-${index}`}>{node.text}</span>
+      if (
+        !activeEvidence
+        || activeEvidence.range.end <= nodeStart
+        || activeEvidence.range.start >= nodeEnd
+      ) {
+        return [<span key={`${keyPrefix}-semantic-text-${index}`}>{node.text}</span>]
+      }
+      const activeStart = Math.max(activeEvidence.range.start, nodeStart) - nodeStart
+      const activeEnd = Math.min(activeEvidence.range.end, nodeEnd) - nodeStart
+      const renderedText: ReactElement[] = []
+      if (node.text.slice(0, activeStart)) {
+        renderedText.push(
+          <span key={`${keyPrefix}-semantic-text-${index}-pre`}>
+            {node.text.slice(0, activeStart)}
+          </span>,
+        )
+      }
+      renderedText.push(
+        <mark
+          key={`${keyPrefix}-semantic-text-${index}-active`}
+          className="ps-evidence-anchor ps-evidence-anchor--active"
+          {...{
+            [paperSurfaceAnchorAttrs.evidenceId]: activeEvidence.id,
+            [paperSurfaceAnchorAttrs.evidenceKind]: activeEvidence.kind,
+          }}
+        >
+          {node.text.slice(activeStart, activeEnd)}
+        </mark>,
+      )
+      if (node.text.slice(activeEnd)) {
+        renderedText.push(
+          <span key={`${keyPrefix}-semantic-text-${index}-post`}>
+            {node.text.slice(activeEnd)}
+          </span>,
+        )
+      }
+      return renderedText
     }
 
     const isClickable = blankFocus?.renderer === 'paper-blank'
@@ -64,8 +128,7 @@ export function renderCanonicalPaperSentenceContent(
       </span>
     )
 
-    if (!node.hint) return blank
-    return (
+    const blankUnit = !node.hint ? blank : (
       <span
         key={`${keyPrefix}-semantic-blank-with-hint-${node.blankId}`}
         className="ps-paper-blank-unit"
@@ -74,5 +137,40 @@ export function renderCanonicalPaperSentenceContent(
         <span className="ps-paper-blank-hint">({node.hint})</span>
       </span>
     )
+
+    if (
+      !activeEvidence
+      || activeEvidence.range.end <= nodeStart
+      || activeEvidence.range.start >= nodeEnd
+    ) {
+      return [blankUnit]
+    }
+    if (
+      activeEvidence.range.start > nodeStart
+      || activeEvidence.range.end < nodeEnd
+    ) {
+      throw new Error(
+        `[CANONICAL_EVIDENCE_SPLITS_BLANK] ${activeEvidence.id} splits ${node.blankId}.`,
+      )
+    }
+    return [
+      <mark
+        key={`${keyPrefix}-semantic-blank-${node.blankId}-active-evidence`}
+        className="ps-evidence-anchor ps-evidence-anchor--active"
+        {...{
+          [paperSurfaceAnchorAttrs.evidenceId]: activeEvidence.id,
+          [paperSurfaceAnchorAttrs.evidenceKind]: activeEvidence.kind,
+        }}
+      >
+        {blankUnit}
+      </mark>,
+    ]
   })
+}
+
+function canonicalNodeVisibleText(
+  node: CanonicalSurfaceTextNode | CanonicalSurfaceBlankNode,
+): string {
+  if (node.type === 'text') return node.text
+  return `${node.questionNo}${node.hint ? ` (${node.hint})` : ''}`
 }

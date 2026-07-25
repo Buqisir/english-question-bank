@@ -16,16 +16,17 @@
  * Rules: no React, no DOM, no fetch, no router reads.
  */
 
-import { segmentPaperText } from '../../../../shared/papersurface/segmentPaperText.mjs'
 import type {
   PaperEvidence,
-  PaperQuestion,
   PaperTextMap,
   PaperTextRange,
 } from '../../../../shared/papersurface/types'
 import type { PaperAssetV1 } from '../../domain/paperAsset.ts'
+import {
+  buildClozePaperView,
+  type ClozePaperViewModel,
+} from './clozePaperViewAdapter.ts'
 import type {
-  LoadBar,
   PaperIntelligenceReport,
   PaperSurfaceData,
   PassageStructure,
@@ -129,6 +130,7 @@ export type ClozeAnalysisSurfaceModel = {
   analysisByQuestionId: Record<string, ClozeBlankAnalysisView>
   groupView: ClozeGroupView | null
   defaultQuestionId: string | null
+  normalization: ClozePaperViewModel['normalization']
 }
 
 // ─── Signature label map ──────────────────────────────────────────────────────
@@ -150,8 +152,6 @@ const CLOZE_EVIDENCE_TYPE_LABELS: Record<ClozeEvidenceType, string> = {
   'affective-cue': '情感线索',
   'logical-connector': '逻辑连接',
 }
-
-const CLOZE_SECTION = '完形填空'
 
 // ─── Build entry point ────────────────────────────────────────────────────────
 
@@ -175,24 +175,25 @@ export function buildClozeAnalysisSurfaceModel(input: {
   }
 
   const questionIds = group.questionIds ?? []
-
-  // Build textMap (mirrors clozePaperViewAdapter but keeps per-paragraph ids)
-  const textMap = buildClozeTextMap(asset, group)
-
-  const passageStructure: PassageStructure = {
-    section: CLOZE_SECTION,
-    paragraphs: (group.passage?.paragraphs ?? []).map((p, i) => ({
-      id: p.paragraphId,
-      label: i === 0 ? '标题' : `P${i}`,
-      text: p.text,
-    })),
+  const canonicalSurface = buildClozePaperView({ asset, groupId })
+  if (canonicalSurface.normalization.status !== 'ready') {
+    throw new Error(
+      `[CLOZE_CANONICAL_SURFACE_UNAVAILABLE] ${asset.paper.paperId}/${groupId} `
+      + 'cannot layer analysis onto an unresolved canonical group.',
+    )
   }
-
-  // Build questions for PaperSurface left column (plain — no analysis-derived options)
-  const questions = buildQuestions(asset, questionIds)
+  assertCanonicalAnalysisAnchors(
+    analysis,
+    questionIds,
+    canonicalSurface.surfaceData.semanticParagraphs,
+  )
 
   // Build passage-side evidence ranges from analysis.blanks
-  const { evidence } = buildEvidence(analysis, questionIds, textMap)
+  const { evidence } = buildEvidence(
+    analysis,
+    questionIds,
+    canonicalSurface.surfaceData.textMap,
+  )
 
   // Build per-blank analysis views
   const analysisByQuestionId = buildAnalysisViews(asset, analysis, questionIds)
@@ -203,55 +204,57 @@ export function buildClozeAnalysisSurfaceModel(input: {
     : null
 
   return {
-    report: buildShellReport(asset, group, groupId),
-    passageStructures: { [CLOZE_SECTION]: passageStructure },
-    surfaceData: { textMap, questions, evidence },
+    report: canonicalSurface.report,
+    passageStructures: canonicalSurface.passageStructures,
+    surfaceData: { ...canonicalSurface.surfaceData, evidence },
     analysisByQuestionId,
     groupView,
-    defaultQuestionId: questionIds[0] ?? null,
+    defaultQuestionId: canonicalSurface.defaultQuestionId,
+    normalization: canonicalSurface.normalization,
   }
 }
 
 // ─── Internal helpers ─────────────────────────────────────────────────────────
 
-function buildClozeTextMap(
-  asset: PaperAssetV1,
-  group: PaperAssetV1['content']['groups'][string],
-): PaperTextMap {
-  const rawParagraphs = group.passage?.paragraphs ?? []
-  const paragraphs: PaperTextMap['paragraphs'] = rawParagraphs.map((p) => {
-    if (!p.text.trim()) {
-      return { id: p.paragraphId, section: CLOZE_SECTION, sentences: [] }
-    }
-    const segmented = segmentPaperText(p.text, { sectionId: p.paragraphId })
-    const first = segmented.paragraphs[0]
-    const sentences = first
-      ? first.sentences.map((s, i) => ({
-          id: `${p.paragraphId}-s${i}`,
-          text: s.text,
-          tokens: [] as never[],
-        }))
-      : []
-    return { id: p.paragraphId, section: CLOZE_SECTION, sentences }
-  })
-  return { paperId: asset.paper.paperId, paragraphs }
-}
-
-function buildQuestions(
-  asset: PaperAssetV1,
+function assertCanonicalAnalysisAnchors(
+  analysis: ReviewedClozeAnalysisV1,
   questionIds: string[],
-): PaperQuestion[] {
-  return questionIds.map((qid, order) => {
-    const q = asset.content.questions[qid]
-    return {
-      id: qid,
-      section: CLOZE_SECTION,
-      order,
-      questionNo: String(q?.questionNo ?? ''),
-      stem: q?.stem ?? '',
-      options: q?.options ?? [],
+  semanticParagraphs: PaperSurfaceData['semanticParagraphs'],
+): void {
+  if (!semanticParagraphs) {
+    throw new Error(
+      '[CLOZE_CANONICAL_ANCHOR_MISSING] canonical semantic paragraphs are unavailable.',
+    )
+  }
+
+  const blankIdByQuestionId = new Map<string, string>()
+  for (const node of semanticParagraphs
+    .flatMap((paragraph) => paragraph.sentences)
+    .flatMap((sentence) => sentence.nodes)) {
+    if (node.type !== 'blank') continue
+    if (blankIdByQuestionId.has(node.questionId)) {
+      throw new Error(
+        `[CLOZE_CANONICAL_ANCHOR_DUPLICATE] ${node.questionId} has multiple blank anchors.`,
+      )
     }
-  })
+    blankIdByQuestionId.set(node.questionId, node.blankId)
+  }
+
+  for (const questionId of questionIds) {
+    const canonicalBlankId = blankIdByQuestionId.get(questionId)
+    const analysisBlank = analysis.blanks[questionId]
+    if (!canonicalBlankId || !analysisBlank) {
+      throw new Error(
+        `[CLOZE_ANALYSIS_ANCHOR_MISSING] ${questionId} has no canonical/analysis blank pair.`,
+      )
+    }
+    if (analysisBlank.blankId !== canonicalBlankId) {
+      throw new Error(
+        `[CLOZE_ANALYSIS_ANCHOR_MISMATCH] ${questionId} references `
+        + `${analysisBlank.blankId}; canonical blank is ${canonicalBlankId}.`,
+      )
+    }
+  }
 }
 
 function buildEvidence(
@@ -272,7 +275,13 @@ function buildEvidence(
 
       const evidenceId = `${questionId}-evidence-${i + 1}`
       const ranges = findAllTextRanges(textMap, item.signalText)
+      if (ranges.length === 0) {
+        throw new Error(
+          `[CLOZE_EVIDENCE_UNRESOLVED] ${evidenceId} has no range in canonical visible text.`,
+        )
+      }
       for (const range of ranges) {
+        assertResolvedEvidenceRange(textMap, range, evidenceId)
         evidence.push({
           id: evidenceId,
           questionId,
@@ -284,6 +293,33 @@ function buildEvidence(
   }
 
   return { evidence }
+}
+
+function assertResolvedEvidenceRange(
+  textMap: PaperTextMap,
+  range: PaperTextRange,
+  evidenceId: string,
+): void {
+  const sentence = textMap.paragraphs
+    .flatMap((paragraph) => paragraph.sentences)
+    .find((candidate) => candidate.id === range.sentenceId)
+  if (!sentence) {
+    throw new Error(
+      `[CLOZE_EVIDENCE_ANCHOR_MISSING] ${evidenceId} references ${range.sentenceId}.`,
+    )
+  }
+  if (
+    !Number.isInteger(range.start) ||
+    !Number.isInteger(range.end) ||
+    range.start < 0 ||
+    range.end <= range.start ||
+    range.end > sentence.text.length
+  ) {
+    throw new Error(
+      `[CLOZE_EVIDENCE_RANGE_OUT_OF_BOUNDS] ${evidenceId} references `
+      + `${range.sentenceId}[${range.start},${range.end}) with length ${sentence.text.length}.`,
+    )
+  }
 }
 
 function buildAnalysisViews(
@@ -363,49 +399,4 @@ export function findAllTextRanges(textMap: PaperTextMap, needle: string): PaperT
     }
   }
   return ranges
-}
-
-// ─── Shell report (minimal; keeps adapter simple) ────────────────────────────
-
-const ZERO_LOAD_BAR: LoadBar = { score: 0, label: '', shortReason: '', evidenceItems: [] }
-
-function buildShellReport(
-  asset: PaperAssetV1,
-  group: PaperAssetV1['content']['groups'][string],
-  groupId: string,
-): PaperIntelligenceReport {
-  return {
-    schemaVersion: 'paper-asset-v1-as-paper-intelligence-shell',
-    generatedAt: '',
-    generator: {
-      promptVersion: 'i9-cloze-analysis-surface',
-      modelId: null,
-      runId: 'cloze-analysis-surface',
-    },
-    sourcePaper: {
-      paperId: asset.paper.paperId,
-      paperName: asset.paper.title,
-      year: 2024,
-      region: '',
-      section: CLOZE_SECTION,
-    },
-    passages: [
-      {
-        paperSection: CLOZE_SECTION,
-        passageTitle: group.title || CLOZE_SECTION,
-        questionGroupId: groupId,
-        loads: {
-          vocabularyChunkLoad: ZERO_LOAD_BAR,
-          grammarLoad: ZERO_LOAD_BAR,
-          discourseStructureLoad: ZERO_LOAD_BAR,
-          topicBackgroundLoad: ZERO_LOAD_BAR,
-          evidenceFindingLoad: ZERO_LOAD_BAR,
-        },
-        aiInitialBand: { band: '—', basis: 'cloze analysis source' },
-        passageOutline: { mainIdea: group.title || CLOZE_SECTION, logicalLayers: [] },
-        keyChunks: [],
-        questions: [],
-      },
-    ],
-  }
 }

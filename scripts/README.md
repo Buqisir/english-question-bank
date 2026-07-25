@@ -64,6 +64,7 @@ must be confirmed green (AGENTS.md RM gate).
 | `verify-paper-asset-v1.mjs` | `paper-asset-v1` fixture and source-faithfulness contract | yes |
 | `verify-paper-normalization-cloze.mjs` | Ticket 01 pure `normalizePaperGroup` cloze compiler: real `paper-2026-i` identity/prose/options/source-map/fingerprint facts, numeric-only stem conditions, immutability/determinism, optional blank records, and structured fail-closed malformed-marker matrix | yes |
 | `verify-paper-normalization-cloze-surface.mjs` | Ticket 02 public canonical cloze adapter + SSR PaperSurface: real `paper-2026-i` TextMap/semantic-node identity, no raw marker or duplicate slot number, compatibility fail-closed fallback diagnostics, and shared blank ruling | yes |
+| `verify-paper-normalization-cloze-analysis.mjs` | Ticket 03 public cloze analysis model + SSR PaperSurface: real `paper-2026-i` canonical plain/analysis digest parity, all 15 blank-to-question anchors, fail-loud analysis/evidence anchors, TextMap range validity, active evidence paint, and lecture focus lifecycle stability | yes |
 | `verify-c7-paper-import-contracts.mjs` | C7 schema / offline validator contracts | yes |
 | `verify-c7-paper-import-publish.mjs` | C7 publish atomicity and storage protocol | yes |
 | `verify-i1-paper-import-analysis.mjs` | I1 owner-only analysis / publish endpoints, provider seam, JSON preview, and C7 package bridge contract | yes |
