@@ -10,6 +10,7 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
+    "prototype:abcd-options": "node ../docs/cuts/paper-canonical-unification/prototypes/abcd-option-layout-selector/selector-prototype.mjs",
     "verify:all": "node ../scripts/verify-ci.mjs"
   },
   "dependencies": {

@@ -1,7 +1,7 @@
 # EQB 试卷 Canonical 大一统 — Wayfinder Map
 
 Status: charted
-Next on PASS: `docs/cuts/paper-canonical-unification/wayfinder/tickets/07a-abcd-option-layout-selector.md`
+Next on PASS: `docs/cuts/paper-canonical-unification/wayfinder/tickets/08-seven-choices-canonical-variant.md`
 Terminal: no
 
 ## Notes
@@ -45,6 +45,7 @@ Terminal: no
 - [设计 canonical compilation 深模块接口](tickets/05-canonical-compilation-module-interface.md) — 选择 one-shot evidence compiler：一个纯函数从 immutable source bytes 到整卷原子 canonical artifacts，blocked 分支只保留 Source Capture 与 Normalization Report。
 - [定义卷型模板与整卷装配单合同](tickets/06-paper-format-profile-and-plan.md) — 以 versioned Profile 独占卷型规则、complete-only Plan 绑定整卷实例，并让三类 renderer 共用一个语义投影 Module。
 - [定义题组通用 envelope 与 rich content nodes](tickets/07-rich-content-and-group-envelope.md) — 以封闭 shared envelope、family-discriminated option owner 与最小 rich-content 网格/媒体模型消除重复 bank 和 renderer 语义回编。
+- [定义 A–D 选项整组择形算法与金样卷 parity](tickets/07a-abcd-option-layout-selector.md) — 以 pinned shaping、固定 twip tabs 与 whole-set fallback 让三类 renderer 共用同一 4/2/1 placement plan，并对不可渲染单列内容 fail closed。
 
 ## Fog
 
