@@ -44,17 +44,17 @@ Fixed point: Ticket 01 的完成 commit
 
 ## Acceptance criteria
 
-- [ ] 一个不在旧白名单内的 application fixture，在完整 payload 下可挂载双范文讲评。
-- [ ] 左侧先显示带标签的完整 AI 参考范文，再显示带标签的完整官方范文。
-- [ ] `officialModelAnswer` 缺省时只显示 AI 参考范文，不出现空标签或假卡片。
-- [ ] 右侧 ReviewCard 四段顺序、标签和字段映射保持 fixed point 一致。
-- [ ] application highlights 即使存在也不在完整讲评体验中显示。
-- [ ] 缺 modelAnswer、malformed reviewCard、application/continuation 错配均 fail closed，不出现部分卡片。
-- [ ] 关闭讲评或切换 panel group 后普通答题框恢复。
-- [ ] 2022-i 与 2024-i 的整框入口、`讲评` handle、视觉和响应式行为无回归。
-- [ ] continuation、历史无 reviewCard application、挑题态和 export isolation 无回归。
-- [ ] 宽屏 rail 与窄屏 drawer 均能完整阅读两篇范文，无横向溢出。
-- [ ] focused red-green fixture 证明旧白名单阻止新 group，完成后由 payload 决定 availability。
+- [x] 一个不在旧白名单内的 application fixture，在完整 payload 下可挂载双范文讲评。
+- [x] 左侧先显示带标签的完整 AI 参考范文，再显示带标签的完整官方范文。
+- [x] `officialModelAnswer` 缺省时只显示 AI 参考范文，不出现空标签或假卡片。
+- [x] 右侧 ReviewCard 四段顺序、标签和字段映射保持 fixed point 一致。
+- [x] application highlights 即使存在也不在完整讲评体验中显示。
+- [x] 缺 modelAnswer、malformed reviewCard、application/continuation 错配均 fail closed，不出现部分卡片。
+- [x] 关闭讲评或切换 panel group 后普通答题框恢复。
+- [x] 2022-i 与 2024-i 的整框入口、`讲评` handle、视觉和响应式行为无回归。
+- [x] continuation、历史无 reviewCard application、挑题态和 export isolation 无回归。
+- [x] 宽屏 rail 与窄屏 drawer 均能完整阅读两篇范文，无横向溢出。
+- [x] focused red-green fixture 证明旧白名单阻止新 group，完成后由 payload 决定 availability。
 
 ## Verification
 

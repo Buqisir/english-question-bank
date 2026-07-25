@@ -42,18 +42,18 @@ Fixed point: Ticket 01 completion commit (the final HEAD in its completion hando
 
 ## Acceptance criteria
 
-- [ ] 自动校验证明独立 prompt 文件与 spec 附录 A 逐字一致，文末只追加完整题面占位内容。
-- [ ] adapter 可从 applicationGiven、instruction 和 group passage 三种现实现状重建完整题面。
-- [ ] adapter fixture 覆盖称呼、标题、给定开头、结尾、敬语、署名、word-count target 和无骨架文章。
-- [ ] 题面存在无法恢复的信息时 fail closed，并输出可诊断的 `SPEC CONTRADICTS`。
-- [ ] application `list` 产出的任务明确要求纯英文成文，不再要求 JSON、audit 或 highlights。
-- [ ] application `persist` 读取 `.model-answer.txt` 等分离工作文件；旧 `.out.json` 不再是 application 新路径输入。
-- [ ] JSON、Markdown、中文解释、遗漏或重复骨架、明显格式错误以及不合规词数均被机器校验拒绝。
-- [ ] `.review.json` 缺失、形状非法或 verdict 为 `MUST_FIX` 时禁止持久化。
-- [ ] 复核 PASS 后可组装无 highlights 的 application candidate，并由 Ticket 01 契约原子持久化。
-- [ ] review、原始模型回复和工作文件内容不泄漏到 paper asset。
-- [ ] continuation 的 list/persist fixture 与 fixed point 行为一致。
-- [ ] focused red-green fixture 证明旧 main 的 JSON application 流程不满足本票，完成后整条新工作流 green。
+- [x] 自动校验证明独立 prompt 文件与 spec 附录 A 逐字一致，文末只追加完整题面占位内容。
+- [x] adapter 可从 applicationGiven、instruction 和 group passage 三种现实现状重建完整题面。
+- [x] adapter fixture 覆盖称呼、标题、给定开头、结尾、敬语、署名、word-count target 和无骨架文章。
+- [x] 题面存在无法恢复的信息时 fail closed，并输出可诊断的 `SPEC CONTRADICTS`。
+- [x] application `list` 产出的任务明确要求纯英文成文，不再要求 JSON、audit 或 highlights。
+- [x] application `persist` 读取 `.model-answer.txt` 等分离工作文件；旧 `.out.json` 不再是 application 新路径输入。
+- [x] JSON、Markdown、中文解释、遗漏或重复骨架、明显格式错误以及不合规词数均被机器校验拒绝。
+- [x] `.review.json` 缺失、形状非法或 verdict 为 `MUST_FIX` 时禁止持久化。
+- [x] 复核 PASS 后可组装无 highlights 的 application candidate，并由 Ticket 01 契约原子持久化。
+- [x] review、原始模型回复和工作文件内容不泄漏到 paper asset。
+- [x] continuation 的 list/persist fixture 与 fixed point 行为一致。
+- [x] focused red-green fixture 证明旧 main 的 JSON application 流程不满足本票，完成后整条新工作流 green。
 
 ## Verification
 

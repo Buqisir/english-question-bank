@@ -40,16 +40,16 @@ Fixed point: `4ed02871b2cd57872b3174c2aabfb781acfd3273`
 
 ## Acceptance criteria
 
-- [ ] TypeScript 能表达无 highlights 的 application，以及带/不带 `officialModelAnswer` 的 application。
-- [ ] JSON Schema 按 task type 分支：新 application 无 highlights 可通过；历史 application 有 highlights 仍可通过。
-- [ ] `officialModelAnswer` 缺省可通过；空字符串、纯空白、错误类型失败。
-- [ ] continuation 缺 highlights 仍失败，带 `officialModelAnswer` 或 `reviewCard` 仍失败。
-- [ ] application validator 不再要求新候选生产 highlights，但历史 highlights 出现时仍验证其既有形状。
-- [ ] application 持久化可写入无 highlights 的新候选，并忠实保留可选官方范文的段落换行。
-- [ ] 更新已有 application 时，历史 highlights 的对象、扩展字段和顺序逐项不变。
-- [ ] 同 paper 的其他 group、continuation 和 envelope meta 不被覆盖。
-- [ ] `audit`、review 结果、模型原始回复和未知工作字段不落盘。
-- [ ] focused red-green fixture 证明旧 main 在新契约上为 red，完成后为 green。
+- [x] TypeScript 能表达无 highlights 的 application，以及带/不带 `officialModelAnswer` 的 application。
+- [x] JSON Schema 按 task type 分支：新 application 无 highlights 可通过；历史 application 有 highlights 仍可通过。
+- [x] `officialModelAnswer` 缺省可通过；空字符串、纯空白、错误类型失败。
+- [x] continuation 缺 highlights 仍失败，带 `officialModelAnswer` 或 `reviewCard` 仍失败。
+- [x] application validator 不再要求新候选生产 highlights，但历史 highlights 出现时仍验证其既有形状。
+- [x] application 持久化可写入无 highlights 的新候选，并忠实保留可选官方范文的段落换行。
+- [x] 更新已有 application 时，历史 highlights 的对象、扩展字段和顺序逐项不变。
+- [x] 同 paper 的其他 group、continuation 和 envelope meta 不被覆盖。
+- [x] `audit`、review 结果、模型原始回复和未知工作字段不落盘。
+- [x] focused red-green fixture 证明旧 main 在新契约上为 red，完成后为 green。
 
 ## Verification
 
