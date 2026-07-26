@@ -1,16 +1,16 @@
 # Paper canonical unification phase transition
 
 Status: active
-Previous phase: to-tickets
-Current phase: owner-approval
-Next on PASS: owner-approval
+Previous phase: owner-approval
+Current phase: implementation
+Next on PASS: implementation
 Terminal: no
 
 Wayfinder map: `docs/cuts/paper-canonical-unification/wayfinder/map.md`
 Current map binding: verified
-Current map binding commit: `16462519a9ef38930bee8748083471d7f0b9c5ee`
+Current map binding commit: `5f81f2cd212b8b8f8883ae55dddcfddf8dbb06ca`
 Current map artifact: `docs/cuts/paper-canonical-unification/wayfinder/map.md`
-Current map artifact SHA-256: `8671ad32cbba2026fe99aca8d71f4ebe10de01cd657000107e99b9f692eab911`
+Current map artifact SHA-256: `f9c2a7f4f1fa3cf104727ccf5cef994d2f68b7533e92bb17ff5042879fbc20f2`
 Wayfinder status: done
 Wayfinder provenance: verified
 Wayfinder entry skill: `/Users/huangxuewei/.claude/skills/wayfinder/SKILL.md`
@@ -39,8 +39,13 @@ Ticket-set binding: verified
 Ticket-set manifest: `docs/cuts/paper-canonical-unification/ticket-set-manifest.md`
 Ticket-set manifest SHA-256: `462290bb40ac17c3adf8db4f2b09d29d30d6fb78958b05b63174f6a3c9a5f476`
 Ticket-set accepted-spec SHA-256: `2e77d4f2ba40e3d4fb33c232bd5734e34b6c6a94a26c626cd1f6af178684490b`
-Owner ticket-granularity approval: pending
-Implementation dispatch: forbidden
+Owner ticket-granularity approval: verified
+Owner approval actor: owner
+Owner approval action: approve-ticket-granularity
+Owner approval result commit: `5f81f2cd212b8b8f8883ae55dddcfddf8dbb06ca`
+Owner approval record: `docs/cuts/paper-canonical-unification/owner-approval.md`
+Owner approval ticket-set manifest SHA-256: `462290bb40ac17c3adf8db4f2b09d29d30d6fb78958b05b63174f6a3c9a5f476`
+Implementation dispatch: allowed
 
 ## Preserved result
 
@@ -54,9 +59,11 @@ The rejected manifest with SHA-256
 `6732eb4da6e35982f0b0a980f2a623f68d49a79811485fa500918c1944f3ee25`
 and its historical Tickets 02–29 are superseded and non-dispatchable. The
 corrected digest-bound Tickets 02–71 are the sole current ticket set. Ticket 02
-is the unique initial implementation frontier, but implementation remains
-forbidden until the owner approves the exact current manifest digest.
+is the unique initial implementation frontier. The owner approved the exact
+current manifest digest in the committed approval record, and all four
+implementation gates are now bound for verification.
 
 Ticket 02 must then commit the route-authority repair and pass independent
 review against that reviewed HEAD before Ticket 03 or any later implementation
-ticket can become eligible.
+ticket can become eligible. This approval-recording task does not dispatch
+Ticket 02 or start the coordinator.
