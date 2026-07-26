@@ -332,6 +332,32 @@ function validateChoiceOwnership(choiceOwnership, questionIds, expectedOwnership
   return diagnostics
 }
 
+function validateReferenceBlankClosure(familyId, questionIds, blankIds, content) {
+  if (!['cloze', 'grammar-fill'].includes(familyId)) return []
+  const diagnostics = []
+  if (questionIds.length !== blankIds.length) {
+    diagnostics.push(diagnostic('REFERENCE_BLANK_CARDINALITY', 'needs_review', '$.blankIds', 'Cloze and Grammar Fill require one Blank for every Question'))
+  }
+  const occurrences = new Map(blankIds.map((blankId) => [blankId, 0]))
+  for (const block of content?.blocks || []) {
+    const inlineSets = block.kind === 'table'
+      ? (block.rows || []).flatMap((row) => (row.cells || []).map((cell) => cell.inlines))
+      : [block.kind === 'figure' ? block.caption : block.inlines]
+    for (const inlines of inlineSets) {
+      for (const inline of inlines || []) {
+        if (inline?.kind === 'blank_ref' && occurrences.has(inline.blankId)) occurrences.set(inline.blankId, occurrences.get(inline.blankId) + 1)
+        if (inline?.kind === 'text' && /__\d+__/.test(inline.text)) {
+          diagnostics.push(diagnostic('REFERENCE_MARKER_AMBIGUOUS', 'needs_review', '$.content', 'Source Blank markers must be resolved to semantic Blank refs'))
+        }
+      }
+    }
+  }
+  if ([...occurrences.values()].some((count) => count !== 1)) {
+    diagnostics.push(diagnostic('REFERENCE_BLANK_OCCURRENCE', 'needs_review', '$.content', 'Every Cloze and Grammar Fill Blank must occur exactly once in semantic content'))
+  }
+  return diagnostics
+}
+
 function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
   const diagnostics = []
   const family = closure.families.get(sourceGroup?.family)
@@ -356,6 +382,7 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
   }
   const content = cloneJson(sourceGroup.content || { blocks: [] })
   diagnostics.push(...validateRichContent(content, new Set(sourceGroup.blankIds), mediaIds))
+  diagnostics.push(...validateReferenceBlankClosure(family.familyContractId, sourceGroup.questionIds, sourceGroup.blankIds, content))
   const variant = cloneJson(sourceGroup.variant || {})
   if (!exactKeys(variant, ['family', 'choiceOwnership']) || variant.family !== family.familyContractId) diagnostics.push(diagnostic('GROUP_VARIANT_INVALID', 'needs_review', '$.groups.variant', 'Variant family must match the closed contract'))
   diagnostics.push(...validateChoiceOwnership(variant.choiceOwnership, sourceGroup.questionIds, family.choiceOwnership))

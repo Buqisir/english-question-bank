@@ -11,6 +11,21 @@ function choiceOwnership(family, questionIds) {
   return { ownership: 'none' }
 }
 
+function referenceBlankContent(family, blankIds) {
+  if (!['cloze', 'grammar-fill'].includes(family)) return { blocks: [] }
+  return {
+    blocks: [{
+      kind: 'paragraph',
+      nodeId: `paragraph:${family}:fixture`,
+      inlines: blankIds.map((blankId, index) => ({
+        kind: 'blank_ref',
+        nodeId: `blank-ref:${family}:${index + 1}`,
+        blankId,
+      })),
+    }],
+  }
+}
+
 export function makeReadyCanonicalFixture() {
   const closure = resolveCanonicalAuthority(canonicalAuthorityRef).closure
   const profile = closure.profiles.get('nck1')
@@ -37,7 +52,7 @@ export function makeReadyCanonicalFixture() {
       questionIds,
       blankIds,
       sourceSpanId,
-      content: { blocks: [] },
+      content: referenceBlankContent(slot.familyContractRef.id, blankIds),
       media: [],
       variant: { family: slot.familyContractRef.id, choiceOwnership: choiceOwnership(slot.familyContractRef.id, questionIds) },
     })
