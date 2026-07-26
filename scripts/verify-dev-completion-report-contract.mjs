@@ -68,10 +68,6 @@ const currentPaperMap = readText(
   ROOT,
   'docs/cuts/paper-canonical-unification/wayfinder/map.md',
 )
-const currentPaperSpec = readText(
-  ROOT,
-  'docs/cuts/paper-canonical-unification/spec.md',
-)
 const currentPaperTicket01 = readText(
   ROOT,
   'docs/cuts/paper-canonical-unification/tickets/01-canonical-foundation.md',
@@ -336,10 +332,37 @@ function markdownField(source, field) {
 }
 
 function committedArtifactDigest(commit, artifactPath) {
-  const bytes = execFileSync('git', ['show', `${commit}:${artifactPath}`], {
-    cwd: ROOT,
-  })
-  return createHash('sha256').update(bytes).digest('hex')
+  try {
+    const bytes = execFileSync('git', ['show', `${commit}:${artifactPath}`], {
+      cwd: ROOT,
+      stdio: ['ignore', 'pipe', 'ignore'],
+    })
+    return createHash('sha256').update(bytes).digest('hex')
+  } catch {
+    return ''
+  }
+}
+
+function currentArtifactDigest(artifactPath) {
+  try {
+    return createHash('sha256')
+      .update(readFileSync(resolve(ROOT, artifactPath)))
+      .digest('hex')
+  } catch {
+    return ''
+  }
+}
+
+function commitIsAncestor(commit, head) {
+  try {
+    execFileSync('git', ['merge-base', '--is-ancestor', commit, head], {
+      cwd: ROOT,
+      stdio: 'ignore',
+    })
+    return true
+  } catch {
+    return false
+  }
 }
 
 function parseCoordinatorYaml(source) {
@@ -414,14 +437,89 @@ function coordinatorYamlErrors(source) {
   }
 }
 
-function artifactProofErrors(proof, expectedSkill) {
+function coordinatorSkillErrors(source) {
   const errors = []
+  const normalized = compact(source)
+
+  if (frontmatterName(source) !== 'coordinate-eqb-wayfinder') {
+    errors.push('frontmatter name must remain coordinate-eqb-wayfinder')
+  }
+  if (!/^disable-model-invocation:\s*true\s*$/m.test(source)) {
+    errors.push('disable-model-invocation must remain true')
+  }
+  if (!normalized.includes("initiative's repository-read-only coordinator")) {
+    errors.push('coordinator must remain repository-read-only')
+  }
+  if (!normalized.includes('Create exactly one fresh peer')) {
+    errors.push('coordinator must create exactly one fresh top-level peer')
+  }
+  if (
+    !normalized.includes('Preserve separate `to-spec` and `to-tickets` peers')
+  ) {
+    errors.push('to-spec and to-tickets must remain distinct peers')
+  }
+  if (
+    !normalized.includes('owner ticket-granularity approval pause') ||
+    !normalized.includes('owner-QA pause')
+  ) {
+    errors.push('owner approval and owner QA must remain pauses')
+  }
+  if (
+    !normalized.includes(
+      'implementation, TDD, ordinary Standards + Spec review, ordinary fixes, verification, and commit together',
+    ) ||
+    !normalized.includes('separately required independent lineage') ||
+    !normalized.includes('failure is never an automatic retry')
+  ) {
+    errors.push('ordinary and independent review/fix boundaries must remain exact')
+  }
+  for (const mechanic of [
+    'Hook',
+    'Runner',
+    'daemon',
+    'worker',
+    'fork',
+    'recursive coordinator',
+    'successor subagent',
+  ]) {
+    if (
+      !normalized.includes('Forbidden mechanics:') ||
+      !source.includes(mechanic)
+    ) {
+      errors.push(`forbidden mechanic is not preserved: ${mechanic}`)
+    }
+  }
+  if (
+    !normalized.includes(
+      'Treat `dispatch-protocols.md` as the sole owner of legal transitions, gates, pauses, resumes, and successor routing',
+    )
+  ) {
+    errors.push('coordinator must execute the project dispatch authority')
+  }
+  if (/gpt-5\.6|`medium`|`high`/.test(source)) {
+    errors.push('coordinator must not copy the project model table')
+  }
+
+  return errors
+}
+
+function artifactProofErrors(
+  proof,
+  expectedSkill,
+  { requireCurrentDigest = false } = {},
+) {
+  const errors = []
+  const entrySkillValid =
+    expectedSkill === null
+      ? proof?.entrySkill === 'none' ||
+        absoluteSkillPattern.test(proof?.entrySkill ?? '')
+      : absoluteSkillPattern.test(proof?.entrySkill ?? '') &&
+        proof.entrySkill.endsWith(`/${expectedSkill}/SKILL.md`)
 
   if (
     proof?.committed !== true ||
-    proof?.skill !== expectedSkill ||
-    !absoluteSkillPattern.test(proof?.entrySkill ?? '') ||
-    !proof.entrySkill.endsWith(`/${expectedSkill}/SKILL.md`) ||
+    (expectedSkill !== null && proof?.skill !== expectedSkill) ||
+    !entrySkillValid ||
     !fullCommitPattern.test(proof?.sourceHead ?? '') ||
     !fullCommitPattern.test(proof?.resultCommit ?? '') ||
     !/^docs\/.+/.test(proof?.artifactPath ?? '') ||
@@ -434,6 +532,13 @@ function artifactProofErrors(proof, expectedSkill) {
     proof.artifactDigest !== proof.actualArtifactDigest
   ) {
     errors.push(`${expectedSkill} artifact digest is stale or mismatched`)
+  }
+  if (
+    requireCurrentDigest &&
+    sha256Pattern.test(proof?.artifactDigest ?? '') &&
+    proof.artifactDigest !== proof.currentArtifactDigest
+  ) {
+    errors.push(`${expectedSkill} current artifact digest is stale or mismatched`)
   }
   return errors
 }
@@ -455,26 +560,264 @@ function ownerApprovalErrors(approval, ticketManifestDigest) {
   return errors
 }
 
-function phaseRouteErrors({
-  from,
-  next,
-  spec = {},
-  tickets = {},
-  approval = {},
-}) {
+const phaseEntrySkills = new Map([
+  ['wayfinder', 'wayfinder'],
+  ['to-spec', 'to-spec'],
+  ['to-tickets', 'to-tickets'],
+  ['implementation', 'implement'],
+  ['independent-review', 'code-review'],
+  ['independent-fix', 'implement'],
+  ['focused-re-review', 'code-review'],
+  ['owner-qa', null],
+  ['release', null],
+])
+const phaseLabels = new Map([
+  ['wayfinder', 'Wayfinder'],
+  ['to-spec', 'To-spec'],
+  ['to-tickets', 'To-tickets'],
+  ['implementation', 'Implementation'],
+  ['independent-review', 'Independent review'],
+  ['independent-fix', 'Independent fix'],
+  ['focused-re-review', 'Focused re-review'],
+  ['owner-qa', 'Owner QA'],
+  ['release', 'Release'],
+])
+const legalPhaseTransitions = new Map([
+  ['wayfinder', new Set(['to-spec'])],
+  ['to-spec', new Set(['to-tickets'])],
+  ['to-tickets', new Set(['owner-approval'])],
+  ['owner-approval', new Set(['implementation'])],
+  [
+    'implementation',
+    new Set(['implementation', 'independent-review', 'owner-qa', 'release']),
+  ],
+  [
+    'independent-review',
+    new Set(['independent-fix', 'owner-qa', 'release']),
+  ],
+  ['independent-fix', new Set(['focused-re-review'])],
+  [
+    'focused-re-review',
+    new Set(['independent-fix', 'owner-qa', 'release']),
+  ],
+  ['owner-qa', new Set(['release'])],
+  ['release', new Set(['DONE'])],
+  ['DONE', new Set()],
+])
+const implementationGatePhases = new Set([
+  'implementation',
+  'independent-review',
+  'independent-fix',
+  'focused-re-review',
+  'owner-qa',
+  'release',
+  'DONE',
+])
+
+function provenanceFromReceipt(source, phase) {
+  const label = phaseLabels.get(phase)
+  if (!label) {
+    return {}
+  }
+  const resultCommit = markdownField(source, `${label} result commit`)
+  const artifactPath = markdownField(source, `${label} artifact`)
+
+  return {
+    skill: phaseEntrySkills.get(phase),
+    entrySkill: markdownField(source, `${label} entry skill`),
+    committed: markdownField(source, `${label} provenance`) === 'verified',
+    sourceHead: markdownField(source, `${label} source HEAD`),
+    resultCommit,
+    artifactPath,
+    artifactDigest: markdownField(source, `${label} artifact SHA-256`),
+    actualArtifactDigest:
+      fullCommitPattern.test(resultCommit ?? '') &&
+      /^docs\/.+/.test(artifactPath ?? '')
+        ? committedArtifactDigest(resultCommit, artifactPath)
+        : '',
+    currentArtifactDigest: /^docs\/.+/.test(artifactPath ?? '')
+      ? currentArtifactDigest(artifactPath)
+      : '',
+  }
+}
+
+function parsePhaseReceipt(source, mapSource, head) {
+  const previous = markdownField(source, 'Previous phase')
+  const current = markdownField(source, 'Current phase')
+  const next = markdownField(source, 'Next on PASS')
+  const bindingCommit = markdownField(source, 'Current map binding commit')
+  const bindingArtifact = markdownField(source, 'Current map artifact')
+  const bindingDigest = markdownField(source, 'Current map artifact SHA-256')
+  const specProvenance = provenanceFromReceipt(source, 'to-spec')
+  const ticketsProvenance = provenanceFromReceipt(source, 'to-tickets')
+  const acceptedSpecPath = markdownField(source, 'Accepted spec')
+  const ticketManifestPath = markdownField(source, 'Ticket-set manifest')
+
+  return {
+    previous,
+    current,
+    next,
+    terminal: markdownField(source, 'Terminal') === 'yes',
+    implementationDispatch: markdownField(source, 'Implementation dispatch'),
+    mapStatus: markdownField(mapSource, 'Status'),
+    mapNext: markdownField(mapSource, 'Next on PASS'),
+    binding: {
+      verified: markdownField(source, 'Current map binding') === 'verified',
+      commit: bindingCommit,
+      artifactPath: bindingArtifact,
+      artifactDigest: bindingDigest,
+      ancestor:
+        fullCommitPattern.test(bindingCommit ?? '') &&
+        fullCommitPattern.test(head ?? '') &&
+        commitIsAncestor(bindingCommit, head),
+      committedArtifactDigest:
+        fullCommitPattern.test(bindingCommit ?? '') &&
+        /^docs\/.+/.test(bindingArtifact ?? '')
+          ? committedArtifactDigest(bindingCommit, bindingArtifact)
+          : '',
+      currentArtifactDigest: /^docs\/.+/.test(bindingArtifact ?? '')
+        ? currentArtifactDigest(bindingArtifact)
+        : '',
+    },
+    provenance: new Map(
+      [...phaseEntrySkills.keys()].map((phase) => [
+        phase,
+        provenanceFromReceipt(source, phase),
+      ]),
+    ),
+    outcomes: new Map(
+      [...phaseLabels].map(([phase, label]) => [
+        phase,
+        markdownField(source, `${label} outcome`),
+      ]),
+    ),
+    spec: {
+      accepted:
+        /^docs\/.+/.test(acceptedSpecPath ?? '') &&
+        markdownField(source, 'Accepted spec SHA-256') !== 'pending',
+      path: acceptedSpecPath,
+      digest: markdownField(source, 'Accepted spec SHA-256'),
+      currentArtifactDigest: /^docs\/.+/.test(acceptedSpecPath ?? '')
+        ? currentArtifactDigest(acceptedSpecPath)
+        : '',
+      provenance: specProvenance,
+    },
+    tickets: {
+      bindingVerified: markdownField(source, 'Ticket-set binding') === 'verified',
+      manifestPath: ticketManifestPath,
+      manifestDigest: markdownField(source, 'Ticket-set manifest SHA-256'),
+      currentArtifactDigest: /^docs\/.+/.test(ticketManifestPath ?? '')
+        ? currentArtifactDigest(ticketManifestPath)
+        : '',
+      boundSpecDigest: markdownField(
+        source,
+        'Ticket-set accepted-spec SHA-256',
+      ),
+      provenance: ticketsProvenance,
+    },
+    approval: {
+      committed:
+        markdownField(source, 'Owner ticket-granularity approval') ===
+        'verified',
+      actor: markdownField(source, 'Owner approval actor'),
+      action: markdownField(source, 'Owner approval action'),
+      resultCommit: markdownField(source, 'Owner approval result commit'),
+      recordPath: markdownField(source, 'Owner approval record'),
+      ticketManifestDigest: markdownField(
+        source,
+        'Owner approval ticket-set manifest SHA-256',
+      ),
+    },
+  }
+}
+
+function currentMapBindingErrors(binding) {
   const errors = []
-  const specProofErrors = artifactProofErrors(spec.provenance, 'to-spec')
+  if (
+    binding?.verified !== true ||
+    !fullCommitPattern.test(binding?.commit ?? '') ||
+    !/^docs\/.+/.test(binding?.artifactPath ?? '') ||
+    !sha256Pattern.test(binding?.artifactDigest ?? '')
+  ) {
+    errors.push('current map route binding is incomplete or malformed')
+    return errors
+  }
+  if (!binding.ancestor) {
+    errors.push('current map binding commit is not an ancestor of HEAD')
+  }
+  if (binding.artifactDigest !== binding.committedArtifactDigest) {
+    errors.push('current map binding does not match the artifact at its commit')
+  }
+  if (binding.artifactDigest !== binding.currentArtifactDigest) {
+    errors.push('current map binding is stale or mismatched with current bytes')
+  }
+  return errors
+}
+
+function phaseTransitionErrors(state) {
+  const errors = []
+  const {
+    previous,
+    current,
+    next,
+    terminal,
+    implementationDispatch,
+    provenance,
+    outcomes,
+    spec,
+    tickets,
+    approval,
+  } = state
+
+  if (!legalPhaseTransitions.has(previous)) {
+    errors.push(`unknown previous phase route kind: ${previous}`)
+  }
+  if (!legalPhaseTransitions.has(current)) {
+    errors.push(`unknown current phase route kind: ${current}`)
+  }
+  if (current !== next) {
+    errors.push('current phase and Next on PASS disagree')
+  }
+  if (
+    legalPhaseTransitions.has(previous) &&
+    legalPhaseTransitions.has(current) &&
+    !legalPhaseTransitions.get(previous).has(current)
+  ) {
+    errors.push(`illegal phase transition: ${previous} -> ${current}`)
+  }
+  if ((current === 'DONE') !== terminal) {
+    errors.push('Terminal must be yes only for DONE')
+  }
+
+  if (previous === 'owner-approval') {
+    errors.push(...ownerApprovalErrors(approval, tickets.manifestDigest))
+  } else if (previous !== 'DONE' && phaseEntrySkills.has(previous)) {
+    errors.push(
+      ...artifactProofErrors(
+        provenance.get(previous),
+        phaseEntrySkills.get(previous),
+      ),
+    )
+  }
+
+  const specProofErrors = artifactProofErrors(spec.provenance, 'to-spec', {
+    requireCurrentDigest: true,
+  })
   const ticketsProofErrors = artifactProofErrors(
     tickets.provenance,
     'to-tickets',
+    { requireCurrentDigest: true },
   )
   const specProven =
     spec.accepted === true &&
     specProofErrors.length === 0 &&
-    spec.digest === spec.provenance.artifactDigest
+    spec.digest === spec.provenance.artifactDigest &&
+    spec.digest === spec.currentArtifactDigest
   const ticketsProven =
+    tickets.bindingVerified === true &&
     ticketsProofErrors.length === 0 &&
-    tickets.manifestDigest === tickets.provenance.artifactDigest
+    tickets.manifestDigest === tickets.provenance.artifactDigest &&
+    tickets.manifestDigest === tickets.currentArtifactDigest
   const ticketsBound =
     specProven &&
     ticketsProven &&
@@ -482,22 +825,64 @@ function phaseRouteErrors({
   const approvalBound =
     ownerApprovalErrors(approval, tickets.manifestDigest).length === 0
 
-  if (from === 'wayfinder' && next !== 'to-spec') {
-    errors.push('completed Wayfinder map can route only to to-spec')
+  if (
+    ['to-tickets', 'owner-approval'].includes(current) ||
+    implementationGatePhases.has(current)
+  ) {
+    if (!specProven) {
+      errors.push('current accepted spec lacks verified to-spec provenance')
+    }
   }
-  if (['to-tickets', 'implementation'].includes(next) && !specProven) {
-    errors.push('current accepted spec lacks verified to-spec provenance')
+  if (current === 'owner-approval' || implementationGatePhases.has(current)) {
+    if (!ticketsProven) {
+      errors.push('current ticket set lacks verified to-tickets provenance')
+    }
+    if (!ticketsBound) {
+      errors.push('current ticket set is not bound to the accepted spec')
+    }
   }
-  if (next === 'implementation' && !ticketsProven) {
-    errors.push('current ticket set lacks verified to-tickets provenance')
-  }
-  if (next === 'implementation' && !ticketsBound) {
-    errors.push('current ticket set is not bound to the accepted spec')
-  }
-  if (next === 'implementation' && !approvalBound) {
+  if (implementationGatePhases.has(current) && !approvalBound) {
     errors.push('owner ticket-granularity approval is absent or stale')
   }
 
+  const implementationAllowed = approvalBound
+  if (
+    implementationDispatch !==
+    (implementationAllowed ? 'allowed' : 'forbidden')
+  ) {
+    errors.push('Implementation dispatch does not match the four gates')
+  }
+
+  if (['independent-review', 'focused-re-review'].includes(previous)) {
+    const outcome = outcomes.get(previous)
+    if (current === 'independent-fix' && outcome !== 'failed') {
+      errors.push('independent fix requires a canonical failed review result')
+    }
+    if (current !== 'independent-fix' && outcome !== 'passed') {
+      errors.push('review may advance only from a canonical PASS result')
+    }
+  }
+  if (previous === 'owner-qa' && outcomes.get(previous) !== 'accepted') {
+    errors.push('release requires recorded owner-QA acceptance')
+  }
+  if (previous === 'release' && outcomes.get(previous) !== 'complete') {
+    errors.push('DONE requires complete release provenance')
+  }
+
+  return errors
+}
+
+function phaseReceiptErrors(state) {
+  const errors = [
+    ...currentMapBindingErrors(state.binding),
+    ...phaseTransitionErrors(state),
+  ]
+  if (state.mapStatus !== 'done') {
+    errors.push('current Wayfinder map status must be done')
+  }
+  if (state.mapNext !== state.current || state.mapNext !== state.next) {
+    errors.push('map route, current phase, and receipt Next on PASS disagree')
+  }
   return errors
 }
 
@@ -818,185 +1203,320 @@ const requireGlobalCoordinator = process.argv.includes(
 const globalCoordinatorFilesExist =
   existsSync(globalCoordinatorYamlPath) &&
   existsSync(globalCoordinatorSkillPath)
-assert(
-  !requireGlobalCoordinator || globalCoordinatorFilesExist,
-  'required installed global coordinator files exist',
-)
-const installedCoordinatorYaml = existsSync(globalCoordinatorYamlPath)
-  ? readFileSync(globalCoordinatorYamlPath, 'utf8')
-  : `interface:
+const portableCoordinatorYaml = `interface:
   display_name: "EQB Wayfinder"
   short_description: "Validated phase coordinator"
   default_prompt: "Use the explicit coordinator."
 policy:
   allow_implicit_invocation: false
 `
-const installedCoordinatorSkill = existsSync(globalCoordinatorSkillPath)
-  ? readFileSync(globalCoordinatorSkillPath, 'utf8')
-  : `---
+const portableCoordinatorSkill = `---
 name: coordinate-eqb-wayfinder
+description: Explicit fixture.
 disable-model-invocation: true
 ---
+Act only as the initiative's repository-read-only coordinator.
+Treat \`dispatch-protocols.md\` as the sole owner of legal transitions, gates, pauses, resumes, and successor routing.
+Preserve separate \`to-spec\` and \`to-tickets\` peers and both the owner ticket-granularity approval pause and owner-QA pause.
+Keep implementation, TDD, ordinary Standards + Spec review, ordinary fixes, verification, and commit together.
+Use a fresh peer only for a separately required independent lineage; failure is never an automatic retry.
+Create exactly one fresh peer with an official top-level task tool.
+Forbidden mechanics: Hook, Runner, daemon, worker, fork, recursive coordinator, successor subagent.
 `
+
+if (requireGlobalCoordinator) {
+  assert(
+    globalCoordinatorFilesExist,
+    'required installed global coordinator files exist',
+  )
+}
 assert(
-  coordinatorYamlErrors(installedCoordinatorYaml).length === 0,
-  `${
-    globalCoordinatorFilesExist ? 'installed' : 'portable fixture'
-  } global coordinator YAML is valid and implicit invocation remains disabled`,
+  coordinatorYamlErrors(portableCoordinatorYaml).length === 0,
+  'portable coordinator YAML parser accepts explicit-only policy fixture',
 )
 assert(
   coordinatorYamlErrors(
-    installedCoordinatorYaml.replace(
+    portableCoordinatorYaml.replace(
       'allow_implicit_invocation: false',
       'allow_implicit_invocation: true',
     ),
   ).some((error) => error.includes('must remain false')),
-  'global coordinator YAML rejects implicit invocation',
+  'portable coordinator YAML parser rejects implicit invocation',
 )
 assert(
-  /^disable-model-invocation:\s*true\s*$/m.test(installedCoordinatorSkill),
-  'global coordinator skill remains explicit-only',
+  coordinatorSkillErrors(portableCoordinatorSkill).length === 0,
+  'portable coordinator skill parser accepts the thin contract fixture',
 )
+assert(
+  coordinatorSkillErrors(
+    portableCoordinatorSkill.replace('repository-read-only', 'read-only-ish'),
+  ).some((error) => error.includes('repository-read-only')),
+  'portable coordinator skill parser rejects a lost read-only boundary',
+)
+if (requireGlobalCoordinator && globalCoordinatorFilesExist) {
+  const installedCoordinatorYaml = readFileSync(
+    globalCoordinatorYamlPath,
+    'utf8',
+  )
+  const installedCoordinatorSkill = readFileSync(
+    globalCoordinatorSkillPath,
+    'utf8',
+  )
+  assert(
+    coordinatorYamlErrors(installedCoordinatorYaml).length === 0,
+    'installed global coordinator YAML is valid and remains explicit-only',
+  )
+  assert(
+    coordinatorSkillErrors(installedCoordinatorSkill).length === 0,
+    'installed global coordinator skill preserves the thin coordination contract',
+  )
+}
 
 const fixtureSourceHead = '1'.repeat(40)
 const fixtureSpecCommit = '2'.repeat(40)
-const fixtureTicketsCommit = '3'.repeat(40)
 const fixtureApprovalCommit = '4'.repeat(40)
 const fixtureSpecDigest = 'a'.repeat(64)
 const fixtureTicketsDigest = 'b'.repeat(64)
-const verifiedPhaseProof = {
-  spec: {
-    accepted: true,
-    digest: fixtureSpecDigest,
-    provenance: {
-      skill: 'to-spec',
-      entrySkill: '/absolute/path/to/to-spec/SKILL.md',
-      committed: true,
-      sourceHead: fixtureSourceHead,
-      resultCommit: fixtureSpecCommit,
-      artifactPath: 'docs/cuts/example/spec.md',
-      artifactDigest: fixtureSpecDigest,
-      actualArtifactDigest: fixtureSpecDigest,
+const fixtureBindingDigest = 'c'.repeat(64)
+
+function verifiedProvenance(phase, digest = 'd'.repeat(64)) {
+  const skill = phaseEntrySkills.get(phase)
+  return {
+    skill,
+    entrySkill: skill === null ? 'none' : `/absolute/path/to/${skill}/SKILL.md`,
+    committed: true,
+    sourceHead: fixtureSourceHead,
+    resultCommit: fixtureSpecCommit,
+    artifactPath: `docs/cuts/example/${phase}.md`,
+    artifactDigest: digest,
+    actualArtifactDigest: digest,
+    currentArtifactDigest: digest,
+  }
+}
+
+function phaseFixture(previous, current) {
+  const specReady = current !== 'to-spec'
+  const ticketsReady = !['to-spec', 'to-tickets'].includes(current)
+  const approvalReady = implementationGatePhases.has(current)
+  const specProvenance = specReady
+    ? verifiedProvenance('to-spec', fixtureSpecDigest)
+    : {}
+  const ticketsProvenance = ticketsReady
+    ? verifiedProvenance('to-tickets', fixtureTicketsDigest)
+    : {}
+  const approval = approvalReady
+    ? {
+        committed: true,
+        actor: 'owner',
+        action: 'approve-ticket-granularity',
+        resultCommit: fixtureApprovalCommit,
+        recordPath: 'docs/cuts/example/phase-transition.md',
+        ticketManifestDigest: fixtureTicketsDigest,
+      }
+    : {}
+  const provenance = new Map()
+  if (phaseEntrySkills.has(previous)) {
+    provenance.set(
+      previous,
+      previous === 'to-spec'
+        ? specProvenance
+        : previous === 'to-tickets'
+          ? ticketsProvenance
+          : verifiedProvenance(previous),
+    )
+  }
+  const outcomes = new Map()
+  if (['independent-review', 'focused-re-review'].includes(previous)) {
+    outcomes.set(
+      previous,
+      current === 'independent-fix' ? 'failed' : 'passed',
+    )
+  }
+  if (previous === 'owner-qa') {
+    outcomes.set(previous, 'accepted')
+  }
+  if (previous === 'release') {
+    outcomes.set(previous, 'complete')
+  }
+
+  return {
+    previous,
+    current,
+    next: current,
+    terminal: current === 'DONE',
+    implementationDispatch: approvalReady ? 'allowed' : 'forbidden',
+    mapStatus: 'done',
+    mapNext: current,
+    binding: {
+      verified: true,
+      commit: fixtureSpecCommit,
+      artifactPath: 'docs/cuts/example/map.md',
+      artifactDigest: fixtureBindingDigest,
+      ancestor: true,
+      committedArtifactDigest: fixtureBindingDigest,
+      currentArtifactDigest: fixtureBindingDigest,
     },
-  },
-  tickets: {
-    manifestDigest: fixtureTicketsDigest,
-    boundSpecDigest: fixtureSpecDigest,
-    provenance: {
-      skill: 'to-tickets',
-      entrySkill: '/absolute/path/to/to-tickets/SKILL.md',
-      committed: true,
-      sourceHead: fixtureSpecCommit,
-      resultCommit: fixtureTicketsCommit,
-      artifactPath: 'docs/cuts/example/ticket-set.manifest',
-      artifactDigest: fixtureTicketsDigest,
-      actualArtifactDigest: fixtureTicketsDigest,
-    },
-  },
-  approval: {
+    provenance,
+    outcomes,
+    spec: specReady
+      ? {
+          accepted: true,
+          path: 'docs/cuts/example/spec.md',
+          digest: fixtureSpecDigest,
+          currentArtifactDigest: fixtureSpecDigest,
+          provenance: specProvenance,
+        }
+      : { provenance: {} },
+    tickets: ticketsReady
+      ? {
+          bindingVerified: true,
+          manifestPath: 'docs/cuts/example/ticket-set.manifest',
+          manifestDigest: fixtureTicketsDigest,
+          currentArtifactDigest: fixtureTicketsDigest,
+          boundSpecDigest: fixtureSpecDigest,
+          provenance: ticketsProvenance,
+        }
+      : { provenance: {} },
+    approval,
+  }
+}
+
+for (const [previous, nextPhases] of legalPhaseTransitions) {
+  for (const current of nextPhases) {
+    assert(
+      phaseReceiptErrors(phaseFixture(previous, current)).length === 0,
+      `legal phase progression passes: ${previous} -> ${current}`,
+    )
+  }
+}
+
+const staleBindingFixture = phaseFixture('wayfinder', 'to-spec')
+staleBindingFixture.binding.currentArtifactDigest = 'e'.repeat(64)
+assert(
+  currentMapBindingErrors(staleBindingFixture.binding).some((error) =>
+    error.includes('current bytes'),
+  ),
+  'stale or mismatched current-map binding fails closed',
+)
+
+for (const [previous, current] of [
+  ['wayfinder', 'implementation'],
+  ['to-spec', 'implementation'],
+  ['to-spec', 'release'],
+]) {
+  const invalid = phaseFixture('owner-approval', 'implementation')
+  invalid.previous = previous
+  invalid.current = current
+  invalid.next = current
+  invalid.mapNext = current
+  invalid.provenance.set(previous, verifiedProvenance(previous))
+  assert(
+    phaseReceiptErrors(invalid).some((error) =>
+      error.includes(`illegal phase transition: ${previous} -> ${current}`),
+    ),
+    `unlisted phase edge fails closed: ${previous} -> ${current}`,
+  )
+}
+
+const toTicketsBypass = phaseFixture('to-tickets', 'owner-approval')
+toTicketsBypass.current = 'implementation'
+toTicketsBypass.next = 'implementation'
+toTicketsBypass.mapNext = 'implementation'
+assert(
+  phaseReceiptErrors(toTicketsBypass).some((error) =>
+    error.includes('illegal phase transition: to-tickets -> implementation'),
+  ) &&
+    phaseReceiptErrors(toTicketsBypass).some((error) =>
+      error.includes('owner ticket-granularity approval is absent or stale'),
+    ),
+  'to-tickets cannot bypass owner approval into implementation',
+)
+
+const unknownRouteFixture = phaseFixture('wayfinder', 'to-spec')
+unknownRouteFixture.current = 'mystery-route'
+unknownRouteFixture.next = 'mystery-route'
+unknownRouteFixture.mapNext = 'mystery-route'
+assert(
+  phaseReceiptErrors(unknownRouteFixture).some((error) =>
+    error.includes('unknown current phase route kind'),
+  ),
+  'unknown route kinds fail closed',
+)
+
+const malformedProvenanceFixture = phaseFixture('wayfinder', 'to-spec')
+malformedProvenanceFixture.provenance.set('wayfinder', {
+  ...malformedProvenanceFixture.provenance.get('wayfinder'),
+  sourceHead: 'short-commit',
+})
+assert(
+  phaseReceiptErrors(malformedProvenanceFixture).some((error) =>
+    error.includes('provenance is incomplete or malformed'),
+  ),
+  'missing or malformed completed-phase provenance fails closed',
+)
+
+const specDigestMismatch = phaseFixture('to-spec', 'to-tickets')
+specDigestMismatch.spec.currentArtifactDigest = 'e'.repeat(64)
+assert(
+  phaseReceiptErrors(specDigestMismatch).some((error) =>
+    error.includes('verified to-spec provenance'),
+  ),
+  'accepted-spec digest mismatch fails closed',
+)
+
+const ticketDigestMismatch = phaseFixture('to-tickets', 'owner-approval')
+ticketDigestMismatch.tickets.currentArtifactDigest = 'e'.repeat(64)
+assert(
+  phaseReceiptErrors(ticketDigestMismatch).some((error) =>
+    error.includes('verified to-tickets provenance'),
+  ),
+  'ticket-set digest mismatch fails closed',
+)
+
+for (const approvalMutation of [
+  {},
+  {
     committed: true,
     actor: 'owner',
     action: 'approve-ticket-granularity',
     resultCommit: fixtureApprovalCommit,
     recordPath: 'docs/cuts/example/phase-transition.md',
-    ticketManifestDigest: fixtureTicketsDigest,
+    ticketManifestDigest: 'e'.repeat(64),
   },
+]) {
+  const staleApprovalFixture = phaseFixture(
+    'owner-approval',
+    'implementation',
+  )
+  staleApprovalFixture.approval = approvalMutation
+  staleApprovalFixture.implementationDispatch = 'forbidden'
+  assert(
+    phaseReceiptErrors(staleApprovalFixture).some((error) =>
+      error.includes('owner ticket-granularity approval is absent or stale'),
+    ),
+    'missing or stale owner approval fails closed',
+  )
 }
 
+const passedReviewToFix = phaseFixture(
+  'independent-review',
+  'independent-fix',
+)
+passedReviewToFix.outcomes.set('independent-review', 'passed')
 assert(
-  phaseRouteErrors({
-    from: 'wayfinder',
-    next: 'implementation',
-    ...verifiedPhaseProof,
-  }).some((error) =>
-    error.includes('completed Wayfinder map can route only to to-spec'),
+  phaseReceiptErrors(passedReviewToFix).some((error) =>
+    error.includes('requires a canonical failed review result'),
   ),
-  'completed Wayfinder map rejects direct implementation',
+  'a passing independent review cannot route to a fix peer',
 )
+
+const failedReviewToRelease = phaseFixture('independent-review', 'release')
+failedReviewToRelease.outcomes.set('independent-review', 'failed')
 assert(
-  phaseRouteErrors({
-    from: 'to-tickets',
-    next: 'implementation',
-    spec: { accepted: true, path: 'spec.md' },
-    tickets: { paths: ['tickets/01.md'] },
-  }).some((error) => error.includes('verified to-spec provenance')) &&
-    phaseRouteErrors({
-      from: 'to-tickets',
-      next: 'implementation',
-      spec: { accepted: true, path: 'spec.md' },
-      tickets: { paths: ['tickets/01.md'] },
-    }).some((error) => error.includes('verified to-tickets provenance')),
-  'spec and ticket filenames without phase proof reject implementation',
-)
-assert(
-  phaseRouteErrors({
-    from: 'to-tickets',
-    next: 'implementation',
-    ...verifiedPhaseProof,
-    tickets: {
-      ...verifiedPhaseProof.tickets,
-      boundSpecDigest: 'c'.repeat(64),
-    },
-  }).some((error) => error.includes('not bound to the accepted spec')),
-  'ticket set bound to another spec rejects implementation',
-)
-assert(
-  phaseRouteErrors({
-    from: 'to-tickets',
-    next: 'implementation',
-    ...verifiedPhaseProof,
-    spec: {
-      ...verifiedPhaseProof.spec,
-      provenance: {
-        ...verifiedPhaseProof.spec.provenance,
-        sourceHead: 'short-commit',
-      },
-    },
-  }).some((error) => error.includes('verified to-spec provenance')),
-  'malformed phase provenance rejects implementation',
-)
-assert(
-  phaseRouteErrors({
-    from: 'to-tickets',
-    next: 'implementation',
-    ...verifiedPhaseProof,
-    tickets: {
-      ...verifiedPhaseProof.tickets,
-      provenance: {
-        ...verifiedPhaseProof.tickets.provenance,
-        actualArtifactDigest: 'c'.repeat(64),
-      },
-    },
-  }).some((error) => error.includes('verified to-tickets provenance')),
-  'stale artifact digest rejects implementation',
-)
-assert(
-  phaseRouteErrors({
-    from: 'to-tickets',
-    next: 'implementation',
-    ...verifiedPhaseProof,
-    approval: {},
-  }).some((error) =>
-    error.includes('owner ticket-granularity approval is absent'),
+  phaseReceiptErrors(failedReviewToRelease).some((error) =>
+    error.includes('canonical PASS result'),
   ),
-  'missing owner ticket-granularity approval rejects implementation',
-)
-assert(
-  phaseRouteErrors({
-    from: 'wayfinder',
-    next: 'to-spec',
-  }).length === 0 &&
-    phaseRouteErrors({
-      from: 'to-spec',
-      next: 'to-tickets',
-      spec: verifiedPhaseProof.spec,
-    }).length === 0 &&
-    phaseRouteErrors({
-      from: 'to-tickets',
-      next: 'implementation',
-      ...verifiedPhaseProof,
-    }).length === 0,
-  'Wayfinder to to-spec to to-tickets to owner approval to implementation passes',
+  'a failed independent review cannot advance without a selected fix',
 )
 
 assert(
@@ -1041,67 +1561,37 @@ for (const routeKind of reviewRouteKinds) {
   )
 }
 
-const currentWayfinderResultCommit = markdownField(
+const currentHead = execFileSync('git', ['rev-parse', 'HEAD'], {
+  cwd: ROOT,
+  encoding: 'utf8',
+}).trim()
+const currentPaperPhaseState = parsePhaseReceipt(
   currentPaperPhase,
-  'Wayfinder result commit',
+  currentPaperMap,
+  currentHead,
 )
-const currentWayfinderArtifact = markdownField(
-  currentPaperPhase,
-  'Wayfinder artifact',
-)
-const currentWayfinderProof = {
-  skill: 'wayfinder',
-  entrySkill: markdownField(currentPaperPhase, 'Wayfinder entry skill'),
-  committed:
-    markdownField(currentPaperPhase, 'Wayfinder provenance') === 'verified',
-  sourceHead: markdownField(currentPaperPhase, 'Wayfinder source HEAD'),
-  resultCommit: currentWayfinderResultCommit,
-  artifactPath: currentWayfinderArtifact,
-  artifactDigest: markdownField(
-    currentPaperPhase,
-    'Wayfinder artifact SHA-256',
-  ),
-  actualArtifactDigest:
-    fullCommitPattern.test(currentWayfinderResultCommit ?? '') &&
-    /^docs\/.+/.test(currentWayfinderArtifact ?? '')
-      ? committedArtifactDigest(
-          currentWayfinderResultCommit,
-          currentWayfinderArtifact,
-        )
-      : '',
-}
+const currentPaperPhaseErrors = phaseReceiptErrors(currentPaperPhaseState)
 assert(
-  artifactProofErrors(currentWayfinderProof, 'wayfinder').length === 0,
-  'current paper Wayfinder provenance resolves to the committed artifact digest',
+  currentPaperPhaseErrors.length === 0,
+  `current paper initiative generically validates at ${currentPaperPhaseState.previous} -> ${currentPaperPhaseState.current}${
+    currentPaperPhaseErrors.length
+      ? ` (${currentPaperPhaseErrors.join('; ')})`
+      : ''
+  }`,
 )
 assert(
-  /^Current phase:\s*to-spec\s*$/m.test(currentPaperPhase) &&
-    /^Next on PASS:\s*to-spec\s*$/m.test(currentPaperPhase) &&
-    /^To-spec provenance:\s*pending\s*$/m.test(currentPaperPhase) &&
-    /^To-tickets provenance:\s*pending\s*$/m.test(currentPaperPhase) &&
-    /^Owner ticket-granularity approval:\s*pending\s*$/m.test(
-      currentPaperPhase,
-    ) &&
-    /^Implementation dispatch:\s*forbidden\s*$/m.test(currentPaperPhase),
-  'current paper initiative stops at the fresh to-spec frontier',
+  currentPaperPhaseState.current !== 'to-spec' ||
+    (!currentPaperPhaseState.spec.provenance.committed &&
+      !currentPaperPhaseState.tickets.provenance.committed &&
+      currentPaperPhaseState.approval.committed !== true),
+  'a pending to-spec frontier has no fabricated later-phase provenance',
 )
 assert(
-  /^Status:\s*done\s*$/m.test(currentPaperMap) &&
-    /^Next on PASS:\s*to-spec\s*$/m.test(currentPaperMap) &&
-    currentPaperMap.includes('phase-transition.md'),
-  'current paper Wayfinder map routes only to the phase receipt to-spec frontier',
-)
-assert(
-  currentPaperSpec.includes(
-    'Status: historical Wayfinder synthesis; not accepted for current dispatch',
-  ) &&
-    currentPaperSpec.includes('Tickets 02–29 are not') &&
-    currentPaperPhase.includes('old Ticket 01 → Ticket 02') &&
-    /^Status:\s*done\s*$/m.test(currentPaperTicket01) &&
+  /^Status:\s*done\s*$/m.test(currentPaperTicket01) &&
     currentPaperPhase.includes(
       '2c7435026923db6b359e3770f22fdd11ed7d3c01',
     ),
-  'current paper route preserves Ticket 01 and parks Tickets 02-29',
+  'current paper route preserves the completed Ticket 01 result',
 )
 
 section('canonical handoff')
@@ -1352,12 +1842,15 @@ assert(
   'model routing preserves the owner-approved role matrix',
 )
 assert(
-  issueTracker.includes('Development phase transition') &&
-    compact(issueTracker).includes('single canonical owner of its semantics') &&
-    compact(dispatch).includes('passes all implementation gates owned by') &&
-    compact(workflow).includes('phase receipt defined by') &&
+  dispatch.includes('Closed development phase state machine') &&
+    dispatch.includes('Implementation gates') &&
+    dispatch.includes('Pause and resume') &&
+    compact(issueTracker).includes('owns storage paths and field shape only') &&
+    compact(workflow).includes(
+      'legal transitions and gates live in `../agents/dispatch-protocols.md`',
+    ) &&
     compact(cutWorkflow).includes(
-      'Every arrow is validated through the phase receipt',
+      'closed state machine, gates, pauses, and successor routing',
     ),
   'phase receipt has one detailed owner and concise authority pointers',
 )
@@ -1365,15 +1858,18 @@ assert(
   agents.includes('sole agent-side dispatch exception') &&
     dispatch.includes('Owner-started Wayfinder coordinator exception') &&
     dispatch.includes('$coordinate-eqb-wayfinder') &&
-    issueTracker.includes('dispatchable frontier') &&
     workflow.includes('sole agent-side exception'),
   'current authorities authorize only the explicit Wayfinder coordinator',
 )
 assert(
-  dispatch.includes('Desktop Stop Hook bridge') &&
-    dispatch.includes('explicit App Server Runner') &&
-    dispatch.includes('must never be enabled, retried, resumed'),
-  'retired Auto-Next routes cannot become coordinator fallbacks',
+  !existsSync(resolve(ROOT, 'docs/cuts/codex-matt-governance')) &&
+    [agents, dispatch, readme, workflow, cutWorkflow].every(
+      (source) =>
+        !/Desktop Stop Hook|App Server Runner|Auto-Next|agent-entrypoint/.test(
+          source,
+        ),
+    ),
+  'retired governance cut and repeated route tombstones are absent',
 )
 
 section('owner QA')

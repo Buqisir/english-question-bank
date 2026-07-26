@@ -12,8 +12,7 @@ File: `codex-matt-workflow.md`
 Use it to choose `grill-with-docs`, Wayfinder, spec/tickets, implementation,
 review, handoff, QA, and shipping. Manual owner dispatch is the default; the
 sole agent-side exception is an owner-explicit `$coordinate-eqb-wayfinder`
-under `../agents/dispatch-protocols.md`. Historical Auto-Next documents do not
-route current work.
+under `../agents/dispatch-protocols.md`.
 
 ### Product and engineering workflow
 

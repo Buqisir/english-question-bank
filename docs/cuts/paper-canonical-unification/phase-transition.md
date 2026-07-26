@@ -1,11 +1,16 @@
 # Paper canonical unification phase transition
 
 Status: active
+Previous phase: wayfinder
 Current phase: to-spec
 Next on PASS: to-spec
 Terminal: no
 
 Wayfinder map: `docs/cuts/paper-canonical-unification/wayfinder/map.md`
+Current map binding: verified
+Current map binding commit: `93bfe6b94d2ce22fb010382cda44c341cbf5ec8c`
+Current map artifact: `docs/cuts/paper-canonical-unification/wayfinder/map.md`
+Current map artifact SHA-256: `f81e51d263634354ce3d43129e1a507f992b5bb6a591d9dcd88c797710088f19`
 Wayfinder status: done
 Wayfinder provenance: verified
 Wayfinder entry skill: `/Users/huangxuewei/.claude/skills/wayfinder/SKILL.md`
@@ -16,8 +21,12 @@ Wayfinder artifact SHA-256: `7522e857854e41ed7c6ad2caa735bb80cd234d4169f1ab9983a
 
 To-spec provenance: pending
 Accepted spec: none
+Accepted spec SHA-256: pending
 To-tickets provenance: pending
 Ticket-set binding: pending
+Ticket-set manifest: pending
+Ticket-set manifest SHA-256: pending
+Ticket-set accepted-spec SHA-256: pending
 Owner ticket-granularity approval: pending
 Implementation dispatch: forbidden
 

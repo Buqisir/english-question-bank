@@ -77,19 +77,9 @@ docs/cuts/<feature>/wayfinder/
 ```
 
 Charting is one task. Resolving one decision ticket is one fresh top-level
-task. When the map is clear, close it without synthesizing a spec or
-implementation tickets. Then cross these fresh top-level boundaries in order:
-
-```text
-Wayfinder done
-  → to-spec
-  → to-tickets
-  → owner ticket-granularity approval
-  → one fresh implementation task per approved ticket
-```
-
-Every arrow is validated through the phase receipt defined by
-`../agents/issue-tracker.md`. No phase infers, merges, or impersonates the next.
+task. When the map is clear, use the field schema in
+`../agents/issue-tracker.md` and the closed state machine, gates, pauses, and
+successor routing in `../agents/dispatch-protocols.md`.
 
 Wayfinder never implements production code.
 
@@ -136,18 +126,9 @@ implementation base as `Fixed point` and the implementation HEAD as
 `Expected HEAD`. Normal work relies on `$implement`'s review unless the owner
 requests another.
 
-After a Must Fix repair, the focused re-review uses the previously reviewed
-HEAD as `Fixed point` and the new fix HEAD as `Expected HEAD`. It checks only
-the previous Must Fix, the fix diff, and direct regressions; it does not reopen
-reviewed history. Continue blocking only for a concrete, substantive defect in
-or left by the fix diff that makes the implementation wrong, unsafe, or
-contrary to the accepted spec.
-
-Review ends as soon as there are no substantive Must Fix findings, then moves
-to owner QA or shipping with no further CR. Wording, formatting, historical
-narrative, theoretical boundaries, and unrelated improvements do not block.
-One fresh independent review means one review lineage, not a new full review
-after every fix.
+The review/fix transition and focused re-review scope are owned by
+`../agents/dispatch-protocols.md`. Product risk decides whether that independent
+lineage is required; it does not create a second ordinary review phase.
 
 ## 8. QA
 
@@ -194,5 +175,4 @@ mixed tickets, or stalled rereading are behavioral stop signals.
 
 The next top-level task is opened manually by default; the sole agent-side
 exception is the owner-explicit coordinator defined in
-`../agents/dispatch-protocols.md`. Historical `agent-entrypoint.md`, relay
-ledgers, and Auto-Next lifecycle records never route new work.
+`../agents/dispatch-protocols.md`.

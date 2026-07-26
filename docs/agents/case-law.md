@@ -17,37 +17,8 @@
 - **显式 Wayfinder 薄协调成为唯一 agent 派发例外（owner 拍板）**：手工
   dispatch 仍是默认；只有 owner 显式调用全局
   `$coordinate-eqb-wayfinder`，且已建图并有 durable frontier，才允许一个
-  repo 只读 coordinator 在同一 saved worktree 单步创建 fresh peer。研究/
-  原型可沿路继续；owner 输入、grilling、QA、阻塞、歧义、错路或循环即停。
-  Review FAIL 可按已验证 handoff 转 fresh fix，但不是 retry；闭图后可沿
-  durable Next 走到 release/DONE。Stop Hook bridge 与 App Server Runner
-  永久退役，不得启用或重试。→ 固化 `AGENTS.md`、
-  `dispatch-protocols.md`、`issue-tracker.md`、`model-routing.md`。
-
-## 2026-07-23
-
-- **Auto-Next 全面退役，Matt 原生手工开发接管（owner 拍板）**：迁移到
-  Codex 后，为了模拟长期主协调 Agent，项目叠加 direct successor、
-  live-state、relay ledger、独立 verification/CR/RM 与模型派发证据。
-  实战出现顶层任务误开成 subagent、错误拓扑沿链继承，以及围绕
-  `agent-entrypoint.md` 措辞反复修验审、流程工作超过产品工作的失控。
-  Owner 决定不再修补自动接力：owner 手工创建每个顶层任务；普通功能走
-  Matt 的 `grill-with-docs → to-spec → to-tickets → fresh implement per
-  ticket`；巨大迷雾才 Wayfinder；skill 内部明确规定的 research/review
-  worker 可用，但永不成为 successor；高风险面只额外加一次独立顶层
-  review。→ 固化 `AGENTS.md`、
-  `docs/steering/codex-matt-workflow.md`、
-  `docs/agents/dispatch-protocols.md`。
-
-## 2026-07-21
-
-- **Workflow 标准刀路由退役（owner 裁决）**：标准刀不再进入
-  `.claude/workflows/cut-pipeline.js`。PM 恢复逐阶段直接派 DEV / CR，亲跑
-  narrow + `tsc` + full verify；不以 verify agent 代位复核。Medium / Large
-  恢复 fresh CR，`cr.md` 成为 RM 必需 artifact；entrypoint 按需，默认路由是
-  `plan.md`。PM 与 RM 合一为阿澈（Codex Sol / max）；PA=Sol / high（不可逆
-  才 xhigh）、DEV=Terra / medium（gnarly 才 high）、CR=Sol / high（Big CR
-  才 xhigh）。旧 Workflow 判例、历史 cuts 与 STATUS 仅作历史记录。
+  repo 只读 coordinator 在同一 saved worktree 单步创建一个 fresh peer。
+  完整状态机、门禁与暂停规则只在 `dispatch-protocols.md`。
 
 ## 2026-07-17
 

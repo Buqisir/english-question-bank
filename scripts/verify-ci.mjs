@@ -37,6 +37,7 @@ const registry = {
   'scripts/verify-print-renderer.mjs',
   'scripts/verify-figure-render.mjs',
   'scripts/verify-architecture-housekeeping.mjs',
+  'scripts/verify-dev-completion-report-contract.mjs',
   'scripts/verify-motion-tokens.mjs',
   'scripts/verify-lecture-panel-css.mjs',
   'scripts/verify-radius-family.mjs',

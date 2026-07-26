@@ -1,7 +1,8 @@
 # Manual task routing and completion exits
 
 This file is the single canonical owner of EQB's detailed top-level task
-boundary, completion-exit policy, and new-task handoff format.
+boundary, closed phase state machine, completion-exit policy, pause/resume
+rules, successor routing, and new-task handoff format.
 
 ## Dispatch and handoff
 
@@ -32,26 +33,83 @@ create and compactly wait on exactly one fresh peer at a time in the
 initiative's same exact saved worktree. It may not delegate, fork, resume,
 create another coordinator, or overlap writers.
 
-Wayfinder research and prototype tickets may continue through their validated
-durable routes. Grilling, owner input, owner QA, `needs-attention`, `BLOCKED`,
-malformed state, route mismatch, cycles, or context uncertainty pause
-coordination. A canonical review-failure handoff may select one fresh fix task
-only when the tracked workflow validates that route; this is a fix transition,
-not an automatic retry.
+The global skill executes the project authorities in this file,
+`issue-tracker.md`, `model-routing.md`, and
+`owner-qa-handoff-template.md`. It does not own or copy their detailed rules.
 
-When the map closes, its only legal successor is one fresh `$to-spec` task,
-followed by one fresh `$to-tickets` task. The coordinator then pauses for
-explicit owner ticket-granularity approval. Only after the phase receipt passes
-all implementation gates owned by `issue-tracker.md` may a later explicit
-resume follow the durable route through implementation, review, fix, the
-owner-QA boundary, release, and `DONE`. Owner QA remains a pause for owner
-acceptance, never a peer the coordinator creates. The global skill owns the
-complete validation, dispatch, observation, ledger, resume, and stop loop;
-this file owns only project authorization and completion routing.
+### Closed development phase state machine
 
-The Desktop Stop Hook bridge and explicit App Server Runner are retired
-historical evidence. They are not dispatch exceptions or activation
-candidates and must never be enabled, retried, resumed, or used as a fallback.
+These route kinds and edges are closed. Unknown route kinds and every unlisted
+edge fail:
+
+| Completed durable phase | Legal next phase |
+| --- | --- |
+| `wayfinder` | `to-spec` |
+| `to-spec` | `to-tickets` |
+| `to-tickets` | `owner-approval` |
+| `owner-approval` | `implementation`, after all four implementation gates pass |
+| `implementation` | `implementation`, `independent-review`, `owner-qa`, or `release` |
+| `independent-review` | `independent-fix` on a canonical failed result; `owner-qa` or `release` on PASS |
+| `independent-fix` | `focused-re-review` |
+| `focused-re-review` | `independent-fix` on a canonical failed result; `owner-qa` or `release` on PASS |
+| `owner-qa` | `release` after owner acceptance |
+| `release` | `DONE` |
+| `DONE` | none |
+
+`Current phase`, receipt `Next on PASS`, and map `Next on PASS` must be the
+same exact route kind. The receipt's `Previous phase` must have complete
+committed provenance under the field schema in `issue-tracker.md`. The map
+must also have a current-route binding: its binding commit is an ancestor of
+HEAD, the artifact exists at that commit, the committed and current bytes both
+match the bound SHA-256, and the three route fields above agree. Missing,
+malformed, stale, contradictory, or unbound evidence fails closed at the
+earliest unproven phase.
+
+The historical `$wayfinder` result and a later governance route correction are
+different provenance. A route-binding commit must be described as governance,
+not as execution by `$wayfinder`.
+
+### Implementation gates
+
+Implementation is forbidden until all four gates verify:
+
+1. the accepted spec has committed `$to-spec` provenance and its current
+   SHA-256 matches;
+2. the ticket-set manifest has committed `$to-tickets` provenance and its
+   current SHA-256 matches;
+3. the ticket-set receipt binds that exact accepted-spec SHA-256;
+4. the owner's committed ticket-granularity approval binds that exact
+   ticket-set manifest SHA-256.
+
+Filenames, directory existence, prose claims, historical chat, and old
+handoffs satisfy none of these gates.
+
+### Review and fix routes
+
+One implementation task keeps implementation, TDD, ordinary Standards + Spec
+review, ordinary fixes, verification, and commit together. Those ordinary
+activities never become successor phases.
+
+A fresh peer is used only for a separately required independent review
+lineage. Only a canonical failed result from that lineage may select one fresh
+`independent-fix` peer. The next review is the focused re-review in the same
+lineage; a review failure authorizes no automatic retry or refill.
+
+### Pause and resume
+
+Coordination pauses at `owner-approval` until the owner commits approval of the
+exact ticket-set digest and explicitly resumes. It also pauses at `owner-qa`
+after the exact checkable state is provisioned, and for grilling or other
+owner input, `needs-attention`, `BLOCKED`, dirty or mismatched repository
+state, malformed evidence, route mismatch, duplicate dispatch, cycles, or lost
+ledger certainty.
+
+Resume requires another full preflight of the saved worktree, branch, HEAD,
+clean state, fixed point, current committed map/receipt, route binding,
+provenance, gates, model route, and absence of another writer. A pause never
+authorizes retry, refill, a replacement root, or a second concurrent writer.
+`DONE` requires `Terminal: yes` and proof that no ticket, independent review,
+owner QA, release, or closeout remains.
 
 ## Durable route on every ticket
 

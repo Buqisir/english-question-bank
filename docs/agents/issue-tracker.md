@@ -75,56 +75,75 @@ Terminal: yes | no
 ```
 
 Each decision ticket holds one precise question and its eventual resolution.
-One top-level task resolves at most one Wayfinder ticket. The map links to the
-closed ticket and records only a one-line gist.
-
-Ticket types are `research`, `prototype`, `grilling`, and `task`. Every ticket
-also records `Status`, `Claim`, `Blocked by`, `Next on PASS`, and `Terminal`.
-Blocking edges are explicit; a dispatchable frontier is one open, unclaimed,
-unblocked ticket selected by the map's durable route, not every plausible open
-ticket.
-
-Under an owner-started coordinator, validated research and prototype routes
-may advance without another owner dispatch. Grilling or any owner-input need
-pauses. When decision mapping closes, its only legal successor kind is
-`to-spec`. A map never routes directly to `to-tickets`, implementation,
-review, fix, QA, release, or `DONE`.
-
-## Development phase transition
-
-Huge/foggy initiatives keep one tracked
-`docs/cuts/<feature>/phase-transition.md` receipt. This section is the single
-canonical owner of its semantics. The legal route kinds are distinct:
+Its field schema is:
 
 ```text
-Wayfinder decision → to-spec → to-tickets → owner approval
-  → implementation → review/fix when required → owner QA → release → DONE
+Status: open | done
+Claim: unclaimed | <task id>
+Blocked by: <ticket titles | None>
+Next on PASS: <route kind or ticket path>
+Terminal: yes | no
+Type: research | prototype | grilling | task
 ```
 
-The receipt records the current phase and `Next on PASS`. Completed phases add
-verifiable provenance: the exact entry skill, source HEAD, result commit,
-artifact path, and SHA-256. A to-tickets result additionally records the exact
-accepted-spec SHA-256 it consumed and a ticket-set manifest SHA-256. Owner
-ticket-granularity approval records that same ticket-set manifest SHA-256.
+The map links closed tickets with one-line gists. Route and transition
+semantics live only in `dispatch-protocols.md`.
 
-An implementation route is dispatchable only when all four gates verify:
+## Development phase receipt
 
-1. the accepted spec has committed `$to-spec` provenance;
-2. the ticket set has committed `$to-tickets` provenance;
-3. the ticket-set receipt binds the current accepted-spec SHA-256;
-4. the owner's committed granularity approval binds the current ticket-set
-   manifest SHA-256.
+Huge/foggy initiatives keep one tracked
+`docs/cuts/<feature>/phase-transition.md` receipt. Its core field schema is:
 
-Filenames, directory existence, prose claims, historical chat, old handoffs,
-and historical model text satisfy none of these gates. Any absent, malformed,
-stale, or mismatched field fails closed at the earliest unproven phase.
-To-spec, to-tickets, implementation, review, owner QA, release, and `DONE`
-remain separate route kinds; no task may infer, skip, merge, or impersonate
-another.
+```text
+Status: active | done
+Previous phase: <route kind>
+Current phase: <route kind>
+Next on PASS: <route kind>
+Terminal: yes | no
+Wayfinder map: <repo-relative path>
+Current map binding: pending | verified
+Current map binding commit: <40-hex commit>
+Current map artifact: <repo-relative path>
+Current map artifact SHA-256: <64-hex digest>
+Implementation dispatch: forbidden | allowed
+```
 
-After a to-tickets task completes, an authorized coordinator always pauses.
-Only a later explicit owner resume, after approval is committed in the receipt,
-may select implementation.
+Every completed task phase uses this reusable provenance group, where
+`<Phase label>` is the human label for the exact route kind:
+
+```text
+<Phase label> provenance: pending | verified
+<Phase label> entry skill: <absolute SKILL.md path | none>
+<Phase label> source HEAD: <40-hex commit>
+<Phase label> result commit: <40-hex commit>
+<Phase label> artifact: <repo-relative path>
+<Phase label> artifact SHA-256: <64-hex digest>
+<Phase label> outcome: passed | failed | accepted | complete
+```
+
+`wayfinder`, `to-spec`, and `to-tickets` use the labels `Wayfinder`,
+`To-spec`, and `To-tickets`. The spec/ticket gates add:
+
+```text
+Accepted spec: <repo-relative path | none>
+Accepted spec SHA-256: <64-hex digest | pending>
+Ticket-set binding: pending | verified
+Ticket-set manifest: <repo-relative path | pending>
+Ticket-set manifest SHA-256: <64-hex digest | pending>
+Ticket-set accepted-spec SHA-256: <64-hex digest | pending>
+Owner ticket-granularity approval: pending | verified
+Owner approval actor: owner
+Owner approval action: approve-ticket-granularity
+Owner approval result commit: <40-hex commit>
+Owner approval record: <repo-relative path>
+Owner approval ticket-set manifest SHA-256: <64-hex digest>
+```
+
+Fields that belong to a pending phase may be omitted or use the shown pending
+sentinel. Once its status is `verified`, every field in that group is
+required. `dispatch-protocols.md` is the sole owner of allowed route kinds,
+legal transitions, implementation gates, pause/resume behavior, and successor
+routing; this file owns storage paths and field shape only.
 
 ## Optional assets
 

@@ -1,6 +1,6 @@
 # 当前状态（medium / large cut 收官时更新）
 
-Last updated: 2026-07-24（workflow skill attachment contract 发布；
+Last updated: 2026-07-26（Wayfinder 阶段治理校正；
 **生产仍为 5cabb5c**：本刀只改协作规则，不触发生产部署）
 
 下一步队列（2026-07-17 晚刷新，均未圈、owner 圈了再动）：
@@ -49,9 +49,8 @@ essay-grading 幸存件重建，判例已回流，远端 Buqisir/project-os 私�
 ## 主线焦点
 
 - 2026-07-26：**owner 显式 Wayfinder 薄协调治理发布**：手工派发仍为默认；
-  `$coordinate-eqb-wayfinder` 是唯一 agent 派发例外，仅从已建图 durable frontier
-  在同一 saved worktree 单步创建 fresh peer，遇 owner input/QA/阻塞/错路即停；
-  Stop Hook bridge 与 App Server Runner 保持退役且永不启用或重试，本次不动产品与生产。
+  `$coordinate-eqb-wayfinder` 是唯一 agent 派发例外，只执行当前 project authorities
+  验证过的 durable route；本次不动产品与生产。
 - 2026-07-25：**paper-normalization 发布门禁通过**：cloze/grammarFill canonical group 已成为
   PaperSurface、Print HTML 与 DOCX proof consumer 的共享语义事实；Print/PDF/DOCX 实物 owner QA 通过，
   Phase B focused re-review Standards + Spec PASS（0 Must Fix），`verify:all`
@@ -64,15 +63,6 @@ essay-grading 幸存件重建，判例已回流，远端 Buqisir/project-os 私�
 - 2026-07-24：**retained application-writing pilot 发布门禁通过**：保留原作文讲评，
   由 plain model 生成结构化复习卡；独立 Standards + Spec review PASS（0 Must Fix）、
   owner QA 通过，`verify:all` 84 PASS / 1 SKIP / 0 FAIL；生产部署不在本次范围。
-- 2026-07-23：**Matt-native 手工顶层任务流程为当前路由，取代 2026-07-22 的 relay/live-state 流程**；owner 手工新开每个顶层任务，任务只返回一个可复制 `Next`。
-  2026-07-22 的 governance/live-state、PA/verification/CR/RM 记录保留为历史证据，不得路由当前工作或授权自动接力、代理自行合并。
-  当前规则见 `docs/steering/codex-matt-workflow.md` 与 `docs/agents/model-routing.md`；生产仍为 `5cabb5c`，本次只修协作合同。
-  **历史账单**：旧 relay 的子代理 token 未回传，主代理出场未统计；详情仍见 `docs/cuts/codex-matt-governance/`。
-- 2026-07-21：**workflow-route-retire 收官**（PR #286，merge
-  `dfabfab`，fresh CR Round 2 APPROVE，5/5 Must Fix 闭环，main CI 全绿）：
-  标准刀 Workflow 路由退役，改为 PM 分阶段直接派工；PM+RM 合一但门禁
-  不降，Medium/Large 恢复 fresh CR，现行 Codex 档位统一为 Sol/Terra。
-  **账单**：子代理 token 工具未回传（DEV 1 轮、CR 2 轮）；主代理出场 ~6。
 - 2026-07-17 晚：**lecture-css-restore 收官（讲评面板样式失踪案）+
   paper-2026-i 九组话题标签 + 生产部署 5cabb5c**（merge 155489f，CI 绿）：
   retire 刀删 harness CSS 误伤五个活讲评面板（owner 报障→组件裸奔实锤）

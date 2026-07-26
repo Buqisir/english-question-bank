@@ -1,7 +1,7 @@
 # EQB × Matt development workflow
 
 This is the practical entry guide for developing EQB with Matt Pocock's
-current skills. It replaces the retired Auto-Next relay.
+current skills.
 
 ## The one picture
 
@@ -31,9 +31,7 @@ task.
 
 ## What manual means
 
-- no Auto-Next;
-- no `create_thread`, fork, or subagent successor;
-- no implicit, permanent, or self-replacing coordinator;
+- ordinary tasks return a handoff rather than dispatching a successor;
 - one writer task at a time in a feature worktree;
 - every passed non-terminal task returns the handoff declared by its ticket.
 
@@ -70,9 +68,8 @@ For a normal feature:
 For a completed Wayfinder map, `/to-spec` and `/to-tickets` are separate fresh
 top-level tasks. The map does not synthesize either artifact. After
 `/to-tickets`, implementation waits for the owner's durable approval of the
-ticket granularity. The phase receipt defined by
-`../agents/issue-tracker.md` is the only proof that these transitions ran;
-artifact names or directories are not phase evidence.
+ticket granularity. The field schema lives in `../agents/issue-tracker.md`;
+the legal transitions and gates live in `../agents/dispatch-protocols.md`.
 
 The ticket is the durable source of scope, acceptance, verification, and exit
 routing. Do not copy the ticket body into the next prompt.
@@ -84,7 +81,7 @@ routing. Do not copy the ticket body into the next prompt.
 - verify worktree, branch, HEAD, spec, and ticket;
 - implement only that ticket;
 - run focused checks and the full suite required by risk;
-- perform ordinary Standards + Spec review and fix findings;
+- perform ordinary Standards + Spec review and ordinary fixes;
 - commit the bounded result;
 - choose the exit declared by `Next on PASS`.
 
@@ -102,6 +99,8 @@ High-risk changes receive one fresh independent review lineage:
   and checks prior Must Fixes, the fix diff, and direct regressions.
 - A green lineage proceeds to owner QA or release; it does not restart a full
   review.
+- Only a canonical failed independent result may route to a fresh fix peer;
+  its focused re-review remains in the same lineage, never an automatic retry.
 
 User-visible work requires browser provisioning and owner acceptance under
 `../agents/owner-qa-handoff-template.md`.
@@ -150,7 +149,7 @@ Before merging:
 - `pnpm -C app run verify:all` or PR CI is green.
 
 The owner manually opens one ship task when shipping is a required successor,
-unless an already-authorized coordinator follows that exact durable route.
+unless the sole authorized coordinator follows the exact durable route.
 After merge, confirm `main` CI and update `docs/STATUS.md` briefly for material
 releases.
 

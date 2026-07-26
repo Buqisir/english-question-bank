@@ -155,12 +155,12 @@ must be confirmed green (AGENTS.md RM gate).
 | --- | --- | --- |
 | `verify-cut-artifacts.mjs` | Multi-session contract check: `node scripts/verify-cut-artifacts.mjs <cut-dir> <tier>` requires a non-empty `spec.md` or legacy plan for medium/large work; Matt-native flow has no standing CR/RM/cut-note artifact gate | no |
 | `verify-c8-forbidden-scope.mjs` | C8 cut-specific forbidden-scope audit (historical) | no |
+| `verify-dev-completion-report-contract.mjs` | Closed completion/phase-route/provenance contract. Portable CI validates parser fixtures and tracked receipts; `--require-global-coordinator` separately validates the two installed global coordinator files and is intentionally local-only. | yes |
 
 ## Miscellaneous / older Paper Intelligence cuts
 
 | Script | Scope |
 | --- | --- |
-| `verify-dev-completion-report-contract.mjs` | DEV completion report contract (steering ↔ template consistency) |
 | `verify-i0c-seven-choices-analysis-v1.mjs` | I0-C 七选五 analysis v1 asset contract |
 | `verify-i0d-seven-choices-surface.mjs` | I0-D 七选五 surface render contract |
 | `verify-paper-surface-interaction-model-doc.mjs` | PaperSurface interaction model doc |

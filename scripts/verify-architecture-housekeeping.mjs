@@ -54,6 +54,7 @@ assert('workflow install note includes server dependencies', workflowInstallNote
 
 const claudeInstructions = read('CLAUDE.md')
 const agentInstructions = read('AGENTS.md')
+const dispatchProtocol = read('docs/agents/dispatch-protocols.md')
 const issueTracker = read('docs/agents/issue-tracker.md')
 assert('CLAUDE delegates to AGENTS single source', claudeInstructions.includes('Read `AGENTS.md`') && claudeInstructions.includes('single source of truth'))
 assert('CLAUDE does not duplicate browser rules', !claudeInstructions.includes('Codex in-app browser'))
@@ -112,6 +113,10 @@ assert('verify-ci runs app build/typecheck', verifyCiPreflightLabels.includes('a
 assert('verify-ci keeps C7 import contracts in stable suite', verifyCiScripts.includes('scripts/verify-c7-paper-import-contracts.mjs'))
 assert('verify-ci keeps C8 draft paper contracts in stable suite', verifyCiScripts.includes('scripts/verify-c8-draft-paper-contracts.mjs'))
 assert('verify-ci keeps draft render contract in stable suite', verifyCiScripts.includes('scripts/verify-c8-draft-paper-render-model.mjs'))
+assert(
+  'verify-ci keeps the portable completion/phase contract in the stable suite',
+  verifyCiScripts.includes('scripts/verify-dev-completion-report-contract.mjs'),
+)
 assert('verify-ci excludes C8 forbidden-scope cut script', !verifyCiScripts.includes('scripts/verify-c8-forbidden-scope.mjs'))
 assert('verify-ci excludes host interaction cut forbidden-scope script', !verifyCiScripts.includes('scripts/verify-paper-surface-host-interaction.mjs'))
 
@@ -213,11 +218,10 @@ assert('workflow protocol follows Matt planning chain', cutWorkflow.includes('gr
 assert('workflow protocol assigns one fresh implementation task per ticket', cutWorkflow.includes('one fresh top-level `/implement` task per ready ticket'))
 assert('workflow protocol reserves Wayfinder for fog', cutWorkflow.includes('Wayfinder') && cutWorkflow.includes('Huge and foggy'))
 assert(
-  'workflow protocol makes post-Wayfinder phases explicit and fresh',
-  cutWorkflow.includes('close it without synthesizing a spec or') &&
-    cutWorkflow.includes('Wayfinder done') &&
-    cutWorkflow.includes('owner ticket-granularity approval') &&
-    cutWorkflow.includes('No phase infers, merges, or impersonates the next'),
+  'workflow protocol delegates post-Wayfinder phases to the canonical owner',
+  cutWorkflow.includes('field schema') &&
+    cutWorkflow.includes('closed state machine, gates, pauses, and') &&
+    cutWorkflow.includes('dispatch-protocols.md'),
 )
 assert('workflow protocol defines escalation signals', cutWorkflow.includes('CONTEXT INSUFFICIENT') && cutWorkflow.includes('SPEC CONTRADICTS'))
 assert(
@@ -239,7 +243,7 @@ assert(
   mattWorkflow.includes('fresh to-spec task') &&
     mattWorkflow.includes('fresh to-tickets task') &&
     mattWorkflow.includes('owner approves ticket granularity') &&
-    mattWorkflow.includes('artifact names or directories are not phase evidence'),
+    mattWorkflow.includes('legal transitions and gates live in'),
 )
 assert('Matt workflow defines one directly pasteable next-task block', mattWorkflow.includes('New top-level task:') && mattWorkflow.includes('Worktree:') && mattWorkflow.includes('Expected HEAD:'))
 assert('Matt workflow separates internal workers from relay', mattWorkflow.includes('internal Standards and Spec reviewers') && mattWorkflow.includes('never become the next ticket or phase'))
@@ -247,12 +251,14 @@ assert('Matt workflow separates internal workers from relay', mattWorkflow.inclu
 const modelRouting = read('docs/agents/model-routing.md')
 const paperPhase = read('docs/cuts/paper-canonical-unification/phase-transition.md')
 assert(
-  'issue tracker owns fail-closed phase provenance gates',
-  issueTracker.replace(/\s+/g, ' ').includes('single canonical owner of its semantics') &&
-    issueTracker.includes('committed `$to-spec` provenance') &&
-    issueTracker.includes('committed `$to-tickets` provenance') &&
+  'dispatch owns phase semantics while tracker owns field schema',
+  dispatchProtocol.includes('Closed development phase state machine') &&
+    dispatchProtocol.includes('Implementation gates') &&
+    dispatchProtocol.includes('Pause and resume') &&
+    issueTracker.replace(/\s+/g, ' ').includes('owns storage paths and field shape only') &&
+    issueTracker.includes('<Phase label> provenance') &&
     issueTracker.includes('ticket-set manifest SHA-256') &&
-    issueTracker.includes('Filenames, directory existence'),
+    !issueTracker.includes('Legal next phase'),
 )
 assert(
   'current model routing is Sol medium except reviews at high',
@@ -260,11 +266,24 @@ assert(
     modelRouting.includes('`gpt-5.6-sol` | `high`') &&
     modelRouting.includes('No current default EQB route uses `gpt-5.6-terra`'),
 )
+function markdownField(source, field) {
+  const escaped = field.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+  return source
+    .match(new RegExp(`^${escaped}:\\s*(.*?)\\s*$`, 'm'))?.[1]
+    ?.replace(/^`|`$/g, '')
+}
 assert(
-  'paper canonical initiative is parked at to-spec',
-  paperPhase.includes('Current phase: to-spec') &&
-    paperPhase.includes('Implementation dispatch: forbidden') &&
-    paperPhase.includes('Tickets 02–29 are non-dispatchable'),
+  'paper canonical phase receipt has an advance-safe current route binding',
+  Boolean(markdownField(paperPhase, 'Previous phase')) &&
+    markdownField(paperPhase, 'Current phase') ===
+      markdownField(paperPhase, 'Next on PASS') &&
+    markdownField(paperPhase, 'Current map binding') === 'verified' &&
+    /^[0-9a-f]{40}$/.test(
+      markdownField(paperPhase, 'Current map binding commit') ?? '',
+    ) &&
+    /^[0-9a-f]{64}$/.test(
+      markdownField(paperPhase, 'Current map artifact SHA-256') ?? '',
+    ),
 )
 
 const status = read('docs/STATUS.md')
@@ -272,15 +291,15 @@ assert(
   'STATUS records the current owner-explicit coordinator policy',
   status.includes('owner 显式 Wayfinder 薄协调治理发布') &&
     status.includes('$coordinate-eqb-wayfinder') &&
-    status.includes('Stop Hook bridge') &&
-    status.includes('App Server Runner') &&
-    status.includes('永不启用或重试'),
+    status.includes('唯一 agent 派发例外') &&
+    status.includes('project authorities'),
 )
 assert(
-  'STATUS preserves the retired Matt relay history',
-  status.includes('Matt-native 手工顶层任务流程') &&
-    status.includes('取代 2026-07-22') &&
-    status.includes('不得路由当前工作'),
+  'STATUS no longer points to retired governance mechanics',
+  !status.includes('docs/cuts/codex-matt-governance') &&
+    !status.includes('Matt-native 手工顶层任务流程') &&
+    !status.includes('Stop Hook bridge') &&
+    !status.includes('App Server Runner'),
 )
 
 const refactorRoadmap = read('docs/architecture/refactor-roadmap-2026-06.md')

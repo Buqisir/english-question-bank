@@ -4,9 +4,7 @@ This repository builds the English Question Bank workbench at `eqbank.cc`.
 `AGENTS.md` is the single source of truth for current project rules.
 `CLAUDE.md` points here instead of duplicating them.
 
-Historical cut records may describe retired PM / PA / DEV / CR / RM relays,
-Auto-Next, subagent dispatch, or `agent-entrypoint.md`. They are evidence, not
-instructions for current work.
+Historical cut records are evidence, not instructions for current work.
 
 ## Safety and scope
 
@@ -58,17 +56,17 @@ The sole agent-side dispatch exception is an owner-explicit invocation of
 `$coordinate-eqb-wayfinder` for an already-charted EQB Wayfinder initiative
 with a validated durable phase frontier. That coordinator stays
 repository-read-only and creates exactly one fresh top-level peer at a time in
-the same saved worktree. Its complete loop and pause rules live only in the
-global skill; project authorization, routing, tracker semantics, and QA
-boundaries live in the files named below.
-
-The Desktop Stop Hook bridge and explicit App Server Runner are retired
-historical evidence. Never enable, retry, or treat either as a current route.
+the same saved worktree.
 
 Detailed task-boundary, attachment, blocker, and handoff rules have one owner:
-`docs/agents/dispatch-protocols.md`. The full new-task template exists only
-there. Owner QA has a separate single owner:
-`docs/agents/owner-qa-handoff-template.md`.
+`docs/agents/dispatch-protocols.md`. It also owns the closed phase state
+machine, implementation gates, pause/resume rules, and successor routing.
+Tracked path and receipt/ticket field schema live in
+`docs/agents/issue-tracker.md`; the current model table lives in
+`docs/agents/model-routing.md`; owner QA has the separate single owner
+`docs/agents/owner-qa-handoff-template.md`. The global coordinator executes
+those project authorities without restating them. The full new-task template
+exists only in `dispatch-protocols.md`.
 
 ## Deterministic completion exit
 
@@ -107,7 +105,7 @@ to the owner as separate work.
   `tickets/`, optional Wayfinder artifacts, research, and QA evidence.
   `.scratch/` is same-session scratch only.
 - If context remains sharp, continue the current ticket. If it does not,
-  compact valuable context or make a bounded handoff; do not invent a relay.
+  compact valuable context or make a bounded handoff.
 
 ## Risk, review, and release
 
