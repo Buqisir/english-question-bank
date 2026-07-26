@@ -77,11 +77,26 @@ export type AbcdRendererFontClosure = {
 }
 
 export type VerifiedAbcdRendererFontClosure = AbcdRendererFontClosure
+export type AbcdRendererFontMaterial = {
+  readonly primary: {
+    readonly fontFaceId: string
+    readonly fontVersion: string
+    readonly fontBytes: Uint8Array
+  }
+  readonly fallbacks: readonly {
+    readonly fontFaceId: string
+    readonly characters: string
+    readonly fontVersion: string
+    readonly fontBytes: Uint8Array
+  }[]
+  readonly fontMetricsDigest: string
+  readonly shapingImplementationDigest: string
+}
 
 export function layoutAbcdOptionSet(optionSet: AbcdOptionSet): AbcdLayoutResult
 export const expectedAbcdRendererFontClosure: AbcdRendererFontClosure
 export function resolveAbcdRendererFontClosure(
-  candidate: AbcdRendererFontClosure,
+  candidate: AbcdRendererFontMaterial,
 ):
   | { readonly status: 'ready'; readonly closure: VerifiedAbcdRendererFontClosure }
   | {

@@ -69,18 +69,17 @@ for (const fixture of gold) {
   assert.match(result.rulesetRef.fontMetricsDigest, /^sha256:[0-9a-f]{64}$/)
 }
 
-const fontClosureResult = resolveAbcdRendererFontClosure(
-  structuredClone(expectedAbcdRendererFontClosure),
-)
-assert.equal(fontClosureResult.status, 'ready')
-const fontClosure = fontClosureResult.closure
 assert.deepEqual(
   resolveAbcdRendererFontClosure({
-    ...structuredClone(expectedAbcdRendererFontClosure),
     primary: {
-      ...expectedAbcdRendererFontClosure.primary,
-      fontFileSha256: 'sha256:unavailable',
+      fontFaceId: expectedAbcdRendererFontClosure.primary.fontFaceId,
+      fontVersion: expectedAbcdRendererFontClosure.primary.fontVersion,
+      fontBytes: new Uint8Array([0]),
     },
+    fallbacks: [],
+    fontMetricsDigest: expectedAbcdRendererFontClosure.fontMetricsDigest,
+    shapingImplementationDigest:
+      expectedAbcdRendererFontClosure.shapingImplementationDigest,
   }),
   {
     status: 'needs_review',
@@ -109,16 +108,6 @@ assert.throws(
   () => translateAbcdPlanToPaperSurface(plan),
   { code: 'ABCD_RENDERER_FONT_CLOSURE_UNAVAILABLE' },
 )
-const translations = [
-  translateAbcdPlanToPaperSurface(plan, fontClosure),
-  translateAbcdPlanToPrintPdf(plan, fontClosure),
-  translateAbcdPlanToDocx(plan, fontClosure),
-]
-assert.equal(translations.every(({ placementSignature }) =>
-  placementSignature === translations[0].placementSignature), true)
-assert.equal(translations.every(({ shrinkToFit }) => shrinkToFit === false), true)
-assert.equal(translations.every(({ clipping }) => clipping === 'forbidden'), true)
-
 const wrappable = layoutAbcdOptionSet(
   optionSet('wrappable', [
     Array.from({ length: 90 }, () => 'word').join(' '),
@@ -175,6 +164,7 @@ const corpusModes = {
   needs_review: 0,
 }
 const boundaryModes = new Map()
+const boundaryOptionSets = new Map()
 for (const { paperId, assetPath } of corpusFiles) {
   const asset = JSON.parse(readFileSync(assetPath, 'utf8'))
   for (const question of Object.values(asset.content.questions)) {
@@ -182,15 +172,19 @@ for (const { paperId, assetPath } of corpusFiles) {
       question.options?.length !== 4
       || question.options.map(({ label }) => label).join('') !== 'ABCD'
     ) continue
-    const selected = layoutAbcdOptionSet(optionSet(
+    const currentOptionSet = optionSet(
       question.questionId,
       question.options.map(({ text }) => text),
-    ))
+    )
+    const selected = layoutAbcdOptionSet(currentOptionSet)
     corpusModes[selected.mode || 'needs_review'] += 1
     if (
       ['q-2022-jia-021', 'q-2020-jia-030', 'q-2020-jia-035']
         .includes(question.questionId)
-    ) boundaryModes.set(question.questionId, selected.mode)
+    ) {
+      boundaryModes.set(question.questionId, selected.mode)
+      boundaryOptionSets.set(question.questionId, currentOptionSet)
+    }
   }
 }
 assert.deepEqual(corpusModes, {
@@ -350,6 +344,42 @@ function assertRenderedContent(pdfPath, outputRoot, placements, label) {
   )
 }
 
+function assertDenseContentNoWrap(pdfPath, outputRoot, placements, label) {
+  const words = pdfAllWords(pdfPath, outputRoot)
+  let cursor = 0
+  placements.forEach((placement, placementIndex) => {
+    const labelIndex = words.findIndex(
+      ({ text }, index) => index >= cursor && text === `${placement.label}.`,
+    )
+    assert.equal(labelIndex >= cursor, true, `${label}: ${placement.label} label found`)
+    const nextPlacement = placements[placementIndex + 1]
+    const nextLabelIndex = nextPlacement
+      ? words.findIndex(
+          ({ text }, index) =>
+            index > labelIndex && text === `${nextPlacement.label}.`,
+        )
+      : words.length
+    const endIndex = nextLabelIndex === -1 ? words.length : nextLabelIndex
+    const optionWords = words.slice(labelIndex, endIndex)
+    assert.equal(optionWords.length >= 2, true, `${label}: option content follows label`)
+    assert.equal(
+      Math.max(...optionWords.map(({ y }) => y))
+        - Math.min(...optionWords.map(({ y }) => y)) <= 0.5,
+      true,
+      `${label}: ${placement.label} dense content does not wrap`,
+    )
+    const nextWord = words[endIndex]
+    if (nextPlacement?.row === placement.row && nextWord) {
+      assert.equal(
+        Math.max(...optionWords.map(({ xMax }) => xMax)) <= nextWord.x - 20,
+        true,
+        `${label}: ${placement.label} preserves the 20pt dense gutter`,
+      )
+    }
+    cursor = endIndex
+  })
+}
+
 function assertPhysicalPlacement(placements, actualWords, label, rowWidthPt = 438.2) {
   assert.equal(actualWords.length, placements.length, `${label}: all four labels render`)
   const baseXByRow = new Map()
@@ -380,6 +410,13 @@ function assertPhysicalPlacement(placements, actualWords, label, rowWidthPt = 43
       true,
       `${label}: dense row does not wrap`,
     )
+    if (rowWords.length > 1) {
+      assert.equal(
+        rowWords.every(({ y, yMax }) => yMax - y <= 18.5),
+        true,
+        `${label}: dense option content remains one line`,
+      )
+    }
   }
 }
 
@@ -424,9 +461,9 @@ function hostFontClosure() {
     ).trim().split('\n')
     return {
       fontFaceId: family.split(',')[0],
-      fontFileSha256: sha256File(file),
       fontVersion: `fc:${fontVersion}`,
       file,
+      fontBytes: readFileSync(file),
     }
   }
   const primary = resolveFont('Times New Roman')
@@ -434,14 +471,14 @@ function hostFontClosure() {
   const candidate = {
     primary: {
       fontFaceId: primary.fontFaceId,
-      fontFileSha256: primary.fontFileSha256,
       fontVersion: primary.fontVersion,
+      fontBytes: primary.fontBytes,
     },
     fallbacks: [{
       fontFaceId: fallback.fontFaceId,
       characters: '．﹣',
-      fontFileSha256: fallback.fontFileSha256,
       fontVersion: fallback.fontVersion,
+      fontBytes: fallback.fontBytes,
     }],
     fontMetricsDigest: expectedAbcdRendererFontClosure.fontMetricsDigest,
     shapingImplementationDigest:
@@ -481,12 +518,23 @@ async function verifyActualArtifacts() {
           'short',
         ],
       },
+      ...[...boundaryOptionSets.values()].map((set) => ({
+        questionId: set.questionId,
+        texts: set.options.map(({ content }) =>
+          content.map(({ text }) => text).join('')),
+      })),
     ]
     for (const { questionId, texts } of actualCases) {
       const selected = layoutAbcdOptionSet(optionSet(questionId, texts))
       const screen = translateAbcdPlanToPaperSurface(selected, actualFont.closure)
       const print = translateAbcdPlanToPrintPdf(selected, actualFont.closure)
       const docx = translateAbcdPlanToDocx(selected, actualFont.closure)
+      assert.equal(screen.placementSignature, print.placementSignature)
+      assert.equal(screen.placementSignature, docx.placementSignature)
+      assert.equal([screen, print, docx].every(({ shrinkToFit }) =>
+        shrinkToFit === false), true)
+      assert.equal([screen, print, docx].every(({ clipping }) =>
+        clipping === 'forbidden'), true)
       const page = await browser.newPage({ viewport: { width: 1000, height: 800 } })
       await page.setContent(htmlFor(screen, embeddedFont))
       await page.evaluate(() => document.fonts.ready)
@@ -518,6 +566,14 @@ async function verifyActualArtifacts() {
         selected.placements,
         `${questionId} Print/PDF`,
       )
+      if (selected.mode !== 'one_column') {
+        assertDenseContentNoWrap(
+          pdfPath,
+          outputRoot,
+          selected.placements,
+          `${questionId} Print/PDF`,
+        )
+      }
       await page.close()
 
       const docxPath = writeDocx(outputRoot, questionId, docx)
@@ -543,6 +599,14 @@ async function verifyActualArtifacts() {
         selected.placements,
         `${questionId} DOCX`,
       )
+      if (selected.mode !== 'one_column') {
+        assertDenseContentNoWrap(
+          docxPdfPath,
+          outputRoot,
+          selected.placements,
+          `${questionId} DOCX`,
+        )
+      }
     }
 
     const clozeScreen = {
@@ -592,6 +656,12 @@ async function verifyActualArtifacts() {
       clozePlacements,
       'Cloze Print/PDF',
     )
+    assertDenseContentNoWrap(
+      clozePrintPdf,
+      outputRoot,
+      clozePlacements,
+      'Cloze Print/PDF',
+    )
     await clozePage.close()
 
     const clozeDocxPath = writeDocx(outputRoot, 'cloze-docx', clozeDocx)
@@ -608,6 +678,12 @@ async function verifyActualArtifacts() {
     assertPhysicalPlacement(clozePlacements, clozeDocxWords, 'Cloze DOCX')
     assertSameColumnSpread(clozePlacements, clozeDocxWords, 'Cloze DOCX')
     assertRenderedContent(
+      clozeDocxPdf,
+      outputRoot,
+      clozePlacements,
+      'Cloze DOCX',
+    )
+    assertDenseContentNoWrap(
       clozeDocxPdf,
       outputRoot,
       clozePlacements,

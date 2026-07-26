@@ -1,6 +1,6 @@
 import metrics from '../../standards/paper-canonical/rendering/times-compatible-metrics-v1.json' with { type: 'json' }
 
-import { digestJson } from './stable.mjs'
+import { digestJson, sha256 } from './stable.mjs'
 
 const LABELS = Object.freeze(['A', 'B', 'C', 'D'])
 
@@ -49,13 +49,40 @@ export const expectedAbcdRendererFontClosure = deeplyFreeze({
 const EXPECTED_FONT_CLOSURE_DIGEST = digestJson(expectedAbcdRendererFontClosure)
 
 export function resolveAbcdRendererFontClosure(candidate) {
-  if (digestJson(candidate) !== EXPECTED_FONT_CLOSURE_DIGEST) {
+  const primaryBytes = candidate?.primary?.fontBytes
+  const fallbackCandidates = candidate?.fallbacks
+  if (
+    !(primaryBytes instanceof Uint8Array)
+    || !Array.isArray(fallbackCandidates)
+    || fallbackCandidates.some(({ fontBytes }) => !(fontBytes instanceof Uint8Array))
+  ) {
     return {
       status: 'needs_review',
       reason: 'pinned_renderer_font_closure_unavailable',
     }
   }
-  const closure = deeplyFreeze(structuredClone(candidate))
+  const measuredClosure = {
+    primary: {
+      fontFaceId: candidate.primary.fontFaceId,
+      fontFileSha256: sha256(primaryBytes),
+      fontVersion: candidate.primary.fontVersion,
+    },
+    fallbacks: fallbackCandidates.map((fallback) => ({
+      fontFaceId: fallback.fontFaceId,
+      characters: fallback.characters,
+      fontFileSha256: sha256(fallback.fontBytes),
+      fontVersion: fallback.fontVersion,
+    })),
+    fontMetricsDigest: candidate.fontMetricsDigest,
+    shapingImplementationDigest: candidate.shapingImplementationDigest,
+  }
+  if (digestJson(measuredClosure) !== EXPECTED_FONT_CLOSURE_DIGEST) {
+    return {
+      status: 'needs_review',
+      reason: 'pinned_renderer_font_closure_unavailable',
+    }
+  }
+  const closure = deeplyFreeze(measuredClosure)
   VERIFIED_FONT_CLOSURES.add(closure)
   return { status: 'ready', closure }
 }
