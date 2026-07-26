@@ -1,7 +1,7 @@
 # EQB 试卷 Canonical 大一统 — Wayfinder Map
 
-Status: charted
-Next on PASS: `docs/cuts/paper-canonical-unification/wayfinder/tickets/16-synthesize-closed-map.md`
+Status: done
+Next on PASS: `docs/cuts/paper-canonical-unification/tickets/01-canonical-foundation.md`
 Terminal: no
 
 ## Notes
@@ -54,14 +54,18 @@ Terminal: no
 - [定义原子 sidecar 发布、consumer selector 与回滚合同](tickets/13-atomic-sidecars-and-consumer-selector.md) — 以整卷 integrity-closed Publication、共享 loader 与 family-atomic selection 统一版本/回滚，禁止 Group/字段/渲染中途的半 canonical fallback。
 - [制定新导入 hard gate 与逐题型竖切路线](tickets/14-new-import-rollout-and-gates.md) — 以 foundation-first family checkpoints、统一跨 renderer proof 与整卷 canonical-required admission 让各 slice 可独立发布，并在迁移前阻断新的 non-canonical imports。
 - [制定 33 套 latest 存量迁移与 legacy 退役计划](tickets/15-latest-migration-and-legacy-retirement.md) — 以冻结 census、family 队列、整卷原子发布、四卷 canary 与全量 renderer parity 推进 33 卷，并只在固定分母清零后逐 family 退役 consumer legacy。
+- [凝结已闭合地图并转入 normal spec/tickets](tickets/16-synthesize-closed-map.md) — 以一份索引式实施规范和 29 张 blockers-first 竖切票闭合决策地图，并把唯一 normal frontier 固定到 canonical foundation。
 
 ## Fog
+
+The remaining items are future-version or separately authorized work. They do
+not block the accepted v1 canonical contracts or the normal implementation
+frontier:
 
 - Whether a future stable canonical package should eventually replace `paper-asset-v1` with `paper-asset-v2`; additive sidecars are the accepted first destination.
 - On-demand canonical compilation for historical `versions/vN` after the first `latest`-only migration.
 - The active listening domain model, audio timing contract, website consumption, and listening renderers.
 - A backend normalization review console beyond durable reports and agent-operated correction; website import UI remains forbidden.
 - Retirement or consolidation of source-format-specific splitters and `packageBuilder` branches after every supported profile has migrated.
-- Production rollout, R2 synchronization, and production backfill mechanics after local migration and release gates are proven.
+- Production rollout, R2 synchronization, and production backfill mechanics are a separate production-authorized cut after repository release gates are proven.
 - New paper families, unsupported question types, or other subjects discovered outside the current 33-paper census.
-- Exact implementation-ticket slicing beyond the accepted foundation-first order; it will be created only after the decision map is closed.
