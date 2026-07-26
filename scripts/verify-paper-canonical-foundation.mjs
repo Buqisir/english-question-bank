@@ -177,6 +177,13 @@ assert.equal(compileCanonicalPaper(makeRequest(nonExactTransformation)).disposit
 const unregisteredOperation = structuredClone(exactTransformation)
 unregisteredOperation.transformations[0].operation = 'erase_source_semantics'
 assert.equal(compileCanonicalPaper(makeRequest(unregisteredOperation)).disposition, 'needs_review')
+const unprovenExactJoin = structuredClone(exactTransformation)
+unprovenExactJoin.transformations[0].operation = 'exact_join'
+unprovenExactJoin.transformations[0].before = 'unrelated source value'
+unprovenExactJoin.transformations[0].after = 'fabricated canonical relation'
+unprovenExactJoin.transformations[0].preconditions = { claimed: true }
+unprovenExactJoin.transformations[0].outputDigest = digestJson(unprovenExactJoin.transformations[0].after)
+assert.equal(compileCanonicalPaper(makeRequest(unprovenExactJoin)).disposition, 'needs_review')
 
 const reviewedAmbiguity = structuredClone(source)
 reviewedAmbiguity.ambiguities = [{
@@ -194,6 +201,12 @@ reviewedRequest.reviewDecisions = [{
 const reviewed = compileCanonicalPaper(reviewedRequest)
 assert.equal(reviewed.disposition, 'ready')
 assert.deepEqual(reviewed.artifacts.normalizationReport.reviewDecisions, reviewedRequest.reviewDecisions)
+const alternateReviewedRequest = structuredClone(reviewedRequest)
+alternateReviewedRequest.reviewDecisions[0].selectedCandidateId = 'candidate:one'
+const alternateReviewed = compileCanonicalPaper(alternateReviewedRequest)
+assert.equal(alternateReviewed.disposition, 'ready')
+assert.notEqual(alternateReviewed.artifacts.canonicalPaper.paperPlan.sourceConformance.reviewDecisionDigest, reviewed.artifacts.canonicalPaper.paperPlan.sourceConformance.reviewDecisionDigest)
+assert.notEqual(alternateReviewed.artifacts.normalizationReport.semanticDigest, reviewed.artifacts.normalizationReport.semanticDigest)
 const badAuthority = compileCanonicalPaper({ ...request, authority: { ...canonicalAuthorityRef, manifestDigest: 'sha256:not-the-manifest' } })
 assert.equal(badAuthority.disposition, 'unsupported')
 assert.equal(badAuthority.artifacts.sourceCapture.schemaVersion, 'source-capture-v1')

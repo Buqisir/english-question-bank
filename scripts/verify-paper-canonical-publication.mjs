@@ -61,6 +61,29 @@ assert.throws(
   { code: 'CANONICAL_PUBLICATION_LINEAGE_INVALID' },
 )
 
+const forgedReportManifest = structuredClone(sealed.manifest)
+const forgedReportArtifacts = { ...sealed.artifacts }
+const reportPath = 'canonical/normalization-report-v1.json'
+const forgedReport = JSON.parse(new TextDecoder().decode(forgedReportArtifacts[reportPath]))
+forgedReport.sourceFingerprint = 'sha256:forged'
+forgedReport.directSourceMap = []
+forgedReportArtifacts[reportPath] = new TextEncoder().encode(`${stableStringify(forgedReport)}\n`)
+const forgedReportDescriptor = forgedReportManifest.artifacts.find((artifact) => artifact.relativePath === reportPath)
+forgedReportDescriptor.byteLength = forgedReportArtifacts[reportPath].byteLength
+forgedReportDescriptor.sha256 = sha256(forgedReportArtifacts[reportPath])
+forgedReportManifest.publicationDigest = digestJson(((manifest) => {
+  const { publicationDigest: _publicationDigest, ...base } = manifest
+  return base
+})(forgedReportManifest))
+assert.throws(
+  () => validateCanonicalPublicationBundle({
+    manifest: forgedReportManifest,
+    sourceAsset: sealed.sourceAsset,
+    readArtifact: (relativePath) => forgedReportArtifacts[relativePath] || sealed.sourceEvidence[relativePath],
+  }),
+  { code: 'CANONICAL_PUBLICATION_LINEAGE_INVALID' },
+)
+
 const rootDir = mkdtempSync(path.join(tmpdir(), 'eqb-canonical-publication-'))
 const db = new DatabaseSync(path.join(rootDir, 'publication.sqlite'))
 try {

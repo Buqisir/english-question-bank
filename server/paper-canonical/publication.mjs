@@ -112,7 +112,15 @@ function validateSourceCaptureIntegrity(sourceCapture) {
 
 function validatePublicationLineage({ sourceCapture, plan, groups, normalizationReport }) {
   const { spans } = validateSourceCaptureIntegrity(sourceCapture)
-  const recordIds = new Set((normalizationReport.transformationRecords || []).map((record) => record.recordId))
+  const records = normalizationReport.transformationRecords || []
+  const recordIds = new Set(records.map((record) => record.recordId))
+  if (recordIds.size !== records.length || records.some((record) => record.operation !== 'direct_projection' || !record.preconditions || Object.keys(record.preconditions).sort().join(',') !== 'direct' || record.preconditions.direct !== true || !Array.isArray(record.inputSourceSpanIds) || record.inputSourceSpanIds.length === 0 || record.inputSourceSpanIds.some((sourceSpanId) => !spans.has(sourceSpanId)) || stableStringify(record.before) !== stableStringify(record.after) || record.outputDigest !== digestJson(record.after))) {
+    throw publicationError('CANONICAL_PUBLICATION_LINEAGE_INVALID', 'Transformation Records do not prove exact source replay')
+  }
+  const expectedRecordIds = plan.sourceConformance?.transformationRecordIds || []
+  if (!Array.isArray(expectedRecordIds) || expectedRecordIds.length !== records.length || expectedRecordIds.some((recordId) => !recordIds.has(recordId))) throw publicationError('CANONICAL_PUBLICATION_LINEAGE_INVALID', 'Canonical Plan does not close its transformation ledger')
+  const reviewDecisionDigest = digestJson(normalizationReport.reviewDecisions || [])
+  if (plan.sourceConformance?.reviewDecisionDigest !== reviewDecisionDigest || !Array.isArray(plan.sourceConformance?.reviewDecisionIds) || plan.sourceConformance.reviewDecisionIds.length !== (normalizationReport.reviewDecisions || []).length || plan.sourceConformance.reviewDecisionIds.some((decisionId, index) => decisionId !== normalizationReport.reviewDecisions[index].decisionId)) throw publicationError('CANONICAL_PUBLICATION_LINEAGE_INVALID', 'Canonical Plan does not bind its explicit review decisions')
   for (const decision of normalizationReport.reviewDecisions || []) if (!Array.isArray(decision.sourceSpanRefs) || decision.sourceSpanRefs.some((sourceSpanId) => !spans.has(sourceSpanId))) throw publicationError('CANONICAL_PUBLICATION_LINEAGE_INVALID', 'Review decision does not resolve to captured evidence')
   for (const group of groups) {
     if (group.sourceMap?.captureId !== sourceCapture.captureId || !Array.isArray(group.sourceMap?.entries) || group.sourceMap.entries.some((entry) => !Array.isArray(entry.sourceSpanRefs) || entry.sourceSpanRefs.length === 0 || entry.sourceSpanRefs.some((sourceSpanId) => !spans.has(sourceSpanId)) || !Array.isArray(entry.transformationRecordIds) || entry.transformationRecordIds.some((recordId) => !recordIds.has(recordId)))) {
@@ -123,6 +131,10 @@ function validatePublicationLineage({ sourceCapture, plan, groups, normalization
     if (group.sourceFingerprint !== expectedFingerprint) throw publicationError('CANONICAL_PUBLICATION_LINEAGE_INVALID', 'Canonical Group source fingerprint does not match source lineage')
   }
   for (const assignment of plan.numberingAssignments || []) if (!spans.has(assignment.sourceNumberSpan)) throw publicationError('CANONICAL_PUBLICATION_LINEAGE_INVALID', 'Canonical Plan numbering assignment lacks a captured source span')
+  const expectedDirectSourceMap = groups.flatMap((group) => group.sourceMap.entries)
+  const expectedSourceFingerprint = digestJson({ captureDigest: sourceCapture.digest, groupFingerprints: groups.map((group) => group.sourceFingerprint) })
+  const expectedSemanticDigest = digestJson({ groups: groups.map((group) => group.semanticDigest), reviewDecisionDigest })
+  if (normalizationReport.sourceFingerprint !== expectedSourceFingerprint || stableStringify(normalizationReport.directSourceMap) !== stableStringify(expectedDirectSourceMap) || normalizationReport.semanticDigest !== expectedSemanticDigest) throw publicationError('CANONICAL_PUBLICATION_LINEAGE_INVALID', 'Normalization Report does not close its direct source lineage')
 }
 
 export function sealCanonicalPublication({ compilation, sourceAssetVersion, sourceAsset }) {
@@ -137,7 +149,7 @@ export function sealCanonicalPublication({ compilation, sourceAssetVersion, sour
   if (matchingDocuments.length !== 1) throw publicationError('CANONICAL_PUBLICATION_SOURCE_UNBOUND', 'The publication source asset must be exactly one captured immutable document')
   const questionGroups = {
     schemaVersion: 'canonical-question-groups-v1',
-    groups: [...canonicalPaper.questionGroups].sort((left, right) => left.identity.groupId.localeCompare(right.identity.groupId)),
+    groups: [...canonicalPaper.questionGroups],
   }
   const descriptors = [
     artifactDescriptor('source_capture', sourceCapture),

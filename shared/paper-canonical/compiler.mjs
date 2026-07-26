@@ -188,7 +188,8 @@ function validateExactTransformationRecords(records, capture, closure) {
       diagnostics.push(diagnostic('TRANSFORMATION_NOT_EXACT', 'needs_review', path, 'Only registered exact transformations can produce canonical semantics'))
       continue
     }
-    if (!Number.isInteger(record.sequence) || record.sequence <= previousSequence || !Array.isArray(record.inputSourceSpanIds) || record.inputSourceSpanIds.length === 0 || record.inputSourceSpanIds.some((id) => !sourceSpanIds.has(id)) || !isRecordValue(record.preconditions) || Object.keys(record.preconditions).length === 0 || record.outputDigest !== digestJson(record.after) || (record.operation === 'direct_projection' && stableStringify(record.before) !== stableStringify(record.after))) {
+    const directProjectionProof = record.operation === 'direct_projection' && exactKeys(record.preconditions, ['direct']) && record.preconditions.direct === true && stableStringify(record.before) === stableStringify(record.after)
+    if (!Number.isInteger(record.sequence) || record.sequence <= previousSequence || !Array.isArray(record.inputSourceSpanIds) || record.inputSourceSpanIds.length === 0 || record.inputSourceSpanIds.some((id) => !sourceSpanIds.has(id)) || record.outputDigest !== digestJson(record.after) || !directProjectionProof) {
       diagnostics.push(diagnostic('TRANSFORMATION_CLOSURE_INVALID', 'needs_review', path, 'Transformation sequence, lineage, or output digest cannot be replayed'))
       continue
     }
@@ -365,7 +366,7 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
   return { diagnostics, artifact }
 }
 
-function buildPlan(source, capture, closure, groups, acceptedRecords) {
+function buildPlan(source, capture, closure, groups, acceptedRecords, reviewDecisions) {
   const diagnostics = []
   const profile = closure.profiles.get(source.profileId)
   if (!profile) return { diagnostics: [diagnostic('PROFILE_UNSUPPORTED', 'unsupported', '$.profileId', 'The source paper does not map to an exact Profile')], plan: null }
@@ -415,15 +416,21 @@ function buildPlan(source, capture, closure, groups, acceptedRecords) {
   }
   if (diagnostics.length > 0) return { diagnostics, plan: null }
   const profileDigest = digestJson(profile)
+  const reviewDecisionDigest = digestJson(reviewDecisions)
   const plan = {
     schemaVersion: 'canonical-paper-plan-v1',
-    planId: stableId('plan', { paperId: source.paperId, captureDigest: capture.digest, profileDigest }),
+    planId: stableId('plan', { paperId: source.paperId, captureDigest: capture.digest, profileDigest, reviewDecisionDigest }),
     paperId: source.paperId,
     authorityRef: closure.authorityRef,
     profileRef: { profileId: profile.profileId, profileVersion: profile.version, profileDigest },
     slotBindings: bindings,
     numberingAssignments,
-    sourceConformance: { status: acceptedRecords.length > 0 ? 'exact_deviations_applied' : 'direct', transformationRecordIds: acceptedRecords.map((record) => record.recordId) },
+    sourceConformance: {
+      status: acceptedRecords.length > 0 ? 'exact_deviations_applied' : 'direct',
+      transformationRecordIds: acceptedRecords.map((record) => record.recordId),
+      reviewDecisionIds: reviewDecisions.map((decision) => decision.decisionId),
+      reviewDecisionDigest,
+    },
     completeness: { status: 'complete', optionalOmissions: [] },
   }
   diagnostics.push(...validateJsonSchema(plan, closure.schemas['canonical-paper-plan-v1'], '$.plan'))
@@ -483,7 +490,7 @@ function makeReport({ disposition, capture, authority, groups = [], records = []
     reviewDecisions,
     diagnostics,
   }
-  if (disposition === 'ready') report.semanticDigest = digestJson({ groups: groups.map((group) => group.semanticDigest) })
+  if (disposition === 'ready') report.semanticDigest = digestJson({ groups: groups.map((group) => group.semanticDigest), reviewDecisionDigest: digestJson(reviewDecisions) })
   return report
 }
 
@@ -527,7 +534,7 @@ export function compileCanonicalPaper(request) {
     if (built.artifact) builtGroups.push({ ...built.artifact, slotId: rawGroup.slotId })
   }
   if (dispositionFor(diagnostics) !== 'ready') return blockedResult(dispositionFor(diagnostics), capture, closure.authorityRef, diagnostics, transformations.records, reviewDecisions)
-  const planResult = buildPlan(source, capture, closure, builtGroups, transformations.records)
+  const planResult = buildPlan(source, capture, closure, builtGroups, transformations.records, reviewDecisions)
   diagnostics.push(...planResult.diagnostics)
   if (dispositionFor(diagnostics) !== 'ready') return blockedResult(dispositionFor(diagnostics), capture, closure.authorityRef, diagnostics, transformations.records, reviewDecisions)
   const groups = builtGroups.map(({ slotId: _slotId, ...group }) => group)
