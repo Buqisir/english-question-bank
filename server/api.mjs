@@ -3610,8 +3610,8 @@ const {
   writeDocxPackage: writeDocxPackageImpl,
   convertDocxToPdf: convertDocxToPdfImpl,
 } = docxRenderer
-function buildDocumentXml({ title, versionType, items, blocks, questionNumberStart, printStyle, images = [], normalizationDiagnostics = [] }) {
-  return buildDocumentXmlImpl({ title, versionType, items, blocks, questionNumberStart, printStyle, images, normalizationDiagnostics })
+function buildDocumentXml({ title, versionType, items, blocks, questionNumberStart, printStyle, images = [], normalizationDiagnostics = [], canonicalConsumption = null }) {
+  return buildDocumentXmlImpl({ title, versionType, items, blocks, questionNumberStart, printStyle, images, normalizationDiagnostics, canonicalConsumption })
 }
 function writeDocxPackage({ documentXml, outputPath, title, images = [] }) {
   return writeDocxPackageImpl({ documentXml, outputPath, title, images })
