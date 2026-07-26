@@ -7,7 +7,12 @@ Terminal: no
 
 Wayfinder map: `docs/cuts/paper-canonical-unification/wayfinder/map.md`
 Wayfinder status: done
-Wayfinder completion: `ad2ccfc`
+Wayfinder provenance: verified
+Wayfinder entry skill: `/Users/huangxuewei/.claude/skills/wayfinder/SKILL.md`
+Wayfinder source HEAD: `19ffc7744c656b526f55934c8c73e245acf7323f`
+Wayfinder result commit: `ad2ccfce58e7c8d4549d6cc9dcdbc0550a04a0bc`
+Wayfinder artifact: `docs/cuts/paper-canonical-unification/wayfinder/map.md`
+Wayfinder artifact SHA-256: `7522e857854e41ed7c6ad2caa735bb80cd234d4169f1ab9983ab79cb7e924463`
 
 To-spec provenance: pending
 Accepted spec: none

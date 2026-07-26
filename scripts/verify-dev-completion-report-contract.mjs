@@ -5,7 +5,9 @@
  * It does not inspect or claim to validate an agent's real final response.
  */
 
-import { readdirSync, readFileSync } from 'node:fs'
+import { createHash } from 'node:crypto'
+import { execFileSync } from 'node:child_process'
+import { existsSync, readdirSync, readFileSync } from 'node:fs'
 import { isAbsolute, join, relative, resolve } from 'node:path'
 
 import {
@@ -74,6 +76,10 @@ const currentPaperTicket01 = readText(
   ROOT,
   'docs/cuts/paper-canonical-unification/tickets/01-canonical-foundation.md',
 )
+const globalCoordinatorSkillPath =
+  '/Users/huangxuewei/.codex/skills/coordinate-eqb-wayfinder/SKILL.md'
+const globalCoordinatorYamlPath =
+  '/Users/huangxuewei/.codex/skills/coordinate-eqb-wayfinder/agents/openai.yaml'
 
 const compact = (source) => source.replace(/\s+/g, ' ')
 const fencedBlocks = (source) =>
@@ -280,6 +286,7 @@ const nonReviewRouteKinds = new Set([
   'implementation',
   'fix',
   'qa-preparation',
+  'release',
   'shipping',
 ])
 
@@ -317,6 +324,137 @@ function currentModelRouteErrors({
   return errors
 }
 
+const fullCommitPattern = /^[0-9a-f]{40}$/
+const sha256Pattern = /^[0-9a-f]{64}$/
+const absoluteSkillPattern = /^\/.+\/SKILL\.md$/
+
+function markdownField(source, field) {
+  const escaped = field.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+  return source
+    .match(new RegExp(`^${escaped}:\\s*(.*?)\\s*$`, 'm'))?.[1]
+    ?.replace(/^`|`$/g, '')
+}
+
+function committedArtifactDigest(commit, artifactPath) {
+  const bytes = execFileSync('git', ['show', `${commit}:${artifactPath}`], {
+    cwd: ROOT,
+  })
+  return createHash('sha256').update(bytes).digest('hex')
+}
+
+function parseCoordinatorYaml(source) {
+  const root = {}
+  const stack = [{ indent: -2, value: root }]
+
+  for (const [index, rawLine] of source.split(/\r?\n/).entries()) {
+    if (!rawLine.trim() || rawLine.trimStart().startsWith('#')) {
+      continue
+    }
+    if (rawLine.includes('\t')) {
+      throw new Error(`line ${index + 1}: tabs are forbidden`)
+    }
+    const match = rawLine.match(/^(\s*)([A-Za-z_][A-Za-z0-9_-]*):(?:\s+(.*))?$/)
+    if (!match) {
+      throw new Error(`line ${index + 1}: unsupported YAML syntax`)
+    }
+    const indent = match[1].length
+    if (indent % 2 !== 0) {
+      throw new Error(`line ${index + 1}: indentation must use two spaces`)
+    }
+    while (stack.at(-1).indent >= indent) {
+      stack.pop()
+    }
+    const parent = stack.at(-1)
+    if (!parent || indent !== parent.indent + 2) {
+      throw new Error(`line ${index + 1}: invalid mapping indentation`)
+    }
+    const key = match[2]
+    if (Object.hasOwn(parent.value, key)) {
+      throw new Error(`line ${index + 1}: duplicate key ${key}`)
+    }
+    const scalar = match[3]
+    if (scalar === undefined) {
+      parent.value[key] = {}
+      stack.push({ indent, value: parent.value[key] })
+      continue
+    }
+    if (scalar === 'true' || scalar === 'false') {
+      parent.value[key] = scalar === 'true'
+      continue
+    }
+    if (scalar.startsWith('"') && scalar.endsWith('"')) {
+      parent.value[key] = JSON.parse(scalar)
+      continue
+    }
+    throw new Error(`line ${index + 1}: scalar must be quoted or boolean`)
+  }
+
+  return root
+}
+
+function coordinatorYamlErrors(source) {
+  try {
+    const parsed = parseCoordinatorYaml(source)
+    const errors = []
+    for (const field of [
+      parsed.interface?.display_name,
+      parsed.interface?.short_description,
+      parsed.interface?.default_prompt,
+    ]) {
+      if (typeof field !== 'string' || !field.trim()) {
+        errors.push('interface strings must be non-empty')
+      }
+    }
+    if (parsed.policy?.allow_implicit_invocation !== false) {
+      errors.push('allow_implicit_invocation must remain false')
+    }
+    return errors
+  } catch (error) {
+    return [error.message]
+  }
+}
+
+function artifactProofErrors(proof, expectedSkill) {
+  const errors = []
+
+  if (
+    proof?.committed !== true ||
+    proof?.skill !== expectedSkill ||
+    !absoluteSkillPattern.test(proof?.entrySkill ?? '') ||
+    !proof.entrySkill.endsWith(`/${expectedSkill}/SKILL.md`) ||
+    !fullCommitPattern.test(proof?.sourceHead ?? '') ||
+    !fullCommitPattern.test(proof?.resultCommit ?? '') ||
+    !/^docs\/.+/.test(proof?.artifactPath ?? '') ||
+    !sha256Pattern.test(proof?.artifactDigest ?? '')
+  ) {
+    errors.push(`${expectedSkill} provenance is incomplete or malformed`)
+  }
+  if (
+    sha256Pattern.test(proof?.artifactDigest ?? '') &&
+    proof.artifactDigest !== proof.actualArtifactDigest
+  ) {
+    errors.push(`${expectedSkill} artifact digest is stale or mismatched`)
+  }
+  return errors
+}
+
+function ownerApprovalErrors(approval, ticketManifestDigest) {
+  const errors = []
+
+  if (
+    approval?.committed !== true ||
+    approval?.actor !== 'owner' ||
+    approval?.action !== 'approve-ticket-granularity' ||
+    !fullCommitPattern.test(approval?.resultCommit ?? '') ||
+    !/^docs\/.+/.test(approval?.recordPath ?? '') ||
+    !sha256Pattern.test(approval?.ticketManifestDigest ?? '') ||
+    approval.ticketManifestDigest !== ticketManifestDigest
+  ) {
+    errors.push('owner ticket-granularity approval is absent or stale')
+  }
+  return errors
+}
+
 function phaseRouteErrors({
   from,
   next,
@@ -325,22 +463,24 @@ function phaseRouteErrors({
   approval = {},
 }) {
   const errors = []
+  const specProofErrors = artifactProofErrors(spec.provenance, 'to-spec')
+  const ticketsProofErrors = artifactProofErrors(
+    tickets.provenance,
+    'to-tickets',
+  )
   const specProven =
     spec.accepted === true &&
-    spec.provenance?.skill === 'to-spec' &&
-    spec.provenance?.committed === true &&
-    Boolean(spec.digest)
+    specProofErrors.length === 0 &&
+    spec.digest === spec.provenance.artifactDigest
   const ticketsProven =
-    tickets.provenance?.skill === 'to-tickets' &&
-    tickets.provenance?.committed === true &&
-    Boolean(tickets.manifestDigest)
+    ticketsProofErrors.length === 0 &&
+    tickets.manifestDigest === tickets.provenance.artifactDigest
   const ticketsBound =
     specProven &&
     ticketsProven &&
     tickets.boundSpecDigest === spec.digest
   const approvalBound =
-    approval.committed === true &&
-    approval.ticketManifestDigest === tickets.manifestDigest
+    ownerApprovalErrors(approval, tickets.manifestDigest).length === 0
 
   if (from === 'wayfinder' && next !== 'to-spec') {
     errors.push('completed Wayfinder map can route only to to-spec')
@@ -672,20 +812,82 @@ assert(
 
 section('Wayfinder development phase gates')
 
+const installedCoordinatorYaml = existsSync(globalCoordinatorYamlPath)
+  ? readFileSync(globalCoordinatorYamlPath, 'utf8')
+  : `interface:
+  display_name: "EQB Wayfinder"
+  short_description: "Validated phase coordinator"
+  default_prompt: "Use the explicit coordinator."
+policy:
+  allow_implicit_invocation: false
+`
+const installedCoordinatorSkill = existsSync(globalCoordinatorSkillPath)
+  ? readFileSync(globalCoordinatorSkillPath, 'utf8')
+  : `---
+name: coordinate-eqb-wayfinder
+disable-model-invocation: true
+---
+`
+assert(
+  coordinatorYamlErrors(installedCoordinatorYaml).length === 0,
+  'global coordinator YAML is valid and implicit invocation remains disabled',
+)
+assert(
+  coordinatorYamlErrors(
+    installedCoordinatorYaml.replace(
+      'allow_implicit_invocation: false',
+      'allow_implicit_invocation: true',
+    ),
+  ).some((error) => error.includes('must remain false')),
+  'global coordinator YAML rejects implicit invocation',
+)
+assert(
+  /^disable-model-invocation:\s*true\s*$/m.test(installedCoordinatorSkill),
+  'global coordinator skill remains explicit-only',
+)
+
+const fixtureSourceHead = '1'.repeat(40)
+const fixtureSpecCommit = '2'.repeat(40)
+const fixtureTicketsCommit = '3'.repeat(40)
+const fixtureApprovalCommit = '4'.repeat(40)
+const fixtureSpecDigest = 'a'.repeat(64)
+const fixtureTicketsDigest = 'b'.repeat(64)
 const verifiedPhaseProof = {
   spec: {
     accepted: true,
-    digest: 'spec-sha-256',
-    provenance: { skill: 'to-spec', committed: true },
+    digest: fixtureSpecDigest,
+    provenance: {
+      skill: 'to-spec',
+      entrySkill: '/absolute/path/to/to-spec/SKILL.md',
+      committed: true,
+      sourceHead: fixtureSourceHead,
+      resultCommit: fixtureSpecCommit,
+      artifactPath: 'docs/cuts/example/spec.md',
+      artifactDigest: fixtureSpecDigest,
+      actualArtifactDigest: fixtureSpecDigest,
+    },
   },
   tickets: {
-    manifestDigest: 'tickets-sha-256',
-    boundSpecDigest: 'spec-sha-256',
-    provenance: { skill: 'to-tickets', committed: true },
+    manifestDigest: fixtureTicketsDigest,
+    boundSpecDigest: fixtureSpecDigest,
+    provenance: {
+      skill: 'to-tickets',
+      entrySkill: '/absolute/path/to/to-tickets/SKILL.md',
+      committed: true,
+      sourceHead: fixtureSpecCommit,
+      resultCommit: fixtureTicketsCommit,
+      artifactPath: 'docs/cuts/example/ticket-set.manifest',
+      artifactDigest: fixtureTicketsDigest,
+      actualArtifactDigest: fixtureTicketsDigest,
+    },
   },
   approval: {
     committed: true,
-    ticketManifestDigest: 'tickets-sha-256',
+    actor: 'owner',
+    action: 'approve-ticket-granularity',
+    resultCommit: fixtureApprovalCommit,
+    recordPath: 'docs/cuts/example/phase-transition.md',
+    ticketManifestDigest: fixtureTicketsDigest,
   },
 }
 
@@ -721,10 +923,40 @@ assert(
     ...verifiedPhaseProof,
     tickets: {
       ...verifiedPhaseProof.tickets,
-      boundSpecDigest: 'different-spec-sha-256',
+      boundSpecDigest: 'c'.repeat(64),
     },
   }).some((error) => error.includes('not bound to the accepted spec')),
   'ticket set bound to another spec rejects implementation',
+)
+assert(
+  phaseRouteErrors({
+    from: 'to-tickets',
+    next: 'implementation',
+    ...verifiedPhaseProof,
+    spec: {
+      ...verifiedPhaseProof.spec,
+      provenance: {
+        ...verifiedPhaseProof.spec.provenance,
+        sourceHead: 'short-commit',
+      },
+    },
+  }).some((error) => error.includes('verified to-spec provenance')),
+  'malformed phase provenance rejects implementation',
+)
+assert(
+  phaseRouteErrors({
+    from: 'to-tickets',
+    next: 'implementation',
+    ...verifiedPhaseProof,
+    tickets: {
+      ...verifiedPhaseProof.tickets,
+      provenance: {
+        ...verifiedPhaseProof.tickets.provenance,
+        actualArtifactDigest: 'c'.repeat(64),
+      },
+    },
+  }).some((error) => error.includes('verified to-tickets provenance')),
+  'stale artifact digest rejects implementation',
 )
 assert(
   phaseRouteErrors({
@@ -797,6 +1029,39 @@ for (const routeKind of reviewRouteKinds) {
   )
 }
 
+const currentWayfinderResultCommit = markdownField(
+  currentPaperPhase,
+  'Wayfinder result commit',
+)
+const currentWayfinderArtifact = markdownField(
+  currentPaperPhase,
+  'Wayfinder artifact',
+)
+const currentWayfinderProof = {
+  skill: 'wayfinder',
+  entrySkill: markdownField(currentPaperPhase, 'Wayfinder entry skill'),
+  committed:
+    markdownField(currentPaperPhase, 'Wayfinder provenance') === 'verified',
+  sourceHead: markdownField(currentPaperPhase, 'Wayfinder source HEAD'),
+  resultCommit: currentWayfinderResultCommit,
+  artifactPath: currentWayfinderArtifact,
+  artifactDigest: markdownField(
+    currentPaperPhase,
+    'Wayfinder artifact SHA-256',
+  ),
+  actualArtifactDigest:
+    fullCommitPattern.test(currentWayfinderResultCommit ?? '') &&
+    /^docs\/.+/.test(currentWayfinderArtifact ?? '')
+      ? committedArtifactDigest(
+          currentWayfinderResultCommit,
+          currentWayfinderArtifact,
+        )
+      : '',
+}
+assert(
+  artifactProofErrors(currentWayfinderProof, 'wayfinder').length === 0,
+  'current paper Wayfinder provenance resolves to the committed artifact digest',
+)
 assert(
   /^Current phase:\s*to-spec\s*$/m.test(currentPaperPhase) &&
     /^Next on PASS:\s*to-spec\s*$/m.test(currentPaperPhase) &&
