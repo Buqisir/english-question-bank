@@ -49,10 +49,10 @@ edge fail:
 | `to-tickets` | `owner-approval` |
 | `owner-approval` | `implementation`, after all four implementation gates pass |
 | `implementation` | `implementation`, `independent-review`, `owner-qa`, or `release` |
-| `independent-review` | `independent-fix` on a canonical failed result; `owner-qa` or `release` on PASS |
+| `independent-review` | `independent-fix` on a canonical failed result; `implementation`, `owner-qa`, or `release` on PASS |
 | `independent-fix` | `focused-re-review` |
-| `focused-re-review` | `independent-fix` on a canonical failed result; `owner-qa` or `release` on PASS |
-| `owner-qa` | `release` after owner acceptance |
+| `focused-re-review` | `independent-fix` on a canonical failed result; `implementation`, `owner-qa`, or `release` on PASS |
+| `owner-qa` | `implementation` or `release` after owner acceptance |
 | `release` | `DONE` |
 | `DONE` | none |
 

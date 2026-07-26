@@ -71,12 +71,16 @@ const currentPaperTicket01 = readText(
   ROOT,
   'docs/cuts/paper-canonical-unification/tickets/01-canonical-foundation.md',
 )
+const currentPaperTicket02 = readText(
+  ROOT,
+  'docs/cuts/paper-canonical-unification/tickets/02-route-authority-repair.md',
+)
 const globalCoordinatorSkillPath =
   '/Users/huangxuewei/.codex/skills/coordinate-eqb-wayfinder/SKILL.md'
 const globalCoordinatorYamlPath =
   '/Users/huangxuewei/.codex/skills/coordinate-eqb-wayfinder/agents/openai.yaml'
 const reviewedDispatchDigest =
-  '065cb845554f8ae1728a902ea124196120b2980c0a5fba29a81c80bf7b39ed98'
+  'c49e17686456b6acff5492ad97605032b0b2e71ed2ed8bd2537acf51116c8f2a'
 const reviewedGlobalCoordinatorSkillDigest =
   'f63d95003fde929d92af2a0473370ed672aa740ea37ad593d3cb62817fe72008'
 const reviewedGlobalCoordinatorYamlDigest =
@@ -709,14 +713,14 @@ const legalPhaseTransitions = new Map([
   ],
   [
     'independent-review',
-    new Set(['independent-fix', 'owner-qa', 'release']),
+    new Set(['implementation', 'independent-fix', 'owner-qa', 'release']),
   ],
   ['independent-fix', new Set(['focused-re-review'])],
   [
     'focused-re-review',
-    new Set(['independent-fix', 'owner-qa', 'release']),
+    new Set(['implementation', 'independent-fix', 'owner-qa', 'release']),
   ],
-  ['owner-qa', new Set(['release'])],
+  ['owner-qa', new Set(['implementation', 'release'])],
   ['release', new Set(['DONE'])],
   ['DONE', new Set()],
 ])
@@ -1019,7 +1023,7 @@ function phaseTransitionErrors(state) {
     }
   }
   if (previous === 'owner-qa' && outcomes.get(previous) !== 'accepted') {
-    errors.push('release requires recorded owner-QA acceptance')
+    errors.push('owner QA may advance only after recorded owner-QA acceptance')
   }
   if (previous === 'release' && outcomes.get(previous) !== 'complete') {
     errors.push('DONE requires complete release provenance')
@@ -1888,6 +1892,60 @@ assert(
   'a failed independent review cannot advance without a selected fix',
 )
 
+for (const reviewPhase of ['independent-review', 'focused-re-review']) {
+  const passedReviewReturn = phaseFixture(reviewPhase, 'implementation')
+  assert(
+    phaseReceiptErrors(passedReviewReturn).length === 0,
+    `${reviewPhase} may return to implementation on canonical PASS`,
+  )
+
+  for (const outcome of [undefined, 'failed', 'accepted', 'complete']) {
+    const invalidReviewReturn = phaseFixture(reviewPhase, 'implementation')
+    invalidReviewReturn.outcomes.set(reviewPhase, outcome)
+    assert(
+      phaseReceiptErrors(invalidReviewReturn).some((error) =>
+        error.includes('canonical PASS result'),
+      ),
+      `${reviewPhase} cannot return to implementation without canonical PASS`,
+    )
+  }
+
+  const gatedReviewReturn = phaseFixture(reviewPhase, 'implementation')
+  gatedReviewReturn.approval.recordedManifestDigest = 'e'.repeat(64)
+  gatedReviewReturn.implementationDispatch = 'forbidden'
+  assert(
+    phaseReceiptErrors(gatedReviewReturn).some((error) =>
+      error.includes('owner ticket-granularity approval is absent or stale'),
+    ),
+    `${reviewPhase} cannot return to implementation after implementation-gate drift`,
+  )
+}
+
+const acceptedOwnerQaReturn = phaseFixture('owner-qa', 'implementation')
+assert(
+  phaseReceiptErrors(acceptedOwnerQaReturn).length === 0,
+  'owner QA may return to implementation after committed owner acceptance',
+)
+for (const outcome of [undefined, 'passed', 'failed', 'complete']) {
+  const invalidOwnerQaReturn = phaseFixture('owner-qa', 'implementation')
+  invalidOwnerQaReturn.outcomes.set('owner-qa', outcome)
+  assert(
+    phaseReceiptErrors(invalidOwnerQaReturn).some((error) =>
+      error.includes('recorded owner-QA acceptance'),
+    ),
+    'owner QA cannot return to implementation without committed owner acceptance',
+  )
+}
+const gatedOwnerQaReturn = phaseFixture('owner-qa', 'implementation')
+gatedOwnerQaReturn.approval.recordedManifestDigest = 'e'.repeat(64)
+gatedOwnerQaReturn.implementationDispatch = 'forbidden'
+assert(
+  phaseReceiptErrors(gatedOwnerQaReturn).some((error) =>
+    error.includes('owner ticket-granularity approval is absent or stale'),
+  ),
+  'owner QA cannot return to implementation after implementation-gate drift',
+)
+
 assert(
   currentModelRouteErrors({
     routeKind: 'implementation',
@@ -1962,6 +2020,14 @@ assert(
       '2c7435026923db6b359e3770f22fdd11ed7d3c01',
     ),
   'current paper route preserves the completed Ticket 01 result',
+)
+assert(
+  phaseReceiptErrors(
+    phaseFixture('implementation', 'independent-review'),
+  ).length === 0 &&
+    markdownField(currentPaperTicket02, 'Next on PASS') ===
+      'independent review',
+  'Ticket 02 bootstrap uses the pre-existing implementation-to-independent-review edge',
 )
 
 section('canonical handoff')
