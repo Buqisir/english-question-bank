@@ -8,9 +8,9 @@ Terminal: no
 
 Wayfinder map: `docs/cuts/paper-canonical-unification/wayfinder/map.md`
 Current map binding: verified
-Current map binding commit: `76ace36cae38a60fe280e464b8e85327a68376d2`
+Current map binding commit: `16462519a9ef38930bee8748083471d7f0b9c5ee`
 Current map artifact: `docs/cuts/paper-canonical-unification/wayfinder/map.md`
-Current map artifact SHA-256: `bc96c0fa86fb2b173be3fce757873ad574cb4add7a965bfa2c59289fc364b651`
+Current map artifact SHA-256: `8671ad32cbba2026fe99aca8d71f4ebe10de01cd657000107e99b9f692eab911`
 Wayfinder status: done
 Wayfinder provenance: verified
 Wayfinder entry skill: `/Users/huangxuewei/.claude/skills/wayfinder/SKILL.md`
@@ -30,14 +30,14 @@ Accepted spec: `docs/cuts/paper-canonical-unification/spec.md`
 Accepted spec SHA-256: `2e77d4f2ba40e3d4fb33c232bd5734e34b6c6a94a26c626cd1f6af178684490b`
 To-tickets provenance: verified
 To-tickets entry skill: `/Users/huangxuewei/.claude/skills/to-tickets/SKILL.md`
-To-tickets source HEAD: `748fe921c965476efbbb693b1f52756a18fc74e0`
-To-tickets result commit: `e03bc11bc2a956165bd75edeeee3b27c94e8d7ab`
+To-tickets source HEAD: `fb5b43cc215b17d6f660df6cf8e589a74218bdfc`
+To-tickets result commit: `16462519a9ef38930bee8748083471d7f0b9c5ee`
 To-tickets artifact: `docs/cuts/paper-canonical-unification/ticket-set-manifest.md`
-To-tickets artifact SHA-256: `6732eb4da6e35982f0b0a980f2a623f68d49a79811485fa500918c1944f3ee25`
+To-tickets artifact SHA-256: `462290bb40ac17c3adf8db4f2b09d29d30d6fb78958b05b63174f6a3c9a5f476`
 To-tickets outcome: complete
 Ticket-set binding: verified
 Ticket-set manifest: `docs/cuts/paper-canonical-unification/ticket-set-manifest.md`
-Ticket-set manifest SHA-256: `6732eb4da6e35982f0b0a980f2a623f68d49a79811485fa500918c1944f3ee25`
+Ticket-set manifest SHA-256: `462290bb40ac17c3adf8db4f2b09d29d30d6fb78958b05b63174f6a3c9a5f476`
 Ticket-set accepted-spec SHA-256: `2e77d4f2ba40e3d4fb33c232bd5734e34b6c6a94a26c626cd1f6af178684490b`
 Owner ticket-granularity approval: pending
 Implementation dispatch: forbidden
@@ -48,12 +48,15 @@ Ticket 01 remains done and immutable at
 `2c7435026923db6b359e3770f22fdd11ed7d3c01`. Its accepted product code,
 commits, verification evidence, and review lineage remain valid.
 
-## Retired route
+## Current route
 
-Wayfinder Ticket 16 historically synthesized `spec.md` and Tickets 01–29
-without fresh explicit to-spec and to-tickets phases. Ticket 01 completed
-before this governance defect was identified. The old Ticket 01 → Ticket 02
-handoff and Tickets 02–29 are non-dispatchable until a fresh to-spec phase and
-a fresh to-tickets phase create verified provenance, bind the ticket set to the
-current accepted spec, and record owner approval of that exact ticket-set
-granularity.
+The rejected manifest with SHA-256
+`6732eb4da6e35982f0b0a980f2a623f68d49a79811485fa500918c1944f3ee25`
+and its historical Tickets 02–29 are superseded and non-dispatchable. The
+corrected digest-bound Tickets 02–71 are the sole current ticket set. Ticket 02
+is the unique initial implementation frontier, but implementation remains
+forbidden until the owner approves the exact current manifest digest.
+
+Ticket 02 must then commit the route-authority repair and pass independent
+review against that reviewed HEAD before Ticket 03 or any later implementation
+ticket can become eligible.
