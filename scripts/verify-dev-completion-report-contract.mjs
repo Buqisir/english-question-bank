@@ -812,6 +812,16 @@ assert(
 
 section('Wayfinder development phase gates')
 
+const requireGlobalCoordinator = process.argv.includes(
+  '--require-global-coordinator',
+)
+const globalCoordinatorFilesExist =
+  existsSync(globalCoordinatorYamlPath) &&
+  existsSync(globalCoordinatorSkillPath)
+assert(
+  !requireGlobalCoordinator || globalCoordinatorFilesExist,
+  'required installed global coordinator files exist',
+)
 const installedCoordinatorYaml = existsSync(globalCoordinatorYamlPath)
   ? readFileSync(globalCoordinatorYamlPath, 'utf8')
   : `interface:
@@ -830,7 +840,9 @@ disable-model-invocation: true
 `
 assert(
   coordinatorYamlErrors(installedCoordinatorYaml).length === 0,
-  'global coordinator YAML is valid and implicit invocation remains disabled',
+  `${
+    globalCoordinatorFilesExist ? 'installed' : 'portable fixture'
+  } global coordinator YAML is valid and implicit invocation remains disabled`,
 )
 assert(
   coordinatorYamlErrors(
