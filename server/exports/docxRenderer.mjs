@@ -1186,14 +1186,8 @@ function buildExamDocumentXml({
           }
           if (!stemText && hasOptions) {
             if (docxQuestion.layoutPlan) {
-              body.push(
-                paragraph([run(`${questionNum}.`, { size: 21 })], {
-                  before: 60,
-                  after: 20,
-                  keepNext: true,
-                }),
-              )
-              body.push(canonicalDocxOptionLayout(
+              body.push(canonicalDocxQuestionOptionLayout(
+                questionNum,
                 docxQuestion.options,
                 docxQuestion.layoutPlan,
               ))
@@ -1293,10 +1287,11 @@ function examOptionTable(rows) {
   return `<w:tbl><w:tblPr><w:tblW w:w="9000" w:type="dxa"/><w:tblBorders><w:top w:val="none"/><w:left w:val="none"/><w:bottom w:val="none"/><w:right w:val="none"/><w:insideH w:val="none"/><w:insideV w:val="none"/></w:tblBorders><w:tblLayout w:type="fixed"/></w:tblPr><w:tblGrid><w:gridCol w:w="${colWidth}"/><w:gridCol w:w="${colWidth}"/></w:tblGrid>${rowXml}</w:tbl>`
 }
 
-function canonicalDocxOptionLayout(options, plan) {
+function canonicalDocxQuestionOptionLayout(questionNumber, options, plan) {
   const byLabel = new Map(options.map((option) => [option.label, option]))
+  let optionLayout
   if (plan.mode === 'one_column') {
-    return plan.placements.map((placement) => {
+    optionLayout = plan.placements.map((placement) => {
       const option = byLabel.get(placement.label)
       return paragraph(
         `${option.label}. ${option.content}`,
@@ -1307,23 +1302,25 @@ function canonicalDocxOptionLayout(options, plan) {
         },
       )
     }).join('')
+  } else {
+    const starts = [...new Set(plan.placements.map((placement) => placement.startTwip))].sort((a, b) => a - b)
+    const widths = starts.map((start, index) =>
+      (starts[index + 1] ?? plan.rowWidthTwip) - start)
+    const rows = Array.from({ length: plan.rowCount }, (_, row) =>
+      plan.placements
+        .filter((placement) => placement.row === row)
+        .sort((a, b) => a.column - b.column)
+        .map((placement) => {
+          const option = byLabel.get(placement.label)
+          return `${option.label}. ${option.content}`
+        }))
+    const grid = widths.map((width) => `<w:gridCol w:w="${width}"/>`).join('')
+    const rowXml = rows.map((cells) =>
+      `<w:tr>${cells.map((cell, column) =>
+        `<w:tc><w:tcPr><w:tcW w:w="${widths[column]}" w:type="dxa"/></w:tcPr>${paragraph(cell, { after: 30, size: 21 })}</w:tc>`).join('')}</w:tr>`).join('')
+    optionLayout = `<w:tbl><w:tblPr><w:tblW w:w="${plan.rowWidthTwip}" w:type="dxa"/><w:tblLayout w:type="fixed"/></w:tblPr><w:tblGrid>${grid}</w:tblGrid>${rowXml}</w:tbl>`
   }
-  const starts = [...new Set(plan.placements.map((placement) => placement.startTwip))].sort((a, b) => a - b)
-  const widths = starts.map((start, index) =>
-    (starts[index + 1] ?? plan.rowWidthTwip) - start)
-  const rows = Array.from({ length: plan.rowCount }, (_, row) =>
-    plan.placements
-      .filter((placement) => placement.row === row)
-      .sort((a, b) => a.column - b.column)
-      .map((placement) => {
-        const option = byLabel.get(placement.label)
-        return `${option.label}. ${option.content}`
-      }))
-  const grid = widths.map((width) => `<w:gridCol w:w="${width}"/>`).join('')
-  const rowXml = rows.map((cells) =>
-    `<w:tr>${cells.map((cell, column) =>
-      `<w:tc><w:tcPr><w:tcW w:w="${widths[column]}" w:type="dxa"/></w:tcPr>${paragraph(cell, { after: 30, size: 21 })}</w:tc>`).join('')}</w:tr>`).join('')
-  return `<w:tbl><w:tblPr><w:tblW w:w="${plan.rowWidthTwip}" w:type="dxa"/><w:tblLayout w:type="fixed"/></w:tblPr><w:tblGrid>${grid}</w:tblGrid>${rowXml}</w:tbl>`
+  return `<w:tbl><w:tblPr><w:tblW w:w="${plan.rowWidthTwip + 420}" w:type="dxa"/><w:tblLayout w:type="fixed"/></w:tblPr><w:tblGrid><w:gridCol w:w="420"/><w:gridCol w:w="${plan.rowWidthTwip}"/></w:tblGrid><w:tr><w:tc><w:tcPr><w:tcW w:w="420" w:type="dxa"/></w:tcPr>${paragraph(`${questionNumber}.`, { after: 30, size: 21 })}</w:tc><w:tc><w:tcPr><w:tcW w:w="${plan.rowWidthTwip}" w:type="dxa"/></w:tcPr>${optionLayout}</w:tc></w:tr></w:tbl>`
 }
 
 // figure-render cut: `images` is an OPTIONAL out-parameter array — see the

@@ -8,13 +8,15 @@ review passes. Do not reuse artifacts from another commit.
 Run the tracked public-seam and actual-artifact gates from the saved worktree:
 
 ```sh
-node scripts/verify-paper-canonical-cloze-grammar-consumption.mjs
-node scripts/verify-paper-canonical-abcd-layout.mjs --actual-artifacts
+node scripts/verify-paper-canonical-cloze-grammar-consumption.mjs --actual-artifacts
 ```
 
-The first command drives the hash-bound `paper-2026-i` reference through
+The command drives the hash-bound `paper-2026-i` reference through
 `loadPaperForConsumption(...)`, then the actual PaperSurface payload adapter,
-Print HTML renderer, and DOCX renderer. The second command renders the pinned
+Print HTML renderer, and DOCX renderer. It writes a HEAD-bound Screen HTML,
+Screen PNG/PDF, Student/Teacher Print HTML, Student Print PNG/PDF, Student
+DOCX, inspected Student/Teacher OOXML, and converted DOCX PDF under
+`.scratch/paper-canonical-ticket-05-qa/<HEAD>/`. It also renders the pinned
 A-D plan through Chromium, a real PDF, DOCX, and DOCX-to-PDF and enforces the
 accepted 1pt / 0.5pt geometry gates.
 

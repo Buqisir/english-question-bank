@@ -1,7 +1,14 @@
 #!/usr/bin/env node
 
 import assert from 'node:assert/strict'
-import { mkdtempSync, rmSync } from 'node:fs'
+import { execFileSync } from 'node:child_process'
+import {
+  mkdirSync,
+  mkdtempSync,
+  readFileSync,
+  rmSync,
+  writeFileSync,
+} from 'node:fs'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { DatabaseSync } from 'node:sqlite'
@@ -71,6 +78,8 @@ const blocks = items.map((item) => ({
   questionGroupId: item.detail.id,
   score: 1.5,
 }))
+const provisionActualArtifacts = process.argv.includes('--actual-artifacts')
+const artifactProof = {}
 
 const rootDir = mkdtempSync(path.join(tmpdir(), 'eqb-canonical-consumption-'))
 const db = new DatabaseSync(path.join(rootDir, 'publication.sqlite'))
@@ -135,6 +144,14 @@ try {
         ),
         true,
       )
+      artifactProof.screen = {
+        cloze: screenArtifact,
+        grammar: buildCanonicalConsumptionSurfaceData({
+          consumption,
+          familyContractId: 'grammar-fill',
+          groupId: 'group-2026-i-grammar-fill',
+        }),
+      }
     }
     if (consumerId === 'print_pdf') {
       const student = buildPrintHtml({
@@ -163,6 +180,7 @@ try {
         (student.match(/data-canonical-placement-signature=/g) || []).length,
         15,
       )
+      artifactProof.print = { student, teacher }
     }
     if (consumerId === 'docx') {
       const renderer = createDocxRenderer({
@@ -195,6 +213,11 @@ try {
         (student.match(/<w:gridCol w:w="2080"\/>/g) || []).length,
         45,
       )
+      assert.equal(
+        (student.match(/<w:gridCol w:w="420"\/>/g) || []).length,
+        15,
+      )
+      artifactProof.docx = { renderer, student, teacher }
     }
   }
   assert.deepEqual(signatures.get('screen'), signatures.get('print_pdf'))
@@ -251,6 +274,125 @@ try {
       }),
       { code: 'CANONICAL_CONSUMPTION_REJECTED' },
     )
+  }
+
+  if (provisionActualArtifacts) {
+    const head = execFileSync('git', ['rev-parse', '--short=12', 'HEAD'], {
+      encoding: 'utf8',
+    }).trim()
+    const outputDir = path.resolve(
+      '.scratch',
+      'paper-canonical-ticket-05-qa',
+      head,
+    )
+    mkdirSync(outputDir, { recursive: true })
+
+    const vite = await import('../app/node_modules/vite/dist/node/index.js')
+    const viteServer = await vite.createServer({
+      root: path.resolve('app'),
+      appType: 'custom',
+      server: { middlewareMode: true },
+    })
+    let screenMarkup
+    try {
+      const screenRenderer = await viteServer.ssrLoadModule(
+        '/src/qa/renderCanonicalConsumptionSurface.tsx',
+      )
+      screenMarkup = [
+        screenRenderer.renderCanonicalConsumptionSurface(
+          artifactProof.screen.cloze.surfaceData,
+        ),
+        screenRenderer.renderCanonicalConsumptionSurface(
+          artifactProof.screen.grammar.surfaceData,
+        ),
+      ].join('')
+    } finally {
+      await viteServer.close()
+    }
+    const surfaceCss = readFileSync(
+      'app/src/shared-ui/papersurface/PaperSurface.css',
+      'utf8',
+    )
+    const screenHtml = `<!doctype html><html><head><meta charset="utf-8"><style>${surfaceCss}</style></head><body>${screenMarkup}</body></html>`
+    const screenPath = path.join(outputDir, 'screen.html')
+    const printStudentPath = path.join(outputDir, 'print-student.html')
+    const printTeacherPath = path.join(outputDir, 'print-teacher.html')
+    writeFileSync(screenPath, screenHtml)
+    writeFileSync(printStudentPath, artifactProof.print.student)
+    writeFileSync(printTeacherPath, artifactProof.print.teacher)
+
+    const playwright = await import('../app/node_modules/playwright/index.js')
+    const browser = await playwright.default.chromium.launch({ headless: true })
+    try {
+      const screenPage = await browser.newPage({
+        viewport: { width: 1280, height: 900 },
+      })
+      await screenPage.goto(new URL(`file://${screenPath}`).href)
+      assert.equal(
+        await screenPage.locator('[data-paper-question-id]').count(),
+        15,
+      )
+      assert.equal(
+        await screenPage.locator('[data-canonical-placement-signature]').count(),
+        15,
+      )
+      await screenPage.screenshot({
+        path: path.join(outputDir, 'screen.png'),
+        fullPage: true,
+      })
+      await screenPage.pdf({
+        path: path.join(outputDir, 'screen.pdf'),
+        format: 'A4',
+        printBackground: true,
+      })
+
+      const printPage = await browser.newPage()
+      await printPage.goto(new URL(`file://${printStudentPath}`).href)
+      assert.equal(
+        await printPage.locator('.print-blank-num').count(),
+        25,
+      )
+      await printPage.screenshot({
+        path: path.join(outputDir, 'print-student.png'),
+        fullPage: true,
+      })
+      await printPage.pdf({
+        path: path.join(outputDir, 'print-student.pdf'),
+        format: 'A4',
+        printBackground: true,
+      })
+    } finally {
+      await browser.close()
+    }
+
+    const studentDocxPath = path.join(outputDir, 'student.docx')
+    artifactProof.docx.renderer.writeDocxPackage({
+      documentXml: artifactProof.docx.student,
+      outputPath: studentDocxPath,
+      title: asset.paper.title,
+    })
+    artifactProof.docx.renderer.convertDocxToPdf(
+      studentDocxPath,
+      path.join(outputDir, 'student-docx.pdf'),
+    )
+    writeFileSync(
+      path.join(outputDir, 'student-document.xml'),
+      artifactProof.docx.student,
+    )
+    writeFileSync(
+      path.join(outputDir, 'teacher-document.xml'),
+      artifactProof.docx.teacher,
+    )
+    writeFileSync(
+      path.join(outputDir, 'HEAD.txt'),
+      `${execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim()}\n`,
+    )
+    execFileSync(
+      process.execPath,
+      ['scripts/verify-paper-canonical-abcd-layout.mjs', '--actual-artifacts'],
+      { stdio: 'inherit' },
+    )
+    console.log(`QA artifacts: ${outputDir}`)
   }
 } finally {
   db.close()
