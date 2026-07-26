@@ -570,7 +570,7 @@ export function buildPrintHtml({
               ? ` data-canonical-placement-signature="${escapeHtml(placement.signature)}" data-canonical-placement-mode="${placement.mode}"`
               : ''
             const renderedOptions = printQuestion.options.map((o) => `<span>${escapeHtml(o.label)}. ${escapeHtml(o.content)}</span>`).join('')
-            groupHtml += `<div class="question"><p class="options-inline options-inline--numbered"><span class="qnum">${questionNum}.</span>${placement ? `<span class="canonical-options canonical-options--${placement.mode}"${placementAttrs}>${renderedOptions}</span>` : renderedOptions}</p>`
+            groupHtml += `<div class="question"><p class="options-inline options-inline--numbered${placement ? ' options-inline--canonical' : ''}"><span class="qnum">${questionNum}.</span>${placement ? `<span class="canonical-options canonical-options--${placement.mode}"${placementAttrs}>${renderedOptions}</span>` : renderedOptions}</p>`
           } else {
             groupHtml += `<div class="question"><p class="stem"><span class="qnum">${questionNum}.</span> ${escapeHtml(printQuestion.stem)}</p>`
             groupHtml += renderOptions(printQuestion.options, detail.groupType)
@@ -819,8 +819,15 @@ body {
 
 .canonical-options {
   display: inline-grid;
-  width: 100%;
+  width: 438.2pt;
   vertical-align: top;
+}
+
+.options-inline--canonical {
+  display: grid;
+  grid-template-columns: 21pt 438.2pt;
+  margin-left: 0;
+  width: 459.2pt;
 }
 
 .canonical-options--four_columns {

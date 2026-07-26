@@ -153,8 +153,8 @@ function paragraph(content = '', options = {}) {
     options.before || options.after
       ? `<w:spacing${options.before ? ` w:before="${options.before}"` : ''}${options.after ? ` w:after="${options.after}"` : ''}/>`
       : '',
-    options.indentLeft || options.firstLineIndent
-      ? `<w:ind${options.indentLeft ? ` w:left="${options.indentLeft}"` : ''}${options.firstLineIndent ? ` w:firstLine="${options.firstLineIndent}"` : ''}/>`
+    options.indentLeft || options.firstLineIndent || options.hangingIndent
+      ? `<w:ind${options.indentLeft ? ` w:left="${options.indentLeft}"` : ''}${options.firstLineIndent ? ` w:firstLine="${options.firstLineIndent}"` : ''}${options.hangingIndent ? ` w:hanging="${options.hangingIndent}"` : ''}/>`
       : '',
     options.keepNext ? '<w:keepNext/>' : '',
     options.shading ? `<w:shd w:val="clear" w:color="auto" w:fill="${options.shading}"/>` : '',
@@ -1298,6 +1298,7 @@ function canonicalDocxQuestionOptionLayout(questionNumber, options, plan) {
         {
           after: 30,
           indentLeft: 420,
+          hangingIndent: 420,
           size: 21,
         },
       )

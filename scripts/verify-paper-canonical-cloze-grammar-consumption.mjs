@@ -242,6 +242,35 @@ try {
     paperId: fixture.source.paperId,
     consumerContract: consumerContractRefs.screen,
   }, store)
+  const oneColumnConsumption = structuredClone(await loadPaperForConsumption({
+    paperId: fixture.source.paperId,
+    consumerContract: consumerContractRefs.docx,
+  }, store))
+  const oneColumnOccurrence = oneColumnConsumption.selections
+    .find((selection) => selection.familyContractId === 'cloze')
+    .projectedOccurrences[0]
+  for (const option of oneColumnOccurrence.choices.sets[0].options) {
+    option.content[0].text = Array.from({ length: 24 }, () => 'word').join(' ')
+  }
+  const oneColumnGroup = projectCanonicalConsumerGroup({
+    consumption: oneColumnConsumption,
+    familyContractId: 'cloze',
+    groupId: 'group-2026-i-cloze',
+  })
+  assert.equal(oneColumnGroup.questions[0].layoutPlan.mode, 'one_column')
+  const oneColumnXml = artifactProof.docx.renderer.buildDocumentXml({
+    title: asset.paper.title,
+    versionType: 'student',
+    printStyle: 'exam',
+    items: [items[0]],
+    blocks: [blocks[0]],
+    questionNumberStart: 41,
+    canonicalConsumption: oneColumnConsumption,
+  })
+  assert.equal(
+    oneColumnXml.includes('<w:ind w:left="420" w:hanging="420"/>'),
+    true,
+  )
   const partial = structuredClone(complete)
   partial.selections.find((selection) => selection.familyContractId === 'cloze').projectedOccurrences.pop()
   assert.throws(
