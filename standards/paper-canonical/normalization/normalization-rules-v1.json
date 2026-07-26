@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "normalization-rules-v1",
+  "id": "normalization-rules",
+  "version": "1",
+  "owner": "normalization",
+  "rules": [
+    {
+      "ruleId": "direct-projection",
+      "version": "1",
+      "certainty": "exact",
+      "allowedOperations": ["direct_projection", "structural_tokenization", "exact_join", "anchor_identity"]
+    },
+    {
+      "ruleId": "guarded-representation-normalization",
+      "version": "1",
+      "certainty": "exact",
+      "allowedOperations": ["representation_normalization"]
+    }
+  ]
+}

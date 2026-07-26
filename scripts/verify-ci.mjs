@@ -13,6 +13,8 @@ const registry = {
   ],
   scripts: [
   'scripts/verify-paper-asset-v1.mjs',
+  'scripts/verify-paper-canonical-foundation.mjs',
+  'scripts/verify-paper-canonical-publication.mjs',
   'scripts/verify-paper-normalization-cloze.mjs',
   'scripts/verify-paper-normalization-grammar-fill.mjs',
   'scripts/verify-paper-normalization-cloze-surface.mjs',

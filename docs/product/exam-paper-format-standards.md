@@ -1,10 +1,34 @@
-# 试卷排版标准(Exam Paper Typography Standard)v2(owner 2026-07-08 终审拍板)
+# 试卷格式标准索引(Exam Paper Format Standards)
 
-**效力:一切渲染、打印、显示均以本标准为准**(owner 原话拍板)。
+## 当前可执行权威
 
-v2(2026-07-08)取代 v1 文字版,并吸收双权威源实测数值与命题人社区
-共识(含纠错)。数据契约(题号/分值/洗卷)另见
-`docs/product/nck1-paper-standard.md`,两者互补:它管数据,本标准管视觉。
+本文件是唯一的人类可读索引；当前 canonical 编译、校验、发布和未来的
+Screen / Print-PDF / DOCX consumer 只从
+[`standards/paper-canonical/manifest-v1.json`](../../standards/paper-canonical/manifest-v1.json)
+解析一份 digest-closed 的权威闭包。这里不复制卷型题号、分值、题组
+cardinality、清洗条件或字体/物理排版数值，也不能被 caller 当作第二套配置。
+
+机器 manifest 分别绑定 Core Invariants、NCK1 / Zhejiang legacy / national
+legacy Profiles、各 family contract、Normalization Rules、Source Adapters、
+Renderer Typography、其 schema 及纯验证入口。未知版本、缺件、digest 不符、
+重复所有者或跨 artifact 不一致必须 fail closed。`nck1-paper-standard.md` 和
+`paper-asset-v1.md`保留为历史/legacy source evidence，不能定义 Canonical Plan
+或 Canonical Question Group。
+
+任何会改变 admission、canonical 语义、Profile、normalization 或 renderer
+结果的变更，必须新增 versioned artifact、schema/semantic conformance fixture、
+迁移说明和 manifest 升版；已经被 Publication 引用的 artifact 不可原位修改。
+
+## v2 历史排版证据（非当前可执行标准）
+
+以下内容保留 2026-07-08 的测量与 owner 决策记录，供后续版本化 Renderer
+Typography artifact 溯源。它不授权 compiler、consumer 或 renderer 从 Markdown
+重建或覆盖 manifest 的事实。
+
+**历史效力记录：一切渲染、打印、显示均以当时 v2 为准**（owner 原话拍板）。
+
+v2（2026-07-08）取代 v1 文字版，并吸收双权威源实测数值与命题人社区
+共识（含纠错）。
 
 ## 0. 原则与权威源(owner 2026-07-08 拍板)
 

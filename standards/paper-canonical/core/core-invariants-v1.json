@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "core-invariants-v1",
+  "id": "core-invariants",
+  "version": "1",
+  "owner": "core",
+  "dispositions": ["ready", "needs_review", "unsupported", "incomplete_source", "answer_conflict"],
+  "identityRule": "source-anchor-set-v1",
+  "fingerprintRule": "source-closure-v1",
+  "semanticDigestRule": "canonical-semantics-v1",
+  "projectionContract": "canonical-projector-v1",
+  "invariants": [
+    "immutable_source_capture",
+    "one_manifest_closure_per_compile",
+    "ready_is_complete_only",
+    "plan_links_groups_only",
+    "analysis_is_not_semantic_authority",
+    "rich_tables_and_figures_are_first_class"
+  ]
+}

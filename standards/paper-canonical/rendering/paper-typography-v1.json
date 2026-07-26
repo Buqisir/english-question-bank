@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "renderer-typography-v1",
+  "id": "paper-typography",
+  "version": "1",
+  "owner": "renderer_typography",
+  "paper": "a4",
+  "projectionContract": "canonical-projector-v1",
+  "rules": [
+    "typography_never_changes_canonical_text",
+    "blank_geometry_is_renderer_owned",
+    "option_layout_is_not_canonical_semantics"
+  ]
+}
