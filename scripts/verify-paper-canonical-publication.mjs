@@ -65,7 +65,7 @@ function legacyBundleFrom(compilation, sourceAsset, transformationRecords = []) 
   report.sourceFingerprint = digestJson({ captureDigest: sourceCapture.digest, groupFingerprints: groups.map((group) => group.sourceFingerprint) })
   report.directSourceMap = groups.flatMap((group) => group.sourceMap.entries)
   report.semanticDigest = digestJson({ groups: groups.map((group) => group.semanticDigest) })
-  const questionGroups = { schemaVersion: 'canonical-question-groups-v1', groups }
+  const questionGroups = { schemaVersion: 'canonical-question-groups-v1', groups: [...groups].sort((left, right) => left.identity.groupId.localeCompare(right.identity.groupId)) }
   const descriptors = [
     descriptor('source_capture', sourceCapture, 'canonical/source-capture-v1.json'),
     descriptor('paper_plan', plan, 'canonical/canonical-paper-plan-v1.json'),

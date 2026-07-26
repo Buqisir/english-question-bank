@@ -133,6 +133,20 @@ function validateSourceAssetBinding(sourceCapture, sourceAsset, options) {
   return matchingDocuments[0]
 }
 
+function reportSemanticOrder(groups, plan, legacyAuthority) {
+  if (!legacyAuthority) return groups
+  const groupsById = new Map(groups.map((group) => [group?.identity?.groupId, group]))
+  const ordered = []
+  for (const binding of plan.slotBindings || []) {
+    if (binding?.state !== 'bound') continue
+    const group = groupsById.get(binding.groupRef?.groupId)
+    if (!group || ordered.includes(group)) throw publicationError('CANONICAL_PUBLICATION_LINEAGE_INVALID', 'Legacy Publication Plan does not recover one semantic order for every Canonical Group')
+    ordered.push(group)
+  }
+  if (ordered.length !== groups.length) throw publicationError('CANONICAL_PUBLICATION_LINEAGE_INVALID', 'Legacy Publication Plan does not close the Canonical Group order')
+  return ordered
+}
+
 function validatePublicationLineage({ sourceCapture, plan, groups, normalizationReport, authorityClosure }) {
   const legacyAuthority = authorityClosure.authorityRef.manifestVersion === '1'
   const { spans } = validateSourceCaptureIntegrity(sourceCapture, { requireEmbeddedEvidence: !legacyAuthority })
@@ -158,10 +172,11 @@ function validatePublicationLineage({ sourceCapture, plan, groups, normalization
     if (group.sourceFingerprint !== expectedFingerprint) throw publicationError('CANONICAL_PUBLICATION_LINEAGE_INVALID', 'Canonical Group source fingerprint does not match source lineage')
   }
   for (const assignment of plan.numberingAssignments || []) if (!spans.has(assignment.sourceNumberSpan)) throw publicationError('CANONICAL_PUBLICATION_LINEAGE_INVALID', 'Canonical Plan numbering assignment lacks a captured source span')
-  const expectedDirectSourceMap = groups.flatMap((group) => group.sourceMap.entries)
-  const expectedSourceFingerprint = digestJson({ captureDigest: sourceCapture.digest, groupFingerprints: groups.map((group) => group.sourceFingerprint) })
+  const semanticGroups = reportSemanticOrder(groups, plan, legacyAuthority)
+  const expectedDirectSourceMap = semanticGroups.flatMap((group) => group.sourceMap.entries)
+  const expectedSourceFingerprint = digestJson({ captureDigest: sourceCapture.digest, groupFingerprints: semanticGroups.map((group) => group.sourceFingerprint) })
   const expectedSemanticDigest = legacyAuthority
-    ? digestJson({ groups: groups.map((group) => group.semanticDigest) })
+    ? digestJson({ groups: semanticGroups.map((group) => group.semanticDigest) })
     : digestJson({ groups: groups.map((group) => group.semanticDigest), reviewDecisionDigest })
   if (normalizationReport.sourceFingerprint !== expectedSourceFingerprint || stableStringify(normalizationReport.directSourceMap) !== stableStringify(expectedDirectSourceMap) || normalizationReport.semanticDigest !== expectedSemanticDigest) throw publicationError('CANONICAL_PUBLICATION_LINEAGE_INVALID', 'Normalization Report does not close its direct source lineage')
 }
