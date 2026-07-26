@@ -175,7 +175,10 @@ export async function renderPaginatedPaper(printHtml) {
     // Step 6: page.pdf() from THIS SAME page — the locked contract this
     // whole module exists to enforce. Do not extract this into a separate
     // function that could be called against an unpaginated page.
-    const pdfBytes = await page.pdf({ printBackground: true })
+    const pdfBytes = await page.pdf({
+      printBackground: true,
+      preferCSSPageSize: true,
+    })
 
     return { paginatedHtml, pdfBytes, pageCount }
   })
