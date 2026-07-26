@@ -381,6 +381,12 @@ try {
         await printPage.locator('.print-blank-num').count(),
         25,
       )
+      assert.equal(
+        await printPage.locator('.options-inline--canonical').evaluateAll(
+          (rows) => rows.every((row) => row.scrollWidth <= row.clientWidth + 1),
+        ),
+        true,
+      )
       await printPage.screenshot({
         path: path.join(outputDir, 'print-student.png'),
         fullPage: true,

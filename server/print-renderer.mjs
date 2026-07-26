@@ -830,6 +830,10 @@ body {
   width: 459.2pt;
 }
 
+.options-inline--canonical > .canonical-options {
+  margin-right: 0;
+}
+
 .canonical-options--four_columns {
   grid-template-columns: repeat(4, minmax(0, 1fr));
   white-space: nowrap;
