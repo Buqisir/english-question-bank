@@ -24,6 +24,10 @@ _Avoid_: source format, renderer template, one universal paper shape
 One paper's validated instantiation of a Paper Format Profile, linking every required active slot to its Canonical Question Group and every Inactive Source Slot to its source closure while fixing paper order, numbering, scoring, instructions, and answer regions.
 _Avoid_: paper asset, layout tree, rendered document
 
+**Canonical Paper Publication**:
+One immutable, versioned, integrity-closed set that binds a single source paper asset instance to one complete Canonical Paper Plan, its exact Canonical Question Groups, Source Capture closure, Normalization Report, provenance/digests, and executable authority closure. It is admitted or rejected as a whole; its additive sidecars are not independently publishable.
+_Avoid_: individual sidecar, mutable latest directory, partially canonical paper
+
 **Inactive Source Slot**:
 A Paper Format Profile slot whose required source evidence is closed in a Canonical Paper Plan but deliberately produces no Canonical Question Group and appears on no current consumption surface. It preserves a real part of the source paper without pretending that family is active.
 _Avoid_: incomplete Question Group, hidden Question Group, raw group
@@ -154,6 +158,7 @@ own light axis); using "考点" loosely when one of these specific axes is meant
 ## Relationships
 
 - A **Source Capture** can compile into one **Canonical Paper Plan**, many **Canonical Question Groups**, and one **Normalization Report**.
+- A **Canonical Paper Publication** binds exactly one source paper asset instance, one complete **Canonical Paper Plan**, its exact **Canonical Question Groups**, one **Source Capture** closure, one **Normalization Report**, and one executable authority closure.
 - Every source-backed canonical value or relationship either maps directly to one or more **Source Spans** or is justified by an ordered **Transformation Record**.
 - A **Paper Format Profile** can be instantiated by many **Canonical Paper Plans**; each Canonical Paper Plan uses exactly one versioned Paper Format Profile.
 - A **Canonical Paper Plan** links its active paper slots to **Canonical Question Groups** but does not contain their passage or question content.
