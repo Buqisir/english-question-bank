@@ -154,6 +154,8 @@ assertBlocked((value) => value.assertions.pop(), 'incomplete_source')
 assertBlocked((value) => value.assertions.push({ ...value.assertions[0], assertionId: 'answer:conflict', answer: 'B' }), 'answer_conflict')
 const exactTransformation = structuredClone(source)
 const transformedGroup = exactTransformation.groups[0]
+const compiledCapture = first.artifacts.sourceCapture
+const transformedObservation = compiledCapture.observations.find((observation) => observation.sourceSpanId === transformedGroup.sourceSpanId)
 exactTransformation.transformations = [{
   recordId: 'record:exact',
   sequence: 1,
@@ -162,11 +164,11 @@ exactTransformation.transformations = [{
   target: { identity: transformedGroup.groupId, path: 'content.blocks' },
   operation: 'direct_projection',
   inputSourceSpanIds: [transformedGroup.sourceSpanId],
-  before: 'fixture',
-  after: 'fixture',
+  before: transformedObservation.value,
+  after: transformedObservation.value,
   certainty: 'exact',
-  preconditions: { direct: true },
-  outputDigest: digestJson('fixture'),
+  preconditions: { sourceObservationIds: [transformedObservation.observationId], sourceValueDigests: [digestJson(transformedObservation.value)] },
+  outputDigest: digestJson(transformedObservation.value),
 }]
 const transformed = compileCanonicalPaper(makeRequest(exactTransformation))
 assert.equal(transformed.disposition, 'ready')
@@ -178,9 +180,23 @@ for (const rule of closure.artifacts.normalization.rules) {
     record.ruleId = rule.ruleId
     record.ruleVersion = rule.version
     record.operation = operation
-    record.preconditions = structuredClone(rule.operationProofs[operation].requiredPreconditions)
-    record.before = { operation }
-    record.after = { operation }
+    const proof = rule.operationProofs[operation]
+    const observations = proof.kind === 'source_identity'
+      ? [transformedObservation]
+      : compiledCapture.observations.slice(0, 2)
+    const sourceObservationIds = observations.map((observation) => observation.observationId)
+    const sourceValueDigests = observations.map((observation) => digestJson(observation.value))
+    record.inputSourceSpanIds = observations.map((observation) => observation.sourceSpanId)
+    record.preconditions = { sourceObservationIds, sourceValueDigests }
+    if (proof.kind === 'unique_observation_join') {
+      const joinValue = { sourceObservationIds, sourceValueDigests }
+      record.target = { identity: `source-join:${digestJson(joinValue).slice('sha256:'.length, 28)}`, path: 'source_join' }
+      record.before = joinValue
+      record.after = joinValue
+    } else {
+      record.before = transformedObservation.value
+      record.after = transformedObservation.value
+    }
     record.outputDigest = digestJson(record.after)
     assert.equal(compileCanonicalPaper(makeRequest(operationFixture)).disposition, 'ready', `${rule.ruleId}@${rule.version}/${operation}`)
   }
@@ -198,6 +214,22 @@ unprovenExactJoin.transformations[0].after = 'fabricated canonical relation'
 unprovenExactJoin.transformations[0].preconditions = { claimed: true }
 unprovenExactJoin.transformations[0].outputDigest = digestJson(unprovenExactJoin.transformations[0].after)
 assert.equal(compileCanonicalPaper(makeRequest(unprovenExactJoin)).disposition, 'needs_review')
+const arbitraryJoinTarget = structuredClone(exactTransformation)
+const joinObservations = compiledCapture.observations.slice(0, 2)
+const joinValue = {
+  sourceObservationIds: joinObservations.map((observation) => observation.observationId),
+  sourceValueDigests: joinObservations.map((observation) => digestJson(observation.value)),
+}
+arbitraryJoinTarget.transformations[0] = {
+  ...arbitraryJoinTarget.transformations[0],
+  operation: 'exact_join',
+  inputSourceSpanIds: joinObservations.map((observation) => observation.sourceSpanId),
+  before: joinValue,
+  after: joinValue,
+  preconditions: joinValue,
+  outputDigest: digestJson(joinValue),
+}
+assert.equal(compileCanonicalPaper(makeRequest(arbitraryJoinTarget)).disposition, 'needs_review')
 
 const reviewedAmbiguity = structuredClone(source)
 reviewedAmbiguity.ambiguities = [{

@@ -11,6 +11,7 @@ import {
 import path from 'node:path'
 
 import { canonicalAuthorityRef, resolveCanonicalAuthority, validateJsonSchema } from '../../shared/paper-canonical/authority.mjs'
+import { validateExactTransformationRecords } from '../../shared/paper-canonical/compiler.mjs'
 import { resolveConsumerContract } from '../../shared/paper-canonical/consumers.mjs'
 import { projectCanonicalPaper } from '../../shared/paper-canonical/projector.mjs'
 import { digestJson, sha256, stableStringify, withoutKey } from '../../shared/paper-canonical/stable.mjs'
@@ -110,16 +111,12 @@ function validateSourceCaptureIntegrity(sourceCapture) {
   return { documents, spans }
 }
 
-function validatePublicationLineage({ sourceCapture, plan, groups, normalizationReport, normalizationRules }) {
+function validatePublicationLineage({ sourceCapture, plan, groups, normalizationReport, authorityClosure }) {
   const { spans } = validateSourceCaptureIntegrity(sourceCapture)
   const records = normalizationReport.transformationRecords || []
   const recordIds = new Set(records.map((record) => record.recordId))
-  const rulesById = new Map((normalizationRules || []).map((rule) => [`${rule.ruleId}@${rule.version}`, rule]))
-  if (recordIds.size !== records.length || records.some((record) => {
-    const rule = rulesById.get(`${record.ruleId}@${record.ruleVersion}`)
-    const proof = rule?.operationProofs?.[record.operation]
-    return !rule || !rule.allowedOperations.includes(record.operation) || !proof || proof.kind !== 'identity' || stableStringify(record.preconditions) !== stableStringify(proof.requiredPreconditions) || !Array.isArray(record.inputSourceSpanIds) || record.inputSourceSpanIds.length === 0 || record.inputSourceSpanIds.some((sourceSpanId) => !spans.has(sourceSpanId)) || stableStringify(record.before) !== stableStringify(record.after) || record.outputDigest !== digestJson(record.after)
-  })) {
+  const acceptedLedger = validateExactTransformationRecords(records, sourceCapture, authorityClosure)
+  if (recordIds.size !== records.length || acceptedLedger.diagnostics.length > 0 || acceptedLedger.records.length !== records.length || stableStringify(acceptedLedger.records) !== stableStringify(records)) {
     throw publicationError('CANONICAL_PUBLICATION_LINEAGE_INVALID', 'Transformation Records do not prove exact source replay')
   }
   const expectedRecordIds = plan.sourceConformance?.transformationRecordIds || []
@@ -216,7 +213,7 @@ export function validateCanonicalPublicationBundle({ manifest, sourceAsset, read
   }
   const sourceAssetDocument = artifacts.source_capture.documents.find((document) => document.documentId === manifest.sourceAssetDocumentId)
   if (!sourceAssetDocument || sourceAssetDocument.sha256 !== manifest.sourceAssetDigest || sourceAssetDocument.sha256 !== sha256(sourceAsset)) throw publicationError('CANONICAL_PUBLICATION_SOURCE_UNBOUND', 'Publication source asset does not bind to captured source evidence')
-  validatePublicationLineage({ sourceCapture: artifacts.source_capture, plan: artifacts.paper_plan, groups: artifacts.question_groups.groups, normalizationReport: artifacts.normalization_report, normalizationRules: closure.artifacts.normalization.rules })
+  validatePublicationLineage({ sourceCapture: artifacts.source_capture, plan: artifacts.paper_plan, groups: artifacts.question_groups.groups, normalizationReport: artifacts.normalization_report, authorityClosure: closure })
   let projected
   try {
     projected = projectCanonicalPaper({ plan: artifacts.paper_plan, groups: artifacts.question_groups.groups, sourceCapture: artifacts.source_capture, authorityClosure: closure })

@@ -182,7 +182,8 @@ function validateNormalizationRules(artifact) {
     ruleIds.add(`${rule.ruleId}@${rule.version}`)
     for (const operation of rule.allowedOperations) {
       const proof = rule.operationProofs[operation]
-      if (!isRecordValue(proof) || !exactKeys(proof, ['kind', 'requiredPreconditions']) || proof.kind !== 'identity' || !isRecordValue(proof.requiredPreconditions) || Object.keys(proof.requiredPreconditions).length === 0 || Object.values(proof.requiredPreconditions).some((value) => value !== true)) issues.push(issue('NORMALIZATION_PROOF_INVALID', `${path}.operationProofs.${operation}`, 'Operation proof must have a machine-checkable exact contract'))
+      const validProof = isRecordValue(proof) && exactKeys(proof, ['kind', 'observationArity']) && Number.isInteger(proof.observationArity) && ((proof.kind === 'source_identity' && proof.observationArity === 1) || (proof.kind === 'unique_observation_join' && proof.observationArity === 2))
+      if (!validProof) issues.push(issue('NORMALIZATION_PROOF_INVALID', `${path}.operationProofs.${operation}`, 'Operation proof must have a machine-checkable exact contract'))
     }
   }
   return issues

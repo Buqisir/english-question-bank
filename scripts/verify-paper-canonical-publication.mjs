@@ -84,6 +84,50 @@ assert.throws(
   { code: 'CANONICAL_PUBLICATION_LINEAGE_INVALID' },
 )
 
+const ledgerFixture = makeReadyCanonicalFixture()
+const ledgerBaseline = compileCanonicalPaper(ledgerFixture.request)
+const ledgerSource = structuredClone(ledgerFixture.source)
+const ledgerGroup = ledgerSource.groups[0]
+const ledgerObservation = ledgerBaseline.artifacts.sourceCapture.observations.find((observation) => observation.sourceSpanId === ledgerGroup.sourceSpanId)
+ledgerSource.transformations = [{
+  recordId: 'record:publication-exact',
+  sequence: 1,
+  ruleId: 'direct-projection',
+  ruleVersion: '1',
+  target: { identity: ledgerGroup.groupId, path: 'content.blocks' },
+  operation: 'direct_projection',
+  inputSourceSpanIds: [ledgerObservation.sourceSpanId],
+  before: ledgerObservation.value,
+  after: ledgerObservation.value,
+  certainty: 'exact',
+  preconditions: { sourceObservationIds: [ledgerObservation.observationId], sourceValueDigests: [digestJson(ledgerObservation.value)] },
+  outputDigest: digestJson(ledgerObservation.value),
+}]
+ledgerFixture.request.evidence.documents[0].bytes = new TextEncoder().encode(JSON.stringify(ledgerSource))
+const ledgerCompilation = compileCanonicalPaper(ledgerFixture.request)
+assert.equal(ledgerCompilation.disposition, 'ready')
+const ledgerSealed = sealCanonicalPublication({ compilation: ledgerCompilation, sourceAssetVersion: 1, sourceAsset: ledgerFixture.request.evidence.documents[0].bytes })
+const heuristicManifest = structuredClone(ledgerSealed.manifest)
+const heuristicArtifacts = { ...ledgerSealed.artifacts }
+const heuristicReport = JSON.parse(new TextDecoder().decode(heuristicArtifacts[reportPath]))
+heuristicReport.transformationRecords[0].certainty = 'heuristic'
+heuristicArtifacts[reportPath] = new TextEncoder().encode(`${stableStringify(heuristicReport)}\n`)
+const heuristicDescriptor = heuristicManifest.artifacts.find((artifact) => artifact.relativePath === reportPath)
+heuristicDescriptor.byteLength = heuristicArtifacts[reportPath].byteLength
+heuristicDescriptor.sha256 = sha256(heuristicArtifacts[reportPath])
+heuristicManifest.publicationDigest = digestJson(((manifest) => {
+  const { publicationDigest: _publicationDigest, ...base } = manifest
+  return base
+})(heuristicManifest))
+assert.throws(
+  () => validateCanonicalPublicationBundle({
+    manifest: heuristicManifest,
+    sourceAsset: ledgerSealed.sourceAsset,
+    readArtifact: (relativePath) => heuristicArtifacts[relativePath] || ledgerSealed.sourceEvidence[relativePath],
+  }),
+  { code: 'CANONICAL_PUBLICATION_LINEAGE_INVALID' },
+)
+
 const rootDir = mkdtempSync(path.join(tmpdir(), 'eqb-canonical-publication-'))
 const db = new DatabaseSync(path.join(rootDir, 'publication.sqlite'))
 try {

@@ -171,15 +171,17 @@ function validateAnswerCoverage(source, capture, diagnostics) {
   }
 }
 
-function validateExactTransformationRecords(records, capture, closure) {
+export function validateExactTransformationRecords(records, capture, closure) {
   const diagnostics = []
   const registeredRules = new Map(closure.artifacts.normalization.rules.map((rule) => [`${rule.ruleId}@${rule.version}`, rule]))
   const sourceSpanIds = new Set(capture.sourceSpans.map((span) => span.sourceSpanId))
+  const observationsById = new Map(capture.observations.map((observation) => [observation.observationId, observation]))
   let previousSequence = 0
+  const recordIds = new Set()
   const accepted = []
   for (const [index, record] of (records || []).entries()) {
     const path = `$.transformations[${index}]`
-    if (!isRecordValue(record) || !exactKeys(record, ['recordId', 'sequence', 'ruleId', 'ruleVersion', 'target', 'operation', 'inputSourceSpanIds', 'before', 'after', 'certainty', 'preconditions', 'outputDigest'])) {
+    if (!isRecordValue(record) || !exactKeys(record, ['recordId', 'sequence', 'ruleId', 'ruleVersion', 'target', 'operation', 'inputSourceSpanIds', 'before', 'after', 'certainty', 'preconditions', 'outputDigest']) || typeof record.recordId !== 'string' || typeof record.ruleId !== 'string' || typeof record.ruleVersion !== 'string' || typeof record.operation !== 'string' || !isRecordValue(record.target) || !exactKeys(record.target, ['identity', 'path']) || typeof record.target.identity !== 'string' || typeof record.target.path !== 'string') {
       diagnostics.push(diagnostic('TRANSFORMATION_SHAPE_INVALID', 'needs_review', path, 'Transformation records are closed ledger entries'))
       continue
     }
@@ -189,12 +191,25 @@ function validateExactTransformationRecords(records, capture, closure) {
       diagnostics.push(diagnostic('TRANSFORMATION_NOT_EXACT', 'needs_review', path, 'Only registered exact transformations can produce canonical semantics'))
       continue
     }
-    const exactProof = proof.kind === 'identity' && stableStringify(record.preconditions) === stableStringify(proof.requiredPreconditions) && stableStringify(record.before) === stableStringify(record.after)
-    if (!Number.isInteger(record.sequence) || record.sequence <= previousSequence || !Array.isArray(record.inputSourceSpanIds) || record.inputSourceSpanIds.length === 0 || record.inputSourceSpanIds.some((id) => !sourceSpanIds.has(id)) || record.outputDigest !== digestJson(record.after) || !exactProof) {
+    const observationIds = record.preconditions?.sourceObservationIds
+    const observations = Array.isArray(observationIds) ? observationIds.map((observationId) => observationsById.get(observationId)) : []
+    const expectedPreconditions = observations.length === proof.observationArity && observations.every(Boolean)
+      ? {
+          sourceObservationIds: [...observationIds],
+          sourceValueDigests: observations.map((observation) => digestJson(observation.value)),
+        }
+      : null
+    const expectedSpanIds = observations.map((observation) => observation.sourceSpanId)
+    const sourceIdentityProof = proof.kind === 'source_identity' && observations.length === 1 && observations[0] && stableStringify(record.before) === stableStringify(observations[0].value) && stableStringify(record.after) === stableStringify(observations[0].value)
+    const joinValue = expectedPreconditions && { sourceObservationIds: expectedPreconditions.sourceObservationIds, sourceValueDigests: expectedPreconditions.sourceValueDigests }
+    const uniqueJoinProof = proof.kind === 'unique_observation_join' && observations.length === 2 && new Set(observationIds).size === 2 && stableStringify(record.before) === stableStringify(joinValue) && stableStringify(record.after) === stableStringify(joinValue) && isRecordValue(record.target) && exactKeys(record.target, ['identity', 'path']) && record.target.path === 'source_join' && record.target.identity === stableId('source-join', joinValue)
+    const exactProof = expectedPreconditions && stableStringify(record.preconditions) === stableStringify(expectedPreconditions) && stableStringify(record.inputSourceSpanIds) === stableStringify(expectedSpanIds) && (sourceIdentityProof || uniqueJoinProof)
+    if (recordIds.has(record.recordId) || !Number.isInteger(record.sequence) || record.sequence <= previousSequence || !Array.isArray(record.inputSourceSpanIds) || record.inputSourceSpanIds.length === 0 || record.inputSourceSpanIds.some((id) => !sourceSpanIds.has(id)) || record.outputDigest !== digestJson(record.after) || !exactProof) {
       diagnostics.push(diagnostic('TRANSFORMATION_CLOSURE_INVALID', 'needs_review', path, 'Transformation sequence, lineage, or output digest cannot be replayed'))
       continue
     }
     previousSequence = record.sequence
+    recordIds.add(record.recordId)
     accepted.push(cloneJson(record))
   }
   return { diagnostics, records: accepted }
