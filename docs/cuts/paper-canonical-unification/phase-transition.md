@@ -1,16 +1,16 @@
 # Paper canonical unification phase transition
 
 Status: active
-Previous phase: wayfinder
-Current phase: to-spec
-Next on PASS: to-spec
+Previous phase: to-spec
+Current phase: to-tickets
+Next on PASS: to-tickets
 Terminal: no
 
 Wayfinder map: `docs/cuts/paper-canonical-unification/wayfinder/map.md`
 Current map binding: verified
-Current map binding commit: `93bfe6b94d2ce22fb010382cda44c341cbf5ec8c`
+Current map binding commit: `6139c3d4e8cfe908544d381a905f198b5e84a3a7`
 Current map artifact: `docs/cuts/paper-canonical-unification/wayfinder/map.md`
-Current map artifact SHA-256: `f81e51d263634354ce3d43129e1a507f992b5bb6a591d9dcd88c797710088f19`
+Current map artifact SHA-256: `08384666d57e7a3ac1810c00f8545b782251852bc4766763219673e406ab6c8e`
 Wayfinder status: done
 Wayfinder provenance: verified
 Wayfinder entry skill: `/Users/huangxuewei/.claude/skills/wayfinder/SKILL.md`
@@ -19,9 +19,15 @@ Wayfinder result commit: `ad2ccfce58e7c8d4549d6cc9dcdbc0550a04a0bc`
 Wayfinder artifact: `docs/cuts/paper-canonical-unification/wayfinder/map.md`
 Wayfinder artifact SHA-256: `7522e857854e41ed7c6ad2caa735bb80cd234d4169f1ab9983ab79cb7e924463`
 
-To-spec provenance: pending
-Accepted spec: none
-Accepted spec SHA-256: pending
+To-spec provenance: verified
+To-spec entry skill: `/Users/huangxuewei/.claude/skills/to-spec/SKILL.md`
+To-spec source HEAD: `ec7e9c23df6d6d8c835f1b2d08a9552d98c8f330`
+To-spec result commit: `36a233fa47e96905bdad4f8f0f5f31c2aadeda72`
+To-spec artifact: `docs/cuts/paper-canonical-unification/spec.md`
+To-spec artifact SHA-256: `2e77d4f2ba40e3d4fb33c232bd5734e34b6c6a94a26c626cd1f6af178684490b`
+To-spec outcome: accepted
+Accepted spec: `docs/cuts/paper-canonical-unification/spec.md`
+Accepted spec SHA-256: `2e77d4f2ba40e3d4fb33c232bd5734e34b6c6a94a26c626cd1f6af178684490b`
 To-tickets provenance: pending
 Ticket-set binding: pending
 Ticket-set manifest: pending
