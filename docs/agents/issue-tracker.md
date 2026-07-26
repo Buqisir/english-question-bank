@@ -43,13 +43,8 @@ Verify:
 Notes:
 ```
 
-Tickets are worked blockers-first. By default, the owner manually starts one
-fresh top-level `/implement` task per ready ticket. An owner-explicit
-`$coordinate-eqb-wayfinder` may instead create the exact durable successor
-under `dispatch-protocols.md`; no other agent may claim dispatch authority. The
-implementation task updates only its ticket status/result plus the code it
-owns. New tickets use `Next on PASS` and `Terminal` to declare their
-deterministic completion route.
+Working order, task boundaries, dispatch authorization, and route semantics
+live only in `dispatch-protocols.md`.
 
 ## Wayfinder
 
@@ -174,6 +169,6 @@ notes inside one task, but:
 
 ## External tracker
 
-If EQB later adopts GitHub Issues or another tracker, keep the same map,
-ticket, blocking, and frontier semantics. Do not initialize or migrate a
-tracker automatically.
+If EQB later adopts GitHub Issues or another tracker, preserve equivalent
+tracked paths and field schema. Do not initialize or migrate a tracker
+automatically.

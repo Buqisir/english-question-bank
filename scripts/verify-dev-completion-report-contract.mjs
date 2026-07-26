@@ -64,10 +64,9 @@ const currentPaperPhase = readText(
   ROOT,
   'docs/cuts/paper-canonical-unification/phase-transition.md',
 )
-const currentPaperMap = readText(
-  ROOT,
-  'docs/cuts/paper-canonical-unification/wayfinder/map.md',
-)
+const currentPaperMapPath =
+  'docs/cuts/paper-canonical-unification/wayfinder/map.md'
+const currentPaperMap = readText(ROOT, currentPaperMapPath)
 const currentPaperTicket01 = readText(
   ROOT,
   'docs/cuts/paper-canonical-unification/tickets/01-canonical-foundation.md',
@@ -331,16 +330,24 @@ function markdownField(source, field) {
     ?.replace(/^`|`$/g, '')
 }
 
-function committedArtifactDigest(commit, artifactPath) {
+function committedArtifactBytes(commit, artifactPath) {
   try {
-    const bytes = execFileSync('git', ['show', `${commit}:${artifactPath}`], {
+    return execFileSync('git', ['show', `${commit}:${artifactPath}`], {
       cwd: ROOT,
       stdio: ['ignore', 'pipe', 'ignore'],
     })
-    return createHash('sha256').update(bytes).digest('hex')
   } catch {
-    return ''
+    return null
   }
+}
+
+function committedArtifactDigest(commit, artifactPath) {
+  const bytes = committedArtifactBytes(commit, artifactPath)
+  return bytes ? createHash('sha256').update(bytes).digest('hex') : ''
+}
+
+function committedArtifactText(commit, artifactPath) {
+  return committedArtifactBytes(commit, artifactPath)?.toString('utf8') ?? ''
 }
 
 function currentArtifactDigest(artifactPath) {
@@ -450,7 +457,7 @@ function coordinatorSkillErrors(source) {
   if (!normalized.includes("initiative's repository-read-only coordinator")) {
     errors.push('coordinator must remain repository-read-only')
   }
-  if (!normalized.includes('Create exactly one fresh peer')) {
+  if (!normalized.includes('Create exactly one fresh top-level peer')) {
     errors.push('coordinator must create exactly one fresh top-level peer')
   }
   if (
@@ -466,12 +473,20 @@ function coordinatorSkillErrors(source) {
   }
   if (
     !normalized.includes(
-      'implementation, TDD, ordinary Standards + Spec review, ordinary fixes, verification, and commit together',
+      'For implementation, review, and fix classification, obey only the route returned by `dispatch-protocols.md`',
     ) ||
-    !normalized.includes('separately required independent lineage') ||
-    !normalized.includes('failure is never an automatic retry')
+    !normalized.includes('do not split work that authority keeps in one task') ||
+    !normalized.includes('turn a failed review into an automatic retry')
   ) {
     errors.push('ordinary and independent review/fix boundaries must remain exact')
+  }
+  if (
+    !normalized.includes(
+      'The only execution mechanism is official Codex top-level task creation',
+    ) ||
+    !normalized.includes('all other execution mechanisms are forbidden')
+  ) {
+    errors.push('official top-level task creation must remain the sole mechanism')
   }
   for (const mechanic of [
     'Hook',
@@ -482,11 +497,17 @@ function coordinatorSkillErrors(source) {
     'recursive coordinator',
     'successor subagent',
   ]) {
-    if (
-      !normalized.includes('Forbidden mechanics:') ||
-      !source.includes(mechanic)
-    ) {
-      errors.push(`forbidden mechanic is not preserved: ${mechanic}`)
+    const escaped = mechanic.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+    const permitsBefore = new RegExp(
+      `\\b(?:allow|permit|enable|start|create|spawn|run|dispatch|use)\\b[^\\n]{0,80}\\b${escaped}\\b`,
+      'i',
+    )
+    const permitsAfter = new RegExp(
+      `\\b${escaped}\\b[^\\n]{0,80}\\b(?:allowed|permitted|enabled|required|supported)\\b`,
+      'i',
+    )
+    if (permitsBefore.test(source) || permitsAfter.test(source)) {
+      errors.push(`coordinator permits a forbidden execution mechanic: ${mechanic}`)
     }
   }
   if (
@@ -553,7 +574,13 @@ function ownerApprovalErrors(approval, ticketManifestDigest) {
     !fullCommitPattern.test(approval?.resultCommit ?? '') ||
     !/^docs\/.+/.test(approval?.recordPath ?? '') ||
     !sha256Pattern.test(approval?.ticketManifestDigest ?? '') ||
-    approval.ticketManifestDigest !== ticketManifestDigest
+    approval.ticketManifestDigest !== ticketManifestDigest ||
+    approval?.ancestor !== true ||
+    approval?.recordExists !== true ||
+    approval?.recordedStatus !== 'verified' ||
+    approval?.recordedActor !== 'owner' ||
+    approval?.recordedAction !== 'approve-ticket-granularity' ||
+    approval?.recordedManifestDigest !== approval?.ticketManifestDigest
   ) {
     errors.push('owner ticket-granularity approval is absent or stale')
   }
@@ -641,10 +668,11 @@ function provenanceFromReceipt(source, phase) {
   }
 }
 
-function parsePhaseReceipt(source, mapSource, head) {
+function parsePhaseReceipt(source, mapSource, mapSourcePath, head) {
   const previous = markdownField(source, 'Previous phase')
   const current = markdownField(source, 'Current phase')
   const next = markdownField(source, 'Next on PASS')
+  const mapPath = markdownField(source, 'Wayfinder map')
   const bindingCommit = markdownField(source, 'Current map binding commit')
   const bindingArtifact = markdownField(source, 'Current map artifact')
   const bindingDigest = markdownField(source, 'Current map artifact SHA-256')
@@ -652,6 +680,16 @@ function parsePhaseReceipt(source, mapSource, head) {
   const ticketsProvenance = provenanceFromReceipt(source, 'to-tickets')
   const acceptedSpecPath = markdownField(source, 'Accepted spec')
   const ticketManifestPath = markdownField(source, 'Ticket-set manifest')
+  const approvalResultCommit = markdownField(
+    source,
+    'Owner approval result commit',
+  )
+  const approvalRecordPath = markdownField(source, 'Owner approval record')
+  const approvalRecordSource =
+    fullCommitPattern.test(approvalResultCommit ?? '') &&
+    /^docs\/.+/.test(approvalRecordPath ?? '')
+      ? committedArtifactText(approvalResultCommit, approvalRecordPath)
+      : ''
 
   return {
     previous,
@@ -663,6 +701,8 @@ function parsePhaseReceipt(source, mapSource, head) {
     mapNext: markdownField(mapSource, 'Next on PASS'),
     binding: {
       verified: markdownField(source, 'Current map binding') === 'verified',
+      mapPath,
+      sourceArtifactPath: mapSourcePath,
       commit: bindingCommit,
       artifactPath: bindingArtifact,
       artifactDigest: bindingDigest,
@@ -721,10 +761,28 @@ function parsePhaseReceipt(source, mapSource, head) {
         'verified',
       actor: markdownField(source, 'Owner approval actor'),
       action: markdownField(source, 'Owner approval action'),
-      resultCommit: markdownField(source, 'Owner approval result commit'),
-      recordPath: markdownField(source, 'Owner approval record'),
+      resultCommit: approvalResultCommit,
+      recordPath: approvalRecordPath,
       ticketManifestDigest: markdownField(
         source,
+        'Owner approval ticket-set manifest SHA-256',
+      ),
+      ancestor:
+        fullCommitPattern.test(approvalResultCommit ?? '') &&
+        fullCommitPattern.test(head ?? '') &&
+        commitIsAncestor(approvalResultCommit, head),
+      recordExists: Boolean(approvalRecordSource),
+      recordedStatus: markdownField(
+        approvalRecordSource,
+        'Owner ticket-granularity approval',
+      ),
+      recordedActor: markdownField(approvalRecordSource, 'Owner approval actor'),
+      recordedAction: markdownField(
+        approvalRecordSource,
+        'Owner approval action',
+      ),
+      recordedManifestDigest: markdownField(
+        approvalRecordSource,
         'Owner approval ticket-set manifest SHA-256',
       ),
     },
@@ -735,12 +793,20 @@ function currentMapBindingErrors(binding) {
   const errors = []
   if (
     binding?.verified !== true ||
+    !/^docs\/.+/.test(binding?.mapPath ?? '') ||
+    !/^docs\/.+/.test(binding?.sourceArtifactPath ?? '') ||
     !fullCommitPattern.test(binding?.commit ?? '') ||
     !/^docs\/.+/.test(binding?.artifactPath ?? '') ||
     !sha256Pattern.test(binding?.artifactDigest ?? '')
   ) {
     errors.push('current map route binding is incomplete or malformed')
     return errors
+  }
+  if (
+    binding.artifactPath !== binding.mapPath ||
+    binding.artifactPath !== binding.sourceArtifactPath
+  ) {
+    errors.push('current map route binding targets a different artifact')
   }
   if (!binding.ancestor) {
     errors.push('current map binding commit is not an ancestor of HEAD')
@@ -845,7 +911,8 @@ function phaseTransitionErrors(state) {
     errors.push('owner ticket-granularity approval is absent or stale')
   }
 
-  const implementationAllowed = approvalBound
+  const implementationAllowed =
+    specProven && ticketsProven && ticketsBound && approvalBound
   if (
     implementationDispatch !==
     (implementationAllowed ? 'allowed' : 'forbidden')
@@ -1218,10 +1285,9 @@ disable-model-invocation: true
 Act only as the initiative's repository-read-only coordinator.
 Treat \`dispatch-protocols.md\` as the sole owner of legal transitions, gates, pauses, resumes, and successor routing.
 Preserve separate \`to-spec\` and \`to-tickets\` peers and both the owner ticket-granularity approval pause and owner-QA pause.
-Keep implementation, TDD, ordinary Standards + Spec review, ordinary fixes, verification, and commit together.
-Use a fresh peer only for a separately required independent lineage; failure is never an automatic retry.
-Create exactly one fresh peer with an official top-level task tool.
-Forbidden mechanics: Hook, Runner, daemon, worker, fork, recursive coordinator, successor subagent.
+For implementation, review, and fix classification, obey only the route returned by \`dispatch-protocols.md\`; do not split work that authority keeps in one task or turn a failed review into an automatic retry.
+The only execution mechanism is official Codex top-level task creation; all other execution mechanisms are forbidden.
+Create exactly one fresh top-level peer.
 `
 
 if (requireGlobalCoordinator) {
@@ -1253,6 +1319,31 @@ assert(
   ).some((error) => error.includes('repository-read-only')),
   'portable coordinator skill parser rejects a lost read-only boundary',
 )
+assert(
+  coordinatorSkillErrors(
+    portableCoordinatorSkill.replace(
+      'Create exactly one fresh top-level peer',
+      'Create one peer',
+    ),
+  ).some((error) => error.includes('exactly one fresh top-level peer')),
+  'portable coordinator skill parser requires exactly one fresh top-level peer',
+)
+for (const mechanic of [
+  'Hook',
+  'Runner',
+  'daemon',
+  'worker',
+  'fork',
+  'recursive coordinator',
+  'successor subagent',
+]) {
+  assert(
+    coordinatorSkillErrors(
+      `${portableCoordinatorSkill}\n${mechanic} permitted.\n`,
+    ).some((error) => error.includes(mechanic)),
+    `portable coordinator skill parser rejects permission for ${mechanic}`,
+  )
+}
 if (requireGlobalCoordinator && globalCoordinatorFilesExist) {
   const installedCoordinatorYaml = readFileSync(
     globalCoordinatorYamlPath,
@@ -1312,6 +1403,12 @@ function phaseFixture(previous, current) {
         resultCommit: fixtureApprovalCommit,
         recordPath: 'docs/cuts/example/phase-transition.md',
         ticketManifestDigest: fixtureTicketsDigest,
+        ancestor: true,
+        recordExists: true,
+        recordedStatus: 'verified',
+        recordedActor: 'owner',
+        recordedAction: 'approve-ticket-granularity',
+        recordedManifestDigest: fixtureTicketsDigest,
       }
     : {}
   const provenance = new Map()
@@ -1349,6 +1446,8 @@ function phaseFixture(previous, current) {
     mapNext: current,
     binding: {
       verified: true,
+      mapPath: 'docs/cuts/example/map.md',
+      sourceArtifactPath: 'docs/cuts/example/map.md',
       commit: fixtureSpecCommit,
       artifactPath: 'docs/cuts/example/map.md',
       artifactDigest: fixtureBindingDigest,
@@ -1399,22 +1498,95 @@ assert(
   'stale or mismatched current-map binding fails closed',
 )
 
-for (const [previous, current] of [
-  ['wayfinder', 'implementation'],
-  ['to-spec', 'implementation'],
-  ['to-spec', 'release'],
+const wrongMapArtifactFixture = phaseFixture('wayfinder', 'to-spec')
+wrongMapArtifactFixture.binding.artifactPath =
+  'docs/cuts/example/unrelated-map.md'
+assert(
+  currentMapBindingErrors(wrongMapArtifactFixture.binding).some((error) =>
+    error.includes('different artifact'),
+  ),
+  'current-map binding must target the receipt Wayfinder map',
+)
+
+for (const previous of legalPhaseTransitions.keys()) {
+  for (const current of legalPhaseTransitions.keys()) {
+    if (legalPhaseTransitions.get(previous).has(current)) {
+      continue
+    }
+    const invalid = phaseFixture(previous, current)
+    const errors = phaseReceiptErrors(invalid)
+    assert(
+      errors.some((error) =>
+        error.includes(`illegal phase transition: ${previous} -> ${current}`),
+      ),
+      `every unlisted phase edge fails closed: ${previous} -> ${current}`,
+    )
+  }
+}
+
+const earlyApprovalBypass = phaseFixture('wayfinder', 'to-spec')
+earlyApprovalBypass.tickets.manifestDigest = fixtureTicketsDigest
+earlyApprovalBypass.approval = {
+  committed: true,
+  actor: 'owner',
+  action: 'approve-ticket-granularity',
+  resultCommit: fixtureApprovalCommit,
+  recordPath: 'docs/cuts/example/phase-transition.md',
+  ticketManifestDigest: fixtureTicketsDigest,
+  ancestor: true,
+  recordExists: true,
+  recordedStatus: 'verified',
+  recordedActor: 'owner',
+  recordedAction: 'approve-ticket-granularity',
+  recordedManifestDigest: fixtureTicketsDigest,
+}
+earlyApprovalBypass.implementationDispatch = 'allowed'
+assert(
+  phaseReceiptErrors(earlyApprovalBypass).some((error) =>
+    error.includes('does not match the four gates'),
+  ),
+  'early approval cannot enable implementation without all four gates',
+)
+
+for (const { name, mutate, expectedError } of [
+  {
+    name: 'accepted-spec provenance',
+    mutate: (fixture) => {
+      fixture.spec.provenance.sourceHead = 'malformed'
+    },
+    expectedError: 'accepted spec lacks verified to-spec provenance',
+  },
+  {
+    name: 'ticket-set provenance',
+    mutate: (fixture) => {
+      fixture.tickets.provenance.sourceHead = 'malformed'
+    },
+    expectedError: 'ticket set lacks verified to-tickets provenance',
+  },
+  {
+    name: 'ticket-to-spec binding',
+    mutate: (fixture) => {
+      fixture.tickets.boundSpecDigest = 'e'.repeat(64)
+    },
+    expectedError: 'ticket set is not bound to the accepted spec',
+  },
+  {
+    name: 'owner approval evidence',
+    mutate: (fixture) => {
+      fixture.approval.recordedManifestDigest = 'e'.repeat(64)
+    },
+    expectedError: 'owner ticket-granularity approval is absent or stale',
+  },
 ]) {
   const invalid = phaseFixture('owner-approval', 'implementation')
-  invalid.previous = previous
-  invalid.current = current
-  invalid.next = current
-  invalid.mapNext = current
-  invalid.provenance.set(previous, verifiedProvenance(previous))
+  mutate(invalid)
+  const errors = phaseReceiptErrors(invalid)
   assert(
-    phaseReceiptErrors(invalid).some((error) =>
-      error.includes(`illegal phase transition: ${previous} -> ${current}`),
-    ),
-    `unlisted phase edge fails closed: ${previous} -> ${current}`,
+    errors.some((error) => error.includes(expectedError)) &&
+      errors.some((error) =>
+        error.includes('Implementation dispatch does not match the four gates'),
+      ),
+    `implementation remains forbidden when ${name} is unverified`,
   )
 }
 
@@ -1482,6 +1654,18 @@ for (const approvalMutation of [
     resultCommit: fixtureApprovalCommit,
     recordPath: 'docs/cuts/example/phase-transition.md',
     ticketManifestDigest: 'e'.repeat(64),
+  },
+  {
+    ...phaseFixture('owner-approval', 'implementation').approval,
+    ancestor: false,
+  },
+  {
+    ...phaseFixture('owner-approval', 'implementation').approval,
+    recordExists: false,
+  },
+  {
+    ...phaseFixture('owner-approval', 'implementation').approval,
+    recordedManifestDigest: 'e'.repeat(64),
   },
 ]) {
   const staleApprovalFixture = phaseFixture(
@@ -1568,6 +1752,7 @@ const currentHead = execFileSync('git', ['rev-parse', 'HEAD'], {
 const currentPaperPhaseState = parsePhaseReceipt(
   currentPaperPhase,
   currentPaperMap,
+  currentPaperMapPath,
   currentHead,
 )
 const currentPaperPhaseErrors = phaseReceiptErrors(currentPaperPhaseState)
