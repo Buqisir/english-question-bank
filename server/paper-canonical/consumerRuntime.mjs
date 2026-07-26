@@ -75,7 +75,7 @@ function explicitDatabaseLegacyPlan(candidates, consumerContract) {
   if (!resolved.ok) return null
   const sourceIds = new Set(
     candidates
-      .map((item) => item.detail?.sourceDetail?.id)
+      .map((item) => item.sourcePaperId)
       .filter(Boolean),
   )
   if (
@@ -83,7 +83,7 @@ function explicitDatabaseLegacyPlan(candidates, consumerContract) {
     || candidates.some(
       (item) =>
         item.detail?.paperId
-        || !item.detail?.sourceDetail?.id,
+        || !item.sourcePaperId,
     )
   ) return null
   const groupIdsByFamily = new Map()

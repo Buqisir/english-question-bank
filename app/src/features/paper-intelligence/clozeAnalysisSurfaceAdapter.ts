@@ -190,11 +190,15 @@ export function buildClozeAnalysisSurfaceModel(input: {
       + 'cannot layer analysis onto an unresolved canonical group.',
     )
   }
-  assertCanonicalAnalysisAnchors(
-    analysis,
-    questionIds,
-    canonicalSurface.surfaceData.semanticParagraphs,
-  )
+  if (canonicalSurface.surfaceData.semanticParagraphs) {
+    assertCanonicalAnalysisAnchors(
+      analysis,
+      questionIds,
+      canonicalSurface.surfaceData.semanticParagraphs,
+    )
+  } else {
+    assertLegacyAnalysisAnchors(asset, analysis, questionIds)
+  }
 
   // Build passage-side evidence ranges from analysis.blanks
   const { evidence } = buildEvidence(
@@ -223,6 +227,28 @@ export function buildClozeAnalysisSurfaceModel(input: {
 }
 
 // ─── Internal helpers ─────────────────────────────────────────────────────────
+
+function assertLegacyAnalysisAnchors(
+  asset: PaperAssetV1,
+  analysis: ReviewedClozeAnalysisV1,
+  questionIds: string[],
+): void {
+  for (const questionId of questionIds) {
+    const selectedBlankId = asset.content.questions[questionId]?.blankId
+    const analysisBlankId = analysis.blanks[questionId]?.blankId
+    if (!selectedBlankId || !analysisBlankId) {
+      throw new Error(
+        `[CLOZE_ANALYSIS_ANCHOR_MISSING] ${questionId} has no selected legacy/analysis blank pair.`,
+      )
+    }
+    if (analysisBlankId !== selectedBlankId) {
+      throw new Error(
+        `[CLOZE_ANALYSIS_ANCHOR_MISMATCH] ${questionId} references `
+        + `${analysisBlankId}; selected legacy blank is ${selectedBlankId}.`,
+      )
+    }
+  }
+}
 
 function assertCanonicalAnalysisAnchors(
   analysis: ReviewedClozeAnalysisV1,

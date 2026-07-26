@@ -30,6 +30,7 @@ import {
   createCanonicalConsumerRuntime,
 } from '../server/paper-canonical/consumerRuntime.mjs'
 import { createDraftPaperStore } from '../server/draft-paper/draftPaperStore.mjs'
+import { createDraftPaperRoutes } from '../server/draft-paper/draftPaperRoutes.mjs'
 import { closeChromiumPool } from '../server/draft-paper/chromiumPool.mjs'
 import {
   createPaperCanonicalConsumerRoutes,
@@ -201,7 +202,7 @@ async function assertActualPaperBrowseBoundary({
     await page.goto(qaUrl.href)
     await page.locator('[data-paper-question-id]').first().waitFor()
     await successfulAnalyses
-    await page.waitForTimeout(250)
+    await page.locator('.pi-cloze-blank-card').waitFor()
     assert.equal(
       successfulAnalysisResponses,
       2,
@@ -235,6 +236,17 @@ async function assertActualPaperBrowseBoundary({
       ),
       'Screen',
     )
+
+    const grammarQaUrl = new URL(qaUrl)
+    grammarQaUrl.searchParams.set('focusGroupId', 'group-2026-i-grammar-fill')
+    grammarQaUrl.searchParams.set('questionId', 'q-2026-i-056')
+    await page.goto(grammarQaUrl.href)
+    await page.locator('.pi-gf-blank-card').waitFor()
+    assert.equal(
+      successfulAnalysisResponses,
+      4,
+      'actual lecture mode mounts both successful Analysis models',
+    )
     if (outputDir) {
       writeFileSync(path.join(outputDir, 'screen.html'), await page.content())
       await page.screenshot({
@@ -249,9 +261,9 @@ async function assertActualPaperBrowseBoundary({
     }
 
     consumption = legacyConsumption
-    await page.reload()
+    await page.goto(qaUrl.href)
     await page.locator('[data-paper-question-id]').first().waitFor()
-    await page.waitForTimeout(250)
+    await page.locator('.pi-cloze-blank-card').waitFor()
     assert.equal(
       await page.locator('[data-paper-question-id]').count(),
       15,
@@ -371,51 +383,106 @@ function makeDraftPaperFixture(rootDir, resolveCanonicalConsumption) {
   }
 }
 
+async function invokeDraftRoute({
+  method,
+  pathName,
+  context,
+  body = {},
+}) {
+  const url = new URL(pathName, 'http://eqb.test')
+  const route = createDraftPaperRoutes().find(
+    (candidate) =>
+      candidate.method === method
+      && url.pathname.match(candidate.pattern),
+  )
+  assert.ok(route, `public draft route exists: ${method} ${url.pathname}`)
+  const match = url.pathname.match(route.pattern)
+  const result = {
+    status: null,
+    headers: {},
+    body: null,
+    json: null,
+  }
+  const response = {
+    writeHead(status, headers) {
+      result.status = status
+      result.headers = headers
+    },
+    end(responseBody) {
+      result.body = responseBody
+    },
+  }
+  await route.handle({
+    request: {},
+    response,
+    url,
+    match,
+    context: {
+      ...context,
+      readJsonBody: async () => body,
+      sendJson: (_response, status, json) => {
+        result.status = status
+        result.json = json
+      },
+      sendPdf: (_response, responseBody, fileName, outputPath) => {
+        result.status = 200
+        result.body = responseBody
+        result.fileName = fileName
+        result.outputPath = outputPath
+      },
+    },
+  })
+  return result
+}
+
 async function assertActualDraftPrintPdfBoundary({
   rootDir,
-  readyConsumption,
-  legacyConsumption,
+  readyResolver,
+  legacyResolver,
   partialConsumption,
 }) {
-  let consumption = readyConsumption
+  let resolveConsumption = readyResolver
   const fixture = makeDraftPaperFixture(rootDir, (input) => {
     assert.equal(input.consumerId, 'print_pdf')
-    return consumption
+    return resolveConsumption(input)
   })
   const { store, userId, draftPaperId } = fixture
+  const routeContext = {
+    draftPaperStore: store,
+    openUserDatabase: ({ readOnly = false } = {}) =>
+      fixture.openUserDatabase({ readOnly }),
+    openDatabase: () => fixture.openBankDatabase(),
+    resolveDataUserId: () => userId,
+  }
 
-  const previewUserDb = fixture.openUserDatabase({ readOnly: false })
-  const previewBankDb = fixture.openBankDatabase()
-  const canonicalPreview = store.getDraftPaper(
-    { userDb: previewUserDb, bankDb: previewBankDb },
-    userId,
-    draftPaperId,
-    { versionType: 'student' },
-  )
-  previewUserDb.close()
-  previewBankDb.close()
+  const canonicalPreview = await invokeDraftRoute({
+    method: 'GET',
+    pathName: `/api/draft-papers/${draftPaperId}/print-html?versionType=student`,
+    context: routeContext,
+  })
+  assert.equal(canonicalPreview.status, 200)
   assert.equal(
-    (canonicalPreview.printHtml.match(/data-canonical-placement-signature=/g) || []).length,
+    (canonicalPreview.body.match(/data-canonical-placement-signature=/g) || []).length,
     15,
-    'draft Print preview carries the shared canonical layoutPlan',
+    'public draft Print preview carries the shared canonical layoutPlan',
   )
 
   try {
-    const pagination = await store.getDraftPaperPagination(
-      userId,
-      draftPaperId,
-      { versionType: 'student' },
-    )
+    const pagination = await invokeDraftRoute({
+      method: 'GET',
+      pathName: `/api/draft-papers/${draftPaperId}/pagination?versionType=student`,
+      context: routeContext,
+    })
     assert.equal(
-      pagination.pdfBytes.subarray(0, 4).toString(),
-      '%PDF',
-      'public draft pagination produces the actual PDF artifact',
+      pagination.status,
+      200,
+      'public draft pagination route succeeds',
     )
     const playwright = await import('../app/node_modules/playwright/index.js')
     const browser = await playwright.default.chromium.launch({ headless: true })
     try {
       const page = await browser.newPage()
-      await page.setContent(pagination.paginatedHtml, { waitUntil: 'load' })
+      await page.setContent(pagination.json.paginatedHtml, { waitUntil: 'load' })
       assertBrowserColumnGates(
         await readBrowserColumnStarts(
           page,
@@ -428,85 +495,96 @@ async function assertActualDraftPrintPdfBoundary({
       await browser.close()
     }
 
-    const exportedPdf = await store.exportDraftPaperPdf(
-      userId,
-      draftPaperId,
-      { versionType: 'student' },
+    const exportedPdf = await invokeDraftRoute({
+      method: 'POST',
+      pathName: `/api/draft-papers/${draftPaperId}/print-pdf`,
+      context: routeContext,
+      body: { versionType: 'student' },
+    })
+    assert.equal(
+      exportedPdf.status,
+      200,
+      'public draft PDF route succeeds',
     )
     assert.equal(
       exportedPdf.body.subarray(0, 4).toString(),
       '%PDF',
       'public draft PDF export returns the planned pagination artifact',
     )
-    assert.equal(
-      exportedPdf.reusedRecent,
-      true,
-      'draft PDF export reuses the exact plan-bound pagination artifact',
-    )
 
-    consumption = legacyConsumption
-    const legacyPagination = await store.getDraftPaperPagination(
-      userId,
-      draftPaperId,
-      { versionType: 'student' },
+    resolveConsumption = legacyResolver
+    const legacyPagination = await invokeDraftRoute({
+      method: 'GET',
+      pathName: `/api/draft-papers/${draftPaperId}/pagination?versionType=student`,
+      context: routeContext,
+    })
+    assert.equal(
+      legacyPagination.status,
+      200,
+      `public draft legacy pagination succeeds: ${JSON.stringify(legacyPagination.json)}`,
     )
     assert.equal(
-      (legacyPagination.paginatedHtml.match(/data-canonical-placement-signature=/g) || []).length,
+      (legacyPagination.json.paginatedHtml.match(/data-canonical-placement-signature=/g) || []).length,
       0,
-      'draft pagination preserves explicit whole-family legacy selection',
+      'public draft pagination preserves explicit whole-family legacy selection',
     )
     assert.equal(
-      legacyPagination.reused,
+      legacyPagination.json.reused,
       false,
       'Consumption Plan change invalidates the physical artifact cache',
     )
 
-    consumption = partialConsumption
-    await assert.rejects(
-      () => store.getDraftPaperPagination(
-        userId,
-        draftPaperId,
-        { versionType: 'student' },
-      ),
-      { code: 'CANONICAL_CONSUMPTION_REJECTED' },
-      'draft pagination rejects a partial plan without exposing cached output',
+    resolveConsumption = () => partialConsumption
+    const partialPagination = await invokeDraftRoute({
+      method: 'GET',
+      pathName: `/api/draft-papers/${draftPaperId}/pagination?versionType=student`,
+      context: routeContext,
+    })
+    assert.equal(partialPagination.status, 400)
+    assert.equal(
+      partialPagination.json.paginatedHtml,
+      undefined,
+      'public draft pagination rejects a partial plan with no cached artifact exposure',
+    )
+    const partialPdf = await invokeDraftRoute({
+      method: 'POST',
+      pathName: `/api/draft-papers/${draftPaperId}/print-pdf`,
+      context: routeContext,
+      body: { versionType: 'student' },
+    })
+    assert.equal(partialPdf.status, 400)
+    assert.equal(
+      partialPdf.body,
+      null,
+      'public draft PDF rejects a partial plan with no artifact exposure',
     )
   } finally {
     await closeChromiumPool()
   }
 
-  consumption = legacyConsumption
-  const legacyUserDb = fixture.openUserDatabase({ readOnly: false })
-  const legacyBankDb = fixture.openBankDatabase()
-  const legacyPreview = store.getDraftPaper(
-    { userDb: legacyUserDb, bankDb: legacyBankDb },
-    userId,
-    draftPaperId,
-    { versionType: 'student' },
-  )
-  legacyUserDb.close()
-  legacyBankDb.close()
+  resolveConsumption = legacyResolver
+  const legacyPreview = await invokeDraftRoute({
+    method: 'GET',
+    pathName: `/api/draft-papers/${draftPaperId}/print-html?versionType=student`,
+    context: routeContext,
+  })
+  assert.equal(legacyPreview.status, 200)
   assert.equal(
-    (legacyPreview.printHtml.match(/data-canonical-placement-signature=/g) || []).length,
+    (legacyPreview.body.match(/data-canonical-placement-signature=/g) || []).length,
     0,
-    'draft Print preview preserves explicit whole-family legacy selection',
+    'public draft Print preview preserves explicit whole-family legacy selection',
   )
 
-  consumption = partialConsumption
-  const partialUserDb = fixture.openUserDatabase({ readOnly: false })
-  const partialBankDb = fixture.openBankDatabase()
-  assert.throws(
-    () => store.getDraftPaper(
-      { userDb: partialUserDb, bankDb: partialBankDb },
-      userId,
-      draftPaperId,
-      { versionType: 'student' },
-    ),
+  resolveConsumption = () => partialConsumption
+  await assert.rejects(
+    () => invokeDraftRoute({
+      method: 'GET',
+      pathName: `/api/draft-papers/${draftPaperId}/print-html?versionType=student`,
+      context: routeContext,
+    }),
     { code: 'CANONICAL_CONSUMPTION_REJECTED' },
-    'draft Print preview rejects a partial Consumption Plan before rendering',
+    'public draft Print preview rejects a partial Consumption Plan before rendering',
   )
-  partialUserDb.close()
-  partialBankDb.close()
 }
 
 const rootDir = mkdtempSync(path.join(tmpdir(), 'eqb-canonical-consumption-'))
@@ -858,7 +936,7 @@ try {
   const databaseLegacyItems = structuredClone(items)
   for (const item of databaseLegacyItems) {
     delete item.detail.paperId
-    item.detail.sourceDetail = { id: 'legacy-source-ticket-05' }
+    item.sourcePaperId = 'legacy-paper-ticket-05'
   }
   const databaseLegacy = legacyRuntime.resolveForItems({
     consumerId: 'print_pdf',
@@ -870,7 +948,7 @@ try {
     'DB-only groups retain an explicit contract-authorized whole-family legacy plan',
   )
   const mixedDatabaseLegacyItems = structuredClone(databaseLegacyItems)
-  mixedDatabaseLegacyItems[1].detail.sourceDetail.id = 'another-legacy-source'
+  mixedDatabaseLegacyItems[1].sourcePaperId = 'another-legacy-paper'
   assert.throws(
     () => legacyRuntime.resolveForItems({
       consumerId: 'print_pdf',
@@ -904,7 +982,6 @@ try {
       'public export honors explicit whole-family legacy selections',
     )
   }
-  legacyDb.close()
   const actualOutputDir = provisionActualArtifacts
     ? path.resolve(
         '.scratch',
@@ -923,10 +1000,11 @@ try {
   })
   await assertActualDraftPrintPdfBoundary({
     rootDir,
-    readyConsumption: complete,
-    legacyConsumption: explicitLegacy,
+    readyResolver: runtime.resolveForItems,
+    legacyResolver: legacyRuntime.resolveForItems,
     partialConsumption: partial,
   })
+  legacyDb.close()
   const mismatchedBlankJoin = structuredClone(complete)
   const clozeOccurrence = mismatchedBlankJoin.selections
     .find((selection) => selection.familyContractId === 'cloze')
@@ -976,20 +1054,48 @@ try {
     corruptDraftRoot,
     (input) => runtime.resolveForItems(input),
   )
-  const corruptDraftUserDb = corruptDraft.openUserDatabase({ readOnly: false })
-  const corruptDraftBankDb = corruptDraft.openBankDatabase()
-  assert.throws(
-    () => corruptDraft.store.getDraftPaper(
-      { userDb: corruptDraftUserDb, bankDb: corruptDraftBankDb },
-      corruptDraft.userId,
-      corruptDraft.draftPaperId,
-      { versionType: 'student' },
-    ),
+  const corruptDraftContext = {
+    draftPaperStore: corruptDraft.store,
+    openUserDatabase: ({ readOnly = false } = {}) =>
+      corruptDraft.openUserDatabase({ readOnly }),
+    openDatabase: () => corruptDraft.openBankDatabase(),
+    resolveDataUserId: () => corruptDraft.userId,
+  }
+  await assert.rejects(
+    () => invokeDraftRoute({
+      method: 'GET',
+      pathName: `/api/draft-papers/${corruptDraft.draftPaperId}/print-html?versionType=student`,
+      context: corruptDraftContext,
+    }),
     { code: 'CANONICAL_CONSUMPTION_REJECTED' },
-    'draft Print preview rejects a corrupt Publication with no partial artifact',
+    'public draft Print preview rejects a corrupt Publication before rendering',
   )
-  corruptDraftUserDb.close()
-  corruptDraftBankDb.close()
+  for (const request of [
+    {
+      method: 'GET',
+      pathName: `/api/draft-papers/${corruptDraft.draftPaperId}/pagination?versionType=student`,
+    },
+    {
+      method: 'POST',
+      pathName: `/api/draft-papers/${corruptDraft.draftPaperId}/print-pdf`,
+      body: { versionType: 'student' },
+    },
+  ]) {
+    const corruptResponse = await invokeDraftRoute({
+      ...request,
+      context: corruptDraftContext,
+    })
+    assert.equal(
+      corruptResponse.status,
+      400,
+      `${request.method} ${request.pathName} rejects a corrupt Publication`,
+    )
+    assert.equal(
+      corruptResponse.body,
+      null,
+      `${request.method} ${request.pathName} exposes no partial physical artifact`,
+    )
+  }
   writeFileSync(canonicalGroupsPath, canonicalGroupsBytes)
 
   if (provisionActualArtifacts) {

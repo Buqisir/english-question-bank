@@ -509,6 +509,7 @@ export function createDraftPaperStore({
         .filter((item) => !item.groupMissing)
         .map((item) => ({
           questionGroupId: item.groupId,
+          sourcePaperId: item.sourcePaperId,
           score: Number(item.questionGroup?.defaultScore || 0),
           sectionTitle: '',
           note: '',
@@ -554,6 +555,7 @@ export function createDraftPaperStore({
       if (!detail) throw new Error(`questionGroupId not found: ${item.questionGroupId}`)
       return {
         detail,
+        sourcePaperId: item.sourcePaperId,
         note: '',
         score: Math.max(
           0,
