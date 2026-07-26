@@ -1,16 +1,16 @@
 # Paper canonical unification phase transition
 
 Status: active
-Previous phase: to-spec
-Current phase: to-tickets
-Next on PASS: to-tickets
+Previous phase: to-tickets
+Current phase: owner-approval
+Next on PASS: owner-approval
 Terminal: no
 
 Wayfinder map: `docs/cuts/paper-canonical-unification/wayfinder/map.md`
 Current map binding: verified
-Current map binding commit: `6139c3d4e8cfe908544d381a905f198b5e84a3a7`
+Current map binding commit: `76ace36cae38a60fe280e464b8e85327a68376d2`
 Current map artifact: `docs/cuts/paper-canonical-unification/wayfinder/map.md`
-Current map artifact SHA-256: `08384666d57e7a3ac1810c00f8545b782251852bc4766763219673e406ab6c8e`
+Current map artifact SHA-256: `bc96c0fa86fb2b173be3fce757873ad574cb4add7a965bfa2c59289fc364b651`
 Wayfinder status: done
 Wayfinder provenance: verified
 Wayfinder entry skill: `/Users/huangxuewei/.claude/skills/wayfinder/SKILL.md`
@@ -28,11 +28,17 @@ To-spec artifact SHA-256: `2e77d4f2ba40e3d4fb33c232bd5734e34b6c6a94a26c626cd1f6a
 To-spec outcome: accepted
 Accepted spec: `docs/cuts/paper-canonical-unification/spec.md`
 Accepted spec SHA-256: `2e77d4f2ba40e3d4fb33c232bd5734e34b6c6a94a26c626cd1f6af178684490b`
-To-tickets provenance: pending
-Ticket-set binding: pending
-Ticket-set manifest: pending
-Ticket-set manifest SHA-256: pending
-Ticket-set accepted-spec SHA-256: pending
+To-tickets provenance: verified
+To-tickets entry skill: `/Users/huangxuewei/.claude/skills/to-tickets/SKILL.md`
+To-tickets source HEAD: `748fe921c965476efbbb693b1f52756a18fc74e0`
+To-tickets result commit: `e03bc11bc2a956165bd75edeeee3b27c94e8d7ab`
+To-tickets artifact: `docs/cuts/paper-canonical-unification/ticket-set-manifest.md`
+To-tickets artifact SHA-256: `6732eb4da6e35982f0b0a980f2a623f68d49a79811485fa500918c1944f3ee25`
+To-tickets outcome: complete
+Ticket-set binding: verified
+Ticket-set manifest: `docs/cuts/paper-canonical-unification/ticket-set-manifest.md`
+Ticket-set manifest SHA-256: `6732eb4da6e35982f0b0a980f2a623f68d49a79811485fa500918c1944f3ee25`
+Ticket-set accepted-spec SHA-256: `2e77d4f2ba40e3d4fb33c232bd5734e34b6c6a94a26c626cd1f6af178684490b`
 Owner ticket-granularity approval: pending
 Implementation dispatch: forbidden
 
