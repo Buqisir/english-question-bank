@@ -461,24 +461,11 @@ function coordinatorSkillErrors(source) {
     errors.push('coordinator must create exactly one fresh top-level peer')
   }
   if (
-    !normalized.includes('Preserve separate `to-spec` and `to-tickets` peers')
-  ) {
-    errors.push('to-spec and to-tickets must remain distinct peers')
-  }
-  if (
-    !normalized.includes('owner ticket-granularity approval pause') ||
-    !normalized.includes('owner-QA pause')
-  ) {
-    errors.push('owner approval and owner QA must remain pauses')
-  }
-  if (
     !normalized.includes(
-      'For implementation, review, and fix classification, obey only the route returned by `dispatch-protocols.md`',
-    ) ||
-    !normalized.includes('do not split work that authority keeps in one task') ||
-    !normalized.includes('turn a failed review into an automatic retry')
+      'Do not classify, merge, split, retry, or advance a route independently of `dispatch-protocols.md`',
+    )
   ) {
-    errors.push('ordinary and independent review/fix boundaries must remain exact')
+    errors.push('coordinator must not reinterpret the dispatch authority')
   }
   if (
     !normalized.includes(
@@ -498,16 +485,37 @@ function coordinatorSkillErrors(source) {
     'successor subagent',
   ]) {
     const escaped = mechanic.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
-    const permitsBefore = new RegExp(
-      `\\b(?:allow|permit|enable|start|create|spawn|run|dispatch|use)\\b[^\\n]{0,80}\\b${escaped}\\b`,
-      'i',
-    )
-    const permitsAfter = new RegExp(
-      `\\b${escaped}\\b[^\\n]{0,80}\\b(?:allowed|permitted|enabled|required|supported)\\b`,
-      'i',
-    )
-    if (permitsBefore.test(source) || permitsAfter.test(source)) {
-      errors.push(`coordinator permits a forbidden execution mechanic: ${mechanic}`)
+    if (new RegExp(`\\b${escaped}\\b`, 'i').test(source)) {
+      errors.push(`thin coordinator mentions forbidden mechanic: ${mechanic}`)
+    }
+  }
+  const activePeerAuthorizations =
+    source.match(
+      /\b(?:allow|permit|enable|use|create|start|open|dispatch|spawn|run)\b[^\n.]{0,100}\b(?:peer|top-level task|successor)\b/gi,
+    ) ?? []
+  const passivePeerAuthorizations =
+    source.match(
+      /\b(?:peer|top-level task|successor)\b[^\n.]{0,100}\b(?:may|can|should|must|will)?\s*be\s+(?:created|started|opened|dispatched|spawned|run)\b/gi,
+    ) ?? []
+  if (
+    activePeerAuthorizations.length !== 1 ||
+    passivePeerAuthorizations.length !== 0
+  ) {
+    errors.push('coordinator must authorize exactly one fresh top-level peer')
+  }
+  for (const copiedDetail of [
+    '`to-spec`',
+    '`to-tickets`',
+    'owner ticket-granularity approval',
+    'owner-QA pause',
+    'ordinary Standards',
+    'independent review',
+    'independent lineage',
+    'independent fix',
+    'focused re-review',
+  ]) {
+    if (source.includes(copiedDetail)) {
+      errors.push(`coordinator must not copy dispatch detail: ${copiedDetail}`)
     }
   }
   if (
@@ -519,6 +527,39 @@ function coordinatorSkillErrors(source) {
   }
   if (/gpt-5\.6|`medium`|`high`/.test(source)) {
     errors.push('coordinator must not copy the project model table')
+  }
+
+  return errors
+}
+
+function coordinatorDispatchAuthorityErrors(source) {
+  const normalized = compact(source)
+  const errors = []
+
+  if (
+    !source.includes('| `wayfinder` | `to-spec` |') ||
+    !source.includes('| `to-spec` | `to-tickets` |')
+  ) {
+    errors.push('dispatch authority must keep to-spec and to-tickets distinct')
+  }
+  if (
+    !normalized.includes('Coordination pauses at `owner-approval`') ||
+    !normalized.includes('It also pauses at `owner-qa`')
+  ) {
+    errors.push('dispatch authority must own both owner pauses')
+  }
+  if (
+    !normalized.includes(
+      'One implementation task keeps implementation, TDD, ordinary Standards + Spec review, ordinary fixes, verification, and commit together',
+    ) ||
+    !normalized.includes(
+      'A fresh peer is used only for a separately required independent review lineage',
+    ) ||
+    !normalized.includes(
+      'a review failure authorizes no automatic retry or refill',
+    )
+  ) {
+    errors.push('dispatch authority must own ordinary and independent review routes')
   }
 
   return errors
@@ -1284,8 +1325,7 @@ disable-model-invocation: true
 ---
 Act only as the initiative's repository-read-only coordinator.
 Treat \`dispatch-protocols.md\` as the sole owner of legal transitions, gates, pauses, resumes, and successor routing.
-Preserve separate \`to-spec\` and \`to-tickets\` peers and both the owner ticket-granularity approval pause and owner-QA pause.
-For implementation, review, and fix classification, obey only the route returned by \`dispatch-protocols.md\`; do not split work that authority keeps in one task or turn a failed review into an automatic retry.
+Do not classify, merge, split, retry, or advance a route independently of \`dispatch-protocols.md\`.
 The only execution mechanism is official Codex top-level task creation; all other execution mechanisms are forbidden.
 Create exactly one fresh top-level peer.
 `
@@ -1339,11 +1379,28 @@ for (const mechanic of [
 ]) {
   assert(
     coordinatorSkillErrors(
-      `${portableCoordinatorSkill}\n${mechanic} permitted.\n`,
+      `${portableCoordinatorSkill}\nA ${mechanic} may be used for dispatch.\n`,
     ).some((error) => error.includes(mechanic)),
-    `portable coordinator skill parser rejects permission for ${mechanic}`,
+    `portable coordinator skill parser rejects any ${mechanic} exception`,
   )
 }
+for (const contradiction of [
+  'Create a second top-level peer when useful.',
+  'A concurrent top-level peer may be created.',
+]) {
+  assert(
+    coordinatorSkillErrors(
+      `${portableCoordinatorSkill}\n${contradiction}\n`,
+    ).some((error) => error.includes('exactly one fresh top-level peer')),
+    `portable coordinator skill parser rejects: ${contradiction}`,
+  )
+}
+assert(
+  coordinatorSkillErrors(
+    `${portableCoordinatorSkill}\nPreserve separate \`to-spec\` and \`to-tickets\` peers.\n`,
+  ).some((error) => error.includes('must not copy dispatch detail')),
+  'portable coordinator skill parser rejects copied phase detail',
+)
 if (requireGlobalCoordinator && globalCoordinatorFilesExist) {
   const installedCoordinatorYaml = readFileSync(
     globalCoordinatorYamlPath,
@@ -1358,8 +1415,11 @@ if (requireGlobalCoordinator && globalCoordinatorFilesExist) {
     'installed global coordinator YAML is valid and remains explicit-only',
   )
   assert(
-    coordinatorSkillErrors(installedCoordinatorSkill).length === 0,
-    'installed global coordinator skill preserves the thin coordination contract',
+    [
+      ...coordinatorSkillErrors(installedCoordinatorSkill),
+      ...coordinatorDispatchAuthorityErrors(dispatch),
+    ].length === 0,
+    'installed global coordinator executes the canonical dispatch contract without copying it',
   )
 }
 

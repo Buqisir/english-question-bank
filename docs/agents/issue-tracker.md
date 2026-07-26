@@ -43,8 +43,8 @@ Verify:
 Notes:
 ```
 
-Working order, task boundaries, dispatch authorization, and route semantics
-live only in `dispatch-protocols.md`.
+Task boundaries, dispatch authorization, and route semantics live only in
+`dispatch-protocols.md`.
 
 ## Wayfinder
 
