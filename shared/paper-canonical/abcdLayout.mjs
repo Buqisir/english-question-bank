@@ -5,8 +5,8 @@ import { digestJson } from './stable.mjs'
 const LABELS = Object.freeze(['A', 'B', 'C', 'D'])
 
 const SHAPING_IMPLEMENTATION = Object.freeze({
-  id: 'fixed-glyph-advance',
-  version: '1',
+  id: 'pinned-times-glyph-and-kern-advance',
+  version: '2',
   rounding: 'outward_to_integer_twip',
 })
 
@@ -26,6 +26,39 @@ const RULES = Object.freeze({
 })
 
 const RULESET_DIGEST = digestJson(RULES)
+const VERIFIED_FONT_CLOSURES = new WeakSet()
+
+function deeplyFreeze(value) {
+  if (!value || typeof value !== 'object' || Object.isFrozen(value)) return value
+  Object.freeze(value)
+  for (const nested of Object.values(value)) deeplyFreeze(nested)
+  return value
+}
+
+export const expectedAbcdRendererFontClosure = deeplyFreeze({
+  primary: {
+    fontFaceId: metrics.fontFaceId,
+    fontFileSha256: metrics.fontFileSha256,
+    fontVersion: metrics.fontVersion,
+  },
+  fallbacks: metrics.fallbacks.map((fallback) => ({ ...fallback })),
+  fontMetricsDigest: RULES.fontMetricsDigest,
+  shapingImplementationDigest: RULES.shapingImplementationDigest,
+})
+
+const EXPECTED_FONT_CLOSURE_DIGEST = digestJson(expectedAbcdRendererFontClosure)
+
+export function resolveAbcdRendererFontClosure(candidate) {
+  if (digestJson(candidate) !== EXPECTED_FONT_CLOSURE_DIGEST) {
+    return {
+      status: 'needs_review',
+      reason: 'pinned_renderer_font_closure_unavailable',
+    }
+  }
+  const closure = deeplyFreeze(structuredClone(candidate))
+  VERIFIED_FONT_CLOSURES.add(closure)
+  return { status: 'ready', closure }
+}
 
 function notApplicable() {
   return {
@@ -46,10 +79,15 @@ function optionText(option) {
 
 function advanceTwip(text) {
   let units = 0
-  for (const character of text) {
+  const characters = [...text]
+  for (let index = 0; index < characters.length; index += 1) {
+    const character = characters[index]
     const advance = metrics.glyphAdvanceUnits[character]
     if (!Number.isInteger(advance)) return null
     units += advance
+    if (index > 0) units += metrics.kerningAdjustmentUnits[
+      `${characters[index - 1]}${character}`
+    ] || 0
   }
   return Math.ceil((units * RULES.fontSizeHalfPoint) / (metrics.unitsPerEm / 10))
 }
@@ -100,6 +138,8 @@ function placementFor(mode, option, measured, index) {
       startTwip: index * RULES.fourColumnPitchTwip,
       continuationStartTwip: null,
       hardBreaks: measured.hardBreaks,
+      advanceTwip: measured.advanceTwip,
+      unbreakableAdvanceTwip: measured.unbreakableAdvanceTwip,
       renderedText: measured.renderedText,
     }
   }
@@ -112,6 +152,8 @@ function placementFor(mode, option, measured, index) {
       startTwip: (index % 2) * RULES.twoColumnSecondTabTwip,
       continuationStartTwip: null,
       hardBreaks: measured.hardBreaks,
+      advanceTwip: measured.advanceTwip,
+      unbreakableAdvanceTwip: measured.unbreakableAdvanceTwip,
       renderedText: measured.renderedText,
     }
   }
@@ -123,6 +165,8 @@ function placementFor(mode, option, measured, index) {
     startTwip: 0,
     continuationStartTwip: RULES.oneColumnHangingIndentTwip,
     hardBreaks: measured.hardBreaks,
+    advanceTwip: measured.advanceTwip,
+    unbreakableAdvanceTwip: measured.unbreakableAdvanceTwip,
     renderedText: measured.renderedText,
   }
 }
@@ -185,8 +229,13 @@ export function layoutAbcdOptionSet(optionSet) {
   return selectedPlan('one_column', optionSet, measured)
 }
 
-function assertSelected(plan) {
+function assertTranslatable(plan, fontClosure) {
   if (plan?.status !== 'selected') throw new TypeError('A selected A-D layout plan is required')
+  if (!VERIFIED_FONT_CLOSURES.has(fontClosure)) {
+    const error = new Error('The pinned renderer font closure is unavailable')
+    error.code = 'ABCD_RENDERER_FONT_CLOSURE_UNAVAILABLE'
+    throw error
+  }
 }
 
 function physicalSignature(plan) {
@@ -214,10 +263,10 @@ function pointPlacements(plan) {
   }))
 }
 
-export function translateAbcdPlanToPaperSurface(plan) {
-  assertSelected(plan)
+function translateAbcdPlanToPointSurface(plan, fontClosure, renderer) {
+  assertTranslatable(plan, fontClosure)
   return {
-    renderer: 'paper_surface',
+    renderer,
     mode: plan.mode,
     placementSignature: physicalSignature(plan),
     rowWidthPt: plan.rowWidthTwip / 20,
@@ -229,23 +278,16 @@ export function translateAbcdPlanToPaperSurface(plan) {
   }
 }
 
-export function translateAbcdPlanToPrintPdf(plan) {
-  assertSelected(plan)
-  return {
-    renderer: 'print_pdf',
-    mode: plan.mode,
-    placementSignature: physicalSignature(plan),
-    rowWidthPt: plan.rowWidthTwip / 20,
-    fontSizeHalfPoint: RULES.fontSizeHalfPoint,
-    denseWhiteSpace: plan.mode === 'one_column' ? 'normal' : 'nowrap',
-    clipping: 'forbidden',
-    shrinkToFit: false,
-    placements: pointPlacements(plan),
-  }
+export function translateAbcdPlanToPaperSurface(plan, fontClosure) {
+  return translateAbcdPlanToPointSurface(plan, fontClosure, 'paper_surface')
 }
 
-export function translateAbcdPlanToDocx(plan) {
-  assertSelected(plan)
+export function translateAbcdPlanToPrintPdf(plan, fontClosure) {
+  return translateAbcdPlanToPointSurface(plan, fontClosure, 'print_pdf')
+}
+
+export function translateAbcdPlanToDocx(plan, fontClosure) {
+  assertTranslatable(plan, fontClosure)
   const rows = Array.from({ length: plan.rowCount }, (_, row) =>
     plan.placements.filter((placement) => placement.row === row))
   return {

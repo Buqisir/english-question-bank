@@ -2,10 +2,12 @@
 
 import assert from 'node:assert/strict'
 import { execFileSync } from 'node:child_process'
+import { createHash } from 'node:crypto'
 import {
   mkdirSync,
   mkdtempSync,
   readFileSync,
+  readdirSync,
   rmSync,
   writeFileSync,
 } from 'node:fs'
@@ -13,12 +15,16 @@ import { tmpdir } from 'node:os'
 import path from 'node:path'
 
 import {
+  expectedAbcdRendererFontClosure,
   layoutAbcdOptionSet,
+  resolveAbcdRendererFontClosure,
   translateAbcdPlanToDocx,
   translateAbcdPlanToPaperSurface,
   translateAbcdPlanToPrintPdf,
 } from '../shared/paper-canonical/abcdLayout.mjs'
 import { compileCanonicalPaper } from '../shared/paper-canonical/compiler.mjs'
+import { digestJson } from '../shared/paper-canonical/stable.mjs'
+import { abcdLayoutReferenceFixture } from '../test-fixtures/paper-canonical/abcdLayoutReferenceFixture.mjs'
 import { makeClozeGrammarCanonicalReferenceFixture } from '../test-fixtures/paper-canonical/clozeGrammarReferenceFixture.mjs'
 
 function optionSet(questionId, texts) {
@@ -33,39 +39,54 @@ function optionSet(questionId, texts) {
   }
 }
 
-const gold = [
-  ['q21', ['Small bird', 'Blue lake', 'Old bridge', 'New road'], 'four_columns'],
-  [
-    'q22',
-    [
-      'A deliberately extended answer choice that must use the full line',
-      'Another deliberately extended answer choice that cannot fit a dense track',
-      'A third deliberately extended answer choice for the accepted gold boundary',
-      'The final deliberately extended answer choice keeps the whole set together',
-    ],
-    'one_column',
-  ],
-  [
-    'q23',
-    [
-      'A medium answer choice',
-      'Another medium answer choice',
-      'The third medium answer',
-      'The fourth medium answer',
-    ],
-    'two_by_two',
-  ],
-]
+function sha256File(filePath) {
+  return `sha256:${createHash('sha256').update(readFileSync(filePath)).digest('hex')}`
+}
 
-for (const [questionId, texts, expectedMode] of gold) {
-  const result = layoutAbcdOptionSet(optionSet(questionId, texts))
+for (const sourceImage of abcdLayoutReferenceFixture.sourceImages) {
+  assert.equal(
+    sha256File(sourceImage.path),
+    sourceImage.sha256,
+    `accepted visual reference stays hash-bound: ${sourceImage.path}`,
+  )
+}
+
+const gold = abcdLayoutReferenceFixture.cases
+for (const fixture of gold) {
+  const result = layoutAbcdOptionSet(optionSet(fixture.questionId, fixture.redactedText))
   assert.equal(result.status, 'selected')
-  assert.equal(result.mode, expectedMode)
+  assert.equal(result.mode, fixture.expectedMode)
+  result.placements.forEach((placement, index) => {
+    assert.equal(
+      Math.abs(placement.advanceTwip - fixture.expectedAdvanceTwip[index]) <= 20,
+      true,
+      `${fixture.questionId} redacted proxy remains within 1pt of accepted measurement`,
+    )
+  })
   assert.deepEqual(result.placements.map(({ label }) => label), ['A', 'B', 'C', 'D'])
   assert.match(result.rulesetRef.digest, /^sha256:[0-9a-f]{64}$/)
   assert.match(result.rulesetRef.shapingImplementationDigest, /^sha256:[0-9a-f]{64}$/)
   assert.match(result.rulesetRef.fontMetricsDigest, /^sha256:[0-9a-f]{64}$/)
 }
+
+const fontClosureResult = resolveAbcdRendererFontClosure(
+  structuredClone(expectedAbcdRendererFontClosure),
+)
+assert.equal(fontClosureResult.status, 'ready')
+const fontClosure = fontClosureResult.closure
+assert.deepEqual(
+  resolveAbcdRendererFontClosure({
+    ...structuredClone(expectedAbcdRendererFontClosure),
+    primary: {
+      ...expectedAbcdRendererFontClosure.primary,
+      fontFileSha256: 'sha256:unavailable',
+    },
+  }),
+  {
+    status: 'needs_review',
+    reason: 'pinned_renderer_font_closure_unavailable',
+  },
+)
 
 const unbreakable = layoutAbcdOptionSet(
   optionSet('overflow', ['short', 'short', 'short', 'x'.repeat(500)]),
@@ -83,11 +104,15 @@ assert.equal(hardBreak.mode, 'one_column')
 assert.equal(hardBreak.placements[0].hardBreaks, 1)
 assert.equal(hardBreak.placements[0].renderedText, 'A. first\nsecond')
 
-const plan = layoutAbcdOptionSet(optionSet('parity', gold[2][1]))
+const plan = layoutAbcdOptionSet(optionSet('parity', gold[2].redactedText))
+assert.throws(
+  () => translateAbcdPlanToPaperSurface(plan),
+  { code: 'ABCD_RENDERER_FONT_CLOSURE_UNAVAILABLE' },
+)
 const translations = [
-  translateAbcdPlanToPaperSurface(plan),
-  translateAbcdPlanToPrintPdf(plan),
-  translateAbcdPlanToDocx(plan),
+  translateAbcdPlanToPaperSurface(plan, fontClosure),
+  translateAbcdPlanToPrintPdf(plan, fontClosure),
+  translateAbcdPlanToDocx(plan, fontClosure),
 ]
 assert.equal(translations.every(({ placementSignature }) =>
   placementSignature === translations[0].placementSignature), true)
@@ -114,6 +139,71 @@ assert.deepEqual(
     reason: 'selector_requires_one_question_owned_A_B_C_D_set',
   },
 )
+
+const corpusFiles = readdirSync('app/public/paper-assets')
+  .map((paperId) => ({
+    paperId,
+    assetPath: path.join(
+      'app/public/paper-assets',
+      paperId,
+      'latest/paper-asset.json',
+    ),
+  }))
+  .filter(({ assetPath }) => {
+    try {
+      readFileSync(assetPath)
+      return true
+    } catch {
+      return false
+    }
+  })
+  .sort((left, right) => left.paperId.localeCompare(right.paperId))
+assert.equal(corpusFiles.length, 33)
+assert.equal(
+  digestJson(corpusFiles.map(({ paperId, assetPath }) => [
+    paperId,
+    sha256File(assetPath),
+  ])),
+  'sha256:e931779c94dda458df0bd94207e5712160bf59adc174d30bcd990df8aa7270e4',
+  'the complete current 33-paper asset closure stays hash-bound',
+)
+
+const corpusModes = {
+  four_columns: 0,
+  two_by_two: 0,
+  one_column: 0,
+  needs_review: 0,
+}
+const boundaryModes = new Map()
+for (const { paperId, assetPath } of corpusFiles) {
+  const asset = JSON.parse(readFileSync(assetPath, 'utf8'))
+  for (const question of Object.values(asset.content.questions)) {
+    if (
+      question.options?.length !== 4
+      || question.options.map(({ label }) => label).join('') !== 'ABCD'
+    ) continue
+    const selected = layoutAbcdOptionSet(optionSet(
+      question.questionId,
+      question.options.map(({ text }) => text),
+    ))
+    corpusModes[selected.mode || 'needs_review'] += 1
+    if (
+      ['q-2022-jia-021', 'q-2020-jia-030', 'q-2020-jia-035']
+        .includes(question.questionId)
+    ) boundaryModes.set(question.questionId, selected.mode)
+  }
+}
+assert.deepEqual(corpusModes, {
+  four_columns: 641,
+  two_by_two: 330,
+  one_column: 64,
+  needs_review: 0,
+})
+assert.deepEqual(Object.fromEntries(boundaryModes), {
+  'q-2020-jia-030': 'one_column',
+  'q-2020-jia-035': 'one_column',
+  'q-2022-jia-021': 'two_by_two',
+})
 
 const referenceCompilation = compileCanonicalPaper(
   makeClozeGrammarCanonicalReferenceFixture().request,
@@ -143,6 +233,10 @@ function escapeXml(value) {
     .replaceAll("'", '&apos;')
 }
 
+function escapeHtml(value) {
+  return escapeXml(value)
+}
+
 function rowsFor(translation) {
   const rows = new Map()
   for (const placement of translation.placements) {
@@ -153,15 +247,23 @@ function rowsFor(translation) {
   return [...rows.values()]
 }
 
-function htmlFor(translation) {
-  const rowHeightPt = 18
+function htmlFor(translation, embeddedFont = '') {
+  const rowHeightPt = 72
   return `<!doctype html><meta charset="utf-8"><style>
     @page { size: A4; margin: 24mm; }
-    body { margin: 0; font-family: "Times New Roman", Times, serif; font-size: 10.5pt; }
+    ${embeddedFont ? `@font-face { font-family: "EQB Pinned Times"; src: url(data:font/ttf;base64,${embeddedFont}); }` : ''}
+    body { margin: 0; font-family: "EQB Pinned Times", "Times New Roman", "Songti SC"; font-size: 10.5pt; font-kerning: normal; }
     .set { position: relative; width: ${translation.rowWidthPt}pt; height: ${rowsFor(translation).length * rowHeightPt}pt; }
-    .option { position: absolute; white-space: ${translation.denseWhiteSpace}; line-height: 18pt; }
+    .option { position: absolute; box-sizing: border-box; line-height: 18pt; overflow: visible; }
+    .dense { white-space: nowrap; }
+    .one { padding-left: 21pt; text-indent: -21pt; white-space: pre-wrap; overflow-wrap: normal; word-break: normal; }
   </style><div class="set">${translation.placements.map((placement) =>
-    `<span class="option" data-label="${placement.label}" style="left:${placement.startPt}pt;top:${placement.row * rowHeightPt}pt">${placement.label}.</span>`).join('')}</div>`
+    `<span class="option ${translation.mode === 'one_column' ? 'one' : 'dense'}" data-label="${placement.label}" style="left:${placement.startPt}pt;top:${placement.row * rowHeightPt}pt;width:${translation.mode === 'one_column' ? translation.rowWidthPt : translation.rowWidthPt - placement.startPt}pt">${escapeHtml(placement.renderedText)}</span>`).join('')}</div>`
+}
+
+function textRuns(value) {
+  return escapeXml(value).split('\n').map((part, index) =>
+    `${index ? '<w:br/>' : ''}<w:t xml:space="preserve">${part}</w:t>`).join('')
 }
 
 function docxDocumentXml(translation) {
@@ -175,7 +277,7 @@ function docxDocumentXml(translation) {
       ? '<w:ind w:left="840" w:hanging="420"/><w:tabs><w:tab w:val="left" w:pos="840"/></w:tabs>'
       : `<w:ind w:left="420"/>${tabs ? `<w:tabs>${tabs}</w:tabs>` : ''}`
     const runs = paragraph.placements.map((placement, index) =>
-      `${index > 0 || translation.mode === 'one_column' ? '<w:r><w:tab/></w:r>' : ''}<w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="21"/></w:rPr><w:t>${escapeXml(`${placement.label}.`)}</w:t></w:r>`).join('')
+      `${index > 0 ? '<w:r><w:tab/></w:r>' : ''}<w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:eastAsia="Songti SC"/><w:sz w:val="21"/><w:kern w:val="2"/></w:rPr>${textRuns(placement.renderedText)}</w:r>`).join('')
     return `<w:p><w:pPr>${properties}<w:spacing w:line="360" w:lineRule="exact"/></w:pPr>${runs}</w:p>`
   }).join('')
   return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
@@ -208,6 +310,44 @@ function pdfWords(pdfPath, outputRoot) {
       yMax: Number(match[4]),
       label: match[5],
     }))
+}
+
+function pdfAllWords(pdfPath, outputRoot) {
+  const bboxPath = path.join(outputRoot, `${path.basename(pdfPath)}.all.bbox.html`)
+  execFileSync('pdftotext', ['-bbox', pdfPath, bboxPath])
+  const source = readFileSync(bboxPath, 'utf8')
+  return [...source.matchAll(/<word xMin="([^"]+)" yMin="([^"]+)" xMax="([^"]+)" yMax="([^"]+)">([^<]*)<\/word>/g)]
+    .map((match) => ({
+      x: Number(match[1]),
+      y: Number(match[2]),
+      xMax: Number(match[3]),
+      yMax: Number(match[4]),
+      text: match[5],
+    }))
+}
+
+function assertRenderedContent(pdfPath, outputRoot, placements, label) {
+  const extracted = execFileSync('pdftotext', [pdfPath, '-'], { encoding: 'utf8' })
+  for (const placement of placements) {
+    for (const line of placement.renderedText.split('\n')) {
+      const probes = line.length > 100 ? [...new Set(line.split(/\s+/u))] : [line]
+      for (const probe of probes) {
+        assert.equal(
+          extracted.includes(probe),
+          true,
+          `${label}: full option content is present`,
+        )
+      }
+    }
+  }
+  const words = pdfAllWords(pdfPath, outputRoot)
+  assert.equal(words.length > placements.length, true, `${label}: content words render`)
+  assert.equal(
+    Math.max(...words.map(({ xMax }) => xMax))
+      - Math.min(...words.map(({ x }) => x)) <= 439.2,
+    true,
+    `${label}: rendered content stays inside the option row`,
+  )
 }
 
 function assertPhysicalPlacement(placements, actualWords, label, rowWidthPt = 438.2) {
@@ -257,42 +397,125 @@ function assertSameColumnSpread(placements, actualWords, label) {
   }
 }
 
+async function readScreenPositions(page) {
+  return page.locator('.option').evaluateAll((nodes) => {
+    const root = document.querySelector('.set').getBoundingClientRect()
+    return nodes.map((node) => {
+      const range = document.createRange()
+      range.selectNodeContents(node)
+      const rect = range.getBoundingClientRect()
+      return {
+        label: node.dataset.label,
+        x: (rect.x - root.x) * 72 / 96,
+        y: (rect.y - root.y) * 72 / 96,
+        xMax: (rect.right - root.x) * 72 / 96,
+        yMax: (rect.bottom - root.y) * 72 / 96,
+      }
+    })
+  })
+}
+
+function hostFontClosure() {
+  function resolveFont(pattern) {
+    const [file, fontVersion, family] = execFileSync(
+      'fc-match',
+      ['-f', '%{file}\\n%{fontversion}\\n%{family}\\n', pattern],
+      { encoding: 'utf8' },
+    ).trim().split('\n')
+    return {
+      fontFaceId: family.split(',')[0],
+      fontFileSha256: sha256File(file),
+      fontVersion: `fc:${fontVersion}`,
+      file,
+    }
+  }
+  const primary = resolveFont('Times New Roman')
+  const fallback = resolveFont('Songti SC')
+  const candidate = {
+    primary: {
+      fontFaceId: primary.fontFaceId,
+      fontFileSha256: primary.fontFileSha256,
+      fontVersion: primary.fontVersion,
+    },
+    fallbacks: [{
+      fontFaceId: fallback.fontFaceId,
+      characters: '．﹣',
+      fontFileSha256: fallback.fontFileSha256,
+      fontVersion: fallback.fontVersion,
+    }],
+    fontMetricsDigest: expectedAbcdRendererFontClosure.fontMetricsDigest,
+    shapingImplementationDigest:
+      expectedAbcdRendererFontClosure.shapingImplementationDigest,
+  }
+  const resolved = resolveAbcdRendererFontClosure(candidate)
+  assert.equal(
+    resolved.status,
+    'ready',
+    'actual artifacts require the exact pinned primary and fallback font files',
+  )
+  return { closure: resolved.closure, primaryFile: primary.file }
+}
+
 async function verifyActualArtifacts() {
   const outputRoot = mkdtempSync(path.join(tmpdir(), 'eqb-abcd-artifacts-'))
   const playwright = await import('../app/node_modules/playwright/index.js')
   const browser = await playwright.default.chromium.launch({ headless: true })
+  const actualFont = hostFontClosure()
+  const embeddedFont = readFileSync(actualFont.primaryFile).toString('base64')
   try {
-    for (const [questionId, texts] of gold) {
+    const actualCases = [
+      ...gold.map(({ questionId, redactedText }) => ({
+        questionId,
+        texts: redactedText,
+      })),
+      {
+        questionId: 'hard-break',
+        texts: ['first\nsecond', 'short', 'short', 'short'],
+      },
+      {
+        questionId: 'wrappable',
+        texts: [
+          Array.from({ length: 90 }, () => 'word').join(' '),
+          'short',
+          'short',
+          'short',
+        ],
+      },
+    ]
+    for (const { questionId, texts } of actualCases) {
       const selected = layoutAbcdOptionSet(optionSet(questionId, texts))
-      const screen = translateAbcdPlanToPaperSurface(selected)
-      const print = translateAbcdPlanToPrintPdf(selected)
-      const docx = translateAbcdPlanToDocx(selected)
+      const screen = translateAbcdPlanToPaperSurface(selected, actualFont.closure)
+      const print = translateAbcdPlanToPrintPdf(selected, actualFont.closure)
+      const docx = translateAbcdPlanToDocx(selected, actualFont.closure)
       const page = await browser.newPage({ viewport: { width: 1000, height: 800 } })
-      await page.setContent(htmlFor(screen))
-      const screenPositions = await page.locator('.option').evaluateAll((nodes) => {
-        const root = document.querySelector('.set').getBoundingClientRect()
-        return nodes.map((node) => {
-          const rect = node.getBoundingClientRect()
-          return {
-            label: node.dataset.label,
-            x: (rect.x - root.x) * 72 / 96,
-            y: (rect.y - root.y) * 72 / 96,
-            xMax: (rect.right - root.x) * 72 / 96,
-            yMax: (rect.bottom - root.y) * 72 / 96,
-          }
-        })
-      })
+      await page.setContent(htmlFor(screen, embeddedFont))
+      await page.evaluate(() => document.fonts.ready)
+      const screenPositions = await readScreenPositions(page)
       assertPhysicalPlacement(selected.placements, screenPositions, `${questionId} PaperSurface`)
+      if (questionId === 'hard-break' || questionId === 'wrappable') {
+        assert.equal(
+          screenPositions[0].yMax - screenPositions[0].y > 18,
+          true,
+          `${questionId} PaperSurface preserves multi-line content`,
+        )
+      }
       const screenshot = await page.screenshot()
       assert.equal(screenshot.subarray(1, 4).toString(), 'PNG')
 
-      await page.setContent(htmlFor(print))
+      await page.setContent(htmlFor(print, embeddedFont))
+      await page.evaluate(() => document.fonts.ready)
       const pdfPath = path.join(outputRoot, `${questionId}-print.pdf`)
       writeFileSync(pdfPath, await page.pdf({ format: 'A4', printBackground: true }))
       assert.equal(readFileSync(pdfPath).subarray(0, 4).toString(), '%PDF')
       assertPhysicalPlacement(
         selected.placements,
         pdfWords(pdfPath, outputRoot),
+        `${questionId} Print/PDF`,
+      )
+      assertRenderedContent(
+        pdfPath,
+        outputRoot,
+        selected.placements,
         `${questionId} Print/PDF`,
       )
       await page.close()
@@ -314,28 +537,34 @@ async function verifyActualArtifacts() {
         pdfWords(docxPdfPath, outputRoot),
         `${questionId} DOCX`,
       )
+      assertRenderedContent(
+        docxPdfPath,
+        outputRoot,
+        selected.placements,
+        `${questionId} DOCX`,
+      )
     }
 
     const clozeScreen = {
-      ...translateAbcdPlanToPaperSurface(clozePlans[0]),
+      ...translateAbcdPlanToPaperSurface(clozePlans[0], actualFont.closure),
       placements: clozePlans.flatMap((selected, row) =>
-        translateAbcdPlanToPaperSurface(selected).placements.map((placement) => ({
+        translateAbcdPlanToPaperSurface(selected, actualFont.closure).placements.map((placement) => ({
           ...placement,
           row,
         }))),
     }
     const clozePrint = {
-      ...translateAbcdPlanToPrintPdf(clozePlans[0]),
+      ...translateAbcdPlanToPrintPdf(clozePlans[0], actualFont.closure),
       placements: clozePlans.flatMap((selected, row) =>
-        translateAbcdPlanToPrintPdf(selected).placements.map((placement) => ({
+        translateAbcdPlanToPrintPdf(selected, actualFont.closure).placements.map((placement) => ({
           ...placement,
           row,
         }))),
     }
     const clozeDocx = {
-      ...translateAbcdPlanToDocx(clozePlans[0]),
+      ...translateAbcdPlanToDocx(clozePlans[0], actualFont.closure),
       paragraphs: clozePlans.flatMap((selected) =>
-        translateAbcdPlanToDocx(selected).paragraphs),
+        translateAbcdPlanToDocx(selected, actualFont.closure).paragraphs),
     }
     const clozePlacements = clozePlans.flatMap((selected, row) =>
       selected.placements.map((placement) => ({
@@ -344,29 +573,25 @@ async function verifyActualArtifacts() {
       })))
 
     const clozePage = await browser.newPage({ viewport: { width: 1000, height: 1200 } })
-    await clozePage.setContent(htmlFor(clozeScreen))
-    const clozeScreenWords = await clozePage.locator('.option').evaluateAll((nodes) => {
-      const root = document.querySelector('.set').getBoundingClientRect()
-      return nodes.map((node) => {
-        const rect = node.getBoundingClientRect()
-        return {
-          label: node.dataset.label,
-          x: (rect.x - root.x) * 72 / 96,
-          y: (rect.y - root.y) * 72 / 96,
-          xMax: (rect.right - root.x) * 72 / 96,
-          yMax: (rect.bottom - root.y) * 72 / 96,
-        }
-      })
-    })
+    await clozePage.setContent(htmlFor(clozeScreen, embeddedFont))
+    await clozePage.evaluate(() => document.fonts.ready)
+    const clozeScreenWords = await readScreenPositions(clozePage)
     assertPhysicalPlacement(clozePlacements, clozeScreenWords, 'Cloze PaperSurface')
     assertSameColumnSpread(clozePlacements, clozeScreenWords, 'Cloze PaperSurface')
 
-    await clozePage.setContent(htmlFor(clozePrint))
+    await clozePage.setContent(htmlFor(clozePrint, embeddedFont))
+    await clozePage.evaluate(() => document.fonts.ready)
     const clozePrintPdf = path.join(outputRoot, 'cloze-print.pdf')
     writeFileSync(clozePrintPdf, await clozePage.pdf({ format: 'A4', printBackground: true }))
     const clozePrintWords = pdfWords(clozePrintPdf, outputRoot)
     assertPhysicalPlacement(clozePlacements, clozePrintWords, 'Cloze Print/PDF')
     assertSameColumnSpread(clozePlacements, clozePrintWords, 'Cloze Print/PDF')
+    assertRenderedContent(
+      clozePrintPdf,
+      outputRoot,
+      clozePlacements,
+      'Cloze Print/PDF',
+    )
     await clozePage.close()
 
     const clozeDocxPath = writeDocx(outputRoot, 'cloze-docx', clozeDocx)
@@ -378,9 +603,16 @@ async function verifyActualArtifacts() {
       outputRoot,
       clozeDocxPath,
     ], { stdio: 'pipe' })
-    const clozeDocxWords = pdfWords(path.join(outputRoot, 'cloze-docx.pdf'), outputRoot)
+    const clozeDocxPdf = path.join(outputRoot, 'cloze-docx.pdf')
+    const clozeDocxWords = pdfWords(clozeDocxPdf, outputRoot)
     assertPhysicalPlacement(clozePlacements, clozeDocxWords, 'Cloze DOCX')
     assertSameColumnSpread(clozePlacements, clozeDocxWords, 'Cloze DOCX')
+    assertRenderedContent(
+      clozeDocxPdf,
+      outputRoot,
+      clozePlacements,
+      'Cloze DOCX',
+    )
   } finally {
     await browser.close()
     rmSync(outputRoot, { recursive: true, force: true })
