@@ -159,8 +159,9 @@ export function buildClozeAnalysisSurfaceModel(input: {
   asset: PaperAssetV1
   analysis: ReviewedClozeAnalysisV1
   groupId: string
+  canonicalConsumption?: unknown
 }): ClozeAnalysisSurfaceModel {
-  const { asset, analysis, groupId } = input
+  const { asset, analysis, groupId, canonicalConsumption } = input
 
   if (analysis.schemaVersion !== 'cloze-analysis-v1') {
     throw new Error('[I9] analysis schemaVersion must be cloze-analysis-v1.')
@@ -175,8 +176,15 @@ export function buildClozeAnalysisSurfaceModel(input: {
   }
 
   const questionIds = group.questionIds ?? []
-  const canonicalSurface = buildClozePaperView({ asset, groupId })
-  if (canonicalSurface.normalization.status !== 'ready') {
+  const canonicalSurface = buildClozePaperView({
+    asset,
+    groupId,
+    canonicalConsumption,
+  })
+  if (
+    canonicalConsumption === undefined
+    && canonicalSurface.normalization.status !== 'ready'
+  ) {
     throw new Error(
       `[CLOZE_CANONICAL_SURFACE_UNAVAILABLE] ${asset.paper.paperId}/${groupId} `
       + 'cannot layer analysis onto an unresolved canonical group.',

@@ -70,6 +70,52 @@ function explicitLegacyPlan(rootDir, paperId, consumerContract) {
   }
 }
 
+function explicitDatabaseLegacyPlan(candidates, consumerContract) {
+  const resolved = resolveConsumerContract(consumerContract)
+  if (!resolved.ok) return null
+  const sourceIds = new Set(
+    candidates
+      .map((item) => item.detail?.sourceDetail?.id)
+      .filter(Boolean),
+  )
+  if (
+    sourceIds.size !== 1
+    || candidates.some(
+      (item) =>
+        item.detail?.paperId
+        || !item.detail?.sourceDetail?.id,
+    )
+  ) return null
+  const groupIdsByFamily = new Map()
+  for (const item of candidates) {
+    const familyContractId =
+      item.detail.groupType === 'cloze' ? 'cloze' : 'grammar-fill'
+    const capability = resolved.contract.families.find(
+      (entry) => entry.familyContractId === familyContractId,
+    )
+    if (!capability || capability.legacyCapability !== 'available') return null
+    const groupIds = groupIdsByFamily.get(familyContractId) || []
+    if (groupIds.includes(item.detail.id)) return null
+    groupIds.push(item.detail.id)
+    groupIdsByFamily.set(familyContractId, groupIds)
+  }
+  return {
+    disposition: 'ready',
+    paperId: `legacy-source-${[...sourceIds][0]}`,
+    sourceAssetVersion: null,
+    selections: [...groupIdsByFamily].map(
+      ([familyContractId, groupIds]) => ({
+        mode: 'legacy',
+        familyContractId,
+        groupIds,
+        projectedOccurrences: [],
+        diagnostic: { code: 'CANONICAL_SOURCE_PAPER_ID_UNAVAILABLE' },
+      }),
+    ),
+    diagnostics: [{ code: 'CANONICAL_SOURCE_PAPER_ID_UNAVAILABLE' }],
+  }
+}
+
 export function createCanonicalConsumerRuntime({ rootDir, db }) {
   const store = {
     ...createFileSystemCanonicalPublicationStore({ rootDir, db }),
@@ -108,6 +154,11 @@ export function createCanonicalConsumerRuntime({ rootDir, db }) {
     const candidates = items.filter((item) =>
       ['cloze', 'grammar_cloze'].includes(item.detail?.groupType))
     if (candidates.length === 0) return null
+    const databaseLegacy = explicitDatabaseLegacyPlan(
+      candidates,
+      consumerContractRefs[consumerId],
+    )
+    if (databaseLegacy) return databaseLegacy
     const paperIds = new Set(
       candidates.map((item) => item.detail?.paperId).filter(Boolean),
     )

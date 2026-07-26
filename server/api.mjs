@@ -488,6 +488,7 @@ const draftPaperStore = createDraftPaperStore({
   openDatabase,
   openUserDatabase,
   paperAssetsDir,
+  resolveCanonicalConsumption,
   rootDir,
   selectQuestionGroupCards,
 })

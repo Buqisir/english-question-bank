@@ -89,6 +89,7 @@ import {
 import {
   canonicalConsumptionForGroup,
   loadScreenConsumption,
+  type WholePaperConsumption,
 } from '../paper-intelligence/canonicalConsumptionClient.ts'
 import {
   buildWritingPaperView,
@@ -325,6 +326,8 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
 
   const [asset, setAsset] = useState<PaperAssetV1 | null>(null)
   const [assetBase, setAssetBase] = useState<string | null>(null)
+  const [canonicalConsumption, setCanonicalConsumption] =
+    useState<WholePaperConsumption | null>(null)
   const [groupModels, setGroupModels] = useState<Record<string, GroupModel>>({})
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -486,6 +489,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     setError(null)
     setAsset(null)
     setAssetBase(null)
+    setCanonicalConsumption(null)
     setGroupModels({})
     setLectureAnalysisByGroupId({})
     setLectureAnalysisFetched(false)
@@ -638,6 +642,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
         if (cancelled) return
         setAsset(loadedAsset)
         setAssetBase(resolvedBase)
+        setCanonicalConsumption(canonicalConsumption)
         setGroupModels(models)
         setLoading(false)
       } catch (e) {
@@ -659,8 +664,9 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
   useEffect(() => {
     if (!lectureOpen) return
     if (lectureAnalysisFetched) return
-    if (!asset || !assetBase) return
+    if (!asset || !assetBase || !canonicalConsumption) return
     let cancelled = false
+    const wholePaperConsumption = canonicalConsumption
     setLectureAnalysisLoading(true)
 
     async function loadLectureAnalyses(): Promise<void> {
@@ -689,7 +695,16 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
             try {
               entries[groupId] = {
                 kind: 'cloze',
-                model: buildClozeAnalysisSurfaceModel({ asset: loadedAsset, analysis: raw, groupId }),
+                model: buildClozeAnalysisSurfaceModel({
+                  asset: loadedAsset,
+                  analysis: raw,
+                  groupId,
+                  canonicalConsumption: canonicalConsumptionForGroup(
+                    wholePaperConsumption,
+                    'cloze',
+                    groupId,
+                  ),
+                }),
               }
             } catch {
               entries[groupId] = { kind: 'unavailable' }
@@ -713,7 +728,16 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
             try {
               entries[groupId] = {
                 kind: 'grammarFill',
-                model: buildGrammarFillAnalysisSurfaceModel({ asset: loadedAsset, analysis: raw, groupId }),
+                model: buildGrammarFillAnalysisSurfaceModel({
+                  asset: loadedAsset,
+                  analysis: raw,
+                  groupId,
+                  canonicalConsumption: canonicalConsumptionForGroup(
+                    wholePaperConsumption,
+                    'grammar-fill',
+                    groupId,
+                  ),
+                }),
               }
             } catch {
               entries[groupId] = { kind: 'unavailable' }
@@ -748,7 +772,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     return (): void => {
       cancelled = true
     }
-  }, [lectureOpen, lectureAnalysisFetched, asset, assetBase])
+  }, [lectureOpen, lectureAnalysisFetched, asset, assetBase, canonicalConsumption])
 
   // Scroll to the requested group once the page has finished loading.
   // 刀 3: focus target falls back to the group derived from `questionId`

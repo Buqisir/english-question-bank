@@ -79,11 +79,16 @@ function inlineFigureImages(html, images) {
 // exist and PO-2's "重新排版中…" loading state already absorbs the extra ~700-800ms
 // render this adds on a title edit. studentLabel and the item list view stay excluded
 // — neither ever reaches the printed page.
-export function draftPaperPaginationSignature(draftPaper, versionType) {
+export function draftPaperPaginationSignature(
+  draftPaper,
+  versionType,
+  canonicalConsumptionSignature = null,
+) {
   return JSON.stringify({
     id: draftPaper.id,
     title: draftPaper.title,
     versionType,
+    canonicalConsumptionSignature,
     items: draftPaper.items.map((item) => ({
       id: item.id,
       groupId: item.groupId,
@@ -233,6 +238,7 @@ export function createDraftPaperStore({
   openDatabase,
   openUserDatabase,
   paperAssetsDir,
+  resolveCanonicalConsumption = null,
   selectQuestionGroupCards,
 }) {
   // draft-desk-b step4 (SW-5 retirement): `exportDir` and `rootDir` used to be
@@ -539,25 +545,41 @@ export function createDraftPaperStore({
   // finding that drove this design). Callers that don't pass
   // `exportOptions.images` (the other two call sites) get it collected
   // into a throwaway array internally — harmless, they never read it.
-  function buildDraftPrintHtml(draftPaper, exportOptions = {}) {
-    if (!draftPaper.items.length) return ''
-    const input = buildDraftPaperExportInput(draftPaper, exportOptions)
-    if (!input.items.length) return ''
-    const exportItems = input.items.map((item) => {
-      // 依赖 getQuestionGroupDetail 每次返回全新对象：下方教师版分支会就地
-      // 写入 detail.questions[].explanation。若它将来加缓存（LRU 等），教师版
-      // 解析会泄漏进后续学生版导出——加缓存前必须先改这里为深拷贝。
-      // groupMissing items are filtered out of input.items above, so this
-      // getQuestionGroupDetail lookup must never see an orphaned groupId here.
+  function resolveDraftExportItems(input) {
+    return input.items.map((item) => {
+      // getQuestionGroupDetail currently returns a fresh object. Teacher
+      // Analysis below mutates its question explanations, so a future cache
+      // must add a clone at this boundary.
       const detail = getQuestionGroupDetail(item.questionGroupId)
       if (!detail) throw new Error(`questionGroupId not found: ${item.questionGroupId}`)
       return {
         detail,
         note: '',
-        score: Math.max(0, Number.isFinite(Number(item.score)) ? Number(item.score) : detail.defaultScore),
+        score: Math.max(
+          0,
+          Number.isFinite(Number(item.score))
+            ? Number(item.score)
+            : detail.defaultScore,
+        ),
         sectionTitle: '',
       }
     })
+  }
+
+  function buildDraftPrintHtml(draftPaper, exportOptions = {}) {
+    if (!draftPaper.items.length) return ''
+    const input = buildDraftPaperExportInput(draftPaper, exportOptions)
+    if (!input.items.length) return ''
+    const exportItems = resolveDraftExportItems(input)
+    const canonicalConsumption =
+      Object.prototype.hasOwnProperty.call(exportOptions, 'canonicalConsumption')
+        ? exportOptions.canonicalConsumption
+        : resolveCanonicalConsumption
+          ? resolveCanonicalConsumption({
+              consumerId: 'print_pdf',
+              items: exportItems,
+            })
+          : null
     if (input.versionType === 'teacher' && paperAssetsDir) {
       // Restart cut ③ — join teacher-version explanations from paper-assets
       // analysis files. Display-layer only: never writes questions.explanation.
@@ -581,9 +603,27 @@ export function createDraftPaperStore({
         paperAssetsDir,
         imageMode: exportOptions.imageMode === 'file' ? 'file' : 'web',
         images: exportOptions.images ?? [],
+        canonicalConsumption,
       }),
       input.title,
     )
+  }
+
+  function resolveDraftCanonicalConsumption(draftPaper) {
+    if (!resolveCanonicalConsumption) return null
+    const input = buildDraftPaperExportInput(draftPaper)
+    const exportItems = resolveDraftExportItems(input)
+    return resolveCanonicalConsumption({
+      consumerId: 'print_pdf',
+      items: exportItems,
+    })
+  }
+
+  function consumptionSignature(consumption) {
+    if (!consumption) return null
+    return createHash('sha256')
+      .update(JSON.stringify(consumption))
+      .digest('hex')
   }
 
   // draft-desk-b step2 (SW-A fix): same buildDraftPrintHtml output the old
@@ -1244,14 +1284,24 @@ export function createDraftPaperStore({
         draftPaper.items.filter((item) => !item.groupMissing).map((item) => [item.groupId, item.id]),
       )
 
-      const signature = draftPaperPaginationSignature(draftPaper, normalizedVersionType)
+      const canonicalConsumption = resolveDraftCanonicalConsumption(draftPaper)
+      const resolvedConsumptionSignature =
+        consumptionSignature(canonicalConsumption)
+      const signature = draftPaperPaginationSignature(
+        draftPaper,
+        normalizedVersionType,
+        resolvedConsumptionSignature,
+      )
       const cached = draftPaginationCacheGet(cacheKey)
       if (cached && cached.signature === signature) {
         const pageBreakSuggestions = derivePageBreakSuggestions(cached.paginatedHtml, { itemsByGroupId, printForm: draftPaper.printForm })
-        return { paginatedHtml: cached.paginatedHtml, pdfBytes: cached.pdfBytes, pageCount: cached.pageCount, draftPaper, pageBreakSuggestions, reused: true }
+        return { paginatedHtml: cached.paginatedHtml, pdfBytes: cached.pdfBytes, pageCount: cached.pageCount, draftPaper, pageBreakSuggestions, reused: true, consumptionSignature: resolvedConsumptionSignature }
       }
 
-      const html = buildDraftPaginationPrintHtml(draftPaper, { versionType: normalizedVersionType })
+      const html = buildDraftPaginationPrintHtml(draftPaper, {
+        versionType: normalizedVersionType,
+        canonicalConsumption,
+      })
       if (!html) throw new Error('请先添加题组')
       const rendered = await renderPaginatedPaper(html)
       // Same non-groupMissing, item-order group id list buildDraftPaperBlocks derives
@@ -1262,7 +1312,7 @@ export function createDraftPaperStore({
 
       draftPaginationCacheSet(cacheKey, { signature, paginatedHtml, pdfBytes: rendered.pdfBytes, pageCount: rendered.pageCount })
       const pageBreakSuggestions = derivePageBreakSuggestions(paginatedHtml, { itemsByGroupId, printForm: draftPaper.printForm })
-      return { paginatedHtml, pdfBytes: rendered.pdfBytes, pageCount: rendered.pageCount, draftPaper, pageBreakSuggestions, reused: false }
+      return { paginatedHtml, pdfBytes: rendered.pdfBytes, pageCount: rendered.pageCount, draftPaper, pageBreakSuggestions, reused: false, consumptionSignature: resolvedConsumptionSignature }
     } finally {
       userDb.close()
       bankDb.close()
@@ -1284,7 +1334,11 @@ export function createDraftPaperStore({
       return { suggestion: null, reused: false }
     }
     const { draftPaper } = pagination
-    const signature = draftPaperPaginationSignature(draftPaper, normalizedVersionType)
+    const signature = draftPaperPaginationSignature(
+      draftPaper,
+      normalizedVersionType,
+      pagination.consumptionSignature,
+    )
     const cacheKey = reorderSuggestionCacheKey(draftPaperId, draftPaper.printForm, signature, pagination.pageBreakSuggestions)
     // reused 与分页端点同款语义（CR MF-1 的可断言面）：null 裁决同样必须命中。
     const cached = reorderSuggestionCacheGet(cacheKey)

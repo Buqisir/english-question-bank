@@ -210,8 +210,9 @@ export function buildGrammarFillAnalysisSurfaceModel(input: {
   asset: PaperAssetV1
   analysis: ReviewedGrammarFillAnalysisV1
   groupId: string
+  canonicalConsumption?: unknown
 }): GrammarFillAnalysisSurfaceModel {
-  const { asset, analysis, groupId } = input
+  const { asset, analysis, groupId, canonicalConsumption } = input
 
   if (analysis.schemaVersion !== 'grammar-fill-analysis-v2') {
     throw new Error('[I14] analysis schemaVersion must be grammar-fill-analysis-v2.')
@@ -226,13 +227,19 @@ export function buildGrammarFillAnalysisSurfaceModel(input: {
   }
 
   const questionIds = group.questionIds ?? []
-  const plainModel = buildGrammarFillPaperView({ asset, groupId })
+  const plainModel = buildGrammarFillPaperView({
+    asset,
+    groupId,
+    canonicalConsumption,
+  })
   const canonicalReady = plainModel.normalization.status === 'ready'
+  const planBound = canonicalConsumption !== undefined
+  const useSelectedSurface = planBound || canonicalReady
 
-  // Canonical compatibility reuses the exact plain-view TextMap and semantic
-  // nodes. Non-enabled/needs-review groups retain the established legacy
-  // analysis model.
-  const textMap = canonicalReady
+  // A whole-paper Consumption Plan owns the selected canonical-or-legacy
+  // surface. Analysis may add evidence to that surface, but cannot rebuild it
+  // from the source asset and replace its semantics or placement identity.
+  const textMap = useSelectedSurface
     ? plainModel.surfaceData.textMap
     : buildGrammarFillAnalysisTextMap(asset, group)
 
@@ -246,11 +253,11 @@ export function buildGrammarFillAnalysisSurfaceModel(input: {
   }
 
   // Build questions for PaperSurface left column.
-  const questions = canonicalReady
+  const questions = useSelectedSurface
     ? [...plainModel.surfaceData.questions]
     : buildQuestions(asset, questionIds)
 
-  if (canonicalReady) {
+  if (useSelectedSurface) {
     for (const questionId of questionIds) {
       const expectedBlankId = asset.content.questions[questionId]?.blankId
       const analysisBlankId = analysis.blanks[questionId]?.blankId
@@ -268,7 +275,7 @@ export function buildGrammarFillAnalysisSurfaceModel(input: {
     analysis,
     questionIds,
     textMap,
-    canonicalReady,
+    useSelectedSurface,
   )
 
   // Build per-blank analysis views.
@@ -282,7 +289,7 @@ export function buildGrammarFillAnalysisSurfaceModel(input: {
   return {
     report: buildShellReport(asset, group, groupId),
     passageStructures: { [GRAMMAR_FILL_SECTION]: passageStructure },
-    surfaceData: canonicalReady
+    surfaceData: useSelectedSurface
       ? { ...plainModel.surfaceData, evidence }
       : { textMap, questions, evidence },
     analysisByQuestionId,

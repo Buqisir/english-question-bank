@@ -29,6 +29,8 @@ import {
 import {
   createCanonicalConsumerRuntime,
 } from '../server/paper-canonical/consumerRuntime.mjs'
+import { createDraftPaperStore } from '../server/draft-paper/draftPaperStore.mjs'
+import { closeChromiumPool } from '../server/draft-paper/chromiumPool.mjs'
 import {
   createPaperCanonicalConsumerRoutes,
 } from '../server/paper-canonical/consumerRoutes.mjs'
@@ -41,6 +43,14 @@ const fixture = makeClozeGrammarCanonicalReferenceFixture()
 const compilation = compileCanonicalPaper(fixture.request)
 assert.equal(compilation.disposition, 'ready')
 const asset = JSON.parse(new TextDecoder().decode(fixture.sourceAsset))
+const clozeAnalysis = JSON.parse(readFileSync(
+  'app/public/paper-assets/paper-2026-i/latest/analyses/cloze-analysis-v1.json',
+  'utf8',
+))
+const grammarFillAnalysis = JSON.parse(readFileSync(
+  'app/public/paper-assets/paper-2026-i/latest/analyses/grammar-fill-analysis-v1.json',
+  'utf8',
+))
 
 function exportItem(groupId) {
   const group = asset.content.groups[groupId]
@@ -141,6 +151,15 @@ async function assertActualPaperBrowseBoundary({
   try {
     const page = await browser.newPage({ viewport: { width: 1280, height: 900 } })
     let consumption = readyConsumption
+    let successfulAnalysisResponses = 0
+    let resolveSuccessfulAnalyses
+    const successfulAnalyses = new Promise((resolve) => {
+      resolveSuccessfulAnalyses = resolve
+    })
+    const markSuccessfulAnalysis = () => {
+      successfulAnalysisResponses += 1
+      if (successfulAnalysisResponses === 2) resolveSuccessfulAnalyses()
+    }
     await page.route('**/api/paper-canonical/consumption?*', (route) =>
       route.fulfill({
         status: 200,
@@ -155,17 +174,43 @@ async function assertActualPaperBrowseBoundary({
       }))
     await page.route('**/paper-assets/**/analyses/**', (route) =>
       route.fulfill({ status: 404, body: '' }))
+    await page.route('**/paper-assets/**/analyses/cloze-analysis-v1.json', (route) => {
+      markSuccessfulAnalysis()
+      return route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify(clozeAnalysis),
+      })
+    })
+    await page.route('**/paper-assets/**/analyses/grammar-fill-analysis-v1.json', (route) => {
+      markSuccessfulAnalysis()
+      return route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify(grammarFillAnalysis),
+      })
+    })
     await page.route('**/paper-assets/**/figures/**', (route) =>
       route.fulfill({ status: 404, body: '' }))
 
     const qaUrl = new URL('canonical-consumption-qa.html', appUrl)
     qaUrl.searchParams.set('paperId', fixture.source.paperId)
+    qaUrl.searchParams.set('lecture', '1')
+    qaUrl.searchParams.set('focusGroupId', 'group-2026-i-cloze')
+    qaUrl.searchParams.set('questionId', 'q-2026-i-041')
     await page.goto(qaUrl.href)
     await page.locator('[data-paper-question-id]').first().waitFor()
+    await successfulAnalyses
+    await page.waitForTimeout(250)
+    assert.equal(
+      successfulAnalysisResponses,
+      2,
+      'actual lecture mode consumes successful Cloze and Grammar Analysis responses',
+    )
     assert.equal(
       await page.locator('[data-paper-question-id]').count(),
       15,
-      'actual PaperBrowsePage renders every Cloze question',
+      'actual lecture-mode PaperBrowsePage renders every Cloze question',
     )
     for (const groupId of [
       'group-2026-i-cloze',
@@ -180,7 +225,7 @@ async function assertActualPaperBrowseBoundary({
     assert.equal(
       await page.locator('[data-canonical-placement-signature]').count(),
       15,
-      'actual PaperBrowsePage carries every Cloze placement signature',
+      'successful Analysis preserves every canonical Cloze placement signature',
     )
     assertBrowserColumnGates(
       await readBrowserColumnStarts(
@@ -206,15 +251,16 @@ async function assertActualPaperBrowseBoundary({
     consumption = legacyConsumption
     await page.reload()
     await page.locator('[data-paper-question-id]').first().waitFor()
+    await page.waitForTimeout(250)
     assert.equal(
       await page.locator('[data-paper-question-id]').count(),
       15,
-      'actual PaperBrowsePage honors an explicit whole-family legacy plan',
+      'actual lecture-mode PaperBrowsePage honors an explicit whole-family legacy plan',
     )
     assert.equal(
       await page.locator('[data-canonical-placement-signature]').count(),
       0,
-      'explicit legacy selection does not invoke canonical projection',
+      'successful Analysis does not upgrade an explicit legacy selection',
     )
 
     consumption = invalidConsumption
@@ -229,6 +275,238 @@ async function assertActualPaperBrowseBoundary({
     await browser.close()
     await viteServer.close()
   }
+}
+
+function makeDraftPaperFixture(rootDir, resolveCanonicalConsumption) {
+  const detailByGroupId = new Map(items.map((item) => [item.detail.id, item.detail]))
+  const userDbPath = path.join(rootDir, 'draft-paper.sqlite')
+  const fixtureDb = new DatabaseSync(userDbPath)
+  fixtureDb.exec(`
+    CREATE TABLE draft_papers (
+      id TEXT PRIMARY KEY,
+      user_id TEXT NOT NULL,
+      title TEXT NOT NULL,
+      subject TEXT NOT NULL,
+      status TEXT NOT NULL,
+      current_marker INTEGER NOT NULL DEFAULT 0,
+      last_printed_at TEXT,
+      created_at TEXT NOT NULL,
+      updated_at TEXT NOT NULL,
+      student_label TEXT,
+      print_form TEXT
+    );
+    CREATE TABLE draft_paper_items (
+      id TEXT PRIMARY KEY,
+      draft_paper_id TEXT NOT NULL,
+      group_id TEXT NOT NULL,
+      source_paper_id TEXT,
+      order_index INTEGER NOT NULL,
+      page_break_before INTEGER NOT NULL DEFAULT 0,
+      created_at TEXT NOT NULL,
+      updated_at TEXT NOT NULL
+    );
+  `)
+  const userId = 'ticket-05-teacher'
+  const draftPaperId = 'draft-paper-canonical-reference'
+  fixtureDb.prepare(`
+    INSERT INTO draft_papers (
+      id, user_id, title, subject, status, current_marker,
+      created_at, updated_at, print_form
+    ) VALUES (?, ?, ?, 'english', 'active', 1, datetime('now'), datetime('now'), 'a4')
+  `).run(draftPaperId, userId, 'Canonical Draft Paper Reference')
+  const insertItem = fixtureDb.prepare(`
+    INSERT INTO draft_paper_items (
+      id, draft_paper_id, group_id, source_paper_id, order_index,
+      page_break_before, created_at, updated_at
+    ) VALUES (?, ?, ?, ?, ?, 0, datetime('now'), datetime('now'))
+  `)
+  for (const [index, item] of items.entries()) {
+    insertItem.run(
+      `draft-item-${index + 1}`,
+      draftPaperId,
+      item.detail.id,
+      item.detail.paperId,
+      index + 1,
+    )
+  }
+  fixtureDb.close()
+
+  const store = createDraftPaperStore({
+    exportImplementation: {
+      exportDocx() {
+        throw new Error('Draft canonical Print/PDF fixture does not export DOCX')
+      },
+    },
+    getPrintReadyByGroupId: (_db, groupIds) =>
+      new Map(groupIds.map((groupId) => [groupId, { ok: true, reason: null }])),
+    getQuestionGroupDetail: (groupId) => detailByGroupId.get(groupId) || null,
+    groupTypeLabels: {
+      cloze: '完形填空',
+      grammar_cloze: '语法填空',
+    },
+    isGroupPrintReady: () => ({ ok: true, reason: null }),
+    openDatabase: () => ({ close() {} }),
+    openUserDatabase: ({ readOnly = false } = {}) =>
+      new DatabaseSync(userDbPath, { readOnly }),
+    paperAssetsDir: path.resolve('app/public/paper-assets'),
+    resolveCanonicalConsumption,
+    selectQuestionGroupCards: (_db, _where, groupIds) =>
+      groupIds.map((groupId) => {
+        const detail = detailByGroupId.get(groupId)
+        return {
+          id: groupId,
+          groupType: detail.groupType,
+          defaultScore: items.find((item) => item.detail.id === groupId)?.score,
+          questionCount: detail.questions.length,
+        }
+      }),
+  })
+  return {
+    store,
+    userId,
+    draftPaperId,
+    openUserDatabase: (options) =>
+      new DatabaseSync(userDbPath, options),
+    openBankDatabase: () => ({ close() {} }),
+  }
+}
+
+async function assertActualDraftPrintPdfBoundary({
+  rootDir,
+  readyConsumption,
+  legacyConsumption,
+  partialConsumption,
+}) {
+  let consumption = readyConsumption
+  const fixture = makeDraftPaperFixture(rootDir, (input) => {
+    assert.equal(input.consumerId, 'print_pdf')
+    return consumption
+  })
+  const { store, userId, draftPaperId } = fixture
+
+  const previewUserDb = fixture.openUserDatabase({ readOnly: false })
+  const previewBankDb = fixture.openBankDatabase()
+  const canonicalPreview = store.getDraftPaper(
+    { userDb: previewUserDb, bankDb: previewBankDb },
+    userId,
+    draftPaperId,
+    { versionType: 'student' },
+  )
+  previewUserDb.close()
+  previewBankDb.close()
+  assert.equal(
+    (canonicalPreview.printHtml.match(/data-canonical-placement-signature=/g) || []).length,
+    15,
+    'draft Print preview carries the shared canonical layoutPlan',
+  )
+
+  try {
+    const pagination = await store.getDraftPaperPagination(
+      userId,
+      draftPaperId,
+      { versionType: 'student' },
+    )
+    assert.equal(
+      pagination.pdfBytes.subarray(0, 4).toString(),
+      '%PDF',
+      'public draft pagination produces the actual PDF artifact',
+    )
+    const playwright = await import('../app/node_modules/playwright/index.js')
+    const browser = await playwright.default.chromium.launch({ headless: true })
+    try {
+      const page = await browser.newPage()
+      await page.setContent(pagination.paginatedHtml, { waitUntil: 'load' })
+      assertBrowserColumnGates(
+        await readBrowserColumnStarts(
+          page,
+          '.canonical-options--four_columns',
+          ':scope > span',
+        ),
+        'Draft Print/PDF',
+      )
+    } finally {
+      await browser.close()
+    }
+
+    const exportedPdf = await store.exportDraftPaperPdf(
+      userId,
+      draftPaperId,
+      { versionType: 'student' },
+    )
+    assert.equal(
+      exportedPdf.body.subarray(0, 4).toString(),
+      '%PDF',
+      'public draft PDF export returns the planned pagination artifact',
+    )
+    assert.equal(
+      exportedPdf.reusedRecent,
+      true,
+      'draft PDF export reuses the exact plan-bound pagination artifact',
+    )
+
+    consumption = legacyConsumption
+    const legacyPagination = await store.getDraftPaperPagination(
+      userId,
+      draftPaperId,
+      { versionType: 'student' },
+    )
+    assert.equal(
+      (legacyPagination.paginatedHtml.match(/data-canonical-placement-signature=/g) || []).length,
+      0,
+      'draft pagination preserves explicit whole-family legacy selection',
+    )
+    assert.equal(
+      legacyPagination.reused,
+      false,
+      'Consumption Plan change invalidates the physical artifact cache',
+    )
+
+    consumption = partialConsumption
+    await assert.rejects(
+      () => store.getDraftPaperPagination(
+        userId,
+        draftPaperId,
+        { versionType: 'student' },
+      ),
+      { code: 'CANONICAL_CONSUMPTION_REJECTED' },
+      'draft pagination rejects a partial plan without exposing cached output',
+    )
+  } finally {
+    await closeChromiumPool()
+  }
+
+  consumption = legacyConsumption
+  const legacyUserDb = fixture.openUserDatabase({ readOnly: false })
+  const legacyBankDb = fixture.openBankDatabase()
+  const legacyPreview = store.getDraftPaper(
+    { userDb: legacyUserDb, bankDb: legacyBankDb },
+    userId,
+    draftPaperId,
+    { versionType: 'student' },
+  )
+  legacyUserDb.close()
+  legacyBankDb.close()
+  assert.equal(
+    (legacyPreview.printHtml.match(/data-canonical-placement-signature=/g) || []).length,
+    0,
+    'draft Print preview preserves explicit whole-family legacy selection',
+  )
+
+  consumption = partialConsumption
+  const partialUserDb = fixture.openUserDatabase({ readOnly: false })
+  const partialBankDb = fixture.openBankDatabase()
+  assert.throws(
+    () => store.getDraftPaper(
+      { userDb: partialUserDb, bankDb: partialBankDb },
+      userId,
+      draftPaperId,
+      { versionType: 'student' },
+    ),
+    { code: 'CANONICAL_CONSUMPTION_REJECTED' },
+    'draft Print preview rejects a partial Consumption Plan before rendering',
+  )
+  partialUserDb.close()
+  partialBankDb.close()
 }
 
 const rootDir = mkdtempSync(path.join(tmpdir(), 'eqb-canonical-consumption-'))
@@ -577,6 +855,30 @@ try {
     }),
     { code: 'CANONICAL_CONSUMPTION_REJECTED' },
   )
+  const databaseLegacyItems = structuredClone(items)
+  for (const item of databaseLegacyItems) {
+    delete item.detail.paperId
+    item.detail.sourceDetail = { id: 'legacy-source-ticket-05' }
+  }
+  const databaseLegacy = legacyRuntime.resolveForItems({
+    consumerId: 'print_pdf',
+    items: databaseLegacyItems,
+  })
+  assert.deepEqual(
+    databaseLegacy.selections.map((selection) => selection.mode),
+    ['legacy', 'legacy'],
+    'DB-only groups retain an explicit contract-authorized whole-family legacy plan',
+  )
+  const mixedDatabaseLegacyItems = structuredClone(databaseLegacyItems)
+  mixedDatabaseLegacyItems[1].detail.sourceDetail.id = 'another-legacy-source'
+  assert.throws(
+    () => legacyRuntime.resolveForItems({
+      consumerId: 'print_pdf',
+      items: mixedDatabaseLegacyItems,
+    }),
+    { code: 'CANONICAL_CONSUMPTION_REJECTED' },
+    'DB-only legacy selection rejects mixed source identity',
+  )
   const legacyExports = createExportImplementation({
     rootDir,
     exportDir: path.join(rootDir, 'legacy-exports'),
@@ -618,6 +920,12 @@ try {
     legacyConsumption: explicitLegacy,
     invalidConsumption: partial,
     outputDir: actualOutputDir,
+  })
+  await assertActualDraftPrintPdfBoundary({
+    rootDir,
+    readyConsumption: complete,
+    legacyConsumption: explicitLegacy,
+    partialConsumption: partial,
   })
   const mismatchedBlankJoin = structuredClone(complete)
   const clozeOccurrence = mismatchedBlankJoin.selections
@@ -662,6 +970,26 @@ try {
     }),
     { code: 'CANONICAL_CONSUMPTION_REJECTED' },
   )
+  const corruptDraftRoot = path.join(rootDir, 'corrupt-draft')
+  mkdirSync(corruptDraftRoot, { recursive: true })
+  const corruptDraft = makeDraftPaperFixture(
+    corruptDraftRoot,
+    (input) => runtime.resolveForItems(input),
+  )
+  const corruptDraftUserDb = corruptDraft.openUserDatabase({ readOnly: false })
+  const corruptDraftBankDb = corruptDraft.openBankDatabase()
+  assert.throws(
+    () => corruptDraft.store.getDraftPaper(
+      { userDb: corruptDraftUserDb, bankDb: corruptDraftBankDb },
+      corruptDraft.userId,
+      corruptDraft.draftPaperId,
+      { versionType: 'student' },
+    ),
+    { code: 'CANONICAL_CONSUMPTION_REJECTED' },
+    'draft Print preview rejects a corrupt Publication with no partial artifact',
+  )
+  corruptDraftUserDb.close()
+  corruptDraftBankDb.close()
   writeFileSync(canonicalGroupsPath, canonicalGroupsBytes)
 
   if (provisionActualArtifacts) {
