@@ -748,6 +748,16 @@ function PaperSurfaceQuestionItem({
           <span
             className={`ps-question-options-inline${question.canonicalPlacement ? ` ps-question-options-inline--${question.canonicalPlacement.mode}` : ''}`}
             data-canonical-placement-signature={question.canonicalPlacement?.signature}
+            data-canonical-column-starts-pt={question.canonicalPlacement?.columnStartsPt.join(',')}
+            style={question.canonicalPlacement
+              ? {
+                  width: `${question.canonicalPlacement.rowWidthPt}pt`,
+                  gridTemplateColumns: question.canonicalPlacement.columnWidthsPt
+                    .map((width) => `${width}pt`)
+                    .join(' '),
+                  gap: 0,
+                }
+              : undefined}
           >
             {question.options.map((opt) => (
               <span

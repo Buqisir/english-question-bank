@@ -290,18 +290,38 @@ function pointPlacements(plan) {
   }))
 }
 
-function translateAbcdPlanToPointSurface(plan, fontClosure, renderer) {
-  assertTranslatable(plan, fontClosure)
+export function translateAbcdPlanToPointPlacement(plan) {
+  if (plan?.status !== 'selected') {
+    throw new TypeError('A selected A-D layout plan is required')
+  }
+  const columnStartsTwip = [...new Set(
+    plan.placements.map(({ startTwip }) => startTwip),
+  )].sort((left, right) => left - right)
+  const columnStartsPt = columnStartsTwip.map((startTwip) => startTwip / 20)
+  const rowWidthPt = plan.rowWidthTwip / 20
   return {
-    renderer,
     mode: plan.mode,
     placementSignature: physicalSignature(plan),
-    rowWidthPt: plan.rowWidthTwip / 20,
+    rowWidthPt,
+    columnStartsPt,
+    columnWidthsPt: columnStartsTwip.map(
+      (startTwip, index) =>
+        ((columnStartsTwip[index + 1] ?? plan.rowWidthTwip) - startTwip) / 20,
+    ),
+    placements: pointPlacements(plan),
+  }
+}
+
+function translateAbcdPlanToPointSurface(plan, fontClosure, renderer) {
+  assertTranslatable(plan, fontClosure)
+  const placement = translateAbcdPlanToPointPlacement(plan)
+  return {
+    renderer,
+    ...placement,
     fontSizeHalfPoint: RULES.fontSizeHalfPoint,
     denseWhiteSpace: plan.mode === 'one_column' ? 'normal' : 'nowrap',
     clipping: 'forbidden',
     shrinkToFit: false,
-    placements: pointPlacements(plan),
   }
 }
 

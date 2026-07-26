@@ -66,6 +66,10 @@ import {
   buildGrammarFillPaperView,
   type GrammarFillPaperViewModel,
 } from '../paper-intelligence/grammarFillPaperViewAdapter.ts'
+import {
+  canonicalConsumptionForGroup,
+  loadScreenConsumption,
+} from '../paper-intelligence/canonicalConsumptionClient.ts'
 import { buildWritingPaperView, type WritingPaperViewModel } from '../paper-intelligence/writingPaperViewAdapter.ts'
 import { FACET_FRAMEWORKS } from '../paper-intelligence/grammarFillFacetRegistry.ts'
 import type { PaperAssetV1, PaperContentBlock } from '../../domain/paperAsset.ts'
@@ -273,17 +277,19 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
       setLoad({ status: 'error', message: '该题组暂无卷面资产——去整卷预览或等待生产线补齐。' })
       return
     }
+    const resolvedPaperId = paperId
     let cancelled = false
     async function loadModel(): Promise<void> {
       try {
-        let base = `/paper-assets/${paperId}/latest`
+        let base = `/paper-assets/${resolvedPaperId}/latest`
         let res = await fetch(`${base}/paper-asset.json`)
         if (!res.ok) {
-          base = `/paper-assets/${paperId}`
+          base = `/paper-assets/${resolvedPaperId}`
           res = await fetch(`${base}/paper-asset.json`)
         }
         if (!res.ok) throw new Error('卷面暂未就绪，可点击「看整卷」预览原卷。')
         const asset = (await res.json()) as PaperAssetV1
+        const canonicalConsumption = await loadScreenConsumption(resolvedPaperId)
         const block = asset.content.blocks.find(
           (b): b is Extract<PaperContentBlock, { type: 'group' }> =>
             b.type === 'group' && b.groupId === detail.id,
@@ -317,7 +323,18 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
           const analysis = (await aRes.json()) as ReviewedSevenChoicesAnalysisV1
           model = { kind: 'sevenChoices', model: buildSevenChoicesSurfaceModel({ asset, analysis, groupId: block.groupId }) }
         } else if (group.groupType === 'cloze') {
-          model = { kind: 'cloze', model: buildClozePaperView({ asset, groupId: block.groupId }) }
+          model = {
+            kind: 'cloze',
+            model: buildClozePaperView({
+              asset,
+              groupId: block.groupId,
+              canonicalConsumption: canonicalConsumptionForGroup(
+                canonicalConsumption,
+                'cloze',
+                block.groupId,
+              ),
+            }),
+          }
         } else if (group.groupType === 'grammarFill') {
           let grammarChips: Chip[] = []
           try {
@@ -333,7 +350,15 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
           }
           model = {
             kind: 'grammarFill',
-            model: buildGrammarFillPaperView({ asset, groupId: block.groupId }),
+            model: buildGrammarFillPaperView({
+              asset,
+              groupId: block.groupId,
+              canonicalConsumption: canonicalConsumptionForGroup(
+                canonicalConsumption,
+                'grammar-fill',
+                block.groupId,
+              ),
+            }),
             chips: grammarChips,
           }
         } else if (group.groupType === 'writing') {

@@ -151,6 +151,7 @@ export function createExportImplementation({
   // with no web server underneath it — see print-renderer.mjs's
   // `figureImageSrc` doc comment for the full "why two modes" story).
   paperAssetsDir = null,
+  resolveCanonicalConsumption = null,
 }) {
   if (typeof getQuestionGroupDetail !== 'function') {
     throw new Error('getQuestionGroupDetail is required')
@@ -184,7 +185,10 @@ export function createExportImplementation({
     // comment above buildExamDocumentXml for why it isn't a return value.
     const images = []
     const normalizationDiagnostics = []
-    const documentXml = buildDocumentXml({ title, versionType, items: exportItems, blocks, questionNumberStart, printStyle, paperAssetsDir, images, normalizationDiagnostics })
+    const canonicalConsumption = resolveCanonicalConsumption
+      ? resolveCanonicalConsumption({ consumerId: 'docx', items: exportItems })
+      : null
+    const documentXml = buildDocumentXml({ title, versionType, items: exportItems, blocks, questionNumberStart, printStyle, paperAssetsDir, images, normalizationDiagnostics, canonicalConsumption })
     const body = writeDocxPackage({ documentXml, images, outputPath, title })
 
     return {
@@ -234,6 +238,12 @@ export function createExportImplementation({
 
     const images = []
     const normalizationDiagnostics = []
+    const canonicalConsumption = resolveCanonicalConsumption
+      ? resolveCanonicalConsumption({
+          consumerId: 'print_pdf',
+          items: exportItems,
+        })
+      : null
     const html = buildPrintHtml({
       title,
       versionType,
@@ -245,6 +255,7 @@ export function createExportImplementation({
       imageMode,
       images,
       normalizationDiagnostics,
+      canonicalConsumption,
     })
     const versionLabel = versionType === 'student' ? '学生版' : '教师版'
     const fileName = `${title}-${versionLabel}-精排.html`

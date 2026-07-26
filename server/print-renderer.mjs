@@ -41,6 +41,7 @@ import { paperBlankPattern } from '../shared/papersurface/blankPattern.mjs'
 import { paperBlankRuling } from '../shared/papersurface/blankRuling.mjs'
 import { headingKind } from '../shared/papersurface/headingKind.mjs'
 import { resolveFigureMarker } from '../shared/figures/resolveFigureMarker.mjs'
+import { translateAbcdPlanToPointPlacement } from '../shared/paper-canonical/abcdLayout.mjs'
 import { projectCanonicalConsumerGroup } from '../shared/paper-canonical/consumerProjection.mjs'
 import { resolveGroupFigures } from './figures/paperFigures.mjs'
 import { resolveCanonicalPrintGroup } from './print-canonical-group-adapter.mjs'
@@ -548,10 +549,9 @@ export function buildPrintHtml({
                   content: option.text,
                 })),
                 canonicalPlacement: canonicalQuestion.layoutPlan
-                  ? {
-                      mode: canonicalQuestion.layoutPlan.mode,
-                      signature: canonicalQuestion.placementSignature,
-                    }
+                  ? translateAbcdPlanToPointPlacement(
+                      canonicalQuestion.layoutPlan,
+                    )
                   : null,
               }
             : question
@@ -567,7 +567,7 @@ export function buildPrintHtml({
             // 真卷完形形态:题号与选项同一行「41. A. xxx B. xxx C. xxx D. xxx」
             const placement = printQuestion.canonicalPlacement
             const placementAttrs = placement
-              ? ` data-canonical-placement-signature="${escapeHtml(placement.signature)}" data-canonical-placement-mode="${placement.mode}"`
+              ? ` data-canonical-placement-signature="${escapeHtml(placement.placementSignature)}" data-canonical-placement-mode="${placement.mode}" data-canonical-column-starts-pt="${placement.columnStartsPt.join(',')}" style="width:${placement.rowWidthPt}pt;grid-template-columns:${placement.columnWidthsPt.map((width) => `${width}pt`).join(' ')}"`
               : ''
             const renderedOptions = printQuestion.options.map((o) => `<span>${escapeHtml(o.label)}. ${escapeHtml(o.content)}</span>`).join('')
             groupHtml += `<div class="question"><p class="options-inline options-inline--numbered${placement ? ' options-inline--canonical' : ''}"><span class="qnum">${questionNum}.</span>${placement ? `<span class="canonical-options canonical-options--${placement.mode}"${placementAttrs}>${renderedOptions}</span>` : renderedOptions}</p>`

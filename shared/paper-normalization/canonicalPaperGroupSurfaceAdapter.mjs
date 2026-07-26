@@ -1,4 +1,5 @@
 import { segmentPaperText } from '../papersurface/segmentPaperText.mjs'
+import { translateAbcdPlanToPointPlacement } from '../paper-canonical/abcdLayout.mjs'
 import { projectCanonicalConsumerGroup } from '../paper-canonical/consumerProjection.mjs'
 import { buildExactPaperGroupSourceSlice } from './exactPaperGroupSourceSlice.mjs'
 import { normalizePaperGroup } from './normalizePaperGroup.mjs'
@@ -241,25 +242,33 @@ export function buildCanonicalConsumptionSurfaceData({
       semanticParagraphs: paragraphModels.map(
         (model) => model.semanticParagraph,
       ),
-      questions: canonicalGroup.questions.map((question, order) => ({
-        id: question.questionId,
-        section: SECTION_BY_GROUP_TYPE[canonicalGroup.groupType],
-        order,
-        questionNo: String(question.questionNo),
-        stem: question.stem,
-        options: question.options.map((option) => ({
-          label: option.label,
-          text: option.text,
-        })),
-        ...(question.layoutPlan
-          ? {
-              canonicalPlacement: {
-                mode: question.layoutPlan.mode,
-                signature: question.placementSignature,
-              },
-            }
-          : {}),
-      })),
+      questions: canonicalGroup.questions.map((question, order) => {
+        const placement = question.layoutPlan
+          ? translateAbcdPlanToPointPlacement(question.layoutPlan)
+          : null
+        return {
+          id: question.questionId,
+          section: SECTION_BY_GROUP_TYPE[canonicalGroup.groupType],
+          order,
+          questionNo: String(question.questionNo),
+          stem: question.stem,
+          options: question.options.map((option) => ({
+            label: option.label,
+            text: option.text,
+          })),
+          ...(placement
+            ? {
+                canonicalPlacement: {
+                  mode: placement.mode,
+                  signature: placement.placementSignature,
+                  rowWidthPt: placement.rowWidthPt,
+                  columnStartsPt: placement.columnStartsPt,
+                  columnWidthsPt: placement.columnWidthsPt,
+                },
+              }
+            : {}),
+        }
+      }),
       evidence: [],
     },
   }

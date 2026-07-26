@@ -103,6 +103,9 @@ export function resolveAbcdRendererFontClosure(
       readonly status: 'needs_review'
       readonly reason: 'pinned_renderer_font_closure_unavailable'
     }
+export function translateAbcdPlanToPointPlacement(
+  plan: SelectedAbcdLayoutPlan,
+): object
 export function translateAbcdPlanToPaperSurface(
   plan: SelectedAbcdLayoutPlan,
   fontClosure: VerifiedAbcdRendererFontClosure,

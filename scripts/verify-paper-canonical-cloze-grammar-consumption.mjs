@@ -26,7 +26,14 @@ import {
   loadPaperForConsumption,
   publishCanonicalPaperPublication,
 } from '../server/paper-canonical/publication.mjs'
+import {
+  createCanonicalConsumerRuntime,
+} from '../server/paper-canonical/consumerRuntime.mjs'
+import {
+  createPaperCanonicalConsumerRoutes,
+} from '../server/paper-canonical/consumerRoutes.mjs'
 import { createDocxRenderer } from '../server/exports/docxRenderer.mjs'
+import { createExportImplementation } from '../server/exports/exportImplementation.mjs'
 import { buildPrintHtml } from '../server/print-renderer.mjs'
 import { makeClozeGrammarCanonicalReferenceFixture } from '../test-fixtures/paper-canonical/clozeGrammarReferenceFixture.mjs'
 
@@ -40,6 +47,7 @@ function exportItem(groupId) {
   return {
     detail: {
       id: groupId,
+      paperId: asset.paper.paperId,
       title: group.title,
       source: asset.paper.title,
       groupType: group.groupType === 'grammarFill' ? 'grammar_cloze' : group.groupType,
@@ -80,6 +88,38 @@ const blocks = items.map((item) => ({
 }))
 const provisionActualArtifacts = process.argv.includes('--actual-artifacts')
 const artifactProof = {}
+const EXPECTED_FOUR_COLUMN_STARTS_PT = [0, 104, 208, 312]
+
+async function readBrowserColumnStarts(page, rowSelector, optionSelector) {
+  return page.locator(rowSelector).evaluateAll((rows, childSelector) =>
+    rows.map((row) => {
+      const root = row.getBoundingClientRect()
+      return [...row.querySelectorAll(childSelector)].map((option) =>
+        (option.getBoundingClientRect().x - root.x) * 72 / 96)
+    }), optionSelector)
+}
+
+function assertBrowserColumnGates(rows, label) {
+  assert.equal(rows.length, 15, `${label}: all 15 Cloze rows render`)
+  for (const [rowIndex, starts] of rows.entries()) {
+    assert.equal(starts.length, 4, `${label}: row ${rowIndex + 1} has A-D`)
+    starts.forEach((start, column) => {
+      assert.equal(
+        Math.abs(start - EXPECTED_FOUR_COLUMN_STARTS_PT[column]) <= 1,
+        true,
+        `${label}: row ${rowIndex + 1} column ${column + 1} stays within 1pt`,
+      )
+    })
+  }
+  for (let column = 0; column < 4; column += 1) {
+    const starts = rows.map((row) => row[column])
+    assert.equal(
+      Math.max(...starts) - Math.min(...starts) <= 0.5,
+      true,
+      `${label}: column ${column + 1} spread stays within 0.5pt`,
+    )
+  }
+}
 
 const rootDir = mkdtempSync(path.join(tmpdir(), 'eqb-canonical-consumption-'))
 const db = new DatabaseSync(path.join(rootDir, 'publication.sqlite'))
@@ -98,6 +138,96 @@ try {
       { kind: 'legacy_family', familyContractId },
     ],
   }
+  const runtime = createCanonicalConsumerRuntime({ rootDir, db })
+  const screenConsumption = runtime.load({
+    paperId: fixture.source.paperId,
+    consumerId: 'screen',
+  })
+  assert.equal(screenConsumption.disposition, 'ready')
+  assert.equal(
+    screenConsumption.selections.find(
+      (selection) => selection.familyContractId === 'cloze',
+    )?.mode,
+    'canonical',
+  )
+  const screenRoute = createPaperCanonicalConsumerRoutes()[0]
+  let screenRouteResult = null
+  await screenRoute.handle({
+    response: {},
+    url: new URL(
+      `http://eqb.test/api/paper-canonical/consumption?paperId=${fixture.source.paperId}`,
+    ),
+    context: {
+      loadCanonicalConsumption: runtime.load,
+      sendJson: (_response, status, body) => {
+        screenRouteResult = { status, body }
+      },
+    },
+  })
+  assert.equal(screenRouteResult.status, 200)
+  assert.equal(screenRouteResult.body.publicationDigest, screenConsumption.publicationDigest)
+  const publicRenderer = createDocxRenderer({
+    groupTypeLabels: { cloze: '完形填空', grammar_cloze: '语法填空' },
+    optionalString: (value) => typeof value === 'string' ? value.trim() : '',
+  })
+  const publicExports = createExportImplementation({
+    rootDir,
+    exportDir: path.join(rootDir, 'exports'),
+    getQuestionGroupDetail: (groupId) =>
+      items.find((item) => item.detail.id === groupId)?.detail || null,
+    buildDocumentXml: publicRenderer.buildDocumentXml,
+    writeDocxPackage: publicRenderer.writeDocxPackage,
+    buildPrintHtml,
+    convertDocxToPdf: publicRenderer.convertDocxToPdf,
+    resolveCanonicalConsumption: runtime.resolveForItems,
+  })
+  const publicInput = {
+    title: asset.paper.title,
+    versionType: 'student',
+    printStyle: 'exam',
+    items: items.map((item) => ({
+      questionGroupId: item.detail.id,
+      score: item.score,
+    })),
+    blocks,
+    questionNumberStart: 41,
+  }
+  const publicPrint = publicExports.exportPrintHtml(publicInput)
+  const publicTeacherPrint = publicExports.exportPrintHtml({
+    ...publicInput,
+    versionType: 'teacher',
+  })
+  assert.equal(
+    publicPrint.normalizationDiagnostics.filter(
+      (diagnostic) => diagnostic.source === 'whole-paper-consumption',
+    ).length,
+    2,
+  )
+  assert.equal(
+    (publicPrint.body.match(/data-canonical-placement-signature=/g) || []).length,
+    15,
+  )
+  const publicDocx = publicExports.exportDocx(publicInput)
+  const publicTeacherDocx = publicExports.exportDocx({
+    ...publicInput,
+    versionType: 'teacher',
+  })
+  assert.equal(
+    publicDocx.normalizationDiagnostics.filter(
+      (diagnostic) => diagnostic.source === 'whole-paper-consumption',
+    ).length,
+    2,
+  )
+  const publicStudentDocumentXml = execFileSync(
+    'unzip',
+    ['-p', publicDocx.outputPath, 'word/document.xml'],
+    { encoding: 'utf8' },
+  )
+  const publicTeacherDocumentXml = execFileSync(
+    'unzip',
+    ['-p', publicTeacherDocx.outputPath, 'word/document.xml'],
+    { encoding: 'utf8' },
+  )
 
   const signatures = new Map()
   for (const [consumerId, consumerContract] of Object.entries(consumerContractRefs)) {
@@ -129,7 +259,7 @@ try {
 
     if (consumerId === 'screen') {
       const screenArtifact = buildCanonicalConsumptionSurfaceData({
-        consumption,
+        consumption: screenRouteResult.body,
         familyContractId: 'cloze',
         groupId: 'group-2026-i-cloze',
       })
@@ -144,10 +274,20 @@ try {
         ),
         true,
       )
+      assert.deepEqual(
+        screenArtifact.surfaceData.questions[0].canonicalPlacement,
+        {
+          mode: 'four_columns',
+          signature: cloze.questions[0].placementSignature,
+          rowWidthPt: 438.2,
+          columnStartsPt: [0, 104, 208, 312],
+          columnWidthsPt: [104, 104, 104, 126.2],
+        },
+      )
       artifactProof.screen = {
         cloze: screenArtifact,
         grammar: buildCanonicalConsumptionSurfaceData({
-          consumption,
+          consumption: screenRouteResult.body,
           familyContractId: 'grammar-fill',
           groupId: 'group-2026-i-grammar-fill',
         }),
@@ -178,6 +318,10 @@ try {
       assert.equal((student.match(/class="print-blank-num"/g) || []).length, 25)
       assert.equal(
         (student.match(/data-canonical-placement-signature=/g) || []).length,
+        15,
+      )
+      assert.equal(
+        (student.match(/grid-template-columns:104pt 104pt 104pt 126\.2pt/g) || []).length,
         15,
       )
       artifactProof.print = { student, teacher }
@@ -222,6 +366,15 @@ try {
   }
   assert.deepEqual(signatures.get('screen'), signatures.get('print_pdf'))
   assert.deepEqual(signatures.get('screen'), signatures.get('docx'))
+  artifactProof.print = {
+    student: publicPrint.body,
+    teacher: publicTeacherPrint.body,
+  }
+  artifactProof.docx = {
+    renderer: publicRenderer,
+    student: publicStudentDocumentXml,
+    teacher: publicTeacherDocumentXml,
+  }
 
   const legacyMisalignedItems = structuredClone(items)
   legacyMisalignedItems[0].detail.passage.materialText =
@@ -305,6 +458,27 @@ try {
     )
   }
 
+  const canonicalGroupsPath = path.join(
+    rootDir,
+    fixture.source.paperId,
+    'versions',
+    'v1',
+    'canonical',
+    'canonical-question-groups-v1.json',
+  )
+  const canonicalGroupsBytes = readFileSync(canonicalGroupsPath)
+  const corruptGroups = JSON.parse(canonicalGroupsBytes)
+  corruptGroups.groups[0].identity.groupId = 'corrupt-group'
+  writeFileSync(canonicalGroupsPath, `${JSON.stringify(corruptGroups)}\n`)
+  assert.throws(
+    () => runtime.load({
+      paperId: fixture.source.paperId,
+      consumerId: 'screen',
+    }),
+    { code: 'CANONICAL_CONSUMPTION_REJECTED' },
+  )
+  writeFileSync(canonicalGroupsPath, canonicalGroupsBytes)
+
   if (provisionActualArtifacts) {
     const head = execFileSync('git', ['rev-parse', '--short=12', 'HEAD'], {
       encoding: 'utf8',
@@ -365,6 +539,14 @@ try {
         await screenPage.locator('[data-canonical-placement-signature]').count(),
         15,
       )
+      assertBrowserColumnGates(
+        await readBrowserColumnStarts(
+          screenPage,
+          '.ps-question-options-inline--four_columns',
+          '.ps-question-options-inline-item',
+        ),
+        'Screen',
+      )
       await screenPage.screenshot({
         path: path.join(outputDir, 'screen.png'),
         fullPage: true,
@@ -386,6 +568,14 @@ try {
           (rows) => rows.every((row) => row.scrollWidth <= row.clientWidth + 1),
         ),
         true,
+      )
+      assertBrowserColumnGates(
+        await readBrowserColumnStarts(
+          printPage,
+          '.canonical-options--four_columns',
+          ':scope > span',
+        ),
+        'Print',
       )
       await printPage.screenshot({
         path: path.join(outputDir, 'print-student.png'),

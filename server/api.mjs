@@ -22,6 +22,8 @@ import { createDraftPaperStore } from './draft-paper/draftPaperStore.mjs'
 import { createExportImplementation } from './exports/exportImplementation.mjs'
 import { createDocxRenderer } from './exports/docxRenderer.mjs'
 import { createExportRoutes } from './exports/exportRoutes.mjs'
+import { createCanonicalConsumerRuntime } from './paper-canonical/consumerRuntime.mjs'
+import { createPaperCanonicalConsumerRoutes } from './paper-canonical/consumerRoutes.mjs'
 import { ensurePaperImportDatabaseShape } from './paper-import/publisher.mjs'
 import { cleanupPaperImportTempArtifacts, listPaperAssetVersions, resolvePaperAssetReadPaths } from './paper-import/storage.mjs'
 import { createQuestionGroupRoutes } from './question-bank/questionGroupRoutes.mjs'
@@ -71,6 +73,7 @@ const exportImplementation = createExportImplementation({
   // exportPrintPdf can resolve each group's figures/manifest.json —
   // optional, defaults to null in createExportImplementation.
   paperAssetsDir,
+  resolveCanonicalConsumption,
 })
 const serverContext = {
   rootDir,
@@ -82,6 +85,7 @@ const serverContext = {
   openDatabase,
   openUserDatabase,
   readJsonBody,
+  loadCanonicalConsumption,
   sendPdf: exportImplementation.sendPdf,
   sendJson,
   bindTopicLabelsToQuestionGroup,
@@ -505,6 +509,7 @@ const serverRoutes = [
   ...createMySpaceRoutes(),
   ...createDraftPaperRoutes(),
   ...createExportRoutes(exportImplementation),
+  ...createPaperCanonicalConsumerRoutes(),
   ...createQuestionGroupRoutes(),
   ...createPaperSetRoutes(),
   ...createAiProxyRoutes(),
@@ -673,6 +678,27 @@ function openDatabase({ readOnly = true } = {}) {
   const db = new DatabaseSync(dbPath, { readOnly })
   db.exec('PRAGMA foreign_keys = ON')
   return db
+}
+
+function withCanonicalConsumerRuntime(callback) {
+  const db = openDatabase({ readOnly: false })
+  try {
+    return callback(createCanonicalConsumerRuntime({
+      rootDir: paperAssetsDir,
+      db,
+    }))
+  } finally {
+    db.close()
+  }
+}
+
+function loadCanonicalConsumption(input) {
+  return withCanonicalConsumerRuntime((runtime) => runtime.load(input))
+}
+
+function resolveCanonicalConsumption(input) {
+  return withCanonicalConsumerRuntime((runtime) =>
+    runtime.resolveForItems(input))
 }
 
 // User-data database (draft papers + My Space). Unlike the shared bank database,
@@ -1708,6 +1734,7 @@ function applyPaperAssetToQuestionGroupDetail(baseDetail, asset, group, dbQuesti
   const writingTask = writingTaskId ? asset?.content?.writingTasks?.[writingTaskId] : null
   return {
     ...baseDetail,
+    paperId: String(asset?.paper?.paperId || '').trim() || null,
     groupType,
     passage: {
       ...baseDetail.passage,

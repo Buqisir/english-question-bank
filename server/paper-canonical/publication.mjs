@@ -513,6 +513,18 @@ async function legacySelections({ ref, contract, familyIds, store, diagnostic })
   return selections
 }
 
+function legacySelectionsSync({ ref, contract, familyIds, store, diagnostic }) {
+  const selections = []
+  for (const familyContractId of familyIds) {
+    const capability = contract.families.find((entry) => entry.familyContractId === familyContractId)
+    if (!capability || capability.legacyCapability === 'retired' || typeof store.projectLegacyFamily !== 'function') return null
+    const projectedOccurrences = store.projectLegacyFamily({ ref, familyContractId })
+    if (!Array.isArray(projectedOccurrences)) return null
+    selections.push({ mode: 'legacy', familyContractId, groupIds: [], projectedOccurrences, diagnostic })
+  }
+  return selections
+}
+
 function canonicalSelections(validated, contract) {
   const groupIdsByFamily = new Map()
   for (const group of validated.groups) {
@@ -602,6 +614,68 @@ export async function loadPaperForConsumption(request, store) {
       })
       if (legacy) return { disposition: 'ready', paperId: request.paperId, sourceAssetVersion: ref.sourceAssetVersion, selections: legacy, diagnostics: [{ code: error.code || 'PUBLICATION_INVALID', message: error.message }] }
       return { disposition: 'incompatible', diagnostics: [{ code: error.code || 'PUBLICATION_INVALID', message: error.message }] }
+    }
+  }
+  return { disposition: 'retryable_unavailable', diagnostics: [{ code: 'PUBLICATION_REF_DISAGREEMENT' }] }
+}
+
+/**
+ * Production consumers use synchronous filesystem/database stores. This
+ * companion keeps their public render/export boundaries synchronous while
+ * preserving the exact validation and whole-family selection performed by the
+ * async loader above. Async legacy projectors are intentionally rejected.
+ */
+export function loadPaperForConsumptionSync(request, store) {
+  const consumer = resolveConsumerContract(request.consumerContract)
+  if (!consumer.ok) return { disposition: 'incompatible', diagnostics: consumer.issues }
+  for (let attempt = 0; attempt < 2; attempt++) {
+    const refs = store.readPublishedRefs(request.paperId, request.version)
+    if (!refs.current) return { disposition: 'not_found', diagnostics: [{ code: 'PUBLICATION_NOT_FOUND' }] }
+    if (!request.version && (!refs.latest || refs.current.publicationDigest !== refs.latest.publicationDigest || refs.current.versionName !== refs.latest.versionName)) continue
+    const ref = refs.current
+    let manifestBytes = null
+    let manifestFileName = null
+    for (const candidate of [publicationFileName, 'canonical-paper-publication-v1.json']) {
+      manifestBytes = store.readVersionArtifact(ref, `canonical/${candidate}`)
+      if (manifestBytes) {
+        manifestFileName = candidate
+        break
+      }
+    }
+    const sourceAsset = store.readSourceAsset(ref)
+    if (!manifestBytes || !sourceAsset) continue
+    try {
+      const manifest = readJsonBytes(manifestBytes, manifestFileName)
+      const validated = validateCanonicalPublicationBundle({
+        manifest,
+        sourceAsset,
+        readArtifact: (relativePath) => store.readVersionArtifact(ref, relativePath),
+      })
+      const selection = canonicalSelections(validated, consumer.contract)
+      const legacy = legacySelectionsSync({
+        ref,
+        contract: consumer.contract,
+        familyIds: selection.legacyFamilies,
+        store,
+        diagnostic: { code: 'CONSUMER_FAMILY_CANONICAL_UNAVAILABLE' },
+      })
+      if (selection.legacyFamilies.length > 0 && !legacy) return { disposition: 'incompatible', diagnostics: [{ code: 'LEGACY_FAMILY_UNAVAILABLE' }] }
+      return {
+        disposition: 'ready',
+        paperId: request.paperId,
+        sourceAssetVersion: ref.sourceAssetVersion,
+        publicationDigest: manifest.publicationDigest,
+        selections: [...selection.selections, ...(legacy || [])],
+        diagnostics: [],
+      }
+    } catch (error) {
+      return {
+        disposition: 'incompatible',
+        diagnostics: [{
+          code: error.code || 'PUBLICATION_INVALID',
+          message: error.message,
+        }],
+      }
     }
   }
   return { disposition: 'retryable_unavailable', diagnostics: [{ code: 'PUBLICATION_REF_DISAGREEMENT' }] }

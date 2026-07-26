@@ -87,6 +87,10 @@ import {
   type GrammarFillPaperViewModel,
 } from '../paper-intelligence/grammarFillPaperViewAdapter.ts'
 import {
+  canonicalConsumptionForGroup,
+  loadScreenConsumption,
+} from '../paper-intelligence/canonicalConsumptionClient.ts'
+import {
   buildWritingPaperView,
   type WritingPaperViewModel,
 } from '../paper-intelligence/writingPaperViewAdapter.ts'
@@ -501,6 +505,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
           throw new Error(`没找到这份卷面（${paperId}），可能已被移除。回到找题页重新打开吧。`)
         }
         const loadedAsset = (await assetRes.json()) as PaperAssetV1
+        const canonicalConsumption = await loadScreenConsumption(paperId)
 
         const groupBlocks = loadedAsset.content.blocks.filter(
           (block): block is Extract<PaperContentBlock, { type: 'group' }> => block.type === 'group',
@@ -578,12 +583,28 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
             } else if (group.groupType === 'cloze') {
               models[block.groupId] = {
                 kind: 'cloze',
-                model: buildClozePaperView({ asset: loadedAsset, groupId: block.groupId }),
+                model: buildClozePaperView({
+                  asset: loadedAsset,
+                  groupId: block.groupId,
+                  canonicalConsumption: canonicalConsumptionForGroup(
+                    canonicalConsumption,
+                    'cloze',
+                    block.groupId,
+                  ),
+                }),
               }
             } else if (group.groupType === 'grammarFill') {
               models[block.groupId] = {
                 kind: 'grammarFill',
-                model: buildGrammarFillPaperView({ asset: loadedAsset, groupId: block.groupId }),
+                model: buildGrammarFillPaperView({
+                  asset: loadedAsset,
+                  groupId: block.groupId,
+                  canonicalConsumption: canonicalConsumptionForGroup(
+                    canonicalConsumption,
+                    'grammar-fill',
+                    block.groupId,
+                  ),
+                }),
               }
             } else if (group.groupType === 'writing') {
               models[block.groupId] = {
