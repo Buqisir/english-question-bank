@@ -75,8 +75,16 @@ const globalCoordinatorSkillPath =
   '/Users/huangxuewei/.codex/skills/coordinate-eqb-wayfinder/SKILL.md'
 const globalCoordinatorYamlPath =
   '/Users/huangxuewei/.codex/skills/coordinate-eqb-wayfinder/agents/openai.yaml'
+const reviewedDispatchDigest =
+  '065cb845554f8ae1728a902ea124196120b2980c0a5fba29a81c80bf7b39ed98'
+const reviewedGlobalCoordinatorSkillDigest =
+  'f63d95003fde929d92af2a0473370ed672aa740ea37ad593d3cb62817fe72008'
+const reviewedGlobalCoordinatorYamlDigest =
+  'e20c155c48eb9deba8ee8f9dc526729e544dadf8b5fd6dc0970cce8ea2e6c8e9'
 
 const compact = (source) => source.replace(/\s+/g, ' ')
+const sourceDigest = (source) =>
+  createHash('sha256').update(source).digest('hex')
 const fencedBlocks = (source) =>
   [...source.matchAll(/```(?:text)?\n([\s\S]*?)```/g)].map((match) =>
     match[1].trim(),
@@ -535,6 +543,10 @@ function coordinatorSkillErrors(source) {
 function coordinatorDispatchAuthorityErrors(source) {
   const normalized = compact(source)
   const errors = []
+
+  if (sourceDigest(source) !== reviewedDispatchDigest) {
+    errors.push('dispatch authority bytes differ from the reviewed binding')
+  }
   const coordinatorSection =
     source.match(
       /### Owner-started Wayfinder coordinator exception\n([\s\S]*?)(?=\n### )/,
@@ -593,6 +605,12 @@ function coordinatorDispatchAuthorityErrors(source) {
   }
 
   return errors
+}
+
+function reviewedArtifactBindingErrors(source, expectedDigest, label) {
+  return sourceDigest(source) === expectedDigest
+    ? []
+    : [`${label} bytes differ from the reviewed binding`]
 }
 
 function artifactProofErrors(
@@ -1359,6 +1377,7 @@ Do not classify, merge, split, retry, or advance a route independently of \`disp
 The only execution mechanism is official Codex top-level task creation; all other execution mechanisms are forbidden.
 Create exactly one fresh top-level peer.
 `
+const portableCoordinatorSkillDigest = sourceDigest(portableCoordinatorSkill)
 
 if (requireGlobalCoordinator) {
   assert(
@@ -1382,6 +1401,14 @@ assert(
 assert(
   coordinatorSkillErrors(portableCoordinatorSkill).length === 0,
   'portable coordinator skill parser accepts the thin contract fixture',
+)
+assert(
+  reviewedArtifactBindingErrors(
+    portableCoordinatorSkill,
+    portableCoordinatorSkillDigest,
+    'portable coordinator fixture',
+  ).length === 0,
+  'portable coordinator fixture matches its reviewed-byte binding',
 )
 assert(
   coordinatorSkillErrors(
@@ -1429,6 +1456,20 @@ for (const contradiction of [
     `portable coordinator skill parser rejects: ${contradiction}`,
   )
 }
+for (const contradiction of [
+  'Simultaneous execution is permitted.',
+  'Other task tools are also allowed.',
+  'Forking is allowed.',
+]) {
+  assert(
+    reviewedArtifactBindingErrors(
+      `${portableCoordinatorSkill}\n${contradiction}\n`,
+      portableCoordinatorSkillDigest,
+      'portable coordinator fixture',
+    ).some((error) => error.includes('reviewed binding')),
+    `portable reviewed-byte binding rejects: ${contradiction}`,
+  )
+}
 assert(
   coordinatorSkillErrors(
     `${portableCoordinatorSkill}\nPreserve separate \`to-spec\` and \`to-tickets\` peers.\n`,
@@ -1463,6 +1504,17 @@ assert(
   ).some((error) => error.includes('exact coordinator topology')),
   'tracked dispatch parser requires official top-level task tools',
 )
+for (const contradiction of [
+  'Other task tools are also allowed.',
+  'Forking is allowed.',
+]) {
+  assert(
+    coordinatorDispatchAuthorityErrors(`${dispatch}\n${contradiction}\n`).some(
+      (error) => error.includes('reviewed binding'),
+    ),
+    `tracked dispatch reviewed-byte binding rejects: ${contradiction}`,
+  )
+}
 if (requireGlobalCoordinator && globalCoordinatorFilesExist) {
   const installedCoordinatorYaml = readFileSync(
     globalCoordinatorYamlPath,
@@ -1473,11 +1525,25 @@ if (requireGlobalCoordinator && globalCoordinatorFilesExist) {
     'utf8',
   )
   assert(
-    coordinatorYamlErrors(installedCoordinatorYaml).length === 0,
+    [
+      ...coordinatorYamlErrors(installedCoordinatorYaml),
+      ...reviewedArtifactBindingErrors(
+        installedCoordinatorYaml,
+        reviewedGlobalCoordinatorYamlDigest,
+        'installed global coordinator YAML',
+      ),
+    ].length === 0,
     'installed global coordinator YAML is valid and remains explicit-only',
   )
   assert(
-    coordinatorSkillErrors(installedCoordinatorSkill).length === 0,
+    [
+      ...coordinatorSkillErrors(installedCoordinatorSkill),
+      ...reviewedArtifactBindingErrors(
+        installedCoordinatorSkill,
+        reviewedGlobalCoordinatorSkillDigest,
+        'installed global coordinator skill',
+      ),
+    ].length === 0,
     'installed global coordinator executes the canonical dispatch contract without copying it',
   )
 }
