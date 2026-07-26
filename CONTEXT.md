@@ -21,8 +21,12 @@ A reusable, versioned definition of one legitimate paper family: its parts, sect
 _Avoid_: source format, renderer template, one universal paper shape
 
 **Canonical Paper Plan**:
-One paper's validated instantiation of a Paper Format Profile, linking every required slot to its Canonical Question Group while fixing paper order, numbering, scoring, instructions, and answer regions.
+One paper's validated instantiation of a Paper Format Profile, linking every required active slot to its Canonical Question Group and every Inactive Source Slot to its source closure while fixing paper order, numbering, scoring, instructions, and answer regions.
 _Avoid_: paper asset, layout tree, rendered document
+
+**Inactive Source Slot**:
+A Paper Format Profile slot whose required source evidence is closed in a Canonical Paper Plan but deliberately produces no Canonical Question Group and appears on no current consumption surface. It preserves a real part of the source paper without pretending that family is active.
+_Avoid_: incomplete Question Group, hidden Question Group, raw group
 
 **Canonical Question Group**:
 The source-traceable semantic form of one Question Group after deterministic normalization; each question family has its own variant behind one shared normalization contract.
@@ -152,7 +156,8 @@ own light axis); using "考点" loosely when one of these specific axes is meant
 - A **Source Capture** can compile into one **Canonical Paper Plan**, many **Canonical Question Groups**, and one **Normalization Report**.
 - Every source-backed canonical value or relationship either maps directly to one or more **Source Spans** or is justified by an ordered **Transformation Record**.
 - A **Paper Format Profile** can be instantiated by many **Canonical Paper Plans**; each Canonical Paper Plan uses exactly one versioned Paper Format Profile.
-- A **Canonical Paper Plan** links its paper slots to **Canonical Question Groups** but does not contain their passage or question content.
+- A **Canonical Paper Plan** links its active paper slots to **Canonical Question Groups** but does not contain their passage or question content.
+- An **Inactive Source Slot** links to one validated source closure instead of a **Canonical Question Group**.
 - A **Normalization Report** records the source-to-canonical outcome without becoming paper content or Analysis.
 - A **Source** can contain many **Passages**.
 - A **Passage** belongs to exactly one **Source** in V0.
