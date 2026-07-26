@@ -38,16 +38,21 @@ function descriptor(role, value, relativePath) {
   return { role, schemaVersion: value.schemaVersion, relativePath, byteLength: bytes.byteLength, sha256: sha256(bytes), bytes }
 }
 
-function legacyBundleFrom(compilation, sourceAsset) {
+function legacyBundleFrom(compilation, sourceAsset, transformationRecords = []) {
   const sourceCapture = structuredClone(compilation.artifacts.sourceCapture)
   const plan = structuredClone(compilation.artifacts.canonicalPaper.paperPlan)
   plan.authorityRef = legacyAuthorityRef
-  delete plan.sourceConformance.reviewDecisionIds
-  delete plan.sourceConformance.reviewDecisionDigest
+  plan.sourceConformance = {
+    status: transformationRecords.length > 0 ? 'exact_deviations_applied' : 'direct',
+    transformationRecordIds: transformationRecords.map((record) => record.recordId),
+  }
   const groups = compilation.artifacts.canonicalPaper.questionGroups.map((group) => {
     const legacyGroup = structuredClone(group)
     legacyGroup.contractRef.manifestVersion = legacyAuthorityRef.manifestVersion
     legacyGroup.contractRef.manifestDigest = legacyAuthorityRef.manifestDigest
+    const recordIds = transformationRecords.filter((record) => record.target.identity === legacyGroup.identity.groupId).map((record) => record.recordId)
+    for (const entry of legacyGroup.sourceMap.entries) entry.transformationRecordIds = recordIds
+    legacyGroup.sourceFingerprint = digestJson({ captureDigest: sourceCapture.digest, sourceSpanId: legacyGroup.sourceMap.entries[0].sourceSpanRefs[0], recordIds: legacyGroup.sourceMap.entries.flatMap((entry) => entry.transformationRecordIds) })
     const { sourceMap: _sourceMap, sourceFingerprint: _sourceFingerprint, semanticDigest: _semanticDigest, ...semantic } = legacyGroup
     legacyGroup.semanticDigest = digestJson(semantic)
     return legacyGroup
@@ -56,6 +61,9 @@ function legacyBundleFrom(compilation, sourceAsset) {
   report.schemaVersion = 'normalization-report-v1'
   report.authority = legacyAuthorityRef
   delete report.reviewDecisions
+  report.transformationRecords = structuredClone(transformationRecords)
+  report.sourceFingerprint = digestJson({ captureDigest: sourceCapture.digest, groupFingerprints: groups.map((group) => group.sourceFingerprint) })
+  report.directSourceMap = groups.flatMap((group) => group.sourceMap.entries)
   report.semanticDigest = digestJson({ groups: groups.map((group) => group.semanticDigest) })
   const questionGroups = { schemaVersion: 'canonical-question-groups-v1', groups }
   const descriptors = [
@@ -104,6 +112,27 @@ assert.throws(
   }),
   { code: 'CANONICAL_PUBLICATION_SOURCE_UNBOUND' },
 )
+const legacyObservation = compilation.artifacts.sourceCapture.observations[0]
+const legacyV1Transformation = {
+  recordId: 'record:existing-v1-normalization',
+  sequence: 1,
+  ruleId: 'direct-projection',
+  ruleVersion: '1',
+  target: { identity: compilation.artifacts.canonicalPaper.questionGroups[0].identity.groupId, path: 'content.blocks' },
+  operation: 'direct_projection',
+  inputSourceSpanIds: [legacyObservation.sourceSpanId],
+  before: { extracted: legacyObservation.value },
+  after: { canonical: legacyObservation.value },
+  certainty: 'exact',
+  preconditions: {},
+  outputDigest: digestJson({ canonical: legacyObservation.value }),
+}
+const legacyTransformed = legacyBundleFrom(compilation, fixture.sourceAsset, [legacyV1Transformation])
+assert.equal(validateCanonicalPublicationBundle({
+  manifest: legacyTransformed.manifest,
+  sourceAsset: legacyTransformed.sourceAsset,
+  readArtifact: (relativePath) => legacyTransformed.artifacts[relativePath],
+}).projected.nodes.filter((node) => node.kind === 'group').length, 9)
 const legacyReadyCompilation = {
   disposition: 'ready',
   artifacts: {

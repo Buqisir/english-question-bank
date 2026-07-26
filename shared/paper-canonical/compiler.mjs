@@ -193,9 +193,19 @@ export function validateExactTransformationRecords(records, capture, closure) {
       continue
     }
     const rule = registeredRules.get(`${record.ruleId}@${record.ruleVersion}`)
-    const proof = rule?.operationProofs?.[record.operation] || (legacyAuthority ? legacyOperationProof(record.operation) : null)
-    if (record.certainty !== 'exact' || !rule || !rule.allowedOperations.includes(record.operation) || !proof) {
+    const proof = rule?.operationProofs?.[record.operation]
+    if (record.certainty !== 'exact' || !rule || !rule.allowedOperations.includes(record.operation) || (!legacyAuthority && !proof)) {
       diagnostics.push(diagnostic('TRANSFORMATION_NOT_EXACT', 'needs_review', path, 'Only registered exact transformations can produce canonical semantics'))
+      continue
+    }
+    if (legacyAuthority) {
+      if (recordIds.has(record.recordId) || !Number.isInteger(record.sequence) || record.sequence <= previousSequence || !Array.isArray(record.inputSourceSpanIds) || record.inputSourceSpanIds.length === 0 || record.inputSourceSpanIds.some((id) => !sourceSpanIds.has(id)) || record.outputDigest !== digestJson(record.after)) {
+        diagnostics.push(diagnostic('TRANSFORMATION_CLOSURE_INVALID', 'needs_review', path, 'Transformation sequence, lineage, or output digest cannot be replayed'))
+        continue
+      }
+      previousSequence = record.sequence
+      recordIds.add(record.recordId)
+      accepted.push(cloneJson(record))
       continue
     }
     const observationIds = record.preconditions?.sourceObservationIds
@@ -220,12 +230,6 @@ export function validateExactTransformationRecords(records, capture, closure) {
     accepted.push(cloneJson(record))
   }
   return { diagnostics, records: accepted }
-}
-
-function legacyOperationProof(operation) {
-  if (operation === 'exact_join') return { kind: 'unique_observation_join', observationArity: 2 }
-  if (['direct_projection', 'structural_tokenization', 'anchor_identity', 'representation_normalization'].includes(operation)) return { kind: 'source_identity', observationArity: 1 }
-  return null
 }
 
 function collectRichTargetIds(content) {

@@ -121,7 +121,7 @@ assert.equal(Object.hasOwn(legacyDirect.artifacts, 'canonicalPaper'), false)
 const legacyClosure = resolveCanonicalAuthority(legacyAuthorityRef).closure
 const legacyTransformationGroup = source.groups[0]
 const legacyObservation = first.artifacts.sourceCapture.observations.find((observation) => observation.sourceSpanId === legacyTransformationGroup.sourceSpanId)
-const legacyFabricatedLedger = validateExactTransformationRecords([{
+const legacyV1Ledger = validateExactTransformationRecords([{
   recordId: 'record:legacy-exact',
   sequence: 1,
   ruleId: 'direct-projection',
@@ -129,13 +129,14 @@ const legacyFabricatedLedger = validateExactTransformationRecords([{
   target: { identity: legacyTransformationGroup.groupId, path: 'content.blocks' },
   operation: 'direct_projection',
   inputSourceSpanIds: [legacyObservation.sourceSpanId],
-  before: 'fabricated-before',
-  after: 'fabricated-after',
+  before: { extracted: legacyObservation.value },
+  after: { canonical: legacyObservation.value },
   certainty: 'exact',
-  preconditions: { sourceObservationIds: [legacyObservation.observationId], sourceValueDigests: [digestJson(legacyObservation.value)] },
-  outputDigest: digestJson('fabricated-after'),
+  preconditions: {},
+  outputDigest: digestJson({ canonical: legacyObservation.value }),
 }], first.artifacts.sourceCapture, legacyClosure)
-assert.equal(legacyFabricatedLedger.diagnostics.length, 1)
+assert.equal(legacyV1Ledger.diagnostics.length, 0)
+assert.deepEqual(legacyV1Ledger.records.map((record) => record.recordId), ['record:legacy-exact'])
 assert.deepEqual(
   ['nck1', 'zhejiang-legacy', 'national-legacy'].map((profileId) => {
     const slots = slotsForProfile(closure.profiles.get(profileId))
