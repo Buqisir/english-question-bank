@@ -150,6 +150,7 @@ function adaptReferenceFamilies(parsed, documents, diagnostics) {
       value: group,
       span: groupRange,
     })
+    const content = referenceContent(group)
     source.groups.push({
       groupId: group.groupId,
       slotId: spec.slotId,
@@ -157,7 +158,7 @@ function adaptReferenceFamilies(parsed, documents, diagnostics) {
       questionIds: [...group.questionIds],
       blankIds: [...group.blankIds],
       sourceSpanId,
-      content: referenceContent(group),
+      content,
       media: [],
       variant: {
         family: spec.familyId,
@@ -173,11 +174,11 @@ function adaptReferenceFamilies(parsed, documents, diagnostics) {
       target: { identity: group.groupId, path: 'content.blocks' },
       operation: 'structural_tokenization',
       inputSourceSpanIds: [sourceSpanId],
-      before: group,
-      after: group,
+      before: group.passage.paragraphs,
+      after: content.blocks,
       certainty: 'exact',
       preconditions: { sourceObservationIds: [observationId], sourceValueDigests: [digestJson(group)] },
-      outputDigest: digestJson(group),
+      outputDigest: digestJson(content.blocks),
     }
     source.transformations = [...(source.transformations || []), record]
     for (const [index, questionId] of group.questionIds.entries()) {
@@ -400,7 +401,19 @@ export function validateExactTransformationRecords(records, capture, closure) {
         }
       : null
     const expectedSpanIds = observations.map((observation) => observation.sourceSpanId)
-    const sourceIdentityProof = proof.kind === 'source_identity' && observations.length === 1 && observations[0] && stableStringify(record.before) === stableStringify(observations[0].value) && stableStringify(record.after) === stableStringify(observations[0].value)
+    const structuralTokenizationProof = record.operation === 'structural_tokenization'
+      && observations.length === 1
+      && observations[0]
+      && record.target.path === 'content.blocks'
+      && record.target.identity === observations[0].value?.groupId
+      && stableStringify(record.before) === stableStringify(observations[0].value?.passage?.paragraphs)
+      && stableStringify(record.after) === stableStringify(referenceContent(observations[0].value).blocks)
+    const sourceIdentityProof = proof.kind === 'source_identity'
+      && observations.length === 1
+      && observations[0]
+      && (record.operation === 'structural_tokenization'
+        ? structuralTokenizationProof
+        : stableStringify(record.before) === stableStringify(observations[0].value) && stableStringify(record.after) === stableStringify(observations[0].value))
     const joinValue = expectedPreconditions && { sourceObservationIds: expectedPreconditions.sourceObservationIds, sourceValueDigests: expectedPreconditions.sourceValueDigests }
     const uniqueJoinProof = proof.kind === 'unique_observation_join' && observations.length === 2 && new Set(observationIds).size === 2 && stableStringify(record.before) === stableStringify(joinValue) && stableStringify(record.after) === stableStringify(joinValue) && isRecordValue(record.target) && exactKeys(record.target, ['identity', 'path']) && record.target.path === 'source_join' && record.target.identity === stableId('source-join', joinValue)
     const exactProof = expectedPreconditions && stableStringify(record.preconditions) === stableStringify(expectedPreconditions) && stableStringify(record.inputSourceSpanIds) === stableStringify(expectedSpanIds) && (sourceIdentityProof || uniqueJoinProof)

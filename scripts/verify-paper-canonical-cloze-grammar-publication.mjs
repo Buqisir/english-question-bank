@@ -50,6 +50,10 @@ assert.deepEqual(
     ['group-2026-i-grammar-fill', 'structural_tokenization'],
   ],
 )
+for (const record of compilation.artifacts.normalizationReport.transformationRecords) {
+  const group = compilation.artifacts.canonicalPaper.questionGroups.find((candidate) => candidate.identity.groupId === record.target.identity)
+  assert.deepEqual(record.after, group.content.blocks)
+}
 const spanById = new Map(compilation.artifacts.sourceCapture.sourceSpans.map((span) => [span.sourceSpanId, span]))
 const clozeGroupSpan = spanById.get(cloze.sourceMap.entries.find((entry) => entry.target.kind === 'group').sourceSpanRefs[0])
 assert.equal(clozeGroupSpan.coordinate.start > 0 && clozeGroupSpan.coordinate.end < fixture.sourceAsset.byteLength, true)

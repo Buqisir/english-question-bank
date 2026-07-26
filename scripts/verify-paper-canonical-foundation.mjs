@@ -221,6 +221,7 @@ assert.equal(transformed.disposition, 'ready')
 assert.equal(transformed.artifacts.normalizationReport.transformationRecords.length, 1)
 for (const rule of closure.artifacts.normalization.rules) {
   for (const operation of rule.allowedOperations) {
+    if (operation === 'structural_tokenization') continue // Covered with real source replay by verify-paper-canonical-cloze-grammar-publication.mjs.
     const operationFixture = structuredClone(exactTransformation)
     const record = operationFixture.transformations[0]
     record.ruleId = rule.ruleId
