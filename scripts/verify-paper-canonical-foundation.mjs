@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import assert from 'node:assert/strict'
+import manifestV1 from '../standards/paper-canonical/manifest-v1.json' with { type: 'json' }
 
 import { canonicalAuthorityRef, compileCanonicalPaper, stableStringify } from '../shared/paper-canonical/compiler.mjs'
 import { resolveCanonicalAuthority, slotsForProfile, validateAuthorityClosure } from '../shared/paper-canonical/authority.mjs'
@@ -107,6 +108,9 @@ assert.equal(first.artifacts.canonicalPaper.paperPlan.completeness.status, 'comp
 assert.equal(first.artifacts.canonicalPaper.questionGroups.length, 9)
 
 const closure = resolveCanonicalAuthority(canonicalAuthorityRef).closure
+const legacyAuthorityRef = { manifestId: manifestV1.manifestId, manifestVersion: manifestV1.version, manifestDigest: digestJson(manifestV1) }
+assert.equal(legacyAuthorityRef.manifestDigest, 'sha256:0aa486d62ba5d7ce9158bf45287d421c9534775118040dbacdfa81dad1e08b6b')
+assert.equal(resolveCanonicalAuthority(legacyAuthorityRef).ok, true)
 assert.deepEqual(
   ['nck1', 'zhejiang-legacy', 'national-legacy'].map((profileId) => {
     const slots = slotsForProfile(closure.profiles.get(profileId))
@@ -161,7 +165,7 @@ exactTransformation.transformations = [{
   recordId: 'record:exact',
   sequence: 1,
   ruleId: 'direct-projection',
-  ruleVersion: '1',
+  ruleVersion: '2',
   target: { identity: transformedGroup.groupId, path: 'content.blocks' },
   operation: 'direct_projection',
   inputSourceSpanIds: [transformedGroup.sourceSpanId],

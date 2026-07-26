@@ -1,0 +1,1 @@
+{"$schema":"https://json-schema.org/draft/2020-12/schema","$id":"normalization-rules-v2","type":"object","additionalProperties":false,"required":["schemaVersion","id","version","owner","rules"],"properties":{"schemaVersion":{"const":"normalization-rules-v2"},"id":{"type":"string"},"version":{"type":"string"},"owner":{"const":"normalization"},"rules":{"type":"array"}}}

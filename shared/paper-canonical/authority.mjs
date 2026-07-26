@@ -1,4 +1,5 @@
-import manifest from '../../standards/paper-canonical/manifest-v1.json' with { type: 'json' }
+import manifestV1 from '../../standards/paper-canonical/manifest-v1.json' with { type: 'json' }
+import manifestV2 from '../../standards/paper-canonical/manifest-v2.json' with { type: 'json' }
 import core from '../../standards/paper-canonical/core/core-invariants-v1.json' with { type: 'json' }
 import sourceAdapters from '../../standards/paper-canonical/adapters/source-adapters-v1.json' with { type: 'json' }
 import nck1 from '../../standards/paper-canonical/profiles/nck1-v1.json' with { type: 'json' }
@@ -10,20 +11,24 @@ import cloze from '../../standards/paper-canonical/families/cloze-v1.json' with 
 import grammarFill from '../../standards/paper-canonical/families/grammar-fill-v1.json' with { type: 'json' }
 import applicationWriting from '../../standards/paper-canonical/families/application-writing-v1.json' with { type: 'json' }
 import continuationWriting from '../../standards/paper-canonical/families/continuation-writing-v1.json' with { type: 'json' }
-import normalization from '../../standards/paper-canonical/normalization/normalization-rules-v1.json' with { type: 'json' }
+import normalizationV1 from '../../standards/paper-canonical/normalization/normalization-rules-v1.json' with { type: 'json' }
+import normalizationV2 from '../../standards/paper-canonical/normalization/normalization-rules-v2.json' with { type: 'json' }
 import typography from '../../standards/paper-canonical/rendering/paper-typography-v1.json' with { type: 'json' }
 import standardManifestSchema from '../../schemas/paper-canonical/standard-manifest-v1.schema.json' with { type: 'json' }
 import coreSchema from '../../schemas/paper-canonical/core-invariants-v1.schema.json' with { type: 'json' }
 import profileSchema from '../../schemas/paper-canonical/paper-format-profile-v1.schema.json' with { type: 'json' }
 import familySchema from '../../schemas/paper-canonical/canonical-family-contract-v1.schema.json' with { type: 'json' }
 import normalizationSchema from '../../schemas/paper-canonical/normalization-rules-v1.schema.json' with { type: 'json' }
+import normalizationV2Schema from '../../schemas/paper-canonical/normalization-rules-v2.schema.json' with { type: 'json' }
 import sourceAdaptersSchema from '../../schemas/paper-canonical/source-adapters-v1.schema.json' with { type: 'json' }
 import typographySchema from '../../schemas/paper-canonical/renderer-typography-v1.schema.json' with { type: 'json' }
 import sourceCaptureSchema from '../../schemas/paper-canonical/source-capture-v1.schema.json' with { type: 'json' }
 import planSchema from '../../schemas/paper-canonical/canonical-paper-plan-v1.schema.json' with { type: 'json' }
 import groupSchema from '../../schemas/paper-canonical/canonical-question-group-v1.schema.json' with { type: 'json' }
 import reportSchema from '../../schemas/paper-canonical/normalization-report-v1.schema.json' with { type: 'json' }
+import reportV2Schema from '../../schemas/paper-canonical/normalization-report-v2.schema.json' with { type: 'json' }
 import publicationSchema from '../../schemas/paper-canonical/canonical-paper-publication-v1.schema.json' with { type: 'json' }
+import publicationV2Schema from '../../schemas/paper-canonical/canonical-paper-publication-v2.schema.json' with { type: 'json' }
 import consumerSchema from '../../schemas/paper-canonical/consumer-contract-v1.schema.json' with { type: 'json' }
 
 import { digestJson, exactKeys, isRecordValue } from './stable.mjs'
@@ -175,11 +180,15 @@ function validateNormalizationRules(artifact) {
   const ruleIds = new Set()
   for (const [index, rule] of artifact.rules.entries()) {
     const path = `$.rules[${index}]`
-    if (!isRecordValue(rule) || !exactKeys(rule, ['ruleId', 'version', 'certainty', 'allowedOperations', 'operationProofs']) || typeof rule.ruleId !== 'string' || typeof rule.version !== 'string' || rule.certainty !== 'exact' || !Array.isArray(rule.allowedOperations) || rule.allowedOperations.length === 0 || new Set(rule.allowedOperations).size !== rule.allowedOperations.length || ruleIds.has(`${rule.ruleId}@${rule.version}`) || !isRecordValue(rule.operationProofs) || Object.keys(rule.operationProofs).sort().join(',') !== [...rule.allowedOperations].sort().join(',')) {
+    const legacyRule = artifact.schemaVersion === 'normalization-rules-v1'
+    const expectedKeys = legacyRule ? ['ruleId', 'version', 'certainty', 'allowedOperations'] : ['ruleId', 'version', 'certainty', 'allowedOperations', 'operationProofs']
+    const missingProofs = !legacyRule && (!isRecordValue(rule) || !isRecordValue(rule.operationProofs) || Object.keys(rule.operationProofs).sort().join(',') !== [...(rule.allowedOperations || [])].sort().join(','))
+    if (!isRecordValue(rule) || !exactKeys(rule, expectedKeys) || typeof rule.ruleId !== 'string' || typeof rule.version !== 'string' || rule.certainty !== 'exact' || !Array.isArray(rule.allowedOperations) || rule.allowedOperations.length === 0 || new Set(rule.allowedOperations).size !== rule.allowedOperations.length || ruleIds.has(`${rule.ruleId}@${rule.version}`) || missingProofs) {
       issues.push(issue('NORMALIZATION_RULE_INVALID', path, 'Rule operations and versioned proof contracts must be closed'))
       continue
     }
     ruleIds.add(`${rule.ruleId}@${rule.version}`)
+    if (legacyRule) continue
     for (const operation of rule.allowedOperations) {
       const proof = rule.operationProofs[operation]
       const validProof = isRecordValue(proof) && exactKeys(proof, ['kind', 'observationArity']) && Number.isInteger(proof.observationArity) && ((proof.kind === 'source_identity' && proof.observationArity === 1) || (proof.kind === 'unique_observation_join' && proof.observationArity === 2))
@@ -246,7 +255,7 @@ export function validateAuthorityClosure({ manifest: candidateManifest, artifact
   return { ok: issues.length === 0, issues }
 }
 
-const defaultArtifacts = {
+const sharedArtifacts = {
   core,
   adapter: sourceAdapters,
   'profile-nck1': nck1,
@@ -258,51 +267,58 @@ const defaultArtifacts = {
   'family-grammar-fill': grammarFill,
   'family-application-writing': applicationWriting,
   'family-continuation-writing': continuationWriting,
-  normalization,
   'renderer-typography': typography,
 }
 
-const defaultSchemas = {
+const sharedSchemas = {
   'standard-manifest-v1': standardManifestSchema,
   'core-invariants-v1': coreSchema,
   'paper-format-profile-v1': profileSchema,
   'canonical-family-contract-v1': familySchema,
-  'normalization-rules-v1': normalizationSchema,
   'source-adapters-v1': sourceAdaptersSchema,
   'renderer-typography-v1': typographySchema,
   'source-capture-v1': sourceCaptureSchema,
   'canonical-paper-plan-v1': planSchema,
   'canonical-question-group-v1': groupSchema,
-  'normalization-report-v1': reportSchema,
-  'canonical-paper-publication-v1': publicationSchema,
   'consumer-contract-v1': consumerSchema,
 }
 
-const defaultValidation = validateAuthorityClosure({ manifest, artifacts: defaultArtifacts, schemas: defaultSchemas })
-if (!defaultValidation.ok) throw new Error(`Invalid checked-in canonical authority: ${JSON.stringify(defaultValidation.issues)}`)
+const artifactsV1 = { ...sharedArtifacts, normalization: normalizationV1 }
+const artifactsV2 = { ...sharedArtifacts, normalization: normalizationV2 }
+const schemasV1 = { ...sharedSchemas, 'normalization-rules-v1': normalizationSchema, 'normalization-report-v1': reportSchema, 'canonical-paper-publication-v1': publicationSchema }
+const schemasV2 = { ...sharedSchemas, 'normalization-rules-v2': normalizationV2Schema, 'normalization-report-v2': reportV2Schema, 'canonical-paper-publication-v2': publicationV2Schema }
+const validationV1 = validateAuthorityClosure({ manifest: manifestV1, artifacts: artifactsV1, schemas: schemasV1 })
+const validationV2 = validateAuthorityClosure({ manifest: manifestV2, artifacts: artifactsV2, schemas: schemasV2 })
+if (!validationV1.ok || !validationV2.ok) throw new Error(`Invalid checked-in canonical authority: ${JSON.stringify([...validationV1.issues, ...validationV2.issues])}`)
 
 const profileById = new Map([nck1, zhejiangLegacy, nationalLegacy].map((profile) => [profile.profileId, profile]))
 const familyById = new Map([reading, sevenChoices, cloze, grammarFill, applicationWriting, continuationWriting].map((family) => [family.familyContractId, family]))
 
-export const canonicalAuthorityRef = Object.freeze({
-  manifestId: manifest.manifestId,
-  manifestVersion: manifest.version,
-  manifestDigest: digestJson(manifest),
-})
+function authorityRef(manifest) {
+  return Object.freeze({ manifestId: manifest.manifestId, manifestVersion: manifest.version, manifestDigest: digestJson(manifest) })
+}
+
+const authorities = [
+  { manifest: manifestV1, artifacts: artifactsV1, schemas: schemasV1 },
+  { manifest: manifestV2, artifacts: artifactsV2, schemas: schemasV2 },
+].map((authority) => ({ ...authority, authorityRef: authorityRef(authority.manifest) }))
+
+export const canonicalAuthorityRef = authorities.find((authority) => authority.manifest.version === '2').authorityRef
 
 export function resolveCanonicalAuthority(authorityRef) {
-  if (!authorityRef || authorityRef.manifestId !== canonicalAuthorityRef.manifestId || authorityRef.manifestVersion !== canonicalAuthorityRef.manifestVersion || authorityRef.manifestDigest !== canonicalAuthorityRef.manifestDigest) {
+  const authority = authorities.find((candidate) => candidate.authorityRef.manifestId === authorityRef?.manifestId && candidate.authorityRef.manifestVersion === authorityRef?.manifestVersion && candidate.authorityRef.manifestDigest === authorityRef?.manifestDigest)
+  if (!authority) {
     return { ok: false, issues: [issue('AUTHORITY_UNAVAILABLE', '$.authority', 'Unknown, missing, or digest-mismatched manifest')] }
   }
   return {
     ok: true,
     closure: Object.freeze({
-      manifest,
-      authorityRef: canonicalAuthorityRef,
+      manifest: authority.manifest,
+      authorityRef: authority.authorityRef,
       profiles: profileById,
       families: familyById,
-      artifacts: defaultArtifacts,
-      schemas: defaultSchemas,
+      artifacts: authority.artifacts,
+      schemas: authority.schemas,
     }),
   }
 }

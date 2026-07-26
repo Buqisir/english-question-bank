@@ -4,7 +4,7 @@
 
 本文件是唯一的人类可读索引；当前 canonical 编译、校验、发布和未来的
 Screen / Print-PDF / DOCX consumer 只从
-[`standards/paper-canonical/manifest-v1.json`](../../standards/paper-canonical/manifest-v1.json)
+[`standards/paper-canonical/manifest-v2.json`](../../standards/paper-canonical/manifest-v2.json)
 解析一份 digest-closed 的权威闭包。这里不复制卷型题号、分值、题组
 cardinality、清洗条件或字体/物理排版数值，也不能被 caller 当作第二套配置。
 
@@ -18,6 +18,8 @@ Renderer Typography、其 schema 及纯验证入口。未知版本、缺件、di
 任何会改变 admission、canonical 语义、Profile、normalization 或 renderer
 结果的变更，必须新增 versioned artifact、schema/semantic conformance fixture、
 迁移说明和 manifest 升版；已经被 Publication 引用的 artifact 不可原位修改。
+`manifest-v1.json` 保留其原始 digest-closed closure，供既有 Publication 解析；
+当前 consumer contracts 已切到同一 v2 authority。
 
 ## v2 历史排版证据（非当前可执行标准）
 

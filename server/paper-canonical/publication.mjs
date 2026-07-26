@@ -16,14 +16,13 @@ import { resolveConsumerContract } from '../../shared/paper-canonical/consumers.
 import { projectCanonicalPaper } from '../../shared/paper-canonical/projector.mjs'
 import { digestJson, sha256, stableStringify, withoutKey } from '../../shared/paper-canonical/stable.mjs'
 
-const publicationFileName = 'canonical-paper-publication-v1.json'
+const publicationFileName = 'canonical-paper-publication-v2.json'
 const latestRefFileName = 'canonical-paper-publication-ref-v1.json'
 const journalFileName = '.canonical-latest-swap-v1.json'
-const artifactPaths = {
+const artifactPathBase = {
   source_capture: 'canonical/source-capture-v1.json',
   paper_plan: 'canonical/canonical-paper-plan-v1.json',
   question_groups: 'canonical/canonical-question-groups-v1.json',
-  normalization_report: 'canonical/normalization-report-v1.json',
 }
 const safePaperId = /^[a-z0-9][a-z0-9._-]{0,127}$/
 
@@ -45,7 +44,18 @@ function publicationError(code, message) {
   return error
 }
 
-function artifactDescriptor(role, value) {
+function artifactPathsFor(authorityRef) {
+  return {
+    ...artifactPathBase,
+    normalization_report: `canonical/normalization-report-v${authorityRef.manifestVersion}.json`,
+  }
+}
+
+function publicationFileNameFor(authorityRef) {
+  return `canonical-paper-publication-v${authorityRef.manifestVersion}.json`
+}
+
+function artifactDescriptor(role, value, artifactPaths) {
   const bytes = stableBytes(value)
   return {
     role,
@@ -143,6 +153,10 @@ export function sealCanonicalPublication({ compilation, sourceAssetVersion, sour
   if (compilation?.disposition !== 'ready') throw publicationError('CANONICAL_PUBLICATION_BLOCKED', 'Only a complete ready compilation may be published')
   if (!(sourceAsset instanceof Uint8Array) || !Number.isInteger(sourceAssetVersion) || sourceAssetVersion < 1) throw publicationError('CANONICAL_PUBLICATION_INPUT_INVALID', 'Publication needs immutable source asset bytes and a positive version')
   const { sourceCapture, canonicalPaper, normalizationReport } = compilation.artifacts
+  const authority = resolveCanonicalAuthority(canonicalPaper?.paperPlan?.authorityRef)
+  if (!authority.ok) throw publicationError('CANONICAL_PUBLICATION_AUTHORITY_INVALID', 'Compilation does not bind a known authority')
+  const closure = authority.closure
+  const artifactPaths = artifactPathsFor(closure.authorityRef)
   assertPaperId(canonicalPaper?.paperPlan?.paperId)
   validateSourceCaptureIntegrity(sourceCapture)
   const sourceEvidence = sourceEvidenceDescriptors(sourceCapture)
@@ -154,13 +168,13 @@ export function sealCanonicalPublication({ compilation, sourceAssetVersion, sour
     groups: [...canonicalPaper.questionGroups],
   }
   const descriptors = [
-    artifactDescriptor('source_capture', sourceCapture),
-    artifactDescriptor('paper_plan', canonicalPaper.paperPlan),
-    artifactDescriptor('question_groups', questionGroups),
-    artifactDescriptor('normalization_report', normalizationReport),
+    artifactDescriptor('source_capture', sourceCapture, artifactPaths),
+    artifactDescriptor('paper_plan', canonicalPaper.paperPlan, artifactPaths),
+    artifactDescriptor('question_groups', questionGroups, artifactPaths),
+    artifactDescriptor('normalization_report', normalizationReport, artifactPaths),
   ]
   const manifestBase = {
-    schemaVersion: 'canonical-paper-publication-v1',
+    schemaVersion: `canonical-paper-publication-v${closure.authorityRef.manifestVersion}`,
     paperId: canonicalPaper.paperPlan.paperId,
     sourceAssetVersion,
     sourceAssetDocumentId: matchingDocuments[0].documentId,
@@ -184,7 +198,8 @@ export function validateCanonicalPublicationBundle({ manifest, sourceAsset, read
   const authority = resolveCanonicalAuthority(manifest?.authority)
   if (!authority.ok) throw publicationError('CANONICAL_PUBLICATION_AUTHORITY_INVALID', 'Publication authority closure is unknown or stale')
   const closure = authority.closure
-  const manifestIssues = validateJsonSchema(manifest, closure.schemas['canonical-paper-publication-v1'], '$.publication')
+  const artifactPaths = artifactPathsFor(closure.authorityRef)
+  const manifestIssues = validateJsonSchema(manifest, closure.schemas[`canonical-paper-publication-v${closure.authorityRef.manifestVersion}`], '$.publication')
   if (manifestIssues.length > 0) throw publicationError('CANONICAL_PUBLICATION_SCHEMA_INVALID', JSON.stringify(manifestIssues))
   if (manifest.publicationDigest !== digestJson(withoutKey(manifest, 'publicationDigest'))) throw publicationError('CANONICAL_PUBLICATION_DIGEST_INVALID', 'Publication manifest digest differs')
   assertPaperId(manifest.paperId)
@@ -200,7 +215,7 @@ export function validateCanonicalPublicationBundle({ manifest, sourceAsset, read
   }
   const sourceCaptureIssues = validateJsonSchema(artifacts.source_capture, closure.schemas['source-capture-v1'], '$.sourceCapture')
   const planIssues = validateJsonSchema(artifacts.paper_plan, closure.schemas['canonical-paper-plan-v1'], '$.plan')
-  const reportIssues = validateJsonSchema(artifacts.normalization_report, closure.schemas['normalization-report-v1'], '$.report')
+  const reportIssues = validateJsonSchema(artifacts.normalization_report, closure.schemas[`normalization-report-v${closure.authorityRef.manifestVersion}`], '$.report')
   if (sourceCaptureIssues.length || planIssues.length || reportIssues.length || artifacts.question_groups?.schemaVersion !== 'canonical-question-groups-v1' || !Array.isArray(artifacts.question_groups?.groups)) throw publicationError('CANONICAL_PUBLICATION_ARTIFACT_SCHEMA_INVALID', 'One or more sealed artifacts violate their exact schemas')
   if (artifacts.normalization_report.disposition !== 'ready' || artifacts.normalization_report.captureDigest !== artifacts.source_capture.digest || artifacts.paper_plan.completeness.status !== 'complete') throw publicationError('CANONICAL_PUBLICATION_SEMANTIC_CLOSURE_INVALID', 'Publication does not contain a complete ready source closure')
   const sourceEvidence = sourceEvidenceDescriptors(artifacts.source_capture)
@@ -368,8 +383,9 @@ export function publishCanonicalPaperPublication({ rootDir, db, compilation, sou
     writeBytes(path.join(stageDir, 'paper-asset.json'), sealed.sourceAsset)
     for (const [relativePath, bytes] of Object.entries(sealed.artifacts)) writeBytes(path.join(stageDir, relativePath), bytes)
     for (const [relativePath, bytes] of Object.entries(sealed.sourceEvidence)) writeBytes(path.join(stageDir, relativePath), bytes)
-    writeJson(path.join(stageDir, 'canonical', publicationFileName), sealed.manifest)
-    const reopenedManifest = readJsonFile(path.join(stageDir, 'canonical', publicationFileName))
+    const manifestFileName = publicationFileNameFor(sealed.manifest.authority)
+    writeJson(path.join(stageDir, 'canonical', manifestFileName), sealed.manifest)
+    const reopenedManifest = readJsonFile(path.join(stageDir, 'canonical', manifestFileName))
     validateCanonicalPublicationBundle({
       manifest: reopenedManifest,
       sourceAsset: readFileSync(path.join(stageDir, 'paper-asset.json')),
@@ -485,11 +501,19 @@ export async function loadPaperForConsumption(request, store) {
     if (!refs.current) return { disposition: 'not_found', diagnostics: [{ code: 'PUBLICATION_NOT_FOUND' }] }
     if (!request.version && (!refs.latest || refs.current.publicationDigest !== refs.latest.publicationDigest || refs.current.versionName !== refs.latest.versionName)) continue
     const ref = refs.current
-    const manifestBytes = await store.readVersionArtifact(ref, `canonical/${publicationFileName}`)
+    let manifestBytes = null
+    let manifestFileName = null
+    for (const candidate of [publicationFileName, 'canonical-paper-publication-v1.json']) {
+      manifestBytes = await store.readVersionArtifact(ref, `canonical/${candidate}`)
+      if (manifestBytes) {
+        manifestFileName = candidate
+        break
+      }
+    }
     const sourceAsset = await store.readSourceAsset(ref)
     if (!manifestBytes || !sourceAsset) continue
     try {
-      const manifest = readJsonBytes(manifestBytes, publicationFileName)
+      const manifest = readJsonBytes(manifestBytes, manifestFileName)
       const validated = validateCanonicalPublicationBundle({
         manifest,
         sourceAsset,

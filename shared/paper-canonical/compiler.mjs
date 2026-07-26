@@ -502,7 +502,7 @@ function validateAmbiguities(ambiguities, reviewDecisions, diagnostics) {
 
 function makeReport({ disposition, capture, authority, groups = [], records = [], reviewDecisions = [], diagnostics = [] }) {
   const report = {
-    schemaVersion: 'normalization-report-v1',
+    schemaVersion: `normalization-report-v${authority?.manifestVersion || '2'}`,
     disposition,
     authority,
     captureDigest: capture.digest,
@@ -561,7 +561,7 @@ export function compileCanonicalPaper(request) {
   if (dispositionFor(diagnostics) !== 'ready') return blockedResult(dispositionFor(diagnostics), capture, closure.authorityRef, diagnostics, transformations.records, reviewDecisions)
   const groups = builtGroups.map(({ slotId: _slotId, ...group }) => group)
   const report = makeReport({ disposition: 'ready', capture, authority: closure.authorityRef, groups, records: transformations.records, reviewDecisions, diagnostics })
-  const reportIssues = validateJsonSchema(report, closure.schemas['normalization-report-v1'], '$.normalizationReport')
+  const reportIssues = validateJsonSchema(report, closure.schemas[`normalization-report-v${closure.authorityRef.manifestVersion}`], '$.normalizationReport')
   if (reportIssues.length > 0) {
     const mapped = reportIssues.map((item) => diagnostic(item.code, 'needs_review', item.path, item.message))
     return blockedResult('needs_review', capture, closure.authorityRef, [...diagnostics, ...mapped], transformations.records, reviewDecisions)

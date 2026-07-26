@@ -1,0 +1,10 @@
+{
+  "schemaVersion": "normalization-rules-v2",
+  "id": "normalization-rules",
+  "version": "2",
+  "owner": "normalization",
+  "rules": [
+    {"ruleId":"direct-projection","version":"2","certainty":"exact","allowedOperations":["direct_projection","structural_tokenization","exact_join","anchor_identity"],"operationProofs":{"direct_projection":{"kind":"source_identity","observationArity":1},"structural_tokenization":{"kind":"source_identity","observationArity":1},"exact_join":{"kind":"unique_observation_join","observationArity":2},"anchor_identity":{"kind":"source_identity","observationArity":1}}},
+    {"ruleId":"guarded-representation-normalization","version":"2","certainty":"exact","allowedOperations":["representation_normalization"],"operationProofs":{"representation_normalization":{"kind":"source_identity","observationArity":1}}}
+  ]
+}

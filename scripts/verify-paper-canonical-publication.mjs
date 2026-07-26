@@ -63,7 +63,7 @@ assert.throws(
 
 const forgedReportManifest = structuredClone(sealed.manifest)
 const forgedReportArtifacts = { ...sealed.artifacts }
-const reportPath = 'canonical/normalization-report-v1.json'
+const reportPath = 'canonical/normalization-report-v2.json'
 const forgedReport = JSON.parse(new TextDecoder().decode(forgedReportArtifacts[reportPath]))
 forgedReport.sourceFingerprint = 'sha256:forged'
 forgedReport.directSourceMap = []
@@ -93,7 +93,7 @@ ledgerSource.transformations = [{
   recordId: 'record:publication-exact',
   sequence: 1,
   ruleId: 'direct-projection',
-  ruleVersion: '1',
+  ruleVersion: '2',
   target: { identity: ledgerGroup.groupId, path: 'content.blocks' },
   operation: 'direct_projection',
   inputSourceSpanIds: [ledgerObservation.sourceSpanId],
@@ -211,7 +211,7 @@ try {
   )
   rmSync(occupiedVersion, { recursive: true, force: true })
 
-  const corruptPath = path.join(rootDir, fixture.source.paperId, 'versions', 'v2', 'canonical', 'normalization-report-v1.json')
+  const corruptPath = path.join(rootDir, fixture.source.paperId, 'versions', 'v2', 'canonical', 'normalization-report-v2.json')
   writeFileSync(corruptPath, '{"corrupt":true}\n')
   const corrupt = await loadPaperForConsumption({ paperId: fixture.source.paperId, version: 'v2', consumerContract: consumerContractRefs.screen }, store)
   assert.equal(corrupt.disposition, 'incompatible')
