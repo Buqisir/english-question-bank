@@ -489,19 +489,19 @@ function coordinatorSkillErrors(source) {
       errors.push(`thin coordinator mentions forbidden mechanic: ${mechanic}`)
     }
   }
-  const activePeerAuthorizations =
-    source.match(
-      /\b(?:allow|permit|enable|use|create|start|open|dispatch|spawn|run)\b[^\n.]{0,100}\b(?:peer|top-level task|successor)\b/gi,
-    ) ?? []
-  const passivePeerAuthorizations =
-    source.match(
-      /\b(?:peer|top-level task|successor)\b[^\n.]{0,100}\b(?:may|can|should|must|will)?\s*be\s+(?:created|started|opened|dispatched|spawned|run)\b/gi,
-    ) ?? []
   if (
-    activePeerAuthorizations.length !== 1 ||
-    passivePeerAuthorizations.length !== 0
+    (source.match(/\bpeer(?:s)?\b/gi) ?? []).length !== 1 ||
+    (source.match(/\btask(?:s)?\b/gi) ?? []).length !== 1 ||
+    (source.match(/\bsuccessor(?:s)?\b/gi) ?? []).length !== 1
   ) {
     errors.push('coordinator must authorize exactly one fresh top-level peer')
+  }
+  if (
+    /\b(?:second|another|additional|multiple|concurrent|parallel|extra|replacement|two)\b/i.test(
+      source,
+    )
+  ) {
+    errors.push('coordinator must not describe an alternate execution topology')
   }
   for (const copiedDetail of [
     '`to-spec`',
@@ -535,6 +535,36 @@ function coordinatorSkillErrors(source) {
 function coordinatorDispatchAuthorityErrors(source) {
   const normalized = compact(source)
   const errors = []
+  const coordinatorSection =
+    source.match(
+      /### Owner-started Wayfinder coordinator exception\n([\s\S]*?)(?=\n### )/,
+    )?.[1] ?? ''
+  const normalizedCoordinatorSection = compact(coordinatorSection)
+  const topologyContradictionSource = normalizedCoordinatorSection.replace(
+    'It may not delegate, fork, resume, create another coordinator, or overlap writers.',
+    '',
+  )
+
+  if (
+    !normalizedCoordinatorSection.includes(
+      'repository-read-only and may use only official Codex top-level task tools to create and compactly wait on exactly one fresh peer at a time',
+    ) ||
+    !normalizedCoordinatorSection.includes(
+      'It may not delegate, fork, resume, create another coordinator, or overlap writers',
+    )
+  ) {
+    errors.push('dispatch authority must own the exact coordinator topology')
+  }
+  if (
+    /\b(?:coordinator|it)\s+(?:may|can|should|must|will)\s+(?!not\b)[^\n.]{0,80}\b(?:delegate|fork|resume|overlap)\b/i.test(
+      topologyContradictionSource,
+    ) ||
+    /\b(?:second|another|additional|multiple|concurrent|parallel|extra|two)\b[^\n.]{0,80}\b(?:peers?|top-level tasks?|successors?|writers?)\b/i.test(
+      topologyContradictionSource,
+    )
+  ) {
+    errors.push('dispatch authority contradicts its sole coordinator topology')
+  }
 
   if (
     !source.includes('| `wayfinder` | `to-spec` |') ||
@@ -1387,6 +1417,10 @@ for (const mechanic of [
 for (const contradiction of [
   'Create a second top-level peer when useful.',
   'A concurrent top-level peer may be created.',
+  'A second peer is created when useful.',
+  'Launch a second peer when useful.',
+  'A second peer is allowed.',
+  'Concurrent top-level tasks are permitted.',
 ]) {
   assert(
     coordinatorSkillErrors(
@@ -1400,6 +1434,34 @@ assert(
     `${portableCoordinatorSkill}\nPreserve separate \`to-spec\` and \`to-tickets\` peers.\n`,
   ).some((error) => error.includes('must not copy dispatch detail')),
   'portable coordinator skill parser rejects copied phase detail',
+)
+assert(
+  coordinatorDispatchAuthorityErrors(dispatch).length === 0,
+  'tracked dispatch authority preserves every coordinator-critical invariant',
+)
+for (const contradiction of [
+  'The coordinator may fork.',
+  'A second peer is allowed.',
+  'Concurrent top-level tasks are permitted.',
+]) {
+  assert(
+    coordinatorDispatchAuthorityErrors(
+      dispatch.replace(
+        'The global skill executes the project authorities',
+        `${contradiction}\n\nThe global skill executes the project authorities`,
+      ),
+    ).some((error) => error.includes('contradicts')),
+    `tracked dispatch parser rejects: ${contradiction}`,
+  )
+}
+assert(
+  coordinatorDispatchAuthorityErrors(
+    dispatch.replace(
+      'may use only official Codex top-level task tools',
+      'may use any available task tools',
+    ),
+  ).some((error) => error.includes('exact coordinator topology')),
+  'tracked dispatch parser requires official top-level task tools',
 )
 if (requireGlobalCoordinator && globalCoordinatorFilesExist) {
   const installedCoordinatorYaml = readFileSync(
@@ -1415,10 +1477,7 @@ if (requireGlobalCoordinator && globalCoordinatorFilesExist) {
     'installed global coordinator YAML is valid and remains explicit-only',
   )
   assert(
-    [
-      ...coordinatorSkillErrors(installedCoordinatorSkill),
-      ...coordinatorDispatchAuthorityErrors(dispatch),
-    ].length === 0,
+    coordinatorSkillErrors(installedCoordinatorSkill).length === 0,
     'installed global coordinator executes the canonical dispatch contract without copying it',
   )
 }
