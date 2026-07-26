@@ -32,22 +32,42 @@ function placementSignature(plan) {
   })
 }
 
-function selectOccurrence({ consumption, familyContractId, groupId }) {
+export function selectConsumerGroupMode({
+  consumption,
+  familyContractId,
+  groupId,
+}) {
   if (consumption?.disposition !== 'ready' || !Array.isArray(consumption.selections)) {
     throw rejected('A ready whole-paper Consumption Plan is required')
   }
   const familySelections = consumption.selections.filter(
     (selection) => selection.familyContractId === familyContractId,
   )
-  if (familySelections.length !== 1 || familySelections[0].mode !== 'canonical') {
-    throw rejected(`Family ${familyContractId} is not wholly canonical`)
+  if (
+    familySelections.length !== 1
+    || !['canonical', 'legacy'].includes(familySelections[0].mode)
+  ) {
+    throw rejected(`Family ${familyContractId} has no unambiguous whole-family selection`)
   }
   const selection = familySelections[0]
   if (
     !Array.isArray(selection.groupIds)
     || new Set(selection.groupIds).size !== selection.groupIds.length
     || !selection.groupIds.includes(groupId)
-    || !Array.isArray(selection.projectedOccurrences)
+  ) {
+    throw rejected(`Family ${familyContractId} selection is partial or ambiguous`)
+  }
+  return selection
+}
+
+function selectOccurrence(input) {
+  const { familyContractId, groupId } = input
+  const selection = selectConsumerGroupMode(input)
+  if (selection.mode !== 'canonical') {
+    throw rejected(`Family ${familyContractId} is not wholly canonical`)
+  }
+  if (
+    !Array.isArray(selection.projectedOccurrences)
     || selection.projectedOccurrences.length !== selection.groupIds.length
   ) {
     throw rejected(`Family ${familyContractId} selection is partial or ambiguous`)

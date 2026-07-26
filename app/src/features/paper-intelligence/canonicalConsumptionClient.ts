@@ -32,18 +32,8 @@ export function canonicalConsumptionForGroup(
   consumption: WholePaperConsumption,
   familyContractId: 'cloze' | 'grammar-fill',
   groupId: string,
-): WholePaperConsumption | undefined {
-  const selections = consumption.selections.filter(
-    (selection) => selection.familyContractId === familyContractId,
-  )
-  if (
-    selections.length !== 1
-    || !Array.isArray(selections[0].groupIds)
-    || !selections[0].groupIds.includes(groupId)
-  ) throw new Error(`Whole-family selection is missing ${familyContractId}/${groupId}`)
-  if (selections[0].mode === 'legacy') return undefined
-  if (selections[0].mode !== 'canonical') {
-    throw new Error(`Whole-family selection is invalid for ${familyContractId}`)
-  }
+): WholePaperConsumption {
+  selectConsumerGroupMode({ consumption, familyContractId, groupId })
   return consumption
 }
+import { selectConsumerGroupMode } from '../../../../shared/paper-canonical/consumerProjection.mjs'

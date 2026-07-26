@@ -3,6 +3,7 @@ import {
   buildCanonicalClozeSurfaceData,
   buildCanonicalConsumptionSurfaceData,
 } from '../../../../shared/paper-normalization/canonicalPaperGroupSurfaceAdapter.mjs'
+import { selectConsumerGroupMode } from '../../../../shared/paper-canonical/consumerProjection.mjs'
 import type { PaperTextMap } from '../../../../shared/papersurface/types'
 import type { PaperAssetV1 } from '../../domain/paperAsset.ts'
 import type {
@@ -33,6 +34,11 @@ export type ClozePaperViewModel = {
               groupId: string
               issues: ReadonlyArray<{ code: string; path: string; message: string }>
             }
+          | {
+              code: 'CANONICAL_CONSUMPTION_LEGACY_SELECTED'
+              paperId: string
+              groupId: string
+            }
       }
 }
 
@@ -54,13 +60,29 @@ export function buildClozePaperView(input: {
   }
 
   const questionIds = group.questionIds ?? []
-  const canonicalResult = canonicalConsumption
+  const selectedMode = canonicalConsumption
+    ? selectConsumerGroupMode({
+        consumption: canonicalConsumption,
+        familyContractId: 'cloze',
+        groupId,
+      }).mode
+    : null
+  const canonicalResult = selectedMode === 'canonical'
     ? buildCanonicalConsumptionSurfaceData({
         consumption: canonicalConsumption,
         familyContractId: 'cloze',
         groupId,
       })
-    : buildCanonicalClozeSurfaceData({ asset, groupId })
+    : selectedMode === 'legacy'
+      ? {
+          status: 'legacy' as const,
+          diagnostic: {
+            code: 'CANONICAL_CONSUMPTION_LEGACY_SELECTED' as const,
+            paperId: asset.paper.paperId,
+            groupId,
+          },
+        }
+      : buildCanonicalClozeSurfaceData({ asset, groupId })
   const textMap = buildClozeTextMap(asset, group)
   const passageStructure: PassageStructure = {
     section: CLOZE_SECTION,

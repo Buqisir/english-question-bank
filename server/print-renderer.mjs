@@ -42,7 +42,10 @@ import { paperBlankRuling } from '../shared/papersurface/blankRuling.mjs'
 import { headingKind } from '../shared/papersurface/headingKind.mjs'
 import { resolveFigureMarker } from '../shared/figures/resolveFigureMarker.mjs'
 import { translateAbcdPlanToPointPlacement } from '../shared/paper-canonical/abcdLayout.mjs'
-import { projectCanonicalConsumerGroup } from '../shared/paper-canonical/consumerProjection.mjs'
+import {
+  projectCanonicalConsumerGroup,
+  selectConsumerGroupMode,
+} from '../shared/paper-canonical/consumerProjection.mjs'
 import { resolveGroupFigures } from './figures/paperFigures.mjs'
 import { resolveCanonicalPrintGroup } from './print-canonical-group-adapter.mjs'
 
@@ -361,6 +364,23 @@ export function buildPrintHtml({
             ? 'grammar-fill'
             : null
       if (!familyContractId) return null
+      const selection = selectConsumerGroupMode({
+        consumption: canonicalConsumption,
+        familyContractId,
+        groupId,
+      })
+      if (selection.mode === 'legacy') {
+        return {
+          status: 'legacy',
+          diagnostic: {
+            status: 'legacy',
+            source: 'whole-paper-consumption',
+            paperId: canonicalConsumption.paperId,
+            groupId,
+            reason: 'whole_family_legacy_selected',
+          },
+        }
+      }
       const canonicalGroup = projectCanonicalConsumerGroup({
         consumption: canonicalConsumption,
         familyContractId,

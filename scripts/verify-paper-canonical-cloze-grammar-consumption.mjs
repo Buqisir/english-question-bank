@@ -121,6 +121,116 @@ function assertBrowserColumnGates(rows, label) {
   }
 }
 
+async function assertActualPaperBrowseBoundary({
+  readyConsumption,
+  legacyConsumption,
+  invalidConsumption,
+  outputDir = null,
+}) {
+  const vite = await import('../app/node_modules/vite/dist/node/index.js')
+  const viteServer = await vite.createServer({
+    root: path.resolve('app'),
+    server: { host: '127.0.0.1', port: 0 },
+  })
+  await viteServer.listen()
+  const appUrl = viteServer.resolvedUrls?.local?.[0]
+  assert.ok(appUrl, 'Vite exposes the PaperBrowse QA mount')
+
+  const playwright = await import('../app/node_modules/playwright/index.js')
+  const browser = await playwright.default.chromium.launch({ headless: true })
+  try {
+    const page = await browser.newPage({ viewport: { width: 1280, height: 900 } })
+    let consumption = readyConsumption
+    await page.route('**/api/paper-canonical/consumption?*', (route) =>
+      route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify(consumption),
+      }))
+    await page.route('**/paper-assets/**/paper-asset.json', (route) =>
+      route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify(asset),
+      }))
+    await page.route('**/paper-assets/**/analyses/**', (route) =>
+      route.fulfill({ status: 404, body: '' }))
+    await page.route('**/paper-assets/**/figures/**', (route) =>
+      route.fulfill({ status: 404, body: '' }))
+
+    const qaUrl = new URL('canonical-consumption-qa.html', appUrl)
+    qaUrl.searchParams.set('paperId', fixture.source.paperId)
+    await page.goto(qaUrl.href)
+    await page.locator('[data-paper-question-id]').first().waitFor()
+    assert.equal(
+      await page.locator('[data-paper-question-id]').count(),
+      15,
+      'actual PaperBrowsePage renders every Cloze question',
+    )
+    for (const groupId of [
+      'group-2026-i-cloze',
+      'group-2026-i-grammar-fill',
+    ]) {
+      assert.equal(
+        await page.locator(`[data-paper-browse-anchor="${groupId}"]`).count(),
+        1,
+        `actual PaperBrowsePage mounts ${groupId}`,
+      )
+    }
+    assert.equal(
+      await page.locator('[data-canonical-placement-signature]').count(),
+      15,
+      'actual PaperBrowsePage carries every Cloze placement signature',
+    )
+    assertBrowserColumnGates(
+      await readBrowserColumnStarts(
+        page,
+        '.ps-question-options-inline--four_columns',
+        '.ps-question-options-inline-item',
+      ),
+      'Screen',
+    )
+    if (outputDir) {
+      writeFileSync(path.join(outputDir, 'screen.html'), await page.content())
+      await page.screenshot({
+        path: path.join(outputDir, 'screen.png'),
+        fullPage: true,
+      })
+      await page.pdf({
+        path: path.join(outputDir, 'screen.pdf'),
+        format: 'A4',
+        printBackground: true,
+      })
+    }
+
+    consumption = legacyConsumption
+    await page.reload()
+    await page.locator('[data-paper-question-id]').first().waitFor()
+    assert.equal(
+      await page.locator('[data-paper-question-id]').count(),
+      15,
+      'actual PaperBrowsePage honors an explicit whole-family legacy plan',
+    )
+    assert.equal(
+      await page.locator('[data-canonical-placement-signature]').count(),
+      0,
+      'explicit legacy selection does not invoke canonical projection',
+    )
+
+    consumption = invalidConsumption
+    await page.reload()
+    await page.getByText(/partial or ambiguous/).waitFor()
+    assert.equal(
+      await page.locator('[data-paper-question-id]').count(),
+      0,
+      'actual PaperBrowsePage exposes no partial paper after plan rejection',
+    )
+  } finally {
+    await browser.close()
+    await viteServer.close()
+  }
+}
+
 const rootDir = mkdtempSync(path.join(tmpdir(), 'eqb-canonical-consumption-'))
 const db = new DatabaseSync(path.join(rootDir, 'publication.sqlite'))
 
@@ -434,6 +544,81 @@ try {
     }),
     { code: 'CANONICAL_CONSUMPTION_REJECTED' },
   )
+  const legacyRoot = path.join(rootDir, 'legacy-only')
+  mkdirSync(path.join(legacyRoot, fixture.source.paperId), { recursive: true })
+  writeFileSync(
+    path.join(legacyRoot, fixture.source.paperId, 'paper-asset.json'),
+    fixture.sourceAsset,
+  )
+  const legacyDb = new DatabaseSync(path.join(legacyRoot, 'publication.sqlite'))
+  const legacyRuntime = createCanonicalConsumerRuntime({
+    rootDir: legacyRoot,
+    db: legacyDb,
+  })
+  const explicitLegacy = legacyRuntime.resolveForItems({
+    consumerId: 'screen',
+    items,
+  })
+  assert.deepEqual(
+    explicitLegacy.selections.map((selection) => selection.mode),
+    ['legacy', 'legacy'],
+    'runtime preserves the explicit whole-family legacy plan',
+  )
+  assert.throws(
+    () => legacyRuntime.resolveForItems({
+      consumerId: 'screen',
+      items: [
+        items[0],
+        {
+          ...items[1],
+          detail: { ...items[1].detail, paperId: 'another-paper' },
+        },
+      ],
+    }),
+    { code: 'CANONICAL_CONSUMPTION_REJECTED' },
+  )
+  const legacyExports = createExportImplementation({
+    rootDir,
+    exportDir: path.join(rootDir, 'legacy-exports'),
+    getQuestionGroupDetail: (groupId) =>
+      items.find((item) => item.detail.id === groupId)?.detail || null,
+    buildDocumentXml: publicRenderer.buildDocumentXml,
+    writeDocxPackage: publicRenderer.writeDocxPackage,
+    buildPrintHtml,
+    convertDocxToPdf: publicRenderer.convertDocxToPdf,
+    resolveCanonicalConsumption: legacyRuntime.resolveForItems,
+  })
+  for (const result of [
+    legacyExports.exportPrintHtml(publicInput),
+    legacyExports.exportDocx(publicInput),
+  ]) {
+    assert.equal(
+      result.normalizationDiagnostics.filter(
+        (diagnostic) =>
+          diagnostic.source === 'whole-paper-consumption'
+          && diagnostic.status === 'legacy',
+      ).length,
+      2,
+      'public export honors explicit whole-family legacy selections',
+    )
+  }
+  legacyDb.close()
+  const actualOutputDir = provisionActualArtifacts
+    ? path.resolve(
+        '.scratch',
+        'paper-canonical-ticket-05-qa',
+        execFileSync('git', ['rev-parse', '--short=12', 'HEAD'], {
+          encoding: 'utf8',
+        }).trim(),
+      )
+    : null
+  if (actualOutputDir) mkdirSync(actualOutputDir, { recursive: true })
+  await assertActualPaperBrowseBoundary({
+    readyConsumption: screenRouteResult.body,
+    legacyConsumption: explicitLegacy,
+    invalidConsumption: partial,
+    outputDir: actualOutputDir,
+  })
   const mismatchedBlankJoin = structuredClone(complete)
   const clozeOccurrence = mismatchedBlankJoin.selections
     .find((selection) => selection.familyContractId === 'cloze')
@@ -480,83 +665,15 @@ try {
   writeFileSync(canonicalGroupsPath, canonicalGroupsBytes)
 
   if (provisionActualArtifacts) {
-    const head = execFileSync('git', ['rev-parse', '--short=12', 'HEAD'], {
-      encoding: 'utf8',
-    }).trim()
-    const outputDir = path.resolve(
-      '.scratch',
-      'paper-canonical-ticket-05-qa',
-      head,
-    )
-    mkdirSync(outputDir, { recursive: true })
-
-    const vite = await import('../app/node_modules/vite/dist/node/index.js')
-    const viteServer = await vite.createServer({
-      root: path.resolve('app'),
-      appType: 'custom',
-      server: { middlewareMode: true },
-    })
-    let screenMarkup
-    try {
-      const screenRenderer = await viteServer.ssrLoadModule(
-        '/src/qa/renderCanonicalConsumptionSurface.tsx',
-      )
-      screenMarkup = [
-        screenRenderer.renderCanonicalConsumptionSurface(
-          artifactProof.screen.cloze.surfaceData,
-        ),
-        screenRenderer.renderCanonicalConsumptionSurface(
-          artifactProof.screen.grammar.surfaceData,
-        ),
-      ].join('')
-    } finally {
-      await viteServer.close()
-    }
-    const surfaceCss = readFileSync(
-      'app/src/shared-ui/papersurface/PaperSurface.css',
-      'utf8',
-    )
-    const screenHtml = `<!doctype html><html><head><meta charset="utf-8"><style>${surfaceCss}</style></head><body>${screenMarkup}</body></html>`
-    const screenPath = path.join(outputDir, 'screen.html')
+    const outputDir = actualOutputDir
     const printStudentPath = path.join(outputDir, 'print-student.html')
     const printTeacherPath = path.join(outputDir, 'print-teacher.html')
-    writeFileSync(screenPath, screenHtml)
     writeFileSync(printStudentPath, artifactProof.print.student)
     writeFileSync(printTeacherPath, artifactProof.print.teacher)
 
     const playwright = await import('../app/node_modules/playwright/index.js')
     const browser = await playwright.default.chromium.launch({ headless: true })
     try {
-      const screenPage = await browser.newPage({
-        viewport: { width: 1280, height: 900 },
-      })
-      await screenPage.goto(new URL(`file://${screenPath}`).href)
-      assert.equal(
-        await screenPage.locator('[data-paper-question-id]').count(),
-        15,
-      )
-      assert.equal(
-        await screenPage.locator('[data-canonical-placement-signature]').count(),
-        15,
-      )
-      assertBrowserColumnGates(
-        await readBrowserColumnStarts(
-          screenPage,
-          '.ps-question-options-inline--four_columns',
-          '.ps-question-options-inline-item',
-        ),
-        'Screen',
-      )
-      await screenPage.screenshot({
-        path: path.join(outputDir, 'screen.png'),
-        fullPage: true,
-      })
-      await screenPage.pdf({
-        path: path.join(outputDir, 'screen.pdf'),
-        format: 'A4',
-        printBackground: true,
-      })
-
       const printPage = await browser.newPage()
       await printPage.goto(new URL(`file://${printStudentPath}`).href)
       assert.equal(

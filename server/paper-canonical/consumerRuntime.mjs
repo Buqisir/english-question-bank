@@ -6,6 +6,7 @@ import {
   createFileSystemCanonicalPublicationStore,
   loadPaperForConsumptionSync,
 } from './publication.mjs'
+import { selectConsumerGroupMode } from '../../shared/paper-canonical/consumerProjection.mjs'
 
 const FAMILY_BY_GROUP_TYPE = new Map([
   ['cloze', 'cloze'],
@@ -113,7 +114,10 @@ export function createCanonicalConsumerRuntime({ rootDir, db }) {
     if (
       paperIds.size !== 1
       || candidates.some((item) => !item.detail?.paperId)
-    ) return null
+    ) throw rejected({
+      disposition: 'incompatible',
+      diagnostics: [{ code: 'CONSUMER_PAPER_SELECTION_AMBIGUOUS' }],
+    })
     const consumption = load({
       paperId: [...paperIds][0],
       consumerId,
@@ -121,20 +125,10 @@ export function createCanonicalConsumerRuntime({ rootDir, db }) {
     for (const item of candidates) {
       const familyContractId =
         item.detail.groupType === 'cloze' ? 'cloze' : 'grammar-fill'
-      const selections = consumption.selections.filter(
-        (selection) => selection.familyContractId === familyContractId,
-      )
-      if (selections.length !== 1) throw rejected({
-        disposition: 'incompatible',
-        diagnostics: [{ code: 'CONSUMER_FAMILY_SELECTION_MISSING' }],
-      })
-      if (selections[0].mode === 'legacy') return null
-      if (
-        selections[0].mode !== 'canonical'
-        || !selections[0].groupIds.includes(item.detail.id)
-      ) throw rejected({
-        disposition: 'incompatible',
-        diagnostics: [{ code: 'CONSUMER_GROUP_SELECTION_MISSING' }],
+      selectConsumerGroupMode({
+        consumption,
+        familyContractId,
+        groupId: item.detail.id,
       })
     }
     return consumption

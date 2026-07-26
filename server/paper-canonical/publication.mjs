@@ -504,11 +504,10 @@ export function createFileSystemCanonicalPublicationStore({ rootDir, db }) {
 async function legacySelections({ ref, contract, familyIds, store, diagnostic }) {
   const selections = []
   for (const familyContractId of familyIds) {
-    const capability = contract.families.find((entry) => entry.familyContractId === familyContractId)
-    if (!capability || capability.legacyCapability === 'retired' || typeof store.projectLegacyFamily !== 'function') return null
+    if (!canProjectLegacyFamily(contract, familyContractId, store)) return null
     const projectedOccurrences = await store.projectLegacyFamily({ ref, familyContractId })
     if (!Array.isArray(projectedOccurrences)) return null
-    selections.push({ mode: 'legacy', familyContractId, groupIds: [], projectedOccurrences, diagnostic })
+    selections.push(legacySelection(familyContractId, projectedOccurrences, diagnostic))
   }
   return selections
 }
@@ -516,13 +515,35 @@ async function legacySelections({ ref, contract, familyIds, store, diagnostic })
 function legacySelectionsSync({ ref, contract, familyIds, store, diagnostic }) {
   const selections = []
   for (const familyContractId of familyIds) {
-    const capability = contract.families.find((entry) => entry.familyContractId === familyContractId)
-    if (!capability || capability.legacyCapability === 'retired' || typeof store.projectLegacyFamily !== 'function') return null
+    if (!canProjectLegacyFamily(contract, familyContractId, store)) return null
     const projectedOccurrences = store.projectLegacyFamily({ ref, familyContractId })
     if (!Array.isArray(projectedOccurrences)) return null
-    selections.push({ mode: 'legacy', familyContractId, groupIds: [], projectedOccurrences, diagnostic })
+    selections.push(legacySelection(familyContractId, projectedOccurrences, diagnostic))
   }
   return selections
+}
+
+function canProjectLegacyFamily(contract, familyContractId, store) {
+  const capability = contract.families.find(
+    (entry) => entry.familyContractId === familyContractId,
+  )
+  return Boolean(
+    capability
+    && capability.legacyCapability !== 'retired'
+    && typeof store.projectLegacyFamily === 'function',
+  )
+}
+
+function legacySelection(familyContractId, projectedOccurrences, diagnostic) {
+  return {
+    mode: 'legacy',
+    familyContractId,
+    groupIds: projectedOccurrences
+      .filter((occurrence) => occurrence?.kind === 'group')
+      .map((occurrence) => occurrence.groupId),
+    projectedOccurrences,
+    diagnostic,
+  }
 }
 
 function canonicalSelections(validated, contract) {
@@ -551,6 +572,71 @@ function canonicalSelections(validated, contract) {
   return { selections, legacyFamilies, allFamilyIds: [...groupIdsByFamily.keys()] }
 }
 
+function selectPublishedRef(request, refs) {
+  if (!refs.current) {
+    return {
+      disposition: 'not_found',
+      diagnostics: [{ code: 'PUBLICATION_NOT_FOUND' }],
+    }
+  }
+  if (
+    !request.version
+    && (
+      !refs.latest
+      || refs.current.publicationDigest !== refs.latest.publicationDigest
+      || refs.current.versionName !== refs.latest.versionName
+    )
+  ) return { disposition: 'retry' }
+  return { disposition: 'selected', ref: refs.current }
+}
+
+function validateConsumptionPublication({
+  ref,
+  manifestBytes,
+  manifestFileName,
+  sourceAsset,
+  store,
+  contract,
+}) {
+  const manifest = readJsonBytes(manifestBytes, manifestFileName)
+  const validated = validateCanonicalPublicationBundle({
+    manifest,
+    sourceAsset,
+    readArtifact: (relativePath) => {
+      const value = store.readVersionArtifact(ref, relativePath)
+      if (value instanceof Promise) {
+        throw publicationError(
+          'CANONICAL_PUBLICATION_STORE_ASYNC',
+          'Store artifact reads must be synchronous inside package validation',
+        )
+      }
+      return value
+    },
+  })
+  return {
+    manifest,
+    selection: canonicalSelections(validated, contract),
+  }
+}
+
+function readyConsumption(request, ref, manifest, canonical, legacy) {
+  return {
+    disposition: 'ready',
+    paperId: request.paperId,
+    sourceAssetVersion: ref.sourceAssetVersion,
+    publicationDigest: manifest.publicationDigest,
+    selections: [...canonical.selections, ...(legacy || [])],
+    diagnostics: [],
+  }
+}
+
+function publicationDiagnostic(error) {
+  return {
+    code: error.code || 'PUBLICATION_INVALID',
+    message: error.message,
+  }
+}
+
 /**
  * Shared Screen/Print-PDF/DOCX loader. It resolves one immutable publication
  * and one exact checked-in Consumer Contract before exposing a whole-family
@@ -561,9 +647,10 @@ export async function loadPaperForConsumption(request, store) {
   if (!consumer.ok) return { disposition: 'incompatible', diagnostics: consumer.issues }
   for (let attempt = 0; attempt < 2; attempt++) {
     const refs = await store.readPublishedRefs(request.paperId, request.version)
-    if (!refs.current) return { disposition: 'not_found', diagnostics: [{ code: 'PUBLICATION_NOT_FOUND' }] }
-    if (!request.version && (!refs.latest || refs.current.publicationDigest !== refs.latest.publicationDigest || refs.current.versionName !== refs.latest.versionName)) continue
-    const ref = refs.current
+    const selected = selectPublishedRef(request, refs)
+    if (selected.disposition === 'not_found') return selected
+    if (selected.disposition === 'retry') continue
+    const ref = selected.ref
     let manifestBytes = null
     let manifestFileName = null
     for (const candidate of [publicationFileName, 'canonical-paper-publication-v1.json']) {
@@ -576,17 +663,14 @@ export async function loadPaperForConsumption(request, store) {
     const sourceAsset = await store.readSourceAsset(ref)
     if (!manifestBytes || !sourceAsset) continue
     try {
-      const manifest = readJsonBytes(manifestBytes, manifestFileName)
-      const validated = validateCanonicalPublicationBundle({
-        manifest,
+      const { manifest, selection } = validateConsumptionPublication({
+        ref,
+        manifestBytes,
+        manifestFileName,
         sourceAsset,
-        readArtifact: (relativePath) => {
-          const value = store.readVersionArtifact(ref, relativePath)
-          if (value instanceof Promise) throw publicationError('CANONICAL_PUBLICATION_STORE_ASYNC', 'Store artifact reads must be synchronous inside package validation')
-          return value
-        },
+        store,
+        contract: consumer.contract,
       })
-      const selection = canonicalSelections(validated, consumer.contract)
       const legacy = await legacySelections({
         ref,
         contract: consumer.contract,
@@ -595,25 +679,19 @@ export async function loadPaperForConsumption(request, store) {
         diagnostic: { code: 'CONSUMER_FAMILY_CANONICAL_UNAVAILABLE' },
       })
       if (selection.legacyFamilies.length > 0 && !legacy) return { disposition: 'incompatible', diagnostics: [{ code: 'LEGACY_FAMILY_UNAVAILABLE' }] }
-      return {
-        disposition: 'ready',
-        paperId: request.paperId,
-        sourceAssetVersion: ref.sourceAssetVersion,
-        publicationDigest: manifest.publicationDigest,
-        selections: [...selection.selections, ...(legacy || [])],
-        diagnostics: [],
-      }
+      return readyConsumption(request, ref, manifest, selection, legacy)
     } catch (error) {
+      const diagnostic = publicationDiagnostic(error)
       const familyIds = consumer.contract.families.map((entry) => entry.familyContractId)
       const legacy = await legacySelections({
         ref,
         contract: consumer.contract,
         familyIds,
         store,
-        diagnostic: { code: error.code || 'PUBLICATION_INVALID', message: error.message },
+        diagnostic,
       })
-      if (legacy) return { disposition: 'ready', paperId: request.paperId, sourceAssetVersion: ref.sourceAssetVersion, selections: legacy, diagnostics: [{ code: error.code || 'PUBLICATION_INVALID', message: error.message }] }
-      return { disposition: 'incompatible', diagnostics: [{ code: error.code || 'PUBLICATION_INVALID', message: error.message }] }
+      if (legacy) return { disposition: 'ready', paperId: request.paperId, sourceAssetVersion: ref.sourceAssetVersion, selections: legacy, diagnostics: [diagnostic] }
+      return { disposition: 'incompatible', diagnostics: [diagnostic] }
     }
   }
   return { disposition: 'retryable_unavailable', diagnostics: [{ code: 'PUBLICATION_REF_DISAGREEMENT' }] }
@@ -630,9 +708,10 @@ export function loadPaperForConsumptionSync(request, store) {
   if (!consumer.ok) return { disposition: 'incompatible', diagnostics: consumer.issues }
   for (let attempt = 0; attempt < 2; attempt++) {
     const refs = store.readPublishedRefs(request.paperId, request.version)
-    if (!refs.current) return { disposition: 'not_found', diagnostics: [{ code: 'PUBLICATION_NOT_FOUND' }] }
-    if (!request.version && (!refs.latest || refs.current.publicationDigest !== refs.latest.publicationDigest || refs.current.versionName !== refs.latest.versionName)) continue
-    const ref = refs.current
+    const selected = selectPublishedRef(request, refs)
+    if (selected.disposition === 'not_found') return selected
+    if (selected.disposition === 'retry') continue
+    const ref = selected.ref
     let manifestBytes = null
     let manifestFileName = null
     for (const candidate of [publicationFileName, 'canonical-paper-publication-v1.json']) {
@@ -645,13 +724,14 @@ export function loadPaperForConsumptionSync(request, store) {
     const sourceAsset = store.readSourceAsset(ref)
     if (!manifestBytes || !sourceAsset) continue
     try {
-      const manifest = readJsonBytes(manifestBytes, manifestFileName)
-      const validated = validateCanonicalPublicationBundle({
-        manifest,
+      const { manifest, selection } = validateConsumptionPublication({
+        ref,
+        manifestBytes,
+        manifestFileName,
         sourceAsset,
-        readArtifact: (relativePath) => store.readVersionArtifact(ref, relativePath),
+        store,
+        contract: consumer.contract,
       })
-      const selection = canonicalSelections(validated, consumer.contract)
       const legacy = legacySelectionsSync({
         ref,
         contract: consumer.contract,
@@ -660,21 +740,14 @@ export function loadPaperForConsumptionSync(request, store) {
         diagnostic: { code: 'CONSUMER_FAMILY_CANONICAL_UNAVAILABLE' },
       })
       if (selection.legacyFamilies.length > 0 && !legacy) return { disposition: 'incompatible', diagnostics: [{ code: 'LEGACY_FAMILY_UNAVAILABLE' }] }
-      return {
-        disposition: 'ready',
-        paperId: request.paperId,
-        sourceAssetVersion: ref.sourceAssetVersion,
-        publicationDigest: manifest.publicationDigest,
-        selections: [...selection.selections, ...(legacy || [])],
-        diagnostics: [],
-      }
+      return readyConsumption(request, ref, manifest, selection, legacy)
     } catch (error) {
+      // Public synchronous consumers are strict: an admitted-but-invalid
+      // publication is incompatible and never re-enters legacy projection.
+      const diagnostic = publicationDiagnostic(error)
       return {
         disposition: 'incompatible',
-        diagnostics: [{
-          code: error.code || 'PUBLICATION_INVALID',
-          message: error.message,
-        }],
+        diagnostics: [diagnostic],
       }
     }
   }

@@ -550,6 +550,41 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
           /* graceful degradation — figures stays [] */
         }
 
+        // Resolve both canonical families before publishing any group model.
+        // A partial or ambiguous whole-paper plan therefore fails the page
+        // boundary instead of degrading a single card.
+        const canonicalModels = new Map<string, GroupModel>()
+        for (const block of groupBlocks) {
+          const group = loadedAsset.content.groups[block.groupId]
+          if (group?.groupType === 'cloze') {
+            canonicalModels.set(block.groupId, {
+              kind: 'cloze',
+              model: buildClozePaperView({
+                asset: loadedAsset,
+                groupId: block.groupId,
+                canonicalConsumption: canonicalConsumptionForGroup(
+                  canonicalConsumption,
+                  'cloze',
+                  block.groupId,
+                ),
+              }),
+            })
+          } else if (group?.groupType === 'grammarFill') {
+            canonicalModels.set(block.groupId, {
+              kind: 'grammarFill',
+              model: buildGrammarFillPaperView({
+                asset: loadedAsset,
+                groupId: block.groupId,
+                canonicalConsumption: canonicalConsumptionForGroup(
+                  canonicalConsumption,
+                  'grammar-fill',
+                  block.groupId,
+                ),
+              }),
+            })
+          }
+        }
+
         const models: Record<string, GroupModel> = {}
         for (const block of groupBlocks) {
           const group = loadedAsset.content.groups[block.groupId]
@@ -581,31 +616,9 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
                 }),
               }
             } else if (group.groupType === 'cloze') {
-              models[block.groupId] = {
-                kind: 'cloze',
-                model: buildClozePaperView({
-                  asset: loadedAsset,
-                  groupId: block.groupId,
-                  canonicalConsumption: canonicalConsumptionForGroup(
-                    canonicalConsumption,
-                    'cloze',
-                    block.groupId,
-                  ),
-                }),
-              }
+              models[block.groupId] = canonicalModels.get(block.groupId)!
             } else if (group.groupType === 'grammarFill') {
-              models[block.groupId] = {
-                kind: 'grammarFill',
-                model: buildGrammarFillPaperView({
-                  asset: loadedAsset,
-                  groupId: block.groupId,
-                  canonicalConsumption: canonicalConsumptionForGroup(
-                    canonicalConsumption,
-                    'grammar-fill',
-                    block.groupId,
-                  ),
-                }),
-              }
+              models[block.groupId] = canonicalModels.get(block.groupId)!
             } else if (group.groupType === 'writing') {
               models[block.groupId] = {
                 kind: 'writing',
