@@ -1,7 +1,7 @@
 # EQB 试卷 Canonical 大一统 — Wayfinder Map
 
 Status: done
-Next on PASS: owner-approval
+Next on PASS: implementation
 Terminal: no
 Phase receipt: `docs/cuts/paper-canonical-unification/phase-transition.md`
 
@@ -38,9 +38,12 @@ Phase receipt: `docs/cuts/paper-canonical-unification/phase-transition.md`
   evidence only. Ticket 01 remains done and immutable. The accepted fresh spec,
   corrected Tickets 02–71, their digest-closed manifest, and the phase receipt
   supersede historical Tickets 02–29 as the sole current route.
-- The sole initial implementation frontier is Ticket 02. Implementation
-  dispatch remains forbidden pending owner approval of the exact fresh
-  manifest digest. Ticket 02 bootstraps on the already-legal
+- The owner approved the exact fresh manifest digest in
+  `docs/cuts/paper-canonical-unification/owner-approval.md`. The receipt must
+  bind that committed record and re-verify all four implementation gates
+  before implementation becomes eligible.
+- The sole initial implementation frontier is Ticket 02. This approval
+  recording dispatches nothing. Ticket 02 bootstraps on the already-legal
   `implementation -> independent-review` edge; no later implementation
   frontier opens until its committed route-authority repair passes that
   independent review.
