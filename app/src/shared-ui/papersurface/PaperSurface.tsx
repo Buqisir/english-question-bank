@@ -745,7 +745,10 @@ function PaperSurfaceQuestionItem({
           aria-label={`Focus question ${question.questionNo}`}
         >
           <span className="ps-question-no">{question.questionNo}.</span>
-          <span className="ps-question-options-inline">
+          <span
+            className={`ps-question-options-inline${question.canonicalPlacement ? ` ps-question-options-inline--${question.canonicalPlacement.mode}` : ''}`}
+            data-canonical-placement-signature={question.canonicalPlacement?.signature}
+          >
             {question.options.map((opt) => (
               <span
                 key={`${question.id}-${opt.label}`}

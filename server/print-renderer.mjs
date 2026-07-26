@@ -41,6 +41,7 @@ import { paperBlankPattern } from '../shared/papersurface/blankPattern.mjs'
 import { paperBlankRuling } from '../shared/papersurface/blankRuling.mjs'
 import { headingKind } from '../shared/papersurface/headingKind.mjs'
 import { resolveFigureMarker } from '../shared/figures/resolveFigureMarker.mjs'
+import { projectCanonicalConsumerGroup } from '../shared/paper-canonical/consumerProjection.mjs'
 import { resolveGroupFigures } from './figures/paperFigures.mjs'
 import { resolveCanonicalPrintGroup } from './print-canonical-group-adapter.mjs'
 
@@ -324,6 +325,7 @@ export function buildPrintHtml({
   imageMode = 'web',
   images = [],
   normalizationDiagnostics = [],
+  canonicalConsumption = null,
 }) {
   // draft-numbering-style v2 (owner 拍板 2026-07-10 二轮改判): small-question
   // numbering in the `blocks`-array path is WHOLE-PAPER continuous again
@@ -349,7 +351,36 @@ export function buildPrintHtml({
     return figuresCache.get(groupId)
   }
 
-  function getCanonicalGroup(groupId) {
+  function getCanonicalGroup(groupId, detail) {
+    if (canonicalConsumption) {
+      const familyContractId =
+        detail.groupType === 'cloze'
+          ? 'cloze'
+          : detail.groupType === 'grammar_cloze'
+            ? 'grammar-fill'
+            : null
+      if (!familyContractId) return null
+      const canonicalGroup = projectCanonicalConsumerGroup({
+        consumption: canonicalConsumption,
+        familyContractId,
+        groupId,
+      })
+      if (!canonicalGroupMatchesPrintDetail(canonicalGroup, detail)) {
+        const error = new Error(`Canonical Print input does not match ${groupId}`)
+        error.code = 'CANONICAL_CONSUMPTION_REJECTED'
+        throw error
+      }
+      return {
+        status: 'ready',
+        group: canonicalGroup,
+        diagnostic: {
+          status: 'ready',
+          source: 'whole-paper-consumption',
+          paperId: canonicalConsumption.paperId,
+          groupId,
+        },
+      }
+    }
     if (!paperAssetsDir) return null
     if (!canonicalGroupCache.has(groupId)) {
       const resolved = resolveCanonicalPrintGroup({
@@ -390,7 +421,10 @@ export function buildPrintHtml({
         const item = itemByGroupId.get(block.questionGroupId)
         if (!item) continue
         const { detail } = item
-        const canonicalResolution = getCanonicalGroup(block.questionGroupId)
+        const canonicalResolution = getCanonicalGroup(
+          block.questionGroupId,
+          detail,
+        )
         let canonicalGroup =
           canonicalResolution?.status === 'ready'
             ? canonicalResolution.group
@@ -399,6 +433,13 @@ export function buildPrintHtml({
           canonicalGroup
           && !canonicalGroupMatchesPrintDetail(canonicalGroup, detail)
         ) {
+          if (canonicalConsumption) {
+            const error = new Error(
+              `Canonical Print input does not match ${block.questionGroupId}`,
+            )
+            error.code = 'CANONICAL_CONSUMPTION_REJECTED'
+            throw error
+          }
           normalizationDiagnostics.push({
             status: 'legacy',
             source: 'legacy',
@@ -506,6 +547,12 @@ export function buildPrintHtml({
                   label: option.label,
                   content: option.text,
                 })),
+                canonicalPlacement: canonicalQuestion.layoutPlan
+                  ? {
+                      mode: canonicalQuestion.layoutPlan.mode,
+                      signature: canonicalQuestion.placementSignature,
+                    }
+                  : null,
               }
             : question
           const stemText = String(printQuestion.stem || '').trim()
@@ -518,7 +565,12 @@ export function buildPrintHtml({
           }
           if (!stemText && hasOptions) {
             // 真卷完形形态:题号与选项同一行「41. A. xxx B. xxx C. xxx D. xxx」
-            groupHtml += `<div class="question"><p class="options-inline options-inline--numbered"><span class="qnum">${questionNum}.</span>${printQuestion.options.map((o) => `<span>${escapeHtml(o.label)}. ${escapeHtml(o.content)}</span>`).join('')}</p>`
+            const placement = printQuestion.canonicalPlacement
+            const placementAttrs = placement
+              ? ` data-canonical-placement-signature="${escapeHtml(placement.signature)}" data-canonical-placement-mode="${placement.mode}"`
+              : ''
+            const renderedOptions = printQuestion.options.map((o) => `<span>${escapeHtml(o.label)}. ${escapeHtml(o.content)}</span>`).join('')
+            groupHtml += `<div class="question"><p class="options-inline options-inline--numbered"><span class="qnum">${questionNum}.</span>${placement ? `<span class="canonical-options canonical-options--${placement.mode}"${placementAttrs}>${renderedOptions}</span>` : renderedOptions}</p>`
           } else {
             groupHtml += `<div class="question"><p class="stem"><span class="qnum">${questionNum}.</span> ${escapeHtml(printQuestion.stem)}</p>`
             groupHtml += renderOptions(printQuestion.options, detail.groupType)
@@ -763,6 +815,26 @@ body {
 
 .options-inline--numbered .qnum {
   margin-right: 0.6em;
+}
+
+.canonical-options {
+  display: inline-grid;
+  width: 100%;
+  vertical-align: top;
+}
+
+.canonical-options--four_columns {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  white-space: nowrap;
+}
+
+.canonical-options--two_by_two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  white-space: nowrap;
+}
+
+.canonical-options--one_column {
+  grid-template-columns: 1fr;
 }
 
 /* standard §3b 分页纪律(owner 2026-07-08):段落可跨页;单个小题不拆;

@@ -1,5 +1,8 @@
 import { segmentPaperText } from '../../../../shared/papersurface/segmentPaperText.mjs'
-import { buildCanonicalClozeSurfaceData } from '../../../../shared/paper-normalization/canonicalPaperGroupSurfaceAdapter.mjs'
+import {
+  buildCanonicalClozeSurfaceData,
+  buildCanonicalConsumptionSurfaceData,
+} from '../../../../shared/paper-normalization/canonicalPaperGroupSurfaceAdapter.mjs'
 import type { PaperTextMap } from '../../../../shared/papersurface/types'
 import type { PaperAssetV1 } from '../../domain/paperAsset.ts'
 import type {
@@ -42,15 +45,22 @@ const ZERO_OUTLINE: PassageOutline = { mainIdea: '', logicalLayers: [] }
 export function buildClozePaperView(input: {
   asset: PaperAssetV1
   groupId: string
+  canonicalConsumption?: unknown
 }): ClozePaperViewModel {
-  const { asset, groupId } = input
+  const { asset, groupId, canonicalConsumption } = input
   const group = asset.content.groups[groupId]
   if (!group || group.groupType !== 'cloze') {
     throw new Error(`[I3] group not found or not cloze: ${groupId}`)
   }
 
   const questionIds = group.questionIds ?? []
-  const canonicalResult = buildCanonicalClozeSurfaceData({ asset, groupId })
+  const canonicalResult = canonicalConsumption
+    ? buildCanonicalConsumptionSurfaceData({
+        consumption: canonicalConsumption,
+        familyContractId: 'cloze',
+        groupId,
+      })
+    : buildCanonicalClozeSurfaceData({ asset, groupId })
   const textMap = buildClozeTextMap(asset, group)
   const passageStructure: PassageStructure = {
     section: CLOZE_SECTION,

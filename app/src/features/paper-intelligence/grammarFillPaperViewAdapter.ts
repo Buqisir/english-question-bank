@@ -1,5 +1,8 @@
 import { segmentPaperText } from '../../../../shared/papersurface/segmentPaperText.mjs'
-import { buildCanonicalPaperGroupSurfaceData } from '../../../../shared/paper-normalization/canonicalPaperGroupSurfaceAdapter.mjs'
+import {
+  buildCanonicalConsumptionSurfaceData,
+  buildCanonicalPaperGroupSurfaceData,
+} from '../../../../shared/paper-normalization/canonicalPaperGroupSurfaceAdapter.mjs'
 import type { PaperTextMap } from '../../../../shared/papersurface/types'
 import type { PaperAssetV1 } from '../../domain/paperAsset.ts'
 import { grammarFillBlankPattern } from '../../shared-ui/papersurface/grammarFillBlank.ts'
@@ -43,15 +46,22 @@ const ZERO_OUTLINE: PassageOutline = { mainIdea: '', logicalLayers: [] }
 export function buildGrammarFillPaperView(input: {
   asset: PaperAssetV1
   groupId: string
+  canonicalConsumption?: unknown
 }): GrammarFillPaperViewModel {
-  const { asset, groupId } = input
+  const { asset, groupId, canonicalConsumption } = input
   const group = asset.content.groups[groupId]
   if (!group || group.groupType !== 'grammarFill') {
     throw new Error(`[I4] group not found or not grammarFill: ${groupId}`)
   }
 
   const questionIds = group.questionIds ?? []
-  const canonicalResult = buildCanonicalPaperGroupSurfaceData({ asset, groupId })
+  const canonicalResult = canonicalConsumption
+    ? buildCanonicalConsumptionSurfaceData({
+        consumption: canonicalConsumption,
+        familyContractId: 'grammar-fill',
+        groupId,
+      })
+    : buildCanonicalPaperGroupSurfaceData({ asset, groupId })
   const legacyTextMap = canonicalResult.status === 'ready'
     ? null
     : buildGrammarFillTextMap(asset, group)

@@ -497,6 +497,12 @@ export type PaperQuestion = {
    *  types that have no inline options (e.g. some writing tasks);
    *  PaperSurface treats an empty array as "no options to render". */
   readonly options: ReadonlyArray<PaperQuestionOption>
+
+  /** Shared canonical A-D placement selected before any renderer starts. */
+  readonly canonicalPlacement?: {
+    readonly mode: 'four_columns' | 'two_by_two' | 'one_column'
+    readonly signature: string
+  }
 }
 
 export type PaperSurfaceProps = {

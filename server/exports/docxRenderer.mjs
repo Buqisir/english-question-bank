@@ -57,6 +57,7 @@ import { paperBlankPattern } from '../../shared/papersurface/blankPattern.mjs'
 import { paperBlankRuling } from '../../shared/papersurface/blankRuling.mjs'
 import { headingKind } from '../../shared/papersurface/headingKind.mjs'
 import { resolveFigureMarker } from '../../shared/figures/resolveFigureMarker.mjs'
+import { projectCanonicalConsumerGroup } from '../../shared/paper-canonical/consumerProjection.mjs'
 import { resolveGroupFigures } from '../figures/paperFigures.mjs'
 import { resolveCanonicalPrintGroup } from '../print-canonical-group-adapter.mjs'
 
@@ -290,9 +291,38 @@ function canonicalGroupMatchesDocxDetail(canonicalGroup, detail) {
   )
 }
 
-function createCanonicalDocxGroupResolver(normalizationDiagnostics) {
+function createCanonicalDocxGroupResolver(
+  normalizationDiagnostics,
+  canonicalConsumption,
+) {
   const canonicalGroupCache = new Map()
   return function getCanonicalDocxGroup(groupId, detail) {
+    if (canonicalConsumption) {
+      const familyContractId =
+        detail.groupType === 'cloze'
+          ? 'cloze'
+          : detail.groupType === 'grammar_cloze'
+            ? 'grammar-fill'
+            : null
+      if (!familyContractId) return null
+      const canonicalGroup = projectCanonicalConsumerGroup({
+        consumption: canonicalConsumption,
+        familyContractId,
+        groupId,
+      })
+      if (!canonicalGroupMatchesDocxDetail(canonicalGroup, detail)) {
+        const error = new Error(`Canonical DOCX input does not match ${groupId}`)
+        error.code = 'CANONICAL_CONSUMPTION_REJECTED'
+        throw error
+      }
+      normalizationDiagnostics.push({
+        status: 'ready',
+        source: 'whole-paper-consumption',
+        paperId: canonicalConsumption.paperId,
+        groupId,
+      })
+      return canonicalGroup
+    }
     if (
       !paperAssetsDir
       || !['cloze', 'grammar_cloze'].includes(detail.groupType)
@@ -338,6 +368,8 @@ function canonicalDocxQuestion(canonicalQuestion, question) {
       label: option.label,
       content: option.text,
     })),
+    layoutPlan: canonicalQuestion.layoutPlan,
+    placementSignature: canonicalQuestion.placementSignature,
   }
 }
 
@@ -976,10 +1008,14 @@ function buildExamDocumentXml({
   questionNumberStart,
   images,
   normalizationDiagnostics,
+  canonicalConsumption,
 }) {
   const figuresCache = new Map()
   const getCanonicalDocxGroup =
-    createCanonicalDocxGroupResolver(normalizationDiagnostics)
+    createCanonicalDocxGroupResolver(
+      normalizationDiagnostics,
+      canonicalConsumption,
+    )
   function getFiguresInfo(groupId) {
     if (!paperAssetsDir) return null
     if (!figuresCache.has(groupId)) figuresCache.set(groupId, resolveGroupFigures(paperAssetsDir, groupId))
@@ -1149,8 +1185,22 @@ function buildExamDocumentXml({
             return
           }
           if (!stemText && hasOptions) {
-            const inlineText = docxQuestion.options.map((o) => `${o.label}. ${o.content}`).join('    ')
-            body.push(paragraph([run(`${questionNum}.  ${inlineText}`, { size: 21 })], { before: 60, after: 50 }))
+            if (docxQuestion.layoutPlan) {
+              body.push(
+                paragraph([run(`${questionNum}.`, { size: 21 })], {
+                  before: 60,
+                  after: 20,
+                  keepNext: true,
+                }),
+              )
+              body.push(canonicalDocxOptionLayout(
+                docxQuestion.options,
+                docxQuestion.layoutPlan,
+              ))
+            } else {
+              const inlineText = docxQuestion.options.map((o) => `${o.label}. ${o.content}`).join('    ')
+              body.push(paragraph([run(`${questionNum}.  ${inlineText}`, { size: 21 })], { before: 60, after: 50 }))
+            }
           } else {
             body.push(
               paragraph(
@@ -1243,6 +1293,39 @@ function examOptionTable(rows) {
   return `<w:tbl><w:tblPr><w:tblW w:w="9000" w:type="dxa"/><w:tblBorders><w:top w:val="none"/><w:left w:val="none"/><w:bottom w:val="none"/><w:right w:val="none"/><w:insideH w:val="none"/><w:insideV w:val="none"/></w:tblBorders><w:tblLayout w:type="fixed"/></w:tblPr><w:tblGrid><w:gridCol w:w="${colWidth}"/><w:gridCol w:w="${colWidth}"/></w:tblGrid>${rowXml}</w:tbl>`
 }
 
+function canonicalDocxOptionLayout(options, plan) {
+  const byLabel = new Map(options.map((option) => [option.label, option]))
+  if (plan.mode === 'one_column') {
+    return plan.placements.map((placement) => {
+      const option = byLabel.get(placement.label)
+      return paragraph(
+        `${option.label}. ${option.content}`,
+        {
+          after: 30,
+          indentLeft: 420,
+          size: 21,
+        },
+      )
+    }).join('')
+  }
+  const starts = [...new Set(plan.placements.map((placement) => placement.startTwip))].sort((a, b) => a - b)
+  const widths = starts.map((start, index) =>
+    (starts[index + 1] ?? plan.rowWidthTwip) - start)
+  const rows = Array.from({ length: plan.rowCount }, (_, row) =>
+    plan.placements
+      .filter((placement) => placement.row === row)
+      .sort((a, b) => a.column - b.column)
+      .map((placement) => {
+        const option = byLabel.get(placement.label)
+        return `${option.label}. ${option.content}`
+      }))
+  const grid = widths.map((width) => `<w:gridCol w:w="${width}"/>`).join('')
+  const rowXml = rows.map((cells) =>
+    `<w:tr>${cells.map((cell, column) =>
+      `<w:tc><w:tcPr><w:tcW w:w="${widths[column]}" w:type="dxa"/></w:tcPr>${paragraph(cell, { after: 30, size: 21 })}</w:tc>`).join('')}</w:tr>`).join('')
+  return `<w:tbl><w:tblPr><w:tblW w:w="${plan.rowWidthTwip}" w:type="dxa"/><w:tblLayout w:type="fixed"/></w:tblPr><w:tblGrid>${grid}</w:tblGrid>${rowXml}</w:tbl>`
+}
+
 // figure-render cut: `images` is an OPTIONAL out-parameter array — see the
 // header comment above `buildExamDocumentXml`. Defaults to a throwaway
 // array so a caller that doesn't need image bytes (e.g. an existing test
@@ -1252,7 +1335,7 @@ function examOptionTable(rows) {
 // selector/translator with exam style, so enabled cloze/grammar groups never
 // parse raw markers while every other asset stays on the structured legacy
 // path.
-function buildDocumentXml({ title, versionType, items, blocks, questionNumberStart, printStyle, images = [], normalizationDiagnostics = [] }) {
+function buildDocumentXml({ title, versionType, items, blocks, questionNumberStart, printStyle, images = [], normalizationDiagnostics = [], canonicalConsumption = null }) {
   if (printStyle === 'exam') {
     return buildExamDocumentXml({
       title,
@@ -1262,11 +1345,15 @@ function buildDocumentXml({ title, versionType, items, blocks, questionNumberSta
       questionNumberStart,
       images,
       normalizationDiagnostics,
+      canonicalConsumption,
     })
   }
   const figuresCache = new Map()
   const getCanonicalDocxGroup =
-    createCanonicalDocxGroupResolver(normalizationDiagnostics)
+    createCanonicalDocxGroupResolver(
+      normalizationDiagnostics,
+      canonicalConsumption,
+    )
   function getFiguresInfo(groupId) {
     if (!paperAssetsDir) return null
     if (!figuresCache.has(groupId)) figuresCache.set(groupId, resolveGroupFigures(paperAssetsDir, groupId))

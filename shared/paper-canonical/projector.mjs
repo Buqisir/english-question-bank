@@ -128,6 +128,10 @@ export function projectCanonicalPaper(canonicalPackage) {
           groupId: group.identity.groupId,
           familyContractId: group.contractRef.familyContractId,
           numbering: numberingByGroup.get(group.identity.groupId) || [],
+          blanks: group.blankRefs.map((blank, index) => ({
+            blankId: blank.blankId,
+            questionId: group.questionRefs[index]?.questionId,
+          })),
           scoringRuleRef: slot.slotId,
           content: cloneJson(group.content),
           media: cloneJson(group.media),

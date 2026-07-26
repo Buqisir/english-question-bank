@@ -79,3 +79,14 @@ export function buildCanonicalClozeSurfaceData(input: {
   asset: unknown
   groupId: string
 }): CanonicalClozeSurfaceResult
+
+export function buildCanonicalConsumptionSurfaceData(input: {
+  consumption: unknown
+  familyContractId: 'cloze' | 'grammar-fill'
+  groupId: string
+}): {
+  readonly status: 'ready'
+  readonly semanticDigest: string
+  readonly placementSignatures: ReadonlyArray<string | null>
+  readonly surfaceData: CanonicalPaperGroupSurfaceData
+}

@@ -1,4 +1,5 @@
 import { segmentPaperText } from '../papersurface/segmentPaperText.mjs'
+import { projectCanonicalConsumerGroup } from '../paper-canonical/consumerProjection.mjs'
 import { buildExactPaperGroupSourceSlice } from './exactPaperGroupSourceSlice.mjs'
 import { normalizePaperGroup } from './normalizePaperGroup.mjs'
 
@@ -208,4 +209,58 @@ export function buildCanonicalPaperGroupSurfaceData({ asset, groupId }) {
  */
 export function buildCanonicalClozeSurfaceData(input) {
   return buildCanonicalPaperGroupSurfaceData(input)
+}
+
+/**
+ * Canonical-required Screen adapter. Unlike the historical compatibility
+ * adapter above, this accepts only the whole-paper loader result and never
+ * reparses source fields or falls back after selection.
+ */
+export function buildCanonicalConsumptionSurfaceData({
+  consumption,
+  familyContractId,
+  groupId,
+}) {
+  const canonicalGroup = projectCanonicalConsumerGroup({
+    consumption,
+    familyContractId,
+    groupId,
+  })
+  const paragraphModels = buildParagraphModels(canonicalGroup)
+  return {
+    status: 'ready',
+    semanticDigest: canonicalGroup.semanticSignature,
+    placementSignatures: canonicalGroup.questions.map(
+      (question) => question.placementSignature,
+    ),
+    surfaceData: {
+      textMap: {
+        paperId: canonicalGroup.paperId,
+        paragraphs: paragraphModels.map((model) => model.textMapParagraph),
+      },
+      semanticParagraphs: paragraphModels.map(
+        (model) => model.semanticParagraph,
+      ),
+      questions: canonicalGroup.questions.map((question, order) => ({
+        id: question.questionId,
+        section: SECTION_BY_GROUP_TYPE[canonicalGroup.groupType],
+        order,
+        questionNo: String(question.questionNo),
+        stem: question.stem,
+        options: question.options.map((option) => ({
+          label: option.label,
+          text: option.text,
+        })),
+        ...(question.layoutPlan
+          ? {
+              canonicalPlacement: {
+                mode: question.layoutPlan.mode,
+                signature: question.placementSignature,
+              },
+            }
+          : {}),
+      })),
+      evidence: [],
+    },
+  }
 }

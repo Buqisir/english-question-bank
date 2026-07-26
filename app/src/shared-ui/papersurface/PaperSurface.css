@@ -489,6 +489,26 @@ button.ps-paper-blank.ps-paper-blank--clickable {
   line-height: var(--ps-line-height);
 }
 
+.ps-question-options-inline--four_columns {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  white-space: nowrap;
+  width: 100%;
+}
+
+.ps-question-options-inline--two_by_two {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  white-space: nowrap;
+  width: 100%;
+}
+
+.ps-question-options-inline--one_column {
+  display: grid;
+  grid-template-columns: 1fr;
+  width: 100%;
+}
+
 /* ─── Reading mode placeholder (B3) ───────────────────────────── */
 
 .ps-reading-placeholder {
