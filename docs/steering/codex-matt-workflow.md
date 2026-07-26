@@ -18,7 +18,10 @@ normal feature
 huge and foggy
   └─ Wayfinder map
        └─ one fresh task per decision ticket
-       └─ to-spec → to-tickets → implement
+       └─ fresh to-spec task
+            └─ fresh to-tickets task
+                 └─ owner approves ticket granularity
+                      └─ fresh implement task per approved ticket
 ```
 
 Manual owner dispatch is the default. The sole agent-side exception is an
@@ -64,6 +67,13 @@ For a normal feature:
 4. Each new ticket declares `Next on PASS` and `Terminal`.
 5. The owner opens one fresh `/implement` task per ticket.
 
+For a completed Wayfinder map, `/to-spec` and `/to-tickets` are separate fresh
+top-level tasks. The map does not synthesize either artifact. After
+`/to-tickets`, implementation waits for the owner's durable approval of the
+ticket granularity. The phase receipt defined by
+`../agents/issue-tracker.md` is the only proof that these transitions ran;
+artifact names or directories are not phase evidence.
+
 The ticket is the durable source of scope, acceptance, verification, and exit
 routing. Do not copy the ticket body into the next prompt.
 
@@ -104,8 +114,9 @@ and the only complete attachment-first template live in
 
 New top-level task: use that canonical template and fill its exact `Worktree:`,
 branch, `Expected HEAD:`, spec, ticket, fixed point, model, effort, and short
-prompt. Implementation/fix successors attach `$implement`; independent review
-and focused re-review successors attach `$code-review`.
+prompt. Phase successors attach `$to-spec` or `$to-tickets`;
+implementation/fix successors attach `$implement`; independent review and
+focused re-review successors attach `$code-review`.
 
 The prompt links the ticket and says to implement only it, treating its
 `Next on PASS` as the exit route. It does not recursively restate the ticket.

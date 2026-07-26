@@ -1,10 +1,15 @@
 # EQB 试卷 Canonical 大一统实施规范
 
-Status: accepted
+Status: historical Wayfinder synthesis; not accepted for current dispatch
 Decision fixed point: `19ffc7744c656b526f55934c8c73e245acf7323f`
 Wayfinder map: `docs/cuts/paper-canonical-unification/wayfinder/map.md`
-Implementation frontier:
-`docs/cuts/paper-canonical-unification/tickets/01-canonical-foundation.md`
+Current phase receipt:
+`docs/cuts/paper-canonical-unification/phase-transition.md`
+
+This draft and its original ticket set are retained as historical planning
+evidence. Ticket 01 was completed and accepted from it; Tickets 02–29 are not
+dispatchable unless a fresh explicit to-spec/to-tickets sequence supersedes or
+re-approves them through the phase receipt.
 
 ## Outcome
 

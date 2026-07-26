@@ -1,8 +1,9 @@
 # EQB 试卷 Canonical 大一统 — Wayfinder Map
 
 Status: done
-Next on PASS: `docs/cuts/paper-canonical-unification/tickets/01-canonical-foundation.md`
+Next on PASS: to-spec
 Terminal: no
+Phase receipt: `docs/cuts/paper-canonical-unification/phase-transition.md`
 
 ## Notes
 
@@ -33,6 +34,11 @@ Terminal: no
 - Do not copy copyrighted passages, answers, student data, credentials, or source files into Wayfinder artifacts. Asset investigation records ids, hashes, shapes, counts, and minimal diagnostic excerpts only.
 - Tickets are claimed before resolution; closed answers live in their tickets
   and appear below only as linked one-line gists.
+- Route correction: Ticket 16 historically synthesized a draft spec and 29
+  implementation tickets, and Ticket 01 was accepted before the missing phase
+  gates were found. Ticket 01 remains done; the phase receipt retires the stale
+  Ticket 01 → Ticket 02 authorization and sends the initiative through a fresh
+  explicit to-spec phase.
 
 ## Decisions so far
 

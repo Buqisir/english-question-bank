@@ -25,11 +25,12 @@ back to the current task.
 ### Owner-started Wayfinder coordinator exception
 
 This exception is authorized only after the owner explicitly invokes
-`$coordinate-eqb-wayfinder` for a charted EQB map whose durable `Next on PASS`
-names one frontier. The coordinator is repository-read-only and may use only
-official Codex top-level task tools to create and compactly wait on exactly one
-fresh peer at a time in the initiative's same exact saved worktree. It may not
-delegate, fork, resume, create another coordinator, or overlap writers.
+`$coordinate-eqb-wayfinder` for a charted EQB initiative whose map or phase
+receipt names one validated durable frontier. The coordinator is
+repository-read-only and may use only official Codex top-level task tools to
+create and compactly wait on exactly one fresh peer at a time in the
+initiative's same exact saved worktree. It may not delegate, fork, resume,
+create another coordinator, or overlap writers.
 
 Wayfinder research and prototype tickets may continue through their validated
 durable routes. Grilling, owner input, owner QA, `needs-attention`, `BLOCKED`,
@@ -38,12 +39,15 @@ coordination. A canonical review-failure handoff may select one fresh fix task
 only when the tracked workflow validates that route; this is a fix transition,
 not an automatic retry.
 
-When the map closes, the same coordinator may follow the durable route through
-implementation, review, fix, the owner-QA boundary, release, and `DONE`.
-Owner QA remains a pause for owner acceptance, never a peer the coordinator
-creates. The global skill owns the complete validation, dispatch, observation,
-ledger, resume, and stop loop; this file owns only project authorization and
-completion routing.
+When the map closes, its only legal successor is one fresh `$to-spec` task,
+followed by one fresh `$to-tickets` task. The coordinator then pauses for
+explicit owner ticket-granularity approval. Only after the phase receipt passes
+all implementation gates owned by `issue-tracker.md` may a later explicit
+resume follow the durable route through implementation, review, fix, the
+owner-QA boundary, release, and `DONE`. Owner QA remains a pause for owner
+acceptance, never a peer the coordinator creates. The global skill owns the
+complete validation, dispatch, observation, ledger, resume, and stop loop;
+this file owns only project authorization and completion routing.
 
 The Desktop Stop Hook bridge and explicit App Server Runner are retired
 historical evidence. They are not dispatch exceptions or activation
@@ -126,10 +130,12 @@ Matt, map for Wayfinder, or the corresponding action for another entry skill.
 Require the task to finish according to `Next on PASS`; this prevents
 recursive prompt growth and constraint loss.
 
-Implementation and fix tasks attach `$implement`. Initial independent reviews
-and focused re-reviews attach `$code-review`. Ask Matt, Wayfinder, grilling,
-and other entry tasks attach their actual entry skill. Only attach the entry
-skill; do not separately attach TDD or ordinary review used by `$implement`.
+To-spec and to-tickets phase tasks attach their complete `$to-spec` and
+`$to-tickets` Markdown skill references. Implementation and fix tasks attach
+`$implement`. Initial independent reviews and focused re-reviews attach
+`$code-review`. Ask Matt, Wayfinder, grilling, and other entry tasks attach
+their actual entry skill. Only attach the entry skill; do not separately
+attach TDD or ordinary review used by `$implement`.
 
 A slash command, bare skill name, or “equivalent flow” is not an attachment.
 QA, `DONE`, and other no-skill exits need no attachment.

@@ -86,9 +86,45 @@ ticket.
 
 Under an owner-started coordinator, validated research and prototype routes
 may advance without another owner dispatch. Grilling or any owner-input need
-pauses. When decision mapping closes, the map's durable `Next on PASS` may
-route into implementation, review, fix, owner QA, release, and `DONE`; owner QA
-itself remains an owner-acceptance pause.
+pauses. When decision mapping closes, its only legal successor kind is
+`to-spec`. A map never routes directly to `to-tickets`, implementation,
+review, fix, QA, release, or `DONE`.
+
+## Development phase transition
+
+Huge/foggy initiatives keep one tracked
+`docs/cuts/<feature>/phase-transition.md` receipt. This section is the single
+canonical owner of its semantics. The legal route kinds are distinct:
+
+```text
+Wayfinder decision → to-spec → to-tickets → owner approval
+  → implementation → review/fix when required → owner QA → release → DONE
+```
+
+The receipt records the current phase and `Next on PASS`. Completed phases add
+verifiable provenance: the exact entry skill, source HEAD, result commit,
+artifact path, and SHA-256. A to-tickets result additionally records the exact
+accepted-spec SHA-256 it consumed and a ticket-set manifest SHA-256. Owner
+ticket-granularity approval records that same ticket-set manifest SHA-256.
+
+An implementation route is dispatchable only when all four gates verify:
+
+1. the accepted spec has committed `$to-spec` provenance;
+2. the ticket set has committed `$to-tickets` provenance;
+3. the ticket-set receipt binds the current accepted-spec SHA-256;
+4. the owner's committed granularity approval binds the current ticket-set
+   manifest SHA-256.
+
+Filenames, directory existence, prose claims, historical chat, old handoffs,
+and historical model text satisfy none of these gates. Any absent, malformed,
+stale, or mismatched field fails closed at the earliest unproven phase.
+To-spec, to-tickets, implementation, review, owner QA, release, and `DONE`
+remain separate route kinds; no task may infer, skip, merge, or impersonate
+another.
+
+After a to-tickets task completes, an authorized coordinator always pauses.
+Only a later explicit owner resume, after approval is committed in the receipt,
+may select implementation.
 
 ## Optional assets
 

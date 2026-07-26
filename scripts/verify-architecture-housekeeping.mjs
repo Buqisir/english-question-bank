@@ -212,6 +212,13 @@ const cutWorkflow = read('docs/steering/cut-workflow-protocol.md')
 assert('workflow protocol follows Matt planning chain', cutWorkflow.includes('grill-with-docs') && cutWorkflow.includes('to-spec') && cutWorkflow.includes('to-tickets'))
 assert('workflow protocol assigns one fresh implementation task per ticket', cutWorkflow.includes('one fresh top-level `/implement` task per ready ticket'))
 assert('workflow protocol reserves Wayfinder for fog', cutWorkflow.includes('Wayfinder') && cutWorkflow.includes('Huge and foggy'))
+assert(
+  'workflow protocol makes post-Wayfinder phases explicit and fresh',
+  cutWorkflow.includes('close it without synthesizing a spec or') &&
+    cutWorkflow.includes('Wayfinder done') &&
+    cutWorkflow.includes('owner ticket-granularity approval') &&
+    cutWorkflow.includes('No phase infers, merges, or impersonates the next'),
+)
 assert('workflow protocol defines escalation signals', cutWorkflow.includes('CONTEXT INSUFFICIENT') && cutWorkflow.includes('SPEC CONTRADICTS'))
 assert(
   'workflow protocol preserves manual shipping with one coordinator exception',
@@ -227,8 +234,38 @@ assert(
     mattWorkflow.includes('sole agent-side exception') &&
     mattWorkflow.includes('$coordinate-eqb-wayfinder'),
 )
+assert(
+  'Matt workflow requires separate to-spec and to-tickets tasks after Wayfinder',
+  mattWorkflow.includes('fresh to-spec task') &&
+    mattWorkflow.includes('fresh to-tickets task') &&
+    mattWorkflow.includes('owner approves ticket granularity') &&
+    mattWorkflow.includes('artifact names or directories are not phase evidence'),
+)
 assert('Matt workflow defines one directly pasteable next-task block', mattWorkflow.includes('New top-level task:') && mattWorkflow.includes('Worktree:') && mattWorkflow.includes('Expected HEAD:'))
 assert('Matt workflow separates internal workers from relay', mattWorkflow.includes('internal Standards and Spec reviewers') && mattWorkflow.includes('never become the next ticket or phase'))
+
+const modelRouting = read('docs/agents/model-routing.md')
+const paperPhase = read('docs/cuts/paper-canonical-unification/phase-transition.md')
+assert(
+  'issue tracker owns fail-closed phase provenance gates',
+  issueTracker.replace(/\s+/g, ' ').includes('single canonical owner of its semantics') &&
+    issueTracker.includes('committed `$to-spec` provenance') &&
+    issueTracker.includes('committed `$to-tickets` provenance') &&
+    issueTracker.includes('ticket-set manifest SHA-256') &&
+    issueTracker.includes('Filenames, directory existence'),
+)
+assert(
+  'current model routing is Sol medium except reviews at high',
+  modelRouting.includes('`gpt-5.6-sol` | `medium`') &&
+    modelRouting.includes('`gpt-5.6-sol` | `high`') &&
+    modelRouting.includes('No current default EQB route uses `gpt-5.6-terra`'),
+)
+assert(
+  'paper canonical initiative is parked at to-spec',
+  paperPhase.includes('Current phase: to-spec') &&
+    paperPhase.includes('Implementation dispatch: forbidden') &&
+    paperPhase.includes('Tickets 02–29 are non-dispatchable'),
+)
 
 const status = read('docs/STATUS.md')
 assert(

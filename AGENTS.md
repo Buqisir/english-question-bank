@@ -28,8 +28,9 @@ Use `Ask Matt` when routing is unclear.
    implement, verify, review, and commit.
 2. A normal feature uses `/grill-with-docs`, `/to-spec`, and `/to-tickets` in
    one planning context, then one fresh `/implement` task per ticket.
-3. A huge, foggy effort may use `/wayfinder`; by default the owner creates one
-   fresh task per decision ticket.
+3. A huge, foggy effort uses `/wayfinder`, then fresh `/to-spec` and
+   `/to-tickets` tasks plus owner ticket-granularity approval before any fresh
+   `/implement` task; by default the owner creates each task.
 4. Hard bugs enter through `/diagnosing-bugs`; raw requests through `/triage`;
    architecture health work through `/improve-codebase-architecture`.
 
@@ -54,11 +55,12 @@ successor; a completed non-terminal ticket must provide it.
 下一票 handoff”。
 
 The sole agent-side dispatch exception is an owner-explicit invocation of
-`$coordinate-eqb-wayfinder` for an already-charted EQB Wayfinder with a durable
-frontier. That coordinator stays repository-read-only and creates exactly one
-fresh top-level peer at a time in the same saved worktree. Its complete loop
-and pause rules live only in the global skill; project authorization, routing,
-tracker semantics, and QA boundaries live in the files named below.
+`$coordinate-eqb-wayfinder` for an already-charted EQB Wayfinder initiative
+with a validated durable phase frontier. That coordinator stays
+repository-read-only and creates exactly one fresh top-level peer at a time in
+the same saved worktree. Its complete loop and pause rules live only in the
+global skill; project authorization, routing, tracker semantics, and QA
+boundaries live in the files named below.
 
 The Desktop Stop Hook bridge and explicit App Server Runner are retired
 historical evidence. Never enable, retry, or treat either as a current route.

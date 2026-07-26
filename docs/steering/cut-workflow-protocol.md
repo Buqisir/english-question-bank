@@ -77,8 +77,19 @@ docs/cuts/<feature>/wayfinder/
 ```
 
 Charting is one task. Resolving one decision ticket is one fresh top-level
-task. When the map is clear, synthesize every closed decision into `spec.md`
-and continue through normal ticketed implementation.
+task. When the map is clear, close it without synthesizing a spec or
+implementation tickets. Then cross these fresh top-level boundaries in order:
+
+```text
+Wayfinder done
+  → to-spec
+  → to-tickets
+  → owner ticket-granularity approval
+  → one fresh implementation task per approved ticket
+```
+
+Every arrow is validated through the phase receipt defined by
+`../agents/issue-tracker.md`. No phase infers, merges, or impersonates the next.
 
 Wayfinder never implements production code.
 

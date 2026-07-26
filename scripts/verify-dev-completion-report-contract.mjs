@@ -57,6 +57,23 @@ const ticketTemplate = documents.get('ticket template')
 const issueTracker = documents.get('issue tracker')
 const readme = readText(ROOT, 'docs/steering/README.md')
 const modelRouting = readText(ROOT, 'docs/agents/model-routing.md')
+const cutWorkflow = readText(ROOT, 'docs/steering/cut-workflow-protocol.md')
+const currentPaperPhase = readText(
+  ROOT,
+  'docs/cuts/paper-canonical-unification/phase-transition.md',
+)
+const currentPaperMap = readText(
+  ROOT,
+  'docs/cuts/paper-canonical-unification/wayfinder/map.md',
+)
+const currentPaperSpec = readText(
+  ROOT,
+  'docs/cuts/paper-canonical-unification/spec.md',
+)
+const currentPaperTicket01 = readText(
+  ROOT,
+  'docs/cuts/paper-canonical-unification/tickets/01-canonical-foundation.md',
+)
 
 const compact = (source) => source.replace(/\s+/g, ' ')
 const fencedBlocks = (source) =>
@@ -75,6 +92,8 @@ const skillRequiredTaskBlocks = (source) =>
 const skillAttachmentPattern =
   /^\[\$(?<skill>[a-z0-9][a-z0-9-]*)\]\((?<path>\/[^)\n]+\/SKILL\.md)\)$/
 const requiredSkillByTaskType = new Map([
+  ['to-spec', 'to-spec'],
+  ['to-tickets', 'to-tickets'],
   ['implementation', 'implement'],
   ['fix', 'implement'],
   ['independent-review', 'code-review'],
@@ -242,6 +261,104 @@ function ticketRouteErrors(source) {
     return ['Terminal: no requires a non-empty, non-placeholder Next on PASS']
   }
   return []
+}
+
+const reviewRouteKinds = new Set([
+  'independent-standards-review',
+  'independent-spec-review',
+  'independent-dual-axis-review',
+  'focused-re-review',
+])
+const nonReviewRouteKinds = new Set([
+  'coordinator',
+  'wayfinder',
+  'grilling',
+  'domain-modeling',
+  'to-spec',
+  'to-tickets',
+  'product-investigation',
+  'implementation',
+  'fix',
+  'qa-preparation',
+  'shipping',
+])
+
+function expectedCurrentModelRoute(routeKind) {
+  if (reviewRouteKinds.has(routeKind)) {
+    return { model: 'gpt-5.6-sol', effort: 'high' }
+  }
+  if (nonReviewRouteKinds.has(routeKind)) {
+    return { model: 'gpt-5.6-sol', effort: 'medium' }
+  }
+  return null
+}
+
+function currentModelRouteErrors({
+  routeKind,
+  model,
+  effort,
+  source = 'current-authority',
+}) {
+  const errors = []
+  const expected = expectedCurrentModelRoute(routeKind)
+
+  if (!expected) {
+    errors.push(`unknown current route kind: ${routeKind}`)
+    return errors
+  }
+  if (source !== 'current-authority') {
+    errors.push('current tasks cannot inherit a model from historical text')
+  }
+  if (model !== expected.model || effort !== expected.effort) {
+    errors.push(
+      `${routeKind} requires ${expected.model} / ${expected.effort}`,
+    )
+  }
+  return errors
+}
+
+function phaseRouteErrors({
+  from,
+  next,
+  spec = {},
+  tickets = {},
+  approval = {},
+}) {
+  const errors = []
+  const specProven =
+    spec.accepted === true &&
+    spec.provenance?.skill === 'to-spec' &&
+    spec.provenance?.committed === true &&
+    Boolean(spec.digest)
+  const ticketsProven =
+    tickets.provenance?.skill === 'to-tickets' &&
+    tickets.provenance?.committed === true &&
+    Boolean(tickets.manifestDigest)
+  const ticketsBound =
+    specProven &&
+    ticketsProven &&
+    tickets.boundSpecDigest === spec.digest
+  const approvalBound =
+    approval.committed === true &&
+    approval.ticketManifestDigest === tickets.manifestDigest
+
+  if (from === 'wayfinder' && next !== 'to-spec') {
+    errors.push('completed Wayfinder map can route only to to-spec')
+  }
+  if (['to-tickets', 'implementation'].includes(next) && !specProven) {
+    errors.push('current accepted spec lacks verified to-spec provenance')
+  }
+  if (next === 'implementation' && !ticketsProven) {
+    errors.push('current ticket set lacks verified to-tickets provenance')
+  }
+  if (next === 'implementation' && !ticketsBound) {
+    errors.push('current ticket set is not bound to the accepted spec')
+  }
+  if (next === 'implementation' && !approvalBound) {
+    errors.push('owner ticket-granularity approval is absent or stale')
+  }
+
+  return errors
 }
 
 function markdownFilesUnder(directory) {
@@ -553,6 +670,163 @@ assert(
   'owner QA full template has exactly one canonical owner',
 )
 
+section('Wayfinder development phase gates')
+
+const verifiedPhaseProof = {
+  spec: {
+    accepted: true,
+    digest: 'spec-sha-256',
+    provenance: { skill: 'to-spec', committed: true },
+  },
+  tickets: {
+    manifestDigest: 'tickets-sha-256',
+    boundSpecDigest: 'spec-sha-256',
+    provenance: { skill: 'to-tickets', committed: true },
+  },
+  approval: {
+    committed: true,
+    ticketManifestDigest: 'tickets-sha-256',
+  },
+}
+
+assert(
+  phaseRouteErrors({
+    from: 'wayfinder',
+    next: 'implementation',
+    ...verifiedPhaseProof,
+  }).some((error) =>
+    error.includes('completed Wayfinder map can route only to to-spec'),
+  ),
+  'completed Wayfinder map rejects direct implementation',
+)
+assert(
+  phaseRouteErrors({
+    from: 'to-tickets',
+    next: 'implementation',
+    spec: { accepted: true, path: 'spec.md' },
+    tickets: { paths: ['tickets/01.md'] },
+  }).some((error) => error.includes('verified to-spec provenance')) &&
+    phaseRouteErrors({
+      from: 'to-tickets',
+      next: 'implementation',
+      spec: { accepted: true, path: 'spec.md' },
+      tickets: { paths: ['tickets/01.md'] },
+    }).some((error) => error.includes('verified to-tickets provenance')),
+  'spec and ticket filenames without phase proof reject implementation',
+)
+assert(
+  phaseRouteErrors({
+    from: 'to-tickets',
+    next: 'implementation',
+    ...verifiedPhaseProof,
+    tickets: {
+      ...verifiedPhaseProof.tickets,
+      boundSpecDigest: 'different-spec-sha-256',
+    },
+  }).some((error) => error.includes('not bound to the accepted spec')),
+  'ticket set bound to another spec rejects implementation',
+)
+assert(
+  phaseRouteErrors({
+    from: 'to-tickets',
+    next: 'implementation',
+    ...verifiedPhaseProof,
+    approval: {},
+  }).some((error) =>
+    error.includes('owner ticket-granularity approval is absent'),
+  ),
+  'missing owner ticket-granularity approval rejects implementation',
+)
+assert(
+  phaseRouteErrors({
+    from: 'wayfinder',
+    next: 'to-spec',
+  }).length === 0 &&
+    phaseRouteErrors({
+      from: 'to-spec',
+      next: 'to-tickets',
+      spec: verifiedPhaseProof.spec,
+    }).length === 0 &&
+    phaseRouteErrors({
+      from: 'to-tickets',
+      next: 'implementation',
+      ...verifiedPhaseProof,
+    }).length === 0,
+  'Wayfinder to to-spec to to-tickets to owner approval to implementation passes',
+)
+
+assert(
+  currentModelRouteErrors({
+    routeKind: 'implementation',
+    model: 'gpt-5.6-terra',
+    effort: 'medium',
+  }).some((error) =>
+    error.includes('requires gpt-5.6-sol / medium'),
+  ),
+  'current generated handoff rejects gpt-5.6-terra',
+)
+assert(
+  currentModelRouteErrors({
+    routeKind: 'implementation',
+    model: 'gpt-5.6-sol',
+    effort: 'medium',
+    source: 'historical-handoff',
+  }).some((error) =>
+    error.includes('cannot inherit a model from historical text'),
+  ),
+  'current task rejects a model inherited from historical text',
+)
+for (const routeKind of nonReviewRouteKinds) {
+  assert(
+    currentModelRouteErrors({
+      routeKind,
+      model: 'gpt-5.6-sol',
+      effort: 'medium',
+    }).length === 0,
+    `${routeKind} uses gpt-5.6-sol / medium`,
+  )
+}
+for (const routeKind of reviewRouteKinds) {
+  assert(
+    currentModelRouteErrors({
+      routeKind,
+      model: 'gpt-5.6-sol',
+      effort: 'high',
+    }).length === 0,
+    `${routeKind} uses gpt-5.6-sol / high`,
+  )
+}
+
+assert(
+  /^Current phase:\s*to-spec\s*$/m.test(currentPaperPhase) &&
+    /^Next on PASS:\s*to-spec\s*$/m.test(currentPaperPhase) &&
+    /^To-spec provenance:\s*pending\s*$/m.test(currentPaperPhase) &&
+    /^To-tickets provenance:\s*pending\s*$/m.test(currentPaperPhase) &&
+    /^Owner ticket-granularity approval:\s*pending\s*$/m.test(
+      currentPaperPhase,
+    ) &&
+    /^Implementation dispatch:\s*forbidden\s*$/m.test(currentPaperPhase),
+  'current paper initiative stops at the fresh to-spec frontier',
+)
+assert(
+  /^Status:\s*done\s*$/m.test(currentPaperMap) &&
+    /^Next on PASS:\s*to-spec\s*$/m.test(currentPaperMap) &&
+    currentPaperMap.includes('phase-transition.md'),
+  'current paper Wayfinder map routes only to the phase receipt to-spec frontier',
+)
+assert(
+  currentPaperSpec.includes(
+    'Status: historical Wayfinder synthesis; not accepted for current dispatch',
+  ) &&
+    currentPaperSpec.includes('Tickets 02–29 are not') &&
+    currentPaperPhase.includes('old Ticket 01 → Ticket 02') &&
+    /^Status:\s*done\s*$/m.test(currentPaperTicket01) &&
+    currentPaperPhase.includes(
+      '2c7435026923db6b359e3770f22fdd11ed7d3c01',
+    ),
+  'current paper route preserves Ticket 01 and parks Tickets 02-29',
+)
+
 section('canonical handoff')
 
 const canonicalBlocks = skillRequiredTaskBlocks(dispatch)
@@ -619,11 +893,20 @@ Expected HEAD: 0123456789abcdef
 Spec: not applicable
 Ticket: not applicable
 Fixed point: 0123456789abcdef
-Model: gpt-5.6-terra
+Model: gpt-5.6-sol
 Effort: medium
 Prompt:
 Implement only the linked ticket.`
 
+assert(
+  validateSkillHandoff(skillTaskBlock('to-spec'), 'to-spec').length === 0,
+  'to-spec phase accepts attachment-first $to-spec',
+)
+assert(
+  validateSkillHandoff(skillTaskBlock('to-tickets'), 'to-tickets').length ===
+    0,
+  'to-tickets phase accepts attachment-first $to-tickets',
+)
 assert(
   validateSkillHandoff(skillTaskBlock('implement'), 'implementation').length ===
     0,
@@ -781,16 +1064,25 @@ assert(
 )
 assert(
   modelRouting.includes(
-    'Owner-started coordinator, Wayfinder, grilling, domain modeling, spec, and product investigation',
+    'Coordinator, Wayfinder, grilling, domain modeling, to-spec, to-tickets, product investigation, implementation, fixes, QA preparation, and mechanical shipping',
   ) &&
+    modelRouting.includes('`gpt-5.6-sol` | `medium`') &&
+    modelRouting.includes('Every independent Standards review') &&
     modelRouting.includes('`gpt-5.6-sol` | `high`') &&
-    modelRouting.includes('Implementation and fixes') &&
-    modelRouting.includes('`gpt-5.6-terra` | `xhigh`') &&
-    modelRouting.includes('Independent review') &&
-    modelRouting.includes('QA preparation and mechanical shipping') &&
-    modelRouting.includes('`gpt-5.6-terra` | `high`') &&
+    modelRouting.includes('No current default EQB route uses `gpt-5.6-terra`') &&
+    modelRouting.includes('never inherit model choices from historical text') &&
     dispatch.includes('owner-approved role defaults'),
   'model routing preserves the owner-approved role matrix',
+)
+assert(
+  issueTracker.includes('Development phase transition') &&
+    compact(issueTracker).includes('single canonical owner of its semantics') &&
+    compact(dispatch).includes('passes all implementation gates owned by') &&
+    compact(workflow).includes('phase receipt defined by') &&
+    compact(cutWorkflow).includes(
+      'Every arrow is validated through the phase receipt',
+    ),
+  'phase receipt has one detailed owner and concise authority pointers',
 )
 assert(
   agents.includes('sole agent-side dispatch exception') &&
