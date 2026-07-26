@@ -193,19 +193,9 @@ export function validateExactTransformationRecords(records, capture, closure) {
       continue
     }
     const rule = registeredRules.get(`${record.ruleId}@${record.ruleVersion}`)
-    const proof = rule?.operationProofs?.[record.operation]
-    if (record.certainty !== 'exact' || !rule || !rule.allowedOperations.includes(record.operation) || (!legacyAuthority && !proof)) {
+    const proof = rule?.operationProofs?.[record.operation] || (legacyAuthority ? legacyOperationProof(record.operation) : null)
+    if (record.certainty !== 'exact' || !rule || !rule.allowedOperations.includes(record.operation) || !proof) {
       diagnostics.push(diagnostic('TRANSFORMATION_NOT_EXACT', 'needs_review', path, 'Only registered exact transformations can produce canonical semantics'))
-      continue
-    }
-    if (legacyAuthority) {
-      if (recordIds.has(record.recordId) || !Number.isInteger(record.sequence) || record.sequence <= previousSequence || !Array.isArray(record.inputSourceSpanIds) || record.inputSourceSpanIds.length === 0 || record.inputSourceSpanIds.some((id) => !sourceSpanIds.has(id)) || record.outputDigest !== digestJson(record.after)) {
-        diagnostics.push(diagnostic('TRANSFORMATION_CLOSURE_INVALID', 'needs_review', path, 'Transformation sequence, lineage, or output digest cannot be replayed'))
-        continue
-      }
-      previousSequence = record.sequence
-      recordIds.add(record.recordId)
-      accepted.push(cloneJson(record))
       continue
     }
     const observationIds = record.preconditions?.sourceObservationIds
@@ -221,7 +211,7 @@ export function validateExactTransformationRecords(records, capture, closure) {
     const joinValue = expectedPreconditions && { sourceObservationIds: expectedPreconditions.sourceObservationIds, sourceValueDigests: expectedPreconditions.sourceValueDigests }
     const uniqueJoinProof = proof.kind === 'unique_observation_join' && observations.length === 2 && new Set(observationIds).size === 2 && stableStringify(record.before) === stableStringify(joinValue) && stableStringify(record.after) === stableStringify(joinValue) && isRecordValue(record.target) && exactKeys(record.target, ['identity', 'path']) && record.target.path === 'source_join' && record.target.identity === stableId('source-join', joinValue)
     const exactProof = expectedPreconditions && stableStringify(record.preconditions) === stableStringify(expectedPreconditions) && stableStringify(record.inputSourceSpanIds) === stableStringify(expectedSpanIds) && (sourceIdentityProof || uniqueJoinProof)
-    if (recordIds.has(record.recordId) || !Number.isInteger(record.sequence) || record.sequence <= previousSequence || !Array.isArray(record.inputSourceSpanIds) || record.inputSourceSpanIds.length === 0 || record.inputSourceSpanIds.some((id) => !sourceSpanIds.has(id)) || record.outputDigest !== digestJson(record.after) || (!legacyAuthority && !exactProof)) {
+    if (recordIds.has(record.recordId) || !Number.isInteger(record.sequence) || record.sequence <= previousSequence || !Array.isArray(record.inputSourceSpanIds) || record.inputSourceSpanIds.length === 0 || record.inputSourceSpanIds.some((id) => !sourceSpanIds.has(id)) || record.outputDigest !== digestJson(record.after) || !exactProof) {
       diagnostics.push(diagnostic('TRANSFORMATION_CLOSURE_INVALID', 'needs_review', path, 'Transformation sequence, lineage, or output digest cannot be replayed'))
       continue
     }
@@ -230,6 +220,12 @@ export function validateExactTransformationRecords(records, capture, closure) {
     accepted.push(cloneJson(record))
   }
   return { diagnostics, records: accepted }
+}
+
+function legacyOperationProof(operation) {
+  if (operation === 'exact_join') return { kind: 'unique_observation_join', observationArity: 2 }
+  if (['direct_projection', 'structural_tokenization', 'anchor_identity', 'representation_normalization'].includes(operation)) return { kind: 'source_identity', observationArity: 1 }
+  return null
 }
 
 function collectRichTargetIds(content) {
@@ -558,6 +554,10 @@ export function compileCanonicalPaper(request) {
     return blockedResult(dispositionFor(diagnostics), capture, request?.authority || null, diagnostics, [], reviewDecisions)
   }
   const closure = authorityResolution.closure
+  if (closure.authorityRef.manifestDigest !== canonicalAuthorityRef.manifestDigest) {
+    diagnostics.push(diagnostic('AUTHORITY_RETIRED', 'unsupported', '$.authority', 'Only the current canonical authority may compile new papers'))
+    return blockedResult(dispositionFor(diagnostics), capture, closure.authorityRef, diagnostics, [], [])
+  }
   const effectiveReviewDecisions = closure.authorityRef.manifestVersion === '1' ? [] : reviewDecisions
   diagnostics.push(...validateCapture(capture, closure).map((item) => diagnostic(item.code, 'incomplete_source', item.path, item.message)))
   if (!parsed) return blockedResult(dispositionFor(diagnostics), capture, closure.authorityRef, diagnostics, [], reviewDecisions)

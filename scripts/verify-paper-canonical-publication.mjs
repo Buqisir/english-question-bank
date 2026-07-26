@@ -24,19 +24,62 @@ const fixture = makeReadyCanonicalFixture()
 const compilation = compileCanonicalPaper(fixture.request)
 assert.equal(compilation.disposition, 'ready')
 
-const legacyFixture = makeReadyCanonicalFixture()
-legacyFixture.request.authority = {
+const legacyAuthorityRef = {
   manifestId: manifestV1.manifestId,
   manifestVersion: manifestV1.version,
   manifestDigest: digestJson(manifestV1),
 }
-const legacyCompilation = compileCanonicalPaper(legacyFixture.request)
-assert.equal(legacyCompilation.disposition, 'ready')
-const legacySealed = sealCanonicalPublication({
-  compilation: legacyCompilation,
-  sourceAssetVersion: 1,
-  sourceAsset: legacyFixture.sourceAsset,
-})
+function stableBytes(value) {
+  return new TextEncoder().encode(`${stableStringify(value)}\n`)
+}
+
+function descriptor(role, value, relativePath) {
+  const bytes = stableBytes(value)
+  return { role, schemaVersion: value.schemaVersion, relativePath, byteLength: bytes.byteLength, sha256: sha256(bytes), bytes }
+}
+
+function legacyBundleFrom(compilation, sourceAsset) {
+  const sourceCapture = structuredClone(compilation.artifacts.sourceCapture)
+  const plan = structuredClone(compilation.artifacts.canonicalPaper.paperPlan)
+  plan.authorityRef = legacyAuthorityRef
+  delete plan.sourceConformance.reviewDecisionIds
+  delete plan.sourceConformance.reviewDecisionDigest
+  const groups = compilation.artifacts.canonicalPaper.questionGroups.map((group) => {
+    const legacyGroup = structuredClone(group)
+    legacyGroup.contractRef.manifestVersion = legacyAuthorityRef.manifestVersion
+    legacyGroup.contractRef.manifestDigest = legacyAuthorityRef.manifestDigest
+    const { sourceMap: _sourceMap, sourceFingerprint: _sourceFingerprint, semanticDigest: _semanticDigest, ...semantic } = legacyGroup
+    legacyGroup.semanticDigest = digestJson(semantic)
+    return legacyGroup
+  })
+  const report = structuredClone(compilation.artifacts.normalizationReport)
+  report.schemaVersion = 'normalization-report-v1'
+  report.authority = legacyAuthorityRef
+  delete report.reviewDecisions
+  report.semanticDigest = digestJson({ groups: groups.map((group) => group.semanticDigest) })
+  const questionGroups = { schemaVersion: 'canonical-question-groups-v1', groups }
+  const descriptors = [
+    descriptor('source_capture', sourceCapture, 'canonical/source-capture-v1.json'),
+    descriptor('paper_plan', plan, 'canonical/canonical-paper-plan-v1.json'),
+    descriptor('question_groups', questionGroups, 'canonical/canonical-question-groups-v1.json'),
+    descriptor('normalization_report', report, 'canonical/normalization-report-v1.json'),
+  ]
+  const manifestBase = {
+    schemaVersion: 'canonical-paper-publication-v1',
+    paperId: plan.paperId,
+    sourceAssetVersion: 1,
+    sourceAssetDigest: sha256(sourceAsset),
+    authority: legacyAuthorityRef,
+    artifacts: descriptors.map(({ bytes: _bytes, ...value }) => value).sort((left, right) => left.role.localeCompare(right.role)),
+  }
+  return {
+    manifest: { ...manifestBase, publicationDigest: digestJson(manifestBase) },
+    sourceAsset,
+    artifacts: Object.fromEntries(descriptors.map((value) => [value.relativePath, value.bytes])),
+  }
+}
+
+const legacySealed = legacyBundleFrom(compilation, fixture.sourceAsset)
 assert.equal(legacySealed.manifest.schemaVersion, 'canonical-paper-publication-v1')
 assert.equal(Object.hasOwn(legacySealed.manifest, 'sourceAssetDocumentId'), false)
 assert.equal(Object.hasOwn(legacySealed.manifest, 'sourceEvidence'), false)
@@ -46,6 +89,54 @@ const legacyValidated = validateCanonicalPublicationBundle({
   readArtifact: (relativePath) => legacySealed.artifacts[relativePath],
 })
 assert.equal(legacyValidated.projected.nodes.filter((node) => node.kind === 'group').length, 9)
+const unrelatedLegacySource = new TextEncoder().encode('unrelated legacy source bytes')
+const unboundLegacyManifest = structuredClone(legacySealed.manifest)
+unboundLegacyManifest.sourceAssetDigest = sha256(unrelatedLegacySource)
+unboundLegacyManifest.publicationDigest = digestJson(((manifest) => {
+  const { publicationDigest: _publicationDigest, ...base } = manifest
+  return base
+})(unboundLegacyManifest))
+assert.throws(
+  () => validateCanonicalPublicationBundle({
+    manifest: unboundLegacyManifest,
+    sourceAsset: unrelatedLegacySource,
+    readArtifact: (relativePath) => legacySealed.artifacts[relativePath],
+  }),
+  { code: 'CANONICAL_PUBLICATION_SOURCE_UNBOUND' },
+)
+const legacyReadyCompilation = {
+  disposition: 'ready',
+  artifacts: {
+    sourceCapture: legacyValidated.sourceCapture,
+    canonicalPaper: { paperPlan: legacyValidated.plan, questionGroups: legacyValidated.groups },
+    normalizationReport: legacyValidated.normalizationReport,
+  },
+}
+assert.throws(
+  () => sealCanonicalPublication({ compilation: legacyReadyCompilation, sourceAssetVersion: 1, sourceAsset: fixture.sourceAsset }),
+  { code: 'CANONICAL_PUBLICATION_AUTHORITY_RETIRED' },
+)
+const forgedLegacyManifest = structuredClone(legacySealed.manifest)
+const forgedLegacyArtifacts = { ...legacySealed.artifacts }
+const legacyReportPath = 'canonical/normalization-report-v1.json'
+const forgedLegacyReport = JSON.parse(new TextDecoder().decode(forgedLegacyArtifacts[legacyReportPath]))
+forgedLegacyReport.semanticDigest = 'sha256:forged'
+forgedLegacyArtifacts[legacyReportPath] = stableBytes(forgedLegacyReport)
+const forgedLegacyDescriptor = forgedLegacyManifest.artifacts.find((artifact) => artifact.relativePath === legacyReportPath)
+forgedLegacyDescriptor.byteLength = forgedLegacyArtifacts[legacyReportPath].byteLength
+forgedLegacyDescriptor.sha256 = sha256(forgedLegacyArtifacts[legacyReportPath])
+forgedLegacyManifest.publicationDigest = digestJson(((manifest) => {
+  const { publicationDigest: _publicationDigest, ...base } = manifest
+  return base
+})(forgedLegacyManifest))
+assert.throws(
+  () => validateCanonicalPublicationBundle({
+    manifest: forgedLegacyManifest,
+    sourceAsset: legacySealed.sourceAsset,
+    readArtifact: (relativePath) => forgedLegacyArtifacts[relativePath],
+  }),
+  { code: 'CANONICAL_PUBLICATION_LINEAGE_INVALID' },
+)
 
 assert.throws(
   () => sealCanonicalPublication({

@@ -102,12 +102,17 @@ function sourceEvidenceDescriptors(sourceCapture) {
   }).sort((left, right) => left.documentId.localeCompare(right.documentId))
 }
 
-function validateSourceCaptureIntegrity(sourceCapture) {
+function validateSourceCaptureIntegrity(sourceCapture, { requireEmbeddedEvidence = true } = {}) {
   if (!sourceCapture || sourceCapture.digest !== digestJson(withoutKey(withoutKey(sourceCapture, 'captureId'), 'digest'))) throw publicationError('CANONICAL_PUBLICATION_CAPTURE_DIGEST_INVALID', 'Source Capture digest differs from its immutable content')
   const expectedCaptureId = `source-capture:${sourceCapture.digest.slice('sha256:'.length, 28)}`
   if (sourceCapture.captureId !== expectedCaptureId) throw publicationError('CANONICAL_PUBLICATION_CAPTURE_ID_INVALID', 'Source Capture identity does not derive from its immutable content')
-  sourceEvidenceDescriptors(sourceCapture)
-  const documents = new Map(sourceCapture.documents.map((document) => [document.documentId, document]))
+  if (!Array.isArray(sourceCapture.documents) || sourceCapture.documents.length === 0) throw publicationError('CANONICAL_PUBLICATION_CAPTURE_LINEAGE_INVALID', 'Source Capture requires immutable source documents')
+  const documents = new Map()
+  for (const document of sourceCapture.documents) {
+    if (!document || typeof document.documentId !== 'string' || documents.has(document.documentId) || typeof document.sha256 !== 'string' || !Number.isInteger(document.byteLength) || document.byteLength < 0) throw publicationError('CANONICAL_PUBLICATION_CAPTURE_LINEAGE_INVALID', 'Source Capture document identity or digest is invalid')
+    documents.set(document.documentId, document)
+  }
+  if (requireEmbeddedEvidence) sourceEvidenceDescriptors(sourceCapture)
   const spans = new Map()
   for (const span of sourceCapture.sourceSpans || []) {
     const document = documents.get(span.documentId)
@@ -121,8 +126,16 @@ function validateSourceCaptureIntegrity(sourceCapture) {
   return { documents, spans }
 }
 
+function validateSourceAssetBinding(sourceCapture, sourceAsset, options) {
+  const { documents } = validateSourceCaptureIntegrity(sourceCapture, options)
+  const matchingDocuments = [...documents.values()].filter((document) => document.sha256 === sha256(sourceAsset))
+  if (matchingDocuments.length !== 1) throw publicationError('CANONICAL_PUBLICATION_SOURCE_UNBOUND', 'Publication source asset must bind exactly one captured immutable document')
+  return matchingDocuments[0]
+}
+
 function validatePublicationLineage({ sourceCapture, plan, groups, normalizationReport, authorityClosure }) {
-  const { spans } = validateSourceCaptureIntegrity(sourceCapture)
+  const legacyAuthority = authorityClosure.authorityRef.manifestVersion === '1'
+  const { spans } = validateSourceCaptureIntegrity(sourceCapture, { requireEmbeddedEvidence: !legacyAuthority })
   const records = normalizationReport.transformationRecords || []
   const recordIds = new Set(records.map((record) => record.recordId))
   const acceptedLedger = validateExactTransformationRecords(records, sourceCapture, authorityClosure)
@@ -132,8 +145,10 @@ function validatePublicationLineage({ sourceCapture, plan, groups, normalization
   const expectedRecordIds = plan.sourceConformance?.transformationRecordIds || []
   if (!Array.isArray(expectedRecordIds) || expectedRecordIds.length !== records.length || expectedRecordIds.some((recordId) => !recordIds.has(recordId))) throw publicationError('CANONICAL_PUBLICATION_LINEAGE_INVALID', 'Canonical Plan does not close its transformation ledger')
   const reviewDecisionDigest = digestJson(normalizationReport.reviewDecisions || [])
-  if (plan.sourceConformance?.reviewDecisionDigest !== reviewDecisionDigest || !Array.isArray(plan.sourceConformance?.reviewDecisionIds) || plan.sourceConformance.reviewDecisionIds.length !== (normalizationReport.reviewDecisions || []).length || plan.sourceConformance.reviewDecisionIds.some((decisionId, index) => decisionId !== normalizationReport.reviewDecisions[index].decisionId)) throw publicationError('CANONICAL_PUBLICATION_LINEAGE_INVALID', 'Canonical Plan does not bind its explicit review decisions')
-  for (const decision of normalizationReport.reviewDecisions || []) if (!Array.isArray(decision.sourceSpanRefs) || decision.sourceSpanRefs.some((sourceSpanId) => !spans.has(sourceSpanId))) throw publicationError('CANONICAL_PUBLICATION_LINEAGE_INVALID', 'Review decision does not resolve to captured evidence')
+  if (!legacyAuthority) {
+    if (plan.sourceConformance?.reviewDecisionDigest !== reviewDecisionDigest || !Array.isArray(plan.sourceConformance?.reviewDecisionIds) || plan.sourceConformance.reviewDecisionIds.length !== (normalizationReport.reviewDecisions || []).length || plan.sourceConformance.reviewDecisionIds.some((decisionId, index) => decisionId !== normalizationReport.reviewDecisions[index].decisionId)) throw publicationError('CANONICAL_PUBLICATION_LINEAGE_INVALID', 'Canonical Plan does not bind its explicit review decisions')
+    for (const decision of normalizationReport.reviewDecisions || []) if (!Array.isArray(decision.sourceSpanRefs) || decision.sourceSpanRefs.some((sourceSpanId) => !spans.has(sourceSpanId))) throw publicationError('CANONICAL_PUBLICATION_LINEAGE_INVALID', 'Review decision does not resolve to captured evidence')
+  }
   for (const group of groups) {
     if (group.sourceMap?.captureId !== sourceCapture.captureId || !Array.isArray(group.sourceMap?.entries) || group.sourceMap.entries.some((entry) => !Array.isArray(entry.sourceSpanRefs) || entry.sourceSpanRefs.length === 0 || entry.sourceSpanRefs.some((sourceSpanId) => !spans.has(sourceSpanId)) || !Array.isArray(entry.transformationRecordIds) || entry.transformationRecordIds.some((recordId) => !recordIds.has(recordId)))) {
       throw publicationError('CANONICAL_PUBLICATION_LINEAGE_INVALID', 'Canonical Group source map does not close against Source Capture')
@@ -145,7 +160,9 @@ function validatePublicationLineage({ sourceCapture, plan, groups, normalization
   for (const assignment of plan.numberingAssignments || []) if (!spans.has(assignment.sourceNumberSpan)) throw publicationError('CANONICAL_PUBLICATION_LINEAGE_INVALID', 'Canonical Plan numbering assignment lacks a captured source span')
   const expectedDirectSourceMap = groups.flatMap((group) => group.sourceMap.entries)
   const expectedSourceFingerprint = digestJson({ captureDigest: sourceCapture.digest, groupFingerprints: groups.map((group) => group.sourceFingerprint) })
-  const expectedSemanticDigest = digestJson({ groups: groups.map((group) => group.semanticDigest), reviewDecisionDigest })
+  const expectedSemanticDigest = legacyAuthority
+    ? digestJson({ groups: groups.map((group) => group.semanticDigest) })
+    : digestJson({ groups: groups.map((group) => group.semanticDigest), reviewDecisionDigest })
   if (normalizationReport.sourceFingerprint !== expectedSourceFingerprint || stableStringify(normalizationReport.directSourceMap) !== stableStringify(expectedDirectSourceMap) || normalizationReport.semanticDigest !== expectedSemanticDigest) throw publicationError('CANONICAL_PUBLICATION_LINEAGE_INVALID', 'Normalization Report does not close its direct source lineage')
 }
 
@@ -156,14 +173,14 @@ export function sealCanonicalPublication({ compilation, sourceAssetVersion, sour
   const authority = resolveCanonicalAuthority(canonicalPaper?.paperPlan?.authorityRef)
   if (!authority.ok) throw publicationError('CANONICAL_PUBLICATION_AUTHORITY_INVALID', 'Compilation does not bind a known authority')
   const closure = authority.closure
-  const legacyAuthority = closure.authorityRef.manifestVersion === '1'
+  if (closure.authorityRef.manifestDigest !== canonicalAuthorityRef.manifestDigest) throw publicationError('CANONICAL_PUBLICATION_AUTHORITY_RETIRED', 'Only the current canonical authority may create a new publication')
   const artifactPaths = artifactPathsFor(closure.authorityRef)
   assertPaperId(canonicalPaper?.paperPlan?.paperId)
-  if (!legacyAuthority) validateSourceCaptureIntegrity(sourceCapture)
-  const sourceEvidence = legacyAuthority ? [] : sourceEvidenceDescriptors(sourceCapture)
+  validateSourceCaptureIntegrity(sourceCapture)
+  const sourceEvidence = sourceEvidenceDescriptors(sourceCapture)
   const sourceAssetDigest = sha256(sourceAsset)
-  const matchingDocuments = legacyAuthority ? [] : sourceCapture.documents.filter((document) => document.sha256 === sourceAssetDigest)
-  if (!legacyAuthority && matchingDocuments.length !== 1) throw publicationError('CANONICAL_PUBLICATION_SOURCE_UNBOUND', 'The publication source asset must be exactly one captured immutable document')
+  const matchingDocuments = sourceCapture.documents.filter((document) => document.sha256 === sourceAssetDigest)
+  if (matchingDocuments.length !== 1) throw publicationError('CANONICAL_PUBLICATION_SOURCE_UNBOUND', 'The publication source asset must be exactly one captured immutable document')
   const questionGroups = {
     schemaVersion: 'canonical-question-groups-v1',
     groups: [...canonicalPaper.questionGroups],
@@ -179,12 +196,8 @@ export function sealCanonicalPublication({ compilation, sourceAssetVersion, sour
     paperId: canonicalPaper.paperPlan.paperId,
     sourceAssetVersion,
     sourceAssetDigest,
-    ...(legacyAuthority
-      ? {}
-      : {
-          sourceAssetDocumentId: matchingDocuments[0].documentId,
-          sourceEvidence: sourceEvidence.map(({ bytes: _bytes, ...descriptor }) => descriptor),
-        }),
+    sourceAssetDocumentId: matchingDocuments[0].documentId,
+    sourceEvidence: sourceEvidence.map(({ bytes: _bytes, ...descriptor }) => descriptor),
     authority: canonicalPaper.paperPlan.authorityRef,
     artifacts: descriptors
       .map(({ bytes: _bytes, ...descriptor }) => descriptor)
@@ -223,6 +236,9 @@ export function validateCanonicalPublicationBundle({ manifest, sourceAsset, read
   const reportIssues = validateJsonSchema(artifacts.normalization_report, closure.schemas[`normalization-report-v${closure.authorityRef.manifestVersion}`], '$.report')
   if (sourceCaptureIssues.length || planIssues.length || reportIssues.length || artifacts.question_groups?.schemaVersion !== 'canonical-question-groups-v1' || !Array.isArray(artifacts.question_groups?.groups)) throw publicationError('CANONICAL_PUBLICATION_ARTIFACT_SCHEMA_INVALID', 'One or more sealed artifacts violate their exact schemas')
   if (artifacts.normalization_report.disposition !== 'ready' || artifacts.normalization_report.captureDigest !== artifacts.source_capture.digest || artifacts.paper_plan.completeness.status !== 'complete') throw publicationError('CANONICAL_PUBLICATION_SEMANTIC_CLOSURE_INVALID', 'Publication does not contain a complete ready source closure')
+  const legacyAuthority = closure.authorityRef.manifestVersion === '1'
+  validateSourceAssetBinding(artifacts.source_capture, sourceAsset, { requireEmbeddedEvidence: !legacyAuthority })
+  validatePublicationLineage({ sourceCapture: artifacts.source_capture, plan: artifacts.paper_plan, groups: artifacts.question_groups.groups, normalizationReport: artifacts.normalization_report, authorityClosure: closure })
   if (closure.authorityRef.manifestVersion === '1') {
     let projected
     try {
@@ -249,7 +265,6 @@ export function validateCanonicalPublicationBundle({ manifest, sourceAsset, read
   }
   const sourceAssetDocument = artifacts.source_capture.documents.find((document) => document.documentId === manifest.sourceAssetDocumentId)
   if (!sourceAssetDocument || sourceAssetDocument.sha256 !== manifest.sourceAssetDigest || sourceAssetDocument.sha256 !== sha256(sourceAsset)) throw publicationError('CANONICAL_PUBLICATION_SOURCE_UNBOUND', 'Publication source asset does not bind to captured source evidence')
-  validatePublicationLineage({ sourceCapture: artifacts.source_capture, plan: artifacts.paper_plan, groups: artifacts.question_groups.groups, normalizationReport: artifacts.normalization_report, authorityClosure: closure })
   let projected
   try {
     projected = projectCanonicalPaper({ plan: artifacts.paper_plan, groups: artifacts.question_groups.groups, sourceCapture: artifacts.source_capture, authorityClosure: closure })
