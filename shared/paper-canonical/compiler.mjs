@@ -25,6 +25,189 @@ function stableId(prefix, value) {
   return `${prefix}:${digestJson(value).slice('sha256:'.length, 28)}`
 }
 
+function jsonObjectPropertyRange(bytes, propertyName) {
+  const marker = new TextEncoder().encode(`"${propertyName}":`)
+  let markerStart = -1
+  for (let offset = 0; offset <= bytes.byteLength - marker.byteLength; offset++) {
+    if (marker.every((value, index) => bytes[offset + index] === value)) {
+      markerStart = offset
+      break
+    }
+  }
+  if (markerStart < 0) return null
+  let start = markerStart + marker.byteLength
+  while (start < bytes.byteLength && /\s/.test(String.fromCharCode(bytes[start]))) start++
+  if (bytes[start] !== 0x7b) return null
+  let depth = 0
+  let inString = false
+  let escaped = false
+  for (let offset = start; offset < bytes.byteLength; offset++) {
+    const value = bytes[offset]
+    if (inString) {
+      if (escaped) escaped = false
+      else if (value === 0x5c) escaped = true
+      else if (value === 0x22) inString = false
+      continue
+    }
+    if (value === 0x22) inString = true
+    else if (value === 0x7b) depth++
+    else if (value === 0x7d && --depth === 0) return { start, end: offset + 1 }
+  }
+  return null
+}
+
+function parseJsonDocument(document, diagnostics) {
+  try {
+    const value = JSON.parse(new TextDecoder().decode(document.bytes))
+    return isRecordValue(value) ? value : null
+  } catch (error) {
+    diagnostics.push(diagnostic('SOURCE_DOCUMENT_UNREADABLE', 'incomplete_source', '$.evidence.documents', `JSON evidence is unreadable: ${error.message}`))
+    return null
+  }
+}
+
+function referenceContent(group) {
+  const blankIdByNumber = new Map((group.blankIds || []).map((blankId) => [Number(blankId.match(/(\d+)$/)?.[1]), blankId]))
+  return {
+    blocks: (group.passage?.paragraphs || []).map((paragraph) => {
+      const inlines = []
+      let cursor = 0
+      let textIndex = 0
+      for (const marker of String(paragraph.text || '').matchAll(/__(\d+)__/g)) {
+        if (marker.index > cursor) {
+          inlines.push({ kind: 'text', nodeId: `text:${paragraph.paragraphId}:${textIndex++}`, text: paragraph.text.slice(cursor, marker.index) })
+        }
+        const blankId = blankIdByNumber.get(Number(marker[1]))
+        if (blankId) inlines.push({ kind: 'blank_ref', nodeId: `blank-ref:${paragraph.paragraphId}:${marker[1]}`, blankId })
+        else inlines.push({ kind: 'text', nodeId: `unresolved-marker:${paragraph.paragraphId}:${marker[1]}`, text: marker[0] })
+        cursor = marker.index + marker[0].length
+      }
+      if (cursor < String(paragraph.text || '').length) {
+        inlines.push({ kind: 'text', nodeId: `text:${paragraph.paragraphId}:${textIndex}`, text: paragraph.text.slice(cursor) })
+      }
+      return { kind: 'paragraph', nodeId: paragraph.paragraphId, inlines }
+    }),
+  }
+}
+
+function referenceOptions(paper, group, diagnostics, familyId) {
+  if (familyId === 'grammar-fill') return { ownership: 'none' }
+  const sets = []
+  for (const [index, questionId] of group.questionIds.entries()) {
+    const question = paper.content?.questions?.[questionId]
+    if (!question || question.blankId !== group.blankIds[index] || question.options?.map((option) => option.label).join('') !== 'ABCD' || question.options.some((option) => typeof option.text !== 'string')) {
+      diagnostics.push(diagnostic('REFERENCE_CLOZE_OPTIONS_INVALID', 'needs_review', '$.evidence.paperAsset', `Cloze Question ${questionId} does not close one ordered A-D set`))
+      continue
+    }
+    sets.push({
+      questionId,
+      options: question.options.map((option) => ({
+        optionId: `option:${questionId}:${option.label}`,
+        label: option.label,
+        content: [{ kind: 'text', nodeId: `text:${questionId}:${option.label}`, text: option.text }],
+      })),
+    })
+  }
+  return { ownership: 'per_question', sets }
+}
+
+function adaptReferenceFamilies(parsed, documents, diagnostics) {
+  const structured = documents
+    .filter((document) => document.roles.some((role) => ['question_source', 'official_answer_source'].includes(role)))
+    .map((document) => ({ document, value: parseJsonDocument(document, diagnostics) }))
+  const paperEntry = structured.find((entry) => entry.value?.schemaVersion === 'paper-asset-v1')
+  const answerEntry = structured.find((entry) => entry.value?.schemaVersion === 'answer-key-v1')
+  if (!paperEntry && !answerEntry) return parsed
+  if (!paperEntry || !answerEntry) {
+    diagnostics.push(diagnostic('REFERENCE_EVIDENCE_INCOMPLETE', 'incomplete_source', '$.evidence.documents', 'Cloze and Grammar Fill reference publication requires paper asset and official answer evidence together'))
+    return parsed
+  }
+  const source = parsed.value
+  const paper = paperEntry.value
+  const answerKey = answerEntry.value
+  if (paper.paper?.paperId !== source.paperId || answerKey.paperId !== source.paperId || answerKey.sourceAssetVersion !== source.sourceAssetVersion) {
+    diagnostics.push(diagnostic('REFERENCE_SOURCE_IDENTITY_MISMATCH', 'needs_review', '$.evidence.documents', 'Reference paper identity and source version must agree across immutable evidence'))
+    return parsed
+  }
+  const familySpecs = [
+    { familyId: 'cloze', slotId: 'language.cloze', legacyType: 'cloze' },
+    { familyId: 'grammar-fill', slotId: 'language.grammar-fill', legacyType: 'grammarFill' },
+  ]
+  let sequence = Math.max(0, ...(source.transformations || []).map((record) => record.sequence || 0))
+  for (const spec of familySpecs) {
+    const group = Object.values(paper.content?.groups || {}).find((candidate) => candidate?.groupType === spec.legacyType)
+    const groupRange = group ? jsonObjectPropertyRange(paperEntry.document.bytes, group.groupId) : null
+    if (!group || !groupRange || !Array.isArray(group.questionIds) || !Array.isArray(group.blankIds) || !Array.isArray(group.passage?.paragraphs) || group.passage.paragraphs.some((paragraph) => typeof paragraph?.paragraphId !== 'string' || typeof paragraph.text !== 'string')) {
+      diagnostics.push(diagnostic('REFERENCE_GROUP_INCOMPLETE', 'incomplete_source', '$.evidence.paperAsset', `${spec.familyId} reference Group is missing or malformed`))
+      continue
+    }
+    const observationId = `observation:reference:${spec.familyId}`
+    const sourceSpanId = `source-span:${observationId}`
+    source.observations.push({
+      observationId,
+      kind: 'reference_question_group',
+      documentInputKey: paperEntry.document.inputKey,
+      value: group,
+      span: groupRange,
+    })
+    source.groups.push({
+      groupId: group.groupId,
+      slotId: spec.slotId,
+      family: spec.familyId,
+      questionIds: [...group.questionIds],
+      blankIds: [...group.blankIds],
+      sourceSpanId,
+      content: referenceContent(group),
+      media: [],
+      variant: {
+        family: spec.familyId,
+        choiceOwnership: referenceOptions(paper, group, diagnostics, spec.familyId),
+      },
+    })
+    const observation = source.observations.at(-1)
+    const record = {
+      recordId: `record:reference:${spec.familyId}`,
+      sequence: ++sequence,
+      ruleId: 'direct-projection',
+      ruleVersion: '2',
+      target: { identity: group.groupId, path: 'content.blocks' },
+      operation: 'structural_tokenization',
+      inputSourceSpanIds: [sourceSpanId],
+      before: group,
+      after: group,
+      certainty: 'exact',
+      preconditions: { sourceObservationIds: [observationId], sourceValueDigests: [digestJson(group)] },
+      outputDigest: digestJson(group),
+    }
+    source.transformations = [...(source.transformations || []), record]
+    for (const [index, questionId] of group.questionIds.entries()) {
+      const question = paper.content?.questions?.[questionId]
+      const answer = answerKey.answers?.[questionId]
+      const answerRange = jsonObjectPropertyRange(answerEntry.document.bytes, questionId)
+      if (!question || question.blankId !== group.blankIds[index] || !answer || !answerRange) {
+        diagnostics.push(diagnostic('REFERENCE_QUESTION_EVIDENCE_INCOMPLETE', 'incomplete_source', '$.evidence.documents', `${spec.familyId} Question ${questionId} lacks one exact Blank or official answer`))
+        continue
+      }
+      const answerObservationId = `observation:reference-answer:${questionId}`
+      source.observations.push({
+        observationId: answerObservationId,
+        kind: 'official_answer',
+        documentInputKey: answerEntry.document.inputKey,
+        value: answer,
+        span: answerRange,
+      })
+      source.assertions.push({
+        assertionId: `answer:${questionId}`,
+        questionId,
+        answer: answer.answer,
+        authority: 'official',
+        sourceSpanId: `source-span:${answerObservationId}`,
+      })
+    }
+  }
+  return parsed
+}
+
 function captureRequestEvidence(request) {
   const diagnostics = []
   const documents = []
@@ -70,7 +253,7 @@ function parseFixtureEvidence(documents, diagnostics) {
   try {
     const parsed = JSON.parse(new TextDecoder().decode(source.bytes))
     if (!isRecordValue(parsed)) throw new TypeError('Fixture root is not an object')
-    return { source, value: parsed }
+    return adaptReferenceFamilies({ source, value: parsed }, documents, diagnostics)
   } catch (error) {
     diagnostics.push(diagnostic('SOURCE_DOCUMENT_UNREADABLE', 'incomplete_source', '$.evidence.documents', `Fixture evidence is unreadable: ${error.message}`))
     return null

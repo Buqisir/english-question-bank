@@ -21,6 +21,8 @@ const fixture = makeClozeGrammarCanonicalReferenceFixture()
 const compilation = compileCanonicalPaper(fixture.request)
 
 assert.equal(compilation.disposition, 'ready')
+assert.equal(fixture.source.groups.some((group) => ['cloze', 'grammar-fill'].includes(group.family)), false)
+assert.equal(compilation.artifacts.canonicalPaper.paperPlan.paperId, 'paper-2026-i')
 assert.equal(compilation.artifacts.sourceCapture.documents.find((document) => document.inputKey === 'paper_asset').sha256, fixture.hashes.paperAsset)
 assert.equal(compilation.artifacts.sourceCapture.documents.find((document) => document.inputKey === 'official_answers').sha256, fixture.hashes.answerKey)
 for (const family of ['cloze', 'grammar-fill']) {
@@ -41,27 +43,47 @@ assert.equal(grammar.questionRefs.length, 10)
 assert.deepEqual(grammar.variant.choiceOwnership, { ownership: 'none' })
 assert.equal(compilation.artifacts.sourceCapture.assertions.find((assertion) => assertion.questionId === 'q-2026-i-041').answer, 'C')
 assert.equal(compilation.artifacts.sourceCapture.assertions.find((assertion) => assertion.questionId === 'q-2026-i-056').answer, 'to be held')
+assert.deepEqual(
+  compilation.artifacts.normalizationReport.transformationRecords.map((record) => [record.target.identity, record.operation]),
+  [
+    ['group-2026-i-cloze', 'structural_tokenization'],
+    ['group-2026-i-grammar-fill', 'structural_tokenization'],
+  ],
+)
+const spanById = new Map(compilation.artifacts.sourceCapture.sourceSpans.map((span) => [span.sourceSpanId, span]))
+const clozeGroupSpan = spanById.get(cloze.sourceMap.entries.find((entry) => entry.target.kind === 'group').sourceSpanRefs[0])
+assert.equal(clozeGroupSpan.coordinate.start > 0 && clozeGroupSpan.coordinate.end < fixture.sourceAsset.byteLength, true)
+assert.equal(JSON.parse(new TextDecoder().decode(fixture.sourceAsset.slice(clozeGroupSpan.coordinate.start, clozeGroupSpan.coordinate.end))).groupId, 'group-2026-i-cloze')
+const answerAssertion = compilation.artifacts.sourceCapture.assertions.find((assertion) => assertion.questionId === 'q-2026-i-041')
+const answerSpan = spanById.get(answerAssertion.sourceSpanId)
+const answerBytes = fixture.request.evidence.documents.find((document) => document.inputKey === 'official_answers').bytes
+assert.equal(JSON.parse(new TextDecoder().decode(answerBytes.slice(answerSpan.coordinate.start, answerSpan.coordinate.end))).questionId, 'q-2026-i-041')
 
 const supplemented = compileCanonicalPaper({ ...fixture.request, supplements: { analysis: { answer: 'forged' }, teacherNotes: ['ignored'] } })
 assert.equal(supplemented.disposition, 'ready')
 assert.deepEqual(supplemented.artifacts.canonicalPaper, compilation.artifacts.canonicalPaper)
 assert.deepEqual(supplemented.artifacts.normalizationReport, compilation.artifacts.normalizationReport)
 
-function requestForSource(source) {
-  const value = structuredClone(source)
+function requestWithEvidence(mutator) {
+  const request = structuredClone(fixture.request)
+  const evidence = Object.fromEntries(request.evidence.documents.map((document) => [
+    document.inputKey,
+    JSON.parse(new TextDecoder().decode(document.bytes)),
+  ]))
+  mutator(evidence)
+  const value = evidence.canonical_mapping
   for (let pass = 0; pass < 3; pass++) {
     const byteLength = new TextEncoder().encode(JSON.stringify(value)).byteLength
     for (const observation of value.observations) if (observation.documentInputKey === 'canonical_mapping') observation.span.end = byteLength
   }
-  const request = structuredClone(fixture.request)
-  request.evidence.documents[0].bytes = new TextEncoder().encode(JSON.stringify(value))
+  for (const document of request.evidence.documents) {
+    document.bytes = new TextEncoder().encode(JSON.stringify(evidence[document.inputKey]))
+  }
   return request
 }
 
 function assertBlocked(mutator, expectedDisposition, expectedCode) {
-  const source = structuredClone(fixture.source)
-  mutator(source)
-  const blocked = compileCanonicalPaper(requestForSource(source))
+  const blocked = compileCanonicalPaper(requestWithEvidence(mutator))
   assert.equal(blocked.disposition, expectedDisposition)
   assert.equal(Object.hasOwn(blocked.artifacts, 'canonicalPaper'), false)
   assert.equal(Object.hasOwn(blocked.artifacts.normalizationReport, 'semanticDigest'), false)
@@ -69,26 +91,27 @@ function assertBlocked(mutator, expectedDisposition, expectedCode) {
   return blocked
 }
 
-const clozeSource = (source) => source.groups.find((group) => group.family === 'cloze')
-const grammarSource = (source) => source.groups.find((group) => group.family === 'grammar-fill')
-assertBlocked((source) => {
-  const inline = clozeSource(source).content.blocks[0].inlines.find((candidate) => candidate.kind === 'blank_ref')
-  inline.kind = 'text'
-  inline.text = '__41__'
-  delete inline.blankId
+const clozeEvidence = (evidence) => evidence.paper_asset.content.groups['group-2026-i-cloze']
+const grammarEvidence = (evidence) => evidence.paper_asset.content.groups['group-2026-i-grammar-fill']
+assertBlocked((evidence) => {
+  clozeEvidence(evidence).passage.paragraphs[0].text = clozeEvidence(evidence).passage.paragraphs[0].text.replace('__41__', '__999__')
 }, 'needs_review', 'REFERENCE_MARKER_AMBIGUOUS')
-assertBlocked((source) => clozeSource(source).blankIds.push(clozeSource(source).blankIds[0]), 'needs_review', 'GROUP_MEMBER_DUPLICATE')
-assertBlocked((source) => {
-  const group = grammarSource(source)
-  const blank = group.content.blocks[0].inlines.find((inline) => inline.kind === 'blank_ref')
-  group.content.blocks[0].inlines = group.content.blocks[0].inlines.filter((inline) => inline !== blank)
+assertBlocked((evidence) => clozeEvidence(evidence).blankIds.push(clozeEvidence(evidence).blankIds[0]), 'needs_review', 'GROUP_MEMBER_DUPLICATE')
+assertBlocked((evidence) => {
+  grammarEvidence(evidence).passage.paragraphs[0].text = grammarEvidence(evidence).passage.paragraphs[0].text.replace('__56__', '')
 }, 'needs_review', 'REFERENCE_BLANK_OCCURRENCE')
-assertBlocked((source) => {
-  const assertion = source.assertions.find((candidate) => candidate.questionId === 'q-2026-i-041')
-  source.assertions.push({ ...assertion, assertionId: 'answer:q-2026-i-041:conflict', answer: 'A' })
+assertBlocked((evidence) => {
+  const sourceSpanId = `source-span:${evidence.canonical_mapping.observations[0].observationId}`
+  evidence.canonical_mapping.assertions.push({
+    assertionId: 'answer:q-2026-i-041:conflict',
+    questionId: 'q-2026-i-041',
+    answer: 'A',
+    authority: 'official',
+    sourceSpanId,
+  })
 }, 'answer_conflict', 'OFFICIAL_ANSWER_CONFLICT')
 
-const blockedForMutation = assertBlocked((source) => grammarSource(source).blankIds.pop(), 'needs_review', 'REFERENCE_BLANK_CARDINALITY')
+const blockedForMutation = assertBlocked((evidence) => grammarEvidence(evidence).blankIds.pop(), 'incomplete_source', 'REFERENCE_QUESTION_EVIDENCE_INCOMPLETE')
 const noMutationRoot = path.join(mkdtempSync(path.join(tmpdir(), 'eqb-canonical-blocked-')), 'publication')
 const noMutationDb = new DatabaseSync(':memory:')
 try {
