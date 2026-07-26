@@ -1,7 +1,7 @@
 # EQB 试卷 Canonical 大一统 — Wayfinder Map
 
 Status: charted
-Next on PASS: `docs/cuts/paper-canonical-unification/wayfinder/tickets/14-new-import-rollout-and-gates.md`
+Next on PASS: `docs/cuts/paper-canonical-unification/wayfinder/tickets/15-latest-migration-and-legacy-retirement.md`
 Terminal: no
 
 ## Notes
@@ -52,6 +52,7 @@ Terminal: no
 - [定义读后续写 canonical variant 与 starters 合同](tickets/11-continuation-writing-canonical-variant.md) — 以 two-starter / plot-led 两个 exact family contract、source-proven 零 starter 与单一 answer-region occurrence 锁定三面 parity 并 fail closed 三条目污染。
 - [定义听力 raw/inactive 插槽与未来 activation seam](tickets/12-listening-raw-inactive-slot.md) — 以两项 Inactive Source Slot、field-complete source closure 与 closed inventory 保持整卷 complete/零听力 Group，并把 activation 留给新 Profile/active family contract。
 - [定义原子 sidecar 发布、consumer selector 与回滚合同](tickets/13-atomic-sidecars-and-consumer-selector.md) — 以整卷 integrity-closed Publication、共享 loader 与 family-atomic selection 统一版本/回滚，禁止 Group/字段/渲染中途的半 canonical fallback。
+- [制定新导入 hard gate 与逐题型竖切路线](tickets/14-new-import-rollout-and-gates.md) — 以 foundation-first family checkpoints、统一跨 renderer proof 与整卷 canonical-required admission 让各 slice 可独立发布，并在迁移前阻断新的 non-canonical imports。
 
 ## Fog
 
