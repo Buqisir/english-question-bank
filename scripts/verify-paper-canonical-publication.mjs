@@ -5,6 +5,7 @@ import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync
 import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { DatabaseSync } from 'node:sqlite'
+import manifestV1 from '../standards/paper-canonical/manifest-v1.json' with { type: 'json' }
 
 import {
   createFileSystemCanonicalPublicationStore,
@@ -22,6 +23,29 @@ import { makeReadyCanonicalFixture } from '../test-fixtures/paper-canonical/foun
 const fixture = makeReadyCanonicalFixture()
 const compilation = compileCanonicalPaper(fixture.request)
 assert.equal(compilation.disposition, 'ready')
+
+const legacyFixture = makeReadyCanonicalFixture()
+legacyFixture.request.authority = {
+  manifestId: manifestV1.manifestId,
+  manifestVersion: manifestV1.version,
+  manifestDigest: digestJson(manifestV1),
+}
+const legacyCompilation = compileCanonicalPaper(legacyFixture.request)
+assert.equal(legacyCompilation.disposition, 'ready')
+const legacySealed = sealCanonicalPublication({
+  compilation: legacyCompilation,
+  sourceAssetVersion: 1,
+  sourceAsset: legacyFixture.sourceAsset,
+})
+assert.equal(legacySealed.manifest.schemaVersion, 'canonical-paper-publication-v1')
+assert.equal(Object.hasOwn(legacySealed.manifest, 'sourceAssetDocumentId'), false)
+assert.equal(Object.hasOwn(legacySealed.manifest, 'sourceEvidence'), false)
+const legacyValidated = validateCanonicalPublicationBundle({
+  manifest: legacySealed.manifest,
+  sourceAsset: legacySealed.sourceAsset,
+  readArtifact: (relativePath) => legacySealed.artifacts[relativePath],
+})
+assert.equal(legacyValidated.projected.nodes.filter((node) => node.kind === 'group').length, 9)
 
 assert.throws(
   () => sealCanonicalPublication({

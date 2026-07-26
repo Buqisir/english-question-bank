@@ -179,6 +179,7 @@ function validateAnswerCoverage(source, capture, diagnostics) {
 
 export function validateExactTransformationRecords(records, capture, closure) {
   const diagnostics = []
+  const legacyAuthority = closure.authorityRef.manifestVersion === '1'
   const registeredRules = new Map(closure.artifacts.normalization.rules.map((rule) => [`${rule.ruleId}@${rule.version}`, rule]))
   const sourceSpanIds = new Set(capture.sourceSpans.map((span) => span.sourceSpanId))
   const observationsById = new Map(capture.observations.map((observation) => [observation.observationId, observation]))
@@ -193,8 +194,18 @@ export function validateExactTransformationRecords(records, capture, closure) {
     }
     const rule = registeredRules.get(`${record.ruleId}@${record.ruleVersion}`)
     const proof = rule?.operationProofs?.[record.operation]
-    if (record.certainty !== 'exact' || !rule || !rule.allowedOperations.includes(record.operation) || !proof) {
+    if (record.certainty !== 'exact' || !rule || !rule.allowedOperations.includes(record.operation) || (!legacyAuthority && !proof)) {
       diagnostics.push(diagnostic('TRANSFORMATION_NOT_EXACT', 'needs_review', path, 'Only registered exact transformations can produce canonical semantics'))
+      continue
+    }
+    if (legacyAuthority) {
+      if (recordIds.has(record.recordId) || !Number.isInteger(record.sequence) || record.sequence <= previousSequence || !Array.isArray(record.inputSourceSpanIds) || record.inputSourceSpanIds.length === 0 || record.inputSourceSpanIds.some((id) => !sourceSpanIds.has(id)) || record.outputDigest !== digestJson(record.after)) {
+        diagnostics.push(diagnostic('TRANSFORMATION_CLOSURE_INVALID', 'needs_review', path, 'Transformation sequence, lineage, or output digest cannot be replayed'))
+        continue
+      }
+      previousSequence = record.sequence
+      recordIds.add(record.recordId)
+      accepted.push(cloneJson(record))
       continue
     }
     const observationIds = record.preconditions?.sourceObservationIds
@@ -210,7 +221,7 @@ export function validateExactTransformationRecords(records, capture, closure) {
     const joinValue = expectedPreconditions && { sourceObservationIds: expectedPreconditions.sourceObservationIds, sourceValueDigests: expectedPreconditions.sourceValueDigests }
     const uniqueJoinProof = proof.kind === 'unique_observation_join' && observations.length === 2 && new Set(observationIds).size === 2 && stableStringify(record.before) === stableStringify(joinValue) && stableStringify(record.after) === stableStringify(joinValue) && isRecordValue(record.target) && exactKeys(record.target, ['identity', 'path']) && record.target.path === 'source_join' && record.target.identity === stableId('source-join', joinValue)
     const exactProof = expectedPreconditions && stableStringify(record.preconditions) === stableStringify(expectedPreconditions) && stableStringify(record.inputSourceSpanIds) === stableStringify(expectedSpanIds) && (sourceIdentityProof || uniqueJoinProof)
-    if (recordIds.has(record.recordId) || !Number.isInteger(record.sequence) || record.sequence <= previousSequence || !Array.isArray(record.inputSourceSpanIds) || record.inputSourceSpanIds.length === 0 || record.inputSourceSpanIds.some((id) => !sourceSpanIds.has(id)) || record.outputDigest !== digestJson(record.after) || !exactProof) {
+    if (recordIds.has(record.recordId) || !Number.isInteger(record.sequence) || record.sequence <= previousSequence || !Array.isArray(record.inputSourceSpanIds) || record.inputSourceSpanIds.length === 0 || record.inputSourceSpanIds.some((id) => !sourceSpanIds.has(id)) || record.outputDigest !== digestJson(record.after) || (!legacyAuthority && !exactProof)) {
       diagnostics.push(diagnostic('TRANSFORMATION_CLOSURE_INVALID', 'needs_review', path, 'Transformation sequence, lineage, or output digest cannot be replayed'))
       continue
     }
@@ -437,22 +448,30 @@ function buildPlan(source, capture, closure, groups, acceptedRecords, reviewDeci
     }
   }
   if (diagnostics.length > 0) return { diagnostics, plan: null }
+  const legacyAuthority = closure.authorityRef.manifestVersion === '1'
   const profileDigest = digestJson(profile)
-  const reviewDecisionDigest = digestJson(reviewDecisions)
+  const reviewDecisionDigest = legacyAuthority ? null : digestJson(reviewDecisions)
   const plan = {
     schemaVersion: 'canonical-paper-plan-v1',
-    planId: stableId('plan', { paperId: source.paperId, captureDigest: capture.digest, profileDigest, reviewDecisionDigest }),
+    planId: stableId('plan', legacyAuthority
+      ? { paperId: source.paperId, captureDigest: capture.digest, profileDigest }
+      : { paperId: source.paperId, captureDigest: capture.digest, profileDigest, reviewDecisionDigest }),
     paperId: source.paperId,
     authorityRef: closure.authorityRef,
     profileRef: { profileId: profile.profileId, profileVersion: profile.version, profileDigest },
     slotBindings: bindings,
     numberingAssignments,
-    sourceConformance: {
-      status: acceptedRecords.length > 0 ? 'exact_deviations_applied' : 'direct',
-      transformationRecordIds: acceptedRecords.map((record) => record.recordId),
-      reviewDecisionIds: reviewDecisions.map((decision) => decision.decisionId),
-      reviewDecisionDigest,
-    },
+    sourceConformance: legacyAuthority
+      ? {
+          status: acceptedRecords.length > 0 ? 'exact_deviations_applied' : 'direct',
+          transformationRecordIds: acceptedRecords.map((record) => record.recordId),
+        }
+      : {
+          status: acceptedRecords.length > 0 ? 'exact_deviations_applied' : 'direct',
+          transformationRecordIds: acceptedRecords.map((record) => record.recordId),
+          reviewDecisionIds: reviewDecisions.map((decision) => decision.decisionId),
+          reviewDecisionDigest,
+        },
     completeness: { status: 'complete', optionalOmissions: [] },
   }
   diagnostics.push(...validateJsonSchema(plan, closure.schemas['canonical-paper-plan-v1'], '$.plan'))
@@ -501,6 +520,7 @@ function validateAmbiguities(ambiguities, reviewDecisions, diagnostics) {
 }
 
 function makeReport({ disposition, capture, authority, groups = [], records = [], reviewDecisions = [], diagnostics = [] }) {
+  const legacyAuthority = authority?.manifestVersion === '1'
   const report = {
     schemaVersion: `normalization-report-v${authority?.manifestVersion || '2'}`,
     disposition,
@@ -509,10 +529,12 @@ function makeReport({ disposition, capture, authority, groups = [], records = []
     sourceFingerprint: digestJson({ captureDigest: capture.digest, groupFingerprints: groups.map((group) => group.sourceFingerprint) }),
     directSourceMap: groups.flatMap((group) => group.sourceMap.entries),
     transformationRecords: records,
-    reviewDecisions,
+    ...(legacyAuthority ? {} : { reviewDecisions }),
     diagnostics,
   }
-  if (disposition === 'ready') report.semanticDigest = digestJson({ groups: groups.map((group) => group.semanticDigest), reviewDecisionDigest: digestJson(reviewDecisions) })
+  if (disposition === 'ready') report.semanticDigest = legacyAuthority
+    ? digestJson({ groups: groups.map((group) => group.semanticDigest) })
+    : digestJson({ groups: groups.map((group) => group.semanticDigest), reviewDecisionDigest: digestJson(reviewDecisions) })
   return report
 }
 
@@ -536,35 +558,36 @@ export function compileCanonicalPaper(request) {
     return blockedResult(dispositionFor(diagnostics), capture, request?.authority || null, diagnostics, [], reviewDecisions)
   }
   const closure = authorityResolution.closure
+  const effectiveReviewDecisions = closure.authorityRef.manifestVersion === '1' ? [] : reviewDecisions
   diagnostics.push(...validateCapture(capture, closure).map((item) => diagnostic(item.code, 'incomplete_source', item.path, item.message)))
   if (!parsed) return blockedResult(dispositionFor(diagnostics), capture, closure.authorityRef, diagnostics, [], reviewDecisions)
   const source = parsed.value
   if (typeof source.paperId !== 'string' || typeof source.profileId !== 'string' || !Array.isArray(source.groups)) {
     diagnostics.push(diagnostic('FIXTURE_SOURCE_SHAPE_INVALID', 'incomplete_source', '$', 'Source evidence does not close a paper, profile, and group list'))
   }
-  validateAmbiguities(source.ambiguities, reviewDecisions, diagnostics)
+  validateAmbiguities(source.ambiguities, effectiveReviewDecisions, diagnostics)
   for (const marker of source.unsupportedFeatures || []) diagnostics.push(diagnostic('SOURCE_FEATURE_UNSUPPORTED', 'unsupported', '$.unsupportedFeatures', String(marker)))
   validateAnswerAssertions(capture, diagnostics)
   validateAnswerCoverage(source, capture, diagnostics)
   const transformations = validateExactTransformationRecords(source.transformations, capture, closure)
   diagnostics.push(...transformations.diagnostics)
-  if (dispositionFor(diagnostics) !== 'ready') return blockedResult(dispositionFor(diagnostics), capture, closure.authorityRef, diagnostics, transformations.records, reviewDecisions)
+  if (dispositionFor(diagnostics) !== 'ready') return blockedResult(dispositionFor(diagnostics), capture, closure.authorityRef, diagnostics, transformations.records, effectiveReviewDecisions)
   const builtGroups = []
   for (const rawGroup of source.groups) {
     const built = buildGroupArtifact({ ...rawGroup, paperId: source.paperId }, capture, closure, transformations.records)
     diagnostics.push(...built.diagnostics)
     if (built.artifact) builtGroups.push({ ...built.artifact, slotId: rawGroup.slotId })
   }
-  if (dispositionFor(diagnostics) !== 'ready') return blockedResult(dispositionFor(diagnostics), capture, closure.authorityRef, diagnostics, transformations.records, reviewDecisions)
-  const planResult = buildPlan(source, capture, closure, builtGroups, transformations.records, reviewDecisions)
+  if (dispositionFor(diagnostics) !== 'ready') return blockedResult(dispositionFor(diagnostics), capture, closure.authorityRef, diagnostics, transformations.records, effectiveReviewDecisions)
+  const planResult = buildPlan(source, capture, closure, builtGroups, transformations.records, effectiveReviewDecisions)
   diagnostics.push(...planResult.diagnostics)
-  if (dispositionFor(diagnostics) !== 'ready') return blockedResult(dispositionFor(diagnostics), capture, closure.authorityRef, diagnostics, transformations.records, reviewDecisions)
+  if (dispositionFor(diagnostics) !== 'ready') return blockedResult(dispositionFor(diagnostics), capture, closure.authorityRef, diagnostics, transformations.records, effectiveReviewDecisions)
   const groups = builtGroups.map(({ slotId: _slotId, ...group }) => group)
-  const report = makeReport({ disposition: 'ready', capture, authority: closure.authorityRef, groups, records: transformations.records, reviewDecisions, diagnostics })
+  const report = makeReport({ disposition: 'ready', capture, authority: closure.authorityRef, groups, records: transformations.records, reviewDecisions: effectiveReviewDecisions, diagnostics })
   const reportIssues = validateJsonSchema(report, closure.schemas[`normalization-report-v${closure.authorityRef.manifestVersion}`], '$.normalizationReport')
   if (reportIssues.length > 0) {
     const mapped = reportIssues.map((item) => diagnostic(item.code, 'needs_review', item.path, item.message))
-    return blockedResult('needs_review', capture, closure.authorityRef, [...diagnostics, ...mapped], transformations.records, reviewDecisions)
+    return blockedResult('needs_review', capture, closure.authorityRef, [...diagnostics, ...mapped], transformations.records, effectiveReviewDecisions)
   }
   return {
     disposition: 'ready',

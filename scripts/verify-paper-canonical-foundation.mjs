@@ -111,6 +111,49 @@ const closure = resolveCanonicalAuthority(canonicalAuthorityRef).closure
 const legacyAuthorityRef = { manifestId: manifestV1.manifestId, manifestVersion: manifestV1.version, manifestDigest: digestJson(manifestV1) }
 assert.equal(legacyAuthorityRef.manifestDigest, 'sha256:0aa486d62ba5d7ce9158bf45287d421c9534775118040dbacdfa81dad1e08b6b')
 assert.equal(resolveCanonicalAuthority(legacyAuthorityRef).ok, true)
+const legacyDirectRequest = makeRequest(source)
+legacyDirectRequest.authority = legacyAuthorityRef
+const legacyDirect = compileCanonicalPaper(legacyDirectRequest)
+assert.equal(legacyDirect.disposition, 'ready')
+assert.equal(legacyDirect.artifacts.normalizationReport.schemaVersion, 'normalization-report-v1')
+assert.equal(Object.hasOwn(legacyDirect.artifacts.normalizationReport, 'reviewDecisions'), false)
+const legacyTransformationSource = structuredClone(source)
+const legacyTransformationGroup = legacyTransformationSource.groups[0]
+const legacyObservation = legacyDirect.artifacts.sourceCapture.observations.find((observation) => observation.sourceSpanId === legacyTransformationGroup.sourceSpanId)
+legacyTransformationSource.transformations = [{
+  recordId: 'record:legacy-exact',
+  sequence: 1,
+  ruleId: 'direct-projection',
+  ruleVersion: '1',
+  target: { identity: legacyTransformationGroup.groupId, path: 'content.blocks' },
+  operation: 'direct_projection',
+  inputSourceSpanIds: [legacyObservation.sourceSpanId],
+  before: legacyObservation.value,
+  after: legacyObservation.value,
+  certainty: 'exact',
+  preconditions: {},
+  outputDigest: digestJson(legacyObservation.value),
+}]
+const legacyTransformationRequest = makeRequest(legacyTransformationSource)
+legacyTransformationRequest.authority = legacyAuthorityRef
+const legacyTransformation = compileCanonicalPaper(legacyTransformationRequest)
+assert.equal(legacyTransformation.disposition, 'ready')
+assert.deepEqual(legacyTransformation.artifacts.normalizationReport.transformationRecords.map((record) => record.recordId), ['record:legacy-exact'])
+const legacyAmbiguousSource = structuredClone(source)
+legacyAmbiguousSource.ambiguities = [{
+  ambiguityId: 'ambiguity:legacy',
+  candidates: ['candidate:one', 'candidate:two'],
+  sourceSpanRefs: [legacyAmbiguousSource.groups[0].sourceSpanId],
+}]
+const legacyAmbiguousRequest = makeRequest(legacyAmbiguousSource)
+legacyAmbiguousRequest.authority = legacyAuthorityRef
+legacyAmbiguousRequest.reviewDecisions = [{
+  decisionId: 'decision:legacy',
+  ambiguityId: 'ambiguity:legacy',
+  selectedCandidateId: 'candidate:one',
+  sourceSpanRefs: [legacyAmbiguousSource.groups[0].sourceSpanId],
+}]
+assert.equal(compileCanonicalPaper(legacyAmbiguousRequest).disposition, 'needs_review')
 assert.deepEqual(
   ['nck1', 'zhejiang-legacy', 'national-legacy'].map((profileId) => {
     const slots = slotsForProfile(closure.profiles.get(profileId))

@@ -156,13 +156,14 @@ export function sealCanonicalPublication({ compilation, sourceAssetVersion, sour
   const authority = resolveCanonicalAuthority(canonicalPaper?.paperPlan?.authorityRef)
   if (!authority.ok) throw publicationError('CANONICAL_PUBLICATION_AUTHORITY_INVALID', 'Compilation does not bind a known authority')
   const closure = authority.closure
+  const legacyAuthority = closure.authorityRef.manifestVersion === '1'
   const artifactPaths = artifactPathsFor(closure.authorityRef)
   assertPaperId(canonicalPaper?.paperPlan?.paperId)
-  validateSourceCaptureIntegrity(sourceCapture)
-  const sourceEvidence = sourceEvidenceDescriptors(sourceCapture)
+  if (!legacyAuthority) validateSourceCaptureIntegrity(sourceCapture)
+  const sourceEvidence = legacyAuthority ? [] : sourceEvidenceDescriptors(sourceCapture)
   const sourceAssetDigest = sha256(sourceAsset)
-  const matchingDocuments = sourceCapture.documents.filter((document) => document.sha256 === sourceAssetDigest)
-  if (matchingDocuments.length !== 1) throw publicationError('CANONICAL_PUBLICATION_SOURCE_UNBOUND', 'The publication source asset must be exactly one captured immutable document')
+  const matchingDocuments = legacyAuthority ? [] : sourceCapture.documents.filter((document) => document.sha256 === sourceAssetDigest)
+  if (!legacyAuthority && matchingDocuments.length !== 1) throw publicationError('CANONICAL_PUBLICATION_SOURCE_UNBOUND', 'The publication source asset must be exactly one captured immutable document')
   const questionGroups = {
     schemaVersion: 'canonical-question-groups-v1',
     groups: [...canonicalPaper.questionGroups],
@@ -177,9 +178,13 @@ export function sealCanonicalPublication({ compilation, sourceAssetVersion, sour
     schemaVersion: `canonical-paper-publication-v${closure.authorityRef.manifestVersion}`,
     paperId: canonicalPaper.paperPlan.paperId,
     sourceAssetVersion,
-    sourceAssetDocumentId: matchingDocuments[0].documentId,
     sourceAssetDigest,
-    sourceEvidence: sourceEvidence.map(({ bytes: _bytes, ...descriptor }) => descriptor),
+    ...(legacyAuthority
+      ? {}
+      : {
+          sourceAssetDocumentId: matchingDocuments[0].documentId,
+          sourceEvidence: sourceEvidence.map(({ bytes: _bytes, ...descriptor }) => descriptor),
+        }),
     authority: canonicalPaper.paperPlan.authorityRef,
     artifacts: descriptors
       .map(({ bytes: _bytes, ...descriptor }) => descriptor)
@@ -218,6 +223,22 @@ export function validateCanonicalPublicationBundle({ manifest, sourceAsset, read
   const reportIssues = validateJsonSchema(artifacts.normalization_report, closure.schemas[`normalization-report-v${closure.authorityRef.manifestVersion}`], '$.report')
   if (sourceCaptureIssues.length || planIssues.length || reportIssues.length || artifacts.question_groups?.schemaVersion !== 'canonical-question-groups-v1' || !Array.isArray(artifacts.question_groups?.groups)) throw publicationError('CANONICAL_PUBLICATION_ARTIFACT_SCHEMA_INVALID', 'One or more sealed artifacts violate their exact schemas')
   if (artifacts.normalization_report.disposition !== 'ready' || artifacts.normalization_report.captureDigest !== artifacts.source_capture.digest || artifacts.paper_plan.completeness.status !== 'complete') throw publicationError('CANONICAL_PUBLICATION_SEMANTIC_CLOSURE_INVALID', 'Publication does not contain a complete ready source closure')
+  if (closure.authorityRef.manifestVersion === '1') {
+    let projected
+    try {
+      projected = projectCanonicalPaper({ plan: artifacts.paper_plan, groups: artifacts.question_groups.groups, sourceCapture: artifacts.source_capture, authorityClosure: closure })
+    } catch (error) {
+      throw publicationError('CANONICAL_PUBLICATION_PROJECTION_INVALID', error.message)
+    }
+    return {
+      manifest,
+      sourceCapture: artifacts.source_capture,
+      plan: artifacts.paper_plan,
+      groups: artifacts.question_groups.groups,
+      normalizationReport: artifacts.normalization_report,
+      projected,
+    }
+  }
   const sourceEvidence = sourceEvidenceDescriptors(artifacts.source_capture)
   if (!Array.isArray(manifest.sourceEvidence) || manifest.sourceEvidence.length !== sourceEvidence.length) throw publicationError('CANONICAL_PUBLICATION_SOURCE_EVIDENCE_INVALID', 'Publication source evidence closure differs from Source Capture')
   for (const expected of sourceEvidence) {
