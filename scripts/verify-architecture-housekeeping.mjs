@@ -213,16 +213,34 @@ assert('workflow protocol follows Matt planning chain', cutWorkflow.includes('gr
 assert('workflow protocol assigns one fresh implementation task per ticket', cutWorkflow.includes('one fresh top-level `/implement` task per ready ticket'))
 assert('workflow protocol reserves Wayfinder for fog', cutWorkflow.includes('Wayfinder') && cutWorkflow.includes('Huge and foggy'))
 assert('workflow protocol defines escalation signals', cutWorkflow.includes('CONTEXT INSUFFICIENT') && cutWorkflow.includes('SPEC CONTRADICTS'))
-assert('workflow protocol routes final shipping to the owner', cutWorkflow.includes('owner manually opens one ship task'))
+assert(
+  'workflow protocol preserves manual shipping with one coordinator exception',
+  cutWorkflow.includes('owner manually opens one ship task') &&
+    cutWorkflow.includes('$coordinate-eqb-wayfinder') &&
+    cutWorkflow.includes('dispatch-protocols.md'),
+)
 
 const mattWorkflow = read('docs/steering/codex-matt-workflow.md')
-assert('Matt workflow forbids automatic top-level task creation', mattWorkflow.includes('never creates the next'))
+assert(
+  'Matt workflow keeps manual dispatch and names the sole coordinator exception',
+  mattWorkflow.includes('Manual owner dispatch is the default') &&
+    mattWorkflow.includes('sole agent-side exception') &&
+    mattWorkflow.includes('$coordinate-eqb-wayfinder'),
+)
 assert('Matt workflow defines one directly pasteable next-task block', mattWorkflow.includes('New top-level task:') && mattWorkflow.includes('Worktree:') && mattWorkflow.includes('Expected HEAD:'))
 assert('Matt workflow separates internal workers from relay', mattWorkflow.includes('internal Standards and Spec reviewers') && mattWorkflow.includes('never become the next ticket or phase'))
 
 const status = read('docs/STATUS.md')
 assert(
-  'STATUS routes current work through Matt-native manual tasks',
+  'STATUS records the current owner-explicit coordinator policy',
+  status.includes('owner 显式 Wayfinder 薄协调治理发布') &&
+    status.includes('$coordinate-eqb-wayfinder') &&
+    status.includes('Stop Hook bridge') &&
+    status.includes('App Server Runner') &&
+    status.includes('永不启用或重试'),
+)
+assert(
+  'STATUS preserves the retired Matt relay history',
   status.includes('Matt-native 手工顶层任务流程') &&
     status.includes('取代 2026-07-22') &&
     status.includes('不得路由当前工作'),

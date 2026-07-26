@@ -43,11 +43,13 @@ Verify:
 Notes:
 ```
 
-Tickets are worked blockers-first. The owner manually starts one fresh
-top-level `/implement` task per ready ticket. The implementation task updates
-only its ticket status/result plus the code it owns. New tickets use
-`Next on PASS` and `Terminal` to declare their deterministic completion route;
-the detailed exit policy lives in `dispatch-protocols.md`.
+Tickets are worked blockers-first. By default, the owner manually starts one
+fresh top-level `/implement` task per ready ticket. An owner-explicit
+`$coordinate-eqb-wayfinder` may instead create the exact durable successor
+under `dispatch-protocols.md`; no other agent may claim dispatch authority. The
+implementation task updates only its ticket status/result plus the code it
+owns. New tickets use `Next on PASS` and `Terminal` to declare their
+deterministic completion route.
 
 ## Wayfinder
 
@@ -61,6 +63,10 @@ docs/cuts/<feature>/wayfinder/
 `map.md` is a low-resolution index:
 
 ```markdown
+Status: charted | done
+Next on PASS: <one frontier ticket | post-map route | DONE>
+Terminal: yes | no
+
 ## Notes
 
 ## Decisions so far
@@ -72,9 +78,17 @@ Each decision ticket holds one precise question and its eventual resolution.
 One top-level task resolves at most one Wayfinder ticket. The map links to the
 closed ticket and records only a one-line gist.
 
-Ticket types are `research`, `prototype`, `grilling`, and `task`. Blocking
-edges are written explicitly in each ticket. The frontier is every open,
-unblocked ticket.
+Ticket types are `research`, `prototype`, `grilling`, and `task`. Every ticket
+also records `Status`, `Claim`, `Blocked by`, `Next on PASS`, and `Terminal`.
+Blocking edges are explicit; a dispatchable frontier is one open, unclaimed,
+unblocked ticket selected by the map's durable route, not every plausible open
+ticket.
+
+Under an owner-started coordinator, validated research and prototype routes
+may advance without another owner dispatch. Grilling or any owner-input need
+pauses. When decision mapping closes, the map's durable `Next on PASS` may
+route into implementation, review, fix, owner QA, release, and `DONE`; owner QA
+itself remains an owner-acceptance pause.
 
 ## Optional assets
 

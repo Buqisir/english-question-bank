@@ -10,8 +10,10 @@ shipping work. Load only the note relevant to the task.
 File: `codex-matt-workflow.md`
 
 Use it to choose `grill-with-docs`, Wayfinder, spec/tickets, implementation,
-review, handoff, QA, and shipping. The owner manually creates every top-level
-task. Historical Auto-Next documents do not route current work.
+review, handoff, QA, and shipping. Manual owner dispatch is the default; the
+sole agent-side exception is an owner-explicit `$coordinate-eqb-wayfinder`
+under `../agents/dispatch-protocols.md`. Historical Auto-Next documents do not
+route current work.
 
 ### Product and engineering workflow
 

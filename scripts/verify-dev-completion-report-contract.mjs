@@ -781,10 +781,30 @@ assert(
 )
 assert(
   modelRouting.includes(
-    '`xhigh`, `max`, and `ultra` require explicit owner direction',
+    'Owner-started coordinator, Wayfinder, grilling, domain modeling, spec, and product investigation',
   ) &&
-    dispatch.includes('explicit owner direction'),
-  'extended efforts remain owner-directed',
+    modelRouting.includes('`gpt-5.6-sol` | `high`') &&
+    modelRouting.includes('Implementation and fixes') &&
+    modelRouting.includes('`gpt-5.6-terra` | `xhigh`') &&
+    modelRouting.includes('Independent review') &&
+    modelRouting.includes('QA preparation and mechanical shipping') &&
+    modelRouting.includes('`gpt-5.6-terra` | `high`') &&
+    dispatch.includes('owner-approved role defaults'),
+  'model routing preserves the owner-approved role matrix',
+)
+assert(
+  agents.includes('sole agent-side dispatch exception') &&
+    dispatch.includes('Owner-started Wayfinder coordinator exception') &&
+    dispatch.includes('$coordinate-eqb-wayfinder') &&
+    issueTracker.includes('dispatchable frontier') &&
+    workflow.includes('sole agent-side exception'),
+  'current authorities authorize only the explicit Wayfinder coordinator',
+)
+assert(
+  dispatch.includes('Desktop Stop Hook bridge') &&
+    dispatch.includes('explicit App Server Runner') &&
+    dispatch.includes('must never be enabled, retried, resumed'),
+  'retired Auto-Next routes cannot become coordinator fallbacks',
 )
 
 section('owner QA')

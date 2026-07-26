@@ -6,19 +6,48 @@ boundary, completion-exit policy, and new-task handoff format.
 ## Dispatch and handoff
 
 `dispatch` means creating, opening, starting, running, supervising, or waiting
-on a successor top-level task. Only the owner dispatches.
+on a successor top-level task. Manual owner dispatch is the default. Ordinary
+tasks do not dispatch; the sole agent-side exception is an owner-explicit
+invocation of `$coordinate-eqb-wayfinder` under the contract below.
 
 `handoff` means returning one complete, copyable instruction for the owner to
 open the required successor. Generating a handoff does not create or run the
 successor.
 
-An agent must not dispatch a successor, but a completed ticket must hand off
-its declared successor whenever the initiative remains open. “Do not start the
-next ticket” never means “omit the next-ticket handoff.”
+An ordinary task agent must not dispatch a successor, but a completed ticket
+must hand off its declared successor whenever the initiative remains open.
+“Do not start the next ticket” never means “omit the next-ticket handoff.”
 
 Subagents cannot be successor phases. Bounded workers explicitly required by a
 current skill or runbook may work only inside that operation and must report
 back to the current task.
+
+### Owner-started Wayfinder coordinator exception
+
+This exception is authorized only after the owner explicitly invokes
+`$coordinate-eqb-wayfinder` for a charted EQB map whose durable `Next on PASS`
+names one frontier. The coordinator is repository-read-only and may use only
+official Codex top-level task tools to create and compactly wait on exactly one
+fresh peer at a time in the initiative's same exact saved worktree. It may not
+delegate, fork, resume, create another coordinator, or overlap writers.
+
+Wayfinder research and prototype tickets may continue through their validated
+durable routes. Grilling, owner input, owner QA, `needs-attention`, `BLOCKED`,
+malformed state, route mismatch, cycles, or context uncertainty pause
+coordination. A canonical review-failure handoff may select one fresh fix task
+only when the tracked workflow validates that route; this is a fix transition,
+not an automatic retry.
+
+When the map closes, the same coordinator may follow the durable route through
+implementation, review, fix, the owner-QA boundary, release, and `DONE`.
+Owner QA remains a pause for owner acceptance, never a peer the coordinator
+creates. The global skill owns the complete validation, dispatch, observation,
+ledger, resume, and stop loop; this file owns only project authorization and
+completion routing.
+
+The Desktop Stop Hook bridge and explicit App Server Runner are retired
+historical evidence. They are not dispatch exceptions or activation
+candidates and must never be enabled, retried, resumed, or used as a fallback.
 
 ## Durable route on every ticket
 
@@ -58,8 +87,9 @@ If the current ticket is blocked:
 - use a new-task handoff only when the durable route or a real work boundary
   requires one; otherwise remain in the current task.
 
-Do not repair a blocker by creating a coordinator, relay state, dispatch
-ledger, automatic successor, or new workflow platform.
+Do not repair a blocker by inventing a coordinator, relay state, dispatch
+ledger, automatic successor, or new workflow platform. Only the owner-explicit
+exception above can start coordination, and its pause conditions fail closed.
 
 ## New top-level task handoff
 
@@ -124,9 +154,8 @@ Invocation availability and handoff referenceability are separate.
 - A non-Codex harness must declare `NATURAL-LANGUAGE FALLBACK` before using the
   documented equivalent.
 
-Normal effort defaults are `low`, `medium`, or `high`.
-`xhigh`/`max`/`ultra` require explicit owner direction and evidence under
-`model-routing.md` that lower effort is inadequate.
+Use the owner-approved role defaults in `model-routing.md`. Any deviation,
+including `max` or `ultra`, requires explicit owner direction.
 
 ## Sequential worktrees
 
@@ -134,13 +163,14 @@ Multi-ticket work uses one explicit feature worktree sequentially:
 
 1. The handoff records absolute worktree, branch, clean HEAD, spec, ticket, and
    fixed point.
-2. The owner opens the next task manually.
+2. The owner opens the next task manually, or an already-authorized
+   `$coordinate-eqb-wayfinder` creates the one exact durable successor.
 3. The new task verifies those facts before writing.
 4. It completes one ticket, commits it, and returns the new exact HEAD.
 
-Never let two top-level tasks write the same worktree. The human task boundary
-is the lock; no lifecycle file, activation commit, claim ledger, or task
-acknowledgement is needed.
+Never let two top-level tasks write the same worktree. The top-level task
+boundary is the lock; no lifecycle file, activation commit, claim ledger, or
+task acknowledgement is needed.
 
 If the expected worktree, branch, or HEAD differs, stop without writing:
 

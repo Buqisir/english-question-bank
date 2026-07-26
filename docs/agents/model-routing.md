@@ -1,25 +1,19 @@
 # Model and effort guidance
 
-The owner creates top-level tasks manually. This table is a cost/quality
-recommendation to include in `Next`, not a dispatch authority or state machine.
-
-Matt's effort rule is **start low and creep up**. More effort spends more
-tokens, reaches attention degradation sooner, and is not a free quality switch.
-Always report the effort next to the model. Raise it only when the task is
-genuinely difficult or a lower setting has shown visible quality loss.
+Manual owner dispatch remains the default; the owner-started
+`$coordinate-eqb-wayfinder` exception may apply these same routes. This table
+is the owner-approved project route to include in every `Next`, not independent
+dispatch authority. Always report effort next to model.
 
 | Work | Recommended model | Starting effort |
 | --- | --- | --- |
-| Ask Matt, Wayfinder, grilling, domain modeling, spec | `gpt-5.6-sol` | `medium` |
-| Ordinary code research | `gpt-5.6-terra` | `low` |
-| `/implement` ticket | `gpt-5.6-terra` | `medium` |
-| Independent `/code-review` | `gpt-5.6-sol` | `medium` |
-| QA preparation and mechanical shipping work | `gpt-5.6-terra` | `low` |
-| Proven difficult work or a retry after visible quality loss | keep the role's model | `high` |
+| Owner-started coordinator, Wayfinder, grilling, domain modeling, spec, and product investigation | `gpt-5.6-sol` | `high` |
+| Implementation and fixes | `gpt-5.6-terra` | `xhigh` |
+| Independent review | `gpt-5.6-sol` | `high` |
+| QA preparation and mechanical shipping | `gpt-5.6-terra` | `high` |
 
-`xhigh`, `max`, and `ultra` require explicit owner direction and evidence that
-the lower setting is inadequate. They are never a ritual attached to a role,
-task size, or final review.
+These defaults are explicit owner direction. `max`, `ultra`, or any different
+model/effort requires fresh owner direction.
 
 If a route is unavailable, tell the owner and recommend the closest sensible
 choice. Do not log availability probes, build substitution ledgers, or create a

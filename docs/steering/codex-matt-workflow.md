@@ -21,14 +21,16 @@ huge and foggy
        └─ to-spec → to-tickets → implement
 ```
 
-The owner opens every top-level task manually. An agent never creates the next
+Manual owner dispatch is the default. The sole agent-side exception is an
+owner-explicit `$coordinate-eqb-wayfinder` for an already-charted map under
+`../agents/dispatch-protocols.md`; ordinary task agents never create the next
 task.
 
 ## What manual means
 
 - no Auto-Next;
 - no `create_thread`, fork, or subagent successor;
-- no long-lived coordinator waiting for later roles;
+- no implicit, permanent, or self-replacing coordinator;
 - one writer task at a time in a feature worktree;
 - every passed non-terminal task returns the handoff declared by its ticket.
 
@@ -77,7 +79,8 @@ routing. Do not copy the ticket body into the next prompt.
 - choose the exit declared by `Next on PASS`.
 
 The implementation task does not dispatch or supervise the successor. It must
-still generate the declared handoff when the initiative remains open.
+still generate the declared handoff when the initiative remains open; an
+already-authorized coordinator may consume that handoff without changing it.
 
 ## Review and QA
 
@@ -118,7 +121,9 @@ use one uniquely verified explicit-only skill. The full resolution and
 - Specs, tickets, review anchors, and QA evidence are durable; chat is not.
 - Reuse one sequential feature worktree for a multi-ticket initiative.
 - Before every handoff, report the exact worktree, branch, and HEAD.
-- Do not create lifecycle state, a dispatch ledger, or a relay coordinator.
+- Ordinary tasks do not create lifecycle state, a dispatch ledger, or a
+  coordinator. The global coordinator skill keeps only an in-conversation
+  ledger.
 
 Use `/handoff` only when crossing to another agent, directory, or colleague.
 Otherwise compact valuable context and continue the current ticket while it
@@ -133,7 +138,8 @@ Before merging:
 - user-visible work has browser and owner QA;
 - `pnpm -C app run verify:all` or PR CI is green.
 
-The owner manually opens one ship task when shipping is a required successor.
+The owner manually opens one ship task when shipping is a required successor,
+unless an already-authorized coordinator follows that exact durable route.
 After merge, confirm `main` CI and update `docs/STATUS.md` briefly for material
 releases.
 

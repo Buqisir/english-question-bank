@@ -48,6 +48,10 @@ essay-grading 幸存件重建，判例已回流，远端 Buqisir/project-os 私�
 
 ## 主线焦点
 
+- 2026-07-26：**owner 显式 Wayfinder 薄协调治理发布**：手工派发仍为默认；
+  `$coordinate-eqb-wayfinder` 是唯一 agent 派发例外，仅从已建图 durable frontier
+  在同一 saved worktree 单步创建 fresh peer，遇 owner input/QA/阻塞/错路即停；
+  Stop Hook bridge 与 App Server Runner 保持退役且永不启用或重试，本次不动产品与生产。
 - 2026-07-25：**paper-normalization 发布门禁通过**：cloze/grammarFill canonical group 已成为
   PaperSurface、Print HTML 与 DOCX proof consumer 的共享语义事实；Print/PDF/DOCX 实物 owner QA 通过，
   Phase B focused re-review Standards + Spec PASS（0 Must Fix），`verify:all`

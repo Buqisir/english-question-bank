@@ -155,8 +155,10 @@ must return one copyable fix prompt.
 
 ## 9. Ship
 
-The owner manually opens one ship task after tickets, required independent
-review, and QA are complete.
+By default, the owner manually opens one ship task after tickets, required
+independent review, and QA are complete. An already-authorized
+`$coordinate-eqb-wayfinder` may follow the exact durable ship route under
+`../agents/dispatch-protocols.md`.
 
 The ship task:
 
@@ -179,6 +181,7 @@ worker only for AFK work that reports back; otherwise compact valuable context
 and continue the same ticket. Repeated settled questions, forgotten scope,
 mixed tickets, or stalled rereading are behavioral stop signals.
 
-The next top-level task is always opened manually by the owner. Historical
-`agent-entrypoint.md`, relay ledgers, and Auto-Next lifecycle records never
-route new work.
+The next top-level task is opened manually by default; the sole agent-side
+exception is the owner-explicit coordinator defined in
+`../agents/dispatch-protocols.md`. Historical `agent-entrypoint.md`, relay
+ledgers, and Auto-Next lifecycle records never route new work.

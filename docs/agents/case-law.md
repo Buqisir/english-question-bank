@@ -12,6 +12,18 @@
 `~/.claude/skills/project-os/assets/case-law-universal.md`(仅本机;
 该 skill 目录自带 git,回流后一行 commit)。项目特有判例不回流。
 
+## 2026-07-26
+
+- **显式 Wayfinder 薄协调成为唯一 agent 派发例外（owner 拍板）**：手工
+  dispatch 仍是默认；只有 owner 显式调用全局
+  `$coordinate-eqb-wayfinder`，且已建图并有 durable frontier，才允许一个
+  repo 只读 coordinator 在同一 saved worktree 单步创建 fresh peer。研究/
+  原型可沿路继续；owner 输入、grilling、QA、阻塞、歧义、错路或循环即停。
+  Review FAIL 可按已验证 handoff 转 fresh fix，但不是 retry；闭图后可沿
+  durable Next 走到 release/DONE。Stop Hook bridge 与 App Server Runner
+  永久退役，不得启用或重试。→ 固化 `AGENTS.md`、
+  `dispatch-protocols.md`、`issue-tracker.md`、`model-routing.md`。
+
 ## 2026-07-23
 
 - **Auto-Next 全面退役，Matt 原生手工开发接管（owner 拍板）**：迁移到
