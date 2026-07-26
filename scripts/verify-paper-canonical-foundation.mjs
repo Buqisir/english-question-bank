@@ -151,6 +151,7 @@ function assertBlocked(mutator, expectedDisposition) {
 assertBlocked((value) => value.ambiguities = ['two plausible boundaries'], 'needs_review')
 assertBlocked((value) => value.unsupportedFeatures = ['unmodeled source feature'], 'unsupported')
 assertBlocked((value) => value.assertions.pop(), 'incomplete_source')
+assertBlocked((value) => value.observations.push({ ...value.observations[0], value: 'ambiguous duplicate observation identity' }), 'incomplete_source')
 assertBlocked((value) => value.assertions.push({ ...value.assertions[0], assertionId: 'answer:conflict', answer: 'B' }), 'answer_conflict')
 const exactTransformation = structuredClone(source)
 const transformedGroup = exactTransformation.groups[0]

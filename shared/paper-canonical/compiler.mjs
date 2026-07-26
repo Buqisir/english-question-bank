@@ -81,10 +81,15 @@ function buildSourceCapture(documents, parsed, diagnostics) {
   const observations = []
   const sourceSpans = []
   const assertions = []
+  const observationIds = new Set()
   const inputObservations = parsed?.value?.observations || []
   for (const [index, observation] of inputObservations.entries()) {
     if (!isRecordValue(observation) || typeof observation.observationId !== 'string' || typeof observation.kind !== 'string' || typeof observation.documentInputKey !== 'string') {
       diagnostics.push(diagnostic('OBSERVATION_INVALID', 'incomplete_source', `$.observations[${index}]`, 'Observations need a stable id, kind, and source document key'))
+      continue
+    }
+    if (observationIds.has(observation.observationId)) {
+      diagnostics.push(diagnostic('OBSERVATION_DUPLICATE', 'incomplete_source', `$.observations[${index}]`, 'Observation identities must identify exactly one source fact'))
       continue
     }
     const document = documents.find((candidate) => candidate.inputKey === observation.documentInputKey)
@@ -95,6 +100,7 @@ function buildSourceCapture(documents, parsed, diagnostics) {
       continue
     }
     const sourceSpanId = `source-span:${observation.observationId}`
+    observationIds.add(observation.observationId)
     observations.push({
       observationId: observation.observationId,
       documentId: document.documentId,
