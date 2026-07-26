@@ -2,7 +2,7 @@
   "schemaVersion": "consumer-contract-v1",
   "consumerId": "docx",
   "version": "1",
-  "authorityManifestDigest": "sha256:a0b20d875ab6aa15decd1b278e72c688c8643430957d3b29257fc1d5bb5a4b29",
+  "authorityManifestDigest": "sha256:56ebbe5e5b0a31edc68bd43387c3ff3b5f66fdfe81340cb3f173edcbe0fd7708",
   "projectorVersion": "canonical-projector-v1",
   "families": [
     {
@@ -48,5 +48,5 @@
       "legacyCapability": "available"
     }
   ],
-  "contractDigest": "sha256:3bec17a280185e8d33df37c2ab08a0172312d6c809812a2849cc1620277a1361"
+  "contractDigest": "sha256:d16e4177992d6fe7ad4abf9341822533cb696e82c70f8870c9a9ec94b7c176a9"
 }

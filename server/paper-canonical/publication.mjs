@@ -110,11 +110,16 @@ function validateSourceCaptureIntegrity(sourceCapture) {
   return { documents, spans }
 }
 
-function validatePublicationLineage({ sourceCapture, plan, groups, normalizationReport }) {
+function validatePublicationLineage({ sourceCapture, plan, groups, normalizationReport, normalizationRules }) {
   const { spans } = validateSourceCaptureIntegrity(sourceCapture)
   const records = normalizationReport.transformationRecords || []
   const recordIds = new Set(records.map((record) => record.recordId))
-  if (recordIds.size !== records.length || records.some((record) => record.operation !== 'direct_projection' || !record.preconditions || Object.keys(record.preconditions).sort().join(',') !== 'direct' || record.preconditions.direct !== true || !Array.isArray(record.inputSourceSpanIds) || record.inputSourceSpanIds.length === 0 || record.inputSourceSpanIds.some((sourceSpanId) => !spans.has(sourceSpanId)) || stableStringify(record.before) !== stableStringify(record.after) || record.outputDigest !== digestJson(record.after))) {
+  const rulesById = new Map((normalizationRules || []).map((rule) => [`${rule.ruleId}@${rule.version}`, rule]))
+  if (recordIds.size !== records.length || records.some((record) => {
+    const rule = rulesById.get(`${record.ruleId}@${record.ruleVersion}`)
+    const proof = rule?.operationProofs?.[record.operation]
+    return !rule || !rule.allowedOperations.includes(record.operation) || !proof || proof.kind !== 'identity' || stableStringify(record.preconditions) !== stableStringify(proof.requiredPreconditions) || !Array.isArray(record.inputSourceSpanIds) || record.inputSourceSpanIds.length === 0 || record.inputSourceSpanIds.some((sourceSpanId) => !spans.has(sourceSpanId)) || stableStringify(record.before) !== stableStringify(record.after) || record.outputDigest !== digestJson(record.after)
+  })) {
     throw publicationError('CANONICAL_PUBLICATION_LINEAGE_INVALID', 'Transformation Records do not prove exact source replay')
   }
   const expectedRecordIds = plan.sourceConformance?.transformationRecordIds || []
@@ -211,7 +216,7 @@ export function validateCanonicalPublicationBundle({ manifest, sourceAsset, read
   }
   const sourceAssetDocument = artifacts.source_capture.documents.find((document) => document.documentId === manifest.sourceAssetDocumentId)
   if (!sourceAssetDocument || sourceAssetDocument.sha256 !== manifest.sourceAssetDigest || sourceAssetDocument.sha256 !== sha256(sourceAsset)) throw publicationError('CANONICAL_PUBLICATION_SOURCE_UNBOUND', 'Publication source asset does not bind to captured source evidence')
-  validatePublicationLineage({ sourceCapture: artifacts.source_capture, plan: artifacts.paper_plan, groups: artifacts.question_groups.groups, normalizationReport: artifacts.normalization_report })
+  validatePublicationLineage({ sourceCapture: artifacts.source_capture, plan: artifacts.paper_plan, groups: artifacts.question_groups.groups, normalizationReport: artifacts.normalization_report, normalizationRules: closure.artifacts.normalization.rules })
   let projected
   try {
     projected = projectCanonicalPaper({ plan: artifacts.paper_plan, groups: artifacts.question_groups.groups, sourceCapture: artifacts.source_capture, authorityClosure: closure })

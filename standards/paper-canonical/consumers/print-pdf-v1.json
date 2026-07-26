@@ -2,7 +2,7 @@
   "schemaVersion": "consumer-contract-v1",
   "consumerId": "print_pdf",
   "version": "1",
-  "authorityManifestDigest": "sha256:a0b20d875ab6aa15decd1b278e72c688c8643430957d3b29257fc1d5bb5a4b29",
+  "authorityManifestDigest": "sha256:56ebbe5e5b0a31edc68bd43387c3ff3b5f66fdfe81340cb3f173edcbe0fd7708",
   "projectorVersion": "canonical-projector-v1",
   "families": [
     {
@@ -48,5 +48,5 @@
       "legacyCapability": "available"
     }
   ],
-  "contractDigest": "sha256:4742a579375205fc5c1eacf9887228a1c2e8d7cb03f09e2f6cb46ba049a9c856"
+  "contractDigest": "sha256:48ab38ff8c04e9496b20ba28971c292dd58ca6528a2468dac1f2ef5a7bd81417"
 }

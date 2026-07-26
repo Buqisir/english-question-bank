@@ -169,6 +169,25 @@ function validateProfile(profile, families) {
   return issues
 }
 
+function validateNormalizationRules(artifact) {
+  const issues = []
+  if (!Array.isArray(artifact?.rules) || artifact.rules.length === 0) return [issue('NORMALIZATION_RULES_REQUIRED', '$.rules', 'Normalization requires ordered exact rules')]
+  const ruleIds = new Set()
+  for (const [index, rule] of artifact.rules.entries()) {
+    const path = `$.rules[${index}]`
+    if (!isRecordValue(rule) || !exactKeys(rule, ['ruleId', 'version', 'certainty', 'allowedOperations', 'operationProofs']) || typeof rule.ruleId !== 'string' || typeof rule.version !== 'string' || rule.certainty !== 'exact' || !Array.isArray(rule.allowedOperations) || rule.allowedOperations.length === 0 || new Set(rule.allowedOperations).size !== rule.allowedOperations.length || ruleIds.has(`${rule.ruleId}@${rule.version}`) || !isRecordValue(rule.operationProofs) || Object.keys(rule.operationProofs).sort().join(',') !== [...rule.allowedOperations].sort().join(',')) {
+      issues.push(issue('NORMALIZATION_RULE_INVALID', path, 'Rule operations and versioned proof contracts must be closed'))
+      continue
+    }
+    ruleIds.add(`${rule.ruleId}@${rule.version}`)
+    for (const operation of rule.allowedOperations) {
+      const proof = rule.operationProofs[operation]
+      if (!isRecordValue(proof) || !exactKeys(proof, ['kind', 'requiredPreconditions']) || proof.kind !== 'identity' || !isRecordValue(proof.requiredPreconditions) || Object.keys(proof.requiredPreconditions).length === 0 || Object.values(proof.requiredPreconditions).some((value) => value !== true)) issues.push(issue('NORMALIZATION_PROOF_INVALID', `${path}.operationProofs.${operation}`, 'Operation proof must have a machine-checkable exact contract'))
+    }
+  }
+  return issues
+}
+
 export function validateAuthorityClosure({ manifest: candidateManifest, artifacts, schemas }) {
   const issues = []
   const schemaById = new Map(Object.entries(schemas || {}))
@@ -219,6 +238,8 @@ export function validateAuthorityClosure({ manifest: candidateManifest, artifact
     issues.push(issue('AUTHORITY_PROFILE_CLOSURE', '$.artifacts', 'Exactly the three v1 profiles are required'))
   }
   for (const profile of profileArtifacts) issues.push(...validateProfile(profile, familyArtifacts))
+  const normalizationArtifact = Object.values(artifacts || {}).find((artifact) => artifact?.owner === 'normalization')
+  issues.push(...validateNormalizationRules(normalizationArtifact))
   const coreArtifact = Object.values(artifacts || {}).find((artifact) => artifact?.owner === 'core')
   if (!coreArtifact || coreArtifact.projectionContract !== 'canonical-projector-v1') issues.push(issue('AUTHORITY_CORE_CLOSURE', '$.artifacts', 'Core invariants must pin the projector'))
   return { ok: issues.length === 0, issues }

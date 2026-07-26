@@ -171,6 +171,20 @@ exactTransformation.transformations = [{
 const transformed = compileCanonicalPaper(makeRequest(exactTransformation))
 assert.equal(transformed.disposition, 'ready')
 assert.equal(transformed.artifacts.normalizationReport.transformationRecords.length, 1)
+for (const rule of closure.artifacts.normalization.rules) {
+  for (const operation of rule.allowedOperations) {
+    const operationFixture = structuredClone(exactTransformation)
+    const record = operationFixture.transformations[0]
+    record.ruleId = rule.ruleId
+    record.ruleVersion = rule.version
+    record.operation = operation
+    record.preconditions = structuredClone(rule.operationProofs[operation].requiredPreconditions)
+    record.before = { operation }
+    record.after = { operation }
+    record.outputDigest = digestJson(record.after)
+    assert.equal(compileCanonicalPaper(makeRequest(operationFixture)).disposition, 'ready', `${rule.ruleId}@${rule.version}/${operation}`)
+  }
+}
 const nonExactTransformation = structuredClone(exactTransformation)
 nonExactTransformation.transformations[0].certainty = 'heuristic'
 assert.equal(compileCanonicalPaper(makeRequest(nonExactTransformation)).disposition, 'needs_review')

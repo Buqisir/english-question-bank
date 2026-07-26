@@ -22,7 +22,7 @@
     {"id":"family-grammar-fill","owner":"family","path":"families/grammar-fill-v1.json","schemaId":"canonical-family-contract-v1","sha256":"sha256:98c5c64b69a6d3e822f085feb73ef5036ba6912787519e92be78fc67498ef3d8"},
     {"id":"family-application-writing","owner":"family","path":"families/application-writing-v1.json","schemaId":"canonical-family-contract-v1","sha256":"sha256:1ccabd97e3d6cb2a4d822c2142217614923ad29987aea652c98025bc1db86192"},
     {"id":"family-continuation-writing","owner":"family","path":"families/continuation-writing-v1.json","schemaId":"canonical-family-contract-v1","sha256":"sha256:2bee9b2906ca11e859b8ba8eb2c5ba33605d8bd899814e869f6957932d8c158e"},
-    {"id":"normalization","owner":"normalization","path":"normalization/normalization-rules-v1.json","schemaId":"normalization-rules-v1","sha256":"sha256:4afd488ff2eac54110d38adb1ab969afe8c04afb2a4fb9bf01e60a4da7fae294"},
+    {"id":"normalization","owner":"normalization","path":"normalization/normalization-rules-v1.json","schemaId":"normalization-rules-v1","sha256":"sha256:b0e4f9502ba6aadf912cd12c1ec12a9356b732033cc0a24e8f98274e31822cfa"},
     {"id":"renderer-typography","owner":"renderer_typography","path":"rendering/paper-typography-v1.json","schemaId":"renderer-typography-v1","sha256":"sha256:5671717022099a3c49728cc056d8762117e9b1c6e3363dc5a4eadf74df3d3111"}
   ],
   "schemas": [

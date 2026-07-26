@@ -8,13 +8,22 @@
       "ruleId": "direct-projection",
       "version": "1",
       "certainty": "exact",
-      "allowedOperations": ["direct_projection", "structural_tokenization", "exact_join", "anchor_identity"]
+      "allowedOperations": ["direct_projection", "structural_tokenization", "exact_join", "anchor_identity"],
+      "operationProofs": {
+        "direct_projection": {"kind":"identity","requiredPreconditions":{"direct":true}},
+        "structural_tokenization": {"kind":"identity","requiredPreconditions":{"structuralIdentity":true}},
+        "exact_join": {"kind":"identity","requiredPreconditions":{"uniqueSourceJoin":true}},
+        "anchor_identity": {"kind":"identity","requiredPreconditions":{"sourceAnchorIdentity":true}}
+      }
     },
     {
       "ruleId": "guarded-representation-normalization",
       "version": "1",
       "certainty": "exact",
-      "allowedOperations": ["representation_normalization"]
+      "allowedOperations": ["representation_normalization"],
+      "operationProofs": {
+        "representation_normalization": {"kind":"identity","requiredPreconditions":{"representationIdentity":true}}
+      }
     }
   ]
 }

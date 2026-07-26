@@ -184,12 +184,13 @@ function validateExactTransformationRecords(records, capture, closure) {
       continue
     }
     const rule = registeredRules.get(`${record.ruleId}@${record.ruleVersion}`)
-    if (record.certainty !== 'exact' || !rule || !rule.allowedOperations.includes(record.operation)) {
+    const proof = rule?.operationProofs?.[record.operation]
+    if (record.certainty !== 'exact' || !rule || !rule.allowedOperations.includes(record.operation) || !proof) {
       diagnostics.push(diagnostic('TRANSFORMATION_NOT_EXACT', 'needs_review', path, 'Only registered exact transformations can produce canonical semantics'))
       continue
     }
-    const directProjectionProof = record.operation === 'direct_projection' && exactKeys(record.preconditions, ['direct']) && record.preconditions.direct === true && stableStringify(record.before) === stableStringify(record.after)
-    if (!Number.isInteger(record.sequence) || record.sequence <= previousSequence || !Array.isArray(record.inputSourceSpanIds) || record.inputSourceSpanIds.length === 0 || record.inputSourceSpanIds.some((id) => !sourceSpanIds.has(id)) || record.outputDigest !== digestJson(record.after) || !directProjectionProof) {
+    const exactProof = proof.kind === 'identity' && stableStringify(record.preconditions) === stableStringify(proof.requiredPreconditions) && stableStringify(record.before) === stableStringify(record.after)
+    if (!Number.isInteger(record.sequence) || record.sequence <= previousSequence || !Array.isArray(record.inputSourceSpanIds) || record.inputSourceSpanIds.length === 0 || record.inputSourceSpanIds.some((id) => !sourceSpanIds.has(id)) || record.outputDigest !== digestJson(record.after) || !exactProof) {
       diagnostics.push(diagnostic('TRANSFORMATION_CLOSURE_INVALID', 'needs_review', path, 'Transformation sequence, lineage, or output digest cannot be replayed'))
       continue
     }
