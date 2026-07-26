@@ -1,0 +1,269 @@
+import metrics from '../../standards/paper-canonical/rendering/times-compatible-metrics-v1.json' with { type: 'json' }
+
+import { digestJson } from './stable.mjs'
+
+const LABELS = Object.freeze(['A', 'B', 'C', 'D'])
+
+const SHAPING_IMPLEMENTATION = Object.freeze({
+  id: 'fixed-glyph-advance',
+  version: '1',
+  rounding: 'outward_to_integer_twip',
+})
+
+const RULES = Object.freeze({
+  rulesetId: 'abcd-option-layout-v1',
+  shapingImplementation: `${SHAPING_IMPLEMENTATION.id}-v${SHAPING_IMPLEMENTATION.version}`,
+  shapingImplementationDigest: digestJson(SHAPING_IMPLEMENTATION),
+  fontMetricsDigest: digestJson(metrics),
+  fontFaceId: metrics.fontFaceId,
+  fontSizeHalfPoint: 21,
+  optionRowWidthTwip: 8764,
+  minimumGutterTwip: 420,
+  fitSafetyTwip: 20,
+  fourColumnPitchTwip: 2080,
+  twoColumnSecondTabTwip: 4020,
+  oneColumnHangingIndentTwip: 420,
+})
+
+const RULESET_DIGEST = digestJson(RULES)
+
+function notApplicable() {
+  return {
+    status: 'not_applicable',
+    reason: 'selector_requires_one_question_owned_A_B_C_D_set',
+  }
+}
+
+function optionText(option) {
+  if (!Array.isArray(option?.content) || option.content.length === 0) return null
+  const parts = []
+  for (const node of option.content) {
+    if (node?.kind !== 'text' || typeof node.text !== 'string') return null
+    parts.push(node.text)
+  }
+  return parts.join('')
+}
+
+function advanceTwip(text) {
+  let units = 0
+  for (const character of text) {
+    const advance = metrics.glyphAdvanceUnits[character]
+    if (!Number.isInteger(advance)) return null
+    units += advance
+  }
+  return Math.ceil((units * RULES.fontSizeHalfPoint) / (metrics.unitsPerEm / 10))
+}
+
+function measureOption(option) {
+  const text = optionText(option)
+  if (text === null) return null
+  const renderedText = `${option.label}. ${text}`
+  const lines = renderedText.split('\n')
+  const lineAdvancesTwip = lines.map(advanceTwip)
+  if (lineAdvancesTwip.some((advance) => advance === null)) return null
+  const unbreakableAdvancesTwip = lines.flatMap((line) =>
+    line.split(/\s+/u).filter(Boolean).map(advanceTwip))
+  if (unbreakableAdvancesTwip.some((advance) => advance === null)) return null
+  return {
+    renderedText,
+    hardBreaks: lines.length - 1,
+    advanceTwip: Math.max(...lineAdvancesTwip),
+    unbreakableAdvanceTwip: Math.max(0, ...unbreakableAdvancesTwip),
+  }
+}
+
+function capacities() {
+  return {
+    four: [
+      RULES.fourColumnPitchTwip - RULES.minimumGutterTwip - RULES.fitSafetyTwip,
+      RULES.fourColumnPitchTwip - RULES.minimumGutterTwip - RULES.fitSafetyTwip,
+      RULES.fourColumnPitchTwip - RULES.minimumGutterTwip - RULES.fitSafetyTwip,
+      RULES.optionRowWidthTwip - RULES.fourColumnPitchTwip * 3 - RULES.fitSafetyTwip,
+    ],
+    two: [
+      RULES.twoColumnSecondTabTwip - RULES.minimumGutterTwip - RULES.fitSafetyTwip,
+      RULES.optionRowWidthTwip - RULES.twoColumnSecondTabTwip - RULES.fitSafetyTwip,
+      RULES.twoColumnSecondTabTwip - RULES.minimumGutterTwip - RULES.fitSafetyTwip,
+      RULES.optionRowWidthTwip - RULES.twoColumnSecondTabTwip - RULES.fitSafetyTwip,
+    ],
+    one: RULES.optionRowWidthTwip - RULES.oneColumnHangingIndentTwip - RULES.fitSafetyTwip,
+  }
+}
+
+function placementFor(mode, option, measured, index) {
+  if (mode === 'four_columns') {
+    return {
+      optionId: option.optionId,
+      label: option.label,
+      row: 0,
+      column: index,
+      startTwip: index * RULES.fourColumnPitchTwip,
+      continuationStartTwip: null,
+      hardBreaks: measured.hardBreaks,
+      renderedText: measured.renderedText,
+    }
+  }
+  if (mode === 'two_by_two') {
+    return {
+      optionId: option.optionId,
+      label: option.label,
+      row: Math.floor(index / 2),
+      column: index % 2,
+      startTwip: (index % 2) * RULES.twoColumnSecondTabTwip,
+      continuationStartTwip: null,
+      hardBreaks: measured.hardBreaks,
+      renderedText: measured.renderedText,
+    }
+  }
+  return {
+    optionId: option.optionId,
+    label: option.label,
+    row: index,
+    column: 0,
+    startTwip: 0,
+    continuationStartTwip: RULES.oneColumnHangingIndentTwip,
+    hardBreaks: measured.hardBreaks,
+    renderedText: measured.renderedText,
+  }
+}
+
+function selectedPlan(mode, optionSet, measured) {
+  const placements = optionSet.options.map((option, index) =>
+    placementFor(mode, option, measured[index], index))
+  return {
+    status: 'selected',
+    mode,
+    rowCount: mode === 'four_columns' ? 1 : mode === 'two_by_two' ? 2 : 4,
+    columnCount: mode === 'four_columns' ? 4 : mode === 'two_by_two' ? 2 : 1,
+    rulesetRef: {
+      id: RULES.rulesetId,
+      digest: RULESET_DIGEST,
+      shapingImplementationDigest: RULES.shapingImplementationDigest,
+      fontMetricsDigest: RULES.fontMetricsDigest,
+    },
+    rowWidthTwip: RULES.optionRowWidthTwip,
+    placements,
+  }
+}
+
+/**
+ * The sole renderer-typography seam for one Question-owned exact A-D set.
+ * Canonical content enters by value; selected layout never mutates or returns
+ * into canonical semantics.
+ */
+export function layoutAbcdOptionSet(optionSet) {
+  if (
+    optionSet?.owner !== 'question'
+    || !Array.isArray(optionSet.options)
+    || optionSet.options.length !== LABELS.length
+    || optionSet.options.some((option, index) =>
+      option?.label !== LABELS[index] || typeof option.optionId !== 'string')
+  ) return notApplicable()
+
+  const measured = optionSet.options.map(measureOption)
+  if (measured.some((value) => value === null)) {
+    return {
+      status: 'needs_review',
+      reason: 'one_column_contains_unrenderable_unbreakable_content',
+    }
+  }
+
+  const cap = capacities()
+  const hasHardBreak = measured.some(({ hardBreaks }) => hardBreaks > 0)
+  if (!hasHardBreak && measured.every(({ advanceTwip }, index) => advanceTwip <= cap.four[index])) {
+    return selectedPlan('four_columns', optionSet, measured)
+  }
+  if (!hasHardBreak && measured.every(({ advanceTwip }, index) => advanceTwip <= cap.two[index])) {
+    return selectedPlan('two_by_two', optionSet, measured)
+  }
+  if (measured.some(({ unbreakableAdvanceTwip }) => unbreakableAdvanceTwip > cap.one)) {
+    return {
+      status: 'needs_review',
+      reason: 'one_column_contains_unrenderable_unbreakable_content',
+    }
+  }
+  return selectedPlan('one_column', optionSet, measured)
+}
+
+function assertSelected(plan) {
+  if (plan?.status !== 'selected') throw new TypeError('A selected A-D layout plan is required')
+}
+
+function physicalSignature(plan) {
+  return digestJson({
+    mode: plan.mode,
+    rowWidthTwip: plan.rowWidthTwip,
+    placements: plan.placements.map((placement) => ({
+      label: placement.label,
+      row: placement.row,
+      column: placement.column,
+      startTwip: placement.startTwip,
+      continuationStartTwip: placement.continuationStartTwip,
+    })),
+  })
+}
+
+function pointPlacements(plan) {
+  return plan.placements.map((placement) => ({
+    ...placement,
+    startPt: placement.startTwip / 20,
+    continuationStartPt:
+      placement.continuationStartTwip === null
+        ? null
+        : placement.continuationStartTwip / 20,
+  }))
+}
+
+export function translateAbcdPlanToPaperSurface(plan) {
+  assertSelected(plan)
+  return {
+    renderer: 'paper_surface',
+    mode: plan.mode,
+    placementSignature: physicalSignature(plan),
+    rowWidthPt: plan.rowWidthTwip / 20,
+    fontSizeHalfPoint: RULES.fontSizeHalfPoint,
+    denseWhiteSpace: plan.mode === 'one_column' ? 'normal' : 'nowrap',
+    clipping: 'forbidden',
+    shrinkToFit: false,
+    placements: pointPlacements(plan),
+  }
+}
+
+export function translateAbcdPlanToPrintPdf(plan) {
+  assertSelected(plan)
+  return {
+    renderer: 'print_pdf',
+    mode: plan.mode,
+    placementSignature: physicalSignature(plan),
+    rowWidthPt: plan.rowWidthTwip / 20,
+    fontSizeHalfPoint: RULES.fontSizeHalfPoint,
+    denseWhiteSpace: plan.mode === 'one_column' ? 'normal' : 'nowrap',
+    clipping: 'forbidden',
+    shrinkToFit: false,
+    placements: pointPlacements(plan),
+  }
+}
+
+export function translateAbcdPlanToDocx(plan) {
+  assertSelected(plan)
+  const rows = Array.from({ length: plan.rowCount }, (_, row) =>
+    plan.placements.filter((placement) => placement.row === row))
+  return {
+    renderer: 'docx',
+    mode: plan.mode,
+    placementSignature: physicalSignature(plan),
+    rowWidthTwip: plan.rowWidthTwip,
+    fontSizeHalfPoint: RULES.fontSizeHalfPoint,
+    clipping: 'forbidden',
+    shrinkToFit: false,
+    tabStopsTwip: [...new Set(plan.placements.map(({ startTwip }) => startTwip))]
+      .filter((value) => value > 0),
+    paragraphs: rows.map((placements) => ({
+      hangingIndentTwip:
+        plan.mode === 'one_column' ? RULES.oneColumnHangingIndentTwip : null,
+      placements: placements.map((placement) => ({ ...placement })),
+    })),
+  }
+}
+
+export const abcdLayoutRules = RULES
