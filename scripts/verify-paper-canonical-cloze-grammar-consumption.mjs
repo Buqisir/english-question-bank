@@ -229,6 +229,19 @@ try {
     }),
     { code: 'CANONICAL_CONSUMPTION_REJECTED' },
   )
+  const mismatchedBlankJoin = structuredClone(complete)
+  const clozeOccurrence = mismatchedBlankJoin.selections
+    .find((selection) => selection.familyContractId === 'cloze')
+    .projectedOccurrences[0]
+  clozeOccurrence.blanks[1].questionId = clozeOccurrence.blanks[0].questionId
+  assert.throws(
+    () => projectCanonicalConsumerGroup({
+      consumption: mismatchedBlankJoin,
+      familyContractId: 'cloze',
+      groupId: 'group-2026-i-cloze',
+    }),
+    { code: 'CANONICAL_CONSUMPTION_REJECTED' },
+  )
   for (const disposition of ['not_found', 'retryable_unavailable', 'incompatible']) {
     assert.throws(
       () => projectCanonicalConsumerGroup({

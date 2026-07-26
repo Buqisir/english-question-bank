@@ -52,6 +52,20 @@ function selectOccurrence({ consumption, familyContractId, groupId }) {
   ) {
     throw rejected(`Family ${familyContractId} selection is partial or ambiguous`)
   }
+  const occurrenceGroupIds = selection.projectedOccurrences.map(
+    (occurrence) => occurrence?.groupId,
+  )
+  if (
+    selection.projectedOccurrences.some(
+      (occurrence) =>
+        occurrence?.kind !== 'group'
+        || occurrence.familyContractId !== familyContractId,
+    )
+    || new Set(occurrenceGroupIds).size !== occurrenceGroupIds.length
+    || occurrenceGroupIds.some((id) => !selection.groupIds.includes(id))
+  ) {
+    throw rejected(`Family ${familyContractId} projected occurrences do not close the selection`)
+  }
   const occurrences = selection.projectedOccurrences.filter(
     (occurrence) => occurrence?.kind === 'group' && occurrence.groupId === groupId,
   )
@@ -86,6 +100,7 @@ export function projectCanonicalConsumerGroup(input) {
 
   const numberByQuestionId = new Map()
   const questionIdByBlankId = new Map()
+  const blankQuestionIds = new Set()
   for (const assignment of occurrence.numbering) {
     if (
       typeof assignment.questionId !== 'string'
@@ -101,11 +116,19 @@ export function projectCanonicalConsumerGroup(input) {
       typeof blank.blankId !== 'string'
       || !numberByQuestionId.has(blank.questionId)
       || questionIdByBlankId.has(blank.blankId)
+      || blankQuestionIds.has(blank.questionId)
     ) {
       throw rejected(`Canonical occurrence ${groupId} has invalid Blank joins`)
     }
     questionIdByBlankId.set(blank.blankId, blank.questionId)
+    blankQuestionIds.add(blank.questionId)
   }
+  if (
+    blankQuestionIds.size !== numberByQuestionId.size
+    || [...numberByQuestionId.keys()].some(
+      (questionId) => !blankQuestionIds.has(questionId),
+    )
+  ) throw rejected(`Canonical occurrence ${groupId} does not join every Question to one Blank`)
 
   const seenBlanks = new Set()
   const paragraphs = occurrence.content?.blocks?.map((block) => {
@@ -143,6 +166,16 @@ export function projectCanonicalConsumerGroup(input) {
       : null
   if (!Array.isArray(choiceSets)) {
     throw rejected(`Canonical occurrence ${groupId} has incompatible choice ownership`)
+  }
+  if (
+    familyContractId === 'cloze'
+    && (
+      choiceSets.length !== occurrence.numbering.length
+      || new Set(choiceSets.map((set) => set.questionId)).size !== choiceSets.length
+      || choiceSets.some((set) => !numberByQuestionId.has(set.questionId))
+    )
+  ) {
+    throw rejected(`Canonical occurrence ${groupId} does not carry one A-D set per Question`)
   }
   const choicesByQuestionId = new Map(choiceSets.map((set) => [set.questionId, set]))
   const questions = occurrence.numbering.map(({ questionId, number }) => {
