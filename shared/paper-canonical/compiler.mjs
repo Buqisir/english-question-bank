@@ -15,6 +15,12 @@ function asBytes(value) {
   return value instanceof Uint8Array ? value : null
 }
 
+function bytesToBase64(bytes) {
+  let binary = ''
+  for (let offset = 0; offset < bytes.length; offset += 0x8000) binary += String.fromCharCode(...bytes.subarray(offset, offset + 0x8000))
+  return btoa(binary)
+}
+
 function stableId(prefix, value) {
   return `${prefix}:${digestJson(value).slice('sha256:'.length, 28)}`
 }
@@ -33,6 +39,7 @@ function captureRequestEvidence(request) {
       continue
     }
     const documentDigest = sha256(bytes)
+    const artifactId = stableId('source-document', { sha256: documentDigest })
     documents.push({
       documentId: stableId('document', { digest: documentDigest, roles: input.roles, inputKey: input.inputKey }),
       inputKey: input.inputKey,
@@ -41,6 +48,13 @@ function captureRequestEvidence(request) {
       originalName: input.declared?.originalName || null,
       byteLength: bytes.byteLength,
       sha256: documentDigest,
+      immutableArtifactRef: {
+        artifactId,
+        relativePath: `source-evidence/${artifactId.slice('source-document:'.length)}.bin`,
+        sha256: documentDigest,
+        byteLength: bytes.byteLength,
+      },
+      encodedBytes: bytesToBase64(bytes),
       bytes,
     })
   }
@@ -169,11 +183,12 @@ function validateExactTransformationRecords(records, capture, closure) {
       diagnostics.push(diagnostic('TRANSFORMATION_SHAPE_INVALID', 'needs_review', path, 'Transformation records are closed ledger entries'))
       continue
     }
-    if (record.certainty !== 'exact' || !registeredRules.has(`${record.ruleId}@${record.ruleVersion}`)) {
+    const rule = registeredRules.get(`${record.ruleId}@${record.ruleVersion}`)
+    if (record.certainty !== 'exact' || !rule || !rule.allowedOperations.includes(record.operation)) {
       diagnostics.push(diagnostic('TRANSFORMATION_NOT_EXACT', 'needs_review', path, 'Only registered exact transformations can produce canonical semantics'))
       continue
     }
-    if (!Number.isInteger(record.sequence) || record.sequence <= previousSequence || !Array.isArray(record.inputSourceSpanIds) || record.inputSourceSpanIds.some((id) => !sourceSpanIds.has(id)) || record.outputDigest !== digestJson(record.after)) {
+    if (!Number.isInteger(record.sequence) || record.sequence <= previousSequence || !Array.isArray(record.inputSourceSpanIds) || record.inputSourceSpanIds.length === 0 || record.inputSourceSpanIds.some((id) => !sourceSpanIds.has(id)) || !isRecordValue(record.preconditions) || Object.keys(record.preconditions).length === 0 || record.outputDigest !== digestJson(record.after) || (record.operation === 'direct_projection' && stableStringify(record.before) !== stableStringify(record.after))) {
       diagnostics.push(diagnostic('TRANSFORMATION_CLOSURE_INVALID', 'needs_review', path, 'Transformation sequence, lineage, or output digest cannot be replayed'))
       continue
     }
@@ -415,7 +430,48 @@ function buildPlan(source, capture, closure, groups, acceptedRecords) {
   return { diagnostics, plan }
 }
 
-function makeReport({ disposition, capture, authority, groups = [], records = [], diagnostics = [] }) {
+function normalizeReviewDecisions(value, capture, diagnostics) {
+  if (value === undefined) return []
+  if (!Array.isArray(value)) {
+    diagnostics.push(diagnostic('REVIEW_DECISIONS_INVALID', 'needs_review', '$.reviewDecisions', 'Review decisions must be an ordered explicit input'))
+    return []
+  }
+  const spanIds = new Set(capture.sourceSpans.map((span) => span.sourceSpanId))
+  const decisionIds = new Set()
+  const decisions = []
+  for (const [index, decision] of value.entries()) {
+    const path = `$.reviewDecisions[${index}]`
+    if (!isRecordValue(decision) || !exactKeys(decision, ['decisionId', 'ambiguityId', 'selectedCandidateId', 'sourceSpanRefs']) || typeof decision.decisionId !== 'string' || typeof decision.ambiguityId !== 'string' || typeof decision.selectedCandidateId !== 'string' || !Array.isArray(decision.sourceSpanRefs) || decision.sourceSpanRefs.length === 0 || decision.sourceSpanRefs.some((sourceSpanId) => !spanIds.has(sourceSpanId)) || decisionIds.has(decision.decisionId)) {
+      diagnostics.push(diagnostic('REVIEW_DECISION_INVALID', 'needs_review', path, 'Review decisions require identity, selected candidate, and captured evidence spans'))
+      continue
+    }
+    decisionIds.add(decision.decisionId)
+    decisions.push(cloneJson(decision))
+  }
+  return decisions
+}
+
+function validateAmbiguities(ambiguities, reviewDecisions, diagnostics) {
+  const decisionsByAmbiguity = new Map(reviewDecisions.map((decision) => [decision.ambiguityId, decision]))
+  for (const [index, ambiguity] of (ambiguities || []).entries()) {
+    const path = `$.ambiguities[${index}]`
+    if (!isRecordValue(ambiguity)) {
+      diagnostics.push(diagnostic('AMBIGUOUS_SOURCE_SEMANTICS', 'needs_review', path, String(ambiguity)))
+      continue
+    }
+    if (!exactKeys(ambiguity, ['ambiguityId', 'candidates', 'sourceSpanRefs']) || typeof ambiguity.ambiguityId !== 'string' || !Array.isArray(ambiguity.candidates) || ambiguity.candidates.length < 2 || ambiguity.candidates.some((candidate) => typeof candidate !== 'string') || !Array.isArray(ambiguity.sourceSpanRefs) || ambiguity.sourceSpanRefs.length === 0) {
+      diagnostics.push(diagnostic('AMBIGUITY_INVALID', 'needs_review', path, 'Ambiguity candidates require identity and source evidence'))
+      continue
+    }
+    const decision = decisionsByAmbiguity.get(ambiguity.ambiguityId)
+    const sameSpans = decision && decision.sourceSpanRefs.length === ambiguity.sourceSpanRefs.length && decision.sourceSpanRefs.every((sourceSpanId) => ambiguity.sourceSpanRefs.includes(sourceSpanId))
+    if (!decision || !ambiguity.candidates.includes(decision.selectedCandidateId) || !sameSpans) {
+      diagnostics.push(diagnostic('AMBIGUOUS_SOURCE_SEMANTICS', 'needs_review', path, `No explicit evidence-bound decision resolves ${ambiguity.ambiguityId}`))
+    }
+  }
+}
+
+function makeReport({ disposition, capture, authority, groups = [], records = [], reviewDecisions = [], diagnostics = [] }) {
   const report = {
     schemaVersion: 'normalization-report-v1',
     disposition,
@@ -424,14 +480,15 @@ function makeReport({ disposition, capture, authority, groups = [], records = []
     sourceFingerprint: digestJson({ captureDigest: capture.digest, groupFingerprints: groups.map((group) => group.sourceFingerprint) }),
     directSourceMap: groups.flatMap((group) => group.sourceMap.entries),
     transformationRecords: records,
+    reviewDecisions,
     diagnostics,
   }
   if (disposition === 'ready') report.semanticDigest = digestJson({ groups: groups.map((group) => group.semanticDigest) })
   return report
 }
 
-function blockedResult(disposition, capture, authority, diagnostics, records = []) {
-  return { disposition, artifacts: { sourceCapture: capture, normalizationReport: makeReport({ disposition, capture, authority, records, diagnostics }) } }
+function blockedResult(disposition, capture, authority, diagnostics, records = [], reviewDecisions = []) {
+  return { disposition, artifacts: { sourceCapture: capture, normalizationReport: makeReport({ disposition, capture, authority, records, reviewDecisions, diagnostics }) } }
 }
 
 /**
@@ -443,41 +500,42 @@ export function compileCanonicalPaper(request) {
   const { documents, diagnostics } = captureRequestEvidence(request)
   const parsed = parseFixtureEvidence(documents, diagnostics)
   const capture = buildSourceCapture(documents, parsed, diagnostics)
+  const reviewDecisions = normalizeReviewDecisions(request?.reviewDecisions, capture, diagnostics)
   const authorityResolution = resolveCanonicalAuthority(request?.authority)
   if (!authorityResolution.ok) {
     diagnostics.push(...authorityResolution.issues.map((item) => diagnostic(item.code, 'unsupported', item.path, item.message)))
-    return blockedResult(dispositionFor(diagnostics), capture, request?.authority || null, diagnostics)
+    return blockedResult(dispositionFor(diagnostics), capture, request?.authority || null, diagnostics, [], reviewDecisions)
   }
   const closure = authorityResolution.closure
   diagnostics.push(...validateCapture(capture, closure).map((item) => diagnostic(item.code, 'incomplete_source', item.path, item.message)))
-  if (!parsed) return blockedResult(dispositionFor(diagnostics), capture, closure.authorityRef, diagnostics)
+  if (!parsed) return blockedResult(dispositionFor(diagnostics), capture, closure.authorityRef, diagnostics, [], reviewDecisions)
   const source = parsed.value
   if (typeof source.paperId !== 'string' || typeof source.profileId !== 'string' || !Array.isArray(source.groups)) {
     diagnostics.push(diagnostic('FIXTURE_SOURCE_SHAPE_INVALID', 'incomplete_source', '$', 'Source evidence does not close a paper, profile, and group list'))
   }
-  for (const marker of source.ambiguities || []) diagnostics.push(diagnostic('AMBIGUOUS_SOURCE_SEMANTICS', 'needs_review', '$.ambiguities', String(marker)))
+  validateAmbiguities(source.ambiguities, reviewDecisions, diagnostics)
   for (const marker of source.unsupportedFeatures || []) diagnostics.push(diagnostic('SOURCE_FEATURE_UNSUPPORTED', 'unsupported', '$.unsupportedFeatures', String(marker)))
   validateAnswerAssertions(capture, diagnostics)
   validateAnswerCoverage(source, capture, diagnostics)
   const transformations = validateExactTransformationRecords(source.transformations, capture, closure)
   diagnostics.push(...transformations.diagnostics)
-  if (dispositionFor(diagnostics) !== 'ready') return blockedResult(dispositionFor(diagnostics), capture, closure.authorityRef, diagnostics, transformations.records)
+  if (dispositionFor(diagnostics) !== 'ready') return blockedResult(dispositionFor(diagnostics), capture, closure.authorityRef, diagnostics, transformations.records, reviewDecisions)
   const builtGroups = []
   for (const rawGroup of source.groups) {
     const built = buildGroupArtifact({ ...rawGroup, paperId: source.paperId }, capture, closure, transformations.records)
     diagnostics.push(...built.diagnostics)
     if (built.artifact) builtGroups.push({ ...built.artifact, slotId: rawGroup.slotId })
   }
-  if (dispositionFor(diagnostics) !== 'ready') return blockedResult(dispositionFor(diagnostics), capture, closure.authorityRef, diagnostics, transformations.records)
+  if (dispositionFor(diagnostics) !== 'ready') return blockedResult(dispositionFor(diagnostics), capture, closure.authorityRef, diagnostics, transformations.records, reviewDecisions)
   const planResult = buildPlan(source, capture, closure, builtGroups, transformations.records)
   diagnostics.push(...planResult.diagnostics)
-  if (dispositionFor(diagnostics) !== 'ready') return blockedResult(dispositionFor(diagnostics), capture, closure.authorityRef, diagnostics, transformations.records)
+  if (dispositionFor(diagnostics) !== 'ready') return blockedResult(dispositionFor(diagnostics), capture, closure.authorityRef, diagnostics, transformations.records, reviewDecisions)
   const groups = builtGroups.map(({ slotId: _slotId, ...group }) => group)
-  const report = makeReport({ disposition: 'ready', capture, authority: closure.authorityRef, groups, records: transformations.records, diagnostics })
+  const report = makeReport({ disposition: 'ready', capture, authority: closure.authorityRef, groups, records: transformations.records, reviewDecisions, diagnostics })
   const reportIssues = validateJsonSchema(report, closure.schemas['normalization-report-v1'], '$.normalizationReport')
   if (reportIssues.length > 0) {
     const mapped = reportIssues.map((item) => diagnostic(item.code, 'needs_review', item.path, item.message))
-    return blockedResult('needs_review', capture, closure.authorityRef, [...diagnostics, ...mapped], transformations.records)
+    return blockedResult('needs_review', capture, closure.authorityRef, [...diagnostics, ...mapped], transformations.records, reviewDecisions)
   }
   return {
     disposition: 'ready',

@@ -26,7 +26,7 @@ import reportSchema from '../../schemas/paper-canonical/normalization-report-v1.
 import publicationSchema from '../../schemas/paper-canonical/canonical-paper-publication-v1.schema.json' with { type: 'json' }
 import consumerSchema from '../../schemas/paper-canonical/consumer-contract-v1.schema.json' with { type: 'json' }
 
-import { digestJson, isRecordValue } from './stable.mjs'
+import { digestJson, exactKeys, isRecordValue } from './stable.mjs'
 
 const requiredOwners = [
   'core',
@@ -97,32 +97,73 @@ function flattenSlots(profile) {
   return profile.parts.flatMap((part) => part.sections.flatMap((section) => section.slots))
 }
 
+function closedProfileValue(value, keys, path, issues, label) {
+  if (!isRecordValue(value) || !exactKeys(value, keys)) {
+    issues.push(issue('PROFILE_UNKNOWN_FIELD', path, `${label} fields are closed`))
+    return false
+  }
+  return true
+}
+
+function validateProfileSlot(slot, profile, families, path, slotIds, issues) {
+  if (!isRecordValue(slot) || typeof slot.slotId !== 'string') {
+    issues.push(issue('PROFILE_SLOT_INVALID', path, 'Slot requires a stable identity'))
+    return
+  }
+  if (slotIds.has(slot.slotId)) issues.push(issue('PROFILE_DUPLICATE_SLOT', path, 'Slot ids must be unique'))
+  slotIds.add(slot.slotId)
+  const common = ['slotId', 'presence', 'activation', 'numberingRule', 'scoringRule', 'instructionRefs', 'answerRegionRef']
+  if (slot.activation === 'canonical_group') {
+    if (!closedProfileValue(slot, [...common, 'familyContractRef', 'groupCardinality', 'questionCardinality'], path, issues, 'Active slot')) return
+    if (!closedProfileValue(slot.familyContractRef, ['id', 'version'], `${path}.familyContractRef`, issues, 'Family reference') || !families.has(slot.familyContractRef.id)) {
+      issues.push(issue('PROFILE_UNKNOWN_FAMILY', path, 'Active slot references an unknown family'))
+    }
+    if (slot.groupCardinality !== 1) issues.push(issue('PROFILE_GROUP_CARDINALITY', path, 'Active slots bind exactly one group'))
+    if (!closedProfileValue(slot.questionCardinality, ['kind', 'count'], `${path}.questionCardinality`, issues, 'Question cardinality') || slot.questionCardinality.kind !== 'exact' || !Number.isInteger(slot.questionCardinality.count)) {
+      issues.push(issue('PROFILE_QUESTION_CARDINALITY', path, 'Active slots require exact integer question cardinality'))
+    }
+  } else if (slot.activation === 'inactive_source') {
+    if (!closedProfileValue(slot, [...common, 'sourceRole', 'renderPolicy'], path, issues, 'Inactive slot')) return
+    if (slot.renderPolicy !== 'suppress') issues.push(issue('PROFILE_INACTIVE_SLOT', path, 'Inactive source slots must suppress rendering'))
+  } else {
+    issues.push(issue('PROFILE_UNKNOWN_ACTIVATION', path, 'Unknown activation'))
+    return
+  }
+  if (!Array.isArray(slot.instructionRefs) || typeof slot.answerRegionRef !== 'string' || !profile.answerRegions[slot.answerRegionRef]) issues.push(issue('PROFILE_UNKNOWN_ANSWER_REGION', path, 'Slot references an unknown answer region'))
+  if (!isRecordValue(slot.numberingRule) || !isRecordValue(slot.scoringRule)) {
+    issues.push(issue('PROFILE_SLOT_RULE_INVALID', path, 'Slot numbering and scoring rules must be closed objects'))
+    return
+  }
+  const numberingKeys = slot.numberingRule.kind === 'range' ? ['kind', 'start', 'end'] : ['kind']
+  if (!exactKeys(slot.numberingRule, numberingKeys) || !['range', 'none', 'source_observed'].includes(slot.numberingRule.kind)) issues.push(issue('PROFILE_NUMBERING_RULE_INVALID', `${path}.numberingRule`, 'Numbering rule is closed'))
+  const scoringKeys = slot.scoringRule.kind === 'per_question' ? ['kind', 'points', 'total'] : ['kind', 'total']
+  if (!exactKeys(slot.scoringRule, scoringKeys) || !['per_question', 'group_total'].includes(slot.scoringRule.kind)) issues.push(issue('PROFILE_SCORING_RULE_INVALID', `${path}.scoringRule`, 'Scoring rule is closed'))
+}
+
 function validateProfile(profile, families) {
   const issues = []
+  if (!isRecordValue(profile.instructions) || !isRecordValue(profile.answerRegions) || !closedProfileValue(profile.completeness, ['requireEveryRequiredSlot', 'allowOptionalOmission', 'requireInactiveSourceClosure', 'rejectUnexpectedSlots'], '$.completeness', issues, 'Completeness')) return issues
+  for (const [instructionId, instruction] of Object.entries(profile.instructions)) {
+    if (!closedProfileValue(instruction, ['instructionId', 'placement', 'text'], `$.instructions.${instructionId}`, issues, 'Instruction') || instruction.instructionId !== instructionId) issues.push(issue('PROFILE_INSTRUCTION_INVALID', `$.instructions.${instructionId}`, 'Instruction identity must close its key'))
+  }
+  for (const [regionId, region] of Object.entries(profile.answerRegions)) {
+    if (!closedProfileValue(region, ['regionId', 'kind'], `$.answerRegions.${regionId}`, issues, 'Answer region') || region.regionId !== regionId) issues.push(issue('PROFILE_ANSWER_REGION_INVALID', `$.answerRegions.${regionId}`, 'Answer region identity must close its key'))
+  }
   if (!Array.isArray(profile.parts) || profile.parts.length === 0) {
     return [issue('PROFILE_PARTS_REQUIRED', '$.parts', 'Profile needs ordered parts')]
   }
   const slotIds = new Set()
-  for (const part of profile.parts) {
-    if (!Array.isArray(part.sections) || part.sections.length === 0) issues.push(issue('PROFILE_SECTIONS_REQUIRED', `$.parts.${part.partId}`, 'Part needs sections'))
-    for (const section of part.sections || []) {
-      for (const slot of section.slots || []) {
-        if (slotIds.has(slot.slotId)) issues.push(issue('PROFILE_DUPLICATE_SLOT', `$.slot.${slot.slotId}`, 'Slot ids must be unique'))
-        slotIds.add(slot.slotId)
-        if (slot.activation === 'canonical_group') {
-          if (!slot.familyContractRef || !families.has(slot.familyContractRef.id)) {
-            issues.push(issue('PROFILE_UNKNOWN_FAMILY', `$.slot.${slot.slotId}`, 'Active slot references an unknown family'))
-          }
-          if (slot.groupCardinality !== 1) issues.push(issue('PROFILE_GROUP_CARDINALITY', `$.slot.${slot.slotId}`, 'Active slots bind exactly one group'))
-        } else if (slot.activation === 'inactive_source') {
-          if (slot.groupRef !== undefined || slot.renderPolicy !== 'suppress') {
-            issues.push(issue('PROFILE_INACTIVE_SLOT', `$.slot.${slot.slotId}`, 'Inactive source slots cannot carry groups and must suppress rendering'))
-          }
-        } else {
-          issues.push(issue('PROFILE_UNKNOWN_ACTIVATION', `$.slot.${slot.slotId}`, 'Unknown activation'))
-        }
-        if (!profile.answerRegions[slot.answerRegionRef]) issues.push(issue('PROFILE_UNKNOWN_ANSWER_REGION', `$.slot.${slot.slotId}`, 'Slot references an unknown answer region'))
+  for (const [partIndex, part] of profile.parts.entries()) {
+    const partPath = `$.parts[${partIndex}]`
+    if (!closedProfileValue(part, ['partId', 'ordinal', 'titleInstructionRef', 'score', 'sections'], partPath, issues, 'Part')) continue
+    if (!Array.isArray(part.sections) || part.sections.length === 0) issues.push(issue('PROFILE_SECTIONS_REQUIRED', partPath, 'Part needs sections'))
+    for (const [sectionIndex, section] of (part.sections || []).entries()) {
+      const sectionPath = `${partPath}.sections[${sectionIndex}]`
+      if (!closedProfileValue(section, ['sectionId', 'ordinal', 'titleInstructionRef', 'score', 'slots'], sectionPath, issues, 'Section') || !Array.isArray(section.slots)) {
+        issues.push(issue('PROFILE_SLOTS_REQUIRED', sectionPath, 'Section needs ordered slots'))
+        continue
       }
+      for (const [slotIndex, slot] of section.slots.entries()) validateProfileSlot(slot, profile, families, `${sectionPath}.slots[${slotIndex}]`, slotIds, issues)
     }
   }
   return issues

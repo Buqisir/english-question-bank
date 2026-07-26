@@ -13,7 +13,7 @@ function groupSemanticPayload(group) {
   return semantic
 }
 
-function sourceMapCoverageIssues(group) {
+function sourceMapCoverageIssues(group, sourceCapture) {
   const issues = []
   const expected = new Set([
     `group:${group.identity.groupId}`,
@@ -22,11 +22,14 @@ function sourceMapCoverageIssues(group) {
     ...group.media.map(({ mediaId }) => `media:${mediaId}`),
   ])
   const seen = new Set()
+  if (group.sourceMap.captureId !== sourceCapture.captureId) issues.push('source-map capture does not match the supplied Source Capture')
+  const spanIds = new Set(sourceCapture.sourceSpans.map((span) => span.sourceSpanId))
   for (const entry of group.sourceMap.entries) {
     const identity = `${entry.target.kind}:${entry.target.id}`
     if (seen.has(identity)) issues.push(`duplicate source-map target ${identity}`)
     seen.add(identity)
     if (!Array.isArray(entry.sourceSpanRefs) || entry.sourceSpanRefs.length === 0) issues.push(`missing source-map span for ${identity}`)
+    else if (entry.sourceSpanRefs.some((sourceSpanId) => !spanIds.has(sourceSpanId))) issues.push(`unresolved source-map span for ${identity}`)
   }
   for (const identity of expected) if (!seen.has(identity)) issues.push(`missing source-map target ${identity}`)
   return issues
@@ -54,6 +57,9 @@ function assertCanonicalPackage(canonicalPackage) {
   const authority = resolveCanonicalAuthority(canonicalPackage?.authorityClosure?.authorityRef || canonicalPackage?.plan?.authorityRef)
   if (!authority.ok) throw projectionError('Canonical authority is unavailable', authority.issues)
   const closure = authority.closure
+  const sourceCapture = canonicalPackage.sourceCapture
+  const captureIssues = validateJsonSchema(sourceCapture, closure.schemas['source-capture-v1'], '$.sourceCapture')
+  if (captureIssues.length > 0) throw projectionError('Source Capture is schema-invalid', captureIssues)
   const planIssues = validateJsonSchema(canonicalPackage?.plan, closure.schemas['canonical-paper-plan-v1'], '$.plan')
   if (planIssues.length > 0) throw projectionError('Canonical Plan is schema-invalid', planIssues)
   const plan = canonicalPackage.plan
@@ -74,7 +80,7 @@ function assertCanonicalPackage(canonicalPackage) {
     const choiceIssues = choiceOwnershipIssues(group, family)
     if (choiceIssues.length > 0) throw projectionError('Group choice ownership is not structurally exclusive', choiceIssues)
     if (group.semanticDigest !== digestJson(groupSemanticPayload(group))) throw projectionError('Group semantic digest does not match canonical semantics', [])
-    const sourceMapIssues = sourceMapCoverageIssues(group)
+    const sourceMapIssues = sourceMapCoverageIssues(group, sourceCapture)
     if (sourceMapIssues.length > 0) throw projectionError('Group source map is incomplete', sourceMapIssues)
     groupById.set(group.identity.groupId, group)
   }

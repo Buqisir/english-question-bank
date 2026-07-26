@@ -24,6 +24,7 @@ const artifactPaths = {
   question_groups: 'canonical/canonical-question-groups-v1.json',
   normalization_report: 'canonical/normalization-report-v1.json',
 }
+const safePaperId = /^[a-z0-9][a-z0-9._-]{0,127}$/
 
 function stableBytes(value) {
   return new TextEncoder().encode(`${stableStringify(value)}\n`)
@@ -55,10 +56,85 @@ function artifactDescriptor(role, value) {
   }
 }
 
+function assertPaperId(paperId) {
+  if (typeof paperId !== 'string' || !safePaperId.test(paperId) || paperId === '.' || paperId === '..') {
+    throw publicationError('CANONICAL_PUBLICATION_PAPER_ID_INVALID', 'Paper id is not safe for immutable publication storage')
+  }
+}
+
+function decodeBase64(encodedBytes, label) {
+  if (typeof encodedBytes !== 'string' || !/^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/.test(encodedBytes)) throw publicationError('CANONICAL_PUBLICATION_SOURCE_EVIDENCE_INVALID', `${label} has invalid base64 evidence`)
+  return new Uint8Array(Buffer.from(encodedBytes, 'base64'))
+}
+
+function sourceEvidenceDescriptors(sourceCapture) {
+  if (!Array.isArray(sourceCapture?.documents) || sourceCapture.documents.length === 0) throw publicationError('CANONICAL_PUBLICATION_SOURCE_EVIDENCE_INVALID', 'Source Capture requires immutable documents')
+  const documentIds = new Set()
+  const relativePaths = new Set()
+  return sourceCapture.documents.map((document) => {
+    const ref = document?.immutableArtifactRef
+    if (!document || typeof document.documentId !== 'string' || documentIds.has(document.documentId) || !ref || typeof ref.artifactId !== 'string' || typeof ref.relativePath !== 'string' || !ref.relativePath.startsWith('source-evidence/') || ref.relativePath.includes('..') || path.isAbsolute(ref.relativePath) || relativePaths.has(ref.relativePath)) {
+      throw publicationError('CANONICAL_PUBLICATION_SOURCE_EVIDENCE_INVALID', 'Source Capture document identity or artifact reference is invalid')
+    }
+    const bytes = decodeBase64(document.encodedBytes, document.documentId)
+    if (bytes.byteLength !== document.byteLength || sha256(bytes) !== document.sha256 || ref.byteLength !== document.byteLength || ref.sha256 !== document.sha256) throw publicationError('CANONICAL_PUBLICATION_SOURCE_EVIDENCE_INVALID', `Source Capture document ${document.documentId} does not close its immutable bytes`)
+    documentIds.add(document.documentId)
+    relativePaths.add(ref.relativePath)
+    return {
+      documentId: document.documentId,
+      artifactId: ref.artifactId,
+      relativePath: ref.relativePath,
+      byteLength: bytes.byteLength,
+      sha256: sha256(bytes),
+      bytes,
+    }
+  }).sort((left, right) => left.documentId.localeCompare(right.documentId))
+}
+
+function validateSourceCaptureIntegrity(sourceCapture) {
+  if (!sourceCapture || sourceCapture.digest !== digestJson(withoutKey(withoutKey(sourceCapture, 'captureId'), 'digest'))) throw publicationError('CANONICAL_PUBLICATION_CAPTURE_DIGEST_INVALID', 'Source Capture digest differs from its immutable content')
+  const expectedCaptureId = `source-capture:${sourceCapture.digest.slice('sha256:'.length, 28)}`
+  if (sourceCapture.captureId !== expectedCaptureId) throw publicationError('CANONICAL_PUBLICATION_CAPTURE_ID_INVALID', 'Source Capture identity does not derive from its immutable content')
+  sourceEvidenceDescriptors(sourceCapture)
+  const documents = new Map(sourceCapture.documents.map((document) => [document.documentId, document]))
+  const spans = new Map()
+  for (const span of sourceCapture.sourceSpans || []) {
+    const document = documents.get(span.documentId)
+    if (!document || typeof span.sourceSpanId !== 'string' || spans.has(span.sourceSpanId) || span.documentDigest !== document.sha256 || !span.coordinate || span.coordinate.kind !== 'byte_range' || !Number.isInteger(span.coordinate.start) || !Number.isInteger(span.coordinate.end) || span.coordinate.start < 0 || span.coordinate.end < span.coordinate.start || span.coordinate.end > document.byteLength) {
+      throw publicationError('CANONICAL_PUBLICATION_CAPTURE_LINEAGE_INVALID', 'Source Capture span does not resolve to immutable document bytes')
+    }
+    spans.set(span.sourceSpanId, span)
+  }
+  for (const assertion of sourceCapture.assertions || []) if (!spans.has(assertion.sourceSpanId)) throw publicationError('CANONICAL_PUBLICATION_CAPTURE_LINEAGE_INVALID', 'Source Capture assertion lacks a resolvable span')
+  for (const observation of sourceCapture.observations || []) if (!documents.has(observation.documentId) || !spans.has(observation.sourceSpanId)) throw publicationError('CANONICAL_PUBLICATION_CAPTURE_LINEAGE_INVALID', 'Source Capture observation lacks immutable document lineage')
+  return { documents, spans }
+}
+
+function validatePublicationLineage({ sourceCapture, plan, groups, normalizationReport }) {
+  const { spans } = validateSourceCaptureIntegrity(sourceCapture)
+  const recordIds = new Set((normalizationReport.transformationRecords || []).map((record) => record.recordId))
+  for (const decision of normalizationReport.reviewDecisions || []) if (!Array.isArray(decision.sourceSpanRefs) || decision.sourceSpanRefs.some((sourceSpanId) => !spans.has(sourceSpanId))) throw publicationError('CANONICAL_PUBLICATION_LINEAGE_INVALID', 'Review decision does not resolve to captured evidence')
+  for (const group of groups) {
+    if (group.sourceMap?.captureId !== sourceCapture.captureId || !Array.isArray(group.sourceMap?.entries) || group.sourceMap.entries.some((entry) => !Array.isArray(entry.sourceSpanRefs) || entry.sourceSpanRefs.length === 0 || entry.sourceSpanRefs.some((sourceSpanId) => !spans.has(sourceSpanId)) || !Array.isArray(entry.transformationRecordIds) || entry.transformationRecordIds.some((recordId) => !recordIds.has(recordId)))) {
+      throw publicationError('CANONICAL_PUBLICATION_LINEAGE_INVALID', 'Canonical Group source map does not close against Source Capture')
+    }
+    const groupSpanIds = [...new Set(group.sourceMap.entries.flatMap((entry) => entry.sourceSpanRefs))]
+    const expectedFingerprint = digestJson({ captureDigest: sourceCapture.digest, sourceSpanId: groupSpanIds[0], recordIds: group.sourceMap.entries.flatMap((entry) => entry.transformationRecordIds) })
+    if (group.sourceFingerprint !== expectedFingerprint) throw publicationError('CANONICAL_PUBLICATION_LINEAGE_INVALID', 'Canonical Group source fingerprint does not match source lineage')
+  }
+  for (const assignment of plan.numberingAssignments || []) if (!spans.has(assignment.sourceNumberSpan)) throw publicationError('CANONICAL_PUBLICATION_LINEAGE_INVALID', 'Canonical Plan numbering assignment lacks a captured source span')
+}
+
 export function sealCanonicalPublication({ compilation, sourceAssetVersion, sourceAsset }) {
   if (compilation?.disposition !== 'ready') throw publicationError('CANONICAL_PUBLICATION_BLOCKED', 'Only a complete ready compilation may be published')
   if (!(sourceAsset instanceof Uint8Array) || !Number.isInteger(sourceAssetVersion) || sourceAssetVersion < 1) throw publicationError('CANONICAL_PUBLICATION_INPUT_INVALID', 'Publication needs immutable source asset bytes and a positive version')
   const { sourceCapture, canonicalPaper, normalizationReport } = compilation.artifacts
+  assertPaperId(canonicalPaper?.paperPlan?.paperId)
+  validateSourceCaptureIntegrity(sourceCapture)
+  const sourceEvidence = sourceEvidenceDescriptors(sourceCapture)
+  const sourceAssetDigest = sha256(sourceAsset)
+  const matchingDocuments = sourceCapture.documents.filter((document) => document.sha256 === sourceAssetDigest)
+  if (matchingDocuments.length !== 1) throw publicationError('CANONICAL_PUBLICATION_SOURCE_UNBOUND', 'The publication source asset must be exactly one captured immutable document')
   const questionGroups = {
     schemaVersion: 'canonical-question-groups-v1',
     groups: [...canonicalPaper.questionGroups].sort((left, right) => left.identity.groupId.localeCompare(right.identity.groupId)),
@@ -73,7 +149,9 @@ export function sealCanonicalPublication({ compilation, sourceAssetVersion, sour
     schemaVersion: 'canonical-paper-publication-v1',
     paperId: canonicalPaper.paperPlan.paperId,
     sourceAssetVersion,
-    sourceAssetDigest: sha256(sourceAsset),
+    sourceAssetDocumentId: matchingDocuments[0].documentId,
+    sourceAssetDigest,
+    sourceEvidence: sourceEvidence.map(({ bytes: _bytes, ...descriptor }) => descriptor),
     authority: canonicalPaper.paperPlan.authorityRef,
     artifacts: descriptors
       .map(({ bytes: _bytes, ...descriptor }) => descriptor)
@@ -84,6 +162,7 @@ export function sealCanonicalPublication({ compilation, sourceAssetVersion, sour
     manifest,
     sourceAsset: new Uint8Array(sourceAsset),
     artifacts: Object.fromEntries(descriptors.map((descriptor) => [descriptor.relativePath, descriptor.bytes])),
+    sourceEvidence: Object.fromEntries(sourceEvidence.map((descriptor) => [descriptor.relativePath, descriptor.bytes])),
   }
 }
 
@@ -94,6 +173,7 @@ export function validateCanonicalPublicationBundle({ manifest, sourceAsset, read
   const manifestIssues = validateJsonSchema(manifest, closure.schemas['canonical-paper-publication-v1'], '$.publication')
   if (manifestIssues.length > 0) throw publicationError('CANONICAL_PUBLICATION_SCHEMA_INVALID', JSON.stringify(manifestIssues))
   if (manifest.publicationDigest !== digestJson(withoutKey(manifest, 'publicationDigest'))) throw publicationError('CANONICAL_PUBLICATION_DIGEST_INVALID', 'Publication manifest digest differs')
+  assertPaperId(manifest.paperId)
   if (!(sourceAsset instanceof Uint8Array) || sha256(sourceAsset) !== manifest.sourceAssetDigest) throw publicationError('CANONICAL_PUBLICATION_SOURCE_STALE', 'Source asset bytes do not match the sealed publication')
   const expectedRoles = Object.keys(artifactPaths).sort()
   if (manifest.artifacts.length !== expectedRoles.length || manifest.artifacts.map((item) => item.role).sort().join(',') !== expectedRoles.join(',')) throw publicationError('CANONICAL_PUBLICATION_ARTIFACT_CLOSURE', 'Publication requires every canonical artifact exactly once')
@@ -109,9 +189,20 @@ export function validateCanonicalPublicationBundle({ manifest, sourceAsset, read
   const reportIssues = validateJsonSchema(artifacts.normalization_report, closure.schemas['normalization-report-v1'], '$.report')
   if (sourceCaptureIssues.length || planIssues.length || reportIssues.length || artifacts.question_groups?.schemaVersion !== 'canonical-question-groups-v1' || !Array.isArray(artifacts.question_groups?.groups)) throw publicationError('CANONICAL_PUBLICATION_ARTIFACT_SCHEMA_INVALID', 'One or more sealed artifacts violate their exact schemas')
   if (artifacts.normalization_report.disposition !== 'ready' || artifacts.normalization_report.captureDigest !== artifacts.source_capture.digest || artifacts.paper_plan.completeness.status !== 'complete') throw publicationError('CANONICAL_PUBLICATION_SEMANTIC_CLOSURE_INVALID', 'Publication does not contain a complete ready source closure')
+  const sourceEvidence = sourceEvidenceDescriptors(artifacts.source_capture)
+  if (!Array.isArray(manifest.sourceEvidence) || manifest.sourceEvidence.length !== sourceEvidence.length) throw publicationError('CANONICAL_PUBLICATION_SOURCE_EVIDENCE_INVALID', 'Publication source evidence closure differs from Source Capture')
+  for (const expected of sourceEvidence) {
+    const descriptor = manifest.sourceEvidence.find((candidate) => candidate.documentId === expected.documentId)
+    if (!descriptor || descriptor.artifactId !== expected.artifactId || descriptor.relativePath !== expected.relativePath || descriptor.byteLength !== expected.byteLength || descriptor.sha256 !== expected.sha256) throw publicationError('CANONICAL_PUBLICATION_SOURCE_EVIDENCE_INVALID', 'Publication source evidence descriptor differs from Source Capture')
+    const bytes = readArtifact(descriptor.relativePath)
+    if (!(bytes instanceof Uint8Array) || bytes.byteLength !== descriptor.byteLength || sha256(bytes) !== descriptor.sha256) throw publicationError('CANONICAL_PUBLICATION_SOURCE_EVIDENCE_INVALID', `Source evidence ${descriptor.documentId} is missing or corrupt`)
+  }
+  const sourceAssetDocument = artifacts.source_capture.documents.find((document) => document.documentId === manifest.sourceAssetDocumentId)
+  if (!sourceAssetDocument || sourceAssetDocument.sha256 !== manifest.sourceAssetDigest || sourceAssetDocument.sha256 !== sha256(sourceAsset)) throw publicationError('CANONICAL_PUBLICATION_SOURCE_UNBOUND', 'Publication source asset does not bind to captured source evidence')
+  validatePublicationLineage({ sourceCapture: artifacts.source_capture, plan: artifacts.paper_plan, groups: artifacts.question_groups.groups, normalizationReport: artifacts.normalization_report })
   let projected
   try {
-    projected = projectCanonicalPaper({ plan: artifacts.paper_plan, groups: artifacts.question_groups.groups, authorityClosure: closure })
+    projected = projectCanonicalPaper({ plan: artifacts.paper_plan, groups: artifacts.question_groups.groups, sourceCapture: artifacts.source_capture, authorityClosure: closure })
   } catch (error) {
     throw publicationError('CANONICAL_PUBLICATION_PROJECTION_INVALID', error.message)
   }
@@ -143,6 +234,7 @@ function ensureDatabaseShape(db) {
 }
 
 function paperPaths(rootDir, paperId) {
+  assertPaperId(paperId)
   const paperDir = path.join(rootDir, paperId)
   return {
     paperDir,
@@ -261,6 +353,7 @@ export function publishCanonicalPaperPublication({ rootDir, db, compilation, sou
   try {
     writeBytes(path.join(stageDir, 'paper-asset.json'), sealed.sourceAsset)
     for (const [relativePath, bytes] of Object.entries(sealed.artifacts)) writeBytes(path.join(stageDir, relativePath), bytes)
+    for (const [relativePath, bytes] of Object.entries(sealed.sourceEvidence)) writeBytes(path.join(stageDir, relativePath), bytes)
     writeJson(path.join(stageDir, 'canonical', publicationFileName), sealed.manifest)
     const reopenedManifest = readJsonFile(path.join(stageDir, 'canonical', publicationFileName))
     validateCanonicalPublicationBundle({
@@ -313,11 +406,15 @@ export function createFileSystemCanonicalPublicationStore({ rootDir, db }) {
       return { current, latest }
     },
     readVersionArtifact(ref, relativePath) {
-      const filePath = path.join(rootDir, ref.paperId, 'versions', ref.versionName, relativePath)
+      const paths = paperPaths(rootDir, ref.paperId)
+      if (typeof ref.versionName !== 'string' || !/^v\d+$/.test(ref.versionName) || typeof relativePath !== 'string' || relativePath.includes('..') || path.isAbsolute(relativePath)) return null
+      const filePath = path.join(paths.versionsDir, ref.versionName, relativePath)
       return existsSync(filePath) ? readFileSync(filePath) : null
     },
     readSourceAsset(ref) {
-      const filePath = path.join(rootDir, ref.paperId, 'versions', ref.versionName, 'paper-asset.json')
+      const paths = paperPaths(rootDir, ref.paperId)
+      if (typeof ref.versionName !== 'string' || !/^v\d+$/.test(ref.versionName)) return null
+      const filePath = path.join(paths.versionsDir, ref.versionName, 'paper-asset.json')
       return existsSync(filePath) ? readFileSync(filePath) : null
     },
   }

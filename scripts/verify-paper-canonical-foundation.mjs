@@ -122,6 +122,7 @@ assert.deepEqual(
 const projected = projectCanonicalPaper({
   plan: first.artifacts.canonicalPaper.paperPlan,
   groups: first.artifacts.canonicalPaper.questionGroups,
+  sourceCapture: first.artifacts.sourceCapture,
   authorityClosure: closure,
 })
 assert.equal(projected.nodes.filter((node) => node.kind === 'group').length, 9)
@@ -134,7 +135,7 @@ const shared = corruptSharedBank.find((group) => group.variant.family === 'seven
 shared.variant.choiceOwnership.sets = []
 shared.semanticDigest = shared.semanticDigest
 assert.throws(
-  () => projectCanonicalPaper({ plan: first.artifacts.canonicalPaper.paperPlan, groups: corruptSharedBank, authorityClosure: closure }),
+  () => projectCanonicalPaper({ plan: first.artifacts.canonicalPaper.paperPlan, groups: corruptSharedBank, sourceCapture: first.artifacts.sourceCapture, authorityClosure: closure }),
   { code: 'CANONICAL_PROJECTION_REJECTED' },
 )
 
@@ -173,6 +174,26 @@ assert.equal(transformed.artifacts.normalizationReport.transformationRecords.len
 const nonExactTransformation = structuredClone(exactTransformation)
 nonExactTransformation.transformations[0].certainty = 'heuristic'
 assert.equal(compileCanonicalPaper(makeRequest(nonExactTransformation)).disposition, 'needs_review')
+const unregisteredOperation = structuredClone(exactTransformation)
+unregisteredOperation.transformations[0].operation = 'erase_source_semantics'
+assert.equal(compileCanonicalPaper(makeRequest(unregisteredOperation)).disposition, 'needs_review')
+
+const reviewedAmbiguity = structuredClone(source)
+reviewedAmbiguity.ambiguities = [{
+  ambiguityId: 'ambiguity:fixture-boundary',
+  candidates: ['candidate:one', 'candidate:two'],
+  sourceSpanRefs: [reviewedAmbiguity.groups[0].sourceSpanId],
+}]
+const reviewedRequest = makeRequest(reviewedAmbiguity)
+reviewedRequest.reviewDecisions = [{
+  decisionId: 'review:fixture-boundary',
+  ambiguityId: 'ambiguity:fixture-boundary',
+  selectedCandidateId: 'candidate:two',
+  sourceSpanRefs: [reviewedAmbiguity.groups[0].sourceSpanId],
+}]
+const reviewed = compileCanonicalPaper(reviewedRequest)
+assert.equal(reviewed.disposition, 'ready')
+assert.deepEqual(reviewed.artifacts.normalizationReport.reviewDecisions, reviewedRequest.reviewDecisions)
 const badAuthority = compileCanonicalPaper({ ...request, authority: { ...canonicalAuthorityRef, manifestDigest: 'sha256:not-the-manifest' } })
 assert.equal(badAuthority.disposition, 'unsupported')
 assert.equal(badAuthority.artifacts.sourceCapture.schemaVersion, 'source-capture-v1')
@@ -207,5 +228,11 @@ assert.equal(validateAuthorityClosure({ manifest: duplicateOwnerManifest, artifa
 const mismatchedArtifacts = structuredClone(closure.artifacts)
 mismatchedArtifacts.core.id = 'tampered'
 assert.equal(validateAuthorityClosure({ manifest: closure.manifest, artifacts: mismatchedArtifacts, schemas: closure.schemas }).ok, false)
+const nestedUnknownArtifacts = structuredClone(closure.artifacts)
+nestedUnknownArtifacts['profile-nck1'].parts[0].unrecognized = true
+const nestedUnknownManifest = structuredClone(closure.manifest)
+const nestedUnknownDescriptor = nestedUnknownManifest.artifacts.find((artifact) => artifact.id === 'profile-nck1')
+nestedUnknownDescriptor.sha256 = digestJson(nestedUnknownArtifacts['profile-nck1'])
+assert.equal(validateAuthorityClosure({ manifest: nestedUnknownManifest, artifacts: nestedUnknownArtifacts, schemas: closure.schemas }).ok, false)
 
 console.log('PASS paper canonical foundation compiler seam')

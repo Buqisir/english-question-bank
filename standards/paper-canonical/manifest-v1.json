@@ -36,8 +36,8 @@
     {"id":"source-capture-v1","path":"../../schemas/paper-canonical/source-capture-v1.schema.json","sha256":"sha256:38b9f3b1074f79ddf489c72a5dbc3f684bee7930fa702245a921bfa993489a7c"},
     {"id":"canonical-paper-plan-v1","path":"../../schemas/paper-canonical/canonical-paper-plan-v1.schema.json","sha256":"sha256:49c5d05a7f3242f7569cdd4c2fdb8b004718cd997c267db3c4cce3cdbbc24300"},
     {"id":"canonical-question-group-v1","path":"../../schemas/paper-canonical/canonical-question-group-v1.schema.json","sha256":"sha256:b37d3d4a7af4e54a79f8306a8230b6c42f0320198adda5a3ef9477fb116cd225"},
-    {"id":"normalization-report-v1","path":"../../schemas/paper-canonical/normalization-report-v1.schema.json","sha256":"sha256:ca6c4a7339790df76edf9f2bc9e1c492e732ccf53396473689d4c54aee70574a"},
-    {"id":"canonical-paper-publication-v1","path":"../../schemas/paper-canonical/canonical-paper-publication-v1.schema.json","sha256":"sha256:15daea14f844bfcd920528786ad8504fa1f8fde48de91dae4d5a89d88694f60a"},
+    {"id":"normalization-report-v1","path":"../../schemas/paper-canonical/normalization-report-v1.schema.json","sha256":"sha256:cdc497b72a2db0e04892f6f629d3c074d7a3103aa76c519515e7623858d45477"},
+    {"id":"canonical-paper-publication-v1","path":"../../schemas/paper-canonical/canonical-paper-publication-v1.schema.json","sha256":"sha256:766961b7c6cf89356aa4a261ecfb0678e9d7af97bbcf5e0e7f6671edbbc430e6"},
     {"id":"consumer-contract-v1","path":"../../schemas/paper-canonical/consumer-contract-v1.schema.json","sha256":"sha256:60d8b840092a57d572303a3ca331df1a4d7d9652d90562ac3a9ccd3fabdfbd3d"}
   ]
 }

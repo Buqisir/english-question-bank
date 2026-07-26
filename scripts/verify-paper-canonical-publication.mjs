@@ -11,14 +11,55 @@ import {
   loadPaperForConsumption,
   publishCanonicalPaperPublication,
   recoverCanonicalPaperPublication,
+  sealCanonicalPublication,
+  validateCanonicalPublicationBundle,
 } from '../server/paper-canonical/publication.mjs'
 import { compileCanonicalPaper } from '../shared/paper-canonical/compiler.mjs'
 import { consumerContractRefs } from '../shared/paper-canonical/consumers.mjs'
+import { digestJson, sha256, stableStringify } from '../shared/paper-canonical/stable.mjs'
 import { makeReadyCanonicalFixture } from '../test-fixtures/paper-canonical/foundationFixture.mjs'
 
 const fixture = makeReadyCanonicalFixture()
 const compilation = compileCanonicalPaper(fixture.request)
 assert.equal(compilation.disposition, 'ready')
+
+assert.throws(
+  () => sealCanonicalPublication({
+    compilation,
+    sourceAssetVersion: 1,
+    sourceAsset: new TextEncoder().encode('unrelated source bytes'),
+  }),
+  { code: 'CANONICAL_PUBLICATION_SOURCE_UNBOUND' },
+)
+
+const sealed = sealCanonicalPublication({ compilation, sourceAssetVersion: 1, sourceAsset: fixture.sourceAsset })
+const tamperedManifest = structuredClone(sealed.manifest)
+const tamperedArtifacts = { ...sealed.artifacts }
+const groupPath = 'canonical/canonical-question-groups-v1.json'
+const tamperedGroups = JSON.parse(new TextDecoder().decode(tamperedArtifacts[groupPath]))
+tamperedGroups.groups[0].sourceMap.captureId = 'source-capture:unrelated'
+tamperedGroups.groups[0].sourceMap.entries[0].sourceSpanRefs = ['source-span:missing']
+tamperedGroups.groups[0].sourceFingerprint = digestJson({ captureDigest: compilation.artifacts.sourceCapture.digest, sourceSpanId: 'source-span:missing', recordIds: [] })
+tamperedGroups.groups[0].semanticDigest = digestJson(((group) => {
+  const { sourceMap: _sourceMap, sourceFingerprint: _sourceFingerprint, semanticDigest: _semanticDigest, ...semantic } = group
+  return semantic
+})(tamperedGroups.groups[0]))
+tamperedArtifacts[groupPath] = new TextEncoder().encode(`${stableStringify(tamperedGroups)}\n`)
+const tamperedDescriptor = tamperedManifest.artifacts.find((artifact) => artifact.relativePath === groupPath)
+tamperedDescriptor.byteLength = tamperedArtifacts[groupPath].byteLength
+tamperedDescriptor.sha256 = sha256(tamperedArtifacts[groupPath])
+tamperedManifest.publicationDigest = digestJson(((manifest) => {
+  const { publicationDigest: _publicationDigest, ...base } = manifest
+  return base
+})(tamperedManifest))
+assert.throws(
+  () => validateCanonicalPublicationBundle({
+    manifest: tamperedManifest,
+    sourceAsset: sealed.sourceAsset,
+    readArtifact: (relativePath) => tamperedArtifacts[relativePath] || sealed.sourceEvidence[relativePath],
+  }),
+  { code: 'CANONICAL_PUBLICATION_LINEAGE_INVALID' },
+)
 
 const rootDir = mkdtempSync(path.join(tmpdir(), 'eqb-canonical-publication-'))
 const db = new DatabaseSync(path.join(rootDir, 'publication.sqlite'))
@@ -31,6 +72,16 @@ try {
     sourceAsset: fixture.sourceAsset,
   })
   assert.equal(first.status, 'published')
+
+  const unsafeFixture = makeReadyCanonicalFixture()
+  unsafeFixture.source.paperId = '../paper-canonical-escape'
+  unsafeFixture.request.evidence.documents[0].bytes = new TextEncoder().encode(JSON.stringify(unsafeFixture.source))
+  const unsafeCompilation = compileCanonicalPaper(unsafeFixture.request)
+  assert.equal(unsafeCompilation.disposition, 'ready')
+  assert.throws(
+    () => publishCanonicalPaperPublication({ rootDir, db, compilation: unsafeCompilation, sourceAssetVersion: 1, sourceAsset: unsafeFixture.request.evidence.documents[0].bytes }),
+    { code: 'CANONICAL_PUBLICATION_PAPER_ID_INVALID' },
+  )
   const repeated = publishCanonicalPaperPublication({
     rootDir,
     db,
