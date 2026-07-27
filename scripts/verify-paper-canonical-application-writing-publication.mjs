@@ -228,6 +228,14 @@ assert.equal(
   absent.compiled.artifacts.sourceCapture.documents.some((document) => document.sha256 === applicationWritingReferenceHashes['paper-zj-2020-jan'].importMeta),
   true,
 )
+assert.equal(
+  absent.compiled.artifacts.sourceCapture.documents.some((document) => document.sha256 === applicationWritingReferenceHashes['paper-zj-2020-jan'].transcription),
+  true,
+)
+assert.equal(
+  absent.compiled.artifacts.sourceCapture.documents.some((document) => document.sha256 === applicationWritingReferenceHashes['paper-zj-2020-jan'].source),
+  true,
+)
 
 const providedFixture = makeApplicationWritingReferenceFixture('paper-2026-i')
 const provided = await exercisePublicSeams(providedFixture)
@@ -250,7 +258,21 @@ assert.equal(
   true,
 )
 assert.equal(
+  provided.compiled.artifacts.sourceCapture.documents.some((document) => document.sha256 === applicationWritingReferenceHashes['paper-2026-i'].transcription),
+  true,
+)
+assert.equal(
   provided.compiled.artifacts.sourceCapture.documents.some((document) => document.sha256 === applicationWritingReferenceHashes['paper-2026-i'].source),
+  true,
+)
+const missingOriginalSourceRequest = structuredClone(providedFixture.request)
+missingOriginalSourceRequest.evidence.documents = missingOriginalSourceRequest.evidence.documents
+  .filter((document) => document.inputKey !== 'original_question_source')
+const missingOriginalSource = compileCanonicalPaper(missingOriginalSourceRequest)
+assert.equal(missingOriginalSource.disposition, 'incomplete_source')
+assert.equal(
+  missingOriginalSource.artifacts.normalizationReport.diagnostics
+    .some((item) => item.code === 'APPLICATION_SOURCE_PROVENANCE_INVALID'),
   true,
 )
 
@@ -287,13 +309,25 @@ assertBlocked(absentFixture, (capture) => {
   for (const inline of sourceBlock.inlines) {
     if (sourceRef.inlineNodeIds.includes(inline.nodeId)) inline.text = inline.text.replace('80', '200')
   }
-}, 'needs_review', 'APPLICATION_WORD_RULING_CONFLICT')
+}, 'needs_review', 'APPLICATION_SOURCE_TRANSCRIPTION_CONFLICT')
 assertBlocked(providedFixture, (capture) => {
-  capture.group.variant.givenSkeleton = {
+  const group = capture.group
+  const titleBlockId = group.variant.givenSkeleton.parts[0].blockRef
+  group.content.blocks = group.content.blocks.filter((block) => block.nodeId !== titleBlockId)
+  group.observations = group.observations.filter((observation) => observation.kind !== 'application_given_part')
+  group.variant.givenSkeleton = {
     presence: 'none',
-    answerRegionAbsenceAssertionRef: 'observation:missing',
+    answerRegionAbsenceAssertionRef: `observation:application:${group.groupId}:answer-region-empty`,
   }
-}, 'incomplete_source', 'APPLICATION_GIVEN_ABSENCE_UNPROVEN')
+  group.observations.push({
+    observationId: group.variant.givenSkeleton.answerRegionAbsenceAssertionRef,
+    kind: 'application_answer_region_absence',
+    value: {
+      groupId: group.groupId,
+      answerRegionRef: 'writing.application-box',
+    },
+  })
+}, 'needs_review', 'APPLICATION_SOURCE_TRANSCRIPTION_CONFLICT')
 assertBlocked(providedFixture, (capture) => {
   const group = capture.group
   const blockRef = `paragraph:${group.groupId}:given:closing`
@@ -322,7 +356,7 @@ assertBlocked(providedFixture, (capture) => {
       blockRef,
     },
   })
-}, 'needs_review', 'APPLICATION_GIVEN_PART_ORDER_AMBIGUOUS')
+}, 'needs_review', 'APPLICATION_SOURCE_TRANSCRIPTION_CONFLICT')
 assertBlocked(providedFixture, (capture) => {
   const group = capture.group
   group.variant.givenSkeleton.parts[0].role = 'date_line'

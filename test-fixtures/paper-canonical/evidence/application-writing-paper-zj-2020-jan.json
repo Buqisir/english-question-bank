@@ -11,7 +11,8 @@
     "slotId": "writing.application",
     "sourceLocation": {
       "kind": "source_document_section",
-      "locator": "writing.application"
+      "locator": "writing.application",
+      "transcriptionDigest": "sha256:6db4f0f7f5b940fc4b08992644b658216f27356c3c1459cb26c21e516ebf45bf"
     },
     "content": {
       "blocks": [

@@ -6,16 +6,20 @@ import { makeReadyCanonicalFixture } from './foundationFixture.mjs'
 const references = Object.freeze({
   'paper-zj-2020-jan': Object.freeze({
     source: 'sha256:d752ee191e73f37445d72b6a626bfa395b9dd74f72d576a2a692b8c7693c9c6a',
-    capture: 'sha256:828e28e229153c84e9a85949625f33655b65d34b9ce07f9b0dccb6c14a059ec9',
+    capture: 'sha256:475455f5d2b23c79c2125182ac65b4863cebc23abde3ceeb01232b5b102702fd',
+    transcription: 'sha256:6db4f0f7f5b940fc4b08992644b658216f27356c3c1459cb26c21e516ebf45bf',
     importMeta: 'sha256:2d8af84e387c806813798da60be4bab314b83d6d5de1478f7a86925a1427d81d',
     captureFile: 'application-writing-paper-zj-2020-jan.json',
-    sourceFile: null,
+    transcriptionFile: 'application-writing-transcription-paper-zj-2020-jan.json',
+    sourceFile: new URL('evidence/original-paper-zj-2020-jan.docx', import.meta.url),
   }),
   'paper-2026-i': Object.freeze({
     source: 'sha256:31a87069e6d530afba9123eec0487adf45e52e0b98530af80b62476f169e4d0f',
-    capture: 'sha256:7552c761d9c213e52d59b0333baabe094a31b8340d1e4c3d2cef7c2e828bd609',
+    capture: 'sha256:bca92da56ff9c9d96a2a5979be136a140ae0cf238aaf5dfbad7e6e54d0d79a31',
+    transcription: 'sha256:2e83dc57ec6462ac5f59c94ef2868e98cf8bef67627e2b804be840a13b1ada28',
     importMeta: 'sha256:dda79f448a049d9ce6293049b4e1dec51fba35cb683e4e7860f5390ab3d3e900',
     captureFile: 'application-writing-paper-2026-i.json',
+    transcriptionFile: 'application-writing-transcription-paper-2026-i.json',
     sourceFile: new URL('../../scripts/import-pipeline/papers/paper-2026-i/source/paper.pdf', import.meta.url),
   }),
 })
@@ -42,10 +46,11 @@ export function makeApplicationWritingReferenceFixture(paperId) {
   if (!hashes) throw new Error(`Unknown Application Writing reference paper ${paperId}`)
   const assetBaseUrl = new URL(`../../app/public/paper-assets/${paperId}/latest/`, import.meta.url)
   const captureBytes = readHashBoundBytes(new URL(`evidence/${hashes.captureFile}`, import.meta.url), hashes.capture)
+  const transcriptionBytes = readHashBoundBytes(new URL(`evidence/${hashes.transcriptionFile}`, import.meta.url), hashes.transcription)
   const importMeta = readHashBoundBytes(new URL('import-meta.json', assetBaseUrl), hashes.importMeta)
   const meta = JSON.parse(new TextDecoder().decode(importMeta))
   if (`sha256:${meta.sourceFileSha256}` !== hashes.source) throw new Error(`Application source provenance drifted for ${paperId}`)
-  const sourceBytes = hashes.sourceFile ? readHashBoundBytes(hashes.sourceFile, hashes.source) : null
+  const sourceBytes = readHashBoundBytes(hashes.sourceFile, hashes.source)
   const fixture = makeReadyCanonicalFixture()
   const source = fixture.source
   source.paperId = paperId
@@ -82,19 +87,31 @@ export function makeApplicationWritingReferenceFixture(paperId) {
             },
           },
           {
+            inputKey: 'application_writing_transcription',
+            roles: ['structured_source', 'source_provenance'],
+            bytes: transcriptionBytes,
+            declared: {
+              mediaType: 'application/vnd.eqb.application-writing-source-transcription+json',
+              originalName: hashes.transcriptionFile,
+            },
+          },
+          {
             inputKey: 'source_provenance',
             roles: ['source_provenance'],
             bytes: importMeta,
             declared: { mediaType: 'application/json', originalName: 'import-meta.json' },
           },
-          ...(sourceBytes
-            ? [{
-                inputKey: 'original_question_source',
-                roles: ['question_source', 'source_provenance'],
-                bytes: sourceBytes,
-                declared: { mediaType: 'application/pdf', originalName: 'paper.pdf' },
-              }]
-            : []),
+          {
+            inputKey: 'original_question_source',
+            roles: ['question_source', 'source_provenance'],
+            bytes: sourceBytes,
+            declared: {
+              mediaType: paperId === 'paper-2026-i'
+                ? 'application/pdf'
+                : 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+              originalName: paperId === 'paper-2026-i' ? 'paper.pdf' : 'source.docx',
+            },
+          },
         ],
       },
     },

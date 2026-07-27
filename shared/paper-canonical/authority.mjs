@@ -26,6 +26,7 @@ import familySchema from '../../schemas/paper-canonical/canonical-family-contrac
 import familyV2Schema from '../../schemas/paper-canonical/canonical-family-contract-v2.schema.json' with { type: 'json' }
 import applicationWritingVariantSchema from '../../schemas/paper-canonical/canonical-application-writing-variant-v1.schema.json' with { type: 'json' }
 import applicationWritingSourceCaptureSchema from '../../schemas/paper-canonical/application-writing-source-capture-v1.schema.json' with { type: 'json' }
+import applicationWritingSourceTranscriptionSchema from '../../schemas/paper-canonical/application-writing-source-transcription-v1.schema.json' with { type: 'json' }
 import normalizationSchema from '../../schemas/paper-canonical/normalization-rules-v1.schema.json' with { type: 'json' }
 import normalizationV2Schema from '../../schemas/paper-canonical/normalization-rules-v2.schema.json' with { type: 'json' }
 import sourceAdaptersSchema from '../../schemas/paper-canonical/source-adapters-v1.schema.json' with { type: 'json' }
@@ -314,6 +315,7 @@ const schemasV4 = {
   'canonical-family-contract-v2': familyV2Schema,
   'canonical-application-writing-variant-v1': applicationWritingVariantSchema,
   'application-writing-source-capture-v1': applicationWritingSourceCaptureSchema,
+  'application-writing-source-transcription-v1': applicationWritingSourceTranscriptionSchema,
   'renderer-typography-v2': typographyV2Schema,
   'normalization-rules-v2': normalizationV2Schema,
   'normalization-report-v4': reportV4Schema,

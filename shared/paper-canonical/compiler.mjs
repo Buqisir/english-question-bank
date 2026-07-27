@@ -540,6 +540,7 @@ function appendReadingReferenceGroups({
 function appendApplicationWritingReferenceGroup({
   source,
   applicationEntry,
+  transcriptionEntry,
   provenanceEntries,
   documents,
   diagnostics,
@@ -565,10 +566,44 @@ function appendApplicationWritingReferenceGroup({
   if (
     capture.paperId !== source.paperId
     || provenanceMatches.length !== 1
-    || capturedSourceMatches.length > 1
+    || capturedSourceMatches.length !== 1
     || capture.group.groupId.length === 0
   ) {
     diagnostics.push(diagnostic('APPLICATION_SOURCE_PROVENANCE_INVALID', 'incomplete_source', '$.evidence.applicationWritingCapture', 'Application Writing capture must bind one paper and one immutable source digest'))
+    return
+  }
+  const transcription = transcriptionEntry?.value
+  const transcriptionIssues = validateJsonSchema(
+    transcription,
+    closure.schemas['application-writing-source-transcription-v1'],
+    '$.evidence.applicationWritingTranscription',
+  )
+  if (
+    !transcriptionEntry
+    || transcriptionIssues.length > 0
+    || transcriptionEntry.document.sha256 !== capture.group.sourceLocation?.transcriptionDigest
+    || transcription?.paperId !== capture.paperId
+    || transcription?.sourceDocumentDigest !== capture.sourceDocumentDigest
+    || transcription?.groupId !== capture.group.groupId
+  ) {
+    diagnostics.push(diagnostic('APPLICATION_SOURCE_TRANSCRIPTION_INVALID', 'incomplete_source', '$.evidence.applicationWritingTranscription', 'Application Writing requires one reviewed transcription bound to the immutable source document and captured Group'))
+    return
+  }
+  const capturedBlocks = (capture.group.content?.blocks || []).map((block) => ({
+    blockId: block.nodeId,
+    text: (block.inlines || []).map((inline) => inline.text || '').join(''),
+  }))
+  const capturedGiven = capture.group.variant?.givenSkeleton
+  const capturedPartBlockIds = capturedGiven?.presence === 'provided'
+    ? capturedGiven.parts.map((part) => part.blockRef)
+    : []
+  if (
+    digestJson(capturedBlocks) !== digestJson(transcription.orderedBlocks)
+    || capturedGiven?.presence !== transcription.answerRegion.presence
+    || capture.group.variant?.response?.answerRegionRef !== transcription.answerRegion.answerRegionRef
+    || digestJson(capturedPartBlockIds) !== digestJson(transcription.answerRegion.partBlockIds)
+  ) {
+    diagnostics.push(diagnostic('APPLICATION_SOURCE_TRANSCRIPTION_CONFLICT', 'needs_review', '$.evidence.applicationWritingCapture.group', 'Application Writing capture conflicts with the reviewed source transcription'))
     return
   }
   const variantIssues = validateJsonSchema(
@@ -641,12 +676,17 @@ function adaptReferenceFamilies(parsed, documents, diagnostics) {
   const applicationEntry = applicationDocument
     ? { document: applicationDocument, value: parseJsonDocument(applicationDocument, diagnostics) }
     : null
+  const transcriptionDocument = documents.find((document) => document.mediaType === 'application/vnd.eqb.application-writing-source-transcription+json')
+  const transcriptionEntry = transcriptionDocument
+    ? { document: transcriptionDocument, value: parseJsonDocument(transcriptionDocument, diagnostics) }
+    : null
   const provenanceEntries = documents
     .filter((document) => document.mediaType === 'application/json' && document.roles.includes('source_provenance'))
     .map((document) => ({ document, value: parseJsonDocument(document, diagnostics) }))
   appendApplicationWritingReferenceGroup({
     source: parsed.value,
     applicationEntry,
+    transcriptionEntry,
     provenanceEntries,
     documents,
     diagnostics,

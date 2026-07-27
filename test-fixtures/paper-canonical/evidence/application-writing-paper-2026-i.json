@@ -12,7 +12,8 @@
     "sourceLocation": {
       "kind": "page_region",
       "page": 10,
-      "region": {"x":0.08,"y":0.42,"width":0.84,"height":0.42}
+      "region": {"x":0.08,"y":0.42,"width":0.84,"height":0.42},
+      "transcriptionDigest": "sha256:2e83dc57ec6462ac5f59c94ef2868e98cf8bef67627e2b804be840a13b1ada28"
     },
     "content": {
       "blocks": [
