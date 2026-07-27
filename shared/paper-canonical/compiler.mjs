@@ -1,4 +1,5 @@
 import { canonicalAuthorityRef, resolveCanonicalAuthority, slotsForProfile, validateJsonSchema } from './authority.mjs'
+import { validateApplicationWritingContract } from './applicationWriting.mjs'
 import { validateReadingContract } from './reading.mjs'
 import { validateSevenChoicesContract } from './sevenChoices.mjs'
 import { cloneJson, digestJson, exactKeys, isRecordValue, sha256, stableStringify, withoutKey } from './stable.mjs'
@@ -971,6 +972,30 @@ function collectReadingTargetIds(variant) {
   ].filter((target) => typeof target.id === 'string')
 }
 
+function collectApplicationWritingTargetIds(variant) {
+  if (variant?.family !== 'application-writing') return []
+  return [
+    { kind: 'writing_task', id: variant.writingTaskId },
+    ...(variant.contentRequirements || []).map((requirement) => ({ kind: 'requirement', id: requirement.requirementId })),
+    ...(variant.givenSkeleton?.presence === 'provided'
+      ? variant.givenSkeleton.parts.map((part) => ({ kind: 'given_part', id: part.givenPartId }))
+      : []),
+  ].filter((target) => typeof target.id === 'string')
+}
+
+function applicationWritingSourceSpanRefs(variant, content, capture, target) {
+  if (variant?.family !== 'application-writing' || variant.givenSkeleton?.presence !== 'provided') return null
+  for (const part of variant.givenSkeleton.parts) {
+    const block = content?.blocks?.find((candidate) => candidate.nodeId === part.blockRef)
+    const targetBelongsToPart = (target.kind === 'given_part' && target.id === part.givenPartId)
+      || (target.kind === 'content_node' && (target.id === part.blockRef || block?.inlines?.some((inline) => inline.nodeId === target.id)))
+    if (!targetBelongsToPart) continue
+    const observation = capture.observations.find((candidate) => candidate.observationId === part.authorityAssertionRef)
+    return observation ? [observation.sourceSpanId] : null
+  }
+  return null
+}
+
 function validateInlines(inlines, blankIds, path, diagnostics, ids) {
   if (!Array.isArray(inlines)) {
     diagnostics.push(diagnostic('RICH_INLINE_INVALID', 'needs_review', path, 'Inlines must be ordered'))
@@ -1124,6 +1149,8 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
     ? ['family', 'members', 'choiceOwnership']
     : family.familyContractId === 'reading'
       ? ['family', 'passageBlockRoles', 'questions', 'choiceOwnership']
+      : family.familyContractId === 'application-writing'
+        ? ['family', 'writingTaskId', 'promptBlockRefs', 'situation', 'contentRequirements', 'wordCountRuling', 'givenSkeleton', 'choiceOwnership', 'response']
       : ['family', 'choiceOwnership']
   if (!exactKeys(variant, variantKeys) || variant.family !== family.familyContractId) diagnostics.push(diagnostic('GROUP_VARIANT_INVALID', 'needs_review', '$.groups.variant', 'Variant family must match the closed contract'))
   diagnostics.push(...validateChoiceOwnership(variant.choiceOwnership, sourceGroup.questionIds, family.choiceOwnership))
@@ -1145,6 +1172,16 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
       media,
       variant,
       assertions: capture.assertions,
+    }).map((item) => diagnostic(item.code, item.disposition, item.path, item.message)))
+  }
+  if (family.familyContractId === 'application-writing') {
+    diagnostics.push(...validateApplicationWritingContract({
+      groupId: sourceGroup.groupId,
+      questionIds: sourceGroup.questionIds,
+      blankIds: sourceGroup.blankIds,
+      content,
+      variant,
+      sourceCapture: capture,
     }).map((item) => diagnostic(item.code, item.disposition, item.path, item.message)))
   }
   if (diagnostics.length > 0) return { diagnostics, artifact: null }
@@ -1172,12 +1209,15 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
     ...media.map((item) => ({ target: { kind: 'media', id: item.mediaId } })),
     ...collectRichTargetIds(content).map((entry) => ({ target: entry })),
     ...collectReadingTargetIds(variant).map((entry) => ({ target: entry })),
+    ...collectApplicationWritingTargetIds(variant).map((entry) => ({ target: entry })),
   ].filter((entry, index, entries) => entries.findIndex((candidate) => candidate.target.kind === entry.target.kind && candidate.target.id === entry.target.id) === index)
   const sourceMap = {
     captureId: capture.captureId,
     entries: targetEntries.map((entry) => ({
       ...entry,
-      sourceSpanRefs: sourceGroup.sourceSpanRefsByTarget?.[`${entry.target.kind}:${entry.target.id}`] || [sourceGroup.sourceSpanId],
+      sourceSpanRefs: applicationWritingSourceSpanRefs(variant, content, capture, entry.target)
+        || sourceGroup.sourceSpanRefsByTarget?.[`${entry.target.kind}:${entry.target.id}`]
+        || [sourceGroup.sourceSpanId],
       transformationRecordIds: sourceGroup.transformationRecordIdsByTarget?.[`${entry.target.kind}:${entry.target.id}`]
         || acceptedRecords.filter((record) => record.target?.identity === sourceGroup.groupId).map((record) => record.recordId),
     })),

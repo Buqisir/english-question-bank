@@ -26,6 +26,38 @@ function choiceOwnership(family, questionIds, groupId) {
 
 function variant(family, questionIds, blankIds, groupId) {
   const value = { family, choiceOwnership: choiceOwnership(family, questionIds, groupId) }
+  if (family === 'application-writing') {
+    const blockId = `paragraph:${groupId}:prompt`
+    const inlineNodeIds = [`text:${groupId}:prompt`]
+    const contentRef = { blockId, inlineNodeIds }
+    return {
+      family,
+      writingTaskId: `writing-task:${groupId}`,
+      promptBlockRefs: [blockId],
+      situation: {
+        writerRole: contentRef,
+        audienceOrDestination: contentRef,
+        deliverable: contentRef,
+        communicativePurpose: contentRef,
+      },
+      contentRequirements: [{ requirementId: `requirement:${groupId}:1`, contentRef }],
+      wordCountRuling: {
+        kind: 'approximate_target',
+        target: 80,
+        countScope: 'student_authored_only',
+        sourceRef: contentRef,
+      },
+      givenSkeleton: {
+        presence: 'none',
+        answerRegionAbsenceAssertionRef: `observation:${groupId}:answer-region-empty`,
+      },
+      choiceOwnership: value.choiceOwnership,
+      response: {
+        kind: 'group_level_written_response',
+        answerRegionRef: 'writing.application-box',
+      },
+    }
+  }
   if (family === 'reading') {
     return {
       family,
@@ -53,6 +85,19 @@ function variant(family, questionIds, blankIds, groupId) {
 }
 
 function referenceBlankContent(family, blankIds) {
+  if (family === 'application-writing') {
+    return {
+      blocks: [{
+        kind: 'paragraph',
+        nodeId: 'paragraph:group:writing.application:prompt',
+        inlines: [{
+          kind: 'text',
+          nodeId: 'text:group:writing.application:prompt',
+          text: 'Write a short source-backed response.',
+        }],
+      }],
+    }
+  }
   if (family === 'reading') {
     return {
       blocks: [{
@@ -106,6 +151,18 @@ export function makeReadyCanonicalFixture() {
       media: [],
       variant: variant(slot.familyContractRef.id, questionIds, blankIds, `group:${slot.slotId}`),
     })
+    if (slot.familyContractRef.id === 'application-writing') {
+      observations.push({
+        observationId: `observation:group:${slot.slotId}:answer-region-empty`,
+        kind: 'application_answer_region_absence',
+        documentInputKey: 'questions',
+        value: {
+          groupId: `group:${slot.slotId}`,
+          answerRegionRef: 'writing.application-box',
+        },
+        span: { start: 0, end: 1 },
+      })
+    }
     for (const questionId of questionIds) assertions.push({ assertionId: `answer:${questionId}`, questionId, answer: 'A', authority: 'official', sourceSpanId })
   }
   const source = { paperId: 'paper-canonical-fixture', profileId: 'nck1', sourceAssetVersion: 1, observations, assertions, groups, inactiveSlots }

@@ -1,4 +1,5 @@
 import { resolveCanonicalAuthority, slotsForProfile, validateJsonSchema } from './authority.mjs'
+import { validateApplicationWritingContract } from './applicationWriting.mjs'
 import { validateReadingContract } from './reading.mjs'
 import { validateSevenChoicesContract } from './sevenChoices.mjs'
 import { cloneJson, digestJson } from './stable.mjs'
@@ -30,6 +31,15 @@ function sourceMapCoverageIssues(group, sourceCapture) {
             `option:${option.optionId}`,
             ...option.content.map((inline) => `content_node:${inline.nodeId}`),
           ])),
+        ]
+      : []),
+    ...(group.variant.family === 'application-writing'
+      ? [
+          `writing_task:${group.variant.writingTaskId}`,
+          ...group.variant.contentRequirements.map((requirement) => `requirement:${requirement.requirementId}`),
+          ...(group.variant.givenSkeleton.presence === 'provided'
+            ? group.variant.givenSkeleton.parts.map((part) => `given_part:${part.givenPartId}`)
+            : []),
         ]
       : []),
   ])
@@ -141,6 +151,17 @@ function assertCanonicalPackage(canonicalPackage) {
       })
       if (readingIssues.length > 0) throw projectionError('Reading canonical contract is not closed', readingIssues)
     }
+    if (family.familyContractId === 'application-writing') {
+      const applicationIssues = validateApplicationWritingContract({
+        groupId: group.identity.groupId,
+        questionIds: group.questionRefs.map(({ questionId }) => questionId),
+        blankIds: group.blankRefs.map(({ blankId }) => blankId),
+        content: group.content,
+        variant: group.variant,
+        sourceCapture,
+      })
+      if (applicationIssues.length > 0) throw projectionError('Application Writing canonical contract is not closed', applicationIssues)
+    }
     if (group.semanticDigest !== digestJson(groupSemanticPayload(group))) throw projectionError('Group semantic digest does not match canonical semantics', [])
     const sourceMapIssues = sourceMapCoverageIssues(group, sourceCapture)
     if (sourceMapIssues.length > 0) throw projectionError('Group source map is incomplete', sourceMapIssues)
@@ -213,6 +234,35 @@ export function projectCanonicalPaper(canonicalPackage) {
               },
             }
           : {}
+        const applicationWriting = group.variant.family === 'application-writing'
+          ? {
+              writingTaskId: group.variant.writingTaskId,
+              prompt: {
+                blocks: group.variant.promptBlockRefs.map((blockId) => cloneJson(group.content.blocks.find((block) => block.nodeId === blockId))),
+              },
+              situation: cloneJson(group.variant.situation),
+              contentRequirements: cloneJson(group.variant.contentRequirements),
+              wordCountRuling: cloneJson(group.variant.wordCountRuling),
+              answerRegion: {
+                answerRegionRef: group.variant.response.answerRegionRef,
+                responseSlotId: slot.slotId,
+                givenTop: cloneJson(group.variant.givenSkeleton.presence === 'provided'
+                  ? group.variant.givenSkeleton.parts.filter((part) => part.placement === 'answer_region_top')
+                  : []),
+                givenBottom: cloneJson(group.variant.givenSkeleton.presence === 'provided'
+                  ? group.variant.givenSkeleton.parts.filter((part) => part.placement === 'answer_region_bottom')
+                  : []),
+              },
+              anchors: {
+                contentNodeIds: contentIdentityLists(group.content).contentNodeIds,
+                requirementIds: group.variant.contentRequirements.map((requirement) => requirement.requirementId),
+                givenPartIds: group.variant.givenSkeleton.presence === 'provided'
+                  ? group.variant.givenSkeleton.parts.map((part) => part.givenPartId)
+                  : [],
+                responseSlotId: slot.slotId,
+              },
+            }
+          : {}
         nodes.push({
           kind: 'group',
           slotId: slot.slotId,
@@ -229,6 +279,7 @@ export function projectCanonicalPaper(canonicalPackage) {
           choices: cloneJson(group.variant.choiceOwnership),
           ...cloneJson(sevenChoices),
           ...cloneJson(reading),
+          ...cloneJson(applicationWriting),
         })
         nodes.push({ kind: 'answer_region', answerRegionId: slot.answerRegionRef, groupId: group.identity.groupId })
       }
