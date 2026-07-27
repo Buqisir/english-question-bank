@@ -1,5 +1,6 @@
 import { canonicalAuthorityRef, resolveCanonicalAuthority, slotsForProfile, validateJsonSchema } from './authority.mjs'
 import { validateApplicationWritingContract } from './applicationWriting.mjs'
+import { validateContinuationWritingContract } from './continuationWriting.mjs'
 import { validateReadingContract } from './reading.mjs'
 import { validateSevenChoicesContract } from './sevenChoices.mjs'
 import { cloneJson, digestJson, exactKeys, isRecordValue, sha256, stableStringify, withoutKey } from './stable.mjs'
@@ -665,6 +666,189 @@ function appendApplicationWritingReferenceGroup({
   })
 }
 
+function appendContinuationWritingReferenceGroup({
+  source,
+  continuationEntry,
+  transcriptionEntry,
+  provenanceEntries,
+  documents,
+  diagnostics,
+}) {
+  if (source.groups.some((candidate) => candidate.slotId === 'writing.continuation')) return
+  if (!continuationEntry) {
+    diagnostics.push(diagnostic('CONTINUATION_SOURCE_CAPTURE_INCOMPLETE', 'incomplete_source', '$.evidence.documents', 'Continuation Writing requires one reviewed structured source capture'))
+    return
+  }
+  const closure = resolveCanonicalAuthority(canonicalAuthorityRef).closure
+  const capture = continuationEntry.value
+  const schemaIssues = validateJsonSchema(capture, closure.schemas['continuation-writing-source-capture-v1'], '$.evidence.continuationWritingCapture')
+  if (schemaIssues.length > 0) {
+    diagnostics.push(...schemaIssues.map((item) => diagnostic('CONTINUATION_SOURCE_CAPTURE_INVALID', 'incomplete_source', item.path, item.message)))
+    return
+  }
+  const provenanceMatches = provenanceEntries.filter((entry) => (
+    entry.value?.schemaVersion === 'import-meta-v1'
+    && entry.value?.paperId === capture.paperId
+    && `sha256:${entry.value?.sourceFileSha256}` === capture.sourceDocumentDigest
+  ))
+  const capturedSourceMatches = documents.filter((document) => document.sha256 === capture.sourceDocumentDigest)
+  const capturedSource = capturedSourceMatches[0]
+  const sourceLocation = capture.group.sourceLocation
+  const sourceInspection = sourceLocation?.sourceInspection
+  const starterProvision = capture.group.variant?.starterProvision
+  const capturedStarterDigests = (starterProvision?.starters || []).map((starter) => {
+    const block = capture.group.content?.blocks?.find((candidate) => candidate.nodeId === starter.contentRef)
+    return block ? digestJson((block.inlines || []).map((inline) => inline.text || '').join('')) : null
+  })
+  const twoStarterLocation = (
+    starterProvision?.kind === 'ordered_source_starters'
+    && capturedSource?.mediaType === 'application/pdf'
+    && isRecordValue(sourceLocation)
+    && exactKeys(sourceLocation, ['kind', 'page', 'region', 'sourceInspection', 'transcriptionDigest'])
+    && sourceLocation.kind === 'pdf_page_region'
+    && Number.isInteger(sourceLocation.page)
+    && sourceLocation.page > 0
+    && isRecordValue(sourceLocation.region)
+    && exactKeys(sourceLocation.region, ['x', 'y', 'width', 'height'])
+    && isRecordValue(sourceInspection)
+    && exactKeys(sourceInspection, ['method', 'starterTextDigests', 'occurrenceCounts'])
+    && sourceInspection.method === 'normalized_page_text'
+    && Array.isArray(sourceInspection.starterTextDigests)
+    && sourceInspection.starterTextDigests.length === 2
+    && Array.isArray(sourceInspection.occurrenceCounts)
+    && sourceInspection.occurrenceCounts.length === 2
+    && sourceInspection.occurrenceCounts.every((count) => count === 1)
+  )
+  const plotLedLocation = (
+    starterProvision?.kind === 'source_proven_none'
+    && capturedSource?.mediaType === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+    && isRecordValue(sourceLocation)
+    && exactKeys(sourceLocation, ['kind', 'sourceInspection', 'transcriptionDigest'])
+    && sourceLocation.kind === 'docx_wml_inventory'
+    && isRecordValue(sourceInspection)
+    && exactKeys(sourceInspection, ['method', 'plotLedInstructionCount', 'paragraphOneLabelCount', 'paragraphTwoLabelCount', 'answerRegionClosure'])
+    && sourceInspection.method === 'wml_read_only'
+    && sourceInspection.plotLedInstructionCount === 1
+    && sourceInspection.paragraphOneLabelCount === 0
+    && sourceInspection.paragraphTwoLabelCount === 0
+    && sourceInspection.answerRegionClosure === 'closed'
+  )
+  if (
+    capture.paperId !== source.paperId
+    || capture.profileId !== source.profileId
+    || provenanceMatches.length !== 1
+    || capturedSourceMatches.length !== 1
+    || capture.group.groupId.length === 0
+  ) {
+    diagnostics.push(diagnostic('CONTINUATION_SOURCE_PROVENANCE_INVALID', 'incomplete_source', '$.evidence.continuationWritingCapture', 'Continuation Writing capture must bind one paper, Profile, and immutable source digest'))
+    return
+  }
+  if (!twoStarterLocation && !plotLedLocation) {
+    diagnostics.push(diagnostic('CONTINUATION_SOURCE_LOCATION_INVALID', 'incomplete_source', '$.evidence.continuationWritingCapture.group.sourceLocation', 'Continuation starter semantics require reviewed PDF page-text or DOCX WML source closure'))
+    return
+  }
+  const transcription = transcriptionEntry?.value
+  const transcriptionIssues = validateJsonSchema(
+    transcription,
+    closure.schemas['continuation-writing-source-transcription-v1'],
+    '$.evidence.continuationWritingTranscription',
+  )
+  if (
+    !transcriptionEntry
+    || transcriptionIssues.length > 0
+    || transcriptionEntry.document.sha256 !== capture.group.sourceLocation?.transcriptionDigest
+    || transcription?.paperId !== capture.paperId
+    || transcription?.sourceDocumentDigest !== capture.sourceDocumentDigest
+    || transcription?.groupId !== capture.group.groupId
+  ) {
+    diagnostics.push(diagnostic('CONTINUATION_SOURCE_TRANSCRIPTION_INVALID', 'incomplete_source', '$.evidence.continuationWritingTranscription', 'Continuation Writing requires one reviewed transcription bound to the immutable source document and captured Group'))
+    return
+  }
+  const capturedBlocks = (capture.group.content?.blocks || []).map((block) => ({
+    blockId: block.nodeId,
+    textDigest: digestJson((block.inlines || []).map((inline) => inline.text || '').join('')),
+  }))
+  const capturedProvision = capture.group.variant?.starterProvision
+  const capturedTranscriptionProvision = capturedProvision?.kind === 'ordered_source_starters'
+    ? { kind: capturedProvision.kind, contentRefs: capturedProvision.starters.map((starter) => starter.contentRef) }
+    : { kind: capturedProvision?.kind }
+  if (
+    digestJson(capturedBlocks) !== digestJson(transcription.orderedBlocks)
+    || digestJson(capture.group.variant?.materialBlockRefs) !== digestJson(transcription.materialBlockRefs)
+    || digestJson(capturedTranscriptionProvision) !== digestJson(transcription.starterProvision)
+    || capture.group.variant?.response?.answerRegionRef !== transcription.answerRegionRef
+  ) {
+    diagnostics.push(diagnostic('CONTINUATION_SOURCE_TRANSCRIPTION_CONFLICT', 'needs_review', '$.evidence.continuationWritingCapture.group', 'Continuation Writing capture conflicts with the reviewed source transcription'))
+    return
+  }
+  if (
+    starterProvision?.kind === 'ordered_source_starters'
+    && starterProvision.starters.length === 2
+    && stableStringify(sourceInspection.starterTextDigests) !== stableStringify(capturedStarterDigests)
+  ) {
+    diagnostics.push(diagnostic('CONTINUATION_SOURCE_LOCATION_INVALID', 'incomplete_source', '$.evidence.continuationWritingCapture.group.sourceLocation', 'The two captured starter texts must match the independently reviewed source-page proof'))
+    return
+  }
+  const variantIssues = validateJsonSchema(
+    capture.group.variant,
+    closure.schemas['canonical-continuation-writing-variant-v1'],
+    '$.evidence.continuationWritingCapture.group.variant',
+  )
+  if (variantIssues.length > 0) {
+    diagnostics.push(...variantIssues.map((item) => diagnostic('CONTINUATION_SOURCE_VARIANT_INVALID', 'incomplete_source', item.path, item.message)))
+    return
+  }
+  const observationIds = new Set()
+  const sourceObservationId = `observation:continuation-source:${capture.group.groupId}`
+  const sourceSpanId = `source-span:${sourceObservationId}`
+  source.observations.push({
+    observationId: sourceObservationId,
+    kind: 'continuation_source_group',
+    documentInputKey: continuationEntry.document.inputKey,
+    value: {
+      groupId: capture.group.groupId,
+      sourceDocumentDigest: capture.sourceDocumentDigest,
+      sourceLocation: capture.group.sourceLocation,
+      review: capture.review,
+    },
+    span: { start: 0, end: continuationEntry.document.byteLength },
+  })
+  for (const observation of capture.group.observations) {
+    if (
+      !isRecordValue(observation)
+      || !exactKeys(observation, ['observationId', 'kind', 'value'])
+      || typeof observation.observationId !== 'string'
+      || typeof observation.kind !== 'string'
+      || !isRecordValue(observation.value)
+      || observationIds.has(observation.observationId)
+    ) {
+      diagnostics.push(diagnostic('CONTINUATION_SOURCE_OBSERVATION_INVALID', 'needs_review', '$.evidence.continuationWritingCapture.group.observations', 'Reviewed Continuation observations require unique closed identities'))
+      continue
+    }
+    observationIds.add(observation.observationId)
+    source.observations.push({
+      observationId: observation.observationId,
+      kind: observation.kind,
+      documentInputKey: continuationEntry.document.inputKey,
+      value: cloneJson(observation.value),
+      span: { start: 0, end: continuationEntry.document.byteLength },
+    })
+  }
+  if (diagnostics.some((item) => item.code === 'CONTINUATION_SOURCE_OBSERVATION_INVALID')) return
+  source.groups.push({
+    groupId: capture.group.groupId,
+    slotId: capture.group.slotId,
+    profileId: capture.profileId,
+    family: 'continuation-writing',
+    questionIds: [],
+    blankIds: [],
+    sourceSpanId,
+    content: cloneJson(capture.group.content),
+    media: [],
+    variant: cloneJson(capture.group.variant),
+  })
+}
+
 function adaptReferenceFamilies(parsed, documents, diagnostics) {
   const structured = documents
     .filter((document) => document.mediaType === 'application/json' && document.roles.some((role) => ['question_source', 'official_answer_source', 'structured_source'].includes(role)))
@@ -680,6 +864,14 @@ function adaptReferenceFamilies(parsed, documents, diagnostics) {
   const transcriptionEntry = transcriptionDocument
     ? { document: transcriptionDocument, value: parseJsonDocument(transcriptionDocument, diagnostics) }
     : null
+  const continuationDocument = documents.find((document) => document.mediaType === 'application/vnd.eqb.continuation-writing-source-capture+json')
+  const continuationEntry = continuationDocument
+    ? { document: continuationDocument, value: parseJsonDocument(continuationDocument, diagnostics) }
+    : null
+  const continuationTranscriptionDocument = documents.find((document) => document.mediaType === 'application/vnd.eqb.continuation-writing-source-transcription+json')
+  const continuationTranscriptionEntry = continuationTranscriptionDocument
+    ? { document: continuationTranscriptionDocument, value: parseJsonDocument(continuationTranscriptionDocument, diagnostics) }
+    : null
   const provenanceEntries = documents
     .filter((document) => document.mediaType === 'application/json' && document.roles.includes('source_provenance'))
     .map((document) => ({ document, value: parseJsonDocument(document, diagnostics) }))
@@ -687,6 +879,14 @@ function adaptReferenceFamilies(parsed, documents, diagnostics) {
     source: parsed.value,
     applicationEntry,
     transcriptionEntry,
+    provenanceEntries,
+    documents,
+    diagnostics,
+  })
+  appendContinuationWritingReferenceGroup({
+    source: parsed.value,
+    continuationEntry,
+    transcriptionEntry: continuationTranscriptionEntry,
     provenanceEntries,
     documents,
     diagnostics,
@@ -1132,6 +1332,18 @@ function collectApplicationWritingTargetIds(variant) {
   ].filter((target) => typeof target.id === 'string')
 }
 
+function collectContinuationWritingTargetIds(variant) {
+  if (variant?.family !== 'continuation-writing') return []
+  return [
+    { kind: 'writing_task', id: variant.writingTaskId },
+    { kind: 'word_ruling', id: variant.wordCountRuling?.authorityObservationRef },
+    { kind: 'response_binding', id: variant.response?.authorityObservationRef },
+    ...(variant.starterProvision?.kind === 'ordered_source_starters'
+      ? variant.starterProvision.starters.map((starter) => ({ kind: 'starter', id: starter.starterId }))
+      : [{ kind: 'starter_absence', id: variant.starterProvision?.absenceAssertionRef }]),
+  ].filter((target) => typeof target.id === 'string')
+}
+
 function applicationWritingSourceSpanRefs(variant, content, capture, target) {
   if (variant?.family !== 'application-writing') return null
   const observationRef = target.kind === 'word_ruling'
@@ -1163,6 +1375,30 @@ function applicationWritingSourceSpanRefs(variant, content, capture, target) {
       const observation = capture.observations.find((candidate) => candidate.observationId === part.authorityAssertionRef)
       return observation ? [observation.sourceSpanId] : null
     }
+  }
+  return null
+}
+
+function continuationWritingSourceSpanRefs(variant, content, capture, target) {
+  if (variant?.family !== 'continuation-writing') return null
+  const observationRef = target.kind === 'word_ruling'
+    ? variant.wordCountRuling?.authorityObservationRef
+    : target.kind === 'response_binding'
+      ? variant.response?.authorityObservationRef
+      : target.kind === 'starter_absence'
+        ? variant.starterProvision?.absenceAssertionRef
+        : null
+  if (observationRef && target.id === observationRef) {
+    const observation = capture.observations.find((candidate) => candidate.observationId === observationRef)
+    return observation ? [observation.sourceSpanId] : null
+  }
+  for (const starter of variant.starterProvision?.starters || []) {
+    const block = content?.blocks?.find((candidate) => candidate.nodeId === starter.contentRef)
+    const belongsToStarter = (target.kind === 'starter' && target.id === starter.starterId)
+      || (target.kind === 'content_node' && (target.id === starter.contentRef || block?.inlines?.some((inline) => inline.nodeId === target.id)))
+    if (!belongsToStarter) continue
+    const observation = capture.observations.find((candidate) => candidate.observationId === starter.authorityObservationRef)
+    return observation ? [observation.sourceSpanId] : null
   }
   return null
 }
@@ -1322,6 +1558,8 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
       ? ['family', 'passageBlockRoles', 'questions', 'choiceOwnership']
       : family.familyContractId === 'application-writing'
         ? ['family', 'writingTaskId', 'promptBlockRefs', 'situation', 'contentRequirements', 'wordCountRuling', 'givenSkeleton', 'choiceOwnership', 'response']
+      : family.familyContractId === 'continuation-writing'
+        ? ['family', 'writingTaskId', 'materialBlockRefs', 'wordCountRuling', 'starterProvision', 'choiceOwnership', 'response']
       : ['family', 'choiceOwnership']
   if (!exactKeys(variant, variantKeys) || variant.family !== family.familyContractId) diagnostics.push(diagnostic('GROUP_VARIANT_INVALID', 'needs_review', '$.groups.variant', 'Variant family must match the closed contract'))
   if (family.variantSchemaId) {
@@ -1360,6 +1598,17 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
       sourceCapture: capture,
     }).map((item) => diagnostic(item.code, item.disposition, item.path, item.message)))
   }
+  if (family.familyContractId === 'continuation-writing') {
+    diagnostics.push(...validateContinuationWritingContract({
+      groupId: sourceGroup.groupId,
+      profileId: sourceGroup.profileId,
+      questionIds: sourceGroup.questionIds,
+      blankIds: sourceGroup.blankIds,
+      content,
+      variant,
+      sourceCapture: capture,
+    }).map((item) => diagnostic(item.code, item.disposition, item.path, item.message)))
+  }
   if (diagnostics.length > 0) return { diagnostics, artifact: null }
   const artifactBase = {
     schemaVersion: 'canonical-question-group-v1',
@@ -1386,12 +1635,14 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
     ...collectRichTargetIds(content).map((entry) => ({ target: entry })),
     ...collectReadingTargetIds(variant).map((entry) => ({ target: entry })),
     ...collectApplicationWritingTargetIds(variant).map((entry) => ({ target: entry })),
+    ...collectContinuationWritingTargetIds(variant).map((entry) => ({ target: entry })),
   ].filter((entry, index, entries) => entries.findIndex((candidate) => candidate.target.kind === entry.target.kind && candidate.target.id === entry.target.id) === index)
   const sourceMap = {
     captureId: capture.captureId,
     entries: targetEntries.map((entry) => ({
       ...entry,
       sourceSpanRefs: applicationWritingSourceSpanRefs(variant, content, capture, entry.target)
+        || continuationWritingSourceSpanRefs(variant, content, capture, entry.target)
         || sourceGroup.sourceSpanRefsByTarget?.[`${entry.target.kind}:${entry.target.id}`]
         || [sourceGroup.sourceSpanId],
       transformationRecordIds: sourceGroup.transformationRecordIdsByTarget?.[`${entry.target.kind}:${entry.target.id}`]
@@ -1439,8 +1690,11 @@ function buildPlan(source, capture, closure, groups, acceptedRecords, reviewDeci
       diagnostics.push(diagnostic('ACTIVE_GROUP_MISSING', 'incomplete_source', `$.groups`, `Required active slot ${slot.slotId} is missing`))
       continue
     }
-    if (group.variant.family !== slot.familyContractRef.id) {
-      diagnostics.push(diagnostic('GROUP_PROFILE_FAMILY_MISMATCH', 'needs_review', `$.groups.${group.groupId}`, 'Group family disagrees with Profile slot'))
+    if (
+      group.variant.family !== slot.familyContractRef.id
+      || group.contractRef.familyContractVersion !== slot.familyContractRef.version
+    ) {
+      diagnostics.push(diagnostic('GROUP_PROFILE_FAMILY_MISMATCH', 'needs_review', `$.groups.${group.groupId}`, 'Group family identity or version disagrees with Profile slot'))
       continue
     }
     if (slot.questionCardinality.kind === 'exact' && group.questionRefs.length !== slot.questionCardinality.count) {
@@ -1589,7 +1843,7 @@ export function compileCanonicalPaper(request) {
   if (dispositionFor(diagnostics) !== 'ready') return blockedResult(dispositionFor(diagnostics), capture, closure.authorityRef, diagnostics, transformations.records, effectiveReviewDecisions)
   const builtGroups = []
   for (const rawGroup of source.groups) {
-    const built = buildGroupArtifact({ ...rawGroup, paperId: source.paperId }, capture, closure, transformations.records)
+    const built = buildGroupArtifact({ ...rawGroup, paperId: source.paperId, profileId: source.profileId }, capture, closure, transformations.records)
     diagnostics.push(...built.diagnostics)
     if (built.artifact) builtGroups.push({ ...built.artifact, slotId: rawGroup.slotId })
   }

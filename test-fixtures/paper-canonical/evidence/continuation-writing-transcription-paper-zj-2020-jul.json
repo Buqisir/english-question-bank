@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "continuation-writing-source-transcription-v1",
+  "paperId": "paper-zj-2020-jul",
+  "sourceDocumentDigest": "sha256:1a447b5dc7bdba349347d61080304eab55815e41db055b5c2ff9b43545b79cdc",
+  "review": {
+    "method": "manual_source_transcription",
+    "status": "accepted"
+  },
+  "groupId": "group-zj-2020-jul-writing-continuation",
+  "orderedBlocks": [
+    {
+      "blockId": "para-zj-2020-jul-writing-cont-title",
+      "textDigest": "sha256:171c08b41e1799a497b9ec3c022887c63d7c592d4036ba8ea71c2d9befd5e203"
+    },
+    {
+      "blockId": "para-zj-2020-jul-writing-cont-p1",
+      "textDigest": "sha256:0d0992e3fcefc7f1318abb866c1817e03bffac32d8e0cf577a259366650132fc"
+    },
+    {
+      "blockId": "para-zj-2020-jul-writing-cont-p2",
+      "textDigest": "sha256:4c82e7fe379e159f125fdabc5bc846a7df20c9c3b4ed850591323269f896fc26"
+    },
+    {
+      "blockId": "para-zj-2020-jul-writing-cont-p3",
+      "textDigest": "sha256:c1de3ff352b8ebd0159d2536404b0c2fd70a86e29fa42fbe08ea5388cda84a89"
+    },
+    {
+      "blockId": "para-zj-2020-jul-writing-cont-p4",
+      "textDigest": "sha256:29e3477e7c1ca5cbfb905414fd02c089eb81d13bd51729e7ee2c18b6f0c03cda"
+    },
+    {
+      "blockId": "para-zj-2020-jul-writing-cont-p5",
+      "textDigest": "sha256:bccd8e5e32986acf65a4dd1e125f7094e9f272b58c536e1f083f767ee722de03"
+    },
+    {
+      "blockId": "para-zj-2020-jul-writing-cont-p6",
+      "textDigest": "sha256:219569ad2a6ef68befb750be0d406bc64edf10d306d67367f3c3449b181b75a7"
+    },
+    {
+      "blockId": "para-zj-2020-jul-writing-cont-p7",
+      "textDigest": "sha256:5852d2cafc0ffc319ffc7edbde66cbfa3a69092d8c518cddce764c128031cace"
+    }
+  ],
+  "materialBlockRefs": [
+    "para-zj-2020-jul-writing-cont-title",
+    "para-zj-2020-jul-writing-cont-p1",
+    "para-zj-2020-jul-writing-cont-p2",
+    "para-zj-2020-jul-writing-cont-p3",
+    "para-zj-2020-jul-writing-cont-p4",
+    "para-zj-2020-jul-writing-cont-p5",
+    "para-zj-2020-jul-writing-cont-p6",
+    "para-zj-2020-jul-writing-cont-p7"
+  ],
+  "starterProvision": {
+    "kind": "source_proven_none"
+  },
+  "answerRegionRef": "writing.continuation-box"
+}

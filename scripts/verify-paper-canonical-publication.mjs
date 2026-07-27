@@ -43,7 +43,13 @@ function descriptor(role, value, relativePath) {
 function legacyBundleFrom(compilation, sourceAsset, transformationRecords = []) {
   const sourceCapture = structuredClone(compilation.artifacts.sourceCapture)
   const plan = structuredClone(compilation.artifacts.canonicalPaper.paperPlan)
+  const legacyProfile = legacyAuthority.profiles.get(plan.profileRef.profileId)
   plan.authorityRef = legacyAuthorityRef
+  plan.profileRef = {
+    profileId: legacyProfile.profileId,
+    profileVersion: legacyProfile.version,
+    profileDigest: digestJson(legacyProfile),
+  }
   plan.sourceConformance = {
     status: transformationRecords.length > 0 ? 'exact_deviations_applied' : 'direct',
     transformationRecordIds: transformationRecords.map((record) => record.recordId),

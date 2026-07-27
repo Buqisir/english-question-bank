@@ -1,5 +1,6 @@
 import { resolveCanonicalAuthority, slotsForProfile, validateJsonSchema } from './authority.mjs'
 import { validateApplicationWritingContract } from './applicationWriting.mjs'
+import { validateContinuationWritingContract } from './continuationWriting.mjs'
 import { validateReadingContract } from './reading.mjs'
 import { validateSevenChoicesContract } from './sevenChoices.mjs'
 import { cloneJson, digestJson } from './stable.mjs'
@@ -42,6 +43,16 @@ function sourceMapCoverageIssues(group, sourceCapture, family) {
           ...(group.variant.givenSkeleton.presence === 'provided'
             ? group.variant.givenSkeleton.parts.map((part) => `given_part:${part.givenPartId}`)
             : [`given_absence:${group.variant.givenSkeleton.answerRegionAbsenceAssertionRef}`]),
+        ]
+      : []),
+    ...(family.variantSchemaId === 'canonical-continuation-writing-variant-v1'
+      ? [
+          `writing_task:${group.variant.writingTaskId}`,
+          `word_ruling:${group.variant.wordCountRuling.authorityObservationRef}`,
+          `response_binding:${group.variant.response.authorityObservationRef}`,
+          ...(group.variant.starterProvision.kind === 'ordered_source_starters'
+            ? group.variant.starterProvision.starters.map((starter) => `starter:${starter.starterId}`)
+            : [`starter_absence:${group.variant.starterProvision.absenceAssertionRef}`]),
         ]
       : []),
   ])
@@ -164,6 +175,18 @@ function assertCanonicalPackage(canonicalPackage) {
       })
       if (applicationIssues.length > 0) throw projectionError('Application Writing canonical contract is not closed', applicationIssues)
     }
+    if (family.variantSchemaId === 'canonical-continuation-writing-variant-v1') {
+      const continuationIssues = validateContinuationWritingContract({
+        groupId: group.identity.groupId,
+        profileId: profile.profileId,
+        questionIds: group.questionRefs.map(({ questionId }) => questionId),
+        blankIds: group.blankRefs.map(({ blankId }) => blankId),
+        content: group.content,
+        variant: group.variant,
+        sourceCapture,
+      })
+      if (continuationIssues.length > 0) throw projectionError('Continuation Writing canonical contract is not closed', continuationIssues)
+    }
     if (group.semanticDigest !== digestJson(groupSemanticPayload(group))) throw projectionError('Group semantic digest does not match canonical semantics', [])
     const sourceMapIssues = sourceMapCoverageIssues(group, sourceCapture, family)
     if (sourceMapIssues.length > 0) throw projectionError('Group source map is incomplete', sourceMapIssues)
@@ -176,7 +199,11 @@ function assertCanonicalPackage(canonicalPackage) {
   for (const slot of activeSlots) {
     const binding = bound.find((candidate) => candidate.slotId === slot.slotId)
     const group = binding && groupById.get(binding.groupRef.groupId)
-    if (!group || group.contractRef.familyContractId !== slot.familyContractRef.id) throw projectionError(`Plan binding for ${slot.slotId} is not a conforming Group`, [])
+    if (
+      !group
+      || group.contractRef.familyContractId !== slot.familyContractRef.id
+      || group.contractRef.familyContractVersion !== slot.familyContractRef.version
+    ) throw projectionError(`Plan binding for ${slot.slotId} is not a conforming Group`, [])
     boundGroupIds.add(group.identity.groupId)
   }
   if (boundGroupIds.size !== groupById.size) throw projectionError('No extra canonical Group may escape the Plan', [])
@@ -282,6 +309,29 @@ export function projectCanonicalPaper(canonicalPackage) {
               },
             }
           : {}
+        const continuationWriting = group.variant.family === 'continuation-writing'
+          ? {
+              writingTaskId: group.variant.writingTaskId,
+              material: {
+                blocks: group.variant.materialBlockRefs.map((blockId) => cloneJson(group.content.blocks.find((block) => block.nodeId === blockId))),
+              },
+              wordCountRuling: cloneJson(group.variant.wordCountRuling),
+              answerRegion: {
+                answerRegionRef: group.variant.response.answerRegionRef,
+                responseSlotId: slot.slotId,
+                starterLines: cloneJson(group.variant.starterProvision.kind === 'ordered_source_starters'
+                  ? group.variant.starterProvision.starters
+                  : []),
+              },
+              anchors: {
+                contentNodeIds: contentIdentityLists(group.content).contentNodeIds,
+                starterIds: group.variant.starterProvision.kind === 'ordered_source_starters'
+                  ? group.variant.starterProvision.starters.map((starter) => starter.starterId)
+                  : [],
+                responseSlotId: slot.slotId,
+              },
+            }
+          : {}
         nodes.push({
           kind: 'group',
           slotId: slot.slotId,
@@ -299,6 +349,7 @@ export function projectCanonicalPaper(canonicalPackage) {
           ...cloneJson(sevenChoices),
           ...cloneJson(reading),
           ...cloneJson(applicationWriting),
+          ...cloneJson(continuationWriting),
         })
         nodes.push({ kind: 'answer_region', answerRegionId: slot.answerRegionRef, groupId: group.identity.groupId })
       }

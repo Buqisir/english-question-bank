@@ -62,6 +62,36 @@ function variant(family, questionIds, blankIds, groupId) {
       },
     }
   }
+  if (family === 'continuation-writing') {
+    const materialBlockId = `paragraph:${groupId}:material`
+    const starterBlockIds = [1, 2].map((index) => `paragraph:${groupId}:starter:${index}`)
+    return {
+      family,
+      writingTaskId: `writing-task:${groupId}`,
+      materialBlockRefs: [materialBlockId],
+      wordCountRuling: {
+        kind: 'approximate_target',
+        target: 150,
+        countScope: 'student_authored_only',
+        sourceRef: { blockId: materialBlockId, inlineNodeIds: [`text:${groupId}:material`] },
+        authorityObservationRef: `observation:${groupId}:word-count`,
+      },
+      starterProvision: {
+        kind: 'ordered_source_starters',
+        starters: starterBlockIds.map((contentRef, index) => ({
+          starterId: `starter:${groupId}:${index + 1}`,
+          contentRef,
+          authorityObservationRef: `observation:${groupId}:starter:${index + 1}`,
+        })),
+      },
+      choiceOwnership: value.choiceOwnership,
+      response: {
+        kind: 'group_level_written_response',
+        answerRegionRef: 'writing.continuation-box',
+        authorityObservationRef: `observation:${groupId}:response`,
+      },
+    }
+  }
   if (family === 'reading') {
     return {
       family,
@@ -100,6 +130,22 @@ function referenceBlankContent(family, blankIds) {
           text: 'Write a source-backed response of about 80 words.',
         }],
       }],
+    }
+  }
+  if (family === 'continuation-writing') {
+    return {
+      blocks: [
+        {
+          kind: 'paragraph',
+          nodeId: 'paragraph:group:writing.continuation:material',
+          inlines: [{ kind: 'text', nodeId: 'text:group:writing.continuation:material', text: 'Source-backed continuation material.' }],
+        },
+        ...[1, 2].map((index) => ({
+          kind: 'paragraph',
+          nodeId: `paragraph:group:writing.continuation:starter:${index}`,
+          inlines: [{ kind: 'text', nodeId: `text:group:writing.continuation:starter:${index}`, text: `Source starter ${index}.` }],
+        })),
+      ],
     }
   }
   if (family === 'reading') {
@@ -187,6 +233,40 @@ export function makeReadyCanonicalFixture() {
             groupId,
             writingTaskId: `writing-task:${groupId}`,
             answerRegionRef: 'writing.application-box',
+          },
+          span: { start: 0, end: 1 },
+        },
+      )
+    }
+    if (slot.familyContractRef.id === 'continuation-writing') {
+      const groupId = `group:${slot.slotId}`
+      observations.push(
+        {
+          observationId: `observation:${groupId}:word-count`,
+          kind: 'continuation_word_count_ruling',
+          documentInputKey: 'questions',
+          value: { groupId, target: 150, countScope: 'student_authored_only' },
+          span: { start: 0, end: 1 },
+        },
+        ...[1, 2].map((index) => ({
+          observationId: `observation:${groupId}:starter:${index}`,
+          kind: 'continuation_source_starter',
+          documentInputKey: 'questions',
+          value: {
+            groupId,
+            starterId: `starter:${groupId}:${index}`,
+            contentRef: `paragraph:${groupId}:starter:${index}`,
+          },
+          span: { start: 0, end: 1 },
+        })),
+        {
+          observationId: `observation:${groupId}:response`,
+          kind: 'continuation_response_binding',
+          documentInputKey: 'questions',
+          value: {
+            groupId,
+            writingTaskId: `writing-task:${groupId}`,
+            answerRegionRef: 'writing.continuation-box',
           },
           span: { start: 0, end: 1 },
         },

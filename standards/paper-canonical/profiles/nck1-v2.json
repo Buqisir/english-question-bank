@@ -1,0 +1,423 @@
+{
+  "schemaVersion": "paper-format-profile-v1",
+  "profileId": "nck1",
+  "version": "2",
+  "owner": "profile",
+  "title": "NCK1 v1",
+  "totalScore": 150,
+  "parts": [
+    {
+      "partId": "listening",
+      "ordinal": 1,
+      "titleInstructionRef": "part.listening",
+      "score": 30,
+      "sections": [
+        {
+          "sectionId": "listening.dialogues",
+          "ordinal": 1,
+          "titleInstructionRef": "section.listening",
+          "score": 30,
+          "slots": [
+            {
+              "slotId": "listening.short-dialogue",
+              "presence": "required",
+              "activation": "inactive_source",
+              "sourceRole": "listening_questions_1_5",
+              "numberingRule": {
+                "kind": "range",
+                "start": 1,
+                "end": 5
+              },
+              "scoringRule": {
+                "kind": "per_question",
+                "points": 1.5,
+                "total": 7.5
+              },
+              "instructionRefs": [],
+              "answerRegionRef": "inactive.source-only",
+              "renderPolicy": "suppress"
+            },
+            {
+              "slotId": "listening.long-form",
+              "presence": "required",
+              "activation": "inactive_source",
+              "sourceRole": "listening_questions_6_20",
+              "numberingRule": {
+                "kind": "range",
+                "start": 6,
+                "end": 20
+              },
+              "scoringRule": {
+                "kind": "per_question",
+                "points": 1.5,
+                "total": 22.5
+              },
+              "instructionRefs": [],
+              "answerRegionRef": "inactive.source-only",
+              "renderPolicy": "suppress"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "partId": "reading",
+      "ordinal": 2,
+      "titleInstructionRef": "part.reading",
+      "score": 50,
+      "sections": [
+        {
+          "sectionId": "reading.choice",
+          "ordinal": 1,
+          "titleInstructionRef": "section.reading-choice",
+          "score": 37.5,
+          "slots": [
+            {
+              "slotId": "reading.a",
+              "presence": "required",
+              "activation": "canonical_group",
+              "familyContractRef": {
+                "id": "reading",
+                "version": "1"
+              },
+              "groupCardinality": 1,
+              "questionCardinality": {
+                "kind": "exact",
+                "count": 3
+              },
+              "numberingRule": {
+                "kind": "range",
+                "start": 21,
+                "end": 23
+              },
+              "scoringRule": {
+                "kind": "per_question",
+                "points": 2.5,
+                "total": 7.5
+              },
+              "instructionRefs": [],
+              "answerRegionRef": "objective.answer-card"
+            },
+            {
+              "slotId": "reading.b",
+              "presence": "required",
+              "activation": "canonical_group",
+              "familyContractRef": {
+                "id": "reading",
+                "version": "1"
+              },
+              "groupCardinality": 1,
+              "questionCardinality": {
+                "kind": "exact",
+                "count": 4
+              },
+              "numberingRule": {
+                "kind": "range",
+                "start": 24,
+                "end": 27
+              },
+              "scoringRule": {
+                "kind": "per_question",
+                "points": 2.5,
+                "total": 10
+              },
+              "instructionRefs": [],
+              "answerRegionRef": "objective.answer-card"
+            },
+            {
+              "slotId": "reading.c",
+              "presence": "required",
+              "activation": "canonical_group",
+              "familyContractRef": {
+                "id": "reading",
+                "version": "1"
+              },
+              "groupCardinality": 1,
+              "questionCardinality": {
+                "kind": "exact",
+                "count": 4
+              },
+              "numberingRule": {
+                "kind": "range",
+                "start": 28,
+                "end": 31
+              },
+              "scoringRule": {
+                "kind": "per_question",
+                "points": 2.5,
+                "total": 10
+              },
+              "instructionRefs": [],
+              "answerRegionRef": "objective.answer-card"
+            },
+            {
+              "slotId": "reading.d",
+              "presence": "required",
+              "activation": "canonical_group",
+              "familyContractRef": {
+                "id": "reading",
+                "version": "1"
+              },
+              "groupCardinality": 1,
+              "questionCardinality": {
+                "kind": "exact",
+                "count": 4
+              },
+              "numberingRule": {
+                "kind": "range",
+                "start": 32,
+                "end": 35
+              },
+              "scoringRule": {
+                "kind": "per_question",
+                "points": 2.5,
+                "total": 10
+              },
+              "instructionRefs": [],
+              "answerRegionRef": "objective.answer-card"
+            }
+          ]
+        },
+        {
+          "sectionId": "reading.seven-choices",
+          "ordinal": 2,
+          "titleInstructionRef": "section.seven-choices",
+          "score": 12.5,
+          "slots": [
+            {
+              "slotId": "reading.seven-choices",
+              "presence": "required",
+              "activation": "canonical_group",
+              "familyContractRef": {
+                "id": "seven-choices",
+                "version": "1"
+              },
+              "groupCardinality": 1,
+              "questionCardinality": {
+                "kind": "exact",
+                "count": 5
+              },
+              "numberingRule": {
+                "kind": "range",
+                "start": 36,
+                "end": 40
+              },
+              "scoringRule": {
+                "kind": "per_question",
+                "points": 2.5,
+                "total": 12.5
+              },
+              "instructionRefs": [],
+              "answerRegionRef": "objective.answer-card"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "partId": "language",
+      "ordinal": 3,
+      "titleInstructionRef": "part.language",
+      "score": 30,
+      "sections": [
+        {
+          "sectionId": "language.fill",
+          "ordinal": 1,
+          "titleInstructionRef": "section.language",
+          "score": 30,
+          "slots": [
+            {
+              "slotId": "language.cloze",
+              "presence": "required",
+              "activation": "canonical_group",
+              "familyContractRef": {
+                "id": "cloze",
+                "version": "1"
+              },
+              "groupCardinality": 1,
+              "questionCardinality": {
+                "kind": "exact",
+                "count": 15
+              },
+              "numberingRule": {
+                "kind": "range",
+                "start": 41,
+                "end": 55
+              },
+              "scoringRule": {
+                "kind": "per_question",
+                "points": 1,
+                "total": 15
+              },
+              "instructionRefs": [],
+              "answerRegionRef": "objective.answer-card"
+            },
+            {
+              "slotId": "language.grammar-fill",
+              "presence": "required",
+              "activation": "canonical_group",
+              "familyContractRef": {
+                "id": "grammar-fill",
+                "version": "1"
+              },
+              "groupCardinality": 1,
+              "questionCardinality": {
+                "kind": "exact",
+                "count": 10
+              },
+              "numberingRule": {
+                "kind": "range",
+                "start": 56,
+                "end": 65
+              },
+              "scoringRule": {
+                "kind": "per_question",
+                "points": 1.5,
+                "total": 15
+              },
+              "instructionRefs": [],
+              "answerRegionRef": "short-answer.answer-card"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "partId": "writing",
+      "ordinal": 4,
+      "titleInstructionRef": "part.writing",
+      "score": 40,
+      "sections": [
+        {
+          "sectionId": "writing.tasks",
+          "ordinal": 1,
+          "titleInstructionRef": "section.writing",
+          "score": 40,
+          "slots": [
+            {
+              "slotId": "writing.application",
+              "presence": "required",
+              "activation": "canonical_group",
+              "familyContractRef": {
+                "id": "application-writing",
+                "version": "3"
+              },
+              "groupCardinality": 1,
+              "questionCardinality": {
+                "kind": "exact",
+                "count": 0
+              },
+              "numberingRule": {
+                "kind": "none"
+              },
+              "scoringRule": {
+                "kind": "group_total",
+                "total": 15
+              },
+              "instructionRefs": [],
+              "answerRegionRef": "writing.application-box"
+            },
+            {
+              "slotId": "writing.continuation",
+              "presence": "required",
+              "activation": "canonical_group",
+              "familyContractRef": {
+                "id": "continuation-writing",
+                "version": "2"
+              },
+              "groupCardinality": 1,
+              "questionCardinality": {
+                "kind": "exact",
+                "count": 0
+              },
+              "numberingRule": {
+                "kind": "none"
+              },
+              "scoringRule": {
+                "kind": "group_total",
+                "total": 25
+              },
+              "instructionRefs": [],
+              "answerRegionRef": "writing.continuation-box"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "instructions": {
+    "part.listening": {
+      "instructionId": "part.listening",
+      "placement": "part_heading",
+      "text": "Listening"
+    },
+    "section.listening": {
+      "instructionId": "section.listening",
+      "placement": "section_heading",
+      "text": "Listening tasks"
+    },
+    "part.reading": {
+      "instructionId": "part.reading",
+      "placement": "part_heading",
+      "text": "Reading"
+    },
+    "section.reading-choice": {
+      "instructionId": "section.reading-choice",
+      "placement": "section_heading",
+      "text": "Reading choices"
+    },
+    "section.seven-choices": {
+      "instructionId": "section.seven-choices",
+      "placement": "section_heading",
+      "text": "Seven choices"
+    },
+    "part.language": {
+      "instructionId": "part.language",
+      "placement": "part_heading",
+      "text": "Language use"
+    },
+    "section.language": {
+      "instructionId": "section.language",
+      "placement": "section_heading",
+      "text": "Language fill"
+    },
+    "part.writing": {
+      "instructionId": "part.writing",
+      "placement": "part_heading",
+      "text": "Writing"
+    },
+    "section.writing": {
+      "instructionId": "section.writing",
+      "placement": "section_heading",
+      "text": "Writing tasks"
+    }
+  },
+  "answerRegions": {
+    "objective.answer-card": {
+      "regionId": "objective.answer-card",
+      "kind": "objective"
+    },
+    "short-answer.answer-card": {
+      "regionId": "short-answer.answer-card",
+      "kind": "short_answer"
+    },
+    "writing.application-box": {
+      "regionId": "writing.application-box",
+      "kind": "writing"
+    },
+    "writing.continuation-box": {
+      "regionId": "writing.continuation-box",
+      "kind": "writing"
+    },
+    "inactive.source-only": {
+      "regionId": "inactive.source-only",
+      "kind": "inactive"
+    }
+  },
+  "completeness": {
+    "requireEveryRequiredSlot": true,
+    "allowOptionalOmission": true,
+    "requireInactiveSourceClosure": true,
+    "rejectUnexpectedSlots": true
+  }
+}
