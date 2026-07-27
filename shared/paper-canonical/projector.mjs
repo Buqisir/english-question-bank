@@ -1,4 +1,5 @@
 import { resolveCanonicalAuthority, slotsForProfile, validateJsonSchema } from './authority.mjs'
+import { validateReadingContract } from './reading.mjs'
 import { validateSevenChoicesContract } from './sevenChoices.mjs'
 import { cloneJson, digestJson } from './stable.mjs'
 
@@ -21,6 +22,16 @@ function sourceMapCoverageIssues(group, sourceCapture) {
     ...group.questionRefs.map(({ questionId }) => `question:${questionId}`),
     ...group.blankRefs.map(({ blankId }) => `blank:${blankId}`),
     ...group.media.map(({ mediaId }) => `media:${mediaId}`),
+    ...sourceMappedContentNodeIds(group.content).map((nodeId) => `content_node:${nodeId}`),
+    ...(group.variant.family === 'reading'
+      ? [
+          ...group.variant.questions.flatMap((question) => question.stem.map((inline) => `content_node:${inline.nodeId}`)),
+          ...group.variant.choiceOwnership.sets.flatMap((set) => set.options.flatMap((option) => [
+            `option:${option.optionId}`,
+            ...option.content.map((inline) => `content_node:${inline.nodeId}`),
+          ])),
+        ]
+      : []),
   ])
   const seen = new Set()
   if (group.sourceMap.captureId !== sourceCapture.captureId) issues.push('source-map capture does not match the supplied Source Capture')
@@ -34,6 +45,26 @@ function sourceMapCoverageIssues(group, sourceCapture) {
   }
   for (const identity of expected) if (!seen.has(identity)) issues.push(`missing source-map target ${identity}`)
   return issues
+}
+
+function sourceMappedContentNodeIds(content) {
+  const ids = []
+  for (const block of content?.blocks || []) {
+    ids.push(block.nodeId)
+    const inlineSets = block.kind === 'table'
+      ? (block.rows || []).flatMap((row) => {
+          ids.push(row.rowId)
+          return (row.cells || []).map((cell) => {
+            ids.push(cell.cellId)
+            return cell.inlines
+          })
+        })
+      : [block.kind === 'figure' ? block.caption : block.inlines]
+    for (const inlines of inlineSets) {
+      for (const inline of inlines || []) if (inline.kind === 'text') ids.push(inline.nodeId)
+    }
+  }
+  return ids
 }
 
 function choiceOwnershipIssues(group, family) {
@@ -58,12 +89,18 @@ function contentNodeIds(content) {
   const ids = []
   for (const block of content?.blocks || []) {
     ids.push(block.nodeId)
-    const inlineSets = block.kind === 'table'
-      ? (block.rows || []).flatMap((row) => (row.cells || []).map((cell) => {
+    let inlineSets
+    if (block.kind === 'table') {
+      inlineSets = (block.rows || []).flatMap((row) => {
+        ids.push(row.rowId)
+        return (row.cells || []).map((cell) => {
           ids.push(cell.cellId)
           return cell.inlines
-        }))
-      : [block.kind === 'figure' ? block.caption : block.inlines]
+        })
+      })
+    } else {
+      inlineSets = [block.kind === 'figure' ? block.caption : block.inlines]
+    }
     for (const inlines of inlineSets) for (const inline of inlines || []) ids.push(inline.nodeId)
   }
   return ids
@@ -105,6 +142,17 @@ function assertCanonicalPackage(canonicalPackage) {
         assertions: sourceCapture.assertions,
       })
       if (sevenChoicesIssues.length > 0) throw projectionError('Seven Choices canonical contract is not closed', sevenChoicesIssues)
+    }
+    if (family.familyContractId === 'reading') {
+      const readingIssues = validateReadingContract({
+        questionIds: group.questionRefs.map(({ questionId }) => questionId),
+        blankIds: group.blankRefs.map(({ blankId }) => blankId),
+        content: group.content,
+        media: group.media,
+        variant: group.variant,
+        assertions: sourceCapture.assertions,
+      })
+      if (readingIssues.length > 0) throw projectionError('Reading canonical contract is not closed', readingIssues)
     }
     if (group.semanticDigest !== digestJson(groupSemanticPayload(group))) throw projectionError('Group semantic digest does not match canonical semantics', [])
     const sourceMapIssues = sourceMapCoverageIssues(group, sourceCapture)
@@ -160,6 +208,24 @@ export function projectCanonicalPaper(canonicalPackage) {
               },
             }
           : {}
+        const reading = group.variant.family === 'reading'
+          ? {
+              blocks: cloneJson(group.content.blocks),
+              passageBlockRoles: cloneJson(group.variant.passageBlockRoles),
+              questions: group.variant.questions.map((question, index) => ({
+                questionId: question.questionId,
+                number: numberingByGroup.get(group.identity.groupId)?.[index]?.number,
+                stem: cloneJson(question.stem),
+                options: cloneJson(group.variant.choiceOwnership.sets[index].options),
+                correctOptionId: question.correctOptionId,
+              })),
+              anchors: {
+                contentNodeIds: contentNodeIds(group.content),
+                questionIds: group.questionRefs.map(({ questionId }) => questionId),
+                optionIds: group.variant.choiceOwnership.sets.flatMap((set) => set.options.map(({ optionId }) => optionId)),
+              },
+            }
+          : {}
         nodes.push({
           kind: 'group',
           slotId: slot.slotId,
@@ -175,6 +241,7 @@ export function projectCanonicalPaper(canonicalPackage) {
           media: cloneJson(group.media),
           choices: cloneJson(group.variant.choiceOwnership),
           ...cloneJson(sevenChoices),
+          ...cloneJson(reading),
         })
         nodes.push({ kind: 'answer_region', answerRegionId: slot.answerRegionRef, groupId: group.identity.groupId })
       }

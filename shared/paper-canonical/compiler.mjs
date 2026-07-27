@@ -1,4 +1,5 @@
 import { canonicalAuthorityRef, resolveCanonicalAuthority, slotsForProfile, validateJsonSchema } from './authority.mjs'
+import { validateReadingContract } from './reading.mjs'
 import { validateSevenChoicesContract } from './sevenChoices.mjs'
 import { cloneJson, digestJson, exactKeys, isRecordValue, sha256, stableStringify, withoutKey } from './stable.mjs'
 
@@ -216,12 +217,164 @@ function referenceOptions(paper, group, diagnostics, familyId) {
   return { ownership: 'per_question', sets }
 }
 
+function appendReadingReferenceGroups({
+  source,
+  paper,
+  answerKey,
+  paperEntry,
+  answerEntry,
+  readingEntry,
+  documents,
+  activeProfile,
+  diagnostics,
+}) {
+  const readingSlots = slotsForProfile(activeProfile).filter((slot) => slot.familyContractRef?.id === 'reading')
+  const missingSlots = readingSlots.filter((slot) => !source.groups.some((candidate) => candidate.slotId === slot.slotId))
+  if (missingSlots.length === 0) return
+  if (!readingEntry) {
+    diagnostics.push(diagnostic('READING_STRUCTURE_EVIDENCE_INCOMPLETE', 'incomplete_source', '$.evidence.documents', 'Reading cannot compile from the flattened marker or placeholder bridge alone'))
+    return
+  }
+  const readingCapture = readingEntry.value
+  const sourceDocument = documents.find((document) => document.sha256 === readingCapture?.sourceDocumentDigest)
+  if (
+    !isRecordValue(readingCapture)
+    || !exactKeys(readingCapture, ['schemaVersion', 'paperId', 'sourceDocumentDigest', 'groups'])
+    || readingCapture.schemaVersion !== 'reading-source-capture-v1'
+    || readingCapture.paperId !== source.paperId
+    || !sourceDocument
+    || sourceDocument.mediaType !== 'application/pdf'
+    || !isRecordValue(readingCapture.groups)
+  ) {
+    diagnostics.push(diagnostic('READING_SOURCE_CAPTURE_INVALID', 'incomplete_source', '$.evidence.documents', 'Reading structured capture must bind one immutable source document digest'))
+    return
+  }
+  const capturedBySlot = new Map(Object.values(readingCapture.groups).map((group) => [group?.slotId, group]))
+  for (const slot of missingSlots) {
+    const captured = capturedBySlot.get(slot.slotId)
+    const group = captured && paper.content?.groups?.[captured.groupId]
+    const groupRange = captured ? jsonObjectPropertyRange(readingEntry.document.bytes, captured.groupId) : null
+    if (
+      !isRecordValue(captured)
+      || !exactKeys(captured, ['groupId', 'slotId', 'sourcePage', 'visualProofDigest', 'content', 'passageBlockRoles'])
+      || captured.slotId !== slot.slotId
+      || !Number.isInteger(captured.sourcePage)
+      || captured.sourcePage < 1
+      || (captured.visualProofDigest !== null && !documents.some((document) => document.sha256 === captured.visualProofDigest && document.mediaType.startsWith('image/')))
+      || !groupRange
+      || group?.groupType !== 'reading'
+      || !Array.isArray(group.questionIds)
+      || group.questionIds.length !== slot.questionCardinality.count
+    ) {
+      diagnostics.push(diagnostic('READING_GROUP_EVIDENCE_INCOMPLETE', 'incomplete_source', '$.evidence.readingCapture', `Reading slot ${slot.slotId} lacks one exact structured source Group`))
+      continue
+    }
+    const observationId = `observation:reference:reading:${captured.groupId}`
+    const sourceSpanId = `source-span:${observationId}`
+    source.observations.push({
+      observationId,
+      kind: 'reading_structured_group',
+      documentInputKey: readingEntry.document.inputKey,
+      value: captured,
+      span: groupRange,
+    })
+    const questions = []
+    const sets = []
+    const sourceSpanRefsByTarget = {}
+    for (const questionId of group.questionIds) {
+      const question = paper.content?.questions?.[questionId]
+      const answer = answerKey.answers?.[questionId]
+      const questionRange = jsonObjectPropertyRange(paperEntry.document.bytes, questionId)
+      const answerRange = jsonObjectPropertyRange(answerEntry.document.bytes, questionId)
+      if (
+        !question
+        || question.groupId !== captured.groupId
+        || !questionRange
+        || !answer
+        || !answerRange
+        || question.options?.map((option) => option.label).join('') !== 'ABCD'
+        || question.options.some((option) => typeof option.text !== 'string' || option.text.length === 0)
+      ) {
+        diagnostics.push(diagnostic('READING_QUESTION_EVIDENCE_INCOMPLETE', 'incomplete_source', '$.evidence.documents', `Reading Question ${questionId} lacks exact stem, A-D Options, or official answer evidence`))
+        continue
+      }
+      const optionId = (label) => `option:${questionId}:${label}`
+      questions.push({
+        questionId,
+        stem: [{ kind: 'text', nodeId: `text:${questionId}:stem`, text: question.stem }],
+        correctOptionId: optionId(answer.answer),
+      })
+      sets.push({
+        questionId,
+        options: question.options.map((option) => ({
+          optionId: optionId(option.label),
+          label: option.label,
+          content: [{ kind: 'text', nodeId: `text:${questionId}:option:${option.label}`, text: option.text }],
+        })),
+      })
+      const questionObservationId = `observation:reference-question:${questionId}`
+      const answerObservationId = `observation:reference-answer:${questionId}`
+      source.observations.push(
+        {
+          observationId: questionObservationId,
+          kind: 'reading_question',
+          documentInputKey: paperEntry.document.inputKey,
+          value: question,
+          span: questionRange,
+        },
+        {
+          observationId: answerObservationId,
+          kind: 'official_answer',
+          documentInputKey: answerEntry.document.inputKey,
+          value: answer,
+          span: answerRange,
+        },
+      )
+      source.assertions.push({
+        assertionId: `answer:${questionId}`,
+        questionId,
+        answer: answer.answer,
+        authority: 'official',
+        sourceSpanId: `source-span:${answerObservationId}`,
+      })
+      const questionSpans = [
+        `source-span:${questionObservationId}`,
+        `source-span:${answerObservationId}`,
+      ]
+      sourceSpanRefsByTarget[`question:${questionId}`] = questionSpans
+      sourceSpanRefsByTarget[`content_node:text:${questionId}:stem`] = [`source-span:${questionObservationId}`]
+      for (const option of question.options) {
+        sourceSpanRefsByTarget[`option:${optionId(option.label)}`] = [`source-span:${questionObservationId}`]
+        sourceSpanRefsByTarget[`content_node:text:${questionId}:option:${option.label}`] = [`source-span:${questionObservationId}`]
+      }
+    }
+    source.groups.push({
+      groupId: captured.groupId,
+      slotId: captured.slotId,
+      family: 'reading',
+      questionIds: [...group.questionIds],
+      blankIds: [],
+      sourceSpanId,
+      content: cloneJson(captured.content),
+      media: [],
+      variant: {
+        family: 'reading',
+        passageBlockRoles: cloneJson(captured.passageBlockRoles),
+        questions,
+        choiceOwnership: { ownership: 'per_question', sets },
+      },
+      sourceSpanRefsByTarget,
+    })
+  }
+}
+
 function adaptReferenceFamilies(parsed, documents, diagnostics) {
   const structured = documents
-    .filter((document) => document.roles.some((role) => ['question_source', 'official_answer_source'].includes(role)))
+    .filter((document) => document.mediaType === 'application/json' && document.roles.some((role) => ['question_source', 'official_answer_source', 'structured_source'].includes(role)))
     .map((document) => ({ document, value: parseJsonDocument(document, diagnostics) }))
   const paperEntry = structured.find((entry) => entry.value?.schemaVersion === 'paper-asset-v1')
   const answerEntry = structured.find((entry) => entry.value?.schemaVersion === 'answer-key-v1')
+  const readingEntry = structured.find((entry) => entry.value?.schemaVersion === 'reading-source-capture-v1')
   if (!paperEntry && !answerEntry) return parsed
   if (!paperEntry || !answerEntry) {
     diagnostics.push(diagnostic('REFERENCE_EVIDENCE_INCOMPLETE', 'incomplete_source', '$.evidence.documents', 'Cloze and Grammar Fill reference publication requires paper asset and official answer evidence together'))
@@ -240,6 +393,17 @@ function adaptReferenceFamilies(parsed, documents, diagnostics) {
     { familyId: 'seven-choices', slotId: 'reading.seven-choices', legacyType: 'sevenChoices' },
   ]
   const activeProfile = resolveCanonicalAuthority(canonicalAuthorityRef).closure.profiles.get(source.profileId)
+  appendReadingReferenceGroups({
+    source,
+    paper,
+    answerKey,
+    paperEntry,
+    answerEntry,
+    readingEntry,
+    documents,
+    activeProfile,
+    diagnostics,
+  })
   const sevenChoicesSlot = activeProfile && slotsForProfile(activeProfile).find((slot) => slot.slotId === 'reading.seven-choices')
   const sevenChoicesNumbers = sevenChoicesSlot?.numberingRule?.kind === 'range'
     ? Array.from({ length: 5 }, (_, index) => sevenChoicesSlot.numberingRule.start + index)
@@ -607,12 +771,28 @@ function collectRichTargetIds(content) {
     targets.push({ kind: 'content_node', id: block.nodeId })
     if (block.kind === 'paragraph') inlines(block.inlines)
     if (block.kind === 'figure') inlines(block.caption)
-    if (block.kind === 'table') for (const row of block.rows || []) for (const cell of row.cells || []) {
-      targets.push({ kind: 'content_node', id: cell.cellId })
-      inlines(cell.inlines)
+    if (block.kind === 'table') for (const row of block.rows || []) {
+      targets.push({ kind: 'content_node', id: row.rowId })
+      for (const cell of row.cells || []) {
+        targets.push({ kind: 'content_node', id: cell.cellId })
+        inlines(cell.inlines)
+      }
     }
   }
   return targets
+}
+
+function collectReadingTargetIds(variant) {
+  if (variant?.family !== 'reading') return []
+  return [
+    ...(variant.questions || []).flatMap((question) => [
+      { kind: 'content_node', id: question?.stem?.[0]?.nodeId },
+    ]),
+    ...(variant.choiceOwnership?.sets || []).flatMap((set) => (set.options || []).flatMap((option) => [
+      { kind: 'option', id: option.optionId },
+      ...(option.content || []).map((inline) => ({ kind: 'content_node', id: inline.nodeId })),
+    ])),
+  ].filter((target) => typeof target.id === 'string')
 }
 
 function validateInlines(inlines, blankIds, path, diagnostics, ids) {
@@ -742,15 +922,33 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
     },
   }))
   const mediaIds = new Set()
+  const capturedArtifacts = new Map(capture.documents.map((document) => [document.immutableArtifactRef?.artifactId, document]))
   for (const [index, item] of media.entries()) {
-    if (!isRecordValue(item) || !exactKeys(item, ['mediaId', 'mimeType', 'sha256', 'pixelWidth', 'pixelHeight', 'sourceArtifactRef']) || mediaIds.has(item.mediaId)) diagnostics.push(diagnostic('MEDIA_INVALID', 'incomplete_source', `$.groups.media[${index}]`, 'Media must be source-linked immutable evidence'))
+    const captured = capturedArtifacts.get(item?.sourceArtifactRef?.artifactId)
+    if (
+      !isRecordValue(item)
+      || !exactKeys(item, ['mediaId', 'mimeType', 'sha256', 'pixelWidth', 'pixelHeight', 'sourceArtifactRef'])
+      || mediaIds.has(item.mediaId)
+      || typeof item.mimeType !== 'string'
+      || typeof item.sha256 !== 'string'
+      || !Number.isInteger(item.pixelWidth)
+      || item.pixelWidth < 1
+      || !Number.isInteger(item.pixelHeight)
+      || item.pixelHeight < 1
+      || !captured
+      || captured.sha256 !== item.sha256
+    ) diagnostics.push(diagnostic('MEDIA_INVALID', 'incomplete_source', `$.groups.media[${index}]`, 'Media must close immutable bytes, digest, dimensions, and source artifact identity'))
     mediaIds.add(item.mediaId)
   }
   const content = cloneJson(sourceGroup.content || { blocks: [] })
   diagnostics.push(...validateRichContent(content, new Set(sourceGroup.blankIds), mediaIds))
   diagnostics.push(...validateReferenceBlankClosure(family.familyContractId, sourceGroup.questionIds, sourceGroup.blankIds, content))
   const variant = cloneJson(sourceGroup.variant || {})
-  const variantKeys = family.familyContractId === 'seven-choices' ? ['family', 'members', 'choiceOwnership'] : ['family', 'choiceOwnership']
+  const variantKeys = family.familyContractId === 'seven-choices'
+    ? ['family', 'members', 'choiceOwnership']
+    : family.familyContractId === 'reading'
+      ? ['family', 'passageBlockRoles', 'questions', 'choiceOwnership']
+      : ['family', 'choiceOwnership']
   if (!exactKeys(variant, variantKeys) || variant.family !== family.familyContractId) diagnostics.push(diagnostic('GROUP_VARIANT_INVALID', 'needs_review', '$.groups.variant', 'Variant family must match the closed contract'))
   diagnostics.push(...validateChoiceOwnership(variant.choiceOwnership, sourceGroup.questionIds, family.choiceOwnership))
   if (family.familyContractId === 'seven-choices') {
@@ -759,6 +957,16 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
       questionIds: sourceGroup.questionIds,
       blankIds: sourceGroup.blankIds,
       content,
+      variant,
+      assertions: capture.assertions,
+    }).map((item) => diagnostic(item.code, item.disposition, item.path, item.message)))
+  }
+  if (family.familyContractId === 'reading') {
+    diagnostics.push(...validateReadingContract({
+      questionIds: sourceGroup.questionIds,
+      blankIds: sourceGroup.blankIds,
+      content,
+      media,
       variant,
       assertions: capture.assertions,
     }).map((item) => diagnostic(item.code, item.disposition, item.path, item.message)))
@@ -787,6 +995,7 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
     ...sourceGroup.blankIds.map((id) => ({ target: { kind: 'blank', id } })),
     ...media.map((item) => ({ target: { kind: 'media', id: item.mediaId } })),
     ...collectRichTargetIds(content).map((entry) => ({ target: entry })),
+    ...collectReadingTargetIds(variant).map((entry) => ({ target: entry })),
   ].filter((entry, index, entries) => entries.findIndex((candidate) => candidate.target.kind === entry.target.kind && candidate.target.id === entry.target.id) === index)
   const sourceMap = {
     captureId: capture.captureId,

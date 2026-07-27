@@ -7,12 +7,37 @@ function option(label) {
 
 function choiceOwnership(family, questionIds, groupId) {
   if (family === 'seven-choices') return { ownership: 'shared_bank', bankId: `bank:${groupId}`, options: 'ABCDEFG'.split('').map(option) }
-  if (family === 'reading' || family === 'cloze') return { ownership: 'per_question', sets: questionIds.map((questionId) => ({ questionId, options: 'ABCD'.split('').map(option) })) }
+  if (family === 'reading') {
+    return {
+      ownership: 'per_question',
+      sets: questionIds.map((questionId) => ({
+        questionId,
+        options: 'ABCD'.split('').map((label) => ({
+          optionId: `option:${questionId}:${label}`,
+          label,
+          content: [{ kind: 'text', nodeId: `text:${questionId}:option:${label}`, text: label }],
+        })),
+      })),
+    }
+  }
+  if (family === 'cloze') return { ownership: 'per_question', sets: questionIds.map((questionId) => ({ questionId, options: 'ABCD'.split('').map(option) })) }
   return { ownership: 'none' }
 }
 
 function variant(family, questionIds, blankIds, groupId) {
   const value = { family, choiceOwnership: choiceOwnership(family, questionIds, groupId) }
+  if (family === 'reading') {
+    return {
+      family,
+      passageBlockRoles: [],
+      questions: questionIds.map((questionId) => ({
+        questionId,
+        stem: [{ kind: 'text', nodeId: `text:${questionId}:stem`, text: `Stem ${questionId}` }],
+        correctOptionId: `option:${questionId}:A`,
+      })),
+      choiceOwnership: value.choiceOwnership,
+    }
+  }
   if (family !== 'seven-choices') return value
   return {
     ...value,
@@ -28,6 +53,15 @@ function variant(family, questionIds, blankIds, groupId) {
 }
 
 function referenceBlankContent(family, blankIds) {
+  if (family === 'reading') {
+    return {
+      blocks: [{
+        kind: 'paragraph',
+        nodeId: 'paragraph:reading:fixture',
+        inlines: [{ kind: 'text', nodeId: 'text:reading:fixture', text: 'Canonical-only Reading passage.' }],
+      }],
+    }
+  }
   if (!['cloze', 'grammar-fill', 'seven-choices'].includes(family)) return { blocks: [] }
   return {
     blocks: [{

@@ -6,7 +6,7 @@ import manifestV1 from '../standards/paper-canonical/manifest-v1.json' with { ty
 import { canonicalAuthorityRef, compileCanonicalPaper, stableStringify, validateExactTransformationRecords } from '../shared/paper-canonical/compiler.mjs'
 import { resolveCanonicalAuthority, slotsForProfile, validateAuthorityClosure } from '../shared/paper-canonical/authority.mjs'
 import { projectCanonicalPaper } from '../shared/paper-canonical/projector.mjs'
-import { digestJson } from '../shared/paper-canonical/stable.mjs'
+import { digestJson, sha256 } from '../shared/paper-canonical/stable.mjs'
 
 function option(label) {
   return { optionId: `option:${label}`, label, content: [{ kind: 'text', nodeId: `text:${label}`, text: label }] }
@@ -16,7 +16,20 @@ function makeChoiceOwnership(family, questionIds, groupId) {
   if (family === 'seven-choices') {
     return { ownership: 'shared_bank', bankId: `bank:${groupId}`, options: 'ABCDEFG'.split('').map(option) }
   }
-  if (family === 'reading' || family === 'cloze') {
+  if (family === 'reading') {
+    return {
+      ownership: 'per_question',
+      sets: questionIds.map((questionId) => ({
+        questionId,
+        options: 'ABCD'.split('').map((label) => ({
+          optionId: `option:${questionId}:${label}`,
+          label,
+          content: [{ kind: 'text', nodeId: `text:${questionId}:option:${label}`, text: label }],
+        })),
+      })),
+    }
+  }
+  if (family === 'cloze') {
     return {
       ownership: 'per_question',
       sets: questionIds.map((questionId) => ({ questionId, options: 'ABCD'.split('').map(option) })),
@@ -27,6 +40,18 @@ function makeChoiceOwnership(family, questionIds, groupId) {
 
 function makeVariant(family, questionIds, blankIds, groupId) {
   const value = { family, choiceOwnership: makeChoiceOwnership(family, questionIds, groupId) }
+  if (family === 'reading') {
+    return {
+      family,
+      passageBlockRoles: [],
+      questions: questionIds.map((questionId) => ({
+        questionId,
+        stem: [{ kind: 'text', nodeId: `text:${questionId}:stem`, text: `Stem ${questionId}` }],
+        correctOptionId: `option:${questionId}:A`,
+      })),
+      choiceOwnership: value.choiceOwnership,
+    }
+  }
   if (family !== 'seven-choices') return value
   return {
     ...value,
@@ -42,6 +67,15 @@ function makeVariant(family, questionIds, blankIds, groupId) {
 }
 
 function makeContent(family, blankIds) {
+  if (family === 'reading') {
+    return {
+      blocks: [{
+        kind: 'paragraph',
+        nodeId: 'paragraph:reading:fixture',
+        inlines: [{ kind: 'text', nodeId: 'text:reading:fixture', text: 'Canonical-only Reading passage.' }],
+      }],
+    }
+  }
   if (!['cloze', 'grammar-fill', 'seven-choices'].includes(family)) return { blocks: [] }
   return {
     blocks: [{
@@ -106,7 +140,7 @@ function makeReadySource() {
 }
 
 const source = makeReadySource()
-function makeRequest(value) {
+function makeRequest(value, extraDocuments = []) {
   return {
     authority: canonicalAuthorityRef,
     evidence: {
@@ -119,6 +153,7 @@ function makeRequest(value) {
             mediaType: 'application/vnd.eqb.canonical-fixture+json',
           },
         },
+        ...extraDocuments,
       ],
     },
   }
@@ -323,7 +358,10 @@ assert.equal(badAuthority.artifacts.sourceCapture.schemaVersion, 'source-capture
 
 const richSource = structuredClone(source)
 const richGroup = richSource.groups.find((group) => group.family === 'reading')
-richGroup.media = [{ mediaId: 'media:fixture', mimeType: 'image/png', sha256: 'sha256:fixture-image', pixelWidth: 10, pixelHeight: 5, sourceArtifactRef: { artifactId: 'artifact:fixture-image' } }]
+const richMediaBytes = new TextEncoder().encode('foundation source-linked figure')
+const richMediaDigest = sha256(richMediaBytes)
+const richMediaArtifactId = `source-document:${digestJson({ sha256: richMediaDigest }).slice('sha256:'.length, 28)}`
+richGroup.media = [{ mediaId: 'media:fixture', mimeType: 'image/png', sha256: richMediaDigest, pixelWidth: 10, pixelHeight: 5, sourceArtifactRef: { artifactId: richMediaArtifactId } }]
 richGroup.content = {
   blocks: [
     { kind: 'paragraph', nodeId: 'paragraph:fixture', inlines: [{ kind: 'text', nodeId: 'text:fixture', text: 'Literal punctuation.' }] },
@@ -334,13 +372,23 @@ richGroup.content = {
     { kind: 'figure', nodeId: 'figure:fixture', mediaId: 'media:fixture', caption: [{ kind: 'text', nodeId: 'caption:fixture', text: 'Source-linked figure.' }] },
   ],
 }
-const richResult = compileCanonicalPaper(makeRequest(richSource))
+const richResult = compileCanonicalPaper(makeRequest(richSource, [{
+  inputKey: 'rich-media',
+  roles: ['source_media'],
+  bytes: richMediaBytes,
+  declared: { mediaType: 'image/png' },
+}]))
 assert.equal(richResult.disposition, 'ready')
 const richArtifact = richResult.artifacts.canonicalPaper.questionGroups.find((group) => group.identity.groupId === richGroup.groupId)
 assert.equal(richArtifact.media[0].sourceArtifactRef.captureId, richResult.artifacts.sourceCapture.captureId)
 const invalidTable = structuredClone(richSource)
 invalidTable.groups.find((group) => group.groupId === richGroup.groupId).content.blocks[1].rows[1].cells[1].columnStart = 0
-assert.equal(compileCanonicalPaper(makeRequest(invalidTable)).disposition, 'needs_review')
+assert.equal(compileCanonicalPaper(makeRequest(invalidTable, [{
+  inputKey: 'rich-media',
+  roles: ['source_media'],
+  bytes: richMediaBytes,
+  declared: { mediaType: 'image/png' },
+}])).disposition, 'needs_review')
 
 const badManifest = structuredClone(closure.manifest)
 badManifest.unrecognized = true
