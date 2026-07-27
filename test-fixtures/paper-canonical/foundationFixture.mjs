@@ -5,14 +5,14 @@ function option(label) {
   return { optionId: `option:${label}`, label, content: [{ kind: 'text', nodeId: `text:${label}`, text: label }] }
 }
 
-function choiceOwnership(family, questionIds) {
-  if (family === 'seven-choices') return { ownership: 'shared_bank', bankId: 'bank:fixture', options: 'ABCDEFG'.split('').map(option) }
+function choiceOwnership(family, questionIds, groupId) {
+  if (family === 'seven-choices') return { ownership: 'shared_bank', bankId: `bank:${groupId}`, options: 'ABCDEFG'.split('').map(option) }
   if (family === 'reading' || family === 'cloze') return { ownership: 'per_question', sets: questionIds.map((questionId) => ({ questionId, options: 'ABCD'.split('').map(option) })) }
   return { ownership: 'none' }
 }
 
-function variant(family, questionIds, blankIds) {
-  const value = { family, choiceOwnership: choiceOwnership(family, questionIds) }
+function variant(family, questionIds, blankIds, groupId) {
+  const value = { family, choiceOwnership: choiceOwnership(family, questionIds, groupId) }
   if (family !== 'seven-choices') return value
   return {
     ...value,
@@ -70,7 +70,7 @@ export function makeReadyCanonicalFixture() {
       sourceSpanId,
       content: referenceBlankContent(slot.familyContractRef.id, blankIds),
       media: [],
-      variant: variant(slot.familyContractRef.id, questionIds, blankIds),
+      variant: variant(slot.familyContractRef.id, questionIds, blankIds, `group:${slot.slotId}`),
     })
     for (const questionId of questionIds) assertions.push({ assertionId: `answer:${questionId}`, questionId, answer: 'A', authority: 'official', sourceSpanId })
   }

@@ -46,6 +46,10 @@ async function exercisePublicSeams(fixture) {
   assert.equal(occurrence.questionBlankPairs.length, 5)
   assert.equal(occurrence.choices.options.length, 7)
   assert.equal(Object.hasOwn(occurrence.choices, 'sets'), false)
+  assert.equal(occurrence.anchors.questionIds.length, 5)
+  assert.equal(occurrence.anchors.blankIds.length, 5)
+  assert.equal(occurrence.anchors.optionIds.length, 7)
+  assert.equal(new Set(occurrence.anchors.contentNodeIds).size, occurrence.anchors.contentNodeIds.length)
   const sealed = sealCanonicalPublication({
     compilation,
     sourceAssetVersion: 1,
@@ -166,6 +170,19 @@ assert.throws(
   }),
   { code: 'CANONICAL_PROJECTION_REJECTED' },
 )
+const foreignBankGroups = structuredClone(canonicalOnlyCompilation.artifacts.canonicalPaper.questionGroups)
+const foreignBankGroup = foreignBankGroups.find((group) => group.variant.family === 'seven-choices')
+foreignBankGroup.variant.choiceOwnership.bankId = 'bank:another-group'
+foreignBankGroup.semanticDigest = digestJson((({ sourceMap: _a, sourceFingerprint: _b, semanticDigest: _c, ...semantic }) => semantic)(foreignBankGroup))
+assert.throws(
+  () => projectCanonicalPaper({
+    plan: canonicalOnlyCompilation.artifacts.canonicalPaper.paperPlan,
+    groups: foreignBankGroups,
+    sourceCapture: canonicalOnlyCompilation.artifacts.sourceCapture,
+    authorityClosure: resolveCanonicalAuthority(canonicalOnlyCompilation.artifacts.canonicalPaper.paperPlan.authorityRef).closure,
+  }),
+  { code: 'CANONICAL_PROJECTION_REJECTED' },
+)
 const conflictingProjectionCapture = structuredClone(canonicalOnlyCompilation.artifacts.sourceCapture)
 const canonicalOnlyMember = canonicalOnlyGroup.variant.members[0]
 conflictingProjectionCapture.assertions.find((assertion) => assertion.assertionId === canonicalOnlyMember.answer.authorityAssertionRef).answer = 'B'
@@ -191,6 +208,21 @@ for (const paperId of ['paper-2026-i', 'paper-960d0f8d']) {
 
 const negativeFixture = makeSevenChoicesCanonicalReferenceFixture('paper-2026-i')
 const sevenGroup = (evidence) => evidence.paper_asset.content.groups['group-2026-i-seven-choices']
+const ordinalRequest = requestWithEvidence(negativeFixture, (evidence) => {
+  for (const [index, paragraph] of sevenGroup(evidence).passage.paragraphs.entries()) {
+    paragraph.text = paragraph.text.replace(`__${36 + index}__`, `(${index + 1})`)
+  }
+})
+const ordinalSourceAsset = ordinalRequest.evidence.documents.find((document) => document.inputKey === 'paper_asset').bytes
+const ordinalCompilation = await exercisePublicSeams({
+  ...negativeFixture,
+  request: ordinalRequest,
+  sourceAsset: ordinalSourceAsset,
+})
+assert.equal(
+  ordinalCompilation.artifacts.sourceCapture.observations.filter((observation) => observation.kind === 'seven_choices_marker').every((observation) => observation.value.dialectId === 'source-local-parenthesized-ordinal-v1'),
+  true,
+)
 assertBlocked(negativeFixture, (evidence) => {
   sevenGroup(evidence).passage.paragraphs[0].text = sevenGroup(evidence).passage.paragraphs[0].text.replace('__36__', '___36___')
 }, 'unsupported', 'SEVEN_CHOICES_DIALECT_UNSUPPORTED')

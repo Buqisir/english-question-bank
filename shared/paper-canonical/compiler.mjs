@@ -67,8 +67,35 @@ function parseJsonDocument(document, diagnostics) {
   }
 }
 
-function referenceMarkerMatches(text) {
-  return [...String(text || '').matchAll(/(_+)(\d+)(_+)/g)]
+function underscoreMarkerMatches(text) {
+  return [...String(text || '').matchAll(/(_+)(\d+)(_+)/g)].map((marker) => ({
+    raw: marker[0],
+    number: Number(marker[2]),
+    index: marker.index,
+    leftWidth: marker[1].length,
+    rightWidth: marker[3].length,
+  }))
+}
+
+function localOrdinalMarkerMatches(text) {
+  return [...String(text || '').matchAll(/\(([1-5])\)/g)].map((marker) => ({
+    raw: marker[0],
+    number: Number(marker[1]),
+    index: marker.index,
+    dialectId: 'source-local-parenthesized-ordinal-v1',
+  }))
+}
+
+function referenceMarkerMatches(group, text) {
+  if (group.groupType !== 'sevenChoices') {
+    return [...String(text || '').matchAll(/__(\d+)__/g)].map((marker) => ({
+      raw: marker[0],
+      number: Number(marker[1]),
+      index: marker.index,
+    }))
+  }
+  const underscores = underscoreMarkerMatches(text)
+  return underscores.length > 0 ? underscores : localOrdinalMarkerMatches(text)
 }
 
 function referenceContent(group) {
@@ -78,14 +105,16 @@ function referenceContent(group) {
       const inlines = []
       let cursor = 0
       let textIndex = 0
-      for (const marker of referenceMarkerMatches(paragraph.text)) {
+      for (const marker of referenceMarkerMatches(group, paragraph.text)) {
         if (marker.index > cursor) {
           inlines.push({ kind: 'text', nodeId: `text:${paragraph.paragraphId}:${textIndex++}`, text: paragraph.text.slice(cursor, marker.index) })
         }
-        const blankId = blankIdByNumber.get(Number(marker[2]))
-        if (blankId) inlines.push({ kind: 'blank_ref', nodeId: `blank-ref:${paragraph.paragraphId}:${marker[2]}`, blankId })
-        else inlines.push({ kind: 'text', nodeId: `unresolved-marker:${paragraph.paragraphId}:${marker[1]}`, text: marker[0] })
-        cursor = marker.index + marker[0].length
+        const blankId = group.groupType === 'sevenChoices' && marker.dialectId === 'source-local-parenthesized-ordinal-v1'
+          ? group.blankIds[marker.number - 1]
+          : blankIdByNumber.get(marker.number)
+        if (blankId) inlines.push({ kind: 'blank_ref', nodeId: `blank-ref:${paragraph.paragraphId}:${marker.number}`, blankId })
+        else inlines.push({ kind: 'text', nodeId: `unresolved-marker:${paragraph.paragraphId}:${marker.number}`, text: marker.raw })
+        cursor = marker.index + marker.raw.length
       }
       if (cursor < String(paragraph.text || '').length) {
         inlines.push({ kind: 'text', nodeId: `text:${paragraph.paragraphId}:${textIndex}`, text: paragraph.text.slice(cursor) })
@@ -120,13 +149,23 @@ function inspectSevenChoicesGroup(paper, group, expectedNumbers, diagnostics) {
       diagnostics.push(diagnostic('SEVEN_CHOICES_PER_QUESTION_OPTIONS_FORBIDDEN', 'needs_review', '$.evidence.paperAsset', 'Seven Choices cannot fall back to Question-owned Options'))
     }
   }
-  const markers = (group.passage?.paragraphs || []).flatMap((paragraph) => referenceMarkerMatches(paragraph.text).map((marker) => ({ paragraph, marker })))
-  const wrappers = new Set(markers.map(({ marker }) => `${marker[1].length}:${marker[3].length}`))
-  const registeredWrapper = wrappers.size === 1 && ['2:2', '5:5'].includes([...wrappers][0])
-  if (markers.length === 0 || !registeredWrapper) {
+  const underscoreMarkers = (group.passage?.paragraphs || []).flatMap((paragraph) => underscoreMarkerMatches(paragraph.text).map((marker) => ({ paragraph, marker })))
+  const ordinalMarkers = (group.passage?.paragraphs || []).flatMap((paragraph) => localOrdinalMarkerMatches(paragraph.text).map((marker) => ({ paragraph, marker })))
+  const wrappers = new Set(underscoreMarkers.map(({ marker }) => `${marker.leftWidth}:${marker.rightWidth}`))
+  const registeredUnderscore = underscoreMarkers.length > 0 && wrappers.size === 1 && ['2:2', '5:5'].includes([...wrappers][0])
+  const registeredOrdinal = underscoreMarkers.length === 0
+    && ordinalMarkers.length > 0
+    && ordinalMarkers.every(({ marker }, index) => marker.number === index + 1)
+  if (!registeredUnderscore && !registeredOrdinal) {
     diagnostics.push(diagnostic('SEVEN_CHOICES_DIALECT_UNSUPPORTED', 'unsupported', '$.evidence.paperAsset', 'Seven Choices marker dialect is not registered'))
     return null
   }
+  const markers = registeredUnderscore ? underscoreMarkers : ordinalMarkers
+  const dialectId = registeredOrdinal
+    ? 'source-local-parenthesized-ordinal-v1'
+    : markers[0].marker.leftWidth === 2
+      ? 'plan-number-double-underscore-v1'
+      : 'plan-number-five-underscore-v1'
   if (markers.length !== 5) {
     diagnostics.push(diagnostic(
       'SEVEN_CHOICES_MARKER_EVIDENCE_INCOMPLETE',
@@ -136,11 +175,12 @@ function inspectSevenChoicesGroup(paper, group, expectedNumbers, diagnostics) {
     ))
   }
   for (const [index, { paragraph, marker }] of markers.entries()) {
-    if (Number(marker[2]) !== questions[index]?.questionNo) {
+    const expectedMarkerNumber = registeredOrdinal ? index + 1 : questions[index]?.questionNo
+    if (marker.number !== expectedMarkerNumber) {
       diagnostics.push(diagnostic('SEVEN_CHOICES_MARKER_IDENTITY_AMBIGUOUS', 'needs_review', '$.evidence.paperAsset', 'Source markers must match the five Plan-assigned Question identities'))
     }
-    const suffix = paragraph.text.slice(marker.index + marker[0].length)
-    if (/^\s*\([1-5]\)/u.test(suffix)) {
+    const suffix = paragraph.text.slice(marker.index + marker.raw.length)
+    if (registeredUnderscore && /^\s*\([1-5]\)/u.test(suffix)) {
       diagnostics.push(diagnostic('SEVEN_CHOICES_STRAY_ORDINAL', 'needs_review', '$.evidence.paperAsset', 'Marker-adjacent local ordinals require explicit source review'))
     }
   }
@@ -152,7 +192,7 @@ function inspectSevenChoicesGroup(paper, group, expectedNumbers, diagnostics) {
   if (options.length !== 7 || options.map((option) => option.label).join('') !== 'ABCDEFG' || new Set(options.map((option) => option.label)).size !== 7) {
     diagnostics.push(diagnostic('SEVEN_CHOICES_BANK_IDENTITY_AMBIGUOUS', 'needs_review', '$.evidence.paperAsset', 'Seven Choices bank identity and A-G order must be exact'))
   }
-  return { questions, markers, options }
+  return { questions, markers, options, dialectId }
 }
 
 function referenceOptions(paper, group, diagnostics, familyId) {
@@ -263,7 +303,7 @@ function adaptReferenceFamilies(parsed, documents, diagnostics) {
     if (sevenChoices) {
       let markerSearchOffset = groupRange.start
       for (const [index, { marker }] of sevenChoices.markers.entries()) {
-        const markerRange = byteRangeForText(paperEntry.document.bytes, marker[0], groupRange.start, groupRange.end, markerSearchOffset)
+        const markerRange = byteRangeForText(paperEntry.document.bytes, marker.raw, groupRange.start, groupRange.end, markerSearchOffset)
         if (!markerRange) {
           diagnostics.push(diagnostic('SEVEN_CHOICES_MARKER_SPAN_MISSING', 'incomplete_source', '$.evidence.paperAsset', 'Seven Choices marker bytes do not resolve inside the captured Group'))
           continue
@@ -278,8 +318,8 @@ function adaptReferenceFamilies(parsed, documents, diagnostics) {
           value: {
             groupId: group.groupId,
             blankId: group.blankIds[index],
-            marker: marker[0],
-            dialectId: marker[1].length === 2 ? 'plan-number-double-underscore-v1' : 'plan-number-five-underscore-v1',
+            marker: marker.raw,
+            dialectId: sevenChoices.dialectId,
           },
           span: markerRange,
         })
@@ -715,6 +755,7 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
   diagnostics.push(...validateChoiceOwnership(variant.choiceOwnership, sourceGroup.questionIds, family.choiceOwnership))
   if (family.familyContractId === 'seven-choices') {
     diagnostics.push(...validateSevenChoicesContract({
+      groupId: sourceGroup.groupId,
       questionIds: sourceGroup.questionIds,
       blankIds: sourceGroup.blankIds,
       content,

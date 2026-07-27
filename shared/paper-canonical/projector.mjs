@@ -54,6 +54,21 @@ function choiceOwnershipIssues(group, family) {
     : ['per-question choices do not cover every Question exactly once']
 }
 
+function contentNodeIds(content) {
+  const ids = []
+  for (const block of content?.blocks || []) {
+    ids.push(block.nodeId)
+    const inlineSets = block.kind === 'table'
+      ? (block.rows || []).flatMap((row) => (row.cells || []).map((cell) => {
+          ids.push(cell.cellId)
+          return cell.inlines
+        }))
+      : [block.kind === 'figure' ? block.caption : block.inlines]
+    for (const inlines of inlineSets) for (const inline of inlines || []) ids.push(inline.nodeId)
+  }
+  return ids
+}
+
 function assertCanonicalPackage(canonicalPackage) {
   const authority = resolveCanonicalAuthority(canonicalPackage?.authorityClosure?.authorityRef || canonicalPackage?.plan?.authorityRef)
   if (!authority.ok) throw projectionError('Canonical authority is unavailable', authority.issues)
@@ -82,6 +97,7 @@ function assertCanonicalPackage(canonicalPackage) {
     if (choiceIssues.length > 0) throw projectionError('Group choice ownership is not structurally exclusive', choiceIssues)
     if (family.familyContractId === 'seven-choices') {
       const sevenChoicesIssues = validateSevenChoicesContract({
+        groupId: group.identity.groupId,
         questionIds: group.questionRefs.map(({ questionId }) => questionId),
         blankIds: group.blankRefs.map(({ blankId }) => blankId),
         content: group.content,
@@ -136,6 +152,12 @@ export function projectCanonicalPaper(canonicalPackage) {
         const sevenChoices = group.variant.family === 'seven-choices'
           ? {
               questionBlankPairs: group.variant.members.map(({ questionId, blankId }) => ({ questionId, blankId })),
+              anchors: {
+                contentNodeIds: contentNodeIds(group.content),
+                questionIds: group.questionRefs.map(({ questionId }) => questionId),
+                blankIds: group.blankRefs.map(({ blankId }) => blankId),
+                optionIds: group.variant.choiceOwnership.options.map(({ optionId }) => optionId),
+              },
             }
           : {}
         nodes.push({

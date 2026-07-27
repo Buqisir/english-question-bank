@@ -12,9 +12,9 @@ function option(label) {
   return { optionId: `option:${label}`, label, content: [{ kind: 'text', nodeId: `text:${label}`, text: label }] }
 }
 
-function makeChoiceOwnership(family, questionIds) {
+function makeChoiceOwnership(family, questionIds, groupId) {
   if (family === 'seven-choices') {
-    return { ownership: 'shared_bank', bankId: 'bank:fixture', options: 'ABCDEFG'.split('').map(option) }
+    return { ownership: 'shared_bank', bankId: `bank:${groupId}`, options: 'ABCDEFG'.split('').map(option) }
   }
   if (family === 'reading' || family === 'cloze') {
     return {
@@ -25,8 +25,8 @@ function makeChoiceOwnership(family, questionIds) {
   return { ownership: 'none' }
 }
 
-function makeVariant(family, questionIds, blankIds) {
-  const value = { family, choiceOwnership: makeChoiceOwnership(family, questionIds) }
+function makeVariant(family, questionIds, blankIds, groupId) {
+  const value = { family, choiceOwnership: makeChoiceOwnership(family, questionIds, groupId) }
   if (family !== 'seven-choices') return value
   return {
     ...value,
@@ -91,7 +91,7 @@ function makeReadySource() {
       sourceSpanId,
       content: makeContent(slot.familyContractRef.id, blankIds),
       media: [],
-      variant: makeVariant(slot.familyContractRef.id, questionIds, blankIds),
+      variant: makeVariant(slot.familyContractRef.id, questionIds, blankIds, `group:${slot.slotId}`),
     })
     for (const questionId of questionIds) {
       assertions.push({ assertionId: `answer:${questionId}`, questionId, answer: 'A', authority: 'official', sourceSpanId })

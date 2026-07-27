@@ -19,7 +19,7 @@ function orderedBlankRefs(content) {
   return { refs, rawMarker }
 }
 
-export function validateSevenChoicesContract({ questionIds, blankIds, content, variant, assertions }) {
+export function validateSevenChoicesContract({ groupId, questionIds, blankIds, content, variant, assertions }) {
   const issues = []
   if (questionIds.length !== 5 || blankIds.length !== 5) {
     issues.push(issue(
@@ -45,7 +45,7 @@ export function validateSevenChoicesContract({ questionIds, blankIds, content, v
   }
   const assertionById = new Map((assertions || []).map((assertion) => [assertion.assertionId, assertion]))
   const choice = variant.choiceOwnership
-  if (!isRecordValue(choice) || !exactKeys(choice, ['ownership', 'bankId', 'options']) || choice.ownership !== 'shared_bank' || typeof choice.bankId !== 'string' || !Array.isArray(choice.options)) {
+  if (!isRecordValue(choice) || !exactKeys(choice, ['ownership', 'bankId', 'options']) || choice.ownership !== 'shared_bank' || choice.bankId !== `bank:${groupId}` || !Array.isArray(choice.options)) {
     issues.push(issue('SEVEN_CHOICES_SHARED_BANK_INVALID', 'incomplete_source', '$.groups.variant.choiceOwnership', 'Seven Choices requires one Group-owned A-G bank'))
     return issues
   }
