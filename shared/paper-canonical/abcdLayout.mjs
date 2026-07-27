@@ -1,4 +1,5 @@
 import metrics from '../../standards/paper-canonical/rendering/times-compatible-metrics-v1.json' with { type: 'json' }
+import rendererTypography from '../../standards/paper-canonical/rendering/paper-typography-v2.json' with { type: 'json' }
 
 import { digestJson, sha256 } from './stable.mjs'
 
@@ -23,20 +24,13 @@ const RULES = Object.freeze({
   fourColumnPitchTwip: 2080,
   twoColumnSecondTabTwip: 4020,
   oneColumnHangingIndentTwip: 420,
+  questionStemAndOuterOptionBlockStartTwip:
+    rendererTypography.coordinates.questionStemAndOuterOptionBlockStartTwip,
+  rendererTypographyDigest: digestJson(rendererTypography),
 })
 
 const RULESET_DIGEST = digestJson(RULES)
 const VERIFIED_FONT_CLOSURES = new WeakSet()
-
-// The question-number gutter and the one-column continuation indent are
-// independent physical coordinates even though both are currently 420 twips.
-// Renderers consume this shared stem-text origin instead of estimating the
-// width of a rendered question number.
-const QUESTION_STEM_START_TWIP = 420
-export const abcdQuestionStemAlignment = Object.freeze({
-  startTwip: QUESTION_STEM_START_TWIP,
-  startPt: QUESTION_STEM_START_TWIP / 20,
-})
 
 function deeplyFreeze(value) {
   if (!value || typeof value !== 'object' || Object.isFrozen(value)) return value
@@ -211,7 +205,7 @@ function placementFor(mode, option, measured, index) {
 function selectedPlan(mode, optionSet, measured) {
   const placements = optionSet.options.map((option, index) =>
     placementFor(mode, option, measured[index], index))
-  return {
+  const plan = {
     status: 'selected',
     mode,
     rowCount: mode === 'four_columns' ? 1 : mode === 'two_by_two' ? 2 : 4,
@@ -221,9 +215,16 @@ function selectedPlan(mode, optionSet, measured) {
       digest: RULESET_DIGEST,
       shapingImplementationDigest: RULES.shapingImplementationDigest,
       fontMetricsDigest: RULES.fontMetricsDigest,
+      rendererTypographyDigest: RULES.rendererTypographyDigest,
     },
     rowWidthTwip: RULES.optionRowWidthTwip,
+    questionStemAndOuterOptionBlockStartTwip:
+      RULES.questionStemAndOuterOptionBlockStartTwip,
     placements,
+  }
+  return {
+    ...plan,
+    placementSignature: abcdPlacementSignature(plan),
   }
 }
 
@@ -266,8 +267,29 @@ export function layoutAbcdOptionSet(optionSet) {
   return selectedPlan('one_column', optionSet, measured)
 }
 
+function assertAuthoritativePlan(plan) {
+  if (plan?.status !== 'selected') {
+    throw new TypeError('A selected A-D layout plan is required')
+  }
+  if (
+    plan.rulesetRef?.id !== RULES.rulesetId
+    || plan.rulesetRef?.digest !== RULESET_DIGEST
+    || plan.rulesetRef?.rendererTypographyDigest
+      !== RULES.rendererTypographyDigest
+    || plan.questionStemAndOuterOptionBlockStartTwip
+      !== RULES.questionStemAndOuterOptionBlockStartTwip
+    || plan.placementSignature !== abcdPlacementSignature(plan)
+  ) {
+    const error = new Error(
+      'The A-D layout plan differs from its renderer-typography authority',
+    )
+    error.code = 'ABCD_LAYOUT_AUTHORITY_MISMATCH'
+    throw error
+  }
+}
+
 function assertTranslatable(plan, fontClosure) {
-  if (plan?.status !== 'selected') throw new TypeError('A selected A-D layout plan is required')
+  assertAuthoritativePlan(plan)
   if (!VERIFIED_FONT_CLOSURES.has(fontClosure)) {
     const error = new Error('The pinned renderer font closure is unavailable')
     error.code = 'ABCD_RENDERER_FONT_CLOSURE_UNAVAILABLE'
@@ -275,10 +297,12 @@ function assertTranslatable(plan, fontClosure) {
   }
 }
 
-function physicalSignature(plan) {
+export function abcdPlacementSignature(plan) {
   return digestJson({
     mode: plan.mode,
     rowWidthTwip: plan.rowWidthTwip,
+    questionStemAndOuterOptionBlockStartTwip:
+      plan.questionStemAndOuterOptionBlockStartTwip,
     placements: plan.placements.map((placement) => ({
       label: placement.label,
       row: placement.row,
@@ -301,9 +325,7 @@ function pointPlacements(plan) {
 }
 
 export function translateAbcdPlanToPointPlacement(plan) {
-  if (plan?.status !== 'selected') {
-    throw new TypeError('A selected A-D layout plan is required')
-  }
+  assertAuthoritativePlan(plan)
   const columnStartsTwip = [...new Set(
     plan.placements.map(({ startTwip }) => startTwip),
   )].sort((left, right) => left - right)
@@ -311,8 +333,11 @@ export function translateAbcdPlanToPointPlacement(plan) {
   const rowWidthPt = plan.rowWidthTwip / 20
   return {
     mode: plan.mode,
-    placementSignature: physicalSignature(plan),
-    questionStemStartPt: abcdQuestionStemAlignment.startPt,
+    placementSignature: plan.placementSignature,
+    questionStemStartTwip:
+      plan.questionStemAndOuterOptionBlockStartTwip,
+    questionStemStartPt:
+      plan.questionStemAndOuterOptionBlockStartTwip / 20,
     rowWidthPt,
     columnStartsPt,
     columnWidthsPt: columnStartsTwip.map(
@@ -351,7 +376,9 @@ export function translateAbcdPlanToDocx(plan, fontClosure) {
   return {
     renderer: 'docx',
     mode: plan.mode,
-    placementSignature: physicalSignature(plan),
+    placementSignature: plan.placementSignature,
+    questionStemAndOuterOptionBlockStartTwip:
+      plan.questionStemAndOuterOptionBlockStartTwip,
     rowWidthTwip: plan.rowWidthTwip,
     fontSizeHalfPoint: RULES.fontSizeHalfPoint,
     clipping: 'forbidden',

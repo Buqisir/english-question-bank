@@ -15,13 +15,21 @@ import { tmpdir } from 'node:os'
 import path from 'node:path'
 
 import {
+  abcdLayoutRules,
+  abcdPlacementSignature,
   expectedAbcdRendererFontClosure,
   layoutAbcdOptionSet,
   resolveAbcdRendererFontClosure,
   translateAbcdPlanToDocx,
   translateAbcdPlanToPaperSurface,
+  translateAbcdPlanToPointPlacement,
   translateAbcdPlanToPrintPdf,
 } from '../shared/paper-canonical/abcdLayout.mjs'
+import {
+  canonicalAuthorityRef,
+  resolveCanonicalAuthority,
+  validateAuthorityClosure,
+} from '../shared/paper-canonical/authority.mjs'
 import { compileCanonicalPaper } from '../shared/paper-canonical/compiler.mjs'
 import { digestJson } from '../shared/paper-canonical/stable.mjs'
 import { abcdLayoutReferenceFixture } from '../test-fixtures/paper-canonical/abcdLayoutReferenceFixture.mjs'
@@ -104,6 +112,56 @@ assert.equal(hardBreak.placements[0].hardBreaks, 1)
 assert.equal(hardBreak.placements[0].renderedText, 'A. first\nsecond')
 
 const plan = layoutAbcdOptionSet(optionSet('parity', gold[2].redactedText))
+const authority = resolveCanonicalAuthority(canonicalAuthorityRef).closure
+const rendererTypography = authority.artifacts['renderer-typography']
+const authoritativeOuterOriginTwip =
+  rendererTypography.coordinates.questionStemAndOuterOptionBlockStartTwip
+const driftedAuthorityArtifacts = {
+  ...authority.artifacts,
+  'renderer-typography': structuredClone(rendererTypography),
+}
+driftedAuthorityArtifacts[
+  'renderer-typography'
+].coordinates.questionStemAndOuterOptionBlockStartTwip += 20
+assert.equal(
+  validateAuthorityClosure({
+    manifest: authority.manifest,
+    artifacts: driftedAuthorityArtifacts,
+    schemas: authority.schemas,
+  }).issues.some((issue) => issue.code === 'AUTHORITY_DIGEST_MISMATCH'),
+  true,
+  'the manifest digest closure rejects a changed outer physical origin',
+)
+assert.equal(
+  plan.questionStemAndOuterOptionBlockStartTwip,
+  authoritativeOuterOriginTwip,
+)
+assert.equal(
+  plan.rulesetRef.rendererTypographyDigest,
+  digestJson(rendererTypography),
+)
+assert.equal(
+  abcdLayoutRules.questionStemAndOuterOptionBlockStartTwip,
+  authoritativeOuterOriginTwip,
+)
+assert.equal(
+  translateAbcdPlanToPointPlacement(plan).questionStemStartPt,
+  authoritativeOuterOriginTwip / 20,
+)
+assert.equal(abcdPlacementSignature(plan), plan.placementSignature)
+
+const tamperedOuterOriginPlan = structuredClone(plan)
+tamperedOuterOriginPlan.questionStemAndOuterOptionBlockStartTwip += 20
+assert.notEqual(
+  abcdPlacementSignature(tamperedOuterOriginPlan),
+  plan.placementSignature,
+  'the physical signature binds the outer Question/Option-block origin',
+)
+assert.throws(
+  () => translateAbcdPlanToPointPlacement(tamperedOuterOriginPlan),
+  { code: 'ABCD_LAYOUT_AUTHORITY_MISMATCH' },
+  'a physical origin cannot move outside the digest-closed renderer authority',
+)
 assert.throws(
   () => translateAbcdPlanToPaperSurface(plan),
   { code: 'ABCD_RENDERER_FONT_CLOSURE_UNAVAILABLE' },

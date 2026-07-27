@@ -207,7 +207,7 @@ assert.throws(
 
 const forgedReportManifest = structuredClone(sealed.manifest)
 const forgedReportArtifacts = { ...sealed.artifacts }
-const reportPath = 'canonical/normalization-report-v2.json'
+const reportPath = 'canonical/normalization-report-v3.json'
 const forgedReport = JSON.parse(new TextDecoder().decode(forgedReportArtifacts[reportPath]))
 forgedReport.sourceFingerprint = 'sha256:forged'
 forgedReport.directSourceMap = []
@@ -358,7 +358,7 @@ try {
   )
   rmSync(occupiedVersion, { recursive: true, force: true })
 
-  const corruptPath = path.join(rootDir, fixture.source.paperId, 'versions', 'v2', 'canonical', 'normalization-report-v2.json')
+  const corruptPath = path.join(rootDir, fixture.source.paperId, 'versions', 'v2', 'canonical', 'normalization-report-v3.json')
   writeFileSync(corruptPath, '{"corrupt":true}\n')
   const corrupt = await loadPaperForConsumption({ paperId: fixture.source.paperId, version: 'v2', consumerContract: consumerContractRefs.screen }, store)
   assert.equal(corrupt.disposition, 'incompatible')

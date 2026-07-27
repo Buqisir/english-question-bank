@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "renderer-typography-v2",
+  "id": "paper-typography",
+  "version": "2",
+  "owner": "renderer_typography",
+  "paper": "a4",
+  "projectionContract": "canonical-projector-v1",
+  "rules": [
+    "typography_never_changes_canonical_text",
+    "blank_geometry_is_renderer_owned",
+    "option_layout_is_not_canonical_semantics",
+    "question_stem_and_outer_option_block_share_bound_origin"
+  ],
+  "coordinates": {
+    "questionStemAndOuterOptionBlockStartTwip": 420
+  }
+}

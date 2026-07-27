@@ -63,7 +63,7 @@ import {
   selectConsumerGroupMode,
 } from '../../shared/paper-canonical/consumerProjection.mjs'
 import {
-  abcdQuestionStemAlignment,
+  translateAbcdPlanToPointPlacement,
 } from '../../shared/paper-canonical/abcdLayout.mjs'
 import { resolveGroupFigures } from '../figures/paperFigures.mjs'
 import { resolveCanonicalPrintGroup } from '../print-canonical-group-adapter.mjs'
@@ -1657,7 +1657,8 @@ function canonicalDocxQuestionOptionLayout(
   } = {},
 ) {
   const byLabel = new Map(options.map((option) => [option.label, option]))
-  const questionStemStartTwip = abcdQuestionStemAlignment.startTwip
+  const questionStemStartTwip =
+    translateAbcdPlanToPointPlacement(plan).questionStemStartTwip
   const optionBlockStartTwip = stemRuns ? questionStemStartTwip : 0
   let optionLayout
   if (plan.mode === 'one_column') {

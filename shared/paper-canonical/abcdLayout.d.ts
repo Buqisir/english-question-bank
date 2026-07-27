@@ -44,8 +44,11 @@ export type SelectedAbcdLayoutPlan = {
     readonly digest: string
     readonly shapingImplementationDigest: string
     readonly fontMetricsDigest: string
+    readonly rendererTypographyDigest: string
   }
   readonly rowWidthTwip: number
+  readonly questionStemAndOuterOptionBlockStartTwip: number
+  readonly placementSignature: string
   readonly placements: readonly AbcdPlacement[]
 }
 
@@ -94,6 +97,7 @@ export type AbcdRendererFontMaterial = {
 }
 
 export function layoutAbcdOptionSet(optionSet: AbcdOptionSet): AbcdLayoutResult
+export function abcdPlacementSignature(plan: SelectedAbcdLayoutPlan): string
 export const expectedAbcdRendererFontClosure: AbcdRendererFontClosure
 export function resolveAbcdRendererFontClosure(
   candidate: AbcdRendererFontMaterial,

@@ -1,4 +1,7 @@
-import { layoutAbcdOptionSet } from './abcdLayout.mjs'
+import {
+  abcdPlacementSignature,
+  layoutAbcdOptionSet,
+} from './abcdLayout.mjs'
 import { digestJson, sha256 } from './stable.mjs'
 
 const SUPPORTED_FAMILIES = new Set([
@@ -33,21 +36,6 @@ function decodeBase64Bytes(value) {
   } catch {
     return null
   }
-}
-
-function placementSignature(plan) {
-  if (plan.status !== 'selected') return null
-  return digestJson({
-    mode: plan.mode,
-    rowWidthTwip: plan.rowWidthTwip,
-    placements: plan.placements.map((placement) => ({
-      label: placement.label,
-      row: placement.row,
-      column: placement.column,
-      startTwip: placement.startTwip,
-      continuationStartTwip: placement.continuationStartTwip,
-    })),
-  })
 }
 
 function projectReadingConsumerGroup(input, occurrence) {
@@ -295,7 +283,7 @@ function projectReadingConsumerGroup(input, occurrence) {
       options,
       correctOptionId: question.correctOptionId,
       layoutPlan,
-      placementSignature: placementSignature(layoutPlan),
+      placementSignature: abcdPlacementSignature(layoutPlan),
     }
   })
 
@@ -556,7 +544,9 @@ export function projectCanonicalConsumerGroup(input) {
       stem: '',
       options,
       layoutPlan,
-      placementSignature: layoutPlan ? placementSignature(layoutPlan) : null,
+      placementSignature: layoutPlan
+        ? abcdPlacementSignature(layoutPlan)
+        : null,
     }
   })
 

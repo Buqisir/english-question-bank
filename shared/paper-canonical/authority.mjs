@@ -1,5 +1,6 @@
 import manifestV1 from '../../standards/paper-canonical/manifest-v1.json' with { type: 'json' }
 import manifestV2 from '../../standards/paper-canonical/manifest-v2.json' with { type: 'json' }
+import manifestV3 from '../../standards/paper-canonical/manifest-v3.json' with { type: 'json' }
 import core from '../../standards/paper-canonical/core/core-invariants-v1.json' with { type: 'json' }
 import sourceAdapters from '../../standards/paper-canonical/adapters/source-adapters-v1.json' with { type: 'json' }
 import nck1 from '../../standards/paper-canonical/profiles/nck1-v1.json' with { type: 'json' }
@@ -13,7 +14,8 @@ import applicationWriting from '../../standards/paper-canonical/families/applica
 import continuationWriting from '../../standards/paper-canonical/families/continuation-writing-v1.json' with { type: 'json' }
 import normalizationV1 from '../../standards/paper-canonical/normalization/normalization-rules-v1.json' with { type: 'json' }
 import normalizationV2 from '../../standards/paper-canonical/normalization/normalization-rules-v2.json' with { type: 'json' }
-import typography from '../../standards/paper-canonical/rendering/paper-typography-v1.json' with { type: 'json' }
+import typographyV1 from '../../standards/paper-canonical/rendering/paper-typography-v1.json' with { type: 'json' }
+import typographyV2 from '../../standards/paper-canonical/rendering/paper-typography-v2.json' with { type: 'json' }
 import standardManifestSchema from '../../schemas/paper-canonical/standard-manifest-v1.schema.json' with { type: 'json' }
 import coreSchema from '../../schemas/paper-canonical/core-invariants-v1.schema.json' with { type: 'json' }
 import profileSchema from '../../schemas/paper-canonical/paper-format-profile-v1.schema.json' with { type: 'json' }
@@ -21,14 +23,17 @@ import familySchema from '../../schemas/paper-canonical/canonical-family-contrac
 import normalizationSchema from '../../schemas/paper-canonical/normalization-rules-v1.schema.json' with { type: 'json' }
 import normalizationV2Schema from '../../schemas/paper-canonical/normalization-rules-v2.schema.json' with { type: 'json' }
 import sourceAdaptersSchema from '../../schemas/paper-canonical/source-adapters-v1.schema.json' with { type: 'json' }
-import typographySchema from '../../schemas/paper-canonical/renderer-typography-v1.schema.json' with { type: 'json' }
+import typographyV1Schema from '../../schemas/paper-canonical/renderer-typography-v1.schema.json' with { type: 'json' }
+import typographyV2Schema from '../../schemas/paper-canonical/renderer-typography-v2.schema.json' with { type: 'json' }
 import sourceCaptureSchema from '../../schemas/paper-canonical/source-capture-v1.schema.json' with { type: 'json' }
 import planSchema from '../../schemas/paper-canonical/canonical-paper-plan-v1.schema.json' with { type: 'json' }
 import groupSchema from '../../schemas/paper-canonical/canonical-question-group-v1.schema.json' with { type: 'json' }
 import reportSchema from '../../schemas/paper-canonical/normalization-report-v1.schema.json' with { type: 'json' }
 import reportV2Schema from '../../schemas/paper-canonical/normalization-report-v2.schema.json' with { type: 'json' }
+import reportV3Schema from '../../schemas/paper-canonical/normalization-report-v3.schema.json' with { type: 'json' }
 import publicationSchema from '../../schemas/paper-canonical/canonical-paper-publication-v1.schema.json' with { type: 'json' }
 import publicationV2Schema from '../../schemas/paper-canonical/canonical-paper-publication-v2.schema.json' with { type: 'json' }
+import publicationV3Schema from '../../schemas/paper-canonical/canonical-paper-publication-v3.schema.json' with { type: 'json' }
 import consumerSchema from '../../schemas/paper-canonical/consumer-contract-v1.schema.json' with { type: 'json' }
 
 import { digestJson, exactKeys, isRecordValue } from './stable.mjs'
@@ -267,7 +272,6 @@ const sharedArtifacts = {
   'family-grammar-fill': grammarFill,
   'family-application-writing': applicationWriting,
   'family-continuation-writing': continuationWriting,
-  'renderer-typography': typography,
 }
 
 const sharedSchemas = {
@@ -276,20 +280,22 @@ const sharedSchemas = {
   'paper-format-profile-v1': profileSchema,
   'canonical-family-contract-v1': familySchema,
   'source-adapters-v1': sourceAdaptersSchema,
-  'renderer-typography-v1': typographySchema,
   'source-capture-v1': sourceCaptureSchema,
   'canonical-paper-plan-v1': planSchema,
   'canonical-question-group-v1': groupSchema,
   'consumer-contract-v1': consumerSchema,
 }
 
-const artifactsV1 = { ...sharedArtifacts, normalization: normalizationV1 }
-const artifactsV2 = { ...sharedArtifacts, normalization: normalizationV2 }
-const schemasV1 = { ...sharedSchemas, 'normalization-rules-v1': normalizationSchema, 'normalization-report-v1': reportSchema, 'canonical-paper-publication-v1': publicationSchema }
-const schemasV2 = { ...sharedSchemas, 'normalization-rules-v2': normalizationV2Schema, 'normalization-report-v2': reportV2Schema, 'canonical-paper-publication-v2': publicationV2Schema }
+const artifactsV1 = { ...sharedArtifacts, normalization: normalizationV1, 'renderer-typography': typographyV1 }
+const artifactsV2 = { ...sharedArtifacts, normalization: normalizationV2, 'renderer-typography': typographyV1 }
+const artifactsV3 = { ...sharedArtifacts, normalization: normalizationV2, 'renderer-typography': typographyV2 }
+const schemasV1 = { ...sharedSchemas, 'renderer-typography-v1': typographyV1Schema, 'normalization-rules-v1': normalizationSchema, 'normalization-report-v1': reportSchema, 'canonical-paper-publication-v1': publicationSchema }
+const schemasV2 = { ...sharedSchemas, 'renderer-typography-v1': typographyV1Schema, 'normalization-rules-v2': normalizationV2Schema, 'normalization-report-v2': reportV2Schema, 'canonical-paper-publication-v2': publicationV2Schema }
+const schemasV3 = { ...sharedSchemas, 'renderer-typography-v2': typographyV2Schema, 'normalization-rules-v2': normalizationV2Schema, 'normalization-report-v3': reportV3Schema, 'canonical-paper-publication-v3': publicationV3Schema }
 const validationV1 = validateAuthorityClosure({ manifest: manifestV1, artifacts: artifactsV1, schemas: schemasV1 })
 const validationV2 = validateAuthorityClosure({ manifest: manifestV2, artifacts: artifactsV2, schemas: schemasV2 })
-if (!validationV1.ok || !validationV2.ok) throw new Error(`Invalid checked-in canonical authority: ${JSON.stringify([...validationV1.issues, ...validationV2.issues])}`)
+const validationV3 = validateAuthorityClosure({ manifest: manifestV3, artifacts: artifactsV3, schemas: schemasV3 })
+if (!validationV1.ok || !validationV2.ok || !validationV3.ok) throw new Error(`Invalid checked-in canonical authority: ${JSON.stringify([...validationV1.issues, ...validationV2.issues, ...validationV3.issues])}`)
 
 const profileById = new Map([nck1, zhejiangLegacy, nationalLegacy].map((profile) => [profile.profileId, profile]))
 const familyById = new Map([reading, sevenChoices, cloze, grammarFill, applicationWriting, continuationWriting].map((family) => [family.familyContractId, family]))
@@ -301,9 +307,10 @@ function authorityRef(manifest) {
 const authorities = [
   { manifest: manifestV1, artifacts: artifactsV1, schemas: schemasV1 },
   { manifest: manifestV2, artifacts: artifactsV2, schemas: schemasV2 },
+  { manifest: manifestV3, artifacts: artifactsV3, schemas: schemasV3 },
 ].map((authority) => ({ ...authority, authorityRef: authorityRef(authority.manifest) }))
 
-export const canonicalAuthorityRef = authorities.find((authority) => authority.manifest.version === '2').authorityRef
+export const canonicalAuthorityRef = authorities.find((authority) => authority.manifest.version === '3').authorityRef
 
 export function resolveCanonicalAuthority(authorityRef) {
   const authority = authorities.find((candidate) => candidate.authorityRef.manifestId === authorityRef?.manifestId && candidate.authorityRef.manifestVersion === authorityRef?.manifestVersion && candidate.authorityRef.manifestDigest === authorityRef?.manifestDigest)

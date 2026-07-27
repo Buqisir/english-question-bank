@@ -16,7 +16,12 @@ import { resolveConsumerContract } from '../../shared/paper-canonical/consumers.
 import { projectCanonicalPaper } from '../../shared/paper-canonical/projector.mjs'
 import { digestJson, sha256, stableStringify, withoutKey } from '../../shared/paper-canonical/stable.mjs'
 
-const publicationFileName = 'canonical-paper-publication-v2.json'
+const publicationFileName = 'canonical-paper-publication-v3.json'
+const publicationFileNames = [
+  publicationFileName,
+  'canonical-paper-publication-v2.json',
+  'canonical-paper-publication-v1.json',
+]
 const latestRefFileName = 'canonical-paper-publication-ref-v1.json'
 const journalFileName = '.canonical-latest-swap-v1.json'
 const artifactPathBase = {
@@ -728,7 +733,7 @@ export async function loadPaperForConsumption(request, store) {
     const ref = selected.ref
     let manifestBytes = null
     let manifestFileName = null
-    for (const candidate of [publicationFileName, 'canonical-paper-publication-v1.json']) {
+    for (const candidate of publicationFileNames) {
       manifestBytes = await store.readVersionArtifact(ref, `canonical/${candidate}`)
       if (manifestBytes) {
         manifestFileName = candidate
@@ -796,7 +801,7 @@ export function loadPaperForConsumptionSync(request, store) {
     const ref = selected.ref
     let manifestBytes = null
     let manifestFileName = null
-    for (const candidate of [publicationFileName, 'canonical-paper-publication-v1.json']) {
+    for (const candidate of publicationFileNames) {
       manifestBytes = store.readVersionArtifact(ref, `canonical/${candidate}`)
       if (manifestBytes) {
         manifestFileName = candidate
