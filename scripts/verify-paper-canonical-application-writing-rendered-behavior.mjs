@@ -978,8 +978,15 @@ async function assertActualPaperSurfaceArtifacts() {
           && block.groupId === canonical.groupId,
       )
       assert.notEqual(applicationGroupIndex, -1)
+      const applicationAnswerBoxIndex = asset.content.blocks.findIndex(
+        (block) =>
+          block.type === 'answerBox'
+          && block.writingTaskId
+            === asset.content.groups[canonical.groupId].writingTaskId,
+      )
+      assert.ok(applicationAnswerBoxIndex > applicationGroupIndex)
       asset.content.blocks = asset.content.blocks.map((block, index) => {
-        if (index >= applicationGroupIndex) return block
+        if (index > applicationAnswerBoxIndex) return block
         if (block.type === 'partHeading') {
           return { ...block, text: 'POISONED LEGACY APPLICATION PART HEADING' }
         }
@@ -1040,6 +1047,12 @@ async function assertActualPaperSurfaceArtifacts() {
         applicationText.includes('POISONED LEGACY APPLICATION'),
         false,
         'real mixed Screen rejects legacy Application chrome',
+      )
+      assert.equal(canonical.paperChrome.instructions.length, 0)
+      assert.equal(
+        await applicationPage.locator('.pi-writing-instruction').count(),
+        0,
+        'real mixed Screen preserves the Profile-owned empty instruction set',
       )
       const continuationText = await writingPages.nth(1).innerText()
       for (const expected of [
