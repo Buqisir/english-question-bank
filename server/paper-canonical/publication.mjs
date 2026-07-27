@@ -116,7 +116,26 @@ function validateSourceCaptureIntegrity(sourceCapture, { requireEmbeddedEvidence
   const spans = new Map()
   for (const span of sourceCapture.sourceSpans || []) {
     const document = documents.get(span.documentId)
-    if (!document || typeof span.sourceSpanId !== 'string' || spans.has(span.sourceSpanId) || span.documentDigest !== document.sha256 || !span.coordinate || span.coordinate.kind !== 'byte_range' || !Number.isInteger(span.coordinate.start) || !Number.isInteger(span.coordinate.end) || span.coordinate.start < 0 || span.coordinate.end < span.coordinate.start || span.coordinate.end > document.byteLength) {
+    const byteRange = span.coordinate?.kind === 'byte_range'
+      && Number.isInteger(span.coordinate.start)
+      && Number.isInteger(span.coordinate.end)
+      && span.coordinate.start >= 0
+      && span.coordinate.end >= span.coordinate.start
+      && span.coordinate.end <= (document?.byteLength ?? -1)
+    const region = span.coordinate?.region
+    const pageRegion = span.coordinate?.kind === 'page_region'
+      && document?.mediaType === 'application/pdf'
+      && Number.isInteger(span.coordinate.page)
+      && span.coordinate.page > 0
+      && region
+      && ['x', 'y', 'width', 'height'].every((key) => typeof region[key] === 'number' && Number.isFinite(region[key]))
+      && region.x >= 0
+      && region.y >= 0
+      && region.width > 0
+      && region.height > 0
+      && region.x + region.width <= 1
+      && region.y + region.height <= 1
+    if (!document || typeof span.sourceSpanId !== 'string' || spans.has(span.sourceSpanId) || span.documentDigest !== document.sha256 || (!byteRange && !pageRegion)) {
       throw publicationError('CANONICAL_PUBLICATION_CAPTURE_LINEAGE_INVALID', 'Source Capture span does not resolve to immutable document bytes')
     }
     spans.set(span.sourceSpanId, span)

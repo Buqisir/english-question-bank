@@ -224,6 +224,16 @@ for (const group of [readingA, readingC]) {
     const questionMap = group.sourceMap.entries.find((entry) => entry.target.kind === 'question' && entry.target.id === question.questionId)
     assert.equal(questionMap.sourceSpanRefs.length, 2)
   }
+  const reviewedPrefix = `observation:reference:reading:${group.identity.groupId}:`
+  const reviewedObservationCount = capture.observations.filter((observation) => observation.observationId.startsWith(reviewedPrefix)).length
+  const reviewedEntries = group.sourceMap.entries.filter((entry) => entry.target.kind === 'content_node' && entry.transformationRecordIds.length === 1)
+  assert.equal(reviewedEntries.length, reviewedObservationCount)
+  for (const entry of reviewedEntries) {
+    assert.equal(entry.sourceSpanRefs.length, 1)
+    const span = capture.sourceSpans.find((candidate) => candidate.sourceSpanId === entry.sourceSpanRefs[0])
+    assert.equal(span.coordinate.kind, 'page_region')
+    assert.equal(capture.documents.find((document) => document.documentId === span.documentId).sha256, readingReferenceHashes.sourcePdf)
+  }
 }
 const projectedA = real.projectedReading.find((group) => group.groupId === readingA.identity.groupId)
 assert.deepEqual(projectedA.blocks, readingA.content.blocks)
@@ -276,8 +286,29 @@ assertBlocked(realFixture, (evidence) => {
 }, 'incomplete_source', 'READING_TABLE_INCOMPLETE')
 assertBlocked(realFixture, (evidence) => {
   const group = evidence.reading_structure.groups['group-2026-i-reading-a']
+  group.content.blocks.find((block) => block.kind === 'table').rows[0].cells[0].inlines[0].text = 'FABRICATED CELL CONTENT'
+}, 'incomplete_source', 'READING_SOURCE_TRANSCRIPTION_MISMATCH')
+assertBlocked(realFixture, (evidence) => {
+  const group = evidence.reading_structure.groups['group-2026-i-reading-a']
+  group.sourceObservations[0].region.width = 2
+}, 'needs_review', 'READING_SOURCE_TRANSCRIPTION_COVERAGE_AMBIGUOUS')
+assertBlocked(realFixture, (evidence) => {
+  const group = evidence.reading_structure.groups['group-2026-i-reading-a']
+  group.content.blocks.find((block) => block.kind === 'table').rows[1].rowId = group.content.blocks.find((block) => block.kind === 'table').rows[0].rowId
+}, 'needs_review', 'READING_IDENTITY_DUPLICATE')
+assertBlocked(realFixture, (evidence) => {
+  const group = evidence.reading_structure.groups['group-2026-i-reading-a']
   group.content.blocks[3] = { kind: 'nested_table', nodeId: 'nested:unsupported', children: [] }
 }, 'unsupported', 'RICH_BLOCK_UNSUPPORTED')
+assertBlocked(realFixture, (evidence) => {
+  evidence.reading_structure.groups['group-duplicate-reading-a'] = {
+    ...structuredClone(evidence.reading_structure.groups['group-2026-i-reading-a']),
+    groupId: 'group-duplicate-reading-a',
+  }
+}, 'needs_review', 'READING_SOURCE_CAPTURE_AMBIGUOUS')
+assertBlocked(realFixture, (evidence) => {
+  evidence.paper_asset.content.questions['q-2026-i-028'].questionNo = 29
+}, 'needs_review', 'READING_QUESTION_IDENTITY_AMBIGUOUS')
 assertBlocked(realFixture, (evidence) => {
   delete evidence.official_answers.answers['q-2026-i-028']
 }, 'incomplete_source', 'READING_QUESTION_EVIDENCE_INCOMPLETE')

@@ -26,12 +26,18 @@ function literalInlineIssues(inlines, path) {
 
 function readingContentIssues(content, media) {
   const issues = []
-  const mediaById = new Map(media.map((item) => [item.mediaId, item]))
+  const mediaItems = Array.isArray(media) ? media : []
+  const mediaById = new Map(mediaItems.map((item) => [item.mediaId, item]))
+  const mediaOccurrences = new Map(mediaItems.map((item) => [item.mediaId, 0]))
   if (!Array.isArray(content?.blocks) || content.blocks.length === 0) {
     return [issue('READING_CONTENT_INCOMPLETE', 'incomplete_source', '$.content.blocks', 'Reading requires one ordered rich-content stream')]
   }
   for (const [index, block] of content.blocks.entries()) {
     const path = `$.content.blocks[${index}]`
+    if (!isRecordValue(block)) {
+      issues.push(issue('READING_BLOCK_INVALID', 'needs_review', path, 'Reading blocks must be closed rich-content objects'))
+      continue
+    }
     const inlineSets = block.kind === 'table'
       ? (block.rows || []).flatMap((row) => (row.cells || []).map((cell) => cell.inlines))
       : [block.kind === 'figure' ? block.caption : block.inlines]
@@ -54,8 +60,10 @@ function readingContentIssues(content, media) {
     }
     if (block.kind === 'figure') {
       const mediaItem = mediaById.get(block.mediaId)
+      if (mediaOccurrences.has(block.mediaId)) mediaOccurrences.set(block.mediaId, mediaOccurrences.get(block.mediaId) + 1)
       if (
         !mediaItem
+        || !['image/png', 'image/jpeg', 'image/webp'].includes(mediaItem.mimeType)
         || typeof mediaItem.sha256 !== 'string'
         || !Number.isInteger(mediaItem.pixelWidth)
         || mediaItem.pixelWidth < 1
@@ -66,6 +74,9 @@ function readingContentIssues(content, media) {
         issues.push(issue('READING_FIGURE_INCOMPLETE', 'incomplete_source', path, 'Reading Figures require closed immutable media, dimensions, and source artifact identity'))
       }
     }
+  }
+  if ([...mediaOccurrences.values()].some((count) => count !== 1)) {
+    issues.push(issue('READING_MEDIA_PLACEMENT_INVALID', 'needs_review', '$.media', 'Every Reading media entry must be placed by exactly one Figure block'))
   }
   return issues
 }
@@ -89,23 +100,33 @@ export function validateReadingContract({
   ) {
     return [issue('READING_VARIANT_INVALID', 'needs_review', '$.variant', 'Reading variant fields are closed')]
   }
+  const blocks = Array.isArray(content?.blocks) ? content.blocks : []
   issues.push(...readingContentIssues(content, media))
   const semanticIds = new Set()
-  for (const block of content.blocks) {
-    semanticIds.add(block.nodeId)
+  function registerSemanticId(id, path) {
+    if (typeof id !== 'string' || semanticIds.has(id)) {
+      issues.push(issue('READING_IDENTITY_DUPLICATE', 'needs_review', path, 'Reading semantic identities must be non-empty and globally unique inside one Group'))
+    }
+    if (typeof id === 'string') semanticIds.add(id)
+  }
+  for (const [blockIndex, block] of blocks.entries()) {
+    if (!isRecordValue(block)) continue
+    registerSemanticId(block.nodeId, `$.content.blocks[${blockIndex}].nodeId`)
     const inlineSets = block.kind === 'table'
-      ? (block.rows || []).flatMap((row) => {
-          semanticIds.add(row.rowId)
-          return (row.cells || []).map((cell) => {
-            semanticIds.add(cell.cellId)
+      ? (block.rows || []).flatMap((row, rowIndex) => {
+          if (!isRecordValue(row)) return []
+          registerSemanticId(row.rowId, `$.content.blocks[${blockIndex}].rows[${rowIndex}].rowId`)
+          return (row.cells || []).map((cell, cellIndex) => {
+            if (!isRecordValue(cell)) return []
+            registerSemanticId(cell.cellId, `$.content.blocks[${blockIndex}].rows[${rowIndex}].cells[${cellIndex}].cellId`)
             return cell.inlines
           })
         })
       : [block.kind === 'figure' ? block.caption : block.inlines]
-    for (const inlines of inlineSets) for (const inline of inlines || []) semanticIds.add(inline.nodeId)
+    for (const inlines of inlineSets) for (const inline of inlines || []) registerSemanticId(inline.nodeId, `$.content.blocks[${blockIndex}]`)
   }
 
-  const paragraphIds = new Set(content.blocks.filter((block) => block.kind === 'paragraph').map((block) => block.nodeId))
+  const paragraphIds = new Set(blocks.filter((block) => block?.kind === 'paragraph').map((block) => block.nodeId))
   const roles = variant.passageBlockRoles
   if (!Array.isArray(roles)) {
     issues.push(issue('READING_ROLE_MAP_INVALID', 'needs_review', '$.variant.passageBlockRoles', 'Reading role membership must be ordered by node identity'))
@@ -162,8 +183,7 @@ export function validateReadingContract({
     }
     issues.push(...literalInlineIssues(question.stem, `$.variant.questions[${index}].stem`))
     for (const inline of question.stem || []) {
-      if (semanticIds.has(inline.nodeId)) issues.push(issue('READING_IDENTITY_DUPLICATE', 'needs_review', `$.variant.questions[${index}].stem`, 'Reading semantic identities must be globally unique inside one Group'))
-      semanticIds.add(inline.nodeId)
+      registerSemanticId(inline.nodeId, `$.variant.questions[${index}].stem`)
     }
     const options = set?.options
     if (
@@ -181,12 +201,10 @@ export function validateReadingContract({
       if (!isRecordValue(option) || !exactKeys(option, ['optionId', 'label', 'content']) || typeof option.optionId !== 'string') {
         issues.push(issue('READING_OPTION_INVALID', 'needs_review', `$.variant.choiceOwnership.sets[${index}].options[${optionIndex}]`, 'Reading Option fields are closed'))
       } else {
-        if (semanticIds.has(option.optionId)) issues.push(issue('READING_IDENTITY_DUPLICATE', 'needs_review', `$.variant.choiceOwnership.sets[${index}].options[${optionIndex}]`, 'Reading semantic identities must be globally unique inside one Group'))
-        semanticIds.add(option.optionId)
+        registerSemanticId(option.optionId, `$.variant.choiceOwnership.sets[${index}].options[${optionIndex}]`)
         issues.push(...literalInlineIssues(option.content, `$.variant.choiceOwnership.sets[${index}].options[${optionIndex}].content`))
         for (const inline of option.content || []) {
-          if (semanticIds.has(inline.nodeId)) issues.push(issue('READING_IDENTITY_DUPLICATE', 'needs_review', `$.variant.choiceOwnership.sets[${index}].options[${optionIndex}].content`, 'Reading semantic identities must be globally unique inside one Group'))
-          semanticIds.add(inline.nodeId)
+          registerSemanticId(inline.nodeId, `$.variant.choiceOwnership.sets[${index}].options[${optionIndex}].content`)
         }
       }
     }

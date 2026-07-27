@@ -22,7 +22,7 @@ function sourceMapCoverageIssues(group, sourceCapture) {
     ...group.questionRefs.map(({ questionId }) => `question:${questionId}`),
     ...group.blankRefs.map(({ blankId }) => `blank:${blankId}`),
     ...group.media.map(({ mediaId }) => `media:${mediaId}`),
-    ...sourceMappedContentNodeIds(group.content).map((nodeId) => `content_node:${nodeId}`),
+    ...contentIdentityLists(group.content).sourceMappedIds.map((nodeId) => `content_node:${nodeId}`),
     ...(group.variant.family === 'reading'
       ? [
           ...group.variant.questions.flatMap((question) => question.stem.map((inline) => `content_node:${inline.nodeId}`)),
@@ -47,24 +47,32 @@ function sourceMapCoverageIssues(group, sourceCapture) {
   return issues
 }
 
-function sourceMappedContentNodeIds(content) {
-  const ids = []
+function contentIdentityLists(content) {
+  const contentNodeIds = []
+  const sourceMappedIds = []
+  const addStructuralId = (id) => {
+    contentNodeIds.push(id)
+    sourceMappedIds.push(id)
+  }
   for (const block of content?.blocks || []) {
-    ids.push(block.nodeId)
+    addStructuralId(block.nodeId)
     const inlineSets = block.kind === 'table'
       ? (block.rows || []).flatMap((row) => {
-          ids.push(row.rowId)
+          addStructuralId(row.rowId)
           return (row.cells || []).map((cell) => {
-            ids.push(cell.cellId)
+            addStructuralId(cell.cellId)
             return cell.inlines
           })
         })
       : [block.kind === 'figure' ? block.caption : block.inlines]
     for (const inlines of inlineSets) {
-      for (const inline of inlines || []) if (inline.kind === 'text') ids.push(inline.nodeId)
+      for (const inline of inlines || []) {
+        contentNodeIds.push(inline.nodeId)
+        if (inline.kind === 'text') sourceMappedIds.push(inline.nodeId)
+      }
     }
   }
-  return ids
+  return { contentNodeIds, sourceMappedIds }
 }
 
 function choiceOwnershipIssues(group, family) {
@@ -83,27 +91,6 @@ function choiceOwnershipIssues(group, family) {
   return actualQuestionIds.length === expectedQuestionIds.length && new Set(actualQuestionIds).size === actualQuestionIds.length && actualQuestionIds.every((id) => expectedQuestionIds.includes(id))
     ? []
     : ['per-question choices do not cover every Question exactly once']
-}
-
-function contentNodeIds(content) {
-  const ids = []
-  for (const block of content?.blocks || []) {
-    ids.push(block.nodeId)
-    let inlineSets
-    if (block.kind === 'table') {
-      inlineSets = (block.rows || []).flatMap((row) => {
-        ids.push(row.rowId)
-        return (row.cells || []).map((cell) => {
-          ids.push(cell.cellId)
-          return cell.inlines
-        })
-      })
-    } else {
-      inlineSets = [block.kind === 'figure' ? block.caption : block.inlines]
-    }
-    for (const inlines of inlineSets) for (const inline of inlines || []) ids.push(inline.nodeId)
-  }
-  return ids
 }
 
 function assertCanonicalPackage(canonicalPackage) {
@@ -201,7 +188,7 @@ export function projectCanonicalPaper(canonicalPackage) {
           ? {
               questionBlankPairs: group.variant.members.map(({ questionId, blankId }) => ({ questionId, blankId })),
               anchors: {
-                contentNodeIds: contentNodeIds(group.content),
+                contentNodeIds: contentIdentityLists(group.content).contentNodeIds,
                 questionIds: group.questionRefs.map(({ questionId }) => questionId),
                 blankIds: group.blankRefs.map(({ blankId }) => blankId),
                 optionIds: group.variant.choiceOwnership.options.map(({ optionId }) => optionId),
@@ -220,7 +207,7 @@ export function projectCanonicalPaper(canonicalPackage) {
                 correctOptionId: question.correctOptionId,
               })),
               anchors: {
-                contentNodeIds: contentNodeIds(group.content),
+                contentNodeIds: contentIdentityLists(group.content).contentNodeIds,
                 questionIds: group.questionRefs.map(({ questionId }) => questionId),
                 optionIds: group.variant.choiceOwnership.sets.flatMap((set) => set.options.map(({ optionId }) => optionId)),
               },

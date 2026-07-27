@@ -54,9 +54,60 @@ function eventTable() {
   }
 }
 
+function reviewedContentObservations(content, page) {
+  const values = []
+  const add = (id, value) => {
+    if (typeof id === 'string') values.push({ id, value })
+  }
+  const addInlines = (inlines) => {
+    for (const inline of inlines || []) add(inline.nodeId, inline)
+  }
+  for (const block of content.blocks) {
+    add(block.nodeId, block)
+    if (block.kind === 'table') {
+      for (const row of block.rows) {
+        add(row.rowId, row)
+        for (const cell of row.cells) {
+          add(cell.cellId, cell)
+          addInlines(cell.inlines)
+        }
+      }
+    } else {
+      addInlines(block.kind === 'figure' ? block.caption : block.inlines)
+    }
+  }
+  return values.map(({ id, value }, index) => ({
+    target: { kind: 'content_node', id },
+    page,
+    region: {
+      x: index % 2 === 0 ? 0.05 : 0.52,
+      y: 0.03 + (index % 18) * 0.052,
+      width: 0.43,
+      height: 0.04,
+    },
+    review: { method: 'manual_transcription', status: 'accepted' },
+    value,
+  }))
+}
+
 function readingSourceCapture(paper) {
   const readingA = paper.content.groups['group-2026-i-reading-a']
   const readingC = paper.content.groups['group-2026-i-reading-c']
+  const readingAContent = {
+    blocks: [
+      paragraph('paragraph:reading-a:title', 'SoFi Stadium Events This Month'),
+      paragraph(readingA.passage.paragraphs[0].paragraphId, readingA.passage.paragraphs[0].text),
+      paragraph(readingA.passage.paragraphs[1].paragraphId, readingA.passage.paragraphs[1].text),
+      eventTable(),
+      paragraph(readingA.passage.paragraphs[3].paragraphId, readingA.passage.paragraphs[3].text),
+      paragraph(readingA.passage.paragraphs[4].paragraphId, readingA.passage.paragraphs[4].text),
+      paragraph(readingA.passage.paragraphs[5].paragraphId, readingA.passage.paragraphs[5].text),
+      paragraph(readingA.passage.paragraphs[6].paragraphId, readingA.passage.paragraphs[6].text),
+    ],
+  }
+  const readingCContent = {
+    blocks: readingC.passage.paragraphs.map((item) => paragraph(item.paragraphId, item.text)),
+  }
   return {
     schemaVersion: 'reading-source-capture-v1',
     paperId: 'paper-2026-i',
@@ -67,18 +118,8 @@ function readingSourceCapture(paper) {
         slotId: 'reading.a',
         sourcePage: 4,
         visualProofDigest: hashes.tableProof,
-        content: {
-          blocks: [
-            paragraph('paragraph:reading-a:title', 'SoFi Stadium Events This Month'),
-            paragraph(readingA.passage.paragraphs[0].paragraphId, readingA.passage.paragraphs[0].text),
-            paragraph(readingA.passage.paragraphs[1].paragraphId, readingA.passage.paragraphs[1].text),
-            eventTable(),
-            paragraph(readingA.passage.paragraphs[3].paragraphId, readingA.passage.paragraphs[3].text),
-            paragraph(readingA.passage.paragraphs[4].paragraphId, readingA.passage.paragraphs[4].text),
-            paragraph(readingA.passage.paragraphs[5].paragraphId, readingA.passage.paragraphs[5].text),
-            paragraph(readingA.passage.paragraphs[6].paragraphId, readingA.passage.paragraphs[6].text),
-          ],
-        },
+        content: readingAContent,
+        sourceObservations: reviewedContentObservations(readingAContent, 4),
         passageBlockRoles: [
           { nodeId: 'para-2026-i-reading-a-2', role: 'subtitle' },
           { nodeId: 'para-2026-i-reading-a-4', role: 'subtitle' },
@@ -91,9 +132,8 @@ function readingSourceCapture(paper) {
         slotId: 'reading.c',
         sourcePage: 6,
         visualProofDigest: null,
-        content: {
-          blocks: readingC.passage.paragraphs.map((item) => paragraph(item.paragraphId, item.text)),
-        },
+        content: readingCContent,
+        sourceObservations: reviewedContentObservations(readingCContent, 6),
         passageBlockRoles: [],
       },
     },

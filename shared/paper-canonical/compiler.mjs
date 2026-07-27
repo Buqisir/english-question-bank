@@ -217,6 +217,47 @@ function referenceOptions(paper, group, diagnostics, familyId) {
   return { ownership: 'per_question', sets }
 }
 
+function readingContentTargetValues(content) {
+  const targets = new Map()
+  let duplicate = false
+  const add = (id, value) => {
+    if (typeof id !== 'string') return
+    const targetKey = `content_node:${id}`
+    if (targets.has(targetKey)) duplicate = true
+    targets.set(targetKey, value)
+  }
+  const addInlines = (inlines) => {
+    for (const inline of inlines || []) add(inline?.nodeId, inline)
+  }
+  for (const block of content?.blocks || []) {
+    add(block?.nodeId, block)
+    if (block?.kind === 'table') {
+      for (const row of block.rows || []) {
+        add(row?.rowId, row)
+        for (const cell of row.cells || []) {
+          add(cell?.cellId, cell)
+          addInlines(cell?.inlines)
+        }
+      }
+    } else {
+      addInlines(block?.kind === 'figure' ? block.caption : block?.inlines)
+    }
+  }
+  return { targets, duplicate }
+}
+
+function validNormalizedRegion(region) {
+  return isRecordValue(region)
+    && exactKeys(region, ['x', 'y', 'width', 'height'])
+    && ['x', 'y', 'width', 'height'].every((key) => typeof region[key] === 'number' && Number.isFinite(region[key]))
+    && region.x >= 0
+    && region.y >= 0
+    && region.width > 0
+    && region.height > 0
+    && region.x + region.width <= 1
+    && region.y + region.height <= 1
+}
+
 function appendReadingReferenceGroups({
   source,
   paper,
@@ -249,14 +290,26 @@ function appendReadingReferenceGroups({
     diagnostics.push(diagnostic('READING_SOURCE_CAPTURE_INVALID', 'incomplete_source', '$.evidence.documents', 'Reading structured capture must bind one immutable source document digest'))
     return
   }
-  const capturedBySlot = new Map(Object.values(readingCapture.groups).map((group) => [group?.slotId, group]))
+  const captureEntries = Object.entries(readingCapture.groups)
+  const capturedSlots = captureEntries.map(([, group]) => group?.slotId)
+  const missingSlotIds = new Set(missingSlots.map((slot) => slot.slotId))
+  if (
+    captureEntries.length !== missingSlots.length
+    || new Set(capturedSlots).size !== capturedSlots.length
+    || captureEntries.some(([groupId, group]) => group?.groupId !== groupId || !missingSlotIds.has(group?.slotId))
+  ) {
+    diagnostics.push(diagnostic('READING_SOURCE_CAPTURE_AMBIGUOUS', 'needs_review', '$.evidence.readingCapture.groups', 'Reading structured capture keys and missing Profile slots must close exactly once'))
+    return
+  }
+  const capturedBySlot = new Map(captureEntries.map(([, group]) => [group.slotId, group]))
+  let sequence = Math.max(0, ...(source.transformations || []).map((record) => record.sequence || 0))
   for (const slot of missingSlots) {
     const captured = capturedBySlot.get(slot.slotId)
     const group = captured && paper.content?.groups?.[captured.groupId]
     const groupRange = captured ? jsonObjectPropertyRange(readingEntry.document.bytes, captured.groupId) : null
     if (
       !isRecordValue(captured)
-      || !exactKeys(captured, ['groupId', 'slotId', 'sourcePage', 'visualProofDigest', 'content', 'passageBlockRoles'])
+      || !exactKeys(captured, ['groupId', 'slotId', 'sourcePage', 'visualProofDigest', 'content', 'passageBlockRoles', 'sourceObservations'])
       || captured.slotId !== slot.slotId
       || !Number.isInteger(captured.sourcePage)
       || captured.sourcePage < 1
@@ -267,6 +320,74 @@ function appendReadingReferenceGroups({
       || group.questionIds.length !== slot.questionCardinality.count
     ) {
       diagnostics.push(diagnostic('READING_GROUP_EVIDENCE_INCOMPLETE', 'incomplete_source', '$.evidence.readingCapture', `Reading slot ${slot.slotId} lacks one exact structured source Group`))
+      continue
+    }
+    const targetValues = readingContentTargetValues(captured.content)
+    const expectedTargets = targetValues.targets
+    const observedTargets = new Map()
+    let observationShapeInvalid = false
+    for (const [index, observation] of (captured.sourceObservations || []).entries()) {
+      const targetKey = `${observation?.target?.kind}:${observation?.target?.id}`
+      if (
+        !isRecordValue(observation)
+        || !exactKeys(observation, ['target', 'page', 'region', 'review', 'value'])
+        || !isRecordValue(observation.target)
+        || !exactKeys(observation.target, ['kind', 'id'])
+        || observation.target.kind !== 'content_node'
+        || typeof observation.target.id !== 'string'
+        || !Number.isInteger(observation.page)
+        || observation.page < 1
+        || !validNormalizedRegion(observation.region)
+        || !isRecordValue(observation.review)
+        || !exactKeys(observation.review, ['method', 'status'])
+        || observation.review.method !== 'manual_transcription'
+        || observation.review.status !== 'accepted'
+        || observedTargets.has(targetKey)
+      ) {
+        observationShapeInvalid = true
+        continue
+      }
+      observedTargets.set(targetKey, observation)
+    }
+    if ((captured.content?.blocks || []).some((block) => !['paragraph', 'table', 'figure'].includes(block?.kind))) {
+      diagnostics.push(diagnostic('RICH_BLOCK_UNSUPPORTED', 'unsupported', '$.evidence.readingCapture', `Reading slot ${slot.slotId} contains an unregistered rich-content block`))
+      continue
+    }
+    if (stableStringify(captured.content).match(/\[(?:表|图)\s*:/u)) {
+      diagnostics.push(diagnostic('READING_FLATTENED_BRIDGE_FORBIDDEN', 'incomplete_source', '$.evidence.readingCapture', `Reading slot ${slot.slotId} cannot replace structured content with a flattened marker or placeholder`))
+      continue
+    }
+    if (targetValues.duplicate) {
+      diagnostics.push(diagnostic('READING_IDENTITY_DUPLICATE', 'needs_review', '$.evidence.readingCapture', `Reading slot ${slot.slotId} repeats a rich-content semantic identity`))
+      continue
+    }
+    if (observationShapeInvalid) {
+      diagnostics.push(diagnostic('READING_SOURCE_TRANSCRIPTION_COVERAGE_AMBIGUOUS', 'needs_review', '$.evidence.readingCapture', `Reading slot ${slot.slotId} needs one reviewed PDF page/region observation per rich-content identity`))
+      continue
+    }
+    if (observedTargets.size !== expectedTargets.size) {
+      const tableIncomplete = (captured.content?.blocks || []).some((block) => block?.kind === 'table' && (
+        !Array.isArray(block.rows)
+        || block.rows.length === 0
+        || block.rows.some((row) => !Array.isArray(row?.cells) || row.cells.reduce((total, cell) => total + (Number.isInteger(cell?.columnSpan) ? cell.columnSpan : 0), 0) < block.columnCount)
+      ))
+      diagnostics.push(diagnostic(
+        tableIncomplete ? 'READING_TABLE_INCOMPLETE' : 'READING_SOURCE_TRANSCRIPTION_INCOMPLETE',
+        'incomplete_source',
+        '$.evidence.readingCapture',
+        `Reading slot ${slot.slotId} has missing content or reviewed PDF transcription observations`,
+      ))
+      continue
+    }
+    if (
+      [...expectedTargets.keys()].some((targetKey) => !observedTargets.has(targetKey))
+      || [...observedTargets.keys()].some((targetKey) => !expectedTargets.has(targetKey))
+    ) {
+      diagnostics.push(diagnostic('READING_SOURCE_TRANSCRIPTION_COVERAGE_AMBIGUOUS', 'needs_review', '$.evidence.readingCapture', `Reading slot ${slot.slotId} has conflicting semantic identities in its reviewed PDF transcription`))
+      continue
+    }
+    if ([...expectedTargets].some(([targetKey, value]) => stableStringify(observedTargets.get(targetKey).value) !== stableStringify(value))) {
+      diagnostics.push(diagnostic('READING_SOURCE_TRANSCRIPTION_MISMATCH', 'incomplete_source', '$.evidence.readingCapture', `Reading slot ${slot.slotId} disagrees with its reviewed PDF transcription evidence`))
       continue
     }
     const observationId = `observation:reference:reading:${captured.groupId}`
@@ -281,7 +402,44 @@ function appendReadingReferenceGroups({
     const questions = []
     const sets = []
     const sourceSpanRefsByTarget = {}
-    for (const questionId of group.questionIds) {
+    const transformationRecordIdsByTarget = {}
+    for (const [targetKey, observation] of observedTargets) {
+      const targetId = observation.target.id
+      const targetObservationId = `observation:reference:reading:${captured.groupId}:${targetId}`
+      const targetSourceSpanId = `source-span:${targetObservationId}`
+      const recordId = `record:reference:reading:${captured.groupId}:${targetId}`
+      source.observations.push({
+        observationId: targetObservationId,
+        kind: 'reading_reviewed_manual_transcription',
+        documentInputKey: sourceDocument.inputKey,
+        value: observation.value,
+        span: {
+          kind: 'page_region',
+          page: observation.page,
+          region: observation.region,
+        },
+      })
+      source.transformations = [...(source.transformations || []), {
+        recordId,
+        sequence: ++sequence,
+        ruleId: 'direct-projection',
+        ruleVersion: '2',
+        target: { identity: targetId, path: targetKey },
+        operation: 'direct_projection',
+        inputSourceSpanIds: [targetSourceSpanId],
+        before: observation.value,
+        after: observation.value,
+        certainty: 'exact',
+        preconditions: {
+          sourceObservationIds: [targetObservationId],
+          sourceValueDigests: [digestJson(observation.value)],
+        },
+        outputDigest: digestJson(observation.value),
+      }]
+      sourceSpanRefsByTarget[targetKey] = [targetSourceSpanId]
+      transformationRecordIdsByTarget[targetKey] = [recordId]
+    }
+    for (const [questionIndex, questionId] of group.questionIds.entries()) {
       const question = paper.content?.questions?.[questionId]
       const answer = answerKey.answers?.[questionId]
       const questionRange = jsonObjectPropertyRange(paperEntry.document.bytes, questionId)
@@ -297,6 +455,15 @@ function appendReadingReferenceGroups({
       ) {
         diagnostics.push(diagnostic('READING_QUESTION_EVIDENCE_INCOMPLETE', 'incomplete_source', '$.evidence.documents', `Reading Question ${questionId} lacks exact stem, A-D Options, or official answer evidence`))
         continue
+      }
+      if (
+        question.questionId !== questionId
+        || (
+          slot.numberingRule.kind === 'range'
+          && question.questionNo !== slot.numberingRule.start + questionIndex
+        )
+      ) {
+        diagnostics.push(diagnostic('READING_QUESTION_IDENTITY_AMBIGUOUS', 'needs_review', '$.evidence.documents', `Reading Question ${questionId} disagrees with Profile numbering identity`))
       }
       const optionId = (label) => `option:${questionId}:${label}`
       questions.push({
@@ -364,6 +531,7 @@ function appendReadingReferenceGroups({
         choiceOwnership: { ownership: 'per_question', sets },
       },
       sourceSpanRefsByTarget,
+      transformationRecordIdsByTarget,
     })
   }
 }
@@ -613,7 +781,13 @@ function buildSourceCapture(documents, parsed, diagnostics) {
     const document = documents.find((candidate) => candidate.inputKey === observation.documentInputKey)
     const start = observation.span?.start
     const end = observation.span?.end
-    if (!document || !Number.isInteger(start) || !Number.isInteger(end) || start < 0 || end < start || end > document.byteLength) {
+    const pageRegion = observation.span?.kind === 'page_region'
+      && document?.mediaType === 'application/pdf'
+      && Number.isInteger(observation.span.page)
+      && observation.span.page > 0
+      && validNormalizedRegion(observation.span.region)
+    const byteRange = Number.isInteger(start) && Number.isInteger(end) && start >= 0 && end >= start && end <= (document?.byteLength ?? -1)
+    if (!document || (!byteRange && !pageRegion)) {
       diagnostics.push(diagnostic('SOURCE_SPAN_INVALID', 'incomplete_source', `$.observations[${index}]`, 'Observation span is not closed against immutable document bytes'))
       continue
     }
@@ -632,7 +806,9 @@ function buildSourceCapture(documents, parsed, diagnostics) {
       sourceSpanId,
       documentId: document.documentId,
       documentDigest: document.sha256,
-      coordinate: { kind: 'byte_range', start, end },
+      coordinate: pageRegion
+        ? { kind: 'page_region', page: observation.span.page, region: cloneJson(observation.span.region) }
+        : { kind: 'byte_range', start, end },
     })
   }
   for (const [index, assertion] of (parsed?.value?.assertions || []).entries()) {
@@ -1002,10 +1178,16 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
     entries: targetEntries.map((entry) => ({
       ...entry,
       sourceSpanRefs: sourceGroup.sourceSpanRefsByTarget?.[`${entry.target.kind}:${entry.target.id}`] || [sourceGroup.sourceSpanId],
-      transformationRecordIds: acceptedRecords.filter((record) => record.target?.identity === sourceGroup.groupId).map((record) => record.recordId),
+      transformationRecordIds: sourceGroup.transformationRecordIdsByTarget?.[`${entry.target.kind}:${entry.target.id}`]
+        || acceptedRecords.filter((record) => record.target?.identity === sourceGroup.groupId).map((record) => record.recordId),
     })),
   }
-  const sourceFingerprint = digestJson({ captureDigest: capture.digest, sourceSpanId: sourceGroup.sourceSpanId, recordIds: sourceMap.entries.flatMap((entry) => entry.transformationRecordIds) })
+  const groupSpanIds = [...new Set(sourceMap.entries.flatMap((entry) => entry.sourceSpanRefs))]
+  const sourceFingerprint = digestJson({
+    captureDigest: capture.digest,
+    sourceSpanId: groupSpanIds[0],
+    recordIds: sourceMap.entries.flatMap((entry) => entry.transformationRecordIds),
+  })
   const semanticDigest = digestJson(artifactBase)
   const artifact = { ...artifactBase, sourceMap, sourceFingerprint, semanticDigest }
   diagnostics.push(...validateJsonSchema(artifact, closure.schemas['canonical-question-group-v1'], '$.group'))
