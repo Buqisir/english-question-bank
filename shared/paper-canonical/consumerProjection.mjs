@@ -9,6 +9,7 @@ const SUPPORTED_FAMILIES = new Set([
   'grammar-fill',
   'seven-choices',
   'reading',
+  'application-writing',
 ])
 
 function rejected(message, issues = []) {
@@ -339,6 +340,164 @@ function projectReadingConsumerGroup(input, occurrence) {
   })
 }
 
+function projectApplicationWritingConsumerGroup(input, occurrence) {
+  const { groupId } = input
+  if (
+    !Array.isArray(occurrence.numbering)
+    || occurrence.numbering.length !== 0
+    || !Array.isArray(occurrence.blanks)
+    || occurrence.blanks.length !== 0
+    || occurrence.choices?.ownership !== 'none'
+    || Object.keys(occurrence.choices).length !== 1
+    || !Array.isArray(occurrence.content?.blocks)
+    || !Array.isArray(occurrence.prompt?.blocks)
+    || occurrence.prompt.blocks.length === 0
+    || typeof occurrence.writingTaskId !== 'string'
+    || typeof occurrence.answerRegion?.answerRegionRef !== 'string'
+    || typeof occurrence.answerRegion?.responseSlotId !== 'string'
+    || !Array.isArray(occurrence.answerRegion?.givenTop)
+    || !Array.isArray(occurrence.answerRegion?.givenBottom)
+    || !Array.isArray(occurrence.contentRequirements)
+    || occurrence.wordCountRuling?.countScope !== 'student_authored_only'
+  ) {
+    throw rejected(`Canonical Application Writing occurrence ${groupId} is incomplete`)
+  }
+
+  const contentById = new Map()
+  for (const block of occurrence.content.blocks) {
+    if (
+      block?.kind !== 'paragraph'
+      || typeof block.nodeId !== 'string'
+      || !Array.isArray(block.inlines)
+      || contentById.has(block.nodeId)
+    ) {
+      throw rejected(`Canonical Application Writing occurrence ${groupId} has invalid content`)
+    }
+    contentById.set(block.nodeId, block)
+  }
+
+  const promptBlocks = occurrence.prompt.blocks.map((block) => {
+    if (
+      !block
+      || contentById.get(block.nodeId) !== block
+      && digestJson(contentById.get(block.nodeId)) !== digestJson(block)
+    ) {
+      throw rejected(`Canonical Application Writing occurrence ${groupId} has invalid prompt ownership`)
+    }
+    return {
+      nodeId: block.nodeId,
+      text: textContent(block.inlines),
+      inlines: structuredClone(block.inlines),
+    }
+  })
+  if (new Set(promptBlocks.map((block) => block.nodeId)).size !== promptBlocks.length) {
+    throw rejected(`Canonical Application Writing occurrence ${groupId} duplicates prompt content`)
+  }
+
+  const seenGivenPartIds = new Set()
+  const seenGivenBlockRefs = new Set()
+  const promptBlockIds = new Set(promptBlocks.map((block) => block.nodeId))
+  const roleOrder = new Map([
+    ['title', 0],
+    ['salutation', 1],
+    ['opening', 2],
+    ['closing', 3],
+    ['signature', 4],
+  ])
+  let previousRole = -1
+  const projectGivenParts = (parts, placement) => parts.map((part) => {
+    const block = contentById.get(part?.blockRef)
+    const currentRole = roleOrder.get(part?.role)
+    if (
+      typeof part?.givenPartId !== 'string'
+      || currentRole === undefined
+      || currentRole < previousRole
+      || part.placement !== placement
+      || (
+        placement === 'answer_region_top'
+          ? !['title', 'salutation', 'opening'].includes(part.role)
+          : !['closing', 'signature'].includes(part.role)
+      )
+      || !block
+      || seenGivenPartIds.has(part.givenPartId)
+      || seenGivenBlockRefs.has(part.blockRef)
+      || promptBlockIds.has(part.blockRef)
+    ) {
+      throw rejected(`Canonical Application Writing occurrence ${groupId} has invalid fixed text`)
+    }
+    previousRole = currentRole
+    seenGivenPartIds.add(part.givenPartId)
+    seenGivenBlockRefs.add(part.blockRef)
+    return {
+      givenPartId: part.givenPartId,
+      role: part.role,
+      placement: part.placement,
+      blockRef: part.blockRef,
+      text: textContent(block.inlines),
+      inlines: structuredClone(block.inlines),
+    }
+  })
+  const givenTop = projectGivenParts(
+    occurrence.answerRegion.givenTop,
+    'answer_region_top',
+  )
+  const givenBottom = projectGivenParts(
+    occurrence.answerRegion.givenBottom,
+    'answer_region_bottom',
+  )
+
+  const anchors = occurrence.anchors
+  const contentNodeIds = occurrence.content.blocks.flatMap((block) => [
+    block.nodeId,
+    ...block.inlines.map((inline) => inline.nodeId),
+  ])
+  if (
+    !anchors
+    || new Set(anchors.contentNodeIds).size !== contentNodeIds.length
+    || contentNodeIds.some((nodeId) => !anchors.contentNodeIds.includes(nodeId))
+    || anchors.requirementIds?.join(',') !== occurrence.contentRequirements
+      .map((requirement) => requirement.requirementId).join(',')
+    || anchors.givenPartIds?.join(',') !== [...givenTop, ...givenBottom]
+      .map((part) => part.givenPartId).join(',')
+    || anchors.responseSlotId !== occurrence.answerRegion.responseSlotId
+  ) {
+    throw rejected(`Canonical Application Writing occurrence ${groupId} has invalid anchors`)
+  }
+
+  const answerRegion = {
+    answerRegionRef: occurrence.answerRegion.answerRegionRef,
+    responseSlotId: occurrence.answerRegion.responseSlotId,
+    givenTop,
+    givenBottom,
+  }
+  const semantic = {
+    paperId: input.consumption.paperId,
+    groupId,
+    familyContractId: 'application-writing',
+    writingTaskId: occurrence.writingTaskId,
+    promptBlocks,
+    situation: structuredClone(occurrence.situation),
+    contentRequirements: structuredClone(occurrence.contentRequirements),
+    wordCountRuling: structuredClone(occurrence.wordCountRuling),
+    answerRegion,
+    anchors: structuredClone(anchors),
+  }
+  return Object.freeze({
+    groupType: 'writing',
+    ...semantic,
+    questions: Object.freeze([]),
+    occurrenceSignature: digestJson({
+      groupId,
+      promptBlockIds: promptBlocks.map((block) => block.nodeId),
+      givenPartIds: [...givenTop, ...givenBottom]
+        .map((part) => part.givenPartId),
+      answerRegionRef: answerRegion.answerRegionRef,
+      responseSlotId: answerRegion.responseSlotId,
+    }),
+    semanticSignature: digestJson(semantic),
+  })
+}
+
 export function selectConsumerGroupMode({
   consumption,
   familyContractId,
@@ -419,6 +578,9 @@ export function projectCanonicalConsumerGroup(input) {
   }
   if (familyContractId === 'reading') {
     return projectReadingConsumerGroup(input, occurrence)
+  }
+  if (familyContractId === 'application-writing') {
+    return projectApplicationWritingConsumerGroup(input, occurrence)
   }
   if (
     !Array.isArray(occurrence.numbering)

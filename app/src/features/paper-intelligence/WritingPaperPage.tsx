@@ -1,5 +1,10 @@
-import type { CSSProperties, KeyboardEvent, ReactNode } from 'react'
-import type { WritingPageModel } from './writingPageModel'
+import {
+  Fragment,
+  type CSSProperties,
+  type KeyboardEvent,
+  type ReactNode,
+} from 'react'
+import type { WritingGivenPart, WritingPageModel } from './writingPageModel'
 import { RetainedModelAnswer } from '../paper-browse/RetainedWritingLecture.tsx'
 import { paperSurfaceTokens } from '../../../../shared/papersurface/tokens.mjs'
 import './writingPaperPage.css'
@@ -32,6 +37,21 @@ const writingPageTokenStyle: WritingPageStyle = {
   '--ps-line-height': paperSurfaceTokens.paperLineHeight,
   '--ps-page-margin-x': paperSurfaceTokens.pageMarginX,
   '--ps-page-margin-top': paperSurfaceTokens.pageMarginTop,
+}
+
+function writingGivenText(part: WritingGivenPart): string {
+  return typeof part === 'string' ? part : part.text
+}
+
+function writingGivenIdentity(part: WritingGivenPart): Record<string, string> {
+  return typeof part === 'string'
+    ? {}
+    : {
+        'data-canonical-given-part-id': part.givenPartId,
+        'data-canonical-given-role': part.role,
+        'data-canonical-given-placement': part.placement,
+        'data-canonical-block-id': part.blockRef,
+      }
 }
 
 export function WritingPaperPage({
@@ -69,42 +89,62 @@ export function WritingPaperPage({
             return <div key={index} className="pi-writing-passage">{children}</div>
           case 'answerBox':
             return (
-              <div
-                key={index}
-                className={[
-                  'pi-writing-answer-box',
-                  block.givenBottom.length > 0 ? 'pi-writing-answer-box--letter' : '',
-                  onAnswerBoxActivate ? 'pi-writing-answer-box--lecture-trigger' : '',
-                ].filter(Boolean).join(' ')}
-                aria-label={onAnswerBoxActivate ? `${block.label}，点击打开讲评` : block.label}
-                data-writing-lecture-trigger={onAnswerBoxActivate ? '' : undefined}
-                role={onAnswerBoxActivate ? 'button' : undefined}
-                tabIndex={onAnswerBoxActivate ? 0 : undefined}
-                onClick={onAnswerBoxActivate}
-                onKeyDown={handleAnswerBoxKeyDown}
-              >
-                {retainedModelAnswer !== undefined ? (
-                  <RetainedModelAnswer
-                    modelAnswer={retainedModelAnswer}
-                    officialModelAnswer={retainedOfficialModelAnswer}
-                  />
-                ) : (
-                  <>
-                    <div className="pi-writing-answer-top">
-                      {block.givenTop.map((line, lineIndex) => (
-                        <p key={`t${lineIndex}`} className="pi-writing-answer-given">{line}</p>
+              <Fragment key={index}>
+                <div
+                  className={[
+                    'pi-writing-answer-box',
+                    block.responseSlotId ? 'pi-writing-answer-box--application' : '',
+                    block.givenBottom.length > 0 ? 'pi-writing-answer-box--letter' : '',
+                    onAnswerBoxActivate ? 'pi-writing-answer-box--lecture-trigger' : '',
+                  ].filter(Boolean).join(' ')}
+                  aria-label={onAnswerBoxActivate ? `${block.label}，点击打开讲评` : block.label}
+                  data-canonical-application-semantic-signature={block.semanticSignature}
+                  data-canonical-application-occurrence-signature={block.occurrenceSignature}
+                  data-canonical-answer-region-ref={block.answerRegionRef}
+                  data-canonical-response-slot-id={block.responseSlotId}
+                  data-writing-lecture-trigger={onAnswerBoxActivate ? '' : undefined}
+                  role={onAnswerBoxActivate ? 'button' : undefined}
+                  tabIndex={onAnswerBoxActivate ? 0 : undefined}
+                  onClick={onAnswerBoxActivate}
+                  onKeyDown={handleAnswerBoxKeyDown}
+                >
+                  <div className="pi-writing-answer-top">
+                    {block.givenTop.map((part, lineIndex) => (
+                      <p
+                        key={typeof part === 'string' ? `t${lineIndex}` : part.givenPartId}
+                        className="pi-writing-answer-given"
+                        {...writingGivenIdentity(part)}
+                      >
+                        {writingGivenText(part)}
+                      </p>
+                    ))}
+                  </div>
+                  {block.givenBottom.length > 0 && (
+                    <div className="pi-writing-answer-bottom">
+                      {block.givenBottom.map((part, lineIndex) => (
+                        <p
+                          key={typeof part === 'string' ? `b${lineIndex}` : part.givenPartId}
+                          className="pi-writing-answer-given pi-writing-answer-given--tight"
+                          {...writingGivenIdentity(part)}
+                        >
+                          {writingGivenText(part)}
+                        </p>
                       ))}
                     </div>
-                    {block.givenBottom.length > 0 && (
-                      <div className="pi-writing-answer-bottom">
-                        {block.givenBottom.map((line, lineIndex) => (
-                          <p key={`b${lineIndex}`} className="pi-writing-answer-given pi-writing-answer-given--tight">{line}</p>
-                        ))}
-                      </div>
-                    )}
-                  </>
+                  )}
+                </div>
+                {retainedModelAnswer !== undefined && (
+                  <aside
+                    className="pi-writing-answer-supplement"
+                    data-writing-answer-supplement=""
+                  >
+                    <RetainedModelAnswer
+                      modelAnswer={retainedModelAnswer}
+                      officialModelAnswer={retainedOfficialModelAnswer}
+                    />
+                  </aside>
                 )}
-              </div>
+              </Fragment>
             )
           default:
             return null

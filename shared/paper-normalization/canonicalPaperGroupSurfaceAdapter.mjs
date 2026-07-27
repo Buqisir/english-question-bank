@@ -372,3 +372,67 @@ export function buildCanonicalReadingConsumptionSurfaceData({
     },
   }
 }
+
+/**
+ * Canonical-required Application Writing Screen adapter.
+ *
+ * Prompt and fixed text come only from the closed occurrence. The historical
+ * Paper Asset writing scaffold extractor is intentionally outside this seam.
+ */
+export function buildCanonicalApplicationWritingConsumptionSurfaceData({
+  consumption,
+  groupId,
+}) {
+  const canonicalGroup = projectCanonicalConsumerGroup({
+    consumption,
+    familyContractId: 'application-writing',
+    groupId,
+  })
+  const paragraphs = canonicalGroup.promptBlocks.map((block) => {
+    const segmented = segmentPaperText(block.text, {
+      sectionId: block.nodeId,
+    }).paragraphs[0]
+    if (!segmented) {
+      throw new Error(
+        `Canonical Application Writing prompt ${block.nodeId} has no visible text`,
+      )
+    }
+    return {
+      id: block.nodeId,
+      section: canonicalGroup.groupId,
+      sentences: segmented.sentences,
+    }
+  })
+  const answerBox = {
+    kind: 'answerBox',
+    label: '应用文写作答题区',
+    answerRegionRef: canonicalGroup.answerRegion.answerRegionRef,
+    responseSlotId: canonicalGroup.answerRegion.responseSlotId,
+    semanticSignature: canonicalGroup.semanticSignature,
+    occurrenceSignature: canonicalGroup.occurrenceSignature,
+    givenTop: canonicalGroup.answerRegion.givenTop,
+    givenBottom: canonicalGroup.answerRegion.givenBottom,
+  }
+  return {
+    status: 'ready',
+    semanticDigest: canonicalGroup.semanticSignature,
+    occurrenceSignature: canonicalGroup.occurrenceSignature,
+    answerRegion: canonicalGroup.answerRegion,
+    anchors: canonicalGroup.anchors,
+    promptBlocks: canonicalGroup.promptBlocks,
+    pageModel: {
+      blocks: [
+        { kind: 'passage' },
+        answerBox,
+      ],
+    },
+    surfaceData: {
+      textMap: {
+        paperId: canonicalGroup.paperId,
+        paragraphs,
+      },
+      questions: [],
+      evidence: [],
+    },
+  }
+}

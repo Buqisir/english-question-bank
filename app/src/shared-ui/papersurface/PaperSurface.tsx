@@ -116,6 +116,14 @@ type PaperSurfaceComponentProps = Omit<PaperSurfaceProps, 'blankFocusMode'> & {
   /** Ordered canonical Reading content rendered natively without marker parsing. */
   readonly canonicalReadingBlocks?: ReadonlyArray<CanonicalReadingSurfaceBlock>
   readonly canonicalReadingSemanticSignature?: string
+  /** Ordered canonical Application Writing prompt rendered without legacy inference. */
+  readonly canonicalApplicationPromptBlocks?: ReadonlyArray<{
+    readonly nodeId: string
+    readonly inlines: ReadonlyArray<{
+      readonly nodeId: string
+      readonly text: string
+    }>
+  }>
 }
 
 export function PaperSurface(props: PaperSurfaceComponentProps): ReactNode {
@@ -137,6 +145,7 @@ export function PaperSurface(props: PaperSurfaceComponentProps): ReactNode {
     semanticParagraphs,
     canonicalReadingBlocks,
     canonicalReadingSemanticSignature,
+    canonicalApplicationPromptBlocks,
   } = props
 
   if (semanticParagraphs !== undefined) {
@@ -285,7 +294,12 @@ export function PaperSurface(props: PaperSurfaceComponentProps): ReactNode {
             semanticSignature={canonicalReadingSemanticSignature}
           />
         )}
-        {!canonicalReadingBlocks && sections.map((section) => (
+        {canonicalApplicationPromptBlocks && (
+          <CanonicalApplicationWritingPrompt
+            blocks={canonicalApplicationPromptBlocks}
+          />
+        )}
+        {!canonicalReadingBlocks && !canonicalApplicationPromptBlocks && sections.map((section) => (
           <PaperSurfaceSection
             key={section}
             section={section}
@@ -326,6 +340,38 @@ export function PaperSurface(props: PaperSurfaceComponentProps): ReactNode {
           />
         )}
       </article>
+    </div>
+  )
+}
+
+function CanonicalApplicationWritingPrompt({
+  blocks,
+}: {
+  blocks: ReadonlyArray<{
+    readonly nodeId: string
+    readonly inlines: ReadonlyArray<{
+      readonly nodeId: string
+      readonly text: string
+    }>
+  }>
+}): ReactNode {
+  return (
+    <div
+      className="ps-canonical-application-prompt"
+      data-canonical-application-prompt=""
+    >
+      {blocks.map((block) => (
+        <p key={block.nodeId} data-canonical-block-id={block.nodeId}>
+          {block.inlines.map((inline) => (
+            <span
+              key={inline.nodeId}
+              data-canonical-content-node-id={inline.nodeId}
+            >
+              {inline.text}
+            </span>
+          ))}
+        </p>
+      ))}
     </div>
   )
 }

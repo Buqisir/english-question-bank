@@ -223,6 +223,15 @@ function renderCanonicalReadingBlocks(canonicalGroup) {
   }).join('')}</div>`
 }
 
+function renderCanonicalApplicationWriting(canonicalGroup) {
+  const renderGivenParts = (parts, position) => parts.map((part) =>
+    `<p class="canonical-application-given canonical-application-given--${position}" data-canonical-given-part-id="${escapeHtml(part.givenPartId)}" data-canonical-given-role="${escapeHtml(part.role)}" data-canonical-given-placement="${escapeHtml(part.placement)}">${renderCanonicalInlineNodes(part.inlines)}</p>`).join('')
+  const prompt = canonicalGroup.promptBlocks.map((block) =>
+    `<p data-canonical-block-id="${escapeHtml(block.nodeId)}">${renderCanonicalInlineNodes(block.inlines)}</p>`).join('')
+  const response = canonicalGroup.answerRegion
+  return `<div class="canonical-application-writing" data-canonical-application-semantic-signature="${escapeHtml(canonicalGroup.semanticSignature)}" data-canonical-application-occurrence-signature="${escapeHtml(canonicalGroup.occurrenceSignature)}"><div class="passage canonical-application-prompt">${prompt}</div><div class="writing-answer-box canonical-application-response" data-canonical-answer-region-ref="${escapeHtml(response.answerRegionRef)}" data-canonical-response-slot-id="${escapeHtml(response.responseSlotId)}" style="width:144mm;height:65mm;"><div class="canonical-application-given-top">${renderGivenParts(response.givenTop, 'top')}</div><div class="canonical-application-given-bottom">${renderGivenParts(response.givenBottom, 'bottom')}</div></div></div>`
+}
+
 function renderCanonicalQuestionOptions(question, preserveInlineIdentity = false) {
   const placement = translateAbcdPlanToPointPlacement(question.layoutPlan)
   const attrs = ` data-canonical-placement-signature="${escapeHtml(placement.placementSignature)}" data-canonical-placement-mode="${placement.mode}" data-canonical-column-starts-pt="${placement.columnStartsPt.join(',')}" data-canonical-question-stem-start-pt="${placement.questionStemStartPt}" style="width:${placement.rowWidthPt}pt;margin-left:${placement.questionStemStartPt}pt;grid-template-columns:${placement.columnWidthsPt.map((width) => `${width}pt`).join(' ')}"`
@@ -413,6 +422,9 @@ export function buildPrintHtml({
               ? 'seven-choices'
               : detail.groupType === 'reading'
                 ? 'reading'
+                : detail.groupType === 'writing'
+                  && detail.writingTask?.taskType === 'application'
+                  ? 'application-writing'
                 : null
       if (!familyContractId) return null
       const selection = selectConsumerGroupMode({
@@ -557,6 +569,8 @@ export function buildPrintHtml({
         if (canonicalGroup) {
           if (canonicalGroup.groupType === 'reading') {
             groupHtml += renderCanonicalReadingBlocks(canonicalGroup)
+          } else if (canonicalGroup.groupType === 'writing') {
+            groupHtml += renderCanonicalApplicationWriting(canonicalGroup)
           } else {
             const displayNumberByQuestionId = new Map(
               canonicalGroup.questions.map((question) => [
@@ -607,7 +621,10 @@ export function buildPrintHtml({
           }
         }
 
-        if (isWritingGroupType(detail.groupType)) {
+        if (
+          isWritingGroupType(detail.groupType)
+          && canonicalGroup?.groupType !== 'writing'
+        ) {
           groupHtml += renderWritingAnswerBox(detail)
         }
 
@@ -1112,6 +1129,23 @@ body {
   border: 0.48pt solid #000;
   margin: 1em auto 0;
   position: relative;
+}
+
+.canonical-application-response {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 3mm;
+}
+
+.canonical-application-given p,
+.canonical-application-given {
+  margin: 0;
+}
+
+.canonical-application-given-bottom {
+  margin-top: auto;
+  text-align: right;
 }
 
 .writing-starter-line {

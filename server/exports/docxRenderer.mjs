@@ -389,6 +389,9 @@ function createCanonicalDocxGroupResolver(
               ? 'seven-choices'
               : detail.groupType === 'reading'
                 ? 'reading'
+                : detail.groupType === 'writing'
+                  && detail.writingTask?.taskType === 'application'
+                  ? 'application-writing'
                 : null
       if (!familyContractId) return null
       const selection = selectConsumerGroupMode({
@@ -648,6 +651,67 @@ function pushCanonicalDocxReadingBlocks(body, canonicalGroup, images) {
   ))
 }
 
+function canonicalApplicationGivenParagraph(part) {
+  return `${canonicalBookmarkStart('canonical_given', part.givenPartId)}${paragraph(
+    canonicalInlineRuns(part.inlines, { size: 21 }),
+    {
+      after: 40,
+      align: ['closing', 'signature'].includes(part.role)
+        ? 'right'
+        : undefined,
+    },
+  )}${canonicalBookmarkEnd('canonical_given', part.givenPartId)}`
+}
+
+function canonicalApplicationWritingAnswerBox(canonicalGroup) {
+  const widthTwips = mmToTwips(144)
+  const heightTwips = mmToTwips(65)
+  const response = canonicalGroup.answerRegion
+  const top = response.givenTop.map(canonicalApplicationGivenParagraph).join('')
+  const bottom = response.givenBottom.map(canonicalApplicationGivenParagraph).join('')
+  const nestedRow = (content, height, verticalAlign = null) =>
+    `<w:tr><w:trPr><w:trHeight w:val="${height}" w:hRule="exact"/></w:trPr><w:tc><w:tcPr><w:tcW w:w="${widthTwips}" w:type="dxa"/>${verticalAlign ? `<w:vAlign w:val="${verticalAlign}"/>` : ''}</w:tcPr>${content || '<w:p/>'}</w:tc></w:tr>`
+  const content = bottom
+    ? `<w:tbl><w:tblPr><w:tblW w:w="${widthTwips}" w:type="dxa"/><w:tblBorders><w:top w:val="nil"/><w:left w:val="nil"/><w:bottom w:val="nil"/><w:right w:val="nil"/><w:insideH w:val="nil"/><w:insideV w:val="nil"/></w:tblBorders><w:tblLayout w:type="fixed"/></w:tblPr><w:tblGrid><w:gridCol w:w="${widthTwips}"/></w:tblGrid>${nestedRow(top, Math.round(heightTwips * 0.8))}${nestedRow(bottom, heightTwips - Math.round(heightTwips * 0.8), 'bottom')}</w:tbl><w:p/>`
+    : top || '<w:p/>'
+  const table = `<w:tbl><w:tblPr><w:tblW w:w="${widthTwips}" w:type="dxa"/><w:tblBorders><w:top w:val="single" w:sz="4" w:space="0" w:color="000000"/><w:left w:val="single" w:sz="4" w:space="0" w:color="000000"/><w:bottom w:val="single" w:sz="4" w:space="0" w:color="000000"/><w:right w:val="single" w:sz="4" w:space="0" w:color="000000"/></w:tblBorders><w:tblLayout w:type="fixed"/></w:tblPr><w:tblGrid><w:gridCol w:w="${widthTwips}"/></w:tblGrid><w:tr><w:trPr><w:cantSplit/><w:trHeight w:val="${heightTwips}" w:hRule="exact"/></w:trPr><w:tc><w:tcPr><w:tcW w:w="${widthTwips}" w:type="dxa"/></w:tcPr>${content}</w:tc></w:tr></w:tbl>`
+  return `${canonicalBookmarkStart('canonical_response', response.responseSlotId)}${table}${canonicalBookmarkEnd('canonical_response', response.responseSlotId)}`
+}
+
+function pushCanonicalDocxApplicationWriting(body, canonicalGroup) {
+  body.push(
+    canonicalBookmarkStart(
+      'canonical_semantic',
+      canonicalGroup.semanticSignature,
+    ),
+    canonicalBookmarkStart(
+      'canonical_occurrence',
+      canonicalGroup.occurrenceSignature,
+    ),
+  )
+  for (const block of canonicalGroup.promptBlocks) {
+    body.push(
+      canonicalBookmarkStart('canonical_block', block.nodeId),
+      paragraph(canonicalInlineRuns(block.inlines, { size: 21 }), {
+        after: 60,
+        firstLineIndent: 420,
+      }),
+      canonicalBookmarkEnd('canonical_block', block.nodeId),
+    )
+  }
+  body.push(
+    canonicalApplicationWritingAnswerBox(canonicalGroup),
+    canonicalBookmarkEnd(
+      'canonical_occurrence',
+      canonicalGroup.occurrenceSignature,
+    ),
+    canonicalBookmarkEnd(
+      'canonical_semantic',
+      canonicalGroup.semanticSignature,
+    ),
+  )
+}
+
 function pushCanonicalDocxContent(
   body,
   canonicalGroup,
@@ -657,6 +721,10 @@ function pushCanonicalDocxContent(
 ) {
   if (canonicalGroup.groupType === 'reading') {
     pushCanonicalDocxReadingBlocks(body, canonicalGroup, images)
+    return
+  }
+  if (canonicalGroup.groupType === 'writing') {
+    pushCanonicalDocxApplicationWriting(body, canonicalGroup)
     return
   }
   pushCanonicalDocxParagraphs(
@@ -1474,7 +1542,10 @@ function buildExamDocumentXml({
           }
         }
 
-        if (isWritingGroupType(detail.groupType)) {
+        if (
+          isWritingGroupType(detail.groupType)
+          && canonicalGroup?.groupType !== 'writing'
+        ) {
           body.push(docxWritingAnswerBox(detail))
         }
 
@@ -1840,7 +1911,10 @@ function buildDocumentXml({ title, versionType, items, blocks, questionNumberSta
           })
         }
 
-        if (isWritingGroupType(detail.groupType)) {
+        if (
+          isWritingGroupType(detail.groupType)
+          && canonicalGroup?.groupType !== 'writing'
+        ) {
           body.push(docxWritingAnswerBox(detail))
         }
 
@@ -1914,7 +1988,10 @@ function buildDocumentXml({ title, versionType, items, blocks, questionNumberSta
         })
       }
 
-      if (isWritingGroupType(detail.groupType)) {
+      if (
+        isWritingGroupType(detail.groupType)
+        && canonicalGroup?.groupType !== 'writing'
+      ) {
         body.push(docxWritingAnswerBox(detail))
       }
 

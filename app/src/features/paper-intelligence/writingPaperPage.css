@@ -119,12 +119,25 @@
    ≈144×65mm ≈246px @ 794px/210mm. Keep the salutation + opening lines TIGHT at
    the top like a real letter, push the signature to the bottom, and let the box
    height itself be the writing space between them. */
+.pi-writing-answer-box--application,
 .pi-writing-answer-box--letter {
   min-height: 246px;
 }
 
+.pi-writing-answer-box--application {
+  box-sizing: border-box;
+  width: 144mm;
+  max-width: 100%;
+  align-self: center;
+}
+
+.pi-writing-answer-box--application .pi-writing-answer-top .pi-writing-answer-given,
 .pi-writing-answer-box--letter .pi-writing-answer-top .pi-writing-answer-given {
   min-height: 0;
+}
+
+.pi-writing-answer-supplement {
+  margin-top: 1.25rem;
 }
 
 .retained-writing-answer {

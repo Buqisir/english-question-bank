@@ -70,6 +70,7 @@ import {
   type ReviewedReadingChoiceAnalysisV1,
 } from '../paper-intelligence/paperAssetSurfaceAdapter.ts'
 import {
+  buildCanonicalApplicationWritingConsumptionSurfaceData,
   buildCanonicalReadingConsumptionSurfaceData,
   type CanonicalReadingSurfaceBlock,
 } from '../../../../shared/paper-normalization/canonicalPaperGroupSurfaceAdapter.mjs'
@@ -163,7 +164,18 @@ type GroupModel =
   | { kind: 'sevenChoices'; model: SevenChoicesSurfaceModel }
   | { kind: 'cloze'; model: ClozePaperViewModel }
   | { kind: 'grammarFill'; model: GrammarFillPaperViewModel }
-  | { kind: 'writing'; model: WritingPaperViewModel }
+  | {
+      kind: 'writing'
+      model: Pick<WritingPaperViewModel, 'surfaceData' | 'pageModel'> & {
+        canonicalPromptBlocks?: ReadonlyArray<{
+          readonly nodeId: string
+          readonly inlines: ReadonlyArray<{
+            readonly nodeId: string
+            readonly text: string
+          }>
+        }>
+      }
+    }
   | { kind: 'unsupported'; groupType: string }
   | { kind: 'error'; message: string }
 
@@ -671,6 +683,36 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
                 },
               })
             }
+          } else if (
+            group?.groupType === 'writing'
+            && group.writingTaskId
+            && loadedAsset.content.writingTasks?.[group.writingTaskId]?.taskType
+              === 'application'
+          ) {
+            const writingMode = canonicalModeForGroup(
+              canonicalConsumption,
+              'application-writing',
+              block.groupId,
+            )
+            if (writingMode === 'canonical') {
+              const canonicalWriting =
+                buildCanonicalApplicationWritingConsumptionSurfaceData({
+                  consumption: canonicalConsumptionForGroup(
+                    canonicalConsumption,
+                    'application-writing',
+                    block.groupId,
+                  ),
+                  groupId: block.groupId,
+                })
+              canonicalModels.set(block.groupId, {
+                kind: 'writing',
+                model: {
+                  surfaceData: canonicalWriting.surfaceData,
+                  pageModel: canonicalWriting.pageModel,
+                  canonicalPromptBlocks: canonicalWriting.promptBlocks,
+                },
+              })
+            }
           }
         }
 
@@ -715,7 +757,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
             } else if (group.groupType === 'grammarFill') {
               models[block.groupId] = canonicalModels.get(block.groupId)!
             } else if (group.groupType === 'writing') {
-              models[block.groupId] = {
+              models[block.groupId] = canonicalModels.get(block.groupId) ?? {
                 kind: 'writing',
                 model: buildWritingPaperView({ asset: loadedAsset, groupId: block.groupId }),
               }
@@ -1596,6 +1638,11 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
           entry.kind === 'reading'
             && entry.model.canonicalReadingBlocks.length > 0
             ? entry.model.canonicalReadingSemanticSignature
+            : undefined
+        }
+        canonicalApplicationPromptBlocks={
+          entry.kind === 'writing'
+            ? entry.model.canonicalPromptBlocks
             : undefined
         }
         // seven-options-on-paper: the 七选五 A-G pool, display-only.

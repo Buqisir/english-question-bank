@@ -194,6 +194,13 @@ for (const selection of browserConsumption.selections) {
     selection.groupIds = Object.values(asset.content.groups)
       .filter((candidate) => candidate.groupType === 'reading')
       .map((candidate) => candidate.groupId)
+  } else if (selection.familyContractId === 'application-writing') {
+    selection.groupIds = Object.values(asset.content.groups)
+      .filter((candidate) =>
+        candidate.groupType === 'writing'
+        && asset.content.writingTasks?.[candidate.writingTaskId]?.taskType
+          === 'application')
+      .map((candidate) => candidate.groupId)
   }
 }
 const sourceGroup = asset.content.groups[occurrence.groupId]

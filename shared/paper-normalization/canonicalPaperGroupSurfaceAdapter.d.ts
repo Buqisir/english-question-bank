@@ -174,3 +174,61 @@ export function buildCanonicalReadingConsumptionSurfaceData(input: {
     readonly evidence: ReadonlyArray<PaperEvidence>
   }
 }
+
+export type CanonicalApplicationWritingGivenPart = {
+  readonly givenPartId: string
+  readonly role: 'title' | 'salutation' | 'opening' | 'closing' | 'signature'
+  readonly placement: 'answer_region_top' | 'answer_region_bottom'
+  readonly blockRef: string
+  readonly text: string
+  readonly inlines: ReadonlyArray<{
+    readonly kind: 'text'
+    readonly nodeId: string
+    readonly text: string
+  }>
+}
+
+export function buildCanonicalApplicationWritingConsumptionSurfaceData(input: {
+  consumption: unknown
+  groupId: string
+}): {
+  readonly status: 'ready'
+  readonly semanticDigest: string
+  readonly occurrenceSignature: string
+  readonly answerRegion: {
+    readonly answerRegionRef: string
+    readonly responseSlotId: string
+    readonly givenTop: ReadonlyArray<CanonicalApplicationWritingGivenPart>
+    readonly givenBottom: ReadonlyArray<CanonicalApplicationWritingGivenPart>
+  }
+  readonly anchors: Record<string, ReadonlyArray<string> | string>
+  readonly promptBlocks: ReadonlyArray<{
+    readonly nodeId: string
+    readonly text: string
+    readonly inlines: ReadonlyArray<{
+      readonly kind: 'text'
+      readonly nodeId: string
+      readonly text: string
+    }>
+  }>
+  readonly pageModel: {
+    readonly blocks: ReadonlyArray<
+      | { readonly kind: 'passage' }
+      | {
+          readonly kind: 'answerBox'
+          readonly label: string
+          readonly answerRegionRef: string
+          readonly responseSlotId: string
+          readonly semanticSignature: string
+          readonly occurrenceSignature: string
+          readonly givenTop: ReadonlyArray<CanonicalApplicationWritingGivenPart>
+          readonly givenBottom: ReadonlyArray<CanonicalApplicationWritingGivenPart>
+        }
+    >
+  }
+  readonly surfaceData: {
+    readonly textMap: PaperTextMap
+    readonly questions: ReadonlyArray<PaperQuestion>
+    readonly evidence: ReadonlyArray<PaperEvidence>
+  }
+}

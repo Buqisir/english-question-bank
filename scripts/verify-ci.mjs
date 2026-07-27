@@ -21,6 +21,7 @@ const registry = {
   'scripts/verify-paper-canonical-application-writing-publication.mjs',
   'scripts/verify-paper-canonical-seven-choices-rendered-behavior.mjs',
   'scripts/verify-paper-canonical-reading-rendered-behavior.mjs',
+  'scripts/verify-paper-canonical-application-writing-rendered-behavior.mjs',
   'scripts/verify-paper-canonical-cloze-grammar-consumption.mjs',
   'scripts/verify-paper-canonical-abcd-layout.mjs',
   'scripts/verify-paper-normalization-cloze.mjs',

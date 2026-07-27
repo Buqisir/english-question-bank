@@ -1139,6 +1139,24 @@ try {
       .filter((candidate) => candidate.groupType === 'reading')
       .map((candidate) => candidate.groupId)
     delete readingSelection.projectedOccurrences
+    let applicationSelection = browserConsumption.selections.find(
+      (selection) => selection.familyContractId === 'application-writing',
+    )
+    if (!applicationSelection) {
+      applicationSelection = { familyContractId: 'application-writing' }
+      browserConsumption.selections.push(applicationSelection)
+    }
+    applicationSelection.mode = 'legacy'
+    applicationSelection.groupIds = Object.values(asset.content.groups)
+      .filter((candidate) => {
+        if (candidate.groupType !== 'writing' || !candidate.writingTaskId) {
+          return false
+        }
+        return asset.content.writingTasks?.[candidate.writingTaskId]?.taskType
+          === 'application'
+      })
+      .map((candidate) => candidate.groupId)
+    delete applicationSelection.projectedOccurrences
     return browserConsumption
   }
   await assertActualPaperBrowseBoundary({

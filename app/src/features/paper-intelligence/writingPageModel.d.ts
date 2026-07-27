@@ -8,10 +8,34 @@ export type WritingChromeBlock =
   | { kind: 'sectionHeading'; text: string }
   | { kind: 'instruction'; text: string }
   | { kind: 'passage' }
-  | { kind: 'answerBox'; label: string; givenTop: string[]; givenBottom: string[] }
+  | {
+      kind: 'answerBox'
+      label: string
+      answerRegionRef?: string
+      responseSlotId?: string
+      semanticSignature?: string
+      occurrenceSignature?: string
+      givenTop: ReadonlyArray<WritingGivenPart>
+      givenBottom: ReadonlyArray<WritingGivenPart>
+    }
+
+export type WritingGivenPart =
+  | string
+  | {
+      givenPartId: string
+      role: 'title' | 'salutation' | 'opening' | 'closing' | 'signature'
+      placement: 'answer_region_top' | 'answer_region_bottom'
+      blockRef: string
+      text: string
+      inlines: ReadonlyArray<{
+        kind: 'text'
+        nodeId: string
+        text: string
+      }>
+    }
 
 export type WritingPageModel = {
-  blocks: WritingChromeBlock[]
+  blocks: ReadonlyArray<WritingChromeBlock>
 }
 
 export type WritingBlockRange = {
