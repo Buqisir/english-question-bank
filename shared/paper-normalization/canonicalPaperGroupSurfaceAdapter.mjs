@@ -12,6 +12,7 @@ const COMPATIBILITY_GROUPS = new Set([
 const SECTION_BY_GROUP_TYPE = Object.freeze({
   cloze: '完形填空',
   grammarFill: '语法填空',
+  sevenChoices: '七选五',
 })
 
 function compatibilityDiagnostic(asset, groupId) {
@@ -231,6 +232,15 @@ export function buildCanonicalConsumptionSurfaceData({
   return {
     status: 'ready',
     semanticDigest: canonicalGroup.semanticSignature,
+    ...(canonicalGroup.occurrenceSignature
+      ? { occurrenceSignature: canonicalGroup.occurrenceSignature }
+      : {}),
+    ...(canonicalGroup.questionBlankPairs
+      ? { questionBlankPairs: canonicalGroup.questionBlankPairs }
+      : {}),
+    ...(canonicalGroup.optionBank
+      ? { optionBank: canonicalGroup.optionBank }
+      : {}),
     placementSignatures: canonicalGroup.questions.map(
       (question) => question.placementSignature,
     ),

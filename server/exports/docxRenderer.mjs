@@ -41,6 +41,7 @@
 // title run size 32 → 40 (20pt, 标准唯一放大项), both document builders.
 
 import { execFileSync } from 'node:child_process'
+import { createHash } from 'node:crypto'
 import {
   existsSync,
   mkdirSync,
@@ -270,12 +271,26 @@ function docxCanonicalParagraphRuns(
         `Canonical DOCX blank references missing question ${node.questionId}`,
       )
     }
+    const pairBookmarkStart = canonicalGroup.groupType === 'sevenChoices'
+      ? [canonicalBookmarkStart(
+          'canonical_pair',
+          `${node.questionId}:${node.blankId}`,
+        )]
+      : []
+    const pairBookmarkEnd = canonicalGroup.groupType === 'sevenChoices'
+      ? [canonicalBookmarkEnd(
+          'canonical_pair',
+          `${node.questionId}:${node.blankId}`,
+        )]
+      : []
     return [
+      ...pairBookmarkStart,
       run(`${padding}${displayNumber}${padding}`, {
         size: 21,
         underline: true,
       }),
       ...(node.hint ? [run(`(${node.hint})`, { size: 21 })] : []),
+      ...pairBookmarkEnd,
     ]
   })
 }
@@ -284,6 +299,8 @@ function canonicalGroupMatchesDocxDetail(canonicalGroup, detail) {
   const expectedGroupType =
     canonicalGroup.groupType === 'grammarFill'
       ? 'grammar_cloze'
+      : canonicalGroup.groupType === 'sevenChoices'
+        ? 'seven_choices'
       : canonicalGroup.groupType
   return (
     detail.groupType === expectedGroupType
@@ -292,6 +309,48 @@ function canonicalGroupMatchesDocxDetail(canonicalGroup, detail) {
       (question, index) => question.questionId === detail.questions[index]?.id,
     )
   )
+}
+
+function canonicalBookmarkIdentity(kind, value) {
+  const digest = createHash('sha256').update(`${kind}:${value}`).digest('hex')
+  return {
+    id: Number.parseInt(digest.slice(0, 7), 16),
+    name: `${kind}_${digest.slice(0, 24)}`,
+  }
+}
+
+function canonicalBookmarkStart(kind, value) {
+  const bookmark = canonicalBookmarkIdentity(kind, value)
+  return `<w:bookmarkStart w:id="${bookmark.id}" w:name="${bookmark.name}"/>`
+}
+
+function canonicalBookmarkEnd(kind, value) {
+  return `<w:bookmarkEnd w:id="${canonicalBookmarkIdentity(kind, value).id}"/>`
+}
+
+function pushCanonicalDocxSharedBank(body, canonicalGroup) {
+  if (!canonicalGroup.optionBank) return
+  const { bankId, options } = canonicalGroup.optionBank
+  body.push(canonicalBookmarkStart('canonical_semantic', canonicalGroup.semanticSignature))
+  body.push(canonicalBookmarkStart('canonical_occurrence', canonicalGroup.occurrenceSignature))
+  body.push(canonicalBookmarkStart('canonical_bank', bankId))
+  body.push(paragraph([run('选项', { bold: true, size: 21 })], {
+    before: 80,
+    after: 50,
+    keepNext: true,
+  }))
+  options.forEach((option) => {
+    body.push(canonicalBookmarkStart('canonical_option', option.optionId))
+    body.push(paragraph(`${option.label}. ${option.text}`, {
+      after: 40,
+      indentLeft: 360,
+      size: 21,
+    }))
+    body.push(canonicalBookmarkEnd('canonical_option', option.optionId))
+  })
+  body.push(canonicalBookmarkEnd('canonical_bank', bankId))
+  body.push(canonicalBookmarkEnd('canonical_occurrence', canonicalGroup.occurrenceSignature))
+  body.push(canonicalBookmarkEnd('canonical_semantic', canonicalGroup.semanticSignature))
 }
 
 function createCanonicalDocxGroupResolver(
@@ -306,6 +365,8 @@ function createCanonicalDocxGroupResolver(
           ? 'cloze'
           : detail.groupType === 'grammar_cloze'
             ? 'grammar-fill'
+            : detail.groupType === 'seven_choices'
+              ? 'seven-choices'
             : null
       if (!familyContractId) return null
       const selection = selectConsumerGroupMode({
@@ -1145,6 +1206,7 @@ function buildExamDocumentXml({
             { after: 60, firstLineIndent: 420 },
           )
           body.push(paragraph('', { after: 80 }))
+          pushCanonicalDocxSharedBank(body, canonicalGroup)
         } else if (passageLines.length > 0 && passageLines[0]) {
           const figuresInfo = getFiguresInfo(block.questionGroupId)
           passageLines.forEach((line) => {
@@ -1455,7 +1517,9 @@ function buildDocumentXml({ title, versionType, items, blocks, questionNumberSta
           body.push(docxWritingAnswerBox(detail))
         }
 
-        if (detail.groupType === 'seven_choices') {
+        if (canonicalGroup?.optionBank) {
+          pushCanonicalDocxSharedBank(body, canonicalGroup)
+        } else if (detail.groupType === 'seven_choices') {
           const sharedOptions = uniqueDocxOptions(detail.questions)
           if (sharedOptions.length > 0) {
             body.push(paragraph([run('选项', { bold: true, size: 21 })], { before: 80, after: 50, keepNext: true }))
@@ -1526,7 +1590,9 @@ function buildDocumentXml({ title, versionType, items, blocks, questionNumberSta
         body.push(docxWritingAnswerBox(detail))
       }
 
-      if (detail.groupType === 'seven_choices') {
+      if (canonicalGroup?.optionBank) {
+        pushCanonicalDocxSharedBank(body, canonicalGroup)
+      } else if (detail.groupType === 'seven_choices') {
         const sharedOptions = uniqueDocxOptions(detail.questions)
 
         if (sharedOptions.length > 0) {

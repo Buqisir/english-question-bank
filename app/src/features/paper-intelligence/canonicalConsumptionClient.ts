@@ -30,10 +30,22 @@ export async function loadScreenConsumption(
 
 export function canonicalConsumptionForGroup(
   consumption: WholePaperConsumption,
-  familyContractId: 'cloze' | 'grammar-fill',
+  familyContractId: 'cloze' | 'grammar-fill' | 'seven-choices',
   groupId: string,
 ): WholePaperConsumption {
   selectConsumerGroupMode({ consumption, familyContractId, groupId })
   return consumption
+}
+
+export function canonicalModeForGroup(
+  consumption: WholePaperConsumption,
+  familyContractId: 'cloze' | 'grammar-fill' | 'seven-choices',
+  groupId: string,
+): 'canonical' | 'legacy' {
+  return selectConsumerGroupMode({
+    consumption,
+    familyContractId,
+    groupId,
+  }).mode
 }
 import { selectConsumerGroupMode } from '../../../../shared/paper-canonical/consumerProjection.mjs'

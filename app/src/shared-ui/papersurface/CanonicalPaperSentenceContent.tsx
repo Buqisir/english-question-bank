@@ -105,6 +105,13 @@ export function renderCanonicalPaperSentenceContent(
     const style = {
       '--ps-paper-blank-width': paperBlankRuling[groupType].width,
     } as CanonicalBlankStyle
+    const canonicalPairAttrs = groupType === 'sevenChoices'
+      ? {
+          'data-canonical-pair': `${node.questionId}:${node.blankId}`,
+          'data-canonical-question-id': node.questionId,
+          'data-canonical-blank-id': node.blankId,
+        }
+      : {}
     const blank = isClickable ? (
       <button
         key={`${keyPrefix}-semantic-blank-${node.blankId}`}
@@ -114,7 +121,10 @@ export function renderCanonicalPaperSentenceContent(
         aria-pressed={isActive}
         aria-label={`聚焦第 ${node.questionNo} 题`}
         onClick={() => blankFocus.onQuestionClick(node.questionId)}
-        {...{ [paperSurfaceAnchorAttrs.blankId]: node.blankId }}
+        {...{
+          [paperSurfaceAnchorAttrs.blankId]: node.blankId,
+          ...canonicalPairAttrs,
+        }}
       >
         {node.questionNo}
       </button>
@@ -123,7 +133,10 @@ export function renderCanonicalPaperSentenceContent(
         key={`${keyPrefix}-semantic-blank-${node.blankId}`}
         className={className}
         style={style}
-        {...{ [paperSurfaceAnchorAttrs.blankId]: node.blankId }}
+        {...{
+          [paperSurfaceAnchorAttrs.blankId]: node.blankId,
+          ...canonicalPairAttrs,
+        }}
       >
         {node.questionNo}
       </span>

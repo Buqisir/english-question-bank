@@ -1,4 +1,7 @@
 import { segmentPaperText } from '../../../../shared/papersurface/segmentPaperText.mjs'
+import {
+  buildCanonicalConsumptionSurfaceData,
+} from '../../../../shared/paper-normalization/canonicalPaperGroupSurfaceAdapter.mjs'
 import type {
   PaperTextMap,
   PaperTextRange,
@@ -118,6 +121,7 @@ export type SevenChoicesChainView = {
 }
 
 export type SevenChoicesOptionView = {
+  optionId?: string
   label: string
   text: string
   chain: SevenChoicesChainView | null
@@ -129,6 +133,11 @@ export type SevenChoicesSurfaceModel = {
   surfaceData: PaperSurfaceData
   paperSection: string
   options: SevenChoicesOptionView[]
+  bankIdentity?: {
+    bankId: string
+    semanticSignature: string
+    occurrenceSignature: string
+  }
   chains: SevenChoicesChainView[]
   chainsByQuestionId: Record<string, SevenChoicesChainView>
   chainsByOptionLabel: Record<string, SevenChoicesChainView>
@@ -138,6 +147,7 @@ export type BuildSevenChoicesSurfaceModelInput = {
   asset: PaperAssetV1
   analysis: ReviewedSevenChoicesAnalysisV1
   groupId: string
+  canonicalConsumption?: unknown
 }
 
 const POSITION_LABELS: Record<string, string> = {
@@ -165,7 +175,7 @@ const SEVEN_CHOICES_BLANK_WRAPPER_RUN = String.raw`(?:[_＿]{3,}|\u00A0{3,}|[-�
 export function buildSevenChoicesSurfaceModel(
   input: BuildSevenChoicesSurfaceModelInput,
 ): SevenChoicesSurfaceModel {
-  const { asset, analysis, groupId } = input
+  const { asset, analysis, groupId, canonicalConsumption } = input
   if (asset.schemaVersion !== 'paper-asset-v1') {
     throw new Error('[I0-D] paper asset schemaVersion must be paper-asset-v1.')
   }
@@ -183,26 +193,60 @@ export function buildSevenChoicesSurfaceModel(
   if (group.groupType !== 'sevenChoices') {
     throw new Error(`[I0-D] requested group is not sevenChoices: ${groupId}`)
   }
-  if (!group.passage?.paragraphs?.length) {
+  if (!canonicalConsumption && !group.passage?.paragraphs?.length) {
     throw new Error(`[I0-D] sevenChoices group has no passage paragraphs: ${groupId}`)
   }
-  if (!group.optionBank?.length) {
+  if (!canonicalConsumption && !group.optionBank?.length) {
     throw new Error(`[I0-D] sevenChoices group has no optionBank: ${groupId}`)
   }
 
-  const textMap = buildSevenChoicesTextMap(asset, group)
+  const canonical = canonicalConsumption
+    ? buildCanonicalConsumptionSurfaceData({
+        consumption: canonicalConsumption,
+        familyContractId: 'seven-choices',
+        groupId,
+      })
+    : null
+  const textMap = canonical
+    ? canonical.surfaceData.textMap
+    : buildSevenChoicesTextMap(asset, group)
   const passageStructure: PassageStructure = {
     section: SEVEN_CHOICES_SECTION,
-    paragraphs: group.passage.paragraphs.map((paragraph, index) => ({
-      id: paragraph.paragraphId,
+    paragraphs: textMap.paragraphs.map((paragraph, index) => ({
+      id: paragraph.id,
       label: index === 0 ? '标题' : `P${index}`,
-      text: paragraph.text,
+      text: paragraph.sentences.map((sentence) => sentence.text).join(' '),
     })),
   }
-  const chains = buildChainViews({ asset, analysis, group, textMap })
+  const optionSource = canonical
+    ? canonical.optionBank?.options
+    : group.optionBank
+  if (!optionSource?.length) {
+    throw new Error(`[I0-D] sevenChoices shared bank is unavailable: ${groupId}`)
+  }
+  const questionOrder = canonical
+    ? canonical.surfaceData.questions.map((question) => ({
+        questionId: question.id,
+        questionNo: String(question.questionNo),
+      }))
+    : group.questionIds.flatMap((questionId) => {
+        const questionNo = asset.content.questions[questionId]?.questionNo
+        return questionNo === undefined || questionNo === null
+          ? []
+          : [{ questionId, questionNo: String(questionNo) }]
+      })
+  const chains = buildChainViews({
+    analysis,
+    questionOrder,
+    textMap,
+    optionTextByLabel: new Map(
+      optionSource.map((option) => [option.label, option.text]),
+    ),
+  })
   const chainsByQuestionId = Object.fromEntries(chains.map((chain) => [chain.questionId, chain]))
   const chainsByOptionLabel = Object.fromEntries(chains.map((chain) => [chain.correctOptionLabel, chain]))
-  const options = group.optionBank.map((option): SevenChoicesOptionView => ({
+  const options = optionSource.map((option): SevenChoicesOptionView => ({
+    ...('optionId' in option ? { optionId: option.optionId } : {}),
     label: option.label,
     text: option.text,
     chain: chainsByOptionLabel[option.label] ?? null,
@@ -211,13 +255,22 @@ export function buildSevenChoicesSurfaceModel(
   return {
     report: buildShellReport({ asset, group, groupId, chains }),
     passageStructures: { [SEVEN_CHOICES_SECTION]: passageStructure },
-    surfaceData: {
+    surfaceData: canonical?.surfaceData ?? {
       textMap,
       questions: [],
       evidence: [],
     },
     paperSection: SEVEN_CHOICES_SECTION,
     options,
+    ...(canonical?.optionBank && canonical.occurrenceSignature
+      ? {
+          bankIdentity: {
+            bankId: canonical.optionBank.bankId,
+            semanticSignature: canonical.semanticDigest,
+            occurrenceSignature: canonical.occurrenceSignature,
+          },
+        }
+      : {}),
     chains,
     chainsByQuestionId,
     chainsByOptionLabel,
@@ -264,19 +317,19 @@ function segmentSentencesForParagraph(
 }
 
 function buildChainViews(input: {
-  asset: PaperAssetV1
   analysis: ReviewedSevenChoicesAnalysisV1
-  group: PaperContentGroup
+  questionOrder: ReadonlyArray<{
+    questionId: string
+    questionNo: string
+  }>
   textMap: PaperTextMap
+  optionTextByLabel: ReadonlyMap<string, string>
 }): SevenChoicesChainView[] {
-  const { asset, analysis, group, textMap } = input
-  const optionTextByLabel = new Map((group.optionBank ?? []).map((option) => [option.label, option.text]))
+  const { analysis, questionOrder, textMap, optionTextByLabel } = input
 
-  return group.questionIds.flatMap((questionId, index): SevenChoicesChainView[] => {
-    const assetQuestion = asset.content.questions[questionId]
+  return questionOrder.flatMap(({ questionId, questionNo }, index): SevenChoicesChainView[] => {
     const item = analysis.questions[questionId]
-    if (!assetQuestion || !item) return []
-    const questionNo = String(assetQuestion.questionNo)
+    if (!item) return []
     const correctOptionLabel = item.optionFit.correctOptionLabel
     const correctOptionText = optionTextByLabel.get(correctOptionLabel) ?? item.optionFit.correctOptionText ?? ''
     const contextSignals = (item.mechanismSignals ?? []).filter((signal) => signal.signalSide === 'context-before' || signal.signalSide === 'context-after')

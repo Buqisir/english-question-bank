@@ -1,7 +1,7 @@
 import { layoutAbcdOptionSet } from './abcdLayout.mjs'
 import { digestJson } from './stable.mjs'
 
-const SUPPORTED_FAMILIES = new Set(['cloze', 'grammar-fill'])
+const SUPPORTED_FAMILIES = new Set(['cloze', 'grammar-fill', 'seven-choices'])
 
 function rejected(message, issues = []) {
   const error = new Error(message)
@@ -183,7 +183,10 @@ export function projectCanonicalConsumerGroup(input) {
     ? occurrence.choices.sets
     : occurrence.choices?.ownership === 'none'
       ? []
-      : null
+      : familyContractId === 'seven-choices'
+        && occurrence.choices?.ownership === 'shared_bank'
+        ? []
+        : null
   if (!Array.isArray(choiceSets)) {
     throw rejected(`Canonical occurrence ${groupId} has incompatible choice ownership`)
   }
@@ -221,6 +224,13 @@ export function projectCanonicalConsumerGroup(input) {
     return {
       questionId,
       questionNo: number,
+      ...(familyContractId === 'seven-choices'
+        ? {
+            blankId: occurrence.blanks.find(
+              (blank) => blank.questionId === questionId,
+            )?.blankId,
+          }
+        : {}),
       stem: '',
       options,
       layoutPlan,
@@ -228,18 +238,82 @@ export function projectCanonicalConsumerGroup(input) {
     }
   })
 
+  let questionBlankPairs
+  let optionBank
+  let occurrenceSignature
+  if (familyContractId === 'seven-choices') {
+    questionBlankPairs = occurrence.questionBlankPairs
+    if (
+      !Array.isArray(questionBlankPairs)
+      || questionBlankPairs.length !== 5
+      || new Set(questionBlankPairs.map((pair) => pair?.questionId)).size !== 5
+      || new Set(questionBlankPairs.map((pair) => pair?.blankId)).size !== 5
+      || questionBlankPairs.some(
+        (pair, index) =>
+          Object.keys(pair || {}).sort().join(',') !== 'blankId,questionId'
+          || pair.questionId !== questions[index]?.questionId
+          || pair.blankId !== questions[index]?.blankId,
+      )
+    ) {
+      throw rejected(`Canonical occurrence ${groupId} does not carry five ordered Question/Blank pairs`)
+    }
+    const options = occurrence.choices.options
+    if (
+      Object.keys(occurrence.choices).sort().join(',') !== 'bankId,options,ownership'
+      || typeof occurrence.choices.bankId !== 'string'
+      || !Array.isArray(options)
+      || options.length !== 7
+      || new Set(options.map((option) => option?.optionId)).size !== 7
+      || options.some(
+        (option) =>
+          typeof option.optionId !== 'string'
+          || typeof option.label !== 'string'
+          || !Array.isArray(option.content),
+      )
+      || !occurrence.anchors
+      || occurrence.anchors.questionIds?.join(',') !== questionBlankPairs.map((pair) => pair.questionId).join(',')
+      || occurrence.anchors.blankIds?.join(',') !== questionBlankPairs.map((pair) => pair.blankId).join(',')
+      || occurrence.anchors.optionIds?.join(',') !== options.map((option) => option.optionId).join(',')
+    ) {
+      throw rejected(`Canonical occurrence ${groupId} does not carry one closed seven-option bank`)
+    }
+    optionBank = {
+      bankId: occurrence.choices.bankId,
+      options: options.map((option) => ({
+        optionId: option.optionId,
+        label: option.label,
+        text: textContent(option.content),
+        content: option.content,
+      })),
+    }
+    occurrenceSignature = digestJson({
+      groupId,
+      questionBlankPairs,
+      bankId: optionBank.bankId,
+      optionIds: optionBank.options.map((option) => option.optionId),
+    })
+  }
+
   const semantic = {
     paperId: input.consumption.paperId,
     groupId,
     familyContractId,
     paragraphs,
     questions: questions.map(({ layoutPlan: _layoutPlan, placementSignature: _placementSignature, ...question }) => question),
+    ...(optionBank ? { optionBank } : {}),
   }
   return Object.freeze({
-    groupType: familyContractId === 'grammar-fill' ? 'grammarFill' : 'cloze',
+    groupType:
+      familyContractId === 'grammar-fill'
+        ? 'grammarFill'
+        : familyContractId === 'seven-choices'
+          ? 'sevenChoices'
+          : 'cloze',
     ...semantic,
     paragraphs,
     questions,
+    ...(questionBlankPairs ? { questionBlankPairs } : {}),
+    ...(occurrenceSignature ? { occurrenceSignature } : {}),
     semanticSignature: digestJson(semantic),
   })
 }

@@ -912,7 +912,7 @@ assert(
 assert(
   'PaperSurface.tsx renders the option bank only when non-empty (C1/C2)',
   /\{optionBank\s*&&\s*optionBank\.length\s*>\s*0\s*&&\s*\(/.test(paperSurfaceSrc) &&
-    /<PaperSurfaceOptionBank\s+options=\{optionBank\}\s*\/>/.test(paperSurfaceSrc),
+    /<PaperSurfaceOptionBank[\s\S]{0,160}options=\{optionBank\}[\s\S]{0,160}identity=\{optionBankIdentity\}/.test(paperSurfaceSrc),
   'missing the optionBank && optionBank.length > 0 render guard',
 )
 
@@ -1824,11 +1824,12 @@ assert(
 // ─── 68-70. lecture-rail-scroll-fix QA round（真机 QA 抓出的两笔）───
 
 assert(
-  '68. PaperBrowsePage: 七选五 blank→questionId 映射从 asset 补喂（sevenChoices 的 surfaceData.questions 有意为空——A-G 池走 optionBank——不补喂则所有空降级为不可点 span），且 prop 已传入 PaperSurface',
+  '68. PaperBrowsePage: 七选五 blank→questionId 映射从 canonical surfaceData.questions 补喂（A-G 仍只走 shared bank），且 prop 已传入 PaperSurface',
   /blankFocusMode === 'paper-blank' && entry\.kind === 'sevenChoices'/.test(pageSrc) &&
-    /blankQuestionIdByNo\[String\(no\)\] = questionId/.test(pageSrc) &&
+    /for \(const question of surfaceData\.questions\)/.test(pageSrc) &&
+    /blankQuestionIdByNo\[String\(question\.questionNo\)\] = question\.id/.test(pageSrc) &&
     /blankQuestionIdByNo=\{blankQuestionIdByNo\}/.test(pageSrc),
-  'missing the sevenChoices blankQuestionIdByNo supplemental mapping or the prop wiring',
+  'missing the canonical sevenChoices blankQuestionIdByNo supplemental mapping or the prop wiring',
 )
 assert(
   '69. PaperSurface: blankQuestionIdByNo 补充映射只填缺口、从不覆盖 questions 派生条目（questions-derived wins on conflict）',

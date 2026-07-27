@@ -87,6 +87,7 @@ import {
   type GrammarFillPaperViewModel,
 } from '../paper-intelligence/grammarFillPaperViewAdapter.ts'
 import {
+  canonicalModeForGroup,
   canonicalConsumptionForGroup,
   loadScreenConsumption,
   type WholePaperConsumption,
@@ -586,6 +587,35 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
                 ),
               }),
             })
+          } else if (group?.groupType === 'sevenChoices') {
+            let sevenChoicesMode: 'canonical' | 'legacy'
+            try {
+              sevenChoicesMode = canonicalModeForGroup(
+                canonicalConsumption,
+                'seven-choices',
+                block.groupId,
+              )
+            } catch {
+              continue
+            }
+            if (!sevenChoicesAnalysis) continue
+            canonicalModels.set(block.groupId, {
+              kind: 'sevenChoices',
+              model: buildSevenChoicesSurfaceModel({
+                asset: loadedAsset,
+                analysis: sevenChoicesAnalysis,
+                groupId: block.groupId,
+                ...(sevenChoicesMode === 'canonical'
+                  ? {
+                      canonicalConsumption: canonicalConsumptionForGroup(
+                        canonicalConsumption,
+                        'seven-choices',
+                        block.groupId,
+                      ),
+                    }
+                  : {}),
+              }),
+            })
           }
         }
 
@@ -611,14 +641,9 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
               }
             } else if (group.groupType === 'sevenChoices') {
               if (!sevenChoicesAnalysis) throw new Error('未找到已审阅七选五解析')
-              models[block.groupId] = {
-                kind: 'sevenChoices',
-                model: buildSevenChoicesSurfaceModel({
-                  asset: loadedAsset,
-                  analysis: sevenChoicesAnalysis,
-                  groupId: block.groupId,
-                }),
-              }
+              const canonicalModel = canonicalModels.get(block.groupId)
+              if (!canonicalModel) throw new Error('七选五消费计划不完整')
+              models[block.groupId] = canonicalModel
             } else if (group.groupType === 'cloze') {
               models[block.groupId] = canonicalModels.get(block.groupId)!
             } else if (group.groupType === 'grammarFill') {
@@ -1463,21 +1488,14 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     if (lectureOpen && (entry.kind === 'cloze' || entry.kind === 'sevenChoices')) {
       blankFocusMode = 'paper-blank'
     }
-    // QA fix: 七选五 surfaceData.questions is intentionally [] (the A-G
-    // pool renders via optionBank, never per-question rows), so the
-    // blank → questionId map derived inside PaperSurface would be empty
-    // and every blank would fall back to the non-interactive span. Feed
-    // the mapping from the asset itself. Cloze needs nothing — its
-    // adapter emits real per-question rows.
+    // 七选五 A-G remains one shared optionBank. Its canonical Question
+    // identities carry zero Options and therefore collapse as visual rows,
+    // while still supplying the five blank → question joins used for focus.
     let blankQuestionIdByNo: Record<string, string> | undefined
     if (blankFocusMode === 'paper-blank' && entry.kind === 'sevenChoices') {
-      const group = asset?.content.groups[groupId]
-      if (group) {
-        blankQuestionIdByNo = {}
-        for (const questionId of group.questionIds) {
-          const no = asset?.content.questions[questionId]?.questionNo
-          if (no !== undefined && no !== null) blankQuestionIdByNo[String(no)] = questionId
-        }
+      blankQuestionIdByNo = {}
+      for (const question of surfaceData.questions) {
+        blankQuestionIdByNo[String(question.questionNo)] = question.id
       }
     }
 
@@ -1507,6 +1525,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
         // compatible with PaperQuestionOption ({label, text, translation?}
         // vs {label, text, chain}) — no adapter change needed.
         optionBank={entry.kind === 'sevenChoices' ? entry.model.options : undefined}
+        optionBankIdentity={entry.kind === 'sevenChoices' ? entry.model.bankIdentity : undefined}
         mode="lecture"
         lectureFocus={isPanelGroup ? lectureFocusForSelection : null}
         readingFocusBySection={{}}

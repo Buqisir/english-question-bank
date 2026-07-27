@@ -532,11 +532,19 @@ export type PaperSurfaceProps = {
    *
    * Optional — omitted (or empty) for every group type except
    * 七选五, and silently renders nothing when empty/undefined (no
-   * placeholder). PaperSurface attaches NO anchor attributes and NO
-   * click handler to this block: it is display-only and never
+   * placeholder). PaperSurface attaches stable canonical bank/Option
+   * identity anchors but no interactive paper-option anchor or click
+   * handler: it is display-only and never
    * participates in `onFocusIntent` / evidence / annotation wiring.
    */
   readonly optionBank?: ReadonlyArray<PaperQuestionOption>
+
+  /** Stable identity carried only by a canonical shared option bank. */
+  readonly optionBankIdentity?: {
+    readonly bankId: string
+    readonly semanticSignature: string
+    readonly occurrenceSignature: string
+  }
 
   /** ============ controlled-component props (host-owned) ============ */
 

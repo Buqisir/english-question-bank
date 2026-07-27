@@ -312,8 +312,11 @@ try {
   }
   const familyFallback = await loadPaperForConsumption({ paperId: fixture.source.paperId, consumerContract: consumerContractRefs.print_pdf }, legacyStore)
   assert.equal(familyFallback.disposition, 'ready')
-  assert.equal(familyFallback.selections.filter((selection) => selection.mode === 'legacy').length, 1)
-  assert.equal(familyFallback.selections.find((selection) => selection.mode === 'legacy').familyContractId, 'seven-choices')
+  assert.equal(familyFallback.selections.filter((selection) => selection.mode === 'legacy').length, 0)
+  assert.equal(
+    familyFallback.selections.find((selection) => selection.familyContractId === 'seven-choices').mode,
+    'canonical',
+  )
 
   assert.throws(
     () => publishCanonicalPaperPublication({

@@ -174,7 +174,10 @@ function renderCanonicalParagraph(canonicalGroup, paragraph, displayNumberByQues
     const hint = node.hint
       ? `<span class="print-blank-hint">(${escapeHtml(node.hint)})</span>`
       : ''
-    return `<span class="print-blank-unit"><span class="print-blank ${blankWidthClass}"><span class="print-blank-num">${displayNumber}</span></span>${hint}</span>`
+    const pairAttrs = canonicalGroup.groupType === 'sevenChoices'
+      ? ` data-canonical-pair="${escapeHtml(`${node.questionId}:${node.blankId}`)}" data-canonical-question-id="${escapeHtml(node.questionId)}" data-canonical-blank-id="${escapeHtml(node.blankId)}"`
+      : ''
+    return `<span class="print-blank-unit"${pairAttrs}><span class="print-blank ${blankWidthClass}"><span class="print-blank-num">${displayNumber}</span></span>${hint}</span>`
   }).join('')
 }
 
@@ -182,6 +185,8 @@ function canonicalGroupMatchesPrintDetail(canonicalGroup, detail) {
   const expectedGroupType =
     canonicalGroup.groupType === 'grammarFill'
       ? 'grammar_cloze'
+      : canonicalGroup.groupType === 'sevenChoices'
+        ? 'seven_choices'
       : canonicalGroup.groupType
   return (
     detail.groupType === expectedGroupType
@@ -190,6 +195,12 @@ function canonicalGroupMatchesPrintDetail(canonicalGroup, detail) {
       (question, index) => question.questionId === detail.questions[index]?.id,
     )
   )
+}
+
+function renderCanonicalSharedBank(canonicalGroup) {
+  if (!canonicalGroup.optionBank) return ''
+  const { bankId, options } = canonicalGroup.optionBank
+  return `<ol class="canonical-option-bank" data-canonical-bank-id="${escapeHtml(bankId)}" data-canonical-semantic-signature="${escapeHtml(canonicalGroup.semanticSignature)}" data-canonical-occurrence-signature="${escapeHtml(canonicalGroup.occurrenceSignature)}">${options.map((option) => `<li class="canonical-option-bank-item" data-canonical-option-id="${escapeHtml(option.optionId)}"><span>${escapeHtml(option.label)}.</span> ${escapeHtml(option.text)}</li>`).join('')}</ol>`
 }
 
 function cssBorderForBlankRuling(ruling) {
@@ -362,6 +373,8 @@ export function buildPrintHtml({
           ? 'cloze'
           : detail.groupType === 'grammar_cloze'
             ? 'grammar-fill'
+            : detail.groupType === 'seven_choices'
+              ? 'seven-choices'
             : null
       if (!familyContractId) return null
       const selection = selectConsumerGroupMode({
@@ -520,6 +533,7 @@ export function buildPrintHtml({
                 )}</p>`,
             )
             .join('')}</div>`
+          groupHtml += renderCanonicalSharedBank(canonicalGroup)
         } else if (passage) {
           const figuresInfo = getFiguresInfo(block.questionGroupId)
           groupHtml += `<div class="passage">${passage.split(/\n/).map((line) => renderPassageLine(line, detail.groupType, figuresInfo, imageMode, images, blankCounter)).join('')}</div>`
@@ -823,6 +837,17 @@ body {
 
 .options-list p {
   margin: 0.1em 0;
+}
+
+.canonical-option-bank {
+  list-style: none;
+  margin: 0.4em 0 0.6em 2em;
+  padding: 0;
+}
+
+.canonical-option-bank-item {
+  margin: 0.1em 0;
+  break-inside: avoid;
 }
 
 .options-inline {

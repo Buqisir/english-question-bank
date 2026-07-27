@@ -98,11 +98,10 @@ type PaperSurfaceComponentProps = Omit<PaperSurfaceProps, 'blankFocusMode'> & {
   readonly blankFocusMode?: PaperSurfaceBlankFocusMode
   /**
    * lecture-rail-scroll-fix QA fix: supplemental blank-number →
-   * questionId entries for surfaces whose `questions` prop is
-   * intentionally empty (七选五 renders its A-G pool via `optionBank`,
-   * never per-question rows — so the blankFocus map derived from
-   * `questions` alone would be empty and every blank would fall back
-   * to the non-interactive span). Entries only fill numbers missing
+   * questionId entries for compatibility surfaces whose `questions` prop
+   * lacks blank metadata. Canonical 七选五 carries five zero-option Question
+   * identities, while its A-G pool remains exclusively in `optionBank`.
+   * Entries only fill numbers missing
    * from the `questions`-derived map; they never override it. Ignored
    * in 'rail' mode.
    */
@@ -122,6 +121,7 @@ export function PaperSurface(props: PaperSurfaceComponentProps): ReactNode {
     evidence,
     questions,
     optionBank,
+    optionBankIdentity,
     mode,
     lectureFocus,
     // readingFocusBySection is accepted but not rendered in B3.
@@ -291,13 +291,16 @@ export function PaperSurface(props: PaperSurfaceComponentProps): ReactNode {
         {/* seven-options-on-paper: the 七选五 A-G candidate-sentence
             pool, printed once after the passage (real exam papers print
             this pool once under the blanked passage, not per blank).
-            Display-only — no anchor attrs, no click handler, never
-            wired into onFocusIntent. Every current adapter feeds exactly
+            Display-only — stable canonical identity anchors only, with no
+            click handler and never wired into onFocusIntent. Every current adapter feeds exactly
             one section per PaperSurface mount, so rendering this once
             here (rather than per-section) matches "right after the
             passage" without a risk of duplicating it across sections. */}
         {optionBank && optionBank.length > 0 && (
-          <PaperSurfaceOptionBank options={optionBank} />
+          <PaperSurfaceOptionBank
+            options={optionBank}
+            identity={optionBankIdentity}
+          />
         )}
         {/* Render global questions (no section). I15: the rail is
             suppressed ONLY in 'in-passage' mode (blankFocus.renderer
@@ -825,7 +828,8 @@ function PaperSurfaceOptionList({
 /**
  * Static A-G candidate-sentence pool for 七选五, printed once after the
  * passage. Deliberately the ONLY option renderer in this file with:
- *   - no `paperSurfaceAnchorAttrs` (no `data-paper-*` anchor of any kind),
+ *   - no interactive `paperSurfaceAnchorAttrs` option key,
+ *   - stable `data-canonical-*` bank/Option/signature identity,
  *   - no `onClick` / focus wiring of any kind.
  * It is pure display, mirroring the docx handout export's deduped
  * "选项" block (single column, `A. ` prefix) — see
@@ -833,16 +837,31 @@ function PaperSurfaceOptionList({
  * source. PaperSurface stays dumb: this never calls back into the host.
  */
 type PaperSurfaceOptionBankProps = {
-  options: ReadonlyArray<PaperQuestionOption>
+  options: ReadonlyArray<PaperQuestionOption & { readonly optionId?: string }>
+  identity?: {
+    readonly bankId: string
+    readonly semanticSignature: string
+    readonly occurrenceSignature: string
+  }
 }
 
 function PaperSurfaceOptionBank({
   options,
+  identity,
 }: PaperSurfaceOptionBankProps): ReactNode {
   return (
-    <ol className="ps-option-bank">
+    <ol
+      className="ps-option-bank"
+      data-canonical-bank-id={identity?.bankId}
+      data-canonical-semantic-signature={identity?.semanticSignature}
+      data-canonical-occurrence-signature={identity?.occurrenceSignature}
+    >
       {options.map((opt) => (
-        <li key={opt.label} className="ps-option-bank-item">
+        <li
+          key={opt.optionId ?? opt.label}
+          className="ps-option-bank-item"
+          data-canonical-option-id={opt.optionId}
+        >
           <span className="ps-option-label">{opt.label}.</span>
           <span className="ps-option-bank-text">{opt.text}</span>
         </li>

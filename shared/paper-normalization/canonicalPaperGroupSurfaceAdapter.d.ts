@@ -23,7 +23,7 @@ export type CanonicalSurfaceBlankNode = {
 export type CanonicalSurfaceParagraph = {
   readonly id: string
   readonly section: string
-  readonly groupType: 'cloze' | 'grammarFill'
+  readonly groupType: 'cloze' | 'grammarFill' | 'sevenChoices'
   readonly sentences: ReadonlyArray<{
     readonly id: string
     readonly nodes: ReadonlyArray<CanonicalSurfaceTextNode | CanonicalSurfaceBlankNode>
@@ -82,11 +82,24 @@ export function buildCanonicalClozeSurfaceData(input: {
 
 export function buildCanonicalConsumptionSurfaceData(input: {
   consumption: unknown
-  familyContractId: 'cloze' | 'grammar-fill'
+  familyContractId: 'cloze' | 'grammar-fill' | 'seven-choices'
   groupId: string
 }): {
   readonly status: 'ready'
   readonly semanticDigest: string
+  readonly occurrenceSignature?: string
+  readonly questionBlankPairs?: ReadonlyArray<{
+    readonly questionId: string
+    readonly blankId: string
+  }>
+  readonly optionBank?: {
+    readonly bankId: string
+    readonly options: ReadonlyArray<{
+      readonly optionId: string
+      readonly label: string
+      readonly text: string
+    }>
+  }
   readonly placementSignatures: ReadonlyArray<string | null>
   readonly surfaceData: CanonicalPaperGroupSurfaceData
 }
