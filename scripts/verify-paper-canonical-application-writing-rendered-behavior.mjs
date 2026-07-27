@@ -191,6 +191,116 @@ function pdfPageContainingText(pdfPath, text) {
   return null
 }
 
+function pdfWords(pdfPath) {
+  const bbox = execFileSync(
+    'pdftotext',
+    ['-bbox-layout', pdfPath, '-'],
+    { encoding: 'utf8' },
+  )
+  return [...bbox.matchAll(
+    /<word xMin="([^"]+)" yMin="([^"]+)" xMax="([^"]+)" yMax="([^"]+)">([^<]+)<\/word>/g,
+  )].map((match) => ({
+    xMin: Number(match[1]),
+    yMin: Number(match[2]),
+    xMax: Number(match[3]),
+    yMax: Number(match[4]),
+    text: match[5],
+  }))
+}
+
+function convertedPdfResponseFrameBounds(pdfPath) {
+  const svgRoot = mkdtempSync(path.join(tmpdir(), 'eqb-application-frame-'))
+  try {
+    const svgPath = path.join(svgRoot, 'page.svg')
+    execFileSync('pdftocairo', [
+      '-f',
+      '1',
+      '-l',
+      '1',
+      '-svg',
+      pdfPath,
+      svgPath,
+    ])
+    const svg = readFileSync(svgPath, 'utf8')
+    const expectedWidthPt = 144 / 25.4 * 72
+    const expectedHeightPt = 65 / 25.4 * 72
+    const lines = [...svg.matchAll(
+      /<path[^>]+stroke="rgb\(0%, 0%, 0%\)"[^>]+d="M ([\d.]+) ([\d.]+) L ([\d.]+) ([\d.]+) "[^>]+transform="matrix\(([-\d.]+), ([-\d.]+), ([-\d.]+), ([-\d.]+), ([-\d.]+), ([-\d.]+)\)"\/>/g,
+    )].map((match) => {
+      const [x1, y1, x2, y2, a, b, c, d, e, f] = match
+        .slice(1)
+        .map(Number)
+      return {
+        x1: (a * x1) + (c * y1) + e,
+        y1: (b * x1) + (d * y1) + f,
+        x2: (a * x2) + (c * y2) + e,
+        y2: (b * x2) + (d * y2) + f,
+      }
+    })
+    const verticalFrameLines = lines.filter((line) =>
+      Math.abs(line.x1 - line.x2) <= 0.1
+      && Math.abs(Math.abs(line.y2 - line.y1) - expectedHeightPt) <= 1,
+    )
+    const horizontalFrameLines = lines.filter((line) =>
+      Math.abs(line.y1 - line.y2) <= 0.1
+      && Math.abs(Math.abs(line.x2 - line.x1) - expectedWidthPt) <= 1,
+    )
+    assert.equal(
+      verticalFrameLines.length,
+      2,
+      'converted PDF exposes both 65 mm response-frame vertical borders',
+    )
+    assert.equal(
+      horizontalFrameLines.length,
+      2,
+      'converted PDF exposes both 144 mm response-frame horizontal borders',
+    )
+    return {
+      left: Math.min(...verticalFrameLines.map((line) => line.x1)),
+      right: Math.max(...verticalFrameLines.map((line) => line.x1)),
+      top: Math.min(...horizontalFrameLines.map((line) => line.y1)),
+      bottom: Math.max(...horizontalFrameLines.map((line) => line.y1)),
+    }
+  } finally {
+    rmSync(svgRoot, { recursive: true, force: true })
+  }
+}
+
+function assertFixedBottomInsideConvertedPdfFrame(
+  pdfPath,
+  fixedBottom,
+  label,
+) {
+  if (fixedBottom.length === 0) return
+  const words = pdfWords(pdfPath)
+  const frame = convertedPdfResponseFrameBounds(pdfPath)
+  const inset = 0.5
+  for (const part of fixedBottom) {
+    const tokens = part.text.split(/\s+/)
+    const sequences = words
+      .map((word, index) => ({ word, index }))
+      .filter(({ index }) =>
+        tokens.every(
+          (token, offset) => words[index + offset]?.text === token,
+        ))
+      .map(({ index }) => words.slice(index, index + tokens.length))
+    assert.equal(
+      sequences.length,
+      1,
+      `${label}: converted PDF contains one fixed text sequence ${part.text}`,
+    )
+    for (const word of sequences[0]) {
+      assert.ok(
+        word.xMin >= frame.left + inset
+        && word.xMax <= frame.right - inset
+        && word.yMin >= frame.top + inset
+        && word.yMax <= frame.bottom - inset,
+        `${label}: fixed token ${word.text} bbox stays inside the response frame`,
+      )
+    }
+  }
+}
+
 function withAllApplicationFixedParts(consumption) {
   const next = structuredClone(consumption)
   const selection = next.selections.find(
@@ -522,6 +632,11 @@ for (const [label, consumption] of [
           ),
         )
       }
+      assertFixedBottomInsideConvertedPdfFrame(
+        convertedPdfPath,
+        canonical.answerRegion.givenBottom,
+        `DOCX ${label} ${versionType}`,
+      )
       if (persistActualArtifacts) {
         copyFileSync(
           docxPath,
@@ -839,6 +954,83 @@ async function assertActualPaperSurfaceArtifacts() {
         )
         await page.close()
       }
+    }
+    {
+      const consumption = providedScreenConsumption
+      const canonical = applicationGroup(consumption)
+      const asset = JSON.parse(readFileSync(
+        new URL(
+          '../app/public/paper-assets/paper-2026-i/latest/paper-asset.json',
+          import.meta.url,
+        ),
+        'utf8',
+      ))
+      const writingPartIndex = asset.content.blocks.findIndex(
+        (block) =>
+          block.type === 'partHeading'
+          && block.partId === 'part-2026-i-writing',
+      )
+      assert.notEqual(writingPartIndex, -1)
+      asset.content.blocks = asset.content.blocks.slice(writingPartIndex)
+      const page = await browser.newPage({
+        viewport: { width: 1280, height: 900 },
+      })
+      await page.route(
+        '**/api/paper-canonical/consumption?*',
+        (route) => route.fulfill({
+          status: 200,
+          contentType: 'application/json',
+          body: JSON.stringify(consumption),
+        }),
+      )
+      await page.route('**/paper-assets/**/paper-asset.json', (route) =>
+        route.fulfill({
+          status: 200,
+          contentType: 'application/json',
+          body: JSON.stringify(asset),
+        }))
+      await page.route('**/paper-assets/**/analyses/**', (route) =>
+        route.fulfill({ status: 404, body: '' }))
+      await page.route('**/paper-assets/**/figures/**', (route) =>
+        route.fulfill({ status: 404, body: '' }))
+      const url = new URL('canonical-consumption-qa.html', appUrl)
+      url.searchParams.set('paperId', consumption.paperId)
+      url.searchParams.set('focusGroupId', canonical.groupId)
+      await page.goto(url.href)
+      const response = page.locator(
+        `[data-canonical-response-slot-id="${canonical.answerRegion.responseSlotId}"]`,
+      )
+      await response.waitFor({ timeout: 10_000 })
+      const writingPages = page.locator('[data-pi-writing-page]')
+      assert.equal(await writingPages.count(), 2)
+      const applicationPage = response.locator(
+        'xpath=ancestor::*[@data-pi-writing-page]',
+      )
+      const applicationText = await applicationPage.innerText()
+      for (const expected of [
+        '第四部分 写作（共两节，满分40分）',
+        '第一节（满分15分）',
+        '（2）请按如下格式在答题卡的相应位置作答。',
+      ]) {
+        assert.equal(
+          applicationText.includes(expected),
+          true,
+          `real mixed Screen preserves Application chrome: ${expected}`,
+        )
+      }
+      const continuationText = await writingPages.nth(1).innerText()
+      for (const expected of [
+        '第二节（满分25分）',
+        '阅读下面材料，根据其内容和所给段落开头语续写两段，使之构成一篇完整的短文。',
+        '（2）请按如下格式在答题卡的相应位置作答。',
+      ]) {
+        assert.equal(
+          continuationText.includes(expected),
+          true,
+          `real mixed Screen preserves Continuation chrome: ${expected}`,
+        )
+      }
+      await page.close()
     }
     const printGeometry = new Map()
     for (const { label, versionType, html, canonical } of printArtifacts) {
