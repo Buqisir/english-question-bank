@@ -32,7 +32,7 @@
     {"id":"canonical-family-contract-v1","path":"../../schemas/paper-canonical/canonical-family-contract-v1.schema.json","sha256":"sha256:2f7d1d618cd8f86fcbe795f6890f73155aacaa0bc95811ce442b68704945b173"},
     {"id":"normalization-rules-v2","path":"../../schemas/paper-canonical/normalization-rules-v2.schema.json","sha256":"sha256:98d8facaf614fe7d43276b17ff1e9c7358ec23959f8454109051f251d565c033"},
     {"id":"source-adapters-v1","path":"../../schemas/paper-canonical/source-adapters-v1.schema.json","sha256":"sha256:de3c074ddb9adfcce3f24e1f077f27e99e1e6680b8779396843d23adf6c5c5a2"},
-    {"id":"renderer-typography-v2","path":"../../schemas/paper-canonical/renderer-typography-v2.schema.json","sha256":"sha256:ee40dea682c3b3ed3eea1b6d85de6d02a40a2c437a9bfea57bee140d0be99dc9"},
+    {"id":"renderer-typography-v2","path":"../../schemas/paper-canonical/renderer-typography-v2.schema.json","sha256":"sha256:a83847d3e3e9c24c6cc47093199dc5638899016aba074e0c315f62afe74b2bff"},
     {"id":"source-capture-v1","path":"../../schemas/paper-canonical/source-capture-v1.schema.json","sha256":"sha256:38b9f3b1074f79ddf489c72a5dbc3f684bee7930fa702245a921bfa993489a7c"},
     {"id":"canonical-paper-plan-v1","path":"../../schemas/paper-canonical/canonical-paper-plan-v1.schema.json","sha256":"sha256:49c5d05a7f3242f7569cdd4c2fdb8b004718cd997c267db3c4cce3cdbbc24300"},
     {"id":"canonical-question-group-v1","path":"../../schemas/paper-canonical/canonical-question-group-v1.schema.json","sha256":"sha256:b37d3d4a7af4e54a79f8306a8230b6c42f0320198adda5a3ef9477fb116cd225"},

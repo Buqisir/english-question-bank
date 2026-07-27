@@ -116,6 +116,45 @@ const authority = resolveCanonicalAuthority(canonicalAuthorityRef).closure
 const rendererTypography = authority.artifacts['renderer-typography']
 const authoritativeOuterOriginTwip =
   rendererTypography.coordinates.questionStemAndOuterOptionBlockStartTwip
+function validateRedigestedOuterOrigin(questionStemStartTwip) {
+  const artifacts = {
+    ...authority.artifacts,
+    'renderer-typography': structuredClone(rendererTypography),
+  }
+  artifacts[
+    'renderer-typography'
+  ].coordinates.questionStemAndOuterOptionBlockStartTwip = questionStemStartTwip
+  const manifest = structuredClone(authority.manifest)
+  manifest.artifacts.find(
+    ({ id }) => id === 'renderer-typography',
+  ).sha256 = digestJson(artifacts['renderer-typography'])
+  return validateAuthorityClosure({
+    manifest,
+    artifacts,
+    schemas: authority.schemas,
+  })
+}
+
+const fractionalOuterOriginValidation = validateRedigestedOuterOrigin(420.5)
+assert.equal(
+  fractionalOuterOriginValidation.issues.some(
+    ({ code, path }) =>
+      code === 'SCHEMA_TYPE'
+      && path === '$.artifacts.renderer-typography.coordinates.questionStemAndOuterOptionBlockStartTwip',
+  ),
+  true,
+  'a re-digested renderer authority rejects a fractional outer physical origin',
+)
+const negativeOuterOriginValidation = validateRedigestedOuterOrigin(-20)
+assert.equal(
+  negativeOuterOriginValidation.issues.some(
+    ({ code, path }) =>
+      code === 'SCHEMA_MINIMUM'
+      && path === '$.artifacts.renderer-typography.coordinates.questionStemAndOuterOptionBlockStartTwip',
+  ),
+  true,
+  'a re-digested renderer authority rejects a negative outer physical origin',
+)
 const driftedAuthorityArtifacts = {
   ...authority.artifacts,
   'renderer-typography': structuredClone(rendererTypography),

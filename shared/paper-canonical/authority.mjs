@@ -98,6 +98,8 @@ export function validateJsonSchema(value, schema, path = '$') {
     }
     if (rule.type === 'string' && typeof candidate !== 'string') issues.push(issue('SCHEMA_TYPE', candidatePath, 'Expected a string'))
     if (rule.type === 'number' && (typeof candidate !== 'number' || !Number.isFinite(candidate))) issues.push(issue('SCHEMA_TYPE', candidatePath, 'Expected a finite number'))
+    if (rule.type === 'integer' && !Number.isInteger(candidate)) issues.push(issue('SCHEMA_TYPE', candidatePath, 'Expected a finite integer'))
+    if (typeof candidate === 'number' && Number.isFinite(candidate) && typeof rule.minimum === 'number' && candidate < rule.minimum) issues.push(issue('SCHEMA_MINIMUM', candidatePath, `Expected at least ${rule.minimum}`))
   }
   walk(value, schema, path)
   return issues
