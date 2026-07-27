@@ -1,3 +1,8 @@
+/**
+ * Type declarations for `consumerProjection.mjs`.
+ * Keep this file in sync with `consumerProjection.d.ts`.
+ */
+
 export type CanonicalConsumerSelection = {
   mode: 'canonical' | 'legacy'
   familyContractId: string

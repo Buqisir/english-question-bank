@@ -11,11 +11,6 @@ const { assert, section, summary } = createVerifier(
   'Canonical Paper Group surface adapter declaration parity verify',
 )
 
-const DTS =
-  'shared/paper-normalization/canonicalPaperGroupSurfaceAdapter.d.ts'
-const DMTS =
-  'shared/paper-normalization/canonicalPaperGroupSurfaceAdapter.d.mts'
-
 function normalizeDeclarations(source) {
   return source
     .replace(/\/\*[\s\S]*?\*\//g, '')
@@ -25,21 +20,41 @@ function normalizeDeclarations(source) {
     .trim()
 }
 
-section('canonicalPaperGroupSurfaceAdapter declaration companions')
+function assertDeclarationCompanions({
+  label,
+  dtsPath,
+  dmtsPath,
+}) {
+  section(`${label} declaration companions`)
 
-const dts = readText(ROOT, DTS)
-const dmts = readText(ROOT, DMTS)
+  const dts = readText(ROOT, dtsPath)
+  const dmts = readText(ROOT, dmtsPath)
 
-assert(dts.length > 0, `${DTS} exists`)
-assert(dmts.length > 0, `${DMTS} exists`)
-assert(
-  normalizeDeclarations(dts) === normalizeDeclarations(dmts),
-  'canonicalPaperGroupSurfaceAdapter .d.ts and .d.mts declarations match',
-)
-assert(
-  dmts.includes('Keep this file in sync')
-    && dmts.includes('canonicalPaperGroupSurfaceAdapter.d.ts'),
-  `${DMTS} names its parity companion`,
-)
+  assert(dts.length > 0, `${dtsPath} exists`)
+  assert(dmts.length > 0, `${dmtsPath} exists`)
+  assert(
+    normalizeDeclarations(dts) === normalizeDeclarations(dmts),
+    `${label} .d.ts and .d.mts declarations match`,
+  )
+  assert(
+    dmts.includes('Keep this file in sync')
+      && dmts.includes(dtsPath.split('/').at(-1)),
+    `${dmtsPath} names its parity companion`,
+  )
+}
+
+assertDeclarationCompanions({
+  label: 'canonicalPaperGroupSurfaceAdapter',
+  dtsPath:
+    'shared/paper-normalization/canonicalPaperGroupSurfaceAdapter.d.ts',
+  dmtsPath:
+    'shared/paper-normalization/canonicalPaperGroupSurfaceAdapter.d.mts',
+})
+
+assertDeclarationCompanions({
+  label: 'consumerProjection',
+  dtsPath: 'shared/paper-canonical/consumerProjection.d.ts',
+  dmtsPath: 'shared/paper-canonical/consumerProjection.d.mts',
+})
 
 summary()

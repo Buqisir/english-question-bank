@@ -664,10 +664,50 @@ async function assertBrowserArtifacts() {
       ]
       const productionSignatures = []
       for (const analysisVariant of analysisVariants) {
+        let authRequestCount = 0
+        let businessStateRequestCount = 0
         let writingAnalysisRequestCount = 0
+        let mainEntryRequested = false
         const page = await browser.newPage({
           viewport: { width: 1280, height: 900 },
         })
+        page.on('request', (request) => {
+          if (new URL(request.url()).pathname === '/src/main.tsx') {
+            mainEntryRequested = true
+          }
+        })
+        await page.route('**/api/auth/me', (route) => {
+          authRequestCount += 1
+          return route.fulfill({
+            status: 200,
+            contentType: 'application/json',
+            body: JSON.stringify({
+              authRequired: true,
+              user: {
+                id: 'ticket-13-owner',
+                username: 'ticket-13-owner',
+                role: 'owner',
+              },
+            }),
+          })
+        })
+        await page.route('**/api/question-groups', (route) => {
+          businessStateRequestCount += 1
+          return route.fulfill({
+            status: 200,
+            contentType: 'application/json',
+            body: JSON.stringify({ questionGroups: [] }),
+          })
+        })
+        await page.route('**/api/ai/status', (route) =>
+          route.fulfill({
+            status: 200,
+            contentType: 'application/json',
+            body: JSON.stringify({
+              serverKeyAvailable: false,
+              dailyLimit: { limit: 0, used: 0, exceeded: false },
+            }),
+          }))
         await page.route(
           '**/api/paper-canonical/consumption?*',
           (route) => route.fulfill({
@@ -697,7 +737,8 @@ async function assertBrowserArtifacts() {
         })
         await page.route('**/paper-assets/**/figures/**', (route) =>
           route.fulfill({ status: 404, body: '' }))
-        const url = new URL('canonical-consumption-qa.html', appUrl)
+        const url = new URL('index.html', appUrl)
+        url.searchParams.set('view', 'paper-browse')
         url.searchParams.set('paperId', consumption.paperId)
         url.searchParams.set('focusGroupId', canonical.groupId)
         url.searchParams.set('lecture', '1')
@@ -715,6 +756,32 @@ async function assertBrowserArtifacts() {
             { cause: error },
           )
         }
+        assert.equal(
+          new URL(page.url()).pathname,
+          '/index.html',
+          'production PaperBrowse proof enters through index.html',
+        )
+        assert.equal(
+          new URL(page.url()).searchParams.get('view'),
+          'paper-browse',
+          'production App route selects ?view=paper-browse',
+        )
+        assert.equal(
+          mainEntryRequested,
+          true,
+          'index.html loads the production main.tsx entry',
+        )
+        assert.ok(
+          authRequestCount > 0,
+          'production AuthGate requests authenticated session state',
+        )
+        assert.ok(
+          businessStateRequestCount > 0,
+          'production App requests prepared question-group business state',
+        )
+        await page.locator('.topbar-username')
+          .filter({ hasText: 'ticket-13-owner' })
+          .waitFor()
         const writingPage = response.locator(
           'xpath=ancestor::*[@data-pi-writing-page]',
         )
