@@ -422,6 +422,18 @@ export function buildCanonicalApplicationWritingConsumptionSurfaceData({
     promptBlocks: canonicalGroup.promptBlocks,
     pageModel: {
       blocks: [
+        {
+          kind: 'partHeading',
+          text: canonicalGroup.paperChrome.part.text,
+        },
+        {
+          kind: 'sectionHeading',
+          text: canonicalGroup.paperChrome.section.text,
+        },
+        ...canonicalGroup.paperChrome.instructions.map((instruction) => ({
+          kind: 'instruction',
+          text: instruction.text,
+        })),
         { kind: 'passage' },
         answerBox,
       ],

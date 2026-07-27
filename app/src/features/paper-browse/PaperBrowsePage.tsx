@@ -179,54 +179,6 @@ type GroupModel =
   | { kind: 'unsupported'; groupType: string }
   | { kind: 'error'; message: string }
 
-function preserveCanonicalApplicationWholePaperChrome({
-  asset,
-  groupId,
-  canonicalPageModel,
-}: {
-  asset: PaperAssetV1
-  groupId: string
-  canonicalPageModel: WritingPaperViewModel['pageModel']
-}): WritingPaperViewModel['pageModel'] {
-  const group = asset.content.groups[groupId]
-  if (!group || group.groupType !== 'writing') return canonicalPageModel
-  const range = findWritingBlockRange(asset, group)
-  if (!range) return canonicalPageModel
-  const canonicalPassage = canonicalPageModel.blocks.find(
-    (block) => block.kind === 'passage',
-  )
-  const canonicalAnswerBox = canonicalPageModel.blocks.find(
-    (block) => block.kind === 'answerBox',
-  )
-  if (!canonicalPassage || !canonicalAnswerBox) {
-    throw new Error('Canonical Application Writing page model is incomplete')
-  }
-  const blocks: WritingPaperViewModel['pageModel']['blocks'][number][] = []
-  for (let index = range.startIdx; index <= range.endIdx; index += 1) {
-    const block = asset.content.blocks[index]
-    if (block.type === 'partHeading') {
-      blocks.push({ kind: 'partHeading', text: block.text })
-    } else if (block.type === 'sectionHeading') {
-      blocks.push({ kind: 'sectionHeading', text: block.text })
-    } else if (block.type === 'instruction') {
-      blocks.push({ kind: 'instruction', text: block.text })
-    } else if (block.type === 'group' && block.groupId === groupId) {
-      blocks.push(canonicalPassage)
-    } else if (
-      block.type === 'answerBox'
-      && block.writingTaskId === group.writingTaskId
-    ) {
-      blocks.push(canonicalAnswerBox)
-    }
-  }
-  return (
-    blocks.filter((block) => block.kind === 'passage').length === 1
-    && blocks.filter((block) => block.kind === 'answerBox').length === 1
-  )
-    ? { blocks }
-    : canonicalPageModel
-}
-
 // 讲评态按需补拉的 cloze/grammarFill/writing 解析——reading/sevenChoices 的
 // 解析已在挑题态初次加载时无条件拉取。'unavailable'
 // = 拉取过但没有（404/解析失败），讲评栏据此显「解析未发布」而不是一直显
@@ -752,16 +704,11 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
                   ),
                   groupId: block.groupId,
                 })
-              const pageModel = preserveCanonicalApplicationWholePaperChrome({
-                asset: loadedAsset,
-                groupId: block.groupId,
-                canonicalPageModel: canonicalWriting.pageModel,
-              })
               canonicalModels.set(block.groupId, {
                 kind: 'writing',
                 model: {
                   surfaceData: canonicalWriting.surfaceData,
-                  pageModel,
+                  pageModel: canonicalWriting.pageModel,
                   canonicalPromptBlocks: canonicalWriting.promptBlocks,
                 },
               })

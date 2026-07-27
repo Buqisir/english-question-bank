@@ -343,7 +343,27 @@ function projectReadingConsumerGroup(input, occurrence) {
 function projectApplicationWritingConsumerGroup(input, occurrence) {
   const { groupId } = input
   if (
-    !Array.isArray(occurrence.numbering)
+    typeof occurrence.paperChrome?.part?.partId !== 'string'
+    || typeof occurrence.paperChrome.part.instructionId !== 'string'
+    || typeof occurrence.paperChrome.part.text !== 'string'
+    || typeof occurrence.paperChrome?.section?.sectionId !== 'string'
+    || typeof occurrence.paperChrome.section.instructionId !== 'string'
+    || typeof occurrence.paperChrome.section.text !== 'string'
+    || !Array.isArray(occurrence.paperChrome.instructions)
+    || occurrence.paperChrome.instructions.some(
+      (instruction) =>
+        typeof instruction?.instructionId !== 'string'
+        || typeof instruction.text !== 'string'
+        || typeof instruction.placement !== 'string',
+    )
+    || new Set([
+      occurrence.paperChrome.part.instructionId,
+      occurrence.paperChrome.section.instructionId,
+      ...occurrence.paperChrome.instructions.map(
+        (instruction) => instruction.instructionId,
+      ),
+    ]).size !== occurrence.paperChrome.instructions.length + 2
+    || !Array.isArray(occurrence.numbering)
     || occurrence.numbering.length !== 0
     || !Array.isArray(occurrence.blanks)
     || occurrence.blanks.length !== 0
@@ -474,6 +494,7 @@ function projectApplicationWritingConsumerGroup(input, occurrence) {
     paperId: input.consumption.paperId,
     groupId,
     familyContractId: 'application-writing',
+    paperChrome: structuredClone(occurrence.paperChrome),
     writingTaskId: occurrence.writingTaskId,
     promptBlocks,
     situation: structuredClone(occurrence.situation),
@@ -488,6 +509,13 @@ function projectApplicationWritingConsumerGroup(input, occurrence) {
     questions: Object.freeze([]),
     occurrenceSignature: digestJson({
       groupId,
+      paperChromeInstructionIds: [
+        occurrence.paperChrome.part.instructionId,
+        occurrence.paperChrome.section.instructionId,
+        ...occurrence.paperChrome.instructions.map(
+          (instruction) => instruction.instructionId,
+        ),
+      ],
       promptBlockIds: promptBlocks.map((block) => block.nodeId),
       givenPartIds: [...givenTop, ...givenBottom]
         .map((part) => part.givenPartId),

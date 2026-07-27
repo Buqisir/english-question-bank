@@ -972,6 +972,25 @@ async function assertActualPaperSurfaceArtifacts() {
       )
       assert.notEqual(writingPartIndex, -1)
       asset.content.blocks = asset.content.blocks.slice(writingPartIndex)
+      const applicationGroupIndex = asset.content.blocks.findIndex(
+        (block) =>
+          block.type === 'group'
+          && block.groupId === canonical.groupId,
+      )
+      assert.notEqual(applicationGroupIndex, -1)
+      asset.content.blocks = asset.content.blocks.map((block, index) => {
+        if (index >= applicationGroupIndex) return block
+        if (block.type === 'partHeading') {
+          return { ...block, text: 'POISONED LEGACY APPLICATION PART HEADING' }
+        }
+        if (block.type === 'sectionHeading') {
+          return { ...block, text: 'POISONED LEGACY APPLICATION SECTION HEADING' }
+        }
+        if (block.type === 'instruction') {
+          return { ...block, text: 'POISONED LEGACY APPLICATION INSTRUCTION' }
+        }
+        return block
+      })
       const page = await browser.newPage({
         viewport: { width: 1280, height: 900 },
       })
@@ -1008,16 +1027,20 @@ async function assertActualPaperSurfaceArtifacts() {
       )
       const applicationText = await applicationPage.innerText()
       for (const expected of [
-        '第四部分 写作（共两节，满分40分）',
-        '第一节（满分15分）',
-        '（2）请按如下格式在答题卡的相应位置作答。',
+        'Writing',
+        'Writing tasks',
       ]) {
         assert.equal(
           applicationText.includes(expected),
           true,
-          `real mixed Screen preserves Application chrome: ${expected}`,
+          `real mixed Screen consumes canonical Application chrome: ${expected}`,
         )
       }
+      assert.equal(
+        applicationText.includes('POISONED LEGACY APPLICATION'),
+        false,
+        'real mixed Screen rejects legacy Application chrome',
+      )
       const continuationText = await writingPages.nth(1).innerText()
       for (const expected of [
         '第二节（满分25分）',
