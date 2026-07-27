@@ -112,7 +112,13 @@ export function WritingPaperPage({
                     {block.givenTop.map((part, lineIndex) => (
                       <p
                         key={typeof part === 'string' ? `t${lineIndex}` : part.givenPartId}
-                        className="pi-writing-answer-given"
+                        className={[
+                          'pi-writing-answer-given',
+                          typeof part !== 'string'
+                          && part.role === 'title'
+                            ? 'pi-writing-answer-given--title'
+                            : '',
+                        ].filter(Boolean).join(' ')}
                         {...writingGivenIdentity(part)}
                       >
                         {writingGivenText(part)}

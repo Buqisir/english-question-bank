@@ -43,6 +43,9 @@ import { headingKind } from '../shared/papersurface/headingKind.mjs'
 import { resolveFigureMarker } from '../shared/figures/resolveFigureMarker.mjs'
 import { translateAbcdPlanToPointPlacement } from '../shared/paper-canonical/abcdLayout.mjs'
 import {
+  applicationWritingNoticeLines,
+} from '../shared/paper-canonical/applicationWritingDisplay.mjs'
+import {
   projectCanonicalConsumerGroup,
   selectConsumerGroupMode,
 } from '../shared/paper-canonical/consumerProjection.mjs'
@@ -226,8 +229,15 @@ function renderCanonicalReadingBlocks(canonicalGroup) {
 function renderCanonicalApplicationWriting(canonicalGroup) {
   const renderGivenParts = (parts, position) => parts.map((part) =>
     `<p class="canonical-application-given canonical-application-given--${position}" data-canonical-given-part-id="${escapeHtml(part.givenPartId)}" data-canonical-given-role="${escapeHtml(part.role)}" data-canonical-given-placement="${escapeHtml(part.placement)}">${renderCanonicalInlineNodes(part.inlines)}</p>`).join('')
-  const prompt = canonicalGroup.promptBlocks.map((block) =>
-    `<p data-canonical-block-id="${escapeHtml(block.nodeId)}">${renderCanonicalInlineNodes(block.inlines)}</p>`).join('')
+  const prompt = canonicalGroup.promptBlocks.map((block) => {
+    const noticeLines = block.inlines.length === 1
+      ? applicationWritingNoticeLines(block.inlines[0].text)
+      : null
+    const content = noticeLines
+      ? `<span data-canonical-content-node-id="${escapeHtml(block.inlines[0].nodeId)}">${noticeLines.map((line) => `<span class="canonical-application-notice-line canonical-application-notice-line--${line.kind}" data-canonical-application-notice-line="${line.kind}">${escapeHtml(line.text)}</span>`).join('')}</span>`
+      : renderCanonicalInlineNodes(block.inlines)
+    return `<p data-canonical-block-id="${escapeHtml(block.nodeId)}"${noticeLines ? ' data-canonical-application-notice=""' : ''}>${content}</p>`
+  }).join('')
   const response = canonicalGroup.answerRegion
   return `<div class="canonical-application-writing" data-canonical-application-semantic-signature="${escapeHtml(canonicalGroup.semanticSignature)}" data-canonical-application-occurrence-signature="${escapeHtml(canonicalGroup.occurrenceSignature)}"><div class="passage canonical-application-prompt">${prompt}</div><div class="writing-answer-box canonical-application-response" data-canonical-answer-region-ref="${escapeHtml(response.answerRegionRef)}" data-canonical-response-slot-id="${escapeHtml(response.responseSlotId)}" style="width:144mm;height:65mm;"><div class="canonical-application-given-top">${renderGivenParts(response.givenTop, 'top')}</div><div class="canonical-application-given-bottom">${renderGivenParts(response.givenBottom, 'bottom')}</div></div></div>`
 }
@@ -1143,9 +1153,27 @@ body {
   margin: 0;
 }
 
+.canonical-application-given[data-canonical-given-role="title"] {
+  text-align: center;
+}
+
 .canonical-application-given-bottom {
   margin-top: auto;
   text-align: right;
+}
+
+.canonical-application-prompt p[data-canonical-application-notice] {
+  text-align: left;
+  text-indent: 0;
+}
+
+.canonical-application-notice-line {
+  display: block;
+  width: fit-content;
+}
+
+.canonical-application-notice-line--instruction {
+  margin-left: 2em;
 }
 
 .writing-starter-line {

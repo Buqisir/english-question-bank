@@ -246,6 +246,20 @@
   text-indent: var(--ps-passage-indent);
 }
 
+.ps-canonical-application-prompt p[data-canonical-application-notice] {
+  text-align: left;
+  text-indent: 0;
+}
+
+.ps-canonical-application-notice-line {
+  display: block;
+  width: fit-content;
+}
+
+.ps-canonical-application-notice-line--instruction {
+  margin-left: var(--ps-passage-indent);
+}
+
 /* ─── Sentence ─────────────────────────────────────────────────── */
 
 .ps-sentence {

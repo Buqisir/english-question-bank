@@ -40,6 +40,8 @@ const actualArtifactRoot = path.resolve(
   process.env.EQB_ACTUAL_ARTIFACT_ROOT
     || '.scratch/ticket-11-application-writing',
 )
+const numberedNoticeText =
+  '注意：(1)写作词数应为80个左右；(2)请按如下格式在答题卡的相应位置作答。'
 if (persistActualArtifacts) {
   mkdirSync(actualArtifactRoot, { recursive: true })
 }
@@ -208,6 +210,30 @@ function pdfWords(pdfPath) {
   }))
 }
 
+function pdfTextBounds(pdfPath, text, label) {
+  const words = pdfWords(pdfPath)
+  const target = text.replaceAll(/\s/g, '')
+  const sequences = []
+  for (let start = 0; start < words.length; start += 1) {
+    let joined = ''
+    for (let end = start; end < words.length; end += 1) {
+      joined += words[end].text.replaceAll(/\s/g, '')
+      if (joined === target) {
+        sequences.push(words.slice(start, end + 1))
+        break
+      }
+      if (joined.length >= target.length || !target.startsWith(joined)) break
+    }
+  }
+  assert.equal(sequences.length, 1, `${label}: PDF contains one ${text}`)
+  return {
+    left: Math.min(...sequences[0].map((word) => word.xMin)),
+    right: Math.max(...sequences[0].map((word) => word.xMax)),
+    top: Math.min(...sequences[0].map((word) => word.yMin)),
+    bottom: Math.max(...sequences[0].map((word) => word.yMax)),
+  }
+}
+
 function convertedPdfResponseFrameBounds(pdfPath) {
   const svgRoot = mkdtempSync(path.join(tmpdir(), 'eqb-application-frame-'))
   try {
@@ -245,6 +271,39 @@ function convertedPdfResponseFrameBounds(pdfPath) {
       Math.abs(line.y1 - line.y2) <= 0.1
       && Math.abs(Math.abs(line.x2 - line.x1) - expectedWidthPt) <= 1,
     )
+    if (
+      verticalFrameLines.length === 0
+      && horizontalFrameLines.length === 0
+    ) {
+      const rectangles = [...svg.matchAll(
+        /<path[^>]+stroke="rgb\(0%, 0%, 0%\)"[^>]+d="M ([\d.]+) ([\d.]+) L ([\d.]+) ([\d.]+) L ([\d.]+) ([\d.]+) L ([\d.]+) ([\d.]+) Z[^"]*"[^>]+transform="matrix\(([-\d.]+), ([-\d.]+), ([-\d.]+), ([-\d.]+), ([-\d.]+), ([-\d.]+)\)"\/>/g,
+      )].map((match) => {
+        const values = match.slice(1).map(Number)
+        const points = [
+          [values[0], values[1]],
+          [values[2], values[3]],
+          [values[4], values[5]],
+          [values[6], values[7]],
+        ].map(([x, y]) => ({
+          x: (values[8] * x) + (values[10] * y) + values[12],
+          y: (values[9] * x) + (values[11] * y) + values[13],
+        }))
+        return {
+          left: Math.min(...points.map((point) => point.x)),
+          right: Math.max(...points.map((point) => point.x)),
+          top: Math.min(...points.map((point) => point.y)),
+          bottom: Math.max(...points.map((point) => point.y)),
+        }
+      }).filter((rectangle) =>
+        Math.abs((rectangle.right - rectangle.left) - expectedWidthPt) <= 2
+        && Math.abs((rectangle.bottom - rectangle.top) - expectedHeightPt) <= 2)
+      assert.equal(
+        rectangles.length,
+        1,
+        'converted PDF exposes one 144 mm by 65 mm response-frame rectangle',
+      )
+      return rectangles[0]
+    }
     assert.equal(
       verticalFrameLines.length,
       2,
@@ -264,6 +323,62 @@ function convertedPdfResponseFrameBounds(pdfPath) {
   } finally {
     rmSync(svgRoot, { recursive: true, force: true })
   }
+}
+
+function assertApplicationFixedPartPdfAlignment(pdfPath, canonical, label) {
+  const frame = convertedPdfResponseFrameBounds(pdfPath)
+  const frameCenter = (frame.left + frame.right) / 2
+  const lastBottomPart = canonical.answerRegion.givenBottom.at(-1)
+  for (const part of [
+    ...canonical.answerRegion.givenTop,
+    ...canonical.answerRegion.givenBottom,
+  ]) {
+    const bounds = pdfTextBounds(pdfPath, part.text, label)
+    if (part.role === 'title') {
+      assert.ok(
+        Math.abs(((bounds.left + bounds.right) / 2) - frameCenter) <= 1,
+        `${label}: title is centered in the response frame`,
+      )
+      assert.ok(
+        bounds.top - frame.top <= 20,
+        `${label}: title stays at the top of the response frame`,
+      )
+    } else if (['salutation', 'opening'].includes(part.role)) {
+      assert.ok(
+        bounds.left - frame.left <= 20,
+        `${label}: ${part.role} stays left-aligned`,
+      )
+    } else {
+      assert.ok(
+        frame.right - bounds.right <= 20,
+        `${label}: ${part.role} stays right-aligned`,
+      )
+      if (part === lastBottomPart) {
+        assert.ok(
+          frame.bottom - bounds.bottom <= 40,
+          `${label}: ${part.role} stays at the bottom of the response frame`,
+        )
+      }
+    }
+  }
+}
+
+function assertNumberedNoticePdfLayout(pdfPath, canonical, label) {
+  const block = canonical.promptBlocks.find(
+    (candidate) => candidate.text === numberedNoticeText,
+  )
+  if (!block) return
+  const expectedLines = [
+    '注意：',
+    '(1)写作词数应为80个左右；',
+    '(2)请按如下格式在答题卡的相应位置作答。',
+  ]
+  const bounds = expectedLines.map((line) =>
+    pdfTextBounds(pdfPath, line, `${label} notice`))
+  assert.ok(bounds[1].top > bounds[0].top)
+  assert.ok(bounds[2].top > bounds[1].top)
+  assert.ok(bounds[1].left > bounds[0].left)
+  assert.ok(bounds[2].left > bounds[0].left)
 }
 
 function assertFixedBottomInsideConvertedPdfFrame(
@@ -337,7 +452,75 @@ function withAllApplicationFixedParts(consumption) {
     ...occurrence.answerRegion.givenTop,
     ...occurrence.answerRegion.givenBottom,
   ].map((part) => part.givenPartId)
+  const noticeBlock = occurrence.content.blocks.find((block) =>
+    block.inlines?.some((inline) => inline.text.startsWith('注意：')))
+  assert.ok(noticeBlock)
+  assert.equal(noticeBlock.inlines.length, 1)
+  noticeBlock.inlines[0].text = numberedNoticeText
+  const ownedNoticeBlock = occurrence.prompt.blocks.find(
+    (block) => block.nodeId === noticeBlock.nodeId,
+  )
+  assert.ok(ownedNoticeBlock)
+  assert.equal(ownedNoticeBlock.inlines.length, 1)
+  ownedNoticeBlock.inlines[0].text = numberedNoticeText
   return next
+}
+
+async function assertBrowserFixedPartAlignment(
+  page,
+  response,
+  canonical,
+  label,
+) {
+  const responseBox = await response.boundingBox()
+  assert.ok(responseBox)
+  const responseCenter = responseBox.x + (responseBox.width / 2)
+  const lastBottomPart = canonical.answerRegion.givenBottom.at(-1)
+  for (const part of [
+    ...canonical.answerRegion.givenTop,
+    ...canonical.answerRegion.givenBottom,
+  ]) {
+    const fixed = page.locator(
+      `[data-canonical-given-part-id="${part.givenPartId}"]`,
+    )
+    const textBox = await fixed.evaluate((element) => {
+      const range = document.createRange()
+      range.selectNodeContents(element)
+      const rect = range.getBoundingClientRect()
+      return {
+        left: rect.left,
+        right: rect.right,
+        top: rect.top,
+        bottom: rect.bottom,
+      }
+    })
+    if (part.role === 'title') {
+      assert.ok(
+        Math.abs(((textBox.left + textBox.right) / 2) - responseCenter) <= 1,
+        `${label}: title is centered in the response box`,
+      )
+      assert.ok(
+        textBox.top - responseBox.y <= 30,
+        `${label}: title stays at the response-box top`,
+      )
+    } else if (['salutation', 'opening'].includes(part.role)) {
+      assert.ok(
+        textBox.left - responseBox.x <= 30,
+        `${label}: ${part.role} stays left-aligned`,
+      )
+    } else {
+      assert.ok(
+        (responseBox.x + responseBox.width) - textBox.right <= 30,
+        `${label}: ${part.role} stays right-aligned`,
+      )
+      if (part === lastBottomPart) {
+        assert.ok(
+          (responseBox.y + responseBox.height) - textBox.bottom <= 30,
+          `${label}: ${part.role} stays at the response-box bottom`,
+        )
+      }
+    }
+  }
 }
 
 const docxRenderer = createDocxRenderer({
@@ -637,6 +820,16 @@ for (const [label, consumption] of [
         canonical.answerRegion.givenBottom,
         `DOCX ${label} ${versionType}`,
       )
+      assertApplicationFixedPartPdfAlignment(
+        convertedPdfPath,
+        canonical,
+        `DOCX ${label} ${versionType}`,
+      )
+      assertNumberedNoticePdfLayout(
+        convertedPdfPath,
+        canonical,
+        `DOCX ${label} ${versionType}`,
+      )
       if (persistActualArtifacts) {
         copyFileSync(
           docxPath,
@@ -787,6 +980,59 @@ async function assertActualPaperSurfaceArtifacts() {
           canonical.answerRegion.givenTop.length
             + canonical.answerRegion.givenBottom.length,
         )
+        await assertBrowserFixedPartAlignment(
+          page,
+          response,
+          canonical,
+          `Screen ${label} ${teacher ? 'teacher' : 'student'}`,
+        )
+        const noticeLines = page.locator(
+          '[data-canonical-application-notice-line]',
+        )
+        const numberedNoticeBlock = canonical.promptBlocks.find((block) =>
+          /^注意[：:]\s*[(（]\d+[)）]/.test(block.text))
+        if (numberedNoticeBlock) {
+          const renderedNoticeLines = await noticeLines.evaluateAll(
+            (elements) => elements.map((element) => ({
+              kind: element.getAttribute(
+                'data-canonical-application-notice-line',
+              ),
+              text: element.textContent,
+              x: element.getBoundingClientRect().x,
+              y: element.getBoundingClientRect().y,
+            })),
+          )
+          assert.equal(renderedNoticeLines[0].kind, 'label')
+          assert.equal(renderedNoticeLines[0].text, '注意：')
+          assert.ok(renderedNoticeLines.length >= 2)
+          for (const [index, line] of renderedNoticeLines.slice(1).entries()) {
+            assert.equal(line.kind, 'instruction')
+            assert.ok(line.y > renderedNoticeLines[index].y)
+            assert.ok(line.x > renderedNoticeLines[0].x)
+          }
+          assert.equal(
+            renderedNoticeLines.map((line) => line.text).join(''),
+            numberedNoticeBlock.text.replaceAll(/\s/g, ''),
+          )
+          if (numberedNoticeBlock.text === numberedNoticeText) {
+            assert.deepEqual(
+              renderedNoticeLines.map(({ kind, text }) => ({ kind, text })),
+              [
+                { kind: 'label', text: '注意：' },
+                {
+                  kind: 'instruction',
+                  text: '(1)写作词数应为80个左右；',
+                },
+                {
+                  kind: 'instruction',
+                  text: '(2)请按如下格式在答题卡的相应位置作答。',
+                },
+              ],
+            )
+          }
+        } else {
+          assert.equal(await noticeLines.count(), 0)
+        }
         if (
           canonical.answerRegion.givenTop.length > 0
           && canonical.answerRegion.givenBottom.length > 0
@@ -827,8 +1073,12 @@ async function assertActualPaperSurfaceArtifacts() {
           bodyText.includes('TEACHER SUPPLEMENT — not paper semantics'),
           teacher,
         )
+        const compactBodyText = bodyText.replaceAll(/\s/g, '')
         for (const block of canonical.promptBlocks) {
-          assert.equal(bodyText.split(block.text).length - 1, 1)
+          assert.equal(
+            compactBodyText.split(block.text.replaceAll(/\s/g, '')).length - 1,
+            1,
+          )
         }
         signatures.push({
           semantic: await response.getAttribute(
@@ -944,8 +1194,12 @@ async function assertActualPaperSurfaceArtifacts() {
         const writingPage = response.locator('xpath=ancestor::*[@data-pi-writing-page]')
         const writingText = await writingPage.innerText()
         assert.equal(writingText.includes('POISONED LEGACY'), false)
+        const compactWritingText = writingText.replaceAll(/\s/g, '')
         for (const block of canonical.promptBlocks) {
-          assert.equal(writingText.split(block.text).length - 1, 1)
+          assert.equal(
+            compactWritingText.split(block.text.replaceAll(/\s/g, '')).length - 1,
+            1,
+          )
         }
         assert.equal(
           await writingPage.locator('[data-canonical-given-part-id]').count(),
@@ -1100,6 +1354,12 @@ async function assertActualPaperSurfaceArtifacts() {
         ).evaluate((element) => element.getBoundingClientRect().top)
         assert.ok(topY < bottomY)
       }
+      await assertBrowserFixedPartAlignment(
+        page,
+        response,
+        canonical,
+        `Print HTML ${label} ${versionType}`,
+      )
       const pdfRoot = mkdtempSync(path.join(tmpdir(), 'eqb-application-pdf-'))
       try {
         const pdfPath = path.join(pdfRoot, `${label}-${versionType}.pdf`)
@@ -1152,6 +1412,16 @@ async function assertActualPaperSurfaceArtifacts() {
             ),
           )
         }
+        assertApplicationFixedPartPdfAlignment(
+          pdfPath,
+          canonical,
+          `Print PDF ${label} ${versionType}`,
+        )
+        assertNumberedNoticePdfLayout(
+          pdfPath,
+          canonical,
+          `Print PDF ${label} ${versionType}`,
+        )
         if (persistActualArtifacts) {
           copyFileSync(
             pdfPath,

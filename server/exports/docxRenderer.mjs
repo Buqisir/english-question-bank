@@ -63,6 +63,9 @@ import {
   selectConsumerGroupMode,
 } from '../../shared/paper-canonical/consumerProjection.mjs'
 import {
+  applicationWritingNoticeLines,
+} from '../../shared/paper-canonical/applicationWritingDisplay.mjs'
+import {
   translateAbcdPlanToPointPlacement,
 } from '../../shared/paper-canonical/abcdLayout.mjs'
 import { resolveGroupFigures } from '../figures/paperFigures.mjs'
@@ -656,9 +659,11 @@ function canonicalApplicationGivenParagraph(part) {
     canonicalInlineRuns(part.inlines, { size: 21 }),
     {
       after: 40,
-      align: ['closing', 'signature'].includes(part.role)
-        ? 'right'
-        : undefined,
+      align: part.role === 'title'
+        ? 'center'
+        : ['closing', 'signature'].includes(part.role)
+          ? 'right'
+          : undefined,
     },
   )}${canonicalBookmarkEnd('canonical_given', part.givenPartId)}`
 }
@@ -690,12 +695,33 @@ function pushCanonicalDocxApplicationWriting(body, canonicalGroup) {
     ),
   )
   for (const block of canonicalGroup.promptBlocks) {
+    const noticeLines = block.inlines.length === 1
+      ? applicationWritingNoticeLines(block.inlines[0].text)
+      : null
     body.push(
       canonicalBookmarkStart('canonical_block', block.nodeId),
-      paragraph(canonicalInlineRuns(block.inlines, { size: 21 }), {
-        after: 60,
-        firstLineIndent: 420,
-      }),
+      ...(noticeLines
+        ? [
+            canonicalBookmarkStart(
+              'canonical_content',
+              block.inlines[0].nodeId,
+            ),
+            ...noticeLines.map((line) => paragraph(
+              [run(line.text, { size: 21 })],
+              {
+                after: 60,
+                indentLeft: line.kind === 'instruction' ? 420 : undefined,
+              },
+            )),
+            canonicalBookmarkEnd(
+              'canonical_content',
+              block.inlines[0].nodeId,
+            ),
+          ]
+        : [paragraph(canonicalInlineRuns(block.inlines, { size: 21 }), {
+            after: 60,
+            firstLineIndent: 420,
+          })]),
       canonicalBookmarkEnd('canonical_block', block.nodeId),
     )
   }

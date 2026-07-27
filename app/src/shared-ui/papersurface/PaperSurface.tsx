@@ -24,6 +24,9 @@ import { useMemo, useCallback, type CSSProperties, type ReactNode } from 'react'
 import './PaperSurface.css'
 import { paperSurfaceTokens } from '../../../../shared/papersurface/tokens.mjs'
 import { paperSurfaceAnchorAttrs } from '../../../../shared/papersurface/anchorKeys.mjs'
+import {
+  applicationWritingNoticeLines,
+} from '../../../../shared/paper-canonical/applicationWritingDisplay'
 import { renderCanonicalPaperSentenceContent } from './CanonicalPaperSentenceContent.tsx'
 import {
   renderLegacyPaperSentenceContent,
@@ -360,18 +363,37 @@ function CanonicalApplicationWritingPrompt({
       className="ps-canonical-application-prompt"
       data-canonical-application-prompt=""
     >
-      {blocks.map((block) => (
-        <p key={block.nodeId} data-canonical-block-id={block.nodeId}>
-          {block.inlines.map((inline) => (
-            <span
-              key={inline.nodeId}
-              data-canonical-content-node-id={inline.nodeId}
-            >
-              {inline.text}
-            </span>
-          ))}
-        </p>
-      ))}
+      {blocks.map((block) => {
+        const noticeLines = block.inlines.length === 1
+          ? applicationWritingNoticeLines(block.inlines[0].text)
+          : null
+        return (
+          <p
+            key={block.nodeId}
+            data-canonical-block-id={block.nodeId}
+            data-canonical-application-notice={noticeLines ? '' : undefined}
+          >
+            {block.inlines.map((inline) => (
+              <span
+                key={inline.nodeId}
+                data-canonical-content-node-id={inline.nodeId}
+              >
+                {noticeLines
+                  ? noticeLines.map((line) => (
+                      <span
+                        key={`${inline.nodeId}:${line.kind}:${line.text}`}
+                        className={`ps-canonical-application-notice-line ps-canonical-application-notice-line--${line.kind}`}
+                        data-canonical-application-notice-line={line.kind}
+                      >
+                        {line.text}
+                      </span>
+                    ))
+                  : inline.text}
+              </span>
+            ))}
+          </p>
+        )
+      })}
     </div>
   )
 }

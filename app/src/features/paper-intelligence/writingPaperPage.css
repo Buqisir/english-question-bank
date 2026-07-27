@@ -136,6 +136,10 @@
   min-height: 0;
 }
 
+.pi-writing-answer-given--title {
+  text-align: center;
+}
+
 .pi-writing-answer-supplement {
   margin-top: 1.25rem;
 }
