@@ -19,6 +19,7 @@ const registry = {
   'scripts/verify-paper-canonical-seven-choices-publication.mjs',
   'scripts/verify-paper-canonical-reading-publication.mjs',
   'scripts/verify-paper-canonical-seven-choices-rendered-behavior.mjs',
+  'scripts/verify-paper-canonical-reading-rendered-behavior.mjs',
   'scripts/verify-paper-canonical-cloze-grammar-consumption.mjs',
   'scripts/verify-paper-canonical-abcd-layout.mjs',
   'scripts/verify-paper-normalization-cloze.mjs',

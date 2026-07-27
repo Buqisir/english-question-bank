@@ -1125,10 +1125,26 @@ try {
       )
     : null
   if (actualOutputDir) mkdirSync(actualOutputDir, { recursive: true })
+  const withBrowserFixtureReading = (consumption) => {
+    const browserConsumption = structuredClone(consumption)
+    let readingSelection = browserConsumption.selections.find(
+      (selection) => selection.familyContractId === 'reading',
+    )
+    if (!readingSelection) {
+      readingSelection = { familyContractId: 'reading' }
+      browserConsumption.selections.push(readingSelection)
+    }
+    readingSelection.mode = 'legacy'
+    readingSelection.groupIds = Object.values(asset.content.groups)
+      .filter((candidate) => candidate.groupType === 'reading')
+      .map((candidate) => candidate.groupId)
+    delete readingSelection.projectedOccurrences
+    return browserConsumption
+  }
   await assertActualPaperBrowseBoundary({
-    readyConsumption: screenRouteResult.body,
-    legacyConsumption: explicitLegacy,
-    invalidConsumption: partial,
+    readyConsumption: withBrowserFixtureReading(screenRouteResult.body),
+    legacyConsumption: withBrowserFixtureReading(explicitLegacy),
+    invalidConsumption: withBrowserFixtureReading(partial),
     outputDir: actualOutputDir,
   })
   const canonicalReferenceRow = db.prepare(`

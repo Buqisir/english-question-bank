@@ -283,3 +283,82 @@ export function buildCanonicalConsumptionSurfaceData({
     },
   }
 }
+
+/**
+ * Canonical-required Reading Screen adapter.
+ *
+ * Rich blocks stay ordered and typed instead of being flattened into the
+ * TextMap. Paragraphs still populate the TextMap as the immutable addressing
+ * oracle for optional Analysis overlays.
+ */
+export function buildCanonicalReadingConsumptionSurfaceData({
+  consumption,
+  groupId,
+}) {
+  const canonicalGroup = projectCanonicalConsumerGroup({
+    consumption,
+    familyContractId: 'reading',
+    groupId,
+  })
+  const textMapParagraphs = canonicalGroup.blocks
+    .filter((block) => block.kind === 'paragraph')
+    .map((block) => {
+      const segmented = segmentPaperText(block.text, {
+        sectionId: block.nodeId,
+      }).paragraphs[0]
+      if (!segmented) {
+        throw new Error(
+          `Canonical Reading paragraph ${block.nodeId} has no visible text`,
+        )
+      }
+      return {
+        id: block.nodeId,
+        section: canonicalGroup.groupId,
+        sentences: segmented.sentences,
+      }
+    })
+  return {
+    status: 'ready',
+    semanticDigest: canonicalGroup.semanticSignature,
+    placementSignatures: canonicalGroup.questions.map(
+      (question) => question.placementSignature,
+    ),
+    richBlocks: canonicalGroup.blocks,
+    anchors: canonicalGroup.anchors,
+    surfaceData: {
+      textMap: {
+        paperId: canonicalGroup.paperId,
+        paragraphs: textMapParagraphs,
+      },
+      questions: canonicalGroup.questions.map((question, order) => {
+        const placement = translateAbcdPlanToPointPlacement(
+          question.layoutPlan,
+        )
+        return {
+          id: question.questionId,
+          section: '__global__',
+          order,
+          questionNo: String(question.questionNo),
+          stem: question.stem,
+          options: question.options.map((option) => ({
+            label: option.label,
+            text: option.text,
+          })),
+          canonicalIdentity: {
+            questionId: question.questionId,
+            correctOptionId: question.correctOptionId,
+            optionIds: question.options.map((option) => option.optionId),
+          },
+          canonicalPlacement: {
+            mode: placement.mode,
+            signature: placement.placementSignature,
+            rowWidthPt: placement.rowWidthPt,
+            columnStartsPt: placement.columnStartsPt,
+            columnWidthsPt: placement.columnWidthsPt,
+          },
+        }
+      }),
+      evidence: [],
+    },
+  }
+}

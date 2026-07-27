@@ -203,6 +203,26 @@ function renderCanonicalSharedBank(canonicalGroup) {
   return `<ol class="canonical-option-bank" data-canonical-bank-id="${escapeHtml(bankId)}" data-canonical-semantic-signature="${escapeHtml(canonicalGroup.semanticSignature)}" data-canonical-occurrence-signature="${escapeHtml(canonicalGroup.occurrenceSignature)}">${options.map((option) => `<li class="canonical-option-bank-item" data-canonical-option-id="${escapeHtml(option.optionId)}"><span>${escapeHtml(option.label)}.</span> ${escapeHtml(option.text)}</li>`).join('')}</ol>`
 }
 
+function renderCanonicalReadingBlocks(canonicalGroup) {
+  return `<div class="canonical-reading" data-canonical-reading-semantic-signature="${escapeHtml(canonicalGroup.semanticSignature)}">${canonicalGroup.blocks.map((block) => {
+    if (block.kind === 'paragraph') {
+      const tag = block.role === 'title' ? 'h3' : 'p'
+      return `<${tag} class="canonical-reading-${block.role}" data-canonical-block-id="${escapeHtml(block.nodeId)}" data-canonical-block-kind="paragraph" data-canonical-reading-role="${block.role}">${escapeHtml(block.text)}</${tag}>`
+    }
+    if (block.kind === 'table') {
+      return `<table class="canonical-reading-table" data-canonical-block-id="${escapeHtml(block.nodeId)}" data-canonical-block-kind="table" data-canonical-table-columns="${block.columnCount}"><tbody>${block.rows.map((row) => `<tr data-canonical-row-id="${escapeHtml(row.rowId)}">${row.cells.map((cell) => `<td colspan="${cell.columnSpan}" rowspan="${cell.rowSpan}" data-canonical-cell-id="${escapeHtml(cell.cellId)}" data-canonical-column-start="${cell.columnStart}">${escapeHtml(cell.text)}</td>`).join('')}</tr>`).join('')}</tbody></table>`
+    }
+    const src = `data:${block.mediaArtifact.mimeType};base64,${block.mediaArtifact.encodedBytes}`
+    return `<figure class="canonical-reading-figure" data-canonical-block-id="${escapeHtml(block.nodeId)}" data-canonical-block-kind="figure" data-canonical-media-id="${escapeHtml(block.mediaId)}" data-canonical-media-sha256="${escapeHtml(block.media.sha256)}" data-canonical-source-artifact-id="${escapeHtml(block.media.sourceArtifactRef.artifactId)}"><img src="${escapeHtml(src)}" alt="${escapeHtml(block.caption || block.mediaId)}">${block.caption ? `<figcaption>${escapeHtml(block.caption)}</figcaption>` : ''}</figure>`
+  }).join('')}</div>`
+}
+
+function renderCanonicalQuestionOptions(question) {
+  const placement = translateAbcdPlanToPointPlacement(question.layoutPlan)
+  const attrs = ` data-canonical-placement-signature="${escapeHtml(placement.placementSignature)}" data-canonical-placement-mode="${placement.mode}" data-canonical-column-starts-pt="${placement.columnStartsPt.join(',')}" style="width:${placement.rowWidthPt}pt;grid-template-columns:${placement.columnWidthsPt.map((width) => `${width}pt`).join(' ')}"`
+  return `<div class="canonical-options canonical-options--${placement.mode}"${attrs}>${question.options.map((option) => `<span data-canonical-option-id="${escapeHtml(option.optionId)}"><span>${escapeHtml(option.label)}.</span> ${escapeHtml(option.text)}</span>`).join('')}</div>`
+}
+
 function cssBorderForBlankRuling(ruling) {
   if (ruling.lineStyle !== 'single-thin') {
     throw new Error(`Unsupported paper blank line style ${ruling.lineStyle}`)
@@ -375,7 +395,9 @@ export function buildPrintHtml({
             ? 'grammar-fill'
             : detail.groupType === 'seven_choices'
               ? 'seven-choices'
-            : null
+              : detail.groupType === 'reading'
+                ? 'reading'
+                : null
       if (!familyContractId) return null
       const selection = selectConsumerGroupMode({
         consumption: canonicalConsumption,
@@ -517,23 +539,27 @@ export function buildPrintHtml({
         const blankCounter = { next: questionNum }
 
         if (canonicalGroup) {
-          const displayNumberByQuestionId = new Map(
-            canonicalGroup.questions.map((question, index) => [
-              question.questionId,
-              questionNum + index,
-            ]),
-          )
-          groupHtml += `<div class="passage">${canonicalGroup.paragraphs
-            .map(
-              (paragraph) =>
-                `<p>${renderCanonicalParagraph(
-                  canonicalGroup,
-                  paragraph,
-                  displayNumberByQuestionId,
-                )}</p>`,
+          if (canonicalGroup.groupType === 'reading') {
+            groupHtml += renderCanonicalReadingBlocks(canonicalGroup)
+          } else {
+            const displayNumberByQuestionId = new Map(
+              canonicalGroup.questions.map((question, index) => [
+                question.questionId,
+                questionNum + index,
+              ]),
             )
-            .join('')}</div>`
-          groupHtml += renderCanonicalSharedBank(canonicalGroup)
+            groupHtml += `<div class="passage">${canonicalGroup.paragraphs
+              .map(
+                (paragraph) =>
+                  `<p>${renderCanonicalParagraph(
+                    canonicalGroup,
+                    paragraph,
+                    displayNumberByQuestionId,
+                  )}</p>`,
+              )
+              .join('')}</div>`
+            groupHtml += renderCanonicalSharedBank(canonicalGroup)
+          }
         } else if (passage) {
           const figuresInfo = getFiguresInfo(block.questionGroupId)
           groupHtml += `<div class="passage">${passage.split(/\n/).map((line) => renderPassageLine(line, detail.groupType, figuresInfo, imageMode, images, blankCounter)).join('')}</div>`
@@ -587,10 +613,19 @@ export function buildPrintHtml({
                       canonicalQuestion.layoutPlan,
                     )
                   : null,
+                answer: canonicalQuestion.correctOptionId
+                  ? canonicalQuestion.options.find(
+                      (option) =>
+                        option.optionId === canonicalQuestion.correctOptionId,
+                    )?.label || ''
+                  : question.answer,
               }
             : question
           const stemText = String(printQuestion.stem || '').trim()
           const hasOptions = Array.isArray(printQuestion.options) && printQuestion.options.length > 0
+          const canonicalQuestionAttrs = canonicalQuestion
+            ? ` data-canonical-question-id="${escapeHtml(canonicalQuestion.questionId)}" data-canonical-correct-option-id="${escapeHtml(canonicalQuestion.correctOptionId || '')}"`
+            : ''
           // 空题干:挖空题号已在文中(语法填空/完形/七选五)。有选项则题号与选项同行
           // (真卷完形形态);无选项且非教师版则整行不出(语法填空文后无内容)。
           if (!stemText && !hasOptions && !isTeacher) {
@@ -604,13 +639,15 @@ export function buildPrintHtml({
               ? ` data-canonical-placement-signature="${escapeHtml(placement.placementSignature)}" data-canonical-placement-mode="${placement.mode}" data-canonical-column-starts-pt="${placement.columnStartsPt.join(',')}" style="width:${placement.rowWidthPt}pt;grid-template-columns:${placement.columnWidthsPt.map((width) => `${width}pt`).join(' ')}"`
               : ''
             const renderedOptions = printQuestion.options.map((o) => `<span>${escapeHtml(o.label)}. ${escapeHtml(o.content)}</span>`).join('')
-            groupHtml += `<div class="question"><p class="options-inline options-inline--numbered${placement ? ' options-inline--canonical' : ''}"><span class="qnum">${questionNum}.</span>${placement ? `<span class="canonical-options canonical-options--${placement.mode}"${placementAttrs}>${renderedOptions}</span>` : renderedOptions}</p>`
+            groupHtml += `<div class="question"${canonicalQuestionAttrs}><p class="options-inline options-inline--numbered${placement ? ' options-inline--canonical' : ''}"><span class="qnum">${questionNum}.</span>${placement ? `<span class="canonical-options canonical-options--${placement.mode}"${placementAttrs}>${renderedOptions}</span>` : renderedOptions}</p>`
           } else {
-            groupHtml += `<div class="question"><p class="stem"><span class="qnum">${questionNum}.</span> ${escapeHtml(printQuestion.stem)}</p>`
-            groupHtml += renderOptions(printQuestion.options, detail.groupType)
+            groupHtml += `<div class="question"${canonicalQuestionAttrs}><p class="stem"><span class="qnum">${questionNum}.</span> ${escapeHtml(printQuestion.stem)}</p>`
+            groupHtml += canonicalQuestion?.layoutPlan
+              ? renderCanonicalQuestionOptions(canonicalQuestion)
+              : renderOptions(printQuestion.options, detail.groupType)
           }
           if (isTeacher) {
-            groupHtml += `<div class="answer"><p><strong>【答案】</strong>${escapeHtml(question.answer || '待补')}</p>`
+            groupHtml += `<div class="answer"><p><strong>【答案】</strong>${escapeHtml(printQuestion.answer || '待补')}</p>`
             const rawExplanation = question.explanation || question.note || ''
             const explanation = isMetaStub(rawExplanation) ? '' : rawExplanation
             if (explanation) {
@@ -850,6 +887,55 @@ body {
   break-inside: avoid;
 }
 
+.canonical-reading-body,
+.canonical-reading-subtitle,
+.canonical-reading-title {
+  margin: 0 0 0.5em;
+}
+
+.canonical-reading-body {
+  text-indent: 2em;
+}
+
+.canonical-reading-subtitle,
+.canonical-reading-title {
+  font-weight: bold;
+}
+
+.canonical-reading-title {
+  text-align: center;
+}
+
+.canonical-reading-table {
+  width: 100%;
+  margin: 0 0 0.6em;
+  border-collapse: collapse;
+  table-layout: fixed;
+  break-inside: avoid;
+}
+
+.canonical-reading-table td {
+  padding: 3pt 4pt;
+  border: 0.5pt solid #000;
+  vertical-align: top;
+}
+
+.canonical-reading-figure {
+  margin: 0 0 0.6em;
+  text-align: center;
+  break-inside: avoid;
+}
+
+.canonical-reading-figure img {
+  max-width: 100%;
+  height: auto;
+}
+
+.canonical-reading-figure figcaption {
+  color: #555;
+  font-size: 9pt;
+}
+
 .options-inline {
   margin: 0.2em 0 0.2em 2em;
 }
@@ -866,6 +952,10 @@ body {
   display: inline-grid;
   width: 438.2pt;
   vertical-align: top;
+}
+
+.question > .canonical-options {
+  margin: 0.2em 0 0.2em 2em;
 }
 
 .options-inline--canonical {

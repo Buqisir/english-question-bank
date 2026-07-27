@@ -367,7 +367,9 @@ function createCanonicalDocxGroupResolver(
             ? 'grammar-fill'
             : detail.groupType === 'seven_choices'
               ? 'seven-choices'
-            : null
+              : detail.groupType === 'reading'
+                ? 'reading'
+                : null
       if (!familyContractId) return null
       const selection = selectConsumerGroupMode({
         consumption: canonicalConsumption,
@@ -444,9 +446,15 @@ function canonicalDocxQuestion(canonicalQuestion, question) {
     ...question,
     stem: canonicalQuestion.stem ?? '',
     options: canonicalQuestion.options.map((option) => ({
+      optionId: option.optionId,
       label: option.label,
       content: option.text,
     })),
+    answer: canonicalQuestion.correctOptionId
+      ? canonicalQuestion.options.find(
+          (option) => option.optionId === canonicalQuestion.correctOptionId,
+        )?.label || ''
+      : question.answer,
     layoutPlan: canonicalQuestion.layoutPlan,
     placementSignature: canonicalQuestion.placementSignature,
   }
@@ -476,6 +484,154 @@ function pushCanonicalDocxParagraphs(
       ),
     )
   })
+}
+
+function canonicalReadingTableXml(block) {
+  const columnWidth = Math.floor(9000 / block.columnCount)
+  const grid = Array.from(
+    { length: block.columnCount },
+    () => `<w:gridCol w:w="${columnWidth}"/>`,
+  ).join('')
+  const activeRowSpans = new Map()
+  const rows = block.rows.map((row) => {
+    const cellsByStart = new Map(
+      row.cells.map((cell) => [cell.columnStart, cell]),
+    )
+    const cells = []
+    for (let column = 0; column < block.columnCount;) {
+      const cell = cellsByStart.get(column)
+      if (cell) {
+        const width = columnWidth * cell.columnSpan
+        cells.push(
+          canonicalBookmarkStart('canonical_cell', cell.cellId),
+          `<w:tc><w:tcPr><w:tcW w:w="${width}" w:type="dxa"/>`
+            + (cell.columnSpan > 1
+              ? `<w:gridSpan w:val="${cell.columnSpan}"/>`
+              : '')
+            + (cell.rowSpan > 1 ? '<w:vMerge w:val="restart"/>' : '')
+            + `</w:tcPr>${paragraph(cell.text, { after: 30, size: 21 })}</w:tc>`,
+          canonicalBookmarkEnd('canonical_cell', cell.cellId),
+        )
+        if (cell.rowSpan > 1) {
+          activeRowSpans.set(column, {
+            remaining: cell.rowSpan - 1,
+            columnSpan: cell.columnSpan,
+          })
+        }
+        column += cell.columnSpan
+        continue
+      }
+      const span = activeRowSpans.get(column)
+      if (!span) {
+        throw new Error(
+          `Canonical Reading table ${block.nodeId} is not rectangular`,
+        )
+      }
+      const width = columnWidth * span.columnSpan
+      cells.push(
+        `<w:tc><w:tcPr><w:tcW w:w="${width}" w:type="dxa"/>`
+          + (span.columnSpan > 1
+            ? `<w:gridSpan w:val="${span.columnSpan}"/>`
+            : '')
+          + '<w:vMerge/></w:tcPr><w:p/></w:tc>',
+      )
+      span.remaining -= 1
+      if (span.remaining === 0) activeRowSpans.delete(column)
+      column += span.columnSpan
+    }
+    return `${canonicalBookmarkStart('canonical_row', row.rowId)}<w:tr>${cells.join('')}</w:tr>${canonicalBookmarkEnd('canonical_row', row.rowId)}`
+  }).join('')
+  return `${canonicalBookmarkStart('canonical_block', block.nodeId)}<w:tbl><w:tblPr><w:tblW w:w="9000" w:type="dxa"/><w:tblBorders><w:top w:val="single" w:sz="4" w:color="000000"/><w:left w:val="single" w:sz="4" w:color="000000"/><w:bottom w:val="single" w:sz="4" w:color="000000"/><w:right w:val="single" w:sz="4" w:color="000000"/><w:insideH w:val="single" w:sz="4" w:color="000000"/><w:insideV w:val="single" w:sz="4" w:color="000000"/></w:tblBorders><w:tblLayout w:type="fixed"/></w:tblPr><w:tblGrid>${grid}</w:tblGrid>${rows}</w:tbl>${canonicalBookmarkEnd('canonical_block', block.nodeId)}`
+}
+
+function pushCanonicalDocxReadingBlocks(body, canonicalGroup, images) {
+  body.push(canonicalBookmarkStart(
+    'canonical_semantic',
+    canonicalGroup.semanticSignature,
+  ))
+  for (const block of canonicalGroup.blocks) {
+    if (block.kind === 'paragraph') {
+      body.push(
+        canonicalBookmarkStart('canonical_block', block.nodeId),
+        paragraph([run(block.text, {
+          bold: block.role !== 'body',
+          size: 21,
+        })], {
+          after: 60,
+          align: block.role === 'title' ? 'center' : undefined,
+          firstLineIndent: block.role === 'body' ? 420 : undefined,
+          keepNext: block.role !== 'body',
+        }),
+        canonicalBookmarkEnd('canonical_block', block.nodeId),
+      )
+      continue
+    }
+    if (block.kind === 'table') {
+      body.push(canonicalReadingTableXml(block))
+      continue
+    }
+    const buffer = Buffer.from(block.mediaArtifact.encodedBytes, 'base64')
+    const digest = `sha256:${createHash('sha256').update(buffer).digest('hex')}`
+    if (digest !== block.media.sha256) {
+      throw new Error(`Canonical Reading media ${block.mediaId} digest drift`)
+    }
+    const extensionByMime = {
+      'image/png': 'png',
+      'image/jpeg': 'jpeg',
+      'image/webp': 'webp',
+    }
+    const extension = extensionByMime[block.media.mimeType]
+    if (!extension) {
+      throw new Error(`Unsupported canonical Reading media ${block.media.mimeType}`)
+    }
+    const imageIndex = images.length + 1
+    const rId = `rIdImage${imageIndex}`
+    images.push({ rId, buffer, extension, mimeType: block.media.mimeType })
+    const { widthEmu, heightEmu } = resolveDocxFigureExtentEmu(
+      block.media.pixelWidth,
+      block.media.pixelHeight,
+    )
+    docxFigureDocPrCounter += 1
+    body.push(
+      canonicalBookmarkStart('canonical_block', block.nodeId),
+      canonicalBookmarkStart('canonical_media', block.mediaId),
+      docxFigureDrawingParagraph({
+        rId,
+        docPrId: 900 + docxFigureDocPrCounter,
+        widthEmu,
+        heightEmu,
+        name: block.caption || block.mediaId,
+      }),
+      ...(block.caption
+        ? [paragraph(block.caption, { align: 'center', after: 60, size: 18 })]
+        : []),
+      canonicalBookmarkEnd('canonical_media', block.mediaId),
+      canonicalBookmarkEnd('canonical_block', block.nodeId),
+    )
+  }
+  body.push(canonicalBookmarkEnd(
+    'canonical_semantic',
+    canonicalGroup.semanticSignature,
+  ))
+}
+
+function pushCanonicalDocxContent(
+  body,
+  canonicalGroup,
+  questionNumberStart,
+  paragraphOptions,
+  images,
+) {
+  if (canonicalGroup.groupType === 'reading') {
+    pushCanonicalDocxReadingBlocks(body, canonicalGroup, images)
+    return
+  }
+  pushCanonicalDocxParagraphs(
+    body,
+    canonicalGroup,
+    questionNumberStart,
+    paragraphOptions,
+  )
 }
 
 function pushHandoutDocxQuestions(
@@ -517,7 +673,17 @@ function pushHandoutDocxQuestions(
       ),
     )
     if (detail.groupType !== 'seven_choices') {
-      if (detail.groupType === 'cloze' && docxQuestion.options.length > 0) {
+      if (docxQuestion.layoutPlan) {
+        body.push(canonicalDocxQuestionOptionLayout(
+          questionNumber,
+          docxQuestion.options,
+          docxQuestion.layoutPlan,
+          {
+            includeQuestionNumber: false,
+            placementSignature: docxQuestion.placementSignature,
+          },
+        ))
+      } else if (detail.groupType === 'cloze' && docxQuestion.options.length > 0) {
         const inlineText = docxQuestion.options.map((option) =>
           `${option.label}. ${option.content}`).join('  ')
         body.push(
@@ -539,7 +705,7 @@ function pushHandoutDocxQuestions(
         })
       }
     }
-    pushDocxAnswerArea(body, detail, question, versionType)
+    pushDocxAnswerArea(body, detail, docxQuestion, versionType)
     questionNumber++
   })
   return questionNumber
@@ -1199,11 +1365,12 @@ function buildExamDocumentXml({
 
         // Passage text
         if (canonicalGroup) {
-          pushCanonicalDocxParagraphs(
+          pushCanonicalDocxContent(
             body,
             canonicalGroup,
             questionNum,
             { after: 60, firstLineIndent: 420 },
+            images,
           )
           body.push(paragraph('', { after: 80 }))
           pushCanonicalDocxSharedBank(body, canonicalGroup)
@@ -1270,6 +1437,7 @@ function buildExamDocumentXml({
                 questionNum,
                 docxQuestion.options,
                 docxQuestion.layoutPlan,
+                { placementSignature: docxQuestion.placementSignature },
               ))
             } else {
               const inlineText = docxQuestion.options.map((o) => `${o.label}. ${o.content}`).join('    ')
@@ -1291,12 +1459,24 @@ function buildExamDocumentXml({
                 { before: 60, after: 50 },
               ),
             )
-            renderOptionsExam(body, docxQuestion.options, detail.groupType)
+            if (docxQuestion.layoutPlan) {
+              body.push(canonicalDocxQuestionOptionLayout(
+                questionNum,
+                docxQuestion.options,
+                docxQuestion.layoutPlan,
+                {
+                  includeQuestionNumber: false,
+                  placementSignature: docxQuestion.placementSignature,
+                },
+              ))
+            } else {
+              renderOptionsExam(body, docxQuestion.options, detail.groupType)
+            }
           }
 
           // Teacher version: compact answer
           if (versionType === 'teacher') {
-            body.push(paragraph([run(`【答案】${question.answer || '待补'}`, { size: 18, color: '333333' })], { after: 30, indentLeft: 420 }))
+            body.push(paragraph([run(`【答案】${docxQuestion.answer || '待补'}`, { size: 18, color: '333333' })], { after: 30, indentLeft: 420 }))
             const explanation = question.explanation || question.note || ''
             if (explanation) {
               body.push(paragraph([run(`【解析】${explanation}`, { size: 18, color: '666666' })], { after: 50, indentLeft: 420 }))
@@ -1367,19 +1547,30 @@ function examOptionTable(rows) {
   return `<w:tbl><w:tblPr><w:tblW w:w="9000" w:type="dxa"/><w:tblBorders><w:top w:val="none"/><w:left w:val="none"/><w:bottom w:val="none"/><w:right w:val="none"/><w:insideH w:val="none"/><w:insideV w:val="none"/></w:tblBorders><w:tblLayout w:type="fixed"/></w:tblPr><w:tblGrid><w:gridCol w:w="${colWidth}"/><w:gridCol w:w="${colWidth}"/></w:tblGrid>${rowXml}</w:tbl>`
 }
 
-function canonicalDocxQuestionOptionLayout(questionNumber, options, plan) {
+function canonicalDocxQuestionOptionLayout(
+  questionNumber,
+  options,
+  plan,
+  {
+    includeQuestionNumber = true,
+    placementSignature: signature,
+  } = {},
+) {
   const byLabel = new Map(options.map((option) => [option.label, option]))
   let optionLayout
   if (plan.mode === 'one_column') {
     optionLayout = plan.placements.map((placement) => {
       const option = byLabel.get(placement.label)
       return paragraph(
-        `${option.label}. ${option.content}`,
+        [
+          canonicalBookmarkStart('canonical_option', option.optionId),
+          run(`${option.label}. ${option.content}`, { size: 21 }),
+          canonicalBookmarkEnd('canonical_option', option.optionId),
+        ],
         {
           after: 30,
           indentLeft: 420,
           hangingIndent: 420,
-          size: 21,
         },
       )
     }).join('')
@@ -1393,15 +1584,25 @@ function canonicalDocxQuestionOptionLayout(questionNumber, options, plan) {
         .sort((a, b) => a.column - b.column)
         .map((placement) => {
           const option = byLabel.get(placement.label)
-          return `${option.label}. ${option.content}`
+          return option
         }))
     const grid = widths.map((width) => `<w:gridCol w:w="${width}"/>`).join('')
     const rowXml = rows.map((cells) =>
-      `<w:tr>${cells.map((cell, column) =>
-        `<w:tc><w:tcPr><w:tcW w:w="${widths[column]}" w:type="dxa"/></w:tcPr>${paragraph(cell, { after: 30, size: 21 })}</w:tc>`).join('')}</w:tr>`).join('')
+      `<w:tr>${cells.map((option, column) =>
+        `<w:tc><w:tcPr><w:tcW w:w="${widths[column]}" w:type="dxa"/></w:tcPr>${paragraph([
+          canonicalBookmarkStart('canonical_option', option.optionId),
+          run(`${option.label}. ${option.content}`, { size: 21 }),
+          canonicalBookmarkEnd('canonical_option', option.optionId),
+        ], { after: 30 })}</w:tc>`).join('')}</w:tr>`).join('')
     optionLayout = `<w:tbl><w:tblPr><w:tblW w:w="${plan.rowWidthTwip}" w:type="dxa"/><w:tblLayout w:type="fixed"/></w:tblPr><w:tblGrid>${grid}</w:tblGrid>${rowXml}</w:tbl>`
   }
-  return `<w:tbl><w:tblPr><w:tblW w:w="${plan.rowWidthTwip + 420}" w:type="dxa"/><w:tblLayout w:type="fixed"/></w:tblPr><w:tblGrid><w:gridCol w:w="420"/><w:gridCol w:w="${plan.rowWidthTwip}"/></w:tblGrid><w:tr><w:tc><w:tcPr><w:tcW w:w="420" w:type="dxa"/></w:tcPr>${paragraph(`${questionNumber}.`, { after: 30, size: 21 })}</w:tc><w:tc><w:tcPr><w:tcW w:w="${plan.rowWidthTwip}" w:type="dxa"/></w:tcPr>${optionLayout}</w:tc></w:tr></w:tbl>`
+  const layout = includeQuestionNumber
+    ? `<w:tbl><w:tblPr><w:tblW w:w="${plan.rowWidthTwip + 420}" w:type="dxa"/><w:tblLayout w:type="fixed"/></w:tblPr><w:tblGrid><w:gridCol w:w="420"/><w:gridCol w:w="${plan.rowWidthTwip}"/></w:tblGrid><w:tr><w:tc><w:tcPr><w:tcW w:w="420" w:type="dxa"/></w:tcPr>${paragraph(`${questionNumber}.`, { after: 30, size: 21 })}</w:tc><w:tc><w:tcPr><w:tcW w:w="${plan.rowWidthTwip}" w:type="dxa"/></w:tcPr>${optionLayout}</w:tc></w:tr></w:tbl>`
+    : optionLayout
+  if (typeof signature !== 'string') {
+    throw new Error('Canonical DOCX placement signature is required')
+  }
+  return `${canonicalBookmarkStart('canonical_placement', signature)}${layout}${canonicalBookmarkEnd('canonical_placement', signature)}`
 }
 
 // figure-render cut: `images` is an OPTIONAL out-parameter array — see the
@@ -1495,11 +1696,12 @@ function buildDocumentXml({ title, versionType, items, blocks, questionNumberSta
         // size 22 → 21 (10.5pt, 不放大字号); Times bold 居中维持不动.
         body.push(paragraph([run(detail.passage.title, { bold: true, size: 21 })], { after: 60, keepNext: true }))
         if (canonicalGroup) {
-          pushCanonicalDocxParagraphs(
+          pushCanonicalDocxContent(
             body,
             canonicalGroup,
             questionNum,
             { after: 80, indentLeft: 240, firstLineIndent: 420 },
+            images,
           )
         } else {
           const passageLines = normalizeDocxLines(
@@ -1568,11 +1770,12 @@ function buildDocumentXml({ title, versionType, items, blocks, questionNumberSta
       body.push(paragraph([run(detail.passage.title, { bold: true, size: 21 })], { after: 60, keepNext: true }))
 
       if (canonicalGroup) {
-        pushCanonicalDocxParagraphs(
+        pushCanonicalDocxContent(
           body,
           canonicalGroup,
           legacyQuestionNum,
           { after: 80, indentLeft: 240, firstLineIndent: 420 },
+          images,
         )
       } else {
         const passageLines = normalizeDocxLines(
@@ -1647,13 +1850,27 @@ function writeDocxPackage({ documentXml, outputPath, title, images = [] }) {
     if (images.length > 0) {
       mkdirSync(path.join(tempDir, 'word/media'), { recursive: true })
     }
+    const imageContentTypes = [...new Map(
+      images.map((image) => [
+        image.extension,
+        image.mimeType
+          || (image.extension === 'png'
+            ? 'image/png'
+            : image.extension === 'jpeg'
+              ? 'image/jpeg'
+              : 'image/webp'),
+      ]),
+    )]
+      .map(([extension, mimeType]) =>
+        `\n  <Default Extension="${extension}" ContentType="${mimeType}"/>`)
+      .join('')
 
     writeFileSync(
       path.join(tempDir, '[Content_Types].xml'),
       `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">
   <Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>
-  <Default Extension="xml" ContentType="application/xml"/>${images.length > 0 ? '\n  <Default Extension="png" ContentType="image/png"/>' : ''}
+  <Default Extension="xml" ContentType="application/xml"/>${imageContentTypes}
   <Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/>
   <Override PartName="/word/footer1.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.footer+xml"/>
   <Override PartName="/docProps/core.xml" ContentType="application/vnd.openxmlformats-package.core-properties+xml"/>

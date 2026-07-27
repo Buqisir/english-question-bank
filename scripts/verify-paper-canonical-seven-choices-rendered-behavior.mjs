@@ -190,6 +190,10 @@ for (const selection of browserConsumption.selections) {
     selection.groupIds = Object.values(asset.content.groups)
       .filter((candidate) => candidate.groupType === 'grammarFill')
       .map((candidate) => candidate.groupId)
+  } else if (selection.familyContractId === 'reading') {
+    selection.groupIds = Object.values(asset.content.groups)
+      .filter((candidate) => candidate.groupType === 'reading')
+      .map((candidate) => candidate.groupId)
   }
 }
 const sourceGroup = asset.content.groups[occurrence.groupId]

@@ -912,7 +912,9 @@ assert(
 )
 assert(
   'PaperSurface.tsx destructures optionBank from props',
-  /const\s*\{[\s\S]{0,400}\boptionBank\b[\s\S]{0,400}\}\s*=\s*props/.test(paperSurfaceSrc),
+  /export function PaperSurface\([^)]*\)[\s\S]*?const\s*\{[\s\S]*?\boptionBank\b[\s\S]*?\}\s*=\s*props/.test(
+    paperSurfaceSrc,
+  ),
   'optionBank is not destructured from props',
 )
 assert(

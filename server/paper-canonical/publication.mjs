@@ -591,6 +591,53 @@ function canonicalSelections(validated, contract) {
   return { selections, legacyFamilies, allFamilyIds: [...groupIdsByFamily.keys()] }
 }
 
+function canonicalMediaArtifacts(validated) {
+  const documentsByArtifactId = new Map(
+    validated.sourceCapture.documents.map((document) => [
+      document.immutableArtifactRef?.artifactId,
+      document,
+    ]),
+  )
+  const mediaById = new Map()
+  for (const occurrence of validated.projected.nodes) {
+    if (occurrence?.kind !== 'group') continue
+    for (const media of occurrence.media || []) {
+      const document = documentsByArtifactId.get(
+        media.sourceArtifactRef?.artifactId,
+      )
+      if (
+        !document
+        || document.sha256 !== media.sha256
+        || document.mediaType !== media.mimeType
+        || typeof document.encodedBytes !== 'string'
+      ) {
+        throw publicationError(
+          'CANONICAL_PUBLICATION_MEDIA_CLOSURE_INVALID',
+          `Canonical media ${media.mediaId} does not resolve to immutable source bytes`,
+        )
+      }
+      const existing = mediaById.get(media.mediaId)
+      const artifact = {
+        mediaId: media.mediaId,
+        mimeType: media.mimeType,
+        sha256: media.sha256,
+        pixelWidth: media.pixelWidth,
+        pixelHeight: media.pixelHeight,
+        sourceArtifactRef: media.sourceArtifactRef,
+        encodedBytes: document.encodedBytes,
+      }
+      if (existing && stableStringify(existing) !== stableStringify(artifact)) {
+        throw publicationError(
+          'CANONICAL_PUBLICATION_MEDIA_CLOSURE_INVALID',
+          `Canonical media identity ${media.mediaId} is ambiguous`,
+        )
+      }
+      mediaById.set(media.mediaId, artifact)
+    }
+  }
+  return [...mediaById.values()]
+}
+
 function selectPublishedRef(request, refs) {
   if (!refs.current) {
     return {
@@ -635,16 +682,25 @@ function validateConsumptionPublication({
   return {
     manifest,
     selection: canonicalSelections(validated, contract),
+    mediaArtifacts: canonicalMediaArtifacts(validated),
   }
 }
 
-function readyConsumption(request, ref, manifest, canonical, legacy) {
+function readyConsumption(
+  request,
+  ref,
+  manifest,
+  canonical,
+  legacy,
+  mediaArtifacts,
+) {
   return {
     disposition: 'ready',
     paperId: request.paperId,
     sourceAssetVersion: ref.sourceAssetVersion,
     publicationDigest: manifest.publicationDigest,
     selections: [...canonical.selections, ...(legacy || [])],
+    mediaArtifacts,
     diagnostics: [],
   }
 }
@@ -682,7 +738,7 @@ export async function loadPaperForConsumption(request, store) {
     const sourceAsset = await store.readSourceAsset(ref)
     if (!manifestBytes || !sourceAsset) continue
     try {
-      const { manifest, selection } = validateConsumptionPublication({
+      const { manifest, selection, mediaArtifacts } = validateConsumptionPublication({
         ref,
         manifestBytes,
         manifestFileName,
@@ -698,7 +754,14 @@ export async function loadPaperForConsumption(request, store) {
         diagnostic: { code: 'CONSUMER_FAMILY_CANONICAL_UNAVAILABLE' },
       })
       if (selection.legacyFamilies.length > 0 && !legacy) return { disposition: 'incompatible', diagnostics: [{ code: 'LEGACY_FAMILY_UNAVAILABLE' }] }
-      return readyConsumption(request, ref, manifest, selection, legacy)
+      return readyConsumption(
+        request,
+        ref,
+        manifest,
+        selection,
+        legacy,
+        mediaArtifacts,
+      )
     } catch (error) {
       const diagnostic = publicationDiagnostic(error)
       const familyIds = consumer.contract.families.map((entry) => entry.familyContractId)
@@ -743,7 +806,7 @@ export function loadPaperForConsumptionSync(request, store) {
     const sourceAsset = store.readSourceAsset(ref)
     if (!manifestBytes || !sourceAsset) continue
     try {
-      const { manifest, selection } = validateConsumptionPublication({
+      const { manifest, selection, mediaArtifacts } = validateConsumptionPublication({
         ref,
         manifestBytes,
         manifestFileName,
@@ -759,7 +822,14 @@ export function loadPaperForConsumptionSync(request, store) {
         diagnostic: { code: 'CONSUMER_FAMILY_CANONICAL_UNAVAILABLE' },
       })
       if (selection.legacyFamilies.length > 0 && !legacy) return { disposition: 'incompatible', diagnostics: [{ code: 'LEGACY_FAMILY_UNAVAILABLE' }] }
-      return readyConsumption(request, ref, manifest, selection, legacy)
+      return readyConsumption(
+        request,
+        ref,
+        manifest,
+        selection,
+        legacy,
+        mediaArtifacts,
+      )
     } catch (error) {
       // Public synchronous consumers are strict: an admitted-but-invalid
       // publication is incompatible and never re-enters legacy projection.

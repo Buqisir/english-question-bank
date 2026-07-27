@@ -42,6 +42,46 @@ export type CanonicalPaperGroupSurfaceData = {
   readonly evidence: ReadonlyArray<PaperEvidence>
 }
 
+export type CanonicalReadingSurfaceBlock =
+  | {
+      readonly kind: 'paragraph'
+      readonly nodeId: string
+      readonly role: 'title' | 'subtitle' | 'body'
+      readonly text: string
+    }
+  | {
+      readonly kind: 'table'
+      readonly nodeId: string
+      readonly columnCount: number
+      readonly rows: ReadonlyArray<{
+        readonly rowId: string
+        readonly cells: ReadonlyArray<{
+          readonly cellId: string
+          readonly columnStart: number
+          readonly columnSpan: number
+          readonly rowSpan: number
+          readonly role: string
+          readonly text: string
+        }>
+      }>
+    }
+  | {
+      readonly kind: 'figure'
+      readonly nodeId: string
+      readonly mediaId: string
+      readonly caption: string
+      readonly media: {
+        readonly mimeType: string
+        readonly sha256: string
+        readonly sourceArtifactRef: { readonly artifactId: string }
+      }
+      readonly mediaArtifact: {
+        readonly mimeType: string
+        readonly sha256: string
+        readonly encodedBytes: string
+      }
+    }
+
 export type CanonicalPaperGroupSurfaceResult =
   | {
       readonly status: 'ready'
@@ -107,4 +147,20 @@ export function buildCanonicalConsumptionSurfaceData(input: {
   }
   readonly placementSignatures: ReadonlyArray<string | null>
   readonly surfaceData: CanonicalPaperGroupSurfaceData
+}
+
+export function buildCanonicalReadingConsumptionSurfaceData(input: {
+  consumption: unknown
+  groupId: string
+}): {
+  readonly status: 'ready'
+  readonly semanticDigest: string
+  readonly placementSignatures: ReadonlyArray<string>
+  readonly richBlocks: ReadonlyArray<CanonicalReadingSurfaceBlock>
+  readonly anchors: Record<string, ReadonlyArray<string>>
+  readonly surfaceData: {
+    readonly textMap: PaperTextMap
+    readonly questions: ReadonlyArray<PaperQuestion>
+    readonly evidence: ReadonlyArray<PaperEvidence>
+  }
 }

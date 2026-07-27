@@ -43,6 +43,7 @@ import type {
 } from '../../../../shared/papersurface/types'
 import type {
   CanonicalSurfaceParagraph,
+  CanonicalReadingSurfaceBlock,
 } from '../../../../shared/paper-normalization/canonicalPaperGroupSurfaceAdapter.mjs'
 
 /**
@@ -112,6 +113,9 @@ type PaperSurfaceComponentProps = Omit<PaperSurfaceProps, 'blankFocusMode'> & {
    * oracle derived from the same canonical group.
    */
   readonly semanticParagraphs?: ReadonlyArray<CanonicalSurfaceParagraph>
+  /** Ordered canonical Reading content rendered natively without marker parsing. */
+  readonly canonicalReadingBlocks?: ReadonlyArray<CanonicalReadingSurfaceBlock>
+  readonly canonicalReadingSemanticSignature?: string
 }
 
 export function PaperSurface(props: PaperSurfaceComponentProps): ReactNode {
@@ -131,6 +135,8 @@ export function PaperSurface(props: PaperSurfaceComponentProps): ReactNode {
     blankFocusMode = 'rail',
     blankQuestionIdByNo,
     semanticParagraphs,
+    canonicalReadingBlocks,
+    canonicalReadingSemanticSignature,
   } = props
 
   if (semanticParagraphs !== undefined) {
@@ -273,7 +279,13 @@ export function PaperSurface(props: PaperSurfaceComponentProps): ReactNode {
       data-ps-mode="lecture"
     >
       <article className="ps-page">
-        {sections.map((section) => (
+        {canonicalReadingBlocks && (
+          <CanonicalReadingBlocks
+            blocks={canonicalReadingBlocks}
+            semanticSignature={canonicalReadingSemanticSignature}
+          />
+        )}
+        {!canonicalReadingBlocks && sections.map((section) => (
           <PaperSurfaceSection
             key={section}
             section={section}
@@ -314,6 +326,91 @@ export function PaperSurface(props: PaperSurfaceComponentProps): ReactNode {
           />
         )}
       </article>
+    </div>
+  )
+}
+
+function CanonicalReadingBlocks({
+  blocks,
+  semanticSignature,
+}: {
+  blocks: ReadonlyArray<CanonicalReadingSurfaceBlock>
+  semanticSignature?: string
+}): ReactNode {
+  return (
+    <div
+      className="ps-canonical-reading"
+      data-canonical-reading-semantic-signature={semanticSignature}
+    >
+      {blocks.map((block) => {
+        if (block.kind === 'paragraph') {
+          const className =
+            block.role === 'title'
+              ? 'ps-canonical-reading-title'
+              : block.role === 'subtitle'
+                ? 'ps-canonical-reading-subtitle'
+                : 'ps-canonical-reading-paragraph'
+          return (
+            <p
+              key={block.nodeId}
+              className={className}
+              data-canonical-block-id={block.nodeId}
+              data-canonical-block-kind="paragraph"
+              data-canonical-reading-role={block.role}
+            >
+              {block.text}
+            </p>
+          )
+        }
+        if (block.kind === 'table') {
+          return (
+            <table
+              key={block.nodeId}
+              className="ps-canonical-reading-table"
+              data-canonical-block-id={block.nodeId}
+              data-canonical-block-kind="table"
+              data-canonical-table-columns={block.columnCount}
+            >
+              <tbody>
+                {block.rows.map((row) => (
+                  <tr key={row.rowId} data-canonical-row-id={row.rowId}>
+                    {row.cells.map((cell) => (
+                      <td
+                        key={cell.cellId}
+                        colSpan={cell.columnSpan}
+                        rowSpan={cell.rowSpan}
+                        data-canonical-cell-id={cell.cellId}
+                        data-canonical-column-start={cell.columnStart}
+                      >
+                        {cell.text}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )
+        }
+        const src =
+          `data:${block.mediaArtifact.mimeType};base64,`
+          + block.mediaArtifact.encodedBytes
+        return (
+          <figure
+            key={block.nodeId}
+            className="ps-canonical-reading-figure"
+            data-canonical-block-id={block.nodeId}
+            data-canonical-block-kind="figure"
+            data-canonical-media-id={block.mediaId}
+            data-canonical-media-sha256={block.media.sha256}
+            data-canonical-source-artifact-id={
+              block.media.sourceArtifactRef.artifactId
+            }
+          >
+            <img src={src} alt={block.caption || block.mediaId} />
+            {block.caption && <figcaption>{block.caption}</figcaption>}
+          </figure>
+        )
+      })}
     </div>
   )
 }
@@ -788,6 +885,8 @@ function PaperSurfaceQuestionItem({
             <PaperSurfaceOptionList
               questionId={question.id}
               options={question.options}
+              canonicalPlacement={question.canonicalPlacement}
+              canonicalOptionIds={question.canonicalIdentity?.optionIds}
             />
           )}
         </>
@@ -801,19 +900,39 @@ function PaperSurfaceQuestionItem({
 type PaperSurfaceOptionListProps = {
   questionId: string
   options: ReadonlyArray<PaperQuestionOption>
+  canonicalPlacement?: PaperQuestion['canonicalPlacement']
+  canonicalOptionIds?: ReadonlyArray<string>
 }
 
 function PaperSurfaceOptionList({
   questionId,
   options,
+  canonicalPlacement,
+  canonicalOptionIds,
 }: PaperSurfaceOptionListProps): ReactNode {
   return (
-    <ol className="ps-option-list">
-      {options.map((opt) => (
+    <ol
+      className={`ps-option-list${canonicalPlacement ? ` ps-option-list--canonical ps-option-list--${canonicalPlacement.mode}` : ''}`}
+      data-canonical-placement-signature={canonicalPlacement?.signature}
+      data-canonical-column-starts-pt={
+        canonicalPlacement?.columnStartsPt.join(',')
+      }
+      style={canonicalPlacement
+        ? {
+            width: `${canonicalPlacement.rowWidthPt}pt`,
+            gridTemplateColumns: canonicalPlacement.columnWidthsPt
+              .map((width) => `${width}pt`)
+              .join(' '),
+            gap: 0,
+          }
+        : undefined}
+    >
+      {options.map((opt, index) => (
         <li
           key={`${questionId}-${opt.label}`}
           className="ps-option"
           {...{ [paperSurfaceAnchorAttrs.optionLabel]: opt.label }}
+          data-canonical-option-id={canonicalOptionIds?.[index]}
         >
           <span className="ps-option-label">{opt.label}.</span>
           <span className="ps-option-text">{opt.text}</span>

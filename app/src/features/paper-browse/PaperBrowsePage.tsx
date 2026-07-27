@@ -69,6 +69,10 @@ import {
   type PaperAssetSurfaceModel,
   type ReviewedReadingChoiceAnalysisV1,
 } from '../paper-intelligence/paperAssetSurfaceAdapter.ts'
+import {
+  buildCanonicalReadingConsumptionSurfaceData,
+  type CanonicalReadingSurfaceBlock,
+} from '../../../../shared/paper-normalization/canonicalPaperGroupSurfaceAdapter.mjs'
 // figure-render cut: separate import line (not folded into the block
 // above) so verify-paper-browse.mjs's `buildPaperAssetSurfaceModel...from
 // '../paper-intelligence/'` proximity regex keeps matching unchanged.
@@ -146,7 +150,16 @@ import {
 import './paperBrowsePage.css'
 
 type GroupModel =
-  | { kind: 'reading'; model: PaperAssetSurfaceModel }
+  | {
+      kind: 'reading'
+      model: {
+        surfaceData: PaperAssetSurfaceModel['surfaceData']
+        analysisByQuestionId: PaperAssetSurfaceModel['analysisByQuestionId']
+        evidenceKindById: PaperAssetSurfaceModel['evidenceKindById']
+        canonicalReadingBlocks: ReadonlyArray<CanonicalReadingSurfaceBlock>
+        canonicalReadingSemanticSignature: string
+      }
+    }
   | { kind: 'sevenChoices'; model: SevenChoicesSurfaceModel }
   | { kind: 'cloze'; model: ClozePaperViewModel }
   | { kind: 'grammarFill'; model: GrammarFillPaperViewModel }
@@ -616,6 +629,48 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
                   : {}),
               }),
             })
+          } else if (group?.groupType === 'reading') {
+            const readingMode = canonicalModeForGroup(
+              canonicalConsumption,
+              'reading',
+              block.groupId,
+            )
+            if (readingMode === 'canonical') {
+              const canonicalReading =
+                buildCanonicalReadingConsumptionSurfaceData({
+                  consumption: canonicalConsumptionForGroup(
+                    canonicalConsumption,
+                    'reading',
+                    block.groupId,
+                  ),
+                  groupId: block.groupId,
+                })
+              const analysisModel = readingAnalysis
+                ? buildPaperAssetSurfaceModel({
+                    asset: loadedAsset,
+                    analysis: readingAnalysis,
+                    groupId: block.groupId,
+                    figures: loadedFigures,
+                    assetBase: resolvedBase,
+                  })
+                : null
+              canonicalModels.set(block.groupId, {
+                kind: 'reading',
+                model: {
+                  surfaceData: {
+                    ...canonicalReading.surfaceData,
+                    evidence: analysisModel?.surfaceData.evidence ?? [],
+                  },
+                  analysisByQuestionId:
+                    analysisModel?.analysisByQuestionId ?? {},
+                  evidenceKindById:
+                    analysisModel?.evidenceKindById ?? {},
+                  canonicalReadingBlocks: canonicalReading.richBlocks,
+                  canonicalReadingSemanticSignature:
+                    canonicalReading.semanticDigest,
+                },
+              })
+            }
           }
         }
 
@@ -628,16 +683,25 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
           }
           try {
             if (group.groupType === 'reading') {
-              if (!readingAnalysis) throw new Error('未找到已审阅阅读解析')
-              models[block.groupId] = {
-                kind: 'reading',
-                model: buildPaperAssetSurfaceModel({
-                  asset: loadedAsset,
-                  analysis: readingAnalysis,
-                  groupId: block.groupId,
-                  figures: loadedFigures,
-                  assetBase: resolvedBase,
-                }),
+              const canonicalModel = canonicalModels.get(block.groupId)
+              if (canonicalModel) {
+                models[block.groupId] = canonicalModel
+              } else {
+                if (!readingAnalysis) throw new Error('未找到已审阅阅读解析')
+                models[block.groupId] = {
+                  kind: 'reading',
+                  model: {
+                    ...buildPaperAssetSurfaceModel({
+                      asset: loadedAsset,
+                      analysis: readingAnalysis,
+                      groupId: block.groupId,
+                      figures: loadedFigures,
+                      assetBase: resolvedBase,
+                    }),
+                    canonicalReadingBlocks: [],
+                    canonicalReadingSemanticSignature: '',
+                  },
+                }
               }
             } else if (group.groupType === 'sevenChoices') {
               const canonicalModel = canonicalModels.get(block.groupId)
@@ -1522,6 +1586,18 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
         annotations={[]}
         evidence={surfaceData.evidence}
         questions={surfaceData.questions}
+        canonicalReadingBlocks={
+          entry.kind === 'reading'
+            && entry.model.canonicalReadingBlocks.length > 0
+            ? entry.model.canonicalReadingBlocks
+            : undefined
+        }
+        canonicalReadingSemanticSignature={
+          entry.kind === 'reading'
+            && entry.model.canonicalReadingBlocks.length > 0
+            ? entry.model.canonicalReadingSemanticSignature
+            : undefined
+        }
         // seven-options-on-paper: the 七选五 A-G pool, display-only.
         // `entry.model.options` (SevenChoicesOptionView[]) is structurally
         // compatible with PaperQuestionOption ({label, text, translation?}

@@ -506,6 +506,13 @@ export type PaperQuestion = {
     readonly columnStartsPt: ReadonlyArray<number>
     readonly columnWidthsPt: ReadonlyArray<number>
   }
+
+  /** Stable canonical Reading identity; display state never changes it. */
+  readonly canonicalIdentity?: {
+    readonly questionId: string
+    readonly correctOptionId: string
+    readonly optionIds: ReadonlyArray<string>
+  }
 }
 
 export type PaperSurfaceProps = {
