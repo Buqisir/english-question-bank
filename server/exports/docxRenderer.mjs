@@ -60,6 +60,7 @@ import { headingKind } from '../../shared/papersurface/headingKind.mjs'
 import { resolveFigureMarker } from '../../shared/figures/resolveFigureMarker.mjs'
 import {
   projectCanonicalConsumerGroup,
+  selectedFamilyContractIdForGroup,
   selectConsumerGroupMode,
 } from '../../shared/paper-canonical/consumerProjection.mjs'
 import {
@@ -321,10 +322,6 @@ function canonicalGroupMatchesDocxDetail(canonicalGroup, detail) {
       : canonicalGroup.groupType
   return (
     detail.groupType === expectedGroupType
-    && (
-      canonicalGroup.groupType !== 'continuation'
-      || detail.writingTask?.taskType === 'continuation'
-    )
     && canonicalGroup.questions.length === detail.questions.length
     && canonicalGroup.questions.every(
       (question, index) => question.questionId === detail.questions[index]?.id,
@@ -389,6 +386,11 @@ function createCanonicalDocxGroupResolver(
   const canonicalGroupCache = new Map()
   return function getCanonicalDocxGroup(groupId, detail) {
     if (canonicalConsumption) {
+      const selectedFamilyContractId =
+        selectedFamilyContractIdForGroup({
+          consumption: canonicalConsumption,
+          groupId,
+        })
       const familyContractId =
         detail.groupType === 'cloze'
           ? 'cloze'
@@ -399,16 +401,11 @@ function createCanonicalDocxGroupResolver(
               : detail.groupType === 'reading'
                 ? 'reading'
                 : detail.groupType === 'writing'
-                  && detail.writingTask?.taskType === 'application'
-                  ? 'application-writing'
-                  : detail.groupType === 'writing'
-                    && detail.writingTask?.taskType === 'continuation'
-                    && canonicalConsumption.selections?.some(
-                      (selection) =>
-                        selection.familyContractId === 'continuation-writing'
-                        && selection.groupIds?.includes(groupId),
-                    )
-                    ? 'continuation-writing'
+                  && [
+                    'application-writing',
+                    'continuation-writing',
+                  ].includes(selectedFamilyContractId)
+                  ? selectedFamilyContractId
                 : null
       if (!familyContractId) return null
       const selection = selectConsumerGroupMode({
@@ -756,24 +753,20 @@ function canonicalContinuationWritingAnswerBox(canonicalGroup) {
   const widthTwips = mmToTwips(145)
   const heightTwips = mmToTwips(57)
   const response = canonicalGroup.answerRegion
-  const tableProperties = `<w:tblPr><w:tblW w:w="${widthTwips}" w:type="dxa"/><w:tblBorders><w:top w:val="single" w:sz="4" w:space="0" w:color="000000"/><w:left w:val="single" w:sz="4" w:space="0" w:color="000000"/><w:bottom w:val="single" w:sz="4" w:space="0" w:color="000000"/><w:right w:val="single" w:sz="4" w:space="0" w:color="000000"/><w:insideH w:val="nil"/></w:tblBorders><w:tblLayout w:type="fixed"/></w:tblPr><w:tblGrid><w:gridCol w:w="${widthTwips}"/></w:tblGrid>`
-  const row = (content, rowHeight) =>
-    `<w:tr><w:trPr><w:cantSplit/><w:trHeight w:val="${rowHeight}" w:hRule="exact"/></w:trPr><w:tc><w:tcPr><w:tcW w:w="${widthTwips}" w:type="dxa"/></w:tcPr>${content || '<w:p/>'}</w:tc></w:tr>`
-  const rows = response.starterLines.length === 2
-    ? response.starterLines.map((starter, index) => {
+  const cellMargins = '<w:tcMar><w:top w:w="0" w:type="dxa"/><w:left w:w="0" w:type="dxa"/><w:bottom w:w="0" w:type="dxa"/><w:right w:w="0" w:type="dxa"/></w:tcMar>'
+  const starterContent = response.starterLines.length === 2
+    ? `<w:tbl><w:tblPr><w:tblW w:w="${widthTwips}" w:type="dxa"/><w:tblBorders><w:top w:val="nil"/><w:left w:val="nil"/><w:bottom w:val="nil"/><w:right w:val="nil"/><w:insideH w:val="nil"/><w:insideV w:val="nil"/></w:tblBorders><w:tblLayout w:type="fixed"/></w:tblPr><w:tblGrid><w:gridCol w:w="${widthTwips}"/></w:tblGrid>${response.starterLines.map((starter, index) => {
         const rowHeight = index === 0
           ? Math.round(heightTwips / 2)
           : heightTwips - Math.round(heightTwips / 2)
-        return row(
-          `${canonicalBookmarkStart('canonical_starter', starter.starterId)}${paragraph(
+        return `<w:tr><w:trPr><w:trHeight w:val="${rowHeight}" w:hRule="exact"/></w:trPr><w:tc><w:tcPr><w:tcW w:w="${widthTwips}" w:type="dxa"/>${cellMargins}</w:tcPr>${canonicalBookmarkStart('canonical_starter', starter.starterId)}${paragraph(
             canonicalInlineRuns(starter.inlines, { size: 21 }),
             { after: 40 },
-          )}${canonicalBookmarkEnd('canonical_starter', starter.starterId)}`,
-          rowHeight,
-        )
-      }).join('')
-    : row('', heightTwips)
-  return `${canonicalBookmarkStart('canonical_response', response.responseSlotId)}<w:tbl>${tableProperties}${rows}</w:tbl>${canonicalBookmarkEnd('canonical_response', response.responseSlotId)}`
+          )}${canonicalBookmarkEnd('canonical_starter', starter.starterId)}</w:tc></w:tr>`
+      }).join('')}</w:tbl><w:p/>`
+    : '<w:p/>'
+  const table = `<w:tbl><w:tblPr><w:tblW w:w="${widthTwips}" w:type="dxa"/><w:tblBorders><w:top w:val="single" w:sz="4" w:space="0" w:color="000000"/><w:left w:val="single" w:sz="4" w:space="0" w:color="000000"/><w:bottom w:val="single" w:sz="4" w:space="0" w:color="000000"/><w:right w:val="single" w:sz="4" w:space="0" w:color="000000"/></w:tblBorders><w:tblLayout w:type="fixed"/></w:tblPr><w:tblGrid><w:gridCol w:w="${widthTwips}"/></w:tblGrid><w:tr><w:trPr><w:cantSplit/><w:trHeight w:val="${heightTwips}" w:hRule="exact"/></w:trPr><w:tc><w:tcPr><w:tcW w:w="${widthTwips}" w:type="dxa"/>${cellMargins}</w:tcPr>${starterContent}</w:tc></w:tr></w:tbl>`
+  return `${canonicalBookmarkStart('canonical_response', response.responseSlotId)}${table}${canonicalBookmarkEnd('canonical_response', response.responseSlotId)}`
 }
 
 function pushCanonicalDocxContinuationWriting(body, canonicalGroup) {

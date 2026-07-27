@@ -75,6 +75,9 @@ import {
   buildCanonicalReadingConsumptionSurfaceData,
   type CanonicalReadingSurfaceBlock,
 } from '../../../../shared/paper-normalization/canonicalPaperGroupSurfaceAdapter.mjs'
+import {
+  selectedFamilyContractIdForGroup,
+} from '../../../../shared/paper-canonical/consumerProjection.mjs'
 // figure-render cut: separate import line (not folded into the block
 // above) so verify-paper-browse.mjs's `buildPaperAssetSurfaceModel...from
 // '../paper-intelligence/'` proximity regex keeps matching unchanged.
@@ -199,6 +202,59 @@ type LectureAnalysisEntry =
 
 type WritingAnalysisFilePayload = {
   groups?: Record<string, { writing?: WritingAnalysis } | undefined>
+}
+
+function isRenderableWritingAnalysis(value: unknown): value is WritingAnalysis {
+  if (!value || typeof value !== 'object') return false
+  const analysis = value as Record<string, unknown>
+  if (
+    !['application', 'continuation'].includes(String(analysis.taskType ?? ''))
+    || typeof analysis.modelAnswer !== 'string'
+  ) return false
+  if (analysis.taskType === 'application') {
+    return (
+      analysis.highlightExpressions === undefined
+      || Array.isArray(analysis.highlightExpressions)
+    )
+  }
+  if (!Array.isArray(analysis.highlightExpressions)) return false
+  const continuationDesign = analysis.continuationDesign
+  if (!continuationDesign || typeof continuationDesign !== 'object') {
+    return false
+  }
+  const design = continuationDesign as Record<string, unknown>
+  return (
+    typeof design.theme === 'string'
+    && Array.isArray(design.paragraphs)
+    && design.paragraphs.length === 2
+    && design.paragraphs.every(
+      (paragraph) => typeof paragraph === 'string',
+    )
+  )
+}
+
+function writingTaskTypeForSurface({
+  asset,
+  consumption,
+  groupId,
+}: {
+  asset: PaperAssetV1 | null
+  consumption: WholePaperConsumption | null
+  groupId: string
+}): 'application' | 'continuation' | undefined {
+  if (consumption) {
+    const familyContractId = selectedFamilyContractIdForGroup({
+      consumption,
+      groupId,
+    })
+    if (familyContractId === 'application-writing') return 'application'
+    if (familyContractId === 'continuation-writing') return 'continuation'
+    return undefined
+  }
+  const group = asset?.content.groups[groupId]
+  return group?.writingTaskId
+    ? asset?.content.writingTasks?.[group.writingTaskId]?.taskType
+    : undefined
 }
 
 // 讲评态下的显式点题选择——哪个题组的哪道题当前在讲评栏里，以及种下的
@@ -594,6 +650,11 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
         const canonicalModels = new Map<string, GroupModel>()
         for (const block of groupBlocks) {
           const group = loadedAsset.content.groups[block.groupId]
+          const selectedFamilyContractId =
+            selectedFamilyContractIdForGroup({
+              consumption: canonicalConsumption,
+              groupId: block.groupId,
+            })
           if (group?.groupType === 'cloze') {
             canonicalModels.set(block.groupId, {
               kind: 'cloze',
@@ -693,9 +754,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
             }
           } else if (
             group?.groupType === 'writing'
-            && group.writingTaskId
-            && loadedAsset.content.writingTasks?.[group.writingTaskId]?.taskType
-              === 'application'
+            && selectedFamilyContractId === 'application-writing'
           ) {
             const writingMode = canonicalModeForGroup(
               canonicalConsumption,
@@ -723,14 +782,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
             }
           } else if (
             group?.groupType === 'writing'
-            && group.writingTaskId
-            && loadedAsset.content.writingTasks?.[group.writingTaskId]?.taskType
-              === 'continuation'
-            && canonicalConsumption.selections.some(
-              (selection) =>
-                selection.familyContractId === 'continuation-writing'
-                && selection.groupIds.includes(block.groupId),
-            )
+            && selectedFamilyContractId === 'continuation-writing'
           ) {
             const writingMode = canonicalModeForGroup(
               canonicalConsumption,
@@ -932,7 +984,9 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
           const raw = res.ok ? ((await res.json()) as WritingAnalysisFilePayload) : null
           for (const groupId of writingGroupIds) {
             const writing = raw?.groups?.[groupId]?.writing
-            entries[groupId] = writing ? { kind: 'writing', analysis: writing } : { kind: 'unavailable' }
+            entries[groupId] = isRenderableWritingAnalysis(writing)
+              ? { kind: 'writing', analysis: writing }
+              : { kind: 'unavailable' }
           }
         } catch {
           for (const groupId of writingGroupIds) entries[groupId] = { kind: 'unavailable' }
@@ -1652,10 +1706,11 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     }
 
     const isPanelGroup = lectureOpen && panelGroupId === groupId
-    const writingGroup = asset?.content.groups[groupId]
-    const sourceTaskType = writingGroup?.writingTaskId
-      ? asset?.content.writingTasks?.[writingGroup.writingTaskId]?.taskType
-      : undefined
+    const sourceTaskType = writingTaskTypeForSurface({
+      asset,
+      consumption: canonicalConsumption,
+      groupId,
+    })
     const writingLectureEntry = lectureAnalysisByGroupId[groupId]
     const retainedLecture = getRetainedWritingLecture({
       lectureOpen,
@@ -1911,9 +1966,11 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
 
     if (group.groupType === 'writing') {
       if (lectureEntry?.kind === 'writing') {
-        const sourceTaskType = group.writingTaskId
-          ? asset?.content.writingTasks?.[group.writingTaskId]?.taskType
-          : undefined
+        const sourceTaskType = writingTaskTypeForSurface({
+          asset,
+          consumption: canonicalConsumption,
+          groupId,
+        })
         const retainedLecture = getRetainedWritingLecture({
           lectureOpen,
           panelGroupId,

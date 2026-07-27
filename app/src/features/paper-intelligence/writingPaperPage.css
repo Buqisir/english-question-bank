@@ -80,12 +80,7 @@
   margin: 0;
 }
 
-/* Bordered answer box, sized per standard §8: 读后续写 ≈145×57mm — this base
-   class also covers a non-signature 应用文 box (no dedicated taskType class
-   exists at this DOM layer; --letter below covers the signature 应用文 case
-   precisely). 57mm @ 794px/210mm (≈3.781px/mm) ≈216px. An empty box (应用文)
-   stays a tall blank; a box with given starters (读后续写) grows so each
-   starter has writing room below. */
+/* Bordered answer box. Family modifiers below pin the physical dimensions. */
 .pi-writing-answer-box {
   border: 1px solid #1a1a1a;
   min-height: 216px;
@@ -94,8 +89,7 @@
   flex-direction: column;
 }
 
-/* Default (continuation starters / a given title): each given line reserves
-   blank writing space below it. */
+/* Default application given lines retain their established writing space. */
 .pi-writing-answer-given {
   margin: 0;
   min-height: 7rem;
@@ -135,8 +129,20 @@
   box-sizing: border-box;
   width: 145mm;
   max-width: 100%;
+  height: 57mm;
   min-height: 57mm;
   align-self: center;
+}
+
+.pi-writing-answer-box--continuation .pi-writing-answer-top {
+  display: grid;
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  flex: 1;
+  min-height: 0;
+}
+
+.pi-writing-answer-box--continuation .pi-writing-answer-given {
+  min-height: 0;
 }
 
 .pi-writing-answer-box--application .pi-writing-answer-top .pi-writing-answer-given,

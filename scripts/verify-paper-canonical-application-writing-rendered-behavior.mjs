@@ -1363,6 +1363,98 @@ async function assertActualPaperSurfaceArtifacts() {
       }
     }
     {
+      const pilotPaperId = 'paper-960d0f8d'
+      const pilotGroupId = 'group-960d0f8d-writing-application'
+      const pilotConsumption = structuredClone(providedScreenConsumption)
+      pilotConsumption.paperId = pilotPaperId
+      const applicationSelection = pilotConsumption.selections.find(
+        (selection) =>
+          selection.familyContractId === 'application-writing',
+      )
+      assert.ok(applicationSelection)
+      applicationSelection.groupIds = [pilotGroupId]
+      applicationSelection.projectedOccurrences =
+        applicationSelection.projectedOccurrences.map((occurrence) => ({
+          ...occurrence,
+          groupId: pilotGroupId,
+        }))
+      const pilotAsset = JSON.parse(readFileSync(
+        new URL(
+          `../app/public/paper-assets/${pilotPaperId}/latest/paper-asset.json`,
+          import.meta.url,
+        ),
+        'utf8',
+      ))
+      pilotAsset.content.blocks = pilotAsset.content.blocks.filter(
+        (block) =>
+          block.type === 'group'
+          && block.groupId === pilotGroupId,
+      )
+      const pilotAnalysis = JSON.parse(readFileSync(
+        new URL(
+          `../app/public/paper-assets/${pilotPaperId}/latest/analyses/writing-analysis-v1.json`,
+          import.meta.url,
+        ),
+        'utf8',
+      ))
+      assert.equal(
+        Object.hasOwn(
+          pilotAnalysis.groups[pilotGroupId].writing,
+          'highlightExpressions',
+        ),
+        false,
+        'accepted Application pilot keeps highlightExpressions optional',
+      )
+      const page = await browser.newPage({
+        viewport: { width: 1280, height: 900 },
+      })
+      let writingAnalysisRequestCount = 0
+      await page.route(
+        '**/api/paper-canonical/consumption?*',
+        (route) => route.fulfill({
+          status: 200,
+          contentType: 'application/json',
+          body: JSON.stringify(pilotConsumption),
+        }),
+      )
+      await page.route('**/paper-assets/**/paper-asset.json', (route) =>
+        route.fulfill({
+          status: 200,
+          contentType: 'application/json',
+          body: JSON.stringify(pilotAsset),
+        }))
+      await page.route('**/paper-assets/**/analyses/**', (route) => {
+        if (route.request().url().endsWith(
+          '/analyses/writing-analysis-v1.json',
+        )) {
+          writingAnalysisRequestCount += 1
+          return route.fulfill({
+            status: 200,
+            contentType: 'application/json',
+            body: JSON.stringify(pilotAnalysis),
+          })
+        }
+        return route.fulfill({ status: 404, body: '' })
+      })
+      await page.route('**/paper-assets/**/figures/**', (route) =>
+        route.fulfill({ status: 404, body: '' }))
+      const url = new URL('canonical-consumption-qa.html', appUrl)
+      url.searchParams.set('paperId', pilotPaperId)
+      url.searchParams.set('focusGroupId', pilotGroupId)
+      url.searchParams.set('lecture', '1')
+      await page.goto(url.href)
+      await page.locator('[data-review-section="value"]').waitFor({
+        timeout: 10_000,
+      })
+      assert.equal(writingAnalysisRequestCount, 1)
+      assert.equal(await page.locator('[data-review-section]').count(), 4)
+      assert.equal(
+        await page.locator('.retained-writing-card-value').innerText(),
+        pilotAnalysis.groups[pilotGroupId].writing.reviewCard.value,
+      )
+      await page.close()
+    }
+    {
       const consumption = providedScreenConsumption
       const canonical = applicationGroup(consumption)
       const asset = JSON.parse(readFileSync(

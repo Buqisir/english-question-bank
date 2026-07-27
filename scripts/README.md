@@ -112,6 +112,7 @@ must be confirmed green (AGENTS.md RM gate).
 
 | Script | Scope | Runs in CI? |
 | --- | --- | --- |
+| `verify-canonical-paper-group-surface-adapter-declaration-parity.mjs` | Canonical Paper Group surface adapter `.d.ts` / `.d.mts` declaration parity | yes |
 | `verify-paper-surface-mjs-declaration-parity.mjs` | `.mjs` declaration parity | yes |
 | `verify-i0e-seven-choices-entry.mjs` | I0-E 七选五 PaperSurface entry availability and label gate | yes |
 

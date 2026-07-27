@@ -83,8 +83,8 @@ function continuationGroup(consumption) {
   })
 }
 
-function poisonedExportItem(canonical) {
-  return {
+function poisonedExportItem(canonical, legacyTaskVariant = 'poisoned') {
+  const item = {
     detail: {
       id: canonical.groupId,
       paperId: canonical.paperId,
@@ -97,7 +97,7 @@ function poisonedExportItem(canonical) {
           'POISONED LEGACY MATERIAL\nParagraph 1: INVENTED PREFIX\nParagraph 2: INVENTED PREFIX',
       },
       writingTask: {
-        taskType: 'continuation',
+        taskType: 'application',
         continuationStarters: [
           'POISONED LEGACY STARTER ONE',
           'POISONED LEGACY STARTER TWO',
@@ -114,6 +114,10 @@ function poisonedExportItem(canonical) {
     sectionTitle: 'POISONED LEGACY CONTINUATION SECTION',
     note: 'POISONED LEGACY CONTINUATION INSTRUCTION',
   }
+  if (legacyTaskVariant === 'absent') {
+    delete item.detail.writingTask.taskType
+  }
+  return item
 }
 
 function bookmarkName(kind, value) {
@@ -206,7 +210,10 @@ for (const { label, consumption, canonical } of cases) {
       title: `Continuation ${label}`,
       versionType,
       printStyle: 'exam',
-      items: [poisonedExportItem(canonical)],
+      items: [poisonedExportItem(
+        canonical,
+        label === 'two-starter' ? 'absent' : 'poisoned',
+      )],
       blocks: [{
         type: 'question_group',
         questionGroupId: canonical.groupId,
@@ -279,7 +286,10 @@ for (const { label, consumption, canonical } of cases) {
       title: `Continuation ${label}`,
       versionType,
       printStyle: 'exam',
-      items: [poisonedExportItem(canonical)],
+      items: [poisonedExportItem(
+        canonical,
+        label === 'two-starter' ? 'absent' : 'poisoned',
+      )],
       blocks: [{
         type: 'question_group',
         questionGroupId: canonical.groupId,
@@ -332,8 +342,13 @@ for (const { label, consumption, canonical } of cases) {
     )
     assert.equal(
       (xml.match(/<w:tbl>/g) || []).length,
+      canonical.answerRegion.starterLines.length === 2 ? 2 : 1,
+      'Continuation owns one outer response table and an optional nested starter layout table',
+    )
+    assert.equal(
+      (xml.match(/<w:cantSplit\/>/g) || []).length,
       1,
-      'Continuation owns one DOCX response table',
+      'Continuation response owns one indivisible outer DOCX row',
     )
     for (const starter of canonical.answerRegion.starterLines) {
       assert.equal(
@@ -383,6 +398,85 @@ for (const { label, consumption, canonical } of cases) {
     } finally {
       rmSync(docxRoot, { recursive: true, force: true })
     }
+  }
+}
+
+{
+  const { consumption, canonical } = cases.find(
+    ({ label }) => label === 'two-starter',
+  )
+  const dummy = {
+    detail: {
+      id: 'dummy-writing-boundary-group',
+      paperId: 'dummy-writing-boundary-paper',
+      title: 'Application task',
+      source: 'boundary fixture',
+      groupType: 'writing',
+      passage: {
+        title: '',
+        materialText:
+          'Filler paragraph with enough words to occupy one ordinary line.',
+      },
+      questions: [],
+    },
+    score: 15,
+    sectionTitle: '',
+    note: '',
+  }
+  const boundaryArgs = {
+    title: 'Continuation boundary probe',
+    versionType: 'student',
+    printStyle: 'exam',
+    items: [dummy, poisonedExportItem(canonical, 'absent')],
+    blocks: [
+      {
+        type: 'question_group',
+        questionGroupId: dummy.detail.id,
+        score: 15,
+      },
+      {
+        type: 'question_group',
+        questionGroupId: canonical.groupId,
+        score: 25,
+      },
+    ],
+    questionNumberStart: 1,
+    canonicalConsumption: consumption,
+  }
+  const root = mkdtempSync(path.join(
+    tmpdir(),
+    'eqb-continuation-docx-boundary-',
+  ))
+  try {
+    const docxPath = path.join(root, 'boundary.docx')
+    const pdfPath = path.join(root, 'boundary.pdf')
+    const xml = docxRenderer.buildDocumentXml(boundaryArgs)
+    docxRenderer.writeDocxPackage({
+      documentXml: xml,
+      outputPath: docxPath,
+      title: boundaryArgs.title,
+    })
+    docxRenderer.convertDocxToPdf(docxPath, pdfPath)
+    const pages = execFileSync(
+      'pdftotext',
+      ['-layout', pdfPath, '-'],
+      { encoding: 'utf8' },
+    ).split('\f')
+    const starterPages = canonical.answerRegion.starterLines.map(
+      (starter) =>
+        pages.findIndex((pageText) => pageText.includes(starter.text)) + 1,
+    )
+    assert.ok(
+      starterPages.every((pageNumber) => pageNumber > 0),
+      'DOCX boundary PDF contains both canonical starter lines',
+    )
+    assert.equal(
+      new Set(starterPages).size,
+      1,
+      'DOCX boundary PDF keeps both starter lines in one unsplit response box/page',
+    )
+  } finally {
+    rmSync(root, { recursive: true, force: true })
   }
 }
 
@@ -463,7 +557,7 @@ async function assertBrowserArtifacts() {
         const box = await response.boundingBox()
         assert.ok(box)
         assert.ok(Math.abs(box.width - (145 / 25.4 * 96)) <= 1)
-        assert.ok(box.height >= (57 / 25.4 * 96) - 1)
+        assert.ok(Math.abs(box.height - (57 / 25.4 * 96)) <= 1)
         signatures.push({
           semantic: await response.getAttribute(
             'data-canonical-writing-semantic-signature',
@@ -516,54 +610,175 @@ async function assertBrowserArtifacts() {
           'POISONED LEGACY STARTER TWO',
           'POISONED LEGACY STARTER THREE',
         ]
-      const page = await browser.newPage({
-        viewport: { width: 1280, height: 900 },
-      })
-      await page.route(
-        '**/api/paper-canonical/consumption?*',
-        (route) => route.fulfill({
-          status: 200,
-          contentType: 'application/json',
-          body: JSON.stringify(consumption),
-        }),
-      )
-      await page.route('**/paper-assets/**/paper-asset.json', (route) =>
-        route.fulfill({
-          status: 200,
-          contentType: 'application/json',
-          body: JSON.stringify(asset),
-        }))
-      await page.route('**/paper-assets/**/analyses/**', (route) =>
-        route.fulfill({ status: 404, body: '' }))
-      await page.route('**/paper-assets/**/figures/**', (route) =>
-        route.fulfill({ status: 404, body: '' }))
-      const url = new URL('canonical-consumption-qa.html', appUrl)
-      url.searchParams.set('paperId', consumption.paperId)
-      url.searchParams.set('focusGroupId', canonical.groupId)
-      await page.goto(url.href)
-      const response = page.locator(
-        `[data-canonical-response-slot-id="${canonical.answerRegion.responseSlotId}"]`,
-      )
-      try {
-        await response.waitFor({ timeout: 10_000 })
-      } catch (error) {
-        throw new Error(
-          `PaperBrowse did not mount canonical Continuation Writing (${label}): ${
-            await page.locator('body').innerText()
-          }`,
-          { cause: error },
+      const legacyTask = asset.content.writingTasks[legacyGroup.writingTaskId]
+      if (label === 'two-starter') delete legacyTask.taskType
+      else legacyTask.taskType = 'application'
+
+      const analysisVariants = [
+        {
+          label: 'valid',
+          payload: {
+            schemaVersion: 'writing-analysis-v1',
+            paperId: consumption.paperId,
+            groups: {
+              [canonical.groupId]: {
+                writing: {
+                  taskType: 'continuation',
+                  modelAnswer: 'FORGED ANALYSIS MODEL ANSWER',
+                  continuationDesign: {
+                    theme: 'FORGED ANALYSIS THEME',
+                    paragraphs: [
+                      'FORGED ANALYSIS PARAGRAPH ONE',
+                      'FORGED ANALYSIS PARAGRAPH TWO',
+                    ],
+                  },
+                  highlightExpressions: [{
+                    text: 'FORGED ANALYSIS EXPRESSION',
+                    note: 'FORGED ANALYSIS NOTE',
+                  }],
+                },
+              },
+            },
+          },
+        },
+        {
+          label: 'invalid',
+          payload: {
+            schemaVersion: 'writing-analysis-v1',
+            paperId: consumption.paperId,
+            groups: {
+              [canonical.groupId]: {
+                writing: {
+                  taskType: 'continuation',
+                  modelAnswer: null,
+                  continuationDesign: {
+                    theme: 'FORGED ANALYSIS INVALID THEME',
+                    paragraphs: ['FORGED ANALYSIS ONLY ONE PARAGRAPH'],
+                  },
+                  highlightExpressions: 'FORGED ANALYSIS INVALID EXPRESSIONS',
+                },
+              },
+            },
+          },
+        },
+      ]
+      const productionSignatures = []
+      for (const analysisVariant of analysisVariants) {
+        let writingAnalysisRequestCount = 0
+        const page = await browser.newPage({
+          viewport: { width: 1280, height: 900 },
+        })
+        await page.route(
+          '**/api/paper-canonical/consumption?*',
+          (route) => route.fulfill({
+            status: 200,
+            contentType: 'application/json',
+            body: JSON.stringify(consumption),
+          }),
         )
+        await page.route('**/paper-assets/**/paper-asset.json', (route) =>
+          route.fulfill({
+            status: 200,
+            contentType: 'application/json',
+            body: JSON.stringify(asset),
+          }))
+        await page.route('**/paper-assets/**/analyses/**', (route) => {
+          if (route.request().url().endsWith(
+            '/analyses/writing-analysis-v1.json',
+          )) {
+            writingAnalysisRequestCount += 1
+            return route.fulfill({
+              status: 200,
+              contentType: 'application/json',
+              body: JSON.stringify(analysisVariant.payload),
+            })
+          }
+          return route.fulfill({ status: 404, body: '' })
+        })
+        await page.route('**/paper-assets/**/figures/**', (route) =>
+          route.fulfill({ status: 404, body: '' }))
+        const url = new URL('canonical-consumption-qa.html', appUrl)
+        url.searchParams.set('paperId', consumption.paperId)
+        url.searchParams.set('focusGroupId', canonical.groupId)
+        url.searchParams.set('lecture', '1')
+        await page.goto(url.href)
+        const response = page.locator(
+          `[data-canonical-response-slot-id="${canonical.answerRegion.responseSlotId}"]`,
+        )
+        try {
+          await response.waitFor({ timeout: 10_000 })
+        } catch (error) {
+          throw new Error(
+            `PaperBrowse did not mount canonical Continuation Writing (${label}/${analysisVariant.label}): ${
+              await page.locator('body').innerText()
+            }`,
+            { cause: error },
+          )
+        }
+        const writingPage = response.locator(
+          'xpath=ancestor::*[@data-pi-writing-page]',
+        )
+        if (analysisVariant.label === 'valid') {
+          await page.getByText('FORGED ANALYSIS THEME', { exact: true })
+            .waitFor()
+        } else {
+          await page.locator('.paper-browse-lecture-empty')
+            .filter({ hasText: '解析未发布' })
+            .waitFor()
+        }
+        assert.equal(
+          writingAnalysisRequestCount,
+          1,
+          'PaperBrowse lecture route fetches the present Analysis exactly once',
+        )
+        assert.equal(await response.count(), 1)
+        assert.equal(
+          await writingPage.locator('[data-canonical-continuation-material]')
+            .count(),
+          1,
+        )
+        assert.equal(
+          await writingPage.locator('[data-canonical-response-slot-id]')
+            .count(),
+          1,
+        )
+        assert.deepEqual(
+          await writingPage.locator('[data-canonical-starter-id]')
+            .allInnerTexts(),
+          canonical.answerRegion.starterLines.map((starter) => starter.text),
+        )
+        assert.deepEqual(
+          await writingPage.locator(
+            '.pi-writing-part, .pi-writing-section, .pi-writing-instruction',
+          ).allInnerTexts(),
+          [
+            canonical.paperChrome.part.text,
+            canonical.paperChrome.section.text,
+            ...canonical.paperChrome.instructions.map(
+              (instruction) => instruction.text,
+            ),
+          ],
+        )
+        assert.equal(
+          await writingPage.locator('[data-writing-answer-supplement]').count(),
+          0,
+        )
+        assertVisibleCanonicalText(await writingPage.innerText(), canonical)
+        productionSignatures.push({
+          semantic: await response.getAttribute(
+            'data-canonical-writing-semantic-signature',
+          ),
+          occurrence: await response.getAttribute(
+            'data-canonical-writing-occurrence-signature',
+          ),
+        })
+        await page.close()
       }
-      assert.equal(await response.count(), 1)
-      const writingPage = response.locator(
-        'xpath=ancestor::*[@data-pi-writing-page]',
-      )
-      assertVisibleCanonicalText(await writingPage.innerText(), canonical)
-      assert.equal(
-        await writingPage.locator('[data-canonical-starter-id]').count(),
-        canonical.answerRegion.starterLines.length,
-      )
-      await page.close()
+      assert.deepEqual(productionSignatures[0], productionSignatures[1])
+      assert.deepEqual(productionSignatures[0], {
+        semantic: canonical.semanticSignature,
+        occurrence: canonical.occurrenceSignature,
+      })
     }
 
     for (const { label, versionType, html, canonical } of printArtifacts) {

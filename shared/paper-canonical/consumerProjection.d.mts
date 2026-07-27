@@ -11,6 +11,11 @@ export function selectConsumerGroupMode(input: {
   groupId: string
 }): CanonicalConsumerSelection
 
+export function selectedFamilyContractIdForGroup(input: {
+  consumption: unknown
+  groupId: string
+}): string | null
+
 export function projectCanonicalConsumerGroup(input: {
   consumption: unknown
   familyContractId: string

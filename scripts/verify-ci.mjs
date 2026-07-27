@@ -34,6 +34,7 @@ const registry = {
   'scripts/verify-paper-normalization-import-gate.mjs',
   'scripts/verify-paper-normalization-print-html.mjs',
   'scripts/verify-paper-normalization-docx.mjs',
+  'scripts/verify-canonical-paper-group-surface-adapter-declaration-parity.mjs',
   'scripts/verify-paper-surface-mjs-declaration-parity.mjs',
   'scripts/verify-c7-paper-import-contracts.mjs',
   'scripts/verify-c7-paper-import-publish.mjs',

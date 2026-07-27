@@ -47,6 +47,7 @@ import {
 } from '../shared/paper-canonical/applicationWritingDisplay.mjs'
 import {
   projectCanonicalConsumerGroup,
+  selectedFamilyContractIdForGroup,
   selectConsumerGroupMode,
 } from '../shared/paper-canonical/consumerProjection.mjs'
 import { resolveGroupFigures } from './figures/paperFigures.mjs'
@@ -195,10 +196,6 @@ function canonicalGroupMatchesPrintDetail(canonicalGroup, detail) {
       : canonicalGroup.groupType
   return (
     detail.groupType === expectedGroupType
-    && (
-      canonicalGroup.groupType !== 'continuation'
-      || detail.writingTask?.taskType === 'continuation'
-    )
     && canonicalGroup.questions.length === detail.questions.length
     && canonicalGroup.questions.every(
       (question, index) => question.questionId === detail.questions[index]?.id,
@@ -444,6 +441,11 @@ export function buildPrintHtml({
 
   function getCanonicalGroup(groupId, detail) {
     if (canonicalConsumption) {
+      const selectedFamilyContractId =
+        selectedFamilyContractIdForGroup({
+          consumption: canonicalConsumption,
+          groupId,
+        })
       const familyContractId =
         detail.groupType === 'cloze'
           ? 'cloze'
@@ -454,16 +456,11 @@ export function buildPrintHtml({
               : detail.groupType === 'reading'
                 ? 'reading'
                 : detail.groupType === 'writing'
-                  && detail.writingTask?.taskType === 'application'
-                  ? 'application-writing'
-                  : detail.groupType === 'writing'
-                    && detail.writingTask?.taskType === 'continuation'
-                    && canonicalConsumption.selections?.some(
-                      (selection) =>
-                        selection.familyContractId === 'continuation-writing'
-                        && selection.groupIds?.includes(groupId),
-                    )
-                    ? 'continuation-writing'
+                  && [
+                    'application-writing',
+                    'continuation-writing',
+                  ].includes(selectedFamilyContractId)
+                  ? selectedFamilyContractId
                 : null
       if (!familyContractId) return null
       const selection = selectConsumerGroupMode({

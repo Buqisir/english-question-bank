@@ -721,6 +721,30 @@ export function selectConsumerGroupMode({
   return selection
 }
 
+export function selectedFamilyContractIdForGroup({
+  consumption,
+  groupId,
+}) {
+  if (consumption?.disposition !== 'ready' || !Array.isArray(consumption.selections)) {
+    throw rejected('A ready whole-paper Consumption Plan is required')
+  }
+  const selections = consumption.selections.filter((selection) => {
+    if (!Array.isArray(selection?.groupIds)) {
+      throw rejected('A Consumption Plan selection has invalid Group ownership')
+    }
+    return selection.groupIds.includes(groupId)
+  })
+  if (selections.length > 1) {
+    throw rejected(`Group ${groupId} belongs to multiple family selections`)
+  }
+  if (selections.length === 0) return null
+  const familyContractId = selections[0].familyContractId
+  if (!SUPPORTED_FAMILIES.has(familyContractId)) {
+    throw rejected(`Group ${groupId} belongs to an unsupported consumer family`)
+  }
+  return familyContractId
+}
+
 function selectOccurrence(input) {
   const { familyContractId, groupId } = input
   const selection = selectConsumerGroupMode(input)
