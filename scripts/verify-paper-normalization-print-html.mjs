@@ -274,8 +274,8 @@ assert.equal(teacherCombined.includes('【答案】'), true)
 assert.equal(studentCombined.includes('<span class="print-blank-num">55</span>'), true)
 assert.equal(studentCombined.includes('<span class="print-blank-num">56</span>'), true)
 assert.equal(studentCombined.includes('<span class="print-blank-num">65</span>'), true)
-assert.equal(studentCombined.includes('<span class="print-blank-num">66</span>'), true)
-assert.equal(studentCombined.includes('<span class="print-blank-num">75</span>'), true)
+assert.equal(studentCombined.includes('<span class="print-blank-num">66</span>'), false)
+assert.equal(studentCombined.includes('<span class="print-blank-num">75</span>'), false)
 assert.equal(studentCombined.includes('class="qnum">41.</span> 41'), false)
 assert.equal(studentCombined.includes('class="qnum">56.</span> 56'), false)
 const orderFacts = [
@@ -286,7 +286,7 @@ const orderFacts = [
   studentCombined.indexOf('<span class="print-blank-num">56</span>'),
   studentCombined.lastIndexOf('class="page-break"'),
   studentCombined.indexOf('第四部分 语法填空（960d0f8d）'),
-  studentCombined.indexOf('<span class="print-blank-num">66</span>'),
+  studentCombined.lastIndexOf('<span class="print-blank-num">56</span>'),
 ]
 assert.equal(
   orderFacts.every((position, index) =>

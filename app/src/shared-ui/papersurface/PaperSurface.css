@@ -506,6 +506,14 @@ button.ps-paper-blank.ps-paper-blank--clickable {
   white-space: nowrap;
 }
 
+.ps-option-list--one_column .ps-option {
+  display: block;
+}
+
+.ps-option-list--one_column .ps-option-label {
+  margin-right: 6px;
+}
+
 .ps-option-label {
   font-weight: 700;
 }

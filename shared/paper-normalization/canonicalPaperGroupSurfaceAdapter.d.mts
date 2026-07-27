@@ -48,6 +48,11 @@ export type CanonicalReadingSurfaceBlock =
       readonly nodeId: string
       readonly role: 'title' | 'subtitle' | 'body'
       readonly text: string
+      readonly inlines: ReadonlyArray<{
+        readonly kind: 'text'
+        readonly nodeId: string
+        readonly text: string
+      }>
     }
   | {
       readonly kind: 'table'
@@ -62,6 +67,11 @@ export type CanonicalReadingSurfaceBlock =
           readonly rowSpan: number
           readonly role: string
           readonly text: string
+          readonly inlines: ReadonlyArray<{
+            readonly kind: 'text'
+            readonly nodeId: string
+            readonly text: string
+          }>
         }>
       }>
     }
@@ -70,6 +80,11 @@ export type CanonicalReadingSurfaceBlock =
       readonly nodeId: string
       readonly mediaId: string
       readonly caption: string
+      readonly captionInlines: ReadonlyArray<{
+        readonly kind: 'text'
+        readonly nodeId: string
+        readonly text: string
+      }>
       readonly media: {
         readonly mimeType: string
         readonly sha256: string

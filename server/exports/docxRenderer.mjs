@@ -328,6 +328,14 @@ function canonicalBookmarkEnd(kind, value) {
   return `<w:bookmarkEnd w:id="${canonicalBookmarkIdentity(kind, value).id}"/>`
 }
 
+function canonicalInlineRuns(nodes, options = {}) {
+  return nodes.flatMap((node) => [
+    canonicalBookmarkStart('canonical_content', node.nodeId),
+    run(node.text, options),
+    canonicalBookmarkEnd('canonical_content', node.nodeId),
+  ])
+}
+
 function pushCanonicalDocxSharedBank(body, canonicalGroup) {
   if (!canonicalGroup.optionBank) return
   const { bankId, options } = canonicalGroup.optionBank
@@ -442,13 +450,21 @@ function createCanonicalDocxGroupResolver(
 
 function canonicalDocxQuestion(canonicalQuestion, question) {
   if (!canonicalQuestion) return question
+  const preserveInlineIdentity =
+    Array.isArray(canonicalQuestion.stemContent)
   return {
     ...question,
     stem: canonicalQuestion.stem ?? '',
+    ...(preserveInlineIdentity
+      ? { stemContent: canonicalQuestion.stemContent }
+      : {}),
     options: canonicalQuestion.options.map((option) => ({
       optionId: option.optionId,
       label: option.label,
       content: option.text,
+      ...(preserveInlineIdentity
+        ? { canonicalContent: option.content }
+        : {}),
     })),
     answer: canonicalQuestion.correctOptionId
       ? canonicalQuestion.options.find(
@@ -463,13 +479,12 @@ function canonicalDocxQuestion(canonicalQuestion, question) {
 function pushCanonicalDocxParagraphs(
   body,
   canonicalGroup,
-  questionNumberStart,
   paragraphOptions,
 ) {
   const displayNumberByQuestionId = new Map(
-    canonicalGroup.questions.map((question, index) => [
+    canonicalGroup.questions.map((question) => [
       question.questionId,
-      questionNumberStart + index,
+      question.questionNo,
     ]),
   )
   canonicalGroup.paragraphs.forEach((canonicalParagraph) => {
@@ -509,7 +524,10 @@ function canonicalReadingTableXml(block) {
               ? `<w:gridSpan w:val="${cell.columnSpan}"/>`
               : '')
             + (cell.rowSpan > 1 ? '<w:vMerge w:val="restart"/>' : '')
-            + `</w:tcPr>${paragraph(cell.text, { after: 30, size: 21 })}</w:tc>`,
+            + `</w:tcPr>${paragraph(
+              canonicalInlineRuns(cell.inlines, { size: 21 }),
+              { after: 30 },
+            )}</w:tc>`,
           canonicalBookmarkEnd('canonical_cell', cell.cellId),
         )
         if (cell.rowSpan > 1) {
@@ -553,10 +571,10 @@ function pushCanonicalDocxReadingBlocks(body, canonicalGroup, images) {
     if (block.kind === 'paragraph') {
       body.push(
         canonicalBookmarkStart('canonical_block', block.nodeId),
-        paragraph([run(block.text, {
+        paragraph(canonicalInlineRuns(block.inlines, {
           bold: block.role !== 'body',
           size: 21,
-        })], {
+        }), {
           after: 60,
           align: block.role === 'title' ? 'center' : undefined,
           firstLineIndent: block.role === 'body' ? 420 : undefined,
@@ -603,7 +621,10 @@ function pushCanonicalDocxReadingBlocks(body, canonicalGroup, images) {
         name: block.caption || block.mediaId,
       }),
       ...(block.caption
-        ? [paragraph(block.caption, { align: 'center', after: 60, size: 18 })]
+        ? [paragraph(
+            canonicalInlineRuns(block.captionInlines, { size: 18 }),
+            { align: 'center', after: 60 },
+          )]
         : []),
       canonicalBookmarkEnd('canonical_media', block.mediaId),
       canonicalBookmarkEnd('canonical_block', block.nodeId),
@@ -629,7 +650,6 @@ function pushCanonicalDocxContent(
   pushCanonicalDocxParagraphs(
     body,
     canonicalGroup,
-    questionNumberStart,
     paragraphOptions,
   )
 }
@@ -658,16 +678,32 @@ function pushHandoutDocxQuestions(
       canonicalQuestion,
       question,
     )
+    const displayQuestionNo = canonicalQuestion
+      ? canonicalQuestion.questionNo
+      : questionNumber
+    if (canonicalQuestion) {
+      body.push(canonicalBookmarkStart(
+        'canonical_question',
+        canonicalQuestion.questionId,
+      ))
+    }
     body.push(
       paragraph(
         [
-          run(`${questionNumber}. `, { bold: true, size: 21 }),
-          run(
-            canonicalQuestion
-              ? docxQuestion.stem
-              : docxQuestionStem(detail, docxQuestion),
-            { bold: true, size: 21 },
-          ),
+          run(`${displayQuestionNo}. `, { bold: true, size: 21 }),
+          ...(canonicalQuestion
+            ? (
+                Array.isArray(docxQuestion.stemContent)
+                  ? canonicalInlineRuns(
+                      docxQuestion.stemContent,
+                      { bold: true, size: 21 },
+                    )
+                  : [run(docxQuestion.stem, { bold: true, size: 21 })]
+              )
+            : [run(
+                docxQuestionStem(detail, docxQuestion),
+                { bold: true, size: 21 },
+              )]),
         ],
         { before: 90, after: 70, keepNext: true },
       ),
@@ -706,6 +742,12 @@ function pushHandoutDocxQuestions(
       }
     }
     pushDocxAnswerArea(body, detail, docxQuestion, versionType)
+    if (canonicalQuestion) {
+      body.push(canonicalBookmarkEnd(
+        'canonical_question',
+        canonicalQuestion.questionId,
+      ))
+    }
     questionNumber++
   })
   return questionNumber
@@ -1421,6 +1463,9 @@ function buildExamDocumentXml({
             canonicalQuestion,
             question,
           )
+          const displayQuestionNo = canonicalQuestion
+            ? canonicalQuestion.questionNo
+            : questionNum
           const stemText = String(docxQuestion.stem || '').trim()
           const hasOptions =
             Array.isArray(docxQuestion.options)
@@ -1431,30 +1476,42 @@ function buildExamDocumentXml({
             questionNum++
             return
           }
+          if (canonicalQuestion) {
+            body.push(canonicalBookmarkStart(
+              'canonical_question',
+              canonicalQuestion.questionId,
+            ))
+          }
           if (!stemText && hasOptions) {
             if (docxQuestion.layoutPlan) {
               body.push(canonicalDocxQuestionOptionLayout(
-                questionNum,
+                displayQuestionNo,
                 docxQuestion.options,
                 docxQuestion.layoutPlan,
                 { placementSignature: docxQuestion.placementSignature },
               ))
             } else {
               const inlineText = docxQuestion.options.map((o) => `${o.label}. ${o.content}`).join('    ')
-              body.push(paragraph([run(`${questionNum}.  ${inlineText}`, { size: 21 })], { before: 60, after: 50 }))
+              body.push(paragraph([run(`${displayQuestionNo}.  ${inlineText}`, { size: 21 })], { before: 60, after: 50 }))
             }
           } else {
             body.push(
               paragraph(
                 [
-                  run(
-                    `${questionNum}.  ${
-                      canonicalQuestion
-                        ? docxQuestion.stem
-                        : docxQuestionStem(detail, docxQuestion)
-                    }`,
-                    { size: 21 },
-                  ),
+                  run(`${displayQuestionNo}.  `, { size: 21 }),
+                  ...(canonicalQuestion
+                    ? (
+                        Array.isArray(docxQuestion.stemContent)
+                          ? canonicalInlineRuns(
+                              docxQuestion.stemContent,
+                              { size: 21 },
+                            )
+                          : [run(docxQuestion.stem, { size: 21 })]
+                      )
+                    : [run(
+                        docxQuestionStem(detail, docxQuestion),
+                        { size: 21 },
+                      )]),
                 ],
                 { before: 60, after: 50 },
               ),
@@ -1481,6 +1538,12 @@ function buildExamDocumentXml({
             if (explanation) {
               body.push(paragraph([run(`【解析】${explanation}`, { size: 18, color: '666666' })], { after: 50, indentLeft: 420 }))
             }
+          }
+          if (canonicalQuestion) {
+            body.push(canonicalBookmarkEnd(
+              'canonical_question',
+              canonicalQuestion.questionId,
+            ))
           }
           questionNum++
         })
@@ -1561,16 +1624,23 @@ function canonicalDocxQuestionOptionLayout(
   if (plan.mode === 'one_column') {
     optionLayout = plan.placements.map((placement) => {
       const option = byLabel.get(placement.label)
+      const continuationStartTwip = placement.continuationStartTwip
+      if (!Number.isInteger(continuationStartTwip)) {
+        throw new Error('Canonical one-column continuation placement is required')
+      }
       return paragraph(
         [
           canonicalBookmarkStart('canonical_option', option.optionId),
-          run(`${option.label}. ${option.content}`, { size: 21 }),
+          run(`${option.label}. `, { size: 21 }),
+          ...(option.canonicalContent
+            ? canonicalInlineRuns(option.canonicalContent, { size: 21 })
+            : [run(option.content, { size: 21 })]),
           canonicalBookmarkEnd('canonical_option', option.optionId),
         ],
         {
           after: 30,
-          indentLeft: 420,
-          hangingIndent: 420,
+          indentLeft: continuationStartTwip,
+          hangingIndent: continuationStartTwip,
         },
       )
     }).join('')
@@ -1591,7 +1661,10 @@ function canonicalDocxQuestionOptionLayout(
       `<w:tr>${cells.map((option, column) =>
         `<w:tc><w:tcPr><w:tcW w:w="${widths[column]}" w:type="dxa"/></w:tcPr>${paragraph([
           canonicalBookmarkStart('canonical_option', option.optionId),
-          run(`${option.label}. ${option.content}`, { size: 21 }),
+          run(`${option.label}. `, { size: 21 }),
+          ...(option.canonicalContent
+            ? canonicalInlineRuns(option.canonicalContent, { size: 21 })
+            : [run(option.content, { size: 21 })]),
           canonicalBookmarkEnd('canonical_option', option.optionId),
         ], { after: 30 })}</w:tc>`).join('')}</w:tr>`).join('')
     optionLayout = `<w:tbl><w:tblPr><w:tblW w:w="${plan.rowWidthTwip}" w:type="dxa"/><w:tblLayout w:type="fixed"/></w:tblPr><w:tblGrid>${grid}</w:tblGrid>${rowXml}</w:tbl>`

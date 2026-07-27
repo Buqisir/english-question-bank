@@ -258,8 +258,8 @@ assert.equal(studentCombined.xml.includes('  41  '), true)
 assert.equal(studentCombined.xml.includes('  55  '), true)
 assert.equal(studentCombined.xml.includes('  56  '), true)
 assert.equal(studentCombined.xml.includes('  65  '), true)
-assert.equal(studentCombined.xml.includes('  66  '), true)
-assert.equal(studentCombined.xml.includes('  75  '), true)
+assert.equal(studentCombined.xml.includes('  66  '), false)
+assert.equal(studentCombined.xml.includes('  75  '), false)
 assert.equal(studentCombined.xml.includes('【答案】'), false)
 assert.equal(teacherCombined.xml.includes('【答案】'), true)
 assert.equal(teacherCombined.xml.includes('41.  41'), false)
@@ -272,7 +272,7 @@ const blockOrder = [
   studentCombined.xml.indexOf('  56  '),
   studentCombined.xml.lastIndexOf('<w:br w:type="page"/>'),
   studentCombined.xml.indexOf('第四部分 语法填空（960d0f8d）'),
-  studentCombined.xml.indexOf('  66  '),
+  studentCombined.xml.lastIndexOf('  56  '),
 ]
 assert.equal(
   blockOrder.every(
@@ -284,7 +284,7 @@ assert.equal(
 )
 assert.match(
   studentCombined.xml,
-  /<w:u w:val="single"\/>[^]*?<w:t xml:space="preserve">  67  <\/w:t><\/w:r><w:r>[^]*?<w:t xml:space="preserve">\(absorb\)<\/w:t>/,
+  /<w:u w:val="single"\/>[^]*?<w:t xml:space="preserve">  57  <\/w:t><\/w:r><w:r>[^]*?<w:t xml:space="preserve">\(absorb\)<\/w:t>/,
 )
 assert.equal(
   (studentCombined.xml.match(/<w:u w:val="single"\/>/g) || []).length,
@@ -307,10 +307,10 @@ assert.equal(handoutCombined.xml.includes('41.  41'), false)
 assert.equal(handoutCombined.xml.includes('56.  56'), false)
 assert.equal(handoutCombined.xml.includes('A. fantasy'), true)
 assert.equal(handoutCombined.xml.includes('  41  '), true)
-assert.equal(handoutCombined.xml.includes('  75  '), true)
+assert.equal(handoutCombined.xml.includes('  65  '), true)
 assert.match(
   handoutCombined.xml,
-  /<w:u w:val="single"\/>[^]*?<w:t xml:space="preserve">  67  <\/w:t><\/w:r><w:r>[^]*?<w:t xml:space="preserve">\(absorb\)<\/w:t>/,
+  /<w:u w:val="single"\/>[^]*?<w:t xml:space="preserve">  57  <\/w:t><\/w:r><w:r>[^]*?<w:t xml:space="preserve">\(absorb\)<\/w:t>/,
 )
 assert.equal(
   (handoutCombined.xml.match(/<w:u w:val="single"\/>/g) || []).length,
@@ -333,7 +333,7 @@ assert.equal(itemsOnlyHandoutCombined.xml.includes('__41__'), false)
 assert.equal(itemsOnlyHandoutCombined.xml.includes('__56__'), false)
 assert.equal(itemsOnlyHandoutCombined.xml.includes('41.  41'), false)
 assert.equal(itemsOnlyHandoutCombined.xml.includes('  41  '), true)
-assert.equal(itemsOnlyHandoutCombined.xml.includes('  75  '), true)
+assert.equal(itemsOnlyHandoutCombined.xml.includes('  65  '), true)
 assert.equal(
   (itemsOnlyHandoutCombined.xml.match(/<w:u w:val="single"\/>/g) || [])
     .length,
@@ -541,7 +541,7 @@ try {
     35,
   )
   assert.equal(packagedXml.includes('  41  '), true)
-  assert.equal(packagedXml.includes('  75  '), true)
+  assert.equal(packagedXml.includes('  65  '), true)
   assert.equal(packagedXml.includes('(absorb)'), true)
 } finally {
   rmSync(packageCheckDir, { recursive: true, force: true })

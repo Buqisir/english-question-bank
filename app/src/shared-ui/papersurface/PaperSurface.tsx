@@ -337,6 +337,16 @@ function CanonicalReadingBlocks({
   blocks: ReadonlyArray<CanonicalReadingSurfaceBlock>
   semanticSignature?: string
 }): ReactNode {
+  const renderInlines = (
+    inlines: ReadonlyArray<{ nodeId: string; text: string }>,
+  ): ReactNode => inlines.map((inline) => (
+    <span
+      key={inline.nodeId}
+      data-canonical-content-node-id={inline.nodeId}
+    >
+      {inline.text}
+    </span>
+  ))
   return (
     <div
       className="ps-canonical-reading"
@@ -358,7 +368,7 @@ function CanonicalReadingBlocks({
               data-canonical-block-kind="paragraph"
               data-canonical-reading-role={block.role}
             >
-              {block.text}
+              {renderInlines(block.inlines)}
             </p>
           )
         }
@@ -382,7 +392,7 @@ function CanonicalReadingBlocks({
                         data-canonical-cell-id={cell.cellId}
                         data-canonical-column-start={cell.columnStart}
                       >
-                        {cell.text}
+                        {renderInlines(cell.inlines)}
                       </td>
                     ))}
                   </tr>
@@ -407,7 +417,9 @@ function CanonicalReadingBlocks({
             }
           >
             <img src={src} alt={block.caption || block.mediaId} />
-            {block.caption && <figcaption>{block.caption}</figcaption>}
+            {block.caption && (
+              <figcaption>{renderInlines(block.captionInlines)}</figcaption>
+            )}
           </figure>
         )
       })}
@@ -835,6 +847,7 @@ function PaperSurfaceQuestionItem({
     <li
       className={isActive ? 'ps-question ps-question--active' : 'ps-question'}
       {...{ [paperSurfaceAnchorAttrs.questionId]: question.id }}
+      data-canonical-question-id={question.canonicalIdentity?.questionId}
       onClick={() => onQuestionClick(question.id)}
     >
       {!trimmedStem && hasOptions ? (
@@ -865,7 +878,17 @@ function PaperSurfaceQuestionItem({
                 className="ps-question-options-inline-item"
                 {...{ [paperSurfaceAnchorAttrs.optionLabel]: opt.label }}
               >
-                <span className="ps-option-label">{opt.label}.</span> {opt.text}
+                <span className="ps-option-label">{opt.label}.</span>{' '}
+                {opt.canonicalContent
+                  ? opt.canonicalContent.map((inline) => (
+                      <span
+                        key={inline.nodeId}
+                        data-canonical-content-node-id={inline.nodeId}
+                      >
+                        {inline.text}
+                      </span>
+                    ))
+                  : opt.text}
               </span>
             ))}
           </span>
@@ -879,7 +902,18 @@ function PaperSurfaceQuestionItem({
             aria-label={`Focus question ${question.questionNo}`}
           >
             <span className="ps-question-no">{question.questionNo}.</span>
-            <span className="ps-question-stem">{question.stem}</span>
+            <span className="ps-question-stem">
+              {question.canonicalStemContent
+                ? question.canonicalStemContent.map((inline) => (
+                    <span
+                      key={inline.nodeId}
+                      data-canonical-content-node-id={inline.nodeId}
+                    >
+                      {inline.text}
+                    </span>
+                  ))
+                : question.stem}
+            </span>
           </button>
           {hasOptions && (
             <PaperSurfaceOptionList
@@ -927,17 +961,44 @@ function PaperSurfaceOptionList({
           }
         : undefined}
     >
-      {options.map((opt, index) => (
-        <li
-          key={`${questionId}-${opt.label}`}
-          className="ps-option"
-          {...{ [paperSurfaceAnchorAttrs.optionLabel]: opt.label }}
-          data-canonical-option-id={canonicalOptionIds?.[index]}
-        >
-          <span className="ps-option-label">{opt.label}.</span>
-          <span className="ps-option-text">{opt.text}</span>
-        </li>
-      ))}
+      {options.map((opt, index) => {
+        const physicalPlacement = canonicalPlacement?.placements?.[index]
+        const continuationStartPt =
+          physicalPlacement?.continuationStartPt
+        return (
+          <li
+            key={`${questionId}-${opt.label}`}
+            className="ps-option"
+            {...{ [paperSurfaceAnchorAttrs.optionLabel]: opt.label }}
+            data-canonical-option-id={canonicalOptionIds?.[index]}
+            data-canonical-start-pt={physicalPlacement?.startPt}
+            data-canonical-continuation-start-pt={
+              continuationStartPt ?? undefined
+            }
+            style={continuationStartPt !== null
+              && continuationStartPt !== undefined
+              ? {
+                  paddingLeft: `${continuationStartPt}pt`,
+                  textIndent: `${-continuationStartPt}pt`,
+                }
+              : undefined}
+          >
+            <span className="ps-option-label">{opt.label}.</span>
+            <span className="ps-option-text">
+              {opt.canonicalContent
+                ? opt.canonicalContent.map((inline) => (
+                    <span
+                      key={inline.nodeId}
+                      data-canonical-content-node-id={inline.nodeId}
+                    >
+                      {inline.text}
+                    </span>
+                  ))
+                : opt.text}
+            </span>
+          </li>
+        )
+      })}
     </ol>
   )
 }

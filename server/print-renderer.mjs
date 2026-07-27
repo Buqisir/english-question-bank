@@ -203,24 +203,40 @@ function renderCanonicalSharedBank(canonicalGroup) {
   return `<ol class="canonical-option-bank" data-canonical-bank-id="${escapeHtml(bankId)}" data-canonical-semantic-signature="${escapeHtml(canonicalGroup.semanticSignature)}" data-canonical-occurrence-signature="${escapeHtml(canonicalGroup.occurrenceSignature)}">${options.map((option) => `<li class="canonical-option-bank-item" data-canonical-option-id="${escapeHtml(option.optionId)}"><span>${escapeHtml(option.label)}.</span> ${escapeHtml(option.text)}</li>`).join('')}</ol>`
 }
 
+function renderCanonicalInlineNodes(nodes) {
+  return nodes.map((node) =>
+    `<span data-canonical-content-node-id="${escapeHtml(node.nodeId)}">${escapeHtml(node.text)}</span>`,
+  ).join('')
+}
+
 function renderCanonicalReadingBlocks(canonicalGroup) {
   return `<div class="canonical-reading" data-canonical-reading-semantic-signature="${escapeHtml(canonicalGroup.semanticSignature)}">${canonicalGroup.blocks.map((block) => {
     if (block.kind === 'paragraph') {
       const tag = block.role === 'title' ? 'h3' : 'p'
-      return `<${tag} class="canonical-reading-${block.role}" data-canonical-block-id="${escapeHtml(block.nodeId)}" data-canonical-block-kind="paragraph" data-canonical-reading-role="${block.role}">${escapeHtml(block.text)}</${tag}>`
+      return `<${tag} class="canonical-reading-${block.role}" data-canonical-block-id="${escapeHtml(block.nodeId)}" data-canonical-block-kind="paragraph" data-canonical-reading-role="${block.role}">${renderCanonicalInlineNodes(block.inlines)}</${tag}>`
     }
     if (block.kind === 'table') {
-      return `<table class="canonical-reading-table" data-canonical-block-id="${escapeHtml(block.nodeId)}" data-canonical-block-kind="table" data-canonical-table-columns="${block.columnCount}"><tbody>${block.rows.map((row) => `<tr data-canonical-row-id="${escapeHtml(row.rowId)}">${row.cells.map((cell) => `<td colspan="${cell.columnSpan}" rowspan="${cell.rowSpan}" data-canonical-cell-id="${escapeHtml(cell.cellId)}" data-canonical-column-start="${cell.columnStart}">${escapeHtml(cell.text)}</td>`).join('')}</tr>`).join('')}</tbody></table>`
+      return `<table class="canonical-reading-table" data-canonical-block-id="${escapeHtml(block.nodeId)}" data-canonical-block-kind="table" data-canonical-table-columns="${block.columnCount}"><tbody>${block.rows.map((row) => `<tr data-canonical-row-id="${escapeHtml(row.rowId)}">${row.cells.map((cell) => `<td colspan="${cell.columnSpan}" rowspan="${cell.rowSpan}" data-canonical-cell-id="${escapeHtml(cell.cellId)}" data-canonical-column-start="${cell.columnStart}">${renderCanonicalInlineNodes(cell.inlines)}</td>`).join('')}</tr>`).join('')}</tbody></table>`
     }
     const src = `data:${block.mediaArtifact.mimeType};base64,${block.mediaArtifact.encodedBytes}`
-    return `<figure class="canonical-reading-figure" data-canonical-block-id="${escapeHtml(block.nodeId)}" data-canonical-block-kind="figure" data-canonical-media-id="${escapeHtml(block.mediaId)}" data-canonical-media-sha256="${escapeHtml(block.media.sha256)}" data-canonical-source-artifact-id="${escapeHtml(block.media.sourceArtifactRef.artifactId)}"><img src="${escapeHtml(src)}" alt="${escapeHtml(block.caption || block.mediaId)}">${block.caption ? `<figcaption>${escapeHtml(block.caption)}</figcaption>` : ''}</figure>`
+    return `<figure class="canonical-reading-figure" data-canonical-block-id="${escapeHtml(block.nodeId)}" data-canonical-block-kind="figure" data-canonical-media-id="${escapeHtml(block.mediaId)}" data-canonical-media-sha256="${escapeHtml(block.media.sha256)}" data-canonical-source-artifact-id="${escapeHtml(block.media.sourceArtifactRef.artifactId)}"><img src="${escapeHtml(src)}" alt="${escapeHtml(block.caption || block.mediaId)}">${block.caption ? `<figcaption>${renderCanonicalInlineNodes(block.captionInlines)}</figcaption>` : ''}</figure>`
   }).join('')}</div>`
 }
 
-function renderCanonicalQuestionOptions(question) {
+function renderCanonicalQuestionOptions(question, preserveInlineIdentity = false) {
   const placement = translateAbcdPlanToPointPlacement(question.layoutPlan)
   const attrs = ` data-canonical-placement-signature="${escapeHtml(placement.placementSignature)}" data-canonical-placement-mode="${placement.mode}" data-canonical-column-starts-pt="${placement.columnStartsPt.join(',')}" style="width:${placement.rowWidthPt}pt;grid-template-columns:${placement.columnWidthsPt.map((width) => `${width}pt`).join(' ')}"`
-  return `<div class="canonical-options canonical-options--${placement.mode}"${attrs}>${question.options.map((option) => `<span data-canonical-option-id="${escapeHtml(option.optionId)}"><span>${escapeHtml(option.label)}.</span> ${escapeHtml(option.text)}</span>`).join('')}</div>`
+  return `<div class="canonical-options canonical-options--${placement.mode}"${attrs}>${question.options.map((option, index) => {
+    const physical = placement.placements[index]
+    const continuation = physical.continuationStartPt
+    const style = continuation === null
+      ? ''
+      : ` style="padding-left:${continuation}pt;text-indent:-${continuation}pt"`
+    const content = preserveInlineIdentity && Array.isArray(option.content)
+      ? renderCanonicalInlineNodes(option.content)
+      : escapeHtml(option.text)
+    return `<span data-canonical-option-id="${escapeHtml(option.optionId)}" data-canonical-start-pt="${physical.startPt}"${continuation === null ? '' : ` data-canonical-continuation-start-pt="${continuation}"`}${style}><span>${escapeHtml(option.label)}.</span> ${content}</span>`
+  }).join('')}</div>`
 }
 
 function cssBorderForBlankRuling(ruling) {
@@ -543,9 +559,9 @@ export function buildPrintHtml({
             groupHtml += renderCanonicalReadingBlocks(canonicalGroup)
           } else {
             const displayNumberByQuestionId = new Map(
-              canonicalGroup.questions.map((question, index) => [
+              canonicalGroup.questions.map((question) => [
                 question.questionId,
-                questionNum + index,
+                question.questionNo,
               ]),
             )
             groupHtml += `<div class="passage">${canonicalGroup.paragraphs
@@ -604,9 +620,16 @@ export function buildPrintHtml({
             ? {
                 ...question,
                 stem: canonicalQuestion.stem ?? '',
+                ...(canonicalGroup.groupType === 'reading'
+                  ? { stemContent: canonicalQuestion.stemContent }
+                  : {}),
                 options: canonicalQuestion.options.map((option) => ({
+                  optionId: option.optionId,
                   label: option.label,
                   content: option.text,
+                  ...(canonicalGroup.groupType === 'reading'
+                    ? { canonicalContent: option.content }
+                    : {}),
                 })),
                 canonicalPlacement: canonicalQuestion.layoutPlan
                   ? translateAbcdPlanToPointPlacement(
@@ -623,8 +646,11 @@ export function buildPrintHtml({
             : question
           const stemText = String(printQuestion.stem || '').trim()
           const hasOptions = Array.isArray(printQuestion.options) && printQuestion.options.length > 0
+          const displayQuestionNo = canonicalQuestion
+            ? canonicalQuestion.questionNo
+            : questionNum
           const canonicalQuestionAttrs = canonicalQuestion
-            ? ` data-canonical-question-id="${escapeHtml(canonicalQuestion.questionId)}" data-canonical-correct-option-id="${escapeHtml(canonicalQuestion.correctOptionId || '')}"`
+            ? ` data-canonical-question-id="${escapeHtml(canonicalQuestion.questionId)}"${isTeacher ? ` data-canonical-correct-option-id="${escapeHtml(canonicalQuestion.correctOptionId || '')}"` : ''}`
             : ''
           // 空题干:挖空题号已在文中(语法填空/完形/七选五)。有选项则题号与选项同行
           // (真卷完形形态);无选项且非教师版则整行不出(语法填空文后无内容)。
@@ -638,12 +664,36 @@ export function buildPrintHtml({
             const placementAttrs = placement
               ? ` data-canonical-placement-signature="${escapeHtml(placement.placementSignature)}" data-canonical-placement-mode="${placement.mode}" data-canonical-column-starts-pt="${placement.columnStartsPt.join(',')}" style="width:${placement.rowWidthPt}pt;grid-template-columns:${placement.columnWidthsPt.map((width) => `${width}pt`).join(' ')}"`
               : ''
-            const renderedOptions = printQuestion.options.map((o) => `<span>${escapeHtml(o.label)}. ${escapeHtml(o.content)}</span>`).join('')
-            groupHtml += `<div class="question"${canonicalQuestionAttrs}><p class="options-inline options-inline--numbered${placement ? ' options-inline--canonical' : ''}"><span class="qnum">${questionNum}.</span>${placement ? `<span class="canonical-options canonical-options--${placement.mode}"${placementAttrs}>${renderedOptions}</span>` : renderedOptions}</p>`
+            const renderedOptions = printQuestion.options.map((o, index) => {
+              if (!o.canonicalContent) {
+                return `<span>${escapeHtml(o.label)}. ${escapeHtml(o.content)}</span>`
+              }
+              const physical = placement?.placements[index]
+              const continuation = physical?.continuationStartPt
+              const style = continuation === null || continuation === undefined
+                ? ''
+                : ` style="padding-left:${continuation}pt;text-indent:-${continuation}pt"`
+              const identityAttrs = canonicalQuestion
+                ? ` data-canonical-option-id="${escapeHtml(o.optionId)}"${physical ? ` data-canonical-start-pt="${physical.startPt}"${continuation === null ? '' : ` data-canonical-continuation-start-pt="${continuation}"`}` : ''}`
+                : ''
+              const content = renderCanonicalInlineNodes(o.canonicalContent)
+              return `<span${identityAttrs}${style}><span>${escapeHtml(o.label)}.</span> ${content}</span>`
+            }).join('')
+            groupHtml += `<div class="question"${canonicalQuestionAttrs}><p class="options-inline options-inline--numbered${placement ? ' options-inline--canonical' : ''}"><span class="qnum">${displayQuestionNo}.</span>${placement ? `<span class="canonical-options canonical-options--${placement.mode}"${placementAttrs}>${renderedOptions}</span>` : renderedOptions}</p>`
           } else {
-            groupHtml += `<div class="question"${canonicalQuestionAttrs}><p class="stem"><span class="qnum">${questionNum}.</span> ${escapeHtml(printQuestion.stem)}</p>`
+            const renderedStem = canonicalQuestion
+              ? (
+                  Array.isArray(printQuestion.stemContent)
+                    ? renderCanonicalInlineNodes(printQuestion.stemContent)
+                    : escapeHtml(printQuestion.stem)
+                )
+              : escapeHtml(printQuestion.stem)
+            groupHtml += `<div class="question"${canonicalQuestionAttrs}><p class="stem"><span class="qnum">${displayQuestionNo}.</span> ${renderedStem}</p>`
             groupHtml += canonicalQuestion?.layoutPlan
-              ? renderCanonicalQuestionOptions(canonicalQuestion)
+              ? renderCanonicalQuestionOptions(
+                  canonicalQuestion,
+                  canonicalGroup.groupType === 'reading',
+                )
               : renderOptions(printQuestion.options, detail.groupType)
           }
           if (isTeacher) {
@@ -981,6 +1031,10 @@ body {
 
 .canonical-options--one_column {
   grid-template-columns: 1fr;
+}
+
+.canonical-options--one_column > span {
+  display: block;
 }
 
 /* standard §3b 分页纪律(owner 2026-07-08):段落可跨页;单个小题不拆;

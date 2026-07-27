@@ -340,13 +340,14 @@ export function buildCanonicalReadingConsumptionSurfaceData({
           order,
           questionNo: String(question.questionNo),
           stem: question.stem,
+          canonicalStemContent: question.stemContent,
           options: question.options.map((option) => ({
             label: option.label,
             text: option.text,
+            canonicalContent: option.content,
           })),
           canonicalIdentity: {
             questionId: question.questionId,
-            correctOptionId: question.correctOptionId,
             optionIds: question.options.map((option) => option.optionId),
           },
           canonicalPlacement: {
@@ -355,6 +356,14 @@ export function buildCanonicalReadingConsumptionSurfaceData({
             rowWidthPt: placement.rowWidthPt,
             columnStartsPt: placement.columnStartsPt,
             columnWidthsPt: placement.columnWidthsPt,
+            placements: placement.placements.map((item) => ({
+              optionId: item.optionId,
+              label: item.label,
+              row: item.row,
+              column: item.column,
+              startPt: item.startPt,
+              continuationStartPt: item.continuationStartPt,
+            })),
           },
         }
       }),

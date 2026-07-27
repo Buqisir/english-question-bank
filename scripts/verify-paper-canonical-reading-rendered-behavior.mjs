@@ -18,6 +18,9 @@ import { compileCanonicalPaper } from '../shared/paper-canonical/compiler.mjs'
 import {
   projectCanonicalConsumerGroup,
 } from '../shared/paper-canonical/consumerProjection.mjs'
+import {
+  buildCanonicalReadingConsumptionSurfaceData,
+} from '../shared/paper-normalization/canonicalPaperGroupSurfaceAdapter.mjs'
 import { consumerContractRefs } from '../shared/paper-canonical/consumers.mjs'
 import {
   digestJson,
@@ -187,6 +190,36 @@ function bookmarkName(kind, value) {
   return `${kind}_${createHash('sha256').update(`${kind}:${value}`).digest('hex').slice(0, 24)}`
 }
 
+function canonicalInlineNodeIds(group) {
+  return [
+    ...group.blocks.flatMap((block) => {
+      if (block.kind === 'table') {
+        return block.rows.flatMap((row) =>
+          row.cells.flatMap((cell) =>
+            cell.inlines.map((inline) => inline.nodeId)))
+      }
+      return (block.kind === 'figure'
+        ? block.captionInlines
+        : block.inlines).map((inline) => inline.nodeId)
+    }),
+    ...group.questions.flatMap((question) => [
+      ...question.stemContent.map((inline) => inline.nodeId),
+      ...question.options.flatMap((option) =>
+        option.content.map((inline) => inline.nodeId)),
+    ]),
+  ]
+}
+
+function assertEachExactlyOnce(text, values, attribute) {
+  for (const value of values) {
+    assert.equal(
+      text.split(`${attribute}="${value}"`).length - 1,
+      1,
+      `${attribute}=${value} occurs exactly once`,
+    )
+  }
+}
+
 const realFixture = makeReadingCanonicalReferenceFixture()
 const real = await publishAndLoad(realFixture)
 const tableGroupId = 'group-2026-i-reading-a'
@@ -216,6 +249,22 @@ assert.deepEqual(
   [...readingPlacementModes].sort(),
   ['four_columns', 'one_column', 'two_by_two'],
 )
+const readingSelection = real.consumption.selections.find(
+  (selection) => selection.familyContractId === 'reading',
+)
+const oneColumnGroup = readingSelection.projectedOccurrences
+  .map((occurrence) => canonicalGroup(real.consumption, occurrence.groupId))
+  .find((group) =>
+    group.questions.some((question) => question.layoutPlan.mode === 'one_column'))
+assert.ok(oneColumnGroup)
+const oneColumnQuestion = oneColumnGroup.questions.find(
+  (question) => question.layoutPlan.mode === 'one_column',
+)
+assert.ok(oneColumnQuestion)
+const oneColumnContinuationTwip =
+  oneColumnQuestion.layoutPlan.placements[0].continuationStartTwip
+assert.ok(Number.isInteger(oneColumnContinuationTwip))
+const oneColumnContinuationPt = oneColumnContinuationTwip / 20
 
 const figureFixture = makeCanonicalFigureFixture()
 const figure = await publishAndLoad(figureFixture)
@@ -265,6 +314,20 @@ const blocks = [{
   score: 2.5,
 }]
 const printCases = []
+const deliberatelyWrongCallerSeed = 3
+const tableSurfacePayload = buildCanonicalReadingConsumptionSurfaceData({
+  consumption: real.consumption,
+  groupId: tableGroupId,
+})
+assert.equal(
+  JSON.stringify(tableSurfacePayload.surfaceData).includes('correctOptionId'),
+  false,
+)
+assert.deepEqual(
+  tableSurfacePayload.surfaceData.questions.map((question) =>
+    question.questionNo),
+  tableGroup.questions.map((question) => String(question.questionNo)),
+)
 
 for (const versionType of ['student', 'teacher']) {
   const html = buildPrintHtml({
@@ -272,7 +335,7 @@ for (const versionType of ['student', 'teacher']) {
     versionType,
     items: [item],
     blocks,
-    questionNumberStart: 21,
+    questionNumberStart: deliberatelyWrongCallerSeed,
     printStyle: 'exam',
     canonicalConsumption: real.consumption,
   })
@@ -289,6 +352,20 @@ for (const versionType of ['student', 'teacher']) {
     tableGroup.questions.length,
   )
   assert.equal(html.includes('POISONED LEGACY'), false)
+  assert.deepEqual(
+    [...html.matchAll(/<span class="qnum">([^<]+)\.<\/span>/g)]
+      .map((match) => Number(match[1])),
+    tableGroup.questions.map((question) => question.questionNo),
+  )
+  assert.equal(
+    html.includes('data-canonical-correct-option-id='),
+    versionType === 'teacher',
+  )
+  assertEachExactlyOnce(
+    html,
+    canonicalInlineNodeIds(tableGroup),
+    'data-canonical-content-node-id',
+  )
   const officialAnswers = tableGroup.questions.map((question) =>
     question.options.find(
       (option) => option.optionId === question.correctOptionId,
@@ -316,7 +393,7 @@ for (const versionType of ['student', 'teacher']) {
     versionType,
     items: [item],
     blocks,
-    questionNumberStart: 21,
+    questionNumberStart: deliberatelyWrongCallerSeed,
     printStyle: 'exam',
     canonicalConsumption: real.consumption,
     images,
@@ -335,6 +412,18 @@ for (const versionType of ['student', 'teacher']) {
   for (const question of tableGroup.questions) {
     assert.equal(
       xml.includes(
+        bookmarkName('canonical_question', question.questionId),
+      ),
+      true,
+    )
+    assert.equal(
+      xml.includes(
+        `<w:t xml:space="preserve">${question.questionNo}.  </w:t>`,
+      ),
+      true,
+    )
+    assert.equal(
+      xml.includes(
         bookmarkName('canonical_placement', question.placementSignature),
       ),
       true,
@@ -345,6 +434,12 @@ for (const versionType of ['student', 'teacher']) {
         true,
       )
     }
+  }
+  for (const nodeId of canonicalInlineNodeIds(tableGroup)) {
+    assert.equal(
+      xml.includes(bookmarkName('canonical_content', nodeId)),
+      true,
+    )
   }
   assert.equal(xml.includes('POISONED LEGACY'), false)
   const docxPath =
@@ -368,6 +463,114 @@ for (const versionType of ['student', 'teacher']) {
       path.join(actualArtifactRoot, `reading-table-${versionType}-docx.pdf`),
     )
   }
+}
+
+const oneColumnItem = exportItem(asset, oneColumnGroup.groupId)
+const oneColumnBlocks = [{
+  type: 'question_group',
+  questionGroupId: oneColumnGroup.groupId,
+  score: 2.5,
+}]
+const oneColumnHtml = buildPrintHtml({
+  title: 'Canonical Reading One-column QA',
+  versionType: 'student',
+  items: [oneColumnItem],
+  blocks: oneColumnBlocks,
+  questionNumberStart: deliberatelyWrongCallerSeed,
+  printStyle: 'exam',
+  canonicalConsumption: real.consumption,
+})
+assert.equal(oneColumnHtml.includes('data-canonical-correct-option-id='), false)
+assert.equal(
+  oneColumnHtml.includes(
+    `data-canonical-continuation-start-pt="${oneColumnContinuationPt}"`,
+  ),
+  true,
+)
+assert.equal(
+  oneColumnHtml.includes(
+    `style="padding-left:${oneColumnContinuationPt}pt;text-indent:-${oneColumnContinuationPt}pt"`,
+  ),
+  true,
+)
+assert.deepEqual(
+  [...oneColumnHtml.matchAll(/<span class="qnum">([^<]+)\.<\/span>/g)]
+    .map((match) => Number(match[1])),
+  oneColumnGroup.questions.map((question) => question.questionNo),
+)
+assertEachExactlyOnce(
+  oneColumnHtml,
+  canonicalInlineNodeIds(oneColumnGroup),
+  'data-canonical-content-node-id',
+)
+writeFileSync(
+  path.join(actualArtifactRoot, 'reading-one-column-student.html'),
+  oneColumnHtml,
+)
+printCases.push({ versionType: 'one-column-student', html: oneColumnHtml })
+
+const oneColumnRenderer = createDocxRenderer({
+  groupTypeLabels: { reading: '阅读理解' },
+  optionalString: (value) =>
+    typeof value === 'string' ? value.trim() : '',
+})
+const oneColumnXml = oneColumnRenderer.buildDocumentXml({
+  title: 'Canonical Reading One-column QA',
+  versionType: 'student',
+  items: [oneColumnItem],
+  blocks: oneColumnBlocks,
+  questionNumberStart: deliberatelyWrongCallerSeed,
+  printStyle: 'exam',
+  canonicalConsumption: real.consumption,
+  images: [],
+})
+const oneColumnOptionBookmark = bookmarkName(
+  'canonical_option',
+  oneColumnQuestion.options[0].optionId,
+)
+const oneColumnBookmarkIndex = oneColumnXml.indexOf(oneColumnOptionBookmark)
+assert.notEqual(oneColumnBookmarkIndex, -1)
+const oneColumnParagraphStart =
+  oneColumnXml.lastIndexOf('<w:p>', oneColumnBookmarkIndex)
+const oneColumnParagraphEnd =
+  oneColumnXml.indexOf('</w:p>', oneColumnBookmarkIndex)
+const oneColumnParagraph = oneColumnXml.slice(
+  oneColumnParagraphStart,
+  oneColumnParagraphEnd,
+)
+assert.equal(
+  oneColumnParagraph.includes(
+    `<w:ind w:left="${oneColumnContinuationTwip}" w:hanging="${oneColumnContinuationTwip}"/>`,
+  ),
+  true,
+)
+for (const question of oneColumnGroup.questions) {
+  assert.equal(
+    oneColumnXml.includes(
+      bookmarkName('canonical_question', question.questionId),
+    ),
+    true,
+  )
+}
+for (const nodeId of canonicalInlineNodeIds(oneColumnGroup)) {
+  assert.equal(
+    oneColumnXml.includes(bookmarkName('canonical_content', nodeId)),
+    true,
+  )
+}
+const oneColumnDocxPath =
+  path.join(actualArtifactRoot, 'reading-one-column-student.docx')
+oneColumnRenderer.writeDocxPackage({
+  documentXml: oneColumnXml,
+  outputPath: oneColumnDocxPath,
+  title: 'Canonical Reading One-column QA',
+  images: [],
+})
+if (persistActualArtifacts) {
+  oneColumnRenderer.convertDocxToPdf(
+    oneColumnDocxPath,
+    path.join(actualArtifactRoot, 'reading-one-column-student-docx.pdf'),
+  )
 }
 
 function syntheticFigureItem() {
@@ -408,13 +611,14 @@ const figureHtml = buildPrintHtml({
   versionType: 'student',
   items: [figureItem],
   blocks: figureBlocks,
-  questionNumberStart: figureGroup.questions[0].questionNo,
+  questionNumberStart: deliberatelyWrongCallerSeed,
   printStyle: 'exam',
   canonicalConsumption: figure.consumption,
 })
 assert.equal(count(figureHtml, /data-canonical-media-id=/g), 1)
 assert.equal(figureHtml.includes('data:image/png;base64,'), true)
 assert.equal(figureHtml.includes('〔表格：见原卷〕'), false)
+assert.equal(figureHtml.includes('data-canonical-correct-option-id='), false)
 writeFileSync(
   path.join(actualArtifactRoot, 'reading-figure-student.html'),
   figureHtml,
@@ -431,7 +635,7 @@ const figureXml = figureRenderer.buildDocumentXml({
   versionType: 'student',
   items: [figureItem],
   blocks: figureBlocks,
-  questionNumberStart: figureGroup.questions[0].questionNo,
+  questionNumberStart: deliberatelyWrongCallerSeed,
   printStyle: 'exam',
   canonicalConsumption: figure.consumption,
   images: figureImages,
@@ -476,6 +680,11 @@ async function assertActualBrowserArtifacts() {
   try {
     for (const { label, consumption, group } of [
       { label: 'table', consumption: real.consumption, group: tableGroup },
+      {
+        label: 'one-column',
+        consumption: real.consumption,
+        group: oneColumnGroup,
+      },
       { label: 'figure', consumption: figure.consumption, group: figureGroup },
     ]) {
       const page = await browser.newPage({
@@ -509,6 +718,27 @@ async function assertActualBrowserArtifacts() {
         await page.locator('[data-canonical-option-id]').count(),
         group.questions.length * 4,
       )
+      assert.equal(
+        await page.locator('[data-canonical-correct-option-id]').count(),
+        0,
+      )
+      assert.deepEqual(
+        await page.locator('[data-canonical-question-id]').evaluateAll(
+          (elements) => elements.map(
+            (element) => element.getAttribute('data-canonical-question-id'),
+          ),
+        ),
+        group.questions.map((question) => question.questionId),
+      )
+      assert.deepEqual(
+        (await page.locator(
+          '[data-canonical-content-node-id]',
+        ).evaluateAll((elements) => elements.map(
+          (element) =>
+            element.getAttribute('data-canonical-content-node-id'),
+        ))).sort(),
+        canonicalInlineNodeIds(group).sort(),
+      )
       assert.deepEqual(
         await page.locator(
           '[data-canonical-placement-signature]',
@@ -521,7 +751,7 @@ async function assertActualBrowserArtifacts() {
       if (label === 'table') {
         assert.equal(await page.locator('table').count(), 1)
         assert.equal(await page.locator('table td').count(), 12)
-      } else {
+      } else if (label === 'figure') {
         assert.equal(await page.locator('figure img').count(), 1)
         assert.equal(
           (await page.locator('figure img').getAttribute('src'))
@@ -532,6 +762,26 @@ async function assertActualBrowserArtifacts() {
           (await page.locator('body').innerText()).includes('见原卷'),
           false,
         )
+      } else {
+        const option = page.locator(
+          `[data-canonical-option-id="${oneColumnQuestion.options[0].optionId}"]`,
+        )
+        const placement = await option.evaluate((element) => {
+          const style = getComputedStyle(element)
+          return {
+            continuation:
+              element.getAttribute('data-canonical-continuation-start-pt'),
+            paddingLeftPx: Number.parseFloat(style.paddingLeft),
+            textIndentPx: Number.parseFloat(style.textIndent),
+          }
+        })
+        assert.equal(
+          Number(placement.continuation),
+          oneColumnContinuationPt,
+        )
+        const expectedPx = oneColumnContinuationPt * (96 / 72)
+        assert.ok(Math.abs(placement.paddingLeftPx - expectedPx) <= 96 / 72)
+        assert.ok(Math.abs(placement.textIndentPx + expectedPx) <= 96 / 72)
       }
       if (persistActualArtifacts) {
         await page.screenshot({
@@ -548,6 +798,28 @@ async function assertActualBrowserArtifacts() {
     }]) {
       const page = await browser.newPage()
       await page.setContent(printCase.html, { waitUntil: 'load' })
+      assert.equal(
+        await page.locator('[data-canonical-correct-option-id]').count(),
+        printCase.versionType === 'teacher' ? tableGroup.questions.length : 0,
+      )
+      if (printCase.versionType === 'one-column-student') {
+        const option = page.locator(
+          `[data-canonical-option-id="${oneColumnQuestion.options[0].optionId}"]`,
+        )
+        const placement = await option.evaluate((element) => {
+          const style = getComputedStyle(element)
+          return {
+            continuation:
+              element.getAttribute('data-canonical-continuation-start-pt'),
+            paddingLeftPx: Number.parseFloat(style.paddingLeft),
+            textIndentPx: Number.parseFloat(style.textIndent),
+          }
+        })
+        const expectedPx = oneColumnContinuationPt * (96 / 72)
+        assert.equal(Number(placement.continuation), oneColumnContinuationPt)
+        assert.ok(Math.abs(placement.paddingLeftPx - expectedPx) <= 96 / 72)
+        assert.ok(Math.abs(placement.textIndentPx + expectedPx) <= 96 / 72)
+      }
       const pdfPath = path.join(
         actualArtifactRoot,
         `reading-${printCase.versionType}.pdf`,
@@ -562,7 +834,7 @@ async function assertActualBrowserArtifacts() {
         encoding: 'utf8',
       })
       assert.equal(pdfText.includes('POISONED LEGACY'), false)
-      if (printCase.versionType !== 'figure-student') {
+      if (['student', 'teacher'].includes(printCase.versionType)) {
         assert.equal(
           pdfText.includes('Los Angeles Rams v Dallas')
             && pdfText.includes('Cowboys'),

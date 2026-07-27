@@ -447,6 +447,14 @@ export type PaperQuestionOption = {
   /** Displayable option text. */
   readonly text: string
 
+  /** Canonical Reading literal nodes. Identity is renderer-visible; answer
+   *  authority deliberately is not part of this student surface payload. */
+  readonly canonicalContent?: ReadonlyArray<{
+    readonly kind: 'text'
+    readonly nodeId: string
+    readonly text: string
+  }>
+
   /** Optional Chinese translation of the option text. PaperSurface
    *  may render it under the option as a faint companion line; the
    *  host decides whether translations are visible. */
@@ -490,6 +498,13 @@ export type PaperQuestion = {
   /** Question stem text. */
   readonly stem: string
 
+  /** Canonical Reading literal stem nodes, preserved for anchor parity. */
+  readonly canonicalStemContent?: ReadonlyArray<{
+    readonly kind: 'text'
+    readonly nodeId: string
+    readonly text: string
+  }>
+
   /** Optional Chinese translation of the stem. */
   readonly stemTranslation?: string
 
@@ -505,12 +520,20 @@ export type PaperQuestion = {
     readonly rowWidthPt: number
     readonly columnStartsPt: ReadonlyArray<number>
     readonly columnWidthsPt: ReadonlyArray<number>
+    readonly placements?: ReadonlyArray<{
+      readonly optionId: string
+      readonly label: string
+      readonly row: number
+      readonly column: number
+      readonly startPt: number
+      readonly continuationStartPt: number | null
+    }>
   }
 
-  /** Stable canonical Reading identity; display state never changes it. */
+  /** Stable canonical Reading identity; answer authority stays in
+   *  teacher/Analysis data and never enters this student surface payload. */
   readonly canonicalIdentity?: {
     readonly questionId: string
-    readonly correctOptionId: string
     readonly optionIds: ReadonlyArray<string>
   }
 }
