@@ -33,6 +33,17 @@ export type WritingGivenPart =
         text: string
       }>
     }
+  | {
+      starterId: string
+      contentRef: string
+      authorityObservationRef: string
+      text: string
+      inlines: ReadonlyArray<{
+        kind: 'text'
+        nodeId: string
+        text: string
+      }>
+    }
 
 export type WritingPageModel = {
   blocks: ReadonlyArray<WritingChromeBlock>

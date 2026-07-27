@@ -131,6 +131,14 @@
   align-self: center;
 }
 
+.pi-writing-answer-box--continuation {
+  box-sizing: border-box;
+  width: 145mm;
+  max-width: 100%;
+  min-height: 57mm;
+  align-self: center;
+}
+
 .pi-writing-answer-box--application .pi-writing-answer-top .pi-writing-answer-given,
 .pi-writing-answer-box--letter .pi-writing-answer-top .pi-writing-answer-given {
   min-height: 0;

@@ -190,9 +190,15 @@ function canonicalGroupMatchesPrintDetail(canonicalGroup, detail) {
       ? 'grammar_cloze'
       : canonicalGroup.groupType === 'sevenChoices'
         ? 'seven_choices'
+        : canonicalGroup.groupType === 'continuation'
+          ? 'writing'
       : canonicalGroup.groupType
   return (
     detail.groupType === expectedGroupType
+    && (
+      canonicalGroup.groupType !== 'continuation'
+      || detail.writingTask?.taskType === 'continuation'
+    )
     && canonicalGroup.questions.length === detail.questions.length
     && canonicalGroup.questions.every(
       (question, index) => question.questionId === detail.questions[index]?.id,
@@ -240,6 +246,21 @@ function renderCanonicalApplicationWriting(canonicalGroup) {
   }).join('')
   const response = canonicalGroup.answerRegion
   return `<div class="canonical-application-writing" data-canonical-application-semantic-signature="${escapeHtml(canonicalGroup.semanticSignature)}" data-canonical-application-occurrence-signature="${escapeHtml(canonicalGroup.occurrenceSignature)}"><div class="passage canonical-application-prompt">${prompt}</div><div class="writing-answer-box canonical-application-response" data-canonical-answer-region-ref="${escapeHtml(response.answerRegionRef)}" data-canonical-response-slot-id="${escapeHtml(response.responseSlotId)}" style="width:144mm;height:65mm;"><div class="canonical-application-given-top">${renderGivenParts(response.givenTop, 'top')}</div><div class="canonical-application-given-bottom">${renderGivenParts(response.givenBottom, 'bottom')}</div></div></div>`
+}
+
+function renderCanonicalContinuationWriting(canonicalGroup) {
+  const chrome = [
+    canonicalGroup.paperChrome.part,
+    canonicalGroup.paperChrome.section,
+    ...canonicalGroup.paperChrome.instructions,
+  ].map((instruction, index) =>
+    `<p class="canonical-continuation-instruction canonical-continuation-instruction--${index < 2 ? 'heading' : 'body'}" data-canonical-instruction-id="${escapeHtml(instruction.instructionId)}">${escapeHtml(instruction.text)}</p>`).join('')
+  const material = canonicalGroup.materialBlocks.map((block) =>
+    `<p data-canonical-block-id="${escapeHtml(block.nodeId)}">${renderCanonicalInlineNodes(block.inlines)}</p>`).join('')
+  const response = canonicalGroup.answerRegion
+  const starters = response.starterLines.map((starter, index) =>
+    `<p class="writing-starter-line writing-starter-line--${index + 1}" data-canonical-starter-id="${escapeHtml(starter.starterId)}" data-canonical-block-id="${escapeHtml(starter.contentRef)}">${renderCanonicalInlineNodes(starter.inlines)}</p>`).join('')
+  return `<div class="canonical-continuation-writing" data-canonical-writing-semantic-signature="${escapeHtml(canonicalGroup.semanticSignature)}" data-canonical-writing-occurrence-signature="${escapeHtml(canonicalGroup.occurrenceSignature)}" data-canonical-word-count-scope="${escapeHtml(canonicalGroup.wordCountRuling.countScope)}" data-canonical-word-count-target="${canonicalGroup.wordCountRuling.target}">${chrome}<div class="passage canonical-continuation-material">${material}</div><div class="writing-answer-box canonical-continuation-response" data-canonical-answer-region-ref="${escapeHtml(response.answerRegionRef)}" data-canonical-response-slot-id="${escapeHtml(response.responseSlotId)}" style="width:145mm;height:57mm;">${starters}</div></div>`
 }
 
 function renderCanonicalQuestionOptions(question, preserveInlineIdentity = false) {
@@ -435,6 +456,14 @@ export function buildPrintHtml({
                 : detail.groupType === 'writing'
                   && detail.writingTask?.taskType === 'application'
                   ? 'application-writing'
+                  : detail.groupType === 'writing'
+                    && detail.writingTask?.taskType === 'continuation'
+                    && canonicalConsumption.selections?.some(
+                      (selection) =>
+                        selection.familyContractId === 'continuation-writing'
+                        && selection.groupIds?.includes(groupId),
+                    )
+                    ? 'continuation-writing'
                 : null
       if (!familyContractId) return null
       const selection = selectConsumerGroupMode({
@@ -581,6 +610,8 @@ export function buildPrintHtml({
             groupHtml += renderCanonicalReadingBlocks(canonicalGroup)
           } else if (canonicalGroup.groupType === 'writing') {
             groupHtml += renderCanonicalApplicationWriting(canonicalGroup)
+          } else if (canonicalGroup.groupType === 'continuation') {
+            groupHtml += renderCanonicalContinuationWriting(canonicalGroup)
           } else {
             const displayNumberByQuestionId = new Map(
               canonicalGroup.questions.map((question) => [
@@ -633,7 +664,7 @@ export function buildPrintHtml({
 
         if (
           isWritingGroupType(detail.groupType)
-          && canonicalGroup?.groupType !== 'writing'
+          && !['writing', 'continuation'].includes(canonicalGroup?.groupType)
         ) {
           groupHtml += renderWritingAnswerBox(detail)
         }
@@ -1146,6 +1177,10 @@ body {
   flex-direction: column;
   box-sizing: border-box;
   padding: 3mm;
+}
+
+.canonical-continuation-response {
+  box-sizing: border-box;
 }
 
 .canonical-application-given p,

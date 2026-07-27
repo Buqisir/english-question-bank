@@ -448,3 +448,80 @@ export function buildCanonicalApplicationWritingConsumptionSurfaceData({
     },
   }
 }
+
+/**
+ * Canonical-required Continuation Writing Screen adapter.
+ *
+ * Material and starter lines are projected from the closed occurrence. This
+ * seam never reads the legacy Writing Task arrays or parses paragraph labels.
+ */
+export function buildCanonicalContinuationWritingConsumptionSurfaceData({
+  consumption,
+  groupId,
+}) {
+  const canonicalGroup = projectCanonicalConsumerGroup({
+    consumption,
+    familyContractId: 'continuation-writing',
+    groupId,
+  })
+  const paragraphs = canonicalGroup.materialBlocks.map((block) => {
+    const segmented = segmentPaperText(block.text, {
+      sectionId: block.nodeId,
+    }).paragraphs[0]
+    if (!segmented) {
+      throw new Error(
+        `Canonical Continuation Writing material ${block.nodeId} has no visible text`,
+      )
+    }
+    return {
+      id: block.nodeId,
+      section: canonicalGroup.groupId,
+      sentences: segmented.sentences,
+    }
+  })
+  const answerBox = {
+    kind: 'answerBox',
+    label: '读后续写答题区',
+    answerRegionRef: canonicalGroup.answerRegion.answerRegionRef,
+    responseSlotId: canonicalGroup.answerRegion.responseSlotId,
+    semanticSignature: canonicalGroup.semanticSignature,
+    occurrenceSignature: canonicalGroup.occurrenceSignature,
+    givenTop: canonicalGroup.answerRegion.starterLines,
+    givenBottom: [],
+  }
+  return {
+    status: 'ready',
+    semanticDigest: canonicalGroup.semanticSignature,
+    occurrenceSignature: canonicalGroup.occurrenceSignature,
+    answerRegion: canonicalGroup.answerRegion,
+    anchors: canonicalGroup.anchors,
+    materialBlocks: canonicalGroup.materialBlocks,
+    wordCountRuling: canonicalGroup.wordCountRuling,
+    pageModel: {
+      blocks: [
+        {
+          kind: 'partHeading',
+          text: canonicalGroup.paperChrome.part.text,
+        },
+        {
+          kind: 'sectionHeading',
+          text: canonicalGroup.paperChrome.section.text,
+        },
+        ...canonicalGroup.paperChrome.instructions.map((instruction) => ({
+          kind: 'instruction',
+          text: instruction.text,
+        })),
+        { kind: 'passage' },
+        answerBox,
+      ],
+    },
+    surfaceData: {
+      textMap: {
+        paperId: canonicalGroup.paperId,
+        paragraphs,
+      },
+      questions: [],
+      evidence: [],
+    },
+  }
+}

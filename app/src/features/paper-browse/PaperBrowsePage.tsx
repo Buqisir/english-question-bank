@@ -71,6 +71,7 @@ import {
 } from '../paper-intelligence/paperAssetSurfaceAdapter.ts'
 import {
   buildCanonicalApplicationWritingConsumptionSurfaceData,
+  buildCanonicalContinuationWritingConsumptionSurfaceData,
   buildCanonicalReadingConsumptionSurfaceData,
   type CanonicalReadingSurfaceBlock,
 } from '../../../../shared/paper-normalization/canonicalPaperGroupSurfaceAdapter.mjs'
@@ -168,6 +169,13 @@ type GroupModel =
       kind: 'writing'
       model: Pick<WritingPaperViewModel, 'surfaceData' | 'pageModel'> & {
         canonicalPromptBlocks?: ReadonlyArray<{
+          readonly nodeId: string
+          readonly inlines: ReadonlyArray<{
+            readonly nodeId: string
+            readonly text: string
+          }>
+        }>
+        canonicalContinuationMaterialBlocks?: ReadonlyArray<{
           readonly nodeId: string
           readonly inlines: ReadonlyArray<{
             readonly nodeId: string
@@ -710,6 +718,42 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
                   surfaceData: canonicalWriting.surfaceData,
                   pageModel: canonicalWriting.pageModel,
                   canonicalPromptBlocks: canonicalWriting.promptBlocks,
+                },
+              })
+            }
+          } else if (
+            group?.groupType === 'writing'
+            && group.writingTaskId
+            && loadedAsset.content.writingTasks?.[group.writingTaskId]?.taskType
+              === 'continuation'
+            && canonicalConsumption.selections.some(
+              (selection) =>
+                selection.familyContractId === 'continuation-writing'
+                && selection.groupIds.includes(block.groupId),
+            )
+          ) {
+            const writingMode = canonicalModeForGroup(
+              canonicalConsumption,
+              'continuation-writing',
+              block.groupId,
+            )
+            if (writingMode === 'canonical') {
+              const canonicalWriting =
+                buildCanonicalContinuationWritingConsumptionSurfaceData({
+                  consumption: canonicalConsumptionForGroup(
+                    canonicalConsumption,
+                    'continuation-writing',
+                    block.groupId,
+                  ),
+                  groupId: block.groupId,
+                })
+              canonicalModels.set(block.groupId, {
+                kind: 'writing',
+                model: {
+                  surfaceData: canonicalWriting.surfaceData,
+                  pageModel: canonicalWriting.pageModel,
+                  canonicalContinuationMaterialBlocks:
+                    canonicalWriting.materialBlocks,
                 },
               })
             }
@@ -1643,6 +1687,11 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
         canonicalApplicationPromptBlocks={
           entry.kind === 'writing'
             ? entry.model.canonicalPromptBlocks
+            : undefined
+        }
+        canonicalContinuationMaterialBlocks={
+          entry.kind === 'writing'
+            ? entry.model.canonicalContinuationMaterialBlocks
             : undefined
         }
         // seven-options-on-paper: the 七选五 A-G pool, display-only.

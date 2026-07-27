@@ -44,14 +44,19 @@ function writingGivenText(part: WritingGivenPart): string {
 }
 
 function writingGivenIdentity(part: WritingGivenPart): Record<string, string> {
-  return typeof part === 'string'
-    ? {}
-    : {
-        'data-canonical-given-part-id': part.givenPartId,
-        'data-canonical-given-role': part.role,
-        'data-canonical-given-placement': part.placement,
-        'data-canonical-block-id': part.blockRef,
-      }
+  if (typeof part === 'string') return {}
+  if ('starterId' in part) {
+    return {
+      'data-canonical-starter-id': part.starterId,
+      'data-canonical-block-id': part.contentRef,
+    }
+  }
+  return {
+    'data-canonical-given-part-id': part.givenPartId,
+    'data-canonical-given-role': part.role,
+    'data-canonical-given-placement': part.placement,
+    'data-canonical-block-id': part.blockRef,
+  }
 }
 
 export function WritingPaperPage({
@@ -93,13 +98,20 @@ export function WritingPaperPage({
                 <div
                   className={[
                     'pi-writing-answer-box',
-                    block.responseSlotId ? 'pi-writing-answer-box--application' : '',
+                    block.answerRegionRef === 'writing.application-box'
+                      ? 'pi-writing-answer-box--application'
+                      : '',
+                    block.answerRegionRef === 'writing.continuation-box'
+                      ? 'pi-writing-answer-box--continuation'
+                      : '',
                     block.givenBottom.length > 0 ? 'pi-writing-answer-box--letter' : '',
                     onAnswerBoxActivate ? 'pi-writing-answer-box--lecture-trigger' : '',
                   ].filter(Boolean).join(' ')}
                   aria-label={onAnswerBoxActivate ? `${block.label}，点击打开讲评` : block.label}
                   data-canonical-application-semantic-signature={block.semanticSignature}
                   data-canonical-application-occurrence-signature={block.occurrenceSignature}
+                  data-canonical-writing-semantic-signature={block.semanticSignature}
+                  data-canonical-writing-occurrence-signature={block.occurrenceSignature}
                   data-canonical-answer-region-ref={block.answerRegionRef}
                   data-canonical-response-slot-id={block.responseSlotId}
                   data-writing-lecture-trigger={onAnswerBoxActivate ? '' : undefined}
@@ -111,10 +123,17 @@ export function WritingPaperPage({
                   <div className="pi-writing-answer-top">
                     {block.givenTop.map((part, lineIndex) => (
                       <p
-                        key={typeof part === 'string' ? `t${lineIndex}` : part.givenPartId}
+                        key={
+                          typeof part === 'string'
+                            ? `t${lineIndex}`
+                            : 'starterId' in part
+                              ? part.starterId
+                              : part.givenPartId
+                        }
                         className={[
                           'pi-writing-answer-given',
                           typeof part !== 'string'
+                          && !('starterId' in part)
                           && part.role === 'title'
                             ? 'pi-writing-answer-given--title'
                             : '',
@@ -129,7 +148,13 @@ export function WritingPaperPage({
                     <div className="pi-writing-answer-bottom">
                       {block.givenBottom.map((part, lineIndex) => (
                         <p
-                          key={typeof part === 'string' ? `b${lineIndex}` : part.givenPartId}
+                          key={
+                            typeof part === 'string'
+                              ? `b${lineIndex}`
+                              : 'starterId' in part
+                                ? part.starterId
+                                : part.givenPartId
+                          }
                           className="pi-writing-answer-given pi-writing-answer-given--tight"
                           {...writingGivenIdentity(part)}
                         >

@@ -240,3 +240,66 @@ export function buildCanonicalApplicationWritingConsumptionSurfaceData(input: {
     readonly evidence: ReadonlyArray<PaperEvidence>
   }
 }
+
+export type CanonicalContinuationWritingStarter = {
+  readonly starterId: string
+  readonly contentRef: string
+  readonly authorityObservationRef: string
+  readonly text: string
+  readonly inlines: ReadonlyArray<{
+    readonly kind: 'text'
+    readonly nodeId: string
+    readonly text: string
+  }>
+}
+
+export function buildCanonicalContinuationWritingConsumptionSurfaceData(input: {
+  consumption: unknown
+  groupId: string
+}): {
+  readonly status: 'ready'
+  readonly semanticDigest: string
+  readonly occurrenceSignature: string
+  readonly answerRegion: {
+    readonly answerRegionRef: string
+    readonly responseSlotId: string
+    readonly starterLines: ReadonlyArray<CanonicalContinuationWritingStarter>
+  }
+  readonly anchors: Record<string, ReadonlyArray<string>>
+  readonly materialBlocks: ReadonlyArray<{
+    readonly nodeId: string
+    readonly text: string
+    readonly inlines: ReadonlyArray<{
+      readonly kind: 'text'
+      readonly nodeId: string
+      readonly text: string
+    }>
+  }>
+  readonly wordCountRuling: {
+    readonly countScope: 'student_authored_only'
+    readonly target: number
+  }
+  readonly pageModel: {
+    readonly blocks: ReadonlyArray<
+      | { readonly kind: 'passage' }
+      | { readonly kind: 'partHeading'; readonly text: string }
+      | { readonly kind: 'sectionHeading'; readonly text: string }
+      | { readonly kind: 'instruction'; readonly text: string }
+      | {
+          readonly kind: 'answerBox'
+          readonly label: string
+          readonly answerRegionRef: string
+          readonly responseSlotId: string
+          readonly semanticSignature: string
+          readonly occurrenceSignature: string
+          readonly givenTop: ReadonlyArray<CanonicalContinuationWritingStarter>
+          readonly givenBottom: ReadonlyArray<never>
+        }
+    >
+  }
+  readonly surfaceData: {
+    readonly textMap: PaperTextMap
+    readonly questions: ReadonlyArray<PaperQuestion>
+    readonly evidence: ReadonlyArray<PaperEvidence>
+  }
+}

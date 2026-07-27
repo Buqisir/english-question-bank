@@ -10,6 +10,7 @@ const SUPPORTED_FAMILIES = new Set([
   'seven-choices',
   'reading',
   'application-writing',
+  'continuation-writing',
 ])
 
 function rejected(message, issues = []) {
@@ -526,6 +527,172 @@ function projectApplicationWritingConsumerGroup(input, occurrence) {
   })
 }
 
+function projectContinuationWritingConsumerGroup(input, occurrence) {
+  const { groupId } = input
+  if (
+    typeof occurrence.paperChrome?.part?.partId !== 'string'
+    || typeof occurrence.paperChrome.part.instructionId !== 'string'
+    || typeof occurrence.paperChrome.part.text !== 'string'
+    || typeof occurrence.paperChrome?.section?.sectionId !== 'string'
+    || typeof occurrence.paperChrome.section.instructionId !== 'string'
+    || typeof occurrence.paperChrome.section.text !== 'string'
+    || !Array.isArray(occurrence.paperChrome.instructions)
+    || occurrence.paperChrome.instructions.some(
+      (instruction) =>
+        typeof instruction?.instructionId !== 'string'
+        || typeof instruction.text !== 'string'
+        || typeof instruction.placement !== 'string',
+    )
+    || new Set([
+      occurrence.paperChrome.part.instructionId,
+      occurrence.paperChrome.section.instructionId,
+      ...occurrence.paperChrome.instructions.map(
+        (instruction) => instruction.instructionId,
+      ),
+    ]).size !== occurrence.paperChrome.instructions.length + 2
+    || !Array.isArray(occurrence.numbering)
+    || occurrence.numbering.length !== 0
+    || !Array.isArray(occurrence.blanks)
+    || occurrence.blanks.length !== 0
+    || occurrence.choices?.ownership !== 'none'
+    || Object.keys(occurrence.choices || {}).length !== 1
+    || !Array.isArray(occurrence.content?.blocks)
+    || !Array.isArray(occurrence.material?.blocks)
+    || occurrence.material.blocks.length === 0
+    || typeof occurrence.writingTaskId !== 'string'
+    || occurrence.wordCountRuling?.countScope !== 'student_authored_only'
+    || occurrence.answerRegion?.answerRegionRef !== 'writing.continuation-box'
+    || typeof occurrence.answerRegion?.responseSlotId !== 'string'
+    || !Array.isArray(occurrence.answerRegion?.starterLines)
+    || ![0, 2].includes(occurrence.answerRegion.starterLines.length)
+  ) {
+    throw rejected(
+      `Canonical Continuation Writing occurrence ${groupId} is incomplete`,
+    )
+  }
+
+  const contentById = new Map()
+  for (const block of occurrence.content.blocks) {
+    if (
+      block?.kind !== 'paragraph'
+      || typeof block.nodeId !== 'string'
+      || !Array.isArray(block.inlines)
+      || block.inlines.length === 0
+      || contentById.has(block.nodeId)
+    ) {
+      throw rejected(
+        `Canonical Continuation Writing occurrence ${groupId} has invalid content`,
+      )
+    }
+    contentById.set(block.nodeId, block)
+  }
+
+  const ownedBlockIds = new Set()
+  const materialBlocks = occurrence.material.blocks.map((block) => {
+    if (
+      !block
+      || !contentById.has(block.nodeId)
+      || digestJson(contentById.get(block.nodeId)) !== digestJson(block)
+      || ownedBlockIds.has(block.nodeId)
+    ) {
+      throw rejected(
+        `Canonical Continuation Writing occurrence ${groupId} has invalid material ownership`,
+      )
+    }
+    ownedBlockIds.add(block.nodeId)
+    return {
+      nodeId: block.nodeId,
+      text: textContent(block.inlines),
+      inlines: structuredClone(block.inlines),
+    }
+  })
+
+  const seenStarterIds = new Set()
+  const starterLines = occurrence.answerRegion.starterLines.map((starter) => {
+    const block = contentById.get(starter?.contentRef)
+    if (
+      typeof starter?.starterId !== 'string'
+      || typeof starter.authorityObservationRef !== 'string'
+      || !block
+      || ownedBlockIds.has(starter.contentRef)
+      || seenStarterIds.has(starter.starterId)
+    ) {
+      throw rejected(
+        `Canonical Continuation Writing occurrence ${groupId} has invalid starter ownership`,
+      )
+    }
+    ownedBlockIds.add(starter.contentRef)
+    seenStarterIds.add(starter.starterId)
+    return {
+      starterId: starter.starterId,
+      contentRef: starter.contentRef,
+      authorityObservationRef: starter.authorityObservationRef,
+      text: textContent(block.inlines),
+      inlines: structuredClone(block.inlines),
+    }
+  })
+  if (ownedBlockIds.size !== contentById.size) {
+    throw rejected(
+      `Canonical Continuation Writing occurrence ${groupId} has unowned content`,
+    )
+  }
+
+  const anchors = occurrence.anchors
+  const contentNodeIds = occurrence.content.blocks.flatMap((block) => [
+    block.nodeId,
+    ...block.inlines.map((inline) => inline.nodeId),
+  ])
+  if (
+    !anchors
+    || new Set(anchors.contentNodeIds).size !== contentNodeIds.length
+    || contentNodeIds.some((nodeId) => !anchors.contentNodeIds.includes(nodeId))
+    || anchors.starterIds?.join(',') !== starterLines
+      .map((starter) => starter.starterId).join(',')
+    || anchors.responseSlotId !== occurrence.answerRegion.responseSlotId
+  ) {
+    throw rejected(
+      `Canonical Continuation Writing occurrence ${groupId} has invalid anchors`,
+    )
+  }
+
+  const answerRegion = {
+    answerRegionRef: occurrence.answerRegion.answerRegionRef,
+    responseSlotId: occurrence.answerRegion.responseSlotId,
+    starterLines,
+  }
+  const semantic = {
+    paperId: input.consumption.paperId,
+    groupId,
+    familyContractId: 'continuation-writing',
+    paperChrome: structuredClone(occurrence.paperChrome),
+    writingTaskId: occurrence.writingTaskId,
+    materialBlocks,
+    wordCountRuling: structuredClone(occurrence.wordCountRuling),
+    answerRegion,
+    anchors: structuredClone(anchors),
+  }
+  return Object.freeze({
+    groupType: 'continuation',
+    ...semantic,
+    questions: Object.freeze([]),
+    occurrenceSignature: digestJson({
+      groupId,
+      paperChromeInstructionIds: [
+        occurrence.paperChrome.part.instructionId,
+        occurrence.paperChrome.section.instructionId,
+        ...occurrence.paperChrome.instructions.map(
+          (instruction) => instruction.instructionId,
+        ),
+      ],
+      materialBlockIds: materialBlocks.map((block) => block.nodeId),
+      starterIds: starterLines.map((starter) => starter.starterId),
+      answerRegionRef: answerRegion.answerRegionRef,
+      responseSlotId: answerRegion.responseSlotId,
+    }),
+    semanticSignature: digestJson(semantic),
+  })
+}
+
 export function selectConsumerGroupMode({
   consumption,
   familyContractId,
@@ -609,6 +776,9 @@ export function projectCanonicalConsumerGroup(input) {
   }
   if (familyContractId === 'application-writing') {
     return projectApplicationWritingConsumerGroup(input, occurrence)
+  }
+  if (familyContractId === 'continuation-writing') {
+    return projectContinuationWritingConsumerGroup(input, occurrence)
   }
   if (
     !Array.isArray(occurrence.numbering)

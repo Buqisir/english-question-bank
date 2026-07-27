@@ -311,6 +311,23 @@ export function projectCanonicalPaper(canonicalPackage) {
           : {}
         const continuationWriting = group.variant.family === 'continuation-writing'
           ? {
+              paperChrome: {
+                part: {
+                  partId: part.partId,
+                  instructionId: part.titleInstructionRef,
+                  text: profile.instructions[part.titleInstructionRef].text,
+                },
+                section: {
+                  sectionId: section.sectionId,
+                  instructionId: section.titleInstructionRef,
+                  text: profile.instructions[section.titleInstructionRef].text,
+                },
+                instructions: slot.instructionRefs.map((instructionId) => ({
+                  instructionId,
+                  placement: profile.instructions[instructionId].placement,
+                  text: profile.instructions[instructionId].text,
+                })),
+              },
               writingTaskId: group.variant.writingTaskId,
               material: {
                 blocks: group.variant.materialBlockRefs.map((blockId) => cloneJson(group.content.blocks.find((block) => block.nodeId === blockId))),

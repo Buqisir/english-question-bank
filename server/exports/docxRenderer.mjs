@@ -316,9 +316,15 @@ function canonicalGroupMatchesDocxDetail(canonicalGroup, detail) {
       ? 'grammar_cloze'
       : canonicalGroup.groupType === 'sevenChoices'
         ? 'seven_choices'
+        : canonicalGroup.groupType === 'continuation'
+          ? 'writing'
       : canonicalGroup.groupType
   return (
     detail.groupType === expectedGroupType
+    && (
+      canonicalGroup.groupType !== 'continuation'
+      || detail.writingTask?.taskType === 'continuation'
+    )
     && canonicalGroup.questions.length === detail.questions.length
     && canonicalGroup.questions.every(
       (question, index) => question.questionId === detail.questions[index]?.id,
@@ -395,6 +401,14 @@ function createCanonicalDocxGroupResolver(
                 : detail.groupType === 'writing'
                   && detail.writingTask?.taskType === 'application'
                   ? 'application-writing'
+                  : detail.groupType === 'writing'
+                    && detail.writingTask?.taskType === 'continuation'
+                    && canonicalConsumption.selections?.some(
+                      (selection) =>
+                        selection.familyContractId === 'continuation-writing'
+                        && selection.groupIds?.includes(groupId),
+                    )
+                    ? 'continuation-writing'
                 : null
       if (!familyContractId) return null
       const selection = selectConsumerGroupMode({
@@ -738,6 +752,93 @@ function pushCanonicalDocxApplicationWriting(body, canonicalGroup) {
   )
 }
 
+function canonicalContinuationWritingAnswerBox(canonicalGroup) {
+  const widthTwips = mmToTwips(145)
+  const heightTwips = mmToTwips(57)
+  const response = canonicalGroup.answerRegion
+  const tableProperties = `<w:tblPr><w:tblW w:w="${widthTwips}" w:type="dxa"/><w:tblBorders><w:top w:val="single" w:sz="4" w:space="0" w:color="000000"/><w:left w:val="single" w:sz="4" w:space="0" w:color="000000"/><w:bottom w:val="single" w:sz="4" w:space="0" w:color="000000"/><w:right w:val="single" w:sz="4" w:space="0" w:color="000000"/><w:insideH w:val="nil"/></w:tblBorders><w:tblLayout w:type="fixed"/></w:tblPr><w:tblGrid><w:gridCol w:w="${widthTwips}"/></w:tblGrid>`
+  const row = (content, rowHeight) =>
+    `<w:tr><w:trPr><w:cantSplit/><w:trHeight w:val="${rowHeight}" w:hRule="exact"/></w:trPr><w:tc><w:tcPr><w:tcW w:w="${widthTwips}" w:type="dxa"/></w:tcPr>${content || '<w:p/>'}</w:tc></w:tr>`
+  const rows = response.starterLines.length === 2
+    ? response.starterLines.map((starter, index) => {
+        const rowHeight = index === 0
+          ? Math.round(heightTwips / 2)
+          : heightTwips - Math.round(heightTwips / 2)
+        return row(
+          `${canonicalBookmarkStart('canonical_starter', starter.starterId)}${paragraph(
+            canonicalInlineRuns(starter.inlines, { size: 21 }),
+            { after: 40 },
+          )}${canonicalBookmarkEnd('canonical_starter', starter.starterId)}`,
+          rowHeight,
+        )
+      }).join('')
+    : row('', heightTwips)
+  return `${canonicalBookmarkStart('canonical_response', response.responseSlotId)}<w:tbl>${tableProperties}${rows}</w:tbl>${canonicalBookmarkEnd('canonical_response', response.responseSlotId)}`
+}
+
+function pushCanonicalDocxContinuationWriting(body, canonicalGroup) {
+  body.push(
+    canonicalBookmarkStart(
+      'canonical_semantic',
+      canonicalGroup.semanticSignature,
+    ),
+    canonicalBookmarkStart(
+      'canonical_occurrence',
+      canonicalGroup.occurrenceSignature,
+    ),
+  )
+  for (const instruction of [
+    canonicalGroup.paperChrome.part,
+    canonicalGroup.paperChrome.section,
+    ...canonicalGroup.paperChrome.instructions,
+  ]) {
+    body.push(
+      canonicalBookmarkStart(
+        'canonical_instruction',
+        instruction.instructionId,
+      ),
+      paragraph(instruction.text, {
+        bold: instruction === canonicalGroup.paperChrome.part,
+        size: 21,
+        after: 60,
+      }),
+      canonicalBookmarkEnd(
+        'canonical_instruction',
+        instruction.instructionId,
+      ),
+    )
+  }
+  body.push(canonicalBookmarkStart(
+    'canonical_word_ruling',
+    canonicalGroup.wordCountRuling.authorityObservationRef,
+  ))
+  for (const block of canonicalGroup.materialBlocks) {
+    body.push(
+      canonicalBookmarkStart('canonical_block', block.nodeId),
+      paragraph(canonicalInlineRuns(block.inlines, { size: 21 }), {
+        after: 60,
+        firstLineIndent: 420,
+      }),
+      canonicalBookmarkEnd('canonical_block', block.nodeId),
+    )
+  }
+  body.push(
+    canonicalBookmarkEnd(
+      'canonical_word_ruling',
+      canonicalGroup.wordCountRuling.authorityObservationRef,
+    ),
+    canonicalContinuationWritingAnswerBox(canonicalGroup),
+    canonicalBookmarkEnd(
+      'canonical_occurrence',
+      canonicalGroup.occurrenceSignature,
+    ),
+    canonicalBookmarkEnd(
+      'canonical_semantic',
+      canonicalGroup.semanticSignature,
+    ),
+  )
+}
+
 function pushCanonicalDocxContent(
   body,
   canonicalGroup,
@@ -751,6 +852,10 @@ function pushCanonicalDocxContent(
   }
   if (canonicalGroup.groupType === 'writing') {
     pushCanonicalDocxApplicationWriting(body, canonicalGroup)
+    return
+  }
+  if (canonicalGroup.groupType === 'continuation') {
+    pushCanonicalDocxContinuationWriting(body, canonicalGroup)
     return
   }
   pushCanonicalDocxParagraphs(
@@ -1570,7 +1675,7 @@ function buildExamDocumentXml({
 
         if (
           isWritingGroupType(detail.groupType)
-          && canonicalGroup?.groupType !== 'writing'
+          && !['writing', 'continuation'].includes(canonicalGroup?.groupType)
         ) {
           body.push(docxWritingAnswerBox(detail))
         }

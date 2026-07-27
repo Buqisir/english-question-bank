@@ -127,6 +127,14 @@ type PaperSurfaceComponentProps = Omit<PaperSurfaceProps, 'blankFocusMode'> & {
       readonly text: string
     }>
   }>
+  /** Ordered canonical Continuation Writing material rendered without legacy parsing. */
+  readonly canonicalContinuationMaterialBlocks?: ReadonlyArray<{
+    readonly nodeId: string
+    readonly inlines: ReadonlyArray<{
+      readonly nodeId: string
+      readonly text: string
+    }>
+  }>
 }
 
 export function PaperSurface(props: PaperSurfaceComponentProps): ReactNode {
@@ -149,6 +157,7 @@ export function PaperSurface(props: PaperSurfaceComponentProps): ReactNode {
     canonicalReadingBlocks,
     canonicalReadingSemanticSignature,
     canonicalApplicationPromptBlocks,
+    canonicalContinuationMaterialBlocks,
   } = props
 
   if (semanticParagraphs !== undefined) {
@@ -302,7 +311,15 @@ export function PaperSurface(props: PaperSurfaceComponentProps): ReactNode {
             blocks={canonicalApplicationPromptBlocks}
           />
         )}
-        {!canonicalReadingBlocks && !canonicalApplicationPromptBlocks && sections.map((section) => (
+        {canonicalContinuationMaterialBlocks && (
+          <CanonicalContinuationWritingMaterial
+            blocks={canonicalContinuationMaterialBlocks}
+          />
+        )}
+        {!canonicalReadingBlocks
+          && !canonicalApplicationPromptBlocks
+          && !canonicalContinuationMaterialBlocks
+          && sections.map((section) => (
           <PaperSurfaceSection
             key={section}
             section={section}
@@ -344,6 +361,38 @@ export function PaperSurface(props: PaperSurfaceComponentProps): ReactNode {
         )}
       </article>
     </div>
+  )
+}
+
+function CanonicalContinuationWritingMaterial({
+  blocks,
+}: {
+  blocks: ReadonlyArray<{
+    readonly nodeId: string
+    readonly inlines: ReadonlyArray<{
+      readonly nodeId: string
+      readonly text: string
+    }>
+  }>
+}) {
+  return (
+    <section
+      className="ps-section canonical-continuation-material"
+      data-canonical-continuation-material=""
+    >
+      {blocks.map((block) => (
+        <p key={block.nodeId} data-canonical-block-id={block.nodeId}>
+          {block.inlines.map((inline) => (
+            <span
+              key={inline.nodeId}
+              data-canonical-content-node-id={inline.nodeId}
+            >
+              {inline.text}
+            </span>
+          ))}
+        </p>
+      ))}
+    </section>
   )
 }
 
