@@ -11,8 +11,24 @@ function choiceOwnership(family, questionIds) {
   return { ownership: 'none' }
 }
 
+function variant(family, questionIds, blankIds) {
+  const value = { family, choiceOwnership: choiceOwnership(family, questionIds) }
+  if (family !== 'seven-choices') return value
+  return {
+    ...value,
+    members: questionIds.map((questionId, index) => ({
+      questionId,
+      blankId: blankIds[index],
+      answer: {
+        optionId: 'option:A',
+        authorityAssertionRef: `answer:${questionId}`,
+      },
+    })),
+  }
+}
+
 function referenceBlankContent(family, blankIds) {
-  if (!['cloze', 'grammar-fill'].includes(family)) return { blocks: [] }
+  if (!['cloze', 'grammar-fill', 'seven-choices'].includes(family)) return { blocks: [] }
   return {
     blocks: [{
       kind: 'paragraph',
@@ -54,7 +70,7 @@ export function makeReadyCanonicalFixture() {
       sourceSpanId,
       content: referenceBlankContent(slot.familyContractRef.id, blankIds),
       media: [],
-      variant: { family: slot.familyContractRef.id, choiceOwnership: choiceOwnership(slot.familyContractRef.id, questionIds) },
+      variant: variant(slot.familyContractRef.id, questionIds, blankIds),
     })
     for (const questionId of questionIds) assertions.push({ assertionId: `answer:${questionId}`, questionId, answer: 'A', authority: 'official', sourceSpanId })
   }

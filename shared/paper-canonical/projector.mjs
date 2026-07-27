@@ -1,4 +1,5 @@
 import { resolveCanonicalAuthority, slotsForProfile, validateJsonSchema } from './authority.mjs'
+import { validateSevenChoicesContract } from './sevenChoices.mjs'
 import { cloneJson, digestJson } from './stable.mjs'
 
 function projectionError(message, issues) {
@@ -79,6 +80,16 @@ function assertCanonicalPackage(canonicalPackage) {
     if (!family || group.contractRef.familyContractVersion !== family.version || group.contractRef.familyContractDigest !== digestJson(family) || group.variant.family !== family.familyContractId || group.variant.choiceOwnership?.ownership !== family.choiceOwnership) throw projectionError('Group family contract is stale or incompatible', [])
     const choiceIssues = choiceOwnershipIssues(group, family)
     if (choiceIssues.length > 0) throw projectionError('Group choice ownership is not structurally exclusive', choiceIssues)
+    if (family.familyContractId === 'seven-choices') {
+      const sevenChoicesIssues = validateSevenChoicesContract({
+        questionIds: group.questionRefs.map(({ questionId }) => questionId),
+        blankIds: group.blankRefs.map(({ blankId }) => blankId),
+        content: group.content,
+        variant: group.variant,
+        assertions: sourceCapture.assertions,
+      })
+      if (sevenChoicesIssues.length > 0) throw projectionError('Seven Choices canonical contract is not closed', sevenChoicesIssues)
+    }
     if (group.semanticDigest !== digestJson(groupSemanticPayload(group))) throw projectionError('Group semantic digest does not match canonical semantics', [])
     const sourceMapIssues = sourceMapCoverageIssues(group, sourceCapture)
     if (sourceMapIssues.length > 0) throw projectionError('Group source map is incomplete', sourceMapIssues)
@@ -122,6 +133,11 @@ export function projectCanonicalPaper(canonicalPackage) {
         if (slot.activation === 'inactive_source') continue
         const binding = plan.slotBindings.find((candidate) => candidate.slotId === slot.slotId)
         const group = groupById.get(binding.groupRef.groupId)
+        const sevenChoices = group.variant.family === 'seven-choices'
+          ? {
+              questionBlankPairs: group.variant.members.map(({ questionId, blankId }) => ({ questionId, blankId })),
+            }
+          : {}
         nodes.push({
           kind: 'group',
           slotId: slot.slotId,
@@ -136,6 +152,7 @@ export function projectCanonicalPaper(canonicalPackage) {
           content: cloneJson(group.content),
           media: cloneJson(group.media),
           choices: cloneJson(group.variant.choiceOwnership),
+          ...cloneJson(sevenChoices),
         })
         nodes.push({ kind: 'answer_region', answerRegionId: slot.answerRegionRef, groupId: group.identity.groupId })
       }

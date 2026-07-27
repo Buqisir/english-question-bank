@@ -25,8 +25,24 @@ function makeChoiceOwnership(family, questionIds) {
   return { ownership: 'none' }
 }
 
+function makeVariant(family, questionIds, blankIds) {
+  const value = { family, choiceOwnership: makeChoiceOwnership(family, questionIds) }
+  if (family !== 'seven-choices') return value
+  return {
+    ...value,
+    members: questionIds.map((questionId, index) => ({
+      questionId,
+      blankId: blankIds[index],
+      answer: {
+        optionId: 'option:A',
+        authorityAssertionRef: `answer:${questionId}`,
+      },
+    })),
+  }
+}
+
 function makeContent(family, blankIds) {
-  if (!['cloze', 'grammar-fill'].includes(family)) return { blocks: [] }
+  if (!['cloze', 'grammar-fill', 'seven-choices'].includes(family)) return { blocks: [] }
   return {
     blocks: [{
       kind: 'paragraph',
@@ -75,7 +91,7 @@ function makeReadySource() {
       sourceSpanId,
       content: makeContent(slot.familyContractRef.id, blankIds),
       media: [],
-      variant: { family: slot.familyContractRef.id, choiceOwnership: makeChoiceOwnership(slot.familyContractRef.id, questionIds) },
+      variant: makeVariant(slot.familyContractRef.id, questionIds, blankIds),
     })
     for (const questionId of questionIds) {
       assertions.push({ assertionId: `answer:${questionId}`, questionId, answer: 'A', authority: 'official', sourceSpanId })
@@ -173,6 +189,7 @@ const projected = projectCanonicalPaper({
 assert.equal(projected.nodes.filter((node) => node.kind === 'group').length, 9)
 const projectedSevenChoices = projected.nodes.find((node) => node.kind === 'group' && node.familyContractId === 'seven-choices')
 assert.deepEqual(Object.keys(projectedSevenChoices.choices).sort(), ['bankId', 'options', 'ownership'])
+assert.equal(projectedSevenChoices.questionBlankPairs.length, 5)
 assert.equal(projected.nodes.some((node) => node.slotId?.startsWith('listening.')), false)
 
 const corruptSharedBank = structuredClone(first.artifacts.canonicalPaper.questionGroups)

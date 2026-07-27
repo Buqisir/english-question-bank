@@ -1,4 +1,5 @@
 import { canonicalAuthorityRef, resolveCanonicalAuthority, slotsForProfile, validateJsonSchema } from './authority.mjs'
+import { validateSevenChoicesContract } from './sevenChoices.mjs'
 import { cloneJson, digestJson, exactKeys, isRecordValue, sha256, stableStringify, withoutKey } from './stable.mjs'
 
 const blockingPriority = ['answer_conflict', 'incomplete_source', 'unsupported', 'needs_review']
@@ -66,6 +67,10 @@ function parseJsonDocument(document, diagnostics) {
   }
 }
 
+function referenceMarkerMatches(text) {
+  return [...String(text || '').matchAll(/(_+)(\d+)(_+)/g)]
+}
+
 function referenceContent(group) {
   const blankIdByNumber = new Map((group.blankIds || []).map((blankId) => [Number(blankId.match(/(\d+)$/)?.[1]), blankId]))
   return {
@@ -73,12 +78,12 @@ function referenceContent(group) {
       const inlines = []
       let cursor = 0
       let textIndex = 0
-      for (const marker of String(paragraph.text || '').matchAll(/__(\d+)__/g)) {
+      for (const marker of referenceMarkerMatches(paragraph.text)) {
         if (marker.index > cursor) {
           inlines.push({ kind: 'text', nodeId: `text:${paragraph.paragraphId}:${textIndex++}`, text: paragraph.text.slice(cursor, marker.index) })
         }
-        const blankId = blankIdByNumber.get(Number(marker[1]))
-        if (blankId) inlines.push({ kind: 'blank_ref', nodeId: `blank-ref:${paragraph.paragraphId}:${marker[1]}`, blankId })
+        const blankId = blankIdByNumber.get(Number(marker[2]))
+        if (blankId) inlines.push({ kind: 'blank_ref', nodeId: `blank-ref:${paragraph.paragraphId}:${marker[2]}`, blankId })
         else inlines.push({ kind: 'text', nodeId: `unresolved-marker:${paragraph.paragraphId}:${marker[1]}`, text: marker[0] })
         cursor = marker.index + marker[0].length
       }
@@ -88,6 +93,66 @@ function referenceContent(group) {
       return { kind: 'paragraph', nodeId: paragraph.paragraphId, inlines }
     }),
   }
+}
+
+function byteRangeForText(bytes, text, start, end, after = start) {
+  const target = new TextEncoder().encode(text)
+  for (let offset = Math.max(start, after); offset <= end - target.byteLength; offset++) {
+    if (target.every((value, index) => bytes[offset + index] === value)) return { start: offset, end: offset + target.byteLength }
+  }
+  return null
+}
+
+function inspectSevenChoicesGroup(paper, group, expectedNumbers, diagnostics) {
+  const questions = (group.questionIds || []).map((questionId) => paper.content?.questions?.[questionId])
+  if (group.questionIds?.length !== 5 || group.blankIds?.length !== 5 || questions.some((question) => !question)) {
+    diagnostics.push(diagnostic('SEVEN_CHOICES_EVIDENCE_INCOMPLETE', 'incomplete_source', '$.evidence.paperAsset', 'Seven Choices requires five complete Question and Blank pairs'))
+    return null
+  }
+  if (new Set(group.questionIds).size !== 5 || new Set(group.blankIds).size !== 5) {
+    diagnostics.push(diagnostic('SEVEN_CHOICES_IDENTITY_AMBIGUOUS', 'needs_review', '$.evidence.paperAsset', 'Seven Choices Question and Blank identities are ambiguous'))
+  }
+  for (const [index, question] of questions.entries()) {
+    if (question.questionId !== group.questionIds[index] || question.groupId !== group.groupId || question.blankId !== group.blankIds[index] || question.questionNo !== expectedNumbers[index]) {
+      diagnostics.push(diagnostic('SEVEN_CHOICES_IDENTITY_AMBIGUOUS', 'needs_review', '$.evidence.paperAsset', 'Seven Choices source identities do not close against Plan order'))
+    }
+    if (Object.hasOwn(question, 'options')) {
+      diagnostics.push(diagnostic('SEVEN_CHOICES_PER_QUESTION_OPTIONS_FORBIDDEN', 'needs_review', '$.evidence.paperAsset', 'Seven Choices cannot fall back to Question-owned Options'))
+    }
+  }
+  const markers = (group.passage?.paragraphs || []).flatMap((paragraph) => referenceMarkerMatches(paragraph.text).map((marker) => ({ paragraph, marker })))
+  const wrappers = new Set(markers.map(({ marker }) => `${marker[1].length}:${marker[3].length}`))
+  const registeredWrapper = wrappers.size === 1 && ['2:2', '5:5'].includes([...wrappers][0])
+  if (markers.length === 0 || !registeredWrapper) {
+    diagnostics.push(diagnostic('SEVEN_CHOICES_DIALECT_UNSUPPORTED', 'unsupported', '$.evidence.paperAsset', 'Seven Choices marker dialect is not registered'))
+    return null
+  }
+  if (markers.length !== 5) {
+    diagnostics.push(diagnostic(
+      'SEVEN_CHOICES_MARKER_EVIDENCE_INCOMPLETE',
+      markers.length < 5 ? 'incomplete_source' : 'needs_review',
+      '$.evidence.paperAsset',
+      'Seven Choices requires exactly five ordered source markers',
+    ))
+  }
+  for (const [index, { paragraph, marker }] of markers.entries()) {
+    if (Number(marker[2]) !== questions[index]?.questionNo) {
+      diagnostics.push(diagnostic('SEVEN_CHOICES_MARKER_IDENTITY_AMBIGUOUS', 'needs_review', '$.evidence.paperAsset', 'Source markers must match the five Plan-assigned Question identities'))
+    }
+    const suffix = paragraph.text.slice(marker.index + marker[0].length)
+    if (/^\s*\([1-5]\)/u.test(suffix)) {
+      diagnostics.push(diagnostic('SEVEN_CHOICES_STRAY_ORDINAL', 'needs_review', '$.evidence.paperAsset', 'Marker-adjacent local ordinals require explicit source review'))
+    }
+  }
+  const options = group.optionBank
+  if (!Array.isArray(options) || options.length < 7 || options.some((option) => typeof option?.text !== 'string' || option.text.length === 0)) {
+    diagnostics.push(diagnostic('SEVEN_CHOICES_BANK_EVIDENCE_INCOMPLETE', 'incomplete_source', '$.evidence.paperAsset', 'Seven Choices requires one complete source-backed A-G bank'))
+    return null
+  }
+  if (options.length !== 7 || options.map((option) => option.label).join('') !== 'ABCDEFG' || new Set(options.map((option) => option.label)).size !== 7) {
+    diagnostics.push(diagnostic('SEVEN_CHOICES_BANK_IDENTITY_AMBIGUOUS', 'needs_review', '$.evidence.paperAsset', 'Seven Choices bank identity and A-G order must be exact'))
+  }
+  return { questions, markers, options }
 }
 
 function referenceOptions(paper, group, diagnostics, familyId) {
@@ -132,9 +197,16 @@ function adaptReferenceFamilies(parsed, documents, diagnostics) {
   const familySpecs = [
     { familyId: 'cloze', slotId: 'language.cloze', legacyType: 'cloze' },
     { familyId: 'grammar-fill', slotId: 'language.grammar-fill', legacyType: 'grammarFill' },
+    { familyId: 'seven-choices', slotId: 'reading.seven-choices', legacyType: 'sevenChoices' },
   ]
+  const activeProfile = resolveCanonicalAuthority(canonicalAuthorityRef).closure.profiles.get(source.profileId)
+  const sevenChoicesSlot = activeProfile && slotsForProfile(activeProfile).find((slot) => slot.slotId === 'reading.seven-choices')
+  const sevenChoicesNumbers = sevenChoicesSlot?.numberingRule?.kind === 'range'
+    ? Array.from({ length: 5 }, (_, index) => sevenChoicesSlot.numberingRule.start + index)
+    : []
   let sequence = Math.max(0, ...(source.transformations || []).map((record) => record.sequence || 0))
   for (const spec of familySpecs) {
+    if (source.groups.some((candidate) => candidate.slotId === spec.slotId)) continue
     const group = Object.values(paper.content?.groups || {}).find((candidate) => candidate?.groupType === spec.legacyType)
     const groupRange = group ? jsonObjectPropertyRange(paperEntry.document.bytes, group.groupId) : null
     if (!group || !groupRange || !Array.isArray(group.questionIds) || !Array.isArray(group.blankIds) || !Array.isArray(group.passage?.paragraphs) || group.passage.paragraphs.some((paragraph) => typeof paragraph?.paragraphId !== 'string' || typeof paragraph.text !== 'string')) {
@@ -143,6 +215,7 @@ function adaptReferenceFamilies(parsed, documents, diagnostics) {
     }
     const observationId = `observation:reference:${spec.familyId}`
     const sourceSpanId = `source-span:${observationId}`
+    const sevenChoices = spec.familyId === 'seven-choices' ? inspectSevenChoicesGroup(paper, group, sevenChoicesNumbers, diagnostics) : null
     source.observations.push({
       observationId,
       kind: 'reference_question_group',
@@ -151,7 +224,7 @@ function adaptReferenceFamilies(parsed, documents, diagnostics) {
       span: groupRange,
     })
     const content = referenceContent(group)
-    source.groups.push({
+    const sourceGroup = {
       groupId: group.groupId,
       slotId: spec.slotId,
       family: spec.familyId,
@@ -162,10 +235,57 @@ function adaptReferenceFamilies(parsed, documents, diagnostics) {
       media: [],
       variant: {
         family: spec.familyId,
-        choiceOwnership: referenceOptions(paper, group, diagnostics, spec.familyId),
+        ...(spec.familyId === 'seven-choices'
+          ? {
+              members: (group.questionIds || []).map((questionId, index) => ({
+                questionId,
+                blankId: group.blankIds[index],
+                answer: {
+                  optionId: `option:${group.groupId}:${answerKey.answers?.[questionId]?.answer}`,
+                  authorityAssertionRef: `answer:${questionId}`,
+                },
+              })),
+              choiceOwnership: {
+                ownership: 'shared_bank',
+                bankId: `bank:${group.groupId}`,
+                options: (group.optionBank || []).map((option) => ({
+                  optionId: `option:${group.groupId}:${option.label}`,
+                  label: option.label,
+                  content: [{ kind: 'text', nodeId: `text:${group.groupId}:option:${option.label}`, text: option.text }],
+                })),
+              },
+            }
+          : { choiceOwnership: referenceOptions(paper, group, diagnostics, spec.familyId) }),
       },
-    })
-    const observation = source.observations.at(-1)
+      sourceSpanRefsByTarget: {},
+    }
+    source.groups.push(sourceGroup)
+    if (sevenChoices) {
+      let markerSearchOffset = groupRange.start
+      for (const [index, { marker }] of sevenChoices.markers.entries()) {
+        const markerRange = byteRangeForText(paperEntry.document.bytes, marker[0], groupRange.start, groupRange.end, markerSearchOffset)
+        if (!markerRange) {
+          diagnostics.push(diagnostic('SEVEN_CHOICES_MARKER_SPAN_MISSING', 'incomplete_source', '$.evidence.paperAsset', 'Seven Choices marker bytes do not resolve inside the captured Group'))
+          continue
+        }
+        markerSearchOffset = markerRange.end
+        const markerObservationId = `observation:reference-marker:${index + 1}:${group.blankIds[index]}`
+        const markerSourceSpanId = `source-span:${markerObservationId}`
+        source.observations.push({
+          observationId: markerObservationId,
+          kind: 'seven_choices_marker',
+          documentInputKey: paperEntry.document.inputKey,
+          value: {
+            groupId: group.groupId,
+            blankId: group.blankIds[index],
+            marker: marker[0],
+            dialectId: marker[1].length === 2 ? 'plan-number-double-underscore-v1' : 'plan-number-five-underscore-v1',
+          },
+          span: markerRange,
+        })
+        sourceGroup.sourceSpanRefsByTarget[`blank:${group.blankIds[index]}`] = [markerSourceSpanId]
+      }
+    }
     const record = {
       recordId: `record:reference:${spec.familyId}`,
       sequence: ++sequence,
@@ -185,9 +305,16 @@ function adaptReferenceFamilies(parsed, documents, diagnostics) {
       const question = paper.content?.questions?.[questionId]
       const answer = answerKey.answers?.[questionId]
       const answerRange = jsonObjectPropertyRange(answerEntry.document.bytes, questionId)
-      if (!question || question.blankId !== group.blankIds[index] || !answer || !answerRange) {
+      if (!question || !answer || !answerRange) {
         diagnostics.push(diagnostic('REFERENCE_QUESTION_EVIDENCE_INCOMPLETE', 'incomplete_source', '$.evidence.documents', `${spec.familyId} Question ${questionId} lacks one exact Blank or official answer`))
         continue
+      }
+      if (question.blankId !== group.blankIds[index]) {
+        if (spec.familyId !== 'seven-choices') {
+          diagnostics.push(diagnostic('REFERENCE_QUESTION_EVIDENCE_INCOMPLETE', 'incomplete_source', '$.evidence.documents', `${spec.familyId} Question ${questionId} lacks one exact Blank or official answer`))
+          continue
+        }
+        diagnostics.push(diagnostic('REFERENCE_QUESTION_IDENTITY_AMBIGUOUS', 'needs_review', '$.evidence.documents', `${spec.familyId} Question ${questionId} disagrees with its Group Blank identity`))
       }
       const answerObservationId = `observation:reference-answer:${questionId}`
       source.observations.push({
@@ -204,6 +331,9 @@ function adaptReferenceFamilies(parsed, documents, diagnostics) {
         authority: 'official',
         sourceSpanId: `source-span:${answerObservationId}`,
       })
+      if (spec.familyId === 'seven-choices') {
+        sourceGroup.sourceSpanRefsByTarget[`question:${questionId}`] = [sourceSpanId, `source-span:${answerObservationId}`]
+      }
     }
   }
   return parsed
@@ -580,8 +710,18 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
   diagnostics.push(...validateRichContent(content, new Set(sourceGroup.blankIds), mediaIds))
   diagnostics.push(...validateReferenceBlankClosure(family.familyContractId, sourceGroup.questionIds, sourceGroup.blankIds, content))
   const variant = cloneJson(sourceGroup.variant || {})
-  if (!exactKeys(variant, ['family', 'choiceOwnership']) || variant.family !== family.familyContractId) diagnostics.push(diagnostic('GROUP_VARIANT_INVALID', 'needs_review', '$.groups.variant', 'Variant family must match the closed contract'))
+  const variantKeys = family.familyContractId === 'seven-choices' ? ['family', 'members', 'choiceOwnership'] : ['family', 'choiceOwnership']
+  if (!exactKeys(variant, variantKeys) || variant.family !== family.familyContractId) diagnostics.push(diagnostic('GROUP_VARIANT_INVALID', 'needs_review', '$.groups.variant', 'Variant family must match the closed contract'))
   diagnostics.push(...validateChoiceOwnership(variant.choiceOwnership, sourceGroup.questionIds, family.choiceOwnership))
+  if (family.familyContractId === 'seven-choices') {
+    diagnostics.push(...validateSevenChoicesContract({
+      questionIds: sourceGroup.questionIds,
+      blankIds: sourceGroup.blankIds,
+      content,
+      variant,
+      assertions: capture.assertions,
+    }).map((item) => diagnostic(item.code, item.disposition, item.path, item.message)))
+  }
   if (diagnostics.length > 0) return { diagnostics, artifact: null }
   const artifactBase = {
     schemaVersion: 'canonical-question-group-v1',
@@ -611,7 +751,7 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
     captureId: capture.captureId,
     entries: targetEntries.map((entry) => ({
       ...entry,
-      sourceSpanRefs: [sourceGroup.sourceSpanId],
+      sourceSpanRefs: sourceGroup.sourceSpanRefsByTarget?.[`${entry.target.kind}:${entry.target.id}`] || [sourceGroup.sourceSpanId],
       transformationRecordIds: acceptedRecords.filter((record) => record.target?.identity === sourceGroup.groupId).map((record) => record.recordId),
     })),
   }
