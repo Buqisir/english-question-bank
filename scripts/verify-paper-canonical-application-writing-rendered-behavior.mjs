@@ -40,8 +40,12 @@ const actualArtifactRoot = path.resolve(
   process.env.EQB_ACTUAL_ARTIFACT_ROOT
     || '.scratch/ticket-11-application-writing',
 )
-const providedNoticeText =
-  '注意：（1）写作词数应为80个左右；（2）请按如下格式在答题卡的相应位置作答。'
+const providedNoticeLines = Object.freeze([
+  '注意：',
+  '（1）写作词数应为80个左右；',
+  '（2）请按如下格式在答题卡的相应位置作答。',
+])
+const providedNoticeText = providedNoticeLines.join('')
 const providedPromptText =
   '你校英文报”Opinion”栏目正在征稿，请同学们对未来大学生活的学习(Study)、社交(Socialize)、睡眠(Sleep)这三件事按重要性进行排序，并阐述理由。请你写一篇短文向该栏目投稿。'
 const providedNoticeBlockId = 'para-2026-i-writing-app-word-rule'
@@ -118,11 +122,11 @@ function applicationExportItem(paperId, groupId) {
     detail: {
       id: groupId,
       paperId,
-      title: group.title,
-      source: asset.paper.title,
+      title: 'POISONED LEGACY APPLICATION TITLE',
+      source: 'POISONED LEGACY APPLICATION SOURCE',
       groupType: 'writing',
       passage: {
-        title: group.title,
+        title: 'POISONED LEGACY APPLICATION PASSAGE TITLE',
         materialText:
           'POISONED LEGACY PROMPT\nDear Invented,\nPOISONED LEGACY OPENING\nYours,\nLegacy Writer',
       },
@@ -136,8 +140,8 @@ function applicationExportItem(paperId, groupId) {
       questions: [],
     },
     score: 15,
-    sectionTitle: '应用文写作',
-    note: '',
+    sectionTitle: 'POISONED LEGACY APPLICATION SECTION HEADING',
+    note: 'POISONED LEGACY APPLICATION INSTRUCTION',
   }
 }
 
@@ -216,6 +220,22 @@ function pdfWords(pdfPath) {
     yMax: Number(match[4]),
     text: match[5],
   }))
+}
+
+function docxParagraphContaining(xml, text, label) {
+  const textTag = `<w:t xml:space="preserve">${text}</w:t>`
+  const textIndex = xml.indexOf(textTag)
+  assert.notEqual(textIndex, -1, `${label}: packaged DOCX contains ${text}`)
+  assert.equal(
+    xml.indexOf(textTag, textIndex + textTag.length),
+    -1,
+    `${label}: packaged DOCX contains ${text} once`,
+  )
+  const paragraphStart = xml.lastIndexOf('<w:p>', textIndex)
+  const paragraphEnd = xml.indexOf('</w:p>', textIndex)
+  assert.notEqual(paragraphStart, -1, `${label}: ${text} starts in a paragraph`)
+  assert.notEqual(paragraphEnd, -1, `${label}: ${text} ends in a paragraph`)
+  return xml.slice(paragraphStart, paragraphEnd + '</w:p>'.length)
 }
 
 function pdfTextBounds(pdfPath, text, label) {
@@ -376,12 +396,7 @@ function assertNumberedNoticePdfLayout(pdfPath, canonical, label) {
     (candidate) => candidate.text === providedNoticeText,
   )
   if (!block) return
-  const expectedLines = [
-    '注意：',
-    '（1）写作词数应为80个左右；',
-    '（2）请按如下格式在答题卡的相应位置作答。',
-  ]
-  const bounds = expectedLines.map((line) =>
+  const bounds = providedNoticeLines.map((line) =>
     pdfTextBounds(pdfPath, line, `${label} notice`))
   assert.ok(bounds[1].top > bounds[0].top)
   assert.ok(bounds[2].top > bounds[1].top)
@@ -698,11 +713,7 @@ const providedAssetNotice = providedAsset.content.blocks[
 ]
 assert.deepEqual(providedAssetNotice, {
   type: 'instruction',
-  text: [
-    '注意：',
-    '（1）写作词数应为80个左右；',
-    '（2）请按如下格式在答题卡的相应位置作答。',
-  ].join('\n'),
+  text: providedNoticeLines.join('\n'),
 })
 assert.equal(
   providedScreen.promptBlocks.find(
@@ -773,11 +784,7 @@ for (const [label, consumption] of [
         (html.match(/data-canonical-application-notice-line=/g) || []).length,
         3,
       )
-      for (const line of [
-        '注意：',
-        '（1）写作词数应为80个左右；',
-        '（2）请按如下格式在答题卡的相应位置作答。',
-      ]) {
+      for (const line of providedNoticeLines) {
         assert.equal((html.split(line).length - 1), 1)
       }
     }
@@ -847,14 +854,43 @@ for (const [label, consumption] of [
         xml.includes(bookmarkName('canonical_content', providedNoticeInlineId)),
         true,
       )
-      for (const line of [
-        '注意：',
-        '（1）写作词数应为80个左右；',
-        '（2）请按如下格式在答题卡的相应位置作答。',
-      ]) {
+      for (const line of providedNoticeLines) {
         assert.equal((xml.split(line).length - 1), 1)
       }
       assert.equal(xml.includes('注意：写作词数应为80个左右。'), false)
+      const noticeParagraphs = providedNoticeLines.map((line) =>
+        docxParagraphContaining(
+          xml,
+          line,
+          `DOCX ${label} ${versionType} notice`,
+        ))
+      assert.equal(noticeParagraphs[0].includes('<w:ind '), false)
+      for (const paragraphXml of noticeParagraphs.slice(1)) {
+        assert.equal(
+          paragraphXml.includes('<w:ind w:left="420"/>'),
+          true,
+        )
+      }
+      const titleParagraph = docxParagraphContaining(
+        xml,
+        'Ranking My College Life Essentials',
+        `DOCX ${label} ${versionType} title`,
+      )
+      assert.equal(
+        titleParagraph.includes('<w:jc w:val="center"/>'),
+        true,
+      )
+      const responseWidthTwips = Math.round(144 / 25.4 * 1440)
+      assert.equal(
+        xml.includes(
+          `<w:tblW w:w="${responseWidthTwips}" w:type="dxa"/>`,
+        ),
+        true,
+      )
+      assert.equal(
+        xml.includes(`<w:gridCol w:w="${responseWidthTwips}"/>`),
+        true,
+      )
     }
     for (const part of [
       ...canonical.answerRegion.givenTop,
@@ -914,6 +950,7 @@ for (const [label, consumption] of [
         ['-layout', convertedPdfPath, '-'],
         { encoding: 'utf8' },
       ).replaceAll(/\s/g, '')
+      assert.equal(convertedText.includes('POISONEDLEGACY'), false)
       for (const part of [
         ...canonical.answerRegion.givenTop,
         ...canonical.answerRegion.givenBottom,
@@ -1140,17 +1177,10 @@ async function assertActualPaperSurfaceArtifacts() {
           if (numberedNoticeBlock.text === providedNoticeText) {
             assert.deepEqual(
               renderedNoticeLines.map(({ kind, text }) => ({ kind, text })),
-              [
-                { kind: 'label', text: '注意：' },
-                {
-                  kind: 'instruction',
-                  text: '（1）写作词数应为80个左右；',
-                },
-                {
-                  kind: 'instruction',
-                  text: '（2）请按如下格式在答题卡的相应位置作答。',
-                },
-              ],
+              providedNoticeLines.map((text, index) => ({
+                kind: index === 0 ? 'label' : 'instruction',
+                text,
+              })),
             )
           }
         } else {
@@ -1505,6 +1535,7 @@ async function assertActualPaperSurfaceArtifacts() {
           { encoding: 'utf8' },
         )
         const compactPdfText = pdfText.replaceAll(/\s/g, '')
+        assert.equal(compactPdfText.includes('POISONEDLEGACY'), false)
         for (const block of canonical.promptBlocks) {
           assert.equal(
             compactPdfText.split(block.text.replaceAll(/\s/g, '')).length - 1,
