@@ -363,7 +363,7 @@ try {
   )
   rmSync(occupiedVersion, { recursive: true, force: true })
 
-  const corruptPath = path.join(rootDir, fixture.source.paperId, 'versions', 'v2', 'canonical', 'normalization-report-v4.json')
+  const corruptPath = path.join(rootDir, fixture.source.paperId, 'versions', 'v2', reportPath)
   writeFileSync(corruptPath, '{"corrupt":true}\n')
   const corrupt = await loadPaperForConsumption({ paperId: fixture.source.paperId, version: 'v2', consumerContract: consumerContractRefs.screen }, store)
   assert.equal(corrupt.disposition, 'incompatible')
