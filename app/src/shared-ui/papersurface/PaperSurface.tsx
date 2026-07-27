@@ -900,6 +900,14 @@ function PaperSurfaceQuestionItem({
             className="ps-question-stem-button"
             aria-pressed={isActive}
             aria-label={`Focus question ${question.questionNo}`}
+            style={question.canonicalPlacement?.questionStemStartPt !== undefined
+              ? {
+                  display: 'grid',
+                  gridTemplateColumns:
+                    `${question.canonicalPlacement.questionStemStartPt}pt minmax(0, 1fr)`,
+                  columnGap: 0,
+                }
+              : undefined}
           >
             <span className="ps-question-no">{question.questionNo}.</span>
             <span className="ps-question-stem">
@@ -946,14 +954,23 @@ function PaperSurfaceOptionList({
 }: PaperSurfaceOptionListProps): ReactNode {
   return (
     <ol
-      className={`ps-option-list${canonicalPlacement ? ` ps-option-list--canonical ps-option-list--${canonicalPlacement.mode}` : ''}`}
+      className={`ps-option-list${canonicalPlacement ? ` ps-option-list--canonical ps-option-list--${canonicalPlacement.mode}${canonicalPlacement.questionStemStartPt !== undefined ? ' ps-option-list--stem-aligned' : ''}` : ''}`}
       data-canonical-placement-signature={canonicalPlacement?.signature}
       data-canonical-column-starts-pt={
         canonicalPlacement?.columnStartsPt.join(',')
       }
+      data-canonical-question-stem-start-pt={
+        canonicalPlacement?.questionStemStartPt
+      }
       style={canonicalPlacement
         ? {
             width: `${canonicalPlacement.rowWidthPt}pt`,
+            ...(canonicalPlacement.questionStemStartPt !== undefined
+              ? {
+                  marginLeft:
+                    `${canonicalPlacement.questionStemStartPt}pt`,
+                }
+              : {}),
             gridTemplateColumns: canonicalPlacement.columnWidthsPt
               .map((width) => `${width}pt`)
               .join(' '),

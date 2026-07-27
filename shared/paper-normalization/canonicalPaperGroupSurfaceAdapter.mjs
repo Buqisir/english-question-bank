@@ -353,6 +353,7 @@ export function buildCanonicalReadingConsumptionSurfaceData({
           canonicalPlacement: {
             mode: placement.mode,
             signature: placement.placementSignature,
+            questionStemStartPt: placement.questionStemStartPt,
             rowWidthPt: placement.rowWidthPt,
             columnStartsPt: placement.columnStartsPt,
             columnWidthsPt: placement.columnWidthsPt,

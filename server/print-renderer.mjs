@@ -225,7 +225,7 @@ function renderCanonicalReadingBlocks(canonicalGroup) {
 
 function renderCanonicalQuestionOptions(question, preserveInlineIdentity = false) {
   const placement = translateAbcdPlanToPointPlacement(question.layoutPlan)
-  const attrs = ` data-canonical-placement-signature="${escapeHtml(placement.placementSignature)}" data-canonical-placement-mode="${placement.mode}" data-canonical-column-starts-pt="${placement.columnStartsPt.join(',')}" style="width:${placement.rowWidthPt}pt;grid-template-columns:${placement.columnWidthsPt.map((width) => `${width}pt`).join(' ')}"`
+  const attrs = ` data-canonical-placement-signature="${escapeHtml(placement.placementSignature)}" data-canonical-placement-mode="${placement.mode}" data-canonical-column-starts-pt="${placement.columnStartsPt.join(',')}" data-canonical-question-stem-start-pt="${placement.questionStemStartPt}" style="width:${placement.rowWidthPt}pt;margin-left:${placement.questionStemStartPt}pt;grid-template-columns:${placement.columnWidthsPt.map((width) => `${width}pt`).join(' ')}"`
   return `<div class="canonical-options canonical-options--${placement.mode}"${attrs}>${question.options.map((option, index) => {
     const physical = placement.placements[index]
     const continuation = physical.continuationStartPt
@@ -688,7 +688,15 @@ export function buildPrintHtml({
                     : escapeHtml(printQuestion.stem)
                 )
               : escapeHtml(printQuestion.stem)
-            groupHtml += `<div class="question"${canonicalQuestionAttrs}><p class="stem"><span class="qnum">${displayQuestionNo}.</span> ${renderedStem}</p>`
+            const stemPlacement = canonicalQuestion?.layoutPlan
+              ? translateAbcdPlanToPointPlacement(
+                  canonicalQuestion.layoutPlan,
+                )
+              : null
+            const stemAttrs = stemPlacement
+              ? ` data-canonical-question-stem-start-pt="${stemPlacement.questionStemStartPt}" style="grid-template-columns:${stemPlacement.questionStemStartPt}pt minmax(0,1fr)"`
+              : ''
+            groupHtml += `<div class="question"${canonicalQuestionAttrs}><p class="stem${stemPlacement ? ' stem--canonical' : ''}"${stemAttrs}><span class="qnum">${displayQuestionNo}.</span>${stemPlacement ? `<span class="canonical-stem-text">${renderedStem}</span>` : ` ${renderedStem}`}</p>`
             groupHtml += canonicalQuestion?.layoutPlan
               ? renderCanonicalQuestionOptions(
                   canonicalQuestion,
@@ -901,6 +909,10 @@ body {
 .stem {
   margin: 0 0 0.2em;
   text-indent: 0;
+}
+
+.stem--canonical {
+  display: grid;
 }
 
 .qnum {

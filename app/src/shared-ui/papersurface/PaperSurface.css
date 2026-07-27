@@ -501,6 +501,10 @@ button.ps-paper-blank.ps-paper-blank--clickable {
   column-gap: 0;
 }
 
+.ps-option-list--stem-aligned {
+  padding-left: 0;
+}
+
 .ps-option-list--four_columns,
 .ps-option-list--two_by_two {
   white-space: nowrap;

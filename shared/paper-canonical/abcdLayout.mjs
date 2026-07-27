@@ -28,6 +28,16 @@ const RULES = Object.freeze({
 const RULESET_DIGEST = digestJson(RULES)
 const VERIFIED_FONT_CLOSURES = new WeakSet()
 
+// The question-number gutter and the one-column continuation indent are
+// independent physical coordinates even though both are currently 420 twips.
+// Renderers consume this shared stem-text origin instead of estimating the
+// width of a rendered question number.
+const QUESTION_STEM_START_TWIP = 420
+export const abcdQuestionStemAlignment = Object.freeze({
+  startTwip: QUESTION_STEM_START_TWIP,
+  startPt: QUESTION_STEM_START_TWIP / 20,
+})
+
 function deeplyFreeze(value) {
   if (!value || typeof value !== 'object' || Object.isFrozen(value)) return value
   Object.freeze(value)
@@ -302,6 +312,7 @@ export function translateAbcdPlanToPointPlacement(plan) {
   return {
     mode: plan.mode,
     placementSignature: physicalSignature(plan),
+    questionStemStartPt: abcdQuestionStemAlignment.startPt,
     rowWidthPt,
     columnStartsPt,
     columnWidthsPt: columnStartsTwip.map(

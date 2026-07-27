@@ -517,6 +517,7 @@ export type PaperQuestion = {
   readonly canonicalPlacement?: {
     readonly mode: 'four_columns' | 'two_by_two' | 'one_column'
     readonly signature: string
+    readonly questionStemStartPt?: number
     readonly rowWidthPt: number
     readonly columnStartsPt: ReadonlyArray<number>
     readonly columnWidthsPt: ReadonlyArray<number>

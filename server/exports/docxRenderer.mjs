@@ -62,6 +62,9 @@ import {
   projectCanonicalConsumerGroup,
   selectConsumerGroupMode,
 } from '../../shared/paper-canonical/consumerProjection.mjs'
+import {
+  abcdQuestionStemAlignment,
+} from '../../shared/paper-canonical/abcdLayout.mjs'
 import { resolveGroupFigures } from '../figures/paperFigures.mjs'
 import { resolveCanonicalPrintGroup } from '../print-canonical-group-adapter.mjs'
 
@@ -150,6 +153,10 @@ function run(text, options = {}) {
   return `<w:r><w:rPr>${runProperties}</w:rPr>${textXml}</w:r>`
 }
 
+function tabRun() {
+  return '<w:r><w:tab/></w:r>'
+}
+
 function paragraph(content = '', options = {}) {
   const children = Array.isArray(content) ? content.join('') : run(content, options.size ? { size: options.size } : {})
   const properties = [
@@ -159,6 +166,11 @@ function paragraph(content = '', options = {}) {
       : '',
     options.indentLeft || options.firstLineIndent || options.hangingIndent
       ? `<w:ind${options.indentLeft ? ` w:left="${options.indentLeft}"` : ''}${options.firstLineIndent ? ` w:firstLine="${options.firstLineIndent}"` : ''}${options.hangingIndent ? ` w:hanging="${options.hangingIndent}"` : ''}/>`
+      : '',
+    Array.isArray(options.tabStopsTwip) && options.tabStopsTwip.length > 0
+      ? `<w:tabs>${options.tabStopsTwip.map(
+          (position) => `<w:tab w:val="left" w:pos="${position}"/>`,
+        ).join('')}</w:tabs>`
       : '',
     options.keepNext ? '<w:keepNext/>' : '',
     options.shading ? `<w:shd w:val="clear" w:color="auto" w:fill="${options.shading}"/>` : '',
@@ -687,39 +699,47 @@ function pushHandoutDocxQuestions(
         canonicalQuestion.questionId,
       ))
     }
-    body.push(
-      paragraph(
-        [
-          run(`${displayQuestionNo}. `, { bold: true, size: 21 }),
-          ...(canonicalQuestion
-            ? (
-                Array.isArray(docxQuestion.stemContent)
-                  ? canonicalInlineRuns(
-                      docxQuestion.stemContent,
-                      { bold: true, size: 21 },
-                    )
-                  : [run(docxQuestion.stem, { bold: true, size: 21 })]
-              )
-            : [run(
-                docxQuestionStem(detail, docxQuestion),
+    const stemRuns = canonicalQuestion
+      ? (
+          Array.isArray(docxQuestion.stemContent)
+            ? canonicalInlineRuns(
+                docxQuestion.stemContent,
                 { bold: true, size: 21 },
-              )]),
-        ],
-        { before: 90, after: 70, keepNext: true },
-      ),
-    )
+              )
+            : [run(docxQuestion.stem, { bold: true, size: 21 })]
+        )
+      : [run(
+          docxQuestionStem(detail, docxQuestion),
+          { bold: true, size: 21 },
+        )]
     if (detail.groupType !== 'seven_choices') {
       if (docxQuestion.layoutPlan) {
         body.push(canonicalDocxQuestionOptionLayout(
-          questionNumber,
+          displayQuestionNo,
           docxQuestion.options,
           docxQuestion.layoutPlan,
           {
-            includeQuestionNumber: false,
             placementSignature: docxQuestion.placementSignature,
+            stemRuns,
+            stemParagraphOptions: {
+              before: 90,
+              after: 70,
+              keepNext: true,
+            },
           },
         ))
-      } else if (detail.groupType === 'cloze' && docxQuestion.options.length > 0) {
+      } else {
+        body.push(
+          paragraph(
+            [
+              run(`${displayQuestionNo}. `, { bold: true, size: 21 }),
+              ...stemRuns,
+            ],
+            { before: 90, after: 70, keepNext: true },
+          ),
+        )
+      }
+      if (!docxQuestion.layoutPlan && detail.groupType === 'cloze' && docxQuestion.options.length > 0) {
         const inlineText = docxQuestion.options.map((option) =>
           `${option.label}. ${option.content}`).join('  ')
         body.push(
@@ -729,7 +749,7 @@ function pushHandoutDocxQuestions(
             size: 21,
           }),
         )
-      } else {
+      } else if (!docxQuestion.layoutPlan) {
         docxQuestion.options.forEach((option) => {
           body.push(
             paragraph(`${option.label}. ${option.content}`, {
@@ -740,6 +760,16 @@ function pushHandoutDocxQuestions(
           )
         })
       }
+    } else {
+      body.push(
+        paragraph(
+          [
+            run(`${displayQuestionNo}. `, { bold: true, size: 21 }),
+            ...stemRuns,
+          ],
+          { before: 90, after: 70, keepNext: true },
+        ),
+      )
     }
     pushDocxAnswerArea(body, detail, docxQuestion, versionType)
     if (canonicalQuestion) {
@@ -1495,38 +1525,43 @@ function buildExamDocumentXml({
               body.push(paragraph([run(`${displayQuestionNo}.  ${inlineText}`, { size: 21 })], { before: 60, after: 50 }))
             }
           } else {
-            body.push(
-              paragraph(
-                [
-                  run(`${displayQuestionNo}.  `, { size: 21 }),
-                  ...(canonicalQuestion
-                    ? (
-                        Array.isArray(docxQuestion.stemContent)
-                          ? canonicalInlineRuns(
-                              docxQuestion.stemContent,
-                              { size: 21 },
-                            )
-                          : [run(docxQuestion.stem, { size: 21 })]
-                      )
-                    : [run(
-                        docxQuestionStem(detail, docxQuestion),
+            const stemRuns = canonicalQuestion
+              ? (
+                  Array.isArray(docxQuestion.stemContent)
+                    ? canonicalInlineRuns(
+                        docxQuestion.stemContent,
                         { size: 21 },
-                      )]),
-                ],
-                { before: 60, after: 50 },
-              ),
-            )
+                      )
+                    : [run(docxQuestion.stem, { size: 21 })]
+                )
+              : [run(
+                  docxQuestionStem(detail, docxQuestion),
+                  { size: 21 },
+                )]
             if (docxQuestion.layoutPlan) {
               body.push(canonicalDocxQuestionOptionLayout(
-                questionNum,
+                displayQuestionNo,
                 docxQuestion.options,
                 docxQuestion.layoutPlan,
                 {
-                  includeQuestionNumber: false,
                   placementSignature: docxQuestion.placementSignature,
+                  stemRuns,
+                  stemParagraphOptions: {
+                    before: 60,
+                    after: 50,
+                  },
                 },
               ))
             } else {
+              body.push(
+                paragraph(
+                  [
+                    run(`${displayQuestionNo}.  `, { size: 21 }),
+                    ...stemRuns,
+                  ],
+                  { before: 60, after: 50 },
+                ),
+              )
               renderOptionsExam(body, docxQuestion.options, detail.groupType)
             }
           }
@@ -1617,9 +1652,13 @@ function canonicalDocxQuestionOptionLayout(
   {
     includeQuestionNumber = true,
     placementSignature: signature,
+    stemRuns = null,
+    stemParagraphOptions = {},
   } = {},
 ) {
   const byLabel = new Map(options.map((option) => [option.label, option]))
+  const questionStemStartTwip = abcdQuestionStemAlignment.startTwip
+  const optionBlockStartTwip = stemRuns ? questionStemStartTwip : 0
   let optionLayout
   if (plan.mode === 'one_column') {
     optionLayout = plan.placements.map((placement) => {
@@ -1639,7 +1678,7 @@ function canonicalDocxQuestionOptionLayout(
         ],
         {
           after: 30,
-          indentLeft: continuationStartTwip,
+          indentLeft: optionBlockStartTwip + continuationStartTwip,
           hangingIndent: continuationStartTwip,
         },
       )
@@ -1667,10 +1706,22 @@ function canonicalDocxQuestionOptionLayout(
             : [run(option.content, { size: 21 })]),
           canonicalBookmarkEnd('canonical_option', option.optionId),
         ], { after: 30 })}</w:tc>`).join('')}</w:tr>`).join('')
-    optionLayout = `<w:tbl><w:tblPr><w:tblW w:w="${plan.rowWidthTwip}" w:type="dxa"/><w:tblLayout w:type="fixed"/></w:tblPr><w:tblGrid>${grid}</w:tblGrid>${rowXml}</w:tbl>`
+    optionLayout = `<w:tbl><w:tblPr><w:tblW w:w="${plan.rowWidthTwip}" w:type="dxa"/>${optionBlockStartTwip ? `<w:tblInd w:w="${optionBlockStartTwip}" w:type="dxa"/>` : ''}<w:tblLayout w:type="fixed"/></w:tblPr><w:tblGrid>${grid}</w:tblGrid>${rowXml}</w:tbl>`
   }
-  const layout = includeQuestionNumber
-    ? `<w:tbl><w:tblPr><w:tblW w:w="${plan.rowWidthTwip + 420}" w:type="dxa"/><w:tblLayout w:type="fixed"/></w:tblPr><w:tblGrid><w:gridCol w:w="420"/><w:gridCol w:w="${plan.rowWidthTwip}"/></w:tblGrid><w:tr><w:tc><w:tcPr><w:tcW w:w="420" w:type="dxa"/></w:tcPr>${paragraph(`${questionNumber}.`, { after: 30, size: 21 })}</w:tc><w:tc><w:tcPr><w:tcW w:w="${plan.rowWidthTwip}" w:type="dxa"/></w:tcPr>${optionLayout}</w:tc></w:tr></w:tbl>`
+  const layout = stemRuns
+    ? `${paragraph(
+        [
+          run(`${questionNumber}.`, { size: 21 }),
+          tabRun(),
+          ...stemRuns,
+        ],
+        {
+          ...stemParagraphOptions,
+          tabStopsTwip: [questionStemStartTwip],
+        },
+      )}${optionLayout}`
+    : includeQuestionNumber
+    ? `<w:tbl><w:tblPr><w:tblW w:w="${plan.rowWidthTwip + questionStemStartTwip}" w:type="dxa"/><w:tblLayout w:type="fixed"/></w:tblPr><w:tblGrid><w:gridCol w:w="${questionStemStartTwip}"/><w:gridCol w:w="${plan.rowWidthTwip}"/></w:tblGrid><w:tr><w:tc><w:tcPr><w:tcW w:w="${questionStemStartTwip}" w:type="dxa"/></w:tcPr>${paragraph(`${questionNumber}.  `, { after: 30, size: 21, ...stemParagraphOptions })}</w:tc><w:tc><w:tcPr><w:tcW w:w="${plan.rowWidthTwip}" w:type="dxa"/></w:tcPr>${optionLayout}</w:tc></w:tr></w:tbl>`
     : optionLayout
   if (typeof signature !== 'string') {
     throw new Error('Canonical DOCX placement signature is required')

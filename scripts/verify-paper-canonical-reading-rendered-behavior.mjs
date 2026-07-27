@@ -16,6 +16,9 @@ import { DatabaseSync } from 'node:sqlite'
 
 import { compileCanonicalPaper } from '../shared/paper-canonical/compiler.mjs'
 import {
+  translateAbcdPlanToPointPlacement,
+} from '../shared/paper-canonical/abcdLayout.mjs'
+import {
   projectCanonicalConsumerGroup,
 } from '../shared/paper-canonical/consumerProjection.mjs'
 import {
@@ -190,6 +193,54 @@ function bookmarkName(kind, value) {
   return `${kind}_${createHash('sha256').update(`${kind}:${value}`).digest('hex').slice(0, 24)}`
 }
 
+function bookmarkId(kind, value) {
+  return Number.parseInt(
+    createHash('sha256').update(`${kind}:${value}`).digest('hex').slice(0, 7),
+    16,
+  )
+}
+
+function assertPdfStemOptionAlignment(pdfPath, group, label) {
+  const bbox = execFileSync(
+    'pdftotext',
+    ['-bbox-layout', pdfPath, '-'],
+    { encoding: 'utf8' },
+  )
+  const words = [...bbox.matchAll(
+    /<word xMin="([^"]+)" yMin="[^"]+" xMax="[^"]+" yMax="[^"]+">([^<]+)<\/word>/g,
+  )].map((match) => ({
+    x: Number(match[1]),
+    text: match[2],
+  }))
+  let cursor = 0
+  for (const question of group.questions) {
+    const questionIndex = words.findIndex(
+      (word, index) =>
+        index >= cursor && word.text === `${question.questionNo}.`,
+    )
+    assert.notEqual(
+      questionIndex,
+      -1,
+      `${label} contains Plan-owned Question ${question.questionNo}`,
+    )
+    const stemWord = words[questionIndex + 1]
+    assert.ok(stemWord, `${label} contains Question ${question.questionNo} stem`)
+    const optionIndex = words.findIndex(
+      (word, index) => index > questionIndex && word.text === 'A.',
+    )
+    assert.notEqual(
+      optionIndex,
+      -1,
+      `${label} contains Question ${question.questionNo} Option A`,
+    )
+    assert.ok(
+      Math.abs(stemWord.x - words[optionIndex].x) <= 1,
+      `${label} Question ${question.questionNo} A. aligns with the stem-text start (${words[optionIndex].x} vs ${stemWord.x})`,
+    )
+    cursor = optionIndex + 1
+  }
+}
+
 function canonicalInlineNodeIds(group) {
   return [
     ...group.blocks.flatMap((block) => {
@@ -265,6 +316,11 @@ const oneColumnContinuationTwip =
   oneColumnQuestion.layoutPlan.placements[0].continuationStartTwip
 assert.ok(Number.isInteger(oneColumnContinuationTwip))
 const oneColumnContinuationPt = oneColumnContinuationTwip / 20
+const questionStemStartPt = translateAbcdPlanToPointPlacement(
+  oneColumnQuestion.layoutPlan,
+).questionStemStartPt
+assert.equal(questionStemStartPt, 21)
+const questionStemStartTwip = questionStemStartPt * 20
 
 const figureFixture = makeCanonicalFigureFixture()
 const figure = await publishAndLoad(figureFixture)
@@ -418,7 +474,7 @@ for (const versionType of ['student', 'teacher']) {
     )
     assert.equal(
       xml.includes(
-        `<w:t xml:space="preserve">${question.questionNo}.  </w:t>`,
+        `<w:t xml:space="preserve">${question.questionNo}.</w:t>`,
       ),
       true,
     )
@@ -434,6 +490,33 @@ for (const versionType of ['student', 'teacher']) {
         true,
       )
     }
+    const questionBookmark = bookmarkName(
+      'canonical_question',
+      question.questionId,
+    )
+    const questionStart = xml.indexOf(questionBookmark)
+    const questionEnd = xml.indexOf(
+      `<w:bookmarkEnd w:id="${bookmarkId(
+        'canonical_question',
+        question.questionId,
+      )}"/>`,
+      questionStart,
+    )
+    const questionXml = xml.slice(questionStart, questionEnd)
+    assert.equal(
+      questionXml.includes(
+        `<w:tab w:val="left" w:pos="${questionStemStartTwip}"/>`,
+      ),
+      true,
+      'DOCX Question stem consumes the shared stem-text start',
+    )
+    assert.equal(
+      questionXml.includes(
+        `<w:tblInd w:w="${questionStemStartTwip}" w:type="dxa"/>`,
+      ),
+      true,
+      'DOCX dense Option block consumes the shared stem-text start',
+    )
   }
   for (const nodeId of canonicalInlineNodeIds(tableGroup)) {
     assert.equal(
@@ -458,9 +541,16 @@ for (const versionType of ['student', 'teacher']) {
     xml,
   )
   if (persistActualArtifacts) {
+    const docxPdfPath =
+      path.join(actualArtifactRoot, `reading-table-${versionType}-docx.pdf`)
     renderer.convertDocxToPdf(
       docxPath,
-      path.join(actualArtifactRoot, `reading-table-${versionType}-docx.pdf`),
+      docxPdfPath,
+    )
+    assertPdfStemOptionAlignment(
+      docxPdfPath,
+      tableGroup,
+      `DOCX ${versionType}`,
     )
   }
 }
@@ -540,7 +630,7 @@ const oneColumnParagraph = oneColumnXml.slice(
 )
 assert.equal(
   oneColumnParagraph.includes(
-    `<w:ind w:left="${oneColumnContinuationTwip}" w:hanging="${oneColumnContinuationTwip}"/>`,
+    `<w:ind w:left="${questionStemStartTwip + oneColumnContinuationTwip}" w:hanging="${oneColumnContinuationTwip}"/>`,
   ),
   true,
 )
@@ -567,9 +657,18 @@ oneColumnRenderer.writeDocxPackage({
   images: [],
 })
 if (persistActualArtifacts) {
+  const oneColumnDocxPdfPath = path.join(
+    actualArtifactRoot,
+    'reading-one-column-student-docx.pdf',
+  )
   oneColumnRenderer.convertDocxToPdf(
     oneColumnDocxPath,
-    path.join(actualArtifactRoot, 'reading-one-column-student-docx.pdf'),
+    oneColumnDocxPdfPath,
+  )
+  assertPdfStemOptionAlignment(
+    oneColumnDocxPdfPath,
+    oneColumnGroup,
+    'DOCX one-column student',
   )
 }
 
@@ -748,6 +847,31 @@ async function assertActualBrowserArtifacts() {
         )),
         group.questions.map((question) => question.placementSignature),
       )
+      for (const question of group.questions) {
+        const questionElement = page.locator(
+          `[data-canonical-question-id="${question.questionId}"]`,
+        )
+        const stemX = await questionElement.locator(
+          '.ps-question-stem [data-canonical-content-node-id]',
+        ).first().evaluate((element) => element.getBoundingClientRect().x)
+        const questionGeometry = await questionElement.evaluate((element) => ({
+          questionX: element.getBoundingClientRect().x,
+          buttonX: element.querySelector('.ps-question-stem-button')
+            ?.getBoundingClientRect().x,
+        }))
+        const optionGeometry = await questionElement.locator(
+          `[data-canonical-option-id="${question.options[0].optionId}"] .ps-option-label`,
+        ).evaluate((element) => ({
+          labelX: element.getBoundingClientRect().x,
+          optionX: element.parentElement?.getBoundingClientRect().x,
+          listX: element.parentElement?.parentElement?.getBoundingClientRect().x,
+        }))
+        const optionLabelX = optionGeometry.labelX
+        assert.ok(
+          Math.abs(stemX - optionLabelX) <= 96 / 72,
+          `Screen ${question.questionId} A. aligns with the stem-text start (${JSON.stringify({ optionGeometry, questionGeometry })} vs ${stemX})`,
+        )
+      }
       if (label === 'table') {
         assert.equal(await page.locator('table').count(), 1)
         assert.equal(await page.locator('table td').count(), 12)
@@ -820,6 +944,28 @@ async function assertActualBrowserArtifacts() {
         assert.ok(Math.abs(placement.paddingLeftPx - expectedPx) <= 96 / 72)
         assert.ok(Math.abs(placement.textIndentPx + expectedPx) <= 96 / 72)
       }
+      if (['student', 'teacher', 'one-column-student'].includes(
+        printCase.versionType,
+      )) {
+        const expectedGroup = printCase.versionType === 'one-column-student'
+          ? oneColumnGroup
+          : tableGroup
+        for (const question of expectedGroup.questions) {
+          const questionElement = page.locator(
+            `[data-canonical-question-id="${question.questionId}"]`,
+          )
+          const stemX = await questionElement.locator(
+            '.stem [data-canonical-content-node-id]',
+          ).first().evaluate((element) => element.getBoundingClientRect().x)
+          const optionLabelX = await questionElement.locator(
+            `[data-canonical-option-id="${question.options[0].optionId}"] > span`,
+          ).first().evaluate((element) => element.getBoundingClientRect().x)
+          assert.ok(
+            Math.abs(stemX - optionLabelX) <= 96 / 72,
+            `Print ${question.questionId} A. aligns with the stem-text start (${optionLabelX} vs ${stemX})`,
+          )
+        }
+      }
       const pdfPath = path.join(
         actualArtifactRoot,
         `reading-${printCase.versionType}.pdf`,
@@ -830,6 +976,17 @@ async function assertActualBrowserArtifacts() {
         printBackground: true,
       })
       assert.equal(pdfBytes.subarray(0, 4).toString(), '%PDF')
+      if (['student', 'teacher', 'one-column-student'].includes(
+        printCase.versionType,
+      )) {
+        assertPdfStemOptionAlignment(
+          pdfPath,
+          printCase.versionType === 'one-column-student'
+            ? oneColumnGroup
+            : tableGroup,
+          `Print/PDF ${printCase.versionType}`,
+        )
+      }
       const pdfText = execFileSync('pdftotext', ['-layout', pdfPath, '-'], {
         encoding: 'utf8',
       })
