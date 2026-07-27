@@ -182,12 +182,18 @@ export function buildSevenChoicesSurfaceModel(
   if (!canonicalConsumption && !analysis) {
     throw new Error('[I0-D] reviewed seven choices analysis is unavailable.')
   }
-  if (analysis && analysis.schemaVersion !== 'seven-choices-analysis-v1') {
+  const analysisSchemaMatches =
+    analysis?.schemaVersion === 'seven-choices-analysis-v1'
+  const analysisPaperMatches =
+    analysis?.paperId === asset.paper.paperId
+  if (!canonicalConsumption && !analysisSchemaMatches) {
     throw new Error('[I0-D] reviewed analysis schemaVersion must be seven-choices-analysis-v1.')
   }
-  if (analysis && analysis.paperId !== asset.paper.paperId) {
+  if (!canonicalConsumption && !analysisPaperMatches) {
     throw new Error('[I0-D] seven choices analysis paperId does not match paper asset.')
   }
+  const enrichmentAnalysis =
+    analysisSchemaMatches && analysisPaperMatches ? analysis : null
 
   const group = asset.content.groups[groupId]
   if (!group) {
@@ -238,16 +244,21 @@ export function buildSevenChoicesSurfaceModel(
           ? []
           : [{ questionId, questionNo: String(questionNo) }]
       })
-  const chains = analysis
-    ? buildChainViews({
-        analysis,
+  let chains: SevenChoicesChainView[] = []
+  if (enrichmentAnalysis) {
+    try {
+      chains = buildChainViews({
+        analysis: enrichmentAnalysis,
         questionOrder,
         textMap,
         optionTextByLabel: new Map(
           optionSource.map((option) => [option.label, option.text]),
         ),
       })
-    : []
+    } catch (error) {
+      if (!canonicalConsumption) throw error
+    }
+  }
   const chainsByQuestionId = Object.fromEntries(chains.map((chain) => [chain.questionId, chain]))
   const chainsByOptionLabel = Object.fromEntries(chains.map((chain) => [chain.correctOptionLabel, chain]))
   const options = optionSource.map((option): SevenChoicesOptionView => ({

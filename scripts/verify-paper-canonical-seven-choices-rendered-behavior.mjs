@@ -389,11 +389,13 @@ async function assertActualPaperSurface() {
   const browser = await playwright.default.chromium.launch({ headless: true })
   const signatures = []
   try {
-    for (const { analysisAvailable, lecture } of [
-      { analysisAvailable: true, lecture: false },
-      { analysisAvailable: true, lecture: true },
-      { analysisAvailable: false, lecture: false },
-      { analysisAvailable: false, lecture: true },
+    for (const { analysisCase, lecture } of [
+      { analysisCase: 'valid', lecture: false },
+      { analysisCase: 'valid', lecture: true },
+      { analysisCase: 'missing', lecture: false },
+      { analysisCase: 'missing', lecture: true },
+      { analysisCase: 'wrong-schema', lecture: true },
+      { analysisCase: 'stale-paper', lecture: true },
     ]) {
       const page = await browser.newPage()
       await page.route('**/api/paper-canonical/consumption?*', (route) =>
@@ -410,12 +412,18 @@ async function assertActualPaperSurface() {
         }))
       await page.route('**/paper-assets/**/analyses/**', (route) =>
         route.fulfill({ status: 404, body: '' }))
-      if (analysisAvailable) {
+      if (analysisCase !== 'missing') {
+        const responseAnalysis = structuredClone(analysis)
+        if (analysisCase === 'wrong-schema') {
+          responseAnalysis.schemaVersion = 'seven-choices-analysis-v0'
+        } else if (analysisCase === 'stale-paper') {
+          responseAnalysis.paperId = 'stale-paper-id'
+        }
         await page.route('**/paper-assets/**/analyses/seven-choices-analysis-v1.json', (route) =>
           route.fulfill({
             status: 200,
             contentType: 'application/json',
-            body: JSON.stringify(analysis),
+            body: JSON.stringify(responseAnalysis),
           }))
       }
       await page.route('**/paper-assets/**/figures/**', (route) =>
@@ -473,7 +481,7 @@ async function assertActualPaperSurface() {
       })
       assert.equal((await page.locator('body').innerText()).includes('LEGACY POISON'), false)
       assert.equal((await page.locator('body').innerText()).includes('POISONED RAW MARKERS'), false)
-      if (!analysisAvailable && lecture) {
+      if (analysisCase !== 'valid' && lecture) {
         assert.equal(
           await page.getByText('解析未发布', { exact: true }).count(),
           1,
@@ -495,9 +503,10 @@ async function assertActualPaperSurface() {
         }
       }
       if (persistActualArtifacts) {
-        const caseName = `${analysisAvailable ? '' : 'no-analysis-'}${
-          lecture ? 'lecture' : 'plain'
-        }`
+        const casePrefix = analysisCase === 'valid'
+          ? ''
+          : `${analysisCase === 'missing' ? 'no-analysis' : analysisCase}-`
+        const caseName = `${casePrefix}${lecture ? 'lecture' : 'plain'}`
         writeFileSync(
           path.join(actualArtifactRoot, `papersurface-${caseName}.html`),
           await page.content(),
@@ -511,7 +520,7 @@ async function assertActualPaperSurface() {
     }
     assert.deepEqual(
       signatures,
-      Array.from({ length: 4 }, () => ({
+      Array.from({ length: 6 }, () => ({
         semantic: group.semanticSignature,
         occurrence: group.occurrenceSignature,
       })),
@@ -545,6 +554,8 @@ if (persistActualArtifacts) {
         'lecture',
         'no-analysis-plain',
         'no-analysis-lecture',
+        'wrong-schema-lecture',
+        'stale-paper-lecture',
       ],
       artifactCases: [
         'student-plain',
@@ -563,6 +574,7 @@ if (persistActualArtifacts) {
 - Every PaperSurface, Print/PDF, and DOCX preview must show five numbered pair anchors (36–40), seven A–G option anchors, exactly one shared bank, and zero per-question choice sets.
 - PaperSurface plain and lecture must preserve the same semantic and occurrence signatures.
 - PaperSurface without the optional Seven Choices Analysis sidecar must preserve the same canonical signatures and blank-focus joins.
+- PaperSurface with a wrong-schema or stale-paper Analysis sidecar must degrade to the same "解析未发布" lecture state without changing canonical signatures or blank-focus joins.
 - Student and teacher artifacts must preserve the same canonical group; teacher-only supplements may appear outside it.
 - Page-break artifacts must not repeat or split the shared bank.
 - No artifact may display \`POISONED RAW MARKERS\` or \`LEGACY POISON\`.
