@@ -17,6 +17,7 @@ import {
 } from '../server/paper-canonical/publication.mjs'
 import { compileCanonicalPaper } from '../shared/paper-canonical/compiler.mjs'
 import { consumerContractRefs } from '../shared/paper-canonical/consumers.mjs'
+import { resolveCanonicalAuthority } from '../shared/paper-canonical/authority.mjs'
 import { digestJson, sha256, stableStringify } from '../shared/paper-canonical/stable.mjs'
 import { makeReadyCanonicalFixture } from '../test-fixtures/paper-canonical/foundationFixture.mjs'
 
@@ -29,6 +30,7 @@ const legacyAuthorityRef = {
   manifestVersion: manifestV1.version,
   manifestDigest: digestJson(manifestV1),
 }
+const legacyAuthority = resolveCanonicalAuthority(legacyAuthorityRef).closure
 function stableBytes(value) {
   return new TextEncoder().encode(`${stableStringify(value)}\n`)
 }
@@ -48,8 +50,11 @@ function legacyBundleFrom(compilation, sourceAsset, transformationRecords = []) 
   }
   const groups = compilation.artifacts.canonicalPaper.questionGroups.map((group) => {
     const legacyGroup = structuredClone(group)
+    const legacyFamily = legacyAuthority.families.get(legacyGroup.contractRef.familyContractId)
     legacyGroup.contractRef.manifestVersion = legacyAuthorityRef.manifestVersion
     legacyGroup.contractRef.manifestDigest = legacyAuthorityRef.manifestDigest
+    legacyGroup.contractRef.familyContractVersion = legacyFamily.version
+    legacyGroup.contractRef.familyContractDigest = digestJson(legacyFamily)
     const recordIds = transformationRecords.filter((record) => record.target.identity === legacyGroup.identity.groupId).map((record) => record.recordId)
     for (const entry of legacyGroup.sourceMap.entries) entry.transformationRecordIds = recordIds
     legacyGroup.sourceFingerprint = digestJson({ captureDigest: sourceCapture.digest, sourceSpanId: legacyGroup.sourceMap.entries[0].sourceSpanRefs[0], recordIds: legacyGroup.sourceMap.entries.flatMap((entry) => entry.transformationRecordIds) })
@@ -207,7 +212,7 @@ assert.throws(
 
 const forgedReportManifest = structuredClone(sealed.manifest)
 const forgedReportArtifacts = { ...sealed.artifacts }
-const reportPath = 'canonical/normalization-report-v3.json'
+const reportPath = sealed.manifest.artifacts.find((artifact) => artifact.role === 'normalization_report').relativePath
 const forgedReport = JSON.parse(new TextDecoder().decode(forgedReportArtifacts[reportPath]))
 forgedReport.sourceFingerprint = 'sha256:forged'
 forgedReport.directSourceMap = []
@@ -358,7 +363,7 @@ try {
   )
   rmSync(occupiedVersion, { recursive: true, force: true })
 
-  const corruptPath = path.join(rootDir, fixture.source.paperId, 'versions', 'v2', 'canonical', 'normalization-report-v3.json')
+  const corruptPath = path.join(rootDir, fixture.source.paperId, 'versions', 'v2', 'canonical', 'normalization-report-v4.json')
   writeFileSync(corruptPath, '{"corrupt":true}\n')
   const corrupt = await loadPaperForConsumption({ paperId: fixture.source.paperId, version: 'v2', consumerContract: consumerContractRefs.screen }, store)
   assert.equal(corrupt.disposition, 'incompatible')

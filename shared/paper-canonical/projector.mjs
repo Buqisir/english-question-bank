@@ -16,7 +16,7 @@ function groupSemanticPayload(group) {
   return semantic
 }
 
-function sourceMapCoverageIssues(group, sourceCapture) {
+function sourceMapCoverageIssues(group, sourceCapture, family) {
   const issues = []
   const expected = new Set([
     `group:${group.identity.groupId}`,
@@ -33,13 +33,15 @@ function sourceMapCoverageIssues(group, sourceCapture) {
           ])),
         ]
       : []),
-    ...(group.variant.family === 'application-writing'
+    ...(family.variantSchemaId === 'canonical-application-writing-variant-v1'
       ? [
           `writing_task:${group.variant.writingTaskId}`,
+          `word_ruling:${group.variant.wordCountRuling.authorityObservationRef}`,
+          `response_binding:${group.variant.response.authorityObservationRef}`,
           ...group.variant.contentRequirements.map((requirement) => `requirement:${requirement.requirementId}`),
           ...(group.variant.givenSkeleton.presence === 'provided'
             ? group.variant.givenSkeleton.parts.map((part) => `given_part:${part.givenPartId}`)
-            : []),
+            : [`given_absence:${group.variant.givenSkeleton.answerRegionAbsenceAssertionRef}`]),
         ]
       : []),
   ])
@@ -151,7 +153,7 @@ function assertCanonicalPackage(canonicalPackage) {
       })
       if (readingIssues.length > 0) throw projectionError('Reading canonical contract is not closed', readingIssues)
     }
-    if (family.familyContractId === 'application-writing') {
+    if (family.variantSchemaId === 'canonical-application-writing-variant-v1') {
       const applicationIssues = validateApplicationWritingContract({
         groupId: group.identity.groupId,
         questionIds: group.questionRefs.map(({ questionId }) => questionId),
@@ -163,7 +165,7 @@ function assertCanonicalPackage(canonicalPackage) {
       if (applicationIssues.length > 0) throw projectionError('Application Writing canonical contract is not closed', applicationIssues)
     }
     if (group.semanticDigest !== digestJson(groupSemanticPayload(group))) throw projectionError('Group semantic digest does not match canonical semantics', [])
-    const sourceMapIssues = sourceMapCoverageIssues(group, sourceCapture)
+    const sourceMapIssues = sourceMapCoverageIssues(group, sourceCapture, family)
     if (sourceMapIssues.length > 0) throw projectionError('Group source map is incomplete', sourceMapIssues)
     groupById.set(group.identity.groupId, group)
   }

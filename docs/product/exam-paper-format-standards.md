@@ -4,7 +4,7 @@
 
 本文件是唯一的人类可读索引；当前 canonical 编译、校验、发布和未来的
 Screen / Print-PDF / DOCX consumer 只从
-[`standards/paper-canonical/manifest-v3.json`](../../standards/paper-canonical/manifest-v3.json)
+[`standards/paper-canonical/manifest-v4.json`](../../standards/paper-canonical/manifest-v4.json)
 解析一份 digest-closed 的权威闭包。这里不复制卷型题号、分值、题组
 cardinality、清洗条件或字体/物理排版数值，也不能被 caller 当作第二套配置。
 
@@ -19,7 +19,10 @@ Renderer Typography、其 schema 及纯验证入口。未知版本、缺件、di
 结果的变更，必须新增 versioned artifact、schema/semantic conformance fixture、
 迁移说明和 manifest 升版；已经被 Publication 引用的 artifact 不可原位修改。
 `manifest-v1.json` 保留其原始 digest-closed closure，供既有 Publication 解析；
-当前 consumer contracts 已切到同一 v3 authority。v3 只新增
+当前 consumer contracts 已切到同一 v4 authority。v4 只新增闭合的
+Application Writing v2 family/source-evidence contract；迁移说明见
+[`application-writing-v2-migration.md`](../../standards/paper-canonical/families/application-writing-v2-migration.md)。
+此前 v3 只新增
 Renderer Typography 对 Question stem 与外层 A–D Option block 共用起点的
 digest-closed 物理坐标；迁移说明见
 [`paper-typography-v2-migration.md`](../../standards/paper-canonical/rendering/paper-typography-v2-migration.md)。

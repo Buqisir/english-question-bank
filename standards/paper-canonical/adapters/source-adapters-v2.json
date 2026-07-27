@@ -1,0 +1,1 @@
+{"schemaVersion":"source-adapters-v1","id":"source-adapters","version":"2","owner":"source_adapter","adapters":[{"adapterId":"canonical-fixture-evidence","version":"1","mediaType":"application/vnd.eqb.canonical-fixture+json"},{"adapterId":"application-writing-source-capture","version":"1","mediaType":"application/vnd.eqb.application-writing-source-capture+json"}]}

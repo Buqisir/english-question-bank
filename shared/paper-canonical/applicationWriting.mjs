@@ -41,6 +41,12 @@ function observationById(sourceCapture, observationId) {
   return sourceCapture?.observations?.find((observation) => observation.observationId === observationId)
 }
 
+function contentRefText(ref, index) {
+  const block = index.blocks.get(ref?.blockId)
+  const selected = new Set(ref?.inlineNodeIds || [])
+  return (block?.inlines || []).filter((inline) => selected.has(inline.nodeId)).map((inline) => inline.text || '').join('')
+}
+
 export function validateApplicationWritingContract({
   groupId,
   questionIds,
@@ -120,13 +126,27 @@ export function validateApplicationWritingContract({
   }
 
   const ruling = variant.wordCountRuling
-  if (!isRecordValue(ruling) || !exactKeys(ruling, ['kind', 'target', 'countScope', 'sourceRef'])) {
+  if (!isRecordValue(ruling) || !exactKeys(ruling, ['kind', 'target', 'countScope', 'sourceRef', 'authorityObservationRef'])) {
     issues.push(issue('APPLICATION_WORD_RULING_INCOMPLETE', 'incomplete_source', '$.variant.wordCountRuling', 'Application Writing requires one exact source-backed word-count ruling'))
   } else if (ruling.kind !== 'approximate_target' || ruling.countScope !== 'student_authored_only') {
     issues.push(issue('APPLICATION_WORD_RULING_UNSUPPORTED', 'unsupported', '$.variant.wordCountRuling', 'Only an approximate student-authored-only word target is representable'))
   } else {
     if (!Number.isInteger(ruling.target) || ruling.target < 1) issues.push(issue('APPLICATION_WORD_RULING_AMBIGUOUS', 'needs_review', '$.variant.wordCountRuling.target', 'Word-count target must be one positive source value'))
     issues.push(...contentRefIssues(ruling.sourceRef, '$.variant.wordCountRuling.sourceRef', promptBlockIds, index))
+    const observation = observationById(sourceCapture, ruling.authorityObservationRef)
+    if (
+      typeof ruling.authorityObservationRef !== 'string'
+      || !observation
+      || observation.kind !== 'application_word_count_ruling'
+      || observation.value?.groupId !== groupId
+    ) {
+      issues.push(issue('APPLICATION_WORD_RULING_UNPROVEN', 'incomplete_source', '$.variant.wordCountRuling', 'Word-count semantics require one reviewed source observation'))
+    } else if (observation.value?.target !== ruling.target || observation.value?.countScope !== ruling.countScope) {
+      issues.push(issue('APPLICATION_WORD_RULING_CONFLICT', 'needs_review', '$.variant.wordCountRuling', 'Canonical and reviewed source word-count rulings conflict'))
+    }
+    if (!contentRefText(ruling.sourceRef, index).includes(String(ruling.target))) {
+      issues.push(issue('APPLICATION_WORD_RULING_UNPROVEN', 'incomplete_source', '$.variant.wordCountRuling.sourceRef', 'The prompt source range does not contain the word-count target'))
+    }
   }
 
   const skeleton = variant.givenSkeleton
@@ -206,11 +226,21 @@ export function validateApplicationWritingContract({
   }
   if (
     !isRecordValue(variant.response)
-    || !exactKeys(variant.response, ['kind', 'answerRegionRef'])
+    || !exactKeys(variant.response, ['kind', 'answerRegionRef', 'authorityObservationRef'])
     || variant.response.kind !== 'group_level_written_response'
     || variant.response.answerRegionRef !== 'writing.application-box'
   ) {
     issues.push(issue('APPLICATION_RESPONSE_BINDING_INVALID', 'needs_review', '$.variant.response', 'Application Writing binds one Profile answer region'))
+  } else {
+    const responseObservation = observationById(sourceCapture, variant.response.authorityObservationRef)
+    if (
+      responseObservation?.kind !== 'application_response_binding'
+      || responseObservation.value?.groupId !== groupId
+      || responseObservation.value?.writingTaskId !== variant.writingTaskId
+      || responseObservation.value?.answerRegionRef !== variant.response.answerRegionRef
+    ) {
+      issues.push(issue('APPLICATION_RESPONSE_BINDING_UNPROVEN', 'incomplete_source', '$.variant.response', 'The response binding requires one reviewed source observation'))
+    }
   }
   return issues
 }

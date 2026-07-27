@@ -537,6 +537,99 @@ function appendReadingReferenceGroups({
   }
 }
 
+function appendApplicationWritingReferenceGroup({
+  source,
+  applicationEntry,
+  provenanceEntries,
+  documents,
+  diagnostics,
+}) {
+  if (source.groups.some((candidate) => candidate.slotId === 'writing.application')) return
+  if (!applicationEntry) {
+    diagnostics.push(diagnostic('APPLICATION_SOURCE_CAPTURE_INCOMPLETE', 'incomplete_source', '$.evidence.documents', 'Application Writing requires one reviewed structured source capture'))
+    return
+  }
+  const closure = resolveCanonicalAuthority(canonicalAuthorityRef).closure
+  const capture = applicationEntry.value
+  const schemaIssues = validateJsonSchema(capture, closure.schemas['application-writing-source-capture-v1'], '$.evidence.applicationWritingCapture')
+  if (schemaIssues.length > 0) {
+    diagnostics.push(...schemaIssues.map((item) => diagnostic('APPLICATION_SOURCE_CAPTURE_INVALID', 'incomplete_source', item.path, item.message)))
+    return
+  }
+  const provenanceMatches = provenanceEntries.filter((entry) => (
+    entry.value?.schemaVersion === 'import-meta-v1'
+    && entry.value?.paperId === capture.paperId
+    && `sha256:${entry.value?.sourceFileSha256}` === capture.sourceDocumentDigest
+  ))
+  const capturedSourceMatches = documents.filter((document) => document.sha256 === capture.sourceDocumentDigest)
+  if (
+    capture.paperId !== source.paperId
+    || provenanceMatches.length !== 1
+    || capturedSourceMatches.length > 1
+    || capture.group.groupId.length === 0
+  ) {
+    diagnostics.push(diagnostic('APPLICATION_SOURCE_PROVENANCE_INVALID', 'incomplete_source', '$.evidence.applicationWritingCapture', 'Application Writing capture must bind one paper and one immutable source digest'))
+    return
+  }
+  const variantIssues = validateJsonSchema(
+    capture.group.variant,
+    closure.schemas['canonical-application-writing-variant-v1'],
+    '$.evidence.applicationWritingCapture.group.variant',
+  )
+  if (variantIssues.length > 0) {
+    diagnostics.push(...variantIssues.map((item) => diagnostic('APPLICATION_SOURCE_VARIANT_INVALID', 'incomplete_source', item.path, item.message)))
+    return
+  }
+  const observationIds = new Set()
+  const sourceObservationId = `observation:application-source:${capture.group.groupId}`
+  const sourceSpanId = `source-span:${sourceObservationId}`
+  source.observations.push({
+    observationId: sourceObservationId,
+    kind: 'application_source_group',
+    documentInputKey: applicationEntry.document.inputKey,
+    value: {
+      groupId: capture.group.groupId,
+      sourceDocumentDigest: capture.sourceDocumentDigest,
+      sourceLocation: capture.group.sourceLocation,
+      review: capture.review,
+    },
+    span: { start: 0, end: applicationEntry.document.byteLength },
+  })
+  for (const observation of capture.group.observations) {
+    if (
+      !isRecordValue(observation)
+      || !exactKeys(observation, ['observationId', 'kind', 'value'])
+      || typeof observation.observationId !== 'string'
+      || typeof observation.kind !== 'string'
+      || !isRecordValue(observation.value)
+      || observationIds.has(observation.observationId)
+    ) {
+      diagnostics.push(diagnostic('APPLICATION_SOURCE_OBSERVATION_INVALID', 'needs_review', '$.evidence.applicationWritingCapture.group.observations', 'Reviewed Application observations require unique closed identities'))
+      continue
+    }
+    observationIds.add(observation.observationId)
+    source.observations.push({
+      observationId: observation.observationId,
+      kind: observation.kind,
+      documentInputKey: applicationEntry.document.inputKey,
+      value: cloneJson(observation.value),
+      span: { start: 0, end: applicationEntry.document.byteLength },
+    })
+  }
+  if (diagnostics.some((item) => item.code === 'APPLICATION_SOURCE_OBSERVATION_INVALID')) return
+  source.groups.push({
+    groupId: capture.group.groupId,
+    slotId: capture.group.slotId,
+    family: 'application-writing',
+    questionIds: [],
+    blankIds: [],
+    sourceSpanId,
+    content: cloneJson(capture.group.content),
+    media: [],
+    variant: cloneJson(capture.group.variant),
+  })
+}
+
 function adaptReferenceFamilies(parsed, documents, diagnostics) {
   const structured = documents
     .filter((document) => document.mediaType === 'application/json' && document.roles.some((role) => ['question_source', 'official_answer_source', 'structured_source'].includes(role)))
@@ -544,6 +637,20 @@ function adaptReferenceFamilies(parsed, documents, diagnostics) {
   const paperEntry = structured.find((entry) => entry.value?.schemaVersion === 'paper-asset-v1')
   const answerEntry = structured.find((entry) => entry.value?.schemaVersion === 'answer-key-v1')
   const readingEntry = structured.find((entry) => entry.value?.schemaVersion === 'reading-source-capture-v1')
+  const applicationDocument = documents.find((document) => document.mediaType === 'application/vnd.eqb.application-writing-source-capture+json')
+  const applicationEntry = applicationDocument
+    ? { document: applicationDocument, value: parseJsonDocument(applicationDocument, diagnostics) }
+    : null
+  const provenanceEntries = documents
+    .filter((document) => document.mediaType === 'application/json' && document.roles.includes('source_provenance'))
+    .map((document) => ({ document, value: parseJsonDocument(document, diagnostics) }))
+  appendApplicationWritingReferenceGroup({
+    source: parsed.value,
+    applicationEntry,
+    provenanceEntries,
+    documents,
+    diagnostics,
+  })
   if (!paperEntry && !answerEntry) return parsed
   if (!paperEntry || !answerEntry) {
     diagnostics.push(diagnostic('REFERENCE_EVIDENCE_INCOMPLETE', 'incomplete_source', '$.evidence.documents', 'Cloze and Grammar Fill reference publication requires paper asset and official answer evidence together'))
@@ -976,22 +1083,46 @@ function collectApplicationWritingTargetIds(variant) {
   if (variant?.family !== 'application-writing') return []
   return [
     { kind: 'writing_task', id: variant.writingTaskId },
+    { kind: 'word_ruling', id: variant.wordCountRuling?.authorityObservationRef },
+    { kind: 'response_binding', id: variant.response?.authorityObservationRef },
     ...(variant.contentRequirements || []).map((requirement) => ({ kind: 'requirement', id: requirement.requirementId })),
     ...(variant.givenSkeleton?.presence === 'provided'
       ? variant.givenSkeleton.parts.map((part) => ({ kind: 'given_part', id: part.givenPartId }))
-      : []),
+      : [{ kind: 'given_absence', id: variant.givenSkeleton?.answerRegionAbsenceAssertionRef }]),
   ].filter((target) => typeof target.id === 'string')
 }
 
 function applicationWritingSourceSpanRefs(variant, content, capture, target) {
-  if (variant?.family !== 'application-writing' || variant.givenSkeleton?.presence !== 'provided') return null
-  for (const part of variant.givenSkeleton.parts) {
-    const block = content?.blocks?.find((candidate) => candidate.nodeId === part.blockRef)
-    const targetBelongsToPart = (target.kind === 'given_part' && target.id === part.givenPartId)
-      || (target.kind === 'content_node' && (target.id === part.blockRef || block?.inlines?.some((inline) => inline.nodeId === target.id)))
-    if (!targetBelongsToPart) continue
-    const observation = capture.observations.find((candidate) => candidate.observationId === part.authorityAssertionRef)
+  if (variant?.family !== 'application-writing') return null
+  const observationRef = target.kind === 'word_ruling'
+    ? variant.wordCountRuling?.authorityObservationRef
+    : target.kind === 'response_binding'
+      ? variant.response?.authorityObservationRef
+      : target.kind === 'given_absence'
+        ? variant.givenSkeleton?.answerRegionAbsenceAssertionRef
+        : null
+  if (observationRef && target.id === observationRef) {
+    const observation = capture.observations.find((candidate) => candidate.observationId === observationRef)
     return observation ? [observation.sourceSpanId] : null
+  }
+  if (target.kind === 'content_node') {
+    const wordBlock = content?.blocks?.find((candidate) => candidate.nodeId === variant.wordCountRuling?.sourceRef?.blockId)
+    const belongsToWordRuling = target.id === wordBlock?.nodeId
+      || wordBlock?.inlines?.some((inline) => inline.nodeId === target.id)
+    if (belongsToWordRuling) {
+      const observation = capture.observations.find((candidate) => candidate.observationId === variant.wordCountRuling.authorityObservationRef)
+      if (observation) return [observation.sourceSpanId]
+    }
+  }
+  if (variant.givenSkeleton?.presence === 'provided') {
+    for (const part of variant.givenSkeleton.parts) {
+      const block = content?.blocks?.find((candidate) => candidate.nodeId === part.blockRef)
+      const targetBelongsToPart = (target.kind === 'given_part' && target.id === part.givenPartId)
+        || (target.kind === 'content_node' && (target.id === part.blockRef || block?.inlines?.some((inline) => inline.nodeId === target.id)))
+      if (!targetBelongsToPart) continue
+      const observation = capture.observations.find((candidate) => candidate.observationId === part.authorityAssertionRef)
+      return observation ? [observation.sourceSpanId] : null
+    }
   }
   return null
 }
@@ -1153,6 +1284,11 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
         ? ['family', 'writingTaskId', 'promptBlockRefs', 'situation', 'contentRequirements', 'wordCountRuling', 'givenSkeleton', 'choiceOwnership', 'response']
       : ['family', 'choiceOwnership']
   if (!exactKeys(variant, variantKeys) || variant.family !== family.familyContractId) diagnostics.push(diagnostic('GROUP_VARIANT_INVALID', 'needs_review', '$.groups.variant', 'Variant family must match the closed contract'))
+  if (family.variantSchemaId) {
+    const variantSchema = closure.schemas[family.variantSchemaId]
+    const variantSchemaIssues = variantSchema ? validateJsonSchema(variant, variantSchema, '$.groups.variant') : [{ code: 'APPLICATION_VARIANT_SCHEMA_MISSING', path: '$.groups.variant', message: 'Family variant schema is unavailable' }]
+    diagnostics.push(...variantSchemaIssues.map((item) => diagnostic(item.code, 'needs_review', item.path, item.message)))
+  }
   diagnostics.push(...validateChoiceOwnership(variant.choiceOwnership, sourceGroup.questionIds, family.choiceOwnership))
   if (family.familyContractId === 'seven-choices') {
     diagnostics.push(...validateSevenChoicesContract({

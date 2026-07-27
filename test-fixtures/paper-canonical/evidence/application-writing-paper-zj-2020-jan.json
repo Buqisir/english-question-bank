@@ -1,0 +1,108 @@
+{
+  "schemaVersion": "application-writing-source-capture-v1",
+  "paperId": "paper-zj-2020-jan",
+  "sourceDocumentDigest": "sha256:d752ee191e73f37445d72b6a626bfa395b9dd74f72d576a2a692b8c7693c9c6a",
+  "review": {
+    "method": "manual_source_review",
+    "status": "accepted"
+  },
+  "group": {
+    "groupId": "group-zj-2020-jan-writing-application",
+    "slotId": "writing.application",
+    "sourceLocation": {
+      "kind": "source_document_section",
+      "locator": "writing.application"
+    },
+    "content": {
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "nodeId": "para-zj-2020-jan-writing-app-title",
+          "inlines": [{"kind":"text","nodeId":"text:para-zj-2020-jan-writing-app-title","text":"假定你是李华，你校将举办外国学生中文演讲比赛，请给你的英国朋友George写封邮件邀请他参加。内容包括："}]
+        },
+        {
+          "kind": "paragraph",
+          "nodeId": "para-zj-2020-jan-writing-app-p1",
+          "inlines": [{"kind":"text","nodeId":"text:para-zj-2020-jan-writing-app-p1","text":"(1)比赛时间；"}]
+        },
+        {
+          "kind": "paragraph",
+          "nodeId": "para-zj-2020-jan-writing-app-p2",
+          "inlines": [{"kind":"text","nodeId":"text:para-zj-2020-jan-writing-app-p2","text":"(2)演讲话题；"}]
+        },
+        {
+          "kind": "paragraph",
+          "nodeId": "para-zj-2020-jan-writing-app-p3",
+          "inlines": [{"kind":"text","nodeId":"text:para-zj-2020-jan-writing-app-p3","text":"(3)报名方式。"}]
+        },
+        {
+          "kind": "paragraph",
+          "nodeId": "para-zj-2020-jan-writing-app-p4",
+          "inlines": [{"kind":"text","nodeId":"text:para-zj-2020-jan-writing-app-p4","text":"注意：(1)词数80左右；"}]
+        },
+        {
+          "kind": "paragraph",
+          "nodeId": "para-zj-2020-jan-writing-app-p5",
+          "inlines": [{"kind":"text","nodeId":"text:para-zj-2020-jan-writing-app-p5","text":"(2)可适当增加细节，以使行文连贯。"}]
+        }
+      ]
+    },
+    "variant": {
+      "family": "application-writing",
+      "writingTaskId": "wt-zj-2020-jan-application",
+      "promptBlockRefs": [
+        "para-zj-2020-jan-writing-app-title",
+        "para-zj-2020-jan-writing-app-p1",
+        "para-zj-2020-jan-writing-app-p2",
+        "para-zj-2020-jan-writing-app-p3",
+        "para-zj-2020-jan-writing-app-p4",
+        "para-zj-2020-jan-writing-app-p5"
+      ],
+      "situation": {
+        "writerRole": {"blockId":"para-zj-2020-jan-writing-app-title","inlineNodeIds":["text:para-zj-2020-jan-writing-app-title"]},
+        "audienceOrDestination": {"blockId":"para-zj-2020-jan-writing-app-title","inlineNodeIds":["text:para-zj-2020-jan-writing-app-title"]},
+        "deliverable": {"blockId":"para-zj-2020-jan-writing-app-title","inlineNodeIds":["text:para-zj-2020-jan-writing-app-title"]},
+        "communicativePurpose": {"blockId":"para-zj-2020-jan-writing-app-title","inlineNodeIds":["text:para-zj-2020-jan-writing-app-title"]}
+      },
+      "contentRequirements": [
+        {"requirementId":"requirement:group-zj-2020-jan-writing-application:1","contentRef":{"blockId":"para-zj-2020-jan-writing-app-p1","inlineNodeIds":["text:para-zj-2020-jan-writing-app-p1"]}},
+        {"requirementId":"requirement:group-zj-2020-jan-writing-application:2","contentRef":{"blockId":"para-zj-2020-jan-writing-app-p2","inlineNodeIds":["text:para-zj-2020-jan-writing-app-p2"]}},
+        {"requirementId":"requirement:group-zj-2020-jan-writing-application:3","contentRef":{"blockId":"para-zj-2020-jan-writing-app-p3","inlineNodeIds":["text:para-zj-2020-jan-writing-app-p3"]}}
+      ],
+      "wordCountRuling": {
+        "kind": "approximate_target",
+        "target": 80,
+        "countScope": "student_authored_only",
+        "sourceRef": {"blockId":"para-zj-2020-jan-writing-app-p4","inlineNodeIds":["text:para-zj-2020-jan-writing-app-p4"]},
+        "authorityObservationRef": "observation:application:group-zj-2020-jan-writing-application:word-count"
+      },
+      "givenSkeleton": {
+        "presence": "none",
+        "answerRegionAbsenceAssertionRef": "observation:application:group-zj-2020-jan-writing-application:answer-region-empty"
+      },
+      "choiceOwnership": {"ownership":"none"},
+      "response": {
+        "kind": "group_level_written_response",
+        "answerRegionRef": "writing.application-box",
+        "authorityObservationRef": "observation:application:group-zj-2020-jan-writing-application:response"
+      }
+    },
+    "observations": [
+      {
+        "observationId": "observation:application:group-zj-2020-jan-writing-application:word-count",
+        "kind": "application_word_count_ruling",
+        "value": {"groupId":"group-zj-2020-jan-writing-application","target":80,"countScope":"student_authored_only"}
+      },
+      {
+        "observationId": "observation:application:group-zj-2020-jan-writing-application:answer-region-empty",
+        "kind": "application_answer_region_absence",
+        "value": {"groupId":"group-zj-2020-jan-writing-application","answerRegionRef":"writing.application-box"}
+      },
+      {
+        "observationId": "observation:application:group-zj-2020-jan-writing-application:response",
+        "kind": "application_response_binding",
+        "value": {"groupId":"group-zj-2020-jan-writing-application","writingTaskId":"wt-zj-2020-jan-application","answerRegionRef":"writing.application-box"}
+      }
+    ]
+  }
+}

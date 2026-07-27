@@ -30,6 +30,8 @@ function variant(family, questionIds, blankIds, groupId) {
     const blockId = `paragraph:${groupId}:prompt`
     const inlineNodeIds = [`text:${groupId}:prompt`]
     const contentRef = { blockId, inlineNodeIds }
+    const wordObservationId = `observation:${groupId}:word-count`
+    const responseObservationId = `observation:${groupId}:response`
     return {
       family,
       writingTaskId: `writing-task:${groupId}`,
@@ -46,6 +48,7 @@ function variant(family, questionIds, blankIds, groupId) {
         target: 80,
         countScope: 'student_authored_only',
         sourceRef: contentRef,
+        authorityObservationRef: wordObservationId,
       },
       givenSkeleton: {
         presence: 'none',
@@ -55,6 +58,7 @@ function variant(family, questionIds, blankIds, groupId) {
       response: {
         kind: 'group_level_written_response',
         answerRegionRef: 'writing.application-box',
+        authorityObservationRef: responseObservationId,
       },
     }
   }
@@ -93,7 +97,7 @@ function referenceBlankContent(family, blankIds) {
         inlines: [{
           kind: 'text',
           nodeId: 'text:group:writing.application:prompt',
-          text: 'Write a short source-backed response.',
+          text: 'Write a source-backed response of about 80 words.',
         }],
       }],
     }
@@ -152,16 +156,41 @@ export function makeReadyCanonicalFixture() {
       variant: variant(slot.familyContractRef.id, questionIds, blankIds, `group:${slot.slotId}`),
     })
     if (slot.familyContractRef.id === 'application-writing') {
-      observations.push({
-        observationId: `observation:group:${slot.slotId}:answer-region-empty`,
-        kind: 'application_answer_region_absence',
-        documentInputKey: 'questions',
-        value: {
-          groupId: `group:${slot.slotId}`,
-          answerRegionRef: 'writing.application-box',
+      const groupId = `group:${slot.slotId}`
+      observations.push(
+        {
+          observationId: `observation:${groupId}:answer-region-empty`,
+          kind: 'application_answer_region_absence',
+          documentInputKey: 'questions',
+          value: {
+            groupId,
+            answerRegionRef: 'writing.application-box',
+          },
+          span: { start: 0, end: 1 },
         },
-        span: { start: 0, end: 1 },
-      })
+        {
+          observationId: `observation:${groupId}:word-count`,
+          kind: 'application_word_count_ruling',
+          documentInputKey: 'questions',
+          value: {
+            groupId,
+            target: 80,
+            countScope: 'student_authored_only',
+          },
+          span: { start: 0, end: 1 },
+        },
+        {
+          observationId: `observation:${groupId}:response`,
+          kind: 'application_response_binding',
+          documentInputKey: 'questions',
+          value: {
+            groupId,
+            writingTaskId: `writing-task:${groupId}`,
+            answerRegionRef: 'writing.application-box',
+          },
+          span: { start: 0, end: 1 },
+        },
+      )
     }
     for (const questionId of questionIds) assertions.push({ assertionId: `answer:${questionId}`, questionId, answer: 'A', authority: 'official', sourceSpanId })
   }

@@ -28,18 +28,40 @@ function makeCanonicalOnlyApplicationFixture() {
   const promptBlockId = 'paragraph:application:prompt'
   const promptInlineId = 'text:application:prompt'
   const absenceObservationId = 'observation:application:answer-region-empty'
-  fixture.source.observations.push({
-    observationId: absenceObservationId,
-    kind: 'application_answer_region_absence',
-    documentInputKey: 'questions',
-    value: { groupId: group.groupId, answerRegionRef: 'writing.application-box' },
-    span: { start: 0, end: 1 },
-  })
+  const wordObservationId = 'observation:application:word-count'
+  const responseObservationId = 'observation:application:response'
+  fixture.source.observations.push(
+    {
+      observationId: absenceObservationId,
+      kind: 'application_answer_region_absence',
+      documentInputKey: 'questions',
+      value: { groupId: group.groupId, answerRegionRef: 'writing.application-box' },
+      span: { start: 0, end: 1 },
+    },
+    {
+      observationId: wordObservationId,
+      kind: 'application_word_count_ruling',
+      documentInputKey: 'questions',
+      value: { groupId: group.groupId, target: 80, countScope: 'student_authored_only' },
+      span: { start: 0, end: 1 },
+    },
+    {
+      observationId: responseObservationId,
+      kind: 'application_response_binding',
+      documentInputKey: 'questions',
+      value: {
+        groupId: group.groupId,
+        writingTaskId: 'writing-task:application:fixture',
+        answerRegionRef: 'writing.application-box',
+      },
+      span: { start: 0, end: 1 },
+    },
+  )
   group.content = {
     blocks: [{
       kind: 'paragraph',
       nodeId: promptBlockId,
-      inlines: [{ kind: 'text', nodeId: promptInlineId, text: 'Write a short notice for the school event.' }],
+      inlines: [{ kind: 'text', nodeId: promptInlineId, text: 'Write a short notice of about 80 words for the school event.' }],
     }],
   }
   const promptRef = { blockId: promptBlockId, inlineNodeIds: [promptInlineId] }
@@ -62,6 +84,7 @@ function makeCanonicalOnlyApplicationFixture() {
       target: 80,
       countScope: 'student_authored_only',
       sourceRef: promptRef,
+      authorityObservationRef: wordObservationId,
     },
     givenSkeleton: {
       presence: 'none',
@@ -71,6 +94,7 @@ function makeCanonicalOnlyApplicationFixture() {
     response: {
       kind: 'group_level_written_response',
       answerRegionRef: 'writing.application-box',
+      authorityObservationRef: responseObservationId,
     },
   }
   for (let pass = 0; pass < 3; pass++) {
@@ -171,39 +195,37 @@ async function exercisePublicSeams(referenceFixture) {
   return { compiled, occurrence: projectedApplication[0] }
 }
 
-function requestWithSource(referenceFixture, mutator) {
+function requestWithApplicationCapture(referenceFixture, mutator) {
   const request = structuredClone(referenceFixture.request)
-  const mappingDocument = request.evidence.documents.find((document) => document.inputKey === 'canonical_mapping')
-  const source = JSON.parse(new TextDecoder().decode(mappingDocument.bytes))
-  mutator(source)
-  for (let pass = 0; pass < 3; pass++) {
-    const mappingLength = new TextEncoder().encode(JSON.stringify(source)).byteLength
-    for (const observation of source.observations) {
-      if (observation.documentInputKey === 'canonical_mapping') observation.span.end = mappingLength
-    }
-  }
-  mappingDocument.bytes = new TextEncoder().encode(JSON.stringify(source))
+  const captureDocument = request.evidence.documents.find((document) => document.inputKey === 'application_writing_capture')
+  const capture = JSON.parse(new TextDecoder().decode(captureDocument.bytes))
+  mutator(capture)
+  captureDocument.bytes = new TextEncoder().encode(JSON.stringify(capture))
   return request
 }
 
 function assertBlocked(referenceFixture, mutator, disposition, code) {
-  const blocked = compileCanonicalPaper(requestWithSource(referenceFixture, mutator))
+  const blocked = compileCanonicalPaper(requestWithApplicationCapture(referenceFixture, mutator))
   assert.equal(blocked.disposition, disposition)
   assert.equal(Object.hasOwn(blocked.artifacts, 'canonicalPaper'), false)
   assert.equal(Object.hasOwn(blocked.artifacts.normalizationReport, 'semanticDigest'), false)
-  assert.equal(blocked.artifacts.normalizationReport.diagnostics.some((item) => item.code === code), true)
+  assert.equal(
+    blocked.artifacts.normalizationReport.diagnostics.some((item) => item.code === code),
+    true,
+    `Expected ${code}; received ${blocked.artifacts.normalizationReport.diagnostics.map((item) => item.code).join(', ')}`,
+  )
 }
 
-const absentFixture = makeApplicationWritingReferenceFixture('paper-2020-i')
+const absentFixture = makeApplicationWritingReferenceFixture('paper-zj-2020-jan')
 const absent = await exercisePublicSeams(absentFixture)
 assert.equal(absent.occurrence.answerRegion.givenTop.length, 0)
 assert.equal(absent.occurrence.answerRegion.givenBottom.length, 0)
 assert.equal(
-  absent.compiled.artifacts.sourceCapture.documents.some((document) => document.sha256 === applicationWritingReferenceHashes['paper-2020-i'].paperAsset),
+  absent.compiled.artifacts.sourceCapture.documents.some((document) => document.sha256 === applicationWritingReferenceHashes['paper-zj-2020-jan'].capture),
   true,
 )
 assert.equal(
-  absent.compiled.artifacts.sourceCapture.documents.some((document) => document.sha256 === applicationWritingReferenceHashes['paper-2020-i'].importMeta),
+  absent.compiled.artifacts.sourceCapture.documents.some((document) => document.sha256 === applicationWritingReferenceHashes['paper-zj-2020-jan'].importMeta),
   true,
 )
 
@@ -220,11 +242,15 @@ const providedObservation = provided.compiled.artifacts.sourceCapture.observatio
   .find((observation) => observation.observationId === providedPart.authorityAssertionRef)
 assert.deepEqual(providedPartMap.sourceSpanRefs, [providedObservation.sourceSpanId])
 assert.equal(
-  provided.compiled.artifacts.sourceCapture.documents.some((document) => document.sha256 === applicationWritingReferenceHashes['paper-2026-i'].paperAsset),
+  provided.compiled.artifacts.sourceCapture.documents.some((document) => document.sha256 === applicationWritingReferenceHashes['paper-2026-i'].capture),
   true,
 )
 assert.equal(
   provided.compiled.artifacts.sourceCapture.documents.some((document) => document.sha256 === applicationWritingReferenceHashes['paper-2026-i'].importMeta),
+  true,
+)
+assert.equal(
+  provided.compiled.artifacts.sourceCapture.documents.some((document) => document.sha256 === applicationWritingReferenceHashes['paper-2026-i'].source),
   true,
 )
 
@@ -242,28 +268,34 @@ assert.equal(supplemented.disposition, 'ready')
 assert.deepEqual(supplemented.artifacts.canonicalPaper, provided.compiled.artifacts.canonicalPaper)
 assert.deepEqual(supplemented.artifacts.normalizationReport, provided.compiled.artifacts.normalizationReport)
 
-assertBlocked(absentFixture, (source) => {
-  const group = source.groups.find((candidate) => candidate.slotId === 'writing.application')
+assertBlocked(absentFixture, (capture) => {
+  const group = capture.group
   group.variant.givenSkeleton.answerRegionAbsenceAssertionRef = 'observation:missing'
 }, 'incomplete_source', 'APPLICATION_GIVEN_ABSENCE_UNPROVEN')
-assertBlocked(absentFixture, (source) => {
-  const group = source.groups.find((candidate) => candidate.slotId === 'writing.application')
+assertBlocked(absentFixture, (capture) => {
+  const group = capture.group
   group.variant.promptBlockRefs = []
 }, 'incomplete_source', 'APPLICATION_PROMPT_INCOMPLETE')
-assertBlocked(absentFixture, (source) => {
-  const group = source.groups.find((candidate) => candidate.slotId === 'writing.application')
+assertBlocked(absentFixture, (capture) => {
+  const group = capture.group
   group.variant.wordCountRuling.kind = 'minimum'
-}, 'unsupported', 'APPLICATION_WORD_RULING_UNSUPPORTED')
-assertBlocked(absentFixture, (source) => {
-  const group = source.groups.find((candidate) => candidate.slotId === 'writing.application')
-  source.ambiguities = [{
-    ambiguityId: 'application-word-ruling',
-    candidates: ['about-80', 'at-least-80'],
-    sourceSpanRefs: [group.sourceSpanId],
-  }]
-}, 'needs_review', 'AMBIGUOUS_SOURCE_SEMANTICS')
-assertBlocked(providedFixture, (source) => {
-  const group = source.groups.find((candidate) => candidate.slotId === 'writing.application')
+}, 'incomplete_source', 'APPLICATION_SOURCE_VARIANT_INVALID')
+assertBlocked(absentFixture, (capture) => {
+  capture.group.variant.wordCountRuling.target = 200
+  const sourceRef = capture.group.variant.wordCountRuling.sourceRef
+  const sourceBlock = capture.group.content.blocks.find((block) => block.nodeId === sourceRef.blockId)
+  for (const inline of sourceBlock.inlines) {
+    if (sourceRef.inlineNodeIds.includes(inline.nodeId)) inline.text = inline.text.replace('80', '200')
+  }
+}, 'needs_review', 'APPLICATION_WORD_RULING_CONFLICT')
+assertBlocked(providedFixture, (capture) => {
+  capture.group.variant.givenSkeleton = {
+    presence: 'none',
+    answerRegionAbsenceAssertionRef: 'observation:missing',
+  }
+}, 'incomplete_source', 'APPLICATION_GIVEN_ABSENCE_UNPROVEN')
+assertBlocked(providedFixture, (capture) => {
+  const group = capture.group
   const blockRef = `paragraph:${group.groupId}:given:closing`
   const givenPartId = `given-part:${group.groupId}:closing`
   const authorityAssertionRef = `observation:application:${group.groupId}:given:closing`
@@ -279,10 +311,9 @@ assertBlocked(providedFixture, (source) => {
     blockRef,
     authorityAssertionRef,
   })
-  source.observations.push({
+  group.observations.push({
     observationId: authorityAssertionRef,
     kind: 'application_given_part',
-    documentInputKey: 'canonical_mapping',
     value: {
       groupId: group.groupId,
       givenPartId,
@@ -290,11 +321,10 @@ assertBlocked(providedFixture, (source) => {
       placement: 'answer_region_bottom',
       blockRef,
     },
-    span: { start: 0, end: 1 },
   })
 }, 'needs_review', 'APPLICATION_GIVEN_PART_ORDER_AMBIGUOUS')
-assertBlocked(providedFixture, (source) => {
-  const group = source.groups.find((candidate) => candidate.slotId === 'writing.application')
+assertBlocked(providedFixture, (capture) => {
+  const group = capture.group
   group.variant.givenSkeleton.parts[0].role = 'date_line'
 }, 'unsupported', 'APPLICATION_GIVEN_ROLE_UNSUPPORTED')
 
