@@ -15,11 +15,11 @@ const references = Object.freeze({
   }),
   'paper-2026-i': Object.freeze({
     source: 'sha256:31a87069e6d530afba9123eec0487adf45e52e0b98530af80b62476f169e4d0f',
-    capture: 'sha256:bca92da56ff9c9d96a2a5979be136a140ae0cf238aaf5dfbad7e6e54d0d79a31',
-    transcription: 'sha256:2e83dc57ec6462ac5f59c94ef2868e98cf8bef67627e2b804be840a13b1ada28',
+    capture: 'sha256:ed8078692b40f42bf2aa62b0e4d7c32314be4e63b3eceec902a7720bb08a768d',
+    transcription: 'sha256:bbc8ba1851dc6b82cb469bb9badb0cd1c9006a632e2c476624c120fb4abcc882',
     importMeta: 'sha256:dda79f448a049d9ce6293049b4e1dec51fba35cb683e4e7860f5390ab3d3e900',
-    captureFile: 'application-writing-paper-2026-i.json',
-    transcriptionFile: 'application-writing-transcription-paper-2026-i.json',
+    captureFile: 'application-writing-paper-2026-i-corrected.json',
+    transcriptionFile: 'application-writing-transcription-paper-2026-i-corrected.json',
     sourceFile: new URL('../../scripts/import-pipeline/papers/paper-2026-i/source/paper.pdf', import.meta.url),
   }),
 })

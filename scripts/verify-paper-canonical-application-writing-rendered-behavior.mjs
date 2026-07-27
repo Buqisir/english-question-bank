@@ -40,8 +40,16 @@ const actualArtifactRoot = path.resolve(
   process.env.EQB_ACTUAL_ARTIFACT_ROOT
     || '.scratch/ticket-11-application-writing',
 )
-const numberedNoticeText =
-  '注意：(1)写作词数应为80个左右；(2)请按如下格式在答题卡的相应位置作答。'
+const providedNoticeText =
+  '注意：（1）写作词数应为80个左右；（2）请按如下格式在答题卡的相应位置作答。'
+const providedPromptText =
+  '你校英文报”Opinion”栏目正在征稿，请同学们对未来大学生活的学习(Study)、社交(Socialize)、睡眠(Sleep)这三件事按重要性进行排序，并阐述理由。请你写一篇短文向该栏目投稿。'
+const providedNoticeBlockId = 'para-2026-i-writing-app-word-rule'
+const providedNoticeInlineId = `text:${providedNoticeBlockId}`
+const providedTitleBlockId =
+  'paragraph:group-2026-i-writing-application:given:title'
+const providedTitlePartId =
+  'given-part:group-2026-i-writing-application:title'
 if (persistActualArtifacts) {
   mkdirSync(actualArtifactRoot, { recursive: true })
 }
@@ -365,13 +373,13 @@ function assertApplicationFixedPartPdfAlignment(pdfPath, canonical, label) {
 
 function assertNumberedNoticePdfLayout(pdfPath, canonical, label) {
   const block = canonical.promptBlocks.find(
-    (candidate) => candidate.text === numberedNoticeText,
+    (candidate) => candidate.text === providedNoticeText,
   )
   if (!block) return
   const expectedLines = [
     '注意：',
-    '(1)写作词数应为80个左右；',
-    '(2)请按如下格式在答题卡的相应位置作答。',
+    '（1）写作词数应为80个左右；',
+    '（2）请按如下格式在答题卡的相应位置作答。',
   ]
   const bounds = expectedLines.map((line) =>
     pdfTextBounds(pdfPath, line, `${label} notice`))
@@ -452,17 +460,6 @@ function withAllApplicationFixedParts(consumption) {
     ...occurrence.answerRegion.givenTop,
     ...occurrence.answerRegion.givenBottom,
   ].map((part) => part.givenPartId)
-  const noticeBlock = occurrence.content.blocks.find((block) =>
-    block.inlines?.some((inline) => inline.text.startsWith('注意：')))
-  assert.ok(noticeBlock)
-  assert.equal(noticeBlock.inlines.length, 1)
-  noticeBlock.inlines[0].text = numberedNoticeText
-  const ownedNoticeBlock = occurrence.prompt.blocks.find(
-    (block) => block.nodeId === noticeBlock.nodeId,
-  )
-  assert.ok(ownedNoticeBlock)
-  assert.equal(ownedNoticeBlock.inlines.length, 1)
-  ownedNoticeBlock.inlines[0].text = numberedNoticeText
   return next
 }
 
@@ -529,6 +526,7 @@ const docxRenderer = createDocxRenderer({
 })
 const printArtifacts = []
 const docxPageCounts = new Map()
+const providedConsumerIdentities = []
 
 for (const consumerContract of [
   consumerContractRefs.screen,
@@ -560,7 +558,71 @@ for (const consumerContract of [
       block.text.includes('投稿')),
     true,
   )
+  assert.deepEqual(
+    provided.promptBlocks.map((block) => ({
+      nodeId: block.nodeId,
+      inlineNodeIds: block.inlines.map((inline) => inline.nodeId),
+      text: block.text,
+    })),
+    [
+      {
+        nodeId: 'para-2026-i-writing-app-title',
+        inlineNodeIds: ['text:para-2026-i-writing-app-title'],
+        text: providedPromptText,
+      },
+      {
+        nodeId: providedNoticeBlockId,
+        inlineNodeIds: [providedNoticeInlineId],
+        text: providedNoticeText,
+      },
+    ],
+  )
+  assert.deepEqual(provided.wordCountRuling, {
+    authorityObservationRef:
+      'observation:application:group-2026-i-writing-application:word-count',
+    countScope: 'student_authored_only',
+    kind: 'approximate_target',
+    sourceRef: {
+      blockId: providedNoticeBlockId,
+      inlineNodeIds: [providedNoticeInlineId],
+    },
+    target: 80,
+  })
+  assert.deepEqual(
+    provided.answerRegion.givenTop.map((part) => ({
+      givenPartId: part.givenPartId,
+      blockRef: part.blockRef,
+      role: part.role,
+      placement: part.placement,
+      text: part.text,
+    })),
+    [{
+      givenPartId: providedTitlePartId,
+      blockRef: providedTitleBlockId,
+      role: 'title',
+      placement: 'answer_region_top',
+      text: 'Ranking My College Life Essentials',
+    }],
+  )
+  assert.equal(provided.answerRegion.answerRegionRef, 'writing.application-box')
+  assert.equal(provided.answerRegion.responseSlotId, 'writing.application')
+  providedConsumerIdentities.push({
+    semanticSignature: provided.semanticSignature,
+    occurrenceSignature: provided.occurrenceSignature,
+    responseSlotId: provided.answerRegion.responseSlotId,
+    promptNodeIds: provided.promptBlocks.map((block) => block.nodeId),
+    givenPartIds: provided.answerRegion.givenTop.map(
+      (part) => part.givenPartId,
+    ),
+  })
 }
+assert.deepEqual(
+  providedConsumerIdentities,
+  Array.from(
+    { length: 3 },
+    () => providedConsumerIdentities[0],
+  ),
+)
 
 const absentScreenConsumption = await publishAndLoad(
   'paper-zj-2020-jan',
@@ -617,6 +679,36 @@ assert.deepEqual(
 const providedScreen = applicationSurface(providedScreenConsumption)
 const providedScreenBox = providedScreen.pageModel.blocks.find(
   (block) => block.kind === 'answerBox',
+)
+const providedAsset = JSON.parse(readFileSync(
+  new URL(
+    '../app/public/paper-assets/paper-2026-i/latest/paper-asset.json',
+    import.meta.url,
+  ),
+  'utf8',
+))
+const providedAssetGroupIndex = providedAsset.content.blocks.findIndex(
+  (block) =>
+    block.type === 'group'
+    && block.groupId === 'group-2026-i-writing-application',
+)
+assert.notEqual(providedAssetGroupIndex, -1)
+const providedAssetNotice = providedAsset.content.blocks[
+  providedAssetGroupIndex + 1
+]
+assert.deepEqual(providedAssetNotice, {
+  type: 'instruction',
+  text: [
+    '注意：',
+    '（1）写作词数应为80个左右；',
+    '（2）请按如下格式在答题卡的相应位置作答。',
+  ].join('\n'),
+})
+assert.equal(
+  providedScreen.promptBlocks.find(
+    (block) => block.nodeId === providedNoticeBlockId,
+  )?.text,
+  providedAssetNotice.text.replaceAll('\n', ''),
 )
 assert.deepEqual(providedScreenBox.givenTop.map((part) => part.role), ['title'])
 assert.deepEqual(providedScreenBox.givenBottom, [])
@@ -676,6 +768,19 @@ for (const [label, consumption] of [
       canonical.answerRegion.givenTop.length
         + canonical.answerRegion.givenBottom.length,
     )
+    if (label === 'provided') {
+      assert.equal(
+        (html.match(/data-canonical-application-notice-line=/g) || []).length,
+        3,
+      )
+      for (const line of [
+        '注意：',
+        '（1）写作词数应为80个左右；',
+        '（2）请按如下格式在答题卡的相应位置作答。',
+      ]) {
+        assert.equal((html.split(line).length - 1), 1)
+      }
+    }
     printArtifacts.push({ label, versionType, html, canonical })
     if (persistActualArtifacts) {
       writeFileSync(
@@ -733,6 +838,24 @@ for (const [label, consumption] of [
       )),
       true,
     )
+    if (label === 'provided') {
+      assert.equal(
+        xml.includes(bookmarkName('canonical_block', providedNoticeBlockId)),
+        true,
+      )
+      assert.equal(
+        xml.includes(bookmarkName('canonical_content', providedNoticeInlineId)),
+        true,
+      )
+      for (const line of [
+        '注意：',
+        '（1）写作词数应为80个左右；',
+        '（2）请按如下格式在答题卡的相应位置作答。',
+      ]) {
+        assert.equal((xml.split(line).length - 1), 1)
+      }
+      assert.equal(xml.includes('注意：写作词数应为80个左右。'), false)
+    }
     for (const part of [
       ...canonical.answerRegion.givenTop,
       ...canonical.answerRegion.givenBottom,
@@ -1014,18 +1137,18 @@ async function assertActualPaperSurfaceArtifacts() {
             renderedNoticeLines.map((line) => line.text).join(''),
             numberedNoticeBlock.text.replaceAll(/\s/g, ''),
           )
-          if (numberedNoticeBlock.text === numberedNoticeText) {
+          if (numberedNoticeBlock.text === providedNoticeText) {
             assert.deepEqual(
               renderedNoticeLines.map(({ kind, text }) => ({ kind, text })),
               [
                 { kind: 'label', text: '注意：' },
                 {
                   kind: 'instruction',
-                  text: '(1)写作词数应为80个左右；',
+                  text: '（1）写作词数应为80个左右；',
                 },
                 {
                   kind: 'instruction',
-                  text: '(2)请按如下格式在答题卡的相应位置作答。',
+                  text: '（2）请按如下格式在答题卡的相应位置作答。',
                 },
               ],
             )

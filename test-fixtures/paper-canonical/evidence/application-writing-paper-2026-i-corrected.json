@@ -1,0 +1,169 @@
+{
+  "schemaVersion": "application-writing-source-capture-v1",
+  "paperId": "paper-2026-i",
+  "sourceDocumentDigest": "sha256:31a87069e6d530afba9123eec0487adf45e52e0b98530af80b62476f169e4d0f",
+  "review": {
+    "method": "manual_source_review",
+    "status": "accepted"
+  },
+  "group": {
+    "groupId": "group-2026-i-writing-application",
+    "slotId": "writing.application",
+    "sourceLocation": {
+      "kind": "page_region",
+      "page": 10,
+      "region": {
+        "x": 0.08,
+        "y": 0.42,
+        "width": 0.84,
+        "height": 0.42
+      },
+      "transcriptionDigest": "sha256:bbc8ba1851dc6b82cb469bb9badb0cd1c9006a632e2c476624c120fb4abcc882"
+    },
+    "content": {
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "nodeId": "para-2026-i-writing-app-title",
+          "inlines": [
+            {
+              "kind": "text",
+              "nodeId": "text:para-2026-i-writing-app-title",
+              "text": "你校英文报”Opinion”栏目正在征稿，请同学们对未来大学生活的学习(Study)、社交(Socialize)、睡眠(Sleep)这三件事按重要性进行排序，并阐述理由。请你写一篇短文向该栏目投稿。"
+            }
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "nodeId": "para-2026-i-writing-app-word-rule",
+          "inlines": [
+            {
+              "kind": "text",
+              "nodeId": "text:para-2026-i-writing-app-word-rule",
+              "text": "注意：（1）写作词数应为80个左右；（2）请按如下格式在答题卡的相应位置作答。"
+            }
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "nodeId": "paragraph:group-2026-i-writing-application:given:title",
+          "inlines": [
+            {
+              "kind": "text",
+              "nodeId": "text:paragraph:group-2026-i-writing-application:given:title",
+              "text": "Ranking My College Life Essentials"
+            }
+          ]
+        }
+      ]
+    },
+    "variant": {
+      "family": "application-writing",
+      "writingTaskId": "wt-2026-i-application",
+      "promptBlockRefs": [
+        "para-2026-i-writing-app-title",
+        "para-2026-i-writing-app-word-rule"
+      ],
+      "situation": {
+        "writerRole": {
+          "blockId": "para-2026-i-writing-app-title",
+          "inlineNodeIds": [
+            "text:para-2026-i-writing-app-title"
+          ]
+        },
+        "audienceOrDestination": {
+          "blockId": "para-2026-i-writing-app-title",
+          "inlineNodeIds": [
+            "text:para-2026-i-writing-app-title"
+          ]
+        },
+        "deliverable": {
+          "blockId": "para-2026-i-writing-app-title",
+          "inlineNodeIds": [
+            "text:para-2026-i-writing-app-title"
+          ]
+        },
+        "communicativePurpose": {
+          "blockId": "para-2026-i-writing-app-title",
+          "inlineNodeIds": [
+            "text:para-2026-i-writing-app-title"
+          ]
+        }
+      },
+      "contentRequirements": [
+        {
+          "requirementId": "requirement:group-2026-i-writing-application:1",
+          "contentRef": {
+            "blockId": "para-2026-i-writing-app-title",
+            "inlineNodeIds": [
+              "text:para-2026-i-writing-app-title"
+            ]
+          }
+        }
+      ],
+      "wordCountRuling": {
+        "kind": "approximate_target",
+        "target": 80,
+        "countScope": "student_authored_only",
+        "sourceRef": {
+          "blockId": "para-2026-i-writing-app-word-rule",
+          "inlineNodeIds": [
+            "text:para-2026-i-writing-app-word-rule"
+          ]
+        },
+        "authorityObservationRef": "observation:application:group-2026-i-writing-application:word-count"
+      },
+      "givenSkeleton": {
+        "presence": "provided",
+        "parts": [
+          {
+            "givenPartId": "given-part:group-2026-i-writing-application:title",
+            "role": "title",
+            "placement": "answer_region_top",
+            "blockRef": "paragraph:group-2026-i-writing-application:given:title",
+            "authorityAssertionRef": "observation:application:group-2026-i-writing-application:given:title"
+          }
+        ]
+      },
+      "choiceOwnership": {
+        "ownership": "none"
+      },
+      "response": {
+        "kind": "group_level_written_response",
+        "answerRegionRef": "writing.application-box",
+        "authorityObservationRef": "observation:application:group-2026-i-writing-application:response"
+      }
+    },
+    "observations": [
+      {
+        "observationId": "observation:application:group-2026-i-writing-application:word-count",
+        "kind": "application_word_count_ruling",
+        "value": {
+          "groupId": "group-2026-i-writing-application",
+          "target": 80,
+          "countScope": "student_authored_only"
+        }
+      },
+      {
+        "observationId": "observation:application:group-2026-i-writing-application:given:title",
+        "kind": "application_given_part",
+        "value": {
+          "groupId": "group-2026-i-writing-application",
+          "givenPartId": "given-part:group-2026-i-writing-application:title",
+          "role": "title",
+          "placement": "answer_region_top",
+          "blockRef": "paragraph:group-2026-i-writing-application:given:title"
+        }
+      },
+      {
+        "observationId": "observation:application:group-2026-i-writing-application:response",
+        "kind": "application_response_binding",
+        "value": {
+          "groupId": "group-2026-i-writing-application",
+          "writingTaskId": "wt-2026-i-application",
+          "answerRegionRef": "writing.application-box"
+        }
+      }
+    ]
+  }
+}
