@@ -387,8 +387,14 @@ async function assertActualPaperSurface() {
   assert.ok(appUrl)
   const playwright = await import('../app/node_modules/playwright/index.js')
   const browser = await playwright.default.chromium.launch({ headless: true })
+  const signatures = []
   try {
-    for (const lecture of [false, true]) {
+    for (const { analysisAvailable, lecture } of [
+      { analysisAvailable: true, lecture: false },
+      { analysisAvailable: true, lecture: true },
+      { analysisAvailable: false, lecture: false },
+      { analysisAvailable: false, lecture: true },
+    ]) {
       const page = await browser.newPage()
       await page.route('**/api/paper-canonical/consumption?*', (route) =>
         route.fulfill({
@@ -404,18 +410,23 @@ async function assertActualPaperSurface() {
         }))
       await page.route('**/paper-assets/**/analyses/**', (route) =>
         route.fulfill({ status: 404, body: '' }))
-      await page.route('**/paper-assets/**/analyses/seven-choices-analysis-v1.json', (route) =>
-        route.fulfill({
-          status: 200,
-          contentType: 'application/json',
-          body: JSON.stringify(analysis),
-        }))
+      if (analysisAvailable) {
+        await page.route('**/paper-assets/**/analyses/seven-choices-analysis-v1.json', (route) =>
+          route.fulfill({
+            status: 200,
+            contentType: 'application/json',
+            body: JSON.stringify(analysis),
+          }))
+      }
       await page.route('**/paper-assets/**/figures/**', (route) =>
         route.fulfill({ status: 404, body: '' }))
       const url = new URL('canonical-consumption-qa.html', appUrl)
       url.searchParams.set('paperId', fixture.paperId)
       url.searchParams.set('focusGroupId', occurrence.groupId)
-      if (lecture) url.searchParams.set('lecture', '1')
+      if (lecture) {
+        url.searchParams.set('lecture', '1')
+        url.searchParams.set('questionId', group.questions[0].questionId)
+      }
       await page.goto(url.href)
       try {
         await page.locator('[data-canonical-bank-id]').waitFor({
@@ -452,10 +463,41 @@ async function assertActualPaperSurface() {
         ),
         group.occurrenceSignature,
       )
+      signatures.push({
+        semantic: await page.locator('[data-canonical-bank-id]').getAttribute(
+          'data-canonical-semantic-signature',
+        ),
+        occurrence: await page.locator('[data-canonical-bank-id]').getAttribute(
+          'data-canonical-occurrence-signature',
+        ),
+      })
       assert.equal((await page.locator('body').innerText()).includes('LEGACY POISON'), false)
       assert.equal((await page.locator('body').innerText()).includes('POISONED RAW MARKERS'), false)
+      if (!analysisAvailable && lecture) {
+        assert.equal(
+          await page.getByText('解析未发布', { exact: true }).count(),
+          1,
+        )
+      }
+      if (lecture) {
+        for (const pair of group.questionBlankPairs) {
+          const question = group.questions.find(
+            (candidate) => candidate.questionId === pair.questionId,
+          )
+          assert.ok(question)
+          const blank = page.getByRole('button', {
+            name: `聚焦第 ${question.questionNo} 题`,
+            exact: true,
+          })
+          assert.equal(await blank.count(), 1)
+          await blank.click()
+          assert.equal(await blank.getAttribute('aria-pressed'), 'true')
+        }
+      }
       if (persistActualArtifacts) {
-        const caseName = lecture ? 'lecture' : 'plain'
+        const caseName = `${analysisAvailable ? '' : 'no-analysis-'}${
+          lecture ? 'lecture' : 'plain'
+        }`
         writeFileSync(
           path.join(actualArtifactRoot, `papersurface-${caseName}.html`),
           await page.content(),
@@ -467,6 +509,13 @@ async function assertActualPaperSurface() {
       }
       await page.close()
     }
+    assert.deepEqual(
+      signatures,
+      Array.from({ length: 4 }, () => ({
+        semantic: group.semanticSignature,
+        occurrence: group.occurrenceSignature,
+      })),
+    )
   } finally {
     await browser.close()
     await viteServer.close()
@@ -491,7 +540,12 @@ if (persistActualArtifacts) {
         sharedBanks: 1,
         perQuestionChoiceSets: 0,
       },
-      paperSurfaceCases: ['plain', 'lecture'],
+      paperSurfaceCases: [
+        'plain',
+        'lecture',
+        'no-analysis-plain',
+        'no-analysis-lecture',
+      ],
       artifactCases: [
         'student-plain',
         'student-page-break',
@@ -508,6 +562,7 @@ if (persistActualArtifacts) {
 - Paper / group: \`${fixture.paperId}\` / \`${occurrence.groupId}\`
 - Every PaperSurface, Print/PDF, and DOCX preview must show five numbered pair anchors (36–40), seven A–G option anchors, exactly one shared bank, and zero per-question choice sets.
 - PaperSurface plain and lecture must preserve the same semantic and occurrence signatures.
+- PaperSurface without the optional Seven Choices Analysis sidecar must preserve the same canonical signatures and blank-focus joins.
 - Student and teacher artifacts must preserve the same canonical group; teacher-only supplements may appear outside it.
 - Page-break artifacts must not repeat or split the shared bank.
 - No artifact may display \`POISONED RAW MARKERS\` or \`LEGACY POISON\`.

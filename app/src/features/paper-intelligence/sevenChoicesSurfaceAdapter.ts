@@ -145,7 +145,7 @@ export type SevenChoicesSurfaceModel = {
 
 export type BuildSevenChoicesSurfaceModelInput = {
   asset: PaperAssetV1
-  analysis: ReviewedSevenChoicesAnalysisV1
+  analysis?: ReviewedSevenChoicesAnalysisV1 | null
   groupId: string
   canonicalConsumption?: unknown
 }
@@ -179,10 +179,13 @@ export function buildSevenChoicesSurfaceModel(
   if (asset.schemaVersion !== 'paper-asset-v1') {
     throw new Error('[I0-D] paper asset schemaVersion must be paper-asset-v1.')
   }
-  if (analysis.schemaVersion !== 'seven-choices-analysis-v1') {
+  if (!canonicalConsumption && !analysis) {
+    throw new Error('[I0-D] reviewed seven choices analysis is unavailable.')
+  }
+  if (analysis && analysis.schemaVersion !== 'seven-choices-analysis-v1') {
     throw new Error('[I0-D] reviewed analysis schemaVersion must be seven-choices-analysis-v1.')
   }
-  if (analysis.paperId !== asset.paper.paperId) {
+  if (analysis && analysis.paperId !== asset.paper.paperId) {
     throw new Error('[I0-D] seven choices analysis paperId does not match paper asset.')
   }
 
@@ -235,14 +238,16 @@ export function buildSevenChoicesSurfaceModel(
           ? []
           : [{ questionId, questionNo: String(questionNo) }]
       })
-  const chains = buildChainViews({
-    analysis,
-    questionOrder,
-    textMap,
-    optionTextByLabel: new Map(
-      optionSource.map((option) => [option.label, option.text]),
-    ),
-  })
+  const chains = analysis
+    ? buildChainViews({
+        analysis,
+        questionOrder,
+        textMap,
+        optionTextByLabel: new Map(
+          optionSource.map((option) => [option.label, option.text]),
+        ),
+      })
+    : []
   const chainsByQuestionId = Object.fromEntries(chains.map((chain) => [chain.questionId, chain]))
   const chainsByOptionLabel = Object.fromEntries(chains.map((chain) => [chain.correctOptionLabel, chain]))
   const options = optionSource.map((option): SevenChoicesOptionView => ({

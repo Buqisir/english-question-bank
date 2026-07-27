@@ -30,7 +30,7 @@
  *   - `cloze-analysis-v1` / `grammar-fill-analysis-v1` / `writing-analysis-v1`
  *     are fetched once, lazily, the first time 讲评态 opens (reading /
  *     sevenChoices analyses are already fetched unconditionally at page
- *     load, unchanged from 刀 1). A missing/failed analysis degrades that
+ *     load). A missing/failed analysis degrades that
  *     group's 讲评栏 to "解析未发布" without crashing or blocking other
  *     groups; the group's卷面 PaperSurface mount keeps rendering its plain
  *     (non-analysis) view.
@@ -155,7 +155,7 @@ type GroupModel =
   | { kind: 'error'; message: string }
 
 // 讲评态按需补拉的 cloze/grammarFill/writing 解析——reading/sevenChoices 的
-// 解析已在挑题态初次加载时无条件拉取（刀 1 遗留行为，不变）。'unavailable'
+// 解析已在挑题态初次加载时无条件拉取。'unavailable'
 // = 拉取过但没有（404/解析失败），讲评栏据此显「解析未发布」而不是一直显
 // 「加载中」。
 type LectureAnalysisEntry =
@@ -598,7 +598,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
             } catch {
               continue
             }
-            if (!sevenChoicesAnalysis) continue
+            if (sevenChoicesMode === 'legacy' && !sevenChoicesAnalysis) continue
             canonicalModels.set(block.groupId, {
               kind: 'sevenChoices',
               model: buildSevenChoicesSurfaceModel({
@@ -640,9 +640,11 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
                 }),
               }
             } else if (group.groupType === 'sevenChoices') {
-              if (!sevenChoicesAnalysis) throw new Error('未找到已审阅七选五解析')
               const canonicalModel = canonicalModels.get(block.groupId)
-              if (!canonicalModel) throw new Error('七选五消费计划不完整')
+              if (!canonicalModel) {
+                if (!sevenChoicesAnalysis) throw new Error('未找到已审阅七选五解析')
+                throw new Error('七选五消费计划不完整')
+              }
               models[block.groupId] = canonicalModel
             } else if (group.groupType === 'cloze') {
               models[block.groupId] = canonicalModels.get(block.groupId)!
@@ -1655,6 +1657,9 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
 
     if (group.groupType === 'sevenChoices' && entry?.kind === 'sevenChoices') {
       const chains = entry.model.chains
+      if (chains.length === 0) {
+        return <p className="paper-browse-lecture-empty">解析未发布</p>
+      }
       return (
         <SevenChoicesAnalysisPanel
           options={entry.model.options}

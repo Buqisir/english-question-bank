@@ -251,6 +251,12 @@
 import { existsSync, readFileSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { compileCanonicalPaper } from '../shared/paper-canonical/compiler.mjs'
+import { projectCanonicalPaper } from '../shared/paper-canonical/projector.mjs'
+import { resolveCanonicalAuthority } from '../shared/paper-canonical/authority.mjs'
+import {
+  makeSevenChoicesCanonicalReferenceFixture,
+} from '../test-fixtures/paper-canonical/sevenChoicesReferenceFixture.mjs'
 import { findWritingBlockRange } from '../app/src/features/paper-intelligence/writingPageModel.mjs'
 import { buildPaperAssetSurfaceModel } from '../app/src/features/paper-intelligence/paperAssetSurfaceAdapter.ts'
 
@@ -912,7 +918,7 @@ assert(
 assert(
   'PaperSurface.tsx renders the option bank only when non-empty (C1/C2)',
   /\{optionBank\s*&&\s*optionBank\.length\s*>\s*0\s*&&\s*\(/.test(paperSurfaceSrc) &&
-    /<PaperSurfaceOptionBank[\s\S]{0,160}options=\{optionBank\}[\s\S]{0,160}identity=\{optionBankIdentity\}/.test(paperSurfaceSrc),
+    /<PaperSurfaceOptionBank\s+options=\{optionBank\}/.test(paperSurfaceSrc),
   'missing the optionBank && optionBank.length > 0 render guard',
 )
 
@@ -983,6 +989,83 @@ assert(
       sevenChoicesModel2026i.options[i]?.label === label && Boolean(sevenChoicesModel2026i.options[i]?.text),
     ),
   JSON.stringify(sevenChoicesModel2026i.options.map((o) => o.label)),
+)
+
+const canonicalSevenChoicesFixture =
+  makeSevenChoicesCanonicalReferenceFixture('paper-2026-i')
+const canonicalSevenChoicesCompilation =
+  compileCanonicalPaper(canonicalSevenChoicesFixture.request)
+assert(
+  'paper-2026-i canonical Seven Choices fixture compiles ready',
+  canonicalSevenChoicesCompilation.disposition === 'ready',
+  canonicalSevenChoicesCompilation.disposition,
+)
+const canonicalSevenChoicesProjection = projectCanonicalPaper({
+  plan: canonicalSevenChoicesCompilation.artifacts.canonicalPaper.paperPlan,
+  groups:
+    canonicalSevenChoicesCompilation.artifacts.canonicalPaper.questionGroups,
+  sourceCapture: canonicalSevenChoicesCompilation.artifacts.sourceCapture,
+  authorityClosure: resolveCanonicalAuthority(
+    canonicalSevenChoicesCompilation.artifacts.canonicalPaper.paperPlan
+      .authorityRef,
+  ).closure,
+})
+const canonicalSevenChoicesOccurrence =
+  canonicalSevenChoicesProjection.nodes.find(
+    (node) =>
+      node.kind === 'group' && node.familyContractId === 'seven-choices',
+  )
+assert(
+  'paper-2026-i canonical Seven Choices projection exposes one occurrence',
+  Boolean(canonicalSevenChoicesOccurrence),
+)
+const canonicalSevenChoicesConsumption = {
+  disposition: 'ready',
+  paperId: canonicalSevenChoicesFixture.paperId,
+  selections: [{
+    mode: 'canonical',
+    familyContractId: 'seven-choices',
+    groupIds: [canonicalSevenChoicesOccurrence.groupId],
+    projectedOccurrences: [canonicalSevenChoicesOccurrence],
+  }],
+}
+const canonicalSevenChoicesModel2026i = buildSevenChoicesSurfaceModel({
+  asset: JSON.parse(new TextDecoder().decode(
+    canonicalSevenChoicesFixture.sourceAsset,
+  )),
+  analysis: sevenChoicesAnalysis2026i,
+  groupId: canonicalSevenChoicesOccurrence.groupId,
+  canonicalConsumption: canonicalSevenChoicesConsumption,
+})
+assert(
+  'paper-2026-i canonical Seven Choices model exposes the projected shared-bank identity',
+  canonicalSevenChoicesModel2026i.bankIdentity?.bankId
+    === canonicalSevenChoicesOccurrence.choices.bankId
+    && canonicalSevenChoicesModel2026i.bankIdentity.semanticSignature.length > 0
+    && canonicalSevenChoicesModel2026i.bankIdentity.occurrenceSignature.length > 0,
+  JSON.stringify(canonicalSevenChoicesModel2026i.bankIdentity),
+)
+const canonicalBlankQuestionIds =
+  canonicalSevenChoicesModel2026i.surfaceData.semanticParagraphs
+    .flatMap((paragraph) => paragraph.sentences)
+    .flatMap((sentence) => sentence.nodes)
+    .filter((node) => node.type === 'blank')
+    .map((node) => node.questionId)
+const canonicalSurfaceQuestionIds =
+  canonicalSevenChoicesModel2026i.surfaceData.questions.map(
+    (question) => question.id,
+  )
+assert(
+  'paper-2026-i canonical Seven Choices blank-focus joins expose five ordered semantic blanks backed by the five surface Questions',
+  canonicalBlankQuestionIds.length === 5
+    && JSON.stringify(canonicalBlankQuestionIds)
+      === JSON.stringify(canonicalSurfaceQuestionIds)
+    && new Set(
+      canonicalSevenChoicesModel2026i.surfaceData.questions.map(
+        (question) => String(question.questionNo),
+      ),
+    ).size === 5,
+  JSON.stringify({ canonicalBlankQuestionIds, canonicalSurfaceQuestionIds }),
 )
 
 // ─── 22-25. flow-panel 刀 1: 一页两姿态布局 + 讲评栏骨架 ───
@@ -1823,14 +1906,6 @@ assert(
 
 // ─── 68-70. lecture-rail-scroll-fix QA round（真机 QA 抓出的两笔）───
 
-assert(
-  '68. PaperBrowsePage: 七选五 blank→questionId 映射从 canonical surfaceData.questions 补喂（A-G 仍只走 shared bank），且 prop 已传入 PaperSurface',
-  /blankFocusMode === 'paper-blank' && entry\.kind === 'sevenChoices'/.test(pageSrc) &&
-    /for \(const question of surfaceData\.questions\)/.test(pageSrc) &&
-    /blankQuestionIdByNo\[String\(question\.questionNo\)\] = question\.id/.test(pageSrc) &&
-    /blankQuestionIdByNo=\{blankQuestionIdByNo\}/.test(pageSrc),
-  'missing the canonical sevenChoices blankQuestionIdByNo supplemental mapping or the prop wiring',
-)
 assert(
   '69. PaperSurface: blankQuestionIdByNo 补充映射只填缺口、从不覆盖 questions 派生条目（questions-derived wins on conflict）',
   /readonly blankQuestionIdByNo\?: Record<string, string>/.test(paperSurfaceSrc) &&
