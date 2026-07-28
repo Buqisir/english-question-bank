@@ -449,6 +449,17 @@ function assertNck1WritingHeadingCounts(renderedText, label) {
   )
 }
 
+function assertNoRendererLocalWritingGroupHeading(renderedText, label) {
+  const compact = compactText(renderedText)
+  for (const heading of ['一、写作', '二、写作']) {
+    assert.equal(
+      compact.includes(heading),
+      false,
+      `${label} suppresses renderer-local ${heading} when canonical paperChrome is present`,
+    )
+  }
+}
+
 function assertVisibleCanonicalText(renderedText, canonical) {
   const compact = compactText(renderedText)
   assert.equal(compact.includes('POISONEDLEGACY'), false)
@@ -557,11 +568,39 @@ const mixedWritingBaseArgs = {
   ],
   questionNumberStart: 1,
 }
+const legacyWritingBaseArgs = {
+  title: 'Legacy writing group heading regression',
+  versionType: 'student',
+  printStyle: 'exam',
+  items: [poisonedExportItem(mixedContinuation)],
+  blocks: [{
+    type: 'question_group',
+    questionGroupId: mixedContinuation.groupId,
+    score: 25,
+  }],
+  questionNumberStart: 1,
+}
+const legacyPrintHtml = buildPrintHtml(legacyWritingBaseArgs)
+assert.equal(
+  compactText(legacyPrintHtml).includes('一、写作（每题25分）'),
+  true,
+  'legacy Print HTML preserves its renderer-local writing group heading',
+)
+const legacyDocxXml = docxRenderer.buildDocumentXml(legacyWritingBaseArgs)
+assert.equal(
+  compactText(legacyDocxXml).includes('一、写作（每题25分）'),
+  true,
+  'legacy DOCX preserves its renderer-local writing group heading',
+)
 const mixedPrintHtml = buildPrintHtml({
   ...mixedWritingBaseArgs,
   canonicalConsumption: mixedWritingConsumptions.printPdf,
 })
 assertNck1WritingHeadingCounts(mixedPrintHtml, 'whole-paper Print HTML')
+assertNoRendererLocalWritingGroupHeading(
+  mixedPrintHtml,
+  'whole-paper Print HTML',
+)
 if (persistActualArtifacts) {
   writeFileSync(
     path.join(actualArtifactRoot, 'print-whole-writing-student.html'),
@@ -573,6 +612,10 @@ const mixedDocxXml = docxRenderer.buildDocumentXml({
   canonicalConsumption: mixedWritingConsumptions.docx,
 })
 assertNck1WritingHeadingCounts(mixedDocxXml, 'whole-paper DOCX OOXML')
+assertNoRendererLocalWritingGroupHeading(
+  mixedDocxXml,
+  'whole-paper DOCX OOXML',
+)
 {
   const root = mkdtempSync(path.join(tmpdir(), 'eqb-writing-chrome-docx-'))
   try {
@@ -589,6 +632,10 @@ assertNck1WritingHeadingCounts(mixedDocxXml, 'whole-paper DOCX OOXML')
       { encoding: 'utf8' },
     )
     assertNck1WritingHeadingCounts(packagedXml, 'packaged DOCX OOXML')
+    assertNoRendererLocalWritingGroupHeading(
+      packagedXml,
+      'packaged DOCX OOXML',
+    )
     docxRenderer.convertDocxToPdf(docxPath, pdfPath)
     const convertedText = execFileSync(
       'pdftotext',
@@ -596,6 +643,10 @@ assertNck1WritingHeadingCounts(mixedDocxXml, 'whole-paper DOCX OOXML')
       { encoding: 'utf8' },
     )
     assertNck1WritingHeadingCounts(convertedText, 'DOCX-to-PDF')
+    assertNoRendererLocalWritingGroupHeading(
+      convertedText,
+      'DOCX-to-PDF',
+    )
     if (persistActualArtifacts) {
       copyFileSync(
         docxPath,
@@ -681,6 +732,10 @@ for (const { label, consumption, canonical } of cases) {
       true,
     )
     assertVisibleCanonicalText(html, canonical)
+    assertNoRendererLocalWritingGroupHeading(
+      html,
+      `Print HTML ${label}/${versionType}`,
+    )
     printArtifacts.push({ label, versionType, html, canonical })
     if (persistActualArtifacts) {
       writeFileSync(
@@ -710,6 +765,10 @@ for (const { label, consumption, canonical } of cases) {
       canonicalConsumption: consumption,
     })
     assertVisibleCanonicalText(xml, canonical)
+    assertNoRendererLocalWritingGroupHeading(
+      xml,
+      `DOCX OOXML ${label}/${versionType}`,
+    )
     assert.equal(
       xml.includes(bookmarkName(
         'canonical_semantic',
@@ -784,6 +843,10 @@ for (const { label, consumption, canonical } of cases) {
         ['-p', docxPath, 'word/document.xml'],
         { encoding: 'utf8' },
       )
+      assertNoRendererLocalWritingGroupHeading(
+        packagedXml,
+        `packaged DOCX OOXML ${label}/${versionType}`,
+      )
       assert.equal(packagedXml, xml)
       docxRenderer.convertDocxToPdf(docxPath, pdfPath)
       assert.equal(readFileSync(pdfPath).subarray(0, 4).toString(), '%PDF')
@@ -793,6 +856,10 @@ for (const { label, consumption, canonical } of cases) {
         { encoding: 'utf8' },
       )
       assertVisibleCanonicalText(convertedText, canonical)
+      assertNoRendererLocalWritingGroupHeading(
+        convertedText,
+        `DOCX-to-PDF ${label}/${versionType}`,
+      )
       if (persistActualArtifacts) {
         copyFileSync(
           docxPath,
@@ -1017,6 +1084,10 @@ async function assertBrowserArtifacts() {
         mixedScreenText,
         'authenticated whole-paper Screen',
       )
+      assertNoRendererLocalWritingGroupHeading(
+        mixedScreenText,
+        'authenticated whole-paper Screen',
+      )
       if (persistActualArtifacts) {
         await page.screenshot({
           path: path.join(
@@ -1047,6 +1118,10 @@ async function assertBrowserArtifacts() {
           { encoding: 'utf8' },
         )
         assertNck1WritingHeadingCounts(pdfText, 'whole-paper Print PDF')
+        assertNoRendererLocalWritingGroupHeading(
+          pdfText,
+          'whole-paper Print PDF',
+        )
         if (persistActualArtifacts) {
           copyFileSync(
             pdfPath,
@@ -1398,6 +1473,10 @@ async function assertBrowserArtifacts() {
           0,
         )
         assertVisibleCanonicalText(await writingPage.innerText(), canonical)
+        assertNoRendererLocalWritingGroupHeading(
+          await writingPage.innerText(),
+          `authenticated Screen ${label}/${analysisVariant.label}`,
+        )
         productionSignatures.push({
           semantic: await response.getAttribute(
             'data-canonical-writing-semantic-signature',
@@ -1442,6 +1521,10 @@ async function assertBrowserArtifacts() {
           { encoding: 'utf8' },
         )
         assertVisibleCanonicalText(pdfText, canonical)
+        assertNoRendererLocalWritingGroupHeading(
+          pdfText,
+          `Print PDF ${label}/${versionType}`,
+        )
         if (persistActualArtifacts) {
           copyFileSync(
             pdfPath,

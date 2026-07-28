@@ -601,10 +601,21 @@ export function buildPrintHtml({
         const hasBlockScore = Number.isFinite(Number(block.score))
         const groupHeaderScoreSuffix = hasBlockScore ? `（每题 ${score} 分）` : ''
         const groupHeaderLabel = groupTypeLabels[detail.groupType] || detail.groupType
+        const canonicalWritingChrome =
+          canonicalGroup
+          && ['writing', 'continuation'].includes(canonicalGroup.groupType)
+            ? projectCanonicalWritingChrome({
+                consumption: canonicalConsumption,
+                groupId: canonicalGroup.groupId,
+                renderedGroupIds,
+              })
+            : null
 
         let groupHtml = '<section class="question-group">'
 
-        groupHtml += `<div class="group-header">${chineseNumeral(groupNum)}、${escapeHtml(groupHeaderLabel)}${escapeHtml(groupHeaderScoreSuffix)}</div>`
+        if (!canonicalWritingChrome) {
+          groupHtml += `<div class="group-header">${chineseNumeral(groupNum)}、${escapeHtml(groupHeaderLabel)}${escapeHtml(groupHeaderScoreSuffix)}</div>`
+        }
 
         if (!isExam) {
           groupHtml += `<div class="group-meta"><strong>${escapeHtml(detail.title)}</strong> · ${groupTypeLabels[detail.groupType] || detail.groupType} · 每题 ${score} 分</div>`
@@ -625,20 +636,12 @@ export function buildPrintHtml({
           } else if (canonicalGroup.groupType === 'writing') {
             groupHtml += renderCanonicalApplicationWriting(
               canonicalGroup,
-              projectCanonicalWritingChrome({
-                consumption: canonicalConsumption,
-                groupId: canonicalGroup.groupId,
-                renderedGroupIds,
-              }),
+              canonicalWritingChrome,
             )
           } else if (canonicalGroup.groupType === 'continuation') {
             groupHtml += renderCanonicalContinuationWriting(
               canonicalGroup,
-              projectCanonicalWritingChrome({
-                consumption: canonicalConsumption,
-                groupId: canonicalGroup.groupId,
-                renderedGroupIds,
-              }),
+              canonicalWritingChrome,
             )
           } else {
             const displayNumberByQuestionId = new Map(

@@ -855,6 +855,7 @@ function pushCanonicalDocxContent(
   images,
   canonicalConsumption = null,
   renderedWritingGroupIds = [],
+  canonicalWritingChrome = null,
 ) {
   if (canonicalGroup.groupType === 'reading') {
     pushCanonicalDocxReadingBlocks(body, canonicalGroup, images)
@@ -864,11 +865,12 @@ function pushCanonicalDocxContent(
     pushCanonicalDocxApplicationWriting(
       body,
       canonicalGroup,
-      projectCanonicalWritingChrome({
-        consumption: canonicalConsumption,
-        groupId: canonicalGroup.groupId,
-        renderedGroupIds: renderedWritingGroupIds,
-      }),
+      canonicalWritingChrome
+      || projectCanonicalWritingChrome({
+          consumption: canonicalConsumption,
+          groupId: canonicalGroup.groupId,
+          renderedGroupIds: renderedWritingGroupIds,
+        }),
     )
     return
   }
@@ -876,11 +878,12 @@ function pushCanonicalDocxContent(
     pushCanonicalDocxContinuationWriting(
       body,
       canonicalGroup,
-      projectCanonicalWritingChrome({
-        consumption: canonicalConsumption,
-        groupId: canonicalGroup.groupId,
-        renderedGroupIds: renderedWritingGroupIds,
-      }),
+      canonicalWritingChrome
+      || projectCanonicalWritingChrome({
+          consumption: canonicalConsumption,
+          groupId: canonicalGroup.groupId,
+          renderedGroupIds: renderedWritingGroupIds,
+        }),
     )
     return
   }
@@ -1654,7 +1657,18 @@ function buildExamDocumentXml({
         const hasBlockScore = Number.isFinite(Number(block.score))
         const groupHeaderScoreSuffix = hasBlockScore ? `（每题 ${score} 分）` : ''
         const groupHeaderLabel = groupTypeLabels[detail.groupType] || detail.groupType
-        body.push(paragraph([run(`${chineseNumeral(groupNum)}、${groupHeaderLabel}${groupHeaderScoreSuffix}`, { bold: true, size: 22, heading: true })], { before: 160, after: 80, keepNext: true }))
+        const canonicalWritingChrome =
+          canonicalGroup
+          && ['writing', 'continuation'].includes(canonicalGroup.groupType)
+            ? projectCanonicalWritingChrome({
+                consumption: canonicalConsumption,
+                groupId: canonicalGroup.groupId,
+                renderedGroupIds,
+              })
+            : null
+        if (!canonicalWritingChrome) {
+          body.push(paragraph([run(`${chineseNumeral(groupNum)}、${groupHeaderLabel}${groupHeaderScoreSuffix}`, { bold: true, size: 22, heading: true })], { before: 160, after: 80, keepNext: true }))
+        }
 
         // draft-numbering-style v2 (owner 拍板 2026-07-10 二轮改判):
         // small-question numbering is whole-paper continuous (`questionNum`,
@@ -1675,6 +1689,7 @@ function buildExamDocumentXml({
             images,
             canonicalConsumption,
             renderedGroupIds,
+            canonicalWritingChrome,
           )
           body.push(paragraph('', { after: 80 }))
           pushCanonicalDocxSharedBank(body, canonicalGroup)
