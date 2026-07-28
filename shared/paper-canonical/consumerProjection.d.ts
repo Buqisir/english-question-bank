@@ -26,3 +26,25 @@ export function projectCanonicalConsumerGroup(input: {
   familyContractId: string
   groupId: string
 }): unknown
+
+export function projectCanonicalWritingChrome(input: {
+  consumption: unknown
+  groupId: string
+  renderedGroupIds?: ReadonlyArray<string>
+}): {
+  readonly part: {
+    readonly partId: string
+    readonly instructionId: string
+    readonly text: string
+  } | null
+  readonly section: {
+    readonly sectionId: string
+    readonly instructionId: string
+    readonly text: string
+  }
+  readonly instructions: ReadonlyArray<{
+    readonly instructionId: string
+    readonly placement: string
+    readonly text: string
+  }>
+}

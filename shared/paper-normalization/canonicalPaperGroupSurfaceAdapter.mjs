@@ -1,6 +1,9 @@
 import { segmentPaperText } from '../papersurface/segmentPaperText.mjs'
 import { translateAbcdPlanToPointPlacement } from '../paper-canonical/abcdLayout.mjs'
-import { projectCanonicalConsumerGroup } from '../paper-canonical/consumerProjection.mjs'
+import {
+  projectCanonicalConsumerGroup,
+  projectCanonicalWritingChrome,
+} from '../paper-canonical/consumerProjection.mjs'
 import { buildExactPaperGroupSourceSlice } from './exactPaperGroupSourceSlice.mjs'
 import { normalizePaperGroup } from './normalizePaperGroup.mjs'
 
@@ -382,6 +385,7 @@ export function buildCanonicalReadingConsumptionSurfaceData({
 export function buildCanonicalApplicationWritingConsumptionSurfaceData({
   consumption,
   groupId,
+  renderedGroupIds,
 }) {
   const canonicalGroup = projectCanonicalConsumerGroup({
     consumption,
@@ -413,6 +417,11 @@ export function buildCanonicalApplicationWritingConsumptionSurfaceData({
     givenTop: canonicalGroup.answerRegion.givenTop,
     givenBottom: canonicalGroup.answerRegion.givenBottom,
   }
+  const writingChrome = projectCanonicalWritingChrome({
+    consumption,
+    groupId,
+    renderedGroupIds,
+  })
   return {
     status: 'ready',
     semanticDigest: canonicalGroup.semanticSignature,
@@ -422,15 +431,17 @@ export function buildCanonicalApplicationWritingConsumptionSurfaceData({
     promptBlocks: canonicalGroup.promptBlocks,
     pageModel: {
       blocks: [
-        {
-          kind: 'partHeading',
-          text: canonicalGroup.paperChrome.part.text,
-        },
+        ...(writingChrome.part
+          ? [{
+              kind: 'partHeading',
+              text: writingChrome.part.text,
+            }]
+          : []),
         {
           kind: 'sectionHeading',
-          text: canonicalGroup.paperChrome.section.text,
+          text: writingChrome.section.text,
         },
-        ...canonicalGroup.paperChrome.instructions.map((instruction) => ({
+        ...writingChrome.instructions.map((instruction) => ({
           kind: 'instruction',
           text: instruction.text,
         })),
@@ -458,6 +469,7 @@ export function buildCanonicalApplicationWritingConsumptionSurfaceData({
 export function buildCanonicalContinuationWritingConsumptionSurfaceData({
   consumption,
   groupId,
+  renderedGroupIds,
 }) {
   const canonicalGroup = projectCanonicalConsumerGroup({
     consumption,
@@ -489,6 +501,11 @@ export function buildCanonicalContinuationWritingConsumptionSurfaceData({
     givenTop: canonicalGroup.answerRegion.starterLines,
     givenBottom: [],
   }
+  const writingChrome = projectCanonicalWritingChrome({
+    consumption,
+    groupId,
+    renderedGroupIds,
+  })
   return {
     status: 'ready',
     semanticDigest: canonicalGroup.semanticSignature,
@@ -499,15 +516,17 @@ export function buildCanonicalContinuationWritingConsumptionSurfaceData({
     wordCountRuling: canonicalGroup.wordCountRuling,
     pageModel: {
       blocks: [
-        {
-          kind: 'partHeading',
-          text: canonicalGroup.paperChrome.part.text,
-        },
+        ...(writingChrome.part
+          ? [{
+              kind: 'partHeading',
+              text: writingChrome.part.text,
+            }]
+          : []),
         {
           kind: 'sectionHeading',
-          text: canonicalGroup.paperChrome.section.text,
+          text: writingChrome.section.text,
         },
-        ...canonicalGroup.paperChrome.instructions.map((instruction) => ({
+        ...writingChrome.instructions.map((instruction) => ({
           kind: 'instruction',
           text: instruction.text,
         })),

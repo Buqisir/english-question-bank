@@ -604,6 +604,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
         const groupBlocks = loadedAsset.content.blocks.filter(
           (block): block is Extract<PaperContentBlock, { type: 'group' }> => block.type === 'group',
         )
+        const renderedGroupIds = groupBlocks.map((block) => block.groupId)
         const groupTypes = new Set(
           groupBlocks.map((block) => loadedAsset.content.groups[block.groupId]?.groupType),
         )
@@ -770,6 +771,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
                     block.groupId,
                   ),
                   groupId: block.groupId,
+                  renderedGroupIds,
                 })
               canonicalModels.set(block.groupId, {
                 kind: 'writing',
@@ -798,6 +800,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
                     block.groupId,
                   ),
                   groupId: block.groupId,
+                  renderedGroupIds,
                 })
               canonicalModels.set(block.groupId, {
                 kind: 'writing',

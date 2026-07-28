@@ -60,6 +60,7 @@ import { headingKind } from '../../shared/papersurface/headingKind.mjs'
 import { resolveFigureMarker } from '../../shared/figures/resolveFigureMarker.mjs'
 import {
   projectCanonicalConsumerGroup,
+  projectCanonicalWritingChrome,
   selectedFamilyContractIdForGroup,
   selectConsumerGroupMode,
 } from '../../shared/paper-canonical/consumerProjection.mjs'
@@ -694,7 +695,36 @@ function canonicalApplicationWritingAnswerBox(canonicalGroup) {
   return `${canonicalBookmarkStart('canonical_response', response.responseSlotId)}${table}${canonicalBookmarkEnd('canonical_response', response.responseSlotId)}`
 }
 
-function pushCanonicalDocxApplicationWriting(body, canonicalGroup) {
+function pushCanonicalDocxWritingChrome(body, writingChrome) {
+  const instructions = [
+    ...(writingChrome.part ? [writingChrome.part] : []),
+    writingChrome.section,
+    ...writingChrome.instructions,
+  ]
+  for (const instruction of instructions) {
+    body.push(
+      canonicalBookmarkStart(
+        'canonical_instruction',
+        instruction.instructionId,
+      ),
+      paragraph(instruction.text, {
+        bold: instruction === writingChrome.part,
+        size: 21,
+        after: 60,
+      }),
+      canonicalBookmarkEnd(
+        'canonical_instruction',
+        instruction.instructionId,
+      ),
+    )
+  }
+}
+
+function pushCanonicalDocxApplicationWriting(
+  body,
+  canonicalGroup,
+  writingChrome,
+) {
   body.push(
     canonicalBookmarkStart(
       'canonical_semantic',
@@ -705,6 +735,7 @@ function pushCanonicalDocxApplicationWriting(body, canonicalGroup) {
       canonicalGroup.occurrenceSignature,
     ),
   )
+  pushCanonicalDocxWritingChrome(body, writingChrome)
   for (const block of canonicalGroup.promptBlocks) {
     const noticeLines = block.inlines.length === 1
       ? applicationWritingNoticeLines(block.inlines[0].text)
@@ -769,7 +800,11 @@ function canonicalContinuationWritingAnswerBox(canonicalGroup) {
   return `${canonicalBookmarkStart('canonical_response', response.responseSlotId)}${table}${canonicalBookmarkEnd('canonical_response', response.responseSlotId)}`
 }
 
-function pushCanonicalDocxContinuationWriting(body, canonicalGroup) {
+function pushCanonicalDocxContinuationWriting(
+  body,
+  canonicalGroup,
+  writingChrome,
+) {
   body.push(
     canonicalBookmarkStart(
       'canonical_semantic',
@@ -780,27 +815,7 @@ function pushCanonicalDocxContinuationWriting(body, canonicalGroup) {
       canonicalGroup.occurrenceSignature,
     ),
   )
-  for (const instruction of [
-    canonicalGroup.paperChrome.part,
-    canonicalGroup.paperChrome.section,
-    ...canonicalGroup.paperChrome.instructions,
-  ]) {
-    body.push(
-      canonicalBookmarkStart(
-        'canonical_instruction',
-        instruction.instructionId,
-      ),
-      paragraph(instruction.text, {
-        bold: instruction === canonicalGroup.paperChrome.part,
-        size: 21,
-        after: 60,
-      }),
-      canonicalBookmarkEnd(
-        'canonical_instruction',
-        instruction.instructionId,
-      ),
-    )
-  }
+  pushCanonicalDocxWritingChrome(body, writingChrome)
   body.push(canonicalBookmarkStart(
     'canonical_word_ruling',
     canonicalGroup.wordCountRuling.authorityObservationRef,
@@ -838,17 +853,35 @@ function pushCanonicalDocxContent(
   questionNumberStart,
   paragraphOptions,
   images,
+  canonicalConsumption = null,
+  renderedWritingGroupIds = [],
 ) {
   if (canonicalGroup.groupType === 'reading') {
     pushCanonicalDocxReadingBlocks(body, canonicalGroup, images)
     return
   }
   if (canonicalGroup.groupType === 'writing') {
-    pushCanonicalDocxApplicationWriting(body, canonicalGroup)
+    pushCanonicalDocxApplicationWriting(
+      body,
+      canonicalGroup,
+      projectCanonicalWritingChrome({
+        consumption: canonicalConsumption,
+        groupId: canonicalGroup.groupId,
+        renderedGroupIds: renderedWritingGroupIds,
+      }),
+    )
     return
   }
   if (canonicalGroup.groupType === 'continuation') {
-    pushCanonicalDocxContinuationWriting(body, canonicalGroup)
+    pushCanonicalDocxContinuationWriting(
+      body,
+      canonicalGroup,
+      projectCanonicalWritingChrome({
+        consumption: canonicalConsumption,
+        groupId: canonicalGroup.groupId,
+        renderedGroupIds: renderedWritingGroupIds,
+      }),
+    )
     return
   }
   pushCanonicalDocxParagraphs(
@@ -1548,6 +1581,11 @@ function buildExamDocumentXml({
   }
 
   const itemByGroupId = new Map(items.map((item) => [item.detail.id, item]))
+  const renderedGroupIds = Array.isArray(blocks) && blocks.length > 0
+    ? blocks
+      .filter((block) => block.type === 'question_group')
+      .map((block) => block.questionGroupId)
+    : items.map((item) => item.detail.id)
 
   // Determine if we should use short-option two-column layout
   function isShortOptions(options) {
@@ -1635,6 +1673,8 @@ function buildExamDocumentXml({
             questionNum,
             { after: 60, firstLineIndent: 420 },
             images,
+            canonicalConsumption,
+            renderedGroupIds,
           )
           body.push(paragraph('', { after: 80 }))
           pushCanonicalDocxSharedBank(body, canonicalGroup)
@@ -1975,6 +2015,11 @@ function buildDocumentXml({ title, versionType, items, blocks, questionNumberSta
   ]
 
   const startNum = Number.isInteger(questionNumberStart) && questionNumberStart >= 1 ? questionNumberStart : 1
+  const renderedGroupIds = Array.isArray(blocks) && blocks.length > 0
+    ? blocks
+      .filter((block) => block.type === 'question_group')
+      .map((block) => block.questionGroupId)
+    : items.map((item) => item.detail.id)
 
   // If blocks are provided, render by block sequence
   if (Array.isArray(blocks) && blocks.length > 0) {
@@ -2022,6 +2067,8 @@ function buildDocumentXml({ title, versionType, items, blocks, questionNumberSta
             questionNum,
             { after: 80, indentLeft: 240, firstLineIndent: 420 },
             images,
+            canonicalConsumption,
+            renderedGroupIds,
           )
         } else {
           const passageLines = normalizeDocxLines(
@@ -2099,6 +2146,8 @@ function buildDocumentXml({ title, versionType, items, blocks, questionNumberSta
           legacyQuestionNum,
           { after: 80, indentLeft: 240, firstLineIndent: 420 },
           images,
+          canonicalConsumption,
+          renderedGroupIds,
         )
       } else {
         const passageLines = normalizeDocxLines(

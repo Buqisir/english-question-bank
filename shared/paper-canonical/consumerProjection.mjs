@@ -1013,3 +1013,111 @@ export function projectCanonicalConsumerGroup(input) {
     semanticSignature: digestJson(semantic),
   })
 }
+
+/**
+ * Resolve shared writing chrome once for an ordered set of rendered Groups.
+ *
+ * A Profile part may own several writing sections. The first rendered
+ * canonical Group for that part carries the part heading; every Group carries
+ * only its own section and slot instructions. This is derived from the ready
+ * whole-paper Consumption Plan, never from PaperAsset chrome or renderer
+ * literals.
+ */
+export function projectCanonicalWritingChrome({
+  consumption,
+  groupId,
+  renderedGroupIds,
+}) {
+  if (
+    renderedGroupIds !== undefined
+    && (
+      !Array.isArray(renderedGroupIds)
+      || new Set(renderedGroupIds).size !== renderedGroupIds.length
+    )
+  ) {
+    throw rejected('Rendered canonical writing Group order is invalid')
+  }
+  const orderedGroupIds = renderedGroupIds ?? consumption?.selections
+    ?.filter(
+      (selection) =>
+        selection?.mode === 'canonical'
+        && [
+          'application-writing',
+          'continuation-writing',
+        ].includes(selection.familyContractId),
+    )
+    .flatMap((selection) => selection.groupIds)
+  if (!Array.isArray(orderedGroupIds) || !orderedGroupIds.includes(groupId)) {
+    throw rejected(`Canonical writing Group ${groupId} is outside the rendered order`)
+  }
+
+  const renderedWritingGroups = []
+  for (const candidateGroupId of orderedGroupIds) {
+    const familyContractId = selectedFamilyContractIdForGroup({
+      consumption,
+      groupId: candidateGroupId,
+    })
+    if (
+      ![
+        'application-writing',
+        'continuation-writing',
+      ].includes(familyContractId)
+    ) continue
+    const selection = selectConsumerGroupMode({
+      consumption,
+      familyContractId,
+      groupId: candidateGroupId,
+    })
+    if (selection.mode !== 'canonical') continue
+    renderedWritingGroups.push({
+      groupId: candidateGroupId,
+      canonicalGroup: projectCanonicalConsumerGroup({
+        consumption,
+        familyContractId,
+        groupId: candidateGroupId,
+      }),
+    })
+  }
+  const target = renderedWritingGroups.find(
+    (candidate) => candidate.groupId === groupId,
+  )
+  if (!target) {
+    throw rejected(`Canonical writing Group ${groupId} is not renderable`)
+  }
+
+  const samePart = renderedWritingGroups.filter(
+    (candidate) =>
+      candidate.canonicalGroup.paperChrome.part.partId
+      === target.canonicalGroup.paperChrome.part.partId,
+  )
+  const targetPart = target.canonicalGroup.paperChrome.part
+  if (
+    samePart.length === 0
+    || samePart.some(
+      (candidate) =>
+        candidate.canonicalGroup.paperChrome.part.instructionId
+          !== targetPart.instructionId
+        || candidate.canonicalGroup.paperChrome.part.text !== targetPart.text,
+    )
+    || new Set(
+      samePart.map(
+        (candidate) =>
+          candidate.canonicalGroup.paperChrome.section.sectionId,
+      ),
+    ).size !== samePart.length
+  ) {
+    throw rejected(
+      `Canonical writing part ${targetPart.partId} is inconsistent`,
+    )
+  }
+
+  return Object.freeze({
+    part: samePart[0].groupId === groupId
+      ? structuredClone(targetPart)
+      : null,
+    section: structuredClone(target.canonicalGroup.paperChrome.section),
+    instructions: structuredClone(
+      target.canonicalGroup.paperChrome.instructions,
+    ),
+  })
+}

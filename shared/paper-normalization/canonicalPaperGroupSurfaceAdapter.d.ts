@@ -191,6 +191,7 @@ export type CanonicalApplicationWritingGivenPart = {
 export function buildCanonicalApplicationWritingConsumptionSurfaceData(input: {
   consumption: unknown
   groupId: string
+  renderedGroupIds?: ReadonlyArray<string>
 }): {
   readonly status: 'ready'
   readonly semanticDigest: string
@@ -251,6 +252,7 @@ export type CanonicalContinuationWritingStarter = {
 export function buildCanonicalContinuationWritingConsumptionSurfaceData(input: {
   consumption: unknown
   groupId: string
+  renderedGroupIds?: ReadonlyArray<string>
 }): {
   readonly status: 'ready'
   readonly semanticDigest: string

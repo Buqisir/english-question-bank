@@ -31,6 +31,9 @@ import {
 import { createDocxRenderer } from '../server/exports/docxRenderer.mjs'
 import { buildPrintHtml } from '../server/print-renderer.mjs'
 import {
+  makeApplicationWritingReferenceFixture,
+} from '../test-fixtures/paper-canonical/applicationWritingReferenceFixture.mjs'
+import {
   makeContinuationWritingReferenceFixture,
   makePollutedContinuationCapture,
 } from '../test-fixtures/paper-canonical/continuationWritingReferenceFixture.mjs'
@@ -175,6 +178,98 @@ function readyConsumption(paperId) {
   }
 }
 
+function projectWritingOccurrence(fixture, familyContractId) {
+  const compilation = compileCanonicalPaper(fixture.request)
+  assert.equal(compilation.disposition, 'ready')
+  const projected = projectCanonicalPaper({
+    plan: compilation.artifacts.canonicalPaper.paperPlan,
+    groups: compilation.artifacts.canonicalPaper.questionGroups,
+    sourceCapture: compilation.artifacts.sourceCapture,
+  })
+  const occurrences = projected.nodes.filter(
+    (node) =>
+      node.kind === 'group'
+      && node.familyContractId === familyContractId,
+  )
+  assert.equal(occurrences.length, 1)
+  return {
+    profileRef: compilation.artifacts.canonicalPaper.paperPlan.profileRef,
+    occurrence: occurrences[0],
+  }
+}
+
+function readyMixedNck1WritingConsumption() {
+  const application = projectWritingOccurrence(
+    makeApplicationWritingReferenceFixture('paper-2026-i'),
+    'application-writing',
+  )
+  const continuation = projectWritingOccurrence(
+    makeContinuationWritingReferenceFixture('paper-2026-i'),
+    'continuation-writing',
+  )
+  assert.deepEqual(application.profileRef, continuation.profileRef)
+  return {
+    disposition: 'ready',
+    paperId: 'paper-2026-i',
+    selections: [
+      {
+        mode: 'legacy',
+        familyContractId: 'reading',
+        groupIds: [
+          'group-2026-i-reading-a',
+          'group-2026-i-reading-b',
+          'group-2026-i-reading-c',
+          'group-2026-i-reading-d',
+        ],
+        projectedOccurrences: [],
+      },
+      {
+        mode: 'legacy',
+        familyContractId: 'seven-choices',
+        groupIds: ['group-2026-i-seven-choices'],
+        projectedOccurrences: [],
+      },
+      {
+        mode: 'legacy',
+        familyContractId: 'cloze',
+        groupIds: ['group-2026-i-cloze'],
+        projectedOccurrences: [],
+      },
+      {
+        mode: 'legacy',
+        familyContractId: 'grammar-fill',
+        groupIds: ['group-2026-i-grammar-fill'],
+        projectedOccurrences: [],
+      },
+      {
+        mode: 'canonical',
+        familyContractId: 'application-writing',
+        groupIds: [application.occurrence.groupId],
+        projectedOccurrences: [application.occurrence],
+      },
+      {
+        mode: 'canonical',
+        familyContractId: 'continuation-writing',
+        groupIds: [continuation.occurrence.groupId],
+        projectedOccurrences: [continuation.occurrence],
+      },
+    ],
+  }
+}
+
+function applicationGroup(consumption) {
+  const selection = consumption.selections.find(
+    (candidate) => candidate.familyContractId === 'application-writing',
+  )
+  assert.equal(selection.mode, 'canonical')
+  assert.equal(selection.groupIds.length, 1)
+  return projectCanonicalConsumerGroup({
+    consumption,
+    familyContractId: 'application-writing',
+    groupId: selection.groupIds[0],
+  })
+}
+
 function continuationGroup(consumption) {
   const selection = consumption.selections.find(
     (candidate) => candidate.familyContractId === 'continuation-writing',
@@ -186,6 +281,33 @@ function continuationGroup(consumption) {
     familyContractId: 'continuation-writing',
     groupId: selection.groupIds[0],
   })
+}
+
+function poisonedApplicationExportItem(canonical) {
+  return {
+    detail: {
+      id: canonical.groupId,
+      paperId: canonical.paperId,
+      title: 'POISONED LEGACY APPLICATION TITLE',
+      source: 'POISONED LEGACY APPLICATION SOURCE',
+      groupType: 'writing',
+      passage: {
+        title: 'POISONED LEGACY APPLICATION PASSAGE',
+        materialText: 'POISONED LEGACY APPLICATION MATERIAL',
+      },
+      writingTask: {
+        taskType: 'continuation',
+        applicationGiven: {
+          top: ['POISONED LEGACY APPLICATION TOP'],
+          bottom: ['POISONED LEGACY APPLICATION BOTTOM'],
+        },
+      },
+      questions: [],
+    },
+    score: 15,
+    sectionTitle: 'POISONED LEGACY APPLICATION SECTION',
+    note: 'POISONED LEGACY APPLICATION INSTRUCTION',
+  }
 }
 
 function poisonedExportItem(canonical, legacyTaskVariant = 'poisoned') {
@@ -232,6 +354,22 @@ function bookmarkName(kind, value) {
 
 function compactText(value) {
   return String(value).replaceAll(/\s/g, '')
+}
+
+function assertNck1WritingHeadingCounts(renderedText, label) {
+  const compact = compactText(renderedText)
+  for (const heading of Object.values(nck1WritingChrome)) {
+    assert.equal(
+      compact.split(compactText(heading)).length - 1,
+      1,
+      `${label} contains ${heading} exactly once`,
+    )
+  }
+  assert.equal(
+    compact.includes('POISONEDLEGACY'),
+    false,
+    `${label} rejects competing legacy writing chrome`,
+  )
 }
 
 function assertVisibleCanonicalText(renderedText, canonical) {
@@ -315,6 +453,77 @@ for (const paperId of ['paper-2026-i', 'paper-zj-2020-jul']) {
 }
 
 assertPollutedProofBlocked()
+
+const mixedWritingConsumption = readyMixedNck1WritingConsumption()
+const mixedApplication = applicationGroup(mixedWritingConsumption)
+const mixedContinuation = continuationGroup(mixedWritingConsumption)
+const mixedWritingArgs = {
+  title: 'NCK1 whole writing chrome regression',
+  versionType: 'student',
+  printStyle: 'exam',
+  items: [
+    poisonedApplicationExportItem(mixedApplication),
+    poisonedExportItem(mixedContinuation),
+  ],
+  blocks: [
+    {
+      type: 'question_group',
+      questionGroupId: mixedApplication.groupId,
+      score: 15,
+    },
+    {
+      type: 'question_group',
+      questionGroupId: mixedContinuation.groupId,
+      score: 25,
+    },
+  ],
+  questionNumberStart: 1,
+  canonicalConsumption: mixedWritingConsumption,
+}
+const mixedPrintHtml = buildPrintHtml(mixedWritingArgs)
+assertNck1WritingHeadingCounts(mixedPrintHtml, 'whole-paper Print HTML')
+const mixedDocxXml = docxRenderer.buildDocumentXml(mixedWritingArgs)
+assertNck1WritingHeadingCounts(mixedDocxXml, 'whole-paper DOCX OOXML')
+{
+  const root = mkdtempSync(path.join(tmpdir(), 'eqb-writing-chrome-docx-'))
+  try {
+    const docxPath = path.join(root, 'whole-writing.docx')
+    const pdfPath = path.join(root, 'whole-writing-converted.pdf')
+    docxRenderer.writeDocxPackage({
+      documentXml: mixedDocxXml,
+      outputPath: docxPath,
+      title: mixedWritingArgs.title,
+    })
+    const packagedXml = execFileSync(
+      'unzip',
+      ['-p', docxPath, 'word/document.xml'],
+      { encoding: 'utf8' },
+    )
+    assertNck1WritingHeadingCounts(packagedXml, 'packaged DOCX OOXML')
+    docxRenderer.convertDocxToPdf(docxPath, pdfPath)
+    const convertedText = execFileSync(
+      'pdftotext',
+      ['-layout', pdfPath, '-'],
+      { encoding: 'utf8' },
+    )
+    assertNck1WritingHeadingCounts(convertedText, 'DOCX-to-PDF')
+    if (persistActualArtifacts) {
+      copyFileSync(
+        docxPath,
+        path.join(actualArtifactRoot, 'docx-whole-writing-student.docx'),
+      )
+      copyFileSync(
+        pdfPath,
+        path.join(
+          actualArtifactRoot,
+          'docx-whole-writing-student-converted.pdf',
+        ),
+      )
+    }
+  } finally {
+    rmSync(root, { recursive: true, force: true })
+  }
+}
 
 const printArtifacts = []
 for (const { label, consumption, canonical } of cases) {
@@ -605,6 +814,153 @@ async function assertBrowserArtifacts() {
   const playwright = await import('../app/node_modules/playwright/index.js')
   const browser = await playwright.default.chromium.launch({ headless: true })
   try {
+    {
+      const asset = JSON.parse(readFileSync(
+        new URL(
+          '../app/public/paper-assets/paper-2026-i/latest/paper-asset.json',
+          import.meta.url,
+        ),
+        'utf8',
+      ))
+      const writingPartIndex = asset.content.blocks.findIndex(
+        (block) =>
+          block.type === 'partHeading'
+          && block.partId === 'part-2026-i-writing',
+      )
+      assert.notEqual(writingPartIndex, -1)
+      asset.content.blocks = asset.content.blocks.map((block, index) => {
+        if (index < writingPartIndex) return block
+        if (block.type === 'partHeading') {
+          return { ...block, text: 'POISONED LEGACY WRITING PART' }
+        }
+        if (block.type === 'sectionHeading') {
+          return { ...block, text: 'POISONED LEGACY WRITING SECTION' }
+        }
+        if (block.type === 'instruction') {
+          return { ...block, text: 'POISONED LEGACY WRITING INSTRUCTION' }
+        }
+        return block
+      })
+      let authRequestCount = 0
+      const page = await browser.newPage({
+        viewport: { width: 1280, height: 900 },
+      })
+      await page.route('**/api/auth/me', (route) => {
+        authRequestCount += 1
+        return route.fulfill({
+          status: 200,
+          contentType: 'application/json',
+          body: JSON.stringify({
+            authRequired: true,
+            user: {
+              id: 'ticket-13-writing-chrome-owner',
+              username: 'ticket-13-writing-chrome-owner',
+              role: 'owner',
+            },
+          }),
+        })
+      })
+      await page.route('**/api/question-groups', (route) => route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({ questionGroups: [] }),
+      }))
+      await page.route('**/api/ai/status', (route) => route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({
+          serverKeyAvailable: false,
+          dailyLimit: { limit: 0, used: 0, exceeded: false },
+        }),
+      }))
+      await page.route(
+        '**/api/paper-canonical/consumption?*',
+        (route) => route.fulfill({
+          status: 200,
+          contentType: 'application/json',
+          body: JSON.stringify(mixedWritingConsumption),
+        }),
+      )
+      await page.route('**/paper-assets/**/paper-asset.json', (route) =>
+        route.fulfill({
+          status: 200,
+          contentType: 'application/json',
+          body: JSON.stringify(asset),
+        }))
+      await page.route('**/paper-assets/**/analyses/**', (route) =>
+        route.fulfill({ status: 404, body: '' }))
+      await page.route('**/paper-assets/**/figures/**', (route) =>
+        route.fulfill({ status: 404, body: '' }))
+      const url = new URL('index.html', appUrl)
+      url.searchParams.set('view', 'paper-browse')
+      url.searchParams.set('paperId', mixedWritingConsumption.paperId)
+      url.searchParams.set('focusGroupId', mixedApplication.groupId)
+      await page.goto(url.href)
+      const mixedContinuationResponse = page.locator(
+        `[data-canonical-response-slot-id="${mixedContinuation.answerRegion.responseSlotId}"]`,
+      )
+      try {
+        await mixedContinuationResponse.waitFor({ timeout: 10_000 })
+      } catch (error) {
+        throw new Error(
+          `Authenticated whole-paper Screen did not mount both writing sections: ${
+            await page.locator('body').innerText()
+          }`,
+          { cause: error },
+        )
+      }
+      assert.ok(authRequestCount > 0)
+      const mixedWritingPages = page.locator('[data-pi-writing-page]')
+      assert.equal(await mixedWritingPages.count(), 2)
+      const mixedScreenText = (
+        await mixedWritingPages.allInnerTexts()
+      ).join('\n')
+      if (mixedScreenText.includes('POISONED LEGACY')) {
+        throw new Error(
+          `Authenticated whole-paper Screen exposed legacy chrome:\n${
+            mixedScreenText.split('\n')
+              .filter((line) => line.includes('POISONED LEGACY'))
+              .join('\n')
+          }`,
+        )
+      }
+      assertNck1WritingHeadingCounts(
+        mixedScreenText,
+        'authenticated whole-paper Screen',
+      )
+      await page.close()
+    }
+
+    {
+      const page = await browser.newPage()
+      await page.setContent(mixedPrintHtml, { waitUntil: 'load' })
+      const root = mkdtempSync(path.join(tmpdir(), 'eqb-writing-chrome-pdf-'))
+      try {
+        const pdfPath = path.join(root, 'whole-writing.pdf')
+        await page.pdf({
+          path: pdfPath,
+          format: 'A4',
+          printBackground: true,
+          preferCSSPageSize: true,
+        })
+        const pdfText = execFileSync(
+          'pdftotext',
+          ['-layout', pdfPath, '-'],
+          { encoding: 'utf8' },
+        )
+        assertNck1WritingHeadingCounts(pdfText, 'whole-paper Print PDF')
+        if (persistActualArtifacts) {
+          copyFileSync(
+            pdfPath,
+            path.join(actualArtifactRoot, 'print-whole-writing-student.pdf'),
+          )
+        }
+      } finally {
+        rmSync(root, { recursive: true, force: true })
+      }
+      await page.close()
+    }
+
     for (const { label, consumption, canonical } of cases) {
       const signatures = []
       for (const teacher of [false, true]) {

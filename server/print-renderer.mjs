@@ -47,6 +47,7 @@ import {
 } from '../shared/paper-canonical/applicationWritingDisplay.mjs'
 import {
   projectCanonicalConsumerGroup,
+  projectCanonicalWritingChrome,
   selectedFamilyContractIdForGroup,
   selectConsumerGroupMode,
 } from '../shared/paper-canonical/consumerProjection.mjs'
@@ -229,7 +230,16 @@ function renderCanonicalReadingBlocks(canonicalGroup) {
   }).join('')}</div>`
 }
 
-function renderCanonicalApplicationWriting(canonicalGroup) {
+function renderCanonicalWritingChrome(chrome, className) {
+  return [
+    ...(chrome.part ? [chrome.part] : []),
+    chrome.section,
+    ...chrome.instructions,
+  ].map((instruction, index) =>
+    `<p class="${className} ${className}--${index < (chrome.part ? 2 : 1) ? 'heading' : 'body'}" data-canonical-instruction-id="${escapeHtml(instruction.instructionId)}">${escapeHtml(instruction.text)}</p>`).join('')
+}
+
+function renderCanonicalApplicationWriting(canonicalGroup, writingChrome) {
   const renderGivenParts = (parts, position) => parts.map((part) =>
     `<p class="canonical-application-given canonical-application-given--${position}" data-canonical-given-part-id="${escapeHtml(part.givenPartId)}" data-canonical-given-role="${escapeHtml(part.role)}" data-canonical-given-placement="${escapeHtml(part.placement)}">${renderCanonicalInlineNodes(part.inlines)}</p>`).join('')
   const prompt = canonicalGroup.promptBlocks.map((block) => {
@@ -242,16 +252,18 @@ function renderCanonicalApplicationWriting(canonicalGroup) {
     return `<p data-canonical-block-id="${escapeHtml(block.nodeId)}"${noticeLines ? ' data-canonical-application-notice=""' : ''}>${content}</p>`
   }).join('')
   const response = canonicalGroup.answerRegion
-  return `<div class="canonical-application-writing" data-canonical-application-semantic-signature="${escapeHtml(canonicalGroup.semanticSignature)}" data-canonical-application-occurrence-signature="${escapeHtml(canonicalGroup.occurrenceSignature)}"><div class="passage canonical-application-prompt">${prompt}</div><div class="writing-answer-box canonical-application-response" data-canonical-answer-region-ref="${escapeHtml(response.answerRegionRef)}" data-canonical-response-slot-id="${escapeHtml(response.responseSlotId)}" style="width:144mm;height:65mm;"><div class="canonical-application-given-top">${renderGivenParts(response.givenTop, 'top')}</div><div class="canonical-application-given-bottom">${renderGivenParts(response.givenBottom, 'bottom')}</div></div></div>`
+  const chrome = renderCanonicalWritingChrome(
+    writingChrome,
+    'canonical-application-instruction',
+  )
+  return `<div class="canonical-application-writing" data-canonical-application-semantic-signature="${escapeHtml(canonicalGroup.semanticSignature)}" data-canonical-application-occurrence-signature="${escapeHtml(canonicalGroup.occurrenceSignature)}">${chrome}<div class="passage canonical-application-prompt">${prompt}</div><div class="writing-answer-box canonical-application-response" data-canonical-answer-region-ref="${escapeHtml(response.answerRegionRef)}" data-canonical-response-slot-id="${escapeHtml(response.responseSlotId)}" style="width:144mm;height:65mm;"><div class="canonical-application-given-top">${renderGivenParts(response.givenTop, 'top')}</div><div class="canonical-application-given-bottom">${renderGivenParts(response.givenBottom, 'bottom')}</div></div></div>`
 }
 
-function renderCanonicalContinuationWriting(canonicalGroup) {
-  const chrome = [
-    canonicalGroup.paperChrome.part,
-    canonicalGroup.paperChrome.section,
-    ...canonicalGroup.paperChrome.instructions,
-  ].map((instruction, index) =>
-    `<p class="canonical-continuation-instruction canonical-continuation-instruction--${index < 2 ? 'heading' : 'body'}" data-canonical-instruction-id="${escapeHtml(instruction.instructionId)}">${escapeHtml(instruction.text)}</p>`).join('')
+function renderCanonicalContinuationWriting(canonicalGroup, writingChrome) {
+  const chrome = renderCanonicalWritingChrome(
+    writingChrome,
+    'canonical-continuation-instruction',
+  )
   const material = canonicalGroup.materialBlocks.map((block) =>
     `<p data-canonical-block-id="${escapeHtml(block.nodeId)}">${renderCanonicalInlineNodes(block.inlines)}</p>`).join('')
   const response = canonicalGroup.answerRegion
@@ -423,6 +435,11 @@ export function buildPrintHtml({
   const isExam = printStyle === 'exam'
   const isTeacher = versionType === 'teacher'
   const itemByGroupId = new Map(items.map((item) => [item.detail.id, item]))
+  const renderedGroupIds = Array.isArray(blocks) && blocks.length > 0
+    ? blocks
+      .filter((block) => block.type === 'question_group')
+      .map((block) => block.questionGroupId)
+    : items.map((item) => item.detail.id)
 
   // figure-render cut: per-call cache so a multi-group paper doesn't
   // rescan paperAssetsDir once per passage LINE — resolveGroupFigures does
@@ -606,9 +623,23 @@ export function buildPrintHtml({
           if (canonicalGroup.groupType === 'reading') {
             groupHtml += renderCanonicalReadingBlocks(canonicalGroup)
           } else if (canonicalGroup.groupType === 'writing') {
-            groupHtml += renderCanonicalApplicationWriting(canonicalGroup)
+            groupHtml += renderCanonicalApplicationWriting(
+              canonicalGroup,
+              projectCanonicalWritingChrome({
+                consumption: canonicalConsumption,
+                groupId: canonicalGroup.groupId,
+                renderedGroupIds,
+              }),
+            )
           } else if (canonicalGroup.groupType === 'continuation') {
-            groupHtml += renderCanonicalContinuationWriting(canonicalGroup)
+            groupHtml += renderCanonicalContinuationWriting(
+              canonicalGroup,
+              projectCanonicalWritingChrome({
+                consumption: canonicalConsumption,
+                groupId: canonicalGroup.groupId,
+                renderedGroupIds,
+              }),
+            )
           } else {
             const displayNumberByQuestionId = new Map(
               canonicalGroup.questions.map((question) => [
