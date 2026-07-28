@@ -142,7 +142,11 @@ agent 不得以"源卷长得不一样"为由自行放宽。与本标准冲突的
   - DOCX 源中的真实形状由 public publisher 直接完成 LibreOffice PDF
     转换、逐形状裁图、摘要绑定与 manifest/body 关联,并与 paper asset
     version 原子发布;不得再用 `attach-paper-assets-extras.mjs` 覆盖这类
-    publisher-owned figures。该脚本只保留给另行 staging 的 PDF/人工截存图。
+    publisher-owned figures。`sources.docx.shapeAssociations` 必须逐形状登记
+    `sourcePart`、`sourceShapeId`、`sourcePage`、页内视觉顺序
+    `sourcePageOrder`、`figureId`、`groupId`、`kind`、`placeholderMarker`
+    与 `caption`;页码和视觉顺序让同页同尺寸形状也能 fail-closed 地逐一关联。
+    该脚本只保留给另行 staging 的 PDF/人工截存图。
 - **PDF 源的文本提取工序**:不复用 `lib.mjs` 的正则切卷(它是为
   "答案版 DOCX 内嵌【答案】"约定设计的,新格式的试题卷排版——选项列在
   段落下方、无内嵌答案——是完全不同的视觉约定,现改造正则风险高于手工核对)。

@@ -22,6 +22,7 @@ const SVG_MATCH_TOLERANCE_POINTS = 3
 const CROP_DPI = 144
 const CROP_PADDING_POINTS = 2
 const shapeXmlPartPattern = /^word\/(?:document|header\d+|footer\d+|footnotes|endnotes)\.xml$/
+const vmlShapePattern = /<v:(shape|rect|roundrect|oval|line|polyline|arc|curve)\b([^>]*)(?:\/>|>[\s\S]*?<\/v:\1>)/g
 
 const mediaTypes = Object.freeze({
   '.bmp': 'image/bmp',
@@ -104,9 +105,20 @@ function readTargetZipEntries(buffer) {
   return entries
 }
 
+function vmlPrimaryMarkup(documentXml) {
+  return documentXml.replace(/<mc:Fallback\b[\s\S]*?<\/mc:Fallback>/g, '')
+}
+
 function documentHasShapes(documentXml) {
-  return /<(?:w:pict|v:shape|v:group|wps:wsp|c:chart|dgm:relIds)\b/.test(documentXml)
+  if (
+    /<(?:wps:wsp|c:chart|dgm:relIds)\b/.test(documentXml)
     || /<a:graphicData\b[^>]*\buri="[^"]*(?:wordprocessingShape|chart|diagram)[^"]*"/.test(documentXml)
+  ) {
+    return true
+  }
+  return [...vmlPrimaryMarkup(documentXml).matchAll(vmlShapePattern)].some(
+    (match) => !/<v:imagedata\b/.test(match[0]),
+  )
 }
 
 function decodeXml(value) {
@@ -164,9 +176,9 @@ function extractShapeDescriptors(sourcePart, xml) {
     })
   }
 
-  const vmlPattern = /<v:shape\b([^>]*)(?:\/>|>[\s\S]*?<\/v:shape>)/g
-  for (const match of xml.matchAll(vmlPattern)) {
-    const attributes = match[1]
+  for (const match of vmlPrimaryMarkup(xml).matchAll(vmlShapePattern)) {
+    if (/<v:imagedata\b/.test(match[0])) continue
+    const attributes = match[2]
     const style = xmlAttribute(attributes, 'style') || ''
     const width = /(?:^|;)\s*width\s*:\s*([^;]+)/i.exec(style)
     const height = /(?:^|;)\s*height\s*:\s*([^;]+)/i.exec(style)
@@ -199,6 +211,7 @@ function resolveShapeAssociations(paperAsset, shapes) {
   const groups = paperAsset?.content?.groups || {}
   const usedShapes = new Set()
   const usedFigures = new Set()
+  const usedPageOrders = new Set()
   return associations.map((association) => {
     const shapeKey = `${association?.sourcePart}\0${association?.sourceShapeId}`
     const shape = shapes.find(
@@ -217,7 +230,9 @@ function resolveShapeAssociations(paperAsset, shapes) {
     const kind = association.kind
     const placeholderMarker = String(association.placeholderMarker || '')
     const sourcePage = Number(association.sourcePage)
+    const sourcePageOrder = Number(association.sourcePageOrder)
     const expectedMarker = `[${kind === 'table' ? '表' : '图'}: ${figureId}]`
+    const pageOrderKey = `${sourcePage}\0${sourcePageOrder}`
     if (
       !/^fig-[a-z0-9]+(?:-[a-z0-9]+)*$/.test(figureId)
       || usedFigures.has(figureId)
@@ -226,10 +241,14 @@ function resolveShapeAssociations(paperAsset, shapes) {
       || placeholderMarker !== expectedMarker
       || !Number.isInteger(sourcePage)
       || sourcePage < 1
+      || !Number.isInteger(sourcePageOrder)
+      || sourcePageOrder < 1
+      || usedPageOrders.has(pageOrderKey)
     ) {
       throw new Error(`Invalid DOCX shape figure association: ${figureId || shapeKey}`)
     }
     usedFigures.add(figureId)
+    usedPageOrders.add(pageOrderKey)
 
     const markerParagraphs = Object.values(groups).flatMap((group) =>
       (group?.passage?.paragraphs || []).filter(
@@ -243,6 +262,7 @@ function resolveShapeAssociations(paperAsset, shapes) {
     return {
       ...shape,
       sourcePage,
+      sourcePageOrder,
       figureId,
       groupId,
       kind,
@@ -459,36 +479,77 @@ export function cropDocxShapesFromPdf(
       candidatesByPage.set(sourcePage, extractSvgCandidates(readFileSync(svgPath, 'utf8')))
     }
 
-    const usedCandidates = new Set()
+    const selectedCandidates = new Map()
+    for (const [sourcePage, candidates] of candidatesByPage) {
+      const pageAssociations = associations
+        .filter((association) => association.sourcePage === sourcePage)
+        .sort((left, right) => left.sourcePageOrder - right.sourcePageOrder)
+      const sizeGroups = []
+      for (const association of pageAssociations) {
+        const sizeGroup = sizeGroups.find((candidate) => (
+          Math.abs(candidate.widthPoints - association.widthPoints) <= 0.5
+          && Math.abs(candidate.heightPoints - association.heightPoints) <= 0.5
+        ))
+        if (sizeGroup) sizeGroup.associations.push(association)
+        else {
+          sizeGroups.push({
+            widthPoints: association.widthPoints,
+            heightPoints: association.heightPoints,
+            associations: [association],
+          })
+        }
+      }
+
+      const usedCandidateIndexes = new Set()
+      for (const sizeGroup of sizeGroups) {
+        const matches = candidates
+          .map((candidate, candidateIndex) => ({
+            candidate,
+            candidateIndex,
+            score: (
+              Math.abs(candidate.width - sizeGroup.widthPoints)
+              + Math.abs(candidate.height - sizeGroup.heightPoints)
+            ),
+          }))
+          .filter(({ candidate, candidateIndex }) => (
+            !usedCandidateIndexes.has(candidateIndex)
+            && Math.abs(candidate.width - sizeGroup.widthPoints) <= SVG_MATCH_TOLERANCE_POINTS
+            && Math.abs(candidate.height - sizeGroup.heightPoints) <= SVG_MATCH_TOLERANCE_POINTS
+          ))
+          .sort((left, right) => left.score - right.score)
+        const bestScore = matches[0]?.score
+        const closest = matches.filter(({ score }) => score - bestScore < 0.25)
+        if (sizeGroup.associations.length === 1) {
+          if (closest.length !== 1) {
+            const association = sizeGroup.associations[0]
+            throw new Error(`DOCX shape crop is missing or ambiguous: ${association.sourcePart}#${association.sourceShapeId}`)
+          }
+        } else if (closest.length !== sizeGroup.associations.length) {
+          throw new Error(`DOCX same-size shape crops are incomplete or ambiguous on page ${sourcePage}`)
+        }
+        const visualCandidates = closest.sort(
+          (left, right) => left.candidate.y - right.candidate.y || left.candidate.x - right.candidate.x,
+        )
+        sizeGroup.associations.forEach((association, index) => {
+          const selected = visualCandidates[index]
+          usedCandidateIndexes.add(selected.candidateIndex)
+          selectedCandidates.set(association.figureId, selected.candidate)
+        })
+      }
+    }
+
     const counters = new Map()
     return associations.map((association, index) => {
-      const candidates = candidatesByPage.get(association.sourcePage) || []
-      const matches = candidates
-        .map((candidate, candidateIndex) => ({
-          candidate,
-          candidateIndex,
-          score: (
-            Math.abs(candidate.width - association.widthPoints)
-            + Math.abs(candidate.height - association.heightPoints)
-          ),
-        }))
-        .filter(({ candidate, candidateIndex }) => (
-          !usedCandidates.has(`${association.sourcePage}:${candidateIndex}`)
-          && Math.abs(candidate.width - association.widthPoints) <= SVG_MATCH_TOLERANCE_POINTS
-          && Math.abs(candidate.height - association.heightPoints) <= SVG_MATCH_TOLERANCE_POINTS
-        ))
-        .sort((left, right) => left.score - right.score)
-      if (matches.length === 0 || (matches[1] && Math.abs(matches[1].score - matches[0].score) < 0.25)) {
+      const selected = selectedCandidates.get(association.figureId)
+      if (!selected) {
         throw new Error(`DOCX shape crop is missing or ambiguous: ${association.sourcePart}#${association.sourceShapeId}`)
       }
-      const selected = matches[0]
-      usedCandidates.add(`${association.sourcePage}:${selected.candidateIndex}`)
 
       const scale = CROP_DPI / 72
-      const x = Math.max(0, Math.floor((selected.candidate.x - CROP_PADDING_POINTS) * scale))
-      const y = Math.max(0, Math.floor((selected.candidate.y - CROP_PADDING_POINTS) * scale))
-      const width = Math.max(1, Math.ceil((selected.candidate.width + 2 * CROP_PADDING_POINTS) * scale))
-      const height = Math.max(1, Math.ceil((selected.candidate.height + 2 * CROP_PADDING_POINTS) * scale))
+      const x = Math.max(0, Math.floor((selected.x - CROP_PADDING_POINTS) * scale))
+      const y = Math.max(0, Math.floor((selected.y - CROP_PADDING_POINTS) * scale))
+      const width = Math.max(1, Math.ceil((selected.width + 2 * CROP_PADDING_POINTS) * scale))
+      const height = Math.max(1, Math.ceil((selected.height + 2 * CROP_PADDING_POINTS) * scale))
       const outputPrefix = path.join(tempDir, `crop-${index + 1}`)
       execFileSyncImpl(
         pdftocairoPath,

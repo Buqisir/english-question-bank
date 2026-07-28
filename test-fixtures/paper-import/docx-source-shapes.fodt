@@ -48,8 +48,8 @@
         <draw:frame
           draw:name="source-body-shape"
           text:anchor-type="as-char"
-          svg:width="8cm"
-          svg:height="3cm">
+          svg:width="4cm"
+          svg:height="1cm">
           <draw:text-box>
             <text:p>BODY SHAPE</text:p>
           </draw:text-box>

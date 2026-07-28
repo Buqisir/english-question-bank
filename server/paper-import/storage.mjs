@@ -216,6 +216,7 @@ function writeDocxSourceCapture(versionDir, rawDir, sourceDocx, paperId) {
         caption: figure.caption,
         sourceDocument: sourceDocx.fileName,
         sourcePage: figure.sourcePage,
+        sourcePageOrder: figure.sourcePageOrder,
         sourcePart: figure.sourcePart,
         sourceShapeId: figure.sourceShapeId,
         placeholderMarker: figure.placeholderMarker,

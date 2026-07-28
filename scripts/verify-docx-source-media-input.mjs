@@ -51,18 +51,43 @@ function findSoffice() {
 function makeEmbeddedImageDocx(tempRoot) {
   const packageDir = path.join(tempRoot, 'embedded-image-package')
   mkdirSync(path.join(packageDir, '_rels'), { recursive: true })
+  mkdirSync(path.join(packageDir, 'word', '_rels'), { recursive: true })
   mkdirSync(path.join(packageDir, 'word', 'media'), { recursive: true })
-  writeFileSync(path.join(packageDir, '[Content_Types].xml'), '<Types/>')
-  writeFileSync(path.join(packageDir, '_rels', '.rels'), '<Relationships/>')
+  writeFileSync(
+    path.join(packageDir, '[Content_Types].xml'),
+    `<?xml version="1.0" encoding="UTF-8"?>
+<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">
+ <Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>
+ <Default Extension="xml" ContentType="application/xml"/>
+ <Default Extension="png" ContentType="image/png"/>
+ <Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/>
+</Types>`,
+  )
+  writeFileSync(
+    path.join(packageDir, '_rels', '.rels'),
+    `<?xml version="1.0" encoding="UTF-8"?>
+<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+ <Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/>
+</Relationships>`,
+  )
+  writeFileSync(
+    path.join(packageDir, 'word', '_rels', 'document.xml.rels'),
+    `<?xml version="1.0" encoding="UTF-8"?>
+<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+ <Relationship Id="rIdImage1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image" Target="media/image1.png"/>
+</Relationships>`,
+  )
   writeFileSync(
     path.join(packageDir, 'word', 'document.xml'),
     `<?xml version="1.0" encoding="UTF-8"?>
 <w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"
- xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"
- xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+ xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"
+ xmlns:v="urn:schemas-microsoft-com:vml">
  <w:body>
   <w:p><w:r><w:t>Input DOCX</w:t></w:r></w:p>
-  <w:p><w:r><w:drawing><a:blip r:embed="rIdImage1"/></w:drawing></w:r></w:p>
+  <w:p><w:r><w:pict><v:shape id="legacy-image-shape" style="width:40pt;height:20pt">
+   <v:imagedata r:id="rIdImage1"/>
+  </v:shape></w:pict></w:r></w:p>
  </w:body>
 </w:document>`,
   )
@@ -144,6 +169,7 @@ try {
         sourcePart: 'word/document.xml',
         sourceShapeId: 'source-body-shape',
         sourcePage: 1,
+        sourcePageOrder: 2,
         figureId: bodyFigureId,
         groupId,
         kind: 'figure',
@@ -154,6 +180,7 @@ try {
         sourcePart: 'word/header1.xml',
         sourceShapeId: 'source-header-shape',
         sourcePage: 1,
+        sourcePageOrder: 1,
         figureId: headerFigureId,
         groupId,
         kind: 'figure',
@@ -216,6 +243,13 @@ try {
   assert.deepEqual(
     manifest.figures.map((figure) => figure.sourcePart).sort(),
     ['word/document.xml', 'word/header1.xml'],
+  )
+  assert.deepEqual(
+    Object.fromEntries(manifest.figures.map((figure) => [figure.sourcePart, figure.sourcePageOrder])),
+    {
+      'word/document.xml': 2,
+      'word/header1.xml': 1,
+    },
   )
   for (const figure of manifest.figures) {
     const figureBytes = readFileSync(path.join(figuresDir, figure.file))
