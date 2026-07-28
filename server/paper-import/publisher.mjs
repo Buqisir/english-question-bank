@@ -12,9 +12,11 @@ import {
 } from './storage.mjs'
 import {
   getReadingChoiceGroups,
+  makePaperImportIssue,
   makePublicValidationReport,
   validatePaperImportPackage,
 } from './validator.mjs'
+import { captureDocxSourceMedia } from './docxSourceMedia.mjs'
 
 const groupTypeMap = {
   reading: 'reading',
@@ -499,8 +501,30 @@ export function publishPaperImportPackage({
   paperAssetsDir,
   forceDbFailure = false,
   failurePoint = null,
+  docxSourceMediaCaptureOptions = {},
+  captureDocxSourceMediaImpl = captureDocxSourceMedia,
 }) {
   const validation = validatePaperImportPackage(files)
+  if (validation.ok && validation.packageData.sourceDocx.kind === 'docx') {
+    try {
+      validation.packageData.sourceDocx.mediaCapture = captureDocxSourceMediaImpl({
+        fileName: validation.packageData.sourceDocx.fileName,
+        buffer: validation.packageData.sourceDocx.buffer,
+        ...docxSourceMediaCaptureOptions,
+      })
+    } catch (error) {
+      validation.ok = false
+      validation.blockingIssues.push(makePaperImportIssue(
+        'blocking',
+        'docx.sourceMediaCaptureFailed',
+        `${validation.packageData.sourceDocx.fileName} 的内嵌图像/形状原料提取失败。`,
+        {
+          fileName: validation.packageData.sourceDocx.fileName,
+          suggestedFix: error instanceof Error ? error.message : String(error),
+        },
+      ))
+    }
+  }
   const publicValidation = makePublicValidationReport(validation)
   if (!validation.ok) {
     return {

@@ -127,6 +127,7 @@ assert.equal(
 
 for (const inputRegression of [
   'scripts/import-pipeline/verify-source-doc-types.mjs',
+  'scripts/verify-docx-source-media-input.mjs',
   'scripts/verify-c7-paper-import-contracts.mjs',
   'scripts/verify-i2-seven-choices-ai-import.mjs',
   'scripts/verify-i3-cloze-ai-import.mjs',
@@ -142,6 +143,7 @@ for (const inputRegression of [
 
 for (const inputModule of [
   'server/paper-import/validator.mjs',
+  'server/paper-import/docxSourceMedia.mjs',
   'server/paper-import-ai/docxSplitter.mjs',
   'server/paper-import/storage.mjs',
 ]) {

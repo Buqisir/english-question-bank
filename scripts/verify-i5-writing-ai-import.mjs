@@ -475,7 +475,23 @@ async function assertPublishPath() {
       sourceDocx: { fileName: 'i5.docx', buffer: fix.sourceBuffer },
     })
 
-    const result = publishPaperImportPackage({ files, db, paperAssetsDir })
+    const result = publishPaperImportPackage({
+      files,
+      db,
+      paperAssetsDir,
+      // This test's DOCX is a magic-byte-only packageBuilder fixture. The real
+      // ZIP/media/shape/LibreOffice path is exercised by
+      // verify-docx-source-media-input.mjs.
+      captureDocxSourceMediaImpl({ fileName, buffer }) {
+        return {
+          schemaVersion: 'docx-source-media-capture-v1',
+          sourceFileName: fileName,
+          sourceSha256: createHash('sha256').update(buffer).digest('hex'),
+          embeddedImages: [],
+          shapeCapture: null,
+        }
+      },
+    })
 
     assert('I5 publish six-family package succeeds', result.ok, JSON.stringify(result, null, 2))
     assert(

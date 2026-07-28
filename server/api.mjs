@@ -1,11 +1,8 @@
 import {
   existsSync,
   mkdirSync,
-  mkdtempSync,
   readdirSync,
   readFileSync,
-  renameSync,
-  rmSync,
   statSync,
   writeFileSync,
 } from 'node:fs'
@@ -14,8 +11,6 @@ import { randomUUID } from 'node:crypto'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { DatabaseSync } from 'node:sqlite'
-import { execFileSync } from 'node:child_process'
-import { tmpdir } from 'node:os'
 import { buildPrintHtml } from './print-renderer.mjs'
 import { createDraftPaperRoutes } from './draft-paper/draftPaperRoutes.mjs'
 import { createDraftPaperStore } from './draft-paper/draftPaperStore.mjs'

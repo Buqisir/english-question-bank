@@ -252,7 +252,13 @@ const paperNormalizationAllowedFiles = new Set([
   'shared/papersurface/blankRuling.d.mts',
   'shared/papersurface/blankRuling.d.ts',
   'shared/papersurface/blankRuling.mjs',
+  // Canonical whole-paper work uses these shared declaration/heading
+  // companions without changing the C7 import schema or renderer ownership.
+  'shared/papersurface/headingKind.mjs',
+  'shared/papersurface/tokens.d.mts',
+  'shared/papersurface/tokens.d.ts',
   'shared/papersurface/tokens.mjs',
+  'shared/papersurface/types.d.ts',
   // paper-normalization Ticket 07: the proof-only Print HTML canonical
   // consumer is the approved Phase B export boundary.
   'server/print-renderer.mjs',

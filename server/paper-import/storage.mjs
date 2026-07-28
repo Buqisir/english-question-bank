@@ -8,7 +8,7 @@ import {
   writeFileSync,
 } from 'node:fs'
 import path from 'node:path'
-import { randomUUID } from 'node:crypto'
+import { createHash, randomUUID } from 'node:crypto'
 import {
   buildPaperNormalizedGroupsSidecar,
   PAPER_NORMALIZED_GROUPS_FILE_NAME,
@@ -131,6 +131,66 @@ function writeJson(filePath, value) {
   writeFileSync(filePath, `${JSON.stringify(value, null, 2)}\n`)
 }
 
+function sha256(buffer) {
+  return createHash('sha256').update(buffer).digest('hex')
+}
+
+function writeDocxSourceCapture(rawDir, sourceDocx) {
+  const capture = sourceDocx.mediaCapture
+  if (!capture) return
+  if (capture.sourceSha256 !== sourceDocx.sha256) {
+    throw new Error('DOCX source media capture does not match the immutable source digest')
+  }
+
+  const embeddedImages = []
+  for (const image of capture.embeddedImages || []) {
+    const fileName = path.basename(String(image.fileName || ''))
+    if (!fileName || fileName !== image.fileName || !Buffer.isBuffer(image.buffer)) {
+      throw new Error('DOCX source image capture is invalid')
+    }
+    if (image.sha256 !== sha256(image.buffer)) {
+      throw new Error(`DOCX source image digest mismatch: ${fileName}`)
+    }
+    const relativePath = path.join('docx-media', fileName)
+    mkdirSync(path.dirname(path.join(rawDir, relativePath)), { recursive: true })
+    writeFileSync(path.join(rawDir, relativePath), image.buffer)
+    embeddedImages.push({
+      fileName,
+      mediaType: image.mediaType,
+      sha256: image.sha256,
+      relativePath: relativePath.split(path.sep).join('/'),
+    })
+  }
+
+  let shapeCapture = null
+  if (capture.shapeCapture) {
+    if (
+      !Buffer.isBuffer(capture.shapeCapture.buffer)
+      || capture.shapeCapture.sha256 !== sha256(capture.shapeCapture.buffer)
+    ) {
+      throw new Error('DOCX source shape capture digest mismatch')
+    }
+    writeFileSync(
+      path.join(rawDir, 'docx-shapes.pdf'),
+      capture.shapeCapture.buffer,
+    )
+    shapeCapture = {
+      fileName: 'docx-shapes.pdf',
+      mediaType: 'application/pdf',
+      sha256: capture.shapeCapture.sha256,
+      relativePath: 'docx-shapes.pdf',
+    }
+  }
+
+  writeJson(path.join(rawDir, 'docx-source-capture.json'), {
+    schemaVersion: 'docx-source-media-capture-v1',
+    sourceFileName: sourceDocx.fileName,
+    sourceSha256: sourceDocx.sha256,
+    embeddedImages,
+    shapeCapture,
+  })
+}
+
 function makeVersionedArtifacts(packageData, version) {
   const paperAsset = JSON.parse(JSON.stringify(packageData.paperAsset))
   const answerKey = JSON.parse(JSON.stringify(packageData.answerKey))
@@ -211,7 +271,9 @@ export function writePaperImportVersion({
 
   const artifacts = makeVersionedArtifacts(packageData, version)
   try {
-    writeFileSync(path.join(tempDir, 'raw', packageData.sourceDocx.fileName), packageData.sourceDocx.buffer)
+    const rawDir = path.join(tempDir, 'raw')
+    writeFileSync(path.join(rawDir, packageData.sourceDocx.fileName), packageData.sourceDocx.buffer)
+    writeDocxSourceCapture(rawDir, packageData.sourceDocx)
     writeJson(path.join(tempDir, 'paper-asset.json'), artifacts.paperAsset)
     if (forceFailureAt === 'version-write') {
       throw new Error('Forced version-write failure')

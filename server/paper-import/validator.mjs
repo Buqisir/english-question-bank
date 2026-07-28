@@ -699,6 +699,7 @@ export function validatePaperImportPackage(files, options = {}) {
       fileName: sourceDocx.fileName,
       buffer: sourceDocx.buffer,
       sha256: docxDigest,
+      kind: sourceDocx.kind,
     }
     normalized.paperAsset.paper.status = 'published'
     normalized.paperAsset.sources = {
