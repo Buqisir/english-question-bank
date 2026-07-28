@@ -433,6 +433,29 @@ function compactText(value) {
   return String(value).replaceAll(/\s/g, '')
 }
 
+function decodeXmlText(value) {
+  return String(value)
+    .replaceAll('&lt;', '<')
+    .replaceAll('&gt;', '>')
+    .replaceAll('&quot;', '"')
+    .replaceAll('&apos;', "'")
+    .replaceAll('&amp;', '&')
+}
+
+function extractDocxVisibleParagraphText(documentXml) {
+  return [...String(documentXml).matchAll(
+    /<w:p(?:\s[^>]*)?>([\s\S]*?)<\/w:p>/g,
+  )]
+    .map((paragraphMatch) =>
+      [...paragraphMatch[1].matchAll(
+        /<w:t(?:\s[^>]*)?>([\s\S]*?)<\/w:t>/g,
+      )]
+        .map((textMatch) => decodeXmlText(textMatch[1]))
+        .join(''))
+    .filter(Boolean)
+    .join('\n')
+}
+
 function assertNck1WritingHeadingCounts(renderedText, label) {
   const compact = compactText(renderedText)
   for (const heading of Object.values(nck1WritingChrome)) {
@@ -887,6 +910,11 @@ for (const { label, consumption, canonical } of cases) {
         packagedXml,
         canonical,
         `packaged DOCX OOXML ${label}/${versionType}`,
+      )
+      assertCanonicalWritingChromeTextLines(
+        extractDocxVisibleParagraphText(packagedXml),
+        canonical,
+        `packaged DOCX OOXML visible text ${label}/${versionType}`,
       )
       assert.equal(packagedXml, xml)
       docxRenderer.convertDocxToPdf(docxPath, pdfPath)
