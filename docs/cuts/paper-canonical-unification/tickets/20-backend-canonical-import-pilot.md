@@ -77,3 +77,17 @@ Consumption Plan and has no canonical-required Reading/Writing raw fallback;
 flattened table markers are never promoted to native table authority. The
 non-blocking repeated-switch smell was not refactored. No owner QA or Ticket 21
 action was taken.
+
+Legacy-selection focused fix commit:
+`10520c3b76512409b9421a39522eff437f6b702d`.
+Legacy-selection verify: the canonical import focused-fix public seam,
+PaperBrowse 198/198, Seven Choices and Cloze/Grammar rendered-consumption
+regressions, app `tsc -b`/build, `git diff --check`, and
+`pnpm -C app run verify:all` 114 PASS / 1 declared SKIP / 0 FAIL.
+Legacy-selection notes: checked-in Screen v12 still authorizes whole-family
+legacy selection for Reading, Application Writing, and Continuation Writing.
+PaperBrowse now renders those explicit `selection.mode=legacy` families while
+canonical mode still rejects missing projection/raw fallback and the public
+page boundary still rejects Plan-external Groups. The non-blocking duplicated
+test helper and prior Repeated Switches smell were not refactored. No owner QA
+or Ticket 21 action was taken.
