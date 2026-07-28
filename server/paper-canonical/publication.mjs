@@ -592,7 +592,7 @@ function candidateStore(sealed, ref) {
   }
 }
 
-function validateCanonicalOnlyConsumers({ sealed, ref, store }) {
+export function loadCanonicalOnlyConsumers({ ref, store }) {
   const consumers = {}
   for (const [consumerId, consumerContract] of Object.entries(
     consumerContractRefs,
@@ -669,8 +669,7 @@ export function admitCanonicalPaperImport({
       sourceAssetVersion,
       publicationDigest: sealed.manifest.publicationDigest,
     }
-    const consumers = validateCanonicalOnlyConsumers({
-      sealed,
+    const consumers = loadCanonicalOnlyConsumers({
       ref,
       store: candidateStore(sealed, ref),
     })
@@ -715,8 +714,7 @@ export function publishCanonicalPaperPublication({
       sourceAssetVersion,
       publicationDigest: sealed.manifest.publicationDigest,
     }
-    const consumers = validateCanonicalOnlyConsumers({
-      sealed,
+    const consumers = loadCanonicalOnlyConsumers({
       ref,
       store: createFileSystemCanonicalPublicationStore({ rootDir, db }),
     })
@@ -777,8 +775,7 @@ export function publishCanonicalPaperPublication({
       sourceAssetVersion,
       publicationDigest: sealed.manifest.publicationDigest,
     }
-    const consumers = validateCanonicalOnlyConsumers({
-      sealed,
+    const consumers = loadCanonicalOnlyConsumers({
       ref,
       store: createFileSystemCanonicalPublicationStore({ rootDir, db }),
     })

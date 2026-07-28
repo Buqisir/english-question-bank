@@ -1,6 +1,6 @@
 // I5 writing AI import verifier
 import { createHash } from 'node:crypto'
-import { mkdirSync, mkdtempSync, rmSync, readFileSync, existsSync } from 'node:fs'
+import { mkdirSync, mkdtempSync, readdirSync, rmSync, readFileSync, existsSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -9,28 +9,12 @@ import { buildSupportedMarkerSequence } from './paper-normalization-test-helpers
 import { parseReadingCandidatesFromText, parseReadingDocxBuffer } from '../server/paper-import-ai/docxSplitter.mjs'
 import { buildPaperImportAiPackageFiles } from '../server/paper-import-ai/packageBuilder.mjs'
 import { validatePaperImportPackage } from '../server/paper-import/validator.mjs'
-import { publishPaperImportPackage as publishPaperImportPackageRaw } from '../server/paper-import/publisher.mjs'
-import { makeCanonicalImportAdmissionRequest } from '../test-fixtures/paper-canonical/foundationFixture.mjs'
+import { publishPaperImportPackage } from '../server/paper-import/publisher.mjs'
 import { DatabaseSync } from 'node:sqlite'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const repoRoot = path.resolve(__dirname, '..')
 let passed = 0
-
-function publishPaperImportPackage(args) {
-  const filesByName = Object.fromEntries(
-    args.files.map((file) => [file.fileName, file.buffer]),
-  )
-  const paperAsset = JSON.parse(filesByName['paper-asset.json'].toString('utf8'))
-  return publishPaperImportPackageRaw({
-    ...args,
-    canonicalRequest: makeCanonicalImportAdmissionRequest({
-      paperId: paperAsset.paper.paperId,
-      paperAssetBytes: filesByName['paper-asset.json'],
-      answerKeyBytes: filesByName['answer-key.json'],
-    }),
-  })
-}
 
 function assert(name, condition, detail = '') {
   if (!condition) throw new Error(`${name}${detail ? `\n${detail}` : ''}`)
@@ -509,16 +493,18 @@ async function assertPublishPath() {
       },
     })
 
-    assert('I5 publish six-family package succeeds', result.ok, JSON.stringify(result, null, 2))
     assert(
-      'I5 writing groups persisted at group_type writing',
-      db.prepare("SELECT COUNT(*) AS count FROM question_groups WHERE group_type = 'writing'").get().count === 2,
+      'I5 partial package is blocked by canonical admission',
+      result.status === 'canonical_admission_failed',
+      JSON.stringify(result, null, 2),
     )
-    const writingLinks = (result.publish?.qaLinks ?? []).filter(l => !l.latestHref.includes('questionId='))
-    assert('I5 publish produces 2 writing QA links without questionId', writingLinks.length === 2)
     assert(
-      'I5 writing QA links reference paper asset',
-      writingLinks.every(l => l.latestHref.includes('source=paper-asset')),
+      'I5 blocked package persists no writing groups',
+      db.prepare("SELECT COUNT(*) AS count FROM question_groups WHERE group_type = 'writing'").get().count === 0,
+    )
+    assert(
+      'I5 blocked package writes no asset tree',
+      readdirSync(paperAssetsDir).length === 0,
     )
   } finally {
     db.close()

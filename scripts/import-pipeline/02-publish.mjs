@@ -22,6 +22,7 @@ import { analyzeReadingImportCandidate } from '../../server/paper-import-ai/anal
 import { analyzeSevenChoicesImportCandidate } from '../../server/paper-import-ai/analyzeSevenChoices.mjs'
 import { analyzeClozeImportCandidate } from '../../server/paper-import-ai/analyzeCloze.mjs'
 import { analyzeGrammarFillImportCandidate } from '../../server/paper-import-ai/analyzeGrammarFill.mjs'
+import { loadCanonicalImportRequest } from '../../server/paper-canonical/importRequest.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const projectRoot = path.resolve(__dirname, '../..')
@@ -37,6 +38,10 @@ if (!configPath) {
 
 const config = JSON.parse(readFileSync(configPath, 'utf8'))
 const { paperId, provenance } = config
+const canonicalRequestPath =
+  typeof config.canonicalRequestPath === 'string'
+    ? path.resolve(path.dirname(configPath), config.canonicalRequestPath)
+    : null
 // Relative docxPath resolves against the config file's directory, so the
 // same committed config works on any machine (laptop / prod server).
 const docxPath = path.isAbsolute(config.docxPath)
@@ -248,6 +253,17 @@ if (doPublish) {
     console.error('\nCannot publish: validation errors present')
     process.exit(1)
   }
+  if (!canonicalRequestPath) {
+    console.error('\nCannot publish: config.canonicalRequestPath is required for canonical admission')
+    process.exit(1)
+  }
+  let canonicalRequest
+  try {
+    canonicalRequest = loadCanonicalImportRequest(canonicalRequestPath)
+  } catch (error) {
+    console.error(`\nCannot publish: ${error.code || 'CANONICAL_IMPORT_REQUEST_INVALID'}: ${error.message}`)
+    process.exit(1)
+  }
 
   console.log('\n[Publish] Publishing to DB...')
   const { DatabaseSync } = await import('node:sqlite')
@@ -258,7 +274,12 @@ if (doPublish) {
 
   const db = new DatabaseSync(dbPath, { readOnly: false })
   try {
-    const result = publishPaperImportPackage({ files, db, paperAssetsDir })
+    const result = publishPaperImportPackage({
+      files,
+      db,
+      paperAssetsDir,
+      canonicalRequest,
+    })
     console.log(`   status: ${result.status}`)
     if (result.publish?.paperId) console.log(`   paperId: ${result.publish.paperId}`)
     if (result.status === 'validation_failed' && result.validation) {
@@ -271,6 +292,12 @@ if (doPublish) {
         console.error(`\n   blockingIssues (${blockingIssues.length}):`)
         blockingIssues.forEach((issue) => console.error(`     - [${issue.code}] ${issue.message}`))
       }
+    }
+    if (result.status === 'canonical_admission_failed') {
+      for (const diagnostic of result.canonicalAdmission?.diagnostics || []) {
+        console.error(`   [${diagnostic.code}] ${diagnostic.message}`)
+      }
+      process.exitCode = 1
     }
   } finally {
     db.close()

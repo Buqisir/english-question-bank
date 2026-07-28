@@ -1,4 +1,4 @@
-import { randomUUID } from 'node:crypto'
+import { createHash, randomUUID } from 'node:crypto'
 import { readFileSync } from 'node:fs'
 import path from 'node:path'
 import {
@@ -18,11 +18,10 @@ import {
   validatePaperImportPackage,
 } from './validator.mjs'
 import { captureDocxSourceMedia } from './docxSourceMedia.mjs'
-import { consumerContractRefs } from '../../shared/paper-canonical/consumers.mjs'
 import {
   admitCanonicalPaperImport,
   createFileSystemCanonicalPublicationStore,
-  loadPaperForConsumptionSync,
+  loadCanonicalOnlyConsumers,
   recordCanonicalPublicationCurrent,
 } from '../paper-canonical/publication.mjs'
 
@@ -517,33 +516,115 @@ function canonicalAdmissionFailure(admission) {
   }
 }
 
-function loadCanonicalConsumers({ paperId, versionName, store }) {
-  const consumers = {}
-  for (const [consumerId, consumerContract] of Object.entries(
-    consumerContractRefs,
-  )) {
-    const consumption = loadPaperForConsumptionSync({
-      paperId,
-      version: versionName,
-      consumerContract,
-    }, store)
+function bytesSha256(bytes) {
+  return `sha256:${createHash('sha256').update(bytes).digest('hex')}`
+}
+
+function importedFamily(group, paperAsset) {
+  if (group.groupType === 'reading') return 'reading'
+  if (group.groupType === 'sevenChoices') return 'seven-choices'
+  if (group.groupType === 'cloze') return 'cloze'
+  if (group.groupType === 'grammarFill') return 'grammar-fill'
+  if (group.groupType === 'listening') return 'inactive-listening'
+  if (group.groupType !== 'writing') return null
+  const task = paperAsset.content.writingTasks?.[group.writingTaskId]
+  if (task?.taskType === 'application') return 'application-writing'
+  if (task?.taskType === 'continuation') return 'continuation-writing'
+  return null
+}
+
+function validateCanonicalImportPackageBinding({
+  admission,
+  packageData,
+  paperAssetBytes,
+  answerKeyBytes,
+}) {
+  const captureDocuments = admission.compilation.artifacts.sourceCapture.documents
+  for (const [inputKey, bytes] of [
+    ['paper_asset', paperAssetBytes],
+    ['official_answers', answerKeyBytes],
+  ]) {
+    const digest = Buffer.isBuffer(bytes) ? bytesSha256(bytes) : null
     if (
-      consumption.disposition !== 'ready'
-      || consumption.selections.length === 0
-      || consumption.selections.some((selection) => selection.mode !== 'canonical')
-    ) {
-      const error = new Error(
-        `${consumerId} rejected the complete canonical Publication`,
+      !digest
+      || !captureDocuments.some(
+        (document) =>
+          document.inputKey === inputKey && document.sha256 === digest,
       )
-      error.code =
-        consumption.diagnostics?.[0]?.code
-        || 'CANONICAL_IMPORT_CONSUMER_UNAVAILABLE'
-      error.diagnostics = consumption.diagnostics || []
-      throw error
+    ) {
+      return {
+        disposition: 'unsupported',
+        diagnostics: [{
+          code: 'CANONICAL_IMPORT_SOURCE_PACKAGE_UNBOUND',
+          message: `Canonical Source Capture does not bind the exact ${inputKey} import file`,
+        }],
+      }
     }
-    consumers[consumerId] = consumption
   }
-  return consumers
+
+  const paperAsset = packageData.paperAsset
+  const importedGroups = Object.values(paperAsset.content.groups)
+  const activeImportedGroups = importedGroups.filter(
+    (group) => group.groupType !== 'listening',
+  )
+  const canonicalGroups =
+    admission.compilation.artifacts.canonicalPaper.questionGroups
+  const canonicalById = new Map(
+    canonicalGroups.map((group) => [group.identity.groupId, group]),
+  )
+  if (
+    canonicalGroups.length !== activeImportedGroups.length
+    || canonicalById.size !== activeImportedGroups.length
+  ) {
+    return {
+      disposition: 'unsupported',
+      diagnostics: [{
+        code: 'CANONICAL_IMPORT_GROUP_SET_MISMATCH',
+        message: 'Canonical and imported active Question Group sets differ',
+      }],
+    }
+  }
+  for (const importedGroup of activeImportedGroups) {
+    const canonicalGroup = canonicalById.get(importedGroup.groupId)
+    const family = importedFamily(importedGroup, paperAsset)
+    const canonicalQuestionIds =
+      canonicalGroup?.questionRefs?.map(({ questionId }) => questionId) || []
+    if (
+      !canonicalGroup
+      || !family
+      || canonicalGroup.contractRef.familyContractId !== family
+      || JSON.stringify(canonicalQuestionIds)
+        !== JSON.stringify(importedGroup.questionIds || [])
+    ) {
+      return {
+        disposition: 'unsupported',
+        diagnostics: [{
+          code: 'CANONICAL_IMPORT_GROUP_BINDING_MISMATCH',
+          message: `Canonical Group does not close the imported identity and question order for ${importedGroup.groupId}`,
+        }],
+      }
+    }
+  }
+
+  const importedListeningQuestionIds = new Set(
+    importedGroups
+      .filter((group) => group.groupType === 'listening')
+      .flatMap((group) => group.questionIds || []),
+  )
+  const inactiveQuestionCount =
+    admission.compilation.artifacts.normalizationReport
+      .inactiveSourceClosures
+      ?.reduce((total, closure) => total + closure.questionCount, 0) || 0
+  if (inactiveQuestionCount !== importedListeningQuestionIds.size) {
+    return {
+      disposition: 'unsupported',
+      diagnostics: [{
+        code: 'CANONICAL_IMPORT_INACTIVE_BINDING_MISMATCH',
+        message: 'Canonical inactive closures do not cover the imported listening question count',
+      }],
+    }
+  }
+  return null
 }
 
 function stagedCanonicalStore({ versionDir, ref }) {
@@ -616,6 +697,9 @@ export function publishPaperImportPackage({
   const sourceAssetFile = files.find(
     (file) => file.fileName === 'paper-asset.json' && Buffer.isBuffer(file.buffer),
   )
+  const answerKeyFile = files.find(
+    (file) => file.fileName === 'answer-key.json' && Buffer.isBuffer(file.buffer),
+  )
   let admission = admitCanonicalPaperImport({
     request: canonicalRequest,
     sourceAssetVersion: version,
@@ -631,6 +715,13 @@ export function publishPaperImportPackage({
       }],
     })
   }
+  const bindingFailure = validateCanonicalImportPackageBinding({
+    admission,
+    packageData: validation.packageData,
+    paperAssetBytes: sourceAssetFile?.buffer,
+    answerKeyBytes: answerKeyFile?.buffer,
+  })
+  if (bindingFailure) return canonicalAdmissionFailure(bindingFailure)
 
   recoverInterruptedPaperImportPublish({ db, paperAssetsDir, paperId })
   cleanupPaperImportTempArtifacts(paperAssetsDir)
@@ -687,9 +778,8 @@ export function publishPaperImportPackage({
       sourceAssetVersion: version,
       publicationDigest: admission.sealed.manifest.publicationDigest,
     }
-    loadCanonicalConsumers({
-      paperId,
-      versionName: writtenVersion.versionName,
+    loadCanonicalOnlyConsumers({
+      ref: canonicalRef,
       store: stagedCanonicalStore({
         versionDir: writtenVersion.versionDir,
         ref: canonicalRef,
@@ -737,9 +827,13 @@ export function publishPaperImportPackage({
       // A stale previous-latest directory is safe and is removed on the next run.
     }
 
-    const consumers = loadCanonicalConsumers({
-      paperId,
-      versionName: writtenVersion.versionName,
+    if (failurePoint === 'committed-reload') {
+      const error = new Error('Forced committed canonical reload failure')
+      error.code = 'CANONICAL_PUBLICATION_FORCED_RELOAD_FAILURE'
+      throw error
+    }
+    const consumers = loadCanonicalOnlyConsumers({
+      ref: canonicalRef,
       store: createFileSystemCanonicalPublicationStore({
         rootDir: paperAssetsDir,
         db,
@@ -772,7 +866,7 @@ export function publishPaperImportPackage({
         // Preserve the original publish failure.
       }
     }
-    if (writtenVersion) {
+    if (writtenVersion && !dbCommitted) {
       removePaperImportVersion({ paperAssetsDir, paperId, versionName: writtenVersion.versionName })
       if (error?.code?.startsWith('CANONICAL_')) {
         return canonicalAdmissionFailure({

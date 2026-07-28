@@ -18,6 +18,7 @@ import { createServer } from '../app/node_modules/vite/dist/node/index.js'
 
 import { resolveGroupFigures } from '../server/figures/paperFigures.mjs'
 import { parseReadingDocxBuffer } from '../server/paper-import-ai/docxSplitter.mjs'
+import { captureDocxSourceMedia } from '../server/paper-import/docxSourceMedia.mjs'
 import { publishPaperImportPackage as publishPaperImportPackageRaw } from '../server/paper-import/publisher.mjs'
 import { buildPrintHtml } from '../server/print-renderer.mjs'
 import {
@@ -44,16 +45,21 @@ const visualIdentityByFigureId = {
 const requireFromApp = createRequire(new URL('../app/package.json', import.meta.url))
 
 function publishPaperImportPackage(args) {
+  const { sourceMediaCapture = null, ...publisherArgs } = args
   const filesByName = Object.fromEntries(
-    args.files.map((file) => [file.fileName, file.buffer]),
+    publisherArgs.files.map((file) => [file.fileName, file.buffer]),
   )
   return publishPaperImportPackageRaw({
-    ...args,
+    ...publisherArgs,
     canonicalRequest: makeCanonicalImportAdmissionRequest({
       paperId,
       paperAssetBytes: filesByName['paper-asset.json'],
       answerKeyBytes: filesByName['answer-key.json'],
+      sourceMediaCapture,
     }),
+    ...(sourceMediaCapture
+      ? { captureDocxSourceMediaImpl: () => sourceMediaCapture }
+      : {}),
   })
 }
 
@@ -294,6 +300,11 @@ try {
   })
   assert.equal(validation.ok, true, JSON.stringify(validation.blockingIssues))
   assert.equal(validation.packageData.sourceDocx.mediaCapture, undefined)
+  const sourceMediaCapture = captureDocxSourceMedia({
+    fileName: validation.packageData.sourceDocx.fileName,
+    buffer: validation.packageData.sourceDocx.buffer,
+    paperAsset: validation.packageData.paperAsset,
+  })
 
   const assetsDir = path.join(tempRoot, 'paper-assets')
   const db = openPaperImportDb(path.join(tempRoot, 'question-bank.sqlite'))
@@ -301,9 +312,10 @@ try {
     files: shapeFixture.files,
     db,
     paperAssetsDir: assetsDir,
+    sourceMediaCapture,
   })
   db.close()
-  assert.equal(published.ok, true, JSON.stringify(published.validation))
+  assert.equal(published.ok, true, JSON.stringify(published))
   assert.equal(published.publish.paperId, paperId)
 
   const versionDir = path.join(assetsDir, paperId, 'versions', 'v1')

@@ -1,11 +1,20 @@
 #!/usr/bin/env node
 import assert from 'node:assert/strict'
-import { existsSync, mkdtempSync, readdirSync, readFileSync, rmSync } from 'node:fs'
+import {
+  existsSync,
+  mkdirSync,
+  mkdtempSync,
+  readdirSync,
+  readFileSync,
+  rmSync,
+  writeFileSync,
+} from 'node:fs'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { DatabaseSync } from 'node:sqlite'
 
 import { publishCanonicalPaperPublication } from '../server/paper-canonical/publication.mjs'
+import { loadCanonicalImportRequest } from '../server/paper-canonical/importRequest.mjs'
 import { publishPaperImportPackage } from '../server/paper-import/publisher.mjs'
 import { readImportPackageFromDirectory } from '../server/paper-import/validator.mjs'
 import {
@@ -43,6 +52,28 @@ function snapshotDatabase(db) {
     sql,
     rows: db.prepare(`SELECT * FROM "${name.replaceAll('"', '""')}"`).all(),
   }))
+}
+
+function writeRequestEnvelope(rootDir, request) {
+  mkdirSync(rootDir, { recursive: true })
+  const documents = request.evidence.documents.map((document, index) => {
+    const fileName = `evidence-${index + 1}.bin`
+    writeFileSync(path.join(rootDir, fileName), document.bytes)
+    const { bytes: _bytes, ...descriptor } = document
+    return { ...descriptor, path: fileName }
+  })
+  const requestPath = path.join(rootDir, 'canonical-import-request.json')
+  writeFileSync(
+    requestPath,
+    `${JSON.stringify({
+      ...request,
+      evidence: {
+        ...request.evidence,
+        documents,
+      },
+    }, null, 2)}\n`,
+  )
+  return requestPath
 }
 
 function mutateFixture(mutator) {
@@ -116,6 +147,17 @@ try {
   }
 
   const ready = makeReadyCanonicalFixture()
+  const readyRequestPath = writeRequestEnvelope(
+    path.join(rootDir, 'operator-request'),
+    ready.request,
+  )
+  const operatorRequest = loadCanonicalImportRequest(readyRequestPath)
+  assert.deepEqual(
+    operatorRequest.evidence.documents.map((document) =>
+      Buffer.from(document.bytes).toString('base64')),
+    ready.request.evidence.documents.map((document) =>
+      Buffer.from(document.bytes).toString('base64')),
+  )
   const staleAuthority = makeReadyCanonicalFixture()
   staleAuthority.request.authority = {
     ...staleAuthority.request.authority,
@@ -161,7 +203,7 @@ try {
   const published = publishCanonicalPaperPublication({
     rootDir: publicationRoot,
     db,
-    request: ready.request,
+    request: operatorRequest,
     sourceAssetVersion: 1,
     sourceAsset: ready.sourceAsset,
   })
@@ -213,23 +255,6 @@ try {
       paperAssetBytes: filesByName['paper-asset.json'],
       answerKeyBytes: filesByName['answer-key.json'],
     })
-    const beforeCorruptTree = snapshotTree(importRoot)
-    const beforeCorruptDb = snapshotDatabase(importDb)
-    const corruptStage = publishPaperImportPackage({
-      files,
-      db: importDb,
-      paperAssetsDir: importRoot,
-      canonicalRequest,
-      failurePoint: 'canonical-stage-corrupt',
-    })
-    assert.equal(corruptStage.status, 'canonical_admission_failed')
-    assert.equal(
-      corruptStage.canonicalAdmission.diagnostics[0].code,
-      'CANONICAL_PUBLICATION_ARTIFACT_DIGEST_INVALID',
-    )
-    assert.deepEqual(snapshotTree(importRoot), beforeCorruptTree)
-    assert.deepEqual(snapshotDatabase(importDb), beforeCorruptDb)
-
     const admitted = publishPaperImportPackage({
       files,
       db: importDb,
@@ -252,6 +277,63 @@ try {
     assert.equal(
       Object.values(admitted.publish.consumers).every((consumption) =>
         consumption.selections.every((selection) => selection.mode === 'canonical')),
+      true,
+    )
+    const activeImportedGroupIds = JSON.parse(
+      filesByName['paper-asset.json'].toString('utf8'),
+    ).content.groups
+    const expectedCanonicalGroupIds = Object.values(activeImportedGroupIds)
+      .filter((group) => group.groupType !== 'listening')
+      .map((group) => group.groupId)
+      .sort()
+    assert.deepEqual(
+      admitted.publish.consumers.screen.selections
+        .flatMap((selection) => selection.groupIds)
+        .sort(),
+      expectedCanonicalGroupIds,
+    )
+
+    const beforeCorruptTree = snapshotTree(importRoot)
+    const beforeCorruptDb = snapshotDatabase(importDb)
+    const corruptStage = publishPaperImportPackage({
+      files,
+      db: importDb,
+      paperAssetsDir: importRoot,
+      canonicalRequest,
+      failurePoint: 'canonical-stage-corrupt',
+    })
+    assert.equal(corruptStage.status, 'canonical_admission_failed')
+    assert.equal(
+      corruptStage.canonicalAdmission.diagnostics[0].code,
+      'CANONICAL_PUBLICATION_ARTIFACT_DIGEST_INVALID',
+    )
+    assert.deepEqual(snapshotTree(importRoot), beforeCorruptTree)
+    assert.deepEqual(snapshotDatabase(importDb), beforeCorruptDb)
+
+    assert.throws(
+      () => publishPaperImportPackage({
+        files,
+        db: importDb,
+        paperAssetsDir: importRoot,
+        canonicalRequest,
+        failurePoint: 'committed-reload',
+      }),
+      (error) =>
+        error?.code === 'CANONICAL_PUBLICATION_FORCED_RELOAD_FAILURE',
+    )
+    const committedRef = importDb.prepare(
+      'SELECT version_name FROM canonical_paper_publications WHERE paper_id = ? AND is_current = 1',
+    ).get('paper-2024-jslk-english')
+    assert.equal(committedRef.version_name, 'v2')
+    assert.equal(
+      existsSync(path.join(
+        importRoot,
+        'paper-2024-jslk-english',
+        'versions',
+        'v2',
+        'canonical',
+        'canonical-paper-publication-v12.json',
+      )),
       true,
     )
   } finally {

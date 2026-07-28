@@ -430,13 +430,331 @@ export function makeCanonicalImportAdmissionRequest({
   paperId,
   paperAssetBytes,
   answerKeyBytes,
+  sourceMediaCapture = null,
 }) {
   const fixture = makeReadyCanonicalFixture()
-  fixture.source.paperId = paperId
+  const paperAsset = JSON.parse(new TextDecoder().decode(paperAssetBytes))
+  const answerKey = JSON.parse(new TextDecoder().decode(answerKeyBytes))
+  if (paperAsset.paper?.paperId !== paperId || answerKey.paperId !== paperId) {
+    throw new Error('Synthetic canonical import fixture requires one paper identity')
+  }
+  const importedGroups = Object.values(paperAsset.content?.groups || {})
+  const readingGroups = importedGroups.filter(
+    (group) => group.groupType === 'reading',
+  )
+  const writingGroups = importedGroups.filter(
+    (group) => group.groupType === 'writing',
+  )
+  const writingGroup = (taskType) => writingGroups.find(
+    (group) =>
+      paperAsset.content.writingTasks?.[group.writingTaskId]?.taskType
+        === taskType,
+  )
+  const importedBySlot = new Map([
+    ...readingGroups.map((group, index) => [`reading.${'abcd'[index]}`, group]),
+    ['reading.seven-choices', importedGroups.find((group) => group.groupType === 'sevenChoices')],
+    ['language.cloze', importedGroups.find((group) => group.groupType === 'cloze')],
+    ['language.grammar-fill', importedGroups.find((group) => group.groupType === 'grammarFill')],
+    ['writing.application', writingGroup('application')],
+    ['writing.continuation', writingGroup('continuation')],
+  ])
+  const replacements = new Map([
+    [fixture.source.paperId, paperId],
+  ])
+  for (const sourceGroup of fixture.source.groups) {
+    const importedGroup = importedBySlot.get(sourceGroup.slotId)
+    if (!importedGroup) {
+      throw new Error(`Synthetic canonical import fixture lacks ${sourceGroup.slotId}`)
+    }
+    if (sourceGroup.questionIds.length !== importedGroup.questionIds.length) {
+      throw new Error(
+        `Synthetic canonical import fixture cardinality differs for ${sourceGroup.slotId}`,
+      )
+    }
+    replacements.set(sourceGroup.groupId, importedGroup.groupId)
+    sourceGroup.questionIds.forEach((questionId, index) => {
+      replacements.set(questionId, importedGroup.questionIds[index])
+    })
+    if ((sourceGroup.blankIds || []).length !== (importedGroup.blankIds || []).length) {
+      throw new Error(
+        `Synthetic canonical import fixture blank cardinality differs for ${sourceGroup.slotId}`,
+      )
+    }
+    sourceGroup.blankIds?.forEach((blankId, index) => {
+      replacements.set(blankId, importedGroup.blankIds[index])
+    })
+    if (importedGroup.writingTaskId) {
+      replacements.set(
+        `writing-task:${sourceGroup.groupId}`,
+        importedGroup.writingTaskId,
+      )
+    }
+  }
+  const replacementEntries = [...replacements.entries()].sort(
+    ([left], [right]) => right.length - left.length,
+  )
+  let sourceText = JSON.stringify(fixture.source)
+  for (const [before, after] of replacementEntries) {
+    sourceText = sourceText.replaceAll(before, after)
+  }
+  fixture.source = JSON.parse(sourceText)
+  for (const closure of fixture.source.inactiveSourceClosures) {
+    const { closureDigest: _closureDigest, ...closureBase } = closure
+    closure.closureDigest = digestJson(closureBase)
+  }
+  const officialAnswers = {
+    ...(paperAsset.answerKey?.answers || {}),
+    ...(answerKey.answers || {}),
+  }
+  const importedById = new Map(
+    importedGroups.map((group) => [group.groupId, group]),
+  )
+  const capturedFigures = new Map(
+    (sourceMediaCapture?.shapeCapture?.figures || []).map((figure) => [
+      figure.figureId,
+      figure,
+    ]),
+  )
+  const mediaEvidenceDocuments = []
+  const textContent = (nodeId, text) => [{
+    kind: 'text',
+    nodeId,
+    text: String(text || ''),
+  }]
+  const optionContent = (groupId, questionId, optionValue) => ({
+    optionId: `option:${questionId}:${optionValue.label}`,
+    label: optionValue.label,
+    content: textContent(
+      `text:${groupId}:${questionId}:option:${optionValue.label}`,
+      optionValue.text,
+    ),
+  })
+  const contentWithBlankMarkers = (importedGroup, markerPattern) => {
+    const blankIdByNumber = new Map(
+      importedGroup.questionIds.map((questionId, index) => [
+        String(paperAsset.content.questions[questionId]?.questionNo),
+        importedGroup.blankIds[index],
+      ]),
+    )
+    return {
+      blocks: (importedGroup.passage?.paragraphs || []).map((paragraph) => {
+        const inlines = []
+        let cursor = 0
+        let match
+        while ((match = markerPattern.exec(paragraph.text)) !== null) {
+          if (match.index > cursor) {
+            inlines.push({
+              kind: 'text',
+              nodeId: `text:${paragraph.paragraphId}:${cursor}`,
+              text: paragraph.text.slice(cursor, match.index),
+            })
+          }
+          const blankId = blankIdByNumber.get(match[1])
+          if (blankId) {
+            inlines.push({
+              kind: 'blank_ref',
+              nodeId: `blank-ref:${blankId}`,
+              blankId,
+            })
+          } else {
+            inlines.push({
+              kind: 'text',
+              nodeId: `text:${paragraph.paragraphId}:${match.index}`,
+              text: match[0],
+            })
+          }
+          cursor = match.index + match[0].length
+        }
+        if (cursor < paragraph.text.length) {
+          inlines.push({
+            kind: 'text',
+            nodeId: `text:${paragraph.paragraphId}:${cursor}`,
+            text: paragraph.text.slice(cursor),
+          })
+        }
+        return {
+          kind: 'paragraph',
+          nodeId: paragraph.paragraphId,
+          inlines,
+        }
+      }),
+    }
+  }
+  for (const sourceGroup of fixture.source.groups) {
+    const importedGroup = importedById.get(sourceGroup.groupId)
+    if (!importedGroup) continue
+    const paragraphs = importedGroup.passage?.paragraphs || []
+    if (sourceGroup.family === 'reading') {
+      sourceGroup.media = []
+      sourceGroup.sourceSpanRefsByTarget = {}
+      sourceGroup.content = {
+        blocks: paragraphs.map((paragraph) => {
+          const marker = paragraph.text.match(/^\[图:\s*([^\]]+)\]/)
+          const figure = marker ? capturedFigures.get(marker[1]) : null
+          if (!figure) {
+            return {
+              kind: 'paragraph',
+              nodeId: paragraph.paragraphId,
+              inlines: textContent(
+                `text:${paragraph.paragraphId}`,
+                paragraph.text,
+              ),
+            }
+          }
+          const mediaId = `media:${figure.figureId}`
+          const mediaDigest = sha256(figure.buffer)
+          const artifactId =
+            `source-document:${digestJson({ sha256: mediaDigest }).slice('sha256:'.length, 28)}`
+          const inputKey = `source_media_${mediaEvidenceDocuments.length + 1}`
+          const observationId = `observation:${mediaId}`
+          sourceGroup.media.push({
+            mediaId,
+            mimeType: 'image/png',
+            sha256: mediaDigest,
+            pixelWidth: figure.pixelWidth,
+            pixelHeight: figure.pixelHeight,
+            sourceArtifactRef: { artifactId },
+          })
+          sourceGroup.sourceSpanRefsByTarget[`media:${mediaId}`] = [
+            `source-span:${observationId}`,
+          ]
+          fixture.source.observations.push({
+            observationId,
+            kind: 'source_figure',
+            documentInputKey: inputKey,
+            value: {
+              mediaId,
+              sha256: mediaDigest,
+              pixelWidth: figure.pixelWidth,
+              pixelHeight: figure.pixelHeight,
+            },
+            span: { start: 0, end: figure.buffer.byteLength },
+          })
+          mediaEvidenceDocuments.push({
+            inputKey,
+            roles: ['source_media'],
+            bytes: new Uint8Array(figure.buffer),
+            declared: {
+              mediaType: 'image/png',
+              originalName: figure.fileName,
+            },
+          })
+          return {
+            kind: 'figure',
+            nodeId: `figure:${figure.figureId}`,
+            mediaId,
+            caption: textContent(
+              `text:${figure.figureId}:caption`,
+              figure.caption,
+            ),
+          }
+        }),
+      }
+      sourceGroup.variant.questions = importedGroup.questionIds.map(
+        (questionId) => {
+          const question = paperAsset.content.questions[questionId]
+          const answer = officialAnswers[questionId]?.answer || 'A'
+          return {
+            questionId,
+            stem: textContent(`text:${questionId}:stem`, question?.stem),
+            correctOptionId: `option:${questionId}:${answer}`,
+          }
+        },
+      )
+      sourceGroup.variant.choiceOwnership = {
+        ownership: 'per_question',
+        sets: importedGroup.questionIds.map((questionId) => ({
+          questionId,
+          options: (paperAsset.content.questions[questionId]?.options || [])
+            .map((optionValue) =>
+              optionContent(sourceGroup.groupId, questionId, optionValue)),
+        })),
+      }
+    } else if (sourceGroup.family === 'seven-choices') {
+      const numbers = importedGroup.questionIds.map(
+        (questionId) => paperAsset.content.questions[questionId]?.questionNo,
+      )
+      sourceGroup.content = contentWithBlankMarkers(
+        importedGroup,
+        new RegExp(`(?<!\\\\d)(${numbers.join('|')})(?!\\\\d)`, 'g'),
+      )
+      sourceGroup.variant.choiceOwnership = {
+        ownership: 'shared_bank',
+        bankId: `bank:${sourceGroup.groupId}`,
+        options: (importedGroup.optionBank || []).map((optionValue) => ({
+          optionId: `option:${optionValue.label}`,
+          label: optionValue.label,
+          content: textContent(
+            `text:${sourceGroup.groupId}:option:${optionValue.label}`,
+            optionValue.text,
+          ),
+        })),
+      }
+    } else if (sourceGroup.family === 'cloze') {
+      sourceGroup.content = contentWithBlankMarkers(
+        importedGroup,
+        /__(\d+)__/g,
+      )
+      sourceGroup.variant.choiceOwnership = {
+        ownership: 'per_question',
+        sets: importedGroup.questionIds.map((questionId) => ({
+          questionId,
+          options: (paperAsset.content.questions[questionId]?.options || [])
+            .map((optionValue) =>
+              optionContent(sourceGroup.groupId, questionId, optionValue)),
+        })),
+      }
+    } else if (sourceGroup.family === 'grammar-fill') {
+      sourceGroup.content = contentWithBlankMarkers(
+        importedGroup,
+        /__(\d+)__/g,
+      )
+    } else if (sourceGroup.family === 'application-writing') {
+      const task = paperAsset.content.writingTasks[importedGroup.writingTaskId]
+      const block = sourceGroup.content.blocks[0]
+      block.inlines = textContent(
+        block.inlines[0].nodeId,
+        `${task.instruction}（词数${task.wordCountTarget}左右。）`,
+      )
+      sourceGroup.variant.wordCountRuling.target = task.wordCountTarget
+    } else if (sourceGroup.family === 'continuation-writing') {
+      const task = paperAsset.content.writingTasks[importedGroup.writingTaskId]
+      const [material, ...starters] = sourceGroup.content.blocks
+      material.inlines = textContent(
+        material.inlines[0].nodeId,
+        task.materialText,
+      )
+      starters.forEach((starter, index) => {
+        starter.inlines = textContent(
+          starter.inlines[0].nodeId,
+          task.continuationStarters[index],
+        )
+      })
+      sourceGroup.variant.wordCountRuling.target = task.wordCountTarget
+    }
+  }
+  for (const assertion of fixture.source.assertions) {
+    const answer = officialAnswers[assertion.questionId]?.answer
+    if (typeof answer === 'string' && answer.length > 0) {
+      assertion.answer = answer
+    }
+  }
+  for (const group of fixture.source.groups) {
+    if (group.family !== 'reading') continue
+    for (const question of group.variant.questions) {
+      const answer = officialAnswers[question.questionId]?.answer
+      if (typeof answer === 'string' && answer.length > 0) {
+        question.correctOptionId = `option:${question.questionId}:${answer}`
+      }
+    }
+  }
   for (let pass = 0; pass < 3; pass++) {
     const bytes = new TextEncoder().encode(JSON.stringify(fixture.source))
     for (const observation of fixture.source.observations) {
-      if (Object.hasOwn(observation.span, 'end')) {
+      if (
+        observation.documentInputKey === 'questions'
+        && Object.hasOwn(observation.span, 'end')
+      ) {
         observation.span.end = bytes.byteLength
       }
     }
@@ -454,6 +772,7 @@ export function makeCanonicalImportAdmissionRequest({
   instructionEvidence.bytes = new TextEncoder().encode(
     JSON.stringify(parsedInstructionEvidence),
   )
+  fixture.request.evidence.documents.push(...mediaEvidenceDocuments)
   fixture.request.evidence.documents.push({
     inputKey: 'paper_asset',
     roles: ['question_source'],
