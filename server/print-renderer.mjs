@@ -1,6 +1,7 @@
 /**
  * Print Renderer — generates semantic HTML + CSS for Vivliostyle PDF.
- * Input: same shape as exportDocx (title, versionType, printStyle, items, blocks, questionNumberStart).
+ * Input: renderer-neutral Print contract
+ * (title, versionType, printStyle, items, blocks, questionNumberStart).
  * Output: complete HTML string ready for Vivliostyle or browser print.
  *
  * 刀⑤ render-fidelity Chunk B: page margins / line-height / font stacks now
@@ -26,13 +27,13 @@
  * omits them keeps byte-identical output (no figures/manifest.json lookup
  * happens at all unless a caller opts in). Line-granular marker replacement
  * (never substring) via the shared `resolveFigureMarker` — same rule
- * `paperAssetSurfaceAdapter.ts` and `docxRenderer.mjs` enforce, so the three
- * surfaces can never drift on which unit counts as "this line IS a figure".
+ * `paperAssetSurfaceAdapter.ts` enforces, so Screen and Print/PDF cannot
+ * drift on which unit counts as "this line IS a figure".
  *
  * heading-fidelity cut (刀⑤ SW-B 销账, docs/cuts/heading-fidelity/plan.md):
- * `.section-header` 拆 part/section 两态 (headingKind.mjs 单源判定, shared
- * with docxRenderer.mjs) — 10.5pt 一律不放大, 部标题黑体加粗顶格 / 节标题
- * 宋体常规缩进 2 字符; h1 卷名 → 20pt (标准唯一放大项).
+ * `.section-header` 拆 part/section 两态 (headingKind.mjs 单源判定,
+ * Screen 与 Print/PDF 共用) — 10.5pt 一律不放大, 部标题黑体加粗顶格 /
+ * 节标题宋体常规缩进 2 字符; h1 卷名 → 20pt (标准唯一放大项).
  */
 
 import path from 'node:path'
@@ -352,7 +353,7 @@ function figureImageSrc({ paperAssetsDir, baseDir, file }, imageMode, images) {
 }
 
 /**
- * Renders ONE passage line (print/docx grain is line, `\n`-split — plan.md
+ * Renders ONE Print/PDF passage line (`\n`-split — plan.md
  * 行为规则 1). `figuresInfo` is null when the caller omitted
  * `paperAssetsDir` (default, byte-identical to pre-cut output) or when this
  * group isn't paper-asset sourced / its paper has no manifest — in every
@@ -423,8 +424,8 @@ export function buildPrintHtml({
   questionNumberStart,
   // figure-render cut — all optional, all default to pre-cut behavior
   // (see the module header comment + renderPassageLine's doc comment).
-  // `images` is an OUT-PARAMETER (like docxRenderer.mjs's identically-
-  // named param) populated ONLY in imageMode:'file' — the caller must
+  // `images` is an OUT-PARAMETER populated ONLY in imageMode:'file' — the
+  // caller must
   // copy each entry's file into the SAME directory as the written HTML
   // before invoking Vivliostyle (same-directory file:// resource loading
   // is unrestricted; cross-directory is not — see figureImageSrc's doc

@@ -350,7 +350,7 @@
  * （--pb-block-gap），线/选区罩都退出布局流，画在块间隙正中
  * （top/bottom: calc(--pb-block-gap / -2) overlay，随卡定位，不是流内
  * div——流内零高度元素会吃 flex gap 槽位造成双倍间隙）。加不加线，纸的
- * 排版逐像素一致。只活在屏幕整卷页，print/PDF/DOCX 零影响（这份 css
+ * 排版逐像素一致。只活在屏幕整卷页，Print/PDF 零影响（这份 css
  * 只被 PaperBrowsePage.tsx 引入）。 ─── */
 
 /* 静息剪刀线：虚线=题组可搬走内容的起点，零占位，画在块间隙正中。

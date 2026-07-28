@@ -795,7 +795,7 @@ function selectOccurrence(input) {
 }
 
 /**
- * Shared post-loader projection for Screen, Print/PDF, and DOCX.
+ * Shared post-loader projection for Screen and Print/PDF.
  *
  * It accepts only a complete whole-paper Consumption Plan. It does not read
  * source assets, sidecars, raw markers, renderer flags, or legacy fields.

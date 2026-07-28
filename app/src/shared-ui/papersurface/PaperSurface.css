@@ -550,8 +550,8 @@ button.ps-paper-blank.ps-paper-blank--clickable {
 /* ─── Option bank (seven-options-on-paper) ─────────────────────── */
 /* 七选五 A-G candidate-sentence pool, printed once after the passage.
    Single-column (unlike the 2-col `.ps-option-list` grid used for short
-   4-option MC options) — mirrors the docx handout export's deduped
-   "选项" block, and print-renderer.mjs's single-column `.options-list`
+   4-option MC options) — mirrors print-renderer.mjs's deduped
+   single-column `.options-list`
    fallback for >4-option groups. Indent reuses `.ps-option-list`'s
    existing 22px left padding — no new spacing/color/size values. */
 .ps-option-bank {
@@ -572,7 +572,7 @@ button.ps-paper-blank.ps-paper-blank--clickable {
 }
 
 /* ─── Question options inline (empty-stem policy) ──────────────── */
-/* surface-question-policy cut: mirrors the print/docx export policy
+/* surface-question-policy cut: mirrors the Print/PDF policy
    (server/print-renderer.mjs's `.options-inline--numbered`) — an empty
    stem + options collapses onto the SAME line as the question number,
    real-paper cloze form ("41. A. xx  B. xx  C. xx  D. xx"). */

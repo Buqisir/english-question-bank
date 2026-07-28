@@ -427,7 +427,6 @@ try {
   for (const consumerContract of [
     consumerContractRefs.screen,
     consumerContractRefs.print_pdf,
-    consumerContractRefs.docx,
   ]) {
     const loaded = await loadPaperForConsumption(
       {

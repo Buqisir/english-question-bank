@@ -26,7 +26,6 @@ import {
 } from '../shared/paper-canonical/consumerProjection.mjs'
 import { consumerContractRefs } from '../shared/paper-canonical/consumers.mjs'
 import { projectCanonicalPaper } from '../shared/paper-canonical/projector.mjs'
-import { createDocxRenderer } from '../server/exports/docxRenderer.mjs'
 import {
   createFileSystemCanonicalPublicationStore,
   loadPaperForConsumption,
@@ -47,7 +46,6 @@ const LISTENING_SLOT_IDS = [
 const CONSUMER_CASES = {
   screen: consumerContractRefs.screen,
   printPdf: consumerContractRefs.print_pdf,
-  docx: consumerContractRefs.docx,
 }
 const persistActualArtifacts = process.argv.includes('--actual-artifacts')
 const exactHead = execFileSync('git', ['rev-parse', 'HEAD'], {
@@ -436,7 +434,11 @@ async function compilePublishAndLoad(fixture) {
         { paperId: fixture.paperId, consumerContract },
         store,
       )
-      assert.equal(loaded.disposition, 'ready')
+      assert.equal(
+        loaded.disposition,
+        'ready',
+        JSON.stringify(loaded.diagnostics),
+      )
       assert.equal(
         loaded.selections.some(
           (selection) => selection.familyContractId === 'listening',
@@ -645,102 +647,6 @@ async function verifyPrintArtifacts({
   }
 }
 
-function verifyDocxArtifacts({ consumption, sourcePhrases }) {
-  const { groups, items, blocks } = canonicalExportPayload(consumption)
-  const renderer = createDocxRenderer({
-    groupTypeLabels: {
-      reading: '阅读理解',
-      seven_choices: '七选五',
-      cloze: '完形填空',
-      grammar_cloze: '语法填空',
-      writing: '写作',
-    },
-    optionalString: (value) =>
-      typeof value === 'string' ? value.trim() : '',
-  })
-  for (const versionType of ['student', 'teacher']) {
-    const documentXml = renderer.buildDocumentXml({
-      title: 'Canonical inactive-slot whole-paper proof',
-      versionType,
-      printStyle: 'exam',
-      items,
-      blocks,
-      questionNumberStart: 1,
-      canonicalConsumption: consumption,
-      images: [],
-    })
-    assertZeroListeningOccurrence(
-      documentXml,
-      `DOCX OOXML ${versionType}`,
-      sourcePhrases,
-    )
-    for (const group of groups) {
-      const activeIdentity = group.questionBlankPairs?.length > 0
-        ? bookmarkName(
-            'canonical_pair',
-            `${group.questionBlankPairs[0].questionId}:${
-              group.questionBlankPairs[0].blankId
-            }`,
-          )
-        : group.questions.length > 0
-          ? bookmarkName(
-              'canonical_question',
-              group.questions[0].questionId,
-            )
-          : bookmarkName('canonical_semantic', group.semanticSignature)
-      assert.equal(
-        group.familyContractId === 'grammar-fill'
-          ? new RegExp(
-              `>\\s*${group.questions[0].questionNo}\\s*<`,
-            ).test(documentXml)
-          : documentXml.includes(activeIdentity),
-        true,
-        `DOCX OOXML ${versionType} contains active Group ${group.groupId}`,
-      )
-    }
-    const docxPath = path.join(
-      actualArtifactRoot,
-      `docx-${versionType}.docx`,
-    )
-    const convertedPdfPath = path.join(
-      actualArtifactRoot,
-      `docx-${versionType}-converted.pdf`,
-    )
-    const docxBytes = renderer.writeDocxPackage({
-      documentXml,
-      outputPath: docxPath,
-      title: 'Canonical inactive-slot whole-paper proof',
-    })
-    assert.equal(docxBytes.subarray(0, 2).toString(), 'PK')
-    const packagedXml = execFileSync(
-      'unzip',
-      ['-p', docxPath, 'word/document.xml'],
-      { encoding: 'utf8' },
-    )
-    assert.equal(packagedXml, documentXml)
-    assertZeroListeningOccurrence(
-      packagedXml,
-      `packaged DOCX OOXML ${versionType}`,
-      sourcePhrases,
-    )
-    renderer.convertDocxToPdf(docxPath, convertedPdfPath)
-    assert.equal(
-      readFileSync(convertedPdfPath).subarray(0, 4).toString(),
-      '%PDF',
-    )
-    const convertedText = execFileSync(
-      'pdftotext',
-      ['-layout', convertedPdfPath, '-'],
-      { encoding: 'utf8' },
-    )
-    assertZeroListeningOccurrence(
-      convertedText,
-      `DOCX-to-PDF ${versionType}`,
-      sourcePhrases,
-    )
-  }
-}
-
 const fixture = makeListeningInactiveReferenceFixture()
 const sourcePhrases = listeningSourcePhrases(fixture)
 try {
@@ -753,10 +659,6 @@ try {
   })
   await verifyPrintArtifacts({
     consumption: consumptions.printPdf,
-    sourcePhrases,
-  })
-  verifyDocxArtifacts({
-    consumption: consumptions.docx,
     sourcePhrases,
   })
   if (persistActualArtifacts) {
@@ -772,7 +674,7 @@ try {
     )
   }
   console.log(
-    'PASS: complete inactive listening slots produce zero current-surface occurrences across whole-paper Screen, Print/PDF, and DOCX artifacts',
+    'PASS: complete inactive listening slots produce zero current-surface occurrences across whole-paper Screen and Print/PDF artifacts',
   )
 } finally {
   if (!persistActualArtifacts) {

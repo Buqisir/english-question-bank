@@ -945,7 +945,7 @@ function PaperSurfaceQuestionItem({
   const hasOptions = question.options.length > 0
 
   // Empty-stem policy (surface-question-policy cut) — mirrors the
-  // print/docx export policy (server/print-renderer.mjs's empty-stem
+  // Print/PDF policy (server/print-renderer.mjs's empty-stem
   // branch): the question number is already inline in the passage
   // (cloze `__41__` / grammar-fill `56._____`), so a stem that carries
   // no information collapses instead of rendering a blank/duplicate row.
@@ -1145,8 +1145,8 @@ function PaperSurfaceOptionList({
  *   - no interactive `paperSurfaceAnchorAttrs` option key,
  *   - stable `data-canonical-*` bank/Option/signature identity,
  *   - no `onClick` / focus wiring of any kind.
- * It is pure display, mirroring the docx handout export's deduped
- * "选项" block (single column, `A. ` prefix) — see
+ * It is pure display, matching the Print/PDF deduped "选项" block
+ * (single column, `A. ` prefix) — see
  * `docs/cuts/seven-options-on-paper/plan.md` for the format-language
  * source. PaperSurface stays dumb: this never calls back into the host.
  */

@@ -34,34 +34,6 @@
     }
   },
   "inputs": {
-    "docxStudent": {
-      "title": "H5A Export Fixture",
-      "versionType": "student",
-      "printStyle": "handout",
-      "questionNumberStart": 21,
-      "items": [
-        {
-          "questionGroupId": "g-h5a-reading",
-          "score": 2.5,
-          "sectionTitle": "Reading A",
-          "note": ""
-        }
-      ]
-    },
-    "docxTeacher": {
-      "title": "H5A Export Fixture",
-      "versionType": "teacher",
-      "printStyle": "handout",
-      "questionNumberStart": 21,
-      "items": [
-        {
-          "questionGroupId": "g-h5a-reading",
-          "score": 2.5,
-          "sectionTitle": "Reading A",
-          "note": "Teacher note"
-        }
-      ]
-    },
     "printHtml": {
       "title": "H5A Print Fixture",
       "versionType": "student",
@@ -110,21 +82,6 @@
     }
   },
   "expected": {
-    "docxStudent": {
-      "fileName": "H5A Export Fixture-学生版.docx",
-      "outputPathSuffix": "2026-05-24T04-00-00-H5A Export Fixture-学生版.docx",
-      "bodyUtf8": "docx:H5A Export Fixture:documentXml:H5A Export Fixture:student:handout:21:1:0"
-    },
-    "docxTeacher": {
-      "fileName": "H5A Export Fixture-教师版.docx",
-      "outputPathSuffix": "2026-05-24T04-00-00-H5A Export Fixture-教师版.docx",
-      "bodyUtf8": "docx:H5A Export Fixture:documentXml:H5A Export Fixture:teacher:handout:21:1:0"
-    },
-    "pdfStudent": {
-      "fileName": "H5A Export Fixture-学生版.pdf",
-      "outputPathSuffix": "2026-05-24T04-00-00-H5A Export Fixture-学生版.pdf",
-      "bodyUtf8": "pdf:2026-05-24T04-00-00-H5A Export Fixture-学生版.pdf"
-    },
     "printHtml": {
       "fileName": "H5A Print Fixture-学生版-精排.html",
       "bodyUtf8": "html:H5A Print Fixture:student:exam:21:1:2"

@@ -22,15 +22,12 @@
  *     so it cannot read PaperSurface's own custom properties — CSS custom
  *     properties inherit down the tree, not up); `writingPaperPage.css`
  *     reads the same `var(--ps-...)` names.
- *   - `server/print-renderer.mjs` / `server/exports/docxRenderer.mjs` are
- *     future consumers (Chunk B / C of the render-fidelity cut) — not yet
- *     wired in Chunk A.
+ *   - `server/print-renderer.mjs` consumes the same primitives for the
+ *     Print/PDF face.
  *
  * Canonicalization rule:
- *   - Values exported here are the canonical paper-surface values for all
- *     four render faces (screen PaperSurface, writing page, PDF export,
- *     DOCX export). Screen is the first consumer; server adoption lands
- *     in Chunk B/C of the render-fidelity cut.
+ *   - Values exported here are the canonical paper-surface values for the
+ *     live Screen and Print/PDF faces.
  *   - Anything that is genuinely React-only (page width on screen, active
  *     selection rail, sidecar / topbar / spike chrome) MUST stay in the
  *     React CSS file and MUST NOT be added here.
@@ -53,14 +50,13 @@ export const paperSurfaceTokens = Object.freeze({
     '"Times New Roman", Times, "SimSun", "Songti SC", "STSong", serif',
   /**
    * English-only stack (standard §2) — for consumers that render a
-   * pure-EN run (e.g. a DOCX rFonts ascii/hAnsi face) and need the
-   * Times New Roman family without the CN fallback chain attached.
+   * pure-EN run and need the Times New Roman family without the CN
+   * fallback chain attached.
    */
   paperFontStackEn: '"Times New Roman", Times, serif',
   /**
    * Chinese body stack (standard §2, 书宋/方正书宋/华文宋体族) — for
-   * consumers that render a pure-ZH run (e.g. a DOCX rFonts eastAsia
-   * face) separately from the EN stack.
+   * consumers that render a pure-ZH run separately from the EN stack.
    */
   paperFontStackZh: '"SimSun", "Songti SC", "STSong", serif',
   /**
@@ -71,9 +67,9 @@ export const paperSurfaceTokens = Object.freeze({
   paperFontStackHeading: '"SimHei", "Heiti SC", "STHeiti", sans-serif',
   /**
    * Canonical writing part headings can be pure English (`Writing`) or mixed
-   * Chinese/English. Pin their Latin glyphs to Arial so Chromium and
-   * LibreOffice do not independently substitute incompatible Hei faces while
-   * the Chinese glyphs still fall through to the standard black-style stack.
+   * Chinese/English. Pin their Latin glyphs to Arial so Chromium does not
+   * substitute an incompatible Hei face while the Chinese glyphs still fall
+   * through to the standard black-style stack.
    */
   paperFontStackWritingPart:
     '"Arial", "Helvetica Neue", "SimHei", "Heiti SC", "STHeiti", sans-serif',
@@ -83,7 +79,7 @@ export const paperSurfaceTokens = Object.freeze({
   paperRule: '#d9d9d9',
   /**
    * Standard §2: English/Chinese body 10.5pt (五号). Documented in pt
-   * for the print/DOCX consumers (Chunk B/C); px is the screen value
+   * for the Print/PDF consumer; px is the screen value
    * at A4 = 794px @ 96dpi (10.5pt ≈ 14px).
    */
   paperFontSizePt: 10.5,

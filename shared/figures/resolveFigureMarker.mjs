@@ -3,8 +3,8 @@
  *
  * Single source of truth for "does this paragraph/line carry a figure
  * marker, and does it resolve to a real manifest figure" — imported by
- * EVERY render surface (client PaperSurface adapter, detail page, print
- * renderer, docx renderer) so the marker-detection + placeholder-fallback
+ * EVERY live render surface (client PaperSurface adapter, detail page,
+ * Print/PDF renderer) so the marker-detection + placeholder-fallback
  * rule (plan.md 行为规则 1 / 3, PA MF-4) can never drift between surfaces.
  *
  * Rule (MF-4, paragraph/line-granular, never substring):
@@ -27,7 +27,7 @@ const FIGURE_TOKEN_PATTERN = /^\[(?:表|图):[^\]]*\]/
  */
 
 /**
- * @param {string} rawText - one paragraph's (client) or one line's (print/docx) text, untrimmed.
+ * @param {string} rawText - one paragraph's (client) or one line's (print) text, untrimmed.
  * @param {ReadonlyArray<PaperFigureManifestEntry>} figures - this paper's figures/manifest.json `figures` array (or empty/undefined when the paper has no manifest).
  * @returns {{ kind: 'figure', figure: PaperFigureManifestEntry } | { kind: 'placeholder', marker: string } | null}
  *   null   — no `[表:`/`[图:` token at the start of this unit; render as normal text (no change from pre-cut behavior).

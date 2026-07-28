@@ -23,7 +23,6 @@ import {
   buildCanonicalApplicationWritingConsumptionSurfaceData,
 } from '../shared/paper-normalization/canonicalPaperGroupSurfaceAdapter.mjs'
 import { consumerContractRefs } from '../shared/paper-canonical/consumers.mjs'
-import { createDocxRenderer } from '../server/exports/docxRenderer.mjs'
 import { buildPrintHtml } from '../server/print-renderer.mjs'
 import {
   createFileSystemCanonicalPublicationStore,
@@ -220,22 +219,6 @@ function pdfWords(pdfPath) {
     yMax: Number(match[4]),
     text: match[5],
   }))
-}
-
-function docxParagraphContaining(xml, text, label) {
-  const textTag = `<w:t xml:space="preserve">${text}</w:t>`
-  const textIndex = xml.indexOf(textTag)
-  assert.notEqual(textIndex, -1, `${label}: packaged DOCX contains ${text}`)
-  assert.equal(
-    xml.indexOf(textTag, textIndex + textTag.length),
-    -1,
-    `${label}: packaged DOCX contains ${text} once`,
-  )
-  const paragraphStart = xml.lastIndexOf('<w:p>', textIndex)
-  const paragraphEnd = xml.indexOf('</w:p>', textIndex)
-  assert.notEqual(paragraphStart, -1, `${label}: ${text} starts in a paragraph`)
-  assert.notEqual(paragraphEnd, -1, `${label}: ${text} ends in a paragraph`)
-  return xml.slice(paragraphStart, paragraphEnd + '</w:p>'.length)
 }
 
 function pdfTextBounds(pdfPath, text, label) {
@@ -535,18 +518,12 @@ async function assertBrowserFixedPartAlignment(
   }
 }
 
-const docxRenderer = createDocxRenderer({
-  groupTypeLabels: { writing: '写作' },
-  optionalString: (value) => value == null ? '' : String(value),
-})
 const printArtifacts = []
-const docxPageCounts = new Map()
 const providedConsumerIdentities = []
 
 for (const consumerContract of [
   consumerContractRefs.screen,
   consumerContractRefs.print_pdf,
-  consumerContractRefs.docx,
 ]) {
   const absent = applicationGroup(await publishAndLoad(
     'paper-zj-2020-jan',
@@ -634,7 +611,7 @@ for (const consumerContract of [
 assert.deepEqual(
   providedConsumerIdentities,
   Array.from(
-    { length: 3 },
+    { length: 2 },
     () => providedConsumerIdentities[0],
   ),
 )
@@ -798,217 +775,6 @@ for (const [label, consumption] of [
   }
 }
 
-for (const [label, consumption] of [
-  ['absent', await publishAndLoad(
-    'paper-zj-2020-jan',
-    consumerContractRefs.docx,
-  )],
-  ['provided', await publishAndLoad(
-    'paper-2026-i',
-    consumerContractRefs.docx,
-  )],
-  ['all-fixed', withAllApplicationFixedParts(await publishAndLoad(
-    'paper-2026-i',
-    consumerContractRefs.docx,
-  ))],
-]) {
-  const paperId = consumption.paperId
-  const groupId = applicationGroupId(consumption)
-  const canonical = applicationGroup(consumption)
-  for (const versionType of ['student', 'teacher']) {
-    const xml = docxRenderer.buildDocumentXml({
-      title: `Application ${label}`,
-      versionType,
-      printStyle: 'exam',
-      items: [applicationExportItem(paperId, groupId)],
-      blocks: [{
-        type: 'question_group',
-        questionGroupId: groupId,
-        score: 15,
-      }],
-      questionNumberStart: 1,
-      canonicalConsumption: consumption,
-    })
-    assert.equal(xml.includes('POISONED LEGACY'), false)
-    assert.equal(xml.includes(canonical.promptBlocks[0].text), true)
-    assert.equal(
-      xml.includes(bookmarkName(
-        'canonical_occurrence',
-        canonical.occurrenceSignature,
-      )),
-      true,
-    )
-    assert.equal(
-      xml.includes(bookmarkName(
-        'canonical_response',
-        canonical.answerRegion.responseSlotId,
-      )),
-      true,
-    )
-    if (label === 'provided') {
-      assert.equal(
-        xml.includes(bookmarkName('canonical_block', providedNoticeBlockId)),
-        true,
-      )
-      assert.equal(
-        xml.includes(bookmarkName('canonical_content', providedNoticeInlineId)),
-        true,
-      )
-      for (const line of providedNoticeLines) {
-        assert.equal((xml.split(line).length - 1), 1)
-      }
-      assert.equal(xml.includes('注意：写作词数应为80个左右。'), false)
-      const noticeParagraphs = providedNoticeLines.map((line) =>
-        docxParagraphContaining(
-          xml,
-          line,
-          `DOCX ${label} ${versionType} notice`,
-        ))
-      assert.equal(noticeParagraphs[0].includes('<w:ind '), false)
-      for (const paragraphXml of noticeParagraphs.slice(1)) {
-        assert.equal(
-          paragraphXml.includes('<w:ind w:left="420"/>'),
-          true,
-        )
-      }
-      const titleParagraph = docxParagraphContaining(
-        xml,
-        'Ranking My College Life Essentials',
-        `DOCX ${label} ${versionType} title`,
-      )
-      assert.equal(
-        titleParagraph.includes('<w:jc w:val="center"/>'),
-        true,
-      )
-      const responseWidthTwips = Math.round(144 / 25.4 * 1440)
-      assert.equal(
-        xml.includes(
-          `<w:tblW w:w="${responseWidthTwips}" w:type="dxa"/>`,
-        ),
-        true,
-      )
-      assert.equal(
-        xml.includes(`<w:gridCol w:w="${responseWidthTwips}"/>`),
-        true,
-      )
-    }
-    for (const part of [
-      ...canonical.answerRegion.givenTop,
-      ...canonical.answerRegion.givenBottom,
-    ]) {
-      assert.equal(xml.includes(bookmarkName('canonical_given', part.givenPartId)), true)
-      assert.equal(xml.includes(part.text), true)
-    }
-    assert.equal(
-      (xml.match(/<w:cantSplit\/>/g) || []).length,
-      1,
-    )
-    assert.equal(
-      xml.includes(
-        `<w:trHeight w:val="${Math.round(65 / 25.4 * 1440)}" w:hRule="exact"/>`,
-      ),
-      true,
-    )
-    if (canonical.answerRegion.givenBottom.length > 0) {
-      assert.equal(xml.includes('<w:vAlign w:val="bottom"/>'), true)
-    }
-    assert.equal(xml.includes('（教师版 含答案解析）'), versionType === 'teacher')
-    const docxRoot = mkdtempSync(path.join(tmpdir(), 'eqb-application-docx-'))
-    try {
-      const docxPath = path.join(docxRoot, `${label}-${versionType}.docx`)
-      const convertedPdfPath = path.join(
-        docxRoot,
-        `${label}-${versionType}-converted.pdf`,
-      )
-      docxRenderer.writeDocxPackage({
-        documentXml: xml,
-        outputPath: docxPath,
-        title: `Application ${label}`,
-      })
-      const packagedXml = execFileSync(
-        'unzip',
-        ['-p', docxPath, 'word/document.xml'],
-        { encoding: 'utf8' },
-      )
-      assert.equal(packagedXml, xml)
-      assert.equal(
-        packagedXml.includes(bookmarkName(
-          'canonical_response',
-          canonical.answerRegion.responseSlotId,
-        )),
-        true,
-      )
-      docxRenderer.convertDocxToPdf(docxPath, convertedPdfPath)
-      const convertedBytes = readFileSync(convertedPdfPath)
-      assert.equal(convertedBytes.subarray(0, 4).toString(), '%PDF')
-      const convertedPageCount = pdfPageCount(convertedPdfPath)
-      const priorPageCount = docxPageCounts.get(label)
-      if (priorPageCount) assert.equal(convertedPageCount, priorPageCount)
-      else docxPageCounts.set(label, convertedPageCount)
-      const convertedText = execFileSync(
-        'pdftotext',
-        ['-layout', convertedPdfPath, '-'],
-        { encoding: 'utf8' },
-      ).replaceAll(/\s/g, '')
-      assert.equal(convertedText.includes('POISONEDLEGACY'), false)
-      for (const part of [
-        ...canonical.answerRegion.givenTop,
-        ...canonical.answerRegion.givenBottom,
-      ]) {
-        assert.equal(
-          convertedText.split(part.text.replaceAll(/\s/g, '')).length - 1,
-          1,
-        )
-      }
-      if (
-        canonical.answerRegion.givenTop.length > 0
-        && canonical.answerRegion.givenBottom.length > 0
-      ) {
-        assert.equal(
-          pdfPageContainingText(
-            convertedPdfPath,
-            canonical.answerRegion.givenTop[0].text,
-          ),
-          pdfPageContainingText(
-            convertedPdfPath,
-            canonical.answerRegion.givenBottom[0].text,
-          ),
-        )
-      }
-      assertFixedBottomInsideConvertedPdfFrame(
-        convertedPdfPath,
-        canonical.answerRegion.givenBottom,
-        `DOCX ${label} ${versionType}`,
-      )
-      assertApplicationFixedPartPdfAlignment(
-        convertedPdfPath,
-        canonical,
-        `DOCX ${label} ${versionType}`,
-      )
-      assertNumberedNoticePdfLayout(
-        convertedPdfPath,
-        canonical,
-        `DOCX ${label} ${versionType}`,
-      )
-      if (persistActualArtifacts) {
-        copyFileSync(
-          docxPath,
-          path.join(actualArtifactRoot, `docx-${label}-${versionType}.docx`),
-        )
-        copyFileSync(
-          convertedPdfPath,
-          path.join(
-            actualArtifactRoot,
-            `docx-${label}-${versionType}-converted.pdf`,
-          ),
-        )
-      }
-    } finally {
-      rmSync(docxRoot, { recursive: true, force: true })
-    }
-  }
-}
-
 {
   const consumption = await publishAndLoad(
     'paper-2026-i',
@@ -1041,28 +807,6 @@ for (const [label, consumption] of [
   assert.equal(mixedPrint.includes('CONTINUATION LEGACY MATERIAL'), true)
   assert.equal(mixedPrint.includes('CONTINUATION STARTER ONE'), true)
   assert.equal(mixedPrint.includes('CONTINUATION STARTER TWO'), true)
-  const mixedDocx = docxRenderer.buildDocumentXml({
-    title: 'Mixed writing regression',
-    versionType: 'student',
-    printStyle: 'exam',
-    items,
-    blocks,
-    questionNumberStart: 1,
-    canonicalConsumption: consumption,
-  })
-  assert.equal(
-    (mixedDocx.match(new RegExp(
-      bookmarkName(
-        'canonical_occurrence',
-        applicationGroup(consumption).occurrenceSignature,
-      ),
-      'g',
-    )) || []).length,
-    1,
-  )
-  assert.equal(mixedDocx.includes('CONTINUATION LEGACY MATERIAL'), true)
-  assert.equal(mixedDocx.includes('CONTINUATION STARTER ONE'), true)
-  assert.equal(mixedDocx.includes('CONTINUATION STARTER TWO'), true)
 }
 
 async function assertActualPaperSurfaceArtifacts() {

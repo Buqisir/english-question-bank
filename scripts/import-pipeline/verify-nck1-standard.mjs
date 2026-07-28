@@ -234,7 +234,7 @@ check('F1 figures/manifest.json: every entry has an existing non-empty file + va
 // ---- F1b. MF-4 invariant (figure-render cut, fig-token P0) ----
 // The figure-render cut's render-time substitution (shared
 // `resolveFigureMarker.mjs`, consumed by paperAssetSurfaceAdapter.ts /
-// print-renderer.mjs / docxRenderer.mjs) replaces a WHOLE paragraph/line
+// print-renderer.mjs) replaces a WHOLE paragraph/line
 // whenever its TRIMMED text STARTS WITH a manifest placeholderMarker —
 // never a substring hide. That is only safe if every marker is genuinely
 // paragraph-initial and appears in exactly one paragraph; this check

@@ -41,7 +41,6 @@ import {
 import {
   createPaperCanonicalConsumerRoutes,
 } from '../server/paper-canonical/consumerRoutes.mjs'
-import { createDocxRenderer } from '../server/exports/docxRenderer.mjs'
 import { createExportImplementation } from '../server/exports/exportImplementation.mjs'
 import { buildPrintHtml } from '../server/print-renderer.mjs'
 import { makeClozeGrammarCanonicalReferenceFixture } from '../test-fixtures/paper-canonical/clozeGrammarReferenceFixture.mjs'
@@ -765,19 +764,12 @@ try {
   })
   assert.equal(screenRouteResult.status, 200)
   assert.equal(screenRouteResult.body.publicationDigest, screenConsumption.publicationDigest)
-  const publicRenderer = createDocxRenderer({
-    groupTypeLabels: { cloze: '完形填空', grammar_cloze: '语法填空' },
-    optionalString: (value) => typeof value === 'string' ? value.trim() : '',
-  })
   const publicExports = createExportImplementation({
     rootDir,
     exportDir: path.join(rootDir, 'exports'),
     getQuestionGroupDetail: (groupId) =>
       items.find((item) => item.detail.id === groupId)?.detail || null,
-    buildDocumentXml: publicRenderer.buildDocumentXml,
-    writeDocxPackage: publicRenderer.writeDocxPackage,
     buildPrintHtml,
-    convertDocxToPdf: publicRenderer.convertDocxToPdf,
     resolveCanonicalConsumption: runtime.resolveForItems,
   })
   const publicInput = {
@@ -806,28 +798,6 @@ try {
     (publicPrint.body.match(/data-canonical-placement-signature=/g) || []).length,
     15,
   )
-  const publicDocx = publicExports.exportDocx(publicInput)
-  const publicTeacherDocx = publicExports.exportDocx({
-    ...publicInput,
-    versionType: 'teacher',
-  })
-  assert.equal(
-    publicDocx.normalizationDiagnostics.filter(
-      (diagnostic) => diagnostic.source === 'whole-paper-consumption',
-    ).length,
-    2,
-  )
-  const publicStudentDocumentXml = execFileSync(
-    'unzip',
-    ['-p', publicDocx.outputPath, 'word/document.xml'],
-    { encoding: 'utf8' },
-  )
-  const publicTeacherDocumentXml = execFileSync(
-    'unzip',
-    ['-p', publicTeacherDocx.outputPath, 'word/document.xml'],
-    { encoding: 'utf8' },
-  )
-
   const signatures = new Map()
   for (const [consumerId, consumerContract] of Object.entries(consumerContractRefs)) {
     const consumption = await loadPaperForConsumption({
@@ -925,54 +895,12 @@ try {
       )
       artifactProof.print = { student, teacher }
     }
-    if (consumerId === 'docx') {
-      const renderer = createDocxRenderer({
-        groupTypeLabels: { cloze: '完形填空', grammar_cloze: '语法填空' },
-        optionalString: (value) => typeof value === 'string' ? value.trim() : '',
-      })
-      const student = renderer.buildDocumentXml({
-        title: asset.paper.title,
-        versionType: 'student',
-        printStyle: 'exam',
-        items,
-        blocks,
-        questionNumberStart: 41,
-        canonicalConsumption: consumption,
-      })
-      const teacher = renderer.buildDocumentXml({
-        title: asset.paper.title,
-        versionType: 'teacher',
-        printStyle: 'exam',
-        items,
-        blocks,
-        questionNumberStart: 41,
-        canonicalConsumption: consumption,
-      })
-      assert.equal(student.includes('teacher supplement'), false)
-      assert.equal(student.includes('teacher explanation'), false)
-      assert.equal(teacher.includes('teacher supplement'), true)
-      assert.equal((student.match(/w:val="single"/g) || []).length >= 25, true)
-      assert.equal(
-        (student.match(/<w:gridCol w:w="2080"\/>/g) || []).length,
-        45,
-      )
-      assert.equal(
-        (student.match(/<w:gridCol w:w="420"\/>/g) || []).length,
-        15,
-      )
-      artifactProof.docx = { renderer, student, teacher }
-    }
+
   }
   assert.deepEqual(signatures.get('screen'), signatures.get('print_pdf'))
-  assert.deepEqual(signatures.get('screen'), signatures.get('docx'))
   artifactProof.print = {
     student: publicPrint.body,
     teacher: publicTeacherPrint.body,
-  }
-  artifactProof.docx = {
-    renderer: publicRenderer,
-    student: publicStudentDocumentXml,
-    teacher: publicTeacherDocumentXml,
   }
 
   const legacyMisalignedItems = structuredClone(items)
@@ -996,7 +924,7 @@ try {
   }, store)
   const oneColumnConsumption = structuredClone(await loadPaperForConsumption({
     paperId: fixture.source.paperId,
-    consumerContract: consumerContractRefs.docx,
+    consumerContract: consumerContractRefs.print_pdf,
   }, store))
   const oneColumnOccurrence = oneColumnConsumption.selections
     .find((selection) => selection.familyContractId === 'cloze')
@@ -1010,7 +938,7 @@ try {
     groupId: 'group-2026-i-cloze',
   })
   assert.equal(oneColumnGroup.questions[0].layoutPlan.mode, 'one_column')
-  const oneColumnXml = artifactProof.docx.renderer.buildDocumentXml({
+  const oneColumnHtml = buildPrintHtml({
     title: asset.paper.title,
     versionType: 'student',
     printStyle: 'exam',
@@ -1019,10 +947,7 @@ try {
     questionNumberStart: 41,
     canonicalConsumption: oneColumnConsumption,
   })
-  assert.equal(
-    oneColumnXml.includes('<w:ind w:left="420" w:hanging="420"/>'),
-    true,
-  )
+  assert.equal(oneColumnHtml.includes('canonical-options--one_column'), true)
   const partial = structuredClone(complete)
   partial.selections.find((selection) => selection.familyContractId === 'cloze').projectedOccurrences.pop()
   assert.throws(
@@ -1095,15 +1020,11 @@ try {
     exportDir: path.join(rootDir, 'legacy-exports'),
     getQuestionGroupDetail: (groupId) =>
       items.find((item) => item.detail.id === groupId)?.detail || null,
-    buildDocumentXml: publicRenderer.buildDocumentXml,
-    writeDocxPackage: publicRenderer.writeDocxPackage,
     buildPrintHtml,
-    convertDocxToPdf: publicRenderer.convertDocxToPdf,
     resolveCanonicalConsumption: legacyRuntime.resolveForItems,
   })
   for (const result of [
     legacyExports.exportPrintHtml(publicInput),
-    legacyExports.exportDocx(publicInput),
   ]) {
     assert.equal(
       result.normalizationDiagnostics.filter(
@@ -1266,24 +1187,6 @@ try {
       await browser.close()
     }
 
-    const studentDocxPath = path.join(outputDir, 'student.docx')
-    artifactProof.docx.renderer.writeDocxPackage({
-      documentXml: artifactProof.docx.student,
-      outputPath: studentDocxPath,
-      title: asset.paper.title,
-    })
-    artifactProof.docx.renderer.convertDocxToPdf(
-      studentDocxPath,
-      path.join(outputDir, 'student-docx.pdf'),
-    )
-    writeFileSync(
-      path.join(outputDir, 'student-document.xml'),
-      artifactProof.docx.student,
-    )
-    writeFileSync(
-      path.join(outputDir, 'teacher-document.xml'),
-      artifactProof.docx.teacher,
-    )
     writeFileSync(
       path.join(outputDir, 'HEAD.txt'),
       `${execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim()}\n`,

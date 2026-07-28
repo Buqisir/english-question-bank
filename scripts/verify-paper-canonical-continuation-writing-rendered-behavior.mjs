@@ -31,7 +31,6 @@ import {
   buildCanonicalContinuationWritingConsumptionSurfaceData,
 } from '../shared/paper-normalization/canonicalPaperGroupSurfaceAdapter.mjs'
 import { consumerContractRefs } from '../shared/paper-canonical/consumers.mjs'
-import { createDocxRenderer } from '../server/exports/docxRenderer.mjs'
 import { buildPrintHtml } from '../server/print-renderer.mjs'
 import {
   createFileSystemCanonicalPublicationStore,
@@ -58,11 +57,6 @@ const actualArtifactRoot = path.resolve(
 if (persistActualArtifacts) {
   mkdirSync(actualArtifactRoot, { recursive: true })
 }
-const docxRenderer = createDocxRenderer({
-  groupTypeLabels: { writing: '写作' },
-  optionalString: (value) => value == null ? '' : String(value),
-})
-
 const nck1WritingChrome = Object.freeze({
   part: '第四部分 写作（共两节，满分40分）',
   application: '第一节（满分15分）',
@@ -425,8 +419,8 @@ function assertSchemaDescriptorIdentityClosure() {
     'canonical-paper-publication-v9',
     'normalization-report-v10',
     'canonical-paper-publication-v10',
-    'normalization-report-v11',
-    'canonical-paper-publication-v11',
+    'normalization-report-v12',
+    'canonical-paper-publication-v12',
   ]) {
     assert.equal(authority.closure.schemas[schemaId].$id, schemaId)
   }
@@ -757,7 +751,6 @@ async function loadIntegrityClosedWritingConsumptions(fixture) {
     for (const [surface, consumerContract] of Object.entries({
       screen: consumerContractRefs.screen,
       printPdf: consumerContractRefs.print_pdf,
-      docx: consumerContractRefs.docx,
     })) {
       const consumption = await loadPaperForConsumption({
         paperId: fixture.paperId,
@@ -922,20 +915,6 @@ function visibleRenderedText(value) {
       .replaceAll('&#39;', "'")
       .replaceAll('&amp;', '&'),
   )
-}
-
-function extractDocxVisibleParagraphText(documentXml) {
-  return [...String(documentXml).matchAll(
-    /<w:p(?:\s[^>]*)?>([\s\S]*?)<\/w:p>/g,
-  )]
-    .map((paragraphMatch) =>
-      [...paragraphMatch[1].matchAll(
-        /<w:t(?:\s[^>]*)?>([\s\S]*?)<\/w:t>/g,
-      )]
-        .map((textMatch) => decodeXmlText(textMatch[1]))
-        .join(''))
-    .filter(Boolean)
-    .join('\n')
 }
 
 function assertNck1WritingHeadingCounts(renderedText, label) {
@@ -1127,46 +1106,6 @@ function assertZhejiangWholeWritingHtmlIdentity(
   }
 }
 
-function assertZhejiangWholeWritingDocxIdentity(
-  documentXml,
-  application,
-  continuation,
-  label,
-) {
-  assertZhejiangWholeWritingVisibleText(
-    extractDocxVisibleParagraphText(documentXml),
-    application,
-    continuation,
-    label,
-  )
-  for (const canonical of [application, continuation]) {
-    for (const [kind, value] of [
-      ['canonical_response', canonical.answerRegion.responseSlotId],
-      ['canonical_semantic', canonical.semanticSignature],
-      ['canonical_occurrence', canonical.occurrenceSignature],
-    ]) {
-      const name = bookmarkName(kind, value)
-      assert.equal(
-        documentXml.split(name).length - 1,
-        1,
-        `${label} contains ${name} once`,
-      )
-    }
-  }
-  for (const instructionId of [
-    'part.writing',
-    'section.writing.application',
-    'section.writing.continuation',
-  ]) {
-    const name = bookmarkName('canonical_instruction', instructionId)
-    assert.equal(
-      documentXml.split(name).length - 1,
-      1,
-      `${label} contains canonical chrome bookmark ${name} once`,
-    )
-  }
-}
-
 function canonicalWritingChromeEntries(canonical) {
   return [
     [canonical.paperChrome.part, 'part_heading'],
@@ -1191,20 +1130,6 @@ function assertCanonicalWritingChromeTextLines(renderedText, canonical, label) {
   }
 }
 
-function assertCanonicalWritingChromeBookmarks(documentXml, canonical, label) {
-  for (const [instruction] of canonicalWritingChromeEntries(canonical)) {
-    const name = bookmarkName(
-      'canonical_instruction',
-      instruction.instructionId,
-    )
-    assert.equal(
-      documentXml.split(name).length - 1,
-      instruction.renderPolicy === 'render' ? 1 : 0,
-      `${label} follows canonical paperChrome bookmark policy for ${instruction.instructionId}`,
-    )
-  }
-}
-
 function assertCanonicalWritingChromeHtmlStructure(html, canonical, label) {
   assert.equal(
     (html.match(/<div class="paper-header">/g) || []).length,
@@ -1220,56 +1145,6 @@ function assertCanonicalWritingChromeHtmlStructure(html, canonical, label) {
       `${label} follows canonical ${role} policy for ${instruction.instructionId}`,
     )
   }
-}
-
-function bookmarkedDocxParagraph(documentXml, instructionId) {
-  const name = bookmarkName('canonical_instruction', instructionId)
-  const start = documentXml.indexOf(`w:name="${name}"`)
-  assert.notEqual(start, -1, `missing DOCX bookmark ${name}`)
-  const paragraphStart = documentXml.indexOf('<w:p>', start)
-  const paragraphEnd = documentXml.indexOf('</w:p>', paragraphStart)
-  assert.notEqual(paragraphStart, -1, `missing DOCX paragraph for ${name}`)
-  assert.notEqual(paragraphEnd, -1, `unterminated DOCX paragraph for ${name}`)
-  return documentXml.slice(paragraphStart, paragraphEnd + '</w:p>'.length)
-}
-
-function assertCanonicalWritingChromeDocxStructure(
-  documentXml,
-  canonical,
-  label,
-) {
-  const visibleLines = extractDocxVisibleParagraphText(documentXml)
-    .split(/\r?\n/)
-  assert.equal(
-    visibleLines.includes(`Continuation ${label.split('/')[0]}`),
-    false,
-    `${label} must not add a visible document title above complete canonical writing chrome`,
-  )
-  assertCanonicalWritingChromeBookmarks(documentXml, canonical, label)
-  if (
-    canonical.paperChrome.part.renderPolicy === 'suppress'
-    && canonical.paperChrome.section.renderPolicy === 'suppress'
-  ) return
-  const partParagraph = bookmarkedDocxParagraph(
-    documentXml,
-    canonical.paperChrome.part.instructionId,
-  )
-  assert.equal(partParagraph.includes('w:ascii="Arial"'), true)
-  assert.equal(partParagraph.includes('w:eastAsia="黑体"'), true)
-  assert.equal(partParagraph.includes('<w:b/>'), true)
-  assert.equal(partParagraph.includes('<w:sz w:val="21"/>'), true)
-  assert.equal(partParagraph.includes('<w:spacing w:after="240"/>'), true)
-  assert.equal(partParagraph.includes('<w:ind'), false)
-
-  const sectionParagraph = bookmarkedDocxParagraph(
-    documentXml,
-    canonical.paperChrome.section.instructionId,
-  )
-  assert.equal(sectionParagraph.includes('w:ascii="Times New Roman"'), true)
-  assert.equal(sectionParagraph.includes('<w:b/>'), false)
-  assert.equal(sectionParagraph.includes('<w:sz w:val="21"/>'), true)
-  assert.equal(sectionParagraph.includes('<w:spacing w:after="180"/>'), true)
-  assert.equal(sectionParagraph.includes('<w:ind w:left="420"/>'), true)
 }
 
 function extractPdfLines(pdfPath) {
@@ -1464,7 +1339,7 @@ function assertWritingChromeRasterParity(metricsByChannel, label) {
   const entries = [...metricsByChannel.entries()]
   assert.deepEqual(
     entries.map(([channel]) => channel).sort(),
-    ['docx-pdf', 'print-pdf', 'screen'],
+    ['print-pdf', 'screen'],
     `${label} has all final-raster channels`,
   )
   for (const [channel, metrics] of entries) {
@@ -1829,12 +1704,6 @@ assert.equal(
   true,
   'legacy Print HTML preserves its renderer-local writing group heading',
 )
-const legacyDocxXml = docxRenderer.buildDocumentXml(legacyWritingBaseArgs)
-assert.equal(
-  compactText(legacyDocxXml).includes('一、写作（每题25分）'),
-  true,
-  'legacy DOCX preserves its renderer-local writing group heading',
-)
 const mixedPrintHtml = buildPrintHtml({
   ...mixedWritingBaseArgs,
   canonicalConsumption: mixedWritingConsumptions.printPdf,
@@ -1856,82 +1725,6 @@ if (persistActualArtifacts) {
     mixedPrintHtml,
   )
 }
-const mixedDocxXml = docxRenderer.buildDocumentXml({
-  ...mixedWritingBaseArgs,
-  canonicalConsumption: mixedWritingConsumptions.docx,
-})
-assertNck1WritingHeadingCounts(mixedDocxXml, 'whole-paper DOCX OOXML')
-assertNck1WholeWritingOrder(
-  extractDocxVisibleParagraphText(mixedDocxXml),
-  mixedApplication,
-  mixedContinuation,
-  'whole-paper DOCX OOXML',
-)
-assertNoRendererLocalWritingGroupHeading(
-  mixedDocxXml,
-  'whole-paper DOCX OOXML',
-)
-{
-  const root = mkdtempSync(path.join(tmpdir(), 'eqb-writing-chrome-docx-'))
-  try {
-    const docxPath = path.join(root, 'whole-writing.docx')
-    const pdfPath = path.join(root, 'whole-writing-converted.pdf')
-    docxRenderer.writeDocxPackage({
-      documentXml: mixedDocxXml,
-      outputPath: docxPath,
-      title: mixedWritingBaseArgs.title,
-    })
-    const packagedXml = execFileSync(
-      'unzip',
-      ['-p', docxPath, 'word/document.xml'],
-      { encoding: 'utf8' },
-    )
-    assertNck1WritingHeadingCounts(packagedXml, 'packaged DOCX OOXML')
-    assertNck1WholeWritingOrder(
-      extractDocxVisibleParagraphText(packagedXml),
-      mixedApplication,
-      mixedContinuation,
-      'packaged DOCX OOXML',
-    )
-    assertNoRendererLocalWritingGroupHeading(
-      packagedXml,
-      'packaged DOCX OOXML',
-    )
-    docxRenderer.convertDocxToPdf(docxPath, pdfPath)
-    const convertedText = execFileSync(
-      'pdftotext',
-      ['-layout', pdfPath, '-'],
-      { encoding: 'utf8' },
-    )
-    assertNck1WritingHeadingCounts(convertedText, 'DOCX-to-PDF')
-    assertNck1WholeWritingOrder(
-      convertedText,
-      mixedApplication,
-      mixedContinuation,
-      'DOCX-to-PDF',
-    )
-    assertNoRendererLocalWritingGroupHeading(
-      convertedText,
-      'DOCX-to-PDF',
-    )
-    if (persistActualArtifacts) {
-      copyFileSync(
-        docxPath,
-        path.join(actualArtifactRoot, 'docx-whole-writing-student.docx'),
-      )
-      copyFileSync(
-        pdfPath,
-        path.join(
-          actualArtifactRoot,
-          'docx-whole-writing-student-converted.pdf',
-        ),
-      )
-    }
-  } finally {
-    rmSync(root, { recursive: true, force: true })
-  }
-}
-
 const zhejiangPrintHtml = buildPrintHtml({
   ...zhejiangWritingBaseArgs,
   canonicalConsumption: zhejiangWritingConsumptions.printPdf,
@@ -1948,73 +1741,6 @@ if (persistActualArtifacts) {
     zhejiangPrintHtml,
   )
 }
-const zhejiangDocxXml = docxRenderer.buildDocumentXml({
-  ...zhejiangWritingBaseArgs,
-  canonicalConsumption: zhejiangWritingConsumptions.docx,
-})
-assertZhejiangWholeWritingDocxIdentity(
-  zhejiangDocxXml,
-  zhejiangApplication,
-  zhejiangContinuation,
-  'complete Zhejiang v4 DOCX OOXML',
-)
-{
-  const root = mkdtempSync(path.join(
-    tmpdir(),
-    'eqb-zhejiang-writing-chrome-docx-',
-  ))
-  try {
-    const docxPath = path.join(root, 'zhejiang-whole-writing.docx')
-    const pdfPath = path.join(root, 'zhejiang-whole-writing-converted.pdf')
-    docxRenderer.writeDocxPackage({
-      documentXml: zhejiangDocxXml,
-      outputPath: docxPath,
-      title: zhejiangWritingBaseArgs.title,
-    })
-    const packagedXml = execFileSync(
-      'unzip',
-      ['-p', docxPath, 'word/document.xml'],
-      { encoding: 'utf8' },
-    )
-    assertZhejiangWholeWritingDocxIdentity(
-      packagedXml,
-      zhejiangApplication,
-      zhejiangContinuation,
-      'complete Zhejiang v4 packaged DOCX OOXML',
-    )
-    docxRenderer.convertDocxToPdf(docxPath, pdfPath)
-    const convertedText = execFileSync(
-      'pdftotext',
-      ['-layout', pdfPath, '-'],
-      { encoding: 'utf8' },
-    )
-    assertZhejiangWholeWritingVisibleText(
-      convertedText,
-      zhejiangApplication,
-      zhejiangContinuation,
-      'complete Zhejiang v4 DOCX-to-PDF',
-    )
-    if (persistActualArtifacts) {
-      copyFileSync(
-        docxPath,
-        path.join(
-          actualArtifactRoot,
-          'docx-zhejiang-whole-writing-student.docx',
-        ),
-      )
-      copyFileSync(
-        pdfPath,
-        path.join(
-          actualArtifactRoot,
-          'docx-zhejiang-whole-writing-student-converted.pdf',
-        ),
-      )
-    }
-  } finally {
-    rmSync(root, { recursive: true, force: true })
-  }
-}
-
 const printArtifacts = []
 for (const { label, consumption, canonical } of cases) {
   for (const versionType of ['student', 'teacher']) {
@@ -2085,248 +1811,6 @@ for (const { label, consumption, canonical } of cases) {
         html,
       )
     }
-  }
-}
-
-for (const { label, consumption, canonical } of cases) {
-  for (const versionType of ['student', 'teacher']) {
-    const xml = docxRenderer.buildDocumentXml({
-      title: `Continuation ${label}`,
-      versionType,
-      printStyle: 'exam',
-      items: [poisonedExportItem(
-        canonical,
-        label === 'two-starter' ? 'absent' : 'poisoned',
-      )],
-      blocks: [{
-        type: 'question_group',
-        questionGroupId: canonical.groupId,
-        score: 25,
-      }],
-      questionNumberStart: 1,
-      canonicalConsumption: consumption,
-    })
-    assertVisibleCanonicalText(xml, canonical)
-    assertNoRendererLocalWritingGroupHeading(
-      xml,
-      `DOCX OOXML ${label}/${versionType}`,
-    )
-    assertCanonicalWritingChromeDocxStructure(
-      xml,
-      canonical,
-      `${label}/${versionType}`,
-    )
-    assert.equal(
-      xml.includes(bookmarkName(
-        'canonical_semantic',
-        canonical.semanticSignature,
-      )),
-      true,
-    )
-    assertCanonicalWritingChromeBookmarks(
-      xml,
-      canonical,
-      `DOCX OOXML ${label}/${versionType}`,
-    )
-    assert.equal(
-      xml.includes(bookmarkName(
-        'canonical_occurrence',
-        canonical.occurrenceSignature,
-      )),
-      true,
-    )
-    assert.equal(
-      xml.includes(bookmarkName(
-        'canonical_response',
-        canonical.answerRegion.responseSlotId,
-      )),
-      true,
-    )
-    assert.equal(
-      xml.includes(bookmarkName(
-        'canonical_word_ruling',
-        canonical.wordCountRuling.authorityObservationRef,
-      )),
-      true,
-    )
-    assert.equal(
-      (xml.match(/<w:tbl>/g) || []).length,
-      canonical.answerRegion.starterLines.length === 2 ? 2 : 1,
-      'Continuation owns one outer response table and an optional nested starter layout table',
-    )
-    assert.equal(
-      (xml.match(/<w:cantSplit\/>/g) || []).length,
-      1,
-      'Continuation response owns one indivisible outer DOCX row',
-    )
-    for (const starter of canonical.answerRegion.starterLines) {
-      assert.equal(
-        xml.includes(bookmarkName('canonical_starter', starter.starterId)),
-        true,
-      )
-    }
-    const docxRoot = mkdtempSync(path.join(tmpdir(), 'eqb-continuation-docx-'))
-    try {
-      const docxPath = path.join(docxRoot, `${label}-${versionType}.docx`)
-      const pdfPath = path.join(
-        docxRoot,
-        `${label}-${versionType}-converted.pdf`,
-      )
-      docxRenderer.writeDocxPackage({
-        documentXml: xml,
-        outputPath: docxPath,
-        title: `Continuation ${label}`,
-      })
-      const packagedXml = execFileSync(
-        'unzip',
-        ['-p', docxPath, 'word/document.xml'],
-        { encoding: 'utf8' },
-      )
-      assertNoRendererLocalWritingGroupHeading(
-        packagedXml,
-        `packaged DOCX OOXML ${label}/${versionType}`,
-      )
-      assertCanonicalWritingChromeBookmarks(
-        packagedXml,
-        canonical,
-        `packaged DOCX OOXML ${label}/${versionType}`,
-      )
-      assertCanonicalWritingChromeTextLines(
-        extractDocxVisibleParagraphText(packagedXml),
-        canonical,
-        `packaged DOCX OOXML visible text ${label}/${versionType}`,
-      )
-      assert.equal(packagedXml, xml)
-      docxRenderer.convertDocxToPdf(docxPath, pdfPath)
-      assert.equal(readFileSync(pdfPath).subarray(0, 4).toString(), '%PDF')
-      const convertedText = execFileSync(
-        'pdftotext',
-        ['-layout', pdfPath, '-'],
-        { encoding: 'utf8' },
-      )
-      assertVisibleCanonicalText(convertedText, canonical)
-      assertNoRendererLocalWritingGroupHeading(
-        convertedText,
-        `DOCX-to-PDF ${label}/${versionType}`,
-      )
-      assertCanonicalWritingChromeTextLines(
-        convertedText,
-        canonical,
-        `DOCX-to-PDF ${label}/${versionType}`,
-      )
-      assert.equal(
-        convertedText.includes(`Continuation ${label}`),
-        false,
-        `DOCX-to-PDF ${label}/${versionType} suppresses the non-canonical visible title`,
-      )
-      if (label === 'two-starter') {
-        assertCanonicalWritingChromePdfGeometry(
-          pdfPath,
-          canonical,
-          `DOCX-to-PDF ${label}/${versionType}`,
-        )
-        recordWritingChromeRasterMetric(
-          label,
-          versionType,
-          'docx-pdf',
-          pdfWritingChromeInk(pdfPath, canonical),
-        )
-      }
-      if (persistActualArtifacts) {
-        copyFileSync(
-          docxPath,
-          path.join(actualArtifactRoot, `docx-${label}-${versionType}.docx`),
-        )
-        copyFileSync(
-          pdfPath,
-          path.join(
-            actualArtifactRoot,
-            `docx-${label}-${versionType}-converted.pdf`,
-          ),
-        )
-      }
-    } finally {
-      rmSync(docxRoot, { recursive: true, force: true })
-    }
-  }
-}
-
-{
-  const { consumption, canonical } = cases.find(
-    ({ label }) => label === 'two-starter',
-  )
-  const dummy = {
-    detail: {
-      id: 'dummy-writing-boundary-group',
-      paperId: 'dummy-writing-boundary-paper',
-      title: 'Application task',
-      source: 'boundary fixture',
-      groupType: 'writing',
-      passage: {
-        title: '',
-        materialText:
-          'Filler paragraph with enough words to occupy one ordinary line.',
-      },
-      questions: [],
-    },
-    score: 15,
-    sectionTitle: '',
-    note: '',
-  }
-  const boundaryArgs = {
-    title: 'Continuation boundary probe',
-    versionType: 'student',
-    printStyle: 'exam',
-    items: [dummy, poisonedExportItem(canonical, 'absent')],
-    blocks: [
-      {
-        type: 'question_group',
-        questionGroupId: dummy.detail.id,
-        score: 15,
-      },
-      {
-        type: 'question_group',
-        questionGroupId: canonical.groupId,
-        score: 25,
-      },
-    ],
-    questionNumberStart: 1,
-    canonicalConsumption: consumption,
-  }
-  const root = mkdtempSync(path.join(
-    tmpdir(),
-    'eqb-continuation-docx-boundary-',
-  ))
-  try {
-    const docxPath = path.join(root, 'boundary.docx')
-    const pdfPath = path.join(root, 'boundary.pdf')
-    const xml = docxRenderer.buildDocumentXml(boundaryArgs)
-    docxRenderer.writeDocxPackage({
-      documentXml: xml,
-      outputPath: docxPath,
-      title: boundaryArgs.title,
-    })
-    docxRenderer.convertDocxToPdf(docxPath, pdfPath)
-    const pages = execFileSync(
-      'pdftotext',
-      ['-layout', pdfPath, '-'],
-      { encoding: 'utf8' },
-    ).split('\f')
-    const starterPages = canonical.answerRegion.starterLines.map(
-      (starter) =>
-        pages.findIndex((pageText) => pageText.includes(starter.text)) + 1,
-    )
-    assert.ok(
-      starterPages.every((pageNumber) => pageNumber > 0),
-      'DOCX boundary PDF contains both canonical starter lines',
-    )
-    assert.equal(
-      new Set(starterPages).size,
-      1,
-      'DOCX boundary PDF keeps both starter lines in one unsplit response box/page',
-    )
-  } finally {
-    rmSync(root, { recursive: true, force: true })
   }
 }
 

@@ -16,9 +16,10 @@ import { resolveConsumerContract } from '../../shared/paper-canonical/consumers.
 import { projectCanonicalPaper } from '../../shared/paper-canonical/projector.mjs'
 import { digestJson, sha256, stableStringify, withoutKey } from '../../shared/paper-canonical/stable.mjs'
 
-const publicationFileName = 'canonical-paper-publication-v11.json'
+const publicationFileName = 'canonical-paper-publication-v12.json'
 const publicationFileNames = [
   publicationFileName,
+  'canonical-paper-publication-v11.json',
   'canonical-paper-publication-v10.json',
   'canonical-paper-publication-v9.json',
   'canonical-paper-publication-v8.json',
@@ -828,7 +829,7 @@ function publicationDiagnostic(error) {
 }
 
 /**
- * Shared Screen/Print-PDF/DOCX loader. It resolves one immutable publication
+ * Shared Screen/Print-PDF loader. It resolves one immutable publication
  * and one exact checked-in Consumer Contract before exposing a whole-family
  * consumption plan; existing consumers are intentionally not rewired here.
  */

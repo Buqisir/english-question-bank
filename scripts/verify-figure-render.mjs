@@ -4,7 +4,7 @@
  *
  * Manifest-driven, zero hardcoded figure id: scans every
  * app/public/paper-assets/<paperId>/latest/figures/manifest.json that
- * exists (today: only paper-2026-i) and exercises ALL FOUR render paths
+ * exists (today: only paper-2026-i) and exercises all supported render paths
  * plan.md names, on REAL data:
  *
  *   1. Client — paperAssetSurfaceAdapter.ts (PaperSurface's textMap, feeds
@@ -17,13 +17,6 @@
  *   3. Server — print-renderer.mjs (covers PDF / 工作台 A4 预览 / 草稿卷预览
  *      in one call — all three wrap this module's output unchanged), both
  *      imageMode: 'web' (browser surfaces) and 'file' (Vivliostyle PDF).
- *   4. Server — docxRenderer.mjs, ALL FOUR passage-emit sites (exam ×
- *      blocks, exam × legacy items, handout × blocks, handout × legacy
- *      items) via the FACTORY path (createDocxRenderer({ paperAssetsDir }),
- *      the same wiring server/api.mjs uses) — not just buildDocumentXml's
- *      string output but writeDocxPackage's real zip (media part +
- *      relationship present, unzipped and inspected).
- *
  * Plus:
  *   - MF-4 invariant re-asserted against PUBLISHED paper-assets (the
  *     import-time version lives in
@@ -31,7 +24,7 @@
  *     belt-and-suspenders post-publish re-check plan.md's Verify section
  *     asks for).
  *   - Whole-library anti-pattern sweep: every paper-asset in the repo
- *     (manifest or not) renders through print-renderer + docxRenderer with
+ *     (manifest or not) renders through print-renderer with
  *     paperAssetsDir set, and NONE of the output may contain a raw
  *     `[表: fig-` / `[图: fig-` token. Zero-figure papers (33 of the 34 in
  *     this repo today) trivially pass (they have no bracket token to begin
@@ -41,11 +34,9 @@
  *     REAL paper-asset group (paper-2020-bing's reading-a, which has no
  *     manifest.json) with a synthetic bracket token appended to its real
  *     passage text — real infra, not a mock resolveGroupFigures.
- *   - Backward-compat control: every buildPrintHtml / buildDocumentXml
- *     call WITHOUT paperAssetsDir stays byte-identical (already covered
- *     exhaustively by verify-print-renderer.mjs / verify-h5g-docx-renderer.
- *     mjs's pre-existing suites, which this script does not duplicate —
- *     see AGENTS.md "do not duplicate verification").
+ *   - Backward-compat control: every buildPrintHtml call WITHOUT
+ *     paperAssetsDir stays byte-identical (already covered exhaustively by
+ *     verify-print-renderer.mjs).
  */
 
 import { existsSync, readFileSync, readdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs'
@@ -304,125 +295,10 @@ section('4. Server — print-renderer.mjs (web + file imageMode)')
   }
 }
 
-// ─── 5. Server path — docxRenderer.mjs (all 4 emit sites) ───────────────
-section('5. Server — docxRenderer.mjs (exam/handout × blocks/legacy = 4 emit sites)')
-{
-  const { createDocxRenderer } = await import('../server/exports/docxRenderer.mjs')
-  const groupTypeLabels = { reading: '阅读理解' }
-  const optionalString = (v) => (typeof v === 'string' ? v.trim() : '')
-  const renderer = createDocxRenderer({ groupTypeLabels, optionalString, paperAssetsDir })
-  // docxRenderer.mjs's `let paperAssetsDir` (and groupTypeLabels/
-  // optionalString) is a MODULE-LEVEL singleton createDocxRenderer
-  // mutates, not a per-instance closure — every existing call site in
-  // this codebase only ever instantiates ONE renderer per process
-  // (api.mjs at startup; verify-h5g-docx-renderer.mjs's repeated
-  // makeRenderer() calls always pass the SAME config, so the reset is a
-  // no-op there). This script is the first consumer that legitimately
-  // needs TWO different configs (with/without paperAssetsDir) in the SAME
-  // process — a second createDocxRenderer(...) call resets the shared
-  // binding out from under any renderer reference created earlier. Fix:
-  // capture ONE fixture and run the "no paperAssetsDir" backward-compat
-  // check LAST, after every use of `renderer` above is done — see the end
-  // of this section. (Known pre-existing architectural pattern, not
-  // something this cut redesigns — see the completion report.)
-  let backwardCompatFixture = null
-
-  for (const { paperId, asset, figures } of papersWithManifest) {
-    for (const entry of figures) {
-      const group = asset.content.groups[entry.groupId]
-      if (!group) continue
-      const materialText = paperAssetParagraphText(group)
-      const detail = { id: entry.groupId, title: group.title, groupType: group.groupType, passage: { title: group.title, materialText, summary: materialText }, questions: [] }
-      const blocksItems = [{ detail, note: '', score: 1, sectionTitle: '' }]
-      const blocks = [{ type: 'question_group', questionGroupId: entry.groupId, score: 1 }]
-      const legacyItems = [{ detail, note: '', score: 1, sectionTitle: '' }] // no `blocks` → legacy fallback branch
-
-      for (const printStyle of ['exam', 'handout']) {
-        for (const mode of ['blocks', 'legacy']) {
-          const images = []
-          const xml = renderer.buildDocumentXml({
-            title: 'T',
-            versionType: 'student',
-            items: mode === 'blocks' ? blocksItems : legacyItems,
-            blocks: mode === 'blocks' ? blocks : null,
-            questionNumberStart: 1,
-            printStyle,
-            images,
-          })
-          const label = `${paperId}/${entry.groupId} (${printStyle}/${mode})`
-          assert(!xml.includes(entry.placeholderMarker) && !FIGURE_TOKEN_ANYWHERE.test(xml), `${label}: documentXml has zero raw figure tokens`)
-          assert(xml.includes('<w:drawing>'), `${label}: documentXml embeds a <w:drawing>`)
-          assert(images.length === 1, `${label}: images out-parameter collected exactly 1 image (got ${images.length})`)
-          assert(xml.includes(`r:embed="${images[0]?.rId}"`), `${label}: documentXml references the collected image's rId`)
-          assert(!xml.includes(entry.caption || ' '), `${label}: documentXml never renders manifest caption (PA SW-4)`)
-
-          // Real zip: media part + relationship actually present.
-          const outDir = mkdtempSync(path.join(tmpdir(), 'verify-figure-render-docx-'))
-          try {
-            const outputPath = path.join(outDir, 'out.docx')
-            const body = renderer.writeDocxPackage({ documentXml: xml, images, outputPath, title: 'T' })
-            assert(Buffer.isBuffer(body) && body[0] === 0x50 && body[1] === 0x4b, `${label}: writeDocxPackage produces a valid zip (PK header)`)
-            const extractDir = path.join(outDir, 'extract')
-            execFileSync('unzip', ['-q', outputPath, '-d', extractDir])
-            const mediaFile = path.join(extractDir, 'word/media', `image1.${images[0].extension}`)
-            assert(existsSync(mediaFile), `${label}: word/media/image1.${images[0].extension} exists in the unzipped package`)
-            const originalSize = readFileSync(path.join(paperAssetsDir, paperId, 'latest', 'figures', entry.file)).length
-            assert(readFileSync(mediaFile).length === originalSize, `${label}: embedded media byte size matches the original PNG`)
-            const relsXml = readFileSync(path.join(extractDir, 'word/_rels/document.xml.rels'), 'utf8')
-            assert(relsXml.includes(images[0].rId) && relsXml.includes('relationships/image'), `${label}: document.xml.rels declares the image relationship`)
-          } finally {
-            rmSync(outDir, { recursive: true, force: true })
-          }
-        }
-      }
-
-      backwardCompatFixture = { paperId, groupId: entry.groupId, marker: entry.placeholderMarker, items: blocksItems, blocks }
-    }
-  }
-
-  // Plan rule 3 — "no manifest hit" placeholder card in DOCX, real
-  // no-manifest paper-asset group + synthetic bracket token.
-  const noManifestPaper = papersWithoutManifest.find((p) => Object.values(p.asset.content.groups).some((g) => g.groupType === 'reading'))
-  if (noManifestPaper) {
-    const group = Object.values(noManifestPaper.asset.content.groups).find((g) => g.groupType === 'reading')
-    const materialText = `${paperAssetParagraphText(group)}\n\n[图: fig-does-not-exist-anywhere]`
-    const detail = { id: group.groupId, title: group.title, groupType: 'reading', passage: { title: group.title, materialText, summary: materialText }, questions: [] }
-    const images = []
-    const xml = renderer.buildDocumentXml({ title: 'T', versionType: 'student', items: [{ detail, note: '', score: 1, sectionTitle: '' }], blocks: [{ type: 'question_group', questionGroupId: group.groupId, score: 1 }], questionNumberStart: 1, printStyle: 'exam', images })
-    assert(images.length === 0, `${noManifestPaper.paperId}: an unresolvable bracket token collects zero images`)
-    assert(xml.includes('〔表格：见原卷〕'), `${noManifestPaper.paperId}: DOCX placeholder card carries the exact plan.md copy`)
-    assert(!xml.includes('[图: fig-does-not-exist-anywhere]'), `${noManifestPaper.paperId}: the unresolvable raw token itself never reaches documentXml`)
-  }
-
-  // Backward-compat, run LAST (see the `backwardCompatFixture` comment
-  // above): a renderer instantiated WITHOUT paperAssetsDir must produce
-  // the exact pre-cut documentXml (raw token unchanged, no <w:drawing>).
-  // Instantiating this second renderer resets docxRenderer.mjs's shared
-  // module-level `paperAssetsDir` binding, so nothing above may rely on
-  // `renderer` (the paperAssetsDir-configured one) after this point.
-  if (backwardCompatFixture) {
-    const rendererNoDir = createDocxRenderer({ groupTypeLabels, optionalString })
-    const xmlNoDir = rendererNoDir.buildDocumentXml({
-      title: 'T',
-      versionType: 'student',
-      items: backwardCompatFixture.items,
-      blocks: backwardCompatFixture.blocks,
-      questionNumberStart: 1,
-      printStyle: 'exam',
-    })
-    assert(xmlNoDir.includes(backwardCompatFixture.marker), `${backwardCompatFixture.paperId}/${backwardCompatFixture.groupId}: renderer created without paperAssetsDir → raw token unchanged (byte-identical additivity)`)
-    assert(!xmlNoDir.includes('<w:drawing>'), `${backwardCompatFixture.paperId}/${backwardCompatFixture.groupId}: renderer created without paperAssetsDir → no <w:drawing> emitted`)
-  }
-}
-
-// ─── 6. Whole-library anti-pattern sweep ─────────────────────────────────
-section('6. Whole-library anti-pattern sweep (no render output contains a raw figure token)')
+// ─── 5. Whole-library anti-pattern sweep ─────────────────────────────────
+section('5. Whole-library anti-pattern sweep (no render output contains a raw figure token)')
 {
   const { buildPrintHtml } = await import('../server/print-renderer.mjs')
-  const { createDocxRenderer } = await import('../server/exports/docxRenderer.mjs')
-  const groupTypeLabels = { reading: '阅读理解', cloze: '完形填空', seven_choices: '七选五', grammar_cloze: '语法填空', writing: '写作', continuation: '读后续写' }
-  const optionalString = (v) => (typeof v === 'string' ? v.trim() : '')
-  const renderer = createDocxRenderer({ groupTypeLabels, optionalString, paperAssetsDir })
 
   let sweptGroups = 0
   let markerBearingGroups = 0
@@ -441,9 +317,6 @@ section('6. Whole-library anti-pattern sweep (no render output contains a raw fi
       const html = buildPrintHtml({ title: 'T', versionType: 'student', printStyle: 'exam', items, blocks, questionNumberStart: 1, paperAssetsDir, imageMode: 'web' })
       assert(!FIGURE_TOKEN_ANYWHERE.test(html), `${paperId}/${groupId}: print HTML output has zero raw figure tokens (whole-library sweep)`)
 
-      const images = []
-      const xml = renderer.buildDocumentXml({ title: 'T', versionType: 'student', items, blocks, questionNumberStart: 1, printStyle: 'exam', images })
-      assert(!FIGURE_TOKEN_ANYWHERE.test(xml), `${paperId}/${groupId}: docx documentXml has zero raw figure tokens (whole-library sweep)`)
     }
   }
   assert(sweptGroups > 0, `whole-library sweep visited ${sweptGroups} groups across ${papers.length} papers`)

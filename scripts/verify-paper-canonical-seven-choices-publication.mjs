@@ -75,7 +75,7 @@ async function exercisePublicSeams(fixture) {
     })
     assert.equal(published.status, 'published')
     const store = createFileSystemCanonicalPublicationStore({ rootDir, db })
-    for (const consumerContract of [consumerContractRefs.screen, consumerContractRefs.docx]) {
+    for (const consumerContract of [consumerContractRefs.screen, consumerContractRefs.print_pdf]) {
       const loaded = await loadPaperForConsumption({
         paperId: fixture.paperId || fixture.source.paperId,
         consumerContract,

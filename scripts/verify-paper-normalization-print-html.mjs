@@ -112,10 +112,7 @@ function exportProofGroup({
       exportDir,
       getQuestionGroupDetail: (requestedGroupId) =>
         requestedGroupId === groupId ? item.detail : null,
-      buildDocumentXml: () => '',
-      writeDocxPackage: () => Buffer.alloc(0),
       buildPrintHtml,
-      convertDocxToPdf: () => {},
       renderPrintPdf({ pdfPath }) {
         writeFileSync(pdfPath, Buffer.from('stable-print-pdf-bytes'))
       },

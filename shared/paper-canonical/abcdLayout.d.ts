@@ -118,8 +118,4 @@ export function translateAbcdPlanToPrintPdf(
   plan: SelectedAbcdLayoutPlan,
   fontClosure: VerifiedAbcdRendererFontClosure,
 ): object
-export function translateAbcdPlanToDocx(
-  plan: SelectedAbcdLayoutPlan,
-  fontClosure: VerifiedAbcdRendererFontClosure,
-): object
 export const abcdLayoutRules: Readonly<Record<string, string | number>>

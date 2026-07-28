@@ -31,21 +31,6 @@ function requiredEnum(value, allowed, label) {
   return value
 }
 
-function docxFileName(title, versionType) {
-  const versionLabel = versionType === 'student' ? '学生版' : '教师版'
-  const cleanTitle = String(title || '英语题集')
-    .replace(/[\\/:*?"<>|]/g, ' ')
-    .replace(/\s+/g, ' ')
-    .trim()
-    .slice(0, 80)
-
-  return `${cleanTitle || '英语题集'}-${versionLabel}.docx`
-}
-
-function pdfFileName(title, versionType) {
-  return docxFileName(title, versionType).replace(/\.docx$/, '.pdf')
-}
-
 function defaultTimestampPrefix() {
   return new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19)
 }
@@ -62,15 +47,6 @@ function sendBinary(response, { body, fileName, outputPath, contentType }) {
     'x-output-path': encodeURIComponent(outputPath),
   })
   response.end(body)
-}
-
-function sendDocx(response, body, fileName, outputPath) {
-  sendBinary(response, {
-    body,
-    fileName,
-    outputPath,
-    contentType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-  })
 }
 
 function sendPdf(response, body, fileName, outputPath) {
@@ -134,89 +110,21 @@ export function createExportImplementation({
   rootDir,
   exportDir,
   getQuestionGroupDetail,
-  buildDocumentXml,
-  writeDocxPackage,
   buildPrintHtml,
-  convertDocxToPdf,
   renderPrintPdf = renderPrintPdfWithVivliostyle,
   timestampPrefix = defaultTimestampPrefix,
-  // figure-render cut (fig-token P0): optional — a caller/test that omits
-  // it (every existing one does) gets pre-cut byte-identical output, since
-  // buildDocumentXml/buildPrintHtml never even look up figures without a
-  // real paperAssetsDir. Used to resolve each group's figures/manifest.json
-  // for DOCX embedding (exportDocx) and to pick the right <img> URL scheme
-  // for print/PDF (exportPrintHtml uses web-relative paths for the
-  // browser-rendered preview; exportPrintPdf overrides to absolute file://
-  // paths since Vivliostyle CLI converts the HTML from a scratch tempdir
-  // with no web server underneath it — see print-renderer.mjs's
-  // `figureImageSrc` doc comment for the full "why two modes" story).
+  // Used to pick the right <img> URL scheme for Print/PDF:
+  // exportPrintHtml uses web-relative paths while exportPrintPdf uses
+  // same-directory file URLs inside its temporary Chromium input.
   paperAssetsDir = null,
   resolveCanonicalConsumption = null,
 }) {
   if (typeof getQuestionGroupDetail !== 'function') {
     throw new Error('getQuestionGroupDetail is required')
   }
-  if (typeof buildDocumentXml !== 'function') {
-    throw new Error('buildDocumentXml is required')
-  }
-  if (typeof writeDocxPackage !== 'function') {
-    throw new Error('writeDocxPackage is required')
-  }
   if (typeof buildPrintHtml !== 'function') {
     throw new Error('buildPrintHtml is required')
   }
-  if (typeof convertDocxToPdf !== 'function') {
-    throw new Error('convertDocxToPdf is required')
-  }
-
-  function exportDocx(input) {
-    const title = requiredString(input.title, 'title')
-    const versionType = requiredEnum(input.versionType, ['student', 'teacher'], 'versionType')
-    const exportItems = resolveExportItems(input, getQuestionGroupDetail)
-    const questionNumberStart = normalizedQuestionNumberStart(input)
-    const blocks = Array.isArray(input.blocks) ? input.blocks : null
-
-    mkdirSync(exportDir, { recursive: true })
-    const fileName = docxFileName(title, versionType)
-    const outputPath = path.join(exportDir, `${timestampPrefix()}-${fileName}`)
-    const printStyle = input.printStyle === 'exam' ? 'exam' : 'handout'
-    // figure-render cut: `images` is an out-parameter buildDocumentXml
-    // populates while walking the passage — see docxRenderer.mjs's header
-    // comment above buildExamDocumentXml for why it isn't a return value.
-    const images = []
-    const normalizationDiagnostics = []
-    const canonicalConsumption = resolveCanonicalConsumption
-      ? resolveCanonicalConsumption({ consumerId: 'docx', items: exportItems })
-      : null
-    const documentXml = buildDocumentXml({ title, versionType, items: exportItems, blocks, questionNumberStart, printStyle, paperAssetsDir, images, normalizationDiagnostics, canonicalConsumption })
-    const body = writeDocxPackage({ documentXml, images, outputPath, title })
-
-    return {
-      body,
-      fileName,
-      outputPath,
-      normalizationDiagnostics,
-    }
-  }
-
-  function exportPdf(input) {
-    const title = requiredString(input.title, 'title')
-    const versionType = requiredEnum(input.versionType, ['student', 'teacher'], 'versionType')
-    const docxResult = exportDocx({ ...input, title, versionType })
-    const fileName = pdfFileName(title, versionType)
-    const outputPath = docxResult.outputPath.replace(/\.docx$/, '.pdf')
-
-    convertDocxToPdf(docxResult.outputPath, outputPath)
-    rmSync(docxResult.outputPath, { force: true })
-
-    return {
-      body: readFileSync(outputPath),
-      fileName,
-      outputPath,
-      normalizationDiagnostics: docxResult.normalizationDiagnostics,
-    }
-  }
-
   // figure-render cut: `imageMode` is an internal option (never taken from
   // `input`, so it isn't attacker/caller controllable over the public
   // export HTTP input) — 'web' (default) for the browser-rendered preview
@@ -300,14 +208,11 @@ export function createExportImplementation({
   }
 
   return {
-    exportDocx,
-    exportPdf,
     exportPrintHtml,
     exportPrintPdf,
     sendBinary,
-    sendDocx,
     sendPdf,
   }
 }
 
-export { sendBinary, sendDocx, sendPdf }
+export { sendBinary, sendPdf }

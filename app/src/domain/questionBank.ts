@@ -131,7 +131,7 @@ export type DraftPaperSummary = {
   updatedAt: string
   lastPrintedAt: string | null
   // draft-student-field (E4): optional owner-facing "whose one-on-one session"
-  // metadata. Free text, nullable, never renders onto the paper face (print/DOCX
+  // metadata. Free text, nullable, never renders onto the paper face (Print/PDF
   // never read this field — see docs/cuts/draft-student-field/plan.md).
   studentLabel: string | null
   printForm: DraftPrintForm

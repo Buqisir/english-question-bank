@@ -4,7 +4,6 @@ import assert from 'node:assert/strict'
 import { execFileSync } from 'node:child_process'
 import { createHash } from 'node:crypto'
 import {
-  mkdirSync,
   mkdtempSync,
   readFileSync,
   readdirSync,
@@ -20,7 +19,6 @@ import {
   expectedAbcdRendererFontClosure,
   layoutAbcdOptionSet,
   resolveAbcdRendererFontClosure,
-  translateAbcdPlanToDocx,
   translateAbcdPlanToPaperSurface,
   translateAbcdPlanToPointPlacement,
   translateAbcdPlanToPrintPdf,
@@ -352,43 +350,6 @@ function htmlFor(translation, embeddedFont = '') {
     `<span class="option ${translation.mode === 'one_column' ? 'one' : 'dense'}" data-label="${placement.label}" style="left:${placement.startPt}pt;top:${placement.row * rowHeightPt}pt;width:${translation.mode === 'one_column' ? translation.rowWidthPt : translation.rowWidthPt - placement.startPt}pt">${escapeHtml(placement.renderedText)}</span>`).join('')}</div>`
 }
 
-function textRuns(value) {
-  return escapeXml(value).split('\n').map((part, index) =>
-    `${index ? '<w:br/>' : ''}<w:t xml:space="preserve">${part}</w:t>`).join('')
-}
-
-function docxDocumentXml(translation) {
-  const body = translation.paragraphs.map((paragraph) => {
-    const tabs = paragraph.placements
-      .filter(({ startTwip }) => startTwip > 0)
-      .map(({ startTwip }) =>
-        `<w:tab w:val="left" w:pos="${420 + startTwip}"/>`)
-      .join('')
-    const properties = translation.mode === 'one_column'
-      ? '<w:ind w:left="840" w:hanging="420"/><w:tabs><w:tab w:val="left" w:pos="840"/></w:tabs>'
-      : `<w:ind w:left="420"/>${tabs ? `<w:tabs>${tabs}</w:tabs>` : ''}`
-    const runs = paragraph.placements.map((placement, index) =>
-      `${index > 0 ? '<w:r><w:tab/></w:r>' : ''}<w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:eastAsia="Songti SC"/><w:sz w:val="21"/><w:kern w:val="2"/></w:rPr>${textRuns(placement.renderedText)}</w:r>`).join('')
-    return `<w:p><w:pPr>${properties}<w:spacing w:line="360" w:lineRule="exact"/></w:pPr>${runs}</w:p>`
-  }).join('')
-  return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:body>${body}<w:sectPr><w:pgSz w:w="11906" w:h="16838"/><w:pgMar w:top="1191" w:right="1361" w:bottom="1191" w:left="1361"/></w:sectPr></w:body></w:document>`
-}
-
-function writeDocx(root, name, translation) {
-  const packageDir = path.join(root, `${name}-package`)
-  mkdirSync(path.join(packageDir, '_rels'), { recursive: true })
-  mkdirSync(path.join(packageDir, 'word'), { recursive: true })
-  writeFileSync(path.join(packageDir, '[Content_Types].xml'), `<?xml version="1.0" encoding="UTF-8"?>
-<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/></Types>`)
-  writeFileSync(path.join(packageDir, '_rels/.rels'), `<?xml version="1.0" encoding="UTF-8"?>
-<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/></Relationships>`)
-  writeFileSync(path.join(packageDir, 'word/document.xml'), docxDocumentXml(translation))
-  const docxPath = path.join(root, `${name}.docx`)
-  execFileSync('zip', ['-X', '-q', '-r', docxPath, '.'], { cwd: packageDir })
-  return docxPath
-}
-
 function pdfWords(pdfPath, outputRoot) {
   const bboxPath = path.join(outputRoot, `${path.basename(pdfPath)}.bbox.html`)
   execFileSync('pdftotext', ['-bbox', pdfPath, bboxPath])
@@ -625,12 +586,10 @@ async function verifyActualArtifacts() {
       const selected = layoutAbcdOptionSet(optionSet(questionId, texts))
       const screen = translateAbcdPlanToPaperSurface(selected, actualFont.closure)
       const print = translateAbcdPlanToPrintPdf(selected, actualFont.closure)
-      const docx = translateAbcdPlanToDocx(selected, actualFont.closure)
       assert.equal(screen.placementSignature, print.placementSignature)
-      assert.equal(screen.placementSignature, docx.placementSignature)
-      assert.equal([screen, print, docx].every(({ shrinkToFit }) =>
+      assert.equal([screen, print].every(({ shrinkToFit }) =>
         shrinkToFit === false), true)
-      assert.equal([screen, print, docx].every(({ clipping }) =>
+      assert.equal([screen, print].every(({ clipping }) =>
         clipping === 'forbidden'), true)
       const page = await browser.newPage({ viewport: { width: 1000, height: 800 } })
       await page.setContent(htmlFor(screen, embeddedFont))
@@ -673,37 +632,6 @@ async function verifyActualArtifacts() {
       }
       await page.close()
 
-      const docxPath = writeDocx(outputRoot, questionId, docx)
-      assert.equal(readFileSync(docxPath).subarray(0, 2).toString(), 'PK')
-      execFileSync('soffice', [
-        '--headless',
-        '--convert-to',
-        'pdf',
-        '--outdir',
-        outputRoot,
-        docxPath,
-      ], { stdio: 'pipe' })
-      const docxPdfPath = path.join(outputRoot, `${questionId}.pdf`)
-      assert.equal(readFileSync(docxPdfPath).subarray(0, 4).toString(), '%PDF')
-      assertPhysicalPlacement(
-        selected.placements,
-        pdfWords(docxPdfPath, outputRoot),
-        `${questionId} DOCX`,
-      )
-      assertRenderedContent(
-        docxPdfPath,
-        outputRoot,
-        selected.placements,
-        `${questionId} DOCX`,
-      )
-      if (selected.mode !== 'one_column') {
-        assertDenseContentNoWrap(
-          docxPdfPath,
-          outputRoot,
-          selected.placements,
-          `${questionId} DOCX`,
-        )
-      }
     }
 
     const clozeScreen = {
@@ -721,11 +649,6 @@ async function verifyActualArtifacts() {
           ...placement,
           row,
         }))),
-    }
-    const clozeDocx = {
-      ...translateAbcdPlanToDocx(clozePlans[0], actualFont.closure),
-      paragraphs: clozePlans.flatMap((selected) =>
-        translateAbcdPlanToDocx(selected, actualFont.closure).paragraphs),
     }
     const clozePlacements = clozePlans.flatMap((selected, row) =>
       selected.placements.map((placement) => ({
@@ -761,31 +684,6 @@ async function verifyActualArtifacts() {
     )
     await clozePage.close()
 
-    const clozeDocxPath = writeDocx(outputRoot, 'cloze-docx', clozeDocx)
-    execFileSync('soffice', [
-      '--headless',
-      '--convert-to',
-      'pdf',
-      '--outdir',
-      outputRoot,
-      clozeDocxPath,
-    ], { stdio: 'pipe' })
-    const clozeDocxPdf = path.join(outputRoot, 'cloze-docx.pdf')
-    const clozeDocxWords = pdfWords(clozeDocxPdf, outputRoot)
-    assertPhysicalPlacement(clozePlacements, clozeDocxWords, 'Cloze DOCX')
-    assertSameColumnSpread(clozePlacements, clozeDocxWords, 'Cloze DOCX')
-    assertRenderedContent(
-      clozeDocxPdf,
-      outputRoot,
-      clozePlacements,
-      'Cloze DOCX',
-    )
-    assertDenseContentNoWrap(
-      clozeDocxPdf,
-      outputRoot,
-      clozePlacements,
-      'Cloze DOCX',
-    )
   } finally {
     await browser.close()
     rmSync(outputRoot, { recursive: true, force: true })

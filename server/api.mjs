@@ -20,7 +20,6 @@ import { buildPrintHtml } from './print-renderer.mjs'
 import { createDraftPaperRoutes } from './draft-paper/draftPaperRoutes.mjs'
 import { createDraftPaperStore } from './draft-paper/draftPaperStore.mjs'
 import { createExportImplementation } from './exports/exportImplementation.mjs'
-import { createDocxRenderer } from './exports/docxRenderer.mjs'
 import { createExportRoutes } from './exports/exportRoutes.mjs'
 import { createCanonicalConsumerRuntime } from './paper-canonical/consumerRuntime.mjs'
 import { createPaperCanonicalConsumerRoutes } from './paper-canonical/consumerRoutes.mjs'
@@ -65,13 +64,7 @@ const exportImplementation = createExportImplementation({
   rootDir,
   exportDir,
   getQuestionGroupDetail,
-  buildDocumentXml,
-  writeDocxPackage,
   buildPrintHtml,
-  convertDocxToPdf,
-  // figure-render cut: threaded through so exportDocx/exportPrintHtml/
-  // exportPrintPdf can resolve each group's figures/manifest.json —
-  // optional, defaults to null in createExportImplementation.
   paperAssetsDir,
   resolveCanonicalConsumption,
 })
@@ -3604,42 +3597,6 @@ async function parseGrammarByQuestionGroup(questionGroupId, apiKey, model, parse
 }
 async function parseSevenChoicesByQuestionGroup(questionGroupId, apiKey, model, parseRequestId, thinkingMode = false) {
   return parseSevenChoicesByQuestionGroupImpl(questionGroupId, apiKey, model, parseRequestId, thinkingMode)
-}
-
-// The DOCX OOXML renderer (escapeXml … convertDocxToPdf, ~24 fns + readingDistractorTypeLabel) now lives
-// in ./exports/docxRenderer.mjs (cut H5-G). USER-VISIBLE: the WordprocessingML strings are byte-sensitive.
-// Only two free identifiers are injected — groupTypeLabels (a non-hoisted const@~149) and optionalString —
-// so the factory must run LATE (a plain const destructure before createExportImplementation@~62 would TDZ
-// on groupTypeLabels). The 3 entry fns alias to *Impl and re-enter api.mjs through hoisted forwarding
-// wrappers (all 3 sync, exact original signatures) so createExportImplementation@~62 keeps injecting the
-// hoisted wrappers unchanged (it only STORES them; they run at export time after init). timestampPrefix
-// STAYS in api.mjs (not docx rendering); the renderer never calls it.
-// figure-render cut (fig-token P0): paperAssetsDir is injected so
-// docxRenderer.mjs can resolve a group's figures/manifest.json + embed the
-// PNG (optional — the factory defaults it to null, matching every other
-// caller/test that omits it). buildDocumentXml/writeDocxPackage both gained
-// an `images` out-parameter for the same reason (see docxRenderer.mjs's
-// header comment above buildExamDocumentXml) — forwarded through here
-// unchanged so the wrappers stay "exact original signatures" plus the one
-// new param.
-const docxRenderer = createDocxRenderer({
-  groupTypeLabels,
-  optionalString,
-  paperAssetsDir,
-})
-const {
-  buildDocumentXml: buildDocumentXmlImpl,
-  writeDocxPackage: writeDocxPackageImpl,
-  convertDocxToPdf: convertDocxToPdfImpl,
-} = docxRenderer
-function buildDocumentXml({ title, versionType, items, blocks, questionNumberStart, printStyle, images = [], normalizationDiagnostics = [], canonicalConsumption = null }) {
-  return buildDocumentXmlImpl({ title, versionType, items, blocks, questionNumberStart, printStyle, images, normalizationDiagnostics, canonicalConsumption })
-}
-function writeDocxPackage({ documentXml, outputPath, title, images = [] }) {
-  return writeDocxPackageImpl({ documentXml, outputPath, title, images })
-}
-function convertDocxToPdf(docxPath, outputPath) {
-  return convertDocxToPdfImpl(docxPath, outputPath)
 }
 
 function formatQuestionGroupForTopicLabel(detail) {

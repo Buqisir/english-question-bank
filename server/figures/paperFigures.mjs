@@ -1,8 +1,7 @@
 // server/figures/paperFigures.mjs — figure-render cut (fig-token P0).
 //
-// Server-side helper, extracted for BOTH print-renderer.mjs and
-// docxRenderer.mjs (plan.md Allowed: "print-renderer.mjs、docxRenderer.mjs
-// （+抽出的嵌图 helper）"): given a question-group id, find the paper-asset
+// Server-side helper for print-renderer.mjs: given a question-group id,
+// find the paper-asset
 // that owns it and return that paper's figures/manifest.json entries plus
 // the on-disk baseDir the figure PNGs live under (`<baseDir>/figures/`).
 //

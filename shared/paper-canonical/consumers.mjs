@@ -1,16 +1,15 @@
-import screen from '../../standards/paper-canonical/consumers/screen-v11.json' with { type: 'json' }
-import printPdf from '../../standards/paper-canonical/consumers/print-pdf-v12.json' with { type: 'json' }
-import docx from '../../standards/paper-canonical/consumers/docx-v11.json' with { type: 'json' }
+import screen from '../../standards/paper-canonical/consumers/screen-v12.json' with { type: 'json' }
+import printPdf from '../../standards/paper-canonical/consumers/print-pdf-v13.json' with { type: 'json' }
 
 import { canonicalAuthorityRef, resolveCanonicalAuthority, validateJsonSchema } from './authority.mjs'
 import { digestJson, withoutKey } from './stable.mjs'
 
-const contracts = [screen, printPdf, docx]
+const contracts = [screen, printPdf]
 const byId = new Map(contracts.map((contract) => [contract.consumerId, contract]))
 
 function validateContract(contract) {
   const authority = resolveCanonicalAuthority(canonicalAuthorityRef)
-  const issues = validateJsonSchema(contract, authority.closure.schemas['consumer-contract-v1'], '$.consumerContract')
+  const issues = validateJsonSchema(contract, authority.closure.schemas['consumer-contract-v2'], '$.consumerContract')
   if (contract.authorityManifestDigest !== canonicalAuthorityRef.manifestDigest) issues.push({ code: 'CONSUMER_AUTHORITY_MISMATCH' })
   if (contract.contractDigest !== digestJson(withoutKey(contract, 'contractDigest'))) issues.push({ code: 'CONSUMER_DIGEST_MISMATCH' })
   const families = new Set()

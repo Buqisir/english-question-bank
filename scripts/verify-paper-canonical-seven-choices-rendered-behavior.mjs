@@ -24,7 +24,6 @@ import { consumerContractRefs } from '../shared/paper-canonical/consumers.mjs'
 import {
   buildCanonicalConsumptionSurfaceData,
 } from '../shared/paper-normalization/canonicalPaperGroupSurfaceAdapter.mjs'
-import { createDocxRenderer } from '../server/exports/docxRenderer.mjs'
 import { buildPrintHtml } from '../server/print-renderer.mjs'
 import {
   createFileSystemCanonicalPublicationStore,
@@ -115,13 +114,16 @@ async function assertWholePaperLoaderSelections() {
     for (const consumerContract of [
       consumerContractRefs.screen,
       consumerContractRefs.print_pdf,
-      consumerContractRefs.docx,
     ]) {
       const loaded = await loadPaperForConsumption({
         paperId: fixture.paperId,
         consumerContract,
       }, store)
-      assert.equal(loaded.disposition, 'ready')
+      assert.equal(
+        loaded.disposition,
+        'ready',
+        JSON.stringify(loaded.diagnostics),
+      )
       const selection = loaded.selections.find(
         (candidate) => candidate.familyContractId === 'seven-choices',
       )
@@ -282,58 +284,6 @@ for (const versionType of ['student', 'teacher']) {
       path.join(actualArtifactRoot, `print-${caseName}.html`),
       html,
     )
-
-    const renderer = createDocxRenderer({
-      groupTypeLabels: { seven_choices: '七选五' },
-      optionalString: (value) => typeof value === 'string' ? value.trim() : '',
-    })
-    const xml = renderer.buildDocumentXml({
-      title: 'Seven Choices QA',
-      versionType,
-      items: [item],
-      blocks,
-      questionNumberStart: 36,
-      printStyle: 'exam',
-      canonicalConsumption: consumption,
-    })
-    assert.equal(count(xml, /canonical_pair_/g), 5)
-    assert.equal(count(xml, /canonical_option_/g), 7)
-    assert.equal(count(xml, /canonical_bank_/g), 1)
-    assert.equal(
-      xml.includes(bookmarkName('canonical_semantic', group.semanticSignature)),
-      true,
-    )
-    assert.equal(
-      xml.includes(bookmarkName('canonical_occurrence', group.occurrenceSignature)),
-      true,
-    )
-    assert.equal(xml.includes('POISONED RAW MARKERS'), false)
-    assert.equal(
-      count(xml, /A\. This capability allows for timely restoration\./g),
-      1,
-    )
-    const docxPath = path.join(
-      actualArtifactRoot,
-      `docx-${caseName}.docx`,
-    )
-    const docxBytes = renderer.writeDocxPackage({
-      documentXml: xml,
-      outputPath: docxPath,
-      title: 'Seven Choices QA',
-    })
-    assert.equal(docxBytes.subarray(0, 2).toString(), 'PK')
-    assert.equal(
-      execFileSync('unzip', ['-p', docxPath, 'word/document.xml'], {
-        encoding: 'utf8',
-      }),
-      xml,
-    )
-    if (persistActualArtifacts) {
-      renderer.convertDocxToPdf(
-        docxPath,
-        path.join(actualArtifactRoot, `docx-${caseName}.pdf`),
-      )
-    }
   }
 }
 
@@ -582,7 +532,7 @@ if (persistActualArtifacts) {
 
 - Exact HEAD: \`${exactHead}\`
 - Paper / group: \`${fixture.paperId}\` / \`${occurrence.groupId}\`
-- Every PaperSurface, Print/PDF, and DOCX preview must show five numbered pair anchors (36–40), seven A–G option anchors, exactly one shared bank, and zero per-question choice sets.
+- Every PaperSurface and Print/PDF preview must show five numbered pair anchors (36–40), seven A–G option anchors, exactly one shared bank, and zero per-question choice sets.
 - PaperSurface plain and lecture must preserve the same semantic and occurrence signatures.
 - PaperSurface without the optional Seven Choices Analysis sidecar must preserve the same canonical signatures and blank-focus joins.
 - PaperSurface with a wrong-schema or stale-paper Analysis sidecar must degrade to the same "解析未发布" lecture state without changing canonical signatures or blank-focus joins.

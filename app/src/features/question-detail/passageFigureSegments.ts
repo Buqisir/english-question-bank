@@ -13,8 +13,8 @@
  * PO-2 (PA follow-up, PM-adopted, plan.md rule 4): the detail-page passage
  * keeps the flattened table text BELOW the image (§8 网站面 = 语义完整,
  * 做题-safe double-store) — this is the ONE surface where the flattened
- * text is deliberately preserved; every other surface (PaperSurface /
- * print / PDF / DOCX) replaces the paragraph/line wholesale with no text.
+ * text is deliberately preserved; every other live surface (PaperSurface /
+ * Print/PDF) replaces the paragraph/line wholesale with no text.
  *
  * `materialText` is paragraphs joined by "\n\n" (server's
  * `paperAssetParagraphText`, unchanged by this cut). Splitting on that

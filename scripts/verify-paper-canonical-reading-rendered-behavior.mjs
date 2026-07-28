@@ -29,7 +29,6 @@ import {
   digestJson,
   sha256,
 } from '../shared/paper-canonical/stable.mjs'
-import { createDocxRenderer } from '../server/exports/docxRenderer.mjs'
 import { buildPrintHtml } from '../server/print-renderer.mjs'
 import {
   createFileSystemCanonicalPublicationStore,
@@ -438,121 +437,7 @@ for (const versionType of ['student', 'teacher']) {
   )
   printCases.push({ versionType, html })
 
-  const images = []
-  const renderer = createDocxRenderer({
-    groupTypeLabels: { reading: '阅读理解' },
-    optionalString: (value) =>
-      typeof value === 'string' ? value.trim() : '',
-  })
-  const xml = renderer.buildDocumentXml({
-    title: 'Canonical Reading QA',
-    versionType,
-    items: [item],
-    blocks,
-    questionNumberStart: deliberatelyWrongCallerSeed,
-    printStyle: 'exam',
-    canonicalConsumption: real.consumption,
-    images,
-  })
-  assert.equal(xml.includes('<w:tbl>'), true)
-  assert.equal(
-    xml.includes(bookmarkName('canonical_semantic', tableGroup.semanticSignature)),
-    true,
-  )
-  for (const block of tableGroup.blocks) {
-    assert.equal(
-      xml.includes(bookmarkName('canonical_block', block.nodeId)),
-      true,
-    )
-  }
-  for (const question of tableGroup.questions) {
-    assert.equal(
-      xml.includes(
-        bookmarkName('canonical_question', question.questionId),
-      ),
-      true,
-    )
-    assert.equal(
-      xml.includes(
-        `<w:t xml:space="preserve">${question.questionNo}.</w:t>`,
-      ),
-      true,
-    )
-    assert.equal(
-      xml.includes(
-        bookmarkName('canonical_placement', question.placementSignature),
-      ),
-      true,
-    )
-    for (const option of question.options) {
-      assert.equal(
-        xml.includes(bookmarkName('canonical_option', option.optionId)),
-        true,
-      )
-    }
-    const questionBookmark = bookmarkName(
-      'canonical_question',
-      question.questionId,
-    )
-    const questionStart = xml.indexOf(questionBookmark)
-    const questionEnd = xml.indexOf(
-      `<w:bookmarkEnd w:id="${bookmarkId(
-        'canonical_question',
-        question.questionId,
-      )}"/>`,
-      questionStart,
-    )
-    const questionXml = xml.slice(questionStart, questionEnd)
-    assert.equal(
-      questionXml.includes(
-        `<w:tab w:val="left" w:pos="${questionStemStartTwip}"/>`,
-      ),
-      true,
-      'DOCX Question stem consumes the shared stem-text start',
-    )
-    assert.equal(
-      questionXml.includes(
-        `<w:tblInd w:w="${questionStemStartTwip}" w:type="dxa"/>`,
-      ),
-      true,
-      'DOCX dense Option block consumes the shared stem-text start',
-    )
-  }
-  for (const nodeId of canonicalInlineNodeIds(tableGroup)) {
-    assert.equal(
-      xml.includes(bookmarkName('canonical_content', nodeId)),
-      true,
-    )
-  }
-  assert.equal(xml.includes('POISONED LEGACY'), false)
-  const docxPath =
-    path.join(actualArtifactRoot, `reading-table-${versionType}.docx`)
-  const bytes = renderer.writeDocxPackage({
-    documentXml: xml,
-    outputPath: docxPath,
-    title: 'Canonical Reading QA',
-    images,
-  })
-  assert.equal(bytes.subarray(0, 2).toString(), 'PK')
-  assert.equal(
-    execFileSync('unzip', ['-p', docxPath, 'word/document.xml'], {
-      encoding: 'utf8',
-    }),
-    xml,
-  )
-  if (persistActualArtifacts) {
-    const docxPdfPath =
-      path.join(actualArtifactRoot, `reading-table-${versionType}-docx.pdf`)
-    renderer.convertDocxToPdf(
-      docxPath,
-      docxPdfPath,
-    )
-    assertPdfStemOptionAlignment(
-      docxPdfPath,
-      tableGroup,
-      `DOCX ${versionType}`,
-    )
-  }
+
 }
 
 const oneColumnItem = exportItem(asset, oneColumnGroup.groupId)
@@ -599,78 +484,6 @@ writeFileSync(
 )
 printCases.push({ versionType: 'one-column-student', html: oneColumnHtml })
 
-const oneColumnRenderer = createDocxRenderer({
-  groupTypeLabels: { reading: '阅读理解' },
-  optionalString: (value) =>
-    typeof value === 'string' ? value.trim() : '',
-})
-const oneColumnXml = oneColumnRenderer.buildDocumentXml({
-  title: 'Canonical Reading One-column QA',
-  versionType: 'student',
-  items: [oneColumnItem],
-  blocks: oneColumnBlocks,
-  questionNumberStart: deliberatelyWrongCallerSeed,
-  printStyle: 'exam',
-  canonicalConsumption: real.consumption,
-  images: [],
-})
-const oneColumnOptionBookmark = bookmarkName(
-  'canonical_option',
-  oneColumnQuestion.options[0].optionId,
-)
-const oneColumnBookmarkIndex = oneColumnXml.indexOf(oneColumnOptionBookmark)
-assert.notEqual(oneColumnBookmarkIndex, -1)
-const oneColumnParagraphStart =
-  oneColumnXml.lastIndexOf('<w:p>', oneColumnBookmarkIndex)
-const oneColumnParagraphEnd =
-  oneColumnXml.indexOf('</w:p>', oneColumnBookmarkIndex)
-const oneColumnParagraph = oneColumnXml.slice(
-  oneColumnParagraphStart,
-  oneColumnParagraphEnd,
-)
-assert.equal(
-  oneColumnParagraph.includes(
-    `<w:ind w:left="${questionStemStartTwip + oneColumnContinuationTwip}" w:hanging="${oneColumnContinuationTwip}"/>`,
-  ),
-  true,
-)
-for (const question of oneColumnGroup.questions) {
-  assert.equal(
-    oneColumnXml.includes(
-      bookmarkName('canonical_question', question.questionId),
-    ),
-    true,
-  )
-}
-for (const nodeId of canonicalInlineNodeIds(oneColumnGroup)) {
-  assert.equal(
-    oneColumnXml.includes(bookmarkName('canonical_content', nodeId)),
-    true,
-  )
-}
-const oneColumnDocxPath =
-  path.join(actualArtifactRoot, 'reading-one-column-student.docx')
-oneColumnRenderer.writeDocxPackage({
-  documentXml: oneColumnXml,
-  outputPath: oneColumnDocxPath,
-  title: 'Canonical Reading One-column QA',
-  images: [],
-})
-if (persistActualArtifacts) {
-  const oneColumnDocxPdfPath = path.join(
-    actualArtifactRoot,
-    'reading-one-column-student-docx.pdf',
-  )
-  oneColumnRenderer.convertDocxToPdf(
-    oneColumnDocxPath,
-    oneColumnDocxPdfPath,
-  )
-  assertPdfStemOptionAlignment(
-    oneColumnDocxPdfPath,
-    oneColumnGroup,
-    'DOCX one-column student',
-  )
-}
 
 function syntheticFigureItem() {
   return {
@@ -723,47 +536,6 @@ writeFileSync(
   figureHtml,
 )
 
-const figureImages = []
-const figureRenderer = createDocxRenderer({
-  groupTypeLabels: { reading: '阅读理解' },
-  optionalString: (value) =>
-    typeof value === 'string' ? value.trim() : '',
-})
-const figureXml = figureRenderer.buildDocumentXml({
-  title: 'Canonical Figure QA',
-  versionType: 'student',
-  items: [figureItem],
-  blocks: figureBlocks,
-  questionNumberStart: deliberatelyWrongCallerSeed,
-  printStyle: 'exam',
-  canonicalConsumption: figure.consumption,
-  images: figureImages,
-})
-assert.equal(figureImages.length, 1)
-assert.equal(
-  figureXml.includes(bookmarkName('canonical_media', figureBlock.mediaId)),
-  true,
-)
-assert.equal(figureXml.includes('〔表格：见原卷〕'), false)
-const figureDocxPath =
-  path.join(actualArtifactRoot, 'reading-figure-student.docx')
-figureRenderer.writeDocxPackage({
-  documentXml: figureXml,
-  outputPath: figureDocxPath,
-  title: 'Canonical Figure QA',
-  images: figureImages,
-})
-assert.equal(
-  execFileSync('unzip', ['-l', figureDocxPath], { encoding: 'utf8' })
-    .includes('word/media/image1.png'),
-  true,
-)
-if (persistActualArtifacts) {
-  figureRenderer.convertDocxToPdf(
-    figureDocxPath,
-    path.join(actualArtifactRoot, 'reading-figure-student-docx.pdf'),
-  )
-}
 
 async function assertActualBrowserArtifacts() {
   const vite = await import('../app/node_modules/vite/dist/node/index.js')

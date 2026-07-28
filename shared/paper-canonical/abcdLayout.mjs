@@ -369,28 +369,4 @@ export function translateAbcdPlanToPrintPdf(plan, fontClosure) {
   return translateAbcdPlanToPointSurface(plan, fontClosure, 'print_pdf')
 }
 
-export function translateAbcdPlanToDocx(plan, fontClosure) {
-  assertTranslatable(plan, fontClosure)
-  const rows = Array.from({ length: plan.rowCount }, (_, row) =>
-    plan.placements.filter((placement) => placement.row === row))
-  return {
-    renderer: 'docx',
-    mode: plan.mode,
-    placementSignature: plan.placementSignature,
-    questionStemAndOuterOptionBlockStartTwip:
-      plan.questionStemAndOuterOptionBlockStartTwip,
-    rowWidthTwip: plan.rowWidthTwip,
-    fontSizeHalfPoint: RULES.fontSizeHalfPoint,
-    clipping: 'forbidden',
-    shrinkToFit: false,
-    tabStopsTwip: [...new Set(plan.placements.map(({ startTwip }) => startTwip))]
-      .filter((value) => value > 0),
-    paragraphs: rows.map((placements) => ({
-      hangingIndentTwip:
-        plan.mode === 'one_column' ? RULES.oneColumnHangingIndentTwip : null,
-      placements: placements.map((placement) => ({ ...placement })),
-    })),
-  }
-}
-
 export const abcdLayoutRules = RULES

@@ -4,10 +4,10 @@
  *
  * `docs/product/exam-paper-format-standards.md` §2/§4: 部标题(第X部分…)
  * 中黑加粗左顶格 10.5pt, 节标题(第X节…) 书宋常规缩进 2 字符 10.5pt —
- * 层级靠字重与缩进区分, 一律不放大字号。`server/print-renderer.mjs` (CSS
- * class 分支) 与 `server/exports/docxRenderer.mjs` (run 属性分支) 都要
- * 对同一个 `section_header` block title 做出 part/section 判定, 判定
- * 逻辑必须单源, 不得在两个渲染面各写一份正则 (blankPattern.mjs 先例)。
+ * 层级靠字重与缩进区分, 一律不放大字号。Screen 与
+ * `server/print-renderer.mjs` 都要对同一个 `section_header` block title
+ * 做出 part/section 判定, 判定逻辑必须单源, 不得在两个渲染面各写一份正则
+ * (blankPattern.mjs 先例)。
  *
  * Rules for this module (same posture as blankPattern.mjs / tokens.mjs):
  *   - Pure ESM, no React, no app/, no server/ imports.
