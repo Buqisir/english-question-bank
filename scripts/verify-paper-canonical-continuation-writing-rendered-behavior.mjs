@@ -22,6 +22,7 @@ import {
 } from '../shared/paper-canonical/authority.mjs'
 import { compileCanonicalPaper } from '../shared/paper-canonical/compiler.mjs'
 import {
+  projectCanonicalWritingChrome,
   projectCanonicalConsumerGroup,
 } from '../shared/paper-canonical/consumerProjection.mjs'
 import { projectCanonicalPaper } from '../shared/paper-canonical/projector.mjs'
@@ -233,6 +234,39 @@ function readyConsumption(paperId) {
   }
 }
 
+function readyWholeWritingConsumption(paperId) {
+  const fixture = makeContinuationWritingReferenceFixture(paperId)
+  const compilation = compileCanonicalPaper(fixture.request)
+  assert.equal(compilation.disposition, 'ready')
+  const projected = projectCanonicalPaper({
+    plan: compilation.artifacts.canonicalPaper.paperPlan,
+    groups: compilation.artifacts.canonicalPaper.questionGroups,
+    sourceCapture: compilation.artifacts.sourceCapture,
+  })
+  const writingOccurrences = projected.nodes.filter(
+    (node) =>
+      node.kind === 'group'
+      && [
+        'application-writing',
+        'continuation-writing',
+      ].includes(node.familyContractId),
+  )
+  assert.deepEqual(
+    writingOccurrences.map((occurrence) => occurrence.familyContractId),
+    ['application-writing', 'continuation-writing'],
+  )
+  return {
+    disposition: 'ready',
+    paperId,
+    selections: writingOccurrences.map((occurrence) => ({
+      mode: 'canonical',
+      familyContractId: occurrence.familyContractId,
+      groupIds: [occurrence.groupId],
+      projectedOccurrences: [occurrence],
+    })),
+  }
+}
+
 function makeIntegrityClosedNck1WritingFixture() {
   const application =
     makeApplicationWritingReferenceFixture('paper-2026-i')
@@ -308,8 +342,55 @@ function makeIntegrityClosedNck1WritingFixture() {
   }
 }
 
-async function loadIntegrityClosedNck1WritingConsumptions() {
-  const fixture = makeIntegrityClosedNck1WritingFixture()
+function makeIntegrityClosedZhejiangWritingFixture() {
+  const continuation =
+    makeContinuationWritingReferenceFixture('paper-zj-2020-jul')
+  const groupIdsBySlot = {
+    'reading.a': 'group-zj-2020-jul-reading-a',
+    'reading.b': 'group-zj-2020-jul-reading-b',
+    'reading.c': 'group-zj-2020-jul-reading-c',
+    'reading.seven-choices': 'group-zj-2020-jul-seven-choices',
+    'language.cloze': 'group-zj-2020-jul-cloze',
+    'language.grammar-fill': 'group-zj-2020-jul-grammar-fill',
+    'writing.application': 'group-zj-2020-jul-writing-application',
+  }
+  let sourceJson = JSON.stringify(continuation.source)
+  for (const group of continuation.source.groups) {
+    const realGroupId = groupIdsBySlot[group.slotId]
+    assert.ok(realGroupId, `missing real Zhejiang Group for ${group.slotId}`)
+    sourceJson = sourceJson.replaceAll(group.groupId, realGroupId)
+  }
+  const source = JSON.parse(sourceJson)
+  for (let pass = 0; pass < 3; pass += 1) {
+    const byteLength =
+      new TextEncoder().encode(JSON.stringify(source)).byteLength
+    for (const observation of source.observations) {
+      if (observation.documentInputKey === 'canonical_mapping') {
+        observation.span.end = byteLength
+      }
+    }
+  }
+  const mappingBytes = new TextEncoder().encode(JSON.stringify(source))
+  const documents = continuation.request.evidence.documents.map(
+    (document) => document.inputKey === 'canonical_mapping'
+      ? { ...document, bytes: mappingBytes }
+      : document,
+  )
+  const sourceAsset = documents.find(
+    (document) => document.inputKey === 'original_question_source',
+  )?.bytes
+  assert.ok(sourceAsset)
+  return {
+    paperId: 'paper-zj-2020-jul',
+    sourceAsset,
+    request: {
+      authority: continuation.request.authority,
+      evidence: { documents },
+    },
+  }
+}
+
+async function loadIntegrityClosedWritingConsumptions(fixture) {
   const compilation = compileCanonicalPaper(fixture.request)
   assert.equal(compilation.disposition, 'ready')
   assert.deepEqual(
@@ -324,12 +405,12 @@ async function loadIntegrityClosedNck1WritingConsumptions() {
       {
         slotId: 'writing.application',
         state: 'bound',
-        groupId: 'group-2026-i-writing-application',
+        groupId: `group-${fixture.paperId.replace(/^paper-/, '')}-writing-application`,
       },
       {
         slotId: 'writing.continuation',
         state: 'bound',
-        groupId: 'group-2026-i-writing-continuation',
+        groupId: `group-${fixture.paperId.replace(/^paper-/, '')}-writing-continuation`,
       },
     ],
   )
@@ -427,6 +508,12 @@ function poisonedApplicationExportItem(canonical) {
           bottom: ['POISONED LEGACY APPLICATION BOTTOM'],
         },
       },
+      analysis: {
+        prompt: 'FORGED ANALYSIS APPLICATION PROMPT',
+      },
+      supplement: {
+        prompt: 'FORGED SUPPLEMENT APPLICATION PROMPT',
+      },
       questions: [],
     },
     score: 15,
@@ -459,6 +546,12 @@ function poisonedExportItem(canonical, legacyTaskVariant = 'poisoned') {
       analysis: {
         continuationStarters: ['FORGED ANALYSIS ONE', 'FORGED ANALYSIS TWO'],
         instructions: ['FORGED ANALYSIS INSTRUCTION'],
+      },
+      supplement: {
+        continuationStarters: [
+          'FORGED SUPPLEMENT ONE',
+          'FORGED SUPPLEMENT TWO',
+        ],
       },
       questions: [],
     },
@@ -527,6 +620,133 @@ function assertNoRendererLocalWritingGroupHeading(renderedText, label) {
       compact.includes(heading),
       false,
       `${label} suppresses renderer-local ${heading} when canonical paperChrome is present`,
+    )
+  }
+}
+
+function countCompactText(renderedText, expectedText) {
+  return compactText(renderedText)
+    .split(compactText(expectedText)).length - 1
+}
+
+function assertZhejiangWholeWritingVisibleText(
+  renderedText,
+  application,
+  continuation,
+  label,
+) {
+  const compact = compactText(renderedText)
+  for (const heading of ['Writing', 'Writing tasks']) {
+    assert.equal(
+      compact.split(compactText(heading)).length - 1,
+      0,
+      `${label} suppresses source-unproven ${heading}`,
+    )
+  }
+  for (const block of [
+    ...application.promptBlocks,
+    ...continuation.materialBlocks,
+  ]) {
+    assert.equal(
+      countCompactText(renderedText, block.text),
+      1,
+      `${label} contains ${block.nodeId} exactly once`,
+    )
+  }
+  for (const poisonedText of [
+    'POISONED LEGACY',
+    'FORGED ANALYSIS',
+    'FORGED SUPPLEMENT',
+  ]) {
+    assert.equal(
+      compact.includes(compactText(poisonedText)),
+      false,
+      `${label} rejects ${poisonedText} as writing authority`,
+    )
+  }
+}
+
+function assertZhejiangWholeWritingHtmlIdentity(
+  html,
+  application,
+  continuation,
+  label,
+) {
+  assertZhejiangWholeWritingVisibleText(
+    html,
+    application,
+    continuation,
+    label,
+  )
+  assert.equal(
+    (html.match(/data-canonical-response-slot-id=/g) || []).length,
+    2,
+    `${label} contains two writing response regions`,
+  )
+  for (const canonical of [application, continuation]) {
+    const attributePrefix =
+      canonical.familyContractId === 'application-writing'
+      ? 'data-canonical-application'
+      : 'data-canonical-writing'
+    assert.equal(
+      (html.match(new RegExp(
+        `data-canonical-response-slot-id="${canonical.answerRegion.responseSlotId}"`,
+        'g',
+      )) || []).length,
+      1,
+      `${label} contains ${canonical.answerRegion.responseSlotId} once`,
+    )
+    for (const [attribute, signature] of [
+      [`${attributePrefix}-semantic-signature`, canonical.semanticSignature],
+      [`${attributePrefix}-occurrence-signature`, canonical.occurrenceSignature],
+    ]) {
+      assert.equal(
+        (html.match(new RegExp(`${attribute}="${signature}"`, 'g')) || [])
+          .length,
+        1,
+        `${label} contains ${attribute} ${signature} once`,
+      )
+    }
+  }
+  assert.equal(
+    (html.match(/data-canonical-instruction-id="/g) || []).length,
+    0,
+    `${label} contains no suppressed canonical chrome`,
+  )
+}
+
+function assertZhejiangWholeWritingDocxIdentity(
+  documentXml,
+  application,
+  continuation,
+  label,
+) {
+  assertZhejiangWholeWritingVisibleText(
+    extractDocxVisibleParagraphText(documentXml),
+    application,
+    continuation,
+    label,
+  )
+  for (const canonical of [application, continuation]) {
+    for (const [kind, value] of [
+      ['canonical_response', canonical.answerRegion.responseSlotId],
+      ['canonical_semantic', canonical.semanticSignature],
+      ['canonical_occurrence', canonical.occurrenceSignature],
+    ]) {
+      const name = bookmarkName(kind, value)
+      assert.equal(
+        documentXml.split(name).length - 1,
+        1,
+        `${label} contains ${name} once`,
+      )
+    }
+  }
+  for (const instructionId of ['part.writing', 'section.writing']) {
+    const name = bookmarkName('canonical_instruction', instructionId)
+    assert.equal(
+      documentXml.split(name).length - 1,
+      0,
+      `${label} omits suppressed chrome bookmark ${name}`,
     )
   }
 }
@@ -725,7 +945,6 @@ function rasterInkMetric(raster) {
     inkWidth,
     inkHeight,
     inkPerHeight: Math.round(weightedInk / inkHeight * 1000) / 1000,
-    aspectRatio: Math.round(inkWidth / inkHeight * 1000) / 1000,
   }
 }
 
@@ -843,7 +1062,10 @@ function assertWritingChromeRasterParity(metricsByChannel, label) {
     }
   }
   for (const role of ['part', 'section']) {
-    const values = entries.map(([, metrics]) => metrics[role].aspectRatio)
+    const values = entries.map(
+      ([, metrics]) =>
+        metrics[role].inkWidth / metrics[role].inkHeight,
+    )
     assert.ok(
       Math.max(...values) / Math.min(...values) <= 1.15,
       `${label} ${role} aspect ratio is materially consistent across final rasters: ${
@@ -1023,10 +1245,117 @@ for (const paperId of ['paper-2026-i', 'paper-zj-2020-jul']) {
 
 assertPollutedProofBlocked()
 
+const zhejiangWholeWritingConsumption =
+  readyWholeWritingConsumption('paper-zj-2020-jul')
+const zhejiangWholeWritingGroupIds =
+  zhejiangWholeWritingConsumption.selections.flatMap(
+    (selection) => selection.groupIds,
+  )
+for (const groupId of zhejiangWholeWritingGroupIds) {
+  assert.deepEqual(
+    projectCanonicalWritingChrome({
+      consumption: zhejiangWholeWritingConsumption,
+      groupId,
+      renderedGroupIds: zhejiangWholeWritingGroupIds,
+    }),
+    {
+      part: null,
+      section: null,
+      instructions: [],
+    },
+    `complete Zhejiang v3 whole-writing chrome is suppressed for ${groupId}`,
+  )
+}
+assert.throws(
+  () => projectCanonicalWritingChrome({
+    consumption: zhejiangWholeWritingConsumption,
+    groupId: zhejiangWholeWritingGroupIds[0],
+    renderedGroupIds: [...zhejiangWholeWritingGroupIds].reverse(),
+  }),
+  /Rendered canonical writing Group order is invalid/,
+)
+{
+  const renderedChromeConsumption =
+    structuredClone(zhejiangWholeWritingConsumption)
+  for (const selection of renderedChromeConsumption.selections) {
+    const occurrence = selection.projectedOccurrences[0]
+    occurrence.paperChrome.part.renderPolicy = 'render'
+    occurrence.paperChrome.section.renderPolicy = 'render'
+  }
+  const firstChrome = projectCanonicalWritingChrome({
+    consumption: renderedChromeConsumption,
+    groupId: zhejiangWholeWritingGroupIds[0],
+    renderedGroupIds: zhejiangWholeWritingGroupIds,
+  })
+  assert.equal(firstChrome.part?.instructionId, 'part.writing')
+  assert.equal(firstChrome.section?.instructionId, 'section.writing')
+  const secondChrome = projectCanonicalWritingChrome({
+    consumption: renderedChromeConsumption,
+    groupId: zhejiangWholeWritingGroupIds[1],
+    renderedGroupIds: zhejiangWholeWritingGroupIds,
+  })
+  assert.equal(secondChrome.part, null)
+  assert.equal(secondChrome.section, null)
+}
+{
+  const inconsistentConsumption =
+    structuredClone(zhejiangWholeWritingConsumption)
+  inconsistentConsumption.selections[1].projectedOccurrences[0]
+    .paperChrome.part.text = 'POISONED INCONSISTENT PART'
+  assert.throws(
+    () => projectCanonicalWritingChrome({
+      consumption: inconsistentConsumption,
+      groupId: zhejiangWholeWritingGroupIds[0],
+      renderedGroupIds: zhejiangWholeWritingGroupIds,
+    }),
+    /Canonical writing part writing is inconsistent/,
+  )
+}
+{
+  const inconsistentConsumption =
+    structuredClone(zhejiangWholeWritingConsumption)
+  inconsistentConsumption.selections[1].projectedOccurrences[0]
+    .paperChrome.section.text = 'POISONED INCONSISTENT SECTION'
+  assert.throws(
+    () => projectCanonicalWritingChrome({
+      consumption: inconsistentConsumption,
+      groupId: zhejiangWholeWritingGroupIds[0],
+      renderedGroupIds: zhejiangWholeWritingGroupIds,
+    }),
+    /Canonical writing section writing\.tasks is inconsistent/,
+  )
+}
+
 const mixedWritingConsumptions =
-  await loadIntegrityClosedNck1WritingConsumptions()
+  await loadIntegrityClosedWritingConsumptions(
+    makeIntegrityClosedNck1WritingFixture(),
+  )
 const mixedApplication = applicationGroup(mixedWritingConsumptions.screen)
 const mixedContinuation = continuationGroup(mixedWritingConsumptions.screen)
+const zhejiangWritingConsumptions =
+  await loadIntegrityClosedWritingConsumptions(
+    makeIntegrityClosedZhejiangWritingFixture(),
+  )
+const zhejiangApplication = applicationGroup(
+  zhejiangWritingConsumptions.screen,
+)
+const zhejiangContinuation = continuationGroup(
+  zhejiangWritingConsumptions.screen,
+)
+const zhejiangWritingGroupIds = [
+  zhejiangApplication.groupId,
+  zhejiangContinuation.groupId,
+]
+for (const groupId of zhejiangWritingGroupIds) {
+  assert.deepEqual(
+    projectCanonicalWritingChrome({
+      consumption: zhejiangWritingConsumptions.screen,
+      groupId,
+      renderedGroupIds: zhejiangWritingGroupIds,
+    }),
+    { part: null, section: null, instructions: [] },
+  )
+}
 const mixedWritingBaseArgs = {
   title: 'NCK1 whole writing chrome regression',
   versionType: 'student',
@@ -1044,6 +1373,28 @@ const mixedWritingBaseArgs = {
     {
       type: 'question_group',
       questionGroupId: mixedContinuation.groupId,
+      score: 25,
+    },
+  ],
+  questionNumberStart: 1,
+}
+const zhejiangWritingBaseArgs = {
+  title: 'Zhejiang v3 whole writing regression',
+  versionType: 'student',
+  printStyle: 'exam',
+  items: [
+    poisonedApplicationExportItem(zhejiangApplication),
+    poisonedExportItem(zhejiangContinuation),
+  ],
+  blocks: [
+    {
+      type: 'question_group',
+      questionGroupId: zhejiangApplication.groupId,
+      score: 15,
+    },
+    {
+      type: 'question_group',
+      questionGroupId: zhejiangContinuation.groupId,
       score: 25,
     },
   ],
@@ -1138,6 +1489,89 @@ assertNoRendererLocalWritingGroupHeading(
         path.join(
           actualArtifactRoot,
           'docx-whole-writing-student-converted.pdf',
+        ),
+      )
+    }
+  } finally {
+    rmSync(root, { recursive: true, force: true })
+  }
+}
+
+const zhejiangPrintHtml = buildPrintHtml({
+  ...zhejiangWritingBaseArgs,
+  canonicalConsumption: zhejiangWritingConsumptions.printPdf,
+})
+assertZhejiangWholeWritingHtmlIdentity(
+  zhejiangPrintHtml,
+  zhejiangApplication,
+  zhejiangContinuation,
+  'complete Zhejiang v3 Print HTML',
+)
+if (persistActualArtifacts) {
+  writeFileSync(
+    path.join(actualArtifactRoot, 'print-zhejiang-whole-writing-student.html'),
+    zhejiangPrintHtml,
+  )
+}
+const zhejiangDocxXml = docxRenderer.buildDocumentXml({
+  ...zhejiangWritingBaseArgs,
+  canonicalConsumption: zhejiangWritingConsumptions.docx,
+})
+assertZhejiangWholeWritingDocxIdentity(
+  zhejiangDocxXml,
+  zhejiangApplication,
+  zhejiangContinuation,
+  'complete Zhejiang v3 DOCX OOXML',
+)
+{
+  const root = mkdtempSync(path.join(
+    tmpdir(),
+    'eqb-zhejiang-writing-chrome-docx-',
+  ))
+  try {
+    const docxPath = path.join(root, 'zhejiang-whole-writing.docx')
+    const pdfPath = path.join(root, 'zhejiang-whole-writing-converted.pdf')
+    docxRenderer.writeDocxPackage({
+      documentXml: zhejiangDocxXml,
+      outputPath: docxPath,
+      title: zhejiangWritingBaseArgs.title,
+    })
+    const packagedXml = execFileSync(
+      'unzip',
+      ['-p', docxPath, 'word/document.xml'],
+      { encoding: 'utf8' },
+    )
+    assertZhejiangWholeWritingDocxIdentity(
+      packagedXml,
+      zhejiangApplication,
+      zhejiangContinuation,
+      'complete Zhejiang v3 packaged DOCX OOXML',
+    )
+    docxRenderer.convertDocxToPdf(docxPath, pdfPath)
+    const convertedText = execFileSync(
+      'pdftotext',
+      ['-layout', pdfPath, '-'],
+      { encoding: 'utf8' },
+    )
+    assertZhejiangWholeWritingVisibleText(
+      convertedText,
+      zhejiangApplication,
+      zhejiangContinuation,
+      'complete Zhejiang v3 DOCX-to-PDF',
+    )
+    if (persistActualArtifacts) {
+      copyFileSync(
+        docxPath,
+        path.join(
+          actualArtifactRoot,
+          'docx-zhejiang-whole-writing-student.docx',
+        ),
+      )
+      copyFileSync(
+        pdfPath,
+        path.join(
+          actualArtifactRoot,
+          'docx-zhejiang-whole-writing-student-converted.pdf',
         ),
       )
     }
@@ -1605,6 +2039,195 @@ async function assertBrowserArtifacts() {
     }
 
     {
+      const asset = JSON.parse(readFileSync(
+        new URL(
+          '../app/public/paper-assets/paper-zj-2020-jul/latest/paper-asset.json',
+          import.meta.url,
+        ),
+        'utf8',
+      ))
+      const writingPartIndex = asset.content.blocks.findIndex(
+        (block) =>
+          block.type === 'partHeading'
+          && block.partId === 'part-zj-2020-jul-writing',
+      )
+      assert.notEqual(writingPartIndex, -1)
+      asset.content.blocks = asset.content.blocks.map((block, index) => {
+        if (index < writingPartIndex) return block
+        if (block.type === 'partHeading') {
+          return { ...block, text: 'POISONED LEGACY WRITING PART' }
+        }
+        if (block.type === 'sectionHeading') {
+          return { ...block, text: 'POISONED LEGACY WRITING SECTION' }
+        }
+        if (block.type === 'instruction') {
+          return { ...block, text: 'POISONED LEGACY WRITING INSTRUCTION' }
+        }
+        return block
+      })
+      for (const groupId of zhejiangWritingGroupIds) {
+        const group = asset.content.groups[groupId]
+        assert.ok(group)
+        group.title = 'POISONED LEGACY WRITING TITLE'
+        group.source = 'POISONED LEGACY WRITING SOURCE'
+        group.passage.paragraphs = [{
+          paragraphId: `poisoned:${groupId}`,
+          text: 'POISONED LEGACY WRITING MATERIAL',
+        }]
+        const writingTask = asset.content.writingTasks[group.writingTaskId]
+        assert.ok(writingTask)
+        writingTask.applicationGiven = {
+          top: ['POISONED LEGACY APPLICATION TOP'],
+          bottom: ['POISONED LEGACY APPLICATION BOTTOM'],
+        }
+        writingTask.continuationStarters = [
+          'POISONED LEGACY STARTER ONE',
+          'POISONED LEGACY STARTER TWO',
+          'POISONED LEGACY STARTER THREE',
+        ]
+      }
+      let analysisRequestCount = 0
+      const page = await browser.newPage({
+        viewport: { width: 1280, height: 900 },
+      })
+      await page.route('**/api/auth/me', (route) => route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({
+          authRequired: true,
+          user: {
+            id: 'ticket-13-zhejiang-owner',
+            username: 'ticket-13-zhejiang-owner',
+            role: 'owner',
+          },
+        }),
+      }))
+      await page.route('**/api/question-groups', (route) => route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({ questionGroups: [] }),
+      }))
+      await page.route('**/api/ai/status', (route) => route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({
+          serverKeyAvailable: false,
+          dailyLimit: { limit: 0, used: 0, exceeded: false },
+        }),
+      }))
+      await page.route(
+        '**/api/paper-canonical/consumption?*',
+        (route) => route.fulfill({
+          status: 200,
+          contentType: 'application/json',
+          body: JSON.stringify(zhejiangWritingConsumptions.screen),
+        }),
+      )
+      await page.route('**/paper-assets/**/paper-asset.json', (route) =>
+        route.fulfill({
+          status: 200,
+          contentType: 'application/json',
+          body: JSON.stringify(asset),
+        }))
+      await page.route('**/paper-assets/**/analyses/**', (route) => {
+        if (route.request().url().endsWith(
+          '/analyses/writing-analysis-v1.json',
+        )) {
+          analysisRequestCount += 1
+          return route.fulfill({
+            status: 200,
+            contentType: 'application/json',
+            body: JSON.stringify({
+              schemaVersion: 'writing-analysis-v1',
+              paperId: zhejiangWritingConsumptions.screen.paperId,
+              groups: 'FORGED ANALYSIS INVALID GROUPS',
+              supplement: 'FORGED SUPPLEMENT AUTHORITY',
+            }),
+          })
+        }
+        return route.fulfill({ status: 404, body: '' })
+      })
+      await page.route('**/paper-assets/**/figures/**', (route) =>
+        route.fulfill({ status: 404, body: '' }))
+      const url = new URL('index.html', appUrl)
+      url.searchParams.set('view', 'paper-browse')
+      url.searchParams.set(
+        'paperId',
+        zhejiangWritingConsumptions.screen.paperId,
+      )
+      url.searchParams.set('focusGroupId', zhejiangApplication.groupId)
+      url.searchParams.set('lecture', '1')
+      await page.goto(url.href)
+      const continuationResponse = page.locator(
+        `[data-canonical-response-slot-id="${zhejiangContinuation.answerRegion.responseSlotId}"]`,
+      )
+      await continuationResponse.waitFor({ timeout: 10_000 })
+      await page.locator('.paper-browse-lecture-empty')
+        .filter({ hasText: '解析未发布' })
+        .waitFor({ timeout: 10_000 })
+      assert.equal(analysisRequestCount, 1)
+      const writingPages = page.locator('[data-pi-writing-page]')
+      assert.equal(await writingPages.count(), 2)
+      const writingText = (await writingPages.allInnerTexts()).join('\n')
+      assertZhejiangWholeWritingVisibleText(
+        writingText,
+        zhejiangApplication,
+        zhejiangContinuation,
+        'authenticated complete Zhejiang v3 Screen',
+      )
+      assert.equal(
+        await writingPages.locator('[data-canonical-response-slot-id]')
+          .count(),
+        2,
+      )
+      for (const canonical of [
+        zhejiangApplication,
+        zhejiangContinuation,
+      ]) {
+        const response = writingPages.locator(
+          `[data-canonical-response-slot-id="${canonical.answerRegion.responseSlotId}"]`,
+        )
+        assert.equal(await response.count(), 1)
+        assert.equal(
+          await response.getAttribute(
+            'data-canonical-writing-semantic-signature',
+          ),
+          canonical.semanticSignature,
+        )
+        assert.equal(
+          await response.getAttribute(
+            'data-canonical-writing-occurrence-signature',
+          ),
+          canonical.occurrenceSignature,
+        )
+      }
+      assert.equal(
+        await writingPages.locator(
+          '[data-canonical-writing-chrome-role]',
+        ).count(),
+        0,
+      )
+      await page.locator('.paper-browse-lecture-handle').click()
+      await page.locator('.paper-browse-lecture-handle')
+        .waitFor({ state: 'visible' })
+      assert.equal(
+        await page.locator('.paper-browse-lecture-handle')
+          .getAttribute('aria-expanded'),
+        'false',
+      )
+      if (persistActualArtifacts) {
+        await page.screenshot({
+          path: path.join(
+            actualArtifactRoot,
+            'screen-zhejiang-whole-writing-student.png',
+          ),
+          fullPage: true,
+        })
+      }
+      await page.close()
+    }
+
+    {
       const page = await browser.newPage()
       await page.setContent(mixedPrintHtml, { waitUntil: 'load' })
       const root = mkdtempSync(path.join(tmpdir(), 'eqb-writing-chrome-pdf-'))
@@ -1630,6 +2253,47 @@ async function assertBrowserArtifacts() {
           copyFileSync(
             pdfPath,
             path.join(actualArtifactRoot, 'print-whole-writing-student.pdf'),
+          )
+        }
+      } finally {
+        rmSync(root, { recursive: true, force: true })
+      }
+      await page.close()
+    }
+
+    {
+      const page = await browser.newPage()
+      await page.setContent(zhejiangPrintHtml, { waitUntil: 'load' })
+      const root = mkdtempSync(path.join(
+        tmpdir(),
+        'eqb-zhejiang-writing-chrome-pdf-',
+      ))
+      try {
+        const pdfPath = path.join(root, 'zhejiang-whole-writing.pdf')
+        await page.pdf({
+          path: pdfPath,
+          format: 'A4',
+          printBackground: true,
+          preferCSSPageSize: true,
+        })
+        const pdfText = execFileSync(
+          'pdftotext',
+          ['-layout', pdfPath, '-'],
+          { encoding: 'utf8' },
+        )
+        assertZhejiangWholeWritingVisibleText(
+          pdfText,
+          zhejiangApplication,
+          zhejiangContinuation,
+          'complete Zhejiang v3 Print PDF',
+        )
+        if (persistActualArtifacts) {
+          copyFileSync(
+            pdfPath,
+            path.join(
+              actualArtifactRoot,
+              'print-zhejiang-whole-writing-student.pdf',
+            ),
           )
         }
       } finally {

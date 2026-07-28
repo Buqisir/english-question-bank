@@ -1031,11 +1031,11 @@ export function projectCanonicalConsumerGroup(input) {
 /**
  * Resolve shared writing chrome once for an ordered set of rendered Groups.
  *
- * A Profile part may own several writing sections. The first rendered
- * canonical Group for that part carries the part heading; every Group carries
- * only its own section and slot instructions. This is derived from the ready
- * whole-paper Consumption Plan, never from PaperAsset chrome or renderer
- * literals.
+ * A Profile part may own several writing sections, and one section may own
+ * several writing Groups. The first rendered canonical Group for a part
+ * carries its part heading; the first rendered canonical Group for a section
+ * carries its section heading. This is derived from the ready whole-paper
+ * Consumption Plan, never from PaperAsset chrome or renderer literals.
  */
 export function projectCanonicalWritingChrome({
   consumption,
@@ -1063,6 +1063,30 @@ export function projectCanonicalWritingChrome({
     .flatMap((selection) => selection.groupIds)
   if (!Array.isArray(orderedGroupIds) || !orderedGroupIds.includes(groupId)) {
     throw rejected(`Canonical writing Group ${groupId} is outside the rendered order`)
+  }
+  const canonicalWritingOrder = consumption?.selections
+    ?.filter(
+      (selection) =>
+        selection?.mode === 'canonical'
+        && [
+          'application-writing',
+          'continuation-writing',
+        ].includes(selection.familyContractId),
+    )
+    .flatMap((selection) => selection.groupIds)
+  const renderedCanonicalWritingOrder = orderedGroupIds.filter(
+    (candidateGroupId) =>
+      canonicalWritingOrder?.includes(candidateGroupId),
+  )
+  const expectedRenderedWritingOrder = canonicalWritingOrder?.filter(
+    (candidateGroupId) => orderedGroupIds.includes(candidateGroupId),
+  )
+  if (
+    !Array.isArray(canonicalWritingOrder)
+    || digestJson(renderedCanonicalWritingOrder)
+      !== digestJson(expectedRenderedWritingOrder)
+  ) {
+    throw rejected('Rendered canonical writing Group order is invalid')
   }
 
   const renderedWritingGroups = []
@@ -1109,21 +1133,30 @@ export function projectCanonicalWritingChrome({
     samePart.length === 0
     || samePart.some(
       (candidate) =>
-        candidate.canonicalGroup.paperChrome.part.instructionId
-          !== targetPart.instructionId
-        || candidate.canonicalGroup.paperChrome.part.text !== targetPart.text
-        || candidate.canonicalGroup.paperChrome.part.renderPolicy
-          !== targetPart.renderPolicy,
+        digestJson(candidate.canonicalGroup.paperChrome.part)
+          !== digestJson(targetPart),
     )
-    || new Set(
-      samePart.map(
-        (candidate) =>
-          candidate.canonicalGroup.paperChrome.section.sectionId,
-      ),
-    ).size !== samePart.length
   ) {
     throw rejected(
       `Canonical writing part ${targetPart.partId} is inconsistent`,
+    )
+  }
+  const targetSection = target.canonicalGroup.paperChrome.section
+  const sameSection = samePart.filter(
+    (candidate) =>
+      candidate.canonicalGroup.paperChrome.section.sectionId
+        === targetSection.sectionId,
+  )
+  if (
+    sameSection.length === 0
+    || sameSection.some(
+      (candidate) =>
+        digestJson(candidate.canonicalGroup.paperChrome.section)
+          !== digestJson(targetSection),
+    )
+  ) {
+    throw rejected(
+      `Canonical writing section ${targetSection.sectionId} is inconsistent`,
     )
   }
 
@@ -1132,8 +1165,8 @@ export function projectCanonicalWritingChrome({
       && targetPart.renderPolicy === 'render'
       ? structuredClone(targetPart)
       : null,
-    section:
-      target.canonicalGroup.paperChrome.section.renderPolicy === 'render'
+    section: sameSection[0].groupId === groupId
+      && targetSection.renderPolicy === 'render'
         ? structuredClone(target.canonicalGroup.paperChrome.section)
         : null,
     instructions: structuredClone(

@@ -4,7 +4,7 @@
 
 本文件是唯一的人类可读索引；当前 canonical 编译、校验、发布和未来的
 Screen / Print-PDF / DOCX consumer 只从
-[`standards/paper-canonical/manifest-v7.json`](../../standards/paper-canonical/manifest-v7.json)
+[`standards/paper-canonical/manifest-v8.json`](../../standards/paper-canonical/manifest-v8.json)
 解析一份 digest-closed 的权威闭包。这里不复制卷型题号、分值、题组
 cardinality、清洗条件或字体/物理排版数值，也不能被 caller 当作第二套配置。
 
@@ -19,7 +19,12 @@ Renderer Typography、其 schema 及纯验证入口。未知版本、缺件、di
 结果的变更，必须新增 versioned artifact、schema/semantic conformance fixture、
 迁移说明和 manifest 升版；已经被 Publication 引用的 artifact 不可原位修改。
 `manifest-v1.json` 保留其原始 digest-closed closure，供既有 Publication 解析；
-当前 consumer contracts 已切到同一 v7 authority。v7 以 NCK1 Profile v3
+当前 Screen v8、Print/PDF v9、DOCX v8 consumer contracts 已切到同一 v8
+authority。v8 以 Zhejiang legacy Profile v3 抑制未由 source 证明的
+`Writing` / `Writing tasks`，同时保持同一 `writing.tasks` section 中的
+Application / Continuation 两个 Group 各自完整且只出现一次；迁移说明见
+[`zhejiang-legacy-v3-migration.md`](../../standards/paper-canonical/profiles/zhejiang-legacy-v3-migration.md)。
+此前 v7 以 NCK1 Profile v3
 闭合一份 40 分写作部分及独立的 15 / 25 分两节；迁移说明见
 [`nck1-v3-migration.md`](../../standards/paper-canonical/profiles/nck1-v3-migration.md)。
 此前 v6 新增闭合的
