@@ -1,7 +1,7 @@
 {
-  "authorityManifestDigest": "sha256:2f41323ad3ef27b6db49e71abcb20a25139f7275dc14e49b93909b53b825f626",
+  "authorityManifestDigest": "sha256:54cb5080708ce195a958c6f70e1f99c692eb71dec8ec91e99a1036587e1b71c1",
   "consumerId": "docx",
-  "contractDigest": "sha256:d5d0a7fca912c1690302c951a9ed33a256aadcc18f432fc0054498f57f4aa81b",
+  "contractDigest": "sha256:527314f221f53ee035333b761df2be6cb8511cb068adfd45fb64d02b62d27ce8",
   "families": [
     {
       "canonical": true,

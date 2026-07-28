@@ -121,9 +121,9 @@
     {
       "id": "normalization",
       "owner": "normalization",
-      "path": "normalization/normalization-rules-v2.json",
-      "schemaId": "normalization-rules-v2",
-      "sha256": "sha256:a25971105d120b66fba1806791f8b5018b520ce17c152b0df9672e1c5d790b89"
+      "path": "normalization/normalization-rules-v3.json",
+      "schemaId": "normalization-rules-v3",
+      "sha256": "sha256:69dbc57abb7e1c1ba05b2caf07fcfad53183fef9361ba99e0ded0f51c9ac9254"
     },
     {
       "id": "renderer-typography",
@@ -175,9 +175,9 @@
       "sha256": "sha256:acbbbc605d647e11672fdf9a0b44293fcb334ef7faeecc77475d70541f362eb8"
     },
     {
-      "id": "normalization-rules-v2",
-      "path": "../../schemas/paper-canonical/normalization-rules-v2.schema.json",
-      "sha256": "sha256:98d8facaf614fe7d43276b17ff1e9c7358ec23959f8454109051f251d565c033"
+      "id": "normalization-rules-v3",
+      "path": "../../schemas/paper-canonical/normalization-rules-v3.schema.json",
+      "sha256": "sha256:1c834477a26047109524abc79602a6d839b05dc3ea1068f330976d178d39bf0c"
     },
     {
       "id": "source-adapters-v1",
@@ -230,14 +230,19 @@
       "sha256": "sha256:2f653c1ada99aa3aebffb87939f98dffa07925c9fbab4d87aae06bbefcbd66ce"
     },
     {
+      "id": "profile-writing-source-evidence-v1",
+      "path": "../../schemas/paper-canonical/profile-writing-source-evidence-v1.schema.json",
+      "sha256": "sha256:08485b2b5b8dadcdb4487790ab62a286b149aa61f16fb71a68545923208f5c21"
+    },
+    {
       "id": "normalization-report-v9",
       "path": "../../schemas/paper-canonical/normalization-report-v9.schema.json",
-      "sha256": "sha256:07ad25325bfab27e935f61913d0e19904e322c4938fc2c4728ab316544a12b03"
+      "sha256": "sha256:f8d17592e40b97cff6ae62744dd59cf98eb4779894b1887e413d86706fb9916b"
     },
     {
       "id": "canonical-paper-publication-v9",
       "path": "../../schemas/paper-canonical/canonical-paper-publication-v9.schema.json",
-      "sha256": "sha256:21c2b15952d97715182819810eb1d615f7c30de61ad71d51e137849da9902d16"
+      "sha256": "sha256:9256188a494f04ef6f2a95041e47052a3c41225f20a2b59056ad0f86a2801026"
     }
   ]
 }

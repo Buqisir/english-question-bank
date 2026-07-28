@@ -849,6 +849,119 @@ function appendContinuationWritingReferenceGroup({
   })
 }
 
+function appendNck1ContinuationInstructionEvidence({
+  source,
+  instructionEntries,
+  requiresInstructionEvidence,
+  documents,
+  diagnostics,
+}) {
+  if (source.profileId !== 'nck1' || !requiresInstructionEvidence) return
+  if (instructionEntries.length !== 1) {
+    diagnostics.push(diagnostic(
+      'CONTINUATION_INSTRUCTION_EVIDENCE_INCOMPLETE',
+      'incomplete_source',
+      '$.evidence.continuationInstruction',
+      'NCK1 requires exactly one reviewed continuation instruction correction',
+    ))
+    return
+  }
+  const entry = instructionEntries[0]
+  const evidence = entry.value
+  const authority = resolveCanonicalAuthority(canonicalAuthorityRef)
+  const profile = authority.closure.profiles.get('nck1')
+  const expectedInstruction =
+    profile?.instructions?.['writing.continuation.prompt']
+  const schemaIssues = validateJsonSchema(
+    evidence,
+    authority.closure.schemas['profile-writing-source-evidence-v1'],
+    '$.evidence.continuationInstruction',
+  )
+  const sourceMatches = documents.filter(
+    (document) => document.sha256 === evidence?.sourceDocumentDigest,
+  )
+  const record = evidence?.transformationRecord
+  const exactCorrection = (
+    evidence?.paperId === source.paperId
+    && evidence?.profileId === source.profileId
+    && sourceMatches.length === 1
+    && stableStringify(evidence?.instruction)
+      === stableStringify(expectedInstruction)
+    && evidence?.sourceLocation?.kind === 'pdf_page_region'
+    && Number.isInteger(evidence?.sourceLocation?.page)
+    && evidence.sourceLocation.page > 0
+    && validNormalizedRegion(evidence?.sourceLocation?.region)
+    && typeof evidence?.sourceLocation?.locator === 'string'
+    && evidence.sourceLocation.locator.length > 0
+    && record?.ruleId === 'source-exact-transcription'
+    && record?.ruleVersion === '1'
+    && record?.certainty === 'exact'
+    && typeof record?.recordId === 'string'
+    && record.recordId.length > 0
+    && typeof record?.before === 'string'
+    && record.before.length > 0
+    && record.before !== record.after
+    && record?.after === expectedInstruction?.text
+    && typeof record?.proof === 'string'
+    && record.proof.length > 0
+  )
+  if (schemaIssues.length > 0 || !exactCorrection) {
+    diagnostics.push(diagnostic(
+      'CONTINUATION_INSTRUCTION_EVIDENCE_INVALID',
+      'incomplete_source',
+      '$.evidence.continuationInstruction',
+      'NCK1 continuation instruction evidence must bind the exact source digest, Profile instruction, and accepted correction',
+    ))
+    return
+  }
+  const observationId =
+    `observation:profile-instruction:${source.paperId}:writing.continuation.prompt`
+  const sourceSpanId = `source-span:${observationId}`
+  source.observations.push({
+    observationId,
+    kind: 'profile_instruction_correction',
+    documentInputKey: sourceMatches[0].inputKey,
+    value: cloneJson(evidence),
+    span: {
+      kind: 'page_region',
+      page: evidence.sourceLocation.page,
+      region: cloneJson(evidence.sourceLocation.region),
+    },
+  })
+  const transformations = Array.isArray(source.transformations)
+    ? source.transformations
+    : []
+  const lastSequence = transformations.reduce(
+    (maximum, candidate) =>
+      Number.isInteger(candidate?.sequence)
+        ? Math.max(maximum, candidate.sequence)
+        : maximum,
+    0,
+  )
+  const observationValue = cloneJson(evidence)
+  transformations.push({
+    recordId: record.recordId,
+    sequence: lastSequence + 1,
+    ruleId: record.ruleId,
+    ruleVersion: record.ruleVersion,
+    target: {
+      identity: 'profile:nck1:instruction:writing.continuation.prompt',
+      path: 'instructions.writing.continuation.prompt.text',
+    },
+    operation: 'profile_instruction_correction',
+    inputSourceSpanIds: [sourceSpanId],
+    before: record.before,
+    after: record.after,
+    certainty: record.certainty,
+    preconditions: {
+      sourceObservationIds: [observationId],
+      sourceValueDigests: [digestJson(observationValue)],
+    },
+    outputDigest: digestJson(record.after),
+  })
+  source.transformations = transformations
+}
+
 function adaptReferenceFamilies(parsed, documents, diagnostics) {
   const structured = documents
     .filter((document) => document.mediaType === 'application/json' && document.roles.some((role) => ['question_source', 'official_answer_source', 'structured_source'].includes(role)))
@@ -872,6 +985,12 @@ function adaptReferenceFamilies(parsed, documents, diagnostics) {
   const continuationTranscriptionEntry = continuationTranscriptionDocument
     ? { document: continuationTranscriptionDocument, value: parseJsonDocument(continuationTranscriptionDocument, diagnostics) }
     : null
+  const instructionEntries = documents
+    .filter((document) => document.mediaType === 'application/vnd.eqb.profile-writing-source-evidence+json')
+    .map((document) => ({
+      document,
+      value: parseJsonDocument(document, diagnostics),
+    }))
   const provenanceEntries = documents
     .filter((document) => document.mediaType === 'application/json' && document.roles.includes('source_provenance'))
     .map((document) => ({ document, value: parseJsonDocument(document, diagnostics) }))
@@ -880,6 +999,13 @@ function adaptReferenceFamilies(parsed, documents, diagnostics) {
     applicationEntry,
     transcriptionEntry,
     provenanceEntries,
+    documents,
+    diagnostics,
+  })
+  appendNck1ContinuationInstructionEvidence({
+    source: parsed.value,
+    instructionEntries,
+    requiresInstructionEvidence: Boolean(continuationEntry),
     documents,
     diagnostics,
   })
@@ -1274,7 +1400,29 @@ export function validateExactTransformationRecords(records, capture, closure) {
         : stableStringify(record.before) === stableStringify(observations[0].value) && stableStringify(record.after) === stableStringify(observations[0].value))
     const joinValue = expectedPreconditions && { sourceObservationIds: expectedPreconditions.sourceObservationIds, sourceValueDigests: expectedPreconditions.sourceValueDigests }
     const uniqueJoinProof = proof.kind === 'unique_observation_join' && observations.length === 2 && new Set(observationIds).size === 2 && stableStringify(record.before) === stableStringify(joinValue) && stableStringify(record.after) === stableStringify(joinValue) && isRecordValue(record.target) && exactKeys(record.target, ['identity', 'path']) && record.target.path === 'source_join' && record.target.identity === stableId('source-join', joinValue)
-    const exactProof = expectedPreconditions && stableStringify(record.preconditions) === stableStringify(expectedPreconditions) && stableStringify(record.inputSourceSpanIds) === stableStringify(expectedSpanIds) && (sourceIdentityProof || uniqueJoinProof)
+    const correctionEvidence = observations[0]?.value
+    const correctionRecord = correctionEvidence?.transformationRecord
+    const profileInstructionCorrectionProof = (
+      proof.kind === 'profile_instruction_correction'
+      && observations.length === 1
+      && observations[0]?.kind === 'profile_instruction_correction'
+      && correctionEvidence?.schemaVersion
+        === 'profile-writing-source-evidence-v1'
+      && correctionEvidence?.profileId === 'nck1'
+      && correctionEvidence?.instruction?.instructionId
+        === 'writing.continuation.prompt'
+      && record.target.identity
+        === 'profile:nck1:instruction:writing.continuation.prompt'
+      && record.target.path
+        === 'instructions.writing.continuation.prompt.text'
+      && record.ruleId === correctionRecord?.ruleId
+      && record.ruleVersion === correctionRecord?.ruleVersion
+      && record.certainty === correctionRecord?.certainty
+      && record.before === correctionRecord?.before
+      && record.after === correctionRecord?.after
+      && record.after === correctionEvidence?.instruction?.text
+    )
+    const exactProof = expectedPreconditions && stableStringify(record.preconditions) === stableStringify(expectedPreconditions) && stableStringify(record.inputSourceSpanIds) === stableStringify(expectedSpanIds) && (sourceIdentityProof || uniqueJoinProof || profileInstructionCorrectionProof)
     if (recordIds.has(record.recordId) || !Number.isInteger(record.sequence) || record.sequence <= previousSequence || !Array.isArray(record.inputSourceSpanIds) || record.inputSourceSpanIds.length === 0 || record.inputSourceSpanIds.some((id) => !sourceSpanIds.has(id)) || record.outputDigest !== digestJson(record.after) || !exactProof) {
       diagnostics.push(diagnostic('TRANSFORMATION_CLOSURE_INVALID', 'needs_review', path, 'Transformation sequence, lineage, or output digest cannot be replayed'))
       continue

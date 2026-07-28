@@ -160,6 +160,33 @@ function assertNck1WritingAuthority() {
     ),
     true,
   )
+
+  const misplacedProfile = structuredClone(profile)
+  const misplacedWritingPart = misplacedProfile.parts.find(
+    (part) => part.partId === 'writing',
+  )
+  misplacedWritingPart.sections[0].slots[0].instructionRefs = [
+    'writing.continuation.prompt',
+  ]
+  const misplacedManifest = structuredClone(authority.closure.manifest)
+  misplacedManifest.artifacts.find(
+    (descriptor) => descriptor.id === 'profile-nck1',
+  ).sha256 = digestJson(misplacedProfile)
+  const misplacedValidation = validateAuthorityClosure({
+    manifest: misplacedManifest,
+    artifacts: {
+      ...authority.closure.artifacts,
+      'profile-nck1': misplacedProfile,
+    },
+    schemas: authority.closure.schemas,
+  })
+  assert.equal(misplacedValidation.ok, false)
+  assert.equal(
+    misplacedValidation.issues.some(
+      (issue) => issue.code === 'PROFILE_NCK1_WRITING_CHROME_INVALID',
+    ),
+    true,
+  )
 }
 
 function assertZhejiangWritingChromeAuthority() {
@@ -200,6 +227,148 @@ function assertZhejiangWritingChromeAuthority() {
   assert.equal(
     validation.issues.some(
       (issue) => issue.code === 'PROFILE_ZHEJIANG_WRITING_CHROME_INVALID',
+    ),
+    true,
+  )
+
+  const misplacedHeadingProfile = structuredClone(profile)
+  misplacedHeadingProfile
+    .instructions['section.writing.application'].placement =
+      'group_instruction'
+  const misplacedHeadingManifest =
+    structuredClone(authority.closure.manifest)
+  misplacedHeadingManifest.artifacts.find(
+    (descriptor) => descriptor.id === 'profile-zhejiang-legacy',
+  ).sha256 = digestJson(misplacedHeadingProfile)
+  const misplacedHeadingValidation = validateAuthorityClosure({
+    manifest: misplacedHeadingManifest,
+    artifacts: {
+      ...authority.closure.artifacts,
+      'profile-zhejiang-legacy': misplacedHeadingProfile,
+    },
+    schemas: authority.closure.schemas,
+  })
+  assert.equal(misplacedHeadingValidation.ok, false)
+  assert.equal(
+    misplacedHeadingValidation.issues.some(
+      (issue) => issue.code === 'PROFILE_ZHEJIANG_WRITING_CHROME_INVALID',
+    ),
+    true,
+  )
+
+  const duplicateRefProfile = structuredClone(profile)
+  const duplicateRefWritingPart = duplicateRefProfile.parts.find(
+    (part) => part.partId === 'writing',
+  )
+  duplicateRefWritingPart.sections[1].slots[0].instructionRefs = [
+    'part.writing',
+  ]
+  const duplicateRefManifest = structuredClone(authority.closure.manifest)
+  duplicateRefManifest.artifacts.find(
+    (descriptor) => descriptor.id === 'profile-zhejiang-legacy',
+  ).sha256 = digestJson(duplicateRefProfile)
+  const duplicateRefValidation = validateAuthorityClosure({
+    manifest: duplicateRefManifest,
+    artifacts: {
+      ...authority.closure.artifacts,
+      'profile-zhejiang-legacy': duplicateRefProfile,
+    },
+    schemas: authority.closure.schemas,
+  })
+  assert.equal(duplicateRefValidation.ok, false)
+  assert.equal(
+    duplicateRefValidation.issues.some(
+      (issue) => issue.code === 'PROFILE_ZHEJIANG_WRITING_CHROME_INVALID',
+    ),
+    true,
+  )
+}
+
+function assertNck1InstructionEvidenceAdmission() {
+  const missingEvidence =
+    makeContinuationWritingReferenceFixture('paper-2026-i')
+  missingEvidence.request.evidence.documents =
+    missingEvidence.request.evidence.documents.filter(
+      (document) =>
+        document.inputKey !== 'continuation_writing_instruction_evidence',
+    )
+  const missingCompilation = compileCanonicalPaper(missingEvidence.request)
+  assert.notEqual(missingCompilation.disposition, 'ready')
+  assert.equal(
+    missingCompilation.artifacts.normalizationReport.diagnostics.some(
+      (diagnostic) =>
+        diagnostic.code === 'CONTINUATION_INSTRUCTION_EVIDENCE_INCOMPLETE',
+    ),
+    true,
+  )
+
+  const forgedEvidence =
+    makeContinuationWritingReferenceFixture('paper-2026-i')
+  const forgedDocument = forgedEvidence.request.evidence.documents.find(
+    (document) =>
+      document.inputKey === 'continuation_writing_instruction_evidence',
+  )
+  const forgedValue = JSON.parse(
+    new TextDecoder().decode(forgedDocument.bytes),
+  )
+  forgedValue.instruction.text = 'FORGED INSTRUCTION'
+  forgedValue.transformationRecord.after = 'FORGED INSTRUCTION'
+  forgedDocument.bytes =
+    new TextEncoder().encode(JSON.stringify(forgedValue))
+  const forgedCompilation = compileCanonicalPaper(forgedEvidence.request)
+  assert.notEqual(forgedCompilation.disposition, 'ready')
+  assert.equal(
+    forgedCompilation.artifacts.normalizationReport.diagnostics.some(
+      (diagnostic) =>
+        diagnostic.code === 'CONTINUATION_INSTRUCTION_EVIDENCE_INVALID',
+    ),
+    true,
+  )
+
+  const admitted =
+    compileCanonicalPaper(
+      makeContinuationWritingReferenceFixture('paper-2026-i').request,
+    )
+  assert.equal(admitted.disposition, 'ready')
+  const instructionRecord =
+    admitted.artifacts.normalizationReport.transformationRecords.find(
+      (record) =>
+        record.target.identity
+          === 'profile:nck1:instruction:writing.continuation.prompt',
+    )
+  assert.ok(instructionRecord)
+  assert.equal(
+    instructionRecord.after,
+    nck1WritingChrome.continuationInstruction,
+  )
+  assert.equal(instructionRecord.inputSourceSpanIds.length, 1)
+}
+
+function assertSchemaDescriptorIdentityClosure() {
+  const authority = resolveCanonicalAuthority(canonicalAuthorityRef)
+  assert.equal(authority.ok, true)
+  for (const schemaId of [
+    'normalization-report-v9',
+    'canonical-paper-publication-v9',
+  ]) {
+    assert.equal(authority.closure.schemas[schemaId].$id, schemaId)
+  }
+  const forgedSchemas = structuredClone(authority.closure.schemas)
+  forgedSchemas['normalization-report-v9'].$id =
+    'normalization-report-forged'
+  const forgedManifest = structuredClone(authority.closure.manifest)
+  forgedManifest.schemas.find(
+    (descriptor) => descriptor.id === 'normalization-report-v9',
+  ).sha256 = digestJson(forgedSchemas['normalization-report-v9'])
+  const validation = validateAuthorityClosure({
+    manifest: forgedManifest,
+    artifacts: authority.closure.artifacts,
+    schemas: forgedSchemas,
+  })
+  assert.equal(validation.ok, false)
+  assert.equal(
+    validation.issues.some(
+      (issue) => issue.code === 'SCHEMA_ID_MISMATCH',
     ),
     true,
   )
@@ -1341,6 +1510,8 @@ function recordWritingChromeRasterMetric(
 
 assertNck1WritingAuthority()
 assertZhejiangWritingChromeAuthority()
+assertNck1InstructionEvidenceAdmission()
+assertSchemaDescriptorIdentityClosure()
 for (const paperId of ['paper-2026-i', 'paper-zj-2020-jul']) {
   const consumption = readyConsumption(paperId)
   const selection = consumption.selections[0]

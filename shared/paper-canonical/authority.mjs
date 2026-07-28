@@ -32,6 +32,7 @@ import continuationWriting from '../../standards/paper-canonical/families/contin
 import continuationWritingV2 from '../../standards/paper-canonical/families/continuation-writing-v2.json' with { type: 'json' }
 import normalizationV1 from '../../standards/paper-canonical/normalization/normalization-rules-v1.json' with { type: 'json' }
 import normalizationV2 from '../../standards/paper-canonical/normalization/normalization-rules-v2.json' with { type: 'json' }
+import normalizationV3 from '../../standards/paper-canonical/normalization/normalization-rules-v3.json' with { type: 'json' }
 import typographyV1 from '../../standards/paper-canonical/rendering/paper-typography-v1.json' with { type: 'json' }
 import typographyV2 from '../../standards/paper-canonical/rendering/paper-typography-v2.json' with { type: 'json' }
 import standardManifestSchema from '../../schemas/paper-canonical/standard-manifest-v1.schema.json' with { type: 'json' }
@@ -47,8 +48,10 @@ import applicationWritingSourceTranscriptionSchema from '../../schemas/paper-can
 import continuationWritingVariantSchema from '../../schemas/paper-canonical/canonical-continuation-writing-variant-v1.schema.json' with { type: 'json' }
 import continuationWritingSourceCaptureSchema from '../../schemas/paper-canonical/continuation-writing-source-capture-v1.schema.json' with { type: 'json' }
 import continuationWritingSourceTranscriptionSchema from '../../schemas/paper-canonical/continuation-writing-source-transcription-v1.schema.json' with { type: 'json' }
+import profileWritingSourceEvidenceSchema from '../../schemas/paper-canonical/profile-writing-source-evidence-v1.schema.json' with { type: 'json' }
 import normalizationSchema from '../../schemas/paper-canonical/normalization-rules-v1.schema.json' with { type: 'json' }
 import normalizationV2Schema from '../../schemas/paper-canonical/normalization-rules-v2.schema.json' with { type: 'json' }
+import normalizationV3Schema from '../../schemas/paper-canonical/normalization-rules-v3.schema.json' with { type: 'json' }
 import sourceAdaptersSchema from '../../schemas/paper-canonical/source-adapters-v1.schema.json' with { type: 'json' }
 import typographyV1Schema from '../../schemas/paper-canonical/renderer-typography-v1.schema.json' with { type: 'json' }
 import typographyV2Schema from '../../schemas/paper-canonical/renderer-typography-v2.schema.json' with { type: 'json' }
@@ -273,6 +276,7 @@ function validateNck1WritingChrome(profile) {
     && application.score === 15
     && applicationSlots.length === 1
     && applicationSlots[0].slotId === 'writing.application'
+    && digestJson(applicationSlots[0].instructionRefs) === digestJson([])
     && continuation?.sectionId === 'writing.continuation'
     && continuation.ordinal === 2
     && continuation.titleInstructionRef === 'section.writing.continuation'
@@ -327,16 +331,23 @@ function validateZhejiangWritingChrome(profile) {
     && application.score === 15
     && application.slots?.length === 1
     && application.slots[0].slotId === 'writing.application'
+    && digestJson(application.slots[0].instructionRefs) === digestJson([])
     && continuation?.sectionId === 'writing.continuation'
     && continuation.ordinal === 2
     && continuation.titleInstructionRef === 'section.writing.continuation'
     && continuation.score === 25
     && continuation.slots?.length === 1
     && continuation.slots[0].slotId === 'writing.continuation'
+    && digestJson(continuation.slots[0].instructionRefs) === digestJson([])
+    && profile.instructions?.['part.writing']?.placement === 'part_heading'
     && profile.instructions?.['part.writing']?.text
       === '第四部分 写作（共两节，满分40分）'
+    && profile.instructions?.['section.writing.application']?.placement
+      === 'section_heading'
     && profile.instructions?.['section.writing.application']?.text
       === '第一节 应用文写作（满分15分）'
+    && profile.instructions?.['section.writing.continuation']?.placement
+      === 'section_heading'
     && profile.instructions?.['section.writing.continuation']?.text
       === '第二节 读后续写（满分25分）'
     && !Object.hasOwn(profile.instructions, 'section.writing')
@@ -367,7 +378,20 @@ function validateNormalizationRules(artifact) {
     if (legacyRule) continue
     for (const operation of rule.allowedOperations) {
       const proof = rule.operationProofs[operation]
-      const validProof = isRecordValue(proof) && exactKeys(proof, ['kind', 'observationArity']) && Number.isInteger(proof.observationArity) && ((proof.kind === 'source_identity' && proof.observationArity === 1) || (proof.kind === 'unique_observation_join' && proof.observationArity === 2))
+      const validProof = isRecordValue(proof)
+        && exactKeys(proof, ['kind', 'observationArity'])
+        && Number.isInteger(proof.observationArity)
+        && (
+          (proof.kind === 'source_identity' && proof.observationArity === 1)
+          || (
+            proof.kind === 'unique_observation_join'
+            && proof.observationArity === 2
+          )
+          || (
+            proof.kind === 'profile_instruction_correction'
+            && proof.observationArity === 1
+          )
+        )
       if (!validProof) issues.push(issue('NORMALIZATION_PROOF_INVALID', `${path}.operationProofs.${operation}`, 'Operation proof must have a machine-checkable exact contract'))
     }
   }
@@ -393,6 +417,9 @@ export function validateAuthorityClosure({ manifest: candidateManifest, artifact
     const schema = schemaById.get(descriptor.id)
     if (!schema) issues.push(issue('SCHEMA_MISSING', '$.schemas', `Schema ${descriptor.id} is unavailable`))
     else if (digestJson(schema) !== descriptor.sha256) issues.push(issue('SCHEMA_DIGEST_MISMATCH', '$.schemas', `Schema ${descriptor.id} digest differs`))
+    if (schema && schema.$id !== descriptor.id) {
+      issues.push(issue('SCHEMA_ID_MISMATCH', '$.schemas', `Schema ${descriptor.id} declares ${schema.$id || 'no $id'}`))
+    }
   }
   const artifactEntries = candidateManifest?.artifacts || []
   const artifactIds = new Set()
@@ -518,7 +545,7 @@ const artifactsV5 = { ...sharedArtifactsV5, normalization: normalizationV2, 'ren
 const artifactsV6 = { ...sharedArtifactsV6, normalization: normalizationV2, 'renderer-typography': typographyV2 }
 const artifactsV7 = { ...sharedArtifactsV7, normalization: normalizationV2, 'renderer-typography': typographyV2 }
 const artifactsV8 = { ...sharedArtifactsV8, normalization: normalizationV2, 'renderer-typography': typographyV2 }
-const artifactsV9 = { ...sharedArtifactsV9, normalization: normalizationV2, 'renderer-typography': typographyV2 }
+const artifactsV9 = { ...sharedArtifactsV9, normalization: normalizationV3, 'renderer-typography': typographyV2 }
 const schemasV1 = { ...sharedSchemas, 'renderer-typography-v1': typographyV1Schema, 'normalization-rules-v1': normalizationSchema, 'normalization-report-v1': reportSchema, 'canonical-paper-publication-v1': publicationSchema }
 const schemasV2 = { ...sharedSchemas, 'renderer-typography-v1': typographyV1Schema, 'normalization-rules-v2': normalizationV2Schema, 'normalization-report-v2': reportV2Schema, 'canonical-paper-publication-v2': publicationV2Schema }
 const schemasV3 = { ...sharedSchemas, 'renderer-typography-v2': typographyV2Schema, 'normalization-rules-v2': normalizationV2Schema, 'normalization-report-v3': reportV3Schema, 'canonical-paper-publication-v3': publicationV3Schema }
@@ -564,6 +591,8 @@ const schemasV8 = {
 }
 const schemasV9 = {
   ...schemasV6,
+  'normalization-rules-v3': normalizationV3Schema,
+  'profile-writing-source-evidence-v1': profileWritingSourceEvidenceSchema,
   'normalization-report-v9': reportV9Schema,
   'canonical-paper-publication-v9': publicationV9Schema,
 }

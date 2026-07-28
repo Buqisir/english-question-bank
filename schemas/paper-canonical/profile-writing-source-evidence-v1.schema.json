@@ -1,0 +1,135 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "profile-writing-source-evidence-v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "paperId",
+    "profileId",
+    "sourceDocumentDigest",
+    "review",
+    "sourceLocation",
+    "instruction",
+    "transformationRecord"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "profile-writing-source-evidence-v1"
+    },
+    "paperId": {
+      "type": "string"
+    },
+    "profileId": {
+      "type": "string"
+    },
+    "sourceDocumentDigest": {
+      "type": "string"
+    },
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["method", "status"],
+      "properties": {
+        "method": {
+          "const": "manual_source_transcription"
+        },
+        "status": {
+          "const": "accepted"
+        }
+      }
+    },
+    "sourceLocation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "page", "region", "locator"],
+      "properties": {
+        "kind": {
+          "const": "pdf_page_region"
+        },
+        "page": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "region": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["x", "y", "width", "height"],
+          "properties": {
+            "x": {
+              "type": "number",
+              "minimum": 0
+            },
+            "y": {
+              "type": "number",
+              "minimum": 0
+            },
+            "width": {
+              "type": "number",
+              "minimum": 0
+            },
+            "height": {
+              "type": "number",
+              "minimum": 0
+            }
+          }
+        },
+        "locator": {
+          "type": "string"
+        }
+      }
+    },
+    "instruction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["instructionId", "placement", "text"],
+      "properties": {
+        "instructionId": {
+          "type": "string"
+        },
+        "placement": {
+          "const": "group_instruction"
+        },
+        "text": {
+          "type": "string"
+        }
+      }
+    },
+    "transformationRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "recordId",
+        "ruleId",
+        "ruleVersion",
+        "certainty",
+        "before",
+        "after",
+        "proof"
+      ],
+      "properties": {
+        "recordId": {
+          "type": "string"
+        },
+        "ruleId": {
+          "const": "source-exact-transcription"
+        },
+        "ruleVersion": {
+          "const": "1"
+        },
+        "certainty": {
+          "const": "exact"
+        },
+        "before": {
+          "type": "string"
+        },
+        "after": {
+          "type": "string"
+        },
+        "proof": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
