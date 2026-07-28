@@ -1,4 +1,5 @@
 import {
+  cpSync,
   existsSync,
   mkdirSync,
   readdirSync,
@@ -135,7 +136,7 @@ function sha256(buffer) {
   return createHash('sha256').update(buffer).digest('hex')
 }
 
-function writeDocxSourceCapture(rawDir, sourceDocx) {
+function writeDocxSourceCapture(versionDir, rawDir, sourceDocx, paperId) {
   const capture = sourceDocx.mediaCapture
   if (!capture) return
   if (capture.sourceSha256 !== sourceDocx.sha256) {
@@ -179,7 +180,62 @@ function writeDocxSourceCapture(rawDir, sourceDocx) {
       mediaType: 'application/pdf',
       sha256: capture.shapeCapture.sha256,
       relativePath: 'docx-shapes.pdf',
+      sourceParts: [...new Set(capture.shapeCapture.sourceParts || [])].sort(),
+      figures: [],
     }
+
+    const figuresDir = path.join(versionDir, 'figures')
+    const manifestFigures = []
+    const usedFigureIds = new Set()
+    const usedFileNames = new Set()
+    for (const figure of capture.shapeCapture.figures || []) {
+      const fileName = path.basename(String(figure.fileName || ''))
+      if (
+        !fileName
+        || fileName !== figure.fileName
+        || !fileName.endsWith('.png')
+        || usedFileNames.has(fileName)
+        || usedFigureIds.has(figure.figureId)
+        || !Buffer.isBuffer(figure.buffer)
+        || figure.sha256 !== sha256(figure.buffer)
+      ) {
+        throw new Error('DOCX source shape figure capture is invalid')
+      }
+      usedFileNames.add(fileName)
+      usedFigureIds.add(figure.figureId)
+      mkdirSync(figuresDir, { recursive: true })
+      writeFileSync(path.join(figuresDir, fileName), figure.buffer)
+      const manifestFigure = {
+        figureId: figure.figureId,
+        groupId: figure.groupId,
+        kind: figure.kind,
+        file: fileName,
+        sha256: figure.sha256,
+        pixelWidth: figure.pixelWidth,
+        pixelHeight: figure.pixelHeight,
+        caption: figure.caption,
+        sourceDocument: sourceDocx.fileName,
+        sourcePage: figure.sourcePage,
+        sourcePart: figure.sourcePart,
+        sourceShapeId: figure.sourceShapeId,
+        placeholderMarker: figure.placeholderMarker,
+        paragraphId: figure.paragraphId,
+      }
+      manifestFigures.push(manifestFigure)
+      shapeCapture.figures.push({
+        ...manifestFigure,
+        versionRelativePath: `figures/${fileName}`,
+      })
+    }
+    if (manifestFigures.length === 0) {
+      throw new Error('DOCX source shape capture has no cropped figures')
+    }
+    writeJson(path.join(figuresDir, 'manifest.json'), {
+      schemaVersion: 'paper-figures-manifest-v1',
+      paperId,
+      sourceSha256: sourceDocx.sha256,
+      figures: manifestFigures,
+    })
   }
 
   writeJson(path.join(rawDir, 'docx-source-capture.json'), {
@@ -273,7 +329,7 @@ export function writePaperImportVersion({
   try {
     const rawDir = path.join(tempDir, 'raw')
     writeFileSync(path.join(rawDir, packageData.sourceDocx.fileName), packageData.sourceDocx.buffer)
-    writeDocxSourceCapture(rawDir, packageData.sourceDocx)
+    writeDocxSourceCapture(tempDir, rawDir, packageData.sourceDocx, paperId)
     writeJson(path.join(tempDir, 'paper-asset.json'), artifacts.paperAsset)
     if (forceFailureAt === 'version-write') {
       throw new Error('Forced version-write failure')
@@ -365,6 +421,10 @@ export function swapPaperImportLatest({
     path.join(tempLatest, PAPER_NORMALIZED_GROUPS_FILE_NAME),
     readFileSync(path.join(versionDir, PAPER_NORMALIZED_GROUPS_FILE_NAME)),
   )
+  const figuresPath = path.join(versionDir, 'figures')
+  if (existsSync(figuresPath)) {
+    cpSync(figuresPath, path.join(tempLatest, 'figures'), { recursive: true })
+  }
 
   let movedPrevious = false
   try {

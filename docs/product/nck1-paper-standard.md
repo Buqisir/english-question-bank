@@ -105,7 +105,7 @@ agent 不得以"源卷长得不一样"为由自行放宽。与本标准冲突的
   提示),**不可加入草稿卷**——缺图的卷子绝不能流到学生手里。
   渲染保真刀落地后自动解禁。
 - **保真分级(owner 拍板)**:试卷面(A4 组卷预览 / 打印 /
-  PDF / DOCX 导出)必须达到真题观感,版式权威为
+  PDF)必须达到真题观感,版式权威为
   `exam-paper-format-standards.md`;网站详情页要求语义完整、
   图表在场、阅读友好,不要求仿真卷版式。
 
@@ -139,6 +139,10 @@ agent 不得以"源卷长得不一样"为由自行放宽。与本标准冲突的
     `normalizePassageText` 标点规则的产物,占位符必须按标准化后的实际字符
     登记,不能想当然按肉眼原文抄)。`verify-nck1-standard.mjs` 强校验两边
     一致,防止双存桥其中一侧漏更新。
+  - DOCX 源中的真实形状由 public publisher 直接完成 LibreOffice PDF
+    转换、逐形状裁图、摘要绑定与 manifest/body 关联,并与 paper asset
+    version 原子发布;不得再用 `attach-paper-assets-extras.mjs` 覆盖这类
+    publisher-owned figures。该脚本只保留给另行 staging 的 PDF/人工截存图。
 - **PDF 源的文本提取工序**:不复用 `lib.mjs` 的正则切卷(它是为
   "答案版 DOCX 内嵌【答案】"约定设计的,新格式的试题卷排版——选项列在
   段落下方、无内嵌答案——是完全不同的视觉约定,现改造正则风险高于手工核对)。
@@ -155,5 +159,6 @@ agent 不得以"源卷长得不一样"为由自行放宽。与本标准冲突的
 - **发布闸现状盘点**:`scripts/import-pipeline/verify-nck1-standard.mjs`
   补齐 §6 全部条目(9 题组/题号段/分值前置条件/客观题答案数量/听力原料/
   figures 双存一致性),支持发布前(仅查 staging)与发布后(另查
-  `app/public/paper-assets/<id>/latest` 里 listening/figures 是否已用
-  `attach-paper-assets-extras.mjs` 落地)两种模式,同一条命令自动识别。
+  `app/public/paper-assets/<id>/latest` 里 listening/另行 staging 的
+  PDF 或人工 figures 是否已用 `attach-paper-assets-extras.mjs` 落地;
+  DOCX 形状 figures 由 public publisher 原子落地)两种模式,同一条命令自动识别。

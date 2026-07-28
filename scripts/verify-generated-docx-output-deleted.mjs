@@ -37,6 +37,35 @@ assert.deepEqual(
 assert.equal(canonicalAuthorityRef.manifestVersion, '12')
 const currentAuthority = resolveCanonicalAuthority(canonicalAuthorityRef)
 assert.equal(currentAuthority.ok, true)
+
+const humanAuthority = read('docs/product/exam-paper-format-standards.md')
+const currentHumanAuthority = humanAuthority.split('## v2 历史排版证据')[0]
+assert.match(
+  currentHumanAuthority,
+  /standards\/paper-canonical\/manifest-v12\.json/,
+  'the unique human-readable authority index must bind current manifest v12',
+)
+assert.match(
+  currentHumanAuthority,
+  /Screen v12、Print\/PDF v13/,
+  'the human-readable current output matrix must name only Screen v12 and Print/PDF v13',
+)
+assert.doesNotMatch(
+  currentHumanAuthority,
+  /DOCX consumer|DOCX 导出|Screen \/ Print-PDF \/ DOCX/,
+  'the human-readable current authority must not retain current generated-DOCX prose',
+)
+const manifestV12Migration = read('standards/paper-canonical/manifest-v12-migration.md')
+assert.match(
+  manifestV12Migration,
+  /manifest v12[\s\S]*Screen v12[\s\S]*Print\/PDF v13/i,
+  'manifest v12 must have an explicit migration record for the two supported consumers',
+)
+assert.match(
+  manifestV12Migration,
+  /manifest v1-v11[\s\S]*immutable/i,
+  'manifest v12 migration must preserve earlier immutable authority closures',
+)
 assert.equal(
   Object.hasOwn(currentAuthority.closure.schemas, 'consumer-contract-v1'),
   false,

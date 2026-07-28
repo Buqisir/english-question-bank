@@ -510,6 +510,7 @@ export function publishPaperImportPackage({
       validation.packageData.sourceDocx.mediaCapture = captureDocxSourceMediaImpl({
         fileName: validation.packageData.sourceDocx.fileName,
         buffer: validation.packageData.sourceDocx.buffer,
+        paperAsset: validation.packageData.paperAsset,
         ...docxSourceMediaCaptureOptions,
       })
     } catch (error) {

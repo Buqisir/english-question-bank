@@ -2,9 +2,9 @@
 
 ## 当前可执行权威
 
-本文件是唯一的人类可读索引；当前 canonical 编译、校验、发布和未来的
-Screen / Print-PDF / DOCX consumer 只从
-[`standards/paper-canonical/manifest-v11.json`](../../standards/paper-canonical/manifest-v11.json)
+本文件是唯一的人类可读索引；当前 canonical 编译、校验、发布和受支持的
+Screen / Print-PDF consumer 只从
+[`standards/paper-canonical/manifest-v12.json`](../../standards/paper-canonical/manifest-v12.json)
 解析一份 digest-closed 的权威闭包。这里不复制卷型题号、分值、题组
 cardinality、清洗条件或字体/物理排版数值，也不能被 caller 当作第二套配置。
 
@@ -18,9 +18,12 @@ Renderer Typography、其 schema 及纯验证入口。未知版本、缺件、di
 任何会改变 admission、canonical 语义、Profile、normalization 或 renderer
 结果的变更，必须新增 versioned artifact、schema/semantic conformance fixture、
 迁移说明和 manifest 升版；已经被 Publication 引用的 artifact 不可原位修改。
-`manifest-v1.json` 至 `manifest-v10.json` 保留各自原始 digest-closed closure，
-供既有 Publication 解析；当前 Screen v11、Print/PDF v12、DOCX v11 consumer
-contracts 已切到同一 v11 authority。v11 以 NCK1 Profile v5 为两个 inactive
+`manifest-v1.json` 至 `manifest-v11.json` 保留各自原始 digest-closed closure，
+供既有 Publication 解析；当前 Screen v12、Print/PDF v13 consumer contracts
+只绑定 v12 authority。v12 以 `consumer-contract-v2` 将当前输出矩阵收口为
+Screen 与 Print/PDF，并退役 generated DOCX capability；迁移说明见
+[`manifest-v12-migration.md`](../../standards/paper-canonical/manifest-v12-migration.md)。
+此前 v11 以 NCK1 Profile v5 为两个 inactive
 listening slot 绑定 `listening-raw-closure@nck1-v1`，闭合 Questions 1–20、
 A–C Options、官方答案、十段 transcript、source timing 与 audio inventory，
 同时继续保持零 listening Group 与 `renderPolicy: suppress`；迁移说明见
@@ -86,7 +89,7 @@ v2（2026-07-08）取代 v1 文字版，并吸收双权威源实测数值与命�
     自 v2 起**废止**,仅作历史 QA 记录。
 - 实测报告:2026-07-08 双源 12 项测量(会话交付,数值已固化入本文)。
 - **保真分级**(nck1-paper-standard.md §8):试卷面(A4 组卷预览/
-  打印/PDF/DOCX 导出)必须达到本标准;网站详情页语义完整、阅读
+  打印/PDF)必须达到本标准;网站详情页语义完整、阅读
   友好即可,不要求仿真卷版式。
 
 ## 1. 页面(A4)
@@ -114,7 +117,6 @@ v2（2026-07-08）取代 v1 文字版，并吸收双权威源实测数值与命�
 
 Web 字体栈映射(token 层):英文 `"Times New Roman", Times, serif`;
 中文正文接宋体族(`"SimSun", "Songti SC", "STSong"`),标题接黑体族。
-**DOCX 导出必须显式设置 rFonts**(现状缺失,刀⑤修)。
 px 换算(A4=794px@96dpi):10.5pt ≈ 14px。
 
 ## 3. 行距
@@ -230,11 +232,11 @@ px 换算(A4=794px@96dpi):10.5pt ≈ 14px。
 
 ## 执行与迁移
 
-- 本标准是四套渲染面(屏幕 PaperSurface / 写作页 / PDF 导出 /
-  DOCX 导出)的唯一权威;现状四面数值各异(2026-07-08 盘点在案),
+- 本标准是两类受支持输出(Screen 与 Print/PDF)的唯一排版权威;现状
+  PaperSurface / 写作页 / Print-PDF 数值各异(2026-07-08 盘点在案),
   收拢工作 = **渲染保真刀(刀⑤)**,含:token 单源化(关掉
-  Issue #30 Gate 2 那道欠了 52 天的门)、PDF/DOCX 补挖空样式与
-  写作框、DOCX 补字体、字号回归 10.5pt 等比(屏幕纸面 794px 下
+  Issue #30 Gate 2 那道欠了 52 天的门)、Print/PDF 补挖空样式与
+  写作框、字号回归 10.5pt 等比(屏幕纸面 794px 下
   由 16px 调整为 ≈14px)、I10 句首挖空修复、死码
   PaperSurfacePrototype 清理。
 - 已入库内容的标点归一(如 paper-2026-i 的破折号)单独小刀。

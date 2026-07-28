@@ -6,13 +6,10 @@
  * (scripts/import-pipeline/papers/<paperId>/{listening,figures}/) into the
  * PUBLISHED paper-asset tree (app/public/paper-assets/<paperId>/{latest,
  * versions/vN}/{listening,figures}/), where N is every currently-published
- * version. These folders carry NO question-group / DB semantics — they are
- * inert raw files sitting alongside paper-asset.json; publishPaperImportPackage
- * (server/paper-import/publisher.mjs, untouched by this cut) only knows about
- * a fixed whitelist of file names (paper-asset.json / answer-key.json /
- * import-meta.json / analyses/*.json) and never touches these folders, so
- * this is a pure additive fs copy with zero risk of colliding with the
- * shipped publish/rollback logic.
+ * version. This remains the bridge for separately staged listening files and
+ * PDF/manual figure captures. DOCX source shapes are now published atomically
+ * by publishPaperImportPackage itself; this script refuses to overwrite those
+ * publisher-owned figure manifests.
  *
  * Run this AFTER `node 02-publish.mjs <config> --publish` has succeeded.
  * Safe to re-run (idempotent overwrite) if listening/figures content changes
@@ -21,7 +18,7 @@
  * Usage: node scripts/import-pipeline/attach-paper-assets-extras.mjs <paperId>
  */
 
-import { cpSync, existsSync, mkdirSync, readdirSync } from 'node:fs'
+import { cpSync, existsSync, mkdirSync, readFileSync, readdirSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -63,6 +60,19 @@ for (const target of targets) {
       continue
     }
     const dest = path.join(target, label)
+    if (label === 'figures') {
+      const manifestPath = path.join(dest, 'manifest.json')
+      if (existsSync(manifestPath)) {
+        const manifest = JSON.parse(readFileSync(manifestPath, 'utf8'))
+        const hasPublisherOwnedDocxFigures = (manifest.figures || []).some(
+          (figure) => typeof figure.sourcePart === 'string' && figure.sourcePart.startsWith('word/'),
+        )
+        if (hasPublisherOwnedDocxFigures) {
+          console.error(`FAIL: refusing to overwrite publisher-owned DOCX figures at ${dest}`)
+          process.exit(1)
+        }
+      }
+    }
     mkdirSync(dest, { recursive: true })
     cpSync(src, dest, { recursive: true })
     console.log(`copied ${label}/ -> ${dest}`)
