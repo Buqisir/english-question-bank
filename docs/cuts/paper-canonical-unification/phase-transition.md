@@ -1,16 +1,16 @@
 # Paper canonical unification phase transition
 
 Status: active
-Previous phase: to-tickets
-Current phase: owner-approval
-Next on PASS: owner-approval
+Previous phase: owner-approval
+Current phase: implementation
+Next on PASS: implementation
 Terminal: no
 
 Wayfinder map: `docs/cuts/paper-canonical-unification/wayfinder/map.md`
 Current map binding: verified
-Current map binding commit: `2dd684e9d70a4e4e8cb7967eab090952cb54e291`
+Current map binding commit: `308df2dcb65033db22bf3aeb065a00989b02a2b4`
 Current map artifact: `docs/cuts/paper-canonical-unification/wayfinder/map.md`
-Current map artifact SHA-256: `a7f94131c90f9fdcdb91155073e29776cff599410f77783f84bfa15bb485b200`
+Current map artifact SHA-256: `83e733e665bbd9f8d6dcd4037854a2b2f7baa43259f577235ea5eb8b00d88f19`
 Wayfinder status: done
 Wayfinder provenance: verified
 Wayfinder entry skill: `/Users/huangxuewei/.claude/skills/wayfinder/SKILL.md`
@@ -39,8 +39,13 @@ Ticket-set binding: verified
 Ticket-set manifest: `docs/cuts/paper-canonical-unification/ticket-set-manifest.md`
 Ticket-set manifest SHA-256: `0fab79f5161cbe563552c17891f08292d45887b4a3f0bc008db72a20632b745f`
 Ticket-set accepted-spec SHA-256: `c6cbbe778d94e1205612fa5ac535e2198020317b09064190fec1d0b6660d868b`
-Owner ticket-granularity approval: pending
-Implementation dispatch: forbidden
+Owner ticket-granularity approval: verified
+Owner approval actor: owner
+Owner approval action: approve-ticket-granularity
+Owner approval result commit: `308df2dcb65033db22bf3aeb065a00989b02a2b4`
+Owner approval record: `docs/cuts/paper-canonical-unification/owner-approval.md`
+Owner approval ticket-set manifest SHA-256: `0fab79f5161cbe563552c17891f08292d45887b4a3f0bc008db72a20632b745f`
+Implementation dispatch: allowed
 
 ## Preserved results
 
@@ -61,11 +66,12 @@ approval remain exact-byte historical evidence under
 `docs/cuts/paper-canonical-unification/history/2026-07-26-superseded-ticket-set/`
 and are never parallel dispatch authority.
 
-The current frontier is owner approval of replacement manifest SHA-256
-`0fab79f5161cbe563552c17891f08292d45887b4a3f0bc008db72a20632b745f`.
-The prior approval bound a different historical manifest and cannot satisfy
-this gate. Implementation and coordinator dispatch remain forbidden, and
-Ticket 16 must not start.
+The owner approved exact replacement manifest SHA-256
+`0fab79f5161cbe563552c17891f08292d45887b4a3f0bc008db72a20632b745f`
+and explicitly resumed only to record that approval. All four implementation
+gates are now bound for verification. Ticket 16 is the sole implementation
+frontier; this approval-recording task dispatches neither Ticket 16 nor a
+coordinator.
 
 Ticket 22 is zero-write diagnostics only and cannot repair corpus problems.
 Ticket 23 may only propose follow-on tickets from independently reviewed
