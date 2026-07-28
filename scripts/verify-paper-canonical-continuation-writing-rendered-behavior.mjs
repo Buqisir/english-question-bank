@@ -661,7 +661,11 @@ function assertZhejiangWholeWritingVisibleText(
     assert.equal(
       compact.includes(compactText(poisonedText)),
       false,
-      `${label} rejects ${poisonedText} as writing authority`,
+      `${label} rejects ${poisonedText} as writing authority: ${
+        renderedText.split('\n')
+          .filter((line) => line.includes(poisonedText))
+          .join(' | ')
+      }`,
     )
   }
 }
@@ -2006,16 +2010,30 @@ async function assertBrowserArtifacts() {
       assert.ok(authRequestCount > 0)
       const mixedWritingPages = page.locator('[data-pi-writing-page]')
       assert.equal(await mixedWritingPages.count(), 2)
+      const mixedVisiblePageText = await page.locator('body').innerText()
+      const mixedRailText = await page.locator('.paper-browse-rail').innerText()
       const mixedScreenText = (
         await mixedWritingPages.allInnerTexts()
       ).join('\n')
-      if (mixedScreenText.includes('POISONED LEGACY')) {
+      if (mixedVisiblePageText.includes('POISONED LEGACY')) {
         throw new Error(
           `Authenticated whole-paper Screen exposed legacy chrome:\n${
-            mixedScreenText.split('\n')
+            mixedVisiblePageText.split('\n')
               .filter((line) => line.includes('POISONED LEGACY'))
               .join('\n')
           }`,
+        )
+      }
+      for (const expectedChrome of [
+        '写作',
+        '满分40分',
+        nck1WritingChrome.application,
+        nck1WritingChrome.continuation,
+      ]) {
+        assert.equal(
+          countCompactText(mixedRailText, expectedChrome),
+          1,
+          `authenticated whole-paper Screen navigation contains canonical ${expectedChrome} exactly once`,
         )
       }
       assertNck1WritingHeadingCounts(
@@ -2169,11 +2187,19 @@ async function assertBrowserArtifacts() {
       const writingPages = page.locator('[data-pi-writing-page]')
       assert.equal(await writingPages.count(), 2)
       const writingText = (await writingPages.allInnerTexts()).join('\n')
+      const visiblePageText = await page.locator('body').innerText()
+      const railText = await page.locator('.paper-browse-rail').innerText()
       assertZhejiangWholeWritingVisibleText(
-        writingText,
+        visiblePageText,
         zhejiangApplication,
         zhejiangContinuation,
         'authenticated complete Zhejiang v3 Screen',
+      )
+      assertZhejiangWholeWritingVisibleText(
+        railText,
+        { promptBlocks: [] },
+        { materialBlocks: [] },
+        'authenticated complete Zhejiang v3 Screen navigation',
       )
       assert.equal(
         await writingPages.locator('[data-canonical-response-slot-id]')

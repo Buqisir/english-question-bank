@@ -76,6 +76,7 @@ import {
   type CanonicalReadingSurfaceBlock,
 } from '../../../../shared/paper-normalization/canonicalPaperGroupSurfaceAdapter.mjs'
 import {
+  projectCanonicalWritingChrome,
   selectedFamilyContractIdForGroup,
 } from '../../../../shared/paper-canonical/consumerProjection.mjs'
 // figure-render cut: separate import line (not folded into the block
@@ -255,6 +256,37 @@ function writingTaskTypeForSurface({
   return group?.writingTaskId
     ? asset?.content.writingTasks?.[group.writingTaskId]?.taskType
     : undefined
+}
+
+function canonicalWritingNavigationChrome({
+  consumption,
+  groupId,
+  renderedGroupIds,
+}: {
+  consumption: WholePaperConsumption
+  groupId: string
+  renderedGroupIds: ReadonlyArray<string>
+}): ReturnType<typeof projectCanonicalWritingChrome> | null {
+  const familyContractId = selectedFamilyContractIdForGroup({
+    consumption,
+    groupId,
+  })
+  if (
+    familyContractId !== 'application-writing'
+    && familyContractId !== 'continuation-writing'
+  ) return null
+  if (
+    canonicalModeForGroup(
+      consumption,
+      familyContractId,
+      groupId,
+    ) !== 'canonical'
+  ) return null
+  return projectCanonicalWritingChrome({
+    consumption,
+    groupId,
+    renderedGroupIds,
+  })
 }
 
 // 讲评态下的显式点题选择——哪个题组的哪道题当前在讲评栏里，以及种下的
@@ -1366,6 +1398,12 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     if (!asset) return []
     type RailGroup = { anchor: string; title: string; range: string }
     const parts: Array<{ anchor: string; name: string; score: string | null; groups: RailGroup[] }> = []
+    const renderedGroupIds = asset.content.blocks.flatMap((block) =>
+      block.type === 'group' ? [block.groupId] : [],
+    )
+    let canonicalWritingPart:
+      | { anchor: string; name: string; score: string | null; groups: RailGroup[] }
+      | null = null
     // 部分标题原文形如「第三部分 语言运用(共两节，满分30分)」：括号段只留
     // 满分数字，前缀「第X部分」剥掉——分值/序数是卷面措辞，不是导航信息。
     const stripParens = (s: string) => s.replace(/[（(][^（()）]*[）)]/g, '').trim()
@@ -1377,8 +1415,10 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
       const m = text.match(/满分\s*([\d.]+)\s*分/)
       return m ? `满分${m[1]}分` : null
     }
-    for (const block of asset.content.blocks) {
+    for (const [index, block] of asset.content.blocks.entries()) {
+      if (writingSkipIndices.has(index)) continue
       if (block.type === 'partHeading') {
+        canonicalWritingPart = null
         parts.push({
           anchor: block.partId,
           name: partNameOf(block.text),
@@ -1388,6 +1428,41 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
       } else if (block.type === 'group') {
         const group = asset.content.groups[block.groupId]
         if (!group) continue
+        const chrome = canonicalConsumption
+          ? canonicalWritingNavigationChrome({
+              consumption: canonicalConsumption,
+              groupId: block.groupId,
+              renderedGroupIds,
+            })
+          : null
+        if (chrome) {
+          if (chrome.part) {
+            canonicalWritingPart = {
+              anchor: chrome.part.partId,
+              name: partNameOf(chrome.part.text),
+              score: scoreOf(chrome.part.text),
+              groups: [],
+            }
+            parts.push(canonicalWritingPart)
+          }
+          if (!chrome.section) continue
+          if (!canonicalWritingPart) {
+            canonicalWritingPart = {
+              anchor: chrome.section.sectionId,
+              name: '',
+              score: null,
+              groups: [],
+            }
+            parts.push(canonicalWritingPart)
+          }
+          canonicalWritingPart.groups.push({
+            anchor: block.groupId,
+            title: chrome.section.text,
+            range: '',
+          })
+          continue
+        }
+        canonicalWritingPart = null
         const questionNos = group.questionIds
           .map((qid) => asset.content.questions[qid]?.questionNo)
           .filter((no): no is number => typeof no === 'number')
@@ -1408,7 +1483,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
       // sectionHeading: 不进 rail（见上方拍板注释）
     }
     return parts
-  }, [asset])
+  }, [asset, canonicalConsumption, writingSkipIndices])
 
   // 讲评态紧凑 rail 的扁平题组表：题号区间当短标签，无题号退回题组名。
   const railGroups = useMemo(() => railParts.flatMap((part) => part.groups), [railParts])
@@ -2037,16 +2112,28 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     }
     const range = buildGroupRangeLabel(asset, group)
     const answerRow = buildAnswerRowText(asset, group)
+    let lectureTitle: string | null = group.title
+    if (group.groupType === 'writing' && canonicalConsumption) {
+      lectureTitle = canonicalWritingNavigationChrome({
+        consumption: canonicalConsumption,
+        groupId,
+        renderedGroupIds: asset.content.blocks.flatMap((block) =>
+          block.type === 'group' ? [block.groupId] : [],
+        ),
+      })?.section?.text ?? null
+    }
     const hasActiveQuestion = Boolean(lectureSelection && lectureSelection.groupId === groupId)
     const activeQuestionId = hasActiveQuestion ? lectureSelection?.questionId ?? null : null
     const activeEvidenceId = hasActiveQuestion ? lectureSelection?.evidenceId ?? null : null
     const activeOptionLabel = hasActiveQuestion ? lectureSelection?.optionLabel ?? null : null
     return (
       <div className="paper-browse-lecture-body">
-        <h4 className="paper-browse-lecture-title">
-          {group.title}
-          {range && <span className="paper-browse-lecture-range"> · {range}</span>}
-        </h4>
+        {lectureTitle && (
+          <h4 className="paper-browse-lecture-title">
+            {lectureTitle}
+            {range && <span className="paper-browse-lecture-range"> · {range}</span>}
+          </h4>
+        )}
         {answerRow && <p className="paper-browse-answer-row">{answerRow}</p>}
         <div className="paper-browse-lecture-analysis">
           {renderLectureAnalysisPanel({
