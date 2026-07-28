@@ -9,6 +9,7 @@ import {
 } from 'node:fs'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
+import { pathToFileURL } from 'node:url'
 import { inflateRawSync } from 'node:zlib'
 
 const EOCD_SIGNATURE = 0x06054b50
@@ -126,11 +127,20 @@ export function convertDocxShapesWithLibreOffice(
   const tempDir = mkdtempSync(path.join(tmpdir(), 'eqb-docx-source-shapes-'))
   const docxPath = path.join(tempDir, 'source.docx')
   const pdfPath = path.join(tempDir, 'source.pdf')
+  const profileUrl = pathToFileURL(path.join(tempDir, 'libreoffice-profile')).href
   try {
     writeFileSync(docxPath, buffer)
     execFileSyncImpl(
       sofficePath,
-      ['--headless', '--convert-to', 'pdf', '--outdir', tempDir, docxPath],
+      [
+        `-env:UserInstallation=${profileUrl}`,
+        '--headless',
+        '--convert-to',
+        'pdf',
+        '--outdir',
+        tempDir,
+        docxPath,
+      ],
       { stdio: 'pipe', timeout: 60_000 },
     )
     if (!existsSync(pdfPath)) {

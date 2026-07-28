@@ -99,8 +99,12 @@ try {
   })
   assert.deepEqual(converted, shapePdfBytes)
   assert.equal(sofficeInvocation.command, '/verified/input-side/soffice')
+  assert.match(
+    sofficeInvocation.args[0],
+    /^-env:UserInstallation=file:\/\/.*\/libreoffice-profile$/,
+  )
   assert.deepEqual(
-    sofficeInvocation.args.slice(0, 4),
+    sofficeInvocation.args.slice(1, 5),
     ['--headless', '--convert-to', 'pdf', '--outdir'],
   )
 
