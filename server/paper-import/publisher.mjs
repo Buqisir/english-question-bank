@@ -694,8 +694,8 @@ function semanticMismatchForGroup({
     const blocks = canonicalGroup.content.blocks
     if (
       family === 'application-writing'
-      && !inlineText(blocks.flatMap((block) => block.inlines || []))
-        .includes(task.instruction)
+      && inlineText(blocks.flatMap((block) => block.inlines || []))
+        !== `${task.instruction}（词数${task.wordCountTarget}左右。）`
     ) {
       return 'application-writing prompt'
     }

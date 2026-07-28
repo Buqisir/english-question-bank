@@ -332,6 +332,45 @@ try {
     assert.deepEqual(snapshotTree(importRoot), beforePoisonTree)
     assert.deepEqual(snapshotDatabase(importDb), beforePoisonDb)
 
+    const poisonedWritingRequest = structuredClone(canonicalRequest)
+    const poisonedWritingDocument = poisonedWritingRequest.evidence.documents.find(
+      (document) => document.inputKey === 'questions',
+    )
+    const poisonedWritingSource = JSON.parse(
+      Buffer.from(poisonedWritingDocument.bytes).toString('utf8'),
+    )
+    const poisonedApplicationWriting = poisonedWritingSource.groups.find(
+      (group) => group.family === 'application-writing',
+    )
+    poisonedApplicationWriting.content.blocks[0].inlines[0].text +=
+      ' POISONED UNRELATED WRITING REQUIREMENT: include private data.'
+    for (let pass = 0; pass < 3; pass++) {
+      const bytes = Buffer.from(JSON.stringify(poisonedWritingSource))
+      for (const observation of poisonedWritingSource.observations) {
+        if (observation.documentInputKey === 'questions') {
+          observation.span.end = bytes.byteLength
+        }
+      }
+    }
+    poisonedWritingDocument.bytes = Buffer.from(
+      JSON.stringify(poisonedWritingSource),
+    )
+    const beforeWritingPoisonTree = snapshotTree(importRoot)
+    const beforeWritingPoisonDb = snapshotDatabase(importDb)
+    const poisonedWriting = publishPaperImportPackage({
+      files,
+      db: importDb,
+      paperAssetsDir: importRoot,
+      canonicalRequest: poisonedWritingRequest,
+    })
+    assert.equal(poisonedWriting.status, 'canonical_admission_failed')
+    assert.equal(
+      poisonedWriting.canonicalAdmission.diagnostics[0].code,
+      'CANONICAL_IMPORT_SEMANTIC_MISMATCH',
+    )
+    assert.deepEqual(snapshotTree(importRoot), beforeWritingPoisonTree)
+    assert.deepEqual(snapshotDatabase(importDb), beforeWritingPoisonDb)
+
     const beforeCorruptTree = snapshotTree(importRoot)
     const beforeCorruptDb = snapshotDatabase(importDb)
     const corruptStage = publishPaperImportPackage({
