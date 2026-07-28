@@ -1,16 +1,16 @@
 # Paper canonical unification phase transition
 
 Status: active
-Previous phase: to-spec
-Current phase: to-tickets
-Next on PASS: to-tickets
+Previous phase: to-tickets
+Current phase: owner-approval
+Next on PASS: owner-approval
 Terminal: no
 
 Wayfinder map: `docs/cuts/paper-canonical-unification/wayfinder/map.md`
 Current map binding: verified
-Current map binding commit: `49f8626dbd0648941a69725e73ebd378cb7f6f76`
+Current map binding commit: `2dd684e9d70a4e4e8cb7967eab090952cb54e291`
 Current map artifact: `docs/cuts/paper-canonical-unification/wayfinder/map.md`
-Current map artifact SHA-256: `b293b33a0c8eb3cfdad39fb32fbb96f31ed6327222d728de77cde8aa904ad2c4`
+Current map artifact SHA-256: `a7f94131c90f9fdcdb91155073e29776cff599410f77783f84bfa15bb485b200`
 Wayfinder status: done
 Wayfinder provenance: verified
 Wayfinder entry skill: `/Users/huangxuewei/.claude/skills/wayfinder/SKILL.md`
@@ -28,12 +28,17 @@ To-spec artifact SHA-256: `c6cbbe778d94e1205612fa5ac535e2198020317b09064190fec1d
 To-spec outcome: accepted
 Accepted spec: `docs/cuts/paper-canonical-unification/spec.md`
 Accepted spec SHA-256: `c6cbbe778d94e1205612fa5ac535e2198020317b09064190fec1d0b6660d868b`
-To-tickets provenance: pending
+To-tickets provenance: verified
 To-tickets entry skill: `/Users/huangxuewei/.claude/skills/to-tickets/SKILL.md`
-Ticket-set binding: pending
-Ticket-set manifest: pending
-Ticket-set manifest SHA-256: pending
-Ticket-set accepted-spec SHA-256: pending
+To-tickets source HEAD: `b41ad774bca35864fce21aa80a19d0dbfcb9e91c`
+To-tickets result commit: `2dd684e9d70a4e4e8cb7967eab090952cb54e291`
+To-tickets artifact: `docs/cuts/paper-canonical-unification/ticket-set-manifest.md`
+To-tickets artifact SHA-256: `0fab79f5161cbe563552c17891f08292d45887b4a3f0bc008db72a20632b745f`
+To-tickets outcome: complete
+Ticket-set binding: verified
+Ticket-set manifest: `docs/cuts/paper-canonical-unification/ticket-set-manifest.md`
+Ticket-set manifest SHA-256: `0fab79f5161cbe563552c17891f08292d45887b4a3f0bc008db72a20632b745f`
+Ticket-set accepted-spec SHA-256: `c6cbbe778d94e1205612fa5ac535e2198020317b09064190fec1d0b6660d868b`
 Owner ticket-granularity approval: pending
 Implementation dispatch: forbidden
 
@@ -50,15 +55,19 @@ Ticket 01's preserved accepted result commit remains
 
 ## Current route
 
-The owner scope amendment supersedes existing Tickets 16–71, the manifest that
-binds them, and its owner approval as unexecuted route authority. Those files
-remain historical evidence and are not rewritten. No implementation ticket is
-currently dispatchable, and Ticket 16 must not start.
+The owner-approved current set preserves completed Tickets 01–15 and publishes
+replacement Tickets 16–23. The former Tickets 16–71, their manifest, and their
+approval remain exact-byte historical evidence under
+`docs/cuts/paper-canonical-unification/history/2026-07-26-superseded-ticket-set/`
+and are never parallel dispatch authority.
 
-The only current frontier is a fresh `$to-tickets` task bound to the amended
-spec. Before it publishes any replacement ticket or manifest, it must show the
-owner every proposed Title, Blocked by edge, What it delivers statement,
-old-ticket mapping, and proposed total ticket count, then wait for explicit
-approval. Publishing the approved set still leaves implementation forbidden
-until a later committed owner approval binds the exact replacement manifest
-digest.
+The current frontier is owner approval of replacement manifest SHA-256
+`0fab79f5161cbe563552c17891f08292d45887b4a3f0bc008db72a20632b745f`.
+The prior approval bound a different historical manifest and cannot satisfy
+this gate. Implementation and coordinator dispatch remain forbidden, and
+Ticket 16 must not start.
+
+Ticket 22 is zero-write diagnostics only and cannot repair corpus problems.
+Ticket 23 may only propose follow-on tickets from independently reviewed
+measured results and must wait for fresh explicit owner approval before
+publishing them.
