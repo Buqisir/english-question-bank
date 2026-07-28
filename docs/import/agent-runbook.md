@@ -17,6 +17,63 @@ Local-only. Never touches production (`.env.qa`, the production server, or
 `scripts/pull-run-push.mjs`). Everything below runs against the local SQLite
 DB (`data/question-bank.sqlite`) and local dev server.
 
+## Canonical-required backend boundary
+
+Every newly published package is canonical-required. The backend operator must
+provide one relative-path request envelope through `config.canonicalRequestPath`;
+`scripts/import-pipeline/02-publish.mjs` loads it with
+`loadCanonicalImportRequest(...)`. The envelope is an evidence index, not a
+place to paste mutable byte arrays: each document names an immutable local file,
+its roles, and its declared media facts.
+
+The exact executable boundaries are:
+
+1. **Package and immutable source capture** —
+   `readImportPackageFromDirectory(...)` and
+   `validatePaperImportPackage(...)` admit the backend package;
+   `publishPaperImportPackage(...)` invokes `captureDocxSourceMedia(...)` for a
+   DOCX input and preserves the source plus extracted media under the immutable
+   version. DOCX remains a source-input format only.
+2. **Compiler** — `admitCanonicalPaperImport(...)` calls the sole semantic
+   entry `compileCanonicalPaper(request)`. The compiler creates Source Capture,
+   resolves the bound authority closure, and returns one whole-paper
+   disposition. Operators never hand-edit Source Capture, a canonical sidecar,
+   or a blocked result.
+3. **Publisher** — `publishPaperImportPackage(...)` is the public backend
+   admission seam. It validates one complete ready Publication before the first
+   store write, stages manifest-last, publishes one immutable version, journals
+   the database/latest swap, and performs an exact committed reload.
+4. **Loader** — `loadPaperForConsumption(...)` reopens that exact Publication
+   against the checked-in `screen` or `print_pdf` Consumer Contract. No caller
+   may assemble groups, sidecars, or latest files independently.
+5. **Recovery, retry, and rollback** —
+   `recoverInterruptedPaperImportPublish(...)` runs before every publish;
+   retry the same public publish command after correcting the reported cause.
+   An interrupted committed retry is idempotent. Use
+   `rollbackPaperImportPublication(...)` only with a validated prior immutable
+   version; never copy `latest`, edit a sidecar, or delete a version by hand.
+6. **Evidence** — the immutable source package, request-envelope documents,
+   Publication manifest/digests, committed current reference, supported
+   Consumer Plans, rendered artifact digests, and HEAD are the audit chain.
+   Analysis may enrich lecture/teacher output only; it is never source evidence
+   for paper semantics or official answers.
+
+Ticket 20 keeps one executable local proof of those boundaries:
+
+```bash
+node scripts/verify-paper-canonical-import-pilot.mjs
+```
+
+It uses the checked-in `paper-2024-jslk-english` backend package and a temporary
+SQLite/assets root. It proves zero-write dry run, publish, exact reload,
+restart/retry, rollback, real PaperSurface plain/lecture, Student/Teacher Print
+HTML, and direct Chromium PDF. It never writes the production database, R2, or
+a historical version. Add `--actual-artifacts` only after the required
+independent review PASS; that mode writes HEAD-bound QA evidence under
+`.scratch/paper-canonical-ticket-20-qa/<HEAD>/`. The output set intentionally
+contains no generated DOCX, OOXML, or DOCX-converted PDF. A preserved raw
+source `.docx` inside the immutable input version is not a generated output.
+
 ## 0. Format whitelist check (before anything else)
 
 `nck1-paper-standard.md` §2 only allows two source formats. Confirm the
@@ -55,6 +112,7 @@ equivalent yet — that script only scans a local DOCX folder):
 ```json
 {
   "docxPath": "/absolute/path/to/scripts/import-pipeline/papers/<paperId>/source/paper.pdf",
+  "canonicalRequestPath": "./canonical-import-request.json",
   "paperId": "paper-<year>-<juan>",
   "provenance": {
     "sourceType": "真题",
@@ -78,7 +136,12 @@ magic bytes) or `.pdf` (`%PDF` magic bytes). Both formats are accepted by
 design (§2 whitelist format ②) — a real, unmodified PDF here will pass; only
 a wrong extension or a corrupted/renamed file gets rejected there.
 
-**Done when:** `node -e "console.log(JSON.parse(require('fs').readFileSync('scripts/import-pipeline/papers/<paperId>/config.json')))"` parses cleanly and both source PDFs exist on disk.
+`canonicalRequestPath` is relative to `config.json` and is mandatory for
+`--publish`. A missing, unreadable, unsafe, stale-authority, or source-unbound
+request fails closed before publication; do not remove the field or bypass the
+public publisher to continue.
+
+**Done when:** `node -e "console.log(JSON.parse(require('fs').readFileSync('scripts/import-pipeline/papers/<paperId>/config.json')))"` parses cleanly and both source PDFs plus every request-envelope evidence file exist on disk.
 
 ## 2. Read the source PDFs directly (no OCR script)
 
