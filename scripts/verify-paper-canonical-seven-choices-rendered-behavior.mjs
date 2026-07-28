@@ -326,7 +326,7 @@ async function assertActualPrintPdfArtifacts() {
 
 async function assertActualPaperSurface() {
   const browserAsset = structuredClone(asset)
-  const compatibleBrowserConsumption = structuredClone(browserConsumption)
+  const compatibleBrowserConsumption = structuredClone(consumption)
   compatibleBrowserConsumption.selections =
     compatibleBrowserConsumption.selections
       .map((selection) => ({

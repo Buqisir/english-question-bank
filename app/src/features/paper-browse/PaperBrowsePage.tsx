@@ -106,6 +106,7 @@ import {
   type WholePaperConsumption,
 } from '../paper-intelligence/canonicalConsumptionClient.ts'
 import {
+  buildWritingPaperView,
   type WritingPaperViewModel,
 } from '../paper-intelligence/writingPaperViewAdapter.ts'
 import {
@@ -686,10 +687,10 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
           /* graceful degradation — figures stays [] */
         }
 
-        // Resolve both canonical families before publishing any group model.
-        // A partial or ambiguous whole-paper plan therefore fails the page
-        // boundary instead of degrading a single card.
-        const canonicalModels = new Map<string, GroupModel>()
+        // Resolve each Consumer Contract-selected family mode before publishing
+        // any group model. Canonical mode consumes only its projection; explicit
+        // whole-family legacy mode may use the retained legacy renderer.
+        const selectedModels = new Map<string, GroupModel>()
         for (const block of groupBlocks) {
           const group = loadedAsset.content.groups[block.groupId]
           const selectedFamilyContractId =
@@ -698,7 +699,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
               groupId: block.groupId,
             })
           if (group?.groupType === 'cloze') {
-            canonicalModels.set(block.groupId, {
+            selectedModels.set(block.groupId, {
               kind: 'cloze',
               model: buildClozePaperView({
                 asset: loadedAsset,
@@ -711,7 +712,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
               }),
             })
           } else if (group?.groupType === 'grammarFill') {
-            canonicalModels.set(block.groupId, {
+            selectedModels.set(block.groupId, {
               kind: 'grammarFill',
               model: buildGrammarFillPaperView({
                 asset: loadedAsset,
@@ -735,7 +736,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
               continue
             }
             if (sevenChoicesMode === 'legacy' && !sevenChoicesAnalysis) continue
-            canonicalModels.set(block.groupId, {
+            selectedModels.set(block.groupId, {
               kind: 'sevenChoices',
               model: buildSevenChoicesSurfaceModel({
                 asset: loadedAsset,
@@ -777,7 +778,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
                     assetBase: resolvedBase,
                   })
                 : null
-              canonicalModels.set(block.groupId, {
+              selectedModels.set(block.groupId, {
                 kind: 'reading',
                 model: {
                   surfaceData: {
@@ -791,6 +792,22 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
                   canonicalReadingBlocks: canonicalReading.richBlocks,
                   canonicalReadingSemanticSignature:
                     canonicalReading.semanticDigest,
+                },
+              })
+            } else {
+              if (!readingAnalysis) continue
+              selectedModels.set(block.groupId, {
+                kind: 'reading',
+                model: {
+                  ...buildPaperAssetSurfaceModel({
+                    asset: loadedAsset,
+                    analysis: readingAnalysis,
+                    groupId: block.groupId,
+                    figures: loadedFigures,
+                    assetBase: resolvedBase,
+                  }),
+                  canonicalReadingBlocks: [],
+                  canonicalReadingSemanticSignature: '',
                 },
               })
             }
@@ -814,13 +831,21 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
                   groupId: block.groupId,
                   renderedGroupIds,
                 })
-              canonicalModels.set(block.groupId, {
+              selectedModels.set(block.groupId, {
                 kind: 'writing',
                 model: {
                   surfaceData: canonicalWriting.surfaceData,
                   pageModel: canonicalWriting.pageModel,
                   canonicalPromptBlocks: canonicalWriting.promptBlocks,
                 },
+              })
+            } else {
+              selectedModels.set(block.groupId, {
+                kind: 'writing',
+                model: buildWritingPaperView({
+                  asset: loadedAsset,
+                  groupId: block.groupId,
+                }),
               })
             }
           } else if (
@@ -843,7 +868,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
                   groupId: block.groupId,
                   renderedGroupIds,
                 })
-              canonicalModels.set(block.groupId, {
+              selectedModels.set(block.groupId, {
                 kind: 'writing',
                 model: {
                   surfaceData: canonicalWriting.surfaceData,
@@ -851,6 +876,14 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
                   canonicalContinuationMaterialBlocks:
                     canonicalWriting.materialBlocks,
                 },
+              })
+            } else {
+              selectedModels.set(block.groupId, {
+                kind: 'writing',
+                model: buildWritingPaperView({
+                  asset: loadedAsset,
+                  groupId: block.groupId,
+                }),
               })
             }
           }
@@ -865,24 +898,24 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
           }
           try {
             if (group.groupType === 'reading') {
-              const canonicalModel = canonicalModels.get(block.groupId)
-              if (!canonicalModel) throw new Error('阅读消费计划不完整')
-              models[block.groupId] = canonicalModel
+              const selectedModel = selectedModels.get(block.groupId)
+              if (!selectedModel) throw new Error('阅读消费计划不完整')
+              models[block.groupId] = selectedModel
             } else if (group.groupType === 'sevenChoices') {
-              const canonicalModel = canonicalModels.get(block.groupId)
-              if (!canonicalModel) {
+              const selectedModel = selectedModels.get(block.groupId)
+              if (!selectedModel) {
                 if (!sevenChoicesAnalysis) throw new Error('未找到已审阅七选五解析')
                 throw new Error('七选五消费计划不完整')
               }
-              models[block.groupId] = canonicalModel
+              models[block.groupId] = selectedModel
             } else if (group.groupType === 'cloze') {
-              models[block.groupId] = canonicalModels.get(block.groupId)!
+              models[block.groupId] = selectedModels.get(block.groupId)!
             } else if (group.groupType === 'grammarFill') {
-              models[block.groupId] = canonicalModels.get(block.groupId)!
+              models[block.groupId] = selectedModels.get(block.groupId)!
             } else if (group.groupType === 'writing') {
-              const canonicalModel = canonicalModels.get(block.groupId)
-              if (!canonicalModel) throw new Error('写作消费计划不完整')
-              models[block.groupId] = canonicalModel
+              const selectedModel = selectedModels.get(block.groupId)
+              if (!selectedModel) throw new Error('写作消费计划不完整')
+              models[block.groupId] = selectedModel
             } else {
               models[block.groupId] = { kind: 'unsupported', groupType: group.groupType }
             }

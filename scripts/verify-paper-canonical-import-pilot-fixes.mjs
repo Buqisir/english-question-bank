@@ -273,6 +273,189 @@ assert.throws(
   'PaperBrowse rejects a non-Listening Group outside the whole-paper plan',
 )
 
+async function assertPaperBrowseSelectionModes() {
+  const legacyCases = [
+    {
+      familyContractId: 'reading',
+      groupIds: [
+        'group-2026-i-reading-a',
+        'group-2026-i-reading-b',
+        'group-2026-i-reading-c',
+        'group-2026-i-reading-d',
+      ],
+      expectedText: 'SoFi Stadium',
+    },
+    {
+      familyContractId: 'application-writing',
+      groupIds: ['group-2026-i-writing-application'],
+      expectedText: '你校英文报”Opinion”栏目正在征稿',
+    },
+    {
+      familyContractId: 'continuation-writing',
+      groupIds: ['group-2026-i-writing-continuation'],
+      expectedText: 'Emily Sanders, a 25-year-old from Detroit',
+    },
+  ]
+  function assetForGroups(groupIds) {
+    const selectedGroupIds = new Set(groupIds)
+    const asset = structuredClone(browseAsset)
+    asset.content.blocks = asset.content.blocks.filter(
+      (block) => block.type === 'group' && selectedGroupIds.has(block.groupId),
+    )
+    return asset
+  }
+  function consumptionForGroup(testCase, mode) {
+    return {
+      disposition: 'ready',
+      paperId,
+      selections: [{
+        mode,
+        familyContractId: testCase.familyContractId,
+        groupIds: testCase.groupIds,
+      }],
+    }
+  }
+  const screenContract = JSON.parse(readFileSync(path.join(
+    repositoryRoot,
+    'standards/paper-canonical/consumers/screen-v12.json',
+  )))
+  for (const { familyContractId } of legacyCases) {
+    assert.equal(
+      screenContract.families.find(
+        (family) => family.familyContractId === familyContractId,
+      )?.legacyCapability,
+      'available',
+      `${familyContractId} legacy mode is authorized by the checked-in Screen contract`,
+    )
+  }
+
+  const vite = await import('../app/node_modules/vite/dist/node/index.js')
+  const viteServer = await vite.createServer({
+    root: path.resolve('app'),
+    server: { host: '127.0.0.1', port: 0 },
+  })
+  await viteServer.listen()
+  const appUrl = viteServer.resolvedUrls?.local?.[0]
+  assert.ok(appUrl)
+  const playwright = await import('../app/node_modules/playwright/index.js')
+  const browser = await playwright.default.chromium.launch({ headless: true })
+
+  async function openPaperBrowse(asset, consumption) {
+    const page = await browser.newPage({
+      viewport: { width: 1280, height: 900 },
+    })
+    await page.route(
+      '**/api/paper-canonical/consumption?*',
+      (route) => route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify(consumption),
+      }),
+    )
+    await page.route('**/paper-assets/**/paper-asset.json', (route) =>
+      route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify(asset),
+      }))
+    await page.route('**/paper-assets/**/analyses/**', (route) => {
+      if (route.request().url().endsWith(
+        '/analyses/reading-choice-analysis-v1.json',
+      )) {
+        return route.fulfill({
+          status: 200,
+          contentType: 'application/json',
+          body: readFileSync(path.join(
+            repositoryRoot,
+            'app/public/paper-assets/paper-2026-i/latest/analyses/reading-choice-analysis-v1.json',
+          )),
+        })
+      }
+      return route.fulfill({ status: 404, body: '' })
+    })
+    await page.route('**/paper-assets/**/figures/**', (route) =>
+      route.fulfill({ status: 404, body: '' }))
+    const url = new URL('canonical-consumption-qa.html', appUrl)
+    url.searchParams.set('paperId', paperId)
+    await page.goto(url.href)
+    return page
+  }
+
+  try {
+    for (const testCase of legacyCases) {
+      const legacyPage = await openPaperBrowse(
+        assetForGroups(testCase.groupIds),
+        consumptionForGroup(testCase, 'legacy'),
+      )
+      try {
+        await legacyPage.locator('.paper-browse-loading').waitFor({
+          state: 'detached',
+        })
+        const legacyBodyText = await legacyPage.locator('body').innerText()
+        assert.equal(
+          legacyBodyText.includes(testCase.expectedText),
+          true,
+          `authorized ${testCase.familyContractId} legacy selection renders its retained source:\n${legacyBodyText}`,
+        )
+        assert.equal(
+          await legacyPage.locator('.paper-browse-placeholder').count(),
+          0,
+          `authorized ${testCase.familyContractId} legacy selection renders through PaperBrowse`,
+        )
+      } finally {
+        await legacyPage.close()
+      }
+
+      const canonicalPage = await openPaperBrowse(
+        assetForGroups(testCase.groupIds),
+        consumptionForGroup(testCase, 'canonical'),
+      )
+      try {
+        await canonicalPage.locator('.paper-browse-error').waitFor()
+        assert.equal(
+          (await canonicalPage.locator('body').innerText()).includes(
+            testCase.expectedText,
+          ),
+          false,
+          `${testCase.familyContractId} canonical mode never falls back to raw fields`,
+        )
+      } finally {
+        await canonicalPage.close()
+      }
+    }
+
+    const readingCase = legacyCases[0]
+    const browserPlanExternalAsset = assetForGroups(readingCase.groupIds)
+    browserPlanExternalAsset.content.groups['group-plan-external'] = {
+      groupId: 'group-plan-external',
+      groupType: 'reading',
+      questionIds: [],
+      passage: { paragraphs: [] },
+    }
+    browserPlanExternalAsset.content.blocks.push({
+      type: 'group',
+      groupId: 'group-plan-external',
+    })
+    const planExternalPage = await openPaperBrowse(
+      browserPlanExternalAsset,
+      consumptionForGroup(readingCase, 'legacy'),
+    )
+    try {
+      await planExternalPage.locator('.paper-browse-error').waitFor()
+      assert.match(
+        await planExternalPage.locator('.paper-browse-error').innerText(),
+        /outside the Consumption Plan/,
+        'the PaperBrowse public seam rejects Plan-external Groups',
+      )
+    } finally {
+      await planExternalPage.close()
+    }
+  } finally {
+    await browser.close()
+    await viteServer.close()
+  }
+}
+
 function mutateJsonDocument(request, mediaType, mutate) {
   const candidate = structuredClone(request)
   const document = candidate.evidence.documents.find(
@@ -356,5 +539,7 @@ for (const testCase of incompleteListeningCases) {
     `missing ${testCase.label} evidence exposes no canonical paper`,
   )
 }
+
+await assertPaperBrowseSelectionModes()
 
 console.log('PASS canonical import pilot focused review fixes')
