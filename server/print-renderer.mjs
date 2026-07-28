@@ -1230,7 +1230,7 @@ body {
 
 [data-canonical-writing-chrome-role="part_heading"] {
   margin: 0 0 9pt;
-  font-family: ${paperSurfaceTokens.paperFontStackHeading};
+  font-family: ${paperSurfaceTokens.paperFontStackWritingPart};
   font-weight: 700;
 }
 

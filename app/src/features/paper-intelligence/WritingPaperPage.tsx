@@ -33,6 +33,8 @@ type WritingPageStyle = CSSProperties & Record<`--${string}`, string | number>
 const writingPageTokenStyle: WritingPageStyle = {
   '--ps-font-stack': paperSurfaceTokens.paperFontStack,
   '--ps-font-stack-heading': paperSurfaceTokens.paperFontStackHeading,
+  '--ps-font-stack-writing-part':
+    paperSurfaceTokens.paperFontStackWritingPart,
   '--ps-font-size': paperSurfaceTokens.paperFontSizePx,
   '--ps-line-height': paperSurfaceTokens.paperLineHeight,
   '--ps-page-margin-x': paperSurfaceTokens.pageMarginX,

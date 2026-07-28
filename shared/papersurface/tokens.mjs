@@ -69,6 +69,15 @@ export const paperSurfaceTokens = Object.freeze({
    * (which stays 书宋 per standard §4).
    */
   paperFontStackHeading: '"SimHei", "Heiti SC", "STHeiti", sans-serif',
+  /**
+   * Canonical writing part headings can be pure English (`Writing`) or mixed
+   * Chinese/English. Pin their Latin glyphs to Arial so Chromium and
+   * LibreOffice do not independently substitute incompatible Hei faces while
+   * the Chinese glyphs still fall through to the standard black-style stack.
+   */
+  paperFontStackWritingPart:
+    '"Arial", "Helvetica Neue", "SimHei", "Heiti SC", "STHeiti", sans-serif',
+  paperFontFamilyWritingPartEn: 'Arial',
   paperInk: '#111111',
   paperMuted: '#555555',
   paperRule: '#d9d9d9',

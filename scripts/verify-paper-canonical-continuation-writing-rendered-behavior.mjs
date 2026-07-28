@@ -570,7 +570,8 @@ function assertCanonicalWritingChromeDocxStructure(
     documentXml,
     canonical.paperChrome.part.instructionId,
   )
-  assert.equal(partParagraph.includes('w:ascii="SimHei"'), true)
+  assert.equal(partParagraph.includes('w:ascii="Arial"'), true)
+  assert.equal(partParagraph.includes('w:eastAsia="黑体"'), true)
   assert.equal(partParagraph.includes('<w:b/>'), true)
   assert.equal(partParagraph.includes('<w:sz w:val="21"/>'), true)
   assert.equal(partParagraph.includes('<w:spacing w:after="240"/>'), true)
@@ -587,7 +588,7 @@ function assertCanonicalWritingChromeDocxStructure(
   assert.equal(sectionParagraph.includes('<w:ind w:left="420"/>'), true)
 }
 
-function extractPdfLineGeometry(pdfPath, text) {
+function extractPdfLines(pdfPath) {
   const xml = execFileSync(
     'pdftotext',
     ['-bbox-layout', pdfPath, '-'],
@@ -596,20 +597,221 @@ function extractPdfLineGeometry(pdfPath, text) {
   const matches = [...xml.matchAll(
     /<line xMin="([^"]+)" yMin="([^"]+)" xMax="([^"]+)" yMax="([^"]+)">([\s\S]*?)<\/line>/g,
   )]
-  const lines = matches.map((match) => ({
-    xMin: Number(match[1]),
-    yMin: Number(match[2]),
-    xMax: Number(match[3]),
-    yMax: Number(match[4]),
-    text: [...match[5].matchAll(/<word [^>]*>([\s\S]*?)<\/word>/g)]
-      .map((wordMatch) => decodeXmlText(wordMatch[1]))
-      .join(' '),
-  }))
-  const found = lines.filter(
+  return matches.map((match) => {
+    const words = [...match[5].matchAll(
+      /<word xMin="([^"]+)" yMin="([^"]+)" xMax="([^"]+)" yMax="([^"]+)">([\s\S]*?)<\/word>/g,
+    )].map((wordMatch) => ({
+      xMin: Number(wordMatch[1]),
+      yMin: Number(wordMatch[2]),
+      xMax: Number(wordMatch[3]),
+      yMax: Number(wordMatch[4]),
+      text: decodeXmlText(wordMatch[5]),
+    }))
+    return {
+      xMin: Number(match[1]),
+      yMin: Number(match[2]),
+      xMax: Number(match[3]),
+      yMax: Number(match[4]),
+      text: words.map((word) => word.text).join(' '),
+      words,
+    }
+  })
+}
+
+function extractPdfLineGeometry(pdfPath, text) {
+  const found = extractPdfLines(pdfPath).filter(
     (line) => compactText(line.text) === compactText(text),
   )
   assert.equal(found.length, 1, `${pdfPath} contains one visible line "${text}"`)
   return found[0]
+}
+
+function parsePgm(buffer) {
+  let offset = 0
+  const nextToken = () => {
+    while (offset < buffer.length) {
+      const byte = buffer[offset]
+      if (byte === 35) {
+        while (offset < buffer.length && buffer[offset] !== 10) offset += 1
+      } else if (byte <= 32) {
+        offset += 1
+      } else {
+        break
+      }
+    }
+    const start = offset
+    while (offset < buffer.length && buffer[offset] > 32) offset += 1
+    return buffer.subarray(start, offset).toString()
+  }
+  assert.equal(nextToken(), 'P5')
+  const width = Number(nextToken())
+  const height = Number(nextToken())
+  assert.equal(Number(nextToken()), 255)
+  while (offset < buffer.length && buffer[offset] <= 32) offset += 1
+  const pixels = buffer.subarray(offset)
+  assert.equal(pixels.length, width * height)
+  return { width, height, pixels }
+}
+
+function rasterInkMetric(raster) {
+  let xMin = raster.width
+  let yMin = raster.height
+  let xMax = -1
+  let yMax = -1
+  let weightedInk = 0
+  for (let y = 0; y < raster.height; y += 1) {
+    for (let x = 0; x < raster.width; x += 1) {
+      const darkness = (255 - raster.pixels[y * raster.width + x]) / 255
+      weightedInk += darkness
+      if (darkness < 0.08) continue
+      xMin = Math.min(xMin, x)
+      yMin = Math.min(yMin, y)
+      xMax = Math.max(xMax, x)
+      yMax = Math.max(yMax, y)
+    }
+  }
+  assert.notEqual(xMax, -1, 'raster crop contains visible ink')
+  const inkWidth = xMax - xMin + 1
+  const inkHeight = yMax - yMin + 1
+  return {
+    inkWidth,
+    inkHeight,
+    inkPerHeight: Math.round(weightedInk / inkHeight * 1000) / 1000,
+    aspectRatio: Math.round(inkWidth / inkHeight * 1000) / 1000,
+  }
+}
+
+function cropPgm(raster, box) {
+  const xMin = Math.max(0, Math.floor(box.xMin))
+  const yMin = Math.max(0, Math.floor(box.yMin))
+  const xMax = Math.min(raster.width, Math.ceil(box.xMax))
+  const yMax = Math.min(raster.height, Math.ceil(box.yMax))
+  const width = xMax - xMin
+  const height = yMax - yMin
+  assert.ok(width > 0 && height > 0)
+  const pixels = Buffer.alloc(width * height)
+  for (let y = 0; y < height; y += 1) {
+    raster.pixels.copy(
+      pixels,
+      y * width,
+      (yMin + y) * raster.width + xMin,
+      (yMin + y) * raster.width + xMax,
+    )
+  }
+  return { width, height, pixels }
+}
+
+function extractPdfWordGeometry(pdfPath, lineText, wordText) {
+  const line = extractPdfLines(pdfPath).find(
+    (candidate) => compactText(candidate.text) === compactText(lineText),
+  )
+  assert.ok(line, `${pdfPath} contains visible line "${lineText}"`)
+  const word = line.words.find((candidate) => candidate.text === wordText)
+  assert.ok(word, `${pdfPath} line "${lineText}" contains word "${wordText}"`)
+  return word
+}
+
+function pdfWritingChromeInk(pdfPath, canonical) {
+  const root = mkdtempSync(path.join(tmpdir(), 'eqb-writing-ink-pdf-'))
+  try {
+    const prefix = path.join(root, 'page')
+    execFileSync('pdftoppm', [
+      '-f', '1',
+      '-l', '1',
+      '-r', '192',
+      '-gray',
+      '-singlefile',
+      pdfPath,
+      prefix,
+    ])
+    const page = parsePgm(readFileSync(`${prefix}.pgm`))
+    const scale = 192 / 72
+    const measure = (lineText) => {
+      const word = extractPdfWordGeometry(pdfPath, lineText, 'Writing')
+      return rasterInkMetric(cropPgm(page, {
+        xMin: word.xMin * scale - 3,
+        yMin: word.yMin * scale - 3,
+        xMax: word.xMax * scale + 3,
+        yMax: word.yMax * scale + 3,
+      }))
+    }
+    return {
+      part: measure(canonical.paperChrome.part.text),
+      section: measure(canonical.paperChrome.section.text),
+    }
+  } finally {
+    rmSync(root, { recursive: true, force: true })
+  }
+}
+
+function pgmFromPng(png) {
+  return parsePgm(execFileSync('ffmpeg', [
+    '-hide_banner',
+    '-loglevel', 'error',
+    '-i', 'pipe:0',
+    '-f', 'image2pipe',
+    '-vcodec', 'pgm',
+    'pipe:1',
+  ], {
+    input: png,
+    maxBuffer: 10 * 1024 * 1024,
+  }))
+}
+
+async function browserWritingChromeInk(page) {
+  const measure = async (role) => {
+    const locator = page.locator(
+      `[data-canonical-writing-chrome-role="${role}"]`,
+    )
+    const clip = await locator.evaluate((element) => {
+      const text = element.firstChild
+      if (!(text instanceof Text)) throw new Error('heading must own text')
+      const range = document.createRange()
+      range.setStart(text, 0)
+      range.setEnd(text, 'Writing'.length)
+      const box = range.getBoundingClientRect()
+      return {
+        x: box.x - 2,
+        y: box.y - 2,
+        width: box.width + 4,
+        height: box.height + 4,
+      }
+    })
+    const png = await page.screenshot({ clip })
+    return rasterInkMetric(pgmFromPng(png))
+  }
+  return {
+    part: await measure('part_heading'),
+    section: await measure('section_heading'),
+  }
+}
+
+function assertWritingChromeRasterParity(metricsByChannel, label) {
+  const entries = [...metricsByChannel.entries()]
+  assert.deepEqual(
+    entries.map(([channel]) => channel).sort(),
+    ['docx-pdf', 'print-pdf', 'screen'],
+    `${label} has all final-raster channels`,
+  )
+  for (const [channel, metrics] of entries) {
+    assert.ok(
+      metrics.part.inkPerHeight >= metrics.section.inkPerHeight * 1.2,
+      `${label}/${channel} part is visibly bold in final raster: ${
+        JSON.stringify(metrics)
+      }`,
+    )
+  }
+  for (const role of ['part', 'section']) {
+    for (const key of ['inkPerHeight', 'aspectRatio']) {
+      const values = entries.map(([, metrics]) => metrics[role][key])
+      assert.ok(
+        Math.max(...values) / Math.min(...values) <= 1.15,
+        `${label} ${role} ${key} is materially consistent across final rasters: ${
+          JSON.stringify(Object.fromEntries(entries))
+        }`,
+      )
+    }
+  }
 }
 
 function assertCanonicalWritingChromePdfGeometry(pdfPath, canonical, label) {
@@ -706,6 +908,21 @@ function assertPollutedProofBlocked() {
 }
 
 const cases = []
+const writingChromeRasterMetrics = new Map()
+
+function recordWritingChromeRasterMetric(
+  label,
+  versionType,
+  channel,
+  metrics,
+) {
+  if (label !== 'zero-starter') return
+  const key = `${label}/${versionType}`
+  const channels = writingChromeRasterMetrics.get(key) || new Map()
+  channels.set(channel, metrics)
+  writingChromeRasterMetrics.set(key, channels)
+}
+
 assertNck1WritingAuthority()
 for (const paperId of ['paper-2026-i', 'paper-zj-2020-jul']) {
   const consumption = readyConsumption(paperId)
@@ -1106,6 +1323,14 @@ for (const { label, consumption, canonical } of cases) {
         canonical,
         `DOCX-to-PDF ${label}/${versionType}`,
       )
+      if (label === 'zero-starter') {
+        recordWritingChromeRasterMetric(
+          label,
+          versionType,
+          'docx-pdf',
+          pdfWritingChromeInk(pdfPath, canonical),
+        )
+      }
       if (persistActualArtifacts) {
         copyFileSync(
           docxPath,
@@ -1386,6 +1611,7 @@ async function assertBrowserArtifacts() {
       for (const teacher of [false, true]) {
         const page = await browser.newPage({
           viewport: { width: 1280, height: 900 },
+          deviceScaleFactor: 2,
         })
         await page.route(
           '**/qa/canonical-continuation-writing-consumption.json',
@@ -1448,6 +1674,14 @@ async function assertBrowserArtifacts() {
           `${label}/${teacher ? 'teacher' : 'student'}`,
           chromeLayout,
         )
+        if (label === 'zero-starter') {
+          recordWritingChromeRasterMetric(
+            label,
+            teacher ? 'teacher' : 'student',
+            'screen',
+            await browserWritingChromeInk(page),
+          )
+        }
         const bodyText = await page.locator('body').innerText()
         assertVisibleCanonicalText(bodyText, canonical)
         assert.equal(
@@ -1804,6 +2038,18 @@ async function assertBrowserArtifacts() {
           canonical,
           `Print PDF ${label}/${versionType}`,
         )
+        if (label === 'zero-starter') {
+          recordWritingChromeRasterMetric(
+            label,
+            versionType,
+            'print-pdf',
+            pdfWritingChromeInk(pdfPath, canonical),
+          )
+          assertWritingChromeRasterParity(
+            writingChromeRasterMetrics.get(`${label}/${versionType}`),
+            `${label}/${versionType}`,
+          )
+        }
         if (persistActualArtifacts) {
           copyFileSync(
             pdfPath,

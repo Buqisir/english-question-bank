@@ -57,6 +57,7 @@ import path from 'node:path'
 import { paperBlankPattern } from '../../shared/papersurface/blankPattern.mjs'
 import { paperBlankRuling } from '../../shared/papersurface/blankRuling.mjs'
 import { headingKind } from '../../shared/papersurface/headingKind.mjs'
+import { paperSurfaceTokens } from '../../shared/papersurface/tokens.mjs'
 import { resolveFigureMarker } from '../../shared/figures/resolveFigureMarker.mjs'
 import {
   canonicalWritingChromeOwnsRenderedDocument,
@@ -137,7 +138,8 @@ function escapeXml(value) {
 // switches to the 中黑/黑体 family used by 部标题「第X部分…」and the 卷名
 // title (standard §2 — 节标题/篇章标题 stay in the default serif family).
 function docxRFonts(options) {
-  const asciiFamily = options.heading ? 'SimHei' : 'Times New Roman'
+  const asciiFamily = options.asciiFamily
+    || (options.heading ? 'SimHei' : 'Times New Roman')
   const eastAsiaFamily = options.heading ? '黑体' : '宋体'
   return `<w:rFonts w:ascii="${asciiFamily}" w:hAnsi="${asciiFamily}" w:eastAsia="${eastAsiaFamily}"/>`
 }
@@ -709,7 +711,12 @@ function pushCanonicalDocxWritingChrome(body, writingChrome) {
   ]
   for (const { instruction, role } of entries) {
     const runOptions = role === 'part_heading'
-      ? { bold: true, size: 21, heading: true }
+      ? {
+          bold: true,
+          size: 21,
+          heading: true,
+          asciiFamily: paperSurfaceTokens.paperFontFamilyWritingPartEn,
+        }
       : { size: 21 }
     const paragraphOptions = {
       after: role === 'part_heading' ? 240 : 180,

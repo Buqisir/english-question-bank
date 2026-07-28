@@ -13,6 +13,8 @@ export type PaperSurfaceTokens = {
   readonly paperFontStackEn: string
   readonly paperFontStackZh: string
   readonly paperFontStackHeading: string
+  readonly paperFontStackWritingPart: string
+  readonly paperFontFamilyWritingPartEn: string
   readonly paperInk: string
   readonly paperMuted: string
   readonly paperRule: string

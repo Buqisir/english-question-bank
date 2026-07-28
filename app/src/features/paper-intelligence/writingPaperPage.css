@@ -57,7 +57,7 @@
    body). Uses the heading (Hei) stack, not the body serif stack. */
 .pi-writing-part {
   margin: 0;
-  font-family: var(--ps-font-stack-heading);
+  font-family: var(--ps-font-stack-writing-part);
   font-size: var(--ps-font-size);
   font-weight: 700;
 }
