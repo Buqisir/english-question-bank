@@ -395,9 +395,8 @@ try {
   const corrupt = await loadPaperForConsumption({ paperId: fixture.source.paperId, version: 'v2', consumerContract: consumerContractRefs.screen }, store)
   assert.equal(corrupt.disposition, 'incompatible')
   const corruptFallback = await loadPaperForConsumption({ paperId: fixture.source.paperId, version: 'v2', consumerContract: consumerContractRefs.screen }, legacyStore)
-  assert.equal(corruptFallback.disposition, 'ready')
-  assert.equal(corruptFallback.selections.every((selection) => selection.mode === 'legacy'), true)
-  assert.equal(corruptFallback.selections.length, 6)
+  assert.equal(corruptFallback.disposition, 'incompatible')
+  assert.equal(corruptFallback.selections, undefined)
   assert.equal(readFileSync(corruptPath, 'utf8').includes('corrupt'), true)
 } finally {
   db.close()

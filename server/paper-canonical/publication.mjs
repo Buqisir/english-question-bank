@@ -1,5 +1,6 @@
 import { randomUUID } from 'node:crypto'
 import {
+  cpSync,
   existsSync,
   mkdirSync,
   readdirSync,
@@ -469,6 +470,27 @@ export function recordCanonicalPublicationCurrent(db, ref) {
   )
 }
 
+function selectCanonicalPublicationCurrent(db, ref) {
+  ensureCanonicalPublicationDatabaseShape(db)
+  db.prepare(
+    'UPDATE canonical_paper_publications SET is_current = 0 WHERE paper_id = ?',
+  ).run(ref.paperId)
+  const selected = db.prepare(
+    'UPDATE canonical_paper_publications SET is_current = 1 WHERE paper_id = ? AND version_name = ? AND source_asset_version = ? AND publication_digest = ?',
+  ).run(
+    ref.paperId,
+    ref.versionName,
+    ref.sourceAssetVersion,
+    ref.publicationDigest,
+  )
+  if (selected.changes !== 1) {
+    throw publicationError(
+      'CANONICAL_PUBLICATION_ROLLBACK_TARGET_CONFLICT',
+      'Rollback target no longer matches its recorded immutable identity',
+    )
+  }
+}
+
 function paperPaths(rootDir, paperId) {
   assertPaperId(paperId)
   const paperDir = path.join(rootDir, paperId)
@@ -532,13 +554,29 @@ function readLatestRef(paths) {
   return existsSync(refPath) ? readJsonFile(refPath) : null
 }
 
-function setLatestRef(paths, ref) {
-  const prepared = path.join(paths.paperDir, `.latest-staging-${randomUUID()}`)
-  writeJson(path.join(prepared, latestRefFileName), ref)
-  const previous = path.join(paths.paperDir, `.latest-previous-${randomUUID()}`)
-  if (existsSync(paths.latestDir)) renameSync(paths.latestDir, previous)
-  renameSync(prepared, paths.latestDir)
-  return previous
+function makeLatestSwap(paths) {
+  return {
+    preparedLatest: path.join(
+      paths.paperDir,
+      `.latest-staging-${randomUUID()}`,
+    ),
+    previousLatest: path.join(
+      paths.paperDir,
+      `.latest-previous-${randomUUID()}`,
+    ),
+    hadLatest: existsSync(paths.latestDir),
+  }
+}
+
+function setLatestRef(paths, ref, swap = makeLatestSwap(paths)) {
+  const { preparedLatest, previousLatest, hadLatest } = swap
+  if (existsSync(paths.latestDir)) {
+    cpSync(paths.latestDir, preparedLatest, { recursive: true })
+  }
+  writeJson(path.join(preparedLatest, latestRefFileName), ref)
+  if (hadLatest) renameSync(paths.latestDir, previousLatest)
+  renameSync(preparedLatest, paths.latestDir)
+  return previousLatest
 }
 
 function restoreLatest(paths, previous) {
@@ -546,15 +584,133 @@ function restoreLatest(paths, previous) {
   if (previous && existsSync(previous)) renameSync(previous, paths.latestDir)
 }
 
+function samePublicationRef(left, right) {
+  return Boolean(
+    left
+    && right
+    && left.paperId === right.paperId
+    && left.versionName === right.versionName
+    && left.sourceAssetVersion === right.sourceAssetVersion
+    && left.publicationDigest === right.publicationDigest,
+  )
+}
+
+function validateRecoveryRef(ref, paperId, label) {
+  if (
+    !ref
+    || ref.paperId !== paperId
+    || !/^v[1-9]\d*$/.test(ref.versionName)
+    || !Number.isInteger(ref.sourceAssetVersion)
+    || ref.sourceAssetVersion < 1
+    || !/^sha256:[a-f0-9]{64}$/.test(ref.publicationDigest)
+  ) {
+    throw publicationError(
+      'CANONICAL_PUBLICATION_RECOVERY_AMBIGUOUS',
+      `${label} does not contain one exact Publication identity`,
+    )
+  }
+  return ref
+}
+
+function readRecoveryJournal(paths, paperId) {
+  let journal
+  try {
+    journal = readJsonFile(paths.journalPath)
+  } catch {
+    throw publicationError(
+      'CANONICAL_PUBLICATION_RECOVERY_AMBIGUOUS',
+      'Publication recovery journal is unreadable',
+    )
+  }
+  const operation = journal.operation || 'publish'
+  if (
+    journal.schemaVersion !== 'canonical-latest-swap-journal-v1'
+    || !['publish', 'rollback'].includes(operation)
+  ) {
+    throw publicationError(
+      'CANONICAL_PUBLICATION_RECOVERY_AMBIGUOUS',
+      'Publication recovery journal has an unknown protocol',
+    )
+  }
+  const target = validateRecoveryRef(journal.target, paperId, 'Recovery target')
+  const previous = journal.previous
+    ? validateRecoveryRef(journal.previous, paperId, 'Recovery predecessor')
+    : null
+  if (
+    journal.previous
+    && journal.previousDigest !== journal.previous.publicationDigest
+  ) {
+    throw publicationError(
+      'CANONICAL_PUBLICATION_RECOVERY_AMBIGUOUS',
+      'Publication recovery predecessor digest disagrees with its identity',
+    )
+  }
+  if (
+    journal.previousLatest !== null
+    && typeof journal.previousLatest !== 'string'
+  ) {
+    throw publicationError(
+      'CANONICAL_PUBLICATION_RECOVERY_AMBIGUOUS',
+      'Publication recovery journal has an invalid previous-latest path',
+    )
+  }
+  if (typeof journal.previousLatest === 'string') {
+    const previousLatest = path.resolve(journal.previousLatest)
+    if (
+      path.dirname(previousLatest) !== paths.paperDir
+      || !/^\.latest-previous-[a-f0-9-]+$/.test(path.basename(previousLatest))
+    ) {
+      throw publicationError(
+        'CANONICAL_PUBLICATION_RECOVERY_AMBIGUOUS',
+        'Publication recovery journal points outside its paper directory',
+      )
+    }
+  }
+  if (
+    journal.preparedLatest !== undefined
+    && (
+      typeof journal.preparedLatest !== 'string'
+      || path.dirname(path.resolve(journal.preparedLatest)) !== paths.paperDir
+      || !/^\.latest-staging-[a-f0-9-]+$/.test(
+        path.basename(journal.preparedLatest),
+      )
+    )
+  ) {
+    throw publicationError(
+      'CANONICAL_PUBLICATION_RECOVERY_AMBIGUOUS',
+      'Publication recovery journal has an invalid prepared-latest path',
+    )
+  }
+  if (
+    journal.hadLatest !== undefined
+    && typeof journal.hadLatest !== 'boolean'
+  ) {
+    throw publicationError(
+      'CANONICAL_PUBLICATION_RECOVERY_AMBIGUOUS',
+      'Publication recovery journal has an invalid prior-latest state',
+    )
+  }
+  return {
+    ...journal,
+    operation,
+    target,
+    previous,
+  }
+}
+
 export function recoverCanonicalPaperPublication({ rootDir, db, paperId }) {
   ensureCanonicalPublicationDatabaseShape(db)
   const paths = paperPaths(rootDir, paperId)
   if (!existsSync(paths.journalPath)) return { status: 'clean' }
-  const journal = readJsonFile(paths.journalPath)
+  const journal = readRecoveryJournal(paths, paperId)
   const current = currentDbRef(db, paperId)
-  if (current?.publicationDigest === journal.target.publicationDigest && current.versionName === journal.target.versionName) {
+  if (samePublicationRef(current, journal.target)) {
+    loadCanonicalOnlyConsumers({
+      ref: journal.target,
+      store: createFileSystemCanonicalPublicationStore({ rootDir, db }),
+    })
     const latest = readLatestRef(paths)
-    if (!latest || latest.publicationDigest !== journal.target.publicationDigest || latest.versionName !== journal.target.versionName) {
+    if (!samePublicationRef(latest, journal.target)) {
       const previous = setLatestRef(paths, journal.target)
       if (previous && existsSync(previous)) rmSync(previous, { recursive: true, force: true })
     }
@@ -562,10 +718,45 @@ export function recoverCanonicalPaperPublication({ rootDir, db, paperId }) {
     rmSync(paths.journalPath, { force: true })
     return { status: 'post_commit_recovered' }
   }
-  if (!current || current.publicationDigest === journal.previousDigest) {
-    restoreLatest(paths, journal.previousLatest)
+  const matchesPrevious = journal.previous
+    ? samePublicationRef(current, journal.previous)
+    : (
+        (!current && journal.previousDigest === null)
+        || current?.publicationDigest === journal.previousDigest
+      )
+  if (matchesPrevious) {
+    const previousLatestExists = typeof journal.previousLatest === 'string'
+      && existsSync(journal.previousLatest)
+    if (previousLatestExists) {
+      restoreLatest(paths, journal.previousLatest)
+    } else if (journal.hadLatest !== undefined) {
+      const latest = readLatestRef(paths)
+      if (journal.hadLatest) {
+        if (!samePublicationRef(latest, journal.previous)) {
+          throw publicationError(
+            'CANONICAL_PUBLICATION_RECOVERY_AMBIGUOUS',
+            'The byte-preserved previous latest Publication cannot be recovered',
+          )
+        }
+      } else if (latest) {
+        if (!samePublicationRef(latest, journal.target)) {
+          throw publicationError(
+            'CANONICAL_PUBLICATION_RECOVERY_AMBIGUOUS',
+            'Unexpected latest Publication appeared during recovery',
+          )
+        }
+        rmSync(paths.latestDir, { recursive: true, force: true })
+      }
+    } else {
+      restoreLatest(paths, journal.previousLatest)
+    }
+    if (journal.preparedLatest && existsSync(journal.preparedLatest)) {
+      rmSync(journal.preparedLatest, { recursive: true, force: true })
+    }
     const targetDir = path.join(paths.versionsDir, journal.target.versionName)
-    if (existsSync(targetDir)) rmSync(targetDir, { recursive: true, force: true })
+    if (journal.operation === 'publish' && existsSync(targetDir)) {
+      rmSync(targetDir, { recursive: true, force: true })
+    }
     rmSync(paths.journalPath, { force: true })
     return { status: 'pre_commit_rolled_back' }
   }
@@ -706,7 +897,22 @@ export function publishCanonicalPaperPublication({
   mkdirSync(paths.versionsDir, { recursive: true })
   recoverCanonicalPaperPublication({ rootDir, db, paperId })
   rejectUnreconciledVersionDirectories(paths, db, paperId)
-  const existing = db.prepare('SELECT version_name FROM canonical_paper_publications WHERE paper_id = ? AND source_asset_version = ? AND publication_digest = ?').get(paperId, sourceAssetVersion, sealed.manifest.publicationDigest)
+  const existingIdentity = db.prepare(
+    'SELECT version_name, publication_digest FROM canonical_paper_publications WHERE paper_id = ? AND source_asset_version = ?',
+  ).all(paperId, sourceAssetVersion)
+  const existing = existingIdentity.find(
+    (row) => row.publication_digest === sealed.manifest.publicationDigest,
+  )
+  if (
+    existingIdentity.some(
+      (row) => row.publication_digest !== sealed.manifest.publicationDigest,
+    )
+  ) {
+    throw publicationError(
+      'CANONICAL_PUBLICATION_IDENTITY_CONFLICT',
+      `Source asset version ${sourceAssetVersion} is already bound to another Publication digest`,
+    )
+  }
   if (existing) {
     const ref = {
       paperId,
@@ -749,13 +955,21 @@ export function publishCanonicalPaperPublication({
     renameSync(stageDir, versionDir)
     const previous = currentDbRef(db, paperId)
     const target = { paperId, versionName, sourceAssetVersion, publicationDigest: sealed.manifest.publicationDigest }
-    const journal = { schemaVersion: 'canonical-latest-swap-journal-v1', target, previousDigest: previous?.publicationDigest || null, previousLatest: null }
+    const journal = {
+      schemaVersion: 'canonical-latest-swap-journal-v1',
+      operation: 'publish',
+      target,
+      previous: previous || null,
+      previousDigest: previous?.publicationDigest || null,
+    }
+    const latestSwap = makeLatestSwap(paths)
+    journal.previousLatest = latestSwap.previousLatest
+    journal.preparedLatest = latestSwap.preparedLatest
+    journal.hadLatest = latestSwap.hadLatest
     db.exec('BEGIN IMMEDIATE')
     try {
       writeJson(paths.journalPath, journal)
-      previousLatest = setLatestRef(paths, target)
-      journal.previousLatest = previousLatest
-      writeJson(paths.journalPath, journal)
+      previousLatest = setLatestRef(paths, target, latestSwap)
       if (failurePoint === 'after-latest-before-commit') throw publicationError('CANONICAL_PUBLICATION_FORCED_FAILURE', 'Forced pre-commit failure')
       recordCanonicalPublicationCurrent(db, target)
       db.exec('COMMIT')
@@ -767,8 +981,6 @@ export function publishCanonicalPaperPublication({
       throw error
     }
     if (failurePoint === 'after-commit') throw publicationError('CANONICAL_PUBLICATION_FORCED_FAILURE', 'Forced post-commit interruption')
-    if (previousLatest && existsSync(previousLatest)) rmSync(previousLatest, { recursive: true, force: true })
-    rmSync(paths.journalPath, { force: true })
     const ref = {
       paperId,
       versionName,
@@ -779,6 +991,8 @@ export function publishCanonicalPaperPublication({
       ref,
       store: createFileSystemCanonicalPublicationStore({ rootDir, db }),
     })
+    if (previousLatest && existsSync(previousLatest)) rmSync(previousLatest, { recursive: true, force: true })
+    rmSync(paths.journalPath, { force: true })
     return {
       status: 'published',
       paperId,
@@ -790,6 +1004,100 @@ export function publishCanonicalPaperPublication({
     if (existsSync(stageDir)) rmSync(stageDir, { recursive: true, force: true })
     if (!committed && versionDir && existsSync(versionDir)) rmSync(versionDir, { recursive: true, force: true })
     throw error
+  }
+}
+
+export function rollbackCanonicalPaperPublication({
+  rootDir,
+  db,
+  paperId,
+  versionName,
+  failurePoint = null,
+}) {
+  ensureCanonicalPublicationDatabaseShape(db)
+  const paths = paperPaths(rootDir, paperId)
+  recoverCanonicalPaperPublication({ rootDir, db, paperId })
+  const target = currentDbRef(db, paperId, versionName)
+  if (!target) {
+    throw publicationError(
+      'CANONICAL_PUBLICATION_ROLLBACK_TARGET_NOT_FOUND',
+      `Rollback target ${versionName} is not a recorded immutable Publication`,
+    )
+  }
+  const store = createFileSystemCanonicalPublicationStore({ rootDir, db })
+  const consumers = loadCanonicalOnlyConsumers({ ref: target, store })
+  const previous = currentDbRef(db, paperId)
+  if (
+    previous?.versionName === target.versionName
+    && previous.publicationDigest === target.publicationDigest
+  ) {
+    const latest = readLatestRef(paths)
+    if (!samePublicationRef(latest, target)) {
+      throw publicationError(
+        'CANONICAL_PUBLICATION_RECOVERY_AMBIGUOUS',
+        'Rollback target is current in SQLite but latest does not bind the same Publication',
+      )
+    }
+    return {
+      status: 'idempotent',
+      paperId,
+      versionName,
+      publicationDigest: target.publicationDigest,
+      consumers,
+    }
+  }
+
+  let previousLatest = null
+  let committed = false
+  const journal = {
+    schemaVersion: 'canonical-latest-swap-journal-v1',
+    operation: 'rollback',
+    target,
+    previous: previous || null,
+    previousDigest: previous?.publicationDigest || null,
+  }
+  const latestSwap = makeLatestSwap(paths)
+  journal.previousLatest = latestSwap.previousLatest
+  journal.preparedLatest = latestSwap.preparedLatest
+  journal.hadLatest = latestSwap.hadLatest
+  db.exec('BEGIN IMMEDIATE')
+  try {
+    writeJson(paths.journalPath, journal)
+    previousLatest = setLatestRef(paths, target, latestSwap)
+    if (failurePoint === 'after-latest-before-commit') {
+      throw publicationError(
+        'CANONICAL_PUBLICATION_FORCED_FAILURE',
+        'Forced rollback pre-commit failure',
+      )
+    }
+    selectCanonicalPublicationCurrent(db, target)
+    db.exec('COMMIT')
+    committed = true
+  } catch (error) {
+    try { db.exec('ROLLBACK') } catch {}
+    if (!committed) {
+      restoreLatest(paths, previousLatest)
+      rmSync(paths.journalPath, { force: true })
+    }
+    throw error
+  }
+  if (failurePoint === 'after-commit') {
+    throw publicationError(
+      'CANONICAL_PUBLICATION_FORCED_FAILURE',
+      'Forced rollback post-commit interruption',
+    )
+  }
+  const committedConsumers = loadCanonicalOnlyConsumers({ ref: target, store })
+  if (previousLatest && existsSync(previousLatest)) {
+    rmSync(previousLatest, { recursive: true, force: true })
+  }
+  rmSync(paths.journalPath, { force: true })
+  return {
+    status: 'rolled_back',
+    paperId,
+    versionName,
+    publicationDigest: target.publicationDigest,
+    consumers: committedConsumers,
   }
 }
 
@@ -1067,16 +1375,9 @@ export async function loadPaperForConsumption(request, store) {
         mediaArtifacts,
       )
     } catch (error) {
+      // An admitted Publication that fails its immutable package validation is
+      // never a license to reinterpret the paper through legacy data.
       const diagnostic = publicationDiagnostic(error)
-      const familyIds = consumer.contract.families.map((entry) => entry.familyContractId)
-      const legacy = await legacySelections({
-        ref,
-        contract: consumer.contract,
-        familyIds,
-        store,
-        diagnostic,
-      })
-      if (legacy) return { disposition: 'ready', paperId: request.paperId, sourceAssetVersion: ref.sourceAssetVersion, selections: legacy, diagnostics: [diagnostic] }
       return { disposition: 'incompatible', diagnostics: [diagnostic] }
     }
   }
