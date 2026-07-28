@@ -255,6 +255,17 @@ async function runOwnerFlow(browser) {
     await page.locator('[data-draft-group-id="g-golden-owner"]').waitFor({ timeout: 10_000 })
     pass('Owner basket-chip opens the draft workbench with the added group in the outline')
 
+    // Ticket 16: the teacher-facing output matrix is behavioral, not a source
+    // inventory. Open the real export menu and prove PDF remains while generated
+    // DOCX is no longer discoverable.
+    await page.getByRole('button', { name: '导出' }).click()
+    await page.getByRole('menuitem', { name: /下载 PDF/ }).waitFor({ timeout: 10_000 })
+    const generatedDocxMenuItems = await page.getByRole('menuitem', { name: /DOCX/ }).count()
+    if (generatedDocxMenuItems !== 0) {
+      fail('Draft workbench export menu must not expose generated DOCX', `found ${generatedDocxMenuItems}`)
+    }
+    pass('Draft workbench export menu exposes PDF and no generated-DOCX control')
+
     // C3: export PDF — fetch bytes directly from the page (plan.md 参考实现).
     // CI has confirmed vivliostyle is available in Actions (PR #276), so the
     // pre-approved 503 degrade path is no longer needed — this is a hard

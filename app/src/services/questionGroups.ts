@@ -3,7 +3,6 @@ import type {
   CreateQuestionGroupInput,
   ExportDocxInput,
   ExportDocxResult,
-  ExportPdfInput,
   ExportPdfResult,
   PaperSetDetail,
   PaperSetSummary,
@@ -144,44 +143,6 @@ export async function updatePaperSet(id: string, input: CreatePaperSetInput) {
 
   const data = (await response.json()) as CreatePaperSetResponse
   return data.paperSet
-}
-
-export async function exportDocx(input: ExportDocxInput): Promise<ExportDocxResult> {
-  const response = await fetch(apiPath('/api/exports/docx'), {
-    body: JSON.stringify(input),
-    headers: {
-      'content-type': 'application/json',
-    },
-    method: 'POST',
-  })
-
-  if (!response.ok) {
-    throw new Error(await readErrorMessage(response, `Failed to export DOCX: ${response.status}`))
-  }
-
-  return {
-    blob: await response.blob(),
-    fileName: decodeHeaderValue(response.headers.get('x-file-name')) || `${input.title}-${input.versionType}.docx`,
-  }
-}
-
-export async function exportPdf(input: ExportPdfInput): Promise<ExportPdfResult> {
-  const response = await fetch(apiPath('/api/exports/pdf'), {
-    body: JSON.stringify(input),
-    headers: {
-      'content-type': 'application/json',
-    },
-    method: 'POST',
-  })
-
-  if (!response.ok) {
-    throw new Error(await readErrorMessage(response, `Failed to export PDF: ${response.status}`))
-  }
-
-  return {
-    blob: await response.blob(),
-    fileName: decodeHeaderValue(response.headers.get('x-file-name')) || `${input.title}-${input.versionType}.pdf`,
-  }
 }
 
 // cut m0-5-ai-daily-limit (C6): verify-question-group has no local fallback, so the

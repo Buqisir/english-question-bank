@@ -1,5 +1,5 @@
 /**
- * usePaperExports — encapsulates DOCX/PDF/PrintHTML/PrintPDF export state and actions.
+ * usePaperExports — encapsulates supported Print HTML/PDF export state and actions.
  *
  * Delegates payload assembly to paperExportPayload.ts.
  * Delegates HTTP to services/questionGroups.ts.
@@ -8,10 +8,8 @@
 
 import { useState } from 'react'
 import type { BasketItem, PaperBlock, VersionType } from '../domain/questionBank.ts'
-import { buildDocxPayload, buildPdfPayload } from './paperExportPayload.ts'
+import { buildDocxPayload } from './paperExportPayload.ts'
 import {
-  exportDocx as fetchExportDocx,
-  exportPdf as fetchExportPdf,
   exportPrintHtml as fetchExportPrintHtml,
   exportPrintPdf as fetchExportPrintPdf,
 } from '../services/questionGroups.ts'
@@ -19,10 +17,6 @@ import {
 export type ExportStatus = 'idle' | 'exporting' | 'exported' | 'error'
 
 export type PaperExportStatuses = {
-  docx: ExportStatus
-  docxError: string
-  pdf: ExportStatus
-  pdfError: string
   printHtml: ExportStatus
   printHtmlError: string
   printPdf: ExportStatus
@@ -36,7 +30,7 @@ export type UsePaperExportsInput = {
   paperExportStyle: 'exam' | 'handout'
   paperTitle: string
   versionType: VersionType
-  onDocxOrPdfExported?: () => void
+  onPdfExported?: () => void
 }
 
 function downloadBlob(blob: Blob, fileName: string) {
@@ -51,10 +45,6 @@ function downloadBlob(blob: Blob, fileName: string) {
 }
 
 export function usePaperExports(input: UsePaperExportsInput) {
-  const [docxStatus, setDocxStatus] = useState<ExportStatus>('idle')
-  const [docxError, setDocxError] = useState('')
-  const [pdfStatus, setPdfStatus] = useState<ExportStatus>('idle')
-  const [pdfError, setPdfError] = useState('')
   const [printHtmlStatus, setPrintHtmlStatus] = useState<ExportStatus>('idle')
   const [printHtmlError, setPrintHtmlError] = useState('')
   const [printPdfStatus, setPrintPdfStatus] = useState<ExportStatus>('idle')
@@ -68,36 +58,6 @@ export function usePaperExports(input: UsePaperExportsInput) {
       paperExportStyle: input.paperExportStyle,
       paperTitle: input.paperTitle,
       versionType: input.versionType,
-    }
-  }
-
-  async function exportDocx() {
-    if (input.basket.length === 0) return
-    setDocxStatus('exporting')
-    setDocxError('')
-    try {
-      const result = await fetchExportDocx(buildDocxPayload(getPayloadState()))
-      downloadBlob(result.blob, result.fileName)
-      setDocxStatus('exported')
-      input.onDocxOrPdfExported?.()
-    } catch (error) {
-      setDocxStatus('error')
-      setDocxError(error instanceof Error ? error.message : String(error))
-    }
-  }
-
-  async function exportPdf() {
-    if (input.basket.length === 0) return
-    setPdfStatus('exporting')
-    setPdfError('')
-    try {
-      const result = await fetchExportPdf(buildPdfPayload(getPayloadState()))
-      downloadBlob(result.blob, result.fileName)
-      setPdfStatus('exported')
-      input.onDocxOrPdfExported?.()
-    } catch (error) {
-      setPdfStatus('error')
-      setPdfError(error instanceof Error ? error.message : String(error))
     }
   }
 
@@ -123,7 +83,7 @@ export function usePaperExports(input: UsePaperExportsInput) {
       const result = await fetchExportPrintPdf(buildDocxPayload(getPayloadState()))
       downloadBlob(result.blob, result.fileName)
       setPrintPdfStatus('exported')
-      input.onDocxOrPdfExported?.()
+      input.onPdfExported?.()
     } catch (error) {
       setPrintPdfStatus('error')
       setPrintPdfError(error instanceof Error ? error.message : String(error))
@@ -131,10 +91,6 @@ export function usePaperExports(input: UsePaperExportsInput) {
   }
 
   function resetExportStatuses() {
-    setDocxStatus('idle')
-    setDocxError('')
-    setPdfStatus('idle')
-    setPdfError('')
     setPrintHtmlStatus('idle')
     setPrintHtmlError('')
     setPrintPdfStatus('idle')
@@ -143,17 +99,11 @@ export function usePaperExports(input: UsePaperExportsInput) {
 
   return {
     statuses: {
-      docx: docxStatus,
-      docxError,
-      pdf: pdfStatus,
-      pdfError,
       printHtml: printHtmlStatus,
       printHtmlError,
       printPdf: printPdfStatus,
       printPdfError,
     } as PaperExportStatuses,
-    exportDocx,
-    exportPdf,
     exportPrintHtml,
     exportPrintPdf,
     resetExportStatuses,

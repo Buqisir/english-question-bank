@@ -52,8 +52,8 @@ const scriptsReadme = read('scripts/README.md')
 
 assert('export routes module exports createExportRoutes', /export function createExportRoutes\([^)]*\)/.test(routeSource))
 assert('export routes module uses minimal router helper', routeSource.includes("from '../router/index.mjs'"))
-assert('docx export route registered', routeSource.includes('/api\\/exports\\/docx$'))
-assert('pdf export route registered', routeSource.includes('/api\\/exports\\/pdf$'))
+assert('generated DOCX export route is absent', !routeSource.includes('/api\\/exports\\/docx$'))
+assert('obsolete DOCX-converted PDF route is absent', !routeSource.includes('/api\\/exports\\/pdf$'))
 assert('print-html export route registered', routeSource.includes('/api\\/exports\\/print-html$'))
 assert('print-pdf export route registered', routeSource.includes('/api\\/exports\\/print-pdf$'))
 assert('print-pdf preserves vivliostyle unavailable 503 mapping', routeSource.includes('精排 PDF 不可用') && routeSource.includes("message.includes('vivliostyle')"))
@@ -71,15 +71,6 @@ assert('api no longer owns export implementation', !/function exportDocx\(input\
 assert('api no longer owns inline export route branches', !api.includes("url.pathname === '/api/exports/docx'") && !api.includes("url.pathname === '/api/exports/pdf'") && !api.includes("url.pathname === '/api/exports/print-html'") && !api.includes("url.pathname === '/api/exports/print-pdf'"))
 
 const implementation = {
-  exportDocx(receivedInput) {
-    calls.push('exportDocx')
-    assert('docx route passes parsed input to exportDocx', receivedInput === input)
-    return { body: Buffer.from('docx'), fileName: 'test.docx', outputPath: '/tmp/test.docx' }
-  },
-  exportPdf() {
-    calls.push('exportPdf')
-    return { body: Buffer.from('pdf'), fileName: 'test.pdf', outputPath: '/tmp/test.pdf' }
-  },
   exportPrintHtml() {
     calls.push('exportPrintHtml')
     return { body: '<html></html>', fileName: 'test.html' }
@@ -87,11 +78,6 @@ const implementation = {
   exportPrintPdf() {
     calls.push('exportPrintPdf')
     throw new Error('vivliostyle CLI not found')
-  },
-  sendDocx(response, body, fileName, outputPath) {
-    calls.push(`sendDocx:${fileName}:${outputPath}:${body.toString()}`)
-    response.writeHead(200, { 'content-type': 'docx' })
-    response.end(body)
   },
   sendPdf(response, body, fileName, outputPath) {
     calls.push(`sendPdf:${fileName}:${outputPath}:${body.toString()}`)
@@ -101,7 +87,7 @@ const implementation = {
 }
 
 const routes = createExportRoutes(implementation)
-assert('createExportRoutes returns four routes', routes.length === 4)
+assert('createExportRoutes returns only the supported Print HTML/PDF routes', routes.length === 2)
 
 const input = { ok: true }
 const request = { method: 'POST' }
@@ -120,13 +106,8 @@ const context = {
   },
 }
 
-const docxResponse = createResponse()
-await routeByPath(routes, '/api/exports/docx').handle({ request, response: docxResponse, context })
-assert('docx route sends docx response', docxResponse.statusCode === 200 && calls.includes('sendDocx:test.docx:/tmp/test.docx:docx'))
-
-const pdfResponse = createResponse()
-await routeByPath(routes, '/api/exports/pdf').handle({ request, response: pdfResponse, context })
-assert('pdf route sends pdf response', pdfResponse.statusCode === 200 && calls.includes('sendPdf:test.pdf:/tmp/test.pdf:pdf'))
+assert('generated DOCX route cannot be selected', routeByPath(routes, '/api/exports/docx') === undefined)
+assert('obsolete DOCX-converted PDF route cannot be selected', routeByPath(routes, '/api/exports/pdf') === undefined)
 
 const htmlResponse = createResponse()
 await routeByPath(routes, '/api/exports/print-html').handle({ request, response: htmlResponse, context })
@@ -137,7 +118,7 @@ assert('print-html route preserves x-file-name header', htmlResponse.headers['x-
 const printPdfResponse = createResponse()
 await routeByPath(routes, '/api/exports/print-pdf').handle({ request, response: printPdfResponse, context })
 assert('print-pdf route maps missing vivliostyle to 503', printPdfResponse.statusCode === 503 && String(printPdfResponse.body).includes('精排 PDF 不可用'))
-assert('routes parsed JSON once per request', readCount === 4)
+assert('routes parsed JSON once per request', readCount === 2)
 
 assert('verify-ci includes H1-E export routes verify', verifyCi.includes('verify-h1e-export-routes.mjs'))
 assert('scripts README documents H1-E export routes verify', scriptsReadme.includes('verify-h1e-export-routes.mjs'))

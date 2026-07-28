@@ -15,27 +15,12 @@ function sendHtml(response, { body, fileName }) {
 
 export function createExportRoutes(exportImplementation) {
   const {
-    exportDocx,
-    exportPdf,
     exportPrintHtml,
     exportPrintPdf,
-    sendDocx,
     sendPdf,
   } = exportImplementation
 
   return [
-    defineRoute('POST', /^\/api\/exports\/docx$/, async ({ request, response, context }) => {
-      const input = await context.readJsonBody(request)
-      const result = exportDocx(input)
-      sendDocx(response, result.body, result.fileName, result.outputPath)
-    }),
-
-    defineRoute('POST', /^\/api\/exports\/pdf$/, async ({ request, response, context }) => {
-      const input = await context.readJsonBody(request)
-      const result = exportPdf(input)
-      sendPdf(response, result.body, result.fileName, result.outputPath)
-    }),
-
     defineRoute('POST', /^\/api\/exports\/print-html$/, async ({ request, response, context }) => {
       const input = await context.readJsonBody(request)
       const result = exportPrintHtml(input)

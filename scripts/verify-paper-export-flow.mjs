@@ -88,10 +88,11 @@ console.log('\nTest 5: usePaperExports module structure')
   const content = (await import('node:fs')).readFileSync(hookPath, 'utf8')
   assert('exports usePaperExports function', content.includes('export function usePaperExports'), '')
   assert('imports buildDocxPayload', content.includes('buildDocxPayload'), '')
-  assert('imports buildPdfPayload', content.includes('buildPdfPayload'), '')
+  assert('does not import obsolete converted-PDF payload', !content.includes('buildPdfPayload'), '')
+  assert('has no generated-DOCX or converted-PDF action', !/exportDocx|exportPdf/.test(content), '')
   assert('has resetExportStatuses', content.includes('resetExportStatuses'), '')
   assert('has downloadBlob helper', content.includes('downloadBlob'), '')
-  assert('calls onDocxOrPdfExported', content.includes('onDocxOrPdfExported'), '')
+  assert('calls onPdfExported after supported Print PDF', content.includes('onPdfExported'), '')
 }
 
 console.log(`\n=== Results: ${passed} passed, ${failed} failed ===`)

@@ -479,7 +479,6 @@ export function getPrintReadyByGroupId(db, groupIds) {
 }
 
 const draftPaperStore = createDraftPaperStore({
-  exportImplementation,
   exportDir,
   getPrintReadyByGroupId,
   getQuestionGroupDetail,
@@ -498,11 +497,6 @@ serverContext.draftPaperStore = draftPaperStore
 // without importing auth.mjs directly (same post-hoc pattern as draftPaperStore above,
 // since resolveDataUserId is destructured/used before serverContext's later fields exist).
 serverContext.resolveDataUserId = resolveDataUserId
-// draft-docx cut: same exportImplementation.sendDocx the integral-paper
-// /api/exports/docx route consumes — post-hoc assignment (same pattern as
-// draftPaperStore/resolveDataUserId above) so the new draft-paper docx route
-// can send its response with the shared helper.
-serverContext.sendDocx = exportImplementation.sendDocx
 
 const serverRoutes = [
   ...h1Routes,

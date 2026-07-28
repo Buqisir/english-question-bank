@@ -118,7 +118,7 @@ const registry = {
   'scripts/verify-my-space-shelf.mjs',
   'scripts/verify-draft-student-field.mjs',
   'scripts/verify-genre-truth.mjs',
-  'scripts/verify-draft-paper-docx.mjs',
+  'scripts/verify-generated-docx-disconnected.mjs',
   'scripts/verify-detail-redesign.mjs',
   'scripts/verify-reading-analysis-retire.mjs',
   'scripts/verify-r2-trap-audit.mjs',

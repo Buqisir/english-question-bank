@@ -209,7 +209,7 @@ function App() {
       setDataStatus((status) => (status === 'sqlite' ? status : 'sample'))
     }
   }, [])
-  // Paper export flow hook — manages DOCX/PDF/PrintHTML/PrintPDF state and actions
+  // Paper export flow hook — manages the supported Print HTML/PDF state and actions.
   const paperExports = usePaperExports({
     basket,
     paperBlocks,
@@ -217,7 +217,7 @@ function App() {
     paperExportStyle,
     paperTitle,
     versionType,
-    onDocxOrPdfExported: () => {},
+    onPdfExported: () => {},
   })
 
   // Wire the Paper Set Draft edit-event router. usePaperDraft is created above
