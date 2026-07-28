@@ -1,0 +1,135 @@
+{
+  "schemaVersion": "paper-listening-transcript-v1",
+  "paperId": "paper-2026-i",
+  "source": "source/answers.pdf p.6-7 (英语·听力材料)",
+  "header": "2026 年普通高等学校招生全国统一考试·全国I卷 英语·听力材料",
+  "texts": [
+    {
+      "textId": "Text 1",
+      "label": "员工入职",
+      "timeRange": "01:05-01:20",
+      "lines": [
+        { "speaker": "M", "line": "Do I need a card to enter the building?" },
+        { "speaker": "W", "line": "Yes, you'll get your card this afternoon. Now let me show you around and say hello to everyone, and then we'll talk about your job duties." }
+      ]
+    },
+    {
+      "textId": "Text 2",
+      "label": "餐桌闲聊",
+      "timeRange": "01:55-02:04",
+      "lines": [
+        { "speaker": "W", "line": "Would you like some more roast beef? It's the chef's signature dish." },
+        { "speaker": "M", "line": "No thanks. It's really good, but I can't manage any more." }
+      ]
+    },
+    {
+      "textId": "Text 3",
+      "label": "探讨摄影作品",
+      "timeRange": "02:35-02:48",
+      "lines": [
+        { "speaker": "W", "line": "Hey! Look at this one in the newspaper. Fishermen fishing in Lake Victoria in Tanzania." },
+        { "speaker": "M", "line": "Wow, that's awesome! I like the unique atmosphere caught by the photographer." }
+      ]
+    },
+    {
+      "textId": "Text 4",
+      "label": "劝其休息",
+      "timeRange": "03:22-03:33",
+      "lines": [
+        { "speaker": "W", "line": "It's almost midnight, Max. You've got a long drive tomorrow." },
+        { "speaker": "M", "line": "Okay, another 15 minutes from my travel blog and I'll be done." }
+      ]
+    },
+    {
+      "textId": "Text 5",
+      "label": "改约见面",
+      "timeRange": "04:02-04:20",
+      "lines": [
+        { "speaker": "W", "line": "Hello Mr. Waterman. This is Sarah Jones. I'm stuck on the highway. There's a serious accident. I'm afraid I can't arrive before noon. Could we meet this afternoon?" },
+        { "speaker": "M", "line": "Okay, I'll see my doctor at one and will be available after two." }
+      ]
+    },
+    {
+      "textId": "Text 6",
+      "label": "城市对比",
+      "timeRange": "05:50-06:25",
+      "coversQuestions": [6, 7],
+      "lines": [
+        { "speaker": "M", "line": "Lisa, you're English, but you live here. What do you love about Copenhagen?" },
+        { "speaker": "W", "line": "It has everything big cities offer. Cafes, Theaters, Museums, but it is still relaxing and manageable. Unlike London, you don't feel constant pressure here." },
+        { "speaker": "M", "line": "Was this lifestyle why you first came?" },
+        { "speaker": "W", "line": "No, I originally came for a three-month project at a law firm. After finishing it, they offered me a permanent job. I took it and stayed." }
+      ]
+    },
+    {
+      "textId": "Text 7",
+      "label": "预定晚宴",
+      "timeRange": "07:44-08:38",
+      "coversQuestions": [8, 9, 10],
+      "lines": [
+        { "speaker": "W", "line": "The Garden Hotel. May I help you?" },
+        { "speaker": "M", "line": "Hello, this is Mike Lee from Gilbert Company. We'd like to book a dinner for next Tuesday." },
+        { "speaker": "W", "line": "Certainly, Mr. Lee. Could you let me know how many guests you're expecting, and if you have a specific budget in mind?" },
+        { "speaker": "M", "line": "Yes, we're expecting 20 people, and we're aiming for 30 pounds per person." },
+        { "speaker": "W", "line": "Understood. Is this for a special occasion?" },
+        { "speaker": "M", "line": "Yes, it's to honor a staff member who is retiring next month." },
+        { "speaker": "W", "line": "That sounds lovely. What time would you like the dinner to start?" },
+        { "speaker": "M", "line": "At 6:30 PM." },
+        { "speaker": "W", "line": "Okay, would you like a detailed menu with prices?" },
+        { "speaker": "M", "line": "Yes, could you email it to mikelee@gilbert.com." },
+        { "speaker": "W", "line": "No problem, I'm on it." }
+      ]
+    },
+    {
+      "textId": "Text 8",
+      "label": "讨论 AI 商业创作",
+      "timeRange": "10:20-11:15",
+      "coversQuestions": [11, 12, 13],
+      "lines": [
+        { "speaker": "W", "line": "Dear listeners, the song we've just heard was made with an AI version of Jenny's singing voice." },
+        { "speaker": "M", "line": "Yeah, earlier this year Jenny announced that she'd let anybody make a song using her AI voice, as long as they were entitled and shared their profits with her, and in just a few weeks, more than 300 new songs were created using her AI voice." },
+        { "speaker": "W", "line": "Incredible! Just imagine, Jenny may have been at home drinking a glass of wine while her AI clone voice worked hard to sing her songs. This could be an attractive new business model for a pop star." },
+        { "speaker": "M", "line": "Indeed. But some of our listeners called to say they want to hear Jenny's real voice. Now let's play one of her greatest hits. Show me your love." }
+      ]
+    },
+    {
+      "textId": "Text 9",
+      "label": "古巴比伦食谱文本",
+      "timeRange": "12:57-14:02",
+      "coversQuestions": [14, 15, 16],
+      "lines": [
+        { "speaker": "M", "line": "Dr. Evans, you just said that these ancient texts are actually the recipes from ancient Babylonia. Can you tell us more?" },
+        { "speaker": "W", "line": "Ancient Babylonia is home to many of the things that we use in our cooking today. I bet about 50% of the energy you need every day comes from vegetables or animals that originated in this area." },
+        { "speaker": "M", "line": "Why have these texts taken so long to come to light?" },
+        { "speaker": "W", "line": "These ancient texts have been known since the 1920s but were thought to be medical texts. In the 1940s, Mary Hussey, an American scholar, suggested that they might be about food, but people didn't believe her until French author Jean Poteau. In the 1980s, was asked to write an article about cooking in the past. He had heard about the texts, so he went to Yale University and found out that they were indeed about food." }
+      ],
+      "note": "本段听力材料原文如此照抄(含 answers.pdf 内 'Jean Poteau'/题干 'Jean Bottero' 拼写不一致、以及'In the 1980s, was asked'这句缺主语的措辞)，语义保真不作修正。"
+    },
+    {
+      "textId": "Text 10",
+      "label": "实验规则注意事项",
+      "timeRange": "16:00-17:13",
+      "coversQuestions": [17, 18, 19, 20],
+      "lines": [
+        { "speaker": "M", "line": "Before we begin today's experiment, let's review the lab rules. First, safety glasses must be worn at all times, even if you're only watching. Second, never mix chemicals unless the instructions tell you to do so. Today we're using a strong acid, which can cause serious burns if it touches your skin. If any chemical container is knocked over, DON'T PANIC! Tell me immediately, and I'll handle the cleanup. Also, keep your hair tied back and avoid wearing loose clothes. We will work in pairs. One person will handle the tools while the other records the data. Switch roles after every three trials to ensure everyone gets practice. Remember, the goal is accurate data, not speed. If you finish early, do not start a new experiment. Instead, clean your workspace thoroughly. Any questions? No? Alright, let's have a safe and productive class!" }
+      ]
+    }
+  ],
+  "broadcastEnd": "18:50",
+  "timingTable": [
+    { "text": "Text 1", "time": "01:05-01:20", "durationSeconds": 15, "wordCount": 35, "wordsPerMinute": 140 },
+    { "text": "Text 2", "time": "01:55-02:04", "durationSeconds": 9, "wordCount": 23, "wordsPerMinute": 153 },
+    { "text": "Text 3", "time": "02:35-02:48", "durationSeconds": 13, "wordCount": 27, "wordsPerMinute": 125 },
+    { "text": "Text 4", "time": "03:22-03:33", "durationSeconds": 11, "wordCount": 22, "wordsPerMinute": 120 },
+    { "text": "Text 5", "time": "04:02-04:20", "durationSeconds": 18, "wordCount": 41, "wordsPerMinute": 137 },
+    { "text": "Text 6", "time": "05:50-06:25", "durationSeconds": 35, "wordCount": 70, "wordsPerMinute": 120 },
+    { "text": "Text 7", "time": "07:44-08:38", "durationSeconds": 54, "wordCount": 114, "wordsPerMinute": 127 },
+    { "text": "Text 8", "time": "10:20-11:15", "durationSeconds": 55, "wordCount": 128, "wordsPerMinute": 140 },
+    { "text": "Text 9", "time": "12:57-14:02", "durationSeconds": 65, "wordCount": 148, "wordsPerMinute": 137 },
+    { "text": "Text 10", "time": "16:00-17:13", "durationSeconds": 73, "wordCount": 142, "wordsPerMinute": 117 }
+  ],
+  "notes": [
+    "美式发音。",
+    "整体语速约 129 词/分钟。"
+  ]
+}

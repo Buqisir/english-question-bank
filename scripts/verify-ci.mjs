@@ -17,6 +17,7 @@ const registry = {
   'scripts/verify-paper-canonical-publication.mjs',
   'scripts/verify-paper-canonical-import-admission.mjs',
   'scripts/verify-paper-canonical-import-recovery.mjs',
+  'scripts/verify-paper-canonical-import-pilot-fixes.mjs',
   'scripts/verify-paper-canonical-import-pilot.mjs',
   'scripts/verify-paper-canonical-cloze-grammar-publication.mjs',
   'scripts/verify-paper-canonical-seven-choices-publication.mjs',

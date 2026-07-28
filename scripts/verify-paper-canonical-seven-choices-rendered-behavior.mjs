@@ -326,6 +326,28 @@ async function assertActualPrintPdfArtifacts() {
 
 async function assertActualPaperSurface() {
   const browserAsset = structuredClone(asset)
+  const compatibleBrowserConsumption = structuredClone(browserConsumption)
+  compatibleBrowserConsumption.selections =
+    compatibleBrowserConsumption.selections
+      .map((selection) => ({
+        ...selection,
+        groupIds: selection.groupIds.filter(
+          (groupId) => Boolean(browserAsset.content.groups[groupId]),
+        ),
+        projectedOccurrences: selection.projectedOccurrences.filter(
+          (node) => Boolean(browserAsset.content.groups[node.groupId]),
+        ),
+      }))
+      .filter((selection) => selection.groupIds.length > 0)
+  const browserGroupIds = new Set(
+    compatibleBrowserConsumption.selections.flatMap(
+      (selection) => selection.groupIds,
+    ),
+  )
+  browserAsset.content.blocks = browserAsset.content.blocks.filter(
+    (block) =>
+      block.type === 'group' && browserGroupIds.has(block.groupId),
+  )
   browserAsset.content.groups[occurrence.groupId].passage.paragraphs = [{
     paragraphId: 'legacy-poison',
     text: 'POISONED RAW MARKERS MUST NOT RENDER __1__ __2__',
@@ -363,7 +385,7 @@ async function assertActualPaperSurface() {
         route.fulfill({
           status: 200,
           contentType: 'application/json',
-          body: JSON.stringify(browserConsumption),
+          body: JSON.stringify(compatibleBrowserConsumption),
         }))
       await page.route('**/paper-assets/**/paper-asset.json', (route) =>
         route.fulfill({

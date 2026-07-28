@@ -38,30 +38,40 @@ The envelope itself has this closed outer shape:
   "evidence": {
     "documents": [
       {
-        "inputKey": "questions",
-        "roles": ["question_source", "official_answer_source"],
+        "inputKey": "canonical_source_envelope",
+        "roles": ["operator_assertions"],
         "declared": {
-          "mediaType": "application/vnd.eqb.canonical-fixture+json"
+          "mediaType": "application/vnd.eqb.canonical-fixture+json",
+          "originalName": "canonical-source-envelope.json"
         },
-        "path": "01-questions.json"
+        "path": "01-canonical-source-envelope.json"
       },
       {
-        "inputKey": "paper_asset",
-        "roles": ["question_source"],
+        "inputKey": "original_question_source",
+        "roles": ["question_source", "source_provenance"],
         "declared": {
-          "mediaType": "application/json",
-          "originalName": "paper-asset.json"
+          "mediaType": "application/pdf",
+          "originalName": "paper.pdf"
         },
-        "path": "04-paper_asset.json"
+        "path": "02-original-question-source.pdf"
       },
       {
-        "inputKey": "official_answers",
-        "roles": ["official_answer_source"],
+        "inputKey": "reading_structure",
+        "roles": ["structured_source"],
         "declared": {
           "mediaType": "application/json",
-          "originalName": "answer-key.json"
+          "originalName": "reading-source-capture-v1.json"
         },
-        "path": "05-official_answers.json"
+        "path": "07-reading-source-capture.json"
+      },
+      {
+        "inputKey": "listening_answers",
+        "roles": ["structured_source", "official_answer_source"],
+        "declared": {
+          "mediaType": "application/vnd.eqb.listening-answers+json",
+          "originalName": "answers.json"
+        },
+        "path": "15-listening-answers.json"
       }
     ]
   }
@@ -79,6 +89,7 @@ node scripts/import-pipeline/build-canonical-request.mjs \
   "<backend-package-dir>" \
   --answers-pdf "<paper-source-dir>/answers.pdf" \
   --instruction-evidence "<reviewed profile-writing-source-evidence.json>" \
+  --reviewed-evidence-dir "<reviewed-evidence-dir>" \
   --output-dir "<backend-package-dir>/canonical-evidence" \
   --write
 ```
@@ -86,19 +97,25 @@ node scripts/import-pipeline/build-canonical-request.mjs \
 The package directory must already contain the normal package-builder outputs
 `paper-asset.json`, `answer-key.json`, and the immutable `paper.pdf`.
 `--instruction-evidence` is the accepted source transcription/correction
-record bound to that PDF; it is never inferred by the producer. The command
-calls `buildNck1CanonicalImportRequest(...)`, derives the whole-paper structured
-source from those package outputs, adds the exact source/answer PDFs, compiles
-the result fail-closed, and only then writes the indexed documents and
-`canonical-import-request.json`. Rerun the same command without `--write` to
-prove every output is byte-reproducible.
+record bound to that PDF; it is never inferred by the producer.
+`--reviewed-evidence-dir` must contain the reviewed Reading structured capture
+and table proof, both Writing captures and transcriptions, and the Listening
+Questions 1–20 with A–C options, official answers, transcript segments, and
+timing/audio inventory. The producer only assembles those immutable documents
+and an empty registered source envelope. Registered compiler adapters derive
+canonical semantics, Source Spans, Transformation Records, and inactive-slot
+closure. Missing or conflicting evidence blocks compilation before any output
+is written; neither the producer nor package validator supplies an answer,
+reconstructs `[表: …]` marker text, or precloses Listening. Rerun the same
+command without `--write` to prove every output is byte-reproducible.
 
 Copy the current `canonicalAuthorityRef`; never copy an older request's
 authority block. Every `path` is non-empty, relative to the envelope, contains
 no `..`, and resolves to an immutable file. Do not hand-author a Canonical
-Paper, Publication, structured-source document, or Source Capture as an input.
-The exact admitted `paper-asset.json`, `answer-key.json`, and original PDF/DOCX
-source must all occur in Source Capture under their correct roles; the public
+Paper, Publication, or Source Capture as an input. Reviewed structured-source
+documents are evidence inputs and require exact source lineage. The exact
+admitted `paper-asset.json`, `answer-key.json`, and original PDF/DOCX source
+must all occur in Source Capture under their correct roles; the public
 publisher verifies the package-file digests again.
 
 Before the state-changing publish, load and compile the envelope fail-closed:
@@ -155,6 +172,7 @@ The exact executable boundaries are:
 Ticket 20 keeps one executable local proof of those boundaries:
 
 ```bash
+node scripts/verify-paper-canonical-import-pilot-fixes.mjs
 node scripts/verify-paper-canonical-import-pilot.mjs
 ```
 

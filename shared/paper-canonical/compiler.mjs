@@ -2144,7 +2144,13 @@ export function compileCanonicalPaper(request) {
   const planResult = buildPlan(source, capture, closure, builtGroups, transformations.records, effectiveReviewDecisions)
   diagnostics.push(...planResult.diagnostics)
   if (dispositionFor(diagnostics) !== 'ready') return blockedResult(dispositionFor(diagnostics), capture, closure.authorityRef, diagnostics, transformations.records, effectiveReviewDecisions)
-  const groups = builtGroups.map(({ slotId: _slotId, ...group }) => group)
+  const builtGroupById = new Map(
+    builtGroups.map((group) => [group.identity.groupId, group]),
+  )
+  const groups = planResult.plan.slotBindings
+    .filter((binding) => binding.state === 'bound')
+    .map((binding) => builtGroupById.get(binding.groupRef.groupId))
+    .map(({ slotId: _slotId, ...group }) => group)
   const sourceClosureScopeIds = new Set(
     planResult.plan.slotBindings
       .map((binding) => binding.sourceClosureRef?.reportScopeId)

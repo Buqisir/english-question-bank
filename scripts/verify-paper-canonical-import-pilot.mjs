@@ -512,7 +512,9 @@ function assertPdfSemanticOrder(pdfPath, consumption, label) {
       (offset, index) => index === 0 || offset > offsets[index - 1],
     ),
     true,
-    `${label} retains canonical whole-paper Group order`,
+    `${label} retains canonical whole-paper Group order: ${JSON.stringify(
+      markers.map((marker, index) => ({ ...marker, offset: offsets[index] })),
+    )}`,
   )
   assert.deepEqual(
     [...new Set(markers.map(({ familyContractId }) => familyContractId))]
@@ -1446,12 +1448,14 @@ try {
       sourcePackageDir,
       'canonical-evidence/03-continuation_writing_instruction_evidence.json',
     ),
+    '--reviewed-evidence-dir',
+    path.join(sourcePackageDir, 'reviewed-evidence'),
     '--output-dir',
     path.dirname(requestPath),
   ], { stdio: 'pipe' })
   const loadedRequest = loadCanonicalImportRequest(requestPath)
   const loadedSourceDocument = loadedRequest.evidence.documents.find(
-    (document) => document.inputKey === 'profile_instruction_source',
+    (document) => document.inputKey === 'original_question_source',
   )
   assert.ok(loadedSourceDocument, 'operator envelope captures the source PDF')
   assert.equal(
@@ -1475,7 +1479,7 @@ try {
   assert.equal(dryRun.ok, true)
   const capturedSourceDocument =
     dryRun.compilation.artifacts.sourceCapture.documents.find(
-      (document) => document.inputKey === 'profile_instruction_source',
+      (document) => document.inputKey === 'original_question_source',
     )
   assert.equal(capturedSourceDocument.originalName, sourceDocument.fileName)
   assert.equal(

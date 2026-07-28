@@ -261,7 +261,11 @@ try {
       paperAssetsDir: importRoot,
       canonicalRequest,
     })
-    assert.equal(admitted.status, 'published')
+    assert.equal(
+      admitted.status,
+      'published',
+      `canonical publish result: ${JSON.stringify(admitted)}`,
+    )
     assert.ok(admitted.publish.canonicalPublicationDigest)
     assert.equal(
       existsSync(path.join(

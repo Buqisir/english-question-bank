@@ -7,8 +7,9 @@
  * `<PaperSurface>` mount per question-group card, reusing the same
  * per-groupType adapters the Paper Intelligence harness uses
  * (`buildPaperAssetSurfaceModel` / `buildSevenChoicesSurfaceModel` /
- * `buildClozePaperView` / `buildGrammarFillPaperView` /
- * `buildWritingPaperView`).
+ * `buildClozePaperView` / `buildGrammarFillPaperView`), while canonical
+ * Reading and Writing semantics come only from the whole-paper Consumption
+ * Plan.
  *
  * 挑题态（讲评关）is READ-ONLY, unchanged from 刀 1: every group's
  * `onFocusIntent` is a no-op, `lectureFocus` is always `null` — zero
@@ -105,9 +106,11 @@ import {
   type WholePaperConsumption,
 } from '../paper-intelligence/canonicalConsumptionClient.ts'
 import {
-  buildWritingPaperView,
   type WritingPaperViewModel,
 } from '../paper-intelligence/writingPaperViewAdapter.ts'
+import {
+  projectAssetBlocksToCanonicalConsumption,
+} from './paperBrowseCanonicalAssetProjection.ts'
 import {
   buildClozeAnalysisSurfaceModel,
   type ClozeAnalysisSurfaceModel,
@@ -156,51 +159,6 @@ import {
   shouldClearLectureSelectionForActiveGroup,
 } from './paperBrowseFocusIntent'
 import './paperBrowsePage.css'
-
-function projectAssetBlocksToCanonicalConsumption(
-  asset: PaperAssetV1,
-  consumption: WholePaperConsumption,
-): PaperAssetV1 {
-  const consumedGroupIds = new Set(
-    consumption.selections.flatMap((selection) => selection.groupIds),
-  )
-  const retainsGroup = (groupId: string): boolean =>
-    consumedGroupIds.has(groupId)
-    || asset.content.groups[groupId]?.groupType !== 'listening'
-  const blocks = asset.content.blocks
-  const firstPartIndex = blocks.findIndex((block) => block.type === 'partHeading')
-  const projectedBlocks: PaperContentBlock[] =
-    firstPartIndex < 0 ? [] : blocks.slice(0, firstPartIndex)
-  const segmentStart = firstPartIndex < 0 ? 0 : firstPartIndex
-
-  for (let start = segmentStart; start < blocks.length;) {
-    let end = start + 1
-    if (blocks[start]?.type === 'partHeading') {
-      while (end < blocks.length && blocks[end].type !== 'partHeading') end += 1
-    } else {
-      end = blocks.length
-    }
-    const segment = blocks.slice(start, end)
-    const hasConsumedGroup = segment.some(
-      (block) => block.type === 'group' && retainsGroup(block.groupId),
-    )
-    if (hasConsumedGroup) {
-      projectedBlocks.push(...segment.filter(
-        (block) =>
-          block.type !== 'group' || retainsGroup(block.groupId),
-      ))
-    }
-    start = end
-  }
-
-  return {
-    ...asset,
-    content: {
-      ...asset.content,
-      blocks: projectedBlocks,
-    },
-  }
-}
 
 type GroupModel =
   | {
@@ -908,25 +866,8 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
           try {
             if (group.groupType === 'reading') {
               const canonicalModel = canonicalModels.get(block.groupId)
-              if (canonicalModel) {
-                models[block.groupId] = canonicalModel
-              } else {
-                if (!readingAnalysis) throw new Error('未找到已审阅阅读解析')
-                models[block.groupId] = {
-                  kind: 'reading',
-                  model: {
-                    ...buildPaperAssetSurfaceModel({
-                      asset: loadedAsset,
-                      analysis: readingAnalysis,
-                      groupId: block.groupId,
-                      figures: loadedFigures,
-                      assetBase: resolvedBase,
-                    }),
-                    canonicalReadingBlocks: [],
-                    canonicalReadingSemanticSignature: '',
-                  },
-                }
-              }
+              if (!canonicalModel) throw new Error('阅读消费计划不完整')
+              models[block.groupId] = canonicalModel
             } else if (group.groupType === 'sevenChoices') {
               const canonicalModel = canonicalModels.get(block.groupId)
               if (!canonicalModel) {
@@ -939,10 +880,9 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
             } else if (group.groupType === 'grammarFill') {
               models[block.groupId] = canonicalModels.get(block.groupId)!
             } else if (group.groupType === 'writing') {
-              models[block.groupId] = canonicalModels.get(block.groupId) ?? {
-                kind: 'writing',
-                model: buildWritingPaperView({ asset: loadedAsset, groupId: block.groupId }),
-              }
+              const canonicalModel = canonicalModels.get(block.groupId)
+              if (!canonicalModel) throw new Error('写作消费计划不完整')
+              models[block.groupId] = canonicalModel
             } else {
               models[block.groupId] = { kind: 'unsupported', groupType: group.groupType }
             }

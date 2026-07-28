@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "paper-listening-questions-v1",
+  "paperId": "paper-2026-i",
+  "note": "标准 §4：听力原料先存，不建题组、不跑解析、不上网站消费面。题干/选项逐字照抄 source/paper.pdf 听力节，不重排、不改写。",
+  "section1": {
+    "title": "第一节（共5小题；每小题1.5分，满分7.5分）",
+    "instruction": "听下面5段录音。每段录音后有一个小题，从题中所给的 A、B、C 三个选项中选出最佳选项。听完每段录音后，你都有10秒钟的时间来回答有关小题和阅读下一小题。每段录音播放两遍。",
+    "questions": [
+      { "no": 1, "stem": "Who is the man?", "options": { "A": "A business client.", "B": "A job applicant.", "C": "A new staff member." } },
+      { "no": 2, "stem": "Where does the conversation probably take place?", "options": { "A": "In an office.", "B": "In a restaurant.", "C": "In a grocery store." } },
+      { "no": 3, "stem": "What are the speakers talking about?", "options": { "A": "A picture.", "B": "A fisherman.", "C": "A country." } },
+      { "no": 4, "stem": "What does the woman suggest Max do?", "options": { "A": "Go to bed.", "B": "Drive carefully.", "C": "Update his blog." } },
+      { "no": 5, "stem": "Why does Sarah make the phone call?", "options": { "A": "To request sick leave.", "B": "To make a complaint.", "C": "To postpone a meeting." } }
+    ]
+  },
+  "section2": {
+    "title": "第二节（共15小题；每小题1.5分，满分22.5分）",
+    "instruction": "听下面5段录音。每段录音后有几个小题，从题中所给的 A、B、C 三个选项中选出最佳选项。听每段录音前，你将有时间阅读各个小题，每小题5秒钟；听完后，每小题都有5秒钟的作答时间。每段录音播放两遍。",
+    "questions": [
+      { "no": 6, "textRef": "Text 6", "stem": "What makes Copenhagen different from London in Lisa's eyes?", "options": { "A": "A less stressful life.", "B": "Better city planning.", "C": "More tourist sites." } },
+      { "no": 7, "textRef": "Text 6", "stem": "Why did Lisa originally come to Copenhagen?", "options": { "A": "To work on a project.", "B": "To find a permanent job.", "C": "To visit famous museums." } },
+      { "no": 8, "textRef": "Text 7", "stem": "What is the total budget for the dinner?", "options": { "A": "£200.", "B": "£300.", "C": "£600." } },
+      { "no": 9, "textRef": "Text 7", "stem": "What occasion is the dinner for?", "options": { "A": "The retirement of an employee.", "B": "The launch of a new product.", "C": "The opening of a branch office." } },
+      { "no": 10, "textRef": "Text 7", "stem": "What will the woman send to the man?", "options": { "A": "A detailed menu.", "B": "A booking confirmation.", "C": "A price list." } },
+      { "no": 11, "textRef": "Text 8", "stem": "What does Jenny do?", "options": { "A": "She's an AI engineer.", "B": "She's a pop singer.", "C": "She's a radio host." } },
+      { "no": 12, "textRef": "Text 8", "stem": "How does the woman feel about what Jenny has done?", "options": { "A": "It might cause legal problems.", "B": "It would benefit the community.", "C": "It could be a profitable business." } },
+      { "no": 13, "textRef": "Text 8", "stem": "What will the man do next?", "options": { "A": "Play a song.", "B": "Contact a listener.", "C": "Share new songs." } },
+      { "no": 14, "textRef": "Text 9", "stem": "What does Evans say about ancient Babylonia?", "options": { "A": "It is rich in energy resources.", "B": "It is the origin of many foods.", "C": "It's famous for ancient medicine." } },
+      { "no": 15, "textRef": "Text 9", "stem": "What were the ancient texts first thought to be?", "options": { "A": "Cookery.", "B": "Medicine.", "C": "Education." } },
+      { "no": 16, "textRef": "Text 9", "stem": "What did Jean Bottero do?", "options": { "A": "Translated the texts.", "B": "Proved Mary's idea right.", "C": "Found the texts at Yale." } },
+      { "no": 17, "textRef": "Text 10", "stem": "What must the students wear when doing the experiment?", "options": { "A": "Loose clothes.", "B": "Protective glasses.", "C": "Waterproof caps." } },
+      { "no": 18, "textRef": "Text 10", "stem": "What should the students do if they knock over a chemical container?", "options": { "A": "Report to the teacher.", "B": "Clear up the mess.", "C": "Check the instructions." } },
+      { "no": 19, "textRef": "Text 10", "stem": "Why should the students switch roles?", "options": { "A": "To practice more equally.", "B": "To speed up the experiment.", "C": "To avoid making mistakes." } },
+      { "no": 20, "textRef": "Text 10", "stem": "What should students do after finishing early?", "options": { "A": "Analyze the data.", "B": "Clean the workspace.", "C": "Start a new experiment." } }
+    ]
+  }
+}

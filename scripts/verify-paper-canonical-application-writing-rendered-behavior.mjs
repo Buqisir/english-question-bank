@@ -179,6 +179,29 @@ function applicationGroupId(consumption) {
   return selection.groupIds[0]
 }
 
+function consumptionForAssetBlocks(consumption, asset) {
+  const blockGroupIds = new Set(
+    asset.content.blocks.flatMap((block) =>
+      block.type === 'group' ? [block.groupId] : []),
+  )
+  const next = structuredClone(consumption)
+  next.selections = next.selections
+    .map((selection) => ({
+      ...selection,
+      groupIds: selection.groupIds.filter((groupId) =>
+        blockGroupIds.has(groupId)),
+      ...(selection.projectedOccurrences
+        ? {
+            projectedOccurrences: selection.projectedOccurrences.filter(
+              (occurrence) => blockGroupIds.has(occurrence.groupId),
+            ),
+          }
+        : {}),
+    }))
+    .filter((selection) => selection.groupIds.length > 0)
+  return next
+}
+
 function bookmarkName(kind, value) {
   return `${kind}_${createHash('sha256').update(`${kind}:${value}`)
     .digest('hex').slice(0, 24)}`
@@ -1041,6 +1064,10 @@ async function assertActualPaperSurfaceArtifacts() {
         top: ['POISONED LEGACY FIXED TOP'],
         bottom: ['POISONED LEGACY FIXED BOTTOM'],
       }
+      const browserConsumption = consumptionForAssetBlocks(
+        consumption,
+        asset,
+      )
       for (const lecture of [false, true]) {
         const page = await browser.newPage({
           viewport: { width: 1280, height: 900 },
@@ -1050,7 +1077,7 @@ async function assertActualPaperSurfaceArtifacts() {
           (route) => route.fulfill({
             status: 200,
             contentType: 'application/json',
-            body: JSON.stringify(consumption),
+            body: JSON.stringify(browserConsumption),
           }),
         )
         await page.route('**/paper-assets/**/paper-asset.json', (route) =>
@@ -1134,6 +1161,10 @@ async function assertActualPaperSurfaceArtifacts() {
           block.type === 'group'
           && block.groupId === pilotGroupId,
       )
+      const browserPilotConsumption = consumptionForAssetBlocks(
+        pilotConsumption,
+        pilotAsset,
+      )
       const pilotAnalysis = JSON.parse(readFileSync(
         new URL(
           `../app/public/paper-assets/${pilotPaperId}/latest/analyses/writing-analysis-v1.json`,
@@ -1158,7 +1189,7 @@ async function assertActualPaperSurfaceArtifacts() {
         (route) => route.fulfill({
           status: 200,
           contentType: 'application/json',
-          body: JSON.stringify(pilotConsumption),
+          body: JSON.stringify(browserPilotConsumption),
         }),
       )
       await page.route('**/paper-assets/**/paper-asset.json', (route) =>
@@ -1241,6 +1272,31 @@ async function assertActualPaperSurfaceArtifacts() {
         }
         return block
       })
+      const chromeConsumption = structuredClone(consumption)
+      const continuationGroupId = asset.content.blocks.find(
+        (block) =>
+          block.type === 'group'
+          && asset.content.groups[block.groupId]?.groupType === 'writing'
+          && asset.content.writingTasks[
+            asset.content.groups[block.groupId].writingTaskId
+          ]?.taskType === 'continuation',
+      )?.groupId
+      assert.ok(continuationGroupId)
+      const continuationSelection = chromeConsumption.selections.find(
+        (selection) =>
+          selection.familyContractId === 'continuation-writing',
+      )
+      assert.ok(continuationSelection)
+      continuationSelection.groupIds = [continuationGroupId]
+      continuationSelection.projectedOccurrences =
+        continuationSelection.projectedOccurrences.map((occurrence) => ({
+          ...occurrence,
+          groupId: continuationGroupId,
+        }))
+      const browserConsumption = consumptionForAssetBlocks(
+        chromeConsumption,
+        asset,
+      )
       const page = await browser.newPage({
         viewport: { width: 1280, height: 900 },
       })
@@ -1249,7 +1305,7 @@ async function assertActualPaperSurfaceArtifacts() {
         (route) => route.fulfill({
           status: 200,
           contentType: 'application/json',
-          body: JSON.stringify(consumption),
+          body: JSON.stringify(browserConsumption),
         }),
       )
       await page.route('**/paper-assets/**/paper-asset.json', (route) =>
@@ -1298,15 +1354,21 @@ async function assertActualPaperSurfaceArtifacts() {
         'real mixed Screen preserves the Profile-owned empty instruction set',
       )
       const continuationText = await writingPages.nth(1).innerText()
+      const canonicalContinuation = projectCanonicalConsumerGroup({
+        consumption: browserConsumption,
+        familyContractId: 'continuation-writing',
+        groupId: continuationGroupId,
+      })
       for (const expected of [
-        '第二节（满分25分）',
-        '阅读下面材料，根据其内容和所给段落开头语续写两段，使之构成一篇完整的短文。',
-        '（2）请按如下格式在答题卡的相应位置作答。',
+        canonicalContinuation.paperChrome.section.text,
+        ...canonicalContinuation.paperChrome.instructions.map(
+          (instruction) => instruction.text,
+        ),
       ]) {
         assert.equal(
           continuationText.includes(expected),
           true,
-          `real mixed Screen preserves Continuation chrome: ${expected}`,
+          `real mixed Screen preserves Continuation chrome: ${expected}; actual: ${continuationText}`,
         )
       }
       await page.close()

@@ -79,23 +79,19 @@ function reviewedContentObservations(content, page) {
       addInlines(block.kind === 'figure' ? block.caption : block.inlines)
     }
   }
-  return values.map(({ id, value }, index) => ({
+  const pageRegion = { x: 0.04, y: 0.04, width: 0.92, height: 0.92 }
+  const tableRegion = { x: 0.08, y: 0.14, width: 0.84, height: 0.12 }
+  return values.map(({ id, value }) => ({
     target: { kind: 'content_node', id },
     page,
-    region: {
-      x: index % 2 === 0 ? 0.05 : 0.52,
-      y: 0.03 + (index % 18) * 0.052,
-      width: 0.43,
-      height: 0.04,
-    },
+    region: id.includes('reading-a:events') ? tableRegion : pageRegion,
     review: { method: 'manual_transcription', status: 'accepted' },
     value,
   }))
 }
 
-function readingSourceCapture(paper) {
+export function makeReviewedReadingSourceCapture(paper) {
   const readingA = paper.content.groups['group-2026-i-reading-a']
-  const readingC = paper.content.groups['group-2026-i-reading-c']
   const readingAContent = {
     blocks: [
       paragraph('paragraph:reading-a:title', 'SoFi Stadium Events This Month'),
@@ -108,43 +104,75 @@ function readingSourceCapture(paper) {
       paragraph(readingA.passage.paragraphs[6].paragraphId, readingA.passage.paragraphs[6].text),
     ],
   }
-  const readingCContent = {
-    blocks: readingC.passage.paragraphs.map((item) => paragraph(item.paragraphId, item.text)),
+  const pageBySlot = {
+    'reading.a': 4,
+    'reading.b': 5,
+    'reading.c': 6,
+    'reading.d': 7,
   }
+  const slotByGroupId = {
+    'group-2026-i-reading-a': 'reading.a',
+    'group-2026-i-reading-b': 'reading.b',
+    'group-2026-i-reading-c': 'reading.c',
+    'group-2026-i-reading-d': 'reading.d',
+  }
+  const groups = Object.fromEntries(
+    Object.entries(slotByGroupId).map(([groupId, slotId]) => {
+      const group = paper.content.groups[groupId]
+      const content = slotId === 'reading.a'
+        ? readingAContent
+        : {
+            blocks: group.passage.paragraphs.map((item) =>
+              paragraph(item.paragraphId, item.text)),
+          }
+      return [
+        groupId,
+        {
+          groupId,
+          slotId,
+          sourcePage: pageBySlot[slotId],
+          visualProofDigest:
+            slotId === 'reading.a' ? hashes.tableProof : null,
+          content,
+          sourceObservations: reviewedContentObservations(
+            content,
+            pageBySlot[slotId],
+          ),
+          passageBlockRoles:
+            slotId === 'reading.a'
+              ? [
+                  {
+                    nodeId: 'para-2026-i-reading-a-2',
+                    role: 'subtitle',
+                  },
+                  {
+                    nodeId: 'para-2026-i-reading-a-4',
+                    role: 'subtitle',
+                  },
+                  {
+                    nodeId: 'para-2026-i-reading-a-6',
+                    role: 'subtitle',
+                  },
+                  {
+                    nodeId: 'paragraph:reading-a:title',
+                    role: 'title',
+                  },
+                ]
+              : [],
+        },
+      ]
+    }),
+  )
   return {
     schemaVersion: 'reading-source-capture-v1',
     paperId: 'paper-2026-i',
     sourceDocumentDigest: hashes.sourcePdf,
-    groups: {
-      [readingA.groupId]: {
-        groupId: readingA.groupId,
-        slotId: 'reading.a',
-        sourcePage: 4,
-        visualProofDigest: hashes.tableProof,
-        content: readingAContent,
-        sourceObservations: reviewedContentObservations(readingAContent, 4),
-        passageBlockRoles: [
-          { nodeId: 'para-2026-i-reading-a-2', role: 'subtitle' },
-          { nodeId: 'para-2026-i-reading-a-4', role: 'subtitle' },
-          { nodeId: 'para-2026-i-reading-a-6', role: 'subtitle' },
-          { nodeId: 'paragraph:reading-a:title', role: 'title' },
-        ],
-      },
-      [readingC.groupId]: {
-        groupId: readingC.groupId,
-        slotId: 'reading.c',
-        sourcePage: 6,
-        visualProofDigest: null,
-        content: readingCContent,
-        sourceObservations: reviewedContentObservations(readingCContent, 6),
-        passageBlockRoles: [],
-      },
-    },
+    groups,
   }
 }
 
 function removeReadingProofSlots(source) {
-  const slots = new Set(['reading.a', 'reading.c'])
+  const slots = new Set(['reading.a', 'reading.b', 'reading.c', 'reading.d'])
   const removed = source.groups.filter((group) => slots.has(group.slotId))
   const questionIds = new Set(removed.flatMap((group) => group.questionIds))
   const observationIds = new Set(removed.map((group) => `observation:${group.slotId}`))
@@ -162,7 +190,9 @@ export function makeReadingCanonicalReferenceFixture() {
   const sourcePdf = readHashBoundBytes(new URL('../../scripts/import-pipeline/papers/paper-2026-i/source/paper.pdf', import.meta.url), hashes.sourcePdf)
   const tableProof = readHashBoundBytes(new URL('figures/reading-a-table-1.png', baseUrl), hashes.tableProof)
   const paper = JSON.parse(new TextDecoder().decode(paperAsset))
-  const structuredReading = new TextEncoder().encode(JSON.stringify(readingSourceCapture(paper)))
+  const structuredReading = new TextEncoder().encode(
+    JSON.stringify(makeReviewedReadingSourceCapture(paper)),
+  )
   const fixture = makeReadyCanonicalFixture()
   const source = fixture.source
   source.paperId = 'paper-2026-i'

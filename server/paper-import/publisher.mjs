@@ -583,26 +583,17 @@ function importedContentSignature(group, paperAsset) {
   return (group.passage?.paragraphs || []).map((paragraph) => {
     const association = associations.find((candidate) =>
       paragraph.text.includes(candidate.placeholderMarker))
-    const table = paragraph.text.match(
-      /^\[表:\s*[^\]]+\]\s*(.+)$/,
-    )
     return association
       ? {
           kind: 'figure',
           figureId: association.figureId,
           caption: association.caption || '',
         }
-      : table
-        ? {
-            kind: 'table',
-            rows: table[1].split(/\s*;\s*/).map((row) =>
-              row.split(/\s+–\s+/)),
-          }
-        : {
-            kind: 'paragraph',
-            nodeId: paragraph.paragraphId,
-            text: paragraph.text,
-          }
+      : {
+          kind: 'paragraph',
+          nodeId: paragraph.paragraphId,
+          text: paragraph.text,
+        }
   })
 }
 
@@ -614,7 +605,7 @@ function canonicalContentSignature(group, importedGroup, paperAsset) {
         ?.questionNo,
     ]),
   )
-  return (group.content?.blocks || []).map((block) => {
+  return (group.content?.blocks || []).map((block, blockIndex) => {
     if (block.kind === 'figure') {
       const media = group.media?.find(
         (candidate) => candidate.mediaId === block.mediaId,
@@ -637,9 +628,15 @@ function canonicalContentSignature(group, importedGroup, paperAsset) {
       if (inline.kind === 'text') return inline.text || ''
       if (inline.kind !== 'blank_ref') return ''
       const number = questionNumberByBlankId.get(inline.blankId)
-      return ['cloze', 'grammar-fill'].includes(
-        group.contractRef.familyContractId,
-      )
+      const family = group.contractRef.familyContractId
+      const usesWrappedMarker =
+        ['cloze', 'grammar-fill'].includes(family)
+        || (
+          family === 'seven-choices'
+          && importedGroup.passage?.paragraphs?.[blockIndex]?.text
+            ?.includes(`__${number}__`)
+        )
+      return usesWrappedMarker
         ? `__${number}__`
         : String(number)
     }).join('')
@@ -665,11 +662,35 @@ function semanticMismatchForGroup({
   canonicalGroup,
   importedGroup,
   paperAsset,
+  sourceCapture,
 }) {
+  const sourceSpans = new Map(
+    sourceCapture.sourceSpans.map((span) => [span.sourceSpanId, span]),
+  )
+  const documentInputKeys = new Map(
+    sourceCapture.documents.map((document) => [
+      document.documentId,
+      document.inputKey,
+    ]),
+  )
+  const groupInputKeys = new Set(
+    canonicalGroup.sourceMap.entries
+      .flatMap((entry) => entry.sourceSpanRefs)
+      .map((sourceSpanId) => sourceSpans.get(sourceSpanId)?.documentId)
+      .map((documentId) => documentInputKeys.get(documentId))
+      .filter(Boolean),
+  )
+  const structuredSourceKey = {
+    reading: 'reading_structure',
+    'application-writing': 'application_writing_capture',
+    'continuation-writing': 'continuation_writing_capture',
+  }[canonicalGroup.contractRef.familyContractId]
+  const usesReviewedStructuredSource =
+    structuredSourceKey && groupInputKeys.has(structuredSourceKey)
+  const family = canonicalGroup.contractRef.familyContractId
   if (
-    !['application-writing', 'continuation-writing'].includes(
-      canonicalGroup.contractRef.familyContractId,
-    )
+    !usesReviewedStructuredSource
+    && !['application-writing', 'continuation-writing'].includes(family)
     &&
     JSON.stringify(canonicalContentSignature(
       canonicalGroup,
@@ -680,7 +701,6 @@ function semanticMismatchForGroup({
   ) {
     return 'content order or text'
   }
-  const family = canonicalGroup.contractRef.familyContractId
   if (family === 'reading') {
     const canonicalQuestions = new Map(
       canonicalGroup.variant.questions.map((question) => [
@@ -744,6 +764,7 @@ function semanticMismatchForGroup({
     ) {
       return 'writing task identity or word-count ruling'
     }
+    if (usesReviewedStructuredSource) return null
     const blocks = canonicalGroup.content.blocks
     if (
       family === 'application-writing'
@@ -842,6 +863,7 @@ function validateCanonicalImportPackageBinding({
       canonicalGroup,
       importedGroup,
       paperAsset,
+      sourceCapture: admission.compilation.artifacts.sourceCapture,
     })
     if (semanticMismatch) {
       return {

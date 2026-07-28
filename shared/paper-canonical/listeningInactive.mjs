@@ -523,6 +523,10 @@ function validateAnswers(answers, questionsBySlot, source, diagnostics) {
   for (const question of questions) {
     const answer = answers.answers[String(question.no)]
     if (typeof answer !== 'string') continue
+    const optionLabels = isRecordValue(question.options)
+      ? Object.keys(question.options)
+      : []
+    if (!sameMembers(optionLabels, ['A', 'B', 'C'])) continue
     if (!Object.hasOwn(question.options || {}, answer)) {
       diagnostics.push(diagnostic(
         'LISTENING_OFFICIAL_ANSWER_CONFLICT',

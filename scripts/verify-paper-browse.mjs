@@ -495,7 +495,6 @@ for (const builder of [
   'buildSevenChoicesSurfaceModel',
   'buildClozePaperView',
   'buildGrammarFillPaperView',
-  'buildWritingPaperView',
 ]) {
   assert(
     `PaperBrowsePage imports ${builder} from features/paper-intelligence`,

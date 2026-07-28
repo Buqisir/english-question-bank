@@ -25,6 +25,7 @@ const packageDir = process.argv[2]
 const outputDir = option('--output-dir')
 const answersPdfPath = option('--answers-pdf')
 const instructionEvidencePath = option('--instruction-evidence')
+const reviewedEvidenceDir = option('--reviewed-evidence-dir')
 const write = process.argv.includes('--write')
 
 if (
@@ -33,23 +34,68 @@ if (
   || !outputDir
   || !answersPdfPath
   || !instructionEvidencePath
+  || !reviewedEvidenceDir
 ) {
   console.error(
     'Usage: node scripts/import-pipeline/build-canonical-request.mjs '
       + '<package-dir> --answers-pdf <answers.pdf> '
-      + '--instruction-evidence <reviewed.json> --output-dir <dir> [--write]',
+      + '--instruction-evidence <reviewed.json> '
+      + '--reviewed-evidence-dir <dir> '
+      + '--output-dir <dir> [--write]',
   )
   process.exit(1)
 }
 
 const absolutePackageDir = path.resolve(packageDir)
 const absoluteOutputDir = path.resolve(outputDir)
+const absoluteReviewedEvidenceDir = path.resolve(reviewedEvidenceDir)
 const requiredPaths = {
   paperAsset: path.join(absolutePackageDir, 'paper-asset.json'),
   answerKey: path.join(absolutePackageDir, 'answer-key.json'),
   sourcePdf: path.join(absolutePackageDir, 'paper.pdf'),
   answersPdf: path.resolve(answersPdfPath),
   instructionEvidence: path.resolve(instructionEvidencePath),
+  sourceProvenance: path.join(absolutePackageDir, 'import-meta.json'),
+  readingSourceCapture: path.join(
+    absoluteReviewedEvidenceDir,
+    'reading-source-capture-v1.json',
+  ),
+  tableVisualProof: path.join(
+    absoluteReviewedEvidenceDir,
+    'reading-a-table-1.png',
+  ),
+  applicationWritingCapture: path.join(
+    absoluteReviewedEvidenceDir,
+    'application-writing-source-capture.json',
+  ),
+  applicationWritingTranscription: path.join(
+    absoluteReviewedEvidenceDir,
+    'application-writing-source-transcription.json',
+  ),
+  continuationWritingCapture: path.join(
+    absoluteReviewedEvidenceDir,
+    'continuation-writing-source-capture.json',
+  ),
+  continuationWritingTranscription: path.join(
+    absoluteReviewedEvidenceDir,
+    'continuation-writing-source-transcription.json',
+  ),
+  listeningQuestions: path.join(
+    absoluteReviewedEvidenceDir,
+    'listening-questions.json',
+  ),
+  listeningAnswers: path.join(
+    absoluteReviewedEvidenceDir,
+    'listening-answers.json',
+  ),
+  listeningTranscript: path.join(
+    absoluteReviewedEvidenceDir,
+    'listening-transcript.json',
+  ),
+  listeningInventory: path.join(
+    absoluteReviewedEvidenceDir,
+    'listening-source-inventory.json',
+  ),
 }
 for (const [label, filePath] of Object.entries(requiredPaths)) {
   if (!existsSync(filePath)) {
@@ -70,6 +116,25 @@ const request = buildNck1CanonicalImportRequest({
   sourcePdfBytes: readFileSync(requiredPaths.sourcePdf),
   answersPdfBytes: readFileSync(requiredPaths.answersPdf),
   instructionEvidenceBytes: readFileSync(requiredPaths.instructionEvidence),
+  sourceProvenanceBytes: readFileSync(requiredPaths.sourceProvenance),
+  readingSourceCaptureBytes: readFileSync(requiredPaths.readingSourceCapture),
+  tableVisualProofBytes: readFileSync(requiredPaths.tableVisualProof),
+  applicationWritingCaptureBytes: readFileSync(
+    requiredPaths.applicationWritingCapture,
+  ),
+  applicationWritingTranscriptionBytes: readFileSync(
+    requiredPaths.applicationWritingTranscription,
+  ),
+  continuationWritingCaptureBytes: readFileSync(
+    requiredPaths.continuationWritingCapture,
+  ),
+  continuationWritingTranscriptionBytes: readFileSync(
+    requiredPaths.continuationWritingTranscription,
+  ),
+  listeningQuestionsBytes: readFileSync(requiredPaths.listeningQuestions),
+  listeningAnswersBytes: readFileSync(requiredPaths.listeningAnswers),
+  listeningTranscriptBytes: readFileSync(requiredPaths.listeningTranscript),
+  listeningInventoryBytes: readFileSync(requiredPaths.listeningInventory),
 })
 const compilation = compileCanonicalPaper(request)
 if (compilation.disposition !== 'ready') {
@@ -84,15 +149,32 @@ if (compilation.disposition !== 'ready') {
 }
 
 const fileNames = new Map([
-  ['questions', '01-questions.json'],
-  ['profile_instruction_source', '02-profile_instruction_source.pdf'],
+  ['canonical_source_envelope', '01-canonical-source-envelope.json'],
+  ['original_question_source', '02-original-question-source.pdf'],
   [
     'continuation_writing_instruction_evidence',
     '03-continuation_writing_instruction_evidence.json',
   ],
   ['paper_asset', '04-paper_asset.json'],
   ['official_answers', '05-official_answers.json'],
-  ['source_answers_pdf', '06-source_answers_pdf.pdf'],
+  ['listening_answer_source', '06-source_answers_pdf.pdf'],
+  ['reading_structure', '07-reading-source-capture.json'],
+  ['table_visual_proof', '08-reading-a-table-1.png'],
+  ['source_provenance', '09-source-provenance.json'],
+  ['application_writing_capture', '10-application-writing-capture.json'],
+  [
+    'application_writing_transcription',
+    '11-application-writing-transcription.json',
+  ],
+  ['continuation_writing_capture', '12-continuation-writing-capture.json'],
+  [
+    'continuation_writing_transcription',
+    '13-continuation-writing-transcription.json',
+  ],
+  ['listening_questions', '14-listening-questions.json'],
+  ['listening_answers', '15-listening-answers.json'],
+  ['listening_transcript', '16-listening-transcript.json'],
+  ['listening_inventory', '17-listening-source-inventory.json'],
 ])
 const envelope = {
   authority: request.authority,

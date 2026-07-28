@@ -1,0 +1,189 @@
+{
+  "schemaVersion": "continuation-writing-source-capture-v1",
+  "paperId": "paper-2026-i",
+  "profileId": "nck1",
+  "sourceDocumentDigest": "sha256:31a87069e6d530afba9123eec0487adf45e52e0b98530af80b62476f169e4d0f",
+  "review": {
+    "method": "manual_source_review",
+    "status": "accepted"
+  },
+  "group": {
+    "groupId": "group-2026-i-writing-continuation",
+    "slotId": "writing.continuation",
+    "sourceLocation": {
+      "kind": "pdf_page_region",
+      "page": 11,
+      "region": {
+        "x": 0,
+        "y": 0,
+        "width": 1,
+        "height": 1
+      },
+      "sourceInspection": {
+        "method": "normalized_page_text",
+        "starterTextDigests": [
+          "sha256:fa32344df1c1977d1ed61fc27bd27bdd7ff62f244175586f19da45133d891aa3",
+          "sha256:06b63bd650297b986c60adc059426e814d2472a96b3b607eb985cf737a17f31b"
+        ],
+        "occurrenceCounts": [
+          1,
+          1
+        ]
+      },
+      "transcriptionDigest": "sha256:5e76ee0f0b157cac6d619199a08fe5e7f819a16964eb56231701e8de7053c8a3"
+    },
+    "content": {
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "nodeId": "para-2026-i-writing-cont-title",
+          "inlines": [
+            {
+              "kind": "text",
+              "nodeId": "text:para-2026-i-writing-cont-title",
+              "text": "Emily Sanders, a 25-year-old from Detroit, Michigan, set out on December 23rd with high hopes of reaching Toronto to meet her boyfriend for Christmas. Although she had heard warnings about an approaching snowstorm, she didn’t give it much thought. She assumed that much like in Michigan, police would simply detour (使绕道) traffic around any closed sections of the highway. But that didn’t happen. As the snow came down more and more heavily, Emily was directed off the highway. She drove on for a while and found herself on an unfamiliar road toward a Canadian town."
+            }
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "nodeId": "para-2026-i-writing-cont-p1",
+          "inlines": [
+            {
+              "kind": "text",
+              "nodeId": "text:para-2026-i-writing-cont-p1",
+              "text": "The blinding whiteout made driving nearly impossible. At one point, Emily’s car got stuck. After a struggle, she managed to free the vehicle and continued inching along the snow-covered road. As night fell, panic set in. While Emily was driving on a narrow stretch of road, her car slid into a ditch (沟) . She tried to call for help but found no signal on her phone. Seeing no hope of immediate rescue, Emily decided to spend the night in her car. She wrapped herself in a blanket, waiting for morning. To stay warm, she ran her engine for a few minutes every now and then. Eventually, she fell asleep."
+            }
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "nodeId": "para-2026-i-writing-cont-p2",
+          "inlines": [
+            {
+              "kind": "text",
+              "nodeId": "text:para-2026-i-writing-cont-p2",
+              "text": "Emily awoke to a gentle knock on her car window. Standing outside were Daniel and his wife Rachel, who noticed the stranded (被困的) vehicle on their way home and stopped to see if they could help. When Emily rolled down the window, Rachel asked if she was okay and told her it was not safe to stay overnight in the car. With genuine warmth in her voice, Rachel said they could take Emily to a nearby cafe they knew. Grateful and relieved, Emily accepted the offer."
+            }
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "nodeId": "para-2026-i-writing-cont-p3",
+          "inlines": [
+            {
+              "kind": "text",
+              "nodeId": "text:para-2026-i-writing-cont-p3",
+              "text": "In the cafe, the couple bought Emily a hot chocolate and listened patiently as she explained her desperate situation: she was about a hundred miles from her destination, her car was completely stuck, and her entire holiday plan could be ruined."
+            }
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "nodeId": "paragraph:group-2026-i-writing-continuation:starter:1",
+          "inlines": [
+            {
+              "kind": "text",
+              "nodeId": "text:group-2026-i-writing-continuation:starter:1",
+              "text": "Daniel and Rachel suggested that Emily continue her journey by train."
+            }
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "nodeId": "paragraph:group-2026-i-writing-continuation:starter:2",
+          "inlines": [
+            {
+              "kind": "text",
+              "nodeId": "text:group-2026-i-writing-continuation:starter:2",
+              "text": "Three days later, Emily returned to get her car."
+            }
+          ]
+        }
+      ]
+    },
+    "variant": {
+      "family": "continuation-writing",
+      "writingTaskId": "wt-2026-i-continuation",
+      "materialBlockRefs": [
+        "para-2026-i-writing-cont-title",
+        "para-2026-i-writing-cont-p1",
+        "para-2026-i-writing-cont-p2",
+        "para-2026-i-writing-cont-p3"
+      ],
+      "wordCountRuling": {
+        "kind": "approximate_target",
+        "target": 150,
+        "countScope": "student_authored_only",
+        "sourceRef": {
+          "blockId": "para-2026-i-writing-cont-title",
+          "inlineNodeIds": [
+            "text:para-2026-i-writing-cont-title"
+          ]
+        },
+        "authorityObservationRef": "observation:continuation:group-2026-i-writing-continuation:word-count"
+      },
+      "starterProvision": {
+        "kind": "ordered_source_starters",
+        "starters": [
+          {
+            "starterId": "starter:group-2026-i-writing-continuation:1",
+            "contentRef": "paragraph:group-2026-i-writing-continuation:starter:1",
+            "authorityObservationRef": "observation:continuation:group-2026-i-writing-continuation:starter:1"
+          },
+          {
+            "starterId": "starter:group-2026-i-writing-continuation:2",
+            "contentRef": "paragraph:group-2026-i-writing-continuation:starter:2",
+            "authorityObservationRef": "observation:continuation:group-2026-i-writing-continuation:starter:2"
+          }
+        ]
+      },
+      "choiceOwnership": {
+        "ownership": "none"
+      },
+      "response": {
+        "kind": "group_level_written_response",
+        "answerRegionRef": "writing.continuation-box",
+        "authorityObservationRef": "observation:continuation:group-2026-i-writing-continuation:response"
+      }
+    },
+    "observations": [
+      {
+        "observationId": "observation:continuation:group-2026-i-writing-continuation:word-count",
+        "kind": "continuation_word_count_ruling",
+        "value": {
+          "groupId": "group-2026-i-writing-continuation",
+          "target": 150,
+          "countScope": "student_authored_only"
+        }
+      },
+      {
+        "observationId": "observation:continuation:group-2026-i-writing-continuation:response",
+        "kind": "continuation_response_binding",
+        "value": {
+          "groupId": "group-2026-i-writing-continuation",
+          "writingTaskId": "wt-2026-i-continuation",
+          "answerRegionRef": "writing.continuation-box"
+        }
+      },
+      {
+        "observationId": "observation:continuation:group-2026-i-writing-continuation:starter:1",
+        "kind": "continuation_source_starter",
+        "value": {
+          "groupId": "group-2026-i-writing-continuation",
+          "starterId": "starter:group-2026-i-writing-continuation:1",
+          "contentRef": "paragraph:group-2026-i-writing-continuation:starter:1"
+        }
+      },
+      {
+        "observationId": "observation:continuation:group-2026-i-writing-continuation:starter:2",
+        "kind": "continuation_source_starter",
+        "value": {
+          "groupId": "group-2026-i-writing-continuation",
+          "starterId": "starter:group-2026-i-writing-continuation:2",
+          "contentRef": "paragraph:group-2026-i-writing-continuation:starter:2"
+        }
+      }
+    ]
+  }
+}

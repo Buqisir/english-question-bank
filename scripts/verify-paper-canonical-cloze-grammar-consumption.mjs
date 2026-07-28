@@ -144,6 +144,36 @@ async function assertActualPaperBrowseBoundary({
   invalidConsumption,
   outputDir = null,
 }) {
+  const browserAsset = structuredClone(asset)
+  const readyGroupIds = new Set(
+    readyConsumption.selections.flatMap((selection) => selection.groupIds),
+  )
+  browserAsset.content.blocks = browserAsset.content.blocks.filter(
+    (block) =>
+      block.type === 'group' && readyGroupIds.has(block.groupId),
+  )
+  const browserGroupIds = new Set(
+    browserAsset.content.blocks.map((block) => block.groupId),
+  )
+  const consumptionForBrowserAsset = (input) => {
+    const next = structuredClone(input)
+    if (!Array.isArray(next.selections)) return next
+    next.selections = next.selections
+      .map((selection) => ({
+        ...selection,
+        groupIds: selection.groupIds.filter((groupId) =>
+          browserGroupIds.has(groupId)),
+        ...(selection.projectedOccurrences
+          ? {
+              projectedOccurrences: selection.projectedOccurrences.filter(
+                (occurrence) => browserGroupIds.has(occurrence.groupId),
+              ),
+            }
+          : {}),
+      }))
+      .filter((selection) => selection.groupIds.length > 0)
+    return next
+  }
   const vite = await import('../app/node_modules/vite/dist/node/index.js')
   const viteServer = await vite.createServer({
     root: path.resolve('app'),
@@ -171,13 +201,13 @@ async function assertActualPaperBrowseBoundary({
       route.fulfill({
         status: 200,
         contentType: 'application/json',
-        body: JSON.stringify(consumption),
+        body: JSON.stringify(consumptionForBrowserAsset(consumption)),
       }))
     await page.route('**/paper-assets/**/paper-asset.json', (route) =>
       route.fulfill({
         status: 200,
         contentType: 'application/json',
-        body: JSON.stringify(asset),
+        body: JSON.stringify(browserAsset),
       }))
     await page.route('**/paper-assets/**/analyses/**', (route) =>
       route.fulfill({ status: 404, body: '' }))
@@ -206,7 +236,16 @@ async function assertActualPaperBrowseBoundary({
     qaUrl.searchParams.set('focusGroupId', 'group-2026-i-cloze')
     qaUrl.searchParams.set('questionId', 'q-2026-i-041')
     await page.goto(qaUrl.href)
-    await page.locator('[data-paper-question-id]').first().waitFor()
+    try {
+      await page.locator('[data-paper-question-id]').first().waitFor()
+    } catch (error) {
+      throw new Error(
+        `PaperBrowse did not mount canonical Cloze/Grammar: ${
+          await page.locator('body').innerText()
+        }`,
+        { cause: error },
+      )
+    }
     await successfulAnalyses
     await page.getByText(
       clozeAnalysis.blanks['q-2026-i-041'].correctFit.reason,
