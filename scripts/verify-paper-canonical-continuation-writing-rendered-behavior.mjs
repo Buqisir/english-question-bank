@@ -519,6 +519,158 @@ function assertCanonicalWritingChromeBookmarks(documentXml, canonical, label) {
   }
 }
 
+function assertCanonicalWritingChromeHtmlStructure(html, canonical, label) {
+  assert.equal(
+    (html.match(/<div class="paper-header">/g) || []).length,
+    0,
+    `${label} must not add a visible document title above complete canonical writing chrome`,
+  )
+  const roles = [
+    [canonical.paperChrome.part, 'part_heading'],
+    [canonical.paperChrome.section, 'section_heading'],
+    ...canonical.paperChrome.instructions.map(
+      (instruction) => [instruction, 'instruction'],
+    ),
+  ]
+  for (const [instruction, role] of roles) {
+    assert.equal(
+      html.includes(
+        `data-canonical-instruction-id="${instruction.instructionId}" data-canonical-writing-chrome-role="${role}"`,
+      ),
+      true,
+      `${label} exposes ${instruction.instructionId} as ${role}`,
+    )
+  }
+}
+
+function bookmarkedDocxParagraph(documentXml, instructionId) {
+  const name = bookmarkName('canonical_instruction', instructionId)
+  const start = documentXml.indexOf(`w:name="${name}"`)
+  assert.notEqual(start, -1, `missing DOCX bookmark ${name}`)
+  const paragraphStart = documentXml.indexOf('<w:p>', start)
+  const paragraphEnd = documentXml.indexOf('</w:p>', paragraphStart)
+  assert.notEqual(paragraphStart, -1, `missing DOCX paragraph for ${name}`)
+  assert.notEqual(paragraphEnd, -1, `unterminated DOCX paragraph for ${name}`)
+  return documentXml.slice(paragraphStart, paragraphEnd + '</w:p>'.length)
+}
+
+function assertCanonicalWritingChromeDocxStructure(
+  documentXml,
+  canonical,
+  label,
+) {
+  const visibleLines = extractDocxVisibleParagraphText(documentXml)
+    .split(/\r?\n/)
+  assert.equal(
+    visibleLines.includes(`Continuation ${label.split('/')[0]}`),
+    false,
+    `${label} must not add a visible document title above complete canonical writing chrome`,
+  )
+  const partParagraph = bookmarkedDocxParagraph(
+    documentXml,
+    canonical.paperChrome.part.instructionId,
+  )
+  assert.equal(partParagraph.includes('w:ascii="SimHei"'), true)
+  assert.equal(partParagraph.includes('<w:b/>'), true)
+  assert.equal(partParagraph.includes('<w:sz w:val="21"/>'), true)
+  assert.equal(partParagraph.includes('<w:spacing w:after="240"/>'), true)
+  assert.equal(partParagraph.includes('<w:ind'), false)
+
+  const sectionParagraph = bookmarkedDocxParagraph(
+    documentXml,
+    canonical.paperChrome.section.instructionId,
+  )
+  assert.equal(sectionParagraph.includes('w:ascii="Times New Roman"'), true)
+  assert.equal(sectionParagraph.includes('<w:b/>'), false)
+  assert.equal(sectionParagraph.includes('<w:sz w:val="21"/>'), true)
+  assert.equal(sectionParagraph.includes('<w:spacing w:after="180"/>'), true)
+  assert.equal(sectionParagraph.includes('<w:ind w:left="420"/>'), true)
+}
+
+function extractPdfLineGeometry(pdfPath, text) {
+  const xml = execFileSync(
+    'pdftotext',
+    ['-bbox-layout', pdfPath, '-'],
+    { encoding: 'utf8' },
+  )
+  const matches = [...xml.matchAll(
+    /<line xMin="([^"]+)" yMin="([^"]+)" xMax="([^"]+)" yMax="([^"]+)">([\s\S]*?)<\/line>/g,
+  )]
+  const lines = matches.map((match) => ({
+    xMin: Number(match[1]),
+    yMin: Number(match[2]),
+    xMax: Number(match[3]),
+    yMax: Number(match[4]),
+    text: [...match[5].matchAll(/<word [^>]*>([\s\S]*?)<\/word>/g)]
+      .map((wordMatch) => decodeXmlText(wordMatch[1]))
+      .join(' '),
+  }))
+  const found = lines.filter(
+    (line) => compactText(line.text) === compactText(text),
+  )
+  assert.equal(found.length, 1, `${pdfPath} contains one visible line "${text}"`)
+  return found[0]
+}
+
+function assertCanonicalWritingChromePdfGeometry(pdfPath, canonical, label) {
+  const part = extractPdfLineGeometry(pdfPath, canonical.paperChrome.part.text)
+  const section = extractPdfLineGeometry(
+    pdfPath,
+    canonical.paperChrome.section.text,
+  )
+  assert.ok(
+    Math.abs((section.xMin - part.xMin) - 21) <= 1,
+    `${label} section heading keeps the canonical 2em/21pt indent`,
+  )
+  assert.ok(
+    section.yMin - part.yMin >= 21
+      && section.yMin - part.yMin <= 28,
+    `${label} keeps the canonical part-to-section vertical rhythm`,
+  )
+  assert.ok(
+    Math.abs((part.yMax - part.yMin) - (section.yMax - section.yMin)) <= 4.5,
+    `${label} keeps part and section headings at the same 10.5pt tier`,
+  )
+}
+
+async function canonicalWritingChromeBrowserLayout(page) {
+  return page.locator('[data-canonical-writing-chrome-role]').evaluateAll(
+    (elements) => {
+      const metrics = elements.map((element) => {
+        const style = getComputedStyle(element)
+        const box = element.getBoundingClientRect()
+        return {
+          role: element.getAttribute('data-canonical-writing-chrome-role'),
+          instructionId: element.getAttribute('data-canonical-instruction-id'),
+          fontSizePt: Math.round(Number.parseFloat(style.fontSize) * 7.5) / 10,
+          fontWeight: Number(style.fontWeight),
+          fontFamily: style.fontFamily,
+          x: box.x,
+          y: box.y,
+          height: box.height,
+        }
+      })
+      const part = metrics.find((metric) => metric.role === 'part_heading')
+      const section = metrics.find(
+        (metric) => metric.role === 'section_heading',
+      )
+      return {
+        roles: metrics.map((metric) => ({
+          role: metric.role,
+          instructionId: metric.instructionId,
+          fontSizePt: metric.fontSizePt,
+          fontWeight: metric.fontWeight,
+          fontFamily: metric.fontFamily,
+        })),
+        sectionIndentPt:
+          Math.round((section.x - part.x) * 7.5) / 10,
+        partToSectionTopPt:
+          Math.round((section.y - part.y) * 7.5) / 10,
+      }
+    },
+  )
+}
+
 function assertVisibleCanonicalText(renderedText, canonical) {
   const compact = compactText(renderedText)
   assert.equal(compact.includes('POISONEDLEGACY'), false)
@@ -795,6 +947,11 @@ for (const { label, consumption, canonical } of cases) {
       html,
       `Print HTML ${label}/${versionType}`,
     )
+    assertCanonicalWritingChromeHtmlStructure(
+      html,
+      canonical,
+      `Print HTML ${label}/${versionType}`,
+    )
     printArtifacts.push({ label, versionType, html, canonical })
     if (persistActualArtifacts) {
       writeFileSync(
@@ -827,6 +984,11 @@ for (const { label, consumption, canonical } of cases) {
     assertNoRendererLocalWritingGroupHeading(
       xml,
       `DOCX OOXML ${label}/${versionType}`,
+    )
+    assertCanonicalWritingChromeDocxStructure(
+      xml,
+      canonical,
+      `${label}/${versionType}`,
     )
     assert.equal(
       xml.includes(bookmarkName(
@@ -931,6 +1093,16 @@ for (const { label, consumption, canonical } of cases) {
       )
       assertCanonicalWritingChromeTextLines(
         convertedText,
+        canonical,
+        `DOCX-to-PDF ${label}/${versionType}`,
+      )
+      assert.equal(
+        convertedText.includes(`Continuation ${label}`),
+        false,
+        `DOCX-to-PDF ${label}/${versionType} suppresses the non-canonical visible title`,
+      )
+      assertCanonicalWritingChromePdfGeometry(
+        pdfPath,
         canonical,
         `DOCX-to-PDF ${label}/${versionType}`,
       )
@@ -1043,6 +1215,7 @@ async function assertBrowserArtifacts() {
   assert.ok(appUrl)
   const playwright = await import('../app/node_modules/playwright/index.js')
   const browser = await playwright.default.chromium.launch({ headless: true })
+  const screenChromeLayouts = new Map()
   try {
     {
       const asset = JSON.parse(readFileSync(
@@ -1263,6 +1436,17 @@ async function assertBrowserArtifacts() {
               (instruction) => instruction.text,
             ),
           ],
+        )
+        const chromeLayout = await canonicalWritingChromeBrowserLayout(page)
+        assert.equal(chromeLayout.sectionIndentPt, 21)
+        assert.equal(chromeLayout.partToSectionTopPt, 27)
+        assert.equal(chromeLayout.roles[0].fontSizePt, 10.5)
+        assert.ok(chromeLayout.roles[0].fontWeight >= 700)
+        assert.equal(chromeLayout.roles[1].fontSizePt, 10.5)
+        assert.ok(chromeLayout.roles[1].fontWeight <= 400)
+        screenChromeLayouts.set(
+          `${label}/${teacher ? 'teacher' : 'student'}`,
+          chromeLayout,
         )
         const bodyText = await page.locator('body').innerText()
         assertVisibleCanonicalText(bodyText, canonical)
@@ -1579,6 +1763,12 @@ async function assertBrowserArtifacts() {
       assert.ok(box)
       assert.ok(Math.abs(box.width - (145 / 25.4 * 96)) <= 1)
       assert.ok(Math.abs(box.height - (57 / 25.4 * 96)) <= 1)
+      const chromeLayout = await canonicalWritingChromeBrowserLayout(page)
+      assert.deepEqual(
+        chromeLayout,
+        screenChromeLayouts.get(`${label}/${versionType}`),
+        `Print HTML ${label}/${versionType} matches Screen paperChrome roles and geometry`,
+      )
       const pdfRoot = mkdtempSync(path.join(tmpdir(), 'eqb-continuation-pdf-'))
       try {
         const pdfPath = path.join(pdfRoot, `${label}-${versionType}.pdf`)
@@ -1601,6 +1791,16 @@ async function assertBrowserArtifacts() {
         )
         assertCanonicalWritingChromeTextLines(
           pdfText,
+          canonical,
+          `Print PDF ${label}/${versionType}`,
+        )
+        assert.equal(
+          pdfText.includes(`Continuation ${label}`),
+          false,
+          `Print PDF ${label}/${versionType} suppresses the non-canonical visible title`,
+        )
+        assertCanonicalWritingChromePdfGeometry(
+          pdfPath,
           canonical,
           `Print PDF ${label}/${versionType}`,
         )

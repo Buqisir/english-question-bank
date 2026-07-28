@@ -434,15 +434,18 @@ export function buildCanonicalApplicationWritingConsumptionSurfaceData({
         ...(writingChrome.part
           ? [{
               kind: 'partHeading',
+              instructionId: writingChrome.part.instructionId,
               text: writingChrome.part.text,
             }]
           : []),
         {
           kind: 'sectionHeading',
+          instructionId: writingChrome.section.instructionId,
           text: writingChrome.section.text,
         },
         ...writingChrome.instructions.map((instruction) => ({
           kind: 'instruction',
+          instructionId: instruction.instructionId,
           text: instruction.text,
         })),
         { kind: 'passage' },
@@ -519,15 +522,18 @@ export function buildCanonicalContinuationWritingConsumptionSurfaceData({
         ...(writingChrome.part
           ? [{
               kind: 'partHeading',
+              instructionId: writingChrome.part.instructionId,
               text: writingChrome.part.text,
             }]
           : []),
         {
           kind: 'sectionHeading',
+          instructionId: writingChrome.section.instructionId,
           text: writingChrome.section.text,
         },
         ...writingChrome.instructions.map((instruction) => ({
           kind: 'instruction',
+          instructionId: instruction.instructionId,
           text: instruction.text,
         })),
         { kind: 'passage' },

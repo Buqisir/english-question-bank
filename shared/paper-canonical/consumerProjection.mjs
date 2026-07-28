@@ -1121,3 +1121,47 @@ export function projectCanonicalWritingChrome({
     ),
   })
 }
+
+/**
+ * A rendered Continuation Writing document made entirely from canonical
+ * Writing Groups already owns its complete visible hierarchy through
+ * paperChrome. Caller-provided export titles remain document metadata in that
+ * case; rendering them as an additional paper heading would create structure
+ * that Screen does not have.
+ */
+export function canonicalWritingChromeOwnsRenderedDocument({
+  consumption,
+  renderedGroupIds,
+}) {
+  if (
+    !Array.isArray(renderedGroupIds)
+    || renderedGroupIds.length === 0
+    || new Set(renderedGroupIds).size !== renderedGroupIds.length
+  ) {
+    return false
+  }
+  let hasContinuationWriting = false
+  const ownsEveryGroup = renderedGroupIds.every((groupId) => {
+    const familyContractId = selectedFamilyContractIdForGroup({
+      consumption,
+      groupId,
+    })
+    if (
+      ![
+        'application-writing',
+        'continuation-writing',
+      ].includes(familyContractId)
+    ) {
+      return false
+    }
+    if (familyContractId === 'continuation-writing') {
+      hasContinuationWriting = true
+    }
+    return selectConsumerGroupMode({
+      consumption,
+      familyContractId,
+      groupId,
+    }).mode === 'canonical'
+  })
+  return ownsEveryGroup && hasContinuationWriting
+}

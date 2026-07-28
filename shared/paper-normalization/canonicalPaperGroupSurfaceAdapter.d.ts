@@ -215,9 +215,9 @@ export function buildCanonicalApplicationWritingConsumptionSurfaceData(input: {
   readonly pageModel: {
     readonly blocks: ReadonlyArray<
       | { readonly kind: 'passage' }
-      | { readonly kind: 'partHeading'; readonly text: string }
-      | { readonly kind: 'sectionHeading'; readonly text: string }
-      | { readonly kind: 'instruction'; readonly text: string }
+      | { readonly kind: 'partHeading'; readonly instructionId: string; readonly text: string }
+      | { readonly kind: 'sectionHeading'; readonly instructionId: string; readonly text: string }
+      | { readonly kind: 'instruction'; readonly instructionId: string; readonly text: string }
       | {
           readonly kind: 'answerBox'
           readonly label: string
@@ -279,9 +279,9 @@ export function buildCanonicalContinuationWritingConsumptionSurfaceData(input: {
   readonly pageModel: {
     readonly blocks: ReadonlyArray<
       | { readonly kind: 'passage' }
-      | { readonly kind: 'partHeading'; readonly text: string }
-      | { readonly kind: 'sectionHeading'; readonly text: string }
-      | { readonly kind: 'instruction'; readonly text: string }
+      | { readonly kind: 'partHeading'; readonly instructionId: string; readonly text: string }
+      | { readonly kind: 'sectionHeading'; readonly instructionId: string; readonly text: string }
+      | { readonly kind: 'instruction'; readonly instructionId: string; readonly text: string }
       | {
           readonly kind: 'answerBox'
           readonly label: string

@@ -59,6 +59,7 @@ import { paperBlankRuling } from '../../shared/papersurface/blankRuling.mjs'
 import { headingKind } from '../../shared/papersurface/headingKind.mjs'
 import { resolveFigureMarker } from '../../shared/figures/resolveFigureMarker.mjs'
 import {
+  canonicalWritingChromeOwnsRenderedDocument,
   projectCanonicalConsumerGroup,
   projectCanonicalWritingChrome,
   selectedFamilyContractIdForGroup,
@@ -696,22 +697,31 @@ function canonicalApplicationWritingAnswerBox(canonicalGroup) {
 }
 
 function pushCanonicalDocxWritingChrome(body, writingChrome) {
-  const instructions = [
-    ...(writingChrome.part ? [writingChrome.part] : []),
-    writingChrome.section,
-    ...writingChrome.instructions,
+  const entries = [
+    ...(writingChrome.part
+      ? [{ instruction: writingChrome.part, role: 'part_heading' }]
+      : []),
+    { instruction: writingChrome.section, role: 'section_heading' },
+    ...writingChrome.instructions.map((instruction) => ({
+      instruction,
+      role: 'instruction',
+    })),
   ]
-  for (const instruction of instructions) {
+  for (const { instruction, role } of entries) {
+    const runOptions = role === 'part_heading'
+      ? { bold: true, size: 21, heading: true }
+      : { size: 21 }
+    const paragraphOptions = {
+      after: role === 'part_heading' ? 240 : 180,
+      keepNext: true,
+      ...(role === 'section_heading' ? { indentLeft: 420 } : {}),
+    }
     body.push(
       canonicalBookmarkStart(
         'canonical_instruction',
         instruction.instructionId,
       ),
-      paragraph(instruction.text, {
-        bold: instruction === writingChrome.part,
-        size: 21,
-        after: 60,
-      }),
+      paragraph([run(instruction.text, runOptions)], paragraphOptions),
       canonicalBookmarkEnd(
         'canonical_instruction',
         instruction.instructionId,
@@ -1572,23 +1582,30 @@ function buildExamDocumentXml({
   // `startNum` seeds it, same as pre-round1 draft-depassage-letter form.
   const startNum = Number.isInteger(questionNumberStart) && questionNumberStart >= 1 ? questionNumberStart : 1
   const body = []
-
-  // Header: centered title, no metadata line
-  // heading-fidelity cut (标准 §2, Locked Decision 3): 卷名唯一放大项 —
-  // size 40 (20pt), 与 print-renderer.mjs 的 h1 (20pt) 同规格。
-  body.push(paragraph([run(title || '英语试题', { bold: true, size: 40 })], { align: 'center', after: 60 }))
-  if (versionType === 'teacher') {
-    body.push(paragraph([run('（教师版 含答案解析）', { size: 20, color: '666666' })], { align: 'center', after: 200 }))
-  } else {
-    body.push(paragraph('', { after: 160 }))
-  }
-
   const itemByGroupId = new Map(items.map((item) => [item.detail.id, item]))
   const renderedGroupIds = Array.isArray(blocks) && blocks.length > 0
     ? blocks
       .filter((block) => block.type === 'question_group')
       .map((block) => block.questionGroupId)
     : items.map((item) => item.detail.id)
+  const canonicalWritingChromeOwnsDocument =
+    canonicalConsumption !== null
+    && canonicalWritingChromeOwnsRenderedDocument({
+      consumption: canonicalConsumption,
+      renderedGroupIds,
+    })
+
+  // Header: centered title, no metadata line
+  // heading-fidelity cut (标准 §2, Locked Decision 3): 卷名唯一放大项 —
+  // size 40 (20pt), 与 print-renderer.mjs 的 h1 (20pt) 同规格。
+  if (!canonicalWritingChromeOwnsDocument) {
+    body.push(paragraph([run(title || '英语试题', { bold: true, size: 40 })], { align: 'center', after: 60 }))
+    if (versionType === 'teacher') {
+      body.push(paragraph([run('（教师版 含答案解析）', { size: 20, color: '666666' })], { align: 'center', after: 200 }))
+    } else {
+      body.push(paragraph('', { after: 160 }))
+    }
+  }
 
   // Determine if we should use short-option two-column layout
   function isShortOptions(options) {

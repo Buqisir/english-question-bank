@@ -4,9 +4,9 @@ import type { PaperAssetV1, PaperParagraph, PaperWritingTask } from '../../domai
 // where the dumb PaperSurface renders the group's prompt/material; `answerBox`
 // carries the (continuation) given starter lines so they render inside the box.
 export type WritingChromeBlock =
-  | { kind: 'partHeading'; text: string }
-  | { kind: 'sectionHeading'; text: string }
-  | { kind: 'instruction'; text: string }
+  | { kind: 'partHeading'; instructionId?: string; text: string }
+  | { kind: 'sectionHeading'; instructionId?: string; text: string }
+  | { kind: 'instruction'; instructionId?: string; text: string }
   | { kind: 'passage' }
   | {
       kind: 'answerBox'

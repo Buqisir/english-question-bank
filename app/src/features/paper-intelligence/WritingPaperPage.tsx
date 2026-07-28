@@ -85,11 +85,38 @@ export function WritingPaperPage({
       {pageModel.blocks.map((block, index) => {
         switch (block.kind) {
           case 'partHeading':
-            return <h2 key={index} className="pi-writing-part">{block.text}</h2>
+            return (
+              <h2
+                key={index}
+                className="pi-writing-part"
+                data-canonical-instruction-id={block.instructionId}
+                data-canonical-writing-chrome-role="part_heading"
+              >
+                {block.text}
+              </h2>
+            )
           case 'sectionHeading':
-            return <h3 key={index} className="pi-writing-section">{block.text}</h3>
+            return (
+              <h3
+                key={index}
+                className="pi-writing-section"
+                data-canonical-instruction-id={block.instructionId}
+                data-canonical-writing-chrome-role="section_heading"
+              >
+                {block.text}
+              </h3>
+            )
           case 'instruction':
-            return <p key={index} className="pi-writing-instruction">{block.text}</p>
+            return (
+              <p
+                key={index}
+                className="pi-writing-instruction"
+                data-canonical-instruction-id={block.instructionId}
+                data-canonical-writing-chrome-role="instruction"
+              >
+                {block.text}
+              </p>
+            )
           case 'passage':
             return <div key={index} className="pi-writing-passage">{children}</div>
           case 'answerBox':

@@ -46,6 +46,7 @@ import {
   applicationWritingNoticeLines,
 } from '../shared/paper-canonical/applicationWritingDisplay.mjs'
 import {
+  canonicalWritingChromeOwnsRenderedDocument,
   projectCanonicalConsumerGroup,
   projectCanonicalWritingChrome,
   selectedFamilyContractIdForGroup,
@@ -232,11 +233,16 @@ function renderCanonicalReadingBlocks(canonicalGroup) {
 
 function renderCanonicalWritingChrome(chrome, className) {
   return [
-    ...(chrome.part ? [chrome.part] : []),
-    chrome.section,
-    ...chrome.instructions,
-  ].map((instruction, index) =>
-    `<p class="${className} ${className}--${index < (chrome.part ? 2 : 1) ? 'heading' : 'body'}" data-canonical-instruction-id="${escapeHtml(instruction.instructionId)}">${escapeHtml(instruction.text)}</p>`).join('')
+    ...(chrome.part
+      ? [{ instruction: chrome.part, role: 'part_heading' }]
+      : []),
+    { instruction: chrome.section, role: 'section_heading' },
+    ...chrome.instructions.map((instruction) => ({
+      instruction,
+      role: 'instruction',
+    })),
+  ].map(({ instruction, role }) =>
+    `<p class="${className} ${className}--${role}" data-canonical-instruction-id="${escapeHtml(instruction.instructionId)}" data-canonical-writing-chrome-role="${role}">${escapeHtml(instruction.text)}</p>`).join('')
 }
 
 function renderCanonicalApplicationWriting(canonicalGroup, writingChrome) {
@@ -440,6 +446,12 @@ export function buildPrintHtml({
       .filter((block) => block.type === 'question_group')
       .map((block) => block.questionGroupId)
     : items.map((item) => item.detail.id)
+  const canonicalWritingChromeOwnsDocument =
+    canonicalConsumption !== null
+    && canonicalWritingChromeOwnsRenderedDocument({
+      consumption: canonicalConsumption,
+      renderedGroupIds,
+    })
 
   // figure-render cut: per-call cache so a multi-group paper doesn't
   // rescan paperAssetsDir once per passage LINE — resolveGroupFigures does
@@ -1210,6 +1222,29 @@ body {
   padding: 3mm;
 }
 
+[data-canonical-writing-chrome-role] {
+  font-size: 10.5pt;
+  line-height: ${paperSurfaceTokens.paperLineHeight};
+  break-after: avoid;
+}
+
+[data-canonical-writing-chrome-role="part_heading"] {
+  margin: 0 0 9pt;
+  font-family: ${paperSurfaceTokens.paperFontStackHeading};
+  font-weight: 700;
+}
+
+[data-canonical-writing-chrome-role="section_heading"] {
+  margin: 0 0 9pt 2em;
+  font-family: ${paperSurfaceTokens.paperFontStack};
+  font-weight: 400;
+}
+
+[data-canonical-writing-chrome-role="instruction"] {
+  margin: 0 0 9pt;
+  white-space: pre-line;
+}
+
 .canonical-continuation-response {
   box-sizing: border-box;
 }
@@ -1268,10 +1303,11 @@ body {
 </style>
 </head>
 <body class="${densityClass}">
+${canonicalWritingChromeOwnsDocument ? '' : `
 <div class="paper-header">
   <h1>${escapeHtml(title || '英语试题')}</h1>
   ${versionLabel ? `<p class="version-label">${escapeHtml(versionLabel)}</p>` : ''}
-</div>
+</div>`}
 ${sections.join('\n')}
 </body>
 </html>`

@@ -48,3 +48,8 @@ export function projectCanonicalWritingChrome(input: {
     readonly text: string
   }>
 }
+
+export function canonicalWritingChromeOwnsRenderedDocument(input: {
+  consumption: unknown
+  renderedGroupIds: ReadonlyArray<string>
+}): boolean
