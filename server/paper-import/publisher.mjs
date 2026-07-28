@@ -583,17 +583,26 @@ function importedContentSignature(group, paperAsset) {
   return (group.passage?.paragraphs || []).map((paragraph) => {
     const association = associations.find((candidate) =>
       paragraph.text.includes(candidate.placeholderMarker))
+    const table = paragraph.text.match(
+      /^\[表:\s*[^\]]+\]\s*(.+)$/,
+    )
     return association
       ? {
           kind: 'figure',
           figureId: association.figureId,
           caption: association.caption || '',
         }
-      : {
-          kind: 'paragraph',
-          nodeId: paragraph.paragraphId,
-          text: paragraph.text,
-        }
+      : table
+        ? {
+            kind: 'table',
+            rows: table[1].split(/\s*;\s*/).map((row) =>
+              row.split(/\s+–\s+/)),
+          }
+        : {
+            kind: 'paragraph',
+            nodeId: paragraph.paragraphId,
+            text: paragraph.text,
+          }
   })
 }
 
@@ -615,6 +624,13 @@ function canonicalContentSignature(group, importedGroup, paperAsset) {
         figureId: String(media?.mediaId || block.mediaId || '')
           .replace(/^media:/, ''),
         caption: inlineText(block.caption),
+      }
+    }
+    if (block.kind === 'table') {
+      return {
+        kind: 'table',
+        rows: block.rows.map((row) =>
+          row.cells.map((cell) => inlineText(cell.inlines))),
       }
     }
     const text = (block.inlines || []).map((inline) => {
@@ -872,7 +888,10 @@ function validateCanonicalImportPackageBinding({
     admission.compilation.artifacts.normalizationReport
       .inactiveSourceClosures
       ?.reduce((total, closure) => total + closure.questionCount, 0) || 0
-  if (inactiveQuestionCount !== importedListeningQuestionIds.size) {
+  if (
+    importedListeningQuestionIds.size > 0
+    && inactiveQuestionCount !== importedListeningQuestionIds.size
+  ) {
     return {
       disposition: 'unsupported',
       diagnostics: [{

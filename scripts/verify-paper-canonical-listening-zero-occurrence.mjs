@@ -600,7 +600,7 @@ async function verifyPrintArtifacts({
         canonicalConsumption: consumption,
       })
       assert.equal(
-        (html.match(/<section class="question-group">/g) || []).length,
+        (html.match(/<section class="question-group"[^>]*>/g) || []).length,
         ACTIVE_GROUP_COUNT,
       )
       assertZeroListeningOccurrence(

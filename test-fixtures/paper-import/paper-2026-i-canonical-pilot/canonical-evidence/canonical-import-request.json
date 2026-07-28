@@ -1,0 +1,79 @@
+{
+  "authority": {
+    "manifestId": "paper-canonical",
+    "manifestVersion": "12",
+    "manifestDigest": "sha256:405ae657a316d0c0da3fcd9e0b0c24df3e559d192e1bdfac74825644aa4b4946"
+  },
+  "evidence": {
+    "documents": [
+      {
+        "inputKey": "questions",
+        "roles": [
+          "question_source",
+          "official_answer_source"
+        ],
+        "declared": {
+          "mediaType": "application/vnd.eqb.canonical-fixture+json"
+        },
+        "path": "01-questions.json"
+      },
+      {
+        "inputKey": "profile_instruction_source",
+        "roles": [
+          "question_source",
+          "source_provenance"
+        ],
+        "declared": {
+          "mediaType": "application/pdf",
+          "originalName": "paper.pdf"
+        },
+        "path": "02-profile_instruction_source.pdf"
+      },
+      {
+        "inputKey": "continuation_writing_instruction_evidence",
+        "roles": [
+          "structured_source",
+          "source_provenance"
+        ],
+        "declared": {
+          "mediaType": "application/vnd.eqb.profile-writing-source-evidence+json"
+        },
+        "path": "03-continuation_writing_instruction_evidence.json"
+      },
+      {
+        "inputKey": "paper_asset",
+        "roles": [
+          "question_source"
+        ],
+        "declared": {
+          "mediaType": "application/json",
+          "originalName": "paper-asset.json"
+        },
+        "path": "04-paper_asset.json"
+      },
+      {
+        "inputKey": "official_answers",
+        "roles": [
+          "official_answer_source"
+        ],
+        "declared": {
+          "mediaType": "application/json",
+          "originalName": "answer-key.json"
+        },
+        "path": "05-official_answers.json"
+      },
+      {
+        "inputKey": "source_answers_pdf",
+        "roles": [
+          "official_answer_source",
+          "source_provenance"
+        ],
+        "declared": {
+          "mediaType": "application/pdf",
+          "originalName": "answers.pdf"
+        },
+        "path": "06-source_answers_pdf.pdf"
+      }
+    ]
+  }
+}

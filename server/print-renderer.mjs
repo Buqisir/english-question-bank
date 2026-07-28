@@ -626,7 +626,9 @@ export function buildPrintHtml({
               })
             : null
 
-        let groupHtml = '<section class="question-group">'
+        let groupHtml = canonicalGroup
+          ? `<section class="question-group" data-canonical-group-id="${escapeHtml(canonicalGroup.groupId)}" data-canonical-semantic-signature="${escapeHtml(canonicalGroup.semanticSignature)}"${canonicalGroup.occurrenceSignature ? ` data-canonical-occurrence-signature="${escapeHtml(canonicalGroup.occurrenceSignature)}"` : ''}>`
+          : '<section class="question-group">'
 
         if (!canonicalWritingChrome) {
           groupHtml += `<div class="group-header">${chineseNumeral(groupNum)}、${escapeHtml(groupHeaderLabel)}${escapeHtml(groupHeaderScoreSuffix)}</div>`

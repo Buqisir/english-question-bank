@@ -1,0 +1,1354 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-2026-i",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-2026-i-reading-a",
+    "group-2026-i-reading-b",
+    "group-2026-i-reading-c",
+    "group-2026-i-reading-d"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed",
+    "importMode": "paper-import-ai",
+    "model": "claude-opus-4-8",
+    "reviewedBy": "import-pipeline-agent",
+    "reviewedAt": "2026-07-07T00:00:00Z"
+  },
+  "groups": {
+    "group-2026-i-reading-a": {
+      "overview": "本文是一则围绕洛杉矶 SoFi 体育场的实用信息类应用文，介绍即将举行的橄榄球赛事、附近酒店以及停车规则。",
+      "discourseStructure": {
+        "summary": "全文以体育场为核心，先总述其为洛杉矶体育迷的热门去处，随后分三个板块列出赛事日程、周边酒店与停车须知。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-2026-i-reading-a-1",
+            "summary": "总述 SoFi 体育场是洛杉矶体育迷的热门目的地，日程排满重磅赛事。",
+            "function": "引入与总起，交代场馆定位。"
+          },
+          {
+            "paragraphId": "para-2026-i-reading-a-2",
+            "summary": "小标题：即将举行的橄榄球赛事。",
+            "function": "板块标题，引出赛事日程。"
+          },
+          {
+            "paragraphId": "para-2026-i-reading-a-3",
+            "summary": "以表格列出四场比赛的对阵、日期与开赛时间。",
+            "function": "提供赛事日程细节，为计数类题目提供数据。"
+          },
+          {
+            "paragraphId": "para-2026-i-reading-a-4",
+            "summary": "小标题：附近酒店。",
+            "function": "板块标题，引出酒店信息。"
+          },
+          {
+            "paragraphId": "para-2026-i-reading-a-5",
+            "summary": "介绍四家距离体育场远近不一的酒店及其特色。",
+            "function": "提供酒店选择与距离信息。"
+          },
+          {
+            "paragraphId": "para-2026-i-reading-a-6",
+            "summary": "小标题：停车。",
+            "function": "板块标题，引出停车规则。"
+          },
+          {
+            "paragraphId": "para-2026-i-reading-a-7",
+            "summary": "说明需按指定分区停车、凭数字停车证经指定入口进入等停车要求。",
+            "function": "提供停车规则与操作步骤。"
+          }
+        ]
+      }
+    },
+    "group-2026-i-reading-b": {
+      "overview": "记叙文。作者通过儿子 Kevin 不会用纸质词典这件小事，回忆自己 13 岁得到第一本词典、用铅笔标记查过的词以记录进步的经历，最终领悟到学习的关键不在于词汇本身或学习方式，而在于求知的渴望与好奇心。",
+      "discourseStructure": {
+        "summary": "由儿子查词引出话题（数字时代的孩子依赖手机、不会用纸质词典）→ 母子共读词典、Kevin 惊讶于词汇之多 → 作者回忆自己与第一本词典的往事及铅笔标记 → 词典失窃但作者仍顺利读完大学，点明真正重要的不是词典 → 升华主旨：学习的核心是求知欲。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-2026-i-reading-b-1",
+            "summary": "Kevin 问词义，作者让他查词典，Kevin 却想用手机，作者意识到他根本不会用词典。",
+            "function": "引入话题，制造代际与媒介对比，抛出问题。"
+          },
+          {
+            "paragraphId": "para-2026-i-reading-b-2",
+            "summary": "母子一起翻词典找词，Kevin 睁大眼睛惊讶于词汇如此之多，问母亲是否都认识。",
+            "function": "刻画孩子初次使用词典时的惊讶反应。"
+          },
+          {
+            "paragraphId": "para-2026-i-reading-b-3",
+            "summary": "作者回忆 13 岁生日得到第一本词典，决心多学词汇，用铅笔标记每个查过的词以记录进步，上大学时带着它。",
+            "function": "回溯作者自身的学习经历，词典承载其努力。"
+          },
+          {
+            "paragraphId": "para-2026-i-reading-b-4",
+            "summary": "词典在大一末被偷，但作者仍读完余下三年大学，意识到真正让她走过来的并非词典。",
+            "function": "转折，弱化工具本身的作用。"
+          },
+          {
+            "paragraphId": "para-2026-i-reading-b-5",
+            "summary": "作者领悟：儿子虽然学习方式不同但仍在学习，关键不是词汇或方式，而是想要知道的渴望、好奇心与求知欲。",
+            "function": "升华点题，揭示学习的本质。"
+          }
+        ]
+      }
+    },
+    "group-2026-i-reading-c": {
+      "overview": "文章报道一项新研究：纽约市大力植树本是绿化好事，但主流树种橡树与枫香树释放的异戊二烯会与污染物反应生成地面臭氧，可能反而恶化空气质量；研究者与公园部门科学家就如何取舍给出不同侧重的看法。",
+      "discourseStructure": {
+        "summary": "先立正面背景（植树的种种好处），再用一项新研究抛出隐忧（特定树种致臭氧上升），随后用数据量化风险，接着引出研究者与公园部门两方声音，最后落在权衡与解决思路上。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-2026-i-reading-c-1",
+            "summary": "纽约市每年种植成千上万棵树以扩大绿地，列举遮荫、降温、吸碳、除污、提供栖息地和美化等好处。",
+            "function": "引入背景，铺陈植树的诸多益处，为后文转折做正面铺垫。"
+          },
+          {
+            "paragraphId": "para-2026-i-reading-c-2",
+            "summary": "新研究指出橡树和枫香树占城市树木多数，会释放大量异戊二烯，与车辆等排放的氮氧化物反应生成地面臭氧，引发呼吸问题。",
+            "function": "转折，揭示植树潜在的负面机制。"
+          },
+          {
+            "paragraphId": "para-2026-i-reading-c-3",
+            "summary": "研究量化：若维持过去的树种模式，未来几十年曼哈顿异戊二烯将升约140%，夏季臭氧最多升30%。",
+            "function": "用数据支撑风险，量化问题严重程度。"
+          },
+          {
+            "paragraphId": "para-2026-i-reading-c-4",
+            "summary": "研究共同作者 Róisín Commane 表示赞成多种树，但若不谨慎可能让空气质量变差。",
+            "function": "引入研究者观点，点明需谨慎权衡。"
+          },
+          {
+            "paragraphId": "para-2026-i-reading-c-5",
+            "summary": "公园部门并非不知情，多年前其研究已确认城市树木确会释放异戊二烯；科学家 Auyeung 认为不该把树当敌人，若能反思以车为中心的生活方式，想种什么树都行。",
+            "function": "引入公园部门回应，提出以改变生活方式而非弃树的解决方向。"
+          },
+          {
+            "paragraphId": "para-2026-i-reading-c-6",
+            "summary": "Auyeung 强调不会砍掉老橡树也不会停种新树，因为橡树是关键物种，为本地昆虫、鸟类等提供食物与栖息地。",
+            "function": "收束，强调橡树的生态价值，反对简单化的砍伐方案。"
+          }
+        ]
+      }
+    },
+    "group-2026-i-reading-d": {
+      "overview": "本文报道剑桥大学心理学家的一项实验，探究“主动评判艺术之美”相较于“仅仅观看艺术”对认知（尤其是抽象思维）的影响。文章依次介绍实验设计、抽象思维得分结果、情绪状态测量的用意，并以研究者的结论收尾。",
+      "discourseStructure": {
+        "summary": "研究引入→实验设计→抽象思维得分发现→情绪状态测量及其排除性结论→研究者总结，呈现“提出研究—设计—数据—解释—结论”的科普报道结构。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-2026-i-reading-d-1",
+            "summary": "剑桥心理学家做实验，比较“仅观看艺术”与“主动评判其美”的认知效应。",
+            "function": "引入研究主题与研究目的。"
+          },
+          {
+            "paragraphId": "para-2026-i-reading-d-2",
+            "summary": "187名参与者被随机分为“美”组（评判每件物品之美）和对照组（将线描图与作品匹配），随后测其信息处理是偏具体还是偏抽象。",
+            "function": "介绍实验对象、分组与任务设计。"
+          },
+          {
+            "paragraphId": "para-2026-i-reading-d-3",
+            "summary": "美组抽象思维平均得分比对照组高近14%；有艺术爱好者中，美组比对照组高出25%以上。",
+            "function": "呈现抽象思维得分的核心数据发现。"
+          },
+          {
+            "paragraphId": "para-2026-i-reading-d-4",
+            "summary": "还测量了情绪状态；美组“变革性与自我超越感”高23%，但并未更快乐，说明是对美的投入而非整体愉悦影响了抽象思维。",
+            "function": "说明测量情绪状态的用意并排除“愉悦”这一替代解释。"
+          },
+          {
+            "paragraphId": "para-2026-i-reading-d-5",
+            "summary": "资深作者Schnall指出人们在屏幕前多作具体思考，而欣赏艺术之美或是启动抽象认知过程的理想方式。",
+            "function": "以研究者观点总结全文，点明主要发现。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "q-2026-i-021": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查根据赛事表格统计各队本月出赛场次并比较得出最多者。",
+      "stemTranslationZh": "本月哪支球队将在该体育场进行最多场比赛？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "华盛顿指挥官队。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Washington Commanders 将在本月于该体育场比赛。",
+            "explanation": "原文赛事表格中未提及 Washington Commanders，该队并不在任何一场对阵中。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "洛杉矶公羊队。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2026-i-reading-a-3",
+              "quote": "Los Angeles Rams v Dallas Cowboys – Saturday, August 9",
+              "anchor": "8月9日 Rams 对 Cowboys"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2026-i-reading-a-3",
+              "quote": "Los Angeles Chargers v Los Angeles Rams – Saturday, August 16",
+              "anchor": "8月16日 Chargers 对 Rams"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2026-i-reading-a-3",
+              "quote": "Los Angeles Rams v Houston Texans – Sunday, August 24",
+              "anchor": "8月24日 Rams 对 Texans"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "洛杉矶闪电队。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "Los Angeles Chargers",
+            "optionText": "Los Angeles Chargers.",
+            "matchType": "exact",
+            "relationNote": "Chargers 确在表中出现，但仅参加 8 月 10 日和 8 月 16 日两场，少于 Rams 的三场，用原文出现过的队名制造干扰。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2026-i-reading-a-3",
+              "quote": "Los Angeles Chargers v New Orleans Saints – Sunday, August 10",
+              "anchor": "Chargers 仅两场之一"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "新奥尔良圣徒队。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "New Orleans Saints",
+            "optionText": "New Orleans Saints.",
+            "matchType": "exact",
+            "relationNote": "Saints 仅在 8 月 10 日出赛一场，用原文出现过的队名制造干扰，场次远少于 Rams。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2026-i-reading-a-3",
+              "quote": "Los Angeles Chargers v New Orleans Saints – Sunday, August 10",
+              "anchor": "Saints 仅一场"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "the most games",
+          "sourceRole": "stem",
+          "targetText": "Los Angeles Rams v Houston Texans – Sunday, August 24",
+          "targetParagraphId": "para-2026-i-reading-a-3",
+          "relationType": "calculation",
+          "note": "题干 the most games 需统计各队出赛场次：Rams 在 8 月 9、16、24 日共出现三次，为最多。"
+        }
+      ]
+    },
+    "q-2026-i-022": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查根据酒店与体育场的距离描述判断哪家酒店最近。",
+      "stemTranslationZh": "哪家酒店离体育场最近？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "桑德·林酒店。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2026-i-reading-a-5",
+              "quote": "Right across the street, Sonder Lim Hotel offers spacious rooms and a rooftop pool.",
+              "anchor": "就在街对面"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "洛杉矶丽思卡尔顿酒店。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "the Ritz-Carlton Los Angeles promises luxurious rooms",
+            "optionText": "The Ritz-Carlton Los Angeles.",
+            "matchType": "exact",
+            "relationNote": "原文说需再多开一段路才能到 Ritz-Carlton，是最远的一家，并非最近，用原文出现的酒店名制造干扰。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2026-i-reading-a-5",
+              "quote": "the Ritz-Carlton Los Angeles promises luxurious rooms",
+              "anchor": "需再多开一段路"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "洛杉矶 H 酒店。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "the H Hotel Los Angeles",
+            "optionText": "The H Hotel Los Angeles.",
+            "matchType": "exact",
+            "relationNote": "原文说 H Hotel 在一英里外（a mile away），并非最近，用原文出现的酒店名制造干扰。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2026-i-reading-a-5",
+              "quote": "A mile away, the H Hotel Los Angeles, with its stylish design",
+              "anchor": "一英里外"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "洛杉矶机场万丽酒店。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "the Renaissance Los Angeles Airport Hotel is just a short drive away",
+            "optionText": "The Renaissance LA Airport Hotel.",
+            "matchType": "wordFamily",
+            "relationNote": "选项名与原文 Renaissance Los Angeles Airport Hotel 为同一酒店变体，但原文说需短途驾车（a short drive away）到达，并非最近。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2026-i-reading-a-5",
+              "quote": "the Renaissance Los Angeles Airport Hotel is just a short drive away",
+              "anchor": "需短途驾车"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "nearest",
+          "sourceRole": "stem",
+          "targetText": "Right across the street, Sonder Lim Hotel offers spacious rooms and a rooftop pool.",
+          "targetParagraphId": "para-2026-i-reading-a-5",
+          "relationType": "paraphrase",
+          "note": "题干 nearest 对应原文 Right across the street（就在街对面），是所有酒店中距离最近的表达。"
+        }
+      ]
+    },
+    "q-2026-i-023": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查在体育场停车所需完成的准备动作。",
+      "stemTranslationZh": "如果你想在体育场停车，你需要做什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "给停车人员打电话。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "parking staff will guide you directly to a space",
+            "optionText": "Call the parking staff.",
+            "matchType": "exact",
+            "relationNote": "原文提到 parking staff 会引导你到车位，但从未要求打电话给工作人员，用原文出现的 parking staff 制造干扰。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2026-i-reading-a-7",
+              "quote": "parking staff will guide you directly to a space",
+              "anchor": "工作人员现场引导"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "预付停车费。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "停车前需要预付停车费。",
+            "explanation": "原文未提及任何有关预付或缴纳停车费的信息。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "获取一张停车证。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2026-i-reading-a-7",
+              "quote": "Make sure to download your parking pass to your smartphone before arrival.",
+              "anchor": "抵达前下载停车证"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2026-i-reading-a-7",
+              "quote": "guests must enter through the exact gate indicated on their color-coded digital parking pass",
+              "anchor": "凭数字停车证进入"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "自行选择一个停车区。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "SoFi Stadium requires you to park strictly in your assigned zone",
+            "sourceHighlight": "assigned zone",
+            "optionText": "Choose a parking zone.",
+            "optionHighlight": "Choose",
+            "explanation": "原文是被分配到指定区域（assigned zone）并严格按此停车，而非由游客自行选择区域，动作方向相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2026-i-reading-a-7",
+              "quote": "SoFi Stadium requires you to park strictly in your assigned zone",
+              "anchor": "按指定区停车"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Obtain a parking pass.",
+          "sourceRole": "correctOption",
+          "targetText": "Make sure to download your parking pass to your smartphone before arrival.",
+          "targetParagraphId": "para-2026-i-reading-a-7",
+          "relationType": "paraphrase",
+          "note": "正确项 Obtain a parking pass 对应原文 download your parking pass to your smartphone，均指须事先取得停车证。"
+        }
+      ]
+    },
+    "q-2026-i-024": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查 Kevin 平时获取词义的惯常做法。",
+      "stemTranslationZh": "Kevin 通常做什么来获取一个单词的意思？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "使用电子设备。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2026-i-reading-b-1",
+              "quote": "Can’t you just use your phone?",
+              "anchor": "用手机查"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2026-i-reading-b-1",
+              "quote": "But my screen time is off,",
+              "anchor": "屏幕时间"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "查阅纸质词典。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "Suddenly it occurred to me that he did not even know how to use a dictionary.",
+            "sourceHighlight": "did not even know how to use a dictionary",
+            "optionText": "Consult a paper dictionary.",
+            "optionHighlight": "Consult a paper dictionary",
+            "explanation": "原文明确说 Kevin 根本不会用词典，纸质词典正是他平时不用的，选项与原文相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2026-i-reading-b-1",
+              "quote": "Suddenly it occurred to me that he did not even know how to use a dictionary.",
+              "anchor": "不会用词典"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "根据上下文猜测。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Guess from the context.",
+            "explanation": "原文未提及 Kevin 通过上下文猜测词义。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "求助于他的英语老师。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Turn to his English teacher.",
+            "explanation": "原文未提及 Kevin 向英语老师求助。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Use electronic devices.",
+          "sourceRole": "correctOption",
+          "targetText": "Can’t you just use your phone?",
+          "targetParagraphId": "para-2026-i-reading-b-1",
+          "relationType": "paraphrase",
+          "note": "选项的 electronic devices 对应原文的 phone（手机），Kevin 想用手机而非词典查词。"
+        }
+      ]
+    },
+    "q-2026-i-025": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "questionFocus": "考查 Kevin 在词典里查词时的情绪感受。",
+      "stemTranslationZh": "Kevin 在词典里查这个词时感觉如何？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "恼火的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Annoyed.",
+            "explanation": "原文未提及查词过程中 Kevin 感到恼火；翻词典时他表现出的是睁大眼睛的惊讶。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "失望的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Disappointed.",
+            "explanation": "原文未提及 Kevin 查词时感到失望。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "受到鼓舞的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Encouraged.",
+            "explanation": "原文未提及 Kevin 查词时受到鼓舞。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "惊讶的。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2026-i-reading-b-2",
+              "quote": "How can there be this many words?",
+              "anchor": "怎么会有这么多词"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2026-i-reading-b-2",
+              "quote": "wide-eyed",
+              "anchor": "睁大眼睛"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Astonished.",
+          "sourceRole": "correctOption",
+          "targetText": "How can there be this many words?",
+          "targetParagraphId": "para-2026-i-reading-b-2",
+          "relationType": "paraphrase",
+          "note": "原文 wide-eyed（睁大眼睛）加惊叹 How can there be this many words? 表现出的惊讶，即选项的 astonished。"
+        }
+      ]
+    },
+    "q-2026-i-026": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查关于作者第一本词典的细节信息。",
+      "stemTranslationZh": "关于作者的第一本词典，我们可以了解到什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它帮助她读完了大学。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "negationReversal",
+            "sourceQuote": "And it wasn’t, ultimately, the dictionary that got me there-not really.",
+            "sourceHighlight": "it wasn’t, ultimately, the dictionary that got me there",
+            "optionText": "It helped her through college.",
+            "optionHighlight": "It helped her through college",
+            "explanation": "原文说归根结底并不是词典让她走到那一步，选项却说词典帮她读完大学，与原文相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2026-i-reading-b-4",
+              "quote": "And it wasn’t, ultimately, the dictionary that got me there-not really.",
+              "anchor": "并非词典之功"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它是作为礼物送给 Kevin 的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "I had my first dictionary as a gift for my 13th birthday.",
+            "sourceEntity": "my 13th birthday",
+            "optionText": "It was given to Kevin as a gift.",
+            "optionEntity": "Kevin",
+            "explanation": "原文说这本词典是作者 13 岁生日时收到的礼物，礼物的接受者是作者本人，而非 Kevin，对象错配。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2026-i-reading-b-3",
+              "quote": "I had my first dictionary as a gift for my 13th birthday.",
+              "anchor": "作者的生日礼物"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它见证了她的努力。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2026-i-reading-b-3",
+              "quote": "started marking every entry I looked up with a pencil to measure my progress",
+              "anchor": "铅笔标记记录进步"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2026-i-reading-b-3",
+              "quote": "I continued to make these pencil marks for years",
+              "anchor": "多年持续标记"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它是一本珍贵的限量版。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "It was a valuable limited edition.",
+            "explanation": "原文未提及这本词典是珍贵的限量版。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "It bore witness to her efforts.",
+          "sourceRole": "correctOption",
+          "targetText": "started marking every entry I looked up with a pencil to measure my progress",
+          "targetParagraphId": "para-2026-i-reading-b-3",
+          "relationType": "paraphrase",
+          "note": "选项 bore witness to her efforts 对应原文用铅笔标记每个查过的词 to measure my progress，词典承载并见证了作者的努力。"
+        }
+      ]
+    },
+    "q-2026-i-027": {
+      "skill": {
+        "primary": "mainIdea"
+      },
+      "questionFocus": "考查作者对学习本质的最终领悟（主旨）。",
+      "stemTranslationZh": "作者对学习逐渐领悟到了什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "开始永远都不嫌晚。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "It is never too late to start.",
+            "explanation": "原文未提及“开始永远不嫌晚”这一观点。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "动机才是真正重要的。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2026-i-reading-b-5",
+              "quote": "It’s not about the words themselves or how we learn them, but the wanting to know them, the curiosity and the appetite.",
+              "anchor": "关键在于求知欲"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "孩子需要榜样。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Children need role models.",
+            "explanation": "原文未提及孩子需要榜样这一观点。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "词典仍然是有用的工具。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "It’s not about the words themselves or how we learn them, but the wanting to know them, the curiosity and the appetite.",
+            "sourceHighlight": "not about the words themselves or how we learn them",
+            "optionText": "Dictionaries are still a useful tool.",
+            "optionHighlight": "Dictionaries are still a useful tool",
+            "explanation": "作者的领悟是关键不在于工具或学习方式，而在于求知欲；选项却强调词典仍是有用工具，与原文淡化工具的态度相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2026-i-reading-b-4",
+              "quote": "And it wasn’t, ultimately, the dictionary that got me there-not really.",
+              "anchor": "并非词典之功"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Motivation is what really matters.",
+          "sourceRole": "correctOption",
+          "targetText": "the wanting to know them, the curiosity and the appetite",
+          "targetParagraphId": "para-2026-i-reading-b-5",
+          "relationType": "paraphrase",
+          "note": "选项 motivation 对应原文 the wanting to know them, the curiosity and the appetite（求知的渴望、好奇心与求知欲），即真正重要的是内在动机。"
+        }
+      ]
+    },
+    "q-2026-i-028": {
+      "skill": {
+        "primary": "inference"
+      },
+      "questionFocus": "考查从研究内容推断橡树和枫香树对人产生何种影响。",
+      "stemTranslationZh": "这项新研究就橡树和枫香树暗示了什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它们影响其他树木的生长。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "They affect the growth of other trees.",
+            "explanation": "原文未提及橡树和枫香树会影响其他树木的生长，属无中生有。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它们吸收的碳比预期的少。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "absorb a surprising amount of airborne carbon",
+            "optionText": "They absorb less carbon than expected.",
+            "matchType": "exact",
+            "relationNote": "借用原文第一段 absorb / carbon 等原词设钩，但原文说树木吸收的碳量之多令人惊讶，并未说明橡树和枫香树吸碳少于预期。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2026-i-reading-c-1",
+              "quote": "absorb a surprising amount of airborne carbon",
+              "anchor": "吸碳量惊人，非少于预期"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它们间接危害人们的健康。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2026-i-reading-c-2",
+              "quote": "a major factor in many breathing problems",
+              "anchor": "臭氧是诸多呼吸问题的主因"
+            },
+            {
+              "paragraphId": "para-2026-i-reading-c-2",
+              "quote": "isoprene interacts rapidly with polluting nitrogen oxides released by vehicles, buildings and industry to form ground-level ozone",
+              "anchor": "异戊二烯反应生成地面臭氧"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它们缓慢地提升当地气温。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeTrend",
+            "sourceQuote": "lower surface temperatures",
+            "sourceHighlight": "lower",
+            "optionText": "They raise the local temperature slowly.",
+            "optionHighlight": "raise",
+            "explanation": "原文说树木降低地表温度，选项却说提升气温，趋势黑白颠倒。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2026-i-reading-c-1",
+              "quote": "lower surface temperatures",
+              "anchor": "树木是降温而非升温"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "harm people's health indirectly",
+          "sourceRole": "correctOption",
+          "targetText": "a major factor in many breathing problems",
+          "targetParagraphId": "para-2026-i-reading-c-2",
+          "relationType": "paraphrase",
+          "note": "选项的 harm health indirectly 对应原文：异戊二烯与氮氧化物反应生成臭氧，而臭氧是 many breathing problems 的 major factor，故属间接危害健康。"
+        }
+      ]
+    },
+    "q-2026-i-029": {
+      "skill": {
+        "primary": "inference"
+      },
+      "questionFocus": "考查基于研究结论推断 Commune（Commane）可能给出的建议。",
+      "stemTranslationZh": "基于他们的研究，Commune 可能会建议以下哪一项？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "砍掉那些释放异戊二烯的树。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "cutting down any big old oaks",
+            "optionText": "Cutting down the isoprene-producing trees.",
+            "matchType": "exact",
+            "relationNote": "借用原文 cutting down 原词设钩，但原文（Auyeung 语）恰恰是否定砍树，Commane 也主张多种树而非砍伐。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2026-i-reading-c-6",
+              "quote": "cutting down any big old oaks",
+              "anchor": "原文否定砍树"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "把植树暂停几十年。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "all for planting more trees",
+            "sourceHighlight": "planting more trees",
+            "optionText": "Suspending tree-planting for a few decades.",
+            "optionHighlight": "Suspending",
+            "explanation": "Commane 明确支持多种树，选项却建议暂停植树，行为方向相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2026-i-reading-c-4",
+              "quote": "all for planting more trees",
+              "anchor": "Commane 支持多种树"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "改变新种植树木的种类。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2026-i-reading-c-3",
+              "quote": "if the city maintains past species patterns in new plantings",
+              "anchor": "维持旧树种模式会推高臭氧，反推应改树种"
+            },
+            {
+              "paragraphId": "para-2026-i-reading-c-4",
+              "quote": "we could make air quality worse",
+              "anchor": "不谨慎会恶化空气，故需调整种植策略"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "去除现有树木释放的异戊二烯。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Removing isoprene released by existing trees.",
+            "explanation": "原文未提及可以去除已有树木释放的异戊二烯，属无中生有。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Changing the species of trees in new plantings",
+          "sourceRole": "correctOption",
+          "targetText": "if the city maintains past species patterns in new plantings",
+          "targetParagraphId": "para-2026-i-reading-c-3",
+          "relationType": "paraphrase",
+          "note": "原文用条件句指出若维持 past species patterns in new plantings 会导致臭氧上升，据此反推 Commane 会建议改变新种植的树种（change the species）。"
+        }
+      ]
+    },
+    "q-2026-i-030": {
+      "skill": {
+        "primary": "wordMeaning"
+      },
+      "questionFocus": "考查根据上下文推测划线短语 oblivious to 的词义。",
+      "stemTranslationZh": "第五段中划线短语“oblivious to”是什么意思？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "对……坦诚",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Honest about",
+            "explanation": "原文语境强调公园部门是否知情，并非诚实与否，该义项在文中无支撑，属无中生有。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "未意识到；不知道",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2026-i-reading-c-5",
+              "quote": "The Parks Department is not oblivious to the issue",
+              "anchor": "not oblivious = 并非不知情"
+            },
+            {
+              "paragraphId": "para-2026-i-reading-c-5",
+              "quote": "concluded that city trees did release isoprene",
+              "anchor": "多年前研究已确认，佐证其知情"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "与……相关",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Related to",
+            "explanation": "oblivious to 表未察觉，与“相关”无关，该义项在文中无支撑，属无中生有。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "对……乐观",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Optimistic about",
+            "explanation": "上下文说明公园部门早已知情，并非表达乐观态度，该义项无原文支撑，属无中生有。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "oblivious to",
+          "sourceRole": "stem",
+          "targetText": "concluded that city trees did release isoprene",
+          "targetParagraphId": "para-2026-i-reading-c-5",
+          "relationType": "locationCue",
+          "note": "由后文“多年前的研究已 concluded that city trees did release isoprene”可知部门早已知情，故 not oblivious to 意为“并非不知道”，oblivious to 即 unaware of。"
+        }
+      ]
+    },
+    "q-2026-i-031": {
+      "skill": {
+        "primary": "inference"
+      },
+      "questionFocus": "考查推断 Auyeung 可能主张的解决方向。",
+      "stemTranslationZh": "Auyeung 很可能会倡导什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "减少日常生活中的汽车使用。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2026-i-reading-c-5",
+              "quote": "if we just rethink our car-centric lifestyle",
+              "anchor": "呼吁反思以车为中心的生活方式"
+            },
+            {
+              "paragraphId": "para-2026-i-reading-c-5",
+              "quote": "We could plant any trees we want to",
+              "anchor": "改变用车方式即可随意种树，问题在车非树"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "为动物提供新的栖息地。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "providing food and habitat for native insects, birds and other animals",
+            "optionText": "Providing animals with new habitats.",
+            "matchType": "wordFamily",
+            "relationNote": "利用原文 habitat / animals 的同族词设钩，但原文只是说明橡树本身为动物提供栖息地以论证其价值，并非 Auyeung 倡导另建新栖息地。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2026-i-reading-c-6",
+              "quote": "providing food and habitat for native insects, birds and other animals",
+              "anchor": "橡树本已提供栖息地"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "控制人口增长。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Controlling population growth.",
+            "explanation": "原文未提及控制人口增长，属无中生有。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "对该问题做更多研究。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Doing more research on the problem.",
+            "explanation": "Auyeung 主张的是反思用车方式，原文未提及倡导开展更多研究，属无中生有。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Reducing car use in daily life",
+          "sourceRole": "correctOption",
+          "targetText": "if we just rethink our car-centric lifestyle",
+          "targetParagraphId": "para-2026-i-reading-c-5",
+          "relationType": "paraphrase",
+          "note": "选项 reducing car use 对应原文 rethink our car-centric lifestyle，Auyeung 认为只要改变以车为中心的生活方式即可，倡导减少用车。"
+        }
+      ]
+    },
+    "q-2026-i-032": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查“美”组参与者被要求对黏土物品做什么，属细节定位。",
+      "stemTranslationZh": "“美”组被要求对这些黏土物品做什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "画出它们的轮廓。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "matched a line drawing of the object",
+            "optionText": "Draw their outlines.",
+            "matchType": "wordFamily",
+            "relationNote": "原文中与“drawing/画”相关的是对照组“matched a line drawing”（匹配线描图），并非“美”组的任务；选项借用与 drawing 同族的 Draw/outlines 制造干扰。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2026-i-reading-d-2",
+              "quote": "the control group just matched a line drawing of the object with the artwork itself",
+              "anchor": "对照组匹配线描图"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "给每件作品打分/评级。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2026-i-reading-d-2",
+              "quote": "was asked to actively consider and then rate the beauty of each object they viewed",
+              "anchor": "被要求评判并对每件物品之美打分"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "比较它们的价格。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Compare their prices.",
+            "explanation": "原文未提及价格，更未要求参与者比较价格，属无中生有。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "临摹/复制每一件作品。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Make a copy of each piece.",
+            "explanation": "原文未提及要求参与者复制作品，属无中生有。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Give each piece a rating.",
+          "sourceRole": "correctOption",
+          "targetText": "rate the beauty of each object they viewed",
+          "targetParagraphId": "para-2026-i-reading-d-2",
+          "relationType": "paraphrase",
+          "note": "选项 Give each piece a rating 与原文 rate the beauty of each object 为同义替换，rating ↔ rate。"
+        }
+      ]
+    },
+    "q-2026-i-033": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查哪一类参与者在测试中平均得分最高，需比对分组与是否有艺术爱好的数据。",
+      "stemTranslationZh": "哪些参与者在测试中的平均得分最高？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "美组、且有艺术爱好的人。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2026-i-reading-d-3",
+              "quote": "those with an artistic hobby in the beauty group scored over 25% higher on average for abstract thinking than those with an artistic hobby in the control group",
+              "anchor": "美组中有艺术爱好者高出25%以上"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "美组、但没有艺术爱好的人。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "those with an artistic hobby in the beauty group scored over 25% higher on average for abstract thinking than those with an artistic hobby in the control group",
+            "sourceEntity": "those with an artistic hobby in the beauty group",
+            "optionText": "Beauty group, without an artistic hobby.",
+            "optionEntity": "without an artistic hobby",
+            "explanation": "得分最高的是美组中“有艺术爱好”者；无艺术爱好者仅约高14%，并非最高，属对象（爱好属性）错配。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "对照组、且有艺术爱好的人。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "those with an artistic hobby in the beauty group scored over 25% higher on average for abstract thinking than those with an artistic hobby in the control group",
+            "sourceEntity": "in the beauty group",
+            "optionText": "Control group, with an artistic hobby.",
+            "optionEntity": "Control group",
+            "explanation": "高分方是美组，对照组为被比较的较低一方，此处把分组对象错配为对照组。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "对照组、且没有艺术爱好的人。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "those in the beauty group scored almost 14% higher on average than the control group in abstract thinking",
+            "sourceEntity": "those in the beauty group",
+            "optionText": "Control group, without an artistic hobby.",
+            "optionEntity": "Control group",
+            "explanation": "对照组本就是被比较的较低一方，无艺术爱好者更非最高分，属分组对象错配。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "highest score on average",
+          "sourceRole": "stem",
+          "targetText": "scored over 25% higher on average for abstract thinking",
+          "targetParagraphId": "para-2026-i-reading-d-3",
+          "relationType": "locationCue",
+          "note": "题干 highest score on average 定位到原文最大差值 over 25% higher on average，即美组中有艺术爱好者。"
+        }
+      ]
+    },
+    "q-2026-i-034": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "questionFocus": "考查测量参与者情绪状态的目的，需理解该测量用于排除/确定影响测试结果的因素。",
+      "stemTranslationZh": "为什么要测量参与者的情绪状态？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "为了了解他们对艺术的态度。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "To discover their attitudes towards art.",
+            "explanation": "原文未提及测量情绪是为了解对艺术的态度，属无中生有。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "为了识别他们具体的思维模式。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Emotional states of participants were also measured by asking about their feelings while completing the gallery task",
+            "sourceEntity": "Emotional states of participants",
+            "optionText": "To identify their specific thinking patterns.",
+            "optionEntity": "thinking patterns",
+            "explanation": "情绪状态测量的是感受（feelings），思维方式则由另外的认知测试考查，二者对象错配。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "为了检验任务的难度。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "To examine the difficulty of the tasks.",
+            "explanation": "原文未提及测量情绪是为检验任务难度，属无中生有。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "为了确定测试结果背后的（影响）因素。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2026-i-reading-d-4",
+              "quote": "suggesting that it was the engagement with beauty that influenced abstract thinking, rather than any overall positivity from the experience",
+              "anchor": "借情绪测量确认是对美的投入而非愉悦影响了抽象思维"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "To determine factors behind the test results.",
+          "sourceRole": "correctOption",
+          "targetText": "it was the engagement with beauty that influenced abstract thinking, rather than any overall positivity from the experience",
+          "targetParagraphId": "para-2026-i-reading-d-4",
+          "relationType": "paraphrase",
+          "note": "情绪测量用于区分是 engagement with beauty 还是 overall positivity 影响 abstract thinking，即确定 factors behind the test results。"
+        }
+      ]
+    },
+    "q-2026-i-035": {
+      "skill": {
+        "primary": "mainIdea"
+      },
+      "questionFocus": "考查关于欣赏艺术的主要研究发现，需概括全文核心结论。",
+      "stemTranslationZh": "关于欣赏艺术，这项研究的主要发现是什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它增进情感联系。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "It enhances emotional ties.",
+            "explanation": "原文虽测量了情绪感受，但未提及欣赏艺术能增进“情感联系”，属无中生有。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它需要批判性思维能力。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "It needs critical thinking skills.",
+            "explanation": "原文未提及欣赏艺术需要批判性思维能力，属无中生有。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它带来积极的情绪/正向感受。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "negationReversal",
+            "sourceQuote": "the beauty group did not report feeling any happier than the control group",
+            "sourceHighlight": "did not report feeling any happier",
+            "optionText": "It creates positive feelings.",
+            "optionHighlight": "creates positive feelings",
+            "explanation": "原文明确美组并未报告更快乐，作者据此排除整体愉悦（positivity）这一解释，与“带来积极情绪”正好相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2026-i-reading-d-4",
+              "quote": "the beauty group did not report feeling any happier than the control group",
+              "anchor": "美组并未更快乐"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它促进抽象思维。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2026-i-reading-d-5",
+              "quote": "Admiring the beauty of art may be the ideal way to initiate the abstract cognitive processes.",
+              "anchor": "欣赏艺术之美或是启动抽象认知的理想方式"
+            },
+            {
+              "role": "support",
+              "paragraphId": "para-2026-i-reading-d-4",
+              "quote": "it was the engagement with beauty that influenced abstract thinking",
+              "anchor": "对美的投入影响了抽象思维"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "It encourages abstract thinking.",
+          "sourceRole": "correctOption",
+          "targetText": "initiate the abstract cognitive processes",
+          "targetParagraphId": "para-2026-i-reading-d-5",
+          "relationType": "paraphrase",
+          "note": "选项 encourages abstract thinking 与原文 initiate the abstract cognitive processes 同义替换，encourage ↔ initiate、abstract thinking ↔ abstract cognitive processes。"
+        }
+      ]
+    }
+  }
+}

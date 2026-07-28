@@ -77,6 +77,8 @@ import {
 } from '../../../../shared/paper-normalization/canonicalPaperGroupSurfaceAdapter.mjs'
 import {
   projectCanonicalWritingChrome,
+  projectCanonicalConsumerGroup,
+  selectConsumerGroupMode,
   selectedFamilyContractIdForGroup,
 } from '../../../../shared/paper-canonical/consumerProjection.mjs'
 // figure-render cut: separate import line (not folded into the block
@@ -154,6 +156,51 @@ import {
   shouldClearLectureSelectionForActiveGroup,
 } from './paperBrowseFocusIntent'
 import './paperBrowsePage.css'
+
+function projectAssetBlocksToCanonicalConsumption(
+  asset: PaperAssetV1,
+  consumption: WholePaperConsumption,
+): PaperAssetV1 {
+  const consumedGroupIds = new Set(
+    consumption.selections.flatMap((selection) => selection.groupIds),
+  )
+  const retainsGroup = (groupId: string): boolean =>
+    consumedGroupIds.has(groupId)
+    || asset.content.groups[groupId]?.groupType !== 'listening'
+  const blocks = asset.content.blocks
+  const firstPartIndex = blocks.findIndex((block) => block.type === 'partHeading')
+  const projectedBlocks: PaperContentBlock[] =
+    firstPartIndex < 0 ? [] : blocks.slice(0, firstPartIndex)
+  const segmentStart = firstPartIndex < 0 ? 0 : firstPartIndex
+
+  for (let start = segmentStart; start < blocks.length;) {
+    let end = start + 1
+    if (blocks[start]?.type === 'partHeading') {
+      while (end < blocks.length && blocks[end].type !== 'partHeading') end += 1
+    } else {
+      end = blocks.length
+    }
+    const segment = blocks.slice(start, end)
+    const hasConsumedGroup = segment.some(
+      (block) => block.type === 'group' && retainsGroup(block.groupId),
+    )
+    if (hasConsumedGroup) {
+      projectedBlocks.push(...segment.filter(
+        (block) =>
+          block.type !== 'group' || retainsGroup(block.groupId),
+      ))
+    }
+    start = end
+  }
+
+  return {
+    ...asset,
+    content: {
+      ...asset.content,
+      blocks: projectedBlocks,
+    },
+  }
+}
 
 type GroupModel =
   | {
@@ -630,8 +677,12 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
         if (!assetRes.ok) {
           throw new Error(`没找到这份卷面（${paperId}），可能已被移除。回到找题页重新打开吧。`)
         }
-        const loadedAsset = (await assetRes.json()) as PaperAssetV1
+        const sourceAsset = (await assetRes.json()) as PaperAssetV1
         const canonicalConsumption = await loadScreenConsumption(paperId)
+        const loadedAsset = projectAssetBlocksToCanonicalConsumption(
+          sourceAsset,
+          canonicalConsumption,
+        )
 
         const groupBlocks = loadedAsset.content.blocks.filter(
           (block): block is Extract<PaperContentBlock, { type: 'group' }> => block.type === 'group',
@@ -1893,6 +1944,29 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     const group = asset?.content.groups[groupId]
     const entry = groupModels[groupId]
     const card = questionGroupById.get(groupId)
+    const selectedFamilyContractId = canonicalConsumption
+      ? selectedFamilyContractIdForGroup({
+          consumption: canonicalConsumption,
+          groupId,
+        })
+      : null
+    const canonicalGroupIdentity =
+      canonicalConsumption
+      && selectedFamilyContractId
+      && selectConsumerGroupMode({
+        consumption: canonicalConsumption,
+        familyContractId: selectedFamilyContractId,
+        groupId,
+      }).mode === 'canonical'
+        ? projectCanonicalConsumerGroup({
+            consumption: canonicalConsumption,
+            familyContractId: selectedFamilyContractId,
+            groupId,
+          }) as {
+            semanticSignature?: string
+            occurrenceSignature?: string
+          }
+        : null
     // 写作卡的选中罩上缘另行定位（--pb-writing-cut-top，见上方量高 effect
     // 与 paperBrowsePage.css），用 modifier class 圈出来。
     const cardClassName =
@@ -1905,6 +1979,12 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
         <section
           className={cardClassName}
           data-paper-browse-anchor={groupId}
+          data-canonical-semantic-signature={
+            canonicalGroupIdentity?.semanticSignature
+          }
+          data-canonical-occurrence-signature={
+            canonicalGroupIdentity?.occurrenceSignature
+          }
           aria-label={group?.title || groupId}
         >
           {card && (

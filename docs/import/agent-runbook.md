@@ -26,9 +26,103 @@ provide one relative-path request envelope through `config.canonicalRequestPath`
 place to paste mutable byte arrays: each document names an immutable local file,
 its roles, and its declared media facts.
 
+The envelope itself has this closed outer shape:
+
+```json
+{
+  "authority": {
+    "manifestId": "<current canonicalAuthorityRef.manifestId>",
+    "manifestVersion": "<current canonicalAuthorityRef.manifestVersion>",
+    "manifestDigest": "<current canonicalAuthorityRef.manifestDigest>"
+  },
+  "evidence": {
+    "documents": [
+      {
+        "inputKey": "questions",
+        "roles": ["question_source", "official_answer_source"],
+        "declared": {
+          "mediaType": "application/vnd.eqb.canonical-fixture+json"
+        },
+        "path": "01-questions.json"
+      },
+      {
+        "inputKey": "paper_asset",
+        "roles": ["question_source"],
+        "declared": {
+          "mediaType": "application/json",
+          "originalName": "paper-asset.json"
+        },
+        "path": "04-paper_asset.json"
+      },
+      {
+        "inputKey": "official_answers",
+        "roles": ["official_answer_source"],
+        "declared": {
+          "mediaType": "application/json",
+          "originalName": "answer-key.json"
+        },
+        "path": "05-official_answers.json"
+      }
+    ]
+  }
+}
+```
+
+`application/vnd.eqb.canonical-fixture+json` is the exact media type registered
+by the current authority's `canonical-fixture-evidence` source adapter. Despite
+the retained adapter name, backend operators do not author this document or
+import test helpers. For an NCK1 PDF package, materialize it and the request
+envelope through the production producer:
+
+```bash
+node scripts/import-pipeline/build-canonical-request.mjs \
+  "<backend-package-dir>" \
+  --answers-pdf "<paper-source-dir>/answers.pdf" \
+  --instruction-evidence "<reviewed profile-writing-source-evidence.json>" \
+  --output-dir "<backend-package-dir>/canonical-evidence" \
+  --write
+```
+
+The package directory must already contain the normal package-builder outputs
+`paper-asset.json`, `answer-key.json`, and the immutable `paper.pdf`.
+`--instruction-evidence` is the accepted source transcription/correction
+record bound to that PDF; it is never inferred by the producer. The command
+calls `buildNck1CanonicalImportRequest(...)`, derives the whole-paper structured
+source from those package outputs, adds the exact source/answer PDFs, compiles
+the result fail-closed, and only then writes the indexed documents and
+`canonical-import-request.json`. Rerun the same command without `--write` to
+prove every output is byte-reproducible.
+
+Copy the current `canonicalAuthorityRef`; never copy an older request's
+authority block. Every `path` is non-empty, relative to the envelope, contains
+no `..`, and resolves to an immutable file. Do not hand-author a Canonical
+Paper, Publication, structured-source document, or Source Capture as an input.
+The exact admitted `paper-asset.json`, `answer-key.json`, and original PDF/DOCX
+source must all occur in Source Capture under their correct roles; the public
+publisher verifies the package-file digests again.
+
+Before the state-changing publish, load and compile the envelope fail-closed:
+
+```bash
+CANONICAL_REQUEST="<absolute path to canonical-import-request.json>" \
+node --input-type=module -e '
+  import { loadCanonicalImportRequest } from "./server/paper-canonical/importRequest.mjs";
+  import { compileCanonicalPaper } from "./shared/paper-canonical/compiler.mjs";
+  const result = compileCanonicalPaper(loadCanonicalImportRequest(process.env.CANONICAL_REQUEST));
+  console.log(result.disposition, result.diagnostics);
+  if (result.disposition !== "ready") process.exitCode = 1;
+'
+```
+
+This check proves the evidence/authority closure only.
+`publishPaperImportPackage(...)` remains the required package-binding and
+atomic-write seam; never treat the preflight as permission to bypass it.
+
 The exact executable boundaries are:
 
 1. **Package and immutable source capture** —
+   `buildNck1CanonicalImportRequest(...)` materializes the registered
+   whole-paper structured-source evidence from the normal NCK1 package outputs;
    `readImportPackageFromDirectory(...)` and
    `validatePaperImportPackage(...)` admit the backend package;
    `publishPaperImportPackage(...)` invokes `captureDocxSourceMedia(...)` for a
@@ -64,15 +158,18 @@ Ticket 20 keeps one executable local proof of those boundaries:
 node scripts/verify-paper-canonical-import-pilot.mjs
 ```
 
-It uses the checked-in `paper-2024-jslk-english` backend package and a temporary
-SQLite/assets root. It proves zero-write dry run, publish, exact reload,
-restart/retry, rollback, real PaperSurface plain/lecture, Student/Teacher Print
-HTML, and direct Chromium PDF. It never writes the production database, R2, or
-a historical version. Add `--actual-artifacts` only after the required
-independent review PASS; that mode writes HEAD-bound QA evidence under
-`.scratch/paper-canonical-ticket-20-qa/<HEAD>/`. The output set intentionally
-contains no generated DOCX, OOXML, or DOCX-converted PDF. A preserved raw
-source `.docx` inside the immutable input version is not a generated output.
+It uses the checked-in `paper-2026-i-canonical-pilot` backend package, whose
+canonical evidence is bound to the real local exam PDF and answer PDF, plus a
+temporary SQLite/assets root. It proves zero-write dry run, publish, exact
+reload, restart/retry, rollback, real PaperSurface plain/lecture,
+Student/Teacher Print HTML, and direct Chromium PDF. It never writes the
+production database, R2, or a historical version. Only after the required
+independent review PASS, add `--actual-artifacts --qa-server`; that mode writes
+HEAD-bound QA evidence under
+`.scratch/paper-canonical-ticket-20-qa/<HEAD>/`, keeps the exact temporary
+publication and Screen URLs alive, and prints the URLs for the provisioning
+task. The output set intentionally contains no generated DOCX, OOXML, or
+DOCX-converted PDF.
 
 ## 0. Format whitelist check (before anything else)
 
