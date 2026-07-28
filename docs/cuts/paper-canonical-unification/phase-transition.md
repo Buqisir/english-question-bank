@@ -1,16 +1,16 @@
 # Paper canonical unification phase transition
 
 Status: active
-Previous phase: owner-approval
-Current phase: implementation
-Next on PASS: implementation
+Previous phase: to-spec
+Current phase: to-tickets
+Next on PASS: to-tickets
 Terminal: no
 
 Wayfinder map: `docs/cuts/paper-canonical-unification/wayfinder/map.md`
 Current map binding: verified
-Current map binding commit: `5f81f2cd212b8b8f8883ae55dddcfddf8dbb06ca`
+Current map binding commit: `49f8626dbd0648941a69725e73ebd378cb7f6f76`
 Current map artifact: `docs/cuts/paper-canonical-unification/wayfinder/map.md`
-Current map artifact SHA-256: `f9c2a7f4f1fa3cf104727ccf5cef994d2f68b7533e92bb17ff5042879fbc20f2`
+Current map artifact SHA-256: `b293b33a0c8eb3cfdad39fb32fbb96f31ed6327222d728de77cde8aa904ad2c4`
 Wayfinder status: done
 Wayfinder provenance: verified
 Wayfinder entry skill: `/Users/huangxuewei/.claude/skills/wayfinder/SKILL.md`
@@ -21,49 +21,44 @@ Wayfinder artifact SHA-256: `7522e857854e41ed7c6ad2caa735bb80cd234d4169f1ab9983a
 
 To-spec provenance: verified
 To-spec entry skill: `/Users/huangxuewei/.claude/skills/to-spec/SKILL.md`
-To-spec source HEAD: `ec7e9c23df6d6d8c835f1b2d08a9552d98c8f330`
-To-spec result commit: `36a233fa47e96905bdad4f8f0f5f31c2aadeda72`
+To-spec source HEAD: `9a42d3f483c70c4e7f6d7bb3813c675fb1a7da79`
+To-spec result commit: `0a9cf68376c7985b48dd936dfe06e1cbe78b7d62`
 To-spec artifact: `docs/cuts/paper-canonical-unification/spec.md`
-To-spec artifact SHA-256: `2e77d4f2ba40e3d4fb33c232bd5734e34b6c6a94a26c626cd1f6af178684490b`
+To-spec artifact SHA-256: `c6cbbe778d94e1205612fa5ac535e2198020317b09064190fec1d0b6660d868b`
 To-spec outcome: accepted
 Accepted spec: `docs/cuts/paper-canonical-unification/spec.md`
-Accepted spec SHA-256: `2e77d4f2ba40e3d4fb33c232bd5734e34b6c6a94a26c626cd1f6af178684490b`
-To-tickets provenance: verified
+Accepted spec SHA-256: `c6cbbe778d94e1205612fa5ac535e2198020317b09064190fec1d0b6660d868b`
+To-tickets provenance: pending
 To-tickets entry skill: `/Users/huangxuewei/.claude/skills/to-tickets/SKILL.md`
-To-tickets source HEAD: `fb5b43cc215b17d6f660df6cf8e589a74218bdfc`
-To-tickets result commit: `16462519a9ef38930bee8748083471d7f0b9c5ee`
-To-tickets artifact: `docs/cuts/paper-canonical-unification/ticket-set-manifest.md`
-To-tickets artifact SHA-256: `462290bb40ac17c3adf8db4f2b09d29d30d6fb78958b05b63174f6a3c9a5f476`
-To-tickets outcome: complete
-Ticket-set binding: verified
-Ticket-set manifest: `docs/cuts/paper-canonical-unification/ticket-set-manifest.md`
-Ticket-set manifest SHA-256: `462290bb40ac17c3adf8db4f2b09d29d30d6fb78958b05b63174f6a3c9a5f476`
-Ticket-set accepted-spec SHA-256: `2e77d4f2ba40e3d4fb33c232bd5734e34b6c6a94a26c626cd1f6af178684490b`
-Owner ticket-granularity approval: verified
-Owner approval actor: owner
-Owner approval action: approve-ticket-granularity
-Owner approval result commit: `5f81f2cd212b8b8f8883ae55dddcfddf8dbb06ca`
-Owner approval record: `docs/cuts/paper-canonical-unification/owner-approval.md`
-Owner approval ticket-set manifest SHA-256: `462290bb40ac17c3adf8db4f2b09d29d30d6fb78958b05b63174f6a3c9a5f476`
-Implementation dispatch: allowed
+Ticket-set binding: pending
+Ticket-set manifest: pending
+Ticket-set manifest SHA-256: pending
+Ticket-set accepted-spec SHA-256: pending
+Owner ticket-granularity approval: pending
+Implementation dispatch: forbidden
 
-## Preserved result
+## Preserved results
 
-Ticket 01 remains done and immutable at
-`2c7435026923db6b359e3770f22fdd11ed7d3c01`. Its accepted product code,
-commits, verification evidence, and review lineage remain valid.
+Tickets 01–15 remain complete exactly as recorded through amendment source
+HEAD `9a42d3f483c70c4e7f6d7bb3813c675fb1a7da79`. Their accepted product code,
+commits, independent-review lineages, owner-QA verdicts, and artifact evidence
+remain valid and are not rewritten or re-accepted. Ticket 15's DOCX, OOXML,
+and DOCX-converted-PDF proof is retained only as historical completion
+evidence; it is not part of the amended future product contract.
+Ticket 01's preserved accepted result commit remains
+`2c7435026923db6b359e3770f22fdd11ed7d3c01`.
 
 ## Current route
 
-The rejected manifest with SHA-256
-`6732eb4da6e35982f0b0a980f2a623f68d49a79811485fa500918c1944f3ee25`
-and its historical Tickets 02–29 are superseded and non-dispatchable. The
-corrected digest-bound Tickets 02–71 are the sole current ticket set. Ticket 02
-is the unique initial implementation frontier. The owner approved the exact
-current manifest digest in the committed approval record, and all four
-implementation gates are now bound for verification.
+The owner scope amendment supersedes existing Tickets 16–71, the manifest that
+binds them, and its owner approval as unexecuted route authority. Those files
+remain historical evidence and are not rewritten. No implementation ticket is
+currently dispatchable, and Ticket 16 must not start.
 
-Ticket 02 must then commit the route-authority repair and pass independent
-review against that reviewed HEAD before Ticket 03 or any later implementation
-ticket can become eligible. This approval-recording task does not dispatch
-Ticket 02 or start the coordinator.
+The only current frontier is a fresh `$to-tickets` task bound to the amended
+spec. Before it publishes any replacement ticket or manifest, it must show the
+owner every proposed Title, Blocked by edge, What it delivers statement,
+old-ticket mapping, and proposed total ticket count, then wait for explicit
+approval. Publishing the approved set still leaves implementation forbidden
+until a later committed owner approval binds the exact replacement manifest
+digest.
