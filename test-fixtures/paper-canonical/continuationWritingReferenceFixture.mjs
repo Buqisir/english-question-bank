@@ -11,8 +11,10 @@ const references = Object.freeze({
     importMeta: 'sha256:dda79f448a049d9ce6293049b4e1dec51fba35cb683e4e7860f5390ab3d3e900',
     capture: 'sha256:93869d8ce85ecf365ee0226345ec6acfbc21e58074214f773e1203269990c6cd',
     transcription: 'sha256:5e76ee0f0b157cac6d619199a08fe5e7f819a16964eb56231701e8de7053c8a3',
+    instructionEvidence: 'sha256:d6f36d9fa08600cb955c38d90e4d629a4b5d0b91ef028a65f3f50db249ecd71c',
     captureFile: 'continuation-writing-paper-2026-i.json',
     transcriptionFile: 'continuation-writing-transcription-paper-2026-i.json',
+    instructionEvidenceFile: 'continuation-writing-instruction-paper-2026-i.json',
     sourceFile: new URL('../../scripts/import-pipeline/papers/paper-2026-i/source/paper.pdf', import.meta.url),
     mediaType: 'application/pdf',
   }),
@@ -100,8 +102,26 @@ export function makeContinuationWritingReferenceFixture(paperId) {
   const sourceBytes = readHashBoundBytes(reference.sourceFile, reference.source, `${paperId} source`)
   const captureBytes = readHashBoundBytes(new URL(`evidence/${reference.captureFile}`, import.meta.url), reference.capture, `${paperId} reviewed capture`)
   const transcriptionBytes = readHashBoundBytes(new URL(`evidence/${reference.transcriptionFile}`, import.meta.url), reference.transcription, `${paperId} reviewed transcription`)
+  const instructionEvidenceBytes = reference.instructionEvidenceFile
+    ? readHashBoundBytes(
+        new URL(`evidence/${reference.instructionEvidenceFile}`, import.meta.url),
+        reference.instructionEvidence,
+        `${paperId} reviewed continuation instruction evidence`,
+      )
+    : null
   const capture = JSON.parse(new TextDecoder().decode(captureBytes))
   const transcription = JSON.parse(new TextDecoder().decode(transcriptionBytes))
+  const instructionEvidence = instructionEvidenceBytes
+    ? JSON.parse(new TextDecoder().decode(instructionEvidenceBytes))
+    : null
+  if (
+    instructionEvidence
+    && (
+      instructionEvidence.paperId !== paperId
+      || instructionEvidence.sourceDocumentDigest !== reference.source
+      || instructionEvidence.review?.status !== 'accepted'
+    )
+  ) throw new Error(`Continuation instruction evidence does not close ${paperId}`)
   const fixture = makeReadyCanonicalFixture()
   fixture.source.paperId = paperId
   adaptFoundationToProfile(fixture.source, reference.profileId)
@@ -121,6 +141,8 @@ export function makeContinuationWritingReferenceFixture(paperId) {
     captureBytes,
     transcription,
     transcriptionBytes,
+    instructionEvidence,
+    instructionEvidenceBytes,
     request: {
       authority: fixture.request.authority,
       evidence: {
@@ -143,6 +165,17 @@ export function makeContinuationWritingReferenceFixture(paperId) {
             bytes: transcriptionBytes,
             declared: { mediaType: 'application/vnd.eqb.continuation-writing-source-transcription+json' },
           },
+          ...(instructionEvidenceBytes
+            ? [{
+                inputKey: 'continuation_writing_instruction_evidence',
+                roles: ['structured_source', 'source_provenance'],
+                bytes: instructionEvidenceBytes,
+                declared: {
+                  mediaType: 'application/vnd.eqb.profile-writing-source-evidence+json',
+                  originalName: reference.instructionEvidenceFile,
+                },
+              }]
+            : []),
           {
             inputKey: 'source_provenance',
             roles: ['source_provenance'],

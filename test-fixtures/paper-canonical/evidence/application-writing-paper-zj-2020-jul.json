@@ -1,0 +1,141 @@
+{
+  "schemaVersion": "application-writing-source-capture-v1",
+  "paperId": "paper-zj-2020-jul",
+  "sourceDocumentDigest": "sha256:1a447b5dc7bdba349347d61080304eab55815e41db055b5c2ff9b43545b79cdc",
+  "review": {
+    "method": "manual_source_review",
+    "status": "accepted"
+  },
+  "group": {
+    "groupId": "group-zj-2020-jul-writing-application",
+    "slotId": "writing.application",
+    "sourceLocation": {
+      "kind": "source_document_section",
+      "locator": "第四部分 写作/第一节 应用文写作",
+      "transcriptionDigest": "sha256:d43a51d3620536c01a83fce251791e1c0ca05c8df7889635eecbd396e6f451c7"
+    },
+    "content": {
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "nodeId": "para-zj-2020-jul-writing-app-prompt",
+          "inlines": [
+            {
+              "kind": "text",
+              "nodeId": "text:para-zj-2020-jul-writing-app-prompt",
+              "text": "假定你是李华，你校来自爱尔兰的外教Peter因病回国休假。请给他写一封电子邮件，内容包括：(1)询问近况；(2)分享班级最新消息；(3)表达祝愿。"
+            }
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "nodeId": "para-zj-2020-jul-writing-app-notice",
+          "inlines": [
+            {
+              "kind": "text",
+              "nodeId": "text:para-zj-2020-jul-writing-app-notice",
+              "text": "注意：(1)词数80左右；(2)可适当增加细节，以使行文连贯。"
+            }
+          ]
+        }
+      ]
+    },
+    "variant": {
+      "family": "application-writing",
+      "writingTaskId": "wt-zj-2020-jul-application",
+      "promptBlockRefs": [
+        "para-zj-2020-jul-writing-app-prompt",
+        "para-zj-2020-jul-writing-app-notice"
+      ],
+      "situation": {
+        "writerRole": {
+          "blockId": "para-zj-2020-jul-writing-app-prompt",
+          "inlineNodeIds": [
+            "text:para-zj-2020-jul-writing-app-prompt"
+          ]
+        },
+        "audienceOrDestination": {
+          "blockId": "para-zj-2020-jul-writing-app-prompt",
+          "inlineNodeIds": [
+            "text:para-zj-2020-jul-writing-app-prompt"
+          ]
+        },
+        "deliverable": {
+          "blockId": "para-zj-2020-jul-writing-app-prompt",
+          "inlineNodeIds": [
+            "text:para-zj-2020-jul-writing-app-prompt"
+          ]
+        },
+        "communicativePurpose": {
+          "blockId": "para-zj-2020-jul-writing-app-prompt",
+          "inlineNodeIds": [
+            "text:para-zj-2020-jul-writing-app-prompt"
+          ]
+        }
+      },
+      "contentRequirements": [
+        {
+          "requirementId": "requirement:group-zj-2020-jul-writing-application:1",
+          "contentRef": {
+            "blockId": "para-zj-2020-jul-writing-app-prompt",
+            "inlineNodeIds": [
+              "text:para-zj-2020-jul-writing-app-prompt"
+            ]
+          }
+        }
+      ],
+      "wordCountRuling": {
+        "kind": "approximate_target",
+        "target": 80,
+        "countScope": "student_authored_only",
+        "sourceRef": {
+          "blockId": "para-zj-2020-jul-writing-app-notice",
+          "inlineNodeIds": [
+            "text:para-zj-2020-jul-writing-app-notice"
+          ]
+        },
+        "authorityObservationRef": "observation:application:group-zj-2020-jul-writing-application:word-count"
+      },
+      "givenSkeleton": {
+        "presence": "none",
+        "answerRegionAbsenceAssertionRef": "observation:application:group-zj-2020-jul-writing-application:answer-region-empty"
+      },
+      "choiceOwnership": {
+        "ownership": "none"
+      },
+      "response": {
+        "kind": "group_level_written_response",
+        "answerRegionRef": "writing.application-box",
+        "authorityObservationRef": "observation:application:group-zj-2020-jul-writing-application:response"
+      }
+    },
+    "observations": [
+      {
+        "observationId": "observation:application:group-zj-2020-jul-writing-application:word-count",
+        "kind": "application_word_count_ruling",
+        "value": {
+          "groupId": "group-zj-2020-jul-writing-application",
+          "target": 80,
+          "countScope": "student_authored_only"
+        }
+      },
+      {
+        "observationId": "observation:application:group-zj-2020-jul-writing-application:answer-region-empty",
+        "kind": "application_answer_region_absence",
+        "value": {
+          "groupId": "group-zj-2020-jul-writing-application",
+          "answerRegionRef": "writing.application-box"
+        }
+      },
+      {
+        "observationId": "observation:application:group-zj-2020-jul-writing-application:response",
+        "kind": "application_response_binding",
+        "value": {
+          "groupId": "group-zj-2020-jul-writing-application",
+          "writingTaskId": "wt-zj-2020-jul-application",
+          "answerRegionRef": "writing.application-box"
+        }
+      }
+    ]
+  }
+}

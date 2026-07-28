@@ -64,6 +64,13 @@ const nck1WritingChrome = Object.freeze({
   part: '第四部分 写作（共两节，满分40分）',
   application: '第一节（满分15分）',
   continuation: '第二节（满分25分）',
+  continuationInstruction:
+    '阅读下面材料，根据其内容和所给段落开头语续写两段话，使之构成一篇完整的短文。',
+})
+const zhejiangWritingChrome = Object.freeze({
+  part: '第四部分 写作（共两节，满分40分）',
+  application: '第一节 应用文写作（满分15分）',
+  continuation: '第二节 读后续写（满分25分）',
 })
 
 function assertNck1WritingAuthority() {
@@ -109,6 +116,14 @@ function assertNck1WritingAuthority() {
     ].text,
     nck1WritingChrome.continuation,
   )
+  assert.deepEqual(
+    writingPart.sections[1].slots[0].instructionRefs,
+    ['writing.continuation.prompt'],
+  )
+  assert.equal(
+    profile.instructions['writing.continuation.prompt'].text,
+    nck1WritingChrome.continuationInstruction,
+  )
 
   const mutatedProfile = structuredClone(profile)
   const mutatedWritingPart = mutatedProfile.parts.find(
@@ -151,18 +166,24 @@ function assertZhejiangWritingChromeAuthority() {
   const authority = resolveCanonicalAuthority(canonicalAuthorityRef)
   assert.equal(authority.ok, true)
   const profile = authority.closure.profiles.get('zhejiang-legacy')
-  assert.equal(profile.version, '3')
-  assert.equal(
-    profile.instructions['part.writing'].renderPolicy,
-    'suppress',
-  )
-  assert.equal(
-    profile.instructions['section.writing'].renderPolicy,
-    'suppress',
+  assert.equal(profile.version, '4')
+  const writingPart = profile.parts.find((part) => part.partId === 'writing')
+  assert.deepEqual(
+    [
+      profile.instructions[writingPart.titleInstructionRef].text,
+      ...writingPart.sections.map(
+        (section) => profile.instructions[section.titleInstructionRef].text,
+      ),
+    ],
+    [
+      zhejiangWritingChrome.part,
+      zhejiangWritingChrome.application,
+      zhejiangWritingChrome.continuation,
+    ],
   )
 
   const mutatedProfile = structuredClone(profile)
-  mutatedProfile.instructions['part.writing'].renderPolicy = 'guess'
+  mutatedProfile.instructions['part.writing'].text = 'Writing'
   const mutatedManifest = structuredClone(authority.closure.manifest)
   mutatedManifest.artifacts.find(
     (descriptor) => descriptor.id === 'profile-zhejiang-legacy',
@@ -178,7 +199,7 @@ function assertZhejiangWritingChromeAuthority() {
   assert.equal(validation.ok, false)
   assert.equal(
     validation.issues.some(
-      (issue) => issue.code === 'PROFILE_INSTRUCTION_INVALID',
+      (issue) => issue.code === 'PROFILE_ZHEJIANG_WRITING_CHROME_INVALID',
     ),
     true,
   )
@@ -195,9 +216,25 @@ function readyConsumption(paperId) {
       compilation.artifacts.canonicalPaper.paperPlan.profileRef,
       {
         profileId: 'nck1',
-        profileVersion: '3',
+        profileVersion: profile.version,
         profileDigest: digestJson(profile),
       },
+    )
+    assert.equal(
+      fixture.instructionEvidence.instruction.text,
+      profile.instructions['writing.continuation.prompt'].text,
+    )
+    assert.equal(
+      fixture.instructionEvidence.transformationRecord.before.includes(
+        '续写两段，使之',
+      ),
+      true,
+    )
+    assert.equal(
+      fixture.instructionEvidence.transformationRecord.after.includes(
+        '续写两段话，使之',
+      ),
+      true,
     )
   } else if (paperId === 'paper-zj-2020-jul') {
     const authority = resolveCanonicalAuthority(canonicalAuthorityRef)
@@ -206,7 +243,7 @@ function readyConsumption(paperId) {
       compilation.artifacts.canonicalPaper.paperPlan.profileRef,
       {
         profileId: 'zhejiang-legacy',
-        profileVersion: '3',
+        profileVersion: profile.version,
         profileDigest: digestJson(profile),
       },
     )
@@ -343,8 +380,22 @@ function makeIntegrityClosedNck1WritingFixture() {
 }
 
 function makeIntegrityClosedZhejiangWritingFixture() {
+  const application =
+    makeApplicationWritingReferenceFixture('paper-zj-2020-jul')
   const continuation =
     makeContinuationWritingReferenceFixture('paper-zj-2020-jul')
+  const continuationSource = structuredClone(continuation.source)
+  continuationSource.groups = continuationSource.groups.filter(
+    (group) => group.slotId !== 'writing.application',
+  )
+  continuationSource.observations = continuationSource.observations.filter(
+    (observation) => (
+      observation.observationId !== 'observation:writing.application'
+      && !observation.observationId.startsWith(
+        'observation:group:writing.application:',
+      )
+    ),
+  )
   const groupIdsBySlot = {
     'reading.a': 'group-zj-2020-jul-reading-a',
     'reading.b': 'group-zj-2020-jul-reading-b',
@@ -352,10 +403,9 @@ function makeIntegrityClosedZhejiangWritingFixture() {
     'reading.seven-choices': 'group-zj-2020-jul-seven-choices',
     'language.cloze': 'group-zj-2020-jul-cloze',
     'language.grammar-fill': 'group-zj-2020-jul-grammar-fill',
-    'writing.application': 'group-zj-2020-jul-writing-application',
   }
-  let sourceJson = JSON.stringify(continuation.source)
-  for (const group of continuation.source.groups) {
+  let sourceJson = JSON.stringify(continuationSource)
+  for (const group of continuationSource.groups) {
     const realGroupId = groupIdsBySlot[group.slotId]
     assert.ok(realGroupId, `missing real Zhejiang Group for ${group.slotId}`)
     sourceJson = sourceJson.replaceAll(group.groupId, realGroupId)
@@ -371,12 +421,18 @@ function makeIntegrityClosedZhejiangWritingFixture() {
     }
   }
   const mappingBytes = new TextEncoder().encode(JSON.stringify(source))
-  const documents = continuation.request.evidence.documents.map(
+  const continuationDocuments = continuation.request.evidence.documents.map(
     (document) => document.inputKey === 'canonical_mapping'
       ? { ...document, bytes: mappingBytes }
       : document,
   )
-  const sourceAsset = documents.find(
+  const applicationDocuments = application.request.evidence.documents.filter(
+    (document) => [
+      'application_writing_capture',
+      'application_writing_transcription',
+    ].includes(document.inputKey),
+  )
+  const sourceAsset = continuationDocuments.find(
     (document) => document.inputKey === 'original_question_source',
   )?.bytes
   assert.ok(sourceAsset)
@@ -385,7 +441,12 @@ function makeIntegrityClosedZhejiangWritingFixture() {
     sourceAsset,
     request: {
       authority: continuation.request.authority,
-      evidence: { documents },
+      evidence: {
+        documents: [
+          ...continuationDocuments,
+          ...applicationDocuments,
+        ],
+      },
     },
   }
 }
@@ -574,6 +635,12 @@ function compactText(value) {
   return String(value).replaceAll(/\s/g, '')
 }
 
+function comparableRenderedText(value) {
+  return compactText(value)
+    .replaceAll(/[‘’]/g, "'")
+    .replaceAll(/[‐‑‒–—]/g, '-')
+}
+
 function decodeXmlText(value) {
   return String(value)
     .replaceAll('&lt;', '<')
@@ -581,6 +648,19 @@ function decodeXmlText(value) {
     .replaceAll('&quot;', '"')
     .replaceAll('&apos;', "'")
     .replaceAll('&amp;', '&')
+}
+
+function visibleRenderedText(value) {
+  const text = String(value)
+  if (!text.includes('<')) return text
+  return decodeXmlText(
+    text
+      .replaceAll(/<[^>]*>/g, '')
+      .replaceAll('&nbsp;', ' ')
+      .replaceAll('&quot;', '"')
+      .replaceAll('&#39;', "'")
+      .replaceAll('&amp;', '&'),
+  )
 }
 
 function extractDocxVisibleParagraphText(documentXml) {
@@ -613,6 +693,33 @@ function assertNck1WritingHeadingCounts(renderedText, label) {
   )
 }
 
+function assertNck1WholeWritingOrder(
+  renderedText,
+  application,
+  continuation,
+  label,
+) {
+  const compact = comparableRenderedText(visibleRenderedText(renderedText))
+  const orderedVisibleText = [
+    nck1WritingChrome.part,
+    nck1WritingChrome.application,
+    ...application.promptBlocks.map((block) => block.text),
+    nck1WritingChrome.continuation,
+    nck1WritingChrome.continuationInstruction,
+    ...continuation.materialBlocks.map((block) => block.text),
+  ]
+  let priorIndex = -1
+  for (const text of orderedVisibleText) {
+    const anchor = comparableRenderedText(text).slice(0, 48)
+    const currentIndex = compact.indexOf(anchor)
+    assert.ok(
+      currentIndex > priorIndex,
+      `${label} preserves canonical NCK1 writing order at ${anchor}`,
+    )
+    priorIndex = currentIndex
+  }
+}
+
 function assertNoRendererLocalWritingGroupHeading(renderedText, label) {
   const compact = compactText(renderedText)
   for (const heading of ['一、写作', '二、写作']) {
@@ -629,31 +736,15 @@ function countCompactText(renderedText, expectedText) {
     .split(compactText(expectedText)).length - 1
 }
 
-function assertZhejiangWholeWritingVisibleText(
-  renderedText,
-  application,
-  continuation,
-  label,
-) {
-  const compact = compactText(renderedText)
-  for (const heading of ['Writing', 'Writing tasks']) {
-    assert.equal(
-      compact.split(compactText(heading)).length - 1,
-      0,
-      `${label} suppresses source-unproven ${heading}`,
-    )
-  }
-  for (const block of [
-    ...application.promptBlocks,
-    ...continuation.materialBlocks,
-  ]) {
-    assert.equal(
-      countCompactText(renderedText, block.text),
-      1,
-      `${label} contains ${block.nodeId} exactly once`,
-    )
-  }
+function assertZhejiangForbiddenTextAbsent(renderedText, label) {
+  const visibleText = visibleRenderedText(renderedText)
+  const compact = comparableRenderedText(visibleText)
   for (const poisonedText of [
+    'Write a source-backed response of about 80 words.',
+    'Writing tasks',
+    'Writing',
+    'Analysis',
+    'supplement',
     'POISONED LEGACY',
     'FORGED ANALYSIS',
     'FORGED SUPPLEMENT',
@@ -662,11 +753,58 @@ function assertZhejiangWholeWritingVisibleText(
       compact.includes(compactText(poisonedText)),
       false,
       `${label} rejects ${poisonedText} as writing authority: ${
-        renderedText.split('\n')
+        visibleText.split('\n')
           .filter((line) => line.includes(poisonedText))
           .join(' | ')
       }`,
     )
+  }
+}
+
+function assertZhejiangWholeWritingVisibleText(
+  renderedText,
+  application,
+  continuation,
+  label,
+) {
+  const visibleText = visibleRenderedText(renderedText)
+  const compact = compactText(visibleText)
+  for (const heading of Object.values(zhejiangWritingChrome)) {
+    assert.equal(
+      compact.split(compactText(heading)).length - 1,
+      1,
+      `${label} contains ${heading} exactly once`,
+    )
+  }
+  for (const block of [
+    ...application.promptBlocks,
+    ...continuation.materialBlocks,
+  ]) {
+    const blockAnchor = comparableRenderedText(block.text).slice(0, 24)
+    assert.equal(
+      compact.split(blockAnchor).length - 1,
+      1,
+      `${label} contains ${block.nodeId} exactly once`,
+    )
+  }
+  assertZhejiangForbiddenTextAbsent(visibleText, label)
+  const orderedVisibleText = [
+    zhejiangWritingChrome.part,
+    zhejiangWritingChrome.application,
+    ...application.promptBlocks.map((block) => block.text),
+    zhejiangWritingChrome.continuation,
+    ...continuation.materialBlocks.map((block) => block.text),
+  ]
+  let priorIndex = -1
+  for (const text of orderedVisibleText) {
+    const currentIndex = compact.indexOf(
+      comparableRenderedText(text).slice(0, 24),
+    )
+    assert.ok(
+      currentIndex > priorIndex,
+      `${label} preserves canonical Zhejiang writing order at ${text}`,
+    )
+    priorIndex = currentIndex
   }
 }
 
@@ -712,11 +850,20 @@ function assertZhejiangWholeWritingHtmlIdentity(
       )
     }
   }
-  assert.equal(
-    (html.match(/data-canonical-instruction-id="/g) || []).length,
-    0,
-    `${label} contains no suppressed canonical chrome`,
-  )
+  for (const instructionId of [
+    'part.writing',
+    'section.writing.application',
+    'section.writing.continuation',
+  ]) {
+    assert.equal(
+      (html.match(new RegExp(
+        `data-canonical-instruction-id="${instructionId}"`,
+        'g',
+      )) || []).length,
+      1,
+      `${label} contains canonical ${instructionId} exactly once`,
+    )
+  }
 }
 
 function assertZhejiangWholeWritingDocxIdentity(
@@ -745,12 +892,16 @@ function assertZhejiangWholeWritingDocxIdentity(
       )
     }
   }
-  for (const instructionId of ['part.writing', 'section.writing']) {
+  for (const instructionId of [
+    'part.writing',
+    'section.writing.application',
+    'section.writing.continuation',
+  ]) {
     const name = bookmarkName('canonical_instruction', instructionId)
     assert.equal(
       documentXml.split(name).length - 1,
-      0,
-      `${label} omits suppressed chrome bookmark ${name}`,
+      1,
+      `${label} contains canonical chrome bookmark ${name} once`,
     )
   }
 }
@@ -1208,6 +1359,12 @@ for (const paperId of ['paper-2026-i', 'paper-zj-2020-jul']) {
       canonical.paperChrome.section.text,
       nck1WritingChrome.continuation,
     )
+    assert.deepEqual(
+      canonical.paperChrome.instructions.map(
+        (instruction) => instruction.text,
+      ),
+      [nck1WritingChrome.continuationInstruction],
+    )
   }
   const surface =
     buildCanonicalContinuationWritingConsumptionSurfaceData({
@@ -1227,16 +1384,28 @@ for (const paperId of ['paper-2026-i', 'paper-zj-2020-jul']) {
     1,
   )
   if (paperId === 'paper-zj-2020-jul') {
-    assert.equal(canonical.paperChrome.part.renderPolicy, 'suppress')
-    assert.equal(canonical.paperChrome.section.renderPolicy, 'suppress')
-    assert.equal(
-      surface.pageModel.blocks.some(
-        (block) =>
-          block.kind === 'partHeading'
-          || block.kind === 'sectionHeading',
-      ),
-      false,
-      'source-unproven Zhejiang English writing chrome is suppressed at the canonical Screen seam',
+    assert.deepEqual(
+      [
+        canonical.paperChrome.part.text,
+        canonical.paperChrome.section.text,
+      ],
+      [
+        zhejiangWritingChrome.part,
+        zhejiangWritingChrome.continuation,
+      ],
+    )
+    assert.deepEqual(
+      surface.pageModel.blocks
+        .filter(
+          (block) =>
+            block.kind === 'partHeading'
+            || block.kind === 'sectionHeading',
+        )
+        .map((block) => block.text),
+      [
+        zhejiangWritingChrome.part,
+        zhejiangWritingChrome.continuation,
+      ],
     )
   }
   cases.push({
@@ -1255,21 +1424,26 @@ const zhejiangWholeWritingGroupIds =
   zhejiangWholeWritingConsumption.selections.flatMap(
     (selection) => selection.groupIds,
   )
-for (const groupId of zhejiangWholeWritingGroupIds) {
-  assert.deepEqual(
-    projectCanonicalWritingChrome({
-      consumption: zhejiangWholeWritingConsumption,
-      groupId,
-      renderedGroupIds: zhejiangWholeWritingGroupIds,
-    }),
-    {
-      part: null,
-      section: null,
-      instructions: [],
-    },
-    `complete Zhejiang v3 whole-writing chrome is suppressed for ${groupId}`,
-  )
-}
+const zhejiangApplicationChrome = projectCanonicalWritingChrome({
+  consumption: zhejiangWholeWritingConsumption,
+  groupId: zhejiangWholeWritingGroupIds[0],
+  renderedGroupIds: zhejiangWholeWritingGroupIds,
+})
+assert.equal(zhejiangApplicationChrome.part?.text, zhejiangWritingChrome.part)
+assert.equal(
+  zhejiangApplicationChrome.section?.text,
+  zhejiangWritingChrome.application,
+)
+const zhejiangContinuationChrome = projectCanonicalWritingChrome({
+  consumption: zhejiangWholeWritingConsumption,
+  groupId: zhejiangWholeWritingGroupIds[1],
+  renderedGroupIds: zhejiangWholeWritingGroupIds,
+})
+assert.equal(zhejiangContinuationChrome.part, null)
+assert.equal(
+  zhejiangContinuationChrome.section?.text,
+  zhejiangWritingChrome.continuation,
+)
 assert.throws(
   () => projectCanonicalWritingChrome({
     consumption: zhejiangWholeWritingConsumption,
@@ -1278,29 +1452,6 @@ assert.throws(
   }),
   /Rendered canonical writing Group order is invalid/,
 )
-{
-  const renderedChromeConsumption =
-    structuredClone(zhejiangWholeWritingConsumption)
-  for (const selection of renderedChromeConsumption.selections) {
-    const occurrence = selection.projectedOccurrences[0]
-    occurrence.paperChrome.part.renderPolicy = 'render'
-    occurrence.paperChrome.section.renderPolicy = 'render'
-  }
-  const firstChrome = projectCanonicalWritingChrome({
-    consumption: renderedChromeConsumption,
-    groupId: zhejiangWholeWritingGroupIds[0],
-    renderedGroupIds: zhejiangWholeWritingGroupIds,
-  })
-  assert.equal(firstChrome.part?.instructionId, 'part.writing')
-  assert.equal(firstChrome.section?.instructionId, 'section.writing')
-  const secondChrome = projectCanonicalWritingChrome({
-    consumption: renderedChromeConsumption,
-    groupId: zhejiangWholeWritingGroupIds[1],
-    renderedGroupIds: zhejiangWholeWritingGroupIds,
-  })
-  assert.equal(secondChrome.part, null)
-  assert.equal(secondChrome.section, null)
-}
 {
   const inconsistentConsumption =
     structuredClone(zhejiangWholeWritingConsumption)
@@ -1313,20 +1464,6 @@ assert.throws(
       renderedGroupIds: zhejiangWholeWritingGroupIds,
     }),
     /Canonical writing part writing is inconsistent/,
-  )
-}
-{
-  const inconsistentConsumption =
-    structuredClone(zhejiangWholeWritingConsumption)
-  inconsistentConsumption.selections[1].projectedOccurrences[0]
-    .paperChrome.section.text = 'POISONED INCONSISTENT SECTION'
-  assert.throws(
-    () => projectCanonicalWritingChrome({
-      consumption: inconsistentConsumption,
-      groupId: zhejiangWholeWritingGroupIds[0],
-      renderedGroupIds: zhejiangWholeWritingGroupIds,
-    }),
-    /Canonical writing section writing\.tasks is inconsistent/,
   )
 }
 
@@ -1350,16 +1487,22 @@ const zhejiangWritingGroupIds = [
   zhejiangApplication.groupId,
   zhejiangContinuation.groupId,
 ]
-for (const groupId of zhejiangWritingGroupIds) {
-  assert.deepEqual(
-    projectCanonicalWritingChrome({
-      consumption: zhejiangWritingConsumptions.screen,
-      groupId,
-      renderedGroupIds: zhejiangWritingGroupIds,
-    }),
-    { part: null, section: null, instructions: [] },
-  )
-}
+assert.equal(
+  projectCanonicalWritingChrome({
+    consumption: zhejiangWritingConsumptions.screen,
+    groupId: zhejiangWritingGroupIds[0],
+    renderedGroupIds: zhejiangWritingGroupIds,
+  }).section?.text,
+  zhejiangWritingChrome.application,
+)
+assert.equal(
+  projectCanonicalWritingChrome({
+    consumption: zhejiangWritingConsumptions.screen,
+    groupId: zhejiangWritingGroupIds[1],
+    renderedGroupIds: zhejiangWritingGroupIds,
+  }).section?.text,
+  zhejiangWritingChrome.continuation,
+)
 const mixedWritingBaseArgs = {
   title: 'NCK1 whole writing chrome regression',
   versionType: 'student',
@@ -1383,7 +1526,7 @@ const mixedWritingBaseArgs = {
   questionNumberStart: 1,
 }
 const zhejiangWritingBaseArgs = {
-  title: 'Zhejiang v3 whole writing regression',
+  title: 'Zhejiang v4 whole writing regression',
   versionType: 'student',
   printStyle: 'exam',
   items: [
@@ -1433,6 +1576,12 @@ const mixedPrintHtml = buildPrintHtml({
   canonicalConsumption: mixedWritingConsumptions.printPdf,
 })
 assertNck1WritingHeadingCounts(mixedPrintHtml, 'whole-paper Print HTML')
+assertNck1WholeWritingOrder(
+  mixedPrintHtml,
+  mixedApplication,
+  mixedContinuation,
+  'whole-paper Print HTML',
+)
 assertNoRendererLocalWritingGroupHeading(
   mixedPrintHtml,
   'whole-paper Print HTML',
@@ -1448,6 +1597,12 @@ const mixedDocxXml = docxRenderer.buildDocumentXml({
   canonicalConsumption: mixedWritingConsumptions.docx,
 })
 assertNck1WritingHeadingCounts(mixedDocxXml, 'whole-paper DOCX OOXML')
+assertNck1WholeWritingOrder(
+  extractDocxVisibleParagraphText(mixedDocxXml),
+  mixedApplication,
+  mixedContinuation,
+  'whole-paper DOCX OOXML',
+)
 assertNoRendererLocalWritingGroupHeading(
   mixedDocxXml,
   'whole-paper DOCX OOXML',
@@ -1468,6 +1623,12 @@ assertNoRendererLocalWritingGroupHeading(
       { encoding: 'utf8' },
     )
     assertNck1WritingHeadingCounts(packagedXml, 'packaged DOCX OOXML')
+    assertNck1WholeWritingOrder(
+      extractDocxVisibleParagraphText(packagedXml),
+      mixedApplication,
+      mixedContinuation,
+      'packaged DOCX OOXML',
+    )
     assertNoRendererLocalWritingGroupHeading(
       packagedXml,
       'packaged DOCX OOXML',
@@ -1479,6 +1640,12 @@ assertNoRendererLocalWritingGroupHeading(
       { encoding: 'utf8' },
     )
     assertNck1WritingHeadingCounts(convertedText, 'DOCX-to-PDF')
+    assertNck1WholeWritingOrder(
+      convertedText,
+      mixedApplication,
+      mixedContinuation,
+      'DOCX-to-PDF',
+    )
     assertNoRendererLocalWritingGroupHeading(
       convertedText,
       'DOCX-to-PDF',
@@ -1509,7 +1676,7 @@ assertZhejiangWholeWritingHtmlIdentity(
   zhejiangPrintHtml,
   zhejiangApplication,
   zhejiangContinuation,
-  'complete Zhejiang v3 Print HTML',
+  'complete Zhejiang v4 Print HTML',
 )
 if (persistActualArtifacts) {
   writeFileSync(
@@ -1525,7 +1692,7 @@ assertZhejiangWholeWritingDocxIdentity(
   zhejiangDocxXml,
   zhejiangApplication,
   zhejiangContinuation,
-  'complete Zhejiang v3 DOCX OOXML',
+  'complete Zhejiang v4 DOCX OOXML',
 )
 {
   const root = mkdtempSync(path.join(
@@ -1549,7 +1716,7 @@ assertZhejiangWholeWritingDocxIdentity(
       packagedXml,
       zhejiangApplication,
       zhejiangContinuation,
-      'complete Zhejiang v3 packaged DOCX OOXML',
+      'complete Zhejiang v4 packaged DOCX OOXML',
     )
     docxRenderer.convertDocxToPdf(docxPath, pdfPath)
     const convertedText = execFileSync(
@@ -1561,7 +1728,7 @@ assertZhejiangWholeWritingDocxIdentity(
       convertedText,
       zhejiangApplication,
       zhejiangContinuation,
-      'complete Zhejiang v3 DOCX-to-PDF',
+      'complete Zhejiang v4 DOCX-to-PDF',
     )
     if (persistActualArtifacts) {
       copyFileSync(
@@ -2036,8 +2203,30 @@ async function assertBrowserArtifacts() {
           `authenticated whole-paper Screen navigation contains canonical ${expectedChrome} exactly once`,
         )
       }
+      assert.equal(
+        countCompactText(
+          mixedRailText,
+          nck1WritingChrome.continuationInstruction,
+        ),
+        0,
+        'authenticated whole-paper Screen navigation excludes the continuation instruction',
+      )
+      assert.equal(
+        countCompactText(
+          mixedVisiblePageText,
+          nck1WritingChrome.continuationInstruction,
+        ),
+        1,
+        'authenticated whole-paper Screen contains the continuation instruction exactly once',
+      )
       assertNck1WritingHeadingCounts(
         mixedScreenText,
+        'authenticated whole-paper Screen',
+      )
+      assertNck1WholeWritingOrder(
+        mixedScreenText,
+        mixedApplication,
+        mixedContinuation,
         'authenticated whole-paper Screen',
       )
       assertNoRendererLocalWritingGroupHeading(
@@ -2190,16 +2379,18 @@ async function assertBrowserArtifacts() {
       const visiblePageText = await page.locator('body').innerText()
       const railText = await page.locator('.paper-browse-rail').innerText()
       assertZhejiangWholeWritingVisibleText(
-        visiblePageText,
+        writingText,
         zhejiangApplication,
         zhejiangContinuation,
-        'authenticated complete Zhejiang v3 Screen',
+        'authenticated complete Zhejiang v4 Screen',
       )
-      assertZhejiangWholeWritingVisibleText(
+      assertZhejiangForbiddenTextAbsent(
+        visiblePageText,
+        'authenticated complete Zhejiang v4 Screen',
+      )
+      assertZhejiangForbiddenTextAbsent(
         railText,
-        { promptBlocks: [] },
-        { materialBlocks: [] },
-        'authenticated complete Zhejiang v3 Screen navigation',
+        'authenticated complete Zhejiang v4 Screen navigation',
       )
       assert.equal(
         await writingPages.locator('[data-canonical-response-slot-id]')
@@ -2231,7 +2422,7 @@ async function assertBrowserArtifacts() {
         await writingPages.locator(
           '[data-canonical-writing-chrome-role]',
         ).count(),
-        0,
+        3,
       )
       await page.locator('.paper-browse-lecture-handle').click()
       await page.locator('.paper-browse-lecture-handle')
@@ -2271,6 +2462,12 @@ async function assertBrowserArtifacts() {
           { encoding: 'utf8' },
         )
         assertNck1WritingHeadingCounts(pdfText, 'whole-paper Print PDF')
+        assertNck1WholeWritingOrder(
+          pdfText,
+          mixedApplication,
+          mixedContinuation,
+          'whole-paper Print PDF',
+        )
         assertNoRendererLocalWritingGroupHeading(
           pdfText,
           'whole-paper Print PDF',
@@ -2311,7 +2508,7 @@ async function assertBrowserArtifacts() {
           pdfText,
           zhejiangApplication,
           zhejiangContinuation,
-          'complete Zhejiang v3 Print PDF',
+          'complete Zhejiang v4 Print PDF',
         )
         if (persistActualArtifacts) {
           copyFileSync(
@@ -2401,11 +2598,14 @@ async function assertBrowserArtifacts() {
             await browserWritingChromeInk(page),
           )
         } else {
-          assert.equal(
+          assert.deepEqual(
             await page.locator(
               '[data-canonical-writing-chrome-role]',
-            ).count(),
-            0,
+            ).allInnerTexts(),
+            [
+              zhejiangWritingChrome.part,
+              zhejiangWritingChrome.continuation,
+            ],
           )
         }
         const bodyText = await page.locator('body').innerText()
@@ -2728,11 +2928,14 @@ async function assertBrowserArtifacts() {
           `Print HTML ${label}/${versionType} matches Screen paperChrome roles and geometry`,
         )
       } else {
-        assert.equal(
+        assert.deepEqual(
           await page.locator(
             '[data-canonical-writing-chrome-role]',
-          ).count(),
-          0,
+          ).allInnerTexts(),
+          [
+            zhejiangWritingChrome.part,
+            zhejiangWritingChrome.continuation,
+          ],
         )
       }
       const pdfRoot = mkdtempSync(path.join(tmpdir(), 'eqb-continuation-pdf-'))

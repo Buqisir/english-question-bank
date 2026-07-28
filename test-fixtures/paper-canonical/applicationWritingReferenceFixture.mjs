@@ -13,6 +13,15 @@ const references = Object.freeze({
     transcriptionFile: 'application-writing-transcription-paper-zj-2020-jan.json',
     sourceFile: new URL('evidence/original-paper-zj-2020-jan.docx', import.meta.url),
   }),
+  'paper-zj-2020-jul': Object.freeze({
+    source: 'sha256:1a447b5dc7bdba349347d61080304eab55815e41db055b5c2ff9b43545b79cdc',
+    capture: 'sha256:7e655448250000e2373a29fd8badad322264f4cea310d0969d0758ecd18be6d1',
+    transcription: 'sha256:d43a51d3620536c01a83fce251791e1c0ca05c8df7889635eecbd396e6f451c7',
+    importMeta: 'sha256:f9856f3cc97440e770887e73ef08e08d2f72e941797c5cfd9e83ea8518128719',
+    captureFile: 'application-writing-paper-zj-2020-jul.json',
+    transcriptionFile: 'application-writing-transcription-paper-zj-2020-jul.json',
+    sourceFile: new URL('evidence/original-paper-zj-2020-jul.docx', import.meta.url),
+  }),
   'paper-2026-i': Object.freeze({
     source: 'sha256:31a87069e6d530afba9123eec0487adf45e52e0b98530af80b62476f169e4d0f',
     capture: 'sha256:ed8078692b40f42bf2aa62b0e4d7c32314be4e63b3eceec902a7720bb08a768d',

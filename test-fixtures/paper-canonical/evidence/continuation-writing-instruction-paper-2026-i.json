@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "profile-writing-source-evidence-v1",
+  "paperId": "paper-2026-i",
+  "profileId": "nck1",
+  "sourceDocumentDigest": "sha256:31a87069e6d530afba9123eec0487adf45e52e0b98530af80b62476f169e4d0f",
+  "review": {
+    "method": "manual_source_transcription",
+    "status": "accepted"
+  },
+  "sourceLocation": {
+    "kind": "pdf_page_region",
+    "page": 11,
+    "locator": "第二节（满分25分）后、Emily续写材料前"
+  },
+  "instruction": {
+    "instructionId": "writing.continuation.prompt",
+    "placement": "group_instruction",
+    "text": "阅读下面材料，根据其内容和所给段落开头语续写两段话，使之构成一篇完整的短文。"
+  },
+  "transformationRecord": {
+    "recordId": "transformation:paper-2026-i:continuation-instruction:legacy-omission-correction",
+    "ruleId": "source-exact-transcription",
+    "ruleVersion": "1",
+    "certainty": "exact",
+    "before": "阅读下面材料，根据其内容和所给段落开头语续写两段，使之构成一篇完整的短文。",
+    "after": "阅读下面材料，根据其内容和所给段落开头语续写两段话，使之构成一篇完整的短文。",
+    "proof": "The hash-bound PDF page text contains exactly one 话 between 两段 and 使之."
+  }
+}

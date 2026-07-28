@@ -4,7 +4,7 @@
 
 本文件是唯一的人类可读索引；当前 canonical 编译、校验、发布和未来的
 Screen / Print-PDF / DOCX consumer 只从
-[`standards/paper-canonical/manifest-v8.json`](../../standards/paper-canonical/manifest-v8.json)
+[`standards/paper-canonical/manifest-v9.json`](../../standards/paper-canonical/manifest-v9.json)
 解析一份 digest-closed 的权威闭包。这里不复制卷型题号、分值、题组
 cardinality、清洗条件或字体/物理排版数值，也不能被 caller 当作第二套配置。
 
@@ -19,8 +19,15 @@ Renderer Typography、其 schema 及纯验证入口。未知版本、缺件、di
 结果的变更，必须新增 versioned artifact、schema/semantic conformance fixture、
 迁移说明和 manifest 升版；已经被 Publication 引用的 artifact 不可原位修改。
 `manifest-v1.json` 保留其原始 digest-closed closure，供既有 Publication 解析；
-当前 Screen v8、Print/PDF v9、DOCX v8 consumer contracts 已切到同一 v8
-authority。v8 以 Zhejiang legacy Profile v3 抑制未由 source 证明的
+当前 Screen v9、Print/PDF v10、DOCX v9 consumer contracts 已切到同一 v9
+authority。v9 以 Zhejiang legacy Profile v4 恢复 hash-bound 原卷中的
+`第四部分 写作（共两节，满分40分）`、15 分应用文与 25 分读后续写层级，
+并以 NCK1 Profile v4 通过 continuation slot 的 `instructionRefs` 恢复原卷
+中带 `话` 的完整续写指令；迁移说明见
+[`zhejiang-legacy-v4-migration.md`](../../standards/paper-canonical/profiles/zhejiang-legacy-v4-migration.md)
+和
+[`nck1-v4-migration.md`](../../standards/paper-canonical/profiles/nck1-v4-migration.md)。
+此前 v8 以 Zhejiang legacy Profile v3 抑制未由 source 证明的
 `Writing` / `Writing tasks`，同时保持同一 `writing.tasks` section 中的
 Application / Continuation 两个 Group 各自完整且只出现一次；迁移说明见
 [`zhejiang-legacy-v3-migration.md`](../../standards/paper-canonical/profiles/zhejiang-legacy-v3-migration.md)。

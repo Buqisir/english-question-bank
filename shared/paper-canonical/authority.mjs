@@ -6,6 +6,7 @@ import manifestV5 from '../../standards/paper-canonical/manifest-v5.json' with {
 import manifestV6 from '../../standards/paper-canonical/manifest-v6.json' with { type: 'json' }
 import manifestV7 from '../../standards/paper-canonical/manifest-v7.json' with { type: 'json' }
 import manifestV8 from '../../standards/paper-canonical/manifest-v8.json' with { type: 'json' }
+import manifestV9 from '../../standards/paper-canonical/manifest-v9.json' with { type: 'json' }
 import core from '../../standards/paper-canonical/core/core-invariants-v1.json' with { type: 'json' }
 import sourceAdapters from '../../standards/paper-canonical/adapters/source-adapters-v1.json' with { type: 'json' }
 import sourceAdaptersV2 from '../../standards/paper-canonical/adapters/source-adapters-v2.json' with { type: 'json' }
@@ -15,8 +16,10 @@ import nck1 from '../../standards/paper-canonical/profiles/nck1-v1.json' with { 
 import zhejiangLegacy from '../../standards/paper-canonical/profiles/zhejiang-legacy-v1.json' with { type: 'json' }
 import nck1V2 from '../../standards/paper-canonical/profiles/nck1-v2.json' with { type: 'json' }
 import nck1V3 from '../../standards/paper-canonical/profiles/nck1-v3.json' with { type: 'json' }
+import nck1V4 from '../../standards/paper-canonical/profiles/nck1-v4.json' with { type: 'json' }
 import zhejiangLegacyV2 from '../../standards/paper-canonical/profiles/zhejiang-legacy-v2.json' with { type: 'json' }
 import zhejiangLegacyV3 from '../../standards/paper-canonical/profiles/zhejiang-legacy-v3.json' with { type: 'json' }
+import zhejiangLegacyV4 from '../../standards/paper-canonical/profiles/zhejiang-legacy-v4.json' with { type: 'json' }
 import nationalLegacy from '../../standards/paper-canonical/profiles/national-legacy-v1.json' with { type: 'json' }
 import reading from '../../standards/paper-canonical/families/reading-v1.json' with { type: 'json' }
 import sevenChoices from '../../standards/paper-canonical/families/seven-choices-v1.json' with { type: 'json' }
@@ -60,6 +63,7 @@ import reportV5Schema from '../../schemas/paper-canonical/normalization-report-v
 import reportV6Schema from '../../schemas/paper-canonical/normalization-report-v6.schema.json' with { type: 'json' }
 import reportV7Schema from '../../schemas/paper-canonical/normalization-report-v7.schema.json' with { type: 'json' }
 import reportV8Schema from '../../schemas/paper-canonical/normalization-report-v8.schema.json' with { type: 'json' }
+import reportV9Schema from '../../schemas/paper-canonical/normalization-report-v9.schema.json' with { type: 'json' }
 import publicationSchema from '../../schemas/paper-canonical/canonical-paper-publication-v1.schema.json' with { type: 'json' }
 import publicationV2Schema from '../../schemas/paper-canonical/canonical-paper-publication-v2.schema.json' with { type: 'json' }
 import publicationV3Schema from '../../schemas/paper-canonical/canonical-paper-publication-v3.schema.json' with { type: 'json' }
@@ -68,6 +72,7 @@ import publicationV5Schema from '../../schemas/paper-canonical/canonical-paper-p
 import publicationV6Schema from '../../schemas/paper-canonical/canonical-paper-publication-v6.schema.json' with { type: 'json' }
 import publicationV7Schema from '../../schemas/paper-canonical/canonical-paper-publication-v7.schema.json' with { type: 'json' }
 import publicationV8Schema from '../../schemas/paper-canonical/canonical-paper-publication-v8.schema.json' with { type: 'json' }
+import publicationV9Schema from '../../schemas/paper-canonical/canonical-paper-publication-v9.schema.json' with { type: 'json' }
 import consumerSchema from '../../schemas/paper-canonical/consumer-contract-v1.schema.json' with { type: 'json' }
 
 import { digestJson, exactKeys, isRecordValue } from './stable.mjs'
@@ -250,8 +255,13 @@ function validateNck1WritingChrome(profile) {
     profile.instructions?.['section.writing.application']
   const continuationInstruction =
     profile.instructions?.['section.writing.continuation']
+  const continuationPromptInstruction =
+    profile.instructions?.['writing.continuation.prompt']
+  const expectedContinuationInstructionRefs = profile.version === '4'
+    ? ['writing.continuation.prompt']
+    : []
   const valid = (
-    profile.version === '3'
+    ['3', '4'].includes(profile.version)
     && writingParts.length === 1
     && part.ordinal === 4
     && part.titleInstructionRef === 'part.writing'
@@ -269,6 +279,8 @@ function validateNck1WritingChrome(profile) {
     && continuation.score === 25
     && continuationSlots.length === 1
     && continuationSlots[0].slotId === 'writing.continuation'
+    && digestJson(continuationSlots[0].instructionRefs)
+      === digestJson(expectedContinuationInstructionRefs)
     && profile.instructions?.['part.writing']?.placement === 'part_heading'
     && profile.instructions['part.writing'].text
       === '第四部分 写作（共两节，满分40分）'
@@ -276,6 +288,13 @@ function validateNck1WritingChrome(profile) {
     && applicationInstruction.text === '第一节（满分15分）'
     && continuationInstruction?.placement === 'section_heading'
     && continuationInstruction.text === '第二节（满分25分）'
+    && (
+      profile.version === '3'
+        ? !continuationPromptInstruction
+        : continuationPromptInstruction?.placement === 'group_instruction'
+          && continuationPromptInstruction.text
+            === '阅读下面材料，根据其内容和所给段落开头语续写两段话，使之构成一篇完整的短文。'
+    )
     && !Object.hasOwn(profile.instructions, 'section.writing')
   )
   return valid
@@ -284,6 +303,50 @@ function validateNck1WritingChrome(profile) {
         'PROFILE_NCK1_WRITING_CHROME_INVALID',
         '$.parts.writing',
         'NCK1 Writing requires one 40-point part with exact 15/25-point Application and Continuation sections',
+      )]
+}
+
+function validateZhejiangWritingChrome(profile) {
+  const writingParts = Array.isArray(profile?.parts)
+    ? profile.parts.filter((part) => part.partId === 'writing')
+    : []
+  const part = writingParts[0]
+  const sections = Array.isArray(part?.sections) ? part.sections : []
+  const application = sections[0]
+  const continuation = sections[1]
+  const valid = (
+    profile?.version === '4'
+    && writingParts.length === 1
+    && part.ordinal === 4
+    && part.titleInstructionRef === 'part.writing'
+    && part.score === 40
+    && sections.length === 2
+    && application?.sectionId === 'writing.application'
+    && application.ordinal === 1
+    && application.titleInstructionRef === 'section.writing.application'
+    && application.score === 15
+    && application.slots?.length === 1
+    && application.slots[0].slotId === 'writing.application'
+    && continuation?.sectionId === 'writing.continuation'
+    && continuation.ordinal === 2
+    && continuation.titleInstructionRef === 'section.writing.continuation'
+    && continuation.score === 25
+    && continuation.slots?.length === 1
+    && continuation.slots[0].slotId === 'writing.continuation'
+    && profile.instructions?.['part.writing']?.text
+      === '第四部分 写作（共两节，满分40分）'
+    && profile.instructions?.['section.writing.application']?.text
+      === '第一节 应用文写作（满分15分）'
+    && profile.instructions?.['section.writing.continuation']?.text
+      === '第二节 读后续写（满分25分）'
+    && !Object.hasOwn(profile.instructions, 'section.writing')
+  )
+  return valid
+    ? []
+    : [issue(
+        'PROFILE_ZHEJIANG_WRITING_CHROME_INVALID',
+        '$.parts.writing',
+        'Zhejiang Writing requires the exact source-backed 40/15/25 part and section hierarchy',
       )]
 }
 
@@ -377,6 +440,12 @@ export function validateAuthorityClosure({ manifest: candidateManifest, artifact
     )
     issues.push(...validateNck1WritingChrome(nck1Profile))
   }
+  if (Number(candidateManifest?.version) >= 9) {
+    const zhejiangProfile = profileArtifacts.find(
+      (profile) => profile.profileId === 'zhejiang-legacy',
+    )
+    issues.push(...validateZhejiangWritingChrome(zhejiangProfile))
+  }
   const normalizationArtifact = Object.values(artifacts || {}).find((artifact) => artifact?.owner === 'normalization')
   issues.push(...validateNormalizationRules(normalizationArtifact))
   const coreArtifact = Object.values(artifacts || {}).find((artifact) => artifact?.owner === 'core')
@@ -423,6 +492,11 @@ const sharedArtifactsV8 = {
   ...sharedArtifactsV7,
   'profile-zhejiang-legacy': zhejiangLegacyV3,
 }
+const sharedArtifactsV9 = {
+  ...sharedArtifactsV8,
+  'profile-nck1': nck1V4,
+  'profile-zhejiang-legacy': zhejiangLegacyV4,
+}
 
 const sharedSchemas = {
   'standard-manifest-v1': standardManifestSchema,
@@ -444,6 +518,7 @@ const artifactsV5 = { ...sharedArtifactsV5, normalization: normalizationV2, 'ren
 const artifactsV6 = { ...sharedArtifactsV6, normalization: normalizationV2, 'renderer-typography': typographyV2 }
 const artifactsV7 = { ...sharedArtifactsV7, normalization: normalizationV2, 'renderer-typography': typographyV2 }
 const artifactsV8 = { ...sharedArtifactsV8, normalization: normalizationV2, 'renderer-typography': typographyV2 }
+const artifactsV9 = { ...sharedArtifactsV9, normalization: normalizationV2, 'renderer-typography': typographyV2 }
 const schemasV1 = { ...sharedSchemas, 'renderer-typography-v1': typographyV1Schema, 'normalization-rules-v1': normalizationSchema, 'normalization-report-v1': reportSchema, 'canonical-paper-publication-v1': publicationSchema }
 const schemasV2 = { ...sharedSchemas, 'renderer-typography-v1': typographyV1Schema, 'normalization-rules-v2': normalizationV2Schema, 'normalization-report-v2': reportV2Schema, 'canonical-paper-publication-v2': publicationV2Schema }
 const schemasV3 = { ...sharedSchemas, 'renderer-typography-v2': typographyV2Schema, 'normalization-rules-v2': normalizationV2Schema, 'normalization-report-v3': reportV3Schema, 'canonical-paper-publication-v3': publicationV3Schema }
@@ -487,6 +562,11 @@ const schemasV8 = {
   'normalization-report-v8': reportV8Schema,
   'canonical-paper-publication-v8': publicationV8Schema,
 }
+const schemasV9 = {
+  ...schemasV6,
+  'normalization-report-v9': reportV9Schema,
+  'canonical-paper-publication-v9': publicationV9Schema,
+}
 const validationV1 = validateAuthorityClosure({ manifest: manifestV1, artifacts: artifactsV1, schemas: schemasV1 })
 const validationV2 = validateAuthorityClosure({ manifest: manifestV2, artifacts: artifactsV2, schemas: schemasV2 })
 const validationV3 = validateAuthorityClosure({ manifest: manifestV3, artifacts: artifactsV3, schemas: schemasV3 })
@@ -495,7 +575,8 @@ const validationV5 = validateAuthorityClosure({ manifest: manifestV5, artifacts:
 const validationV6 = validateAuthorityClosure({ manifest: manifestV6, artifacts: artifactsV6, schemas: schemasV6 })
 const validationV7 = validateAuthorityClosure({ manifest: manifestV7, artifacts: artifactsV7, schemas: schemasV7 })
 const validationV8 = validateAuthorityClosure({ manifest: manifestV8, artifacts: artifactsV8, schemas: schemasV8 })
-if (!validationV1.ok || !validationV2.ok || !validationV3.ok || !validationV4.ok || !validationV5.ok || !validationV6.ok || !validationV7.ok || !validationV8.ok) throw new Error(`Invalid checked-in canonical authority: ${JSON.stringify([...validationV1.issues, ...validationV2.issues, ...validationV3.issues, ...validationV4.issues, ...validationV5.issues, ...validationV6.issues, ...validationV7.issues, ...validationV8.issues])}`)
+const validationV9 = validateAuthorityClosure({ manifest: manifestV9, artifacts: artifactsV9, schemas: schemasV9 })
+if (!validationV1.ok || !validationV2.ok || !validationV3.ok || !validationV4.ok || !validationV5.ok || !validationV6.ok || !validationV7.ok || !validationV8.ok || !validationV9.ok) throw new Error(`Invalid checked-in canonical authority: ${JSON.stringify([...validationV1.issues, ...validationV2.issues, ...validationV3.issues, ...validationV4.issues, ...validationV5.issues, ...validationV6.issues, ...validationV7.issues, ...validationV8.issues, ...validationV9.issues])}`)
 
 function authorityRef(manifest) {
   return Object.freeze({ manifestId: manifest.manifestId, manifestVersion: manifest.version, manifestDigest: digestJson(manifest) })
@@ -510,6 +591,7 @@ const authorities = [
   { manifest: manifestV6, artifacts: artifactsV6, schemas: schemasV6 },
   { manifest: manifestV7, artifacts: artifactsV7, schemas: schemasV7 },
   { manifest: manifestV8, artifacts: artifactsV8, schemas: schemasV8 },
+  { manifest: manifestV9, artifacts: artifactsV9, schemas: schemasV9 },
 ].map((authority) => ({
   ...authority,
   authorityRef: authorityRef(authority.manifest),
@@ -517,7 +599,7 @@ const authorities = [
   families: new Map(Object.values(authority.artifacts).filter((artifact) => artifact?.owner === 'family').map((family) => [family.familyContractId, family])),
 }))
 
-export const canonicalAuthorityRef = authorities.find((authority) => authority.manifest.version === '8').authorityRef
+export const canonicalAuthorityRef = authorities.find((authority) => authority.manifest.version === '9').authorityRef
 
 export function resolveCanonicalAuthority(authorityRef) {
   const authority = authorities.find((candidate) => candidate.authorityRef.manifestId === authorityRef?.manifestId && candidate.authorityRef.manifestVersion === authorityRef?.manifestVersion && candidate.authorityRef.manifestDigest === authorityRef?.manifestDigest)

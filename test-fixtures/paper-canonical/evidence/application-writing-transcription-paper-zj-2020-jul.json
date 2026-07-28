@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "application-writing-source-transcription-v1",
+  "paperId": "paper-zj-2020-jul",
+  "sourceDocumentDigest": "sha256:1a447b5dc7bdba349347d61080304eab55815e41db055b5c2ff9b43545b79cdc",
+  "review": {
+    "method": "manual_source_transcription",
+    "status": "accepted"
+  },
+  "groupId": "group-zj-2020-jul-writing-application",
+  "orderedBlocks": [
+    {
+      "blockId": "para-zj-2020-jul-writing-app-prompt",
+      "text": "假定你是李华，你校来自爱尔兰的外教Peter因病回国休假。请给他写一封电子邮件，内容包括：(1)询问近况；(2)分享班级最新消息；(3)表达祝愿。"
+    },
+    {
+      "blockId": "para-zj-2020-jul-writing-app-notice",
+      "text": "注意：(1)词数80左右；(2)可适当增加细节，以使行文连贯。"
+    }
+  ],
+  "answerRegion": {
+    "presence": "none",
+    "answerRegionRef": "writing.application-box",
+    "partBlockIds": []
+  }
+}
