@@ -1,6 +1,6 @@
 # 16 — Disconnect generated-DOCX capability and prove direct Chromium PDF
 
-Status: ready
+Status: done
 Blocked by: Tickets 01–15 completed accepted baseline
 Next on PASS: independent review
 Independent review PASS: owner QA
@@ -40,6 +40,6 @@ Tickets 18 and 64–71.
 
 ## Result
 
-Commit:
-Verify:
-Notes:
+Commit: `3da1f82545549aedab91755b7b0cd8040a8c5d6d`; renderer-neutral Print contract fix `7098fa9974e1e152b4105b688007802eaf2afcf4`
+Verify: `node scripts/verify-generated-docx-disconnected.mjs` — 28/28 PASS; `node scripts/verify-paper-export-flow.mjs && node scripts/verify-paper-export-payload.mjs && node scripts/verify-print-pdf-export-flow.mjs` — PASS; `pnpm -C app run build` — PASS; `node scripts/smoke-golden-path.mjs` — real-browser export menu and PDF download PASS; `pnpm -C app run verify:all` — 109 PASS / 1 declared SKIP / 0 FAIL; `git diff --check` — PASS
+Notes: Removed generated-DOCX UI, client/state paths, and public routes; retired the obsolete DOCX-to-LibreOffice PDF route; kept Student/Teacher Screen and direct Chromium Print/PDF available through renderer-neutral Print contracts. Ticket 17 retains ownership of deleting the now-unreachable DOCX implementation.
