@@ -419,7 +419,7 @@ async function compilePublishAndLoad(fixture) {
     const published = publishCanonicalPaperPublication({
       rootDir: publicationRoot,
       db,
-      compilation,
+      request: fixture.request,
       sourceAssetVersion: 1,
       sourceAsset: fixture.sourceAsset,
     })

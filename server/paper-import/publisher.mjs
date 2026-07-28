@@ -1,4 +1,5 @@
 import { randomUUID } from 'node:crypto'
+import { readFileSync } from 'node:fs'
 import path from 'node:path'
 import {
   computeNextPaperAssetVersion,
@@ -17,6 +18,13 @@ import {
   validatePaperImportPackage,
 } from './validator.mjs'
 import { captureDocxSourceMedia } from './docxSourceMedia.mjs'
+import { consumerContractRefs } from '../../shared/paper-canonical/consumers.mjs'
+import {
+  admitCanonicalPaperImport,
+  createFileSystemCanonicalPublicationStore,
+  loadPaperForConsumptionSync,
+  recordCanonicalPublicationCurrent,
+} from '../paper-canonical/publication.mjs'
 
 const groupTypeMap = {
   reading: 'reading',
@@ -495,10 +503,77 @@ function buildQaLinks(paperId, version, readingGroups, scGroups, clozeGroups, gr
   return [...readingLinks, ...scLinks, ...clozeLinks, ...gfLinks, ...wLinks]
 }
 
+function canonicalAdmissionFailure(admission) {
+  return {
+    ok: false,
+    status: 'canonical_admission_failed',
+    validation: null,
+    publish: null,
+    canonicalAdmission: {
+      disposition: admission.disposition,
+      diagnostics: admission.diagnostics,
+      artifacts: admission.artifacts,
+    },
+  }
+}
+
+function loadCanonicalConsumers({ paperId, versionName, store }) {
+  const consumers = {}
+  for (const [consumerId, consumerContract] of Object.entries(
+    consumerContractRefs,
+  )) {
+    const consumption = loadPaperForConsumptionSync({
+      paperId,
+      version: versionName,
+      consumerContract,
+    }, store)
+    if (
+      consumption.disposition !== 'ready'
+      || consumption.selections.length === 0
+      || consumption.selections.some((selection) => selection.mode !== 'canonical')
+    ) {
+      const error = new Error(
+        `${consumerId} rejected the complete canonical Publication`,
+      )
+      error.code =
+        consumption.diagnostics?.[0]?.code
+        || 'CANONICAL_IMPORT_CONSUMER_UNAVAILABLE'
+      error.diagnostics = consumption.diagnostics || []
+      throw error
+    }
+    consumers[consumerId] = consumption
+  }
+  return consumers
+}
+
+function stagedCanonicalStore({ versionDir, ref }) {
+  return {
+    readPublishedRefs() {
+      return { current: ref, latest: ref }
+    },
+    readVersionArtifact(_ref, relativePath) {
+      const filePath = path.join(versionDir, relativePath)
+      try {
+        return readFileSync(filePath)
+      } catch {
+        return null
+      }
+    },
+    readSourceAsset() {
+      try {
+        return readFileSync(path.join(versionDir, 'canonical/source-asset.bin'))
+      } catch {
+        return null
+      }
+    },
+  }
+}
+
 export function publishPaperImportPackage({
   files,
   db,
   paperAssetsDir,
+  canonicalRequest,
   forceDbFailure = false,
   failurePoint = null,
   docxSourceMediaCaptureOptions = {},
@@ -537,9 +612,42 @@ export function publishPaperImportPackage({
   }
 
   const paperId = validation.packageData.paperAsset.paper.paperId
+  let version = computeNextPublishVersion({ db, paperAssetsDir, paperId })
+  const sourceAssetFile = files.find(
+    (file) => file.fileName === 'paper-asset.json' && Buffer.isBuffer(file.buffer),
+  )
+  let admission = admitCanonicalPaperImport({
+    request: canonicalRequest,
+    sourceAssetVersion: version,
+    sourceAsset: sourceAssetFile?.buffer,
+  })
+  if (!admission.ok) return canonicalAdmissionFailure(admission)
+  if (admission.sealed.manifest.paperId !== paperId) {
+    return canonicalAdmissionFailure({
+      disposition: 'unsupported',
+      diagnostics: [{
+        code: 'CANONICAL_IMPORT_PAPER_ID_MISMATCH',
+        message: 'Canonical Publication paper identity differs from the validated import package',
+      }],
+    })
+  }
+
   recoverInterruptedPaperImportPublish({ db, paperAssetsDir, paperId })
   cleanupPaperImportTempArtifacts(paperAssetsDir)
-  const version = computeNextPublishVersion({ db, paperAssetsDir, paperId })
+  const recoveredVersion = computeNextPublishVersion({
+    db,
+    paperAssetsDir,
+    paperId,
+  })
+  if (recoveredVersion !== version) {
+    version = recoveredVersion
+    admission = admitCanonicalPaperImport({
+      request: canonicalRequest,
+      sourceAssetVersion: version,
+      sourceAsset: sourceAssetFile?.buffer,
+    })
+    if (!admission.ok) return canonicalAdmissionFailure(admission)
+  }
   const readingGroups = getReadingChoiceGroups(validation.packageData.paperAsset).map((group) => ({
     groupId: group.groupId,
     title: group.title,
@@ -569,7 +677,23 @@ export function publishPaperImportPackage({
       validationReport: publicValidation,
       publishReport,
       version,
+      canonicalPublication: admission.sealed,
       forceFailureAt: failurePoint,
+    })
+
+    const canonicalRef = {
+      paperId,
+      versionName: writtenVersion.versionName,
+      sourceAssetVersion: version,
+      publicationDigest: admission.sealed.manifest.publicationDigest,
+    }
+    loadCanonicalConsumers({
+      paperId,
+      versionName: writtenVersion.versionName,
+      store: stagedCanonicalStore({
+        versionDir: writtenVersion.versionDir,
+        ref: canonicalRef,
+      }),
     })
 
     db.exec('BEGIN')
@@ -593,10 +717,12 @@ export function publishPaperImportPackage({
       VALUES (?, ?, ?, 'published', ?, ?)
       `,
     ).run(`pir-${randomUUID()}`, paperId, version, JSON.stringify(publicValidation), JSON.stringify(publishReport))
+    recordCanonicalPublicationCurrent(db, canonicalRef)
     latestSwap = swapPaperImportLatest({
       paperAssetsDir,
       paperId,
       versionDir: writtenVersion.versionDir,
+      canonicalRef,
       deferCleanup: true,
       forceFailureAt: failurePoint,
     })
@@ -611,6 +737,15 @@ export function publishPaperImportPackage({
       // A stale previous-latest directory is safe and is removed on the next run.
     }
 
+    const consumers = loadCanonicalConsumers({
+      paperId,
+      versionName: writtenVersion.versionName,
+      store: createFileSystemCanonicalPublicationStore({
+        rootDir: paperAssetsDir,
+        db,
+      }),
+    })
+
     return {
       ok: true,
       status: 'published',
@@ -619,6 +754,9 @@ export function publishPaperImportPackage({
         ...publishReport,
         latestDir: latestSwap.latestDir,
         versionDir: writtenVersion.versionDir,
+        canonicalPublicationDigest:
+          admission.sealed.manifest.publicationDigest,
+        consumers,
       },
     }
   } catch (error) {
@@ -636,6 +774,14 @@ export function publishPaperImportPackage({
     }
     if (writtenVersion) {
       removePaperImportVersion({ paperAssetsDir, paperId, versionName: writtenVersion.versionName })
+      if (error?.code?.startsWith('CANONICAL_')) {
+        return canonicalAdmissionFailure({
+          disposition: 'unsupported',
+          diagnostics: error.diagnostics?.length
+            ? error.diagnostics
+            : [{ code: error.code, message: error.message }],
+        })
+      }
       try {
         ensurePaperImportDatabaseShape(db)
         db.prepare(

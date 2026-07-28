@@ -294,7 +294,7 @@ try {
   const first = publishCanonicalPaperPublication({
     rootDir,
     db,
-    compilation,
+    request: fixture.request,
     sourceAssetVersion: 1,
     sourceAsset: fixture.sourceAsset,
   })
@@ -322,13 +322,13 @@ try {
   const unsafeCompilation = compileCanonicalPaper(unsafeFixture.request)
   assert.equal(unsafeCompilation.disposition, 'ready')
   assert.throws(
-    () => publishCanonicalPaperPublication({ rootDir, db, compilation: unsafeCompilation, sourceAssetVersion: 1, sourceAsset: unsafeFixture.request.evidence.documents[0].bytes }),
+    () => sealCanonicalPublication({ compilation: unsafeCompilation, sourceAssetVersion: 1, sourceAsset: unsafeFixture.request.evidence.documents[0].bytes }),
     { code: 'CANONICAL_PUBLICATION_PAPER_ID_INVALID' },
   )
   const repeated = publishCanonicalPaperPublication({
     rootDir,
     db,
-    compilation,
+    request: fixture.request,
     sourceAssetVersion: 1,
     sourceAsset: fixture.sourceAsset,
   })
@@ -354,7 +354,7 @@ try {
     () => publishCanonicalPaperPublication({
       rootDir,
       db,
-      compilation,
+      request: fixture.request,
       sourceAssetVersion: 2,
       sourceAsset: fixture.sourceAsset,
       failurePoint: 'after-latest-before-commit',
@@ -370,7 +370,7 @@ try {
     () => publishCanonicalPaperPublication({
       rootDir,
       db,
-      compilation,
+      request: fixture.request,
       sourceAssetVersion: 2,
       sourceAsset: fixture.sourceAsset,
       failurePoint: 'after-commit',
@@ -385,7 +385,7 @@ try {
   const occupiedVersion = path.join(rootDir, fixture.source.paperId, 'versions', 'v3')
   mkdirSync(occupiedVersion)
   assert.throws(
-    () => publishCanonicalPaperPublication({ rootDir, db, compilation, sourceAssetVersion: 3, sourceAsset: fixture.sourceAsset }),
+    () => publishCanonicalPaperPublication({ rootDir, db, request: fixture.request, sourceAssetVersion: 3, sourceAsset: fixture.sourceAsset }),
     { code: 'CANONICAL_PUBLICATION_VERSION_CONFLICT' },
   )
   rmSync(occupiedVersion, { recursive: true, force: true })

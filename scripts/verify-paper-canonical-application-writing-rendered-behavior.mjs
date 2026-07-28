@@ -67,7 +67,7 @@ async function publishAndLoad(paperId, consumerContract) {
     publishCanonicalPaperPublication({
       rootDir,
       db,
-      compilation,
+      request: fixture.request,
       sourceAssetVersion: 1,
       sourceAsset: fixture.sourceAsset,
     })

@@ -9,6 +9,7 @@ import { DatabaseSync } from 'node:sqlite'
 import { publishPaperImportPackage } from '../server/paper-import/publisher.mjs'
 import { cleanupPaperImportTempArtifacts, resolvePaperAssetReadPaths } from '../server/paper-import/storage.mjs'
 import { readImportPackageFromDirectory } from '../server/paper-import/validator.mjs'
+import { makeCanonicalImportAdmissionRequest } from '../test-fixtures/paper-canonical/foundationFixture.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '..')
@@ -46,6 +47,14 @@ const db = new DatabaseSync(dbPath)
 try {
   db.exec(readFileSync(path.join(rootDir, 'data/sql/schema.sql'), 'utf8'))
   const files = readImportPackageFromDirectory(fixtureDir)
+  const filesByName = Object.fromEntries(
+    files.map((file) => [file.fileName, file.buffer]),
+  )
+  const canonicalRequest = makeCanonicalImportAdmissionRequest({
+    paperId,
+    paperAssetBytes: filesByName['paper-asset.json'],
+    answerKeyBytes: filesByName['answer-key.json'],
+  })
 
   const invalidDb = new DatabaseSync(path.join(tempRoot, 'invalid.sqlite'))
   const invalidRoot = path.join(tempRoot, 'invalid-paper-assets')
@@ -64,7 +73,7 @@ try {
   writeFileSync(fileInsteadOfRoot, 'not a directory')
   let writeFailure = null
   try {
-    publishPaperImportPackage({ files, db: writeFailDb, paperAssetsDir: fileInsteadOfRoot })
+    publishPaperImportPackage({ files, db: writeFailDb, paperAssetsDir: fileInsteadOfRoot, canonicalRequest })
   } catch (error) {
     writeFailure = error
   }
@@ -72,7 +81,7 @@ try {
   assert('versioned file write failure creates no DB tables', !tableExists(writeFailDb, 'paper_asset_versions'))
   writeFailDb.close()
 
-  const first = publishPaperImportPackage({ files, db, paperAssetsDir })
+  const first = publishPaperImportPackage({ files, db, paperAssetsDir, canonicalRequest })
   assert('first publish succeeds', first.ok, JSON.stringify(first, null, 2))
   assert('first publish creates v1 dir', existsSync(path.join(paperAssetsDir, `${paperId}/versions/v1/paper-asset.json`)))
   assert('first publish creates latest dir', existsSync(path.join(paperAssetsDir, `${paperId}/latest/paper-asset.json`)))
@@ -107,7 +116,7 @@ try {
   existingTagDb.prepare(
     "INSERT INTO tags (id, name, category, description, is_active) VALUES ('tag-existing-2024', '2024', '教师标签', '', 1)",
   ).run()
-  const existingTagPublish = publishPaperImportPackage({ files, db: existingTagDb, paperAssetsDir: existingTagAssets })
+  const existingTagPublish = publishPaperImportPackage({ files, db: existingTagDb, paperAssetsDir: existingTagAssets, canonicalRequest })
   assert('publish reuses existing tag names without UNIQUE failure', existingTagPublish.ok)
   assert(
     'existing 2024 tag remains single row after publish',
@@ -143,7 +152,7 @@ try {
     VALUES ('pav-db-only-v1', ?, 1, 'v1', 'missing-on-disk', 'sha', 'published')
     `,
   ).run(paperId)
-  const dbOnlyPublish = publishPaperImportPackage({ files, db: dbOnlyVersionDb, paperAssetsDir: dbOnlyVersionAssets })
+  const dbOnlyPublish = publishPaperImportPackage({ files, db: dbOnlyVersionDb, paperAssetsDir: dbOnlyVersionAssets, canonicalRequest })
   assert('publish skips DB-only existing version', dbOnlyPublish.publish?.assetVersion === 2)
   assert('DB-only version publish creates v2 dir', existsSync(path.join(dbOnlyVersionAssets, `${paperId}/versions/v2/paper-asset.json`)))
   assert(
@@ -164,7 +173,7 @@ try {
 
   let forcedFailure = null
   try {
-    publishPaperImportPackage({ files, db, paperAssetsDir, forceDbFailure: true })
+    publishPaperImportPackage({ files, db, paperAssetsDir, canonicalRequest, forceDbFailure: true })
   } catch (error) {
     forcedFailure = error
   }
@@ -183,7 +192,7 @@ try {
     db.prepare('SELECT COUNT(*) AS count FROM paper_asset_versions WHERE paper_id = ?').get(paperId).count === 1,
   )
 
-  const second = publishPaperImportPackage({ files, db, paperAssetsDir })
+  const second = publishPaperImportPackage({ files, db, paperAssetsDir, canonicalRequest })
   assert('second publish succeeds after failed v2 attempt', second.ok)
   assert('second publish reuses v2 after failed attempt', second.publish?.assetVersion === 2)
   assert('second publish creates v2 dir', existsSync(path.join(paperAssetsDir, `${paperId}/versions/v2/paper-asset.json`)))

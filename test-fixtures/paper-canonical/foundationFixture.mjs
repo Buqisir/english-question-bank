@@ -425,3 +425,52 @@ export function makeReadyCanonicalFixture() {
     sourceAsset: bytes,
   }
 }
+
+export function makeCanonicalImportAdmissionRequest({
+  paperId,
+  paperAssetBytes,
+  answerKeyBytes,
+}) {
+  const fixture = makeReadyCanonicalFixture()
+  fixture.source.paperId = paperId
+  for (let pass = 0; pass < 3; pass++) {
+    const bytes = new TextEncoder().encode(JSON.stringify(fixture.source))
+    for (const observation of fixture.source.observations) {
+      if (Object.hasOwn(observation.span, 'end')) {
+        observation.span.end = bytes.byteLength
+      }
+    }
+  }
+  fixture.request.evidence.documents[0].bytes =
+    new TextEncoder().encode(JSON.stringify(fixture.source))
+  const instructionEvidence = fixture.request.evidence.documents.find(
+    (document) =>
+      document.inputKey === 'continuation_writing_instruction_evidence',
+  )
+  const parsedInstructionEvidence = JSON.parse(
+    new TextDecoder().decode(instructionEvidence.bytes),
+  )
+  parsedInstructionEvidence.paperId = paperId
+  instructionEvidence.bytes = new TextEncoder().encode(
+    JSON.stringify(parsedInstructionEvidence),
+  )
+  fixture.request.evidence.documents.push({
+    inputKey: 'paper_asset',
+    roles: ['question_source'],
+    bytes: new Uint8Array(paperAssetBytes),
+    declared: {
+      mediaType: 'application/json',
+      originalName: 'paper-asset.json',
+    },
+  })
+  fixture.request.evidence.documents.push({
+    inputKey: 'official_answers',
+    roles: ['official_answer_source'],
+    bytes: new Uint8Array(answerKeyBytes),
+    declared: {
+      mediaType: 'application/json',
+      originalName: 'answer-key.json',
+    },
+  })
+  return fixture.request
+}

@@ -309,6 +309,7 @@ export function writePaperImportVersion({
   validationReport,
   publishReport,
   version,
+  canonicalPublication = null,
   forceFailureAt = null,
 }) {
   const paperId = packageData.paperAsset.paper.paperId
@@ -356,6 +357,39 @@ export function writePaperImportVersion({
     )
     writeJson(path.join(tempDir, 'validation-report.json'), validationReport)
     writeJson(path.join(tempDir, 'publish-report.json'), publishReport)
+    if (canonicalPublication) {
+      const canonicalDir = path.join(tempDir, 'canonical')
+      mkdirSync(canonicalDir, { recursive: true })
+      writeFileSync(
+        path.join(canonicalDir, 'source-asset.bin'),
+        canonicalPublication.sourceAsset,
+      )
+      for (const [relativePath, bytes] of Object.entries(
+        canonicalPublication.artifacts,
+      )) {
+        const target = path.join(tempDir, relativePath)
+        mkdirSync(path.dirname(target), { recursive: true })
+        writeFileSync(target, bytes)
+      }
+      for (const [relativePath, bytes] of Object.entries(
+        canonicalPublication.sourceEvidence,
+      )) {
+        const target = path.join(tempDir, relativePath)
+        mkdirSync(path.dirname(target), { recursive: true })
+        writeFileSync(target, bytes)
+      }
+      writeJson(
+        path.join(
+          canonicalDir,
+          `canonical-paper-publication-v${canonicalPublication.manifest.authority.manifestVersion}.json`,
+        ),
+        canonicalPublication.manifest,
+      )
+      if (forceFailureAt === 'canonical-stage-corrupt') {
+        const corruptPath = Object.keys(canonicalPublication.artifacts)[0]
+        writeFileSync(path.join(tempDir, corruptPath), '{"corrupt":true}\n')
+      }
+    }
 
     renameSync(tempDir, versionDir)
   } catch (error) {
@@ -366,9 +400,20 @@ export function writePaperImportVersion({
 }
 
 export function removePaperImportVersion({ paperAssetsDir, paperId, versionName }) {
+  const paperDir = path.join(paperAssetsDir, paperId)
+  const versionsDir = path.join(paperDir, 'versions')
   const versionDir = path.join(paperAssetsDir, paperId, 'versions', versionName)
   if (existsSync(versionDir)) {
     rmSync(versionDir, { recursive: true, force: true })
+  }
+  if (existsSync(versionsDir) && readdirSync(versionsDir).length === 0) {
+    rmSync(versionsDir, { recursive: true, force: true })
+  }
+  if (existsSync(paperDir) && readdirSync(paperDir).length === 0) {
+    rmSync(paperDir, { recursive: true, force: true })
+  }
+  if (existsSync(paperAssetsDir) && readdirSync(paperAssetsDir).length === 0) {
+    rmSync(paperAssetsDir, { recursive: true, force: true })
   }
 }
 
@@ -376,6 +421,7 @@ export function swapPaperImportLatest({
   paperAssetsDir,
   paperId,
   versionDir,
+  canonicalRef = null,
   deferCleanup = false,
   forceFailureAt = null,
 }) {
@@ -425,6 +471,18 @@ export function swapPaperImportLatest({
   const figuresPath = path.join(versionDir, 'figures')
   if (existsSync(figuresPath)) {
     cpSync(figuresPath, path.join(tempLatest, 'figures'), { recursive: true })
+  }
+  const canonicalPath = path.join(versionDir, 'canonical')
+  if (existsSync(canonicalPath)) {
+    cpSync(canonicalPath, path.join(tempLatest, 'canonical'), {
+      recursive: true,
+    })
+  }
+  if (canonicalRef) {
+    writeJson(
+      path.join(tempLatest, 'canonical-paper-publication-ref-v1.json'),
+      canonicalRef,
+    )
   }
 
   let movedPrevious = false

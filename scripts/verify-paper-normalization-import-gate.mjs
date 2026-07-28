@@ -17,7 +17,7 @@ import { fileURLToPath } from 'node:url'
 import { DatabaseSync } from 'node:sqlite'
 
 import {
-  publishPaperImportPackage,
+  publishPaperImportPackage as publishPaperImportPackageRaw,
   recoverInterruptedPaperImportPublish,
 } from '../server/paper-import/publisher.mjs'
 import {
@@ -33,6 +33,7 @@ import {
 import {
   validatePaperNormalizedGroupsSidecar,
 } from '../server/paper-import/normalization.mjs'
+import { makeCanonicalImportAdmissionRequest } from '../test-fixtures/paper-canonical/foundationFixture.mjs'
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const fixtureDir = path.join(
@@ -42,6 +43,20 @@ const fixtureDir = path.join(
 const schemaSql = readFileSync(path.join(rootDir, 'data/sql/schema.sql'), 'utf8')
 const paperId = 'paper-2024-jslk-english'
 const sidecarFileName = 'paper-normalized-groups-v1.json'
+
+function publishPaperImportPackage(args) {
+  const filesByName = Object.fromEntries(
+    args.files.map((file) => [file.fileName, file.buffer]),
+  )
+  return publishPaperImportPackageRaw({
+    ...args,
+    canonicalRequest: makeCanonicalImportAdmissionRequest({
+      paperId,
+      paperAssetBytes: filesByName['paper-asset.json'],
+      answerKeyBytes: filesByName['answer-key.json'],
+    }),
+  })
+}
 
 const crashChildConfig = process.env.EQB_PAPER_IMPORT_CRASH_CHILD
 if (crashChildConfig) {

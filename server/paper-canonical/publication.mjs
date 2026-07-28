@@ -11,8 +11,14 @@ import {
 import path from 'node:path'
 
 import { canonicalAuthorityRef, resolveCanonicalAuthority, validateJsonSchema } from '../../shared/paper-canonical/authority.mjs'
-import { validateExactTransformationRecords } from '../../shared/paper-canonical/compiler.mjs'
-import { resolveConsumerContract } from '../../shared/paper-canonical/consumers.mjs'
+import {
+  compileCanonicalPaper,
+  validateExactTransformationRecords,
+} from '../../shared/paper-canonical/compiler.mjs'
+import {
+  consumerContractRefs,
+  resolveConsumerContract,
+} from '../../shared/paper-canonical/consumers.mjs'
 import { projectCanonicalPaper } from '../../shared/paper-canonical/projector.mjs'
 import { digestJson, sha256, stableStringify, withoutKey } from '../../shared/paper-canonical/stable.mjs'
 
@@ -431,7 +437,7 @@ export function validateCanonicalPublicationBundle({ manifest, sourceAsset, read
   }
 }
 
-function ensureDatabaseShape(db) {
+export function ensureCanonicalPublicationDatabaseShape(db) {
   db.exec(`
     CREATE TABLE IF NOT EXISTS canonical_paper_publications (
       paper_id TEXT NOT NULL,
@@ -446,6 +452,21 @@ function ensureDatabaseShape(db) {
     CREATE INDEX IF NOT EXISTS idx_canonical_paper_publications_current
       ON canonical_paper_publications (paper_id, is_current);
   `)
+}
+
+export function recordCanonicalPublicationCurrent(db, ref) {
+  ensureCanonicalPublicationDatabaseShape(db)
+  db.prepare(
+    'UPDATE canonical_paper_publications SET is_current = 0 WHERE paper_id = ?',
+  ).run(ref.paperId)
+  db.prepare(
+    'INSERT INTO canonical_paper_publications (paper_id, version_name, source_asset_version, publication_digest, is_current) VALUES (?, ?, ?, ?, 1)',
+  ).run(
+    ref.paperId,
+    ref.versionName,
+    ref.sourceAssetVersion,
+    ref.publicationDigest,
+  )
 }
 
 function paperPaths(rootDir, paperId) {
@@ -526,7 +547,7 @@ function restoreLatest(paths, previous) {
 }
 
 export function recoverCanonicalPaperPublication({ rootDir, db, paperId }) {
-  ensureDatabaseShape(db)
+  ensureCanonicalPublicationDatabaseShape(db)
   const paths = paperPaths(rootDir, paperId)
   if (!existsSync(paths.journalPath)) return { status: 'clean' }
   const journal = readJsonFile(paths.journalPath)
@@ -551,15 +572,162 @@ export function recoverCanonicalPaperPublication({ rootDir, db, paperId }) {
   throw publicationError('CANONICAL_PUBLICATION_RECOVERY_AMBIGUOUS', 'Journal and SQLite current reference cannot be reconciled uniquely')
 }
 
-export function publishCanonicalPaperPublication({ rootDir, db, compilation, sourceAssetVersion, sourceAsset, failurePoint = null }) {
-  const sealed = sealCanonicalPublication({ compilation, sourceAssetVersion, sourceAsset })
+function candidateStore(sealed, ref) {
+  const manifestFileName = publicationFileNameFor(sealed.manifest.authority)
+  return {
+    readPublishedRefs() {
+      return { current: ref, latest: ref }
+    },
+    readVersionArtifact(_ref, relativePath) {
+      if (relativePath === `canonical/${manifestFileName}`) {
+        return stableBytes(sealed.manifest)
+      }
+      return sealed.artifacts[relativePath]
+        || sealed.sourceEvidence[relativePath]
+        || null
+    },
+    readSourceAsset() {
+      return sealed.sourceAsset
+    },
+  }
+}
+
+function validateCanonicalOnlyConsumers({ sealed, ref, store }) {
+  const consumers = {}
+  for (const [consumerId, consumerContract] of Object.entries(
+    consumerContractRefs,
+  )) {
+    const consumption = loadPaperForConsumptionSync({
+      paperId: ref.paperId,
+      version: ref.versionName,
+      consumerContract,
+    }, store)
+    if (
+      consumption.disposition !== 'ready'
+      || consumption.selections.length === 0
+      || consumption.selections.some((selection) => selection.mode !== 'canonical')
+    ) {
+      const diagnostic = consumption.diagnostics?.[0]
+      throw publicationError(
+        diagnostic?.code || 'CANONICAL_IMPORT_CONSUMER_UNAVAILABLE',
+        diagnostic?.message
+          || `${consumerId} cannot consume every required canonical family`,
+      )
+    }
+    consumers[consumerId] = consumption
+  }
+  return consumers
+}
+
+function admissionFailure(compilation, error = null) {
+  const reportDiagnostics =
+    compilation?.artifacts?.normalizationReport?.diagnostics
+  const diagnostics = Array.isArray(reportDiagnostics)
+    && reportDiagnostics.length > 0
+    ? reportDiagnostics
+    : [{
+      code: error?.code || 'CANONICAL_IMPORT_ADMISSION_INVALID',
+      message: error instanceof Error ? error.message : String(error),
+    }]
+  return {
+    ok: false,
+    status: 'admission_failed',
+    disposition: compilation?.disposition || 'unsupported',
+    diagnostics,
+    artifacts: compilation?.artifacts
+      ? {
+          sourceCapture: compilation.artifacts.sourceCapture,
+          normalizationReport: compilation.artifacts.normalizationReport,
+        }
+      : undefined,
+  }
+}
+
+/**
+ * Pure write latch for new imports. Compilation, complete Publication sealing,
+ * and both supported Consumer Contracts must agree before a caller may touch
+ * database or filesystem state.
+ */
+export function admitCanonicalPaperImport({
+  request,
+  sourceAssetVersion,
+  sourceAsset,
+}) {
+  const compilation = compileCanonicalPaper(request)
+  if (compilation.disposition !== 'ready') {
+    return admissionFailure(compilation)
+  }
+  try {
+    const sealed = sealCanonicalPublication({
+      compilation,
+      sourceAssetVersion,
+      sourceAsset,
+    })
+    const ref = {
+      paperId: sealed.manifest.paperId,
+      versionName: `v${sourceAssetVersion}`,
+      sourceAssetVersion,
+      publicationDigest: sealed.manifest.publicationDigest,
+    }
+    const consumers = validateCanonicalOnlyConsumers({
+      sealed,
+      ref,
+      store: candidateStore(sealed, ref),
+    })
+    return {
+      ok: true,
+      status: 'ready',
+      disposition: 'ready',
+      compilation,
+      sealed,
+      consumers,
+    }
+  } catch (error) {
+    return admissionFailure(compilation, error)
+  }
+}
+
+export function publishCanonicalPaperPublication({
+  rootDir,
+  db,
+  request,
+  sourceAssetVersion,
+  sourceAsset,
+  failurePoint = null,
+}) {
+  const admission = admitCanonicalPaperImport({
+    request,
+    sourceAssetVersion,
+    sourceAsset,
+  })
+  if (!admission.ok) return admission
+  const { sealed } = admission
   const { paperId } = sealed.manifest
   const paths = paperPaths(rootDir, paperId)
   mkdirSync(paths.versionsDir, { recursive: true })
   recoverCanonicalPaperPublication({ rootDir, db, paperId })
   rejectUnreconciledVersionDirectories(paths, db, paperId)
   const existing = db.prepare('SELECT version_name FROM canonical_paper_publications WHERE paper_id = ? AND source_asset_version = ? AND publication_digest = ?').get(paperId, sourceAssetVersion, sealed.manifest.publicationDigest)
-  if (existing) return { status: 'idempotent', paperId, versionName: existing.version_name, publicationDigest: sealed.manifest.publicationDigest }
+  if (existing) {
+    const ref = {
+      paperId,
+      versionName: existing.version_name,
+      sourceAssetVersion,
+      publicationDigest: sealed.manifest.publicationDigest,
+    }
+    const consumers = validateCanonicalOnlyConsumers({
+      sealed,
+      ref,
+      store: createFileSystemCanonicalPublicationStore({ rootDir, db }),
+    })
+    return {
+      status: 'idempotent',
+      paperId,
+      versionName: existing.version_name,
+      publicationDigest: sealed.manifest.publicationDigest,
+      consumers,
+    }
+  }
   const versionName = nextVersionName(paths)
   const stageDir = path.join(paths.paperDir, `.staging-${randomUUID()}`)
   let versionDir = null
@@ -591,8 +759,7 @@ export function publishCanonicalPaperPublication({ rootDir, db, compilation, sou
       journal.previousLatest = previousLatest
       writeJson(paths.journalPath, journal)
       if (failurePoint === 'after-latest-before-commit') throw publicationError('CANONICAL_PUBLICATION_FORCED_FAILURE', 'Forced pre-commit failure')
-      db.prepare('UPDATE canonical_paper_publications SET is_current = 0 WHERE paper_id = ?').run(paperId)
-      db.prepare('INSERT INTO canonical_paper_publications (paper_id, version_name, source_asset_version, publication_digest, is_current) VALUES (?, ?, ?, ?, 1)').run(paperId, versionName, sourceAssetVersion, sealed.manifest.publicationDigest)
+      recordCanonicalPublicationCurrent(db, target)
       db.exec('COMMIT')
       committed = true
     } catch (error) {
@@ -604,7 +771,24 @@ export function publishCanonicalPaperPublication({ rootDir, db, compilation, sou
     if (failurePoint === 'after-commit') throw publicationError('CANONICAL_PUBLICATION_FORCED_FAILURE', 'Forced post-commit interruption')
     if (previousLatest && existsSync(previousLatest)) rmSync(previousLatest, { recursive: true, force: true })
     rmSync(paths.journalPath, { force: true })
-    return { status: 'published', paperId, versionName, publicationDigest: sealed.manifest.publicationDigest }
+    const ref = {
+      paperId,
+      versionName,
+      sourceAssetVersion,
+      publicationDigest: sealed.manifest.publicationDigest,
+    }
+    const consumers = validateCanonicalOnlyConsumers({
+      sealed,
+      ref,
+      store: createFileSystemCanonicalPublicationStore({ rootDir, db }),
+    })
+    return {
+      status: 'published',
+      paperId,
+      versionName,
+      publicationDigest: sealed.manifest.publicationDigest,
+      consumers,
+    }
   } catch (error) {
     if (existsSync(stageDir)) rmSync(stageDir, { recursive: true, force: true })
     if (!committed && versionDir && existsSync(versionDir)) rmSync(versionDir, { recursive: true, force: true })
@@ -615,7 +799,7 @@ export function publishCanonicalPaperPublication({ rootDir, db, compilation, sou
 export function createFileSystemCanonicalPublicationStore({ rootDir, db }) {
   return {
     readPublishedRefs(paperId, versionName = null) {
-      ensureDatabaseShape(db)
+      ensureCanonicalPublicationDatabaseShape(db)
       const paths = paperPaths(rootDir, paperId)
       const current = currentDbRef(db, paperId, versionName)
       const latest = versionName ? current : readLatestRef(paths)
@@ -630,8 +814,15 @@ export function createFileSystemCanonicalPublicationStore({ rootDir, db }) {
     readSourceAsset(ref) {
       const paths = paperPaths(rootDir, ref.paperId)
       if (typeof ref.versionName !== 'string' || !/^v\d+$/.test(ref.versionName)) return null
-      const filePath = path.join(paths.versionsDir, ref.versionName, 'paper-asset.json')
-      return existsSync(filePath) ? readFileSync(filePath) : null
+      const versionDir = path.join(paths.versionsDir, ref.versionName)
+      for (const relativePath of [
+        'canonical/source-asset.bin',
+        'paper-asset.json',
+      ]) {
+        const filePath = path.join(versionDir, relativePath)
+        if (existsSync(filePath)) return readFileSync(filePath)
+      }
+      return null
     },
   }
 }

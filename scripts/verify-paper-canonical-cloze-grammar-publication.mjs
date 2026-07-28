@@ -133,19 +133,21 @@ assertBlocked((evidence) => {
   })
 }, 'answer_conflict', 'OFFICIAL_ANSWER_CONFLICT')
 
-const blockedForMutation = assertBlocked((evidence) => grammarEvidence(evidence).blankIds.pop(), 'incomplete_source', 'REFERENCE_QUESTION_EVIDENCE_INCOMPLETE')
+const blockedRequest = requestWithEvidence((evidence) => grammarEvidence(evidence).blankIds.pop())
+const blockedForMutation = compileCanonicalPaper(blockedRequest)
+assert.equal(blockedForMutation.disposition, 'incomplete_source')
 const noMutationRoot = path.join(mkdtempSync(path.join(tmpdir(), 'eqb-canonical-blocked-')), 'publication')
 const noMutationDb = new DatabaseSync(':memory:')
 try {
-  assert.throws(
-    () => publishCanonicalPaperPublication({
+  assert.equal(
+    publishCanonicalPaperPublication({
       rootDir: noMutationRoot,
       db: noMutationDb,
-      compilation: blockedForMutation,
+      request: blockedRequest,
       sourceAssetVersion: 1,
       sourceAsset: fixture.sourceAsset,
-    }),
-    { code: 'CANONICAL_PUBLICATION_BLOCKED' },
+    }).status,
+    'admission_failed',
   )
   assert.equal(existsSync(noMutationRoot), false)
   assert.equal(noMutationDb.prepare("SELECT count(*) AS count FROM sqlite_master WHERE type = 'table' AND name = 'canonical_paper_publications'").get().count, 0)
@@ -172,7 +174,7 @@ try {
   const published = publishCanonicalPaperPublication({
     rootDir,
     db,
-    compilation,
+    request: fixture.request,
     sourceAssetVersion: 1,
     sourceAsset: fixture.sourceAsset,
   })

@@ -18,13 +18,14 @@ import { createServer } from '../app/node_modules/vite/dist/node/index.js'
 
 import { resolveGroupFigures } from '../server/figures/paperFigures.mjs'
 import { parseReadingDocxBuffer } from '../server/paper-import-ai/docxSplitter.mjs'
-import { publishPaperImportPackage } from '../server/paper-import/publisher.mjs'
+import { publishPaperImportPackage as publishPaperImportPackageRaw } from '../server/paper-import/publisher.mjs'
 import { buildPrintHtml } from '../server/print-renderer.mjs'
 import {
   readImportPackageFromDirectory,
   sha256,
   validatePaperImportPackage,
 } from '../server/paper-import/validator.mjs'
+import { makeCanonicalImportAdmissionRequest } from '../test-fixtures/paper-canonical/foundationFixture.mjs'
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const fixtureDir = path.join(rootDir, 'test-fixtures/paper-import/paper-2024-jslk-english')
@@ -41,6 +42,20 @@ const visualIdentityByFigureId = {
   [headerFigureId]: { red: 220, green: 38, blue: 38 },
 }
 const requireFromApp = createRequire(new URL('../app/package.json', import.meta.url))
+
+function publishPaperImportPackage(args) {
+  const filesByName = Object.fromEntries(
+    args.files.map((file) => [file.fileName, file.buffer]),
+  )
+  return publishPaperImportPackageRaw({
+    ...args,
+    canonicalRequest: makeCanonicalImportAdmissionRequest({
+      paperId,
+      paperAssetBytes: filesByName['paper-asset.json'],
+      answerKeyBytes: filesByName['answer-key.json'],
+    }),
+  })
+}
 
 function findSoffice() {
   return [

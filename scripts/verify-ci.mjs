@@ -15,6 +15,7 @@ const registry = {
   'scripts/verify-paper-asset-v1.mjs',
   'scripts/verify-paper-canonical-foundation.mjs',
   'scripts/verify-paper-canonical-publication.mjs',
+  'scripts/verify-paper-canonical-import-admission.mjs',
   'scripts/verify-paper-canonical-cloze-grammar-publication.mjs',
   'scripts/verify-paper-canonical-seven-choices-publication.mjs',
   'scripts/verify-paper-canonical-reading-publication.mjs',

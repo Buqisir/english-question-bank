@@ -9,12 +9,28 @@ import { buildSupportedMarkerSequence } from './paper-normalization-test-helpers
 import { parseReadingCandidatesFromText, parseReadingDocxBuffer } from '../server/paper-import-ai/docxSplitter.mjs'
 import { buildPaperImportAiPackageFiles } from '../server/paper-import-ai/packageBuilder.mjs'
 import { validatePaperImportPackage } from '../server/paper-import/validator.mjs'
-import { publishPaperImportPackage } from '../server/paper-import/publisher.mjs'
+import { publishPaperImportPackage as publishPaperImportPackageRaw } from '../server/paper-import/publisher.mjs'
+import { makeCanonicalImportAdmissionRequest } from '../test-fixtures/paper-canonical/foundationFixture.mjs'
 import { DatabaseSync } from 'node:sqlite'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const repoRoot = path.resolve(__dirname, '..')
 let passed = 0
+
+function publishPaperImportPackage(args) {
+  const filesByName = Object.fromEntries(
+    args.files.map((file) => [file.fileName, file.buffer]),
+  )
+  const paperAsset = JSON.parse(filesByName['paper-asset.json'].toString('utf8'))
+  return publishPaperImportPackageRaw({
+    ...args,
+    canonicalRequest: makeCanonicalImportAdmissionRequest({
+      paperId: paperAsset.paper.paperId,
+      paperAssetBytes: filesByName['paper-asset.json'],
+      answerKeyBytes: filesByName['answer-key.json'],
+    }),
+  })
+}
 
 function assert(name, condition, detail = '') {
   if (!condition) throw new Error(`${name}${detail ? `\n${detail}` : ''}`)

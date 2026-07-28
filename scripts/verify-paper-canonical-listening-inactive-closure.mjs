@@ -417,7 +417,7 @@ try {
     publishCanonicalPaperPublication({
       rootDir,
       db,
-      compilation: compiled,
+      request: fixture.request,
       sourceAssetVersion: 1,
       sourceAsset: fixture.sourceAsset,
     }).status,

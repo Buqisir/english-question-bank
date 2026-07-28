@@ -69,7 +69,7 @@ async function exercisePublicSeams(referenceFixture) {
     assert.equal(publishCanonicalPaperPublication({
       rootDir,
       db,
-      compilation: compiled,
+      request: referenceFixture.request,
       sourceAssetVersion: 1,
       sourceAsset: referenceFixture.sourceAsset,
     }).status, 'published')
