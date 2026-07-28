@@ -1272,6 +1272,43 @@ export function rollbackPaperImportPublication({
     && current.sourceAssetVersion === target.sourceAssetVersion
     && current.publicationDigest === target.publicationDigest
   ) {
+    const latestDir = path.join(paperAssetsDir, paperId, 'latest')
+    let latestRef = null
+    try {
+      latestRef = JSON.parse(
+        readFileSync(
+          path.join(latestDir, 'canonical-paper-publication-ref-v1.json'),
+          'utf8',
+        ),
+      )
+    } catch {
+      // The mismatch below reports one stable fail-closed error.
+    }
+    if (
+      !latestRef
+      || latestRef.paperId !== target.paperId
+      || latestRef.versionName !== target.versionName
+      || latestRef.sourceAssetVersion !== target.sourceAssetVersion
+      || latestRef.publicationDigest !== target.publicationDigest
+    ) {
+      const error = new Error('Canonical current and latest Publication references disagree')
+      error.code = 'PUBLICATION_REF_DISAGREEMENT'
+      throw error
+    }
+    let latestAssetVersion = null
+    try {
+      latestAssetVersion = Number(
+        JSON.parse(readFileSync(path.join(latestDir, 'paper-asset.json'), 'utf8'))
+          ?.paper?.assetVersion,
+      )
+    } catch {
+      // The mismatch below reports one stable fail-closed error.
+    }
+    if (latestAssetVersion !== target.sourceAssetVersion) {
+      const error = new Error('Canonical latest asset does not match the current Publication')
+      error.code = 'PUBLICATION_REF_DISAGREEMENT'
+      throw error
+    }
     return {
       status: 'idempotent',
       paperId,

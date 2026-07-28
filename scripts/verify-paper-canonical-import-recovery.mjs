@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import assert from 'node:assert/strict'
+import { spawnSync } from 'node:child_process'
 import {
   existsSync,
   mkdtempSync,
@@ -32,6 +33,35 @@ import {
   makeCanonicalImportAdmissionRequest,
   makeReadyCanonicalFixture,
 } from '../test-fixtures/paper-canonical/foundationFixture.mjs'
+
+const repositoryRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
+const importFixtureDir = path.join(
+  repositoryRoot,
+  'test-fixtures/paper-import/paper-2024-jslk-english',
+)
+const importPaperId = 'paper-2024-jslk-english'
+
+const crashChildConfig = process.env.EQB_CANONICAL_IMPORT_RECOVERY_CHILD
+if (crashChildConfig) {
+  const { dbPath, paperAssetsDir } = JSON.parse(crashChildConfig)
+  const childFiles = readImportPackageFromDirectory(importFixtureDir)
+  const childByName = Object.fromEntries(
+    childFiles.map(({ fileName, buffer }) => [fileName, buffer]),
+  )
+  const childDb = new DatabaseSync(dbPath)
+  publishPaperImportPackage({
+    files: childFiles,
+    db: childDb,
+    paperAssetsDir,
+    canonicalRequest: makeCanonicalImportAdmissionRequest({
+      paperId: importPaperId,
+      paperAssetBytes: childByName['paper-asset.json'],
+      answerKeyBytes: childByName['answer-key.json'],
+    }),
+    failurePoint: 'process-exit-after-version-rename',
+  })
+  throw new Error('Crash child returned without exiting')
+}
 
 function withTrailingSourceWhitespace(fixture) {
   const changed = structuredClone(fixture)
@@ -359,13 +389,7 @@ try {
   rmSync(rootDir, { recursive: true, force: true })
 }
 
-const repositoryRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
-const importFixtureDir = path.join(
-  repositoryRoot,
-  'test-fixtures/paper-import/paper-2024-jslk-english',
-)
 const importFiles = readImportPackageFromDirectory(importFixtureDir)
-const importPaperId = 'paper-2024-jslk-english'
 const importRoot = mkdtempSync(path.join(tmpdir(), 'eqb-public-import-recovery-'))
 const importDbPath = path.join(importRoot, 'question-bank.sqlite')
 const importAssets = path.join(importRoot, 'paper-assets')
@@ -403,6 +427,32 @@ function getCurrentCanonicalPublicationVersion(database, paperId) {
 
 try {
   assert.equal(publishImport(importFiles).status, 'published')
+  const latestBeforePreCommitCrash = snapshotTree(
+    path.join(importAssets, importPaperId, 'latest'),
+  )
+  const databaseBeforePreCommitCrash = snapshotDatabase(importDb)
+  importDb.close()
+  const crash = spawnSync(process.execPath, [fileURLToPath(import.meta.url)], {
+    env: {
+      ...process.env,
+      EQB_CANONICAL_IMPORT_RECOVERY_CHILD: JSON.stringify({
+        dbPath: importDbPath,
+        paperAssetsDir: importAssets,
+      }),
+    },
+    encoding: 'utf8',
+  })
+  assert.equal(crash.status, 87, crash.stderr || crash.stdout)
+  importDb = new DatabaseSync(importDbPath)
+  assert.deepEqual(
+    snapshotTree(path.join(importAssets, importPaperId, 'latest')),
+    latestBeforePreCommitCrash,
+  )
+  assert.deepEqual(snapshotDatabase(importDb), databaseBeforePreCommitCrash)
+  const preCommitRetry = publishImport(importFiles)
+  assert.equal(preCommitRetry.status, 'published')
+  assert.equal(preCommitRetry.publish.assetVersion, 2)
+
   assert.throws(
     () => publishImport(importFiles, { failurePoint: 'after-commit' }),
     { code: 'CANONICAL_PUBLICATION_FORCED_RELOAD_FAILURE' },
@@ -415,7 +465,7 @@ try {
   importDb = new DatabaseSync(importDbPath)
   const retry = publishImport(importFiles)
   assert.equal(retry.status, 'idempotent')
-  assert.equal(retry.publish.assetVersion, 2)
+  assert.equal(retry.publish.assetVersion, 3)
   assert.equal(
     existsSync(path.join(importAssets, importPaperId, '.latest-swap.json')),
     false,
@@ -441,7 +491,7 @@ try {
   )
   assert.equal(
     getCurrentCanonicalPublicationVersion(importDb, importPaperId),
-    3,
+    4,
   )
 
   const beforeFailedRollback = {
@@ -484,6 +534,26 @@ try {
     'print_pdf',
     'screen',
   ])
+  const latestRefPath = path.join(
+    importAssets,
+    importPaperId,
+    'latest',
+    'canonical-paper-publication-ref-v1.json',
+  )
+  const latestRefBytes = readFileSync(latestRefPath)
+  const staleLatestRef = JSON.parse(latestRefBytes.toString('utf8'))
+  staleLatestRef.versionName = 'v2'
+  writeFileSync(latestRefPath, `${JSON.stringify(staleLatestRef, null, 2)}\n`)
+  assert.throws(
+    () => rollbackPaperImportPublication({
+      db: importDb,
+      paperAssetsDir: importAssets,
+      paperId: importPaperId,
+      versionName: 'v1',
+    }),
+    { code: 'PUBLICATION_REF_DISAGREEMENT' },
+  )
+  writeFileSync(latestRefPath, latestRefBytes)
   assert.equal(
     JSON.parse(
       readFileSync(
