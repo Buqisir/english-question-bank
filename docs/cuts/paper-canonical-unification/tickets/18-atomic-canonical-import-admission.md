@@ -1,6 +1,6 @@
 # 18 — Atomic canonical import admission
 
-Status: ready
+Status: done
 Blocked by: Ticket 17 independent review PASS
 Next on PASS: `docs/cuts/paper-canonical-unification/tickets/19-import-recovery-retry-rollback.md`
 Terminal: no
@@ -13,18 +13,18 @@ result preserves all store state.
 
 ## Acceptance criteria
 
-- [ ] Admission requires every Profile-required family available, inactive
+- [x] Admission requires every Profile-required family available, inactive
       closures implemented, one complete ready package, and valid
       Publication/Consumer Contract closure.
-- [ ] Ready flow is compile, in-memory seal/load, stage, staged reopen,
+- [x] Ready flow is compile, in-memory seal/load, stage, staged reopen,
       journaled commit, and exact committed reload.
-- [ ] All four blocked dispositions, unavailable family, stale/corrupt
+- [x] All four blocked dispositions, unavailable family, stale/corrupt
       Publication, and authority/Profile mismatch return structured failure.
-- [ ] Blocked cases preserve database rows, refs, asset/latest/version trees,
+- [x] Blocked cases preserve database rows, refs, asset/latest/version trees,
       reports, and journals byte-for-byte.
-- [ ] No runtime canonical flag, allowlist, partial publication, operator
+- [x] No runtime canonical flag, allowlist, partial publication, operator
       bypass, generated-DOCX output, or website import UI is introduced.
-- [ ] Focused public-seam checks, ordinary Standards + Spec self-check,
+- [x] Focused public-seam checks, ordinary Standards + Spec self-check,
       app/server checks, full verify, and `git diff --check` pass.
 
 ## Superseded-ticket mapping
@@ -34,6 +34,17 @@ assumption.
 
 ## Result
 
-Commit:
-Verify:
-Notes:
+Commit: `20cd54c7`; `fb97a110`; `040f40c3`; `93cd1272`
+Verify: atomic canonical admission PASS; C7 publish 36/36; normalization import
+gate PASS; real DOCX source-media input PASS; I5 writing import 61 checks;
+app build PASS; `verify:all` 111 PASS / 1 declared SKIP / 0 FAIL;
+`git diff --check` PASS.
+Notes: The public import seam now compiles and validates one ready whole-paper
+canonical package before mutation, proves in-memory and staged canonical-only
+Screen/Print consumers, commits legacy rows plus the canonical current ref in
+one journaled transaction, and exact-reloads the committed Publication.
+Structured blocked outcomes preserve the asset tree and database exactly.
+Package binding covers imported identities, ordered content, answers, source
+media, and exact writing semantics. Initial Standards + Spec review Must Fixes
+and both focused re-review rounds are closed; final Standards and Spec results
+are PASS.
