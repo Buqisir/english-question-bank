@@ -94,10 +94,16 @@ async function exercisePublicSeams(fixture) {
 
 function requestWithEvidence(fixture, mutator) {
   const request = structuredClone(fixture.request)
-  const evidence = Object.fromEntries(request.evidence.documents.map((document) => [
-    document.inputKey,
-    JSON.parse(new TextDecoder().decode(document.bytes)),
-  ]))
+  const evidence = Object.fromEntries(
+    request.evidence.documents
+      .filter((document) =>
+        document.declared.mediaType.includes('json'),
+      )
+      .map((document) => [
+        document.inputKey,
+        JSON.parse(new TextDecoder().decode(document.bytes)),
+      ]),
+  )
   mutator(evidence)
   for (let pass = 0; pass < 3; pass++) {
     const mappingLength = new TextEncoder().encode(JSON.stringify(evidence.canonical_mapping)).byteLength
@@ -105,7 +111,13 @@ function requestWithEvidence(fixture, mutator) {
       if (observation.documentInputKey === 'canonical_mapping') observation.span.end = mappingLength
     }
   }
-  for (const document of request.evidence.documents) document.bytes = new TextEncoder().encode(JSON.stringify(evidence[document.inputKey]))
+  for (const document of request.evidence.documents) {
+    if (Object.hasOwn(evidence, document.inputKey)) {
+      document.bytes = new TextEncoder().encode(
+        JSON.stringify(evidence[document.inputKey]),
+      )
+    }
+  }
   return request
 }
 

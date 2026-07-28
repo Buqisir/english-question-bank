@@ -325,6 +325,41 @@ function assertNck1InstructionEvidenceAdmission() {
     true,
   )
 
+  const forgedSourceDigest =
+    makeContinuationWritingReferenceFixture('paper-2026-i')
+  const unrelatedSourceBytes =
+    new TextEncoder().encode('%PDF-1.4\n% unrelated forged source\n')
+  forgedSourceDigest.request.evidence.documents.push({
+    inputKey: 'unrelated_forged_source',
+    roles: ['question_source', 'source_provenance'],
+    bytes: unrelatedSourceBytes,
+    declared: { mediaType: 'application/pdf' },
+  })
+  const forgedSourceDocument =
+    forgedSourceDigest.request.evidence.documents.find(
+      (document) =>
+        document.inputKey === 'continuation_writing_instruction_evidence',
+    )
+  const forgedSourceValue = JSON.parse(
+    new TextDecoder().decode(forgedSourceDocument.bytes),
+  )
+  forgedSourceValue.sourceDocumentDigest =
+    `sha256:${createHash('sha256')
+      .update(unrelatedSourceBytes)
+      .digest('hex')}`
+  forgedSourceDocument.bytes =
+    new TextEncoder().encode(JSON.stringify(forgedSourceValue))
+  const forgedSourceCompilation =
+    compileCanonicalPaper(forgedSourceDigest.request)
+  assert.notEqual(forgedSourceCompilation.disposition, 'ready')
+  assert.equal(
+    forgedSourceCompilation.artifacts.normalizationReport.diagnostics.some(
+      (diagnostic) =>
+        diagnostic.code === 'CONTINUATION_INSTRUCTION_EVIDENCE_INVALID',
+    ),
+    true,
+  )
+
   const admitted =
     compileCanonicalPaper(
       makeContinuationWritingReferenceFixture('paper-2026-i').request,
@@ -350,6 +385,8 @@ function assertSchemaDescriptorIdentityClosure() {
   for (const schemaId of [
     'normalization-report-v9',
     'canonical-paper-publication-v9',
+    'normalization-report-v10',
+    'canonical-paper-publication-v10',
   ]) {
     assert.equal(authority.closure.schemas[schemaId].$id, schemaId)
   }
@@ -371,6 +408,21 @@ function assertSchemaDescriptorIdentityClosure() {
       (issue) => issue.code === 'SCHEMA_ID_MISMATCH',
     ),
     true,
+  )
+}
+
+function assertV9CompatibilityReadClosure() {
+  const legacyAuthority = resolveCanonicalAuthority({
+    manifestId: 'paper-canonical',
+    manifestVersion: '9',
+    manifestDigest:
+      'sha256:2f41323ad3ef27b6db49e71abcb20a25139f7275dc14e49b93909b53b825f626',
+  })
+  assert.equal(legacyAuthority.ok, true)
+  assert.equal(legacyAuthority.closure.manifest.version, '9')
+  assert.equal(
+    digestJson(legacyAuthority.closure.manifest),
+    'sha256:2f41323ad3ef27b6db49e71abcb20a25139f7275dc14e49b93909b53b825f626',
   )
 }
 
@@ -1512,6 +1564,7 @@ assertNck1WritingAuthority()
 assertZhejiangWritingChromeAuthority()
 assertNck1InstructionEvidenceAdmission()
 assertSchemaDescriptorIdentityClosure()
+assertV9CompatibilityReadClosure()
 for (const paperId of ['paper-2026-i', 'paper-zj-2020-jul']) {
   const consumption = readyConsumption(paperId)
   const selection = consumption.selections[0]

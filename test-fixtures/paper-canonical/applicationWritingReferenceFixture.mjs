@@ -1,7 +1,10 @@
 import { readFileSync } from 'node:fs'
 
 import { sha256 } from '../../shared/paper-canonical/stable.mjs'
-import { makeReadyCanonicalFixture } from './foundationFixture.mjs'
+import {
+  makeNck1ProfileInstructionEvidenceDocuments,
+  makeReadyCanonicalFixture,
+} from './foundationFixture.mjs'
 
 const references = Object.freeze({
   'paper-zj-2020-jan': Object.freeze({
@@ -121,6 +124,7 @@ export function makeApplicationWritingReferenceFixture(paperId) {
               originalName: paperId === 'paper-2026-i' ? 'paper.pdf' : 'source.docx',
             },
           },
+          ...makeNck1ProfileInstructionEvidenceDocuments(source.paperId),
         ],
       },
     },

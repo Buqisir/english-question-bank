@@ -7,6 +7,7 @@ import manifestV6 from '../../standards/paper-canonical/manifest-v6.json' with {
 import manifestV7 from '../../standards/paper-canonical/manifest-v7.json' with { type: 'json' }
 import manifestV8 from '../../standards/paper-canonical/manifest-v8.json' with { type: 'json' }
 import manifestV9 from '../../standards/paper-canonical/manifest-v9.json' with { type: 'json' }
+import manifestV10 from '../../standards/paper-canonical/manifest-v10.json' with { type: 'json' }
 import core from '../../standards/paper-canonical/core/core-invariants-v1.json' with { type: 'json' }
 import sourceAdapters from '../../standards/paper-canonical/adapters/source-adapters-v1.json' with { type: 'json' }
 import sourceAdaptersV2 from '../../standards/paper-canonical/adapters/source-adapters-v2.json' with { type: 'json' }
@@ -67,6 +68,8 @@ import reportV6Schema from '../../schemas/paper-canonical/normalization-report-v
 import reportV7Schema from '../../schemas/paper-canonical/normalization-report-v7.schema.json' with { type: 'json' }
 import reportV8Schema from '../../schemas/paper-canonical/normalization-report-v8.schema.json' with { type: 'json' }
 import reportV9Schema from '../../schemas/paper-canonical/normalization-report-v9.schema.json' with { type: 'json' }
+import reportV10Schema from '../../schemas/paper-canonical/normalization-report-v10.schema.json' with { type: 'json' }
+import legacyReportV9Schema from '../../schemas/paper-canonical/compat/normalization-report-v9-pre-identity-fix.schema.json' with { type: 'json' }
 import publicationSchema from '../../schemas/paper-canonical/canonical-paper-publication-v1.schema.json' with { type: 'json' }
 import publicationV2Schema from '../../schemas/paper-canonical/canonical-paper-publication-v2.schema.json' with { type: 'json' }
 import publicationV3Schema from '../../schemas/paper-canonical/canonical-paper-publication-v3.schema.json' with { type: 'json' }
@@ -76,6 +79,8 @@ import publicationV6Schema from '../../schemas/paper-canonical/canonical-paper-p
 import publicationV7Schema from '../../schemas/paper-canonical/canonical-paper-publication-v7.schema.json' with { type: 'json' }
 import publicationV8Schema from '../../schemas/paper-canonical/canonical-paper-publication-v8.schema.json' with { type: 'json' }
 import publicationV9Schema from '../../schemas/paper-canonical/canonical-paper-publication-v9.schema.json' with { type: 'json' }
+import publicationV10Schema from '../../schemas/paper-canonical/canonical-paper-publication-v10.schema.json' with { type: 'json' }
+import legacyPublicationV9Schema from '../../schemas/paper-canonical/compat/canonical-paper-publication-v9-pre-identity-fix.schema.json' with { type: 'json' }
 import consumerSchema from '../../schemas/paper-canonical/consumer-contract-v1.schema.json' with { type: 'json' }
 
 import { digestJson, exactKeys, isRecordValue } from './stable.mjs'
@@ -398,7 +403,11 @@ function validateNormalizationRules(artifact) {
   return issues
 }
 
-export function validateAuthorityClosure({ manifest: candidateManifest, artifacts, schemas }) {
+export function validateAuthorityClosure({
+  manifest: candidateManifest,
+  artifacts,
+  schemas,
+}) {
   const issues = []
   const schemaById = new Map(Object.entries(schemas || {}))
   const manifestSchema = schemaById.get('standard-manifest-v1')
@@ -417,7 +426,18 @@ export function validateAuthorityClosure({ manifest: candidateManifest, artifact
     const schema = schemaById.get(descriptor.id)
     if (!schema) issues.push(issue('SCHEMA_MISSING', '$.schemas', `Schema ${descriptor.id} is unavailable`))
     else if (digestJson(schema) !== descriptor.sha256) issues.push(issue('SCHEMA_DIGEST_MISMATCH', '$.schemas', `Schema ${descriptor.id} digest differs`))
-    if (schema && schema.$id !== descriptor.id) {
+    const immutableV9IdentityException = (
+      schema
+      && candidateManifest?.version === '9'
+      && digestJson(candidateManifest)
+        === 'sha256:2f41323ad3ef27b6db49e71abcb20a25139f7275dc14e49b93909b53b825f626'
+      && [
+        'normalization-report-v9',
+        'canonical-paper-publication-v9',
+      ].includes(descriptor.id)
+      && digestJson(schema) === descriptor.sha256
+    )
+    if (schema && schema.$id !== descriptor.id && !immutableV9IdentityException) {
       issues.push(issue('SCHEMA_ID_MISMATCH', '$.schemas', `Schema ${descriptor.id} declares ${schema.$id || 'no $id'}`))
     }
   }
@@ -545,7 +565,8 @@ const artifactsV5 = { ...sharedArtifactsV5, normalization: normalizationV2, 'ren
 const artifactsV6 = { ...sharedArtifactsV6, normalization: normalizationV2, 'renderer-typography': typographyV2 }
 const artifactsV7 = { ...sharedArtifactsV7, normalization: normalizationV2, 'renderer-typography': typographyV2 }
 const artifactsV8 = { ...sharedArtifactsV8, normalization: normalizationV2, 'renderer-typography': typographyV2 }
-const artifactsV9 = { ...sharedArtifactsV9, normalization: normalizationV3, 'renderer-typography': typographyV2 }
+const artifactsV9 = { ...sharedArtifactsV9, normalization: normalizationV2, 'renderer-typography': typographyV2 }
+const artifactsV10 = { ...sharedArtifactsV9, normalization: normalizationV3, 'renderer-typography': typographyV2 }
 const schemasV1 = { ...sharedSchemas, 'renderer-typography-v1': typographyV1Schema, 'normalization-rules-v1': normalizationSchema, 'normalization-report-v1': reportSchema, 'canonical-paper-publication-v1': publicationSchema }
 const schemasV2 = { ...sharedSchemas, 'renderer-typography-v1': typographyV1Schema, 'normalization-rules-v2': normalizationV2Schema, 'normalization-report-v2': reportV2Schema, 'canonical-paper-publication-v2': publicationV2Schema }
 const schemasV3 = { ...sharedSchemas, 'renderer-typography-v2': typographyV2Schema, 'normalization-rules-v2': normalizationV2Schema, 'normalization-report-v3': reportV3Schema, 'canonical-paper-publication-v3': publicationV3Schema }
@@ -591,10 +612,17 @@ const schemasV8 = {
 }
 const schemasV9 = {
   ...schemasV6,
+  'normalization-report-v9': legacyReportV9Schema,
+  'canonical-paper-publication-v9': legacyPublicationV9Schema,
+}
+const schemasV10 = {
+  ...schemasV6,
   'normalization-rules-v3': normalizationV3Schema,
   'profile-writing-source-evidence-v1': profileWritingSourceEvidenceSchema,
   'normalization-report-v9': reportV9Schema,
   'canonical-paper-publication-v9': publicationV9Schema,
+  'normalization-report-v10': reportV10Schema,
+  'canonical-paper-publication-v10': publicationV10Schema,
 }
 const validationV1 = validateAuthorityClosure({ manifest: manifestV1, artifacts: artifactsV1, schemas: schemasV1 })
 const validationV2 = validateAuthorityClosure({ manifest: manifestV2, artifacts: artifactsV2, schemas: schemasV2 })
@@ -605,7 +633,22 @@ const validationV6 = validateAuthorityClosure({ manifest: manifestV6, artifacts:
 const validationV7 = validateAuthorityClosure({ manifest: manifestV7, artifacts: artifactsV7, schemas: schemasV7 })
 const validationV8 = validateAuthorityClosure({ manifest: manifestV8, artifacts: artifactsV8, schemas: schemasV8 })
 const validationV9 = validateAuthorityClosure({ manifest: manifestV9, artifacts: artifactsV9, schemas: schemasV9 })
-if (!validationV1.ok || !validationV2.ok || !validationV3.ok || !validationV4.ok || !validationV5.ok || !validationV6.ok || !validationV7.ok || !validationV8.ok || !validationV9.ok) throw new Error(`Invalid checked-in canonical authority: ${JSON.stringify([...validationV1.issues, ...validationV2.issues, ...validationV3.issues, ...validationV4.issues, ...validationV5.issues, ...validationV6.issues, ...validationV7.issues, ...validationV8.issues, ...validationV9.issues])}`)
+const validationV10 = validateAuthorityClosure({ manifest: manifestV10, artifacts: artifactsV10, schemas: schemasV10 })
+const validations = [
+  validationV1,
+  validationV2,
+  validationV3,
+  validationV4,
+  validationV5,
+  validationV6,
+  validationV7,
+  validationV8,
+  validationV9,
+  validationV10,
+]
+if (validations.some((validation) => !validation.ok)) {
+  throw new Error(`Invalid checked-in canonical authority: ${JSON.stringify(validations.flatMap((validation) => validation.issues))}`)
+}
 
 function authorityRef(manifest) {
   return Object.freeze({ manifestId: manifest.manifestId, manifestVersion: manifest.version, manifestDigest: digestJson(manifest) })
@@ -621,6 +664,7 @@ const authorities = [
   { manifest: manifestV7, artifacts: artifactsV7, schemas: schemasV7 },
   { manifest: manifestV8, artifacts: artifactsV8, schemas: schemasV8 },
   { manifest: manifestV9, artifacts: artifactsV9, schemas: schemasV9 },
+  { manifest: manifestV10, artifacts: artifactsV10, schemas: schemasV10 },
 ].map((authority) => ({
   ...authority,
   authorityRef: authorityRef(authority.manifest),
@@ -628,7 +672,7 @@ const authorities = [
   families: new Map(Object.values(authority.artifacts).filter((artifact) => artifact?.owner === 'family').map((family) => [family.familyContractId, family])),
 }))
 
-export const canonicalAuthorityRef = authorities.find((authority) => authority.manifest.version === '9').authorityRef
+export const canonicalAuthorityRef = authorities.find((authority) => authority.manifest.version === '10').authorityRef
 
 export function resolveCanonicalAuthority(authorityRef) {
   const authority = authorities.find((candidate) => candidate.authorityRef.manifestId === authorityRef?.manifestId && candidate.authorityRef.manifestVersion === authorityRef?.manifestVersion && candidate.authorityRef.manifestDigest === authorityRef?.manifestDigest)

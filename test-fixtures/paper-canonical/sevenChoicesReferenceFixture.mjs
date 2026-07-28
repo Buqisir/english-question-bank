@@ -1,7 +1,10 @@
 import { readFileSync } from 'node:fs'
 
 import { sha256 } from '../../shared/paper-canonical/stable.mjs'
-import { makeReadyCanonicalFixture } from './foundationFixture.mjs'
+import {
+  makeNck1ProfileInstructionEvidenceDocuments,
+  makeReadyCanonicalFixture,
+} from './foundationFixture.mjs'
 
 const references = Object.freeze({
   'paper-2026-i': Object.freeze({
@@ -90,6 +93,7 @@ export function makeSevenChoicesCanonicalReferenceFixture(paperId) {
             bytes: importMeta,
             declared: { mediaType: 'application/json', originalName: 'import-meta.json' },
           },
+          ...makeNck1ProfileInstructionEvidenceDocuments(source.paperId),
         ],
       },
     },

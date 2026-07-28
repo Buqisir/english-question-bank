@@ -46,11 +46,17 @@ assert.equal(compilation.artifacts.sourceCapture.assertions.find((assertion) => 
 assert.deepEqual(
   compilation.artifacts.normalizationReport.transformationRecords.map((record) => [record.target.identity, record.operation]),
   [
+    [
+      'profile:nck1:instruction:writing.continuation.prompt',
+      'profile_instruction_correction',
+    ],
     ['group-2026-i-cloze', 'structural_tokenization'],
     ['group-2026-i-grammar-fill', 'structural_tokenization'],
   ],
 )
-for (const record of compilation.artifacts.normalizationReport.transformationRecords) {
+for (const record of compilation.artifacts.normalizationReport.transformationRecords.filter(
+  (candidate) => candidate.operation === 'structural_tokenization',
+)) {
   const group = compilation.artifacts.canonicalPaper.questionGroups.find((candidate) => candidate.identity.groupId === record.target.identity)
   assert.deepEqual(record.after, group.content.blocks)
 }
@@ -70,10 +76,16 @@ assert.deepEqual(supplemented.artifacts.normalizationReport, compilation.artifac
 
 function requestWithEvidence(mutator) {
   const request = structuredClone(fixture.request)
-  const evidence = Object.fromEntries(request.evidence.documents.map((document) => [
-    document.inputKey,
-    JSON.parse(new TextDecoder().decode(document.bytes)),
-  ]))
+  const evidence = Object.fromEntries(
+    request.evidence.documents
+      .filter((document) =>
+        document.declared.mediaType.includes('json'),
+      )
+      .map((document) => [
+        document.inputKey,
+        JSON.parse(new TextDecoder().decode(document.bytes)),
+      ]),
+  )
   mutator(evidence)
   const value = evidence.canonical_mapping
   for (let pass = 0; pass < 3; pass++) {
@@ -81,7 +93,11 @@ function requestWithEvidence(mutator) {
     for (const observation of value.observations) if (observation.documentInputKey === 'canonical_mapping') observation.span.end = byteLength
   }
   for (const document of request.evidence.documents) {
-    document.bytes = new TextEncoder().encode(JSON.stringify(evidence[document.inputKey]))
+    if (Object.hasOwn(evidence, document.inputKey)) {
+      document.bytes = new TextEncoder().encode(
+        JSON.stringify(evidence[document.inputKey]),
+      )
+    }
   }
   return request
 }

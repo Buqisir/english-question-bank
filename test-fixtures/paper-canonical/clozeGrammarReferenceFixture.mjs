@@ -1,7 +1,10 @@
 import { readFileSync } from 'node:fs'
 
 import { sha256 } from '../../shared/paper-canonical/stable.mjs'
-import { makeReadyCanonicalFixture } from './foundationFixture.mjs'
+import {
+  makeNck1ProfileInstructionEvidenceDocuments,
+  makeReadyCanonicalFixture,
+} from './foundationFixture.mjs'
 
 const paperAssetUrl = new URL('../../app/public/paper-assets/paper-2026-i/latest/paper-asset.json', import.meta.url)
 const answerKeyUrl = new URL('../../app/public/paper-assets/paper-2026-i/latest/answer-key.json', import.meta.url)
@@ -64,6 +67,7 @@ export function makeClozeGrammarCanonicalReferenceFixture() {
             bytes: answerKey,
             declared: { mediaType: 'application/json', originalName: 'answer-key.json' },
           },
+          ...makeNck1ProfileInstructionEvidenceDocuments(source.paperId),
         ],
       },
     },

@@ -852,11 +852,11 @@ function appendContinuationWritingReferenceGroup({
 function appendNck1ContinuationInstructionEvidence({
   source,
   instructionEntries,
-  requiresInstructionEvidence,
+  expectedSourceDocumentDigest,
   documents,
   diagnostics,
 }) {
-  if (source.profileId !== 'nck1' || !requiresInstructionEvidence) return
+  if (source.profileId !== 'nck1') return
   if (instructionEntries.length !== 1) {
     diagnostics.push(diagnostic(
       'CONTINUATION_INSTRUCTION_EVIDENCE_INCOMPLETE',
@@ -884,7 +884,14 @@ function appendNck1ContinuationInstructionEvidence({
   const exactCorrection = (
     evidence?.paperId === source.paperId
     && evidence?.profileId === source.profileId
+    && (
+      expectedSourceDocumentDigest == null
+      || evidence.sourceDocumentDigest === expectedSourceDocumentDigest
+    )
     && sourceMatches.length === 1
+    && sourceMatches[0].mediaType === 'application/pdf'
+    && sourceMatches[0].roles.includes('question_source')
+    && sourceMatches[0].roles.includes('source_provenance')
     && stableStringify(evidence?.instruction)
       === stableStringify(expectedInstruction)
     && evidence?.sourceLocation?.kind === 'pdf_page_region'
@@ -1005,7 +1012,8 @@ function adaptReferenceFamilies(parsed, documents, diagnostics) {
   appendNck1ContinuationInstructionEvidence({
     source: parsed.value,
     instructionEntries,
-    requiresInstructionEvidence: Boolean(continuationEntry),
+    expectedSourceDocumentDigest:
+      continuationEntry?.value?.sourceDocumentDigest,
     documents,
     diagnostics,
   })

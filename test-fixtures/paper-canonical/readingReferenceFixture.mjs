@@ -1,7 +1,10 @@
 import { readFileSync } from 'node:fs'
 
 import { sha256 } from '../../shared/paper-canonical/stable.mjs'
-import { makeReadyCanonicalFixture } from './foundationFixture.mjs'
+import {
+  makeNck1ProfileInstructionEvidenceDocuments,
+  makeReadyCanonicalFixture,
+} from './foundationFixture.mjs'
 
 const hashes = Object.freeze({
   sourcePdf: 'sha256:31a87069e6d530afba9123eec0487adf45e52e0b98530af80b62476f169e4d0f',
@@ -215,6 +218,7 @@ export function makeReadingCanonicalReferenceFixture() {
             bytes: tableProof,
             declared: { mediaType: 'image/png', originalName: 'reading-a-table-1.png' },
           },
+          ...makeNck1ProfileInstructionEvidenceDocuments(source.paperId),
         ],
       },
     },

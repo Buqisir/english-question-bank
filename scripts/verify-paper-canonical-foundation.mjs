@@ -9,7 +9,10 @@ import { projectCanonicalPaper } from '../shared/paper-canonical/projector.mjs'
 import { digestJson, sha256 } from '../shared/paper-canonical/stable.mjs'
 import { makeReadyCanonicalFixture } from '../test-fixtures/paper-canonical/foundationFixture.mjs'
 
-const source = makeReadyCanonicalFixture().source
+const readyFixture = makeReadyCanonicalFixture()
+const source = readyFixture.source
+const profileInstructionEvidenceDocuments =
+  readyFixture.request.evidence.documents.slice(1)
 function makeRequest(value, extraDocuments = []) {
   return {
     authority: canonicalAuthorityRef,
@@ -23,6 +26,7 @@ function makeRequest(value, extraDocuments = []) {
             mediaType: 'application/vnd.eqb.canonical-fixture+json',
           },
         },
+        ...profileInstructionEvidenceDocuments,
         ...extraDocuments,
       ],
     },
@@ -140,7 +144,16 @@ exactTransformation.transformations = [{
 }]
 const transformed = compileCanonicalPaper(makeRequest(exactTransformation))
 assert.equal(transformed.disposition, 'ready')
-assert.equal(transformed.artifacts.normalizationReport.transformationRecords.length, 1)
+assert.equal(
+  transformed.artifacts.normalizationReport.transformationRecords.length,
+  first.artifacts.normalizationReport.transformationRecords.length + 1,
+)
+assert.equal(
+  transformed.artifacts.normalizationReport.transformationRecords.some(
+    (record) => record.recordId === 'record:exact',
+  ),
+  true,
+)
 for (const rule of closure.artifacts.normalization.rules) {
   for (const operation of rule.allowedOperations) {
     if (operation === 'structural_tokenization') continue // Covered with real source replay by verify-paper-canonical-cloze-grammar-publication.mjs.

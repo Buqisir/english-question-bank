@@ -1,5 +1,60 @@
 import { canonicalAuthorityRef } from '../../shared/paper-canonical/compiler.mjs'
 import { resolveCanonicalAuthority, slotsForProfile } from '../../shared/paper-canonical/authority.mjs'
+import { sha256 } from '../../shared/paper-canonical/stable.mjs'
+
+export function makeNck1ProfileInstructionEvidenceDocuments(paperId) {
+  const profile =
+    resolveCanonicalAuthority(canonicalAuthorityRef).closure.profiles.get(
+      'nck1',
+    )
+  const instructionSourceBytes = new TextEncoder().encode(
+    '%PDF-1.4\n% EQB canonical fixture instruction source\n',
+  )
+  const instructionEvidence = {
+    schemaVersion: 'profile-writing-source-evidence-v1',
+    paperId,
+    profileId: 'nck1',
+    sourceDocumentDigest: sha256(instructionSourceBytes),
+    review: {
+      method: 'manual_source_transcription',
+      status: 'accepted',
+    },
+    sourceLocation: {
+      kind: 'pdf_page_region',
+      page: 1,
+      region: { x: 0, y: 0, width: 1, height: 1 },
+      locator: 'Synthetic protocol fixture instruction source',
+    },
+    instruction: profile.instructions['writing.continuation.prompt'],
+    transformationRecord: {
+      recordId:
+        `transformation:${paperId}:continuation-instruction`,
+      ruleId: 'source-exact-transcription',
+      ruleVersion: '1',
+      certainty: 'exact',
+      before: 'Synthetic instruction before correction.',
+      after: profile.instructions['writing.continuation.prompt'].text,
+      proof: 'Synthetic protocol fixture exact transcription proof.',
+    },
+  }
+  return [
+    {
+      inputKey: 'profile_instruction_source',
+      roles: ['question_source', 'source_provenance'],
+      bytes: instructionSourceBytes,
+      declared: { mediaType: 'application/pdf' },
+    },
+    {
+      inputKey: 'continuation_writing_instruction_evidence',
+      roles: ['structured_source', 'source_provenance'],
+      bytes: new TextEncoder().encode(JSON.stringify(instructionEvidence)),
+      declared: {
+        mediaType:
+          'application/vnd.eqb.profile-writing-source-evidence+json',
+      },
+    },
+  ]
+}
 
 function option(label) {
   return { optionId: `option:${label}`, label, content: [{ kind: 'text', nodeId: `text:${label}`, text: label }] }
@@ -280,17 +335,24 @@ export function makeReadyCanonicalFixture() {
     for (const observation of observations) observation.span.end = byteLength
   }
   const bytes = new TextEncoder().encode(JSON.stringify(source))
+  const instructionEvidenceDocuments =
+    makeNck1ProfileInstructionEvidenceDocuments(source.paperId)
   return {
     source,
     request: {
       authority: canonicalAuthorityRef,
       evidence: {
-        documents: [{
-          inputKey: 'questions',
-          roles: ['question_source', 'official_answer_source'],
-          bytes,
-          declared: { mediaType: 'application/vnd.eqb.canonical-fixture+json' },
-        }],
+        documents: [
+          {
+            inputKey: 'questions',
+            roles: ['question_source', 'official_answer_source'],
+            bytes,
+            declared: {
+              mediaType: 'application/vnd.eqb.canonical-fixture+json',
+            },
+          },
+          ...instructionEvidenceDocuments,
+        ],
       },
     },
     sourceAsset: bytes,

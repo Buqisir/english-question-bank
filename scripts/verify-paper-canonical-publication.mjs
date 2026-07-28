@@ -298,6 +298,22 @@ try {
   const unsafeFixture = makeReadyCanonicalFixture()
   unsafeFixture.source.paperId = '../paper-canonical-escape'
   unsafeFixture.request.evidence.documents[0].bytes = new TextEncoder().encode(JSON.stringify(unsafeFixture.source))
+  const unsafeInstructionEvidence = JSON.parse(
+    new TextDecoder().decode(
+      unsafeFixture.request.evidence.documents.find(
+        (document) =>
+          document.inputKey ===
+          'continuation_writing_instruction_evidence',
+      ).bytes,
+    ),
+  )
+  unsafeInstructionEvidence.paperId = unsafeFixture.source.paperId
+  unsafeFixture.request.evidence.documents.find(
+    (document) =>
+      document.inputKey === 'continuation_writing_instruction_evidence',
+  ).bytes = new TextEncoder().encode(
+    JSON.stringify(unsafeInstructionEvidence),
+  )
   const unsafeCompilation = compileCanonicalPaper(unsafeFixture.request)
   assert.equal(unsafeCompilation.disposition, 'ready')
   assert.throws(
