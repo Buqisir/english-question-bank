@@ -2,6 +2,7 @@ import { createHash, randomUUID } from 'node:crypto'
 import { readFileSync } from 'node:fs'
 import path from 'node:path'
 import {
+  beginPaperImportPublish,
   computeNextPaperAssetVersion,
   cleanupPaperImportTempArtifacts,
   commitPaperImportLatestSwap,
@@ -23,6 +24,7 @@ import {
   createFileSystemCanonicalPublicationStore,
   loadCanonicalOnlyConsumers,
   recordCanonicalPublicationCurrent,
+  selectCanonicalPublicationCurrent,
 } from '../paper-canonical/publication.mjs'
 
 const groupTypeMap = {
@@ -135,15 +137,50 @@ function getPublishedDbAssetVersions(db, paperId) {
   ).all(paperId).map(({ asset_version: version }) => Number(version))
 }
 
+function getCurrentCanonicalPublication(db, paperId) {
+  const table = db.prepare(
+    "SELECT name FROM sqlite_master WHERE type = 'table' AND name = 'canonical_paper_publications'",
+  ).get()
+  if (!table) return null
+  const row = db.prepare(
+    `
+    SELECT paper_id, version_name, source_asset_version, publication_digest
+    FROM canonical_paper_publications
+    WHERE paper_id = ? AND is_current = 1
+    `,
+  ).get(paperId)
+  if (!row) return null
+  return {
+    paperId: row.paper_id,
+    versionName: row.version_name,
+    sourceAssetVersion: Number(row.source_asset_version),
+    publicationDigest: row.publication_digest,
+  }
+}
+
 export function recoverInterruptedPaperImportPublish({
   db,
   paperAssetsDir,
   paperId,
 }) {
+  const current = getCurrentCanonicalPublication(db, paperId)
   return recoverPaperImportLatestSwap({
     paperAssetsDir,
     paperId,
     publishedVersions: getPublishedDbAssetVersions(db, paperId),
+    currentCanonicalVersion: current?.sourceAssetVersion ?? null,
+    validateCommitted(targetVersion) {
+      if (!current || current.sourceAssetVersion !== targetVersion) {
+        throw new Error(`Committed canonical Publication is missing for ${paperId} v${targetVersion}`)
+      }
+      loadCanonicalOnlyConsumers({
+        ref: current,
+        store: createFileSystemCanonicalPublicationStore({
+          rootDir: paperAssetsDir,
+          db,
+        }),
+      })
+    },
   })
 }
 
@@ -870,6 +907,43 @@ function stagedCanonicalStore({ versionDir, ref }) {
   }
 }
 
+function admitBoundCanonicalPackage({
+  canonicalRequest,
+  version,
+  paperId,
+  packageData,
+  sourceAssetBytes,
+  answerKeyBytes,
+}) {
+  const admission = admitCanonicalPaperImport({
+    request: canonicalRequest,
+    sourceAssetVersion: version,
+    sourceAsset: sourceAssetBytes,
+  })
+  if (!admission.ok) return { failure: canonicalAdmissionFailure(admission) }
+  if (admission.sealed.manifest.paperId !== paperId) {
+    return {
+      failure: canonicalAdmissionFailure({
+        disposition: 'unsupported',
+        diagnostics: [{
+          code: 'CANONICAL_IMPORT_PAPER_ID_MISMATCH',
+          message: 'Canonical Publication paper identity differs from the validated import package',
+        }],
+      }),
+    }
+  }
+  const bindingFailure = validateCanonicalImportPackageBinding({
+    admission,
+    packageData,
+    paperAssetBytes: sourceAssetBytes,
+    answerKeyBytes,
+  })
+  if (bindingFailure) {
+    return { failure: canonicalAdmissionFailure(bindingFailure) }
+  }
+  return { admission }
+}
+
 export function publishPaperImportPackage({
   files,
   db,
@@ -913,52 +987,80 @@ export function publishPaperImportPackage({
   }
 
   const paperId = validation.packageData.paperAsset.paper.paperId
-  let version = computeNextPublishVersion({ db, paperAssetsDir, paperId })
   const sourceAssetFile = files.find(
     (file) => file.fileName === 'paper-asset.json' && Buffer.isBuffer(file.buffer),
   )
   const answerKeyFile = files.find(
     (file) => file.fileName === 'answer-key.json' && Buffer.isBuffer(file.buffer),
   )
-  let admission = admitCanonicalPaperImport({
-    request: canonicalRequest,
-    sourceAssetVersion: version,
-    sourceAsset: sourceAssetFile?.buffer,
-  })
-  if (!admission.ok) return canonicalAdmissionFailure(admission)
-  if (admission.sealed.manifest.paperId !== paperId) {
-    return canonicalAdmissionFailure({
-      disposition: 'unsupported',
-      diagnostics: [{
-        code: 'CANONICAL_IMPORT_PAPER_ID_MISMATCH',
-        message: 'Canonical Publication paper identity differs from the validated import package',
-      }],
-    })
-  }
-  const bindingFailure = validateCanonicalImportPackageBinding({
-    admission,
-    packageData: validation.packageData,
-    paperAssetBytes: sourceAssetFile?.buffer,
-    answerKeyBytes: answerKeyFile?.buffer,
-  })
-  if (bindingFailure) return canonicalAdmissionFailure(bindingFailure)
-
-  recoverInterruptedPaperImportPublish({ db, paperAssetsDir, paperId })
+  const recovery = recoverInterruptedPaperImportPublish({ db, paperAssetsDir, paperId })
   cleanupPaperImportTempArtifacts(paperAssetsDir)
-  const recoveredVersion = computeNextPublishVersion({
+
+  if (recovery.finalized) {
+    const current = getCurrentCanonicalPublication(db, paperId)
+    const retry = admitBoundCanonicalPackage({
+      canonicalRequest,
+      version: recovery.targetVersion,
+      paperId,
+      packageData: validation.packageData,
+      sourceAssetBytes: sourceAssetFile?.buffer,
+      answerKeyBytes: answerKeyFile?.buffer,
+    })
+    if (retry.failure) return retry.failure
+    if (
+      !current
+      || current.sourceAssetVersion !== recovery.targetVersion
+      || current.publicationDigest !== retry.admission.sealed.manifest.publicationDigest
+    ) {
+      return canonicalAdmissionFailure({
+        disposition: 'unsupported',
+        diagnostics: [{
+          code: 'CANONICAL_PUBLICATION_IDENTITY_CONFLICT',
+          message: 'Retry identity conflicts with the committed canonical Publication',
+        }],
+      })
+    }
+    const consumers = loadCanonicalOnlyConsumers({
+      ref: current,
+      store: createFileSystemCanonicalPublicationStore({
+        rootDir: paperAssetsDir,
+        db,
+      }),
+    })
+    const versionName = `v${recovery.targetVersion}`
+    const versionDir = path.join(paperAssetsDir, paperId, 'versions', versionName)
+    const publishReport = JSON.parse(
+      readFileSync(path.join(versionDir, 'publish-report.json'), 'utf8'),
+    )
+    return {
+      ok: true,
+      status: 'idempotent',
+      validation: publicValidation,
+      publish: {
+        ...publishReport,
+        latestDir: path.join(paperAssetsDir, paperId, 'latest'),
+        versionDir,
+        canonicalPublicationDigest: current.publicationDigest,
+        consumers,
+      },
+    }
+  }
+
+  const version = computeNextPublishVersion({
     db,
     paperAssetsDir,
     paperId,
   })
-  if (recoveredVersion !== version) {
-    version = recoveredVersion
-    admission = admitCanonicalPaperImport({
-      request: canonicalRequest,
-      sourceAssetVersion: version,
-      sourceAsset: sourceAssetFile?.buffer,
-    })
-    if (!admission.ok) return canonicalAdmissionFailure(admission)
-  }
+  const admissionResult = admitBoundCanonicalPackage({
+    canonicalRequest,
+    version,
+    paperId,
+    packageData: validation.packageData,
+    sourceAssetBytes: sourceAssetFile?.buffer,
+    answerKeyBytes: answerKeyFile?.buffer,
+  })
+  if (admissionResult.failure) return admissionResult.failure
+  const admission = admissionResult.admission
   const readingGroups = getReadingChoiceGroups(validation.packageData.paperAsset).map((group) => ({
     groupId: group.groupId,
     title: group.title,
@@ -990,7 +1092,18 @@ export function publishPaperImportPackage({
       version,
       canonicalPublication: admission.sealed,
       forceFailureAt: failurePoint,
+      beforeVersionCommit({ tempDir, versionName }) {
+        beginPaperImportPublish({
+          paperAssetsDir,
+          paperId,
+          versionName,
+          tempVersionDir: tempDir,
+        })
+      },
     })
+    if (failurePoint === 'process-exit-after-version-rename') {
+      process.exit(87)
+    }
 
     const canonicalRef = {
       paperId,
@@ -1041,13 +1154,7 @@ export function publishPaperImportPackage({
     }
     db.exec('COMMIT')
     dbCommitted = true
-    try {
-      commitPaperImportLatestSwap(latestSwap)
-    } catch {
-      // A stale previous-latest directory is safe and is removed on the next run.
-    }
-
-    if (failurePoint === 'committed-reload') {
+    if (failurePoint === 'after-commit' || failurePoint === 'committed-reload') {
       const error = new Error('Forced committed canonical reload failure')
       error.code = 'CANONICAL_PUBLICATION_FORCED_RELOAD_FAILURE'
       throw error
@@ -1059,6 +1166,7 @@ export function publishPaperImportPackage({
         db,
       }),
     })
+    commitPaperImportLatestSwap(latestSwap)
 
     return {
       ok: true,
@@ -1082,6 +1190,11 @@ export function publishPaperImportPackage({
       }
       try {
         rollbackPaperImportLatestSwap(latestSwap)
+      } catch {
+        // Preserve the original publish failure.
+      }
+      try {
+        recoverInterruptedPaperImportPublish({ db, paperAssetsDir, paperId })
       } catch {
         // Preserve the original publish failure.
       }
@@ -1112,6 +1225,109 @@ export function publishPaperImportPackage({
         )
       } catch {
         // Failure recording must not hide the publish failure.
+      }
+    }
+    throw error
+  }
+}
+
+export function rollbackPaperImportPublication({
+  db,
+  paperAssetsDir,
+  paperId,
+  versionName,
+  failurePoint = null,
+}) {
+  if (!/^v[1-9]\d*$/.test(versionName)) {
+    throw new Error(`Invalid rollback version for ${paperId}`)
+  }
+  recoverInterruptedPaperImportPublish({ db, paperAssetsDir, paperId })
+  const row = db.prepare(
+    `
+    SELECT paper_id, version_name, source_asset_version, publication_digest
+    FROM canonical_paper_publications
+    WHERE paper_id = ? AND version_name = ?
+    `,
+  ).get(paperId, versionName)
+  if (!row) {
+    const error = new Error(`Canonical rollback target is not published: ${paperId} ${versionName}`)
+    error.code = 'CANONICAL_PUBLICATION_ROLLBACK_TARGET_MISSING'
+    throw error
+  }
+  const target = {
+    paperId: row.paper_id,
+    versionName: row.version_name,
+    sourceAssetVersion: Number(row.source_asset_version),
+    publicationDigest: row.publication_digest,
+  }
+  const store = createFileSystemCanonicalPublicationStore({
+    rootDir: paperAssetsDir,
+    db,
+  })
+  const targetConsumers = loadCanonicalOnlyConsumers({ ref: target, store })
+  const current = getCurrentCanonicalPublication(db, paperId)
+  if (
+    current
+    && current.versionName === target.versionName
+    && current.sourceAssetVersion === target.sourceAssetVersion
+    && current.publicationDigest === target.publicationDigest
+  ) {
+    return {
+      status: 'idempotent',
+      paperId,
+      versionName,
+      publicationDigest: target.publicationDigest,
+      consumers: targetConsumers,
+    }
+  }
+
+  let latestSwap = null
+  let dbCommitted = false
+  try {
+    db.exec('BEGIN')
+    selectCanonicalPublicationCurrent(db, target)
+    latestSwap = swapPaperImportLatest({
+      paperAssetsDir,
+      paperId,
+      versionDir: path.join(paperAssetsDir, paperId, 'versions', versionName),
+      canonicalRef: target,
+      deferCleanup: true,
+      forceFailureAt: failurePoint,
+      operation: 'rollback',
+    })
+    if (failurePoint === 'process-exit-after-latest-swap') {
+      process.exit(88)
+    }
+    if (failurePoint === 'after-latest-before-commit') {
+      throw new Error('Forced rollback failure after latest swap')
+    }
+    db.exec('COMMIT')
+    dbCommitted = true
+    if (failurePoint === 'after-commit' || failurePoint === 'committed-reload') {
+      const error = new Error('Forced committed rollback reload failure')
+      error.code = 'CANONICAL_PUBLICATION_FORCED_RELOAD_FAILURE'
+      throw error
+    }
+    const consumers = loadCanonicalOnlyConsumers({ ref: target, store })
+    commitPaperImportLatestSwap(latestSwap)
+    return {
+      status: 'rolled_back',
+      paperId,
+      versionName,
+      publicationDigest: target.publicationDigest,
+      consumers,
+    }
+  } catch (error) {
+    if (!dbCommitted) {
+      try {
+        db.exec('ROLLBACK')
+      } catch {
+        // The transaction may not have started.
+      }
+      try {
+        rollbackPaperImportLatestSwap(latestSwap)
+      } catch {
+        // Preserve the original rollback failure.
       }
     }
     throw error

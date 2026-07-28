@@ -11,17 +11,27 @@ import {
 } from 'node:fs'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { DatabaseSync } from 'node:sqlite'
 
 import {
   createFileSystemCanonicalPublicationStore,
   loadPaperForConsumption,
+  loadPaperForConsumptionSync,
   publishCanonicalPaperPublication,
   recoverCanonicalPaperPublication,
   rollbackCanonicalPaperPublication,
 } from '../server/paper-canonical/publication.mjs'
+import {
+  publishPaperImportPackage,
+  rollbackPaperImportPublication,
+} from '../server/paper-import/publisher.mjs'
+import { readImportPackageFromDirectory } from '../server/paper-import/validator.mjs'
 import { consumerContractRefs } from '../shared/paper-canonical/consumers.mjs'
-import { makeReadyCanonicalFixture } from '../test-fixtures/paper-canonical/foundationFixture.mjs'
+import {
+  makeCanonicalImportAdmissionRequest,
+  makeReadyCanonicalFixture,
+} from '../test-fixtures/paper-canonical/foundationFixture.mjs'
 
 function withTrailingSourceWhitespace(fixture) {
   const changed = structuredClone(fixture)
@@ -101,7 +111,7 @@ try {
   assert.deepEqual(snapshotTree(publicationRoot), beforeConflict.tree)
   assert.deepEqual(snapshotDatabase(db), beforeConflict.database)
 
-  const beforePreCommitFailure = {
+  const beforePreCommitRestart = {
     tree: snapshotTree(publicationRoot),
     database: snapshotDatabase(db),
   }
@@ -112,12 +122,45 @@ try {
       request: initial.request,
       sourceAssetVersion: 2,
       sourceAsset: initial.sourceAsset,
-      failurePoint: 'after-latest-before-commit',
+      failurePoint: 'after-version-rename-crash',
     }),
-    { code: 'CANONICAL_PUBLICATION_FORCED_FAILURE' },
+    { code: 'CANONICAL_PUBLICATION_FORCED_CRASH' },
   )
-  assert.deepEqual(snapshotTree(publicationRoot), beforePreCommitFailure.tree)
-  assert.deepEqual(snapshotDatabase(db), beforePreCommitFailure.database)
+  db.close()
+  db = new DatabaseSync(dbPath)
+  assert.equal(
+    recoverCanonicalPaperPublication({
+      rootDir: publicationRoot,
+      db,
+      paperId: initial.source.paperId,
+    }).status,
+    'pre_commit_rolled_back',
+  )
+  assert.deepEqual(snapshotTree(publicationRoot), beforePreCommitRestart.tree)
+  assert.deepEqual(snapshotDatabase(db), beforePreCommitRestart.database)
+
+  for (const failurePoint of [
+    'during-latest-swap',
+    'after-latest-before-commit',
+  ]) {
+    const beforePreCommitFailure = {
+      tree: snapshotTree(publicationRoot),
+      database: snapshotDatabase(db),
+    }
+    assert.throws(
+      () => publishCanonicalPaperPublication({
+        rootDir: publicationRoot,
+        db,
+        request: initial.request,
+        sourceAssetVersion: 2,
+        sourceAsset: initial.sourceAsset,
+        failurePoint,
+      }),
+      { code: 'CANONICAL_PUBLICATION_FORCED_FAILURE' },
+    )
+    assert.deepEqual(snapshotTree(publicationRoot), beforePreCommitFailure.tree)
+    assert.deepEqual(snapshotDatabase(db), beforePreCommitFailure.database)
+  }
 
   assert.throws(
     () => publishCanonicalPaperPublication({
@@ -254,18 +297,13 @@ try {
     ),
     '{"corrupt":true}\n',
   )
-  const corrupt = await loadPaperForConsumption(
+  const corrupt = loadPaperForConsumptionSync(
     {
       paperId: initial.source.paperId,
       version: 'v2',
       consumerContract: consumerContractRefs.screen,
     },
-    {
-      ...currentStore,
-      async projectLegacyFamily({ familyContractId }) {
-        return [{ kind: 'legacy_family', familyContractId }]
-      },
-    },
+    currentStore,
   )
   assert.equal(corrupt.disposition, 'incompatible')
   assert.notEqual(
@@ -319,6 +357,145 @@ try {
 } finally {
   db.close()
   rmSync(rootDir, { recursive: true, force: true })
+}
+
+const repositoryRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
+const importFixtureDir = path.join(
+  repositoryRoot,
+  'test-fixtures/paper-import/paper-2024-jslk-english',
+)
+const importFiles = readImportPackageFromDirectory(importFixtureDir)
+const importPaperId = 'paper-2024-jslk-english'
+const importRoot = mkdtempSync(path.join(tmpdir(), 'eqb-public-import-recovery-'))
+const importDbPath = path.join(importRoot, 'question-bank.sqlite')
+const importAssets = path.join(importRoot, 'paper-assets')
+let importDb = new DatabaseSync(importDbPath)
+importDb.exec(readFileSync(path.join(repositoryRoot, 'data/sql/schema.sql'), 'utf8'))
+
+function canonicalRequestFor(files) {
+  const byName = Object.fromEntries(files.map(({ fileName, buffer }) => [fileName, buffer]))
+  return makeCanonicalImportAdmissionRequest({
+    paperId: importPaperId,
+    paperAssetBytes: byName['paper-asset.json'],
+    answerKeyBytes: byName['answer-key.json'],
+  })
+}
+
+function publishImport(files, options = {}) {
+  return publishPaperImportPackage({
+    files,
+    db: importDb,
+    paperAssetsDir: importAssets,
+    canonicalRequest: canonicalRequestFor(files),
+    ...options,
+  })
+}
+
+function getCurrentCanonicalPublicationVersion(database, paperId) {
+  return Number(database.prepare(
+    `
+    SELECT source_asset_version
+    FROM canonical_paper_publications
+    WHERE paper_id = ? AND is_current = 1
+    `,
+  ).get(paperId)?.source_asset_version)
+}
+
+try {
+  assert.equal(publishImport(importFiles).status, 'published')
+  assert.throws(
+    () => publishImport(importFiles, { failurePoint: 'after-commit' }),
+    { code: 'CANONICAL_PUBLICATION_FORCED_RELOAD_FAILURE' },
+  )
+  assert.equal(
+    existsSync(path.join(importAssets, importPaperId, '.latest-swap.json')),
+    true,
+  )
+  importDb.close()
+  importDb = new DatabaseSync(importDbPath)
+  const retry = publishImport(importFiles)
+  assert.equal(retry.status, 'idempotent')
+  assert.equal(retry.publish.assetVersion, 2)
+  assert.equal(
+    existsSync(path.join(importAssets, importPaperId, '.latest-swap.json')),
+    false,
+  )
+
+  assert.throws(
+    () => publishImport(importFiles, { failurePoint: 'after-commit' }),
+    { code: 'CANONICAL_PUBLICATION_FORCED_RELOAD_FAILURE' },
+  )
+  importDb.close()
+  importDb = new DatabaseSync(importDbPath)
+  const conflictingFiles = importFiles.map((file) => ({
+    ...file,
+    buffer: file.fileName === 'paper-asset.json'
+      ? Buffer.concat([file.buffer, Buffer.from(' ')])
+      : Buffer.from(file.buffer),
+  }))
+  const conflict = publishImport(conflictingFiles)
+  assert.equal(conflict.status, 'canonical_admission_failed')
+  assert.equal(
+    conflict.canonicalAdmission.diagnostics[0].code,
+    'CANONICAL_PUBLICATION_IDENTITY_CONFLICT',
+  )
+  assert.equal(
+    getCurrentCanonicalPublicationVersion(importDb, importPaperId),
+    3,
+  )
+
+  const beforeFailedRollback = {
+    tree: snapshotTree(importAssets),
+    database: snapshotDatabase(importDb),
+  }
+  assert.throws(
+    () => rollbackPaperImportPublication({
+      db: importDb,
+      paperAssetsDir: importAssets,
+      paperId: importPaperId,
+      versionName: 'v1',
+      failurePoint: 'after-latest-before-commit',
+    }),
+    /Forced rollback failure/,
+  )
+  assert.deepEqual(snapshotTree(importAssets), beforeFailedRollback.tree)
+  assert.deepEqual(snapshotDatabase(importDb), beforeFailedRollback.database)
+
+  assert.throws(
+    () => rollbackPaperImportPublication({
+      db: importDb,
+      paperAssetsDir: importAssets,
+      paperId: importPaperId,
+      versionName: 'v1',
+      failurePoint: 'after-commit',
+    }),
+    { code: 'CANONICAL_PUBLICATION_FORCED_RELOAD_FAILURE' },
+  )
+  importDb.close()
+  importDb = new DatabaseSync(importDbPath)
+  const recoveredRollback = rollbackPaperImportPublication({
+    db: importDb,
+    paperAssetsDir: importAssets,
+    paperId: importPaperId,
+    versionName: 'v1',
+  })
+  assert.equal(recoveredRollback.status, 'idempotent')
+  assert.deepEqual(Object.keys(recoveredRollback.consumers).sort(), [
+    'print_pdf',
+    'screen',
+  ])
+  assert.equal(
+    JSON.parse(
+      readFileSync(
+        path.join(importAssets, importPaperId, 'latest', 'paper-asset.json'),
+        'utf8',
+      ),
+    ).paper.assetVersion,
+    1,
+  )
+} finally {
+  importDb.close()
+  rmSync(importRoot, { recursive: true, force: true })
 }
 
 console.log('PASS canonical import recovery, retry, and rollback')
