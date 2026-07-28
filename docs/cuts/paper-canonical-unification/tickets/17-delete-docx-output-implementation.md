@@ -1,6 +1,6 @@
 # 17 — Delete DOCX output implementation while preserving DOCX input
 
-Status: ready
+Status: done
 Blocked by: Ticket 16 independent review PASS and owner QA acceptance
 Next on PASS: independent review
 Independent review PASS: `docs/cuts/paper-canonical-unification/tickets/18-atomic-canonical-import-admission.md`
@@ -42,6 +42,13 @@ preserving their still-required Screen/Print/PDF and migration obligations.
 
 ## Result
 
-Commit:
-Verify:
-Notes:
+Commit: generated-DOCX deletion `b99336018a87669802a54dcb9ce6801e1f084355`; DOCX input preservation `c401bf9b48c6fe28c87d80e6929a9a119d1d12fa`; isolated input-side LibreOffice profile `f8357176b9f153cdafe235dea0656e3525087cd1`
+Verify: `node scripts/verify-generated-docx-output-deleted.mjs` — PASS; `node scripts/verify-docx-source-media-input.mjs` — PASS; `node scripts/verify-c7-paper-import-contracts.mjs` — 43/43 PASS; `node scripts/verify-c7-paper-import-publish.mjs` — 36/36 PASS; `pnpm -C app run build` — PASS; `pnpm -C app run verify:all` — 110 PASS / 1 declared SKIP / 0 FAIL; `git diff --check` — PASS
+Notes: Deleted generated-DOCX rendering, packaging, output conversion, contracts,
+consumer authority, schemas, fixtures, and gates. Current canonical authority
+now exposes only Screen and Print/PDF; retained historical Publication support
+is parse-only and cannot compile or seal current authority. The public DOCX
+input publisher preserves immutable source bytes plus digest-checked embedded
+media and shape PDF capture, with per-call isolated LibreOffice profiles and
+atomic rollback on failure. Focused Standards and Spec re-review both passed
+with no remaining Must Fix or Should Fix.
