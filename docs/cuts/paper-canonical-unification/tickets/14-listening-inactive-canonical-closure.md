@@ -1,6 +1,6 @@
 # 14 — Listening inactive canonical closure
 
-Status: ready
+Status: done
 Blocked by: Ticket 13 independent review PASS and owner QA acceptance
 Next on PASS: `docs/cuts/paper-canonical-unification/tickets/15-listening-zero-occurrence-proof.md`
 Terminal: no
@@ -26,6 +26,12 @@ source slots so the whole paper is complete without a listening Group.
 
 ## Result
 
-Commit:
-Verify:
-Notes:
+Commit: this commit
+Verify: `node scripts/verify-paper-canonical-listening-inactive-closure.mjs`;
+`pnpm -C app run verify:all` (`108 PASS / 1 declared SKIP / 0 FAIL`);
+`git diff --check`
+Notes: Closed both inactive listening slots with field-level Source Map and
+exact-replay Transformation Records. Missing audio/evidence, competing source
+documents, source-role mismatches, and transcript, timing, Question, or join
+reordering fail closed. Standards review and focused Spec re-review passed with
+zero remaining Must Fixes.

@@ -54,6 +54,7 @@ function legacyBundleFrom(compilation, sourceAsset, transformationRecords = []) 
     status: transformationRecords.length > 0 ? 'exact_deviations_applied' : 'direct',
     transformationRecordIds: transformationRecords.map((record) => record.recordId),
   }
+  for (const binding of plan.slotBindings) delete binding.sourceClosureRef
   const groups = compilation.artifacts.canonicalPaper.questionGroups.map((group) => {
     const legacyGroup = structuredClone(group)
     const legacyFamily = legacyAuthority.families.get(legacyGroup.contractRef.familyContractId)
@@ -72,6 +73,7 @@ function legacyBundleFrom(compilation, sourceAsset, transformationRecords = []) 
   report.schemaVersion = 'normalization-report-v1'
   report.authority = legacyAuthorityRef
   delete report.reviewDecisions
+  delete report.inactiveSourceClosures
   report.transformationRecords = structuredClone(transformationRecords)
   report.sourceFingerprint = digestJson({ captureDigest: sourceCapture.digest, groupFingerprints: groups.map((group) => group.sourceFingerprint) })
   report.directSourceMap = groups.flatMap((group) => group.sourceMap.entries)
@@ -244,20 +246,23 @@ const ledgerBaseline = compileCanonicalPaper(ledgerFixture.request)
 const ledgerSource = structuredClone(ledgerFixture.source)
 const ledgerGroup = ledgerSource.groups[0]
 const ledgerObservation = ledgerBaseline.artifacts.sourceCapture.observations.find((observation) => observation.sourceSpanId === ledgerGroup.sourceSpanId)
-ledgerSource.transformations = [{
-  recordId: 'record:publication-exact',
-  sequence: 1,
-  ruleId: 'direct-projection',
-  ruleVersion: '2',
-  target: { identity: ledgerGroup.groupId, path: 'content.blocks' },
-  operation: 'direct_projection',
-  inputSourceSpanIds: [ledgerObservation.sourceSpanId],
-  before: ledgerObservation.value,
-  after: ledgerObservation.value,
-  certainty: 'exact',
-  preconditions: { sourceObservationIds: [ledgerObservation.observationId], sourceValueDigests: [digestJson(ledgerObservation.value)] },
-  outputDigest: digestJson(ledgerObservation.value),
-}]
+ledgerSource.transformations = [
+  ...(ledgerSource.transformations || []),
+  {
+    recordId: 'record:publication-exact',
+    sequence: (ledgerSource.transformations || []).length + 1,
+    ruleId: 'direct-projection',
+    ruleVersion: '2',
+    target: { identity: ledgerGroup.groupId, path: 'content.blocks' },
+    operation: 'direct_projection',
+    inputSourceSpanIds: [ledgerObservation.sourceSpanId],
+    before: ledgerObservation.value,
+    after: ledgerObservation.value,
+    certainty: 'exact',
+    preconditions: { sourceObservationIds: [ledgerObservation.observationId], sourceValueDigests: [digestJson(ledgerObservation.value)] },
+    outputDigest: digestJson(ledgerObservation.value),
+  },
+]
 ledgerFixture.request.evidence.documents[0].bytes = new TextEncoder().encode(JSON.stringify(ledgerSource))
 const ledgerCompilation = compileCanonicalPaper(ledgerFixture.request)
 assert.equal(ledgerCompilation.disposition, 'ready')

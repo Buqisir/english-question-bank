@@ -203,8 +203,33 @@ function assertCanonicalPackage(canonicalPackage) {
     groupById.set(group.identity.groupId, group)
   }
   const activeSlots = slotsForProfile(profile).filter((slot) => slot.activation === 'canonical_group')
+  const inactiveSlots = slotsForProfile(profile).filter((slot) => slot.activation === 'inactive_source')
   const bound = plan.slotBindings.filter((binding) => binding.state === 'bound')
+  const inactive = plan.slotBindings.filter((binding) => binding.state === 'inactive')
   if (bound.length !== activeSlots.length || new Set(bound.map((binding) => binding.slotId)).size !== bound.length) throw projectionError('Plan bindings do not close every active Profile slot', [])
+  if (inactive.length !== inactiveSlots.length || new Set(inactive.map((binding) => binding.slotId)).size !== inactive.length) throw projectionError('Plan bindings do not close every inactive Profile slot', [])
+  const sourceSpanIds = new Set(
+    sourceCapture.sourceSpans.map((span) => span.sourceSpanId),
+  )
+  for (const slot of inactiveSlots) {
+    const binding = inactive.find((candidate) => candidate.slotId === slot.slotId)
+    if (
+      !binding
+      || Object.hasOwn(binding, 'groupRef')
+      || !Array.isArray(binding.sourceSliceRefs)
+      || binding.sourceSliceRefs.length === 0
+      || binding.sourceSliceRefs.some((sourceSpanId) => !sourceSpanIds.has(sourceSpanId))
+      || (
+        slot.sourceClosureContractRef
+        && (
+          binding.sourceClosureRef?.contractId !== slot.sourceClosureContractRef.id
+          || binding.sourceClosureRef?.contractVersion !== slot.sourceClosureContractRef.version
+          || typeof binding.sourceClosureRef?.reportScopeId !== 'string'
+          || typeof binding.sourceClosureRef?.closureDigest !== 'string'
+        )
+      )
+    ) throw projectionError(`Plan inactive binding for ${slot.slotId} is not source-closed`, [])
+  }
   const boundGroupIds = new Set()
   for (const slot of activeSlots) {
     const binding = bound.find((candidate) => candidate.slotId === slot.slotId)

@@ -8,16 +8,19 @@ import manifestV7 from '../../standards/paper-canonical/manifest-v7.json' with {
 import manifestV8 from '../../standards/paper-canonical/manifest-v8.json' with { type: 'json' }
 import manifestV9 from '../../standards/paper-canonical/manifest-v9.json' with { type: 'json' }
 import manifestV10 from '../../standards/paper-canonical/manifest-v10.json' with { type: 'json' }
+import manifestV11 from '../../standards/paper-canonical/manifest-v11.json' with { type: 'json' }
 import core from '../../standards/paper-canonical/core/core-invariants-v1.json' with { type: 'json' }
 import sourceAdapters from '../../standards/paper-canonical/adapters/source-adapters-v1.json' with { type: 'json' }
 import sourceAdaptersV2 from '../../standards/paper-canonical/adapters/source-adapters-v2.json' with { type: 'json' }
 import sourceAdaptersV3 from '../../standards/paper-canonical/adapters/source-adapters-v3.json' with { type: 'json' }
 import sourceAdaptersV4 from '../../standards/paper-canonical/adapters/source-adapters-v4.json' with { type: 'json' }
+import sourceAdaptersV5 from '../../standards/paper-canonical/adapters/source-adapters-v5.json' with { type: 'json' }
 import nck1 from '../../standards/paper-canonical/profiles/nck1-v1.json' with { type: 'json' }
 import zhejiangLegacy from '../../standards/paper-canonical/profiles/zhejiang-legacy-v1.json' with { type: 'json' }
 import nck1V2 from '../../standards/paper-canonical/profiles/nck1-v2.json' with { type: 'json' }
 import nck1V3 from '../../standards/paper-canonical/profiles/nck1-v3.json' with { type: 'json' }
 import nck1V4 from '../../standards/paper-canonical/profiles/nck1-v4.json' with { type: 'json' }
+import nck1V5 from '../../standards/paper-canonical/profiles/nck1-v5.json' with { type: 'json' }
 import zhejiangLegacyV2 from '../../standards/paper-canonical/profiles/zhejiang-legacy-v2.json' with { type: 'json' }
 import zhejiangLegacyV3 from '../../standards/paper-canonical/profiles/zhejiang-legacy-v3.json' with { type: 'json' }
 import zhejiangLegacyV4 from '../../standards/paper-canonical/profiles/zhejiang-legacy-v4.json' with { type: 'json' }
@@ -50,6 +53,7 @@ import continuationWritingVariantSchema from '../../schemas/paper-canonical/cano
 import continuationWritingSourceCaptureSchema from '../../schemas/paper-canonical/continuation-writing-source-capture-v1.schema.json' with { type: 'json' }
 import continuationWritingSourceTranscriptionSchema from '../../schemas/paper-canonical/continuation-writing-source-transcription-v1.schema.json' with { type: 'json' }
 import profileWritingSourceEvidenceSchema from '../../schemas/paper-canonical/profile-writing-source-evidence-v1.schema.json' with { type: 'json' }
+import listeningSourceInventorySchema from '../../schemas/paper-canonical/listening-source-inventory-v1.schema.json' with { type: 'json' }
 import normalizationSchema from '../../schemas/paper-canonical/normalization-rules-v1.schema.json' with { type: 'json' }
 import normalizationV2Schema from '../../schemas/paper-canonical/normalization-rules-v2.schema.json' with { type: 'json' }
 import normalizationV3Schema from '../../schemas/paper-canonical/normalization-rules-v3.schema.json' with { type: 'json' }
@@ -69,6 +73,7 @@ import reportV7Schema from '../../schemas/paper-canonical/normalization-report-v
 import reportV8Schema from '../../schemas/paper-canonical/normalization-report-v8.schema.json' with { type: 'json' }
 import reportV9Schema from '../../schemas/paper-canonical/normalization-report-v9-identity-corrected.schema.json' with { type: 'json' }
 import reportV10Schema from '../../schemas/paper-canonical/normalization-report-v10.schema.json' with { type: 'json' }
+import reportV11Schema from '../../schemas/paper-canonical/normalization-report-v11.schema.json' with { type: 'json' }
 import legacyReportV9Schema from '../../schemas/paper-canonical/normalization-report-v9.schema.json' with { type: 'json' }
 import publicationSchema from '../../schemas/paper-canonical/canonical-paper-publication-v1.schema.json' with { type: 'json' }
 import publicationV2Schema from '../../schemas/paper-canonical/canonical-paper-publication-v2.schema.json' with { type: 'json' }
@@ -80,6 +85,7 @@ import publicationV7Schema from '../../schemas/paper-canonical/canonical-paper-p
 import publicationV8Schema from '../../schemas/paper-canonical/canonical-paper-publication-v8.schema.json' with { type: 'json' }
 import publicationV9Schema from '../../schemas/paper-canonical/canonical-paper-publication-v9-identity-corrected.schema.json' with { type: 'json' }
 import publicationV10Schema from '../../schemas/paper-canonical/canonical-paper-publication-v10.schema.json' with { type: 'json' }
+import publicationV11Schema from '../../schemas/paper-canonical/canonical-paper-publication-v11.schema.json' with { type: 'json' }
 import legacyPublicationV9Schema from '../../schemas/paper-canonical/canonical-paper-publication-v9.schema.json' with { type: 'json' }
 import consumerSchema from '../../schemas/paper-canonical/consumer-contract-v1.schema.json' with { type: 'json' }
 
@@ -182,8 +188,46 @@ function validateProfileSlot(slot, profile, families, path, slotIds, issues) {
       issues.push(issue('PROFILE_QUESTION_CARDINALITY', path, 'Active slots require exact integer question cardinality'))
     }
   } else if (slot.activation === 'inactive_source') {
-    if (!closedProfileValue(slot, [...common, 'sourceRole', 'renderPolicy'], path, issues, 'Inactive slot')) return
+    const hasSourceClosureContract = Object.hasOwn(slot, 'sourceClosureContractRef')
+    const inactiveKeys = hasSourceClosureContract
+      ? [
+          ...common,
+          'sourceRole',
+          'renderPolicy',
+          'sourceClosureContractRef',
+          'questionRule',
+          'officialAnswerRule',
+          'transcriptRule',
+          'supplementalEvidenceRule',
+        ]
+      : [...common, 'sourceRole', 'renderPolicy']
+    if (!closedProfileValue(slot, inactiveKeys, path, issues, 'Inactive slot')) return
     if (slot.renderPolicy !== 'suppress') issues.push(issue('PROFILE_INACTIVE_SLOT', path, 'Inactive source slots must suppress rendering'))
+    if (hasSourceClosureContract) {
+      const questionRule = slot.questionRule
+      if (
+        !closedProfileValue(slot.sourceClosureContractRef, ['id', 'version'], `${path}.sourceClosureContractRef`, issues, 'Inactive source closure contract')
+        || !closedProfileValue(questionRule, ['numbering', 'cardinality', 'optionLabels'], `${path}.questionRule`, issues, 'Inactive Question rule')
+        || !closedProfileValue(questionRule?.numbering, ['start', 'end'], `${path}.questionRule.numbering`, issues, 'Inactive Question numbering')
+        || !closedProfileValue(slot.officialAnswerRule, ['exactlyOnePerQuestion', 'labelMustBelongToQuestionOptions'], `${path}.officialAnswerRule`, issues, 'Inactive official-answer rule')
+        || !closedProfileValue(slot.transcriptRule, ['segmentCardinality', 'everyQuestionCoveredExactlyOnce'], `${path}.transcriptRule`, issues, 'Inactive transcript rule')
+        || !closedProfileValue(slot.supplementalEvidenceRule, ['timing', 'audio'], `${path}.supplementalEvidenceRule`, issues, 'Inactive supplemental-evidence rule')
+        || slot.sourceClosureContractRef.id !== 'listening-raw-closure'
+        || slot.sourceClosureContractRef.version !== 'nck1-v1'
+        || !Number.isInteger(questionRule?.numbering?.start)
+        || !Number.isInteger(questionRule?.numbering?.end)
+        || !Number.isInteger(questionRule?.cardinality)
+        || questionRule.cardinality < 1
+        || !Array.isArray(questionRule?.optionLabels)
+        || questionRule.optionLabels.join('') !== 'ABC'
+        || slot.officialAnswerRule.exactlyOnePerQuestion !== true
+        || slot.officialAnswerRule.labelMustBelongToQuestionOptions !== true
+        || slot.transcriptRule.segmentCardinality !== 5
+        || slot.transcriptRule.everyQuestionCoveredExactlyOnce !== true
+        || slot.supplementalEvidenceRule.timing !== 'preserve_exactly_if_supplied'
+        || slot.supplementalEvidenceRule.audio !== 'not_required_for_inactive_closure'
+      ) issues.push(issue('PROFILE_INACTIVE_SOURCE_CONTRACT_INVALID', path, 'Inactive listening source closure contract is not exact'))
+    }
   } else {
     issues.push(issue('PROFILE_UNKNOWN_ACTIVATION', path, 'Unknown activation'))
     return
@@ -265,11 +309,11 @@ function validateNck1WritingChrome(profile) {
     profile.instructions?.['section.writing.continuation']
   const continuationPromptInstruction =
     profile.instructions?.['writing.continuation.prompt']
-  const expectedContinuationInstructionRefs = profile.version === '4'
+  const expectedContinuationInstructionRefs = Number(profile.version) >= 4
     ? ['writing.continuation.prompt']
     : []
   const valid = (
-    ['3', '4'].includes(profile.version)
+    ['3', '4', '5'].includes(profile.version)
     && writingParts.length === 1
     && part.ordinal === 4
     && part.titleInstructionRef === 'part.writing'
@@ -544,6 +588,11 @@ const sharedArtifactsV9 = {
   'profile-nck1': nck1V4,
   'profile-zhejiang-legacy': zhejiangLegacyV4,
 }
+const sharedArtifactsV11 = {
+  ...sharedArtifactsV9,
+  adapter: sourceAdaptersV5,
+  'profile-nck1': nck1V5,
+}
 
 const sharedSchemas = {
   'standard-manifest-v1': standardManifestSchema,
@@ -567,6 +616,7 @@ const artifactsV7 = { ...sharedArtifactsV7, normalization: normalizationV2, 'ren
 const artifactsV8 = { ...sharedArtifactsV8, normalization: normalizationV2, 'renderer-typography': typographyV2 }
 const artifactsV9 = { ...sharedArtifactsV9, normalization: normalizationV2, 'renderer-typography': typographyV2 }
 const artifactsV10 = { ...sharedArtifactsV9, normalization: normalizationV3, 'renderer-typography': typographyV2 }
+const artifactsV11 = { ...sharedArtifactsV11, normalization: normalizationV3, 'renderer-typography': typographyV2 }
 const schemasV1 = { ...sharedSchemas, 'renderer-typography-v1': typographyV1Schema, 'normalization-rules-v1': normalizationSchema, 'normalization-report-v1': reportSchema, 'canonical-paper-publication-v1': publicationSchema }
 const schemasV2 = { ...sharedSchemas, 'renderer-typography-v1': typographyV1Schema, 'normalization-rules-v2': normalizationV2Schema, 'normalization-report-v2': reportV2Schema, 'canonical-paper-publication-v2': publicationV2Schema }
 const schemasV3 = { ...sharedSchemas, 'renderer-typography-v2': typographyV2Schema, 'normalization-rules-v2': normalizationV2Schema, 'normalization-report-v3': reportV3Schema, 'canonical-paper-publication-v3': publicationV3Schema }
@@ -624,6 +674,12 @@ const schemasV10 = {
   'normalization-report-v10': reportV10Schema,
   'canonical-paper-publication-v10': publicationV10Schema,
 }
+const schemasV11 = {
+  ...schemasV10,
+  'listening-source-inventory-v1': listeningSourceInventorySchema,
+  'normalization-report-v11': reportV11Schema,
+  'canonical-paper-publication-v11': publicationV11Schema,
+}
 const validationV1 = validateAuthorityClosure({ manifest: manifestV1, artifacts: artifactsV1, schemas: schemasV1 })
 const validationV2 = validateAuthorityClosure({ manifest: manifestV2, artifacts: artifactsV2, schemas: schemasV2 })
 const validationV3 = validateAuthorityClosure({ manifest: manifestV3, artifacts: artifactsV3, schemas: schemasV3 })
@@ -634,6 +690,7 @@ const validationV7 = validateAuthorityClosure({ manifest: manifestV7, artifacts:
 const validationV8 = validateAuthorityClosure({ manifest: manifestV8, artifacts: artifactsV8, schemas: schemasV8 })
 const validationV9 = validateAuthorityClosure({ manifest: manifestV9, artifacts: artifactsV9, schemas: schemasV9 })
 const validationV10 = validateAuthorityClosure({ manifest: manifestV10, artifacts: artifactsV10, schemas: schemasV10 })
+const validationV11 = validateAuthorityClosure({ manifest: manifestV11, artifacts: artifactsV11, schemas: schemasV11 })
 const validations = [
   validationV1,
   validationV2,
@@ -645,6 +702,7 @@ const validations = [
   validationV8,
   validationV9,
   validationV10,
+  validationV11,
 ]
 if (validations.some((validation) => !validation.ok)) {
   throw new Error(`Invalid checked-in canonical authority: ${JSON.stringify(validations.flatMap((validation) => validation.issues))}`)
@@ -665,6 +723,7 @@ const authorities = [
   { manifest: manifestV8, artifacts: artifactsV8, schemas: schemasV8 },
   { manifest: manifestV9, artifacts: artifactsV9, schemas: schemasV9 },
   { manifest: manifestV10, artifacts: artifactsV10, schemas: schemasV10 },
+  { manifest: manifestV11, artifacts: artifactsV11, schemas: schemasV11 },
 ].map((authority) => ({
   ...authority,
   authorityRef: authorityRef(authority.manifest),
@@ -672,7 +731,7 @@ const authorities = [
   families: new Map(Object.values(authority.artifacts).filter((artifact) => artifact?.owner === 'family').map((family) => [family.familyContractId, family])),
 }))
 
-export const canonicalAuthorityRef = authorities.find((authority) => authority.manifest.version === '10').authorityRef
+export const canonicalAuthorityRef = authorities.find((authority) => authority.manifest.version === '11').authorityRef
 
 export function resolveCanonicalAuthority(authorityRef) {
   const authority = authorities.find((candidate) => candidate.authorityRef.manifestId === authorityRef?.manifestId && candidate.authorityRef.manifestVersion === authorityRef?.manifestVersion && candidate.authorityRef.manifestDigest === authorityRef?.manifestDigest)

@@ -4,7 +4,7 @@
 
 本文件是唯一的人类可读索引；当前 canonical 编译、校验、发布和未来的
 Screen / Print-PDF / DOCX consumer 只从
-[`standards/paper-canonical/manifest-v10.json`](../../standards/paper-canonical/manifest-v10.json)
+[`standards/paper-canonical/manifest-v11.json`](../../standards/paper-canonical/manifest-v11.json)
 解析一份 digest-closed 的权威闭包。这里不复制卷型题号、分值、题组
 cardinality、清洗条件或字体/物理排版数值，也不能被 caller 当作第二套配置。
 
@@ -18,9 +18,14 @@ Renderer Typography、其 schema 及纯验证入口。未知版本、缺件、di
 任何会改变 admission、canonical 语义、Profile、normalization 或 renderer
 结果的变更，必须新增 versioned artifact、schema/semantic conformance fixture、
 迁移说明和 manifest 升版；已经被 Publication 引用的 artifact 不可原位修改。
-`manifest-v1.json` 至 `manifest-v9.json` 保留各自原始 digest-closed closure，
-供既有 Publication 解析；当前 Screen v10、Print/PDF v11、DOCX v10 consumer
-contracts 已切到同一 v10 authority。v10 要求 NCK1 续写指令纠正文据与续写
+`manifest-v1.json` 至 `manifest-v10.json` 保留各自原始 digest-closed closure，
+供既有 Publication 解析；当前 Screen v11、Print/PDF v12、DOCX v11 consumer
+contracts 已切到同一 v11 authority。v11 以 NCK1 Profile v5 为两个 inactive
+listening slot 绑定 `listening-raw-closure@nck1-v1`，闭合 Questions 1–20、
+A–C Options、官方答案、十段 transcript、source timing 与 audio inventory，
+同时继续保持零 listening Group 与 `renderPolicy: suppress`；迁移说明见
+[`nck1-v5-migration.md`](../../standards/paper-canonical/profiles/nck1-v5-migration.md)。
+此前 v10 要求 NCK1 续写指令纠正文据与续写
 原始 PDF 使用同一 digest，并生成可执行 Transformation Record；同时校验
 schema descriptor 与 `$id` 恒等。迁移说明见
 [`normalization-rules-v3-migration.md`](../../standards/paper-canonical/normalization/normalization-rules-v3-migration.md)。

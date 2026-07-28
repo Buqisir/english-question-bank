@@ -128,20 +128,23 @@ const exactTransformation = structuredClone(source)
 const transformedGroup = exactTransformation.groups[0]
 const compiledCapture = first.artifacts.sourceCapture
 const transformedObservation = compiledCapture.observations.find((observation) => observation.sourceSpanId === transformedGroup.sourceSpanId)
-exactTransformation.transformations = [{
-  recordId: 'record:exact',
-  sequence: 1,
-  ruleId: 'direct-projection',
-  ruleVersion: '2',
-  target: { identity: transformedGroup.groupId, path: 'content.blocks' },
-  operation: 'direct_projection',
-  inputSourceSpanIds: [transformedGroup.sourceSpanId],
-  before: transformedObservation.value,
-  after: transformedObservation.value,
-  certainty: 'exact',
-  preconditions: { sourceObservationIds: [transformedObservation.observationId], sourceValueDigests: [digestJson(transformedObservation.value)] },
-  outputDigest: digestJson(transformedObservation.value),
-}]
+exactTransformation.transformations = [
+  ...(exactTransformation.transformations || []),
+  {
+    recordId: 'record:exact',
+    sequence: (exactTransformation.transformations || []).length + 1,
+    ruleId: 'direct-projection',
+    ruleVersion: '2',
+    target: { identity: transformedGroup.groupId, path: 'content.blocks' },
+    operation: 'direct_projection',
+    inputSourceSpanIds: [transformedGroup.sourceSpanId],
+    before: transformedObservation.value,
+    after: transformedObservation.value,
+    certainty: 'exact',
+    preconditions: { sourceObservationIds: [transformedObservation.observationId], sourceValueDigests: [digestJson(transformedObservation.value)] },
+    outputDigest: digestJson(transformedObservation.value),
+  },
+]
 const transformed = compileCanonicalPaper(makeRequest(exactTransformation))
 assert.equal(transformed.disposition, 'ready')
 assert.equal(

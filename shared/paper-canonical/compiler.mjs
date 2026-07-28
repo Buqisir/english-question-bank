@@ -1,6 +1,7 @@
 import { canonicalAuthorityRef, resolveCanonicalAuthority, slotsForProfile, validateJsonSchema } from './authority.mjs'
 import { validateApplicationWritingContract } from './applicationWriting.mjs'
 import { validateContinuationWritingContract } from './continuationWriting.mjs'
+import { appendListeningInactiveClosures } from './listeningInactive.mjs'
 import { validateReadingContract } from './reading.mjs'
 import { validateSevenChoicesContract } from './sevenChoices.mjs'
 import { cloneJson, digestJson, exactKeys, isRecordValue, sha256, stableStringify, withoutKey } from './stable.mjs'
@@ -990,6 +991,38 @@ function adaptReferenceFamilies(parsed, documents, diagnostics) {
   const continuationTranscriptionEntry = continuationTranscriptionDocument
     ? { document: continuationTranscriptionDocument, value: parseJsonDocument(continuationTranscriptionDocument, diagnostics) }
     : null
+  const listeningMediaTypes = new Map([
+    ['questions', 'application/vnd.eqb.listening-questions+json'],
+    ['answers', 'application/vnd.eqb.listening-answers+json'],
+    ['transcript', 'application/vnd.eqb.listening-transcript+json'],
+    ['inventory', 'application/vnd.eqb.listening-source-inventory+json'],
+  ])
+  const listeningEntries = Object.fromEntries(
+    [...listeningMediaTypes].map(([key, mediaType]) => {
+      const entries = documents
+        .filter((document) => document.mediaType === mediaType)
+        .map((document) => ({
+          document,
+          value: parseJsonDocument(document, diagnostics),
+        }))
+      if (entries.length > 1) {
+        const conflictingAnswers = key === 'answers'
+          && entries.every((entry) => isRecordValue(entry.value))
+          && new Set(entries.map((entry) => stableStringify(entry.value))).size > 1
+        diagnostics.push(diagnostic(
+          conflictingAnswers
+            ? 'LISTENING_OFFICIAL_ANSWER_DOCUMENT_CONFLICT'
+            : 'LISTENING_SOURCE_DOCUMENT_AMBIGUOUS',
+          conflictingAnswers ? 'answer_conflict' : 'needs_review',
+          `$.evidence.documents.${key}`,
+          conflictingAnswers
+            ? 'Competing listening answer documents disagree'
+            : `Listening ${key} evidence must resolve to exactly one document`,
+        ))
+      }
+      return [key, entries[0] || null]
+    }),
+  )
   const instructionEntries = documents
     .filter((document) => document.mediaType === 'application/vnd.eqb.profile-writing-source-evidence+json')
     .map((document) => ({
@@ -1024,6 +1057,19 @@ function adaptReferenceFamilies(parsed, documents, diagnostics) {
     documents,
     diagnostics,
   })
+  const currentAuthority = resolveCanonicalAuthority(canonicalAuthorityRef).closure
+  const activeProfile = currentAuthority.profiles.get(parsed.value.profileId)
+  appendListeningInactiveClosures({
+    source: parsed.value,
+    profileSlots: activeProfile ? slotsForProfile(activeProfile) : [],
+    documents,
+    questionsEntry: listeningEntries.questions,
+    answersEntry: listeningEntries.answers,
+    transcriptEntry: listeningEntries.transcript,
+    inventoryEntry: listeningEntries.inventory,
+    inventorySchema: currentAuthority.schemas['listening-source-inventory-v1'],
+    diagnostics,
+  })
   if (!paperEntry && !answerEntry) return parsed
   if (!paperEntry || !answerEntry) {
     diagnostics.push(diagnostic('REFERENCE_EVIDENCE_INCOMPLETE', 'incomplete_source', '$.evidence.documents', 'Cloze and Grammar Fill reference publication requires paper asset and official answer evidence together'))
@@ -1041,7 +1087,7 @@ function adaptReferenceFamilies(parsed, documents, diagnostics) {
     { familyId: 'grammar-fill', slotId: 'language.grammar-fill', legacyType: 'grammarFill' },
     { familyId: 'seven-choices', slotId: 'reading.seven-choices', legacyType: 'sevenChoices' },
   ]
-  const activeProfile = resolveCanonicalAuthority(canonicalAuthorityRef).closure.profiles.get(source.profileId)
+  const referenceProfile = resolveCanonicalAuthority(canonicalAuthorityRef).closure.profiles.get(source.profileId)
   appendReadingReferenceGroups({
     source,
     paper,
@@ -1050,10 +1096,10 @@ function adaptReferenceFamilies(parsed, documents, diagnostics) {
     answerEntry,
     readingEntry,
     documents,
-    activeProfile,
+    activeProfile: referenceProfile,
     diagnostics,
   })
-  const sevenChoicesSlot = activeProfile && slotsForProfile(activeProfile).find((slot) => slot.slotId === 'reading.seven-choices')
+  const sevenChoicesSlot = referenceProfile && slotsForProfile(referenceProfile).find((slot) => slot.slotId === 'reading.seven-choices')
   const sevenChoicesNumbers = sevenChoicesSlot?.numberingRule?.kind === 'range'
     ? Array.from({ length: 5 }, (_, index) => sevenChoicesSlot.numberingRule.start + index)
     : []
@@ -1280,7 +1326,12 @@ function buildSourceCapture(documents, parsed, diagnostics) {
       kind: observation.kind,
       value: observation.value ?? null,
       order: index,
-      extraction: { adapterId: 'canonical-fixture-evidence', version: '1' },
+      extraction: isRecordValue(observation.extraction)
+        && exactKeys(observation.extraction, ['adapterId', 'version'])
+        && typeof observation.extraction.adapterId === 'string'
+        && typeof observation.extraction.version === 'string'
+        ? cloneJson(observation.extraction)
+        : { adapterId: 'canonical-fixture-evidence', version: '1' },
       sourceSpanId,
     })
     sourceSpans.push({
@@ -1322,7 +1373,30 @@ function buildSourceCapture(documents, parsed, diagnostics) {
 }
 
 function validateCapture(capture, closure) {
-  return validateJsonSchema(capture, closure.schemas['source-capture-v1'], '$.sourceCapture')
+  const issues = validateJsonSchema(
+    capture,
+    closure.schemas['source-capture-v1'],
+    '$.sourceCapture',
+  )
+  const registeredAdapters = new Map(
+    (closure.artifacts.adapter?.adapters || []).map((adapter) => [
+      adapter.adapterId,
+      adapter.version,
+    ]),
+  )
+  for (const [index, observation] of capture.observations.entries()) {
+    if (
+      registeredAdapters.get(observation.extraction?.adapterId)
+      !== observation.extraction?.version
+    ) {
+      issues.push({
+        code: 'SOURCE_ADAPTER_UNREGISTERED',
+        path: `$.sourceCapture.observations[${index}].extraction`,
+        message: 'Source observation does not bind one registered adapter version',
+      })
+    }
+  }
+  return issues
 }
 
 function validateAnswerAssertions(capture, diagnostics) {
@@ -1391,7 +1465,9 @@ export function validateExactTransformationRecords(records, capture, closure) {
           sourceValueDigests: observations.map((observation) => digestJson(observation.value)),
         }
       : null
-    const expectedSpanIds = observations.map((observation) => observation.sourceSpanId)
+    const expectedSpanIds = observations.every(Boolean)
+      ? observations.map((observation) => observation.sourceSpanId)
+      : []
     const structuralTokenizationProof = record.operation === 'structural_tokenization'
       && observations.length === 1
       && observations[0]
@@ -1833,10 +1909,40 @@ function buildPlan(source, capture, closure, groups, acceptedRecords, reviewDeci
   for (const slot of slots) {
     if (slot.activation === 'inactive_source') {
       const sourceSliceRefs = source.inactiveSlots?.[slot.slotId]
+      const sourceClosure = source.inactiveSourceClosures?.find(
+        (candidate) => candidate?.slotId === slot.slotId,
+      )
       if (!Array.isArray(sourceSliceRefs) || sourceSliceRefs.length === 0 || sourceSliceRefs.some((id) => !capture.sourceSpans.some((span) => span.sourceSpanId === id))) {
         diagnostics.push(diagnostic('INACTIVE_SOURCE_MISSING', 'incomplete_source', `$.inactiveSlots.${slot.slotId}`, 'Required inactive source closure is missing'))
+      } else if (
+        slot.sourceClosureContractRef
+        && (
+          !isRecordValue(sourceClosure)
+          || sourceClosure.status !== 'closed'
+          || sourceClosure.contractRef?.id !== slot.sourceClosureContractRef.id
+          || sourceClosure.contractRef?.version !== slot.sourceClosureContractRef.version
+          || sourceClosure.sourceSliceRefs?.length !== sourceSliceRefs.length
+          || sourceClosure.sourceSliceRefs.some((sourceSpanId) => !sourceSliceRefs.includes(sourceSpanId))
+          || sourceClosure.closureDigest !== digestJson(withoutKey(sourceClosure, 'closureDigest'))
+        )
+      ) {
+        diagnostics.push(diagnostic('INACTIVE_SOURCE_CLOSURE_INVALID', 'incomplete_source', `$.inactiveSourceClosures.${slot.slotId}`, 'Required inactive source closure does not bind its exact Profile contract and captured source slices'))
       } else {
-        bindings.push({ slotId: slot.slotId, state: 'inactive', sourceSliceRefs: [...sourceSliceRefs] })
+        bindings.push({
+          slotId: slot.slotId,
+          state: 'inactive',
+          sourceSliceRefs: [...sourceSliceRefs],
+          ...(sourceClosure && slot.sourceClosureContractRef
+            ? {
+                sourceClosureRef: {
+                  reportScopeId: sourceClosure.scopeId,
+                  contractId: sourceClosure.contractRef.id,
+                  contractVersion: sourceClosure.contractRef.version,
+                  closureDigest: sourceClosure.closureDigest,
+                },
+              }
+            : {}),
+        })
       }
       continue
     }
@@ -1939,22 +2045,54 @@ function validateAmbiguities(ambiguities, reviewDecisions, diagnostics) {
   }
 }
 
-function makeReport({ disposition, capture, authority, groups = [], records = [], reviewDecisions = [], diagnostics = [] }) {
+function makeReport({
+  disposition,
+  capture,
+  authority,
+  groups = [],
+  records = [],
+  reviewDecisions = [],
+  inactiveSourceClosures = [],
+  diagnostics = [],
+}) {
   const legacyAuthority = authority?.manifestVersion === '1'
+  const closureDigests = inactiveSourceClosures.map(
+    (closure) => closure.closureDigest,
+  )
   const report = {
     schemaVersion: `normalization-report-v${authority?.manifestVersion || '2'}`,
     disposition,
     authority,
     captureDigest: capture.digest,
-    sourceFingerprint: digestJson({ captureDigest: capture.digest, groupFingerprints: groups.map((group) => group.sourceFingerprint) }),
-    directSourceMap: groups.flatMap((group) => group.sourceMap.entries),
+    sourceFingerprint: digestJson({
+      captureDigest: capture.digest,
+      groupFingerprints: groups.map((group) => group.sourceFingerprint),
+      ...(Number(authority?.manifestVersion) >= 11
+        ? { inactiveSourceClosureDigests: closureDigests }
+        : {}),
+    }),
+    directSourceMap: [
+      ...groups.flatMap((group) => group.sourceMap.entries),
+      ...inactiveSourceClosures.flatMap(
+        (closure) => closure.sourceMap?.entries || [],
+      ),
+    ],
     transformationRecords: records,
     ...(legacyAuthority ? {} : { reviewDecisions }),
+    ...(Number(authority?.manifestVersion) >= 11
+      ? { inactiveSourceClosures }
+      : {}),
     diagnostics,
   }
   if (disposition === 'ready') report.semanticDigest = legacyAuthority
     ? digestJson({ groups: groups.map((group) => group.semanticDigest) })
-    : digestJson({ groups: groups.map((group) => group.semanticDigest), reviewDecisionDigest: digestJson(reviewDecisions) })
+    : digestJson({
+        groups: groups.map((group) => group.semanticDigest),
+        reviewDecisionDigest: digestJson(reviewDecisions),
+        ...(Number(authority?.manifestVersion) >= 11
+          ? { inactiveSourceClosureDigests: closureDigests }
+          : {}),
+      })
   return report
 }
 
@@ -2007,7 +2145,25 @@ export function compileCanonicalPaper(request) {
   diagnostics.push(...planResult.diagnostics)
   if (dispositionFor(diagnostics) !== 'ready') return blockedResult(dispositionFor(diagnostics), capture, closure.authorityRef, diagnostics, transformations.records, effectiveReviewDecisions)
   const groups = builtGroups.map(({ slotId: _slotId, ...group }) => group)
-  const report = makeReport({ disposition: 'ready', capture, authority: closure.authorityRef, groups, records: transformations.records, reviewDecisions: effectiveReviewDecisions, diagnostics })
+  const sourceClosureScopeIds = new Set(
+    planResult.plan.slotBindings
+      .map((binding) => binding.sourceClosureRef?.reportScopeId)
+      .filter(Boolean),
+  )
+  const inactiveSourceClosures = cloneJson(
+    (source.inactiveSourceClosures || []).filter((closure) =>
+      sourceClosureScopeIds.has(closure.scopeId)),
+  )
+  const report = makeReport({
+    disposition: 'ready',
+    capture,
+    authority: closure.authorityRef,
+    groups,
+    records: transformations.records,
+    reviewDecisions: effectiveReviewDecisions,
+    inactiveSourceClosures,
+    diagnostics,
+  })
   const reportIssues = validateJsonSchema(report, closure.schemas[`normalization-report-v${closure.authorityRef.manifestVersion}`], '$.normalizationReport')
   if (reportIssues.length > 0) {
     const mapped = reportIssues.map((item) => diagnostic(item.code, 'needs_review', item.path, item.message))

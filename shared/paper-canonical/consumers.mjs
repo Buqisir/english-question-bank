@@ -1,6 +1,6 @@
-import screen from '../../standards/paper-canonical/consumers/screen-v10.json' with { type: 'json' }
-import printPdf from '../../standards/paper-canonical/consumers/print-pdf-v11.json' with { type: 'json' }
-import docx from '../../standards/paper-canonical/consumers/docx-v10.json' with { type: 'json' }
+import screen from '../../standards/paper-canonical/consumers/screen-v11.json' with { type: 'json' }
+import printPdf from '../../standards/paper-canonical/consumers/print-pdf-v12.json' with { type: 'json' }
+import docx from '../../standards/paper-canonical/consumers/docx-v11.json' with { type: 'json' }
 
 import { canonicalAuthorityRef, resolveCanonicalAuthority, validateJsonSchema } from './authority.mjs'
 import { digestJson, withoutKey } from './stable.mjs'

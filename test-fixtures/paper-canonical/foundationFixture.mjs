@@ -1,6 +1,6 @@
 import { canonicalAuthorityRef } from '../../shared/paper-canonical/compiler.mjs'
 import { resolveCanonicalAuthority, slotsForProfile } from '../../shared/paper-canonical/authority.mjs'
-import { sha256 } from '../../shared/paper-canonical/stable.mjs'
+import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 
 export function makeNck1ProfileInstructionEvidenceDocuments(paperId) {
   const profile =
@@ -232,13 +232,65 @@ export function makeReadyCanonicalFixture() {
   const observations = []
   const groups = []
   const assertions = []
+  const transformations = []
   const inactiveSlots = {}
+  const inactiveSourceClosures = []
   for (const slot of slotsForProfile(profile)) {
     const observationId = `observation:${slot.slotId}`
     observations.push({ observationId, kind: 'fixture_section', documentInputKey: 'questions', value: slot.slotId, span: { start: 0, end: 1 } })
     const sourceSpanId = `source-span:${observationId}`
     if (slot.activation === 'inactive_source') {
+      const recordId = `record:${slot.slotId}:inactive-closure`
+      transformations.push({
+        recordId,
+        sequence: transformations.length + 1,
+        ruleId: 'direct-projection',
+        ruleVersion: '2',
+        target: {
+          identity: slot.slotId,
+          path: `inactive_slot:${slot.slotId}`,
+        },
+        operation: 'direct_projection',
+        inputSourceSpanIds: [sourceSpanId],
+        before: slot.slotId,
+        after: slot.slotId,
+        certainty: 'exact',
+        preconditions: {
+          sourceObservationIds: [observationId],
+          sourceValueDigests: [digestJson(slot.slotId)],
+        },
+        outputDigest: digestJson(slot.slotId),
+      })
       inactiveSlots[slot.slotId] = [sourceSpanId]
+      const closureBase = {
+        scopeId: `inactive-source-closure:paper-canonical-fixture:${slot.slotId}`,
+        slotId: slot.slotId,
+        contractRef: structuredClone(slot.sourceClosureContractRef),
+        status: 'closed',
+        sourceSliceRefs: [sourceSpanId],
+        questionCount: slot.questionRule.cardinality,
+        optionLabels: [...slot.questionRule.optionLabels],
+        officialAnswerCount: slot.questionRule.cardinality,
+        transcriptSegmentCount: slot.transcriptRule.segmentCardinality,
+        transcriptCoverage: 'exactly_once',
+        timing: { disposition: 'not_supplied' },
+        audio: { disposition: 'not_supplied' },
+        sourceMap: {
+          entries: [{
+            target: {
+              kind: 'inactive_slot',
+              id: slot.slotId,
+            },
+            sourceSpanRefs: [sourceSpanId],
+            transformationRecordIds: [recordId],
+          }],
+        },
+        transformationRecordIds: [recordId],
+      }
+      inactiveSourceClosures.push({
+        ...closureBase,
+        closureDigest: digestJson(closureBase),
+      })
       continue
     }
     const questionIds = Array.from({ length: slot.questionCardinality.count }, (_, index) => `question:${slot.slotId}:${index + 1}`)
@@ -341,7 +393,9 @@ export function makeReadyCanonicalFixture() {
     observations,
     assertions,
     groups,
+    transformations,
     inactiveSlots,
+    inactiveSourceClosures,
   }
   for (let pass = 0; pass < 3; pass++) {
     const byteLength = new TextEncoder().encode(JSON.stringify(source)).byteLength

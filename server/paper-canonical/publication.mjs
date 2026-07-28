@@ -16,9 +16,10 @@ import { resolveConsumerContract } from '../../shared/paper-canonical/consumers.
 import { projectCanonicalPaper } from '../../shared/paper-canonical/projector.mjs'
 import { digestJson, sha256, stableStringify, withoutKey } from '../../shared/paper-canonical/stable.mjs'
 
-const publicationFileName = 'canonical-paper-publication-v10.json'
+const publicationFileName = 'canonical-paper-publication-v11.json'
 const publicationFileNames = [
   publicationFileName,
+  'canonical-paper-publication-v10.json',
   'canonical-paper-publication-v9.json',
   'canonical-paper-publication-v8.json',
   'canonical-paper-publication-v7.json',
@@ -180,6 +181,9 @@ function reportSemanticOrder(groups, plan, legacyAuthority) {
 
 function validatePublicationLineage({ sourceCapture, plan, groups, normalizationReport, authorityClosure }) {
   const legacyAuthority = authorityClosure.authorityRef.manifestVersion === '1'
+  const closesInactiveSource = Number(
+    authorityClosure.authorityRef.manifestVersion,
+  ) >= 11
   const { spans } = validateSourceCaptureIntegrity(sourceCapture, { requireEmbeddedEvidence: !legacyAuthority })
   const records = normalizationReport.transformationRecords || []
   const recordIds = new Set(records.map((record) => record.recordId))
@@ -203,12 +207,111 @@ function validatePublicationLineage({ sourceCapture, plan, groups, normalization
     if (group.sourceFingerprint !== expectedFingerprint) throw publicationError('CANONICAL_PUBLICATION_LINEAGE_INVALID', 'Canonical Group source fingerprint does not match source lineage')
   }
   for (const assignment of plan.numberingAssignments || []) if (!spans.has(assignment.sourceNumberSpan)) throw publicationError('CANONICAL_PUBLICATION_LINEAGE_INVALID', 'Canonical Plan numbering assignment lacks a captured source span')
+  const inactiveSourceClosures = closesInactiveSource
+    ? normalizationReport.inactiveSourceClosures || []
+    : []
+  if (closesInactiveSource) {
+    const profile = authorityClosure.profiles.get(plan.profileRef?.profileId)
+    const inactiveSlots = profile
+      ? profile.parts.flatMap((part) =>
+          part.sections.flatMap((section) =>
+            section.slots.filter((slot) =>
+              slot.activation === 'inactive_source'
+              && slot.sourceClosureContractRef)))
+      : []
+    if (
+      inactiveSourceClosures.length !== inactiveSlots.length
+      || new Set(inactiveSourceClosures.map((closure) => closure.slotId)).size
+        !== inactiveSourceClosures.length
+    ) throw publicationError('CANONICAL_PUBLICATION_LINEAGE_INVALID', 'Normalization Report does not close every inactive Profile slot exactly once')
+    for (const slot of inactiveSlots) {
+      const closure = inactiveSourceClosures.find(
+        (candidate) => candidate.slotId === slot.slotId,
+      )
+      const binding = plan.slotBindings.find(
+        (candidate) =>
+          candidate.slotId === slot.slotId && candidate.state === 'inactive',
+      )
+      if (
+        !closure
+        || closure.status !== 'closed'
+        || closure.contractRef?.id !== slot.sourceClosureContractRef?.id
+        || closure.contractRef?.version !== slot.sourceClosureContractRef?.version
+        || closure.questionCount !== slot.questionRule?.cardinality
+        || stableStringify(closure.optionLabels) !== stableStringify(slot.questionRule?.optionLabels)
+        || closure.officialAnswerCount !== slot.questionRule?.cardinality
+        || closure.transcriptSegmentCount !== slot.transcriptRule?.segmentCardinality
+        || closure.transcriptCoverage !== 'exactly_once'
+        || (
+          closure.timing?.disposition === 'supplied'
+            ? (
+                Object.keys(closure.timing).sort().join(',') !== 'disposition,rowCount'
+                || closure.timing.rowCount !== slot.transcriptRule?.segmentCardinality
+              )
+            : (
+                closure.timing?.disposition !== 'not_supplied'
+                || Object.keys(closure.timing || {}).join(',') !== 'disposition'
+              )
+        )
+        || !['not_supplied', 'captured_uninterpreted'].includes(closure.audio?.disposition)
+        || (
+          closure.audio?.disposition === 'not_supplied'
+            ? Object.keys(closure.audio).join(',') !== 'disposition'
+            : (
+                Object.keys(closure.audio).sort().join(',') !== 'artifactRef,digest,disposition'
+                || ![...sourceCapture.documents].some((document) =>
+                  document.immutableArtifactRef?.artifactId === closure.audio.artifactRef
+                  && document.sha256 === closure.audio.digest
+                  && document.roles?.includes('audio_source'))
+              )
+        )
+        || closure.closureDigest !== digestJson(withoutKey(closure, 'closureDigest'))
+        || !Array.isArray(closure.sourceSliceRefs)
+        || closure.sourceSliceRefs.length === 0
+        || closure.sourceSliceRefs.some((sourceSpanId) => !spans.has(sourceSpanId))
+        || !Array.isArray(closure.transformationRecordIds)
+        || closure.transformationRecordIds.some((recordId) => !recordIds.has(recordId))
+        || !Array.isArray(closure.sourceMap?.entries)
+        || closure.sourceMap.entries.length === 0
+        || closure.sourceMap.entries.some((entry) =>
+          !Array.isArray(entry.sourceSpanRefs)
+          || entry.sourceSpanRefs.length === 0
+          || entry.sourceSpanRefs.some((sourceSpanId) => !spans.has(sourceSpanId))
+          || !Array.isArray(entry.transformationRecordIds)
+          || entry.transformationRecordIds.length === 0
+          || entry.transformationRecordIds.some((recordId) => !recordIds.has(recordId)))
+        || !binding
+        || Object.hasOwn(binding, 'groupRef')
+        || binding.sourceClosureRef?.reportScopeId !== closure.scopeId
+        || binding.sourceClosureRef?.contractId !== closure.contractRef.id
+        || binding.sourceClosureRef?.contractVersion !== closure.contractRef.version
+        || binding.sourceClosureRef?.closureDigest !== closure.closureDigest
+        || stableStringify(binding.sourceSliceRefs) !== stableStringify(closure.sourceSliceRefs)
+      ) throw publicationError('CANONICAL_PUBLICATION_LINEAGE_INVALID', `Inactive source closure ${slot.slotId} does not bind exact captured evidence`)
+    }
+  }
   const semanticGroups = reportSemanticOrder(groups, plan, legacyAuthority)
-  const expectedDirectSourceMap = semanticGroups.flatMap((group) => group.sourceMap.entries)
-  const expectedSourceFingerprint = digestJson({ captureDigest: sourceCapture.digest, groupFingerprints: semanticGroups.map((group) => group.sourceFingerprint) })
+  const expectedDirectSourceMap = [
+    ...semanticGroups.flatMap((group) => group.sourceMap.entries),
+    ...inactiveSourceClosures.flatMap(
+      (closure) => closure.sourceMap?.entries || [],
+    ),
+  ]
+  const inactiveSourceClosureDigests = inactiveSourceClosures.map(
+    (closure) => closure.closureDigest,
+  )
+  const expectedSourceFingerprint = digestJson({
+    captureDigest: sourceCapture.digest,
+    groupFingerprints: semanticGroups.map((group) => group.sourceFingerprint),
+    ...(closesInactiveSource ? { inactiveSourceClosureDigests } : {}),
+  })
   const expectedSemanticDigest = legacyAuthority
     ? digestJson({ groups: semanticGroups.map((group) => group.semanticDigest) })
-    : digestJson({ groups: groups.map((group) => group.semanticDigest), reviewDecisionDigest })
+    : digestJson({
+        groups: groups.map((group) => group.semanticDigest),
+        reviewDecisionDigest,
+        ...(closesInactiveSource ? { inactiveSourceClosureDigests } : {}),
+      })
   if (normalizationReport.sourceFingerprint !== expectedSourceFingerprint || stableStringify(normalizationReport.directSourceMap) !== stableStringify(expectedDirectSourceMap) || normalizationReport.semanticDigest !== expectedSemanticDigest) throw publicationError('CANONICAL_PUBLICATION_LINEAGE_INVALID', 'Normalization Report does not close its direct source lineage')
 }
 

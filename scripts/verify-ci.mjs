@@ -20,6 +20,7 @@ const registry = {
   'scripts/verify-paper-canonical-reading-publication.mjs',
   'scripts/verify-paper-canonical-application-writing-publication.mjs',
   'scripts/verify-paper-canonical-continuation-writing-publication.mjs',
+  'scripts/verify-paper-canonical-listening-inactive-closure.mjs',
   'scripts/verify-paper-canonical-continuation-writing-rendered-behavior.mjs',
   'scripts/verify-paper-canonical-seven-choices-rendered-behavior.mjs',
   'scripts/verify-paper-canonical-reading-rendered-behavior.mjs',

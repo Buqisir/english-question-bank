@@ -46,6 +46,8 @@ assert.equal(compilation.artifacts.sourceCapture.assertions.find((assertion) => 
 assert.deepEqual(
   compilation.artifacts.normalizationReport.transformationRecords.map((record) => [record.target.identity, record.operation]),
   [
+    ['listening.short-dialogue', 'direct_projection'],
+    ['listening.long-form', 'direct_projection'],
     [
       'profile:nck1:instruction:writing.continuation.prompt',
       'profile_instruction_correction',
