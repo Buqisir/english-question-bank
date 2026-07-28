@@ -1,13 +1,13 @@
 # EQB 试卷 Canonical 大一统 — Wayfinder Map
 
 Status: done
-Next on PASS: implementation
+Next on PASS: to-tickets
 Terminal: no
 Phase receipt: `docs/cuts/paper-canonical-unification/phase-transition.md`
 
 ## Notes
 
-- Objective: make every currently supported high-school English paper family pass through one source-traceable canonical backbone before Screen, Print/PDF, and DOCX consumption.
+- Original chart objective: make every currently supported high-school English paper family pass through one source-traceable canonical backbone. The owner amendment after Ticket 15 contracts supported outputs to Screen and Print/PDF while preserving the renderer-neutral backbone.
 - Worktree: `/Users/huangxuewei/Projects/wt-paper-canonical-unification-20260725`
 - Branch: `codex/paper-canonical-unification-20260725`
 - Chart fixed point: `19ffc7744c656b526f55934c8c73e245acf7323f`
@@ -34,19 +34,21 @@ Phase receipt: `docs/cuts/paper-canonical-unification/phase-transition.md`
 - Do not copy copyrighted passages, answers, student data, credentials, or source files into Wayfinder artifacts. Asset investigation records ids, hashes, shapes, counts, and minimal diagnostic excerpts only.
 - Tickets are claimed before resolution; closed answers live in their tickets
   and appear below only as linked one-line gists.
-- Route correction: Ticket 16's 29-ticket synthesis remains historical
-  evidence only. Ticket 01 remains done and immutable. The accepted fresh spec,
-  corrected Tickets 02–71, their digest-closed manifest, and the phase receipt
-  supersede historical Tickets 02–29 as the sole current route.
-- The owner approved the exact fresh manifest digest in
-  `docs/cuts/paper-canonical-unification/owner-approval.md`. The receipt must
-  bind that committed record and re-verify all four implementation gates
-  before implementation becomes eligible.
-- The sole initial implementation frontier is Ticket 02. This approval
-  recording dispatches nothing. Ticket 02 bootstraps on the already-legal
-  `implementation -> independent-review` edge; no later implementation
-  frontier opens until its committed route-authority repair passes that
-  independent review.
+- Route correction history remains evidence. Tickets 01–15 and all of their
+  implementation, review, owner-QA, artifact, and commit evidence remain
+  accepted completed results.
+- Owner scope amendment after Ticket 15: generated DOCX output is retired;
+  DOCX source input is preserved; the only supported artifact matrix is Screen
+  plus Print/PDF; and direct Chromium/Playwright PDF remains the current
+  fixed-layout mainline.
+- Existing Tickets 16–71, their manifest, and the approval bound to that
+  manifest are superseded as unexecuted route authority. They remain historical
+  planning and provenance evidence and are not rewritten.
+- The sole current frontier is a fresh `$to-tickets` phase bound to the amended
+  spec. It must present Title, Blocked by, What it delivers, old-ticket mapping,
+  and proposed total count to the owner and wait for explicit approval before
+  publishing a replacement manifest. No implementation ticket is currently
+  dispatchable.
 
 ## Decisions so far
 
@@ -80,6 +82,8 @@ frontier:
 - On-demand canonical compilation for historical `versions/vN` after the first `latest`-only migration.
 - The active listening domain model, audio timing contract, website consumption, and listening renderers.
 - A backend normalization review console beyond durable reports and agent-operated correction; website import UI remains forbidden.
-- Retirement or consolidation of source-format-specific splitters and `packageBuilder` branches after every supported profile has migrated.
+- Retirement or consolidation of source-format-specific input splitters after
+  every supported profile has migrated. Generated DOCX output is no longer
+  fog; its full retirement is the first amended implementation goal.
 - Production rollout, R2 synchronization, and production backfill mechanics are a separate production-authorized cut after repository release gates are proven.
 - New paper families, unsupported question types, or other subjects discovered outside the current 33-paper census.
