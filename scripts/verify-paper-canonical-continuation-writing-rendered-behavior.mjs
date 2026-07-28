@@ -460,6 +460,42 @@ function assertNoRendererLocalWritingGroupHeading(renderedText, label) {
   }
 }
 
+function assertCanonicalWritingChromeTextLines(renderedText, canonical, label) {
+  const lines = String(renderedText)
+    .split(/\r?\n/)
+    .map(compactText)
+    .filter(Boolean)
+  for (const instruction of [
+    canonical.paperChrome.part,
+    canonical.paperChrome.section,
+    ...canonical.paperChrome.instructions,
+  ]) {
+    assert.equal(
+      lines.filter((line) => line === compactText(instruction.text)).length,
+      1,
+      `${label} contains canonical paperChrome line ${instruction.instructionId} exactly once`,
+    )
+  }
+}
+
+function assertCanonicalWritingChromeBookmarks(documentXml, canonical, label) {
+  for (const instruction of [
+    canonical.paperChrome.part,
+    canonical.paperChrome.section,
+    ...canonical.paperChrome.instructions,
+  ]) {
+    const name = bookmarkName(
+      'canonical_instruction',
+      instruction.instructionId,
+    )
+    assert.equal(
+      documentXml.split(name).length - 1,
+      1,
+      `${label} contains canonical paperChrome bookmark ${instruction.instructionId} exactly once`,
+    )
+  }
+}
+
 function assertVisibleCanonicalText(renderedText, canonical) {
   const compact = compactText(renderedText)
   assert.equal(compact.includes('POISONEDLEGACY'), false)
@@ -782,11 +818,11 @@ for (const { label, consumption, canonical } of cases) {
       ...canonical.paperChrome.instructions,
     ]) {
       assert.equal(
-        xml.includes(bookmarkName(
+        xml.split(bookmarkName(
           'canonical_instruction',
           instruction.instructionId,
-        )),
-        true,
+        )).length - 1,
+        1,
       )
     }
     assert.equal(
@@ -847,6 +883,11 @@ for (const { label, consumption, canonical } of cases) {
         packagedXml,
         `packaged DOCX OOXML ${label}/${versionType}`,
       )
+      assertCanonicalWritingChromeBookmarks(
+        packagedXml,
+        canonical,
+        `packaged DOCX OOXML ${label}/${versionType}`,
+      )
       assert.equal(packagedXml, xml)
       docxRenderer.convertDocxToPdf(docxPath, pdfPath)
       assert.equal(readFileSync(pdfPath).subarray(0, 4).toString(), '%PDF')
@@ -858,6 +899,11 @@ for (const { label, consumption, canonical } of cases) {
       assertVisibleCanonicalText(convertedText, canonical)
       assertNoRendererLocalWritingGroupHeading(
         convertedText,
+        `DOCX-to-PDF ${label}/${versionType}`,
+      )
+      assertCanonicalWritingChromeTextLines(
+        convertedText,
+        canonical,
         `DOCX-to-PDF ${label}/${versionType}`,
       )
       if (persistActualArtifacts) {
@@ -1523,6 +1569,11 @@ async function assertBrowserArtifacts() {
         assertVisibleCanonicalText(pdfText, canonical)
         assertNoRendererLocalWritingGroupHeading(
           pdfText,
+          `Print PDF ${label}/${versionType}`,
+        )
+        assertCanonicalWritingChromeTextLines(
+          pdfText,
+          canonical,
           `Print PDF ${label}/${versionType}`,
         )
         if (persistActualArtifacts) {
