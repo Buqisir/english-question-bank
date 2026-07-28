@@ -14,11 +14,17 @@ import {
 import { tmpdir } from 'node:os'
 import path from 'node:path'
 
+import {
+  canonicalAuthorityRef,
+  resolveCanonicalAuthority,
+  validateAuthorityClosure,
+} from '../shared/paper-canonical/authority.mjs'
 import { compileCanonicalPaper } from '../shared/paper-canonical/compiler.mjs'
 import {
   projectCanonicalConsumerGroup,
 } from '../shared/paper-canonical/consumerProjection.mjs'
 import { projectCanonicalPaper } from '../shared/paper-canonical/projector.mjs'
+import { digestJson } from '../shared/paper-canonical/stable.mjs'
 import {
   buildCanonicalContinuationWritingConsumptionSurfaceData,
 } from '../shared/paper-normalization/canonicalPaperGroupSurfaceAdapter.mjs'
@@ -43,10 +49,109 @@ const docxRenderer = createDocxRenderer({
   optionalString: (value) => value == null ? '' : String(value),
 })
 
+const nck1WritingChrome = Object.freeze({
+  part: '第四部分 写作（共两节，满分40分）',
+  application: '第一节（满分15分）',
+  continuation: '第二节（满分25分）',
+})
+
+function assertNck1WritingAuthority() {
+  const authority = resolveCanonicalAuthority(canonicalAuthorityRef)
+  assert.equal(authority.ok, true)
+  const profile = authority.closure.profiles.get('nck1')
+  const writingPart = profile.parts.find((part) => part.partId === 'writing')
+  assert.ok(writingPart)
+  assert.equal(writingPart.score, 40)
+  assert.equal(writingPart.sections.length, 2)
+  assert.deepEqual(
+    writingPart.sections.map((section) => ({
+      sectionId: section.sectionId,
+      score: section.score,
+      slots: section.slots.map((slot) => slot.slotId),
+    })),
+    [
+      {
+        sectionId: 'writing.application',
+        score: 15,
+        slots: ['writing.application'],
+      },
+      {
+        sectionId: 'writing.continuation',
+        score: 25,
+        slots: ['writing.continuation'],
+      },
+    ],
+  )
+  assert.equal(
+    profile.instructions[writingPart.titleInstructionRef].text,
+    nck1WritingChrome.part,
+  )
+  assert.equal(
+    profile.instructions[
+      writingPart.sections[0].titleInstructionRef
+    ].text,
+    nck1WritingChrome.application,
+  )
+  assert.equal(
+    profile.instructions[
+      writingPart.sections[1].titleInstructionRef
+    ].text,
+    nck1WritingChrome.continuation,
+  )
+
+  const mutatedProfile = structuredClone(profile)
+  const mutatedWritingPart = mutatedProfile.parts.find(
+    (part) => part.partId === 'writing',
+  )
+  mutatedWritingPart.sections = [{
+    sectionId: 'writing.tasks',
+    ordinal: 1,
+    titleInstructionRef: 'section.writing',
+    score: 40,
+    slots: mutatedWritingPart.sections.flatMap((section) => section.slots),
+  }]
+  mutatedProfile.instructions['section.writing'] = {
+    instructionId: 'section.writing',
+    placement: 'section_heading',
+    text: 'Writing tasks',
+  }
+  const mutatedManifest = structuredClone(authority.closure.manifest)
+  mutatedManifest.artifacts.find(
+    (descriptor) => descriptor.id === 'profile-nck1',
+  ).sha256 = digestJson(mutatedProfile)
+  const validation = validateAuthorityClosure({
+    manifest: mutatedManifest,
+    artifacts: {
+      ...authority.closure.artifacts,
+      'profile-nck1': mutatedProfile,
+    },
+    schemas: authority.closure.schemas,
+  })
+  assert.equal(validation.ok, false)
+  assert.equal(
+    validation.issues.some(
+      (issue) => issue.code === 'PROFILE_NCK1_WRITING_CHROME_INVALID',
+    ),
+    true,
+  )
+}
+
 function readyConsumption(paperId) {
   const fixture = makeContinuationWritingReferenceFixture(paperId)
   const compilation = compileCanonicalPaper(fixture.request)
   assert.equal(compilation.disposition, 'ready')
+  if (paperId === 'paper-2026-i') {
+    const authority = resolveCanonicalAuthority(canonicalAuthorityRef)
+    const profile = authority.closure.profiles.get('nck1')
+    assert.deepEqual(
+      compilation.artifacts.canonicalPaper.paperPlan.profileRef,
+      {
+        profileId: 'nck1',
+        profileVersion: '3',
+        profileDigest: digestJson(profile),
+      },
+    )
+  }
   const projected = projectCanonicalPaper({
     plan: compilation.artifacts.canonicalPaper.paperPlan,
     groups: compilation.artifacts.canonicalPaper.questionGroups,
@@ -164,6 +269,7 @@ function assertPollutedProofBlocked() {
 }
 
 const cases = []
+assertNck1WritingAuthority()
 for (const paperId of ['paper-2026-i', 'paper-zj-2020-jul']) {
   const consumption = readyConsumption(paperId)
   const selection = consumption.selections[0]
@@ -176,6 +282,13 @@ for (const paperId of ['paper-2026-i', 'paper-zj-2020-jul']) {
     canonical.answerRegion.starterLines.length,
     paperId === 'paper-2026-i' ? 2 : 0,
   )
+  if (paperId === 'paper-2026-i') {
+    assert.equal(canonical.paperChrome.part.text, nck1WritingChrome.part)
+    assert.equal(
+      canonical.paperChrome.section.text,
+      nck1WritingChrome.continuation,
+    )
+  }
   const surface =
     buildCanonicalContinuationWritingConsumptionSurfaceData({
       consumption,
