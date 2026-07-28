@@ -1,7 +1,7 @@
 # EQB 试卷 Canonical 大一统 — Wayfinder Map
 
 Status: done
-Next on PASS: to-tickets
+Next on PASS: owner-approval
 Terminal: no
 Phase receipt: `docs/cuts/paper-canonical-unification/phase-transition.md`
 
@@ -41,14 +41,17 @@ Phase receipt: `docs/cuts/paper-canonical-unification/phase-transition.md`
   DOCX source input is preserved; the only supported artifact matrix is Screen
   plus Print/PDF; and direct Chromium/Playwright PDF remains the current
   fixed-layout mainline.
-- Existing Tickets 16–71, their manifest, and the approval bound to that
-  manifest are superseded as unexecuted route authority. They remain historical
-  planning and provenance evidence and are not rewritten.
-- The sole current frontier is a fresh `$to-tickets` phase bound to the amended
-  spec. It must present Title, Blocked by, What it delivers, old-ticket mapping,
-  and proposed total count to the owner and wait for explicit approval before
-  publishing a replacement manifest. No implementation ticket is currently
-  dispatchable.
+- The former Tickets 16–71, their manifest, and the approval bound to that
+  manifest are superseded as unexecuted route authority. Their exact bytes are
+  preserved under `history/2026-07-26-superseded-ticket-set/`; that directory
+  is evidence only and is never dispatch authority.
+- The owner approved the replacement granularity of preserved Tickets 01–15
+  plus new Tickets 16–23 before publication. Ticket 22 is diagnostic-only and
+  zero-write; Ticket 23 may only propose a measured follow-on route and must
+  pause for fresh owner approval before publishing it.
+- The current phase is owner approval of the exact replacement manifest
+  digest. Implementation and coordinator dispatch remain forbidden; Ticket 16
+  cannot start until the four implementation gates are separately closed.
 
 ## Decisions so far
 
