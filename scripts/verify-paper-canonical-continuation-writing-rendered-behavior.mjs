@@ -13,6 +13,7 @@ import {
 } from 'node:fs'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
+import { DatabaseSync } from 'node:sqlite'
 
 import {
   canonicalAuthorityRef,
@@ -28,8 +29,14 @@ import { digestJson } from '../shared/paper-canonical/stable.mjs'
 import {
   buildCanonicalContinuationWritingConsumptionSurfaceData,
 } from '../shared/paper-normalization/canonicalPaperGroupSurfaceAdapter.mjs'
+import { consumerContractRefs } from '../shared/paper-canonical/consumers.mjs'
 import { createDocxRenderer } from '../server/exports/docxRenderer.mjs'
 import { buildPrintHtml } from '../server/print-renderer.mjs'
+import {
+  createFileSystemCanonicalPublicationStore,
+  loadPaperForConsumption,
+  publishCanonicalPaperPublication,
+} from '../server/paper-canonical/publication.mjs'
 import {
   makeApplicationWritingReferenceFixture,
 } from '../test-fixtures/paper-canonical/applicationWritingReferenceFixture.mjs'
@@ -178,82 +185,152 @@ function readyConsumption(paperId) {
   }
 }
 
-function projectWritingOccurrence(fixture, familyContractId) {
-  const compilation = compileCanonicalPaper(fixture.request)
-  assert.equal(compilation.disposition, 'ready')
-  const projected = projectCanonicalPaper({
-    plan: compilation.artifacts.canonicalPaper.paperPlan,
-    groups: compilation.artifacts.canonicalPaper.questionGroups,
-    sourceCapture: compilation.artifacts.sourceCapture,
-  })
-  const occurrences = projected.nodes.filter(
-    (node) =>
-      node.kind === 'group'
-      && node.familyContractId === familyContractId,
+function makeIntegrityClosedNck1WritingFixture() {
+  const application =
+    makeApplicationWritingReferenceFixture('paper-2026-i')
+  const continuation =
+    makeContinuationWritingReferenceFixture('paper-2026-i')
+  const source = structuredClone(continuation.source)
+  source.groups = source.groups.filter(
+    (group) => group.slotId !== 'writing.application',
   )
-  assert.equal(occurrences.length, 1)
+  const removedObservationIds = new Set([
+    'observation:writing.application',
+    'observation:group:writing.application:answer-region-empty',
+    'observation:group:writing.application:word-count',
+    'observation:group:writing.application:response',
+  ])
+  source.observations = source.observations.filter(
+    (observation) => !removedObservationIds.has(observation.observationId),
+  )
+  const realGroupIdsBySlot = {
+    'reading.a': 'group-2026-i-reading-a',
+    'reading.b': 'group-2026-i-reading-b',
+    'reading.c': 'group-2026-i-reading-c',
+    'reading.d': 'group-2026-i-reading-d',
+    'reading.seven-choices': 'group-2026-i-seven-choices',
+    'language.cloze': 'group-2026-i-cloze',
+    'language.grammar-fill': 'group-2026-i-grammar-fill',
+  }
+  for (const group of source.groups) {
+    const realGroupId = realGroupIdsBySlot[group.slotId]
+    if (!realGroupId) continue
+    group.groupId = realGroupId
+    if (group.variant.family === 'seven-choices') {
+      group.variant.choiceOwnership.bankId = `bank:${realGroupId}`
+    }
+  }
+  for (let pass = 0; pass < 3; pass += 1) {
+    const byteLength =
+      new TextEncoder().encode(JSON.stringify(source)).byteLength
+    for (const observation of source.observations) {
+      if (observation.documentInputKey === 'canonical_mapping') {
+        observation.span.end = byteLength
+      }
+    }
+  }
+  const mappingBytes = new TextEncoder().encode(JSON.stringify(source))
+  const continuationDocuments = continuation.request.evidence.documents.map(
+    (document) => document.inputKey === 'canonical_mapping'
+      ? { ...document, bytes: mappingBytes }
+      : document,
+  )
+  const applicationDocuments = application.request.evidence.documents.filter(
+    (document) => [
+      'application_writing_capture',
+      'application_writing_transcription',
+    ].includes(document.inputKey),
+  )
+  const sourceAsset = continuationDocuments.find(
+    (document) => document.inputKey === 'original_question_source',
+  )?.bytes
+  assert.ok(sourceAsset)
   return {
-    profileRef: compilation.artifacts.canonicalPaper.paperPlan.profileRef,
-    occurrence: occurrences[0],
+    paperId: 'paper-2026-i',
+    sourceAsset,
+    request: {
+      authority: continuation.request.authority,
+      evidence: {
+        documents: [
+          ...continuationDocuments,
+          ...applicationDocuments,
+        ],
+      },
+    },
   }
 }
 
-function readyMixedNck1WritingConsumption() {
-  const application = projectWritingOccurrence(
-    makeApplicationWritingReferenceFixture('paper-2026-i'),
-    'application-writing',
-  )
-  const continuation = projectWritingOccurrence(
-    makeContinuationWritingReferenceFixture('paper-2026-i'),
-    'continuation-writing',
-  )
-  assert.deepEqual(application.profileRef, continuation.profileRef)
-  return {
-    disposition: 'ready',
-    paperId: 'paper-2026-i',
-    selections: [
+async function loadIntegrityClosedNck1WritingConsumptions() {
+  const fixture = makeIntegrityClosedNck1WritingFixture()
+  const compilation = compileCanonicalPaper(fixture.request)
+  assert.equal(compilation.disposition, 'ready')
+  assert.deepEqual(
+    compilation.artifacts.canonicalPaper.paperPlan.slotBindings
+      .filter((binding) => binding.slotId.startsWith('writing.'))
+      .map((binding) => ({
+        slotId: binding.slotId,
+        state: binding.state,
+        groupId: binding.groupRef?.groupId,
+      })),
+    [
       {
-        mode: 'legacy',
-        familyContractId: 'reading',
-        groupIds: [
-          'group-2026-i-reading-a',
-          'group-2026-i-reading-b',
-          'group-2026-i-reading-c',
-          'group-2026-i-reading-d',
-        ],
-        projectedOccurrences: [],
+        slotId: 'writing.application',
+        state: 'bound',
+        groupId: 'group-2026-i-writing-application',
       },
       {
-        mode: 'legacy',
-        familyContractId: 'seven-choices',
-        groupIds: ['group-2026-i-seven-choices'],
-        projectedOccurrences: [],
-      },
-      {
-        mode: 'legacy',
-        familyContractId: 'cloze',
-        groupIds: ['group-2026-i-cloze'],
-        projectedOccurrences: [],
-      },
-      {
-        mode: 'legacy',
-        familyContractId: 'grammar-fill',
-        groupIds: ['group-2026-i-grammar-fill'],
-        projectedOccurrences: [],
-      },
-      {
-        mode: 'canonical',
-        familyContractId: 'application-writing',
-        groupIds: [application.occurrence.groupId],
-        projectedOccurrences: [application.occurrence],
-      },
-      {
-        mode: 'canonical',
-        familyContractId: 'continuation-writing',
-        groupIds: [continuation.occurrence.groupId],
-        projectedOccurrences: [continuation.occurrence],
+        slotId: 'writing.continuation',
+        state: 'bound',
+        groupId: 'group-2026-i-writing-continuation',
       },
     ],
+  )
+  const rootDir = mkdtempSync(path.join(
+    tmpdir(),
+    'eqb-integrity-closed-writing-',
+  ))
+  const db = new DatabaseSync(path.join(rootDir, 'publication.sqlite'))
+  try {
+    assert.equal(
+      publishCanonicalPaperPublication({
+        rootDir,
+        db,
+        compilation,
+        sourceAssetVersion: 1,
+        sourceAsset: fixture.sourceAsset,
+      }).status,
+      'published',
+    )
+    const store = createFileSystemCanonicalPublicationStore({ rootDir, db })
+    const consumptions = {}
+    for (const [surface, consumerContract] of Object.entries({
+      screen: consumerContractRefs.screen,
+      printPdf: consumerContractRefs.print_pdf,
+      docx: consumerContractRefs.docx,
+    })) {
+      const consumption = await loadPaperForConsumption({
+        paperId: fixture.paperId,
+        consumerContract,
+      }, store)
+      assert.equal(consumption.disposition, 'ready')
+      for (const familyContractId of [
+        'application-writing',
+        'continuation-writing',
+      ]) {
+        const selection = consumption.selections.find(
+          (candidate) =>
+            candidate.familyContractId === familyContractId,
+        )
+        assert.equal(selection.mode, 'canonical')
+        assert.equal(selection.groupIds.length, 1)
+        assert.equal(selection.projectedOccurrences.length, 1)
+      }
+      consumptions[surface] = consumption
+    }
+    return consumptions
+  } finally {
+    db.close()
+    rmSync(rootDir, { recursive: true, force: true })
   }
 }
 
@@ -454,10 +531,11 @@ for (const paperId of ['paper-2026-i', 'paper-zj-2020-jul']) {
 
 assertPollutedProofBlocked()
 
-const mixedWritingConsumption = readyMixedNck1WritingConsumption()
-const mixedApplication = applicationGroup(mixedWritingConsumption)
-const mixedContinuation = continuationGroup(mixedWritingConsumption)
-const mixedWritingArgs = {
+const mixedWritingConsumptions =
+  await loadIntegrityClosedNck1WritingConsumptions()
+const mixedApplication = applicationGroup(mixedWritingConsumptions.screen)
+const mixedContinuation = continuationGroup(mixedWritingConsumptions.screen)
+const mixedWritingBaseArgs = {
   title: 'NCK1 whole writing chrome regression',
   versionType: 'student',
   printStyle: 'exam',
@@ -478,11 +556,22 @@ const mixedWritingArgs = {
     },
   ],
   questionNumberStart: 1,
-  canonicalConsumption: mixedWritingConsumption,
 }
-const mixedPrintHtml = buildPrintHtml(mixedWritingArgs)
+const mixedPrintHtml = buildPrintHtml({
+  ...mixedWritingBaseArgs,
+  canonicalConsumption: mixedWritingConsumptions.printPdf,
+})
 assertNck1WritingHeadingCounts(mixedPrintHtml, 'whole-paper Print HTML')
-const mixedDocxXml = docxRenderer.buildDocumentXml(mixedWritingArgs)
+if (persistActualArtifacts) {
+  writeFileSync(
+    path.join(actualArtifactRoot, 'print-whole-writing-student.html'),
+    mixedPrintHtml,
+  )
+}
+const mixedDocxXml = docxRenderer.buildDocumentXml({
+  ...mixedWritingBaseArgs,
+  canonicalConsumption: mixedWritingConsumptions.docx,
+})
 assertNck1WritingHeadingCounts(mixedDocxXml, 'whole-paper DOCX OOXML')
 {
   const root = mkdtempSync(path.join(tmpdir(), 'eqb-writing-chrome-docx-'))
@@ -492,7 +581,7 @@ assertNck1WritingHeadingCounts(mixedDocxXml, 'whole-paper DOCX OOXML')
     docxRenderer.writeDocxPackage({
       documentXml: mixedDocxXml,
       outputPath: docxPath,
-      title: mixedWritingArgs.title,
+      title: mixedWritingBaseArgs.title,
     })
     const packagedXml = execFileSync(
       'unzip',
@@ -878,7 +967,7 @@ async function assertBrowserArtifacts() {
         (route) => route.fulfill({
           status: 200,
           contentType: 'application/json',
-          body: JSON.stringify(mixedWritingConsumption),
+          body: JSON.stringify(mixedWritingConsumptions.screen),
         }),
       )
       await page.route('**/paper-assets/**/paper-asset.json', (route) =>
@@ -893,7 +982,7 @@ async function assertBrowserArtifacts() {
         route.fulfill({ status: 404, body: '' }))
       const url = new URL('index.html', appUrl)
       url.searchParams.set('view', 'paper-browse')
-      url.searchParams.set('paperId', mixedWritingConsumption.paperId)
+      url.searchParams.set('paperId', mixedWritingConsumptions.screen.paperId)
       url.searchParams.set('focusGroupId', mixedApplication.groupId)
       await page.goto(url.href)
       const mixedContinuationResponse = page.locator(
@@ -928,6 +1017,15 @@ async function assertBrowserArtifacts() {
         mixedScreenText,
         'authenticated whole-paper Screen',
       )
+      if (persistActualArtifacts) {
+        await page.screenshot({
+          path: path.join(
+            actualArtifactRoot,
+            'screen-whole-writing-student.png',
+          ),
+          fullPage: true,
+        })
+      }
       await page.close()
     }
 
