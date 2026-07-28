@@ -293,6 +293,45 @@ try {
       expectedCanonicalGroupIds,
     )
 
+    const poisonedRequest = structuredClone(canonicalRequest)
+    const poisonedDocument = poisonedRequest.evidence.documents.find(
+      (document) => document.inputKey === 'questions',
+    )
+    const poisonedSource = JSON.parse(
+      Buffer.from(poisonedDocument.bytes).toString('utf8'),
+    )
+    const poisonedReading = poisonedSource.groups.find(
+      (group) => group.family === 'reading',
+    )
+    poisonedReading.content.blocks[0].inlines[0].text =
+      'POISONED UNRELATED CANONICAL CONTENT'
+    poisonedReading.variant.questions[0].stem[0].text =
+      'POISONED UNRELATED QUESTION STEM'
+    for (let pass = 0; pass < 3; pass++) {
+      const bytes = Buffer.from(JSON.stringify(poisonedSource))
+      for (const observation of poisonedSource.observations) {
+        if (observation.documentInputKey === 'questions') {
+          observation.span.end = bytes.byteLength
+        }
+      }
+    }
+    poisonedDocument.bytes = Buffer.from(JSON.stringify(poisonedSource))
+    const beforePoisonTree = snapshotTree(importRoot)
+    const beforePoisonDb = snapshotDatabase(importDb)
+    const poisoned = publishPaperImportPackage({
+      files,
+      db: importDb,
+      paperAssetsDir: importRoot,
+      canonicalRequest: poisonedRequest,
+    })
+    assert.equal(poisoned.status, 'canonical_admission_failed')
+    assert.equal(
+      poisoned.canonicalAdmission.diagnostics[0].code,
+      'CANONICAL_IMPORT_SEMANTIC_MISMATCH',
+    )
+    assert.deepEqual(snapshotTree(importRoot), beforePoisonTree)
+    assert.deepEqual(snapshotDatabase(importDb), beforePoisonDb)
+
     const beforeCorruptTree = snapshotTree(importRoot)
     const beforeCorruptDb = snapshotDatabase(importDb)
     const corruptStage = publishPaperImportPackage({

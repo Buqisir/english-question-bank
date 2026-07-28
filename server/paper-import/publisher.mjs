@@ -533,6 +533,187 @@ function importedFamily(group, paperAsset) {
   return null
 }
 
+function inlineText(inlines) {
+  return (inlines || [])
+    .filter((inline) => inline?.kind === 'text')
+    .map((inline) => inline.text || '')
+    .join('')
+}
+
+function importedContentSignature(group, paperAsset) {
+  const associations = (paperAsset.sources?.docx?.shapeAssociations || [])
+    .filter((association) => association.groupId === group.groupId)
+  return (group.passage?.paragraphs || []).map((paragraph) => {
+    const association = associations.find((candidate) =>
+      paragraph.text.includes(candidate.placeholderMarker))
+    return association
+      ? {
+          kind: 'figure',
+          figureId: association.figureId,
+          caption: association.caption || '',
+        }
+      : {
+          kind: 'paragraph',
+          nodeId: paragraph.paragraphId,
+          text: paragraph.text,
+        }
+  })
+}
+
+function canonicalContentSignature(group, importedGroup, paperAsset) {
+  const questionNumberByBlankId = new Map(
+    (importedGroup.blankIds || []).map((blankId, index) => [
+      blankId,
+      paperAsset.content.questions[importedGroup.questionIds[index]]
+        ?.questionNo,
+    ]),
+  )
+  return (group.content?.blocks || []).map((block) => {
+    if (block.kind === 'figure') {
+      const media = group.media?.find(
+        (candidate) => candidate.mediaId === block.mediaId,
+      )
+      return {
+        kind: 'figure',
+        figureId: String(media?.mediaId || block.mediaId || '')
+          .replace(/^media:/, ''),
+        caption: inlineText(block.caption),
+      }
+    }
+    const text = (block.inlines || []).map((inline) => {
+      if (inline.kind === 'text') return inline.text || ''
+      if (inline.kind !== 'blank_ref') return ''
+      const number = questionNumberByBlankId.get(inline.blankId)
+      return ['cloze', 'grammar-fill'].includes(
+        group.contractRef.familyContractId,
+      )
+        ? `__${number}__`
+        : String(number)
+    }).join('')
+    return { kind: block.kind, nodeId: block.nodeId, text }
+  })
+}
+
+function importedOptions(options) {
+  return (options || []).map((option) => ({
+    label: option.label,
+    text: option.text || '',
+  }))
+}
+
+function canonicalOptions(options) {
+  return (options || []).map((option) => ({
+    label: option.label,
+    text: inlineText(option.content),
+  }))
+}
+
+function semanticMismatchForGroup({
+  canonicalGroup,
+  importedGroup,
+  paperAsset,
+}) {
+  if (
+    !['application-writing', 'continuation-writing'].includes(
+      canonicalGroup.contractRef.familyContractId,
+    )
+    &&
+    JSON.stringify(canonicalContentSignature(
+      canonicalGroup,
+      importedGroup,
+      paperAsset,
+    ))
+    !== JSON.stringify(importedContentSignature(importedGroup, paperAsset))
+  ) {
+    return 'content order or text'
+  }
+  const family = canonicalGroup.contractRef.familyContractId
+  if (family === 'reading') {
+    const canonicalQuestions = new Map(
+      canonicalGroup.variant.questions.map((question) => [
+        question.questionId,
+        question,
+      ]),
+    )
+    const canonicalSets = new Map(
+      canonicalGroup.variant.choiceOwnership.sets.map((set) => [
+        set.questionId,
+        set,
+      ]),
+    )
+    for (const questionId of importedGroup.questionIds) {
+      const importedQuestion = paperAsset.content.questions[questionId]
+      const canonicalQuestion = canonicalQuestions.get(questionId)
+      if (
+        inlineText(canonicalQuestion?.stem) !== (importedQuestion?.stem || '')
+        || JSON.stringify(canonicalOptions(
+          canonicalSets.get(questionId)?.options,
+        )) !== JSON.stringify(importedOptions(importedQuestion?.options))
+      ) {
+        return `stem or options for ${questionId}`
+      }
+    }
+  }
+  if (family === 'seven-choices') {
+    if (
+      JSON.stringify(canonicalOptions(
+        canonicalGroup.variant.choiceOwnership.options,
+      )) !== JSON.stringify(importedOptions(importedGroup.optionBank))
+    ) {
+      return 'shared A-G bank'
+    }
+  }
+  if (family === 'cloze') {
+    const canonicalSets = new Map(
+      canonicalGroup.variant.choiceOwnership.sets.map((set) => [
+        set.questionId,
+        set,
+      ]),
+    )
+    for (const questionId of importedGroup.questionIds) {
+      if (
+        JSON.stringify(canonicalOptions(
+          canonicalSets.get(questionId)?.options,
+        )) !== JSON.stringify(importedOptions(
+          paperAsset.content.questions[questionId]?.options,
+        ))
+      ) {
+        return `options for ${questionId}`
+      }
+    }
+  }
+  if (['application-writing', 'continuation-writing'].includes(family)) {
+    const task = paperAsset.content.writingTasks?.[importedGroup.writingTaskId]
+    if (
+      !task
+      || canonicalGroup.variant.writingTaskId !== task.writingTaskId
+      || canonicalGroup.variant.wordCountRuling.target !== task.wordCountTarget
+    ) {
+      return 'writing task identity or word-count ruling'
+    }
+    const blocks = canonicalGroup.content.blocks
+    if (
+      family === 'application-writing'
+      && !inlineText(blocks.flatMap((block) => block.inlines || []))
+        .includes(task.instruction)
+    ) {
+      return 'application-writing prompt'
+    }
+    if (
+      family === 'continuation-writing'
+      && (
+        inlineText(blocks[0]?.inlines) !== task.materialText
+        || JSON.stringify(blocks.slice(1).map((block) =>
+          inlineText(block.inlines)))
+          !== JSON.stringify(task.continuationStarters || [])
+      )
+    ) {
+      return 'continuation material or ordered starters'
+    }
+  }
+  return null
+}
+
 function validateCanonicalImportPackageBinding({
   admission,
   packageData,
@@ -601,6 +782,45 @@ function validateCanonicalImportPackageBinding({
         diagnostics: [{
           code: 'CANONICAL_IMPORT_GROUP_BINDING_MISMATCH',
           message: `Canonical Group does not close the imported identity and question order for ${importedGroup.groupId}`,
+        }],
+      }
+    }
+    const semanticMismatch = semanticMismatchForGroup({
+      canonicalGroup,
+      importedGroup,
+      paperAsset,
+    })
+    if (semanticMismatch) {
+      return {
+        disposition: 'unsupported',
+        diagnostics: [{
+          code: 'CANONICAL_IMPORT_SEMANTIC_MISMATCH',
+          message: `Canonical Group differs from imported ${semanticMismatch}: ${importedGroup.groupId}`,
+        }],
+      }
+    }
+  }
+
+  const activeQuestionIds = new Set(
+    activeImportedGroups.flatMap((group) => group.questionIds || []),
+  )
+  const canonicalAssertions = new Map(
+    admission.compilation.artifacts.sourceCapture.assertions.map(
+      (assertion) => [assertion.questionId, assertion.answer],
+    ),
+  )
+  for (const [questionId, answer] of Object.entries(
+    packageData.answerKey.answers || {},
+  )) {
+    if (
+      activeQuestionIds.has(questionId)
+      && canonicalAssertions.get(questionId) !== answer.answer
+    ) {
+      return {
+        disposition: 'answer_conflict',
+        diagnostics: [{
+          code: 'CANONICAL_IMPORT_ANSWER_MISMATCH',
+          message: `Canonical official answer differs from imported answer-key.json for ${questionId}`,
         }],
       }
     }
