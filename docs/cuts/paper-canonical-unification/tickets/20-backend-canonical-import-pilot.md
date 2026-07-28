@@ -57,3 +57,23 @@ this implementation task did not provision owner QA; provisioning remains
 gated on independent review PASS. No production, R2, historical-version,
 website-import UI, generated DOCX/OOXML, independent-review, owner-QA, or
 Ticket 21 action was taken.
+
+Focused review-fix commit:
+`98384045cef3248d163f3d873910ea725d9134a7`.
+Focused verify: source-bound import-pilot fixes, deterministic request
+reproduction, public canonical admission/recovery/pilot, Reading publication,
+inactive Listening closure and zero occurrence, the four directly affected
+rendered consumers, PaperBrowse 198/198, app typecheck/build, and
+`git diff --check` PASS; `pnpm -C app run verify:all`
+114 PASS / 1 declared SKIP / 0 FAIL.
+Focused notes: the pilot request now carries an empty registered source
+envelope plus reviewed immutable Reading, Writing, and complete inactive
+Listening evidence. Registered compiler adapters alone derive semantic Groups,
+official assertions, exact Source Spans, Transformation Records, inactive-slot
+closure, and Profile order. Missing active or Listening answers and any
+Listening question/option/transcript/timing/audio evidence fail closed.
+PaperBrowse rejects rendered non-Listening Groups outside the ready
+Consumption Plan and has no canonical-required Reading/Writing raw fallback;
+flattened table markers are never promoted to native table authority. The
+non-blocking repeated-switch smell was not refactored. No owner QA or Ticket 21
+action was taken.
