@@ -12,6 +12,16 @@ function projectionError(message, issues) {
   return error
 }
 
+function projectProfileInstruction(profile, instructionId) {
+  const instruction = profile.instructions[instructionId]
+  return {
+    instructionId,
+    placement: instruction.placement,
+    text: instruction.text,
+    renderPolicy: instruction.renderPolicy ?? 'render',
+  }
+}
+
 function groupSemanticPayload(group) {
   const { sourceMap: _sourceMap, sourceFingerprint: _sourceFingerprint, semanticDigest: _semanticDigest, ...semantic } = group
   return semantic
@@ -226,10 +236,16 @@ export function projectCanonicalPaper(canonicalPackage) {
   const nodes = []
   for (const part of profile.parts) {
     nodes.push({ kind: 'part', partId: part.partId, instructionId: part.titleInstructionRef })
-    nodes.push({ kind: 'instruction', instructionId: part.titleInstructionRef, text: profile.instructions[part.titleInstructionRef].text })
+    nodes.push({
+      kind: 'instruction',
+      ...projectProfileInstruction(profile, part.titleInstructionRef),
+    })
     for (const section of part.sections) {
       nodes.push({ kind: 'section', sectionId: section.sectionId, instructionId: section.titleInstructionRef })
-      nodes.push({ kind: 'instruction', instructionId: section.titleInstructionRef, text: profile.instructions[section.titleInstructionRef].text })
+      nodes.push({
+        kind: 'instruction',
+        ...projectProfileInstruction(profile, section.titleInstructionRef),
+      })
       for (const slot of section.slots) {
         if (slot.activation === 'inactive_source') continue
         const binding = plan.slotBindings.find((candidate) => candidate.slotId === slot.slotId)
@@ -268,19 +284,20 @@ export function projectCanonicalPaper(canonicalPackage) {
               paperChrome: {
                 part: {
                   partId: part.partId,
-                  instructionId: part.titleInstructionRef,
-                  text: profile.instructions[part.titleInstructionRef].text,
+                  ...projectProfileInstruction(
+                    profile,
+                    part.titleInstructionRef,
+                  ),
                 },
                 section: {
                   sectionId: section.sectionId,
-                  instructionId: section.titleInstructionRef,
-                  text: profile.instructions[section.titleInstructionRef].text,
+                  ...projectProfileInstruction(
+                    profile,
+                    section.titleInstructionRef,
+                  ),
                 },
-                instructions: slot.instructionRefs.map((instructionId) => ({
-                  instructionId,
-                  placement: profile.instructions[instructionId].placement,
-                  text: profile.instructions[instructionId].text,
-                })),
+                instructions: slot.instructionRefs.map((instructionId) =>
+                  projectProfileInstruction(profile, instructionId)),
               },
               writingTaskId: group.variant.writingTaskId,
               prompt: {
@@ -314,19 +331,20 @@ export function projectCanonicalPaper(canonicalPackage) {
               paperChrome: {
                 part: {
                   partId: part.partId,
-                  instructionId: part.titleInstructionRef,
-                  text: profile.instructions[part.titleInstructionRef].text,
+                  ...projectProfileInstruction(
+                    profile,
+                    part.titleInstructionRef,
+                  ),
                 },
                 section: {
                   sectionId: section.sectionId,
-                  instructionId: section.titleInstructionRef,
-                  text: profile.instructions[section.titleInstructionRef].text,
+                  ...projectProfileInstruction(
+                    profile,
+                    section.titleInstructionRef,
+                  ),
                 },
-                instructions: slot.instructionRefs.map((instructionId) => ({
-                  instructionId,
-                  placement: profile.instructions[instructionId].placement,
-                  text: profile.instructions[instructionId].text,
-                })),
+                instructions: slot.instructionRefs.map((instructionId) =>
+                  projectProfileInstruction(profile, instructionId)),
               },
               writingTaskId: group.variant.writingTaskId,
               material: {

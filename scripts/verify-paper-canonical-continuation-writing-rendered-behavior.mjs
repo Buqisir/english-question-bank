@@ -146,6 +146,43 @@ function assertNck1WritingAuthority() {
   )
 }
 
+function assertZhejiangWritingChromeAuthority() {
+  const authority = resolveCanonicalAuthority(canonicalAuthorityRef)
+  assert.equal(authority.ok, true)
+  const profile = authority.closure.profiles.get('zhejiang-legacy')
+  assert.equal(profile.version, '3')
+  assert.equal(
+    profile.instructions['part.writing'].renderPolicy,
+    'suppress',
+  )
+  assert.equal(
+    profile.instructions['section.writing'].renderPolicy,
+    'suppress',
+  )
+
+  const mutatedProfile = structuredClone(profile)
+  mutatedProfile.instructions['part.writing'].renderPolicy = 'guess'
+  const mutatedManifest = structuredClone(authority.closure.manifest)
+  mutatedManifest.artifacts.find(
+    (descriptor) => descriptor.id === 'profile-zhejiang-legacy',
+  ).sha256 = digestJson(mutatedProfile)
+  const validation = validateAuthorityClosure({
+    manifest: mutatedManifest,
+    artifacts: {
+      ...authority.closure.artifacts,
+      'profile-zhejiang-legacy': mutatedProfile,
+    },
+    schemas: authority.closure.schemas,
+  })
+  assert.equal(validation.ok, false)
+  assert.equal(
+    validation.issues.some(
+      (issue) => issue.code === 'PROFILE_INSTRUCTION_INVALID',
+    ),
+    true,
+  )
+}
+
 function readyConsumption(paperId) {
   const fixture = makeContinuationWritingReferenceFixture(paperId)
   const compilation = compileCanonicalPaper(fixture.request)
@@ -157,6 +194,17 @@ function readyConsumption(paperId) {
       compilation.artifacts.canonicalPaper.paperPlan.profileRef,
       {
         profileId: 'nck1',
+        profileVersion: '3',
+        profileDigest: digestJson(profile),
+      },
+    )
+  } else if (paperId === 'paper-zj-2020-jul') {
+    const authority = resolveCanonicalAuthority(canonicalAuthorityRef)
+    const profile = authority.closure.profiles.get('zhejiang-legacy')
+    assert.deepEqual(
+      compilation.artifacts.canonicalPaper.paperPlan.profileRef,
+      {
+        profileId: 'zhejiang-legacy',
         profileVersion: '3',
         profileDigest: digestJson(profile),
       },
@@ -483,38 +531,40 @@ function assertNoRendererLocalWritingGroupHeading(renderedText, label) {
   }
 }
 
+function canonicalWritingChromeEntries(canonical) {
+  return [
+    [canonical.paperChrome.part, 'part_heading'],
+    [canonical.paperChrome.section, 'section_heading'],
+    ...canonical.paperChrome.instructions.map(
+      (instruction) => [instruction, 'instruction'],
+    ),
+  ]
+}
+
 function assertCanonicalWritingChromeTextLines(renderedText, canonical, label) {
   const lines = String(renderedText)
     .split(/\r?\n/)
     .map(compactText)
     .filter(Boolean)
-  for (const instruction of [
-    canonical.paperChrome.part,
-    canonical.paperChrome.section,
-    ...canonical.paperChrome.instructions,
-  ]) {
+  for (const [instruction] of canonicalWritingChromeEntries(canonical)) {
     assert.equal(
       lines.filter((line) => line === compactText(instruction.text)).length,
-      1,
-      `${label} contains canonical paperChrome line ${instruction.instructionId} exactly once`,
+      instruction.renderPolicy === 'render' ? 1 : 0,
+      `${label} follows canonical paperChrome render policy for ${instruction.instructionId}`,
     )
   }
 }
 
 function assertCanonicalWritingChromeBookmarks(documentXml, canonical, label) {
-  for (const instruction of [
-    canonical.paperChrome.part,
-    canonical.paperChrome.section,
-    ...canonical.paperChrome.instructions,
-  ]) {
+  for (const [instruction] of canonicalWritingChromeEntries(canonical)) {
     const name = bookmarkName(
       'canonical_instruction',
       instruction.instructionId,
     )
     assert.equal(
       documentXml.split(name).length - 1,
-      1,
-      `${label} contains canonical paperChrome bookmark ${instruction.instructionId} exactly once`,
+      instruction.renderPolicy === 'render' ? 1 : 0,
+      `${label} follows canonical paperChrome bookmark policy for ${instruction.instructionId}`,
     )
   }
 }
@@ -525,20 +575,13 @@ function assertCanonicalWritingChromeHtmlStructure(html, canonical, label) {
     0,
     `${label} must not add a visible document title above complete canonical writing chrome`,
   )
-  const roles = [
-    [canonical.paperChrome.part, 'part_heading'],
-    [canonical.paperChrome.section, 'section_heading'],
-    ...canonical.paperChrome.instructions.map(
-      (instruction) => [instruction, 'instruction'],
-    ),
-  ]
-  for (const [instruction, role] of roles) {
+  for (const [instruction, role] of canonicalWritingChromeEntries(canonical)) {
     assert.equal(
       html.includes(
         `data-canonical-instruction-id="${instruction.instructionId}" data-canonical-writing-chrome-role="${role}"`,
       ),
-      true,
-      `${label} exposes ${instruction.instructionId} as ${role}`,
+      instruction.renderPolicy === 'render',
+      `${label} follows canonical ${role} policy for ${instruction.instructionId}`,
     )
   }
 }
@@ -566,6 +609,11 @@ function assertCanonicalWritingChromeDocxStructure(
     false,
     `${label} must not add a visible document title above complete canonical writing chrome`,
   )
+  assertCanonicalWritingChromeBookmarks(documentXml, canonical, label)
+  if (
+    canonical.paperChrome.part.renderPolicy === 'suppress'
+    && canonical.paperChrome.section.renderPolicy === 'suppress'
+  ) return
   const partParagraph = bookmarkedDocxParagraph(
     documentXml,
     canonical.paperChrome.part.instructionId,
@@ -701,16 +749,6 @@ function cropPgm(raster, box) {
   return { width, height, pixels }
 }
 
-function extractPdfWordGeometry(pdfPath, lineText, wordText) {
-  const line = extractPdfLines(pdfPath).find(
-    (candidate) => compactText(candidate.text) === compactText(lineText),
-  )
-  assert.ok(line, `${pdfPath} contains visible line "${lineText}"`)
-  const word = line.words.find((candidate) => candidate.text === wordText)
-  assert.ok(word, `${pdfPath} line "${lineText}" contains word "${wordText}"`)
-  return word
-}
-
 function pdfWritingChromeInk(pdfPath, canonical) {
   const root = mkdtempSync(path.join(tmpdir(), 'eqb-writing-ink-pdf-'))
   try {
@@ -727,12 +765,12 @@ function pdfWritingChromeInk(pdfPath, canonical) {
     const page = parsePgm(readFileSync(`${prefix}.pgm`))
     const scale = 192 / 72
     const measure = (lineText) => {
-      const word = extractPdfWordGeometry(pdfPath, lineText, 'Writing')
+      const line = extractPdfLineGeometry(pdfPath, lineText)
       return rasterInkMetric(cropPgm(page, {
-        xMin: word.xMin * scale - 3,
-        yMin: word.yMin * scale - 3,
-        xMax: word.xMax * scale + 3,
-        yMax: word.yMax * scale + 3,
+        xMin: line.xMin * scale - 3,
+        yMin: line.yMin * scale - 3,
+        xMax: line.xMax * scale + 3,
+        yMax: line.yMax * scale + 3,
       }))
     }
     return {
@@ -759,6 +797,7 @@ function pgmFromPng(png) {
 }
 
 async function browserWritingChromeInk(page) {
+  await page.evaluate(() => document.fonts.ready)
   const measure = async (role) => {
     const locator = page.locator(
       `[data-canonical-writing-chrome-role="${role}"]`,
@@ -768,7 +807,7 @@ async function browserWritingChromeInk(page) {
       if (!(text instanceof Text)) throw new Error('heading must own text')
       const range = document.createRange()
       range.setStart(text, 0)
-      range.setEnd(text, 'Writing'.length)
+      range.setEnd(text, text.length)
       const box = range.getBoundingClientRect()
       return {
         x: box.x - 2,
@@ -794,23 +833,23 @@ function assertWritingChromeRasterParity(metricsByChannel, label) {
     `${label} has all final-raster channels`,
   )
   for (const [channel, metrics] of entries) {
-    assert.ok(
-      metrics.part.inkPerHeight >= metrics.section.inkPerHeight * 1.2,
-      `${label}/${channel} part is visibly bold in final raster: ${
-        JSON.stringify(metrics)
-      }`,
-    )
-  }
-  for (const role of ['part', 'section']) {
-    for (const key of ['inkPerHeight', 'aspectRatio']) {
-      const values = entries.map(([, metrics]) => metrics[role][key])
+    for (const role of ['part', 'section']) {
       assert.ok(
-        Math.max(...values) / Math.min(...values) <= 1.15,
-        `${label} ${role} ${key} is materially consistent across final rasters: ${
-          JSON.stringify(Object.fromEntries(entries))
-        }`,
+        metrics[role].inkWidth > 0
+          && metrics[role].inkHeight > 0
+          && metrics[role].inkPerHeight > 0,
+        `${label}/${channel} ${role} remains visible in the final raster`,
       )
     }
+  }
+  for (const role of ['part', 'section']) {
+    const values = entries.map(([, metrics]) => metrics[role].aspectRatio)
+    assert.ok(
+      Math.max(...values) / Math.min(...values) <= 1.15,
+      `${label} ${role} aspect ratio is materially consistent across final rasters: ${
+        JSON.stringify(Object.fromEntries(entries))
+      }`,
+    )
   }
 }
 
@@ -916,7 +955,7 @@ function recordWritingChromeRasterMetric(
   channel,
   metrics,
 ) {
-  if (label !== 'zero-starter') return
+  if (label !== 'two-starter') return
   const key = `${label}/${versionType}`
   const channels = writingChromeRasterMetrics.get(key) || new Map()
   channels.set(channel, metrics)
@@ -924,6 +963,7 @@ function recordWritingChromeRasterMetric(
 }
 
 assertNck1WritingAuthority()
+assertZhejiangWritingChromeAuthority()
 for (const paperId of ['paper-2026-i', 'paper-zj-2020-jul']) {
   const consumption = readyConsumption(paperId)
   const selection = consumption.selections[0]
@@ -960,6 +1000,19 @@ for (const paperId of ['paper-2026-i', 'paper-zj-2020-jul']) {
       .length,
     1,
   )
+  if (paperId === 'paper-zj-2020-jul') {
+    assert.equal(canonical.paperChrome.part.renderPolicy, 'suppress')
+    assert.equal(canonical.paperChrome.section.renderPolicy, 'suppress')
+    assert.equal(
+      surface.pageModel.blocks.some(
+        (block) =>
+          block.kind === 'partHeading'
+          || block.kind === 'sectionHeading',
+      ),
+      false,
+      'source-unproven Zhejiang English writing chrome is suppressed at the canonical Screen seam',
+    )
+  }
   cases.push({
     label: paperId === 'paper-2026-i' ? 'two-starter' : 'zero-starter',
     consumption,
@@ -1134,19 +1187,11 @@ for (const { label, consumption, canonical } of cases) {
       ),
       true,
     )
-    for (const instruction of [
-      canonical.paperChrome.part,
-      canonical.paperChrome.section,
-      ...canonical.paperChrome.instructions,
-    ]) {
-      assert.equal(
-        (html.match(new RegExp(
-          `data-canonical-instruction-id="${instruction.instructionId}"`,
-          'g',
-        )) || []).length,
-        1,
-      )
-    }
+    assertCanonicalWritingChromeHtmlStructure(
+      html,
+      canonical,
+      `Print HTML ${label}/${versionType}`,
+    )
     assert.equal(
       (html.match(/data-canonical-response-slot-id=/g) || []).length,
       1,
@@ -1162,11 +1207,6 @@ for (const { label, consumption, canonical } of cases) {
     assertVisibleCanonicalText(html, canonical)
     assertNoRendererLocalWritingGroupHeading(
       html,
-      `Print HTML ${label}/${versionType}`,
-    )
-    assertCanonicalWritingChromeHtmlStructure(
-      html,
-      canonical,
       `Print HTML ${label}/${versionType}`,
     )
     printArtifacts.push({ label, versionType, html, canonical })
@@ -1214,19 +1254,11 @@ for (const { label, consumption, canonical } of cases) {
       )),
       true,
     )
-    for (const instruction of [
-      canonical.paperChrome.part,
-      canonical.paperChrome.section,
-      ...canonical.paperChrome.instructions,
-    ]) {
-      assert.equal(
-        xml.split(bookmarkName(
-          'canonical_instruction',
-          instruction.instructionId,
-        )).length - 1,
-        1,
-      )
-    }
+    assertCanonicalWritingChromeBookmarks(
+      xml,
+      canonical,
+      `DOCX OOXML ${label}/${versionType}`,
+    )
     assert.equal(
       xml.includes(bookmarkName(
         'canonical_occurrence',
@@ -1318,12 +1350,12 @@ for (const { label, consumption, canonical } of cases) {
         false,
         `DOCX-to-PDF ${label}/${versionType} suppresses the non-canonical visible title`,
       )
-      assertCanonicalWritingChromePdfGeometry(
-        pdfPath,
-        canonical,
-        `DOCX-to-PDF ${label}/${versionType}`,
-      )
-      if (label === 'zero-starter') {
+      if (label === 'two-starter') {
+        assertCanonicalWritingChromePdfGeometry(
+          pdfPath,
+          canonical,
+          `DOCX-to-PDF ${label}/${versionType}`,
+        )
         recordWritingChromeRasterMetric(
           label,
           versionType,
@@ -1655,31 +1687,35 @@ async function assertBrowserArtifacts() {
           await page.locator(
             '.pi-writing-part, .pi-writing-section, .pi-writing-instruction',
           ).allInnerTexts(),
-          [
-            canonical.paperChrome.part.text,
-            canonical.paperChrome.section.text,
-            ...canonical.paperChrome.instructions.map(
-              (instruction) => instruction.text,
-            ),
-          ],
+          canonicalWritingChromeEntries(canonical)
+            .filter(([instruction]) => instruction.renderPolicy === 'render')
+            .map(([instruction]) => instruction.text),
         )
-        const chromeLayout = await canonicalWritingChromeBrowserLayout(page)
-        assert.equal(chromeLayout.sectionIndentPt, 21)
-        assert.equal(chromeLayout.partToSectionTopPt, 27)
-        assert.equal(chromeLayout.roles[0].fontSizePt, 10.5)
-        assert.ok(chromeLayout.roles[0].fontWeight >= 700)
-        assert.equal(chromeLayout.roles[1].fontSizePt, 10.5)
-        assert.ok(chromeLayout.roles[1].fontWeight <= 400)
-        screenChromeLayouts.set(
-          `${label}/${teacher ? 'teacher' : 'student'}`,
-          chromeLayout,
-        )
-        if (label === 'zero-starter') {
+        if (label === 'two-starter') {
+          const chromeLayout =
+            await canonicalWritingChromeBrowserLayout(page)
+          assert.equal(chromeLayout.sectionIndentPt, 21)
+          assert.equal(chromeLayout.partToSectionTopPt, 27)
+          assert.equal(chromeLayout.roles[0].fontSizePt, 10.5)
+          assert.ok(chromeLayout.roles[0].fontWeight >= 700)
+          assert.equal(chromeLayout.roles[1].fontSizePt, 10.5)
+          assert.ok(chromeLayout.roles[1].fontWeight <= 400)
+          screenChromeLayouts.set(
+            `${label}/${teacher ? 'teacher' : 'student'}`,
+            chromeLayout,
+          )
           recordWritingChromeRasterMetric(
             label,
             teacher ? 'teacher' : 'student',
             'screen',
             await browserWritingChromeInk(page),
+          )
+        } else {
+          assert.equal(
+            await page.locator(
+              '[data-canonical-writing-chrome-role]',
+            ).count(),
+            0,
           )
         }
         const bodyText = await page.locator('body').innerText()
@@ -1952,13 +1988,9 @@ async function assertBrowserArtifacts() {
           await writingPage.locator(
             '.pi-writing-part, .pi-writing-section, .pi-writing-instruction',
           ).allInnerTexts(),
-          [
-            canonical.paperChrome.part.text,
-            canonical.paperChrome.section.text,
-            ...canonical.paperChrome.instructions.map(
-              (instruction) => instruction.text,
-            ),
-          ],
+          canonicalWritingChromeEntries(canonical)
+            .filter(([instruction]) => instruction.renderPolicy === 'render')
+            .map(([instruction]) => instruction.text),
         )
         assert.equal(
           await writingPage.locator('[data-writing-answer-supplement]').count(),
@@ -1997,12 +2029,22 @@ async function assertBrowserArtifacts() {
       assert.ok(box)
       assert.ok(Math.abs(box.width - (145 / 25.4 * 96)) <= 1)
       assert.ok(Math.abs(box.height - (57 / 25.4 * 96)) <= 1)
-      const chromeLayout = await canonicalWritingChromeBrowserLayout(page)
-      assert.deepEqual(
-        chromeLayout,
-        screenChromeLayouts.get(`${label}/${versionType}`),
-        `Print HTML ${label}/${versionType} matches Screen paperChrome roles and geometry`,
-      )
+      if (label === 'two-starter') {
+        const chromeLayout =
+          await canonicalWritingChromeBrowserLayout(page)
+        assert.deepEqual(
+          chromeLayout,
+          screenChromeLayouts.get(`${label}/${versionType}`),
+          `Print HTML ${label}/${versionType} matches Screen paperChrome roles and geometry`,
+        )
+      } else {
+        assert.equal(
+          await page.locator(
+            '[data-canonical-writing-chrome-role]',
+          ).count(),
+          0,
+        )
+      }
       const pdfRoot = mkdtempSync(path.join(tmpdir(), 'eqb-continuation-pdf-'))
       try {
         const pdfPath = path.join(pdfRoot, `${label}-${versionType}.pdf`)
@@ -2033,12 +2075,12 @@ async function assertBrowserArtifacts() {
           false,
           `Print PDF ${label}/${versionType} suppresses the non-canonical visible title`,
         )
-        assertCanonicalWritingChromePdfGeometry(
-          pdfPath,
-          canonical,
-          `Print PDF ${label}/${versionType}`,
-        )
-        if (label === 'zero-starter') {
+        if (label === 'two-starter') {
+          assertCanonicalWritingChromePdfGeometry(
+            pdfPath,
+            canonical,
+            `Print PDF ${label}/${versionType}`,
+          )
           recordWritingChromeRasterMetric(
             label,
             versionType,

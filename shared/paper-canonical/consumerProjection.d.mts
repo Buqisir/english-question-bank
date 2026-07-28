@@ -36,16 +36,19 @@ export function projectCanonicalWritingChrome(input: {
     readonly partId: string
     readonly instructionId: string
     readonly text: string
+    readonly renderPolicy: 'render'
   } | null
   readonly section: {
     readonly sectionId: string
     readonly instructionId: string
     readonly text: string
-  }
+    readonly renderPolicy: 'render'
+  } | null
   readonly instructions: ReadonlyArray<{
     readonly instructionId: string
     readonly placement: string
     readonly text: string
+    readonly renderPolicy: 'render'
   }>
 }
 

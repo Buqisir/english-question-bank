@@ -347,15 +347,22 @@ function projectApplicationWritingConsumerGroup(input, occurrence) {
     typeof occurrence.paperChrome?.part?.partId !== 'string'
     || typeof occurrence.paperChrome.part.instructionId !== 'string'
     || typeof occurrence.paperChrome.part.text !== 'string'
+    || !['render', 'suppress'].includes(
+      occurrence.paperChrome.part.renderPolicy,
+    )
     || typeof occurrence.paperChrome?.section?.sectionId !== 'string'
     || typeof occurrence.paperChrome.section.instructionId !== 'string'
     || typeof occurrence.paperChrome.section.text !== 'string'
+    || !['render', 'suppress'].includes(
+      occurrence.paperChrome.section.renderPolicy,
+    )
     || !Array.isArray(occurrence.paperChrome.instructions)
     || occurrence.paperChrome.instructions.some(
       (instruction) =>
         typeof instruction?.instructionId !== 'string'
         || typeof instruction.text !== 'string'
-        || typeof instruction.placement !== 'string',
+        || typeof instruction.placement !== 'string'
+        || !['render', 'suppress'].includes(instruction.renderPolicy),
     )
     || new Set([
       occurrence.paperChrome.part.instructionId,
@@ -533,15 +540,22 @@ function projectContinuationWritingConsumerGroup(input, occurrence) {
     typeof occurrence.paperChrome?.part?.partId !== 'string'
     || typeof occurrence.paperChrome.part.instructionId !== 'string'
     || typeof occurrence.paperChrome.part.text !== 'string'
+    || !['render', 'suppress'].includes(
+      occurrence.paperChrome.part.renderPolicy,
+    )
     || typeof occurrence.paperChrome?.section?.sectionId !== 'string'
     || typeof occurrence.paperChrome.section.instructionId !== 'string'
     || typeof occurrence.paperChrome.section.text !== 'string'
+    || !['render', 'suppress'].includes(
+      occurrence.paperChrome.section.renderPolicy,
+    )
     || !Array.isArray(occurrence.paperChrome.instructions)
     || occurrence.paperChrome.instructions.some(
       (instruction) =>
         typeof instruction?.instructionId !== 'string'
         || typeof instruction.text !== 'string'
-        || typeof instruction.placement !== 'string',
+        || typeof instruction.placement !== 'string'
+        || !['render', 'suppress'].includes(instruction.renderPolicy),
     )
     || new Set([
       occurrence.paperChrome.part.instructionId,
@@ -1097,7 +1111,9 @@ export function projectCanonicalWritingChrome({
       (candidate) =>
         candidate.canonicalGroup.paperChrome.part.instructionId
           !== targetPart.instructionId
-        || candidate.canonicalGroup.paperChrome.part.text !== targetPart.text,
+        || candidate.canonicalGroup.paperChrome.part.text !== targetPart.text
+        || candidate.canonicalGroup.paperChrome.part.renderPolicy
+          !== targetPart.renderPolicy,
     )
     || new Set(
       samePart.map(
@@ -1113,11 +1129,17 @@ export function projectCanonicalWritingChrome({
 
   return Object.freeze({
     part: samePart[0].groupId === groupId
+      && targetPart.renderPolicy === 'render'
       ? structuredClone(targetPart)
       : null,
-    section: structuredClone(target.canonicalGroup.paperChrome.section),
+    section:
+      target.canonicalGroup.paperChrome.section.renderPolicy === 'render'
+        ? structuredClone(target.canonicalGroup.paperChrome.section)
+        : null,
     instructions: structuredClone(
-      target.canonicalGroup.paperChrome.instructions,
+      target.canonicalGroup.paperChrome.instructions.filter(
+        (instruction) => instruction.renderPolicy === 'render',
+      ),
     ),
   })
 }

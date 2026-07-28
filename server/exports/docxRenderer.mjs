@@ -703,7 +703,9 @@ function pushCanonicalDocxWritingChrome(body, writingChrome) {
     ...(writingChrome.part
       ? [{ instruction: writingChrome.part, role: 'part_heading' }]
       : []),
-    { instruction: writingChrome.section, role: 'section_heading' },
+    ...(writingChrome.section
+      ? [{ instruction: writingChrome.section, role: 'section_heading' }]
+      : []),
     ...writingChrome.instructions.map((instruction) => ({
       instruction,
       role: 'instruction',

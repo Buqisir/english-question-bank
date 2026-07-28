@@ -5,6 +5,7 @@ import manifestV4 from '../../standards/paper-canonical/manifest-v4.json' with {
 import manifestV5 from '../../standards/paper-canonical/manifest-v5.json' with { type: 'json' }
 import manifestV6 from '../../standards/paper-canonical/manifest-v6.json' with { type: 'json' }
 import manifestV7 from '../../standards/paper-canonical/manifest-v7.json' with { type: 'json' }
+import manifestV8 from '../../standards/paper-canonical/manifest-v8.json' with { type: 'json' }
 import core from '../../standards/paper-canonical/core/core-invariants-v1.json' with { type: 'json' }
 import sourceAdapters from '../../standards/paper-canonical/adapters/source-adapters-v1.json' with { type: 'json' }
 import sourceAdaptersV2 from '../../standards/paper-canonical/adapters/source-adapters-v2.json' with { type: 'json' }
@@ -15,6 +16,7 @@ import zhejiangLegacy from '../../standards/paper-canonical/profiles/zhejiang-le
 import nck1V2 from '../../standards/paper-canonical/profiles/nck1-v2.json' with { type: 'json' }
 import nck1V3 from '../../standards/paper-canonical/profiles/nck1-v3.json' with { type: 'json' }
 import zhejiangLegacyV2 from '../../standards/paper-canonical/profiles/zhejiang-legacy-v2.json' with { type: 'json' }
+import zhejiangLegacyV3 from '../../standards/paper-canonical/profiles/zhejiang-legacy-v3.json' with { type: 'json' }
 import nationalLegacy from '../../standards/paper-canonical/profiles/national-legacy-v1.json' with { type: 'json' }
 import reading from '../../standards/paper-canonical/families/reading-v1.json' with { type: 'json' }
 import sevenChoices from '../../standards/paper-canonical/families/seven-choices-v1.json' with { type: 'json' }
@@ -57,6 +59,7 @@ import reportV4Schema from '../../schemas/paper-canonical/normalization-report-v
 import reportV5Schema from '../../schemas/paper-canonical/normalization-report-v5.schema.json' with { type: 'json' }
 import reportV6Schema from '../../schemas/paper-canonical/normalization-report-v6.schema.json' with { type: 'json' }
 import reportV7Schema from '../../schemas/paper-canonical/normalization-report-v7.schema.json' with { type: 'json' }
+import reportV8Schema from '../../schemas/paper-canonical/normalization-report-v8.schema.json' with { type: 'json' }
 import publicationSchema from '../../schemas/paper-canonical/canonical-paper-publication-v1.schema.json' with { type: 'json' }
 import publicationV2Schema from '../../schemas/paper-canonical/canonical-paper-publication-v2.schema.json' with { type: 'json' }
 import publicationV3Schema from '../../schemas/paper-canonical/canonical-paper-publication-v3.schema.json' with { type: 'json' }
@@ -64,6 +67,7 @@ import publicationV4Schema from '../../schemas/paper-canonical/canonical-paper-p
 import publicationV5Schema from '../../schemas/paper-canonical/canonical-paper-publication-v5.schema.json' with { type: 'json' }
 import publicationV6Schema from '../../schemas/paper-canonical/canonical-paper-publication-v6.schema.json' with { type: 'json' }
 import publicationV7Schema from '../../schemas/paper-canonical/canonical-paper-publication-v7.schema.json' with { type: 'json' }
+import publicationV8Schema from '../../schemas/paper-canonical/canonical-paper-publication-v8.schema.json' with { type: 'json' }
 import consumerSchema from '../../schemas/paper-canonical/consumer-contract-v1.schema.json' with { type: 'json' }
 
 import { digestJson, exactKeys, isRecordValue } from './stable.mjs'
@@ -186,7 +190,19 @@ function validateProfile(profile, families) {
   const issues = []
   if (!isRecordValue(profile.instructions) || !isRecordValue(profile.answerRegions) || !closedProfileValue(profile.completeness, ['requireEveryRequiredSlot', 'allowOptionalOmission', 'requireInactiveSourceClosure', 'rejectUnexpectedSlots'], '$.completeness', issues, 'Completeness')) return issues
   for (const [instructionId, instruction] of Object.entries(profile.instructions)) {
-    if (!closedProfileValue(instruction, ['instructionId', 'placement', 'text'], `$.instructions.${instructionId}`, issues, 'Instruction') || instruction.instructionId !== instructionId) issues.push(issue('PROFILE_INSTRUCTION_INVALID', `$.instructions.${instructionId}`, 'Instruction identity must close its key'))
+    const hasRenderPolicy =
+      isRecordValue(instruction) && Object.hasOwn(instruction, 'renderPolicy')
+    const instructionKeys = hasRenderPolicy
+      ? ['instructionId', 'placement', 'text', 'renderPolicy']
+      : ['instructionId', 'placement', 'text']
+    if (
+      !closedProfileValue(instruction, instructionKeys, `$.instructions.${instructionId}`, issues, 'Instruction')
+      || instruction.instructionId !== instructionId
+      || (
+        hasRenderPolicy
+        && !['render', 'suppress'].includes(instruction.renderPolicy)
+      )
+    ) issues.push(issue('PROFILE_INSTRUCTION_INVALID', `$.instructions.${instructionId}`, 'Instruction identity and render policy must close its key'))
   }
   for (const [regionId, region] of Object.entries(profile.answerRegions)) {
     if (!closedProfileValue(region, ['regionId', 'kind'], `$.answerRegions.${regionId}`, issues, 'Answer region') || region.regionId !== regionId) issues.push(issue('PROFILE_ANSWER_REGION_INVALID', `$.answerRegions.${regionId}`, 'Answer region identity must close its key'))
@@ -403,6 +419,10 @@ const sharedArtifactsV7 = {
   ...sharedArtifactsV6,
   'profile-nck1': nck1V3,
 }
+const sharedArtifactsV8 = {
+  ...sharedArtifactsV7,
+  'profile-zhejiang-legacy': zhejiangLegacyV3,
+}
 
 const sharedSchemas = {
   'standard-manifest-v1': standardManifestSchema,
@@ -423,6 +443,7 @@ const artifactsV4 = { ...sharedArtifactsV4, normalization: normalizationV2, 'ren
 const artifactsV5 = { ...sharedArtifactsV5, normalization: normalizationV2, 'renderer-typography': typographyV2 }
 const artifactsV6 = { ...sharedArtifactsV6, normalization: normalizationV2, 'renderer-typography': typographyV2 }
 const artifactsV7 = { ...sharedArtifactsV7, normalization: normalizationV2, 'renderer-typography': typographyV2 }
+const artifactsV8 = { ...sharedArtifactsV8, normalization: normalizationV2, 'renderer-typography': typographyV2 }
 const schemasV1 = { ...sharedSchemas, 'renderer-typography-v1': typographyV1Schema, 'normalization-rules-v1': normalizationSchema, 'normalization-report-v1': reportSchema, 'canonical-paper-publication-v1': publicationSchema }
 const schemasV2 = { ...sharedSchemas, 'renderer-typography-v1': typographyV1Schema, 'normalization-rules-v2': normalizationV2Schema, 'normalization-report-v2': reportV2Schema, 'canonical-paper-publication-v2': publicationV2Schema }
 const schemasV3 = { ...sharedSchemas, 'renderer-typography-v2': typographyV2Schema, 'normalization-rules-v2': normalizationV2Schema, 'normalization-report-v3': reportV3Schema, 'canonical-paper-publication-v3': publicationV3Schema }
@@ -461,6 +482,11 @@ const schemasV7 = {
   'normalization-report-v7': reportV7Schema,
   'canonical-paper-publication-v7': publicationV7Schema,
 }
+const schemasV8 = {
+  ...schemasV6,
+  'normalization-report-v8': reportV8Schema,
+  'canonical-paper-publication-v8': publicationV8Schema,
+}
 const validationV1 = validateAuthorityClosure({ manifest: manifestV1, artifacts: artifactsV1, schemas: schemasV1 })
 const validationV2 = validateAuthorityClosure({ manifest: manifestV2, artifacts: artifactsV2, schemas: schemasV2 })
 const validationV3 = validateAuthorityClosure({ manifest: manifestV3, artifacts: artifactsV3, schemas: schemasV3 })
@@ -468,7 +494,8 @@ const validationV4 = validateAuthorityClosure({ manifest: manifestV4, artifacts:
 const validationV5 = validateAuthorityClosure({ manifest: manifestV5, artifacts: artifactsV5, schemas: schemasV5 })
 const validationV6 = validateAuthorityClosure({ manifest: manifestV6, artifacts: artifactsV6, schemas: schemasV6 })
 const validationV7 = validateAuthorityClosure({ manifest: manifestV7, artifacts: artifactsV7, schemas: schemasV7 })
-if (!validationV1.ok || !validationV2.ok || !validationV3.ok || !validationV4.ok || !validationV5.ok || !validationV6.ok || !validationV7.ok) throw new Error(`Invalid checked-in canonical authority: ${JSON.stringify([...validationV1.issues, ...validationV2.issues, ...validationV3.issues, ...validationV4.issues, ...validationV5.issues, ...validationV6.issues, ...validationV7.issues])}`)
+const validationV8 = validateAuthorityClosure({ manifest: manifestV8, artifacts: artifactsV8, schemas: schemasV8 })
+if (!validationV1.ok || !validationV2.ok || !validationV3.ok || !validationV4.ok || !validationV5.ok || !validationV6.ok || !validationV7.ok || !validationV8.ok) throw new Error(`Invalid checked-in canonical authority: ${JSON.stringify([...validationV1.issues, ...validationV2.issues, ...validationV3.issues, ...validationV4.issues, ...validationV5.issues, ...validationV6.issues, ...validationV7.issues, ...validationV8.issues])}`)
 
 function authorityRef(manifest) {
   return Object.freeze({ manifestId: manifest.manifestId, manifestVersion: manifest.version, manifestDigest: digestJson(manifest) })
@@ -482,6 +509,7 @@ const authorities = [
   { manifest: manifestV5, artifacts: artifactsV5, schemas: schemasV5 },
   { manifest: manifestV6, artifacts: artifactsV6, schemas: schemasV6 },
   { manifest: manifestV7, artifacts: artifactsV7, schemas: schemasV7 },
+  { manifest: manifestV8, artifacts: artifactsV8, schemas: schemasV8 },
 ].map((authority) => ({
   ...authority,
   authorityRef: authorityRef(authority.manifest),
@@ -489,7 +517,7 @@ const authorities = [
   families: new Map(Object.values(authority.artifacts).filter((artifact) => artifact?.owner === 'family').map((family) => [family.familyContractId, family])),
 }))
 
-export const canonicalAuthorityRef = authorities.find((authority) => authority.manifest.version === '7').authorityRef
+export const canonicalAuthorityRef = authorities.find((authority) => authority.manifest.version === '8').authorityRef
 
 export function resolveCanonicalAuthority(authorityRef) {
   const authority = authorities.find((candidate) => candidate.authorityRef.manifestId === authorityRef?.manifestId && candidate.authorityRef.manifestVersion === authorityRef?.manifestVersion && candidate.authorityRef.manifestDigest === authorityRef?.manifestDigest)

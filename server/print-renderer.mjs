@@ -236,7 +236,9 @@ function renderCanonicalWritingChrome(chrome, className) {
     ...(chrome.part
       ? [{ instruction: chrome.part, role: 'part_heading' }]
       : []),
-    { instruction: chrome.section, role: 'section_heading' },
+    ...(chrome.section
+      ? [{ instruction: chrome.section, role: 'section_heading' }]
+      : []),
     ...chrome.instructions.map((instruction) => ({
       instruction,
       role: 'instruction',
