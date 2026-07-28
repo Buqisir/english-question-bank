@@ -248,7 +248,7 @@ export type PaperSetLayout = {
   printStyle: 'exam' | 'handout'
 }
 
-export type ExportDocxInput = {
+export type PrintExportInput = {
   title: string
   versionType: VersionType
   printStyle?: 'exam' | 'handout'
@@ -272,14 +272,10 @@ export type PaperBlock =
   | { id: string; type: 'page_break' }
   | { id: string; type: 'question_group'; questionGroupId: string; score: number }
 
-export type ExportDocxResult = {
+export type PrintExportResult = {
   blob: Blob
   fileName: string
 }
-
-export type ExportPdfInput = ExportDocxInput
-
-export type ExportPdfResult = ExportDocxResult
 
 export type PaperSetSummary = {
   id: string

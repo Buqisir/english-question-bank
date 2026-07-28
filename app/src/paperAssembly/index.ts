@@ -1,4 +1,4 @@
-export { buildSavePayload, buildDocxPayload, buildPdfPayload } from './paperExportPayload.ts'
+export { buildSavePayload, buildPrintPayload } from './paperExportPayload.ts'
 export type { PaperAssemblyState } from './paperExportPayload.ts'
 export { usePaperExports } from './usePaperExports.ts'
 export type { ExportStatus, PaperExportStatuses, UsePaperExportsInput } from './usePaperExports.ts'

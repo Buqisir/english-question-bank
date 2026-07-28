@@ -8,7 +8,7 @@
 
 import { useState } from 'react'
 import type { BasketItem, PaperBlock, VersionType } from '../domain/questionBank.ts'
-import { buildDocxPayload } from './paperExportPayload.ts'
+import { buildPrintPayload } from './paperExportPayload.ts'
 import {
   exportPrintHtml as fetchExportPrintHtml,
   exportPrintPdf as fetchExportPrintPdf,
@@ -30,7 +30,6 @@ export type UsePaperExportsInput = {
   paperExportStyle: 'exam' | 'handout'
   paperTitle: string
   versionType: VersionType
-  onPdfExported?: () => void
 }
 
 function downloadBlob(blob: Blob, fileName: string) {
@@ -66,7 +65,7 @@ export function usePaperExports(input: UsePaperExportsInput) {
     setPrintHtmlStatus('exporting')
     setPrintHtmlError('')
     try {
-      const result = await fetchExportPrintHtml(buildDocxPayload(getPayloadState()))
+      const result = await fetchExportPrintHtml(buildPrintPayload(getPayloadState()))
       downloadBlob(result.blob, result.fileName)
       setPrintHtmlStatus('exported')
     } catch (error) {
@@ -80,10 +79,9 @@ export function usePaperExports(input: UsePaperExportsInput) {
     setPrintPdfStatus('exporting')
     setPrintPdfError('')
     try {
-      const result = await fetchExportPrintPdf(buildDocxPayload(getPayloadState()))
+      const result = await fetchExportPrintPdf(buildPrintPayload(getPayloadState()))
       downloadBlob(result.blob, result.fileName)
       setPrintPdfStatus('exported')
-      input.onPdfExported?.()
     } catch (error) {
       setPrintPdfStatus('error')
       setPrintPdfError(error instanceof Error ? error.message : String(error))

@@ -828,7 +828,7 @@ export function buildPrintHtml({
     // Legacy: render by items. draft-depassage-letter cut: never had
     // passage-letter rendering (nothing to retire) and is not given the new
     // .group-header 大题头 — every current export caller (paperExportPayload.ts
-    // buildDocxPayload/buildPdfPayload) always sends a non-empty `blocks`
+    // buildPrintPayload always sends a non-empty `blocks`
     // array (usePaperDraft.ts invariant 2: every basket item has exactly one
     // question_group block), so this branch has no real product consumer.
     // Left mechanically unchanged; recorded as fact per plan.md step 2.

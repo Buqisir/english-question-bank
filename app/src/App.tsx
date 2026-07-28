@@ -217,7 +217,6 @@ function App() {
     paperExportStyle,
     paperTitle,
     versionType,
-    onPdfExported: () => {},
   })
 
   // Wire the Paper Set Draft edit-event router. usePaperDraft is created above

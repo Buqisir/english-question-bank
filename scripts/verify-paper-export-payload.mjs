@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 /**
- * Verification: paperExportPayload produces correct save/DOCX/PDF payloads.
+ * Verification: paperExportPayload produces correct save and Print payloads.
  * Imports the REAL production module — no logic duplication.
  */
 
-import { buildSavePayload, buildDocxPayload, buildPdfPayload } from '../app/src/paperAssembly/paperExportPayload.ts'
+import { buildSavePayload, buildPrintPayload } from '../app/src/paperAssembly/paperExportPayload.ts'
 
 let passed = 0, failed = 0
 function assert(name, condition, detail) {
@@ -47,10 +47,10 @@ console.log('Test 1: buildSavePayload')
   assert('layout.printStyle = exam', payload.layout.printStyle === 'exam', '')
 }
 
-// Test 2: DOCX payload
-console.log('\nTest 2: buildDocxPayload')
+// Test 2: renderer-neutral Print payload
+console.log('\nTest 2: buildPrintPayload')
 {
-  const payload = buildDocxPayload(state)
+  const payload = buildPrintPayload(state)
   assert('title correct', payload.title === '2025 英语模拟', '')
   assert('versionType = student', payload.versionType === 'student', '')
   assert('printStyle = exam', payload.printStyle === 'exam', '')
@@ -65,17 +65,16 @@ console.log('\nTest 2: buildDocxPayload')
   assert('blocks[3] is question_group g2', payload.blocks[3].type === 'question_group' && payload.blocks[3].questionGroupId === 'g2', '')
 }
 
-// Test 3: PDF payload same as DOCX
-console.log('\nTest 3: buildPdfPayload matches DOCX')
+// Test 3: Teacher Print payload uses the same renderer-neutral contract.
+console.log('\nTest 3: teacher Print payload')
 {
-  const docx = buildDocxPayload(state)
-  const pdf = buildPdfPayload(state)
-  assert('same title', pdf.title === docx.title, '')
-  assert('same versionType', pdf.versionType === docx.versionType, '')
-  assert('same printStyle', pdf.printStyle === docx.printStyle, '')
-  assert('same questionNumberStart', pdf.questionNumberStart === docx.questionNumberStart, '')
-  assert('same blocks length', pdf.blocks?.length === docx.blocks?.length, '')
-  assert('same items length', pdf.items.length === docx.items.length, '')
+  const teacher = buildPrintPayload({ ...state, versionType: 'teacher' })
+  assert('same title', teacher.title === state.paperTitle, '')
+  assert('teacher versionType', teacher.versionType === 'teacher', '')
+  assert('same printStyle', teacher.printStyle === state.paperExportStyle, '')
+  assert('same questionNumberStart', teacher.questionNumberStart === state.questionNumberStart, '')
+  assert('same blocks length', teacher.blocks?.length === state.paperBlocks.length, '')
+  assert('same items length', teacher.items.length === state.basket.length, '')
 }
 
 // Test 4: Empty title fallback
@@ -88,7 +87,7 @@ console.log('\nTest 4: Empty title fallback')
 // Test 5: Handout style
 console.log('\nTest 5: Handout style propagates')
 {
-  const payload = buildDocxPayload({ ...state, paperExportStyle: 'handout' })
+  const payload = buildPrintPayload({ ...state, paperExportStyle: 'handout' })
   assert('printStyle = handout', payload.printStyle === 'handout', `got: ${payload.printStyle}`)
 }
 

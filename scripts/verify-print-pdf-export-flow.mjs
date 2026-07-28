@@ -3,7 +3,7 @@
  * Verification: 精排 PDF (Vivliostyle) export flow.
  *
  * Covers:
- *   1. buildDocxPayload preserves block order (section_header / page_break / question_group)
+ *   1. buildPrintPayload preserves block order (section_header / page_break / question_group)
  *      and propagates score / sectionTitle / note from basket.
  *   2. buildPrintHtml produces HTML that respects the same block order with continuous numbering.
  *   3. Vivliostyle CLI is reachable (server/node_modules/.bin/vivliostyle).
@@ -17,7 +17,7 @@ import { execFileSync } from 'node:child_process'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
 
-import { buildDocxPayload } from '../app/src/paperAssembly/paperExportPayload.ts'
+import { buildPrintPayload } from '../app/src/paperAssembly/paperExportPayload.ts'
 import { mapPrintPdfError } from '../app/src/services/questionGroups.ts'
 import { buildPrintHtml } from '../server/print-renderer.mjs'
 import { proxyFreeEnv } from './lib/proxyFreeEnv.mjs'
@@ -52,9 +52,9 @@ const state = {
 console.log('=== 精排 PDF Export Flow Verification ===\n')
 
 // --- Test 1: payload preserves block order and metadata ---
-console.log('Test 1: buildDocxPayload preserves block order')
+console.log('Test 1: buildPrintPayload preserves block order')
 {
-  const payload = buildDocxPayload(state)
+  const payload = buildPrintPayload(state)
   assert('blocks length 5', payload.blocks?.length === 5, `got ${payload.blocks?.length}`)
   assert('block[0] section_header', payload.blocks[0].type === 'section_header', '')
   assert('block[0].title 第一部分', payload.blocks[0].title === '第一部分 阅读理解', `got ${payload.blocks[0].title}`)

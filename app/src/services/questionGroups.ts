@@ -1,11 +1,10 @@
 import type {
   CreatePaperSetInput,
   CreateQuestionGroupInput,
-  ExportDocxInput,
-  ExportDocxResult,
-  ExportPdfResult,
   PaperSetDetail,
   PaperSetSummary,
+  PrintExportInput,
+  PrintExportResult,
   QuestionGroupCard,
   QuestionGroupDetail,
   TopicLabel,
@@ -459,7 +458,7 @@ export async function askQuestionBankSteward(message: string, apiKey: string, th
   return (await response.json()) as QuestionBankStewardResult
 }
 
-export async function exportPrintHtml(input: ExportDocxInput): Promise<ExportDocxResult> {
+export async function exportPrintHtml(input: PrintExportInput): Promise<PrintExportResult> {
   const response = await fetch(apiPath('/api/exports/print-html'), {
     body: JSON.stringify(input),
     headers: { 'content-type': 'application/json' },
@@ -493,7 +492,7 @@ export function mapPrintPdfError(status: number, rawMessage: string): string {
   return `精排 PDF 生成失败：${rawMessage}`
 }
 
-export async function exportPrintPdf(input: ExportDocxInput): Promise<ExportPdfResult> {
+export async function exportPrintPdf(input: PrintExportInput): Promise<PrintExportResult> {
   let response: Response
   try {
     response = await fetch(apiPath('/api/exports/print-pdf'), {

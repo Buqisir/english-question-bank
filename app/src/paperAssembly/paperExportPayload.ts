@@ -1,11 +1,11 @@
 /**
- * Paper Export Payload — assembles save/DOCX/PDF request payloads.
+ * Paper Export Payload — assembles save and supported Print request payloads.
  *
  * Delegates numbering and block conversion to paperLayout domain module.
  * Does NOT duplicate any layout logic.
  */
 
-import type { BasketItem, CreatePaperSetInput, ExportDocxInput, PaperBlock, VersionType } from '../domain/questionBank.ts'
+import type { BasketItem, CreatePaperSetInput, PaperBlock, PrintExportInput, VersionType } from '../domain/questionBank.ts'
 import { toPaperExportBlocks, buildPaperSetLayout } from '../domain/paperLayout.ts'
 
 export type PaperAssemblyState = {
@@ -30,7 +30,7 @@ export function buildSavePayload(state: PaperAssemblyState): CreatePaperSetInput
   }
 }
 
-export function buildDocxPayload(state: PaperAssemblyState): ExportDocxInput {
+export function buildPrintPayload(state: PaperAssemblyState): PrintExportInput {
   const basketLookup = (gid: string) => state.basket.find((i) => i.id === gid)
   return {
     title: state.paperTitle.trim() || '未命名题集',
@@ -45,9 +45,4 @@ export function buildDocxPayload(state: PaperAssemblyState): ExportDocxInput {
     questionNumberStart: state.questionNumberStart,
     blocks: toPaperExportBlocks(state.paperBlocks, basketLookup),
   }
-}
-
-export function buildPdfPayload(state: PaperAssemblyState): ExportDocxInput {
-  // PDF uses same payload shape as DOCX (server converts internally)
-  return buildDocxPayload(state)
 }
