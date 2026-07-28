@@ -55,3 +55,6 @@ through input-side LibreOffice, crops same-size shapes by explicit page order,
 and atomically publishes digest-bound figures plus manifest/body associations.
 The real public-seam regression starts from FODT, generates DOCX with equal-size
 body and header shapes, then exercises Screen and Print/PDF consumers.
+Focused Standards and Spec re-review against previously reviewed HEAD
+`c3d26b17b9d991d752dec8ee356273a71f41e30a` passed with no remaining Must Fix
+or Should Fix.
