@@ -8,6 +8,6 @@ bound to that source span.
 
 Manifest v10 also closes schema descriptor identity: every schema descriptor
 must match the schema's declared `$id`. The corrected v9 report and publication
-schemas are current v10 dependencies. Manifest v9 and its original schema bytes
-remain available through compatibility snapshots so earlier Publications keep
-their immutable read authority.
+schemas are current v10 dependencies at identity-corrected versioned paths.
+Manifest v9 still resolves its original paths and bytes so earlier Publications
+keep their immutable read authority.

@@ -329,7 +329,20 @@ export function makeReadyCanonicalFixture() {
     }
     for (const questionId of questionIds) assertions.push({ assertionId: `answer:${questionId}`, questionId, answer: 'A', authority: 'official', sourceSpanId })
   }
-  const source = { paperId: 'paper-canonical-fixture', profileId: 'nck1', sourceAssetVersion: 1, observations, assertions, groups, inactiveSlots }
+  const source = {
+    paperId: 'paper-canonical-fixture',
+    profileId: 'nck1',
+    sourceAssetVersion: 1,
+    profileInstructionSourceDigest: sha256(
+      new TextEncoder().encode(
+        '%PDF-1.4\n% EQB canonical fixture instruction source\n',
+      ),
+    ),
+    observations,
+    assertions,
+    groups,
+    inactiveSlots,
+  }
   for (let pass = 0; pass < 3; pass++) {
     const byteLength = new TextEncoder().encode(JSON.stringify(source)).byteLength
     for (const observation of observations) observation.span.end = byteLength

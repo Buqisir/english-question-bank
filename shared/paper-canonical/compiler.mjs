@@ -884,10 +884,8 @@ function appendNck1ContinuationInstructionEvidence({
   const exactCorrection = (
     evidence?.paperId === source.paperId
     && evidence?.profileId === source.profileId
-    && (
-      expectedSourceDocumentDigest == null
-      || evidence.sourceDocumentDigest === expectedSourceDocumentDigest
-    )
+    && typeof expectedSourceDocumentDigest === 'string'
+    && evidence.sourceDocumentDigest === expectedSourceDocumentDigest
     && sourceMatches.length === 1
     && sourceMatches[0].mediaType === 'application/pdf'
     && sourceMatches[0].roles.includes('question_source')
@@ -1013,7 +1011,8 @@ function adaptReferenceFamilies(parsed, documents, diagnostics) {
     source: parsed.value,
     instructionEntries,
     expectedSourceDocumentDigest:
-      continuationEntry?.value?.sourceDocumentDigest,
+      continuationEntry?.value?.sourceDocumentDigest
+      || parsed.value?.profileInstructionSourceDigest,
     documents,
     diagnostics,
   })

@@ -1,6 +1,6 @@
 {
+  "$id": "canonical-paper-publication-v9",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "canonical-paper-publication-v8",
   "type": "object",
   "additionalProperties": false,
   "required": [

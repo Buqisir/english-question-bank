@@ -67,9 +67,9 @@ import reportV5Schema from '../../schemas/paper-canonical/normalization-report-v
 import reportV6Schema from '../../schemas/paper-canonical/normalization-report-v6.schema.json' with { type: 'json' }
 import reportV7Schema from '../../schemas/paper-canonical/normalization-report-v7.schema.json' with { type: 'json' }
 import reportV8Schema from '../../schemas/paper-canonical/normalization-report-v8.schema.json' with { type: 'json' }
-import reportV9Schema from '../../schemas/paper-canonical/normalization-report-v9.schema.json' with { type: 'json' }
+import reportV9Schema from '../../schemas/paper-canonical/normalization-report-v9-identity-corrected.schema.json' with { type: 'json' }
 import reportV10Schema from '../../schemas/paper-canonical/normalization-report-v10.schema.json' with { type: 'json' }
-import legacyReportV9Schema from '../../schemas/paper-canonical/compat/normalization-report-v9-pre-identity-fix.schema.json' with { type: 'json' }
+import legacyReportV9Schema from '../../schemas/paper-canonical/normalization-report-v9.schema.json' with { type: 'json' }
 import publicationSchema from '../../schemas/paper-canonical/canonical-paper-publication-v1.schema.json' with { type: 'json' }
 import publicationV2Schema from '../../schemas/paper-canonical/canonical-paper-publication-v2.schema.json' with { type: 'json' }
 import publicationV3Schema from '../../schemas/paper-canonical/canonical-paper-publication-v3.schema.json' with { type: 'json' }
@@ -78,9 +78,9 @@ import publicationV5Schema from '../../schemas/paper-canonical/canonical-paper-p
 import publicationV6Schema from '../../schemas/paper-canonical/canonical-paper-publication-v6.schema.json' with { type: 'json' }
 import publicationV7Schema from '../../schemas/paper-canonical/canonical-paper-publication-v7.schema.json' with { type: 'json' }
 import publicationV8Schema from '../../schemas/paper-canonical/canonical-paper-publication-v8.schema.json' with { type: 'json' }
-import publicationV9Schema from '../../schemas/paper-canonical/canonical-paper-publication-v9.schema.json' with { type: 'json' }
+import publicationV9Schema from '../../schemas/paper-canonical/canonical-paper-publication-v9-identity-corrected.schema.json' with { type: 'json' }
 import publicationV10Schema from '../../schemas/paper-canonical/canonical-paper-publication-v10.schema.json' with { type: 'json' }
-import legacyPublicationV9Schema from '../../schemas/paper-canonical/compat/canonical-paper-publication-v9-pre-identity-fix.schema.json' with { type: 'json' }
+import legacyPublicationV9Schema from '../../schemas/paper-canonical/canonical-paper-publication-v9.schema.json' with { type: 'json' }
 import consumerSchema from '../../schemas/paper-canonical/consumer-contract-v1.schema.json' with { type: 'json' }
 
 import { digestJson, exactKeys, isRecordValue } from './stable.mjs'

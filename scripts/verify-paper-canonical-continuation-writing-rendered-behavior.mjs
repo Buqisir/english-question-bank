@@ -45,6 +45,9 @@ import {
   makeContinuationWritingReferenceFixture,
   makePollutedContinuationCapture,
 } from '../test-fixtures/paper-canonical/continuationWritingReferenceFixture.mjs'
+import {
+  makeReadyCanonicalFixture,
+} from '../test-fixtures/paper-canonical/foundationFixture.mjs'
 
 const persistActualArtifacts =
   process.env.EQB_PERSIST_ACTUAL_ARTIFACTS === '1'
@@ -354,6 +357,41 @@ function assertNck1InstructionEvidenceAdmission() {
   assert.notEqual(forgedSourceCompilation.disposition, 'ready')
   assert.equal(
     forgedSourceCompilation.artifacts.normalizationReport.diagnostics.some(
+      (diagnostic) =>
+        diagnostic.code === 'CONTINUATION_INSTRUCTION_EVIDENCE_INVALID',
+    ),
+    true,
+  )
+
+  const forgedDirectSourceDigest = makeReadyCanonicalFixture()
+  forgedDirectSourceDigest.request.evidence.documents.push({
+    inputKey: 'unrelated_direct_forged_source',
+    roles: ['question_source', 'source_provenance'],
+    bytes: unrelatedSourceBytes,
+    declared: { mediaType: 'application/pdf' },
+  })
+  const forgedDirectEvidence =
+    forgedDirectSourceDigest.request.evidence.documents.find(
+      (document) =>
+        document.inputKey ===
+        'continuation_writing_instruction_evidence',
+    )
+  const forgedDirectValue = JSON.parse(
+    new TextDecoder().decode(forgedDirectEvidence.bytes),
+  )
+  forgedDirectValue.sourceDocumentDigest =
+    `sha256:${createHash('sha256')
+      .update(unrelatedSourceBytes)
+      .digest('hex')}`
+  forgedDirectEvidence.bytes = new TextEncoder().encode(
+    JSON.stringify(forgedDirectValue),
+  )
+  const forgedDirectCompilation = compileCanonicalPaper(
+    forgedDirectSourceDigest.request,
+  )
+  assert.notEqual(forgedDirectCompilation.disposition, 'ready')
+  assert.equal(
+    forgedDirectCompilation.artifacts.normalizationReport.diagnostics.some(
       (diagnostic) =>
         diagnostic.code === 'CONTINUATION_INSTRUCTION_EVIDENCE_INVALID',
     ),

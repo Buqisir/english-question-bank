@@ -236,12 +236,12 @@
     },
     {
       "id": "normalization-report-v9",
-      "path": "../../schemas/paper-canonical/normalization-report-v9.schema.json",
+      "path": "../../schemas/paper-canonical/normalization-report-v9-identity-corrected.schema.json",
       "sha256": "sha256:f8d17592e40b97cff6ae62744dd59cf98eb4779894b1887e413d86706fb9916b"
     },
     {
       "id": "canonical-paper-publication-v9",
-      "path": "../../schemas/paper-canonical/canonical-paper-publication-v9.schema.json",
+      "path": "../../schemas/paper-canonical/canonical-paper-publication-v9-identity-corrected.schema.json",
       "sha256": "sha256:9256188a494f04ef6f2a95041e47052a3c41225f20a2b59056ad0f86a2801026"
     },
     {
