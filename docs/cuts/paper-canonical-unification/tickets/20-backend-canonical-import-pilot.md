@@ -79,7 +79,7 @@ non-blocking repeated-switch smell was not refactored. No owner QA or Ticket 21
 action was taken.
 
 Legacy-selection focused fix commit:
-`10520c3b76512409b9421a39522eff437f6b702d`.
+`10520c3b11fdf706767c102229a818786846bf9d`.
 Legacy-selection verify: the canonical import focused-fix public seam,
 PaperBrowse 198/198, Seven Choices and Cloze/Grammar rendered-consumption
 regressions, app `tsc -b`/build, `git diff --check`, and
