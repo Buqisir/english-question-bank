@@ -568,7 +568,11 @@ function assertPassageLetterMarkup(html, consumption, consumerId, label) {
   }
 }
 
-function expectedReadingPassageEntries(consumption, consumerId) {
+function expectedReadingPassageEntries(
+  consumption,
+  consumerId,
+  predecessorAnchorIdByGroupId = new Map(),
+) {
   const readingSelection = consumption.selections.find(
     (selection) => selection.familyContractId === 'reading',
   )
@@ -590,23 +594,58 @@ function expectedReadingPassageEntries(consumption, consumerId) {
         consumerId === 'screen'
           ? index > 0 ? groupIds[index - 1] : null
           : groupId,
+      predecessorAnchorId:
+        predecessorAnchorIdByGroupId.get(groupId)
+        ?? (consumerId === 'print_pdf' ? groupId : undefined),
     }
   })
 }
 
 function exactPrintReadingPredecessorBindings(html, consumption, label) {
-  const matches = [...html.matchAll(
+  const allMatches = [...html.matchAll(
     /<div class="group-header" data-canonical-reading-preceding-for="([^"]+)" data-canonical-reading-preceding-kind="([^"]+)" data-canonical-reading-predecessor-group-id="([^"]+)">([^<]+)<\/div>/g,
   )]
-  const observations = matches.map((match) => ({
-    precedingForGroupId: match[1],
-    precedingKind: match[2],
-    predecessorGroupId: match[3],
-    visibleText: normalizedVisibleText(match[4]),
-    predecessorPage: 'print-html',
-    letterPage: 'print-html',
-  }))
   const expected = expectedReadingPassageEntries(consumption, 'print_pdf')
+  assert.equal(
+    allMatches.length,
+    expected.length,
+    `${label} exposes only the expected tagged Reading predecessors`,
+  )
+  const observations = expected.map((entry) => {
+    const sectionMarker =
+      `<section class="question-group" data-canonical-group-id="${entry.groupId}"`
+    assert.equal(
+      countTextOccurrences(html, sectionMarker),
+      1,
+      `${label} exposes one structural Print Group for ${entry.groupId}`,
+    )
+    const sectionStart = html.indexOf(sectionMarker)
+    const sectionEnd = html.indexOf('</section>', sectionStart)
+    assert.notEqual(
+      sectionEnd,
+      -1,
+      `${label} closes the structural Print Group for ${entry.groupId}`,
+    )
+    const sectionHtml = html.slice(sectionStart, sectionEnd)
+    const matches = [...sectionHtml.matchAll(
+      /<div class="group-header" data-canonical-reading-preceding-for="([^"]+)" data-canonical-reading-preceding-kind="([^"]+)" data-canonical-reading-predecessor-group-id="([^"]+)">([^<]+)<\/div>/g,
+    )]
+    assert.equal(
+      matches.length,
+      1,
+      `${label} binds one tagged predecessor inside ${entry.groupId}'s structural Print Group`,
+    )
+    const [match] = matches
+    return {
+      precedingForGroupId: match[1],
+      precedingKind: match[2],
+      predecessorGroupId: match[3],
+      predecessorAnchorId: entry.groupId,
+      visibleText: normalizedVisibleText(match[4]),
+      predecessorPage: 'print-html',
+      letterPage: 'print-html',
+    }
+  })
   assertExactTaggedPredecessorObservations(observations, expected, label)
   assertTaggedPredecessorAttacksFailClosed(observations, expected, label)
   return new Map(
@@ -637,6 +676,11 @@ function assertExactTaggedPredecessorObservations(
       observation.predecessorGroupId,
       entry.predecessorGroupId,
       `${label} binds ${entry.groupId} to the expected predecessor Group`,
+    )
+    assert.equal(
+      observation.predecessorAnchorId,
+      entry.predecessorAnchorId,
+      `${label} binds ${entry.groupId} to the exact structural predecessor anchor`,
     )
     assert.equal(
       observation.predecessorPage,
@@ -702,10 +746,74 @@ function assertTaggedPredecessorAttacksFailClosed(
     /exactly one tagged predecessor/,
     `${label} rejects a predecessor tagged for the wrong Group`,
   )
+  assert.throws(
+    () => assertExactTaggedPredecessorObservations(
+      observations.map((observation, index) =>
+        index === 0
+          ? {
+              ...observation,
+              predecessorAnchorId: second.predecessorAnchorId,
+            }
+          : observation),
+      expected,
+      label,
+    ),
+    /structural predecessor anchor/,
+    `${label} rejects a predecessor structurally owned by the wrong Group`,
+  )
 }
 
-async function measureScreenPassageLetterGeometry(page, consumption, label) {
-  const expected = expectedReadingPassageEntries(consumption, 'screen')
+function screenReadingPredecessorAnchorIds(asset, consumption, label) {
+  const readingSelection = consumption.selections.find(
+    (selection) => selection.familyContractId === 'reading',
+  )
+  const [firstGroupId, ...followingGroupIds] = readingSelection.groupIds
+  const firstGroupBlockIndex = asset.content.blocks.findIndex(
+    (block) => block.type === 'group' && block.groupId === firstGroupId,
+  )
+  assert.notEqual(
+    firstGroupBlockIndex,
+    -1,
+    `${label} exposes the first Reading Group in the source block order`,
+  )
+  let heading = null
+  for (let index = firstGroupBlockIndex - 1; index >= 0; index -= 1) {
+    const block = asset.content.blocks[index]
+    if (block.type === 'sectionHeading') {
+      heading = block
+      break
+    }
+    if (block.type === 'group' || block.type === 'partHeading') break
+  }
+  assert.ok(
+    heading?.sectionId,
+    `${label} exposes the exact source Reading heading for ${firstGroupId}`,
+  )
+  return new Map([
+    [firstGroupId, heading.sectionId],
+    ...followingGroupIds.map((groupId, index) => [
+      groupId,
+      readingSelection.groupIds[index],
+    ]),
+  ])
+}
+
+async function measureScreenPassageLetterGeometry(
+  page,
+  asset,
+  consumption,
+  label,
+) {
+  const predecessorAnchorIds = screenReadingPredecessorAnchorIds(
+    asset,
+    consumption,
+    label,
+  )
+  const expected = expectedReadingPassageEntries(
+    consumption,
+    'screen',
+    predecessorAnchorIds,
+  )
   const measurements = []
   for (const [
     index,
@@ -767,6 +875,9 @@ async function measureScreenPassageLetterGeometry(page, consumption, label) {
         predecessorGroupId: precedingElement.getAttribute(
           'data-canonical-reading-predecessor-group-id',
         ),
+        predecessorAnchorId: precedingElement.getAttribute(
+          'data-paper-browse-anchor',
+        ),
         precedingInkBottom,
         precedingBaselineStepPx:
           letterTextRect.bottom - precedingInkBottom,
@@ -788,6 +899,11 @@ async function measureScreenPassageLetterGeometry(page, consumption, label) {
       geometry.predecessorGroupId,
       expected[index].predecessorGroupId,
       `${label} binds ${groupId} to its exact visible predecessor Group`,
+    )
+    assert.equal(
+      geometry.predecessorAnchorId,
+      expected[index].predecessorAnchorId,
+      `${label} binds ${groupId} to its exact visible predecessor anchor`,
     )
     const tolerances = passageLetterReference.evidence.tolerances
     assert.equal(
@@ -1345,7 +1461,6 @@ function assertPdfPassageLetterGeometry(
     groupId,
     letter: expectedLetter,
     precedingKind,
-    predecessorGroupId,
   } of expected) {
     const group = projectCanonicalConsumerGroup({
       consumption,
@@ -1459,7 +1574,8 @@ function assertPdfPassageLetterGeometry(
       pageCenterOffsetPt: letterCenterX - pageCenterX,
       precedingForGroupId: predecessorBinding.precedingForGroupId,
       precedingKind,
-      predecessorGroupId,
+      predecessorGroupId: predecessorBinding.predecessorGroupId,
+      predecessorAnchorId: predecessorBinding.predecessorAnchorId,
       predecessorPage: precedingWord.page,
       letterPage: letter.page,
       firstLineBaselineStepPt: followingBaselineStepPt,
@@ -1941,6 +2057,7 @@ async function renderSupportedArtifacts({
       passageLetterGeometry.screenPlain =
         await measureScreenPassageLetterGeometry(
           page,
+          asset,
           consumers.screen,
           'plain PaperSurface',
         )
@@ -1986,6 +2103,7 @@ async function renderSupportedArtifacts({
       passageLetterGeometry.screenLecture =
         await measureScreenPassageLetterGeometry(
           page,
+          asset,
           consumers.screen,
           'lecture PaperSurface',
         )
