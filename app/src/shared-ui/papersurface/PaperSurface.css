@@ -184,7 +184,7 @@
 .ps-canonical-reading-paragraph,
 .ps-canonical-reading-title,
 .ps-canonical-reading-subtitle {
-  margin: 0 0 8px;
+  margin: 0;
 }
 
 .ps-canonical-reading-paragraph {
@@ -203,19 +203,19 @@
 
 .ps-canonical-reading-table {
   width: 100%;
-  margin: 0 0 10px;
+  margin: 0;
   border-collapse: collapse;
   table-layout: fixed;
 }
 
 .ps-canonical-reading-table td {
-  padding: 4px 6px;
+  padding: 0 6px;
   border: 1px solid var(--ps-rule);
   vertical-align: top;
 }
 
 .ps-canonical-reading-figure {
-  margin: 0 0 10px;
+  margin: 0;
   text-align: center;
 }
 
@@ -439,6 +439,19 @@ button.ps-paper-blank.ps-paper-blank--clickable {
   list-style: none;
   margin: 14px 0 0;
   padding: 0;
+}
+
+.ps-canonical-reading ~ .ps-question-list {
+  margin-top: 24px;
+}
+
+.ps-canonical-reading ~ .ps-question-list .ps-question {
+  margin-bottom: 0;
+}
+
+.ps-canonical-reading ~ .ps-question-list .ps-option-list {
+  margin-top: 0;
+  row-gap: 0;
 }
 
 /* ─── Question item ────────────────────────────────────────────── */

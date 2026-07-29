@@ -65,6 +65,7 @@
         "marginAfterPt",
         "precedingGeometry",
         "followingGeometry",
+        "verticalRhythm",
         "referenceMeasurement"
       ],
       "properties": {
@@ -101,11 +102,14 @@
                   "screen": {
                     "enum": [
                       "reading_heading",
-                      "prior_content"
+                      "prior_question_tail"
                     ]
                   },
                   "print_pdf": {
-                    "const": "reading_heading"
+                    "enum": [
+                      "reading_heading",
+                      "prior_question_tail"
+                    ]
                   }
                 }
               }
@@ -141,7 +145,7 @@
           "required": [
             "normalizationRule",
             "readingHeading",
-            "priorContent"
+            "priorQuestionTail"
           ],
           "properties": {
             "normalizationRule": {
@@ -150,7 +154,7 @@
             "readingHeading": {
               "$ref": "#/$defs/precedingGeometryContext"
             },
-            "priorContent": {
+            "priorQuestionTail": {
               "$ref": "#/$defs/precedingGeometryContext"
             }
           }
@@ -192,6 +196,149 @@
             }
           }
         },
+        "verticalRhythm": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "semanticRoleClasses",
+            "adjacencyGraph",
+            "targets"
+          ],
+          "properties": {
+            "semanticRoleClasses": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "chrome",
+                "passageContent",
+                "questionStem",
+                "optionLine",
+                "teacherTail"
+              ],
+              "properties": {
+                "chrome": {
+                  "$ref": "#/$defs/nonEmptyRoleArray"
+                },
+                "passageContent": {
+                  "$ref": "#/$defs/nonEmptyRoleArray"
+                },
+                "questionStem": {
+                  "$ref": "#/$defs/nonEmptyRoleArray"
+                },
+                "optionLine": {
+                  "$ref": "#/$defs/nonEmptyRoleArray"
+                },
+                "teacherTail": {
+                  "$ref": "#/$defs/nonEmptyRoleArray"
+                }
+              }
+            },
+            "adjacencyGraph": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "edgeId",
+                  "optionalCollapse"
+                ],
+                "properties": {
+                  "edgeId": {
+                    "type": "string"
+                  },
+                  "fromClass": {
+                    "type": "string"
+                  },
+                  "fromRole": {
+                    "type": "string"
+                  },
+                  "toClass": {
+                    "type": "string"
+                  },
+                  "toRole": {
+                    "type": "string"
+                  },
+                  "baselineStepRatio": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "pageRelation": {
+                    "enum": [
+                      "next_page_continuation",
+                      "next_page_start"
+                    ]
+                  },
+                  "optionalCollapse": {
+                    "type": "boolean"
+                  },
+                  "repeatForbiddenRoles": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "targets": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "screen",
+                "printPdf"
+              ],
+              "properties": {
+                "screen": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "baselineStepPx",
+                    "oneStepTolerancePx",
+                    "twoStepTolerancePx"
+                  ],
+                  "properties": {
+                    "baselineStepPx": {
+                      "type": "number",
+                      "minimum": 0
+                    },
+                    "oneStepTolerancePx": {
+                      "type": "number",
+                      "minimum": 0
+                    },
+                    "twoStepTolerancePx": {
+                      "type": "number",
+                      "minimum": 0
+                    }
+                  }
+                },
+                "printPdf": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "baselineStepPt",
+                    "oneStepTolerancePt",
+                    "twoStepTolerancePt"
+                  ],
+                  "properties": {
+                    "baselineStepPt": {
+                      "type": "number",
+                      "minimum": 0
+                    },
+                    "oneStepTolerancePt": {
+                      "type": "number",
+                      "minimum": 0
+                    },
+                    "twoStepTolerancePt": {
+                      "type": "number",
+                      "minimum": 0
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
         "referenceMeasurement": {
           "type": "object",
           "additionalProperties": false,
@@ -212,6 +359,13 @@
     }
   },
   "$defs": {
+    "nonEmptyRoleArray": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    },
     "precedingGeometryContext": {
       "type": "object",
       "additionalProperties": false,

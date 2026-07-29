@@ -27,6 +27,9 @@ import {
   projectCanonicalConsumerGroup,
 } from '../shared/paper-canonical/consumerProjection.mjs'
 import {
+  readingPassageLetterTypography,
+} from '../shared/paper-canonical/readingPassageLetter.mjs'
+import {
   buildCanonicalReadingConsumptionSurfaceData,
 } from '../shared/paper-normalization/canonicalPaperGroupSurfaceAdapter.mjs'
 import { consumerContractRefs } from '../shared/paper-canonical/consumers.mjs'
@@ -243,6 +246,199 @@ function assertPdfStemOptionAlignment(pdfPath, group, label) {
     )
     cursor = optionIndex + 1
   }
+}
+
+function assertPdfInstructionRhythm(pdfPath, group, label) {
+  const rhythm = readingPassageLetterTypography.verticalRhythm.targets.printPdf
+  const info = execFileSync('pdfinfo', [pdfPath], { encoding: 'utf8' })
+  const pageSize = /Page size:\s+([\d.]+) x ([\d.]+) pts \(A4\)/.exec(info)
+  assert.ok(pageSize, `${label} declares A4`)
+  assert.ok(
+    Math.abs(Number(pageSize[1]) - 595.276) <= 0.5
+    && Math.abs(Number(pageSize[2]) - 841.89) <= 0.5,
+    `${label} is exact CSS A4`,
+  )
+  const bbox = execFileSync('pdftotext', ['-bbox', pdfPath, '-'], {
+    encoding: 'utf8',
+  })
+  const words = [...bbox.matchAll(
+    /<word xMin="[^"]+" yMin="([^"]+)" xMax="[^"]+" yMax="([^"]+)">([^<]+)<\/word>/g,
+  )].map((match) => ({
+    centerY: (Number(match[1]) + Number(match[2])) / 2,
+    text: match[3]
+      .replace(/&#x([0-9a-f]+);/gi, (_value, codePoint) =>
+        String.fromCodePoint(Number.parseInt(codePoint, 16)))
+      .normalize('NFKC'),
+  }))
+  const marker = group.blocks[0].text.split(/\s+/).slice(0, 3)
+  const markerIndex = words.findIndex((word, index) =>
+    marker.every((token, tokenIndex) =>
+      words[index + tokenIndex]?.text === token))
+  assert.notEqual(markerIndex, -1, `${label} finds first passage line`)
+  const letter = words[markerIndex - 1]
+  assert.equal(letter.text, group.passageLetter)
+  const instructionIndex = words.findLastIndex(
+    (word, index) =>
+      index < markerIndex - 1
+      && word.text.includes('最佳选项'),
+  )
+  const instructionFirstIndex = words.findLastIndex(
+    (word, index) =>
+      index <= instructionIndex
+      && word.text.includes('阅读下列短文'),
+  )
+  const sectionIndex = words.findLastIndex(
+    (word, index) =>
+      index < instructionFirstIndex
+      && word.text.includes('阅读理解'),
+  )
+  assert.notEqual(instructionIndex, -1, `${label} finds instruction tail`)
+  assert.notEqual(instructionFirstIndex, -1, `${label} finds instruction head`)
+  assert.notEqual(sectionIndex, -1, `${label} finds Reading heading`)
+  assert.ok(
+    Math.abs(
+      letter.centerY
+      - words[instructionIndex].centerY
+      - rhythm.baselineStepPt,
+    ) <= rhythm.oneStepTolerancePt,
+    `${label} keeps instruction_to_a 1x: ${JSON.stringify({
+      actual: letter.centerY - words[instructionIndex].centerY,
+      expected: rhythm.baselineStepPt,
+      tolerance: rhythm.oneStepTolerancePt,
+    })}`,
+  )
+  assert.ok(
+    Math.abs(
+      words[instructionFirstIndex].centerY
+      - words[sectionIndex].centerY
+      - rhythm.baselineStepPt,
+    ) <= rhythm.oneStepTolerancePt,
+    `${label} keeps chrome_internal 1x: ${JSON.stringify({
+      actual:
+        words[instructionFirstIndex].centerY - words[sectionIndex].centerY,
+      expected: rhythm.baselineStepPt,
+      tolerance: rhythm.oneStepTolerancePt,
+    })}`,
+  )
+}
+
+function assertPdfWrappedOptionRhythm(pdfPath, question, label) {
+  const rhythm = readingPassageLetterTypography.verticalRhythm.targets.printPdf
+  const bbox = execFileSync('pdftotext', ['-bbox', pdfPath, '-'], {
+    encoding: 'utf8',
+  })
+  const words = [...bbox.matchAll(
+    /<word xMin="[^"]+" yMin="([^"]+)" xMax="[^"]+" yMax="([^"]+)">([^<]+)<\/word>/g,
+  )].map((match) => ({
+    centerY: (Number(match[1]) + Number(match[2])) / 2,
+    text: match[3]
+      .replace(/&#x([0-9a-f]+);/gi, (_value, codePoint) =>
+        String.fromCodePoint(Number.parseInt(codePoint, 16)))
+      .normalize('NFKC'),
+  }))
+  const questionIndex = words.findIndex(
+    (word) => word.text === `${question.questionNo}.`,
+  )
+  assert.notEqual(questionIndex, -1, `${label} finds the exact Question stem`)
+  const optionAIndex = words.findIndex(
+    (word, index) => index > questionIndex && word.text === 'A.',
+  )
+  const optionBIndex = words.findIndex(
+    (word, index) => index > optionAIndex && word.text === 'B.',
+  )
+  assert.notEqual(optionAIndex, -1, `${label} finds Option A`)
+  assert.notEqual(optionBIndex, -1, `${label} finds Option B`)
+  const optionAText = question.options[0].content
+    .map((inline) => inline.text)
+    .join('')
+    .normalize('NFKC')
+  const extractedText = words
+    .slice(optionAIndex + 1, optionBIndex)
+    .map((word) => word.text)
+    .join(' ')
+  assert.equal(
+    optionAText.split(/\s+/).every((token) => extractedText.includes(token)),
+    true,
+    `${label} binds the wrapped lines to exact Option A text`,
+  )
+  const lines = words
+    .slice(optionAIndex, optionBIndex)
+    .map((word) => word.centerY)
+    .sort((left, right) => left - right)
+    .reduce((centers, center) => {
+      if (
+        centers.at(-1) === undefined
+        || Math.abs(center - centers.at(-1)) > 1
+      ) {
+        centers.push(center)
+      }
+      return centers
+    }, [])
+  assert.equal(lines.length >= 2, true, `${label} wraps Option A`)
+  for (let index = 1; index < lines.length; index += 1) {
+    assert.ok(
+      Math.abs(
+        lines[index] - lines[index - 1] - rhythm.baselineStepPt,
+      ) <= rhythm.oneStepTolerancePt,
+      `${label} keeps wrapped option line-height 1x`,
+    )
+  }
+}
+
+function assertPdfTwoLineStemRhythm(pdfPath, question, label) {
+  const rhythm = readingPassageLetterTypography.verticalRhythm.targets.printPdf
+  const bbox = execFileSync('pdftotext', ['-bbox', pdfPath, '-'], {
+    encoding: 'utf8',
+  })
+  const words = [...bbox.matchAll(
+    /<word xMin="[^"]+" yMin="([^"]+)" xMax="[^"]+" yMax="([^"]+)">([^<]+)<\/word>/g,
+  )].map((match) => ({
+    centerY: (Number(match[1]) + Number(match[2])) / 2,
+    text: match[3]
+      .replace(/&#x([0-9a-f]+);/gi, (_value, codePoint) =>
+        String.fromCodePoint(Number.parseInt(codePoint, 16)))
+      .normalize('NFKC'),
+  }))
+  const questionIndex = words.findIndex(
+    (word) => word.text === `${question.questionNo}.`,
+  )
+  const optionAIndex = words.findIndex(
+    (word, index) => index > questionIndex && word.text === 'A.',
+  )
+  assert.notEqual(questionIndex, -1, `${label} finds the exact Question stem`)
+  assert.notEqual(optionAIndex, -1, `${label} finds Option A after the stem`)
+  const stemText = question.stemContent
+    .map((inline) => inline.text)
+    .join('')
+    .normalize('NFKC')
+  const extractedText = words
+    .slice(questionIndex + 1, optionAIndex)
+    .map((word) => word.text)
+    .join(' ')
+  assert.equal(
+    stemText.split(/\s+/).every((token) => extractedText.includes(token)),
+    true,
+    `${label} binds both lines to the exact stem text`,
+  )
+  const lines = words
+    .slice(questionIndex, optionAIndex)
+    .map((word) => word.centerY)
+    .sort((left, right) => left - right)
+    .reduce((centers, center) => {
+      if (
+        centers.at(-1) === undefined
+        || Math.abs(center - centers.at(-1)) > 1
+      ) {
+        centers.push(center)
+      }
+      return centers
+    }, [])
+  assert.equal(lines.length, 2, `${label} renders a two-line stem`)
+  assert.ok(
+    Math.abs(lines[1] - lines[0] - rhythm.baselineStepPt)
+      <= rhythm.oneStepTolerancePt,
+    `${label} keeps two-line stem line-height 1x`,
+  )
 }
 
 function canonicalInlineNodeIds(group) {
@@ -484,6 +680,63 @@ for (const versionType of ['student', 'teacher']) {
 
 }
 
+for (const versionType of ['student', 'teacher']) {
+  const tableCase = printCases.find(
+    (candidate) => candidate.versionType === versionType,
+  )
+  const html = tableCase.html.replace(
+    '</style>',
+    `[data-canonical-question-id="${tableGroup.questions[0].questionId}"] .canonical-stem-text{display:block;max-width:270pt}</style>`,
+  )
+  const variant = `two-line-stem-${versionType}`
+  writeFileSync(
+    path.join(actualArtifactRoot, `reading-${variant}.html`),
+    html,
+  )
+  printCases.push({ versionType: variant, html })
+}
+
+const instructionText =
+  '阅读下列短文，从每题所给的 A、B、C、D 四个选项中选出最佳选项。'
+for (const versionType of ['student', 'teacher']) {
+  const html = buildPrintHtml({
+    title: 'Canonical Reading Instruction QA',
+    versionType,
+    items: [item],
+    blocks: [
+      { type: 'section_header', title: '第一部分 阅读理解' },
+      { type: 'instruction', text: instructionText },
+      ...blocks,
+    ],
+    questionNumberStart: deliberatelyWrongCallerSeed,
+    printStyle: 'exam',
+    canonicalConsumption: real.consumption,
+  })
+  assert.equal(
+    count(html, /data-canonical-reading-rhythm-role="meta_instruction"/g),
+    1,
+  )
+  assert.equal(
+    html.includes(
+      'data-canonical-reading-preceding-for="group-2026-i-reading-a"'
+      + ' data-canonical-reading-preceding-kind="reading_heading"'
+      + ' data-canonical-reading-anchor-id="print-instruction-1"',
+    ),
+    true,
+  )
+  writeFileSync(
+    path.join(
+      actualArtifactRoot,
+      `reading-instruction-present-${versionType}.html`,
+    ),
+    html,
+  )
+  printCases.push({
+    versionType: `instruction-present-${versionType}`,
+    html,
+  })
+}
+
 const oneColumnItem = exportItem(asset, oneColumnGroup.groupId)
 const oneColumnBlocks = [{
   type: 'question_group',
@@ -527,6 +780,18 @@ writeFileSync(
   oneColumnHtml,
 )
 printCases.push({ versionType: 'one-column-student', html: oneColumnHtml })
+const wrappedOneColumnHtml = oneColumnHtml.replace(
+  '</style>',
+  '.canonical-options--one_column{width:180pt!important;grid-template-columns:180pt!important}</style>',
+)
+writeFileSync(
+  path.join(actualArtifactRoot, 'reading-wrapped-one-column-student.html'),
+  wrappedOneColumnHtml,
+)
+printCases.push({
+  versionType: 'wrapped-one-column-student',
+  html: wrappedOneColumnHtml,
+})
 
 
 function syntheticFigureItem() {
@@ -740,9 +1005,46 @@ async function assertActualBrowserArtifacts() {
       await page.setContent(printCase.html, { waitUntil: 'load' })
       assert.equal(
         await page.locator('[data-canonical-correct-option-id]').count(),
-        printCase.versionType === 'teacher' ? tableGroup.questions.length : 0,
+        printCase.versionType.includes('teacher')
+          ? tableGroup.questions.length
+          : 0,
       )
-      if (printCase.versionType === 'one-column-student') {
+      if (printCase.versionType.startsWith('instruction-present-')) {
+        const rhythm = await page.evaluate(() => {
+          const bottom = (selector) => {
+            const element = document.querySelector(selector)
+            const range = document.createRange()
+            range.selectNodeContents(element)
+            return Math.max(
+              ...[...range.getClientRects()].map((rect) => rect.bottom),
+            )
+          }
+          return {
+            section: bottom(
+              '[data-canonical-reading-rhythm-role="part_title"]',
+            ),
+            instruction: bottom(
+              '[data-canonical-reading-rhythm-role="meta_instruction"]',
+            ),
+            letter: bottom(
+              '[data-canonical-reading-rhythm-role="passage_letter"]',
+            ),
+          }
+        })
+        assert.ok(
+          Math.abs(rhythm.instruction - rhythm.section - 24) <= 1.25,
+          `Print instruction fixture keeps chrome_internal 1x: ${JSON.stringify(rhythm)}`,
+        )
+        assert.ok(
+          Math.abs(rhythm.letter - rhythm.instruction - 24) <= 1.25,
+          `Print instruction fixture keeps chrome_to_a 1x: ${JSON.stringify(rhythm)}`,
+        )
+      }
+      if (
+        ['one-column-student', 'wrapped-one-column-student'].includes(
+          printCase.versionType,
+        )
+      ) {
         const option = page.locator(
           `[data-canonical-option-id="${oneColumnQuestion.options[0].optionId}"]`,
         )
@@ -759,11 +1061,76 @@ async function assertActualBrowserArtifacts() {
         assert.equal(Number(placement.continuation), oneColumnContinuationPt)
         assert.ok(Math.abs(placement.paddingLeftPx - expectedPx) <= 96 / 72)
         assert.ok(Math.abs(placement.textIndentPx + expectedPx) <= 96 / 72)
+        if (printCase.versionType === 'wrapped-one-column-student') {
+          const lineCount = await option.evaluate((element) => {
+            const range = document.createRange()
+            range.selectNodeContents(element)
+            return [...range.getClientRects()]
+              .map((rect) => rect.bottom)
+              .sort((left, right) => left - right)
+              .reduce((lines, bottom) => {
+                if (
+                  lines.at(-1) === undefined
+                  || Math.abs(bottom - lines.at(-1)) > 1
+                ) {
+                  lines.push(bottom)
+                }
+                return lines
+              }, []).length
+          })
+          assert.equal(
+            lineCount >= 2,
+            true,
+            'Print HTML executes a wrapped one-column option',
+          )
+        }
       }
-      if (['student', 'teacher', 'one-column-student'].includes(
-        printCase.versionType,
-      )) {
-        const expectedGroup = printCase.versionType === 'one-column-student'
+      if (printCase.versionType.startsWith('two-line-stem-')) {
+        const lineCount = await page.locator(
+          `[data-canonical-question-id="${tableGroup.questions[0].questionId}"] [data-canonical-reading-rhythm-role="question_stem_line"]`,
+        ).evaluate((element) => {
+          const walker = document.createTreeWalker(
+            element,
+            NodeFilter.SHOW_TEXT,
+          )
+          const bottoms = []
+          for (let node = walker.nextNode(); node; node = walker.nextNode()) {
+            if (!node.textContent?.trim()) continue
+            const range = document.createRange()
+            range.selectNodeContents(node)
+            bottoms.push(
+              ...[...range.getClientRects()].map((rect) => rect.bottom),
+            )
+          }
+          return bottoms
+            .sort((left, right) => left - right)
+            .reduce((lines, bottom) => {
+              if (
+                lines.at(-1) === undefined
+                || Math.abs(bottom - lines.at(-1)) > 1
+              ) {
+                lines.push(bottom)
+              }
+              return lines
+            }, []).length
+        })
+        assert.equal(lineCount, 2, 'Print HTML executes a two-line stem')
+      }
+      if (
+        [
+          'student',
+          'teacher',
+          'one-column-student',
+          'wrapped-one-column-student',
+        ].includes(
+          printCase.versionType,
+        )
+        || printCase.versionType.startsWith('instruction-present-')
+        || printCase.versionType.startsWith('two-line-stem-')
+      ) {
+        const expectedGroup = printCase.versionType.includes(
+          'one-column-student',
+        )
           ? oneColumnGroup
           : tableGroup
         for (const question of expectedGroup.questions) {
@@ -790,16 +1157,46 @@ async function assertActualBrowserArtifacts() {
         path: pdfPath,
         format: 'A4',
         printBackground: true,
+        preferCSSPageSize: true,
       })
       assert.equal(pdfBytes.subarray(0, 4).toString(), '%PDF')
-      if (['student', 'teacher', 'one-column-student'].includes(
-        printCase.versionType,
-      )) {
+      if (
+        [
+          'student',
+          'teacher',
+          'one-column-student',
+          'wrapped-one-column-student',
+        ].includes(
+          printCase.versionType,
+        )
+        || printCase.versionType.startsWith('instruction-present-')
+      ) {
         assertPdfStemOptionAlignment(
           pdfPath,
-          printCase.versionType === 'one-column-student'
+          printCase.versionType.includes('one-column-student')
             ? oneColumnGroup
             : tableGroup,
+          `Print/PDF ${printCase.versionType}`,
+        )
+      }
+      if (printCase.versionType.startsWith('instruction-present-')) {
+        assertPdfInstructionRhythm(
+          pdfPath,
+          tableGroup,
+          `Print/PDF ${printCase.versionType}`,
+        )
+      }
+      if (printCase.versionType === 'wrapped-one-column-student') {
+        assertPdfWrappedOptionRhythm(
+          pdfPath,
+          oneColumnQuestion,
+          'Print/PDF wrapped-one-column-student',
+        )
+      }
+      if (printCase.versionType.startsWith('two-line-stem-')) {
+        assertPdfTwoLineStemRhythm(
+          pdfPath,
+          tableGroup.questions[0],
           `Print/PDF ${printCase.versionType}`,
         )
       }

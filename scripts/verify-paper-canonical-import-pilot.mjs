@@ -82,11 +82,19 @@ function assertPassageLetterReferenceEvidence() {
   const evidence = JSON.parse(evidenceBytes)
   assert.equal(
     evidence.schemaVersion,
-    'reading-passage-letter-reference-measurements-v2',
+    'reading-vertical-rhythm-reference-measurements-v3',
   )
   assert.deepEqual(
-    evidence.references.map((reference) => reference.passageLetter?.value),
-    ['A', 'B', 'C', 'D', undefined],
+    evidence.references.map((reference) => path.basename(reference.file)),
+    [
+      'page-03-reading-a-start.jpeg',
+      'page-04-reading-a-b.jpeg',
+      'page-05-reading-b-c.jpeg',
+      'page-06-reading-c-d.jpeg',
+      'page-07-reading-d.jpeg',
+      'page-08-seven-choices.jpeg',
+    ],
+    'the vertical-rhythm oracle digest-binds the exact G03-G08 byte set',
   )
   assert.equal(
     readingPassageLetterTypography.referenceMeasurement.path,
@@ -109,42 +117,58 @@ function assertPassageLetterReferenceEvidence() {
       referenceRatioTolerance: 0.05,
       screenBaselineStepPx: 24,
       screenTolerancePx: 1.25,
-      screenBeforeAdjustmentPx: -13,
+      screenBeforeAdjustmentPx: -16,
       pdfBaselineStepPt: 18,
-      pdfTolerancePt: 1,
-      pdfBeforeAdjustmentPt: -4.5,
+      pdfTolerancePt: 1.5,
+      pdfBeforeAdjustmentPt: -6.75,
     },
     'Renderer Typography maps the local Reading-heading ratio to actual Screen/PDF line steps',
   )
   assert.deepEqual(
     readingPassageLetterGeometryForLetter('B', 'screen'),
     {
-      precedingKind: 'prior_content',
+      precedingKind: 'prior_question_tail',
       referenceBaselineStepRatio: 2,
       referenceRatioTolerance: 0.05,
       screenBaselineStepPx: 48,
       screenTolerancePx: 1.25,
       screenBeforeAdjustmentPx: 13,
       pdfBaselineStepPt: 36,
-      pdfTolerancePt: 1,
-      pdfBeforeAdjustmentPt: null,
+      pdfTolerancePt: 1.5,
+      pdfBeforeAdjustmentPt: 18,
     },
-    'Renderer Typography maps the local prior-content ratio to the actual Screen line step',
+    'Renderer Typography maps the previous question tail to the actual Screen 2x step',
   )
   assert.deepEqual(
     readingPassageLetterGeometryForLetter('B', 'print_pdf'),
     {
-      precedingKind: 'reading_heading',
-      referenceBaselineStepRatio: 1,
+      precedingKind: 'prior_question_tail',
+      referenceBaselineStepRatio: 2,
       referenceRatioTolerance: 0.05,
-      screenBaselineStepPx: 24,
+      screenBaselineStepPx: 48,
       screenTolerancePx: 1.25,
-      screenBeforeAdjustmentPx: -13,
-      pdfBaselineStepPt: 18,
-      pdfTolerancePt: 1,
-      pdfBeforeAdjustmentPt: -4.5,
+      screenBeforeAdjustmentPx: 13,
+      pdfBaselineStepPt: 36,
+      pdfTolerancePt: 1.5,
+      pdfBeforeAdjustmentPt: 18,
     },
-    'Print/PDF uses its actual per-group Reading heading as the B-D predecessor',
+    'Print/PDF maps B-D from the previous question tail at the golden 2x step',
+  )
+  assert.deepEqual(
+    readingPassageLetterTypography.verticalRhythm.semanticRoleClasses,
+    {
+      chrome: ['part_title', 'subsection', 'meta_instruction'],
+      passageContent: [
+        'passage_title',
+        'passage_subtitle',
+        'passage_body_line',
+        'native_table_line',
+      ],
+      questionStem: ['question_stem_line'],
+      optionLine: ['option_line'],
+      teacherTail: ['answer_line', 'explanation_line'],
+    },
+    'Renderer Typography exposes one explicit semantic-role class graph',
   )
   assert.throws(
     () => assertCanonicalReadingCompanion({
@@ -169,6 +193,48 @@ function assertPassageLetterReferenceEvidence() {
     ),
     'utf8',
   )
+  const graphById = new Map(
+    evidence.normalizedContract.adjacencyGraph.map((edge) => [
+      edge.edgeId,
+      edge,
+    ]),
+  )
+  assert.deepEqual(
+    readingPassageLetterTypography.verticalRhythm.adjacencyGraph,
+    evidence.normalizedContract.adjacencyGraph,
+    'Renderer Typography binds the complete independent Reading rhythm graph',
+  )
+  assert.deepEqual(
+    readingPassageLetterTypography.verticalRhythm.targets,
+    {
+      screen: {
+        baselineStepPx: evidence.normalizedContract.screenBodyBaselineStepPx,
+        oneStepTolerancePx: 1.25,
+        twoStepTolerancePx: 1.5,
+      },
+      printPdf: {
+        baselineStepPt: evidence.normalizedContract.pdfBodyBaselineStepPt,
+        oneStepTolerancePt: 1.5,
+        twoStepTolerancePt: 1.5,
+      },
+    },
+    'Renderer Typography maps only dimensionless golden ratios to local Screen/PDF baselines',
+  )
+  assert.equal(
+    evidence.authority.scaleBoundary.includes(
+      'JPEG pixels are never treated as Screen CSS pixels or PDF points',
+    ),
+    true,
+    'golden evidence forbids JPEG-to-renderer unit conversion',
+  )
+  assert.equal(
+    evidence.toleranceDerivation.oneStepRoundedTolerance,
+    evidence.tolerances.oneStepRatio,
+  )
+  assert.equal(
+    evidence.toleranceDerivation.twoStepRoundedTolerance,
+    evidence.tolerances.twoStepRatio,
+  )
   for (const reference of evidence.references) {
     const bytes = readFileSync(path.join(repositoryRoot, reference.file))
     assert.equal(
@@ -181,51 +247,65 @@ function assertPassageLetterReferenceEvidence() {
       true,
       `${reference.file} remains indexed by the accepted reference README`,
     )
-    if (!reference.passageLetter) continue
-    const { box } = reference.passageLetter
     assert.equal(
-      Math.abs(box.height - evidence.normalizedContract.letterGlyphHeightPx)
-        <= evidence.tolerances.letterGlyphHeightPx,
+      Number.isFinite(reference.localBaselineStepPx)
+        && reference.localBaselineStepPx > 0,
       true,
-      `${reference.file} passage letter retains the measured glyph height`,
+      `${reference.file} records a page-local baseline only`,
     )
-    assert.equal(
-      Math.abs(reference.passageLetter.imageCenterOffsetPx)
-        <= evidence.tolerances.horizontalImageCenterOffsetPx,
-      true,
-      `${reference.file} passage letter is horizontally centered`,
-    )
-    assert.equal(
-      reference.localScale.baselineProxySamplesY.slice(1).every(
-        (baselineY, index) =>
-          Math.abs(
-            baselineY
-            - reference.localScale.baselineProxySamplesY[index]
-            - reference.localScale.baselineStepPx,
-          ) <= evidence.tolerances.localBaselineStepPx,
-      ),
-      true,
-      `${reference.file} supplies a stable local Latin baseline-step reference`,
-    )
-    const precedingTarget = reference.preceding.kind === 'reading-instruction'
-      ? evidence.normalizedContract.headingToLetterBaselineStepRatio
-      : evidence.normalizedContract.priorContentToLetterBaselineStepRatio
-    assert.equal(
-      Math.abs(
-        reference.localScale.precedingToLetterBaselineStepRatio
-        - precedingTarget,
-      ) <= evidence.tolerances.goldenBaselineStepRatio,
-      true,
-      `${reference.file} passage letter retains the local preceding baseline-step ratio`,
-    )
-    assert.equal(
-      Math.abs(
-        reference.localScale.letterToFollowingBaselineStepRatio
-        - evidence.normalizedContract.letterToFirstPassageBaselineStepRatio,
-      ) <= evidence.tolerances.goldenBaselineStepRatio,
-      true,
-      `${reference.file} passage letter retains the local following baseline-step ratio`,
-    )
+    for (const sample of reference.samples) {
+      const edge = graphById.get(sample.edgeId)
+      assert.ok(edge, `${reference.file} sample uses a declared semantic edge`)
+      assert.equal(
+        sample.from.role,
+        edge.fromRole
+          ?? evidence.normalizedContract.semanticRoleClasses[
+            edge.fromClass
+          ].find((role) => role === sample.from.role),
+        `${reference.file} sample has the exact from-role`,
+      )
+      assert.equal(
+        sample.to.role,
+        edge.toRole
+          ?? evidence.normalizedContract.semanticRoleClasses[
+            edge.toClass
+          ].find((role) => role === sample.to.role),
+        `${reference.file} sample has the exact to-role`,
+      )
+      if (edge.pageRelation) {
+        assert.equal(
+          sample.pageRelation,
+          edge.pageRelation,
+          `${reference.file} ${sample.edgeId} retains the exact page relation`,
+        )
+        assert.deepEqual(
+          sample.repeatForbiddenRoles ?? [],
+          edge.repeatForbiddenRoles ?? [],
+          `${reference.file} ${sample.edgeId} retains repeated-role prohibitions`,
+        )
+        continue
+      }
+      const ratioTolerance =
+        edge.baselineStepRatio === 2
+          ? evidence.tolerances.twoStepRatio
+          : evidence.tolerances.oneStepRatio
+      assert.equal(
+        Math.abs(sample.baselineStepRatio - edge.baselineStepRatio)
+          <= ratioTolerance,
+        true,
+        `${reference.file} ${sample.edgeId} retains its local dimensionless ratio`,
+      )
+      assert.equal(
+        Math.abs(
+          (sample.to.baselineProxyY - sample.from.baselineProxyY)
+            / reference.localBaselineStepPx
+            / (sample.stepCount ?? 1)
+          - sample.baselineStepRatio,
+        ) <= 0.000001,
+        true,
+        `${reference.file} ${sample.edgeId} ratio is derived from its exact semantic anchors`,
+      )
+    }
   }
   return {
     digest: sha256(evidenceBytes),
@@ -237,7 +317,7 @@ function assertReadingPredecessorOracle() {
   const oracle = JSON.parse(readFileSync(readingPredecessorOraclePath, 'utf8'))
   assert.equal(
     oracle.schemaVersion,
-    'reading-predecessor-oracles-v1',
+    'reading-rhythm-oracles-v2',
     'Reading predecessor oracle uses the reviewed schema',
   )
   assert.equal(oracle.paperId, paperId)
@@ -262,7 +342,41 @@ function assertReadingPredecessorOracle() {
       entries.length,
       `Reading predecessor oracle has unique ${consumerId} visible Groups`,
     )
+    for (const [index, entry] of entries.entries()) {
+      assert.equal(
+        entry.predecessorRole,
+        index === 0
+          ? consumerId === 'screen' ? 'subsection' : 'part_title'
+          : 'option_line',
+        `${consumerId} oracle names the exact semantic predecessor role`,
+      )
+      assert.equal(
+        entry.predecessorStructuralGroupId,
+        index === 0 ? null : entries[index - 1].groupId,
+        `${consumerId} B-D oracle binds the previous structural Group`,
+      )
+      assert.equal(
+        entry.predecessorQuestionId,
+        [null, 'q-2026-i-023', 'q-2026-i-027', 'q-2026-i-031'][index],
+        `${consumerId} oracle carries an explicit question anchor`,
+      )
+      assert.equal(
+        entry.predecessorOptionId,
+        entry.predecessorQuestionId
+          ? `option:${entry.predecessorQuestionId}:D`
+          : null,
+        `${consumerId} oracle carries the final visible option anchor`,
+      )
+    }
   }
+  assert.equal(
+    oracle.readingEnd.screenNextSectionVisibleText,
+    '第二节 (共5小题；每小题2.5分，满分12.5分)',
+  )
+  assert.equal(
+    oracle.readingEnd.printPdfNextSectionVisibleText,
+    '第二部分 七选五',
+  )
   return oracle
 }
 
@@ -557,6 +671,9 @@ function assertPassageLetterMarkup(html, consumption, consumerId, label) {
   const expectedReading = expectedReadingPassageEntries(
     consumption,
     consumerId,
+    consumerId === 'screen'
+      ? readingPredecessorOracle.screen
+      : readingPredecessorOracle.printPdf,
   )
   assert.deepEqual(
     canonicalAttributeValues(html, 'data-canonical-passage-letter'),
@@ -593,33 +710,31 @@ function assertPassageLetterMarkup(html, consumption, consumerId, label) {
       1,
       `${label} renders ${letter} once inside ${groupId}`,
     )
-    if (label.includes('Print HTML')) {
-      assert.equal(
-        html.includes(
-          `data-canonical-reading-preceding-for="${groupId}" data-canonical-reading-preceding-kind="reading_heading" data-canonical-reading-predecessor-group-id="${groupId}"`,
-        ),
-        true,
-        `${label} tags the actual Reading-heading predecessor for ${groupId}`,
-      )
-    }
   }
 }
 
 function expectedReadingPassageEntries(
   consumption,
   consumerId,
-  predecessorAnchorIdByGroupId = new Map(),
+  oracleEntries,
 ) {
   const readingSelection = consumption.selections.find(
     (selection) => selection.familyContractId === 'reading',
   )
-  return readingSelection.groupIds.map((groupId, index, groupIds) => {
+  return readingSelection.groupIds.map((groupId, index) => {
     const group = projectCanonicalConsumerGroup({
       consumption,
       familyContractId: 'reading',
       groupId,
     })
+    const oracleEntry = oracleEntries[index]
+    assert.equal(
+      oracleEntry?.groupId,
+      groupId,
+      `${consumerId} oracle follows the canonical Reading group order`,
+    )
     return {
+      ...oracleEntry,
       groupId,
       letter: group.passageLetter,
       precedingKind:
@@ -627,68 +742,105 @@ function expectedReadingPassageEntries(
           group.passageLetter,
           consumerId,
         ).precedingKind,
-      predecessorGroupId:
-        consumerId === 'screen'
-          ? index > 0 ? groupIds[index - 1] : null
-          : groupId,
-      predecessorAnchorId:
-        predecessorAnchorIdByGroupId.get(groupId)
-        ?? (consumerId === 'print_pdf' ? groupId : undefined),
+      predecessorGroupId: oracleEntry.predecessorStructuralGroupId,
     }
   })
 }
 
-function exactPrintReadingPredecessorBindings(html, consumption, label) {
-  const allMatches = [...html.matchAll(
-    /<div class="group-header" data-canonical-reading-preceding-for="([^"]+)" data-canonical-reading-preceding-kind="([^"]+)" data-canonical-reading-predecessor-group-id="([^"]+)">([^<]+)<\/div>/g,
-  )]
-  const predecessorAnchorIds = new Map(
-    readingPredecessorOracle.printPdf.map((entry) => [
-      entry.groupId,
-      entry.predecessorAnchorId,
-    ]),
-  )
+function exactPrintReadingPredecessorBindings(
+  html,
+  consumption,
+  label,
+  oracleEntries = readingPredecessorOracle.printPdf,
+) {
   const expected = expectedReadingPassageEntries(
     consumption,
     'print_pdf',
-    predecessorAnchorIds,
+    oracleEntries,
   )
-  assert.equal(
-    allMatches.length,
-    expected.length,
-    `${label} exposes only the expected tagged Reading predecessors`,
+  const matchingCloseIndex = (tagName, openingIndex) => {
+    const tokenPattern = new RegExp(`<\\/?${tagName}\\b[^>]*>`, 'gi')
+    tokenPattern.lastIndex = openingIndex
+    let depth = 0
+    for (let token = tokenPattern.exec(html); token; token = tokenPattern.exec(html)) {
+      depth += token[0].startsWith('</') ? -1 : 1
+      if (depth === 0) return token.index
+    }
+    return -1
+  }
+  const tags = [...html.matchAll(/<([a-z0-9]+)\b([^>]*)>/gi)].map(
+    (match) => {
+      const attrs = Object.fromEntries(
+        [...match[2].matchAll(/([a-z0-9:-]+)="([^"]*)"/gi)]
+          .map((attribute) => [attribute[1], attribute[2]]),
+      )
+      const close = matchingCloseIndex(match[1], match.index)
+      return {
+        tagName: match[1].toLowerCase(),
+        attrs,
+        index: match.index,
+        visibleText: close < 0
+          ? ''
+          : normalizedVisibleText(
+              html.slice(match.index + match[0].length, close)
+                .replace(/<[^>]+>/g, ' '),
+            ),
+      }
+    },
   )
-  const observations = expected.map((entry) => {
-    const sectionMarker =
-      `<section class="question-group" data-canonical-group-id="${entry.groupId}"`
+  const readingSections = tags.filter(
+    (tag) =>
+      tag.tagName === 'section'
+      && tag.attrs['data-canonical-group-id']?.includes('-reading-'),
+  )
+  const structuralGroupForTag = (tag) =>
+    readingSections
+      .filter((section) => section.index <= tag.index)
+      .at(-1)?.attrs['data-canonical-group-id'] ?? null
+  const observations = expected.map((entry, index) => {
+    const visibleMatches = tags.filter(
+      (tag) =>
+        tag.attrs['data-canonical-reading-preceding-for'] === entry.groupId,
+    )
     assert.equal(
-      countTextOccurrences(html, sectionMarker),
+      visibleMatches.length,
       1,
-      `${label} exposes one structural Print Group for ${entry.groupId}`,
+      `${label} exposes exactly one visible predecessor for ${entry.groupId}`,
     )
-    const sectionStart = html.indexOf(sectionMarker)
-    const sectionEnd = html.indexOf('</section>', sectionStart)
-    assert.notEqual(
-      sectionEnd,
-      -1,
-      `${label} closes the structural Print Group for ${entry.groupId}`,
-    )
-    const sectionHtml = html.slice(sectionStart, sectionEnd)
-    const matches = [...sectionHtml.matchAll(
-      /<div class="group-header" data-canonical-reading-preceding-for="([^"]+)" data-canonical-reading-preceding-kind="([^"]+)" data-canonical-reading-predecessor-group-id="([^"]+)">([^<]+)<\/div>/g,
-    )]
+    const [visible] = visibleMatches
+    const semanticMatches = index === 0
+      ? visibleMatches
+      : tags.filter(
+          (tag) =>
+            tag.attrs['data-canonical-reading-anchor-for'] === entry.groupId,
+        )
     assert.equal(
-      matches.length,
+      semanticMatches.length,
       1,
-      `${label} binds one tagged predecessor inside ${entry.groupId}'s structural Print Group`,
+      `${label} exposes exactly one semantic option anchor for ${entry.groupId}`,
     )
-    const [match] = matches
+    const [semantic] = semanticMatches
     return {
-      precedingForGroupId: match[1],
-      precedingKind: match[2],
-      predecessorGroupId: match[3],
-      predecessorAnchorId: entry.groupId,
-      visibleText: normalizedVisibleText(match[4]),
+      precedingForGroupId: entry.groupId,
+      precedingKind:
+        visible.attrs['data-canonical-reading-preceding-kind'],
+      predecessorRole:
+        semantic.attrs['data-canonical-reading-rhythm-role'],
+      visiblePredecessorRole:
+        visible.attrs['data-canonical-reading-rhythm-role'],
+      predecessorGroupId:
+        index === 0 ? null : structuralGroupForTag(semantic),
+      predecessorAnchorId:
+        index === 0
+          ? visible.attrs['data-canonical-reading-anchor-id']
+          : structuralGroupForTag(semantic),
+      predecessorQuestionId:
+        semantic.attrs['data-canonical-reading-predecessor-question-id']
+        ?? null,
+      predecessorOptionId:
+        semantic.attrs['data-canonical-reading-predecessor-option-id']
+        ?? null,
+      visibleText: visible.visibleText,
       predecessorPage: 'print-html',
       letterPage: 'print-html',
     }
@@ -730,10 +882,43 @@ function assertExactTaggedPredecessorObservations(
       `${label} binds ${entry.groupId} to the exact structural predecessor anchor`,
     )
     assert.equal(
-      observation.predecessorPage,
-      observation.letterPage,
-      `${label} keeps ${entry.groupId}'s predecessor and letter on one page`,
+      observation.predecessorRole,
+      entry.predecessorRole,
+      `${label} binds ${entry.groupId} to the exact semantic predecessor role`,
     )
+    assert.equal(
+      observation.predecessorQuestionId,
+      entry.predecessorQuestionId,
+      `${label} binds ${entry.groupId} to the previous final question`,
+    )
+    assert.equal(
+      observation.predecessorOptionId,
+      entry.predecessorOptionId,
+      `${label} binds ${entry.groupId} to the previous final visible option`,
+    )
+    assert.equal(
+      normalizedVisibleText(observation.visibleText).replaceAll(' ', ''),
+      normalizedVisibleText(
+        observation.visiblePredecessorRole === 'option_line'
+          || entry.predecessorRole === 'subsection'
+          ? entry.visibleText
+          : observation.visibleText,
+      ).replaceAll(' ', ''),
+      `${label} uses the exact visible predecessor line where Student output exposes it`,
+    )
+    if (observation.pageRelation === 'next_page_transition') {
+      assert.equal(
+        observation.letterPage,
+        observation.predecessorPage + 1,
+        `${label} keeps ${entry.groupId}'s cross-page transition on adjacent pages`,
+      )
+    } else {
+      assert.equal(
+        observation.predecessorPage,
+        observation.letterPage,
+        `${label} keeps ${entry.groupId}'s predecessor and letter on one page`,
+      )
+    }
   }
   assert.equal(
     observations.length,
@@ -808,6 +993,42 @@ function assertTaggedPredecessorAttacksFailClosed(
     /structural predecessor anchor/,
     `${label} rejects a predecessor structurally owned by the wrong Group`,
   )
+  assert.throws(
+    () => assertExactTaggedPredecessorObservations(
+      observations.map((observation, index) =>
+        index === 1
+          ? { ...observation, predecessorRole: 'question_block' }
+          : observation),
+      expected,
+      label,
+    ),
+    /semantic predecessor role/,
+    `${label} rejects a predecessor with the wrong semantic role`,
+  )
+  assert.throws(
+    () => assertExactTaggedPredecessorObservations(
+      observations.map((observation, index) =>
+        index === 1
+          ? { ...observation, predecessorQuestionId: 'wrong-question' }
+          : observation),
+      expected,
+      label,
+    ),
+    /previous final question/,
+    `${label} rejects a predecessor from the wrong question line`,
+  )
+  assert.throws(
+    () => assertExactTaggedPredecessorObservations(
+      observations.map((observation, index) =>
+        index === 1
+          ? { ...observation, predecessorOptionId: 'wrong-option' }
+          : observation),
+      expected,
+      label,
+    ),
+    /previous final visible option/,
+    `${label} rejects a non-final option anchor`,
+  )
 }
 
 async function measureScreenPassageLetterGeometry(
@@ -815,16 +1036,10 @@ async function measureScreenPassageLetterGeometry(
   consumption,
   label,
 ) {
-  const predecessorAnchorIds = new Map(
-    readingPredecessorOracle.screen.map((entry) => [
-      entry.groupId,
-      entry.predecessorAnchorId,
-    ]),
-  )
   const expected = expectedReadingPassageEntries(
     consumption,
     'screen',
-    predecessorAnchorIds,
+    readingPredecessorOracle.screen,
   )
   const measurements = []
   for (const [
@@ -871,6 +1086,12 @@ async function measureScreenPassageLetterGeometry(
         ...precedingTextRects.map((rect) => rect.bottom),
       )
       const style = getComputedStyle(element)
+      const structuralAnchor = precedingElement.closest(
+        '[data-paper-browse-anchor]',
+      )
+      const predecessorRole = precedingElement.getAttribute(
+        'data-canonical-reading-rhythm-role',
+      )
       return {
         letterCenterX: letterRect.x + letterRect.width / 2,
         readingCenterX: readingRect.x + readingRect.width / 2,
@@ -884,12 +1105,22 @@ async function measureScreenPassageLetterGeometry(
         precedingKind: precedingElement.getAttribute(
           'data-canonical-reading-preceding-kind',
         ),
-        predecessorGroupId: precedingElement.getAttribute(
-          'data-canonical-reading-predecessor-group-id',
-        ),
-        predecessorAnchorId: precedingElement.getAttribute(
+        predecessorRole,
+        visiblePredecessorRole: predecessorRole,
+        predecessorGroupId:
+          predecessorRole === 'option_line'
+            ? structuralAnchor?.getAttribute('data-paper-browse-anchor')
+            : null,
+        predecessorAnchorId: structuralAnchor?.getAttribute(
           'data-paper-browse-anchor',
         ),
+        predecessorQuestionId: precedingElement.getAttribute(
+          'data-canonical-reading-predecessor-question-id',
+        ),
+        predecessorOptionId: precedingElement.getAttribute(
+          'data-canonical-reading-predecessor-option-id',
+        ),
+        visibleText: precedingElement.textContent,
         precedingInkBottom,
         precedingBaselineStepPx:
           letterTextRect.bottom - precedingInkBottom,
@@ -916,6 +1147,26 @@ async function measureScreenPassageLetterGeometry(
       geometry.predecessorAnchorId,
       expected[index].predecessorAnchorId,
       `${label} binds ${groupId} to its exact visible predecessor anchor`,
+    )
+    assert.equal(
+      geometry.predecessorRole,
+      expected[index].predecessorRole,
+      `${label} binds ${groupId} to the exact predecessor role`,
+    )
+    assert.equal(
+      geometry.predecessorQuestionId,
+      expected[index].predecessorQuestionId,
+      `${label} binds ${groupId} to the previous final question`,
+    )
+    assert.equal(
+      geometry.predecessorOptionId,
+      expected[index].predecessorOptionId,
+      `${label} binds ${groupId} to the previous final option`,
+    )
+    assert.equal(
+      normalizedVisibleText(geometry.visibleText).replaceAll(' ', ''),
+      normalizedVisibleText(expected[index].visibleText).replaceAll(' ', ''),
+      `${label} binds ${groupId} to the exact visible line`,
     )
     const tolerances = passageLetterReference.evidence.tolerances
     assert.equal(
@@ -980,6 +1231,630 @@ async function measureScreenPassageLetterGeometry(
   return measurements
 }
 
+async function assertScreenReadingVerticalRhythm(
+  page,
+  consumption,
+  label,
+  {
+    requireFullVariants = false,
+    requireWrappedOption = false,
+  } = {},
+) {
+  const readingSelection = consumption.selections.find(
+    (selection) => selection.familyContractId === 'reading',
+  )
+  const measurements = await page.evaluate((groupIds) => {
+    const lineBottoms = (element) => {
+      const walker = document.createTreeWalker(
+        element,
+        NodeFilter.SHOW_TEXT,
+        {
+          acceptNode: (node) =>
+            node.textContent?.trim()
+              ? NodeFilter.FILTER_ACCEPT
+              : NodeFilter.FILTER_REJECT,
+        },
+      )
+      const bottoms = []
+      for (let node = walker.nextNode(); node; node = walker.nextNode()) {
+        const range = document.createRange()
+        range.selectNodeContents(node)
+        for (const rect of range.getClientRects()) {
+          if (rect.width > 0 && rect.height > 0) bottoms.push(rect.bottom)
+        }
+      }
+      return [...bottoms]
+        .sort((left, right) => left - right)
+        .reduce((lines, bottom) => {
+          const prior = lines.at(-1)
+          if (prior === undefined || Math.abs(bottom - prior) > 1) {
+            lines.push(bottom)
+          } else {
+            lines[lines.length - 1] = Math.max(prior, bottom)
+          }
+          return lines
+        }, [])
+    }
+    return groupIds.map((groupId) => {
+      const card = document.querySelector(
+        `[data-paper-browse-anchor="${groupId}"]`,
+      )
+      if (!card) return null
+      const letter = card.querySelector(
+        '[data-canonical-reading-rhythm-role="passage_letter"]',
+      )
+      const content = [...card.querySelectorAll(
+        [
+          '[data-canonical-reading-rhythm-role="passage_title"]',
+          '[data-canonical-reading-rhythm-role="passage_subtitle"]',
+          '[data-canonical-reading-rhythm-role="passage_body_line"]',
+          '[data-canonical-reading-rhythm-role="native_table_line"]',
+        ].join(','),
+      )].map((element) => ({
+        role: element.getAttribute('data-canonical-reading-rhythm-role'),
+        lines: lineBottoms(element),
+      }))
+      const questions = [...card.querySelectorAll(
+        '[data-canonical-reading-rhythm-role="question_block"]',
+      )].map((question) => ({
+        questionId: question.getAttribute('data-canonical-question-id'),
+        stem: lineBottoms(question.querySelector(
+          '[data-canonical-reading-rhythm-role="question_stem_line"]',
+        )),
+        options: [...question.querySelectorAll(
+          '[data-canonical-reading-rhythm-role="option_line"]',
+        )].map((option) => ({
+          optionId: option.getAttribute('data-canonical-option-id'),
+          lines: lineBottoms(option),
+        })),
+        placementMode: question.querySelector(
+          '[data-canonical-placement-signature]',
+        )?.className ?? '',
+      }))
+      return {
+        groupId,
+        letter: lineBottoms(letter),
+        content,
+        questions,
+      }
+    })
+  }, readingSelection.groupIds)
+  assert.equal(
+    measurements.every(Boolean),
+    true,
+    `${label} exposes every Reading structural Group`,
+  )
+  const targets = readingPassageLetterTypography.verticalRhythm.targets.screen
+  const assertStep = (actual, ratio, edgeId) => assert.equal(
+    Math.abs(actual - targets.baselineStepPx * ratio)
+      <= (ratio === 2
+        ? targets.twoStepTolerancePx
+        : targets.oneStepTolerancePx),
+    true,
+    `${label} ${edgeId} keeps ${ratio}x rhythm: ${JSON.stringify({
+      actual,
+      expected: targets.baselineStepPx * ratio,
+    })}`,
+  )
+  const stemLineCounts = new Set()
+  const optionRowCounts = new Set()
+  const placementModes = new Set()
+  let hasTitle = false
+  let hasNoTitle = false
+  let hasNativeTable = false
+  let hasWrappedOption = false
+  for (const group of measurements) {
+    assert.equal(group.letter.length, 1, `${label} has one letter line`)
+    assert.equal(group.content.length > 0, true, `${label} has Reading content`)
+    hasTitle ||= group.content.some((entry) => entry.role === 'passage_title')
+    hasNoTitle ||= !group.content.some(
+      (entry) => entry.role === 'passage_title',
+    )
+    hasNativeTable ||= group.content.some(
+      (entry) => entry.role === 'native_table_line',
+    )
+    for (const entry of group.content) {
+      assert.equal(entry.lines.length > 0, true, `${label} has no empty role`)
+      for (let index = 1; index < entry.lines.length; index += 1) {
+        assertStep(
+          entry.lines[index] - entry.lines[index - 1],
+          1,
+          'passage_content_internal',
+        )
+      }
+    }
+    for (let index = 1; index < group.content.length; index += 1) {
+      assertStep(
+        group.content[index].lines[0]
+          - group.content[index - 1].lines.at(-1),
+        1,
+        'passage_content_internal',
+      )
+    }
+    const firstStem = group.questions[0]?.stem
+    assert.equal(firstStem?.length > 0, true, `${label} has a first stem`)
+    assertStep(
+      firstStem[0] - group.content.at(-1).lines.at(-1),
+      2,
+      'passage_to_first_question',
+    )
+    for (const [questionIndex, question] of group.questions.entries()) {
+      assert.equal(
+        question.questionId,
+        projectCanonicalConsumerGroup({
+          consumption,
+          familyContractId: 'reading',
+          groupId: group.groupId,
+        }).questions[questionIndex].questionId,
+        `${label} keeps exact Question order`,
+      )
+      stemLineCounts.add(question.stem.length)
+      for (let index = 1; index < question.stem.length; index += 1) {
+        assertStep(
+          question.stem[index] - question.stem[index - 1],
+          1,
+          'question_stem_internal',
+        )
+      }
+      const optionLines = question.options.flatMap((option) => option.lines)
+      const distinctOptionRows = [...optionLines]
+        .sort((left, right) => left - right)
+        .reduce((rows, bottom) => {
+          if (rows.at(-1) === undefined || Math.abs(bottom - rows.at(-1)) > 1) {
+            rows.push(bottom)
+          }
+          return rows
+        }, [])
+      optionRowCounts.add(distinctOptionRows.length)
+      if (question.placementMode.includes('one_column')) {
+        placementModes.add('one_column')
+      } else if (question.placementMode.includes('two_by_two')) {
+        placementModes.add('two_by_two')
+      } else if (question.placementMode.includes('four_columns')) {
+        placementModes.add('four_columns')
+      }
+      hasWrappedOption ||= question.options.some(
+        (option) => option.lines.length > 1,
+      )
+      assertStep(
+        distinctOptionRows[0] - question.stem.at(-1),
+        1,
+        'stem_to_options',
+      )
+      for (let index = 1; index < distinctOptionRows.length; index += 1) {
+        assertStep(
+          distinctOptionRows[index] - distinctOptionRows[index - 1],
+          1,
+          'option_line_internal',
+        )
+      }
+      const nextQuestion = group.questions[questionIndex + 1]
+      if (nextQuestion) {
+        assertStep(
+          nextQuestion.stem[0] - distinctOptionRows.at(-1),
+          1,
+          'question_to_next_question',
+        )
+      }
+    }
+  }
+  assert.equal(hasTitle && hasNoTitle, true, `${label} covers title/no-title`)
+  assert.equal(hasNativeTable, true, `${label} covers a native Reading table`)
+  if (requireFullVariants) {
+    assert.equal(
+      stemLineCounts.has(1) && stemLineCounts.has(2),
+      true,
+      `${label} covers one- and two-line stems`,
+    )
+    assert.equal(
+      [1, 2, 4].every((rowCount) => optionRowCounts.has(rowCount)),
+      true,
+      `${label} covers one-, two-, and four-row option layouts`,
+    )
+    assert.deepEqual(
+      [...placementModes].sort(),
+      ['four_columns', 'one_column', 'two_by_two'],
+      `${label} covers every canonical ABCD placement mode`,
+    )
+  }
+  if (requireWrappedOption) {
+    assert.equal(
+      hasWrappedOption,
+      true,
+      `${label} covers wrapped one-column options`,
+    )
+  }
+  const chromeGeometry = await page.evaluate((firstGroupId) => {
+    const firstCard = document.querySelector(
+      `[data-paper-browse-anchor="${firstGroupId}"]`,
+    )
+    const roleElements = [...document.querySelectorAll(
+      [
+        '[data-canonical-reading-rhythm-role="part_title"]',
+        '[data-canonical-reading-rhythm-role="subsection"]',
+        '[data-canonical-reading-rhythm-role="meta_instruction"]',
+      ].join(','),
+    )].filter((element) =>
+      firstCard
+      && (element.compareDocumentPosition(firstCard)
+        & Node.DOCUMENT_POSITION_FOLLOWING))
+    const bottom = (element) => {
+      const range = document.createRange()
+      range.selectNodeContents(element)
+      return Math.max(...[...range.getClientRects()].map((rect) => rect.bottom))
+    }
+    const letter = firstCard?.querySelector(
+      '[data-canonical-reading-rhythm-role="passage_letter"]',
+    )
+    return {
+      roles: roleElements.map((element) => ({
+        role: element.getAttribute('data-canonical-reading-rhythm-role'),
+        bottom: bottom(element),
+      })),
+      letterBottom: letter ? bottom(letter) : null,
+    }
+  }, readingSelection.groupIds[0])
+  assert.equal(
+    chromeGeometry.roles.length > 0,
+    true,
+    `${label} exposes Reading chrome`,
+  )
+  for (let index = 1; index < chromeGeometry.roles.length; index += 1) {
+    assertStep(
+      chromeGeometry.roles[index].bottom
+        - chromeGeometry.roles[index - 1].bottom,
+      1,
+      'chrome_internal',
+    )
+  }
+  assertStep(
+    chromeGeometry.letterBottom - chromeGeometry.roles.at(-1).bottom,
+    1,
+    'chrome_to_a',
+  )
+  const ending = readingPredecessorOracle.readingEnd
+  assert.equal(
+    await page.locator(
+      `[data-canonical-reading-following-for="${ending.groupId}"]`,
+    ).count(),
+    1,
+    `${label} exposes exactly one post-Reading section anchor`,
+  )
+  const endGeometry = await page.evaluate((oracle) => {
+    const option = document.querySelector(
+      `[data-canonical-reading-before-section="${oracle.nextSectionId}"]`,
+    )
+    const section = document.querySelector(
+      `[data-canonical-reading-following-for="${oracle.groupId}"]`,
+    )
+    const bottom = (element) => {
+      const range = document.createRange()
+      range.selectNodeContents(element)
+      return Math.max(...[...range.getClientRects()].map((rect) => rect.bottom))
+    }
+    if (!option || !section) return null
+    return {
+      optionRole: option.getAttribute('data-canonical-reading-rhythm-role'),
+      optionQuestionId: option.getAttribute(
+        'data-canonical-reading-predecessor-question-id',
+      ),
+      optionId: option.getAttribute(
+        'data-canonical-reading-predecessor-option-id',
+      ),
+      sectionRole: section.getAttribute(
+        'data-canonical-reading-rhythm-role',
+      ),
+      sectionText: section.textContent?.trim(),
+      step: bottom(section) - bottom(option),
+    }
+  }, ending)
+  assert.ok(endGeometry, `${label} exposes the Reading D ending boundary`)
+  assert.equal(endGeometry.optionRole, 'option_line')
+  assert.equal(endGeometry.optionQuestionId, ending.predecessorQuestionId)
+  assert.equal(endGeometry.optionId, ending.predecessorOptionId)
+  assert.equal(endGeometry.sectionRole, ending.nextSectionRole)
+  assert.equal(
+    normalizedVisibleText(endGeometry.sectionText),
+    normalizedVisibleText(ending.screenNextSectionVisibleText),
+  )
+  assertStep(endGeometry.step, 2, 'reading_to_next_section_same_page')
+  return measurements
+}
+
+async function assertPrintHtmlReadingVerticalRhythm(
+  page,
+  html,
+  consumption,
+  label,
+  oracleEntries = readingPredecessorOracle.printPdf,
+) {
+  await page.setContent(html, { waitUntil: 'load' })
+  await page.evaluate(() => document.fonts.ready)
+  const groupIds = consumption.selections.find(
+    (selection) => selection.familyContractId === 'reading',
+  ).groupIds
+  const observations = await page.evaluate((readingGroupIds) => {
+    const lineBottoms = (element) => {
+      if (!element) return []
+      const walker = document.createTreeWalker(
+        element,
+        NodeFilter.SHOW_TEXT,
+        {
+          acceptNode: (node) =>
+            node.textContent?.trim()
+              ? NodeFilter.FILTER_ACCEPT
+              : NodeFilter.FILTER_REJECT,
+        },
+      )
+      const bottoms = []
+      for (let node = walker.nextNode(); node; node = walker.nextNode()) {
+        const range = document.createRange()
+        range.selectNodeContents(node)
+        for (const rect of range.getClientRects()) {
+          if (rect.width > 0 && rect.height > 0) bottoms.push(rect.bottom)
+        }
+      }
+      return bottoms.sort((left, right) => left - right).reduce(
+        (lines, bottom) => {
+          if (
+            lines.at(-1) === undefined
+            || Math.abs(bottom - lines.at(-1)) > 1
+          ) {
+            lines.push(bottom)
+          }
+          return lines
+        },
+        [],
+      )
+    }
+    const groups = readingGroupIds.map((groupId) => {
+      const group = document.querySelector(
+        `[data-canonical-group-id="${groupId}"]`,
+      )
+      if (!group) return null
+      const content = [...group.querySelectorAll(
+        [
+          '[data-canonical-reading-rhythm-role="passage_title"]',
+          '[data-canonical-reading-rhythm-role="passage_subtitle"]',
+          '[data-canonical-reading-rhythm-role="passage_body_line"]',
+          '[data-canonical-reading-rhythm-role="native_table_line"]',
+        ].join(','),
+      )].map((element) => ({
+        role: element.getAttribute('data-canonical-reading-rhythm-role'),
+        lines: lineBottoms(element),
+      }))
+      const questions = [...group.querySelectorAll(
+        '[data-canonical-reading-rhythm-role="question_block"]',
+      )].map((question) => ({
+        stem: lineBottoms(question.querySelector(
+          '[data-canonical-reading-rhythm-role="question_stem_line"]',
+        )),
+        options: [...question.querySelectorAll(
+          '[data-canonical-reading-rhythm-role="option_line"]',
+        )].map((option) => lineBottoms(option)),
+        answer: lineBottoms(question.querySelector(
+          '[data-canonical-reading-rhythm-role="answer_line"]',
+        )),
+        explanation: lineBottoms(question.querySelector(
+          '[data-canonical-reading-rhythm-role="explanation_line"]',
+        )),
+      }))
+      const visiblePredecessor = document.querySelector(
+        `[data-canonical-reading-preceding-for="${groupId}"]`,
+      )
+      return {
+        groupId,
+        letter: lineBottoms(group.querySelector(
+          '[data-canonical-reading-rhythm-role="passage_letter"]',
+        )),
+        content,
+        questions,
+        transition: {
+          predecessor: lineBottoms(visiblePredecessor).at(-1),
+          predecessorRole: visiblePredecessor?.getAttribute(
+            'data-canonical-reading-rhythm-role',
+          ),
+        },
+      }
+    })
+    const ending = document.querySelector(
+      '[data-canonical-reading-following-for]',
+    )
+    const endingCount = document.querySelectorAll(
+      '[data-canonical-reading-following-for]',
+    ).length
+    const endingGroupId = ending?.getAttribute(
+      'data-canonical-reading-following-for',
+    )
+    const endingPredecessor = document.querySelector(
+      `[data-canonical-reading-before-section]`,
+    )
+    const allEndingPredecessors = [...document.querySelectorAll(
+      '[data-canonical-reading-before-section]',
+    )]
+    return {
+      groups,
+      ending: ending && endingPredecessor
+        ? {
+            endingCount,
+            groupId: endingGroupId,
+            predecessorCount: allEndingPredecessors.length,
+            predecessorRole: allEndingPredecessors.at(-1).getAttribute(
+              'data-canonical-reading-rhythm-role',
+            ),
+            predecessorQuestionId: allEndingPredecessors.at(-1).getAttribute(
+              'data-canonical-reading-predecessor-question-id',
+            ),
+            predecessorOptionId: allEndingPredecessors.at(-1).getAttribute(
+              'data-canonical-reading-predecessor-option-id',
+            ),
+            sectionText: ending.textContent?.trim(),
+            step:
+              lineBottoms(ending)[0]
+              - lineBottoms(allEndingPredecessors.at(-1)).at(-1),
+          }
+        : null,
+    }
+  }, groupIds)
+  assert.equal(
+    observations.groups.every(Boolean),
+    true,
+    `${label} exposes every Reading group`,
+  )
+  const target =
+    readingPassageLetterTypography.verticalRhythm.targets.screen
+  const assertStep = (actual, ratio, edgeId) => assert.equal(
+    Math.abs(actual - target.baselineStepPx * ratio)
+      <= (ratio === 2
+        ? target.twoStepTolerancePx
+        : target.oneStepTolerancePx),
+    true,
+    `${label} ${edgeId} keeps ${ratio}x rhythm: ${JSON.stringify({
+      actual,
+      expected: target.baselineStepPx * ratio,
+    })}`,
+  )
+  for (const [groupIndex, group] of observations.groups.entries()) {
+    assert.equal(group.letter.length, 1, `${label} has one passage letter`)
+    assert.equal(group.content.length > 0, true, `${label} has passage content`)
+    for (const entry of group.content) {
+      for (let index = 1; index < entry.lines.length; index += 1) {
+        assertStep(
+          entry.lines[index] - entry.lines[index - 1],
+          1,
+          'passage_content_internal',
+        )
+      }
+    }
+    for (let index = 1; index < group.content.length; index += 1) {
+      assertStep(
+        group.content[index].lines[0]
+          - group.content[index - 1].lines.at(-1),
+        1,
+        'passage_content_internal',
+      )
+    }
+    assertStep(
+      group.questions[0].stem[0] - group.content.at(-1).lines.at(-1),
+      2,
+      'passage_to_first_question',
+    )
+    for (const [questionIndex, question] of group.questions.entries()) {
+      for (let index = 1; index < question.stem.length; index += 1) {
+        assertStep(
+          question.stem[index] - question.stem[index - 1],
+          1,
+          'question_stem_internal',
+        )
+      }
+      const optionRows = question.options.flatMap((lines) => lines)
+        .sort((left, right) => left - right)
+        .reduce((rows, bottom) => {
+          if (rows.at(-1) === undefined || Math.abs(bottom - rows.at(-1)) > 1) {
+            rows.push(bottom)
+          }
+          return rows
+        }, [])
+      assertStep(
+        optionRows[0] - question.stem.at(-1),
+        1,
+        'stem_to_options',
+      )
+      for (let index = 1; index < optionRows.length; index += 1) {
+        assertStep(
+          optionRows[index] - optionRows[index - 1],
+          1,
+          'option_line_internal',
+        )
+      }
+      let tail = optionRows.at(-1)
+      if (question.answer.length > 0) {
+        assertStep(
+          question.answer[0] - tail,
+          1,
+          'option_to_answer',
+        )
+        tail = question.answer.at(-1)
+      }
+      if (question.explanation.length > 0) {
+        assertStep(
+          question.explanation[0] - tail,
+          1,
+          'answer_to_explanation',
+        )
+        for (
+          let index = 1;
+          index < question.explanation.length;
+          index += 1
+        ) {
+          assertStep(
+            question.explanation[index] - question.explanation[index - 1],
+            1,
+            'answer_to_explanation',
+          )
+        }
+        tail = question.explanation.at(-1)
+      }
+      const nextQuestion = group.questions[questionIndex + 1]
+      if (nextQuestion) {
+        assertStep(
+          nextQuestion.stem[0] - tail,
+          1,
+          question.answer.length > 0
+            ? 'teacher_tail_to_next_question'
+            : 'question_to_next_question',
+        )
+      }
+    }
+    assertStep(
+      group.letter[0] - group.transition.predecessor,
+      groupIndex === 0 ? 1 : 2,
+      groupIndex === 0 ? 'chrome_to_a' : 'reading_passage_transition',
+    )
+    assert.equal(
+      group.transition.predecessorRole,
+      groupIndex === 0
+        ? oracleEntries[0].predecessorRole
+        : label.includes('Teacher')
+          ? 'explanation_line'
+          : 'option_line',
+      `${label} uses the exact visible transition role`,
+    )
+  }
+  const ending = readingPredecessorOracle.readingEnd
+  assert.ok(observations.ending, `${label} exposes Reading D ending`)
+  assert.equal(
+    observations.ending.endingCount,
+    1,
+    `${label} exposes exactly one post-Reading section anchor`,
+  )
+  assert.equal(observations.ending.groupId, ending.groupId)
+  assert.equal(observations.ending.predecessorCount, 1)
+  assert.equal(
+    observations.ending.predecessorQuestionId,
+    ending.predecessorQuestionId,
+  )
+  assert.equal(
+    observations.ending.predecessorOptionId,
+    ending.predecessorOptionId,
+  )
+  assert.equal(
+    observations.ending.predecessorRole,
+    label.includes('Teacher') ? 'explanation_line' : 'option_line',
+  )
+  assert.equal(
+    normalizedVisibleText(observations.ending.sectionText),
+    normalizedVisibleText(ending.printPdfNextSectionVisibleText),
+  )
+  assertStep(
+    observations.ending.step,
+    2,
+    label.includes('Teacher')
+      ? 'teacher_reading_to_next_section_same_page'
+      : 'reading_to_next_section_same_page',
+  )
+}
+
 function assertStudentTeacherStructuralParity(studentHtml, teacherHtml) {
   const student = structuralArtifactIdentity(studentHtml)
   const teacher = structuralArtifactIdentity(teacherHtml)
@@ -997,6 +1872,28 @@ function assertStudentTeacherStructuralParity(studentHtml, teacherHtml) {
       teacherQuestionIds.has(questionId),
       true,
       `Teacher Print HTML retains Student question ${questionId}`,
+    )
+  }
+}
+
+function assertNoReadingRolesInNonReadingPrintGroups(html, asset, label) {
+  for (const group of Object.values(asset.content.groups)
+    .filter((candidate) => candidate.groupType !== 'reading')) {
+    const sectionStart = html.indexOf(
+      `data-canonical-group-id="${group.groupId}"`,
+    )
+    if (sectionStart < 0) continue
+    const sectionEnd = html.indexOf('</section>', sectionStart)
+    assert.notEqual(
+      sectionEnd,
+      -1,
+      `${label} closes ${group.groupId}'s structural section`,
+    )
+    assert.equal(
+      html.slice(sectionStart, sectionEnd)
+        .includes('data-canonical-reading-rhythm-role='),
+      false,
+      `${label} exposes no Reading rhythm roles in ${group.groupId}`,
     )
   }
 }
@@ -1423,6 +2320,10 @@ function firstPdfWordBox(pdfPath, page, word) {
 
 function normalizedPdfToken(value) {
   return String(value)
+    .replace(/&#x([0-9a-f]+);/gi, (_match, codePoint) =>
+      String.fromCodePoint(Number.parseInt(codePoint, 16)))
+    .replace(/&#([0-9]+);/g, (_match, codePoint) =>
+      String.fromCodePoint(Number.parseInt(codePoint, 10)))
     .replaceAll('&amp;', '&')
     .replaceAll('&lt;', '<')
     .replaceAll('&gt;', '>')
@@ -1451,6 +2352,239 @@ function pdfWordsWithBoxes(pdfPath) {
     })))
 }
 
+function assertPdfReadingQuestionsNotSplit(pdfPath, consumption, label) {
+  const words = pdfWordsWithBoxes(pdfPath)
+  const readingSelection = consumption.selections.find(
+    (selection) => selection.familyContractId === 'reading',
+  )
+  for (const groupId of readingSelection.groupIds) {
+    const group = projectCanonicalConsumerGroup({
+      consumption,
+      familyContractId: 'reading',
+      groupId,
+    })
+    for (const question of group.questions) {
+      const stemTokens = canonicalInlineText(question.stemContent)
+        .split(/\s+/)
+        .map(normalizedPdfToken)
+        .filter(Boolean)
+        .slice(0, 5)
+      const stemIndexes = words.flatMap((word, wordIndex) =>
+        stemTokens.every(
+          (token, tokenIndex) =>
+            words[wordIndex + tokenIndex]?.text === token,
+        ) ? [wordIndex] : [])
+      assert.equal(
+        stemIndexes.length,
+        1,
+        `${label} locates exactly one stem for Question ${question.questionNo}`,
+      )
+      const [stemIndex] = stemIndexes
+      assert.equal(
+        words[stemIndex - 1]?.text,
+        String(question.questionNo),
+        `${label} binds the exact question number to its stem`,
+      )
+      const finalOption = question.options.at(-1)
+      const finalOptionTokens = canonicalInlineText(finalOption.content)
+        .split(/\s+/)
+        .map(normalizedPdfToken)
+        .filter(Boolean)
+      const finalOptionIndexes = words.flatMap((word, wordIndex) =>
+        wordIndex > stemIndex
+        && finalOptionTokens.every(
+          (token, tokenIndex) =>
+            words[wordIndex + tokenIndex]?.text === token,
+        ) ? [wordIndex] : [])
+      assert.equal(
+        finalOptionIndexes.length,
+        1,
+        `${label} locates exactly one final option for Question ${question.questionNo}`,
+      )
+      assert.equal(
+        words[stemIndex].page,
+        words[finalOptionIndexes[0]].page,
+        `${label} does not split Question ${question.questionNo} between its stem and final option`,
+      )
+    }
+  }
+}
+
+function exactPdfSequenceIndexes(words, tokens, startIndex = 0) {
+  return words.flatMap((word, wordIndex) =>
+    wordIndex >= startIndex
+    && tokens.every(
+      (token, tokenIndex) => words[wordIndex + tokenIndex]?.text === token,
+    ) ? [wordIndex] : [])
+}
+
+function assertPdfReadingContinuationAndEnd(pdfPath, consumption, label) {
+  const words = pdfWordsWithBoxes(pdfPath)
+  const readingSelection = consumption.selections.find(
+    (selection) => selection.familyContractId === 'reading',
+  )
+  let crossPageContinuationCount = 0
+  for (const groupId of readingSelection.groupIds) {
+    const group = projectCanonicalConsumerGroup({
+      consumption,
+      familyContractId: 'reading',
+      groupId,
+    })
+    const firstTokens = normalizedVisibleText(group.blocks[0].text)
+      .split(/\s+/)
+      .map(normalizedPdfToken)
+      .filter(Boolean)
+      .slice(0, 4)
+    const firstIndexes = exactPdfSequenceIndexes(words, firstTokens)
+    assert.equal(
+      firstIndexes.length,
+      1,
+      `${label} does not repeat ${groupId}'s letter or first title/body line on continuation pages`,
+    )
+    const firstIndex = firstIndexes[0]
+    assert.equal(
+      words[firstIndex - 1]?.text,
+      group.passageLetter,
+      `${label} places ${group.passageLetter} only at ${groupId}'s exact first content line`,
+    )
+    const finalBlock = group.blocks.at(-1)
+    const finalTokens = normalizedVisibleText(finalBlock.text)
+      .split(/\s+/)
+      .map(normalizedPdfToken)
+      .filter(Boolean)
+      .slice(-4)
+    const firstQuestionTokens = canonicalInlineText(
+      group.questions[0].stemContent,
+    ).split(/\s+/).map(normalizedPdfToken).filter(Boolean).slice(0, 5)
+    const firstQuestionIndexes = exactPdfSequenceIndexes(
+      words,
+      firstQuestionTokens,
+      firstIndex,
+    )
+    assert.equal(
+      firstQuestionIndexes.length,
+      1,
+      `${label} locates exactly one first-question line for ${groupId}`,
+    )
+    const finalIndexes = exactPdfSequenceIndexes(
+      words,
+      finalTokens,
+      firstIndex,
+    ).filter((wordIndex) => wordIndex < firstQuestionIndexes[0])
+    assert.equal(
+      finalIndexes.length,
+      1,
+      `${label} locates exactly one final original-text line for ${groupId}`,
+    )
+    const finalLineWords = words.slice(
+      finalIndexes[0],
+      finalIndexes[0] + finalTokens.length,
+    )
+    const firstQuestionWord = words[firstQuestionIndexes[0]]
+    const finalLinePage = finalLineWords[0].page
+    if (firstQuestionWord.page === finalLinePage) {
+      const actual =
+        (firstQuestionWord.yMin + firstQuestionWord.yMax) / 2
+        - median(finalLineWords.map(
+          (word) => (word.yMin + word.yMax) / 2,
+        ))
+      const target =
+        readingPassageLetterTypography.verticalRhythm.targets.printPdf
+      assert.equal(
+        Math.abs(actual - target.baselineStepPt * 2)
+          <= target.twoStepTolerancePt,
+        true,
+        `${label} keeps ${groupId} final original-text line to first question at 2x: ${JSON.stringify({
+          actual,
+          expected: target.baselineStepPt * 2,
+        })}`,
+      )
+    } else {
+      assert.equal(
+        firstQuestionWord.page === finalLinePage + 1
+        && firstQuestionWord.yMax < 130,
+        true,
+        `${label} keeps ${groupId}'s cross-page first question at the adjacent page head`,
+      )
+    }
+    if (words[firstIndex].page !== words[finalIndexes[0]].page) {
+      crossPageContinuationCount += 1
+    }
+  }
+  assert.equal(
+    crossPageContinuationCount > 0,
+    true,
+    `${label} executes at least one same-passage cross-page continuation`,
+  )
+
+  const ending = readingPredecessorOracle.readingEnd
+  const finalGroup = projectCanonicalConsumerGroup({
+    consumption,
+    familyContractId: 'reading',
+    groupId: ending.groupId,
+  })
+  const finalQuestion = finalGroup.questions.at(-1)
+  assert.equal(finalQuestion.questionId, ending.predecessorQuestionId)
+  assert.equal(finalQuestion.options.at(-1).optionId, ending.predecessorOptionId)
+  const finalOptionTokens = canonicalInlineText(
+    finalQuestion.options.at(-1).content,
+  ).split(/\s+/).map(normalizedPdfToken).filter(Boolean)
+  const finalOptionIndexes = exactPdfSequenceIndexes(words, finalOptionTokens)
+  assert.equal(
+    finalOptionIndexes.length,
+    1,
+    `${label} binds Reading D ending to its exact final option`,
+  )
+  const sectionTokens = ending.printPdfNextSectionVisibleText
+    .split(/\s+/)
+    .map(normalizedPdfToken)
+    .filter(Boolean)
+  const sectionIndexes = exactPdfSequenceIndexes(words, sectionTokens)
+  assert.equal(
+    sectionIndexes.length,
+    1,
+    `${label} locates exactly one post-Reading section heading`,
+  )
+  const sectionIndex = sectionIndexes[0]
+  const visibleTail = words[sectionIndex - 1]
+  const finalOption = words[finalOptionIndexes[0]]
+  assert.equal(
+    visibleTail.page,
+    finalOption.page,
+    `${label} keeps the Student option or Teacher answer/explanation tail with Reading D's final question`,
+  )
+  const section = words[sectionIndex]
+  assert.equal(
+    section.page === visibleTail.page
+    || section.page === visibleTail.page + 1,
+    true,
+    `${label} keeps the post-Reading section on the same or immediately following page`,
+  )
+  if (section.page === visibleTail.page) {
+    const actual = (
+      (section.yMin + section.yMax) / 2
+      - (visibleTail.yMin + visibleTail.yMax) / 2
+    )
+    const target =
+      readingPassageLetterTypography.verticalRhythm.targets.printPdf
+    assert.equal(
+      Math.abs(actual - target.baselineStepPt * 2)
+        <= target.twoStepTolerancePt,
+      true,
+      `${label} keeps Reading D to next section at 2x: ${JSON.stringify({
+        actual,
+        expected: target.baselineStepPt * 2,
+      })}`,
+    )
+  } else {
+    assert.equal(
+      section.yMax < 130,
+      true,
+      `${label} starts the cross-page post-Reading section at the next A4 page head`,
+    )
+  }
+}
+
 function median(values) {
   const sorted = [...values].sort((left, right) => left - right)
   const midpoint = Math.floor(sorted.length / 2)
@@ -1465,9 +2599,14 @@ function assertPdfPassageLetterGeometry(
   pageBoxes,
   predecessorBindings,
   label,
+  oracleEntries = readingPredecessorOracle.printPdf,
 ) {
   const words = pdfWordsWithBoxes(pdfPath)
-  const expected = expectedReadingPassageEntries(consumption, 'print_pdf')
+  const expected = expectedReadingPassageEntries(
+    consumption,
+    'print_pdf',
+    oracleEntries,
+  )
   const measurements = []
   for (const {
     groupId,
@@ -1503,18 +2642,54 @@ function assertPdfPassageLetterGeometry(
       predecessorBinding,
       `${label} carries the exact Print HTML predecessor binding for ${groupId}`,
     )
-    const predecessorTokens = predecessorBinding.visibleText
+    let predecessorTokens = predecessorBinding.visibleText
       .split(/\s+/)
       .map(normalizedPdfToken)
       .filter(Boolean)
-    const predecessorIndexes = words.flatMap((word, wordIndex) =>
+    let predecessorIndexes = words.flatMap((word, wordIndex) =>
       predecessorTokens.every(
         (token, tokenIndex) => words[wordIndex + tokenIndex]?.text === token,
       ) ? [wordIndex] : [])
+    if (predecessorIndexes.length === 0) {
+      const semanticTailTokens = [
+        ...predecessorBinding.visibleText.matchAll(
+          /[\p{Script=Han}]{2,}|[A-Za-z0-9-]{3,}/gu,
+        ),
+      ].map((match) => normalizedPdfToken(match[0]))
+        .filter(Boolean)
+        .slice(-8)
+      const tailMatches = words.flatMap((word, wordIndex) =>
+        wordIndex < markerIndex
+        && word.text.length >= 2
+        && semanticTailTokens.some(
+          (tailToken) =>
+            word.text.includes(tailToken) || tailToken.includes(word.text),
+        )
+          ? [wordIndex]
+          : [])
+      const closestTailMatch = tailMatches.at(-1)
+      if (closestTailMatch !== undefined) {
+        predecessorIndexes = [closestTailMatch]
+        predecessorTokens = [words[closestTailMatch].text]
+      }
+    }
     assert.equal(
       predecessorIndexes.length,
       1,
-      `${label} locates exactly one visible tagged predecessor for ${groupId}`,
+      `${label} locates exactly one visible tagged predecessor for ${groupId}: ${JSON.stringify({
+        visibleText: predecessorBinding.visibleText,
+        visibleRole: predecessorBinding.visiblePredecessorRole,
+        tokens: predecessorTokens,
+        nearby: words
+          .filter((word) =>
+            predecessorTokens.some((token) => word.text.includes(token)))
+          .slice(-12)
+          .map((word) => word.text),
+        hanTail: words
+          .filter((word) => /\p{Script=Han}/u.test(word.text))
+          .slice(-30)
+          .map((word) => word.text),
+      })}`,
     )
     const [precedingWordIndex] = predecessorIndexes
     const precedingWords = words.slice(
@@ -1532,10 +2707,15 @@ function assertPdfPassageLetterGeometry(
       firstWord.page,
       `${label} keeps ${expectedLetter} with its first passage line`,
     )
+    const pageRelation =
+      precedingWord?.page === letter.page
+        ? 'same_page'
+        : 'next_page_transition'
     assert.equal(
-      precedingWord?.page,
-      letter.page,
-      `${label} exposes preceding content for ${expectedLetter} on the same page`,
+      precedingWord?.page === letter.page
+      || precedingWord?.page + 1 === letter.page,
+      true,
+      `${label} keeps ${expectedLetter} on the same or immediately following page`,
     )
     const pageBox = pageBoxes[letter.page - 1].cropBox
     const pageCenterX = (pageBox.xMin + pageBox.xMax) / 2
@@ -1560,14 +2740,25 @@ function assertPdfPassageLetterGeometry(
       true,
       `${label} ${expectedLetter} and its first passage line use the ratio-mapped PDF baseline step`,
     )
-    assert.equal(
-      Math.abs(
-        precedingBaselineStepPt - expectedGeometry.pdfBaselineStepPt,
+    if (pageRelation === 'same_page') {
+      assert.equal(
+        Math.abs(
+          precedingBaselineStepPt - expectedGeometry.pdfBaselineStepPt,
+        )
+          <= expectedGeometry.pdfTolerancePt,
+        true,
+        `${label} ${expectedLetter} retains the ratio-mapped predecessor baseline step: ${JSON.stringify({
+          actual: precedingBaselineStepPt,
+          expected: expectedGeometry.pdfBaselineStepPt,
+        })}`,
       )
-        <= expectedGeometry.pdfTolerancePt,
-      true,
-      `${label} ${expectedLetter} retains the ratio-mapped predecessor baseline step`,
-    )
+    } else {
+      assert.equal(
+        letter.yMax < 130,
+        true,
+        `${label} ${expectedLetter} starts at the next A4 page head after its exact predecessor tail`,
+      )
+    }
     assert.equal(
       letter.yMax - letter.yMin > 10 && letter.yMax - letter.yMin < 13,
       true,
@@ -1588,8 +2779,14 @@ function assertPdfPassageLetterGeometry(
       precedingKind,
       predecessorGroupId: predecessorBinding.predecessorGroupId,
       predecessorAnchorId: predecessorBinding.predecessorAnchorId,
+      predecessorRole: predecessorBinding.predecessorRole,
+      visiblePredecessorRole: predecessorBinding.visiblePredecessorRole,
+      predecessorQuestionId: predecessorBinding.predecessorQuestionId,
+      predecessorOptionId: predecessorBinding.predecessorOptionId,
+      visibleText: predecessorBinding.visibleText,
       predecessorPage: precedingWord.page,
       letterPage: letter.page,
+      pageRelation,
       firstLineBaselineStepPt: followingBaselineStepPt,
       firstLineInkGapPt: firstWord.yMin - letter.yMax,
       precedingBaselineProxyPt,
@@ -2045,6 +3242,16 @@ async function renderSupportedArtifacts({
         )
       }
       for (const group of Object.values(asset.content.groups)
+        .filter((candidate) => candidate.groupType !== 'reading')) {
+        assert.equal(
+          await page.locator(
+            `[data-paper-browse-anchor="${group.groupId}"] [data-canonical-reading-rhythm-role]`,
+          ).count(),
+          0,
+          `plain PaperSurface exposes no Reading rhythm roles in ${group.groupId}`,
+        )
+      }
+      for (const group of Object.values(asset.content.groups)
         .filter((candidate) => candidate.groupType === 'listening')) {
         assert.equal(
           await page.locator(
@@ -2072,6 +3279,31 @@ async function renderSupportedArtifacts({
           consumers.screen,
           'plain PaperSurface',
         )
+      await assertScreenReadingVerticalRhythm(
+        page,
+        consumers.screen,
+        'plain PaperSurface',
+      )
+      const plainNarrowStemStyle = await page.addStyleTag({
+        content: `[data-canonical-question-id="${draft.firstGroup.questionIds[0]}"] .ps-question-stem{max-width:240px}`,
+      })
+      await assertScreenReadingVerticalRhythm(
+        page,
+        consumers.screen,
+        'plain PaperSurface narrow-stem variant',
+        { requireFullVariants: true },
+      )
+      await plainNarrowStemStyle.evaluate((element) => element.remove())
+      const plainWrappedOptionStyle = await page.addStyleTag({
+        content: '.ps-option-list--one_column{width:240px!important;grid-template-columns:240px!important}',
+      })
+      await assertScreenReadingVerticalRhythm(
+        page,
+        consumers.screen,
+        'plain PaperSurface wrapped-option variant',
+        { requireWrappedOption: true },
+      )
+      await plainWrappedOptionStyle.evaluate((element) => element.remove())
       assert.equal(
         await page.locator('.paper-browse-lecture-analysis').count(),
         0,
@@ -2117,6 +3349,31 @@ async function renderSupportedArtifacts({
           consumers.screen,
           'lecture PaperSurface',
         )
+      await assertScreenReadingVerticalRhythm(
+        page,
+        consumers.screen,
+        'lecture PaperSurface',
+      )
+      const lectureNarrowStemStyle = await page.addStyleTag({
+        content: `[data-canonical-question-id="${firstQuestionId}"] .ps-question-stem{max-width:240px}`,
+      })
+      await assertScreenReadingVerticalRhythm(
+        page,
+        consumers.screen,
+        'lecture PaperSurface narrow-stem variant',
+        { requireFullVariants: true },
+      )
+      await lectureNarrowStemStyle.evaluate((element) => element.remove())
+      const lectureWrappedOptionStyle = await page.addStyleTag({
+        content: '.ps-option-list--one_column{width:240px!important;grid-template-columns:240px!important}',
+      })
+      await assertScreenReadingVerticalRhythm(
+        page,
+        consumers.screen,
+        'lecture PaperSurface wrapped-option variant',
+        { requireWrappedOption: true },
+      )
+      await lectureWrappedOptionStyle.evaluate((element) => element.remove())
       assert.equal(
         await page.locator('.paper-browse-lecture-analysis').count(),
         1,
@@ -2165,6 +3422,65 @@ async function renderSupportedArtifacts({
         fullPage: true,
       })
 
+      const publicAssetPath = path.join(
+        paperAssetsDir,
+        paperId,
+        'latest',
+        'paper-asset.json',
+      )
+      const publicAssetBytes = readFileSync(publicAssetPath)
+      const instructionVariantAsset = JSON.parse(publicAssetBytes)
+      const firstReadingBlockIndex =
+        instructionVariantAsset.content.blocks.findIndex(
+          (block) =>
+            block.type === 'group'
+            && block.groupId
+              === readingPredecessorOracle.screen[0].groupId,
+        )
+      instructionVariantAsset.content.blocks.splice(
+        firstReadingBlockIndex,
+        0,
+        {
+          type: 'instruction',
+          text: '阅读下列短文，从每题所给的 A、B、C、D 四个选项中选出最佳选项。',
+        },
+      )
+      try {
+        writeFileSync(
+          publicAssetPath,
+          `${JSON.stringify(instructionVariantAsset, null, 2)}\n`,
+        )
+        for (const variantMode of ['plain', 'lecture']) {
+          const instructionUrl = new URL(
+            variantMode === 'plain' ? plainUrl : lectureUrl,
+          )
+          instructionUrl.searchParams.set(
+            'rhythmVariant',
+            `instruction-present-${variantMode}`,
+          )
+          await page.goto(instructionUrl.href)
+          await page.locator(
+            '[data-canonical-reading-rhythm-role="meta_instruction"]',
+          ).waitFor()
+          assert.equal(
+            await page.locator(
+              '[data-canonical-reading-rhythm-role="meta_instruction"]',
+            ).count(),
+            1,
+            `${variantMode} PaperSurface instruction-present fixture exposes one exact instruction role`,
+          )
+          await assertScreenReadingVerticalRhythm(
+            page,
+            consumers.screen,
+            `${variantMode} PaperSurface instruction-present fixture`,
+          )
+        }
+      } finally {
+        writeFileSync(publicAssetPath, publicAssetBytes)
+      }
+      await page.goto(lectureUrl.href)
+      await page.locator('.paper-browse-answer-row').waitFor()
+
       const printHtml = {}
       const pdfPaths = {}
       for (const versionType of ['student', 'teacher']) {
@@ -2188,7 +3504,11 @@ async function renderSupportedArtifacts({
           },
         )
         const pdfBytes = Buffer.from(await pdfResponse.arrayBuffer())
-        assert.equal(pdfResponse.status, 200)
+        assert.equal(
+          pdfResponse.status,
+          200,
+          `PDF render failed: ${pdfBytes.toString('utf8')}`,
+        )
         assert.equal(pdfBytes.subarray(0, 4).toString(), '%PDF')
         pdfPaths[versionType] = path.join(
           outputDir,
@@ -2196,6 +3516,28 @@ async function renderSupportedArtifacts({
         )
         writeFileSync(pdfPaths[versionType], pdfBytes)
       }
+      await assertPrintHtmlReadingVerticalRhythm(
+        page,
+        printHtml.student,
+        consumers.print_pdf,
+        'Student Print HTML',
+      )
+      await assertPrintHtmlReadingVerticalRhythm(
+        page,
+        printHtml.teacher,
+        consumers.print_pdf,
+        'Teacher Print HTML',
+      )
+      assertNoReadingRolesInNonReadingPrintGroups(
+        printHtml.student,
+        asset,
+        'Student Print HTML',
+      )
+      assertNoReadingRolesInNonReadingPrintGroups(
+        printHtml.teacher,
+        asset,
+        'Teacher Print HTML',
+      )
 
       assert.equal(
         (printHtml.student.match(/<div class="answer">/g) || []).length,
@@ -2325,6 +3667,16 @@ async function renderSupportedArtifacts({
           `${versionType === 'student' ? 'Student' : 'Teacher'} Chromium PDF`
         assertPdfSemanticOrder(pdfPath, consumers.print_pdf, label)
         const pageBoxes = assertPdfA4AndUnclipped(pdfPath, label)
+        assertPdfReadingQuestionsNotSplit(
+          pdfPath,
+          consumers.print_pdf,
+          label,
+        )
+        assertPdfReadingContinuationAndEnd(
+          pdfPath,
+          consumers.print_pdf,
+          label,
+        )
         passageLetterGeometry.pdf[versionType] =
           assertPdfPassageLetterGeometry(
             pdfPath,

@@ -10,7 +10,9 @@ export const readingPassageLetterBySlotId = Object.freeze(
 
 const geometryByPrecedingKind = Object.freeze({
   reading_heading: Object.freeze(contract.precedingGeometry.readingHeading),
-  prior_content: Object.freeze(contract.precedingGeometry.priorContent),
+  prior_question_tail: Object.freeze(
+    contract.precedingGeometry.priorQuestionTail,
+  ),
 })
 
 const precedingKindByConsumerAndLetter = Object.freeze(
@@ -59,8 +61,36 @@ export const readingPassageLetterTypography = Object.freeze({
   precedingGeometry: Object.freeze({
     normalizationRule: contract.precedingGeometry.normalizationRule,
     readingHeading: geometryByPrecedingKind.reading_heading,
-    priorContent: geometryByPrecedingKind.prior_content,
+    priorQuestionTail: geometryByPrecedingKind.prior_question_tail,
   }),
   followingGeometry: Object.freeze({ ...contract.followingGeometry }),
+  verticalRhythm: Object.freeze({
+    semanticRoleClasses: Object.freeze(
+      Object.fromEntries(
+        Object.entries(contract.verticalRhythm.semanticRoleClasses).map(
+          ([className, roles]) => [className, Object.freeze([...roles])],
+        ),
+      ),
+    ),
+    adjacencyGraph: Object.freeze(
+      contract.verticalRhythm.adjacencyGraph.map((edge) =>
+        Object.freeze({
+          ...edge,
+          ...(edge.repeatForbiddenRoles
+            ? {
+                repeatForbiddenRoles: Object.freeze([
+                  ...edge.repeatForbiddenRoles,
+                ]),
+              }
+            : {}),
+        })),
+    ),
+    targets: Object.freeze({
+      screen: Object.freeze({ ...contract.verticalRhythm.targets.screen }),
+      printPdf: Object.freeze({
+        ...contract.verticalRhythm.targets.printPdf,
+      }),
+    }),
+  }),
   referenceMeasurement: Object.freeze({ ...contract.referenceMeasurement }),
 })

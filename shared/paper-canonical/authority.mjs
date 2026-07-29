@@ -459,6 +459,51 @@ function validateNormalizationRules(artifact) {
 function validateRendererTypography(artifact, profiles) {
   if (artifact?.schemaVersion !== 'renderer-typography-v3') return []
   const contract = artifact.readingPassageLetters
+  const expectedSemanticRoleClasses = {
+    chrome: ['part_title', 'subsection', 'meta_instruction'],
+    passageContent: [
+      'passage_title',
+      'passage_subtitle',
+      'passage_body_line',
+      'native_table_line',
+    ],
+    questionStem: ['question_stem_line'],
+    optionLine: ['option_line'],
+    teacherTail: ['answer_line', 'explanation_line'],
+  }
+  const expectedRhythmEdges = [
+    { edgeId: 'chrome_internal', fromClass: 'chrome', toClass: 'chrome', baselineStepRatio: 1, optionalCollapse: true },
+    { edgeId: 'chrome_to_a', fromClass: 'chrome', toRole: 'passage_letter', baselineStepRatio: 1, optionalCollapse: true },
+    { edgeId: 'letter_to_first_content', fromRole: 'passage_letter', toClass: 'passageContent', baselineStepRatio: 1, optionalCollapse: true },
+    { edgeId: 'passage_content_internal', fromClass: 'passageContent', toClass: 'passageContent', baselineStepRatio: 1, optionalCollapse: false },
+    { edgeId: 'passage_to_first_question', fromClass: 'passageContent', toClass: 'questionStem', baselineStepRatio: 2, optionalCollapse: false },
+    { edgeId: 'question_stem_internal', fromClass: 'questionStem', toClass: 'questionStem', baselineStepRatio: 1, optionalCollapse: false },
+    { edgeId: 'stem_to_options', fromClass: 'questionStem', toClass: 'optionLine', baselineStepRatio: 1, optionalCollapse: false },
+    { edgeId: 'option_line_internal', fromClass: 'optionLine', toClass: 'optionLine', baselineStepRatio: 1, optionalCollapse: false },
+    { edgeId: 'question_to_next_question', fromClass: 'optionLine', toClass: 'questionStem', baselineStepRatio: 1, optionalCollapse: false },
+    { edgeId: 'option_to_answer', fromClass: 'optionLine', toRole: 'answer_line', baselineStepRatio: 1, optionalCollapse: true },
+    { edgeId: 'answer_to_explanation', fromRole: 'answer_line', toRole: 'explanation_line', baselineStepRatio: 1, optionalCollapse: true },
+    { edgeId: 'teacher_tail_to_next_question', fromClass: 'teacherTail', toClass: 'questionStem', baselineStepRatio: 1, optionalCollapse: true },
+    { edgeId: 'reading_passage_transition', fromClass: 'optionLine', toRole: 'passage_letter', baselineStepRatio: 2, optionalCollapse: false },
+    { edgeId: 'teacher_reading_passage_transition', fromClass: 'teacherTail', toRole: 'passage_letter', baselineStepRatio: 2, optionalCollapse: true },
+    { edgeId: 'reading_to_next_section_same_page', fromClass: 'optionLine', toRole: 'next_section', baselineStepRatio: 2, optionalCollapse: false },
+    { edgeId: 'teacher_reading_to_next_section_same_page', fromClass: 'teacherTail', toRole: 'next_section', baselineStepRatio: 2, optionalCollapse: true },
+    {
+      edgeId: 'same_passage_cross_page',
+      fromClass: 'passageContent',
+      toClass: 'passageContent',
+      pageRelation: 'next_page_continuation',
+      optionalCollapse: false,
+      repeatForbiddenRoles: ['passage_letter', 'passage_title', 'passage_subtitle'],
+    },
+    {
+      edgeId: 'reading_to_next_section_cross_page',
+      fromClass: 'optionLine',
+      toRole: 'next_section',
+      pageRelation: 'next_page_start',
+      optionalCollapse: false,
+    },
+  ]
   const expectedSlotIds = [...new Set(
     profiles.flatMap((profile) =>
       flattenSlots(profile)
@@ -482,13 +527,17 @@ function validateRendererTypography(artifact, profiles) {
       && entry.precedingKindByConsumer.screen === (
         entry.slotId === 'reading.a'
           ? 'reading_heading'
-          : 'prior_content'
+          : 'prior_question_tail'
       )
-      && entry.precedingKindByConsumer.print_pdf === 'reading_heading')
+      && entry.precedingKindByConsumer.print_pdf === (
+        entry.slotId === 'reading.a'
+          ? 'reading_heading'
+          : 'prior_question_tail'
+      ))
     && exactKeys(contract.precedingGeometry, [
       'normalizationRule',
       'readingHeading',
-      'priorContent',
+      'priorQuestionTail',
     ])
     && contract.precedingGeometry.normalizationRule
       === 'local_baseline_step_ratio_mapped_to_actual_rendered_line_step'
@@ -499,23 +548,26 @@ function validateRendererTypography(artifact, profiles) {
     && contract.precedingGeometry.readingHeading?.screenBaselineStepPx === 24
     && contract.precedingGeometry.readingHeading?.screenTolerancePx === 1.25
     && contract.precedingGeometry.readingHeading
-      ?.screenBeforeAdjustmentPx === -13
+      ?.screenBeforeAdjustmentPx === -16
     && contract.precedingGeometry.readingHeading?.pdfBaselineStepPt === 18
-    && contract.precedingGeometry.readingHeading?.pdfTolerancePt === 1
+    && contract.precedingGeometry.readingHeading?.pdfTolerancePt === 1.5
     && contract.precedingGeometry.readingHeading
-      ?.pdfBeforeAdjustmentPt === -4.5
-    && contract.precedingGeometry.priorContent
+      ?.pdfBeforeAdjustmentPt === -6.75
+    && contract.precedingGeometry.priorQuestionTail
       ?.referenceBaselineStepRatio === 2
-    && contract.precedingGeometry.priorContent
+    && contract.precedingGeometry.priorQuestionTail
       ?.referenceRatioTolerance === 0.05
-    && contract.precedingGeometry.priorContent?.screenBaselineStepPx === 48
-    && contract.precedingGeometry.priorContent?.screenTolerancePx === 1.25
-    && contract.precedingGeometry.priorContent
+    && contract.precedingGeometry.priorQuestionTail
+      ?.screenBaselineStepPx === 48
+    && contract.precedingGeometry.priorQuestionTail
+      ?.screenTolerancePx === 1.25
+    && contract.precedingGeometry.priorQuestionTail
       ?.screenBeforeAdjustmentPx === 13
-    && contract.precedingGeometry.priorContent?.pdfBaselineStepPt === 36
-    && contract.precedingGeometry.priorContent?.pdfTolerancePt === 1
-    && contract.precedingGeometry.priorContent
-      ?.pdfBeforeAdjustmentPt === null
+    && contract.precedingGeometry.priorQuestionTail
+      ?.pdfBaselineStepPt === 36
+    && contract.precedingGeometry.priorQuestionTail?.pdfTolerancePt === 1.5
+    && contract.precedingGeometry.priorQuestionTail
+      ?.pdfBeforeAdjustmentPt === 18
     && exactKeys(contract.followingGeometry, [
       'referenceBaselineStepRatio',
       'referenceRatioTolerance',
@@ -530,6 +582,35 @@ function validateRendererTypography(artifact, profiles) {
     && contract.followingGeometry.screenTolerancePx === 0.75
     && contract.followingGeometry.pdfBaselineStepPt === 18
     && contract.followingGeometry.pdfTolerancePt === 0.5
+    && exactKeys(contract.verticalRhythm, [
+      'semanticRoleClasses',
+      'adjacencyGraph',
+      'targets',
+    ])
+    && JSON.stringify(contract.verticalRhythm.semanticRoleClasses)
+      === JSON.stringify(expectedSemanticRoleClasses)
+    && Array.isArray(contract.verticalRhythm.adjacencyGraph)
+    && contract.verticalRhythm.adjacencyGraph.length
+      === expectedRhythmEdges.length
+    && JSON.stringify(contract.verticalRhythm.adjacencyGraph)
+      === JSON.stringify(expectedRhythmEdges)
+    && exactKeys(contract.verticalRhythm.targets, ['screen', 'printPdf'])
+    && exactKeys(contract.verticalRhythm.targets.screen, [
+      'baselineStepPx',
+      'oneStepTolerancePx',
+      'twoStepTolerancePx',
+    ])
+    && contract.verticalRhythm.targets.screen.baselineStepPx === 24
+    && contract.verticalRhythm.targets.screen.oneStepTolerancePx === 1.25
+    && contract.verticalRhythm.targets.screen.twoStepTolerancePx === 1.5
+    && exactKeys(contract.verticalRhythm.targets.printPdf, [
+      'baselineStepPt',
+      'oneStepTolerancePt',
+      'twoStepTolerancePt',
+    ])
+    && contract.verticalRhythm.targets.printPdf.baselineStepPt === 18
+    && contract.verticalRhythm.targets.printPdf.oneStepTolerancePt === 1.5
+    && contract.verticalRhythm.targets.printPdf.twoStepTolerancePt === 1.5
     && contract.referenceMeasurement?.path
       === 'docs/cuts/paper-canonical-unification/qa/20-reading-passage-letter-reference-measurements.json'
     && /^sha256:[a-f0-9]{64}$/.test(

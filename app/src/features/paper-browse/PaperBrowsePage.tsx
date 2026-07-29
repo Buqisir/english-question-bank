@@ -1762,7 +1762,11 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     similarToastTimeoutRef.current = window.setTimeout(() => setSimilarToast(null), 2200)
   }
 
-  function renderGroupBody(groupId: string, entry: GroupModel | undefined): ReactNode {
+  function renderGroupBody(
+    groupId: string,
+    entry: GroupModel | undefined,
+    readingSuccessorGroupId?: string,
+  ): ReactNode {
     if (!entry) {
       return <div className="paper-browse-placeholder">加载中…</div>
     }
@@ -1849,6 +1853,19 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
             ? entry.model.canonicalReadingSemanticSignature
             : undefined
         }
+        canonicalReadingSuccessorGroupId={
+          entry.kind === 'reading'
+            ? readingSuccessorGroupId
+            : undefined
+        }
+        canonicalReadingFollowingSectionId={
+          entry.kind === 'reading'
+            && groupId
+              === canonicalReadingGroupIds[canonicalReadingGroupIds.length - 1]
+            && nextSectionAfterReading?.type === 'sectionHeading'
+            ? nextSectionAfterReading.sectionId
+            : undefined
+        }
         canonicalApplicationPromptBlocks={
           entry.kind === 'writing'
             ? entry.model.canonicalPromptBlocks
@@ -1917,17 +1934,44 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
           && block.groupId === canonicalReadingGroupIds[0],
       )
     : -1
-  let firstReadingHeadingBlockIndex = -1
+  const lastReadingGroupBlockIndex = asset
+    ? asset.content.blocks.findLastIndex(
+        (block) =>
+          block.type === 'group'
+          && block.groupId
+            === canonicalReadingGroupIds[canonicalReadingGroupIds.length - 1],
+      )
+    : -1
+  const nextSectionAfterReading =
+    asset && lastReadingGroupBlockIndex >= 0
+      ? asset.content.blocks
+          .slice(lastReadingGroupBlockIndex + 1)
+          .find((block) => block.type === 'sectionHeading')
+      : undefined
+  let firstReadingPredecessorBlockIndex = -1
+  let readingChromeStartBlockIndex = firstReadingGroupBlockIndex
   if (asset && firstReadingGroupBlockIndex >= 0) {
     for (let index = firstReadingGroupBlockIndex - 1; index >= 0; index -= 1) {
       const block = asset.content.blocks[index]
-      if (block.type === 'sectionHeading') {
-        firstReadingHeadingBlockIndex = index
-        break
+      if (
+        block.type === 'instruction'
+        || block.type === 'sectionHeading'
+        || block.type === 'partHeading'
+      ) {
+        if (firstReadingPredecessorBlockIndex < 0) {
+          firstReadingPredecessorBlockIndex = index
+        }
+        readingChromeStartBlockIndex = index
+        continue
       }
-      if (block.type === 'group' || block.type === 'partHeading') break
+      if (block.type === 'pageBreakHint') continue
+      if (block.type === 'group') break
+      break
     }
   }
+  const isReadingChromeBlock = (index: number) =>
+    index >= readingChromeStartBlockIndex
+    && index < firstReadingGroupBlockIndex
 
   // one-sheet-paper: `mergedInstructionText` folds a single-group section's
   // leading 指导语 into this same hover/剪走 unit (owner-ratified rule:
@@ -1983,7 +2027,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
       entry?.kind === 'writing'
         ? 'paper-browse-group-card paper-browse-group-card--writing'
         : 'paper-browse-group-card'
-    const readingPrecedingFor =
+    const readingSuccessorGroupId =
       nextReadingGroupIdByPredecessorGroupId.get(groupId)
 
     return (
@@ -1996,13 +2040,6 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
           }
           data-canonical-occurrence-signature={
             canonicalGroupIdentity?.occurrenceSignature
-          }
-          data-canonical-reading-preceding-for={readingPrecedingFor}
-          data-canonical-reading-preceding-kind={
-            readingPrecedingFor ? 'prior_content' : undefined
-          }
-          data-canonical-reading-predecessor-group-id={
-            readingPrecedingFor ? groupId : undefined
           }
           aria-label={group?.title || groupId}
         >
@@ -2034,11 +2071,21 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
             <div className="paper-browse-scissor-line paper-browse-scissor-line--bottom" aria-hidden="true" />
           )}
           {options?.mergedInstructionText && (
-            <p className="paper-browse-instruction paper-browse-instruction--merged">
+            <p
+              className="paper-browse-instruction paper-browse-instruction--merged"
+              data-canonical-reading-rhythm-role={
+                isReadingChromeBlock(index)
+                  ? 'meta_instruction'
+                  : undefined
+              }
+              data-canonical-reading-chrome={
+                isReadingChromeBlock(index) ? '' : undefined
+              }
+            >
               {options.mergedInstructionText}
             </p>
           )}
-          {renderGroupBody(groupId, entry)}
+          {renderGroupBody(groupId, entry, readingSuccessorGroupId)}
         </section>
       </Fragment>
     )
@@ -2287,23 +2334,56 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
             key={`part-${index}`}
             className="paper-browse-part-heading"
             data-paper-browse-anchor={block.partId}
+            data-canonical-reading-rhythm-role={
+              isReadingChromeBlock(index) ? 'part_title' : undefined
+            }
+            data-canonical-reading-chrome={
+              isReadingChromeBlock(index) ? '' : undefined
+            }
+            data-canonical-reading-preceding-for={
+              index === firstReadingPredecessorBlockIndex
+                ? canonicalReadingGroupIds[0]
+                : undefined
+            }
+            data-canonical-reading-preceding-kind={
+              index === firstReadingPredecessorBlockIndex
+                ? 'reading_heading'
+                : undefined
+            }
           >
             {block.text}
           </h2>
         )
-      case 'sectionHeading':
+      case 'sectionHeading': {
+        const followsReading =
+          block.sectionId === nextSectionAfterReading?.sectionId
         return (
           <h3
             key={`section-${index}`}
             className="paper-browse-section-heading"
             data-paper-browse-anchor={block.sectionId}
+            data-canonical-reading-rhythm-role={
+              isReadingChromeBlock(index)
+                ? 'subsection'
+                : followsReading ? 'next_section' : undefined
+            }
+            data-canonical-reading-chrome={
+              isReadingChromeBlock(index) ? '' : undefined
+            }
+            data-canonical-reading-following-for={
+              followsReading
+                ? canonicalReadingGroupIds[
+                    canonicalReadingGroupIds.length - 1
+                  ]
+                : undefined
+            }
             data-canonical-reading-preceding-for={
-              index === firstReadingHeadingBlockIndex
+              index === firstReadingPredecessorBlockIndex
                 ? canonicalReadingGroupIds[0]
                 : undefined
             }
             data-canonical-reading-preceding-kind={
-              index === firstReadingHeadingBlockIndex
+              index === firstReadingPredecessorBlockIndex
                 ? 'reading_heading'
                 : undefined
             }
@@ -2311,6 +2391,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
             {block.text}
           </h3>
         )
+      }
       case 'instruction': {
         // one-sheet-paper: a single-group section's leading 指导语 gets
         // folded into that group's own hover/剪走 unit (scissorPlan,
@@ -2328,7 +2409,28 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
           })
         }
         return (
-          <p key={`instruction-${index}`} className="paper-browse-instruction">
+          <p
+            key={`instruction-${index}`}
+            className="paper-browse-instruction"
+            data-canonical-reading-rhythm-role={
+              isReadingChromeBlock(index)
+                ? 'meta_instruction'
+                : undefined
+            }
+            data-canonical-reading-chrome={
+              isReadingChromeBlock(index) ? '' : undefined
+            }
+            data-canonical-reading-preceding-for={
+              index === firstReadingPredecessorBlockIndex
+                ? canonicalReadingGroupIds[0]
+                : undefined
+            }
+            data-canonical-reading-preceding-kind={
+              index === firstReadingPredecessorBlockIndex
+                ? 'reading_heading'
+                : undefined
+            }
+          >
             {block.text}
           </p>
         )

@@ -125,6 +125,8 @@ type PaperSurfaceComponentProps = Omit<PaperSurfaceProps, 'blankFocusMode'> & {
   readonly canonicalReadingBlocks?: ReadonlyArray<CanonicalReadingSurfaceBlock>
   readonly canonicalReadingPassageLetter?: 'A' | 'B' | 'C' | 'D'
   readonly canonicalReadingSemanticSignature?: string
+  readonly canonicalReadingSuccessorGroupId?: string
+  readonly canonicalReadingFollowingSectionId?: string
   /** Ordered canonical Application Writing prompt rendered without legacy inference. */
   readonly canonicalApplicationPromptBlocks?: ReadonlyArray<{
     readonly nodeId: string
@@ -163,6 +165,8 @@ export function PaperSurface(props: PaperSurfaceComponentProps): ReactNode {
     canonicalReadingBlocks,
     canonicalReadingPassageLetter,
     canonicalReadingSemanticSignature,
+    canonicalReadingSuccessorGroupId,
+    canonicalReadingFollowingSectionId,
     canonicalApplicationPromptBlocks,
     canonicalContinuationMaterialBlocks,
   } = props
@@ -369,6 +373,9 @@ export function PaperSurface(props: PaperSurfaceComponentProps): ReactNode {
             questions={questionsBySection.get('__global__')!}
             lectureFocus={lectureFocus}
             onQuestionClick={handleQuestionClick}
+            readingSuccessorGroupId={canonicalReadingSuccessorGroupId}
+            readingFollowingSectionId={canonicalReadingFollowingSectionId}
+            readingRhythmEnabled={canonicalReadingBlocks !== undefined}
           />
         )}
       </article>
@@ -485,6 +492,7 @@ function CanonicalReadingBlocks({
       <div
         className="ps-canonical-reading-passage-letter"
         data-canonical-passage-letter={passageLetter}
+        data-canonical-reading-rhythm-role="passage_letter"
         data-canonical-reading-preceding-kind={
           precedingGeometry.precedingKind
         }
@@ -524,6 +532,13 @@ function CanonicalReadingBlocks({
               data-canonical-block-id={block.nodeId}
               data-canonical-block-kind="paragraph"
               data-canonical-reading-role={block.role}
+              data-canonical-reading-rhythm-role={
+                block.role === 'title'
+                  ? 'passage_title'
+                  : block.role === 'subtitle'
+                    ? 'passage_subtitle'
+                    : 'passage_body_line'
+              }
             >
               {renderInlines(block.inlines)}
             </p>
@@ -536,6 +551,7 @@ function CanonicalReadingBlocks({
               className="ps-canonical-reading-table"
               data-canonical-block-id={block.nodeId}
               data-canonical-block-kind="table"
+              data-canonical-reading-rhythm-role="native_table_line"
               data-canonical-table-columns={block.columnCount}
             >
               <tbody>
@@ -912,12 +928,18 @@ type PaperSurfaceQuestionListProps = {
   questions: PaperQuestion[]
   lectureFocus: LectureFocus | null
   onQuestionClick: (questionId: string) => void
+  readingSuccessorGroupId?: string
+  readingFollowingSectionId?: string
+  readingRhythmEnabled?: boolean
 }
 
 function PaperSurfaceQuestionList({
   questions,
   lectureFocus,
   onQuestionClick,
+  readingSuccessorGroupId,
+  readingFollowingSectionId,
+  readingRhythmEnabled = false,
 }: PaperSurfaceQuestionListProps): ReactNode {
   const sorted = useMemo(
     () => [...questions].sort((a, b) => a.order - b.order),
@@ -926,12 +948,23 @@ function PaperSurfaceQuestionList({
 
   return (
     <ol className="ps-question-list">
-      {sorted.map((q) => (
+      {sorted.map((q, index) => (
         <PaperSurfaceQuestionItem
           key={q.id}
           question={q}
           isActive={lectureFocus?.questionId === q.id}
           onQuestionClick={onQuestionClick}
+          readingSuccessorGroupId={
+            index === sorted.length - 1
+              ? readingSuccessorGroupId
+              : undefined
+          }
+          readingFollowingSectionId={
+            index === sorted.length - 1
+              ? readingFollowingSectionId
+              : undefined
+          }
+          readingRhythmEnabled={readingRhythmEnabled}
         />
       ))}
     </ol>
@@ -944,12 +977,18 @@ type PaperSurfaceQuestionItemProps = {
   question: PaperQuestion
   isActive: boolean
   onQuestionClick: (questionId: string) => void
+  readingSuccessorGroupId?: string
+  readingFollowingSectionId?: string
+  readingRhythmEnabled: boolean
 }
 
 function PaperSurfaceQuestionItem({
   question,
   isActive,
   onQuestionClick,
+  readingSuccessorGroupId,
+  readingFollowingSectionId,
+  readingRhythmEnabled,
 }: PaperSurfaceQuestionItemProps): ReactNode {
   // QA fix (PR #39): the whole question block is one focus target.
   //
@@ -989,6 +1028,13 @@ function PaperSurfaceQuestionItem({
       className={isActive ? 'ps-question ps-question--active' : 'ps-question'}
       {...{ [paperSurfaceAnchorAttrs.questionId]: question.id }}
       data-canonical-question-id={question.canonicalIdentity?.questionId}
+      data-canonical-reading-rhythm-role={
+        readingRhythmEnabled ? 'question_block' : undefined
+      }
+      data-canonical-reading-last-question-for={readingSuccessorGroupId}
+      data-canonical-reading-last-question-before-section={
+        readingFollowingSectionId
+      }
       onClick={() => onQuestionClick(question.id)}
     >
       {!trimmedStem && hasOptions ? (
@@ -1051,7 +1097,12 @@ function PaperSurfaceQuestionItem({
               : undefined}
           >
             <span className="ps-question-no">{question.questionNo}.</span>
-            <span className="ps-question-stem">
+            <span
+              className="ps-question-stem"
+              data-canonical-reading-rhythm-role={
+                readingRhythmEnabled ? 'question_stem_line' : undefined
+              }
+            >
               {question.canonicalStemContent
                 ? question.canonicalStemContent.map((inline) => (
                     <span
@@ -1070,6 +1121,10 @@ function PaperSurfaceQuestionItem({
               options={question.options}
               canonicalPlacement={question.canonicalPlacement}
               canonicalOptionIds={question.canonicalIdentity?.optionIds}
+              readingSuccessorGroupId={readingSuccessorGroupId}
+              readingFollowingSectionId={readingFollowingSectionId}
+              predecessorQuestionId={question.canonicalIdentity?.questionId}
+              readingRhythmEnabled={readingRhythmEnabled}
             />
           )}
         </>
@@ -1085,6 +1140,10 @@ type PaperSurfaceOptionListProps = {
   options: ReadonlyArray<PaperQuestionOption>
   canonicalPlacement?: PaperQuestion['canonicalPlacement']
   canonicalOptionIds?: ReadonlyArray<string>
+  readingSuccessorGroupId?: string
+  readingFollowingSectionId?: string
+  predecessorQuestionId?: string
+  readingRhythmEnabled: boolean
 }
 
 function PaperSurfaceOptionList({
@@ -1092,6 +1151,10 @@ function PaperSurfaceOptionList({
   options,
   canonicalPlacement,
   canonicalOptionIds,
+  readingSuccessorGroupId,
+  readingFollowingSectionId,
+  predecessorQuestionId,
+  readingRhythmEnabled,
 }: PaperSurfaceOptionListProps): ReactNode {
   return (
     <ol
@@ -1129,6 +1192,34 @@ function PaperSurfaceOptionList({
             className="ps-option"
             {...{ [paperSurfaceAnchorAttrs.optionLabel]: opt.label }}
             data-canonical-option-id={canonicalOptionIds?.[index]}
+            data-canonical-reading-rhythm-role={
+              readingRhythmEnabled ? 'option_line' : undefined
+            }
+            data-canonical-reading-preceding-for={
+              index === options.length - 1
+                ? readingSuccessorGroupId
+                : undefined
+            }
+            data-canonical-reading-preceding-kind={
+              index === options.length - 1 && readingSuccessorGroupId
+                ? 'prior_question_tail'
+                : undefined
+            }
+            data-canonical-reading-before-section={
+              index === options.length - 1
+                ? readingFollowingSectionId
+                : undefined
+            }
+            data-canonical-reading-predecessor-question-id={
+              index === options.length - 1
+                ? predecessorQuestionId
+                : undefined
+            }
+            data-canonical-reading-predecessor-option-id={
+              index === options.length - 1
+                ? canonicalOptionIds?.[index]
+                : undefined
+            }
             data-canonical-start-pt={physicalPlacement?.startPt}
             data-canonical-continuation-start-pt={
               continuationStartPt ?? undefined

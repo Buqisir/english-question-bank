@@ -141,12 +141,12 @@ console.log('\nTest 3b: heading-fidelity — part/section-header split, h1 卷�
   assert('① h1 rule no longer 18pt (old value retired)', !/font-size:\s*18pt/.test(h1Rule), h1Rule)
 
   // ② part heading (第X部分…): section-header--part class, no 12pt residue.
-  assert('② part title carries section-header--part class', html.includes('<h2 class="section-header section-header--part">第一部分 阅读理解'), '')
+  assert('② part title carries section-header--part class', /<h2 class="section-header section-header--part"[^>]*>第一部分 阅读理解/.test(html), '')
   const partRule = html.match(/\.section-header--part \{[^}]*\}/)?.[0] || ''
   assert('② .section-header--part is bold, heading (Hei) font stack, no left indent', /font-weight:\s*bold/.test(partRule) && /SimHei/.test(partRule) && /padding-left:\s*0/.test(partRule), partRule)
 
   // ③ section heading (第X节…): section-header--section class, Song stack, indented 21pt.
-  assert('③ section title carries section-header--section class', html.includes('<h2 class="section-header section-header--section">第一节'), '')
+  assert('③ section title carries section-header--section class', /<h2 class="section-header section-header--section"[^>]*>第一节/.test(html), '')
   const sectionRule = html.match(/\.section-header--section \{[^}]*\}/)?.[0] || ''
   assert('③ .section-header--section is regular weight, Song(SimSun) font stack, padding-left 21pt (2 字符)', !/font-weight:\s*bold/.test(sectionRule) && /SimSun/.test(sectionRule) && /padding-left:\s*21pt/.test(sectionRule), sectionRule)
 
@@ -158,7 +158,7 @@ console.log('\nTest 3b: heading-fidelity — part/section-header split, h1 卷�
   // ⑤ negative: a title matching neither pattern falls back to 'part' (Locked Decision 1).
   const fallbackBlocks = [{ type: 'section_header', title: '写作' }, { type: 'question_group', questionGroupId: 'g1', score: 2.5 }]
   const fallbackHtml = buildPrintHtml({ title: 'X', versionType: 'student', printStyle: 'exam', items, blocks: fallbackBlocks, questionNumberStart: 1 })
-  assert('⑤ non-matching title falls back to section-header--part (conservative default)', fallbackHtml.includes('<h2 class="section-header section-header--part">写作</h2>'), '')
+  assert('⑤ non-matching title falls back to section-header--part (conservative default)', /<h2 class="section-header section-header--part"[^>]*>写作<\/h2>/.test(fallbackHtml), '')
 }
 
 // --- Test 6: Blank-marker styling (刀⑤ render-fidelity Chunk B / PA F2) ---

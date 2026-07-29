@@ -222,7 +222,7 @@ function renderCanonicalInlineNodes(nodes) {
   ).join('')
 }
 
-function renderCanonicalReadingBlocks(canonicalGroup, groupLeadHtml) {
+function renderCanonicalReadingBlocks(canonicalGroup) {
   const precedingGeometry =
     readingPassageLetterGeometryForLetter(
       canonicalGroup.passageLetter,
@@ -240,13 +240,19 @@ function renderCanonicalReadingBlocks(canonicalGroup, groupLeadHtml) {
   const beforeStyle = beforeAdjustment < 0
     ? `margin-top:${beforeAdjustment}pt`
     : `padding-top:${beforeAdjustment}pt`
-  return `<div class="canonical-reading-start">${groupLeadHtml}<div class="canonical-reading-passage-letter" data-canonical-passage-letter="${escapeHtml(canonicalGroup.passageLetter)}" data-canonical-reading-preceding-kind="${precedingGeometry.precedingKind}" style="${beforeStyle}">${escapeHtml(canonicalGroup.passageLetter)}</div></div><div class="canonical-reading" data-canonical-reading-semantic-signature="${escapeHtml(canonicalGroup.semanticSignature)}">${canonicalGroup.blocks.map((block) => {
+  return `<div class="canonical-reading-start"><div class="canonical-reading-passage-letter" data-canonical-passage-letter="${escapeHtml(canonicalGroup.passageLetter)}" data-canonical-reading-rhythm-role="passage_letter" data-canonical-reading-preceding-kind="${precedingGeometry.precedingKind}" style="${beforeStyle}">${escapeHtml(canonicalGroup.passageLetter)}</div></div><div class="canonical-reading" data-canonical-reading-semantic-signature="${escapeHtml(canonicalGroup.semanticSignature)}">${canonicalGroup.blocks.map((block) => {
     if (block.kind === 'paragraph') {
       const tag = block.role === 'title' ? 'h3' : 'p'
-      return `<${tag} class="canonical-reading-${block.role}" data-canonical-block-id="${escapeHtml(block.nodeId)}" data-canonical-block-kind="paragraph" data-canonical-reading-role="${block.role}">${renderCanonicalInlineNodes(block.inlines)}</${tag}>`
+      const rhythmRole =
+        block.role === 'title'
+          ? 'passage_title'
+          : block.role === 'subtitle'
+            ? 'passage_subtitle'
+            : 'passage_body_line'
+      return `<${tag} class="canonical-reading-${block.role}" data-canonical-block-id="${escapeHtml(block.nodeId)}" data-canonical-block-kind="paragraph" data-canonical-reading-role="${block.role}" data-canonical-reading-rhythm-role="${rhythmRole}">${renderCanonicalInlineNodes(block.inlines)}</${tag}>`
     }
     if (block.kind === 'table') {
-      return `<table class="canonical-reading-table" data-canonical-block-id="${escapeHtml(block.nodeId)}" data-canonical-block-kind="table" data-canonical-table-columns="${block.columnCount}"><tbody>${block.rows.map((row) => `<tr data-canonical-row-id="${escapeHtml(row.rowId)}">${row.cells.map((cell) => `<td colspan="${cell.columnSpan}" rowspan="${cell.rowSpan}" data-canonical-cell-id="${escapeHtml(cell.cellId)}" data-canonical-column-start="${cell.columnStart}">${renderCanonicalInlineNodes(cell.inlines)}</td>`).join('')}</tr>`).join('')}</tbody></table>`
+      return `<table class="canonical-reading-table" data-canonical-block-id="${escapeHtml(block.nodeId)}" data-canonical-block-kind="table" data-canonical-reading-rhythm-role="native_table_line" data-canonical-table-columns="${block.columnCount}"><tbody>${block.rows.map((row) => `<tr data-canonical-row-id="${escapeHtml(row.rowId)}">${row.cells.map((cell) => `<td colspan="${cell.columnSpan}" rowspan="${cell.rowSpan}" data-canonical-cell-id="${escapeHtml(cell.cellId)}" data-canonical-column-start="${cell.columnStart}">${renderCanonicalInlineNodes(cell.inlines)}</td>`).join('')}</tr>`).join('')}</tbody></table>`
     }
     const src = `data:${block.mediaArtifact.mimeType};base64,${block.mediaArtifact.encodedBytes}`
     return `<figure class="canonical-reading-figure" data-canonical-block-id="${escapeHtml(block.nodeId)}" data-canonical-block-kind="figure" data-canonical-media-id="${escapeHtml(block.mediaId)}" data-canonical-media-sha256="${escapeHtml(block.media.sha256)}" data-canonical-source-artifact-id="${escapeHtml(block.media.sourceArtifactRef.artifactId)}"><img src="${escapeHtml(src)}" alt="${escapeHtml(block.caption || block.mediaId)}">${block.caption ? `<figcaption>${renderCanonicalInlineNodes(block.captionInlines)}</figcaption>` : ''}</figure>`
@@ -302,7 +308,11 @@ function renderCanonicalContinuationWriting(canonicalGroup, writingChrome) {
   return `<div class="canonical-continuation-writing" data-canonical-writing-semantic-signature="${escapeHtml(canonicalGroup.semanticSignature)}" data-canonical-writing-occurrence-signature="${escapeHtml(canonicalGroup.occurrenceSignature)}" data-canonical-word-count-scope="${escapeHtml(canonicalGroup.wordCountRuling.countScope)}" data-canonical-word-count-target="${canonicalGroup.wordCountRuling.target}">${chrome}<div class="passage canonical-continuation-material">${material}</div><div class="writing-answer-box canonical-continuation-response" data-canonical-answer-region-ref="${escapeHtml(response.answerRegionRef)}" data-canonical-response-slot-id="${escapeHtml(response.responseSlotId)}" style="width:145mm;height:57mm;">${starters}</div></div>`
 }
 
-function renderCanonicalQuestionOptions(question, preserveInlineIdentity = false) {
+function renderCanonicalQuestionOptions(
+  question,
+  preserveInlineIdentity = false,
+  readingTail = null,
+) {
   const placement = translateAbcdPlanToPointPlacement(question.layoutPlan)
   const attrs = ` data-canonical-placement-signature="${escapeHtml(placement.placementSignature)}" data-canonical-placement-mode="${placement.mode}" data-canonical-column-starts-pt="${placement.columnStartsPt.join(',')}" data-canonical-question-stem-start-pt="${placement.questionStemStartPt}" style="width:${placement.rowWidthPt}pt;margin-left:${placement.questionStemStartPt}pt;grid-template-columns:${placement.columnWidthsPt.map((width) => `${width}pt`).join(' ')}"`
   return `<div class="canonical-options canonical-options--${placement.mode}"${attrs}>${question.options.map((option, index) => {
@@ -314,7 +324,17 @@ function renderCanonicalQuestionOptions(question, preserveInlineIdentity = false
     const content = preserveInlineIdentity && Array.isArray(option.content)
       ? renderCanonicalInlineNodes(option.content)
       : escapeHtml(option.text)
-    return `<span data-canonical-option-id="${escapeHtml(option.optionId)}" data-canonical-start-pt="${physical.startPt}"${continuation === null ? '' : ` data-canonical-continuation-start-pt="${continuation}"`}${style}><span>${escapeHtml(option.label)}.</span> ${content}</span>`
+    const isTailOption =
+      readingTail
+      && readingTail.isLastQuestion
+      && index === question.options.length - 1
+    const rhythmAttrs = preserveInlineIdentity
+      ? ' data-canonical-reading-rhythm-role="option_line"'
+      : ''
+    const tailAttrs = isTailOption
+      ? ` data-canonical-reading-anchor-for="${escapeHtml(readingTail.targetId)}" data-canonical-reading-predecessor-question-id="${escapeHtml(question.questionId)}" data-canonical-reading-predecessor-option-id="${escapeHtml(option.optionId)}"${readingTail.successorGroupId ? ` data-canonical-reading-preceding-kind="prior_question_tail"${readingTail.visiblePredecessorOnOption ? ` data-canonical-reading-preceding-for="${escapeHtml(readingTail.successorGroupId)}"` : ''}` : readingTail.visiblePredecessorOnOption ? ` data-canonical-reading-before-section="${escapeHtml(readingTail.followingSectionId)}"` : ''}`
+      : ''
+    return `<span data-canonical-option-id="${escapeHtml(option.optionId)}"${rhythmAttrs}${tailAttrs} data-canonical-start-pt="${physical.startPt}"${continuation === null ? '' : ` data-canonical-continuation-start-pt="${continuation}"`}${style}><span>${escapeHtml(option.label)}.</span> ${content}</span>`
   }).join('')}</div>`
 }
 
@@ -470,6 +490,73 @@ export function buildPrintHtml({
       .filter((block) => block.type === 'question_group')
       .map((block) => block.questionGroupId)
     : items.map((item) => item.detail.id)
+  const canonicalReadingSelection = canonicalConsumption?.selections?.find(
+    (selection) =>
+      selection.familyContractId === 'reading'
+      && selection.mode === 'canonical',
+  )
+  const canonicalReadingGroupIds = canonicalReadingSelection
+    ? canonicalReadingSelection.groupIds.filter((groupId) =>
+        renderedGroupIds.includes(groupId))
+    : []
+  const nextReadingGroupIdByPredecessorGroupId = new Map(
+    canonicalReadingGroupIds.slice(0, -1).map((groupId, index) => [
+      groupId,
+      canonicalReadingGroupIds[index + 1],
+    ]),
+  )
+  const firstReadingGroupBlockIndex = Array.isArray(blocks)
+    ? blocks.findIndex(
+        (block) =>
+          block.type === 'question_group'
+          && block.questionGroupId === canonicalReadingGroupIds[0],
+      )
+    : -1
+  const lastReadingGroupBlockIndex = Array.isArray(blocks)
+    ? blocks.findLastIndex(
+        (block) =>
+          block.type === 'question_group'
+          && block.questionGroupId
+            === canonicalReadingGroupIds[canonicalReadingGroupIds.length - 1],
+      )
+    : -1
+  const followingReadingSectionBlockIndex =
+    Array.isArray(blocks) && lastReadingGroupBlockIndex >= 0
+      ? blocks.findIndex(
+          (block, index) =>
+            index > lastReadingGroupBlockIndex
+            && block.type === 'section_header'
+            && block.title,
+        )
+      : -1
+  const followingReadingSectionId =
+    followingReadingSectionBlockIndex >= 0
+      ? `print-section-${followingReadingSectionBlockIndex}`
+      : undefined
+  let firstReadingPredecessorBlockIndex = -1
+  let readingChromeStartBlockIndex = firstReadingGroupBlockIndex
+  if (firstReadingGroupBlockIndex >= 0) {
+    for (
+      let index = firstReadingGroupBlockIndex - 1;
+      index >= 0;
+      index -= 1
+    ) {
+      const block = blocks[index]
+      if (block.type === 'section_header' || block.type === 'instruction') {
+        if (firstReadingPredecessorBlockIndex < 0) {
+          firstReadingPredecessorBlockIndex = index
+        }
+        readingChromeStartBlockIndex = index
+        continue
+      }
+      if (block.type === 'page_break') continue
+      if (block.type === 'question_group') break
+      break
+    }
+  }
+  const isReadingChromeBlock = (blockIndex) =>
+    blockIndex >= readingChromeStartBlockIndex
+    && blockIndex < firstReadingGroupBlockIndex
   const canonicalWritingChromeOwnsDocument =
     canonicalConsumption !== null
     && canonicalWritingChromeOwnsRenderedDocument({
@@ -581,13 +668,40 @@ export function buildPrintHtml({
   if (Array.isArray(blocks) && blocks.length > 0) {
     let questionNum = startNum
     let groupNum = 0
-    for (const block of blocks) {
+    for (const [blockIndex, block] of blocks.entries()) {
       if (block.type === 'section_header' && block.title) {
         // heading-fidelity cut (Locked Decision 1/2): 部/节判定单源 —
         // 部标题(第X部分…)黑体加粗顶格, 节标题(第X节…)宋体常规缩进 2 字符.
         // 层级靠字重与缩进区分, 两态共用 10.5pt (标准 §2/§4 一律不放大字号).
         const kind = headingKind(block.title)
-        sections.push(`<h2 class="section-header section-header--${kind}">${escapeHtml(block.title)}</h2>`)
+        const rhythmRole =
+          blockIndex === followingReadingSectionBlockIndex
+            ? 'next_section'
+            : isReadingChromeBlock(blockIndex) && kind === 'part'
+              ? 'part_title'
+              : isReadingChromeBlock(blockIndex) ? 'subsection' : null
+        const rhythmRoleAttr = rhythmRole
+          ? ` data-canonical-reading-rhythm-role="${rhythmRole}"`
+          : ''
+        const readingPredecessorAttrs =
+          blockIndex === firstReadingPredecessorBlockIndex
+            ? ` data-canonical-reading-preceding-for="${escapeHtml(canonicalReadingGroupIds[0])}" data-canonical-reading-preceding-kind="reading_heading" data-canonical-reading-anchor-id="print-section-${blockIndex}"`
+            : ''
+        const readingFollowingAttrs =
+          blockIndex === followingReadingSectionBlockIndex
+            ? ` data-canonical-reading-section-id="${escapeHtml(followingReadingSectionId)}" data-canonical-reading-following-for="${escapeHtml(canonicalReadingGroupIds.at(-1))}"`
+            : ''
+        sections.push(`<h2 class="section-header section-header--${kind}"${rhythmRoleAttr}${readingPredecessorAttrs}${readingFollowingAttrs}>${escapeHtml(block.title)}</h2>`)
+      } else if (
+        block.type === 'instruction'
+        && block.text
+        && isReadingChromeBlock(blockIndex)
+      ) {
+        const readingPredecessorAttrs =
+          blockIndex === firstReadingPredecessorBlockIndex
+            ? ` data-canonical-reading-preceding-for="${escapeHtml(canonicalReadingGroupIds[0])}" data-canonical-reading-preceding-kind="reading_heading" data-canonical-reading-anchor-id="print-instruction-${blockIndex}"`
+            : ''
+        sections.push(`<p class="reading-meta-instruction" data-canonical-reading-rhythm-role="meta_instruction"${readingPredecessorAttrs}>${escapeHtml(block.text)}</p>`)
       } else if (block.type === 'page_break') {
         sections.push('<div class="page-break"></div>')
       } else if (block.type === 'question_group' && block.questionGroupId) {
@@ -648,19 +762,18 @@ export function buildPrintHtml({
             : null
 
         let groupHtml = canonicalGroup
-          ? `<section class="question-group" data-canonical-group-id="${escapeHtml(canonicalGroup.groupId)}" data-canonical-semantic-signature="${escapeHtml(canonicalGroup.semanticSignature)}"${canonicalGroup.occurrenceSignature ? ` data-canonical-occurrence-signature="${escapeHtml(canonicalGroup.occurrenceSignature)}"` : ''}>`
+          ? `<section class="question-group" data-canonical-group-id="${escapeHtml(canonicalGroup.groupId)}"${canonicalGroup.groupType === 'reading' ? ' data-canonical-group-type="reading"' : ''} data-canonical-semantic-signature="${escapeHtml(canonicalGroup.semanticSignature)}"${canonicalGroup.occurrenceSignature ? ` data-canonical-occurrence-signature="${escapeHtml(canonicalGroup.occurrenceSignature)}"` : ''}>`
           : '<section class="question-group">'
 
         let groupLeadHtml = ''
-        if (!canonicalWritingChrome) {
-          const readingPredecessorAttrs =
-            canonicalGroup?.groupType === 'reading'
-              ? ` data-canonical-reading-preceding-for="${escapeHtml(canonicalGroup.groupId)}" data-canonical-reading-preceding-kind="reading_heading" data-canonical-reading-predecessor-group-id="${escapeHtml(canonicalGroup.groupId)}"`
-              : ''
-          groupLeadHtml += `<div class="group-header"${readingPredecessorAttrs}>${chineseNumeral(groupNum)}、${escapeHtml(groupHeaderLabel)}${escapeHtml(groupHeaderScoreSuffix)}</div>`
+        if (
+          !canonicalWritingChrome
+          && canonicalGroup?.groupType !== 'reading'
+        ) {
+          groupLeadHtml += `<div class="group-header">${chineseNumeral(groupNum)}、${escapeHtml(groupHeaderLabel)}${escapeHtml(groupHeaderScoreSuffix)}</div>`
         }
 
-        if (!isExam) {
+        if (!isExam && canonicalGroup?.groupType !== 'reading') {
           groupLeadHtml += `<div class="group-meta"><strong>${escapeHtml(detail.title)}</strong> · ${groupTypeLabels[detail.groupType] || detail.groupType} · 每题 ${score} 分</div>`
         }
 
@@ -675,10 +788,7 @@ export function buildPrintHtml({
 
         if (canonicalGroup) {
           if (canonicalGroup.groupType === 'reading') {
-            groupHtml += renderCanonicalReadingBlocks(
-              canonicalGroup,
-              groupLeadHtml,
-            )
+            groupHtml += renderCanonicalReadingBlocks(canonicalGroup)
           } else if (canonicalGroup.groupType === 'writing') {
             groupHtml += groupLeadHtml
             groupHtml += renderCanonicalApplicationWriting(
@@ -755,6 +865,21 @@ export function buildPrintHtml({
         const canonicalQuestionById = canonicalGroup
           ? new Map(canonicalGroup.questions.map((question) => [question.questionId, question]))
           : null
+        const readingSuccessorGroupId =
+          canonicalGroup?.groupType === 'reading'
+            ? nextReadingGroupIdByPredecessorGroupId.get(
+                canonicalGroup.groupId,
+              )
+            : undefined
+        const readingFollowingSectionId =
+          canonicalGroup?.groupType === 'reading'
+          && canonicalGroup.groupId === canonicalReadingGroupIds.at(-1)
+            ? followingReadingSectionId
+            : undefined
+        const lastReadingQuestionId =
+          canonicalGroup?.groupType === 'reading'
+            ? canonicalGroup.questions.at(-1)?.questionId
+            : undefined
         for (const question of detail.questions) {
           const canonicalQuestion = canonicalQuestionById?.get(question.id)
           const printQuestion = canonicalQuestion
@@ -791,7 +916,7 @@ export function buildPrintHtml({
             ? canonicalQuestion.questionNo
             : questionNum
           const canonicalQuestionAttrs = canonicalQuestion
-            ? ` data-canonical-question-id="${escapeHtml(canonicalQuestion.questionId)}"${isTeacher ? ` data-canonical-correct-option-id="${escapeHtml(canonicalQuestion.correctOptionId || '')}"` : ''}`
+            ? ` data-canonical-question-id="${escapeHtml(canonicalQuestion.questionId)}"${canonicalGroup?.groupType === 'reading' ? ' data-canonical-reading-rhythm-role="question_block"' : ''}${canonicalQuestion.questionId === lastReadingQuestionId && readingSuccessorGroupId ? ` data-canonical-reading-last-question-for="${escapeHtml(readingSuccessorGroupId)}"` : ''}${canonicalQuestion.questionId === lastReadingQuestionId && readingFollowingSectionId ? ` data-canonical-reading-last-question-before-section="${escapeHtml(readingFollowingSectionId)}"` : ''}${isTeacher ? ` data-canonical-correct-option-id="${escapeHtml(canonicalQuestion.correctOptionId || '')}"` : ''}`
             : ''
           // 空题干:挖空题号已在文中(语法填空/完形/七选五)。有选项则题号与选项同行
           // (真卷完形形态);无选项且非教师版则整行不出(语法填空文后无内容)。
@@ -837,20 +962,54 @@ export function buildPrintHtml({
             const stemAttrs = stemPlacement
               ? ` data-canonical-question-stem-start-pt="${stemPlacement.questionStemStartPt}" style="grid-template-columns:${stemPlacement.questionStemStartPt}pt minmax(0,1fr)"`
               : ''
-            groupHtml += `<div class="question"${canonicalQuestionAttrs}><p class="stem${stemPlacement ? ' stem--canonical' : ''}"${stemAttrs}><span class="qnum">${displayQuestionNo}.</span>${stemPlacement ? `<span class="canonical-stem-text">${renderedStem}</span>` : ` ${renderedStem}`}</p>`
+            groupHtml += `<div class="question"${canonicalQuestionAttrs}><p class="stem${stemPlacement ? ' stem--canonical' : ''}"${canonicalGroup?.groupType === 'reading' ? ' data-canonical-reading-rhythm-role="question_stem_line"' : ''}${stemAttrs}><span class="qnum">${displayQuestionNo}.</span>${stemPlacement ? `<span class="canonical-stem-text">${renderedStem}</span>` : ` ${renderedStem}`}</p>`
             groupHtml += canonicalQuestion?.layoutPlan
               ? renderCanonicalQuestionOptions(
                   canonicalQuestion,
                   canonicalGroup.groupType === 'reading',
+                  canonicalGroup.groupType === 'reading'
+                    && (readingSuccessorGroupId || readingFollowingSectionId)
+                    ? {
+                        isLastQuestion:
+                          canonicalQuestion.questionId
+                            === lastReadingQuestionId,
+                        targetId:
+                          readingSuccessorGroupId
+                          || readingFollowingSectionId,
+                        successorGroupId: readingSuccessorGroupId,
+                        followingSectionId: readingFollowingSectionId,
+                        visiblePredecessorOnOption: !isTeacher,
+                      }
+                    : null,
                 )
               : renderOptions(printQuestion.options, detail.groupType)
           }
           if (isTeacher) {
-            groupHtml += `<div class="answer"><p><strong>【答案】</strong>${escapeHtml(printQuestion.answer || '待补')}</p>`
+            const isReadingTransitionTail =
+              canonicalGroup?.groupType === 'reading'
+              && canonicalQuestion?.questionId === lastReadingQuestionId
+              && (readingSuccessorGroupId || readingFollowingSectionId)
             const rawExplanation = question.explanation || question.note || ''
             const explanation = isMetaStub(rawExplanation) ? '' : rawExplanation
+            const answerTransitionAttrs =
+              isReadingTransitionTail && !explanation
+                ? ` data-canonical-reading-predecessor-question-id="${escapeHtml(canonicalQuestion.questionId)}" data-canonical-reading-predecessor-option-id="${escapeHtml(canonicalQuestion.options.at(-1)?.optionId || '')}"${readingSuccessorGroupId ? ` data-canonical-reading-preceding-for="${escapeHtml(readingSuccessorGroupId)}" data-canonical-reading-preceding-kind="prior_question_tail"` : ` data-canonical-reading-before-section="${escapeHtml(readingFollowingSectionId)}"`}`
+                : ''
+            const answerRhythmAttrs =
+              canonicalGroup?.groupType === 'reading'
+                ? ' data-canonical-reading-rhythm-role="answer_line"'
+                : ''
+            groupHtml += `<div class="answer"><p${answerRhythmAttrs}${answerTransitionAttrs}><strong>【答案】</strong>${escapeHtml(printQuestion.answer || '待补')}</p>`
             if (explanation) {
-              groupHtml += `<p class="explanation"><strong>【解析】</strong>${escapeHtml(explanation)}</p>`
+              const explanationTransitionAttrs =
+                isReadingTransitionTail
+                  ? ` data-canonical-reading-predecessor-question-id="${escapeHtml(canonicalQuestion.questionId)}" data-canonical-reading-predecessor-option-id="${escapeHtml(canonicalQuestion.options.at(-1)?.optionId || '')}"${readingSuccessorGroupId ? ` data-canonical-reading-preceding-for="${escapeHtml(readingSuccessorGroupId)}" data-canonical-reading-preceding-kind="prior_question_tail"` : ` data-canonical-reading-before-section="${escapeHtml(readingFollowingSectionId)}"`}`
+                  : ''
+              const explanationRhythmAttrs =
+                canonicalGroup?.groupType === 'reading'
+                  ? ' data-canonical-reading-rhythm-role="explanation_line"'
+                  : ''
+              groupHtml += `<p class="explanation"${explanationRhythmAttrs}${explanationTransitionAttrs}><strong>【解析】</strong>${escapeHtml(explanation)}</p>`
             }
             groupHtml += '</div>'
           }
@@ -986,6 +1145,10 @@ body {
   margin-bottom: 1em;
 }
 
+.question-group[data-canonical-group-type="reading"] {
+  margin-bottom: 0;
+}
+
 .group-meta {
   font-size: 9pt;
   color: #666;
@@ -1102,7 +1265,7 @@ body {
 .canonical-reading-body,
 .canonical-reading-subtitle,
 .canonical-reading-title {
-  margin: 0 0 0.5em;
+  margin: 0;
   font-size: ${readingPassageLetterTypography.fontSizePt}pt;
   line-height: ${readingPassageLetterTypography.lineHeightPt}pt;
 }
@@ -1132,20 +1295,20 @@ body {
 
 .canonical-reading-table {
   width: 100%;
-  margin: 0 0 0.6em;
+  margin: 0;
   border-collapse: collapse;
   table-layout: fixed;
   break-inside: avoid;
 }
 
 .canonical-reading-table td {
-  padding: 3pt 4pt;
+  padding: 0 4pt;
   border: 0.5pt solid #000;
   vertical-align: top;
 }
 
 .canonical-reading-figure {
-  margin: 0 0 0.6em;
+  margin: 0;
   text-align: center;
   break-inside: avoid;
 }
@@ -1182,6 +1345,38 @@ body {
   margin: 0.2em 0 0.2em 2em;
 }
 
+.question-group[data-canonical-group-type="reading"] .canonical-reading + .question {
+  margin-top: 0;
+  padding-top: 18pt;
+}
+
+.question-group[data-canonical-group-type="reading"] .question,
+.question-group[data-canonical-group-type="reading"] .stem,
+.question-group[data-canonical-group-type="reading"] .question > .canonical-options,
+.question-group[data-canonical-group-type="reading"] .answer,
+.question-group[data-canonical-group-type="reading"] .answer p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.question-group[data-canonical-group-type="reading"] .answer,
+.question-group[data-canonical-group-type="reading"] .question > .canonical-options {
+  margin-left: 21pt;
+}
+
+.question-group[data-canonical-group-type="reading"] .answer {
+  font-size: 10.5pt;
+}
+
+.reading-meta-instruction {
+  margin: -7.03125pt 0 6.75pt;
+  line-height: ${paperSurfaceTokens.paperLineHeight};
+}
+
+.section-header[data-canonical-reading-following-for] {
+  margin-top: 18pt;
+}
+
 .options-inline--canonical {
   display: grid;
   grid-template-columns: 21pt 438.2pt;
@@ -1215,6 +1410,10 @@ body {
    标题不落页尾;写作框整框不拆。 */
 .question {
   break-inside: avoid;
+}
+
+.question[data-canonical-reading-last-question-for] {
+  break-after: avoid;
 }
 
 .section-header,
@@ -1361,6 +1560,16 @@ body {
 /* Handout density: more spacing */
 .handout .passage p { margin-bottom: 0.4em; }
 .handout .question { margin: 0.8em 0; }
+
+.exam .question-group[data-canonical-group-type="reading"] .question,
+.handout .question-group[data-canonical-group-type="reading"] .question {
+  margin: 0;
+}
+
+.exam .question-group[data-canonical-group-type="reading"] .canonical-reading + .question,
+.handout .question-group[data-canonical-group-type="reading"] .canonical-reading + .question {
+  margin-top: 0;
+}
 </style>
 </head>
 <body class="${densityClass}">
