@@ -1,0 +1,104 @@
+{
+  "schemaVersion": "seven-choices-role-oracles-v1",
+  "paperId": "paper-2026-i",
+  "sourceAsset": {
+    "path": "test-fixtures/paper-import/paper-2026-i-canonical-pilot/paper-asset.json",
+    "sha256": "fe7feb2cc9554b00bbab96a7d4fe5e499513c564c28e6c314e0373e29b2ca7bf"
+  },
+  "readingBoundary": {
+    "groupId": "group-2026-i-reading-d",
+    "questionId": "q-2026-i-035",
+    "optionId": "option:q-2026-i-035:D",
+    "sectionId": "section-2026-i-reading-seven",
+    "sectionVisibleText": "第二节 (共5小题；每小题2.5分，满分12.5分)",
+    "instructionVisibleText": "阅读下面短文，从短文后的选项中选出可以填入空白处的最佳选项。选项中有两项为多余选项。"
+  },
+  "sevenChoicesGroup": {
+    "groupId": "group-2026-i-seven-choices",
+    "bankId": "bank:group-2026-i-seven-choices",
+    "questionBlankPairs": [
+      {
+        "questionId": "q-2026-i-036",
+        "blankId": "blank-2026-i-036"
+      },
+      {
+        "questionId": "q-2026-i-037",
+        "blankId": "blank-2026-i-037"
+      },
+      {
+        "questionId": "q-2026-i-038",
+        "blankId": "blank-2026-i-038"
+      },
+      {
+        "questionId": "q-2026-i-039",
+        "blankId": "blank-2026-i-039"
+      },
+      {
+        "questionId": "q-2026-i-040",
+        "blankId": "blank-2026-i-040"
+      }
+    ],
+    "paragraphIds": [
+      "para-2026-i-seven-title",
+      "para-2026-i-seven-p1",
+      "para-2026-i-seven-p2",
+      "para-2026-i-seven-p3",
+      "para-2026-i-seven-p4"
+    ],
+    "optionIds": [
+      "option:group-2026-i-seven-choices:A",
+      "option:group-2026-i-seven-choices:B",
+      "option:group-2026-i-seven-choices:C",
+      "option:group-2026-i-seven-choices:D",
+      "option:group-2026-i-seven-choices:E",
+      "option:group-2026-i-seven-choices:F",
+      "option:group-2026-i-seven-choices:G"
+    ],
+    "answers": [
+      "C",
+      "F",
+      "A",
+      "D",
+      "B"
+    ],
+    "firstPassageText": "Museums, once quiet places filled with history, are now full of digital excitement.",
+    "lastPassageText": "Strict policies should be established to protect visitors’ information.",
+    "firstOptionText": "This capability allows for timely restoration.",
+    "lastOptionText": "AI is changing this by using image recognition technology to analyze exhibits."
+  },
+  "followingSection": {
+    "partId": "part-2026-i-language",
+    "visibleText": "第三部分 语言运用(共两节，满分30分)"
+  },
+  "fixtures": {
+    "screenWrappedPassageWidthPx": 330,
+    "screenWrappedOptionWidthPx": 260,
+    "printWrappedPassageWidthPt": 250,
+    "printWrappedOptionWidthPt": 190,
+    "bankHeadingVisibleText": "A-G 选项",
+    "samePageNextSectionVisibleText": "第三部分 语言运用(共两节，满分30分)"
+  },
+  "roleOrder": {
+    "chrome": [
+      "subsection",
+      "meta_instruction"
+    ],
+    "passage": [
+      "passage_body_line"
+    ],
+    "bankWithoutHeading": [
+      "bank_option_line"
+    ],
+    "bankWithHeading": [
+      "bank_heading",
+      "bank_option_line"
+    ],
+    "teacherTail": [
+      "answer_line",
+      "explanation_line"
+    ],
+    "following": [
+      "next_section"
+    ]
+  }
+}

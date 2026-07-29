@@ -50,6 +50,7 @@ import {
   readingPassageLetterGeometryForLetter,
   readingPassageLetterTypography,
 } from '../shared/paper-canonical/readingPassageLetter.mjs'
+import { sevenChoicesRhythm } from '../shared/paper-canonical/sevenChoicesRhythm.mjs'
 import {
   canonicalWritingChromeOwnsRenderedDocument,
   projectCanonicalConsumerGroup,
@@ -186,7 +187,7 @@ function renderCanonicalParagraph(canonicalGroup, paragraph, displayNumberByQues
       ? `<span class="print-blank-hint">(${escapeHtml(node.hint)})</span>`
       : ''
     const pairAttrs = canonicalGroup.groupType === 'sevenChoices'
-      ? ` data-canonical-pair="${escapeHtml(`${node.questionId}:${node.blankId}`)}" data-canonical-question-id="${escapeHtml(node.questionId)}" data-canonical-blank-id="${escapeHtml(node.blankId)}"`
+      ? ` data-canonical-pair="${escapeHtml(`${node.questionId}:${node.blankId}`)}" data-canonical-question-id="${escapeHtml(node.questionId)}" data-canonical-blank-id="${escapeHtml(node.blankId)}" data-canonical-seven-choices-rhythm-role="inline_blank_marker"`
       : ''
     return `<span class="print-blank-unit"${pairAttrs}><span class="print-blank ${blankWidthClass}"><span class="print-blank-num">${displayNumber}</span></span>${hint}</span>`
   }).join('')
@@ -210,10 +211,31 @@ function canonicalGroupMatchesPrintDetail(canonicalGroup, detail) {
   )
 }
 
-function renderCanonicalSharedBank(canonicalGroup) {
+function renderCanonicalSharedBank(canonicalGroup, {
+  heading = null,
+  followingSectionId,
+  teacher = false,
+} = {}) {
   if (!canonicalGroup.optionBank) return ''
   const { bankId, options } = canonicalGroup.optionBank
-  return `<ol class="canonical-option-bank" data-canonical-bank-id="${escapeHtml(bankId)}" data-canonical-semantic-signature="${escapeHtml(canonicalGroup.semanticSignature)}" data-canonical-occurrence-signature="${escapeHtml(canonicalGroup.occurrenceSignature)}">${options.map((option) => `<li class="canonical-option-bank-item" data-canonical-option-id="${escapeHtml(option.optionId)}"><span>${escapeHtml(option.label)}.</span> ${escapeHtml(option.text)}</li>`).join('')}</ol>`
+  const isSevenChoices = canonicalGroup.groupType === 'sevenChoices'
+  const headingHtml = heading && isSevenChoices
+    ? `<div class="canonical-option-bank-heading" data-canonical-seven-choices-rhythm-role="bank_heading">${escapeHtml(heading)}</div>`
+    : ''
+  const optionHtml = options.map((option, index) => {
+    const rhythmAttrs = isSevenChoices
+      ? ' data-canonical-seven-choices-rhythm-role="bank_option_line"'
+      : ''
+    const transitionAttrs =
+      isSevenChoices
+      && !teacher
+      && index === options.length - 1
+      && followingSectionId
+        ? ` data-canonical-seven-choices-before-section="${escapeHtml(followingSectionId)}"`
+        : ''
+    return `<li class="canonical-option-bank-item" data-canonical-option-id="${escapeHtml(option.optionId)}"${rhythmAttrs}${transitionAttrs}><span class="canonical-option-bank-label">${escapeHtml(option.label)}.</span><span class="canonical-option-bank-text">${escapeHtml(option.text)}</span></li>`
+  }).join('')
+  return `<div class="canonical-option-bank-region" data-canonical-bank-heading-state="${headingHtml ? 'present' : 'absent'}">${headingHtml}<ol class="canonical-option-bank" data-canonical-bank-id="${escapeHtml(bankId)}" data-canonical-semantic-signature="${escapeHtml(canonicalGroup.semanticSignature)}" data-canonical-occurrence-signature="${escapeHtml(canonicalGroup.occurrenceSignature)}">${optionHtml}</ol></div>`
 }
 
 function renderCanonicalInlineNodes(nodes) {
@@ -476,6 +498,7 @@ export function buildPrintHtml({
   images = [],
   normalizationDiagnostics = [],
   canonicalConsumption = null,
+  sevenChoicesBankHeading = null,
 }) {
   // draft-numbering-style v2 (owner 拍板 2026-07-10 二轮改判): small-question
   // numbering in the `blocks`-array path is WHOLE-PAPER continuous again
@@ -533,6 +556,68 @@ export function buildPrintHtml({
     followingReadingSectionBlockIndex >= 0
       ? `print-section-${followingReadingSectionBlockIndex}`
       : undefined
+  const canonicalSevenChoicesSelection = canonicalConsumption?.selections?.find(
+    (selection) =>
+      selection.familyContractId === 'seven-choices'
+      && selection.mode === 'canonical',
+  )
+  const canonicalSevenChoicesGroupIds = canonicalSevenChoicesSelection
+    ? canonicalSevenChoicesSelection.groupIds.filter((groupId) =>
+        renderedGroupIds.includes(groupId))
+    : []
+  const firstSevenChoicesGroupBlockIndex = Array.isArray(blocks)
+    ? blocks.findIndex(
+        (block) =>
+          block.type === 'question_group'
+          && block.questionGroupId === canonicalSevenChoicesGroupIds[0],
+      )
+    : -1
+  const lastSevenChoicesGroupBlockIndex = Array.isArray(blocks)
+    ? blocks.findLastIndex(
+        (block) =>
+          block.type === 'question_group'
+          && block.questionGroupId
+            === canonicalSevenChoicesGroupIds[
+              canonicalSevenChoicesGroupIds.length - 1
+            ],
+      )
+    : -1
+  const followingSevenChoicesSectionBlockIndex =
+    Array.isArray(blocks) && lastSevenChoicesGroupBlockIndex >= 0
+      ? blocks.findIndex(
+          (block, index) =>
+            index > lastSevenChoicesGroupBlockIndex
+            && block.type === 'section_header'
+            && block.title,
+        )
+      : -1
+  const followingSevenChoicesSectionId =
+    followingSevenChoicesSectionBlockIndex >= 0
+      ? `print-section-${followingSevenChoicesSectionBlockIndex}`
+      : undefined
+  let firstSevenChoicesPredecessorBlockIndex = -1
+  let sevenChoicesChromeStartBlockIndex = firstSevenChoicesGroupBlockIndex
+  if (firstSevenChoicesGroupBlockIndex >= 0) {
+    for (
+      let index = firstSevenChoicesGroupBlockIndex - 1;
+      index >= 0;
+      index -= 1
+    ) {
+      const block = blocks[index]
+      if (block.type === 'section_header' || block.type === 'instruction') {
+        if (firstSevenChoicesPredecessorBlockIndex < 0) {
+          firstSevenChoicesPredecessorBlockIndex = index
+        }
+        sevenChoicesChromeStartBlockIndex = index
+        continue
+      }
+      if (block.type === 'page_break') continue
+      break
+    }
+  }
+  const isSevenChoicesChromeBlock = (blockIndex) =>
+    blockIndex >= sevenChoicesChromeStartBlockIndex
+    && blockIndex < firstSevenChoicesGroupBlockIndex
   let firstReadingPredecessorBlockIndex = -1
   let readingChromeStartBlockIndex = firstReadingGroupBlockIndex
   if (firstReadingGroupBlockIndex >= 0) {
@@ -691,17 +776,54 @@ export function buildPrintHtml({
           blockIndex === followingReadingSectionBlockIndex
             ? ` data-canonical-reading-section-id="${escapeHtml(followingReadingSectionId)}" data-canonical-reading-following-for="${escapeHtml(canonicalReadingGroupIds.at(-1))}"`
             : ''
-        sections.push(`<h2 class="section-header section-header--${kind}"${rhythmRoleAttr}${readingPredecessorAttrs}${readingFollowingAttrs}>${escapeHtml(block.title)}</h2>`)
+        const sevenChoicesRhythmRole =
+          blockIndex === followingSevenChoicesSectionBlockIndex
+            ? 'next_section'
+            : isSevenChoicesChromeBlock(blockIndex) && kind === 'part'
+              ? 'part_title'
+              : isSevenChoicesChromeBlock(blockIndex)
+                ? 'subsection'
+                : null
+        const sevenChoicesRhythmAttrs = sevenChoicesRhythmRole
+          ? ` data-canonical-seven-choices-rhythm-role="${sevenChoicesRhythmRole}"${isSevenChoicesChromeBlock(blockIndex) ? ' data-canonical-seven-choices-chrome=""' : ''}`
+          : ''
+        const sevenChoicesPredecessorAttrs =
+          blockIndex === firstSevenChoicesPredecessorBlockIndex
+            ? ` data-canonical-seven-choices-preceding-for="${escapeHtml(canonicalSevenChoicesGroupIds[0])}"`
+            : ''
+        const sevenChoicesBoundaryAttrs =
+          blockIndex === followingReadingSectionBlockIndex
+          && isSevenChoicesChromeBlock(blockIndex)
+            ? ` data-canonical-seven-choices-reading-boundary-group-id="${escapeHtml(canonicalReadingGroupIds.at(-1))}"`
+            : ''
+        const sevenChoicesFollowingAttrs =
+          blockIndex === followingSevenChoicesSectionBlockIndex
+            ? ` data-canonical-seven-choices-section-id="${escapeHtml(followingSevenChoicesSectionId)}" data-canonical-seven-choices-following-for="${escapeHtml(canonicalSevenChoicesGroupIds.at(-1))}"`
+            : ''
+        sections.push(`<h2 class="section-header section-header--${kind}" id="print-section-${blockIndex}"${rhythmRoleAttr}${readingPredecessorAttrs}${readingFollowingAttrs}${sevenChoicesRhythmAttrs}${sevenChoicesPredecessorAttrs}${sevenChoicesBoundaryAttrs}${sevenChoicesFollowingAttrs}>${escapeHtml(block.title)}</h2>`)
       } else if (
         block.type === 'instruction'
         && block.text
-        && isReadingChromeBlock(blockIndex)
+        && (
+          isReadingChromeBlock(blockIndex)
+          || isSevenChoicesChromeBlock(blockIndex)
+        )
       ) {
         const readingPredecessorAttrs =
           blockIndex === firstReadingPredecessorBlockIndex
             ? ` data-canonical-reading-preceding-for="${escapeHtml(canonicalReadingGroupIds[0])}" data-canonical-reading-preceding-kind="reading_heading" data-canonical-reading-anchor-id="print-instruction-${blockIndex}"`
             : ''
-        sections.push(`<p class="reading-meta-instruction" data-canonical-reading-rhythm-role="meta_instruction"${readingPredecessorAttrs}>${escapeHtml(block.text)}</p>`)
+        const readingRhythmAttrs = isReadingChromeBlock(blockIndex)
+          ? ' data-canonical-reading-rhythm-role="meta_instruction"'
+          : ''
+        const sevenChoicesRhythmAttrs = isSevenChoicesChromeBlock(blockIndex)
+          ? ' data-canonical-seven-choices-rhythm-role="meta_instruction" data-canonical-seven-choices-chrome=""'
+          : ''
+        const sevenChoicesPredecessorAttrs =
+          blockIndex === firstSevenChoicesPredecessorBlockIndex
+            ? ` data-canonical-seven-choices-preceding-for="${escapeHtml(canonicalSevenChoicesGroupIds[0])}"`
+            : ''
+        sections.push(`<p class="reading-meta-instruction"${readingRhythmAttrs}${readingPredecessorAttrs}${sevenChoicesRhythmAttrs}${sevenChoicesPredecessorAttrs}>${escapeHtml(block.text)}</p>`)
       } else if (block.type === 'page_break') {
         sections.push('<div class="page-break"></div>')
       } else if (block.type === 'question_group' && block.questionGroupId) {
@@ -762,18 +884,23 @@ export function buildPrintHtml({
             : null
 
         let groupHtml = canonicalGroup
-          ? `<section class="question-group" data-canonical-group-id="${escapeHtml(canonicalGroup.groupId)}"${canonicalGroup.groupType === 'reading' ? ' data-canonical-group-type="reading"' : ''} data-canonical-semantic-signature="${escapeHtml(canonicalGroup.semanticSignature)}"${canonicalGroup.occurrenceSignature ? ` data-canonical-occurrence-signature="${escapeHtml(canonicalGroup.occurrenceSignature)}"` : ''}>`
+          ? `<section class="question-group" data-canonical-group-id="${escapeHtml(canonicalGroup.groupId)}" data-canonical-group-type="${escapeHtml(canonicalGroup.groupType)}" data-canonical-semantic-signature="${escapeHtml(canonicalGroup.semanticSignature)}"${canonicalGroup.occurrenceSignature ? ` data-canonical-occurrence-signature="${escapeHtml(canonicalGroup.occurrenceSignature)}"` : ''}>`
           : '<section class="question-group">'
 
         let groupLeadHtml = ''
         if (
           !canonicalWritingChrome
           && canonicalGroup?.groupType !== 'reading'
+          && canonicalGroup?.groupType !== 'sevenChoices'
         ) {
           groupLeadHtml += `<div class="group-header">${chineseNumeral(groupNum)}、${escapeHtml(groupHeaderLabel)}${escapeHtml(groupHeaderScoreSuffix)}</div>`
         }
 
-        if (!isExam && canonicalGroup?.groupType !== 'reading') {
+        if (
+          !isExam
+          && canonicalGroup?.groupType !== 'reading'
+          && canonicalGroup?.groupType !== 'sevenChoices'
+        ) {
           groupLeadHtml += `<div class="group-meta"><strong>${escapeHtml(detail.title)}</strong> · ${groupTypeLabels[detail.groupType] || detail.groupType} · 每题 ${score} 分</div>`
         }
 
@@ -812,14 +939,24 @@ export function buildPrintHtml({
             groupHtml += `<div class="passage">${canonicalGroup.paragraphs
               .map(
                 (paragraph) =>
-                  `<p>${renderCanonicalParagraph(
+                  `<p data-canonical-paragraph-id="${escapeHtml(paragraph.paragraphId)}"${canonicalGroup.groupType === 'sevenChoices' ? ' data-canonical-seven-choices-rhythm-role="passage_body_line"' : ''}>${renderCanonicalParagraph(
                     canonicalGroup,
                     paragraph,
                     displayNumberByQuestionId,
                   )}</p>`,
               )
               .join('')}</div>`
-            groupHtml += renderCanonicalSharedBank(canonicalGroup)
+            groupHtml += renderCanonicalSharedBank(canonicalGroup, {
+              heading:
+                canonicalGroup.groupType === 'sevenChoices'
+                  ? sevenChoicesBankHeading
+                  : null,
+              followingSectionId:
+                canonicalGroup.groupType === 'sevenChoices'
+                  ? followingSevenChoicesSectionId
+                  : undefined,
+              teacher: isTeacher,
+            })
           }
         } else if (passage) {
           groupHtml += groupLeadHtml
@@ -880,6 +1017,12 @@ export function buildPrintHtml({
           canonicalGroup?.groupType === 'reading'
             ? canonicalGroup.questions.at(-1)?.questionId
             : undefined
+        const isCanonicalSevenChoices =
+          canonicalGroup?.groupType === 'sevenChoices'
+          && canonicalSevenChoicesGroupIds.includes(canonicalGroup.groupId)
+        const lastSevenChoicesQuestionId = isCanonicalSevenChoices
+          ? canonicalGroup.questions.at(-1)?.questionId
+          : undefined
         for (const question of detail.questions) {
           const canonicalQuestion = canonicalQuestionById?.get(question.id)
           const printQuestion = canonicalQuestion
@@ -920,11 +1063,18 @@ export function buildPrintHtml({
             : ''
           // 空题干:挖空题号已在文中(语法填空/完形/七选五)。有选项则题号与选项同行
           // (真卷完形形态);无选项且非教师版则整行不出(语法填空文后无内容)。
+          const suppressCanonicalSevenChoicesStem =
+            isCanonicalSevenChoices
+            && isTeacher
+            && !stemText
+            && !hasOptions
           if (!stemText && !hasOptions && !isTeacher) {
             questionNum += 1
             continue
           }
-          if (!stemText && hasOptions) {
+          if (suppressCanonicalSevenChoicesStem) {
+            groupHtml += `<div class="question question--canonical-seven-choices-tail"${canonicalQuestionAttrs}>`
+          } else if (!stemText && hasOptions) {
             // 真卷完形形态:题号与选项同一行「41. A. xxx B. xxx C. xxx D. xxx」
             const placement = printQuestion.canonicalPlacement
             const placementAttrs = placement
@@ -998,8 +1148,17 @@ export function buildPrintHtml({
             const answerRhythmAttrs =
               canonicalGroup?.groupType === 'reading'
                 ? ' data-canonical-reading-rhythm-role="answer_line"'
+                : isCanonicalSevenChoices
+                  ? ' data-canonical-seven-choices-rhythm-role="answer_line"'
+                  : ''
+            const sevenChoicesAnswerTransitionAttrs =
+              isCanonicalSevenChoices
+              && canonicalQuestion?.questionId === lastSevenChoicesQuestionId
+              && followingSevenChoicesSectionId
+              && !explanation
+                ? ` data-canonical-seven-choices-before-section="${escapeHtml(followingSevenChoicesSectionId)}"`
                 : ''
-            groupHtml += `<div class="answer"><p${answerRhythmAttrs}${answerTransitionAttrs}><strong>【答案】</strong>${escapeHtml(printQuestion.answer || '待补')}</p>`
+            groupHtml += `<div class="answer"><p${answerRhythmAttrs}${answerTransitionAttrs}${sevenChoicesAnswerTransitionAttrs}><strong>【答案】</strong>${escapeHtml(printQuestion.answer || '待补')}</p>`
             if (explanation) {
               const explanationTransitionAttrs =
                 isReadingTransitionTail
@@ -1008,8 +1167,17 @@ export function buildPrintHtml({
               const explanationRhythmAttrs =
                 canonicalGroup?.groupType === 'reading'
                   ? ' data-canonical-reading-rhythm-role="explanation_line"'
+                  : isCanonicalSevenChoices
+                    ? ' data-canonical-seven-choices-rhythm-role="explanation_line"'
+                    : ''
+              const sevenChoicesExplanationTransitionAttrs =
+                isCanonicalSevenChoices
+                && canonicalQuestion?.questionId
+                  === lastSevenChoicesQuestionId
+                && followingSevenChoicesSectionId
+                  ? ` data-canonical-seven-choices-before-section="${escapeHtml(followingSevenChoicesSectionId)}"`
                   : ''
-              groupHtml += `<p class="explanation"${explanationRhythmAttrs}${explanationTransitionAttrs}><strong>【解析】</strong>${escapeHtml(explanation)}</p>`
+              groupHtml += `<p class="explanation"${explanationRhythmAttrs}${explanationTransitionAttrs}${sevenChoicesExplanationTransitionAttrs}><strong>【解析】</strong>${escapeHtml(explanation)}</p>`
             }
             groupHtml += '</div>'
           }
@@ -1149,6 +1317,10 @@ body {
   margin-bottom: 0;
 }
 
+.question-group[data-canonical-group-type="sevenChoices"] {
+  margin-bottom: 0;
+}
+
 .group-meta {
   font-size: 9pt;
   color: #666;
@@ -1187,6 +1359,15 @@ body {
 .passage p {
   margin: 0 0 0.3em;
   text-indent: 2em;
+}
+
+.question-group[data-canonical-group-type="sevenChoices"] .passage {
+  margin: 0;
+}
+
+.question-group[data-canonical-group-type="sevenChoices"] .passage p {
+  margin: 0;
+  line-height: ${sevenChoicesRhythm.targets.printPdf.baselineStepPt}pt;
 }
 
 /* figure-render cut — SW-2: figures never exceed the passage's own
@@ -1260,6 +1441,42 @@ body {
 .canonical-option-bank-item {
   margin: 0.1em 0;
   break-inside: avoid;
+}
+
+.canonical-option-bank-region[data-canonical-bank-heading-state] {
+  font-size: 10.5pt;
+  line-height: ${sevenChoicesRhythm.targets.printPdf.baselineStepPt}pt;
+}
+
+.canonical-option-bank-region[data-canonical-bank-heading-state] .canonical-option-bank {
+  margin: 0 0 0 ${sevenChoicesRhythm.horizontalBankGeometry.rendererMapping.printPdf.bankInsetEm}em;
+}
+
+.canonical-option-bank-region[data-canonical-bank-heading-state="absent"] .canonical-option-bank {
+  padding-top: ${sevenChoicesRhythm.targets.printPdf.baselineStepPt}pt;
+}
+
+.canonical-option-bank-heading {
+  margin: 0 0 0 ${sevenChoicesRhythm.horizontalBankGeometry.rendererMapping.printPdf.bankInsetEm}em;
+  line-height: ${sevenChoicesRhythm.targets.printPdf.baselineStepPt}pt;
+  break-after: avoid;
+}
+
+.canonical-option-bank-item[data-canonical-seven-choices-rhythm-role="bank_option_line"] {
+  display: flex;
+  align-items: baseline;
+  gap: ${sevenChoicesRhythm.horizontalBankGeometry.rendererMapping.printPdf.labelTextGapEm}em;
+  margin: 0;
+  line-height: ${sevenChoicesRhythm.targets.printPdf.baselineStepPt}pt;
+  break-inside: avoid;
+}
+
+.canonical-option-bank-label {
+  flex: 0 0 auto;
+}
+
+.canonical-option-bank-text {
+  min-width: 0;
 }
 
 .canonical-reading-body,
@@ -1373,8 +1590,29 @@ body {
   line-height: ${paperSurfaceTokens.paperLineHeight};
 }
 
+.reading-meta-instruction[data-canonical-seven-choices-rhythm-role="meta_instruction"] {
+  margin: -6.3pt 0 4.5pt;
+}
+
 .section-header[data-canonical-reading-following-for] {
   margin-top: 18pt;
+}
+
+.section-header[data-canonical-seven-choices-following-for] {
+  margin-top: ${sevenChoicesRhythm.targets.printPdf.baselineStepPt}pt;
+}
+
+.question-group[data-canonical-group-type="sevenChoices"] .question,
+.question-group[data-canonical-group-type="sevenChoices"] .answer,
+.question-group[data-canonical-group-type="sevenChoices"] .answer p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.question-group[data-canonical-group-type="sevenChoices"] .answer {
+  margin-left: 21pt;
+  font-size: 10.5pt;
+  line-height: ${sevenChoicesRhythm.targets.printPdf.baselineStepPt}pt;
 }
 
 .options-inline--canonical {

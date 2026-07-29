@@ -18,6 +18,7 @@ import path from 'node:path'
 import { DatabaseSync } from 'node:sqlite'
 
 import { consumerContractRefs } from '../shared/paper-canonical/consumers.mjs'
+import { canonicalAuthorityRef } from '../shared/paper-canonical/authority.mjs'
 import {
   projectCanonicalConsumerGroup,
 } from '../shared/paper-canonical/consumerProjection.mjs'
@@ -26,6 +27,9 @@ import {
   readingPassageLetterGeometryForLetter,
   readingPassageLetterTypography,
 } from '../shared/paper-canonical/readingPassageLetter.mjs'
+import {
+  sevenChoicesRhythm,
+} from '../shared/paper-canonical/sevenChoicesRhythm.mjs'
 import { loadCanonicalImportRequest } from '../server/paper-canonical/importRequest.mjs'
 import {
   admitCanonicalPaperImport,
@@ -65,6 +69,14 @@ const readingPredecessorOraclePath = path.join(
 const readingPdfRoleOraclePath = path.join(
   repositoryRoot,
   'docs/cuts/paper-canonical-unification/qa/20-reading-pdf-role-oracles.json',
+)
+const sevenChoicesReferencePath = path.join(
+  repositoryRoot,
+  'docs/cuts/paper-canonical-unification/qa/20-seven-choices-golden-geometry-reference-measurements-v1.json',
+)
+const sevenChoicesRoleOraclePath = path.join(
+  repositoryRoot,
+  'docs/cuts/paper-canonical-unification/qa/20-seven-choices-role-oracles.json',
 )
 const paperId = 'paper-2026-i'
 const provisionActualArtifacts = process.argv.includes('--actual-artifacts')
@@ -319,6 +331,148 @@ function assertPassageLetterReferenceEvidence() {
   return {
     digest: sha256(evidenceBytes),
     evidence,
+  }
+}
+
+function assertSevenChoicesReferenceEvidence() {
+  const evidenceBytes = readFileSync(sevenChoicesReferencePath)
+  const evidence = JSON.parse(evidenceBytes)
+  assert.equal(
+    evidence.schemaVersion,
+    'seven-choices-golden-geometry-reference-measurements-v1',
+  )
+  assert.equal(
+    canonicalAuthorityRef.manifestVersion,
+    '15',
+    'new Publications use the versioned Seven Choices rhythm authority closure',
+  )
+  assert.equal(
+    consumerContractRefs.screen.version,
+    '15',
+    'Screen v15 binds the Seven Choices rhythm authority closure',
+  )
+  assert.equal(
+    consumerContractRefs.print_pdf.version,
+    '16',
+    'Print/PDF v16 binds the Seven Choices rhythm authority closure',
+  )
+  assert.equal(
+    sevenChoicesRhythm.referenceMeasurement.path,
+    path.relative(repositoryRoot, sevenChoicesReferencePath),
+  )
+  assert.equal(
+    sevenChoicesRhythm.referenceMeasurement.sha256,
+    `sha256:${sha256(evidenceBytes)}`,
+    'Seven Choices rhythm authority binds the exact measured evidence bytes',
+  )
+  assert.deepEqual(
+    sevenChoicesRhythm.semanticRoleClasses,
+    evidence.normalizedContract.semanticRoleClasses,
+    'Seven Choices exposes one explicit semantic-role class authority',
+  )
+  assert.deepEqual(
+    sevenChoicesRhythm.adjacencyGraph,
+    evidence.normalizedContract.adjacencyGraph,
+    'Seven Choices exposes the complete measured adjacency graph',
+  )
+  assert.deepEqual(
+    sevenChoicesRhythm.targets,
+    evidence.normalizedContract.targets,
+    'Seven Choices maps only dimensionless ratios to local public-artifact baselines',
+  )
+  assert.deepEqual(
+    sevenChoicesRhythm.goldenGeometryFramework,
+    evidence.normalizedContract.framework,
+    'Seven Choices binds the reusable two-dimensional Golden Geometry axes without sharing family values',
+  )
+  assert.deepEqual(
+    sevenChoicesRhythm.horizontalBankGeometry,
+    evidence.normalizedContract.horizontalBankGeometry,
+    'Seven Choices binds its independently measured horizontal A-G strategy',
+  )
+  assert.equal(
+    evidence.authority.scaleBoundary.includes(
+      'JPEG pixels are never treated as Screen CSS pixels or PDF points',
+    ),
+    true,
+    'Seven Choices golden evidence forbids JPEG-to-renderer unit conversion',
+  )
+  const goldenBytes = readFileSync(
+    path.join(repositoryRoot, evidence.reference.file),
+  )
+  assert.equal(sha256(goldenBytes), evidence.reference.sha256)
+  assert.equal(evidence.reference.pixelWidth, 866)
+  assert.equal(evidence.reference.pixelHeight, 1161)
+  assert.deepEqual(
+    evidence.reference.horizontalBankMeasurements.clusters.labelLeftPx.values,
+    [102, 102, 103, 102, 102, 102, 103],
+    'the golden A-G bank exposes one repeated option-label x cluster',
+  )
+  assert.deepEqual(
+    evidence.reference.horizontalBankMeasurements.clusters.textStartPx.values,
+    [126, 121, 125, 126, 124, 121, 123],
+    'the golden A-G text starts form a narrow content-driven label-width cluster',
+  )
+  assert.equal(
+    evidence.normalizedContract.horizontalBankGeometry.strategy.distribution,
+    'not_distributed_not_space_between',
+    'varying right bounds cannot be misclassified as space-between',
+  )
+  assert.equal(
+    evidence.normalizedContract.horizontalBankGeometry.strategy
+      .goldenWrappedContinuationObservation,
+    'unobserved_all_golden_options_are_one_line',
+    'the digest-bound crop does not invent a wrapped-option measurement',
+  )
+  assert.equal(
+    evidence.reference.file.endsWith('page-08-seven-choices.jpeg'),
+    true,
+    'Seven Choices ratios come only from the exact golden page-08 bytes',
+  )
+  const readingDependencyBytes = readFileSync(path.join(
+    repositoryRoot,
+    evidence.authority.readingBoundaryDependency.path,
+  ))
+  assert.equal(
+    sha256(readingDependencyBytes),
+    evidence.authority.readingBoundaryDependency.sha256,
+    'Seven Choices preserves the exact established Reading-D boundary authority',
+  )
+  return {
+    digest: sha256(evidenceBytes),
+    evidence,
+  }
+}
+
+function assertSevenChoicesRoleOracle() {
+  const bytes = readFileSync(sevenChoicesRoleOraclePath)
+  const oracle = JSON.parse(bytes)
+  assert.equal(oracle.schemaVersion, 'seven-choices-role-oracles-v1')
+  assert.equal(oracle.paperId, paperId)
+  assert.equal(
+    sha256(readFileSync(path.join(repositoryRoot, oracle.sourceAsset.path))),
+    oracle.sourceAsset.sha256,
+    'Seven Choices oracle binds the exact source asset independently',
+  )
+  assert.deepEqual(
+    oracle.sevenChoicesGroup.questionBlankPairs.map(
+      ({ questionId, blankId }) => `${questionId}:${blankId}`,
+    ),
+    [
+      'q-2026-i-036:blank-2026-i-036',
+      'q-2026-i-037:blank-2026-i-037',
+      'q-2026-i-038:blank-2026-i-038',
+      'q-2026-i-039:blank-2026-i-039',
+      'q-2026-i-040:blank-2026-i-040',
+    ],
+  )
+  assert.deepEqual(
+    oracle.sevenChoicesGroup.optionIds.map((optionId) => optionId.at(-1)),
+    ['A', 'B', 'C', 'D', 'E', 'F', 'G'],
+  )
+  return {
+    digest: sha256(bytes),
+    oracle,
   }
 }
 
@@ -699,6 +853,37 @@ function readingPrintVariantItem(asset, groupId) {
     },
     score: 2.5,
     sectionTitle: '阅读理解',
+    note: '',
+  }
+}
+
+function sevenChoicesPrintVariantItem(asset) {
+  const { groupId } = sevenChoicesRoleOracle.sevenChoicesGroup
+  const group = asset.content.groups[groupId]
+  return {
+    detail: {
+      id: groupId,
+      paperId: asset.paper.paperId,
+      title: group.title,
+      source: asset.paper.title,
+      groupType: 'seven_choices',
+      passage: {
+        title: group.title,
+        materialText: 'POISONED LEGACY SEVEN CHOICES VARIANT',
+      },
+      questions: group.questionIds.map((questionId) => ({
+        id: questionId,
+        questionNo: String(asset.content.questions[questionId].questionNo),
+        stem: 'POISONED LEGACY STEM',
+        answer: asset.answerKey.answers[questionId]?.answer || '',
+        explanation:
+          asset.answerKey.answers[questionId]?.explanation
+          || 'Source-bound explanation fixture',
+        options: [{ label: 'A', content: 'POISONED LEGACY OPTION' }],
+      })),
+    },
+    score: 2.5,
+    sectionTitle: '七选五',
     note: '',
   }
 }
@@ -1635,6 +1820,483 @@ async function assertScreenReadingVerticalRhythm(
   return measurements
 }
 
+function assertSevenChoicesDomObservation(
+  observation,
+  label,
+  {
+    teacher = false,
+    headingPresent = false,
+    wrappedOption = false,
+    requireReadingBoundary = true,
+  } = {},
+) {
+  const oracle = sevenChoicesRoleOracle.sevenChoicesGroup
+  assert.ok(observation, `${label} exposes the exact Seven Choices Group`)
+  assert.equal(observation.groupId, oracle.groupId)
+  assert.deepEqual(
+    observation.paragraphIds,
+    oracle.paragraphIds,
+    `${label} preserves exact paragraph identity/order`,
+  )
+  assert.deepEqual(
+    observation.blankPairs,
+    oracle.questionBlankPairs.map(
+      ({ questionId, blankId }) => `${questionId}:${blankId}`,
+    ),
+    `${label} preserves exact inline Blank identity/order`,
+  )
+  assert.equal(
+    observation.blankLineCounts.every((count) => count === 1),
+    true,
+    `${label} inline blanks add no phantom vertical line`,
+  )
+  assert.equal(observation.bankCount, 1, `${label} renders one A-G bank`)
+  assert.equal(
+    observation.bankId,
+    oracle.bankId,
+    `${label} binds the source-owned bank identity`,
+  )
+  assert.deepEqual(
+    observation.optionIds,
+    oracle.optionIds,
+    `${label} preserves A-G option identity/order`,
+  )
+  assert.equal(
+    observation.optionRoles.every((role) => role === 'bank_option_line'),
+    true,
+    `${label} exposes no wrong-role bank row`,
+  )
+  assert.equal(
+    observation.headingCount,
+    headingPresent ? 1 : 0,
+    `${label} executes the declared bank-heading variant`,
+  )
+  assert.equal(
+    observation.phantomRoleCount,
+    0,
+    `${label} exposes no unknown Seven Choices role`,
+  )
+  const chromeOrder = ['part_title', 'subsection', 'meta_instruction']
+  assert.equal(
+    observation.chromeRoles.length > 0
+    && new Set(observation.chromeRoles).size
+      === observation.chromeRoles.length
+    && observation.chromeRoles.every((role) => chromeOrder.includes(role))
+    && observation.chromeRoles.every(
+      (role, index) =>
+        index === 0
+        || chromeOrder.indexOf(role)
+          > chromeOrder.indexOf(observation.chromeRoles[index - 1]),
+    ),
+    true,
+    `${label} preserves an ordered optional-collapse chrome chain`,
+  )
+  if (requireReadingBoundary) {
+    assert.equal(
+      observation.boundaryGroupId,
+      sevenChoicesRoleOracle.readingBoundary.groupId,
+      `${label} binds the established Reading-D boundary without deriving it`,
+    )
+  }
+  assert.equal(
+    observation.followingRole,
+    'next_section',
+    `${label} binds the exact following section role`,
+  )
+  assert.equal(
+    observation.followingFor,
+    oracle.groupId,
+    `${label} binds the bank/tail to its exact following section`,
+  )
+  const targetStepPx = 24
+  const tolerancePx = sevenChoicesRhythm.targets.screen.oneStepTolerancePx
+  for (const paragraph of observation.passageLines) {
+    assert.equal(paragraph.length > 0, true, `${label} has no empty passage role`)
+    for (let index = 1; index < paragraph.length; index += 1) {
+      assert.equal(
+        Math.abs(
+          paragraph[index].bottom
+          - paragraph[index - 1].bottom
+          - targetStepPx,
+        ) <= tolerancePx,
+        true,
+        `${label} keeps wrapped passage lines on one local baseline step`,
+      )
+    }
+  }
+  const flattenedPassage = observation.passageLines.flat()
+  assert.equal(
+    flattenedPassage.length > observation.passageLines.length,
+    true,
+    `${label} executes wrapped passage lines`,
+  )
+  if (headingPresent) {
+    assert.equal(
+      Math.abs(
+        observation.headingLines[0].bottom
+        - flattenedPassage.at(-1).bottom
+        - targetStepPx,
+      ) <= tolerancePx,
+      true,
+      `${label} keeps passage-to-bank-heading at one baseline step: ${JSON.stringify({
+        passageBottom: flattenedPassage.at(-1).bottom,
+        headingBottom: observation.headingLines[0]?.bottom,
+      })}`,
+    )
+    assert.equal(
+      Math.abs(
+        observation.optionLines[0][0].bottom
+        - observation.headingLines[0].bottom
+        - targetStepPx,
+      ) <= tolerancePx,
+      true,
+      `${label} keeps bank-heading-to-first-option at one baseline step: ${JSON.stringify({
+        headingBottom: observation.headingLines[0]?.bottom,
+        optionBottom: observation.optionLines[0][0].bottom,
+      })}`,
+    )
+  } else {
+    assert.equal(
+      Math.abs(
+        observation.optionLines[0][0].bottom
+        - flattenedPassage.at(-1).bottom
+        - targetStepPx * 2,
+      ) <= sevenChoicesRhythm.targets.screen.twoStepTolerancePx,
+      true,
+      `${label} keeps passage-to-first-option at two local baseline steps: ${JSON.stringify({
+        passageBottom: flattenedPassage.at(-1).bottom,
+        optionBottom: observation.optionLines[0][0].bottom,
+        actual:
+          observation.optionLines[0][0].bottom
+          - flattenedPassage.at(-1).bottom,
+      })}`,
+    )
+  }
+  for (const lines of observation.optionLines) {
+    assert.equal(lines.length > 0, true, `${label} has no empty option row`)
+    for (let index = 1; index < lines.length; index += 1) {
+      assert.equal(
+        Math.abs(lines[index].bottom - lines[index - 1].bottom - targetStepPx)
+          <= tolerancePx,
+        true,
+        `${label} keeps wrapped option lines on one baseline step`,
+      )
+    }
+  }
+  for (let index = 1; index < observation.optionLines.length; index += 1) {
+    assert.equal(
+      Math.abs(
+        observation.optionLines[index][0].bottom
+        - observation.optionLines[index - 1].at(-1).bottom
+        - targetStepPx,
+      ) <= tolerancePx,
+      true,
+      `${label} keeps option-to-option transitions on one baseline step`,
+    )
+  }
+  if (wrappedOption) {
+    assert.equal(
+      observation.optionLines.some((lines) => lines.length > 1),
+      true,
+      `${label} executes a wrapped A-G option`,
+    )
+  }
+  const labelLefts = observation.optionGeometry.map((row) => row.labelLeft)
+  const rowWidths = observation.optionGeometry.map((row) => row.rowWidth)
+  const textStarts = observation.optionGeometry.map((row) => row.textLeft)
+  const rightBounds = observation.optionGeometry.map((row) => row.textRight)
+  assert.equal(
+    Math.max(...labelLefts) - Math.min(...labelLefts) <= 1.5,
+    true,
+    `${label} has one fixed option-label x cluster`,
+  )
+  assert.equal(
+    Math.max(...rowWidths) - Math.min(...rowWidths) <= 1.5,
+    true,
+    `${label} gives every row the same remaining-width track`,
+  )
+  assert.equal(
+    Math.max(...textStarts) - Math.min(...textStarts)
+      <= observation.fontSizePx * 0.45,
+    true,
+    `${label} text starts vary only with label glyph width`,
+  )
+  if (!wrappedOption) {
+    assert.equal(
+      Math.max(...rightBounds) - Math.min(...rightBounds)
+        >= observation.fontSizePx * 5,
+      true,
+      `${label} right bounds stay content-driven instead of distributed`,
+    )
+  }
+  assert.equal(
+    Math.abs(observation.bankInsetPx / observation.fontSizePx - 2) <= 0.05,
+    true,
+    `${label} maps the golden bank origin to a local 2em inset`,
+  )
+  for (const row of observation.optionGeometry) {
+    assert.equal(
+      Math.abs(
+        (row.textLeft - row.labelRight) / observation.fontSizePx
+        - sevenChoicesRhythm.horizontalBankGeometry.rendererMapping.screen
+          .labelTextGapEm,
+      ) <= 0.08,
+      true,
+      `${label} maps the content-driven label gap in local em`,
+    )
+    assert.equal(
+      row.textLineLefts.every(
+        (left) => Math.abs(left - row.textLeft) <= 1.5,
+      ),
+      true,
+      `${label} wrapped continuation hangs at its own text-start x`,
+    )
+  }
+  if (teacher) {
+    assert.equal(
+      observation.answerCount,
+      oracle.questionBlankPairs.length,
+      `${label} renders one answer tail per source Question`,
+    )
+  } else {
+    assert.equal(
+      observation.answerCount,
+      0,
+      `${label} Student/plain artifact hides answer tails`,
+    )
+  }
+}
+
+function assertSevenChoicesObservationAttacksFailClosed(
+  baseline,
+  label,
+) {
+  const attacks = [
+    ['missing role', (value) => { value.optionIds.pop() }],
+    ['duplicate role', (value) => {
+      value.optionIds.push(value.optionIds.at(-1))
+    }],
+    ['wrong role', (value) => { value.optionRoles[0] = 'option_line' }],
+    ['wrong line', (value) => { value.blankLineCounts[0] = 2 }],
+    ['wrong group', (value) => { value.groupId = 'group-poisoned' }],
+    ['wrong Blank join', (value) => {
+      value.blankPairs[0] = 'q-poisoned:blank-poisoned'
+    }],
+    ['phantom role', (value) => { value.phantomRoleCount = 1 }],
+    ['repeated bank', (value) => { value.bankCount = 2 }],
+    ['unexplained parity drift', (value) => {
+      value.bankInsetPx += value.fontSizePx
+    }],
+  ]
+  for (const [attackName, mutate] of attacks) {
+    const attacked = structuredClone(baseline)
+    mutate(attacked)
+    assert.throws(
+      () => assertSevenChoicesDomObservation(
+        attacked,
+        `${label} ${attackName} attack`,
+      ),
+      `${label} fails closed on ${attackName}`,
+    )
+  }
+}
+
+async function sevenChoicesDomObservation(page, groupSelector) {
+  return page.evaluate(({ groupSelector, knownRoles }) => {
+    const group = document.querySelector(groupSelector)
+    if (!group) return null
+    const lineRects = (element) => {
+      if (!element) return []
+      const walker = document.createTreeWalker(
+        element,
+        NodeFilter.SHOW_TEXT,
+        {
+          acceptNode: (node) =>
+            node.textContent?.trim()
+              ? NodeFilter.FILTER_ACCEPT
+              : NodeFilter.FILTER_REJECT,
+        },
+      )
+      const rects = []
+      for (let node = walker.nextNode(); node; node = walker.nextNode()) {
+        const range = document.createRange()
+        range.selectNodeContents(node)
+        for (const rect of range.getClientRects()) {
+          if (rect.width > 0 && rect.height > 0) {
+            rects.push({
+              left: rect.left,
+              right: rect.right,
+              bottom: rect.bottom,
+            })
+          }
+        }
+      }
+      return rects.sort((left, right) => left.bottom - right.bottom)
+        .reduce((lines, rect) => {
+          const prior = lines.at(-1)
+          if (!prior || Math.abs(rect.bottom - prior.bottom) > 1) {
+            lines.push({ ...rect })
+          } else {
+            prior.left = Math.min(prior.left, rect.left)
+            prior.right = Math.max(prior.right, rect.right)
+            prior.bottom = Math.max(prior.bottom, rect.bottom)
+          }
+          return lines
+        }, [])
+    }
+    const roleElements = [...document.querySelectorAll(
+      '[data-canonical-seven-choices-rhythm-role]',
+    )]
+    const bank = group.querySelector('[data-canonical-bank-id]')
+    const bankRegion = bank?.closest('.ps-option-bank-region, .canonical-option-bank-region')
+    const optionElements = [...group.querySelectorAll(
+      '[data-canonical-seven-choices-rhythm-role="bank_option_line"]',
+    )]
+    const firstOptionStyle = optionElements[0]
+      ? getComputedStyle(optionElements[0])
+      : null
+    const passageContainer = group.querySelector('.ps-passage-body, .passage')
+    const bankStyle = bank ? getComputedStyle(bank) : null
+    const bankRect = bank?.getBoundingClientRect()
+    const passageRect = passageContainer?.getBoundingClientRect()
+    return {
+      groupId:
+        group.getAttribute('data-paper-browse-anchor')
+        || group.getAttribute('data-canonical-group-id'),
+      paragraphIds: [...group.querySelectorAll(
+        '[data-canonical-seven-choices-rhythm-role="passage_body_line"]',
+      )].map((element) =>
+        element.getAttribute('data-canonical-paragraph-id')
+        || element.getAttribute('data-paper-paragraph-id')),
+      passageLines: [...group.querySelectorAll(
+        '[data-canonical-seven-choices-rhythm-role="passage_body_line"]',
+      )].map(lineRects),
+      blankPairs: [...group.querySelectorAll(
+        '[data-canonical-seven-choices-rhythm-role="inline_blank_marker"]',
+      )].map((element) => element.getAttribute('data-canonical-pair')),
+      blankLineCounts: [...group.querySelectorAll(
+        '[data-canonical-seven-choices-rhythm-role="inline_blank_marker"]',
+      )].map((element) => lineRects(element).length),
+      bankCount: group.querySelectorAll('[data-canonical-bank-id]').length,
+      bankId: bank?.getAttribute('data-canonical-bank-id'),
+      headingCount: group.querySelectorAll(
+        '[data-canonical-seven-choices-rhythm-role="bank_heading"]',
+      ).length,
+      headingLines: lineRects(group.querySelector(
+        '[data-canonical-seven-choices-rhythm-role="bank_heading"]',
+      )),
+      optionIds: optionElements.map((element) =>
+        element.getAttribute('data-canonical-option-id')),
+      optionRoles: optionElements.map((element) =>
+        element.getAttribute('data-canonical-seven-choices-rhythm-role')),
+      optionLines: optionElements.map(lineRects),
+      optionGeometry: optionElements.map((element) => {
+        const row = element.getBoundingClientRect()
+        const label = element.querySelector(
+          '.ps-option-label, .canonical-option-bank-label',
+        )?.getBoundingClientRect()
+        const textElement = element.querySelector(
+          '.ps-option-bank-text, .canonical-option-bank-text',
+        )
+        const text = textElement?.getBoundingClientRect()
+        const textLines = lineRects(textElement)
+        const textLineLefts = textLines.map((line) => line.left)
+        return {
+          rowWidth: row.width,
+          labelLeft: label?.left,
+          labelRight: label?.right,
+          textLeft: text?.left,
+          textRight: Math.max(...textLines.map((line) => line.right)),
+          textLineLefts,
+        }
+      }),
+      fontSizePx: Number.parseFloat(firstOptionStyle?.fontSize || '0'),
+      bankInsetPx: optionElements[0] && passageRect
+        ? optionElements[0].querySelector(
+            '.ps-option-label, .canonical-option-bank-label',
+          )?.getBoundingClientRect().left - passageRect.left
+        : Number.parseFloat(bankStyle?.marginLeft || '0')
+          + Number.parseFloat(bankStyle?.paddingLeft || '0'),
+      answerCount: group.querySelectorAll(
+        '[data-canonical-seven-choices-rhythm-role="answer_line"]',
+      ).length,
+      chromeRoles: roleElements
+        .filter((element) =>
+          element.hasAttribute('data-canonical-seven-choices-chrome')
+          || element.getAttribute(
+            'data-canonical-seven-choices-preceding-for',
+          ))
+        .map((element) =>
+          element.getAttribute('data-canonical-seven-choices-rhythm-role')),
+      boundaryGroupId: document.querySelector(
+        '[data-canonical-seven-choices-reading-boundary-group-id]',
+      )?.getAttribute(
+        'data-canonical-seven-choices-reading-boundary-group-id',
+      ),
+      followingRole: document.querySelector(
+        '[data-canonical-seven-choices-following-for]',
+      )?.getAttribute('data-canonical-seven-choices-rhythm-role'),
+      followingFor: document.querySelector(
+        '[data-canonical-seven-choices-following-for]',
+      )?.getAttribute('data-canonical-seven-choices-following-for'),
+      phantomRoleCount: roleElements.filter((element) =>
+        !knownRoles.includes(element.getAttribute(
+          'data-canonical-seven-choices-rhythm-role',
+        ))).length,
+      bankHeadingState: bankRegion?.getAttribute(
+        'data-canonical-bank-heading-state',
+      ),
+    }
+  }, {
+    groupSelector,
+    knownRoles: Object.values(sevenChoicesRhythm.semanticRoleClasses).flat(),
+  })
+}
+
+async function assertScreenSevenChoicesGoldenGeometry(
+  page,
+  label,
+  { wrappedOption = false, headingPresent = false } = {},
+) {
+  const groupId = sevenChoicesRoleOracle.sevenChoicesGroup.groupId
+  const observation = await sevenChoicesDomObservation(
+    page,
+    `[data-paper-browse-anchor="${groupId}"]`,
+  )
+  assertSevenChoicesDomObservation(observation, label, {
+    wrappedOption,
+    headingPresent,
+  })
+  return observation
+}
+
+async function assertPrintHtmlSevenChoicesGoldenGeometry(
+  page,
+  html,
+  label,
+  {
+    teacher = false,
+    headingPresent = false,
+    wrappedOption = false,
+    requireReadingBoundary = true,
+  } = {},
+) {
+  await page.setContent(html, { waitUntil: 'load' })
+  await page.evaluate(() => document.fonts.ready)
+  const groupId = sevenChoicesRoleOracle.sevenChoicesGroup.groupId
+  const observation = await sevenChoicesDomObservation(
+    page,
+    `[data-canonical-group-id="${groupId}"]`,
+  )
+  assertSevenChoicesDomObservation(observation, label, {
+    teacher,
+    headingPresent,
+    wrappedOption,
+    requireReadingBoundary,
+  })
+  return observation
+}
+
 async function assertPrintHtmlReadingVerticalRhythm(
   page,
   html,
@@ -2504,6 +3166,171 @@ function assertPdfReadingQuestionsNotSplit(pdfPath, consumption, label) {
       )
     }
   }
+}
+
+function assertPdfSevenChoicesGoldenGeometry(
+  pdfPath,
+  consumption,
+  label,
+  {
+    headingText = null,
+    requireWrappedOption = false,
+    requireCrossPageBank = false,
+  } = {},
+) {
+  const words = pdfWordsWithBoxes(pdfPath)
+  const lines = pdfRoleLines(words)
+  const lineByWordIndex = new Map(lines.flatMap((line) =>
+    line.wordIndexes.map((wordIndex) => [wordIndex, line])))
+  const { groupId } = sevenChoicesRoleOracle.sevenChoicesGroup
+  const group = projectCanonicalConsumerGroup({
+    consumption,
+    familyContractId: 'seven-choices',
+    groupId,
+  })
+  assert.deepEqual(
+    group.optionBank.options.map((option) => option.optionId),
+    sevenChoicesRoleOracle.sevenChoicesGroup.optionIds,
+    `${label} derives A-G identities from the source-bound oracle`,
+  )
+  const rows = group.optionBank.options.map((option) => {
+    const tokens = exactPdfTokens(option.text)
+    const start = uniquePdfSequenceIndex(
+      words,
+      tokens,
+      `${label} ${option.optionId}`,
+    )
+    const optionWords = words.slice(start, start + tokens.length)
+    const labelWord = words[start - 1]
+    assert.equal(
+      labelWord?.text,
+      option.label,
+      `${label} binds ${option.optionId} to its exact label`,
+    )
+    const optionLines = [...new Map(optionWords.map((word) => {
+      const line = lineByWordIndex.get(word.wordIndex)
+      return [`${line.page}:${line.lineIndex}`, line]
+    })).values()].sort((left, right) =>
+      left.page - right.page || left.centerY - right.centerY)
+    assert.equal(
+      new Set(optionWords.map((word) => word.page)).size,
+      1,
+      `${label} never splits ${option.optionId} across A4 pages`,
+    )
+    const continuationLefts = optionLines.slice(1)
+      .map((line) => line.xMin)
+    return {
+      optionId: option.optionId,
+      start,
+      page: optionWords[0].page,
+      labelLeft: labelWord.xMin,
+      labelRight: labelWord.xMax,
+      textLeft: optionWords[0].xMin,
+      textRight: Math.max(...optionWords.map((word) => word.xMax)),
+      lineCenters: optionLines.map((line) => line.centerY),
+      continuationLefts,
+    }
+  })
+  assert.equal(
+    rows.every(
+      (row, index) => index === 0 || row.start > rows[index - 1].start,
+    ),
+    true,
+    `${label} preserves A-G row order`,
+  )
+  const labelLefts = rows.map((row) => row.labelLeft)
+  const textLefts = rows.map((row) => row.textLeft)
+  const rightBounds = rows.map((row) => row.textRight)
+  assert.equal(
+    Math.max(...labelLefts) - Math.min(...labelLefts) <= 1.5,
+    true,
+    `${label} has one PDF option-label x cluster`,
+  )
+  assert.equal(
+    Math.abs(median(labelLefts) - (68.03 + 21)) <= 2,
+    true,
+    `${label} maps the bank origin to 2em inside the 24mm content edge`,
+  )
+  assert.equal(
+    Math.max(...textLefts) - Math.min(...textLefts) <= 5,
+    true,
+    `${label} PDF text starts vary only with label glyph width`,
+  )
+  if (!requireWrappedOption) {
+    assert.equal(
+      Math.max(...rightBounds) - Math.min(...rightBounds) >= 40,
+      true,
+      `${label} PDF right bounds remain content-driven`,
+    )
+  }
+  for (const row of rows) {
+    assert.equal(
+      Math.abs(
+        (row.textLeft - row.labelRight) / 10.5
+        - sevenChoicesRhythm.horizontalBankGeometry.rendererMapping.printPdf
+          .labelTextGapEm,
+      ) <= 0.15,
+      true,
+      `${label} maps the label gap in local PDF em`,
+    )
+    assert.equal(
+      row.continuationLefts.every(
+        (left) => Math.abs(left - row.textLeft) <= 1.5,
+      ),
+      true,
+      `${label} hangs wrapped ${row.optionId} lines at text-start x`,
+    )
+    for (let index = 1; index < row.lineCenters.length; index += 1) {
+      assert.equal(
+        Math.abs(
+          row.lineCenters[index]
+          - row.lineCenters[index - 1]
+          - sevenChoicesRhythm.targets.printPdf.baselineStepPt,
+        ) <= sevenChoicesRhythm.targets.printPdf.oneStepTolerancePt,
+        true,
+        `${label} keeps wrapped ${row.optionId} lines on one PDF baseline step`,
+      )
+    }
+  }
+  assert.equal(
+    rows.some((row) => row.lineCenters.length > 1),
+    requireWrappedOption,
+    `${label} executes the declared wrapped-option PDF variant`,
+  )
+  const bankPages = [...new Set(rows.map((row) => row.page))]
+  assert.equal(
+    bankPages.length > 1,
+    requireCrossPageBank,
+    `${label} executes the declared same/cross-page bank variant`,
+  )
+  for (let index = 1; index < rows.length; index += 1) {
+    const prior = rows[index - 1]
+    const current = rows[index]
+    assert.equal(
+      current.page === prior.page || current.page === prior.page + 1,
+      true,
+      `${label} allows no unexplained page jump between options`,
+    )
+    if (current.page === prior.page) {
+      assert.equal(
+        Math.abs(
+          current.lineCenters[0]
+          - prior.lineCenters.at(-1)
+          - sevenChoicesRhythm.targets.printPdf.baselineStepPt,
+        ) <= sevenChoicesRhythm.targets.printPdf.oneStepTolerancePt,
+        true,
+        `${label} keeps same-page option transitions on one baseline step`,
+      )
+    }
+  }
+  if (headingText) {
+    assert.equal(
+      countTextOccurrences(pdfText(pdfPath), headingText),
+      1,
+      `${label} emits the optional bank heading once across pages`,
+    )
+  }
+  return rows
 }
 
 function exactPdfSequenceIndexes(words, tokens, startIndex = 0) {
@@ -3937,6 +4764,40 @@ async function renderSupportedArtifacts({
         consumers.screen,
         'plain PaperSurface',
       )
+      const plainSevenChoicesObservation =
+        await assertScreenSevenChoicesGoldenGeometry(
+        page,
+        'plain PaperSurface Seven Choices',
+      )
+      assertSevenChoicesObservationAttacksFailClosed(
+        plainSevenChoicesObservation,
+        'plain PaperSurface Seven Choices independent oracle',
+      )
+      const plainSevenWrappedStyle = await page.addStyleTag({
+        content: '.ps-option-bank{width:260px!important}',
+      })
+      await assertScreenSevenChoicesGoldenGeometry(
+        page,
+        'plain PaperSurface Seven Choices wrapped-option adversary',
+        { wrappedOption: true },
+      )
+      await plainSevenWrappedStyle.evaluate((element) => element.remove())
+      const sevenHeadingUrl = new URL(plainUrl)
+      sevenHeadingUrl.searchParams.set(
+        'sevenChoicesBankHeading',
+        'present',
+      )
+      await page.goto(sevenHeadingUrl.href)
+      await page.locator(
+        '[data-canonical-seven-choices-rhythm-role="bank_heading"]',
+      ).waitFor()
+      await assertScreenSevenChoicesGoldenGeometry(
+        page,
+        'plain PaperSurface Seven Choices bank-heading-present fixture',
+        { headingPresent: true },
+      )
+      await page.goto(plainUrl.href)
+      await page.locator('[data-paper-browse-anchor]').first().waitFor()
       const plainNarrowStemStyle = await page.addStyleTag({
         content: `[data-canonical-question-id="${draft.firstGroup.questionIds[0]}"] .ps-question-stem{max-width:240px}`,
       })
@@ -4007,6 +4868,19 @@ async function renderSupportedArtifacts({
         consumers.screen,
         'lecture PaperSurface',
       )
+      await assertScreenSevenChoicesGoldenGeometry(
+        page,
+        'lecture PaperSurface Seven Choices',
+      )
+      const lectureSevenWrappedStyle = await page.addStyleTag({
+        content: '.ps-option-bank{width:260px!important}',
+      })
+      await assertScreenSevenChoicesGoldenGeometry(
+        page,
+        'lecture PaperSurface Seven Choices wrapped-option adversary',
+        { wrappedOption: true },
+      )
+      await lectureSevenWrappedStyle.evaluate((element) => element.remove())
       const lectureNarrowStemStyle = await page.addStyleTag({
         content: `[data-canonical-question-id="${firstQuestionId}"] .ps-question-stem{max-width:240px}`,
       })
@@ -4219,6 +5093,72 @@ async function renderSupportedArtifacts({
         consumers.print_pdf,
         'Teacher Print HTML',
       )
+      await assertPrintHtmlSevenChoicesGoldenGeometry(
+        page,
+        printHtml.student,
+        'Student Print HTML Seven Choices',
+      )
+      await assertPrintHtmlSevenChoicesGoldenGeometry(
+        page,
+        printHtml.teacher,
+        'Teacher Print HTML Seven Choices',
+        { teacher: true },
+      )
+      const sevenChoicesVariantBlocks = [
+        {
+          type: 'section_header',
+          title: sevenChoicesRoleOracle.readingBoundary.sectionVisibleText,
+        },
+        {
+          type: 'instruction',
+          text: sevenChoicesRoleOracle.readingBoundary
+            .instructionVisibleText,
+        },
+        {
+          type: 'question_group',
+          questionGroupId:
+            sevenChoicesRoleOracle.sevenChoicesGroup.groupId,
+          score: 2.5,
+        },
+        {
+          type: 'section_header',
+          title: sevenChoicesRoleOracle.followingSection.visibleText,
+        },
+      ]
+      const sevenChoicesHeadingVariantHtml = buildPrintHtml({
+        title: 'Canonical Import Pilot Seven Choices Golden Geometry',
+        versionType: 'student',
+        items: [sevenChoicesPrintVariantItem(asset)],
+        blocks: sevenChoicesVariantBlocks,
+        questionNumberStart: 36,
+        printStyle: 'exam',
+        canonicalConsumption: consumers.print_pdf,
+        sevenChoicesBankHeading:
+          sevenChoicesRoleOracle.fixtures.bankHeadingVisibleText,
+      })
+      await assertPrintHtmlSevenChoicesGoldenGeometry(
+        page,
+        sevenChoicesHeadingVariantHtml,
+        'Student Print HTML Seven Choices bank-heading-present fixture',
+        { headingPresent: true, requireReadingBoundary: false },
+      )
+      const sevenChoicesWrappedVariantHtml =
+        sevenChoicesHeadingVariantHtml.replace(
+          '</head>',
+          `<style>
+.canonical-option-bank { width: ${sevenChoicesRoleOracle.fixtures.printWrappedOptionWidthPt}pt !important; }
+</style></head>`,
+        )
+      await assertPrintHtmlSevenChoicesGoldenGeometry(
+        page,
+        sevenChoicesWrappedVariantHtml,
+        'Student Print HTML Seven Choices wrapped-option adversary',
+        {
+          headingPresent: true,
+          wrappedOption: true,
+          requireReadingBoundary: false,
+        },
+      )
       assertNoReadingRolesInNonReadingPrintGroups(
         printHtml.student,
         asset,
@@ -4368,6 +5308,11 @@ async function renderSupportedArtifacts({
           consumers.print_pdf,
           label,
         )
+        assertPdfSevenChoicesGoldenGeometry(
+          pdfPath,
+          consumers.print_pdf,
+          `${label} Seven Choices`,
+        )
         pdfRhythmEvidence.push(assertPdfReadingVerticalRhythm(
           pdfPath,
           consumers.print_pdf,
@@ -4452,6 +5397,47 @@ async function renderSupportedArtifacts({
           requireCrossPageEnd: true,
         },
       ))
+      const sevenChoicesPdfVariantHtml =
+        sevenChoicesWrappedVariantHtml.replace(
+          '</head>',
+          `<style>
+.canonical-option-bank-item:nth-child(5) {
+  break-before: page !important;
+  page-break-before: always !important;
+}
+</style></head>`,
+        )
+      const sevenChoicesPdfVariantPath = path.join(
+        outputDir,
+        'print-student-seven-choices-golden-geometry-variants.pdf',
+      )
+      let sevenChoicesVariantRender
+      try {
+        sevenChoicesVariantRender = await renderPaginatedPaper(
+          sevenChoicesPdfVariantHtml,
+        )
+      } finally {
+        await closeChromiumPool()
+      }
+      writeFileSync(
+        sevenChoicesPdfVariantPath,
+        sevenChoicesVariantRender.pdfBytes,
+      )
+      assertPdfA4AndUnclipped(
+        sevenChoicesPdfVariantPath,
+        'Student Chromium PDF Seven Choices wrapped/cross-page adversary',
+      )
+      assertPdfSevenChoicesGoldenGeometry(
+        sevenChoicesPdfVariantPath,
+        consumers.print_pdf,
+        'Student Chromium PDF Seven Choices wrapped/cross-page adversary',
+        {
+          headingText:
+            sevenChoicesRoleOracle.fixtures.bankHeadingVisibleText,
+          requireWrappedOption: true,
+          requireCrossPageBank: true,
+        },
+      )
       assert.deepEqual(
         [...new Set(pdfRhythmEvidence.flatMap(
           (evidence) => [...evidence.edgeIds],
@@ -4515,6 +5501,8 @@ async function renderSupportedArtifacts({
 const passageLetterReference = assertPassageLetterReferenceEvidence()
 const readingPredecessorOracle = assertReadingPredecessorOracle()
 const readingPdfRoleOracle = assertReadingPdfRoleOracle()
+const sevenChoicesReference = assertSevenChoicesReferenceEvidence()
+const { oracle: sevenChoicesRoleOracle } = assertSevenChoicesRoleOracle()
 const rootDir = mkdtempSync(path.join(tmpdir(), 'eqb-canonical-import-pilot-'))
 const dbPath = path.join(rootDir, 'question-bank.sqlite')
 const paperAssetsDir = path.join(rootDir, 'paper-assets')

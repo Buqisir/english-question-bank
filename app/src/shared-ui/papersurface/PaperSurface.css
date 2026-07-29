@@ -125,6 +125,11 @@
   padding-bottom: 0;
 }
 
+.ps-section[data-canonical-seven-choices-section] {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
 /* ─── Passage body ─────────────────────────────────────────────── */
 
 .ps-passage-body {
@@ -143,6 +148,19 @@
 
 .ps-paragraph:last-child {
   margin-bottom: 12px;
+}
+
+/* Canonical Seven Choices rhythm v1. The local 24px baseline is the only
+   Screen scale authority: paragraph boundaries collapse to one baseline
+   step, inline blank markers stay inside that line box, and an absent bank
+   heading leaves exactly one empty baseline before option A. */
+.ps-paragraph[data-canonical-seven-choices-rhythm-role="passage_body_line"] {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.ps-paragraph[data-canonical-seven-choices-rhythm-role="passage_body_line"]:last-child {
+  margin-bottom: 0;
 }
 
 /* figure-render cut (fig-token P0). Paper-sheet visual rules (see file
@@ -564,7 +582,7 @@ button.ps-paper-blank.ps-paper-blank--clickable {
 .ps-option-bank {
   list-style: none;
   margin: 10px 0 0;
-  padding: 0 0 0 22px;
+  padding: 0 0 0 var(--ps-passage-indent);
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -572,10 +590,43 @@ button.ps-paper-blank.ps-paper-blank--clickable {
 
 .ps-option-bank-item {
   display: flex;
-  gap: 6px;
+  gap: 0.4em;
   align-items: baseline;
   font-size: var(--ps-font-size);
   line-height: var(--ps-line-height);
+}
+
+.ps-option-bank-region[data-canonical-bank-heading-state] {
+  font-size: var(--ps-font-size);
+  line-height: var(--ps-line-height);
+}
+
+.ps-option-bank-region[data-canonical-bank-heading-state="absent"] .ps-option-bank {
+  margin-top: var(--ps-seven-baseline-step);
+}
+
+.ps-option-bank-region[data-canonical-bank-heading-state="present"] .ps-option-bank {
+  margin-top: 0;
+}
+
+.ps-option-bank-region[data-canonical-bank-heading-state="present"] {
+  margin-top: calc(0px - var(--ps-font-size));
+}
+
+.ps-option-bank-heading {
+  min-height: var(--ps-line-height);
+  margin: 0;
+  padding-left: var(--ps-passage-indent);
+  line-height: var(--ps-line-height);
+}
+
+.ps-option-bank-region[data-canonical-bank-heading-state] .ps-option-bank {
+  margin-bottom: 0;
+  gap: 0;
+}
+
+.ps-option-bank-item[data-canonical-seven-choices-rhythm-role="bank_option_line"] {
+  break-inside: avoid;
 }
 
 /* ─── Question options inline (empty-stem policy) ──────────────── */

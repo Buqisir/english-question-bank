@@ -4,7 +4,7 @@
 
 本文件是唯一的人类可读索引；当前 canonical 编译、校验、发布和受支持的
 Screen / Print-PDF consumer 只从
-[`standards/paper-canonical/manifest-v14.json`](../../standards/paper-canonical/manifest-v14.json)
+[`standards/paper-canonical/manifest-v15.json`](../../standards/paper-canonical/manifest-v15.json)
 解析一份 digest-closed 的权威闭包。这里不复制卷型题号、分值、题组
 cardinality、清洗条件或字体/物理排版数值，也不能被 caller 当作第二套配置。
 
@@ -18,10 +18,20 @@ Renderer Typography、其 schema 及纯验证入口。未知版本、缺件、di
 任何会改变 admission、canonical 语义、Profile、normalization 或 renderer
 结果的变更，必须新增 versioned artifact、schema/semantic conformance fixture、
 迁移说明和 manifest 升版；已经被 Publication 引用的 artifact 不可原位修改。
-`manifest-v1.json` 至 `manifest-v13.json` 保留各自原始 digest-closed closure，
-供既有 Publication 解析；当前 Screen v14、Print/PDF v15 consumer contracts
-只绑定 v14 authority。v14 以 Renderer Typography v4 绑定 Reading A–D 的
-完整 vertical-rhythm 语义邻接图；迁移说明见
+`manifest-v1.json` 至 `manifest-v14.json` 保留各自原始 digest-closed closure，
+供既有 Publication 解析；当前 Screen v15、Print/PDF v16 consumer contracts
+只绑定 v15 authority。v15 新增 Seven Choices Golden Geometry v1：它以
+digest-bound page-08 证据绑定完整 vertical-rhythm 语义邻接图，并把 A–G
+选项库分类为单列剩余宽度 track、固定 label 起点、label glyph 后固定 em gap
+的 content-driven text 起点、非 distributed/space-between，以及 wrapped
+continuation hanging indent。原始 JPEG 坐标只形成局部无量纲比例，绝不直接
+映射为 CSS px、PDF pt 或整页 A4 比例；golden 中未观测到的 wrapped option
+只由 adversarial public-artifact fixture 证明。通用测量轴见
+[`golden-geometry-framework-v1.md`](../cuts/paper-canonical-unification/qa/golden-geometry-framework-v1.md)，
+迁移说明见
+[`manifest-v15-migration.md`](../../standards/paper-canonical/manifest-v15-migration.md)。
+此前 v14 以 Renderer Typography v4 绑定 Reading A–D 的完整
+vertical-rhythm 语义邻接图；迁移说明见
 [`manifest-v14-migration.md`](../../standards/paper-canonical/manifest-v14-migration.md)
 和
 [`paper-typography-v4-migration.md`](../../standards/paper-canonical/rendering/paper-typography-v4-migration.md)。

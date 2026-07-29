@@ -12,6 +12,7 @@ import manifestV11 from '../../standards/paper-canonical/manifest-v11.json' with
 import manifestV12 from '../../standards/paper-canonical/manifest-v12.json' with { type: 'json' }
 import manifestV13 from '../../standards/paper-canonical/manifest-v13.json' with { type: 'json' }
 import manifestV14 from '../../standards/paper-canonical/manifest-v14.json' with { type: 'json' }
+import manifestV15 from '../../standards/paper-canonical/manifest-v15.json' with { type: 'json' }
 import legacyRhythmManifestV13 from '../../standards/paper-canonical/history/manifest-v13-reading-rhythm/manifest-v13.json' with { type: 'json' }
 import legacyRhythmTypographyV3 from '../../standards/paper-canonical/history/manifest-v13-reading-rhythm/paper-typography-v3.json' with { type: 'json' }
 import legacyRhythmTypographyV3Schema from '../../standards/paper-canonical/history/manifest-v13-reading-rhythm/renderer-typography-v3.schema.json' with { type: 'json' }
@@ -47,6 +48,7 @@ import typographyV1 from '../../standards/paper-canonical/rendering/paper-typogr
 import typographyV2 from '../../standards/paper-canonical/rendering/paper-typography-v2.json' with { type: 'json' }
 import typographyV3 from '../../standards/paper-canonical/rendering/paper-typography-v3.json' with { type: 'json' }
 import typographyV4 from '../../standards/paper-canonical/rendering/paper-typography-v4.json' with { type: 'json' }
+import sevenChoicesRhythmV1 from '../../standards/paper-canonical/rendering/seven-choices-rhythm-v1.json' with { type: 'json' }
 import standardManifestSchema from '../../schemas/paper-canonical/standard-manifest-v1.schema.json' with { type: 'json' }
 import coreSchema from '../../schemas/paper-canonical/core-invariants-v1.schema.json' with { type: 'json' }
 import profileSchema from '../../schemas/paper-canonical/paper-format-profile-v1.schema.json' with { type: 'json' }
@@ -70,6 +72,7 @@ import typographyV1Schema from '../../schemas/paper-canonical/renderer-typograph
 import typographyV2Schema from '../../schemas/paper-canonical/renderer-typography-v2.schema.json' with { type: 'json' }
 import typographyV3Schema from '../../schemas/paper-canonical/renderer-typography-v3.schema.json' with { type: 'json' }
 import typographyV4Schema from '../../schemas/paper-canonical/renderer-typography-v4.schema.json' with { type: 'json' }
+import sevenChoicesRhythmV1Schema from '../../schemas/paper-canonical/seven-choices-rhythm-v1.schema.json' with { type: 'json' }
 import sourceCaptureSchema from '../../schemas/paper-canonical/source-capture-v1.schema.json' with { type: 'json' }
 import planSchema from '../../schemas/paper-canonical/canonical-paper-plan-v1.schema.json' with { type: 'json' }
 import groupSchema from '../../schemas/paper-canonical/canonical-question-group-v1.schema.json' with { type: 'json' }
@@ -87,6 +90,7 @@ import reportV11Schema from '../../schemas/paper-canonical/normalization-report-
 import reportV12Schema from '../../schemas/paper-canonical/normalization-report-v12.schema.json' with { type: 'json' }
 import reportV13Schema from '../../schemas/paper-canonical/normalization-report-v13.schema.json' with { type: 'json' }
 import reportV14Schema from '../../schemas/paper-canonical/normalization-report-v14.schema.json' with { type: 'json' }
+import reportV15Schema from '../../schemas/paper-canonical/normalization-report-v15.schema.json' with { type: 'json' }
 import legacyReportV9Schema from '../../schemas/paper-canonical/normalization-report-v9.schema.json' with { type: 'json' }
 import publicationSchema from '../../schemas/paper-canonical/canonical-paper-publication-v1.schema.json' with { type: 'json' }
 import publicationV2Schema from '../../schemas/paper-canonical/canonical-paper-publication-v2.schema.json' with { type: 'json' }
@@ -102,6 +106,7 @@ import publicationV11Schema from '../../schemas/paper-canonical/canonical-paper-
 import publicationV12Schema from '../../schemas/paper-canonical/canonical-paper-publication-v12.schema.json' with { type: 'json' }
 import publicationV13Schema from '../../schemas/paper-canonical/canonical-paper-publication-v13.schema.json' with { type: 'json' }
 import publicationV14Schema from '../../schemas/paper-canonical/canonical-paper-publication-v14.schema.json' with { type: 'json' }
+import publicationV15Schema from '../../schemas/paper-canonical/canonical-paper-publication-v15.schema.json' with { type: 'json' }
 import legacyPublicationV9Schema from '../../schemas/paper-canonical/canonical-paper-publication-v9.schema.json' with { type: 'json' }
 import consumerSchema from '../../schemas/paper-canonical/consumer-contract-v1.schema.json' with { type: 'json' }
 import consumerV2Schema from '../../schemas/paper-canonical/consumer-contract-v2.schema.json' with { type: 'json' }
@@ -747,6 +752,91 @@ function validateRendererTypography(artifact, profiles) {
   return []
 }
 
+function validateSevenChoicesRhythm(artifact) {
+  if (artifact?.schemaVersion !== 'seven-choices-rhythm-v1') return []
+  const expectedRoleClasses = {
+    readingBoundary: ['reading_question_tail'],
+    chrome: ['part_title', 'subsection', 'meta_instruction'],
+    passageContent: ['passage_title', 'passage_body_line'],
+    inlineBlank: ['inline_blank_marker'],
+    bankHeading: ['bank_heading'],
+    bankOption: ['bank_option_line'],
+    teacherTail: ['answer_line', 'explanation_line'],
+    followingSection: ['next_section'],
+  }
+  const expectedEdgeIds = [
+    'reading_boundary_to_chrome_same_page',
+    'reading_boundary_to_chrome_cross_page',
+    'chrome_internal',
+    'chrome_to_passage',
+    'passage_title_to_body',
+    'passage_line_internal',
+    'paragraph_transition',
+    'inline_blank_no_phantom_space',
+    'passage_to_bank_heading',
+    'bank_heading_to_first_option',
+    'passage_to_first_option',
+    'passage_to_bank_cross_page',
+    'bank_option_line_internal',
+    'bank_option_to_next_option',
+    'bank_to_answer',
+    'answer_to_explanation',
+    'teacher_tail_internal',
+    'student_bank_to_next_section_same_page',
+    'teacher_tail_to_next_section_same_page',
+    'student_bank_to_next_section_cross_page',
+    'teacher_tail_to_next_section_cross_page',
+    'same_passage_cross_page',
+    'bank_between_options_cross_page',
+  ]
+  const valid = (
+    JSON.stringify(artifact.semanticRoleClasses)
+      === JSON.stringify(expectedRoleClasses)
+    && artifact.adjacencyGraph?.length === expectedEdgeIds.length
+    && artifact.adjacencyGraph.every(
+      (edge, index) => edge?.edgeId === expectedEdgeIds[index],
+    )
+    && new Set(expectedEdgeIds).size === expectedEdgeIds.length
+    && artifact.targets?.screen?.baselineStepPx === 24
+    && artifact.targets?.printPdf?.baselineStepPt === 18
+    && artifact.goldenGeometryFramework?.id
+      === 'golden-geometry-framework-v1'
+    && /^sha256:[a-f0-9]{64}$/.test(
+      artifact.goldenGeometryFramework?.sha256 || '',
+    )
+    && JSON.stringify(artifact.goldenGeometryFramework?.axes)
+      === JSON.stringify(['vertical', 'horizontal'])
+    && artifact.goldenGeometryFramework?.familyValuesAreNotShared === true
+    && artifact.horizontalBankGeometry?.rowOccupancy?.columnCount === 1
+    && artifact.horizontalBankGeometry?.rowOccupancy
+      ?.horizontalGutterCount === 0
+    && artifact.horizontalBankGeometry?.strategy?.rowTrack
+      === 'fixed_single_remaining_usable_width'
+    && artifact.horizontalBankGeometry?.strategy?.textStart
+      === 'content_driven_after_label_glyph_plus_fixed_em_gap'
+    && artifact.horizontalBankGeometry?.strategy?.distribution
+      === 'not_distributed_not_space_between'
+    && artifact.horizontalBankGeometry?.strategy?.wrappedContinuation
+      === 'hanging_indent_at_each_rows_text_start'
+    && artifact.horizontalBankGeometry?.rendererMapping?.screen
+      ?.bankInsetEm === 2
+    && artifact.horizontalBankGeometry?.rendererMapping?.printPdf
+      ?.bankInsetEm === 2
+    && artifact.referenceMeasurement?.path
+      === 'docs/cuts/paper-canonical-unification/qa/20-seven-choices-golden-geometry-reference-measurements-v1.json'
+    && /^sha256:[a-f0-9]{64}$/.test(
+      artifact.referenceMeasurement?.sha256 || '',
+    )
+  )
+  return valid
+    ? []
+    : [issue(
+        'RENDERER_SEVEN_CHOICES_RHYTHM_INVALID',
+        '$.artifacts.renderer-seven-choices-rhythm',
+        'Seven Choices geometry must retain its exact role classes, adjacency inventory, horizontal strategy, local targets, and digest-bound evidence',
+      )]
+}
+
 export function validateAuthorityClosure({
   manifest: candidateManifest,
   artifacts,
@@ -846,6 +936,20 @@ export function validateAuthorityClosure({
     rendererTypographyArtifact,
     profileArtifacts,
   ))
+  const sevenChoicesRhythmArtifact = Object.values(artifacts || {}).find(
+    (artifact) => artifact?.schemaVersion === 'seven-choices-rhythm-v1',
+  )
+  if (Number(candidateManifest?.version) >= 15) {
+    if (!sevenChoicesRhythmArtifact) {
+      issues.push(issue(
+        'RENDERER_SEVEN_CHOICES_RHYTHM_MISSING',
+        '$.artifacts',
+        'Manifest v15+ must bind Seven Choices rhythm authority',
+      ))
+    } else {
+      issues.push(...validateSevenChoicesRhythm(sevenChoicesRhythmArtifact))
+    }
+  }
   const coreArtifact = Object.values(artifacts || {}).find((artifact) => artifact?.owner === 'core')
   if (!coreArtifact || coreArtifact.projectionContract !== 'canonical-projector-v1') issues.push(issue('AUTHORITY_CORE_CLOSURE', '$.artifacts', 'Core invariants must pin the projector'))
   return { ok: issues.length === 0, issues }
@@ -932,6 +1036,10 @@ const legacyRhythmArtifactsV13 = {
   'renderer-typography': legacyRhythmTypographyV3,
 }
 const artifactsV14 = { ...sharedArtifactsV11, normalization: normalizationV3, 'renderer-typography': typographyV4 }
+const artifactsV15 = {
+  ...artifactsV14,
+  'renderer-seven-choices-rhythm': sevenChoicesRhythmV1,
+}
 const schemasV1 = { ...sharedSchemas, 'renderer-typography-v1': typographyV1Schema, 'normalization-rules-v1': normalizationSchema, 'normalization-report-v1': reportSchema, 'canonical-paper-publication-v1': publicationSchema }
 const schemasV2 = { ...sharedSchemas, 'renderer-typography-v1': typographyV1Schema, 'normalization-rules-v2': normalizationV2Schema, 'normalization-report-v2': reportV2Schema, 'canonical-paper-publication-v2': publicationV2Schema }
 const schemasV3 = { ...sharedSchemas, 'renderer-typography-v2': typographyV2Schema, 'normalization-rules-v2': normalizationV2Schema, 'normalization-report-v3': reportV3Schema, 'canonical-paper-publication-v3': publicationV3Schema }
@@ -1037,6 +1145,18 @@ const schemasV14 = {
   'normalization-report-v14': reportV14Schema,
   'canonical-paper-publication-v14': publicationV14Schema,
 }
+const schemasV15 = {
+  ...Object.fromEntries(
+    Object.entries(schemasV14).filter(([schemaId]) =>
+      ![
+        'normalization-report-v14',
+        'canonical-paper-publication-v14',
+      ].includes(schemaId)),
+  ),
+  'seven-choices-rhythm-v1': sevenChoicesRhythmV1Schema,
+  'normalization-report-v15': reportV15Schema,
+  'canonical-paper-publication-v15': publicationV15Schema,
+}
 const validationV1 = validateAuthorityClosure({ manifest: manifestV1, artifacts: artifactsV1, schemas: schemasV1 })
 const validationV2 = validateAuthorityClosure({ manifest: manifestV2, artifacts: artifactsV2, schemas: schemasV2 })
 const validationV3 = validateAuthorityClosure({ manifest: manifestV3, artifacts: artifactsV3, schemas: schemasV3 })
@@ -1056,6 +1176,7 @@ const legacyRhythmValidationV13 = validateAuthorityClosure({
   schemas: legacyRhythmSchemasV13,
 })
 const validationV14 = validateAuthorityClosure({ manifest: manifestV14, artifacts: artifactsV14, schemas: schemasV14 })
+const validationV15 = validateAuthorityClosure({ manifest: manifestV15, artifacts: artifactsV15, schemas: schemasV15 })
 const validations = [
   validationV1,
   validationV2,
@@ -1072,6 +1193,7 @@ const validations = [
   validationV13,
   legacyRhythmValidationV13,
   validationV14,
+  validationV15,
 ]
 if (validations.some((validation) => !validation.ok)) {
   throw new Error(`Invalid checked-in canonical authority: ${JSON.stringify(validations.flatMap((validation) => validation.issues))}`)
@@ -1101,6 +1223,7 @@ const authorities = [
     schemas: legacyRhythmSchemasV13,
   },
   { manifest: manifestV14, artifacts: artifactsV14, schemas: schemasV14 },
+  { manifest: manifestV15, artifacts: artifactsV15, schemas: schemasV15 },
 ].map((authority) => ({
   ...authority,
   authorityRef: authorityRef(authority.manifest),
@@ -1108,7 +1231,7 @@ const authorities = [
   families: new Map(Object.values(authority.artifacts).filter((artifact) => artifact?.owner === 'family').map((family) => [family.familyContractId, family])),
 }))
 
-export const canonicalAuthorityRef = authorities.find((authority) => authority.manifest.version === '14').authorityRef
+export const canonicalAuthorityRef = authorities.find((authority) => authority.manifest.version === '15').authorityRef
 
 export function resolveCanonicalAuthority(authorityRef) {
   const authority = authorities.find((candidate) => candidate.authorityRef.manifestId === authorityRef?.manifestId && candidate.authorityRef.manifestVersion === authorityRef?.manifestVersion && candidate.authorityRef.manifestDigest === authorityRef?.manifestDigest)

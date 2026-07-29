@@ -110,6 +110,8 @@ export function renderCanonicalPaperSentenceContent(
           'data-canonical-pair': `${node.questionId}:${node.blankId}`,
           'data-canonical-question-id': node.questionId,
           'data-canonical-blank-id': node.blankId,
+          'data-canonical-seven-choices-rhythm-role':
+            'inline_blank_marker',
         }
       : {}
     const blank = isClickable ? (

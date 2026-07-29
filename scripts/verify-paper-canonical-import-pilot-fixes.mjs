@@ -319,7 +319,7 @@ async function assertPaperBrowseSelectionModes() {
   }
   const screenContract = JSON.parse(readFileSync(path.join(
     repositoryRoot,
-    'standards/paper-canonical/consumers/screen-v14.json',
+    'standards/paper-canonical/consumers/screen-v15.json',
   )))
   for (const { familyContractId } of legacyCases) {
     assert.equal(

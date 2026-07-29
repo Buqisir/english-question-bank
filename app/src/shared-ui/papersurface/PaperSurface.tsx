@@ -32,6 +32,9 @@ import {
   readingPassageLetterGeometryForLetter,
   readingPassageLetterTypography,
 } from '../../../../shared/paper-canonical/readingPassageLetter.mjs'
+import {
+  sevenChoicesRhythm,
+} from '../../../../shared/paper-canonical/sevenChoicesRhythm.mjs'
 import { renderCanonicalPaperSentenceContent } from './CanonicalPaperSentenceContent.tsx'
 import {
   renderLegacyPaperSentenceContent,
@@ -70,6 +73,8 @@ const paperSurfaceTokenStyle: PaperSurfaceStyle = {
   '--ps-rule': paperSurfaceTokens.paperRule,
   '--ps-font-size': paperSurfaceTokens.paperFontSizePx,
   '--ps-line-height': paperSurfaceTokens.paperLineHeight,
+  '--ps-seven-baseline-step':
+    `${sevenChoicesRhythm.targets.screen.baselineStepPx}px`,
   '--ps-passage-indent': paperSurfaceTokens.passageIndent,
   '--ps-options-grid-columns': paperSurfaceTokens.optionsGridColumns,
   '--ps-options-grid-gap-x': paperSurfaceTokens.optionsGridGapX,
@@ -127,6 +132,11 @@ type PaperSurfaceComponentProps = Omit<PaperSurfaceProps, 'blankFocusMode'> & {
   readonly canonicalReadingSemanticSignature?: string
   readonly canonicalReadingSuccessorGroupId?: string
   readonly canonicalReadingFollowingSectionId?: string
+  /** Enables the canonical Seven Choices semantic-role rhythm graph. */
+  readonly sevenChoicesRhythmEnabled?: boolean
+  readonly sevenChoicesFollowingSectionId?: string
+  /** Optional fixture-backed visible bank heading; production source may omit it. */
+  readonly optionBankHeading?: string
   /** Ordered canonical Application Writing prompt rendered without legacy inference. */
   readonly canonicalApplicationPromptBlocks?: ReadonlyArray<{
     readonly nodeId: string
@@ -167,6 +177,9 @@ export function PaperSurface(props: PaperSurfaceComponentProps): ReactNode {
     canonicalReadingSemanticSignature,
     canonicalReadingSuccessorGroupId,
     canonicalReadingFollowingSectionId,
+    sevenChoicesRhythmEnabled = false,
+    sevenChoicesFollowingSectionId,
+    optionBankHeading,
     canonicalApplicationPromptBlocks,
     canonicalContinuationMaterialBlocks,
   } = props
@@ -348,6 +361,7 @@ export function PaperSurface(props: PaperSurfaceComponentProps): ReactNode {
             onQuestionClick={handleQuestionClick}
             blankFocus={blankFocus}
             semanticParagraphs={semanticParagraphs}
+            sevenChoicesRhythmEnabled={sevenChoicesRhythmEnabled}
           />
         ))}
         {/* seven-options-on-paper: the 七选五 A-G candidate-sentence
@@ -362,6 +376,9 @@ export function PaperSurface(props: PaperSurfaceComponentProps): ReactNode {
           <PaperSurfaceOptionBank
             options={optionBank}
             identity={optionBankIdentity}
+            heading={optionBankHeading}
+            sevenChoicesRhythmEnabled={sevenChoicesRhythmEnabled}
+            followingSectionId={sevenChoicesFollowingSectionId}
           />
         )}
         {/* Render global questions (no section). I15: the rail is
@@ -666,6 +683,7 @@ type PaperSurfaceSectionProps = {
   onQuestionClick: (questionId: string) => void
   blankFocus: BlankFocusContext
   semanticParagraphs?: ReadonlyArray<CanonicalSurfaceParagraph>
+  sevenChoicesRhythmEnabled: boolean
 }
 
 function PaperSurfaceSection({
@@ -679,6 +697,7 @@ function PaperSurfaceSection({
   onQuestionClick,
   blankFocus,
   semanticParagraphs,
+  sevenChoicesRhythmEnabled,
 }: PaperSurfaceSectionProps): ReactNode {
   const paragraphs = useMemo(
     () => textMap.paragraphs.filter((p) => p.section === section),
@@ -701,6 +720,9 @@ function PaperSurfaceSection({
     <section
       className="ps-section"
       {...{ [paperSurfaceAnchorAttrs.section]: section }}
+      data-canonical-seven-choices-section={
+        sevenChoicesRhythmEnabled ? '' : undefined
+      }
     >
       <div className="ps-passage-body">
         {paragraphs.map((para) => (
@@ -712,6 +734,7 @@ function PaperSurfaceSection({
             activeEvidenceId={activeEvidenceId}
             blankFocus={blankFocus}
             semanticParagraph={semanticParagraphs?.find((item) => item.id === para.id)}
+            sevenChoicesRhythmEnabled={sevenChoicesRhythmEnabled}
           />
         ))}
       </div>
@@ -740,6 +763,7 @@ type PaperSurfaceParagraphProps = {
   activeEvidenceId: string | null
   blankFocus: BlankFocusContext
   semanticParagraph?: CanonicalSurfaceParagraph
+  sevenChoicesRhythmEnabled: boolean
 }
 
 function PaperSurfaceParagraph({
@@ -749,6 +773,7 @@ function PaperSurfaceParagraph({
   activeEvidenceId,
   blankFocus,
   semanticParagraph,
+  sevenChoicesRhythmEnabled,
 }: PaperSurfaceParagraphProps): ReactNode {
   // figure-render cut (fig-token P0): `paragraph.figure` is set ONLY by
   // the adapter when this paragraph's WHOLE text is a manifest marker
@@ -777,6 +802,9 @@ function PaperSurfaceParagraph({
     <p
       className="ps-paragraph"
       {...{ [paperSurfaceAnchorAttrs.paragraphId]: paragraph.id }}
+      data-canonical-seven-choices-rhythm-role={
+        sevenChoicesRhythmEnabled ? 'passage_body_line' : undefined
+      }
     >
       {paragraph.sentences.map((sentence) => (
         <PaperSurfaceSentence
@@ -1272,29 +1300,58 @@ type PaperSurfaceOptionBankProps = {
     readonly semanticSignature: string
     readonly occurrenceSignature: string
   }
+  heading?: string
+  sevenChoicesRhythmEnabled: boolean
+  followingSectionId?: string
 }
 
 function PaperSurfaceOptionBank({
   options,
   identity,
+  heading,
+  sevenChoicesRhythmEnabled,
+  followingSectionId,
 }: PaperSurfaceOptionBankProps): ReactNode {
   return (
-    <ol
-      className="ps-option-bank"
-      data-canonical-bank-id={identity?.bankId}
-      data-canonical-semantic-signature={identity?.semanticSignature}
-      data-canonical-occurrence-signature={identity?.occurrenceSignature}
+    <div
+      className="ps-option-bank-region"
+      data-canonical-bank-heading-state={heading ? 'present' : 'absent'}
     >
-      {options.map((opt) => (
-        <li
-          key={opt.optionId ?? opt.label}
-          className="ps-option-bank-item"
-          data-canonical-option-id={opt.optionId}
+      {heading && (
+        <div
+          className="ps-option-bank-heading"
+          data-canonical-seven-choices-rhythm-role={
+            sevenChoicesRhythmEnabled ? 'bank_heading' : undefined
+          }
         >
-          <span className="ps-option-label">{opt.label}.</span>
-          <span className="ps-option-bank-text">{opt.text}</span>
-        </li>
-      ))}
-    </ol>
+          {heading}
+        </div>
+      )}
+      <ol
+        className="ps-option-bank"
+        data-canonical-bank-id={identity?.bankId}
+        data-canonical-semantic-signature={identity?.semanticSignature}
+        data-canonical-occurrence-signature={identity?.occurrenceSignature}
+      >
+        {options.map((opt, index) => (
+          <li
+            key={opt.optionId ?? opt.label}
+            className="ps-option-bank-item"
+            data-canonical-option-id={opt.optionId}
+            data-canonical-seven-choices-rhythm-role={
+              sevenChoicesRhythmEnabled ? 'bank_option_line' : undefined
+            }
+            data-canonical-seven-choices-before-section={
+              index === options.length - 1
+                ? followingSectionId
+                : undefined
+            }
+          >
+            <span className="ps-option-label">{opt.label}.</span>
+            <span className="ps-option-bank-text">{opt.text}</span>
+          </li>
+        ))}
+      </ol>
+    </div>
   )
 }

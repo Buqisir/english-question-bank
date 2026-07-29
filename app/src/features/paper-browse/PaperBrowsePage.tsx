@@ -337,6 +337,9 @@ export type PaperBrowsePageProps = {
    * （URL 的 `similar=1`）。不支持题型/查无此题时静默降级为普通讲评态深链，
    * 不报错。 */
   similar?: boolean
+  /** Canonical QA/public-fixture companion for the optional A-G bank heading.
+   * Production callers omit it; an absent node collapses without space. */
+  sevenChoicesBankHeading?: string
   /** App's loaded questionGroups, keyed by id (== paper-asset groupId). */
   questionGroupById: Map<string, QuestionGroupCard>
   onAddGroupsToBasket: (groups: QuestionGroupCard[]) => void
@@ -444,6 +447,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     questionId,
     lecture,
     similar,
+    sevenChoicesBankHeading,
     questionGroupById,
     onAddGroupsToBasket,
     currentDraftPaperId,
@@ -1866,6 +1870,19 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
             ? nextSectionAfterReading.sectionId
             : undefined
         }
+        sevenChoicesRhythmEnabled={
+          entry.kind === 'sevenChoices'
+          && canonicalSevenChoicesGroupIds.includes(groupId)
+        }
+        sevenChoicesFollowingSectionId={
+          entry.kind === 'sevenChoices'
+          && groupId
+            === canonicalSevenChoicesGroupIds[
+              canonicalSevenChoicesGroupIds.length - 1
+            ]
+            ? nextHeadingAfterSevenChoices?.id
+            : undefined
+        }
         canonicalApplicationPromptBlocks={
           entry.kind === 'writing'
             ? entry.model.canonicalPromptBlocks
@@ -1882,6 +1899,11 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
         // vs {label, text, chain}) — no adapter change needed.
         optionBank={entry.kind === 'sevenChoices' ? entry.model.options : undefined}
         optionBankIdentity={entry.kind === 'sevenChoices' ? entry.model.bankIdentity : undefined}
+        optionBankHeading={
+          entry.kind === 'sevenChoices'
+            ? sevenChoicesBankHeading
+            : undefined
+        }
         mode="lecture"
         lectureFocus={isPanelGroup ? lectureFocusForSelection : null}
         readingFocusBySection={{}}
@@ -1974,6 +1996,70 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
   const isReadingChromeBlock = (index: number) =>
     index >= readingChromeStartBlockIndex
     && index < firstReadingGroupBlockIndex
+  const canonicalSevenChoicesGroupIds =
+    canonicalConsumption?.selections.find(
+      (selection) =>
+        selection.familyContractId === 'seven-choices'
+        && selection.mode === 'canonical',
+    )?.groupIds ?? []
+  const firstSevenChoicesGroupBlockIndex = asset
+    ? asset.content.blocks.findIndex(
+        (block) =>
+          block.type === 'group'
+          && block.groupId === canonicalSevenChoicesGroupIds[0],
+      )
+    : -1
+  const lastSevenChoicesGroupBlockIndex = asset
+    ? asset.content.blocks.findLastIndex(
+        (block) =>
+          block.type === 'group'
+          && block.groupId
+            === canonicalSevenChoicesGroupIds[
+              canonicalSevenChoicesGroupIds.length - 1
+            ],
+      )
+    : -1
+  const nextHeadingAfterSevenChoices = (() => {
+    if (!asset || lastSevenChoicesGroupBlockIndex < 0) return undefined
+    const block = asset.content.blocks
+      .slice(lastSevenChoicesGroupBlockIndex + 1)
+      .find(
+        (candidate) =>
+          candidate.type === 'partHeading'
+          || candidate.type === 'sectionHeading',
+      )
+    if (!block) return undefined
+    return block.type === 'partHeading'
+      ? { id: block.partId, block }
+      : { id: block.sectionId, block }
+  })()
+  let firstSevenChoicesPredecessorBlockIndex = -1
+  let sevenChoicesChromeStartBlockIndex = firstSevenChoicesGroupBlockIndex
+  if (asset && firstSevenChoicesGroupBlockIndex >= 0) {
+    for (
+      let index = firstSevenChoicesGroupBlockIndex - 1;
+      index >= 0;
+      index -= 1
+    ) {
+      const block = asset.content.blocks[index]
+      if (
+        block.type === 'instruction'
+        || block.type === 'sectionHeading'
+        || block.type === 'partHeading'
+      ) {
+        if (firstSevenChoicesPredecessorBlockIndex < 0) {
+          firstSevenChoicesPredecessorBlockIndex = index
+        }
+        sevenChoicesChromeStartBlockIndex = index
+        continue
+      }
+      if (block.type === 'pageBreakHint') continue
+      break
+    }
+  }
+  const isSevenChoicesChromeBlock = (index: number) =>
+    index >= sevenChoicesChromeStartBlockIndex
+    && index < firstSevenChoicesGroupBlockIndex
 
   // one-sheet-paper: `mergedInstructionText` folds a single-group section's
   // leading 指导语 into this same hover/剪走 unit (owner-ratified rule:
@@ -2037,6 +2123,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
         <section
           className={cardClassName}
           data-paper-browse-anchor={groupId}
+          data-canonical-group-type={group?.groupType}
           data-canonical-semantic-signature={
             canonicalGroupIdentity?.semanticSignature
           }
@@ -2082,6 +2169,19 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
               }
               data-canonical-reading-chrome={
                 isReadingChromeBlock(index) ? '' : undefined
+              }
+              data-canonical-seven-choices-rhythm-role={
+                isSevenChoicesChromeBlock(index)
+                  ? 'meta_instruction'
+                  : undefined
+              }
+              data-canonical-seven-choices-chrome={
+                isSevenChoicesChromeBlock(index) ? '' : undefined
+              }
+              data-canonical-seven-choices-preceding-for={
+                index === firstSevenChoicesPredecessorBlockIndex
+                  ? canonicalSevenChoicesGroupIds[0]
+                  : undefined
               }
             >
               {options.mergedInstructionText}
@@ -2352,6 +2452,28 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
                 ? 'reading_heading'
                 : undefined
             }
+            data-canonical-seven-choices-rhythm-role={
+              isSevenChoicesChromeBlock(index) ? 'part_title' : (
+                block.partId === nextHeadingAfterSevenChoices?.id
+                  ? 'next_section'
+                  : undefined
+              )
+            }
+            data-canonical-seven-choices-chrome={
+              isSevenChoicesChromeBlock(index) ? '' : undefined
+            }
+            data-canonical-seven-choices-preceding-for={
+              index === firstSevenChoicesPredecessorBlockIndex
+                ? canonicalSevenChoicesGroupIds[0]
+                : undefined
+            }
+            data-canonical-seven-choices-following-for={
+              block.partId === nextHeadingAfterSevenChoices?.id
+                ? canonicalSevenChoicesGroupIds[
+                    canonicalSevenChoicesGroupIds.length - 1
+                  ]
+                : undefined
+            }
           >
             {block.text}
           </h2>
@@ -2387,6 +2509,35 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
             data-canonical-reading-preceding-kind={
               index === firstReadingPredecessorBlockIndex
                 ? 'reading_heading'
+                : undefined
+            }
+            data-canonical-seven-choices-rhythm-role={
+              isSevenChoicesChromeBlock(index) ? 'subsection' : (
+                block.sectionId === nextHeadingAfterSevenChoices?.id
+                  ? 'next_section'
+                  : undefined
+              )
+            }
+            data-canonical-seven-choices-chrome={
+              isSevenChoicesChromeBlock(index) ? '' : undefined
+            }
+            data-canonical-seven-choices-preceding-for={
+              index === firstSevenChoicesPredecessorBlockIndex
+                ? canonicalSevenChoicesGroupIds[0]
+                : undefined
+            }
+            data-canonical-seven-choices-reading-boundary-group-id={
+              block.sectionId === nextSectionAfterReading?.sectionId
+                ? canonicalReadingGroupIds[
+                    canonicalReadingGroupIds.length - 1
+                  ]
+                : undefined
+            }
+            data-canonical-seven-choices-following-for={
+              block.sectionId === nextHeadingAfterSevenChoices?.id
+                ? canonicalSevenChoicesGroupIds[
+                    canonicalSevenChoicesGroupIds.length - 1
+                  ]
                 : undefined
             }
           >
@@ -2430,6 +2581,19 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
             data-canonical-reading-preceding-kind={
               index === firstReadingPredecessorBlockIndex
                 ? 'reading_heading'
+                : undefined
+            }
+            data-canonical-seven-choices-rhythm-role={
+              isSevenChoicesChromeBlock(index)
+                ? 'meta_instruction'
+                : undefined
+            }
+            data-canonical-seven-choices-chrome={
+              isSevenChoicesChromeBlock(index) ? '' : undefined
+            }
+            data-canonical-seven-choices-preceding-for={
+              index === firstSevenChoicesPredecessorBlockIndex
+                ? canonicalSevenChoicesGroupIds[0]
                 : undefined
             }
           >

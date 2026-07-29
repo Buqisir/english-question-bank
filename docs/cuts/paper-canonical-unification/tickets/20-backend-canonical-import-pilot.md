@@ -194,3 +194,54 @@ four actionable verifier gaps; all four were fixed in this task, and both
 focused re-reviews PASS with zero remaining finding. No Owner QA provisioning,
 Ticket 21, other paper-family work, production/R2 action, or generated-DOCX
 output was performed.
+
+Seven Choices Golden Geometry closure (2026-07-29):
+Manifest v15 adds the renderer-owned `seven-choices-rhythm-v1` authority,
+Screen v15, and Print/PDF v16 without modifying any published v1-v14 artifact.
+The exact golden page-08 JPEG bytes are bound at
+`d567b57e7a9372511121abcefeb66bbe45f9db152a7d8037aff247844773fe57`.
+All golden coordinates remain evidence-local: vertical distances are
+normalized by the nearby Latin baseline step, while bank positions are
+normalized by local em or usable-content width. No JPEG pixel is treated as a
+CSS pixel or PDF point, and no scale is inferred from full-page A4.
+
+The complete Seven Choices semantic-role graph covers the preserved
+Reading-D boundary, optional part/subsection/meta chrome, passage title/body,
+paragraph and wrapped-line rhythm, inline blank markers, optional bank heading,
+one-line/wrapped A-G options, Student/Teacher tails, following sections, and
+same/cross-page passage and bank continuation. Independent source-identity and
+role-adjacency oracles fail closed on missing/duplicate/wrong role, line,
+group, page, phantom chrome, repeated bank/section, split option, and
+Screen/Print parity drift.
+
+The horizontal golden evidence classifies one option per full remaining-width
+row track: A-G labels form one fixed origin cluster, text starts are
+content-driven after the label glyph plus a fixed em gap, visible right bounds
+remain content-driven, and there is no distributed or space-between
+placement. The golden contains only one-line options, so hanging-indent
+continuation is explicitly fixture-proved with short/long/wrapped adversarial
+variants rather than claimed as a golden observation. The reusable
+`golden-geometry-framework-v1.md` records both measurement axes but shares no
+family values or strategy with later families.
+
+Actual public artifacts pass for plain/lecture Screen, Student/Teacher Print
+HTML, Student/Teacher exact-A4 Chromium PDF, and the wrapped/cross-page A-G
+variant. Visual inspection confirms one A-G bank, stable label/text starts,
+wrapped hanging indents, between-option page breaks, and the bank-to-next-
+section transition. Every PDF variant has an A4 MediaBox and CropBox
+(`594.96 × 841.92pt`). The generated browser/process group was closed, and no
+matching verifier, Vite, QA-server, or Chromium process remains.
+
+Closure verify: canonical foundation/Publication/admission/recovery, backend
+pilot and focused fixes, Seven Choices and Reading publication/rendered
+behavior, Continuation rendering, generated-DOCX retirement, app typecheck,
+real `--actual-artifacts`, `git diff --check`, and
+`pnpm -C app run verify:all` 115 PASS / 1 declared SKIP / 0 FAIL.
+Renderer Typography v4 remains byte-identical at
+`ee1b93188b883cbc5bde5d409eee22ebcf9d51748b483515cfd2d80a0924b4e4`;
+its Reading vertical-rhythm evidence remains byte-identical at
+`3827f696fe64ee3086cb7d0b08f9e5b6a94cf01022ac2d5343d81ee743643f35`.
+Commit: this bounded Seven Choices closure commit (exact HEAD is reported in
+the independent-review handoff). No Owner QA provisioning, independent review,
+Ticket 21/Cloze/other-family work, production/R2 action, or generated-DOCX
+output was performed.

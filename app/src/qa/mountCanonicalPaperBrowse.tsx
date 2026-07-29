@@ -11,6 +11,11 @@ createRoot(document.getElementById('root')!).render(
     focusGroupId={search.get('focusGroupId') ?? undefined}
     questionId={search.get('questionId') ?? undefined}
     lecture={search.get('lecture') === '1'}
+    sevenChoicesBankHeading={
+      search.get('sevenChoicesBankHeading') === 'present'
+        ? 'A-G 选项'
+        : undefined
+    }
     questionGroupById={new Map()}
     onAddGroupsToBasket={() => {}}
     currentDraftPaperId={null}
