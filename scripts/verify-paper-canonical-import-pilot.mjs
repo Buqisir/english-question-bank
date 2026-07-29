@@ -43,6 +43,11 @@ import {
 import {
   runCanonicalImportPilotQaSession,
 } from './lib/canonicalImportPilotQaArtifactServer.mjs'
+import {
+  renderPaginatedPaper,
+} from '../server/draft-paper/paginationRenderer.mjs'
+import { closeChromiumPool } from '../server/draft-paper/chromiumPool.mjs'
+import { buildPrintHtml } from '../server/print-renderer.mjs'
 
 const repositoryRoot = path.resolve(import.meta.dirname, '..')
 const sourcePackageDir = path.join(
@@ -56,6 +61,10 @@ const passageLetterReferencePath = path.join(
 const readingPredecessorOraclePath = path.join(
   repositoryRoot,
   'docs/cuts/paper-canonical-unification/qa/20-reading-predecessor-oracles.json',
+)
+const readingPdfRoleOraclePath = path.join(
+  repositoryRoot,
+  'docs/cuts/paper-canonical-unification/qa/20-reading-pdf-role-oracles.json',
 )
 const paperId = 'paper-2026-i'
 const provisionActualArtifacts = process.argv.includes('--actual-artifacts')
@@ -380,6 +389,38 @@ function assertReadingPredecessorOracle() {
   return oracle
 }
 
+function assertReadingPdfRoleOracle() {
+  const oracle = JSON.parse(readFileSync(readingPdfRoleOraclePath, 'utf8'))
+  assert.equal(oracle.schemaVersion, 'reading-pdf-role-oracles-v1')
+  assert.equal(oracle.paperId, paperId)
+  assert.equal(
+    sha256(readFileSync(path.join(repositoryRoot, oracle.sourceAsset.path))),
+    oracle.sourceAsset.sha256,
+    'Reading PDF role oracle binds the exact pilot source asset',
+  )
+  assert.deepEqual(
+    oracle.readingGroups.map((group) => group.letter),
+    ['A', 'B', 'C', 'D'],
+    'Reading PDF role oracle binds A-D in source order',
+  )
+  assert.deepEqual(
+    oracle.optionRowCases.map((entry) => entry.rowCount),
+    [1, 2, 4],
+    'Reading PDF role oracle selects exact one-, two-, and four-row cases',
+  )
+  assert.equal(
+    oracle.exactA4Variant.oneLineStemLineCount,
+    1,
+    'Reading PDF role oracle pins an exact one-line stem case',
+  )
+  assert.equal(
+    oracle.exactA4Variant.stemLineCount,
+    2,
+    'Reading PDF role oracle pins an exact two-line stem case',
+  )
+  return oracle
+}
+
 function snapshotTree(rootDir) {
   if (!existsSync(rootDir)) return []
   const entries = []
@@ -632,6 +673,34 @@ function seedDraftRows(userDbPath, asset) {
   })
   userDb.close()
   return { draftPaperId, activeGroups: groups, firstGroup: groups[0] }
+}
+
+function readingPrintVariantItem(asset, groupId) {
+  const group = asset.content.groups[groupId]
+  return {
+    detail: {
+      id: groupId,
+      paperId: asset.paper.paperId,
+      title: group.title,
+      source: asset.paper.title,
+      groupType: 'reading',
+      passage: {
+        title: group.title,
+        materialText: 'POISONED LEGACY READING VARIANT',
+      },
+      questions: group.questionIds.map((questionId) => ({
+        id: questionId,
+        questionNo: String(asset.content.questions[questionId].questionNo),
+        stem: 'POISONED LEGACY STEM',
+        answer: 'POISONED LEGACY ANSWER',
+        explanation: '',
+        options: [{ label: 'A', content: 'POISONED LEGACY OPTION' }],
+      })),
+    },
+    score: 2.5,
+    sectionTitle: '阅读理解',
+    note: '',
+  }
 }
 
 function attributeSignatures(html) {
@@ -2376,7 +2445,7 @@ function pdfWordsWithBoxes(pdfPath) {
       xMax: Number(wordMatch[3]),
       yMax: Number(wordMatch[4]),
       text: normalizedPdfToken(wordMatch[5]),
-    })))
+    }))).map((word, wordIndex) => ({ ...word, wordIndex }))
 }
 
 function assertPdfReadingQuestionsNotSplit(pdfPath, consumption, label) {
@@ -2443,6 +2512,563 @@ function exactPdfSequenceIndexes(words, tokens, startIndex = 0) {
     && tokens.every(
       (token, tokenIndex) => words[wordIndex + tokenIndex]?.text === token,
     ) ? [wordIndex] : [])
+}
+
+function pdfRoleLines(words) {
+  const lines = []
+  for (const word of words) {
+    const centerY = (word.yMin + word.yMax) / 2
+    const current = lines.find((line) =>
+      line.page === word.page
+      && Math.abs(centerY - median(line.wordCenters)) <= 2.5)
+    if (!current) {
+      lines.push({
+        page: word.page,
+        words: [word],
+        wordCenters: [centerY],
+      })
+    } else {
+      current.words.push(word)
+      current.wordCenters.push(centerY)
+    }
+  }
+  return lines.sort((left, right) =>
+    left.page - right.page
+    || median(left.wordCenters) - median(right.wordCenters)
+    || Math.min(...left.words.map((word) => word.xMin))
+      - Math.min(...right.words.map((word) => word.xMin)))
+    .map((line, lineIndex) => ({
+    lineIndex,
+    page: line.page,
+    xMin: Math.min(...line.words.map((word) => word.xMin)),
+    yMin: Math.min(...line.words.map((word) => word.yMin)),
+    xMax: Math.max(...line.words.map((word) => word.xMax)),
+    yMax: Math.max(...line.words.map((word) => word.yMax)),
+    centerY: median(line.wordCenters),
+    wordIndexes: line.words.map((word) => word.wordIndex),
+    text: line.words.map((word) => word.text).join(' '),
+    }))
+}
+
+function exactPdfTokens(value) {
+  return normalizedVisibleText(value)
+    .split(/\s+/)
+    .map(normalizedPdfToken)
+    .filter(Boolean)
+}
+
+function uniquePdfSequenceIndex(
+  words,
+  tokens,
+  label,
+  startIndex = 0,
+  endIndex = words.length,
+) {
+  const indexes = exactPdfSequenceIndexes(words, tokens, startIndex)
+    .filter((wordIndex) => wordIndex + tokens.length <= endIndex)
+  assert.equal(
+    indexes.length,
+    1,
+    `${label} resolves to one exact PDF token sequence`,
+  )
+  return indexes[0]
+}
+
+function isPdfBodyLine(line) {
+  return line.yMin >= 55 && line.yMax < 760
+}
+
+function pdfLinesForWordRange(
+  lines,
+  _wordIndexToLineIndex,
+  startWordIndex,
+  endWordIndex,
+) {
+  if (startWordIndex >= endWordIndex) return []
+  return lines.filter((line) =>
+    line.wordIndexes.some((wordIndex) =>
+      wordIndex >= startWordIndex && wordIndex < endWordIndex))
+    .filter(isPdfBodyLine)
+}
+
+function assertPdfRoleEdge(
+  from,
+  to,
+  edge,
+  label,
+  observations,
+) {
+  assert.ok(from && to, `${label} ${edge.edgeId} has both role coordinates`)
+  const samePage = to.page === from.page
+  if (edge.edgeId.endsWith('_same_page')) {
+    assert.equal(
+      samePage,
+      true,
+      `${label} ${edge.edgeId} stays on its declared same A4 page`,
+    )
+  } else {
+    assert.equal(
+      samePage || to.page === from.page + 1,
+      true,
+      `${label} ${edge.edgeId} stays on the same or adjacent A4 page`,
+    )
+  }
+  const observation = {
+    edgeId: edge.edgeId,
+    from: {
+      page: from.page,
+      xMin: from.xMin,
+      yMin: from.yMin,
+      xMax: from.xMax,
+      yMax: from.yMax,
+      centerY: from.centerY,
+    },
+    to: {
+      page: to.page,
+      xMin: to.xMin,
+      yMin: to.yMin,
+      xMax: to.xMax,
+      yMax: to.yMax,
+      centerY: to.centerY,
+    },
+    pageRelation: samePage ? 'same_page' : 'next_page',
+  }
+  if (samePage) {
+    const target =
+      passageLetterReference.evidence.normalizedContract.pdfBodyBaselineStepPt
+      * edge.baselineStepRatio
+    const tolerance =
+      edge.baselineStepRatio === 2
+        ? passageLetterReference.evidence.tolerances.pdfTwoStepPt
+        : passageLetterReference.evidence.tolerances.pdfOneStepPt
+    observation.distancePt = to.centerY - from.centerY
+    observation.targetPt = target
+    assert.equal(
+      Math.abs(observation.distancePt - target) <= tolerance,
+      true,
+      `${label} ${edge.edgeId} keeps ${edge.baselineStepRatio}x in PDF points: ${JSON.stringify(observation)}`,
+    )
+  } else {
+    assert.equal(
+      to.yMax < 130,
+      true,
+      `${label} ${edge.edgeId} continues at the adjacent A4 page head`,
+    )
+  }
+  observations.push(observation)
+}
+
+function assertPdfPageRelationEdge(
+  from,
+  to,
+  edge,
+  label,
+  observations,
+) {
+  assert.ok(from && to, `${label} ${edge.edgeId} has both role coordinates`)
+  assert.equal(
+    to.page,
+    from.page + 1,
+    `${label} ${edge.edgeId} continues on the adjacent A4 page`,
+  )
+  assert.equal(
+    to.yMax < 130,
+    true,
+    `${label} ${edge.edgeId} continues at the next A4 page head`,
+  )
+  observations.push({
+    edgeId: edge.edgeId,
+    from: {
+      page: from.page,
+      xMin: from.xMin,
+      yMin: from.yMin,
+      xMax: from.xMax,
+      yMax: from.yMax,
+      centerY: from.centerY,
+    },
+    to: {
+      page: to.page,
+      xMin: to.xMin,
+      yMin: to.yMin,
+      xMax: to.xMax,
+      yMax: to.yMax,
+      centerY: to.centerY,
+    },
+    pageRelation: edge.pageRelation,
+  })
+}
+
+function assertPdfReadingVerticalRhythm(
+  pdfPath,
+  consumption,
+  label,
+  {
+    requireTeacherTail = false,
+    requireInstruction = false,
+    requireTwoLineStem = false,
+    requireWrappedOption = false,
+    requireCrossPageEnd = false,
+  } = {},
+) {
+  const words = pdfWordsWithBoxes(pdfPath)
+  const lines = pdfRoleLines(words)
+  const wordIndexToLineIndex = new Map(
+    lines.flatMap((line) =>
+      line.wordIndexes.map((wordIndex) => [wordIndex, line.lineIndex])),
+  )
+  const graph = new Map(
+    passageLetterReference.evidence.normalizedContract.adjacencyGraph
+      .map((edge) => [edge.edgeId, edge]),
+  )
+  const observations = []
+  const cover = (edgeId, from, to) => {
+    const edge = graph.get(edgeId)
+    assert.ok(edge, `${label} uses declared edge ${edgeId}`)
+    if (edge.pageRelation) {
+      assertPdfPageRelationEdge(from, to, edge, label, observations)
+    } else {
+      assertPdfRoleEdge(from, to, edge, label, observations)
+    }
+  }
+  const readingSelection = consumption.selections.find(
+    (selection) => selection.familyContractId === 'reading',
+  )
+  assert.deepEqual(
+    readingSelection.groupIds,
+    readingPdfRoleOracle.readingGroups.map((group) => group.groupId),
+    `${label} binds the source-digest-pinned Reading A-D group order`,
+  )
+  const groups = readingSelection.groupIds.map((groupId) =>
+    projectCanonicalConsumerGroup({
+      consumption,
+      familyContractId: 'reading',
+      groupId,
+    }))
+  const groupAnchors = groups.map((group, groupIndex) => {
+    const oracle = readingPdfRoleOracle.readingGroups[groupIndex]
+    assert.equal(group.passageLetter, oracle.letter)
+    assert.equal(group.questions[0].questionId, oracle.firstQuestionId)
+    assert.equal(group.questions.at(-1).questionId, oracle.lastQuestionId)
+    const firstTokens = exactPdfTokens(group.blocks[0].text).slice(0, 4)
+    const firstWordIndex = uniquePdfSequenceIndex(
+      words,
+      firstTokens,
+      `${label} ${group.groupId} first passage line`,
+    )
+    const letterWordIndex = firstWordIndex - 1
+    assert.equal(words[letterWordIndex]?.text, oracle.letter)
+    return {
+      group,
+      oracle,
+      firstWordIndex,
+      firstLine: lines[wordIndexToLineIndex.get(firstWordIndex)],
+      letterWordIndex,
+      letterLine: lines[wordIndexToLineIndex.get(letterWordIndex)],
+    }
+  })
+  const questionAnchors = groupAnchors.flatMap((groupAnchor, groupIndex) =>
+    groupAnchor.group.questions.map((question, questionIndex) => {
+      const stemTokens = exactPdfTokens(
+        canonicalInlineText(question.stemContent),
+      ).slice(0, 5)
+      const stemWordIndex = uniquePdfSequenceIndex(
+        words,
+        stemTokens,
+        `${label} Question ${question.questionNo} stem`,
+        groupAnchor.firstWordIndex,
+      )
+      const questionNumberWordIndex = stemWordIndex - 1
+      assert.equal(
+        words[questionNumberWordIndex]?.text,
+        String(question.questionNo),
+        `${label} binds Question ${question.questionNo}'s exact number`,
+      )
+      return {
+        groupIndex,
+        questionIndex,
+        groupAnchor,
+        question,
+        stemWordIndex,
+        questionNumberWordIndex,
+      }
+    }))
+  const questionById = new Map(
+    questionAnchors.map((anchor) => [anchor.question.questionId, anchor]),
+  )
+  const nextSectionWordIndex = uniquePdfSequenceIndex(
+    words,
+    exactPdfTokens(readingPdfRoleOracle.readingEnd.nextSectionVisibleText),
+    `${label} post-Reading section`,
+  )
+  const nextSectionLine =
+    lines[wordIndexToLineIndex.get(nextSectionWordIndex)]
+  const optionRowCases = new Map(
+    readingPdfRoleOracle.optionRowCases.map((entry) => [
+      entry.questionId,
+      entry,
+    ]),
+  )
+  let wrappedOptionObserved = false
+  let twoLineStemObserved = false
+  const questionRoles = new Map()
+
+  for (const anchor of questionAnchors) {
+    const nextQuestion = anchor.groupAnchor.group.questions[
+      anchor.questionIndex + 1
+    ]
+    const nextGroupAnchor = groupAnchors[anchor.groupIndex + 1]
+    const boundaryWordIndex = nextQuestion
+      ? questionById.get(nextQuestion.questionId).questionNumberWordIndex
+      : nextGroupAnchor
+        ? nextGroupAnchor.letterWordIndex
+        : nextSectionWordIndex
+    const answerWordIndexes = words.slice(
+      anchor.questionNumberWordIndex,
+      boundaryWordIndex,
+    ).filter((word) => word.text.startsWith('答案'))
+      .map((word) => word.wordIndex)
+    const explanationWordIndexes = words.slice(
+      anchor.questionNumberWordIndex,
+      boundaryWordIndex,
+    ).filter((word) => word.text.startsWith('解析'))
+      .map((word) => word.wordIndex)
+    assert.equal(
+      answerWordIndexes.length,
+      requireTeacherTail ? 1 : 0,
+      `${label} Question ${anchor.question.questionNo} has the exact answer-role count`,
+    )
+    assert.equal(
+      explanationWordIndexes.length,
+      requireTeacherTail ? 1 : 0,
+      `${label} Question ${anchor.question.questionNo} has the exact explanation-role count`,
+    )
+    const optionBoundaryWordIndex =
+      answerWordIndexes[0] ?? boundaryWordIndex
+    const optionLineIndexes = new Set()
+    for (const option of anchor.question.options) {
+      const optionTokens = exactPdfTokens(canonicalInlineText(option.content))
+      const optionWordIndex = uniquePdfSequenceIndex(
+        words,
+        optionTokens,
+        `${label} Question ${anchor.question.questionNo} Option ${option.label}`,
+        anchor.stemWordIndex,
+        optionBoundaryWordIndex,
+      )
+      assert.equal(words[optionWordIndex - 1]?.text, option.label)
+      for (
+        let wordIndex = optionWordIndex - 1;
+        wordIndex < optionWordIndex + optionTokens.length;
+        wordIndex += 1
+      ) {
+        optionLineIndexes.add(wordIndexToLineIndex.get(wordIndex))
+      }
+    }
+    const optionLines = [...optionLineIndexes]
+      .sort((left, right) => left - right)
+      .map((lineIndex) => lines[lineIndex])
+    const firstOptionLineIndex = optionLines[0].lineIndex
+    const stemStartLineIndex =
+      wordIndexToLineIndex.get(anchor.questionNumberWordIndex)
+    const stemLines = lines.slice(stemStartLineIndex, firstOptionLineIndex)
+      .filter(isPdfBodyLine)
+    assert.equal(stemLines.length > 0, true)
+    if (
+      anchor.question.questionId
+        === readingPdfRoleOracle.exactA4Variant.oneLineStemQuestionId
+    ) {
+      assert.equal(
+        stemLines.length,
+        readingPdfRoleOracle.exactA4Variant.oneLineStemLineCount,
+        `${label} executes the source-pinned one-line stem case`,
+      )
+    }
+    const rowCase = optionRowCases.get(anchor.question.questionId)
+    if (rowCase) {
+      assert.equal(anchor.question.layoutPlan.mode, rowCase.placementMode)
+      if (!requireWrappedOption || anchor.question.questionId
+        !== readingPdfRoleOracle.exactA4Variant.wrappedOptionQuestionId) {
+        assert.equal(
+          optionLines.length,
+          rowCase.rowCount,
+          `${label} ${anchor.question.questionId} has exact ${rowCase.rowCount}-row PDF geometry`,
+        )
+      }
+    }
+    if (
+      anchor.question.questionId
+        === readingPdfRoleOracle.exactA4Variant.stemQuestionId
+      && stemLines.length
+        === readingPdfRoleOracle.exactA4Variant.stemLineCount
+    ) {
+      twoLineStemObserved = true
+    }
+    if (
+      anchor.question.questionId
+        === readingPdfRoleOracle.exactA4Variant.wrappedOptionQuestionId
+      && optionLines.length >=
+        readingPdfRoleOracle.exactA4Variant.minimumWrappedOptionLineCount
+    ) {
+      wrappedOptionObserved = true
+    }
+    const answerLine = answerWordIndexes[0] === undefined
+      ? null
+      : lines[wordIndexToLineIndex.get(answerWordIndexes[0])]
+    const explanationLines = explanationWordIndexes[0] === undefined
+      ? []
+      : pdfLinesForWordRange(
+          lines,
+          wordIndexToLineIndex,
+          explanationWordIndexes[0],
+          boundaryWordIndex,
+        )
+    questionRoles.set(anchor.question.questionId, {
+      anchor,
+      stemLines,
+      optionLines,
+      answerLine,
+      explanationLines,
+      tailLine:
+        explanationLines.at(-1) ?? answerLine ?? optionLines.at(-1),
+    })
+
+    for (let index = 1; index < stemLines.length; index += 1) {
+      cover(
+        'question_stem_internal',
+        stemLines[index - 1],
+        stemLines[index],
+      )
+    }
+    cover('stem_to_options', stemLines.at(-1), optionLines[0])
+    for (let index = 1; index < optionLines.length; index += 1) {
+      cover(
+        'option_line_internal',
+        optionLines[index - 1],
+        optionLines[index],
+      )
+    }
+    if (requireTeacherTail) {
+      cover('option_to_answer', optionLines.at(-1), answerLine)
+      cover('answer_to_explanation', answerLine, explanationLines[0])
+    }
+  }
+
+  for (const groupAnchor of groupAnchors) {
+    const firstQuestion = questionRoles.get(
+      groupAnchor.group.questions[0].questionId,
+    )
+    const contentLines = pdfLinesForWordRange(
+      lines,
+      wordIndexToLineIndex,
+      groupAnchor.firstWordIndex,
+      firstQuestion.anchor.questionNumberWordIndex,
+    )
+    assert.equal(contentLines.length > 0, true)
+    cover(
+      'letter_to_first_content',
+      groupAnchor.letterLine,
+      contentLines[0],
+    )
+    for (let index = 1; index < contentLines.length; index += 1) {
+      if (contentLines[index - 1].page === contentLines[index].page) {
+        cover(
+          'passage_content_internal',
+          contentLines[index - 1],
+          contentLines[index],
+        )
+      } else {
+        cover(
+          'same_passage_cross_page',
+          contentLines[index - 1],
+          contentLines[index],
+        )
+      }
+    }
+    cover(
+      'passage_to_first_question',
+      contentLines.at(-1),
+      firstQuestion.stemLines[0],
+    )
+    for (
+      let questionIndex = 1;
+      questionIndex < groupAnchor.group.questions.length;
+      questionIndex += 1
+    ) {
+      const previous = questionRoles.get(
+        groupAnchor.group.questions[questionIndex - 1].questionId,
+      )
+      const current = questionRoles.get(
+        groupAnchor.group.questions[questionIndex].questionId,
+      )
+      cover(
+        requireTeacherTail
+          ? 'teacher_tail_to_next_question'
+          : 'question_to_next_question',
+        previous.tailLine,
+        current.stemLines[0],
+      )
+    }
+  }
+
+  const partTitleWordIndex = uniquePdfSequenceIndex(
+    words,
+    exactPdfTokens(readingPdfRoleOracle.chrome.partTitleVisibleText),
+    `${label} Reading part title`,
+  )
+  const partTitleLine = lines[wordIndexToLineIndex.get(partTitleWordIndex)]
+  let lastChromeLine = partTitleLine
+  if (requireInstruction) {
+    const instructionWordIndex = uniquePdfSequenceIndex(
+      words,
+      exactPdfTokens(readingPdfRoleOracle.chrome.instructionVisibleText),
+      `${label} Reading instruction`,
+    )
+    const instructionLine =
+      lines[wordIndexToLineIndex.get(instructionWordIndex)]
+    cover('chrome_internal', partTitleLine, instructionLine)
+    lastChromeLine = instructionLine
+  }
+  cover('chrome_to_a', lastChromeLine, groupAnchors[0].letterLine)
+
+  for (let groupIndex = 1; groupIndex < groupAnchors.length; groupIndex += 1) {
+    const previousGroup = groupAnchors[groupIndex - 1].group
+    const previousTail = questionRoles.get(
+      previousGroup.questions.at(-1).questionId,
+    ).tailLine
+    cover(
+      requireTeacherTail
+        ? 'teacher_reading_passage_transition'
+        : 'reading_passage_transition',
+      previousTail,
+      groupAnchors[groupIndex].letterLine,
+    )
+  }
+
+  const readingEnd = questionRoles.get(
+    readingPdfRoleOracle.readingEnd.questionId,
+  ).tailLine
+  const endEdgeId = requireCrossPageEnd
+    ? 'reading_to_next_section_cross_page'
+    : requireTeacherTail
+      ? 'teacher_reading_to_next_section_same_page'
+      : 'reading_to_next_section_same_page'
+  cover(endEdgeId, readingEnd, nextSectionLine)
+
+  if (requireTwoLineStem) {
+    assert.equal(
+      twoLineStemObserved,
+      true,
+      `${label} executes the source-pinned two-line stem case`,
+    )
+  }
+  if (requireWrappedOption) {
+    assert.equal(
+      wrappedOptionObserved,
+      true,
+      `${label} executes the source-pinned wrapped-option case`,
+    )
+  }
+  const edgeIds = new Set(observations.map((observation) => observation.edgeId))
+  return { edgeIds, observations }
 }
 
 function assertPdfReadingContinuationAndEnd(pdfPath, consumption, label) {
@@ -3455,6 +4081,7 @@ async function renderSupportedArtifacts({
         'latest',
         'paper-asset.json',
       )
+      let printInstructionVariantHtml = null
       const publicAssetBytes = readFileSync(publicAssetPath)
       const instructionVariantAsset = JSON.parse(publicAssetBytes)
       const firstReadingBlockIndex =
@@ -3505,11 +4132,48 @@ async function renderSupportedArtifacts({
       } finally {
         writeFileSync(publicAssetPath, publicAssetBytes)
       }
+      const readingVariantItems = readingPdfRoleOracle.readingGroups
+        .map(({ groupId }) => readingPrintVariantItem(asset, groupId))
+      printInstructionVariantHtml = buildPrintHtml({
+        title: 'Canonical Import Pilot Reading Rhythm Variant',
+        versionType: 'student',
+        items: readingVariantItems,
+        blocks: [
+          {
+            type: 'section_header',
+            title: readingPdfRoleOracle.chrome.partTitleVisibleText,
+          },
+          {
+            type: 'instruction',
+            text: readingPdfRoleOracle.chrome.instructionVisibleText,
+          },
+          ...readingPdfRoleOracle.readingGroups.map(({ groupId }) => ({
+            type: 'question_group',
+            questionGroupId: groupId,
+            score: 2.5,
+          })),
+          {
+            type: 'section_header',
+            title: readingPdfRoleOracle.readingEnd.nextSectionVisibleText,
+          },
+        ],
+        questionNumberStart: 3,
+        printStyle: 'exam',
+        canonicalConsumption: consumers.print_pdf,
+      })
+      assert.equal(
+        printInstructionVariantHtml.includes(
+          'data-canonical-reading-rhythm-role="meta_instruction"',
+        ),
+        true,
+        'Student Print instruction variant comes from the real canonical renderer',
+      )
       await page.goto(lectureUrl.href)
       await page.locator('.paper-browse-answer-row').waitFor()
 
       const printHtml = {}
       const pdfPaths = {}
+      const pdfRhythmEvidence = []
       for (const versionType of ['student', 'teacher']) {
         const htmlResponse = await fetch(
           `${baseUrl}/api/draft-papers/${draft.draftPaperId}/print-html?versionType=${versionType}`,
@@ -3704,6 +4368,12 @@ async function renderSupportedArtifacts({
           consumers.print_pdf,
           label,
         )
+        pdfRhythmEvidence.push(assertPdfReadingVerticalRhythm(
+          pdfPath,
+          consumers.print_pdf,
+          label,
+          { requireTeacherTail: versionType === 'teacher' },
+        ))
         passageLetterGeometry.pdf[versionType] =
           assertPdfPassageLetterGeometry(
             pdfPath,
@@ -3727,6 +4397,82 @@ async function renderSupportedArtifacts({
           label,
         )
       }
+      assert.ok(
+        printInstructionVariantHtml,
+        'the real Student Print instruction variant is available',
+      )
+      const variant = readingPdfRoleOracle.exactA4Variant
+      const readingEnd = readingPdfRoleOracle.readingEnd
+      const variantCss = `
+<style>
+[data-canonical-question-id="${variant.stemQuestionId}"] .stem {
+  width: ${variant.stemWidthPt}pt !important;
+}
+[data-canonical-question-id="${variant.wrappedOptionQuestionId}"] .canonical-options {
+  width: ${variant.wrappedOptionWidthPt}pt !important;
+  grid-template-columns: ${variant.wrappedOptionWidthPt}pt !important;
+}
+[data-canonical-reading-following-for="${readingEnd.groupId}"] {
+  break-before: page !important;
+  page-break-before: always !important;
+}
+</style>`
+      const variantHtml = printInstructionVariantHtml.replace(
+        '</head>',
+        `${variantCss}</head>`,
+      )
+      const variantPdfPath = path.join(
+        outputDir,
+        'print-student-reading-rhythm-variants.pdf',
+      )
+      let variantRender
+      try {
+        variantRender = await renderPaginatedPaper(variantHtml)
+      } finally {
+        await closeChromiumPool()
+      }
+      writeFileSync(variantPdfPath, variantRender.pdfBytes)
+      assert.equal(
+        variantRender.pdfBytes.subarray(0, 4).toString(),
+        '%PDF',
+        'the real paginated exact-A4 variant emits Chromium PDF bytes',
+      )
+      assertPdfA4AndUnclipped(
+        variantPdfPath,
+        'Student Chromium PDF complete Reading rhythm variant',
+      )
+      pdfRhythmEvidence.push(assertPdfReadingVerticalRhythm(
+        variantPdfPath,
+        consumers.print_pdf,
+        'Student Chromium PDF complete Reading rhythm variant',
+        {
+          requireInstruction: true,
+          requireTwoLineStem: true,
+          requireWrappedOption: true,
+          requireCrossPageEnd: true,
+        },
+      ))
+      assert.deepEqual(
+        [...new Set(pdfRhythmEvidence.flatMap(
+          (evidence) => [...evidence.edgeIds],
+        ))].sort(),
+        passageLetterReference.evidence.normalizedContract.adjacencyGraph
+          .map((edge) => edge.edgeId)
+          .sort(),
+        'Student/Teacher exact-A4 PDFs execute the complete independent Reading adjacency graph',
+      )
+      assert.deepEqual(
+        [...new Set(pdfRhythmEvidence.flatMap((evidence) =>
+          evidence.observations
+            .filter((observation) =>
+              Number.isFinite(observation.distancePt))
+            .map((observation) => observation.edgeId)))].sort(),
+        passageLetterReference.evidence.normalizedContract.adjacencyGraph
+          .filter((edge) => !edge.pageRelation)
+          .map((edge) => edge.edgeId)
+          .sort(),
+        'every ratio-based Reading adjacency edge has an exact same-page PDF-point measurement',
+      )
       assert.equal(
         existsSync(forbiddenToolMarker),
         false,
@@ -3768,6 +4514,7 @@ async function renderSupportedArtifacts({
 
 const passageLetterReference = assertPassageLetterReferenceEvidence()
 const readingPredecessorOracle = assertReadingPredecessorOracle()
+const readingPdfRoleOracle = assertReadingPdfRoleOracle()
 const rootDir = mkdtempSync(path.join(tmpdir(), 'eqb-canonical-import-pilot-'))
 const dbPath = path.join(rootDir, 'question-bank.sqlite')
 const paperAssetsDir = path.join(rootDir, 'paper-assets')

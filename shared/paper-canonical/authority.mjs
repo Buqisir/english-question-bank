@@ -12,6 +12,9 @@ import manifestV11 from '../../standards/paper-canonical/manifest-v11.json' with
 import manifestV12 from '../../standards/paper-canonical/manifest-v12.json' with { type: 'json' }
 import manifestV13 from '../../standards/paper-canonical/manifest-v13.json' with { type: 'json' }
 import manifestV14 from '../../standards/paper-canonical/manifest-v14.json' with { type: 'json' }
+import legacyRhythmManifestV13 from '../../standards/paper-canonical/history/manifest-v13-reading-rhythm/manifest-v13.json' with { type: 'json' }
+import legacyRhythmTypographyV3 from '../../standards/paper-canonical/history/manifest-v13-reading-rhythm/paper-typography-v3.json' with { type: 'json' }
+import legacyRhythmTypographyV3Schema from '../../standards/paper-canonical/history/manifest-v13-reading-rhythm/renderer-typography-v3.schema.json' with { type: 'json' }
 import core from '../../standards/paper-canonical/core/core-invariants-v1.json' with { type: 'json' }
 import sourceAdapters from '../../standards/paper-canonical/adapters/source-adapters-v1.json' with { type: 'json' }
 import sourceAdaptersV2 from '../../standards/paper-canonical/adapters/source-adapters-v2.json' with { type: 'json' }
@@ -550,8 +553,16 @@ function validateRendererTypographyV3(artifact, profiles) {
       )]
 }
 
-function validateRendererTypographyV4(artifact, profiles) {
-  if (artifact?.schemaVersion !== 'renderer-typography-v4') return []
+function validateRendererTypographyRhythm(
+  artifact,
+  profiles,
+  {
+    schemaVersion = 'renderer-typography-v4',
+    referenceMeasurementPath =
+      'docs/cuts/paper-canonical-unification/qa/20-reading-vertical-rhythm-reference-measurements-v3.json',
+  } = {},
+) {
+  if (artifact?.schemaVersion !== schemaVersion) return []
   const contract = artifact.readingPassageLetters
   const expectedSemanticRoleClasses = {
     chrome: ['part_title', 'subsection', 'meta_instruction'],
@@ -705,8 +716,7 @@ function validateRendererTypographyV4(artifact, profiles) {
     && contract.verticalRhythm.targets.printPdf.baselineStepPt === 18
     && contract.verticalRhythm.targets.printPdf.oneStepTolerancePt === 1.5
     && contract.verticalRhythm.targets.printPdf.twoStepTolerancePt === 1.5
-    && contract.referenceMeasurement?.path
-      === 'docs/cuts/paper-canonical-unification/qa/20-reading-vertical-rhythm-reference-measurements-v3.json'
+    && contract.referenceMeasurement?.path === referenceMeasurementPath
     && /^sha256:[a-f0-9]{64}$/.test(
       contract.referenceMeasurement?.sha256 || '',
     )
@@ -722,10 +732,17 @@ function validateRendererTypographyV4(artifact, profiles) {
 
 function validateRendererTypography(artifact, profiles) {
   if (artifact?.schemaVersion === 'renderer-typography-v3') {
+    if (artifact.readingPassageLetters?.verticalRhythm) {
+      return validateRendererTypographyRhythm(artifact, profiles, {
+        schemaVersion: 'renderer-typography-v3',
+        referenceMeasurementPath:
+          'docs/cuts/paper-canonical-unification/qa/20-reading-passage-letter-reference-measurements.json',
+      })
+    }
     return validateRendererTypographyV3(artifact, profiles)
   }
   if (artifact?.schemaVersion === 'renderer-typography-v4') {
-    return validateRendererTypographyV4(artifact, profiles)
+    return validateRendererTypographyRhythm(artifact, profiles)
   }
   return []
 }
@@ -909,6 +926,11 @@ const artifactsV10 = { ...sharedArtifactsV9, normalization: normalizationV3, 're
 const artifactsV11 = { ...sharedArtifactsV11, normalization: normalizationV3, 'renderer-typography': typographyV2 }
 const artifactsV12 = artifactsV11
 const artifactsV13 = { ...sharedArtifactsV11, normalization: normalizationV3, 'renderer-typography': typographyV3 }
+const legacyRhythmArtifactsV13 = {
+  ...sharedArtifactsV11,
+  normalization: normalizationV3,
+  'renderer-typography': legacyRhythmTypographyV3,
+}
 const artifactsV14 = { ...sharedArtifactsV11, normalization: normalizationV3, 'renderer-typography': typographyV4 }
 const schemasV1 = { ...sharedSchemas, 'renderer-typography-v1': typographyV1Schema, 'normalization-rules-v1': normalizationSchema, 'normalization-report-v1': reportSchema, 'canonical-paper-publication-v1': publicationSchema }
 const schemasV2 = { ...sharedSchemas, 'renderer-typography-v1': typographyV1Schema, 'normalization-rules-v2': normalizationV2Schema, 'normalization-report-v2': reportV2Schema, 'canonical-paper-publication-v2': publicationV2Schema }
@@ -998,6 +1020,10 @@ const schemasV13 = {
   'normalization-report-v13': reportV13Schema,
   'canonical-paper-publication-v13': publicationV13Schema,
 }
+const legacyRhythmSchemasV13 = {
+  ...schemasV13,
+  'renderer-typography-v3': legacyRhythmTypographyV3Schema,
+}
 const schemasV14 = {
   ...Object.fromEntries(
     Object.entries(schemasV13).filter(([schemaId]) =>
@@ -1024,6 +1050,11 @@ const validationV10 = validateAuthorityClosure({ manifest: manifestV10, artifact
 const validationV11 = validateAuthorityClosure({ manifest: manifestV11, artifacts: artifactsV11, schemas: schemasV11 })
 const validationV12 = validateAuthorityClosure({ manifest: manifestV12, artifacts: artifactsV12, schemas: schemasV12 })
 const validationV13 = validateAuthorityClosure({ manifest: manifestV13, artifacts: artifactsV13, schemas: schemasV13 })
+const legacyRhythmValidationV13 = validateAuthorityClosure({
+  manifest: legacyRhythmManifestV13,
+  artifacts: legacyRhythmArtifactsV13,
+  schemas: legacyRhythmSchemasV13,
+})
 const validationV14 = validateAuthorityClosure({ manifest: manifestV14, artifacts: artifactsV14, schemas: schemasV14 })
 const validations = [
   validationV1,
@@ -1039,6 +1070,7 @@ const validations = [
   validationV11,
   validationV12,
   validationV13,
+  legacyRhythmValidationV13,
   validationV14,
 ]
 if (validations.some((validation) => !validation.ok)) {
@@ -1063,6 +1095,11 @@ const authorities = [
   { manifest: manifestV11, artifacts: artifactsV11, schemas: schemasV11 },
   { manifest: manifestV12, artifacts: artifactsV12, schemas: schemasV12 },
   { manifest: manifestV13, artifacts: artifactsV13, schemas: schemasV13 },
+  {
+    manifest: legacyRhythmManifestV13,
+    artifacts: legacyRhythmArtifactsV13,
+    schemas: legacyRhythmSchemasV13,
+  },
   { manifest: manifestV14, artifacts: artifactsV14, schemas: schemasV14 },
 ].map((authority) => ({
   ...authority,

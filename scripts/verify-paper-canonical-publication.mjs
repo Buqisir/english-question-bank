@@ -1,17 +1,27 @@
 #!/usr/bin/env node
 
 import assert from 'node:assert/strict'
-import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
+import {
+  cpSync,
+  existsSync,
+  mkdirSync,
+  mkdtempSync,
+  readFileSync,
+  readdirSync,
+  rmSync,
+  statSync,
+  writeFileSync,
+} from 'node:fs'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { DatabaseSync } from 'node:sqlite'
 import manifestV1 from '../standards/paper-canonical/manifest-v1.json' with { type: 'json' }
-import manifestV13 from '../standards/paper-canonical/manifest-v13.json' with { type: 'json' }
 
 import {
   createFileSystemCanonicalPublicationStore,
   loadPaperForConsumption,
   publishCanonicalPaperPublication,
+  recordCanonicalPublicationCurrent,
   recoverCanonicalPaperPublication,
   sealCanonicalPublication,
   validateCanonicalPublicationBundle,
@@ -39,6 +49,81 @@ function stableBytes(value) {
 function descriptor(role, value, relativePath) {
   const bytes = stableBytes(value)
   return { role, schemaVersion: value.schemaVersion, relativePath, byteLength: bytes.byteLength, sha256: sha256(bytes), bytes }
+}
+
+const oldV13FixtureRoot = path.resolve(
+  'test-fixtures/paper-canonical/publications/old-v13',
+)
+const oldV13FixtureIntegrityDigest =
+  'sha256:b5250b626deb3f354fac478873bd3191904972cf43557700bd28550d138c7b9c'
+
+function fixtureRelativeFiles(rootDir, relativeDir = '') {
+  return readdirSync(path.join(rootDir, relativeDir))
+    .flatMap((entry) => {
+      const relativePath = path.join(relativeDir, entry)
+      return statSync(path.join(rootDir, relativePath)).isDirectory()
+        ? fixtureRelativeFiles(rootDir, relativePath)
+        : [relativePath]
+    })
+    .sort()
+}
+
+async function assertExactOldV13FilesystemReload() {
+  const integrityPath = path.join(oldV13FixtureRoot, 'fixture-integrity.json')
+  const integrityBytes = readFileSync(integrityPath)
+  assert.equal(
+    sha256(integrityBytes),
+    oldV13FixtureIntegrityDigest,
+    'the checked-in old-v13 fixture inventory is byte-pinned',
+  )
+  const integrity = JSON.parse(integrityBytes)
+  assert.equal(integrity.schemaVersion, 'canonical-publication-fixture-v1')
+  assert.deepEqual(
+    fixtureRelativeFiles(oldV13FixtureRoot),
+    [
+      'fixture-integrity.json',
+      ...Object.keys(integrity.files),
+    ].sort(),
+    'the old-v13 fixture contains exactly the pinned filesystem bytes',
+  )
+  for (const [relativePath, expectedDigest] of Object.entries(
+    integrity.files,
+  )) {
+    assert.equal(
+      sha256(readFileSync(path.join(oldV13FixtureRoot, relativePath))),
+      expectedDigest,
+      `old-v13 fixture pins ${relativePath}`,
+    )
+  }
+
+  const rootDir = mkdtempSync(path.join(tmpdir(), 'eqb-old-v13-reload-'))
+  const db = new DatabaseSync(path.join(rootDir, 'publication.sqlite'))
+  try {
+    cpSync(path.join(oldV13FixtureRoot, 'store'), rootDir, {
+      recursive: true,
+    })
+    recordCanonicalPublicationCurrent(db, integrity.publicationRef)
+    const store = createFileSystemCanonicalPublicationStore({ rootDir, db })
+    for (const consumerId of ['screen', 'print_pdf']) {
+      const consumption = await loadPaperForConsumption({
+        paperId: integrity.publicationRef.paperId,
+        consumerContract: consumerContractRefs[consumerId],
+      }, store)
+      assert.equal(
+        consumption.disposition,
+        'ready',
+        `the real filesystem store reloads old-v13 for ${consumerId}`,
+      )
+      assert.equal(
+        sha256(stableBytes(consumption)),
+        integrity.consumptionDigests[consumerId],
+        `old-v13 reload preserves the exact ${consumerId} Consumption Plan`,
+      )
+    }
+  } finally {
+    db.close()
+    rmSync(rootDir, { recursive: true, force: true })
+  }
 }
 
 function legacyBundleFrom(compilation, sourceAsset, transformationRecords = []) {
@@ -190,89 +275,8 @@ assert.throws(
   { code: 'CANONICAL_PUBLICATION_SOURCE_UNBOUND' },
 )
 
+await assertExactOldV13FilesystemReload()
 const sealed = sealCanonicalPublication({ compilation, sourceAssetVersion: 1, sourceAsset: fixture.sourceAsset })
-const immutableV13AuthorityRef = {
-  manifestId: manifestV13.manifestId,
-  manifestVersion: manifestV13.version,
-  manifestDigest: digestJson(manifestV13),
-}
-const immutableV13Manifest = structuredClone(sealed.manifest)
-const immutableV13Artifacts = { ...sealed.artifacts }
-const immutableV13SourceEvidence = { ...sealed.sourceEvidence }
-const immutableV13Descriptors = new Map(
-  immutableV13Manifest.artifacts.map((artifact) => [artifact.role, artifact]),
-)
-const immutableV13PlanDescriptor = immutableV13Descriptors.get('paper_plan')
-const immutableV13Plan = JSON.parse(new TextDecoder().decode(
-  immutableV13Artifacts[immutableV13PlanDescriptor.relativePath],
-))
-immutableV13Plan.authorityRef = immutableV13AuthorityRef
-immutableV13Artifacts[immutableV13PlanDescriptor.relativePath] =
-  stableBytes(immutableV13Plan)
-const immutableV13GroupsDescriptor =
-  immutableV13Descriptors.get('question_groups')
-const immutableV13Groups = JSON.parse(new TextDecoder().decode(
-  immutableV13Artifacts[immutableV13GroupsDescriptor.relativePath],
-))
-for (const group of immutableV13Groups.groups) {
-  group.contractRef.manifestVersion = immutableV13AuthorityRef.manifestVersion
-  group.contractRef.manifestDigest = immutableV13AuthorityRef.manifestDigest
-  const {
-    sourceMap: _sourceMap,
-    sourceFingerprint: _sourceFingerprint,
-    semanticDigest: _semanticDigest,
-    ...semantic
-  } = group
-  group.semanticDigest = digestJson(semantic)
-}
-immutableV13Artifacts[immutableV13GroupsDescriptor.relativePath] =
-  stableBytes(immutableV13Groups)
-const immutableV13ReportDescriptor =
-  immutableV13Descriptors.get('normalization_report')
-const immutableV13Report = JSON.parse(new TextDecoder().decode(
-  immutableV13Artifacts[immutableV13ReportDescriptor.relativePath],
-))
-immutableV13Report.schemaVersion = 'normalization-report-v13'
-immutableV13Report.authority = immutableV13AuthorityRef
-immutableV13Report.semanticDigest = digestJson({
-  groups: immutableV13Groups.groups.map((group) => group.semanticDigest),
-  reviewDecisionDigest: digestJson(immutableV13Report.reviewDecisions),
-  inactiveSourceClosureDigests: immutableV13Report.inactiveSourceClosures.map(
-    (closure) => closure.closureDigest,
-  ),
-})
-delete immutableV13Artifacts[immutableV13ReportDescriptor.relativePath]
-immutableV13ReportDescriptor.relativePath =
-  'canonical/normalization-report-v13.json'
-immutableV13Artifacts[immutableV13ReportDescriptor.relativePath] =
-  stableBytes(immutableV13Report)
-for (const descriptor of immutableV13Manifest.artifacts) {
-  const bytes = immutableV13Artifacts[descriptor.relativePath]
-  descriptor.byteLength = bytes.byteLength
-  descriptor.sha256 = sha256(bytes)
-  if (descriptor.role === 'normalization_report') {
-    descriptor.schemaVersion = 'normalization-report-v13'
-  }
-}
-immutableV13Manifest.schemaVersion = 'canonical-paper-publication-v13'
-immutableV13Manifest.authority = immutableV13AuthorityRef
-immutableV13Manifest.publicationDigest = digestJson(((manifest) => {
-  const { publicationDigest: _publicationDigest, ...base } = manifest
-  return base
-})(immutableV13Manifest))
-const immutableV13Validated = validateCanonicalPublicationBundle({
-  manifest: immutableV13Manifest,
-  sourceAsset: sealed.sourceAsset,
-  readArtifact: (relativePath) =>
-    immutableV13Artifacts[relativePath]
-    || immutableV13SourceEvidence[relativePath],
-})
-assert.equal(
-  immutableV13Validated.projected.nodes.filter((node) => node.kind === 'group')
-    .length,
-  9,
-  'an exact manifest-v13 Publication remains resolvable and loadable',
-)
 const tamperedManifest = structuredClone(sealed.manifest)
 const tamperedArtifacts = { ...sealed.artifacts }
 const groupPath = 'canonical/canonical-question-groups-v1.json'
