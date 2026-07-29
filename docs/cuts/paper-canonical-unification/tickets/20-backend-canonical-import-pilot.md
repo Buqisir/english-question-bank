@@ -166,3 +166,31 @@ Chromium PDF geometry, `git diff --check`, and
 Ordinary Standards focused self-review: 0 findings. Ordinary Spec focused
 self-review: 0 findings. No owner-QA provisioning, owner verdict, Ticket 21,
 production/R2, or generated-DOCX action was taken.
+
+Second focused-review Must Fix closure commit:
+`6b1a6f8bd1584ec5d190cfecea3d5430f5dabf0e`.
+Fixed point: `2c99350ebd2dfb7141f17b3ae36c225ec485e53b`.
+The checked-in old-v13 fixture is the exact byte-preserved
+`b137ce5ac30268e1b2e25091b093beb26d2792ff` Publication, not a v14-derived
+reconstruction. Its complete filesystem inventory and Screen/Print
+Consumption Plans are digest-pinned, and the real filesystem store plus
+`loadPaperForConsumption` reloads it through a byte-preserved historical v13
+authority closure. Current v13/v3, prior evidence, and v14/v4 bytes remain
+unchanged.
+
+Student/Teacher exact-A4 PDFs now measure the complete Reading semantic-role
+adjacency graph in PDF points. Independent source-bound oracles cover A-D,
+one/two-line stems, one/two/four-row and wrapped options, question and
+teacher-tail transitions, same/cross-page passage continuation, and same/
+cross-page Reading-D-to-next-section boundaries. Every ratio edge has a real
+same-page point measurement; declared same-page edges fail on cross-page
+output, and explicit page-relation edges remain separate.
+
+Focused verify: canonical foundation and Publication, backend pilot,
+`--actual-artifacts`, rendered PDF visual inspection, app typecheck/build,
+`git diff --check`, and `pnpm -C app run verify:all`
+115 PASS / 1 declared SKIP / 0 FAIL. Ordinary Standards + Spec review found
+four actionable verifier gaps; all four were fixed in this task, and both
+focused re-reviews PASS with zero remaining finding. No Owner QA provisioning,
+Ticket 21, other paper-family work, production/R2 action, or generated-DOCX
+output was performed.
