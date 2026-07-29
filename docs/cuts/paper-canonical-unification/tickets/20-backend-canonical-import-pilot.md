@@ -120,36 +120,49 @@ Reading passages A–D omitted the centered passage letter at each passage
 start. The accepted paper also requires the letter-to-passage spacing to
 follow the golden geometry rather than an approximate web margin.
 
-Owner-QA Must Fix repair evidence: exact JPEG bytes from
-`page-03-reading-a-start.jpeg` through `page-07-reading-d.jpeg` were measured
-with Tesseract 5.5.2 TSV bounding boxes and recorded, with per-file SHA-256
-digests and Screen/PDF tolerances, in
-`qa/20-reading-passage-letter-reference-measurements.json`. The fixed point
-reproduced zero A–D passage-letter occurrences in plain/lecture Screen and
-Student/Teacher Print HTML/PDF. Renderer Typography v3 and manifest v13 now
-project A/B/C/D only from explicit `reading.a`–`reading.d` slot identity, and
-Screen v13 / Print-PDF v14 render each letter once in a centered 18pt line box
-with authority-bound preceding adjustment. The focused review found that the first repair recorded but did
-not execute the golden preceding-content gaps, and that Screen could accept
-Reading blocks without their required letter. The repaired shared authority
-now normalizes the measured 18±2px Reading-heading gap and 46±2px prior-content
-gap to Screen. Print/PDF preserves its existing per-group Reading header, so
-its output-context predecessor is explicitly `reading_heading` for A–D and
-normalizes every header-to-letter gap to 13.5±1.5pt. Actual plain/lecture
-Screen and Student/Teacher Chromium PDF regressions locate the tagged
-predecessor identity and measure both preceding and following geometry.
-PaperSurface rejects either half of an incomplete
-blocks-plus-letter companion before rendering any canonical Reading content.
-Public-seam and actual-artifact checks bind the accepted reference digest and
-prove zero passage letters for every non-Reading family. Canonical semantic
-signatures, question order, group headers, passage content, answers, and A–D
-Option coordinates remain unchanged. No owner-QA provisioning, owner verdict,
-Ticket 21, production/R2, or generated-DOCX action was taken from this repair
-task.
+Owner-QA A4-normalization repair commits:
+`994430318786b60d8d97b545e221c55508271367`;
+`4fc782071cf5f9587bd850598888bf7ecabfcec1`;
+`9fc2afdd4b7c5edf415ed6a6a0874196b642f58b`.
+Exact digest-bound golden JPEG crops were measured with Tesseract 5.5.2 TSV
+word boxes. A line baseline proxy is the median lower edge of ordinary-height
+nearby Latin glyph boxes; every letter distance is divided by the local
+baseline step before mapping to a renderer. The observed predecessor/letter/
+following ratios are A `31/32` and `31/32`, B `62/31` and `32/31`, C `63/32`
+and `32/32`, and D `62/31` and `31/31`. Renderer Typography v3 normalizes these
+to heading-to-letter `1`, prior-content-to-letter `2`, and
+letter-to-first-passage `1`, with golden ratio tolerance `±0.05`. No JPEG
+pixel is treated as a CSS pixel or converted to a PDF point.
 
-Focused review repair verify: canonical foundation, Reading rendered behavior
-including the incomplete-companion rejection, backend pilot and focused fixes,
-Print renderer 92/92, PaperBrowse 193/193, app typecheck/build, actual
-plain/lecture Screen plus Student/Teacher Chromium PDF geometry,
-`git diff --check`, and `pnpm -C app run verify:all` 115 PASS / 1 declared
-SKIP / 0 FAIL.
+The mapping formula is `target = golden ratio × actual rendered body baseline
+step`. Screen's computed 24px step yields heading `24±1.25px`, prior content
+`48±1.25px`, and following passage `24±0.75px`. Exact A4 Chromium PDF's
+measured 18pt step yields heading `18±1pt`, prior content `36±1pt`, and
+following passage `18±0.5pt`; the current Print/PDF route uses its visible
+per-group heading as the predecessor for A–D. The complete method, crop
+digests, samples, formulas, tolerances, targets, and output adjustments are
+recorded in
+`qa/20-reading-passage-letter-reference-measurements.json`.
+
+Screen and Print/PDF now bind each visible Reading `groupId` to exactly one
+tagged predecessor. Screen observes the predecessor's real
+`data-paper-browse-anchor`; Print scopes the tagged header inside the exact
+enclosing canonical Group section; PDF propagates that observed Print
+binding instead of copying an expected identity. The independent
+source-asset-digest-bound group-to-anchor oracle lives in
+`qa/20-reading-predecessor-oracles.json`, so the verifier does not duplicate
+the producer's heading-selection algorithm. Missing, duplicate, wrong-page,
+wrong-tagged-group, and wrong-structural-group attacks all fail closed.
+PaperSurface still rejects incomplete blocks-plus-letter companions, and
+canonical signatures, question order, placement, answers, A–D Option
+coordinates, v1–v12 artifacts, and non-Reading zero-occurrence behavior remain
+unchanged. Manifest v13, Screen v13, and Print-PDF v14 digest closure passes.
+
+Repair verify: canonical foundation, Reading rendered behavior, backend pilot
+and focused fixes, Print renderer 92/92, PaperBrowse 193/193, app
+typecheck/build, actual plain/lecture Screen plus Student/Teacher exact A4
+Chromium PDF geometry, `git diff --check`, and
+`pnpm -C app run verify:all` 115 PASS / 1 declared SKIP / 0 FAIL.
+Ordinary Standards focused self-review: 0 findings. Ordinary Spec focused
+self-review: 0 findings. No owner-QA provisioning, owner verdict, Ticket 21,
+production/R2, or generated-DOCX action was taken.
