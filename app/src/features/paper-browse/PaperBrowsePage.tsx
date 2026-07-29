@@ -2130,6 +2130,15 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
           data-canonical-occurrence-signature={
             canonicalGroupIdentity?.occurrenceSignature
           }
+          data-canonical-seven-choices-reading-boundary-group-id={
+            groupId === canonicalSevenChoicesGroupIds[0]
+            && firstSevenChoicesPredecessorBlockIndex < 0
+            && canonicalReadingGroupIds.length > 0
+              ? canonicalReadingGroupIds[
+                  canonicalReadingGroupIds.length - 1
+                ]
+              : undefined
+          }
           aria-label={group?.title || groupId}
         >
           {card && (

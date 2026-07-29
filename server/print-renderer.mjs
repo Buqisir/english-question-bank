@@ -561,6 +561,23 @@ export function buildPrintHtml({
       selection.familyContractId === 'seven-choices'
       && selection.mode === 'canonical',
   )
+  if (canonicalSevenChoicesSelection) {
+    for (const groupId of canonicalSevenChoicesSelection.groupIds) {
+      const renderedCount = renderedGroupIds.filter(
+        (renderedGroupId) => renderedGroupId === groupId,
+      ).length
+      const suppliedByItems = items.some(
+        (item) => item.detail.id === groupId,
+      )
+      if (renderedCount > 1 || (suppliedByItems && renderedCount !== 1)) {
+        const error = new Error(
+          `Canonical Seven Choices Group must occur exactly once when supplied: ${groupId}`,
+        )
+        error.code = 'CANONICAL_CONSUMPTION_REJECTED'
+        throw error
+      }
+    }
+  }
   const canonicalSevenChoicesGroupIds = canonicalSevenChoicesSelection
     ? canonicalSevenChoicesSelection.groupIds.filter((groupId) =>
         renderedGroupIds.includes(groupId))
@@ -883,8 +900,15 @@ export function buildPrintHtml({
               })
             : null
 
+        const collapsedSevenChoicesBoundaryAttr =
+          canonicalGroup?.groupType === 'sevenChoices'
+          && canonicalGroup.groupId === canonicalSevenChoicesGroupIds[0]
+          && firstSevenChoicesPredecessorBlockIndex < 0
+          && canonicalReadingGroupIds.length > 0
+            ? ` data-canonical-seven-choices-reading-boundary-group-id="${escapeHtml(canonicalReadingGroupIds.at(-1))}"`
+            : ''
         let groupHtml = canonicalGroup
-          ? `<section class="question-group" data-canonical-group-id="${escapeHtml(canonicalGroup.groupId)}" data-canonical-group-type="${escapeHtml(canonicalGroup.groupType)}" data-canonical-semantic-signature="${escapeHtml(canonicalGroup.semanticSignature)}"${canonicalGroup.occurrenceSignature ? ` data-canonical-occurrence-signature="${escapeHtml(canonicalGroup.occurrenceSignature)}"` : ''}>`
+          ? `<section class="question-group" data-canonical-group-id="${escapeHtml(canonicalGroup.groupId)}" data-canonical-group-type="${escapeHtml(canonicalGroup.groupType)}" data-canonical-semantic-signature="${escapeHtml(canonicalGroup.semanticSignature)}"${canonicalGroup.occurrenceSignature ? ` data-canonical-occurrence-signature="${escapeHtml(canonicalGroup.occurrenceSignature)}"` : ''}${collapsedSevenChoicesBoundaryAttr}>`
           : '<section class="question-group">'
 
         let groupLeadHtml = ''

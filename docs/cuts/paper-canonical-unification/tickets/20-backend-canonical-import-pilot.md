@@ -206,13 +206,15 @@ normalized by local em or usable-content width. No JPEG pixel is treated as a
 CSS pixel or PDF point, and no scale is inferred from full-page A4.
 
 The complete Seven Choices semantic-role graph covers the preserved
-Reading-D boundary, optional part/subsection/meta chrome, passage title/body,
+Reading-D boundary, optional part/subsection/meta chrome, source-bound passage
+body (the source has no standalone passage title),
 paragraph and wrapped-line rhythm, inline blank markers, optional bank heading,
 one-line/wrapped A-G options, Student/Teacher tails, following sections, and
-same/cross-page passage and bank continuation. Independent source-identity and
-role-adjacency oracles fail closed on missing/duplicate/wrong role, line,
-group, page, phantom chrome, repeated bank/section, split option, and
-Screen/Print parity drift.
+same/cross-page passage and bank continuation. Independent original-PDF and
+official-answer oracles attack the real PaperBrowse, `buildPrintHtml`, and
+paginated-PDF producer seams. Missing, duplicate, wrong, and synchronized-
+drift inputs fail before a partial artifact or fail the independent public-
+seam oracle; no post-render observation object is used as adversarial input.
 
 The horizontal golden evidence classifies one option per full remaining-width
 row track: A-G labels form one fixed origin cluster, text starts are
@@ -245,3 +247,22 @@ Commit: this bounded Seven Choices closure commit (exact HEAD is reported in
 the independent-review handoff). No Owner QA provisioning, independent review,
 Ticket 21/Cloze/other-family work, production/R2 action, or generated-DOCX
 output was performed.
+
+Independent-review Must Fix closure (2026-07-29):
+Manifest v16, `seven-choices-rhythm-v2`, Screen v16, and Print/PDF v17
+supersede only the unexecutable v15 title claim. The immutable source PDF
+carries no Seven Choices title, so current authority removes
+`passage_title` and `passage_title_to_body`; the misleading
+`para-2026-i-seven-title` identifier remains a source identity, not title
+semantics. Manifest v1-v15, Reading Typography v4, and all prior evidence
+bytes remain unchanged.
+
+The focused verifier now derives visible passage, bank, and answer expectations
+from the digest-bound original PDF and official-answer JSON. Real Screen and
+Print producer attacks cover missing, duplicate, wrong, and synchronized-drift
+inputs. Exact A4 PDFs close same/cross-page Reading-D, same/cross-page passage,
+passage-to-bank, between-option bank pagination, Student/Teacher following
+section edges, label-plus-text atomicity, and hanging indents. The complete
+artifact set includes plain/lecture Screen, Student/Teacher Print HTML and
+baseline PDFs, wrapped/between-option PDF, full cross-page role-graph PDF, and
+Teacher tail cross-page PDF.

@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "seven-choices-rhythm-v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "id",
+    "version",
+    "owner",
+    "paper",
+    "projectionContract",
+    "rules",
+    "semanticRoleClasses",
+    "adjacencyGraph",
+    "targets",
+    "goldenGeometryFramework",
+    "horizontalBankGeometry",
+    "referenceMeasurement"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "seven-choices-rhythm-v2"
+    },
+    "id": {
+      "const": "seven-choices-rhythm"
+    },
+    "version": {
+      "const": "2"
+    },
+    "owner": {
+      "const": "renderer_typography"
+    },
+    "paper": {
+      "const": "a4"
+    },
+    "projectionContract": {
+      "const": "canonical-projector-v1"
+    },
+    "rules": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string"
+      }
+    },
+    "semanticRoleClasses": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "array",
+        "minItems": 1,
+        "uniqueItems": true,
+        "items": {
+          "type": "string"
+        }
+      }
+    },
+    "adjacencyGraph": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object"
+      }
+    },
+    "targets": {
+      "type": "object"
+    },
+    "goldenGeometryFramework": {
+      "type": "object"
+    },
+    "horizontalBankGeometry": {
+      "type": "object"
+    },
+    "referenceMeasurement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "properties": {
+        "path": {
+          "type": "string"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        }
+      }
+    }
+  }
+}

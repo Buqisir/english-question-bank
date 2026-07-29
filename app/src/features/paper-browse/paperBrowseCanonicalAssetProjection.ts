@@ -39,6 +39,14 @@ export function projectAssetBlocksToCanonicalConsumption(
       }
       continue
     }
+    if (
+      group.groupType === 'sevenChoices'
+      && activeAssetGroupIds.has(block.groupId)
+    ) {
+      throw rejected(
+        `PaperBrowse Seven Choices Group occurs more than once: ${block.groupId}`,
+      )
+    }
     activeAssetGroupIds.add(block.groupId)
     if (!consumedGroupIds.has(block.groupId)) {
       throw rejected(

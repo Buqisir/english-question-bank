@@ -1,0 +1,108 @@
+{
+  "schemaVersion": "seven-choices-source-oracles-v2",
+  "paperId": "paper-2026-i",
+  "sources": {
+    "questionPdf": {
+      "path": "test-fixtures/paper-import/paper-2026-i-canonical-pilot/canonical-evidence/02-original-question-source.pdf",
+      "sha256": "31a87069e6d530afba9123eec0487adf45e52e0b98530af80b62476f169e4d0f",
+      "readingBoundaryPage": 7,
+      "sevenChoicesPage": 8,
+      "followingSectionPage": 9
+    },
+    "officialAnswers": {
+      "path": "test-fixtures/paper-import/paper-2026-i-canonical-pilot/canonical-evidence/05-official_answers.json",
+      "sha256": "17502bb7685b83afc8847f3a44f8ac3c68defcb941ae75ba1ff14945c07daaf0"
+    }
+  },
+  "sourceExtraction": {
+    "readingBoundaryStartMarker": "What is the major finding of the study regarding the appreciation of art?",
+    "readingBoundaryEndMarker": "D．It encourages abstract thinking.",
+    "sectionMarker": "第二节 （共 5 小题；每小题 2.5 分，满分 12.5 分）",
+    "instructionMarker": "阅读下面短文，从短文后的选项中选出可以填入空白处的最佳选项。选项中有两项为多余选项。",
+    "passageStartMarker": "Museums, once quiet places filled with history",
+    "bankStartMarker": "A. This capability allows for timely restoration.",
+    "bankEndMarker": "G. AI is changing this by using image recognition technology to analyze exhibits.",
+    "followingSectionMarker": "第三部分 语言运用（共两节，满分 30 分）"
+  },
+  "sourceSemantics": {
+    "passageTitle": "absent",
+    "passageParagraphCount": 5,
+    "blankNumbers": [
+      36,
+      37,
+      38,
+      39,
+      40
+    ],
+    "optionLabels": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E",
+      "F",
+      "G"
+    ],
+    "answerQuestionNumbers": [
+      36,
+      37,
+      38,
+      39,
+      40
+    ]
+  },
+  "publicIdentities": {
+    "readingBoundary": {
+      "groupId": "group-2026-i-reading-d",
+      "questionId": "q-2026-i-035",
+      "optionId": "option:q-2026-i-035:D"
+    },
+    "sevenChoices": {
+      "groupId": "group-2026-i-seven-choices",
+      "bankId": "bank:group-2026-i-seven-choices",
+      "questionBlankPairs": [
+        {
+          "questionId": "q-2026-i-036",
+          "blankId": "blank-2026-i-036"
+        },
+        {
+          "questionId": "q-2026-i-037",
+          "blankId": "blank-2026-i-037"
+        },
+        {
+          "questionId": "q-2026-i-038",
+          "blankId": "blank-2026-i-038"
+        },
+        {
+          "questionId": "q-2026-i-039",
+          "blankId": "blank-2026-i-039"
+        },
+        {
+          "questionId": "q-2026-i-040",
+          "blankId": "blank-2026-i-040"
+        }
+      ],
+      "paragraphIds": [
+        "para-2026-i-seven-title",
+        "para-2026-i-seven-p1",
+        "para-2026-i-seven-p2",
+        "para-2026-i-seven-p3",
+        "para-2026-i-seven-p4"
+      ],
+      "optionIds": [
+        "option:group-2026-i-seven-choices:A",
+        "option:group-2026-i-seven-choices:B",
+        "option:group-2026-i-seven-choices:C",
+        "option:group-2026-i-seven-choices:D",
+        "option:group-2026-i-seven-choices:E",
+        "option:group-2026-i-seven-choices:F",
+        "option:group-2026-i-seven-choices:G"
+      ]
+    }
+  },
+  "variants": {
+    "screenWrappedOptionWidthPx": 260,
+    "printWrappedOptionWidthPt": 190,
+    "bankHeadingVisibleText": "A-G 选项"
+  }
+}

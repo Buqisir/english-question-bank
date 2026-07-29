@@ -1,8 +1,8 @@
 {
   "authority": {
     "manifestId": "paper-canonical",
-    "manifestVersion": "15",
-    "manifestDigest": "sha256:c108ff6c1e863520cf44852be0d6393b4c423c36b28e34bc70689018acf7b2d4"
+    "manifestVersion": "16",
+    "manifestDigest": "sha256:7555b5f099a9eef06f92accfc796b3dd6dee2e7728f7da80dee44050404d1a66"
   },
   "evidence": {
     "documents": [

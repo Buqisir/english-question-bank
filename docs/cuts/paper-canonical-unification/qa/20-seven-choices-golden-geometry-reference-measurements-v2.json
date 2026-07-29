@@ -1,0 +1,85 @@
+{
+  "schemaVersion": "seven-choices-golden-geometry-reference-measurements-v2",
+  "correction": {
+    "supersedes": "seven-choices-golden-geometry-reference-measurements-v1",
+    "reason": "The immutable source PDF carries no standalone Seven Choices passage title. The misleading source paragraph id is not title authority."
+  },
+  "preservedGoldenMeasurement": {
+    "path": "docs/cuts/paper-canonical-unification/qa/20-seven-choices-golden-geometry-reference-measurements-v1.json",
+    "sha256": "df173cb7fcc835c8040da345d2f6f4121e41913eb19fe84aac106497690a0837"
+  },
+  "sourceOracle": {
+    "path": "docs/cuts/paper-canonical-unification/qa/20-seven-choices-source-oracles-v2.json",
+    "sha256": "a04a223bfc4298ed8e438cc1ae3b1998f5c4017a927b5acf2fb38fb20d4527a6"
+  },
+  "sourceTitleDisposition": {
+    "role": "passage_title",
+    "status": "removed_unexecutable",
+    "replacementRole": "passage_body_line",
+    "sourceClaim": "The first visible Seven Choices line is the first body paragraph, not a source title."
+  },
+  "normalizedContract": {
+    "semanticRoleClasses": {
+      "readingBoundary": [
+        "reading_question_tail"
+      ],
+      "chrome": [
+        "part_title",
+        "subsection",
+        "meta_instruction"
+      ],
+      "passageContent": [
+        "passage_body_line"
+      ],
+      "inlineBlank": [
+        "inline_blank_marker"
+      ],
+      "bankHeading": [
+        "bank_heading"
+      ],
+      "bankOption": [
+        "bank_option_line"
+      ],
+      "teacherTail": [
+        "answer_line",
+        "explanation_line"
+      ],
+      "followingSection": [
+        "next_section"
+      ]
+    },
+    "adjacencyEdgeIds": [
+      "reading_boundary_to_chrome_same_page",
+      "reading_boundary_to_chrome_cross_page",
+      "chrome_internal",
+      "chrome_to_passage",
+      "passage_line_internal",
+      "paragraph_transition",
+      "inline_blank_no_phantom_space",
+      "passage_to_bank_heading",
+      "bank_heading_to_first_option",
+      "passage_to_first_option",
+      "passage_to_bank_cross_page",
+      "bank_option_line_internal",
+      "bank_option_to_next_option",
+      "bank_to_answer",
+      "answer_to_explanation",
+      "teacher_tail_internal",
+      "student_bank_to_next_section_same_page",
+      "teacher_tail_to_next_section_same_page",
+      "student_bank_to_next_section_cross_page",
+      "teacher_tail_to_next_section_cross_page",
+      "same_passage_cross_page",
+      "bank_between_options_cross_page"
+    ]
+  },
+  "verificationBoundary": {
+    "oracles": "immutable source PDF and official-answer source",
+    "producerSeams": [
+      "PaperBrowse HTTP page",
+      "buildPrintHtml",
+      "renderPaginatedPaper"
+    ],
+    "forbiddenOracle": "projectCanonicalConsumerGroup expected visible text"
+  }
+}
