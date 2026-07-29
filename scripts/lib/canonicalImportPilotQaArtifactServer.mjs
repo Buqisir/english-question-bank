@@ -117,3 +117,22 @@ export async function startCanonicalImportPilotQaArtifactServer({
     }),
   }
 }
+
+export async function runCanonicalImportPilotQaSession({
+  startArtifactServer = startCanonicalImportPilotQaArtifactServer,
+  artifactServerOptions,
+  closeRenderedServices,
+  run,
+}) {
+  let qaArtifactServer
+  try {
+    qaArtifactServer = await startArtifactServer(artifactServerOptions)
+    return await run(qaArtifactServer)
+  } finally {
+    try {
+      await qaArtifactServer?.close()
+    } finally {
+      await closeRenderedServices()
+    }
+  }
+}

@@ -36,7 +36,7 @@ import {
   validatePaperImportPackage,
 } from '../server/paper-import/validator.mjs'
 import {
-  startCanonicalImportPilotQaArtifactServer,
+  runCanonicalImportPilotQaSession,
 } from './lib/canonicalImportPilotQaArtifactServer.mjs'
 
 const repositoryRoot = path.resolve(import.meta.dirname, '..')
@@ -47,9 +47,17 @@ const sourcePackageDir = path.join(
 const paperId = 'paper-2026-i'
 const provisionActualArtifacts = process.argv.includes('--actual-artifacts')
 const keepQaServer = process.argv.includes('--qa-server')
+const injectQaArtifactServerStartupFailure = process.argv.includes(
+  '--inject-qa-artifact-server-startup-failure',
+)
 
 if (keepQaServer && !provisionActualArtifacts) {
   throw new Error('--qa-server requires --actual-artifacts')
+}
+if (injectQaArtifactServerStartupFailure && !keepQaServer) {
+  throw new Error(
+    '--inject-qa-artifact-server-startup-failure requires --qa-server',
+  )
 }
 
 function sha256(bytes) {
@@ -1725,52 +1733,77 @@ try {
     console.log(`QA artifacts: ${outputDir}`)
   }
   if (keepQaServer) {
-    const qaArtifactServer =
-      await startCanonicalImportPilotQaArtifactServer({
-        repositoryRoot,
-        head,
-      })
     try {
-      assert.equal(
-        qaArtifactServer.artifactDir,
-        outputDir,
-        'QA artifact server binds the exact HEAD-scoped output directory',
-      )
-      await assertServedQaArtifacts({
-        qaServer: qaArtifactServer,
-        outputDir,
-        head,
+      await runCanonicalImportPilotQaSession({
+        startArtifactServer: injectQaArtifactServerStartupFailure
+          ? async () => {
+              throw new Error('Injected QA artifact server startup failure')
+            }
+          : undefined,
+        artifactServerOptions: {
+          repositoryRoot,
+          head,
+        },
+        closeRenderedServices: rendered.closeServices,
+        run: async (qaArtifactServer) => {
+          assert.equal(
+            qaArtifactServer.artifactDir,
+            outputDir,
+            'QA artifact server binds the exact HEAD-scoped output directory',
+          )
+          await assertServedQaArtifacts({
+            qaServer: qaArtifactServer,
+            outputDir,
+            head,
+          })
+          console.log(`QA plain URL: ${rendered.plainUrl}`)
+          console.log(`QA lecture URL: ${rendered.lectureUrl}`)
+          console.log(
+            `QA Student Print HTML URL: ${
+              qaArtifactServer.urls.studentPrintHtml
+            }`,
+          )
+          console.log(
+            `QA Teacher Print HTML URL: ${
+              qaArtifactServer.urls.teacherPrintHtml
+            }`,
+          )
+          console.log(
+            `QA Student Chromium PDF URL: ${
+              qaArtifactServer.urls.studentChromiumPdf
+            }`,
+          )
+          console.log(
+            `QA Teacher Chromium PDF URL: ${
+              qaArtifactServer.urls.teacherChromiumPdf
+            }`,
+          )
+          console.log('QA server is ready; stop this process after owner QA.')
+          await new Promise((resolve) => {
+            process.once('SIGINT', resolve)
+            process.once('SIGTERM', resolve)
+          })
+        },
       })
-      console.log(`QA plain URL: ${rendered.plainUrl}`)
-      console.log(`QA lecture URL: ${rendered.lectureUrl}`)
-      console.log(
-        `QA Student Print HTML URL: ${
-          qaArtifactServer.urls.studentPrintHtml
-        }`,
-      )
-      console.log(
-        `QA Teacher Print HTML URL: ${
-          qaArtifactServer.urls.teacherPrintHtml
-        }`,
-      )
-      console.log(
-        `QA Student Chromium PDF URL: ${
-          qaArtifactServer.urls.studentChromiumPdf
-        }`,
-      )
-      console.log(
-        `QA Teacher Chromium PDF URL: ${
-          qaArtifactServer.urls.teacherChromiumPdf
-        }`,
-      )
-      console.log('QA server is ready; stop this process after owner QA.')
-      await new Promise((resolve) => {
-        process.once('SIGINT', resolve)
-        process.once('SIGTERM', resolve)
+    } catch (error) {
+      if (!injectQaArtifactServerStartupFailure) throw error
+      const retainedServiceProbeComplete = new Promise((resolve) => {
+        const keepAlive = setInterval(() => {}, 1_000)
+        const finish = () => {
+          clearInterval(keepAlive)
+          resolve()
+        }
+        process.once('SIGINT', finish)
+        process.once('SIGTERM', finish)
       })
-    } finally {
-      await qaArtifactServer.close()
-      await rendered.closeServices()
+      console.log(
+        `QA retained-service cleanup probes: ${JSON.stringify({
+          api: new URL('/api/health', rendered.baseUrl).href,
+          vite: rendered.appUrl,
+        })}`,
+      )
+      await retainedServiceProbeComplete
+      throw error
     }
   }
   console.log('PASS backend canonical import pilot')

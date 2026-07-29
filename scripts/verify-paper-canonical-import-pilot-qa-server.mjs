@@ -1,15 +1,18 @@
 #!/usr/bin/env node
 
 import assert from 'node:assert/strict'
+import { spawn } from 'node:child_process'
 import { mkdtempSync, mkdirSync, rmSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
 
 import {
+  runCanonicalImportPilotQaSession,
   startCanonicalImportPilotQaArtifactServer,
 } from './lib/canonicalImportPilotQaArtifactServer.mjs'
 
 const head = '0123456789abcdef0123456789abcdef01234567'
+const projectRoot = path.resolve(import.meta.dirname, '..')
 const repositoryRoot = mkdtempSync(
   path.join(tmpdir(), 'eqb-canonical-import-pilot-qa-server-'),
 )
@@ -92,5 +95,125 @@ try {
   await qaServer?.close()
   rmSync(repositoryRoot, { recursive: true, force: true })
 }
+
+const startupFailure = spawn(process.execPath, [
+  'scripts/verify-paper-canonical-import-pilot.mjs',
+  '--actual-artifacts',
+  '--qa-server',
+  '--inject-qa-artifact-server-startup-failure',
+], {
+  cwd: projectRoot,
+  stdio: ['ignore', 'pipe', 'pipe'],
+})
+let startupFailureOutput = ''
+let cleanupProbesResolved = false
+let resolveCleanupProbes
+let rejectCleanupProbes
+const cleanupProbesPromise = new Promise((resolve, reject) => {
+  resolveCleanupProbes = resolve
+  rejectCleanupProbes = reject
+})
+const startupFailureExit = new Promise((resolve) => {
+  startupFailure.once('exit', (code, signal) => {
+    if (!cleanupProbesResolved) {
+      rejectCleanupProbes(new Error(
+        `real QA pilot exited before exposing cleanup probes (${code}, ${
+          signal
+        }):\n${startupFailureOutput}`,
+      ))
+    }
+    resolve({ code, signal })
+  })
+})
+const cleanupProbeTimeout = setTimeout(() => {
+  rejectCleanupProbes(new Error(
+    `real QA pilot did not expose cleanup probes:\n${startupFailureOutput}`,
+  ))
+  startupFailure.kill('SIGKILL')
+}, 120_000)
+const captureStartupFailureOutput = (chunk) => {
+  startupFailureOutput += chunk.toString()
+  const cleanupProbeMatch = startupFailureOutput.match(
+    /(?:^|\n)QA retained-service cleanup probes: ([^\n]+)\n/,
+  )
+  if (!cleanupProbesResolved && cleanupProbeMatch) {
+    cleanupProbesResolved = true
+    resolveCleanupProbes(JSON.parse(cleanupProbeMatch[1]))
+  }
+}
+startupFailure.stdout.on('data', captureStartupFailureOutput)
+startupFailure.stderr.on('data', captureStartupFailureOutput)
+startupFailure.once('error', rejectCleanupProbes)
+
+const cleanupProbes = await cleanupProbesPromise
+assert.equal(
+  startupFailure.exitCode,
+  null,
+  'real QA pilot remains alive before retained-service cleanup probes',
+)
+assert.equal(
+  startupFailure.signalCode,
+  null,
+  'real QA pilot has not received an exit signal before cleanup probes',
+)
+let retainedServiceProbeError
+try {
+  for (const [service, url] of Object.entries(cleanupProbes)) {
+    await assert.rejects(
+      fetch(url, { signal: AbortSignal.timeout(2_000) }),
+      `${service} is unreachable after artifact server startup failure`,
+    )
+  }
+} catch (error) {
+  retainedServiceProbeError = error
+} finally {
+  assert.equal(
+    startupFailure.exitCode,
+    null,
+    'real QA pilot remains alive through retained-service cleanup probes',
+  )
+  assert.equal(
+    startupFailure.signalCode,
+    null,
+    'real QA pilot receives no exit signal before cleanup probes finish',
+  )
+  startupFailure.kill('SIGTERM')
+}
+const startupFailureResult = await startupFailureExit
+clearTimeout(cleanupProbeTimeout)
+if (retainedServiceProbeError) throw retainedServiceProbeError
+assert.notEqual(
+  startupFailureResult.code,
+  0,
+  'injected artifact server startup failure rejects the real QA pilot',
+)
+assert.match(
+  startupFailureOutput,
+  /Injected QA artifact server startup failure/,
+  'real QA pilot preserves the injected startup failure',
+)
+
+const closeError = new Error('injected QA artifact server close failure')
+let closeFailureClosedRetainedServices = false
+await assert.rejects(
+  runCanonicalImportPilotQaSession({
+    startArtifactServer: async () => ({
+      close: async () => {
+        throw closeError
+      },
+    }),
+    artifactServerOptions: { repositoryRoot, head },
+    closeRenderedServices: async () => {
+      closeFailureClosedRetainedServices = true
+    },
+    run: async () => {},
+  }),
+  closeError,
+)
+assert.equal(
+  closeFailureClosedRetainedServices,
+  true,
+  'artifact server close failure still closes retained API and Vite services',
+)
 
 console.log('PASS Ticket 20 HEAD-scoped QA artifact server')
