@@ -343,12 +343,39 @@
   margin: 0 0 8px;
 }
 
+.paper-browse-instruction--merged[
+  data-canonical-seven-choices-chrome
+] {
+  margin-bottom: 6px;
+}
+
+.paper-browse-part-heading[
+  data-canonical-seven-choices-following-for
+],
+.paper-browse-section-heading[
+  data-canonical-seven-choices-following-for
+] {
+  margin-top: -7px;
+}
+
 .paper-browse-content > [data-canonical-reading-chrome] {
   margin-bottom: 0;
 }
 
 .paper-browse-content > [data-canonical-reading-chrome]
   + [data-canonical-reading-chrome] {
+  margin-top: -16px;
+}
+
+.paper-browse-content > [data-canonical-seven-choices-chrome]
+  + [data-canonical-seven-choices-chrome] {
+  margin-top: -16px;
+}
+
+.paper-browse-content > [data-canonical-seven-choices-chrome]
+  + .paper-browse-group-card:has(
+    > [data-canonical-seven-choices-chrome]
+  ) {
   margin-top: -16px;
 }
 

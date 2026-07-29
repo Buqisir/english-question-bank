@@ -266,3 +266,49 @@ section edges, label-plus-text atomicity, and hanging indents. The complete
 artifact set includes plain/lecture Screen, Student/Teacher Print HTML and
 baseline PDFs, wrapped/between-option PDF, full cross-page role-graph PDF, and
 Teacher tail cross-page PDF.
+
+Focused-review 22-edge coverage closure (2026-07-29):
+`qa/20-seven-choices-observed-coverage-oracle-v1.json` is a checked-in
+authority/evidence oracle independent of the production projector and
+renderer selection logic. It binds the immutable original-question PDF,
+official-answer JSON, Seven Choices golden reference, and checked-in Reading
+analysis bytes. Its edge-ID set exactly equals all 22
+`seven-choices-rhythm-v2` authority edges; the verifier fails closed on any
+missing, extra, duplicate, or wrong-bundle edge.
+
+The actual-artifact evidence now carries a
+`seven-choices-observed-coverage-ledger-v1` ledger with exact per-edge
+identities, source-text digests, measured ratios or page relations, and
+atomicity observations. Its six exact bundles close 12 plain Screen edges,
+12 lecture Screen edges, 12 Student Print HTML edges, 15 Teacher Print HTML
+edges, 17 Student exact-A4 PDF edges, and 20 Teacher exact-A4 PDF edges; their
+union is exactly the independent 22-edge oracle. Source-bound variants cover
+optional chrome and bank heading collapse, passage and paragraph transitions,
+zero-extra-space inline blanks, one-line and wrapped options, label-plus-text
+atomicity, same/cross-page passage and bank continuation, official-answer and
+checked-in explanation tails, and Student/Teacher same/cross-page following
+sections. Same-passage continuation uses a dedicated real Chromium artifact
+so the adversary cannot corrupt unrelated paragraph-transition measurements.
+
+All negative cases poison source or canonical-consumption inputs before the
+real PaperBrowse or Print producer runs. Invalid duplicate, missing, wrong,
+and Question/Blank or bank-option inputs expose zero/failed public artifacts;
+a structurally valid synchronized text drift is rejected only by the
+independent source oracle. No post-render observation object is mutated.
+`passage_title` and `passage_title_to_body` remain retired; manifest v1-v15,
+Reading Typography v4, prior evidence, original source bytes, and official
+answer bytes remain unchanged.
+
+Rendered visual inspection confirms the source-bound Student passage and A-G
+bank, the Teacher bank/answer/explanation tail, and the following section are
+unclipped on exact A4 pages with stable indentation and page footers.
+
+Focused verification passes: backend pilot, official `--actual-artifacts`,
+pilot focused fixes, Seven Choices publication/rendered behavior, import
+admission/recovery, app typecheck/build, `git diff --check`, and
+`pnpm -C app run verify:all` 115 PASS / 1 declared SKIP / 0 FAIL. The
+standalone whole-app lint command still reports the repository's existing
+34 errors and 4 warnings outside this bounded CSS/renderer/verifier change;
+no lint-debt files were changed. No Owner QA provisioning, Ticket 21,
+Cloze/other-family work, production/R2 action, or generated-DOCX output was
+performed.

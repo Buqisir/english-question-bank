@@ -1,0 +1,414 @@
+{
+  "schemaVersion": "seven-choices-observed-coverage-oracle-v1",
+  "authorityBoundary": {
+    "sourceOracle": {
+      "path": "docs/cuts/paper-canonical-unification/qa/20-seven-choices-source-oracles-v2.json",
+      "sha256": "a04a223bfc4298ed8e438cc1ae3b1998f5c4017a927b5acf2fb38fb20d4527a6"
+    },
+    "goldenReference": {
+      "path": "docs/cuts/paper-canonical-unification/qa/20-seven-choices-golden-geometry-reference-measurements-v2.json",
+      "sha256": "2896abb74418a9bfbe35efa22be46298d81859f05e7391e5f86a7093ac70b02a"
+    },
+    "readingAnalysis": {
+      "path": "test-fixtures/paper-import/paper-2026-i-canonical-pilot/reading-choice-analysis-v1.json",
+      "sha256": "90f21e8f607ed886814b16909f70a86fbece083c7ede6500004bd2cb0b884d9c"
+    },
+    "expectedSourceRoles": {
+      "readingBoundary": "reading_question_tail",
+      "chrome": [
+        "part_title",
+        "subsection",
+        "meta_instruction"
+      ],
+      "passage": "passage_body_line",
+      "inlineBlank": "inline_blank_marker",
+      "bankHeading": "bank_heading",
+      "bankOption": "bank_option_line",
+      "answer": "answer_line",
+      "explanation": "explanation_line",
+      "followingSection": "next_section"
+    },
+    "teacherReadingBoundary": {
+      "questionId": "q-2026-i-035",
+      "answer": "D",
+      "identity": "q-2026-i-035:answer_line",
+      "visibleText": "【答案】D",
+      "explanationIdentity": "q-2026-i-035:explanation_line",
+      "explanationText": "考查关于欣赏艺术的主要研究发现，需概括全文核心结论。"
+    },
+    "teacherExplanationFixture": {
+      "authority": "non_semantic_checked_in_observation_fixture",
+      "textsByQuestionNo": {
+        "36": "Coverage fixture for official answer C.",
+        "37": "Coverage fixture for official answer F.",
+        "38": "Coverage fixture for official answer A.",
+        "39": "Coverage fixture for official answer D.",
+        "40": "Coverage fixture for official answer B."
+      }
+    },
+    "passageParagraphAnchors": [
+      {
+        "paragraphId": "para-2026-i-seven-title",
+        "start": "Museums, once quiet places filled with history",
+        "end": "revealing hidden stories."
+      },
+      {
+        "paragraphId": "para-2026-i-seven-p1",
+        "start": "AI transforms a standard museum trip",
+        "end": "satisfy curiosity."
+      },
+      {
+        "paragraphId": "para-2026-i-seven-p2",
+        "start": "Beyond visitor interaction",
+        "end": "improve preservation strategies."
+      },
+      {
+        "paragraphId": "para-2026-i-seven-p3",
+        "start": "AI also significantly enhances",
+        "end": "engaging for young minds."
+      },
+      {
+        "paragraphId": "para-2026-i-seven-p4",
+        "start": "Looking ahead, the rapid advancement",
+        "end": "protect visitors' information."
+      }
+    ],
+    "chromeAnchors": [
+      {
+        "identity": "source:seven-choices-section",
+        "role": "subsection",
+        "text": "第二节 （共 5 小题；每小题 2.5 分，满分 12.5 分）"
+      },
+      {
+        "identity": "source:seven-choices-instruction",
+        "role": "meta_instruction",
+        "text": "阅读下面短文，从短文后的选项中选出可以填入空白处的最佳选项。选项中有两项为多余选项。"
+      }
+    ]
+  },
+  "edges": [
+    {
+      "edgeId": "reading_boundary_to_chrome_same_page",
+      "fromClass": "readingBoundary",
+      "toClass": "chrome",
+      "baselineStepRatio": 2,
+      "optionalCollapse": true
+    },
+    {
+      "edgeId": "reading_boundary_to_chrome_cross_page",
+      "fromClass": "readingBoundary",
+      "toClass": "chrome",
+      "pageRelation": "next_page_start",
+      "optionalCollapse": true
+    },
+    {
+      "edgeId": "chrome_internal",
+      "fromClass": "chrome",
+      "toClass": "chrome",
+      "baselineStepRatio": 1,
+      "optionalCollapse": true
+    },
+    {
+      "edgeId": "chrome_to_passage",
+      "fromClass": "chrome",
+      "toClass": "passageContent",
+      "baselineStepRatio": 1.25,
+      "optionalCollapse": true
+    },
+    {
+      "edgeId": "passage_line_internal",
+      "fromRole": "passage_body_line",
+      "toRole": "passage_body_line",
+      "baselineStepRatio": 1,
+      "optionalCollapse": false
+    },
+    {
+      "edgeId": "paragraph_transition",
+      "fromClass": "passageContent",
+      "toClass": "passageContent",
+      "baselineStepRatio": 1,
+      "optionalCollapse": false
+    },
+    {
+      "edgeId": "inline_blank_no_phantom_space",
+      "fromRole": "passage_body_line",
+      "throughClass": "inlineBlank",
+      "toRole": "passage_body_line",
+      "extraBaselineStepRatio": 0,
+      "optionalCollapse": false
+    },
+    {
+      "edgeId": "passage_to_bank_heading",
+      "fromClass": "passageContent",
+      "toClass": "bankHeading",
+      "baselineStepRatio": 1,
+      "optionalCollapse": true
+    },
+    {
+      "edgeId": "bank_heading_to_first_option",
+      "fromClass": "bankHeading",
+      "toClass": "bankOption",
+      "baselineStepRatio": 1,
+      "optionalCollapse": true
+    },
+    {
+      "edgeId": "passage_to_first_option",
+      "fromClass": "passageContent",
+      "toClass": "bankOption",
+      "baselineStepRatio": 2,
+      "optionalCollapse": true
+    },
+    {
+      "edgeId": "passage_to_bank_cross_page",
+      "fromClass": "passageContent",
+      "toClass": "bankOption",
+      "pageRelation": "next_page_start",
+      "optionalCollapse": true
+    },
+    {
+      "edgeId": "bank_option_line_internal",
+      "fromClass": "bankOption",
+      "toClass": "bankOption",
+      "baselineStepRatio": 1,
+      "optionalCollapse": false
+    },
+    {
+      "edgeId": "bank_option_to_next_option",
+      "fromClass": "bankOption",
+      "toClass": "bankOption",
+      "baselineStepRatio": 1,
+      "optionalCollapse": false
+    },
+    {
+      "edgeId": "bank_to_answer",
+      "fromClass": "bankOption",
+      "toRole": "answer_line",
+      "baselineStepRatio": 1,
+      "optionalCollapse": true
+    },
+    {
+      "edgeId": "answer_to_explanation",
+      "fromRole": "answer_line",
+      "toRole": "explanation_line",
+      "baselineStepRatio": 1,
+      "optionalCollapse": true
+    },
+    {
+      "edgeId": "teacher_tail_internal",
+      "fromClass": "teacherTail",
+      "toClass": "teacherTail",
+      "baselineStepRatio": 1,
+      "optionalCollapse": true
+    },
+    {
+      "edgeId": "student_bank_to_next_section_same_page",
+      "fromClass": "bankOption",
+      "toRole": "next_section",
+      "baselineStepRatio": 2,
+      "optionalCollapse": false
+    },
+    {
+      "edgeId": "teacher_tail_to_next_section_same_page",
+      "fromClass": "teacherTail",
+      "toRole": "next_section",
+      "baselineStepRatio": 2,
+      "optionalCollapse": true
+    },
+    {
+      "edgeId": "student_bank_to_next_section_cross_page",
+      "fromClass": "bankOption",
+      "toRole": "next_section",
+      "pageRelation": "next_page_start",
+      "optionalCollapse": false
+    },
+    {
+      "edgeId": "teacher_tail_to_next_section_cross_page",
+      "fromClass": "teacherTail",
+      "toRole": "next_section",
+      "pageRelation": "next_page_start",
+      "optionalCollapse": true
+    },
+    {
+      "edgeId": "same_passage_cross_page",
+      "fromClass": "passageContent",
+      "toClass": "passageContent",
+      "pageRelation": "next_page_continuation",
+      "optionalCollapse": false,
+      "repeatForbiddenRoles": [
+        "part_title",
+        "subsection",
+        "meta_instruction",
+        "bank_heading",
+        "bank_option_line"
+      ]
+    },
+    {
+      "edgeId": "bank_between_options_cross_page",
+      "fromClass": "bankOption",
+      "toClass": "bankOption",
+      "pageRelation": "next_page_continuation",
+      "optionalCollapse": false,
+      "splitForbiddenRole": "bank_option_line",
+      "repeatForbiddenRoles": [
+        "bank_heading"
+      ]
+    }
+  ],
+  "requiredBundles": [
+    {
+      "bundleId": "screen-plain",
+      "surface": "screen",
+      "variants": [
+        "plain-baseline",
+        "plain-bank-heading",
+        "plain-wrapped-option"
+      ],
+      "expectedEdgeIds": [
+        "reading_boundary_to_chrome_same_page",
+        "chrome_internal",
+        "chrome_to_passage",
+        "passage_line_internal",
+        "paragraph_transition",
+        "inline_blank_no_phantom_space",
+        "passage_to_bank_heading",
+        "bank_heading_to_first_option",
+        "passage_to_first_option",
+        "bank_option_line_internal",
+        "bank_option_to_next_option",
+        "student_bank_to_next_section_same_page"
+      ]
+    },
+    {
+      "bundleId": "screen-lecture",
+      "surface": "screen",
+      "variants": [
+        "lecture-baseline",
+        "lecture-bank-heading",
+        "lecture-wrapped-option"
+      ],
+      "expectedEdgeIds": [
+        "reading_boundary_to_chrome_same_page",
+        "chrome_internal",
+        "chrome_to_passage",
+        "passage_line_internal",
+        "paragraph_transition",
+        "inline_blank_no_phantom_space",
+        "passage_to_bank_heading",
+        "bank_heading_to_first_option",
+        "passage_to_first_option",
+        "bank_option_line_internal",
+        "bank_option_to_next_option",
+        "student_bank_to_next_section_same_page"
+      ]
+    },
+    {
+      "bundleId": "print-html-student",
+      "surface": "print_html",
+      "variants": [
+        "student-baseline",
+        "student-bank-heading",
+        "student-wrapped-option",
+        "student-optional-chrome-collapse"
+      ],
+      "expectedEdgeIds": [
+        "reading_boundary_to_chrome_same_page",
+        "chrome_internal",
+        "chrome_to_passage",
+        "passage_line_internal",
+        "paragraph_transition",
+        "inline_blank_no_phantom_space",
+        "passage_to_bank_heading",
+        "bank_heading_to_first_option",
+        "passage_to_first_option",
+        "bank_option_line_internal",
+        "bank_option_to_next_option",
+        "student_bank_to_next_section_same_page"
+      ]
+    },
+    {
+      "bundleId": "print-html-teacher",
+      "surface": "print_html",
+      "variants": [
+        "teacher-baseline",
+        "teacher-bank-heading",
+        "teacher-wrapped-option"
+      ],
+      "expectedEdgeIds": [
+        "reading_boundary_to_chrome_same_page",
+        "chrome_internal",
+        "chrome_to_passage",
+        "passage_line_internal",
+        "paragraph_transition",
+        "inline_blank_no_phantom_space",
+        "passage_to_bank_heading",
+        "bank_heading_to_first_option",
+        "passage_to_first_option",
+        "bank_option_line_internal",
+        "bank_option_to_next_option",
+        "bank_to_answer",
+        "answer_to_explanation",
+        "teacher_tail_internal",
+        "teacher_tail_to_next_section_same_page"
+      ]
+    },
+    {
+      "bundleId": "pdf-student",
+      "surface": "exact_a4_pdf",
+      "variants": [
+        "student-baseline",
+        "student-bank-heading-wrapped-bank-pagination",
+        "student-cross-page-role-graph"
+      ],
+      "expectedEdgeIds": [
+        "reading_boundary_to_chrome_same_page",
+        "reading_boundary_to_chrome_cross_page",
+        "chrome_internal",
+        "chrome_to_passage",
+        "passage_line_internal",
+        "paragraph_transition",
+        "inline_blank_no_phantom_space",
+        "passage_to_bank_heading",
+        "bank_heading_to_first_option",
+        "passage_to_first_option",
+        "passage_to_bank_cross_page",
+        "bank_option_line_internal",
+        "bank_option_to_next_option",
+        "student_bank_to_next_section_same_page",
+        "student_bank_to_next_section_cross_page",
+        "same_passage_cross_page",
+        "bank_between_options_cross_page"
+      ]
+    },
+    {
+      "bundleId": "pdf-teacher",
+      "surface": "exact_a4_pdf",
+      "variants": [
+        "teacher-baseline",
+        "teacher-bank-heading-wrapped-bank-pagination",
+        "teacher-complete-cross-page-role-graph"
+      ],
+      "expectedEdgeIds": [
+        "reading_boundary_to_chrome_same_page",
+        "reading_boundary_to_chrome_cross_page",
+        "chrome_internal",
+        "chrome_to_passage",
+        "passage_line_internal",
+        "paragraph_transition",
+        "inline_blank_no_phantom_space",
+        "passage_to_bank_heading",
+        "bank_heading_to_first_option",
+        "passage_to_first_option",
+        "passage_to_bank_cross_page",
+        "bank_option_line_internal",
+        "bank_option_to_next_option",
+        "bank_to_answer",
+        "answer_to_explanation",
+        "teacher_tail_internal",
+        "teacher_tail_to_next_section_same_page",
+        "teacher_tail_to_next_section_cross_page",
+        "same_passage_cross_page",
+        "bank_between_options_cross_page"
+      ]
+    }
+  ]
+}

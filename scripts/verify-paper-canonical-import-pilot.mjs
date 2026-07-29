@@ -82,6 +82,10 @@ const sevenChoicesSourceOraclePath = path.join(
   repositoryRoot,
   'docs/cuts/paper-canonical-unification/qa/20-seven-choices-source-oracles-v2.json',
 )
+const sevenChoicesCoverageOraclePath = path.join(
+  repositoryRoot,
+  'docs/cuts/paper-canonical-unification/qa/20-seven-choices-observed-coverage-oracle-v1.json',
+)
 const paperId = 'paper-2026-i'
 const provisionActualArtifacts = process.argv.includes('--actual-artifacts')
 const keepQaServer = process.argv.includes('--qa-server')
@@ -469,6 +473,123 @@ function assertSevenChoicesReferenceEvidence() {
   return {
     digest: sha256(evidenceBytes),
     evidence,
+  }
+}
+
+function assertSevenChoicesCoverageOracle() {
+  const bytes = readFileSync(sevenChoicesCoverageOraclePath)
+  const oracle = JSON.parse(bytes)
+  assert.equal(
+    oracle.schemaVersion,
+    'seven-choices-observed-coverage-oracle-v1',
+  )
+  for (const binding of Object.values(oracle.authorityBoundary).filter(
+    (entry) => entry && typeof entry === 'object' && entry.path,
+  )) {
+    assert.equal(
+      sha256(readFileSync(path.join(repositoryRoot, binding.path))),
+      binding.sha256,
+      `Seven Choices coverage oracle binds ${binding.path}`,
+    )
+  }
+  assert.deepEqual(
+    sevenChoicesRhythm.adjacencyGraph,
+    oracle.edges,
+    'the production authority edge graph exactly equals the independent checked-in evidence oracle',
+  )
+  assert.deepEqual(
+    {
+      readingBoundary:
+        sevenChoicesRhythm.semanticRoleClasses.readingBoundary[0],
+      chrome: sevenChoicesRhythm.semanticRoleClasses.chrome,
+      passage: sevenChoicesRhythm.semanticRoleClasses.passageContent[0],
+      inlineBlank: sevenChoicesRhythm.semanticRoleClasses.inlineBlank[0],
+      bankHeading: sevenChoicesRhythm.semanticRoleClasses.bankHeading[0],
+      bankOption: sevenChoicesRhythm.semanticRoleClasses.bankOption[0],
+      answer: sevenChoicesRhythm.semanticRoleClasses.teacherTail[0],
+      explanation: sevenChoicesRhythm.semanticRoleClasses.teacherTail[1],
+      followingSection:
+        sevenChoicesRhythm.semanticRoleClasses.followingSection[0],
+    },
+    oracle.authorityBoundary.expectedSourceRoles,
+    'the production role classes exactly equal the independent checked-in evidence oracle',
+  )
+  let priorParagraphOffset = -1
+  for (const paragraph of oracle.authorityBoundary.passageParagraphAnchors) {
+    const start = normalizedVisibleText(sevenChoicesSourceOracle.passageText)
+      .indexOf(normalizedVisibleText(paragraph.start))
+    const end = normalizedVisibleText(sevenChoicesSourceOracle.passageText)
+      .indexOf(normalizedVisibleText(paragraph.end), start)
+    assert.equal(
+      start > priorParagraphOffset && end >= start,
+      true,
+      `${paragraph.paragraphId} anchors independently into the immutable source PDF passage`,
+    )
+    priorParagraphOffset = end
+  }
+  assert.deepEqual(
+    oracle.authorityBoundary.chromeAnchors.map(({ text }) =>
+      normalizedVisibleText(text)),
+    [
+      sevenChoicesSourceOracle.oracle.sourceExtraction.sectionMarker,
+      sevenChoicesSourceOracle.oracle.sourceExtraction.instructionMarker,
+    ].map(normalizedVisibleText),
+    'the independent chrome observations bind the immutable source PDF text',
+  )
+  assert.deepEqual(
+    Object.values(
+      oracle.authorityBoundary.teacherExplanationFixture.textsByQuestionNo,
+    ).map((text) => text.match(/answer ([A-G])/u)?.[1]),
+    sevenChoicesSourceOracle.answerLabels,
+    'the non-semantic explanation fixture binds each official answer identity',
+  )
+  const officialAnswers = JSON.parse(readFileSync(path.join(
+    repositoryRoot,
+    sevenChoicesSourceOracle.oracle.sources.officialAnswers.path,
+  )))
+  const teacherBoundary = oracle.authorityBoundary.teacherReadingBoundary
+  assert.equal(
+    officialAnswers.answers[teacherBoundary.questionId]?.answer,
+    teacherBoundary.answer,
+    'the Teacher Reading-D boundary binds the immutable official answer',
+  )
+  const readingAnalysis = JSON.parse(readFileSync(path.join(
+    repositoryRoot,
+    oracle.authorityBoundary.readingAnalysis.path,
+  )))
+  assert.equal(
+    readingAnalysis.questions[teacherBoundary.questionId]?.questionFocus,
+    teacherBoundary.explanationText,
+    'the Teacher Reading-D terminal explanation binds checked-in independent analysis evidence',
+  )
+  const edgeIds = oracle.edges.map((edge) => edge.edgeId)
+  assert.equal(
+    new Set(edgeIds).size,
+    edgeIds.length,
+    'the independent Seven Choices coverage oracle has no duplicate edge ID',
+  )
+  assert.deepEqual(
+    [...new Set(oracle.requiredBundles.flatMap(
+      (bundle) => bundle.expectedEdgeIds,
+    ))].sort(),
+    [...edgeIds].sort(),
+    'the required public-surface bundles close exactly the independent 22-edge oracle set',
+  )
+  for (const bundle of oracle.requiredBundles) {
+    assert.equal(
+      new Set(bundle.expectedEdgeIds).size,
+      bundle.expectedEdgeIds.length,
+      `${bundle.bundleId} declares each expected edge exactly once`,
+    )
+    assert.equal(
+      bundle.expectedEdgeIds.every((edgeId) => edgeIds.includes(edgeId)),
+      true,
+      `${bundle.bundleId} contains only independent oracle edge IDs`,
+    )
+  }
+  return {
+    digest: sha256(bytes),
+    oracle,
   }
 }
 
@@ -1011,8 +1132,10 @@ function sevenChoicesPrintVariantItem(asset) {
         stem: 'POISONED LEGACY STEM',
         answer: asset.answerKey.answers[questionId]?.answer || '',
         explanation:
-          asset.answerKey.answers[questionId]?.explanation
-          || 'Source-bound explanation fixture',
+          sevenChoicesCoverageOracle.oracle.authorityBoundary
+            .teacherExplanationFixture.textsByQuestionNo[
+              String(asset.content.questions[questionId].questionNo)
+            ],
         options: [{ label: 'A', content: 'POISONED LEGACY OPTION' }],
       })),
     },
@@ -1954,6 +2077,129 @@ async function assertScreenReadingVerticalRhythm(
   return measurements
 }
 
+function sevenChoicesCoverageEdge(edgeId) {
+  const edge = sevenChoicesCoverageOracle.oracle.edges.find(
+    (candidate) => candidate.edgeId === edgeId,
+  )
+  assert.ok(edge, `independent Seven Choices oracle declares ${edgeId}`)
+  return edge
+}
+
+function sevenChoicesTextDigest(value) {
+  return sha256(Buffer.from(normalizedVisibleText(value || ''), 'utf8'))
+}
+
+function recordSevenChoicesEdge(
+  recordCoverage,
+  {
+    bundleId,
+    variant,
+    edgeId,
+    fromIdentity,
+    toIdentity,
+    fromText,
+    toText,
+    actualRatio = null,
+    pageRelation = null,
+    atomic = null,
+  },
+) {
+  if (!recordCoverage) return
+  const edge = sevenChoicesCoverageEdge(edgeId)
+  if (edge.baselineStepRatio !== undefined) {
+    assert.equal(
+      Number.isFinite(actualRatio),
+      true,
+      `${bundleId}/${variant}/${edgeId} records an executable ratio`,
+    )
+  }
+  if (edge.extraBaselineStepRatio !== undefined) {
+    assert.equal(
+      actualRatio,
+      edge.extraBaselineStepRatio,
+      `${bundleId}/${variant}/${edgeId} records zero extra baseline space`,
+    )
+  }
+  if (edge.pageRelation) {
+    assert.equal(
+      pageRelation,
+      edge.pageRelation,
+      `${bundleId}/${variant}/${edgeId} records its exact page relation`,
+    )
+  }
+  assert.equal(
+    typeof fromIdentity === 'string' && fromIdentity.length > 0,
+    true,
+    `${bundleId}/${variant}/${edgeId} records its source-bound from identity`,
+  )
+  assert.equal(
+    typeof toIdentity === 'string' && toIdentity.length > 0,
+    true,
+    `${bundleId}/${variant}/${edgeId} records its source-bound to identity`,
+  )
+  recordCoverage({
+    bundleId,
+    variant,
+    edgeId,
+    fromIdentity,
+    toIdentity,
+    fromTextDigest: sevenChoicesTextDigest(fromText),
+    toTextDigest: sevenChoicesTextDigest(toText),
+    ...(actualRatio === null ? {} : { actualRatio }),
+    ...(pageRelation === null ? {} : { pageRelation }),
+    ...(atomic === null ? {} : { atomic }),
+  })
+}
+
+function assertSevenChoicesObservedCoverage(observations) {
+  const oracle = sevenChoicesCoverageOracle.oracle
+  const expectedBundleIds = oracle.requiredBundles.map(
+    (bundle) => bundle.bundleId,
+  )
+  assert.deepEqual(
+    [...new Set(observations.map((entry) => entry.bundleId))].sort(),
+    [...expectedBundleIds].sort(),
+    'Seven Choices observed coverage exposes exactly every required public-surface bundle',
+  )
+  for (const bundle of oracle.requiredBundles) {
+    const actual = observations.filter(
+      (entry) => entry.bundleId === bundle.bundleId,
+    )
+    assert.deepEqual(
+      [...new Set(actual.map((entry) => entry.variant))].sort(),
+      [...bundle.variants].sort(),
+      `${bundle.bundleId} executes exactly every independent required variant`,
+    )
+    assert.deepEqual(
+      [...new Set(actual.map((entry) => entry.edgeId))].sort(),
+      [...bundle.expectedEdgeIds].sort(),
+      `${bundle.bundleId} observed edge-ID set exactly equals its independent oracle set`,
+    )
+  }
+  const expectedEdgeIds = oracle.edges.map((edge) => edge.edgeId)
+  assert.deepEqual(
+    [...new Set(observations.map((entry) => entry.edgeId))].sort(),
+    [...expectedEdgeIds].sort(),
+    'the complete observed public-artifact ledger exactly equals the independent 22-edge oracle set',
+  )
+  return {
+    schemaVersion: 'seven-choices-observed-coverage-ledger-v1',
+    oraclePath: path.relative(repositoryRoot, sevenChoicesCoverageOraclePath),
+    oracleSha256: sevenChoicesCoverageOracle.digest,
+    edgeIds: [...expectedEdgeIds],
+    bundles: oracle.requiredBundles.map((bundle) => ({
+      bundleId: bundle.bundleId,
+      variants: [...bundle.variants],
+      edgeIds: [...new Set(observations
+        .filter((entry) => entry.bundleId === bundle.bundleId)
+        .map((entry) => entry.edgeId))],
+      observations: observations.filter(
+        (entry) => entry.bundleId === bundle.bundleId,
+      ),
+    })),
+  }
+}
+
 function assertSevenChoicesDomObservation(
   observation,
   label,
@@ -1963,6 +2209,9 @@ function assertSevenChoicesDomObservation(
     wrappedOption = false,
     requireReadingBoundary = true,
     chromePresent = true,
+    bundleId = null,
+    variant = null,
+    recordCoverage = null,
   } = {},
 ) {
   const oracle =
@@ -2062,6 +2311,18 @@ function assertSevenChoicesDomObservation(
     true,
     `${label} preserves an ordered optional-collapse chrome chain`,
   )
+  for (const anchor of sevenChoicesCoverageOracle.oracle.authorityBoundary
+    .chromeAnchors) {
+    const observed = observation.chrome.find(
+      (entry) => entry.role === anchor.role,
+    )
+    if (!observed) continue
+    assert.equal(
+      normalizedVisibleText(observed.text).replace(/[^\p{L}\p{N}]/gu, ''),
+      normalizedVisibleText(anchor.text).replace(/[^\p{L}\p{N}]/gu, ''),
+      `${label} binds ${anchor.role} text to the immutable source PDF`,
+    )
+  }
   if (requireReadingBoundary) {
     assert.equal(
       observation.boundaryGroupId,
@@ -2082,6 +2343,127 @@ function assertSevenChoicesDomObservation(
   )
   const targetStepPx = 24
   const tolerancePx = sevenChoicesRhythm.targets.screen.oneStepTolerancePx
+  const assertRatio = (actualPx, edgeId) => {
+    const edge = sevenChoicesCoverageEdge(edgeId)
+    const tolerance = edge.baselineStepRatio === 2
+      ? sevenChoicesRhythm.targets.screen.twoStepTolerancePx
+      : tolerancePx
+    assert.equal(
+      Math.abs(actualPx - targetStepPx * edge.baselineStepRatio) <= tolerance,
+      true,
+      `${label} ${edgeId} keeps ${edge.baselineStepRatio}x public DOM rhythm: ${JSON.stringify({
+        actualPx,
+        expectedPx: targetStepPx * edge.baselineStepRatio,
+        ...(edgeId === 'chrome_to_passage'
+          ? {
+              chromeBox: observation.chrome.at(-1)?.box,
+              chromeChain: observation.chrome.map((entry) => ({
+                role: entry.role,
+                text: entry.text,
+                box: entry.box,
+              })),
+              passageBox: observation.passageBox,
+              chromeLine: observation.chrome.at(-1)?.lines.at(-1),
+              passageLine: observation.passageLines[0]?.[0],
+            }
+          : {}),
+        ...(edgeId === 'reading_boundary_to_chrome_same_page'
+          ? {
+              readingBoundary: observation.readingBoundary,
+              teacherReadingBoundary: observation.teacherReadingBoundary,
+              firstChrome: observation.chrome[0],
+            }
+          : {}),
+      })}`,
+    )
+    return actualPx / targetStepPx
+  }
+  if (chromePresent) {
+    assert.equal(
+      observation.chrome.every((entry) => entry.lines.length > 0),
+      true,
+      `${label} exposes executable chrome geometry`,
+    )
+    if (requireReadingBoundary) {
+      const boundary = teacher
+        && observation.teacherReadingBoundary.lines.length > 0
+        ? observation.teacherReadingBoundary
+        : observation.readingBoundary
+      if (teacher) {
+        const teacherBoundary =
+          sevenChoicesCoverageOracle.oracle.authorityBoundary
+            .teacherReadingBoundary
+        const expectedText = boundary.role === 'answer_line'
+          ? teacherBoundary.visibleText
+          : teacherBoundary.explanationText
+        assert.equal(
+          normalizedVisibleText(boundary.text)
+            .replace(/[^\p{L}\p{N}]/gu, '')
+            .includes(
+              normalizedVisibleText(expectedText)
+                .replace(/[^\p{L}\p{N}]/gu, ''),
+            ),
+          true,
+          `${label} binds the terminal Reading-D teacher tail to checked-in analysis evidence: ${JSON.stringify({
+            observed: boundary.text,
+            expected: expectedText,
+          })}`,
+        )
+      }
+      assert.equal(
+        boundary.lines.length > 0,
+        true,
+        `${label} exposes the source-bound Reading-D tail geometry`,
+      )
+      const actualPx = label.includes('Print HTML')
+        ? observation.chrome[0].lines[0].center
+          - boundary.lines.at(-1).center
+        : observation.chrome[0].bottom - boundary.bottom
+      recordSevenChoicesEdge(recordCoverage, {
+        bundleId,
+        variant,
+        edgeId: 'reading_boundary_to_chrome_same_page',
+        fromIdentity: boundary.identity,
+        toIdentity: observation.chrome[0].identity,
+        fromText: boundary.text,
+        toText: observation.chrome[0].text,
+        actualRatio: assertRatio(
+          actualPx,
+          'reading_boundary_to_chrome_same_page',
+        ),
+      })
+    }
+    for (let index = 1; index < observation.chrome.length; index += 1) {
+      const previous = observation.chrome[index - 1]
+      const current = observation.chrome[index]
+      const actualPx =
+        current.lines[0].center - previous.lines.at(-1).center
+      recordSevenChoicesEdge(recordCoverage, {
+        bundleId,
+        variant,
+        edgeId: 'chrome_internal',
+        fromIdentity: previous.identity,
+        toIdentity: current.identity,
+        fromText: previous.text,
+        toText: current.text,
+        actualRatio: assertRatio(actualPx, 'chrome_internal'),
+      })
+    }
+    const lastChrome = observation.chrome.at(-1)
+    const actualPx =
+      observation.passageLines[0][0].center
+      - lastChrome.lines.at(-1).center
+    recordSevenChoicesEdge(recordCoverage, {
+      bundleId,
+      variant,
+      edgeId: 'chrome_to_passage',
+      fromIdentity: lastChrome.identity,
+      toIdentity: observation.paragraphIds[0],
+      fromText: lastChrome.text,
+      toText: observation.passageTexts[0],
+      actualRatio: assertRatio(actualPx, 'chrome_to_passage'),
+    })
+  }
   for (const paragraph of observation.passageLines) {
     assert.equal(paragraph.length > 0, true, `${label} has no empty passage role`)
     for (let index = 1; index < paragraph.length; index += 1) {
@@ -2094,7 +2476,55 @@ function assertSevenChoicesDomObservation(
         true,
         `${label} keeps wrapped passage lines on one local baseline step`,
       )
+      recordSevenChoicesEdge(recordCoverage, {
+        bundleId,
+        variant,
+        edgeId: 'passage_line_internal',
+        fromIdentity: observation.paragraphIds[
+          observation.passageLines.indexOf(paragraph)
+        ],
+        toIdentity: observation.paragraphIds[
+          observation.passageLines.indexOf(paragraph)
+        ],
+        fromText: observation.passageTexts[
+          observation.passageLines.indexOf(paragraph)
+        ],
+        toText: observation.passageTexts[
+          observation.passageLines.indexOf(paragraph)
+        ],
+        actualRatio:
+          (paragraph[index].center - paragraph[index - 1].center)
+          / targetStepPx,
+      })
     }
+  }
+  for (let index = 1; index < observation.passageLines.length; index += 1) {
+    const actualPx =
+      observation.passageLines[index][0].center
+      - observation.passageLines[index - 1].at(-1).center
+    recordSevenChoicesEdge(recordCoverage, {
+      bundleId,
+      variant,
+      edgeId: 'paragraph_transition',
+      fromIdentity: observation.paragraphIds[index - 1],
+      toIdentity: observation.paragraphIds[index],
+      fromText: observation.passageTexts[index - 1],
+      toText: observation.passageTexts[index],
+      actualRatio: assertRatio(actualPx, 'paragraph_transition'),
+    })
+  }
+  for (let index = 0; index < observation.blankGeometry.length; index += 1) {
+    recordSevenChoicesEdge(recordCoverage, {
+      bundleId,
+      variant,
+      edgeId: 'inline_blank_no_phantom_space',
+      fromIdentity: observation.blankPairs[index],
+      toIdentity: observation.blankPairs[index],
+      fromText: observation.blankPairs[index],
+      toText: observation.blankPairs[index],
+      actualRatio: 0,
+      atomic: true,
+    })
   }
   const flattenedPassage = observation.passageLines.flat()
   assert.equal(
@@ -2115,6 +2545,18 @@ function assertSevenChoicesDomObservation(
         headingBottom: observation.headingLines[0]?.bottom,
       })}`,
     )
+    recordSevenChoicesEdge(recordCoverage, {
+      bundleId,
+      variant,
+      edgeId: 'passage_to_bank_heading',
+      fromIdentity: observation.paragraphIds.at(-1),
+      toIdentity: `${observation.bankId}:heading`,
+      fromText: observation.passageTexts.at(-1),
+      toText: sevenChoicesSourceOracle.oracle.variants.bankHeadingVisibleText,
+      actualRatio:
+        (observation.headingLines[0].center
+        - flattenedPassage.at(-1).center) / targetStepPx,
+    })
     assert.equal(
       Math.abs(
         observation.optionLines[0][0].bottom
@@ -2127,6 +2569,18 @@ function assertSevenChoicesDomObservation(
         optionBottom: observation.optionLines[0][0].bottom,
       })}`,
     )
+    recordSevenChoicesEdge(recordCoverage, {
+      bundleId,
+      variant,
+      edgeId: 'bank_heading_to_first_option',
+      fromIdentity: `${observation.bankId}:heading`,
+      toIdentity: observation.optionIds[0],
+      fromText: sevenChoicesSourceOracle.oracle.variants.bankHeadingVisibleText,
+      toText: observation.optionTexts[0],
+      actualRatio:
+        (observation.optionLines[0][0].center
+        - observation.headingLines[0].center) / targetStepPx,
+    })
   } else {
     assert.equal(
       Math.abs(
@@ -2143,6 +2597,18 @@ function assertSevenChoicesDomObservation(
           - flattenedPassage.at(-1).bottom,
       })}`,
     )
+    recordSevenChoicesEdge(recordCoverage, {
+      bundleId,
+      variant,
+      edgeId: 'passage_to_first_option',
+      fromIdentity: observation.paragraphIds.at(-1),
+      toIdentity: observation.optionIds[0],
+      fromText: observation.passageTexts.at(-1),
+      toText: observation.optionTexts[0],
+      actualRatio:
+        (observation.optionLines[0][0].center
+        - flattenedPassage.at(-1).center) / targetStepPx,
+    })
   }
   for (const lines of observation.optionLines) {
     assert.equal(lines.length > 0, true, `${label} has no empty option row`)
@@ -2153,6 +2619,19 @@ function assertSevenChoicesDomObservation(
         true,
         `${label} keeps wrapped option lines on one baseline step`,
       )
+      const optionIndex = observation.optionLines.indexOf(lines)
+      recordSevenChoicesEdge(recordCoverage, {
+        bundleId,
+        variant,
+        edgeId: 'bank_option_line_internal',
+        fromIdentity: observation.optionIds[optionIndex],
+        toIdentity: observation.optionIds[optionIndex],
+        fromText: observation.optionTexts[optionIndex],
+        toText: observation.optionTexts[optionIndex],
+        actualRatio:
+          (lines[index].center - lines[index - 1].center) / targetStepPx,
+        atomic: true,
+      })
     }
   }
   for (let index = 1; index < observation.optionLines.length; index += 1) {
@@ -2165,6 +2644,19 @@ function assertSevenChoicesDomObservation(
       true,
       `${label} keeps option-to-option transitions on one baseline step`,
     )
+    recordSevenChoicesEdge(recordCoverage, {
+      bundleId,
+      variant,
+      edgeId: 'bank_option_to_next_option',
+      fromIdentity: observation.optionIds[index - 1],
+      toIdentity: observation.optionIds[index],
+      fromText: observation.optionTexts[index - 1],
+      toText: observation.optionTexts[index],
+      actualRatio:
+        (observation.optionLines[index][0].center
+        - observation.optionLines[index - 1].at(-1).center) / targetStepPx,
+      atomic: true,
+    })
   }
   if (wrappedOption) {
     assert.equal(
@@ -2247,6 +2739,44 @@ function assertSevenChoicesDomObservation(
       sevenChoicesSourceOracle.answerLabels,
       `${label} binds teacher tails to the immutable official-answer source`,
     )
+    assert.equal(
+      observation.teacherTail.length >= oracle.questionBlankPairs.length,
+      true,
+      `${label} exposes executable teacher-tail geometry`,
+    )
+    const firstTail = observation.teacherTail[0]
+    const bankToAnswerPx =
+      firstTail.lines[0].center - observation.optionLines.at(-1).at(-1).center
+    recordSevenChoicesEdge(recordCoverage, {
+      bundleId,
+      variant,
+      edgeId: 'bank_to_answer',
+      fromIdentity: observation.optionIds.at(-1),
+      toIdentity: firstTail.identity,
+      fromText: observation.optionTexts.at(-1),
+      toText: firstTail.text,
+      actualRatio: assertRatio(bankToAnswerPx, 'bank_to_answer'),
+    })
+    for (let index = 1; index < observation.teacherTail.length; index += 1) {
+      const previous = observation.teacherTail[index - 1]
+      const current = observation.teacherTail[index]
+      const actualPx = current.lines[0].center - previous.lines.at(-1).center
+      const edgeId =
+        previous.role === 'answer_line'
+        && current.role === 'explanation_line'
+          ? 'answer_to_explanation'
+          : 'teacher_tail_internal'
+      recordSevenChoicesEdge(recordCoverage, {
+        bundleId,
+        variant,
+        edgeId,
+        fromIdentity: previous.identity,
+        toIdentity: current.identity,
+        fromText: previous.text,
+        toText: current.text,
+        actualRatio: assertRatio(actualPx, edgeId),
+      })
+    }
   } else {
     assert.equal(
       observation.answerCount,
@@ -2254,10 +2784,42 @@ function assertSevenChoicesDomObservation(
       `${label} Student/plain artifact hides answer tails`,
     )
   }
+  assert.equal(
+    normalizedVisibleText(observation.following.text)
+      .replace(/[^\p{L}\p{N}]/gu, ''),
+    normalizedVisibleText(
+      sevenChoicesSourceOracle.oracle.sourceExtraction
+        .followingSectionMarker,
+    ).replace(/[^\p{L}\p{N}]/gu, ''),
+    `${label} binds the following-section text to the immutable source PDF`,
+  )
+  const tail = teacher
+    ? observation.teacherTail.at(-1)
+    : {
+        identity: observation.optionIds.at(-1),
+        text: observation.optionTexts.at(-1),
+        lines: observation.optionLines.at(-1),
+      }
+  const followingPx =
+    observation.following.lines[0].center - tail.lines.at(-1).center
+  const followingEdgeId = teacher
+    ? 'teacher_tail_to_next_section_same_page'
+    : 'student_bank_to_next_section_same_page'
+  recordSevenChoicesEdge(recordCoverage, {
+    bundleId,
+    variant,
+    edgeId: followingEdgeId,
+    fromIdentity: tail.identity,
+    toIdentity: observation.following.identity,
+    fromText: tail.text,
+    toText: observation.following.text,
+    actualRatio: assertRatio(followingPx, followingEdgeId),
+  })
 }
 
 async function sevenChoicesDomObservation(page, groupSelector) {
-  return page.evaluate(({ groupSelector, knownRoles }) => {
+  const identities = sevenChoicesSourceOracle.oracle.publicIdentities
+  return page.evaluate(({ groupSelector, knownRoles, identities }) => {
     const group = document.querySelector(groupSelector)
     if (!group) return null
     const lineRects = (element) => {
@@ -2286,7 +2848,7 @@ async function sevenChoicesDomObservation(page, groupSelector) {
           }
         }
       }
-      return rects.sort((left, right) => left.bottom - right.bottom)
+      const lines = rects.sort((left, right) => left.bottom - right.bottom)
         .reduce((lines, rect) => {
           const prior = lines.at(-1)
           if (!prior || Math.abs(rect.bottom - prior.bottom) > 1) {
@@ -2298,10 +2860,47 @@ async function sevenChoicesDomObservation(page, groupSelector) {
           }
           return lines
         }, [])
+      const lineHeight = Number.parseFloat(
+        getComputedStyle(element).lineHeight || '0',
+      )
+      const elementTop = element.getBoundingClientRect().top
+      return lines.map((line, index) => ({
+        ...line,
+        center:
+          Number.isFinite(lineHeight) && lineHeight > 0
+            ? elementTop + lineHeight * (index + 0.5)
+            : line.bottom,
+      }))
+    }
+    const textBottom = (element) => {
+      if (!element) return null
+      const range = document.createRange()
+      range.selectNodeContents(element)
+      const bottoms = [...range.getClientRects()]
+        .filter((rect) => rect.width > 0 && rect.height > 0)
+        .map((rect) => rect.bottom)
+      return bottoms.length > 0 ? Math.max(...bottoms) : null
     }
     const roleElements = [...document.querySelectorAll(
       '[data-canonical-seven-choices-rhythm-role]',
     )]
+    const chromeElements = roleElements.filter((element) =>
+      element.hasAttribute('data-canonical-seven-choices-chrome')
+      || element.getAttribute('data-canonical-seven-choices-preceding-for'))
+    const readingBoundary = document.querySelector(
+      `[data-canonical-reading-before-section][data-canonical-option-id="${identities.readingBoundary.optionId}"], `
+      + `[data-paper-browse-anchor="${identities.readingBoundary.groupId}"] `
+      + `[data-canonical-option-id="${identities.readingBoundary.optionId}"], `
+      + `[data-canonical-group-id="${identities.readingBoundary.groupId}"] `
+      + `[data-canonical-option-id="${identities.readingBoundary.optionId}"]`,
+    )
+    const teacherReadingBoundary = document.querySelector(
+      `[data-canonical-question-id="${identities.readingBoundary.questionId}"] `
+      + '[data-canonical-reading-before-section]',
+    )
+    const following = document.querySelector(
+      '[data-canonical-seven-choices-following-for]',
+    )
     const bank = group.querySelector('[data-canonical-bank-id]')
     const bankRegion = bank?.closest('.ps-option-bank-region, .canonical-option-bank-region')
     const optionElements = [...group.querySelectorAll(
@@ -2332,6 +2931,83 @@ async function sevenChoicesDomObservation(page, groupSelector) {
       passageLines: [...group.querySelectorAll(
         '[data-canonical-seven-choices-rhythm-role="passage_body_line"]',
       )].map(lineRects),
+      passageBox: passageContainer
+        ? {
+            top: passageContainer.getBoundingClientRect().top,
+            bottom: passageContainer.getBoundingClientRect().bottom,
+            marginTop: Number.parseFloat(
+              getComputedStyle(passageContainer).marginTop,
+            ),
+            marginBottom: Number.parseFloat(
+              getComputedStyle(passageContainer).marginBottom,
+            ),
+          }
+        : null,
+      readingBoundary: {
+        identity: identities.readingBoundary.optionId,
+        text: readingBoundary?.textContent || '',
+        lines: lineRects(readingBoundary),
+        bottom: textBottom(readingBoundary),
+        box: readingBoundary
+          ? {
+              top: readingBoundary.getBoundingClientRect().top,
+              bottom: readingBoundary.getBoundingClientRect().bottom,
+              marginTop: Number.parseFloat(
+                getComputedStyle(readingBoundary).marginTop,
+              ),
+              marginBottom: Number.parseFloat(
+                getComputedStyle(readingBoundary).marginBottom,
+              ),
+            }
+          : null,
+      },
+      teacherReadingBoundary: {
+        identity:
+          `${identities.readingBoundary.questionId}:${
+            teacherReadingBoundary?.getAttribute(
+              'data-canonical-reading-rhythm-role',
+            ) || 'teacher_tail'
+          }`,
+        role: teacherReadingBoundary?.getAttribute(
+          'data-canonical-reading-rhythm-role',
+        ),
+        text: teacherReadingBoundary?.textContent || '',
+        lines: lineRects(teacherReadingBoundary),
+        bottom: textBottom(teacherReadingBoundary),
+        box: teacherReadingBoundary
+          ? {
+              top: teacherReadingBoundary.getBoundingClientRect().top,
+              bottom: teacherReadingBoundary.getBoundingClientRect().bottom,
+              marginTop: Number.parseFloat(
+                getComputedStyle(teacherReadingBoundary).marginTop,
+              ),
+              marginBottom: Number.parseFloat(
+                getComputedStyle(teacherReadingBoundary).marginBottom,
+              ),
+            }
+          : null,
+      },
+      chrome: chromeElements.map((element, index) => ({
+        identity:
+          element.getAttribute('data-paper-browse-anchor')
+          || element.id
+          || `seven-choices-chrome-${index}`,
+        role: element.getAttribute(
+          'data-canonical-seven-choices-rhythm-role',
+        ),
+        text: element.textContent || '',
+        lines: lineRects(element),
+        bottom: textBottom(element),
+        box: {
+          top: element.getBoundingClientRect().top,
+          bottom: element.getBoundingClientRect().bottom,
+          marginTop: Number.parseFloat(getComputedStyle(element).marginTop),
+          marginBottom: Number.parseFloat(
+            getComputedStyle(element).marginBottom,
+          ),
+          lineHeight: Number.parseFloat(getComputedStyle(element).lineHeight),
+        },
+      })),
       blankPairs: [...group.querySelectorAll(
         '[data-canonical-seven-choices-rhythm-role="inline_blank_marker"]',
       )].map((element) => element.getAttribute('data-canonical-pair')),
@@ -2414,14 +3090,27 @@ async function sevenChoicesDomObservation(page, groupSelector) {
       answerTexts: [...group.querySelectorAll(
         '[data-canonical-seven-choices-rhythm-role="answer_line"]',
       )].map((element) => element.textContent || ''),
-      chromeRoles: roleElements
-        .filter((element) =>
-          element.hasAttribute('data-canonical-seven-choices-chrome')
-          || element.getAttribute(
-            'data-canonical-seven-choices-preceding-for',
-          ))
-        .map((element) =>
-          element.getAttribute('data-canonical-seven-choices-rhythm-role')),
+      teacherTail: [...group.querySelectorAll(
+        [
+          '[data-canonical-seven-choices-rhythm-role="answer_line"]',
+          '[data-canonical-seven-choices-rhythm-role="explanation_line"]',
+        ].join(','),
+      )].map((element, index) => ({
+        identity:
+          element.getAttribute('data-canonical-question-id')
+          || `${identities.sevenChoices.questionBlankPairs[
+            Math.floor(index / 2)
+          ]?.questionId || 'unknown-question'}:${element.getAttribute(
+            'data-canonical-seven-choices-rhythm-role',
+          )}`,
+        role: element.getAttribute(
+          'data-canonical-seven-choices-rhythm-role',
+        ),
+        text: element.textContent || '',
+        lines: lineRects(element),
+      })),
+      chromeRoles: chromeElements.map((element) =>
+        element.getAttribute('data-canonical-seven-choices-rhythm-role')),
       boundaryGroupId: document.querySelector(
         '[data-canonical-seven-choices-reading-boundary-group-id]',
       )?.getAttribute(
@@ -2433,6 +3122,16 @@ async function sevenChoicesDomObservation(page, groupSelector) {
       followingFor: document.querySelector(
         '[data-canonical-seven-choices-following-for]',
       )?.getAttribute('data-canonical-seven-choices-following-for'),
+      following: {
+        identity:
+          following?.getAttribute('data-paper-browse-anchor')
+          || following?.getAttribute(
+            'data-canonical-seven-choices-section-id',
+          )
+          || 'seven-choices-following-section',
+        text: following?.textContent || '',
+        lines: lineRects(following),
+      },
       phantomRoleCount: roleElements.filter((element) =>
         !knownRoles.includes(element.getAttribute(
           'data-canonical-seven-choices-rhythm-role',
@@ -2444,13 +3143,20 @@ async function sevenChoicesDomObservation(page, groupSelector) {
   }, {
     groupSelector,
     knownRoles: Object.values(sevenChoicesRhythm.semanticRoleClasses).flat(),
+    identities,
   })
 }
 
 async function assertScreenSevenChoicesGoldenGeometry(
   page,
   label,
-  { wrappedOption = false, headingPresent = false } = {},
+  {
+    wrappedOption = false,
+    headingPresent = false,
+    bundleId = null,
+    variant = null,
+    recordCoverage = null,
+  } = {},
 ) {
   const groupId =
     sevenChoicesSourceOracle.oracle.publicIdentities.sevenChoices.groupId
@@ -2461,6 +3167,9 @@ async function assertScreenSevenChoicesGoldenGeometry(
   assertSevenChoicesDomObservation(observation, label, {
     wrappedOption,
     headingPresent,
+    bundleId,
+    variant,
+    recordCoverage,
   })
   return observation
 }
@@ -2475,6 +3184,9 @@ async function assertPrintHtmlSevenChoicesGoldenGeometry(
     wrappedOption = false,
     requireReadingBoundary = true,
     chromePresent = true,
+    bundleId = null,
+    variant = null,
+    recordCoverage = null,
   } = {},
 ) {
   await page.setContent(html, { waitUntil: 'load' })
@@ -2491,6 +3203,9 @@ async function assertPrintHtmlSevenChoicesGoldenGeometry(
     wrappedOption,
     requireReadingBoundary,
     chromePresent,
+    bundleId,
+    variant,
+    recordCoverage,
   })
   return observation
 }
@@ -3379,6 +4094,9 @@ function assertPdfSevenChoicesGoldenGeometry(
     headingText = null,
     requireWrappedOption = false,
     requireCrossPageBank = false,
+    bundleId = null,
+    variant = null,
+    recordCoverage = null,
   } = {},
 ) {
   const words = pdfWordsWithBoxes(pdfPath)
@@ -3433,6 +4151,7 @@ function assertPdfSevenChoicesGoldenGeometry(
       textLeft: optionWords[0].xMin,
       textRight: Math.max(...optionWords.map((word) => word.xMax)),
       lineCenters: optionLines.map((line) => line.centerY),
+      lines: optionLines,
       continuationLefts,
     }
   })
@@ -3495,6 +4214,27 @@ function assertPdfSevenChoicesGoldenGeometry(
         true,
         `${label} keeps wrapped ${row.optionId} lines on one PDF baseline step`,
       )
+      recordSevenChoicesEdge(recordCoverage, {
+        bundleId,
+        variant,
+        edgeId: 'bank_option_line_internal',
+        fromIdentity: row.optionId,
+        toIdentity: row.optionId,
+        fromText: sevenChoicesSourceOracle.bankOptions.find(
+          (_option, optionIndex) =>
+            sevenChoicesSourceOracle.oracle.publicIdentities.sevenChoices
+              .optionIds[optionIndex] === row.optionId,
+        )?.text,
+        toText: sevenChoicesSourceOracle.bankOptions.find(
+          (_option, optionIndex) =>
+            sevenChoicesSourceOracle.oracle.publicIdentities.sevenChoices
+              .optionIds[optionIndex] === row.optionId,
+        )?.text,
+        actualRatio:
+          (row.lineCenters[index] - row.lineCenters[index - 1])
+          / sevenChoicesRhythm.targets.printPdf.baselineStepPt,
+        atomic: true,
+      })
     }
   }
   assert.equal(
@@ -3526,6 +4266,36 @@ function assertPdfSevenChoicesGoldenGeometry(
         true,
         `${label} keeps same-page option transitions on one baseline step`,
       )
+      recordSevenChoicesEdge(recordCoverage, {
+        bundleId,
+        variant,
+        edgeId: 'bank_option_to_next_option',
+        fromIdentity: prior.optionId,
+        toIdentity: current.optionId,
+        fromText: sevenChoicesSourceOracle.bankOptions[index - 1].text,
+        toText: sevenChoicesSourceOracle.bankOptions[index].text,
+        actualRatio:
+          (current.lineCenters[0] - prior.lineCenters.at(-1))
+          / sevenChoicesRhythm.targets.printPdf.baselineStepPt,
+        atomic: true,
+      })
+    } else {
+      assert.equal(
+        current.lines[0].yMax < 130,
+        true,
+        `${label} starts the same-bank continuation at the next A4 page head`,
+      )
+      recordSevenChoicesEdge(recordCoverage, {
+        bundleId,
+        variant,
+        edgeId: 'bank_between_options_cross_page',
+        fromIdentity: prior.optionId,
+        toIdentity: current.optionId,
+        fromText: sevenChoicesSourceOracle.bankOptions[index - 1].text,
+        toText: sevenChoicesSourceOracle.bankOptions[index].text,
+        pageRelation: 'next_page_continuation',
+        atomic: true,
+      })
     }
   }
   if (headingText) {
@@ -3538,28 +4308,134 @@ function assertPdfSevenChoicesGoldenGeometry(
   return rows
 }
 
+function assertPdfSevenChoicesObservedEdge({
+  from,
+  to,
+  edgeId,
+  fromIdentity,
+  toIdentity,
+  fromText,
+  toText,
+  label,
+  bundleId,
+  variant,
+  recordCoverage,
+  atomic = null,
+}) {
+  assert.ok(
+    from && to,
+    `${label} ${edgeId} has both public PDF role boxes: ${JSON.stringify({
+      fromIdentity,
+      toIdentity,
+      from,
+      to,
+    })}`,
+  )
+  const edge = sevenChoicesCoverageEdge(edgeId)
+  if (edge.pageRelation) {
+    assert.equal(
+      to.page,
+      from.page + 1,
+      `${label} ${edgeId} continues on the adjacent exact-A4 page`,
+    )
+    assert.equal(
+      to.yMax < 130,
+      true,
+      `${label} ${edgeId} starts at the next exact-A4 page head`,
+    )
+    recordSevenChoicesEdge(recordCoverage, {
+      bundleId,
+      variant,
+      edgeId,
+      fromIdentity,
+      toIdentity,
+      fromText,
+      toText,
+      pageRelation: edge.pageRelation,
+      atomic,
+    })
+    return
+  }
+  assert.equal(
+    to.page,
+    from.page,
+    `${label} ${edgeId} has an executable same-page PDF-point ratio: ${JSON.stringify({
+      fromIdentity,
+      toIdentity,
+      fromPage: from.page,
+      toPage: to.page,
+      fromText,
+      toText,
+    })}`,
+  )
+  const distancePt = to.centerY - from.centerY
+  const targetPt =
+    sevenChoicesRhythm.targets.printPdf.baselineStepPt
+    * edge.baselineStepRatio
+  const tolerancePt = edge.baselineStepRatio === 2
+    ? sevenChoicesRhythm.targets.printPdf.twoStepTolerancePt
+    : sevenChoicesRhythm.targets.printPdf.oneStepTolerancePt
+  assert.equal(
+    Math.abs(distancePt - targetPt) <= tolerancePt + 0.01,
+    true,
+    `${label} ${edgeId} keeps ${edge.baselineStepRatio}x in PDF points: ${JSON.stringify({
+      distancePt,
+      targetPt,
+      from: {
+        page: from.page,
+        yMin: from.yMin,
+        yMax: from.yMax,
+        centerY: from.centerY,
+        text: from.text,
+      },
+      to: {
+        page: to.page,
+        yMin: to.yMin,
+        yMax: to.yMax,
+        centerY: to.centerY,
+        text: to.text,
+      },
+    })}`,
+  )
+  recordSevenChoicesEdge(recordCoverage, {
+    bundleId,
+    variant,
+    edgeId,
+    fromIdentity,
+    toIdentity,
+    fromText,
+    toText,
+    actualRatio:
+      distancePt / sevenChoicesRhythm.targets.printPdf.baselineStepPt,
+    atomic,
+  })
+}
+
 function assertPdfSevenChoicesRoleGraph(
   pdfPath,
   label,
   {
     teacher = false,
+    headingText = null,
     boundaryRelation = 'same_page',
     passageRelation = 'cross_page',
     passageBankRelation = 'same_page',
     followingRelation = 'same_page',
+    bundleId = null,
+    variant = null,
+    recordCoverage = null,
   } = {},
 ) {
   const words = pdfWordsWithBoxes(pdfPath)
+  const lines = pdfRoleLines(words)
+  const lineByWordIndex = new Map(lines.flatMap((line) =>
+    line.wordIndexes.map((wordIndex) => [wordIndex, line])))
   const locate = (
     value,
     role,
     { first = false, tokenLimit } = {},
   ) => {
-    const tokens = sourceLexicalTokens(value)
-      .map(normalizedPdfToken)
-      .filter(Boolean)
-      .slice(0, tokenLimit)
-    const indexes = exactPdfSequenceIndexes(words, tokens)
+    const indexes = collapsedPdfSequenceIndexes(words, value, tokenLimit)
     assert.equal(
       indexes.length > 0,
       true,
@@ -3574,22 +4450,100 @@ function assertPdfSevenChoicesRoleGraph(
     }
     return indexes[0]
   }
+  const lineFor = (wordIndex) => lineByWordIndex.get(wordIndex)
   const readingTailIndex = locate(
     sevenChoicesSourceOracle.oracle.sourceExtraction.readingBoundaryEndMarker,
     'Reading-D tail',
   )
-  const passageStartIndex = locate(
-    sevenChoicesSourceOracle.oracle.sourceExtraction.passageStartMarker,
-    'Seven Choices passage start',
+  const chrome = sevenChoicesCoverageOracle.oracle.authorityBoundary
+    .chromeAnchors.map((anchor) => {
+      const wordIndex = locate(anchor.text, anchor.role, { tokenLimit: 5 })
+      return {
+        ...anchor,
+        wordIndex,
+        line: lineFor(wordIndex),
+      }
+    })
+  let readingBoundaryLine = lineFor(readingTailIndex)
+  let readingBoundaryIdentity =
+    sevenChoicesSourceOracle.oracle.publicIdentities.readingBoundary.optionId
+  let readingBoundaryText =
+    sevenChoicesSourceOracle.oracle.sourceExtraction.readingBoundaryEndMarker
+  if (teacher) {
+    const teacherBoundary =
+      sevenChoicesCoverageOracle.oracle.authorityBoundary
+        .teacherReadingBoundary
+    const explanationBoundaryIndexes = collapsedPdfSequenceIndexes(
+      words,
+      teacherBoundary.explanationText,
+    ).filter(
+      (wordIndex) =>
+        wordIndex > readingTailIndex && wordIndex < chrome[0].wordIndex,
+    )
+    const answerBoundaryIndexes = collapsedPdfSequenceIndexes(
+      words,
+      teacherBoundary.visibleText,
+    ).filter(
+      (wordIndex) =>
+        wordIndex > readingTailIndex && wordIndex < chrome[0].wordIndex,
+    )
+    const usesExplanation = explanationBoundaryIndexes.length === 1
+    const boundaryIndexes = usesExplanation
+      ? explanationBoundaryIndexes
+      : answerBoundaryIndexes
+    assert.equal(
+      boundaryIndexes.length,
+      1,
+      `${label} locates the official-answer-bound Teacher Reading-D tail`,
+    )
+    readingBoundaryLine = lineFor(boundaryIndexes[0])
+    readingBoundaryIdentity = usesExplanation
+      ? teacherBoundary.explanationIdentity
+      : teacherBoundary.identity
+    readingBoundaryText = usesExplanation
+      ? teacherBoundary.explanationText
+      : teacherBoundary.visibleText
+  }
+  const paragraphs = sevenChoicesCoverageOracle.oracle.authorityBoundary
+    .passageParagraphAnchors.map((anchor) => {
+      const start = locate(
+        anchor.start,
+        `${anchor.paragraphId} start`,
+        { tokenLimit: 5 },
+      )
+      const endTokens = exactPdfTokens(anchor.end)
+      const end = uniquePdfSequenceIndex(
+        words,
+        endTokens,
+        `${label} ${anchor.paragraphId} end`,
+      ) + endTokens.length - 1
+      assert.equal(
+        end >= start,
+        true,
+        `${label} ${anchor.paragraphId} preserves its source-bound range`,
+      )
+      return {
+        ...anchor,
+        start,
+        end,
+        lines: pdfLinesForWordRange(
+          lines,
+          lineByWordIndex,
+          start,
+          end + 1,
+        ),
+      }
+    })
+  assert.equal(
+    paragraphs.every(
+      (paragraph, index) =>
+        index === 0 || paragraph.start > paragraphs[index - 1].end,
+    ),
+    true,
+    `${label} preserves exact source-bound paragraph identity/order`,
   )
-  const passageEndTokens = sourceLexicalTokens(
-    sevenChoicesSourceOracle.passageText,
-  ).map(normalizedPdfToken).filter(Boolean).slice(-8)
-  const passageEndIndex = uniquePdfSequenceIndex(
-    words,
-    passageEndTokens,
-    `${label} source-bound Seven Choices passage end`,
-  )
+  const passageStartIndex = paragraphs[0].start
+  const passageEndIndex = paragraphs.at(-1).end
   const bankRows = sevenChoicesSourceOracle.bankOptions.map(
     ({ text }, index) => {
       const optionId =
@@ -3601,9 +4555,17 @@ function assertPdfSevenChoicesRoleGraph(
         `${label} ${optionId} source text`,
       )
       return {
+        optionId,
+        text,
         start,
         end: start + exactPdfTokens(text).length - 1,
         page: words[start].page,
+        lines: pdfLinesForWordRange(
+          lines,
+          lineByWordIndex,
+          start - 1,
+          start + exactPdfTokens(text).length,
+        ),
       }
     },
   )
@@ -3620,21 +4582,120 @@ function assertPdfSevenChoicesRoleGraph(
     true,
     `${label} preserves the source-bound Reading-D → passage → A-G → following-section order`,
   )
-  const relation = (leftPage, rightPage, expected, edgeLabel) => {
+  const observe = (edgeId, from, to, identitiesAndText = {}) =>
+    assertPdfSevenChoicesObservedEdge({
+      from,
+      to,
+      edgeId,
+      label,
+      bundleId,
+      variant,
+      recordCoverage,
+      ...identitiesAndText,
+    })
+  observe(
+    boundaryRelation === 'same_page'
+      ? 'reading_boundary_to_chrome_same_page'
+      : 'reading_boundary_to_chrome_cross_page',
+    readingBoundaryLine,
+    chrome[0].line,
+    {
+      fromIdentity: readingBoundaryIdentity,
+      toIdentity: chrome[0].identity,
+      fromText: readingBoundaryText,
+      toText: chrome[0].text,
+    },
+  )
+  for (let index = 1; index < chrome.length; index += 1) {
+    observe('chrome_internal', chrome[index - 1].line, chrome[index].line, {
+      fromIdentity: chrome[index - 1].identity,
+      toIdentity: chrome[index].identity,
+      fromText: chrome[index - 1].text,
+      toText: chrome[index].text,
+    })
+  }
+  observe('chrome_to_passage', chrome.at(-1).line, paragraphs[0].lines[0], {
+    fromIdentity: chrome.at(-1).identity,
+    toIdentity: paragraphs[0].paragraphId,
+    fromText: chrome.at(-1).text,
+    toText: paragraphs[0].start,
+  })
+
+  for (const paragraph of paragraphs) {
     assert.equal(
-      expected === 'same_page'
-        ? rightPage === leftPage
-        : rightPage === leftPage + 1,
+      paragraph.lines.length > 0,
       true,
-      `${label} executes ${edgeLabel} as ${expected}`,
+      `${label} ${paragraph.paragraphId} exposes PDF lines`,
+    )
+    for (let index = 1; index < paragraph.lines.length; index += 1) {
+      const previous = paragraph.lines[index - 1]
+      const current = paragraph.lines[index]
+      observe(
+        current.page === previous.page
+          ? 'passage_line_internal'
+          : 'same_passage_cross_page',
+        previous,
+        current,
+        {
+          fromIdentity: paragraph.paragraphId,
+          toIdentity: paragraph.paragraphId,
+          fromText: paragraph.start,
+          toText: paragraph.end,
+        },
+      )
+    }
+  }
+  for (let index = 1; index < paragraphs.length; index += 1) {
+    observe(
+      'paragraph_transition',
+      paragraphs[index - 1].lines.at(-1),
+      paragraphs[index].lines[0],
+      {
+        fromIdentity: paragraphs[index - 1].paragraphId,
+        toIdentity: paragraphs[index].paragraphId,
+        fromText: paragraphs[index - 1].end,
+        toText: paragraphs[index].start,
+      },
     )
   }
-  relation(
-    words[readingTailIndex].page,
-    words[passageStartIndex].page,
-    boundaryRelation,
-    'Reading-D boundary',
-  )
+  for (const [index, questionNo] of sevenChoicesSourceOracle.oracle
+    .sourceSemantics.blankNumbers.entries()) {
+    const matches = words.flatMap((word, wordIndex) => {
+      if (!new RegExp(`^${questionNo}(?:\\D|$)`, 'u').test(word.text)) {
+        return []
+      }
+      const blankLine = lineFor(wordIndex)
+      const paragraph = paragraphs.find((candidate) =>
+        candidate.lines.some((line) =>
+          line.page === blankLine?.page
+          && Math.abs(line.centerY - blankLine.centerY) <= 2.5))
+      return paragraph ? [{ wordIndex, paragraph }] : []
+    })
+    assert.equal(
+      matches.length,
+      1,
+      `${label} locates source-bound inline Blank ${questionNo} exactly once: ${JSON.stringify(
+        words
+          .filter((word) => /\d/u.test(word.text))
+          .map(({ wordIndex, text, page }) => ({ wordIndex, text, page })),
+      )}`,
+    )
+    const [{ paragraph }] = matches
+    assert.ok(paragraph, `${label} binds Blank ${questionNo} to a paragraph`)
+    recordSevenChoicesEdge(recordCoverage, {
+      bundleId,
+      variant,
+      edgeId: 'inline_blank_no_phantom_space',
+      fromIdentity:
+        sevenChoicesSourceOracle.oracle.publicIdentities.sevenChoices
+          .questionBlankPairs[index].blankId,
+      toIdentity: paragraph.paragraphId,
+      fromText: String(questionNo),
+      toText: paragraph.start,
+      actualRatio: 0,
+      atomic: true,
+    })
+  }
   assert.equal(
     passageRelation === 'cross_page'
       ? words[passageEndIndex].page > words[passageStartIndex].page
@@ -3642,12 +4703,81 @@ function assertPdfSevenChoicesRoleGraph(
     true,
     `${label} executes same-passage ${passageRelation}`,
   )
-  relation(
-    words[passageEndIndex].page,
-    bankRows[0].page,
-    passageBankRelation,
-    'passage-to-bank',
-  )
+  if (headingText) {
+    const headingIndex = locate(headingText, 'optional bank heading')
+    observe(
+      'passage_to_bank_heading',
+      lineFor(passageEndIndex),
+      lineFor(headingIndex),
+      {
+        fromIdentity: paragraphs.at(-1).paragraphId,
+        toIdentity:
+          `${sevenChoicesSourceOracle.oracle.publicIdentities.sevenChoices.bankId}:heading`,
+        fromText: paragraphs.at(-1).end,
+        toText: headingText,
+      },
+    )
+    observe(
+      'bank_heading_to_first_option',
+      lineFor(headingIndex),
+      bankRows[0].lines[0],
+      {
+        fromIdentity:
+          `${sevenChoicesSourceOracle.oracle.publicIdentities.sevenChoices.bankId}:heading`,
+        toIdentity: bankRows[0].optionId,
+        fromText: headingText,
+        toText: bankRows[0].text,
+      },
+    )
+  } else {
+    observe(
+      passageBankRelation === 'same_page'
+        ? 'passage_to_first_option'
+        : 'passage_to_bank_cross_page',
+      lineFor(passageEndIndex),
+      bankRows[0].lines[0],
+      {
+        fromIdentity: paragraphs.at(-1).paragraphId,
+        toIdentity: bankRows[0].optionId,
+        fromText: paragraphs.at(-1).end,
+        toText: bankRows[0].text,
+      },
+    )
+  }
+  for (const row of bankRows) {
+    for (let index = 1; index < row.lines.length; index += 1) {
+      observe(
+        'bank_option_line_internal',
+        row.lines[index - 1],
+        row.lines[index],
+        {
+          fromIdentity: row.optionId,
+          toIdentity: row.optionId,
+          fromText: row.text,
+          toText: row.text,
+          atomic: true,
+        },
+      )
+    }
+  }
+  for (let index = 1; index < bankRows.length; index += 1) {
+    const previous = bankRows[index - 1]
+    const current = bankRows[index]
+    observe(
+      current.page === previous.page
+        ? 'bank_option_to_next_option'
+        : 'bank_between_options_cross_page',
+      previous.lines.at(-1),
+      current.lines[0],
+      {
+        fromIdentity: previous.optionId,
+        toIdentity: current.optionId,
+        fromText: previous.text,
+        toText: current.text,
+        atomic: true,
+      },
+    )
+  }
   const answerIndexes = words.flatMap((word, wordIndex) =>
     wordIndex > bankRows.at(-1).end
     && wordIndex < followingIndex
@@ -3680,16 +4810,114 @@ function assertPdfSevenChoicesRoleGraph(
       `${label} Student PDF has no teacher tail`,
     )
   }
+  const teacherTail = []
+  if (teacher) {
+    for (let index = 0; index < answerIndexes.length; index += 1) {
+      const answerIndex = answerIndexes[index]
+      const answerLine = lineFor(answerIndex)
+      assert.equal(
+        answerLine.text.includes(sevenChoicesSourceOracle.answerLabels[index]),
+        true,
+        `${label} binds answer ${index + 1} to the official-answer source`,
+      )
+      teacherTail.push({
+        wordIndex: answerIndex,
+        identity:
+          `${sevenChoicesSourceOracle.oracle.publicIdentities.sevenChoices
+            .questionBlankPairs[index].questionId}:answer_line`,
+        role: 'answer_line',
+        text: answerLine.text,
+        line: answerLine,
+      })
+      if (explanationIndexes[index] !== undefined) {
+        const explanationLine = lineFor(explanationIndexes[index])
+        const fixtureText =
+          sevenChoicesCoverageOracle.oracle.authorityBoundary
+            .teacherExplanationFixture.textsByQuestionNo[
+              String(sevenChoicesSourceOracle.oracle.sourceSemantics
+                .answerQuestionNumbers[index])
+            ]
+        assert.equal(
+          normalizedVisibleText(explanationLine.text)
+            .replace(/[^\p{L}\p{N}]/gu, '')
+            .includes(
+              normalizedVisibleText(fixtureText)
+                .replace(/[^\p{L}\p{N}]/gu, ''),
+          ),
+          true,
+          `${label} binds explanation ${index + 1} to checked-in observation evidence: ${JSON.stringify({
+            observed: explanationLine.text,
+            expected: fixtureText,
+          })}`,
+        )
+        teacherTail.push({
+          wordIndex: explanationIndexes[index],
+          identity:
+            `${sevenChoicesSourceOracle.oracle.publicIdentities.sevenChoices
+              .questionBlankPairs[index].questionId}:explanation_line`,
+          role: 'explanation_line',
+          text: explanationLine.text,
+          line: explanationLine,
+        })
+      }
+    }
+    teacherTail.sort((left, right) => left.wordIndex - right.wordIndex)
+    observe(
+      'bank_to_answer',
+      bankRows.at(-1).lines.at(-1),
+      teacherTail[0].line,
+      {
+        fromIdentity: bankRows.at(-1).optionId,
+        toIdentity: teacherTail[0].identity,
+        fromText: bankRows.at(-1).text,
+        toText: teacherTail[0].text,
+      },
+    )
+    for (let index = 1; index < teacherTail.length; index += 1) {
+      const previous = teacherTail[index - 1]
+      const current = teacherTail[index]
+      observe(
+        previous.role === 'answer_line'
+        && current.role === 'explanation_line'
+          ? 'answer_to_explanation'
+          : 'teacher_tail_internal',
+        previous.line,
+        current.line,
+        {
+          fromIdentity: previous.identity,
+          toIdentity: current.identity,
+          fromText: previous.text,
+          toText: current.text,
+        },
+      )
+    }
+  }
   const tailIndex = teacher
     ? explanationIndexes.at(-1) ?? answerIndexes.at(-1)
     : bankRows.at(-1).end
-  relation(
-    words[tailIndex].page,
-    words[followingIndex].page,
-    followingRelation,
-    teacher
-      ? 'teacher-tail-to-following-section'
-      : 'student-bank-to-following-section',
+  const followingEdgeId = teacher
+    ? followingRelation === 'same_page'
+      ? 'teacher_tail_to_next_section_same_page'
+      : 'teacher_tail_to_next_section_cross_page'
+    : followingRelation === 'same_page'
+      ? 'student_bank_to_next_section_same_page'
+      : 'student_bank_to_next_section_cross_page'
+  observe(
+    followingEdgeId,
+    lineFor(tailIndex),
+    lineFor(followingIndex),
+    {
+      fromIdentity: teacher
+        ? teacherTail.at(-1).identity
+        : bankRows.at(-1).optionId,
+      toIdentity: 'source:following-section',
+      fromText: teacher
+        ? teacherTail.at(-1).text
+        : bankRows.at(-1).text,
+      toText:
+        sevenChoicesSourceOracle.oracle.sourceExtraction
+          .followingSectionMarker,
+    },
   )
   return {
     readingTailPage: words[readingTailIndex].page,
@@ -3707,6 +4935,143 @@ function exactPdfSequenceIndexes(words, tokens, startIndex = 0) {
     && tokens.every(
       (token, tokenIndex) => words[wordIndex + tokenIndex]?.text === token,
     ) ? [wordIndex] : [])
+}
+
+function assertPdfSevenChoicesSamePassageContinuation(
+  pdfPath,
+  label,
+  {
+    bundleId,
+    variant,
+    recordCoverage,
+  },
+) {
+  const words = pdfWordsWithBoxes(pdfPath)
+  const lines = pdfRoleLines(words)
+  const lineByWordIndex = new Map(lines.flatMap((line) =>
+    line.wordIndexes.map((wordIndex) => [wordIndex, line])))
+  const anchor =
+    sevenChoicesCoverageOracle.oracle.authorityBoundary
+      .passageParagraphAnchors[1]
+  const startIndexes = collapsedPdfSequenceIndexes(words, anchor.start, 5)
+  assert.equal(
+    startIndexes.length,
+    1,
+    `${label} locates the exact source-bound continuation paragraph start`,
+  )
+  const endTokens = exactPdfTokens(anchor.end)
+  const endIndex = uniquePdfSequenceIndex(
+    words,
+    endTokens,
+    `${label} continuation paragraph end`,
+  ) + endTokens.length - 1
+  const paragraphLines = pdfLinesForWordRange(
+    lines,
+    lineByWordIndex,
+    startIndexes[0],
+    endIndex + 1,
+  )
+  const pageBreakIndex = paragraphLines.findIndex(
+    (line, index) =>
+      index > 0 && line.page === paragraphLines[index - 1].page + 1,
+  )
+  assert.equal(
+    pageBreakIndex > 0,
+    true,
+    `${label} executes a real adjacent-page continuation inside ${anchor.paragraphId}: ${JSON.stringify({
+      start: words[startIndexes[0]],
+      end: words[endIndex],
+      pages: paragraphLines.map((line) => line.page),
+    })}`,
+  )
+  assertPdfSevenChoicesObservedEdge({
+    from: paragraphLines[pageBreakIndex - 1],
+    to: paragraphLines[pageBreakIndex],
+    edgeId: 'same_passage_cross_page',
+    fromIdentity: anchor.paragraphId,
+    toIdentity: anchor.paragraphId,
+    fromText: anchor.start,
+    toText: anchor.end,
+    label,
+    bundleId,
+    variant,
+    recordCoverage,
+  })
+}
+
+function assertPdfSevenChoicesPassageToFirstOption(
+  pdfPath,
+  label,
+  {
+    bundleId,
+    variant,
+    recordCoverage,
+  },
+) {
+  const words = pdfWordsWithBoxes(pdfPath)
+  const lines = pdfRoleLines(words)
+  const lineByWordIndex = new Map(lines.flatMap((line) =>
+    line.wordIndexes.map((wordIndex) => [wordIndex, line])))
+  const paragraph =
+    sevenChoicesCoverageOracle.oracle.authorityBoundary
+      .passageParagraphAnchors.at(-1)
+  const paragraphEndTokens = exactPdfTokens(paragraph.end)
+  const paragraphEndIndex = uniquePdfSequenceIndex(
+    words,
+    paragraphEndTokens,
+    `${label} final source paragraph`,
+  ) + paragraphEndTokens.length - 1
+  const firstOption = sevenChoicesSourceOracle.bankOptions[0]
+  const firstOptionIndex = uniquePdfSequenceIndex(
+    words,
+    exactPdfTokens(firstOption.text),
+    `${label} source option A`,
+  )
+  assertPdfSevenChoicesObservedEdge({
+    from: lineByWordIndex.get(paragraphEndIndex),
+    to: lineByWordIndex.get(firstOptionIndex),
+    edgeId: 'passage_to_first_option',
+    fromIdentity: paragraph.paragraphId,
+    toIdentity:
+      sevenChoicesSourceOracle.oracle.publicIdentities
+        .sevenChoices.optionIds[0],
+    fromText: paragraph.end,
+    toText: firstOption.text,
+    label,
+    bundleId,
+    variant,
+    recordCoverage,
+  })
+}
+
+function collapsedPdfSequenceIndexes(words, value, tokenLimit) {
+  const target = sourceLexicalTokens(value)
+    .slice(0, tokenLimit)
+    .join('')
+    .normalize('NFKC')
+    .replace(/[^\p{L}\p{N}]/gu, '')
+  assert.equal(target.length > 0, true, 'collapsed PDF target is non-empty')
+  const indexes = []
+  for (let start = 0; start < words.length; start += 1) {
+    let observed = ''
+    for (
+      let index = start;
+      index < words.length
+        && words[index].page === words[start].page
+        && observed.length <= target.length;
+      index += 1
+    ) {
+      observed += words[index].text
+        .normalize('NFKC')
+        .replace(/[^\p{L}\p{N}]/gu, '')
+      if (observed === target) {
+        indexes.push(start)
+        break
+      }
+      if (!target.startsWith(observed)) break
+    }
+  }
+  return indexes
 }
 
 function pdfRoleLines(words) {
@@ -3770,7 +5135,7 @@ function uniquePdfSequenceIndex(
 }
 
 function isPdfBodyLine(line) {
-  return line.yMin >= 55 && line.yMax < 760
+  return line.yMin >= 55 && line.yMax < 790
 }
 
 function pdfLinesForWordRange(
@@ -5000,6 +6365,10 @@ async function renderSupportedArtifacts({
     screenLecture: [],
     pdf: {},
   }
+  const sevenChoicesCoverageObservations = []
+  const recordSevenChoicesCoverage = (observation) => {
+    sevenChoicesCoverageObservations.push(observation)
+  }
   const asset = JSON.parse(readFileSync(
     path.join(paperAssetsDir, paperId, 'latest', 'paper-asset.json'),
     'utf8',
@@ -5135,6 +6504,11 @@ async function renderSupportedArtifacts({
       await assertScreenSevenChoicesGoldenGeometry(
         page,
         'plain PaperSurface Seven Choices',
+        {
+          bundleId: 'screen-plain',
+          variant: 'plain-baseline',
+          recordCoverage: recordSevenChoicesCoverage,
+        },
       )
       const runScreenSourceAssetAttack = async ({
         name,
@@ -5246,7 +6620,12 @@ async function renderSupportedArtifacts({
       await assertScreenSevenChoicesGoldenGeometry(
         page,
         'plain PaperSurface Seven Choices wrapped-option adversary',
-        { wrappedOption: true },
+        {
+          wrappedOption: true,
+          bundleId: 'screen-plain',
+          variant: 'plain-wrapped-option',
+          recordCoverage: recordSevenChoicesCoverage,
+        },
       )
       await plainSevenWrappedStyle.evaluate((element) => element.remove())
       const sevenHeadingUrl = new URL(plainUrl)
@@ -5261,7 +6640,12 @@ async function renderSupportedArtifacts({
       await assertScreenSevenChoicesGoldenGeometry(
         page,
         'plain PaperSurface Seven Choices bank-heading-present fixture',
-        { headingPresent: true },
+        {
+          headingPresent: true,
+          bundleId: 'screen-plain',
+          variant: 'plain-bank-heading',
+          recordCoverage: recordSevenChoicesCoverage,
+        },
       )
       await page.goto(plainUrl.href)
       await page.locator('[data-paper-browse-anchor]').first().waitFor()
@@ -5338,6 +6722,11 @@ async function renderSupportedArtifacts({
       await assertScreenSevenChoicesGoldenGeometry(
         page,
         'lecture PaperSurface Seven Choices',
+        {
+          bundleId: 'screen-lecture',
+          variant: 'lecture-baseline',
+          recordCoverage: recordSevenChoicesCoverage,
+        },
       )
       const lectureSevenWrappedStyle = await page.addStyleTag({
         content: '.ps-option-bank{width:260px!important}',
@@ -5345,9 +6734,35 @@ async function renderSupportedArtifacts({
       await assertScreenSevenChoicesGoldenGeometry(
         page,
         'lecture PaperSurface Seven Choices wrapped-option adversary',
-        { wrappedOption: true },
+        {
+          wrappedOption: true,
+          bundleId: 'screen-lecture',
+          variant: 'lecture-wrapped-option',
+          recordCoverage: recordSevenChoicesCoverage,
+        },
       )
       await lectureSevenWrappedStyle.evaluate((element) => element.remove())
+      const lectureSevenHeadingUrl = new URL(lectureUrl)
+      lectureSevenHeadingUrl.searchParams.set(
+        'sevenChoicesBankHeading',
+        'present',
+      )
+      await page.goto(lectureSevenHeadingUrl.href)
+      await page.locator(
+        '[data-canonical-seven-choices-rhythm-role="bank_heading"]',
+      ).waitFor()
+      await assertScreenSevenChoicesGoldenGeometry(
+        page,
+        'lecture PaperSurface Seven Choices bank-heading-present fixture',
+        {
+          headingPresent: true,
+          bundleId: 'screen-lecture',
+          variant: 'lecture-bank-heading',
+          recordCoverage: recordSevenChoicesCoverage,
+        },
+      )
+      await page.goto(lectureUrl.href)
+      await page.locator('[data-paper-browse-anchor]').first().waitFor()
       const lectureNarrowStemStyle = await page.addStyleTag({
         content: `[data-canonical-question-id="${firstQuestionId}"] .ps-question-stem{max-width:240px}`,
       })
@@ -5560,17 +6975,6 @@ async function renderSupportedArtifacts({
         consumers.print_pdf,
         'Teacher Print HTML',
       )
-      await assertPrintHtmlSevenChoicesGoldenGeometry(
-        page,
-        printHtml.student,
-        'Student Print HTML Seven Choices',
-      )
-      await assertPrintHtmlSevenChoicesGoldenGeometry(
-        page,
-        printHtml.teacher,
-        'Teacher Print HTML Seven Choices',
-        { teacher: true },
-      )
       const sevenChoicesVariantBlocks = [
         {
           type: 'section_header',
@@ -5595,6 +6999,68 @@ async function renderSupportedArtifacts({
             .followingSectionMarker,
         },
       ]
+      const readingBoundaryGroupId =
+        sevenChoicesSourceOracle.oracle.publicIdentities.readingBoundary
+          .groupId
+      const sevenChoicesPdfCoverageBlocks = [
+        {
+          type: 'question_group',
+          questionGroupId: readingBoundaryGroupId,
+          score: 2.5,
+        },
+        ...sevenChoicesVariantBlocks,
+      ]
+      const sevenChoicesPdfCoverageItems = [
+        readingPrintVariantItem(asset, readingBoundaryGroupId),
+        sevenChoicesPrintVariantItem(asset),
+      ]
+      const sevenChoicesStudentBaselineHtml = buildPrintHtml({
+        title: 'Canonical Import Pilot Seven Choices student coverage',
+        versionType: 'student',
+        items: sevenChoicesPdfCoverageItems,
+        blocks: sevenChoicesPdfCoverageBlocks,
+        questionNumberStart: 33,
+        printStyle: 'exam',
+        canonicalConsumption: consumers.print_pdf,
+      })
+      const sevenChoicesTeacherBaselineHtml = buildPrintHtml({
+        title: 'Canonical Import Pilot Seven Choices teacher coverage',
+        versionType: 'teacher',
+        items: sevenChoicesPdfCoverageItems,
+        blocks: sevenChoicesPdfCoverageBlocks,
+        questionNumberStart: 33,
+        printStyle: 'exam',
+        canonicalConsumption: consumers.print_pdf,
+      })
+      writeFileSync(
+        path.join(outputDir, 'print-student-seven-choices-baseline.html'),
+        sevenChoicesStudentBaselineHtml,
+      )
+      writeFileSync(
+        path.join(outputDir, 'print-teacher-seven-choices-baseline.html'),
+        sevenChoicesTeacherBaselineHtml,
+      )
+      await assertPrintHtmlSevenChoicesGoldenGeometry(
+        page,
+        sevenChoicesStudentBaselineHtml,
+        'Student Print HTML Seven Choices',
+        {
+          bundleId: 'print-html-student',
+          variant: 'student-baseline',
+          recordCoverage: recordSevenChoicesCoverage,
+        },
+      )
+      await assertPrintHtmlSevenChoicesGoldenGeometry(
+        page,
+        sevenChoicesTeacherBaselineHtml,
+        'Teacher Print HTML Seven Choices',
+        {
+          teacher: true,
+          bundleId: 'print-html-teacher',
+          variant: 'teacher-baseline',
+          recordCoverage: recordSevenChoicesCoverage,
+        },
+      )
       const sevenChoicesHeadingVariantHtml = buildPrintHtml({
         title: 'Canonical Import Pilot Seven Choices Golden Geometry',
         versionType: 'student',
@@ -5610,7 +7076,13 @@ async function renderSupportedArtifacts({
         page,
         sevenChoicesHeadingVariantHtml,
         'Student Print HTML Seven Choices bank-heading-present fixture',
-        { headingPresent: true, requireReadingBoundary: false },
+        {
+          headingPresent: true,
+          requireReadingBoundary: false,
+          bundleId: 'print-html-student',
+          variant: 'student-bank-heading',
+          recordCoverage: recordSevenChoicesCoverage,
+        },
       )
       const sevenChoicesWrappedVariantHtml =
         sevenChoicesHeadingVariantHtml.replace(
@@ -5627,6 +7099,54 @@ async function renderSupportedArtifacts({
           headingPresent: true,
           wrappedOption: true,
           requireReadingBoundary: false,
+          bundleId: 'print-html-student',
+          variant: 'student-wrapped-option',
+          recordCoverage: recordSevenChoicesCoverage,
+        },
+      )
+      const sevenChoicesTeacherHeadingVariantHtml = buildPrintHtml({
+        title: 'Canonical Import Pilot Seven Choices teacher coverage',
+        versionType: 'teacher',
+        items: [sevenChoicesPrintVariantItem(asset)],
+        blocks: sevenChoicesVariantBlocks,
+        questionNumberStart: 36,
+        printStyle: 'exam',
+        canonicalConsumption: consumers.print_pdf,
+        sevenChoicesBankHeading:
+          sevenChoicesSourceOracle.oracle.variants.bankHeadingVisibleText,
+      })
+      await assertPrintHtmlSevenChoicesGoldenGeometry(
+        page,
+        sevenChoicesTeacherHeadingVariantHtml,
+        'Teacher Print HTML Seven Choices bank-heading-present fixture',
+        {
+          teacher: true,
+          headingPresent: true,
+          requireReadingBoundary: false,
+          bundleId: 'print-html-teacher',
+          variant: 'teacher-bank-heading',
+          recordCoverage: recordSevenChoicesCoverage,
+        },
+      )
+      const sevenChoicesTeacherWrappedVariantHtml =
+        sevenChoicesTeacherHeadingVariantHtml.replace(
+          '</head>',
+          `<style>
+.canonical-option-bank { width: ${sevenChoicesSourceOracle.oracle.variants.printWrappedOptionWidthPt}pt !important; }
+</style></head>`,
+        )
+      await assertPrintHtmlSevenChoicesGoldenGeometry(
+        page,
+        sevenChoicesTeacherWrappedVariantHtml,
+        'Teacher Print HTML Seven Choices wrapped-option fixture',
+        {
+          teacher: true,
+          headingPresent: true,
+          wrappedOption: true,
+          requireReadingBoundary: false,
+          bundleId: 'print-html-teacher',
+          variant: 'teacher-wrapped-option',
+          recordCoverage: recordSevenChoicesCoverage,
         },
       )
       const sevenChoicesVariantItem = sevenChoicesPrintVariantItem(asset)
@@ -5754,6 +7274,9 @@ async function renderSupportedArtifacts({
         {
           chromePresent: false,
           requireReadingBoundary: false,
+          bundleId: 'print-html-student',
+          variant: 'student-optional-chrome-collapse',
+          recordCoverage: recordSevenChoicesCoverage,
         },
       )
       assertNoReadingRolesInNonReadingPrintGroups(
@@ -5905,15 +7428,6 @@ async function renderSupportedArtifacts({
           consumers.print_pdf,
           label,
         )
-        assertPdfSevenChoicesGoldenGeometry(
-          pdfPath,
-          `${label} Seven Choices`,
-        )
-        assertPdfSevenChoicesRoleGraph(
-          pdfPath,
-          `${label} Seven Choices`,
-          { teacher: versionType === 'teacher' },
-        )
         pdfRhythmEvidence.push(assertPdfReadingVerticalRhythm(
           pdfPath,
           consumers.print_pdf,
@@ -5941,6 +7455,91 @@ async function renderSupportedArtifacts({
           outputDir,
           pageBoxes,
           label,
+        )
+      }
+      assertPdfSevenChoicesPassageToFirstOption(
+        pdfPaths.teacher,
+        'Teacher Chromium PDF public baseline Seven Choices direct-bank edge',
+        {
+          bundleId: 'pdf-teacher',
+          variant: 'teacher-baseline',
+          recordCoverage: recordSevenChoicesCoverage,
+        },
+      )
+      for (const versionType of ['student', 'teacher']) {
+        const sourceBoundBaselineBaseHtml = buildPrintHtml({
+          title:
+            `Canonical Import Pilot Seven Choices ${versionType} PDF coverage`,
+          versionType,
+          items: sevenChoicesPdfCoverageItems,
+          blocks: sevenChoicesPdfCoverageBlocks,
+          questionNumberStart: 33,
+          printStyle: 'exam',
+          canonicalConsumption: consumers.print_pdf,
+        })
+        const sourceBoundBaselineHtml = versionType === 'teacher'
+          ? sourceBoundBaselineBaseHtml.replace(
+              '</head>',
+              `<style>
+[data-canonical-seven-choices-reading-boundary-group-id] {
+  break-before: page !important;
+  page-break-before: always !important;
+}
+.canonical-option-bank-region {
+  break-before: page !important;
+  page-break-before: always !important;
+}
+</style></head>`,
+            )
+          : sourceBoundBaselineBaseHtml
+        const sourceBoundBaselinePath = path.join(
+          outputDir,
+          `print-${versionType}-seven-choices-source-bound-baseline.pdf`,
+        )
+        let sourceBoundBaselineRender
+        try {
+          sourceBoundBaselineRender = await renderPaginatedPaper(
+            sourceBoundBaselineHtml,
+          )
+        } finally {
+          await closeChromiumPool()
+        }
+        writeFileSync(
+          sourceBoundBaselinePath,
+          sourceBoundBaselineRender.pdfBytes,
+        )
+        const sourceBoundLabel =
+          `${versionType === 'student' ? 'Student' : 'Teacher'} Chromium PDF Seven Choices source-bound baseline`
+        assertPdfA4AndUnclipped(sourceBoundBaselinePath, sourceBoundLabel)
+        assertPdfSevenChoicesGoldenGeometry(
+          sourceBoundBaselinePath,
+          sourceBoundLabel,
+          {
+            bundleId: versionType === 'student'
+              ? 'pdf-student'
+              : 'pdf-teacher',
+            variant: `${versionType}-baseline`,
+            recordCoverage: recordSevenChoicesCoverage,
+          },
+        )
+        assertPdfSevenChoicesRoleGraph(
+          sourceBoundBaselinePath,
+          sourceBoundLabel,
+          {
+            teacher: versionType === 'teacher',
+            boundaryRelation: versionType === 'teacher'
+              ? 'cross_page'
+              : 'same_page',
+            passageRelation: 'same_page',
+            passageBankRelation: versionType === 'teacher'
+              ? 'cross_page'
+              : 'same_page',
+            bundleId: versionType === 'student'
+              ? 'pdf-student'
+              : 'pdf-teacher',
+            variant: `${versionType}-baseline`,
+            recordCoverage: recordSevenChoicesCoverage,
+          },
         )
       }
       assert.ok(
@@ -5998,10 +7597,22 @@ async function renderSupportedArtifacts({
           requireCrossPageEnd: true,
         },
       ))
-      const sevenChoicesPdfVariantHtml =
-        sevenChoicesWrappedVariantHtml.replace(
+      const sevenChoicesPdfVariantHtml = buildPrintHtml({
+        title: 'Canonical Import Pilot Seven Choices student PDF variants',
+        versionType: 'student',
+        items: sevenChoicesPdfCoverageItems,
+        blocks: sevenChoicesPdfCoverageBlocks,
+        questionNumberStart: 33,
+        printStyle: 'exam',
+        canonicalConsumption: consumers.print_pdf,
+        sevenChoicesBankHeading:
+          sevenChoicesSourceOracle.oracle.variants.bankHeadingVisibleText,
+      }).replace(
           '</head>',
           `<style>
+.canonical-option-bank {
+  width: ${sevenChoicesSourceOracle.oracle.variants.printWrappedOptionWidthPt}pt !important;
+}
 .canonical-option-bank-item:nth-child(5) {
   break-before: page !important;
   page-break-before: always !important;
@@ -6036,9 +7647,75 @@ async function renderSupportedArtifacts({
             sevenChoicesSourceOracle.oracle.variants.bankHeadingVisibleText,
           requireWrappedOption: true,
           requireCrossPageBank: true,
+          bundleId: 'pdf-student',
+          variant: 'student-bank-heading-wrapped-bank-pagination',
+          recordCoverage: recordSevenChoicesCoverage,
         },
       )
-      const sevenChoicesFullGraphVariantHtml = printHtml.student.replace(
+      assertPdfSevenChoicesRoleGraph(
+        sevenChoicesPdfVariantPath,
+        'Student Chromium PDF Seven Choices wrapped/cross-page adversary',
+        {
+          headingText:
+            sevenChoicesSourceOracle.oracle.variants.bankHeadingVisibleText,
+          boundaryRelation: 'same_page',
+          passageRelation: 'same_page',
+          passageBankRelation: 'same_page',
+          followingRelation: 'same_page',
+          bundleId: 'pdf-student',
+          variant: 'student-bank-heading-wrapped-bank-pagination',
+          recordCoverage: recordSevenChoicesCoverage,
+        },
+      )
+      const sevenChoicesStudentContinuationHtml =
+        sevenChoicesPdfVariantHtml.replace(
+          '</head>',
+          `<style>
+.question-group[data-canonical-group-type="sevenChoices"] .passage p:nth-child(2) {
+  width: 50pt !important;
+  orphans: 1 !important;
+  widows: 1 !important;
+}
+</style></head>`,
+        )
+      const sevenChoicesStudentContinuationPath = path.join(
+        outputDir,
+        'print-student-seven-choices-same-passage-continuation.pdf',
+      )
+      let sevenChoicesStudentContinuationRender
+      try {
+        sevenChoicesStudentContinuationRender = await renderPaginatedPaper(
+          sevenChoicesStudentContinuationHtml,
+        )
+      } finally {
+        await closeChromiumPool()
+      }
+      writeFileSync(
+        sevenChoicesStudentContinuationPath,
+        sevenChoicesStudentContinuationRender.pdfBytes,
+      )
+      assertPdfA4AndUnclipped(
+        sevenChoicesStudentContinuationPath,
+        'Student Chromium PDF Seven Choices same-passage continuation adversary',
+      )
+      assertPdfSevenChoicesSamePassageContinuation(
+        sevenChoicesStudentContinuationPath,
+        'Student Chromium PDF Seven Choices same-passage continuation adversary',
+        {
+          bundleId: 'pdf-student',
+          variant: 'student-bank-heading-wrapped-bank-pagination',
+          recordCoverage: recordSevenChoicesCoverage,
+        },
+      )
+      const sevenChoicesFullGraphVariantHtml = buildPrintHtml({
+        title: 'Canonical Import Pilot Seven Choices student cross-page coverage',
+        versionType: 'student',
+        items: sevenChoicesPdfCoverageItems,
+        blocks: sevenChoicesPdfCoverageBlocks,
+        questionNumberStart: 33,
+        printStyle: 'exam',
+        canonicalConsumption: consumers.print_pdf,
+      }).replace(
         '</head>',
         `<style>
 [data-canonical-seven-choices-reading-boundary-group-id],
@@ -6072,6 +7749,11 @@ async function renderSupportedArtifacts({
       assertPdfSevenChoicesGoldenGeometry(
         sevenChoicesFullGraphVariantPath,
         'Student Chromium PDF Seven Choices complete cross-page role graph',
+        {
+          bundleId: 'pdf-student',
+          variant: 'student-cross-page-role-graph',
+          recordCoverage: recordSevenChoicesCoverage,
+        },
       )
       assertPdfSevenChoicesRoleGraph(
         sevenChoicesFullGraphVariantPath,
@@ -6081,47 +7763,186 @@ async function renderSupportedArtifacts({
           passageRelation: 'same_page',
           passageBankRelation: 'cross_page',
           followingRelation: 'cross_page',
+          bundleId: 'pdf-student',
+          variant: 'student-cross-page-role-graph',
+          recordCoverage: recordSevenChoicesCoverage,
         },
       )
-      const sevenChoicesTeacherTailVariantHtml = printHtml.teacher.replace(
+      const sevenChoicesTeacherHeadingPdfHtml = buildPrintHtml({
+        title: 'Canonical Import Pilot Seven Choices teacher PDF coverage',
+        versionType: 'teacher',
+        items: sevenChoicesPdfCoverageItems,
+        blocks: sevenChoicesPdfCoverageBlocks,
+        questionNumberStart: 33,
+        printStyle: 'exam',
+        canonicalConsumption: consumers.print_pdf,
+        sevenChoicesBankHeading:
+          sevenChoicesSourceOracle.oracle.variants.bankHeadingVisibleText,
+      }).replace(
         '</head>',
         `<style>
-[data-canonical-seven-choices-following-for] {
+.canonical-option-bank {
+  width: ${sevenChoicesSourceOracle.oracle.variants.printWrappedOptionWidthPt}pt !important;
+}
+.canonical-option-bank-item:nth-child(5) {
   break-before: page !important;
   page-break-before: always !important;
 }
 </style></head>`,
       )
-      const sevenChoicesTeacherTailVariantPath = path.join(
+      const sevenChoicesTeacherHeadingPdfPath = path.join(
         outputDir,
-        'print-teacher-seven-choices-tail-variants.pdf',
+        'print-teacher-seven-choices-heading-bank-variants.pdf',
       )
-      let sevenChoicesTeacherTailVariantRender
+      let sevenChoicesTeacherHeadingPdfRender
       try {
-        sevenChoicesTeacherTailVariantRender = await renderPaginatedPaper(
-          sevenChoicesTeacherTailVariantHtml,
+        sevenChoicesTeacherHeadingPdfRender = await renderPaginatedPaper(
+          sevenChoicesTeacherHeadingPdfHtml,
         )
       } finally {
         await closeChromiumPool()
       }
       writeFileSync(
-        sevenChoicesTeacherTailVariantPath,
-        sevenChoicesTeacherTailVariantRender.pdfBytes,
+        sevenChoicesTeacherHeadingPdfPath,
+        sevenChoicesTeacherHeadingPdfRender.pdfBytes,
       )
       assertPdfA4AndUnclipped(
-        sevenChoicesTeacherTailVariantPath,
-        'Teacher Chromium PDF Seven Choices cross-page tail graph',
+        sevenChoicesTeacherHeadingPdfPath,
+        'Teacher Chromium PDF Seven Choices heading/wrapped/bank pagination graph',
       )
       assertPdfSevenChoicesGoldenGeometry(
-        sevenChoicesTeacherTailVariantPath,
-        'Teacher Chromium PDF Seven Choices cross-page tail graph',
+        sevenChoicesTeacherHeadingPdfPath,
+        'Teacher Chromium PDF Seven Choices heading/wrapped/bank pagination graph',
+        {
+          headingText:
+            sevenChoicesSourceOracle.oracle.variants.bankHeadingVisibleText,
+          requireWrappedOption: true,
+          requireCrossPageBank: true,
+          bundleId: 'pdf-teacher',
+          variant: 'teacher-bank-heading-wrapped-bank-pagination',
+          recordCoverage: recordSevenChoicesCoverage,
+        },
       )
       assertPdfSevenChoicesRoleGraph(
-        sevenChoicesTeacherTailVariantPath,
-        'Teacher Chromium PDF Seven Choices cross-page tail graph',
+        sevenChoicesTeacherHeadingPdfPath,
+        'Teacher Chromium PDF Seven Choices heading/wrapped/bank pagination graph',
         {
           teacher: true,
+          headingText:
+            sevenChoicesSourceOracle.oracle.variants.bankHeadingVisibleText,
+          boundaryRelation: 'same_page',
+          passageRelation: 'same_page',
+          followingRelation: 'same_page',
+          bundleId: 'pdf-teacher',
+          variant: 'teacher-bank-heading-wrapped-bank-pagination',
+          recordCoverage: recordSevenChoicesCoverage,
+        },
+      )
+      const sevenChoicesTeacherContinuationHtml =
+        sevenChoicesTeacherHeadingPdfHtml.replace(
+          '</head>',
+          `<style>
+.question-group[data-canonical-group-type="sevenChoices"] .passage p:nth-child(2) {
+  width: 50pt !important;
+  orphans: 1 !important;
+  widows: 1 !important;
+}
+</style></head>`,
+        )
+      const sevenChoicesTeacherContinuationPath = path.join(
+        outputDir,
+        'print-teacher-seven-choices-same-passage-continuation.pdf',
+      )
+      let sevenChoicesTeacherContinuationRender
+      try {
+        sevenChoicesTeacherContinuationRender = await renderPaginatedPaper(
+          sevenChoicesTeacherContinuationHtml,
+        )
+      } finally {
+        await closeChromiumPool()
+      }
+      writeFileSync(
+        sevenChoicesTeacherContinuationPath,
+        sevenChoicesTeacherContinuationRender.pdfBytes,
+      )
+      assertPdfA4AndUnclipped(
+        sevenChoicesTeacherContinuationPath,
+        'Teacher Chromium PDF Seven Choices same-passage continuation adversary',
+      )
+      assertPdfSevenChoicesSamePassageContinuation(
+        sevenChoicesTeacherContinuationPath,
+        'Teacher Chromium PDF Seven Choices same-passage continuation adversary',
+        {
+          bundleId: 'pdf-teacher',
+          variant: 'teacher-bank-heading-wrapped-bank-pagination',
+          recordCoverage: recordSevenChoicesCoverage,
+        },
+      )
+      const sevenChoicesTeacherCrossPageHtml = buildPrintHtml({
+        title: 'Canonical Import Pilot Seven Choices teacher cross-page coverage',
+        versionType: 'teacher',
+        items: sevenChoicesPdfCoverageItems,
+        blocks: sevenChoicesPdfCoverageBlocks,
+        questionNumberStart: 33,
+        printStyle: 'exam',
+        canonicalConsumption: consumers.print_pdf,
+      }).replace(
+        '</head>',
+        `<style>
+[data-canonical-seven-choices-reading-boundary-group-id],
+.canonical-option-bank-region,
+[data-canonical-seven-choices-following-for] {
+  break-before: page !important;
+  page-break-before: always !important;
+}
+.canonical-option-bank-item:nth-child(5) {
+  break-before: page !important;
+  page-break-before: always !important;
+}
+</style></head>`,
+      )
+      const sevenChoicesTeacherCrossPagePath = path.join(
+        outputDir,
+        'print-teacher-seven-choices-full-role-graph-variants.pdf',
+      )
+      let sevenChoicesTeacherCrossPageRender
+      try {
+        sevenChoicesTeacherCrossPageRender = await renderPaginatedPaper(
+          sevenChoicesTeacherCrossPageHtml,
+        )
+      } finally {
+        await closeChromiumPool()
+      }
+      writeFileSync(
+        sevenChoicesTeacherCrossPagePath,
+        sevenChoicesTeacherCrossPageRender.pdfBytes,
+      )
+      assertPdfA4AndUnclipped(
+        sevenChoicesTeacherCrossPagePath,
+        'Teacher Chromium PDF Seven Choices complete cross-page role graph',
+      )
+      assertPdfSevenChoicesGoldenGeometry(
+        sevenChoicesTeacherCrossPagePath,
+        'Teacher Chromium PDF Seven Choices complete cross-page role graph',
+        {
+          requireCrossPageBank: true,
+          bundleId: 'pdf-teacher',
+          variant: 'teacher-complete-cross-page-role-graph',
+          recordCoverage: recordSevenChoicesCoverage,
+        },
+      )
+      assertPdfSevenChoicesRoleGraph(
+        sevenChoicesTeacherCrossPagePath,
+        'Teacher Chromium PDF Seven Choices complete cross-page role graph',
+        {
+          teacher: true,
+          boundaryRelation: 'cross_page',
+          passageRelation: 'same_page',
+          passageBankRelation: 'cross_page',
           followingRelation: 'cross_page',
+          bundleId: 'pdf-teacher',
+          variant: 'teacher-complete-cross-page-role-graph',
+          recordCoverage: recordSevenChoicesCoverage,
         },
       )
       assert.deepEqual(
@@ -6155,6 +7976,9 @@ async function renderSupportedArtifacts({
     }
 
     assertSupportedConsumerParity(consumers)
+    const sevenChoicesCoverageLedger = assertSevenChoicesObservedCoverage(
+      sevenChoicesCoverageObservations,
+    )
     const artifactFiles = listFiles(outputDir)
     assert.equal(
       artifactFiles.some((file) => /\.(?:docx|xml)$/i.test(file)),
@@ -6177,6 +8001,7 @@ async function renderSupportedArtifacts({
       ).href,
       artifactFiles,
       passageLetterGeometry,
+      sevenChoicesCoverageLedger,
       closeServices,
     }
   } finally {
@@ -6189,6 +8014,7 @@ const readingPredecessorOracle = assertReadingPredecessorOracle()
 const readingPdfRoleOracle = assertReadingPdfRoleOracle()
 const sevenChoicesSourceOracle = assertSevenChoicesSourceOracle()
 const sevenChoicesReference = assertSevenChoicesReferenceEvidence()
+const sevenChoicesCoverageOracle = assertSevenChoicesCoverageOracle()
 const rootDir = mkdtempSync(path.join(tmpdir(), 'eqb-canonical-import-pilot-'))
 const dbPath = path.join(rootDir, 'question-bank.sqlite')
 const paperAssetsDir = path.join(rootDir, 'paper-assets')
@@ -6412,6 +8238,7 @@ try {
     readingPassageLetterReferenceDigest: passageLetterReference.digest,
     sevenChoicesReferenceDigest: sevenChoicesReference.digest,
     sevenChoicesSourceOracleDigest: sevenChoicesSourceOracle.digest,
+    sevenChoicesCoverageOracleDigest: sevenChoicesCoverageOracle.digest,
     canonicalEvidenceDigests,
     dryRun: {
       validation: 'ready',
@@ -6458,6 +8285,7 @@ try {
         'student-following-section-cross-page',
         'teacher-tail-following-section-cross-page',
       ],
+      observedLedger: rendered.sevenChoicesCoverageLedger,
     },
     renderedArtifactDigests,
     forbiddenOutputArtifacts,

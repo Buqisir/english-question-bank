@@ -1329,6 +1329,16 @@ body {
   padding-left: 21pt;
 }
 
+.section-header[data-canonical-seven-choices-chrome] {
+  margin-bottom: 4.5pt;
+}
+
+.section-header[data-canonical-seven-choices-chrome]:has(
+  + [data-canonical-seven-choices-chrome]
+) {
+  margin-bottom: 0.6em;
+}
+
 .page-break {
   break-before: page;
 }
