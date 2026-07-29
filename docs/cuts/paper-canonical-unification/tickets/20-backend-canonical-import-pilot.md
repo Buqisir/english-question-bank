@@ -99,6 +99,11 @@ regression, the official backend pilot and focused-fix verifiers, the real
 `--actual-artifacts --qa-server` six-URL smoke with clean SIGINT shutdown, app
 `tsc -b`/build, architecture housekeeping 83/83, and `git diff --check` PASS;
 `pnpm -C app run verify:all` 115 PASS / 1 declared SKIP / 0 FAIL.
+Ordinary repair self-review: Standards found 0 hard violations and one
+non-blocking Possible Duplicated Code judgement in the independent artifact
+expectations; Spec PASS with 0 findings / 0 Must Fix. The independent expected
+values remain as the regression oracle rather than sharing the server
+manifest.
 Provisioning repair notes: the official QA command now serves only the
 generated Student/Teacher Print HTML and direct Chromium PDF bytes from the
 exact `.scratch/paper-canonical-ticket-20-qa/<HEAD>/` directory, prints exact
