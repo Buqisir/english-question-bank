@@ -1,30 +1,45 @@
 {
-  "schemaVersion": "reading-passage-letter-reference-measurements-v1",
+  "schemaVersion": "reading-passage-letter-reference-measurements-v2",
   "authority": {
     "readme": "docs/product/exam-paper-format-reference/README.md",
     "standard": "docs/product/exam-paper-format-standards.md",
-    "measurementMethod": "Tesseract 5.5.2 --psm 6 TSV word boxes on the exact JPEG bytes; Latin-line top uses the first Latin glyph row so a taller adjacent Chinese gloss does not move the baseline proxy.",
-    "coordinateSystem": "JPEG pixels from top-left; boxes are x,y,width,height; baselineProxyY is the glyph-box lower edge."
+    "measurementMethod": "Tesseract 5.5.2 --psm 6 TSV word boxes on the exact digest-bound JPEG bytes. Local scale is the median step between nearby Latin-line baseline proxies in the same crop; a line baseline proxy is the median lower edge of its ordinary-height Latin word boxes, excluding taller Chinese gloss or descender outliers. Passage-letter distances are divided by that local step before any renderer target is selected.",
+    "coordinateSystem": "JPEG pixels from top-left; boxes are x,y,width,height; baselineProxyY is the selected median Latin glyph-box lower edge.",
+    "scaleBoundary": "JPEG pixels are used only inside each crop to form dimensionless ratios. No JPEG pixel is treated as a Screen CSS pixel or converted to a PDF point.",
+    "renderedMappingMethod": "Multiply the dimensionless golden ratio by the actual public artifact's fixed body baseline step: computed 24px on Screen and measured 18pt in exact A4 Chromium PDF."
   },
   "tolerances": {
     "horizontalImageCenterOffsetPx": 12,
     "letterGlyphHeightPx": 1,
-    "letterToNextLatinLineTopDeltaPx": 1,
-    "letterInkBottomToNextLatinLineInkTopPx": 1,
-    "headingInkBottomToLetterInkTopPx": 2,
-    "priorContentInkBottomToLetterInkTopPx": 2,
+    "localBaselineStepPx": 1,
+    "goldenBaselineStepRatio": 0.05,
     "screenHorizontalCenterPx": 0.5,
-    "screenBaselineStepPx": 0.75,
+    "screenFollowingBaselineStepPx": 0.75,
+    "screenPrecedingBaselineStepPx": 1.25,
     "pdfHorizontalCenterPt": 0.5,
-    "pdfBaselineStepPt": 0.5
+    "pdfFollowingBaselineStepPt": 0.5,
+    "pdfPrecedingBaselineStepPt": 1
   },
   "normalizedContract": {
     "letterGlyphHeightPx": 13,
-    "letterToNextLatinLineTopDeltaPx": 31,
-    "letterInkBottomToNextLatinLineInkTopPx": 18,
-    "headingInkBottomToLetterInkTopPx": 18,
-    "priorContentInkBottomToLetterInkTopPx": 46,
-    "renderedBaselineStep": "one fixed 18pt line",
+    "scaleReference": "median nearby Latin baseline-proxy step in the same digest-bound crop",
+    "headingToLetterBaselineStepRatio": 1,
+    "priorContentToLetterBaselineStepRatio": 2,
+    "letterToFirstPassageBaselineStepRatio": 1,
+    "screen": {
+      "observedBodyBaselineStepPx": 24,
+      "headingToLetterTargetPx": 24,
+      "priorContentToLetterTargetPx": 48,
+      "letterToFirstPassageTargetPx": 24,
+      "formula": "targetPx = goldenBaselineStepRatio * observedBodyBaselineStepPx"
+    },
+    "printPdf": {
+      "observedBodyBaselineStepPt": 18,
+      "headingToLetterTargetPt": 18,
+      "priorContentToLetterTargetPt": 36,
+      "letterToFirstPassageTargetPt": 18,
+      "formula": "targetPt = goldenBaselineStepRatio * observedBodyBaselineStepPt"
+    },
     "extraLetterToPassageMargin": "none"
   },
   "references": [
@@ -50,6 +65,16 @@
         "letterToLatinLineTopDeltaPx": 31,
         "letterInkBottomToLatinLineInkTopPx": 18
       },
+      "localScale": {
+        "baselineProxySamplesY": [892, 924, 956, 987, 1019],
+        "baselineStepPx": 32,
+        "precedingBaselineProxyY": 830,
+        "precedingToLetterBaselineDeltaPx": 31,
+        "precedingToLetterBaselineStepRatio": 0.96875,
+        "followingBaselineProxyY": 892,
+        "letterToFollowingBaselineDeltaPx": 31,
+        "letterToFollowingBaselineStepRatio": 0.96875
+      },
       "firstBodyLatinLineTopY": 910
     },
     {
@@ -73,6 +98,16 @@
         "latinLineTopY": 866,
         "letterToLatinLineTopDeltaPx": 31,
         "letterInkBottomToLatinLineInkTopPx": 18
+      },
+      "localScale": {
+        "baselineProxySamplesY": [880, 911, 942, 974],
+        "baselineStepPx": 31,
+        "precedingBaselineProxyY": 786,
+        "precedingToLetterBaselineDeltaPx": 62,
+        "precedingToLetterBaselineStepRatio": 2,
+        "followingBaselineProxyY": 880,
+        "letterToFollowingBaselineDeltaPx": 32,
+        "letterToFollowingBaselineStepRatio": 1.032258
       }
     },
     {
@@ -96,6 +131,16 @@
         "latinLineTopY": 942,
         "letterToLatinLineTopDeltaPx": 31,
         "letterInkBottomToLatinLineInkTopPx": 18
+      },
+      "localScale": {
+        "baselineProxySamplesY": [956, 987, 1019, 1051],
+        "baselineStepPx": 32,
+        "precedingBaselineProxyY": 861,
+        "precedingToLetterBaselineDeltaPx": 63,
+        "precedingToLetterBaselineStepRatio": 1.96875,
+        "followingBaselineProxyY": 956,
+        "letterToFollowingBaselineDeltaPx": 32,
+        "letterToFollowingBaselineStepRatio": 1
       }
     },
     {
@@ -119,6 +164,16 @@
         "latinLineTopY": 977,
         "letterToLatinLineTopDeltaPx": 30,
         "letterInkBottomToLatinLineInkTopPx": 17
+      },
+      "localScale": {
+        "baselineProxySamplesY": [991, 1021, 1052, 1083],
+        "baselineStepPx": 31,
+        "precedingBaselineProxyY": 898,
+        "precedingToLetterBaselineDeltaPx": 62,
+        "precedingToLetterBaselineStepRatio": 2,
+        "followingBaselineProxyY": 991,
+        "letterToFollowingBaselineDeltaPx": 31,
+        "letterToFollowingBaselineStepRatio": 1
       }
     },
     {

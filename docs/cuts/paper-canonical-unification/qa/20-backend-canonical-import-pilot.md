@@ -46,11 +46,15 @@ directory remains.
 
 1. Reading passages render exactly one centered `A`, `B`, `C`, and `D` at
    their respective passage starts in plain/lecture Screen and Student/Teacher
-   Print/PDF. The preceding Reading-heading gap is 18±2px on Screen and
-   the B–D prior-content gap is 46±2px on Screen. Print/PDF preserves a
-   per-group Reading header before every A–D passage, so all four
-   header-to-letter gaps are 13.5±1.5pt. The letter-to-first-passage-line step remains one 18pt
-   line with no extra web margin, matching the digest-bound measurements in
+   Print/PDF. The digest-bound crops are normalized only by their local Latin
+   baseline step: heading-to-letter is `1×`, prior-content-to-letter is `2×`,
+   and letter-to-first-passage-line is `1×`. Screen maps those ratios to its
+   actual 24px line step, so A is 24±1.25px after its tagged heading and B–D
+   are 48±1.25px after their exact tagged predecessor Groups. Print/PDF keeps
+   a per-group tagged Reading heading and maps `1×` to 18±1pt; its
+   letter-to-first-line step remains 18±0.5pt. No JPEG pixel is treated as a
+   CSS pixel or converted to points. The letter has no extra web margin,
+   matching the method, formulas, crop samples, and tolerances in
    `20-reading-passage-letter-reference-measurements.json`; Seven Choices,
    Cloze, Grammar Fill, Writing, and inactive Listening show no passage letter.
 2. Plain PaperSurface shows the complete paper once in source order and no
@@ -66,8 +70,8 @@ directory remains.
 5. `evidence.json` records dry-run zero mutation, v1 publish, idempotent v2
    recovery retry, rollback to the exact v1 digest, only the `screen` and
    `print_pdf` consumers, the accepted reference-measurement digest, and
-   Screen/PDF A–D preceding-content, letter-box, and following-line geometry
-   within the recorded tolerances.
+   Screen/PDF A–D exact predecessor bindings, ratio-mapped baseline geometry,
+   letter boxes, and following-line geometry within the recorded tolerances.
 6. The QA directory and immutable import version contain no generated `.docx`,
    OOXML/XML, or DOCX-converted PDF. The source PDF is preserved byte-identical
    inside the local immutable version and direct PDF output never invokes

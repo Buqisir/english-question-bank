@@ -13,6 +13,13 @@ Free-form section or title text is not an identity source.
 
 The measured golden-reference evidence and tolerances are digest-bound through
 `docs/cuts/paper-canonical-unification/qa/20-reading-passage-letter-reference-measurements.json`.
+Because those JPEG pages are cropped, their pixels never define absolute
+Screen or PDF distance. Each crop instead uses the median nearby Latin
+baseline step as its local scale. The measured heading-to-letter,
+prior-content-to-letter, and letter-to-first-line ratios are mapped to the
+actual 24px Screen and 18pt exact-A4 PDF line steps. Screen and Print/PDF
+geometry checks resolve exactly one predecessor tag for each visible
+`groupId`; missing, duplicate, wrong-Group, or cross-page bindings fail closed.
 Existing manifest-v1 through manifest-v12 Publications remain resolvable
 through their immutable authority closures. New Publications use manifest v13,
 Screen v13, and Print/PDF v14.

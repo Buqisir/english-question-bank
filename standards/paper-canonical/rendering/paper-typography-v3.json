@@ -58,31 +58,39 @@
     "marginBeforePt": 0,
     "marginAfterPt": 0,
     "precedingGeometry": {
-      "normalizationRule": "reference_px_1_to_1_screen_css_px_and_0_75pt_per_pdf_css_px",
+      "normalizationRule": "local_baseline_step_ratio_mapped_to_actual_rendered_line_step",
       "readingHeading": {
-        "referenceInkGapPx": 18,
-        "referenceTolerancePx": 2,
-        "screenInkGapPx": 18,
-        "screenTolerancePx": 2,
-        "screenBeforeAdjustmentPx": -4,
-        "pdfInkGapPt": 13.5,
-        "pdfTolerancePt": 1.5,
-        "pdfBeforePaddingPt": 2.635
+        "referenceBaselineStepRatio": 1,
+        "referenceRatioTolerance": 0.05,
+        "screenBaselineStepPx": 24,
+        "screenTolerancePx": 1.25,
+        "screenBeforeAdjustmentPx": -13,
+        "pdfBaselineStepPt": 18,
+        "pdfTolerancePt": 1,
+        "pdfBeforeAdjustmentPt": -4.5
       },
       "priorContent": {
-        "referenceInkGapPx": 46,
-        "referenceTolerancePx": 2,
-        "screenInkGapPx": 46,
-        "screenTolerancePx": 2,
-        "screenBeforeAdjustmentPx": 12,
-        "pdfInkGapPt": 34.5,
-        "pdfTolerancePt": 1.5,
-        "pdfBeforePaddingPt": 23.635
+        "referenceBaselineStepRatio": 2,
+        "referenceRatioTolerance": 0.05,
+        "screenBaselineStepPx": 48,
+        "screenTolerancePx": 1.25,
+        "screenBeforeAdjustmentPx": 13,
+        "pdfBaselineStepPt": 36,
+        "pdfTolerancePt": 1,
+        "pdfBeforeAdjustmentPt": null
       }
+    },
+    "followingGeometry": {
+      "referenceBaselineStepRatio": 1,
+      "referenceRatioTolerance": 0.05,
+      "screenBaselineStepPx": 24,
+      "screenTolerancePx": 0.75,
+      "pdfBaselineStepPt": 18,
+      "pdfTolerancePt": 0.5
     },
     "referenceMeasurement": {
       "path": "docs/cuts/paper-canonical-unification/qa/20-reading-passage-letter-reference-measurements.json",
-      "sha256": "sha256:784a323faf0181a7241c3fe8e370046fa129d6b92ac3e18f6d68a9179dcb0427"
+      "sha256": "sha256:1f183f801cbcc5c060c92f8c2fcd3a6af918a2f257686e8c61f9a71065dc3896"
     }
   }
 }

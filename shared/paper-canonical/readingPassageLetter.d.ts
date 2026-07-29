@@ -6,14 +6,14 @@ export type ReadingPassageLetterPrecedingKind =
 
 export type ReadingPassageLetterGeometry = Readonly<{
   precedingKind: ReadingPassageLetterPrecedingKind
-  referenceInkGapPx: number
-  referenceTolerancePx: number
-  screenInkGapPx: number
+  referenceBaselineStepRatio: number
+  referenceRatioTolerance: number
+  screenBaselineStepPx: number
   screenTolerancePx: number
   screenBeforeAdjustmentPx: number
-  pdfInkGapPt: number
+  pdfBaselineStepPt: number
   pdfTolerancePt: number
-  pdfBeforePaddingPt: number
+  pdfBeforeAdjustmentPt: number | null
 }>
 
 export function readingPassageLetterGeometryForLetter(
@@ -37,6 +37,14 @@ export const readingPassageLetterTypography: Readonly<{
     normalizationRule: string
     readingHeading: Omit<ReadingPassageLetterGeometry, 'precedingKind'>
     priorContent: Omit<ReadingPassageLetterGeometry, 'precedingKind'>
+  }>
+  followingGeometry: Readonly<{
+    referenceBaselineStepRatio: number
+    referenceRatioTolerance: number
+    screenBaselineStepPx: number
+    screenTolerancePx: number
+    pdfBaselineStepPt: number
+    pdfTolerancePt: number
   }>
   referenceMeasurement: Readonly<{
     path: string

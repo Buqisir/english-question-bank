@@ -61,5 +61,6 @@ export const readingPassageLetterTypography = Object.freeze({
     readingHeading: geometryByPrecedingKind.reading_heading,
     priorContent: geometryByPrecedingKind.prior_content,
   }),
+  followingGeometry: Object.freeze({ ...contract.followingGeometry }),
   referenceMeasurement: Object.freeze({ ...contract.referenceMeasurement }),
 })

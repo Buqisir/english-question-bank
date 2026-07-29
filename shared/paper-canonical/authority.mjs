@@ -491,13 +491,45 @@ function validateRendererTypography(artifact, profiles) {
       'priorContent',
     ])
     && contract.precedingGeometry.normalizationRule
-      === 'reference_px_1_to_1_screen_css_px_and_0_75pt_per_pdf_css_px'
-    && contract.precedingGeometry.readingHeading?.referenceInkGapPx === 18
-    && contract.precedingGeometry.readingHeading?.screenInkGapPx === 18
-    && contract.precedingGeometry.readingHeading?.pdfInkGapPt === 13.5
-    && contract.precedingGeometry.priorContent?.referenceInkGapPx === 46
-    && contract.precedingGeometry.priorContent?.screenInkGapPx === 46
-    && contract.precedingGeometry.priorContent?.pdfInkGapPt === 34.5
+      === 'local_baseline_step_ratio_mapped_to_actual_rendered_line_step'
+    && contract.precedingGeometry.readingHeading
+      ?.referenceBaselineStepRatio === 1
+    && contract.precedingGeometry.readingHeading
+      ?.referenceRatioTolerance === 0.05
+    && contract.precedingGeometry.readingHeading?.screenBaselineStepPx === 24
+    && contract.precedingGeometry.readingHeading?.screenTolerancePx === 1.25
+    && contract.precedingGeometry.readingHeading
+      ?.screenBeforeAdjustmentPx === -13
+    && contract.precedingGeometry.readingHeading?.pdfBaselineStepPt === 18
+    && contract.precedingGeometry.readingHeading?.pdfTolerancePt === 1
+    && contract.precedingGeometry.readingHeading
+      ?.pdfBeforeAdjustmentPt === -4.5
+    && contract.precedingGeometry.priorContent
+      ?.referenceBaselineStepRatio === 2
+    && contract.precedingGeometry.priorContent
+      ?.referenceRatioTolerance === 0.05
+    && contract.precedingGeometry.priorContent?.screenBaselineStepPx === 48
+    && contract.precedingGeometry.priorContent?.screenTolerancePx === 1.25
+    && contract.precedingGeometry.priorContent
+      ?.screenBeforeAdjustmentPx === 13
+    && contract.precedingGeometry.priorContent?.pdfBaselineStepPt === 36
+    && contract.precedingGeometry.priorContent?.pdfTolerancePt === 1
+    && contract.precedingGeometry.priorContent
+      ?.pdfBeforeAdjustmentPt === null
+    && exactKeys(contract.followingGeometry, [
+      'referenceBaselineStepRatio',
+      'referenceRatioTolerance',
+      'screenBaselineStepPx',
+      'screenTolerancePx',
+      'pdfBaselineStepPt',
+      'pdfTolerancePt',
+    ])
+    && contract.followingGeometry.referenceBaselineStepRatio === 1
+    && contract.followingGeometry.referenceRatioTolerance === 0.05
+    && contract.followingGeometry.screenBaselineStepPx === 24
+    && contract.followingGeometry.screenTolerancePx === 0.75
+    && contract.followingGeometry.pdfBaselineStepPt === 18
+    && contract.followingGeometry.pdfTolerancePt === 0.5
     && contract.referenceMeasurement?.path
       === 'docs/cuts/paper-canonical-unification/qa/20-reading-passage-letter-reference-measurements.json'
     && /^sha256:[a-f0-9]{64}$/.test(

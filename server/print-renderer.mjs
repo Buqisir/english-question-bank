@@ -228,7 +228,19 @@ function renderCanonicalReadingBlocks(canonicalGroup, groupLeadHtml) {
       canonicalGroup.passageLetter,
       'print_pdf',
     )
-  return `<div class="canonical-reading-start">${groupLeadHtml}<div class="canonical-reading-passage-letter" data-canonical-passage-letter="${escapeHtml(canonicalGroup.passageLetter)}" data-canonical-reading-preceding-kind="${precedingGeometry.precedingKind}" style="padding-top:${precedingGeometry.pdfBeforePaddingPt}pt">${escapeHtml(canonicalGroup.passageLetter)}</div></div><div class="canonical-reading" data-canonical-reading-semantic-signature="${escapeHtml(canonicalGroup.semanticSignature)}">${canonicalGroup.blocks.map((block) => {
+  const beforeAdjustment = precedingGeometry.pdfBeforeAdjustmentPt
+  if (beforeAdjustment === null) {
+    throw Object.assign(
+      new Error(
+        `Missing Print/PDF Reading predecessor geometry for ${canonicalGroup.groupId}`,
+      ),
+      { code: 'CANONICAL_READING_COMPANION_REJECTED' },
+    )
+  }
+  const beforeStyle = beforeAdjustment < 0
+    ? `margin-top:${beforeAdjustment}pt`
+    : `padding-top:${beforeAdjustment}pt`
+  return `<div class="canonical-reading-start">${groupLeadHtml}<div class="canonical-reading-passage-letter" data-canonical-passage-letter="${escapeHtml(canonicalGroup.passageLetter)}" data-canonical-reading-preceding-kind="${precedingGeometry.precedingKind}" style="${beforeStyle}">${escapeHtml(canonicalGroup.passageLetter)}</div></div><div class="canonical-reading" data-canonical-reading-semantic-signature="${escapeHtml(canonicalGroup.semanticSignature)}">${canonicalGroup.blocks.map((block) => {
     if (block.kind === 'paragraph') {
       const tag = block.role === 'title' ? 'h3' : 'p'
       return `<${tag} class="canonical-reading-${block.role}" data-canonical-block-id="${escapeHtml(block.nodeId)}" data-canonical-block-kind="paragraph" data-canonical-reading-role="${block.role}">${renderCanonicalInlineNodes(block.inlines)}</${tag}>`
@@ -643,7 +655,7 @@ export function buildPrintHtml({
         if (!canonicalWritingChrome) {
           const readingPredecessorAttrs =
             canonicalGroup?.groupType === 'reading'
-              ? ` data-canonical-reading-preceding-for="${escapeHtml(canonicalGroup.groupId)}" data-canonical-reading-preceding-kind="reading_heading"`
+              ? ` data-canonical-reading-preceding-for="${escapeHtml(canonicalGroup.groupId)}" data-canonical-reading-preceding-kind="reading_heading" data-canonical-reading-predecessor-group-id="${escapeHtml(canonicalGroup.groupId)}"`
               : ''
           groupLeadHtml += `<div class="group-header"${readingPredecessorAttrs}>${chineseNumeral(groupNum)}、${escapeHtml(groupHeaderLabel)}${escapeHtml(groupHeaderScoreSuffix)}</div>`
         }

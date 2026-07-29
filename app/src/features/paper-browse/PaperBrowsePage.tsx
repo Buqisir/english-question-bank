@@ -1900,6 +1900,35 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     return surfaceEl
   }
 
+  const canonicalReadingGroupIds =
+    canonicalConsumption?.selections.find(
+      (selection) => selection.familyContractId === 'reading',
+    )?.groupIds ?? []
+  const nextReadingGroupIdByPredecessorGroupId = new Map(
+    canonicalReadingGroupIds.slice(0, -1).map((groupId, index) => [
+      groupId,
+      canonicalReadingGroupIds[index + 1],
+    ]),
+  )
+  const firstReadingGroupBlockIndex = asset
+    ? asset.content.blocks.findIndex(
+        (block) =>
+          block.type === 'group'
+          && block.groupId === canonicalReadingGroupIds[0],
+      )
+    : -1
+  let firstReadingHeadingBlockIndex = -1
+  if (asset && firstReadingGroupBlockIndex >= 0) {
+    for (let index = firstReadingGroupBlockIndex - 1; index >= 0; index -= 1) {
+      const block = asset.content.blocks[index]
+      if (block.type === 'sectionHeading') {
+        firstReadingHeadingBlockIndex = index
+        break
+      }
+      if (block.type === 'group' || block.type === 'partHeading') break
+    }
+  }
+
   // one-sheet-paper: `mergedInstructionText` folds a single-group section's
   // leading 指导语 into this same hover/剪走 unit (owner-ratified rule:
   // 「指导语跟题走」) — rendered inside the card, in the same hover-highlight
@@ -1954,6 +1983,8 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
       entry?.kind === 'writing'
         ? 'paper-browse-group-card paper-browse-group-card--writing'
         : 'paper-browse-group-card'
+    const readingPrecedingFor =
+      nextReadingGroupIdByPredecessorGroupId.get(groupId)
 
     return (
       <Fragment key={`group-${index}`}>
@@ -1965,6 +1996,13 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
           }
           data-canonical-occurrence-signature={
             canonicalGroupIdentity?.occurrenceSignature
+          }
+          data-canonical-reading-preceding-for={readingPrecedingFor}
+          data-canonical-reading-preceding-kind={
+            readingPrecedingFor ? 'prior_content' : undefined
+          }
+          data-canonical-reading-predecessor-group-id={
+            readingPrecedingFor ? groupId : undefined
           }
           aria-label={group?.title || groupId}
         >
@@ -2259,6 +2297,16 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
             key={`section-${index}`}
             className="paper-browse-section-heading"
             data-paper-browse-anchor={block.sectionId}
+            data-canonical-reading-preceding-for={
+              index === firstReadingHeadingBlockIndex
+                ? canonicalReadingGroupIds[0]
+                : undefined
+            }
+            data-canonical-reading-preceding-kind={
+              index === firstReadingHeadingBlockIndex
+                ? 'reading_heading'
+                : undefined
+            }
           >
             {block.text}
           </h3>

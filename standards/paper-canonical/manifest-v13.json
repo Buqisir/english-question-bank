@@ -118,7 +118,7 @@
       "owner": "renderer_typography",
       "path": "rendering/paper-typography-v3.json",
       "schemaId": "renderer-typography-v3",
-      "sha256": "sha256:ff474aa911ae58bf5db4a6174ad70b82a47932ac8b9cafcab40d90ad7378a834"
+      "sha256": "sha256:cd9fc028ca69bad464e4a1cf573c84eea31cf5f666d0780f82e2af68d35bf63e"
     }
   ],
   "schemas": [
@@ -175,7 +175,7 @@
     {
       "id": "renderer-typography-v3",
       "path": "../../schemas/paper-canonical/renderer-typography-v3.schema.json",
-      "sha256": "sha256:534969e19e80b7c16b203d78b71eba701b7cef17adc54bcedc731a6289a2ccc0"
+      "sha256": "sha256:a95236f0a395bf457ed02422afad6ff1528d69433fa8344a4ffcf831c2a19297"
     },
     {
       "id": "source-capture-v1",

@@ -64,6 +64,7 @@
         "marginBeforePt",
         "marginAfterPt",
         "precedingGeometry",
+        "followingGeometry",
         "referenceMeasurement"
       ],
       "properties": {
@@ -144,13 +145,50 @@
           ],
           "properties": {
             "normalizationRule": {
-              "const": "reference_px_1_to_1_screen_css_px_and_0_75pt_per_pdf_css_px"
+              "const": "local_baseline_step_ratio_mapped_to_actual_rendered_line_step"
             },
             "readingHeading": {
               "$ref": "#/$defs/precedingGeometryContext"
             },
             "priorContent": {
               "$ref": "#/$defs/precedingGeometryContext"
+            }
+          }
+        },
+        "followingGeometry": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "referenceBaselineStepRatio",
+            "referenceRatioTolerance",
+            "screenBaselineStepPx",
+            "screenTolerancePx",
+            "pdfBaselineStepPt",
+            "pdfTolerancePt"
+          ],
+          "properties": {
+            "referenceBaselineStepRatio": {
+              "const": 1
+            },
+            "referenceRatioTolerance": {
+              "type": "number",
+              "minimum": 0
+            },
+            "screenBaselineStepPx": {
+              "type": "number",
+              "minimum": 0
+            },
+            "screenTolerancePx": {
+              "type": "number",
+              "minimum": 0
+            },
+            "pdfBaselineStepPt": {
+              "type": "number",
+              "minimum": 0
+            },
+            "pdfTolerancePt": {
+              "type": "number",
+              "minimum": 0
             }
           }
         },
@@ -178,25 +216,25 @@
       "type": "object",
       "additionalProperties": false,
       "required": [
-        "referenceInkGapPx",
-        "referenceTolerancePx",
-        "screenInkGapPx",
+        "referenceBaselineStepRatio",
+        "referenceRatioTolerance",
+        "screenBaselineStepPx",
         "screenTolerancePx",
         "screenBeforeAdjustmentPx",
-        "pdfInkGapPt",
+        "pdfBaselineStepPt",
         "pdfTolerancePt",
-        "pdfBeforePaddingPt"
+        "pdfBeforeAdjustmentPt"
       ],
       "properties": {
-        "referenceInkGapPx": {
+        "referenceBaselineStepRatio": {
           "type": "number",
           "minimum": 0
         },
-        "referenceTolerancePx": {
+        "referenceRatioTolerance": {
           "type": "number",
           "minimum": 0
         },
-        "screenInkGapPx": {
+        "screenBaselineStepPx": {
           "type": "number",
           "minimum": 0
         },
@@ -207,7 +245,7 @@
         "screenBeforeAdjustmentPx": {
           "type": "number"
         },
-        "pdfInkGapPt": {
+        "pdfBaselineStepPt": {
           "type": "number",
           "minimum": 0
         },
@@ -215,9 +253,11 @@
           "type": "number",
           "minimum": 0
         },
-        "pdfBeforePaddingPt": {
-          "type": "number",
-          "minimum": 0
+        "pdfBeforeAdjustmentPt": {
+          "type": [
+            "number",
+            "null"
+          ]
         }
       }
     }

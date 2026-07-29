@@ -78,7 +78,7 @@ function assertPassageLetterReferenceEvidence() {
   const evidence = JSON.parse(evidenceBytes)
   assert.equal(
     evidence.schemaVersion,
-    'reading-passage-letter-reference-measurements-v1',
+    'reading-passage-letter-reference-measurements-v2',
   )
   assert.deepEqual(
     evidence.references.map((reference) => reference.passageLetter?.value),
@@ -101,44 +101,44 @@ function assertPassageLetterReferenceEvidence() {
     readingPassageLetterGeometryForLetter('A', 'screen'),
     {
       precedingKind: 'reading_heading',
-      referenceInkGapPx: 18,
-      referenceTolerancePx: 2,
-      screenInkGapPx: 18,
-      screenTolerancePx: 2,
-      screenBeforeAdjustmentPx: -4,
-      pdfInkGapPt: 13.5,
-      pdfTolerancePt: 1.5,
-      pdfBeforePaddingPt: 2.635,
+      referenceBaselineStepRatio: 1,
+      referenceRatioTolerance: 0.05,
+      screenBaselineStepPx: 24,
+      screenTolerancePx: 1.25,
+      screenBeforeAdjustmentPx: -13,
+      pdfBaselineStepPt: 18,
+      pdfTolerancePt: 1,
+      pdfBeforeAdjustmentPt: -4.5,
     },
-    'Renderer Typography normalizes the golden Reading-heading gap for Screen and PDF',
+    'Renderer Typography maps the local Reading-heading ratio to actual Screen/PDF line steps',
   )
   assert.deepEqual(
     readingPassageLetterGeometryForLetter('B', 'screen'),
     {
       precedingKind: 'prior_content',
-      referenceInkGapPx: 46,
-      referenceTolerancePx: 2,
-      screenInkGapPx: 46,
-      screenTolerancePx: 2,
-      screenBeforeAdjustmentPx: 12,
-      pdfInkGapPt: 34.5,
-      pdfTolerancePt: 1.5,
-      pdfBeforePaddingPt: 23.635,
+      referenceBaselineStepRatio: 2,
+      referenceRatioTolerance: 0.05,
+      screenBaselineStepPx: 48,
+      screenTolerancePx: 1.25,
+      screenBeforeAdjustmentPx: 13,
+      pdfBaselineStepPt: 36,
+      pdfTolerancePt: 1,
+      pdfBeforeAdjustmentPt: null,
     },
-    'Renderer Typography normalizes the golden prior-content gap for Screen',
+    'Renderer Typography maps the local prior-content ratio to the actual Screen line step',
   )
   assert.deepEqual(
     readingPassageLetterGeometryForLetter('B', 'print_pdf'),
     {
       precedingKind: 'reading_heading',
-      referenceInkGapPx: 18,
-      referenceTolerancePx: 2,
-      screenInkGapPx: 18,
-      screenTolerancePx: 2,
-      screenBeforeAdjustmentPx: -4,
-      pdfInkGapPt: 13.5,
-      pdfTolerancePt: 1.5,
-      pdfBeforePaddingPt: 2.635,
+      referenceBaselineStepRatio: 1,
+      referenceRatioTolerance: 0.05,
+      screenBaselineStepPx: 24,
+      screenTolerancePx: 1.25,
+      screenBeforeAdjustmentPx: -13,
+      pdfBaselineStepPt: 18,
+      pdfTolerancePt: 1,
+      pdfBeforeAdjustmentPt: -4.5,
     },
     'Print/PDF uses its actual per-group Reading heading as the B-D predecessor',
   )
@@ -192,34 +192,35 @@ function assertPassageLetterReferenceEvidence() {
       `${reference.file} passage letter is horizontally centered`,
     )
     assert.equal(
-      Math.abs(
-        reference.following.letterToLatinLineTopDeltaPx
-        - evidence.normalizedContract.letterToNextLatinLineTopDeltaPx,
-      ) <= evidence.tolerances.letterToNextLatinLineTopDeltaPx,
+      reference.localScale.baselineProxySamplesY.slice(1).every(
+        (baselineY, index) =>
+          Math.abs(
+            baselineY
+            - reference.localScale.baselineProxySamplesY[index]
+            - reference.localScale.baselineStepPx,
+          ) <= evidence.tolerances.localBaselineStepPx,
+      ),
       true,
-      `${reference.file} passage letter and following line share the measured baseline step`,
-    )
-    assert.equal(
-      Math.abs(
-        reference.following.letterInkBottomToLatinLineInkTopPx
-        - evidence.normalizedContract.letterInkBottomToNextLatinLineInkTopPx,
-      ) <= evidence.tolerances.letterInkBottomToNextLatinLineInkTopPx,
-      true,
-      `${reference.file} passage letter retains the measured following-line ink gap`,
+      `${reference.file} supplies a stable local Latin baseline-step reference`,
     )
     const precedingTarget = reference.preceding.kind === 'reading-instruction'
-      ? evidence.normalizedContract.headingInkBottomToLetterInkTopPx
-      : evidence.normalizedContract.priorContentInkBottomToLetterInkTopPx
-    const precedingTolerance =
-      reference.preceding.kind === 'reading-instruction'
-        ? evidence.tolerances.headingInkBottomToLetterInkTopPx
-        : evidence.tolerances.priorContentInkBottomToLetterInkTopPx
+      ? evidence.normalizedContract.headingToLetterBaselineStepRatio
+      : evidence.normalizedContract.priorContentToLetterBaselineStepRatio
     assert.equal(
       Math.abs(
-        reference.preceding.inkBottomToLetterInkTopPx - precedingTarget,
-      ) <= precedingTolerance,
+        reference.localScale.precedingToLetterBaselineStepRatio
+        - precedingTarget,
+      ) <= evidence.tolerances.goldenBaselineStepRatio,
       true,
-      `${reference.file} passage letter retains the measured preceding-content gap`,
+      `${reference.file} passage letter retains the local preceding baseline-step ratio`,
+    )
+    assert.equal(
+      Math.abs(
+        reference.localScale.letterToFollowingBaselineStepRatio
+        - evidence.normalizedContract.letterToFirstPassageBaselineStepRatio,
+      ) <= evidence.tolerances.goldenBaselineStepRatio,
+      true,
+      `${reference.file} passage letter retains the local following baseline-step ratio`,
     )
   }
   return {
@@ -515,16 +516,17 @@ function structuralArtifactIdentity(html) {
   ]))
 }
 
-function assertPassageLetterMarkup(html, consumption, label) {
+function assertPassageLetterMarkup(html, consumption, consumerId, label) {
+  const expectedReading = expectedReadingPassageEntries(
+    consumption,
+    consumerId,
+  )
   assert.deepEqual(
     canonicalAttributeValues(html, 'data-canonical-passage-letter'),
-    ['A', 'B', 'C', 'D'],
+    expectedReading.map(({ letter }) => letter),
     `${label} renders A/B/C/D exactly once each`,
   )
-  const readingSelection = consumption.selections.find(
-    (selection) => selection.familyContractId === 'reading',
-  )
-  for (const [index, groupId] of readingSelection.groupIds.entries()) {
+  for (const { groupId, letter } of expectedReading) {
     const start = html.indexOf(`data-canonical-group-id="${groupId}"`)
       >= 0
       ? html.indexOf(`data-canonical-group-id="${groupId}"`)
@@ -549,15 +551,15 @@ function assertPassageLetterMarkup(html, consumption, label) {
     assert.equal(
       countTextOccurrences(
         html.slice(start, end),
-        `data-canonical-passage-letter="${'ABCD'[index]}"`,
+        `data-canonical-passage-letter="${letter}"`,
       ),
       1,
-      `${label} renders ${'ABCD'[index]} once inside ${groupId}`,
+      `${label} renders ${letter} once inside ${groupId}`,
     )
     if (label.includes('Print HTML')) {
       assert.equal(
         html.includes(
-          `data-canonical-reading-preceding-for="${groupId}" data-canonical-reading-preceding-kind="reading_heading"`,
+          `data-canonical-reading-preceding-for="${groupId}" data-canonical-reading-preceding-kind="reading_heading" data-canonical-reading-predecessor-group-id="${groupId}"`,
         ),
         true,
         `${label} tags the actual Reading-heading predecessor for ${groupId}`,
@@ -566,14 +568,144 @@ function assertPassageLetterMarkup(html, consumption, label) {
   }
 }
 
-async function measureScreenPassageLetterGeometry(page, consumption, label) {
+function expectedReadingPassageEntries(consumption, consumerId) {
   const readingSelection = consumption.selections.find(
     (selection) => selection.familyContractId === 'reading',
   )
-  const expected = readingSelection.groupIds.map((groupId, index) => ({
-    groupId,
-    letter: 'ABCD'[index],
+  return readingSelection.groupIds.map((groupId, index, groupIds) => {
+    const group = projectCanonicalConsumerGroup({
+      consumption,
+      familyContractId: 'reading',
+      groupId,
+    })
+    return {
+      groupId,
+      letter: group.passageLetter,
+      precedingKind:
+        readingPassageLetterGeometryForLetter(
+          group.passageLetter,
+          consumerId,
+        ).precedingKind,
+      predecessorGroupId:
+        consumerId === 'screen'
+          ? index > 0 ? groupIds[index - 1] : null
+          : groupId,
+    }
+  })
+}
+
+function exactPrintReadingPredecessorBindings(html, consumption, label) {
+  const matches = [...html.matchAll(
+    /<div class="group-header" data-canonical-reading-preceding-for="([^"]+)" data-canonical-reading-preceding-kind="([^"]+)" data-canonical-reading-predecessor-group-id="([^"]+)">([^<]+)<\/div>/g,
+  )]
+  const observations = matches.map((match) => ({
+    precedingForGroupId: match[1],
+    precedingKind: match[2],
+    predecessorGroupId: match[3],
+    visibleText: normalizedVisibleText(match[4]),
+    predecessorPage: 'print-html',
+    letterPage: 'print-html',
   }))
+  const expected = expectedReadingPassageEntries(consumption, 'print_pdf')
+  assertExactTaggedPredecessorObservations(observations, expected, label)
+  assertTaggedPredecessorAttacksFailClosed(observations, expected, label)
+  return new Map(
+    observations.map((observation) => [
+      observation.precedingForGroupId,
+      observation,
+    ]),
+  )
+}
+
+function assertExactTaggedPredecessorObservations(
+  observations,
+  expected,
+  label,
+) {
+  for (const entry of expected) {
+    const matches = observations.filter(
+      (observation) => observation.precedingForGroupId === entry.groupId,
+    )
+    assert.equal(
+      matches.length,
+      1,
+      `${label} requires exactly one tagged predecessor for ${entry.groupId}`,
+    )
+    const [observation] = matches
+    assert.equal(observation.precedingKind, entry.precedingKind)
+    assert.equal(
+      observation.predecessorGroupId,
+      entry.predecessorGroupId,
+      `${label} binds ${entry.groupId} to the expected predecessor Group`,
+    )
+    assert.equal(
+      observation.predecessorPage,
+      observation.letterPage,
+      `${label} keeps ${entry.groupId}'s predecessor and letter on one page`,
+    )
+  }
+  assert.equal(
+    observations.length,
+    expected.length,
+    `${label} rejects predecessor tags for an unknown Reading Group`,
+  )
+}
+
+function assertTaggedPredecessorAttacksFailClosed(
+  observations,
+  expected,
+  label,
+) {
+  const [first, second] = observations
+  assert.throws(
+    () => assertExactTaggedPredecessorObservations(
+      observations.slice(1),
+      expected,
+      label,
+    ),
+    /exactly one tagged predecessor/,
+    `${label} rejects a missing tagged predecessor`,
+  )
+  assert.throws(
+    () => assertExactTaggedPredecessorObservations(
+      [...observations, { ...first }],
+      expected,
+      label,
+    ),
+    /exactly one tagged predecessor/,
+    `${label} rejects a duplicate tagged predecessor`,
+  )
+  assert.throws(
+    () => assertExactTaggedPredecessorObservations(
+      observations.map((observation, index) =>
+        index === 0
+          ? { ...observation, predecessorPage: 'wrong-page' }
+          : observation),
+      expected,
+      label,
+    ),
+    /one page/,
+    `${label} rejects a predecessor on the wrong page`,
+  )
+  assert.throws(
+    () => assertExactTaggedPredecessorObservations(
+      observations.map((observation, index) =>
+        index === 0
+          ? {
+              ...observation,
+              precedingForGroupId: second.precedingForGroupId,
+            }
+          : observation),
+      expected,
+      label,
+    ),
+    /exactly one tagged predecessor/,
+    `${label} rejects a predecessor tagged for the wrong Group`,
+  )
+}
+
+async function measureScreenPassageLetterGeometry(page, consumption, label) {
+  const expected = expectedReadingPassageEntries(consumption, 'screen')
   const measurements = []
   for (const [
     index,
@@ -606,22 +738,11 @@ async function measureScreenPassageLetterGeometry(page, consumption, label) {
       const firstRange = document.createRange()
       firstRange.selectNodeContents(firstText)
       const firstTextRect = firstRange.getBoundingClientRect()
-      const precedingElement = context.precedingKind === 'reading_heading'
-        ? (() => {
-            const card = element.closest('[data-paper-browse-anchor]')
-            return card?.querySelector('.paper-browse-instruction--merged')
-              ?? card?.previousElementSibling
-              ?? null
-          })()
-        : (() => {
-            const precedingCard = document.querySelector(
-              `[data-paper-browse-anchor="${context.previousGroupId}"]`,
-            )
-            const options = precedingCard?.querySelectorAll(
-              '[data-canonical-option-id]',
-            )
-            return options?.[options.length - 1] ?? null
-          })()
+      const precedingMatches = document.querySelectorAll(
+        `[data-canonical-reading-preceding-for="${context.groupId}"]`,
+      )
+      if (precedingMatches.length !== 1) return null
+      const precedingElement = precedingMatches[0]
       if (!precedingElement) return null
       const precedingRange = document.createRange()
       precedingRange.selectNodeContents(precedingElement)
@@ -637,8 +758,18 @@ async function measureScreenPassageLetterGeometry(page, consumption, label) {
         letterTextBottom: letterTextRect.bottom,
         letterTextHeight: letterTextRect.height,
         firstTextTop: firstTextRect.top,
+        precedingForGroupId: precedingElement.getAttribute(
+          'data-canonical-reading-preceding-for',
+        ),
+        precedingKind: precedingElement.getAttribute(
+          'data-canonical-reading-preceding-kind',
+        ),
+        predecessorGroupId: precedingElement.getAttribute(
+          'data-canonical-reading-predecessor-group-id',
+        ),
         precedingInkBottom,
-        precedingInkGapPx: letterTextRect.top - precedingInkBottom,
+        precedingBaselineStepPx:
+          letterTextRect.bottom - precedingInkBottom,
         fontSizePx: Number.parseFloat(style.fontSize),
         lineHeightPx: Number.parseFloat(style.lineHeight),
         fontWeight: Number.parseInt(style.fontWeight, 10),
@@ -647,10 +778,17 @@ async function measureScreenPassageLetterGeometry(page, consumption, label) {
         paddingTopPx: Number.parseFloat(style.paddingTop),
       }
     }, {
+      groupId,
       precedingKind: expectedGeometry.precedingKind,
-      previousGroupId: expected[index - 1]?.groupId ?? null,
     })
     assert.ok(geometry, `${label} exposes ${groupId} passage-letter geometry`)
+    assert.equal(geometry.precedingForGroupId, groupId)
+    assert.equal(geometry.precedingKind, expectedGeometry.precedingKind)
+    assert.equal(
+      geometry.predecessorGroupId,
+      expected[index].predecessorGroupId,
+      `${label} binds ${groupId} to its exact visible predecessor Group`,
+    )
     const tolerances = passageLetterReference.evidence.tolerances
     assert.equal(
       Math.abs(geometry.letterCenterX - geometry.readingCenterX)
@@ -661,17 +799,22 @@ async function measureScreenPassageLetterGeometry(page, consumption, label) {
     assert.equal(
       Math.abs(
         geometry.firstTextTop - geometry.letterTextTop
-        - geometry.lineHeightPx,
-      ) <= tolerances.screenBaselineStepPx,
+        - readingPassageLetterTypography.followingGeometry
+          .screenBaselineStepPx,
+      ) <= readingPassageLetterTypography.followingGeometry.screenTolerancePx,
       true,
-      `${label} ${letter} and the first passage line use one measured baseline step`,
+      `${label} ${letter} and the first passage line use the ratio-mapped Screen baseline step`,
     )
     assert.equal(
       Math.abs(
-        geometry.precedingInkGapPx - expectedGeometry.screenInkGapPx,
+        geometry.precedingBaselineStepPx
+        - expectedGeometry.screenBaselineStepPx,
       ) <= expectedGeometry.screenTolerancePx,
       true,
-      `${label} ${letter} retains the normalized golden preceding-content ink gap`,
+      `${label} ${letter} retains the ratio-mapped preceding baseline step: ${JSON.stringify({
+        actual: geometry.precedingBaselineStepPx,
+        expected: expectedGeometry.screenBaselineStepPx,
+      })}`,
     )
     assert.equal(geometry.fontWeight >= 700, true, `${label} ${letter} is bold`)
     assert.equal(
@@ -691,8 +834,16 @@ async function measureScreenPassageLetterGeometry(page, consumption, label) {
       true,
       `${label} ${letter} exposes a stable glyph box`,
     )
-    measurements.push({ groupId, letter, ...geometry })
+    measurements.push({
+      groupId,
+      letter,
+      ...geometry,
+      predecessorPage: 'screen-flow',
+      letterPage: 'screen-flow',
+    })
   }
+  assertExactTaggedPredecessorObservations(measurements, expected, label)
+  assertTaggedPredecessorAttacksFailClosed(measurements, expected, label)
   assert.equal(
     await page.locator('[data-canonical-passage-letter]').count(),
     4,
@@ -1172,19 +1323,30 @@ function pdfWordsWithBoxes(pdfPath) {
     })))
 }
 
+function median(values) {
+  const sorted = [...values].sort((left, right) => left - right)
+  const midpoint = Math.floor(sorted.length / 2)
+  return sorted.length % 2 === 0
+    ? (sorted[midpoint - 1] + sorted[midpoint]) / 2
+    : sorted[midpoint]
+}
+
 function assertPdfPassageLetterGeometry(
   pdfPath,
   consumption,
   pageBoxes,
+  predecessorBindings,
   label,
 ) {
   const words = pdfWordsWithBoxes(pdfPath)
-  const readingSelection = consumption.selections.find(
-    (selection) => selection.familyContractId === 'reading',
-  )
-  let cursor = 0
+  const expected = expectedReadingPassageEntries(consumption, 'print_pdf')
   const measurements = []
-  for (const [index, groupId] of readingSelection.groupIds.entries()) {
+  for (const {
+    groupId,
+    letter: expectedLetter,
+    precedingKind,
+    predecessorGroupId,
+  } of expected) {
     const group = projectCanonicalConsumerGroup({
       consumption,
       familyContractId: 'reading',
@@ -1195,34 +1357,44 @@ function assertPdfPassageLetterGeometry(
       .map(normalizedPdfToken)
       .filter(Boolean)
       .slice(0, 4)
-    const markerIndex = words.findIndex((word, wordIndex) =>
-      wordIndex >= cursor
-      && markerTokens.every(
+    const markerIndexes = words.flatMap((word, wordIndex) =>
+      markerTokens.every(
         (token, tokenIndex) => words[wordIndex + tokenIndex]?.text === token,
-      ))
-    assert.notEqual(
-      markerIndex,
-      -1,
-      `${label} exposes ${groupId}'s first passage line geometry`,
+      ) ? [wordIndex] : [])
+    assert.equal(
+      markerIndexes.length,
+      1,
+      `${label} exposes exactly one ${groupId} first-passage marker`,
     )
+    const [markerIndex] = markerIndexes
     const letter = words[markerIndex - 1]
     const firstWord = words[markerIndex]
-    const expectedLetter = 'ABCD'[index]
     const expectedGeometry =
       readingPassageLetterGeometryForLetter(expectedLetter, 'print_pdf')
-    const headerPrefix = `${['一', '二', '三', '四'][index]}、阅读理解`
-    const precedingWordIndex = words.findLastIndex(
-      (word, wordIndex) =>
-        wordIndex < markerIndex - 1
-        && word.page === firstWord.page
-        && word.text.startsWith(headerPrefix),
+    const predecessorBinding = predecessorBindings.get(groupId)
+    assert.ok(
+      predecessorBinding,
+      `${label} carries the exact Print HTML predecessor binding for ${groupId}`,
     )
-    assert.notEqual(
+    const predecessorTokens = predecessorBinding.visibleText
+      .split(/\s+/)
+      .map(normalizedPdfToken)
+      .filter(Boolean)
+    const predecessorIndexes = words.flatMap((word, wordIndex) =>
+      predecessorTokens.every(
+        (token, tokenIndex) => words[wordIndex + tokenIndex]?.text === token,
+      ) ? [wordIndex] : [])
+    assert.equal(
+      predecessorIndexes.length,
+      1,
+      `${label} locates exactly one visible tagged predecessor for ${groupId}`,
+    )
+    const [precedingWordIndex] = predecessorIndexes
+    const precedingWords = words.slice(
       precedingWordIndex,
-      -1,
-      `${label} locates ${groupId}'s tagged Reading-heading marker by visible identity`,
+      precedingWordIndex + predecessorTokens.length,
     )
-    const precedingWord = words[precedingWordIndex]
+    const precedingWord = precedingWords[0]
     assert.equal(
       letter?.text,
       expectedLetter,
@@ -1241,8 +1413,11 @@ function assertPdfPassageLetterGeometry(
     const pageBox = pageBoxes[letter.page - 1].cropBox
     const pageCenterX = (pageBox.xMin + pageBox.xMax) / 2
     const letterCenterX = (letter.xMin + letter.xMax) / 2
-    const baselineStepPt = firstWord.yMin - letter.yMin
-    const precedingInkGapPt = letter.yMin - precedingWord.yMax
+    const followingBaselineStepPt = firstWord.yMax - letter.yMax
+    const precedingBaselineProxyPt = median(
+      precedingWords.map((word) => word.yMax),
+    )
+    const precedingBaselineStepPt = letter.yMax - precedingBaselineProxyPt
     const tolerances = passageLetterReference.evidence.tolerances
     assert.equal(
       Math.abs(letterCenterX - pageCenterX)
@@ -1251,16 +1426,20 @@ function assertPdfPassageLetterGeometry(
       `${label} ${expectedLetter} is centered on the A4 page`,
     )
     assert.equal(
-      Math.abs(baselineStepPt - 18)
-        <= tolerances.pdfBaselineStepPt,
+      Math.abs(
+        followingBaselineStepPt
+        - readingPassageLetterTypography.followingGeometry.pdfBaselineStepPt,
+      ) <= readingPassageLetterTypography.followingGeometry.pdfTolerancePt,
       true,
-      `${label} ${expectedLetter} and its first passage line use one fixed 18pt baseline step`,
+      `${label} ${expectedLetter} and its first passage line use the ratio-mapped PDF baseline step`,
     )
     assert.equal(
-      Math.abs(precedingInkGapPt - expectedGeometry.pdfInkGapPt)
+      Math.abs(
+        precedingBaselineStepPt - expectedGeometry.pdfBaselineStepPt,
+      )
         <= expectedGeometry.pdfTolerancePt,
       true,
-      `${label} ${expectedLetter} retains the normalized golden preceding-content ink gap`,
+      `${label} ${expectedLetter} retains the ratio-mapped predecessor baseline step`,
     )
     assert.equal(
       letter.yMax - letter.yMin > 10 && letter.yMax - letter.yMin < 13,
@@ -1278,13 +1457,19 @@ function assertPdfPassageLetterGeometry(
         yMax: letter.yMax,
       },
       pageCenterOffsetPt: letterCenterX - pageCenterX,
-      firstLineTopDeltaPt: baselineStepPt,
+      precedingForGroupId: predecessorBinding.precedingForGroupId,
+      precedingKind,
+      predecessorGroupId,
+      predecessorPage: precedingWord.page,
+      letterPage: letter.page,
+      firstLineBaselineStepPt: followingBaselineStepPt,
       firstLineInkGapPt: firstWord.yMin - letter.yMax,
-      precedingInkBottomPt: precedingWord.yMax,
-      precedingInkGapPt,
+      precedingBaselineProxyPt,
+      precedingBaselineStepPt,
     })
-    cursor = markerIndex + markerTokens.length
   }
+  assertExactTaggedPredecessorObservations(measurements, expected, label)
+  assertTaggedPredecessorAttacksFailClosed(measurements, expected, label)
   return measurements
 }
 
@@ -1750,6 +1935,7 @@ async function renderSupportedArtifacts({
       assertPassageLetterMarkup(
         plainHtml,
         consumers.screen,
+        'screen',
         'plain PaperSurface',
       )
       passageLetterGeometry.screenPlain =
@@ -1794,6 +1980,7 @@ async function renderSupportedArtifacts({
       assertPassageLetterMarkup(
         lectureHtml,
         consumers.screen,
+        'screen',
         'lecture PaperSurface',
       )
       passageLetterGeometry.screenLecture =
@@ -1899,13 +2086,27 @@ async function renderSupportedArtifacts({
       assertPassageLetterMarkup(
         printHtml.student,
         consumers.print_pdf,
+        'print_pdf',
         'Student Print HTML',
       )
       assertPassageLetterMarkup(
         printHtml.teacher,
         consumers.print_pdf,
+        'print_pdf',
         'Teacher Print HTML',
       )
+      const printPredecessorBindings = {
+        student: exactPrintReadingPredecessorBindings(
+          printHtml.student,
+          consumers.print_pdf,
+          'Student Print HTML',
+        ),
+        teacher: exactPrintReadingPredecessorBindings(
+          printHtml.teacher,
+          consumers.print_pdf,
+          'Teacher Print HTML',
+        ),
+      }
       assert.equal(
         attributeSignatures(printHtml.student).length > 0,
         true,
@@ -2001,6 +2202,7 @@ async function renderSupportedArtifacts({
             pdfPath,
             consumers.print_pdf,
             pageBoxes,
+            printPredecessorBindings[versionType],
             label,
           )
         assertPdfBankAndNativeTable(
