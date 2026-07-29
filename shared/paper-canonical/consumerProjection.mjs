@@ -2,6 +2,7 @@ import {
   abcdPlacementSignature,
   layoutAbcdOptionSet,
 } from './abcdLayout.mjs'
+import { readingPassageLetterBySlotId } from './readingPassageLetter.mjs'
 import { digestJson, sha256 } from './stable.mjs'
 
 const SUPPORTED_FAMILIES = new Set([
@@ -42,8 +43,10 @@ function decodeBase64Bytes(value) {
 
 function projectReadingConsumerGroup(input, occurrence) {
   const { groupId } = input
+  const passageLetter = readingPassageLetterBySlotId[occurrence.slotId]
   if (
-    !Array.isArray(occurrence.blanks)
+    !passageLetter
+    || !Array.isArray(occurrence.blanks)
     || occurrence.blanks.length !== 0
     || !Array.isArray(occurrence.numbering)
     || !Array.isArray(occurrence.blocks)
@@ -335,6 +338,7 @@ function projectReadingConsumerGroup(input, occurrence) {
   return Object.freeze({
     groupType: 'reading',
     ...semantic,
+    passageLetter,
     media: structuredClone(occurrence.media),
     questions,
     semanticSignature: digestJson(semantic),

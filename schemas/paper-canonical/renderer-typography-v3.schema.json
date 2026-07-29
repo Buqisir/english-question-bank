@@ -1,0 +1,135 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "renderer-typography-v3",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "id",
+    "version",
+    "owner",
+    "paper",
+    "projectionContract",
+    "rules",
+    "coordinates",
+    "readingPassageLetters"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "renderer-typography-v3"
+    },
+    "id": {
+      "type": "string"
+    },
+    "version": {
+      "const": "3"
+    },
+    "owner": {
+      "const": "renderer_typography"
+    },
+    "paper": {
+      "type": "string"
+    },
+    "projectionContract": {
+      "type": "string"
+    },
+    "rules": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "coordinates": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "questionStemAndOuterOptionBlockStartTwip"
+      ],
+      "properties": {
+        "questionStemAndOuterOptionBlockStartTwip": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "readingPassageLetters": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "slotIdentity",
+        "horizontalPlacement",
+        "fontSizePt",
+        "lineHeightPt",
+        "fontWeight",
+        "marginBeforePt",
+        "marginAfterPt",
+        "referenceMeasurement"
+      ],
+      "properties": {
+        "slotIdentity": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "slotId",
+              "letter"
+            ],
+            "properties": {
+              "slotId": {
+                "type": "string"
+              },
+              "letter": {
+                "enum": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ]
+              }
+            }
+          }
+        },
+        "horizontalPlacement": {
+          "const": "reading_content_column_center"
+        },
+        "fontSizePt": {
+          "type": "number",
+          "minimum": 0
+        },
+        "lineHeightPt": {
+          "type": "number",
+          "minimum": 0
+        },
+        "fontWeight": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "marginBeforePt": {
+          "type": "number",
+          "minimum": 0
+        },
+        "marginAfterPt": {
+          "type": "number",
+          "minimum": 0
+        },
+        "referenceMeasurement": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "path",
+            "sha256"
+          ],
+          "properties": {
+            "path": {
+              "type": "string"
+            },
+            "sha256": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -4,7 +4,7 @@
 
 本文件是唯一的人类可读索引；当前 canonical 编译、校验、发布和受支持的
 Screen / Print-PDF consumer 只从
-[`standards/paper-canonical/manifest-v12.json`](../../standards/paper-canonical/manifest-v12.json)
+[`standards/paper-canonical/manifest-v13.json`](../../standards/paper-canonical/manifest-v13.json)
 解析一份 digest-closed 的权威闭包。这里不复制卷型题号、分值、题组
 cardinality、清洗条件或字体/物理排版数值，也不能被 caller 当作第二套配置。
 
@@ -18,10 +18,15 @@ Renderer Typography、其 schema 及纯验证入口。未知版本、缺件、di
 任何会改变 admission、canonical 语义、Profile、normalization 或 renderer
 结果的变更，必须新增 versioned artifact、schema/semantic conformance fixture、
 迁移说明和 manifest 升版；已经被 Publication 引用的 artifact 不可原位修改。
-`manifest-v1.json` 至 `manifest-v11.json` 保留各自原始 digest-closed closure，
-供既有 Publication 解析；当前 Screen v12、Print/PDF v13 consumer contracts
-只绑定 v12 authority。v12 以 `consumer-contract-v2` 将当前输出矩阵收口为
-Screen 与 Print/PDF，并退役 generated DOCX capability；迁移说明见
+`manifest-v1.json` 至 `manifest-v12.json` 保留各自原始 digest-closed closure，
+供既有 Publication 解析；当前 Screen v13、Print/PDF v14 consumer contracts
+只绑定 v13 authority。v13 以 Renderer Typography v3 绑定 Reading A–D 的
+slot-identity 投影、居中位置和 18pt 行盒；迁移说明见
+[`manifest-v13-migration.md`](../../standards/paper-canonical/manifest-v13-migration.md)
+和
+[`paper-typography-v3-migration.md`](../../standards/paper-canonical/rendering/paper-typography-v3-migration.md)。
+此前 v12 以 `consumer-contract-v2` 将当前输出矩阵收口为 Screen 与 Print/PDF，
+并退役 generated DOCX capability；迁移说明见
 [`manifest-v12-migration.md`](../../standards/paper-canonical/manifest-v12-migration.md)。
 此前 v11 以 NCK1 Profile v5 为两个 inactive
 listening slot 绑定 `listening-raw-closure@nck1-v1`，闭合 Questions 1–20、

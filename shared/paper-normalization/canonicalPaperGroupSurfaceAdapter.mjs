@@ -323,6 +323,7 @@ export function buildCanonicalReadingConsumptionSurfaceData({
   return {
     status: 'ready',
     semanticDigest: canonicalGroup.semanticSignature,
+    passageLetter: canonicalGroup.passageLetter,
     placementSignatures: canonicalGroup.questions.map(
       (question) => question.placementSignature,
     ),

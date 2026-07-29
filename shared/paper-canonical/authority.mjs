@@ -10,6 +10,7 @@ import manifestV9 from '../../standards/paper-canonical/manifest-v9.json' with {
 import manifestV10 from '../../standards/paper-canonical/manifest-v10.json' with { type: 'json' }
 import manifestV11 from '../../standards/paper-canonical/manifest-v11.json' with { type: 'json' }
 import manifestV12 from '../../standards/paper-canonical/manifest-v12.json' with { type: 'json' }
+import manifestV13 from '../../standards/paper-canonical/manifest-v13.json' with { type: 'json' }
 import core from '../../standards/paper-canonical/core/core-invariants-v1.json' with { type: 'json' }
 import sourceAdapters from '../../standards/paper-canonical/adapters/source-adapters-v1.json' with { type: 'json' }
 import sourceAdaptersV2 from '../../standards/paper-canonical/adapters/source-adapters-v2.json' with { type: 'json' }
@@ -40,6 +41,7 @@ import normalizationV2 from '../../standards/paper-canonical/normalization/norma
 import normalizationV3 from '../../standards/paper-canonical/normalization/normalization-rules-v3.json' with { type: 'json' }
 import typographyV1 from '../../standards/paper-canonical/rendering/paper-typography-v1.json' with { type: 'json' }
 import typographyV2 from '../../standards/paper-canonical/rendering/paper-typography-v2.json' with { type: 'json' }
+import typographyV3 from '../../standards/paper-canonical/rendering/paper-typography-v3.json' with { type: 'json' }
 import standardManifestSchema from '../../schemas/paper-canonical/standard-manifest-v1.schema.json' with { type: 'json' }
 import coreSchema from '../../schemas/paper-canonical/core-invariants-v1.schema.json' with { type: 'json' }
 import profileSchema from '../../schemas/paper-canonical/paper-format-profile-v1.schema.json' with { type: 'json' }
@@ -61,6 +63,7 @@ import normalizationV3Schema from '../../schemas/paper-canonical/normalization-r
 import sourceAdaptersSchema from '../../schemas/paper-canonical/source-adapters-v1.schema.json' with { type: 'json' }
 import typographyV1Schema from '../../schemas/paper-canonical/renderer-typography-v1.schema.json' with { type: 'json' }
 import typographyV2Schema from '../../schemas/paper-canonical/renderer-typography-v2.schema.json' with { type: 'json' }
+import typographyV3Schema from '../../schemas/paper-canonical/renderer-typography-v3.schema.json' with { type: 'json' }
 import sourceCaptureSchema from '../../schemas/paper-canonical/source-capture-v1.schema.json' with { type: 'json' }
 import planSchema from '../../schemas/paper-canonical/canonical-paper-plan-v1.schema.json' with { type: 'json' }
 import groupSchema from '../../schemas/paper-canonical/canonical-question-group-v1.schema.json' with { type: 'json' }
@@ -76,6 +79,7 @@ import reportV9Schema from '../../schemas/paper-canonical/normalization-report-v
 import reportV10Schema from '../../schemas/paper-canonical/normalization-report-v10.schema.json' with { type: 'json' }
 import reportV11Schema from '../../schemas/paper-canonical/normalization-report-v11.schema.json' with { type: 'json' }
 import reportV12Schema from '../../schemas/paper-canonical/normalization-report-v12.schema.json' with { type: 'json' }
+import reportV13Schema from '../../schemas/paper-canonical/normalization-report-v13.schema.json' with { type: 'json' }
 import legacyReportV9Schema from '../../schemas/paper-canonical/normalization-report-v9.schema.json' with { type: 'json' }
 import publicationSchema from '../../schemas/paper-canonical/canonical-paper-publication-v1.schema.json' with { type: 'json' }
 import publicationV2Schema from '../../schemas/paper-canonical/canonical-paper-publication-v2.schema.json' with { type: 'json' }
@@ -89,6 +93,7 @@ import publicationV9Schema from '../../schemas/paper-canonical/canonical-paper-p
 import publicationV10Schema from '../../schemas/paper-canonical/canonical-paper-publication-v10.schema.json' with { type: 'json' }
 import publicationV11Schema from '../../schemas/paper-canonical/canonical-paper-publication-v11.schema.json' with { type: 'json' }
 import publicationV12Schema from '../../schemas/paper-canonical/canonical-paper-publication-v12.schema.json' with { type: 'json' }
+import publicationV13Schema from '../../schemas/paper-canonical/canonical-paper-publication-v13.schema.json' with { type: 'json' }
 import legacyPublicationV9Schema from '../../schemas/paper-canonical/canonical-paper-publication-v9.schema.json' with { type: 'json' }
 import consumerSchema from '../../schemas/paper-canonical/consumer-contract-v1.schema.json' with { type: 'json' }
 import consumerV2Schema from '../../schemas/paper-canonical/consumer-contract-v2.schema.json' with { type: 'json' }
@@ -451,6 +456,43 @@ function validateNormalizationRules(artifact) {
   return issues
 }
 
+function validateRendererTypography(artifact, profiles) {
+  if (artifact?.schemaVersion !== 'renderer-typography-v3') return []
+  const contract = artifact.readingPassageLetters
+  const expectedSlotIds = [...new Set(
+    profiles.flatMap((profile) =>
+      flattenSlots(profile)
+        .filter((slot) =>
+          slot.activation === 'canonical_group'
+          && slot.familyContractRef?.id === 'reading')
+        .map((slot) => slot.slotId)),
+  )].sort()
+  const slotIdentity = contract?.slotIdentity
+  const valid = (
+    Array.isArray(slotIdentity)
+    && slotIdentity.length === expectedSlotIds.length
+    && new Set(slotIdentity.map((entry) => entry?.slotId)).size
+      === slotIdentity.length
+    && slotIdentity.every((entry, index) =>
+      isRecordValue(entry)
+      && exactKeys(entry, ['slotId', 'letter'])
+      && entry.slotId === expectedSlotIds[index]
+      && entry.letter === entry.slotId.slice('reading.'.length).toUpperCase())
+    && contract.referenceMeasurement?.path
+      === 'docs/cuts/paper-canonical-unification/qa/20-reading-passage-letter-reference-measurements.json'
+    && /^sha256:[a-f0-9]{64}$/.test(
+      contract.referenceMeasurement?.sha256 || '',
+    )
+  )
+  return valid
+    ? []
+    : [issue(
+        'RENDERER_READING_PASSAGE_LETTERS_INVALID',
+        '$.artifacts.renderer-typography.readingPassageLetters',
+        'Reading passage letters must bind each active Reading slot identity exactly once and retain digest-bound measured evidence',
+      )]
+}
+
 export function validateAuthorityClosure({
   manifest: candidateManifest,
   artifacts,
@@ -543,6 +585,13 @@ export function validateAuthorityClosure({
   }
   const normalizationArtifact = Object.values(artifacts || {}).find((artifact) => artifact?.owner === 'normalization')
   issues.push(...validateNormalizationRules(normalizationArtifact))
+  const rendererTypographyArtifact = Object.values(artifacts || {}).find(
+    (artifact) => artifact?.owner === 'renderer_typography',
+  )
+  issues.push(...validateRendererTypography(
+    rendererTypographyArtifact,
+    profileArtifacts,
+  ))
   const coreArtifact = Object.values(artifacts || {}).find((artifact) => artifact?.owner === 'core')
   if (!coreArtifact || coreArtifact.projectionContract !== 'canonical-projector-v1') issues.push(issue('AUTHORITY_CORE_CLOSURE', '$.artifacts', 'Core invariants must pin the projector'))
   return { ok: issues.length === 0, issues }
@@ -622,6 +671,7 @@ const artifactsV9 = { ...sharedArtifactsV9, normalization: normalizationV2, 'ren
 const artifactsV10 = { ...sharedArtifactsV9, normalization: normalizationV3, 'renderer-typography': typographyV2 }
 const artifactsV11 = { ...sharedArtifactsV11, normalization: normalizationV3, 'renderer-typography': typographyV2 }
 const artifactsV12 = artifactsV11
+const artifactsV13 = { ...sharedArtifactsV11, normalization: normalizationV3, 'renderer-typography': typographyV3 }
 const schemasV1 = { ...sharedSchemas, 'renderer-typography-v1': typographyV1Schema, 'normalization-rules-v1': normalizationSchema, 'normalization-report-v1': reportSchema, 'canonical-paper-publication-v1': publicationSchema }
 const schemasV2 = { ...sharedSchemas, 'renderer-typography-v1': typographyV1Schema, 'normalization-rules-v2': normalizationV2Schema, 'normalization-report-v2': reportV2Schema, 'canonical-paper-publication-v2': publicationV2Schema }
 const schemasV3 = { ...sharedSchemas, 'renderer-typography-v2': typographyV2Schema, 'normalization-rules-v2': normalizationV2Schema, 'normalization-report-v3': reportV3Schema, 'canonical-paper-publication-v3': publicationV3Schema }
@@ -697,6 +747,19 @@ const schemasV12 = {
   'normalization-report-v12': reportV12Schema,
   'canonical-paper-publication-v12': publicationV12Schema,
 }
+const schemasV13 = {
+  ...Object.fromEntries(
+    Object.entries(schemasV12).filter(([schemaId]) =>
+      ![
+        'renderer-typography-v2',
+        'normalization-report-v12',
+        'canonical-paper-publication-v12',
+      ].includes(schemaId)),
+  ),
+  'renderer-typography-v3': typographyV3Schema,
+  'normalization-report-v13': reportV13Schema,
+  'canonical-paper-publication-v13': publicationV13Schema,
+}
 const validationV1 = validateAuthorityClosure({ manifest: manifestV1, artifacts: artifactsV1, schemas: schemasV1 })
 const validationV2 = validateAuthorityClosure({ manifest: manifestV2, artifacts: artifactsV2, schemas: schemasV2 })
 const validationV3 = validateAuthorityClosure({ manifest: manifestV3, artifacts: artifactsV3, schemas: schemasV3 })
@@ -709,6 +772,7 @@ const validationV9 = validateAuthorityClosure({ manifest: manifestV9, artifacts:
 const validationV10 = validateAuthorityClosure({ manifest: manifestV10, artifacts: artifactsV10, schemas: schemasV10 })
 const validationV11 = validateAuthorityClosure({ manifest: manifestV11, artifacts: artifactsV11, schemas: schemasV11 })
 const validationV12 = validateAuthorityClosure({ manifest: manifestV12, artifacts: artifactsV12, schemas: schemasV12 })
+const validationV13 = validateAuthorityClosure({ manifest: manifestV13, artifacts: artifactsV13, schemas: schemasV13 })
 const validations = [
   validationV1,
   validationV2,
@@ -722,6 +786,7 @@ const validations = [
   validationV10,
   validationV11,
   validationV12,
+  validationV13,
 ]
 if (validations.some((validation) => !validation.ok)) {
   throw new Error(`Invalid checked-in canonical authority: ${JSON.stringify(validations.flatMap((validation) => validation.issues))}`)
@@ -744,6 +809,7 @@ const authorities = [
   { manifest: manifestV10, artifacts: artifactsV10, schemas: schemasV10 },
   { manifest: manifestV11, artifacts: artifactsV11, schemas: schemasV11 },
   { manifest: manifestV12, artifacts: artifactsV12, schemas: schemasV12 },
+  { manifest: manifestV13, artifacts: artifactsV13, schemas: schemasV13 },
 ].map((authority) => ({
   ...authority,
   authorityRef: authorityRef(authority.manifest),
@@ -751,7 +817,7 @@ const authorities = [
   families: new Map(Object.values(authority.artifacts).filter((artifact) => artifact?.owner === 'family').map((family) => [family.familyContractId, family])),
 }))
 
-export const canonicalAuthorityRef = authorities.find((authority) => authority.manifest.version === '12').authorityRef
+export const canonicalAuthorityRef = authorities.find((authority) => authority.manifest.version === '13').authorityRef
 
 export function resolveCanonicalAuthority(authorityRef) {
   const authority = authorities.find((candidate) => candidate.authorityRef.manifestId === authorityRef?.manifestId && candidate.authorityRef.manifestVersion === authorityRef?.manifestVersion && candidate.authorityRef.manifestDigest === authorityRef?.manifestDigest)

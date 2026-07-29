@@ -1,5 +1,5 @@
 import metrics from '../../standards/paper-canonical/rendering/times-compatible-metrics-v1.json' with { type: 'json' }
-import rendererTypography from '../../standards/paper-canonical/rendering/paper-typography-v2.json' with { type: 'json' }
+import rendererTypography from '../../standards/paper-canonical/rendering/paper-typography-v3.json' with { type: 'json' }
 
 import { digestJson, sha256 } from './stable.mjs'
 

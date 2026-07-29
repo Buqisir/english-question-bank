@@ -125,21 +125,6 @@
   padding-bottom: 0;
 }
 
-/* ─── Passage letter (paper-passage-letter cut) ────────────────────
- * Reading passages only (see PaperSurfaceSection's passageLetter
- * derivation in PaperSurface.tsx). Standard §83-84: bold, centered,
- * one blank line above and below — approximated here as a margin of
- * one line-height on each side, using the same font-size/line-height
- * tokens the passage body consumes so it scales together with the
- * screen basis (10.5pt-equivalent). */
-.ps-passage-letter {
-  font-size: var(--ps-font-size);
-  line-height: var(--ps-line-height);
-  font-weight: bold;
-  text-align: center;
-  margin: calc(var(--ps-font-size) * var(--ps-line-height)) 0;
-}
-
 /* ─── Passage body ─────────────────────────────────────────────── */
 
 .ps-passage-body {
@@ -185,6 +170,15 @@
 .ps-canonical-reading {
   font-size: var(--ps-font-size);
   line-height: var(--ps-line-height);
+}
+
+.ps-canonical-reading-passage-letter {
+  margin: 0;
+  padding: 0;
+  font-size: var(--ps-font-size);
+  line-height: var(--ps-line-height);
+  font-weight: 700;
+  text-align: center;
 }
 
 .ps-canonical-reading-paragraph,

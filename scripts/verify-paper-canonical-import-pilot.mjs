@@ -21,6 +21,9 @@ import { consumerContractRefs } from '../shared/paper-canonical/consumers.mjs'
 import {
   projectCanonicalConsumerGroup,
 } from '../shared/paper-canonical/consumerProjection.mjs'
+import {
+  readingPassageLetterTypography,
+} from '../shared/paper-canonical/readingPassageLetter.mjs'
 import { loadCanonicalImportRequest } from '../server/paper-canonical/importRequest.mjs'
 import {
   admitCanonicalPaperImport,
@@ -44,6 +47,10 @@ const sourcePackageDir = path.join(
   repositoryRoot,
   'test-fixtures/paper-import/paper-2026-i-canonical-pilot',
 )
+const passageLetterReferencePath = path.join(
+  repositoryRoot,
+  'docs/cuts/paper-canonical-unification/qa/20-reading-passage-letter-reference-measurements.json',
+)
 const paperId = 'paper-2026-i'
 const provisionActualArtifacts = process.argv.includes('--actual-artifacts')
 const keepQaServer = process.argv.includes('--qa-server')
@@ -62,6 +69,100 @@ if (injectQaArtifactServerStartupFailure && !keepQaServer) {
 
 function sha256(bytes) {
   return createHash('sha256').update(bytes).digest('hex')
+}
+
+function assertPassageLetterReferenceEvidence() {
+  const evidenceBytes = readFileSync(passageLetterReferencePath)
+  const evidence = JSON.parse(evidenceBytes)
+  assert.equal(
+    evidence.schemaVersion,
+    'reading-passage-letter-reference-measurements-v1',
+  )
+  assert.deepEqual(
+    evidence.references.map((reference) => reference.passageLetter?.value),
+    ['A', 'B', 'C', 'D', undefined],
+  )
+  assert.equal(
+    readingPassageLetterTypography.referenceMeasurement.path,
+    path.relative(repositoryRoot, passageLetterReferencePath),
+    'Renderer Typography binds the measured Reading passage-letter evidence path',
+  )
+  assert.equal(
+    readingPassageLetterTypography.referenceMeasurement.sha256,
+    `sha256:${sha256(evidenceBytes)}`,
+    'Renderer Typography binds the exact measured Reading passage-letter evidence digest',
+  )
+  assert.equal(readingPassageLetterTypography.lineHeightPt, 18)
+  assert.equal(readingPassageLetterTypography.marginBeforePt, 0)
+  assert.equal(readingPassageLetterTypography.marginAfterPt, 0)
+  const readme = readFileSync(
+    path.join(
+      repositoryRoot,
+      'docs/product/exam-paper-format-reference/README.md',
+    ),
+    'utf8',
+  )
+  for (const reference of evidence.references) {
+    const bytes = readFileSync(path.join(repositoryRoot, reference.file))
+    assert.equal(
+      sha256(bytes),
+      reference.sha256,
+      `${reference.file} retains its accepted golden-reference digest`,
+    )
+    assert.equal(
+      readme.includes(path.basename(reference.file)),
+      true,
+      `${reference.file} remains indexed by the accepted reference README`,
+    )
+    if (!reference.passageLetter) continue
+    const { box } = reference.passageLetter
+    assert.equal(
+      Math.abs(box.height - evidence.normalizedContract.letterGlyphHeightPx)
+        <= evidence.tolerances.letterGlyphHeightPx,
+      true,
+      `${reference.file} passage letter retains the measured glyph height`,
+    )
+    assert.equal(
+      Math.abs(reference.passageLetter.imageCenterOffsetPx)
+        <= evidence.tolerances.horizontalImageCenterOffsetPx,
+      true,
+      `${reference.file} passage letter is horizontally centered`,
+    )
+    assert.equal(
+      Math.abs(
+        reference.following.letterToLatinLineTopDeltaPx
+        - evidence.normalizedContract.letterToNextLatinLineTopDeltaPx,
+      ) <= evidence.tolerances.letterToNextLatinLineTopDeltaPx,
+      true,
+      `${reference.file} passage letter and following line share the measured baseline step`,
+    )
+    assert.equal(
+      Math.abs(
+        reference.following.letterInkBottomToLatinLineInkTopPx
+        - evidence.normalizedContract.letterInkBottomToNextLatinLineInkTopPx,
+      ) <= evidence.tolerances.letterInkBottomToNextLatinLineInkTopPx,
+      true,
+      `${reference.file} passage letter retains the measured following-line ink gap`,
+    )
+    const precedingTarget = reference.preceding.kind === 'reading-instruction'
+      ? evidence.normalizedContract.headingInkBottomToLetterInkTopPx
+      : evidence.normalizedContract.priorContentInkBottomToLetterInkTopPx
+    const precedingTolerance =
+      reference.preceding.kind === 'reading-instruction'
+        ? evidence.tolerances.headingInkBottomToLetterInkTopPx
+        : evidence.tolerances.priorContentInkBottomToLetterInkTopPx
+    assert.equal(
+      Math.abs(
+        reference.preceding.inkBottomToLetterInkTopPx - precedingTarget,
+      ) <= precedingTolerance,
+      true,
+      `${reference.file} passage letter retains the measured preceding-content gap`,
+    )
+  }
+  return {
+    digest: sha256(evidenceBytes),
+    evidence,
+  }
 }
 
 function snapshotTree(rootDir) {
@@ -155,6 +256,7 @@ async function exactReload({ db, paperAssetsDir, expectedVersion }) {
       false,
       `${consumerId} exposes zero Listening occurrence`,
     )
+    assertCanonicalPassageLetterProjection(consumers[consumerId])
   }
   assert.deepEqual(Object.keys(consumers).sort(), ['print_pdf', 'screen'])
   return { ref, consumers }
@@ -174,6 +276,7 @@ function normalizedConsumptionSemantics(consumption) {
       return {
         groupId: occurrence.groupId,
         groupType: occurrence.groupType,
+        passageLetter: occurrence.passageLetter,
         semanticSignature: occurrence.semanticSignature,
         occurrenceSignature: occurrence.occurrenceSignature,
         questions: (occurrence.questions || []).map((question) => ({
@@ -191,6 +294,45 @@ function assertSupportedConsumerParity(consumers) {
     normalizedConsumptionSemantics(consumers.print_pdf),
     'Screen and Print/PDF consume one semantic projection',
   )
+}
+
+function assertCanonicalPassageLetterProjection(consumption) {
+  const readingSelection = consumption.selections.find(
+    (selection) => selection.familyContractId === 'reading',
+  )
+  assert.ok(readingSelection)
+  assert.deepEqual(
+    readingSelection.projectedOccurrences.map(
+      (occurrence) => occurrence.slotId,
+    ),
+    ['reading.a', 'reading.b', 'reading.c', 'reading.d'],
+  )
+  assert.deepEqual(
+    readingSelection.groupIds.map((groupId) =>
+      projectCanonicalConsumerGroup({
+        consumption,
+        familyContractId: 'reading',
+        groupId,
+      }).passageLetter),
+    ['A', 'B', 'C', 'D'],
+    'the ready whole-paper Reading selection projects A/B/C/D from explicit slot identity',
+  )
+  for (const selection of consumption.selections.filter(
+    (candidate) => candidate.familyContractId !== 'reading',
+  )) {
+    for (const groupId of selection.groupIds) {
+      const group = projectCanonicalConsumerGroup({
+        consumption,
+        familyContractId: selection.familyContractId,
+        groupId,
+      })
+      assert.equal(
+        Object.hasOwn(group, 'passageLetter'),
+        false,
+        `${selection.familyContractId} ${groupId} projects no passage letter`,
+      )
+    }
+  }
 }
 
 async function availablePort() {
@@ -303,10 +445,138 @@ function structuralArtifactIdentity(html) {
     'data-canonical-answer-region-ref',
     'data-canonical-response-slot-id',
     'data-canonical-placement-signature',
+    'data-canonical-passage-letter',
   ].map((attributeName) => [
     attributeName,
     canonicalAttributeValues(html, attributeName),
   ]))
+}
+
+function assertPassageLetterMarkup(html, consumption, label) {
+  assert.deepEqual(
+    canonicalAttributeValues(html, 'data-canonical-passage-letter'),
+    ['A', 'B', 'C', 'D'],
+    `${label} renders A/B/C/D exactly once each`,
+  )
+  const readingSelection = consumption.selections.find(
+    (selection) => selection.familyContractId === 'reading',
+  )
+  for (const [index, groupId] of readingSelection.groupIds.entries()) {
+    const start = html.indexOf(`data-canonical-group-id="${groupId}"`)
+      >= 0
+      ? html.indexOf(`data-canonical-group-id="${groupId}"`)
+      : html.indexOf(`data-paper-browse-anchor="${groupId}"`)
+    assert.notEqual(start, -1, `${label} contains Reading Group ${groupId}`)
+    const followingStarts = consumption.selections.flatMap(
+      (selection) => selection.groupIds,
+    ).map((candidate) => {
+      const canonical = html.indexOf(
+        `data-canonical-group-id="${candidate}"`,
+        start + 1,
+      )
+      const screen = html.indexOf(
+        `data-paper-browse-anchor="${candidate}"`,
+        start + 1,
+      )
+      return [canonical, screen].filter((offset) => offset > start)
+    }).flat()
+    const end = followingStarts.length > 0
+      ? Math.min(...followingStarts)
+      : html.length
+    assert.equal(
+      countTextOccurrences(
+        html.slice(start, end),
+        `data-canonical-passage-letter="${'ABCD'[index]}"`,
+      ),
+      1,
+      `${label} renders ${'ABCD'[index]} once inside ${groupId}`,
+    )
+  }
+}
+
+async function measureScreenPassageLetterGeometry(page, consumption, label) {
+  const readingSelection = consumption.selections.find(
+    (selection) => selection.familyContractId === 'reading',
+  )
+  const expected = readingSelection.groupIds.map((groupId, index) => ({
+    groupId,
+    letter: 'ABCD'[index],
+  }))
+  const measurements = []
+  for (const { groupId, letter } of expected) {
+    const card = page.locator(
+      `[data-paper-browse-anchor="${groupId}"]`,
+    )
+    const letterElement = card.locator(
+      `[data-canonical-passage-letter="${letter}"]`,
+    )
+    assert.equal(
+      await letterElement.count(),
+      1,
+      `${label} renders ${letter} once inside ${groupId}`,
+    )
+    const geometry = await letterElement.evaluate((element) => {
+      const letterRect = element.getBoundingClientRect()
+      const reading = element.nextElementSibling
+      const firstText = reading?.querySelector(
+        '[data-canonical-block-id] [data-canonical-content-node-id]',
+      )?.firstChild
+      if (!reading || !firstText) return null
+      const readingRect = reading.getBoundingClientRect()
+      const letterRange = document.createRange()
+      letterRange.selectNodeContents(element)
+      const letterTextRect = letterRange.getBoundingClientRect()
+      const firstRange = document.createRange()
+      firstRange.selectNodeContents(firstText)
+      const firstTextRect = firstRange.getBoundingClientRect()
+      const style = getComputedStyle(element)
+      return {
+        letterCenterX: letterRect.x + letterRect.width / 2,
+        readingCenterX: readingRect.x + readingRect.width / 2,
+        letterTextTop: letterTextRect.top,
+        letterTextBottom: letterTextRect.bottom,
+        letterTextHeight: letterTextRect.height,
+        firstTextTop: firstTextRect.top,
+        fontSizePx: Number.parseFloat(style.fontSize),
+        lineHeightPx: Number.parseFloat(style.lineHeight),
+        fontWeight: Number.parseInt(style.fontWeight, 10),
+        marginTopPx: Number.parseFloat(style.marginTop),
+        marginBottomPx: Number.parseFloat(style.marginBottom),
+      }
+    })
+    assert.ok(geometry, `${label} exposes ${groupId} passage-letter geometry`)
+    const tolerances = passageLetterReference.evidence.tolerances
+    assert.equal(
+      Math.abs(geometry.letterCenterX - geometry.readingCenterX)
+        <= tolerances.screenHorizontalCenterPx,
+      true,
+      `${label} ${letter} is horizontally centered in the Reading column`,
+    )
+    assert.equal(
+      Math.abs(
+        geometry.firstTextTop - geometry.letterTextTop
+        - geometry.lineHeightPx,
+      ) <= tolerances.screenBaselineStepPx,
+      true,
+      `${label} ${letter} and the first passage line use one measured baseline step`,
+    )
+    assert.equal(geometry.fontWeight >= 700, true, `${label} ${letter} is bold`)
+    assert.equal(geometry.marginTopPx, 0, `${label} ${letter} has no approximate top margin`)
+    assert.equal(geometry.marginBottomPx, 0, `${label} ${letter} has no approximate bottom margin`)
+    assert.equal(
+      geometry.letterTextHeight >= geometry.fontSizePx
+      && geometry.letterTextHeight <= geometry.lineHeightPx,
+      true,
+      `${label} ${letter} exposes a stable glyph box`,
+    )
+    measurements.push({ groupId, letter, ...geometry })
+  }
+  assert.equal(
+    await page.locator('[data-canonical-passage-letter]').count(),
+    4,
+    `${label} renders no passage letters for non-Reading groups`,
+  )
+  return measurements
 }
 
 function assertStudentTeacherStructuralParity(studentHtml, teacherHtml) {
@@ -750,6 +1020,123 @@ function firstPdfWordBox(pdfPath, page, word) {
   }
 }
 
+function normalizedPdfToken(value) {
+  return String(value)
+    .replaceAll('&amp;', '&')
+    .replaceAll('&lt;', '<')
+    .replaceAll('&gt;', '>')
+    .replaceAll('&quot;', '"')
+    .replaceAll('&apos;', "'")
+    .normalize('NFKC')
+    .replace(/^[^\p{L}\p{N}]+|[^\p{L}\p{N}]+$/gu, '')
+}
+
+function pdfWordsWithBoxes(pdfPath) {
+  const bbox = execFileSync('pdftotext', ['-bbox', pdfPath, '-'], {
+    encoding: 'utf8',
+  })
+  return [...bbox.matchAll(
+    /<page width="([\d.-]+)" height="([\d.-]+)">([\s\S]*?)<\/page>/g,
+  )].flatMap((pageMatch, pageIndex) =>
+    [...pageMatch[3].matchAll(
+      /<word xMin="([\d.-]+)" yMin="([\d.-]+)" xMax="([\d.-]+)" yMax="([\d.-]+)">([^<]+)<\/word>/g,
+    )].map((wordMatch) => ({
+      page: pageIndex + 1,
+      xMin: Number(wordMatch[1]),
+      yMin: Number(wordMatch[2]),
+      xMax: Number(wordMatch[3]),
+      yMax: Number(wordMatch[4]),
+      text: normalizedPdfToken(wordMatch[5]),
+    })))
+}
+
+function assertPdfPassageLetterGeometry(
+  pdfPath,
+  consumption,
+  pageBoxes,
+  label,
+) {
+  const words = pdfWordsWithBoxes(pdfPath)
+  const readingSelection = consumption.selections.find(
+    (selection) => selection.familyContractId === 'reading',
+  )
+  let cursor = 0
+  const measurements = []
+  for (const [index, groupId] of readingSelection.groupIds.entries()) {
+    const group = projectCanonicalConsumerGroup({
+      consumption,
+      familyContractId: 'reading',
+      groupId,
+    })
+    const markerTokens = normalizedVisibleText(group.blocks[0].text)
+      .split(/\s+/)
+      .map(normalizedPdfToken)
+      .filter(Boolean)
+      .slice(0, 4)
+    const markerIndex = words.findIndex((word, wordIndex) =>
+      wordIndex >= cursor
+      && markerTokens.every(
+        (token, tokenIndex) => words[wordIndex + tokenIndex]?.text === token,
+      ))
+    assert.notEqual(
+      markerIndex,
+      -1,
+      `${label} exposes ${groupId}'s first passage line geometry`,
+    )
+    const letter = words[markerIndex - 1]
+    const firstWord = words[markerIndex]
+    const expectedLetter = 'ABCD'[index]
+    assert.equal(
+      letter?.text,
+      expectedLetter,
+      `${label} places ${expectedLetter} immediately before ${groupId}'s first passage line`,
+    )
+    assert.equal(
+      letter.page,
+      firstWord.page,
+      `${label} keeps ${expectedLetter} with its first passage line`,
+    )
+    const pageBox = pageBoxes[letter.page - 1].cropBox
+    const pageCenterX = (pageBox.xMin + pageBox.xMax) / 2
+    const letterCenterX = (letter.xMin + letter.xMax) / 2
+    const baselineStepPt = firstWord.yMin - letter.yMin
+    const tolerances = passageLetterReference.evidence.tolerances
+    assert.equal(
+      Math.abs(letterCenterX - pageCenterX)
+        <= tolerances.pdfHorizontalCenterPt,
+      true,
+      `${label} ${expectedLetter} is centered on the A4 page`,
+    )
+    assert.equal(
+      Math.abs(baselineStepPt - 18)
+        <= tolerances.pdfBaselineStepPt,
+      true,
+      `${label} ${expectedLetter} and its first passage line use one fixed 18pt baseline step`,
+    )
+    assert.equal(
+      letter.yMax - letter.yMin > 10 && letter.yMax - letter.yMin < 13,
+      true,
+      `${label} ${expectedLetter} retains the 10.5pt bold glyph box`,
+    )
+    measurements.push({
+      groupId,
+      letter: expectedLetter,
+      page: letter.page,
+      box: {
+        xMin: letter.xMin,
+        yMin: letter.yMin,
+        xMax: letter.xMax,
+        yMax: letter.yMax,
+      },
+      pageCenterOffsetPt: letterCenterX - pageCenterX,
+      firstLineTopDeltaPt: baselineStepPt,
+      firstLineInkGapPt: firstWord.yMin - letter.yMax,
+    })
+    cursor = markerIndex + markerTokens.length
+  }
+  return measurements
+}
+
 function assertPdfBankAndNativeTable(
   pdfPath,
   consumption,
@@ -1099,6 +1486,11 @@ async function renderSupportedArtifacts({
   keepServices = false,
 }) {
   mkdirSync(outputDir, { recursive: true })
+  const passageLetterGeometry = {
+    screenPlain: [],
+    screenLecture: [],
+    pdf: {},
+  }
   const asset = JSON.parse(readFileSync(
     path.join(paperAssetsDir, paperId, 'latest', 'paper-asset.json'),
     'utf8',
@@ -1204,6 +1596,17 @@ async function renderSupportedArtifacts({
         'plain PaperSurface hides official answers',
       )
       const plainHtml = await page.content()
+      assertPassageLetterMarkup(
+        plainHtml,
+        consumers.screen,
+        'plain PaperSurface',
+      )
+      passageLetterGeometry.screenPlain =
+        await measureScreenPassageLetterGeometry(
+          page,
+          consumers.screen,
+          'plain PaperSurface',
+        )
       assert.equal(
         await page.locator('.paper-browse-lecture-analysis').count(),
         0,
@@ -1237,6 +1640,17 @@ async function renderSupportedArtifacts({
         'lecture PaperSurface exposes the selected official answer',
       )
       const lectureHtml = await page.content()
+      assertPassageLetterMarkup(
+        lectureHtml,
+        consumers.screen,
+        'lecture PaperSurface',
+      )
+      passageLetterGeometry.screenLecture =
+        await measureScreenPassageLetterGeometry(
+          page,
+          consumers.screen,
+          'lecture PaperSurface',
+        )
       assert.equal(
         await page.locator('.paper-browse-lecture-analysis').count(),
         1,
@@ -1331,6 +1745,16 @@ async function renderSupportedArtifacts({
         printHtml.student,
         printHtml.teacher,
       )
+      assertPassageLetterMarkup(
+        printHtml.student,
+        consumers.print_pdf,
+        'Student Print HTML',
+      )
+      assertPassageLetterMarkup(
+        printHtml.teacher,
+        consumers.print_pdf,
+        'Teacher Print HTML',
+      )
       assert.equal(
         attributeSignatures(printHtml.student).length > 0,
         true,
@@ -1421,6 +1845,13 @@ async function renderSupportedArtifacts({
           `${versionType === 'student' ? 'Student' : 'Teacher'} Chromium PDF`
         assertPdfSemanticOrder(pdfPath, consumers.print_pdf, label)
         const pageBoxes = assertPdfA4AndUnclipped(pdfPath, label)
+        passageLetterGeometry.pdf[versionType] =
+          assertPdfPassageLetterGeometry(
+            pdfPath,
+            consumers.print_pdf,
+            pageBoxes,
+            label,
+          )
         assertPdfBankAndNativeTable(
           pdfPath,
           consumers.print_pdf,
@@ -1467,6 +1898,7 @@ async function renderSupportedArtifacts({
         appUrl,
       ).href,
       artifactFiles,
+      passageLetterGeometry,
       closeServices,
     }
   } finally {
@@ -1474,6 +1906,7 @@ async function renderSupportedArtifacts({
   }
 }
 
+const passageLetterReference = assertPassageLetterReferenceEvidence()
 const rootDir = mkdtempSync(path.join(tmpdir(), 'eqb-canonical-import-pilot-'))
 const dbPath = path.join(rootDir, 'question-bank.sqlite')
 const paperAssetsDir = path.join(rootDir, 'paper-assets')
@@ -1694,6 +2127,7 @@ try {
     sourcePackage: path.relative(repositoryRoot, sourcePackageDir),
     sourcePackageDigests,
     canonicalRequestDigest: sha256(readFileSync(requestPath)),
+    readingPassageLetterReferenceDigest: passageLetterReference.digest,
     canonicalEvidenceDigests,
     dryRun: {
       validation: 'ready',
@@ -1724,6 +2158,7 @@ try {
       semanticParity: 'exact',
       listeningOccurrenceCount: 0,
     },
+    renderedPassageLetterGeometry: rendered.passageLetterGeometry,
     renderedArtifactDigests,
     forbiddenOutputArtifacts,
     directPdfOutputToolSentinel: 'not_called',

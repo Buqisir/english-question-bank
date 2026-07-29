@@ -419,8 +419,8 @@ function assertSchemaDescriptorIdentityClosure() {
     'canonical-paper-publication-v9',
     'normalization-report-v10',
     'canonical-paper-publication-v10',
-    'normalization-report-v12',
-    'canonical-paper-publication-v12',
+    'normalization-report-v13',
+    'canonical-paper-publication-v13',
   ]) {
     assert.equal(authority.closure.schemas[schemaId].$id, schemaId)
   }

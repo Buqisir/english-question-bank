@@ -114,3 +114,24 @@ ready and remains alive for owner QA. Canonical semantics and artifact
 generation are unchanged. The automated smoke was stopped after verification;
 no owner-QA provisioning, owner verdict, Ticket 21, production/R2 action, or
 generated-DOCX output was performed.
+
+Owner-QA Must Fix (2026-07-28): FAIL on the exact reviewed QA state because
+Reading passages A–D omitted the centered passage letter at each passage
+start. The accepted paper also requires the letter-to-passage spacing to
+follow the golden geometry rather than an approximate web margin.
+
+Owner-QA Must Fix repair evidence: exact JPEG bytes from
+`page-03-reading-a-start.jpeg` through `page-07-reading-d.jpeg` were measured
+with Tesseract 5.5.2 TSV bounding boxes and recorded, with per-file SHA-256
+digests and Screen/PDF tolerances, in
+`qa/20-reading-passage-letter-reference-measurements.json`. The fixed point
+reproduced zero A–D passage-letter occurrences in plain/lecture Screen and
+Student/Teacher Print HTML/PDF. Renderer Typography v3 and manifest v13 now
+project A/B/C/D only from explicit `reading.a`–`reading.d` slot identity, and
+Screen v13 / Print-PDF v14 render each letter once in a centered zero-margin
+18pt line box. Public-seam and actual-artifact checks bind the accepted
+reference digest, measure Screen/PDF geometry, and prove zero passage letters
+for every non-Reading family. Canonical semantic signatures, question order,
+group headers, passage content, answers, and A–D Option coordinates remain
+unchanged. No owner-QA provisioning, owner verdict, Ticket 21, production/R2,
+or generated-DOCX action was taken from this repair task.

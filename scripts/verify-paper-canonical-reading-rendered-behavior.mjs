@@ -16,6 +16,11 @@ import { DatabaseSync } from 'node:sqlite'
 
 import { compileCanonicalPaper } from '../shared/paper-canonical/compiler.mjs'
 import {
+  canonicalAuthorityRef,
+  resolveCanonicalAuthority,
+  validateAuthorityClosure,
+} from '../shared/paper-canonical/authority.mjs'
+import {
   translateAbcdPlanToPointPlacement,
 } from '../shared/paper-canonical/abcdLayout.mjs'
 import {
@@ -302,6 +307,40 @@ assert.deepEqual(
 const readingSelection = real.consumption.selections.find(
   (selection) => selection.familyContractId === 'reading',
 )
+assert.deepEqual(
+  readingSelection.projectedOccurrences.map((occurrence) => occurrence.slotId),
+  ['reading.a', 'reading.b', 'reading.c', 'reading.d'],
+)
+assert.deepEqual(
+  readingSelection.projectedOccurrences.map((occurrence) =>
+    canonicalGroup(real.consumption, occurrence.groupId).passageLetter),
+  ['A', 'B', 'C', 'D'],
+)
+{
+  const authority = resolveCanonicalAuthority(canonicalAuthorityRef).closure
+  const artifacts = {
+    ...authority.artifacts,
+    'renderer-typography': structuredClone(
+      authority.artifacts['renderer-typography'],
+    ),
+  }
+  artifacts['renderer-typography'].readingPassageLetters
+    .slotIdentity[0].letter = 'D'
+  const manifest = structuredClone(authority.manifest)
+  manifest.artifacts.find(
+    ({ id }) => id === 'renderer-typography',
+  ).sha256 = digestJson(artifacts['renderer-typography'])
+  assert.equal(
+    validateAuthorityClosure({
+      manifest,
+      artifacts,
+      schemas: authority.schemas,
+    }).issues.some(({ code }) =>
+      code === 'RENDERER_READING_PASSAGE_LETTERS_INVALID'),
+    true,
+    'a re-digested renderer artifact cannot remap Reading slot identity',
+  )
+}
 const oneColumnGroup = readingSelection.projectedOccurrences
   .map((occurrence) => canonicalGroup(real.consumption, occurrence.groupId))
   .find((group) =>
@@ -374,6 +413,7 @@ const tableSurfacePayload = buildCanonicalReadingConsumptionSurfaceData({
   consumption: real.consumption,
   groupId: tableGroupId,
 })
+assert.equal(tableSurfacePayload.passageLetter, 'A')
 assert.equal(
   JSON.stringify(tableSurfacePayload.surfaceData).includes('correctOptionId'),
   false,
@@ -400,6 +440,10 @@ for (const versionType of ['student', 'teacher']) {
     tableGroup.blocks.map((block) => block.nodeId),
   )
   assert.equal(count(html, /data-canonical-cell-id=/g), 12)
+  assert.equal(
+    count(html, /data-canonical-passage-letter="A"/g),
+    1,
+  )
   assert.equal(count(html, /data-canonical-question-id=/g), 3)
   assert.equal(count(html, /data-canonical-option-id=/g), 12)
   assert.equal(

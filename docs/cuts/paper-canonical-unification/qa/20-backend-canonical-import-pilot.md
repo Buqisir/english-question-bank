@@ -44,20 +44,27 @@ directory remains.
 
 ## Owner checks
 
-1. Plain PaperSurface shows the complete paper once in source order and no
+1. Reading passages render exactly one centered `A`, `B`, `C`, and `D` at
+   their respective passage starts in plain/lecture Screen and Student/Teacher
+   Print/PDF. The letter-to-first-passage-line step is one 18pt line with no
+   extra web margin, matching the digest-bound measurements in
+   `20-reading-passage-letter-reference-measurements.json`; Seven Choices,
+   Cloze, Grammar Fill, Writing, and inactive Listening show no passage letter.
+2. Plain PaperSurface shows the complete paper once in source order and no
    answer/lecture row; lecture PaperSurface keeps the same paper structure and
    exposes the selected official answer and teaching panel.
-2. Student Print HTML and Student Chromium PDF contain no answers or
+3. Student Print HTML and Student Chromium PDF contain no answers or
    explanations. Teacher Print HTML and Teacher Chromium PDF add answers
    without changing section order, question identity, wording, writing
    response regions, or canonical layout identity.
-3. Screen and Print/PDF preserve Reading, Seven Choices, Cloze, Grammar Fill,
+4. Screen and Print/PDF preserve Reading, Seven Choices, Cloze, Grammar Fill,
    Application Writing, and Continuation Writing semantics; Listening remains
    inactive and has zero current-surface occurrence.
-4. `evidence.json` records dry-run zero mutation, v1 publish, idempotent v2
-   recovery retry, rollback to the exact v1 digest, and only the `screen` and
-   `print_pdf` consumers.
-5. The QA directory and immutable import version contain no generated `.docx`,
+5. `evidence.json` records dry-run zero mutation, v1 publish, idempotent v2
+   recovery retry, rollback to the exact v1 digest, only the `screen` and
+   `print_pdf` consumers, the accepted reference-measurement digest, and
+   Screen/PDF A–D geometry within the recorded tolerances.
+6. The QA directory and immutable import version contain no generated `.docx`,
    OOXML/XML, or DOCX-converted PDF. The source PDF is preserved byte-identical
    inside the local immutable version and direct PDF output never invokes
    LibreOffice/soffice.

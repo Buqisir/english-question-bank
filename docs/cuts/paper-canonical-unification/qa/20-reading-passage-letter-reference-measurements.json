@@ -1,0 +1,133 @@
+{
+  "schemaVersion": "reading-passage-letter-reference-measurements-v1",
+  "authority": {
+    "readme": "docs/product/exam-paper-format-reference/README.md",
+    "standard": "docs/product/exam-paper-format-standards.md",
+    "measurementMethod": "Tesseract 5.5.2 --psm 6 TSV word boxes on the exact JPEG bytes; Latin-line top uses the first Latin glyph row so a taller adjacent Chinese gloss does not move the baseline proxy.",
+    "coordinateSystem": "JPEG pixels from top-left; boxes are x,y,width,height; baselineProxyY is the glyph-box lower edge."
+  },
+  "tolerances": {
+    "horizontalImageCenterOffsetPx": 12,
+    "letterGlyphHeightPx": 1,
+    "letterToNextLatinLineTopDeltaPx": 1,
+    "letterInkBottomToNextLatinLineInkTopPx": 1,
+    "headingInkBottomToLetterInkTopPx": 2,
+    "priorContentInkBottomToLetterInkTopPx": 2,
+    "screenHorizontalCenterPx": 0.5,
+    "screenBaselineStepPx": 0.75,
+    "pdfHorizontalCenterPt": 0.5,
+    "pdfBaselineStepPt": 0.5
+  },
+  "normalizedContract": {
+    "letterGlyphHeightPx": 13,
+    "letterToNextLatinLineTopDeltaPx": 31,
+    "letterInkBottomToNextLatinLineInkTopPx": 18,
+    "headingInkBottomToLetterInkTopPx": 18,
+    "priorContentInkBottomToLetterInkTopPx": 46,
+    "renderedBaselineStep": "one fixed 18pt line",
+    "extraLetterToPassageMargin": "none"
+  },
+  "references": [
+    {
+      "file": "docs/product/exam-paper-format-reference/images/page-03-reading-a-start.jpeg",
+      "sha256": "d602f8e4757be05a84762d387268cbf9b1e0734b62c37e2349de4d9d566ff272",
+      "pixelWidth": 866,
+      "pixelHeight": 1161,
+      "passageLetter": {
+        "value": "A",
+        "box": { "x": 427, "y": 848, "width": 13, "height": 13 },
+        "baselineProxyY": 861,
+        "imageCenterOffsetPx": 0.5
+      },
+      "preceding": {
+        "kind": "reading-instruction",
+        "inkBottomY": 830,
+        "inkBottomToLetterInkTopPx": 18
+      },
+      "following": {
+        "kind": "passage-title",
+        "latinLineTopY": 879,
+        "letterToLatinLineTopDeltaPx": 31,
+        "letterInkBottomToLatinLineInkTopPx": 18
+      },
+      "firstBodyLatinLineTopY": 910
+    },
+    {
+      "file": "docs/product/exam-paper-format-reference/images/page-04-reading-a-b.jpeg",
+      "sha256": "79378d6d9e9664282687d0d36226d10b0462f1b55a51fa2dfd93512756222d8a",
+      "pixelWidth": 866,
+      "pixelHeight": 1161,
+      "passageLetter": {
+        "value": "B",
+        "box": { "x": 416, "y": 835, "width": 12, "height": 13 },
+        "baselineProxyY": 848,
+        "imageCenterOffsetPx": -11
+      },
+      "preceding": {
+        "kind": "prior-passage-final-option-line",
+        "inkBottomY": 790,
+        "inkBottomToLetterInkTopPx": 45
+      },
+      "following": {
+        "kind": "first-passage-line",
+        "latinLineTopY": 866,
+        "letterToLatinLineTopDeltaPx": 31,
+        "letterInkBottomToLatinLineInkTopPx": 18
+      }
+    },
+    {
+      "file": "docs/product/exam-paper-format-reference/images/page-05-reading-b-c.jpeg",
+      "sha256": "dd46050919138eac5e92507b433433d71ba7bc05a8f848fe794480fd1ee3bf90",
+      "pixelWidth": 866,
+      "pixelHeight": 1161,
+      "passageLetter": {
+        "value": "C",
+        "box": { "x": 424, "y": 911, "width": 12, "height": 13 },
+        "baselineProxyY": 924,
+        "imageCenterOffsetPx": -3
+      },
+      "preceding": {
+        "kind": "prior-passage-final-option-line",
+        "inkBottomY": 864,
+        "inkBottomToLetterInkTopPx": 47
+      },
+      "following": {
+        "kind": "first-passage-line",
+        "latinLineTopY": 942,
+        "letterToLatinLineTopDeltaPx": 31,
+        "letterInkBottomToLatinLineInkTopPx": 18
+      }
+    },
+    {
+      "file": "docs/product/exam-paper-format-reference/images/page-06-reading-c-d.jpeg",
+      "sha256": "34716c179a4da5269e26da48fb0de087b6f2318c408aa61e792ba2c8ee235676",
+      "pixelWidth": 866,
+      "pixelHeight": 1161,
+      "passageLetter": {
+        "value": "D",
+        "box": { "x": 429, "y": 947, "width": 14, "height": 13 },
+        "baselineProxyY": 960,
+        "imageCenterOffsetPx": 3
+      },
+      "preceding": {
+        "kind": "prior-passage-final-option-line",
+        "inkBottomY": 902,
+        "inkBottomToLetterInkTopPx": 45
+      },
+      "following": {
+        "kind": "first-passage-line",
+        "latinLineTopY": 977,
+        "letterToLatinLineTopDeltaPx": 30,
+        "letterInkBottomToLatinLineInkTopPx": 17
+      }
+    },
+    {
+      "file": "docs/product/exam-paper-format-reference/images/page-07-reading-d.jpeg",
+      "sha256": "e3372945269c6bcf9cdebe916ebc1f1120cb206a13ba093c3863ba45d7836487",
+      "pixelWidth": 866,
+      "pixelHeight": 1161,
+      "passageLetter": null,
+      "continuationOf": "D"
+    }
+  ]
+}

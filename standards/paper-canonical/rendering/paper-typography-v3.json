@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "renderer-typography-v3",
+  "id": "paper-typography",
+  "version": "3",
+  "owner": "renderer_typography",
+  "paper": "a4",
+  "projectionContract": "canonical-projector-v1",
+  "rules": [
+    "typography_never_changes_canonical_text",
+    "blank_geometry_is_renderer_owned",
+    "option_layout_is_not_canonical_semantics",
+    "question_stem_and_outer_option_block_share_bound_origin",
+    "reading_passage_letter_comes_only_from_profile_slot_identity",
+    "reading_passage_letter_renders_once_before_passage_content"
+  ],
+  "coordinates": {
+    "questionStemAndOuterOptionBlockStartTwip": 420
+  },
+  "readingPassageLetters": {
+    "slotIdentity": [
+      {
+        "slotId": "reading.a",
+        "letter": "A"
+      },
+      {
+        "slotId": "reading.b",
+        "letter": "B"
+      },
+      {
+        "slotId": "reading.c",
+        "letter": "C"
+      },
+      {
+        "slotId": "reading.d",
+        "letter": "D"
+      }
+    ],
+    "horizontalPlacement": "reading_content_column_center",
+    "fontSizePt": 10.5,
+    "lineHeightPt": 18,
+    "fontWeight": 700,
+    "marginBeforePt": 0,
+    "marginAfterPt": 0,
+    "referenceMeasurement": {
+      "path": "docs/cuts/paper-canonical-unification/qa/20-reading-passage-letter-reference-measurements.json",
+      "sha256": "sha256:784a323faf0181a7241c3fe8e370046fa129d6b92ac3e18f6d68a9179dcb0427"
+    }
+  }
+}

@@ -47,6 +47,9 @@ import {
   applicationWritingNoticeLines,
 } from '../shared/paper-canonical/applicationWritingDisplay.mjs'
 import {
+  readingPassageLetterTypography,
+} from '../shared/paper-canonical/readingPassageLetter.mjs'
+import {
   canonicalWritingChromeOwnsRenderedDocument,
   projectCanonicalConsumerGroup,
   projectCanonicalWritingChrome,
@@ -219,7 +222,7 @@ function renderCanonicalInlineNodes(nodes) {
 }
 
 function renderCanonicalReadingBlocks(canonicalGroup) {
-  return `<div class="canonical-reading" data-canonical-reading-semantic-signature="${escapeHtml(canonicalGroup.semanticSignature)}">${canonicalGroup.blocks.map((block) => {
+  return `<div class="canonical-reading-passage-letter" data-canonical-passage-letter="${escapeHtml(canonicalGroup.passageLetter)}">${escapeHtml(canonicalGroup.passageLetter)}</div><div class="canonical-reading" data-canonical-reading-semantic-signature="${escapeHtml(canonicalGroup.semanticSignature)}">${canonicalGroup.blocks.map((block) => {
     if (block.kind === 'paragraph') {
       const tag = block.role === 'title' ? 'h3' : 'p'
       return `<${tag} class="canonical-reading-${block.role}" data-canonical-block-id="${escapeHtml(block.nodeId)}" data-canonical-block-kind="paragraph" data-canonical-reading-role="${block.role}">${renderCanonicalInlineNodes(block.inlines)}</${tag}>`
@@ -1059,6 +1062,18 @@ body {
 .canonical-reading-subtitle,
 .canonical-reading-title {
   margin: 0 0 0.5em;
+  font-size: ${readingPassageLetterTypography.fontSizePt}pt;
+  line-height: ${readingPassageLetterTypography.lineHeightPt}pt;
+}
+
+.canonical-reading-passage-letter {
+  margin: ${readingPassageLetterTypography.marginBeforePt}pt 0 ${readingPassageLetterTypography.marginAfterPt}pt;
+  padding: 0;
+  font-size: ${readingPassageLetterTypography.fontSizePt}pt;
+  line-height: ${readingPassageLetterTypography.lineHeightPt}pt;
+  font-weight: ${readingPassageLetterTypography.fontWeight};
+  text-align: center;
+  break-after: avoid;
 }
 
 .canonical-reading-body {

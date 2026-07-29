@@ -91,7 +91,7 @@ console.log('Test 1: HTML generation - blocks, numbering, structure')
   assert('seven_choices in-text blank __36__ remapped to 23 (matches its whole-paper continuous question number, no parens)', html.includes('<span class="print-blank-num">23</span>'), '')
   assert('literal blank marker 36 no longer shown bare in print-blank-num', !html.includes('<span class="print-blank-num">36</span>'), '')
   assert('no bracketed print-blank-num anywhere (round-1 "(n)" form retired)', !/class="print-blank-num">\(\d+\)<\/span>/.test(html), '')
-  assert('no A-D passage-letter row anywhere', !html.includes('class="passage-letter"'), '')
+  assert('legacy Print input projects no canonical passage-letter row', !html.includes('data-canonical-passage-letter='), '')
 }
 
 // --- Test 2: Teacher version ---
@@ -458,12 +458,11 @@ console.log('\nTest 8: Real paper-2026-i asset payload — behavioral blank coun
     assert('cloze real blank count is 15 (2026-07-08 measured)', countBlanks(realItems[1].__materialText) === 15, `got ${countBlanks(realItems[1].__materialText)}`)
     assert('grammar_cloze real blank count is 10 (2026-07-08 measured)', countBlanks(realItems[2].__materialText) === 10, `got ${countBlanks(realItems[2].__materialText)}`)
 
-    // --- Test 8b: real paper-2026-i reading groups — group-header row
-    // (draft-depassage-letter cut, docs/cuts/draft-depassage-letter/plan.md).
-    // The paper-passage-letter cut's A-D letter (via detail.title fallback,
-    // e.g. "Reading A") is retired; every question_group block now gets a
-    // continuous `${n}、${题型}` group-header instead, regardless of
-    // sectionTitle/detail.title contents. ---
+    // --- Test 8b: real paper-2026-i legacy reading inputs — group-header row.
+    // Ticket 20 restores A-D only for a ready canonical whole-family
+    // selection. These calls deliberately omit canonicalConsumption, so a
+    // free-form detail.title such as "Reading A" must not synthesize a
+    // canonical passage letter. Existing group headers remain unchanged. ---
     console.log('\nTest 8b: Real paper-2026-i reading groups — group-header row (大题头)')
     {
       const readingGroupIds = [
@@ -498,19 +497,19 @@ console.log('\nTest 8: Real paper-2026-i asset payload — behavioral blank coun
           readingHtml.slice(readingHtml.indexOf('<section class="question-group">'), readingHtml.indexOf('<section class="question-group">') + 200),
         )
         assert(
-          `${groupId}: no A-D passage-letter row (detail.title "${group.title}" ends in a letter but is no longer consumed)`,
-          !readingHtml.includes('class="passage-letter"'),
+          `${groupId}: legacy detail.title "${group.title}" cannot synthesize a canonical passage-letter row`,
+          !readingHtml.includes('data-canonical-passage-letter='),
           '',
         )
       }
       // Non-reading real groups (already built above as realItems, blocks
-      // realBlocks) must never render .passage-letter (fully retired) and
+      // realBlocks) must never render a canonical passage letter and
       // must each carry their own group-header (n continuous across the
       // 3-group blocks list: seven_choices=1, cloze=2, grammar_cloze=3).
       assert(
-        'non-reading real groups (seven_choices/cloze/grammar_cloze) never render .passage-letter',
-        !html.includes('class="passage-letter"'),
-        html.includes('class="passage-letter"') ? 'found an unexpected passage-letter row' : '',
+        'non-reading real groups (seven_choices/cloze/grammar_cloze) never render a canonical passage letter',
+        !html.includes('data-canonical-passage-letter='),
+        html.includes('data-canonical-passage-letter=') ? 'found an unexpected canonical passage-letter row' : '',
       )
       assert('group-header 一、七选五 present (real seven_choices group, Chinese numeral)', html.includes('<div class="group-header">一、七选五（每题 1 分）</div>'), '')
       assert('group-header 二、完形填空 present (real cloze group, Chinese numeral)', html.includes('<div class="group-header">二、完形填空（每题 1 分）</div>'), '')
@@ -522,7 +521,7 @@ console.log('\nTest 8: Real paper-2026-i asset payload — behavioral blank coun
         /font-weight:\s*bold/.test(groupHeaderCssRule) && /font-size:\s*11pt/.test(groupHeaderCssRule),
         groupHeaderCssRule,
       )
-      assert('.passage-letter CSS rule retired (no longer emitted)', !buildPrintHtml({ title: 'CSS', versionType: 'student', printStyle: 'exam', items: [], blocks: [], questionNumberStart: 1 }).includes('.passage-letter {'), '')
+      assert('renderer-local legacy .passage-letter CSS rule remains retired', !buildPrintHtml({ title: 'CSS', versionType: 'student', printStyle: 'exam', items: [], blocks: [], questionNumberStart: 1 }).includes('.passage-letter {'), '')
     }
 
     // --- Test 9: real-PDF byte-level smoke from the REAL payload HTML ---

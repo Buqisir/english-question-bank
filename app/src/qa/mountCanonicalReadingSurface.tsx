@@ -27,6 +27,7 @@ async function mount(): Promise<void> {
         evidence={[]}
         questions={model.surfaceData.questions}
         canonicalReadingBlocks={model.richBlocks}
+        canonicalReadingPassageLetter={model.passageLetter}
         canonicalReadingSemanticSignature={model.semanticDigest}
         mode="lecture"
         lectureFocus={null}

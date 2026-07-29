@@ -1,5 +1,5 @@
-import screen from '../../standards/paper-canonical/consumers/screen-v12.json' with { type: 'json' }
-import printPdf from '../../standards/paper-canonical/consumers/print-pdf-v13.json' with { type: 'json' }
+import screen from '../../standards/paper-canonical/consumers/screen-v13.json' with { type: 'json' }
+import printPdf from '../../standards/paper-canonical/consumers/print-pdf-v14.json' with { type: 'json' }
 
 import { canonicalAuthorityRef, resolveCanonicalAuthority, validateJsonSchema } from './authority.mjs'
 import { digestJson, withoutKey } from './stable.mjs'

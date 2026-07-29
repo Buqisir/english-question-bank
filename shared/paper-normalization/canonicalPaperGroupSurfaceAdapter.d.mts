@@ -170,6 +170,7 @@ export function buildCanonicalReadingConsumptionSurfaceData(input: {
 }): {
   readonly status: 'ready'
   readonly semanticDigest: string
+  readonly passageLetter: 'A' | 'B' | 'C' | 'D'
   readonly placementSignatures: ReadonlyArray<string>
   readonly richBlocks: ReadonlyArray<CanonicalReadingSurfaceBlock>
   readonly anchors: Record<string, ReadonlyArray<string>>

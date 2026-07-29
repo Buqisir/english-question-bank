@@ -169,6 +169,7 @@ type GroupModel =
         analysisByQuestionId: PaperAssetSurfaceModel['analysisByQuestionId']
         evidenceKindById: PaperAssetSurfaceModel['evidenceKindById']
         canonicalReadingBlocks: ReadonlyArray<CanonicalReadingSurfaceBlock>
+        canonicalReadingPassageLetter?: 'A' | 'B' | 'C' | 'D'
         canonicalReadingSemanticSignature: string
       }
     }
@@ -790,6 +791,8 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
                   evidenceKindById:
                     analysisModel?.evidenceKindById ?? {},
                   canonicalReadingBlocks: canonicalReading.richBlocks,
+                  canonicalReadingPassageLetter:
+                    canonicalReading.passageLetter,
                   canonicalReadingSemanticSignature:
                     canonicalReading.semanticDigest,
                 },
@@ -1833,6 +1836,11 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
           entry.kind === 'reading'
             && entry.model.canonicalReadingBlocks.length > 0
             ? entry.model.canonicalReadingBlocks
+            : undefined
+        }
+        canonicalReadingPassageLetter={
+          entry.kind === 'reading'
+            ? entry.model.canonicalReadingPassageLetter
             : undefined
         }
         canonicalReadingSemanticSignature={

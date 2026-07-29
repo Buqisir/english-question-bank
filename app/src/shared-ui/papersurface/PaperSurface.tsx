@@ -27,6 +27,9 @@ import { paperSurfaceAnchorAttrs } from '../../../../shared/papersurface/anchorK
 import {
   applicationWritingNoticeLines,
 } from '../../../../shared/paper-canonical/applicationWritingDisplay'
+import {
+  readingPassageLetterTypography,
+} from '../../../../shared/paper-canonical/readingPassageLetter.mjs'
 import { renderCanonicalPaperSentenceContent } from './CanonicalPaperSentenceContent.tsx'
 import {
   renderLegacyPaperSentenceContent,
@@ -118,6 +121,7 @@ type PaperSurfaceComponentProps = Omit<PaperSurfaceProps, 'blankFocusMode'> & {
   readonly semanticParagraphs?: ReadonlyArray<CanonicalSurfaceParagraph>
   /** Ordered canonical Reading content rendered natively without marker parsing. */
   readonly canonicalReadingBlocks?: ReadonlyArray<CanonicalReadingSurfaceBlock>
+  readonly canonicalReadingPassageLetter?: 'A' | 'B' | 'C' | 'D'
   readonly canonicalReadingSemanticSignature?: string
   /** Ordered canonical Application Writing prompt rendered without legacy inference. */
   readonly canonicalApplicationPromptBlocks?: ReadonlyArray<{
@@ -155,6 +159,7 @@ export function PaperSurface(props: PaperSurfaceComponentProps): ReactNode {
     blankQuestionIdByNo,
     semanticParagraphs,
     canonicalReadingBlocks,
+    canonicalReadingPassageLetter,
     canonicalReadingSemanticSignature,
     canonicalApplicationPromptBlocks,
     canonicalContinuationMaterialBlocks,
@@ -300,9 +305,10 @@ export function PaperSurface(props: PaperSurfaceComponentProps): ReactNode {
       data-ps-mode="lecture"
     >
       <article className="ps-page">
-        {canonicalReadingBlocks && (
+        {canonicalReadingBlocks && canonicalReadingPassageLetter && (
           <CanonicalReadingBlocks
             blocks={canonicalReadingBlocks}
+            passageLetter={canonicalReadingPassageLetter}
             semanticSignature={canonicalReadingSemanticSignature}
           />
         )}
@@ -449,9 +455,11 @@ function CanonicalApplicationWritingPrompt({
 
 function CanonicalReadingBlocks({
   blocks,
+  passageLetter,
   semanticSignature,
 }: {
   blocks: ReadonlyArray<CanonicalReadingSurfaceBlock>
+  passageLetter: 'A' | 'B' | 'C' | 'D'
   semanticSignature?: string
 }): ReactNode {
   const renderInlines = (
@@ -465,11 +473,25 @@ function CanonicalReadingBlocks({
     </span>
   ))
   return (
-    <div
-      className="ps-canonical-reading"
-      data-canonical-reading-semantic-signature={semanticSignature}
-    >
-      {blocks.map((block) => {
+    <>
+      <div
+        className="ps-canonical-reading-passage-letter"
+        data-canonical-passage-letter={passageLetter}
+        style={{
+          fontSize: `${readingPassageLetterTypography.fontSizePt}pt`,
+          lineHeight: `${readingPassageLetterTypography.lineHeightPt}pt`,
+          fontWeight: readingPassageLetterTypography.fontWeight,
+          marginBlockStart: `${readingPassageLetterTypography.marginBeforePt}pt`,
+          marginBlockEnd: `${readingPassageLetterTypography.marginAfterPt}pt`,
+        }}
+      >
+        {passageLetter}
+      </div>
+      <div
+        className="ps-canonical-reading"
+        data-canonical-reading-semantic-signature={semanticSignature}
+      >
+        {blocks.map((block) => {
         if (block.kind === 'paragraph') {
           const className =
             block.role === 'title'
@@ -539,8 +561,9 @@ function CanonicalReadingBlocks({
             )}
           </figure>
         )
-      })}
-    </div>
+        })}
+      </div>
+    </>
   )
 }
 
@@ -640,28 +663,11 @@ function PaperSurfaceSection({
     return map
   }, [evidenceForSection])
 
-  // paper-passage-letter: reading passages get a centered bold A/B/C/D
-  // letter row before the passage body (exam-paper-format-standards.md
-  // §83-84). PaperSurfaceSection has no group.title / groupType prop to
-  // derive the letter from directly, but paperAssetSurfaceAdapter (the
-  // only adapter feeding reading groups) sets `section` to the bare
-  // passage letter itself ("A"/"B"/"C"/"D" — see
-  // SECTION_BY_READING_GROUP_ID / the group.title fallback there); every
-  // other group-type adapter sets `section` to a fixed Chinese section
-  // label ('完形填空' / '语法填空' / '七选五' / …) that can never match
-  // this pattern. Reusing `section` here is therefore equivalent to
-  // deriving from group.title (DEV-verified against every non-reading
-  // adapter — none produce a trailing A-D letter) without adding a new
-  // prop, per the paper-passage-letter cut's PM ruling
-  // (docs/cuts/paper-passage-letter/plan.md).
-  const passageLetter = /([A-D])$/.exec(section)?.[1] ?? null
-
   return (
     <section
       className="ps-section"
       {...{ [paperSurfaceAnchorAttrs.section]: section }}
     >
-      {passageLetter && <div className="ps-passage-letter">{passageLetter}</div>}
       <div className="ps-passage-body">
         {paragraphs.map((para) => (
           <PaperSurfaceParagraph
