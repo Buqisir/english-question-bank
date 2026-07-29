@@ -1353,6 +1353,11 @@ async function assertScreenReadingVerticalRhythm(
     hasNativeTable ||= group.content.some(
       (entry) => entry.role === 'native_table_line',
     )
+    assertStep(
+      group.content[0].lines[0] - group.letter[0],
+      1,
+      'letter_to_first_content',
+    )
     for (const entry of group.content) {
       assert.equal(entry.lines.length > 0, true, `${label} has no empty role`)
       for (let index = 1; index < entry.lines.length; index += 1) {
@@ -1717,6 +1722,11 @@ async function assertPrintHtmlReadingVerticalRhythm(
   for (const [groupIndex, group] of observations.groups.entries()) {
     assert.equal(group.letter.length, 1, `${label} has one passage letter`)
     assert.equal(group.content.length > 0, true, `${label} has passage content`)
+    assertStep(
+      group.content[0].lines[0] - group.letter[0],
+      1,
+      'letter_to_first_content',
+    )
     for (const entry of group.content) {
       for (let index = 1; index < entry.lines.length; index += 1) {
         assertStep(
