@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "reading-predecessor-oracles-v1",
+  "paperId": "paper-2026-i",
+  "sourceAsset": {
+    "path": "test-fixtures/paper-import/paper-2026-i-canonical-pilot/paper-asset.json",
+    "sha256": "fe7feb2cc9554b00bbab96a7d4fe5e499513c564c28e6c314e0373e29b2ca7bf"
+  },
+  "screen": [
+    {
+      "groupId": "group-2026-i-reading-a",
+      "predecessorAnchorId": "section-2026-i-reading-choice"
+    },
+    {
+      "groupId": "group-2026-i-reading-b",
+      "predecessorAnchorId": "group-2026-i-reading-a"
+    },
+    {
+      "groupId": "group-2026-i-reading-c",
+      "predecessorAnchorId": "group-2026-i-reading-b"
+    },
+    {
+      "groupId": "group-2026-i-reading-d",
+      "predecessorAnchorId": "group-2026-i-reading-c"
+    }
+  ],
+  "printPdf": [
+    {
+      "groupId": "group-2026-i-reading-a",
+      "predecessorAnchorId": "group-2026-i-reading-a"
+    },
+    {
+      "groupId": "group-2026-i-reading-b",
+      "predecessorAnchorId": "group-2026-i-reading-b"
+    },
+    {
+      "groupId": "group-2026-i-reading-c",
+      "predecessorAnchorId": "group-2026-i-reading-c"
+    },
+    {
+      "groupId": "group-2026-i-reading-d",
+      "predecessorAnchorId": "group-2026-i-reading-d"
+    }
+  ]
+}

@@ -53,6 +53,10 @@ const passageLetterReferencePath = path.join(
   repositoryRoot,
   'docs/cuts/paper-canonical-unification/qa/20-reading-passage-letter-reference-measurements.json',
 )
+const readingPredecessorOraclePath = path.join(
+  repositoryRoot,
+  'docs/cuts/paper-canonical-unification/qa/20-reading-predecessor-oracles.json',
+)
 const paperId = 'paper-2026-i'
 const provisionActualArtifacts = process.argv.includes('--actual-artifacts')
 const keepQaServer = process.argv.includes('--qa-server')
@@ -227,6 +231,39 @@ function assertPassageLetterReferenceEvidence() {
     digest: sha256(evidenceBytes),
     evidence,
   }
+}
+
+function assertReadingPredecessorOracle() {
+  const oracle = JSON.parse(readFileSync(readingPredecessorOraclePath, 'utf8'))
+  assert.equal(
+    oracle.schemaVersion,
+    'reading-predecessor-oracles-v1',
+    'Reading predecessor oracle uses the reviewed schema',
+  )
+  assert.equal(oracle.paperId, paperId)
+  const sourceAssetPath = path.join(repositoryRoot, oracle.sourceAsset.path)
+  assert.equal(
+    sha256(readFileSync(sourceAssetPath)),
+    oracle.sourceAsset.sha256,
+    'Reading predecessor oracle binds the exact pilot source asset',
+  )
+  for (const [consumerId, entries] of [
+    ['screen', oracle.screen],
+    ['print_pdf', oracle.printPdf],
+  ]) {
+    assert.equal(entries.length, 4)
+    assert.equal(
+      new Set(entries.map((entry) => entry.predecessorAnchorId)).size,
+      entries.length,
+      `Reading predecessor oracle has unique ${consumerId} structural anchors`,
+    )
+    assert.equal(
+      new Set(entries.map((entry) => entry.groupId)).size,
+      entries.length,
+      `Reading predecessor oracle has unique ${consumerId} visible Groups`,
+    )
+  }
+  return oracle
 }
 
 function snapshotTree(rootDir) {
@@ -605,7 +642,17 @@ function exactPrintReadingPredecessorBindings(html, consumption, label) {
   const allMatches = [...html.matchAll(
     /<div class="group-header" data-canonical-reading-preceding-for="([^"]+)" data-canonical-reading-preceding-kind="([^"]+)" data-canonical-reading-predecessor-group-id="([^"]+)">([^<]+)<\/div>/g,
   )]
-  const expected = expectedReadingPassageEntries(consumption, 'print_pdf')
+  const predecessorAnchorIds = new Map(
+    readingPredecessorOracle.printPdf.map((entry) => [
+      entry.groupId,
+      entry.predecessorAnchorId,
+    ]),
+  )
+  const expected = expectedReadingPassageEntries(
+    consumption,
+    'print_pdf',
+    predecessorAnchorIds,
+  )
   assert.equal(
     allMatches.length,
     expected.length,
@@ -763,51 +810,16 @@ function assertTaggedPredecessorAttacksFailClosed(
   )
 }
 
-function screenReadingPredecessorAnchorIds(asset, consumption, label) {
-  const readingSelection = consumption.selections.find(
-    (selection) => selection.familyContractId === 'reading',
-  )
-  const [firstGroupId, ...followingGroupIds] = readingSelection.groupIds
-  const firstGroupBlockIndex = asset.content.blocks.findIndex(
-    (block) => block.type === 'group' && block.groupId === firstGroupId,
-  )
-  assert.notEqual(
-    firstGroupBlockIndex,
-    -1,
-    `${label} exposes the first Reading Group in the source block order`,
-  )
-  let heading = null
-  for (let index = firstGroupBlockIndex - 1; index >= 0; index -= 1) {
-    const block = asset.content.blocks[index]
-    if (block.type === 'sectionHeading') {
-      heading = block
-      break
-    }
-    if (block.type === 'group' || block.type === 'partHeading') break
-  }
-  assert.ok(
-    heading?.sectionId,
-    `${label} exposes the exact source Reading heading for ${firstGroupId}`,
-  )
-  return new Map([
-    [firstGroupId, heading.sectionId],
-    ...followingGroupIds.map((groupId, index) => [
-      groupId,
-      readingSelection.groupIds[index],
-    ]),
-  ])
-}
-
 async function measureScreenPassageLetterGeometry(
   page,
-  asset,
   consumption,
   label,
 ) {
-  const predecessorAnchorIds = screenReadingPredecessorAnchorIds(
-    asset,
-    consumption,
-    label,
+  const predecessorAnchorIds = new Map(
+    readingPredecessorOracle.screen.map((entry) => [
+      entry.groupId,
+      entry.predecessorAnchorId,
+    ]),
   )
   const expected = expectedReadingPassageEntries(
     consumption,
@@ -2057,7 +2069,6 @@ async function renderSupportedArtifacts({
       passageLetterGeometry.screenPlain =
         await measureScreenPassageLetterGeometry(
           page,
-          asset,
           consumers.screen,
           'plain PaperSurface',
         )
@@ -2103,7 +2114,6 @@ async function renderSupportedArtifacts({
       passageLetterGeometry.screenLecture =
         await measureScreenPassageLetterGeometry(
           page,
-          asset,
           consumers.screen,
           'lecture PaperSurface',
         )
@@ -2378,6 +2388,7 @@ async function renderSupportedArtifacts({
 }
 
 const passageLetterReference = assertPassageLetterReferenceEvidence()
+const readingPredecessorOracle = assertReadingPredecessorOracle()
 const rootDir = mkdtempSync(path.join(tmpdir(), 'eqb-canonical-import-pilot-'))
 const dbPath = path.join(rootDir, 'question-bank.sqlite')
 const paperAssetsDir = path.join(rootDir, 'paper-assets')
