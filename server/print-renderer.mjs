@@ -47,6 +47,7 @@ import {
   applicationWritingNoticeLines,
 } from '../shared/paper-canonical/applicationWritingDisplay.mjs'
 import {
+  readingPassageLetterGeometryForLetter,
   readingPassageLetterTypography,
 } from '../shared/paper-canonical/readingPassageLetter.mjs'
 import {
@@ -222,7 +223,9 @@ function renderCanonicalInlineNodes(nodes) {
 }
 
 function renderCanonicalReadingBlocks(canonicalGroup) {
-  return `<div class="canonical-reading-passage-letter" data-canonical-passage-letter="${escapeHtml(canonicalGroup.passageLetter)}">${escapeHtml(canonicalGroup.passageLetter)}</div><div class="canonical-reading" data-canonical-reading-semantic-signature="${escapeHtml(canonicalGroup.semanticSignature)}">${canonicalGroup.blocks.map((block) => {
+  const precedingGeometry =
+    readingPassageLetterGeometryForLetter(canonicalGroup.passageLetter)
+  return `<div class="canonical-reading-passage-letter" data-canonical-passage-letter="${escapeHtml(canonicalGroup.passageLetter)}" data-canonical-reading-preceding-kind="${precedingGeometry.precedingKind}" style="padding-top:${precedingGeometry.pdfBeforePaddingPt}pt">${escapeHtml(canonicalGroup.passageLetter)}</div><div class="canonical-reading" data-canonical-reading-semantic-signature="${escapeHtml(canonicalGroup.semanticSignature)}">${canonicalGroup.blocks.map((block) => {
     if (block.kind === 'paragraph') {
       const tag = block.role === 'title' ? 'h3' : 'p'
       return `<${tag} class="canonical-reading-${block.role}" data-canonical-block-id="${escapeHtml(block.nodeId)}" data-canonical-block-kind="paragraph" data-canonical-reading-role="${block.role}">${renderCanonicalInlineNodes(block.inlines)}</${tag}>`

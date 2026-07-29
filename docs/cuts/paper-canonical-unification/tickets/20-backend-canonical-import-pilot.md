@@ -128,10 +128,25 @@ digests and Screen/PDF tolerances, in
 reproduced zero A–D passage-letter occurrences in plain/lecture Screen and
 Student/Teacher Print HTML/PDF. Renderer Typography v3 and manifest v13 now
 project A/B/C/D only from explicit `reading.a`–`reading.d` slot identity, and
-Screen v13 / Print-PDF v14 render each letter once in a centered zero-margin
-18pt line box. Public-seam and actual-artifact checks bind the accepted
-reference digest, measure Screen/PDF geometry, and prove zero passage letters
-for every non-Reading family. Canonical semantic signatures, question order,
-group headers, passage content, answers, and A–D Option coordinates remain
-unchanged. No owner-QA provisioning, owner verdict, Ticket 21, production/R2,
-or generated-DOCX action was taken from this repair task.
+Screen v13 / Print-PDF v14 render each letter once in a centered 18pt line box
+with authority-bound preceding adjustment. The focused review found that the first repair recorded but did
+not execute the golden preceding-content gaps, and that Screen could accept
+Reading blocks without their required letter. The repaired shared authority
+now normalizes the measured 18±2px Reading-heading gap and 46±2px prior-content
+gap to Screen and to 13.5±1.5pt / 34.5±1.5pt PDF output; actual plain/lecture
+Screen and Student/Teacher Chromium PDF regressions measure both preceding and
+following geometry. PaperSurface rejects either half of an incomplete
+blocks-plus-letter companion before rendering any canonical Reading content.
+Public-seam and actual-artifact checks bind the accepted reference digest and
+prove zero passage letters for every non-Reading family. Canonical semantic
+signatures, question order, group headers, passage content, answers, and A–D
+Option coordinates remain unchanged. No owner-QA provisioning, owner verdict,
+Ticket 21, production/R2, or generated-DOCX action was taken from this repair
+task.
+
+Focused review repair verify: canonical foundation, Reading rendered behavior
+including the incomplete-companion rejection, backend pilot and focused fixes,
+Print renderer 92/92, PaperBrowse 193/193, app typecheck/build, actual
+plain/lecture Screen plus Student/Teacher Chromium PDF geometry,
+`git diff --check`, and `pnpm -C app run verify:all` 115 PASS / 1 declared
+SKIP / 0 FAIL.

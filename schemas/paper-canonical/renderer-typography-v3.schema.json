@@ -63,6 +63,7 @@
         "fontWeight",
         "marginBeforePt",
         "marginAfterPt",
+        "precedingGeometry",
         "referenceMeasurement"
       ],
       "properties": {
@@ -71,9 +72,10 @@
           "items": {
             "type": "object",
             "additionalProperties": false,
-            "required": [
-              "slotId",
-              "letter"
+              "required": [
+                "slotId",
+                "letter",
+                "precedingKind"
             ],
             "properties": {
               "slotId": {
@@ -85,6 +87,12 @@
                   "B",
                   "C",
                   "D"
+                ]
+              },
+              "precedingKind": {
+                "enum": [
+                  "reading_heading",
+                  "prior_content"
                 ]
               }
             }
@@ -113,6 +121,26 @@
           "type": "number",
           "minimum": 0
         },
+        "precedingGeometry": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "normalizationRule",
+            "readingHeading",
+            "priorContent"
+          ],
+          "properties": {
+            "normalizationRule": {
+              "const": "reference_px_1_to_1_screen_css_px_and_0_75pt_per_pdf_css_px"
+            },
+            "readingHeading": {
+              "$ref": "#/$defs/precedingGeometryContext"
+            },
+            "priorContent": {
+              "$ref": "#/$defs/precedingGeometryContext"
+            }
+          }
+        },
         "referenceMeasurement": {
           "type": "object",
           "additionalProperties": false,
@@ -128,6 +156,55 @@
               "type": "string"
             }
           }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "precedingGeometryContext": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "referenceInkGapPx",
+        "referenceTolerancePx",
+        "screenInkGapPx",
+        "screenTolerancePx",
+        "screenBeforeAdjustmentPx",
+        "pdfInkGapPt",
+        "pdfTolerancePt",
+        "pdfBeforePaddingPt"
+      ],
+      "properties": {
+        "referenceInkGapPx": {
+          "type": "number",
+          "minimum": 0
+        },
+        "referenceTolerancePx": {
+          "type": "number",
+          "minimum": 0
+        },
+        "screenInkGapPx": {
+          "type": "number",
+          "minimum": 0
+        },
+        "screenTolerancePx": {
+          "type": "number",
+          "minimum": 0
+        },
+        "screenBeforeAdjustmentPx": {
+          "type": "number"
+        },
+        "pdfInkGapPt": {
+          "type": "number",
+          "minimum": 0
+        },
+        "pdfTolerancePt": {
+          "type": "number",
+          "minimum": 0
+        },
+        "pdfBeforePaddingPt": {
+          "type": "number",
+          "minimum": 0
         }
       }
     }

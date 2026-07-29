@@ -8,6 +8,44 @@ export const readingPassageLetterBySlotId = Object.freeze(
   ),
 )
 
+const geometryByPrecedingKind = Object.freeze({
+  reading_heading: Object.freeze(contract.precedingGeometry.readingHeading),
+  prior_content: Object.freeze(contract.precedingGeometry.priorContent),
+})
+
+const precedingKindByLetter = Object.freeze(
+  Object.fromEntries(
+    contract.slotIdentity.map(({ letter, precedingKind }) => [
+      letter,
+      precedingKind,
+    ]),
+  ),
+)
+
+export function readingPassageLetterGeometryForLetter(letter) {
+  const precedingKind = precedingKindByLetter[letter]
+  const geometry = geometryByPrecedingKind[precedingKind]
+  if (!geometry) {
+    const error = new Error(`Unsupported canonical Reading passage letter ${letter}`)
+    error.code = 'CANONICAL_READING_COMPANION_REJECTED'
+    throw error
+  }
+  return Object.freeze({
+    precedingKind,
+    ...geometry,
+  })
+}
+
+export function assertCanonicalReadingCompanion({ blocks, passageLetter }) {
+  if ((blocks !== undefined) !== (passageLetter !== undefined)) {
+    const error = new Error(
+      'Canonical Reading blocks and passage letter must be provided together',
+    )
+    error.code = 'CANONICAL_READING_COMPANION_REJECTED'
+    throw error
+  }
+}
+
 export const readingPassageLetterTypography = Object.freeze({
   horizontalPlacement: contract.horizontalPlacement,
   fontSizePt: contract.fontSizePt,
@@ -15,5 +53,10 @@ export const readingPassageLetterTypography = Object.freeze({
   fontWeight: contract.fontWeight,
   marginBeforePt: contract.marginBeforePt,
   marginAfterPt: contract.marginAfterPt,
+  precedingGeometry: Object.freeze({
+    normalizationRule: contract.precedingGeometry.normalizationRule,
+    readingHeading: geometryByPrecedingKind.reading_heading,
+    priorContent: geometryByPrecedingKind.prior_content,
+  }),
   referenceMeasurement: Object.freeze({ ...contract.referenceMeasurement }),
 })

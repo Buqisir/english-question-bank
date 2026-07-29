@@ -20,19 +20,23 @@
     "slotIdentity": [
       {
         "slotId": "reading.a",
-        "letter": "A"
+        "letter": "A",
+        "precedingKind": "reading_heading"
       },
       {
         "slotId": "reading.b",
-        "letter": "B"
+        "letter": "B",
+        "precedingKind": "prior_content"
       },
       {
         "slotId": "reading.c",
-        "letter": "C"
+        "letter": "C",
+        "precedingKind": "prior_content"
       },
       {
         "slotId": "reading.d",
-        "letter": "D"
+        "letter": "D",
+        "precedingKind": "prior_content"
       }
     ],
     "horizontalPlacement": "reading_content_column_center",
@@ -41,6 +45,29 @@
     "fontWeight": 700,
     "marginBeforePt": 0,
     "marginAfterPt": 0,
+    "precedingGeometry": {
+      "normalizationRule": "reference_px_1_to_1_screen_css_px_and_0_75pt_per_pdf_css_px",
+      "readingHeading": {
+        "referenceInkGapPx": 18,
+        "referenceTolerancePx": 2,
+        "screenInkGapPx": 18,
+        "screenTolerancePx": 2,
+        "screenBeforeAdjustmentPx": -4,
+        "pdfInkGapPt": 13.5,
+        "pdfTolerancePt": 1.5,
+        "pdfBeforePaddingPt": 2.635
+      },
+      "priorContent": {
+        "referenceInkGapPx": 46,
+        "referenceTolerancePx": 2,
+        "screenInkGapPx": 46,
+        "screenTolerancePx": 2,
+        "screenBeforeAdjustmentPx": 12,
+        "pdfInkGapPt": 34.5,
+        "pdfTolerancePt": 1.5,
+        "pdfBeforePaddingPt": 23.635
+      }
+    },
     "referenceMeasurement": {
       "path": "docs/cuts/paper-canonical-unification/qa/20-reading-passage-letter-reference-measurements.json",
       "sha256": "sha256:784a323faf0181a7241c3fe8e370046fa129d6b92ac3e18f6d68a9179dcb0427"

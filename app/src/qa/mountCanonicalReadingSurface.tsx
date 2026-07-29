@@ -9,6 +9,7 @@ import {
 async function mount(): Promise<void> {
   const params = new URLSearchParams(window.location.search)
   const groupId = params.get('groupId')
+  const invalidCompanion = params.get('invalidCompanion')
   if (!groupId) throw new Error('groupId is required')
   const response = await fetch('/qa/canonical-reading-consumption.json')
   if (!response.ok) throw new Error('canonical Reading QA consumption unavailable')
@@ -27,7 +28,11 @@ async function mount(): Promise<void> {
         evidence={[]}
         questions={model.surfaceData.questions}
         canonicalReadingBlocks={model.richBlocks}
-        canonicalReadingPassageLetter={model.passageLetter}
+        canonicalReadingPassageLetter={
+          invalidCompanion === 'missing-letter'
+            ? undefined
+            : model.passageLetter
+        }
         canonicalReadingSemanticSignature={model.semanticDigest}
         mode="lecture"
         lectureFocus={null}

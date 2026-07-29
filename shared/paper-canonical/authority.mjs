@@ -475,9 +475,27 @@ function validateRendererTypography(artifact, profiles) {
       === slotIdentity.length
     && slotIdentity.every((entry, index) =>
       isRecordValue(entry)
-      && exactKeys(entry, ['slotId', 'letter'])
+      && exactKeys(entry, ['slotId', 'letter', 'precedingKind'])
       && entry.slotId === expectedSlotIds[index]
-      && entry.letter === entry.slotId.slice('reading.'.length).toUpperCase())
+      && entry.letter === entry.slotId.slice('reading.'.length).toUpperCase()
+      && entry.precedingKind === (
+        entry.slotId === 'reading.a'
+          ? 'reading_heading'
+          : 'prior_content'
+      ))
+    && exactKeys(contract.precedingGeometry, [
+      'normalizationRule',
+      'readingHeading',
+      'priorContent',
+    ])
+    && contract.precedingGeometry.normalizationRule
+      === 'reference_px_1_to_1_screen_css_px_and_0_75pt_per_pdf_css_px'
+    && contract.precedingGeometry.readingHeading?.referenceInkGapPx === 18
+    && contract.precedingGeometry.readingHeading?.screenInkGapPx === 18
+    && contract.precedingGeometry.readingHeading?.pdfInkGapPt === 13.5
+    && contract.precedingGeometry.priorContent?.referenceInkGapPx === 46
+    && contract.precedingGeometry.priorContent?.screenInkGapPx === 46
+    && contract.precedingGeometry.priorContent?.pdfInkGapPt === 34.5
     && contract.referenceMeasurement?.path
       === 'docs/cuts/paper-canonical-unification/qa/20-reading-passage-letter-reference-measurements.json'
     && /^sha256:[a-f0-9]{64}$/.test(

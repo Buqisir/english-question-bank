@@ -816,6 +816,35 @@ async function assertActualBrowserArtifacts() {
       }
       await page.close()
     }
+
+    const rejectedPage = await browser.newPage({
+      viewport: { width: 1280, height: 900 },
+    })
+    await rejectedPage.route(
+      '**/qa/canonical-reading-consumption.json',
+      (route) =>
+        route.fulfill({
+          status: 200,
+          contentType: 'application/json',
+          body: JSON.stringify(real.consumption),
+        }),
+    )
+    const rejectedUrl = new URL('canonical-reading-qa.html', appUrl)
+    rejectedUrl.searchParams.set('groupId', tableGroup.groupId)
+    rejectedUrl.searchParams.set('invalidCompanion', 'missing-letter')
+    const pageError = rejectedPage.waitForEvent('pageerror')
+    await rejectedPage.goto(rejectedUrl.href)
+    assert.match(
+      (await pageError).message,
+      /Canonical Reading blocks and passage letter must be provided together/,
+      'PaperSurface fails closed when canonical Reading blocks lose their passage letter',
+    )
+    assert.equal(
+      await rejectedPage.locator('[data-canonical-block-id]').count(),
+      0,
+      'PaperSurface emits no partial canonical Reading artifact after companion rejection',
+    )
+    await rejectedPage.close()
   } finally {
     await browser.close()
     await viteServer.close()

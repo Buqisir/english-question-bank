@@ -28,6 +28,8 @@ import {
   applicationWritingNoticeLines,
 } from '../../../../shared/paper-canonical/applicationWritingDisplay'
 import {
+  assertCanonicalReadingCompanion,
+  readingPassageLetterGeometryForLetter,
   readingPassageLetterTypography,
 } from '../../../../shared/paper-canonical/readingPassageLetter.mjs'
 import { renderCanonicalPaperSentenceContent } from './CanonicalPaperSentenceContent.tsx'
@@ -168,6 +170,10 @@ export function PaperSurface(props: PaperSurfaceComponentProps): ReactNode {
   if (semanticParagraphs !== undefined) {
     assertCanonicalCompanionMatchesTextMap(textMap, semanticParagraphs)
   }
+  assertCanonicalReadingCompanion({
+    blocks: canonicalReadingBlocks,
+    passageLetter: canonicalReadingPassageLetter,
+  })
 
   const handleQuestionClick = useCallback(
     (questionId: string) => {
@@ -462,6 +468,8 @@ function CanonicalReadingBlocks({
   passageLetter: 'A' | 'B' | 'C' | 'D'
   semanticSignature?: string
 }): ReactNode {
+  const precedingGeometry =
+    readingPassageLetterGeometryForLetter(passageLetter)
   const renderInlines = (
     inlines: ReadonlyArray<{ nodeId: string; text: string }>,
   ): ReactNode => inlines.map((inline) => (
@@ -477,12 +485,22 @@ function CanonicalReadingBlocks({
       <div
         className="ps-canonical-reading-passage-letter"
         data-canonical-passage-letter={passageLetter}
+        data-canonical-reading-preceding-kind={
+          precedingGeometry.precedingKind
+        }
         style={{
           fontSize: `${readingPassageLetterTypography.fontSizePt}pt`,
           lineHeight: `${readingPassageLetterTypography.lineHeightPt}pt`,
           fontWeight: readingPassageLetterTypography.fontWeight,
-          marginBlockStart: `${readingPassageLetterTypography.marginBeforePt}pt`,
+          marginBlockStart:
+            precedingGeometry.screenBeforeAdjustmentPx < 0
+              ? `${precedingGeometry.screenBeforeAdjustmentPx}px`
+              : `${readingPassageLetterTypography.marginBeforePt}pt`,
           marginBlockEnd: `${readingPassageLetterTypography.marginAfterPt}pt`,
+          paddingBlockStart:
+            precedingGeometry.screenBeforeAdjustmentPx > 0
+              ? `${precedingGeometry.screenBeforeAdjustmentPx}px`
+              : 0,
         }}
       >
         {passageLetter}

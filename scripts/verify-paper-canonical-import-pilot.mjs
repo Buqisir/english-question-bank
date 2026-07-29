@@ -22,6 +22,8 @@ import {
   projectCanonicalConsumerGroup,
 } from '../shared/paper-canonical/consumerProjection.mjs'
 import {
+  assertCanonicalReadingCompanion,
+  readingPassageLetterGeometryForLetter,
   readingPassageLetterTypography,
 } from '../shared/paper-canonical/readingPassageLetter.mjs'
 import { loadCanonicalImportRequest } from '../server/paper-canonical/importRequest.mjs'
@@ -95,6 +97,52 @@ function assertPassageLetterReferenceEvidence() {
   assert.equal(readingPassageLetterTypography.lineHeightPt, 18)
   assert.equal(readingPassageLetterTypography.marginBeforePt, 0)
   assert.equal(readingPassageLetterTypography.marginAfterPt, 0)
+  assert.deepEqual(
+    readingPassageLetterGeometryForLetter('A'),
+    {
+      precedingKind: 'reading_heading',
+      referenceInkGapPx: 18,
+      referenceTolerancePx: 2,
+      screenInkGapPx: 18,
+      screenTolerancePx: 2,
+      screenBeforeAdjustmentPx: -4,
+      pdfInkGapPt: 13.5,
+      pdfTolerancePt: 1.5,
+      pdfBeforePaddingPt: 2.635,
+    },
+    'Renderer Typography normalizes the golden Reading-heading gap for Screen and PDF',
+  )
+  assert.deepEqual(
+    readingPassageLetterGeometryForLetter('B'),
+    {
+      precedingKind: 'prior_content',
+      referenceInkGapPx: 46,
+      referenceTolerancePx: 2,
+      screenInkGapPx: 46,
+      screenTolerancePx: 2,
+      screenBeforeAdjustmentPx: 12,
+      pdfInkGapPt: 34.5,
+      pdfTolerancePt: 1.5,
+      pdfBeforePaddingPt: 23.635,
+    },
+    'Renderer Typography normalizes the golden prior-content gap for Screen and PDF',
+  )
+  assert.throws(
+    () => assertCanonicalReadingCompanion({
+      blocks: [{}],
+      passageLetter: undefined,
+    }),
+    /Canonical Reading blocks and passage letter must be provided together/,
+    'Canonical Reading companion rejects blocks without a passage letter',
+  )
+  assert.throws(
+    () => assertCanonicalReadingCompanion({
+      blocks: undefined,
+      passageLetter: 'A',
+    }),
+    /Canonical Reading blocks and passage letter must be provided together/,
+    'Canonical Reading companion rejects a passage letter without blocks',
+  )
   const readme = readFileSync(
     path.join(
       repositoryRoot,
@@ -503,7 +551,10 @@ async function measureScreenPassageLetterGeometry(page, consumption, label) {
     letter: 'ABCD'[index],
   }))
   const measurements = []
-  for (const { groupId, letter } of expected) {
+  for (const [
+    index,
+    { groupId, letter },
+  ] of expected.entries()) {
     const card = page.locator(
       `[data-paper-browse-anchor="${groupId}"]`,
     )
@@ -515,7 +566,8 @@ async function measureScreenPassageLetterGeometry(page, consumption, label) {
       1,
       `${label} renders ${letter} once inside ${groupId}`,
     )
-    const geometry = await letterElement.evaluate((element) => {
+    const expectedGeometry = readingPassageLetterGeometryForLetter(letter)
+    const geometry = await letterElement.evaluate((element, context) => {
       const letterRect = element.getBoundingClientRect()
       const reading = element.nextElementSibling
       const firstText = reading?.querySelector(
@@ -529,6 +581,29 @@ async function measureScreenPassageLetterGeometry(page, consumption, label) {
       const firstRange = document.createRange()
       firstRange.selectNodeContents(firstText)
       const firstTextRect = firstRange.getBoundingClientRect()
+      const precedingElement = context.precedingKind === 'reading_heading'
+        ? (() => {
+            const card = element.closest('[data-paper-browse-anchor]')
+            return card?.querySelector('.paper-browse-instruction--merged')
+              ?? card?.previousElementSibling
+              ?? null
+          })()
+        : (() => {
+            const precedingCard = document.querySelector(
+              `[data-paper-browse-anchor="${context.previousGroupId}"]`,
+            )
+            const options = precedingCard?.querySelectorAll(
+              '[data-canonical-option-id]',
+            )
+            return options?.[options.length - 1] ?? null
+          })()
+      if (!precedingElement) return null
+      const precedingRange = document.createRange()
+      precedingRange.selectNodeContents(precedingElement)
+      const precedingTextRects = [...precedingRange.getClientRects()]
+      const precedingInkBottom = Math.max(
+        ...precedingTextRects.map((rect) => rect.bottom),
+      )
       const style = getComputedStyle(element)
       return {
         letterCenterX: letterRect.x + letterRect.width / 2,
@@ -537,12 +612,18 @@ async function measureScreenPassageLetterGeometry(page, consumption, label) {
         letterTextBottom: letterTextRect.bottom,
         letterTextHeight: letterTextRect.height,
         firstTextTop: firstTextRect.top,
+        precedingInkBottom,
+        precedingInkGapPx: letterTextRect.top - precedingInkBottom,
         fontSizePx: Number.parseFloat(style.fontSize),
         lineHeightPx: Number.parseFloat(style.lineHeight),
         fontWeight: Number.parseInt(style.fontWeight, 10),
         marginTopPx: Number.parseFloat(style.marginTop),
         marginBottomPx: Number.parseFloat(style.marginBottom),
+        paddingTopPx: Number.parseFloat(style.paddingTop),
       }
+    }, {
+      precedingKind: expectedGeometry.precedingKind,
+      previousGroupId: expected[index - 1]?.groupId ?? null,
     })
     assert.ok(geometry, `${label} exposes ${groupId} passage-letter geometry`)
     const tolerances = passageLetterReference.evidence.tolerances
@@ -560,9 +641,25 @@ async function measureScreenPassageLetterGeometry(page, consumption, label) {
       true,
       `${label} ${letter} and the first passage line use one measured baseline step`,
     )
+    assert.equal(
+      Math.abs(
+        geometry.precedingInkGapPx - expectedGeometry.screenInkGapPx,
+      ) <= expectedGeometry.screenTolerancePx,
+      true,
+      `${label} ${letter} retains the normalized golden preceding-content ink gap`,
+    )
     assert.equal(geometry.fontWeight >= 700, true, `${label} ${letter} is bold`)
-    assert.equal(geometry.marginTopPx, 0, `${label} ${letter} has no approximate top margin`)
+    assert.equal(
+      geometry.marginTopPx,
+      Math.min(expectedGeometry.screenBeforeAdjustmentPx, 0),
+      `${label} ${letter} uses only its exact authority-bound top adjustment`,
+    )
     assert.equal(geometry.marginBottomPx, 0, `${label} ${letter} has no approximate bottom margin`)
+    assert.equal(
+      geometry.paddingTopPx,
+      Math.max(expectedGeometry.screenBeforeAdjustmentPx, 0),
+      `${label} ${letter} uses only its exact authority-bound top padding`,
+    )
     assert.equal(
       geometry.letterTextHeight >= geometry.fontSizePx
       && geometry.letterTextHeight <= geometry.lineHeightPx,
@@ -1084,8 +1181,11 @@ function assertPdfPassageLetterGeometry(
       `${label} exposes ${groupId}'s first passage line geometry`,
     )
     const letter = words[markerIndex - 1]
+    const precedingWord = words[markerIndex - 2]
     const firstWord = words[markerIndex]
     const expectedLetter = 'ABCD'[index]
+    const expectedGeometry =
+      readingPassageLetterGeometryForLetter(expectedLetter)
     assert.equal(
       letter?.text,
       expectedLetter,
@@ -1096,10 +1196,16 @@ function assertPdfPassageLetterGeometry(
       firstWord.page,
       `${label} keeps ${expectedLetter} with its first passage line`,
     )
+    assert.equal(
+      precedingWord?.page,
+      letter.page,
+      `${label} exposes preceding content for ${expectedLetter} on the same page`,
+    )
     const pageBox = pageBoxes[letter.page - 1].cropBox
     const pageCenterX = (pageBox.xMin + pageBox.xMax) / 2
     const letterCenterX = (letter.xMin + letter.xMax) / 2
     const baselineStepPt = firstWord.yMin - letter.yMin
+    const precedingInkGapPt = letter.yMin - precedingWord.yMax
     const tolerances = passageLetterReference.evidence.tolerances
     assert.equal(
       Math.abs(letterCenterX - pageCenterX)
@@ -1112,6 +1218,12 @@ function assertPdfPassageLetterGeometry(
         <= tolerances.pdfBaselineStepPt,
       true,
       `${label} ${expectedLetter} and its first passage line use one fixed 18pt baseline step`,
+    )
+    assert.equal(
+      Math.abs(precedingInkGapPt - expectedGeometry.pdfInkGapPt)
+        <= expectedGeometry.pdfTolerancePt,
+      true,
+      `${label} ${expectedLetter} retains the normalized golden preceding-content ink gap`,
     )
     assert.equal(
       letter.yMax - letter.yMin > 10 && letter.yMax - letter.yMin < 13,
@@ -1131,6 +1243,8 @@ function assertPdfPassageLetterGeometry(
       pageCenterOffsetPt: letterCenterX - pageCenterX,
       firstLineTopDeltaPt: baselineStepPt,
       firstLineInkGapPt: firstWord.yMin - letter.yMax,
+      precedingInkBottomPt: precedingWord.yMax,
+      precedingInkGapPt,
     })
     cursor = markerIndex + markerTokens.length
   }
