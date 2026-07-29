@@ -1,0 +1,145 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "seven-choices-rhythm-v3",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "id",
+    "version",
+    "owner",
+    "paper",
+    "projectionContract",
+    "rules",
+    "semanticRoleClasses",
+    "adjacencyGraph",
+    "targets",
+    "goldenGeometryFramework",
+    "horizontalBankGeometry",
+    "visibleGeometryAdjustments",
+    "referenceMeasurement"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "seven-choices-rhythm-v3"
+    },
+    "id": {
+      "const": "seven-choices-rhythm"
+    },
+    "version": {
+      "const": "3"
+    },
+    "owner": {
+      "const": "renderer_typography"
+    },
+    "paper": {
+      "const": "a4"
+    },
+    "projectionContract": {
+      "const": "canonical-projector-v1"
+    },
+    "rules": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string"
+      }
+    },
+    "semanticRoleClasses": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "array",
+        "minItems": 1,
+        "uniqueItems": true,
+        "items": {
+          "type": "string"
+        }
+      }
+    },
+    "adjacencyGraph": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object"
+      }
+    },
+    "targets": {
+      "type": "object"
+    },
+    "goldenGeometryFramework": {
+      "type": "object"
+    },
+    "horizontalBankGeometry": {
+      "type": "object"
+    },
+    "visibleGeometryAdjustments": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "revisionId",
+        "screen",
+        "printPdf"
+      ],
+      "properties": {
+        "revisionId": {
+          "const": "seven-choices-visible-geometry-v1"
+        },
+        "screen": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "mergedInstructionMarginBottomPx",
+            "followingSectionMarginTopAdjustmentPx",
+            "adjacentChromeMarginTopAdjustmentPx"
+          ],
+          "properties": {
+            "mergedInstructionMarginBottomPx": {
+              "const": 6
+            },
+            "followingSectionMarginTopAdjustmentPx": {
+              "const": -7
+            },
+            "adjacentChromeMarginTopAdjustmentPx": {
+              "const": -16
+            }
+          }
+        },
+        "printPdf": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "singleChromeMarginBottomPt",
+            "adjacentChromeMarginBottomEm"
+          ],
+          "properties": {
+            "singleChromeMarginBottomPt": {
+              "const": 4.5
+            },
+            "adjacentChromeMarginBottomEm": {
+              "const": 0.6
+            }
+          }
+        }
+      }
+    },
+    "referenceMeasurement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "properties": {
+        "path": {
+          "type": "string"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        }
+      }
+    }
+  }
+}

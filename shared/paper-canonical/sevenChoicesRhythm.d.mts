@@ -30,6 +30,18 @@ export const sevenChoicesRhythm: Readonly<{
   }>
   goldenGeometryFramework: Readonly<Record<string, unknown>>
   horizontalBankGeometry: Readonly<Record<string, unknown>>
+  visibleGeometryAdjustments: Readonly<{
+    revisionId: string
+    screen: Readonly<{
+      mergedInstructionMarginBottomPx: number
+      followingSectionMarginTopAdjustmentPx: number
+      adjacentChromeMarginTopAdjustmentPx: number
+    }>
+    printPdf: Readonly<{
+      singleChromeMarginBottomPt: number
+      adjacentChromeMarginBottomEm: number
+    }>
+  }>
   referenceMeasurement: Readonly<{
     path: string
     sha256: string

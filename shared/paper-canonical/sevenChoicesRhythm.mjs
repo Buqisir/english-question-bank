@@ -1,4 +1,4 @@
-import contract from '../../standards/paper-canonical/rendering/seven-choices-rhythm-v2.json' with { type: 'json' }
+import contract from '../../standards/paper-canonical/rendering/seven-choices-rhythm-v3.json' with { type: 'json' }
 
 function freezeRoleClasses(roleClasses) {
   return Object.freeze(
@@ -53,6 +53,15 @@ export const sevenChoicesRhythm = Object.freeze({
       printPdf: Object.freeze({
         ...contract.horizontalBankGeometry.rendererMapping.printPdf,
       }),
+    }),
+  }),
+  visibleGeometryAdjustments: Object.freeze({
+    revisionId: contract.visibleGeometryAdjustments.revisionId,
+    screen: Object.freeze({
+      ...contract.visibleGeometryAdjustments.screen,
+    }),
+    printPdf: Object.freeze({
+      ...contract.visibleGeometryAdjustments.printPdf,
     }),
   }),
   referenceMeasurement: Object.freeze({

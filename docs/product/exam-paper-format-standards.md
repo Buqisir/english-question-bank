@@ -4,7 +4,7 @@
 
 本文件是唯一的人类可读索引；当前 canonical 编译、校验、发布和受支持的
 Screen / Print-PDF consumer 只从
-[`standards/paper-canonical/manifest-v16.json`](../../standards/paper-canonical/manifest-v16.json)
+[`standards/paper-canonical/manifest-v17.json`](../../standards/paper-canonical/manifest-v17.json)
 解析一份 digest-closed 的权威闭包。这里不复制卷型题号、分值、题组
 cardinality、清洗条件或字体/物理排版数值，也不能被 caller 当作第二套配置。
 
@@ -18,9 +18,14 @@ Renderer Typography、其 schema 及纯验证入口。未知版本、缺件、di
 任何会改变 admission、canonical 语义、Profile、normalization 或 renderer
 结果的变更，必须新增 versioned artifact、schema/semantic conformance fixture、
 迁移说明和 manifest 升版；已经被 Publication 引用的 artifact 不可原位修改。
-`manifest-v1.json` 至 `manifest-v15.json` 保留各自原始 digest-closed closure，
-供既有 Publication 解析；当前 Screen v16、Print/PDF v17 consumer contracts
-只绑定 v16 authority。v16 以原始试题 PDF 和官方答案源纠正 Seven Choices
+`manifest-v1.json` 至 `manifest-v16.json` 保留各自原始 digest-closed closure，
+供既有 Publication 解析；当前 Screen v17、Print/PDF v18 consumer contracts
+只绑定 v17 authority。v17 以 `seven-choices-rhythm-v3` 对 Screen 与 Print/PDF
+已验证的可见间距调整建立 successor renderer closure；迁移说明见
+[`manifest-v17-migration.md`](../../standards/paper-canonical/manifest-v17-migration.md)
+和
+[`seven-choices-rhythm-v3-migration.md`](../../standards/paper-canonical/rendering/seven-choices-rhythm-v3-migration.md)。
+此前 v16 以原始试题 PDF 和官方答案源纠正 Seven Choices
 权威：原源没有独立篇章标题，因此 `seven-choices-rhythm-v2` 只保留可执行的
 `passage_body_line`，移除 `passage_title` 及 `passage_title_to_body`。迁移说明见
 [`manifest-v16-migration.md`](../../standards/paper-canonical/manifest-v16-migration.md)。

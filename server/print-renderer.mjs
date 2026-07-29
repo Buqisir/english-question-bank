@@ -1330,13 +1330,13 @@ body {
 }
 
 .section-header[data-canonical-seven-choices-chrome] {
-  margin-bottom: 4.5pt;
+  margin-bottom: ${sevenChoicesRhythm.visibleGeometryAdjustments.printPdf.singleChromeMarginBottomPt}pt;
 }
 
 .section-header[data-canonical-seven-choices-chrome]:has(
   + [data-canonical-seven-choices-chrome]
 ) {
-  margin-bottom: 0.6em;
+  margin-bottom: ${sevenChoicesRhythm.visibleGeometryAdjustments.printPdf.adjacentChromeMarginBottomEm}em;
 }
 
 .page-break {

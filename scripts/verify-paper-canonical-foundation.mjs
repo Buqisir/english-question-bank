@@ -3,6 +3,7 @@
 import assert from 'node:assert/strict'
 import manifestV1 from '../standards/paper-canonical/manifest-v1.json' with { type: 'json' }
 import manifestV13 from '../standards/paper-canonical/manifest-v13.json' with { type: 'json' }
+import sevenChoicesRhythmV3Conformance from '../test-fixtures/paper-canonical/seven-choices-rhythm-v3-conformance.json' with { type: 'json' }
 
 import { canonicalAuthorityRef, compileCanonicalPaper, stableStringify, validateExactTransformationRecords } from '../shared/paper-canonical/compiler.mjs'
 import { resolveCanonicalAuthority, slotsForProfile, validateAuthorityClosure } from '../shared/paper-canonical/authority.mjs'
@@ -49,6 +50,54 @@ assert.equal(first.artifacts.canonicalPaper.paperPlan.completeness.status, 'comp
 assert.equal(first.artifacts.canonicalPaper.questionGroups.length, 9)
 
 const closure = resolveCanonicalAuthority(canonicalAuthorityRef).closure
+const sevenChoicesRhythmV3 =
+  closure.artifacts['renderer-seven-choices-rhythm']
+assert.deepEqual(
+  {
+    schemaVersion: sevenChoicesRhythmV3.schemaVersion,
+    id: sevenChoicesRhythmV3.id,
+    version: sevenChoicesRhythmV3.version,
+  },
+  sevenChoicesRhythmV3Conformance.authority,
+)
+assert.deepEqual(
+  sevenChoicesRhythmV3.visibleGeometryAdjustments,
+  sevenChoicesRhythmV3Conformance.visibleGeometryAdjustments,
+)
+assert.deepEqual(
+  validateAuthorityClosure({
+    manifest: closure.manifest,
+    artifacts: closure.artifacts,
+    schemas: closure.schemas,
+  }),
+  { ok: true, issues: [] },
+)
+for (const attack of [
+  ...sevenChoicesRhythmV3Conformance.schemaAttacks,
+  ...sevenChoicesRhythmV3Conformance.semanticAttacks,
+]) {
+  const artifacts = structuredClone(closure.artifacts)
+  let target = artifacts['renderer-seven-choices-rhythm']
+  for (const key of attack.path.slice(0, -1)) target = target[key]
+  target[attack.path.at(-1)] = attack.invalidValue
+  const manifest = structuredClone(closure.manifest)
+  manifest.artifacts.find(
+    (descriptor) => descriptor.id === 'renderer-seven-choices-rhythm',
+  ).sha256 = digestJson(artifacts['renderer-seven-choices-rhythm'])
+  const validation = validateAuthorityClosure({
+    manifest,
+    artifacts,
+    schemas: closure.schemas,
+  })
+  assert.equal(validation.ok, false, attack.caseId)
+  assert.equal(
+    validation.issues.some(
+      (issue) => issue.code === attack.expectedIssueCode,
+    ),
+    true,
+    attack.caseId,
+  )
+}
 const legacyAuthorityRef = { manifestId: manifestV1.manifestId, manifestVersion: manifestV1.version, manifestDigest: digestJson(manifestV1) }
 assert.equal(legacyAuthorityRef.manifestDigest, 'sha256:0aa486d62ba5d7ce9158bf45287d421c9534775118040dbacdfa81dad1e08b6b')
 assert.equal(resolveCanonicalAuthority(legacyAuthorityRef).ok, true)

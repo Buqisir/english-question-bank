@@ -1,0 +1,62 @@
+{
+  "schemaVersion": "seven-choices-rhythm-v3-conformance-v1",
+  "authority": {
+    "schemaVersion": "seven-choices-rhythm-v3",
+    "id": "seven-choices-rhythm",
+    "version": "3"
+  },
+  "visibleGeometryAdjustments": {
+    "revisionId": "seven-choices-visible-geometry-v1",
+    "screen": {
+      "mergedInstructionMarginBottomPx": 6,
+      "followingSectionMarginTopAdjustmentPx": -7,
+      "adjacentChromeMarginTopAdjustmentPx": -16
+    },
+    "printPdf": {
+      "singleChromeMarginBottomPt": 4.5,
+      "adjacentChromeMarginBottomEm": 0.6
+    }
+  },
+  "schemaAttacks": [
+    {
+      "caseId": "unversioned-geometry-override",
+      "path": [
+        "unversionedGeometryOverride"
+      ],
+      "invalidValue": true,
+      "expectedIssueCode": "SCHEMA_UNKNOWN_FIELD"
+    }
+  ],
+  "semanticAttacks": [
+    {
+      "caseId": "screen-merged-instruction-drift",
+      "path": [
+        "visibleGeometryAdjustments",
+        "screen",
+        "mergedInstructionMarginBottomPx"
+      ],
+      "invalidValue": 7,
+      "expectedIssueCode": "RENDERER_SEVEN_CHOICES_RHYTHM_INVALID"
+    },
+    {
+      "caseId": "screen-adjacent-chrome-drift",
+      "path": [
+        "visibleGeometryAdjustments",
+        "screen",
+        "adjacentChromeMarginTopAdjustmentPx"
+      ],
+      "invalidValue": -15,
+      "expectedIssueCode": "RENDERER_SEVEN_CHOICES_RHYTHM_INVALID"
+    },
+    {
+      "caseId": "print-adjacent-chrome-drift",
+      "path": [
+        "visibleGeometryAdjustments",
+        "printPdf",
+        "adjacentChromeMarginBottomEm"
+      ],
+      "invalidValue": 0.7,
+      "expectedIssueCode": "RENDERER_SEVEN_CHOICES_RHYTHM_INVALID"
+    }
+  ]
+}

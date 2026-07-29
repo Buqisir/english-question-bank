@@ -34,7 +34,7 @@ assert.deepEqual(
   'supported canonical consumers must be exactly Screen and Print/PDF',
 )
 
-assert.equal(canonicalAuthorityRef.manifestVersion, '16')
+assert.equal(canonicalAuthorityRef.manifestVersion, '17')
 const currentAuthority = resolveCanonicalAuthority(canonicalAuthorityRef)
 assert.equal(currentAuthority.ok, true)
 
@@ -42,13 +42,13 @@ const humanAuthority = read('docs/product/exam-paper-format-standards.md')
 const currentHumanAuthority = humanAuthority.split('## v2 历史排版证据')[0]
 assert.match(
   currentHumanAuthority,
-  /standards\/paper-canonical\/manifest-v16\.json/,
-  'the unique human-readable authority index must bind current manifest v16',
+  /standards\/paper-canonical\/manifest-v17\.json/,
+  'the unique human-readable authority index must bind current manifest v17',
 )
 assert.match(
   currentHumanAuthority,
-  /Screen v16、Print\/PDF v17/,
-  'the human-readable current output matrix must name only Screen v16 and Print/PDF v17',
+  /Screen v17、Print\/PDF v18/,
+  'the human-readable current output matrix must name only Screen v17 and Print/PDF v18',
 )
 assert.doesNotMatch(
   currentHumanAuthority,
@@ -119,6 +119,22 @@ assert.match(
   manifestV16Migration,
   /has no[\s\S]*standalone Seven Choices passage title[\s\S]*passage_title_to_body/i,
   'manifest v16 must record the source-bound passage-title correction',
+)
+const manifestV17Migration = read('standards/paper-canonical/manifest-v17-migration.md')
+assert.match(
+  manifestV17Migration,
+  /Manifest v17[\s\S]*Screen v17[\s\S]*Print\/PDF v18/i,
+  'manifest v17 must record the successor renderer/output authority closure',
+)
+assert.match(
+  manifestV17Migration,
+  /Manifest v1-v16[\s\S]*immutable/i,
+  'manifest v17 migration must preserve earlier immutable authority closures',
+)
+assert.match(
+  manifestV17Migration,
+  /schema[\s\S]*semantic conformance fixture[\s\S]*geometry/i,
+  'manifest v17 must record schema and semantic conformance for visible geometry',
 )
 assert.equal(
   Object.hasOwn(currentAuthority.closure.schemas, 'consumer-contract-v1'),

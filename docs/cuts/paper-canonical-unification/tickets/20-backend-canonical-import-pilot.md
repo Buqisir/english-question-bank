@@ -312,3 +312,31 @@ standalone whole-app lint command still reports the repository's existing
 no lint-debt files were changed. No Owner QA provisioning, Ticket 21,
 Cloze/other-family work, production/R2 action, or generated-DOCX output was
 performed.
+
+Renderer version-discipline Must Fix closure (2026-07-29):
+Manifest v17 adds `seven-choices-rhythm-v3`, Screen v17, and Print/PDF v18.
+The successor preserves all 22 v2 semantic edges and the no-passage-title
+correction while binding the visible geometry adjustments introduced at
+`8bdbdd93c9e331ba92e2e44991d8bddc22bf126b`. The renderer now consumes those
+Screen and Print/PDF values from the v3 authority instead of owning unversioned
+CSS or template literals.
+
+The new v3 schema closes every geometry field and exact value.
+`test-fixtures/paper-canonical/seven-choices-rhythm-v3-conformance.json`
+proves the valid closure and independently attacks unknown, Screen-drifted,
+and Print/PDF-drifted values through schema plus semantic validation.
+Manifest v1-v16, Screen v1-v16, Print/PDF v1-v17, Renderer Typography v4,
+Seven Choices Rhythm v1-v2, all prior conformance/evidence bytes, original
+source bytes, official-answer bytes, and the v16 no-passage-title correction
+remain unchanged.
+
+Focused verification passes the versioned authority/conformance fixture,
+canonical Publication, import admission/recovery, backend pilot and focused
+fixes, Seven Choices publication/rendered behavior, Print renderer 92/92,
+PaperBrowse 193/193, app typecheck/build, official `--actual-artifacts`,
+exact-A4 visual inspection, `git diff --check`, resource cleanup, and
+`pnpm -C app run verify:all` 115 PASS / 1 declared SKIP / 0 FAIL. The
+successor closure commit is the exact HEAD reported in the focused re-review
+handoff. No Owner QA provisioning, Ticket 21, Cloze/other-family work,
+production/R2 action, unrelated lint repair, or generated-DOCX output was
+performed.

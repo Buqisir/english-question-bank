@@ -63,6 +63,9 @@ import { PaperSurface } from '../../shared-ui/papersurface/PaperSurface'
 // ancestor），不是 shared-ui/papersurface/** 或 paper-intelligence/**
 // 内部文件，纯数据 primitives，import-only 零改动。
 import { paperSurfaceTokens } from '../../../../shared/papersurface/tokens.mjs'
+import {
+  sevenChoicesRhythm,
+} from '../../../../shared/paper-canonical/sevenChoicesRhythm.mjs'
 import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
 import { WritingPaperPage } from '../paper-intelligence/WritingPaperPage'
 import {
@@ -379,6 +382,12 @@ const paperBrowseContentStyle: PaperBrowseContentStyle = {
   '--ps-font-stack-heading': paperSurfaceTokens.paperFontStackHeading,
   '--ps-font-size': paperSurfaceTokens.paperFontSizePx,
   '--ps-line-height': paperSurfaceTokens.paperLineHeight,
+  '--ps-seven-merged-instruction-margin-bottom':
+    `${sevenChoicesRhythm.visibleGeometryAdjustments.screen.mergedInstructionMarginBottomPx}px`,
+  '--ps-seven-following-section-margin-top-adjustment':
+    `${sevenChoicesRhythm.visibleGeometryAdjustments.screen.followingSectionMarginTopAdjustmentPx}px`,
+  '--ps-seven-adjacent-chrome-margin-top-adjustment':
+    `${sevenChoicesRhythm.visibleGeometryAdjustments.screen.adjacentChromeMarginTopAdjustmentPx}px`,
   '--ps-passage-indent': paperSurfaceTokens.passageIndent,
   '--ps-page-margin-x': paperSurfaceTokens.pageMarginX,
   '--ps-page-margin-top': paperSurfaceTokens.pageMarginTop,

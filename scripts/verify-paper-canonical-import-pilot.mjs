@@ -353,18 +353,18 @@ function assertSevenChoicesReferenceEvidence() {
   )
   assert.equal(
     canonicalAuthorityRef.manifestVersion,
-    '16',
+    '17',
     'new Publications use the versioned Seven Choices rhythm authority closure',
   )
   assert.equal(
     consumerContractRefs.screen.version,
-    '16',
-    'Screen v16 binds the Seven Choices rhythm authority closure',
+    '17',
+    'Screen v17 binds the Seven Choices rhythm authority closure',
   )
   assert.equal(
     consumerContractRefs.print_pdf.version,
-    '17',
-    'Print/PDF v17 binds the Seven Choices rhythm authority closure',
+    '18',
+    'Print/PDF v18 binds the Seven Choices rhythm authority closure',
   )
   assert.equal(
     sha256(preservedBytes),
