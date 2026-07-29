@@ -1637,6 +1637,9 @@ async function assertPrintHtmlReadingVerticalRhythm(
         options: [...question.querySelectorAll(
           '[data-canonical-reading-rhythm-role="option_line"]',
         )].map((option) => lineBottoms(option)),
+        placementMode: question.querySelector(
+          '[data-canonical-placement-mode]',
+        )?.getAttribute('data-canonical-placement-mode'),
         answer: lineBottoms(question.querySelector(
           '[data-canonical-reading-rhythm-role="answer_line"]',
         )),
@@ -1708,6 +1711,8 @@ async function assertPrintHtmlReadingVerticalRhythm(
   )
   const target =
     readingPassageLetterTypography.verticalRhythm.targets.screen
+  const optionRowCounts = new Set()
+  const placementModes = new Set()
   const assertStep = (actual, ratio, edgeId) => assert.equal(
     Math.abs(actual - target.baselineStepPx * ratio)
       <= (ratio === 2
@@ -1765,6 +1770,8 @@ async function assertPrintHtmlReadingVerticalRhythm(
           }
           return rows
         }, [])
+      optionRowCounts.add(optionRows.length)
+      placementModes.add(question.placementMode)
       assertStep(
         optionRows[0] - question.stem.at(-1),
         1,
@@ -1831,6 +1838,16 @@ async function assertPrintHtmlReadingVerticalRhythm(
       `${label} uses the exact visible transition role`,
     )
   }
+  assert.equal(
+    [1, 2, 4].every((rowCount) => optionRowCounts.has(rowCount)),
+    true,
+    `${label} covers one-, two-, and four-row option layouts`,
+  )
+  assert.deepEqual(
+    [...placementModes].sort(),
+    ['four_columns', 'one_column', 'two_by_two'],
+    `${label} covers every canonical ABCD placement mode`,
+  )
   const ending = readingPredecessorOracle.readingEnd
   assert.ok(observations.ending, `${label} exposes Reading D ending`)
   assert.equal(
