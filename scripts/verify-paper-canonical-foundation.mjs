@@ -2,6 +2,7 @@
 
 import assert from 'node:assert/strict'
 import manifestV1 from '../standards/paper-canonical/manifest-v1.json' with { type: 'json' }
+import manifestV13 from '../standards/paper-canonical/manifest-v13.json' with { type: 'json' }
 
 import { canonicalAuthorityRef, compileCanonicalPaper, stableStringify, validateExactTransformationRecords } from '../shared/paper-canonical/compiler.mjs'
 import { resolveCanonicalAuthority, slotsForProfile, validateAuthorityClosure } from '../shared/paper-canonical/authority.mjs'
@@ -51,6 +52,16 @@ const closure = resolveCanonicalAuthority(canonicalAuthorityRef).closure
 const legacyAuthorityRef = { manifestId: manifestV1.manifestId, manifestVersion: manifestV1.version, manifestDigest: digestJson(manifestV1) }
 assert.equal(legacyAuthorityRef.manifestDigest, 'sha256:0aa486d62ba5d7ce9158bf45287d421c9534775118040dbacdfa81dad1e08b6b')
 assert.equal(resolveCanonicalAuthority(legacyAuthorityRef).ok, true)
+const immutableV13AuthorityRef = {
+  manifestId: manifestV13.manifestId,
+  manifestVersion: manifestV13.version,
+  manifestDigest: digestJson(manifestV13),
+}
+assert.equal(
+  immutableV13AuthorityRef.manifestDigest,
+  'sha256:f51bd73617d2c3566594070d0a56fdc67d30e7ef7a7d6d3678182226b18ff1c4',
+)
+assert.equal(resolveCanonicalAuthority(immutableV13AuthorityRef).ok, true)
 const legacyDirectRequest = makeRequest(source)
 legacyDirectRequest.authority = legacyAuthorityRef
 const legacyDirect = compileCanonicalPaper(legacyDirectRequest)

@@ -51,7 +51,7 @@ const sourcePackageDir = path.join(
 )
 const passageLetterReferencePath = path.join(
   repositoryRoot,
-  'docs/cuts/paper-canonical-unification/qa/20-reading-passage-letter-reference-measurements.json',
+  'docs/cuts/paper-canonical-unification/qa/20-reading-vertical-rhythm-reference-measurements-v3.json',
 )
 const readingPredecessorOraclePath = path.join(
   repositoryRoot,

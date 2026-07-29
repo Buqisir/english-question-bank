@@ -296,11 +296,13 @@ async function assertPaperBrowseSelectionModes() {
       expectedText: 'Emily Sanders, a 25-year-old from Detroit',
     },
   ]
-  function assetForGroups(groupIds) {
+  function assetForGroups(groupIds, { preserveNonGroupBlocks = false } = {}) {
     const selectedGroupIds = new Set(groupIds)
     const asset = structuredClone(browseAsset)
     asset.content.blocks = asset.content.blocks.filter(
-      (block) => block.type === 'group' && selectedGroupIds.has(block.groupId),
+      (block) =>
+        (preserveNonGroupBlocks && block.type !== 'group')
+        || (block.type === 'group' && selectedGroupIds.has(block.groupId)),
     )
     return asset
   }
@@ -317,7 +319,7 @@ async function assertPaperBrowseSelectionModes() {
   }
   const screenContract = JSON.parse(readFileSync(path.join(
     repositoryRoot,
-    'standards/paper-canonical/consumers/screen-v13.json',
+    'standards/paper-canonical/consumers/screen-v14.json',
   )))
   for (const { familyContractId } of legacyCases) {
     assert.equal(
@@ -384,7 +386,9 @@ async function assertPaperBrowseSelectionModes() {
   try {
     for (const testCase of legacyCases) {
       const legacyPage = await openPaperBrowse(
-        assetForGroups(testCase.groupIds),
+        assetForGroups(testCase.groupIds, {
+          preserveNonGroupBlocks: testCase.familyContractId === 'reading',
+        }),
         consumptionForGroup(testCase, 'legacy'),
       )
       try {
@@ -402,6 +406,18 @@ async function assertPaperBrowseSelectionModes() {
           0,
           `authorized ${testCase.familyContractId} legacy selection renders through PaperBrowse`,
         )
+        if (testCase.familyContractId === 'reading') {
+          assert.equal(
+            await legacyPage.locator(
+              '[data-canonical-reading-rhythm-role],'
+              + '[data-canonical-reading-chrome],'
+              + '[data-canonical-reading-preceding-for],'
+              + '[data-canonical-reading-following-for]',
+            ).count(),
+            0,
+            'full-chrome legacy Reading receives no canonical rhythm attributes',
+          )
+        }
       } finally {
         await legacyPage.close()
       }

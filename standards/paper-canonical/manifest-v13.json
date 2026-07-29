@@ -5,39 +5,27 @@
   "factOwners": [
     {
       "owner": "core",
-      "artifactKinds": [
-        "core"
-      ]
+      "artifactKinds": ["core"]
     },
     {
       "owner": "profile",
-      "artifactKinds": [
-        "profile"
-      ]
+      "artifactKinds": ["profile"]
     },
     {
       "owner": "family",
-      "artifactKinds": [
-        "family"
-      ]
+      "artifactKinds": ["family"]
     },
     {
       "owner": "normalization",
-      "artifactKinds": [
-        "normalization"
-      ]
+      "artifactKinds": ["normalization"]
     },
     {
       "owner": "source_adapter",
-      "artifactKinds": [
-        "source_adapter"
-      ]
+      "artifactKinds": ["source_adapter"]
     },
     {
       "owner": "renderer_typography",
-      "artifactKinds": [
-        "renderer_typography"
-      ]
+      "artifactKinds": ["renderer_typography"]
     }
   ],
   "artifacts": [
@@ -130,7 +118,7 @@
       "owner": "renderer_typography",
       "path": "rendering/paper-typography-v3.json",
       "schemaId": "renderer-typography-v3",
-      "sha256": "sha256:74635a8f3771cb8e708543866d371fe4d3b2809696db3edc482135c532c7cc3d"
+      "sha256": "sha256:cd9fc028ca69bad464e4a1cf573c84eea31cf5f666d0780f82e2af68d35bf63e"
     }
   ],
   "schemas": [
@@ -187,7 +175,7 @@
     {
       "id": "renderer-typography-v3",
       "path": "../../schemas/paper-canonical/renderer-typography-v3.schema.json",
-      "sha256": "sha256:ef510ed3af776b4f33b3936923ab5d184ee148f0430c97fac379f4ff7ed1972b"
+      "sha256": "sha256:a95236f0a395bf457ed02422afad6ff1528d69433fa8344a4ffcf831c2a19297"
     },
     {
       "id": "source-capture-v1",

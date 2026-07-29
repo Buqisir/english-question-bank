@@ -1919,7 +1919,9 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
 
   const canonicalReadingGroupIds =
     canonicalConsumption?.selections.find(
-      (selection) => selection.familyContractId === 'reading',
+      (selection) =>
+        selection.familyContractId === 'reading'
+        && selection.mode === 'canonical',
     )?.groupIds ?? []
   const nextReadingGroupIdByPredecessorGroupId = new Map(
     canonicalReadingGroupIds.slice(0, -1).map((groupId, index) => [

@@ -6,6 +6,7 @@ import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { DatabaseSync } from 'node:sqlite'
 import manifestV1 from '../standards/paper-canonical/manifest-v1.json' with { type: 'json' }
+import manifestV13 from '../standards/paper-canonical/manifest-v13.json' with { type: 'json' }
 
 import {
   createFileSystemCanonicalPublicationStore,
@@ -190,6 +191,88 @@ assert.throws(
 )
 
 const sealed = sealCanonicalPublication({ compilation, sourceAssetVersion: 1, sourceAsset: fixture.sourceAsset })
+const immutableV13AuthorityRef = {
+  manifestId: manifestV13.manifestId,
+  manifestVersion: manifestV13.version,
+  manifestDigest: digestJson(manifestV13),
+}
+const immutableV13Manifest = structuredClone(sealed.manifest)
+const immutableV13Artifacts = { ...sealed.artifacts }
+const immutableV13SourceEvidence = { ...sealed.sourceEvidence }
+const immutableV13Descriptors = new Map(
+  immutableV13Manifest.artifacts.map((artifact) => [artifact.role, artifact]),
+)
+const immutableV13PlanDescriptor = immutableV13Descriptors.get('paper_plan')
+const immutableV13Plan = JSON.parse(new TextDecoder().decode(
+  immutableV13Artifacts[immutableV13PlanDescriptor.relativePath],
+))
+immutableV13Plan.authorityRef = immutableV13AuthorityRef
+immutableV13Artifacts[immutableV13PlanDescriptor.relativePath] =
+  stableBytes(immutableV13Plan)
+const immutableV13GroupsDescriptor =
+  immutableV13Descriptors.get('question_groups')
+const immutableV13Groups = JSON.parse(new TextDecoder().decode(
+  immutableV13Artifacts[immutableV13GroupsDescriptor.relativePath],
+))
+for (const group of immutableV13Groups.groups) {
+  group.contractRef.manifestVersion = immutableV13AuthorityRef.manifestVersion
+  group.contractRef.manifestDigest = immutableV13AuthorityRef.manifestDigest
+  const {
+    sourceMap: _sourceMap,
+    sourceFingerprint: _sourceFingerprint,
+    semanticDigest: _semanticDigest,
+    ...semantic
+  } = group
+  group.semanticDigest = digestJson(semantic)
+}
+immutableV13Artifacts[immutableV13GroupsDescriptor.relativePath] =
+  stableBytes(immutableV13Groups)
+const immutableV13ReportDescriptor =
+  immutableV13Descriptors.get('normalization_report')
+const immutableV13Report = JSON.parse(new TextDecoder().decode(
+  immutableV13Artifacts[immutableV13ReportDescriptor.relativePath],
+))
+immutableV13Report.schemaVersion = 'normalization-report-v13'
+immutableV13Report.authority = immutableV13AuthorityRef
+immutableV13Report.semanticDigest = digestJson({
+  groups: immutableV13Groups.groups.map((group) => group.semanticDigest),
+  reviewDecisionDigest: digestJson(immutableV13Report.reviewDecisions),
+  inactiveSourceClosureDigests: immutableV13Report.inactiveSourceClosures.map(
+    (closure) => closure.closureDigest,
+  ),
+})
+delete immutableV13Artifacts[immutableV13ReportDescriptor.relativePath]
+immutableV13ReportDescriptor.relativePath =
+  'canonical/normalization-report-v13.json'
+immutableV13Artifacts[immutableV13ReportDescriptor.relativePath] =
+  stableBytes(immutableV13Report)
+for (const descriptor of immutableV13Manifest.artifacts) {
+  const bytes = immutableV13Artifacts[descriptor.relativePath]
+  descriptor.byteLength = bytes.byteLength
+  descriptor.sha256 = sha256(bytes)
+  if (descriptor.role === 'normalization_report') {
+    descriptor.schemaVersion = 'normalization-report-v13'
+  }
+}
+immutableV13Manifest.schemaVersion = 'canonical-paper-publication-v13'
+immutableV13Manifest.authority = immutableV13AuthorityRef
+immutableV13Manifest.publicationDigest = digestJson(((manifest) => {
+  const { publicationDigest: _publicationDigest, ...base } = manifest
+  return base
+})(immutableV13Manifest))
+const immutableV13Validated = validateCanonicalPublicationBundle({
+  manifest: immutableV13Manifest,
+  sourceAsset: sealed.sourceAsset,
+  readArtifact: (relativePath) =>
+    immutableV13Artifacts[relativePath]
+    || immutableV13SourceEvidence[relativePath],
+})
+assert.equal(
+  immutableV13Validated.projected.nodes.filter((node) => node.kind === 'group')
+    .length,
+  9,
+  'an exact manifest-v13 Publication remains resolvable and loadable',
+)
 const tamperedManifest = structuredClone(sealed.manifest)
 const tamperedArtifacts = { ...sealed.artifacts }
 const groupPath = 'canonical/canonical-question-groups-v1.json'

@@ -1,464 +1,188 @@
 {
-  "schemaVersion": "reading-vertical-rhythm-reference-measurements-v3",
+  "schemaVersion": "reading-passage-letter-reference-measurements-v2",
   "authority": {
     "readme": "docs/product/exam-paper-format-reference/README.md",
     "standard": "docs/product/exam-paper-format-standards.md",
-    "goldenPages": ["G03", "G04", "G05", "G06", "G07", "G08"],
-    "measurementMethod": "Tesseract 5.5.2 --psm 6 TSV word boxes on the exact digest-bound JPEG bytes. Each line baseline proxy is the median lower edge of ordinary-height Latin word boxes on that semantic line. Each distance is divided by the median nearby Latin baseline step from the same crop before any renderer target is selected.",
-    "coordinateSystem": "JPEG pixels from top-left; recorded coordinates are line baseline proxies only.",
-    "scaleBoundary": "JPEG coordinates are used only inside one crop to form dimensionless local ratios. JPEG pixels are never treated as Screen CSS pixels or PDF points, and no scale is inferred from a full A4 page.",
-    "renderedMappingMethod": "Multiply a dimensionless adjacency ratio by the actual public artifact baseline step: computed 24px on Screen and measured 18pt in exact-A4 Chromium PDF.",
-    "semanticBoundary": "The oracle names visible semantic roles and exact source-text anchors. It does not copy renderer DOM order or the production heading-selection algorithm."
+    "measurementMethod": "Tesseract 5.5.2 --psm 6 TSV word boxes on the exact digest-bound JPEG bytes. Local scale is the median step between nearby Latin-line baseline proxies in the same crop; a line baseline proxy is the median lower edge of its ordinary-height Latin word boxes, excluding taller Chinese gloss or descender outliers. Passage-letter distances are divided by that local step before any renderer target is selected.",
+    "coordinateSystem": "JPEG pixels from top-left; boxes are x,y,width,height; baselineProxyY is the selected median Latin glyph-box lower edge.",
+    "scaleBoundary": "JPEG pixels are used only inside each crop to form dimensionless ratios. No JPEG pixel is treated as a Screen CSS pixel or converted to a PDF point.",
+    "renderedMappingMethod": "Multiply the dimensionless golden ratio by the actual public artifact's fixed body baseline step: computed 24px on Screen and measured 18pt in exact A4 Chromium PDF."
   },
   "tolerances": {
     "horizontalImageCenterOffsetPx": 12,
     "letterGlyphHeightPx": 1,
     "localBaselineStepPx": 1,
-    "letterRatio": 0.05,
-    "oneStepRatio": 0.15,
-    "twoStepRatio": 0.15,
+    "goldenBaselineStepRatio": 0.05,
     "screenHorizontalCenterPx": 0.5,
-    "screenOneStepPx": 1.25,
-    "screenTwoStepPx": 1.5,
+    "screenFollowingBaselineStepPx": 0.75,
+    "screenPrecedingBaselineStepPx": 1.25,
     "pdfHorizontalCenterPt": 0.5,
-    "pdfOneStepPt": 1.5,
-    "pdfTwoStepPt": 1.5
-  },
-  "toleranceDerivation": {
-    "method": "For each normalized adjacency class, take the largest absolute residual among the recorded local-ratio samples, then round upward to the next 0.05 ratio step. Letter edges retain the tighter prior 0.05 gate because all four direct letter samples fall within it. Renderer tolerances add only the public artifact extractor's observed sub-pixel or sub-point box uncertainty; PDF mixed-glyph comparisons use extracted text-box vertical centers as the baseline proxy so glyph ascender and descender shapes cannot change the result. Tolerances are not copied CSS constants.",
-    "oneStepLargestRecordedResidual": 0.129032,
-    "oneStepRoundedTolerance": 0.15,
-    "twoStepLargestRecordedResidual": 0.096774,
-    "twoStepRoundedTolerance": 0.15,
-    "letterLargestRecordedResidual": 0.032258,
-    "letterRoundedTolerance": 0.05,
-    "pdfOneStepLargestExtractorResidualPt": 1.288261,
-    "pdfOneStepRoundedTolerancePt": 1.5,
-    "pdfTwoStepLargestExtractorResidualPt": 1.288261,
-    "pdfTwoStepRoundedTolerancePt": 1.5
+    "pdfFollowingBaselineStepPt": 0.5,
+    "pdfPrecedingBaselineStepPt": 1
   },
   "normalizedContract": {
     "letterGlyphHeightPx": 13,
     "scaleReference": "median nearby Latin baseline-proxy step in the same digest-bound crop",
-    "screenBodyBaselineStepPx": 24,
-    "pdfBodyBaselineStepPt": 18,
-    "extraLetterToPassageMargin": "none",
-    "semanticRoleClasses": {
-      "chrome": ["part_title", "subsection", "meta_instruction"],
-      "passageContent": [
-        "passage_title",
-        "passage_subtitle",
-        "passage_body_line",
-        "native_table_line"
-      ],
-      "questionStem": ["question_stem_line"],
-      "optionLine": ["option_line"],
-      "teacherTail": ["answer_line", "explanation_line"]
+    "headingToLetterBaselineStepRatio": 1,
+    "priorContentToLetterBaselineStepRatio": 2,
+    "letterToFirstPassageBaselineStepRatio": 1,
+    "screen": {
+      "observedBodyBaselineStepPx": 24,
+      "headingToLetterTargetPx": 24,
+      "priorContentToLetterTargetPx": 48,
+      "letterToFirstPassageTargetPx": 24,
+      "formula": "targetPx = goldenBaselineStepRatio * observedBodyBaselineStepPx"
     },
-    "adjacencyGraph": [
-      {
-        "edgeId": "chrome_internal",
-        "fromClass": "chrome",
-        "toClass": "chrome",
-        "baselineStepRatio": 1,
-        "optionalCollapse": true
-      },
-      {
-        "edgeId": "chrome_to_a",
-        "fromClass": "chrome",
-        "toRole": "passage_letter",
-        "baselineStepRatio": 1,
-        "optionalCollapse": true
-      },
-      {
-        "edgeId": "letter_to_first_content",
-        "fromRole": "passage_letter",
-        "toClass": "passageContent",
-        "baselineStepRatio": 1,
-        "optionalCollapse": true
-      },
-      {
-        "edgeId": "passage_content_internal",
-        "fromClass": "passageContent",
-        "toClass": "passageContent",
-        "baselineStepRatio": 1,
-        "optionalCollapse": false
-      },
-      {
-        "edgeId": "passage_to_first_question",
-        "fromClass": "passageContent",
-        "toClass": "questionStem",
-        "baselineStepRatio": 2,
-        "optionalCollapse": false
-      },
-      {
-        "edgeId": "question_stem_internal",
-        "fromClass": "questionStem",
-        "toClass": "questionStem",
-        "baselineStepRatio": 1,
-        "optionalCollapse": false
-      },
-      {
-        "edgeId": "stem_to_options",
-        "fromClass": "questionStem",
-        "toClass": "optionLine",
-        "baselineStepRatio": 1,
-        "optionalCollapse": false
-      },
-      {
-        "edgeId": "option_line_internal",
-        "fromClass": "optionLine",
-        "toClass": "optionLine",
-        "baselineStepRatio": 1,
-        "optionalCollapse": false
-      },
-      {
-        "edgeId": "question_to_next_question",
-        "fromClass": "optionLine",
-        "toClass": "questionStem",
-        "baselineStepRatio": 1,
-        "optionalCollapse": false
-      },
-      {
-        "edgeId": "option_to_answer",
-        "fromClass": "optionLine",
-        "toRole": "answer_line",
-        "baselineStepRatio": 1,
-        "optionalCollapse": true
-      },
-      {
-        "edgeId": "answer_to_explanation",
-        "fromRole": "answer_line",
-        "toRole": "explanation_line",
-        "baselineStepRatio": 1,
-        "optionalCollapse": true
-      },
-      {
-        "edgeId": "teacher_tail_to_next_question",
-        "fromClass": "teacherTail",
-        "toClass": "questionStem",
-        "baselineStepRatio": 1,
-        "optionalCollapse": true
-      },
-      {
-        "edgeId": "reading_passage_transition",
-        "fromClass": "optionLine",
-        "toRole": "passage_letter",
-        "baselineStepRatio": 2,
-        "optionalCollapse": false
-      },
-      {
-        "edgeId": "teacher_reading_passage_transition",
-        "fromClass": "teacherTail",
-        "toRole": "passage_letter",
-        "baselineStepRatio": 2,
-        "optionalCollapse": true
-      },
-      {
-        "edgeId": "reading_to_next_section_same_page",
-        "fromClass": "optionLine",
-        "toRole": "next_section",
-        "baselineStepRatio": 2,
-        "optionalCollapse": false
-      },
-      {
-        "edgeId": "teacher_reading_to_next_section_same_page",
-        "fromClass": "teacherTail",
-        "toRole": "next_section",
-        "baselineStepRatio": 2,
-        "optionalCollapse": true
-      },
-      {
-        "edgeId": "same_passage_cross_page",
-        "fromClass": "passageContent",
-        "toClass": "passageContent",
-        "pageRelation": "next_page_continuation",
-        "optionalCollapse": false,
-        "repeatForbiddenRoles": [
-          "passage_letter",
-          "passage_title",
-          "passage_subtitle"
-        ]
-      },
-      {
-        "edgeId": "reading_to_next_section_cross_page",
-        "fromClass": "optionLine",
-        "toRole": "next_section",
-        "pageRelation": "next_page_start",
-        "optionalCollapse": false
-      }
-    ],
-    "supportedVariants": {
-      "instruction": ["present", "absent"],
-      "firstContent": ["title", "body"],
-      "stemLineCount": [1, 2],
-      "optionRowCount": [1, 2, 4],
-      "optionWrapping": ["dense_no_wrap", "one_column_wrapped"],
-      "screenMode": ["plain", "lecture"],
-      "printVersion": ["student", "teacher"],
-      "pageRelation": ["same_page", "cross_page"]
-    }
+    "printPdf": {
+      "observedBodyBaselineStepPt": 18,
+      "headingToLetterTargetPt": 18,
+      "priorContentToLetterTargetPt": 36,
+      "letterToFirstPassageTargetPt": 18,
+      "formula": "targetPt = goldenBaselineStepRatio * observedBodyBaselineStepPt"
+    },
+    "extraLetterToPassageMargin": "none"
   },
   "references": [
     {
-      "goldenId": "G03",
       "file": "docs/product/exam-paper-format-reference/images/page-03-reading-a-start.jpeg",
       "sha256": "d602f8e4757be05a84762d387268cbf9b1e0734b62c37e2349de4d9d566ff272",
       "pixelWidth": 866,
       "pixelHeight": 1161,
-      "localBaselineStepPx": 32,
       "passageLetter": {
         "value": "A",
         "box": { "x": 427, "y": 848, "width": 13, "height": 13 },
         "baselineProxyY": 861,
         "imageCenterOffsetPx": 0.5
       },
-      "samples": [
-        {
-          "edgeId": "chrome_internal",
-          "from": { "role": "part_title", "text": "第二部分 阅读（共两节，满分50分）", "baselineProxyY": 767 },
-          "to": { "role": "subsection", "text": "第一节（共15小题；每小题2.5分，满分37.5分）", "baselineProxyY": 799 },
-          "baselineStepRatio": 1
-        },
-        {
-          "edgeId": "chrome_internal",
-          "from": { "role": "subsection", "text": "第一节（共15小题；每小题2.5分，满分37.5分）", "baselineProxyY": 799 },
-          "to": { "role": "meta_instruction", "text": "阅读下列短文，从每题所给的A、B、C、D四个选项中选出最佳选项。", "baselineProxyY": 830 },
-          "baselineStepRatio": 0.96875
-        },
-        {
-          "edgeId": "chrome_to_a",
-          "from": { "role": "meta_instruction", "text": "阅读下列短文，从每题所给的A、B、C、D四个选项中选出最佳选项。", "baselineProxyY": 830 },
-          "to": { "role": "passage_letter", "group": "A", "text": "A", "baselineProxyY": 861 },
-          "baselineStepRatio": 0.96875
-        },
-        {
-          "edgeId": "letter_to_first_content",
-          "from": { "role": "passage_letter", "group": "A", "text": "A", "baselineProxyY": 861 },
-          "to": { "role": "passage_title", "group": "A", "text": "Yellowstone Poster Exhibition to Be on View at UW’s Coe Library", "baselineProxyY": 892 },
-          "baselineStepRatio": 0.96875
-        },
-        {
-          "edgeId": "passage_content_internal",
-          "from": { "role": "passage_title", "group": "A", "text": "Yellowstone Poster Exhibition to Be on View at UW’s Coe Library", "baselineProxyY": 892 },
-          "to": { "role": "passage_body_line", "group": "A", "text": "A first-of-its-kind exhibition that focuses on the history of Yellowstone National Park", "baselineProxyY": 924 },
-          "baselineStepRatio": 1
-        }
-      ],
-      "continuesOn": "G04"
+      "preceding": {
+        "kind": "reading-instruction",
+        "inkBottomY": 830,
+        "inkBottomToLetterInkTopPx": 18
+      },
+      "following": {
+        "kind": "passage-title",
+        "latinLineTopY": 879,
+        "letterToLatinLineTopDeltaPx": 31,
+        "letterInkBottomToLatinLineInkTopPx": 18
+      },
+      "localScale": {
+        "baselineProxySamplesY": [892, 924, 956, 987, 1019],
+        "baselineStepPx": 32,
+        "precedingBaselineProxyY": 830,
+        "precedingToLetterBaselineDeltaPx": 31,
+        "precedingToLetterBaselineStepRatio": 0.96875,
+        "followingBaselineProxyY": 892,
+        "letterToFollowingBaselineDeltaPx": 31,
+        "letterToFollowingBaselineStepRatio": 0.96875
+      },
+      "firstBodyLatinLineTopY": 910
     },
     {
-      "goldenId": "G04",
       "file": "docs/product/exam-paper-format-reference/images/page-04-reading-a-b.jpeg",
       "sha256": "79378d6d9e9664282687d0d36226d10b0462f1b55a51fa2dfd93512756222d8a",
       "pixelWidth": 866,
       "pixelHeight": 1161,
-      "localBaselineStepPx": 31,
       "passageLetter": {
         "value": "B",
         "box": { "x": 416, "y": 835, "width": 12, "height": 13 },
         "baselineProxyY": 848,
         "imageCenterOffsetPx": -11
       },
-      "samples": [
-        {
-          "edgeId": "passage_content_internal",
-          "from": { "role": "passage_body_line", "group": "A", "text": "advertising and art.", "baselineProxyY": 99 },
-          "to": { "role": "passage_body_line", "group": "A", "text": "“We’re thrilled to be working with Yellowstone collectors Jack and Susan Davis, and", "baselineProxyY": 129 },
-          "baselineStepRatio": 0.967742
-        },
-        {
-          "edgeId": "passage_to_first_question",
-          "from": { "role": "passage_body_line", "group": "A", "text": "as posters such as this one were printed on soft paper and very few have survived.", "baselineProxyY": 441 },
-          "to": { "role": "question_stem_line", "group": "A", "question": 21, "text": "21. How long will the exhibition “Wonderland Illustrated” last?", "baselineProxyY": 504 },
-          "baselineStepRatio": 2.032258
-        },
-        {
-          "edgeId": "stem_to_options",
-          "from": { "role": "question_stem_line", "group": "A", "question": 21, "baselineProxyY": 504 },
-          "to": { "role": "option_line", "group": "A", "question": 21, "rows": 1, "baselineProxyY": 536 },
-          "baselineStepRatio": 1.032258
-        },
-        {
-          "edgeId": "question_to_next_question",
-          "from": { "role": "option_line", "group": "A", "question": 21, "baselineProxyY": 536 },
-          "to": { "role": "question_stem_line", "group": "A", "question": 22, "baselineProxyY": 567 },
-          "baselineStepRatio": 1
-        },
-        {
-          "edgeId": "option_line_internal",
-          "from": { "role": "option_line", "group": "A", "question": 22, "row": 1, "baselineProxyY": 598 },
-          "to": { "role": "option_line", "group": "A", "question": 22, "row": 4, "baselineProxyY": 692 },
-          "stepCount": 3,
-          "baselineStepRatio": 1.010753
-        },
-        {
-          "edgeId": "reading_passage_transition",
-          "from": { "role": "option_line", "group": "A", "question": 23, "row": 2, "text": "C. It is printed on cloth. D. It is owned by a professor.", "baselineProxyY": 786 },
-          "to": { "role": "passage_letter", "group": "B", "text": "B", "baselineProxyY": 848 },
-          "baselineStepRatio": 2
-        },
-        {
-          "edgeId": "letter_to_first_content",
-          "from": { "role": "passage_letter", "group": "B", "baselineProxyY": 848 },
-          "to": { "role": "passage_body_line", "group": "B", "text": "Parrots are prey animals, which means that other predators", "baselineProxyY": 880 },
-          "baselineStepRatio": 1.032258
-        }
-      ],
-      "continuesOn": "G05"
+      "preceding": {
+        "kind": "prior-passage-final-option-line",
+        "inkBottomY": 790,
+        "inkBottomToLetterInkTopPx": 45
+      },
+      "following": {
+        "kind": "first-passage-line",
+        "latinLineTopY": 866,
+        "letterToLatinLineTopDeltaPx": 31,
+        "letterInkBottomToLatinLineInkTopPx": 18
+      },
+      "localScale": {
+        "baselineProxySamplesY": [880, 911, 942, 974],
+        "baselineStepPx": 31,
+        "precedingBaselineProxyY": 786,
+        "precedingToLetterBaselineDeltaPx": 62,
+        "precedingToLetterBaselineStepRatio": 2,
+        "followingBaselineProxyY": 880,
+        "letterToFollowingBaselineDeltaPx": 32,
+        "letterToFollowingBaselineStepRatio": 1.032258
+      }
     },
     {
-      "goldenId": "G05",
       "file": "docs/product/exam-paper-format-reference/images/page-05-reading-b-c.jpeg",
       "sha256": "dd46050919138eac5e92507b433433d71ba7bc05a8f848fe794480fd1ee3bf90",
       "pixelWidth": 866,
       "pixelHeight": 1161,
-      "localBaselineStepPx": 31,
       "passageLetter": {
         "value": "C",
         "box": { "x": 424, "y": 911, "width": 12, "height": 13 },
         "baselineProxyY": 924,
         "imageCenterOffsetPx": -3
       },
-      "samples": [
-        {
-          "edgeId": "passage_to_first_question",
-          "from": { "role": "passage_body_line", "group": "B", "text": "to change.", "baselineProxyY": 452 },
-          "to": { "role": "question_stem_line", "group": "B", "question": 24, "baselineProxyY": 511 },
-          "baselineStepRatio": 1.903226
-        },
-        {
-          "edgeId": "option_line_internal",
-          "from": { "role": "option_line", "group": "B", "question": 24, "row": 1, "baselineProxyY": 543 },
-          "to": { "role": "option_line", "group": "B", "question": 24, "row": 2, "baselineProxyY": 578.5 },
-          "baselineStepRatio": 1.145161
-        },
-        {
-          "edgeId": "question_to_next_question",
-          "from": { "role": "option_line", "group": "B", "question": 24, "row": 2, "baselineProxyY": 578.5 },
-          "to": { "role": "question_stem_line", "group": "B", "question": 25, "baselineProxyY": 607 },
-          "baselineStepRatio": 0.919355
-        },
-        {
-          "edgeId": "reading_passage_transition",
-          "from": { "role": "option_line", "group": "B", "question": 27, "row": 2, "baselineProxyY": 861 },
-          "to": { "role": "passage_letter", "group": "C", "baselineProxyY": 924 },
-          "baselineStepRatio": 2.032258
-        },
-        {
-          "edgeId": "letter_to_first_content",
-          "from": { "role": "passage_letter", "group": "C", "baselineProxyY": 924 },
-          "to": { "role": "passage_body_line", "group": "C", "baselineProxyY": 956 },
-          "baselineStepRatio": 1.032258
-        }
-      ],
-      "continuesOn": "G06"
+      "preceding": {
+        "kind": "prior-passage-final-option-line",
+        "inkBottomY": 864,
+        "inkBottomToLetterInkTopPx": 47
+      },
+      "following": {
+        "kind": "first-passage-line",
+        "latinLineTopY": 942,
+        "letterToLatinLineTopDeltaPx": 31,
+        "letterInkBottomToLatinLineInkTopPx": 18
+      },
+      "localScale": {
+        "baselineProxySamplesY": [956, 987, 1019, 1051],
+        "baselineStepPx": 32,
+        "precedingBaselineProxyY": 861,
+        "precedingToLetterBaselineDeltaPx": 63,
+        "precedingToLetterBaselineStepRatio": 1.96875,
+        "followingBaselineProxyY": 956,
+        "letterToFollowingBaselineDeltaPx": 32,
+        "letterToFollowingBaselineStepRatio": 1
+      }
     },
     {
-      "goldenId": "G06",
       "file": "docs/product/exam-paper-format-reference/images/page-06-reading-c-d.jpeg",
       "sha256": "34716c179a4da5269e26da48fb0de087b6f2318c408aa61e792ba2c8ee235676",
       "pixelWidth": 866,
       "pixelHeight": 1161,
-      "localBaselineStepPx": 31,
       "passageLetter": {
         "value": "D",
         "box": { "x": 429, "y": 947, "width": 14, "height": 13 },
         "baselineProxyY": 960,
         "imageCenterOffsetPx": 3
       },
-      "samples": [
-        {
-          "edgeId": "passage_to_first_question",
-          "from": { "role": "passage_body_line", "group": "C", "text": "what it means to “win” an argument.", "baselineProxyY": 559 },
-          "to": { "role": "question_stem_line", "group": "C", "question": 28, "baselineProxyY": 620 },
-          "baselineStepRatio": 1.967742
-        },
-        {
-          "edgeId": "stem_to_options",
-          "from": { "role": "question_stem_line", "group": "C", "question": 28, "baselineProxyY": 620 },
-          "to": { "role": "option_line", "group": "C", "question": 28, "baselineProxyY": 651 },
-          "baselineStepRatio": 1
-        },
-        {
-          "edgeId": "reading_passage_transition",
-          "from": { "role": "option_line", "group": "C", "question": 31, "row": 2, "baselineProxyY": 898 },
-          "to": { "role": "passage_letter", "group": "D", "baselineProxyY": 960 },
-          "baselineStepRatio": 2
-        },
-        {
-          "edgeId": "letter_to_first_content",
-          "from": { "role": "passage_letter", "group": "D", "baselineProxyY": 960 },
-          "to": { "role": "passage_body_line", "group": "D", "baselineProxyY": 991 },
-          "baselineStepRatio": 1
-        }
-      ],
-      "continuesOn": "G07"
+      "preceding": {
+        "kind": "prior-passage-final-option-line",
+        "inkBottomY": 902,
+        "inkBottomToLetterInkTopPx": 45
+      },
+      "following": {
+        "kind": "first-passage-line",
+        "latinLineTopY": 977,
+        "letterToLatinLineTopDeltaPx": 30,
+        "letterInkBottomToLatinLineInkTopPx": 17
+      },
+      "localScale": {
+        "baselineProxySamplesY": [991, 1021, 1052, 1083],
+        "baselineStepPx": 31,
+        "precedingBaselineProxyY": 898,
+        "precedingToLetterBaselineDeltaPx": 62,
+        "precedingToLetterBaselineStepRatio": 2,
+        "followingBaselineProxyY": 991,
+        "letterToFollowingBaselineDeltaPx": 31,
+        "letterToFollowingBaselineStepRatio": 1
+      }
     },
     {
-      "goldenId": "G07",
       "file": "docs/product/exam-paper-format-reference/images/page-07-reading-d.jpeg",
       "sha256": "e3372945269c6bcf9cdebe916ebc1f1120cb206a13ba093c3863ba45d7836487",
       "pixelWidth": 866,
       "pixelHeight": 1161,
-      "localBaselineStepPx": 31,
       "passageLetter": null,
-      "continuationOf": "D",
-      "samples": [
-        {
-          "edgeId": "same_passage_cross_page",
-          "from": { "role": "passage_body_line", "group": "D", "goldenId": "G06", "text": "as kindness, sharing, and cooperation." },
-          "to": { "role": "passage_body_line", "group": "D", "goldenId": "G07", "text": "Even so, how quickly your child develops into a social creature may also depend on his" },
-          "pageRelation": "next_page_continuation",
-          "repeatForbiddenRoles": ["passage_letter", "passage_title", "passage_subtitle"]
-        },
-        {
-          "edgeId": "passage_content_internal",
-          "from": { "role": "passage_body_line", "group": "D", "text": "a friend’s behavior.", "baselineProxyY": 189 },
-          "to": { "role": "passage_body_line", "group": "D", "text": "This seemingly unusual way of demonstrating fondness can result in unpleasant behavior.", "baselineProxyY": 220 },
-          "baselineStepRatio": 1
-        },
-        {
-          "edgeId": "passage_to_first_question",
-          "from": { "role": "passage_body_line", "group": "D", "text": "schedule playtime when they’re refreshed.", "baselineProxyY": 651 },
-          "to": { "role": "question_stem_line", "group": "D", "question": 32, "baselineProxyY": 713 },
-          "baselineStepRatio": 2
-        },
-        {
-          "edgeId": "option_line_internal",
-          "from": { "role": "option_line", "group": "D", "question": 32, "row": 1, "baselineProxyY": 746 },
-          "to": { "role": "option_line", "group": "D", "question": 32, "row": 2, "baselineProxyY": 776.5 },
-          "baselineStepRatio": 0.983871
-        }
-      ],
-      "continuesOn": "G08"
-    },
-    {
-      "goldenId": "G08",
-      "file": "docs/product/exam-paper-format-reference/images/page-08-seven-choices.jpeg",
-      "sha256": "d567b57e7a9372511121abcefeb66bbe45f9db152a7d8037aff247844773fe57",
-      "pixelWidth": 866,
-      "pixelHeight": 1161,
-      "localBaselineStepPx": 31,
-      "passageLetter": null,
-      "samples": [
-        {
-          "edgeId": "reading_to_next_section_cross_page",
-          "from": { "role": "option_line", "group": "D", "question": 35, "goldenId": "G07", "text": "C. How Your Baby Learns to Love D. How to Communicate with Your Kid" },
-          "to": { "role": "next_section", "goldenId": "G08", "text": "第二节（共5小题；每小题2.5分，满分12.5分）", "baselineProxyY": 36 },
-          "pageRelation": "next_page_start"
-        }
-      ]
+      "continuationOf": "D"
     }
-  ],
-  "nonGoldenCoverage": {
-    "reason": "G03-G08 contain no native table and no teacher answer/explanation tail. Those roles share the recorded one-step line class only where the public artifact exposes the same computed 24px/18pt local baseline; they are verified against canonical executable fixtures and are not claimed as JPEG observations.",
-    "requiredPublicArtifactRoles": [
-      "native_table_line",
-      "answer_line",
-      "explanation_line",
-      "question_stem_line:two_line",
-      "option_line:wrapped_one_column"
-    ]
-  }
+  ]
 }
