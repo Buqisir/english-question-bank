@@ -47,8 +47,9 @@ directory remains.
 1. Reading passages render exactly one centered `A`, `B`, `C`, and `D` at
    their respective passage starts in plain/lecture Screen and Student/Teacher
    Print/PDF. The preceding Reading-heading gap is 18±2px on Screen and
-   13.5±1.5pt in PDF; the B–D prior-content gap is 46±2px on Screen and
-   34.5±1.5pt in PDF. The letter-to-first-passage-line step remains one 18pt
+   the B–D prior-content gap is 46±2px on Screen. Print/PDF preserves a
+   per-group Reading header before every A–D passage, so all four
+   header-to-letter gaps are 13.5±1.5pt. The letter-to-first-passage-line step remains one 18pt
    line with no extra web margin, matching the digest-bound measurements in
    `20-reading-passage-letter-reference-measurements.json`; Seven Choices,
    Cloze, Grammar Fill, Writing, and inactive Listening show no passage letter.

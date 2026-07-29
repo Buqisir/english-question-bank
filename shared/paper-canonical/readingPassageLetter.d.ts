@@ -18,6 +18,7 @@ export type ReadingPassageLetterGeometry = Readonly<{
 
 export function readingPassageLetterGeometryForLetter(
   letter: 'A' | 'B' | 'C' | 'D',
+  consumerId: 'screen' | 'print_pdf',
 ): ReadingPassageLetterGeometry
 
 export function assertCanonicalReadingCompanion(input: {

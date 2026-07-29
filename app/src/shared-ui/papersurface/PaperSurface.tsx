@@ -469,7 +469,7 @@ function CanonicalReadingBlocks({
   semanticSignature?: string
 }): ReactNode {
   const precedingGeometry =
-    readingPassageLetterGeometryForLetter(passageLetter)
+    readingPassageLetterGeometryForLetter(passageLetter, 'screen')
   const renderInlines = (
     inlines: ReadonlyArray<{ nodeId: string; text: string }>,
   ): ReactNode => inlines.map((inline) => (

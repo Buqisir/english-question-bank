@@ -475,14 +475,16 @@ function validateRendererTypography(artifact, profiles) {
       === slotIdentity.length
     && slotIdentity.every((entry, index) =>
       isRecordValue(entry)
-      && exactKeys(entry, ['slotId', 'letter', 'precedingKind'])
+      && exactKeys(entry, ['slotId', 'letter', 'precedingKindByConsumer'])
       && entry.slotId === expectedSlotIds[index]
       && entry.letter === entry.slotId.slice('reading.'.length).toUpperCase()
-      && entry.precedingKind === (
+      && exactKeys(entry.precedingKindByConsumer, ['screen', 'print_pdf'])
+      && entry.precedingKindByConsumer.screen === (
         entry.slotId === 'reading.a'
           ? 'reading_heading'
           : 'prior_content'
-      ))
+      )
+      && entry.precedingKindByConsumer.print_pdf === 'reading_heading')
     && exactKeys(contract.precedingGeometry, [
       'normalizationRule',
       'readingHeading',

@@ -21,22 +21,34 @@
       {
         "slotId": "reading.a",
         "letter": "A",
-        "precedingKind": "reading_heading"
+        "precedingKindByConsumer": {
+          "screen": "reading_heading",
+          "print_pdf": "reading_heading"
+        }
       },
       {
         "slotId": "reading.b",
         "letter": "B",
-        "precedingKind": "prior_content"
+        "precedingKindByConsumer": {
+          "screen": "prior_content",
+          "print_pdf": "reading_heading"
+        }
       },
       {
         "slotId": "reading.c",
         "letter": "C",
-        "precedingKind": "prior_content"
+        "precedingKindByConsumer": {
+          "screen": "prior_content",
+          "print_pdf": "reading_heading"
+        }
       },
       {
         "slotId": "reading.d",
         "letter": "D",
-        "precedingKind": "prior_content"
+        "precedingKindByConsumer": {
+          "screen": "prior_content",
+          "print_pdf": "reading_heading"
+        }
       }
     ],
     "horizontalPlacement": "reading_content_column_center",

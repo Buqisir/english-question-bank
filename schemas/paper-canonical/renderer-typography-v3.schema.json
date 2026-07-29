@@ -75,7 +75,7 @@
               "required": [
                 "slotId",
                 "letter",
-                "precedingKind"
+                "precedingKindByConsumer"
             ],
             "properties": {
               "slotId": {
@@ -89,11 +89,24 @@
                   "D"
                 ]
               },
-              "precedingKind": {
-                "enum": [
-                  "reading_heading",
-                  "prior_content"
-                ]
+              "precedingKindByConsumer": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "screen",
+                  "print_pdf"
+                ],
+                "properties": {
+                  "screen": {
+                    "enum": [
+                      "reading_heading",
+                      "prior_content"
+                    ]
+                  },
+                  "print_pdf": {
+                    "const": "reading_heading"
+                  }
+                }
               }
             }
           }

@@ -222,10 +222,13 @@ function renderCanonicalInlineNodes(nodes) {
   ).join('')
 }
 
-function renderCanonicalReadingBlocks(canonicalGroup) {
+function renderCanonicalReadingBlocks(canonicalGroup, groupLeadHtml) {
   const precedingGeometry =
-    readingPassageLetterGeometryForLetter(canonicalGroup.passageLetter)
-  return `<div class="canonical-reading-passage-letter" data-canonical-passage-letter="${escapeHtml(canonicalGroup.passageLetter)}" data-canonical-reading-preceding-kind="${precedingGeometry.precedingKind}" style="padding-top:${precedingGeometry.pdfBeforePaddingPt}pt">${escapeHtml(canonicalGroup.passageLetter)}</div><div class="canonical-reading" data-canonical-reading-semantic-signature="${escapeHtml(canonicalGroup.semanticSignature)}">${canonicalGroup.blocks.map((block) => {
+    readingPassageLetterGeometryForLetter(
+      canonicalGroup.passageLetter,
+      'print_pdf',
+    )
+  return `<div class="canonical-reading-start">${groupLeadHtml}<div class="canonical-reading-passage-letter" data-canonical-passage-letter="${escapeHtml(canonicalGroup.passageLetter)}" data-canonical-reading-preceding-kind="${precedingGeometry.precedingKind}" style="padding-top:${precedingGeometry.pdfBeforePaddingPt}pt">${escapeHtml(canonicalGroup.passageLetter)}</div></div><div class="canonical-reading" data-canonical-reading-semantic-signature="${escapeHtml(canonicalGroup.semanticSignature)}">${canonicalGroup.blocks.map((block) => {
     if (block.kind === 'paragraph') {
       const tag = block.role === 'title' ? 'h3' : 'p'
       return `<${tag} class="canonical-reading-${block.role}" data-canonical-block-id="${escapeHtml(block.nodeId)}" data-canonical-block-kind="paragraph" data-canonical-reading-role="${block.role}">${renderCanonicalInlineNodes(block.inlines)}</${tag}>`
@@ -636,12 +639,17 @@ export function buildPrintHtml({
           ? `<section class="question-group" data-canonical-group-id="${escapeHtml(canonicalGroup.groupId)}" data-canonical-semantic-signature="${escapeHtml(canonicalGroup.semanticSignature)}"${canonicalGroup.occurrenceSignature ? ` data-canonical-occurrence-signature="${escapeHtml(canonicalGroup.occurrenceSignature)}"` : ''}>`
           : '<section class="question-group">'
 
+        let groupLeadHtml = ''
         if (!canonicalWritingChrome) {
-          groupHtml += `<div class="group-header">${chineseNumeral(groupNum)}、${escapeHtml(groupHeaderLabel)}${escapeHtml(groupHeaderScoreSuffix)}</div>`
+          const readingPredecessorAttrs =
+            canonicalGroup?.groupType === 'reading'
+              ? ` data-canonical-reading-preceding-for="${escapeHtml(canonicalGroup.groupId)}" data-canonical-reading-preceding-kind="reading_heading"`
+              : ''
+          groupLeadHtml += `<div class="group-header"${readingPredecessorAttrs}>${chineseNumeral(groupNum)}、${escapeHtml(groupHeaderLabel)}${escapeHtml(groupHeaderScoreSuffix)}</div>`
         }
 
         if (!isExam) {
-          groupHtml += `<div class="group-meta"><strong>${escapeHtml(detail.title)}</strong> · ${groupTypeLabels[detail.groupType] || detail.groupType} · 每题 ${score} 分</div>`
+          groupLeadHtml += `<div class="group-meta"><strong>${escapeHtml(detail.title)}</strong> · ${groupTypeLabels[detail.groupType] || detail.groupType} · 每题 ${score} 分</div>`
         }
 
         // draft-numbering-style v2 (owner 拍板 2026-07-10 二轮改判):
@@ -655,18 +663,24 @@ export function buildPrintHtml({
 
         if (canonicalGroup) {
           if (canonicalGroup.groupType === 'reading') {
-            groupHtml += renderCanonicalReadingBlocks(canonicalGroup)
+            groupHtml += renderCanonicalReadingBlocks(
+              canonicalGroup,
+              groupLeadHtml,
+            )
           } else if (canonicalGroup.groupType === 'writing') {
+            groupHtml += groupLeadHtml
             groupHtml += renderCanonicalApplicationWriting(
               canonicalGroup,
               canonicalWritingChrome,
             )
           } else if (canonicalGroup.groupType === 'continuation') {
+            groupHtml += groupLeadHtml
             groupHtml += renderCanonicalContinuationWriting(
               canonicalGroup,
               canonicalWritingChrome,
             )
           } else {
+            groupHtml += groupLeadHtml
             const displayNumberByQuestionId = new Map(
               canonicalGroup.questions.map((question) => [
                 question.questionId,
@@ -686,8 +700,11 @@ export function buildPrintHtml({
             groupHtml += renderCanonicalSharedBank(canonicalGroup)
           }
         } else if (passage) {
+          groupHtml += groupLeadHtml
           const figuresInfo = getFiguresInfo(block.questionGroupId)
           groupHtml += `<div class="passage">${passage.split(/\n/).map((line) => renderPassageLine(line, detail.groupType, figuresInfo, imageMode, images, blankCounter)).join('')}</div>`
+        } else {
+          groupHtml += groupLeadHtml
         }
 
         // Hard consistency assertion (plan.md 连带硬需求): the count of
@@ -976,6 +993,15 @@ body {
   font-size: 11pt;
   font-weight: bold;
   margin: 0.6em 0 0.4em;
+}
+
+.group-header[data-canonical-reading-preceding-for] {
+  break-after: avoid;
+}
+
+.canonical-reading-start {
+  break-inside: avoid;
+  break-after: avoid;
 }
 
 .passage {

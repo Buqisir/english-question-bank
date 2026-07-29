@@ -133,9 +133,12 @@ with authority-bound preceding adjustment. The focused review found that the fir
 not execute the golden preceding-content gaps, and that Screen could accept
 Reading blocks without their required letter. The repaired shared authority
 now normalizes the measured 18±2px Reading-heading gap and 46±2px prior-content
-gap to Screen and to 13.5±1.5pt / 34.5±1.5pt PDF output; actual plain/lecture
-Screen and Student/Teacher Chromium PDF regressions measure both preceding and
-following geometry. PaperSurface rejects either half of an incomplete
+gap to Screen. Print/PDF preserves its existing per-group Reading header, so
+its output-context predecessor is explicitly `reading_heading` for A–D and
+normalizes every header-to-letter gap to 13.5±1.5pt. Actual plain/lecture
+Screen and Student/Teacher Chromium PDF regressions locate the tagged
+predecessor identity and measure both preceding and following geometry.
+PaperSurface rejects either half of an incomplete
 blocks-plus-letter companion before rendering any canonical Reading content.
 Public-seam and actual-artifact checks bind the accepted reference digest and
 prove zero passage letters for every non-Reading family. Canonical semantic

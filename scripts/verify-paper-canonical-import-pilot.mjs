@@ -98,7 +98,7 @@ function assertPassageLetterReferenceEvidence() {
   assert.equal(readingPassageLetterTypography.marginBeforePt, 0)
   assert.equal(readingPassageLetterTypography.marginAfterPt, 0)
   assert.deepEqual(
-    readingPassageLetterGeometryForLetter('A'),
+    readingPassageLetterGeometryForLetter('A', 'screen'),
     {
       precedingKind: 'reading_heading',
       referenceInkGapPx: 18,
@@ -113,7 +113,7 @@ function assertPassageLetterReferenceEvidence() {
     'Renderer Typography normalizes the golden Reading-heading gap for Screen and PDF',
   )
   assert.deepEqual(
-    readingPassageLetterGeometryForLetter('B'),
+    readingPassageLetterGeometryForLetter('B', 'screen'),
     {
       precedingKind: 'prior_content',
       referenceInkGapPx: 46,
@@ -125,7 +125,22 @@ function assertPassageLetterReferenceEvidence() {
       pdfTolerancePt: 1.5,
       pdfBeforePaddingPt: 23.635,
     },
-    'Renderer Typography normalizes the golden prior-content gap for Screen and PDF',
+    'Renderer Typography normalizes the golden prior-content gap for Screen',
+  )
+  assert.deepEqual(
+    readingPassageLetterGeometryForLetter('B', 'print_pdf'),
+    {
+      precedingKind: 'reading_heading',
+      referenceInkGapPx: 18,
+      referenceTolerancePx: 2,
+      screenInkGapPx: 18,
+      screenTolerancePx: 2,
+      screenBeforeAdjustmentPx: -4,
+      pdfInkGapPt: 13.5,
+      pdfTolerancePt: 1.5,
+      pdfBeforePaddingPt: 2.635,
+    },
+    'Print/PDF uses its actual per-group Reading heading as the B-D predecessor',
   )
   assert.throws(
     () => assertCanonicalReadingCompanion({
@@ -539,6 +554,15 @@ function assertPassageLetterMarkup(html, consumption, label) {
       1,
       `${label} renders ${'ABCD'[index]} once inside ${groupId}`,
     )
+    if (label.includes('Print HTML')) {
+      assert.equal(
+        html.includes(
+          `data-canonical-reading-preceding-for="${groupId}" data-canonical-reading-preceding-kind="reading_heading"`,
+        ),
+        true,
+        `${label} tags the actual Reading-heading predecessor for ${groupId}`,
+      )
+    }
   }
 }
 
@@ -566,7 +590,8 @@ async function measureScreenPassageLetterGeometry(page, consumption, label) {
       1,
       `${label} renders ${letter} once inside ${groupId}`,
     )
-    const expectedGeometry = readingPassageLetterGeometryForLetter(letter)
+    const expectedGeometry =
+      readingPassageLetterGeometryForLetter(letter, 'screen')
     const geometry = await letterElement.evaluate((element, context) => {
       const letterRect = element.getBoundingClientRect()
       const reading = element.nextElementSibling
@@ -1181,11 +1206,23 @@ function assertPdfPassageLetterGeometry(
       `${label} exposes ${groupId}'s first passage line geometry`,
     )
     const letter = words[markerIndex - 1]
-    const precedingWord = words[markerIndex - 2]
     const firstWord = words[markerIndex]
     const expectedLetter = 'ABCD'[index]
     const expectedGeometry =
-      readingPassageLetterGeometryForLetter(expectedLetter)
+      readingPassageLetterGeometryForLetter(expectedLetter, 'print_pdf')
+    const headerPrefix = `${['一', '二', '三', '四'][index]}、阅读理解`
+    const precedingWordIndex = words.findLastIndex(
+      (word, wordIndex) =>
+        wordIndex < markerIndex - 1
+        && word.page === firstWord.page
+        && word.text.startsWith(headerPrefix),
+    )
+    assert.notEqual(
+      precedingWordIndex,
+      -1,
+      `${label} locates ${groupId}'s tagged Reading-heading marker by visible identity`,
+    )
+    const precedingWord = words[precedingWordIndex]
     assert.equal(
       letter?.text,
       expectedLetter,

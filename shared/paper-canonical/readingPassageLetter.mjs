@@ -13,20 +13,23 @@ const geometryByPrecedingKind = Object.freeze({
   prior_content: Object.freeze(contract.precedingGeometry.priorContent),
 })
 
-const precedingKindByLetter = Object.freeze(
+const precedingKindByConsumerAndLetter = Object.freeze(
   Object.fromEntries(
-    contract.slotIdentity.map(({ letter, precedingKind }) => [
+    contract.slotIdentity.map(({ letter, precedingKindByConsumer }) => [
       letter,
-      precedingKind,
+      Object.freeze({ ...precedingKindByConsumer }),
     ]),
   ),
 )
 
-export function readingPassageLetterGeometryForLetter(letter) {
-  const precedingKind = precedingKindByLetter[letter]
+export function readingPassageLetterGeometryForLetter(letter, consumerId) {
+  const precedingKind =
+    precedingKindByConsumerAndLetter[letter]?.[consumerId]
   const geometry = geometryByPrecedingKind[precedingKind]
   if (!geometry) {
-    const error = new Error(`Unsupported canonical Reading passage letter ${letter}`)
+    const error = new Error(
+      `Unsupported canonical Reading passage-letter geometry ${consumerId}:${letter}`,
+    )
     error.code = 'CANONICAL_READING_COMPANION_REJECTED'
     throw error
   }
