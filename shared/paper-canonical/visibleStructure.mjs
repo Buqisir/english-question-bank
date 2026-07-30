@@ -26,10 +26,26 @@ function isIdentity(value) {
  * structure. It validates both exact node shapes and the projected
  * part -> heading -> section -> heading -> instruction* -> Group order.
  */
-export function assertCanonicalVisibleStructure(value) {
+export function assertCanonicalVisibleStructure(value, expectedGroups = null) {
   if (!Array.isArray(value) || value.length === 0) {
     reject('one non-empty node array is required')
   }
+  if (
+    expectedGroups !== null
+    && (
+      !Array.isArray(expectedGroups)
+      || expectedGroups.length === 0
+      || expectedGroups.some((group) =>
+        !hasExactKeys(group, [
+          'slotId',
+          'groupId',
+          'familyContractId',
+        ])
+        || !isIdentity(group.slotId)
+        || !isIdentity(group.groupId)
+        || !isIdentity(group.familyContractId))
+    )
+  ) reject('the expected Group order is invalid')
 
   const partIds = new Set()
   const sectionIds = new Set()
@@ -42,6 +58,7 @@ export function assertCanonicalVisibleStructure(value) {
   let sectionHasGroup = false
   let pendingHeading = null
   let pendingGroupInstruction = false
+  let groupIndex = 0
 
   for (const [index, node] of value.entries()) {
     if (!isRecord(node) || typeof node.kind !== 'string') {
@@ -151,8 +168,19 @@ export function assertCanonicalVisibleStructure(value) {
       if (!activeSection || pendingHeading) {
         reject(`node ${index} places a Group outside one closed section`)
       }
+      const expectedGroup = expectedGroups?.[groupIndex]
+      if (
+        expectedGroups !== null
+        && (
+          !expectedGroup
+          || expectedGroup.slotId !== node.slotId
+          || expectedGroup.groupId !== node.groupId
+          || expectedGroup.familyContractId !== node.familyContractId
+        )
+      ) reject(`node ${index} disagrees with ordered Consumption Plan Groups`)
       slotIds.add(node.slotId)
       groupIds.add(node.groupId)
+      groupIndex += 1
       sectionHasGroup = true
       pendingGroupInstruction = false
       continue
@@ -168,7 +196,50 @@ export function assertCanonicalVisibleStructure(value) {
     || !partHasSection
     || !activeSection
     || !sectionHasGroup
+    || (
+      expectedGroups !== null
+      && groupIndex !== expectedGroups.length
+    )
   ) reject('the final part, section, heading, or Group instruction is open')
 
   return value
+}
+
+export function assertCanonicalConsumptionVisibleStructure(consumption) {
+  if (!isRecord(consumption) || !Array.isArray(consumption.selections)) {
+    reject('Consumption Plan selections are unavailable')
+  }
+  const expectedGroups = []
+  const seenGroupIds = new Set()
+  for (const [selectionIndex, selection] of consumption.selections.entries()) {
+    if (!isRecord(selection) || selection.mode !== 'canonical') continue
+    if (
+      !isIdentity(selection.familyContractId)
+      || !Array.isArray(selection.groupIds)
+      || !Array.isArray(selection.projectedOccurrences)
+      || selection.groupIds.length !== selection.projectedOccurrences.length
+    ) reject(`canonical selection ${selectionIndex} is incomplete`)
+    for (const [groupIndex, groupId] of selection.groupIds.entries()) {
+      const occurrence = selection.projectedOccurrences[groupIndex]
+      if (
+        !isIdentity(groupId)
+        || seenGroupIds.has(groupId)
+        || !isRecord(occurrence)
+        || occurrence.kind !== 'group'
+        || occurrence.groupId !== groupId
+        || occurrence.familyContractId !== selection.familyContractId
+        || !isIdentity(occurrence.slotId)
+      ) reject(`canonical selection ${selectionIndex} Group order is invalid`)
+      seenGroupIds.add(groupId)
+      expectedGroups.push({
+        slotId: occurrence.slotId,
+        groupId,
+        familyContractId: selection.familyContractId,
+      })
+    }
+  }
+  return assertCanonicalVisibleStructure(
+    consumption.visibleStructure,
+    expectedGroups,
+  )
 }

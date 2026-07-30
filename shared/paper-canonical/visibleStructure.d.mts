@@ -5,4 +5,13 @@
 
 export function assertCanonicalVisibleStructure(
   value: unknown,
+  expectedGroups?: ReadonlyArray<{
+    slotId: string
+    groupId: string
+    familyContractId: string
+  }> | null,
+): ReadonlyArray<unknown>
+
+export function assertCanonicalConsumptionVisibleStructure(
+  consumption: unknown,
 ): ReadonlyArray<unknown>

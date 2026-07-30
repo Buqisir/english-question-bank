@@ -1324,26 +1324,36 @@ function canonicalSelections(validated, contract) {
 }
 
 function canonicalVisibleStructure(validated) {
-  const visibleStructure = validated.projected.nodes.map((node) => {
+  const visibleStructure = validated.projected.nodes.flatMap((node) => {
     if (
       node.kind === 'part'
       || node.kind === 'section'
       || node.kind === 'instruction'
-    ) return structuredClone(node)
+    ) return [structuredClone(node)]
     if (node.kind === 'group') {
-      return {
+      return [{
         kind: 'group',
         slotId: node.slotId,
         groupId: node.groupId,
         familyContractId: node.familyContractId,
-      }
+      }]
     }
+    if (node.kind === 'answer_region') return []
     throw publicationError(
       'CANONICAL_CONSUMPTION_REJECTED',
       `Projected visible structure has unknown node kind ${node.kind}`,
     )
   })
-  assertCanonicalVisibleStructure(visibleStructure)
+  assertCanonicalVisibleStructure(
+    visibleStructure,
+    validated.projected.nodes
+      .filter((node) => node.kind === 'group')
+      .map((node) => ({
+        slotId: node.slotId,
+        groupId: node.groupId,
+        familyContractId: node.familyContractId,
+      })),
+  )
   return visibleStructure
 }
 

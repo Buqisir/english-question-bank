@@ -455,12 +455,34 @@ const browseConsumption = {
     }
     return []
   }),
-  selections: [{
-    mode: 'canonical',
-    familyContractId: 'reading',
-    groupIds: browseGroupIds,
-  }],
+  selections: [
+    ...projectedPilot.nodes
+      .filter((node) => node.kind === 'group')
+      .reduce((selections, occurrence) => {
+        let selection = selections.find(
+          (candidate) =>
+            candidate.familyContractId === occurrence.familyContractId,
+        )
+        if (!selection) {
+          selection = {
+            mode: 'canonical',
+            familyContractId: occurrence.familyContractId,
+            groupIds: [],
+            projectedOccurrences: [],
+          }
+          selections.push(selection)
+        }
+        selection.groupIds.push(occurrence.groupId)
+        selection.projectedOccurrences.push(occurrence)
+        return selections
+      }, []),
+  ],
 }
+assert.deepEqual(
+  browseConsumption.selections.flatMap((selection) => selection.groupIds),
+  browseGroupIds,
+  'focused Screen Consumption Plan closes every non-Listening Group in order',
+)
 const projectedBrowseAsset = projectAssetBlocksToCanonicalConsumption(
   browseAsset,
   browseConsumption,
@@ -490,9 +512,25 @@ const partHeadingNode = reorderedVisibleNodeConsumption.visibleStructure[1]
 reorderedVisibleNodeConsumption.visibleStructure[1] =
   reorderedVisibleNodeConsumption.visibleStructure[2]
 reorderedVisibleNodeConsumption.visibleStructure[2] = partHeadingNode
+const swappedGroupVisibleNodeConsumption = structuredClone(browseConsumption)
+const readingAIndex =
+  swappedGroupVisibleNodeConsumption.visibleStructure.findIndex(
+    (node) => node.kind === 'group' && node.slotId === 'reading.a',
+  )
+const readingBIndex =
+  swappedGroupVisibleNodeConsumption.visibleStructure.findIndex(
+    (node) => node.kind === 'group' && node.slotId === 'reading.b',
+  )
+const readingAGroupNode =
+  swappedGroupVisibleNodeConsumption.visibleStructure[readingAIndex]
+swappedGroupVisibleNodeConsumption.visibleStructure[readingAIndex] =
+  swappedGroupVisibleNodeConsumption.visibleStructure[readingBIndex]
+swappedGroupVisibleNodeConsumption.visibleStructure[readingBIndex] =
+  readingAGroupNode
 for (const [caseId, poisonedConsumption] of [
   ['unknown-node', unknownVisibleNodeConsumption],
   ['reordered-heading', reorderedVisibleNodeConsumption],
+  ['swapped-same-section-Group', swappedGroupVisibleNodeConsumption],
 ]) {
   assert.throws(
     () =>

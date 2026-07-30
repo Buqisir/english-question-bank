@@ -67,7 +67,7 @@ import {
   selectConsumerGroupMode,
 } from '../shared/paper-canonical/consumerProjection.mjs'
 import {
-  assertCanonicalVisibleStructure,
+  assertCanonicalConsumptionVisibleStructure,
 } from '../shared/paper-canonical/visibleStructure.mjs'
 import { resolveGroupFigures } from './figures/paperFigures.mjs'
 import { resolveCanonicalPrintGroup } from './print-canonical-group-adapter.mjs'
@@ -690,7 +690,7 @@ export function buildPrintHtml({
     Array.isArray(canonicalConsumption?.visibleStructure)
     || Number(canonicalConsumption?.authorityRef?.manifestVersion) >= 30
   ) {
-    assertCanonicalVisibleStructure(canonicalConsumption?.visibleStructure)
+    assertCanonicalConsumptionVisibleStructure(canonicalConsumption)
   }
   // draft-numbering-style v2 (owner 拍板 2026-07-10 二轮改判): small-question
   // numbering in the `blocks`-array path is WHOLE-PAPER continuous again

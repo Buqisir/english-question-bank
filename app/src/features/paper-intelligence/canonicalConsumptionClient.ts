@@ -1,5 +1,5 @@
 import {
-  assertCanonicalVisibleStructure,
+  assertCanonicalConsumptionVisibleStructure,
 } from '../../../../shared/paper-canonical/visibleStructure.mjs'
 
 export type WholePaperConsumption = {
@@ -79,7 +79,7 @@ export async function loadScreenConsumption(
   if (
     Array.isArray(consumption.visibleStructure)
     || Number(consumption.authorityRef?.manifestVersion) >= 30
-  ) assertCanonicalVisibleStructure(consumption.visibleStructure)
+  ) assertCanonicalConsumptionVisibleStructure(consumption)
   return consumption
 }
 
