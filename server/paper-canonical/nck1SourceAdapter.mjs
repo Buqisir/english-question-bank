@@ -53,6 +53,7 @@ export function buildNck1CanonicalImportRequest({
   instructionEvidenceBytes = null,
   sourceProvenanceBytes = null,
   readingSourceCaptureBytes = null,
+  grammarFillPromptSourceCaptureBytes = null,
   tableVisualProofBytes = null,
   applicationWritingCaptureBytes = null,
   applicationWritingTranscriptionBytes = null,
@@ -115,6 +116,14 @@ export function buildNck1CanonicalImportRequest({
       bytes: readingSourceCaptureBytes,
       mediaType: 'application/json',
       originalName: 'reading-source-capture-v1.json',
+    }),
+    evidenceDocument({
+      inputKey: 'grammar_fill_prompt_source_capture',
+      roles: ['structured_source', 'source_provenance'],
+      bytes: grammarFillPromptSourceCaptureBytes,
+      mediaType:
+        'application/vnd.eqb.grammar-fill-prompt-source-capture+json',
+      originalName: 'grammar-fill-prompt-source-capture.json',
     }),
     evidenceDocument({
       inputKey: 'table_visual_proof',

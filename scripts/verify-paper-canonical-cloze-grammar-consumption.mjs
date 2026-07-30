@@ -338,7 +338,16 @@ async function assertActualPaperBrowseBoundary({
 
     consumption = legacyConsumption
     await page.goto(qaUrl.href)
-    await page.locator('[data-paper-question-id]').first().waitFor()
+    try {
+      await page.locator('[data-paper-question-id]').first().waitFor()
+    } catch (error) {
+      const visibleError = await page.locator(
+        '.paper-browse-error',
+      ).textContent().catch(() => null)
+      throw new Error(
+        `Legacy Screen fixture did not render: ${visibleError || error.message}`,
+      )
+    }
     await page.getByText(
       clozeAnalysis.blanks['q-2026-i-041'].correctFit.reason,
       { exact: true },

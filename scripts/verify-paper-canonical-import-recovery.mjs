@@ -323,7 +323,7 @@ try {
       'versions',
       'v2',
       'canonical',
-      'normalization-report-v23.json',
+      'normalization-report-v24.json',
     ),
     '{"corrupt":true}\n',
   )

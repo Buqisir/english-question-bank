@@ -8,6 +8,7 @@ import { DatabaseSync } from 'node:sqlite'
 
 import { compileCanonicalPaper } from '../shared/paper-canonical/compiler.mjs'
 import { consumerContractRefs } from '../shared/paper-canonical/consumers.mjs'
+import { sha256 } from '../shared/paper-canonical/stable.mjs'
 import {
   createFileSystemCanonicalPublicationStore,
   loadPaperForConsumption,
@@ -89,6 +90,8 @@ function requestWithEvidence(mutator) {
       ]),
   )
   mutator(evidence)
+  evidence.grammar_fill_prompt_source_capture.sources.paperAsset.sha256 =
+    sha256(new TextEncoder().encode(JSON.stringify(evidence.paper_asset)))
   const value = evidence.canonical_mapping
   for (let pass = 0; pass < 3; pass++) {
     const byteLength = new TextEncoder().encode(JSON.stringify(value)).byteLength

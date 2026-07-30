@@ -1,0 +1,1 @@
+{"$id":"grammar-fill-prompt-provision-v1","$schema":"https://json-schema.org/draft/2020-12/schema","additionalProperties":false,"properties":{"blankId":{"type":"string"},"prompt":{"type":"string"},"provision":{"enum":["source_prompt","source_proven_none"]}},"required":["blankId","provision"],"type":"object"}

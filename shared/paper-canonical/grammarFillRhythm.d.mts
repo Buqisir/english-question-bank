@@ -1,7 +1,7 @@
 export type GrammarFillRhythm = Readonly<{
-  schemaVersion: 'grammar-fill-rhythm-v3'
+  schemaVersion: 'grammar-fill-rhythm-v4'
   id: 'grammar-fill-rhythm'
-  version: '3'
+  version: '4'
   adjacencyGraph: ReadonlyArray<Readonly<Record<string, unknown>>>
   targets: Readonly<Record<string, Readonly<Record<string, number>>>>
   blankGeometry: Readonly<Record<string, string | number | boolean>>

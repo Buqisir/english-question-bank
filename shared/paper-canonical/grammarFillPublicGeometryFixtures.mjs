@@ -1,6 +1,7 @@
-import contract from '../../standards/paper-canonical/rendering/grammar-fill-public-geometry-fixtures-v2.json' with { type: 'json' }
+import contract from '../../standards/paper-canonical/rendering/grammar-fill-public-geometry-fixtures-v3.json' with { type: 'json' }
 
 import { canonicalAuthorityRef } from './authority.mjs'
+import { resolveCanonicalConsumerOccurrence } from './consumerProjection.mjs'
 import { consumerContractRefs } from './consumers.mjs'
 
 function freezeObject(value) {
@@ -29,6 +30,19 @@ export function resolveGrammarFillPublicGeometryFixture(
   const selection = consumption?.selections?.find(
     (candidate) => candidate.familyContractId === 'grammar-fill',
   )
+  let occurrence = null
+  try {
+    occurrence = resolveCanonicalConsumerOccurrence({
+      consumption,
+      familyContractId: 'grammar-fill',
+      groupId: variant?.groupId,
+    })
+  } catch {
+    occurrence = null
+  }
+  const occurrenceDigest = selection?.projectedOccurrenceDigests?.find(
+    (candidate) => candidate?.groupId === variant?.groupId,
+  )?.digest
   if (
     !variant
     || variant.surface !== expectedSurface
@@ -43,6 +57,13 @@ export function resolveGrammarFillPublicGeometryFixture(
       .authorityManifestId !== canonicalAuthorityRef.manifestId
     || grammarFillPublicGeometryFixtures.compatibleConsumptionPlan
       .authorityManifestVersion !== canonicalAuthorityRef.manifestVersion
+    || consumption.paperId
+      !== grammarFillPublicGeometryFixtures.compatibleConsumptionPlan.paperId
+    || consumption.sourceAssetVersion
+      !== grammarFillPublicGeometryFixtures.compatibleConsumptionPlan
+        .sourceAssetVersion
+    || !/^sha256:[a-f0-9]{64}$/.test(consumption.sourceAssetDigest || '')
+    || !/^sha256:[a-f0-9]{64}$/.test(consumption.publicationDigest || '')
     || !expectedConsumerContract
     || consumption.consumerContractRef?.id
       !== expectedConsumerContract.id
@@ -52,6 +73,8 @@ export function resolveGrammarFillPublicGeometryFixture(
       !== expectedConsumerContract.digest
     || selection?.mode !== 'canonical'
     || !selection.groupIds?.includes(variant.groupId)
+    || occurrence?.groupId !== variant.groupId
+    || occurrenceDigest !== variant.projectedOccurrenceDigest
   ) {
     const error = new Error(
       `Canonical Grammar Fill geometry fixture is unavailable: ${variantId}`,

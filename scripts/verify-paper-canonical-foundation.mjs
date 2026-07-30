@@ -4,8 +4,8 @@ import assert from 'node:assert/strict'
 import manifestV1 from '../standards/paper-canonical/manifest-v1.json' with { type: 'json' }
 import manifestV13 from '../standards/paper-canonical/manifest-v13.json' with { type: 'json' }
 import clozeRhythmV2Conformance from '../test-fixtures/paper-canonical/cloze-rhythm-v2-conformance.json' with { type: 'json' }
-import grammarFillRhythmV3Conformance from '../test-fixtures/paper-canonical/grammar-fill-rhythm-v3-conformance.json' with { type: 'json' }
-import grammarFillPublicGeometryFixturesV2Conformance from '../test-fixtures/paper-canonical/grammar-fill-public-geometry-fixtures-v2-conformance.json' with { type: 'json' }
+import grammarFillRhythmV4Conformance from '../test-fixtures/paper-canonical/grammar-fill-rhythm-v4-conformance.json' with { type: 'json' }
+import grammarFillPublicGeometryFixturesV3Conformance from '../test-fixtures/paper-canonical/grammar-fill-public-geometry-fixtures-v3-conformance.json' with { type: 'json' }
 import sevenChoicesRhythmV3Conformance from '../test-fixtures/paper-canonical/seven-choices-rhythm-v3-conformance.json' with { type: 'json' }
 
 import { canonicalAuthorityRef, compileCanonicalPaper, stableStringify, validateExactTransformationRecords } from '../shared/paper-canonical/compiler.mjs'
@@ -169,20 +169,20 @@ for (const leafPath of visitAuthorityLeaves(clozeRhythmV2)) {
     },
   )
 }
-const grammarFillRhythmV3 =
+const grammarFillRhythmV4 =
   closure.artifacts['renderer-grammar-fill-rhythm']
 assert.deepEqual(
   {
-    schemaVersion: grammarFillRhythmV3.schemaVersion,
-    id: grammarFillRhythmV3.id,
-    version: grammarFillRhythmV3.version,
+    schemaVersion: grammarFillRhythmV4.schemaVersion,
+    id: grammarFillRhythmV4.id,
+    version: grammarFillRhythmV4.version,
   },
-  grammarFillRhythmV3Conformance.authority,
+  grammarFillRhythmV4Conformance.authority,
 )
-for (const attack of grammarFillRhythmV3Conformance.semanticAttacks) {
+for (const attack of grammarFillRhythmV4Conformance.semanticAttacks) {
   assertRendererAuthorityMutationRejected(
     'renderer-grammar-fill-rhythm',
-    grammarFillRhythmV3Conformance,
+    grammarFillRhythmV4Conformance,
     attack.caseId,
     (artifact) => {
       let target = artifact
@@ -200,10 +200,10 @@ for (const attack of grammarFillRhythmV3Conformance.semanticAttacks) {
     },
   )
 }
-for (const fieldPath of visitAuthorityFields(grammarFillRhythmV3)) {
+for (const fieldPath of visitAuthorityFields(grammarFillRhythmV4)) {
   assertRendererAuthorityMutationRejected(
     'renderer-grammar-fill-rhythm',
-    grammarFillRhythmV3Conformance,
+    grammarFillRhythmV4Conformance,
     `grammar-fill-complete-field-closure:${fieldPath.join('.')}`,
     (artifact) => {
       let target = artifact
@@ -212,10 +212,10 @@ for (const fieldPath of visitAuthorityFields(grammarFillRhythmV3)) {
     },
   )
 }
-for (const leafPath of visitAuthorityLeaves(grammarFillRhythmV3)) {
+for (const leafPath of visitAuthorityLeaves(grammarFillRhythmV4)) {
   assertRendererAuthorityMutationRejected(
     'renderer-grammar-fill-rhythm',
-    grammarFillRhythmV3Conformance,
+    grammarFillRhythmV4Conformance,
     `grammar-fill-complete-value-closure:${leafPath.join('.')}`,
     (artifact) => {
       let target = artifact
@@ -230,30 +230,31 @@ for (const leafPath of visitAuthorityLeaves(grammarFillRhythmV3)) {
     },
   )
 }
-const grammarFillPublicGeometryFixturesV2 =
+const grammarFillPublicGeometryFixturesV3 =
   closure.artifacts['renderer-grammar-fill-public-geometry-fixtures']
 assert.equal(
-  grammarFillPublicGeometryFixturesV2.schemaVersion,
-  'grammar-fill-public-geometry-fixtures-v2',
+  grammarFillPublicGeometryFixturesV3.schemaVersion,
+  'grammar-fill-public-geometry-fixtures-v3',
 )
 assert.deepEqual(
-  Object.keys(grammarFillPublicGeometryFixturesV2.variants),
-  grammarFillPublicGeometryFixturesV2Conformance.positive.variantIds,
+  Object.keys(grammarFillPublicGeometryFixturesV3.variants).sort(),
+  [...grammarFillPublicGeometryFixturesV3Conformance.positive.variantIds]
+    .sort(),
 )
 assertRendererAuthorityMutationRejected(
   'renderer-grammar-fill-public-geometry-fixtures',
-  grammarFillPublicGeometryFixturesV2Conformance,
+  grammarFillPublicGeometryFixturesV3Conformance,
   'grammar-fill-public-geometry-fixtures-complete-value-closure',
   (artifact) => {
     artifact.variants['screen-wrapped-line']
       .paragraphWidths[0].usableWidthEm += 999
   },
 )
-for (const attack of grammarFillPublicGeometryFixturesV2Conformance
+for (const attack of grammarFillPublicGeometryFixturesV3Conformance
   .shadowGeometryAttacks) {
   assertRendererAuthorityMutationRejected(
     'renderer-grammar-fill-public-geometry-fixtures',
-    grammarFillPublicGeometryFixturesV2Conformance,
+    grammarFillPublicGeometryFixturesV3Conformance,
     attack.caseId,
     (artifact) => {
       artifact.variants['screen-wrapped-line'][attack.fieldName] =
@@ -269,14 +270,14 @@ fixtureRemovalManifest.artifacts = fixtureRemovalManifest.artifacts.filter(
 )
 fixtureRemovalManifest.schemas = fixtureRemovalManifest.schemas.filter(
   (descriptor) =>
-    descriptor.id !== 'grammar-fill-public-geometry-fixtures-v2',
+    descriptor.id !== 'grammar-fill-public-geometry-fixtures-v3',
 )
 const fixtureRemovalArtifacts = structuredClone(closure.artifacts)
 delete fixtureRemovalArtifacts[
   'renderer-grammar-fill-public-geometry-fixtures'
 ]
 const fixtureRemovalSchemas = structuredClone(closure.schemas)
-delete fixtureRemovalSchemas['grammar-fill-public-geometry-fixtures-v2']
+delete fixtureRemovalSchemas['grammar-fill-public-geometry-fixtures-v3']
 const fixtureRemovalValidation = validateAuthorityClosure({
   manifest: fixtureRemovalManifest,
   artifacts: fixtureRemovalArtifacts,
@@ -307,15 +308,8 @@ const screenFixtureConsumption = {
     groupIds: ['group-2026-i-grammar-fill'],
   }],
 }
-assert.equal(
-  resolveGrammarFillPublicGeometryFixture(
-    'screen-wrapped-line',
-    'screen',
-    screenFixtureConsumption,
-  ).groupId,
-  'group-2026-i-grammar-fill',
-)
 for (const [caseId, consumption] of [
+  ['copied-refs-only-plan', screenFixtureConsumption],
   ['absent-plan', null],
   [
     'historical-plan',

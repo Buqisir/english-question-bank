@@ -81,6 +81,17 @@ function choiceOwnership(family, questionIds, groupId) {
 
 function variant(family, questionIds, blankIds, groupId) {
   const value = { family, choiceOwnership: choiceOwnership(family, questionIds, groupId) }
+  if (family === 'grammar-fill') {
+    return {
+      ...value,
+      promptBindings: blankIds.map((blankId) => ({
+        blankId,
+        provision: 'source_proven_none',
+        authorityObservationRef:
+          `observation:grammar-fill-prompt:${blankId}`,
+      })),
+    }
+  }
   if (family === 'application-writing') {
     const blockId = `paragraph:${groupId}:prompt`
     const inlineNodeIds = [`text:${groupId}:prompt`]
@@ -307,7 +318,26 @@ export function makeReadyCanonicalFixture() {
       content: referenceBlankContent(slot.familyContractRef.id, blankIds),
       media: [],
       variant: variant(slot.familyContractRef.id, questionIds, blankIds, `group:${slot.slotId}`),
+      sourceSpanRefsByTarget:
+        slot.familyContractRef.id === 'grammar-fill'
+          ? Object.fromEntries(blankIds.map((blankId) => [
+              `prompt_provision:${blankId}`,
+              [`source-span:observation:grammar-fill-prompt:${blankId}`],
+            ]))
+          : {},
     })
+    if (slot.familyContractRef.id === 'grammar-fill') {
+      observations.push(...blankIds.map((blankId) => ({
+        observationId: `observation:grammar-fill-prompt:${blankId}`,
+        kind: 'grammar_fill_prompt_provision',
+        documentInputKey: 'questions',
+        value: {
+          blankId,
+          provision: 'source_proven_none',
+        },
+        span: { start: 0, end: 1 },
+      })))
+    }
     if (slot.familyContractRef.id === 'application-writing') {
       const groupId = `group:${slot.slotId}`
       observations.push(
@@ -709,6 +739,33 @@ export function makeCanonicalImportAdmissionRequest({
         importedGroup,
         /__(\d+)__/g,
       )
+      sourceGroup.variant.promptBindings = sourceGroup.blankIds.map(
+        (blankId, index) => {
+          const importedBlankId = importedGroup.blankIds[index]
+          const prompt = paperAsset.content.blanks[importedBlankId]?.prompt
+          const authorityObservationRef =
+            `observation:grammar-fill-prompt:${blankId}`
+          const observation = fixture.source.observations.find(
+            (candidate) =>
+              candidate.observationId === authorityObservationRef,
+          )
+          observation.value = typeof prompt === 'string'
+            ? { blankId, provision: 'source_prompt', prompt }
+            : { blankId, provision: 'source_proven_none' }
+          return typeof prompt === 'string'
+            ? {
+                blankId,
+                provision: 'source_prompt',
+                prompt,
+                authorityObservationRef,
+              }
+            : {
+                blankId,
+                provision: 'source_proven_none',
+                authorityObservationRef,
+              }
+        },
+      )
     } else if (sourceGroup.family === 'application-writing') {
       const task = paperAsset.content.writingTasks[importedGroup.writingTaskId]
       const block = sourceGroup.content.blocks[0]
@@ -791,5 +848,63 @@ export function makeCanonicalImportAdmissionRequest({
       originalName: 'answer-key.json',
     },
   })
+  const grammarFillGroup = importedGroups.find(
+    (group) => group.groupType === 'grammarFill',
+  )
+  const promptSourcePdfBytes = new TextEncoder().encode(
+    `%PDF-1.4\n% reviewed Grammar Fill prompt source for ${paperId}\n`,
+  )
+  const promptSourceCapture = {
+    schemaVersion: 'grammar-fill-prompt-source-capture-v1',
+    paperId,
+    sourceAssetVersion: paperAsset.paper.sourceAssetVersion,
+    groupId: grammarFillGroup.groupId,
+    review: {
+      method: 'manual_source_review',
+      status: 'accepted',
+    },
+    sources: {
+      paperAsset: {
+        sha256: sha256(paperAssetBytes),
+      },
+      questionPdf: {
+        sha256: sha256(promptSourcePdfBytes),
+      },
+    },
+    rows: grammarFillGroup.blankIds.map((blankId, index) => {
+      const prompt = paperAsset.content.blanks[blankId]?.prompt
+      return {
+        ordinal: index + 1,
+        blankId,
+        questionId: grammarFillGroup.questionIds[index],
+        provision:
+          typeof prompt === 'string'
+            ? 'source_prompt'
+            : 'source_proven_none',
+        ...(typeof prompt === 'string' ? { prompt } : {}),
+      }
+    }),
+  }
+  fixture.request.evidence.documents.push(
+    {
+      inputKey: 'grammar_fill_prompt_question_pdf',
+      roles: ['question_source'],
+      bytes: promptSourcePdfBytes,
+      declared: {
+        mediaType: 'application/pdf',
+        originalName: 'grammar-fill-prompt-source.pdf',
+      },
+    },
+    {
+      inputKey: 'grammar_fill_prompt_source_capture',
+      roles: ['structured_source', 'source_provenance'],
+      bytes: new TextEncoder().encode(JSON.stringify(promptSourceCapture)),
+      declared: {
+        mediaType:
+          'application/vnd.eqb.grammar-fill-prompt-source-capture+json',
+        originalName: 'grammar-fill-prompt-source-capture.json',
+      },
+    },
+  )
   return fixture.request
 }

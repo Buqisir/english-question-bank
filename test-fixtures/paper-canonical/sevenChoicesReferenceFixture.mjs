@@ -12,6 +12,7 @@ const references = Object.freeze({
     paperAsset: 'sha256:fe7feb2cc9554b00bbab96a7d4fe5e499513c564c28e6c314e0373e29b2ca7bf',
     answerKey: 'sha256:17502bb7685b83afc8847f3a44f8ac3c68defcb941ae75ba1ff14945c07daaf0',
     importMeta: 'sha256:dda79f448a049d9ce6293049b4e1dec51fba35cb683e4e7860f5390ab3d3e900',
+    promptCapture: 'sha256:c20392a1ab530b6a327aa5a3b81b29682f85f7f6e5be48824c3398d814c477e8',
   }),
   'paper-960d0f8d': Object.freeze({
     source: 'sha256:960d0f8d6fddc3e6ccff22a15c9044170cb58f59a8b62f9870cf522df8cde25b',
@@ -47,6 +48,41 @@ export function makeSevenChoicesCanonicalReferenceFixture(paperId) {
   const paperAsset = readHashBoundBytes(new URL('paper-asset.json', baseUrl), hashes.paperAsset)
   const answerKey = readHashBoundBytes(new URL('answer-key.json', baseUrl), hashes.answerKey)
   const importMeta = readHashBoundBytes(new URL('import-meta.json', baseUrl), hashes.importMeta)
+  const promptDocuments = paperId === 'paper-2026-i'
+    ? [
+        {
+          inputKey: 'original_question_source',
+          roles: ['question_source', 'source_provenance'],
+          bytes: readHashBoundBytes(
+            new URL(
+              '../paper-import/paper-2026-i-canonical-pilot/paper.pdf',
+              import.meta.url,
+            ),
+            hashes.source,
+          ),
+          declared: {
+            mediaType: 'application/pdf',
+            originalName: 'paper.pdf',
+          },
+        },
+        {
+          inputKey: 'grammar_fill_prompt_source_capture',
+          roles: ['structured_source', 'source_provenance'],
+          bytes: readHashBoundBytes(
+            new URL(
+              '../paper-import/paper-2026-i-canonical-pilot/reviewed-evidence/grammar-fill-prompt-source-capture.json',
+              import.meta.url,
+            ),
+            hashes.promptCapture,
+          ),
+          declared: {
+            mediaType:
+              'application/vnd.eqb.grammar-fill-prompt-source-capture+json',
+            originalName: 'grammar-fill-prompt-source-capture.json',
+          },
+        },
+      ]
+    : []
   const meta = JSON.parse(new TextDecoder().decode(importMeta))
   if (`sha256:${meta.sourceFileSha256}` !== hashes.source) throw new Error(`Reference source digest drifted for ${paperId}`)
   const fixture = makeReadyCanonicalFixture()
@@ -93,6 +129,7 @@ export function makeSevenChoicesCanonicalReferenceFixture(paperId) {
             bytes: importMeta,
             declared: { mediaType: 'application/json', originalName: 'import-meta.json' },
           },
+          ...promptDocuments,
           ...makeNck1ProfileInstructionEvidenceDocuments(source.paperId),
         ],
       },

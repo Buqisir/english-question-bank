@@ -162,6 +162,13 @@ function legacyBundleFrom(compilation, sourceAsset, transformationRecords = []) 
   const groups = compilation.artifacts.canonicalPaper.questionGroups.map((group) => {
     const legacyGroup = structuredClone(group)
     const legacyFamily = legacyAuthority.families.get(legacyGroup.contractRef.familyContractId)
+    legacyGroup.schemaVersion = 'canonical-question-group-v1'
+    if (legacyGroup.variant.family === 'grammar-fill') {
+      delete legacyGroup.variant.promptBindings
+      legacyGroup.sourceMap.entries = legacyGroup.sourceMap.entries.filter(
+        (entry) => entry.target.kind !== 'prompt_provision',
+      )
+    }
     legacyGroup.contractRef.manifestVersion = legacyAuthorityRef.manifestVersion
     legacyGroup.contractRef.manifestDigest = legacyAuthorityRef.manifestDigest
     legacyGroup.contractRef.familyContractVersion = legacyFamily.version

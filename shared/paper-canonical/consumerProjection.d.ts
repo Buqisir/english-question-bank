@@ -25,6 +25,12 @@ export function selectedFamilyContractIdForGroup(input: {
   groupId: string
 }): string | null
 
+export function resolveCanonicalConsumerOccurrence(input: {
+  consumption: unknown
+  familyContractId: string
+  groupId: string
+}): unknown
+
 export function projectCanonicalConsumerGroup(input: {
   consumption: unknown
   familyContractId: string

@@ -7,6 +7,7 @@ export type GrammarFillPublicGeometrySurface =
 export type GrammarFillPublicGeometryFixture = Readonly<{
   surface: GrammarFillPublicGeometrySurface
   groupId: string
+  projectedOccurrenceDigest: string
   paragraphWidths: readonly Readonly<{
     paragraphId: string
     usableWidthEm: number
@@ -15,9 +16,9 @@ export type GrammarFillPublicGeometryFixture = Readonly<{
 }>
 
 export declare const grammarFillPublicGeometryFixtures: Readonly<{
-  schemaVersion: 'grammar-fill-public-geometry-fixtures-v2'
+  schemaVersion: 'grammar-fill-public-geometry-fixtures-v3'
   id: 'grammar-fill-public-geometry-fixtures'
-  version: '2'
+  version: '3'
   owner: 'renderer_typography'
   paper: 'a4'
   sourceOracle: Readonly<{ path: string; sha256: string }>
@@ -25,8 +26,10 @@ export declare const grammarFillPublicGeometryFixtures: Readonly<{
     'fixture_selected_before_public_producer_and_output_rendered_unchanged'
   horizontalUnit: 'em'
   compatibleConsumptionPlan: Readonly<{
+    paperId: 'paper-2026-i'
+    sourceAssetVersion: 1
     authorityManifestId: 'paper-canonical'
-    authorityManifestVersion: '23'
+    authorityManifestVersion: '24'
     surfaceConsumerIds: Readonly<{
       screen: 'screen'
       print_html: 'print_pdf'

@@ -850,6 +850,10 @@ function selectOccurrence(input) {
   return occurrences[0]
 }
 
+export function resolveCanonicalConsumerOccurrence(input) {
+  return selectOccurrence(input)
+}
+
 /**
  * Shared post-loader projection for Screen and Print/PDF.
  *

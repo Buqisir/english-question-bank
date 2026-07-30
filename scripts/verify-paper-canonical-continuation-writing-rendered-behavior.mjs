@@ -190,7 +190,7 @@ function assertZhejiangWritingChromeAuthority() {
   const authority = resolveCanonicalAuthority(canonicalAuthorityRef)
   assert.equal(authority.ok, true)
   const profile = authority.closure.profiles.get('zhejiang-legacy')
-  assert.equal(profile.version, '4')
+  assert.equal(profile.version, '5')
   const writingPart = profile.parts.find((part) => part.partId === 'writing')
   assert.deepEqual(
     [
@@ -419,8 +419,8 @@ function assertSchemaDescriptorIdentityClosure() {
     'canonical-paper-publication-v9',
     'normalization-report-v10',
     'canonical-paper-publication-v10',
-    'normalization-report-v23',
-    'canonical-paper-publication-v23',
+    'normalization-report-v24',
+    'canonical-paper-publication-v24',
   ]) {
     assert.equal(authority.closure.schemas[schemaId].$id, schemaId)
   }

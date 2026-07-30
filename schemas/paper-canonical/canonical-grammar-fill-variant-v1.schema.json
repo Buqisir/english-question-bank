@@ -1,0 +1,1 @@
+{"$id":"canonical-grammar-fill-variant-v1","$schema":"https://json-schema.org/draft/2020-12/schema","additionalProperties":false,"properties":{"choiceOwnership":{"const":{"ownership":"none"}},"family":{"const":"grammar-fill"},"promptBindings":{"items":{"type":"object"},"type":"array"}},"required":["family","promptBindings","choiceOwnership"],"type":"object"}

@@ -246,17 +246,34 @@ export function loadCanonicalGrammarFillPrintChrome({
     ) {
       reject('Canonical Grammar Fill projected occurrence source digest disagrees')
     }
+    const projectedOccurrence = selection.projectedOccurrences?.find(
+      (candidate) =>
+        candidate?.kind === 'group' && candidate.groupId === groupId,
+    )
+    if (
+      !projectedOccurrence
+      || projectedOccurrence.familyContractId !== 'grammar-fill'
+      || !Array.isArray(projectedOccurrence.blanks)
+    ) {
+      reject('Canonical Grammar Fill projected prompt authority is unavailable')
+    }
+    const projectedBlankById = new Map(
+      projectedOccurrence.blanks.map((blank) => [blank?.blankId, blank]),
+    )
     const questionSupplements =
       publicOracle.grammarFill.questionIds.map((questionId, index) => {
         const blankId = publicOracle.grammarFill.blankIds[index]
         const question = asset.content.questions?.[questionId]
         const blank = asset.content.blanks?.[blankId]
+        const projectedBlank = projectedBlankById.get(blankId)
         const answer = officialAnswers.answers?.[questionId]?.answer
         const prompt = blank?.prompt ?? null
         if (
           question?.blankId !== blankId
           || blank?.questionId !== questionId
-          || prompt !== publicOracle.grammarFill.prompts[questionId]
+          || projectedBlank?.questionId !== questionId
+          || !Object.hasOwn(projectedBlank, 'prompt')
+          || prompt !== projectedBlank.prompt
           || answer !== publicOracle.grammarFill.answers[questionId]
         ) {
           reject(`Canonical Grammar Fill source row disagrees: ${questionId}`)

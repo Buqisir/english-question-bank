@@ -71,6 +71,10 @@ const requiredPaths = {
     absoluteReviewedEvidenceDir,
     'reading-source-capture-v1.json',
   ),
+  grammarFillPromptSourceCapture: path.join(
+    absoluteReviewedEvidenceDir,
+    'grammar-fill-prompt-source-capture.json',
+  ),
   tableVisualProof: path.join(
     absoluteReviewedEvidenceDir,
     'reading-a-table-1.png',
@@ -129,6 +133,9 @@ const request = buildNck1CanonicalImportRequest({
   instructionEvidenceBytes: readFileSync(requiredPaths.instructionEvidence),
   sourceProvenanceBytes: readFileSync(requiredPaths.sourceProvenance),
   readingSourceCaptureBytes: readFileSync(requiredPaths.readingSourceCapture),
+  grammarFillPromptSourceCaptureBytes: readFileSync(
+    requiredPaths.grammarFillPromptSourceCapture,
+  ),
   tableVisualProofBytes: readFileSync(requiredPaths.tableVisualProof),
   applicationWritingCaptureBytes: readFileSync(
     requiredPaths.applicationWritingCapture,
@@ -170,6 +177,10 @@ const fileNames = new Map([
   ['official_answers', '05-official_answers.json'],
   ['listening_answer_source', '06-source_answers_pdf.pdf'],
   ['reading_structure', '07-reading-source-capture.json'],
+  [
+    'grammar_fill_prompt_source_capture',
+    '18-grammar-fill-prompt-source-capture.json',
+  ],
   ['table_visual_proof', '08-reading-a-table-1.png'],
   ['source_provenance', '09-source-provenance.json'],
   ['application_writing_capture', '10-application-writing-capture.json'],

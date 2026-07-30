@@ -699,3 +699,37 @@ Student/Teacher direct Chromium PDF, including the three invalid-Plan attacks.
 Full `pnpm -C app run verify:all` reports 115 PASS / 1 declared off-repo SKIP /
 0 FAIL. No Owner QA provisioning, Reading/Seven Choices/Cloze implementation,
 Ticket 21, production/R2, or generated-DOCX action was performed.
+
+Grammar Fill Golden Geometry fourth focused-review Must Fix closure
+(2026-07-30):
+The self-review of the committed Manifest v23 repair found that prompt
+provisions were still not owned by a versioned family/source-adapter contract,
+the public fixture accepted a refs-only imitation of a Consumption Plan, and
+the human authority index still named v23 as current. Because v23 had already
+been published in the repair history, its bytes remain unchanged and this
+repair publishes a new immutable successor.
+
+Manifest v24 closes prompt identity through Grammar Fill family v2, Source
+Adapter v6, the accepted source-digest-bound prompt capture, Core Invariants
+v2, and Question Group v2. `blankRefs` are identity-only; ordered
+`promptBindings` refer to exact `grammar_fill_prompt_provision` observations
+whose source spans are present in the Group source map. Missing, incomplete,
+or bogus prompt captures fail admission. The canonical projector validates
+that same contract before public projection, and the post-loader consumer
+uses the explicit projected prompt only.
+
+Grammar Fill rhythm v4 and public-geometry fixture authority v3 remove prompt
+semantics from renderer authority and retain only em-class geometry. Their
+schemas reject `wrappedLineWidthPt`, `wrappedLineWidthPx`, and undeclared
+shadow geometry. Manifest v24 semantic validation requires the exact fixture
+artifact/schema; the coordinated-removal regression remains fail closed.
+
+Screen v24 and Print/PDF v25 select fixture variants only after the ordinary
+Consumption Plan occurrence-integrity seam validates the exact projected
+occurrence and digest. Absent, historical, wrong-consumer, refs-only,
+missing-occurrence, and mismatched-occurrence Plans all reject before a
+fixture-backed public artifact is produced. The real seam remains plain and
+lecture Screen, Student and Teacher Print HTML, and Student and Teacher
+Chromium PDF. No Owner QA provisioning, Reading/Seven Choices/Cloze
+implementation, Ticket 21, production/R2, or generated-DOCX action is part of
+this closure.

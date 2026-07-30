@@ -1,10 +1,28 @@
 export type WholePaperConsumption = {
   disposition: 'ready'
   paperId: string
+  sourceAssetVersion: number | null
+  sourceAssetDigest?: string
+  publicationDigest?: string
+  authorityRef?: {
+    manifestId: string
+    manifestVersion: string
+    manifestDigest: string
+  }
+  consumerContractRef?: {
+    id: string
+    version: string
+    digest: string
+  }
   selections: ReadonlyArray<{
     mode: 'canonical' | 'legacy'
     familyContractId: string
     groupIds: ReadonlyArray<string>
+    projectedOccurrences?: ReadonlyArray<unknown>
+    projectedOccurrenceDigests?: ReadonlyArray<{
+      groupId: string
+      digest: string
+    }>
   }>
 }
 

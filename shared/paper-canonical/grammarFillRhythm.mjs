@@ -1,4 +1,4 @@
-import contract from '../../standards/paper-canonical/rendering/grammar-fill-rhythm-v3.json' with { type: 'json' }
+import contract from '../../standards/paper-canonical/rendering/grammar-fill-rhythm-v4.json' with { type: 'json' }
 
 function freezeObject(value) {
   if (Array.isArray(value)) return Object.freeze(value.map(freezeObject))

@@ -61,6 +61,9 @@ function buildPilotRequest(overrides = {}) {
     readingSourceCaptureBytes: new TextEncoder().encode(JSON.stringify(
       makeReviewedReadingSourceCapture(paperAsset),
     )),
+    grammarFillPromptSourceCaptureBytes: bytes(
+      'reviewed-evidence/grammar-fill-prompt-source-capture.json',
+    ),
     tableVisualProofBytes: readFileSync(path.join(
       repositoryRoot,
       'app/public/paper-assets/paper-2026-i/latest/figures/reading-a-table-1.png',

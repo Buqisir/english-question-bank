@@ -119,7 +119,7 @@ const grammarFillSourceOraclePath = path.join(
 )
 const grammarFillPublicAdversaryOraclePath = path.join(
   repositoryRoot,
-  'docs/cuts/paper-canonical-unification/qa/20-grammar-fill-public-adversaries-v2.json',
+  'docs/cuts/paper-canonical-unification/qa/20-grammar-fill-public-adversaries-v3.json',
 )
 const grammarFillCoverageOraclePath = path.join(
   repositoryRoot,
@@ -392,18 +392,18 @@ function assertSevenChoicesReferenceEvidence() {
   )
   assert.equal(
     canonicalAuthorityRef.manifestVersion,
-    '23',
+    '24',
     'new Publications preserve Seven Choices inside the closed Grammar Fill successor authority',
   )
   assert.equal(
     consumerContractRefs.screen.version,
-    '23',
-    'Screen v23 binds the complete geometry authority closure',
+    '24',
+    'Screen v24 binds the complete geometry authority closure',
   )
   assert.equal(
     consumerContractRefs.print_pdf.version,
-    '24',
-    'Print/PDF v24 binds the complete geometry authority closure',
+    '25',
+    'Print/PDF v25 binds the complete geometry authority closure',
   )
   assert.equal(
     sha256(preservedBytes),
@@ -1134,7 +1134,7 @@ function assertGrammarFillPublicAdversaryOracle() {
   const oracle = JSON.parse(bytes)
   assert.equal(
     oracle.schemaVersion,
-    'grammar-fill-public-adversaries-v2',
+    'grammar-fill-public-adversaries-v3',
   )
   assert.equal(oracle.paperId, paperId)
   assert.equal(
@@ -11024,6 +11024,31 @@ async function renderSupportedArtifacts({
         caseId: 'mismatched-consumer-contract',
         responseBody: mismatchedScreenFixturePlan,
       })
+      const refsOnlyScreenFixturePlan = structuredClone(
+        screenGrammarFillWrapped.consumption,
+      )
+      refsOnlyScreenFixturePlan.selections = [
+        {
+          familyContractId: 'grammar-fill',
+          mode: 'canonical',
+          groupIds: ['group-2026-i-grammar-fill'],
+        },
+      ]
+      await runScreenFixturePlanAttack({
+        caseId: 'refs-only-consumption-plan',
+        responseBody: refsOnlyScreenFixturePlan,
+      })
+      const mismatchedOccurrenceScreenFixturePlan = structuredClone(
+        screenGrammarFillWrapped.consumption,
+      )
+      mismatchedOccurrenceScreenFixturePlan.selections.find(
+        (candidate) => candidate.familyContractId === 'grammar-fill',
+      ).projectedOccurrenceDigests[0].digest =
+        'sha256:0000000000000000000000000000000000000000000000000000000000000000'
+      await runScreenFixturePlanAttack({
+        caseId: 'mismatched-occurrence-consumption-plan',
+        responseBody: mismatchedOccurrenceScreenFixturePlan,
+      })
       await page.goto(plainUrl.href)
       await page.locator('[data-paper-browse-anchor]').first().waitFor()
       const runScreenSourceAssetAttack = async ({
@@ -11561,12 +11586,12 @@ async function renderSupportedArtifacts({
         const immutableChromeResponse = await fetch(
           `${baseUrl}/api/draft-papers/${draft.draftPaperId}/print-html?versionType=student`,
         )
+        const immutableChromeHtml = await immutableChromeResponse.text()
         assert.equal(
           immutableChromeResponse.status,
           200,
-          'Print producer ignores mutable latest Cloze chrome',
+          `Print producer ignores mutable latest Cloze chrome: ${immutableChromeHtml}`,
         )
-        const immutableChromeHtml = await immutableChromeResponse.text()
         assert.equal(
           immutableChromeHtml.includes(
             clozeSourceOracle.oracle.publicVisibleChrome.part,
@@ -12042,6 +12067,40 @@ async function renderSupportedArtifacts({
           grammarFillGeometrySurface: 'print_html',
           expectedCode:
             'CANONICAL_GRAMMAR_FILL_GEOMETRY_FIXTURE_REJECTED',
+        },
+      )
+      const refsOnlyFixturePlan = structuredClone(consumers.print_pdf)
+      refsOnlyFixturePlan.selections = [
+        {
+          familyContractId: 'grammar-fill',
+          mode: 'canonical',
+          groupIds: ['group-2026-i-grammar-fill'],
+        },
+      ]
+      assertGrammarFillPrintProducerRejected(
+        'fixture-refs-only-consumption-plan',
+        {
+          canonicalConsumption: refsOnlyFixturePlan,
+          grammarFillGeometryVariantId: printFixtureVariantId,
+          grammarFillGeometrySurface: 'print_html',
+          expectedCode:
+            'CANONICAL_CONSUMPTION_REJECTED',
+        },
+      )
+      const mismatchedOccurrenceFixturePlan =
+        structuredClone(consumers.print_pdf)
+      mismatchedOccurrenceFixturePlan.selections.find(
+        (candidate) => candidate.familyContractId === 'grammar-fill',
+      ).projectedOccurrenceDigests[0].digest =
+        'sha256:0000000000000000000000000000000000000000000000000000000000000000'
+      assertGrammarFillPrintProducerRejected(
+        'fixture-mismatched-occurrence-consumption-plan',
+        {
+          canonicalConsumption: mismatchedOccurrenceFixturePlan,
+          grammarFillGeometryVariantId: printFixtureVariantId,
+          grammarFillGeometrySurface: 'print_html',
+          expectedCode:
+            'CANONICAL_CONSUMPTION_REJECTED',
         },
       )
       const printGrammarFillWrapped = grammarFillVariantConsumption(
@@ -13861,7 +13920,7 @@ try {
   assert.equal(sourceDocument.kind, 'pdf')
   const requestPath = path.join(
     sourcePackageDir,
-    'canonical-evidence/canonical-import-request-v23.json',
+    'canonical-evidence/canonical-import-request-v24.json',
   )
   execFileSync(process.execPath, [
     path.join(
@@ -13933,6 +13992,58 @@ try {
   )
   assert.deepEqual(snapshotTree(paperAssetsDir), beforeDryRun.tree)
   assert.deepEqual(snapshotDatabase(db), beforeDryRun.database)
+
+  const assertPromptEvidenceRejected = (caseId, mutate) => {
+    const attackedRequest = structuredClone(loadedRequest)
+    const promptDocument = attackedRequest.evidence.documents.find(
+      (document) =>
+        document.inputKey === 'grammar_fill_prompt_source_capture',
+    )
+    mutate(attackedRequest, promptDocument)
+    const attacked = admitCanonicalPaperImport({
+      request: attackedRequest,
+      sourceAssetVersion: 1,
+      sourceAsset: filesByName['paper-asset.json'],
+    })
+    assert.equal(attacked.ok, false, `${caseId} fails closed`)
+    assert.equal(
+      attacked.diagnostics.some(
+        (diagnostic) =>
+          [
+            'GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_REQUIRED',
+            'GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_INVALID',
+            'GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE',
+          ].includes(diagnostic.code),
+      ),
+      true,
+      `${caseId} reports a Grammar Fill prompt authority diagnostic`,
+    )
+  }
+  assertPromptEvidenceRejected(
+    'missing Grammar Fill prompt source capture',
+    (request) => {
+      request.evidence.documents = request.evidence.documents.filter(
+        (document) =>
+          document.inputKey !== 'grammar_fill_prompt_source_capture',
+      )
+    },
+  )
+  assertPromptEvidenceRejected(
+    'incomplete Grammar Fill prompt source capture',
+    (_request, document) => {
+      const evidence = JSON.parse(new TextDecoder().decode(document.bytes))
+      evidence.rows.splice(0, 1)
+      document.bytes = new TextEncoder().encode(JSON.stringify(evidence))
+    },
+  )
+  assertPromptEvidenceRejected(
+    'bogus Grammar Fill prompt source capture',
+    (_request, document) => {
+      const evidence = JSON.parse(new TextDecoder().decode(document.bytes))
+      evidence.rows[0].prompt = 'bogus-source-prompt'
+      document.bytes = new TextEncoder().encode(JSON.stringify(evidence))
+    },
+  )
 
   let publisherCaptureCount = 0
   const captureDocxSourceMediaImpl = () => {

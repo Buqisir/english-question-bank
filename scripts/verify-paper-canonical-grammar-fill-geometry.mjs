@@ -105,7 +105,7 @@ assert.equal(
 
 const source = readOracle('20-grammar-fill-source-oracles-v3.json')
 const publicAdversaries = readOracle(
-  '20-grammar-fill-public-adversaries-v2.json',
+  '20-grammar-fill-public-adversaries-v3.json',
 )
 const golden = readOracle(
   '20-grammar-fill-golden-geometry-reference-measurements-v2.json',
@@ -272,17 +272,21 @@ assert.equal(
   grammarFillRhythm.publicArtifactOracle.proofClosure.observedCoverage.sha256,
   sha256(coverage.bytes),
 )
+const {
+  prompts: sourcePromptIdentity,
+  ...sourceGeometryIdentity
+} = source.value.publicIdentities.grammarFill
 assert.deepEqual(
   grammarFillRhythm.publicArtifactOracle.grammarFill,
-  source.value.publicIdentities.grammarFill,
+  sourceGeometryIdentity,
   'production authority publishes the exact source-bound Grammar Fill identity',
 )
 const sourcePromptedQuestionNos = Object.entries(
-  source.value.publicIdentities.grammarFill.prompts,
+  sourcePromptIdentity,
 ).flatMap(([questionId, prompt]) =>
   prompt === null ? [] : [Number(questionId.slice(-3))])
 const sourceUnpromptedQuestionNos = Object.entries(
-  source.value.publicIdentities.grammarFill.prompts,
+  sourcePromptIdentity,
 ).flatMap(([questionId, prompt]) =>
   prompt === null ? [Number(questionId.slice(-3))] : [])
 assert.deepEqual(

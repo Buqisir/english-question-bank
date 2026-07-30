@@ -1,6 +1,7 @@
 import { canonicalAuthorityRef, resolveCanonicalAuthority, slotsForProfile, validateJsonSchema } from './authority.mjs'
 import { validateApplicationWritingContract } from './applicationWriting.mjs'
 import { validateContinuationWritingContract } from './continuationWriting.mjs'
+import { validateGrammarFillPromptContract } from './grammarFillPromptContract.mjs'
 import { appendListeningInactiveClosures } from './listeningInactive.mjs'
 import { validateReadingContract } from './reading.mjs'
 import { validateSevenChoicesContract } from './sevenChoices.mjs'
@@ -126,6 +127,115 @@ function referenceContent(group) {
       return { kind: 'paragraph', nodeId: paragraph.paragraphId, inlines }
     }),
   }
+}
+
+function grammarFillPromptBindingsFromPaper({
+  paper,
+  paperEntry,
+  promptEntry,
+  documents,
+  group,
+  source,
+  diagnostics,
+  sourceEvidenceSchema,
+}) {
+  const evidence = promptEntry?.value
+  const evidenceIssues = sourceEvidenceSchema
+    ? validateJsonSchema(
+        evidence,
+        sourceEvidenceSchema,
+        '$.evidence.grammarFillPromptSourceCapture',
+      )
+    : [{ code: 'SCHEMA_MISSING' }]
+  const sourceBindingsValid = (
+    evidence?.paperId === source.paperId
+    && evidence?.sourceAssetVersion === source.sourceAssetVersion
+    && evidence?.groupId === group.groupId
+    && evidence?.review?.method === 'manual_source_review'
+    && evidence?.review?.status === 'accepted'
+    && evidence?.sources?.paperAsset?.sha256 === paperEntry.document.sha256
+    && evidence?.sources?.questionPdf?.sha256
+      && documents.some(
+        (document) =>
+          document.mediaType === 'application/pdf'
+          && document.roles.includes('question_source')
+          && document.sha256 === evidence.sources.questionPdf.sha256,
+      )
+  )
+  const rows = Array.isArray(evidence?.rows) ? evidence.rows : []
+  if (
+    evidenceIssues.length > 0
+    || !sourceBindingsValid
+    || rows.length !== group.blankIds.length
+    || rows.some(
+      (row, index) =>
+        row?.ordinal !== index + 1
+        || row?.blankId !== group.blankIds[index]
+        || row?.questionId !== group.questionIds[index],
+    )
+  ) {
+    diagnostics.push(diagnostic(
+      'GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_INVALID',
+      'incomplete_source',
+      '$.evidence.grammarFillPromptSourceCapture',
+      'Grammar Fill prompt evidence must be complete, accepted, source-bound, and ordered',
+    ))
+  }
+  return (group.blankIds || []).map((blankId) => {
+    const blank = paper.content?.blanks?.[blankId]
+    const row = rows.find((candidate) => candidate?.blankId === blankId)
+    const span = promptEntry
+      ? byteRangeForText(
+          promptEntry.document.bytes,
+          `"blankId":"${blankId}"`,
+          0,
+          promptEntry.document.bytes.byteLength,
+        )
+      : null
+    const observationId =
+      `observation:reference:grammar-fill:prompt:${blankId}`
+    const provision = row?.provision
+    const prompt = row?.prompt
+    const paperAssetAgrees = (
+      isRecordValue(blank)
+      && (
+        provision === 'source_prompt'
+          ? Object.hasOwn(blank, 'prompt') && blank.prompt === prompt
+          : provision === 'source_proven_none'
+            && !Object.hasOwn(blank, 'prompt')
+      )
+    )
+    if (!paperAssetAgrees || !span) {
+      diagnostics.push(diagnostic(
+        'GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE',
+        'incomplete_source',
+        '$.evidence.grammarFillPromptSourceCapture.rows',
+        `Grammar Fill Blank ${blankId} lacks accepted independent prompt-provision evidence`,
+      ))
+    } else {
+      source.observations.push({
+        observationId,
+        kind: 'grammar_fill_prompt_provision',
+        documentInputKey: promptEntry.document.inputKey,
+        value: {
+          blankId,
+          provision,
+          ...(provision === 'source_prompt' ? { prompt } : {}),
+        },
+        span,
+        extraction: {
+          adapterId: 'grammar-fill-prompt-evidence',
+          version: '1',
+        },
+      })
+    }
+    return {
+      blankId,
+      provision,
+      ...(provision === 'source_prompt' ? { prompt } : {}),
+      authorityObservationRef: observationId,
+    }
+  })
 }
 
 function byteRangeForText(bytes, text, start, end, after = start) {
@@ -975,6 +1085,17 @@ function adaptReferenceFamilies(parsed, documents, diagnostics) {
   const paperEntry = structured.find((entry) => entry.value?.schemaVersion === 'paper-asset-v1')
   const answerEntry = structured.find((entry) => entry.value?.schemaVersion === 'answer-key-v1')
   const readingEntry = structured.find((entry) => entry.value?.schemaVersion === 'reading-source-capture-v1')
+  const promptDocuments = documents.filter(
+    (document) =>
+      document.mediaType
+        === 'application/vnd.eqb.grammar-fill-prompt-source-capture+json',
+  )
+  const promptEntry = promptDocuments.length === 1
+    ? {
+        document: promptDocuments[0],
+        value: parseJsonDocument(promptDocuments[0], diagnostics),
+      }
+    : null
   const applicationDocument = documents.find((document) => document.mediaType === 'application/vnd.eqb.application-writing-source-capture+json')
   const applicationEntry = applicationDocument
     ? { document: applicationDocument, value: parseJsonDocument(applicationDocument, diagnostics) }
@@ -1082,12 +1203,25 @@ function adaptReferenceFamilies(parsed, documents, diagnostics) {
     diagnostics.push(diagnostic('REFERENCE_SOURCE_IDENTITY_MISMATCH', 'needs_review', '$.evidence.documents', 'Reference paper identity and source version must agree across immutable evidence'))
     return parsed
   }
+  const hasGrammarFillReference = Object.values(
+    paper.content?.groups || {},
+  ).some((candidate) => candidate?.groupType === 'grammarFill')
+  if (hasGrammarFillReference && promptDocuments.length !== 1) {
+    diagnostics.push(diagnostic(
+      'GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_REQUIRED',
+      'incomplete_source',
+      '$.evidence.documents',
+      'Current Grammar Fill compilation requires exactly one reviewed prompt source capture',
+    ))
+  }
   const familySpecs = [
     { familyId: 'cloze', slotId: 'language.cloze', legacyType: 'cloze' },
     { familyId: 'grammar-fill', slotId: 'language.grammar-fill', legacyType: 'grammarFill' },
     { familyId: 'seven-choices', slotId: 'reading.seven-choices', legacyType: 'sevenChoices' },
   ]
-  const referenceProfile = resolveCanonicalAuthority(canonicalAuthorityRef).closure.profiles.get(source.profileId)
+  const referenceAuthority =
+    resolveCanonicalAuthority(canonicalAuthorityRef).closure
+  const referenceProfile = referenceAuthority.profiles.get(source.profileId)
   appendReadingReferenceGroups({
     source,
     paper,
@@ -1123,29 +1257,41 @@ function adaptReferenceFamilies(parsed, documents, diagnostics) {
       span: groupRange,
     })
     const content = referenceContent(group)
+    const grammarFillPromptBindings =
+      spec.familyId === 'grammar-fill'
+        ? grammarFillPromptBindingsFromPaper({
+            paper,
+            paperEntry,
+            promptEntry,
+            documents,
+            group,
+            source,
+            diagnostics,
+            sourceEvidenceSchema:
+              referenceAuthority.schemas[
+                referenceAuthority.families.get('grammar-fill')
+                  ?.promptEvidenceSchemaId
+              ],
+          })
+        : null
     const sourceGroup = {
       groupId: group.groupId,
       slotId: spec.slotId,
       family: spec.familyId,
       questionIds: [...group.questionIds],
       blankIds: [...group.blankIds],
-      ...(
-        spec.familyId === 'grammar-fill'
-          ? {
-              blankPrompts: Object.fromEntries(
-                group.blankIds.map((blankId) => [
-                  blankId,
-                  paper.content?.blanks?.[blankId]?.prompt ?? null,
-                ]),
-              ),
-            }
-          : {}
-      ),
       sourceSpanId,
       content,
       media: [],
       variant: {
         family: spec.familyId,
+        ...(
+          spec.familyId === 'grammar-fill'
+            ? {
+                promptBindings: grammarFillPromptBindings,
+              }
+            : {}
+        ),
         ...(spec.familyId === 'seven-choices'
           ? {
               members: (group.questionIds || []).map((questionId, index) => ({
@@ -1168,7 +1314,15 @@ function adaptReferenceFamilies(parsed, documents, diagnostics) {
             }
           : { choiceOwnership: referenceOptions(paper, group, diagnostics, spec.familyId) }),
       },
-      sourceSpanRefsByTarget: {},
+      sourceSpanRefsByTarget:
+        grammarFillPromptBindings == null
+          ? {}
+          : Object.fromEntries(
+              grammarFillPromptBindings.map((binding) => [
+                `prompt_provision:${binding.blankId}`,
+                [`source-span:${binding.authorityObservationRef}`],
+              ]),
+            ),
     }
     source.groups.push(sourceGroup)
     if (sevenChoices) {
@@ -1562,6 +1716,14 @@ function collectReadingTargetIds(variant) {
   ].filter((target) => typeof target.id === 'string')
 }
 
+function collectGrammarFillTargetIds(variant) {
+  if (variant?.family !== 'grammar-fill') return []
+  return (variant.promptBindings || []).map((binding) => ({
+    kind: 'prompt_provision',
+    id: binding.blankId,
+  }))
+}
+
 function collectApplicationWritingTargetIds(variant) {
   if (variant?.family !== 'application-writing') return []
   return [
@@ -1755,6 +1917,27 @@ function validateReferenceBlankClosure(familyId, questionIds, blankIds, content)
   return diagnostics
 }
 
+function validateGrammarFillPromptBindings(
+  blankIds,
+  content,
+  variant,
+  capture,
+  evidenceSchema,
+) {
+  return validateGrammarFillPromptContract({
+    blankIds,
+    content,
+    variant,
+    sourceCapture: capture,
+    promptProvisionSchema: evidenceSchema,
+  }).map((issue) => diagnostic(
+    issue.code,
+    'needs_review',
+    issue.path,
+    issue.message,
+  ))
+}
+
 function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
   const diagnostics = []
   const family = closure.families.get(sourceGroup?.family)
@@ -1765,33 +1948,6 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
   const sourceSpanIds = new Set(capture.sourceSpans.map((span) => span.sourceSpanId))
   if (!sourceSpanIds.has(sourceGroup.sourceSpanId)) diagnostics.push(diagnostic('GROUP_SOURCE_UNRESOLVED', 'incomplete_source', '$.groups', 'Group does not resolve to a captured source span'))
   if (new Set(sourceGroup.questionIds).size !== sourceGroup.questionIds.length || new Set(sourceGroup.blankIds).size !== sourceGroup.blankIds.length) diagnostics.push(diagnostic('GROUP_MEMBER_DUPLICATE', 'needs_review', '$.groups', 'Question and Blank identities are unique'))
-  const grammarFillPrompts = family.familyContractId === 'grammar-fill'
-    ? Object.fromEntries(
-        sourceGroup.blankIds.map((blankId) => [
-          blankId,
-          sourceGroup.blankPrompts?.[blankId] ?? null,
-        ]),
-      )
-    : null
-  if (
-    grammarFillPrompts
-    && Object.values(grammarFillPrompts).some(
-      (prompt) =>
-        prompt !== null
-        && (
-          typeof prompt !== 'string'
-          || prompt.length === 0
-          || /[()\r\n]/u.test(prompt)
-        ),
-    )
-  ) {
-    diagnostics.push(diagnostic(
-      'GRAMMAR_FILL_PROMPT_IDENTITY_INVALID',
-      'needs_review',
-      '$.groups.blankPrompts',
-      'Grammar Fill prompt identity must be an explicit source string or null',
-    ))
-  }
   const media = cloneJson(sourceGroup.media || []).map((item) => ({
     ...item,
     sourceArtifactRef: {
@@ -1830,6 +1986,9 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
         ? ['family', 'writingTaskId', 'promptBlockRefs', 'situation', 'contentRequirements', 'wordCountRuling', 'givenSkeleton', 'choiceOwnership', 'response']
       : family.familyContractId === 'continuation-writing'
         ? ['family', 'writingTaskId', 'materialBlockRefs', 'wordCountRuling', 'starterProvision', 'choiceOwnership', 'response']
+      : family.familyContractId === 'grammar-fill'
+        && Number(family.version) >= 2
+        ? ['family', 'promptBindings', 'choiceOwnership']
       : ['family', 'choiceOwnership']
   if (!exactKeys(variant, variantKeys) || variant.family !== family.familyContractId) diagnostics.push(diagnostic('GROUP_VARIANT_INVALID', 'needs_review', '$.groups.variant', 'Variant family must match the closed contract'))
   if (family.variantSchemaId) {
@@ -1838,6 +1997,17 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
     diagnostics.push(...variantSchemaIssues.map((item) => diagnostic(item.code, 'needs_review', item.path, item.message)))
   }
   diagnostics.push(...validateChoiceOwnership(variant.choiceOwnership, sourceGroup.questionIds, family.choiceOwnership))
+  if (family.familyContractId === 'grammar-fill' && Number(family.version) >= 2) {
+    diagnostics.push(
+      ...validateGrammarFillPromptBindings(
+        sourceGroup.blankIds,
+        content,
+        variant,
+        capture,
+        closure.schemas[family.promptProvisionSchemaId],
+      ),
+    )
+  }
   if (family.familyContractId === 'seven-choices') {
     diagnostics.push(...validateSevenChoicesContract({
       groupId: sourceGroup.groupId,
@@ -1881,7 +2051,9 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
   }
   if (diagnostics.length > 0) return { diagnostics, artifact: null }
   const artifactBase = {
-    schemaVersion: 'canonical-question-group-v1',
+    schemaVersion:
+      closure.artifacts.core?.groupSchemaId
+        || 'canonical-question-group-v1',
     identity: { paperId: sourceGroup.paperId || null, groupId: sourceGroup.groupId },
     contractRef: {
       manifestId: closure.authorityRef.manifestId,
@@ -1892,10 +2064,7 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
       familyContractDigest: digestJson(family),
     },
     questionRefs: sourceGroup.questionIds.map((questionId) => ({ questionId })),
-    blankRefs: sourceGroup.blankIds.map((blankId) => ({
-      blankId,
-      ...(grammarFillPrompts ? { prompt: grammarFillPrompts[blankId] } : {}),
-    })),
+    blankRefs: sourceGroup.blankIds.map((blankId) => ({ blankId })),
     content,
     media,
     variant,
@@ -1907,6 +2076,7 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
     ...media.map((item) => ({ target: { kind: 'media', id: item.mediaId } })),
     ...collectRichTargetIds(content).map((entry) => ({ target: entry })),
     ...collectReadingTargetIds(variant).map((entry) => ({ target: entry })),
+    ...collectGrammarFillTargetIds(variant).map((entry) => ({ target: entry })),
     ...collectApplicationWritingTargetIds(variant).map((entry) => ({ target: entry })),
     ...collectContinuationWritingTargetIds(variant).map((entry) => ({ target: entry })),
   ].filter((entry, index, entries) => entries.findIndex((candidate) => candidate.target.kind === entry.target.kind && candidate.target.id === entry.target.id) === index)
@@ -1930,7 +2100,11 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
   })
   const semanticDigest = digestJson(artifactBase)
   const artifact = { ...artifactBase, sourceMap, sourceFingerprint, semanticDigest }
-  diagnostics.push(...validateJsonSchema(artifact, closure.schemas['canonical-question-group-v1'], '$.group'))
+  diagnostics.push(...validateJsonSchema(
+    artifact,
+    closure.schemas[artifact.schemaVersion],
+    '$.group',
+  ))
   return { diagnostics, artifact }
 }
 

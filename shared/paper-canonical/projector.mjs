@@ -1,6 +1,7 @@
 import { resolveCanonicalAuthority, slotsForProfile, validateJsonSchema } from './authority.mjs'
 import { validateApplicationWritingContract } from './applicationWriting.mjs'
 import { validateContinuationWritingContract } from './continuationWriting.mjs'
+import { validateGrammarFillPromptContract } from './grammarFillPromptContract.mjs'
 import { validateReadingContract } from './reading.mjs'
 import { validateSevenChoicesContract } from './sevenChoices.mjs'
 import { cloneJson, digestJson } from './stable.mjs'
@@ -144,12 +145,29 @@ function assertCanonicalPackage(canonicalPackage) {
   if (!Array.isArray(groups)) throw projectionError('Canonical Groups are required', [])
   const groupById = new Map()
   for (const group of groups) {
-    const groupIssues = validateJsonSchema(group, closure.schemas['canonical-question-group-v1'], '$.groups')
+    const groupSchemaId = closure.artifacts.core?.groupSchemaId
+      || 'canonical-question-group-v1'
+    if (group.schemaVersion !== groupSchemaId) {
+      throw projectionError('Canonical Group schema does not match Core authority', [])
+    }
+    const groupIssues = validateJsonSchema(
+      group,
+      closure.schemas[groupSchemaId],
+      '$.groups',
+    )
     if (groupIssues.length > 0) throw projectionError('Canonical Group is schema-invalid', groupIssues)
     if (group.identity.paperId !== plan.paperId || groupById.has(group.identity.groupId)) throw projectionError('Groups must belong to one paper and have unique identities', [])
     if (group.contractRef.manifestDigest !== closure.authorityRef.manifestDigest) throw projectionError('Group authority closure differs from Plan', [])
     const family = closure.families.get(group.contractRef.familyContractId)
     if (!family || group.contractRef.familyContractVersion !== family.version || group.contractRef.familyContractDigest !== digestJson(family) || group.variant.family !== family.familyContractId || group.variant.choiceOwnership?.ownership !== family.choiceOwnership) throw projectionError('Group family contract is stale or incompatible', [])
+    const variantIssues = validateJsonSchema(
+      group.variant,
+      closure.schemas[family.variantSchemaId],
+      '$.groups.variant',
+    )
+    if (variantIssues.length > 0) {
+      throw projectionError('Canonical Group variant is schema-invalid', variantIssues)
+    }
     const choiceIssues = choiceOwnershipIssues(group, family)
     if (choiceIssues.length > 0) throw projectionError('Group choice ownership is not structurally exclusive', choiceIssues)
     if (family.familyContractId === 'seven-choices') {
@@ -173,6 +191,23 @@ function assertCanonicalPackage(canonicalPackage) {
         assertions: sourceCapture.assertions,
       })
       if (readingIssues.length > 0) throw projectionError('Reading canonical contract is not closed', readingIssues)
+    }
+    if (family.familyContractId === 'grammar-fill' && family.version >= 2) {
+      const grammarFillIssues = validateGrammarFillPromptContract({
+        blankIds: group.blankRefs.map(({ blankId }) => blankId),
+        content: group.content,
+        variant: group.variant,
+        sourceCapture,
+        promptProvisionSchema:
+          closure.schemas[family.promptProvisionSchemaId],
+        sourceMap: group.sourceMap,
+      })
+      if (grammarFillIssues.length > 0) {
+        throw projectionError(
+          'Grammar Fill prompt authority is not closed',
+          grammarFillIssues,
+        )
+      }
     }
     if (family.variantSchemaId === 'canonical-application-writing-variant-v1') {
       const applicationIssues = validateApplicationWritingContract({
@@ -398,13 +433,26 @@ export function projectCanonicalPaper(canonicalPackage) {
           groupId: group.identity.groupId,
           familyContractId: group.contractRef.familyContractId,
           numbering: numberingByGroup.get(group.identity.groupId) || [],
-          blanks: group.blankRefs.map((blank, index) => ({
-            blankId: blank.blankId,
-            questionId: group.questionRefs[index]?.questionId,
-            ...(Object.hasOwn(blank, 'prompt')
-              ? { prompt: blank.prompt }
-              : {}),
-          })),
+          blanks: group.blankRefs.map((blank, index) => {
+            const promptBinding = group.variant?.promptBindings?.find(
+              (binding) => binding?.blankId === blank.blankId,
+            )
+            return {
+              blankId: blank.blankId,
+              questionId: group.questionRefs[index]?.questionId,
+              ...(
+                group.contractRef.familyContractId === 'grammar-fill'
+                && Number(group.contractRef.familyContractVersion) >= 2
+                  ? {
+                      prompt:
+                        promptBinding?.provision === 'source_prompt'
+                          ? promptBinding.prompt
+                          : null,
+                    }
+                  : {}
+              ),
+            }
+          }),
           scoringRuleRef: slot.slotId,
           content: cloneJson(group.content),
           media: cloneJson(group.media),

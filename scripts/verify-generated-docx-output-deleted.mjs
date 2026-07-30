@@ -34,7 +34,7 @@ assert.deepEqual(
   'supported canonical consumers must be exactly Screen and Print/PDF',
 )
 
-assert.equal(canonicalAuthorityRef.manifestVersion, '23')
+assert.equal(canonicalAuthorityRef.manifestVersion, '24')
 const currentAuthority = resolveCanonicalAuthority(canonicalAuthorityRef)
 assert.equal(currentAuthority.ok, true)
 
@@ -42,13 +42,13 @@ const humanAuthority = read('docs/product/exam-paper-format-standards.md')
 const currentHumanAuthority = humanAuthority.split('## v2 历史排版证据')[0]
 assert.match(
   currentHumanAuthority,
-  /standards\/paper-canonical\/manifest-v23\.json/,
-  'the unique human-readable authority index must bind current manifest v23',
+  /standards\/paper-canonical\/manifest-v24\.json/,
+  'the unique human-readable authority index must bind current manifest v24',
 )
 assert.match(
   currentHumanAuthority,
-  /Screen v22、Print\/PDF v23/,
-  'the human-readable current output matrix must name only Screen v22 and Print/PDF v23',
+  /Screen v24、Print\/PDF v25/,
+  'the human-readable current output matrix must name only Screen v24 and Print/PDF v25',
 )
 assert.doesNotMatch(
   currentHumanAuthority,
@@ -221,6 +221,22 @@ assert.match(
   manifestV23Migration,
   /v22[\s\S]*byte-for-byte resolvable/i,
   'manifest v23 migration must preserve the immutable v22 closure',
+)
+const manifestV24Migration = read('standards/paper-canonical/manifest-v24-migration.md')
+assert.match(
+  manifestV24Migration,
+  /Manifest v24[\s\S]*Screen v24[\s\S]*Print\/PDF v25/i,
+  'manifest v24 must record the Grammar Fill family-owned prompt authority closure',
+)
+assert.match(
+  manifestV24Migration,
+  /v23[\s\S]*byte-for-byte resolvable/i,
+  'manifest v24 migration must preserve the immutable v23 closure',
+)
+assert.match(
+  manifestV24Migration,
+  /family v2[\s\S]*Source Adapter v6[\s\S]*Question Group v2[\s\S]*Consumption Plan/i,
+  'manifest v24 must record the prompt and Plan occurrence-integrity boundary',
 )
 assert.equal(
   Object.hasOwn(currentAuthority.closure.schemas, 'consumer-contract-v1'),

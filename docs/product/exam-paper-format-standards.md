@@ -4,7 +4,7 @@
 
 本文件是唯一的人类可读索引；当前 canonical 编译、校验、发布和受支持的
 Screen / Print-PDF consumer 只从
-[`standards/paper-canonical/manifest-v23.json`](../../standards/paper-canonical/manifest-v23.json)
+[`standards/paper-canonical/manifest-v24.json`](../../standards/paper-canonical/manifest-v24.json)
 解析一份 digest-closed 的权威闭包。这里不复制卷型题号、分值、题组
 cardinality、清洗条件或字体/物理排版数值，也不能被 caller 当作第二套配置。
 
@@ -18,14 +18,28 @@ Renderer Typography、其 schema 及纯验证入口。未知版本、缺件、di
 任何会改变 admission、canonical 语义、Profile、normalization 或 renderer
 结果的变更，必须新增 versioned artifact、schema/semantic conformance fixture、
 迁移说明和 manifest 升版；已经被 Publication 引用的 artifact 不可原位修改。
-`manifest-v1.json` 至 `manifest-v21.json` 保留各自原始 digest-closed closure，
-供既有 Publication 解析；当前 Screen v22、Print/PDF v23 consumer contracts
-只绑定 v22 authority。v22 新增 Grammar Fill public-geometry-fixtures v1：
+`manifest-v1.json` 至 `manifest-v23.json` 保留各自原始 digest-closed closure，
+供既有 Publication 解析；当前 Screen v24、Print/PDF v25 consumer contracts
+只绑定 v24 authority。v24 以 Grammar Fill family v2、Question Group/Core
+v2、Source Adapter v6 与 reviewed prompt source capture 显式拥有每个 Blank
+的 `source_prompt` / `source_proven_none` 身份；public projection 只消费该
+versioned identity，不从 prose 或 renderer authority 反推 prompt。Grammar
+Fill rhythm v4 与 public-geometry-fixtures v3 不含 px/pt shadow geometry，
+fixture 选择还必须通过 compatible Consumption Plan 的 exact occurrence
+integrity 与 surface Consumer Contract。迁移说明见
+[`manifest-v24-migration.md`](../../standards/paper-canonical/manifest-v24-migration.md)。
+此前 v23 新增 Grammar Fill rhythm v3 与
+public-geometry-fixtures v2：canonical projection 显式携带每个 Blank 的
+source-backed prompt string 或 `null`，不从相邻 prose 推断 prompt；successor
+source/adversary/fixture closure 不含 px/pt shadow geometry；fixture 选择只接受
+exact v23 Consumption Plan 与 surface-compatible Consumer Contract。迁移说明见
+[`manifest-v23-migration.md`](../../standards/paper-canonical/manifest-v23-migration.md)。
+此前 v22 新增 Grammar Fill public-geometry-fixtures v1：
 它把 q56 wrapped-line、q58 line-end 所需的 40em usable-width proxy、跨页
 continuation 的 17em proxy 与 q55 producer page-break 身份绑定到真实
 Screen / Print HTML / PDF producer 输入，产物生成后禁止 verifier 注入或
 改写。迁移说明见
-[`manifest-v23-migration.md`](../../standards/paper-canonical/manifest-v23-migration.md)。
+[`manifest-v22-migration.md`](../../standards/paper-canonical/manifest-v22-migration.md)。
 此前 v21 以 `grammar-fill-rhythm-v2` 闭合 Grammar Fill
 Golden Geometry successor：它保留 v20 及 v1 measurement 的精确历史字节，
 并把 Question 63 纠正为与不可变 source/runtime 一致的 unprompted 身份；

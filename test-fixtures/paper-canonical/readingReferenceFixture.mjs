@@ -11,6 +11,7 @@ const hashes = Object.freeze({
   paperAsset: 'sha256:fe7feb2cc9554b00bbab96a7d4fe5e499513c564c28e6c314e0373e29b2ca7bf',
   answerKey: 'sha256:17502bb7685b83afc8847f3a44f8ac3c68defcb941ae75ba1ff14945c07daaf0',
   tableProof: 'sha256:bd12fcedbb71fb608210ffeaf84864c8aa3d9096a71d955cfd1e5db2aec53b35',
+  grammarFillPromptCapture: 'sha256:c20392a1ab530b6a327aa5a3b81b29682f85f7f6e5be48824c3398d814c477e8',
 })
 
 function readHashBoundBytes(url, expectedDigest) {
@@ -189,6 +190,13 @@ export function makeReadingCanonicalReferenceFixture() {
   const answerKey = readHashBoundBytes(new URL('answer-key.json', baseUrl), hashes.answerKey)
   const sourcePdf = readHashBoundBytes(new URL('../../scripts/import-pipeline/papers/paper-2026-i/source/paper.pdf', import.meta.url), hashes.sourcePdf)
   const tableProof = readHashBoundBytes(new URL('figures/reading-a-table-1.png', baseUrl), hashes.tableProof)
+  const grammarFillPromptCapture = readHashBoundBytes(
+    new URL(
+      '../paper-import/paper-2026-i-canonical-pilot/reviewed-evidence/grammar-fill-prompt-source-capture.json',
+      import.meta.url,
+    ),
+    hashes.grammarFillPromptCapture,
+  )
   const paper = JSON.parse(new TextDecoder().decode(paperAsset))
   const structuredReading = new TextEncoder().encode(
     JSON.stringify(makeReviewedReadingSourceCapture(paper)),
@@ -241,6 +249,16 @@ export function makeReadingCanonicalReferenceFixture() {
             roles: ['question_source', 'source_provenance'],
             bytes: sourcePdf,
             declared: { mediaType: 'application/pdf', originalName: 'paper.pdf' },
+          },
+          {
+            inputKey: 'grammar_fill_prompt_source_capture',
+            roles: ['structured_source', 'source_provenance'],
+            bytes: grammarFillPromptCapture,
+            declared: {
+              mediaType:
+                'application/vnd.eqb.grammar-fill-prompt-source-capture+json',
+              originalName: 'grammar-fill-prompt-source-capture.json',
+            },
           },
           {
             inputKey: 'table_visual_proof',

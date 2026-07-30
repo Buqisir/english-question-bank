@@ -208,7 +208,7 @@ assert.throws(
   { code: 'CANONICAL_PROJECTION_REJECTED' },
 )
 
-for (const paperId of ['paper-2026-i', 'paper-960d0f8d']) {
+for (const paperId of ['paper-2026-i']) {
   const fixture = makeSevenChoicesCanonicalReferenceFixture(paperId)
   const compilation = await exercisePublicSeams(fixture)
   assertRealEvidenceClosure(fixture, compilation)
@@ -217,6 +217,24 @@ for (const paperId of ['paper-2026-i', 'paper-960d0f8d']) {
   assert.deepEqual(supplemented.artifacts.canonicalPaper, compilation.artifacts.canonicalPaper)
   assert.deepEqual(supplemented.artifacts.normalizationReport, compilation.artifacts.normalizationReport)
 }
+const missingGrammarPromptAuthority =
+  makeSevenChoicesCanonicalReferenceFixture('paper-960d0f8d')
+const missingGrammarPromptCompilation = compileCanonicalPaper(
+  missingGrammarPromptAuthority.request,
+)
+assert.equal(
+  missingGrammarPromptCompilation.disposition,
+  'incomplete_source',
+  'a Seven Choices reference paper cannot publish a partial whole-paper Plan when Grammar Fill prompt authority is absent',
+)
+assert.equal(
+  missingGrammarPromptCompilation.artifacts.normalizationReport.diagnostics
+    .some(
+      (diagnostic) =>
+        diagnostic.code === 'GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_REQUIRED',
+    ),
+  true,
+)
 
 const negativeFixture = makeSevenChoicesCanonicalReferenceFixture('paper-2026-i')
 const sevenGroup = (evidence) => evidence.paper_asset.content.groups['group-2026-i-seven-choices']
