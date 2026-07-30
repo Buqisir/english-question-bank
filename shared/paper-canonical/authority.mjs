@@ -22,6 +22,7 @@ import manifestV21 from '../../standards/paper-canonical/manifest-v21.json' with
 import manifestV22 from '../../standards/paper-canonical/manifest-v22.json' with { type: 'json' }
 import manifestV23 from '../../standards/paper-canonical/manifest-v23.json' with { type: 'json' }
 import manifestV24 from '../../standards/paper-canonical/manifest-v24.json' with { type: 'json' }
+import manifestV25 from '../../standards/paper-canonical/manifest-v25.json' with { type: 'json' }
 import legacyRhythmManifestV13 from '../../standards/paper-canonical/history/manifest-v13-reading-rhythm/manifest-v13.json' with { type: 'json' }
 import legacyRhythmTypographyV3 from '../../standards/paper-canonical/history/manifest-v13-reading-rhythm/paper-typography-v3.json' with { type: 'json' }
 import legacyRhythmTypographyV3Schema from '../../standards/paper-canonical/history/manifest-v13-reading-rhythm/renderer-typography-v3.schema.json' with { type: 'json' }
@@ -33,6 +34,7 @@ import sourceAdaptersV3 from '../../standards/paper-canonical/adapters/source-ad
 import sourceAdaptersV4 from '../../standards/paper-canonical/adapters/source-adapters-v4.json' with { type: 'json' }
 import sourceAdaptersV5 from '../../standards/paper-canonical/adapters/source-adapters-v5.json' with { type: 'json' }
 import sourceAdaptersV6 from '../../standards/paper-canonical/adapters/source-adapters-v6.json' with { type: 'json' }
+import sourceAdaptersV7 from '../../standards/paper-canonical/adapters/source-adapters-v7.json' with { type: 'json' }
 import nck1 from '../../standards/paper-canonical/profiles/nck1-v1.json' with { type: 'json' }
 import zhejiangLegacy from '../../standards/paper-canonical/profiles/zhejiang-legacy-v1.json' with { type: 'json' }
 import nck1V2 from '../../standards/paper-canonical/profiles/nck1-v2.json' with { type: 'json' }
@@ -40,17 +42,21 @@ import nck1V3 from '../../standards/paper-canonical/profiles/nck1-v3.json' with 
 import nck1V4 from '../../standards/paper-canonical/profiles/nck1-v4.json' with { type: 'json' }
 import nck1V5 from '../../standards/paper-canonical/profiles/nck1-v5.json' with { type: 'json' }
 import nck1V6 from '../../standards/paper-canonical/profiles/nck1-v6.json' with { type: 'json' }
+import nck1V7 from '../../standards/paper-canonical/profiles/nck1-v7.json' with { type: 'json' }
 import zhejiangLegacyV2 from '../../standards/paper-canonical/profiles/zhejiang-legacy-v2.json' with { type: 'json' }
 import zhejiangLegacyV3 from '../../standards/paper-canonical/profiles/zhejiang-legacy-v3.json' with { type: 'json' }
 import zhejiangLegacyV4 from '../../standards/paper-canonical/profiles/zhejiang-legacy-v4.json' with { type: 'json' }
 import zhejiangLegacyV5 from '../../standards/paper-canonical/profiles/zhejiang-legacy-v5.json' with { type: 'json' }
+import zhejiangLegacyV6 from '../../standards/paper-canonical/profiles/zhejiang-legacy-v6.json' with { type: 'json' }
 import nationalLegacy from '../../standards/paper-canonical/profiles/national-legacy-v1.json' with { type: 'json' }
 import nationalLegacyV2 from '../../standards/paper-canonical/profiles/national-legacy-v2.json' with { type: 'json' }
+import nationalLegacyV3 from '../../standards/paper-canonical/profiles/national-legacy-v3.json' with { type: 'json' }
 import reading from '../../standards/paper-canonical/families/reading-v1.json' with { type: 'json' }
 import sevenChoices from '../../standards/paper-canonical/families/seven-choices-v1.json' with { type: 'json' }
 import cloze from '../../standards/paper-canonical/families/cloze-v1.json' with { type: 'json' }
 import grammarFill from '../../standards/paper-canonical/families/grammar-fill-v1.json' with { type: 'json' }
 import grammarFillV2 from '../../standards/paper-canonical/families/grammar-fill-v2.json' with { type: 'json' }
+import grammarFillV3 from '../../standards/paper-canonical/families/grammar-fill-v3.json' with { type: 'json' }
 import applicationWritingV1 from '../../standards/paper-canonical/families/application-writing-v1.json' with { type: 'json' }
 import applicationWritingV2 from '../../standards/paper-canonical/families/application-writing-v2.json' with { type: 'json' }
 import applicationWritingV3 from '../../standards/paper-canonical/families/application-writing-v3.json' with { type: 'json' }
@@ -75,6 +81,7 @@ import grammarFillRhythmV4 from '../../standards/paper-canonical/rendering/gramm
 import grammarFillPublicGeometryFixturesV1 from '../../standards/paper-canonical/rendering/grammar-fill-public-geometry-fixtures-v1.json' with { type: 'json' }
 import grammarFillPublicGeometryFixturesV2 from '../../standards/paper-canonical/rendering/grammar-fill-public-geometry-fixtures-v2.json' with { type: 'json' }
 import grammarFillPublicGeometryFixturesV3 from '../../standards/paper-canonical/rendering/grammar-fill-public-geometry-fixtures-v3.json' with { type: 'json' }
+import grammarFillPublicGeometryFixturesV4 from '../../standards/paper-canonical/rendering/grammar-fill-public-geometry-fixtures-v4.json' with { type: 'json' }
 import standardManifestSchema from '../../schemas/paper-canonical/standard-manifest-v1.schema.json' with { type: 'json' }
 import coreSchema from '../../schemas/paper-canonical/core-invariants-v1.schema.json' with { type: 'json' }
 import coreV2Schema from '../../schemas/paper-canonical/core-invariants-v2.schema.json' with { type: 'json' }
@@ -84,9 +91,11 @@ import familyV2Schema from '../../schemas/paper-canonical/canonical-family-contr
 import familyV3Schema from '../../schemas/paper-canonical/canonical-family-contract-v3.schema.json' with { type: 'json' }
 import familyV4Schema from '../../schemas/paper-canonical/canonical-family-contract-v4.schema.json' with { type: 'json' }
 import familyV5Schema from '../../schemas/paper-canonical/canonical-family-contract-v5.schema.json' with { type: 'json' }
+import familyV6Schema from '../../schemas/paper-canonical/canonical-family-contract-v6.schema.json' with { type: 'json' }
 import grammarFillVariantSchema from '../../schemas/paper-canonical/canonical-grammar-fill-variant-v1.schema.json' with { type: 'json' }
 import grammarFillPromptSourceCaptureSchema from '../../schemas/paper-canonical/grammar-fill-prompt-source-capture-v1.schema.json' with { type: 'json' }
 import grammarFillPromptProvisionSchema from '../../schemas/paper-canonical/grammar-fill-prompt-provision-v1.schema.json' with { type: 'json' }
+import grammarFillPromptProvisionV2Schema from '../../schemas/paper-canonical/grammar-fill-prompt-provision-v2.schema.json' with { type: 'json' }
 import applicationWritingVariantSchema from '../../schemas/paper-canonical/canonical-application-writing-variant-v1.schema.json' with { type: 'json' }
 import applicationWritingSourceCaptureSchema from '../../schemas/paper-canonical/application-writing-source-capture-v1.schema.json' with { type: 'json' }
 import applicationWritingSourceTranscriptionSchema from '../../schemas/paper-canonical/application-writing-source-transcription-v1.schema.json' with { type: 'json' }
@@ -115,6 +124,7 @@ import grammarFillRhythmV4Schema from '../../schemas/paper-canonical/grammar-fil
 import grammarFillPublicGeometryFixturesV1Schema from '../../schemas/paper-canonical/grammar-fill-public-geometry-fixtures-v1.schema.json' with { type: 'json' }
 import grammarFillPublicGeometryFixturesV2Schema from '../../schemas/paper-canonical/grammar-fill-public-geometry-fixtures-v2.schema.json' with { type: 'json' }
 import grammarFillPublicGeometryFixturesV3Schema from '../../schemas/paper-canonical/grammar-fill-public-geometry-fixtures-v3.schema.json' with { type: 'json' }
+import grammarFillPublicGeometryFixturesV4Schema from '../../schemas/paper-canonical/grammar-fill-public-geometry-fixtures-v4.schema.json' with { type: 'json' }
 import sourceCaptureSchema from '../../schemas/paper-canonical/source-capture-v1.schema.json' with { type: 'json' }
 import planSchema from '../../schemas/paper-canonical/canonical-paper-plan-v1.schema.json' with { type: 'json' }
 import groupSchema from '../../schemas/paper-canonical/canonical-question-group-v1.schema.json' with { type: 'json' }
@@ -143,6 +153,7 @@ import reportV21Schema from '../../schemas/paper-canonical/normalization-report-
 import reportV22Schema from '../../schemas/paper-canonical/normalization-report-v22.schema.json' with { type: 'json' }
 import reportV23Schema from '../../schemas/paper-canonical/normalization-report-v23.schema.json' with { type: 'json' }
 import reportV24Schema from '../../schemas/paper-canonical/normalization-report-v24.schema.json' with { type: 'json' }
+import reportV25Schema from '../../schemas/paper-canonical/normalization-report-v25.schema.json' with { type: 'json' }
 import legacyReportV9Schema from '../../schemas/paper-canonical/normalization-report-v9.schema.json' with { type: 'json' }
 import publicationSchema from '../../schemas/paper-canonical/canonical-paper-publication-v1.schema.json' with { type: 'json' }
 import publicationV2Schema from '../../schemas/paper-canonical/canonical-paper-publication-v2.schema.json' with { type: 'json' }
@@ -168,6 +179,7 @@ import publicationV21Schema from '../../schemas/paper-canonical/canonical-paper-
 import publicationV22Schema from '../../schemas/paper-canonical/canonical-paper-publication-v22.schema.json' with { type: 'json' }
 import publicationV23Schema from '../../schemas/paper-canonical/canonical-paper-publication-v23.schema.json' with { type: 'json' }
 import publicationV24Schema from '../../schemas/paper-canonical/canonical-paper-publication-v24.schema.json' with { type: 'json' }
+import publicationV25Schema from '../../schemas/paper-canonical/canonical-paper-publication-v25.schema.json' with { type: 'json' }
 import legacyPublicationV9Schema from '../../schemas/paper-canonical/canonical-paper-publication-v9.schema.json' with { type: 'json' }
 import consumerSchema from '../../schemas/paper-canonical/consumer-contract-v1.schema.json' with { type: 'json' }
 import consumerV2Schema from '../../schemas/paper-canonical/consumer-contract-v2.schema.json' with { type: 'json' }
@@ -399,7 +411,7 @@ function validateNck1WritingChrome(profile) {
     ? ['writing.continuation.prompt']
     : []
   const valid = (
-    ['3', '4', '5', '6'].includes(profile.version)
+    ['3', '4', '5', '6', '7'].includes(profile.version)
     && writingParts.length === 1
     && part.ordinal === 4
     && part.titleInstructionRef === 'part.writing'
@@ -454,7 +466,7 @@ function validateZhejiangWritingChrome(profile) {
   const application = sections[0]
   const continuation = sections[1]
   const valid = (
-    ['4', '5'].includes(profile?.version)
+    ['4', '5', '6'].includes(profile?.version)
     && writingParts.length === 1
     && part.ordinal === 4
     && part.titleInstructionRef === 'part.writing'
@@ -969,8 +981,10 @@ function validateGrammarFillPublicGeometryFixtures(
   artifact,
   manifestVersion,
 ) {
-  const expected = Number(manifestVersion) >= 24
-    ? grammarFillPublicGeometryFixturesV3
+  const expected = Number(manifestVersion) >= 25
+    ? grammarFillPublicGeometryFixturesV4
+    : Number(manifestVersion) >= 24
+      ? grammarFillPublicGeometryFixturesV3
     : Number(manifestVersion) >= 23
       ? grammarFillPublicGeometryFixturesV2
     : grammarFillPublicGeometryFixturesV1
@@ -1150,6 +1164,12 @@ export function validateAuthorityClosure({
   const coreArtifact = Object.values(artifacts || {}).find((artifact) => artifact?.owner === 'core')
   if (!coreArtifact || coreArtifact.projectionContract !== 'canonical-projector-v1') issues.push(issue('AUTHORITY_CORE_CLOSURE', '$.artifacts', 'Core invariants must pin the projector'))
   if (Number(candidateManifest?.version) >= 24) {
+    const promptContractVersion =
+      Number(candidateManifest.version) >= 25 ? '2' : '1'
+    const grammarFillFamilyAuthority =
+      Number(candidateManifest.version) >= 25
+        ? grammarFillV3
+        : grammarFillV2
     const grammarFillFamily = familyArtifacts.get('grammar-fill')
     const adapter = Object.values(artifacts || {}).find(
       (artifact) => artifact?.owner === 'source_adapter',
@@ -1157,18 +1177,21 @@ export function validateAuthorityClosure({
     const promptAdapter = adapter?.adapters?.filter(
       (candidate) =>
         candidate?.adapterId === 'grammar-fill-prompt-evidence'
-        && candidate?.version === '1'
+        && candidate?.version === promptContractVersion
         && candidate?.mediaType
           === 'application/vnd.eqb.grammar-fill-prompt-source-capture+json',
     )
     if (
-      digestJson(grammarFillFamily) !== digestJson(grammarFillV2)
+      digestJson(grammarFillFamily) !== digestJson(grammarFillFamilyAuthority)
       || grammarFillFamily?.variantSchemaId
         !== 'canonical-grammar-fill-variant-v1'
       || grammarFillFamily?.promptEvidenceSchemaId
         !== 'grammar-fill-prompt-source-capture-v1'
       || grammarFillFamily?.promptProvisionSchemaId
-        !== 'grammar-fill-prompt-provision-v1'
+        !== `grammar-fill-prompt-provision-v${promptContractVersion}`
+      || !schemaById.has(
+        `grammar-fill-prompt-provision-v${promptContractVersion}`,
+      )
     ) {
       issues.push(issue(
         'GRAMMAR_FILL_PROMPT_AUTHORITY_INVALID',
@@ -1328,6 +1351,16 @@ const artifactsV24 = {
   'renderer-grammar-fill-rhythm': grammarFillRhythmV4,
   'renderer-grammar-fill-public-geometry-fixtures':
     grammarFillPublicGeometryFixturesV3,
+}
+const artifactsV25 = {
+  ...artifactsV24,
+  adapter: sourceAdaptersV7,
+  'profile-nck1': nck1V7,
+  'profile-zhejiang-legacy': zhejiangLegacyV6,
+  'profile-national-legacy': nationalLegacyV3,
+  'family-grammar-fill': grammarFillV3,
+  'renderer-grammar-fill-public-geometry-fixtures':
+    grammarFillPublicGeometryFixturesV4,
 }
 const schemasV1 = { ...sharedSchemas, 'renderer-typography-v1': typographyV1Schema, 'normalization-rules-v1': normalizationSchema, 'normalization-report-v1': reportSchema, 'canonical-paper-publication-v1': publicationSchema }
 const schemasV2 = { ...sharedSchemas, 'renderer-typography-v1': typographyV1Schema, 'normalization-rules-v2': normalizationV2Schema, 'normalization-report-v2': reportV2Schema, 'canonical-paper-publication-v2': publicationV2Schema }
@@ -1574,6 +1607,24 @@ const schemasV24 = {
   'normalization-report-v24': reportV24Schema,
   'canonical-paper-publication-v24': publicationV24Schema,
 }
+const schemasV25 = {
+  ...Object.fromEntries(
+    Object.entries(schemasV24).filter(([schemaId]) =>
+      ![
+        'canonical-family-contract-v5',
+        'grammar-fill-prompt-provision-v1',
+        'grammar-fill-public-geometry-fixtures-v3',
+        'normalization-report-v24',
+        'canonical-paper-publication-v24',
+      ].includes(schemaId)),
+  ),
+  'canonical-family-contract-v6': familyV6Schema,
+  'grammar-fill-prompt-provision-v2': grammarFillPromptProvisionV2Schema,
+  'grammar-fill-public-geometry-fixtures-v4':
+    grammarFillPublicGeometryFixturesV4Schema,
+  'normalization-report-v25': reportV25Schema,
+  'canonical-paper-publication-v25': publicationV25Schema,
+}
 const validationV1 = validateAuthorityClosure({ manifest: manifestV1, artifacts: artifactsV1, schemas: schemasV1 })
 const validationV2 = validateAuthorityClosure({ manifest: manifestV2, artifacts: artifactsV2, schemas: schemasV2 })
 const validationV3 = validateAuthorityClosure({ manifest: manifestV3, artifacts: artifactsV3, schemas: schemasV3 })
@@ -1603,6 +1654,7 @@ const validationV21 = validateAuthorityClosure({ manifest: manifestV21, artifact
 const validationV22 = validateAuthorityClosure({ manifest: manifestV22, artifacts: artifactsV22, schemas: schemasV22 })
 const validationV23 = validateAuthorityClosure({ manifest: manifestV23, artifacts: artifactsV23, schemas: schemasV23 })
 const validationV24 = validateAuthorityClosure({ manifest: manifestV24, artifacts: artifactsV24, schemas: schemasV24 })
+const validationV25 = validateAuthorityClosure({ manifest: manifestV25, artifacts: artifactsV25, schemas: schemasV25 })
 const validations = [
   validationV1,
   validationV2,
@@ -1629,6 +1681,7 @@ const validations = [
   validationV22,
   validationV23,
   validationV24,
+  validationV25,
 ]
 if (validations.some((validation) => !validation.ok)) {
   throw new Error(`Invalid checked-in canonical authority: ${JSON.stringify(validations.flatMap((validation) => validation.issues))}`)
@@ -1668,6 +1721,7 @@ const authorities = [
   { manifest: manifestV22, artifacts: artifactsV22, schemas: schemasV22 },
   { manifest: manifestV23, artifacts: artifactsV23, schemas: schemasV23 },
   { manifest: manifestV24, artifacts: artifactsV24, schemas: schemasV24 },
+  { manifest: manifestV25, artifacts: artifactsV25, schemas: schemasV25 },
 ].map((authority) => ({
   ...authority,
   authorityRef: authorityRef(authority.manifest),
@@ -1675,7 +1729,7 @@ const authorities = [
   families: new Map(Object.values(authority.artifacts).filter((artifact) => artifact?.owner === 'family').map((family) => [family.familyContractId, family])),
 }))
 
-export const canonicalAuthorityRef = authorities.find((authority) => authority.manifest.version === '24').authorityRef
+export const canonicalAuthorityRef = authorities.find((authority) => authority.manifest.version === '25').authorityRef
 
 export function resolveCanonicalAuthority(authorityRef) {
   const authority = authorities.find((candidate) => candidate.authorityRef.manifestId === authorityRef?.manifestId && candidate.authorityRef.manifestVersion === authorityRef?.manifestVersion && candidate.authorityRef.manifestDigest === authorityRef?.manifestDigest)

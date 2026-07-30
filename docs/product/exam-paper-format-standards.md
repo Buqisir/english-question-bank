@@ -4,7 +4,7 @@
 
 本文件是唯一的人类可读索引；当前 canonical 编译、校验、发布和受支持的
 Screen / Print-PDF consumer 只从
-[`standards/paper-canonical/manifest-v24.json`](../../standards/paper-canonical/manifest-v24.json)
+[`standards/paper-canonical/manifest-v25.json`](../../standards/paper-canonical/manifest-v25.json)
 解析一份 digest-closed 的权威闭包。这里不复制卷型题号、分值、题组
 cardinality、清洗条件或字体/物理排版数值，也不能被 caller 当作第二套配置。
 
@@ -18,9 +18,17 @@ Renderer Typography、其 schema 及纯验证入口。未知版本、缺件、di
 任何会改变 admission、canonical 语义、Profile、normalization 或 renderer
 结果的变更，必须新增 versioned artifact、schema/semantic conformance fixture、
 迁移说明和 manifest 升版；已经被 Publication 引用的 artifact 不可原位修改。
-`manifest-v1.json` 至 `manifest-v23.json` 保留各自原始 digest-closed closure，
-供既有 Publication 解析；当前 Screen v24、Print/PDF v25 consumer contracts
-只绑定 v24 authority。v24 以 Grammar Fill family v2、Question Group/Core
+`manifest-v1.json` 至 `manifest-v24.json` 保留各自原始 digest-closed closure，
+供既有 Publication 解析；当前 Screen v25、Print/PDF v26 consumer contracts
+只绑定 v25 authority。v25 以 Grammar Fill family v3、Source Adapter v7 与
+`grammar-fill-prompt-provision-v2` 闭合 prompt evidence：`source_prompt`
+必须携带 `prompt`，`source_proven_none` 禁止携带 `prompt`；同一版本化契约在
+admission、canonical projection 与 sealed Publication validation 三处执行，
+矛盾证据不能再被接受后静默丢弃。迁移说明见
+[`manifest-v25-migration.md`](../../standards/paper-canonical/manifest-v25-migration.md)。
+public-geometry-fixtures v4 保留 v3 的全部 geometry 与 occurrence digest，
+只把 compatible Consumption Plan 闭包推进到 v25。
+此前 v24 以 Grammar Fill family v2、Question Group/Core
 v2、Source Adapter v6 与 reviewed prompt source capture 显式拥有每个 Blank
 的 `source_prompt` / `source_proven_none` 身份；public projection 只消费该
 versioned identity，不从 prose 或 renderer authority 反推 prompt。Grammar

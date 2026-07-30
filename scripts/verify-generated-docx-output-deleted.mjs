@@ -34,7 +34,7 @@ assert.deepEqual(
   'supported canonical consumers must be exactly Screen and Print/PDF',
 )
 
-assert.equal(canonicalAuthorityRef.manifestVersion, '24')
+assert.equal(canonicalAuthorityRef.manifestVersion, '25')
 const currentAuthority = resolveCanonicalAuthority(canonicalAuthorityRef)
 assert.equal(currentAuthority.ok, true)
 
@@ -42,13 +42,13 @@ const humanAuthority = read('docs/product/exam-paper-format-standards.md')
 const currentHumanAuthority = humanAuthority.split('## v2 历史排版证据')[0]
 assert.match(
   currentHumanAuthority,
-  /standards\/paper-canonical\/manifest-v24\.json/,
-  'the unique human-readable authority index must bind current manifest v24',
+  /standards\/paper-canonical\/manifest-v25\.json/,
+  'the unique human-readable authority index must bind current manifest v25',
 )
 assert.match(
   currentHumanAuthority,
-  /Screen v24、Print\/PDF v25/,
-  'the human-readable current output matrix must name only Screen v24 and Print/PDF v25',
+  /Screen v25、Print\/PDF v26/,
+  'the human-readable current output matrix must name only Screen v25 and Print/PDF v26',
 )
 assert.doesNotMatch(
   currentHumanAuthority,
@@ -237,6 +237,22 @@ assert.match(
   manifestV24Migration,
   /family v2[\s\S]*Source Adapter v6[\s\S]*Question Group v2[\s\S]*Consumption Plan/i,
   'manifest v24 must record the prompt and Plan occurrence-integrity boundary',
+)
+const manifestV25Migration = read('standards/paper-canonical/manifest-v25-migration.md')
+assert.match(
+  manifestV25Migration,
+  /Manifest v25[\s\S]*Screen v25[\s\S]*Print\/PDF v26/i,
+  'manifest v25 must record the closed Grammar Fill prompt-provision successor',
+)
+assert.match(
+  manifestV25Migration,
+  /Manifest v24[\s\S]*remain unchanged and resolvable/i,
+  'manifest v25 migration must preserve the immutable v24 closure',
+)
+assert.match(
+  manifestV25Migration,
+  /source_prompt[\s\S]*requires[\s\S]*source_proven_none[\s\S]*forbids/i,
+  'manifest v25 must record both exact prompt-provision shapes',
 )
 assert.equal(
   Object.hasOwn(currentAuthority.closure.schemas, 'consumer-contract-v1'),

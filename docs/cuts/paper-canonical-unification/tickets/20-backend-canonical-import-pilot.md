@@ -747,3 +747,36 @@ prefix. Public projection now preserves an ordinary parenthetical after an
 unprompted Blank, while reversed bindings fail both projection and sealed
 Publication validation. The v4 declaration no longer exposes renderer-owned
 prompt semantics.
+
+Grammar Fill Golden Geometry sixth focused-review Must Fix closure
+(2026-07-30):
+The focused re-review found one remaining v24 contradiction: a reviewed
+provision row could declare `source_proven_none` while also carrying `prompt`.
+The v1 provision schema accepted that shape, and compilation conditionally
+discarded the prompt after validation. Manifest v24 and every previously
+published byte remain unchanged.
+
+Manifest v25 publishes the immutable successor closure. Grammar Fill family
+v3 selects the executable `grammar-fill-prompt-provision-v2` contract:
+`source_prompt` requires `prompt`, while `source_proven_none` forbids it.
+Source Adapter v7 registers prompt-evidence adapter v2 and applies the same
+contract to every reviewed source row before it may create an observation or
+binding. The executable branch check is Grammar Fill-specific; the generic
+schema validator and every other family retain their prior behavior.
+Public-geometry-fixtures v4 preserves every v3 variant and occurrence digest
+while rebinding its compatible Consumption Plan to Manifest v25. Screen v25
+and Print/PDF v26 bind only the new manifest and family; renderer geometry and
+every other reviewed Grammar Fill behavior are unchanged.
+
+Direct regressions reject the contradiction at canonical import admission,
+canonical projection, and sealed Publication validation. The latter two
+validate the exact source observation against the family-owned v2 provision
+contract, so a coordinated integrity-redigested attack still fails before a
+public projection can exist. No Owner QA provisioning, non-blocking
+duplicated-code repair, other-family implementation, Ticket 21,
+production/R2 action, or generated-DOCX work was performed.
+
+Focused foundation, Publication, admission, recovery, Grammar Fill
+publication/consumption, generated-DOCX retirement, app build/typecheck, and
+ordinary backend pilot checks pass. Full `pnpm -C app run verify:all` reports
+115 PASS / 1 declared off-repo SKIP / 0 FAIL, and `git diff --check` passes.

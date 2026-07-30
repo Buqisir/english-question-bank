@@ -8,6 +8,9 @@ import {
   buildNck1CanonicalImportRequest,
 } from '../server/paper-canonical/nck1SourceAdapter.mjs'
 import {
+  admitCanonicalPaperImport,
+} from '../server/paper-canonical/publication.mjs'
+import {
   compileCanonicalPaper,
 } from '../shared/paper-canonical/compiler.mjs'
 import {
@@ -98,6 +101,36 @@ function withoutOfficialAnswer(questionId) {
     answerKeyBytes: Buffer.from(JSON.stringify(answerKey)),
   })
 }
+
+const contradictoryPromptEvidence = JSON.parse(
+  bytes('reviewed-evidence/grammar-fill-prompt-source-capture.json'),
+)
+const contradictoryUnpromptedRow = contradictoryPromptEvidence.rows.find(
+  (row) => row.provision === 'source_proven_none',
+)
+contradictoryUnpromptedRow.prompt = 'contradictory-source-prompt'
+const contradictoryPromptAdmission = admitCanonicalPaperImport({
+  request: buildPilotRequest({
+    grammarFillPromptSourceCaptureBytes: Buffer.from(
+      JSON.stringify(contradictoryPromptEvidence),
+    ),
+  }),
+  sourceAssetVersion: 1,
+  sourceAsset: bytes('paper-asset.json'),
+})
+assert.equal(
+  contradictoryPromptAdmission.ok,
+  false,
+  'admission rejects source_proven_none evidence that also carries prompt',
+)
+assert.equal(
+  contradictoryPromptAdmission.diagnostics.some(
+    (diagnostic) =>
+      diagnostic.code === 'GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_INVALID',
+  ),
+  true,
+  'admission reports the contradictory prompt evidence contract',
+)
 
 const missingAnswer = compileCanonicalPaper(
   withoutOfficialAnswer('q-2026-i-021'),

@@ -1,7 +1,10 @@
 import { canonicalAuthorityRef, resolveCanonicalAuthority, slotsForProfile, validateJsonSchema } from './authority.mjs'
 import { validateApplicationWritingContract } from './applicationWriting.mjs'
 import { validateContinuationWritingContract } from './continuationWriting.mjs'
-import { validateGrammarFillPromptContract } from './grammarFillPromptContract.mjs'
+import {
+  validateGrammarFillPromptContract,
+  validateGrammarFillPromptProvision,
+} from './grammarFillPromptContract.mjs'
 import { appendListeningInactiveClosures } from './listeningInactive.mjs'
 import { validateReadingContract } from './reading.mjs'
 import { validateSevenChoicesContract } from './sevenChoices.mjs'
@@ -138,6 +141,8 @@ function grammarFillPromptBindingsFromPaper({
   source,
   diagnostics,
   sourceEvidenceSchema,
+  promptProvisionSchema,
+  promptAdapterVersion,
 }) {
   const evidence = promptEntry?.value
   const evidenceIssues = sourceEvidenceSchema
@@ -163,8 +168,19 @@ function grammarFillPromptBindingsFromPaper({
       )
   )
   const rows = Array.isArray(evidence?.rows) ? evidence.rows : []
+  const promptProvisionIssues = rows.flatMap((row, index) =>
+    validateGrammarFillPromptProvision(
+      {
+        blankId: row?.blankId,
+        provision: row?.provision,
+        ...(Object.hasOwn(row || {}, 'prompt') ? { prompt: row.prompt } : {}),
+      },
+      promptProvisionSchema,
+      `$.evidence.grammarFillPromptSourceCapture.rows[${index}]`,
+    ))
   if (
     evidenceIssues.length > 0
+    || promptProvisionIssues.length > 0
     || !sourceBindingsValid
     || rows.length !== group.blankIds.length
     || rows.some(
@@ -225,7 +241,7 @@ function grammarFillPromptBindingsFromPaper({
         span,
         extraction: {
           adapterId: 'grammar-fill-prompt-evidence',
-          version: '1',
+          version: promptAdapterVersion,
         },
       })
     }
@@ -1272,6 +1288,16 @@ function adaptReferenceFamilies(parsed, documents, diagnostics) {
                 referenceAuthority.families.get('grammar-fill')
                   ?.promptEvidenceSchemaId
               ],
+            promptProvisionSchema:
+              referenceAuthority.schemas[
+                referenceAuthority.families.get('grammar-fill')
+                  ?.promptProvisionSchemaId
+              ],
+            promptAdapterVersion:
+              referenceAuthority.artifacts.adapter.adapters.find(
+                (adapter) =>
+                  adapter.adapterId === 'grammar-fill-prompt-evidence',
+              )?.version,
           })
         : null
     const sourceGroup = {

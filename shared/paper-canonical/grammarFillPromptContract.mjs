@@ -5,6 +5,33 @@ function issue(code, path, message) {
   return { code, path, message }
 }
 
+export function validateGrammarFillPromptProvision(
+  value,
+  schema,
+  path = '$.grammarFillPromptProvision',
+) {
+  if (schema?.$id !== 'grammar-fill-prompt-provision-v2') {
+    return validateJsonSchema(value, schema, path)
+  }
+  if (!Array.isArray(schema.oneOf)) {
+    return [issue(
+      'SCHEMA_ONE_OF',
+      path,
+      'Grammar Fill prompt provision v2 requires exactly one schema branch',
+    )]
+  }
+  const matchingBranches = schema.oneOf.filter(
+    (branch) => validateJsonSchema(value, branch, path).length === 0,
+  )
+  return matchingBranches.length === 1
+    ? []
+    : [issue(
+        'SCHEMA_ONE_OF',
+        path,
+        'Expected exactly one Grammar Fill prompt provision branch to match',
+      )]
+}
+
 function exactPromptPrefixAgrees(following, prompt) {
   if (following?.kind !== 'text' || typeof following.text !== 'string') {
     return false
@@ -70,7 +97,7 @@ export function validateGrammarFillPromptContract({
     const observationValid = (
       observation?.kind === 'grammar_fill_prompt_provision'
       && isRecordValue(promptProvisionSchema)
-      && validateJsonSchema(
+      && validateGrammarFillPromptProvision(
         observationValue,
         promptProvisionSchema,
         '$.sourceCapture.observations.promptProvision',

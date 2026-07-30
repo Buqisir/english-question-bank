@@ -5,13 +5,14 @@ import manifestV1 from '../standards/paper-canonical/manifest-v1.json' with { ty
 import manifestV13 from '../standards/paper-canonical/manifest-v13.json' with { type: 'json' }
 import clozeRhythmV2Conformance from '../test-fixtures/paper-canonical/cloze-rhythm-v2-conformance.json' with { type: 'json' }
 import grammarFillRhythmV4Conformance from '../test-fixtures/paper-canonical/grammar-fill-rhythm-v4-conformance.json' with { type: 'json' }
-import grammarFillPublicGeometryFixturesV3Conformance from '../test-fixtures/paper-canonical/grammar-fill-public-geometry-fixtures-v3-conformance.json' with { type: 'json' }
+import grammarFillPublicGeometryFixturesV4Conformance from '../test-fixtures/paper-canonical/grammar-fill-public-geometry-fixtures-v4-conformance.json' with { type: 'json' }
 import sevenChoicesRhythmV3Conformance from '../test-fixtures/paper-canonical/seven-choices-rhythm-v3-conformance.json' with { type: 'json' }
 
 import { canonicalAuthorityRef, compileCanonicalPaper, stableStringify, validateExactTransformationRecords } from '../shared/paper-canonical/compiler.mjs'
 import { resolveCanonicalAuthority, slotsForProfile, validateAuthorityClosure } from '../shared/paper-canonical/authority.mjs'
 import { consumerContractRefs } from '../shared/paper-canonical/consumers.mjs'
 import { resolveGrammarFillPublicGeometryFixture } from '../shared/paper-canonical/grammarFillPublicGeometryFixtures.mjs'
+import { validateGrammarFillPromptProvision } from '../shared/paper-canonical/grammarFillPromptContract.mjs'
 import { projectCanonicalPaper } from '../shared/paper-canonical/projector.mjs'
 import { digestJson, sha256 } from '../shared/paper-canonical/stable.mjs'
 import { makeReadyCanonicalFixture } from '../test-fixtures/paper-canonical/foundationFixture.mjs'
@@ -55,6 +56,51 @@ assert.equal(first.artifacts.canonicalPaper.paperPlan.completeness.status, 'comp
 assert.equal(first.artifacts.canonicalPaper.questionGroups.length, 9)
 
 const closure = resolveCanonicalAuthority(canonicalAuthorityRef).closure
+const grammarFillPromptProvisionV2 =
+  closure.schemas['grammar-fill-prompt-provision-v2']
+assert.deepEqual(
+  validateGrammarFillPromptProvision(
+    {
+      blankId: 'blank:prompted',
+      provision: 'source_prompt',
+      prompt: 'hold',
+    },
+    grammarFillPromptProvisionV2,
+  ),
+  [],
+  'the v2 provision contract accepts source_prompt with prompt',
+)
+assert.deepEqual(
+  validateGrammarFillPromptProvision(
+    {
+      blankId: 'blank:unprompted',
+      provision: 'source_proven_none',
+    },
+    grammarFillPromptProvisionV2,
+  ),
+  [],
+  'the v2 provision contract accepts source_proven_none without prompt',
+)
+for (const contradictoryProvision of [
+  {
+    blankId: 'blank:prompted',
+    provision: 'source_prompt',
+  },
+  {
+    blankId: 'blank:unprompted',
+    provision: 'source_proven_none',
+    prompt: 'contradictory-source-prompt',
+  },
+]) {
+  assert.equal(
+    validateGrammarFillPromptProvision(
+      contradictoryProvision,
+      grammarFillPromptProvisionV2,
+    ).some((issue) => issue.code === 'SCHEMA_ONE_OF'),
+    true,
+    'the v2 provision contract closes prompt presence by provision kind',
+  )
+}
 const clozeRhythmV2 = closure.artifacts['renderer-cloze-rhythm']
 assert.deepEqual(
   {
@@ -230,31 +276,31 @@ for (const leafPath of visitAuthorityLeaves(grammarFillRhythmV4)) {
     },
   )
 }
-const grammarFillPublicGeometryFixturesV3 =
+const grammarFillPublicGeometryFixturesV4 =
   closure.artifacts['renderer-grammar-fill-public-geometry-fixtures']
 assert.equal(
-  grammarFillPublicGeometryFixturesV3.schemaVersion,
-  'grammar-fill-public-geometry-fixtures-v3',
+  grammarFillPublicGeometryFixturesV4.schemaVersion,
+  'grammar-fill-public-geometry-fixtures-v4',
 )
 assert.deepEqual(
-  Object.keys(grammarFillPublicGeometryFixturesV3.variants).sort(),
-  [...grammarFillPublicGeometryFixturesV3Conformance.positive.variantIds]
+  Object.keys(grammarFillPublicGeometryFixturesV4.variants).sort(),
+  [...grammarFillPublicGeometryFixturesV4Conformance.positive.variantIds]
     .sort(),
 )
 assertRendererAuthorityMutationRejected(
   'renderer-grammar-fill-public-geometry-fixtures',
-  grammarFillPublicGeometryFixturesV3Conformance,
+  grammarFillPublicGeometryFixturesV4Conformance,
   'grammar-fill-public-geometry-fixtures-complete-value-closure',
   (artifact) => {
     artifact.variants['screen-wrapped-line']
       .paragraphWidths[0].usableWidthEm += 999
   },
 )
-for (const attack of grammarFillPublicGeometryFixturesV3Conformance
+for (const attack of grammarFillPublicGeometryFixturesV4Conformance
   .shadowGeometryAttacks) {
   assertRendererAuthorityMutationRejected(
     'renderer-grammar-fill-public-geometry-fixtures',
-    grammarFillPublicGeometryFixturesV3Conformance,
+    grammarFillPublicGeometryFixturesV4Conformance,
     attack.caseId,
     (artifact) => {
       artifact.variants['screen-wrapped-line'][attack.fieldName] =
@@ -270,14 +316,14 @@ fixtureRemovalManifest.artifacts = fixtureRemovalManifest.artifacts.filter(
 )
 fixtureRemovalManifest.schemas = fixtureRemovalManifest.schemas.filter(
   (descriptor) =>
-    descriptor.id !== 'grammar-fill-public-geometry-fixtures-v3',
+    descriptor.id !== 'grammar-fill-public-geometry-fixtures-v4',
 )
 const fixtureRemovalArtifacts = structuredClone(closure.artifacts)
 delete fixtureRemovalArtifacts[
   'renderer-grammar-fill-public-geometry-fixtures'
 ]
 const fixtureRemovalSchemas = structuredClone(closure.schemas)
-delete fixtureRemovalSchemas['grammar-fill-public-geometry-fixtures-v3']
+delete fixtureRemovalSchemas['grammar-fill-public-geometry-fixtures-v4']
 const fixtureRemovalValidation = validateAuthorityClosure({
   manifest: fixtureRemovalManifest,
   artifacts: fixtureRemovalArtifacts,
@@ -484,6 +530,39 @@ assert.throws(
     authorityClosure: closure,
   }),
   { code: 'CANONICAL_PROJECTION_REJECTED' },
+)
+
+const contradictoryPromptProjectionCapture = structuredClone(
+  first.artifacts.sourceCapture,
+)
+const contradictoryPromptProjectionGroups = structuredClone(
+  first.artifacts.canonicalPaper.questionGroups,
+)
+const contradictoryPromptProjectionGrammarFill =
+  contradictoryPromptProjectionGroups.find(
+    (group) => group.variant.family === 'grammar-fill',
+  )
+const contradictoryPromptProjectionBinding =
+  contradictoryPromptProjectionGrammarFill.variant.promptBindings.find(
+    (binding) => binding.provision === 'source_proven_none',
+  )
+const contradictoryPromptProjectionObservation =
+  contradictoryPromptProjectionCapture.observations.find(
+    (observation) =>
+      observation.observationId
+        === contradictoryPromptProjectionBinding.authorityObservationRef,
+  )
+contradictoryPromptProjectionObservation.value.prompt =
+  'contradictory-source-prompt'
+assert.throws(
+  () => projectCanonicalPaper({
+    plan: first.artifacts.canonicalPaper.paperPlan,
+    groups: contradictoryPromptProjectionGroups,
+    sourceCapture: contradictoryPromptProjectionCapture,
+    authorityClosure: closure,
+  }),
+  { code: 'CANONICAL_PROJECTION_REJECTED' },
+  'canonical projection rejects source_proven_none evidence that also carries prompt',
 )
 
 const ordinaryParentheticalGroups = structuredClone(

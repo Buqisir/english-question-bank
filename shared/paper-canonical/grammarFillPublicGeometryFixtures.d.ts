@@ -15,9 +15,9 @@ export type GrammarFillPublicGeometryFixture = Readonly<{
 }>
 
 export declare const grammarFillPublicGeometryFixtures: Readonly<{
-  schemaVersion: 'grammar-fill-public-geometry-fixtures-v3'
+  schemaVersion: 'grammar-fill-public-geometry-fixtures-v4'
   id: 'grammar-fill-public-geometry-fixtures'
-  version: '3'
+  version: '4'
   owner: 'renderer_typography'
   paper: 'a4'
   sourceOracle: Readonly<{ path: string; sha256: string }>
@@ -28,7 +28,7 @@ export declare const grammarFillPublicGeometryFixtures: Readonly<{
     paperId: 'paper-2026-i'
     sourceAssetVersion: 1
     authorityManifestId: 'paper-canonical'
-    authorityManifestVersion: '24'
+    authorityManifestVersion: '25'
     surfaceConsumerIds: Readonly<{
       screen: 'screen'
       print_html: 'print_pdf'

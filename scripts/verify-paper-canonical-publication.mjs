@@ -341,6 +341,87 @@ assert.throws(
   }),
   { code: 'CANONICAL_PUBLICATION_PROJECTION_INVALID' },
 )
+
+const contradictoryPromptCompilation = structuredClone(compilation)
+const contradictoryPromptCapture =
+  contradictoryPromptCompilation.artifacts.sourceCapture
+const contradictoryPromptGroups =
+  contradictoryPromptCompilation.artifacts.canonicalPaper.questionGroups
+const contradictoryPromptGrammarFill = contradictoryPromptGroups.find(
+  (group) => group.variant.family === 'grammar-fill',
+)
+const contradictoryPromptBinding =
+  contradictoryPromptGrammarFill.variant.promptBindings.find(
+    (binding) => binding.provision === 'source_proven_none',
+  )
+const contradictoryPromptObservation =
+  contradictoryPromptCapture.observations.find(
+    (observation) =>
+      observation.observationId
+        === contradictoryPromptBinding.authorityObservationRef,
+  )
+contradictoryPromptObservation.value.prompt = 'contradictory-source-prompt'
+const {
+  captureId: _contradictoryCaptureId,
+  digest: _contradictoryCaptureDigest,
+  ...contradictoryPromptCaptureBase
+} = contradictoryPromptCapture
+contradictoryPromptCapture.digest = digestJson(
+  contradictoryPromptCaptureBase,
+)
+contradictoryPromptCapture.captureId =
+  `source-capture:${
+    contradictoryPromptCapture.digest.slice('sha256:'.length, 28)
+  }`
+for (const group of contradictoryPromptGroups) {
+  group.sourceMap.captureId = contradictoryPromptCapture.captureId
+  const groupSpanIds = [...new Set(
+    group.sourceMap.entries.flatMap((entry) => entry.sourceSpanRefs),
+  )]
+  group.sourceFingerprint = digestJson({
+    captureDigest: contradictoryPromptCapture.digest,
+    sourceSpanId: groupSpanIds[0],
+    recordIds: group.sourceMap.entries.flatMap(
+      (entry) => entry.transformationRecordIds,
+    ),
+  })
+}
+const contradictoryPromptReport =
+  contradictoryPromptCompilation.artifacts.normalizationReport
+contradictoryPromptReport.captureDigest = contradictoryPromptCapture.digest
+contradictoryPromptReport.sourceFingerprint = digestJson({
+  captureDigest: contradictoryPromptCapture.digest,
+  groupFingerprints: contradictoryPromptGroups.map(
+    (group) => group.sourceFingerprint,
+  ),
+  inactiveSourceClosureDigests:
+    contradictoryPromptReport.inactiveSourceClosures.map(
+      (inactiveClosure) => inactiveClosure.closureDigest,
+    ),
+})
+contradictoryPromptReport.directSourceMap = [
+  ...contradictoryPromptGroups.flatMap((group) => group.sourceMap.entries),
+  ...contradictoryPromptReport.inactiveSourceClosures.flatMap(
+    (inactiveClosure) => inactiveClosure.sourceMap.entries,
+  ),
+]
+const contradictoryPromptSealed = sealCanonicalPublication({
+  compilation: contradictoryPromptCompilation,
+  sourceAssetVersion: 1,
+  sourceAsset: fixture.sourceAsset,
+})
+assert.throws(
+  () => validateCanonicalPublicationBundle({
+    manifest: contradictoryPromptSealed.manifest,
+    sourceAsset: contradictoryPromptSealed.sourceAsset,
+    readArtifact: (relativePath) =>
+      contradictoryPromptSealed.artifacts[relativePath]
+      || contradictoryPromptSealed.sourceEvidence[relativePath],
+  }),
+  { code: 'CANONICAL_PUBLICATION_PROJECTION_INVALID' },
+  'sealed Publication validation rejects source_proven_none evidence that also carries prompt',
+)
+
 const tamperedManifest = structuredClone(sealed.manifest)
 const tamperedArtifacts = { ...sealed.artifacts }
 const groupPath = 'canonical/canonical-question-groups-v1.json'
