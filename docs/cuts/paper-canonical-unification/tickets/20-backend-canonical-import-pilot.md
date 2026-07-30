@@ -969,4 +969,5 @@ checks pass. App typecheck/build passes. The final registered
 self-review found one strict visible-structure closure gap plus two inaccurate
 authority-document statements; the bounded follow-up makes unknown/reordered
 Screen and Print nodes fail closed and corrects the 18–23pt and Language
-section migration wording.
+section migration wording. Focused re-review of those fixes and their direct
+regressions reports Standards PASS and Spec PASS.
