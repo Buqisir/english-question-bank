@@ -16,6 +16,7 @@ import manifestV15 from '../../standards/paper-canonical/manifest-v15.json' with
 import manifestV16 from '../../standards/paper-canonical/manifest-v16.json' with { type: 'json' }
 import manifestV17 from '../../standards/paper-canonical/manifest-v17.json' with { type: 'json' }
 import manifestV18 from '../../standards/paper-canonical/manifest-v18.json' with { type: 'json' }
+import manifestV19 from '../../standards/paper-canonical/manifest-v19.json' with { type: 'json' }
 import legacyRhythmManifestV13 from '../../standards/paper-canonical/history/manifest-v13-reading-rhythm/manifest-v13.json' with { type: 'json' }
 import legacyRhythmTypographyV3 from '../../standards/paper-canonical/history/manifest-v13-reading-rhythm/paper-typography-v3.json' with { type: 'json' }
 import legacyRhythmTypographyV3Schema from '../../standards/paper-canonical/history/manifest-v13-reading-rhythm/renderer-typography-v3.schema.json' with { type: 'json' }
@@ -55,6 +56,7 @@ import sevenChoicesRhythmV1 from '../../standards/paper-canonical/rendering/seve
 import sevenChoicesRhythmV2 from '../../standards/paper-canonical/rendering/seven-choices-rhythm-v2.json' with { type: 'json' }
 import sevenChoicesRhythmV3 from '../../standards/paper-canonical/rendering/seven-choices-rhythm-v3.json' with { type: 'json' }
 import clozeRhythmV1 from '../../standards/paper-canonical/rendering/cloze-rhythm-v1.json' with { type: 'json' }
+import clozeRhythmV2 from '../../standards/paper-canonical/rendering/cloze-rhythm-v2.json' with { type: 'json' }
 import standardManifestSchema from '../../schemas/paper-canonical/standard-manifest-v1.schema.json' with { type: 'json' }
 import coreSchema from '../../schemas/paper-canonical/core-invariants-v1.schema.json' with { type: 'json' }
 import profileSchema from '../../schemas/paper-canonical/paper-format-profile-v1.schema.json' with { type: 'json' }
@@ -82,6 +84,7 @@ import sevenChoicesRhythmV1Schema from '../../schemas/paper-canonical/seven-choi
 import sevenChoicesRhythmV2Schema from '../../schemas/paper-canonical/seven-choices-rhythm-v2.schema.json' with { type: 'json' }
 import sevenChoicesRhythmV3Schema from '../../schemas/paper-canonical/seven-choices-rhythm-v3.schema.json' with { type: 'json' }
 import clozeRhythmV1Schema from '../../schemas/paper-canonical/cloze-rhythm-v1.schema.json' with { type: 'json' }
+import clozeRhythmV2Schema from '../../schemas/paper-canonical/cloze-rhythm-v2.schema.json' with { type: 'json' }
 import sourceCaptureSchema from '../../schemas/paper-canonical/source-capture-v1.schema.json' with { type: 'json' }
 import planSchema from '../../schemas/paper-canonical/canonical-paper-plan-v1.schema.json' with { type: 'json' }
 import groupSchema from '../../schemas/paper-canonical/canonical-question-group-v1.schema.json' with { type: 'json' }
@@ -103,6 +106,7 @@ import reportV15Schema from '../../schemas/paper-canonical/normalization-report-
 import reportV16Schema from '../../schemas/paper-canonical/normalization-report-v16.schema.json' with { type: 'json' }
 import reportV17Schema from '../../schemas/paper-canonical/normalization-report-v17.schema.json' with { type: 'json' }
 import reportV18Schema from '../../schemas/paper-canonical/normalization-report-v18.schema.json' with { type: 'json' }
+import reportV19Schema from '../../schemas/paper-canonical/normalization-report-v19.schema.json' with { type: 'json' }
 import legacyReportV9Schema from '../../schemas/paper-canonical/normalization-report-v9.schema.json' with { type: 'json' }
 import publicationSchema from '../../schemas/paper-canonical/canonical-paper-publication-v1.schema.json' with { type: 'json' }
 import publicationV2Schema from '../../schemas/paper-canonical/canonical-paper-publication-v2.schema.json' with { type: 'json' }
@@ -122,6 +126,7 @@ import publicationV15Schema from '../../schemas/paper-canonical/canonical-paper-
 import publicationV16Schema from '../../schemas/paper-canonical/canonical-paper-publication-v16.schema.json' with { type: 'json' }
 import publicationV17Schema from '../../schemas/paper-canonical/canonical-paper-publication-v17.schema.json' with { type: 'json' }
 import publicationV18Schema from '../../schemas/paper-canonical/canonical-paper-publication-v18.schema.json' with { type: 'json' }
+import publicationV19Schema from '../../schemas/paper-canonical/canonical-paper-publication-v19.schema.json' with { type: 'json' }
 import legacyPublicationV9Schema from '../../schemas/paper-canonical/canonical-paper-publication-v9.schema.json' with { type: 'json' }
 import consumerSchema from '../../schemas/paper-canonical/consumer-contract-v1.schema.json' with { type: 'json' }
 import consumerV2Schema from '../../schemas/paper-canonical/consumer-contract-v2.schema.json' with { type: 'json' }
@@ -154,7 +159,10 @@ export function validateJsonSchema(value, schema, path = '$') {
   const issues = []
   function walk(candidate, rule, candidatePath) {
     if (!isRecordValue(rule)) return
-    if (Object.hasOwn(rule, 'const') && candidate !== rule.const) {
+    if (
+      Object.hasOwn(rule, 'const')
+      && digestJson(candidate) !== digestJson(rule.const)
+    ) {
       issues.push(issue('SCHEMA_CONST', candidatePath, `Expected ${JSON.stringify(rule.const)}`))
       return
     }
@@ -884,88 +892,11 @@ function validateSevenChoicesRhythm(artifact) {
       )]
 }
 
-function validateClozeRhythm(artifact) {
-  if (artifact?.schemaVersion !== 'cloze-rhythm-v1') return []
-  const expectedRoleClasses = {
-    previousFamilyBoundary: ['previous_family_tail'],
-    chrome: ['part_title', 'subsection', 'meta_instruction'],
-    passageContent: ['passage_body_line'],
-    inlineBlank: ['inline_blank_marker'],
-    choiceRow: ['choice_row'],
-    choiceLabel: ['choice_label'],
-    choiceText: ['choice_text'],
-    teacherTail: ['answer_line', 'explanation_line'],
-    followingSection: ['next_section'],
-  }
-  const expectedEdgeIds = [
-    'previous_family_to_chrome_same_page',
-    'previous_family_to_chrome_cross_page',
-    'chrome_internal',
-    'chrome_to_passage',
-    'passage_line_internal',
-    'paragraph_transition',
-    'inline_blank_no_phantom_space',
-    'inline_blank_atomicity',
-    'inline_blank_punctuation_outside',
-    'same_passage_cross_page',
-    'passage_tail_to_first_choice_row',
-    'choice_row_question_to_first_track',
-    'choice_label_to_text',
-    'choice_tracks_internal',
-    'choice_row_baseline',
-    'wrapped_option_continuation',
-    'choice_label_text_atomicity',
-    'choice_row_unsplittable',
-    'choice_block_cross_page',
-    'choice_row_to_answer',
-    'answer_to_explanation',
-    'teacher_tail_to_next_row',
-    'student_tail_to_next_section_same_page',
-    'teacher_tail_to_next_section_same_page',
-    'student_tail_to_next_section_cross_page',
-    'teacher_tail_to_next_section_cross_page',
-  ]
-  const valid = (
-    JSON.stringify(artifact.semanticRoleClasses)
-      === JSON.stringify(expectedRoleClasses)
-    && artifact.adjacencyGraph?.length === expectedEdgeIds.length
-    && artifact.adjacencyGraph.every(
-      (edge, index) => edge?.edgeId === expectedEdgeIds[index],
-    )
-    && new Set(expectedEdgeIds).size === expectedEdgeIds.length
-    && artifact.targets?.screen?.baselineStepPx === 24
-    && artifact.targets?.printPdf?.baselineStepPt === 18
-    && JSON.stringify(artifact.blankGeometry) === JSON.stringify({
-      widthEm: 3.3,
-      numberAlignment: 'center',
-      whiteSpace: 'nowrap',
-      verticalSpaceContribution: 0,
-      punctuationOwnership: 'passage_text_outside_blank',
-      atomicity: 'inline_block_unbreakable',
-    })
-    && JSON.stringify(artifact.horizontalChoiceGeometry?.rendererMapping)
-      === JSON.stringify({
-        rowWidthPt: 438.2,
-        questionLabelWidthPt: 21,
-        columnStartsPt: [0, 104, 208, 312],
-        columnOriginPitchPt: 104,
-        columnWidthsPt: [104, 104, 104, 126.2],
-        minimumGutterPt: 21,
-      })
-    && artifact.horizontalChoiceGeometry?.strategy?.optionColumns
-      === 'four_fixed_equal_origin_pitch_tracks'
-    && artifact.horizontalChoiceGeometry?.strategy?.distribution
-      === 'not_distributed_not_space_between'
-    && artifact.horizontalChoiceGeometry?.strategy?.hybridRows === 'forbidden'
-    && artifact.horizontalChoiceGeometry?.strategy?.shrinkToFit === false
-    && artifact.goldenGeometryFramework?.id === 'golden-geometry-framework-v1'
-    && artifact.goldenGeometryFramework?.familyValuesAreNotShared === true
-    && artifact.referenceMeasurement?.path
-      === 'docs/cuts/paper-canonical-unification/qa/20-cloze-golden-geometry-reference-measurements-v1.json'
-    && /^sha256:[a-f0-9]{64}$/.test(
-      artifact.referenceMeasurement?.sha256 || '',
-    )
-  )
+function validateClozeRhythm(artifact, manifestVersion) {
+  const expected = Number(manifestVersion) >= 19
+    ? clozeRhythmV2
+    : clozeRhythmV1
+  const valid = digestJson(artifact) === digestJson(expected)
   return valid
     ? []
     : [issue(
@@ -1091,9 +1022,7 @@ export function validateAuthorityClosure({
       issues.push(...validateSevenChoicesRhythm(sevenChoicesRhythmArtifact))
     }
   }
-  const clozeRhythmArtifact = Object.values(artifacts || {}).find(
-    (artifact) => artifact?.schemaVersion === 'cloze-rhythm-v1',
-  )
+  const clozeRhythmArtifact = artifacts?.['renderer-cloze-rhythm']
   if (Number(candidateManifest?.version) >= 18) {
     if (!clozeRhythmArtifact) {
       issues.push(issue(
@@ -1102,7 +1031,10 @@ export function validateAuthorityClosure({
         'Manifest v18+ must bind Cloze rhythm authority',
       ))
     } else {
-      issues.push(...validateClozeRhythm(clozeRhythmArtifact))
+      issues.push(...validateClozeRhythm(
+        clozeRhythmArtifact,
+        candidateManifest.version,
+      ))
     }
   }
   const coreArtifact = Object.values(artifacts || {}).find((artifact) => artifact?.owner === 'core')
@@ -1206,6 +1138,10 @@ const artifactsV17 = {
 const artifactsV18 = {
   ...artifactsV17,
   'renderer-cloze-rhythm': clozeRhythmV1,
+}
+const artifactsV19 = {
+  ...artifactsV17,
+  'renderer-cloze-rhythm': clozeRhythmV2,
 }
 const schemasV1 = { ...sharedSchemas, 'renderer-typography-v1': typographyV1Schema, 'normalization-rules-v1': normalizationSchema, 'normalization-report-v1': reportSchema, 'canonical-paper-publication-v1': publicationSchema }
 const schemasV2 = { ...sharedSchemas, 'renderer-typography-v1': typographyV1Schema, 'normalization-rules-v2': normalizationV2Schema, 'normalization-report-v2': reportV2Schema, 'canonical-paper-publication-v2': publicationV2Schema }
@@ -1362,6 +1298,19 @@ const schemasV18 = {
   'normalization-report-v18': reportV18Schema,
   'canonical-paper-publication-v18': publicationV18Schema,
 }
+const schemasV19 = {
+  ...Object.fromEntries(
+    Object.entries(schemasV18).filter(([schemaId]) =>
+      ![
+        'cloze-rhythm-v1',
+        'normalization-report-v18',
+        'canonical-paper-publication-v18',
+      ].includes(schemaId)),
+  ),
+  'cloze-rhythm-v2': clozeRhythmV2Schema,
+  'normalization-report-v19': reportV19Schema,
+  'canonical-paper-publication-v19': publicationV19Schema,
+}
 const validationV1 = validateAuthorityClosure({ manifest: manifestV1, artifacts: artifactsV1, schemas: schemasV1 })
 const validationV2 = validateAuthorityClosure({ manifest: manifestV2, artifacts: artifactsV2, schemas: schemasV2 })
 const validationV3 = validateAuthorityClosure({ manifest: manifestV3, artifacts: artifactsV3, schemas: schemasV3 })
@@ -1385,6 +1334,7 @@ const validationV15 = validateAuthorityClosure({ manifest: manifestV15, artifact
 const validationV16 = validateAuthorityClosure({ manifest: manifestV16, artifacts: artifactsV16, schemas: schemasV16 })
 const validationV17 = validateAuthorityClosure({ manifest: manifestV17, artifacts: artifactsV17, schemas: schemasV17 })
 const validationV18 = validateAuthorityClosure({ manifest: manifestV18, artifacts: artifactsV18, schemas: schemasV18 })
+const validationV19 = validateAuthorityClosure({ manifest: manifestV19, artifacts: artifactsV19, schemas: schemasV19 })
 const validations = [
   validationV1,
   validationV2,
@@ -1405,6 +1355,7 @@ const validations = [
   validationV16,
   validationV17,
   validationV18,
+  validationV19,
 ]
 if (validations.some((validation) => !validation.ok)) {
   throw new Error(`Invalid checked-in canonical authority: ${JSON.stringify(validations.flatMap((validation) => validation.issues))}`)
@@ -1438,6 +1389,7 @@ const authorities = [
   { manifest: manifestV16, artifacts: artifactsV16, schemas: schemasV16 },
   { manifest: manifestV17, artifacts: artifactsV17, schemas: schemasV17 },
   { manifest: manifestV18, artifacts: artifactsV18, schemas: schemasV18 },
+  { manifest: manifestV19, artifacts: artifactsV19, schemas: schemasV19 },
 ].map((authority) => ({
   ...authority,
   authorityRef: authorityRef(authority.manifest),
@@ -1445,7 +1397,7 @@ const authorities = [
   families: new Map(Object.values(authority.artifacts).filter((artifact) => artifact?.owner === 'family').map((family) => [family.familyContractId, family])),
 }))
 
-export const canonicalAuthorityRef = authorities.find((authority) => authority.manifest.version === '18').authorityRef
+export const canonicalAuthorityRef = authorities.find((authority) => authority.manifest.version === '19').authorityRef
 
 export function resolveCanonicalAuthority(authorityRef) {
   const authority = authorities.find((candidate) => candidate.authorityRef.manifestId === authorityRef?.manifestId && candidate.authorityRef.manifestVersion === authorityRef?.manifestVersion && candidate.authorityRef.manifestDigest === authorityRef?.manifestDigest)

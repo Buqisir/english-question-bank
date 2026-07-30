@@ -3,7 +3,7 @@
 import assert from 'node:assert/strict'
 import manifestV1 from '../standards/paper-canonical/manifest-v1.json' with { type: 'json' }
 import manifestV13 from '../standards/paper-canonical/manifest-v13.json' with { type: 'json' }
-import clozeRhythmV1Conformance from '../test-fixtures/paper-canonical/cloze-rhythm-v1-conformance.json' with { type: 'json' }
+import clozeRhythmV2Conformance from '../test-fixtures/paper-canonical/cloze-rhythm-v2-conformance.json' with { type: 'json' }
 import sevenChoicesRhythmV3Conformance from '../test-fixtures/paper-canonical/seven-choices-rhythm-v3-conformance.json' with { type: 'json' }
 
 import { canonicalAuthorityRef, compileCanonicalPaper, stableStringify, validateExactTransformationRecords } from '../shared/paper-canonical/compiler.mjs'
@@ -51,31 +51,18 @@ assert.equal(first.artifacts.canonicalPaper.paperPlan.completeness.status, 'comp
 assert.equal(first.artifacts.canonicalPaper.questionGroups.length, 9)
 
 const closure = resolveCanonicalAuthority(canonicalAuthorityRef).closure
-const clozeRhythmV1 = closure.artifacts['renderer-cloze-rhythm']
+const clozeRhythmV2 = closure.artifacts['renderer-cloze-rhythm']
 assert.deepEqual(
   {
-    schemaVersion: clozeRhythmV1.schemaVersion,
-    id: clozeRhythmV1.id,
-    version: clozeRhythmV1.version,
+    schemaVersion: clozeRhythmV2.schemaVersion,
+    id: clozeRhythmV2.id,
+    version: clozeRhythmV2.version,
   },
-  clozeRhythmV1Conformance.authority,
+  clozeRhythmV2Conformance.authority,
 )
-assert.deepEqual(
-  clozeRhythmV1.blankGeometry,
-  clozeRhythmV1Conformance.exactValues.blankGeometry,
-)
-assert.deepEqual(
-  clozeRhythmV1.horizontalChoiceGeometry.rendererMapping,
-  clozeRhythmV1Conformance.exactValues.horizontalChoiceGeometry,
-)
-for (const attack of [
-  ...clozeRhythmV1Conformance.schemaAttacks,
-  ...clozeRhythmV1Conformance.semanticAttacks,
-]) {
+function assertClozeAuthorityMutationRejected(caseId, mutate) {
   const artifacts = structuredClone(closure.artifacts)
-  let target = artifacts['renderer-cloze-rhythm']
-  for (const key of attack.path.slice(0, -1)) target = target[key]
-  target[attack.path.at(-1)] = attack.invalidValue
+  mutate(artifacts['renderer-cloze-rhythm'])
   const manifest = structuredClone(closure.manifest)
   manifest.artifacts.find(
     (descriptor) => descriptor.id === 'renderer-cloze-rhythm',
@@ -85,13 +72,83 @@ for (const attack of [
     artifacts,
     schemas: closure.schemas,
   })
-  assert.equal(validation.ok, false, attack.caseId)
-  assert.equal(
-    validation.issues.some(
-      (issue) => issue.code === attack.expectedIssueCode,
-    ),
-    true,
-    attack.caseId,
+  assert.equal(validation.ok, false, caseId)
+  for (const expectedIssueCode of clozeRhythmV2Conformance.expectedIssueCodes) {
+    assert.equal(
+      validation.issues.some(
+        (issue) => issue.code === expectedIssueCode,
+      ),
+      true,
+      `${caseId} reports ${expectedIssueCode}`,
+    )
+  }
+}
+for (const attack of clozeRhythmV2Conformance.semanticAttacks) {
+  assertClozeAuthorityMutationRejected(attack.caseId, (artifact) => {
+    let target = artifact
+    if (attack.operation === 'duplicate-array-entry') {
+      for (const key of attack.path) target = target[key]
+      target.push(structuredClone(target[attack.sourceIndex]))
+      return
+    }
+    for (const key of attack.path.slice(0, -1)) target = target[key]
+    if (attack.operation === 'delete') {
+      delete target[attack.path.at(-1)]
+    } else {
+      target[attack.path.at(-1)] = attack.invalidValue
+    }
+  })
+}
+function visitAuthorityFields(value, path = [], fields = []) {
+  if (Array.isArray(value)) {
+    value.forEach((entry, index) =>
+      visitAuthorityFields(entry, [...path, index], fields))
+    return fields
+  }
+  if (value && typeof value === 'object') {
+    for (const [key, entry] of Object.entries(value)) {
+      fields.push([...path, key])
+      visitAuthorityFields(entry, [...path, key], fields)
+    }
+  }
+  return fields
+}
+for (const fieldPath of visitAuthorityFields(clozeRhythmV2)) {
+  assertClozeAuthorityMutationRejected(
+    `complete-field-closure:${fieldPath.join('.')}`,
+    (artifact) => {
+      let target = artifact
+      for (const key of fieldPath.slice(0, -1)) target = target[key]
+      delete target[fieldPath.at(-1)]
+    },
+  )
+}
+function visitAuthorityLeaves(value, path = [], leaves = []) {
+  if (Array.isArray(value)) {
+    value.forEach((entry, index) =>
+      visitAuthorityLeaves(entry, [...path, index], leaves))
+  } else if (value && typeof value === 'object') {
+    Object.entries(value).forEach(([key, entry]) =>
+      visitAuthorityLeaves(entry, [...path, key], leaves))
+  } else {
+    leaves.push(path)
+  }
+  return leaves
+}
+for (const leafPath of visitAuthorityLeaves(clozeRhythmV2)) {
+  assertClozeAuthorityMutationRejected(
+    `complete-value-closure:${leafPath.join('.')}`,
+    (artifact) => {
+      let target = artifact
+      for (const key of leafPath.slice(0, -1)) target = target[key]
+      const key = leafPath.at(-1)
+      const value = target[key]
+      target[key] = typeof value === 'string'
+        ? `${value}:poisoned`
+        : typeof value === 'number'
+          ? value + 999
+          : !value
+    },
   )
 }
 const sevenChoicesRhythmV3 =

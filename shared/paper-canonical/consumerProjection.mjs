@@ -3,6 +3,7 @@ import {
   layoutAbcdOptionSet,
   layoutFixedFourColumnClozeOptionSet,
 } from './abcdLayout.mjs'
+import { resolveCanonicalAuthority } from './authority.mjs'
 import { readingPassageLetterBySlotId } from './readingPassageLetter.mjs'
 import { digestJson, sha256, stableStringify } from './stable.mjs'
 
@@ -796,67 +797,40 @@ function selectOccurrence(input) {
   }
   if (familyContractId === 'cloze') {
     const authorityRef = consumption?.authorityRef
-    // Both successor fields are absent only on byte-pinned pre-v18 Plans.
-    const carriesIntegrityEnvelope =
-      authorityRef !== undefined
-      || selection.projectedOccurrenceDigests !== undefined
-    if (
-      !carriesIntegrityEnvelope
-      && !VERIFIED_PRE_V18_CLOZE_CONSUMPTION_DIGESTS.has(
-        sha256(`${stableStringify(consumption)}\n`),
-      )
-    ) {
-      throw rejected(
-        `Family ${familyContractId} historical Consumption Plan is unverified`,
-      )
-    }
-    if (carriesIntegrityEnvelope) {
-      const authorityVersion = Number(authorityRef?.manifestVersion)
-      if (
-        authorityRef?.manifestId !== 'paper-canonical'
-        || typeof authorityRef.manifestVersion !== 'string'
-        || !Number.isInteger(authorityVersion)
-        || authorityVersion < 1
-        || typeof authorityRef.manifestDigest !== 'string'
-      ) {
+    const consumptionDigest = sha256(`${stableStringify(consumption)}\n`)
+    const verifiedHistoricalPlan =
+      authorityRef === undefined
+      && selection.projectedOccurrenceDigests === undefined
+      && VERIFIED_PRE_V18_CLOZE_CONSUMPTION_DIGESTS.has(consumptionDigest)
+    if (!verifiedHistoricalPlan) {
+      if (!resolveCanonicalAuthority(authorityRef).ok) {
         throw rejected(
-          `Family ${familyContractId} Consumption Plan authority is invalid`,
+          `Family ${familyContractId} Consumption Plan authority is unavailable`,
         )
       }
-      const integrityRequired = authorityVersion >= 18
-      if (
-        integrityRequired
-        && !Array.isArray(selection.projectedOccurrenceDigests)
-      ) {
+      if (!Array.isArray(selection.projectedOccurrenceDigests)) {
         throw rejected(
           `Family ${familyContractId} projected occurrence integrity is required`,
         )
       }
-      if (selection.projectedOccurrenceDigests !== undefined) {
-        if (!Array.isArray(selection.projectedOccurrenceDigests)) {
-          throw rejected(
-            `Family ${familyContractId} projected occurrence integrity is invalid`,
-          )
-        }
-        const digestByGroupId = new Map(
-          selection.projectedOccurrenceDigests.map((entry) => [
-            entry?.groupId,
-            entry?.digest,
-          ]),
+      const digestByGroupId = new Map(
+        selection.projectedOccurrenceDigests.map((entry) => [
+          entry?.groupId,
+          entry?.digest,
+        ]),
+      )
+      if (
+        selection.projectedOccurrenceDigests.length
+          !== selection.projectedOccurrences.length
+        || digestByGroupId.size !== selection.projectedOccurrences.length
+        || selection.projectedOccurrences.some(
+          (occurrence) =>
+            digestByGroupId.get(occurrence.groupId) !== digestJson(occurrence),
         )
-        if (
-          selection.projectedOccurrenceDigests.length
-            !== selection.projectedOccurrences.length
-          || digestByGroupId.size !== selection.projectedOccurrences.length
-          || selection.projectedOccurrences.some(
-            (occurrence) =>
-              digestByGroupId.get(occurrence.groupId) !== digestJson(occurrence),
-          )
-        ) {
-          throw rejected(
-            `Family ${familyContractId} projected occurrence integrity is invalid`,
-          )
-        }
+      ) {
+        throw rejected(
+          `Family ${familyContractId} projected occurrence integrity is invalid`,
+        )
       }
     }
   }

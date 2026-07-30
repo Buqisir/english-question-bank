@@ -16,6 +16,7 @@ import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { DatabaseSync } from 'node:sqlite'
 
+import manifestV17 from '../standards/paper-canonical/manifest-v17.json' with { type: 'json' }
 import { compileCanonicalPaper } from '../shared/paper-canonical/compiler.mjs'
 import {
   projectCanonicalConsumerGroup,
@@ -1002,6 +1003,56 @@ try {
       groupId: 'group-2026-i-cloze',
     }),
     { code: 'CANONICAL_CONSUMPTION_REJECTED' },
+  )
+  const fakePreV18Consumption = structuredClone(complete)
+  fakePreV18Consumption.authorityRef = {
+    manifestId: manifestV17.manifestId,
+    manifestVersion: manifestV17.version,
+    manifestDigest: digestJson(manifestV17),
+  }
+  const fakePreV18Selection = fakePreV18Consumption.selections.find(
+    (selection) => selection.familyContractId === 'cloze',
+  )
+  delete fakePreV18Selection.projectedOccurrenceDigests
+  fakePreV18Selection.projectedOccurrences[0]
+    .choices.sets[0].options[0].content[0].text =
+      'POISONED FAKE PRE-V18 CLOZE OPTION'
+  const fakePreV18Before = stableStringify(fakePreV18Consumption)
+  assert.throws(
+    () => projectCanonicalConsumerGroup({
+      consumption: fakePreV18Consumption,
+      familyContractId: 'cloze',
+      groupId: 'group-2026-i-cloze',
+    }),
+    { code: 'CANONICAL_CONSUMPTION_REJECTED' },
+    'a current Cloze Plan cannot downgrade integrity through a registered v17 authorityRef',
+  )
+  assert.throws(
+    () => buildCanonicalConsumptionSurfaceData({
+      consumption: fakePreV18Consumption,
+      familyContractId: 'cloze',
+      groupId: 'group-2026-i-cloze',
+    }),
+    { code: 'CANONICAL_CONSUMPTION_REJECTED' },
+    'Screen exposes no artifact for a fake pre-v18 Cloze integrity downgrade',
+  )
+  assert.throws(
+    () => buildPrintHtml({
+      title: asset.paper.title,
+      versionType: 'student',
+      printStyle: 'exam',
+      items: [items[0]],
+      blocks: [blocks[0]],
+      questionNumberStart: 41,
+      canonicalConsumption: fakePreV18Consumption,
+    }),
+    { code: 'CANONICAL_CONSUMPTION_REJECTED' },
+    'Print exposes no artifact for a fake pre-v18 Cloze integrity downgrade',
+  )
+  assert.equal(
+    stableStringify(fakePreV18Consumption),
+    fakePreV18Before,
+    'failed Screen/Print projection does not mutate the poisoned Consumption Plan',
   )
   const legacyRoot = path.join(rootDir, 'legacy-only')
   mkdirSync(path.join(legacyRoot, fixture.source.paperId), { recursive: true })

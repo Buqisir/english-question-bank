@@ -17,6 +17,7 @@ import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { DatabaseSync } from 'node:sqlite'
 
+import manifestV17 from '../standards/paper-canonical/manifest-v17.json' with { type: 'json' }
 import { consumerContractRefs } from '../shared/paper-canonical/consumers.mjs'
 import { canonicalAuthorityRef } from '../shared/paper-canonical/authority.mjs'
 import {
@@ -369,18 +370,18 @@ function assertSevenChoicesReferenceEvidence() {
   )
   assert.equal(
     canonicalAuthorityRef.manifestVersion,
-    '18',
-    'new Publications preserve Seven Choices inside the Cloze-extended authority closure',
+    '19',
+    'new Publications preserve Seven Choices inside the closed Cloze successor authority',
   )
   assert.equal(
     consumerContractRefs.screen.version,
-    '18',
-    'Screen v18 binds the complete geometry authority closure',
+    '19',
+    'Screen v19 binds the complete geometry authority closure',
   )
   assert.equal(
     consumerContractRefs.print_pdf.version,
-    '19',
-    'Print/PDF v19 binds the complete geometry authority closure',
+    '20',
+    'Print/PDF v20 binds the complete geometry authority closure',
   )
   assert.equal(
     sha256(preservedBytes),
@@ -5284,6 +5285,8 @@ function pdfWordsWithBoxes(pdfPath) {
       /<word xMin="([\d.-]+)" yMin="([\d.-]+)" xMax="([\d.-]+)" yMax="([\d.-]+)">([^<]+)<\/word>/g,
     )].map((wordMatch) => ({
       page: pageIndex + 1,
+      pageWidth: Number(pageMatch[1]),
+      pageHeight: Number(pageMatch[2]),
       xMin: Number(wordMatch[1]),
       yMin: Number(wordMatch[2]),
       xMax: Number(wordMatch[3]),
@@ -6363,6 +6366,8 @@ function pdfRoleLines(words) {
     .map((line, lineIndex) => ({
     lineIndex,
     page: line.page,
+    pageWidth: line.words[0].pageWidth,
+    pageHeight: line.words[0].pageHeight,
     xMin: Math.min(...line.words.map((word) => word.xMin)),
     yMin: Math.min(...line.words.map((word) => word.yMin)),
     xMax: Math.max(...line.words.map((word) => word.xMax)),
@@ -6670,9 +6675,14 @@ function assertPdfClozeGeometry(
             ? line.lineIndex < nextStartLine.lineIndex
             : line.lineIndex <= sourceEndLine.lineIndex
         ))
-      .filter((line) => line.wordIndexes.length > 1 && isPdfBodyLine(line))
+      .filter(isPdfBodyLine)
       .sort((left, right) =>
         left.page - right.page || left.centerY - right.centerY)
+    assert.equal(
+      paragraphLines.length > 0,
+      true,
+      `${label} paragraph ${index + 1} has measured body lines`,
+    )
     return {
       paragraphId:
         clozeSourceOracle.oracle.publicIdentities.cloze.paragraphIds[index],
@@ -6693,21 +6703,109 @@ function assertPdfClozeGeometry(
       paragraphProofs[0].lines[0],
     ),
   })
-  const internalLineRatios = paragraphProofs.flatMap((paragraph) =>
+  const bodyLineLedger = paragraphProofs.flatMap((paragraph) =>
+    paragraph.lines.map((line) => ({
+      lineId: `${paragraph.paragraphId}:${line.page}:${line.lineIndex}`,
+      paragraphId: paragraph.paragraphId,
+      sourceTextDigest: digestJson(paragraph.text),
+      page: line.page,
+      pageRelation: 'body_line',
+      wordCount: line.wordIndexes.length,
+      wordIndexes: [...line.wordIndexes],
+      textDigest: digestJson(line.text),
+      coordinates: {
+        xMin: line.xMin,
+        yMin: line.yMin,
+        xMax: line.xMax,
+        yMax: line.yMax,
+        centerY: line.centerY,
+      },
+    })))
+  assert.equal(
+    bodyLineLedger.every((line) =>
+      line.wordCount >= 1
+      && Object.values(line.coordinates).every(Number.isFinite)),
+    true,
+    `${label} measures every legitimate body line, including one-word lines`,
+  )
+  assert.equal(
+    new Set(bodyLineLedger.map((line) => line.lineId)).size,
+    bodyLineLedger.length,
+    `${label} body-line identities are unique`,
+  )
+  const expectedInternalSteps = paragraphProofs.flatMap((paragraph) =>
     paragraph.lines.slice(1).flatMap((line, index) => {
       const previous = paragraph.lines[index]
       if (line.page !== previous.page) return []
-      return [assertPdfStep('passage_line_internal', previous, line)]
+      return [{
+        stepId:
+          `${paragraph.paragraphId}:${previous.page}:`
+          + `${previous.lineIndex}->${line.lineIndex}`,
+        paragraphId: paragraph.paragraphId,
+        from: previous,
+        to: line,
+      }]
     }))
+  const internalLineSteps = expectedInternalSteps.map((step) => ({
+    stepId: step.stepId,
+    paragraphId: step.paragraphId,
+    sourceTextDigest: digestJson(
+      paragraphProofs.find(
+        (paragraph) => paragraph.paragraphId === step.paragraphId,
+      ).text,
+    ),
+    pageRelation: 'same_page',
+    from: {
+      page: step.from.page,
+      lineIndex: step.from.lineIndex,
+      textDigest: digestJson(step.from.text),
+      coordinates: {
+        xMin: step.from.xMin,
+        yMin: step.from.yMin,
+        xMax: step.from.xMax,
+        yMax: step.from.yMax,
+        centerY: step.from.centerY,
+      },
+    },
+    to: {
+      page: step.to.page,
+      lineIndex: step.to.lineIndex,
+      textDigest: digestJson(step.to.text),
+      coordinates: {
+        xMin: step.to.xMin,
+        yMin: step.to.yMin,
+        xMax: step.to.xMax,
+        yMax: step.to.yMax,
+        centerY: step.to.centerY,
+      },
+    },
+    actualRatio: assertPdfStep(
+      'passage_line_internal',
+      step.from,
+      step.to,
+    ),
+  }))
   assert.equal(
-    internalLineRatios.length > 0,
+    internalLineSteps.length > 0,
     true,
     `${label} measures every same-page internal passage line edge`,
+  )
+  assert.equal(
+    new Set(internalLineSteps.map((step) => step.stepId)).size,
+    expectedInternalSteps.length,
+    `${label} records every internal step exactly once`,
+  )
+  assert.deepEqual(
+    internalLineSteps.map((step) => step.stepId).sort(),
+    expectedInternalSteps.map((step) => step.stepId).sort(),
+    `${label} has no missing, duplicate, or unmeasured internal step`,
   )
   observe('passage_line_internal', {
     fromIdentity: paragraphProofs.map((paragraph) => paragraph.paragraphId),
     toIdentity: paragraphProofs.map((paragraph) => paragraph.paragraphId),
-    actualRatios: internalLineRatios,
+    bodyLines: bodyLineLedger,
+    internalSteps: internalLineSteps,
+    actualRatios: internalLineSteps.map((step) => step.actualRatio),
   })
   const paragraphTransitionRatios = paragraphProofs.slice(1).flatMap(
     (paragraph, index) => {
@@ -7456,7 +7554,14 @@ function uniquePdfSequenceIndex(
 }
 
 function isPdfBodyLine(line) {
-  return line.yMin >= 55 && line.yMax < 790
+  assert.equal(
+    Number.isFinite(line.pageHeight) && line.pageHeight > 0,
+    true,
+    'PDF line carries its measured page height',
+  )
+  const topBodySeam = line.pageHeight * 21 / 297
+  const bottomBodySeam = line.pageHeight * (297 - 24) / 297
+  return line.centerY >= topBodySeam && line.centerY <= bottomBodySeam
 }
 
 function pdfLinesForWordRange(
@@ -10020,24 +10125,36 @@ async function renderSupportedArtifacts({
         (candidate) => candidate.familyContractId === 'cloze',
       ).projectedOccurrenceDigests
       assertClozePrintProducerRejected(
-        'missing mandatory v18 projected occurrence digests',
+        'missing mandatory v19 projected occurrence digests',
         { canonicalConsumption: missingClozeOccurrenceDigests },
       )
-      const strippedClozeIntegrityEnvelope = structuredClone(
+      const fakePreV18ClozeIntegrityEnvelope = structuredClone(
         consumers.print_pdf,
       )
       const strippedClozeSelection =
-        strippedClozeIntegrityEnvelope.selections.find(
+        fakePreV18ClozeIntegrityEnvelope.selections.find(
           (candidate) => candidate.familyContractId === 'cloze',
         )
-      delete strippedClozeIntegrityEnvelope.authorityRef
+      fakePreV18ClozeIntegrityEnvelope.authorityRef = {
+        manifestId: manifestV17.manifestId,
+        manifestVersion: manifestV17.version,
+        manifestDigest: digestJson(manifestV17),
+      }
       delete strippedClozeSelection.projectedOccurrenceDigests
       strippedClozeSelection.projectedOccurrences[0]
         .choices.sets[0].options[0].content[0].text =
-          'POISONED STRIPPED V18 CLOZE SOURCE OPTION'
+          'POISONED STRIPPED CURRENT CLOZE SOURCE OPTION'
+      const fakePreV18Before = JSON.stringify(
+        fakePreV18ClozeIntegrityEnvelope,
+      )
       assertClozePrintProducerRejected(
-        'stripped v18 integrity envelope with source drift',
-        { canonicalConsumption: strippedClozeIntegrityEnvelope },
+        'stripped current integrity envelope with fake v17 authority and source drift',
+        { canonicalConsumption: fakePreV18ClozeIntegrityEnvelope },
+      )
+      assert.equal(
+        JSON.stringify(fakePreV18ClozeIntegrityEnvelope),
+        fakePreV18Before,
+        'failed public Print projection does not mutate the poisoned Plan',
       )
       assertClozePrintProducerRejected('wrong Question/Blank join', {
         canonicalConsumption: attackedClozeConsumption((occurrence) => {
@@ -11055,7 +11172,7 @@ try {
   assert.equal(sourceDocument.kind, 'pdf')
   const requestPath = path.join(
     sourcePackageDir,
-    'canonical-evidence/canonical-import-request-v18.json',
+    'canonical-evidence/canonical-import-request-v19.json',
   )
   execFileSync(process.execPath, [
     path.join(

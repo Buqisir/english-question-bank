@@ -458,3 +458,38 @@ The complete exact-HEAD verification, official `--actual-artifacts` evidence,
 exact-A4 inspection, full `verify:all`, cleanup, and final commit are recorded
 by the focused review handoff. No Owner QA provisioning or out-of-scope family,
 Ticket 21, production/R2, or generated-DOCX action was performed.
+
+Cloze Golden Geometry failed-review Must Fix closure (2026-07-29):
+Because the committed v1/v18 authority bytes are immutable, manifest v19 adds
+the standards-compliant `cloze-rhythm-v2` successor without changing any
+renderer value. Its schema closes the complete payload exactly, including all
+26 edge fields, target tolerances, Golden Geometry/reference digests, fixed
+four-track strategy and coordinates, blank geometry, and every renderer-owned
+semantic. Conformance redigests the manifest descriptor after each payload
+poison and rejects the named ratio, endpoint, tolerance, framework, reference,
+alignment, missing, duplicate, and extra-field attacks, plus programmatic
+deletion of every field and mutation of every leaf.
+
+The Cloze projector now resolves the exact registered authority. Only the
+byte-pinned old-v13 Consumption Plan digest may use the historical no-envelope
+route; a current Plan carrying a real v17 authority reference with stripped
+occurrence digests and a poisoned option is rejected at direct projection,
+Screen, and Print seams without mutating the input. Exact old-v13 public reload
+and byte shape remain accepted.
+
+PDF passage evidence derives its body seam from each measured page and the
+versioned Print margins. It records every remaining body line, including
+one-word lines, and every same-page internal step with exact source identity,
+text digest, coordinates, and page relation; missing, duplicate, or unmeasured
+steps fail closed. Official actual-artifact evidence records 220 body lines and
+184 same-page internal steps. Student and Teacher PDFs remain exact A4
+(`594.96 × 841.92 pt`), with 8 and 13 pages respectively.
+
+Focused authority, historical publication, Cloze consumption, admission,
+recovery, pilot, renderer, PaperBrowse, app typecheck/build, and Continuation
+checks pass. The official `--actual-artifacts` pilot passes, and
+`pnpm -C app run verify:all` reports 115 PASS / 1 declared off-repo SKIP /
+0 FAIL. This bounded commit also passes `git diff --check`; its exact-HEAD
+rerun and artifact path are reported in the focused review handoff. No Owner QA
+provisioning or out-of-scope family, Ticket 21, production/R2, generated-DOCX,
+or unrelated lint action was performed.

@@ -22,9 +22,10 @@ import {
 import { projectCanonicalPaper } from '../../shared/paper-canonical/projector.mjs'
 import { digestJson, sha256, stableStringify, withoutKey } from '../../shared/paper-canonical/stable.mjs'
 
-const publicationFileName = 'canonical-paper-publication-v18.json'
+const publicationFileName = 'canonical-paper-publication-v19.json'
 const publicationFileNames = [
   publicationFileName,
+  'canonical-paper-publication-v18.json',
   'canonical-paper-publication-v17.json',
   'canonical-paper-publication-v16.json',
   'canonical-paper-publication-v15.json',
@@ -1287,7 +1288,7 @@ function canonicalSelections(validated, contract) {
       projectedOccurrences,
       ...(
         familyContractId === 'cloze'
-        && validated.plan.authorityRef.manifestVersion === '18'
+        && Number(validated.plan.authorityRef.manifestVersion) >= 18
         ? {
             projectedOccurrenceDigests: projectedOccurrences.map(
               (occurrence) => ({
@@ -1412,7 +1413,7 @@ function readyConsumption(
     publicationDigest: manifest.publicationDigest,
     ...(
       // Preserve the byte-pinned pre-v18 Consumption Plan shape.
-      manifest.authority.manifestVersion === '18'
+      Number(manifest.authority.manifestVersion) >= 18
         ? {
             sourceAssetDigest: manifest.sourceAssetDigest,
             authorityRef: structuredClone(manifest.authority),

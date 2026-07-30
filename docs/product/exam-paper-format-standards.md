@@ -4,7 +4,7 @@
 
 本文件是唯一的人类可读索引；当前 canonical 编译、校验、发布和受支持的
 Screen / Print-PDF consumer 只从
-[`standards/paper-canonical/manifest-v18.json`](../../standards/paper-canonical/manifest-v18.json)
+[`standards/paper-canonical/manifest-v19.json`](../../standards/paper-canonical/manifest-v19.json)
 解析一份 digest-closed 的权威闭包。这里不复制卷型题号、分值、题组
 cardinality、清洗条件或字体/物理排版数值，也不能被 caller 当作第二套配置。
 
@@ -18,9 +18,12 @@ Renderer Typography、其 schema 及纯验证入口。未知版本、缺件、di
 任何会改变 admission、canonical 语义、Profile、normalization 或 renderer
 结果的变更，必须新增 versioned artifact、schema/semantic conformance fixture、
 迁移说明和 manifest 升版；已经被 Publication 引用的 artifact 不可原位修改。
-`manifest-v1.json` 至 `manifest-v17.json` 保留各自原始 digest-closed closure，
-供既有 Publication 解析；当前 Screen v18、Print/PDF v19 consumer contracts
-只绑定 v18 authority。v18 以 `cloze-rhythm-v1` 建立 Cloze Golden Geometry
+`manifest-v1.json` 至 `manifest-v18.json` 保留各自原始 digest-closed closure，
+供既有 Publication 解析；当前 Screen v19、Print/PDF v20 consumer contracts
+只绑定 v19 authority。v19 以 `cloze-rhythm-v2` 完整闭合 Cloze Golden
+Geometry renderer semantics；迁移说明见
+[`manifest-v19-migration.md`](../../standards/paper-canonical/manifest-v19-migration.md)。
+此前 v18 以 `cloze-rhythm-v1` 建立 Cloze Golden Geometry
 successor renderer closure；迁移说明见
 [`manifest-v18-migration.md`](../../standards/paper-canonical/manifest-v18-migration.md)。
 此前 v17 以 `seven-choices-rhythm-v3` 对 Screen 与 Print/PDF
