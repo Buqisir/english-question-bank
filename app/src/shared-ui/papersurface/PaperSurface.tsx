@@ -38,6 +38,9 @@ import {
 import {
   clozeRhythm,
 } from '../../../../shared/paper-canonical/clozeRhythm.mjs'
+import {
+  grammarFillRhythm,
+} from '../../../../shared/paper-canonical/grammarFillRhythm.mjs'
 import { renderCanonicalPaperSentenceContent } from './CanonicalPaperSentenceContent.tsx'
 import {
   renderLegacyPaperSentenceContent,
@@ -80,6 +83,10 @@ const paperSurfaceTokenStyle: PaperSurfaceStyle = {
     `${sevenChoicesRhythm.targets.screen.baselineStepPx}px`,
   '--ps-cloze-baseline-step':
     `${clozeRhythm.targets.screen.baselineStepPx}px`,
+  '--ps-grammar-fill-baseline-step':
+    `${grammarFillRhythm.rendererMapping.screen.baselineStepPx}px`,
+  '--ps-grammar-fill-prompt-gap':
+    `${grammarFillRhythm.promptGeometry.gapEm}em`,
   '--ps-passage-indent': paperSurfaceTokens.passageIndent,
   '--ps-options-grid-columns': paperSurfaceTokens.optionsGridColumns,
   '--ps-options-grid-gap-x': paperSurfaceTokens.optionsGridGapX,

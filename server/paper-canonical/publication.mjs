@@ -22,9 +22,10 @@ import {
 import { projectCanonicalPaper } from '../../shared/paper-canonical/projector.mjs'
 import { digestJson, sha256, stableStringify, withoutKey } from '../../shared/paper-canonical/stable.mjs'
 
-const publicationFileName = 'canonical-paper-publication-v20.json'
+const publicationFileName = 'canonical-paper-publication-v21.json'
 const publicationFileNames = [
   publicationFileName,
+  'canonical-paper-publication-v20.json',
   'canonical-paper-publication-v19.json',
   'canonical-paper-publication-v18.json',
   'canonical-paper-publication-v17.json',

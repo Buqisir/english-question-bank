@@ -1,0 +1,136 @@
+{
+  "schemaVersion": "grammar-fill-rhythm-v2-conformance-v1",
+  "authority": {
+    "schemaVersion": "grammar-fill-rhythm-v2",
+    "id": "grammar-fill-rhythm",
+    "version": "2"
+  },
+  "semanticAttacks": [
+    {
+      "caseId": "edge-ratio-drift",
+      "operation": "set",
+      "path": [
+        "adjacencyGraph",
+        0,
+        "baselineStepRatio"
+      ],
+      "invalidValue": 99
+    },
+    {
+      "caseId": "edge-endpoint-drift",
+      "operation": "set",
+      "path": [
+        "adjacencyGraph",
+        0,
+        "fromClass"
+      ],
+      "invalidValue": "chrome"
+    },
+    {
+      "caseId": "target-tolerance-drift",
+      "operation": "set",
+      "path": [
+        "targets",
+        "screen",
+        "oneStepTolerancePx"
+      ],
+      "invalidValue": 999
+    },
+    {
+      "caseId": "framework-digest-drift",
+      "operation": "set",
+      "path": [
+        "goldenGeometryFramework",
+        "sha256"
+      ],
+      "invalidValue": "poisoned"
+    },
+    {
+      "caseId": "reference-digest-drift",
+      "operation": "set",
+      "path": [
+        "referenceMeasurement",
+        "sha256"
+      ],
+      "invalidValue": "poisoned"
+    },
+    {
+      "caseId": "blank-alignment-drift",
+      "operation": "set",
+      "path": [
+        "blankGeometry",
+        "numberAlignment"
+      ],
+      "invalidValue": "left"
+    },
+    {
+      "caseId": "prompt-attachment-drift",
+      "operation": "set",
+      "path": [
+        "promptGeometry",
+        "attachment"
+      ],
+      "invalidValue": "detached"
+    },
+    {
+      "caseId": "screen-renderer-mapping-drift",
+      "operation": "set",
+      "path": [
+        "rendererMapping",
+        "screen",
+        "writingCardMarginTopPx",
+        "plain"
+      ],
+      "invalidValue": 0
+    },
+    {
+      "caseId": "public-source-identity-drift",
+      "operation": "set",
+      "path": [
+        "publicArtifactOracle",
+        "grammarFill",
+        "questionIds",
+        0
+      ],
+      "invalidValue": "q-poisoned"
+    },
+    {
+      "caseId": "public-occurrence-digest-drift",
+      "operation": "set",
+      "path": [
+        "publicArtifactOracle",
+        "expectedProjectedOccurrenceDigest"
+      ],
+      "invalidValue": "sha256:poisoned"
+    },
+    {
+      "caseId": "missing-declared-field",
+      "operation": "delete",
+      "path": [
+        "promptGeometry",
+        "absentContribution"
+      ]
+    },
+    {
+      "caseId": "duplicate-declared-edge",
+      "operation": "duplicate-array-entry",
+      "path": [
+        "adjacencyGraph"
+      ],
+      "sourceIndex": 0
+    },
+    {
+      "caseId": "extra-declared-field",
+      "operation": "set",
+      "path": [
+        "blankGeometry",
+        "unversionedExtra"
+      ],
+      "invalidValue": 1
+    }
+  ],
+  "expectedIssueCodes": [
+    "SCHEMA_CONST",
+    "RENDERER_GRAMMAR_FILL_RHYTHM_INVALID"
+  ]
+}

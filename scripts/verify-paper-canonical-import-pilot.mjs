@@ -108,15 +108,15 @@ const clozeCoverageOraclePath = path.join(
 )
 const grammarFillReferencePath = path.join(
   repositoryRoot,
-  'docs/cuts/paper-canonical-unification/qa/20-grammar-fill-golden-geometry-reference-measurements-v1.json',
+  'docs/cuts/paper-canonical-unification/qa/20-grammar-fill-golden-geometry-reference-measurements-v2.json',
 )
 const grammarFillSourceOraclePath = path.join(
   repositoryRoot,
-  'docs/cuts/paper-canonical-unification/qa/20-grammar-fill-source-oracles-v1.json',
+  'docs/cuts/paper-canonical-unification/qa/20-grammar-fill-source-oracles-v2.json',
 )
 const grammarFillCoverageOraclePath = path.join(
   repositoryRoot,
-  'docs/cuts/paper-canonical-unification/qa/20-grammar-fill-observed-coverage-oracle-v1.json',
+  'docs/cuts/paper-canonical-unification/qa/20-grammar-fill-observed-coverage-oracle-v2.json',
 )
 const paperId = 'paper-2026-i'
 const provisionActualArtifacts = process.argv.includes('--actual-artifacts')
@@ -385,18 +385,18 @@ function assertSevenChoicesReferenceEvidence() {
   )
   assert.equal(
     canonicalAuthorityRef.manifestVersion,
-    '20',
+    '21',
     'new Publications preserve Seven Choices inside the closed Grammar Fill successor authority',
   )
   assert.equal(
     consumerContractRefs.screen.version,
-    '20',
-    'Screen v20 binds the complete geometry authority closure',
+    '21',
+    'Screen v21 binds the complete geometry authority closure',
   )
   assert.equal(
     consumerContractRefs.print_pdf.version,
-    '21',
-    'Print/PDF v21 binds the complete geometry authority closure',
+    '22',
+    'Print/PDF v22 binds the complete geometry authority closure',
   )
   assert.equal(
     sha256(preservedBytes),
@@ -955,7 +955,7 @@ function independentGrammarFillExplanationText(entry) {
 function assertGrammarFillSourceOracle() {
   const bytes = readFileSync(grammarFillSourceOraclePath)
   const oracle = JSON.parse(bytes)
-  assert.equal(oracle.schemaVersion, 'grammar-fill-source-oracles-v1')
+  assert.equal(oracle.schemaVersion, 'grammar-fill-source-oracles-v2')
   assert.equal(oracle.paperId, paperId)
   const sourcePaths = Object.fromEntries(
     Object.entries(oracle.sources).map(([key, source]) => [
@@ -1076,7 +1076,7 @@ function assertGrammarFillReferenceEvidence() {
   const evidence = JSON.parse(bytes)
   assert.equal(
     evidence.schemaVersion,
-    'grammar-fill-golden-geometry-reference-measurements-v1',
+    'grammar-fill-golden-geometry-reference-measurements-v2',
   )
   assert.equal(
     sha256(readFileSync(path.join(repositoryRoot, evidence.reference.path))),
@@ -1097,6 +1097,20 @@ function assertGrammarFillReferenceEvidence() {
   )
   assert.equal(grammarFillRhythm.blankGeometry.widthEm, 3.3)
   assert.equal(grammarFillRhythm.promptGeometry.gapEm, 0.5)
+  const promptedQuestionNos = grammarFillSourceOracle.rows.flatMap((row) =>
+    row.prompt === null ? [] : [row.questionNo])
+  const unpromptedQuestionNos = grammarFillSourceOracle.rows.flatMap((row) =>
+    row.prompt === null ? [row.questionNo] : [])
+  assert.deepEqual(
+    evidence.observedGoldenVariants.prompted,
+    promptedQuestionNos,
+    'Grammar Fill golden prompted identities equal the immutable source set',
+  )
+  assert.deepEqual(
+    evidence.observedGoldenVariants.unprompted,
+    unpromptedQuestionNos,
+    'Grammar Fill golden unprompted identities equal the immutable source set',
+  )
   assert.equal(
     grammarFillRhythm.horizontalStrategy.blankWidthProxy,
     'em',
@@ -1113,7 +1127,7 @@ function assertGrammarFillCoverageOracle() {
   const oracle = JSON.parse(bytes)
   assert.equal(
     oracle.schemaVersion,
-    'grammar-fill-observed-coverage-oracle-v1',
+    'grammar-fill-observed-coverage-oracle-v2',
   )
   assert.equal(
     oracle.authorityBoundary.sourceOracle,
@@ -2085,6 +2099,46 @@ function grammarFillVariantConsumption(
     },
   )
   return { consumption: variant, expectedPassageTexts }
+}
+
+function grammarFillLineEndAdversaryCss() {
+  const groupId =
+    grammarFillSourceOracle.oracle.publicIdentities.grammarFill.groupId
+  const [wrappedParagraphId, lineEndParagraphId, crossPageParagraphId] =
+    grammarFillSourceOracle.oracle.publicIdentities.grammarFill.paragraphIds
+  const widthEm =
+    grammarFillSourceOracle.oracle.variants.lineEndUsableWidthEm
+  const passageCrossWidthEm =
+    grammarFillSourceOracle.oracle.variants.passageCrossUsableWidthEm
+  assert.equal(
+    Number.isFinite(widthEm) && widthEm > 0,
+    true,
+    'Grammar Fill line-end adversary has an independent em-class width',
+  )
+  assert.equal(
+    Number.isFinite(passageCrossWidthEm) && passageCrossWidthEm > 0,
+    true,
+    'Grammar Fill passage-cross adversary has an independent em-class width',
+  )
+  return `
+[data-canonical-group-id="${groupId}"]
+  [data-canonical-paragraph-id="${wrappedParagraphId}"],
+[data-canonical-group-id="${groupId}"]
+  [data-canonical-paragraph-id="${lineEndParagraphId}"],
+[data-paper-browse-anchor="${groupId}"]
+  [data-paper-paragraph-id="${wrappedParagraphId}"],
+[data-paper-browse-anchor="${groupId}"]
+  [data-paper-paragraph-id="${lineEndParagraphId}"] {
+  width: ${widthEm}em !important;
+  max-width: ${widthEm}em !important;
+}
+[data-canonical-group-id="${groupId}"]
+  [data-canonical-paragraph-id="${crossPageParagraphId}"],
+[data-paper-browse-anchor="${groupId}"]
+  [data-paper-paragraph-id="${crossPageParagraphId}"] {
+  width: ${passageCrossWidthEm}em !important;
+  max-width: ${passageCrossWidthEm}em !important;
+}`
 }
 
 function attributeSignatures(html) {
@@ -3327,7 +3381,7 @@ function assertGrammarFillObservedCoverage(observations) {
     'complete Grammar Fill ledger exactly equals the independent 32-edge oracle',
   )
   return {
-    schemaVersion: 'grammar-fill-observed-coverage-ledger-v1',
+    schemaVersion: 'grammar-fill-observed-coverage-ledger-v2',
     oraclePath: path.relative(
       repositoryRoot,
       grammarFillCoverageOraclePath,
@@ -4008,6 +4062,7 @@ async function assertGrammarFillDomGeometry(
   {
     teacher = false,
     requireWrappedLine = false,
+    requireLineEndBlank = false,
     surface = 'screen',
     observeFollowingTransition = true,
     expectedPassageTexts =
@@ -4045,7 +4100,6 @@ async function assertGrammarFillDomGeometry(
             bottom: rect.bottom,
             height: rect.height,
             center,
-            page: Math.floor(rect.y / 1122.52) + 1,
           })
         }
       }
@@ -4096,6 +4150,7 @@ async function assertGrammarFillDomGeometry(
       const paragraph = element.closest(
         '[data-canonical-grammar-fill-rhythm-role="passage_body_line"]',
       )
+      const paragraphStyle = paragraph ? getComputedStyle(paragraph) : null
       const textNodes = []
       if (paragraph) {
         const walker = document.createTreeWalker(
@@ -4138,6 +4193,18 @@ async function assertGrammarFillDomGeometry(
         unitBreakInside: unitStyle?.breakInside,
         unitRect: unitRect?.toJSON(),
         blankRect: rect.toJSON(),
+        paragraphId:
+          paragraph?.getAttribute('data-canonical-paragraph-id')
+          || paragraph?.getAttribute('data-paper-paragraph-id')
+          || null,
+        paragraphLineHeight:
+          Number.parseFloat(paragraphStyle?.lineHeight || ''),
+        paragraphLines: visualLines(paragraph),
+        promptCount: unit
+          ? unit.querySelectorAll(
+              '.ps-paper-blank-hint, .print-blank-hint',
+            ).length
+          : null,
         promptText: prompt?.textContent || null,
         promptRole: prompt?.getAttribute(
           'data-canonical-grammar-fill-rhythm-role',
@@ -4445,13 +4512,27 @@ async function assertGrammarFillDomGeometry(
     toIdentity: observation.paragraphs.at(-1).id,
     actualRatios: paragraphGaps.map((gap) => gap / baselineStepPx),
   })
+  const samePassagePair = observation.paragraphs.flatMap(
+    (paragraph) => paragraph.lines.slice(1).map((line, index) => ({
+      paragraphId: paragraph.id,
+      from: paragraph.lines[index],
+      to: line,
+    })),
+  )[0]
+  assert.ok(
+    samePassagePair,
+    `${label} executes an adjacent same-passage continuation`,
+  )
   observe('same_passage_continuation', {
-    fromIdentity: observation.paragraphs[0].id,
-    toIdentity: observation.paragraphs.at(-1).id,
+    fromIdentity: samePassagePair.paragraphId,
+    toIdentity: samePassagePair.paragraphId,
     pageRelation: 'same_page_continuation',
-    pages: observation.paragraphs.flatMap(
-      (paragraph) => paragraph.lines.map((line) => line.page),
-    ),
+    actualRelation: 'same_continuous_public_dom_flow',
+    fromCenterPx: samePassagePair.from.center,
+    toCenterPx: samePassagePair.to.center,
+    actualRatio:
+      (samePassagePair.to.center - samePassagePair.from.center)
+      / baselineStepPx,
   })
   assert.deepEqual(
     observation.blanks.map((blank) => blank.questionId),
@@ -4547,10 +4628,26 @@ async function assertGrammarFillDomGeometry(
     horizontalRelation: 'source_space_after_unit',
     observedTextDigest: sha256(Buffer.from(firstBlank.followingText, 'utf8')),
   })
+  const firstBlankExtraHeightPx = Math.max(
+    0,
+    firstBlank.unitRect.height - firstBlank.paragraphLineHeight,
+  )
+  assert.equal(
+    firstBlankExtraHeightPx / baselineStepPx
+      <= (
+        surface === 'printHtml'
+          ? grammarFillRhythm.targets.printPdf.oneStepTolerancePt * cssPtToPx
+          : grammarFillRhythm.targets.screen.oneStepTolerancePx
+      ) / baselineStepPx,
+    true,
+    `${label} measures no Blank-created extra vertical step`,
+  )
   observe('inline_blank_no_phantom_space', {
     fromIdentity: firstBlank.questionId,
     toIdentity: firstBlank.questionId,
-    actualRatio: 0,
+    actualRatio: firstBlankExtraHeightPx / baselineStepPx,
+    measuredUnitHeightPx: firstBlank.unitRect.height,
+    measuredParagraphLineHeightPx: firstBlank.paragraphLineHeight,
     blankLineHeight: firstBlank.unitRect.height,
   })
   observe('inline_blank_atomicity', {
@@ -4601,11 +4698,18 @@ async function assertGrammarFillDomGeometry(
     unitRect: firstBlank.unitRect,
   })
   assert.equal(unpromptedBlank.promptText, null)
+  assert.equal(unpromptedBlank.promptCount, 0)
+  const unpromptedExtraHeightPx = Math.max(
+    0,
+    unpromptedBlank.unitRect.height - unpromptedBlank.blankRect.height,
+  )
   observe('unprompted_collapse', {
     fromIdentity: unpromptedBlank.blankId,
     toIdentity: unpromptedBlank.questionId,
-    actualRatio: 0,
-    promptCount: 0,
+    actualRatio: unpromptedExtraHeightPx / baselineStepPx,
+    promptCount: unpromptedBlank.promptCount,
+    measuredUnitHeightPx: unpromptedBlank.unitRect.height,
+    measuredBlankHeightPx: unpromptedBlank.blankRect.height,
   })
   assert.match(sentenceStartBlank.previousText, /[.!?]\s*$/u)
   observe('sentence_start_blank', {
@@ -4628,35 +4732,54 @@ async function assertGrammarFillDomGeometry(
   })
   const lineEndBlank = observation.blanks.find(
     (blank) =>
-      blank.followingLines[0]
-      && Math.abs(
-        blank.followingLines[0].center
-        - blank.blankRect.y - blank.blankRect.height / 2,
-      ) > 3,
+      blank.questionId === expected.oracle.variants.lineEndQuestionId,
   )
-  if (lineEndBlank) {
+  if (requireLineEndBlank) {
+    assert.ok(
+      lineEndBlank?.followingLines[0],
+      `${label} resolves the declared source-bound line-end Blank`,
+    )
+    const blankCenter =
+      lineEndBlank.blankRect.y + lineEndBlank.blankRect.height / 2
+    assert.equal(
+      lineEndBlank.followingLines[0].center - blankCenter > 3,
+      true,
+      `${label} executes ${lineEndBlank.questionId} at a real line end: ${
+        JSON.stringify({
+          widthEm:
+            expected.oracle.variants.lineEndUsableWidthEm,
+          blankRect: lineEndBlank.blankRect,
+          followingLine: lineEndBlank.followingLines[0],
+          paragraphLines: lineEndBlank.paragraphLines,
+        })
+      }`,
+    )
     observe('line_end_blank', {
       fromIdentity: lineEndBlank.blankId,
-      toIdentity: lineEndBlank.questionId,
+      toIdentity: lineEndBlank.paragraphId,
       pageRelation: 'line_end_atomic',
       blankRect: lineEndBlank.blankRect,
       followingLine: lineEndBlank.followingLines[0],
     })
   }
+  const wrappedBlank = observation.blanks.find(
+    (blank) =>
+      blank.questionId === expected.oracle.variants.wrappedLineQuestionId,
+  )
   const wrappedParagraph = observation.paragraphs.find(
-    (paragraph) => paragraph.lines.length > 2,
+    (paragraph) => paragraph.id === wrappedBlank?.paragraphId,
   )
   if (requireWrappedLine) {
     assert.ok(
-      wrappedParagraph,
-      `${label} executes a real wrapped-line Grammar Fill paragraph`,
+      wrappedParagraph?.lines.length > 1,
+      `${label} executes the declared source-bound wrapped-line Blank`,
     )
     observe('wrapped_line_blank', {
       fromIdentity: wrappedParagraph.id,
-      toIdentity: firstBlank.blankId,
+      toIdentity: wrappedBlank.blankId,
       pageRelation: 'wrapped_line_atomic',
       lineCount: wrappedParagraph.lines.length,
-      unitRect: firstBlank.unitRect,
+      unitRect: wrappedBlank.unitRect,
     })
   }
   const finalPassageLine = observation.paragraphs.at(-1).lines.at(-1)
@@ -4759,13 +4882,22 @@ async function assertGrammarFillDomGeometry(
         ),
       })
     }
+    const answerHeightPx = observation.answers.flatMap(
+      (entry) => entry.lines,
+    ).reduce((sum, line) => sum + line.height, 0)
+    const explanationHeightPx = observation.explanations.flatMap(
+      (entry) => entry.lines,
+    ).reduce((sum, line) => sum + line.height, 0)
     observe('student_supplement_absence_collapse', {
       fromIdentity: observation.paragraphs.at(-1).id,
       toIdentity:
         expected.oracle.publicIdentities.followingSection.sectionId,
-      actualRatio: 0,
-      answerCount: 0,
-      explanationCount: 0,
+      actualRatio:
+        (answerHeightPx + explanationHeightPx) / baselineStepPx,
+      answerCount: observation.answers.length,
+      explanationCount: observation.explanations.length,
+      answerHeightPx,
+      explanationHeightPx,
     })
   }
   return { ...observation, observedEdges }
@@ -7665,7 +7797,7 @@ function pdfRoleLines(words) {
       current.wordCenters.push(centerY)
     }
   }
-  return lines.sort((left, right) =>
+  const measuredLines = lines.sort((left, right) =>
     left.page - right.page
     || median(left.wordCenters) - median(right.wordCenters)
     || Math.min(...left.words.map((word) => word.xMin))
@@ -7683,6 +7815,43 @@ function pdfRoleLines(words) {
     wordIndexes: line.words.map((word) => word.wordIndex),
     text: line.words.map((word) => word.text).join(' '),
     }))
+  const pageBodySeams = new Map()
+  for (const page of [...new Set(measuredLines.map((line) => line.page))]) {
+    const pageLines = measuredLines.filter((line) => line.page === page)
+    const footerLine = pageLines.at(-1)
+    const bodyLines = pageLines.slice(0, -1)
+    assert.equal(
+      bodyLines.length > 0,
+      true,
+      `PDF page ${page} exposes body lines above its measured footer`,
+    )
+    const bodyLineHeights = bodyLines.map((line) => line.yMax - line.yMin)
+    const footerSeparation =
+      footerLine.centerY - bodyLines.at(-1).centerY
+    assert.equal(
+      footerSeparation > median(bodyLineHeights) * 2,
+      true,
+      `PDF page ${page} separates its measured footer from the body`,
+    )
+    const firstBodyLine = bodyLines[0]
+    const lastBodyLine = bodyLines.at(-1)
+    pageBodySeams.set(page, {
+      page,
+      topY:
+        firstBodyLine.yMin - median(bodyLineHeights) / 2,
+      bottomY:
+        (lastBodyLine.yMax + footerLine.yMin) / 2,
+      firstBodyCenterY: firstBodyLine.centerY,
+      lastBodyCenterY: lastBodyLine.centerY,
+      footerCenterY: footerLine.centerY,
+      footerText: footerLine.text,
+      footerTextDigest: sha256(Buffer.from(footerLine.text, 'utf8')),
+    })
+  }
+  return measuredLines.map((line) => ({
+    ...line,
+    measuredBodySeam: pageBodySeams.get(line.page),
+  }))
 }
 
 function exactPdfTokens(value) {
@@ -8862,13 +9031,16 @@ function uniquePdfSequenceIndex(
 
 function isPdfBodyLine(line) {
   assert.equal(
-    Number.isFinite(line.pageHeight) && line.pageHeight > 0,
+    Number.isFinite(line.measuredBodySeam?.topY)
+      && Number.isFinite(line.measuredBodySeam?.bottomY)
+      && line.measuredBodySeam.topY < line.measuredBodySeam.bottomY,
     true,
-    'PDF line carries its measured page height',
+    'PDF line carries its artifact-measured page/body seam',
   )
-  const topBodySeam = line.pageHeight * 21 / 297
-  const bottomBodySeam = line.pageHeight * (297 - 24) / 297
-  return line.centerY >= topBodySeam && line.centerY <= bottomBodySeam
+  return (
+    line.centerY >= line.measuredBodySeam.topY
+    && line.centerY <= line.measuredBodySeam.bottomY
+  )
 }
 
 function pdfLinesForWordRange(
@@ -8940,6 +9112,7 @@ function assertGrammarFillPdfArtifact(
   label,
   {
     teacher = false,
+    requireLineEndBlank = false,
     previousRelation = 'same_page',
     passageRelation = 'same_page',
     followingRelation = 'same_page',
@@ -9163,17 +9336,17 @@ function assertGrammarFillPdfArtifact(
     }
   }
   const lineEndBlank = blankProofs.find((proof) => {
-    const nextWord = words[
-      proof.promptWord
-        ? proof.promptWord.wordIndex + 1
-        : proof.wordIndex + 1
-    ]
+    if (proof.questionId !== expected.oracle.variants.lineEndQuestionId) {
+      return false
+    }
+    const terminalWord = proof.promptWord || proof.word
+    const nextWord = words[words.indexOf(terminalWord) + 1]
     return nextWord && lineForWord(nextWord).lineIndex !== proof.line.lineIndex
   })
-  if (passageRelation === 'cross_page') {
+  if (requireLineEndBlank) {
     assert.ok(
       lineEndBlank,
-      `${label} executes a real line-end blank adversary`,
+      `${label} executes the exact source-bound line-end blank adversary`,
     )
   }
   let transitionTailLine = finalPassageLine
@@ -9258,10 +9431,10 @@ function assertGrammarFillPdfArtifact(
         : null,
     })),
     lineEndBlankId: lineEndBlank?.blankId || null,
-    bodySeams: {
-      topRatio: 21 / 297,
-      bottomRatio: (297 - 24) / 297,
-    },
+    bodySeams: [...new Map(lines.map((line) => [
+      line.page,
+      line.measuredBodySeam,
+    ])).values()],
   }
 }
 
@@ -10675,6 +10848,9 @@ async function renderSupportedArtifacts({
         )
         await page.goto(wrappedUrl.href)
         await page.locator('[data-paper-browse-anchor]').first().waitFor()
+        const grammarFillLineEndStyle = await page.addStyleTag({
+          content: grammarFillLineEndAdversaryCss(),
+        })
         const plainClozeWrappedObservation = await assertClozeDomGeometry(
           page,
           'plain PaperSurface Cloze wrapped-option adversary',
@@ -10696,6 +10872,7 @@ async function renderSupportedArtifacts({
             'plain PaperSurface Grammar Fill wrapped-line adversary',
             {
               requireWrappedLine: true,
+              requireLineEndBlank: true,
               observeFollowingTransition: false,
               expectedPassageTexts:
                 screenGrammarFillWrapped.expectedPassageTexts,
@@ -10706,6 +10883,7 @@ async function renderSupportedArtifacts({
           variant: 'plain-wrapped-line',
           proof: plainGrammarFillWrappedObservation,
         })
+        await grammarFillLineEndStyle.evaluate((element) => element.remove())
       } finally {
         await page.unroute(
           screenConsumptionRoute,
@@ -11007,6 +11185,9 @@ async function renderSupportedArtifacts({
         )
         await page.goto(wrappedLectureUrl.href)
         await page.locator('[data-paper-browse-anchor]').first().waitFor()
+        const grammarFillLineEndStyle = await page.addStyleTag({
+          content: grammarFillLineEndAdversaryCss(),
+        })
         const lectureClozeWrappedObservation = await assertClozeDomGeometry(
           page,
           'lecture PaperSurface Cloze wrapped-option adversary',
@@ -11028,6 +11209,7 @@ async function renderSupportedArtifacts({
             'lecture PaperSurface Grammar Fill wrapped-line adversary',
             {
               requireWrappedLine: true,
+              requireLineEndBlank: true,
               observeFollowingTransition: false,
               expectedPassageTexts:
                 screenGrammarFillWrapped.expectedPassageTexts,
@@ -11038,6 +11220,7 @@ async function renderSupportedArtifacts({
           variant: 'lecture-wrapped-line',
           proof: lectureGrammarFillWrappedObservation,
         })
+        await grammarFillLineEndStyle.evaluate((element) => element.remove())
       } finally {
         await page.unroute(
           screenConsumptionRoute,
@@ -11480,13 +11663,17 @@ async function renderSupportedArtifacts({
           grammarFillChrome = grammarFillChromeForPrint(),
         } = {},
       ) => {
+        const artifactPrefix = `forbidden-grammar-fill-poison-${caseId}`
         const artifactPath = path.join(
           outputDir,
-          `forbidden-grammar-fill-poison-${caseId}.html`,
+          `${artifactPrefix}.html`,
         )
-        assert.equal(
-          existsSync(artifactPath),
-          false,
+        const beforeArtifacts = readdirSync(outputDir).filter(
+          (entry) => entry.startsWith(artifactPrefix),
+        )
+        assert.deepEqual(
+          beforeArtifacts,
+          [],
           `${caseId} starts with no attempted public artifact`,
         )
         let rejected = null
@@ -11510,16 +11697,20 @@ async function renderSupportedArtifacts({
           'CANONICAL_CONSUMPTION_REJECTED',
           `Print producer fails closed on Grammar Fill ${caseId}`,
         )
-        assert.equal(
-          existsSync(artifactPath),
-          false,
+        const afterArtifacts = readdirSync(outputDir).filter(
+          (entry) => entry.startsWith(artifactPrefix),
+        )
+        assert.deepEqual(
+          afterArtifacts,
+          [],
           `Grammar Fill ${caseId} produces zero public artifacts`,
         )
         grammarFillPoisonRejections.push({
           caseId,
           status: 'rejected-before-artifact-write',
           code: rejected.code,
-          artifactCount: 0,
+          artifactCount: afterArtifacts.length,
+          observedArtifactNames: afterArtifacts,
         })
       }
       const attackedGrammarFillConsumption = (
@@ -11663,6 +11854,9 @@ async function renderSupportedArtifacts({
         { variant: 'source-derived-wrapped-option' },
       )
       await page.setContent(wrappedStudentPrintHtml, { waitUntil: 'load' })
+      const studentGrammarFillLineEndStyle = await page.addStyleTag({
+        content: grammarFillLineEndAdversaryCss(),
+      })
       const wrappedStudentPrintClozeObservation =
         await assertClozeDomGeometry(
           page,
@@ -11685,6 +11879,7 @@ async function renderSupportedArtifacts({
           'Student Print HTML Grammar Fill wrapped-line adversary',
           {
             requireWrappedLine: true,
+            requireLineEndBlank: true,
             surface: 'printHtml',
             observeFollowingTransition: false,
             expectedPassageTexts:
@@ -11696,6 +11891,9 @@ async function renderSupportedArtifacts({
         variant: 'student-wrapped-line',
         proof: wrappedStudentPrintGrammarFillObservation,
       })
+      await studentGrammarFillLineEndStyle.evaluate(
+        (element) => element.remove(),
+      )
       await page.setContent(printHtml.teacher, { waitUntil: 'load' })
       const teacherPrintClozeObservation = await assertClozeDomGeometry(
         page,
@@ -11723,6 +11921,9 @@ async function renderSupportedArtifacts({
         { variant: 'source-derived-wrapped-option' },
       )
       await page.setContent(wrappedTeacherPrintHtml, { waitUntil: 'load' })
+      const teacherGrammarFillLineEndStyle = await page.addStyleTag({
+        content: grammarFillLineEndAdversaryCss(),
+      })
       const wrappedTeacherPrintClozeObservation =
         await assertClozeDomGeometry(
           page,
@@ -11747,6 +11948,7 @@ async function renderSupportedArtifacts({
           {
             teacher: true,
             requireWrappedLine: true,
+            requireLineEndBlank: true,
             surface: 'printHtml',
             observeFollowingTransition: false,
             expectedPassageTexts:
@@ -11758,6 +11960,9 @@ async function renderSupportedArtifacts({
         variant: 'teacher-wrapped-line',
         proof: wrappedTeacherPrintGrammarFillObservation,
       })
+      await teacherGrammarFillLineEndStyle.evaluate(
+        (element) => element.remove(),
+      )
       const sevenChoicesVariantBlocks = [
         {
           type: 'section_header',
@@ -12675,9 +12880,7 @@ async function renderSupportedArtifacts({
   page-break-before: always !important;
 }
 ${variant === 'passage-cross-page'
-    ? `.question-group[data-canonical-group-type="grammarFill"] .passage {
-  width: ${grammarFillSourceOracle.oracle.variants.wrappedLineWidthPt}pt !important;
-}`
+    ? grammarFillLineEndAdversaryCss()
     : ''}
 </style></head>`,
         )
@@ -12691,6 +12894,7 @@ ${variant === 'passage-cross-page'
               teacher: versionType === 'teacher',
               surface: 'printHtml',
               requireWrappedLine: domMode === 'wrapped',
+              requireLineEndBlank: domMode === 'wrapped',
               observeFollowingTransition: domMode !== 'wrapped',
               expectedPassageTexts,
             },
@@ -12715,6 +12919,7 @@ ${variant === 'passage-cross-page'
           artifactLabel,
           {
             teacher: versionType === 'teacher',
+            requireLineEndBlank: variant === 'passage-cross-page',
             expectedPassageTexts,
             ...pdfRelations,
           },
@@ -12764,7 +12969,9 @@ ${variant === 'passage-cross-page'
               edgeId: 'line_end_blank',
               sourceOracleSha256: grammarFillSourceOracle.digest,
               fromIdentity: pdfMeasurement.lineEndBlankId,
-              toIdentity: pdfMeasurement.lineEndBlankId,
+              toIdentity:
+                grammarFillSourceOracle.oracle.publicIdentities
+                  .grammarFill.paragraphIds[1],
               pageRelation: 'line_end_atomic',
               pdfMeasurement,
             },
@@ -13434,7 +13641,7 @@ try {
   assert.equal(sourceDocument.kind, 'pdf')
   const requestPath = path.join(
     sourcePackageDir,
-    'canonical-evidence/canonical-import-request-v20.json',
+    'canonical-evidence/canonical-import-request-v21.json',
   )
   execFileSync(process.execPath, [
     path.join(

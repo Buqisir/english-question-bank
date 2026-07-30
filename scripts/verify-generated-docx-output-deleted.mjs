@@ -34,7 +34,7 @@ assert.deepEqual(
   'supported canonical consumers must be exactly Screen and Print/PDF',
 )
 
-assert.equal(canonicalAuthorityRef.manifestVersion, '20')
+assert.equal(canonicalAuthorityRef.manifestVersion, '21')
 const currentAuthority = resolveCanonicalAuthority(canonicalAuthorityRef)
 assert.equal(currentAuthority.ok, true)
 
@@ -42,13 +42,13 @@ const humanAuthority = read('docs/product/exam-paper-format-standards.md')
 const currentHumanAuthority = humanAuthority.split('## v2 历史排版证据')[0]
 assert.match(
   currentHumanAuthority,
-  /standards\/paper-canonical\/manifest-v20\.json/,
-  'the unique human-readable authority index must bind current manifest v20',
+  /standards\/paper-canonical\/manifest-v21\.json/,
+  'the unique human-readable authority index must bind current manifest v21',
 )
 assert.match(
   currentHumanAuthority,
-  /Screen v20、Print\/PDF v21/,
-  'the human-readable current output matrix must name only Screen v20 and Print/PDF v21',
+  /Screen v21、Print\/PDF v22/,
+  'the human-readable current output matrix must name only Screen v21 and Print/PDF v22',
 )
 assert.doesNotMatch(
   currentHumanAuthority,
@@ -183,6 +183,22 @@ assert.match(
   manifestV20Migration,
   /Grammar Fill[\s\S]*Golden Geometry[\s\S]*3\.3em/i,
   'manifest v20 must record the Grammar Fill Golden Geometry semantic closure',
+)
+const manifestV21Migration = read('standards/paper-canonical/manifest-v21-migration.md')
+assert.match(
+  manifestV21Migration,
+  /Manifest v21[\s\S]*Screen v21[\s\S]*Print\/PDF v22/i,
+  'manifest v21 must record the Grammar Fill successor output closure',
+)
+assert.match(
+  manifestV21Migration,
+  /v20[\s\S]*byte-for-byte resolvable/i,
+  'manifest v21 migration must preserve the immutable v20 closure',
+)
+assert.match(
+  manifestV21Migration,
+  /Question 63[\s\S]*unprompted[\s\S]*q56[\s\S]*q58/i,
+  'manifest v21 must record the corrected Grammar Fill proof identities',
 )
 assert.equal(
   Object.hasOwn(currentAuthority.closure.schemas, 'consumer-contract-v1'),

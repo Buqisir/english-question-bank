@@ -555,3 +555,65 @@ and independent Standards + Spec review verdict are reported in the fresh
 review handoff. No Owner QA provisioning, Application/Continuation Writing
 implementation, inactive Listening work, Ticket 21, production/R2 action,
 unrelated lint repair, or generated-DOCX action was performed.
+
+Grammar Fill Golden Geometry focused-review Must Fix closure (2026-07-30):
+The first independent Standards + Spec review of `af64b7c5` found four bounded
+proof defects: Screen retained renderer-local `24px` and `0.5em` truths;
+golden v1 incorrectly classified Question 63 as prompted; the ledger selected
+wrapped/line-end roles by content shape and recorded literal zero values; and
+PDF body exclusion used fixed A4 ratios instead of artifact-measured seams.
+Because Manifest v20, rhythm v1, its schemas/consumers, and the accepted v1
+measurement were already committed, none of those bytes was rewritten.
+
+Manifest v21 is the complete successor closure: `grammar-fill-rhythm-v2`, its
+exact schema and conformance fixture, Normalization Report v21, Publication
+v21, Screen v21, Print/PDF v22, migration record, current consumer/loader
+registration, and immutable-request fixture all bind one digest-closed
+authority. Screen now receives the rhythm-owned baseline and prompt gap as
+CSS custom properties at both PaperSurface and PaperBrowse roots. Historical
+v1-v20 authorities and consumers, including the exact v13 compatibility
+route, remain resolvable; generated DOCX remains retired.
+
+The preserved golden v1 bytes are referenced by corrected golden v2. Golden
+v2 classifies prompted 56, 57, 59, 60, 62, 64, and 65 and unprompted 58, 61,
+and 63, exactly matching the immutable source oracle and runtime authority.
+Both focused authority verification and the official pilot now cross-check
+those sets, so source/golden prompt-identity disagreement fails closed before
+any producer or public rendering.
+
+The source-bound adversary declares q56 as the wrapped Blank and q58 as the
+line-end Blank. Its widths are expressed only as local em-class proxies:
+40em for the q56/q58 paragraphs and 17em for the source-derived cross-page
+continuation; no golden pixel is converted to CSS px, PDF pt, or A4 scale.
+All six public bundles execute exact q56 and q58 identities. Student and
+Teacher PDF passage-cross artifacts continue from pages 4→5 and 6→7,
+respectively, and record `blank-2026-i-058` as the line-end Blank.
+
+Same-passage Screen/Print-HTML evidence now records one actual adjacent
+same-paragraph line pair, its DOM centers, local baseline ratio, and continuous
+public-flow relation; it no longer declares a multi-page array to be same
+page. Blank phantom height, unprompted prompt contribution, Student supplement
+absence, answer/explanation counts, and poison artifact counts are computed
+from DOM rectangles, queried node sets, and before/after directory listings.
+The observed zero values are therefore measurements, not literals or oracle
+bookkeeping.
+
+Every PDF page derives its body seam from the actual first/last body lines and
+the bottom-most measured footer line. The ledger records top/bottom seam
+coordinates, first/last body centers, footer center, footer text, and footer
+text digest; fixed `21/297` and `24/297` filters are removed. Required
+observed sets still equal the independent 32-edge oracle exactly, and every
+poison case records an actually empty artifact-name set before and after the
+rejected producer call.
+
+Focused authority/conformance, admission, recovery, historical Publication,
+Grammar Fill surface/Print, Continuation regression, and generated-DOCX
+retirement checks pass. The official actual-artifact pilot passes with six
+public bundles, 32 closed edges, ten pre-producer poison rejections, and exact
+A4 `594.96 × 841.92 pt` PDFs. Visual inspection confirms unclipped baseline
+Student blanks, Teacher answer/explanation continuation, q58 line-end,
+cross-page continuation, and the Application Writing transition. Full
+`pnpm -C app run verify:all` reports 115 PASS / 1 declared off-repo SKIP /
+0 FAIL, and `git diff --check` passes. No Owner QA, out-of-scope writing or
+listening implementation, Ticket 21, production/R2, unrelated lint, or
+generated-DOCX work was performed.

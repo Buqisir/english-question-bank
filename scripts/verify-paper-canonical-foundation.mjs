@@ -4,7 +4,7 @@ import assert from 'node:assert/strict'
 import manifestV1 from '../standards/paper-canonical/manifest-v1.json' with { type: 'json' }
 import manifestV13 from '../standards/paper-canonical/manifest-v13.json' with { type: 'json' }
 import clozeRhythmV2Conformance from '../test-fixtures/paper-canonical/cloze-rhythm-v2-conformance.json' with { type: 'json' }
-import grammarFillRhythmV1Conformance from '../test-fixtures/paper-canonical/grammar-fill-rhythm-v1-conformance.json' with { type: 'json' }
+import grammarFillRhythmV2Conformance from '../test-fixtures/paper-canonical/grammar-fill-rhythm-v2-conformance.json' with { type: 'json' }
 import sevenChoicesRhythmV3Conformance from '../test-fixtures/paper-canonical/seven-choices-rhythm-v3-conformance.json' with { type: 'json' }
 
 import { canonicalAuthorityRef, compileCanonicalPaper, stableStringify, validateExactTransformationRecords } from '../shared/paper-canonical/compiler.mjs'
@@ -166,20 +166,20 @@ for (const leafPath of visitAuthorityLeaves(clozeRhythmV2)) {
     },
   )
 }
-const grammarFillRhythmV1 =
+const grammarFillRhythmV2 =
   closure.artifacts['renderer-grammar-fill-rhythm']
 assert.deepEqual(
   {
-    schemaVersion: grammarFillRhythmV1.schemaVersion,
-    id: grammarFillRhythmV1.id,
-    version: grammarFillRhythmV1.version,
+    schemaVersion: grammarFillRhythmV2.schemaVersion,
+    id: grammarFillRhythmV2.id,
+    version: grammarFillRhythmV2.version,
   },
-  grammarFillRhythmV1Conformance.authority,
+  grammarFillRhythmV2Conformance.authority,
 )
-for (const attack of grammarFillRhythmV1Conformance.semanticAttacks) {
+for (const attack of grammarFillRhythmV2Conformance.semanticAttacks) {
   assertRendererAuthorityMutationRejected(
     'renderer-grammar-fill-rhythm',
-    grammarFillRhythmV1Conformance,
+    grammarFillRhythmV2Conformance,
     attack.caseId,
     (artifact) => {
       let target = artifact
@@ -197,10 +197,10 @@ for (const attack of grammarFillRhythmV1Conformance.semanticAttacks) {
     },
   )
 }
-for (const fieldPath of visitAuthorityFields(grammarFillRhythmV1)) {
+for (const fieldPath of visitAuthorityFields(grammarFillRhythmV2)) {
   assertRendererAuthorityMutationRejected(
     'renderer-grammar-fill-rhythm',
-    grammarFillRhythmV1Conformance,
+    grammarFillRhythmV2Conformance,
     `grammar-fill-complete-field-closure:${fieldPath.join('.')}`,
     (artifact) => {
       let target = artifact
@@ -209,10 +209,10 @@ for (const fieldPath of visitAuthorityFields(grammarFillRhythmV1)) {
     },
   )
 }
-for (const leafPath of visitAuthorityLeaves(grammarFillRhythmV1)) {
+for (const leafPath of visitAuthorityLeaves(grammarFillRhythmV2)) {
   assertRendererAuthorityMutationRejected(
     'renderer-grammar-fill-rhythm',
-    grammarFillRhythmV1Conformance,
+    grammarFillRhythmV2Conformance,
     `grammar-fill-complete-value-closure:${leafPath.join('.')}`,
     (artifact) => {
       let target = artifact

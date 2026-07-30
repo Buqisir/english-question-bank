@@ -186,7 +186,7 @@
 .ps-paragraph[data-canonical-grammar-fill-rhythm-role="passage_body_line"] {
   margin-top: 0;
   margin-bottom: 0;
-  line-height: 24px;
+  line-height: var(--ps-grammar-fill-baseline-step);
 }
 
 .ps-paragraph[data-canonical-grammar-fill-rhythm-role="passage_body_line"]:last-child {
@@ -349,7 +349,7 @@
 
 .ps-paper-blank-unit[data-canonical-grammar-fill-unit]
   .ps-paper-blank-hint {
-  margin-left: 0.5em;
+  margin-left: var(--ps-grammar-fill-prompt-gap);
 }
 
 /* ─── I15: clickable in-passage grammar-fill blank ─────────────── *

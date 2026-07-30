@@ -25,12 +25,12 @@ function readOracle(fileName) {
   }
 }
 
-const source = readOracle('20-grammar-fill-source-oracles-v1.json')
+const source = readOracle('20-grammar-fill-source-oracles-v2.json')
 const golden = readOracle(
-  '20-grammar-fill-golden-geometry-reference-measurements-v1.json',
+  '20-grammar-fill-golden-geometry-reference-measurements-v2.json',
 )
 const coverage = readOracle(
-  '20-grammar-fill-observed-coverage-oracle-v1.json',
+  '20-grammar-fill-observed-coverage-oracle-v2.json',
 )
 
 for (const binding of Object.values(source.value.sources)) {
@@ -75,6 +75,24 @@ assert.deepEqual(
   grammarFillRhythm.publicArtifactOracle.grammarFill,
   source.value.publicIdentities.grammarFill,
   'production authority publishes the exact source-bound Grammar Fill identity',
+)
+const sourcePromptedQuestionNos = Object.entries(
+  source.value.publicIdentities.grammarFill.prompts,
+).flatMap(([questionId, prompt]) =>
+  prompt === null ? [] : [Number(questionId.slice(-3))])
+const sourceUnpromptedQuestionNos = Object.entries(
+  source.value.publicIdentities.grammarFill.prompts,
+).flatMap(([questionId, prompt]) =>
+  prompt === null ? [Number(questionId.slice(-3))] : [])
+assert.deepEqual(
+  golden.value.observedGoldenVariants.prompted,
+  sourcePromptedQuestionNos,
+  'golden prompted variants exactly equal the immutable source prompt set',
+)
+assert.deepEqual(
+  golden.value.observedGoldenVariants.unprompted,
+  sourceUnpromptedQuestionNos,
+  'golden unprompted variants exactly equal the immutable source prompt set',
 )
 for (const [sourceKey, binding] of Object.entries(
   grammarFillRhythm.publicArtifactOracle.sourceBindings,

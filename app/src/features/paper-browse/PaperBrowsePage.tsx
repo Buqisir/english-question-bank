@@ -398,6 +398,8 @@ const paperBrowseContentStyle: PaperBrowseContentStyle = {
     `${clozeRhythm.targets.screen.baselineStepPx}px`,
   '--ps-grammar-fill-baseline-step':
     `${grammarFillRhythm.rendererMapping.screen.baselineStepPx}px`,
+  '--ps-grammar-fill-prompt-gap':
+    `${grammarFillRhythm.promptGeometry.gapEm}em`,
   '--ps-grammar-fill-instruction-margin-bottom':
     `${grammarFillRhythm.rendererMapping.screen.instructionMarginBottomPx}px`,
   '--ps-grammar-fill-following-section-margin-top':
