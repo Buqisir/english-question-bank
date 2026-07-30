@@ -295,12 +295,15 @@ export function projectCanonicalPaper(canonicalPackage) {
   }
   const nodes = []
   for (const part of profile.parts) {
+    const visibleSections = part.sections.filter((section) =>
+      section.slots.some((slot) => slot.activation === 'canonical_group'))
+    if (visibleSections.length === 0) continue
     nodes.push({ kind: 'part', partId: part.partId, instructionId: part.titleInstructionRef })
     nodes.push({
       kind: 'instruction',
       ...projectProfileInstruction(profile, part.titleInstructionRef),
     })
-    for (const section of part.sections) {
+    for (const section of visibleSections) {
       nodes.push({ kind: 'section', sectionId: section.sectionId, instructionId: section.titleInstructionRef })
       nodes.push({
         kind: 'instruction',
@@ -308,6 +311,12 @@ export function projectCanonicalPaper(canonicalPackage) {
       })
       for (const slot of section.slots) {
         if (slot.activation === 'inactive_source') continue
+        for (const instructionId of slot.instructionRefs) {
+          nodes.push({
+            kind: 'instruction',
+            ...projectProfileInstruction(profile, instructionId),
+          })
+        }
         const binding = plan.slotBindings.find((candidate) => candidate.slotId === slot.slotId)
         const group = groupById.get(binding.groupRef.groupId)
         const sevenChoices = group.variant.family === 'seven-choices'

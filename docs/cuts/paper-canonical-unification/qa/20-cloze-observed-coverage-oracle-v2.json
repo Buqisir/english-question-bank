@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "cloze-observed-coverage-oracle-v2",
+  "predecessor": {
+    "path": "docs/cuts/paper-canonical-unification/qa/20-cloze-observed-coverage-oracle-v1.json",
+    "sha256": "f0ba09bd5768dc89e826f9467195fc5525997f921e2fb902d932319b5c08ccf9"
+  },
+  "profileAdditions": {
+    "pdf-student-public-chrome-baseline": [
+      "choice_block_cross_page",
+      "choice_label_text_atomicity",
+      "choice_label_to_text",
+      "choice_row_baseline",
+      "choice_row_question_to_first_track",
+      "choice_row_unsplittable",
+      "choice_tracks_internal",
+      "chrome_internal",
+      "chrome_to_passage",
+      "inline_blank_atomicity",
+      "inline_blank_no_phantom_space",
+      "inline_blank_punctuation_outside",
+      "paragraph_transition",
+      "passage_line_internal",
+      "passage_tail_to_first_choice_row",
+      "previous_family_to_chrome_same_page",
+      "student_tail_to_next_section_same_page"
+    ]
+  },
+  "profileOverrides": {
+    "pdf-student/student-baseline": "pdf-student-public-chrome-baseline"
+  },
+  "reason": "The complete visible Reading part, section, and instruction chrome reflows the fixed-18pt direct PDF baseline across additional pages inside the Cloze occurrence; no line-height adaptation is applied."
+}

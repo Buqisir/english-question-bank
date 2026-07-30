@@ -6,8 +6,8 @@
 // DOM contract this cut locked down in step2 — every page container carries
 // `.preview-page` and every `.question-group` section (including cross-page
 // split fragments) carries `data-group-id` — plus paged.js's own generated
-// page-box CSS (exact page sizing, `@bottom-center` footer text via
-// server/draft-paper/draftPaperStore.mjs's addDraftFooterCss). This module no
+// page-box CSS (exact page sizing and the print-renderer-owned standard
+// `@bottom-center` footer text). This module no
 // longer re-paginates ANYTHING client-side: the retired greedy client-side
 // pagination IIFE this file used to inject (named "paginate" + "A4Preview",
 // split here so a source-text scan for the old identifier proves it is truly

@@ -34,7 +34,7 @@ assert.deepEqual(
   'supported canonical consumers must be exactly Screen and Print/PDF',
 )
 
-assert.equal(canonicalAuthorityRef.manifestVersion, '29')
+assert.equal(canonicalAuthorityRef.manifestVersion, '30')
 const currentAuthority = resolveCanonicalAuthority(canonicalAuthorityRef)
 assert.equal(currentAuthority.ok, true)
 
@@ -42,13 +42,13 @@ const humanAuthority = read('docs/product/exam-paper-format-standards.md')
 const currentHumanAuthority = humanAuthority.split('## v2 历史排版证据')[0]
 assert.match(
   currentHumanAuthority,
-  /standards\/paper-canonical\/manifest-v29\.json/,
-  'the unique human-readable authority index must bind current manifest v29',
+  /standards\/paper-canonical\/manifest-v30\.json/,
+  'the unique human-readable authority index must bind current manifest v30',
 )
 assert.match(
   currentHumanAuthority,
-  /Screen v29、Print\/PDF v30/,
-  'the human-readable current output matrix must name only Screen v29 and Print/PDF v30',
+  /Screen v30、Print\/PDF v31/,
+  'the human-readable current output matrix must name only Screen v30 and Print/PDF v31',
 )
 assert.doesNotMatch(
   currentHumanAuthority,
@@ -317,6 +317,22 @@ assert.match(
   manifestV29Migration,
   /ditch （沟）\.[\s\S]*rejects `ditch \(沟\) \.`/i,
   'manifest v29 must record the exact accepted and rejected punctuation variants',
+)
+const manifestV30Migration = read('standards/paper-canonical/manifest-v30-migration.md')
+assert.match(
+  manifestV30Migration,
+  /Manifest v30[\s\S]*Screen v30[\s\S]*Print\/PDF v31/i,
+  'manifest v30 must record the whole-paper public-chrome successor',
+)
+assert.match(
+  manifestV30Migration,
+  /Manifest v1 through Manifest v29[\s\S]*remain unchanged and resolvable/i,
+  'manifest v30 migration must preserve every immutable predecessor closure',
+)
+assert.match(
+  manifestV30Migration,
+  /screenBorderPx: 1[\s\S]*printBorderPt: 0\.5/i,
+  'manifest v30 must record medium-specific thin-rule targets',
 )
 assert.equal(
   Object.hasOwn(currentAuthority.closure.schemas, 'consumer-contract-v1'),

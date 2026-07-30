@@ -32,6 +32,7 @@ import {
 } from '../shared/paper-normalization/canonicalPaperGroupSurfaceAdapter.mjs'
 import { consumerContractRefs } from '../shared/paper-canonical/consumers.mjs'
 import { continuationWritingRhythm } from '../shared/paper-canonical/continuationWritingRhythm.mjs'
+import { canonicalizeVisibleEnglishTypography } from '../shared/paper-canonical/visibleTypography.mjs'
 import { buildPrintHtml } from '../server/print-renderer.mjs'
 import {
   createFileSystemCanonicalPublicationStore,
@@ -703,8 +704,8 @@ function assertSchemaDescriptorIdentityClosure() {
     'canonical-paper-publication-v9',
     'normalization-report-v10',
     'canonical-paper-publication-v10',
-    'normalization-report-v29',
-    'canonical-paper-publication-v29',
+    'normalization-report-v30',
+    'canonical-paper-publication-v30',
   ]) {
     assert.equal(authority.closure.schemas[schemaId].$id, schemaId)
   }
@@ -1611,6 +1612,8 @@ async function assertContinuationMaterialWrap(page, canonical, label) {
     return {
       blockId: element.getAttribute('data-canonical-block-id'),
       lineCount: range.getClientRects().length,
+      textIndentPx: Number.parseFloat(getComputedStyle(element).textIndent),
+      fontSizePx: Number.parseFloat(getComputedStyle(element).fontSize),
     }
   }))
   assert.deepEqual(
@@ -1622,6 +1625,12 @@ async function assertContinuationMaterialWrap(page, canonical, label) {
     observed.some(({ lineCount }) => lineCount > 1),
     true,
     `${label} exercises real material wrapping`,
+  )
+  assert.equal(
+    observed.every(({ textIndentPx, fontSizePx }) =>
+      Math.abs(textIndentPx - 2 * fontSizePx) <= 0.5),
+    true,
+    `${label} applies the unified 2em first-line indent to every ordinary material paragraph`,
   )
 }
 
@@ -1709,31 +1718,110 @@ function extractContinuationResponsePdfRect(pdfPath, pageNumber) {
       svgPath,
     ])
     const svg = readFileSync(svgPath, 'utf8')
-    const rectanglePattern =
-      /<path[^>]*d="M (-?[0-9.]+) (-?[0-9.]+) L (-?[0-9.]+) (-?[0-9.]+) L (-?[0-9.]+) (-?[0-9.]+) L (-?[0-9.]+) (-?[0-9.]+) Z[^>]*transform="matrix\((-?[0-9.]+), 0, 0, (-?[0-9.]+), (-?[0-9.]+), (-?[0-9.]+)\)"\/>/g
-    const rectangles = [...svg.matchAll(rectanglePattern)].map((match) => {
-      const scaleX = Number(match[9])
-      const scaleY = Number(match[10])
-      return {
-        x: Number(match[1]) * scaleX + Number(match[11]),
-        y: Number(match[2]) * scaleY + Number(match[12]),
-        width: Math.abs(Number(match[3]) - Number(match[1])) * scaleX,
-        height: Math.abs(Number(match[6]) - Number(match[2])) * scaleY,
-      }
-    })
+    const rectangles = [...svg.matchAll(/<path\b[^>]*\bd="[^"]+"[^>]*>/g)]
+      .map(([tag]) => {
+        const points = [...(tag.match(/\bd="([^"]+)"/)?.[1] || '').matchAll(
+          /[ML]\s*([\d.-]+)\s+([\d.-]+)/g,
+        )].slice(0, 4).map((match) => [Number(match[1]), Number(match[2])])
+        if (points.length !== 4) return null
+        const matrix = tag.match(
+          /transform="matrix\(([\d.-]+),\s*([\d.-]+),\s*([\d.-]+),\s*([\d.-]+),\s*([\d.-]+),\s*([\d.-]+)\)"/,
+        )?.slice(1).map(Number) || [1, 0, 0, 1, 0, 0]
+        const transformed = points.map(([x, y]) => [
+          matrix[0] * x + matrix[2] * y + matrix[4],
+          matrix[1] * x + matrix[3] * y + matrix[5],
+        ])
+        const xs = transformed.map(([x]) => x)
+        const ys = transformed.map(([, y]) => y)
+        const xMin = Math.min(...xs)
+        const xMax = Math.max(...xs)
+        const yMin = Math.min(...ys)
+        const yMax = Math.max(...ys)
+        if (xMax <= xMin || yMax <= yMin) return null
+        return {
+          xMin,
+          xMax,
+          yMin,
+          yMax,
+          width: xMax - xMin,
+          height: yMax - yMin,
+          stroked: /\bfill="none"/.test(tag),
+        }
+      })
+      .filter(Boolean)
     const expectedWidthPt =
       continuationWritingRhythm.responseGeometry.widthMm / 25.4 * 72
     const expectedHeightPt =
       continuationWritingRhythm.responseGeometry.heightMm / 25.4 * 72
-    const candidates = rectangles.filter(
-      (rectangle) =>
-        Math.abs(rectangle.width - expectedWidthPt) <= 1.5
-        && Math.abs(rectangle.height - expectedHeightPt) <= 1.5,
-    )
+    const unique = [
+      ...new Map(rectangles.map((rectangle) => [
+        [
+          rectangle.xMin.toFixed(2),
+          rectangle.yMin.toFixed(2),
+          rectangle.xMax.toFixed(2),
+          rectangle.yMax.toFixed(2),
+        ].join(':'),
+        rectangle,
+      ])).values(),
+    ]
+    const horizontal = unique.filter((rectangle) =>
+      !rectangle.stroked
+      && Math.abs(rectangle.width - expectedWidthPt) <= 2.5
+      && rectangle.height >= 0.35
+      && rectangle.height <= 0.65)
+    const vertical = unique.filter((rectangle) =>
+      !rectangle.stroked
+      && Math.abs(rectangle.height - expectedHeightPt) <= 2.5
+      && rectangle.width >= 0.35
+      && rectangle.width <= 0.65)
+    const candidates = []
+    for (const top of horizontal) {
+      for (const bottom of horizontal) {
+        if (
+          bottom.yMin <= top.yMin
+          || Math.abs(top.xMin - bottom.xMin) > 1
+          || Math.abs(top.xMax - bottom.xMax) > 1
+          || Math.abs(bottom.yMax - top.yMin - expectedHeightPt) > 2.5
+        ) continue
+        const left = vertical.find((edge) =>
+          Math.abs(edge.xMin - top.xMin) <= 1
+          && Math.abs(edge.yMin - top.yMin) <= 1)
+        const right = vertical.find((edge) =>
+          Math.abs(edge.xMax - top.xMax) <= 1
+          && Math.abs(edge.yMin - top.yMin) <= 1)
+        if (!left || !right) continue
+        candidates.push({
+          x: top.xMin,
+          y: top.yMin,
+          width: top.width,
+          height: bottom.yMax - top.yMin,
+          ruleThicknesses: [
+            top.height,
+            bottom.height,
+            left.width,
+            right.width,
+          ],
+        })
+      }
+    }
     assert.equal(
       candidates.length,
       1,
-      `${pdfPath} page ${pageNumber} contains one Continuation response border`,
+      `${pdfPath} page ${pageNumber} contains one Continuation response rule box`,
+    )
+    assert.equal(
+      candidates[0].ruleThicknesses.every(
+        (thickness) => Math.abs(thickness - 0.5) <= 0.12,
+      ),
+      true,
+      `${pdfPath} page ${pageNumber} uses approximately 0.5pt Continuation response rules`,
+    )
+    assert.equal(
+      candidates[0].ruleThicknesses.some(
+        (thickness) => thickness >= 0.68 && thickness <= 0.82,
+      ),
+      false,
+      `${pdfPath} page ${pageNumber} emits no approximately 0.75pt Continuation response rule`,
     )
     return candidates[0]
   } finally {
@@ -2073,7 +2161,10 @@ function assertVisibleCanonicalText(renderedText, canonical) {
   assert.equal(compact.includes('FORGEDANALYSIS'), false)
   const expectedMaterialBlocks = canonical.paperId
     === continuationSourceOracle.paperId
-    ? continuationSourceText.materialBlocks
+    ? continuationSourceText.materialBlocks.map((block) => ({
+        ...block,
+        text: canonicalizeVisibleEnglishTypography(block.text),
+      }))
     : canonical.materialBlocks
   const expectedStarters = canonical.paperId === continuationSourceOracle.paperId
     ? continuationSourceText.starters
@@ -2082,7 +2173,7 @@ function assertVisibleCanonicalText(renderedText, canonical) {
     assert.deepEqual(
       canonical.materialBlocks.map(({ nodeId, text }) => ({ nodeId, text })),
       expectedMaterialBlocks,
-      'canonical material is independently identical to the source-bound capture and PDF',
+      'canonical material is the independently replayed visible typography projection of the source-bound capture and PDF',
     )
     assert.deepEqual(
       canonical.answerRegion.starterLines.map(
@@ -2097,14 +2188,15 @@ function assertVisibleCanonicalText(renderedText, canonical) {
       visibleRenderedText(renderedText),
     )
     assert.equal(
-      normalizedVisibleText.includes('ditch （沟）.'),
+      normalizedVisibleText.includes('ditch (沟).'),
       true,
-      'public Continuation output preserves the exact source punctuation',
+      'public Continuation output cleans the source-layout gloss punctuation',
     )
     assert.equal(
-      normalizedVisibleText.includes('ditch (沟) .'),
+      normalizedVisibleText.includes('ditch （沟）.')
+        || normalizedVisibleText.includes('ditch (沟) .'),
       false,
-      'public Continuation output rejects the reviewed punctuation-drift variant',
+      'public Continuation output exposes neither raw nor reviewed source-layout punctuation accidents',
     )
   }
   for (const block of expectedMaterialBlocks) {

@@ -26,6 +26,9 @@ import {
   recordCanonicalPublicationCurrent,
   selectCanonicalPublicationCurrent,
 } from '../paper-canonical/publication.mjs'
+import {
+  canonicalizeVisibleEnglishTypography,
+} from '../../shared/paper-canonical/visibleTypography.mjs'
 
 const groupTypeMap = {
   reading: 'reading',
@@ -587,12 +590,14 @@ function importedContentSignature(group, paperAsset) {
       ? {
           kind: 'figure',
           figureId: association.figureId,
-          caption: association.caption || '',
+          caption: canonicalizeVisibleEnglishTypography(
+            association.caption || '',
+          ),
         }
       : {
           kind: 'paragraph',
           nodeId: paragraph.paragraphId,
-          text: paragraph.text,
+          text: canonicalizeVisibleEnglishTypography(paragraph.text),
         }
   })
 }
@@ -647,7 +652,7 @@ function canonicalContentSignature(group, importedGroup, paperAsset) {
 function importedOptions(options) {
   return (options || []).map((option) => ({
     label: option.label,
-    text: option.text || '',
+    text: canonicalizeVisibleEnglishTypography(option.text || ''),
   }))
 }
 
@@ -718,7 +723,10 @@ function semanticMismatchForGroup({
       const importedQuestion = paperAsset.content.questions[questionId]
       const canonicalQuestion = canonicalQuestions.get(questionId)
       if (
-        inlineText(canonicalQuestion?.stem) !== (importedQuestion?.stem || '')
+        inlineText(canonicalQuestion?.stem)
+          !== canonicalizeVisibleEnglishTypography(
+            importedQuestion?.stem || '',
+          )
         || JSON.stringify(canonicalOptions(
           canonicalSets.get(questionId)?.options,
         )) !== JSON.stringify(importedOptions(importedQuestion?.options))
@@ -769,17 +777,24 @@ function semanticMismatchForGroup({
     if (
       family === 'application-writing'
       && inlineText(blocks.flatMap((block) => block.inlines || []))
-        !== `${task.instruction}（词数${task.wordCountTarget}左右。）`
+        !== canonicalizeVisibleEnglishTypography(
+          `${task.instruction}（词数${task.wordCountTarget}左右。）`,
+        )
     ) {
       return 'application-writing prompt'
     }
     if (
       family === 'continuation-writing'
       && (
-        inlineText(blocks[0]?.inlines) !== task.materialText
+        inlineText(blocks[0]?.inlines)
+          !== canonicalizeVisibleEnglishTypography(task.materialText)
         || JSON.stringify(blocks.slice(1).map((block) =>
           inlineText(block.inlines)))
-          !== JSON.stringify(task.continuationStarters || [])
+          !== JSON.stringify(
+            (task.continuationStarters || []).map(
+              canonicalizeVisibleEnglishTypography,
+            ),
+          )
       )
     ) {
       return 'continuation material or ordered starters'

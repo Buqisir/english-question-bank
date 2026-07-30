@@ -127,7 +127,7 @@
 }
 
 .pi-writing-answer-box--application {
-  border-width: var(--application-writing-response-border, 0.48pt);
+  border-width: var(--application-writing-response-border, 1px);
   box-sizing: border-box;
   width: var(--application-writing-response-width, 144mm);
   height: var(--application-writing-response-height, 65mm);
@@ -146,7 +146,7 @@
   height: var(--continuation-writing-response-height, 57mm);
   min-height: var(--continuation-writing-response-height, 57mm);
   align-self: center;
-  border-width: var(--continuation-writing-response-border, 0.48pt);
+  border-width: var(--continuation-writing-response-border, 1px);
   margin-top: var(--continuation-writing-response-margin-top, 14px);
   padding:
     var(--continuation-writing-response-padding-block, 20px)

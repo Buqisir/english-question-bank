@@ -98,6 +98,8 @@ assert.deepEqual(paperBlankRuling.cloze, {
   numberSuffix: '',
   numberAlignment: 'center',
   lineStyle: 'single-thin',
+  screenLineWidthPx: 1,
+  printLineWidthPt: 0.5,
   whiteSpace: 'nowrap',
   hintPlacement: 'immediately-after',
 })

@@ -623,6 +623,12 @@ button.ps-paper-blank.ps-paper-blank--clickable {
   font-weight: 700;
 }
 
+.canonical-continuation-material p {
+  margin: 0;
+  text-align: justify;
+  text-indent: var(--ps-passage-indent);
+}
+
 /* ─── Option bank (seven-options-on-paper) ─────────────────────── */
 /* 七选五 A-G candidate-sentence pool, printed once after the passage.
    Single-column (unlike the 2-col `.ps-option-list` grid used for short

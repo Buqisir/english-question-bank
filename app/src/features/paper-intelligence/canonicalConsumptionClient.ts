@@ -14,6 +14,31 @@ export type WholePaperConsumption = {
     version: string
     digest: string
   }
+  visibleStructure?: ReadonlyArray<
+    | {
+        kind: 'part'
+        partId: string
+        instructionId: string
+      }
+    | {
+        kind: 'section'
+        sectionId: string
+        instructionId: string
+      }
+    | {
+        kind: 'instruction'
+        instructionId: string
+        placement: 'part_heading' | 'section_heading' | 'group_instruction'
+        text: string
+        renderPolicy: 'render'
+      }
+    | {
+        kind: 'group'
+        slotId: string
+        groupId: string
+        familyContractId: string
+      }
+  >
   selections: ReadonlyArray<{
     mode: 'canonical' | 'legacy'
     familyContractId: string
@@ -42,6 +67,10 @@ export async function loadScreenConsumption(
     consumption?.disposition !== 'ready'
     || consumption.paperId !== paperId
     || !Array.isArray(consumption.selections)
+    || (
+      Number(consumption.authorityRef?.manifestVersion) >= 30
+      && !Array.isArray(consumption.visibleStructure)
+    )
   ) throw new Error('Canonical consumption response is incomplete')
   return consumption
 }

@@ -12,9 +12,8 @@
 // DP-title REVERSAL (step3, owner ruling 2026-07-12, Option B — cr-step2-lite.md):
 // step2 originally shipped with `title` EXCLUDED from this signature per plan.md
 // step2's then-literal Must-Do text ("改标题不触发 render"), even though title
-// demonstrably feeds every page's footer via addDraftFooterCss — a title-only edit
-// was confirmed to leave a STALE cache hit (old footer text). The owner ratified
-// Option B: title is now INCLUDED, so a title-only edit DOES trigger a re-render.
+// changes document-body layout and can change pagination. Title remains INCLUDED,
+// so a title-only edit DOES trigger a re-render.
 // The assertion below was flipped in this same step to match — see
 // draftPaperPaginationSignature's doc comment in draftPaperStore.mjs for the full
 // writeup.
@@ -89,13 +88,12 @@ assert(
 {
   // DP-title Option B (owner ruling 2026-07-12): title now counts as a "layout"-ish
   // edit for cache-invalidation purposes, even though it isn't item order/grouping —
-  // it feeds every page's printed footer (addDraftFooterCss), so a stale cache hit
-  // would show the wrong title on the paper.
+  // it changes the printed document body and can change pagination.
   const retitled = baseDraftPaper()
   retitled.title = 'A Completely Different Title'
   assert(
     'changing title DOES change the signature (DP-title Option B, owner ruling 2026-07-12 — ' +
-      'title is baked into every page\'s printed footer, see this script\'s header)',
+      'title changes the printed document body, see this script\'s header)',
     draftPaperPaginationSignature(retitled, 'student') !== baseSig,
   )
 }

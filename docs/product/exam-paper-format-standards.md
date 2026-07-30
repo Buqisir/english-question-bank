@@ -4,7 +4,7 @@
 
 本文件是唯一的人类可读索引；当前 canonical 编译、校验、发布和受支持的
 Screen / Print-PDF consumer 只从
-[`standards/paper-canonical/manifest-v29.json`](../../standards/paper-canonical/manifest-v29.json)
+[`standards/paper-canonical/manifest-v30.json`](../../standards/paper-canonical/manifest-v30.json)
 解析一份 digest-closed 的权威闭包。这里不复制卷型题号、分值、题组
 cardinality、清洗条件或字体/物理排版数值，也不能被 caller 当作第二套配置。
 
@@ -18,9 +18,21 @@ Renderer Typography、其 schema 及纯验证入口。未知版本、缺件、di
 任何会改变 admission、canonical 语义、Profile、normalization 或 renderer
 结果的变更，必须新增 versioned artifact、schema/semantic conformance fixture、
 迁移说明和 manifest 升版；已经被 Publication 引用的 artifact 不可原位修改。
-`manifest-v1.json` 至 `manifest-v28.json` 保留各自原始 digest-closed closure，
-供既有 Publication 解析；当前 Screen v29、Print/PDF v30 consumer contracts
-只绑定 v29 authority。v29 以不可变 Continuation capture/transcription v2
+`manifest-v1.json` 至 `manifest-v29.json` 保留各自原始 digest-closed closure，
+供既有 Publication 解析；当前 Screen v30、Print/PDF v31 consumer contracts
+只绑定 v30 authority。v30 以 NCK1 Profile v9 发布 renderer-neutral 的完整
+可见结构：inactive Listening 不产生标题、正文或空隙，首个可见部分仍是
+`第二部分 阅读（共两节，满分50分）`，且阅读理解、七选五的节标题和说明均
+由同一 Consumption Plan 进入 Screen、Print HTML 与 PDF。Normalization
+Rules v4 只登记中文释义半角括号、释义后标点相邻空格和英文字母间撇号三类
+精确可重放转换；原始 Source Capture 字节保持不变，可见 canonical text
+不再复制源排版事故。Application / Continuation rhythm v3 分别声明 Screen
+1px 与 Print/PDF 0.5pt 的细线原语，正文首行统一 2em，续写给定段首仍为
+独立 4em 角色。正文行盒继续固定 18pt，不引入任何 18/19、18–23 或按页自适应。
+迁移说明见
+[`manifest-v30-migration.md`](../../standards/paper-canonical/manifest-v30-migration.md)。
+
+此前 v29 以不可变 Continuation capture/transcription v2
 完整逐字核对原题 PDF 材料，在 Unicode NFC + ASCII 空白折叠后仍保留标点
 码位、标点相邻空格、撇号码位和词语有无，因而必须接受 `ditch （沟）.` 并
 拒绝 `ditch (沟) .`，而不是让输出反向证明 source oracle。
@@ -296,7 +308,9 @@ px 换算(A4=794px@96dpi):10.5pt ≈ 14px。
   数字两侧各约 3 字符位留白;
 - **完形填空 / 语法填空**:下划线长 ≈**3.3em**(≈35pt/12mm),
   数字两侧各约 2 字符位留白;
-- 线粗 0.48pt,题号严格居中(实测偏差 ≤0.12em),**题号无尾点**,
+- 印刷细线以约 0.5pt 为意图；支持点值的 Print/PDF 原语取 0.5pt，
+  Screen 取清晰的 1px。不得从栅格图制造 0.48 与 0.50 的虚假物理精度。
+  题号严格居中(实测偏差 ≤0.12em),**题号无尾点**,
   句读标点排在线外;
 - 横线**不得跨行断开**;行首/行尾必须完整显示(watch-ledger I10 的
   句首挖空 bug 属此条,刀⑤收);
@@ -325,7 +339,7 @@ px 换算(A4=794px@96dpi):10.5pt ≈ 14px。
 
 ## 8. 写作答题区
 
-- 应用文与读后续写**各配一个答题框,共两框**;细边框(0.48pt)
+- 应用文与读后续写**各配一个答题框,共两框**;印刷细边框约 0.5pt
   素框,框内无横线、无提示行。
 - 实测尺寸:应用文 ≈144×65mm;读后续写 ≈145×57mm。
 - 读后续写的两个段首语**印在框内**(各段起笔位置),学生续写于其后。

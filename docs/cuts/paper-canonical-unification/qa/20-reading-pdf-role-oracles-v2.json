@@ -1,0 +1,71 @@
+{
+  "schemaVersion": "reading-pdf-role-oracles-v2",
+  "paperId": "paper-2026-i",
+  "sourceAsset": {
+    "path": "test-fixtures/paper-import/paper-2026-i-canonical-pilot/paper-asset.json",
+    "sha256": "fe7feb2cc9554b00bbab96a7d4fe5e499513c564c28e6c314e0373e29b2ca7bf"
+  },
+  "readingGroups": [
+    {
+      "groupId": "group-2026-i-reading-a",
+      "letter": "A",
+      "firstQuestionId": "q-2026-i-021",
+      "lastQuestionId": "q-2026-i-023"
+    },
+    {
+      "groupId": "group-2026-i-reading-b",
+      "letter": "B",
+      "firstQuestionId": "q-2026-i-024",
+      "lastQuestionId": "q-2026-i-027"
+    },
+    {
+      "groupId": "group-2026-i-reading-c",
+      "letter": "C",
+      "firstQuestionId": "q-2026-i-028",
+      "lastQuestionId": "q-2026-i-031"
+    },
+    {
+      "groupId": "group-2026-i-reading-d",
+      "letter": "D",
+      "firstQuestionId": "q-2026-i-032",
+      "lastQuestionId": "q-2026-i-035"
+    }
+  ],
+  "optionRowCases": [
+    {
+      "questionId": "q-2026-i-025",
+      "placementMode": "four_columns",
+      "rowCount": 1
+    },
+    {
+      "questionId": "q-2026-i-021",
+      "placementMode": "two_by_two",
+      "rowCount": 2
+    },
+    {
+      "questionId": "q-2026-i-029",
+      "placementMode": "one_column",
+      "rowCount": 4
+    }
+  ],
+  "chrome": {
+    "partTitleVisibleText": "第二部分 阅读（共两节，满分50分）",
+    "sectionTitleVisibleText": "第一节（共15小题；每小题2.5分，满分37.5分）",
+    "instructionVisibleText": "阅读下列短文，从每题所给的A、B、C、D四个选项中选出最佳选项。"
+  },
+  "exactA4Variant": {
+    "oneLineStemQuestionId": "q-2026-i-021",
+    "oneLineStemLineCount": 1,
+    "stemQuestionId": "q-2026-i-035",
+    "stemWidthPt": 250,
+    "stemLineCount": 2,
+    "wrappedOptionQuestionId": "q-2026-i-029",
+    "wrappedOptionWidthPt": 185,
+    "minimumWrappedOptionLineCount": 5
+  },
+  "readingEnd": {
+    "groupId": "group-2026-i-reading-d",
+    "questionId": "q-2026-i-035",
+    "nextSectionVisibleText": "第二节（共5小题；每小题2.5分，满分12.5分）"
+  }
+}

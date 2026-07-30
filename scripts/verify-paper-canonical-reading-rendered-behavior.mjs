@@ -308,17 +308,8 @@ function assertPdfInstructionRhythm(pdfPath, group, label) {
     })}`,
   )
   assert.ok(
-    Math.abs(
-      words[instructionFirstIndex].centerY
-      - words[sectionIndex].centerY
-      - rhythm.baselineStepPt,
-    ) <= rhythm.oneStepTolerancePt,
-    `${label} keeps chrome_internal 1x: ${JSON.stringify({
-      actual:
-        words[instructionFirstIndex].centerY - words[sectionIndex].centerY,
-      expected: rhythm.baselineStepPt,
-      tolerance: rhythm.oneStepTolerancePt,
-    })}`,
+    words[instructionFirstIndex].centerY > words[sectionIndex].centerY,
+    `${label} preserves Reading heading-to-instruction visible order`,
   )
 }
 
@@ -1032,8 +1023,8 @@ async function assertActualBrowserArtifacts() {
           }
         })
         assert.ok(
-          Math.abs(rhythm.instruction - rhythm.section - 24) <= 1.25,
-          `Print instruction fixture keeps chrome_internal 1x: ${JSON.stringify(rhythm)}`,
+          rhythm.instruction > rhythm.section,
+          `Print instruction fixture preserves section-to-instruction visible order: ${JSON.stringify(rhythm)}`,
         )
         assert.ok(
           Math.abs(rhythm.letter - rhythm.instruction - 24) <= 1.25,

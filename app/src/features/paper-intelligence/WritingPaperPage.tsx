@@ -51,7 +51,7 @@ const applicationWritingPageStyle: WritingPageStyle = {
   '--application-writing-response-height':
     `${applicationWritingRhythm.responseGeometry.heightMm}mm`,
   '--application-writing-response-border':
-    `${applicationWritingRhythm.responseGeometry.borderPt}pt`,
+    `${applicationWritingRhythm.responseGeometry.screenBorderPx}px`,
   '--application-writing-response-padding':
     `${applicationWritingRhythm.responseGeometry.paddingMm}mm`,
   '--application-writing-prompt-gap':
@@ -70,7 +70,7 @@ const continuationWritingPageStyle: WritingPageStyle = {
   '--continuation-writing-response-height':
     `${continuationWritingRhythm.responseGeometry.heightMm}mm`,
   '--continuation-writing-response-border':
-    `${continuationWritingRhythm.responseGeometry.borderPt}pt`,
+    `${continuationWritingRhythm.responseGeometry.screenBorderPx}px`,
   '--continuation-writing-response-margin-top':
     `${continuationWritingRhythm.rendererMapping.screen.responseMarginTopPx}px`,
   '--continuation-writing-response-padding-block':

@@ -2986,6 +2986,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
           <p
             key={`instruction-${index}`}
             className="paper-browse-instruction"
+            data-paper-browse-anchor={block.instructionId}
             data-canonical-reading-rhythm-role={
               isReadingChromeBlock(index)
                 ? 'meta_instruction'

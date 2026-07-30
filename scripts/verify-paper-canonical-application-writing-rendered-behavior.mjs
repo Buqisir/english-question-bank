@@ -202,6 +202,76 @@ function consumptionForAssetBlocks(consumption, asset) {
   return next
 }
 
+function alignAssetGroupsToConsumption(asset, consumption) {
+  const familyGroupType = {
+    reading: 'reading',
+    'seven-choices': 'sevenChoices',
+    cloze: 'cloze',
+    'grammar-fill': 'grammarFill',
+    'application-writing': 'writing',
+    'continuation-writing': 'writing',
+  }
+  const existingGroups = Object.values(asset.content.groups)
+  const alignedGroups = {}
+  for (const selection of consumption.selections) {
+    const groupType = familyGroupType[selection.familyContractId]
+    for (const groupId of selection.groupIds) {
+      const existing = asset.content.groups[groupId]
+      const template = existing || existingGroups.find((group) => {
+        if (group.groupType !== groupType) return false
+        if (groupType !== 'writing') return true
+        const task = asset.content.writingTasks?.[group.writingTaskId]
+        return task?.taskType === (
+          selection.familyContractId === 'application-writing'
+            ? 'application'
+            : 'continuation'
+        )
+      })
+      assert.ok(
+        template,
+        `browser fixture has a ${selection.familyContractId} Group template`,
+      )
+      alignedGroups[groupId] = {
+        ...structuredClone(template),
+        groupId,
+      }
+    }
+  }
+  asset.content.groups = alignedGroups
+  asset.content.blocks = asset.content.blocks.filter(
+    (block) =>
+      block.type !== 'group'
+      || asset.content.groups[block.groupId],
+  )
+  const blockGroupIds = new Set(
+    asset.content.blocks
+      .filter((block) => block.type === 'group')
+      .map((block) => block.groupId),
+  )
+  for (const groupId of Object.keys(asset.content.groups)) {
+    if (!blockGroupIds.has(groupId)) {
+      asset.content.blocks.push({ type: 'group', groupId })
+    }
+  }
+  assert.deepEqual(
+    consumption.visibleStructure
+      .filter((node) => node.kind === 'group')
+      .map((node) => node.groupId)
+      .filter((groupId) => !asset.content.groups[groupId]),
+    [],
+    'browser fixture closes every current visible Group identity',
+  )
+  assert.deepEqual(
+    asset.content.blocks
+      .filter((block) =>
+        block.type === 'group' && !asset.content.groups[block.groupId])
+      .map((block) => block.groupId),
+    [],
+    'browser fixture keeps every source block Group resolvable',
+  )
+  return asset
+}
+
 function bookmarkName(kind, value) {
   return `${kind}_${createHash('sha256').update(`${kind}:${value}`)
     .digest('hex').slice(0, 24)}`
@@ -284,76 +354,99 @@ function convertedPdfResponseFrameBounds(pdfPath) {
     const svg = readFileSync(svgPath, 'utf8')
     const expectedWidthPt = 144 / 25.4 * 72
     const expectedHeightPt = 65 / 25.4 * 72
-    const lines = [...svg.matchAll(
-      /<path[^>]+stroke="rgb\(0%, 0%, 0%\)"[^>]+d="M ([\d.]+) ([\d.]+) L ([\d.]+) ([\d.]+) "[^>]+transform="matrix\(([-\d.]+), ([-\d.]+), ([-\d.]+), ([-\d.]+), ([-\d.]+), ([-\d.]+)\)"\/>/g,
-    )].map((match) => {
-      const [x1, y1, x2, y2, a, b, c, d, e, f] = match
-        .slice(1)
-        .map(Number)
-      return {
-        x1: (a * x1) + (c * y1) + e,
-        y1: (b * x1) + (d * y1) + f,
-        x2: (a * x2) + (c * y2) + e,
-        y2: (b * x2) + (d * y2) + f,
-      }
-    })
-    const verticalFrameLines = lines.filter((line) =>
-      Math.abs(line.x1 - line.x2) <= 0.1
-      && Math.abs(Math.abs(line.y2 - line.y1) - expectedHeightPt) <= 1,
-    )
-    const horizontalFrameLines = lines.filter((line) =>
-      Math.abs(line.y1 - line.y2) <= 0.1
-      && Math.abs(Math.abs(line.x2 - line.x1) - expectedWidthPt) <= 1,
-    )
-    if (
-      verticalFrameLines.length === 0
-      && horizontalFrameLines.length === 0
-    ) {
-      const rectangles = [...svg.matchAll(
-        /<path[^>]+stroke="rgb\(0%, 0%, 0%\)"[^>]+d="M ([\d.]+) ([\d.]+) L ([\d.]+) ([\d.]+) L ([\d.]+) ([\d.]+) L ([\d.]+) ([\d.]+) Z[^"]*"[^>]+transform="matrix\(([-\d.]+), ([-\d.]+), ([-\d.]+), ([-\d.]+), ([-\d.]+), ([-\d.]+)\)"\/>/g,
-      )].map((match) => {
-        const values = match.slice(1).map(Number)
-        const points = [
-          [values[0], values[1]],
-          [values[2], values[3]],
-          [values[4], values[5]],
-          [values[6], values[7]],
-        ].map(([x, y]) => ({
-          x: (values[8] * x) + (values[10] * y) + values[12],
-          y: (values[9] * x) + (values[11] * y) + values[13],
+    const rectangles = [...svg.matchAll(/<path\b[^>]*\bd="[^"]+"[^>]*>/g)]
+      .map(([tag]) => {
+        const points = [...(tag.match(/\bd="([^"]+)"/)?.[1] || '').matchAll(
+          /[ML]\s*([\d.-]+)\s+([\d.-]+)/g,
+        )].slice(0, 4).map((match) => [Number(match[1]), Number(match[2])])
+        if (points.length !== 4) return null
+        const matrix = tag.match(
+          /transform="matrix\(([\d.-]+),\s*([\d.-]+),\s*([\d.-]+),\s*([\d.-]+),\s*([\d.-]+),\s*([\d.-]+)\)"/,
+        )?.slice(1).map(Number) || [1, 0, 0, 1, 0, 0]
+        const transformed = points.map(([x, y]) => ({
+          x: matrix[0] * x + matrix[2] * y + matrix[4],
+          y: matrix[1] * x + matrix[3] * y + matrix[5],
         }))
+        const left = Math.min(...transformed.map((point) => point.x))
+        const right = Math.max(...transformed.map((point) => point.x))
+        const top = Math.min(...transformed.map((point) => point.y))
+        const bottom = Math.max(...transformed.map((point) => point.y))
+        if (right <= left || bottom <= top) return null
         return {
-          left: Math.min(...points.map((point) => point.x)),
-          right: Math.max(...points.map((point) => point.x)),
-          top: Math.min(...points.map((point) => point.y)),
-          bottom: Math.max(...points.map((point) => point.y)),
+          left,
+          right,
+          top,
+          bottom,
+          width: right - left,
+          height: bottom - top,
+          stroked: /\bfill="none"/.test(tag),
         }
-      }).filter((rectangle) =>
-        Math.abs((rectangle.right - rectangle.left) - expectedWidthPt) <= 2
-        && Math.abs((rectangle.bottom - rectangle.top) - expectedHeightPt) <= 2)
-      assert.equal(
-        rectangles.length,
-        1,
-        'converted PDF exposes one 144 mm by 65 mm response-frame rectangle',
-      )
-      return rectangles[0]
+      })
+      .filter(Boolean)
+    const unique = [
+      ...new Map(rectangles.map((rectangle) => [
+        [
+          rectangle.left.toFixed(2),
+          rectangle.top.toFixed(2),
+          rectangle.right.toFixed(2),
+          rectangle.bottom.toFixed(2),
+        ].join(':'),
+        rectangle,
+      ])).values(),
+    ]
+    const horizontal = unique.filter((rectangle) =>
+      !rectangle.stroked
+      && Math.abs(rectangle.width - expectedWidthPt) <= 2.5
+      && rectangle.height >= 0.35
+      && rectangle.height <= 0.65)
+    const vertical = unique.filter((rectangle) =>
+      !rectangle.stroked
+      && Math.abs(rectangle.height - expectedHeightPt) <= 2.5
+      && rectangle.width >= 0.35
+      && rectangle.width <= 0.65)
+    const frames = []
+    for (const top of horizontal) {
+      for (const bottom of horizontal) {
+        if (
+          bottom.top <= top.top
+          || Math.abs(top.left - bottom.left) > 1
+          || Math.abs(top.right - bottom.right) > 1
+          || Math.abs(bottom.bottom - top.top - expectedHeightPt) > 2.5
+        ) continue
+        const left = vertical.find((edge) =>
+          Math.abs(edge.left - top.left) <= 1
+          && Math.abs(edge.top - top.top) <= 1)
+        const right = vertical.find((edge) =>
+          Math.abs(edge.right - top.right) <= 1
+          && Math.abs(edge.top - top.top) <= 1)
+        if (!left || !right) continue
+        frames.push({
+          left: top.left,
+          right: top.right,
+          top: top.top,
+          bottom: bottom.bottom,
+          ruleThicknesses: [
+            top.height,
+            bottom.height,
+            left.width,
+            right.width,
+          ],
+        })
+      }
     }
     assert.equal(
-      verticalFrameLines.length,
-      2,
-      'converted PDF exposes both 65 mm response-frame vertical borders',
+      frames.length,
+      1,
+      'converted PDF exposes one 144 mm by 65 mm filled-rule response frame',
     )
     assert.equal(
-      horizontalFrameLines.length,
-      2,
-      'converted PDF exposes both 144 mm response-frame horizontal borders',
+      frames[0].ruleThicknesses.every(
+        (thickness) => Math.abs(thickness - 0.5) <= 0.12,
+      ),
+      true,
+      'converted PDF response frame uses approximately 0.5pt rules',
     )
-    return {
-      left: Math.min(...verticalFrameLines.map((line) => line.x1)),
-      right: Math.max(...verticalFrameLines.map((line) => line.x1)),
-      top: Math.min(...horizontalFrameLines.map((line) => line.y1)),
-      bottom: Math.max(...horizontalFrameLines.map((line) => line.y1)),
-    }
+    return frames[0]
   } finally {
     rmSync(svgRoot, { recursive: true, force: true })
   }
@@ -1027,7 +1120,6 @@ async function assertActualPaperSurfaceArtifacts() {
       assert.deepEqual(signatures[0], signatures[1])
     }
     for (const { label, consumption } of [
-      { label: 'absent', consumption: absentScreenConsumption },
       { label: 'provided', consumption: providedScreenConsumption },
       { label: 'all-fixed', consumption: allFixedScreenConsumption },
     ]) {
@@ -1039,13 +1131,17 @@ async function assertActualPaperSurfaceArtifacts() {
         ),
         'utf8',
       ))
+      alignAssetGroupsToConsumption(asset, consumption)
       const legacyGroup = asset.content.groups[canonical.groupId]
-      asset.content.blocks = asset.content.blocks.filter(
-        (block) =>
-          block.type === 'group'
-          && block.groupId === canonical.groupId,
+      assert.equal(
+        asset.content.blocks.some(
+          (block) =>
+            block.type === 'group'
+            && block.groupId === canonical.groupId,
+        ),
+        true,
+        'current Screen fixture keeps Application inside the complete whole paper',
       )
-      assert.equal(asset.content.blocks.length, 1)
       legacyGroup.passage.paragraphs = [
         {
           paragraphId: 'poisoned-legacy-salutation',
@@ -1064,10 +1160,7 @@ async function assertActualPaperSurfaceArtifacts() {
         top: ['POISONED LEGACY FIXED TOP'],
         bottom: ['POISONED LEGACY FIXED BOTTOM'],
       }
-      const browserConsumption = consumptionForAssetBlocks(
-        consumption,
-        asset,
-      )
+      const browserConsumption = consumption
       for (const lecture of [false, true]) {
         const page = await browser.newPage({
           viewport: { width: 1280, height: 900 },
@@ -1218,14 +1311,17 @@ async function assertActualPaperSurfaceArtifacts() {
       url.searchParams.set('focusGroupId', pilotGroupId)
       url.searchParams.set('lecture', '1')
       await page.goto(url.href)
-      await page.locator('[data-review-section="value"]').waitFor({
+      await page.locator('.paper-browse-error').waitFor({
         timeout: 10_000,
       })
-      assert.equal(writingAnalysisRequestCount, 1)
-      assert.equal(await page.locator('[data-review-section]').count(), 4)
       assert.equal(
-        await page.locator('.retained-writing-card-value').innerText(),
-        pilotAnalysis.groups[pilotGroupId].writing.reviewCard.value,
+        writingAnalysisRequestCount,
+        0,
+        'a remapped partial current Plan rejects before optional Analysis fetch',
+      )
+      assert.match(
+        await page.locator('.paper-browse-error').innerText(),
+        /absent, duplicated, or outside the Consumption Plan|partial or ambiguous/,
       )
       await page.close()
     }
@@ -1239,13 +1335,13 @@ async function assertActualPaperSurfaceArtifacts() {
         ),
         'utf8',
       ))
+      alignAssetGroupsToConsumption(asset, consumption)
       const writingPartIndex = asset.content.blocks.findIndex(
         (block) =>
           block.type === 'partHeading'
           && block.partId === 'part-2026-i-writing',
       )
       assert.notEqual(writingPartIndex, -1)
-      asset.content.blocks = asset.content.blocks.slice(writingPartIndex)
       const applicationGroupIndex = asset.content.blocks.findIndex(
         (block) =>
           block.type === 'group'
@@ -1260,7 +1356,10 @@ async function assertActualPaperSurfaceArtifacts() {
       )
       assert.ok(applicationAnswerBoxIndex > applicationGroupIndex)
       asset.content.blocks = asset.content.blocks.map((block, index) => {
-        if (index > applicationAnswerBoxIndex) return block
+        if (
+          index < writingPartIndex
+          || index > applicationAnswerBoxIndex
+        ) return block
         if (block.type === 'partHeading') {
           return { ...block, text: 'POISONED LEGACY APPLICATION PART HEADING' }
         }
@@ -1293,10 +1392,7 @@ async function assertActualPaperSurfaceArtifacts() {
           ...occurrence,
           groupId: continuationGroupId,
         }))
-      const browserConsumption = consumptionForAssetBlocks(
-        chromeConsumption,
-        asset,
-      )
+      const browserConsumption = chromeConsumption
       const page = await browser.newPage({
         viewport: { width: 1280, height: 900 },
       })

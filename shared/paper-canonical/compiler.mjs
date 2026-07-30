@@ -9,6 +9,7 @@ import { appendListeningInactiveClosures } from './listeningInactive.mjs'
 import { validateReadingContract } from './reading.mjs'
 import { validateSevenChoicesContract } from './sevenChoices.mjs'
 import { cloneJson, digestJson, exactKeys, isRecordValue, sha256, stableStringify, withoutKey } from './stable.mjs'
+import { canonicalizeVisibleEnglishTypography } from './visibleTypography.mjs'
 
 const blockingPriority = ['answer_conflict', 'incomplete_source', 'unsupported', 'needs_review']
 
@@ -373,6 +374,139 @@ function readingContentTargetValues(content) {
     }
   }
   return { targets, duplicate }
+}
+
+function visitVisibleTextNodes(value, visit, seen = new Set()) {
+  if (Array.isArray(value)) {
+    for (const item of value) visitVisibleTextNodes(item, visit, seen)
+    return
+  }
+  if (!isRecordValue(value)) return
+  if (
+    value.kind === 'text'
+    && typeof value.nodeId === 'string'
+    && typeof value.text === 'string'
+  ) {
+    if (!seen.has(value.nodeId)) {
+      seen.add(value.nodeId)
+      visit(value)
+    }
+    return
+  }
+  for (const child of Object.values(value)) {
+    visitVisibleTextNodes(child, visit, seen)
+  }
+}
+
+function appendVisibleTypographyTransformations(source, diagnostics) {
+  let transformationSequence = Math.max(
+    0,
+    ...(source.transformations || []).map((record) => record.sequence || 0),
+  )
+  const observationById = new Map(
+    (source.observations || []).map((observation) => [
+      observation.observationId,
+      observation,
+    ]),
+  )
+  const registeredRecordIds = new Set(
+    (source.transformations || []).map((record) => record.recordId),
+  )
+  for (const group of source.groups || []) {
+    visitVisibleTextNodes(
+      { content: group.content, variant: group.variant },
+      (inline) => {
+        const before = inline.text
+        const after = canonicalizeVisibleEnglishTypography(before)
+        if (after === before) return
+        const targetKey = `content_node:${inline.nodeId}`
+        const baseSourceSpanId =
+          group.sourceSpanRefsByTarget?.[targetKey]?.[0]
+          || group.sourceSpanId
+        const baseObservationId = baseSourceSpanId?.startsWith('source-span:')
+          ? baseSourceSpanId.slice('source-span:'.length)
+          : null
+        const baseObservation = observationById.get(baseObservationId)
+        if (!baseObservation) {
+          diagnostics.push(diagnostic(
+            'VISIBLE_TYPOGRAPHY_SOURCE_UNRESOLVED',
+            'incomplete_source',
+            `$.groups.${group.groupId}.${targetKey}`,
+            'Visible typography cleanup requires one exact immutable source span',
+          ))
+          return
+        }
+        const observationId =
+          `observation:visible-typography:${group.groupId}:${inline.nodeId}`
+        const visibleSourceSpanId = `source-span:${observationId}`
+        const recordId =
+          `record:visible-typography:${group.groupId}:${inline.nodeId}`
+        if (
+          observationById.has(observationId)
+          || registeredRecordIds.has(recordId)
+        ) {
+          diagnostics.push(diagnostic(
+            'VISIBLE_TYPOGRAPHY_IDENTITY_DUPLICATE',
+            'needs_review',
+            `$.groups.${group.groupId}.${targetKey}`,
+            'Visible typography cleanup identities must be unique',
+          ))
+          return
+        }
+        const observationValue = { nodeId: inline.nodeId, text: before }
+        const observation = {
+          observationId,
+          kind: 'canonical_visible_typography_source',
+          documentInputKey: baseObservation.documentInputKey,
+          value: observationValue,
+          span: cloneJson(baseObservation.span),
+        }
+        source.observations.push(observation)
+        observationById.set(observationId, observation)
+        const record = {
+          recordId,
+          sequence: ++transformationSequence,
+          ruleId: 'canonical-visible-typography',
+          ruleVersion: '1',
+          target: {
+            identity: inline.nodeId,
+            path: 'content.text',
+          },
+          operation: 'canonical_visible_typography',
+          inputSourceSpanIds: [visibleSourceSpanId],
+          before,
+          after,
+          certainty: 'exact',
+          preconditions: {
+            sourceObservationIds: [observationId],
+            sourceValueDigests: [digestJson(observationValue)],
+          },
+          outputDigest: digestJson(after),
+        }
+        source.transformations = [...(source.transformations || []), record]
+        registeredRecordIds.add(recordId)
+        group.sourceSpanRefsByTarget = {
+          ...(group.sourceSpanRefsByTarget || {}),
+          [targetKey]: [
+            ...new Set([
+              ...(group.sourceSpanRefsByTarget?.[targetKey] || []),
+              visibleSourceSpanId,
+            ]),
+          ],
+        }
+        group.transformationRecordIdsByTarget = {
+          ...(group.transformationRecordIdsByTarget || {}),
+          [targetKey]: [
+            ...new Set([
+              ...(group.transformationRecordIdsByTarget?.[targetKey] || []),
+              recordId,
+            ]),
+          ],
+        }
+        inline.text = after
+      },
+    )
+  }
 }
 
 function validNormalizedRegion(region) {
@@ -1014,6 +1148,61 @@ function appendContinuationWritingReferenceGroup({
     })
   }
   if (diagnostics.some((item) => item.code === 'CONTINUATION_SOURCE_OBSERVATION_INVALID')) return
+  const visibleContent = cloneJson(capture.group.content)
+  const sourceSpanRefsByTarget = {}
+  const transformationRecordIdsByTarget = {}
+  let transformationSequence = Math.max(
+    0,
+    ...(source.transformations || []).map((record) => record.sequence || 0),
+  )
+  for (const block of visibleContent.blocks || []) {
+    for (const inline of block.inlines || []) {
+      if (inline.kind !== 'text') continue
+      const before = inline.text
+      const after = canonicalizeVisibleEnglishTypography(before)
+      if (after === before) continue
+      const observationId =
+        `observation:visible-typography:${capture.group.groupId}:${inline.nodeId}`
+      const visibleSourceSpanId = `source-span:${observationId}`
+      const recordId =
+        `record:visible-typography:${capture.group.groupId}:${inline.nodeId}`
+      const observationValue = { nodeId: inline.nodeId, text: before }
+      source.observations.push({
+        observationId,
+        kind: 'canonical_visible_typography_source',
+        documentInputKey: continuationEntry.document.inputKey,
+        value: observationValue,
+        span: { start: 0, end: continuationEntry.document.byteLength },
+      })
+      source.transformations = [...(source.transformations || []), {
+        recordId,
+        sequence: ++transformationSequence,
+        ruleId: 'canonical-visible-typography',
+        ruleVersion: '1',
+        target: {
+          identity: inline.nodeId,
+          path: 'content.text',
+        },
+        operation: 'canonical_visible_typography',
+        inputSourceSpanIds: [visibleSourceSpanId],
+        before,
+        after,
+        certainty: 'exact',
+        preconditions: {
+          sourceObservationIds: [observationId],
+          sourceValueDigests: [digestJson(observationValue)],
+        },
+        outputDigest: digestJson(after),
+      }]
+      sourceSpanRefsByTarget[`content_node:${inline.nodeId}`] = [
+        visibleSourceSpanId,
+      ]
+      transformationRecordIdsByTarget[`content_node:${inline.nodeId}`] = [
+        recordId,
+      ]
+      inline.text = after
+    }
+  }
   source.groups.push({
     groupId: capture.group.groupId,
     slotId: capture.group.slotId,
@@ -1022,9 +1211,11 @@ function appendContinuationWritingReferenceGroup({
     questionIds: [],
     blankIds: [],
     sourceSpanId,
-    content: cloneJson(capture.group.content),
+    content: visibleContent,
     media: [],
     variant: cloneJson(capture.group.variant),
+    sourceSpanRefsByTarget,
+    transformationRecordIdsByTarget,
   })
 }
 
@@ -1147,6 +1338,10 @@ function appendNck1ContinuationInstructionEvidence({
 }
 
 function adaptReferenceFamilies(parsed, documents, diagnostics) {
+  const finish = () => {
+    appendVisibleTypographyTransformations(parsed.value, diagnostics)
+    return parsed
+  }
   const structured = documents
     .filter((document) => document.mediaType === 'application/json' && document.roles.some((role) => ['question_source', 'official_answer_source', 'structured_source'].includes(role)))
     .map((document) => ({ document, value: parseJsonDocument(document, diagnostics) }))
@@ -1259,17 +1454,17 @@ function adaptReferenceFamilies(parsed, documents, diagnostics) {
     inventorySchema: currentAuthority.schemas['listening-source-inventory-v1'],
     diagnostics,
   })
-  if (!paperEntry && !answerEntry) return parsed
+  if (!paperEntry && !answerEntry) return finish()
   if (!paperEntry || !answerEntry) {
     diagnostics.push(diagnostic('REFERENCE_EVIDENCE_INCOMPLETE', 'incomplete_source', '$.evidence.documents', 'Cloze and Grammar Fill reference publication requires paper asset and official answer evidence together'))
-    return parsed
+    return finish()
   }
   const source = parsed.value
   const paper = paperEntry.value
   const answerKey = answerEntry.value
   if (paper.paper?.paperId !== source.paperId || answerKey.paperId !== source.paperId || answerKey.sourceAssetVersion !== source.sourceAssetVersion) {
     diagnostics.push(diagnostic('REFERENCE_SOURCE_IDENTITY_MISMATCH', 'needs_review', '$.evidence.documents', 'Reference paper identity and source version must agree across immutable evidence'))
-    return parsed
+    return finish()
   }
   const hasGrammarFillReference = Object.values(
     paper.content?.groups || {},
@@ -1438,7 +1633,7 @@ function adaptReferenceFamilies(parsed, documents, diagnostics) {
       operation: 'structural_tokenization',
       inputSourceSpanIds: [sourceSpanId],
       before: group.passage.paragraphs,
-      after: content.blocks,
+      after: cloneJson(content.blocks),
       certainty: 'exact',
       preconditions: { sourceObservationIds: [observationId], sourceValueDigests: [digestJson(group)] },
       outputDigest: digestJson(content.blocks),
@@ -1479,7 +1674,7 @@ function adaptReferenceFamilies(parsed, documents, diagnostics) {
       }
     }
   }
-  return parsed
+  return finish()
 }
 
 function captureRequestEvidence(request) {
@@ -1749,9 +1944,22 @@ export function validateExactTransformationRecords(records, capture, closure) {
       && record.after === correctionRecord?.after
       && record.after === correctionEvidence?.instruction?.text
     )
-    const exactProof = expectedPreconditions && stableStringify(record.preconditions) === stableStringify(expectedPreconditions) && stableStringify(record.inputSourceSpanIds) === stableStringify(expectedSpanIds) && (sourceIdentityProof || uniqueJoinProof || profileInstructionCorrectionProof)
+    const visibleTypographyProof = (
+      proof.kind === 'registered_exact_typography'
+      && observations.length === 1
+      && observations[0]?.kind === 'canonical_visible_typography_source'
+      && record.ruleId === 'canonical-visible-typography'
+      && record.ruleVersion === '1'
+      && record.operation === 'canonical_visible_typography'
+      && record.target.identity === observations[0]?.value?.nodeId
+      && record.target.path === 'content.text'
+      && record.before === observations[0]?.value?.text
+      && record.after !== record.before
+      && record.after === canonicalizeVisibleEnglishTypography(record.before)
+    )
+    const exactProof = expectedPreconditions && stableStringify(record.preconditions) === stableStringify(expectedPreconditions) && stableStringify(record.inputSourceSpanIds) === stableStringify(expectedSpanIds) && (sourceIdentityProof || uniqueJoinProof || profileInstructionCorrectionProof || visibleTypographyProof)
     if (recordIds.has(record.recordId) || !Number.isInteger(record.sequence) || record.sequence <= previousSequence || !Array.isArray(record.inputSourceSpanIds) || record.inputSourceSpanIds.length === 0 || record.inputSourceSpanIds.some((id) => !sourceSpanIds.has(id)) || record.outputDigest !== digestJson(record.after) || !exactProof) {
-      diagnostics.push(diagnostic('TRANSFORMATION_CLOSURE_INVALID', 'needs_review', path, 'Transformation sequence, lineage, or output digest cannot be replayed'))
+      diagnostics.push(diagnostic('TRANSFORMATION_CLOSURE_INVALID', 'needs_review', path, `Transformation ${record.recordId || '(unidentified)'} sequence, lineage, or output digest cannot be replayed`))
       continue
     }
     previousSequence = record.sequence

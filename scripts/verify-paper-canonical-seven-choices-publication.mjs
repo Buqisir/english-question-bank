@@ -12,6 +12,9 @@ import { resolveCanonicalAuthority } from '../shared/paper-canonical/authority.m
 import { consumerContractRefs } from '../shared/paper-canonical/consumers.mjs'
 import { digestJson } from '../shared/paper-canonical/stable.mjs'
 import {
+  canonicalizeVisibleEnglishTypography,
+} from '../shared/paper-canonical/visibleTypography.mjs'
+import {
   createFileSystemCanonicalPublicationStore,
   loadPaperForConsumption,
   publishCanonicalPaperPublication,
@@ -146,7 +149,13 @@ function assertRealEvidenceClosure(fixture, compilation) {
     .map((observation) => [observation.value.blankId, observation]))
   for (const [index, block] of group.content.blocks.entries()) {
     const reconstructed = block.inlines.map((inline) => inline.kind === 'text' ? inline.text : markerByBlank.get(inline.blankId).value.marker).join('')
-    assert.equal(reconstructed, sourceGroup.passage.paragraphs[index].text, 'literal punctuation and spacing reconstruct exact source text')
+    assert.equal(
+      reconstructed,
+      canonicalizeVisibleEnglishTypography(
+        sourceGroup.passage.paragraphs[index].text,
+      ),
+      'visible text is the exact registered typography projection of immutable source text',
+    )
   }
   for (const blank of group.blankRefs) {
     const mapEntry = group.sourceMap.entries.find((entry) => entry.target.kind === 'blank' && entry.target.id === blank.blankId)
@@ -156,7 +165,11 @@ function assertRealEvidenceClosure(fixture, compilation) {
     const bytes = new Uint8Array(Buffer.from(document.encodedBytes, 'base64'))
     assert.equal(new TextDecoder().decode(bytes.slice(span.coordinate.start, span.coordinate.end)), markerByBlank.get(blank.blankId).value.marker)
   }
-  assert.deepEqual(group.variant.choiceOwnership.options.map((option) => option.content[0].text), sourceGroup.optionBank.map((option) => option.text))
+  assert.deepEqual(
+    group.variant.choiceOwnership.options.map((option) => option.content[0].text),
+    sourceGroup.optionBank.map((option) =>
+      canonicalizeVisibleEnglishTypography(option.text)),
+  )
   for (const member of group.variant.members) {
     const option = group.variant.choiceOwnership.options.find((candidate) => candidate.optionId === member.answer.optionId)
     const assertion = capture.assertions.find((candidate) => candidate.assertionId === member.answer.authorityAssertionRef)

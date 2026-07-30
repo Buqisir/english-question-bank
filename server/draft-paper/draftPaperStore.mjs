@@ -71,17 +71,10 @@ function inlineFigureImages(html, images) {
 // Fields included are the plan.md step2 "布局编辑" set (item identity/order/
 // page-break-before) PLUS `title` (draft-desk-b step3, DP-title owner ruling
 // 2026-07-12, Option B — see cr-step2-lite.md "DP-title" and plan.md's step2 Must-Do
-// revision note). Step2 originally shipped with `title` EXCLUDED per plan.md's then-
-// literal Must-Do text ("改标题不触发 render") — but draftPaperStore.mjs's own
-// addDraftFooterCss() unconditionally bakes `title` into the CSS `@page
-// @bottom-center` footer text of EVERY page (DP-1 acceptance check (b) required this
-// exact footer to render correctly), so excluding it left a confirmed parity gap: a
-// title-only edit would keep serving a cache hit with the OLD footer text until the
-// next layout edit. The owner ratified Option B (title IN the signature, a title edit
-// triggers a real re-render) precisely because parity is this whole cut's reason to
-// exist and PO-2's "重新排版中…" loading state already absorbs the extra ~700-800ms
-// render this adds on a title edit. studentLabel and the item list view stay excluded
-// — neither ever reaches the printed page.
+// revision note). `title` remains included because it is rendered in the document
+// body and can change pagination. The standard page footer is independently owned
+// by print-renderer.mjs and never embeds the product title. studentLabel and the
+// item list view stay excluded — neither ever reaches the printed page.
 export function draftPaperPaginationSignature(
   draftPaper,
   versionType,
@@ -501,6 +494,223 @@ export function createDraftPaperStore({
     return blocks
   }
 
+  function loadCanonicalPageBreakAfterGroupIds(
+    exportItems,
+    canonicalConsumption,
+  ) {
+    const reject = (message) => {
+      const error = new Error(message)
+      error.code = 'CANONICAL_CONSUMPTION_REJECTED'
+      throw error
+    }
+    const sourcePaperIds = [
+      ...new Set(exportItems.map((item) => item.detail.paperId).filter(Boolean)),
+    ]
+    const sourceAssetVersion = canonicalConsumption?.sourceAssetVersion
+    const sourceAssetDigest = canonicalConsumption?.sourceAssetDigest
+    if (
+      sourcePaperIds.length !== 1
+      || !paperAssetsDir
+      || !Number.isInteger(sourceAssetVersion)
+      || typeof sourceAssetDigest !== 'string'
+    ) {
+      reject('Canonical visible page-break source binding is unavailable')
+    }
+    const assetPath = path.join(
+      paperAssetsDir,
+      sourcePaperIds[0],
+      'versions',
+      `v${sourceAssetVersion}`,
+      'paper-asset.json',
+    )
+    if (!existsSync(assetPath)) {
+      reject('Canonical visible page-break source asset is unavailable')
+    }
+    const assetBytes = readFileSync(assetPath)
+    const observedDigest =
+      `sha256:${createHash('sha256').update(assetBytes).digest('hex')}`
+    if (observedDigest !== sourceAssetDigest) {
+      reject('Canonical visible page-break source digest disagrees')
+    }
+    let asset
+    try {
+      asset = JSON.parse(assetBytes)
+    } catch {
+      reject('Canonical visible page-break source asset is invalid')
+    }
+    if (!Array.isArray(asset?.content?.blocks)) {
+      reject('Canonical visible page-break source blocks are invalid')
+    }
+    const applicationGroupIds = new Set(
+      canonicalConsumption.selections.find(
+        (selection) =>
+          selection.familyContractId === 'application-writing'
+          && selection.mode === 'canonical',
+      )?.groupIds || [],
+    )
+    return new Set(asset.content.blocks.flatMap((block, index, blocks) => {
+      if (
+        block.type !== 'group'
+        || blocks[index + 1]?.type !== 'pageBreakHint'
+      ) return []
+      const nextGroup = blocks.slice(index + 2).find(
+        (candidate) => candidate.type === 'group',
+      )
+      return nextGroup && applicationGroupIds.has(nextGroup.groupId)
+        ? [block.groupId]
+        : []
+    }))
+  }
+
+  function buildCanonicalVisibleBlocks(
+    exportItems,
+    canonicalConsumption,
+    pageBreakAfterGroupIds,
+  ) {
+    if (!Array.isArray(canonicalConsumption?.visibleStructure)) {
+      if (
+        Number(canonicalConsumption?.authorityRef?.manifestVersion) >= 30
+      ) {
+        const error = new Error(
+          'Current canonical Consumption Plan lacks visible structure',
+        )
+        error.code = 'CANONICAL_CONSUMPTION_REJECTED'
+        throw error
+      }
+      return null
+    }
+    const itemByGroupId = new Map(
+      exportItems.map((item) => [item.detail.id, item]),
+    )
+    const blocks = []
+    let pendingPart = null
+    let pendingSection = null
+    let currentPartBlock = null
+    let currentSectionBlock = null
+    let partEmitted = false
+    let sectionEmitted = false
+    let groupInstructionBlocks = []
+    const structuralGroupIds = new Set()
+    const visibleGroupIds = new Set()
+    for (const node of canonicalConsumption.visibleStructure) {
+      if (node.kind === 'part') {
+        if (pendingPart || pendingSection) {
+          const error = new Error(
+            'Canonical visible chrome contains an unresolved heading',
+          )
+          error.code = 'CANONICAL_CONSUMPTION_REJECTED'
+          throw error
+        }
+        pendingPart = node
+        pendingSection = null
+        currentPartBlock = null
+        currentSectionBlock = null
+        partEmitted = false
+        sectionEmitted = false
+        groupInstructionBlocks = []
+        continue
+      }
+      if (node.kind === 'section') {
+        if (pendingPart || pendingSection) {
+          const error = new Error(
+            'Canonical visible chrome contains an unresolved heading',
+          )
+          error.code = 'CANONICAL_CONSUMPTION_REJECTED'
+          throw error
+        }
+        pendingSection = node
+        currentSectionBlock = null
+        sectionEmitted = false
+        groupInstructionBlocks = []
+        continue
+      }
+      if (node.kind === 'instruction') {
+        if (
+          node.placement === 'part_heading'
+          && pendingPart?.instructionId === node.instructionId
+        ) {
+          currentPartBlock = {
+            type: 'section_header',
+            title: node.text,
+          }
+          pendingPart = null
+          continue
+        }
+        if (
+          node.placement === 'section_heading'
+          && pendingSection?.instructionId === node.instructionId
+        ) {
+          currentSectionBlock = {
+            type: 'section_header',
+            title: node.text,
+          }
+          pendingSection = null
+          continue
+        }
+        if (node.placement === 'group_instruction') {
+          groupInstructionBlocks.push({
+            type: 'instruction',
+            instructionId: node.instructionId,
+            text: node.text,
+          })
+          continue
+        }
+        const error = new Error(
+          `Canonical visible instruction is structurally orphaned: ${node.instructionId}`,
+        )
+        error.code = 'CANONICAL_CONSUMPTION_REJECTED'
+        throw error
+      }
+      if (node.kind === 'group') {
+        const item = itemByGroupId.get(node.groupId)
+        if (structuralGroupIds.has(node.groupId)) {
+          const error = new Error(
+            `Canonical visible Group is duplicated: ${node.groupId}`,
+          )
+          error.code = 'CANONICAL_CONSUMPTION_REJECTED'
+          throw error
+        }
+        structuralGroupIds.add(node.groupId)
+        if (!item) {
+          groupInstructionBlocks = []
+          continue
+        }
+        if (currentPartBlock && !partEmitted) {
+          blocks.push(currentPartBlock)
+          partEmitted = true
+        }
+        if (currentSectionBlock && !sectionEmitted) {
+          blocks.push(currentSectionBlock)
+          sectionEmitted = true
+        }
+        blocks.push(...groupInstructionBlocks)
+        groupInstructionBlocks = []
+        visibleGroupIds.add(node.groupId)
+        blocks.push({
+          type: 'question_group',
+          questionGroupId: node.groupId,
+          score: Number(item.score || item.detail.defaultScore || 0),
+        })
+        if (pageBreakAfterGroupIds.has(node.groupId)) {
+          blocks.push({ type: 'page_break' })
+        }
+      }
+    }
+    if (
+      pendingPart
+      || pendingSection
+      || groupInstructionBlocks.length > 0
+      || visibleGroupIds.size !== itemByGroupId.size
+    ) {
+      const error = new Error(
+        'Canonical visible structure does not close the rendered paper',
+      )
+      error.code = 'CANONICAL_CONSUMPTION_REJECTED'
+      throw error
+    }
+    return blocks
+  }
+
   function buildDraftPaperExportInput(draftPaper, { versionType = 'student', printStyle = 'exam', questionNumberStart = 1 } = {}) {
     return {
       title: draftPaper.title || '未命名英语练习卷',
@@ -621,20 +831,6 @@ export function createDraftPaperStore({
     }
   }
 
-  function addDraftFooterCss(html, title) {
-    const safeTitle = String(title || '英语练习卷').replace(/\\/g, '\\\\').replace(/"/g, '\\"')
-    const footerCss = `
-@page {
-  @bottom-center {
-    content: "${safeTitle} · " counter(page);
-    font-size: 9pt;
-    color: #666;
-  }
-}
-`
-    return html.replace('</style>', `${footerCss}\n</style>`)
-  }
-
   // figure-render cut (fig-token P0): `imageMode` defaults to 'web' — the
   // A4 preview + print-preview route are both browser-rendered, served
   // through the app's own origin (`/paper-assets/**` static route), so a
@@ -707,23 +903,32 @@ export function createDraftPaperStore({
       paperAssetsDir,
       versionType: input.versionType,
     })
-    return addDraftFooterCss(
-      buildPrintHtml({
-        title: input.title,
-        versionType: input.versionType,
-        printStyle: input.printStyle,
-        items: exportItems,
-        blocks: input.blocks,
-        questionNumberStart: input.questionNumberStart,
-        paperAssetsDir,
-        imageMode: exportOptions.imageMode === 'file' ? 'file' : 'web',
-        images: exportOptions.images ?? [],
-        canonicalConsumption,
-        clozeChrome,
-        grammarFillChrome,
-      }),
-      input.title,
+    const canonicalPageBreakAfterGroupIds =
+      Array.isArray(canonicalConsumption?.visibleStructure)
+        ? loadCanonicalPageBreakAfterGroupIds(
+            exportItems,
+            canonicalConsumption,
+          )
+        : new Set()
+    const canonicalBlocks = buildCanonicalVisibleBlocks(
+      exportItems,
+      canonicalConsumption,
+      canonicalPageBreakAfterGroupIds,
     )
+    return buildPrintHtml({
+      title: input.title,
+      versionType: input.versionType,
+      printStyle: input.printStyle,
+      items: exportItems,
+      blocks: canonicalBlocks || input.blocks,
+      questionNumberStart: input.questionNumberStart,
+      paperAssetsDir,
+      imageMode: exportOptions.imageMode === 'file' ? 'file' : 'web',
+      images: exportOptions.images ?? [],
+      canonicalConsumption,
+      clozeChrome,
+      grammarFillChrome,
+    })
   }
 
   function resolveDraftCanonicalConsumption(draftPaper) {

@@ -22,9 +22,10 @@ import {
 import { projectCanonicalPaper } from '../../shared/paper-canonical/projector.mjs'
 import { digestJson, sha256, stableStringify, withoutKey } from '../../shared/paper-canonical/stable.mjs'
 
-const publicationFileName = 'canonical-paper-publication-v29.json'
+const publicationFileName = 'canonical-paper-publication-v30.json'
 const publicationFileNames = [
   publicationFileName,
+  'canonical-paper-publication-v29.json',
   'canonical-paper-publication-v28.json',
   'canonical-paper-publication-v27.json',
   'canonical-paper-publication-v26.json',
@@ -1319,6 +1320,25 @@ function canonicalSelections(validated, contract) {
   return { selections, legacyFamilies, allFamilyIds: [...groupIdsByFamily.keys()] }
 }
 
+function canonicalVisibleStructure(validated) {
+  return validated.projected.nodes.flatMap((node) => {
+    if (
+      node.kind === 'part'
+      || node.kind === 'section'
+      || node.kind === 'instruction'
+    ) return [structuredClone(node)]
+    if (node.kind === 'group') {
+      return [{
+        kind: 'group',
+        slotId: node.slotId,
+        groupId: node.groupId,
+        familyContractId: node.familyContractId,
+      }]
+    }
+    return []
+  })
+}
+
 function canonicalMediaArtifacts(validated) {
   const documentsByArtifactId = new Map(
     validated.sourceCapture.documents.map((document) => [
@@ -1410,6 +1430,7 @@ function validateConsumptionPublication({
   return {
     manifest,
     selection: canonicalSelections(validated, contract),
+    visibleStructure: canonicalVisibleStructure(validated),
     mediaArtifacts: canonicalMediaArtifacts(validated),
   }
 }
@@ -1420,6 +1441,7 @@ function readyConsumption(
   manifest,
   canonical,
   legacy,
+  visibleStructure,
   mediaArtifacts,
 ) {
   return {
@@ -1442,6 +1464,11 @@ function readyConsumption(
         : {}
     ),
     selections: [...canonical.selections, ...(legacy || [])],
+    ...(
+      Number(manifest.authority.manifestVersion) >= 30
+        ? { visibleStructure }
+        : {}
+    ),
     mediaArtifacts,
     diagnostics: [],
   }
@@ -1480,7 +1507,12 @@ export async function loadPaperForConsumption(request, store) {
     const sourceAsset = await store.readSourceAsset(ref)
     if (!manifestBytes || !sourceAsset) continue
     try {
-      const { manifest, selection, mediaArtifacts } = validateConsumptionPublication({
+      const {
+        manifest,
+        selection,
+        visibleStructure,
+        mediaArtifacts,
+      } = validateConsumptionPublication({
         ref,
         manifestBytes,
         manifestFileName,
@@ -1502,6 +1534,7 @@ export async function loadPaperForConsumption(request, store) {
         manifest,
         selection,
         legacy,
+        visibleStructure,
         mediaArtifacts,
       )
     } catch (error) {
@@ -1548,7 +1581,12 @@ export function loadPaperForConsumptionSync(request, store) {
     const sourceAsset = store.readSourceAsset(ref)
     if (!manifestBytes || !sourceAsset) continue
     try {
-      const { manifest, selection, mediaArtifacts } = validateConsumptionPublication({
+      const {
+        manifest,
+        selection,
+        visibleStructure,
+        mediaArtifacts,
+      } = validateConsumptionPublication({
         ref,
         manifestBytes,
         manifestFileName,
@@ -1570,6 +1608,7 @@ export function loadPaperForConsumptionSync(request, store) {
         manifest,
         selection,
         legacy,
+        visibleStructure,
         mediaArtifacts,
       )
     } catch (error) {

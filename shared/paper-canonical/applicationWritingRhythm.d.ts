@@ -9,7 +9,8 @@ export declare const applicationWritingRhythm: Readonly<{
     physicalAuthority: Readonly<{ path: string; section: string }>
     widthMm: number
     heightMm: number
-    borderPt: number
+    screenBorderPx: number
+    printBorderPt: number
     paddingMm: number
     atomicity: string
     usableArea: string

@@ -12,7 +12,19 @@ import {
 } from '../server/paper-canonical/publication.mjs'
 import {
   compileCanonicalPaper,
+  validateExactTransformationRecords,
 } from '../shared/paper-canonical/compiler.mjs'
+import {
+  projectCanonicalPaper,
+} from '../shared/paper-canonical/projector.mjs'
+import {
+  canonicalAuthorityRef,
+  resolveCanonicalAuthority,
+} from '../shared/paper-canonical/authority.mjs'
+import {
+  canonicalizeVisibleEnglishTypography,
+} from '../shared/paper-canonical/visibleTypography.mjs'
+import { digestJson } from '../shared/paper-canonical/stable.mjs'
 import {
   makeReviewedReadingSourceCapture,
 } from '../test-fixtures/paper-canonical/readingReferenceFixture.mjs'
@@ -211,7 +223,156 @@ assert.equal(
   'flattened paper-asset marker text cannot replace structured Reading evidence',
 )
 const readyPilot = compileCanonicalPaper(pilotRequest)
-assert.equal(readyPilot.disposition, 'ready')
+assert.equal(
+  readyPilot.disposition,
+  'ready',
+  JSON.stringify(readyPilot.artifacts.normalizationReport.diagnostics, null, 2),
+)
+const projectedPilot = projectCanonicalPaper({
+  plan: readyPilot.artifacts.canonicalPaper.paperPlan,
+  groups: readyPilot.artifacts.canonicalPaper.questionGroups,
+  sourceCapture: readyPilot.artifacts.sourceCapture,
+  authorityClosure: resolveCanonicalAuthority(canonicalAuthorityRef).closure,
+})
+const projectedChrome = projectedPilot.nodes.filter(
+  (node) => node.kind === 'part'
+    || node.kind === 'section'
+    || node.kind === 'instruction',
+)
+assert.equal(
+  projectedChrome.some((node) =>
+    node.partId === 'listening'
+    || node.sectionId === 'listening.dialogues'
+    || node.instructionId === 'part.listening'
+    || node.instructionId === 'section.listening'),
+  false,
+  'inactive Listening contributes zero visible chrome',
+)
+assert.deepEqual(
+  projectedChrome.slice(0, 6),
+  [
+    {
+      kind: 'part',
+      partId: 'reading',
+      instructionId: 'part.reading',
+    },
+    {
+      kind: 'instruction',
+      instructionId: 'part.reading',
+      placement: 'part_heading',
+      text: '第二部分 阅读（共两节，满分50分）',
+      renderPolicy: 'render',
+    },
+    {
+      kind: 'section',
+      sectionId: 'reading.choice',
+      instructionId: 'section.reading-choice',
+    },
+    {
+      kind: 'instruction',
+      instructionId: 'section.reading-choice',
+      placement: 'section_heading',
+      text: '第一节（共15小题；每小题2.5分，满分37.5分）',
+      renderPolicy: 'render',
+    },
+    {
+      kind: 'instruction',
+      instructionId: 'reading.choice.prompt',
+      placement: 'group_instruction',
+      text: '阅读下列短文，从每题所给的A、B、C、D四个选项中选出最佳选项。',
+      renderPolicy: 'render',
+    },
+    {
+      kind: 'section',
+      sectionId: 'reading.seven-choices',
+      instructionId: 'section.seven-choices',
+    },
+  ],
+  'the public projection begins with exact Reading hierarchy and instruction',
+)
+const sevenChoicesChrome = projectedChrome.slice(6, 8)
+assert.deepEqual(
+  sevenChoicesChrome.map((node) => node.text).filter(Boolean),
+  [
+    '第二节（共5小题；每小题2.5分，满分12.5分）',
+    '阅读下面短文，从短文后的选项中选出可以填入空白处的最佳选项。选项中有两项为多余选项。',
+  ],
+  'Seven Choices keeps its complete section title and visible instruction',
+)
+const continuationProjection = projectedPilot.nodes.find(
+  (node) =>
+    node.kind === 'group'
+    && node.familyContractId === 'continuation-writing',
+)
+const continuationVisibleText = continuationProjection.material.blocks
+  .flatMap((block) => block.inlines.map((inline) => inline.text))
+  .join(' ')
+assert.equal(
+  continuationVisibleText.includes('ditch (沟).'),
+  true,
+  'visible canonical typography uses a half-width gloss with adjacent punctuation',
+)
+for (const expected of ['didn’t', 'Emily’s']) {
+  assert.equal(
+    continuationVisibleText.includes(expected),
+    true,
+    `visible canonical typography uses the registered curly apostrophe in ${expected}`,
+  )
+}
+assert.equal(
+  canonicalizeVisibleEnglishTypography("you're"),
+  'you’re',
+  'the registered exact rule covers English contractions without broad punctuation normalization',
+)
+assert.equal(
+  readyPilot.artifacts.normalizationReport.transformationRecords.some(
+    (record) =>
+      record.operation === 'canonical_visible_typography'
+      && record.ruleId === 'canonical-visible-typography',
+  ),
+  true,
+  'visible punctuation cleanup is backed by a registered exact Transformation Record',
+)
+const sevenChoicesGroup = readyPilot.artifacts.canonicalPaper.questionGroups
+  .find((group) => group.contractRef.familyContractId === 'seven-choices')
+assert.ok(sevenChoicesGroup, 'pilot publishes canonical Seven Choices')
+assert.equal(
+  JSON.stringify(sevenChoicesGroup).includes('algorithms (算法),'),
+  true,
+  'the registered typography rule removes source-layout spacing before punctuation in Reading',
+)
+assert.equal(
+  JSON.stringify(sevenChoicesGroup).includes('algorithms (算法) ,'),
+  false,
+  'source-layout spacing does not govern visible canonical Reading typography',
+)
+const poisonedTypographyRecords = structuredClone(
+  readyPilot.artifacts.normalizationReport.transformationRecords,
+)
+const poisonedTypographyRecord = poisonedTypographyRecords.find(
+  (record) =>
+    record.operation === 'canonical_visible_typography'
+    && record.before.includes('algorithms'),
+)
+assert.ok(
+  poisonedTypographyRecord,
+  'Seven Choices typography cleanup has one exact replayable record',
+)
+poisonedTypographyRecord.after = poisonedTypographyRecord.before
+poisonedTypographyRecord.outputDigest = digestJson(
+  poisonedTypographyRecord.after,
+)
+assert.equal(
+  validateExactTransformationRecords(
+    poisonedTypographyRecords,
+    readyPilot.artifacts.sourceCapture,
+    resolveCanonicalAuthority(canonicalAuthorityRef).closure,
+  ).diagnostics.some(
+    (diagnostic) => diagnostic.code === 'TRANSFORMATION_CLOSURE_INVALID',
+  ),
+  true,
+  'a digest-consistent poisoned typography record fails independent exact replay',
+)
 assert.deepEqual(
   readyPilot.artifacts.canonicalPaper.questionGroups.map(
     (group) => group.identity.groupId,
@@ -277,17 +438,48 @@ const browseGroupIds = browseAsset.content.blocks.flatMap((block) =>
 const browseConsumption = {
   disposition: 'ready',
   paperId,
+  visibleStructure: projectedPilot.nodes.flatMap((node) => {
+    if (
+      node.kind === 'part'
+      || node.kind === 'section'
+      || node.kind === 'instruction'
+    ) return [node]
+    if (node.kind === 'group') {
+      return [{
+        kind: node.kind,
+        slotId: node.slotId,
+        groupId: node.groupId,
+        familyContractId: node.familyContractId,
+      }]
+    }
+    return []
+  }),
   selections: [{
     mode: 'canonical',
     familyContractId: 'reading',
     groupIds: browseGroupIds,
   }],
 }
-assert.doesNotThrow(() =>
-  projectAssetBlocksToCanonicalConsumption(
-    browseAsset,
-    browseConsumption,
-  ))
+const projectedBrowseAsset = projectAssetBlocksToCanonicalConsumption(
+  browseAsset,
+  browseConsumption,
+)
+assert.deepEqual(
+  projectedBrowseAsset.content.blocks
+    .filter((block) =>
+      block.type === 'partHeading'
+      || block.type === 'sectionHeading'
+      || block.type === 'instruction')
+    .slice(0, 4)
+    .map((block) => block.text),
+  [
+    '第二部分 阅读（共两节，满分50分）',
+    '第一节（共15小题；每小题2.5分，满分37.5分）',
+    '阅读下列短文，从每题所给的A、B、C、D四个选项中选出最佳选项。',
+    '第二节（共5小题；每小题2.5分，满分12.5分）',
+  ],
+  'PaperBrowse consumes public canonical chrome instead of source-layout accidents',
+)
 const planExternalAsset = structuredClone(browseAsset)
 planExternalAsset.content.groups['group-plan-external'] = {
   groupId: 'group-plan-external',

@@ -921,3 +921,49 @@ and inactive Listening semantics remain unchanged. Focused source/public,
 publication, admission/recovery, default-producer, and actual-artifact checks
 pass. Final `pnpm -C app run verify:all` reports 115 PASS / 1 declared off-repo
 SKIP / 0 FAIL, and `git diff --check` passes.
+
+Whole-paper public-chrome and typography repair (2026-07-30):
+Manifest v30 publishes immutable NCK1 v9, Normalization Rules v4, Renderer
+Typography v5, Application Writing rhythm v3, Continuation Writing rhythm v3,
+Grammar Fill public-geometry-fixtures v9, Screen v30, and Print/PDF v31.
+Every published predecessor byte remains unchanged.
+
+The ready Plan now projects renderer-neutral visible part, section,
+instruction, and Group order. Inactive Listening contributes no visible node
+or gap, while the first visible heading remains `第二部分 阅读（共两节，满分50分）`;
+Reading Choice and Seven Choices retain their complete section titles and
+instructions on Screen, Student/Teacher Print HTML, and direct Chromium PDF.
+The Print store consumes that public structure instead of rebuilding visible
+chrome from the raw source layout.
+
+Ordinary Reading, Cloze, Grammar Fill, Application prompt, and Continuation
+material paragraphs use one 2 em first-line indent. The two supplied
+Continuation starters remain a separate accepted 4 em role. Print/PDF keeps
+the fixed 18 pt baseline and introduces no page-level line-height adaptation.
+Screen rules remain 1 px; printed blank underlines and the two writing response
+boxes use filled approximately 0.5 pt rules, avoiding Chromium's approximately
+0.75 pt border quantization.
+
+Normalization Rules v4 registers the narrow exact
+`canonical-visible-typography` transformation. Chinese gloss parentheses,
+their adjacent ASCII punctuation spacing, and English intra-word apostrophes
+are cleaned before publication through source-bound observations and replayable
+Transformation Records; raw Source Capture bytes remain immutable. A
+digest-consistent poisoned record fails independent exact replay.
+
+Real plain/lecture Screen plus Student/Teacher Print HTML and exact-A4
+Chromium PDF pass. The Student PDF has 9 pages and Teacher PDF has 14 pages.
+Every PDF page contains the extracted standard footer
+`英语试题 第X页(共Y页)` at the accepted bottom position and contains no
+`Canonical Import Pilot · X` footer. Actual PDF vectors measure the writing
+box and blank rules at approximately 0.5 pt and reject the approximately
+0.75 pt result. Visual inspection confirms the complete Reading hierarchy,
+Seven Choices instruction, 2 em material paragraphs, distinct 4 em starters,
+canonical visible punctuation, answer visibility, and unclipped response
+regions.
+
+Focused publication, admission/recovery, Screen, Print HTML, and direct-PDF
+checks pass. App typecheck/build passes. The final registered
+`pnpm -C app run verify:all` reports 115 PASS / 1 declared off-repo SKIP /
+0 FAIL, and `git diff --check` passes. Ordinary Standards + Spec self-review
+finds no remaining bounded defect.

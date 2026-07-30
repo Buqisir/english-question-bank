@@ -78,11 +78,11 @@ const passageLetterReferencePath = path.join(
 )
 const readingPredecessorOraclePath = path.join(
   repositoryRoot,
-  'docs/cuts/paper-canonical-unification/qa/20-reading-predecessor-oracles.json',
+  'docs/cuts/paper-canonical-unification/qa/20-reading-predecessor-oracles-v3.json',
 )
 const readingPdfRoleOraclePath = path.join(
   repositoryRoot,
-  'docs/cuts/paper-canonical-unification/qa/20-reading-pdf-role-oracles.json',
+  'docs/cuts/paper-canonical-unification/qa/20-reading-pdf-role-oracles-v2.json',
 )
 const sevenChoicesPreservedReferencePath = path.join(
   repositoryRoot,
@@ -110,7 +110,7 @@ const clozeSourceOraclePath = path.join(
 )
 const clozeCoverageOraclePath = path.join(
   repositoryRoot,
-  'docs/cuts/paper-canonical-unification/qa/20-cloze-observed-coverage-oracle-v1.json',
+  'docs/cuts/paper-canonical-unification/qa/20-cloze-observed-coverage-oracle-v2.json',
 )
 const grammarFillReferencePath = path.join(
   repositoryRoot,
@@ -513,18 +513,18 @@ function assertSevenChoicesReferenceEvidence() {
   )
   assert.equal(
     canonicalAuthorityRef.manifestVersion,
-    '29',
-    'new Publications preserve Seven Choices inside the Continuation Writing successor authority',
+    '30',
+    'new Publications preserve Seven Choices inside the whole-paper typography successor authority',
   )
   assert.equal(
     consumerContractRefs.screen.version,
-    '29',
-    'Screen v29 binds the complete geometry authority closure',
+    '30',
+    'Screen v30 binds the complete geometry authority closure',
   )
   assert.equal(
     consumerContractRefs.print_pdf.version,
-    '30',
-    'Print/PDF v30 binds the complete geometry authority closure',
+    '31',
+    'Print/PDF v31 binds the complete geometry authority closure',
   )
   assert.equal(
     sha256(preservedBytes),
@@ -992,11 +992,31 @@ function assertClozeReferenceEvidence() {
 
 function assertClozeCoverageOracle() {
   const bytes = readFileSync(clozeCoverageOraclePath)
-  const oracle = JSON.parse(bytes)
+  const successor = JSON.parse(bytes)
   assert.equal(
-    oracle.schemaVersion,
-    'cloze-observed-coverage-oracle-v1',
+    successor.schemaVersion,
+    'cloze-observed-coverage-oracle-v2',
   )
+  const predecessorPath = path.join(
+    repositoryRoot,
+    successor.predecessor.path,
+  )
+  const predecessorBytes = readFileSync(predecessorPath)
+  assert.equal(
+    sha256(predecessorBytes),
+    successor.predecessor.sha256,
+    'Cloze coverage successor binds the immutable v1 predecessor bytes',
+  )
+  const oracle = JSON.parse(predecessorBytes)
+  oracle.schemaVersion = successor.schemaVersion
+  oracle.variantOracle.profiles = {
+    ...oracle.variantOracle.profiles,
+    ...successor.profileAdditions,
+  }
+  oracle.variantOracle.profileByBundleVariant = {
+    ...oracle.variantOracle.profileByBundleVariant,
+    ...successor.profileOverrides,
+  }
   for (const binding of [
     oracle.authorityBoundary.sourceOracle,
     oracle.authorityBoundary.goldenReference,
@@ -1509,7 +1529,7 @@ function assertReadingPredecessorOracle() {
   const oracle = JSON.parse(readFileSync(readingPredecessorOraclePath, 'utf8'))
   assert.equal(
     oracle.schemaVersion,
-    'reading-rhythm-oracles-v2',
+    'reading-rhythm-oracles-v3',
     'Reading predecessor oracle uses the reviewed schema',
   )
   assert.equal(oracle.paperId, paperId)
@@ -1538,7 +1558,7 @@ function assertReadingPredecessorOracle() {
       assert.equal(
         entry.predecessorRole,
         index === 0
-          ? consumerId === 'screen' ? 'subsection' : 'part_title'
+          ? 'meta_instruction'
           : 'option_line',
         `${consumerId} oracle names the exact semantic predecessor role`,
       )
@@ -1563,18 +1583,18 @@ function assertReadingPredecessorOracle() {
   }
   assert.equal(
     oracle.readingEnd.screenNextSectionVisibleText,
-    '第二节 (共5小题；每小题2.5分，满分12.5分)',
+    '第二节（共5小题；每小题2.5分，满分12.5分）',
   )
   assert.equal(
     oracle.readingEnd.printPdfNextSectionVisibleText,
-    '第二部分 七选五',
+    '第二节（共5小题；每小题2.5分，满分12.5分）',
   )
   return oracle
 }
 
 function assertReadingPdfRoleOracle() {
   const oracle = JSON.parse(readFileSync(readingPdfRoleOraclePath, 'utf8'))
-  assert.equal(oracle.schemaVersion, 'reading-pdf-role-oracles-v1')
+  assert.equal(oracle.schemaVersion, 'reading-pdf-role-oracles-v2')
   assert.equal(oracle.paperId, paperId)
   assert.equal(
     sha256(readFileSync(path.join(repositoryRoot, oracle.sourceAsset.path))),
@@ -1600,6 +1620,22 @@ function assertReadingPdfRoleOracle() {
     oracle.exactA4Variant.stemLineCount,
     2,
     'Reading PDF role oracle pins an exact two-line stem case',
+  )
+  assert.equal(
+    oracle.chrome.partTitleVisibleText,
+    '第二部分 阅读（共两节，满分50分）',
+  )
+  assert.equal(
+    oracle.chrome.sectionTitleVisibleText,
+    '第一节（共15小题；每小题2.5分，满分37.5分）',
+  )
+  assert.equal(
+    oracle.chrome.instructionVisibleText,
+    '阅读下列短文，从每题所给的A、B、C、D四个选项中选出最佳选项。',
+  )
+  assert.equal(
+    oracle.readingEnd.nextSectionVisibleText,
+    '第二节（共5小题；每小题2.5分，满分12.5分）',
   )
   return oracle
 }
@@ -3411,7 +3447,10 @@ function recordClozeBundleCoverage(
     assert.equal(
       expectedVariantEdges.includes(observed.edgeId),
       true,
-      `${bundleId}/${variant} observes only its independently declared edges`,
+      `${bundleId}/${variant} observes only its independently declared edges: ${JSON.stringify({
+        observed: observed.edgeId,
+        expected: expectedVariantEdges,
+      })}`,
     )
     observations.push({
       bundleId,
@@ -6800,6 +6839,80 @@ function groupedThinRectangles(rectangles, orientation) {
   })).sort((left, right) => left.coordinate - right.coordinate)
 }
 
+function filledThinBoxCandidates(rectangles, expectedWidth, expectedHeight) {
+  const unique = [
+    ...new Map(rectangles
+      .filter((rectangle) => !rectangle.stroked)
+      .map((rectangle) => [
+        [
+          rectangle.page,
+          rectangle.xMin.toFixed(2),
+          rectangle.yMin.toFixed(2),
+          rectangle.xMax.toFixed(2),
+          rectangle.yMax.toFixed(2),
+        ].join(':'),
+        rectangle,
+      ])).values(),
+  ]
+  const horizontal = unique.filter(({ width, height }) =>
+    Math.abs(width - expectedWidth) <= 2.5
+    && height >= 0.35
+    && height <= 0.65)
+  const vertical = unique.filter(({ width, height }) =>
+    Math.abs(height - expectedHeight) <= 2.5
+    && width >= 0.35
+    && width <= 0.65)
+  const candidates = []
+  for (const top of horizontal) {
+    for (const bottom of horizontal) {
+      if (
+        bottom.yMin <= top.yMin
+        || Math.abs(top.xMin - bottom.xMin) > 1
+        || Math.abs(top.xMax - bottom.xMax) > 1
+        || Math.abs(bottom.yMax - top.yMin - expectedHeight) > 2.5
+      ) continue
+      const left = vertical.find((edge) =>
+        Math.abs(edge.xMin - top.xMin) <= 1
+        && Math.abs(edge.yMin - top.yMin) <= 1
+        && Math.abs(edge.yMax - bottom.yMax) <= 1)
+      const right = vertical.find((edge) =>
+        Math.abs(edge.xMax - top.xMax) <= 1
+        && Math.abs(edge.yMin - top.yMin) <= 1
+        && Math.abs(edge.yMax - bottom.yMax) <= 1)
+      if (!left || !right) continue
+      candidates.push({
+        page: top.page,
+        xMin: Math.min(top.xMin, left.xMin),
+        yMin: Math.min(top.yMin, left.yMin, right.yMin),
+        xMax: Math.max(top.xMax, right.xMax),
+        yMax: Math.max(bottom.yMax, left.yMax, right.yMax),
+        width: Math.max(top.xMax, right.xMax)
+          - Math.min(top.xMin, left.xMin),
+        height: Math.max(bottom.yMax, left.yMax, right.yMax)
+          - Math.min(top.yMin, left.yMin, right.yMin),
+        ruleThicknesses: [
+          top.height,
+          bottom.height,
+          left.width,
+          right.width,
+        ],
+      })
+    }
+  }
+  return [
+    ...new Map(candidates.map((candidate) => [
+      [
+        candidate.page,
+        candidate.xMin.toFixed(1),
+        candidate.yMin.toFixed(1),
+        candidate.xMax.toFixed(1),
+        candidate.yMax.toFixed(1),
+      ].join(':'),
+      candidate,
+    ])).values(),
+  ]
+}
+
 function findNativeTableGrid(rectangles, rowCount, columnCount) {
   const vertical = groupedThinRectangles(rectangles, 'vertical')
     .filter((group) => group.count >= rowCount)
@@ -8000,7 +8113,8 @@ function pdfRoleLines(words) {
     text: line.words.map((word) => word.text).join(' '),
     }))
   const pageBodySeams = new Map()
-  for (const page of [...new Set(measuredLines.map((line) => line.page))]) {
+  const pages = [...new Set(measuredLines.map((line) => line.page))]
+  for (const page of pages) {
     const pageLines = measuredLines.filter((line) => line.page === page)
     const footerLine = pageLines.at(-1)
     const bodyLines = pageLines.slice(0, -1)
@@ -8016,6 +8130,23 @@ function pdfRoleLines(words) {
       footerSeparation > median(bodyLineHeights) * 2,
       true,
       `PDF page ${page} separates its measured footer from the body`,
+    )
+    assert.equal(
+      footerLine.text.replace(/\s+/gu, ''),
+      `英语试题第${page}页(共${pages.length}页`,
+      `PDF page ${page} exposes the normalized standard footer geometry`,
+    )
+    assert.equal(
+      footerLine.text.includes('Canonical Import Pilot')
+        || footerLine.text.includes('·'),
+      false,
+      `PDF page ${page} contains no product-title footer`,
+    )
+    const footerBottomOffsetPt = footerLine.pageHeight - footerLine.centerY
+    assert.equal(
+      Math.abs(footerBottomOffsetPt - 17.5 * 72 / 25.4) <= 5,
+      true,
+      `PDF page ${page} keeps the standard footer near 17.5mm from the bottom`,
     )
     const firstBodyLine = bodyLines[0]
     const lastBodyLine = bodyLines.at(-1)
@@ -8036,6 +8167,54 @@ function pdfRoleLines(words) {
     ...line,
     measuredBodySeam: pageBodySeams.get(line.page),
   }))
+}
+
+function assertRawPdfStandardFooters(pdfPath, pageCount, label) {
+  for (let page = 1; page <= pageCount; page += 1) {
+    const rawPageText = execFileSync(
+      'pdftotext',
+      ['-f', String(page), '-l', String(page), '-layout', pdfPath, '-'],
+      { encoding: 'utf8' },
+    )
+    const visibleLines = rawPageText
+      .split(/\r?\n/u)
+      .map((line) => line.trim())
+      .filter(Boolean)
+    const footer = visibleLines.at(-1)?.replace(/\s+/gu, '')
+    assert.equal(
+      footer,
+      `英语试题第${page}页(共${pageCount}页)`,
+      `${label} page ${page} contains the complete standard footer in actual PDF text`,
+    )
+    assert.equal(
+      footer.includes('CanonicalImportPilot') || footer.includes('·'),
+      false,
+      `${label} page ${page} contains no product-title footer`,
+    )
+  }
+}
+
+function uniquePdfLineForExactVisibleText(
+  lines,
+  pdfPath,
+  expectedText,
+  label,
+) {
+  assert.equal(
+    countTextOccurrences(
+      pdfText(pdfPath).replaceAll(/\s/g, ''),
+      expectedText.replaceAll(/\s/g, ''),
+    ),
+    1,
+    `${label} exposes the exact complete visible text once`,
+  )
+  const matches = lines.filter(
+    (line) =>
+      normalizedPdfToken(line.text.replaceAll(/\s/g, ''))
+      === normalizedPdfToken(expectedText.replaceAll(/\s/g, '')),
+  )
+  assert.equal(matches.length, 1, `${label} resolves to one exact PDF line`)
+  return matches[0]
 }
 
 function exactPdfTokens(value) {
@@ -9281,6 +9460,7 @@ function grammarFillPdfRulingMeasurements(pdfPath, pages) {
             yMin,
             yMax,
             widthPt,
+            heightPt,
           })
         }
       }
@@ -9503,6 +9683,16 @@ function assertGrammarFillPdfArtifact(
         - grammarFillRhythm.blankGeometry.widthEm,
       ) <= 0.12,
       true,
+    )
+    assert.equal(
+      Math.abs(proof.ruling.heightPt - 0.5) <= 0.12,
+      true,
+      `${label} blank ${proof.questionId} uses an approximately 0.5pt filled PDF rule: ${proof.ruling.heightPt}`,
+    )
+    assert.equal(
+      proof.ruling.heightPt >= 0.68 && proof.ruling.heightPt <= 0.82,
+      false,
+      `${label} blank ${proof.questionId} emits no approximately 0.75pt rule`,
     )
     assert.equal(/\.$/u.test(proof.word.text), false)
     if (proof.promptWord) {
@@ -9735,7 +9925,7 @@ function assertPdfReadingVerticalRhythm(
   label,
   {
     requireTeacherTail = false,
-    requireInstruction = false,
+    requireInstruction = true,
     requireTwoLineStem = false,
     requireWrappedOption = false,
     requireCrossPageEnd = false,
@@ -9826,13 +10016,15 @@ function assertPdfReadingVerticalRhythm(
   const questionById = new Map(
     questionAnchors.map((anchor) => [anchor.question.questionId, anchor]),
   )
-  const nextSectionWordIndex = uniquePdfSequenceIndex(
-    words,
-    exactPdfTokens(readingPdfRoleOracle.readingEnd.nextSectionVisibleText),
+  const expectedNextSectionText =
+    readingPdfRoleOracle.readingEnd.nextSectionVisibleText
+  const nextSectionLine = uniquePdfLineForExactVisibleText(
+    lines,
+    pdfPath,
+    expectedNextSectionText,
     `${label} post-Reading section`,
   )
-  const nextSectionLine =
-    lines[wordIndexToLineIndex.get(nextSectionWordIndex)]
+  const nextSectionWordIndex = Math.min(...nextSectionLine.wordIndexes)
   const optionRowCases = new Map(
     readingPdfRoleOracle.optionRowCases.map((entry) => [
       entry.questionId,
@@ -10040,22 +10232,33 @@ function assertPdfReadingVerticalRhythm(
     }
   }
 
-  const partTitleWordIndex = uniquePdfSequenceIndex(
-    words,
-    exactPdfTokens(readingPdfRoleOracle.chrome.partTitleVisibleText),
+  const partTitleLine = uniquePdfLineForExactVisibleText(
+    lines,
+    pdfPath,
+    readingPdfRoleOracle.chrome.partTitleVisibleText,
     `${label} Reading part title`,
   )
-  const partTitleLine = lines[wordIndexToLineIndex.get(partTitleWordIndex)]
-  let lastChromeLine = partTitleLine
+  const sectionTitleLine = uniquePdfLineForExactVisibleText(
+    lines,
+    pdfPath,
+    readingPdfRoleOracle.chrome.sectionTitleVisibleText,
+    `${label} Reading section title`,
+  )
+  assert.equal(
+    sectionTitleLine.page === partTitleLine.page
+      && sectionTitleLine.centerY > partTitleLine.centerY,
+    true,
+    `${label} preserves the visible Reading part-to-section hierarchy`,
+  )
+  let lastChromeLine = sectionTitleLine
   if (requireInstruction) {
-    const instructionWordIndex = uniquePdfSequenceIndex(
-      words,
-      exactPdfTokens(readingPdfRoleOracle.chrome.instructionVisibleText),
+    const instructionLine = uniquePdfLineForExactVisibleText(
+      lines,
+      pdfPath,
+      readingPdfRoleOracle.chrome.instructionVisibleText,
       `${label} Reading instruction`,
     )
-    const instructionLine =
-      lines[wordIndexToLineIndex.get(instructionWordIndex)]
-    cover('chrome_internal', partTitleLine, instructionLine)
+    cover('chrome_internal', sectionTitleLine, instructionLine)
     lastChromeLine = instructionLine
   }
   cover('chrome_to_a', lastChromeLine, groupAnchors[0].letterLine)
@@ -10719,10 +10922,11 @@ function assertPdfWritingResponseRegions(
         true,
         `${label} page ${page} SVG viewport equals the PDF CropBox`,
       )
-      matches.push(...svg.rectangles.filter(({ width, height, stroked }) =>
-        stroked
-        && Math.abs(width - expectedWidth) <= 2.5
-        && Math.abs(height - expectedHeight) <= 2.5))
+      matches.push(...filledThinBoxCandidates(
+        svg.rectangles,
+        expectedWidth,
+        expectedHeight,
+      ))
     }
     assert.equal(
       matches.length,
@@ -10733,6 +10937,18 @@ function assertPdfWritingResponseRegions(
       rectangleInsideBox(matches[0], pageBoxes[matches[0].page - 1].cropBox),
       true,
       `${label} ${regionName} response region is fully inside page ${matches[0].page} CropBox`,
+    )
+    assert.equal(
+      matches[0].ruleThicknesses.every(
+        (thickness) => Math.abs(thickness - 0.5) <= 0.12),
+      true,
+      `${label} ${regionName} response region uses approximately 0.5pt filled PDF rules: ${JSON.stringify(matches[0].ruleThicknesses)}`,
+    )
+    assert.equal(
+      matches[0].ruleThicknesses.some(
+        (thickness) => thickness >= 0.68 && thickness <= 0.82),
+      false,
+      `${label} ${regionName} response region emits no approximately 0.75pt rule`,
     )
     region.responsePage = matches[0].page
     const markerWord = marker.match(/[A-Za-z][A-Za-z'-]*/)?.[0]
@@ -10876,6 +11092,8 @@ async function assertApplicationWritingDomArtifact(
       borderRight: Number.parseFloat(style.borderRightWidth),
       paddingLeft: Number.parseFloat(style.paddingLeft),
       paddingRight: Number.parseFloat(style.paddingRight),
+      backgroundImage: style.backgroundImage,
+      boxRule: style.getPropertyValue('--writing-box-rule').trim(),
     }
   })
   const expectedWidth = applicationWritingRhythm.responseGeometry.widthMm
@@ -10914,6 +11132,16 @@ async function assertApplicationWritingDomArtifact(
       expectedHeight,
     })}`,
   )
+  if (surface !== 'screen') {
+    assert.equal(geometry.borderLeft, 0)
+    assert.equal(geometry.borderRight, 0)
+    assert.equal(geometry.boxRule, '0.5pt')
+    assert.equal(
+      countTextOccurrences(geometry.backgroundImage, 'linear-gradient'),
+      4,
+      `${label} targets four approximately 0.5pt printed response rules`,
+    )
+  }
   const usableWidth = geometry.width
     - geometry.borderLeft
     - geometry.borderRight
@@ -10949,6 +11177,8 @@ async function assertApplicationWritingDomArtifact(
     const style = getComputedStyle(element)
     return {
       borderLeft: Number.parseFloat(style.borderLeftWidth),
+      backgroundImage: style.backgroundImage,
+      boxRule: style.getPropertyValue('--writing-box-rule').trim(),
       paddingTop: Number.parseFloat(style.paddingTop),
       paddingRight: Number.parseFloat(style.paddingRight),
       paddingBottom: Number.parseFloat(style.paddingBottom),
@@ -10966,7 +11196,7 @@ async function assertApplicationWritingDomArtifact(
         paddingLeft: 24,
       }
     : {
-        borderLeft: 1,
+        borderLeft: 0,
         paddingTop: 0,
         paddingRight: 0,
         paddingBottom: 0,
@@ -10979,6 +11209,17 @@ async function assertApplicationWritingDomArtifact(
       Math.abs(continuationGeometry[field] - expected) <= 0.05,
       true,
       `${label} restores pre-Application-rhythm Continuation ${field}: ${JSON.stringify(continuationGeometry)}`,
+    )
+  }
+  if (surface !== 'screen') {
+    assert.equal(continuationGeometry.boxRule, '0.5pt')
+    assert.equal(
+      countTextOccurrences(
+        continuationGeometry.backgroundImage,
+        'linear-gradient',
+      ),
+      4,
+      `${label} targets four approximately 0.5pt printed Continuation rules`,
     )
   }
   assert.equal(
@@ -12252,10 +12493,10 @@ async function renderSupportedArtifacts({
         )
         assert.equal(
           immutableChromeHtml.includes(
-            clozeSourceOracle.oracle.publicVisibleChrome.part,
+            '第三部分 语言运用（共两节，满分30分）',
           ),
           true,
-          'Print producer reads Cloze chrome from its immutable Publication-bound source asset',
+          'Print producer reads whole-paper chrome from its immutable Profile-bound Consumption Plan',
         )
         assert.equal(
           immutableChromeHtml.includes(latestClozePart.text),
@@ -12314,6 +12555,10 @@ async function renderSupportedArtifacts({
           {
             type: 'section_header',
             title: readingPdfRoleOracle.chrome.partTitleVisibleText,
+          },
+          {
+            type: 'section_header',
+            title: readingPdfRoleOracle.chrome.sectionTitleVisibleText,
           },
           {
             type: 'instruction',
@@ -13553,6 +13798,7 @@ async function renderSupportedArtifacts({
           `${versionType === 'student' ? 'Student' : 'Teacher'} Chromium PDF`
         assertPdfSemanticOrder(pdfPath, consumers.print_pdf, label)
         const pageBoxes = assertPdfA4AndUnclipped(pdfPath, label)
+        assertRawPdfStandardFooters(pdfPath, pageBoxes.length, label)
         assertPdfReadingQuestionsNotSplit(
           pdfPath,
           consumers.print_pdf,
@@ -13606,8 +13852,8 @@ async function renderSupportedArtifacts({
         '</head>',
         `<style>
 .canonical-application-prompt {
-  width: 160pt !important;
-  max-width: 160pt !important;
+  width: 60pt !important;
+  max-width: 60pt !important;
 }
 </style></head>`,
       )
@@ -14750,7 +14996,7 @@ try {
   )
   const requestPath = path.join(
     sourcePackageDir,
-    'canonical-evidence/canonical-import-request-v29.json',
+    'canonical-evidence/canonical-import-request-v30.json',
   )
   execFileSync(process.execPath, [
     path.join(

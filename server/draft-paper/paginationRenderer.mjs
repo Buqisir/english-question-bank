@@ -3,8 +3,8 @@
 //
 // Input: a complete print HTML string — the same shape
 // draftPaperStore.mjs's buildDraftPrintHtml() already produces
-// (buildPrintHtml output + addDraftFooterCss layered on top, see
-// draftPaperStore.mjs:255-268). This module does not build that HTML and
+// (the complete buildPrintHtml output, including its standard page footer).
+// This module does not build that HTML and
 // does not know about draft papers, groups, or scores — it only paginates
 // whatever complete print HTML string it is given.
 //

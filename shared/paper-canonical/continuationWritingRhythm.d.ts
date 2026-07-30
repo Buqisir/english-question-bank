@@ -9,7 +9,8 @@ export declare const continuationWritingRhythm: Readonly<{
     physicalAuthority: Readonly<{ path: string; section: string }>
     widthMm: number
     heightMm: number
-    borderPt: number
+    screenBorderPx: number
+    printBorderPt: number
     pagination: string
     horizontalAlignment: string
     studentWritableArea: string

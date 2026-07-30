@@ -8,6 +8,8 @@ export type PaperBlankRuling = {
   readonly numberSuffix: ''
   readonly numberAlignment: 'center'
   readonly lineStyle: 'single-thin'
+  readonly screenLineWidthPx: number
+  readonly printLineWidthPt: number
   readonly whiteSpace: 'nowrap'
   readonly hintPlacement: 'immediately-after'
 }

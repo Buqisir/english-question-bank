@@ -539,11 +539,11 @@ function renderCanonicalQuestionOptions(
   }).join('')}</div>`
 }
 
-function cssBorderForBlankRuling(ruling) {
+function cssBackgroundForBlankRuling(ruling) {
   if (ruling.lineStyle !== 'single-thin') {
     throw new Error(`Unsupported paper blank line style ${ruling.lineStyle}`)
   }
-  return '0.48pt solid #000'
+  return `linear-gradient(#000, #000) bottom / 100% ${ruling.printLineWidthPt}pt no-repeat`
 }
 
 /** standard §8: 写作题组 (应用文 / 读后续写) get a bordered blank answer box. */
@@ -977,6 +977,37 @@ export function buildPrintHtml({
         && selection.mode === 'canonical',
     )?.groupIds.filter((groupId) => renderedGroupIds.includes(groupId))
       || []
+  const canonicalContinuationGroupIds =
+    canonicalConsumption?.selections?.find(
+      (selection) =>
+        selection.familyContractId === 'continuation-writing'
+        && selection.mode === 'canonical',
+    )?.groupIds.filter((groupId) => renderedGroupIds.includes(groupId))
+      || []
+  const canonicalWritingChromeBlockIndexes = new Set()
+  if (Array.isArray(blocks)) {
+    for (
+      const groupId of [
+        ...canonicalApplicationGroupIds,
+        ...canonicalContinuationGroupIds,
+      ]
+    ) {
+      const groupBlockIndex = blocks.findIndex(
+        (block) =>
+          block.type === 'question_group'
+          && block.questionGroupId === groupId,
+      )
+      for (let index = groupBlockIndex - 1; index >= 0; index -= 1) {
+        const block = blocks[index]
+        if (block.type === 'section_header' || block.type === 'instruction') {
+          canonicalWritingChromeBlockIndexes.add(index)
+          continue
+        }
+        if (block.type === 'page_break') continue
+        break
+      }
+    }
+  }
   const firstGrammarFillGroupBlockIndex = Array.isArray(blocks)
     ? blocks.findIndex(
         (block) =>
@@ -1175,12 +1206,7 @@ export function buildPrintHtml({
     let groupNum = 0
     for (const [blockIndex, block] of blocks.entries()) {
       if (block.type === 'section_header' && block.title) {
-        if (
-          blockIndex === followingGrammarFillSectionBlockIndex
-          && canonicalApplicationGroupIds.length > 0
-        ) {
-          continue
-        }
+        if (canonicalWritingChromeBlockIndexes.has(blockIndex)) continue
         if (
           clozeChrome
           && blockIndex === firstClozePredecessorBlockIndex
@@ -1315,6 +1341,7 @@ export function buildPrintHtml({
       } else if (
         block.type === 'instruction'
         && block.text
+        && !canonicalWritingChromeBlockIndexes.has(blockIndex)
         && (
           isReadingChromeBlock(blockIndex)
           || isSevenChoicesChromeBlock(blockIndex)
@@ -1324,7 +1351,7 @@ export function buildPrintHtml({
       ) {
         const readingPredecessorAttrs =
           blockIndex === firstReadingPredecessorBlockIndex
-            ? ` data-canonical-reading-preceding-for="${escapeHtml(canonicalReadingGroupIds[0])}" data-canonical-reading-preceding-kind="reading_heading" data-canonical-reading-anchor-id="print-instruction-${blockIndex}"`
+            ? ` data-canonical-reading-preceding-for="${escapeHtml(canonicalReadingGroupIds[0])}" data-canonical-reading-preceding-kind="reading_heading" data-canonical-reading-anchor-id="${escapeHtml(block.instructionId || `print-instruction-${blockIndex}`)}"`
             : ''
         const readingRhythmAttrs = isReadingChromeBlock(blockIndex)
           ? ' data-canonical-reading-rhythm-role="meta_instruction"'
@@ -1851,9 +1878,9 @@ export function buildPrintHtml({
 <title>${escapeHtml(title || '英语试题')}</title>
 <style>
 /* 刀⑤ render-fidelity Chunk B — standard §1: 左右 24mm / 上 ≈21mm.
-   Bottom margin is 24mm (not standard-mandated directly) so the §1 footer
-   distance (页码距底 ≈17.5mm) falls out of an exact, documented sum:
-   24mm margin-bottom - 6.5mm @bottom-center padding-bottom = 17.5mm. */
+   Bottom margin is 24mm (not standard-mandated directly). Chromium's margin
+   box places the 9pt footer literal ≈17.5mm from the physical bottom when the
+   bottom-center content is top-aligned with 4.1mm top padding. */
 @page {
   size: A4;
   margin: 21mm 24mm 24mm 24mm;
@@ -1863,8 +1890,8 @@ export function buildPrintHtml({
     font-family: ${paperSurfaceTokens.paperFontStack};
     font-size: 9pt;
     color: #000;
-    vertical-align: bottom;
-    padding-bottom: 6.5mm;
+    vertical-align: top;
+    padding-top: 4.1mm;
   }
 }
 
@@ -1931,6 +1958,15 @@ body {
   + [data-canonical-seven-choices-chrome]
 ) {
   margin-bottom: ${sevenChoicesRhythm.visibleGeometryAdjustments.printPdf.adjacentChromeMarginBottomEm}em;
+}
+
+.section-header[data-canonical-reading-rhythm-role="part_title"] {
+  margin-bottom: 0;
+}
+
+.section-header[data-canonical-reading-rhythm-role="part_title"]
+  + .section-header[data-canonical-reading-rhythm-role="subsection"] {
+  margin-top: 0;
 }
 
 .page-break {
@@ -2295,7 +2331,7 @@ body {
 }
 
 .section-header[data-canonical-reading-following-for] {
-  margin-top: 18pt;
+  margin-top: 17.25pt;
 }
 
 .section-header[data-canonical-seven-choices-following-for] {
@@ -2456,7 +2492,7 @@ body {
 .print-blank {
   display: inline-block;
   white-space: ${paperBlankRuling.cloze.whiteSpace};
-  border-bottom: ${cssBorderForBlankRuling(paperBlankRuling.cloze)};
+  background: ${cssBackgroundForBlankRuling(paperBlankRuling.cloze)};
   text-align: ${paperBlankRuling.cloze.numberAlignment};
   vertical-align: baseline;
   margin: 0 0.15em;
@@ -2479,13 +2515,19 @@ ${grammarFillGeometryFixtureCss}
    relative 承载子行的 absolute 定位; 应用文框维持空框(无 starter 子元素时
    与刀前字节一致)。 */
 .writing-answer-box {
-  border: 0.48pt solid #000;
+  --writing-box-rule: 0.5pt;
+  border: 0;
+  background:
+    linear-gradient(#000, #000) top / 100% var(--writing-box-rule) no-repeat,
+    linear-gradient(#000, #000) bottom / 100% var(--writing-box-rule) no-repeat,
+    linear-gradient(#000, #000) left / var(--writing-box-rule) 100% no-repeat,
+    linear-gradient(#000, #000) right / var(--writing-box-rule) 100% no-repeat;
   margin: 1em auto 0;
   position: relative;
 }
 
 .canonical-application-response {
-  border-width: ${applicationWritingRhythm.responseGeometry.borderPt}pt;
+  --writing-box-rule: ${applicationWritingRhythm.responseGeometry.printBorderPt}pt;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
@@ -2522,7 +2564,7 @@ ${grammarFillGeometryFixtureCss}
   box-sizing: border-box;
   width: ${continuationWritingRhythm.responseGeometry.widthMm}mm;
   height: ${continuationWritingRhythm.responseGeometry.heightMm}mm;
-  border-width: ${continuationWritingRhythm.responseGeometry.borderPt}pt;
+  --writing-box-rule: ${continuationWritingRhythm.responseGeometry.printBorderPt}pt;
   margin-top: ${continuationWritingRhythm.rendererMapping.printPdf.responseMarginTopPt}pt;
   padding: ${continuationWritingRhythm.rendererMapping.printPdf.responsePaddingPt}pt;
   position: relative;
@@ -2574,6 +2616,12 @@ ${grammarFillGeometryFixtureCss}
   break-inside: avoid;
   page-break-inside: avoid;
 }
+
+${isTeacher ? `
+.question-group[data-canonical-group-type="continuation"] {
+  break-before: page;
+}
+` : ''}
 
 .writing-starter-line {
   margin: 0 ${continuationWritingRhythm.starterGeometry.trailingInsetEm}em 0 ${continuationWritingRhythm.starterGeometry.firstLineIndentEm}em;

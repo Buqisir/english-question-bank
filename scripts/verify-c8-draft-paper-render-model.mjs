@@ -159,6 +159,7 @@ console.log('C8 verify: draft paper render model')
 const server = read('server/api.mjs')
 const draftRoutes = read('server/draft-paper/draftPaperRoutes.mjs')
 const draftStore = read('server/draft-paper/draftPaperStore.mjs')
+const printRenderer = read('server/print-renderer.mjs')
 // H9/C8 originally forbade touching print-renderer.mjs rendering logic.
 // Restart cut ③ (docs/cuts/restart-2026-07-mainline/plan.md) was the first
 // authorized, narrow supersession (isMetaStub() stub-hiding).
@@ -207,9 +208,12 @@ assert('draft render uses student version only', !draftBody.includes('【答案�
 assert('draft render emits section headers in type order', firstSection >= 0 && secondSection > firstSection && thirdSection > secondSection)
 assert('draft render emits a page break before the second group only', firstSection >= 0 && firstQuestion > firstSection && pageBreak > firstQuestion && secondSection > pageBreak)
 assert('draft render reopens a new section when group type returns later', thirdSection > secondSection)
-assert('draft render keeps footer title and page counter', draftHtml.includes('H9 Draft · ') && draftHtml.includes('counter(page)'))
-assert('footer is injected outside print renderer body', draftStore.includes('addDraftFooterCss'))
-assert('footer contains title and page counter', /counter\(page\)/.test(draftStore))
+assert('draft render keeps the standard complete footer', draftHtml.includes('英语试题 第') && draftHtml.includes('counter(pages)'))
+assert('draft store does not override the standard footer with a product title', !draftStore.includes('addDraftFooterCss'))
+assert(
+  'print renderer owns page and total-page counters',
+  /content:\s*"英语试题 第"\s*counter\(page\)\s*"页\(共"\s*counter\(pages\)\s*"页\)"/.test(printRenderer),
+)
 // draft-desk-b step4 (MF-2/MF-7, plan.md "步4 — PDF 换引擎收口 + Vivliostyle
 // 草稿卷退役"): exportDraftPaperPdf no longer calls buildDraftPrintHtml +
 // Vivliostyle CLI directly (that whole line, including `imageMode: 'file'` +

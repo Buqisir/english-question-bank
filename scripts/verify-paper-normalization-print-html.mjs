@@ -299,7 +299,11 @@ assert.equal(
 const blankRule = studentCombined.match(/\.print-blank \{[^}]*\}/)?.[0] || ''
 assert.match(blankRule, /display:\s*inline-block/)
 assert.match(blankRule, /white-space:\s*nowrap/)
-assert.match(blankRule, /border-bottom:\s*0\.48pt solid #000/)
+assert.match(
+  blankRule,
+  /background:\s*linear-gradient\(#000, #000\) bottom \/ 100% 0\.5pt no-repeat/,
+)
+assert.doesNotMatch(blankRule, /border-bottom:/)
 assert.match(blankRule, /text-align:\s*center/)
 assert.match(studentCombined, /\.print-blank--short \{ width: 3\.3em; \}/)
 assert.match(studentCombined, /\.print-blank--seven \{ width: 4\.6em; \}/)

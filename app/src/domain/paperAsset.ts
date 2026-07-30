@@ -108,6 +108,7 @@ export type PaperBlockSectionHeading = {
 
 export type PaperBlockInstruction = {
   type: 'instruction'
+  instructionId?: string
   text: string
 }
 

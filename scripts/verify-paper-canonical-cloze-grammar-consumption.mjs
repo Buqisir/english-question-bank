@@ -173,12 +173,51 @@ async function assertActualPaperBrowseBoundary({
   const readyGroupIds = new Set(
     readyConsumption.selections.flatMap((selection) => selection.groupIds),
   )
+  const familyGroupType = {
+    reading: 'reading',
+    'seven-choices': 'sevenChoices',
+    cloze: 'cloze',
+    'grammar-fill': 'grammarFill',
+    'application-writing': 'writing',
+    'continuation-writing': 'writing',
+  }
+  const sourceGroups = Object.values(browserAsset.content.groups)
+  const alignedGroups = Object.fromEntries(
+    Object.entries(browserAsset.content.groups).filter(
+      ([groupId, group]) =>
+        group.groupType === 'listening' && readyGroupIds.has(groupId),
+    ),
+  )
+  for (const selection of readyConsumption.selections) {
+    for (const groupId of selection.groupIds) {
+      const template = browserAsset.content.groups[groupId]
+        || sourceGroups.find((group) =>
+          group.groupType === familyGroupType[selection.familyContractId])
+      assert.ok(template, `browser fixture has ${selection.familyContractId}`)
+      alignedGroups[groupId] = {
+        ...structuredClone(template),
+        groupId,
+      }
+    }
+  }
+  browserAsset.content.groups = alignedGroups
   browserAsset.content.blocks = browserAsset.content.blocks.filter(
     (block) =>
-      block.type === 'group' && readyGroupIds.has(block.groupId),
+      block.type !== 'group'
+      || browserAsset.content.groups[block.groupId],
   )
+  const sourceBlockGroupIds = new Set(
+    browserAsset.content.blocks
+      .filter((block) => block.type === 'group')
+      .map((block) => block.groupId),
+  )
+  for (const groupId of readyGroupIds) {
+    if (!sourceBlockGroupIds.has(groupId)) {
+      browserAsset.content.blocks.push({ type: 'group', groupId })
+    }
+  }
   const browserGroupIds = new Set(
-    browserAsset.content.blocks.map((block) => block.groupId),
+    Object.keys(browserAsset.content.groups),
   )
   const consumptionForBrowserAsset = (input) => {
     const next = structuredClone(input)
@@ -282,7 +321,9 @@ async function assertActualPaperBrowseBoundary({
       'actual lecture mode consumes successful Cloze and Grammar Analysis responses',
     )
     assert.equal(
-      await page.locator('[data-paper-question-id]').count(),
+      await page.locator(
+        '[data-paper-browse-anchor="group-2026-i-cloze"] [data-paper-question-id]',
+      ).count(),
       15,
       'actual lecture-mode PaperBrowsePage renders every Cloze question',
     )
@@ -297,7 +338,9 @@ async function assertActualPaperBrowseBoundary({
       )
     }
     assert.equal(
-      await page.locator('[data-canonical-placement-signature]').count(),
+      await page.locator(
+        '[data-paper-browse-anchor="group-2026-i-cloze"] [data-canonical-placement-signature]',
+      ).count(),
       15,
       'successful Analysis preserves every canonical Cloze placement signature',
     )
@@ -353,7 +396,9 @@ async function assertActualPaperBrowseBoundary({
       { exact: true },
     ).waitFor()
     assert.equal(
-      await page.locator('[data-paper-question-id]').count(),
+      await page.locator(
+        '[data-paper-browse-anchor="group-2026-i-cloze"] [data-paper-question-id]',
+      ).count(),
       15,
       'actual lecture-mode PaperBrowsePage honors an explicit whole-family legacy plan',
     )
@@ -616,7 +661,11 @@ async function assertActualDraftPrintPdfBoundary({
       `${baseUrl}/api/draft-papers/${draftPaperId}/print-html?versionType=student`,
     )
     const previewHtml = await preview.text()
-    assert.equal(preview.status, 200, 'real HTTP draft Print preview succeeds')
+    assert.equal(
+      preview.status,
+      200,
+      `real HTTP draft Print preview succeeds: ${previewHtml}`,
+    )
     assert.equal(
       (previewHtml.match(/data-canonical-placement-signature=/g) || []).length,
       15,
@@ -1206,26 +1255,22 @@ try {
       )
     : null
   if (actualOutputDir) mkdirSync(actualOutputDir, { recursive: true })
-  const withBrowserFixtureReading = (consumption) => {
-    const browserConsumption = structuredClone(consumption)
-    let readingSelection = browserConsumption.selections.find(
-      (selection) => selection.familyContractId === 'reading',
-    )
-    if (!readingSelection) {
-      readingSelection = { familyContractId: 'reading' }
-      browserConsumption.selections.push(readingSelection)
-    }
-    readingSelection.mode = 'legacy'
-    readingSelection.groupIds = Object.values(asset.content.groups)
-      .filter((candidate) => candidate.groupType === 'reading')
-      .map((candidate) => candidate.groupId)
-    delete readingSelection.projectedOccurrences
-    return browserConsumption
+  const browserLegacyConsumption = structuredClone(explicitLegacy)
+  for (const selection of screenRouteResult.body.selections) {
+    if (browserLegacyConsumption.selections.some(
+      (candidate) =>
+        candidate.familyContractId === selection.familyContractId,
+    )) continue
+    browserLegacyConsumption.selections.push({
+      familyContractId: selection.familyContractId,
+      mode: 'legacy',
+      groupIds: [...selection.groupIds],
+    })
   }
   await assertActualPaperBrowseBoundary({
-    readyConsumption: withBrowserFixtureReading(screenRouteResult.body),
-    legacyConsumption: withBrowserFixtureReading(explicitLegacy),
-    invalidConsumption: withBrowserFixtureReading(partial),
+    readyConsumption: screenRouteResult.body,
+    legacyConsumption: browserLegacyConsumption,
+    invalidConsumption: partial,
     outputDir: actualOutputDir,
   })
   const canonicalReferenceRow = db.prepare(`

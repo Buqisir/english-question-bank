@@ -3,11 +3,11 @@
 import assert from 'node:assert/strict'
 import manifestV1 from '../standards/paper-canonical/manifest-v1.json' with { type: 'json' }
 import manifestV13 from '../standards/paper-canonical/manifest-v13.json' with { type: 'json' }
-import applicationWritingRhythmV2Conformance from '../test-fixtures/paper-canonical/application-writing-rhythm-v2-conformance.json' with { type: 'json' }
+import applicationWritingRhythmV3Conformance from '../test-fixtures/paper-canonical/application-writing-rhythm-v3-conformance.json' with { type: 'json' }
 import clozeRhythmV2Conformance from '../test-fixtures/paper-canonical/cloze-rhythm-v2-conformance.json' with { type: 'json' }
-import continuationWritingRhythmV2Conformance from '../test-fixtures/paper-canonical/continuation-writing-rhythm-v2-conformance.json' with { type: 'json' }
+import continuationWritingRhythmV3Conformance from '../test-fixtures/paper-canonical/continuation-writing-rhythm-v3-conformance.json' with { type: 'json' }
 import grammarFillRhythmV4Conformance from '../test-fixtures/paper-canonical/grammar-fill-rhythm-v4-conformance.json' with { type: 'json' }
-import grammarFillPublicGeometryFixturesV8Conformance from '../test-fixtures/paper-canonical/grammar-fill-public-geometry-fixtures-v8-conformance.json' with { type: 'json' }
+import grammarFillPublicGeometryFixturesV9Conformance from '../test-fixtures/paper-canonical/grammar-fill-public-geometry-fixtures-v9-conformance.json' with { type: 'json' }
 import sevenChoicesRhythmV3Conformance from '../test-fixtures/paper-canonical/seven-choices-rhythm-v3-conformance.json' with { type: 'json' }
 
 import { canonicalAuthorityRef, compileCanonicalPaper, stableStringify, validateExactTransformationRecords } from '../shared/paper-canonical/compiler.mjs'
@@ -66,7 +66,7 @@ assert.deepEqual(
     id: applicationWritingRhythmV2?.id,
     version: applicationWritingRhythmV2?.version,
   },
-  applicationWritingRhythmV2Conformance.authority,
+  applicationWritingRhythmV3Conformance.authority,
 )
 const continuationWritingRhythmV2 =
   closure.artifacts['renderer-continuation-writing-rhythm']
@@ -76,7 +76,7 @@ assert.deepEqual(
     id: continuationWritingRhythmV2?.id,
     version: continuationWritingRhythmV2?.version,
   },
-  continuationWritingRhythmV2Conformance.authority,
+  continuationWritingRhythmV3Conformance.authority,
 )
 const grammarFillPromptProvisionV2 =
   closure.schemas['grammar-fill-prompt-provision-v2']
@@ -160,10 +160,10 @@ function assertRendererAuthorityMutationRejected(
     )
   }
 }
-for (const attack of applicationWritingRhythmV2Conformance.semanticAttacks) {
+for (const attack of applicationWritingRhythmV3Conformance.semanticAttacks) {
   assertRendererAuthorityMutationRejected(
     'renderer-application-writing-rhythm',
-    applicationWritingRhythmV2Conformance,
+    applicationWritingRhythmV3Conformance,
     attack.caseId,
     (artifact) => {
       let target = artifact
@@ -177,10 +177,10 @@ for (const attack of applicationWritingRhythmV2Conformance.semanticAttacks) {
     },
   )
 }
-for (const attack of continuationWritingRhythmV2Conformance.semanticAttacks) {
+for (const attack of continuationWritingRhythmV3Conformance.semanticAttacks) {
   assertRendererAuthorityMutationRejected(
     'renderer-continuation-writing-rhythm',
-    continuationWritingRhythmV2Conformance,
+    continuationWritingRhythmV3Conformance,
     attack.caseId,
     (artifact) => {
       let target = artifact
@@ -332,31 +332,31 @@ for (const leafPath of visitAuthorityLeaves(grammarFillRhythmV4)) {
     },
   )
 }
-const grammarFillPublicGeometryFixturesV8 =
+const grammarFillPublicGeometryFixturesV9 =
   closure.artifacts['renderer-grammar-fill-public-geometry-fixtures']
 assert.equal(
-  grammarFillPublicGeometryFixturesV8.schemaVersion,
-  'grammar-fill-public-geometry-fixtures-v8',
+  grammarFillPublicGeometryFixturesV9.schemaVersion,
+  'grammar-fill-public-geometry-fixtures-v9',
 )
 assert.deepEqual(
-  Object.keys(grammarFillPublicGeometryFixturesV8.variants).sort(),
-  [...grammarFillPublicGeometryFixturesV8Conformance.positive.variantIds]
+  Object.keys(grammarFillPublicGeometryFixturesV9.variants).sort(),
+  [...grammarFillPublicGeometryFixturesV9Conformance.positive.variantIds]
     .sort(),
 )
 assertRendererAuthorityMutationRejected(
   'renderer-grammar-fill-public-geometry-fixtures',
-  grammarFillPublicGeometryFixturesV8Conformance,
+  grammarFillPublicGeometryFixturesV9Conformance,
   'grammar-fill-public-geometry-fixtures-complete-value-closure',
   (artifact) => {
     artifact.variants['screen-wrapped-line']
       .paragraphWidths[0].usableWidthEm += 999
   },
 )
-for (const attack of grammarFillPublicGeometryFixturesV8Conformance
+for (const attack of grammarFillPublicGeometryFixturesV9Conformance
   .shadowGeometryAttacks) {
   assertRendererAuthorityMutationRejected(
     'renderer-grammar-fill-public-geometry-fixtures',
-    grammarFillPublicGeometryFixturesV8Conformance,
+    grammarFillPublicGeometryFixturesV9Conformance,
     attack.caseId,
     (artifact) => {
       artifact.variants['screen-wrapped-line'][attack.fieldName] =
@@ -729,6 +729,7 @@ for (const rule of closure.artifacts.normalization.rules) {
   for (const operation of rule.allowedOperations) {
     if (operation === 'structural_tokenization') continue // Covered with real source replay by verify-paper-canonical-cloze-grammar-publication.mjs.
     if (operation === 'profile_instruction_correction') continue // Covered with hash-bound source evidence by verify-paper-canonical-continuation-writing-rendered-behavior.mjs.
+    if (operation === 'canonical_visible_typography') continue // Covered with raw-inline replay and public punctuation assertions by verify-paper-canonical-import-pilot-fixes.mjs.
     const operationFixture = structuredClone(exactTransformation)
     const record = operationFixture.transformations[0]
     record.ruleId = rule.ruleId

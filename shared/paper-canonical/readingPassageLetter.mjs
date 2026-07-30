@@ -1,4 +1,4 @@
-import rendererTypography from '../../standards/paper-canonical/rendering/paper-typography-v4.json' with { type: 'json' }
+import rendererTypography from '../../standards/paper-canonical/rendering/paper-typography-v5.json' with { type: 'json' }
 
 const contract = rendererTypography.readingPassageLetters
 
