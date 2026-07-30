@@ -410,7 +410,9 @@ async function assertActualPaperBrowseBoundary({
 
     consumption = invalidConsumption
     await page.reload()
-    await page.getByText(/partial or ambiguous/).waitFor()
+    await page.getByText(
+      /partial or ambiguous|Canonical visible structure is invalid/,
+    ).waitFor()
     assert.equal(
       await page.locator('[data-paper-question-id]').count(),
       0,

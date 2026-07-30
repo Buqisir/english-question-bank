@@ -1321,7 +1321,7 @@ async function assertActualPaperSurfaceArtifacts() {
       )
       assert.match(
         await page.locator('.paper-browse-error').innerText(),
-        /absent, duplicated, or outside the Consumption Plan|partial or ambiguous/,
+        /absent, duplicated, or outside the Consumption Plan|partial or ambiguous|disagrees with ordered Consumption Plan Groups/,
       )
       await page.close()
     }
