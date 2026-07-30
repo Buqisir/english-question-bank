@@ -26,6 +26,9 @@ function readOracle(fileName) {
 }
 
 const source = readOracle('20-grammar-fill-source-oracles-v2.json')
+const publicAdversaries = readOracle(
+  '20-grammar-fill-public-adversaries-v1.json',
+)
 const golden = readOracle(
   '20-grammar-fill-golden-geometry-reference-measurements-v2.json',
 )
@@ -40,6 +43,60 @@ for (const binding of Object.values(source.value.sources)) {
     `Grammar Fill source binding is immutable: ${binding.path}`,
   )
 }
+assert.equal(
+  publicAdversaries.value.authorityBoundary.sourceOracle,
+  path.relative(repositoryRoot, source.path),
+)
+assert.equal(
+  publicAdversaries.value.authorityBoundary.sourceOracleSha256,
+  sha256(source.bytes),
+  'public adversaries bind the exact independent source-oracle bytes',
+)
+const publicGeometryAuthorityPath = path.join(
+  repositoryRoot,
+  publicAdversaries.value.authorityBoundary.geometryFixtureAuthority,
+)
+const publicGeometryAuthority = JSON.parse(
+  readFileSync(publicGeometryAuthorityPath, 'utf8'),
+)
+assert.equal(
+  sha256(readFileSync(publicGeometryAuthorityPath)),
+  publicAdversaries.value.authorityBoundary
+    .geometryFixtureAuthoritySha256,
+)
+assert.equal(
+  publicAdversaries.value.authorityBoundary.constructionBoundary,
+  'canonical_consumption_and_print_blocks_before_public_producer',
+)
+assert.equal(
+  publicAdversaries.value.authorityBoundary.renderMutation,
+  'forbidden',
+)
+assert.equal(
+  publicAdversaries.value.wrappedLineAndLineEnd.wrappedQuestionId,
+  source.value.variants.wrappedLineQuestionId,
+)
+assert.equal(
+  publicAdversaries.value.wrappedLineAndLineEnd.lineEndQuestionId,
+  source.value.variants.lineEndQuestionId,
+)
+assert.equal(
+  publicGeometryAuthority.variants[
+    publicAdversaries.value.wrappedLineAndLineEnd.screenGeometryVariantId
+  ].surface,
+  'screen',
+)
+assert.equal(
+  publicGeometryAuthority.variants[
+    publicAdversaries.value.wrappedLineAndLineEnd
+      .printHtmlGeometryVariantId
+  ].surface,
+  'print_html',
+)
+assert.equal(
+  publicAdversaries.value.passageCrossPage.sourceText,
+  source.value.variants.passageCrossPage.sourceText,
+)
 assert.equal(
   sha256(readFileSync(path.join(repositoryRoot, golden.value.reference.path))),
   golden.value.reference.sha256,

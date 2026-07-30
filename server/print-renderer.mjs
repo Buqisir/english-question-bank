@@ -53,6 +53,9 @@ import {
 import { sevenChoicesRhythm } from '../shared/paper-canonical/sevenChoicesRhythm.mjs'
 import { clozeRhythm } from '../shared/paper-canonical/clozeRhythm.mjs'
 import { grammarFillRhythm } from '../shared/paper-canonical/grammarFillRhythm.mjs'
+import {
+  resolveGrammarFillPublicGeometryFixture,
+} from '../shared/paper-canonical/grammarFillPublicGeometryFixtures.mjs'
 import { digestJson } from '../shared/paper-canonical/stable.mjs'
 import {
   canonicalWritingChromeOwnsRenderedDocument,
@@ -640,6 +643,8 @@ export function buildPrintHtml({
   sevenChoicesBankHeading = null,
   clozeChrome = null,
   grammarFillChrome = null,
+  grammarFillGeometryVariantId = null,
+  grammarFillGeometrySurface = null,
 }) {
   // draft-numbering-style v2 (owner 拍板 2026-07-10 二轮改判): small-question
   // numbering in the `blocks`-array path is WHOLE-PAPER continuous again
@@ -654,6 +659,40 @@ export function buildPrintHtml({
     items,
     teacher: isTeacher,
   })
+  if (
+    (grammarFillGeometryVariantId == null)
+      !== (grammarFillGeometrySurface == null)
+  ) {
+    const error = new Error(
+      'Canonical Grammar Fill geometry fixture requires variant and surface',
+    )
+    error.code = 'CANONICAL_GRAMMAR_FILL_GEOMETRY_FIXTURE_REJECTED'
+    throw error
+  }
+  const grammarFillGeometryFixture =
+    resolveGrammarFillPublicGeometryFixture(
+      grammarFillGeometryVariantId,
+      grammarFillGeometrySurface,
+    )
+  const grammarFillGeometryFixtureCss =
+    grammarFillGeometryFixture == null
+      ? ''
+      : [
+          ...grammarFillGeometryFixture.paragraphWidths.map(
+            ({ paragraphId, usableWidthEm }) =>
+              `[data-canonical-group-id="${grammarFillGeometryFixture.groupId}"] `
+              + `[data-canonical-paragraph-id="${paragraphId}"] {`
+              + `width:${usableWidthEm}em!important;`
+              + `max-width:${usableWidthEm}em!important;}`,
+          ),
+          ...(grammarFillGeometryFixture.pageBreakBeforeQuestionId
+            ? [
+                `[data-canonical-question-id="${grammarFillGeometryFixture.pageBreakBeforeQuestionId}"] {`
+                + 'break-before:page!important;'
+                + 'page-break-before:always!important;}',
+              ]
+            : []),
+        ].join('\n')
   const itemByGroupId = new Map(items.map((item) => [item.detail.id, item]))
   const renderedGroupIds = Array.isArray(blocks) && blocks.length > 0
     ? blocks
@@ -2376,6 +2415,8 @@ body {
 .print-blank-num {
   display: inline-block;
 }
+
+${grammarFillGeometryFixtureCss}
 
 /* standard §8 — 写作答题区: 应用文/读后续写各一个细边框素框, 框内无横线/提示行.
    writing-box-starters (owner 拍板 2026-07-16): 读后续写框内印两句段首语,

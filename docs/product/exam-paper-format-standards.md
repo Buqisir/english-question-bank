@@ -4,7 +4,7 @@
 
 本文件是唯一的人类可读索引；当前 canonical 编译、校验、发布和受支持的
 Screen / Print-PDF consumer 只从
-[`standards/paper-canonical/manifest-v21.json`](../../standards/paper-canonical/manifest-v21.json)
+[`standards/paper-canonical/manifest-v22.json`](../../standards/paper-canonical/manifest-v22.json)
 解析一份 digest-closed 的权威闭包。这里不复制卷型题号、分值、题组
 cardinality、清洗条件或字体/物理排版数值，也不能被 caller 当作第二套配置。
 
@@ -18,9 +18,15 @@ Renderer Typography、其 schema 及纯验证入口。未知版本、缺件、di
 任何会改变 admission、canonical 语义、Profile、normalization 或 renderer
 结果的变更，必须新增 versioned artifact、schema/semantic conformance fixture、
 迁移说明和 manifest 升版；已经被 Publication 引用的 artifact 不可原位修改。
-`manifest-v1.json` 至 `manifest-v20.json` 保留各自原始 digest-closed closure，
-供既有 Publication 解析；当前 Screen v21、Print/PDF v22 consumer contracts
-只绑定 v21 authority。v21 以 `grammar-fill-rhythm-v2` 闭合 Grammar Fill
+`manifest-v1.json` 至 `manifest-v21.json` 保留各自原始 digest-closed closure，
+供既有 Publication 解析；当前 Screen v22、Print/PDF v23 consumer contracts
+只绑定 v22 authority。v22 新增 Grammar Fill public-geometry-fixtures v1：
+它把 q56 wrapped-line、q58 line-end 所需的 40em usable-width proxy、跨页
+continuation 的 17em proxy 与 q55 producer page-break 身份绑定到真实
+Screen / Print HTML / PDF producer 输入，产物生成后禁止 verifier 注入或
+改写。迁移说明见
+[`manifest-v22-migration.md`](../../standards/paper-canonical/manifest-v22-migration.md)。
+此前 v21 以 `grammar-fill-rhythm-v2` 闭合 Grammar Fill
 Golden Geometry successor：它保留 v20 及 v1 measurement 的精确历史字节，
 并把 Question 63 纠正为与不可变 source/runtime 一致的 unprompted 身份；
 q56 wrapped-line、q58 line-end、optional collapse、零产物和 PDF body seam

@@ -72,6 +72,9 @@ import {
 import {
   grammarFillRhythm,
 } from '../../../../shared/paper-canonical/grammarFillRhythm.mjs'
+import {
+  resolveGrammarFillPublicGeometryFixture,
+} from '../../../../shared/paper-canonical/grammarFillPublicGeometryFixtures.mjs'
 import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
 import { WritingPaperPage } from '../paper-intelligence/WritingPaperPage'
 import {
@@ -349,6 +352,10 @@ export type PaperBrowsePageProps = {
   /** Canonical QA/public-fixture companion for the optional A-G bank heading.
    * Production callers omit it; an absent node collapses without space. */
   sevenChoicesBankHeading?: string
+  /** Canonical QA/public-fixture selection resolved before PaperBrowse
+   * renders. Production callers omit it; verifier-side DOM mutation is
+   * forbidden. */
+  grammarFillGeometryVariantId?: string
   /** App's loaded questionGroups, keyed by id (== paper-asset groupId). */
   questionGroupById: Map<string, QuestionGroupCard>
   onAddGroupsToBasket: (groups: QuestionGroupCard[]) => void
@@ -477,6 +484,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     lecture,
     similar,
     sevenChoicesBankHeading,
+    grammarFillGeometryVariantId,
     questionGroupById,
     onAddGroupsToBasket,
     currentDraftPaperId,
@@ -485,6 +493,19 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     onBackToWorkbench,
     shellNav,
   } = props
+  const grammarFillGeometryFixture =
+    resolveGrammarFillPublicGeometryFixture(
+      grammarFillGeometryVariantId,
+      'screen',
+    )
+  const grammarFillGeometryFixtureCss =
+    grammarFillGeometryFixture?.paragraphWidths.map(
+      ({ paragraphId, usableWidthEm }) =>
+        `[data-paper-browse-anchor="${grammarFillGeometryFixture.groupId}"] `
+        + `[data-paper-paragraph-id="${paragraphId}"] {`
+        + `width:${usableWidthEm}em!important;`
+        + `max-width:${usableWidthEm}em!important;}`,
+    ).join('\n') ?? ''
 
   const [asset, setAsset] = useState<PaperAssetV1 | null>(null)
   const [assetBase, setAssetBase] = useState<string | null>(null)
@@ -3125,6 +3146,11 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
           )}
         </nav>
         <div className="paper-browse-content" ref={scrollerRef} style={paperBrowseContentStyle}>
+          {grammarFillGeometryFixture && (
+            <style data-canonical-grammar-fill-geometry-fixture={grammarFillGeometryVariantId}>
+              {grammarFillGeometryFixtureCss}
+            </style>
+          )}
           {asset.content.blocks.map((block, index) =>
             writingSkipIndices.has(index) || scissorPlan.skipIndices.has(index)
               ? null

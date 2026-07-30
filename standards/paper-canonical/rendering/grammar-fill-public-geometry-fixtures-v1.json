@@ -1,0 +1,76 @@
+{
+  "schemaVersion": "grammar-fill-public-geometry-fixtures-v1",
+  "id": "grammar-fill-public-geometry-fixtures",
+  "version": "1",
+  "owner": "renderer_typography",
+  "paper": "a4",
+  "sourceOracle": {
+    "path": "docs/cuts/paper-canonical-unification/qa/20-grammar-fill-source-oracles-v2.json",
+    "sha256": "585ee36c3c0cb61a2c9ba6d2bb75c77409a7ede922eab9b01ad529de7a44e04b"
+  },
+  "constructionBoundary": "fixture_selected_before_public_producer_and_output_rendered_unchanged",
+  "horizontalUnit": "em",
+  "variants": {
+    "screen-wrapped-line": {
+      "surface": "screen",
+      "groupId": "group-2026-i-grammar-fill",
+      "paragraphWidths": [
+        {
+          "paragraphId": "para-2026-i-grammar-fill-title",
+          "usableWidthEm": 40
+        },
+        {
+          "paragraphId": "para-2026-i-grammar-fill-p1",
+          "usableWidthEm": 40
+        }
+      ],
+      "pageBreakBeforeQuestionId": null
+    },
+    "print-wrapped-line": {
+      "surface": "print_html",
+      "groupId": "group-2026-i-grammar-fill",
+      "paragraphWidths": [
+        {
+          "paragraphId": "para-2026-i-grammar-fill-title",
+          "usableWidthEm": 40
+        },
+        {
+          "paragraphId": "para-2026-i-grammar-fill-p1",
+          "usableWidthEm": 40
+        }
+      ],
+      "pageBreakBeforeQuestionId": null
+    },
+    "pdf-baseline": {
+      "surface": "print_pdf",
+      "groupId": "group-2026-i-grammar-fill",
+      "paragraphWidths": [],
+      "pageBreakBeforeQuestionId": "q-2026-i-055"
+    },
+    "pdf-passage-cross-page": {
+      "surface": "print_pdf",
+      "groupId": "group-2026-i-grammar-fill",
+      "paragraphWidths": [
+        {
+          "paragraphId": "para-2026-i-grammar-fill-title",
+          "usableWidthEm": 40
+        },
+        {
+          "paragraphId": "para-2026-i-grammar-fill-p1",
+          "usableWidthEm": 40
+        },
+        {
+          "paragraphId": "para-2026-i-grammar-fill-p2",
+          "usableWidthEm": 17
+        }
+      ],
+      "pageBreakBeforeQuestionId": "q-2026-i-055"
+    },
+    "pdf-next-section-cross-page": {
+      "surface": "print_pdf",
+      "groupId": "group-2026-i-grammar-fill",
+      "paragraphWidths": [],
+      "pageBreakBeforeQuestionId": "q-2026-i-055"
+    }
+  }
+}

@@ -16,6 +16,9 @@ createRoot(document.getElementById('root')!).render(
         ? 'A-G 选项'
         : undefined
     }
+    grammarFillGeometryVariantId={
+      search.get('grammarFillGeometryVariant') ?? undefined
+    }
     questionGroupById={new Map()}
     onAddGroupsToBasket={() => {}}
     currentDraftPaperId={null}

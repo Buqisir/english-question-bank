@@ -5,6 +5,7 @@ import manifestV1 from '../standards/paper-canonical/manifest-v1.json' with { ty
 import manifestV13 from '../standards/paper-canonical/manifest-v13.json' with { type: 'json' }
 import clozeRhythmV2Conformance from '../test-fixtures/paper-canonical/cloze-rhythm-v2-conformance.json' with { type: 'json' }
 import grammarFillRhythmV2Conformance from '../test-fixtures/paper-canonical/grammar-fill-rhythm-v2-conformance.json' with { type: 'json' }
+import grammarFillPublicGeometryFixturesV1Conformance from '../test-fixtures/paper-canonical/grammar-fill-public-geometry-fixtures-v1-conformance.json' with { type: 'json' }
 import sevenChoicesRhythmV3Conformance from '../test-fixtures/paper-canonical/seven-choices-rhythm-v3-conformance.json' with { type: 'json' }
 
 import { canonicalAuthorityRef, compileCanonicalPaper, stableStringify, validateExactTransformationRecords } from '../shared/paper-canonical/compiler.mjs'
@@ -227,6 +228,25 @@ for (const leafPath of visitAuthorityLeaves(grammarFillRhythmV2)) {
     },
   )
 }
+const grammarFillPublicGeometryFixturesV1 =
+  closure.artifacts['renderer-grammar-fill-public-geometry-fixtures']
+assert.equal(
+  grammarFillPublicGeometryFixturesV1.schemaVersion,
+  'grammar-fill-public-geometry-fixtures-v1',
+)
+assert.deepEqual(
+  Object.keys(grammarFillPublicGeometryFixturesV1.variants),
+  grammarFillPublicGeometryFixturesV1Conformance.positive.variantIds,
+)
+assertRendererAuthorityMutationRejected(
+  'renderer-grammar-fill-public-geometry-fixtures',
+  grammarFillPublicGeometryFixturesV1Conformance,
+  'grammar-fill-public-geometry-fixtures-complete-value-closure',
+  (artifact) => {
+    artifact.variants['screen-wrapped-line']
+      .paragraphWidths[0].usableWidthEm += 999
+  },
+)
 const sevenChoicesRhythmV3 =
   closure.artifacts['renderer-seven-choices-rhythm']
 assert.deepEqual(

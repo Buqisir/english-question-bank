@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "grammar-fill-public-geometry-fixtures-v1-conformance",
+  "contractPath": "standards/paper-canonical/rendering/grammar-fill-public-geometry-fixtures-v1.json",
+  "schemaPath": "schemas/paper-canonical/grammar-fill-public-geometry-fixtures-v1.schema.json",
+  "expectedIssueCodes": ["SCHEMA_CONST"],
+  "positive": {
+    "variantIds": [
+      "screen-wrapped-line",
+      "print-wrapped-line",
+      "pdf-baseline",
+      "pdf-passage-cross-page",
+      "pdf-next-section-cross-page"
+    ],
+    "constructionBoundary": "fixture_selected_before_public_producer_and_output_rendered_unchanged",
+    "horizontalUnit": "em"
+  },
+  "negative": [
+    {
+      "caseId": "unknown-variant",
+      "variantId": "poisoned-variant",
+      "expectedError": "CANONICAL_GRAMMAR_FILL_GEOMETRY_FIXTURE_REJECTED"
+    },
+    {
+      "caseId": "surface-mismatch",
+      "variantId": "screen-wrapped-line",
+      "requestedSurface": "print_pdf",
+      "expectedError": "CANONICAL_GRAMMAR_FILL_GEOMETRY_FIXTURE_REJECTED"
+    }
+  ]
+}

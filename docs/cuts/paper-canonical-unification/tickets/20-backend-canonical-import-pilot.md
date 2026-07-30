@@ -617,3 +617,48 @@ cross-page continuation, and the Application Writing transition. Full
 0 FAIL, and `git diff --check` passes. No Owner QA, out-of-scope writing or
 listening implementation, Ticket 21, production/R2, unrelated lint, or
 generated-DOCX work was performed.
+
+Grammar Fill Golden Geometry second focused-review Must Fix closure
+(2026-07-30):
+The focused re-review of `93fe42bc` found two remaining proof-boundary defects:
+the wrapped/cross-page CSS was still applied after Screen/Print/PDF production,
+and the poison/Student-absence proofs still depended on prefix-filtered empty
+sets or count-shaped zero evidence. The repair removes both proof paths.
+
+Manifest v22 is the complete standards-compliant successor required by the
+public producer change. It adds the immutable Grammar Fill public-geometry
+fixture authority, exact schema and conformance fixture, Normalization Report
+v22, Publication v22, Screen v22, Print/PDF v23, migration record, current
+loader/consumer registration, and immutable request fixture. Manifest v1-v21,
+all historical consumers and schemas, the exact v13 compatibility route, and
+every previously reviewed family/source/answer/evidence byte remain
+resolvable; generated DOCX remains retired.
+
+The checked-in adversary companion binds the Grammar Fill source oracle and
+the new fixture-authority bytes. It names q56 as the wrapped Blank, q58 as the
+line-end Blank, the exact immutable source phrases/repeat counts, and the
+Screen/Print/PDF variants before any public producer runs. PaperBrowse resolves
+its variant before the initial React output. `buildPrintHtml` resolves and
+embeds the Print/PDF variant while creating the HTML. The verifier measures
+those unchanged outputs; it no longer calls `page.addStyleTag` for Grammar
+Fill or splices CSS into produced HTML.
+
+Every poison case snapshots the complete output-directory path-and-byte
+identity before the producer call, verifies the exact attempted target path is
+absent before and after rejection, and requires the complete directory digest
+to remain identical. It uses no prefix filtering, empty-array oracle, or
+artifact count. Student supplement collapse is proven by the directly measured
+passage-tail-to-Application-Writing centers and baseline ratio. Wrapped-line
+proof records the first/final rendered line centers and local baseline-span
+ratio instead of a line count.
+
+Focused authority/conformance, historical Publication/projection,
+admission/recovery, official backend pilot, Grammar Fill surface/Print,
+Reading/Seven Choices/Continuation regressions, generated-DOCX retirement,
+app build, official `--actual-artifacts`, exact-A4 visual inspection, and
+`git diff --check` pass. Full `pnpm -C app run verify:all` reports
+115 PASS / 1 declared off-repo SKIP / 0 FAIL. The final exact-HEAD rerun and
+HEAD-scoped artifact path are reported in the independent-review handoff. No
+Owner QA provisioning, out-of-scope writing/listening implementation,
+Ticket 21, production/R2, unrelated lint, or generated-DOCX work was
+performed.
