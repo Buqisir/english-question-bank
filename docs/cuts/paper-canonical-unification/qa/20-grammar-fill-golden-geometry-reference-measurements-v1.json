@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "grammar-fill-golden-geometry-reference-measurements-v1",
+  "framework": {
+    "path": "docs/cuts/paper-canonical-unification/qa/golden-geometry-framework-v1.md",
+    "sha256": "46fee75e0ddaa62989985c1e3dea5be11f8501324fd0a95b409b610716c0be88"
+  },
+  "reference": {
+    "path": "docs/product/exam-paper-format-reference/images/page-10-grammar-fill.jpeg",
+    "sha256": "667e97aa473dabb9981b952b05ca6e63f580e738d9f6e7f854875fbd46476392",
+    "pixelWidth": 866,
+    "pixelHeight": 1161,
+    "coordinateUse": "evidence_only_never_css_px_pdf_pt_or_a4_scale"
+  },
+  "localProxies": {
+    "latinBaselineStepPx": 30.8,
+    "latinFontBoxHeightPx": 17,
+    "usableContentLeftPx": 73,
+    "usableContentRightPx": 793,
+    "usableContentWidthPx": 720
+  },
+  "verticalMeasurements": {
+    "sectionToInstructionBaselineRatio": 1,
+    "instructionToPassageBaselineRatio": 1.5,
+    "passageLineBaselineRatio": 1,
+    "paragraphTransitionBaselineRatio": 1,
+    "inlineBlankExtraBaselineRatio": 0
+  },
+  "horizontalMeasurements": {
+    "blankWidthFontBoxRatio": 3.41,
+    "blankWidthClassEm": 3.3,
+    "blankToPromptGapFontBoxRatio": 0.59,
+    "blankNumberCenterOffsetBlankWidthRatio": 0.02,
+    "paragraphIndentUsableWidthRatio": 0.054,
+    "strategy": "content_driven_inline_atomic_unit",
+    "distribution": "not_distributed"
+  },
+  "observedGoldenVariants": {
+    "prompted": [56, 57, 59, 60, 62, 63, 64, 65],
+    "unprompted": [58, 61],
+    "sentenceStart": [62],
+    "sentenceInternal": [56, 57, 58, 59, 60, 61, 63, 64, 65],
+    "lineEnd": [58],
+    "wrappedLine": [56, 61, 62, 65],
+    "crossPage": "unobserved_in_crop_public_fixture_required"
+  }
+}

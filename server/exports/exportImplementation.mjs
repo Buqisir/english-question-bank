@@ -10,6 +10,9 @@ import {
 } from 'node:fs'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
+import {
+  loadCanonicalGrammarFillPrintChrome,
+} from '../paper-canonical/grammarFillPrintSourceBinding.mjs'
 
 function requiredString(value, label) {
   if (typeof value !== 'string' || !value.trim()) {
@@ -152,6 +155,12 @@ export function createExportImplementation({
           items: exportItems,
         })
       : null
+    const grammarFillChrome = loadCanonicalGrammarFillPrintChrome({
+      exportItems,
+      canonicalConsumption,
+      paperAssetsDir: paperAssetsDir || rootDir,
+      versionType,
+    })
     const html = buildPrintHtml({
       title,
       versionType,
@@ -164,6 +173,7 @@ export function createExportImplementation({
       images,
       normalizationDiagnostics,
       canonicalConsumption,
+      grammarFillChrome,
     })
     const versionLabel = versionType === 'student' ? '学生版' : '教师版'
     const fileName = `${title}-${versionLabel}-精排.html`

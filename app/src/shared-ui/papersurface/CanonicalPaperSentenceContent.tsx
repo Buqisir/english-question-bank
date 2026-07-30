@@ -2,6 +2,7 @@ import type { CSSProperties, ReactElement, ReactNode } from 'react'
 import { paperSurfaceAnchorAttrs } from '../../../../shared/papersurface/anchorKeys.mjs'
 import { paperBlankRuling } from '../../../../shared/papersurface/blankRuling.mjs'
 import { clozeRhythm } from '../../../../shared/paper-canonical/clozeRhythm.mjs'
+import { grammarFillRhythm } from '../../../../shared/paper-canonical/grammarFillRhythm.mjs'
 import type {
   CanonicalSurfaceBlankNode,
   CanonicalSurfaceParagraph,
@@ -106,11 +107,14 @@ export function renderCanonicalPaperSentenceContent(
     const style = {
       '--ps-paper-blank-width': groupType === 'cloze'
         ? `${clozeRhythm.blankGeometry.widthEm}em`
-        : paperBlankRuling[groupType].width,
+        : groupType === 'grammarFill'
+          ? `${grammarFillRhythm.blankGeometry.widthEm}em`
+          : paperBlankRuling[groupType].width,
     } as CanonicalBlankStyle
     const canonicalPairAttrs = (
       groupType === 'sevenChoices'
       || groupType === 'cloze'
+      || groupType === 'grammarFill'
     )
       ? {
           'data-canonical-pair': `${node.questionId}:${node.blankId}`,
@@ -121,8 +125,11 @@ export function renderCanonicalPaperSentenceContent(
                 'data-canonical-seven-choices-rhythm-role':
                   'inline_blank_marker',
               }
-            : {
+            : groupType === 'cloze' ? {
                 'data-canonical-cloze-rhythm-role':
+                  'inline_blank_marker',
+              } : {
+                'data-canonical-grammar-fill-rhythm-role':
                   'inline_blank_marker',
               }),
         }
@@ -157,13 +164,25 @@ export function renderCanonicalPaperSentenceContent(
       </span>
     )
 
-    const blankUnit = !node.hint ? blank : (
+    const blankUnit = groupType !== 'grammarFill' && !node.hint ? blank : (
       <span
         key={`${keyPrefix}-semantic-blank-with-hint-${node.blankId}`}
         className="ps-paper-blank-unit"
+        data-canonical-grammar-fill-unit={
+          groupType === 'grammarFill' ? '' : undefined
+        }
       >
         {blank}
-        <span className="ps-paper-blank-hint">({node.hint})</span>
+        {node.hint ? (
+          <span
+            className="ps-paper-blank-hint"
+            data-canonical-grammar-fill-rhythm-role={
+              groupType === 'grammarFill' ? 'prompt_text' : undefined
+            }
+          >
+            ({node.hint})
+          </span>
+        ) : null}
       </span>
     )
 

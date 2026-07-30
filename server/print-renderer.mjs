@@ -52,6 +52,8 @@ import {
 } from '../shared/paper-canonical/readingPassageLetter.mjs'
 import { sevenChoicesRhythm } from '../shared/paper-canonical/sevenChoicesRhythm.mjs'
 import { clozeRhythm } from '../shared/paper-canonical/clozeRhythm.mjs'
+import { grammarFillRhythm } from '../shared/paper-canonical/grammarFillRhythm.mjs'
+import { digestJson } from '../shared/paper-canonical/stable.mjs'
 import {
   canonicalWritingChromeOwnsRenderedDocument,
   projectCanonicalConsumerGroup,
@@ -184,14 +186,17 @@ function renderCanonicalParagraph(canonicalGroup, paragraph, displayNumberByQues
         `Canonical Print HTML blank references missing question ${node.questionId}`,
       )
     }
+    const isGrammarFill = canonicalGroup.groupType === 'grammarFill'
     const hint = node.hint
-      ? `<span class="print-blank-hint">(${escapeHtml(node.hint)})</span>`
+      ? `<span class="print-blank-hint"${isGrammarFill ? ' data-canonical-grammar-fill-rhythm-role="prompt_text"' : ''}>(${escapeHtml(node.hint)})</span>`
       : ''
     const pairAttrs = canonicalGroup.groupType === 'sevenChoices'
       ? ` data-canonical-pair="${escapeHtml(`${node.questionId}:${node.blankId}`)}" data-canonical-question-id="${escapeHtml(node.questionId)}" data-canonical-blank-id="${escapeHtml(node.blankId)}" data-canonical-seven-choices-rhythm-role="inline_blank_marker"`
       : canonicalGroup.groupType === 'cloze'
         ? ` data-canonical-pair="${escapeHtml(`${node.questionId}:${node.blankId}`)}" data-canonical-question-id="${escapeHtml(node.questionId)}" data-canonical-blank-id="${escapeHtml(node.blankId)}" data-canonical-cloze-rhythm-role="inline_blank_marker"`
-      : ''
+        : isGrammarFill
+          ? ` data-canonical-pair="${escapeHtml(`${node.questionId}:${node.blankId}`)}" data-canonical-question-id="${escapeHtml(node.questionId)}" data-canonical-blank-id="${escapeHtml(node.blankId)}" data-canonical-grammar-fill-rhythm-role="inline_blank_marker" data-canonical-grammar-fill-unit=""`
+          : ''
     return `<span class="print-blank-unit"${pairAttrs}><span class="print-blank ${blankWidthClass}"><span class="print-blank-num">${displayNumber}</span></span>${hint}</span>`
   }).join('')
 }
@@ -212,6 +217,137 @@ function canonicalGroupMatchesPrintDetail(canonicalGroup, detail) {
       (question, index) => question.questionId === detail.questions[index]?.id,
     )
   )
+}
+
+function rejectCanonicalGrammarFill(message) {
+  const error = new Error(message)
+  error.code = 'CANONICAL_CONSUMPTION_REJECTED'
+  throw error
+}
+
+function assertCanonicalGrammarFillSourceBinding({
+  canonicalConsumption,
+  grammarFillChrome,
+  items,
+  teacher,
+}) {
+  const selection = canonicalConsumption?.selections?.find(
+    (candidate) =>
+      candidate.familyContractId === 'grammar-fill'
+      && candidate.mode === 'canonical',
+  )
+  if (!selection) return
+  const oracle = grammarFillRhythm.publicArtifactOracle
+  const groupId = oracle.grammarFill.groupId
+  if (!items.some((candidate) => candidate.detail.id === groupId)) return
+  const requiresBinding =
+    Number(canonicalConsumption.authorityRef?.manifestVersion) >= 20
+    && canonicalConsumption.paperId === oracle.paperId
+    && selection.groupIds.includes(oracle.grammarFill.groupId)
+  const binding = grammarFillChrome?.sourceBinding
+  if (!binding) {
+    if (requiresBinding) {
+      rejectCanonicalGrammarFill(
+        'Canonical Grammar Fill public artifact source binding is unavailable',
+      )
+    }
+    return
+  }
+  if (
+    binding.paperId !== oracle.paperId
+    || binding.sourceAssetVersion !== oracle.sourceAssetVersion
+    || binding.groupId !== groupId
+    || selection.groupIds.length !== 1
+    || selection.groupIds[0] !== groupId
+  ) {
+    rejectCanonicalGrammarFill(
+      'Canonical Grammar Fill public artifact identity disagrees',
+    )
+  }
+  const occurrence = selection.projectedOccurrences?.find(
+    (candidate) => candidate.groupId === groupId,
+  )
+  const occurrenceDigest = selection.projectedOccurrenceDigests?.find(
+    (candidate) => candidate.groupId === groupId,
+  )?.digest
+  const expectedOccurrenceDigest = binding.proofVariantId
+    ? oracle.adversarialProjectedOccurrenceDigests[binding.proofVariantId]
+    : oracle.expectedProjectedOccurrenceDigest
+  if (
+    !occurrence
+    || typeof expectedOccurrenceDigest !== 'string'
+    || occurrenceDigest !== expectedOccurrenceDigest
+    || occurrenceDigest !== binding.projectedOccurrenceDigest
+    || digestJson(occurrence) !== occurrenceDigest
+  ) {
+    rejectCanonicalGrammarFill(
+      'Canonical Grammar Fill projected source occurrence disagrees',
+    )
+  }
+  if (
+    binding.geometry?.blankWidthEm
+      !== grammarFillRhythm.blankGeometry.widthEm
+    || binding.geometry?.promptGapEm
+      !== grammarFillRhythm.promptGeometry.gapEm
+    || binding.geometry?.promptAttachment
+      !== grammarFillRhythm.promptGeometry.attachment
+  ) {
+    rejectCanonicalGrammarFill(
+      'Canonical Grammar Fill prompt or blank geometry authority disagrees',
+    )
+  }
+  const canonicalGroup = projectCanonicalConsumerGroup({
+    consumption: canonicalConsumption,
+    familyContractId: 'grammar-fill',
+    groupId,
+  })
+  const projectedBlankRows = canonicalGroup.paragraphs.flatMap(
+    (paragraph) => paragraph.nodes
+      .filter((node) => node.type === 'blank')
+      .map((node) => ({
+        questionId: node.questionId,
+        blankId: node.blankId,
+        prompt: node.hint ?? null,
+      })),
+  )
+  const supplements = binding.questionSupplements
+  if (
+    !Array.isArray(supplements)
+    || supplements.length !== oracle.grammarFill.questionIds.length
+    || JSON.stringify(projectedBlankRows)
+      !== JSON.stringify(supplements.map((row) => ({
+        questionId: row.questionId,
+        blankId: row.blankId,
+        prompt: row.prompt ?? null,
+      })))
+  ) {
+    rejectCanonicalGrammarFill(
+      'Canonical Grammar Fill Question/Blank/Prompt source order disagrees',
+    )
+  }
+  const item = items.find((candidate) => candidate.detail.id === groupId)
+  if (
+    !item
+    || item.detail.questions.length !== supplements.length
+    || item.detail.questions.some((question, index) => {
+      const expected = supplements[index]
+      return (
+        question.id !== expected.questionId
+        || question.answer !== expected.answer
+        || (
+          teacher
+          && (
+            typeof expected.explanation !== 'string'
+            || question.explanation !== expected.explanation
+          )
+        )
+      )
+    })
+  ) {
+    rejectCanonicalGrammarFill(
+      `Canonical Grammar Fill ${teacher ? 'Teacher' : 'Student'} supplements disagree with source-bound answers or analysis`,
+    )
+  }
 }
 
 function renderCanonicalSharedBank(canonicalGroup, {
@@ -503,6 +639,7 @@ export function buildPrintHtml({
   canonicalConsumption = null,
   sevenChoicesBankHeading = null,
   clozeChrome = null,
+  grammarFillChrome = null,
 }) {
   // draft-numbering-style v2 (owner 拍板 2026-07-10 二轮改判): small-question
   // numbering in the `blocks`-array path is WHOLE-PAPER continuous again
@@ -511,6 +648,12 @@ export function buildPrintHtml({
   const startNum = Number.isInteger(questionNumberStart) && questionNumberStart >= 1 ? questionNumberStart : 1
   const isExam = printStyle === 'exam'
   const isTeacher = versionType === 'teacher'
+  assertCanonicalGrammarFillSourceBinding({
+    canonicalConsumption,
+    grammarFillChrome,
+    items,
+    teacher: isTeacher,
+  })
   const itemByGroupId = new Map(items.map((item) => [item.detail.id, item]))
   const renderedGroupIds = Array.isArray(blocks) && blocks.length > 0
     ? blocks
@@ -723,6 +866,94 @@ export function buildPrintHtml({
   const isClozeChromeBlock = (blockIndex) =>
     blockIndex >= clozeChromeStartBlockIndex
     && blockIndex < firstClozeGroupBlockIndex
+  const canonicalGrammarFillSelection =
+    canonicalConsumption?.selections?.find(
+      (selection) =>
+        selection.familyContractId === 'grammar-fill'
+        && selection.mode === 'canonical',
+    )
+  if (canonicalGrammarFillSelection) {
+    for (const groupId of canonicalGrammarFillSelection.groupIds) {
+      const renderedCount = renderedGroupIds.filter(
+        (renderedGroupId) => renderedGroupId === groupId,
+      ).length
+      const suppliedByItems = items.some(
+        (item) => item.detail.id === groupId,
+      )
+      if (renderedCount > 1 || (suppliedByItems && renderedCount !== 1)) {
+        const error = new Error(
+          `Canonical Grammar Fill Group must occur exactly once when supplied: ${groupId}`,
+        )
+        error.code = 'CANONICAL_CONSUMPTION_REJECTED'
+        throw error
+      }
+    }
+  }
+  const canonicalGrammarFillGroupIds = canonicalGrammarFillSelection
+    ? canonicalGrammarFillSelection.groupIds.filter((groupId) =>
+        renderedGroupIds.includes(groupId))
+    : []
+  const firstGrammarFillGroupBlockIndex = Array.isArray(blocks)
+    ? blocks.findIndex(
+        (block) =>
+          block.type === 'question_group'
+          && block.questionGroupId === canonicalGrammarFillGroupIds[0],
+      )
+    : -1
+  const lastGrammarFillGroupBlockIndex = Array.isArray(blocks)
+    ? blocks.findLastIndex(
+        (block) =>
+          block.type === 'question_group'
+          && block.questionGroupId
+            === canonicalGrammarFillGroupIds[
+              canonicalGrammarFillGroupIds.length - 1
+            ],
+      )
+    : -1
+  const followingGrammarFillSectionBlockIndex =
+    Array.isArray(blocks) && lastGrammarFillGroupBlockIndex >= 0
+      ? blocks.findIndex(
+          (block, index) =>
+            index > lastGrammarFillGroupBlockIndex
+            && block.type === 'section_header'
+            && block.title,
+        )
+      : -1
+  const followingGrammarFillSectionId =
+    followingGrammarFillSectionBlockIndex >= 0
+      ? grammarFillChrome?.followingSection?.sectionId
+        || `print-section-${followingGrammarFillSectionBlockIndex}`
+      : undefined
+  let firstGrammarFillPredecessorBlockIndex = -1
+  let grammarFillChromeStartBlockIndex = firstGrammarFillGroupBlockIndex
+  if (firstGrammarFillGroupBlockIndex >= 0) {
+    for (
+      let index = firstGrammarFillGroupBlockIndex - 1;
+      index >= 0;
+      index -= 1
+    ) {
+      const block = blocks[index]
+      if (block.type === 'section_header' || block.type === 'instruction') {
+        if (firstGrammarFillPredecessorBlockIndex < 0) {
+          firstGrammarFillPredecessorBlockIndex = index
+        }
+        grammarFillChromeStartBlockIndex = index
+        continue
+      }
+      if (block.type === 'page_break') continue
+      if (block.type === 'question_group') break
+      break
+    }
+  }
+  const isGrammarFillChromeBlock = (blockIndex) =>
+    blockIndex >= grammarFillChromeStartBlockIndex
+    && blockIndex < firstGrammarFillGroupBlockIndex
+  const hasGrammarFillInstructionBlock =
+    firstGrammarFillGroupBlockIndex >= 0
+    && blocks.slice(
+      grammarFillChromeStartBlockIndex,
+      firstGrammarFillGroupBlockIndex,
+    ).some((block) => block.type === 'instruction')
   let firstReadingPredecessorBlockIndex = -1
   let readingChromeStartBlockIndex = firstReadingGroupBlockIndex
   if (firstReadingGroupBlockIndex >= 0) {
@@ -868,7 +1099,7 @@ export function buildPrintHtml({
           const previousFamilyGroupId =
             canonicalSevenChoicesGroupIds.at(-1) || ''
           sections.push(
-            `<h2 class="section-header section-header--part" id="${escapeHtml(clozeChrome.part.partId)}" data-canonical-seven-choices-rhythm-role="next_section" data-canonical-seven-choices-section-id="${escapeHtml(clozeChrome.part.partId)}" data-canonical-seven-choices-following-for="${escapeHtml(previousFamilyGroupId)}" data-canonical-cloze-rhythm-role="part_title" data-canonical-cloze-chrome="" data-canonical-cloze-preceding-for="${escapeHtml(clozeChrome.groupId)}" data-canonical-cloze-previous-family-group-id="${escapeHtml(previousFamilyGroupId)}">${escapeHtml(clozeChrome.part.text)}</h2>`,
+            `<h2 class="section-header section-header--part" id="${escapeHtml(clozeChrome.part.partId)}" data-canonical-seven-choices-rhythm-role="next_section" data-canonical-seven-choices-section-id="${escapeHtml(clozeChrome.part.partId)}" data-canonical-seven-choices-following-for="${escapeHtml(previousFamilyGroupId)}" data-canonical-cloze-rhythm-role="part_title" data-canonical-cloze-chrome="" data-canonical-cloze-preceding-for="${escapeHtml(clozeChrome.groupId)}" data-canonical-cloze-previous-family-group-id="${escapeHtml(previousFamilyGroupId)}" data-canonical-grammar-fill-rhythm-role="part_context">${escapeHtml(clozeChrome.part.text)}</h2>`,
           )
           sections.push(
             `<h2 class="section-header section-header--section" id="${escapeHtml(clozeChrome.section.sectionId)}" data-canonical-cloze-rhythm-role="subsection" data-canonical-cloze-chrome="">${escapeHtml(clozeChrome.section.text)}</h2>`,
@@ -882,16 +1113,22 @@ export function buildPrintHtml({
         // 部标题(第X部分…)黑体加粗顶格, 节标题(第X节…)宋体常规缩进 2 字符.
         // 层级靠字重与缩进区分, 两态共用 10.5pt (标准 §2/§4 一律不放大字号).
         const visibleTitle =
-          blockIndex === followingClozeSectionBlockIndex
-            && clozeChrome?.followingSection?.text
-            ? clozeChrome.followingSection.text
-            : block.title
+          blockIndex === followingGrammarFillSectionBlockIndex
+            && grammarFillChrome?.followingSection?.text
+            ? grammarFillChrome.followingSection.text
+            : blockIndex === followingClozeSectionBlockIndex
+              && clozeChrome?.followingSection?.text
+              ? clozeChrome.followingSection.text
+              : block.title
         const kind = headingKind(visibleTitle)
         const headingId =
-          blockIndex === followingClozeSectionBlockIndex
-            && clozeChrome?.followingSection?.sectionId
-            ? clozeChrome.followingSection.sectionId
-            : `print-section-${blockIndex}`
+          blockIndex === followingGrammarFillSectionBlockIndex
+            && grammarFillChrome?.followingSection?.sectionId
+            ? grammarFillChrome.followingSection.sectionId
+            : blockIndex === followingClozeSectionBlockIndex
+              && clozeChrome?.followingSection?.sectionId
+              ? clozeChrome.followingSection.sectionId
+              : `print-section-${blockIndex}`
         const rhythmRole =
           blockIndex === followingReadingSectionBlockIndex
             ? 'next_section'
@@ -952,7 +1189,39 @@ export function buildPrintHtml({
           blockIndex === followingClozeSectionBlockIndex
             ? ` data-canonical-cloze-section-id="${escapeHtml(followingClozeSectionId)}"${followingClozeGroupId ? ` data-canonical-cloze-following-group-id="${escapeHtml(followingClozeGroupId)}"` : ''} data-canonical-cloze-following-for="${escapeHtml(canonicalClozeGroupIds.at(-1))}"`
             : ''
-        sections.push(`<h2 class="section-header section-header--${kind}" id="${escapeHtml(headingId)}"${rhythmRoleAttr}${readingPredecessorAttrs}${readingFollowingAttrs}${sevenChoicesRhythmAttrs}${sevenChoicesPredecessorAttrs}${sevenChoicesBoundaryAttrs}${sevenChoicesFollowingAttrs}${clozeRhythmAttrs}${clozePredecessorAttrs}${clozeFollowingAttrs}>${escapeHtml(visibleTitle)}</h2>`)
+        const grammarFillRhythmRole =
+          blockIndex === followingGrammarFillSectionBlockIndex
+            ? 'next_section'
+            : isGrammarFillChromeBlock(blockIndex)
+              ? 'subsection'
+              : null
+        const grammarFillRhythmAttrs = grammarFillRhythmRole
+          ? ` data-canonical-grammar-fill-rhythm-role="${grammarFillRhythmRole}"${isGrammarFillChromeBlock(blockIndex) ? ' data-canonical-grammar-fill-chrome=""' : ''}`
+          : ''
+        const grammarFillPartContextAttrs =
+          clozeRhythmRole === 'part_title'
+          && canonicalGrammarFillGroupIds.length > 0
+            ? ' data-canonical-grammar-fill-rhythm-role="part_context"'
+            : ''
+        const grammarFillPredecessorAttrs =
+          blockIndex === firstGrammarFillPredecessorBlockIndex
+            ? ` data-canonical-grammar-fill-preceding-for="${escapeHtml(canonicalGrammarFillGroupIds[0])}" data-canonical-grammar-fill-previous-family-group-id="${escapeHtml(canonicalClozeGroupIds.at(-1) || '')}"`
+            : ''
+        const grammarFillFollowingAttrs =
+          blockIndex === followingGrammarFillSectionBlockIndex
+            ? ` data-canonical-grammar-fill-section-id="${escapeHtml(followingGrammarFillSectionId)}" data-canonical-grammar-fill-following-for="${escapeHtml(canonicalGrammarFillGroupIds.at(-1))}"`
+            : ''
+        sections.push(`<h2 class="section-header section-header--${kind}" id="${escapeHtml(headingId)}"${rhythmRoleAttr}${readingPredecessorAttrs}${readingFollowingAttrs}${sevenChoicesRhythmAttrs}${sevenChoicesPredecessorAttrs}${sevenChoicesBoundaryAttrs}${sevenChoicesFollowingAttrs}${clozeRhythmAttrs}${clozePredecessorAttrs}${clozeFollowingAttrs}${grammarFillRhythmAttrs}${grammarFillPartContextAttrs}${grammarFillPredecessorAttrs}${grammarFillFollowingAttrs}>${escapeHtml(visibleTitle)}</h2>`)
+        if (
+          grammarFillChrome
+          && grammarFillChrome.groupId === canonicalGrammarFillGroupIds[0]
+          && blockIndex === firstGrammarFillPredecessorBlockIndex
+          && !hasGrammarFillInstructionBlock
+        ) {
+          sections.push(
+            `<p class="reading-meta-instruction" data-canonical-grammar-fill-rhythm-role="meta_instruction" data-canonical-grammar-fill-chrome="">${escapeHtml(grammarFillChrome.instruction.text)}</p>`,
+          )
+        }
       } else if (
         block.type === 'instruction'
         && block.text
@@ -960,6 +1229,7 @@ export function buildPrintHtml({
           isReadingChromeBlock(blockIndex)
           || isSevenChoicesChromeBlock(blockIndex)
           || isClozeChromeBlock(blockIndex)
+          || isGrammarFillChromeBlock(blockIndex)
         )
       ) {
         const readingPredecessorAttrs =
@@ -983,7 +1253,14 @@ export function buildPrintHtml({
           blockIndex === firstClozePredecessorBlockIndex
             ? ` data-canonical-cloze-preceding-for="${escapeHtml(canonicalClozeGroupIds[0])}" data-canonical-cloze-previous-family-group-id="${escapeHtml(canonicalSevenChoicesGroupIds.at(-1) || '')}"`
             : ''
-        sections.push(`<p class="reading-meta-instruction"${readingRhythmAttrs}${readingPredecessorAttrs}${sevenChoicesRhythmAttrs}${sevenChoicesPredecessorAttrs}${clozeRhythmAttrs}${clozePredecessorAttrs}>${escapeHtml(block.text)}</p>`)
+        const grammarFillRhythmAttrs = isGrammarFillChromeBlock(blockIndex)
+          ? ' data-canonical-grammar-fill-rhythm-role="meta_instruction" data-canonical-grammar-fill-chrome=""'
+          : ''
+        const grammarFillPredecessorAttrs =
+          blockIndex === firstGrammarFillPredecessorBlockIndex
+            ? ` data-canonical-grammar-fill-preceding-for="${escapeHtml(canonicalGrammarFillGroupIds[0])}" data-canonical-grammar-fill-previous-family-group-id="${escapeHtml(canonicalClozeGroupIds.at(-1) || '')}"`
+            : ''
+        sections.push(`<p class="reading-meta-instruction"${readingRhythmAttrs}${readingPredecessorAttrs}${sevenChoicesRhythmAttrs}${sevenChoicesPredecessorAttrs}${clozeRhythmAttrs}${clozePredecessorAttrs}${grammarFillRhythmAttrs}${grammarFillPredecessorAttrs}>${escapeHtml(block.text)}</p>`)
       } else if (block.type === 'page_break') {
         sections.push('<div class="page-break"></div>')
       } else if (block.type === 'question_group' && block.questionGroupId) {
@@ -1056,8 +1333,14 @@ export function buildPrintHtml({
           && firstClozePredecessorBlockIndex < 0
             ? ` data-canonical-cloze-previous-family-group-id="${escapeHtml(canonicalSevenChoicesGroupIds.at(-1) || '')}"`
             : ''
+        const collapsedGrammarFillBoundaryAttr =
+          canonicalGroup?.groupType === 'grammarFill'
+          && canonicalGroup.groupId === canonicalGrammarFillGroupIds[0]
+          && firstGrammarFillPredecessorBlockIndex < 0
+            ? ` data-canonical-grammar-fill-previous-family-group-id="${escapeHtml(canonicalClozeGroupIds.at(-1) || '')}"`
+            : ''
         let groupHtml = canonicalGroup
-          ? `<section class="question-group" data-canonical-group-id="${escapeHtml(canonicalGroup.groupId)}" data-canonical-group-type="${escapeHtml(canonicalGroup.groupType)}" data-canonical-semantic-signature="${escapeHtml(canonicalGroup.semanticSignature)}"${canonicalGroup.occurrenceSignature ? ` data-canonical-occurrence-signature="${escapeHtml(canonicalGroup.occurrenceSignature)}"` : ''}${collapsedSevenChoicesBoundaryAttr}${collapsedClozeBoundaryAttr}>`
+          ? `<section class="question-group" data-canonical-group-id="${escapeHtml(canonicalGroup.groupId)}" data-canonical-group-type="${escapeHtml(canonicalGroup.groupType)}" data-canonical-semantic-signature="${escapeHtml(canonicalGroup.semanticSignature)}"${canonicalGroup.occurrenceSignature ? ` data-canonical-occurrence-signature="${escapeHtml(canonicalGroup.occurrenceSignature)}"` : ''}${collapsedSevenChoicesBoundaryAttr}${collapsedClozeBoundaryAttr}${collapsedGrammarFillBoundaryAttr}>`
           : '<section class="question-group">'
 
         let groupLeadHtml = ''
@@ -1066,6 +1349,7 @@ export function buildPrintHtml({
           && canonicalGroup?.groupType !== 'reading'
           && canonicalGroup?.groupType !== 'sevenChoices'
           && canonicalGroup?.groupType !== 'cloze'
+          && canonicalGroup?.groupType !== 'grammarFill'
         ) {
           groupLeadHtml += `<div class="group-header">${chineseNumeral(groupNum)}、${escapeHtml(groupHeaderLabel)}${escapeHtml(groupHeaderScoreSuffix)}</div>`
         }
@@ -1075,6 +1359,7 @@ export function buildPrintHtml({
           && canonicalGroup?.groupType !== 'reading'
           && canonicalGroup?.groupType !== 'sevenChoices'
           && canonicalGroup?.groupType !== 'cloze'
+          && canonicalGroup?.groupType !== 'grammarFill'
         ) {
           groupLeadHtml += `<div class="group-meta"><strong>${escapeHtml(detail.title)}</strong> · ${groupTypeLabels[detail.groupType] || detail.groupType} · 每题 ${score} 分</div>`
         }
@@ -1114,7 +1399,7 @@ export function buildPrintHtml({
             groupHtml += `<div class="passage">${canonicalGroup.paragraphs
               .map(
                 (paragraph) =>
-                  `<p data-canonical-paragraph-id="${escapeHtml(paragraph.paragraphId)}"${canonicalGroup.groupType === 'sevenChoices' ? ' data-canonical-seven-choices-rhythm-role="passage_body_line"' : canonicalGroup.groupType === 'cloze' ? ' data-canonical-cloze-rhythm-role="passage_body_line"' : ''}>${renderCanonicalParagraph(
+                  `<p data-canonical-paragraph-id="${escapeHtml(paragraph.paragraphId)}"${canonicalGroup.groupType === 'sevenChoices' ? ' data-canonical-seven-choices-rhythm-role="passage_body_line"' : canonicalGroup.groupType === 'cloze' ? ' data-canonical-cloze-rhythm-role="passage_body_line"' : canonicalGroup.groupType === 'grammarFill' ? ' data-canonical-grammar-fill-rhythm-role="passage_body_line"' : ''}>${renderCanonicalParagraph(
                     canonicalGroup,
                     paragraph,
                     displayNumberByQuestionId,
@@ -1204,6 +1489,12 @@ export function buildPrintHtml({
         const lastClozeQuestionId = isCanonicalCloze
           ? canonicalGroup.questions.at(-1)?.questionId
           : undefined
+        const isCanonicalGrammarFill =
+          canonicalGroup?.groupType === 'grammarFill'
+          && canonicalGrammarFillGroupIds.includes(canonicalGroup.groupId)
+        const lastGrammarFillQuestionId = isCanonicalGrammarFill
+          ? canonicalGroup.questions.at(-1)?.questionId
+          : undefined
         for (const question of detail.questions) {
           const canonicalQuestion = canonicalQuestionById?.get(question.id)
           const printQuestion = canonicalQuestion
@@ -1240,7 +1531,7 @@ export function buildPrintHtml({
             ? canonicalQuestion.questionNo
             : questionNum
           const canonicalQuestionAttrs = canonicalQuestion
-            ? ` data-canonical-question-id="${escapeHtml(canonicalQuestion.questionId)}"${canonicalGroup?.groupType === 'reading' ? ' data-canonical-reading-rhythm-role="question_block"' : isCanonicalCloze ? ' data-canonical-cloze-rhythm-role="choice_row"' : ''}${canonicalQuestion.questionId === lastReadingQuestionId && readingSuccessorGroupId ? ` data-canonical-reading-last-question-for="${escapeHtml(readingSuccessorGroupId)}"` : ''}${canonicalQuestion.questionId === lastReadingQuestionId && readingFollowingSectionId ? ` data-canonical-reading-last-question-before-section="${escapeHtml(readingFollowingSectionId)}"` : ''}${isCanonicalCloze && canonicalQuestion.questionId === lastClozeQuestionId && followingClozeSectionId ? ` data-canonical-cloze-before-section="${escapeHtml(followingClozeSectionId)}"` : ''}${isTeacher ? ` data-canonical-correct-option-id="${escapeHtml(canonicalQuestion.correctOptionId || '')}"` : ''}`
+            ? ` data-canonical-question-id="${escapeHtml(canonicalQuestion.questionId)}"${canonicalGroup?.groupType === 'reading' ? ' data-canonical-reading-rhythm-role="question_block"' : isCanonicalCloze ? ' data-canonical-cloze-rhythm-role="choice_row"' : ''}${canonicalQuestion.questionId === lastReadingQuestionId && readingSuccessorGroupId ? ` data-canonical-reading-last-question-for="${escapeHtml(readingSuccessorGroupId)}"` : ''}${canonicalQuestion.questionId === lastReadingQuestionId && readingFollowingSectionId ? ` data-canonical-reading-last-question-before-section="${escapeHtml(readingFollowingSectionId)}"` : ''}${isCanonicalCloze && canonicalQuestion.questionId === lastClozeQuestionId && followingClozeSectionId ? ` data-canonical-cloze-before-section="${escapeHtml(followingClozeSectionId)}"` : ''}${isCanonicalGrammarFill && canonicalQuestion.questionId === lastGrammarFillQuestionId && followingGrammarFillSectionId ? ` data-canonical-grammar-fill-before-section="${escapeHtml(followingGrammarFillSectionId)}"` : ''}${isTeacher ? ` data-canonical-correct-option-id="${escapeHtml(canonicalQuestion.correctOptionId || '')}"` : ''}`
             : ''
           // 空题干:挖空题号已在文中(语法填空/完形/七选五)。有选项则题号与选项同行
           // (真卷完形形态);无选项且非教师版则整行不出(语法填空文后无内容)。
@@ -1249,12 +1540,23 @@ export function buildPrintHtml({
             && isTeacher
             && !stemText
             && !hasOptions
+          const suppressCanonicalGrammarFillStem =
+            isCanonicalGrammarFill
+            && isTeacher
+            && !stemText
+            && !hasOptions
           if (!stemText && !hasOptions && !isTeacher) {
             questionNum += 1
             continue
           }
-          if (suppressCanonicalSevenChoicesStem) {
-            groupHtml += `<div class="question question--canonical-seven-choices-tail"${canonicalQuestionAttrs}>`
+          if (
+            suppressCanonicalSevenChoicesStem
+            || suppressCanonicalGrammarFillStem
+          ) {
+            const tailClass = suppressCanonicalSevenChoicesStem
+              ? 'question--canonical-seven-choices-tail'
+              : 'question--canonical-grammar-fill-tail'
+            groupHtml += `<div class="question ${tailClass}"${canonicalQuestionAttrs}>`
           } else if (!stemText && hasOptions) {
             // 真卷完形形态:题号与选项同一行「41. A. xxx B. xxx C. xxx D. xxx」
             const placement = printQuestion.canonicalPlacement
@@ -1336,7 +1638,9 @@ export function buildPrintHtml({
                   ? ' data-canonical-seven-choices-rhythm-role="answer_line"'
                   : isCanonicalCloze
                     ? ' data-canonical-cloze-rhythm-role="answer_line"'
-                  : ''
+                    : isCanonicalGrammarFill
+                      ? ' data-canonical-grammar-fill-rhythm-role="answer_line"'
+                      : ''
             const sevenChoicesAnswerTransitionAttrs =
               isCanonicalSevenChoices
               && canonicalQuestion?.questionId === lastSevenChoicesQuestionId
@@ -1351,7 +1655,14 @@ export function buildPrintHtml({
               && !explanation
                 ? ` data-canonical-cloze-before-section="${escapeHtml(followingClozeSectionId)}"`
                 : ''
-            groupHtml += `<div class="answer"><p${answerRhythmAttrs}${answerTransitionAttrs}${sevenChoicesAnswerTransitionAttrs}${clozeAnswerTransitionAttrs}><strong>【答案】</strong>${escapeHtml(printQuestion.answer || '待补')}</p>`
+            const grammarFillAnswerTransitionAttrs =
+              isCanonicalGrammarFill
+              && canonicalQuestion?.questionId === lastGrammarFillQuestionId
+              && followingGrammarFillSectionId
+              && !explanation
+                ? ` data-canonical-grammar-fill-before-section="${escapeHtml(followingGrammarFillSectionId)}"`
+                : ''
+            groupHtml += `<div class="answer"><p${answerRhythmAttrs}${answerTransitionAttrs}${sevenChoicesAnswerTransitionAttrs}${clozeAnswerTransitionAttrs}${grammarFillAnswerTransitionAttrs}><strong>【答案】</strong>${escapeHtml(printQuestion.answer || '待补')}</p>`
             if (explanation) {
               const explanationTransitionAttrs =
                 isReadingTransitionTail
@@ -1364,7 +1675,9 @@ export function buildPrintHtml({
                     ? ' data-canonical-seven-choices-rhythm-role="explanation_line"'
                     : isCanonicalCloze
                       ? ' data-canonical-cloze-rhythm-role="explanation_line"'
-                    : ''
+                      : isCanonicalGrammarFill
+                        ? ' data-canonical-grammar-fill-rhythm-role="explanation_line"'
+                        : ''
               const sevenChoicesExplanationTransitionAttrs =
                 isCanonicalSevenChoices
                 && canonicalQuestion?.questionId
@@ -1378,7 +1691,13 @@ export function buildPrintHtml({
                 && followingClozeSectionId
                   ? ` data-canonical-cloze-before-section="${escapeHtml(followingClozeSectionId)}"`
                   : ''
-              groupHtml += `<p class="explanation"${explanationRhythmAttrs}${explanationTransitionAttrs}${sevenChoicesExplanationTransitionAttrs}${clozeExplanationTransitionAttrs}><strong>【解析】</strong>${escapeHtml(explanation)}</p>`
+              const grammarFillExplanationTransitionAttrs =
+                isCanonicalGrammarFill
+                && canonicalQuestion?.questionId === lastGrammarFillQuestionId
+                && followingGrammarFillSectionId
+                  ? ` data-canonical-grammar-fill-before-section="${escapeHtml(followingGrammarFillSectionId)}"`
+                  : ''
+              groupHtml += `<p class="explanation"${explanationRhythmAttrs}${explanationTransitionAttrs}${sevenChoicesExplanationTransitionAttrs}${clozeExplanationTransitionAttrs}${grammarFillExplanationTransitionAttrs}><strong>【解析】</strong>${escapeHtml(explanation)}</p>`
             }
             groupHtml += '</div>'
           }
@@ -1536,6 +1855,10 @@ body {
   margin-bottom: 0;
 }
 
+.question-group[data-canonical-group-type="grammarFill"] {
+  margin-bottom: 0;
+}
+
 .section-header[data-canonical-cloze-chrome] {
   margin-top: 0;
   margin-bottom: 0;
@@ -1556,6 +1879,30 @@ body {
   margin-top: ${clozeRhythm.targets.printPdf.baselineStepPt}pt;
   margin-bottom: 0;
   line-height: ${clozeRhythm.targets.printPdf.baselineStepPt}pt;
+}
+
+.section-header[data-canonical-grammar-fill-chrome] {
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: ${grammarFillRhythm.rendererMapping.printPdf.baselineStepPt}pt;
+}
+
+.section-header[
+  data-canonical-grammar-fill-chrome
+][data-canonical-cloze-rhythm-role="next_section"] {
+  margin-top: ${clozeRhythm.targets.printPdf.baselineStepPt}pt;
+}
+
+.reading-meta-instruction[data-canonical-grammar-fill-chrome] {
+  margin-top: 0;
+  margin-bottom: ${grammarFillRhythm.rendererMapping.printPdf.instructionMarginBottomPt}pt;
+  line-height: ${grammarFillRhythm.rendererMapping.printPdf.baselineStepPt}pt;
+}
+
+.section-header[data-canonical-grammar-fill-rhythm-role="next_section"] {
+  margin-top: ${grammarFillRhythm.rendererMapping.printPdf.followingSectionMarginTopPt}pt;
+  margin-bottom: 0;
+  line-height: ${grammarFillRhythm.rendererMapping.printPdf.baselineStepPt}pt;
 }
 
 .group-meta {
@@ -1614,6 +1961,15 @@ body {
 .question-group[data-canonical-group-type="cloze"] .passage p {
   margin: 0;
   line-height: ${clozeRhythm.targets.printPdf.baselineStepPt}pt;
+}
+
+.question-group[data-canonical-group-type="grammarFill"] .passage {
+  margin: 0;
+}
+
+.question-group[data-canonical-group-type="grammarFill"] .passage p {
+  margin: 0;
+  line-height: ${grammarFillRhythm.targets.printPdf.baselineStepPt}pt;
 }
 
 /* figure-render cut — SW-2: figures never exceed the passage's own
@@ -1899,6 +2255,17 @@ body {
   white-space: nowrap;
 }
 
+.question-group[data-canonical-group-type="grammarFill"] .question,
+.question-group[data-canonical-group-type="grammarFill"] .answer,
+.question-group[data-canonical-group-type="grammarFill"] .answer p {
+  margin: 0;
+  line-height: ${grammarFillRhythm.targets.printPdf.baselineStepPt}pt;
+}
+
+.question-group[data-canonical-group-type="grammarFill"] .answer {
+  font-size: 10.5pt;
+}
+
 .options-inline--canonical {
   display: grid;
   grid-template-columns: 21pt 438.2pt;
@@ -1966,6 +2333,30 @@ body {
    七选五 ≈4.6em (10.5pt 下 ≈48pt/17mm); 完形/语法填空 ≈3.3em (≈35pt/12mm). */
 .print-blank-unit {
   white-space: ${paperBlankRuling.cloze.whiteSpace};
+}
+
+.print-blank-unit[data-canonical-grammar-fill-unit] {
+  display: inline-grid;
+  grid-template-columns: ${grammarFillRhythm.blankGeometry.widthEm}em max-content;
+  column-gap: ${grammarFillRhythm.promptGeometry.gapEm}em;
+  align-items: baseline;
+  break-inside: avoid;
+  text-align: left;
+  text-indent: 0;
+  vertical-align: baseline;
+}
+
+.print-blank-unit[data-canonical-grammar-fill-unit] > :where(.print-blank) {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.print-blank-unit[data-canonical-grammar-fill-unit] > :where(.print-blank-hint) {
+  display: block;
+  justify-self: start;
+  margin-left: 0;
+  text-align: left;
+  text-indent: 0;
 }
 
 .print-blank {

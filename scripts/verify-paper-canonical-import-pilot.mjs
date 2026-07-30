@@ -34,6 +34,9 @@ import {
 import {
   clozeRhythm,
 } from '../shared/paper-canonical/clozeRhythm.mjs'
+import {
+  grammarFillRhythm,
+} from '../shared/paper-canonical/grammarFillRhythm.mjs'
 import { digestJson } from '../shared/paper-canonical/stable.mjs'
 import { loadCanonicalImportRequest } from '../server/paper-canonical/importRequest.mjs'
 import {
@@ -102,6 +105,18 @@ const clozeSourceOraclePath = path.join(
 const clozeCoverageOraclePath = path.join(
   repositoryRoot,
   'docs/cuts/paper-canonical-unification/qa/20-cloze-observed-coverage-oracle-v1.json',
+)
+const grammarFillReferencePath = path.join(
+  repositoryRoot,
+  'docs/cuts/paper-canonical-unification/qa/20-grammar-fill-golden-geometry-reference-measurements-v1.json',
+)
+const grammarFillSourceOraclePath = path.join(
+  repositoryRoot,
+  'docs/cuts/paper-canonical-unification/qa/20-grammar-fill-source-oracles-v1.json',
+)
+const grammarFillCoverageOraclePath = path.join(
+  repositoryRoot,
+  'docs/cuts/paper-canonical-unification/qa/20-grammar-fill-observed-coverage-oracle-v1.json',
 )
 const paperId = 'paper-2026-i'
 const provisionActualArtifacts = process.argv.includes('--actual-artifacts')
@@ -370,18 +385,18 @@ function assertSevenChoicesReferenceEvidence() {
   )
   assert.equal(
     canonicalAuthorityRef.manifestVersion,
-    '19',
-    'new Publications preserve Seven Choices inside the closed Cloze successor authority',
+    '20',
+    'new Publications preserve Seven Choices inside the closed Grammar Fill successor authority',
   )
   assert.equal(
     consumerContractRefs.screen.version,
-    '19',
-    'Screen v19 binds the complete geometry authority closure',
+    '20',
+    'Screen v20 binds the complete geometry authority closure',
   )
   assert.equal(
     consumerContractRefs.print_pdf.version,
-    '20',
-    'Print/PDF v20 binds the complete geometry authority closure',
+    '21',
+    'Print/PDF v21 binds the complete geometry authority closure',
   )
   assert.equal(
     sha256(preservedBytes),
@@ -925,6 +940,224 @@ function assertClozeCoverageOracle() {
       profile.every((edgeId) => edgeIds.includes(edgeId)),
       true,
       `${variantKey} contains only independent Cloze edge IDs`,
+    )
+  }
+  return { digest: sha256(bytes), oracle }
+}
+
+function independentGrammarFillExplanationText(entry) {
+  return [
+    entry?.reason ? `【${entry.answer}】${entry.reason}` : '',
+    entry?.teachingNote ? `点拨：${entry.teachingNote}` : '',
+  ].filter(Boolean).join('\n')
+}
+
+function assertGrammarFillSourceOracle() {
+  const bytes = readFileSync(grammarFillSourceOraclePath)
+  const oracle = JSON.parse(bytes)
+  assert.equal(oracle.schemaVersion, 'grammar-fill-source-oracles-v1')
+  assert.equal(oracle.paperId, paperId)
+  const sourcePaths = Object.fromEntries(
+    Object.entries(oracle.sources).map(([key, source]) => [
+      key,
+      path.join(repositoryRoot, source.path),
+    ]),
+  )
+  for (const [key, source] of Object.entries(oracle.sources)) {
+    assert.equal(
+      sha256(readFileSync(sourcePaths[key])),
+      source.sha256,
+      `Grammar Fill source oracle binds immutable ${key} bytes`,
+    )
+  }
+  const pageText = normalizedVisibleText(sourcePdfPageText(
+    sourcePaths.questionPdf,
+    oracle.sources.questionPdf.grammarFillPage,
+  ))
+  const compactSourceText = (value) =>
+    normalizedVisibleText(value)
+      .replace(/__(\d+)__/gu, '$1')
+      .replace(/\s+/gu, '')
+  for (const marker of [
+    oracle.publicVisibleChrome.section,
+    oracle.publicVisibleChrome.instruction,
+    oracle.publicVisibleChrome.followingPart,
+  ]) {
+    assert.equal(
+      compactSourceText(pageText).includes(compactSourceText(marker)),
+      true,
+      `immutable source page exposes ${marker}`,
+    )
+  }
+  const paperAsset = JSON.parse(readFileSync(sourcePaths.paperAsset, 'utf8'))
+  const officialAnswers = JSON.parse(
+    readFileSync(sourcePaths.officialAnswers, 'utf8'),
+  )
+  const teacherAnalysis = JSON.parse(
+    readFileSync(sourcePaths.teacherAnalysis, 'utf8'),
+  )
+  assert.equal(
+    teacherAnalysis.schemaVersion,
+    oracle.sources.teacherAnalysis.schemaVersion,
+  )
+  assert.equal(
+    teacherAnalysis.meta?.reviewStatus,
+    oracle.sources.teacherAnalysis.reviewStatus,
+  )
+  const identity = oracle.publicIdentities.grammarFill
+  const group = paperAsset.content.groups[identity.groupId]
+  assert.equal(group?.groupType, 'grammarFill')
+  assert.deepEqual(group.questionIds, identity.questionIds)
+  assert.deepEqual(group.blankIds, identity.blankIds)
+  assert.deepEqual(
+    group.passage.paragraphs.map((paragraph) => paragraph.paragraphId),
+    identity.paragraphIds,
+  )
+  assert.equal(
+    compactSourceText(pageText).includes(compactSourceText(
+      group.passage.paragraphs[0].text.slice(0, 80),
+    )),
+    true,
+    'immutable source page exposes the Grammar Fill passage start',
+  )
+  assert.equal(
+    compactSourceText(pageText).includes(compactSourceText(
+      group.passage.paragraphs.at(-1).text.slice(-80),
+    )),
+    true,
+    'immutable source page exposes the Grammar Fill passage end',
+  )
+  const rows = identity.questionIds.map((questionId, index) => {
+    const question = paperAsset.content.questions[questionId]
+    const blankId = identity.blankIds[index]
+    const blank = paperAsset.content.blanks[blankId]
+    const answer = officialAnswers.answers[questionId]
+    const analysis = teacherAnalysis.blanks[questionId]
+    assert.equal(question.questionNo, 56 + index)
+    assert.equal(question.blankId, blankId)
+    assert.equal(blank.questionId, questionId)
+    assert.equal(blank.prompt ?? null, identity.prompts[questionId])
+    assert.equal(answer.answer, identity.answers[questionId])
+    assert.equal(analysis.blankId, blankId)
+    assert.equal(analysis.hint ?? null, identity.prompts[questionId])
+    assert.equal(
+      typeof analysis.answer === 'string' && analysis.answer.length > 0,
+      true,
+      `${questionId} retains its independently reviewed analysis answer text`,
+    )
+    return {
+      questionId,
+      questionNo: question.questionNo,
+      blankId,
+      prompt: blank.prompt ?? null,
+      answer: answer.answer,
+      analysisAnswer: analysis.answer,
+      explanation: independentGrammarFillExplanationText(analysis),
+    }
+  })
+  assert.equal(
+    rows.every((row) => row.explanation.length > 0),
+    true,
+    'every Grammar Fill answer has source-bound reviewed analysis text',
+  )
+  return {
+    digest: sha256(bytes),
+    oracle,
+    paperAsset,
+    officialAnswers,
+    teacherAnalysis,
+    teacherAnalysisPath: sourcePaths.teacherAnalysis,
+    rows,
+  }
+}
+
+function assertGrammarFillReferenceEvidence() {
+  const bytes = readFileSync(grammarFillReferencePath)
+  const evidence = JSON.parse(bytes)
+  assert.equal(
+    evidence.schemaVersion,
+    'grammar-fill-golden-geometry-reference-measurements-v1',
+  )
+  assert.equal(
+    sha256(readFileSync(path.join(repositoryRoot, evidence.reference.path))),
+    evidence.reference.sha256,
+    'Grammar Fill geometry binds the exact page-10 reference bytes',
+  )
+  assert.equal(
+    evidence.reference.coordinateUse,
+    'evidence_only_never_css_px_pdf_pt_or_a4_scale',
+  )
+  assert.equal(
+    grammarFillRhythm.referenceMeasurement.path,
+    path.relative(repositoryRoot, grammarFillReferencePath),
+  )
+  assert.equal(
+    grammarFillRhythm.referenceMeasurement.sha256,
+    sha256(bytes),
+  )
+  assert.equal(grammarFillRhythm.blankGeometry.widthEm, 3.3)
+  assert.equal(grammarFillRhythm.promptGeometry.gapEm, 0.5)
+  assert.equal(
+    grammarFillRhythm.horizontalStrategy.blankWidthProxy,
+    'em',
+  )
+  assert.equal(
+    grammarFillRhythm.horizontalStrategy.paragraphWidthProxy,
+    'usable_content_width',
+  )
+  return { digest: sha256(bytes), evidence }
+}
+
+function assertGrammarFillCoverageOracle() {
+  const bytes = readFileSync(grammarFillCoverageOraclePath)
+  const oracle = JSON.parse(bytes)
+  assert.equal(
+    oracle.schemaVersion,
+    'grammar-fill-observed-coverage-oracle-v1',
+  )
+  assert.equal(
+    oracle.authorityBoundary.sourceOracle,
+    path.relative(repositoryRoot, grammarFillSourceOraclePath),
+  )
+  assert.equal(
+    oracle.authorityBoundary.goldenReference,
+    path.relative(repositoryRoot, grammarFillReferencePath),
+  )
+  assert.deepEqual(
+    grammarFillRhythm.adjacencyGraph,
+    oracle.edges,
+    'Grammar Fill production edge graph exactly equals the independent oracle',
+  )
+  assert.deepEqual(
+    {
+      previousFamily: grammarFillRhythm
+        .semanticRoleClasses.previousFamilyBoundary[0],
+      chrome: grammarFillRhythm.semanticRoleClasses.chrome,
+      passage: grammarFillRhythm.semanticRoleClasses.passageContent[0],
+      inlineBlank: grammarFillRhythm.semanticRoleClasses.inlineBlank[0],
+      prompt: grammarFillRhythm.semanticRoleClasses.prompt[0],
+      answer: grammarFillRhythm.semanticRoleClasses.teacherTail[0],
+      explanation: grammarFillRhythm.semanticRoleClasses.teacherTail[1],
+      followingSection:
+        grammarFillRhythm.semanticRoleClasses.followingSection[0],
+    },
+    oracle.authorityBoundary.expectedSourceRoles,
+  )
+  const edgeIds = oracle.edges.map((edge) => edge.edgeId)
+  assert.equal(new Set(edgeIds).size, edgeIds.length)
+  assert.deepEqual(
+    [...new Set(oracle.requiredBundles.flatMap(
+      (bundle) => bundle.expectedEdgeIds,
+    ))].sort(),
+    [...edgeIds].sort(),
+    'Grammar Fill required bundles close exactly the independent 32-edge graph',
+  )
+  for (const bundle of oracle.requiredBundles) {
+    assert.equal(new Set(bundle.variants).size, bundle.variants.length)
+    assert.equal(
+      bundle.expectedEdgeIds.every((edgeId) => edgeIds.includes(edgeId)),
+      true,
+      `${bundle.bundleId} contains only independent Grammar Fill edges`,
     )
   }
   return { digest: sha256(bytes), oracle }
@@ -1512,7 +1745,7 @@ function clozePrintVariantItem(asset) {
 
 function grammarFillPrintVariantItem(asset) {
   const groupId =
-    clozeSourceOracle.oracle.publicIdentities.followingSection.groupId
+    grammarFillSourceOracle.oracle.publicIdentities.grammarFill.groupId
   const group = asset.content.groups[groupId]
   return {
     detail: {
@@ -1525,19 +1758,133 @@ function grammarFillPrintVariantItem(asset) {
         title: group.title,
         materialText: 'POISONED LEGACY GRAMMAR FILL VARIANT',
       },
-      questions: group.questionIds.map((questionId) => ({
-        id: questionId,
-        questionNo: String(asset.content.questions[questionId].questionNo),
-        stem: '',
-        answer: '',
-        explanation: '',
-        options: [],
-      })),
+      questions: group.questionIds.map((questionId) => {
+        const row = grammarFillSourceOracle.rows.find(
+          (candidate) => candidate.questionId === questionId,
+        )
+        return {
+          id: questionId,
+          questionNo: String(asset.content.questions[questionId].questionNo),
+          stem: '',
+          answer: row.answer,
+          explanation: row.explanation,
+          options: [],
+        }
+      }),
     },
     score: 1.5,
     sectionTitle: '语法填空',
     note: '',
   }
+}
+
+function grammarFillChromeForPrint({ proofVariantId = null } = {}) {
+  const groupId =
+    grammarFillSourceOracle.oracle.publicIdentities.grammarFill.groupId
+  const blocks = grammarFillSourceOracle.paperAsset.content.blocks
+  const groupIndex = blocks.findIndex(
+    (block) => block.type === 'group' && block.groupId === groupId,
+  )
+  assert.ok(groupIndex >= 2, 'Grammar Fill source chrome resolves its Group')
+  const section = blocks[groupIndex - 2]
+  const instruction = blocks[groupIndex - 1]
+  const previousGroup = blocks.slice(0, groupIndex).findLast(
+    (block) => block.type === 'group',
+  )
+  const partContext = blocks.slice(0, groupIndex).findLast(
+    (block) => block.type === 'partHeading',
+  )
+  const followingPart = blocks.slice(groupIndex + 1).find(
+    (block) => block.type === 'partHeading',
+  )
+  assert.equal(section.type, 'sectionHeading')
+  assert.equal(instruction.type, 'instruction')
+  assert.equal(previousGroup.type, 'group')
+  assert.equal(partContext.type, 'partHeading')
+  assert.equal(followingPart.type, 'partHeading')
+  return {
+    groupId,
+    previousFamilyGroupId: previousGroup.groupId,
+    partContext: {
+      partId: partContext.partId,
+      text: partContext.text,
+    },
+    section: {
+      sectionId: section.sectionId,
+      text: section.text,
+    },
+    instruction: { text: instruction.text },
+    followingSection: {
+      sectionId: followingPart.partId,
+      text: followingPart.text,
+    },
+    sourceBinding: {
+      paperId: grammarFillRhythm.publicArtifactOracle.paperId,
+      sourceAssetVersion:
+        grammarFillRhythm.publicArtifactOracle.sourceAssetVersion,
+      groupId,
+      projectedOccurrenceDigest:
+        proofVariantId
+          ? grammarFillRhythm.publicArtifactOracle
+              .adversarialProjectedOccurrenceDigests[proofVariantId]
+          : grammarFillRhythm.publicArtifactOracle
+              .expectedProjectedOccurrenceDigest,
+      ...(proofVariantId ? { proofVariantId } : {}),
+      geometry: {
+        blankWidthEm: grammarFillRhythm.blankGeometry.widthEm,
+        promptGapEm: grammarFillRhythm.promptGeometry.gapEm,
+        promptAttachment: grammarFillRhythm.promptGeometry.attachment,
+      },
+      sourceDigests: {
+        paperAsset:
+          `sha256:${grammarFillRhythm.publicArtifactOracle
+            .sourceBindings.paperAsset.sha256}`,
+        officialAnswers:
+          `sha256:${grammarFillRhythm.publicArtifactOracle
+            .sourceBindings.officialAnswers.sha256}`,
+        teacherAnalysis:
+          `sha256:${grammarFillRhythm.publicArtifactOracle
+            .sourceBindings.teacherAnalysis.sha256}`,
+      },
+      questionSupplements: grammarFillSourceOracle.rows.map((row) => ({
+        questionId: row.questionId,
+        blankId: row.blankId,
+        prompt: row.prompt,
+        answer: row.answer,
+        explanation: row.explanation,
+      })),
+    },
+  }
+}
+
+function grammarFillChromeForConsumption(consumption) {
+  const selection = consumption.selections.find(
+    (candidate) => candidate.familyContractId === 'grammar-fill',
+  )
+  const projectedOccurrenceDigest =
+    selection?.projectedOccurrenceDigests?.find(
+      (candidate) =>
+        candidate.groupId
+          === grammarFillRhythm.publicArtifactOracle.grammarFill.groupId,
+    )?.digest
+  assert.equal(typeof projectedOccurrenceDigest, 'string')
+  if (
+    projectedOccurrenceDigest
+      === grammarFillRhythm.publicArtifactOracle
+        .expectedProjectedOccurrenceDigest
+  ) {
+    return grammarFillChromeForPrint()
+  }
+  const proofVariantId = Object.entries(
+    grammarFillRhythm.publicArtifactOracle
+      .adversarialProjectedOccurrenceDigests,
+  ).find(([, digest]) => digest === projectedOccurrenceDigest)?.[0]
+  assert.equal(
+    typeof proofVariantId,
+    'string',
+    'Grammar Fill public adversary has an independently published occurrence digest',
+  )
+  return grammarFillChromeForPrint({ proofVariantId })
 }
 
 function clozeVariantConsumption(
@@ -1639,6 +1986,105 @@ function clozeVariantConsumption(
         ? `${paragraph.text} ${appendedPassageText}`
         : paragraph.text)
   return { consumption: variant, expectedRows, expectedPassageTexts }
+}
+
+function grammarFillVariantConsumption(
+  consumption,
+  {
+    passageTailRepeats = 0,
+    wrappedPrefixRepeats = 0,
+  } = {},
+) {
+  const variant = structuredClone(consumption)
+  const selection = variant.selections.find(
+    (candidate) => candidate.familyContractId === 'grammar-fill',
+  )
+  assert.ok(
+    selection,
+    'Grammar Fill adversary resolves the canonical selection',
+  )
+  const groupId =
+    grammarFillSourceOracle.oracle.publicIdentities.grammarFill.groupId
+  const occurrence = selection.projectedOccurrences.find(
+    (candidate) => candidate.groupId === groupId,
+  )
+  assert.ok(
+    occurrence,
+    'Grammar Fill adversary resolves the canonical occurrence',
+  )
+  let appendedPassageText = ''
+  let wrappedPrefixText = ''
+  if (wrappedPrefixRepeats > 0) {
+    const targetQuestionId =
+      grammarFillSourceOracle.oracle.variants.promptedQuestionId
+    const targetBlankId =
+      grammarFillSourceOracle.rows.find(
+        (row) => row.questionId === targetQuestionId,
+      ).blankId
+    const targetBlock = occurrence.content.blocks.find((block) =>
+      block.inlines.some(
+        (inline) =>
+          inline.kind === 'blank_ref'
+          && inline.blankId === targetBlankId,
+      ))
+    const blankIndex = targetBlock?.inlines.findIndex(
+      (inline) =>
+        inline.kind === 'blank_ref'
+        && inline.blankId === targetBlankId,
+    )
+    const precedingText = blankIndex > 0
+      ? targetBlock.inlines[blankIndex - 1]
+      : null
+    assert.equal(precedingText?.kind, 'text')
+    const sourcePhrase = 'Daji'
+    wrappedPrefixText = Array.from(
+      { length: wrappedPrefixRepeats },
+      () => sourcePhrase,
+    ).join(' ')
+    precedingText.text = `${precedingText.text} ${wrappedPrefixText} `
+  }
+  if (passageTailRepeats > 0) {
+    const sourcePhrase =
+      grammarFillSourceOracle.oracle.variants.passageCrossPage.sourceText
+    appendedPassageText = Array.from(
+      { length: passageTailRepeats },
+      () => sourcePhrase,
+    ).join(' ')
+    const finalBlock = occurrence.content.blocks.at(-1)
+    const finalText = [...finalBlock.inlines].reverse().find(
+      (inline) => inline.kind === 'text',
+    )
+    assert.ok(
+      finalText,
+      'Grammar Fill passage adversary resolves a source text node',
+    )
+    finalText.text = `${finalText.text} ${appendedPassageText}`
+  }
+  selection.projectedOccurrenceDigests = selection.projectedOccurrences.map(
+    (candidate) => ({
+      groupId: candidate.groupId,
+      digest: digestJson(candidate),
+    }),
+  )
+  const sourceParagraphs =
+    grammarFillSourceOracle.paperAsset.content.groups[groupId]
+      .passage.paragraphs
+  const expectedPassageTexts = sourceParagraphs.map(
+    (paragraph, index) => {
+      let text = paragraph.text
+      if (index === 0 && wrappedPrefixText) {
+        text = text.replace(
+          '__56__',
+          `${wrappedPrefixText} __56__`,
+        )
+      }
+      if (index === sourceParagraphs.length - 1 && appendedPassageText) {
+        text = `${text} ${appendedPassageText}`
+      }
+      return text
+    },
+  )
+  return { consumption: variant, expectedPassageTexts }
 }
 
 function attributeSignatures(html) {
@@ -2809,6 +3255,98 @@ function assertClozeObservedCoverage(observations) {
   }
 }
 
+function recordGrammarFillBundleCoverage(
+  observations,
+  {
+    bundleId,
+    variant,
+    proof,
+  },
+) {
+  const bundle = grammarFillCoverageOracle.oracle.requiredBundles.find(
+    (candidate) => candidate.bundleId === bundleId,
+  )
+  assert.ok(bundle, `independent Grammar Fill oracle declares ${bundleId}`)
+  assert.equal(
+    bundle.variants.includes(variant),
+    true,
+    `${bundleId} independently requires ${variant}`,
+  )
+  assert.equal(
+    Array.isArray(proof?.observedEdges) && proof.observedEdges.length > 0,
+    true,
+    `${bundleId}/${variant} returns measured public-artifact edges`,
+  )
+  assert.equal(
+    new Set(proof.observedEdges.map((entry) => entry.edgeId)).size,
+    proof.observedEdges.length,
+    `${bundleId}/${variant} records every edge at most once`,
+  )
+  for (const observed of proof.observedEdges) {
+    assert.equal(
+      bundle.expectedEdgeIds.includes(observed.edgeId),
+      true,
+      `${bundleId}/${variant} records only independent oracle edges`,
+    )
+    observations.push({
+      bundleId,
+      variant,
+      ...observed,
+      proof: 'source_identity_and_public_geometry_assertion',
+      proofDigest: sha256(Buffer.from(JSON.stringify(observed), 'utf8')),
+    })
+  }
+}
+
+function assertGrammarFillObservedCoverage(observations) {
+  const oracle = grammarFillCoverageOracle.oracle
+  for (const bundle of oracle.requiredBundles) {
+    const actual = observations.filter(
+      (entry) => entry.bundleId === bundle.bundleId,
+    )
+    assert.deepEqual(
+      [...new Set(actual.map((entry) => entry.variant))].sort(),
+      [...bundle.variants].sort(),
+      `${bundle.bundleId} executes exactly every Grammar Fill variant`,
+    )
+    assert.deepEqual(
+      [...new Set(actual.map((entry) => entry.edgeId))].sort(),
+      [...bundle.expectedEdgeIds].sort(),
+      `${bundle.bundleId} observed set exactly equals its independent oracle`,
+    )
+    assert.equal(
+      new Set(actual.map((entry) =>
+        `${entry.variant}:${entry.edgeId}`)).size,
+      actual.length,
+      `${bundle.bundleId} has no duplicate variant/edge observation`,
+    )
+  }
+  assert.deepEqual(
+    [...new Set(observations.map((entry) => entry.edgeId))].sort(),
+    oracle.edges.map((edge) => edge.edgeId).sort(),
+    'complete Grammar Fill ledger exactly equals the independent 32-edge oracle',
+  )
+  return {
+    schemaVersion: 'grammar-fill-observed-coverage-ledger-v1',
+    oraclePath: path.relative(
+      repositoryRoot,
+      grammarFillCoverageOraclePath,
+    ),
+    oracleSha256: grammarFillCoverageOracle.digest,
+    edgeIds: oracle.edges.map((edge) => edge.edgeId),
+    bundles: oracle.requiredBundles.map((bundle) => ({
+      bundleId: bundle.bundleId,
+      variants: [...bundle.variants],
+      edgeIds: [...new Set(observations
+        .filter((entry) => entry.bundleId === bundle.bundleId)
+        .map((entry) => entry.edgeId))],
+      observations: observations.filter(
+        (entry) => entry.bundleId === bundle.bundleId,
+      ),
+    })),
+  }
+}
+
 async function assertClozeDomGeometry(
   page,
   label,
@@ -3461,6 +3999,775 @@ async function assertClozeDomGeometry(
       expected.oracle.publicIdentities.followingSection.sectionId,
     actualRatio: assertStep(followingEdgeId, followingGapPx),
   })
+  return { ...observation, observedEdges }
+}
+
+async function assertGrammarFillDomGeometry(
+  page,
+  label,
+  {
+    teacher = false,
+    requireWrappedLine = false,
+    surface = 'screen',
+    observeFollowingTransition = true,
+    expectedPassageTexts =
+      grammarFillSourceOracle.paperAsset.content.groups[
+        grammarFillSourceOracle.oracle.publicIdentities.grammarFill.groupId
+      ].passage.paragraphs.map((paragraph) => paragraph.text),
+  } = {},
+) {
+  const expected = grammarFillSourceOracle
+  const observation = await page.evaluate(({ groupId, previousGroupId }) => {
+    const group = document.querySelector(
+      `[data-canonical-group-id="${groupId}"], `
+      + `[data-paper-browse-anchor="${groupId}"]`,
+    )
+    if (!(group instanceof HTMLElement)) return { missingGroup: true }
+    const visualLines = (elementOrNode) => {
+      if (!elementOrNode) return []
+      const range = document.createRange()
+      range.selectNodeContents(elementOrNode)
+      const lines = []
+      for (const rect of range.getClientRects()) {
+        const center = rect.y + rect.height / 2
+        const line = lines.find(
+          (candidate) => Math.abs(candidate.center - center) <= 1,
+        )
+        if (line) {
+          line.x = Math.min(line.x, rect.x)
+          line.right = Math.max(line.right, rect.right)
+          line.bottom = Math.max(line.bottom, rect.bottom)
+        } else {
+          lines.push({
+            x: rect.x,
+            right: rect.right,
+            y: rect.y,
+            bottom: rect.bottom,
+            height: rect.height,
+            center,
+            page: Math.floor(rect.y / 1122.52) + 1,
+          })
+        }
+      }
+      return lines.sort((left, right) =>
+        left.center - right.center || left.x - right.x)
+    }
+    const role = (value) => [
+      ...document.querySelectorAll(
+        `[data-canonical-grammar-fill-rhythm-role="${value}"]`,
+      ),
+    ]
+    const groupRole = (value) => [
+      ...group.querySelectorAll(
+        `[data-canonical-grammar-fill-rhythm-role="${value}"]`,
+      ),
+    ]
+    const paragraphs = groupRole('passage_body_line').map((element) => ({
+      id: element.getAttribute('data-canonical-paragraph-id')
+        || element.getAttribute('data-paper-paragraph-id'),
+      text: element.textContent || '',
+      lineHeight: Number.parseFloat(getComputedStyle(element).lineHeight),
+      lines: visualLines(element),
+    }))
+    const blanks = groupRole('inline_blank_marker').map((element) => {
+      const unit = element.closest('[data-canonical-grammar-fill-unit]')
+        || element.closest('.print-blank-unit')
+      const blankSurface =
+        element.matches('.print-blank-unit')
+          ? element.querySelector('.print-blank')
+          : element
+      const prompt = unit?.querySelector('.ps-paper-blank-hint')
+        || unit?.querySelector('.print-blank-hint')
+      const rect = blankSurface.getBoundingClientRect()
+      const unitRect = unit?.getBoundingClientRect()
+      const style = getComputedStyle(blankSurface)
+      const unitStyle = unit ? getComputedStyle(unit) : null
+      let flowUnit = unit
+      while (
+        flowUnit?.parentElement
+        && flowUnit.parentElement !== element.closest(
+          '[data-canonical-grammar-fill-rhythm-role="passage_body_line"]',
+        )
+        && !flowUnit.previousSibling
+        && !flowUnit.nextSibling
+      ) {
+        flowUnit = flowUnit.parentElement
+      }
+      const paragraph = element.closest(
+        '[data-canonical-grammar-fill-rhythm-role="passage_body_line"]',
+      )
+      const textNodes = []
+      if (paragraph) {
+        const walker = document.createTreeWalker(
+          paragraph,
+          NodeFilter.SHOW_TEXT,
+        )
+        while (walker.nextNode()) textNodes.push(walker.currentNode)
+      }
+      const precedingTextNodes = textNodes.filter(
+        (node) =>
+          !unit?.contains(node)
+          && (
+            node.compareDocumentPosition(unit)
+            & Node.DOCUMENT_POSITION_FOLLOWING
+          ),
+      )
+      const followingTextNodes = textNodes.filter(
+        (node) =>
+          !unit?.contains(node)
+          && (
+            unit?.compareDocumentPosition(node)
+            & Node.DOCUMENT_POSITION_FOLLOWING
+          ),
+      )
+      const previous = flowUnit?.previousSibling
+      const following = flowUnit?.nextSibling
+      return {
+        questionId: element.getAttribute('data-canonical-question-id'),
+        blankId: element.getAttribute('data-canonical-blank-id'),
+        pair: element.getAttribute('data-canonical-pair'),
+        text:
+          element.querySelector('.print-blank-num')?.textContent
+          || element.textContent
+          || '',
+        width: rect.width,
+        fontSize: Number.parseFloat(style.fontSize),
+        textAlign: style.textAlign,
+        whiteSpace: style.whiteSpace,
+        unitDisplay: unitStyle?.display,
+        unitBreakInside: unitStyle?.breakInside,
+        unitRect: unitRect?.toJSON(),
+        blankRect: rect.toJSON(),
+        promptText: prompt?.textContent || null,
+        promptRole: prompt?.getAttribute(
+          'data-canonical-grammar-fill-rhythm-role',
+        ) || null,
+        promptRect: prompt?.getBoundingClientRect().toJSON() || null,
+        previousText: precedingTextNodes.slice(-4)
+          .map((node) => node.textContent || '').join('')
+          || previous?.textContent || '',
+        followingText: followingTextNodes.slice(0, 4)
+          .map((node) => node.textContent || '').join('')
+          || following?.textContent || '',
+        previousLines: visualLines(precedingTextNodes.at(-1) || previous),
+        followingLines: visualLines(followingTextNodes[0] || following),
+      }
+    })
+    const chrome = [
+      role('part_context')[0],
+      role('subsection')[0],
+      role('meta_instruction')[0],
+    ].filter(Boolean).map((element) => ({
+      role: element.getAttribute(
+        'data-canonical-grammar-fill-rhythm-role',
+      ),
+      text: element.textContent || '',
+      lines: visualLines(element),
+    }))
+    const subsectionCenter = chrome.find(
+      (entry) => entry.role === 'subsection',
+    )?.lines[0]?.center
+    const previousFamily = [
+      ...document.querySelectorAll(
+        `[data-canonical-group-id="${previousGroupId}"] `
+        + '[data-canonical-cloze-rhythm-role], '
+        + `[data-paper-browse-anchor="${previousGroupId}"] `
+        + '[data-canonical-cloze-rhythm-role]',
+      ),
+    ].flatMap((element) =>
+      visualLines(element).map((line) => ({
+        identity:
+          element.closest('[data-canonical-question-id]')
+            ?.getAttribute('data-canonical-question-id')
+          || previousGroupId,
+        role: element.getAttribute('data-canonical-cloze-rhythm-role'),
+        text: element.textContent || '',
+        line,
+      })))
+      .filter((entry) => entry.line.center < subsectionCenter)
+      .sort((left, right) => left.line.center - right.line.center)
+      .at(-1)
+    const followingElements = role('next_section')
+    if (followingElements.length === 0) {
+      const fallback = document.querySelector(
+        '[data-paper-browse-anchor="part-2026-i-writing"]',
+      ) || [...document.querySelectorAll('h1, h2, h3, h4')].find(
+        (element) =>
+          element.textContent?.includes('第四部分')
+          && element.textContent?.includes('写作'),
+      )
+      if (fallback) followingElements.push(fallback)
+    }
+    const following = followingElements.map((element) => ({
+      id: element.getAttribute('data-paper-browse-anchor') || element.id,
+      role: element.getAttribute(
+        'data-canonical-grammar-fill-rhythm-role',
+      ),
+      text: element.textContent || '',
+      lines: visualLines(element),
+      debug: {
+        className: element.className,
+        marginTop: getComputedStyle(element).marginTop,
+        parentClassName: element.parentElement?.className || '',
+        cardClassName:
+          element.closest('.paper-browse-group-card')?.className || '',
+        cardMarginTop:
+          element.closest('.paper-browse-group-card')
+            ? getComputedStyle(
+                element.closest('.paper-browse-group-card'),
+              ).marginTop
+            : null,
+        shellClassName:
+          document.querySelector('.paper-browse-shell')?.className || '',
+      },
+    }))
+    const answers = groupRole('answer_line').map((element) => ({
+      questionId:
+        element.closest('[data-canonical-question-id]')
+          ?.getAttribute('data-canonical-question-id'),
+      text: element.textContent || '',
+      lines: visualLines(element),
+    }))
+    const explanations = groupRole('explanation_line').map((element) => ({
+      questionId:
+        element.closest('[data-canonical-question-id]')
+          ?.getAttribute('data-canonical-question-id'),
+      text: element.textContent || '',
+      lines: visualLines(element),
+    }))
+    return {
+      missingGroup: false,
+      groupId:
+        group.getAttribute('data-canonical-group-id')
+        || group.getAttribute('data-paper-browse-anchor'),
+      previousFamily,
+      previousFamilyIds: [
+        ...document.querySelectorAll(
+          '[data-canonical-grammar-fill-previous-family-group-id]',
+        ),
+      ].map((element) =>
+        element.getAttribute(
+          'data-canonical-grammar-fill-previous-family-group-id',
+        )),
+      chrome,
+      paragraphs,
+      blanks,
+      answers,
+      explanations,
+      following,
+    }
+  }, {
+    groupId:
+      expected.oracle.publicIdentities.grammarFill.groupId,
+    previousGroupId:
+      expected.oracle.publicIdentities.clozeBoundary.groupId,
+  })
+  assert.equal(observation.missingGroup, false, `${label} exposes Grammar Fill`)
+  assert.equal(
+    observation.groupId,
+    expected.oracle.publicIdentities.grammarFill.groupId,
+  )
+  assert.equal(
+    observation.previousFamilyIds.includes(
+      expected.oracle.publicIdentities.clozeBoundary.groupId,
+    ),
+    true,
+    `${label} binds the exact Cloze predecessor identity`,
+  )
+  assert.deepEqual(
+    observation.chrome.map((entry) => entry.role),
+    ['part_context', 'subsection', 'meta_instruction'],
+    `${label} exposes exact ordered Grammar Fill chrome identities`,
+  )
+  assert.deepEqual(
+    observation.chrome.map((entry) => normalizedVisibleText(entry.text)),
+    [
+      expected.oracle.publicVisibleChrome.part,
+      expected.oracle.publicVisibleChrome.section,
+      expected.oracle.publicVisibleChrome.instruction,
+    ].map(normalizedVisibleText),
+  )
+  assert.deepEqual(
+    observation.paragraphs.map((paragraph) => paragraph.id),
+    expected.oracle.publicIdentities.grammarFill.paragraphIds,
+  )
+  assert.deepEqual(
+    observation.paragraphs.map((paragraph) =>
+      normalizedVisibleText(paragraph.text).replace(/\s+/gu, '')),
+    expectedPassageTexts.map((text) =>
+      normalizedVisibleText(text)
+        .replace(/__(\d+)__/gu, '$1')
+        .replace(/\s+/gu, '')),
+    `${label} binds exact source passage text and order`,
+  )
+  const observedEdges = []
+  const observe = (edgeId, evidence) => {
+    assert.equal(
+      observedEdges.some((entry) => entry.edgeId === edgeId),
+      false,
+      `${label} records ${edgeId} once`,
+    )
+    observedEdges.push({
+      edgeId,
+      sourceOracleSha256: expected.digest,
+      ...evidence,
+    })
+  }
+  const cssPtToPx = 4 / 3
+  const baselineStepPx =
+    surface === 'printHtml'
+      ? grammarFillRhythm.targets.printPdf.baselineStepPt * cssPtToPx
+      : grammarFillRhythm.targets.screen.baselineStepPx
+  const edgeAuthority = (edgeId) => {
+    const edge = grammarFillRhythm.adjacencyGraph.find(
+      (candidate) => candidate.edgeId === edgeId,
+    )
+    assert.ok(edge, `${label} resolves ${edgeId} authority`)
+    return edge
+  }
+  const assertStep = (edgeId, distancePx, debug = null) => {
+    const edge = edgeAuthority(edgeId)
+    const targetPx = edge.baselineStepRatio * baselineStepPx
+    const targetTolerances =
+      surface === 'printHtml'
+        ? {
+            oneStepTolerancePx:
+              grammarFillRhythm.targets.printPdf.oneStepTolerancePt
+              * cssPtToPx,
+            threeHalfStepTolerancePx:
+              grammarFillRhythm.targets.printPdf.threeHalfStepTolerancePt
+              * cssPtToPx,
+            twoStepTolerancePx:
+              grammarFillRhythm.targets.printPdf.twoStepTolerancePt
+              * cssPtToPx,
+          }
+        : grammarFillRhythm.targets.screen
+    const tolerancePx =
+      edge.baselineStepRatio === 1
+        ? targetTolerances.oneStepTolerancePx
+        : edge.baselineStepRatio === 1.5
+          ? targetTolerances.threeHalfStepTolerancePx
+          : targetTolerances.twoStepTolerancePx
+    assert.equal(
+      Math.abs(distancePx - targetPx) <= tolerancePx,
+      true,
+      `${label} ${edgeId} measures ${JSON.stringify({
+        distancePx,
+        targetPx,
+        debug,
+      })}`,
+    )
+    return distancePx / baselineStepPx
+  }
+  const subsection = observation.chrome[1].lines[0]
+  const instruction = observation.chrome[2].lines[0]
+  const firstPassage = observation.paragraphs[0].lines[0]
+  assert.ok(observation.previousFamily?.line)
+  observe('cloze_tail_to_chrome_same_page', {
+    fromIdentity: observation.previousFamily.identity,
+    toIdentity: expected.oracle.publicIdentities.grammarFill.groupId,
+    actualRatio: assertStep(
+      'cloze_tail_to_chrome_same_page',
+      subsection.center - observation.previousFamily.line.center,
+    ),
+    pageRelation: 'same_page',
+  })
+  assert.equal(
+    observation.chrome[0].lines[0].center < subsection.center,
+    true,
+    `${label} preserves source part-context before subsection`,
+  )
+  observe('part_context_to_subsection', {
+    fromIdentity: 'part-2026-i-language',
+    toIdentity: expected.oracle.publicIdentities.grammarFill.groupId,
+    pageRelation: 'source_order',
+    actualOrder:
+      subsection.center - observation.chrome[0].lines[0].center,
+  })
+  observe('chrome_internal', {
+    fromIdentity: expected.oracle.publicIdentities.grammarFill.groupId,
+    toIdentity: expected.oracle.publicIdentities.grammarFill.groupId,
+    actualRatio: assertStep(
+      'chrome_internal',
+      instruction.center - subsection.center,
+    ),
+  })
+  observe('chrome_to_passage', {
+    fromIdentity: expected.oracle.publicIdentities.grammarFill.groupId,
+    toIdentity: observation.paragraphs[0].id,
+    actualRatio: assertStep(
+      'chrome_to_passage',
+      firstPassage.center - instruction.center,
+    ),
+  })
+  const internalLineGaps = observation.paragraphs.flatMap(
+    (paragraph) => paragraph.lines.slice(1).map(
+      (line, index) => line.center - paragraph.lines[index].center,
+    ),
+  )
+  assert.equal(
+    internalLineGaps.length > 0
+    && internalLineGaps.every((gap) =>
+      Math.abs(gap - baselineStepPx)
+        <= (
+          surface === 'printHtml'
+            ? grammarFillRhythm.targets.printPdf.oneStepTolerancePt
+              * cssPtToPx
+            : grammarFillRhythm.targets.screen.oneStepTolerancePx
+        )),
+    true,
+    `${label} measures every passage line at one baseline: ${JSON.stringify(internalLineGaps)}`,
+  )
+  observe('passage_line_internal', {
+    fromIdentity: observation.paragraphs[0].id,
+    toIdentity: observation.paragraphs.at(-1).id,
+    actualRatios: internalLineGaps.map((gap) => gap / baselineStepPx),
+  })
+  const paragraphGaps = observation.paragraphs.slice(1).map(
+    (paragraph, index) =>
+      paragraph.lines[0].center
+      - observation.paragraphs[index].lines.at(-1).center,
+  )
+  assert.equal(
+    paragraphGaps.every((gap) =>
+      Math.abs(gap - baselineStepPx)
+        <= (
+          surface === 'printHtml'
+            ? grammarFillRhythm.targets.printPdf.oneStepTolerancePt
+              * cssPtToPx
+            : grammarFillRhythm.targets.screen.oneStepTolerancePx
+        )),
+    true,
+    `${label} measures source paragraph transitions`,
+  )
+  observe('paragraph_transition', {
+    fromIdentity: observation.paragraphs[0].id,
+    toIdentity: observation.paragraphs.at(-1).id,
+    actualRatios: paragraphGaps.map((gap) => gap / baselineStepPx),
+  })
+  observe('same_passage_continuation', {
+    fromIdentity: observation.paragraphs[0].id,
+    toIdentity: observation.paragraphs.at(-1).id,
+    pageRelation: 'same_page_continuation',
+    pages: observation.paragraphs.flatMap(
+      (paragraph) => paragraph.lines.map((line) => line.page),
+    ),
+  })
+  assert.deepEqual(
+    observation.blanks.map((blank) => blank.questionId),
+    expected.oracle.publicIdentities.grammarFill.questionIds,
+  )
+  assert.deepEqual(
+    observation.blanks.map((blank) => blank.blankId),
+    expected.oracle.publicIdentities.grammarFill.blankIds,
+  )
+  assert.deepEqual(
+    observation.blanks.map((blank) => blank.pair),
+    expected.oracle.publicIdentities.grammarFill.questionIds.map(
+      (questionId, index) =>
+        `${questionId}:${expected.oracle.publicIdentities.grammarFill.blankIds[index]}`,
+    ),
+  )
+  for (const blank of observation.blanks) {
+    const expectedPrompt =
+      expected.oracle.publicIdentities.grammarFill.prompts[blank.questionId]
+    assert.equal(blank.text, String(
+      expected.rows.find((row) => row.questionId === blank.questionId)
+        .questionNo,
+    ))
+    assert.equal(/\.$/u.test(blank.text), false)
+    assert.equal(
+      Math.abs(
+        blank.width / blank.fontSize
+        - grammarFillRhythm.blankGeometry.widthEm,
+      ) <= 0.12,
+      true,
+      `${label} ${blank.blankId} measures a 3.3em-class line`,
+    )
+    assert.equal(blank.textAlign, 'center')
+    assert.match(String(blank.unitDisplay), /inline/)
+    assert.equal(
+      blank.previousText.endsWith(' '),
+      true,
+      `${label} ${blank.blankId} retains source left space: ${JSON.stringify(blank.previousText.slice(-12))}`,
+    )
+    assert.equal(
+      blank.followingText.startsWith(' '),
+      true,
+      `${label} ${blank.blankId} retains source right space: ${JSON.stringify(blank.followingText.slice(0, 12))}`,
+    )
+    assert.equal(
+      blank.promptText,
+      expectedPrompt === null ? null : `(${expectedPrompt})`,
+    )
+    if (expectedPrompt !== null) {
+      assert.equal(blank.promptRole, 'prompt_text')
+      assert.ok(blank.promptRect)
+      assert.equal(
+        Math.abs(
+          (blank.promptRect.x - blank.blankRect.right) / blank.fontSize
+          - grammarFillRhythm.promptGeometry.gapEm,
+        ) <= 0.12,
+        true,
+        `${label} ${blank.blankId} measures prompt attachment`,
+      )
+      assert.equal(
+        blank.promptRect.y >= blank.unitRect.y - 1
+        && blank.promptRect.bottom <= blank.unitRect.bottom + 1,
+        true,
+        `${label} ${blank.blankId} keeps prompt inside the atomic unit`,
+      )
+    }
+  }
+  const firstBlank = observation.blanks[0]
+  const unpromptedBlank = observation.blanks.find(
+    (blank) =>
+      blank.questionId
+      === expected.oracle.variants.unpromptedQuestionId,
+  )
+  const sentenceStartBlank = observation.blanks.find(
+    (blank) =>
+      blank.questionId
+      === expected.oracle.variants.sentenceStartQuestionId,
+  )
+  const sentenceInternalBlank = observation.blanks.find(
+    (blank) =>
+      blank.questionId
+      === expected.oracle.variants.sentenceInternalQuestionId,
+  )
+  observe('inline_blank_left_space', {
+    fromIdentity: firstBlank.questionId,
+    toIdentity: firstBlank.blankId,
+    horizontalRelation: 'source_space_before',
+    observedTextDigest: sha256(Buffer.from(firstBlank.previousText, 'utf8')),
+  })
+  observe('inline_blank_right_space', {
+    fromIdentity: firstBlank.blankId,
+    toIdentity: firstBlank.questionId,
+    horizontalRelation: 'source_space_after_unit',
+    observedTextDigest: sha256(Buffer.from(firstBlank.followingText, 'utf8')),
+  })
+  observe('inline_blank_no_phantom_space', {
+    fromIdentity: firstBlank.questionId,
+    toIdentity: firstBlank.questionId,
+    actualRatio: 0,
+    blankLineHeight: firstBlank.unitRect.height,
+  })
+  observe('inline_blank_atomicity', {
+    fromIdentity: firstBlank.blankId,
+    toIdentity: firstBlank.blankId,
+    pageRelation: 'same_line_unsplittable',
+    unitRect: firstBlank.unitRect,
+  })
+  observe('inline_blank_number_centered', {
+    fromIdentity: firstBlank.blankId,
+    toIdentity: firstBlank.blankId,
+    horizontalRelation: 'centered_number_without_trailing_dot',
+    measuredWidthEm: firstBlank.width / firstBlank.fontSize,
+  })
+  observe('inline_blank_width', {
+    fromIdentity: firstBlank.blankId,
+    toIdentity: observation.blanks.at(-1).blankId,
+    horizontalRelation: '3_3em_class',
+    measuredWidthsEm: observation.blanks.map(
+      (blank) => blank.width / blank.fontSize,
+    ),
+  })
+  observe('inline_blank_source_order', {
+    fromIdentity: observation.blanks[0].blankId,
+    toIdentity: observation.blanks.at(-1).blankId,
+    pageRelation: 'exact_visible_source_order',
+    identities: observation.blanks.map((blank) => blank.blankId),
+  })
+  observe('prompt_attachment', {
+    fromIdentity: firstBlank.blankId,
+    toIdentity: firstBlank.questionId,
+    horizontalRelation: 'fixed_em_gap_inside_atomic_unit',
+    actualGapEm:
+      (firstBlank.promptRect.x - firstBlank.blankRect.right)
+      / firstBlank.fontSize,
+  })
+  observe('prompt_to_following_text', {
+    fromIdentity: firstBlank.questionId,
+    toIdentity: firstBlank.questionId,
+    horizontalRelation: 'source_space_after_prompt',
+    observedTextDigest:
+      sha256(Buffer.from(firstBlank.followingText, 'utf8')),
+  })
+  observe('prompt_atomicity', {
+    fromIdentity: firstBlank.questionId,
+    toIdentity: firstBlank.blankId,
+    pageRelation: 'same_atomic_unit',
+    unitRect: firstBlank.unitRect,
+  })
+  assert.equal(unpromptedBlank.promptText, null)
+  observe('unprompted_collapse', {
+    fromIdentity: unpromptedBlank.blankId,
+    toIdentity: unpromptedBlank.questionId,
+    actualRatio: 0,
+    promptCount: 0,
+  })
+  assert.match(sentenceStartBlank.previousText, /[.!?]\s*$/u)
+  observe('sentence_start_blank', {
+    fromIdentity: sentenceStartBlank.questionId,
+    toIdentity: sentenceStartBlank.blankId,
+    pageRelation: 'sentence_start',
+    observedTextDigest:
+      sha256(Buffer.from(sentenceStartBlank.previousText, 'utf8')),
+  })
+  assert.equal(
+    /[.!?]\s*$/u.test(sentenceInternalBlank.previousText),
+    false,
+  )
+  observe('sentence_internal_blank', {
+    fromIdentity: sentenceInternalBlank.questionId,
+    toIdentity: sentenceInternalBlank.blankId,
+    pageRelation: 'sentence_internal',
+    observedTextDigest:
+      sha256(Buffer.from(sentenceInternalBlank.previousText, 'utf8')),
+  })
+  const lineEndBlank = observation.blanks.find(
+    (blank) =>
+      blank.followingLines[0]
+      && Math.abs(
+        blank.followingLines[0].center
+        - blank.blankRect.y - blank.blankRect.height / 2,
+      ) > 3,
+  )
+  if (lineEndBlank) {
+    observe('line_end_blank', {
+      fromIdentity: lineEndBlank.blankId,
+      toIdentity: lineEndBlank.questionId,
+      pageRelation: 'line_end_atomic',
+      blankRect: lineEndBlank.blankRect,
+      followingLine: lineEndBlank.followingLines[0],
+    })
+  }
+  const wrappedParagraph = observation.paragraphs.find(
+    (paragraph) => paragraph.lines.length > 2,
+  )
+  if (requireWrappedLine) {
+    assert.ok(
+      wrappedParagraph,
+      `${label} executes a real wrapped-line Grammar Fill paragraph`,
+    )
+    observe('wrapped_line_blank', {
+      fromIdentity: wrappedParagraph.id,
+      toIdentity: firstBlank.blankId,
+      pageRelation: 'wrapped_line_atomic',
+      lineCount: wrappedParagraph.lines.length,
+      unitRect: firstBlank.unitRect,
+    })
+  }
+  const finalPassageLine = observation.paragraphs.at(-1).lines.at(-1)
+  const nextSection = observation.following[0]
+  assert.ok(nextSection?.lines[0], `${label} exposes Application Writing`)
+  assert.equal(
+    nextSection.role,
+    'next_section',
+    `${label} binds the Application Writing public role`,
+  )
+  const followingEdgeId = teacher
+    ? 'teacher_tail_to_next_section_same_page'
+    : 'student_tail_to_next_section_same_page'
+  if (teacher) {
+    assert.deepEqual(
+      observation.answers.map((entry) => entry.questionId),
+      expected.oracle.publicIdentities.grammarFill.questionIds,
+    )
+    assert.deepEqual(
+      observation.explanations.map((entry) => entry.questionId),
+      expected.oracle.publicIdentities.grammarFill.questionIds,
+    )
+    for (const [index, row] of expected.rows.entries()) {
+      assert.equal(
+        normalizedVisibleText(observation.answers[index].text)
+          .replace(/^【答案】/u, ''),
+        normalizedVisibleText(row.answer),
+      )
+      assert.equal(
+        normalizedVisibleText(observation.explanations[index].text)
+          .replace(/^【解析】/u, ''),
+        normalizedVisibleText(row.explanation),
+      )
+    }
+    observe('passage_tail_to_answer', {
+      fromIdentity: observation.paragraphs.at(-1).id,
+      toIdentity: observation.answers[0].questionId,
+      actualRatio: assertStep(
+        'passage_tail_to_answer',
+        observation.answers[0].lines[0].center - finalPassageLine.center,
+      ),
+    })
+    const answerToExplanationRatios = observation.answers.map(
+      (answer, index) =>
+        (
+          observation.explanations[index].lines[0].center
+          - answer.lines.at(-1).center
+        ) / baselineStepPx,
+    )
+    assert.equal(
+      answerToExplanationRatios.every(
+        (ratio) => Math.abs(ratio - 1) <= 0.08),
+      true,
+    )
+    observe('answer_to_explanation', {
+      fromIdentity: observation.answers[0].questionId,
+      toIdentity: observation.explanations.at(-1).questionId,
+      actualRatios: answerToExplanationRatios,
+    })
+    const tailToNextRatios = observation.answers.slice(1).map(
+      (answer, index) =>
+        (
+          answer.lines[0].center
+          - observation.explanations[index].lines.at(-1).center
+        ) / baselineStepPx,
+    )
+    assert.equal(
+      tailToNextRatios.every((ratio) => Math.abs(ratio - 1) <= 0.08),
+      true,
+    )
+    observe('teacher_tail_to_next_answer', {
+      fromIdentity: observation.explanations[0].questionId,
+      toIdentity: observation.answers.at(-1).questionId,
+      actualRatios: tailToNextRatios,
+    })
+    const teacherTail = observation.explanations.at(-1).lines.at(-1)
+    if (observeFollowingTransition) {
+      observe(followingEdgeId, {
+        fromIdentity: observation.explanations.at(-1).questionId,
+        toIdentity:
+          expected.oracle.publicIdentities.followingSection.sectionId,
+        actualRatio: assertStep(
+          followingEdgeId,
+          nextSection.lines[0].center - teacherTail.center,
+        ),
+      })
+    }
+  } else {
+    assert.equal(observation.answers.length, 0)
+    assert.equal(observation.explanations.length, 0)
+    if (observeFollowingTransition) {
+      observe(followingEdgeId, {
+        fromIdentity: observation.paragraphs.at(-1).id,
+        toIdentity:
+          expected.oracle.publicIdentities.followingSection.sectionId,
+        actualRatio: assertStep(
+          followingEdgeId,
+          nextSection.lines[0].center - finalPassageLine.center,
+          nextSection.debug,
+        ),
+      })
+    }
+    observe('student_supplement_absence_collapse', {
+      fromIdentity: observation.paragraphs.at(-1).id,
+      toIdentity:
+        expected.oracle.publicIdentities.followingSection.sectionId,
+      actualRatio: 0,
+      answerCount: 0,
+      explanationCount: 0,
+    })
+  }
   return { ...observation, observedEdges }
 }
 
@@ -7577,6 +8884,387 @@ function pdfLinesForWordRange(
     .filter(isPdfBodyLine)
 }
 
+function grammarFillPdfRulingMeasurements(pdfPath, pages) {
+  const scratchDir = mkdtempSync(path.join(
+    tmpdir(),
+    'eqb-grammar-fill-rulings-',
+  ))
+  const rulings = []
+  try {
+    for (const page of [...new Set(pages)]) {
+      const svgPath = path.join(scratchDir, `page-${page}.svg`)
+      execFileSync('pdftocairo', [
+        '-f',
+        String(page),
+        '-l',
+        String(page),
+        '-svg',
+        pdfPath,
+        svgPath,
+      ])
+      const svg = readFileSync(svgPath, 'utf8')
+      const rectanglePattern =
+        /M ([\d.]+) ([\d.]+) L ([\d.]+) \2 L \3 ([\d.]+) L \1 \4 Z/gu
+      for (const match of svg.matchAll(rectanglePattern)) {
+        const xMin = Number(match[1])
+        const yMin = Number(match[2])
+        const xMax = Number(match[3])
+        const yMax = Number(match[4])
+        const widthPt = xMax - xMin
+        const heightPt = yMax - yMin
+        if (
+          widthPt >= 32
+          && widthPt <= 38
+          && heightPt >= 0.4
+          && heightPt <= 1.2
+        ) {
+          rulings.push({
+            page,
+            xMin,
+            xMax,
+            yMin,
+            yMax,
+            widthPt,
+          })
+        }
+      }
+    }
+  } finally {
+    rmSync(scratchDir, { recursive: true, force: true })
+  }
+  return rulings
+}
+
+function assertGrammarFillPdfArtifact(
+  pdfPath,
+  label,
+  {
+    teacher = false,
+    previousRelation = 'same_page',
+    passageRelation = 'same_page',
+    followingRelation = 'same_page',
+    expectedPassageTexts =
+      grammarFillSourceOracle.paperAsset.content.groups[
+        grammarFillSourceOracle.oracle.publicIdentities.grammarFill.groupId
+      ].passage.paragraphs.map((paragraph) => paragraph.text),
+  } = {},
+) {
+  const expected = grammarFillSourceOracle
+  const rowWords = pdfWordsWithBoxes(pdfPath)
+  const words = pdfWordsInGeometricReadingOrder(rowWords)
+  const lines = pdfRoleLines(rowWords)
+  const lineForWord = (word) => {
+    const centerY = (word.yMin + word.yMax) / 2
+    return lines.find(
+      (line) =>
+        line.page === word.page
+        && Math.abs(line.centerY - centerY) <= 2.5,
+    )
+  }
+  const marker = (value, markerLabel, startIndex = 0) =>
+    uniquePdfSequenceIndex(
+      words,
+      exactPdfTokens(value),
+      `${label} ${markerLabel}`,
+      startIndex,
+    )
+  const partIndex = marker(
+    expected.oracle.publicVisibleChrome.part,
+    'source part context',
+  )
+  const sectionIndex = marker(
+    expected.oracle.publicVisibleChrome.section,
+    'Grammar Fill subsection',
+    partIndex,
+  )
+  const instructionIndex = marker(
+    expected.oracle.publicVisibleChrome.instruction,
+    'Grammar Fill instruction',
+    sectionIndex,
+  )
+  const firstPassageIndex = marker(
+    sourceLexicalTokens(
+      expectedPassageTexts[0].replace(/__\d+__/gu, ''),
+    ).slice(0, 8).join(' '),
+    'source passage start',
+    instructionIndex,
+  )
+  const passageEndTokens = sourceLexicalTokens(
+    expectedPassageTexts.at(-1).replace(/__\d+__/gu, ''),
+  ).slice(-5)
+  const passageEndIndexes = exactPdfSequenceIndexes(
+    words,
+    exactPdfTokens(passageEndTokens.join(' ')),
+    firstPassageIndex,
+  )
+  assert.equal(
+    passageEndIndexes.length >= 1,
+    true,
+    `${label} resolves the source passage end`,
+  )
+  const passageEndIndex =
+    passageEndIndexes.at(-1) + passageEndTokens.length - 1
+  const followingIndexes = exactPdfSequenceIndexes(
+    words,
+    exactPdfTokens(expected.oracle.publicVisibleChrome.followingPart),
+    passageEndIndex,
+  )
+  assert.equal(followingIndexes.length >= 1, true)
+  const followingIndex = followingIndexes[0]
+  const sectionLine = lineForWord(words[sectionIndex])
+  const firstPassageLine = lineForWord(words[firstPassageIndex])
+  const finalPassageLine = lineForWord(words[passageEndIndex])
+  const followingLine = lineForWord(words[followingIndex])
+  const previousLine = lines.filter(
+    (line) =>
+      isPdfBodyLine(line)
+      && (
+        line.page < sectionLine.page
+        || (
+          line.page === sectionLine.page
+          && line.centerY < sectionLine.centerY
+        )
+      ),
+  ).at(-1)
+  for (const line of [
+    previousLine,
+    sectionLine,
+    firstPassageLine,
+    finalPassageLine,
+    followingLine,
+  ]) {
+    assert.equal(
+      isPdfBodyLine(line),
+      true,
+      `${label} excludes header/footer through measured body seams`,
+    )
+  }
+  const actualPreviousRelation =
+    previousLine.page === sectionLine.page ? 'same_page' : 'cross_page'
+  assert.equal(actualPreviousRelation, previousRelation)
+  if (previousRelation === 'cross_page') {
+    assert.equal(sectionLine.page, previousLine.page + 1)
+    assert.equal(sectionLine.yMax < 130, true)
+  }
+  const passageLines = lines.filter(
+    (line) =>
+      isPdfBodyLine(line)
+      && line.lineIndex >= firstPassageLine.lineIndex
+      && line.lineIndex <= finalPassageLine.lineIndex,
+  )
+  const passagePages = [...new Set(passageLines.map((line) => line.page))]
+  assert.equal(
+    passagePages.length > 1 ? 'cross_page' : 'same_page',
+    passageRelation,
+  )
+  const samePageLineGapsPt = passageLines.slice(1).flatMap(
+    (line, index) =>
+      line.page === passageLines[index].page
+        ? [line.centerY - passageLines[index].centerY]
+        : [],
+  )
+  assert.equal(
+    samePageLineGapsPt.every(
+      (gap) =>
+        Math.abs(
+          gap - grammarFillRhythm.targets.printPdf.baselineStepPt,
+        ) <= grammarFillRhythm.targets.printPdf.oneStepTolerancePt,
+    ),
+    true,
+    `${label} measures local passage baselines`,
+  )
+  const compactPdfText = normalizedVisibleText(
+    execFileSync('pdftotext', ['-layout', pdfPath, '-'], {
+      encoding: 'utf8',
+    }),
+  ).replace(/\s+/gu, '')
+  for (const text of expectedPassageTexts) {
+    const projectedText = normalizedVisibleText(text)
+      .replace(/__(\d+)__/gu, '$1')
+      .replace(/\s+/gu, '')
+    for (const fragment of [
+      projectedText.slice(0, 80),
+      projectedText.slice(-80),
+    ]) {
+      assert.equal(
+        compactPdfText.includes(fragment),
+        true,
+        `${label} binds digest-backed projected source passage fragments`,
+      )
+    }
+  }
+  const blankProofs = expected.rows.map((row) => {
+    const indexes = exactPdfSequenceIndexes(
+      words,
+      [String(row.questionNo)],
+      firstPassageIndex,
+    ).filter((index) => index <= passageEndIndex)
+    assert.equal(indexes.length, 1)
+    const word = words[indexes[0]]
+    const promptIndex = row.prompt === null
+      ? null
+      : exactPdfSequenceIndexes(
+          words,
+          exactPdfTokens(`(${row.prompt})`),
+          indexes[0],
+        ).find((index) => index <= passageEndIndex)
+    if (row.prompt !== null) assert.ok(Number.isInteger(promptIndex))
+    return {
+      ...row,
+      wordIndex: indexes[0],
+      word,
+      line: lineForWord(word),
+      promptWord: promptIndex === null ? null : words[promptIndex],
+    }
+  })
+  assert.equal(
+    blankProofs.every(
+      (proof, index) =>
+        index === 0
+        || proof.wordIndex > blankProofs[index - 1].wordIndex,
+    ),
+    true,
+  )
+  const rulings = grammarFillPdfRulingMeasurements(
+    pdfPath,
+    blankProofs.map((proof) => proof.word.page),
+  )
+  for (const proof of blankProofs) {
+    const centerX = (proof.word.xMin + proof.word.xMax) / 2
+    const matches = rulings.filter(
+      (ruling) =>
+        ruling.page === proof.word.page
+        && centerX >= ruling.xMin - 1
+        && centerX <= ruling.xMax + 1
+        && Math.abs(ruling.yMin - proof.word.yMax) <= 8,
+    )
+    assert.equal(matches.length, 1)
+    proof.ruling = matches[0]
+    assert.equal(
+      Math.abs(
+        proof.ruling.widthPt / 10.5
+        - grammarFillRhythm.blankGeometry.widthEm,
+      ) <= 0.12,
+      true,
+    )
+    assert.equal(/\.$/u.test(proof.word.text), false)
+    if (proof.promptWord) {
+      assert.equal(
+        lineForWord(proof.promptWord).lineIndex,
+        proof.line.lineIndex,
+      )
+      assert.equal(
+        Math.abs(
+          (proof.promptWord.xMin - proof.ruling.xMax) / 10.5
+          - grammarFillRhythm.promptGeometry.gapEm,
+        ) <= 0.16,
+        true,
+      )
+    }
+  }
+  const lineEndBlank = blankProofs.find((proof) => {
+    const nextWord = words[
+      proof.promptWord
+        ? proof.promptWord.wordIndex + 1
+        : proof.wordIndex + 1
+    ]
+    return nextWord && lineForWord(nextWord).lineIndex !== proof.line.lineIndex
+  })
+  if (passageRelation === 'cross_page') {
+    assert.ok(
+      lineEndBlank,
+      `${label} executes a real line-end blank adversary`,
+    )
+  }
+  let transitionTailLine = finalPassageLine
+  if (teacher) {
+    for (const row of expected.rows) {
+      assert.equal(
+        compactPdfText.includes(
+          normalizedVisibleText(`【答案】${row.answer}`)
+            .replace(/\s+/gu, ''),
+        ),
+        true,
+      )
+      assert.equal(
+        compactPdfText.includes(
+          normalizedVisibleText(`【解析】${row.explanation}`)
+            .replace(/\s+/gu, ''),
+        ),
+        true,
+      )
+    }
+    const finalExplanationIndexes = collapsedPdfSequenceIndexes(
+      words,
+      `【解析】${expected.rows.at(-1).explanation}`,
+      8,
+    )
+    assert.equal(finalExplanationIndexes.length, 1)
+    transitionTailLine = lines.filter(
+      (line) =>
+        isPdfBodyLine(line)
+        && line.lineIndex >= lineForWord(
+          words[finalExplanationIndexes[0]],
+        ).lineIndex
+        && line.lineIndex < followingLine.lineIndex,
+    ).at(-1)
+  } else {
+    assert.equal(compactPdfText.includes('【答案】'), false)
+    assert.equal(compactPdfText.includes('【解析】'), false)
+  }
+  const actualFollowingRelation =
+    transitionTailLine.page === followingLine.page
+      ? 'same_page'
+      : 'cross_page'
+  if (followingRelation !== 'either') {
+    assert.equal(
+      actualFollowingRelation,
+      followingRelation,
+      `${label} preserves the declared following-section page relation`,
+    )
+  }
+  if (actualFollowingRelation === 'cross_page') {
+    assert.equal(followingLine.page, transitionTailLine.page + 1)
+    assert.equal(followingLine.yMax < 130, true)
+  }
+  return {
+    pdfSha256: sha256(readFileSync(pdfPath)),
+    sourceOracleSha256: expected.digest,
+    sourceTextDigest: sha256(Buffer.from(
+      expectedPassageTexts.join('\n'),
+      'utf8',
+    )),
+    previousRelation,
+    passageRelation,
+    followingRelation: actualFollowingRelation,
+    previousPage: previousLine.page,
+    sectionPage: sectionLine.page,
+    passagePages,
+    followingPage: followingLine.page,
+    baselineRatios: samePageLineGapsPt.map(
+      (gap) => gap / grammarFillRhythm.targets.printPdf.baselineStepPt,
+    ),
+    blankRulings: blankProofs.map((proof) => ({
+      questionId: proof.questionId,
+      blankId: proof.blankId,
+      page: proof.word.page,
+      lineIndex: proof.line.lineIndex,
+      widthPt: proof.ruling.widthPt,
+      xMin: proof.ruling.xMin,
+      xMax: proof.ruling.xMax,
+      promptText: proof.prompt,
+      promptGapEm: proof.promptWord
+        ? (proof.promptWord.xMin - proof.ruling.xMax) / 10.5
+        : null,
+    })),
+    lineEndBlankId: lineEndBlank?.blankId || null,
+    bodySeams: {
+      topRatio: 21 / 297,
+      bottomRatio: (297 - 24) / 297,
+    },
+  }
+}
+
 function assertPdfRoleEdge(
   from,
   to,
@@ -8796,6 +10484,8 @@ async function renderSupportedArtifacts({
     sevenChoicesCoverageObservations.push(observation)
   }
   const clozeCoverageObservations = []
+  const grammarFillCoverageObservations = []
+  const grammarFillPoisonRejections = []
   const asset = JSON.parse(readFileSync(
     path.join(paperAssetsDir, paperId, 'latest', 'paper-asset.json'),
     'utf8',
@@ -8946,6 +10636,16 @@ async function renderSupportedArtifacts({
         variant: 'plain-baseline',
         proof: plainClozeObservation,
       })
+      const plainGrammarFillObservation =
+        await assertGrammarFillDomGeometry(
+          page,
+          'plain PaperSurface Grammar Fill',
+        )
+      recordGrammarFillBundleCoverage(grammarFillCoverageObservations, {
+        bundleId: 'screen-plain',
+        variant: 'plain-baseline',
+        proof: plainGrammarFillObservation,
+      })
       const screenClozeWrapped = clozeVariantConsumption(
         consumers.screen,
         {
@@ -8953,13 +10653,17 @@ async function renderSupportedArtifacts({
             clozeSourceOracle.oracle.variants.wrappedOption.repeatCount,
         },
       )
+      const screenGrammarFillWrapped = grammarFillVariantConsumption(
+        screenClozeWrapped.consumption,
+        { wrappedPrefixRepeats: 3 },
+      )
       const screenConsumptionRoute =
         '**/api/paper-canonical/consumption?**'
       const screenConsumptionHandler = async (route) => {
         await route.fulfill({
           status: 200,
           contentType: 'application/json',
-          body: JSON.stringify(screenClozeWrapped.consumption),
+          body: JSON.stringify(screenGrammarFillWrapped.consumption),
         })
       }
       await page.route(screenConsumptionRoute, screenConsumptionHandler)
@@ -8985,6 +10689,22 @@ async function renderSupportedArtifacts({
           bundleId: 'screen-plain',
           variant: 'plain-wrapped-option',
           proof: plainClozeWrappedObservation,
+        })
+        const plainGrammarFillWrappedObservation =
+          await assertGrammarFillDomGeometry(
+            page,
+            'plain PaperSurface Grammar Fill wrapped-line adversary',
+            {
+              requireWrappedLine: true,
+              observeFollowingTransition: false,
+              expectedPassageTexts:
+                screenGrammarFillWrapped.expectedPassageTexts,
+            },
+          )
+        recordGrammarFillBundleCoverage(grammarFillCoverageObservations, {
+          bundleId: 'screen-plain',
+          variant: 'plain-wrapped-line',
+          proof: plainGrammarFillWrappedObservation,
         })
       } finally {
         await page.unroute(
@@ -9268,6 +10988,16 @@ async function renderSupportedArtifacts({
         variant: 'lecture-baseline',
         proof: lectureClozeObservation,
       })
+      const lectureGrammarFillObservation =
+        await assertGrammarFillDomGeometry(
+          page,
+          'lecture PaperSurface Grammar Fill',
+        )
+      recordGrammarFillBundleCoverage(grammarFillCoverageObservations, {
+        bundleId: 'screen-lecture',
+        variant: 'lecture-baseline',
+        proof: lectureGrammarFillObservation,
+      })
       await page.route(screenConsumptionRoute, screenConsumptionHandler)
       try {
         const wrappedLectureUrl = new URL(lectureUrl)
@@ -9291,6 +11021,22 @@ async function renderSupportedArtifacts({
           bundleId: 'screen-lecture',
           variant: 'lecture-wrapped-option',
           proof: lectureClozeWrappedObservation,
+        })
+        const lectureGrammarFillWrappedObservation =
+          await assertGrammarFillDomGeometry(
+            page,
+            'lecture PaperSurface Grammar Fill wrapped-line adversary',
+            {
+              requireWrappedLine: true,
+              observeFollowingTransition: false,
+              expectedPassageTexts:
+                screenGrammarFillWrapped.expectedPassageTexts,
+            },
+          )
+        recordGrammarFillBundleCoverage(grammarFillCoverageObservations, {
+          bundleId: 'screen-lecture',
+          variant: 'lecture-wrapped-line',
+          proof: lectureGrammarFillWrappedObservation,
         })
       } finally {
         await page.unroute(
@@ -9633,6 +11379,17 @@ async function renderSupportedArtifacts({
         variant: 'student-baseline',
         proof: studentPrintClozeObservation,
       })
+      const studentPrintGrammarFillObservation =
+        await assertGrammarFillDomGeometry(
+          page,
+          'Student Print HTML Grammar Fill',
+          { surface: 'printHtml' },
+        )
+      recordGrammarFillBundleCoverage(grammarFillCoverageObservations, {
+        bundleId: 'print-html-student',
+        variant: 'student-baseline',
+        proof: studentPrintGrammarFillObservation,
+      })
       const printClozeWrapped = clozeVariantConsumption(
         consumers.print_pdf,
         {
@@ -9676,23 +11433,231 @@ async function renderSupportedArtifacts({
             clozeSourceOracle.oracle.publicIdentities.followingSection.groupId,
           score: 1.5,
         },
+        {
+          type: 'section_header',
+          title:
+            grammarFillSourceOracle.oracle.publicVisibleChrome.followingPart,
+        },
       ]
       const clozePublicVariantItems = [
         sevenChoicesPrintVariantItem(asset),
         clozePrintVariantItem(asset),
         grammarFillPrintVariantItem(asset),
       ]
-      const clozePublicVariantHtml = (versionType, options = {}) =>
-        buildPrintHtml({
+      const grammarFillPoisonBlocks = [
+        {
+          type: 'section_header',
+          title: grammarFillSourceOracle.oracle.publicVisibleChrome.part,
+        },
+        {
+          type: 'section_header',
+          title: grammarFillSourceOracle.oracle.publicVisibleChrome.section,
+        },
+        {
+          type: 'instruction',
+          text: grammarFillSourceOracle.oracle.publicVisibleChrome.instruction,
+        },
+        {
+          type: 'question_group',
+          questionGroupId:
+            grammarFillSourceOracle.oracle.publicIdentities.grammarFill
+              .groupId,
+          score: 1.5,
+        },
+        {
+          type: 'section_header',
+          title:
+            grammarFillSourceOracle.oracle.publicVisibleChrome.followingPart,
+        },
+      ]
+      const grammarFillPoisonItem = grammarFillPrintVariantItem(asset)
+      const assertGrammarFillPrintProducerRejected = (
+        caseId,
+        {
+          versionType = 'student',
+          items = [grammarFillPoisonItem],
+          canonicalConsumption = consumers.print_pdf,
+          grammarFillChrome = grammarFillChromeForPrint(),
+        } = {},
+      ) => {
+        const artifactPath = path.join(
+          outputDir,
+          `forbidden-grammar-fill-poison-${caseId}.html`,
+        )
+        assert.equal(
+          existsSync(artifactPath),
+          false,
+          `${caseId} starts with no attempted public artifact`,
+        )
+        let rejected = null
+        try {
+          const html = buildPrintHtml({
+            title: `Canonical Import Pilot Grammar Fill poison ${caseId}`,
+            versionType,
+            items,
+            blocks: grammarFillPoisonBlocks,
+            questionNumberStart: 56,
+            printStyle: 'exam',
+            canonicalConsumption,
+            grammarFillChrome,
+          })
+          writeFileSync(artifactPath, html)
+        } catch (error) {
+          rejected = error
+        }
+        assert.equal(
+          rejected?.code,
+          'CANONICAL_CONSUMPTION_REJECTED',
+          `Print producer fails closed on Grammar Fill ${caseId}`,
+        )
+        assert.equal(
+          existsSync(artifactPath),
+          false,
+          `Grammar Fill ${caseId} produces zero public artifacts`,
+        )
+        grammarFillPoisonRejections.push({
+          caseId,
+          status: 'rejected-before-artifact-write',
+          code: rejected.code,
+          artifactCount: 0,
+        })
+      }
+      const attackedGrammarFillConsumption = (
+        mutate,
+        { recomputeOccurrenceDigest = true } = {},
+      ) => {
+        const attacked = structuredClone(consumers.print_pdf)
+        const selection = attacked.selections.find(
+          (candidate) => candidate.familyContractId === 'grammar-fill',
+        )
+        const occurrence = selection.projectedOccurrences.find(
+          (candidate) =>
+            candidate.groupId
+              === grammarFillSourceOracle.oracle.publicIdentities.grammarFill
+                .groupId,
+        )
+        assert.ok(occurrence)
+        mutate(occurrence, selection)
+        if (recomputeOccurrenceDigest) {
+          selection.projectedOccurrenceDigests =
+            selection.projectedOccurrences.map((candidate) => ({
+              groupId: candidate.groupId,
+              digest: digestJson(candidate),
+            }))
+        }
+        return attacked
+      }
+      assertGrammarFillPrintProducerRejected(
+        'source-text-drift-with-recomputed-digest',
+        {
+          canonicalConsumption: attackedGrammarFillConsumption(
+            (occurrence) => {
+              occurrence.content.blocks[0].inlines[0].text =
+                'POISONED GRAMMAR FILL SOURCE TEXT'
+            },
+          ),
+        },
+      )
+      assertGrammarFillPrintProducerRejected(
+        'blank-identity-drift-with-recomputed-digest',
+        {
+          canonicalConsumption: attackedGrammarFillConsumption(
+            (occurrence) => {
+              occurrence.blanks[0].blankId =
+                'blank-poisoned-grammar-fill'
+            },
+          ),
+        },
+      )
+      assertGrammarFillPrintProducerRejected(
+        'blank-order-drift-with-recomputed-digest',
+        {
+          canonicalConsumption: attackedGrammarFillConsumption(
+            (occurrence) => {
+              const firstBlank = occurrence.blanks[0]
+              occurrence.blanks[0] = occurrence.blanks[1]
+              occurrence.blanks[1] = firstBlank
+            },
+          ),
+        },
+      )
+      assertGrammarFillPrintProducerRejected(
+        'prompt-text-drift-with-recomputed-digest',
+        {
+          canonicalConsumption: attackedGrammarFillConsumption(
+            (occurrence) => {
+              const promptText = occurrence.content.blocks[0].inlines[2]
+              promptText.text = promptText.text.replace(
+                '(hold)',
+                '(POISONED)',
+              )
+            },
+          ),
+        },
+      )
+      const promptAttachmentPoison = structuredClone(
+        grammarFillChromeForPrint(),
+      )
+      promptAttachmentPoison.sourceBinding.geometry.promptAttachment =
+        'detached'
+      assertGrammarFillPrintProducerRejected('prompt-attachment-drift', {
+        grammarFillChrome: promptAttachmentPoison,
+      })
+      const answerPoison = structuredClone([grammarFillPoisonItem])
+      answerPoison[0].detail.questions[0].answer =
+        'POISONED OFFICIAL ANSWER'
+      assertGrammarFillPrintProducerRejected('official-answer-drift', {
+        versionType: 'teacher',
+        items: answerPoison,
+      })
+      const explanationPoison = structuredClone([grammarFillPoisonItem])
+      explanationPoison[0].detail.questions[0].explanation =
+        'POISONED REVIEWED ANALYSIS'
+      assertGrammarFillPrintProducerRejected('reviewed-analysis-drift', {
+        versionType: 'teacher',
+        items: explanationPoison,
+      })
+      const authorityEnvelopePoison = structuredClone(consumers.print_pdf)
+      authorityEnvelopePoison.authorityRef.manifestDigest =
+        'sha256:poisoned-grammar-fill-authority'
+      assertGrammarFillPrintProducerRejected('authority-envelope-drift', {
+        canonicalConsumption: authorityEnvelopePoison,
+      })
+      const missingIntegrityEnvelope = structuredClone(consumers.print_pdf)
+      delete missingIntegrityEnvelope.selections.find(
+        (candidate) => candidate.familyContractId === 'grammar-fill',
+      ).projectedOccurrenceDigests
+      assertGrammarFillPrintProducerRejected('missing-integrity-envelope', {
+        canonicalConsumption: missingIntegrityEnvelope,
+      })
+      assertGrammarFillPrintProducerRejected('projected-digest-drift', {
+        canonicalConsumption: attackedGrammarFillConsumption(
+          (occurrence) => {
+            occurrence.content.blocks[0].inlines[0].text =
+              'POISONED WITHOUT DIGEST REFRESH'
+          },
+          { recomputeOccurrenceDigest: false },
+        ),
+      })
+      const printGrammarFillWrapped = grammarFillVariantConsumption(
+        printClozeWrapped.consumption,
+        { wrappedPrefixRepeats: 3 },
+      )
+      const clozePublicVariantHtml = (versionType, options = {}) => {
+        const canonicalConsumption =
+          options.consumption || printGrammarFillWrapped.consumption
+        return buildPrintHtml({
           title: `Canonical Import Pilot Cloze ${options.variant || 'variant'}`,
           versionType,
           items: clozePublicVariantItems,
           blocks: options.blocks || clozePublicVariantBlocks,
           questionNumberStart: 33,
           printStyle: 'exam',
-          canonicalConsumption:
-            options.consumption || printClozeWrapped.consumption,
+          canonicalConsumption,
+          grammarFillChrome:
+            grammarFillChromeForConsumption(canonicalConsumption),
         })
+      }
       const wrappedStudentPrintHtml = clozePublicVariantHtml(
         'student',
         { variant: 'source-derived-wrapped-option' },
@@ -9714,6 +11679,23 @@ async function renderSupportedArtifacts({
         variant: 'student-wrapped-option',
         proof: wrappedStudentPrintClozeObservation,
       })
+      const wrappedStudentPrintGrammarFillObservation =
+        await assertGrammarFillDomGeometry(
+          page,
+          'Student Print HTML Grammar Fill wrapped-line adversary',
+          {
+            requireWrappedLine: true,
+            surface: 'printHtml',
+            observeFollowingTransition: false,
+            expectedPassageTexts:
+              printGrammarFillWrapped.expectedPassageTexts,
+          },
+        )
+      recordGrammarFillBundleCoverage(grammarFillCoverageObservations, {
+        bundleId: 'print-html-student',
+        variant: 'student-wrapped-line',
+        proof: wrappedStudentPrintGrammarFillObservation,
+      })
       await page.setContent(printHtml.teacher, { waitUntil: 'load' })
       const teacherPrintClozeObservation = await assertClozeDomGeometry(
         page,
@@ -9724,6 +11706,17 @@ async function renderSupportedArtifacts({
         bundleId: 'print-html-teacher',
         variant: 'teacher-baseline',
         proof: teacherPrintClozeObservation,
+      })
+      const teacherPrintGrammarFillObservation =
+        await assertGrammarFillDomGeometry(
+          page,
+          'Teacher Print HTML Grammar Fill',
+          { teacher: true, surface: 'printHtml' },
+        )
+      recordGrammarFillBundleCoverage(grammarFillCoverageObservations, {
+        bundleId: 'print-html-teacher',
+        variant: 'teacher-baseline',
+        proof: teacherPrintGrammarFillObservation,
       })
       const wrappedTeacherPrintHtml = clozePublicVariantHtml(
         'teacher',
@@ -9746,6 +11739,24 @@ async function renderSupportedArtifacts({
         bundleId: 'print-html-teacher',
         variant: 'teacher-wrapped-option',
         proof: wrappedTeacherPrintClozeObservation,
+      })
+      const wrappedTeacherPrintGrammarFillObservation =
+        await assertGrammarFillDomGeometry(
+          page,
+          'Teacher Print HTML Grammar Fill wrapped-line adversary',
+          {
+            teacher: true,
+            requireWrappedLine: true,
+            surface: 'printHtml',
+            observeFollowingTransition: false,
+            expectedPassageTexts:
+              printGrammarFillWrapped.expectedPassageTexts,
+          },
+        )
+      recordGrammarFillBundleCoverage(grammarFillCoverageObservations, {
+        bundleId: 'print-html-teacher',
+        variant: 'teacher-wrapped-line',
+        proof: wrappedTeacherPrintGrammarFillObservation,
       })
       const sevenChoicesVariantBlocks = [
         {
@@ -10125,7 +12136,7 @@ async function renderSupportedArtifacts({
         (candidate) => candidate.familyContractId === 'cloze',
       ).projectedOccurrenceDigests
       assertClozePrintProducerRejected(
-        'missing mandatory v19 projected occurrence digests',
+        'missing mandatory v20 projected occurrence digests',
         { canonicalConsumption: missingClozeOccurrenceDigests },
       )
       const fakePreV18ClozeIntegrityEnvelope = structuredClone(
@@ -10185,6 +12196,7 @@ async function renderSupportedArtifacts({
         questionNumberStart: 33,
         printStyle: 'exam',
         canonicalConsumption: consumers.print_pdf,
+        grammarFillChrome: grammarFillChromeForPrint(),
       })
       await page.setContent(explanationPoisonHtml, { waitUntil: 'load' })
       await assert.rejects(
@@ -10213,6 +12225,7 @@ async function renderSupportedArtifacts({
         questionNumberStart: 33,
         printStyle: 'exam',
         canonicalConsumption: consumers.print_pdf,
+        grammarFillChrome: grammarFillChromeForPrint(),
       })
       await page.setContent(answerPoisonHtml, { waitUntil: 'load' })
       await assert.rejects(
@@ -10492,9 +12505,30 @@ async function renderSupportedArtifacts({
         ...clozePublicVariantBlocks.slice(1),
       ]
       const pageBreakBeforeFollowingBlocks = [
-        ...clozePublicVariantBlocks.slice(0, -2),
+        ...clozePublicVariantBlocks.slice(
+          0,
+          clozePublicVariantBlocks.findIndex(
+            (block) =>
+              block.type === 'section_header'
+              && normalizedVisibleText(block.title)
+                === normalizedVisibleText(
+                  clozeSourceOracle.oracle.publicVisibleChrome
+                    .followingSection,
+                ),
+          ),
+        ),
         { type: 'page_break' },
-        ...clozePublicVariantBlocks.slice(-2),
+        ...clozePublicVariantBlocks.slice(
+          clozePublicVariantBlocks.findIndex(
+            (block) =>
+              block.type === 'section_header'
+              && normalizedVisibleText(block.title)
+                === normalizedVisibleText(
+                  clozeSourceOracle.oracle.publicVisibleChrome
+                    .followingSection,
+                ),
+          ),
+        ),
       ]
       const studentPassageCross = clozeVariantConsumption(
         consumers.print_pdf,
@@ -10590,6 +12624,226 @@ async function renderSupportedArtifacts({
         blocks: pageBreakBeforeFollowingBlocks,
         assertionOptions: { requireFollowingCrossPage: true },
       })
+      const grammarFillFollowingBlockIndex =
+        clozePublicVariantBlocks.findLastIndex(
+          (block) =>
+            block.type === 'section_header'
+            && normalizedVisibleText(block.title)
+              === normalizedVisibleText(
+                grammarFillSourceOracle.oracle.publicVisibleChrome
+                  .followingPart,
+              ),
+        )
+      assert.equal(grammarFillFollowingBlockIndex >= 0, true)
+      const pageBreakBeforeGrammarFillFollowingBlocks = [
+        ...clozePublicVariantBlocks.slice(
+          0,
+          grammarFillFollowingBlockIndex,
+        ),
+        { type: 'page_break' },
+        ...clozePublicVariantBlocks.slice(
+          grammarFillFollowingBlockIndex,
+        ),
+      ]
+      const grammarFillPassageCross = grammarFillVariantConsumption(
+        consumers.print_pdf,
+        {
+          passageTailRepeats:
+            grammarFillSourceOracle.oracle.variants.passageCrossPage
+              .repeatCount,
+        },
+      )
+      const renderGrammarFillPdfVariant = async ({
+        versionType,
+        variant,
+        blocks,
+        consumption,
+        expectedPassageTexts,
+        domMode,
+        pdfRelations,
+      }) => {
+        const baseHtml = clozePublicVariantHtml(versionType, {
+          variant: `grammar-fill-${variant}`,
+          blocks,
+          consumption,
+        })
+        const html = baseHtml.replace(
+          '</head>',
+          `<style>
+[data-canonical-question-id="${grammarFillSourceOracle.oracle.publicIdentities.clozeBoundary.questionId}"] {
+  break-before: page !important;
+  page-break-before: always !important;
+}
+${variant === 'passage-cross-page'
+    ? `.question-group[data-canonical-group-type="grammarFill"] .passage {
+  width: ${grammarFillSourceOracle.oracle.variants.wrappedLineWidthPt}pt !important;
+}`
+    : ''}
+</style></head>`,
+        )
+        await page.setContent(html, { waitUntil: 'load' })
+        let domProof = null
+        if (domMode) {
+          domProof = await assertGrammarFillDomGeometry(
+            page,
+            `${versionType} Grammar Fill ${variant} pre-PDF public DOM`,
+            {
+              teacher: versionType === 'teacher',
+              surface: 'printHtml',
+              requireWrappedLine: domMode === 'wrapped',
+              observeFollowingTransition: domMode !== 'wrapped',
+              expectedPassageTexts,
+            },
+          )
+        }
+        let renderedVariant
+        try {
+          renderedVariant = await renderPaginatedPaper(html)
+        } finally {
+          await closeChromiumPool()
+        }
+        const outputPath = path.join(
+          outputDir,
+          `print-${versionType}-grammar-fill-${variant}.pdf`,
+        )
+        writeFileSync(outputPath, renderedVariant.pdfBytes)
+        const artifactLabel =
+          `${versionType === 'student' ? 'Student' : 'Teacher'} Chromium PDF Grammar Fill ${variant}`
+        assertPdfA4AndUnclipped(outputPath, artifactLabel)
+        const pdfMeasurement = assertGrammarFillPdfArtifact(
+          outputPath,
+          artifactLabel,
+          {
+            teacher: versionType === 'teacher',
+            expectedPassageTexts,
+            ...pdfRelations,
+          },
+        )
+        let observedEdges
+        if (variant === 'baseline') {
+          observedEdges = domProof.observedEdges.map((edge) => ({
+            ...edge,
+            pdfMeasurement,
+          }))
+        } else if (variant === 'passage-cross-page') {
+          const wrappedEdge = domProof.observedEdges.find(
+            (edge) => edge.edgeId === 'wrapped_line_blank',
+          )
+          assert.ok(wrappedEdge)
+          assert.ok(pdfMeasurement.lineEndBlankId)
+          observedEdges = [
+            {
+              edgeId: 'cloze_tail_to_chrome_cross_page',
+              sourceOracleSha256: grammarFillSourceOracle.digest,
+              fromIdentity:
+                grammarFillSourceOracle.oracle.publicIdentities
+                  .clozeBoundary.questionId,
+              toIdentity:
+                grammarFillSourceOracle.oracle.publicIdentities
+                  .grammarFill.groupId,
+              pageRelation: 'next_page_start',
+              pdfMeasurement,
+            },
+            {
+              edgeId: 'same_passage_cross_page',
+              sourceOracleSha256: grammarFillSourceOracle.digest,
+              fromIdentity:
+                grammarFillSourceOracle.oracle.publicIdentities
+                  .grammarFill.paragraphIds[0],
+              toIdentity:
+                grammarFillSourceOracle.oracle.publicIdentities
+                  .grammarFill.paragraphIds.at(-1),
+              pageRelation: 'next_page_continuation',
+              pdfMeasurement,
+            },
+            {
+              ...wrappedEdge,
+              pdfMeasurement,
+            },
+            {
+              edgeId: 'line_end_blank',
+              sourceOracleSha256: grammarFillSourceOracle.digest,
+              fromIdentity: pdfMeasurement.lineEndBlankId,
+              toIdentity: pdfMeasurement.lineEndBlankId,
+              pageRelation: 'line_end_atomic',
+              pdfMeasurement,
+            },
+          ]
+        } else {
+          const edgeId = versionType === 'teacher'
+            ? 'teacher_tail_to_next_section_cross_page'
+            : 'student_tail_to_next_section_cross_page'
+          observedEdges = [{
+            edgeId,
+            sourceOracleSha256: grammarFillSourceOracle.digest,
+            fromIdentity: versionType === 'teacher'
+              ? grammarFillSourceOracle.oracle.publicIdentities
+                .grammarFill.questionIds.at(-1)
+              : grammarFillSourceOracle.oracle.publicIdentities
+                .grammarFill.paragraphIds.at(-1),
+            toIdentity:
+              grammarFillSourceOracle.oracle.publicIdentities
+                .followingSection.sectionId,
+            pageRelation: 'next_page_start',
+            pdfMeasurement,
+          }]
+        }
+        recordGrammarFillBundleCoverage(grammarFillCoverageObservations, {
+          bundleId: `pdf-${versionType}`,
+          variant: `${versionType}-${variant}`,
+          proof: { observedEdges },
+        })
+      }
+      for (const versionType of ['student', 'teacher']) {
+        await renderGrammarFillPdfVariant({
+          versionType,
+          variant: 'baseline',
+          blocks: clozePublicVariantBlocks,
+          consumption: consumers.print_pdf,
+          expectedPassageTexts:
+            grammarFillSourceOracle.paperAsset.content.groups[
+              grammarFillSourceOracle.oracle.publicIdentities
+                .grammarFill.groupId
+            ].passage.paragraphs.map((paragraph) => paragraph.text),
+          domMode: 'baseline',
+          pdfRelations: {
+            previousRelation: 'same_page',
+            passageRelation: 'same_page',
+            followingRelation: 'same_page',
+          },
+        })
+        await renderGrammarFillPdfVariant({
+          versionType,
+          variant: 'passage-cross-page',
+          blocks: pageBreakBeforeFollowingBlocks,
+          consumption: grammarFillPassageCross.consumption,
+          expectedPassageTexts:
+            grammarFillPassageCross.expectedPassageTexts,
+          domMode: 'wrapped',
+          pdfRelations: {
+            previousRelation: 'cross_page',
+            passageRelation: 'cross_page',
+            followingRelation: 'either',
+          },
+        })
+        await renderGrammarFillPdfVariant({
+          versionType,
+          variant: 'next-section-cross-page',
+          blocks: pageBreakBeforeGrammarFillFollowingBlocks,
+          consumption: consumers.print_pdf,
+          expectedPassageTexts:
+            grammarFillSourceOracle.paperAsset.content.groups[
+              grammarFillSourceOracle.oracle.publicIdentities
+                .grammarFill.groupId
+            ].passage.paragraphs.map((paragraph) => paragraph.text),
+          domMode: null,
+          pdfRelations: {
+            previousRelation: 'same_page',
+            passageRelation: 'same_page',
+            followingRelation: 'cross_page',
+          },
+        })
+      }
       assertPdfSevenChoicesPassageToFirstOption(
         pdfPaths.teacher,
         'Teacher Chromium PDF public baseline Seven Choices direct-bank edge',
@@ -11115,6 +13369,9 @@ async function renderSupportedArtifacts({
     const clozeCoverageLedger = assertClozeObservedCoverage(
       clozeCoverageObservations,
     )
+    const grammarFillCoverageLedger = assertGrammarFillObservedCoverage(
+      grammarFillCoverageObservations,
+    )
     const artifactFiles = listFiles(outputDir)
     assert.equal(
       artifactFiles.some((file) => /\.(?:docx|xml)$/i.test(file)),
@@ -11139,6 +13396,8 @@ async function renderSupportedArtifacts({
       passageLetterGeometry,
       sevenChoicesCoverageLedger,
       clozeCoverageLedger,
+      grammarFillCoverageLedger,
+      grammarFillPoisonRejections,
       closeServices,
     }
   } finally {
@@ -11155,6 +13414,9 @@ const sevenChoicesCoverageOracle = assertSevenChoicesCoverageOracle()
 const clozeSourceOracle = assertClozeSourceOracle()
 const clozeReference = assertClozeReferenceEvidence()
 const clozeCoverageOracle = assertClozeCoverageOracle()
+const grammarFillSourceOracle = assertGrammarFillSourceOracle()
+const grammarFillReference = assertGrammarFillReferenceEvidence()
+const grammarFillCoverageOracle = assertGrammarFillCoverageOracle()
 const rootDir = mkdtempSync(path.join(tmpdir(), 'eqb-canonical-import-pilot-'))
 const dbPath = path.join(rootDir, 'question-bank.sqlite')
 const paperAssetsDir = path.join(rootDir, 'paper-assets')
@@ -11172,7 +13434,7 @@ try {
   assert.equal(sourceDocument.kind, 'pdf')
   const requestPath = path.join(
     sourcePackageDir,
-    'canonical-evidence/canonical-import-request-v19.json',
+    'canonical-evidence/canonical-import-request-v20.json',
   )
   execFileSync(process.execPath, [
     path.join(
@@ -11366,6 +13628,22 @@ try {
     reviewedClozeAnalysisBytes,
     'Teacher public proof consumes the exact digest-bound reviewed Cloze analysis bytes',
   )
+  const publishedGrammarFillAnalysisPath = path.join(
+    publishedAnalysisDir,
+    'grammar-fill-analysis-v1.json',
+  )
+  const reviewedGrammarFillAnalysisBytes = readFileSync(
+    grammarFillSourceOracle.teacherAnalysisPath,
+  )
+  writeFileSync(
+    publishedGrammarFillAnalysisPath,
+    reviewedGrammarFillAnalysisBytes,
+  )
+  assert.deepEqual(
+    readFileSync(publishedGrammarFillAnalysisPath),
+    reviewedGrammarFillAnalysisBytes,
+    'Teacher public proof consumes the exact digest-bound reviewed Grammar Fill analysis bytes',
+  )
   const rendered = await renderSupportedArtifacts({
     dbPath,
     paperAssetsDir,
@@ -11468,6 +13746,26 @@ try {
         'following-section-cross-page',
       ],
       observedLedger: rendered.clozeCoverageLedger,
+    },
+    grammarFillPublicSeamCoverage: {
+      sourceOracles: [
+        'original-question-pdf',
+        'versioned-paper-asset-json',
+        'official-answer-json',
+        'reviewed-analysis-json',
+      ],
+      producers: ['PaperBrowse', 'buildPrintHtml', 'renderPaginatedPaper'],
+      variants: [
+        'plain-and-lecture-baseline',
+        'screen-and-print-wrapped-lines',
+        'student-and-teacher-baseline',
+        'same-passage-cross-page',
+        'line-end-blank',
+        'following-section-cross-page',
+      ],
+      observedLedger: rendered.grammarFillCoverageLedger,
+      failClosedPoisonRejections:
+        rendered.grammarFillPoisonRejections,
     },
     renderedArtifactDigests,
     forbiddenOutputArtifacts,

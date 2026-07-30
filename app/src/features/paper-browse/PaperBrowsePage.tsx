@@ -69,6 +69,9 @@ import {
 import {
   clozeRhythm,
 } from '../../../../shared/paper-canonical/clozeRhythm.mjs'
+import {
+  grammarFillRhythm,
+} from '../../../../shared/paper-canonical/grammarFillRhythm.mjs'
 import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
 import { WritingPaperPage } from '../paper-intelligence/WritingPaperPage'
 import {
@@ -393,6 +396,16 @@ const paperBrowseContentStyle: PaperBrowseContentStyle = {
     `${sevenChoicesRhythm.visibleGeometryAdjustments.screen.adjacentChromeMarginTopAdjustmentPx}px`,
   '--ps-cloze-baseline-step':
     `${clozeRhythm.targets.screen.baselineStepPx}px`,
+  '--ps-grammar-fill-baseline-step':
+    `${grammarFillRhythm.rendererMapping.screen.baselineStepPx}px`,
+  '--ps-grammar-fill-instruction-margin-bottom':
+    `${grammarFillRhythm.rendererMapping.screen.instructionMarginBottomPx}px`,
+  '--ps-grammar-fill-following-section-margin-top':
+    `${grammarFillRhythm.rendererMapping.screen.followingSectionMarginTopPx}px`,
+  '--ps-grammar-fill-writing-margin-plain':
+    `${grammarFillRhythm.rendererMapping.screen.writingCardMarginTopPx.plain}px`,
+  '--ps-grammar-fill-writing-margin-lecture':
+    `${grammarFillRhythm.rendererMapping.screen.writingCardMarginTopPx.lecture}px`,
   '--ps-passage-indent': paperSurfaceTokens.passageIndent,
   '--ps-page-margin-x': paperSurfaceTokens.pageMarginX,
   '--ps-page-margin-top': paperSurfaceTokens.pageMarginTop,
@@ -1958,6 +1971,13 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
                 setLectureOpen(true)
               }
             : undefined}
+          grammarFillPredecessorGroupId={
+            groupId === followingGrammarFillGroupId
+              ? canonicalGrammarFillGroupIds[
+                  canonicalGrammarFillGroupIds.length - 1
+                ]
+              : undefined
+          }
         >
           {surfaceEl}
         </WritingPaperPage>
@@ -2125,6 +2145,88 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
   const isClozeChromeBlock = (index: number) =>
     index >= clozeChromeStartBlockIndex
     && index < firstClozeGroupBlockIndex
+  const canonicalGrammarFillGroupIds =
+    canonicalConsumption?.selections.find(
+      (selection) =>
+        selection.familyContractId === 'grammar-fill'
+        && selection.mode === 'canonical',
+    )?.groupIds ?? []
+  const firstGrammarFillGroupBlockIndex = asset
+    ? asset.content.blocks.findIndex(
+        (block) =>
+          block.type === 'group'
+          && block.groupId === canonicalGrammarFillGroupIds[0],
+      )
+    : -1
+  const lastGrammarFillGroupBlockIndex = asset
+    ? asset.content.blocks.findLastIndex(
+        (block) =>
+          block.type === 'group'
+          && block.groupId
+            === canonicalGrammarFillGroupIds[
+              canonicalGrammarFillGroupIds.length - 1
+            ],
+      )
+    : -1
+  const nextHeadingAfterGrammarFill = (() => {
+    if (!asset || lastGrammarFillGroupBlockIndex < 0) return undefined
+    const block = asset.content.blocks
+      .slice(lastGrammarFillGroupBlockIndex + 1)
+      .find(
+        (candidate) =>
+          candidate.type === 'partHeading'
+          || candidate.type === 'sectionHeading',
+      )
+    if (!block) return undefined
+    return block.type === 'partHeading'
+      ? { id: block.partId, block }
+      : { id: block.sectionId, block }
+  })()
+  const followingGrammarFillGroupId = (() => {
+    if (!asset || lastGrammarFillGroupBlockIndex < 0) return undefined
+    const block = asset.content.blocks
+      .slice(lastGrammarFillGroupBlockIndex + 1)
+      .find((candidate) => candidate.type === 'group')
+    return block?.type === 'group' ? block.groupId : undefined
+  })()
+  let firstGrammarFillPredecessorBlockIndex = -1
+  let grammarFillChromeStartBlockIndex = firstGrammarFillGroupBlockIndex
+  if (asset && firstGrammarFillGroupBlockIndex >= 0) {
+    for (
+      let index = firstGrammarFillGroupBlockIndex - 1;
+      index >= 0;
+      index -= 1
+    ) {
+      const block = asset.content.blocks[index]
+      if (
+        block.type === 'instruction'
+        || block.type === 'sectionHeading'
+      ) {
+        if (firstGrammarFillPredecessorBlockIndex < 0) {
+          firstGrammarFillPredecessorBlockIndex = index
+        }
+        grammarFillChromeStartBlockIndex = index
+        continue
+      }
+      if (block.type === 'pageBreakHint') continue
+      if (block.type === 'group') break
+      break
+    }
+  }
+  const isGrammarFillChromeBlock = (index: number) =>
+    index >= grammarFillChromeStartBlockIndex
+    && index < firstGrammarFillGroupBlockIndex
+  const grammarFillPartContext = (
+    asset
+    && grammarFillChromeStartBlockIndex >= 0
+  )
+    ? asset.content.blocks
+      .slice(0, grammarFillChromeStartBlockIndex)
+      .findLast(
+        (block): block is Extract<PaperContentBlock, { type: 'partHeading' }> =>
+          block.type === 'partHeading',
+      )
+    : undefined
   let firstSevenChoicesPredecessorBlockIndex = -1
   let sevenChoicesChromeStartBlockIndex = firstSevenChoicesGroupBlockIndex
   if (asset && firstSevenChoicesGroupBlockIndex >= 0) {
@@ -2239,6 +2341,14 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
                 ]
               : undefined
           }
+          data-canonical-grammar-fill-previous-family-group-id={
+            groupId === canonicalGrammarFillGroupIds[0]
+            && firstGrammarFillPredecessorBlockIndex < 0
+              ? canonicalClozeGroupIds[
+                  canonicalClozeGroupIds.length - 1
+                ]
+              : undefined
+          }
           aria-label={group?.title || groupId}
         >
           {card && (
@@ -2309,6 +2419,26 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
                 index === firstClozePredecessorBlockIndex
                   ? canonicalSevenChoicesGroupIds[
                       canonicalSevenChoicesGroupIds.length - 1
+                    ]
+                  : undefined
+              }
+              data-canonical-grammar-fill-rhythm-role={
+                isGrammarFillChromeBlock(index)
+                  ? 'meta_instruction'
+                  : undefined
+              }
+              data-canonical-grammar-fill-chrome={
+                isGrammarFillChromeBlock(index) ? '' : undefined
+              }
+              data-canonical-grammar-fill-preceding-for={
+                index === firstGrammarFillPredecessorBlockIndex
+                  ? canonicalGrammarFillGroupIds[0]
+                  : undefined
+              }
+              data-canonical-grammar-fill-previous-family-group-id={
+                index === firstGrammarFillPredecessorBlockIndex
+                  ? canonicalClozeGroupIds[
+                      canonicalClozeGroupIds.length - 1
                     ]
                   : undefined
               }
@@ -2632,6 +2762,25 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
                   ]
                 : undefined
             }
+            data-canonical-grammar-fill-rhythm-role={
+              block.partId === grammarFillPartContext?.partId
+                ? 'part_context'
+                : isGrammarFillChromeBlock(index) ? 'part_context' : (
+                block.partId === nextHeadingAfterGrammarFill?.id
+                  ? 'next_section'
+                  : undefined
+              )
+            }
+            data-canonical-grammar-fill-chrome={
+              isGrammarFillChromeBlock(index) ? '' : undefined
+            }
+            data-canonical-grammar-fill-following-for={
+              block.partId === nextHeadingAfterGrammarFill?.id
+                ? canonicalGrammarFillGroupIds[
+                    canonicalGrammarFillGroupIds.length - 1
+                  ]
+                : undefined
+            }
           >
             {block.text}
           </h2>
@@ -2727,6 +2876,35 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
                   ]
                 : undefined
             }
+            data-canonical-grammar-fill-rhythm-role={
+              isGrammarFillChromeBlock(index) ? 'subsection' : (
+                block.sectionId === nextHeadingAfterGrammarFill?.id
+                  ? 'next_section'
+                  : undefined
+              )
+            }
+            data-canonical-grammar-fill-chrome={
+              isGrammarFillChromeBlock(index) ? '' : undefined
+            }
+            data-canonical-grammar-fill-preceding-for={
+              index === firstGrammarFillPredecessorBlockIndex
+                ? canonicalGrammarFillGroupIds[0]
+                : undefined
+            }
+            data-canonical-grammar-fill-previous-family-group-id={
+              index === firstGrammarFillPredecessorBlockIndex
+                ? canonicalClozeGroupIds[
+                    canonicalClozeGroupIds.length - 1
+                  ]
+                : undefined
+            }
+            data-canonical-grammar-fill-following-for={
+              block.sectionId === nextHeadingAfterGrammarFill?.id
+                ? canonicalGrammarFillGroupIds[
+                    canonicalGrammarFillGroupIds.length - 1
+                  ]
+                : undefined
+            }
           >
             {block.text}
           </h3>
@@ -2800,6 +2978,26 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
               index === firstClozePredecessorBlockIndex
                 ? canonicalSevenChoicesGroupIds[
                     canonicalSevenChoicesGroupIds.length - 1
+                  ]
+                : undefined
+            }
+            data-canonical-grammar-fill-rhythm-role={
+              isGrammarFillChromeBlock(index)
+                ? 'meta_instruction'
+                : undefined
+            }
+            data-canonical-grammar-fill-chrome={
+              isGrammarFillChromeBlock(index) ? '' : undefined
+            }
+            data-canonical-grammar-fill-preceding-for={
+              index === firstGrammarFillPredecessorBlockIndex
+                ? canonicalGrammarFillGroupIds[0]
+                : undefined
+            }
+            data-canonical-grammar-fill-previous-family-group-id={
+              index === firstGrammarFillPredecessorBlockIndex
+                ? canonicalClozeGroupIds[
+                    canonicalClozeGroupIds.length - 1
                   ]
                 : undefined
             }

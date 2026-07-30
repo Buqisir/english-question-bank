@@ -22,9 +22,10 @@ import {
 import { projectCanonicalPaper } from '../../shared/paper-canonical/projector.mjs'
 import { digestJson, sha256, stableStringify, withoutKey } from '../../shared/paper-canonical/stable.mjs'
 
-const publicationFileName = 'canonical-paper-publication-v19.json'
+const publicationFileName = 'canonical-paper-publication-v20.json'
 const publicationFileNames = [
   publicationFileName,
+  'canonical-paper-publication-v19.json',
   'canonical-paper-publication-v18.json',
   'canonical-paper-publication-v17.json',
   'canonical-paper-publication-v16.json',
@@ -1287,8 +1288,14 @@ function canonicalSelections(validated, contract) {
       groupIds,
       projectedOccurrences,
       ...(
-        familyContractId === 'cloze'
-        && Number(validated.plan.authorityRef.manifestVersion) >= 18
+        (
+          familyContractId === 'cloze'
+          && Number(validated.plan.authorityRef.manifestVersion) >= 18
+        )
+        || (
+          familyContractId === 'grammar-fill'
+          && Number(validated.plan.authorityRef.manifestVersion) >= 20
+        )
         ? {
             projectedOccurrenceDigests: projectedOccurrences.map(
               (occurrence) => ({

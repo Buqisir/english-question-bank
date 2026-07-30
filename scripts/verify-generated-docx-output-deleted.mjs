@@ -34,7 +34,7 @@ assert.deepEqual(
   'supported canonical consumers must be exactly Screen and Print/PDF',
 )
 
-assert.equal(canonicalAuthorityRef.manifestVersion, '19')
+assert.equal(canonicalAuthorityRef.manifestVersion, '20')
 const currentAuthority = resolveCanonicalAuthority(canonicalAuthorityRef)
 assert.equal(currentAuthority.ok, true)
 
@@ -42,13 +42,13 @@ const humanAuthority = read('docs/product/exam-paper-format-standards.md')
 const currentHumanAuthority = humanAuthority.split('## v2 历史排版证据')[0]
 assert.match(
   currentHumanAuthority,
-  /standards\/paper-canonical\/manifest-v19\.json/,
-  'the unique human-readable authority index must bind current manifest v19',
+  /standards\/paper-canonical\/manifest-v20\.json/,
+  'the unique human-readable authority index must bind current manifest v20',
 )
 assert.match(
   currentHumanAuthority,
-  /Screen v19、Print\/PDF v20/,
-  'the human-readable current output matrix must name only Screen v19 and Print/PDF v20',
+  /Screen v20、Print\/PDF v21/,
+  'the human-readable current output matrix must name only Screen v20 and Print/PDF v21',
 )
 assert.doesNotMatch(
   currentHumanAuthority,
@@ -167,6 +167,22 @@ assert.match(
   manifestV19Migration,
   /26 edge[\s\S]*targets and tolerances[\s\S]*four-track/i,
   'manifest v19 must record the complete Cloze payload closure',
+)
+const manifestV20Migration = read('standards/paper-canonical/manifest-v20-migration.md')
+assert.match(
+  manifestV20Migration,
+  /Manifest v20[\s\S]*Screen v20[\s\S]*Print\/PDF v21/i,
+  'manifest v20 must record the Grammar Fill renderer/output authority closure',
+)
+assert.match(
+  manifestV20Migration,
+  /Manifest v1-v19[\s\S]*immutable/i,
+  'manifest v20 migration must preserve earlier immutable authority closures',
+)
+assert.match(
+  manifestV20Migration,
+  /Grammar Fill[\s\S]*Golden Geometry[\s\S]*3\.3em/i,
+  'manifest v20 must record the Grammar Fill Golden Geometry semantic closure',
 )
 assert.equal(
   Object.hasOwn(currentAuthority.closure.schemas, 'consumer-contract-v1'),

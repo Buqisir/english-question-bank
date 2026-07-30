@@ -1,0 +1,116 @@
+{
+  "schemaVersion": "grammar-fill-source-oracles-v1",
+  "paperId": "paper-2026-i",
+  "sources": {
+    "questionPdf": {
+      "path": "test-fixtures/paper-import/paper-2026-i-canonical-pilot/canonical-evidence/02-original-question-source.pdf",
+      "sha256": "31a87069e6d530afba9123eec0487adf45e52e0b98530af80b62476f169e4d0f",
+      "clozePage": 9,
+      "grammarFillPage": 10,
+      "applicationWritingPage": 10
+    },
+    "paperAsset": {
+      "path": "test-fixtures/paper-import/paper-2026-i-canonical-pilot/canonical-evidence/04-paper_asset.json",
+      "sha256": "fe7feb2cc9554b00bbab96a7d4fe5e499513c564c28e6c314e0373e29b2ca7bf"
+    },
+    "officialAnswers": {
+      "path": "test-fixtures/paper-import/paper-2026-i-canonical-pilot/canonical-evidence/05-official_answers.json",
+      "sha256": "17502bb7685b83afc8847f3a44f8ac3c68defcb941ae75ba1ff14945c07daaf0"
+    },
+    "teacherAnalysis": {
+      "path": "app/public/paper-assets/paper-2026-i/latest/analyses/grammar-fill-analysis-v1.json",
+      "sha256": "9d283190ed9c4abbc9ef2206e3f03f805f5542306850b126a60d1ed760abb7b0",
+      "schemaVersion": "grammar-fill-analysis-v2",
+      "reviewStatus": "reviewed"
+    }
+  },
+  "publicIdentities": {
+    "clozeBoundary": {
+      "groupId": "group-2026-i-cloze",
+      "questionId": "q-2026-i-055"
+    },
+    "grammarFill": {
+      "groupId": "group-2026-i-grammar-fill",
+      "paragraphIds": [
+        "para-2026-i-grammar-fill-title",
+        "para-2026-i-grammar-fill-p1",
+        "para-2026-i-grammar-fill-p2"
+      ],
+      "questionIds": [
+        "q-2026-i-056",
+        "q-2026-i-057",
+        "q-2026-i-058",
+        "q-2026-i-059",
+        "q-2026-i-060",
+        "q-2026-i-061",
+        "q-2026-i-062",
+        "q-2026-i-063",
+        "q-2026-i-064",
+        "q-2026-i-065"
+      ],
+      "blankIds": [
+        "blank-2026-i-056",
+        "blank-2026-i-057",
+        "blank-2026-i-058",
+        "blank-2026-i-059",
+        "blank-2026-i-060",
+        "blank-2026-i-061",
+        "blank-2026-i-062",
+        "blank-2026-i-063",
+        "blank-2026-i-064",
+        "blank-2026-i-065"
+      ],
+      "prompts": {
+        "q-2026-i-056": "hold",
+        "q-2026-i-057": "frequent",
+        "q-2026-i-058": null,
+        "q-2026-i-059": "be",
+        "q-2026-i-060": "necessity",
+        "q-2026-i-061": null,
+        "q-2026-i-062": "draw",
+        "q-2026-i-063": null,
+        "q-2026-i-064": "head",
+        "q-2026-i-065": "cheap"
+      },
+      "answers": {
+        "q-2026-i-056": "to be held",
+        "q-2026-i-057": "frequency",
+        "q-2026-i-058": "the",
+        "q-2026-i-059": "were",
+        "q-2026-i-060": "necessities",
+        "q-2026-i-061": "for",
+        "q-2026-i-062": "Drawn",
+        "q-2026-i-063": "that/which",
+        "q-2026-i-064": "heading",
+        "q-2026-i-065": "cheaper"
+      }
+    },
+    "followingSection": {
+      "sectionId": "part-2026-i-writing",
+      "groupId": "group-2026-i-writing-application"
+    }
+  },
+  "publicVisibleChrome": {
+    "part": "第三部分 语言运用(共两节，满分30分)",
+    "section": "第二节(共10小题；每小题1.5分，满分15分)",
+    "instruction": "阅读下面短文，在空白处填入1个适当的单词或括号内单词的正确形式。",
+    "followingPart": "第四部分 写作(共两节，满分40分)"
+  },
+  "variants": {
+    "sentenceStartQuestionId": "q-2026-i-062",
+    "sentenceInternalQuestionId": "q-2026-i-056",
+    "lineEndQuestionId": "q-2026-i-058",
+    "promptedQuestionId": "q-2026-i-056",
+    "unpromptedQuestionId": "q-2026-i-058",
+    "wrappedLineWidthPt": 180,
+    "passageCrossPage": {
+      "sourceText": "Before",
+      "repeatCount": 180,
+      "derivation": "append exact immutable source text with one ASCII space before canonical projection"
+    },
+    "pageRelations": {
+      "clozeToGrammarFill": "producer page_break before Grammar Fill chrome",
+      "grammarFillToWriting": "producer page_break before source-bound Application Writing part"
+    }
+  }
+}

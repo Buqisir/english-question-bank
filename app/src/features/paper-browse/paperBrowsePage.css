@@ -419,6 +419,61 @@
   line-height: var(--ps-cloze-baseline-step);
 }
 
+.paper-browse-part-heading[data-canonical-grammar-fill-chrome],
+.paper-browse-section-heading[data-canonical-grammar-fill-chrome] {
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: var(--ps-grammar-fill-baseline-step);
+}
+
+.paper-browse-part-heading[
+  data-canonical-grammar-fill-chrome
+][data-canonical-cloze-following-for],
+.paper-browse-section-heading[
+  data-canonical-grammar-fill-chrome
+][data-canonical-cloze-following-for] {
+  margin-top: calc(
+    var(--ps-cloze-baseline-step) - var(--pb-block-gap)
+  );
+}
+
+.paper-browse-instruction[data-canonical-grammar-fill-chrome] {
+  margin-top: 0;
+  margin-bottom: var(--ps-grammar-fill-instruction-margin-bottom);
+  line-height: var(--ps-grammar-fill-baseline-step);
+}
+
+.paper-browse-content > [data-canonical-grammar-fill-chrome]
+  + [data-canonical-grammar-fill-chrome],
+.paper-browse-content > [data-canonical-grammar-fill-chrome]
+  + .paper-browse-group-card:has(
+    > [data-canonical-grammar-fill-chrome]
+  ) {
+  margin-top: calc(-1 * var(--pb-block-gap));
+}
+
+.paper-browse-part-heading[data-canonical-grammar-fill-following-for],
+.paper-browse-section-heading[data-canonical-grammar-fill-following-for] {
+  margin-top: calc(
+    var(--ps-grammar-fill-following-section-margin-top)
+      - var(--pb-block-gap)
+  );
+  line-height: var(--ps-grammar-fill-baseline-step);
+}
+
+.paper-browse-group-card--writing:has(
+  .pi-writing-part[data-canonical-grammar-fill-following-for]
+) {
+  margin-top: var(--ps-grammar-fill-writing-margin-plain);
+}
+
+.paper-browse-shell--lecture-open
+  .paper-browse-group-card--writing:has(
+    .pi-writing-part[data-canonical-grammar-fill-following-for]
+  ) {
+  margin-top: var(--ps-grammar-fill-writing-margin-lecture);
+}
+
 /* dashed-line-unify: 屏幕卷面是连续流，「分页」是纸的语义——线退役
    （导出面分页纪律零触碰），元素保留为零高度锚免动 TSX 结构。此前这
    条 0.25 暖墨虚线会冒充剪刀线（owner 报障：七选五选项池被夹）。 */

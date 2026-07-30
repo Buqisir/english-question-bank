@@ -715,6 +715,9 @@ function PaperSurfaceSection({
   clozeRhythmEnabled,
   clozeFollowingSectionId,
 }: PaperSurfaceSectionProps): ReactNode {
+  const grammarFillRhythmEnabled = semanticParagraphs?.some(
+    (paragraph) => paragraph.groupType === 'grammarFill',
+  ) ?? false
   const paragraphs = useMemo(
     () => textMap.paragraphs.filter((p) => p.section === section),
     [textMap, section],
@@ -741,6 +744,9 @@ function PaperSurfaceSection({
       }
       data-canonical-cloze-section={
         clozeRhythmEnabled ? '' : undefined
+      }
+      data-canonical-grammar-fill-section={
+        grammarFillRhythmEnabled ? '' : undefined
       }
     >
       <div className="ps-passage-body">
@@ -831,6 +837,11 @@ function PaperSurfaceParagraph({
       }
       data-canonical-cloze-rhythm-role={
         clozeRhythmEnabled ? 'passage_body_line' : undefined
+      }
+      data-canonical-grammar-fill-rhythm-role={
+        semanticParagraph?.groupType === 'grammarFill'
+          ? 'passage_body_line'
+          : undefined
       }
     >
       {paragraph.sentences.map((sentence) => (

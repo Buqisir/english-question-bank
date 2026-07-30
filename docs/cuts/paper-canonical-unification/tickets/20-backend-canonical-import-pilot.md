@@ -493,3 +493,65 @@ checks pass. The official `--actual-artifacts` pilot passes, and
 rerun and artifact path are reported in the focused review handoff. No Owner QA
 provisioning or out-of-scope family, Ticket 21, production/R2, generated-DOCX,
 or unrelated lint action was performed.
+
+Grammar Fill Golden Geometry pre-QA repair closure (2026-07-29):
+Manifest v20 adds the immutable `grammar-fill-rhythm-v1` authority, its exact
+schema and conformance fixture, Normalization Report v20, Publication v20,
+Screen v20, and Print/PDF v21. Manifest v1-v19, every earlier consumer,
+renderer, family, schema, conformance, source, official-answer, analysis, and
+evidence byte remain unchanged and resolvable. Exact historical v13 projection
+remains byte-pinned and accepted; generated DOCX remains retired.
+
+The independent source oracle binds the 2026-I original-question PDF
+(`31a87069...`, page 10), versioned Paper Asset (`fe7feb2c...`), official
+answers (`17502bb7...`), and reviewed Grammar Fill Teacher analysis
+(`9d283190...`). The golden-reference record binds
+`page-10-grammar-fill.jpeg` (`667e97aa...`) and uses only dimensionless
+measurements: vertical distances are normalized by local Latin baseline/font
+proxies and horizontal distances by em or usable-width ratios. No reference
+pixel is converted to CSS px, PDF pt, or inferred A4 scale.
+
+The checked-in independent coverage oracle publishes the complete 32-edge
+Grammar Fill semantic-role graph before renderer observation. Its required
+bundles are plain and lecture Screen, Student and Teacher Print HTML, and
+Student and Teacher exact-A4 Chromium PDF. Actual variants cover baseline,
+sentence-start, sentence-internal, line-end, wrapped-line, same-passage,
+passage-cross-page, preceding Cloze-boundary, and same/cross-page Application
+Writing transitions. Each bundle's observed edge set must exactly equal its
+independent required set, and the public union must equal all 32 edges without
+missing, extra, or duplicate observations. Every ledger row carries measured
+DOM/PDF/source identities, source-text digests, ratios, x relations, or page
+relations as applicable; PDF body evidence excludes only measured page/body
+seams.
+
+The public projection preserves the exact visible/source order of Questions
+and Blanks 56-65. Every blank is a centered, no-dot, 3.3em-class atomic unit
+with source spaces on both sides, punctuation outside, zero phantom vertical
+space, and no line/page split. Prompted blanks bind the exact source prompts
+`hold`, `frequent`, `be`, `necessity`, `draw`, `head`, and `cheap`; unprompted
+58, 61, and 63 remain prompt-free. Prompt attachment and following-text
+spacing are measured, and Screen/Print render no duplicate or detached prompt.
+
+The shared public Print source-binding loader reopens the immutable Publication
+Source Capture, versioned Paper Asset, official-answer artifact, and
+digest-pinned reviewed analysis before rendering. Student artifacts omit
+answers and explanations without phantom space. Teacher artifacts bind all ten
+official answers and reviewed explanations, including same/cross-page
+transition to the source-bound Application Writing heading. Source text,
+Blank identity, Blank order, prompt text, prompt attachment, answer,
+explanation, authority envelope, missing integrity, and stale digest are ten
+independent pre-producer poison cases; every case rejects and records zero
+public artifact.
+
+Focused authority, conformance, historical Publication/projection, source
+binding, import admission/recovery, pilot, Print renderer 92/92, PaperBrowse,
+app typecheck/build, official `--actual-artifacts`, and `git diff --check`
+pass. The six public bundles and adversarial exact-A4 PDFs measure
+`594.96 × 841.92 pt`; visual inspection confirms unclipped Student passage and
+blanks, Teacher answer/explanation continuation, and the following Writing
+section. `pnpm -C app run verify:all` reports 115 PASS / 1 declared off-repo
+SKIP / 0 FAIL. The closure commit, exact-HEAD rerun, HEAD-scoped artifact path,
+and independent Standards + Spec review verdict are reported in the fresh
+review handoff. No Owner QA provisioning, Application/Continuation Writing
+implementation, inactive Listening work, Ticket 21, production/R2 action,
+unrelated lint repair, or generated-DOCX action was performed.

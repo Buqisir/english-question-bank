@@ -4,6 +4,7 @@ import assert from 'node:assert/strict'
 import manifestV1 from '../standards/paper-canonical/manifest-v1.json' with { type: 'json' }
 import manifestV13 from '../standards/paper-canonical/manifest-v13.json' with { type: 'json' }
 import clozeRhythmV2Conformance from '../test-fixtures/paper-canonical/cloze-rhythm-v2-conformance.json' with { type: 'json' }
+import grammarFillRhythmV1Conformance from '../test-fixtures/paper-canonical/grammar-fill-rhythm-v1-conformance.json' with { type: 'json' }
 import sevenChoicesRhythmV3Conformance from '../test-fixtures/paper-canonical/seven-choices-rhythm-v3-conformance.json' with { type: 'json' }
 
 import { canonicalAuthorityRef, compileCanonicalPaper, stableStringify, validateExactTransformationRecords } from '../shared/paper-canonical/compiler.mjs'
@@ -60,20 +61,25 @@ assert.deepEqual(
   },
   clozeRhythmV2Conformance.authority,
 )
-function assertClozeAuthorityMutationRejected(caseId, mutate) {
+function assertRendererAuthorityMutationRejected(
+  rendererId,
+  conformance,
+  caseId,
+  mutate,
+) {
   const artifacts = structuredClone(closure.artifacts)
-  mutate(artifacts['renderer-cloze-rhythm'])
+  mutate(artifacts[rendererId])
   const manifest = structuredClone(closure.manifest)
   manifest.artifacts.find(
-    (descriptor) => descriptor.id === 'renderer-cloze-rhythm',
-  ).sha256 = digestJson(artifacts['renderer-cloze-rhythm'])
+    (descriptor) => descriptor.id === rendererId,
+  ).sha256 = digestJson(artifacts[rendererId])
   const validation = validateAuthorityClosure({
     manifest,
     artifacts,
     schemas: closure.schemas,
   })
   assert.equal(validation.ok, false, caseId)
-  for (const expectedIssueCode of clozeRhythmV2Conformance.expectedIssueCodes) {
+  for (const expectedIssueCode of conformance.expectedIssueCodes) {
     assert.equal(
       validation.issues.some(
         (issue) => issue.code === expectedIssueCode,
@@ -84,7 +90,11 @@ function assertClozeAuthorityMutationRejected(caseId, mutate) {
   }
 }
 for (const attack of clozeRhythmV2Conformance.semanticAttacks) {
-  assertClozeAuthorityMutationRejected(attack.caseId, (artifact) => {
+  assertRendererAuthorityMutationRejected(
+    'renderer-cloze-rhythm',
+    clozeRhythmV2Conformance,
+    attack.caseId,
+    (artifact) => {
     let target = artifact
     if (attack.operation === 'duplicate-array-entry') {
       for (const key of attack.path) target = target[key]
@@ -97,7 +107,8 @@ for (const attack of clozeRhythmV2Conformance.semanticAttacks) {
     } else {
       target[attack.path.at(-1)] = attack.invalidValue
     }
-  })
+    },
+  )
 }
 function visitAuthorityFields(value, path = [], fields = []) {
   if (Array.isArray(value)) {
@@ -114,7 +125,9 @@ function visitAuthorityFields(value, path = [], fields = []) {
   return fields
 }
 for (const fieldPath of visitAuthorityFields(clozeRhythmV2)) {
-  assertClozeAuthorityMutationRejected(
+  assertRendererAuthorityMutationRejected(
+    'renderer-cloze-rhythm',
+    clozeRhythmV2Conformance,
     `complete-field-closure:${fieldPath.join('.')}`,
     (artifact) => {
       let target = artifact
@@ -136,8 +149,71 @@ function visitAuthorityLeaves(value, path = [], leaves = []) {
   return leaves
 }
 for (const leafPath of visitAuthorityLeaves(clozeRhythmV2)) {
-  assertClozeAuthorityMutationRejected(
+  assertRendererAuthorityMutationRejected(
+    'renderer-cloze-rhythm',
+    clozeRhythmV2Conformance,
     `complete-value-closure:${leafPath.join('.')}`,
+    (artifact) => {
+      let target = artifact
+      for (const key of leafPath.slice(0, -1)) target = target[key]
+      const key = leafPath.at(-1)
+      const value = target[key]
+      target[key] = typeof value === 'string'
+        ? `${value}:poisoned`
+        : typeof value === 'number'
+          ? value + 999
+          : !value
+    },
+  )
+}
+const grammarFillRhythmV1 =
+  closure.artifacts['renderer-grammar-fill-rhythm']
+assert.deepEqual(
+  {
+    schemaVersion: grammarFillRhythmV1.schemaVersion,
+    id: grammarFillRhythmV1.id,
+    version: grammarFillRhythmV1.version,
+  },
+  grammarFillRhythmV1Conformance.authority,
+)
+for (const attack of grammarFillRhythmV1Conformance.semanticAttacks) {
+  assertRendererAuthorityMutationRejected(
+    'renderer-grammar-fill-rhythm',
+    grammarFillRhythmV1Conformance,
+    attack.caseId,
+    (artifact) => {
+      let target = artifact
+      if (attack.operation === 'duplicate-array-entry') {
+        for (const key of attack.path) target = target[key]
+        target.push(structuredClone(target[attack.sourceIndex]))
+        return
+      }
+      for (const key of attack.path.slice(0, -1)) target = target[key]
+      if (attack.operation === 'delete') {
+        delete target[attack.path.at(-1)]
+      } else {
+        target[attack.path.at(-1)] = attack.invalidValue
+      }
+    },
+  )
+}
+for (const fieldPath of visitAuthorityFields(grammarFillRhythmV1)) {
+  assertRendererAuthorityMutationRejected(
+    'renderer-grammar-fill-rhythm',
+    grammarFillRhythmV1Conformance,
+    `grammar-fill-complete-field-closure:${fieldPath.join('.')}`,
+    (artifact) => {
+      let target = artifact
+      for (const key of fieldPath.slice(0, -1)) target = target[key]
+      delete target[fieldPath.at(-1)]
+    },
+  )
+}
+for (const leafPath of visitAuthorityLeaves(grammarFillRhythmV1)) {
+  assertRendererAuthorityMutationRejected(
+    'renderer-grammar-fill-rhythm',
+    grammarFillRhythmV1Conformance,
+    `grammar-fill-complete-value-closure:${leafPath.join('.')}`,
     (artifact) => {
       let target = artifact
       for (const key of leafPath.slice(0, -1)) target = target[key]

@@ -188,7 +188,10 @@ assert.deepEqual(grammar2026.normalizationDiagnostics, [
 ])
 assert.equal(grammar2026.html.includes('__56__'), false)
 assert.equal(grammar2026.html.includes('<span class="print-blank-num">56</span>'), true)
-assert.equal(grammar2026.html.includes('<span class="print-blank-hint">(hold)</span>'), true)
+assert.match(
+  grammar2026.html,
+  /<span class="print-blank-hint"[^>]*>\(hold\)<\/span>/,
+)
 assert.equal(grammar2026.html.includes('class="qnum">56.</span> 56'), false)
 
 const paper960 = readPaperAsset('paper-960d0f8d')
@@ -208,12 +211,13 @@ assert.deepEqual(grammar960.normalizationDiagnostics, [
 ])
 assert.equal(/\d{1,3}\._{2,}/.test(grammar960.html), false)
 assert.equal(grammar960.html.includes('<span class="print-blank-num">56</span>'), true)
-assert.equal(grammar960.html.includes('<span class="print-blank-hint">(absorb)</span>'), true)
-assert.equal(
-  grammar960.html.includes(
-    '<span class="print-blank-unit"><span class="print-blank print-blank--short"><span class="print-blank-num">57</span></span><span class="print-blank-hint">(absorb)</span></span>',
-  ),
-  true,
+assert.match(
+  grammar960.html,
+  /<span class="print-blank-hint"[^>]*>\(absorb\)<\/span>/,
+)
+assert.match(
+  grammar960.html,
+  /<span class="print-blank-unit"[^>]*><span class="print-blank print-blank--short"><span class="print-blank-num">57<\/span><\/span><span class="print-blank-hint"[^>]*>\(absorb\)<\/span><\/span>/,
 )
 for (const protectedNumber of ['2026', '25-30g', '800g', '3-5g', '30g', '10g']) {
   assert.equal(

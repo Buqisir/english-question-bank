@@ -67,12 +67,14 @@ export function WritingPaperPage({
   retainedModelAnswer,
   retainedOfficialModelAnswer,
   onAnswerBoxActivate,
+  grammarFillPredecessorGroupId,
 }: {
   pageModel: WritingPageModel
   children: ReactNode
   retainedModelAnswer?: string
   retainedOfficialModelAnswer?: string
   onAnswerBoxActivate?: () => void
+  grammarFillPredecessorGroupId?: string
 }) {
   const handleAnswerBoxKeyDown = onAnswerBoxActivate
     ? (event: KeyboardEvent<HTMLDivElement>) => {
@@ -93,6 +95,14 @@ export function WritingPaperPage({
                 className="pi-writing-part"
                 data-canonical-instruction-id={block.instructionId}
                 data-canonical-writing-chrome-role="part_heading"
+                data-canonical-grammar-fill-rhythm-role={
+                  grammarFillPredecessorGroupId
+                    ? 'next_section'
+                    : undefined
+                }
+                data-canonical-grammar-fill-following-for={
+                  grammarFillPredecessorGroupId
+                }
               >
                 {block.text}
               </h2>

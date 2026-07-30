@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "grammar-fill-observed-coverage-oracle-v1",
+  "authorityBoundary": {
+    "sourceOracle": "docs/cuts/paper-canonical-unification/qa/20-grammar-fill-source-oracles-v1.json",
+    "goldenReference": "docs/cuts/paper-canonical-unification/qa/20-grammar-fill-golden-geometry-reference-measurements-v1.json",
+    "expectedSourceRoles": {
+      "previousFamily": "cloze_tail",
+      "chrome": ["part_context", "subsection", "meta_instruction"],
+      "passage": "passage_body_line",
+      "inlineBlank": "inline_blank_marker",
+      "prompt": "prompt_text",
+      "answer": "answer_line",
+      "explanation": "explanation_line",
+      "followingSection": "next_section"
+    }
+  },
+  "edges": [
+    {"edgeId":"cloze_tail_to_chrome_same_page","fromClass":"previousFamilyBoundary","toClass":"chrome","baselineStepRatio":2,"optionalCollapse":true},
+    {"edgeId":"cloze_tail_to_chrome_cross_page","fromClass":"previousFamilyBoundary","toClass":"chrome","pageRelation":"next_page_start","optionalCollapse":true},
+    {"edgeId":"part_context_to_subsection","fromRole":"part_context","toRole":"subsection","pageRelation":"source_order","optionalCollapse":false},
+    {"edgeId":"chrome_internal","fromClass":"chrome","toClass":"chrome","baselineStepRatio":1,"optionalCollapse":false},
+    {"edgeId":"chrome_to_passage","fromClass":"chrome","toClass":"passageContent","baselineStepRatio":1.5,"optionalCollapse":false},
+    {"edgeId":"passage_line_internal","fromClass":"passageContent","toClass":"passageContent","baselineStepRatio":1,"optionalCollapse":false},
+    {"edgeId":"paragraph_transition","fromClass":"passageContent","toClass":"passageContent","baselineStepRatio":1,"optionalCollapse":false},
+    {"edgeId":"same_passage_continuation","fromClass":"passageContent","toClass":"passageContent","pageRelation":"same_page_continuation","optionalCollapse":false},
+    {"edgeId":"same_passage_cross_page","fromClass":"passageContent","toClass":"passageContent","pageRelation":"next_page_continuation","optionalCollapse":false},
+    {"edgeId":"inline_blank_left_space","fromRole":"passage_body_line","toRole":"inline_blank_marker","horizontalRelation":"source_space_before","optionalCollapse":false},
+    {"edgeId":"inline_blank_right_space","fromRole":"inline_blank_marker","toRole":"passage_body_line","horizontalRelation":"source_space_after_unit","optionalCollapse":false},
+    {"edgeId":"inline_blank_no_phantom_space","fromRole":"passage_body_line","throughClass":"inlineBlank","toRole":"passage_body_line","extraBaselineStepRatio":0,"optionalCollapse":false},
+    {"edgeId":"inline_blank_atomicity","fromClass":"inlineBlank","toClass":"inlineBlank","pageRelation":"same_line_unsplittable","optionalCollapse":false},
+    {"edgeId":"inline_blank_number_centered","fromClass":"inlineBlank","toClass":"inlineBlank","horizontalRelation":"centered_number_without_trailing_dot","optionalCollapse":false},
+    {"edgeId":"inline_blank_width","fromClass":"inlineBlank","toClass":"inlineBlank","horizontalRelation":"3_3em_class","optionalCollapse":false},
+    {"edgeId":"inline_blank_source_order","fromClass":"inlineBlank","toClass":"inlineBlank","pageRelation":"exact_visible_source_order","optionalCollapse":false},
+    {"edgeId":"prompt_attachment","fromRole":"inline_blank_marker","toRole":"prompt_text","horizontalRelation":"fixed_em_gap_inside_atomic_unit","optionalCollapse":true},
+    {"edgeId":"prompt_to_following_text","fromRole":"prompt_text","toRole":"passage_body_line","horizontalRelation":"source_space_after_prompt","optionalCollapse":true},
+    {"edgeId":"prompt_atomicity","fromClass":"prompt","toClass":"inlineBlank","pageRelation":"same_atomic_unit","optionalCollapse":true},
+    {"edgeId":"unprompted_collapse","fromClass":"inlineBlank","toRole":"passage_body_line","extraBaselineStepRatio":0,"optionalCollapse":true},
+    {"edgeId":"sentence_start_blank","fromRole":"passage_body_line","toRole":"inline_blank_marker","pageRelation":"sentence_start","optionalCollapse":false},
+    {"edgeId":"sentence_internal_blank","fromRole":"passage_body_line","toRole":"inline_blank_marker","pageRelation":"sentence_internal","optionalCollapse":false},
+    {"edgeId":"line_end_blank","fromRole":"inline_blank_marker","toRole":"passage_body_line","pageRelation":"line_end_atomic","optionalCollapse":false},
+    {"edgeId":"wrapped_line_blank","fromRole":"passage_body_line","throughClass":"inlineBlank","toRole":"passage_body_line","pageRelation":"wrapped_line_atomic","optionalCollapse":false},
+    {"edgeId":"student_tail_to_next_section_same_page","fromClass":"passageContent","toRole":"next_section","baselineStepRatio":2,"optionalCollapse":false},
+    {"edgeId":"student_tail_to_next_section_cross_page","fromClass":"passageContent","toRole":"next_section","pageRelation":"next_page_start","optionalCollapse":false},
+    {"edgeId":"passage_tail_to_answer","fromClass":"passageContent","toRole":"answer_line","baselineStepRatio":1,"optionalCollapse":true},
+    {"edgeId":"answer_to_explanation","fromRole":"answer_line","toRole":"explanation_line","baselineStepRatio":1,"optionalCollapse":true},
+    {"edgeId":"teacher_tail_to_next_answer","fromClass":"teacherTail","toRole":"answer_line","baselineStepRatio":1,"optionalCollapse":true},
+    {"edgeId":"teacher_tail_to_next_section_same_page","fromClass":"teacherTail","toRole":"next_section","baselineStepRatio":2,"optionalCollapse":true},
+    {"edgeId":"teacher_tail_to_next_section_cross_page","fromClass":"teacherTail","toRole":"next_section","pageRelation":"next_page_start","optionalCollapse":true},
+    {"edgeId":"student_supplement_absence_collapse","fromClass":"passageContent","toRole":"next_section","extraBaselineStepRatio":0,"optionalCollapse":true}
+  ],
+  "requiredBundles": [
+    {"bundleId":"screen-plain","variants":["plain-baseline","plain-wrapped-line"],"expectedEdgeIds":["cloze_tail_to_chrome_same_page","part_context_to_subsection","chrome_internal","chrome_to_passage","passage_line_internal","paragraph_transition","same_passage_continuation","inline_blank_left_space","inline_blank_right_space","inline_blank_no_phantom_space","inline_blank_atomicity","inline_blank_number_centered","inline_blank_width","inline_blank_source_order","prompt_attachment","prompt_to_following_text","prompt_atomicity","unprompted_collapse","sentence_start_blank","sentence_internal_blank","wrapped_line_blank","student_tail_to_next_section_same_page","student_supplement_absence_collapse"]},
+    {"bundleId":"screen-lecture","variants":["lecture-baseline","lecture-wrapped-line"],"expectedEdgeIds":["cloze_tail_to_chrome_same_page","part_context_to_subsection","chrome_internal","chrome_to_passage","passage_line_internal","paragraph_transition","same_passage_continuation","inline_blank_left_space","inline_blank_right_space","inline_blank_no_phantom_space","inline_blank_atomicity","inline_blank_number_centered","inline_blank_width","inline_blank_source_order","prompt_attachment","prompt_to_following_text","prompt_atomicity","unprompted_collapse","sentence_start_blank","sentence_internal_blank","line_end_blank","wrapped_line_blank","student_tail_to_next_section_same_page","student_supplement_absence_collapse"]},
+    {"bundleId":"print-html-student","variants":["student-baseline","student-wrapped-line"],"expectedEdgeIds":["cloze_tail_to_chrome_same_page","part_context_to_subsection","chrome_internal","chrome_to_passage","passage_line_internal","paragraph_transition","same_passage_continuation","inline_blank_left_space","inline_blank_right_space","inline_blank_no_phantom_space","inline_blank_atomicity","inline_blank_number_centered","inline_blank_width","inline_blank_source_order","prompt_attachment","prompt_to_following_text","prompt_atomicity","unprompted_collapse","sentence_start_blank","sentence_internal_blank","wrapped_line_blank","student_tail_to_next_section_same_page","student_supplement_absence_collapse"]},
+    {"bundleId":"print-html-teacher","variants":["teacher-baseline","teacher-wrapped-line"],"expectedEdgeIds":["cloze_tail_to_chrome_same_page","part_context_to_subsection","chrome_internal","chrome_to_passage","passage_line_internal","paragraph_transition","same_passage_continuation","inline_blank_left_space","inline_blank_right_space","inline_blank_no_phantom_space","inline_blank_atomicity","inline_blank_number_centered","inline_blank_width","inline_blank_source_order","prompt_attachment","prompt_to_following_text","prompt_atomicity","unprompted_collapse","sentence_start_blank","sentence_internal_blank","wrapped_line_blank","passage_tail_to_answer","answer_to_explanation","teacher_tail_to_next_answer","teacher_tail_to_next_section_same_page"]},
+    {"bundleId":"pdf-student","variants":["student-baseline","student-passage-cross-page","student-next-section-cross-page"],"expectedEdgeIds":["cloze_tail_to_chrome_same_page","cloze_tail_to_chrome_cross_page","part_context_to_subsection","chrome_internal","chrome_to_passage","passage_line_internal","paragraph_transition","same_passage_continuation","same_passage_cross_page","inline_blank_left_space","inline_blank_right_space","inline_blank_no_phantom_space","inline_blank_atomicity","inline_blank_number_centered","inline_blank_width","inline_blank_source_order","prompt_attachment","prompt_to_following_text","prompt_atomicity","unprompted_collapse","sentence_start_blank","sentence_internal_blank","line_end_blank","wrapped_line_blank","student_tail_to_next_section_same_page","student_tail_to_next_section_cross_page","student_supplement_absence_collapse"]},
+    {"bundleId":"pdf-teacher","variants":["teacher-baseline","teacher-passage-cross-page","teacher-next-section-cross-page"],"expectedEdgeIds":["cloze_tail_to_chrome_same_page","cloze_tail_to_chrome_cross_page","part_context_to_subsection","chrome_internal","chrome_to_passage","passage_line_internal","paragraph_transition","same_passage_continuation","same_passage_cross_page","inline_blank_left_space","inline_blank_right_space","inline_blank_no_phantom_space","inline_blank_atomicity","inline_blank_number_centered","inline_blank_width","inline_blank_source_order","prompt_attachment","prompt_to_following_text","prompt_atomicity","unprompted_collapse","sentence_start_blank","sentence_internal_blank","line_end_blank","wrapped_line_blank","passage_tail_to_answer","answer_to_explanation","teacher_tail_to_next_answer","teacher_tail_to_next_section_same_page","teacher_tail_to_next_section_cross_page"]}
+  ]
+}

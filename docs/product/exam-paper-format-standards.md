@@ -4,7 +4,7 @@
 
 本文件是唯一的人类可读索引；当前 canonical 编译、校验、发布和受支持的
 Screen / Print-PDF consumer 只从
-[`standards/paper-canonical/manifest-v19.json`](../../standards/paper-canonical/manifest-v19.json)
+[`standards/paper-canonical/manifest-v20.json`](../../standards/paper-canonical/manifest-v20.json)
 解析一份 digest-closed 的权威闭包。这里不复制卷型题号、分值、题组
 cardinality、清洗条件或字体/物理排版数值，也不能被 caller 当作第二套配置。
 
@@ -18,9 +18,19 @@ Renderer Typography、其 schema 及纯验证入口。未知版本、缺件、di
 任何会改变 admission、canonical 语义、Profile、normalization 或 renderer
 结果的变更，必须新增 versioned artifact、schema/semantic conformance fixture、
 迁移说明和 manifest 升版；已经被 Publication 引用的 artifact 不可原位修改。
-`manifest-v1.json` 至 `manifest-v18.json` 保留各自原始 digest-closed closure，
-供既有 Publication 解析；当前 Screen v19、Print/PDF v20 consumer contracts
-只绑定 v19 authority。v19 以 `cloze-rhythm-v2` 完整闭合 Cloze Golden
+`manifest-v1.json` 至 `manifest-v19.json` 保留各自原始 digest-closed closure，
+供既有 Publication 解析；当前 Screen v20、Print/PDF v21 consumer contracts
+只绑定 v20 authority。v20 以 `grammar-fill-rhythm-v1` 闭合 Grammar Fill
+Golden Geometry：权威分别绑定 page-10 Grammar Fill 金样图、2026-I 不可变
+原题 PDF、versioned Paper Asset、官方答案与 reviewed analysis digest；完整
+语义邻接图、24px / 18pt 行节奏、3.3em-class 原子作答线、居中无句点题号、
+prompt 的 exact-text / attachment / spacing、Student / Teacher tail 以及到
+Application Writing 的同页或跨页关系均为机器可执行事实。纵向只使用局部
+baseline/font proxy 比例，横向只使用 em/usable-width 比例；Screen 与
+exact-A4 Print/PDF 的独立 observed-set oracle 必须与实测 ledger 精确相等。
+迁移说明见
+[`manifest-v20-migration.md`](../../standards/paper-canonical/manifest-v20-migration.md)。
+此前 v19 以 `cloze-rhythm-v2` 完整闭合 Cloze Golden
 Geometry renderer semantics；迁移说明见
 [`manifest-v19-migration.md`](../../standards/paper-canonical/manifest-v19-migration.md)。
 此前 v18 以 `cloze-rhythm-v1` 建立 Cloze Golden Geometry

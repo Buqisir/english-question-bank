@@ -8,6 +8,9 @@ import { existsSync, readFileSync } from 'node:fs'
 import { createHash, randomUUID } from 'node:crypto'
 import path from 'node:path'
 import { buildPrintHtml } from '../print-renderer.mjs'
+import {
+  loadCanonicalGrammarFillPrintChrome,
+} from '../paper-canonical/grammarFillPrintSourceBinding.mjs'
 import { loadGroupAnalysisTexts } from './analysisText.mjs'
 import { renderPaginatedPaper } from './paginationRenderer.mjs'
 import { applyPaginationDomContract } from './paginationDomContract.mjs'
@@ -682,10 +685,6 @@ export function createDraftPaperStore({
               items: exportItems,
             })
           : null
-    const clozeChrome = loadCanonicalClozeChrome(
-      exportItems,
-      canonicalConsumption,
-    )
     if (input.versionType === 'teacher' && paperAssetsDir) {
       // Restart cut ③ — join teacher-version explanations from paper-assets
       // analysis files. Display-layer only: never writes questions.explanation.
@@ -698,6 +697,16 @@ export function createDraftPaperStore({
         }
       }
     }
+    const clozeChrome = loadCanonicalClozeChrome(
+      exportItems,
+      canonicalConsumption,
+    )
+    const grammarFillChrome = loadCanonicalGrammarFillPrintChrome({
+      exportItems,
+      canonicalConsumption,
+      paperAssetsDir,
+      versionType: input.versionType,
+    })
     return addDraftFooterCss(
       buildPrintHtml({
         title: input.title,
@@ -711,6 +720,7 @@ export function createDraftPaperStore({
         images: exportOptions.images ?? [],
         canonicalConsumption,
         clozeChrome,
+        grammarFillChrome,
       }),
       input.title,
     )

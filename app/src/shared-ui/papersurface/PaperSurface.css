@@ -135,6 +135,11 @@
   padding-bottom: 0;
 }
 
+.ps-section[data-canonical-grammar-fill-section] {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
 /* ─── Passage body ─────────────────────────────────────────────── */
 
 .ps-passage-body {
@@ -175,6 +180,16 @@
 }
 
 .ps-paragraph[data-canonical-cloze-rhythm-role="passage_body_line"]:last-child {
+  margin-bottom: 0;
+}
+
+.ps-paragraph[data-canonical-grammar-fill-rhythm-role="passage_body_line"] {
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: 24px;
+}
+
+.ps-paragraph[data-canonical-grammar-fill-rhythm-role="passage_body_line"]:last-child {
   margin-bottom: 0;
 }
 
@@ -325,6 +340,16 @@
 .ps-paper-blank-hint {
   white-space: nowrap;
   text-indent: 0;
+}
+
+.ps-paper-blank-unit[data-canonical-grammar-fill-unit] {
+  break-inside: avoid;
+  vertical-align: baseline;
+}
+
+.ps-paper-blank-unit[data-canonical-grammar-fill-unit]
+  .ps-paper-blank-hint {
+  margin-left: 0.5em;
 }
 
 /* ─── I15: clickable in-passage grammar-fill blank ─────────────── *

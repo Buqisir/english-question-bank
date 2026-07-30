@@ -230,7 +230,7 @@ try {
         `class="[^"]*ps-paper-blank--active[^"]*"[^>]*`
         + `data-paper-blank-id="${proof.hintedBlankId}"[^>]*>`
         + `${proof.hintedQuestionNo}</button>`
-        + `<span class="ps-paper-blank-hint">\\(${proof.hint}\\)</span>`,
+        + `<span class="ps-paper-blank-hint"[^>]*>\\(${proof.hint}\\)</span>`,
       ),
     )
     assert.equal(
@@ -239,16 +239,17 @@ try {
     )
     const hintedBlankStructure = markup.match(
       new RegExp(
-        `<span class="ps-paper-blank-unit"><button[^>]*`
+        `<span class="ps-paper-blank-unit"[^>]*><button[^>]*`
         + `data-paper-blank-id="${proof.hintedBlankId}"[^>]*>`
         + `${proof.hintedQuestionNo}</button>`
-        + `<span class="ps-paper-blank-hint">\\(${proof.hint}\\)</span></span>`,
+        + `<span class="ps-paper-blank-hint"[^>]*>\\(${proof.hint}\\)</span></span>`,
       ),
     )?.[0]
     assert.ok(hintedBlankStructure)
     hintedBlankStructures.push(
       hintedBlankStructure
         .replaceAll(proof.hintedBlankId, '<blank-id>')
+        .replaceAll(proof.hintedQuestionId, '<question-id>')
         .replaceAll(proof.hintedQuestionNo, '<question-no>')
         .replaceAll(proof.hint, '<hint>'),
     )
@@ -259,12 +260,12 @@ try {
         + '\\d+</(?:span|button)>',
       ),
     )
-    assert.equal(
+    assert.match(
+      markup,
       new RegExp(
-        `ps-paper-blank-unit"><(?:span|button)[^>]*`
-        + `data-paper-blank-id="${proof.nullHintBlankId}"`,
-      ).test(markup),
-      false,
+        `ps-paper-blank-unit"[^>]*data-canonical-grammar-fill-unit=""[^>]*>`
+        + `<(?:span|button)[^>]*data-paper-blank-id="${proof.nullHintBlankId}"`,
+      ),
     )
 
     let activeGroupId = null

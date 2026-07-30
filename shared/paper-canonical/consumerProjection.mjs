@@ -20,6 +20,10 @@ const VERIFIED_PRE_V18_CLOZE_CONSUMPTION_DIGESTS = new Set([
   'sha256:9088282a4eac36c568c8f57a7c643ed9e173b5b3bb04806a28074f636996268c',
 ])
 
+const VERIFIED_PRE_V20_GRAMMAR_FILL_CONSUMPTION_DIGESTS = new Set([
+  'sha256:9088282a4eac36c568c8f57a7c643ed9e173b5b3bb04806a28074f636996268c',
+])
+
 function rejected(message, issues = []) {
   const error = new Error(message)
   error.code = 'CANONICAL_CONSUMPTION_REJECTED'
@@ -795,13 +799,16 @@ function selectOccurrence(input) {
   ) {
     throw rejected(`Family ${familyContractId} projected occurrences do not close the selection`)
   }
-  if (familyContractId === 'cloze') {
+  if (familyContractId === 'cloze' || familyContractId === 'grammar-fill') {
     const authorityRef = consumption?.authorityRef
     const consumptionDigest = sha256(`${stableStringify(consumption)}\n`)
+    const verifiedHistoricalDigests = familyContractId === 'cloze'
+      ? VERIFIED_PRE_V18_CLOZE_CONSUMPTION_DIGESTS
+      : VERIFIED_PRE_V20_GRAMMAR_FILL_CONSUMPTION_DIGESTS
     const verifiedHistoricalPlan =
       authorityRef === undefined
       && selection.projectedOccurrenceDigests === undefined
-      && VERIFIED_PRE_V18_CLOZE_CONSUMPTION_DIGESTS.has(consumptionDigest)
+      && verifiedHistoricalDigests.has(consumptionDigest)
     if (!verifiedHistoricalPlan) {
       if (!resolveCanonicalAuthority(authorityRef).ok) {
         throw rejected(
@@ -912,11 +919,34 @@ export function projectCanonicalConsumerGroup(input) {
     if (block?.kind !== 'paragraph' || typeof block.nodeId !== 'string' || !Array.isArray(block.inlines)) {
       throw rejected(`Canonical occurrence ${groupId} contains an unsupported content block`)
     }
+    const grammarPromptByBlankIndex = new Map()
+    const grammarFollowingTextByIndex = new Map()
+    if (familyContractId === 'grammar-fill') {
+      block.inlines.forEach((inline, index) => {
+        if (inline?.kind !== 'blank_ref') return
+        const following = block.inlines[index + 1]
+        if (following?.kind !== 'text' || typeof following.text !== 'string') return
+        const prompt = following.text.match(
+          /^ \(([^()\r\n]+)\)(?=\s|[.,;:!?])/u,
+        )
+        if (!prompt) return
+        grammarPromptByBlankIndex.set(index, prompt[1])
+        grammarFollowingTextByIndex.set(
+          index + 1,
+          following.text.slice(prompt[0].length),
+        )
+      })
+    }
     return {
       paragraphId: block.nodeId,
-      nodes: block.inlines.map((inline) => {
+      nodes: block.inlines.map((inline, inlineIndex) => {
         if (inline?.kind === 'text' && typeof inline.text === 'string') {
-          return { type: 'text', text: inline.text }
+          return {
+            type: 'text',
+            text:
+              grammarFollowingTextByIndex.get(inlineIndex)
+              ?? inline.text,
+          }
         }
         if (inline?.kind !== 'blank_ref' || !questionIdByBlankId.has(inline.blankId) || seenBlanks.has(inline.blankId)) {
           throw rejected(`Canonical occurrence ${groupId} has a missing, duplicated, or unknown Blank`)
@@ -928,6 +958,11 @@ export function projectCanonicalConsumerGroup(input) {
           blankId: inline.blankId,
           questionId,
           questionNo: numberByQuestionId.get(questionId),
+          ...(
+            grammarPromptByBlankIndex.has(inlineIndex)
+              ? { hint: grammarPromptByBlankIndex.get(inlineIndex) }
+              : {}
+          ),
         }
       }),
     }

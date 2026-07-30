@@ -42,6 +42,9 @@ import {
 import {
   createPaperCanonicalConsumerRoutes,
 } from '../server/paper-canonical/consumerRoutes.mjs'
+import {
+  loadCanonicalGrammarFillPrintChrome,
+} from '../server/paper-canonical/grammarFillPrintSourceBinding.mjs'
 import { createExportImplementation } from '../server/exports/exportImplementation.mjs'
 import { buildPrintHtml } from '../server/print-renderer.mjs'
 import { makeClozeGrammarCanonicalReferenceFixture } from '../test-fixtures/paper-canonical/clozeGrammarReferenceFixture.mjs'
@@ -54,10 +57,21 @@ const clozeAnalysis = JSON.parse(readFileSync(
   'app/public/paper-assets/paper-2026-i/latest/analyses/cloze-analysis-v1.json',
   'utf8',
 ))
-const grammarFillAnalysis = JSON.parse(readFileSync(
-  'app/public/paper-assets/paper-2026-i/latest/analyses/grammar-fill-analysis-v1.json',
+const grammarFillAnalysisPath =
+  'app/public/paper-assets/paper-2026-i/latest/analyses/grammar-fill-analysis-v1.json'
+const grammarFillAnalysisBytes = readFileSync(grammarFillAnalysisPath)
+const grammarFillAnalysis = JSON.parse(grammarFillAnalysisBytes)
+const officialAnswers = JSON.parse(readFileSync(
+  'test-fixtures/paper-import/paper-2026-i-canonical-pilot/answer-key.json',
   'utf8',
 ))
+
+function grammarFillExplanation(entry) {
+  return [
+    entry?.reason ? `【${entry.answer}】${entry.reason}` : '',
+    entry?.teachingNote ? `点拨：${entry.teachingNote}` : '',
+  ].filter(Boolean).join('\n')
+}
 
 function exportItem(groupId) {
   const group = asset.content.groups[groupId]
@@ -74,12 +88,22 @@ function exportItem(groupId) {
       },
       questions: group.questionIds.map((questionId) => {
         const question = asset.content.questions[questionId]
+        const grammarFillEntry =
+          group.groupType === 'grammarFill'
+            ? grammarFillAnalysis.blanks[questionId]
+            : null
         return {
           id: questionId,
           questionNo: String(question.questionNo),
           stem: question.stem ?? '',
-          answer: 'teacher supplement',
-          explanation: 'teacher explanation',
+          answer:
+            group.groupType === 'grammarFill'
+              ? officialAnswers.answers[questionId].answer
+              : 'teacher supplement',
+          explanation:
+            group.groupType === 'grammarFill'
+              ? grammarFillExplanation(grammarFillEntry)
+              : 'teacher explanation',
           note: '',
           options: (question.options || []).map((option) => ({
             label: option.label,
@@ -770,6 +794,20 @@ try {
     sourceAssetVersion: 1,
     sourceAsset: fixture.sourceAsset,
   })
+  const publishedGrammarFillAnalysisDir = path.join(
+    rootDir,
+    fixture.source.paperId,
+    'latest',
+    'analyses',
+  )
+  mkdirSync(publishedGrammarFillAnalysisDir, { recursive: true })
+  writeFileSync(
+    path.join(
+      publishedGrammarFillAnalysisDir,
+      'grammar-fill-analysis-v1.json',
+    ),
+    grammarFillAnalysisBytes,
+  )
   const store = {
     ...createFileSystemCanonicalPublicationStore({ rootDir, db }),
     projectLegacyFamily: async ({ familyContractId }) => [
@@ -810,6 +848,7 @@ try {
     getQuestionGroupDetail: (groupId) =>
       items.find((item) => item.detail.id === groupId)?.detail || null,
     buildPrintHtml,
+    paperAssetsDir: rootDir,
     resolveCanonicalConsumption: runtime.resolveForItems,
   })
   const publicInput = {
@@ -903,6 +942,20 @@ try {
       }
     }
     if (consumerId === 'print_pdf') {
+      const studentGrammarFillChrome =
+        loadCanonicalGrammarFillPrintChrome({
+          exportItems: items,
+          canonicalConsumption: consumption,
+          paperAssetsDir: rootDir,
+          versionType: 'student',
+        })
+      const teacherGrammarFillChrome =
+        loadCanonicalGrammarFillPrintChrome({
+          exportItems: items,
+          canonicalConsumption: consumption,
+          paperAssetsDir: rootDir,
+          versionType: 'teacher',
+        })
       const student = buildPrintHtml({
         title: asset.paper.title,
         versionType: 'student',
@@ -911,6 +964,7 @@ try {
         blocks,
         questionNumberStart: 41,
         canonicalConsumption: consumption,
+        grammarFillChrome: studentGrammarFillChrome,
       })
       const teacher = buildPrintHtml({
         title: asset.paper.title,
@@ -920,6 +974,7 @@ try {
         blocks,
         questionNumberStart: 41,
         canonicalConsumption: consumption,
+        grammarFillChrome: teacherGrammarFillChrome,
       })
       assert.equal(student.includes('teacher supplement'), false)
       assert.equal(student.includes('teacher explanation'), false)
