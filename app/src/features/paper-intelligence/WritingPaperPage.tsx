@@ -7,6 +7,7 @@ import {
 import type { WritingGivenPart, WritingPageModel } from './writingPageModel'
 import { RetainedModelAnswer } from '../paper-browse/RetainedWritingLecture.tsx'
 import { paperSurfaceTokens } from '../../../../shared/papersurface/tokens.mjs'
+import { applicationWritingRhythm } from '../../../../shared/paper-canonical/applicationWritingRhythm.mjs'
 import './writingPaperPage.css'
 
 // Renders the writing section's A4 page chrome (part/section headings, 注意,
@@ -39,6 +40,22 @@ const writingPageTokenStyle: WritingPageStyle = {
   '--ps-line-height': paperSurfaceTokens.paperLineHeight,
   '--ps-page-margin-x': paperSurfaceTokens.pageMarginX,
   '--ps-page-margin-top': paperSurfaceTokens.pageMarginTop,
+  '--application-writing-page-gap':
+    `${applicationWritingRhythm.rendererMapping.screen.pageBlockGapPx}px`,
+  '--application-writing-response-width':
+    `${applicationWritingRhythm.responseGeometry.widthMm}mm`,
+  '--application-writing-response-height':
+    `${applicationWritingRhythm.responseGeometry.heightMm}mm`,
+  '--application-writing-response-border':
+    `${applicationWritingRhythm.responseGeometry.borderPt}pt`,
+  '--application-writing-response-padding':
+    `${applicationWritingRhythm.responseGeometry.paddingMm}mm`,
+  '--application-writing-prompt-gap':
+    `${applicationWritingRhythm.rendererMapping.screen.promptParagraphGapPx}px`,
+  '--application-writing-notice-margin-top':
+    `${applicationWritingRhythm.rendererMapping.screen.noticeMarginTopPx}px`,
+  '--application-writing-response-margin-top':
+    `${applicationWritingRhythm.rendererMapping.screen.responseMarginTopPx}px`,
 }
 
 function writingGivenText(part: WritingGivenPart): string {
@@ -68,6 +85,7 @@ export function WritingPaperPage({
   retainedOfficialModelAnswer,
   onAnswerBoxActivate,
   grammarFillPredecessorGroupId,
+  applicationWritingPredecessorGroupId,
 }: {
   pageModel: WritingPageModel
   children: ReactNode
@@ -75,7 +93,18 @@ export function WritingPaperPage({
   retainedOfficialModelAnswer?: string
   onAnswerBoxActivate?: () => void
   grammarFillPredecessorGroupId?: string
+  applicationWritingPredecessorGroupId?: string
 }) {
+  const isApplicationWriting = pageModel.blocks.some(
+    (block) =>
+      block.kind === 'answerBox'
+      && block.answerRegionRef === 'writing.application-box',
+  )
+  const isContinuationWriting = pageModel.blocks.some(
+    (block) =>
+      block.kind === 'answerBox'
+      && block.answerRegionRef === 'writing.continuation-box',
+  )
   const handleAnswerBoxKeyDown = onAnswerBoxActivate
     ? (event: KeyboardEvent<HTMLDivElement>) => {
         if (event.key !== 'Enter' && event.key !== ' ') return
@@ -85,7 +114,14 @@ export function WritingPaperPage({
     : undefined
 
   return (
-    <div className="pi-writing-page" data-pi-writing-page="" style={writingPageTokenStyle}>
+    <div
+      className={[
+        'pi-writing-page',
+        isApplicationWriting ? 'pi-writing-page--application' : '',
+      ].filter(Boolean).join(' ')}
+      data-pi-writing-page=""
+      style={writingPageTokenStyle}
+    >
       {pageModel.blocks.map((block, index) => {
         switch (block.kind) {
           case 'partHeading':
@@ -95,6 +131,9 @@ export function WritingPaperPage({
                 className="pi-writing-part"
                 data-canonical-instruction-id={block.instructionId}
                 data-canonical-writing-chrome-role="part_heading"
+                data-canonical-application-writing-rhythm-role={
+                  isApplicationWriting ? 'part_heading' : undefined
+                }
                 data-canonical-grammar-fill-rhythm-role={
                   grammarFillPredecessorGroupId
                     ? 'next_section'
@@ -114,6 +153,18 @@ export function WritingPaperPage({
                 className="pi-writing-section"
                 data-canonical-instruction-id={block.instructionId}
                 data-canonical-writing-chrome-role="section_heading"
+                data-canonical-application-writing-rhythm-role={
+                  isApplicationWriting
+                    ? 'section_heading'
+                    : isContinuationWriting
+                      ? 'continuation_section'
+                      : undefined
+                }
+                data-canonical-application-writing-following-for={
+                  isContinuationWriting
+                    ? applicationWritingPredecessorGroupId
+                    : undefined
+                }
               >
                 {block.text}
               </h3>
@@ -125,6 +176,11 @@ export function WritingPaperPage({
                 className="pi-writing-instruction"
                 data-canonical-instruction-id={block.instructionId}
                 data-canonical-writing-chrome-role="instruction"
+                data-canonical-application-writing-rhythm-role={
+                  isContinuationWriting
+                    ? 'continuation_prompt'
+                    : undefined
+                }
               >
                 {block.text}
               </p>
@@ -153,6 +209,11 @@ export function WritingPaperPage({
                   data-canonical-writing-occurrence-signature={block.occurrenceSignature}
                   data-canonical-answer-region-ref={block.answerRegionRef}
                   data-canonical-response-slot-id={block.responseSlotId}
+                  data-canonical-application-writing-rhythm-role={
+                    block.answerRegionRef === 'writing.application-box'
+                      ? 'response_box'
+                      : undefined
+                  }
                   data-writing-lecture-trigger={onAnswerBoxActivate ? '' : undefined}
                   role={onAnswerBoxActivate ? 'button' : undefined}
                   tabIndex={onAnswerBoxActivate ? 0 : undefined}
@@ -178,6 +239,15 @@ export function WritingPaperPage({
                             : '',
                         ].filter(Boolean).join(' ')}
                         {...writingGivenIdentity(part)}
+                        data-canonical-application-writing-rhythm-role={
+                          typeof part !== 'string' && !('starterId' in part)
+                            ? part.role === 'title'
+                              ? 'given_title'
+                              : part.role === 'salutation'
+                                ? 'given_addressee'
+                                : undefined
+                            : undefined
+                        }
                       >
                         {writingGivenText(part)}
                       </p>
@@ -196,6 +266,11 @@ export function WritingPaperPage({
                           }
                           className="pi-writing-answer-given pi-writing-answer-given--tight"
                           {...writingGivenIdentity(part)}
+                          data-canonical-application-writing-rhythm-role={
+                            typeof part !== 'string' && !('starterId' in part)
+                              ? 'given_closing'
+                              : undefined
+                          }
                         >
                           {writingGivenText(part)}
                         </p>

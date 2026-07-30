@@ -780,3 +780,33 @@ Focused foundation, Publication, admission, recovery, Grammar Fill
 publication/consumption, generated-DOCX retirement, app build/typecheck, and
 ordinary backend pilot checks pass. Full `pnpm -C app run verify:all` reports
 115 PASS / 1 declared off-repo SKIP / 0 FAIL, and `git diff --check` passes.
+
+Application Writing Golden Geometry closure (2026-07-30):
+Manifest v26 publishes `application-writing-rhythm-v1`, Screen v26, and
+Print/PDF v27. The rhythm reuses `golden-geometry-framework-v1`, binds the
+exact page-11 JPEG only through local baseline/font proxies and
+em/usable-width ratios, and keeps the 144 mm × 65 mm response region under the
+existing human-readable product standard. The source oracle binds the
+immutable 2026-I original PDF, Paper Asset v1, official answer sources, and
+reviewed Application evidence.
+
+New immutable Application capture/transcription v2 evidence preserves the
+original PDF's two prompt paragraphs while retaining the exact concatenated
+Paper Asset text; historical capture/transcription bytes remain unchanged.
+The public graph covers the preceding Grammar Fill boundary, exact part and
+section chrome, both prompt paragraphs, notice, source-given title, response
+usable area, Student/Teacher tail collapse, and the following source-bound
+Continuation section and prompt. Because 2026-I authorizes no Application
+reference answer, analysis, rubric, salutation, or addressee, Student and
+Teacher artifacts expose none and leave no phantom gap.
+
+Real plain/lecture Screen, Student/Teacher Print HTML, and Student/Teacher
+exact-A4 Chromium PDF pass. Visual inspection confirms no clipping, overlap,
+answer leakage, unusable response area, or orphaned Continuation heading.
+A source-text-preserving narrow-prompt adversary leaves insufficient A4 space
+and proves the complete response box and given title move together to the next
+CropBox before Continuation. Grammar Fill public-geometry-fixtures v5 preserves
+the frozen v4 variants and occurrence digests while advancing only the
+compatible Plan identity to Manifest v26. No Continuation implementation,
+inactive Listening, Ticket 21, Owner QA, production/R2, or generated-DOCX work
+was performed.

@@ -35,6 +35,10 @@
   box-sizing: border-box;
 }
 
+.pi-writing-page--application {
+  gap: var(--application-writing-page-gap, 0);
+}
+
 /* The passage's own PaperSurface card blends into the single sheet (display-only
    override scoped to writing; PaperSurface core is untouched). The surface's
    fixed full-A4 min-height is dropped so the prompt/material flows straight into
@@ -82,11 +86,13 @@
 
 /* Bordered answer box. Family modifiers below pin the physical dimensions. */
 .pi-writing-answer-box {
-  border: 1px solid #1a1a1a;
+  border: var(--application-writing-response-border, 0.48pt) solid #1a1a1a;
   min-height: 216px;
-  padding: 1.25rem 1.5rem;
+  padding: var(--application-writing-response-padding, 3mm);
   display: flex;
   flex-direction: column;
+  break-inside: avoid;
+  page-break-inside: avoid;
 }
 
 /* Default application given lines retain their established writing space. */
@@ -115,14 +121,16 @@
    height itself be the writing space between them. */
 .pi-writing-answer-box--application,
 .pi-writing-answer-box--letter {
-  min-height: 246px;
+  min-height: var(--application-writing-response-height, 65mm);
 }
 
 .pi-writing-answer-box--application {
   box-sizing: border-box;
-  width: 144mm;
+  width: var(--application-writing-response-width, 144mm);
+  height: var(--application-writing-response-height, 65mm);
   max-width: 100%;
   align-self: center;
+  margin-top: var(--application-writing-response-margin-top, 12px);
 }
 
 .pi-writing-answer-box--continuation {

@@ -53,6 +53,7 @@ import {
 import { sevenChoicesRhythm } from '../shared/paper-canonical/sevenChoicesRhythm.mjs'
 import { clozeRhythm } from '../shared/paper-canonical/clozeRhythm.mjs'
 import { grammarFillRhythm } from '../shared/paper-canonical/grammarFillRhythm.mjs'
+import { applicationWritingRhythm } from '../shared/paper-canonical/applicationWritingRhythm.mjs'
 import {
   resolveGrammarFillPublicGeometryFixture,
 } from '../shared/paper-canonical/grammarFillPublicGeometryFixtures.mjs'
@@ -423,7 +424,12 @@ function renderCanonicalReadingBlocks(canonicalGroup) {
   }).join('')}</div>`
 }
 
-function renderCanonicalWritingChrome(chrome, className) {
+function renderCanonicalWritingChrome(
+  chrome,
+  className,
+  family,
+  previousFamilyBoundary = null,
+) {
   return [
     ...(chrome.part
       ? [{ instruction: chrome.part, role: 'part_heading' }]
@@ -435,13 +441,37 @@ function renderCanonicalWritingChrome(chrome, className) {
       instruction,
       role: 'instruction',
     })),
-  ].map(({ instruction, role }) =>
-    `<p class="${className} ${className}--${role}" data-canonical-instruction-id="${escapeHtml(instruction.instructionId)}" data-canonical-writing-chrome-role="${role}">${escapeHtml(instruction.text)}</p>`).join('')
+  ].map(({ instruction, role }) => {
+    const applicationRhythmRole =
+      family === 'application'
+        ? role
+        : family === 'continuation'
+          ? role === 'section_heading'
+            ? 'continuation_section'
+            : role === 'instruction'
+              ? 'continuation_prompt'
+              : null
+          : null
+    const rhythmAttr = applicationRhythmRole
+      ? ` data-canonical-application-writing-rhythm-role="${applicationRhythmRole}"`
+      : ''
+    const previousFamilyAttrs =
+      family === 'application'
+      && role === 'part_heading'
+      && previousFamilyBoundary
+        ? ` data-canonical-grammar-fill-rhythm-role="next_section" data-canonical-grammar-fill-section-id="${escapeHtml(previousFamilyBoundary.sectionId)}" data-canonical-grammar-fill-following-for="${escapeHtml(previousFamilyBoundary.groupId)}"`
+        : ''
+    return `<p class="${className} ${className}--${role}" data-canonical-instruction-id="${escapeHtml(instruction.instructionId)}" data-canonical-writing-chrome-role="${role}"${rhythmAttr}${previousFamilyAttrs}>${escapeHtml(instruction.text)}</p>`
+  }).join('')
 }
 
-function renderCanonicalApplicationWriting(canonicalGroup, writingChrome) {
+function renderCanonicalApplicationWriting(
+  canonicalGroup,
+  writingChrome,
+  previousFamilyBoundary,
+) {
   const renderGivenParts = (parts, position) => parts.map((part) =>
-    `<p class="canonical-application-given canonical-application-given--${position}" data-canonical-given-part-id="${escapeHtml(part.givenPartId)}" data-canonical-given-role="${escapeHtml(part.role)}" data-canonical-given-placement="${escapeHtml(part.placement)}">${renderCanonicalInlineNodes(part.inlines)}</p>`).join('')
+    `<p class="canonical-application-given canonical-application-given--${position}" data-canonical-given-part-id="${escapeHtml(part.givenPartId)}" data-canonical-given-role="${escapeHtml(part.role)}" data-canonical-given-placement="${escapeHtml(part.placement)}" data-canonical-application-writing-rhythm-role="${part.role === 'title' ? 'given_title' : position === 'bottom' ? 'given_closing' : 'given_addressee'}">${renderCanonicalInlineNodes(part.inlines)}</p>`).join('')
   const prompt = canonicalGroup.promptBlocks.map((block) => {
     const noticeLines = block.inlines.length === 1
       ? applicationWritingNoticeLines(block.inlines[0].text)
@@ -449,27 +479,30 @@ function renderCanonicalApplicationWriting(canonicalGroup, writingChrome) {
     const content = noticeLines
       ? `<span data-canonical-content-node-id="${escapeHtml(block.inlines[0].nodeId)}">${noticeLines.map((line) => `<span class="canonical-application-notice-line canonical-application-notice-line--${line.kind}" data-canonical-application-notice-line="${line.kind}">${escapeHtml(line.text)}</span>`).join('')}</span>`
       : renderCanonicalInlineNodes(block.inlines)
-    return `<p data-canonical-block-id="${escapeHtml(block.nodeId)}"${noticeLines ? ' data-canonical-application-notice=""' : ''}>${content}</p>`
+    return `<p data-canonical-block-id="${escapeHtml(block.nodeId)}" data-canonical-application-writing-rhythm-role="${noticeLines ? 'notice_line' : 'prompt_line'}"${noticeLines ? ' data-canonical-application-notice=""' : ''}>${content}</p>`
   }).join('')
   const response = canonicalGroup.answerRegion
   const chrome = renderCanonicalWritingChrome(
     writingChrome,
     'canonical-application-instruction',
+    'application',
+    previousFamilyBoundary,
   )
-  return `<div class="canonical-application-writing" data-canonical-application-semantic-signature="${escapeHtml(canonicalGroup.semanticSignature)}" data-canonical-application-occurrence-signature="${escapeHtml(canonicalGroup.occurrenceSignature)}">${chrome}<div class="passage canonical-application-prompt">${prompt}</div><div class="writing-answer-box canonical-application-response" data-canonical-answer-region-ref="${escapeHtml(response.answerRegionRef)}" data-canonical-response-slot-id="${escapeHtml(response.responseSlotId)}" style="width:144mm;height:65mm;"><div class="canonical-application-given-top">${renderGivenParts(response.givenTop, 'top')}</div><div class="canonical-application-given-bottom">${renderGivenParts(response.givenBottom, 'bottom')}</div></div></div>`
+  return `<div class="canonical-application-writing" data-canonical-application-semantic-signature="${escapeHtml(canonicalGroup.semanticSignature)}" data-canonical-application-occurrence-signature="${escapeHtml(canonicalGroup.occurrenceSignature)}">${chrome}<div class="passage canonical-application-prompt">${prompt}</div><div class="writing-answer-box canonical-application-response" data-canonical-application-writing-rhythm-role="response_box" data-canonical-answer-region-ref="${escapeHtml(response.answerRegionRef)}" data-canonical-response-slot-id="${escapeHtml(response.responseSlotId)}" style="width:${applicationWritingRhythm.responseGeometry.widthMm}mm;height:${applicationWritingRhythm.responseGeometry.heightMm}mm;"><div class="canonical-application-given-top">${renderGivenParts(response.givenTop, 'top')}</div><div class="canonical-application-given-bottom">${renderGivenParts(response.givenBottom, 'bottom')}</div></div></div>`
 }
 
 function renderCanonicalContinuationWriting(canonicalGroup, writingChrome) {
   const chrome = renderCanonicalWritingChrome(
     writingChrome,
     'canonical-continuation-instruction',
+    'continuation',
   )
   const material = canonicalGroup.materialBlocks.map((block) =>
     `<p data-canonical-block-id="${escapeHtml(block.nodeId)}">${renderCanonicalInlineNodes(block.inlines)}</p>`).join('')
   const response = canonicalGroup.answerRegion
   const starters = response.starterLines.map((starter, index) =>
     `<p class="writing-starter-line writing-starter-line--${index + 1}" data-canonical-starter-id="${escapeHtml(starter.starterId)}" data-canonical-block-id="${escapeHtml(starter.contentRef)}">${renderCanonicalInlineNodes(starter.inlines)}</p>`).join('')
-  return `<div class="canonical-continuation-writing" data-canonical-writing-semantic-signature="${escapeHtml(canonicalGroup.semanticSignature)}" data-canonical-writing-occurrence-signature="${escapeHtml(canonicalGroup.occurrenceSignature)}" data-canonical-word-count-scope="${escapeHtml(canonicalGroup.wordCountRuling.countScope)}" data-canonical-word-count-target="${canonicalGroup.wordCountRuling.target}">${chrome}<div class="passage canonical-continuation-material">${material}</div><div class="writing-answer-box canonical-continuation-response" data-canonical-answer-region-ref="${escapeHtml(response.answerRegionRef)}" data-canonical-response-slot-id="${escapeHtml(response.responseSlotId)}" style="width:145mm;height:57mm;">${starters}</div></div>`
+  return `<div class="canonical-continuation-writing" data-canonical-writing-semantic-signature="${escapeHtml(canonicalGroup.semanticSignature)}" data-canonical-writing-occurrence-signature="${escapeHtml(canonicalGroup.occurrenceSignature)}" data-canonical-word-count-scope="${escapeHtml(canonicalGroup.wordCountRuling.countScope)}" data-canonical-word-count-target="${canonicalGroup.wordCountRuling.target}"><div class="canonical-continuation-chrome">${chrome}</div><div class="passage canonical-continuation-material">${material}</div><div class="writing-answer-box canonical-continuation-response" data-canonical-answer-region-ref="${escapeHtml(response.answerRegionRef)}" data-canonical-response-slot-id="${escapeHtml(response.responseSlotId)}" style="width:145mm;height:57mm;">${starters}</div></div>`
 }
 
 function renderCanonicalQuestionOptions(
@@ -933,6 +966,13 @@ export function buildPrintHtml({
     ? canonicalGrammarFillSelection.groupIds.filter((groupId) =>
         renderedGroupIds.includes(groupId))
     : []
+  const canonicalApplicationGroupIds =
+    canonicalConsumption?.selections?.find(
+      (selection) =>
+        selection.familyContractId === 'application-writing'
+        && selection.mode === 'canonical',
+    )?.groupIds.filter((groupId) => renderedGroupIds.includes(groupId))
+      || []
   const firstGrammarFillGroupBlockIndex = Array.isArray(blocks)
     ? blocks.findIndex(
         (block) =>
@@ -1131,6 +1171,12 @@ export function buildPrintHtml({
     let groupNum = 0
     for (const [blockIndex, block] of blocks.entries()) {
       if (block.type === 'section_header' && block.title) {
+        if (
+          blockIndex === followingGrammarFillSectionBlockIndex
+          && canonicalApplicationGroupIds.length > 0
+        ) {
+          continue
+        }
         if (
           clozeChrome
           && blockIndex === firstClozePredecessorBlockIndex
@@ -1421,6 +1467,14 @@ export function buildPrintHtml({
             groupHtml += renderCanonicalApplicationWriting(
               canonicalGroup,
               canonicalWritingChrome,
+              canonicalGroup.groupId === canonicalApplicationGroupIds[0]
+              && canonicalGrammarFillGroupIds.length > 0
+                ? {
+                    groupId: canonicalGrammarFillGroupIds.at(-1),
+                    sectionId: followingGrammarFillSectionId
+                      || canonicalWritingChrome.part.instructionId,
+                  }
+                : null,
             )
           } else if (canonicalGroup.groupType === 'continuation') {
             groupHtml += groupLeadHtml
@@ -2425,16 +2479,19 @@ ${grammarFillGeometryFixtureCss}
    relative 承载子行的 absolute 定位; 应用文框维持空框(无 starter 子元素时
    与刀前字节一致)。 */
 .writing-answer-box {
-  border: 0.48pt solid #000;
+  border: ${applicationWritingRhythm.responseGeometry.borderPt}pt solid #000;
   margin: 1em auto 0;
   position: relative;
+  break-inside: avoid;
+  page-break-inside: avoid;
 }
 
 .canonical-application-response {
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
-  padding: 3mm;
+  padding: ${applicationWritingRhythm.responseGeometry.paddingMm}mm;
+  margin-top: ${applicationWritingRhythm.rendererMapping.printPdf.responseMarginTopPt}pt;
 }
 
 [data-canonical-writing-chrome-role] {
@@ -2479,6 +2536,7 @@ ${grammarFillGeometryFixtureCss}
 }
 
 .canonical-application-prompt p[data-canonical-application-notice] {
+  margin-top: ${applicationWritingRhythm.rendererMapping.printPdf.noticeMarginTopPt}pt;
   text-align: left;
   text-indent: 0;
 }
@@ -2490,6 +2548,24 @@ ${grammarFillGeometryFixtureCss}
 
 .canonical-application-notice-line--instruction {
   margin-left: 2em;
+}
+
+.canonical-application-prompt p {
+  margin-bottom: ${applicationWritingRhythm.rendererMapping.printPdf.promptParagraphGapPt}pt;
+}
+
+.canonical-application-instruction--part_heading,
+.canonical-application-instruction--section_heading {
+  margin-bottom: ${applicationWritingRhythm.rendererMapping.printPdf.pageBlockGapPt}pt;
+}
+
+.canonical-application-instruction--part_heading[data-canonical-grammar-fill-following-for] {
+  margin-top: ${grammarFillRhythm.rendererMapping.printPdf.followingSectionMarginTopPt}pt;
+}
+
+.canonical-continuation-chrome {
+  break-inside: avoid;
+  page-break-inside: avoid;
 }
 
 .writing-starter-line {

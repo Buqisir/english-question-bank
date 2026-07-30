@@ -1,0 +1,109 @@
+{
+  "schemaVersion": "application-writing-observed-coverage-oracle-v1",
+  "sourceOracle": {
+    "path": "docs/cuts/paper-canonical-unification/qa/20-application-writing-source-oracles-v1.json",
+    "sha256": "73ede765bce1104bd9494530e567c579d4a620b09870b5469689498782d50f7c"
+  },
+  "requiredEdgeIds": [
+    "grammar_fill_boundary_to_part_same_page",
+    "grammar_fill_boundary_to_part_cross_page",
+    "part_to_section",
+    "section_to_prompt",
+    "prompt_line_internal",
+    "prompt_wrapped_continuation",
+    "prompt_to_notice",
+    "notice_line_internal",
+    "notice_to_response",
+    "response_given_title_alignment",
+    "response_usable_width",
+    "response_usable_height",
+    "response_atomicity_same_page",
+    "response_atomicity_next_page",
+    "student_response_to_next_section_same_page",
+    "student_response_to_next_section_cross_page",
+    "student_supplement_absence_collapse",
+    "unauthorized_teacher_tail_collapse",
+    "continuation_section_to_prompt"
+  ],
+  "requiredBundles": {
+    "screen_plain": [
+      "part_to_section",
+      "section_to_prompt",
+      "prompt_line_internal",
+      "prompt_wrapped_continuation",
+      "prompt_to_notice",
+      "notice_line_internal",
+      "notice_to_response",
+      "response_given_title_alignment",
+      "response_usable_width",
+      "response_usable_height",
+      "student_response_to_next_section_cross_page",
+      "student_supplement_absence_collapse",
+      "continuation_section_to_prompt"
+    ],
+    "screen_lecture": [
+      "part_to_section",
+      "section_to_prompt",
+      "prompt_line_internal",
+      "prompt_wrapped_continuation",
+      "prompt_to_notice",
+      "notice_line_internal",
+      "notice_to_response",
+      "response_given_title_alignment",
+      "response_usable_width",
+      "response_usable_height",
+      "student_response_to_next_section_cross_page",
+      "unauthorized_teacher_tail_collapse",
+      "continuation_section_to_prompt"
+    ],
+    "student_print_html": [
+      "grammar_fill_boundary_to_part_same_page",
+      "part_to_section",
+      "section_to_prompt",
+      "prompt_line_internal",
+      "prompt_to_notice",
+      "notice_line_internal",
+      "notice_to_response",
+      "response_given_title_alignment",
+      "response_usable_width",
+      "response_usable_height",
+      "response_atomicity_same_page",
+      "student_response_to_next_section_same_page",
+      "student_supplement_absence_collapse",
+      "continuation_section_to_prompt"
+    ],
+    "teacher_print_html": [
+      "grammar_fill_boundary_to_part_same_page",
+      "part_to_section",
+      "section_to_prompt",
+      "prompt_line_internal",
+      "prompt_to_notice",
+      "notice_line_internal",
+      "notice_to_response",
+      "response_given_title_alignment",
+      "response_usable_width",
+      "response_usable_height",
+      "response_atomicity_same_page",
+      "unauthorized_teacher_tail_collapse",
+      "continuation_section_to_prompt"
+    ],
+    "student_pdf": [
+      "grammar_fill_boundary_to_part_cross_page",
+      "prompt_wrapped_continuation",
+      "response_atomicity_same_page",
+      "student_response_to_next_section_same_page"
+    ],
+    "teacher_pdf": [
+      "grammar_fill_boundary_to_part_cross_page",
+      "prompt_wrapped_continuation",
+      "response_atomicity_same_page",
+      "student_response_to_next_section_cross_page",
+      "unauthorized_teacher_tail_collapse",
+      "continuation_section_to_prompt"
+    ],
+    "teacher_pdf_response_move": [
+      "response_atomicity_next_page"
+    ]
+  },
+  "coverageRule": "Every required edge is observed from a real public Screen, Print HTML, or exact-A4 PDF artifact; optional source-absent roles are measured as collapse, never manufactured as visible text."
+}

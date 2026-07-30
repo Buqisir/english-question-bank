@@ -29,6 +29,11 @@ const reviewedEvidenceDir = option('--reviewed-evidence-dir')
 const requestFileName =
   option('--request-file-name') || 'canonical-import-request.json'
 const write = process.argv.includes('--write')
+const requestVersion = Number(
+  requestFileName.match(/-v([1-9][0-9]*)\.json$/)?.[1] || 0,
+)
+const useApplicationWritingParagraphBoundaryEvidence =
+  requestVersion >= 26
 
 if (
   !packageDir
@@ -81,11 +86,15 @@ const requiredPaths = {
   ),
   applicationWritingCapture: path.join(
     absoluteReviewedEvidenceDir,
-    'application-writing-source-capture.json',
+    useApplicationWritingParagraphBoundaryEvidence
+      ? 'application-writing-source-capture-v2.json'
+      : 'application-writing-source-capture.json',
   ),
   applicationWritingTranscription: path.join(
     absoluteReviewedEvidenceDir,
-    'application-writing-source-transcription.json',
+    useApplicationWritingParagraphBoundaryEvidence
+      ? 'application-writing-source-transcription-v2.json'
+      : 'application-writing-source-transcription.json',
   ),
   continuationWritingCapture: path.join(
     absoluteReviewedEvidenceDir,
@@ -183,10 +192,17 @@ const fileNames = new Map([
   ],
   ['table_visual_proof', '08-reading-a-table-1.png'],
   ['source_provenance', '09-source-provenance.json'],
-  ['application_writing_capture', '10-application-writing-capture.json'],
+  [
+    'application_writing_capture',
+    useApplicationWritingParagraphBoundaryEvidence
+      ? '19-application-writing-capture-v2.json'
+      : '10-application-writing-capture.json',
+  ],
   [
     'application_writing_transcription',
-    '11-application-writing-transcription.json',
+    useApplicationWritingParagraphBoundaryEvidence
+      ? '20-application-writing-transcription-v2.json'
+      : '11-application-writing-transcription.json',
   ],
   ['continuation_writing_capture', '12-continuation-writing-capture.json'],
   [

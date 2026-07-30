@@ -476,6 +476,9 @@ function CanonicalApplicationWritingPrompt({
             key={block.nodeId}
             data-canonical-block-id={block.nodeId}
             data-canonical-application-notice={noticeLines ? '' : undefined}
+            data-canonical-application-writing-rhythm-role={
+              noticeLines ? 'notice_line' : 'prompt_line'
+            }
           >
             {block.inlines.map((inline) => (
               <span

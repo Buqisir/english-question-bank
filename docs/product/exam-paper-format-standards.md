@@ -4,7 +4,7 @@
 
 本文件是唯一的人类可读索引；当前 canonical 编译、校验、发布和受支持的
 Screen / Print-PDF consumer 只从
-[`standards/paper-canonical/manifest-v25.json`](../../standards/paper-canonical/manifest-v25.json)
+[`standards/paper-canonical/manifest-v26.json`](../../standards/paper-canonical/manifest-v26.json)
 解析一份 digest-closed 的权威闭包。这里不复制卷型题号、分值、题组
 cardinality、清洗条件或字体/物理排版数值，也不能被 caller 当作第二套配置。
 
@@ -18,9 +18,21 @@ Renderer Typography、其 schema 及纯验证入口。未知版本、缺件、di
 任何会改变 admission、canonical 语义、Profile、normalization 或 renderer
 结果的变更，必须新增 versioned artifact、schema/semantic conformance fixture、
 迁移说明和 manifest 升版；已经被 Publication 引用的 artifact 不可原位修改。
-`manifest-v1.json` 至 `manifest-v24.json` 保留各自原始 digest-closed closure，
-供既有 Publication 解析；当前 Screen v25、Print/PDF v26 consumer contracts
-只绑定 v25 authority。v25 以 Grammar Fill family v3、Source Adapter v7 与
+`manifest-v1.json` 至 `manifest-v25.json` 保留各自原始 digest-closed closure，
+供既有 Publication 解析；当前 Screen v26、Print/PDF v27 consumer contracts
+只绑定 v26 authority。v26 新增 `application-writing-rhythm-v1`：它把
+page-11 金样图仅作为局部 baseline/font proxy 和 em/usable-width ratio 的
+无量纲证据，不把 JPEG 像素换算成 CSS px、PDF pt 或整页 A4 比例；可见角色图
+由 2026-I 原题 PDF、Paper Asset、官方答案源和 Application Writing
+capture/transcription 共同约束，覆盖 Grammar Fill 边界、写作部分/小节、
+两个源 prompt 段落/notice、源给定标题、144 mm × 65 mm 原子作答区，以及紧随其后的
+Continuation Writing 小节和 prompt。2026-I 来源没有授权应用文参考答案、
+分析、rubric、称呼或收件人，因此 Student / Teacher 产物都必须零文本、零
+phantom gap 地折叠这些角色。迁移说明见
+[`manifest-v26-migration.md`](../../standards/paper-canonical/manifest-v26-migration.md)。
+public-geometry-fixtures v5 保留 Grammar Fill v4 的全部源文本、geometry 与
+projected-occurrence digest，只把 compatible Consumption Plan 推进到 v26。
+此前 v25 以 Grammar Fill family v3、Source Adapter v7 与
 `grammar-fill-prompt-provision-v2` 闭合 prompt evidence：`source_prompt`
 必须携带 `prompt`，`source_proven_none` 禁止携带 `prompt`；同一版本化契约在
 admission、canonical projection 与 sealed Publication validation 三处执行，

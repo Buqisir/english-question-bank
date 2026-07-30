@@ -1,0 +1,60 @@
+{
+  "schemaVersion": "application-writing-golden-geometry-reference-measurements-v1",
+  "framework": {
+    "path": "docs/cuts/paper-canonical-unification/qa/golden-geometry-framework-v1.md",
+    "sha256": "46fee75e0ddaa62989985c1e3dea5be11f8501324fd0a95b409b610716c0be88"
+  },
+  "reference": {
+    "path": "docs/product/exam-paper-format-reference/images/page-11-writing-start.jpeg",
+    "sha256": "88ae679dcd952b0054628893dd0ffa9fc11a7cc5b26f27701c695079a9568875",
+    "pixelWidth": 866,
+    "pixelHeight": 1161,
+    "coordinateUse": "evidence_only_never_css_px_pdf_pt_or_a4_scale"
+  },
+  "localProxies": {
+    "latinBaselineStepPx": 33,
+    "latinFontBoxHeightPx": 17,
+    "usableContentLeftPx": 81,
+    "usableContentRightPx": 802,
+    "usableContentWidthPx": 721
+  },
+  "verticalMeasurements": {
+    "partToSectionBaselineRatio": 1,
+    "sectionToPromptBaselineRatio": 1,
+    "promptLineBaselineRatio": 1,
+    "requirementLineBaselineRatio": 1,
+    "requirementsToNoticeBaselineRatio": 2,
+    "noticeLineBaselineRatio": 1,
+    "noticeToResponseBorderBaselineRatio": 0.5,
+    "responseBorderToGivenTitleBaselineRatio": 0.9,
+    "responseHeightFontBoxRatio": 12.35,
+    "responseToContinuationSectionBaselineRatio": 1.82,
+    "continuationSectionToPromptBaselineRatio": 1
+  },
+  "horizontalMeasurements": {
+    "promptFirstLineIndentFontBoxRatio": 2.47,
+    "wrappedPromptContinuationIndentFontBoxRatio": 0.12,
+    "listIndentFontBoxRatio": 2.94,
+    "responseWidthUsableWidthRatio": 1.001,
+    "givenTitleAlignment": "centered_in_response_usable_width",
+    "strategy": "source_ordered_block_flow_with_full_width_response_region",
+    "distribution": "not_distributed"
+  },
+  "observedGoldenVariants": {
+    "promptParagraphs": 2,
+    "promptWrap": "observed",
+    "requirements": 2,
+    "noticeItems": 2,
+    "givenTitle": "observed",
+    "salutationOrAddressee": "not_present_in_reference",
+    "teacherTail": "not_present_in_reference",
+    "responseCrossPage": "unobserved_public_fixture_required",
+    "familyTransitionCrossPage": "unobserved_public_fixture_required"
+  },
+  "rendererMappingBoundary": {
+    "responsePhysicalSizeAuthority": "docs/product/exam-paper-format-standards.md section 8",
+    "responseWidthMm": 144,
+    "responseHeightMm": 65,
+    "mapping": "Golden ratios classify rhythm and alignment only; the product standard owns physical response-box dimensions."
+  }
+}

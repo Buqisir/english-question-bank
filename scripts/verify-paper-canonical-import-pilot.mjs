@@ -40,6 +40,9 @@ import {
 import {
   grammarFillPublicGeometryFixtures,
 } from '../shared/paper-canonical/grammarFillPublicGeometryFixtures.mjs'
+import {
+  applicationWritingRhythm,
+} from '../shared/paper-canonical/applicationWritingRhythm.mjs'
 import { digestJson } from '../shared/paper-canonical/stable.mjs'
 import { loadCanonicalImportRequest } from '../server/paper-canonical/importRequest.mjs'
 import {
@@ -125,6 +128,18 @@ const grammarFillCoverageOraclePath = path.join(
   repositoryRoot,
   'docs/cuts/paper-canonical-unification/qa/20-grammar-fill-observed-coverage-oracle-v3.json',
 )
+const applicationWritingReferencePath = path.join(
+  repositoryRoot,
+  'docs/cuts/paper-canonical-unification/qa/20-application-writing-golden-geometry-reference-measurements-v1.json',
+)
+const applicationWritingSourceOraclePath = path.join(
+  repositoryRoot,
+  'docs/cuts/paper-canonical-unification/qa/20-application-writing-source-oracles-v1.json',
+)
+const applicationWritingCoverageOraclePath = path.join(
+  repositoryRoot,
+  'docs/cuts/paper-canonical-unification/qa/20-application-writing-observed-coverage-oracle-v1.json',
+)
 const paperId = 'paper-2026-i'
 const provisionActualArtifacts = process.argv.includes('--actual-artifacts')
 const keepQaServer = process.argv.includes('--qa-server')
@@ -143,6 +158,53 @@ if (injectQaArtifactServerStartupFailure && !keepQaServer) {
 
 function sha256(bytes) {
   return createHash('sha256').update(bytes).digest('hex')
+}
+
+function assertApplicationWritingReferenceEvidence() {
+  const referenceBytes = readFileSync(applicationWritingReferencePath)
+  const reference = JSON.parse(referenceBytes)
+  const sourceOracleBytes = readFileSync(applicationWritingSourceOraclePath)
+  const sourceOracle = JSON.parse(sourceOracleBytes)
+  const coverageOracleBytes = readFileSync(applicationWritingCoverageOraclePath)
+  const coverageOracle = JSON.parse(coverageOracleBytes)
+  assert.equal(
+    applicationWritingRhythm.referenceMeasurement.sha256,
+    `sha256:${sha256(referenceBytes)}`,
+    'Application Writing authority binds the exact dimensionless reference measurement',
+  )
+  assert.equal(
+    applicationWritingRhythm.publicArtifactOracle.sha256,
+    `sha256:${sha256(sourceOracleBytes)}`,
+    'Application Writing authority binds the exact source oracle',
+  )
+  assert.equal(
+    applicationWritingRhythm.observedCoverageOracle.sha256,
+    `sha256:${sha256(coverageOracleBytes)}`,
+    'Application Writing authority binds the exact public observed-coverage oracle',
+  )
+  const referenceImage = path.join(repositoryRoot, reference.reference.path)
+  assert.equal(
+    sha256(readFileSync(referenceImage)),
+    reference.reference.sha256,
+    'Application Writing reference measurement binds the exact page-11 JPEG bytes',
+  )
+  assert.equal(
+    reference.reference.coordinateUse,
+    'evidence_only_never_css_px_pdf_pt_or_a4_scale',
+  )
+  for (const source of Object.values(sourceOracle.sources)) {
+    assert.equal(
+      sha256(readFileSync(path.join(repositoryRoot, source.path))),
+      source.sha256,
+      `Application Writing source oracle binds ${source.path}`,
+    )
+  }
+  assert.deepEqual(sourceOracle.applicationWriting.teacherTail, {
+    referenceAnswer: 'absent_not_authorized',
+    analysisOrRubric: 'absent_not_reviewed',
+    requiredVisibleOccurrenceCount: 0,
+  })
+  return { reference, sourceOracle, coverageOracle }
 }
 
 function assertPassageLetterReferenceEvidence() {
@@ -392,18 +454,18 @@ function assertSevenChoicesReferenceEvidence() {
   )
   assert.equal(
     canonicalAuthorityRef.manifestVersion,
-    '25',
-    'new Publications preserve Seven Choices inside the closed Grammar Fill successor authority',
+    '26',
+    'new Publications preserve Seven Choices inside the closed Application Writing successor authority',
   )
   assert.equal(
     consumerContractRefs.screen.version,
-    '25',
-    'Screen v25 binds the complete geometry authority closure',
+    '26',
+    'Screen v26 binds the complete geometry authority closure',
   )
   assert.equal(
     consumerContractRefs.print_pdf.version,
-    '26',
-    'Print/PDF v26 binds the complete geometry authority closure',
+    '27',
+    'Print/PDF v27 binds the complete geometry authority closure',
   )
   assert.equal(
     sha256(preservedBytes),
@@ -6580,6 +6642,13 @@ function markerPages(pdfPath, pageCount, marker) {
     .filter((page) => pdfPageText(pdfPath, page).includes(marker))
 }
 
+function compactMarkerPages(pdfPath, pageCount, marker) {
+  const compactMarker = String(marker || '').normalize('NFKC').replaceAll(/\s/g, '')
+  return Array.from({ length: pageCount }, (_, index) => index + 1)
+    .filter((page) =>
+      pdfPageText(pdfPath, page).replaceAll(/\s/g, '').includes(compactMarker))
+}
+
 function svgPageRectangles(pdfPath, svgPath, page) {
   execFileSync(
     'pdftocairo',
@@ -10537,8 +10606,11 @@ function assertPdfWritingResponseRegions(
       familyContractId,
       groupId: selection.groupIds[0],
     })
-    const marker = projectedGroupTextCandidates(group)
-      .find((candidate) => candidate.length >= 24).slice(0, 24)
+    const markerInsideRegion = familyContractId === 'application-writing'
+    const marker = markerInsideRegion
+      ? canonicalInlineText(group.answerRegion.givenTop[0].inlines)
+      : projectedGroupTextCandidates(group)
+        .find((candidate) => candidate.length >= 24).slice(0, 24)
     const pages = markerPages(pdfPath, pageBoxes.length, marker)
     assert.equal(
       pages.length,
@@ -10552,6 +10624,7 @@ function assertPdfWritingResponseRegions(
       regionName,
       marker,
       markerPage: pages[0],
+      markerInsideRegion,
     }
   })
   for (const [index, region] of regions.entries()) {
@@ -10562,6 +10635,7 @@ function assertPdfWritingResponseRegions(
       regionName,
       marker,
       markerPage,
+      markerInsideRegion,
     } = region
     const nextRegion = regions[index + 1]
     const finalPage = nextRegion?.markerPage || pageBoxes.length
@@ -10601,8 +10675,13 @@ function assertPdfWritingResponseRegions(
       true,
       `${label} ${regionName} response region is fully inside page ${matches[0].page} CropBox`,
     )
+    region.responsePage = matches[0].page
     const markerWord = marker.match(/[A-Za-z][A-Za-z'-]*/)?.[0]
-    if (markerWord && matches[0].page === markerPage) {
+    if (
+      markerWord
+      && !markerInsideRegion
+      && matches[0].page === markerPage
+    ) {
       const markerBox = firstPdfWordBox(
         pdfPath,
         markerPage,
@@ -10630,6 +10709,442 @@ function assertPdfWritingResponseRegions(
       )
     }
   }
+  return regions
+}
+
+async function assertApplicationWritingDomArtifact(
+  page,
+  consumption,
+  label,
+  { surface, teacher },
+) {
+  const source = applicationWritingEvidence.sourceOracle
+  const application = source.applicationWriting
+  const following = source.followingContinuationWriting
+  const applicationRoot = page.locator(
+    `[data-paper-browse-anchor="${application.groupId}"], `
+      + `[data-canonical-group-id="${application.groupId}"]`,
+  ).first()
+  const continuationRoot = page.locator(
+    `[data-paper-browse-anchor="${following.groupId}"], `
+      + `[data-canonical-group-id="${following.groupId}"]`,
+  ).first()
+  assert.equal(await applicationRoot.count(), 1, `${label} has one Application root`)
+  assert.equal(await continuationRoot.count(), 1, `${label} has one Continuation root`)
+  const applicationText = (await applicationRoot.innerText()).replaceAll(/\s/g, '')
+  const continuationText = (await continuationRoot.innerText()).replaceAll(/\s/g, '')
+  for (const { text } of [
+    ...application.chrome,
+    ...application.promptBlocks,
+    ...application.givenParts,
+  ]) {
+    assert.equal(
+      countTextOccurrences(applicationText, text.replaceAll(/\s/g, '')),
+      1,
+      `${label} renders source-bound Application text exactly once: ${text}`,
+    )
+  }
+  for (const text of [following.sectionText, following.promptText]) {
+    assert.equal(
+      countTextOccurrences(continuationText, text.replaceAll(/\s/g, '')),
+      1,
+      `${label} renders source-bound Continuation transition exactly once: ${text}`,
+    )
+  }
+  for (const [role, expectedCount] of [
+    ['part_heading', 1],
+    ['section_heading', 1],
+    ['prompt_line', application.promptParagraphCount],
+    ['notice_line', 1],
+    ['response_box', 1],
+    ['given_title', 1],
+  ]) {
+    assert.equal(
+      await applicationRoot.locator(
+        `[data-canonical-application-writing-rhythm-role="${role}"]`,
+      ).count(),
+      expectedCount,
+      `${label} exposes ${expectedCount} ${role} occurrence(s)`,
+    )
+  }
+  const promptBlockOrder = await applicationRoot.locator(
+    '[data-canonical-application-writing-rhythm-role="prompt_line"], '
+      + '[data-canonical-application-writing-rhythm-role="notice_line"]',
+  ).evaluateAll((elements) =>
+    elements.map((element) => ({
+      tagName: element.tagName,
+      blockId: element.getAttribute('data-canonical-block-id'),
+    })))
+  assert.deepEqual(
+    promptBlockOrder,
+    application.promptBlocks.map((block) => ({
+      tagName: 'P',
+      blockId: block.blockId,
+    })),
+    `${label} preserves the two source prompt paragraphs and notice as distinct ordered public blocks`,
+  )
+  for (const role of ['continuation_section', 'continuation_prompt']) {
+    assert.equal(
+      await continuationRoot.locator(
+        `[data-canonical-application-writing-rhythm-role="${role}"]`,
+      ).count(),
+      1,
+      `${label} exposes one ${role}`,
+    )
+  }
+  const promptLineCount = await applicationRoot.locator(
+    `[data-canonical-block-id="${application.promptBlocks[0].blockId}"]`,
+  ).evaluate((element) => {
+    const range = document.createRange()
+    range.selectNodeContents(element)
+    return range.getClientRects().length
+  })
+  assert.equal(
+    promptLineCount > 1,
+    true,
+    `${label} renders the exact source prompt as a wrapped public paragraph`,
+  )
+  const response = applicationRoot.locator(
+    `[data-canonical-response-slot-id="${application.response.responseSlotId}"]`,
+  )
+  const geometry = await response.evaluate((element) => {
+    const box = element.getBoundingClientRect()
+    const style = getComputedStyle(element)
+    return {
+      width: box.width,
+      height: box.height,
+      borderLeft: Number.parseFloat(style.borderLeftWidth),
+      borderRight: Number.parseFloat(style.borderRightWidth),
+      paddingLeft: Number.parseFloat(style.paddingLeft),
+      paddingRight: Number.parseFloat(style.paddingRight),
+    }
+  })
+  const expectedWidth = applicationWritingRhythm.responseGeometry.widthMm
+    / 25.4 * 96
+  const expectedHeight = applicationWritingRhythm.responseGeometry.heightMm
+    / 25.4 * 96
+  if (surface === 'screen') {
+    const promptWidth = await applicationRoot.locator(
+      `[data-canonical-block-id="${application.promptBlocks[0].blockId}"]`,
+    ).evaluate((element) => element.getBoundingClientRect().width)
+    const expectedScreenWidth = Math.min(expectedWidth, promptWidth)
+    assert.equal(
+      Math.abs(geometry.width - expectedScreenWidth) <= 1,
+      true,
+      `${label} preserves the standards-owned width with a usable-width cap: ${JSON.stringify({
+        geometry,
+        promptWidth,
+        expectedScreenWidth,
+      })}`,
+    )
+  } else {
+    assert.equal(
+      Math.abs(geometry.width - expectedWidth) <= 1,
+      true,
+      `${label} preserves 144 mm response width: ${JSON.stringify({
+        geometry,
+        expectedWidth,
+      })}`,
+    )
+  }
+  assert.equal(
+    Math.abs(geometry.height - expectedHeight) <= 1,
+    true,
+    `${label} preserves 65 mm response height: ${JSON.stringify({
+      geometry,
+      expectedHeight,
+    })}`,
+  )
+  const usableWidth = geometry.width
+    - geometry.borderLeft
+    - geometry.borderRight
+    - geometry.paddingLeft
+    - geometry.paddingRight
+  const expectedUsableWidth = geometry.width
+    - geometry.borderLeft
+    - geometry.borderRight
+    - (
+      2 * applicationWritingRhythm.responseGeometry.paddingMm
+      / 25.4 * 96
+    )
+  assert.equal(
+    Math.abs(usableWidth - expectedUsableWidth) <= 2,
+    true,
+    `${label} preserves the 3 mm response insets: ${JSON.stringify({
+      geometry,
+      usableWidth,
+      expectedUsableWidth,
+    })}`,
+  )
+  assert.equal(
+    await applicationRoot.locator(
+      '[data-writing-answer-supplement], .answer, .explanation',
+    ).count(),
+    0,
+    `${label} collapses the source-unapproved Teacher tail without leakage`,
+  )
+  if (surface === 'screen') {
+    const writingPageOrder = await page.locator('[data-pi-writing-page]')
+      .evaluateAll((pages, ids) => {
+        const [applicationId, continuationId] = ids
+        return pages.map((candidate) => ({
+          application: candidate.querySelector(
+            `[data-canonical-response-slot-id="${applicationId}"]`,
+          ) !== null,
+          continuation: candidate.querySelector(
+            `[data-canonical-instruction-id="${continuationId}"]`,
+          ) !== null,
+        }))
+      }, [
+        application.response.responseSlotId,
+        following.sectionInstructionId,
+      ])
+    const applicationPage = writingPageOrder.findIndex((entry) => entry.application)
+    const continuationPage = writingPageOrder.findIndex((entry) => entry.continuation)
+    assert.equal(applicationPage >= 0 && continuationPage > applicationPage, true)
+  } else {
+    const relation = await page.locator(
+      `[data-canonical-group-id="${application.groupId}"], `
+        + `[data-canonical-group-id="${following.groupId}"]`,
+    ).evaluateAll((elements) =>
+      elements.map((element) => element.getAttribute('data-canonical-group-id')))
+    assert.deepEqual(relation, [application.groupId, following.groupId])
+  }
+  return surface === 'screen'
+    ? [
+        'part_to_section',
+        'section_to_prompt',
+        'prompt_line_internal',
+        'prompt_wrapped_continuation',
+        'prompt_to_notice',
+        'notice_line_internal',
+        'notice_to_response',
+        'response_given_title_alignment',
+        'response_usable_width',
+        'response_usable_height',
+        'student_response_to_next_section_cross_page',
+        teacher
+          ? 'unauthorized_teacher_tail_collapse'
+          : 'student_supplement_absence_collapse',
+        'continuation_section_to_prompt',
+      ]
+    : [
+        'grammar_fill_boundary_to_part_same_page',
+        'part_to_section',
+        'section_to_prompt',
+        'prompt_line_internal',
+        'prompt_to_notice',
+        'notice_line_internal',
+        'notice_to_response',
+        'response_given_title_alignment',
+        'response_usable_width',
+        'response_usable_height',
+        'response_atomicity_same_page',
+        teacher
+          ? 'unauthorized_teacher_tail_collapse'
+          : 'student_supplement_absence_collapse',
+        ...(teacher ? [] : ['student_response_to_next_section_same_page']),
+        'continuation_section_to_prompt',
+      ]
+}
+
+function assertApplicationWritingPdfArtifact({
+  pdfPath,
+  consumption,
+  label,
+  teacher,
+  responseRegions,
+  pageBoxes,
+}) {
+  const source = applicationWritingEvidence.sourceOracle
+  const preceding = source.precedingGrammarFillBoundary
+  const application = source.applicationWriting
+  const following = source.followingContinuationWriting
+  const text = pdfText(pdfPath).replaceAll(/\s/g, '')
+  for (const { text: expected } of [
+    ...application.chrome,
+    ...application.promptBlocks,
+    ...application.givenParts,
+  ]) {
+    assert.equal(
+      countTextOccurrences(text, expected.replaceAll(/\s/g, '')),
+      1,
+      `${label} retains source-bound Application text exactly once: ${expected}`,
+    )
+  }
+  for (const expected of [following.sectionText, following.promptText]) {
+    assert.equal(
+      countTextOccurrences(text, expected.replaceAll(/\s/g, '')),
+      1,
+      `${label} retains source-bound Continuation transition exactly once: ${expected}`,
+    )
+  }
+  const applicationOffset = text.indexOf(
+    application.promptBlocks[0].text.replaceAll(/\s/g, ''),
+  )
+  const continuationOffset = text.indexOf(
+    following.sectionText.replaceAll(/\s/g, ''),
+  )
+  assert.equal(applicationOffset >= 0 && continuationOffset > applicationOffset, true)
+  const applicationInterval = text.slice(applicationOffset, continuationOffset)
+  assert.equal(applicationInterval.includes('【答案】'), false)
+  assert.equal(applicationInterval.includes('【解析】'), false)
+  const applicationResponse = responseRegions.find(
+    (region) => region.familyContractId === 'application-writing',
+  )
+  assert.ok(applicationResponse)
+  const titlePage = compactMarkerPages(
+    pdfPath,
+    pageBoxes.length,
+    application.givenParts[0].text,
+  )
+  assert.deepEqual(titlePage, [applicationResponse.responsePage])
+  const grammarBoundaryPage = compactMarkerPages(
+    pdfPath,
+    pageBoxes.length,
+    preceding.sectionText,
+  )
+  const applicationPartPage = compactMarkerPages(
+    pdfPath,
+    pageBoxes.length,
+    application.chrome[0].text,
+  )
+  assert.equal(
+    grammarBoundaryPage.length === 1
+      && applicationPartPage.length === 1
+      && grammarBoundaryPage[0] < applicationPartPage[0],
+    true,
+    `${label} preserves the source Grammar Fill to Application cross-page boundary`,
+  )
+  const applicationPromptPage = compactMarkerPages(
+    pdfPath,
+    pageBoxes.length,
+    application.promptBlocks[0].text,
+  )
+  assert.deepEqual(
+    applicationPromptPage,
+    [applicationResponse.responsePage],
+    `${label} keeps the atomic response region with its source prompt`,
+  )
+  const continuationPage = compactMarkerPages(
+    pdfPath,
+    pageBoxes.length,
+    following.sectionText,
+  )
+  const continuationPromptPage = compactMarkerPages(
+    pdfPath,
+    pageBoxes.length,
+    following.promptText,
+  )
+  assert.deepEqual(
+    continuationPromptPage,
+    continuationPage,
+    `${label} keeps the Continuation section heading with its source prompt`,
+  )
+  assert.equal(
+    continuationPage.length === 1
+      && (
+        teacher
+          ? continuationPage[0] > applicationResponse.responsePage
+          : continuationPage[0] === applicationResponse.responsePage
+      ),
+    true,
+    `${label} preserves the source-bound Application-to-Continuation page relation`,
+  )
+  return [
+    'grammar_fill_boundary_to_part_cross_page',
+    'prompt_wrapped_continuation',
+    'response_atomicity_same_page',
+    teacher
+      ? 'student_response_to_next_section_cross_page'
+      : 'student_response_to_next_section_same_page',
+    ...(teacher
+      ? [
+          'unauthorized_teacher_tail_collapse',
+          'continuation_section_to_prompt',
+        ]
+      : []),
+  ]
+}
+
+function assertApplicationWritingResponseMovePdfArtifact({
+  pdfPath,
+  responseRegions,
+  pageBoxes,
+  label,
+}) {
+  const source = applicationWritingEvidence.sourceOracle
+  const application = source.applicationWriting
+  const following = source.followingContinuationWriting
+  const applicationResponse = responseRegions.find(
+    (region) => region.familyContractId === 'application-writing',
+  )
+  assert.ok(applicationResponse)
+  const promptEndPage = compactMarkerPages(
+    pdfPath,
+    pageBoxes.length,
+    application.promptBlocks.at(-1).text,
+  )
+  assert.equal(
+    promptEndPage.length === 1
+      && applicationResponse.responsePage > promptEndPage[0],
+    true,
+    `${label} moves the complete response region after the source prompt leaves insufficient A4 space`,
+  )
+  assert.deepEqual(
+    compactMarkerPages(
+      pdfPath,
+      pageBoxes.length,
+      application.givenParts[0].text,
+    ),
+    [applicationResponse.responsePage],
+    `${label} moves the source-given title with the atomic response region`,
+  )
+  const continuationSectionPage = compactMarkerPages(
+    pdfPath,
+    pageBoxes.length,
+    following.sectionText,
+  )
+  assert.deepEqual(
+    compactMarkerPages(
+      pdfPath,
+      pageBoxes.length,
+      following.promptText,
+    ),
+    continuationSectionPage,
+    `${label} keeps the following Continuation heading and prompt together`,
+  )
+  assert.equal(
+    continuationSectionPage.length === 1
+      && continuationSectionPage[0] >= applicationResponse.responsePage,
+    true,
+    `${label} preserves Continuation order after the moved response region`,
+  )
+  return ['response_atomicity_next_page']
+}
+
+function assertApplicationWritingObservedCoverage(ledger) {
+  const expected = applicationWritingEvidence.coverageOracle
+  assert.deepEqual(
+    Object.keys(ledger).sort(),
+    Object.keys(expected.requiredBundles).sort(),
+    'Application Writing executes every required public artifact bundle',
+  )
+  for (const [bundleId, requiredEdgeIds] of Object.entries(
+    expected.requiredBundles,
+  )) {
+    assert.deepEqual(
+      [...new Set(ledger[bundleId])].sort(),
+      [...requiredEdgeIds].sort(),
+      `Application Writing ${bundleId} observes its exact required edge set`,
+    )
+  }
+  assert.deepEqual(
+    [...new Set(Object.values(ledger).flat())].sort(),
+    [...expected.requiredEdgeIds].sort(),
+    'Application Writing public Screen, Print HTML, and exact-A4 PDFs execute the complete source-authorized edge set',
+  )
+  return ledger
 }
 
 function listFiles(rootDir) {
@@ -10723,6 +11238,7 @@ async function renderSupportedArtifacts({
   const clozeCoverageObservations = []
   const grammarFillCoverageObservations = []
   const grammarFillPoisonRejections = []
+  const applicationWritingCoverageLedger = {}
   const asset = JSON.parse(readFileSync(
     path.join(paperAssetsDir, paperId, 'latest', 'paper-asset.json'),
     'utf8',
@@ -10883,6 +11399,13 @@ async function renderSupportedArtifacts({
         variant: 'plain-baseline',
         proof: plainGrammarFillObservation,
       })
+      applicationWritingCoverageLedger.screen_plain =
+        await assertApplicationWritingDomArtifact(
+          page,
+          consumers.screen,
+          'plain PaperSurface Application Writing',
+          { surface: 'screen', teacher: false },
+        )
       const screenClozeWrapped = clozeVariantConsumption(
         consumers.screen,
         {
@@ -11335,6 +11858,13 @@ async function renderSupportedArtifacts({
         variant: 'lecture-baseline',
         proof: lectureGrammarFillObservation,
       })
+      applicationWritingCoverageLedger.screen_lecture =
+        await assertApplicationWritingDomArtifact(
+          page,
+          consumers.screen,
+          'lecture PaperSurface Application Writing',
+          { surface: 'screen', teacher: true },
+        )
       const screenGrammarFillLectureWrapped =
         grammarFillVariantConsumption(
           screenClozeWrapped.consumption,
@@ -11734,6 +12264,13 @@ async function renderSupportedArtifacts({
         'Teacher Print HTML',
       )
       await page.setContent(printHtml.student, { waitUntil: 'load' })
+      applicationWritingCoverageLedger.student_print_html =
+        await assertApplicationWritingDomArtifact(
+          page,
+          consumers.print_pdf,
+          'Student Print HTML Application Writing',
+          { surface: 'printHtml', teacher: false },
+        )
       const studentPrintClozeObservation = await assertClozeDomGeometry(
         page,
         'Student Print HTML Cloze',
@@ -12176,6 +12713,13 @@ async function renderSupportedArtifacts({
         proof: wrappedStudentPrintGrammarFillObservation,
       })
       await page.setContent(printHtml.teacher, { waitUntil: 'load' })
+      applicationWritingCoverageLedger.teacher_print_html =
+        await assertApplicationWritingDomArtifact(
+          page,
+          consumers.print_pdf,
+          'Teacher Print HTML Application Writing',
+          { surface: 'printHtml', teacher: true },
+        )
       const teacherPrintClozeObservation = await assertClozeDomGeometry(
         page,
         'Teacher Print HTML Cloze',
@@ -12912,14 +13456,69 @@ async function renderSupportedArtifacts({
           pageBoxes,
           label,
         )
-        assertPdfWritingResponseRegions(
+        const writingResponseRegions = assertPdfWritingResponseRegions(
           pdfPath,
           consumers.print_pdf,
           outputDir,
           pageBoxes,
           label,
         )
+        applicationWritingCoverageLedger[
+          versionType === 'student' ? 'student_pdf' : 'teacher_pdf'
+        ] = assertApplicationWritingPdfArtifact({
+          pdfPath,
+          consumption: consumers.print_pdf,
+          label: `${label} Application Writing`,
+          teacher: versionType === 'teacher',
+          responseRegions: writingResponseRegions,
+          pageBoxes,
+        })
       }
+      const applicationResponseMoveHtml = printHtml.teacher.replace(
+        '</head>',
+        `<style>
+.canonical-application-prompt {
+  width: 160pt !important;
+  max-width: 160pt !important;
+}
+</style></head>`,
+      )
+      const applicationResponseMovePdfPath = path.join(
+        outputDir,
+        'print-teacher-application-response-move.pdf',
+      )
+      let applicationResponseMoveRender
+      try {
+        applicationResponseMoveRender = await renderPaginatedPaper(
+          applicationResponseMoveHtml,
+        )
+      } finally {
+        await closeChromiumPool()
+      }
+      writeFileSync(
+        applicationResponseMovePdfPath,
+        applicationResponseMoveRender.pdfBytes,
+      )
+      const applicationResponseMoveLabel =
+        'Teacher Chromium PDF Application Writing insufficient-space adversary'
+      const applicationResponseMovePageBoxes = assertPdfA4AndUnclipped(
+        applicationResponseMovePdfPath,
+        applicationResponseMoveLabel,
+      )
+      const applicationResponseMoveRegions = assertPdfWritingResponseRegions(
+        applicationResponseMovePdfPath,
+        consumers.print_pdf,
+        outputDir,
+        applicationResponseMovePageBoxes,
+        applicationResponseMoveLabel,
+      )
+      applicationWritingCoverageLedger.teacher_pdf_response_move =
+        assertApplicationWritingResponseMovePdfArtifact({
+          pdfPath: applicationResponseMovePdfPath,
+          responseRegions: applicationResponseMoveRegions,
+          pageBoxes: applicationResponseMovePageBoxes,
+          label: applicationResponseMoveLabel,
+        })
       const baselineStudentClozePdf = assertPdfClozeGeometry(
         pdfPaths.student,
         'Student Chromium PDF Cloze baseline',
@@ -13856,6 +14455,9 @@ async function renderSupportedArtifacts({
     const grammarFillCoverageLedger = assertGrammarFillObservedCoverage(
       grammarFillCoverageObservations,
     )
+    assertApplicationWritingObservedCoverage(
+      applicationWritingCoverageLedger,
+    )
     const artifactFiles = listFiles(outputDir)
     assert.equal(
       artifactFiles.some((file) => /\.(?:docx|xml)$/i.test(file)),
@@ -13882,6 +14484,7 @@ async function renderSupportedArtifacts({
       clozeCoverageLedger,
       grammarFillCoverageLedger,
       grammarFillPoisonRejections,
+      applicationWritingCoverageLedger,
       closeServices,
     }
   } finally {
@@ -13903,6 +14506,8 @@ const grammarFillPublicAdversaryOracle =
   assertGrammarFillPublicAdversaryOracle()
 const grammarFillReference = assertGrammarFillReferenceEvidence()
 const grammarFillCoverageOracle = assertGrammarFillCoverageOracle()
+const applicationWritingEvidence =
+  assertApplicationWritingReferenceEvidence()
 const rootDir = mkdtempSync(path.join(tmpdir(), 'eqb-canonical-import-pilot-'))
 const dbPath = path.join(rootDir, 'question-bank.sqlite')
 const paperAssetsDir = path.join(rootDir, 'paper-assets')
@@ -13920,7 +14525,7 @@ try {
   assert.equal(sourceDocument.kind, 'pdf')
   const requestPath = path.join(
     sourcePackageDir,
-    'canonical-evidence/canonical-import-request-v25.json',
+    'canonical-evidence/canonical-import-request-v26.json',
   )
   execFileSync(process.execPath, [
     path.join(
@@ -14305,6 +14910,28 @@ try {
       observedLedger: rendered.grammarFillCoverageLedger,
       failClosedPoisonRejections:
         rendered.grammarFillPoisonRejections,
+    },
+    applicationWritingPublicSeamCoverage: {
+      sourceOracles: [
+        'page-11-dimensionless-reference',
+        'original-question-pdf',
+        'versioned-paper-asset-json',
+        'official-answer-json',
+        'official-reference-pdf',
+        'application-source-capture',
+        'reviewed-application-transcription',
+      ],
+      producers: ['PaperBrowse', 'buildPrintHtml', 'renderPaginatedPaper'],
+      variants: [
+        'plain-and-lecture-source-bound-baseline',
+        'source-bound-wrapped-prompt',
+        'student-and-teacher-print-baseline',
+        'atomic-response-region',
+        'source-bound-insufficient-space-response-move',
+        'same-and-cross-page-family-transition',
+        'source-unapproved-teacher-tail-collapse',
+      ],
+      observedLedger: rendered.applicationWritingCoverageLedger,
     },
     renderedArtifactDigests,
     forbiddenOutputArtifacts,

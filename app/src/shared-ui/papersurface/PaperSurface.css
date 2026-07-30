@@ -293,12 +293,13 @@
 }
 
 .ps-canonical-application-prompt p {
-  margin: 0 0 8px;
+  margin: 0 0 var(--application-writing-prompt-gap, 0);
   text-align: justify;
   text-indent: var(--ps-passage-indent);
 }
 
 .ps-canonical-application-prompt p[data-canonical-application-notice] {
+  margin-top: var(--application-writing-notice-margin-top, 24px);
   text-align: left;
   text-indent: 0;
 }

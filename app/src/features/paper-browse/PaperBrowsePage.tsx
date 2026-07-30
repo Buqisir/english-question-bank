@@ -2004,6 +2004,13 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
                 ]
               : undefined
           }
+          applicationWritingPredecessorGroupId={
+            groupId === followingApplicationWritingGroupId
+              ? canonicalApplicationWritingGroupIds[
+                  canonicalApplicationWritingGroupIds.length - 1
+                ]
+              : undefined
+          }
         >
           {surfaceEl}
         </WritingPaperPage>
@@ -2177,6 +2184,29 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
         selection.familyContractId === 'grammar-fill'
         && selection.mode === 'canonical',
     )?.groupIds ?? []
+  const canonicalApplicationWritingGroupIds =
+    canonicalConsumption?.selections.find(
+      (selection) =>
+        selection.familyContractId === 'application-writing'
+        && selection.mode === 'canonical',
+    )?.groupIds ?? []
+  const lastApplicationWritingGroupBlockIndex = asset
+    ? asset.content.blocks.findLastIndex(
+        (block) =>
+          block.type === 'group'
+          && block.groupId
+            === canonicalApplicationWritingGroupIds[
+              canonicalApplicationWritingGroupIds.length - 1
+            ],
+      )
+    : -1
+  const followingApplicationWritingGroupId = (() => {
+    if (!asset || lastApplicationWritingGroupBlockIndex < 0) return undefined
+    const block = asset.content.blocks
+      .slice(lastApplicationWritingGroupBlockIndex + 1)
+      .find((candidate) => candidate.type === 'group')
+    return block?.type === 'group' ? block.groupId : undefined
+  })()
   const firstGrammarFillGroupBlockIndex = asset
     ? asset.content.blocks.findIndex(
         (block) =>
