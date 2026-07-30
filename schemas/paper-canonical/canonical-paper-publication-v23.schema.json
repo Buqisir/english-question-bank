@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "canonical-paper-publication-v23",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "paperId",
+    "sourceAssetVersion",
+    "sourceAssetDocumentId",
+    "sourceAssetDigest",
+    "sourceEvidence",
+    "authority",
+    "artifacts",
+    "publicationDigest"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "canonical-paper-publication-v23"
+    },
+    "paperId": {
+      "type": "string"
+    },
+    "sourceAssetVersion": {
+      "type": "number"
+    },
+    "sourceAssetDocumentId": {
+      "type": "string"
+    },
+    "sourceAssetDigest": {
+      "type": "string"
+    },
+    "sourceEvidence": {
+      "type": "array"
+    },
+    "authority": {
+      "type": "object"
+    },
+    "artifacts": {
+      "type": "array"
+    },
+    "publicationDigest": {
+      "type": "string"
+    },
+    "members": {
+      "properties": {
+        "normalizationReport": {
+          "properties": {
+            "schemaVersion": {
+              "const": "normalization-report-v23"
+            }
+          }
+        }
+      }
+    }
+  }
+}

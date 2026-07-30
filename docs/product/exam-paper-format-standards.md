@@ -4,7 +4,7 @@
 
 本文件是唯一的人类可读索引；当前 canonical 编译、校验、发布和受支持的
 Screen / Print-PDF consumer 只从
-[`standards/paper-canonical/manifest-v22.json`](../../standards/paper-canonical/manifest-v22.json)
+[`standards/paper-canonical/manifest-v23.json`](../../standards/paper-canonical/manifest-v23.json)
 解析一份 digest-closed 的权威闭包。这里不复制卷型题号、分值、题组
 cardinality、清洗条件或字体/物理排版数值，也不能被 caller 当作第二套配置。
 
@@ -25,7 +25,7 @@ Renderer Typography、其 schema 及纯验证入口。未知版本、缺件、di
 continuation 的 17em proxy 与 q55 producer page-break 身份绑定到真实
 Screen / Print HTML / PDF producer 输入，产物生成后禁止 verifier 注入或
 改写。迁移说明见
-[`manifest-v22-migration.md`](../../standards/paper-canonical/manifest-v22-migration.md)。
+[`manifest-v23-migration.md`](../../standards/paper-canonical/manifest-v23-migration.md)。
 此前 v21 以 `grammar-fill-rhythm-v2` 闭合 Grammar Fill
 Golden Geometry successor：它保留 v20 及 v1 measurement 的精确历史字节，
 并把 Question 63 纠正为与不可变 source/runtime 一致的 unprompted 身份；

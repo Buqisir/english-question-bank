@@ -4,7 +4,10 @@ import { readFileSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
+import { canonicalAuthorityRef } from '../shared/paper-canonical/authority.mjs'
+import { projectCanonicalConsumerGroup } from '../shared/paper-canonical/consumerProjection.mjs'
 import { grammarFillRhythm } from '../shared/paper-canonical/grammarFillRhythm.mjs'
+import { digestJson } from '../shared/paper-canonical/stable.mjs'
 
 const repositoryRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const qaRoot = path.join(
@@ -25,15 +28,117 @@ function readOracle(fileName) {
   }
 }
 
-const source = readOracle('20-grammar-fill-source-oracles-v2.json')
+function projectExplicitPromptFixture({ prompt, followingText }) {
+  const occurrence = {
+    kind: 'group',
+    groupId: 'group:grammar-fill:prompt-fixture',
+    familyContractId: 'grammar-fill',
+    numbering: [{ questionId: 'question:grammar-fill:1', number: 56 }],
+    blanks: [{
+      blankId: 'blank:grammar-fill:1',
+      questionId: 'question:grammar-fill:1',
+      prompt,
+    }],
+    content: {
+      blocks: [{
+        kind: 'paragraph',
+        nodeId: 'paragraph:grammar-fill:prompt-fixture',
+        inlines: [
+          {
+            kind: 'blank_ref',
+            nodeId: 'blank-ref:grammar-fill:1',
+            blankId: 'blank:grammar-fill:1',
+          },
+          {
+            kind: 'text',
+            nodeId: 'text:grammar-fill:following',
+            text: followingText,
+          },
+        ],
+      }],
+    },
+    media: [],
+    choices: { ownership: 'none' },
+  }
+  const consumption = {
+    disposition: 'ready',
+    paperId: 'paper:grammar-fill:prompt-fixture',
+    authorityRef: canonicalAuthorityRef,
+    selections: [{
+      mode: 'canonical',
+      familyContractId: 'grammar-fill',
+      groupIds: [occurrence.groupId],
+      projectedOccurrences: [occurrence],
+      projectedOccurrenceDigests: [{
+        groupId: occurrence.groupId,
+        digest: digestJson(occurrence),
+      }],
+    }],
+  }
+  return projectCanonicalConsumerGroup({
+    consumption,
+    familyContractId: 'grammar-fill',
+    groupId: occurrence.groupId,
+  })
+}
+
+const explicitPromptProjection = projectExplicitPromptFixture({
+  prompt: 'hold',
+  followingText: ' (hold) steady.',
+})
+assert.equal(explicitPromptProjection.paragraphs[0].nodes[0].hint, 'hold')
+assert.equal(explicitPromptProjection.paragraphs[0].nodes[1].text, ' steady.')
+const ordinaryParentheticalProjection = projectExplicitPromptFixture({
+  prompt: null,
+  followingText: ' (ordinary aside) remains source text.',
+})
+assert.equal(
+  Object.hasOwn(ordinaryParentheticalProjection.paragraphs[0].nodes[0], 'hint'),
+  false,
+  'an explicit prompt-free Blank never reclassifies following prose',
+)
+assert.equal(
+  ordinaryParentheticalProjection.paragraphs[0].nodes[1].text,
+  ' (ordinary aside) remains source text.',
+  'post-loader projection preserves ordinary parenthetical prose verbatim',
+)
+
+const source = readOracle('20-grammar-fill-source-oracles-v3.json')
 const publicAdversaries = readOracle(
-  '20-grammar-fill-public-adversaries-v1.json',
+  '20-grammar-fill-public-adversaries-v2.json',
 )
 const golden = readOracle(
   '20-grammar-fill-golden-geometry-reference-measurements-v2.json',
 )
 const coverage = readOracle(
-  '20-grammar-fill-observed-coverage-oracle-v2.json',
+  '20-grammar-fill-observed-coverage-oracle-v3.json',
+)
+
+function collectForbiddenGeometryFields(value, found = []) {
+  if (Array.isArray(value)) {
+    value.forEach((entry) => collectForbiddenGeometryFields(entry, found))
+    return found
+  }
+  if (!value || typeof value !== 'object') return found
+  for (const [key, entry] of Object.entries(value)) {
+    if (
+      /(?:width|height|gap|margin|inset|offset|coordinate).*(?:px|pt)$/iu
+        .test(key)
+    ) found.push(key)
+    collectForbiddenGeometryFields(entry, found)
+  }
+  return found
+}
+
+assert.deepEqual(
+  collectForbiddenGeometryFields(source.value),
+  [],
+  'successor source oracle contains no px/pt shadow geometry',
+)
+assert.deepEqual(
+  collectForbiddenGeometryFields(publicAdversaries.value),
+  [],
+  'successor public adversary contains no px/pt shadow geometry',
 )
 
 for (const binding of Object.values(source.value.sources)) {
@@ -58,6 +163,11 @@ const publicGeometryAuthorityPath = path.join(
 )
 const publicGeometryAuthority = JSON.parse(
   readFileSync(publicGeometryAuthorityPath, 'utf8'),
+)
+assert.deepEqual(
+  collectForbiddenGeometryFields(publicGeometryAuthority),
+  [],
+  'successor fixture authority contains no px/pt shadow geometry',
 )
 assert.equal(
   sha256(readFileSync(publicGeometryAuthorityPath)),
@@ -127,6 +237,40 @@ assert.equal(
 assert.equal(
   grammarFillRhythm.publicArtifactOracle.paperId,
   source.value.paperId,
+)
+assert.equal(
+  grammarFillRhythm.publicArtifactOracle.proofClosure.sourceOracle.path,
+  path.relative(repositoryRoot, source.path),
+)
+assert.equal(
+  grammarFillRhythm.publicArtifactOracle.proofClosure.sourceOracle.sha256,
+  sha256(source.bytes),
+)
+assert.equal(
+  grammarFillRhythm.publicArtifactOracle.proofClosure.publicAdversaries.path,
+  path.relative(repositoryRoot, publicAdversaries.path),
+)
+assert.equal(
+  grammarFillRhythm.publicArtifactOracle.proofClosure.publicAdversaries.sha256,
+  sha256(publicAdversaries.bytes),
+)
+assert.equal(
+  grammarFillRhythm.publicArtifactOracle.proofClosure
+    .publicGeometryFixtures.path,
+  path.relative(repositoryRoot, publicGeometryAuthorityPath),
+)
+assert.equal(
+  grammarFillRhythm.publicArtifactOracle.proofClosure
+    .publicGeometryFixtures.sha256,
+  sha256(readFileSync(publicGeometryAuthorityPath)),
+)
+assert.equal(
+  grammarFillRhythm.publicArtifactOracle.proofClosure.observedCoverage.path,
+  path.relative(repositoryRoot, coverage.path),
+)
+assert.equal(
+  grammarFillRhythm.publicArtifactOracle.proofClosure.observedCoverage.sha256,
+  sha256(coverage.bytes),
 )
 assert.deepEqual(
   grammarFillRhythm.publicArtifactOracle.grammarFill,

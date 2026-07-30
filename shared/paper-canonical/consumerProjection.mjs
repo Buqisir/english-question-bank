@@ -884,6 +884,7 @@ export function projectCanonicalConsumerGroup(input) {
 
   const numberByQuestionId = new Map()
   const questionIdByBlankId = new Map()
+  const promptByBlankId = new Map()
   const blankQuestionIds = new Set()
   for (const assignment of occurrence.numbering) {
     if (
@@ -901,10 +902,28 @@ export function projectCanonicalConsumerGroup(input) {
       || !numberByQuestionId.has(blank.questionId)
       || questionIdByBlankId.has(blank.blankId)
       || blankQuestionIds.has(blank.questionId)
+      || (
+        familyContractId === 'grammar-fill'
+        && Number(input.consumption?.authorityRef?.manifestVersion) >= 23
+        && (
+          !Object.hasOwn(blank, 'prompt')
+          || (
+            blank.prompt !== null
+            && (
+              typeof blank.prompt !== 'string'
+              || blank.prompt.length === 0
+              || /[()\r\n]/u.test(blank.prompt)
+            )
+          )
+        )
+      )
     ) {
       throw rejected(`Canonical occurrence ${groupId} has invalid Blank joins`)
     }
     questionIdByBlankId.set(blank.blankId, blank.questionId)
+    if (familyContractId === 'grammar-fill' && Object.hasOwn(blank, 'prompt')) {
+      promptByBlankId.set(blank.blankId, blank.prompt)
+    }
     blankQuestionIds.add(blank.questionId)
   }
   if (
@@ -919,21 +938,28 @@ export function projectCanonicalConsumerGroup(input) {
     if (block?.kind !== 'paragraph' || typeof block.nodeId !== 'string' || !Array.isArray(block.inlines)) {
       throw rejected(`Canonical occurrence ${groupId} contains an unsupported content block`)
     }
-    const grammarPromptByBlankIndex = new Map()
     const grammarFollowingTextByIndex = new Map()
     if (familyContractId === 'grammar-fill') {
       block.inlines.forEach((inline, index) => {
         if (inline?.kind !== 'blank_ref') return
+        const prompt = promptByBlankId.get(inline.blankId)
+        if (prompt === null || prompt === undefined) return
         const following = block.inlines[index + 1]
-        if (following?.kind !== 'text' || typeof following.text !== 'string') return
-        const prompt = following.text.match(
-          /^ \(([^()\r\n]+)\)(?=\s|[.,;:!?])/u,
-        )
-        if (!prompt) return
-        grammarPromptByBlankIndex.set(index, prompt[1])
+        const sourcePrefix = ` (${prompt})`
+        const boundary = following?.text?.slice(sourcePrefix.length, sourcePrefix.length + 1)
+        if (
+          following?.kind !== 'text'
+          || typeof following.text !== 'string'
+          || !following.text.startsWith(sourcePrefix)
+          || (boundary !== '' && !/[\s.,;:!?]/u.test(boundary))
+        ) {
+          throw rejected(
+            `Canonical occurrence ${groupId} prompt identity disagrees with source text`,
+          )
+        }
         grammarFollowingTextByIndex.set(
           index + 1,
-          following.text.slice(prompt[0].length),
+          following.text.slice(sourcePrefix.length),
         )
       })
     }
@@ -959,8 +985,8 @@ export function projectCanonicalConsumerGroup(input) {
           questionId,
           questionNo: numberByQuestionId.get(questionId),
           ...(
-            grammarPromptByBlankIndex.has(inlineIndex)
-              ? { hint: grammarPromptByBlankIndex.get(inlineIndex) }
+            promptByBlankId.get(inline.blankId) != null
+              ? { hint: promptByBlankId.get(inline.blankId) }
               : {}
           ),
         }

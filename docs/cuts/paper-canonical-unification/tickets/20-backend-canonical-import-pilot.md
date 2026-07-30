@@ -662,3 +662,40 @@ HEAD-scoped artifact path are reported in the independent-review handoff. No
 Owner QA provisioning, out-of-scope writing/listening implementation,
 Ticket 21, production/R2, unrelated lint, or generated-DOCX work was
 performed.
+
+Grammar Fill Golden Geometry third focused-review Must Fix closure
+(2026-07-30):
+The focused re-review of the Manifest v22 closure found four remaining
+authority-boundary defects: prompt identity was inferred from rendered prose;
+the successor source oracle retained a renderer-shadow point width; semantic
+authority did not require the exact public-geometry fixture; and fixture
+selection was not bound to the ready Consumption Plan plus the surface's
+Consumer Contract. Manifest v1-v22 and every v1/v2 Grammar Fill artifact
+remain byte-for-byte unchanged.
+
+Manifest v23 is the immutable successor closure. Its versioned compiler
+projection carries each Grammar Fill Blank's exact source-backed prompt as a
+string or `null`; the shared post-loader consumer strips only that explicit
+prompt and never interprets an ordinary parenthetical phrase as prompt
+identity. The new source oracle v3, public adversary v2, observed-coverage
+oracle v3, Grammar Fill rhythm v3, and public-geometry fixture v2 form one
+digest-closed proof chain without px/pt shadow geometry. Conformance attacks
+inject both `wrappedLineWidthPt` and `wrappedLineWidthPx` and fail closed.
+
+Manifest v23 semantic validation requires the exact fixture descriptor,
+schema, registered schema, and artifact. A coordinated-removal regression
+deletes all four together and still fails with the required-fixture error.
+Screen v23 and Print/PDF v24 resolve a geometry variant only from a ready
+Consumption Plan whose canonical authority and surface Consumer Contract
+exactly match the successor fixture; absent, historical, and mismatched Plans
+reject before a fixture-backed public artifact is produced.
+
+Focused foundation, conformance, publication, admission, recovery, Grammar
+Fill surface and Cloze/Grammar consumption, Continuation regression,
+generated-DOCX retirement, app typecheck/build, ordinary backend pilot,
+official `--actual-artifacts`, and `git diff --check` pass. The real public
+seam covers plain/lecture Screen, Student/Teacher Print HTML, and
+Student/Teacher direct Chromium PDF, including the three invalid-Plan attacks.
+Full `pnpm -C app run verify:all` reports 115 PASS / 1 declared off-repo SKIP /
+0 FAIL. No Owner QA provisioning, Reading/Seven Choices/Cloze implementation,
+Ticket 21, production/R2, or generated-DOCX action was performed.

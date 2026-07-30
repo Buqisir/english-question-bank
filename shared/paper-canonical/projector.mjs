@@ -401,6 +401,9 @@ export function projectCanonicalPaper(canonicalPackage) {
           blanks: group.blankRefs.map((blank, index) => ({
             blankId: blank.blankId,
             questionId: group.questionRefs[index]?.questionId,
+            ...(Object.hasOwn(blank, 'prompt')
+              ? { prompt: blank.prompt }
+              : {}),
           })),
           scoringRuleRef: slot.slotId,
           content: cloneJson(group.content),

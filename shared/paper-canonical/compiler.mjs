@@ -1129,6 +1129,18 @@ function adaptReferenceFamilies(parsed, documents, diagnostics) {
       family: spec.familyId,
       questionIds: [...group.questionIds],
       blankIds: [...group.blankIds],
+      ...(
+        spec.familyId === 'grammar-fill'
+          ? {
+              blankPrompts: Object.fromEntries(
+                group.blankIds.map((blankId) => [
+                  blankId,
+                  paper.content?.blanks?.[blankId]?.prompt ?? null,
+                ]),
+              ),
+            }
+          : {}
+      ),
       sourceSpanId,
       content,
       media: [],
@@ -1753,6 +1765,33 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
   const sourceSpanIds = new Set(capture.sourceSpans.map((span) => span.sourceSpanId))
   if (!sourceSpanIds.has(sourceGroup.sourceSpanId)) diagnostics.push(diagnostic('GROUP_SOURCE_UNRESOLVED', 'incomplete_source', '$.groups', 'Group does not resolve to a captured source span'))
   if (new Set(sourceGroup.questionIds).size !== sourceGroup.questionIds.length || new Set(sourceGroup.blankIds).size !== sourceGroup.blankIds.length) diagnostics.push(diagnostic('GROUP_MEMBER_DUPLICATE', 'needs_review', '$.groups', 'Question and Blank identities are unique'))
+  const grammarFillPrompts = family.familyContractId === 'grammar-fill'
+    ? Object.fromEntries(
+        sourceGroup.blankIds.map((blankId) => [
+          blankId,
+          sourceGroup.blankPrompts?.[blankId] ?? null,
+        ]),
+      )
+    : null
+  if (
+    grammarFillPrompts
+    && Object.values(grammarFillPrompts).some(
+      (prompt) =>
+        prompt !== null
+        && (
+          typeof prompt !== 'string'
+          || prompt.length === 0
+          || /[()\r\n]/u.test(prompt)
+        ),
+    )
+  ) {
+    diagnostics.push(diagnostic(
+      'GRAMMAR_FILL_PROMPT_IDENTITY_INVALID',
+      'needs_review',
+      '$.groups.blankPrompts',
+      'Grammar Fill prompt identity must be an explicit source string or null',
+    ))
+  }
   const media = cloneJson(sourceGroup.media || []).map((item) => ({
     ...item,
     sourceArtifactRef: {
@@ -1853,7 +1892,10 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
       familyContractDigest: digestJson(family),
     },
     questionRefs: sourceGroup.questionIds.map((questionId) => ({ questionId })),
-    blankRefs: sourceGroup.blankIds.map((blankId) => ({ blankId })),
+    blankRefs: sourceGroup.blankIds.map((blankId) => ({
+      blankId,
+      ...(grammarFillPrompts ? { prompt: grammarFillPrompts[blankId] } : {}),
+    })),
     content,
     media,
     variant,

@@ -1,0 +1,210 @@
+{
+  "authority": {
+    "manifestId": "paper-canonical",
+    "manifestVersion": "23",
+    "manifestDigest": "sha256:f5cc5987192ab498cf7c5b3a77e8b9b0c8bd2cbb1ab712897e4e14fb771ae75c"
+  },
+  "evidence": {
+    "documents": [
+      {
+        "inputKey": "canonical_source_envelope",
+        "roles": [
+          "operator_assertions"
+        ],
+        "declared": {
+          "mediaType": "application/vnd.eqb.canonical-fixture+json",
+          "originalName": "canonical-source-envelope.json"
+        },
+        "path": "01-canonical-source-envelope.json"
+      },
+      {
+        "inputKey": "paper_asset",
+        "roles": [
+          "question_source"
+        ],
+        "declared": {
+          "mediaType": "application/json",
+          "originalName": "paper-asset.json"
+        },
+        "path": "04-paper_asset.json"
+      },
+      {
+        "inputKey": "official_answers",
+        "roles": [
+          "official_answer_source"
+        ],
+        "declared": {
+          "mediaType": "application/json",
+          "originalName": "answer-key.json"
+        },
+        "path": "05-official_answers.json"
+      },
+      {
+        "inputKey": "reading_structure",
+        "roles": [
+          "structured_source"
+        ],
+        "declared": {
+          "mediaType": "application/json",
+          "originalName": "reading-source-capture-v1.json"
+        },
+        "path": "07-reading-source-capture.json"
+      },
+      {
+        "inputKey": "table_visual_proof",
+        "roles": [
+          "source_provenance"
+        ],
+        "declared": {
+          "mediaType": "image/png",
+          "originalName": "reading-a-table-1.png"
+        },
+        "path": "08-reading-a-table-1.png"
+      },
+      {
+        "inputKey": "application_writing_capture",
+        "roles": [
+          "structured_source",
+          "source_provenance"
+        ],
+        "declared": {
+          "mediaType": "application/vnd.eqb.application-writing-source-capture+json",
+          "originalName": "application-writing-source-capture.json"
+        },
+        "path": "10-application-writing-capture.json"
+      },
+      {
+        "inputKey": "application_writing_transcription",
+        "roles": [
+          "structured_source",
+          "source_provenance"
+        ],
+        "declared": {
+          "mediaType": "application/vnd.eqb.application-writing-source-transcription+json",
+          "originalName": "application-writing-source-transcription.json"
+        },
+        "path": "11-application-writing-transcription.json"
+      },
+      {
+        "inputKey": "continuation_writing_capture",
+        "roles": [
+          "structured_source",
+          "source_provenance"
+        ],
+        "declared": {
+          "mediaType": "application/vnd.eqb.continuation-writing-source-capture+json",
+          "originalName": "continuation-writing-source-capture.json"
+        },
+        "path": "12-continuation-writing-capture.json"
+      },
+      {
+        "inputKey": "continuation_writing_transcription",
+        "roles": [
+          "structured_source",
+          "source_provenance"
+        ],
+        "declared": {
+          "mediaType": "application/vnd.eqb.continuation-writing-source-transcription+json",
+          "originalName": "continuation-writing-source-transcription.json"
+        },
+        "path": "13-continuation-writing-transcription.json"
+      },
+      {
+        "inputKey": "continuation_writing_instruction_evidence",
+        "roles": [
+          "structured_source",
+          "source_provenance"
+        ],
+        "declared": {
+          "mediaType": "application/vnd.eqb.profile-writing-source-evidence+json",
+          "originalName": "continuation-writing-instruction-evidence.json"
+        },
+        "path": "03-continuation_writing_instruction_evidence.json"
+      },
+      {
+        "inputKey": "source_provenance",
+        "roles": [
+          "source_provenance"
+        ],
+        "declared": {
+          "mediaType": "application/json",
+          "originalName": "import-meta.json"
+        },
+        "path": "09-source-provenance.json"
+      },
+      {
+        "inputKey": "original_question_source",
+        "roles": [
+          "question_source",
+          "source_provenance"
+        ],
+        "declared": {
+          "mediaType": "application/pdf",
+          "originalName": "paper.pdf"
+        },
+        "path": "02-original-question-source.pdf"
+      },
+      {
+        "inputKey": "listening_answer_source",
+        "roles": [
+          "official_answer_source",
+          "transcript_source",
+          "source_provenance"
+        ],
+        "declared": {
+          "mediaType": "application/pdf",
+          "originalName": "answers.pdf"
+        },
+        "path": "06-source_answers_pdf.pdf"
+      },
+      {
+        "inputKey": "listening_questions",
+        "roles": [
+          "structured_source",
+          "question_source"
+        ],
+        "declared": {
+          "mediaType": "application/vnd.eqb.listening-questions+json",
+          "originalName": "questions.json"
+        },
+        "path": "14-listening-questions.json"
+      },
+      {
+        "inputKey": "listening_answers",
+        "roles": [
+          "structured_source",
+          "official_answer_source"
+        ],
+        "declared": {
+          "mediaType": "application/vnd.eqb.listening-answers+json",
+          "originalName": "answers.json"
+        },
+        "path": "15-listening-answers.json"
+      },
+      {
+        "inputKey": "listening_transcript",
+        "roles": [
+          "structured_source",
+          "transcript_source"
+        ],
+        "declared": {
+          "mediaType": "application/vnd.eqb.listening-transcript+json",
+          "originalName": "transcript.json"
+        },
+        "path": "16-listening-transcript.json"
+      },
+      {
+        "inputKey": "listening_inventory",
+        "roles": [
+          "operator_assertions",
+          "source_provenance"
+        ],
+        "declared": {
+          "mediaType": "application/vnd.eqb.listening-source-inventory+json",
+          "originalName": "listening-source-inventory.json"
+        },
+        "path": "17-listening-source-inventory.json"
+      }
+    ]
+  }
+}

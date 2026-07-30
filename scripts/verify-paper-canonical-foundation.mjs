@@ -4,12 +4,14 @@ import assert from 'node:assert/strict'
 import manifestV1 from '../standards/paper-canonical/manifest-v1.json' with { type: 'json' }
 import manifestV13 from '../standards/paper-canonical/manifest-v13.json' with { type: 'json' }
 import clozeRhythmV2Conformance from '../test-fixtures/paper-canonical/cloze-rhythm-v2-conformance.json' with { type: 'json' }
-import grammarFillRhythmV2Conformance from '../test-fixtures/paper-canonical/grammar-fill-rhythm-v2-conformance.json' with { type: 'json' }
-import grammarFillPublicGeometryFixturesV1Conformance from '../test-fixtures/paper-canonical/grammar-fill-public-geometry-fixtures-v1-conformance.json' with { type: 'json' }
+import grammarFillRhythmV3Conformance from '../test-fixtures/paper-canonical/grammar-fill-rhythm-v3-conformance.json' with { type: 'json' }
+import grammarFillPublicGeometryFixturesV2Conformance from '../test-fixtures/paper-canonical/grammar-fill-public-geometry-fixtures-v2-conformance.json' with { type: 'json' }
 import sevenChoicesRhythmV3Conformance from '../test-fixtures/paper-canonical/seven-choices-rhythm-v3-conformance.json' with { type: 'json' }
 
 import { canonicalAuthorityRef, compileCanonicalPaper, stableStringify, validateExactTransformationRecords } from '../shared/paper-canonical/compiler.mjs'
 import { resolveCanonicalAuthority, slotsForProfile, validateAuthorityClosure } from '../shared/paper-canonical/authority.mjs'
+import { consumerContractRefs } from '../shared/paper-canonical/consumers.mjs'
+import { resolveGrammarFillPublicGeometryFixture } from '../shared/paper-canonical/grammarFillPublicGeometryFixtures.mjs'
 import { projectCanonicalPaper } from '../shared/paper-canonical/projector.mjs'
 import { digestJson, sha256 } from '../shared/paper-canonical/stable.mjs'
 import { makeReadyCanonicalFixture } from '../test-fixtures/paper-canonical/foundationFixture.mjs'
@@ -167,20 +169,20 @@ for (const leafPath of visitAuthorityLeaves(clozeRhythmV2)) {
     },
   )
 }
-const grammarFillRhythmV2 =
+const grammarFillRhythmV3 =
   closure.artifacts['renderer-grammar-fill-rhythm']
 assert.deepEqual(
   {
-    schemaVersion: grammarFillRhythmV2.schemaVersion,
-    id: grammarFillRhythmV2.id,
-    version: grammarFillRhythmV2.version,
+    schemaVersion: grammarFillRhythmV3.schemaVersion,
+    id: grammarFillRhythmV3.id,
+    version: grammarFillRhythmV3.version,
   },
-  grammarFillRhythmV2Conformance.authority,
+  grammarFillRhythmV3Conformance.authority,
 )
-for (const attack of grammarFillRhythmV2Conformance.semanticAttacks) {
+for (const attack of grammarFillRhythmV3Conformance.semanticAttacks) {
   assertRendererAuthorityMutationRejected(
     'renderer-grammar-fill-rhythm',
-    grammarFillRhythmV2Conformance,
+    grammarFillRhythmV3Conformance,
     attack.caseId,
     (artifact) => {
       let target = artifact
@@ -198,10 +200,10 @@ for (const attack of grammarFillRhythmV2Conformance.semanticAttacks) {
     },
   )
 }
-for (const fieldPath of visitAuthorityFields(grammarFillRhythmV2)) {
+for (const fieldPath of visitAuthorityFields(grammarFillRhythmV3)) {
   assertRendererAuthorityMutationRejected(
     'renderer-grammar-fill-rhythm',
-    grammarFillRhythmV2Conformance,
+    grammarFillRhythmV3Conformance,
     `grammar-fill-complete-field-closure:${fieldPath.join('.')}`,
     (artifact) => {
       let target = artifact
@@ -210,10 +212,10 @@ for (const fieldPath of visitAuthorityFields(grammarFillRhythmV2)) {
     },
   )
 }
-for (const leafPath of visitAuthorityLeaves(grammarFillRhythmV2)) {
+for (const leafPath of visitAuthorityLeaves(grammarFillRhythmV3)) {
   assertRendererAuthorityMutationRejected(
     'renderer-grammar-fill-rhythm',
-    grammarFillRhythmV2Conformance,
+    grammarFillRhythmV3Conformance,
     `grammar-fill-complete-value-closure:${leafPath.join('.')}`,
     (artifact) => {
       let target = artifact
@@ -228,25 +230,124 @@ for (const leafPath of visitAuthorityLeaves(grammarFillRhythmV2)) {
     },
   )
 }
-const grammarFillPublicGeometryFixturesV1 =
+const grammarFillPublicGeometryFixturesV2 =
   closure.artifacts['renderer-grammar-fill-public-geometry-fixtures']
 assert.equal(
-  grammarFillPublicGeometryFixturesV1.schemaVersion,
-  'grammar-fill-public-geometry-fixtures-v1',
+  grammarFillPublicGeometryFixturesV2.schemaVersion,
+  'grammar-fill-public-geometry-fixtures-v2',
 )
 assert.deepEqual(
-  Object.keys(grammarFillPublicGeometryFixturesV1.variants),
-  grammarFillPublicGeometryFixturesV1Conformance.positive.variantIds,
+  Object.keys(grammarFillPublicGeometryFixturesV2.variants),
+  grammarFillPublicGeometryFixturesV2Conformance.positive.variantIds,
 )
 assertRendererAuthorityMutationRejected(
   'renderer-grammar-fill-public-geometry-fixtures',
-  grammarFillPublicGeometryFixturesV1Conformance,
+  grammarFillPublicGeometryFixturesV2Conformance,
   'grammar-fill-public-geometry-fixtures-complete-value-closure',
   (artifact) => {
     artifact.variants['screen-wrapped-line']
       .paragraphWidths[0].usableWidthEm += 999
   },
 )
+for (const attack of grammarFillPublicGeometryFixturesV2Conformance
+  .shadowGeometryAttacks) {
+  assertRendererAuthorityMutationRejected(
+    'renderer-grammar-fill-public-geometry-fixtures',
+    grammarFillPublicGeometryFixturesV2Conformance,
+    attack.caseId,
+    (artifact) => {
+      artifact.variants['screen-wrapped-line'][attack.fieldName] =
+        attack.invalidValue
+    },
+  )
+}
+const fixtureRemovalManifest = structuredClone(closure.manifest)
+fixtureRemovalManifest.artifacts = fixtureRemovalManifest.artifacts.filter(
+  (descriptor) =>
+    descriptor.id
+      !== 'renderer-grammar-fill-public-geometry-fixtures',
+)
+fixtureRemovalManifest.schemas = fixtureRemovalManifest.schemas.filter(
+  (descriptor) =>
+    descriptor.id !== 'grammar-fill-public-geometry-fixtures-v2',
+)
+const fixtureRemovalArtifacts = structuredClone(closure.artifacts)
+delete fixtureRemovalArtifacts[
+  'renderer-grammar-fill-public-geometry-fixtures'
+]
+const fixtureRemovalSchemas = structuredClone(closure.schemas)
+delete fixtureRemovalSchemas['grammar-fill-public-geometry-fixtures-v2']
+const fixtureRemovalValidation = validateAuthorityClosure({
+  manifest: fixtureRemovalManifest,
+  artifacts: fixtureRemovalArtifacts,
+  schemas: fixtureRemovalSchemas,
+})
+assert.equal(
+  fixtureRemovalValidation.ok,
+  false,
+  'coordinated fixture descriptor/schema/artifact removal fails closed',
+)
+assert.equal(
+  fixtureRemovalValidation.issues.some(
+    (issue) =>
+      issue.code
+        === 'RENDERER_GRAMMAR_FILL_PUBLIC_GEOMETRY_FIXTURES_MISSING',
+  ),
+  true,
+  'coordinated removal reports the exact missing fixture authority',
+)
+const screenFixtureConsumption = {
+  disposition: 'ready',
+  paperId: 'paper-2026-i',
+  authorityRef: canonicalAuthorityRef,
+  consumerContractRef: consumerContractRefs.screen,
+  selections: [{
+    mode: 'canonical',
+    familyContractId: 'grammar-fill',
+    groupIds: ['group-2026-i-grammar-fill'],
+  }],
+}
+assert.equal(
+  resolveGrammarFillPublicGeometryFixture(
+    'screen-wrapped-line',
+    'screen',
+    screenFixtureConsumption,
+  ).groupId,
+  'group-2026-i-grammar-fill',
+)
+for (const [caseId, consumption] of [
+  ['absent-plan', null],
+  [
+    'historical-plan',
+    {
+      ...screenFixtureConsumption,
+      authorityRef: {
+        manifestId: manifestV13.manifestId,
+        manifestVersion: manifestV13.version,
+        manifestDigest: digestJson(manifestV13),
+      },
+    },
+  ],
+  [
+    'mismatched-consumer',
+    {
+      ...screenFixtureConsumption,
+      consumerContractRef: consumerContractRefs.print_pdf,
+    },
+  ],
+]) {
+  assert.throws(
+    () => resolveGrammarFillPublicGeometryFixture(
+      'screen-wrapped-line',
+      'screen',
+      consumption,
+    ),
+    (error) =>
+      error?.code
+        === 'CANONICAL_GRAMMAR_FILL_GEOMETRY_FIXTURE_REJECTED',
+    caseId,
+  )
+}
 const sevenChoicesRhythmV3 =
   closure.artifacts['renderer-seven-choices-rhythm']
 assert.deepEqual(

@@ -673,6 +673,7 @@ export function buildPrintHtml({
     resolveGrammarFillPublicGeometryFixture(
       grammarFillGeometryVariantId,
       grammarFillGeometrySurface,
+      canonicalConsumption,
     )
   const grammarFillGeometryFixtureCss =
     grammarFillGeometryFixture == null

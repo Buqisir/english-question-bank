@@ -1,7 +1,7 @@
 export type GrammarFillRhythm = Readonly<{
-  schemaVersion: 'grammar-fill-rhythm-v2'
+  schemaVersion: 'grammar-fill-rhythm-v3'
   id: 'grammar-fill-rhythm'
-  version: '2'
+  version: '3'
   adjacencyGraph: ReadonlyArray<Readonly<Record<string, unknown>>>
   targets: Readonly<Record<string, Readonly<Record<string, number>>>>
   blankGeometry: Readonly<Record<string, string | number | boolean>>
@@ -35,6 +35,14 @@ export type GrammarFillRhythm = Readonly<{
       blankIds: ReadonlyArray<string>
       prompts: Readonly<Record<string, string | null>>
       answers: Readonly<Record<string, string>>
+    }>
+    proofClosure: Readonly<{
+      sourceOracle: Readonly<{ path: string; sha256: string }>
+      publicAdversaries: Readonly<{ path: string; sha256: string }>
+      publicGeometryFixtures: Readonly<{ path: string; sha256: string }>
+      observedCoverage: Readonly<{ path: string; sha256: string }>
+      promptProjection:
+        'explicit_blank_ref_prompt_identity_string_or_null'
     }>
   }>
 }>

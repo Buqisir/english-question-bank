@@ -493,11 +493,22 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     onBackToWorkbench,
     shellNav,
   } = props
+  const [asset, setAsset] = useState<PaperAssetV1 | null>(null)
+  const [assetBase, setAssetBase] = useState<string | null>(null)
+  const [canonicalConsumption, setCanonicalConsumption] =
+    useState<WholePaperConsumption | null>(null)
+  const [groupModels, setGroupModels] = useState<Record<string, GroupModel>>({})
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
   const grammarFillGeometryFixture =
-    resolveGrammarFillPublicGeometryFixture(
-      grammarFillGeometryVariantId,
-      'screen',
-    )
+    grammarFillGeometryVariantId == null
+      || (loading && canonicalConsumption == null)
+      ? null
+      : resolveGrammarFillPublicGeometryFixture(
+          grammarFillGeometryVariantId,
+          'screen',
+          canonicalConsumption,
+        )
   const grammarFillGeometryFixtureCss =
     grammarFillGeometryFixture?.paragraphWidths.map(
       ({ paragraphId, usableWidthEm }) =>
@@ -506,14 +517,6 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
         + `width:${usableWidthEm}em!important;`
         + `max-width:${usableWidthEm}em!important;}`,
     ).join('\n') ?? ''
-
-  const [asset, setAsset] = useState<PaperAssetV1 | null>(null)
-  const [assetBase, setAssetBase] = useState<string | null>(null)
-  const [canonicalConsumption, setCanonicalConsumption] =
-    useState<WholePaperConsumption | null>(null)
-  const [groupModels, setGroupModels] = useState<Record<string, GroupModel>>({})
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
   const [activeAnchor, setActiveAnchor] = useState<string | null>(null)
   // 讲评态开关 — 挑题态(默认收起)/讲评态(展开)。刀 3: 入口带态的 `lecture`
   // prop（URL 的 lecture=1）种下初始值——lazy initializer 而非

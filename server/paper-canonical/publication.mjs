@@ -22,9 +22,10 @@ import {
 import { projectCanonicalPaper } from '../../shared/paper-canonical/projector.mjs'
 import { digestJson, sha256, stableStringify, withoutKey } from '../../shared/paper-canonical/stable.mjs'
 
-const publicationFileName = 'canonical-paper-publication-v22.json'
+const publicationFileName = 'canonical-paper-publication-v23.json'
 const publicationFileNames = [
   publicationFileName,
+  'canonical-paper-publication-v22.json',
   'canonical-paper-publication-v21.json',
   'canonical-paper-publication-v20.json',
   'canonical-paper-publication-v19.json',
@@ -1420,6 +1421,11 @@ function readyConsumption(
     paperId: request.paperId,
     sourceAssetVersion: ref.sourceAssetVersion,
     publicationDigest: manifest.publicationDigest,
+    ...(
+      Number(manifest.authority.manifestVersion) >= 23
+        ? { consumerContractRef: structuredClone(request.consumerContract) }
+        : {}
+    ),
     ...(
       // Preserve the byte-pinned pre-v18 Consumption Plan shape.
       Number(manifest.authority.manifestVersion) >= 18

@@ -1,0 +1,85 @@
+{
+  "schemaVersion": "grammar-fill-public-geometry-fixtures-v2",
+  "id": "grammar-fill-public-geometry-fixtures",
+  "version": "2",
+  "owner": "renderer_typography",
+  "paper": "a4",
+  "sourceOracle": {
+    "path": "docs/cuts/paper-canonical-unification/qa/20-grammar-fill-source-oracles-v3.json",
+    "sha256": "15ba1d55a0f06fd38cb1fce400163e5327366b355b467691222e7a7d4049f6a8"
+  },
+  "constructionBoundary": "fixture_selected_before_public_producer_and_output_rendered_unchanged",
+  "horizontalUnit": "em",
+  "variants": {
+    "screen-wrapped-line": {
+      "surface": "screen",
+      "groupId": "group-2026-i-grammar-fill",
+      "paragraphWidths": [
+        {
+          "paragraphId": "para-2026-i-grammar-fill-title",
+          "usableWidthEm": 40
+        },
+        {
+          "paragraphId": "para-2026-i-grammar-fill-p1",
+          "usableWidthEm": 40
+        }
+      ],
+      "pageBreakBeforeQuestionId": null
+    },
+    "print-wrapped-line": {
+      "surface": "print_html",
+      "groupId": "group-2026-i-grammar-fill",
+      "paragraphWidths": [
+        {
+          "paragraphId": "para-2026-i-grammar-fill-title",
+          "usableWidthEm": 40
+        },
+        {
+          "paragraphId": "para-2026-i-grammar-fill-p1",
+          "usableWidthEm": 40
+        }
+      ],
+      "pageBreakBeforeQuestionId": null
+    },
+    "pdf-baseline": {
+      "surface": "print_pdf",
+      "groupId": "group-2026-i-grammar-fill",
+      "paragraphWidths": [],
+      "pageBreakBeforeQuestionId": "q-2026-i-055"
+    },
+    "pdf-passage-cross-page": {
+      "surface": "print_pdf",
+      "groupId": "group-2026-i-grammar-fill",
+      "paragraphWidths": [
+        {
+          "paragraphId": "para-2026-i-grammar-fill-title",
+          "usableWidthEm": 40
+        },
+        {
+          "paragraphId": "para-2026-i-grammar-fill-p1",
+          "usableWidthEm": 40
+        },
+        {
+          "paragraphId": "para-2026-i-grammar-fill-p2",
+          "usableWidthEm": 17
+        }
+      ],
+      "pageBreakBeforeQuestionId": "q-2026-i-055"
+    },
+    "pdf-next-section-cross-page": {
+      "surface": "print_pdf",
+      "groupId": "group-2026-i-grammar-fill",
+      "paragraphWidths": [],
+      "pageBreakBeforeQuestionId": "q-2026-i-055"
+    }
+  },
+  "compatibleConsumptionPlan": {
+    "authorityManifestId": "paper-canonical",
+    "authorityManifestVersion": "23",
+    "surfaceConsumerIds": {
+      "screen": "screen",
+      "print_html": "print_pdf",
+      "print_pdf": "print_pdf"
+    }
+  }
+}

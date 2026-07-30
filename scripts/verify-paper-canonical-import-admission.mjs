@@ -274,7 +274,7 @@ try {
         'versions',
         'v1',
         'canonical',
-        'canonical-paper-publication-v22.json',
+        'canonical-paper-publication-v23.json',
       )),
       true,
     )
@@ -414,7 +414,7 @@ try {
         'versions',
         'v2',
         'canonical',
-        'canonical-paper-publication-v22.json',
+        'canonical-paper-publication-v23.json',
       )),
       true,
     )
