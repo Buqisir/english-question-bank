@@ -965,5 +965,8 @@ regions.
 Focused publication, admission/recovery, Screen, Print HTML, and direct-PDF
 checks pass. App typecheck/build passes. The final registered
 `pnpm -C app run verify:all` reports 115 PASS / 1 declared off-repo SKIP /
-0 FAIL, and `git diff --check` passes. Ordinary Standards + Spec self-review
-finds no remaining bounded defect.
+0 FAIL, and `git diff --check` passes. Initial parallel Standards + Spec
+self-review found one strict visible-structure closure gap plus two inaccurate
+authority-document statements; the bounded follow-up makes unknown/reordered
+Screen and Print nodes fail closed and corrects the 18–23pt and Language
+section migration wording.

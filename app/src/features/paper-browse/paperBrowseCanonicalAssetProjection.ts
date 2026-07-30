@@ -5,6 +5,9 @@ import type {
 import type {
   WholePaperConsumption,
 } from '../paper-intelligence/canonicalConsumptionClient.ts'
+import {
+  assertCanonicalVisibleStructure,
+} from '../../../../shared/paper-canonical/visibleStructure.mjs'
 
 function rejected(message: string): Error {
   const error = new Error(message)
@@ -21,6 +24,10 @@ export function projectAssetBlocksToCanonicalConsumption(
   asset: PaperAssetV1,
   consumption: WholePaperConsumption,
 ): PaperAssetV1 {
+  if (
+    Array.isArray(consumption.visibleStructure)
+    || Number(consumption.authorityRef?.manifestVersion) >= 30
+  ) assertCanonicalVisibleStructure(consumption.visibleStructure)
   const consumedGroupIds = new Set(
     consumption.selections.flatMap((selection) => selection.groupIds),
   )

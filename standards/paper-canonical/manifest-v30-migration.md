@@ -4,11 +4,13 @@ Manifest v30 publishes the bounded whole-paper public-chrome and typography
 repair. Manifest v1 through Manifest v29, their schemas, evidence, consumer
 contracts, and publication bytes remain unchanged and resolvable.
 
-- NCK1 Profile v9 keeps every part/section ordinal, score, slot, Group family,
-  numbering assignment, and answer region while publishing exact visible
-  Reading/Language chrome. Inactive Listening remains source-closed and now
-  contributes no projected visible node. Reading Choice and Seven Choices
-  retain their complete inline count/score text and source instruction.
+- NCK1 Profile v9 keeps total scores, slot/Group order, numbering assignments,
+  and answer regions while publishing exact visible Reading/Language chrome.
+  It versions the former single 30-point Language section into ordered
+  15-point Cloze and 15-point Grammar Fill sections. Inactive Listening
+  remains source-closed and now contributes no projected visible node.
+  Reading Choice and Seven Choices retain their complete inline count/score
+  text and source instruction.
 - Paper Typography v5 preserves v4 A–D and fixed-18pt geometry while
   registering the Profile-owned Reading instruction as the final visible
   chrome role before passage A.

@@ -24,6 +24,7 @@ import {
 import {
   canonicalizeVisibleEnglishTypography,
 } from '../shared/paper-canonical/visibleTypography.mjs'
+import { buildPrintHtml } from '../server/print-renderer.mjs'
 import { digestJson } from '../shared/paper-canonical/stable.mjs'
 import {
   makeReviewedReadingSourceCapture,
@@ -480,6 +481,43 @@ assert.deepEqual(
   ],
   'PaperBrowse consumes public canonical chrome instead of source-layout accidents',
 )
+const unknownVisibleNodeConsumption = structuredClone(browseConsumption)
+unknownVisibleNodeConsumption.visibleStructure.splice(3, 0, {
+  kind: 'mystery',
+})
+const reorderedVisibleNodeConsumption = structuredClone(browseConsumption)
+const partHeadingNode = reorderedVisibleNodeConsumption.visibleStructure[1]
+reorderedVisibleNodeConsumption.visibleStructure[1] =
+  reorderedVisibleNodeConsumption.visibleStructure[2]
+reorderedVisibleNodeConsumption.visibleStructure[2] = partHeadingNode
+for (const [caseId, poisonedConsumption] of [
+  ['unknown-node', unknownVisibleNodeConsumption],
+  ['reordered-heading', reorderedVisibleNodeConsumption],
+]) {
+  assert.throws(
+    () =>
+      projectAssetBlocksToCanonicalConsumption(
+        browseAsset,
+        poisonedConsumption,
+      ),
+    { code: 'CANONICAL_CONSUMPTION_REJECTED' },
+    `Screen rejects ${caseId} canonical visible structure`,
+  )
+  assert.throws(
+    () =>
+      buildPrintHtml({
+        title: 'poisoned visible structure',
+        versionType: 'student',
+        printStyle: 'exam',
+        items: [],
+        blocks: [],
+        questionNumberStart: 1,
+        canonicalConsumption: poisonedConsumption,
+      }),
+    { code: 'CANONICAL_CONSUMPTION_REJECTED' },
+    `Print HTML rejects ${caseId} canonical visible structure`,
+  )
+}
 const planExternalAsset = structuredClone(browseAsset)
 planExternalAsset.content.groups['group-plan-external'] = {
   groupId: 'group-plan-external',

@@ -1,3 +1,7 @@
+import {
+  assertCanonicalVisibleStructure,
+} from '../../../../shared/paper-canonical/visibleStructure.mjs'
+
 export type WholePaperConsumption = {
   disposition: 'ready'
   paperId: string
@@ -72,6 +76,10 @@ export async function loadScreenConsumption(
       && !Array.isArray(consumption.visibleStructure)
     )
   ) throw new Error('Canonical consumption response is incomplete')
+  if (
+    Array.isArray(consumption.visibleStructure)
+    || Number(consumption.authorityRef?.manifestVersion) >= 30
+  ) assertCanonicalVisibleStructure(consumption.visibleStructure)
   return consumption
 }
 

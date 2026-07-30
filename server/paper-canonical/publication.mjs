@@ -21,6 +21,9 @@ import {
 } from '../../shared/paper-canonical/consumers.mjs'
 import { projectCanonicalPaper } from '../../shared/paper-canonical/projector.mjs'
 import { digestJson, sha256, stableStringify, withoutKey } from '../../shared/paper-canonical/stable.mjs'
+import {
+  assertCanonicalVisibleStructure,
+} from '../../shared/paper-canonical/visibleStructure.mjs'
 
 const publicationFileName = 'canonical-paper-publication-v30.json'
 const publicationFileNames = [
@@ -1321,22 +1324,27 @@ function canonicalSelections(validated, contract) {
 }
 
 function canonicalVisibleStructure(validated) {
-  return validated.projected.nodes.flatMap((node) => {
+  const visibleStructure = validated.projected.nodes.map((node) => {
     if (
       node.kind === 'part'
       || node.kind === 'section'
       || node.kind === 'instruction'
-    ) return [structuredClone(node)]
+    ) return structuredClone(node)
     if (node.kind === 'group') {
-      return [{
+      return {
         kind: 'group',
         slotId: node.slotId,
         groupId: node.groupId,
         familyContractId: node.familyContractId,
-      }]
+      }
     }
-    return []
+    throw publicationError(
+      'CANONICAL_CONSUMPTION_REJECTED',
+      `Projected visible structure has unknown node kind ${node.kind}`,
+    )
   })
+  assertCanonicalVisibleStructure(visibleStructure)
+  return visibleStructure
 }
 
 function canonicalMediaArtifacts(validated) {
