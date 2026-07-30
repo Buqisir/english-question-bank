@@ -462,6 +462,87 @@ assert.throws(
   { code: 'CANONICAL_PROJECTION_REJECTED' },
 )
 
+const reversedPromptBindings = structuredClone(
+  first.artifacts.canonicalPaper.questionGroups,
+)
+const reorderedGrammarFill = reversedPromptBindings.find(
+  (group) => group.variant.family === 'grammar-fill',
+)
+reorderedGrammarFill.variant.promptBindings.reverse()
+const {
+  sourceMap: _reorderedSourceMap,
+  sourceFingerprint: _reorderedSourceFingerprint,
+  semanticDigest: _reorderedSemanticDigest,
+  ...reorderedGrammarFillSemantic
+} = reorderedGrammarFill
+reorderedGrammarFill.semanticDigest = digestJson(reorderedGrammarFillSemantic)
+assert.throws(
+  () => projectCanonicalPaper({
+    plan: first.artifacts.canonicalPaper.paperPlan,
+    groups: reversedPromptBindings,
+    sourceCapture: first.artifacts.sourceCapture,
+    authorityClosure: closure,
+  }),
+  { code: 'CANONICAL_PROJECTION_REJECTED' },
+)
+
+const ordinaryParentheticalGroups = structuredClone(
+  first.artifacts.canonicalPaper.questionGroups,
+)
+const ordinaryParentheticalGrammarFill = ordinaryParentheticalGroups.find(
+  (group) => group.variant.family === 'grammar-fill',
+)
+const sourceProvenNoneBinding =
+  ordinaryParentheticalGrammarFill.variant.promptBindings.find(
+    (binding) => binding.provision === 'source_proven_none',
+  )
+const ordinaryParentheticalBlock =
+  ordinaryParentheticalGrammarFill.content.blocks.find((block) =>
+    block.inlines?.some(
+      (inline) =>
+        inline.kind === 'blank_ref'
+        && inline.blankId === sourceProvenNoneBinding.blankId,
+    ))
+const ordinaryParentheticalBlankIndex =
+  ordinaryParentheticalBlock.inlines.findIndex(
+    (inline) =>
+      inline.kind === 'blank_ref'
+      && inline.blankId === sourceProvenNoneBinding.blankId,
+  )
+ordinaryParentheticalBlock.inlines[
+  ordinaryParentheticalBlankIndex + 1
+].text = ` (ordinary aside),${
+  ordinaryParentheticalBlock.inlines[
+    ordinaryParentheticalBlankIndex + 1
+  ].text
+}`
+const {
+  sourceMap: _ordinaryParentheticalSourceMap,
+  sourceFingerprint: _ordinaryParentheticalSourceFingerprint,
+  semanticDigest: _ordinaryParentheticalSemanticDigest,
+  ...ordinaryParentheticalSemantic
+} = ordinaryParentheticalGrammarFill
+ordinaryParentheticalGrammarFill.semanticDigest =
+  digestJson(ordinaryParentheticalSemantic)
+const ordinaryParentheticalProjection = projectCanonicalPaper({
+  plan: first.artifacts.canonicalPaper.paperPlan,
+  groups: ordinaryParentheticalGroups,
+  sourceCapture: first.artifacts.sourceCapture,
+  authorityClosure: closure,
+})
+const ordinaryParentheticalOccurrence =
+  ordinaryParentheticalProjection.nodes.find(
+    (node) =>
+      node.kind === 'group'
+      && node.familyContractId === 'grammar-fill',
+  )
+assert.equal(
+  ordinaryParentheticalOccurrence.blanks.find(
+    (blank) => blank.blankId === sourceProvenNoneBinding.blankId,
+  ).prompt,
+  null,
+)
+
 function assertBlocked(mutator, expectedDisposition) {
   const blockedSource = structuredClone(source)
   mutator(blockedSource)

@@ -302,6 +302,45 @@ assert.throws(
 
 await assertExactOldV13FilesystemReload()
 const sealed = sealCanonicalPublication({ compilation, sourceAssetVersion: 1, sourceAsset: fixture.sourceAsset })
+const reorderedCompilation = structuredClone(compilation)
+const reorderedPublicationGrammarFill =
+  reorderedCompilation.artifacts.canonicalPaper.questionGroups.find(
+    (group) => group.variant.family === 'grammar-fill',
+  )
+reorderedPublicationGrammarFill.variant.promptBindings.reverse()
+const {
+  sourceMap: _reorderedPublicationSourceMap,
+  sourceFingerprint: _reorderedPublicationSourceFingerprint,
+  semanticDigest: _reorderedPublicationSemanticDigest,
+  ...reorderedPublicationSemantic
+} = reorderedPublicationGrammarFill
+reorderedPublicationGrammarFill.semanticDigest =
+  digestJson(reorderedPublicationSemantic)
+const reorderedReport = reorderedCompilation.artifacts.normalizationReport
+reorderedReport.semanticDigest = digestJson({
+  groups: reorderedCompilation.artifacts.canonicalPaper.questionGroups.map(
+    (group) => group.semanticDigest,
+  ),
+  reviewDecisionDigest: digestJson(reorderedReport.reviewDecisions || []),
+  inactiveSourceClosureDigests: (
+    reorderedReport.inactiveSourceClosures || []
+  ).map((closure) => closure.closureDigest),
+})
+const reorderedSealed = sealCanonicalPublication({
+  compilation: reorderedCompilation,
+  sourceAssetVersion: 1,
+  sourceAsset: fixture.sourceAsset,
+})
+assert.throws(
+  () => validateCanonicalPublicationBundle({
+    manifest: reorderedSealed.manifest,
+    sourceAsset: reorderedSealed.sourceAsset,
+    readArtifact: (relativePath) =>
+      reorderedSealed.artifacts[relativePath]
+      || reorderedSealed.sourceEvidence[relativePath],
+  }),
+  { code: 'CANONICAL_PUBLICATION_PROJECTION_INVALID' },
+)
 const tamperedManifest = structuredClone(sealed.manifest)
 const tamperedArtifacts = { ...sealed.artifacts }
 const groupPath = 'canonical/canonical-question-groups-v1.json'

@@ -5,6 +5,17 @@ function issue(code, path, message) {
   return { code, path, message }
 }
 
+function exactPromptPrefixAgrees(following, prompt) {
+  if (following?.kind !== 'text' || typeof following.text !== 'string') {
+    return false
+  }
+  const prefix = ` (${prompt})`
+  if (!following.text.startsWith(prefix)) return false
+  const boundary = following.text.slice(prefix.length, prefix.length + 1)
+  return boundary === ''
+    || [' ', '\t', '.', ',', ';', ':', '!', '?'].includes(boundary)
+}
+
 export function validateGrammarFillPromptContract({
   blankIds,
   content,
@@ -34,6 +45,9 @@ export function validateGrammarFillPromptContract({
   if (
     bindings.length !== blankIds.length
     || bindingByBlankId.size !== blankIds.length
+    || bindings.some(
+      (binding, index) => binding?.blankId !== blankIds[index],
+    )
     || [...bindingByBlankId.keys()].some(
       (blankId) => !blankIds.includes(blankId),
     )
@@ -48,12 +62,6 @@ export function validateGrammarFillPromptContract({
     const binding = bindingByBlankId.get(blankId)
     const occurrences = occurrenceByBlankId.get(blankId) || []
     const following = occurrences[0]?.following
-    const sourcePrompt =
-      following?.kind === 'text' && typeof following.text === 'string'
-        ? following.text.match(
-            /^ \(([^()\r\n]+)\)(?=\s|[.,;:!?])/u,
-          )?.[1] ?? null
-        : null
     const observation = sourceCapture?.observations?.find(
       (candidate) =>
         candidate.observationId === binding?.authorityObservationRef,
@@ -86,8 +94,11 @@ export function validateGrammarFillPromptContract({
       && binding.provision === 'source_prompt'
       && typeof binding.prompt === 'string'
       && binding.prompt.length > 0
-      && !/[()\r\n]/u.test(binding.prompt)
-      && sourcePrompt === binding.prompt
+      && !binding.prompt.includes('(')
+      && !binding.prompt.includes(')')
+      && !binding.prompt.includes('\r')
+      && !binding.prompt.includes('\n')
+      && exactPromptPrefixAgrees(following, binding.prompt)
     )
     const unprompted = (
       isRecordValue(binding)
@@ -98,7 +109,6 @@ export function validateGrammarFillPromptContract({
       ])
       && binding.blankId === blankId
       && binding.provision === 'source_proven_none'
-      && sourcePrompt === null
     )
     const sourceMapValid = sourceMap == null || sourceMap.entries?.some(
       (entry) =>

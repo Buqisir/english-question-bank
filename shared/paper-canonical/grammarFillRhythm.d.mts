@@ -33,7 +33,6 @@ export type GrammarFillRhythm = Readonly<{
       paragraphIds: ReadonlyArray<string>
       questionIds: ReadonlyArray<string>
       blankIds: ReadonlyArray<string>
-      prompts: Readonly<Record<string, string | null>>
       answers: Readonly<Record<string, string>>
     }>
     proofClosure: Readonly<{
@@ -41,8 +40,6 @@ export type GrammarFillRhythm = Readonly<{
       publicAdversaries: Readonly<{ path: string; sha256: string }>
       publicGeometryFixtures: Readonly<{ path: string; sha256: string }>
       observedCoverage: Readonly<{ path: string; sha256: string }>
-      promptProjection:
-        'explicit_blank_ref_prompt_identity_string_or_null'
     }>
   }>
 }>

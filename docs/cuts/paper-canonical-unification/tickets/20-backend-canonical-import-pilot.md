@@ -733,3 +733,17 @@ lecture Screen, Student and Teacher Print HTML, and Student and Teacher
 Chromium PDF. No Owner QA provisioning, Reading/Seven Choices/Cloze
 implementation, Ticket 21, production/R2, or generated-DOCX action is part of
 this closure.
+
+Grammar Fill Golden Geometry fifth focused-review Must Fix closure
+(2026-07-30):
+The same-lineage review found three v24 prompt-contract leaks: ordered
+`promptBindings` were accepted as an unordered set, the shared projector
+validator still parsed ordinary parenthetical prose to infer prompt identity,
+and the renderer declaration retained two prompt fields removed from rhythm
+v4. The repair validates each binding against the same-index `blankRef`,
+accepts `source_proven_none` solely from its exact source-backed provision
+observation, and uses an explicit prompt only to verify its exact source-text
+prefix. Public projection now preserves an ordinary parenthetical after an
+unprompted Blank, while reversed bindings fail both projection and sealed
+Publication validation. The v4 declaration no longer exposes renderer-owned
+prompt semantics.
