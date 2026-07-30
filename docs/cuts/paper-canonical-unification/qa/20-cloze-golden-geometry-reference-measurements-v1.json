@@ -1,0 +1,60 @@
+{
+  "schemaVersion": "cloze-golden-geometry-reference-measurements-v1",
+  "measurementMethod": {
+    "tool": "Tesseract 5.5.2 --psm 6 TSV word boxes",
+    "verticalProxy": "Median lower edge of ordinary-height nearby Latin word boxes; distances are divided by the local median baseline step.",
+    "horizontalProxy": "Repeated question, option-label, and option-text x coordinates divided by the local usable text width; label-to-text gaps are divided by the local median Latin em proxy.",
+    "scaleBoundary": "JPEG coordinates are evidence-local only. No JPEG pixel is treated as a Screen CSS pixel or PDF point, and no full-page A4 scale is inferred."
+  },
+  "reference": {
+    "file": "docs/product/exam-paper-format-reference/images/page-09-cloze.jpeg",
+    "sha256": "6e4297ba33b34c150657ae7116b08dfd115e3a284579467bf7bc612ccf10b23c",
+    "widthPx": 866,
+    "heightPx": 1149
+  },
+  "vertical": {
+    "localBaselineStepPx": 33,
+    "chromeBaselinesPx": [27, 59, 91],
+    "passageBaselinesPx": [140, 173, 206, 238, 271, 303, 336, 369, 401, 434, 467, 499, 532, 564],
+    "firstChoiceRowBaselinePx": 630,
+    "choiceRowBaselinesPx": [630, 662, 699, 732, 760, 797, 830, 858, 895, 924, 956, 985, 1026, 1054, 1092],
+    "normalized": {
+      "chromeInternalBaselineStepRatio": 0.969697,
+      "chromeToPassageBaselineStepRatio": 1.484848,
+      "passageLineBaselineStepRatio": 1,
+      "paragraphTransitionBaselineStepRatio": 1,
+      "passageTailToFirstChoiceRowBaselineStepRatio": 2,
+      "choiceRowBaselineStepRatio": 1
+    }
+  },
+  "horizontal": {
+    "usableLeftPx": 73,
+    "usableRightPx": 793,
+    "usableWidthPx": 720,
+    "localLatinEmProxyPx": 17,
+    "questionLabelAnchorPx": 73,
+    "optionLabelAnchorsPx": [101, 283, 454, 626],
+    "optionTextStartAnchorsPx": [124, 305, 477, 649],
+    "optionLabelPitchPx": [182, 171, 172],
+    "normalized": {
+      "questionLabelAnchorUsableWidthRatio": 0,
+      "optionLabelAnchorUsableWidthRatios": [0.038889, 0.291667, 0.529167, 0.768056],
+      "optionTextStartUsableWidthRatios": [0.070833, 0.322222, 0.561111, 0.8],
+      "medianOptionLabelPitchUsableWidthRatio": 0.238889,
+      "optionLabelPitchRangeUsableWidthRatio": 0.015278,
+      "medianLabelToTextGapEm": 0.411765,
+      "questionToFirstOptionLabelGapEm": 1.647059
+    },
+    "strategy": {
+      "questionLabel": "fixed_leading_anchor",
+      "optionColumns": "four_fixed_equal_origin_pitch_tracks",
+      "optionLabel": "fixed_anchor_cluster_per_track",
+      "optionTextStart": "fixed_after_label_glyph_plus_em_gap",
+      "gutter": "fixed_minimum_gutter_not_distributed",
+      "trailingCapacity": "final_track_consumes_remaining_width_without_moving_origins",
+      "distribution": "not_distributed_not_space_between",
+      "wrappedContinuation": "hanging_indent_at_each_option_text_start",
+      "goldenWrappedContinuationObservation": "unobserved_all_golden_options_are_one_line"
+    }
+  }
+}

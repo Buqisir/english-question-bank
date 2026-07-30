@@ -18,6 +18,7 @@ import {
   abcdPlacementSignature,
   expectedAbcdRendererFontClosure,
   layoutAbcdOptionSet,
+  layoutFixedFourColumnClozeOptionSet,
   resolveAbcdRendererFontClosure,
   translateAbcdPlanToPaperSurface,
   translateAbcdPlanToPointPlacement,
@@ -213,6 +214,51 @@ const wrappable = layoutAbcdOptionSet(
 )
 assert.equal(wrappable.status, 'selected')
 assert.equal(wrappable.mode, 'one_column')
+const fixedClozeWrapped = layoutFixedFourColumnClozeOptionSet(
+  optionSet('cloze-wrapped', [
+    'short',
+    'short',
+    'short',
+    Array.from({ length: 5 }, () => 'look forward to').join(' '),
+  ]),
+)
+assert.equal(fixedClozeWrapped.status, 'selected')
+assert.equal(fixedClozeWrapped.mode, 'four_columns')
+assert.deepEqual(
+  fixedClozeWrapped.placements.map((placement) => placement.startTwip),
+  [0, 2080, 4160, 6240],
+  'Cloze wrapped text preserves one fixed four-track strategy',
+)
+assert.deepEqual(
+  layoutFixedFourColumnClozeOptionSet(
+    optionSet('cloze-hard-break', [
+      'short',
+      'short',
+      'short',
+      'look forward\nto',
+    ]),
+  ),
+  {
+    status: 'needs_review',
+    reason: 'fixed_four_column_contains_unrenderable_content',
+  },
+  'Cloze fixed tracks fail closed on authored hard breaks',
+)
+assert.deepEqual(
+  layoutFixedFourColumnClozeOptionSet(
+    optionSet('cloze-unbreakable', [
+      'short',
+      'short',
+      'short',
+      'x'.repeat(100),
+    ]),
+  ),
+  {
+    status: 'needs_review',
+    reason: 'fixed_four_column_contains_unrenderable_content',
+  },
+  'Cloze fixed tracks fail closed on an overwide unbreakable token',
+)
 assert.deepEqual(
   layoutAbcdOptionSet({
     owner: 'shared_bank',

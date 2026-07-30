@@ -169,7 +169,8 @@ assert.deepEqual(cloze.normalizationDiagnostics, [
 assert.equal(/_{2,}\d+_{2,}/.test(cloze.html), false)
 assert.equal(cloze.html.includes('<span class="print-blank-num">41</span>'), true)
 assert.equal(cloze.html.includes('class="qnum">41.</span> 41'), false)
-assert.equal(cloze.html.includes('A. fantasy'), true)
+assert.equal(cloze.html.includes('>A.</span>'), true)
+assert.equal(cloze.html.includes('fantasy'), true)
 
 const grammar2026GroupId = 'group-2026-i-grammar-fill'
 const grammar2026 = renderProofGroup({

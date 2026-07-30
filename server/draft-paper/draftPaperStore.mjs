@@ -4,7 +4,7 @@
 // exportDraftPaperPdf now consumes getDraftPaperPagination's in-memory
 // pdfBytes directly (see that function's own doc comment). readFileSync
 // stays; it is still used by inlineFigureImages below.
-import { readFileSync } from 'node:fs'
+import { existsSync, readFileSync } from 'node:fs'
 import { createHash, randomUUID } from 'node:crypto'
 import path from 'node:path'
 import { buildPrintHtml } from '../print-renderer.mjs'
@@ -517,6 +517,107 @@ export function createDraftPaperStore({
     }
   }
 
+  function loadCanonicalClozeChrome(exportItems, canonicalConsumption) {
+    const selection = canonicalConsumption?.selections?.find(
+      (candidate) =>
+        candidate.familyContractId === 'cloze'
+        && candidate.mode === 'canonical',
+    )
+    if (!selection) return null
+    const reject = (message) => {
+      const error = new Error(message)
+      error.code = 'CANONICAL_CONSUMPTION_REJECTED'
+      throw error
+    }
+    if (selection.groupIds.length !== 1 || !paperAssetsDir) {
+      reject('Canonical Cloze chrome source identity is unavailable')
+    }
+    const groupId = selection.groupIds[0]
+    const item = exportItems.find((candidate) => candidate.detail.id === groupId)
+    const sourcePaperId = item?.detail.paperId
+    if (typeof sourcePaperId !== 'string' || sourcePaperId.length === 0) {
+      reject('Canonical Cloze chrome paper identity is unavailable')
+    }
+    const sourceAssetVersion = canonicalConsumption?.sourceAssetVersion
+    const sourceAssetDigest = canonicalConsumption?.sourceAssetDigest
+    if (
+      !Number.isInteger(sourceAssetVersion)
+      || typeof sourceAssetDigest !== 'string'
+    ) {
+      reject('Canonical Cloze chrome source binding is unavailable')
+    }
+    const assetPath = path.join(
+      paperAssetsDir,
+      sourcePaperId,
+      'versions',
+      `v${sourceAssetVersion}`,
+      'paper-asset.json',
+    )
+    if (!existsSync(assetPath)) {
+      reject('Canonical Cloze chrome immutable source asset is unavailable')
+    }
+    const assetBytes = readFileSync(assetPath)
+    const observedDigest =
+      `sha256:${createHash('sha256').update(assetBytes).digest('hex')}`
+    if (observedDigest !== sourceAssetDigest) {
+      reject('Canonical Cloze chrome immutable source digest disagrees')
+    }
+    let asset
+    try {
+      asset = JSON.parse(assetBytes)
+    } catch {
+      reject('Canonical Cloze chrome immutable source asset is invalid')
+    }
+    const blocks = asset?.content?.blocks
+    if (!Array.isArray(blocks)) {
+      reject('Canonical Cloze chrome immutable source blocks are invalid')
+    }
+    const groupIndex = blocks.findIndex(
+      (block) => block.type === 'group' && block.groupId === groupId,
+    )
+    if (groupIndex < 0) {
+      reject('Canonical Cloze chrome Group identity is unavailable')
+    }
+    const preceding = []
+    for (let index = groupIndex - 1; index >= 0; index -= 1) {
+      const block = blocks[index]
+      if (block.type === 'pageBreakHint') continue
+      if (
+        block.type === 'partHeading'
+        || block.type === 'sectionHeading'
+        || block.type === 'instruction'
+      ) {
+        preceding.unshift(block)
+        continue
+      }
+      break
+    }
+    const [part, section, instruction] = preceding
+    const followingSection = blocks.slice(groupIndex + 1).find(
+      (block) => block.type === 'sectionHeading',
+    )
+    if (
+      part?.type !== 'partHeading'
+      || section?.type !== 'sectionHeading'
+      || instruction?.type !== 'instruction'
+      || followingSection?.type !== 'sectionHeading'
+      || [part.text, section.text, instruction.text, followingSection.text]
+        .some((text) => typeof text !== 'string' || text.length === 0)
+    ) {
+      reject('Canonical Cloze chrome source adjacency is incomplete')
+    }
+    return {
+      groupId,
+      part: { partId: part.partId, text: part.text },
+      section: { sectionId: section.sectionId, text: section.text },
+      instruction: { text: instruction.text },
+      followingSection: {
+        sectionId: followingSection.sectionId,
+        text: followingSection.text,
+      },
+    }
+  }
+
   function addDraftFooterCss(html, title) {
     const safeTitle = String(title || '英语练习卷').replace(/\\/g, '\\\\').replace(/"/g, '\\"')
     const footerCss = `
@@ -581,6 +682,10 @@ export function createDraftPaperStore({
               items: exportItems,
             })
           : null
+    const clozeChrome = loadCanonicalClozeChrome(
+      exportItems,
+      canonicalConsumption,
+    )
     if (input.versionType === 'teacher' && paperAssetsDir) {
       // Restart cut ③ — join teacher-version explanations from paper-assets
       // analysis files. Display-layer only: never writes questions.explanation.
@@ -605,6 +710,7 @@ export function createDraftPaperStore({
         imageMode: exportOptions.imageMode === 'file' ? 'file' : 'web',
         images: exportOptions.images ?? [],
         canonicalConsumption,
+        clozeChrome,
       }),
       input.title,
     )

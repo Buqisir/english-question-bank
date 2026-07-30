@@ -1,0 +1,94 @@
+{
+  "schemaVersion": "cloze-observed-coverage-oracle-v1",
+  "authorityBoundary": {
+    "sourceOracle": {
+      "path": "docs/cuts/paper-canonical-unification/qa/20-cloze-source-oracles-v1.json",
+      "sha256": "09fb9ad40fd76c31cc9de05e44d395e3d000fd404539e57494eb7c063e2ac2bc"
+    },
+    "goldenReference": {
+      "path": "docs/cuts/paper-canonical-unification/qa/20-cloze-golden-geometry-reference-measurements-v1.json",
+      "sha256": "ae6b4a6e5d651ac1fa4a6a6d5365b03c9a6d80f431d98b50af969c2a92f4a6d4"
+    },
+    "expectedSourceRoles": {
+      "sevenChoicesBoundary": "previous_family_tail",
+      "chrome": ["part_title", "subsection", "meta_instruction"],
+      "passage": "passage_body_line",
+      "inlineBlank": "inline_blank_marker",
+      "choiceRow": "choice_row",
+      "choiceLabel": "choice_label",
+      "choiceText": "choice_text",
+      "answer": "answer_line",
+      "explanation": "explanation_line",
+      "followingSection": "next_section"
+    }
+  },
+  "edges": [
+    {"edgeId":"previous_family_to_chrome_same_page","fromClass":"previousFamilyBoundary","toClass":"chrome","baselineStepRatio":2,"optionalCollapse":true},
+    {"edgeId":"previous_family_to_chrome_cross_page","fromClass":"previousFamilyBoundary","toClass":"chrome","pageRelation":"next_page_start","optionalCollapse":true},
+    {"edgeId":"chrome_internal","fromClass":"chrome","toClass":"chrome","baselineStepRatio":1,"optionalCollapse":true},
+    {"edgeId":"chrome_to_passage","fromClass":"chrome","toClass":"passageContent","baselineStepRatio":1.5,"optionalCollapse":true},
+    {"edgeId":"passage_line_internal","fromClass":"passageContent","toClass":"passageContent","baselineStepRatio":1,"optionalCollapse":false},
+    {"edgeId":"paragraph_transition","fromClass":"passageContent","toClass":"passageContent","baselineStepRatio":1,"optionalCollapse":false},
+    {"edgeId":"inline_blank_no_phantom_space","fromRole":"passage_body_line","throughClass":"inlineBlank","toRole":"passage_body_line","extraBaselineStepRatio":0,"optionalCollapse":false},
+    {"edgeId":"inline_blank_atomicity","fromClass":"inlineBlank","toClass":"inlineBlank","pageRelation":"same_line_unsplittable","optionalCollapse":false},
+    {"edgeId":"inline_blank_punctuation_outside","fromClass":"inlineBlank","toRole":"passage_body_line","pageRelation":"punctuation_sibling","optionalCollapse":false},
+    {"edgeId":"same_passage_cross_page","fromClass":"passageContent","toClass":"passageContent","pageRelation":"next_page_continuation","optionalCollapse":false},
+    {"edgeId":"passage_tail_to_first_choice_row","fromClass":"passageContent","toClass":"choiceRow","baselineStepRatio":2,"optionalCollapse":false},
+    {"edgeId":"choice_row_question_to_first_track","fromRole":"choice_row","toRole":"choice_label","horizontalRelation":"fixed_question_to_A_anchor","optionalCollapse":false},
+    {"edgeId":"choice_label_to_text","fromRole":"choice_label","toRole":"choice_text","horizontalRelation":"fixed_em_gap","optionalCollapse":false},
+    {"edgeId":"choice_tracks_internal","fromClass":"choiceLabel","toClass":"choiceLabel","horizontalRelation":"four_fixed_equal_origin_pitch_tracks","optionalCollapse":false},
+    {"edgeId":"choice_row_baseline","fromClass":"choiceRow","toClass":"choiceRow","baselineStepRatio":1,"optionalCollapse":false},
+    {"edgeId":"wrapped_option_continuation","fromRole":"choice_text","toRole":"choice_text","horizontalRelation":"hanging_indent","optionalCollapse":false},
+    {"edgeId":"choice_label_text_atomicity","fromRole":"choice_label","toRole":"choice_text","pageRelation":"same_atomic_option","optionalCollapse":false},
+    {"edgeId":"choice_row_unsplittable","fromClass":"choiceRow","toClass":"choiceRow","pageRelation":"same_page_unit","optionalCollapse":false},
+    {"edgeId":"choice_block_cross_page","fromClass":"choiceRow","toClass":"choiceRow","pageRelation":"next_page_continuation","optionalCollapse":false},
+    {"edgeId":"choice_row_to_answer","fromClass":"choiceRow","toRole":"answer_line","baselineStepRatio":1,"optionalCollapse":true},
+    {"edgeId":"answer_to_explanation","fromRole":"answer_line","toRole":"explanation_line","baselineStepRatio":1,"optionalCollapse":true},
+    {"edgeId":"teacher_tail_to_next_row","fromClass":"teacherTail","toClass":"choiceRow","baselineStepRatio":1,"optionalCollapse":true},
+    {"edgeId":"student_tail_to_next_section_same_page","fromClass":"choiceRow","toRole":"next_section","baselineStepRatio":2,"optionalCollapse":false},
+    {"edgeId":"teacher_tail_to_next_section_same_page","fromClass":"teacherTail","toRole":"next_section","baselineStepRatio":2,"optionalCollapse":true},
+    {"edgeId":"student_tail_to_next_section_cross_page","fromClass":"choiceRow","toRole":"next_section","pageRelation":"next_page_start","optionalCollapse":false},
+    {"edgeId":"teacher_tail_to_next_section_cross_page","fromClass":"teacherTail","toRole":"next_section","pageRelation":"next_page_start","optionalCollapse":true}
+  ],
+  "variantOracle": {
+    "profiles": {
+      "student-baseline": ["choice_label_text_atomicity","choice_label_to_text","choice_row_baseline","choice_row_question_to_first_track","choice_row_unsplittable","choice_tracks_internal","chrome_internal","chrome_to_passage","inline_blank_atomicity","inline_blank_no_phantom_space","inline_blank_punctuation_outside","paragraph_transition","passage_line_internal","passage_tail_to_first_choice_row","previous_family_to_chrome_same_page","student_tail_to_next_section_same_page"],
+      "student-wrapped": ["choice_label_text_atomicity","choice_label_to_text","choice_row_baseline","choice_row_question_to_first_track","choice_row_unsplittable","choice_tracks_internal","chrome_internal","chrome_to_passage","inline_blank_atomicity","inline_blank_no_phantom_space","inline_blank_punctuation_outside","paragraph_transition","passage_line_internal","passage_tail_to_first_choice_row","previous_family_to_chrome_same_page","student_tail_to_next_section_same_page","wrapped_option_continuation"],
+      "teacher-baseline-html": ["answer_to_explanation","choice_label_text_atomicity","choice_label_to_text","choice_row_baseline","choice_row_question_to_first_track","choice_row_to_answer","choice_row_unsplittable","choice_tracks_internal","chrome_internal","chrome_to_passage","inline_blank_atomicity","inline_blank_no_phantom_space","inline_blank_punctuation_outside","paragraph_transition","passage_line_internal","passage_tail_to_first_choice_row","previous_family_to_chrome_same_page","teacher_tail_to_next_row","teacher_tail_to_next_section_same_page"],
+      "teacher-wrapped-html": ["answer_to_explanation","choice_label_text_atomicity","choice_label_to_text","choice_row_baseline","choice_row_question_to_first_track","choice_row_to_answer","choice_row_unsplittable","choice_tracks_internal","chrome_internal","chrome_to_passage","inline_blank_atomicity","inline_blank_no_phantom_space","inline_blank_punctuation_outside","paragraph_transition","passage_line_internal","passage_tail_to_first_choice_row","previous_family_to_chrome_same_page","teacher_tail_to_next_row","teacher_tail_to_next_section_same_page","wrapped_option_continuation"],
+      "pdf-student-passage-cross": ["choice_block_cross_page","choice_label_text_atomicity","choice_label_to_text","choice_row_baseline","choice_row_question_to_first_track","choice_row_unsplittable","choice_tracks_internal","chrome_internal","chrome_to_passage","inline_blank_atomicity","inline_blank_no_phantom_space","inline_blank_punctuation_outside","paragraph_transition","passage_line_internal","passage_tail_to_first_choice_row","previous_family_to_chrome_cross_page","same_passage_cross_page","student_tail_to_next_section_same_page","wrapped_option_continuation"],
+      "pdf-student-choice-cross": ["choice_block_cross_page","choice_label_text_atomicity","choice_label_to_text","choice_row_baseline","choice_row_question_to_first_track","choice_row_unsplittable","choice_tracks_internal","chrome_internal","chrome_to_passage","inline_blank_atomicity","inline_blank_no_phantom_space","inline_blank_punctuation_outside","paragraph_transition","passage_line_internal","passage_tail_to_first_choice_row","previous_family_to_chrome_same_page","same_passage_cross_page","student_tail_to_next_section_same_page","wrapped_option_continuation"],
+      "pdf-student-next-cross": ["choice_label_text_atomicity","choice_label_to_text","choice_row_baseline","choice_row_question_to_first_track","choice_row_unsplittable","choice_tracks_internal","chrome_internal","chrome_to_passage","inline_blank_atomicity","inline_blank_no_phantom_space","inline_blank_punctuation_outside","paragraph_transition","passage_line_internal","passage_tail_to_first_choice_row","previous_family_to_chrome_same_page","same_passage_cross_page","student_tail_to_next_section_cross_page"],
+      "pdf-teacher-baseline": ["answer_to_explanation","choice_block_cross_page","choice_label_text_atomicity","choice_label_to_text","choice_row_baseline","choice_row_question_to_first_track","choice_row_to_answer","choice_row_unsplittable","choice_tracks_internal","chrome_internal","chrome_to_passage","inline_blank_atomicity","inline_blank_no_phantom_space","inline_blank_punctuation_outside","paragraph_transition","passage_line_internal","passage_tail_to_first_choice_row","previous_family_to_chrome_same_page","teacher_tail_to_next_row","teacher_tail_to_next_section_same_page"],
+      "pdf-teacher-passage-cross": ["answer_to_explanation","choice_block_cross_page","choice_label_text_atomicity","choice_label_to_text","choice_row_baseline","choice_row_question_to_first_track","choice_row_to_answer","choice_row_unsplittable","choice_tracks_internal","chrome_internal","chrome_to_passage","inline_blank_atomicity","inline_blank_no_phantom_space","inline_blank_punctuation_outside","paragraph_transition","passage_line_internal","passage_tail_to_first_choice_row","previous_family_to_chrome_cross_page","same_passage_cross_page","teacher_tail_to_next_row","teacher_tail_to_next_section_cross_page","wrapped_option_continuation"],
+      "pdf-teacher-choice-cross": ["answer_to_explanation","choice_block_cross_page","choice_label_text_atomicity","choice_label_to_text","choice_row_baseline","choice_row_question_to_first_track","choice_row_to_answer","choice_row_unsplittable","choice_tracks_internal","chrome_internal","chrome_to_passage","inline_blank_atomicity","inline_blank_no_phantom_space","inline_blank_punctuation_outside","paragraph_transition","passage_line_internal","passage_tail_to_first_choice_row","previous_family_to_chrome_same_page","teacher_tail_to_next_row","teacher_tail_to_next_section_same_page","wrapped_option_continuation"],
+      "pdf-teacher-next-cross": ["answer_to_explanation","choice_block_cross_page","choice_label_text_atomicity","choice_label_to_text","choice_row_baseline","choice_row_question_to_first_track","choice_row_to_answer","choice_row_unsplittable","choice_tracks_internal","chrome_internal","chrome_to_passage","inline_blank_atomicity","inline_blank_no_phantom_space","inline_blank_punctuation_outside","paragraph_transition","passage_line_internal","passage_tail_to_first_choice_row","previous_family_to_chrome_same_page","teacher_tail_to_next_row","teacher_tail_to_next_section_cross_page"]
+    },
+    "profileByBundleVariant": {
+      "screen-plain/plain-baseline": "student-baseline",
+      "screen-plain/plain-wrapped-option": "student-wrapped",
+      "screen-lecture/lecture-baseline": "student-baseline",
+      "screen-lecture/lecture-wrapped-option": "student-wrapped",
+      "print-html-student/student-baseline": "student-baseline",
+      "print-html-student/student-wrapped-option": "student-wrapped",
+      "print-html-teacher/teacher-baseline": "teacher-baseline-html",
+      "print-html-teacher/teacher-wrapped-option": "teacher-wrapped-html",
+      "pdf-student/student-baseline": "student-baseline",
+      "pdf-student/student-passage-cross-page": "pdf-student-passage-cross",
+      "pdf-student/student-choice-block-cross-page": "pdf-student-choice-cross",
+      "pdf-student/student-next-section-cross-page": "pdf-student-next-cross",
+      "pdf-teacher/teacher-baseline": "pdf-teacher-baseline",
+      "pdf-teacher/teacher-passage-cross-page": "pdf-teacher-passage-cross",
+      "pdf-teacher/teacher-choice-block-cross-page": "pdf-teacher-choice-cross",
+      "pdf-teacher/teacher-next-section-cross-page": "pdf-teacher-next-cross"
+    }
+  },
+  "requiredBundles": [
+    {"bundleId":"screen-plain","surface":"screen","variants":["plain-baseline","plain-wrapped-option"],"expectedEdgeIds":["previous_family_to_chrome_same_page","chrome_internal","chrome_to_passage","passage_line_internal","paragraph_transition","inline_blank_no_phantom_space","inline_blank_atomicity","inline_blank_punctuation_outside","passage_tail_to_first_choice_row","choice_row_question_to_first_track","choice_label_to_text","choice_tracks_internal","choice_row_baseline","wrapped_option_continuation","choice_label_text_atomicity","choice_row_unsplittable","student_tail_to_next_section_same_page"]},
+    {"bundleId":"screen-lecture","surface":"screen","variants":["lecture-baseline","lecture-wrapped-option"],"expectedEdgeIds":["previous_family_to_chrome_same_page","chrome_internal","chrome_to_passage","passage_line_internal","paragraph_transition","inline_blank_no_phantom_space","inline_blank_atomicity","inline_blank_punctuation_outside","passage_tail_to_first_choice_row","choice_row_question_to_first_track","choice_label_to_text","choice_tracks_internal","choice_row_baseline","wrapped_option_continuation","choice_label_text_atomicity","choice_row_unsplittable","student_tail_to_next_section_same_page"]},
+    {"bundleId":"print-html-student","surface":"print_html","variants":["student-baseline","student-wrapped-option"],"expectedEdgeIds":["previous_family_to_chrome_same_page","chrome_internal","chrome_to_passage","passage_line_internal","paragraph_transition","inline_blank_no_phantom_space","inline_blank_atomicity","inline_blank_punctuation_outside","passage_tail_to_first_choice_row","choice_row_question_to_first_track","choice_label_to_text","choice_tracks_internal","choice_row_baseline","wrapped_option_continuation","choice_label_text_atomicity","choice_row_unsplittable","student_tail_to_next_section_same_page"]},
+    {"bundleId":"print-html-teacher","surface":"print_html","variants":["teacher-baseline","teacher-wrapped-option"],"expectedEdgeIds":["previous_family_to_chrome_same_page","chrome_internal","chrome_to_passage","passage_line_internal","paragraph_transition","inline_blank_no_phantom_space","inline_blank_atomicity","inline_blank_punctuation_outside","passage_tail_to_first_choice_row","choice_row_question_to_first_track","choice_label_to_text","choice_tracks_internal","choice_row_baseline","wrapped_option_continuation","choice_label_text_atomicity","choice_row_unsplittable","choice_row_to_answer","answer_to_explanation","teacher_tail_to_next_row","teacher_tail_to_next_section_same_page"]},
+    {"bundleId":"pdf-student","surface":"pdf","variants":["student-baseline","student-passage-cross-page","student-choice-block-cross-page","student-next-section-cross-page"],"expectedEdgeIds":["previous_family_to_chrome_same_page","previous_family_to_chrome_cross_page","chrome_internal","chrome_to_passage","passage_line_internal","paragraph_transition","inline_blank_no_phantom_space","inline_blank_atomicity","inline_blank_punctuation_outside","same_passage_cross_page","passage_tail_to_first_choice_row","choice_row_question_to_first_track","choice_label_to_text","choice_tracks_internal","choice_row_baseline","wrapped_option_continuation","choice_label_text_atomicity","choice_row_unsplittable","choice_block_cross_page","student_tail_to_next_section_same_page","student_tail_to_next_section_cross_page"]},
+    {"bundleId":"pdf-teacher","surface":"pdf","variants":["teacher-baseline","teacher-passage-cross-page","teacher-choice-block-cross-page","teacher-next-section-cross-page"],"expectedEdgeIds":["previous_family_to_chrome_same_page","previous_family_to_chrome_cross_page","chrome_internal","chrome_to_passage","passage_line_internal","paragraph_transition","inline_blank_no_phantom_space","inline_blank_atomicity","inline_blank_punctuation_outside","same_passage_cross_page","passage_tail_to_first_choice_row","choice_row_question_to_first_track","choice_label_to_text","choice_tracks_internal","choice_row_baseline","wrapped_option_continuation","choice_label_text_atomicity","choice_row_unsplittable","choice_block_cross_page","choice_row_to_answer","answer_to_explanation","teacher_tail_to_next_row","teacher_tail_to_next_section_same_page","teacher_tail_to_next_section_cross_page"]}
+  ]
+}

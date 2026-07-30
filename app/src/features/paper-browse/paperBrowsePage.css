@@ -379,6 +379,46 @@
   margin-top: var(--ps-seven-adjacent-chrome-margin-top-adjustment);
 }
 
+.paper-browse-part-heading[data-canonical-cloze-chrome] {
+  margin: var(--ps-cloze-baseline-step) 0 0;
+  line-height: var(--ps-cloze-baseline-step);
+}
+
+.paper-browse-part-heading[
+  data-canonical-cloze-chrome
+][data-canonical-seven-choices-following-for] {
+  margin-top: var(--ps-seven-following-section-margin-top-adjustment);
+}
+
+.paper-browse-section-heading[data-canonical-cloze-chrome] {
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: var(--ps-cloze-baseline-step);
+}
+
+.paper-browse-instruction[data-canonical-cloze-chrome] {
+  margin-top: 0;
+  margin-bottom: calc(var(--ps-cloze-baseline-step) / 2);
+  line-height: var(--ps-cloze-baseline-step);
+}
+
+.paper-browse-content > [data-canonical-cloze-chrome]
+  + [data-canonical-cloze-chrome],
+.paper-browse-content > [data-canonical-cloze-chrome]
+  + .paper-browse-group-card:has(
+    > [data-canonical-cloze-chrome]
+  ) {
+  margin-top: calc(-1 * var(--pb-block-gap));
+}
+
+.paper-browse-part-heading[data-canonical-cloze-following-for],
+.paper-browse-section-heading[data-canonical-cloze-following-for] {
+  margin-top: calc(
+    var(--ps-cloze-baseline-step) - var(--pb-block-gap)
+  );
+  line-height: var(--ps-cloze-baseline-step);
+}
+
 /* dashed-line-unify: 屏幕卷面是连续流，「分页」是纸的语义——线退役
    （导出面分页纪律零触碰），元素保留为零高度锚免动 TSX 结构。此前这
    条 0.25 暖墨虚线会冒充剪刀线（owner 报障：七选五选项池被夹）。 */

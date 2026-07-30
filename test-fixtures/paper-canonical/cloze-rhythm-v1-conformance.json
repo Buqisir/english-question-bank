@@ -1,0 +1,16 @@
+{
+  "schemaVersion":"cloze-rhythm-v1-conformance-v1",
+  "authority":{"schemaVersion":"cloze-rhythm-v1","id":"cloze-rhythm","version":"1"},
+  "exactValues":{
+    "blankGeometry":{"widthEm":3.3,"numberAlignment":"center","whiteSpace":"nowrap","verticalSpaceContribution":0,"punctuationOwnership":"passage_text_outside_blank","atomicity":"inline_block_unbreakable"},
+    "horizontalChoiceGeometry":{"rowWidthPt":438.2,"questionLabelWidthPt":21,"columnStartsPt":[0,104,208,312],"columnOriginPitchPt":104,"columnWidthsPt":[104,104,104,126.2],"minimumGutterPt":21}
+  },
+  "schemaAttacks":[
+    {"caseId":"unversioned-cloze-override","path":["unversionedGeometryOverride"],"invalidValue":true,"expectedIssueCode":"SCHEMA_UNKNOWN_FIELD"}
+  ],
+  "semanticAttacks":[
+    {"caseId":"blank-width-drift","path":["blankGeometry","widthEm"],"invalidValue":3.4,"expectedIssueCode":"RENDERER_CLOZE_RHYTHM_INVALID"},
+    {"caseId":"column-origin-drift","path":["horizontalChoiceGeometry","rendererMapping","columnStartsPt",2],"invalidValue":209,"expectedIssueCode":"RENDERER_CLOZE_RHYTHM_INVALID"},
+    {"caseId":"shrink-layout-enabled","path":["horizontalChoiceGeometry","strategy","shrinkToFit"],"invalidValue":true,"expectedIssueCode":"RENDERER_CLOZE_RHYTHM_INVALID"}
+  ]
+}

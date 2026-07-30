@@ -35,6 +35,9 @@ import {
 import {
   sevenChoicesRhythm,
 } from '../../../../shared/paper-canonical/sevenChoicesRhythm.mjs'
+import {
+  clozeRhythm,
+} from '../../../../shared/paper-canonical/clozeRhythm.mjs'
 import { renderCanonicalPaperSentenceContent } from './CanonicalPaperSentenceContent.tsx'
 import {
   renderLegacyPaperSentenceContent,
@@ -75,6 +78,8 @@ const paperSurfaceTokenStyle: PaperSurfaceStyle = {
   '--ps-line-height': paperSurfaceTokens.paperLineHeight,
   '--ps-seven-baseline-step':
     `${sevenChoicesRhythm.targets.screen.baselineStepPx}px`,
+  '--ps-cloze-baseline-step':
+    `${clozeRhythm.targets.screen.baselineStepPx}px`,
   '--ps-passage-indent': paperSurfaceTokens.passageIndent,
   '--ps-options-grid-columns': paperSurfaceTokens.optionsGridColumns,
   '--ps-options-grid-gap-x': paperSurfaceTokens.optionsGridGapX,
@@ -135,6 +140,9 @@ type PaperSurfaceComponentProps = Omit<PaperSurfaceProps, 'blankFocusMode'> & {
   /** Enables the canonical Seven Choices semantic-role rhythm graph. */
   readonly sevenChoicesRhythmEnabled?: boolean
   readonly sevenChoicesFollowingSectionId?: string
+  /** Enables the canonical Cloze semantic-role rhythm graph. */
+  readonly clozeRhythmEnabled?: boolean
+  readonly clozeFollowingSectionId?: string
   /** Optional fixture-backed visible bank heading; production source may omit it. */
   readonly optionBankHeading?: string
   /** Ordered canonical Application Writing prompt rendered without legacy inference. */
@@ -179,6 +187,8 @@ export function PaperSurface(props: PaperSurfaceComponentProps): ReactNode {
     canonicalReadingFollowingSectionId,
     sevenChoicesRhythmEnabled = false,
     sevenChoicesFollowingSectionId,
+    clozeRhythmEnabled = false,
+    clozeFollowingSectionId,
     optionBankHeading,
     canonicalApplicationPromptBlocks,
     canonicalContinuationMaterialBlocks,
@@ -362,6 +372,8 @@ export function PaperSurface(props: PaperSurfaceComponentProps): ReactNode {
             blankFocus={blankFocus}
             semanticParagraphs={semanticParagraphs}
             sevenChoicesRhythmEnabled={sevenChoicesRhythmEnabled}
+            clozeRhythmEnabled={clozeRhythmEnabled}
+            clozeFollowingSectionId={clozeFollowingSectionId}
           />
         ))}
         {/* seven-options-on-paper: the 七选五 A-G candidate-sentence
@@ -684,6 +696,8 @@ type PaperSurfaceSectionProps = {
   blankFocus: BlankFocusContext
   semanticParagraphs?: ReadonlyArray<CanonicalSurfaceParagraph>
   sevenChoicesRhythmEnabled: boolean
+  clozeRhythmEnabled: boolean
+  clozeFollowingSectionId?: string
 }
 
 function PaperSurfaceSection({
@@ -698,6 +712,8 @@ function PaperSurfaceSection({
   blankFocus,
   semanticParagraphs,
   sevenChoicesRhythmEnabled,
+  clozeRhythmEnabled,
+  clozeFollowingSectionId,
 }: PaperSurfaceSectionProps): ReactNode {
   const paragraphs = useMemo(
     () => textMap.paragraphs.filter((p) => p.section === section),
@@ -723,6 +739,9 @@ function PaperSurfaceSection({
       data-canonical-seven-choices-section={
         sevenChoicesRhythmEnabled ? '' : undefined
       }
+      data-canonical-cloze-section={
+        clozeRhythmEnabled ? '' : undefined
+      }
     >
       <div className="ps-passage-body">
         {paragraphs.map((para) => (
@@ -735,6 +754,7 @@ function PaperSurfaceSection({
             blankFocus={blankFocus}
             semanticParagraph={semanticParagraphs?.find((item) => item.id === para.id)}
             sevenChoicesRhythmEnabled={sevenChoicesRhythmEnabled}
+            clozeRhythmEnabled={clozeRhythmEnabled}
           />
         ))}
       </div>
@@ -748,6 +768,8 @@ function PaperSurfaceSection({
           questions={questions}
           lectureFocus={lectureFocus}
           onQuestionClick={onQuestionClick}
+          clozeRhythmEnabled={clozeRhythmEnabled}
+          clozeFollowingSectionId={clozeFollowingSectionId}
         />
       )}
     </section>
@@ -764,6 +786,7 @@ type PaperSurfaceParagraphProps = {
   blankFocus: BlankFocusContext
   semanticParagraph?: CanonicalSurfaceParagraph
   sevenChoicesRhythmEnabled: boolean
+  clozeRhythmEnabled: boolean
 }
 
 function PaperSurfaceParagraph({
@@ -774,6 +797,7 @@ function PaperSurfaceParagraph({
   blankFocus,
   semanticParagraph,
   sevenChoicesRhythmEnabled,
+  clozeRhythmEnabled,
 }: PaperSurfaceParagraphProps): ReactNode {
   // figure-render cut (fig-token P0): `paragraph.figure` is set ONLY by
   // the adapter when this paragraph's WHOLE text is a manifest marker
@@ -804,6 +828,9 @@ function PaperSurfaceParagraph({
       {...{ [paperSurfaceAnchorAttrs.paragraphId]: paragraph.id }}
       data-canonical-seven-choices-rhythm-role={
         sevenChoicesRhythmEnabled ? 'passage_body_line' : undefined
+      }
+      data-canonical-cloze-rhythm-role={
+        clozeRhythmEnabled ? 'passage_body_line' : undefined
       }
     >
       {paragraph.sentences.map((sentence) => (
@@ -959,6 +986,8 @@ type PaperSurfaceQuestionListProps = {
   readingSuccessorGroupId?: string
   readingFollowingSectionId?: string
   readingRhythmEnabled?: boolean
+  clozeRhythmEnabled?: boolean
+  clozeFollowingSectionId?: string
 }
 
 function PaperSurfaceQuestionList({
@@ -968,6 +997,8 @@ function PaperSurfaceQuestionList({
   readingSuccessorGroupId,
   readingFollowingSectionId,
   readingRhythmEnabled = false,
+  clozeRhythmEnabled = false,
+  clozeFollowingSectionId,
 }: PaperSurfaceQuestionListProps): ReactNode {
   const sorted = useMemo(
     () => [...questions].sort((a, b) => a.order - b.order),
@@ -993,6 +1024,12 @@ function PaperSurfaceQuestionList({
               : undefined
           }
           readingRhythmEnabled={readingRhythmEnabled}
+          clozeRhythmEnabled={clozeRhythmEnabled}
+          clozeFollowingSectionId={
+            index === sorted.length - 1
+              ? clozeFollowingSectionId
+              : undefined
+          }
         />
       ))}
     </ol>
@@ -1008,6 +1045,8 @@ type PaperSurfaceQuestionItemProps = {
   readingSuccessorGroupId?: string
   readingFollowingSectionId?: string
   readingRhythmEnabled: boolean
+  clozeRhythmEnabled: boolean
+  clozeFollowingSectionId?: string
 }
 
 function PaperSurfaceQuestionItem({
@@ -1017,6 +1056,8 @@ function PaperSurfaceQuestionItem({
   readingSuccessorGroupId,
   readingFollowingSectionId,
   readingRhythmEnabled,
+  clozeRhythmEnabled,
+  clozeFollowingSectionId,
 }: PaperSurfaceQuestionItemProps): ReactNode {
   // QA fix (PR #39): the whole question block is one focus target.
   //
@@ -1063,6 +1104,10 @@ function PaperSurfaceQuestionItem({
       data-canonical-reading-last-question-before-section={
         readingFollowingSectionId
       }
+      data-canonical-cloze-rhythm-role={
+        clozeRhythmEnabled ? 'choice_row' : undefined
+      }
+      data-canonical-cloze-before-section={clozeFollowingSectionId}
       onClick={() => onQuestionClick(question.id)}
     >
       {!trimmedStem && hasOptions ? (
@@ -1093,17 +1138,31 @@ function PaperSurfaceQuestionItem({
                 className="ps-question-options-inline-item"
                 {...{ [paperSurfaceAnchorAttrs.optionLabel]: opt.label }}
               >
-                <span className="ps-option-label">{opt.label}.</span>{' '}
-                {opt.canonicalContent
-                  ? opt.canonicalContent.map((inline) => (
-                      <span
-                        key={inline.nodeId}
-                        data-canonical-content-node-id={inline.nodeId}
-                      >
-                        {inline.text}
-                      </span>
-                    ))
-                  : opt.text}
+                <span
+                  className="ps-option-label"
+                  data-canonical-cloze-rhythm-role={
+                    clozeRhythmEnabled ? 'choice_label' : undefined
+                  }
+                >
+                  {opt.label}.
+                </span>{' '}
+                <span
+                  className="ps-option-text"
+                  data-canonical-cloze-rhythm-role={
+                    clozeRhythmEnabled ? 'choice_text' : undefined
+                  }
+                >
+                  {opt.canonicalContent
+                    ? opt.canonicalContent.map((inline) => (
+                        <span
+                          key={inline.nodeId}
+                          data-canonical-content-node-id={inline.nodeId}
+                        >
+                          {inline.text}
+                        </span>
+                      ))
+                    : opt.text}
+                </span>
               </span>
             ))}
           </span>

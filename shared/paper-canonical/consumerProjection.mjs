@@ -1,9 +1,10 @@
 import {
   abcdPlacementSignature,
   layoutAbcdOptionSet,
+  layoutFixedFourColumnClozeOptionSet,
 } from './abcdLayout.mjs'
 import { readingPassageLetterBySlotId } from './readingPassageLetter.mjs'
-import { digestJson, sha256 } from './stable.mjs'
+import { digestJson, sha256, stableStringify } from './stable.mjs'
 
 const SUPPORTED_FAMILIES = new Set([
   'cloze',
@@ -12,6 +13,10 @@ const SUPPORTED_FAMILIES = new Set([
   'reading',
   'application-writing',
   'continuation-writing',
+])
+
+const VERIFIED_PRE_V18_CLOZE_CONSUMPTION_DIGESTS = new Set([
+  'sha256:9088282a4eac36c568c8f57a7c643ed9e173b5b3bb04806a28074f636996268c',
 ])
 
 function rejected(message, issues = []) {
@@ -764,7 +769,7 @@ export function selectedFamilyContractIdForGroup({
 }
 
 function selectOccurrence(input) {
-  const { familyContractId, groupId } = input
+  const { consumption, familyContractId, groupId } = input
   const selection = selectConsumerGroupMode(input)
   if (selection.mode !== 'canonical') {
     throw rejected(`Family ${familyContractId} is not wholly canonical`)
@@ -788,6 +793,72 @@ function selectOccurrence(input) {
     || occurrenceGroupIds.some((id) => !selection.groupIds.includes(id))
   ) {
     throw rejected(`Family ${familyContractId} projected occurrences do not close the selection`)
+  }
+  if (familyContractId === 'cloze') {
+    const authorityRef = consumption?.authorityRef
+    // Both successor fields are absent only on byte-pinned pre-v18 Plans.
+    const carriesIntegrityEnvelope =
+      authorityRef !== undefined
+      || selection.projectedOccurrenceDigests !== undefined
+    if (
+      !carriesIntegrityEnvelope
+      && !VERIFIED_PRE_V18_CLOZE_CONSUMPTION_DIGESTS.has(
+        sha256(`${stableStringify(consumption)}\n`),
+      )
+    ) {
+      throw rejected(
+        `Family ${familyContractId} historical Consumption Plan is unverified`,
+      )
+    }
+    if (carriesIntegrityEnvelope) {
+      const authorityVersion = Number(authorityRef?.manifestVersion)
+      if (
+        authorityRef?.manifestId !== 'paper-canonical'
+        || typeof authorityRef.manifestVersion !== 'string'
+        || !Number.isInteger(authorityVersion)
+        || authorityVersion < 1
+        || typeof authorityRef.manifestDigest !== 'string'
+      ) {
+        throw rejected(
+          `Family ${familyContractId} Consumption Plan authority is invalid`,
+        )
+      }
+      const integrityRequired = authorityVersion >= 18
+      if (
+        integrityRequired
+        && !Array.isArray(selection.projectedOccurrenceDigests)
+      ) {
+        throw rejected(
+          `Family ${familyContractId} projected occurrence integrity is required`,
+        )
+      }
+      if (selection.projectedOccurrenceDigests !== undefined) {
+        if (!Array.isArray(selection.projectedOccurrenceDigests)) {
+          throw rejected(
+            `Family ${familyContractId} projected occurrence integrity is invalid`,
+          )
+        }
+        const digestByGroupId = new Map(
+          selection.projectedOccurrenceDigests.map((entry) => [
+            entry?.groupId,
+            entry?.digest,
+          ]),
+        )
+        if (
+          selection.projectedOccurrenceDigests.length
+            !== selection.projectedOccurrences.length
+          || digestByGroupId.size !== selection.projectedOccurrences.length
+          || selection.projectedOccurrences.some(
+            (occurrence) =>
+              digestByGroupId.get(occurrence.groupId) !== digestJson(occurrence),
+          )
+        ) {
+          throw rejected(
+            `Family ${familyContractId} projected occurrence integrity is invalid`,
+          )
+        }
+      }
+    }
   }
   const occurrences = selection.projectedOccurrences.filter(
     (occurrence) => occurrence?.kind === 'group' && occurrence.groupId === groupId,
@@ -925,7 +996,9 @@ export function projectCanonicalConsumerGroup(input) {
       : []
     const layoutPlan = options.length === 0
       ? null
-      : layoutAbcdOptionSet({
+      : (familyContractId === 'cloze'
+          ? layoutFixedFourColumnClozeOptionSet
+          : layoutAbcdOptionSet)({
           owner: 'question',
           questionId,
           options: choiceSet.options,

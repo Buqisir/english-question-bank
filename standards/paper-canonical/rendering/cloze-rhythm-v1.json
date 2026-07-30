@@ -1,0 +1,106 @@
+{
+  "schemaVersion": "cloze-rhythm-v1",
+  "id": "cloze-rhythm",
+  "version": "1",
+  "owner": "renderer_typography",
+  "paper": "a4",
+  "projectionContract": "canonical-projector-v1",
+  "rules": [
+    "typography_never_changes_canonical_text",
+    "inline_blank_width_is_3_3em_class",
+    "inline_blank_number_is_centered",
+    "inline_blank_markers_add_no_vertical_space",
+    "inline_blank_punctuation_remains_outside",
+    "inline_blank_units_are_atomic",
+    "source_cloze_rows_use_one_fixed_four_column_plan",
+    "option_label_and_text_are_atomic",
+    "choice_rows_are_unsplittable",
+    "optional_roles_collapse_without_phantom_space",
+    "previous_family_identity_remains_seven_choices_owned"
+  ],
+  "semanticRoleClasses": {
+    "previousFamilyBoundary": ["previous_family_tail"],
+    "chrome": ["part_title", "subsection", "meta_instruction"],
+    "passageContent": ["passage_body_line"],
+    "inlineBlank": ["inline_blank_marker"],
+    "choiceRow": ["choice_row"],
+    "choiceLabel": ["choice_label"],
+    "choiceText": ["choice_text"],
+    "teacherTail": ["answer_line", "explanation_line"],
+    "followingSection": ["next_section"]
+  },
+  "adjacencyGraph": [
+    {"edgeId":"previous_family_to_chrome_same_page","fromClass":"previousFamilyBoundary","toClass":"chrome","baselineStepRatio":2,"optionalCollapse":true},
+    {"edgeId":"previous_family_to_chrome_cross_page","fromClass":"previousFamilyBoundary","toClass":"chrome","pageRelation":"next_page_start","optionalCollapse":true},
+    {"edgeId":"chrome_internal","fromClass":"chrome","toClass":"chrome","baselineStepRatio":1,"optionalCollapse":true},
+    {"edgeId":"chrome_to_passage","fromClass":"chrome","toClass":"passageContent","baselineStepRatio":1.5,"optionalCollapse":true},
+    {"edgeId":"passage_line_internal","fromClass":"passageContent","toClass":"passageContent","baselineStepRatio":1,"optionalCollapse":false},
+    {"edgeId":"paragraph_transition","fromClass":"passageContent","toClass":"passageContent","baselineStepRatio":1,"optionalCollapse":false},
+    {"edgeId":"inline_blank_no_phantom_space","fromRole":"passage_body_line","throughClass":"inlineBlank","toRole":"passage_body_line","extraBaselineStepRatio":0,"optionalCollapse":false},
+    {"edgeId":"inline_blank_atomicity","fromClass":"inlineBlank","toClass":"inlineBlank","pageRelation":"same_line_unsplittable","optionalCollapse":false},
+    {"edgeId":"inline_blank_punctuation_outside","fromClass":"inlineBlank","toRole":"passage_body_line","pageRelation":"punctuation_sibling","optionalCollapse":false},
+    {"edgeId":"same_passage_cross_page","fromClass":"passageContent","toClass":"passageContent","pageRelation":"next_page_continuation","optionalCollapse":false},
+    {"edgeId":"passage_tail_to_first_choice_row","fromClass":"passageContent","toClass":"choiceRow","baselineStepRatio":2,"optionalCollapse":false},
+    {"edgeId":"choice_row_question_to_first_track","fromRole":"choice_row","toRole":"choice_label","horizontalRelation":"fixed_question_to_A_anchor","optionalCollapse":false},
+    {"edgeId":"choice_label_to_text","fromRole":"choice_label","toRole":"choice_text","horizontalRelation":"fixed_em_gap","optionalCollapse":false},
+    {"edgeId":"choice_tracks_internal","fromClass":"choiceLabel","toClass":"choiceLabel","horizontalRelation":"four_fixed_equal_origin_pitch_tracks","optionalCollapse":false},
+    {"edgeId":"choice_row_baseline","fromClass":"choiceRow","toClass":"choiceRow","baselineStepRatio":1,"optionalCollapse":false},
+    {"edgeId":"wrapped_option_continuation","fromRole":"choice_text","toRole":"choice_text","horizontalRelation":"hanging_indent","optionalCollapse":false},
+    {"edgeId":"choice_label_text_atomicity","fromRole":"choice_label","toRole":"choice_text","pageRelation":"same_atomic_option","optionalCollapse":false},
+    {"edgeId":"choice_row_unsplittable","fromClass":"choiceRow","toClass":"choiceRow","pageRelation":"same_page_unit","optionalCollapse":false},
+    {"edgeId":"choice_block_cross_page","fromClass":"choiceRow","toClass":"choiceRow","pageRelation":"next_page_continuation","optionalCollapse":false},
+    {"edgeId":"choice_row_to_answer","fromClass":"choiceRow","toRole":"answer_line","baselineStepRatio":1,"optionalCollapse":true},
+    {"edgeId":"answer_to_explanation","fromRole":"answer_line","toRole":"explanation_line","baselineStepRatio":1,"optionalCollapse":true},
+    {"edgeId":"teacher_tail_to_next_row","fromClass":"teacherTail","toClass":"choiceRow","baselineStepRatio":1,"optionalCollapse":true},
+    {"edgeId":"student_tail_to_next_section_same_page","fromClass":"choiceRow","toRole":"next_section","baselineStepRatio":2,"optionalCollapse":false},
+    {"edgeId":"teacher_tail_to_next_section_same_page","fromClass":"teacherTail","toRole":"next_section","baselineStepRatio":2,"optionalCollapse":true},
+    {"edgeId":"student_tail_to_next_section_cross_page","fromClass":"choiceRow","toRole":"next_section","pageRelation":"next_page_start","optionalCollapse":false},
+    {"edgeId":"teacher_tail_to_next_section_cross_page","fromClass":"teacherTail","toRole":"next_section","pageRelation":"next_page_start","optionalCollapse":true}
+  ],
+  "targets": {
+    "screen": {"baselineStepPx":24,"oneStepTolerancePx":1.5,"threeHalfStepTolerancePx":1.5,"twoStepTolerancePx":1.5},
+    "printPdf": {"baselineStepPt":18,"oneStepTolerancePt":1.5,"threeHalfStepTolerancePt":1.5,"twoStepTolerancePt":1.5}
+  },
+  "blankGeometry": {
+    "widthEm": 3.3,
+    "numberAlignment": "center",
+    "whiteSpace": "nowrap",
+    "verticalSpaceContribution": 0,
+    "punctuationOwnership": "passage_text_outside_blank",
+    "atomicity": "inline_block_unbreakable"
+  },
+  "horizontalChoiceGeometry": {
+    "rowOccupancy": {"questionLabelCount":1,"tracksPerRow":4,"optionsPerTrack":1,"columnCount":4},
+    "strategy": {
+      "questionLabel":"fixed_leading_anchor",
+      "optionColumns":"four_fixed_equal_origin_pitch_tracks",
+      "optionLabel":"fixed_anchor_per_track",
+      "optionTextStart":"after_label_glyph_plus_fixed_gap",
+      "gutter":"fixed_minimum_gutter_not_distributed",
+      "trailingCapacity":"final_track_consumes_remaining_width_without_moving_origins",
+      "distribution":"not_distributed_not_space_between",
+      "wrappedContinuation":"hanging_indent_at_option_text_start",
+      "hybridRows":"forbidden",
+      "shrinkToFit":false
+    },
+    "rendererMapping": {
+      "rowWidthPt":438.2,
+      "questionLabelWidthPt":21,
+      "columnStartsPt":[0,104,208,312],
+      "columnOriginPitchPt":104,
+      "columnWidthsPt":[104,104,104,126.2],
+      "minimumGutterPt":21
+    }
+  },
+  "goldenGeometryFramework": {
+    "id":"golden-geometry-framework-v1",
+    "path":"docs/cuts/paper-canonical-unification/qa/golden-geometry-framework-v1.md",
+    "sha256":"sha256:46fee75e0ddaa62989985c1e3dea5be11f8501324fd0a95b409b610716c0be88",
+    "axes":["vertical","horizontal"],
+    "familyValuesAreNotShared":true
+  },
+  "referenceMeasurement": {
+    "path":"docs/cuts/paper-canonical-unification/qa/20-cloze-golden-geometry-reference-measurements-v1.json",
+    "sha256":"sha256:ae6b4a6e5d651ac1fa4a6a6d5365b03c9a6d80f431d98b50af969c2a92f4a6d4"
+  }
+}

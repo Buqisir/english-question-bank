@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "normalization-report-v18",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion","disposition","authority","captureDigest","sourceFingerprint","directSourceMap","transformationRecords","reviewDecisions","inactiveSourceClosures","diagnostics"],
+  "properties": {
+    "schemaVersion": {"const": "normalization-report-v18"},
+    "disposition": {"enum": ["ready","needs_review","unsupported","incomplete_source","answer_conflict"]},
+    "authority": {"type": "object"},
+    "captureDigest": {"type": "string"},
+    "sourceFingerprint": {"type": "string"},
+    "semanticDigest": {"type": "string"},
+    "directSourceMap": {"type": "array"},
+    "transformationRecords": {"type": "array"},
+    "reviewDecisions": {"type": "array"},
+    "inactiveSourceClosures": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["scopeId","slotId","contractRef","status","sourceSliceRefs","questionCount","optionLabels","officialAnswerCount","transcriptSegmentCount","transcriptCoverage","timing","audio","sourceMap","transformationRecordIds","closureDigest"],
+        "properties": {
+          "scopeId": {"type": "string"},
+          "slotId": {"enum": ["listening.short-dialogue","listening.long-form"]},
+          "contractRef": {"type":"object","additionalProperties":false,"required":["id","version"],"properties":{"id":{"const":"listening-raw-closure"},"version":{"const":"nck1-v1"}}},
+          "status": {"const": "closed"},
+          "sourceSliceRefs": {"type": "array"},
+          "questionCount": {"type": "integer"},
+          "optionLabels": {"type": "array"},
+          "officialAnswerCount": {"type": "integer"},
+          "transcriptSegmentCount": {"const": 5},
+          "transcriptCoverage": {"const": "exactly_once"},
+          "timing": {"type": "object"},
+          "audio": {"type": "object"},
+          "sourceMap": {"type":"object","additionalProperties":false,"required":["entries"],"properties":{"entries":{"type":"array"}}},
+          "transformationRecordIds": {"type": "array"},
+          "closureDigest": {"type": "string"}
+        }
+      }
+    },
+    "diagnostics": {"type": "array"}
+  }
+}

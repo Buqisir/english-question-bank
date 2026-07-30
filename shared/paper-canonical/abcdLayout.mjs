@@ -267,6 +267,42 @@ export function layoutAbcdOptionSet(optionSet) {
   return selectedPlan('one_column', optionSet, measured)
 }
 
+/**
+ * Cloze's digest-bound golden family uses one fixed A/B/C/D track strategy.
+ * Soft-wrapping content may continue inside its own track, but a hard break,
+ * unsupported glyph, or unbreakable token wider than that track fails closed.
+ */
+export function layoutFixedFourColumnClozeOptionSet(optionSet) {
+  if (
+    optionSet?.owner !== 'question'
+    || !Array.isArray(optionSet.options)
+    || optionSet.options.length !== LABELS.length
+    || optionSet.options.some((option, index) =>
+      option?.label !== LABELS[index] || typeof option.optionId !== 'string')
+  ) return notApplicable()
+
+  const measured = optionSet.options.map(measureOption)
+  if (measured.some((value) => value === null)) {
+    return {
+      status: 'needs_review',
+      reason: 'fixed_four_column_contains_unrenderable_content',
+    }
+  }
+  const cap = capacities().four
+  if (
+    measured.some(
+      ({ hardBreaks, unbreakableAdvanceTwip }, index) =>
+        hardBreaks > 0 || unbreakableAdvanceTwip > cap[index],
+    )
+  ) {
+    return {
+      status: 'needs_review',
+      reason: 'fixed_four_column_contains_unrenderable_content',
+    }
+  }
+  return selectedPlan('four_columns', optionSet, measured)
+}
+
 function assertAuthoritativePlan(plan) {
   if (plan?.status !== 'selected') {
     throw new TypeError('A selected A-D layout plan is required')

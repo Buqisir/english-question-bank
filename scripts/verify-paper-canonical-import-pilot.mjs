@@ -30,6 +30,10 @@ import {
 import {
   sevenChoicesRhythm,
 } from '../shared/paper-canonical/sevenChoicesRhythm.mjs'
+import {
+  clozeRhythm,
+} from '../shared/paper-canonical/clozeRhythm.mjs'
+import { digestJson } from '../shared/paper-canonical/stable.mjs'
 import { loadCanonicalImportRequest } from '../server/paper-canonical/importRequest.mjs'
 import {
   admitCanonicalPaperImport,
@@ -85,6 +89,18 @@ const sevenChoicesSourceOraclePath = path.join(
 const sevenChoicesCoverageOraclePath = path.join(
   repositoryRoot,
   'docs/cuts/paper-canonical-unification/qa/20-seven-choices-observed-coverage-oracle-v1.json',
+)
+const clozeReferencePath = path.join(
+  repositoryRoot,
+  'docs/cuts/paper-canonical-unification/qa/20-cloze-golden-geometry-reference-measurements-v1.json',
+)
+const clozeSourceOraclePath = path.join(
+  repositoryRoot,
+  'docs/cuts/paper-canonical-unification/qa/20-cloze-source-oracles-v1.json',
+)
+const clozeCoverageOraclePath = path.join(
+  repositoryRoot,
+  'docs/cuts/paper-canonical-unification/qa/20-cloze-observed-coverage-oracle-v1.json',
 )
 const paperId = 'paper-2026-i'
 const provisionActualArtifacts = process.argv.includes('--actual-artifacts')
@@ -353,18 +369,18 @@ function assertSevenChoicesReferenceEvidence() {
   )
   assert.equal(
     canonicalAuthorityRef.manifestVersion,
-    '17',
-    'new Publications use the versioned Seven Choices rhythm authority closure',
+    '18',
+    'new Publications preserve Seven Choices inside the Cloze-extended authority closure',
   )
   assert.equal(
     consumerContractRefs.screen.version,
-    '17',
-    'Screen v17 binds the Seven Choices rhythm authority closure',
+    '18',
+    'Screen v18 binds the complete geometry authority closure',
   )
   assert.equal(
     consumerContractRefs.print_pdf.version,
-    '18',
-    'Print/PDF v18 binds the Seven Choices rhythm authority closure',
+    '19',
+    'Print/PDF v19 binds the complete geometry authority closure',
   )
   assert.equal(
     sha256(preservedBytes),
@@ -599,6 +615,318 @@ function sourcePdfPageText(pdfPath, pageNumber) {
     ['-f', String(pageNumber), '-l', String(pageNumber), '-layout', pdfPath, '-'],
     { encoding: 'utf8' },
   )
+}
+
+function independentClozeExplanationText(entry) {
+  const parts = []
+  if (entry?.correctFit?.reason) {
+    parts.push(`正答依据：${entry.correctFit.reason}`)
+  }
+  const distractors = Array.isArray(entry?.distractorGlosses)
+    ? entry.distractorGlosses
+      .map((item) =>
+        item?.optionLabel && item?.meaning
+          ? `${item.optionLabel}. ${item.meaning}`
+          : '')
+      .filter(Boolean)
+    : []
+  if (distractors.length > 0) {
+    parts.push(`干扰项：${distractors.join('　')}`)
+  }
+  if (entry?.teachingNote) {
+    parts.push(`点拨：${entry.teachingNote}`)
+  }
+  return parts.join('\n')
+}
+
+function assertClozeSourceOracle() {
+  const bytes = readFileSync(clozeSourceOraclePath)
+  const oracle = JSON.parse(bytes)
+  assert.equal(oracle.schemaVersion, 'cloze-source-oracles-v1')
+  assert.equal(oracle.paperId, paperId)
+  const questionPdfPath = path.join(
+    repositoryRoot,
+    oracle.sources.questionPdf.path,
+  )
+  const paperAssetPath = path.join(
+    repositoryRoot,
+    oracle.sources.paperAsset.path,
+  )
+  const answersPath = path.join(
+    repositoryRoot,
+    oracle.sources.officialAnswers.path,
+  )
+  const teacherAnalysisPath = path.join(
+    repositoryRoot,
+    oracle.sources.teacherAnalysis.path,
+  )
+  for (const [label, source, sourcePath] of [
+    ['original question PDF', oracle.sources.questionPdf, questionPdfPath],
+    ['paper asset', oracle.sources.paperAsset, paperAssetPath],
+    ['official answers', oracle.sources.officialAnswers, answersPath],
+    [
+      'reviewed Teacher analysis',
+      oracle.sources.teacherAnalysis,
+      teacherAnalysisPath,
+    ],
+  ]) {
+    assert.equal(
+      sha256(readFileSync(sourcePath)),
+      source.sha256,
+      `Cloze source oracle binds the immutable ${label} bytes`,
+    )
+  }
+  const clozePage = normalizedVisibleText(sourcePdfPageText(
+    questionPdfPath,
+    oracle.sources.questionPdf.clozePage,
+  ))
+  const followingPage = normalizedVisibleText(sourcePdfPageText(
+    questionPdfPath,
+    oracle.sources.questionPdf.grammarFillPage,
+  ))
+  for (const [label, haystack, marker] of [
+    ['part', clozePage, oracle.sourceExtraction.partMarker],
+    ['section', clozePage, oracle.sourceExtraction.sectionMarker],
+    ['instruction', clozePage, oracle.sourceExtraction.instructionMarker],
+    ['passage start', clozePage, oracle.sourceExtraction.passageStartMarker],
+    ['passage end', clozePage, oracle.sourceExtraction.passageEndMarker],
+    ['first choice', clozePage, oracle.sourceExtraction.firstChoiceMarker],
+    ['last choice', clozePage, oracle.sourceExtraction.lastChoiceMarker],
+    ['following Grammar Fill section', followingPage, oracle.sourceExtraction.followingSectionMarker],
+  ]) {
+    assert.equal(
+      haystack.includes(normalizedVisibleText(marker)),
+      true,
+      `immutable source exposes the Cloze ${label} marker`,
+    )
+  }
+  const paperAsset = JSON.parse(readFileSync(paperAssetPath, 'utf8'))
+  const officialAnswers = JSON.parse(readFileSync(answersPath, 'utf8'))
+  const teacherAnalysis = JSON.parse(
+    readFileSync(teacherAnalysisPath, 'utf8'),
+  )
+  assert.equal(
+    teacherAnalysis.schemaVersion,
+    oracle.sources.teacherAnalysis.schemaVersion,
+  )
+  assert.equal(
+    teacherAnalysis.meta?.reviewStatus,
+    oracle.sources.teacherAnalysis.reviewStatus,
+  )
+  const group = paperAsset.content.groups[
+    oracle.publicIdentities.cloze.groupId
+  ]
+  assert.ok(group, 'paper asset exposes the independently named Cloze Group')
+  assert.equal(group.groupType, 'cloze')
+  assert.deepEqual(
+    group.questionIds,
+    oracle.publicIdentities.cloze.questionIds,
+    'Cloze question identity/order comes from the independent source oracle',
+  )
+  assert.deepEqual(
+    group.blankIds,
+    oracle.publicIdentities.cloze.blankIds,
+    'Cloze blank identity/order comes from the independent source oracle',
+  )
+  assert.deepEqual(
+    group.passage.paragraphs.map((paragraph) => paragraph.paragraphId),
+    oracle.publicIdentities.cloze.paragraphIds,
+    'Cloze paragraph identity/order comes from the independent source oracle',
+  )
+  const questionRows = group.questionIds.map((questionId, index) => {
+    const question = paperAsset.content.questions[questionId]
+    const expectedNo = oracle.sourceSemantics.questionNumbers[index]
+    assert.equal(question.questionNo, expectedNo)
+    assert.equal(question.blankId, group.blankIds[index])
+    assert.deepEqual(
+      question.options.map((option) => option.label),
+      oracle.sourceSemantics.optionLabels,
+      `Question ${expectedNo} retains fixed A/B/C/D source labels`,
+    )
+    const answer = officialAnswers.answers[questionId]
+    assert.ok(answer, `official answers include ${questionId}`)
+    assert.equal(answer.questionNo, expectedNo)
+    assert.equal(
+      oracle.sourceSemantics.optionLabels.includes(answer.answer),
+      true,
+      `${questionId} official answer resolves to its immutable A-D set`,
+    )
+    const reviewedAnalysis = teacherAnalysis.blanks?.[questionId]
+    assert.ok(
+      reviewedAnalysis,
+      `reviewed Teacher analysis includes ${questionId}`,
+    )
+    const explanation = independentClozeExplanationText(reviewedAnalysis)
+    assert.equal(
+      explanation.length > 0,
+      true,
+      `reviewed Teacher analysis produces an independent explanation for ${questionId}`,
+    )
+    return {
+      questionId,
+      questionNo: expectedNo,
+      blankId: question.blankId,
+      options: question.options.map((option) => ({ ...option })),
+      answer: answer.answer,
+      explanation,
+    }
+  })
+  const wrappedVariantRow = questionRows.find(
+    (row) => row.questionId === oracle.variants.wrappedOption.questionId,
+  )
+  assert.equal(
+    wrappedVariantRow?.options.some(
+      (option) =>
+        option.label === oracle.variants.wrappedOption.optionLabel,
+    ),
+    true,
+    'wrapped-option adversary binds an immutable source Question/Option identity',
+  )
+  assert.equal(
+    oracle.variants.passageCrossPage.sourceText,
+    oracle.sourceExtraction.passageStartMarker,
+    'cross-page adversary repeats only an immutable source passage sentence',
+  )
+  assert.equal(
+    oracle.variants.choiceBlockCrossPage.optionLabel,
+    'D',
+    'choice-block adversary names one fixed source track',
+  )
+  return {
+    digest: sha256(bytes),
+    oracle,
+    questionPdfPath,
+    paperAsset,
+    officialAnswers,
+    teacherAnalysis,
+    teacherAnalysisPath,
+    questionRows,
+  }
+}
+
+function assertClozeReferenceEvidence() {
+  const bytes = readFileSync(clozeReferencePath)
+  const evidence = JSON.parse(bytes)
+  assert.equal(
+    evidence.schemaVersion,
+    'cloze-golden-geometry-reference-measurements-v1',
+  )
+  assert.equal(
+    sha256(readFileSync(path.join(repositoryRoot, evidence.reference.file))),
+    evidence.reference.sha256,
+    'Cloze golden geometry binds the immutable family reference JPEG',
+  )
+  assert.match(
+    evidence.measurementMethod.scaleBoundary,
+    /No JPEG pixel is treated as a Screen CSS pixel or PDF point/,
+  )
+  assert.equal(
+    clozeRhythm.referenceMeasurement.path,
+    path.relative(repositoryRoot, clozeReferencePath),
+  )
+  assert.equal(
+    clozeRhythm.referenceMeasurement.sha256,
+    `sha256:${sha256(bytes)}`,
+    'Cloze authority binds the exact checked-in normalized measurement bytes',
+  )
+  assert.equal(clozeRhythm.blankGeometry.widthEm, 3.3)
+  assert.equal(clozeRhythm.blankGeometry.verticalSpaceContribution, 0)
+  assert.deepEqual(
+    clozeRhythm.horizontalChoiceGeometry.rendererMapping,
+    {
+      rowWidthPt: 438.2,
+      questionLabelWidthPt: 21,
+      columnStartsPt: [0, 104, 208, 312],
+      columnOriginPitchPt: 104,
+      columnWidthsPt: [104, 104, 104, 126.2],
+      minimumGutterPt: 21,
+    },
+    'Cloze authority publishes the fixed four-track renderer mapping without a distributed or hybrid row',
+  )
+  return { digest: sha256(bytes), evidence }
+}
+
+function assertClozeCoverageOracle() {
+  const bytes = readFileSync(clozeCoverageOraclePath)
+  const oracle = JSON.parse(bytes)
+  assert.equal(
+    oracle.schemaVersion,
+    'cloze-observed-coverage-oracle-v1',
+  )
+  for (const binding of [
+    oracle.authorityBoundary.sourceOracle,
+    oracle.authorityBoundary.goldenReference,
+  ]) {
+    assert.equal(
+      sha256(readFileSync(path.join(repositoryRoot, binding.path))),
+      binding.sha256,
+      `Cloze coverage oracle binds ${binding.path}`,
+    )
+  }
+  assert.deepEqual(
+    clozeRhythm.adjacencyGraph,
+    oracle.edges,
+    'Cloze production authority edge graph exactly equals the independent checked-in oracle',
+  )
+  assert.deepEqual(
+    {
+      sevenChoicesBoundary:
+        clozeRhythm.semanticRoleClasses.previousFamilyBoundary[0],
+      chrome: clozeRhythm.semanticRoleClasses.chrome,
+      passage: clozeRhythm.semanticRoleClasses.passageContent[0],
+      inlineBlank: clozeRhythm.semanticRoleClasses.inlineBlank[0],
+      choiceRow: clozeRhythm.semanticRoleClasses.choiceRow[0],
+      choiceLabel: clozeRhythm.semanticRoleClasses.choiceLabel[0],
+      choiceText: clozeRhythm.semanticRoleClasses.choiceText[0],
+      answer: clozeRhythm.semanticRoleClasses.teacherTail[0],
+      explanation: clozeRhythm.semanticRoleClasses.teacherTail[1],
+      followingSection:
+        clozeRhythm.semanticRoleClasses.followingSection[0],
+    },
+    oracle.authorityBoundary.expectedSourceRoles,
+    'Cloze role identities exactly equal the independent public-artifact oracle',
+  )
+  const edgeIds = oracle.edges.map((edge) => edge.edgeId)
+  assert.equal(new Set(edgeIds).size, edgeIds.length)
+  assert.deepEqual(
+    [...new Set(oracle.requiredBundles.flatMap(
+      (bundle) => bundle.expectedEdgeIds,
+    ))].sort(),
+    [...edgeIds].sort(),
+    'Cloze required bundles close exactly the independent 26-edge graph',
+  )
+  for (const bundle of oracle.requiredBundles) {
+    assert.equal(new Set(bundle.variants).size, bundle.variants.length)
+    assert.equal(
+      bundle.expectedEdgeIds.every((edgeId) => edgeIds.includes(edgeId)),
+      true,
+      `${bundle.bundleId} contains only independent Cloze edge IDs`,
+    )
+  }
+  const requiredVariantKeys = oracle.requiredBundles.flatMap((bundle) =>
+    bundle.variants.map((variant) => `${bundle.bundleId}/${variant}`))
+  assert.deepEqual(
+    Object.keys(oracle.variantOracle.profileByBundleVariant).sort(),
+    [...requiredVariantKeys].sort(),
+    'Cloze variant oracle declares every required public variant exactly once',
+  )
+  for (const [variantKey, profileId] of Object.entries(
+    oracle.variantOracle.profileByBundleVariant,
+  )) {
+    const profile = oracle.variantOracle.profiles[profileId]
+    assert.equal(
+      Array.isArray(profile) && profile.length > 0,
+      true,
+      `${variantKey} resolves an explicit independent edge profile`,
+    )
+    assert.equal(new Set(profile).size, profile.length)
+    assert.equal(
+      profile.every((edgeId) => edgeIds.includes(edgeId)),
+      true,
+      `${variantKey} contains only independent Cloze edge IDs`,
+    )
+  }
+  return { digest: sha256(bytes), oracle }
 }
 
 function assertSevenChoicesSourceOracle() {
@@ -1143,6 +1471,173 @@ function sevenChoicesPrintVariantItem(asset) {
     sectionTitle: '七选五',
     note: '',
   }
+}
+
+function clozePrintVariantItem(asset) {
+  const { groupId } = clozeSourceOracle.oracle.publicIdentities.cloze
+  const group = asset.content.groups[groupId]
+  return {
+    detail: {
+      id: groupId,
+      paperId: asset.paper.paperId,
+      title: group.title,
+      source: asset.paper.title,
+      groupType: 'cloze',
+      passage: {
+        title: group.title,
+        materialText: 'POISONED LEGACY CLOZE VARIANT',
+      },
+      questions: group.questionIds.map((questionId) => {
+        const question = asset.content.questions[questionId]
+        const sourceRow = clozeSourceOracle.questionRows.find(
+          (row) => row.questionId === questionId,
+        )
+        const answer = sourceRow?.answer || ''
+        return {
+          id: questionId,
+          questionNo: String(question.questionNo),
+          stem: 'POISONED LEGACY STEM',
+          answer,
+          explanation: sourceRow?.explanation || '',
+          options: [{ label: 'A', content: 'POISONED LEGACY OPTION' }],
+        }
+      }),
+    },
+    score: 1,
+    sectionTitle: '完形填空',
+    note: '',
+  }
+}
+
+function grammarFillPrintVariantItem(asset) {
+  const groupId =
+    clozeSourceOracle.oracle.publicIdentities.followingSection.groupId
+  const group = asset.content.groups[groupId]
+  return {
+    detail: {
+      id: groupId,
+      paperId: asset.paper.paperId,
+      title: group.title,
+      source: asset.paper.title,
+      groupType: 'grammar_cloze',
+      passage: {
+        title: group.title,
+        materialText: 'POISONED LEGACY GRAMMAR FILL VARIANT',
+      },
+      questions: group.questionIds.map((questionId) => ({
+        id: questionId,
+        questionNo: String(asset.content.questions[questionId].questionNo),
+        stem: '',
+        answer: '',
+        explanation: '',
+        options: [],
+      })),
+    },
+    score: 1.5,
+    sectionTitle: '语法填空',
+    note: '',
+  }
+}
+
+function clozeVariantConsumption(
+  consumption,
+  {
+    wrappedOptionRepeats = 1,
+    wrapEveryChoiceRow = false,
+    passageTailRepeats = 0,
+  } = {},
+) {
+  const variant = structuredClone(consumption)
+  const selection = variant.selections.find(
+    (candidate) => candidate.familyContractId === 'cloze',
+  )
+  assert.ok(selection, 'Cloze adversary resolves the canonical selection')
+  const occurrence = selection.projectedOccurrences.find(
+    (candidate) =>
+      candidate.groupId
+        === clozeSourceOracle.oracle.publicIdentities.cloze.groupId,
+  )
+  assert.ok(occurrence, 'Cloze adversary resolves the canonical occurrence')
+  const repeatedOptionText = new Map()
+  const repeatOption = (questionId, optionLabel, repeats) => {
+    const sourceRow = clozeSourceOracle.questionRows.find(
+      (row) => row.questionId === questionId,
+    )
+    const sourceOption = sourceRow?.options.find(
+      (option) => option.label === optionLabel,
+    )
+    const choiceSet = occurrence.choices.sets.find(
+      (candidate) => candidate.questionId === questionId,
+    )
+    const option = choiceSet?.options.find(
+      (candidate) => candidate.label === optionLabel,
+    )
+    assert.ok(sourceOption && option && Array.isArray(option.content))
+    const repeated = Array.from(
+      { length: repeats },
+      () => sourceOption.text,
+    ).join(' ')
+    assert.equal(
+      option.content.length,
+      1,
+      `${questionId}:${optionLabel} has one immutable text node`,
+    )
+    option.content[0].text = repeated
+    repeatedOptionText.set(`${questionId}:${optionLabel}`, repeated)
+  }
+  if (wrapEveryChoiceRow) {
+    for (const row of clozeSourceOracle.questionRows) {
+      repeatOption(
+        row.questionId,
+        clozeSourceOracle.oracle.variants.choiceBlockCrossPage.optionLabel,
+        wrappedOptionRepeats,
+      )
+    }
+  } else if (wrappedOptionRepeats > 1) {
+    repeatOption(
+      clozeSourceOracle.oracle.variants.wrappedOption.questionId,
+      clozeSourceOracle.oracle.variants.wrappedOption.optionLabel,
+      wrappedOptionRepeats,
+    )
+  }
+  let appendedPassageText = ''
+  if (passageTailRepeats > 0) {
+    const sourcePhrase =
+      clozeSourceOracle.oracle.variants.passageCrossPage.sourceText
+    appendedPassageText = Array.from(
+      { length: passageTailRepeats },
+      () => sourcePhrase,
+    ).join(' ')
+    const finalBlock = occurrence.content.blocks.at(-1)
+    const finalText = [...finalBlock.inlines].reverse().find(
+      (inline) => inline.kind === 'text',
+    )
+    assert.ok(finalText, 'Cloze passage adversary resolves a final text node')
+    finalText.text = `${finalText.text} ${appendedPassageText}`
+  }
+  selection.projectedOccurrenceDigests = selection.projectedOccurrences.map(
+    (candidate) => ({
+      groupId: candidate.groupId,
+      digest: digestJson(candidate),
+    }),
+  )
+  const expectedRows = clozeSourceOracle.questionRows.map((row) => ({
+    ...row,
+    options: row.options.map((option) => ({
+      ...option,
+      text:
+        repeatedOptionText.get(`${row.questionId}:${option.label}`)
+        ?? option.text,
+    })),
+  }))
+  const expectedPassageTexts =
+    clozeSourceOracle.paperAsset.content.groups[
+      clozeSourceOracle.oracle.publicIdentities.cloze.groupId
+    ].passage.paragraphs.map((paragraph, index, paragraphs) =>
+      index === paragraphs.length - 1 && appendedPassageText
+        ? `${paragraph.text} ${appendedPassageText}`
+        : paragraph.text)
+  return { consumption: variant, expectedRows, expectedPassageTexts }
 }
 
 function attributeSignatures(html) {
@@ -2198,6 +2693,774 @@ function assertSevenChoicesObservedCoverage(observations) {
       ),
     })),
   }
+}
+
+function recordClozeBundleCoverage(
+  observations,
+  {
+    bundleId,
+    variant,
+    proof,
+  },
+) {
+  const bundle = clozeCoverageOracle.oracle.requiredBundles.find(
+    (candidate) => candidate.bundleId === bundleId,
+  )
+  assert.ok(bundle, `independent Cloze oracle declares ${bundleId}`)
+  assert.equal(
+    bundle.variants.includes(variant),
+    true,
+    `${bundleId} independently requires ${variant}`,
+  )
+  const profileId =
+    clozeCoverageOracle.oracle.variantOracle.profileByBundleVariant[
+      `${bundleId}/${variant}`
+    ]
+  const expectedVariantEdges =
+    clozeCoverageOracle.oracle.variantOracle.profiles[profileId]
+  assert.equal(
+    Array.isArray(expectedVariantEdges),
+    true,
+    `${bundleId}/${variant} resolves its independent exact edge profile`,
+  )
+  assert.equal(
+    Array.isArray(proof?.observedEdges) && proof.observedEdges.length > 0,
+    true,
+    `${bundleId}/${variant} returns real public-artifact edge observations`,
+  )
+  assert.equal(
+    new Set(proof.observedEdges.map((entry) => entry.edgeId)).size,
+    proof.observedEdges.length,
+    `${bundleId}/${variant} observes each edge at most once`,
+  )
+  for (const observed of proof.observedEdges) {
+    assert.equal(
+      expectedVariantEdges.includes(observed.edgeId),
+      true,
+      `${bundleId}/${variant} observes only its independently declared edges`,
+    )
+    observations.push({
+      bundleId,
+      variant,
+      ...observed,
+      proof: 'source_identity_and_public_geometry_assertion',
+      proofDigest: sha256(Buffer.from(JSON.stringify(observed), 'utf8')),
+    })
+  }
+}
+
+function assertClozeObservedCoverage(observations) {
+  const oracle = clozeCoverageOracle.oracle
+  for (const bundle of oracle.requiredBundles) {
+    const actual = observations.filter(
+      (entry) => entry.bundleId === bundle.bundleId,
+    )
+    assert.deepEqual(
+      [...new Set(actual.map((entry) => entry.variant))].sort(),
+      [...bundle.variants].sort(),
+      `${bundle.bundleId} executes exactly every independent Cloze variant`,
+    )
+    assert.deepEqual(
+      [...new Set(actual.map((entry) => entry.edgeId))].sort(),
+      [...bundle.expectedEdgeIds].sort(),
+      `${bundle.bundleId} observed edge set exactly equals its independent oracle`,
+    )
+    assert.equal(
+      new Set(actual.map((entry) =>
+        `${entry.variant}:${entry.edgeId}`)).size,
+      actual.length,
+      `${bundle.bundleId} has no duplicate variant/edge observation`,
+    )
+    for (const variant of bundle.variants) {
+      const profileId =
+        oracle.variantOracle.profileByBundleVariant[
+          `${bundle.bundleId}/${variant}`
+        ]
+      assert.deepEqual(
+        actual.filter((entry) => entry.variant === variant)
+          .map((entry) => entry.edgeId)
+          .sort(),
+        [...oracle.variantOracle.profiles[profileId]].sort(),
+        `${bundle.bundleId}/${variant} observed edge set exactly equals its independent oracle set`,
+      )
+    }
+  }
+  assert.deepEqual(
+    [...new Set(observations.map((entry) => entry.edgeId))].sort(),
+    oracle.edges.map((edge) => edge.edgeId).sort(),
+    'complete Cloze public ledger exactly equals the independent 26-edge oracle',
+  )
+  return {
+    schemaVersion: 'cloze-observed-coverage-ledger-v1',
+    oraclePath: path.relative(repositoryRoot, clozeCoverageOraclePath),
+    oracleSha256: clozeCoverageOracle.digest,
+    edgeIds: oracle.edges.map((edge) => edge.edgeId),
+    bundles: oracle.requiredBundles.map((bundle) => ({
+      bundleId: bundle.bundleId,
+      variants: [...bundle.variants],
+      edgeIds: [...new Set(observations
+        .filter((entry) => entry.bundleId === bundle.bundleId)
+        .map((entry) => entry.edgeId))],
+      observations: observations.filter(
+        (entry) => entry.bundleId === bundle.bundleId,
+      ),
+    })),
+  }
+}
+
+async function assertClozeDomGeometry(
+  page,
+  label,
+  {
+    teacher = false,
+    wrappedOption = false,
+    expectedRows = clozeSourceOracle.questionRows,
+    expectedPassageTexts =
+      clozeSourceOracle.paperAsset.content.groups[
+        clozeSourceOracle.oracle.publicIdentities.cloze.groupId
+      ].passage.paragraphs.map((paragraph) => paragraph.text),
+  } = {},
+) {
+  const expected = clozeSourceOracle
+  const observation = await page.evaluate(({ previousGroupId }) => {
+    const group = document.querySelector(
+      '[data-canonical-group-type="cloze"]',
+    )
+    if (!(group instanceof HTMLElement)) return { missingGroup: true }
+    const visualLines = (element) => {
+      if (!(element instanceof Element)) return []
+      const range = document.createRange()
+      range.selectNodeContents(element)
+      const lines = []
+      for (const rect of range.getClientRects()) {
+        const center = rect.y + rect.height / 2
+        const line = lines.find(
+          (candidate) => Math.abs(candidate.center - center) <= 1,
+        )
+        if (line) {
+          line.x = Math.min(line.x, rect.x)
+          line.right = Math.max(line.right, rect.right)
+        } else {
+          lines.push({
+            x: rect.x,
+            right: rect.right,
+            y: rect.y,
+            height: rect.height,
+            center,
+          })
+        }
+      }
+      return lines.sort((left, right) =>
+        left.center - right.center || left.x - right.x)
+    }
+    const role = (value) => [
+      ...document.querySelectorAll(
+        `[data-canonical-cloze-rhythm-role="${value}"]`,
+      ),
+    ]
+    const groupRole = (value) => [
+      ...group.querySelectorAll(
+        `[data-canonical-cloze-rhythm-role="${value}"]`,
+      ),
+    ]
+    const paragraphs = groupRole('passage_body_line').map((element) => ({
+      id: element.getAttribute('data-canonical-paragraph-id')
+        || element.getAttribute('data-paper-paragraph-id'),
+      text: element.textContent || '',
+      rect: element.getBoundingClientRect().toJSON(),
+      lineHeight: Number.parseFloat(getComputedStyle(element).lineHeight),
+      lines: visualLines(element),
+    }))
+    const blanks = groupRole('inline_blank_marker').map((element) => {
+      const ruled = element.querySelector('.print-blank') || element
+      const rect = ruled.getBoundingClientRect()
+      const style = getComputedStyle(ruled)
+      const paragraph = element.closest(
+        '[data-canonical-cloze-rhythm-role="passage_body_line"]',
+      )
+      return {
+        questionId: element.getAttribute('data-canonical-question-id'),
+        blankId: element.getAttribute('data-canonical-blank-id'),
+        pair: element.getAttribute('data-canonical-pair'),
+        text: element.textContent || '',
+        width: rect.width,
+        fontSize: Number.parseFloat(style.fontSize),
+        height: rect.height,
+        paragraphLineHeight: paragraph
+          ? Number.parseFloat(getComputedStyle(paragraph).lineHeight)
+          : null,
+        whiteSpace: style.whiteSpace,
+        textAlign: style.textAlign,
+        display: style.display,
+        containsPunctuation: /[.,;:!?，。；：！？]/u.test(
+          element.textContent || '',
+        ),
+      }
+    })
+    const rows = groupRole('choice_row').map((row) => {
+      const labels = [
+        ...row.querySelectorAll(
+          '[data-canonical-cloze-rhythm-role="choice_label"]',
+        ),
+      ]
+      const texts = [
+        ...row.querySelectorAll(
+          '[data-canonical-cloze-rhythm-role="choice_text"]',
+        ),
+      ]
+      const placement = row.querySelector(
+        '[data-canonical-column-starts-pt]',
+      )
+      const labelRects = labels.map((element) =>
+        element.getBoundingClientRect())
+      const textRects = texts.map((element) =>
+        element.getBoundingClientRect())
+      const textLineRects = texts.map((element) => {
+        return visualLines(element)
+      })
+      const question = row.querySelector(
+        '.qnum, .ps-question-number, .ps-question-no',
+      )
+      return {
+        questionId: row.getAttribute('data-canonical-question-id')
+          || row.getAttribute('data-paper-question-id'),
+        rowRect: row.getBoundingClientRect().toJSON(),
+        questionText: question?.textContent || '',
+        questionLines: visualLines(question),
+        labels: labels.map((element) => element.textContent || ''),
+        texts: texts.map((element) => element.textContent || ''),
+        labelXs: labelRects.map((rect) => rect.x),
+        labelYs: labelRects.map((rect) => rect.y),
+        textXs: textRects.map((rect) => rect.x),
+        textYs: textRects.map((rect) => rect.y),
+        textLineRects,
+        columnStartsPt:
+          placement?.getAttribute('data-canonical-column-starts-pt'),
+        placementMode:
+          placement?.getAttribute('data-canonical-placement-mode')
+          || placement?.className,
+        lineHeight: Number.parseFloat(getComputedStyle(row).lineHeight),
+        breakInside: getComputedStyle(row).breakInside,
+      }
+    })
+    const part = role('part_title')[0]
+    const partCenter = visualLines(part)[0]?.center
+    const previousFamily = [
+      ...document.querySelectorAll(
+        `[data-canonical-group-id="${previousGroupId}"] [data-canonical-seven-choices-rhythm-role], [data-paper-browse-anchor="${previousGroupId}"] [data-canonical-seven-choices-rhythm-role]`,
+      ),
+    ].flatMap((element) =>
+      visualLines(element).map((line) => ({
+        line,
+        role: element.getAttribute(
+          'data-canonical-seven-choices-rhythm-role',
+        ),
+        identity:
+          element.getAttribute('data-canonical-option-id')
+          || element.closest('[data-canonical-question-id]')
+            ?.getAttribute('data-canonical-question-id')
+          || previousGroupId,
+        text: element.textContent || '',
+      })))
+      .filter((entry) => entry.line.center < partCenter)
+      .sort((left, right) => left.line.center - right.line.center)
+      .at(-1)
+    return {
+      missingGroup: false,
+      previousFamily,
+      previousFamilyIds: [
+        ...document.querySelectorAll(
+          '[data-canonical-cloze-previous-family-group-id]',
+        ),
+      ].map((element) =>
+        element.getAttribute(
+          'data-canonical-cloze-previous-family-group-id',
+        )),
+      chrome: role('part_title')
+        .concat(role('subsection'), role('meta_instruction'))
+        .map((element) => ({
+          role: element.getAttribute('data-canonical-cloze-rhythm-role'),
+          text: element.textContent || '',
+          rect: element.getBoundingClientRect().toJSON(),
+          lineHeight: Number.parseFloat(getComputedStyle(element).lineHeight),
+          lines: visualLines(element),
+        })),
+      following: role('next_section').map((element) => ({
+        id: element.getAttribute('data-paper-browse-anchor')
+          || element.id,
+        groupId: element.getAttribute(
+          'data-canonical-cloze-following-group-id',
+        ),
+        text: element.textContent || '',
+        lines: visualLines(element),
+      })),
+      paragraphs,
+      blanks,
+      rows,
+      answers: groupRole('answer_line').map((element) => ({
+        text: element.textContent || '',
+        questionId:
+          element.closest('[data-canonical-question-id]')
+            ?.getAttribute('data-canonical-question-id'),
+        lines: visualLines(element),
+      })),
+      explanations: groupRole('explanation_line').map((element) => ({
+        text: element.textContent || '',
+        questionId:
+          element.closest('[data-canonical-question-id]')
+            ?.getAttribute('data-canonical-question-id'),
+        lines: visualLines(element),
+      })),
+    }
+  }, {
+    previousGroupId:
+      expected.oracle.publicIdentities.sevenChoicesBoundary.groupId,
+  })
+  assert.equal(observation.missingGroup, false, `${label} exposes Cloze`)
+  const observedEdges = []
+  const observe = (edgeId, evidence) => {
+    assert.equal(
+      observedEdges.some((entry) => entry.edgeId === edgeId),
+      false,
+      `${label} records ${edgeId} once`,
+    )
+    observedEdges.push({ edgeId, ...evidence })
+  }
+  const baselineStepPx = clozeRhythm.targets.screen.baselineStepPx
+  const assertStep = (edgeId, actualPx) => {
+    const authorityEdge = clozeRhythm.adjacencyGraph.find(
+      (edge) => edge.edgeId === edgeId,
+    )
+    assert.ok(
+      Number.isFinite(authorityEdge?.baselineStepRatio),
+      `${label} resolves ${edgeId} ratio authority`,
+    )
+    const tolerancePx =
+      authorityEdge.baselineStepRatio === 1
+        ? clozeRhythm.targets.screen.oneStepTolerancePx
+        : authorityEdge.baselineStepRatio === 1.5
+          ? clozeRhythm.targets.screen.threeHalfStepTolerancePx
+          : clozeRhythm.targets.screen.twoStepTolerancePx
+    assert.equal(
+      Math.abs(
+        actualPx - authorityEdge.baselineStepRatio * baselineStepPx,
+      ) <= tolerancePx,
+      true,
+      `${label} measures ${edgeId} at ${authorityEdge.baselineStepRatio} local baseline steps: ${JSON.stringify({ actualPx, expectedPx: authorityEdge.baselineStepRatio * baselineStepPx })}`,
+    )
+    return actualPx / baselineStepPx
+  }
+  assert.equal(
+    observation.previousFamilyIds.includes(
+      expected.oracle.publicIdentities.sevenChoicesBoundary.groupId,
+    ),
+    true,
+    `${label} binds the exact visible Seven Choices predecessor identity`,
+  )
+  assert.deepEqual(
+    observation.chrome.map((entry) => entry.role),
+    ['part_title', 'subsection', 'meta_instruction'],
+    `${label} exposes exact ordered Cloze chrome roles`,
+  )
+  assert.ok(
+    observation.previousFamily?.line,
+    `${label} resolves the visible Seven Choices family tail`,
+  )
+  const previousToChromePx =
+    observation.chrome[0].lines[0].center
+    - observation.previousFamily.line.center
+  observe('previous_family_to_chrome_same_page', {
+    fromIdentity: observation.previousFamily.identity,
+    toIdentity: 'cloze:part_title',
+    fromText: normalizedVisibleText(observation.previousFamily.text),
+    toText: normalizedVisibleText(observation.chrome[0].text),
+    actualRatio: assertStep(
+      'previous_family_to_chrome_same_page',
+      previousToChromePx,
+    ),
+  })
+  const chromeGaps = observation.chrome.slice(1).map(
+    (entry, index) =>
+      entry.lines[0].center - observation.chrome[index].lines.at(-1).center,
+  )
+  assert.equal(
+    chromeGaps.every((gap) =>
+      Math.abs(
+        gap - clozeRhythm.targets.screen.baselineStepPx,
+      ) <= clozeRhythm.targets.screen.oneStepTolerancePx),
+    true,
+    `${label} measures every adjacent Cloze chrome role at one local baseline step: ${JSON.stringify(chromeGaps)}`,
+  )
+  observe('chrome_internal', {
+    fromIdentity: observation.chrome[0].role,
+    toIdentity: observation.chrome.at(-1).role,
+    fromText: normalizedVisibleText(observation.chrome[0].text),
+    toText: normalizedVisibleText(observation.chrome.at(-1).text),
+    actualRatios: chromeGaps.map((gap) => gap / baselineStepPx),
+  })
+  const chromeToPassagePx =
+    observation.paragraphs[0].lines[0].center
+    - observation.chrome.at(-1).lines.at(-1).center
+  observe('chrome_to_passage', {
+    fromIdentity: observation.chrome.at(-1).role,
+    toIdentity: observation.paragraphs[0].id,
+    fromText: normalizedVisibleText(observation.chrome.at(-1).text),
+    toText: normalizedVisibleText(observation.paragraphs[0].text),
+    actualRatio: assertStep('chrome_to_passage', chromeToPassagePx),
+  })
+  assert.deepEqual(
+    observation.chrome.map((entry) => normalizedVisibleText(entry.text)),
+    [
+      expected.oracle.publicVisibleChrome.part,
+      expected.oracle.publicVisibleChrome.section,
+      expected.oracle.publicVisibleChrome.instruction,
+    ].map(normalizedVisibleText),
+    `${label} chrome text is source-bound rather than DOM-order authority`,
+  )
+  assert.deepEqual(
+    observation.paragraphs.map((entry) => entry.id),
+    expected.oracle.publicIdentities.cloze.paragraphIds,
+    `${label} passage roles preserve source paragraph identities`,
+  )
+  assert.deepEqual(
+    observation.paragraphs.map((entry, index) =>
+      normalizedVisibleText(entry.text)),
+    expectedPassageTexts.map((text) =>
+      normalizedVisibleText(text.replace(/__(\d+)__/g, '$1'))),
+    `${label} preserves passage words, spaces, punctuation, and inline blank numbers`,
+  )
+  assert.deepEqual(
+    observation.blanks.map((blank) => blank.questionId),
+    expected.oracle.publicIdentities.cloze.questionIds,
+    `${label} exposes each source Question identity exactly once`,
+  )
+  assert.deepEqual(
+    observation.blanks.map((blank) => blank.blankId),
+    expected.oracle.publicIdentities.cloze.blankIds,
+    `${label} exposes each source Blank identity exactly once`,
+  )
+  for (const [index, blank] of observation.blanks.entries()) {
+    const questionId = expected.oracle.publicIdentities.cloze.questionIds[index]
+    const blankId = expected.oracle.publicIdentities.cloze.blankIds[index]
+    assert.equal(blank.pair, `${questionId}:${blankId}`)
+    assert.equal(normalizedVisibleText(blank.text), String(41 + index))
+    assert.equal(Math.abs(blank.width / blank.fontSize - 3.3) <= 0.08, true)
+    assert.equal(blank.whiteSpace, 'nowrap')
+    assert.equal(blank.textAlign, 'center')
+    assert.equal(
+      ['inline-block', 'inline-flex'].includes(blank.display),
+      true,
+      `${label} blank ${blankId} is an unbroken atomic inline unit`,
+    )
+    assert.equal(blank.containsPunctuation, false)
+    assert.equal(
+      blank.height <= blank.paragraphLineHeight + 1,
+      true,
+      `${label} blank ${blankId} adds zero phantom vertical space`,
+    )
+  }
+  observe('inline_blank_no_phantom_space', {
+    fromIdentity: observation.paragraphs[0].id,
+    toIdentity: observation.blanks.map((blank) => blank.blankId),
+    extraBaselineStepRatios: observation.blanks.map(
+      (blank) =>
+        Math.max(0, blank.height - blank.paragraphLineHeight)
+        / baselineStepPx,
+    ),
+  })
+  observe('inline_blank_atomicity', {
+    fromIdentity: observation.blanks.map((blank) => blank.blankId),
+    pageRelation: 'same_line_unsplittable',
+    displays: observation.blanks.map((blank) => blank.display),
+  })
+  observe('inline_blank_punctuation_outside', {
+    fromIdentity: observation.blanks.map((blank) => blank.blankId),
+    toIdentity: observation.paragraphs.map((paragraph) => paragraph.id),
+    pageRelation: 'punctuation_sibling',
+  })
+  const internalPassageGaps = observation.paragraphs.flatMap(
+    (paragraph) => paragraph.lines.slice(1).map(
+      (line, index) => line.center - paragraph.lines[index].center,
+    ),
+  )
+  assert.equal(
+    internalPassageGaps.length > 0
+    && internalPassageGaps.every((gap) =>
+      Math.abs(gap - baselineStepPx)
+        <= clozeRhythm.targets.screen.oneStepTolerancePx),
+    true,
+    `${label} measures every same-paragraph line at one local baseline step`,
+  )
+  observe('passage_line_internal', {
+    fromIdentity: observation.paragraphs.map((paragraph) => paragraph.id),
+    toIdentity: observation.paragraphs.map((paragraph) => paragraph.id),
+    actualRatios: internalPassageGaps.map((gap) => gap / baselineStepPx),
+  })
+  const paragraphGaps = observation.paragraphs.slice(1).map(
+    (paragraph, index) =>
+      paragraph.lines[0].center
+      - observation.paragraphs[index].lines.at(-1).center,
+  )
+  assert.equal(
+    paragraphGaps.every((gap) =>
+      Math.abs(gap - baselineStepPx)
+        <= clozeRhythm.targets.screen.oneStepTolerancePx),
+    true,
+    `${label} measures every source paragraph transition at one local baseline step`,
+  )
+  observe('paragraph_transition', {
+    fromIdentity: observation.paragraphs.slice(0, -1)
+      .map((paragraph) => paragraph.id),
+    toIdentity: observation.paragraphs.slice(1)
+      .map((paragraph) => paragraph.id),
+    actualRatios: paragraphGaps.map((gap) => gap / baselineStepPx),
+  })
+  assert.deepEqual(
+    observation.rows.map((row) => row.questionId),
+    expected.oracle.publicIdentities.cloze.questionIds,
+    `${label} renders source Questions 41-55 exactly once`,
+  )
+  for (const [index, row] of observation.rows.entries()) {
+    const sourceRow = expectedRows[index]
+    assert.deepEqual(
+      row.labels.map(normalizedVisibleText),
+      sourceRow.options.map((option) => `${option.label}.`),
+    )
+    assert.deepEqual(
+      row.texts.map(normalizedVisibleText),
+      sourceRow.options.map((option) => option.text),
+    )
+    assert.equal(row.columnStartsPt, '0,104,208,312')
+    assert.match(String(row.placementMode), /four_columns/)
+    const relativeLabelXs = row.labelXs.map((x) => x - row.labelXs[0])
+    const expectedPitchPx = 104 * 96 / 72
+    assert.equal(
+      relativeLabelXs.every(
+        (x, track) => Math.abs(x - expectedPitchPx * track) <= 2,
+      ),
+      true,
+      `${label} ${sourceRow.questionId} retains four fixed origin-pitch tracks`,
+    )
+    assert.equal(
+      row.labelYs.every((y) => Math.abs(y - row.labelYs[0]) <= 1),
+      true,
+      `${label} ${sourceRow.questionId} keeps A-D labels on one baseline`,
+    )
+    assert.equal(
+      row.textXs.every((x, track) => x > row.labelXs[track]),
+      true,
+      `${label} ${sourceRow.questionId} keeps a stable label/text-start gap`,
+    )
+    assert.equal(
+      row.textYs.every((y, track) =>
+        Math.abs(y - row.labelYs[track]) <= 1),
+      true,
+      `${label} ${sourceRow.questionId} keeps label-plus-text atomic`,
+    )
+    assert.equal(
+      row.breakInside,
+      'avoid',
+      `${label} ${sourceRow.questionId} is an unsplittable row strategy`,
+    )
+  }
+  const firstRow = observation.rows[0]
+  const passageTailToFirstRowPx =
+    firstRow.questionLines[0].center
+    - observation.paragraphs.at(-1).lines.at(-1).center
+  observe('passage_tail_to_first_choice_row', {
+    fromIdentity: observation.paragraphs.at(-1).id,
+    toIdentity: firstRow.questionId,
+    fromText: normalizedVisibleText(observation.paragraphs.at(-1).text),
+    toText: normalizedVisibleText(firstRow.questionText),
+    actualRatio: assertStep(
+      'passage_tail_to_first_choice_row',
+      passageTailToFirstRowPx,
+    ),
+  })
+  observe('choice_row_question_to_first_track', {
+    fromIdentity: firstRow.questionId,
+    toIdentity: `${firstRow.questionId}:A`,
+    horizontalRelation: 'fixed_question_to_A_anchor',
+    actualPx:
+      firstRow.labelXs[0] - firstRow.questionLines[0].x,
+  })
+  observe('choice_label_to_text', {
+    fromIdentity: observation.rows.map((row) => `${row.questionId}:label`),
+    toIdentity: observation.rows.map((row) => `${row.questionId}:text`),
+    horizontalRelation: 'fixed_em_gap',
+    actualGapsPx: observation.rows.flatMap((row) =>
+      row.textXs.map((x, track) => x - row.labelXs[track])),
+  })
+  observe('choice_tracks_internal', {
+    fromIdentity: firstRow.labels,
+    toIdentity: firstRow.labels,
+    horizontalRelation: 'four_fixed_equal_origin_pitch_tracks',
+    relativeOriginsPx: firstRow.labelXs.map(
+      (x) => x - firstRow.labelXs[0],
+    ),
+  })
+  observe('choice_row_baseline', {
+    fromIdentity: observation.rows[0].questionId,
+    toIdentity: observation.rows.at(-1).questionId,
+    actualLineHeightRatios: observation.rows.map(
+      (row) => row.lineHeight / baselineStepPx,
+    ),
+  })
+  observe('choice_label_text_atomicity', {
+    fromIdentity: observation.rows.map((row) => row.questionId),
+    pageRelation: 'same_atomic_option',
+    labelTextBaselineDeltasPx: observation.rows.flatMap((row) =>
+      row.textYs.map((y, track) => y - row.labelYs[track])),
+  })
+  observe('choice_row_unsplittable', {
+    fromIdentity: observation.rows.map((row) => row.questionId),
+    pageRelation: 'same_page_unit',
+    breakInside: observation.rows.map((row) => row.breakInside),
+  })
+  assert.equal(
+    observation.following.some((entry) =>
+      (
+        entry.id === expected.oracle.publicIdentities.followingSection.sectionId
+        || entry.groupId
+          === expected.oracle.publicIdentities.followingSection.groupId
+      )
+      && normalizedVisibleText(entry.text)
+          === normalizedVisibleText(
+          expected.oracle.publicVisibleChrome.followingSection,
+        )),
+    true,
+    `${label} binds the following Grammar Fill section identity and text`,
+  )
+  assert.equal(
+    observation.answers.length,
+    teacher ? 15 : 0,
+    `${label} ${teacher ? 'includes' : 'hides'} the Cloze answer supplement`,
+  )
+  assert.equal(
+    observation.explanations.length,
+    teacher ? 15 : 0,
+    `${label} ${teacher ? 'includes' : 'hides'} the Cloze explanation supplement`,
+  )
+  if (teacher) {
+    for (const [index, answer] of observation.answers.entries()) {
+      assert.equal(
+        normalizedVisibleText(answer.text),
+        normalizedVisibleText(`【答案】${expectedRows[index].answer}`),
+        `${label} ${answer.questionId} answer binds the exact official-answer bytes`,
+      )
+    }
+    assert.deepEqual(
+      observation.explanations.map((explanation) => ({
+        questionId: explanation.questionId,
+        text: normalizedVisibleText(explanation.text),
+      })),
+      expectedRows.map((row) => ({
+        questionId: row.questionId,
+        text: normalizedVisibleText(`【解析】${row.explanation}`),
+      })),
+      `${label} binds every Teacher explanation to the exact reviewed-analysis bytes`,
+    )
+    const rowToAnswerRatios = observation.answers.map(
+      (answer, index) =>
+        (
+          answer.lines[0].center
+          - observation.rows[index].textLineRects
+            .flat()
+            .at(-1).center
+        ) / baselineStepPx,
+    )
+    const answerToExplanationRatios = observation.explanations.map(
+      (explanation, index) =>
+        (
+          explanation.lines[0].center
+          - observation.answers[index].lines[0].center
+        ) / baselineStepPx,
+    )
+    assert.equal(
+      rowToAnswerRatios.every((ratio) => Math.abs(ratio - 1) <= 0.08),
+      true,
+      `${label} measures every choice row to Teacher answer at one local baseline step`,
+    )
+    assert.equal(
+      answerToExplanationRatios.every(
+        (ratio) => Math.abs(ratio - 1) <= 0.08),
+      true,
+      `${label} measures every answer to reviewed explanation at one local baseline step`,
+    )
+    observe('choice_row_to_answer', {
+      fromIdentity: observation.rows.map((row) => row.questionId),
+      toIdentity: observation.answers.map((answer) => answer.questionId),
+      actualRatios: rowToAnswerRatios,
+    })
+    observe('answer_to_explanation', {
+      fromIdentity: observation.answers.map((answer) => answer.questionId),
+      toIdentity: observation.explanations.map(
+        (explanation) => explanation.questionId),
+      actualRatios: answerToExplanationRatios,
+    })
+    const tailToNextRowRatios = observation.rows.slice(1).map(
+      (row, index) =>
+        (
+          row.questionLines[0].center
+          - observation.explanations[index].lines.at(-1).center
+        ) / baselineStepPx,
+    )
+    assert.equal(
+      tailToNextRowRatios.every((ratio) => Math.abs(ratio - 1) <= 0.08),
+      true,
+      `${label} measures every reviewed Teacher tail to next row at one local baseline step`,
+    )
+    observe('teacher_tail_to_next_row', {
+      fromIdentity: observation.explanations.slice(0, -1)
+        .map((explanation) => explanation.questionId),
+      toIdentity: observation.rows.slice(1).map((row) => row.questionId),
+      actualRatios: tailToNextRowRatios,
+    })
+  }
+  if (wrappedOption) {
+    assert.equal(
+      observation.rows.some((row) =>
+        row.textLineRects.some((rects) => rects.length > 1)),
+      true,
+      `${label} executes a real wrapped option continuation`,
+    )
+    const wrapped = observation.rows.flatMap((row) =>
+      row.textLineRects.map((lines, track) => ({
+        questionId: row.questionId,
+        track,
+        lines,
+      }))).find((entry) => entry.lines.length > 1)
+    assert.ok(wrapped, `${label} resolves one wrapped source-derived option`)
+    assert.equal(
+      wrapped.lines.every(
+        (line) => Math.abs(line.x - wrapped.lines[0].x) <= 1.5),
+      true,
+      `${label} wrapped continuation hangs at the option text-start x`,
+    )
+    observe('wrapped_option_continuation', {
+      fromIdentity: `${wrapped.questionId}:${wrapped.track}`,
+      toIdentity: `${wrapped.questionId}:${wrapped.track}`,
+      horizontalRelation: 'hanging_indent',
+      continuationXs: wrapped.lines.map((line) => line.x),
+    })
+  }
+  const finalTail = teacher
+    ? observation.explanations.at(-1).lines.at(-1)
+    : observation.rows.at(-1).questionLines.at(-1)
+  const followingGapPx =
+    observation.following[0].lines[0].center - finalTail.center
+  const followingEdgeId = teacher
+    ? 'teacher_tail_to_next_section_same_page'
+    : 'student_tail_to_next_section_same_page'
+  observe(followingEdgeId, {
+    fromIdentity: teacher
+      ? observation.explanations.at(-1).questionId
+      : observation.rows.at(-1).questionId,
+    toIdentity:
+      expected.oracle.publicIdentities.followingSection.sectionId,
+    actualRatio: assertStep(followingEdgeId, followingGapPx),
+  })
+  return { ...observation, observedEdges }
 }
 
 function assertSevenChoicesDomObservation(
@@ -5117,6 +6380,1064 @@ function exactPdfTokens(value) {
     .filter(Boolean)
 }
 
+function pdfWordsInGeometricReadingOrder(words) {
+  const lines = []
+  for (const word of words) {
+    const centerY = (word.yMin + word.yMax) / 2
+    const line = lines.find((candidate) =>
+      candidate.page === word.page
+      && Math.abs(centerY - median(candidate.wordCenters)) <= 2.5)
+    if (line) {
+      line.words.push(word)
+      line.wordCenters.push(centerY)
+    } else {
+      lines.push({
+        page: word.page,
+        words: [word],
+        wordCenters: [centerY],
+      })
+    }
+  }
+  return lines.sort((left, right) =>
+    left.page - right.page
+    || median(left.wordCenters) - median(right.wordCenters)
+    || Math.min(...left.words.map((word) => word.xMin))
+      - Math.min(...right.words.map((word) => word.xMin)))
+    .flatMap((line) =>
+      line.words.sort((left, right) => left.xMin - right.xMin))
+    .map((word, wordIndex) => ({ ...word, wordIndex }))
+}
+
+function assertPdfClozeGeometry(
+  pdfPath,
+  label,
+  {
+    teacher = false,
+    requirePassageCrossPage = false,
+    requireChoiceBlockCrossPage = false,
+    requireFollowingCrossPage = false,
+    requireWrappedOption = false,
+    expectedRows = clozeSourceOracle.questionRows,
+    expectedPassageTexts =
+      clozeSourceOracle.paperAsset.content.groups[
+        clozeSourceOracle.oracle.publicIdentities.cloze.groupId
+      ].passage.paragraphs.map((paragraph) => paragraph.text),
+  } = {},
+) {
+  const rowWords = pdfWordsWithBoxes(pdfPath)
+  const words = pdfWordsInGeometricReadingOrder(rowWords)
+  const lines = pdfRoleLines(rowWords)
+  const lineByWordIndex = new Map(
+    lines.flatMap((line) =>
+      line.wordIndexes.map((wordIndex) => [wordIndex, line])),
+  )
+  const lineForWord = (word) => {
+    if (!word) return undefined
+    const centerY = (word.yMin + word.yMax) / 2
+    return lines.find(
+      (line) =>
+        line.page === word.page
+        && Math.abs(line.centerY - centerY) <= 2.5,
+    )
+  }
+  const observedEdges = []
+  const observe = (edgeId, evidence) => {
+    assert.equal(
+      observedEdges.some((entry) => entry.edgeId === edgeId),
+      false,
+      `${label} records ${edgeId} once`,
+    )
+    observedEdges.push({ edgeId, ...evidence })
+  }
+  const edgeAuthority = (edgeId) => {
+    const edge = clozeRhythm.adjacencyGraph.find(
+      (candidate) => candidate.edgeId === edgeId,
+    )
+    assert.ok(edge, `${label} resolves ${edgeId} authority`)
+    return edge
+  }
+  const assertPdfStep = (edgeId, fromLine, toLine) => {
+    const edge = edgeAuthority(edgeId)
+    assert.equal(
+      fromLine.page,
+      toLine.page,
+      `${label} ${edgeId} is measured on one local PDF page`,
+    )
+    const distancePt = toLine.centerY - fromLine.centerY
+    const targetPt =
+      edge.baselineStepRatio * clozeRhythm.targets.printPdf.baselineStepPt
+    const tolerancePt =
+      edge.baselineStepRatio === 1
+        ? clozeRhythm.targets.printPdf.oneStepTolerancePt
+        : edge.baselineStepRatio === 1.5
+          ? clozeRhythm.targets.printPdf.threeHalfStepTolerancePt
+          : clozeRhythm.targets.printPdf.twoStepTolerancePt
+    assert.equal(
+      Math.abs(distancePt - targetPt) <= tolerancePt,
+      true,
+      `${label} ${edgeId} maps its local baseline ratio: ${JSON.stringify({ distancePt, targetPt, fromLine, toLine })}`,
+    )
+    return distancePt / clozeRhythm.targets.printPdf.baselineStepPt
+  }
+  const pagesText = execFileSync(
+    'pdftotext',
+    ['-layout', pdfPath, '-'],
+    { encoding: 'utf8' },
+  ).split('\f').map(normalizedVisibleText)
+  const markerIndex = (marker, markerLabel) => {
+    const tokens = exactPdfTokens(marker)
+    const indexes = exactPdfSequenceIndexes(words, tokens)
+    const firstTokenCandidates = words.flatMap((word, index) =>
+      word.text === tokens[0]
+        ? [{
+            page: word.page,
+            nearby: words.slice(index, index + tokens.length + 4)
+              .map((candidate) => candidate.text),
+          }]
+        : [])
+    assert.equal(
+      indexes.length >= 1,
+      true,
+      `${label} exposes source-bound ${markerLabel}: ${JSON.stringify({
+        expectedTokens: tokens,
+        firstTokenCandidates,
+      })}`,
+    )
+    return indexes[0]
+  }
+  const boundaryIndex = markerIndex(
+    clozeSourceOracle.oracle.sourceExtraction.sevenChoicesBoundaryMarker,
+    'Seven Choices predecessor',
+  )
+  const partIndex = markerIndex(
+    clozeSourceOracle.oracle.publicVisibleChrome.part,
+    'Cloze part chrome',
+  )
+  const sectionIndex = markerIndex(
+    clozeSourceOracle.oracle.publicVisibleChrome.section,
+    'Cloze section chrome',
+  )
+  const instructionIndex = markerIndex(
+    clozeSourceOracle.oracle.publicVisibleChrome.instruction,
+    'Cloze instruction chrome',
+  )
+  const passageStartIndex = markerIndex(
+    clozeSourceOracle.oracle.sourceExtraction.passageStartMarker,
+    'Cloze passage start',
+  )
+  const passageEndIndex = markerIndex(
+    clozeSourceOracle.oracle.sourceExtraction.passageEndMarker,
+    'Cloze passage end',
+  )
+  const followingIndex = markerIndex(
+    clozeSourceOracle.oracle.publicVisibleChrome.followingSection,
+    'Grammar Fill following section',
+  )
+  const followingWord = words[followingIndex]
+  assert.equal(
+    boundaryIndex < partIndex
+      && partIndex < sectionIndex
+      && sectionIndex < instructionIndex
+      && instructionIndex < passageStartIndex
+      && passageStartIndex < passageEndIndex
+      && passageEndIndex < followingIndex,
+    true,
+    `${label} preserves the complete source semantic order`,
+  )
+  const passageStartPage = words[passageStartIndex].page
+  const passageEndPage = words[passageEndIndex].page
+  const boundaryLine = lineForWord(words[boundaryIndex])
+  const partLine = lineForWord(words[partIndex])
+  const sectionLine = lineForWord(words[sectionIndex])
+  const instructionLine = lineForWord(words[instructionIndex])
+  const followingLine = lineForWord(followingWord)
+  assert.ok(
+    boundaryLine && partLine && sectionLine && instructionLine
+      && followingLine,
+    `${label} resolves all cross-family/chrome PDF baselines`,
+  )
+  const visibleBoundaryLine = teacher
+    ? lines.filter((line) =>
+        line.lineIndex > boundaryLine.lineIndex
+        && line.lineIndex < partLine.lineIndex
+        && isPdfBodyLine(line)).at(-1)
+    : boundaryLine
+  assert.ok(
+    visibleBoundaryLine,
+    `${label} resolves the last visible Seven Choices family line`,
+  )
+  const visibleBoundaryIdentity = teacher
+    ? sevenChoicesSourceOracle.oracle.publicIdentities.sevenChoices
+      .questionBlankPairs.at(-1).questionId
+    : clozeSourceOracle.oracle.publicIdentities.sevenChoicesBoundary.optionId
+  const visibleBoundaryText = teacher
+    ? `【答案】${sevenChoicesSourceOracle.answerLabels.at(-1)}`
+    : clozeSourceOracle.oracle.sourceExtraction.sevenChoicesBoundaryMarker
+  if (visibleBoundaryLine.page === partLine.page) {
+    observe('previous_family_to_chrome_same_page', {
+      fromIdentity: visibleBoundaryIdentity,
+      toIdentity: 'cloze:part_title',
+      fromText: visibleBoundaryText,
+      toText: clozeSourceOracle.oracle.publicVisibleChrome.part,
+      actualRatio: assertPdfStep(
+        'previous_family_to_chrome_same_page',
+        visibleBoundaryLine,
+        partLine,
+      ),
+    })
+  } else {
+    assert.equal(partLine.page, visibleBoundaryLine.page + 1)
+    assert.equal(partLine.yMax < 130, true)
+    observe('previous_family_to_chrome_cross_page', {
+      fromIdentity: visibleBoundaryIdentity,
+      toIdentity: 'cloze:part_title',
+      fromText: visibleBoundaryText,
+      toText: clozeSourceOracle.oracle.publicVisibleChrome.part,
+      pageRelation: 'next_page_start',
+      fromPage: visibleBoundaryLine.page,
+      toPage: partLine.page,
+    })
+  }
+  observe('chrome_internal', {
+    fromIdentity: ['part_title', 'subsection'],
+    toIdentity: ['subsection', 'meta_instruction'],
+    actualRatios: [
+      assertPdfStep('chrome_internal', partLine, sectionLine),
+      assertPdfStep('chrome_internal', sectionLine, instructionLine),
+    ],
+    texts: [
+      clozeSourceOracle.oracle.publicVisibleChrome.part,
+      clozeSourceOracle.oracle.publicVisibleChrome.section,
+      clozeSourceOracle.oracle.publicVisibleChrome.instruction,
+    ],
+  })
+  const firstChoiceBoundaryIndex = words.findIndex(
+    (word, index) =>
+      index > passageStartIndex
+      && word.text === '41'
+      && words[index + 1]?.text === 'A',
+  )
+  assert.equal(
+    firstChoiceBoundaryIndex > passageEndIndex,
+    true,
+    `${label} resolves the passage-to-choice source boundary`,
+  )
+  const paragraphAnchors = expectedPassageTexts.map((text, index) => {
+    const tokens = exactPdfTokens(text.replace(/__(\d+)__/g, '$1'))
+    const startTokens = tokens.slice(0, Math.min(6, tokens.length))
+    const endTokens = tokens.slice(-Math.min(6, tokens.length))
+    const startCandidates = exactPdfSequenceIndexes(
+      words,
+      startTokens,
+      passageStartIndex,
+    ).filter((candidate) => candidate < firstChoiceBoundaryIndex)
+    assert.equal(
+      startCandidates.length > 0,
+      true,
+      `${label} paragraph ${index + 1} exposes its immutable source start`,
+    )
+    const start = startCandidates[0]
+    const endCandidates = exactPdfSequenceIndexes(
+      words,
+      endTokens,
+      start,
+    ).filter((candidate) => candidate < firstChoiceBoundaryIndex)
+    assert.equal(
+      endCandidates.length > 0,
+      true,
+      `${label} paragraph ${index + 1} exposes its immutable source end`,
+    )
+    return {
+      text,
+      index,
+      start,
+      sourceEnd: endCandidates.at(-1) + endTokens.length,
+    }
+  })
+  const paragraphProofs = paragraphAnchors.map((anchor, index) => {
+    const { text, start, sourceEnd } = anchor
+    const paragraphWords = words.slice(start, sourceEnd)
+    const startLine = lineForWord(words[start])
+    const sourceEndLine = lineForWord(words[sourceEnd - 1])
+    const nextStartLine = index < paragraphAnchors.length - 1
+      ? lineForWord(words[paragraphAnchors[index + 1].start])
+      : null
+    const paragraphLines = lines
+      .filter((line) =>
+        line.lineIndex >= startLine.lineIndex
+        && (
+          nextStartLine
+            ? line.lineIndex < nextStartLine.lineIndex
+            : line.lineIndex <= sourceEndLine.lineIndex
+        ))
+      .filter((line) => line.wordIndexes.length > 1 && isPdfBodyLine(line))
+      .sort((left, right) =>
+        left.page - right.page || left.centerY - right.centerY)
+    return {
+      paragraphId:
+        clozeSourceOracle.oracle.publicIdentities.cloze.paragraphIds[index],
+      text,
+      start,
+      words: paragraphWords,
+      lines: paragraphLines,
+    }
+  })
+  observe('chrome_to_passage', {
+    fromIdentity: 'meta_instruction',
+    toIdentity: paragraphProofs[0].paragraphId,
+    fromText: clozeSourceOracle.oracle.publicVisibleChrome.instruction,
+    toText: expectedPassageTexts[0],
+    actualRatio: assertPdfStep(
+      'chrome_to_passage',
+      instructionLine,
+      paragraphProofs[0].lines[0],
+    ),
+  })
+  const internalLineRatios = paragraphProofs.flatMap((paragraph) =>
+    paragraph.lines.slice(1).flatMap((line, index) => {
+      const previous = paragraph.lines[index]
+      if (line.page !== previous.page) return []
+      return [assertPdfStep('passage_line_internal', previous, line)]
+    }))
+  assert.equal(
+    internalLineRatios.length > 0,
+    true,
+    `${label} measures every same-page internal passage line edge`,
+  )
+  observe('passage_line_internal', {
+    fromIdentity: paragraphProofs.map((paragraph) => paragraph.paragraphId),
+    toIdentity: paragraphProofs.map((paragraph) => paragraph.paragraphId),
+    actualRatios: internalLineRatios,
+  })
+  const paragraphTransitionRatios = paragraphProofs.slice(1).flatMap(
+    (paragraph, index) => {
+      const previous = paragraphProofs[index].lines.at(-1)
+      const next = paragraph.lines[0]
+      if (next.page !== previous.page) return []
+      return [assertPdfStep('paragraph_transition', previous, next)]
+    },
+  )
+  if (paragraphTransitionRatios.length > 0) {
+    observe('paragraph_transition', {
+      fromIdentity: paragraphProofs.slice(0, -1)
+        .map((paragraph) => paragraph.paragraphId),
+      toIdentity: paragraphProofs.slice(1)
+        .map((paragraph) => paragraph.paragraphId),
+      actualRatios: paragraphTransitionRatios,
+    })
+  }
+  const blankProofs =
+    clozeSourceOracle.oracle.publicIdentities.cloze.questionIds.map(
+      (questionId, index) => {
+        const number = String(41 + index)
+        const candidates = words.slice(passageStartIndex, passageEndIndex + 1)
+          .filter((word) => word.text === number)
+        assert.equal(
+          candidates.length,
+          1,
+          `${label} passage exposes one inline Blank ${number}`,
+        )
+        const word = candidates[0]
+        const line = lineForWord(word)
+        assert.ok(line)
+        const verticalOffsetPt = Math.abs(
+          (word.yMin + word.yMax) / 2 - line.centerY,
+        )
+        assert.equal(
+          verticalOffsetPt
+            <= clozeRhythm.targets.printPdf.oneStepTolerancePt,
+          true,
+          `${label} inline Blank ${number} adds no phantom baseline step`,
+        )
+        return {
+          questionId,
+          blankId:
+            clozeSourceOracle.oracle.publicIdentities.cloze.blankIds[index],
+          number,
+          page: word.page,
+          lineIndex: line.lineIndex,
+          glyphWidthPt: word.xMax - word.xMin,
+          fontProxyPt: word.yMax - word.yMin,
+          extraBaselineStepRatio:
+            verticalOffsetPt
+            / clozeRhythm.targets.printPdf.baselineStepPt,
+        }
+      },
+    )
+  observe('inline_blank_no_phantom_space', {
+    fromIdentity: paragraphProofs.map((paragraph) => paragraph.paragraphId),
+    toIdentity: blankProofs.map((blank) => blank.blankId),
+    extraBaselineStepRatios: blankProofs.map(
+      (blank) => blank.extraBaselineStepRatio,
+    ),
+    blankGlyphMetrics: blankProofs,
+  })
+  observe('inline_blank_atomicity', {
+    fromIdentity: blankProofs.map((blank) => blank.blankId),
+    pageRelation: 'same_line_unsplittable',
+    lineIdentities: blankProofs.map(
+      (blank) => `${blank.page}:${blank.lineIndex}`,
+    ),
+  })
+  observe('inline_blank_punctuation_outside', {
+    fromIdentity: blankProofs.map((blank) => blank.blankId),
+    toIdentity: paragraphProofs.map((paragraph) => paragraph.paragraphId),
+    pageRelation: 'punctuation_sibling',
+    blankTokens: blankProofs.map((blank) => blank.number),
+  })
+  const passageContinuation = paragraphProofs.flatMap((paragraph) =>
+    paragraph.lines.slice(1).flatMap((line, index) =>
+      line.page === paragraph.lines[index].page + 1
+        ? [{ from: paragraph.lines[index], to: line }]
+        : [])).at(0)
+  if (requirePassageCrossPage) {
+    assert.ok(
+      passageContinuation,
+      `${label} executes a same-passage cross-page continuation`,
+    )
+  }
+  if (passageContinuation) {
+    observe('same_passage_cross_page', {
+      fromIdentity: paragraphProofs.find((paragraph) =>
+        paragraph.lines.includes(passageContinuation.from))?.paragraphId,
+      toIdentity: paragraphProofs.find((paragraph) =>
+        paragraph.lines.includes(passageContinuation.to))?.paragraphId,
+      pageRelation: 'next_page_continuation',
+      fromPage: passageContinuation.from.page,
+      toPage: passageContinuation.to.page,
+    })
+  }
+  const rowAnchors = expectedRows.map((sourceRow) => {
+    const firstOptionToken = exactPdfTokens(
+      sourceRow.options[0].text,
+    )[0]
+    const questionIndexes = rowWords.flatMap((word, wordIndex) =>
+      word.text === String(sourceRow.questionNo)
+      && word.xMin >= 65
+      && word.xMin <= 85
+      && rowWords[wordIndex + 1]?.text === 'A'
+      && rowWords[wordIndex + 1].page === word.page
+      && rowWords[wordIndex + 1].xMin > word.xMin
+      && Math.abs(
+        (rowWords[wordIndex + 1].yMin + rowWords[wordIndex + 1].yMax)
+          / 2
+        - (word.yMin + word.yMax) / 2,
+      ) <= 1
+      && rowWords[wordIndex + 2]?.text
+      && (
+        firstOptionToken.startsWith(rowWords[wordIndex + 2].text)
+        || rowWords[wordIndex + 2]?.text?.startsWith(firstOptionToken)
+      )
+        ? [wordIndex]
+        : [])
+    assert.equal(
+      questionIndexes.length,
+      1,
+      `${label} exposes one fixed-left row label ${sourceRow.questionNo}`,
+    )
+    const questionIndex = questionIndexes[0]
+    const questionWord = rowWords[questionIndex]
+    return {
+      sourceRow,
+      questionIndex,
+      questionWord,
+      page: questionWord.page,
+      y: (questionWord.yMin + questionWord.yMax) / 2,
+      firstTextX: rowWords[questionIndex + 2].xMin,
+    }
+  })
+  const collapsedWordText = (value) =>
+    value.normalize('NFKC').replace(/[^\p{L}\p{N}]/gu, '')
+  const rowProofs = rowAnchors.map((anchor, rowIndex) => {
+    const {
+      sourceRow,
+      questionIndex,
+      questionWord,
+      page,
+      y,
+      firstTextX,
+    } = anchor
+    const nextAnchor = rowAnchors[rowIndex + 1]
+    const teacherAnswerWord = teacher
+      ? rowWords.find((word, wordIndex) =>
+          wordIndex > questionIndex
+          && word.text === normalizedPdfToken(
+            `【答案】${sourceRow.answer}`,
+          ))
+      : null
+    const optionEndY =
+      teacherAnswerWord?.page === page
+        ? (teacherAnswerWord.yMin + teacherAnswerWord.yMax) / 2 - 1
+        : nextAnchor?.page === page
+          ? nextAnchor.y - 1
+          : followingWord.page === page
+            ? (followingWord.yMin + followingWord.yMax) / 2 - 1
+            : 790
+    const options = sourceRow.options.map((option, track) => {
+      const expectedX = firstTextX + 104 * track
+      const nextTrackBoundary =
+        track < 3 ? firstTextX + 104 * (track + 1) - 16 : 550
+      const wordsInTrack = rowWords
+        .filter((word) => {
+          const centerY = (word.yMin + word.yMax) / 2
+          return word.page === page
+            && centerY >= y - 1
+            && centerY < optionEndY
+            && word.xMin >= expectedX - 1.5
+            && word.xMin < nextTrackBoundary
+        })
+        .sort((left, right) =>
+          (left.yMin + left.yMax) / 2
+            - (right.yMin + right.yMax) / 2
+          || left.xMin - right.xMin)
+      const observedText = wordsInTrack
+        .map((word) => collapsedWordText(word.text))
+        .join('')
+      const expectedText = collapsedWordText(option.text)
+      assert.equal(
+        observedText,
+        expectedText,
+        `${label} row ${sourceRow.questionNo} exposes ${option.label} source text`,
+      )
+      const labelWords = rowWords.filter((word) => {
+        const centerY = (word.yMin + word.yMax) / 2
+        return word.page === page
+          && Math.abs(centerY - y) <= 1
+          && word.text === option.label
+          && word.xMin >= expectedX - 20
+          && word.xMin < expectedX - 1
+      })
+      assert.equal(
+        labelWords.length,
+        1,
+        `${label} row ${sourceRow.questionNo} exposes one ${option.label} label at its fixed track`,
+      )
+      return {
+        ...option,
+        word: wordsInTrack[0],
+        words: wordsInTrack,
+        labelWord: labelWords[0],
+      }
+    })
+    assert.equal(
+      new Set(options.map((option) => option.word.page)).size,
+      1,
+      `${label} keeps row ${sourceRow.questionNo} unsplit on one page`,
+    )
+    const relativeXs = options.map(
+      (option) => option.word.xMin - options[0].word.xMin,
+    )
+    assert.equal(
+      relativeXs.every(
+        (x, track) => Math.abs(x - 104 * track) <= 2.5,
+      ),
+      true,
+      `${label} row ${sourceRow.questionNo} retains fixed 104pt option text-start pitch`,
+    )
+    const yCenters = options.map(
+      (option) => (option.word.yMin + option.word.yMax) / 2,
+    )
+    const labelCenters = options.map(
+      (option) =>
+        (option.labelWord.yMin + option.labelWord.yMax) / 2,
+    )
+    assert.equal(
+      labelCenters.every(
+        (labelY) => Math.abs(labelY - labelCenters[0]) <= 1,
+      ),
+      true,
+      `${label} row ${sourceRow.questionNo} keeps A-D labels on one baseline`,
+    )
+    if (!requireWrappedOption) {
+      assert.equal(
+        yCenters.every((y) => Math.abs(y - yCenters[0]) <= 1),
+        true,
+        `${label} row ${sourceRow.questionNo} retains one-line A-D baseline`,
+      )
+    }
+    assert.equal(
+      options[0].word.xMin - questionWord.xMin > 20,
+      true,
+      `${label} row ${sourceRow.questionNo} retains its question-to-A anchor`,
+    )
+    return {
+      questionId: sourceRow.questionId,
+      questionNo: sourceRow.questionNo,
+      answer: sourceRow.answer,
+      questionIndex,
+      page,
+      y,
+      tailY: Math.max(
+        ...options.flatMap((option) =>
+          option.words.map((word) => (word.yMin + word.yMax) / 2)),
+      ),
+      xStarts: options.map((option) => option.word.xMin),
+      options,
+    }
+  })
+  const followingRawIndex = rowWords.findIndex((word) =>
+    word.page === followingWord.page
+    && word.text === followingWord.text
+    && Math.abs(word.xMin - followingWord.xMin) <= 0.1
+    && Math.abs(word.yMin - followingWord.yMin) <= 0.1)
+  assert.equal(
+    followingRawIndex >= 0,
+    true,
+    `${label} resolves the following section in the PDF content stream`,
+  )
+  const teacherTails = teacher
+    ? rowProofs.map((row, index) => {
+        const nextBoundaryIndex =
+          rowProofs[index + 1]?.questionIndex ?? followingRawIndex
+        const answerIndexes = rowWords.flatMap((word, wordIndex) =>
+          wordIndex > row.questionIndex
+          && wordIndex < nextBoundaryIndex
+          && word.text === normalizedPdfToken(`【答案】${row.answer}`)
+            ? [wordIndex]
+            : [])
+        const explanationIndexes = rowWords.flatMap((word, wordIndex) =>
+          wordIndex > row.questionIndex
+          && wordIndex < nextBoundaryIndex
+          && word.text.startsWith('解析')
+            ? [wordIndex]
+            : [])
+        assert.equal(
+          answerIndexes.length,
+          1,
+          `${label} binds row ${row.questionNo} to its official Teacher answer`,
+        )
+        assert.equal(
+          explanationIndexes.length,
+          1,
+          `${label} binds row ${row.questionNo} to one reviewed Teacher explanation`,
+        )
+        const answerWord = rowWords[answerIndexes[0]]
+        const explanationWord = rowWords[explanationIndexes[0]]
+        const answerLine = lineForWord(answerWord)
+        assert.ok(
+          answerLine,
+          `${label} resolves row ${row.questionNo} Teacher answer line`,
+        )
+        assert.equal(
+          collapsedWordText(answerLine.text),
+          collapsedWordText(`【答案】${expectedRows[index].answer}`),
+          `${label} row ${row.questionNo} exposes the exact official-answer bytes`,
+        )
+        const nextRow = rowProofs[index + 1]
+        const explanationRegionWords = rowWords
+          .filter((word) =>
+            word.page === explanationWord.page
+            && word.yMin >= explanationWord.yMin - 1
+            && word.yMax < (
+              nextRow?.page === explanationWord.page
+                ? nextRow.y - 1
+                : followingLine.page === explanationWord.page
+                  ? followingLine.yMin - 1
+                : 790
+            ))
+        const explanationRegionLines = []
+        for (const word of explanationRegionWords) {
+          const centerY = (word.yMin + word.yMax) / 2
+          const line = explanationRegionLines.find(
+            (candidate) => Math.abs(candidate.centerY - centerY) <= 2.5,
+          )
+          if (line) {
+            line.words.push(word)
+            line.centerY = median(line.words.map(
+              (candidate) => (candidate.yMin + candidate.yMax) / 2,
+            ))
+          } else {
+            explanationRegionLines.push({
+              centerY,
+              words: [word],
+            })
+          }
+        }
+        explanationRegionLines.sort(
+          (left, right) => left.centerY - right.centerY,
+        )
+        const orderedExplanationWords = explanationRegionLines.flatMap(
+          (line) => line.words.sort(
+            (left, right) => left.xMin - right.xMin,
+          ),
+        )
+        const observedExplanationText = orderedExplanationWords
+          .map((word) => word.text)
+          .join('')
+        assert.equal(
+          collapsedWordText(observedExplanationText),
+          collapsedWordText(`【解析】${expectedRows[index].explanation}`),
+          `${label} row ${row.questionNo} exposes the exact digest-bound reviewed explanation`,
+        )
+        assert.equal(
+          answerWord.page === row.page
+          && explanationWord.page === row.page,
+          true,
+          `${label} keeps row ${row.questionNo} with its answer/explanation supplement`,
+        )
+        const answerY = (answerWord.yMin + answerWord.yMax) / 2
+        const explanationY =
+          (explanationWord.yMin + explanationWord.yMax) / 2
+        assert.equal(
+          Math.abs(
+            answerY - row.tailY
+            - clozeRhythm.targets.printPdf.baselineStepPt,
+          ) <= clozeRhythm.targets.printPdf.oneStepTolerancePt,
+          true,
+          `${label} keeps row ${row.questionNo} to answer at one local baseline step`,
+        )
+        assert.equal(
+          Math.abs(
+            explanationY - answerY
+            - clozeRhythm.targets.printPdf.baselineStepPt,
+          ) <= clozeRhythm.targets.printPdf.oneStepTolerancePt,
+          true,
+          `${label} keeps answer to explanation at one local baseline step`,
+        )
+        const tailWord = orderedExplanationWords.at(-1)
+        assert.ok(
+          tailWord,
+          `${label} resolves row ${row.questionNo} reviewed explanation tail`,
+        )
+        return {
+          page: tailWord.page,
+          y: (tailWord.yMin + tailWord.yMax) / 2,
+          answerY,
+          explanationY,
+        }
+      })
+    : []
+  const rowPages = new Set(rowProofs.map((row) => row.page))
+  const choiceTransitionIndex = rowProofs.findIndex(
+    (row, index) =>
+      index > 0 && row.page === rowProofs[index - 1].page + 1,
+  )
+  if (requireChoiceBlockCrossPage) {
+    assert.equal(
+      choiceTransitionIndex > 0,
+      true,
+      `${label} executes row-block pagination without splitting a row`,
+    )
+  }
+  if (choiceTransitionIndex > 0) {
+    observe('choice_block_cross_page', {
+      fromIdentity: rowProofs[choiceTransitionIndex - 1].questionId,
+      toIdentity: rowProofs[choiceTransitionIndex].questionId,
+      pageRelation: 'next_page_continuation',
+      fromPage: rowProofs[choiceTransitionIndex - 1].page,
+      toPage: rowProofs[choiceTransitionIndex].page,
+    })
+  }
+  for (let index = 1; index < rowProofs.length; index += 1) {
+    const previous = rowProofs[index - 1]
+    const current = rowProofs[index]
+    assert.equal(
+      current.page === previous.page
+      || current.page === previous.page + 1,
+      true,
+      `${label} keeps rows ${previous.questionNo}-${current.questionNo} contiguous`,
+    )
+    if (current.page === previous.page && !teacher) {
+      assert.equal(
+        Math.abs(
+          current.y - previous.tailY
+          - clozeRhythm.targets.printPdf.baselineStepPt,
+        ) <= clozeRhythm.targets.printPdf.oneStepTolerancePt,
+        true,
+        `${label} keeps row rhythm at one local baseline step`,
+      )
+    }
+    if (current.page === previous.page && teacher) {
+      const previousTail = teacherTails[index - 1]
+      assert.equal(
+        previousTail.page,
+        current.page,
+        `${label} keeps the prior reviewed explanation tail with the next row`,
+      )
+      assert.equal(
+        Math.abs(
+          current.y - previousTail.y
+          - clozeRhythm.targets.printPdf.baselineStepPt,
+        ) <= clozeRhythm.targets.printPdf.oneStepTolerancePt,
+        true,
+        `${label} keeps Teacher tail to next row at one local baseline step`,
+      )
+    }
+  }
+  const wrappedOptionWords = rowProofs[12].options[3].words
+  const wrappedOptionLines = []
+  for (const word of wrappedOptionWords) {
+      const centerY = (word.yMin + word.yMax) / 2
+      const line = wrappedOptionLines.find(
+        (candidate) => Math.abs(candidate.centerY - centerY) <= 2.5,
+      )
+      if (line) {
+        line.words.push(word)
+        line.centerY = median(line.words.map(
+          (candidate) => (candidate.yMin + candidate.yMax) / 2,
+        ))
+      } else {
+        wrappedOptionLines.push({ centerY, words: [word] })
+      }
+  }
+  const continuationXs = wrappedOptionLines
+    .sort((left, right) => left.centerY - right.centerY)
+    .map((line) => Math.min(...line.words.map((word) => word.xMin)))
+  if (requireWrappedOption) {
+    assert.equal(
+      continuationXs.length > 1,
+      true,
+      `${label} executes a wrapped option with hanging text continuation`,
+    )
+    assert.equal(
+      Math.max(...continuationXs) - Math.min(...continuationXs) <= 1.5,
+      true,
+      `${label} wrapped continuation stays anchored inside its fixed track`,
+    )
+  }
+  if (continuationXs.length > 1) {
+    observe('wrapped_option_continuation', {
+      fromIdentity: `${rowProofs[12].questionId}:D`,
+      toIdentity: `${rowProofs[12].questionId}:D`,
+      horizontalRelation: 'hanging_indent',
+      continuationXs,
+    })
+  }
+  const passageTailLine = paragraphProofs.at(-1).lines.at(-1)
+  const firstRowLine = lineForWord(
+    rowWords[rowProofs[0].questionIndex],
+  )
+  if (passageTailLine.page === firstRowLine.page) {
+    observe('passage_tail_to_first_choice_row', {
+      fromIdentity: paragraphProofs.at(-1).paragraphId,
+      toIdentity: rowProofs[0].questionId,
+      fromText: expectedPassageTexts.at(-1),
+      toText: String(rowProofs[0].questionNo),
+      actualRatio: assertPdfStep(
+        'passage_tail_to_first_choice_row',
+        passageTailLine,
+        firstRowLine,
+      ),
+      pageRelation: 'same_page',
+    })
+  } else {
+    assert.equal(firstRowLine.page, passageTailLine.page + 1)
+    assert.equal(firstRowLine.yMax < 130, true)
+    observe('passage_tail_to_first_choice_row', {
+      fromIdentity: paragraphProofs.at(-1).paragraphId,
+      toIdentity: rowProofs[0].questionId,
+      fromText: expectedPassageTexts.at(-1),
+      toText: String(rowProofs[0].questionNo),
+      pageRelation: 'next_page_start',
+      fromPage: passageTailLine.page,
+      toPage: firstRowLine.page,
+    })
+  }
+  observe('choice_row_question_to_first_track', {
+    fromIdentity: rowProofs.map((row) => row.questionId),
+    toIdentity: rowProofs.map((row) => `${row.questionId}:A`),
+    horizontalRelation: 'fixed_question_to_A_anchor',
+    actualOffsetsPt: rowProofs.map(
+      (row) => row.options[0].labelWord.xMin
+        - rowWords[row.questionIndex].xMin,
+    ),
+  })
+  observe('choice_label_to_text', {
+    fromIdentity: rowProofs.flatMap((row) =>
+      row.options.map((option) => `${row.questionId}:${option.label}`)),
+    toIdentity: rowProofs.flatMap((row) =>
+      row.options.map((option) => `${row.questionId}:${option.label}:text`)),
+    horizontalRelation: 'fixed_em_gap',
+    actualGapEm: rowProofs.flatMap((row) =>
+      row.options.map((option) =>
+        (option.word.xMin - option.labelWord.xMax) / 10.5)),
+  })
+  observe('choice_tracks_internal', {
+    fromIdentity: rowProofs[0].options.map((option) => option.label),
+    toIdentity: rowProofs[0].options.map((option) => option.label),
+    horizontalRelation: 'four_fixed_equal_origin_pitch_tracks',
+    relativeOriginsPt: rowProofs[0].xStarts.map(
+      (x) => x - rowProofs[0].xStarts[0],
+    ),
+  })
+  const samePageRowRatios = rowProofs.slice(1).flatMap((row, index) => {
+    const previousTail = teacher
+      ? teacherTails[index]
+      : {
+          page: rowProofs[index].page,
+          y: rowProofs[index].tailY,
+        }
+    return row.page === previousTail.page
+      ? [(row.y - previousTail.y)
+        / clozeRhythm.targets.printPdf.baselineStepPt]
+      : []
+  })
+  assert.equal(
+    samePageRowRatios.length > 0,
+    true,
+    `${label} measures real same-page row rhythm`,
+  )
+  assert.equal(
+    samePageRowRatios.every(
+      (ratio) =>
+        Math.abs(ratio - 1)
+          <= clozeRhythm.targets.printPdf.oneStepTolerancePt
+            / clozeRhythm.targets.printPdf.baselineStepPt,
+    ),
+    true,
+    `${label} keeps every measured row rhythm at one local baseline step`,
+  )
+  const oneLineBaselineDeltasPt = rowProofs.flatMap((row) =>
+    row.options.map((option) =>
+      Math.abs(
+        (
+          option.word.yMin + option.word.yMax
+          - option.labelWord.yMin - option.labelWord.yMax
+        ) / 2,
+      )),
+  )
+  assert.equal(
+    oneLineBaselineDeltasPt.every((delta) => delta <= 1),
+    true,
+    `${label} keeps every A-D label and option text on one row baseline`,
+  )
+  observe('choice_row_baseline', {
+    fromIdentity: rowProofs.slice(0, -1).map((row) => row.questionId),
+    toIdentity: rowProofs.slice(1).map((row) => row.questionId),
+    actualRatios: samePageRowRatios,
+    oneLineBaselineDeltasPt,
+  })
+  observe('choice_label_text_atomicity', {
+    fromIdentity: rowProofs.map((row) => row.questionId),
+    pageRelation: 'same_atomic_option',
+    labelTextBaselineDeltasPt: rowProofs.flatMap((row) =>
+      row.options.map((option) =>
+        (
+          (option.word.yMin + option.word.yMax)
+          - (option.labelWord.yMin + option.labelWord.yMax)
+        ) / 2)),
+  })
+  observe('choice_row_unsplittable', {
+    fromIdentity: rowProofs.map((row) => row.questionId),
+    pageRelation: 'same_page_unit',
+    pages: rowProofs.map((row) => row.page),
+  })
+  if (teacher) {
+    observe('choice_row_to_answer', {
+      fromIdentity: rowProofs.map((row) => row.questionId),
+      toIdentity: rowProofs.map((row) => row.questionId),
+      actualRatios: rowProofs.map(
+        (row, index) =>
+          (teacherTails[index].answerY - row.tailY)
+          / clozeRhythm.targets.printPdf.baselineStepPt,
+      ),
+    })
+    observe('answer_to_explanation', {
+      fromIdentity: rowProofs.map((row) => row.questionId),
+      toIdentity: rowProofs.map((row) => row.questionId),
+      actualRatios: teacherTails.map(
+        (tail) =>
+          (tail.explanationY - tail.answerY)
+          / clozeRhythm.targets.printPdf.baselineStepPt,
+      ),
+    })
+    observe('teacher_tail_to_next_row', {
+      fromIdentity: rowProofs.slice(0, -1).map((row) => row.questionId),
+      toIdentity: rowProofs.slice(1).map((row) => row.questionId),
+      actualRatios: rowProofs.slice(1).flatMap((row, index) =>
+        row.page === teacherTails[index].page
+          ? [(row.y - teacherTails[index].y)
+            / clozeRhythm.targets.printPdf.baselineStepPt]
+          : []),
+    })
+  }
+  const lastRowPage = rowProofs.at(-1).page
+  const followingPage = words[followingIndex].page
+  if (requireFollowingCrossPage) {
+    assert.equal(
+      followingPage,
+      lastRowPage + 1,
+      `${label} starts Grammar Fill on the immediately following page`,
+    )
+  } else {
+    assert.equal(
+      followingPage === lastRowPage || followingPage === lastRowPage + 1,
+      true,
+      `${label} keeps the Cloze-to-Grammar transition contiguous`,
+    )
+  }
+  const finalTail = teacher
+    ? teacherTails.at(-1)
+    : {
+        page: rowProofs.at(-1).page,
+        y: rowProofs.at(-1).tailY,
+      }
+  const followingEdgeId = teacher
+    ? followingPage === finalTail.page
+      ? 'teacher_tail_to_next_section_same_page'
+      : 'teacher_tail_to_next_section_cross_page'
+    : followingPage === finalTail.page
+      ? 'student_tail_to_next_section_same_page'
+      : 'student_tail_to_next_section_cross_page'
+  if (followingPage === finalTail.page) {
+    observe(followingEdgeId, {
+      fromIdentity: rowProofs.at(-1).questionId,
+      toIdentity:
+        clozeSourceOracle.oracle.publicIdentities.followingSection.groupId,
+      actualRatio: assertPdfStep(
+        followingEdgeId,
+        { page: finalTail.page, centerY: finalTail.y },
+        followingLine,
+      ),
+      pageRelation: 'same_page',
+    })
+  } else {
+    assert.equal(followingPage, finalTail.page + 1)
+    assert.equal(followingLine.yMax < 130, true)
+    observe(followingEdgeId, {
+      fromIdentity: rowProofs.at(-1).questionId,
+      toIdentity:
+        clozeSourceOracle.oracle.publicIdentities.followingSection.groupId,
+      pageRelation: 'next_page_start',
+      fromPage: finalTail.page,
+      toPage: followingPage,
+    })
+  }
+  const pdfTextValue = pagesText.join('\n')
+  if (teacher) {
+    assert.equal(
+      teacherTails.length,
+      15,
+      `${label} includes all 15 source-bound Cloze answer/explanation supplements`,
+    )
+  } else {
+    assert.equal(
+      (pdfTextValue.match(/【答案】/g) || []).length,
+      0,
+      `${label} hides all Teacher answers`,
+    )
+    assert.equal(
+      (pdfTextValue.match(/【解析】/g) || []).length,
+      0,
+      `${label} hides all Teacher explanations`,
+    )
+  }
+  return {
+    boundaryPage: words[boundaryIndex].page,
+    chromePages: [
+      words[partIndex].page,
+      words[sectionIndex].page,
+      words[instructionIndex].page,
+    ],
+    passageStartPage,
+    passageEndPage:
+      paragraphProofs.at(-1)?.lines.at(-1)?.page ?? passageEndPage,
+    rowPages: [...rowPages],
+    followingPage,
+    observedEdges,
+  }
+}
+
 function uniquePdfSequenceIndex(
   words,
   tokens,
@@ -6369,6 +8690,7 @@ async function renderSupportedArtifacts({
   const recordSevenChoicesCoverage = (observation) => {
     sevenChoicesCoverageObservations.push(observation)
   }
+  const clozeCoverageObservations = []
   const asset = JSON.parse(readFileSync(
     path.join(paperAssetsDir, paperId, 'latest', 'paper-asset.json'),
     'utf8',
@@ -6510,6 +8832,63 @@ async function renderSupportedArtifacts({
           recordCoverage: recordSevenChoicesCoverage,
         },
       )
+      const plainClozeObservation = await assertClozeDomGeometry(
+        page,
+        'plain PaperSurface Cloze',
+      )
+      recordClozeBundleCoverage(clozeCoverageObservations, {
+        bundleId: 'screen-plain',
+        variant: 'plain-baseline',
+        proof: plainClozeObservation,
+      })
+      const screenClozeWrapped = clozeVariantConsumption(
+        consumers.screen,
+        {
+          wrappedOptionRepeats:
+            clozeSourceOracle.oracle.variants.wrappedOption.repeatCount,
+        },
+      )
+      const screenConsumptionRoute =
+        '**/api/paper-canonical/consumption?**'
+      const screenConsumptionHandler = async (route) => {
+        await route.fulfill({
+          status: 200,
+          contentType: 'application/json',
+          body: JSON.stringify(screenClozeWrapped.consumption),
+        })
+      }
+      await page.route(screenConsumptionRoute, screenConsumptionHandler)
+      try {
+        const wrappedUrl = new URL(plainUrl)
+        wrappedUrl.searchParams.set(
+          'clozeProducerVariant',
+          'source-derived-wrapped-option',
+        )
+        await page.goto(wrappedUrl.href)
+        await page.locator('[data-paper-browse-anchor]').first().waitFor()
+        const plainClozeWrappedObservation = await assertClozeDomGeometry(
+          page,
+          'plain PaperSurface Cloze wrapped-option adversary',
+          {
+            wrappedOption: true,
+            expectedRows: screenClozeWrapped.expectedRows,
+            expectedPassageTexts:
+              screenClozeWrapped.expectedPassageTexts,
+          },
+        )
+        recordClozeBundleCoverage(clozeCoverageObservations, {
+          bundleId: 'screen-plain',
+          variant: 'plain-wrapped-option',
+          proof: plainClozeWrappedObservation,
+        })
+      } finally {
+        await page.unroute(
+          screenConsumptionRoute,
+          screenConsumptionHandler,
+        )
+      }
+      await page.goto(plainUrl.href)
+      await page.locator('[data-paper-browse-anchor]').first().waitFor()
       const runScreenSourceAssetAttack = async ({
         name,
         mutate,
@@ -6536,7 +8915,7 @@ async function renderSupportedArtifacts({
             ).textContent()
             assert.match(
               errorText || '',
-              /Seven Choices Group occurs more than once|Consumption Plan Group is absent|asset Group is missing/,
+              /Seven Choices Group occurs more than once|Cloze Group occurs more than once|Consumption Plan Group is absent|asset Group is missing|Rendered canonical writing Group order is invalid/,
               `Screen rejects ${name} before rendering a partial public artifact`,
             )
             assert.equal(
@@ -6545,6 +8924,13 @@ async function renderSupportedArtifacts({
               ).count(),
               0,
               `Screen ${name} emits zero partial Seven Choices bank`,
+            )
+            assert.equal(
+              await page.locator(
+                '[data-canonical-group-type="cloze"]',
+              ).count(),
+              0,
+              `Screen ${name} emits zero partial Cloze artifact`,
             )
           } else {
             await page.locator('[data-paper-browse-anchor]').first().waitFor()
@@ -6610,6 +8996,46 @@ async function renderSupportedArtifacts({
               candidate.type === 'group' && candidate.groupId === groupId,
           )
           block.groupId = 'group-poisoned-seven-choices'
+        },
+      })
+      await runScreenSourceAssetAttack({
+        name: 'duplicate-cloze-group-adversary',
+        expectRejected: true,
+        mutate: (attackedAsset) => {
+          const groupId =
+            clozeSourceOracle.oracle.publicIdentities.cloze.groupId
+          const groupIndex = attackedAsset.content.blocks.findIndex(
+            (block) => block.type === 'group' && block.groupId === groupId,
+          )
+          attackedAsset.content.blocks.splice(
+            groupIndex + 1,
+            0,
+            structuredClone(attackedAsset.content.blocks[groupIndex]),
+          )
+        },
+      })
+      await runScreenSourceAssetAttack({
+        name: 'missing-cloze-group-adversary',
+        expectRejected: true,
+        mutate: (attackedAsset) => {
+          const groupId =
+            clozeSourceOracle.oracle.publicIdentities.cloze.groupId
+          attackedAsset.content.blocks = attackedAsset.content.blocks.filter(
+            (block) => block.type !== 'group' || block.groupId !== groupId,
+          )
+        },
+      })
+      await runScreenSourceAssetAttack({
+        name: 'wrong-cloze-group-adversary',
+        expectRejected: true,
+        mutate: (attackedAsset) => {
+          const groupId =
+            clozeSourceOracle.oracle.publicIdentities.cloze.groupId
+          const block = attackedAsset.content.blocks.find(
+            (candidate) =>
+              candidate.type === 'group' && candidate.groupId === groupId,
+          )
+          block.groupId = 'group-poisoned-cloze'
         },
       })
       await page.goto(plainUrl.href)
@@ -6728,6 +9154,47 @@ async function renderSupportedArtifacts({
           recordCoverage: recordSevenChoicesCoverage,
         },
       )
+      const lectureClozeObservation = await assertClozeDomGeometry(
+        page,
+        'lecture PaperSurface Cloze',
+      )
+      recordClozeBundleCoverage(clozeCoverageObservations, {
+        bundleId: 'screen-lecture',
+        variant: 'lecture-baseline',
+        proof: lectureClozeObservation,
+      })
+      await page.route(screenConsumptionRoute, screenConsumptionHandler)
+      try {
+        const wrappedLectureUrl = new URL(lectureUrl)
+        wrappedLectureUrl.searchParams.set(
+          'clozeProducerVariant',
+          'source-derived-wrapped-option',
+        )
+        await page.goto(wrappedLectureUrl.href)
+        await page.locator('[data-paper-browse-anchor]').first().waitFor()
+        const lectureClozeWrappedObservation = await assertClozeDomGeometry(
+          page,
+          'lecture PaperSurface Cloze wrapped-option adversary',
+          {
+            wrappedOption: true,
+            expectedRows: screenClozeWrapped.expectedRows,
+            expectedPassageTexts:
+              screenClozeWrapped.expectedPassageTexts,
+          },
+        )
+        recordClozeBundleCoverage(clozeCoverageObservations, {
+          bundleId: 'screen-lecture',
+          variant: 'lecture-wrapped-option',
+          proof: lectureClozeWrappedObservation,
+        })
+      } finally {
+        await page.unroute(
+          screenConsumptionRoute,
+          screenConsumptionHandler,
+        )
+      }
+      await page.goto(lectureUrl.href)
+      await page.locator('[data-paper-browse-anchor]').first().waitFor()
       const lectureSevenWrappedStyle = await page.addStyleTag({
         content: '.ps-option-bank{width:260px!important}',
       })
@@ -6888,6 +9355,82 @@ async function renderSupportedArtifacts({
       } finally {
         writeFileSync(publicAssetPath, publicAssetBytes)
       }
+      const latestClozePoison = JSON.parse(publicAssetBytes)
+      const latestClozePart = latestClozePoison.content.blocks.find(
+        (block) =>
+          block.type === 'partHeading'
+          && block.partId === 'part-2026-i-language',
+      )
+      assert.ok(latestClozePart)
+      latestClozePart.text = 'POISONED MUTABLE LATEST CLOZE CHROME'
+      try {
+        writeFileSync(
+          publicAssetPath,
+          `${JSON.stringify(latestClozePoison, null, 2)}\n`,
+        )
+        const immutableChromeResponse = await fetch(
+          `${baseUrl}/api/draft-papers/${draft.draftPaperId}/print-html?versionType=student`,
+        )
+        assert.equal(
+          immutableChromeResponse.status,
+          200,
+          'Print producer ignores mutable latest Cloze chrome',
+        )
+        const immutableChromeHtml = await immutableChromeResponse.text()
+        assert.equal(
+          immutableChromeHtml.includes(
+            clozeSourceOracle.oracle.publicVisibleChrome.part,
+          ),
+          true,
+          'Print producer reads Cloze chrome from its immutable Publication-bound source asset',
+        )
+        assert.equal(
+          immutableChromeHtml.includes(latestClozePart.text),
+          false,
+          'mutable latest Cloze chrome cannot enter a public Print artifact',
+        )
+      } finally {
+        writeFileSync(publicAssetPath, publicAssetBytes)
+      }
+      const immutableClozeAssetPath = path.join(
+        paperAssetsDir,
+        paperId,
+        'versions',
+        `v${consumers.print_pdf.sourceAssetVersion}`,
+        'paper-asset.json',
+      )
+      const immutableClozeAssetBytes = readFileSync(
+        immutableClozeAssetPath,
+      )
+      const immutableClozePoison = JSON.parse(immutableClozeAssetBytes)
+      immutableClozePoison.content.blocks.find(
+        (block) =>
+          block.type === 'partHeading'
+          && block.partId === 'part-2026-i-language',
+      ).text = 'POISONED IMMUTABLE CLOZE CHROME'
+      try {
+        writeFileSync(
+          immutableClozeAssetPath,
+          `${JSON.stringify(immutableClozePoison, null, 2)}\n`,
+        )
+        const rejectedChromeResponse = await fetch(
+          `${baseUrl}/api/draft-papers/${draft.draftPaperId}/print-html?versionType=student`,
+        )
+        assert.notEqual(
+          rejectedChromeResponse.status,
+          200,
+          'Print producer fails closed before rendering digest-drifted immutable Cloze chrome',
+        )
+        assert.match(
+          await rejectedChromeResponse.text(),
+          /Canonical Cloze chrome immutable source digest disagrees/,
+        )
+      } finally {
+        writeFileSync(
+          immutableClozeAssetPath,
+          immutableClozeAssetBytes,
+        )
+      }
       const readingVariantItems = readingPdfRoleOracle.readingGroups
         .map(({ groupId }) => readingPrintVariantItem(asset, groupId))
       printInstructionVariantHtml = buildPrintHtml({
@@ -6975,6 +9518,130 @@ async function renderSupportedArtifacts({
         consumers.print_pdf,
         'Teacher Print HTML',
       )
+      await page.setContent(printHtml.student, { waitUntil: 'load' })
+      const studentPrintClozeObservation = await assertClozeDomGeometry(
+        page,
+        'Student Print HTML Cloze',
+      )
+      recordClozeBundleCoverage(clozeCoverageObservations, {
+        bundleId: 'print-html-student',
+        variant: 'student-baseline',
+        proof: studentPrintClozeObservation,
+      })
+      const printClozeWrapped = clozeVariantConsumption(
+        consumers.print_pdf,
+        {
+          wrappedOptionRepeats:
+            clozeSourceOracle.oracle.variants.wrappedOption.repeatCount,
+        },
+      )
+      const clozePublicVariantBlocks = [
+        {
+          type: 'question_group',
+          questionGroupId:
+            sevenChoicesSourceOracle.oracle.publicIdentities.sevenChoices
+              .groupId,
+          score: 2.5,
+        },
+        {
+          type: 'section_header',
+          title: clozeSourceOracle.oracle.publicVisibleChrome.part,
+        },
+        {
+          type: 'section_header',
+          title: clozeSourceOracle.oracle.publicVisibleChrome.section,
+        },
+        {
+          type: 'instruction',
+          text: clozeSourceOracle.oracle.publicVisibleChrome.instruction,
+        },
+        {
+          type: 'question_group',
+          questionGroupId:
+            clozeSourceOracle.oracle.publicIdentities.cloze.groupId,
+          score: 1,
+        },
+        {
+          type: 'section_header',
+          title: clozeSourceOracle.oracle.publicVisibleChrome.followingSection,
+        },
+        {
+          type: 'question_group',
+          questionGroupId:
+            clozeSourceOracle.oracle.publicIdentities.followingSection.groupId,
+          score: 1.5,
+        },
+      ]
+      const clozePublicVariantItems = [
+        sevenChoicesPrintVariantItem(asset),
+        clozePrintVariantItem(asset),
+        grammarFillPrintVariantItem(asset),
+      ]
+      const clozePublicVariantHtml = (versionType, options = {}) =>
+        buildPrintHtml({
+          title: `Canonical Import Pilot Cloze ${options.variant || 'variant'}`,
+          versionType,
+          items: clozePublicVariantItems,
+          blocks: options.blocks || clozePublicVariantBlocks,
+          questionNumberStart: 33,
+          printStyle: 'exam',
+          canonicalConsumption:
+            options.consumption || printClozeWrapped.consumption,
+        })
+      const wrappedStudentPrintHtml = clozePublicVariantHtml(
+        'student',
+        { variant: 'source-derived-wrapped-option' },
+      )
+      await page.setContent(wrappedStudentPrintHtml, { waitUntil: 'load' })
+      const wrappedStudentPrintClozeObservation =
+        await assertClozeDomGeometry(
+          page,
+          'Student Print HTML Cloze wrapped-option adversary',
+          {
+            wrappedOption: true,
+            expectedRows: printClozeWrapped.expectedRows,
+            expectedPassageTexts:
+              printClozeWrapped.expectedPassageTexts,
+          },
+        )
+      recordClozeBundleCoverage(clozeCoverageObservations, {
+        bundleId: 'print-html-student',
+        variant: 'student-wrapped-option',
+        proof: wrappedStudentPrintClozeObservation,
+      })
+      await page.setContent(printHtml.teacher, { waitUntil: 'load' })
+      const teacherPrintClozeObservation = await assertClozeDomGeometry(
+        page,
+        'Teacher Print HTML Cloze',
+        { teacher: true },
+      )
+      recordClozeBundleCoverage(clozeCoverageObservations, {
+        bundleId: 'print-html-teacher',
+        variant: 'teacher-baseline',
+        proof: teacherPrintClozeObservation,
+      })
+      const wrappedTeacherPrintHtml = clozePublicVariantHtml(
+        'teacher',
+        { variant: 'source-derived-wrapped-option' },
+      )
+      await page.setContent(wrappedTeacherPrintHtml, { waitUntil: 'load' })
+      const wrappedTeacherPrintClozeObservation =
+        await assertClozeDomGeometry(
+          page,
+          'Teacher Print HTML Cloze wrapped-option adversary',
+          {
+            teacher: true,
+            wrappedOption: true,
+            expectedRows: printClozeWrapped.expectedRows,
+            expectedPassageTexts:
+              printClozeWrapped.expectedPassageTexts,
+          },
+        )
+      recordClozeBundleCoverage(clozeCoverageObservations, {
+        bundleId: 'print-html-teacher',
+        variant: 'teacher-wrapped-option',
+        proof: wrappedTeacherPrintClozeObservation,
+      })
       const sevenChoicesVariantBlocks = [
         {
           type: 'section_header',
@@ -7260,6 +9927,186 @@ async function renderSupportedArtifacts({
         /preserves source-PDF A-G text/,
         'independent source oracle rejects a structurally valid producer text drift',
       )
+      const clozeVariantBlocks = [
+        {
+          type: 'section_header',
+          title: clozeSourceOracle.oracle.sourceExtraction.partMarker,
+        },
+        {
+          type: 'section_header',
+          title: clozeSourceOracle.oracle.sourceExtraction.sectionMarker,
+        },
+        {
+          type: 'instruction',
+          text: clozeSourceOracle.oracle.sourceExtraction.instructionMarker,
+        },
+        {
+          type: 'question_group',
+          questionGroupId:
+            clozeSourceOracle.oracle.publicIdentities.cloze.groupId,
+          score: 1,
+        },
+        {
+          type: 'section_header',
+          title:
+            clozeSourceOracle.oracle.sourceExtraction.followingSectionMarker,
+        },
+      ]
+      const clozeVariantItem = clozePrintVariantItem(asset)
+      const clozeBuildArgs = {
+        title: 'Canonical Import Pilot Cloze adversary',
+        versionType: 'student',
+        items: [clozeVariantItem],
+        blocks: clozeVariantBlocks,
+        questionNumberStart: 41,
+        printStyle: 'exam',
+        canonicalConsumption: consumers.print_pdf,
+      }
+      const clozeGroupBlockIndex = clozeVariantBlocks.findIndex(
+        (block) => block.type === 'question_group',
+      )
+      const assertClozePrintProducerRejected = (
+        name,
+        {
+          blocks = clozeVariantBlocks,
+          canonicalConsumption = consumers.print_pdf,
+        } = {},
+      ) => {
+        assert.throws(
+          () => buildPrintHtml({
+            ...clozeBuildArgs,
+            blocks,
+            canonicalConsumption,
+          }),
+          { code: 'CANONICAL_CONSUMPTION_REJECTED' },
+          `Print producer fails closed on Cloze ${name}`,
+        )
+      }
+      assertClozePrintProducerRejected('duplicate Group', {
+        blocks: [
+          ...clozeVariantBlocks.slice(0, clozeGroupBlockIndex + 1),
+          structuredClone(clozeVariantBlocks[clozeGroupBlockIndex]),
+          ...clozeVariantBlocks.slice(clozeGroupBlockIndex + 1),
+        ],
+      })
+      assertClozePrintProducerRejected('missing Group', {
+        blocks: clozeVariantBlocks.filter(
+          (block) => block.type !== 'question_group',
+        ),
+      })
+      assertClozePrintProducerRejected('wrong Group identity', {
+        blocks: clozeVariantBlocks.map((block) =>
+          block.type === 'question_group'
+            ? { ...block, questionGroupId: 'group-poisoned-cloze' }
+            : block),
+      })
+      const attackedClozeConsumption = (mutate) => {
+        const attacked = structuredClone(consumers.print_pdf)
+        const selection = attacked.selections.find(
+          (candidate) => candidate.familyContractId === 'cloze',
+        )
+        const occurrence = selection.projectedOccurrences.find(
+          (candidate) =>
+            candidate.groupId
+              === clozeSourceOracle.oracle.publicIdentities.cloze.groupId,
+        )
+        mutate(occurrence)
+        return attacked
+      }
+      const missingClozeOccurrenceDigests = structuredClone(
+        consumers.print_pdf,
+      )
+      delete missingClozeOccurrenceDigests.selections.find(
+        (candidate) => candidate.familyContractId === 'cloze',
+      ).projectedOccurrenceDigests
+      assertClozePrintProducerRejected(
+        'missing mandatory v18 projected occurrence digests',
+        { canonicalConsumption: missingClozeOccurrenceDigests },
+      )
+      const strippedClozeIntegrityEnvelope = structuredClone(
+        consumers.print_pdf,
+      )
+      const strippedClozeSelection =
+        strippedClozeIntegrityEnvelope.selections.find(
+          (candidate) => candidate.familyContractId === 'cloze',
+        )
+      delete strippedClozeIntegrityEnvelope.authorityRef
+      delete strippedClozeSelection.projectedOccurrenceDigests
+      strippedClozeSelection.projectedOccurrences[0]
+        .choices.sets[0].options[0].content[0].text =
+          'POISONED STRIPPED V18 CLOZE SOURCE OPTION'
+      assertClozePrintProducerRejected(
+        'stripped v18 integrity envelope with source drift',
+        { canonicalConsumption: strippedClozeIntegrityEnvelope },
+      )
+      assertClozePrintProducerRejected('wrong Question/Blank join', {
+        canonicalConsumption: attackedClozeConsumption((occurrence) => {
+          occurrence.blanks[0].blankId =
+            'blank-poisoned-cloze'
+        }),
+      })
+      assertClozePrintProducerRejected('source option text drift', {
+        canonicalConsumption: attackedClozeConsumption((occurrence) => {
+          occurrence.choices.sets[0].options[0].content[0].text =
+            'POISONED CLOZE SOURCE OPTION'
+        }),
+      })
+      const explanationPoisonItems = structuredClone(
+        clozePublicVariantItems,
+      )
+      explanationPoisonItems.find(
+        (item) =>
+          item.detail.id
+            === clozeSourceOracle.oracle.publicIdentities.cloze.groupId,
+      ).detail.questions[0].explanation =
+        'POISONED REVIEWED CLOZE EXPLANATION'
+      const explanationPoisonHtml = buildPrintHtml({
+        title: 'Canonical Import Pilot Cloze explanation poison',
+        versionType: 'teacher',
+        items: explanationPoisonItems,
+        blocks: clozePublicVariantBlocks,
+        questionNumberStart: 33,
+        printStyle: 'exam',
+        canonicalConsumption: consumers.print_pdf,
+      })
+      await page.setContent(explanationPoisonHtml, { waitUntil: 'load' })
+      await assert.rejects(
+        () => assertClozeDomGeometry(
+          page,
+          'Teacher Print HTML Cloze explanation poison',
+          { teacher: true },
+        ),
+        /exact reviewed-analysis bytes/,
+        'independent Teacher oracle rejects explanation poison injected before public rendering',
+      )
+      const answerPoisonItems = structuredClone(
+        clozePublicVariantItems,
+      )
+      answerPoisonItems.find(
+        (item) =>
+          item.detail.id
+            === clozeSourceOracle.oracle.publicIdentities.cloze.groupId,
+      ).detail.questions[0].answer =
+        `${clozeSourceOracle.questionRows[0].answer} POISONED`
+      const answerPoisonHtml = buildPrintHtml({
+        title: 'Canonical Import Pilot Cloze answer poison',
+        versionType: 'teacher',
+        items: answerPoisonItems,
+        blocks: clozePublicVariantBlocks,
+        questionNumberStart: 33,
+        printStyle: 'exam',
+        canonicalConsumption: consumers.print_pdf,
+      })
+      await page.setContent(answerPoisonHtml, { waitUntil: 'load' })
+      await assert.rejects(
+        () => assertClozeDomGeometry(
+          page,
+          'Teacher Print HTML Cloze answer poison',
+          { teacher: true },
+        ),
+        /exact official-answer bytes/,
+        'independent Teacher oracle rejects answer poison injected before public rendering',
+      )
       const sevenChoicesNoChromeHtml = buildPrintHtml({
         ...sevenChoicesBuildArgs,
         blocks: [
@@ -7457,6 +10304,175 @@ async function renderSupportedArtifacts({
           label,
         )
       }
+      const baselineStudentClozePdf = assertPdfClozeGeometry(
+        pdfPaths.student,
+        'Student Chromium PDF Cloze baseline',
+      )
+      recordClozeBundleCoverage(clozeCoverageObservations, {
+        bundleId: 'pdf-student',
+        variant: 'student-baseline',
+        proof: baselineStudentClozePdf,
+      })
+      const baselineTeacherClozePdf = assertPdfClozeGeometry(
+        pdfPaths.teacher,
+        'Teacher Chromium PDF Cloze baseline',
+        { teacher: true },
+      )
+      recordClozeBundleCoverage(clozeCoverageObservations, {
+        bundleId: 'pdf-teacher',
+        variant: 'teacher-baseline',
+        proof: baselineTeacherClozePdf,
+      })
+      const renderClozePdfVariant = async ({
+        versionType,
+        variant,
+        consumptionVariant,
+        blocks = clozePublicVariantBlocks,
+        assertionOptions,
+      }) => {
+        const html = clozePublicVariantHtml(
+          versionType,
+          {
+            variant,
+            blocks,
+            consumption: consumptionVariant.consumption,
+          },
+        )
+        let renderedVariant
+        try {
+          renderedVariant = await renderPaginatedPaper(html)
+        } finally {
+          await closeChromiumPool()
+        }
+        const outputPath = path.join(
+          outputDir,
+          `print-${versionType}-cloze-${variant}.pdf`,
+        )
+        writeFileSync(outputPath, renderedVariant.pdfBytes)
+        const label =
+          `${versionType === 'student' ? 'Student' : 'Teacher'} Chromium PDF Cloze ${variant}`
+        assertPdfA4AndUnclipped(outputPath, label)
+        const proof = assertPdfClozeGeometry(
+          outputPath,
+          label,
+          {
+            teacher: versionType === 'teacher',
+            expectedRows: consumptionVariant.expectedRows,
+            expectedPassageTexts:
+              consumptionVariant.expectedPassageTexts,
+            ...assertionOptions,
+          },
+        )
+        recordClozeBundleCoverage(clozeCoverageObservations, {
+          bundleId: `pdf-${versionType}`,
+          variant: `${versionType}-${variant}`,
+          proof,
+        })
+      }
+      const pageBreakBeforeClozeBlocks = [
+        clozePublicVariantBlocks[0],
+        { type: 'page_break' },
+        ...clozePublicVariantBlocks.slice(1),
+      ]
+      const pageBreakBeforeFollowingBlocks = [
+        ...clozePublicVariantBlocks.slice(0, -2),
+        { type: 'page_break' },
+        ...clozePublicVariantBlocks.slice(-2),
+      ]
+      const studentPassageCross = clozeVariantConsumption(
+        consumers.print_pdf,
+        {
+          wrappedOptionRepeats:
+            clozeSourceOracle.oracle.variants.wrappedOption.repeatCount,
+          passageTailRepeats:
+            clozeSourceOracle.oracle.variants.passageCrossPage.repeatCount,
+        },
+      )
+      await renderClozePdfVariant({
+        versionType: 'student',
+        variant: 'passage-cross-page',
+        consumptionVariant: studentPassageCross,
+        blocks: pageBreakBeforeClozeBlocks,
+        assertionOptions: {
+          requirePassageCrossPage: true,
+          requireWrappedOption: true,
+        },
+      })
+      const studentChoiceCross = clozeVariantConsumption(
+        consumers.print_pdf,
+        {
+          wrappedOptionRepeats:
+            clozeSourceOracle.oracle.variants.choiceBlockCrossPage
+              .repeatCountPerQuestion,
+          wrapEveryChoiceRow: true,
+        },
+      )
+      await renderClozePdfVariant({
+        versionType: 'student',
+        variant: 'choice-block-cross-page',
+        consumptionVariant: studentChoiceCross,
+        assertionOptions: {
+          requireChoiceBlockCrossPage: true,
+          requireWrappedOption: true,
+        },
+      })
+      const studentFollowingCross = clozeVariantConsumption(
+        consumers.print_pdf,
+      )
+      await renderClozePdfVariant({
+        versionType: 'student',
+        variant: 'next-section-cross-page',
+        consumptionVariant: studentFollowingCross,
+        blocks: pageBreakBeforeFollowingBlocks,
+        assertionOptions: { requireFollowingCrossPage: true },
+      })
+      const teacherPassageCross = clozeVariantConsumption(
+        consumers.print_pdf,
+        {
+          wrappedOptionRepeats:
+            clozeSourceOracle.oracle.variants.wrappedOption.repeatCount,
+          passageTailRepeats:
+            clozeSourceOracle.oracle.variants.passageCrossPage.repeatCount,
+        },
+      )
+      await renderClozePdfVariant({
+        versionType: 'teacher',
+        variant: 'passage-cross-page',
+        consumptionVariant: teacherPassageCross,
+        blocks: pageBreakBeforeClozeBlocks,
+        assertionOptions: {
+          requirePassageCrossPage: true,
+          requireWrappedOption: true,
+        },
+      })
+      const teacherChoiceCross = clozeVariantConsumption(
+        consumers.print_pdf,
+        {
+          wrappedOptionRepeats:
+            clozeSourceOracle.oracle.variants.choiceBlockCrossPage
+              .repeatCountPerQuestion,
+          wrapEveryChoiceRow: true,
+        },
+      )
+      await renderClozePdfVariant({
+        versionType: 'teacher',
+        variant: 'choice-block-cross-page',
+        consumptionVariant: teacherChoiceCross,
+        assertionOptions: {
+          requireChoiceBlockCrossPage: true,
+          requireWrappedOption: true,
+        },
+      })
+      const teacherFollowingCross = clozeVariantConsumption(
+        consumers.print_pdf,
+      )
+      await renderClozePdfVariant({
+        versionType: 'teacher',
+        variant: 'next-section-cross-page',
+        consumptionVariant: teacherFollowingCross,
+        blocks: pageBreakBeforeFollowingBlocks,
+        assertionOptions: { requireFollowingCrossPage: true },
+      })
       assertPdfSevenChoicesPassageToFirstOption(
         pdfPaths.teacher,
         'Teacher Chromium PDF public baseline Seven Choices direct-bank edge',
@@ -7979,6 +10995,9 @@ async function renderSupportedArtifacts({
     const sevenChoicesCoverageLedger = assertSevenChoicesObservedCoverage(
       sevenChoicesCoverageObservations,
     )
+    const clozeCoverageLedger = assertClozeObservedCoverage(
+      clozeCoverageObservations,
+    )
     const artifactFiles = listFiles(outputDir)
     assert.equal(
       artifactFiles.some((file) => /\.(?:docx|xml)$/i.test(file)),
@@ -8002,6 +11021,7 @@ async function renderSupportedArtifacts({
       artifactFiles,
       passageLetterGeometry,
       sevenChoicesCoverageLedger,
+      clozeCoverageLedger,
       closeServices,
     }
   } finally {
@@ -8015,6 +11035,9 @@ const readingPdfRoleOracle = assertReadingPdfRoleOracle()
 const sevenChoicesSourceOracle = assertSevenChoicesSourceOracle()
 const sevenChoicesReference = assertSevenChoicesReferenceEvidence()
 const sevenChoicesCoverageOracle = assertSevenChoicesCoverageOracle()
+const clozeSourceOracle = assertClozeSourceOracle()
+const clozeReference = assertClozeReferenceEvidence()
+const clozeCoverageOracle = assertClozeCoverageOracle()
 const rootDir = mkdtempSync(path.join(tmpdir(), 'eqb-canonical-import-pilot-'))
 const dbPath = path.join(rootDir, 'question-bank.sqlite')
 const paperAssetsDir = path.join(rootDir, 'paper-assets')
@@ -8032,7 +11055,7 @@ try {
   assert.equal(sourceDocument.kind, 'pdf')
   const requestPath = path.join(
     sourcePackageDir,
-    'canonical-evidence/canonical-import-request.json',
+    'canonical-evidence/canonical-import-request-v18.json',
   )
   execFileSync(process.execPath, [
     path.join(
@@ -8054,6 +11077,8 @@ try {
     path.join(sourcePackageDir, 'reviewed-evidence'),
     '--output-dir',
     path.dirname(requestPath),
+    '--request-file-name',
+    path.basename(requestPath),
   ], { stdio: 'pipe' })
   const loadedRequest = loadCanonicalImportRequest(requestPath)
   const loadedSourceDocument = loadedRequest.evidence.documents.find(
@@ -8204,6 +11229,26 @@ try {
   if (provisionActualArtifacts && existsSync(outputDir)) {
     rmSync(outputDir, { recursive: true, force: true })
   }
+  const publishedAnalysisDir = path.join(
+    paperAssetsDir,
+    paperId,
+    'latest',
+    'analyses',
+  )
+  mkdirSync(publishedAnalysisDir, { recursive: true })
+  const publishedClozeAnalysisPath = path.join(
+    publishedAnalysisDir,
+    'cloze-analysis-v1.json',
+  )
+  const reviewedClozeAnalysisBytes = readFileSync(
+    clozeSourceOracle.teacherAnalysisPath,
+  )
+  writeFileSync(publishedClozeAnalysisPath, reviewedClozeAnalysisBytes)
+  assert.deepEqual(
+    readFileSync(publishedClozeAnalysisPath),
+    reviewedClozeAnalysisBytes,
+    'Teacher public proof consumes the exact digest-bound reviewed Cloze analysis bytes',
+  )
   const rendered = await renderSupportedArtifacts({
     dbPath,
     paperAssetsDir,
@@ -8239,6 +11284,9 @@ try {
     sevenChoicesReferenceDigest: sevenChoicesReference.digest,
     sevenChoicesSourceOracleDigest: sevenChoicesSourceOracle.digest,
     sevenChoicesCoverageOracleDigest: sevenChoicesCoverageOracle.digest,
+    clozeReferenceDigest: clozeReference.digest,
+    clozeSourceOracleDigest: clozeSourceOracle.digest,
+    clozeCoverageOracleDigest: clozeCoverageOracle.digest,
     canonicalEvidenceDigests,
     dryRun: {
       validation: 'ready',
@@ -8286,6 +11334,23 @@ try {
         'teacher-tail-following-section-cross-page',
       ],
       observedLedger: rendered.sevenChoicesCoverageLedger,
+    },
+    clozePublicSeamCoverage: {
+      sourceOracles: [
+        'original-question-pdf',
+        'paper-asset-json',
+        'official-answer-json',
+      ],
+      producers: ['PaperBrowse', 'buildPrintHtml', 'renderPaginatedPaper'],
+      variants: [
+        'plain-and-lecture-baseline',
+        'screen-and-print-wrapped-options',
+        'student-and-teacher-baseline',
+        'same-passage-cross-page',
+        'choice-block-cross-page',
+        'following-section-cross-page',
+      ],
+      observedLedger: rendered.clozeCoverageLedger,
     },
     renderedArtifactDigests,
     forbiddenOutputArtifacts,

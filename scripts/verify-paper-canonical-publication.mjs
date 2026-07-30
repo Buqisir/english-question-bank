@@ -27,6 +27,7 @@ import {
   validateCanonicalPublicationBundle,
 } from '../server/paper-canonical/publication.mjs'
 import { compileCanonicalPaper } from '../shared/paper-canonical/compiler.mjs'
+import { projectCanonicalConsumerGroup } from '../shared/paper-canonical/consumerProjection.mjs'
 import { consumerContractRefs } from '../shared/paper-canonical/consumers.mjs'
 import { resolveCanonicalAuthority } from '../shared/paper-canonical/authority.mjs'
 import { digestJson, sha256, stableStringify } from '../shared/paper-canonical/stable.mjs'
@@ -118,6 +119,23 @@ async function assertExactOldV13FilesystemReload() {
         sha256(stableBytes(consumption)),
         integrity.consumptionDigests[consumerId],
         `old-v13 reload preserves the exact ${consumerId} Consumption Plan`,
+      )
+      const clozeSelection = consumption.selections.find(
+        (selection) => selection.familyContractId === 'cloze',
+      )
+      assert.ok(
+        clozeSelection,
+        `old-v13 ${consumerId} Consumption Plan retains its Cloze selection`,
+      )
+      const projectedCloze = projectCanonicalConsumerGroup({
+        consumption,
+        familyContractId: 'cloze',
+        groupId: clozeSelection.groupIds[0],
+      })
+      assert.equal(
+        projectedCloze.groupId,
+        clozeSelection.groupIds[0],
+        `the exact byte-pinned old-v13 ${consumerId} Cloze selection remains consumable`,
       )
     }
   } finally {

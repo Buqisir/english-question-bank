@@ -22,9 +22,10 @@ import {
 import { projectCanonicalPaper } from '../../shared/paper-canonical/projector.mjs'
 import { digestJson, sha256, stableStringify, withoutKey } from '../../shared/paper-canonical/stable.mjs'
 
-const publicationFileName = 'canonical-paper-publication-v17.json'
+const publicationFileName = 'canonical-paper-publication-v18.json'
 const publicationFileNames = [
   publicationFileName,
+  'canonical-paper-publication-v17.json',
   'canonical-paper-publication-v16.json',
   'canonical-paper-publication-v15.json',
   'canonical-paper-publication-v13.json',
@@ -1276,11 +1277,26 @@ function canonicalSelections(validated, contract) {
       legacyFamilies.push(familyContractId)
       continue
     }
+    const projectedOccurrences = validated.projected.nodes.filter(
+      (node) => node.kind === 'group' && groupIds.includes(node.groupId),
+    )
     selections.push({
       mode: 'canonical',
       familyContractId,
       groupIds,
-      projectedOccurrences: validated.projected.nodes.filter((node) => node.kind === 'group' && groupIds.includes(node.groupId)),
+      projectedOccurrences,
+      ...(
+        familyContractId === 'cloze'
+        && validated.plan.authorityRef.manifestVersion === '18'
+        ? {
+            projectedOccurrenceDigests: projectedOccurrences.map(
+              (occurrence) => ({
+                groupId: occurrence.groupId,
+                digest: digestJson(occurrence),
+              }),
+            ),
+          }
+        : {}),
     })
   }
   return { selections, legacyFamilies, allFamilyIds: [...groupIdsByFamily.keys()] }
@@ -1394,6 +1410,15 @@ function readyConsumption(
     paperId: request.paperId,
     sourceAssetVersion: ref.sourceAssetVersion,
     publicationDigest: manifest.publicationDigest,
+    ...(
+      // Preserve the byte-pinned pre-v18 Consumption Plan shape.
+      manifest.authority.manifestVersion === '18'
+        ? {
+            sourceAssetDigest: manifest.sourceAssetDigest,
+            authorityRef: structuredClone(manifest.authority),
+          }
+        : {}
+    ),
     selections: [...canonical.selections, ...(legacy || [])],
     mediaArtifacts,
     diagnostics: [],

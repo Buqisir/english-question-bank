@@ -1,0 +1,102 @@
+{
+  "schemaVersion": "cloze-source-oracles-v1",
+  "paperId": "paper-2026-i",
+  "sources": {
+    "questionPdf": {
+      "path": "test-fixtures/paper-import/paper-2026-i-canonical-pilot/canonical-evidence/02-original-question-source.pdf",
+      "sha256": "31a87069e6d530afba9123eec0487adf45e52e0b98530af80b62476f169e4d0f",
+      "sevenChoicesBoundaryPage": 8,
+      "clozePage": 9,
+      "grammarFillPage": 10
+    },
+    "paperAsset": {
+      "path": "test-fixtures/paper-import/paper-2026-i-canonical-pilot/canonical-evidence/04-paper_asset.json",
+      "sha256": "fe7feb2cc9554b00bbab96a7d4fe5e499513c564c28e6c314e0373e29b2ca7bf"
+    },
+    "officialAnswers": {
+      "path": "test-fixtures/paper-import/paper-2026-i-canonical-pilot/canonical-evidence/05-official_answers.json",
+      "sha256": "17502bb7685b83afc8847f3a44f8ac3c68defcb941ae75ba1ff14945c07daaf0"
+    },
+    "teacherAnalysis": {
+      "path": "app/public/paper-assets/paper-2026-i/latest/analyses/cloze-analysis-v1.json",
+      "sha256": "40a1ebd9a821e2f3e0eaf45fd988a706aa70ae1e9caca739a8a45688efe65755",
+      "schemaVersion": "cloze-analysis-v1",
+      "reviewStatus": "reviewed"
+    }
+  },
+  "sourceExtraction": {
+    "sevenChoicesBoundaryMarker": "G. AI is changing this by using image recognition technology to analyze exhibits.",
+    "partMarker": "第三部分 语言运用（共两节，满分 30 分）",
+    "sectionMarker": "第一节 （共 15 小题；每小题 1 分，满分 15 分）",
+    "instructionMarker": "阅读下面短文，从每题所给的 A、B、C、D 四个选项中选出可以填入空白处的最佳选项。",
+    "passageStartMarker": "I grew up in a little town in northeast Ohio.",
+    "passageEndMarker": "my small town roots to lead me in the right direction.",
+    "firstChoiceMarker": "41．A．fantasy",
+    "lastChoiceMarker": "55．A．inspire",
+    "followingSectionMarker": "第二节 （共 10 小题；每小题 1.5 分，满分 15 分）"
+  },
+  "publicVisibleChrome": {
+    "authority": "immutable paperAsset source bytes",
+    "part": "第三部分 语言运用(共两节，满分30分)",
+    "section": "第一节(共15小题；每小题1分，满分15分)",
+    "instruction": "阅读下面短文，从每题所给的A、B、C、D四个选项中选出最佳选项。",
+    "followingSection": "第二节(共10小题；每小题1.5分，满分15分)"
+  },
+  "sourceSemantics": {
+    "passageParagraphCount": 4,
+    "questionNumbers": [41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55],
+    "optionLabels": ["A", "B", "C", "D"]
+  },
+  "publicIdentities": {
+    "sevenChoicesBoundary": {
+      "groupId": "group-2026-i-seven-choices",
+      "optionId": "option:group-2026-i-seven-choices:G"
+    },
+    "cloze": {
+      "groupId": "group-2026-i-cloze",
+      "paragraphIds": [
+        "para-2026-i-cloze-title",
+        "para-2026-i-cloze-p1",
+        "para-2026-i-cloze-p2",
+        "para-2026-i-cloze-p3"
+      ],
+      "questionIds": [
+        "q-2026-i-041", "q-2026-i-042", "q-2026-i-043", "q-2026-i-044", "q-2026-i-045",
+        "q-2026-i-046", "q-2026-i-047", "q-2026-i-048", "q-2026-i-049", "q-2026-i-050",
+        "q-2026-i-051", "q-2026-i-052", "q-2026-i-053", "q-2026-i-054", "q-2026-i-055"
+      ],
+      "blankIds": [
+        "blank-2026-i-041", "blank-2026-i-042", "blank-2026-i-043", "blank-2026-i-044", "blank-2026-i-045",
+        "blank-2026-i-046", "blank-2026-i-047", "blank-2026-i-048", "blank-2026-i-049", "blank-2026-i-050",
+        "blank-2026-i-051", "blank-2026-i-052", "blank-2026-i-053", "blank-2026-i-054", "blank-2026-i-055"
+      ]
+    },
+    "followingSection": {
+      "sectionId": "section-2026-i-grammar-fill",
+      "groupId": "group-2026-i-grammar-fill"
+    }
+  },
+  "variants": {
+    "authority": "deterministic producer inputs derived only from the immutable source text named above",
+    "wrappedOption": {
+      "questionId": "q-2026-i-053",
+      "optionLabel": "D",
+      "repeatCount": 5,
+      "derivation": "repeat the exact immutable source option text with one ASCII space before canonical projection"
+    },
+    "choiceBlockCrossPage": {
+      "optionLabel": "D",
+      "repeatCountPerQuestion": 5,
+      "derivation": "repeat each Question's exact immutable D-option text before canonical projection"
+    },
+    "passageCrossPage": {
+      "sourceText": "I grew up in a little town in northeast Ohio.",
+      "repeatCount": 120,
+      "derivation": "append repetitions to the final source paragraph text node before canonical projection"
+    },
+    "pageRelations": {
+      "previousFamilyToCloze": "a producer page_break block before Cloze chrome",
+      "clozeToGrammarFill": "a producer page_break block before the source-bound following section"
+    }
+  }
+}

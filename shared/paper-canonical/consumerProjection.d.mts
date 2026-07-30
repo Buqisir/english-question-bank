@@ -8,6 +8,10 @@ export type CanonicalConsumerSelection = {
   familyContractId: string
   groupIds: ReadonlyArray<string>
   projectedOccurrences?: ReadonlyArray<unknown>
+  projectedOccurrenceDigests?: ReadonlyArray<{
+    groupId: string
+    digest: string
+  }>
 }
 
 export function selectConsumerGroupMode(input: {

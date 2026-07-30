@@ -1,6 +1,7 @@
 import type { CSSProperties, ReactElement, ReactNode } from 'react'
 import { paperSurfaceAnchorAttrs } from '../../../../shared/papersurface/anchorKeys.mjs'
 import { paperBlankRuling } from '../../../../shared/papersurface/blankRuling.mjs'
+import { clozeRhythm } from '../../../../shared/paper-canonical/clozeRhythm.mjs'
 import type {
   CanonicalSurfaceBlankNode,
   CanonicalSurfaceParagraph,
@@ -103,15 +104,27 @@ export function renderCanonicalPaperSentenceContent(
         : 'ps-paper-blank ps-paper-blank--semantic ps-paper-blank--clickable'
       : 'ps-paper-blank ps-paper-blank--semantic'
     const style = {
-      '--ps-paper-blank-width': paperBlankRuling[groupType].width,
+      '--ps-paper-blank-width': groupType === 'cloze'
+        ? `${clozeRhythm.blankGeometry.widthEm}em`
+        : paperBlankRuling[groupType].width,
     } as CanonicalBlankStyle
-    const canonicalPairAttrs = groupType === 'sevenChoices'
+    const canonicalPairAttrs = (
+      groupType === 'sevenChoices'
+      || groupType === 'cloze'
+    )
       ? {
           'data-canonical-pair': `${node.questionId}:${node.blankId}`,
           'data-canonical-question-id': node.questionId,
           'data-canonical-blank-id': node.blankId,
-          'data-canonical-seven-choices-rhythm-role':
-            'inline_blank_marker',
+          ...(groupType === 'sevenChoices'
+            ? {
+                'data-canonical-seven-choices-rhythm-role':
+                  'inline_blank_marker',
+              }
+            : {
+                'data-canonical-cloze-rhythm-role':
+                  'inline_blank_marker',
+              }),
         }
       : {}
     const blank = isClickable ? (

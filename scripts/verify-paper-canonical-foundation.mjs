@@ -3,6 +3,7 @@
 import assert from 'node:assert/strict'
 import manifestV1 from '../standards/paper-canonical/manifest-v1.json' with { type: 'json' }
 import manifestV13 from '../standards/paper-canonical/manifest-v13.json' with { type: 'json' }
+import clozeRhythmV1Conformance from '../test-fixtures/paper-canonical/cloze-rhythm-v1-conformance.json' with { type: 'json' }
 import sevenChoicesRhythmV3Conformance from '../test-fixtures/paper-canonical/seven-choices-rhythm-v3-conformance.json' with { type: 'json' }
 
 import { canonicalAuthorityRef, compileCanonicalPaper, stableStringify, validateExactTransformationRecords } from '../shared/paper-canonical/compiler.mjs'
@@ -50,6 +51,49 @@ assert.equal(first.artifacts.canonicalPaper.paperPlan.completeness.status, 'comp
 assert.equal(first.artifacts.canonicalPaper.questionGroups.length, 9)
 
 const closure = resolveCanonicalAuthority(canonicalAuthorityRef).closure
+const clozeRhythmV1 = closure.artifacts['renderer-cloze-rhythm']
+assert.deepEqual(
+  {
+    schemaVersion: clozeRhythmV1.schemaVersion,
+    id: clozeRhythmV1.id,
+    version: clozeRhythmV1.version,
+  },
+  clozeRhythmV1Conformance.authority,
+)
+assert.deepEqual(
+  clozeRhythmV1.blankGeometry,
+  clozeRhythmV1Conformance.exactValues.blankGeometry,
+)
+assert.deepEqual(
+  clozeRhythmV1.horizontalChoiceGeometry.rendererMapping,
+  clozeRhythmV1Conformance.exactValues.horizontalChoiceGeometry,
+)
+for (const attack of [
+  ...clozeRhythmV1Conformance.schemaAttacks,
+  ...clozeRhythmV1Conformance.semanticAttacks,
+]) {
+  const artifacts = structuredClone(closure.artifacts)
+  let target = artifacts['renderer-cloze-rhythm']
+  for (const key of attack.path.slice(0, -1)) target = target[key]
+  target[attack.path.at(-1)] = attack.invalidValue
+  const manifest = structuredClone(closure.manifest)
+  manifest.artifacts.find(
+    (descriptor) => descriptor.id === 'renderer-cloze-rhythm',
+  ).sha256 = digestJson(artifacts['renderer-cloze-rhythm'])
+  const validation = validateAuthorityClosure({
+    manifest,
+    artifacts,
+    schemas: closure.schemas,
+  })
+  assert.equal(validation.ok, false, attack.caseId)
+  assert.equal(
+    validation.issues.some(
+      (issue) => issue.code === attack.expectedIssueCode,
+    ),
+    true,
+    attack.caseId,
+  )
+}
 const sevenChoicesRhythmV3 =
   closure.artifacts['renderer-seven-choices-rhythm']
 assert.deepEqual(

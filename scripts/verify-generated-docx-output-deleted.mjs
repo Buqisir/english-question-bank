@@ -34,7 +34,7 @@ assert.deepEqual(
   'supported canonical consumers must be exactly Screen and Print/PDF',
 )
 
-assert.equal(canonicalAuthorityRef.manifestVersion, '17')
+assert.equal(canonicalAuthorityRef.manifestVersion, '18')
 const currentAuthority = resolveCanonicalAuthority(canonicalAuthorityRef)
 assert.equal(currentAuthority.ok, true)
 
@@ -42,13 +42,13 @@ const humanAuthority = read('docs/product/exam-paper-format-standards.md')
 const currentHumanAuthority = humanAuthority.split('## v2 历史排版证据')[0]
 assert.match(
   currentHumanAuthority,
-  /standards\/paper-canonical\/manifest-v17\.json/,
-  'the unique human-readable authority index must bind current manifest v17',
+  /standards\/paper-canonical\/manifest-v18\.json/,
+  'the unique human-readable authority index must bind current manifest v18',
 )
 assert.match(
   currentHumanAuthority,
-  /Screen v17、Print\/PDF v18/,
-  'the human-readable current output matrix must name only Screen v17 and Print/PDF v18',
+  /Screen v18、Print\/PDF v19/,
+  'the human-readable current output matrix must name only Screen v18 and Print/PDF v19',
 )
 assert.doesNotMatch(
   currentHumanAuthority,
@@ -135,6 +135,22 @@ assert.match(
   manifestV17Migration,
   /schema[\s\S]*semantic conformance fixture[\s\S]*geometry/i,
   'manifest v17 must record schema and semantic conformance for visible geometry',
+)
+const manifestV18Migration = read('standards/paper-canonical/manifest-v18-migration.md')
+assert.match(
+  manifestV18Migration,
+  /Manifest v18[\s\S]*Screen v18[\s\S]*Print\/PDF v19/i,
+  'manifest v18 must record the Cloze renderer/output authority closure',
+)
+assert.match(
+  manifestV18Migration,
+  /Manifest v1-v17[\s\S]*immutable/i,
+  'manifest v18 migration must preserve earlier immutable authority closures',
+)
+assert.match(
+  manifestV18Migration,
+  /Cloze[\s\S]*Golden Geometry[\s\S]*3\.3em[\s\S]*four-column/i,
+  'manifest v18 must record the Cloze Golden Geometry semantic closure',
 )
 assert.equal(
   Object.hasOwn(currentAuthority.closure.schemas, 'consumer-contract-v1'),

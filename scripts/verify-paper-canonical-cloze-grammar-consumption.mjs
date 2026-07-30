@@ -971,22 +971,28 @@ try {
   for (const option of oneColumnOccurrence.choices.sets[0].options) {
     option.content[0].text = Array.from({ length: 24 }, () => 'word').join(' ')
   }
-  const oneColumnGroup = projectCanonicalConsumerGroup({
-    consumption: oneColumnConsumption,
-    familyContractId: 'cloze',
-    groupId: 'group-2026-i-cloze',
-  })
-  assert.equal(oneColumnGroup.questions[0].layoutPlan.mode, 'one_column')
-  const oneColumnHtml = buildPrintHtml({
-    title: asset.paper.title,
-    versionType: 'student',
-    printStyle: 'exam',
-    items: [items[0]],
-    blocks: [blocks[0]],
-    questionNumberStart: 41,
-    canonicalConsumption: oneColumnConsumption,
-  })
-  assert.equal(oneColumnHtml.includes('canonical-options--one_column'), true)
+  assert.throws(
+    () => projectCanonicalConsumerGroup({
+      consumption: oneColumnConsumption,
+      familyContractId: 'cloze',
+      groupId: 'group-2026-i-cloze',
+    }),
+    { code: 'CANONICAL_CONSUMPTION_REJECTED' },
+    'post-loader Cloze text mutation cannot manufacture a valid long-option variant',
+  )
+  assert.throws(
+    () => buildPrintHtml({
+      title: asset.paper.title,
+      versionType: 'student',
+      printStyle: 'exam',
+      items: [items[0]],
+      blocks: [blocks[0]],
+      questionNumberStart: 41,
+      canonicalConsumption: oneColumnConsumption,
+    }),
+    { code: 'CANONICAL_CONSUMPTION_REJECTED' },
+    'Print rejects the poisoned Cloze occurrence before rendering',
+  )
   const partial = structuredClone(complete)
   partial.selections.find((selection) => selection.familyContractId === 'cloze').projectedOccurrences.pop()
   assert.throws(

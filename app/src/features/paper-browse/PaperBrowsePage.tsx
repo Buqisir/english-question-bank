@@ -66,6 +66,9 @@ import { paperSurfaceTokens } from '../../../../shared/papersurface/tokens.mjs'
 import {
   sevenChoicesRhythm,
 } from '../../../../shared/paper-canonical/sevenChoicesRhythm.mjs'
+import {
+  clozeRhythm,
+} from '../../../../shared/paper-canonical/clozeRhythm.mjs'
 import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
 import { WritingPaperPage } from '../paper-intelligence/WritingPaperPage'
 import {
@@ -388,6 +391,8 @@ const paperBrowseContentStyle: PaperBrowseContentStyle = {
     `${sevenChoicesRhythm.visibleGeometryAdjustments.screen.followingSectionMarginTopAdjustmentPx}px`,
   '--ps-seven-adjacent-chrome-margin-top-adjustment':
     `${sevenChoicesRhythm.visibleGeometryAdjustments.screen.adjacentChromeMarginTopAdjustmentPx}px`,
+  '--ps-cloze-baseline-step':
+    `${clozeRhythm.targets.screen.baselineStepPx}px`,
   '--ps-passage-indent': paperSurfaceTokens.passageIndent,
   '--ps-page-margin-x': paperSurfaceTokens.pageMarginX,
   '--ps-page-margin-top': paperSurfaceTokens.pageMarginTop,
@@ -1892,6 +1897,19 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
             ? nextHeadingAfterSevenChoices?.id
             : undefined
         }
+        clozeRhythmEnabled={
+          entry.kind === 'cloze'
+          && canonicalClozeGroupIds.includes(groupId)
+        }
+        clozeFollowingSectionId={
+          entry.kind === 'cloze'
+          && groupId
+            === canonicalClozeGroupIds[
+              canonicalClozeGroupIds.length - 1
+            ]
+            ? nextHeadingAfterCloze?.id
+            : undefined
+        }
         canonicalApplicationPromptBlocks={
           entry.kind === 'writing'
             ? entry.model.canonicalPromptBlocks
@@ -2042,6 +2060,71 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
       ? { id: block.partId, block }
       : { id: block.sectionId, block }
   })()
+  const canonicalClozeGroupIds =
+    canonicalConsumption?.selections.find(
+      (selection) =>
+        selection.familyContractId === 'cloze'
+        && selection.mode === 'canonical',
+    )?.groupIds ?? []
+  const firstClozeGroupBlockIndex = asset
+    ? asset.content.blocks.findIndex(
+        (block) =>
+          block.type === 'group'
+          && block.groupId === canonicalClozeGroupIds[0],
+      )
+    : -1
+  const lastClozeGroupBlockIndex = asset
+    ? asset.content.blocks.findLastIndex(
+        (block) =>
+          block.type === 'group'
+          && block.groupId
+            === canonicalClozeGroupIds[
+              canonicalClozeGroupIds.length - 1
+            ],
+      )
+    : -1
+  const nextHeadingAfterCloze = (() => {
+    if (!asset || lastClozeGroupBlockIndex < 0) return undefined
+    const block = asset.content.blocks
+      .slice(lastClozeGroupBlockIndex + 1)
+      .find(
+        (candidate) =>
+          candidate.type === 'partHeading'
+          || candidate.type === 'sectionHeading',
+      )
+    if (!block) return undefined
+    return block.type === 'partHeading'
+      ? { id: block.partId, block }
+      : { id: block.sectionId, block }
+  })()
+  let firstClozePredecessorBlockIndex = -1
+  let clozeChromeStartBlockIndex = firstClozeGroupBlockIndex
+  if (asset && firstClozeGroupBlockIndex >= 0) {
+    for (
+      let index = firstClozeGroupBlockIndex - 1;
+      index >= 0;
+      index -= 1
+    ) {
+      const block = asset.content.blocks[index]
+      if (
+        block.type === 'instruction'
+        || block.type === 'sectionHeading'
+        || block.type === 'partHeading'
+      ) {
+        if (firstClozePredecessorBlockIndex < 0) {
+          firstClozePredecessorBlockIndex = index
+        }
+        clozeChromeStartBlockIndex = index
+        continue
+      }
+      if (block.type === 'pageBreakHint') continue
+      if (block.type === 'group') break
+      break
+    }
+  }
+  const isClozeChromeBlock = (index: number) =>
+    index >= clozeChromeStartBlockIndex
+    && index < firstClozeGroupBlockIndex
   let firstSevenChoicesPredecessorBlockIndex = -1
   let sevenChoicesChromeStartBlockIndex = firstSevenChoicesGroupBlockIndex
   if (asset && firstSevenChoicesGroupBlockIndex >= 0) {
@@ -2148,6 +2231,14 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
                 ]
               : undefined
           }
+          data-canonical-cloze-previous-family-group-id={
+            groupId === canonicalClozeGroupIds[0]
+            && firstClozePredecessorBlockIndex < 0
+              ? canonicalSevenChoicesGroupIds[
+                  canonicalSevenChoicesGroupIds.length - 1
+                ]
+              : undefined
+          }
           aria-label={group?.title || groupId}
         >
           {card && (
@@ -2199,6 +2290,26 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
               data-canonical-seven-choices-preceding-for={
                 index === firstSevenChoicesPredecessorBlockIndex
                   ? canonicalSevenChoicesGroupIds[0]
+                  : undefined
+              }
+              data-canonical-cloze-rhythm-role={
+                isClozeChromeBlock(index)
+                  ? 'meta_instruction'
+                  : undefined
+              }
+              data-canonical-cloze-chrome={
+                isClozeChromeBlock(index) ? '' : undefined
+              }
+              data-canonical-cloze-preceding-for={
+                index === firstClozePredecessorBlockIndex
+                  ? canonicalClozeGroupIds[0]
+                  : undefined
+              }
+              data-canonical-cloze-previous-family-group-id={
+                index === firstClozePredecessorBlockIndex
+                  ? canonicalSevenChoicesGroupIds[
+                      canonicalSevenChoicesGroupIds.length - 1
+                    ]
                   : undefined
               }
             >
@@ -2492,6 +2603,35 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
                   ]
                 : undefined
             }
+            data-canonical-cloze-rhythm-role={
+              isClozeChromeBlock(index) ? 'part_title' : (
+                block.partId === nextHeadingAfterCloze?.id
+                  ? 'next_section'
+                  : undefined
+              )
+            }
+            data-canonical-cloze-chrome={
+              isClozeChromeBlock(index) ? '' : undefined
+            }
+            data-canonical-cloze-preceding-for={
+              index === firstClozePredecessorBlockIndex
+                ? canonicalClozeGroupIds[0]
+                : undefined
+            }
+            data-canonical-cloze-previous-family-group-id={
+              index === firstClozePredecessorBlockIndex
+                ? canonicalSevenChoicesGroupIds[
+                    canonicalSevenChoicesGroupIds.length - 1
+                  ]
+                : undefined
+            }
+            data-canonical-cloze-following-for={
+              block.partId === nextHeadingAfterCloze?.id
+                ? canonicalClozeGroupIds[
+                    canonicalClozeGroupIds.length - 1
+                  ]
+                : undefined
+            }
           >
             {block.text}
           </h2>
@@ -2558,6 +2698,35 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
                   ]
                 : undefined
             }
+            data-canonical-cloze-rhythm-role={
+              isClozeChromeBlock(index) ? 'subsection' : (
+                block.sectionId === nextHeadingAfterCloze?.id
+                  ? 'next_section'
+                  : undefined
+              )
+            }
+            data-canonical-cloze-chrome={
+              isClozeChromeBlock(index) ? '' : undefined
+            }
+            data-canonical-cloze-preceding-for={
+              index === firstClozePredecessorBlockIndex
+                ? canonicalClozeGroupIds[0]
+                : undefined
+            }
+            data-canonical-cloze-previous-family-group-id={
+              index === firstClozePredecessorBlockIndex
+                ? canonicalSevenChoicesGroupIds[
+                    canonicalSevenChoicesGroupIds.length - 1
+                  ]
+                : undefined
+            }
+            data-canonical-cloze-following-for={
+              block.sectionId === nextHeadingAfterCloze?.id
+                ? canonicalClozeGroupIds[
+                    canonicalClozeGroupIds.length - 1
+                  ]
+                : undefined
+            }
           >
             {block.text}
           </h3>
@@ -2612,6 +2781,26 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
             data-canonical-seven-choices-preceding-for={
               index === firstSevenChoicesPredecessorBlockIndex
                 ? canonicalSevenChoicesGroupIds[0]
+                : undefined
+            }
+            data-canonical-cloze-rhythm-role={
+              isClozeChromeBlock(index)
+                ? 'meta_instruction'
+                : undefined
+            }
+            data-canonical-cloze-chrome={
+              isClozeChromeBlock(index) ? '' : undefined
+            }
+            data-canonical-cloze-preceding-for={
+              index === firstClozePredecessorBlockIndex
+                ? canonicalClozeGroupIds[0]
+                : undefined
+            }
+            data-canonical-cloze-previous-family-group-id={
+              index === firstClozePredecessorBlockIndex
+                ? canonicalSevenChoicesGroupIds[
+                    canonicalSevenChoicesGroupIds.length - 1
+                  ]
                 : undefined
             }
           >

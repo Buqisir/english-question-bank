@@ -60,7 +60,9 @@ export type AbcdLayoutResult =
     }
   | {
       readonly status: 'needs_review'
-      readonly reason: 'one_column_contains_unrenderable_unbreakable_content'
+      readonly reason:
+        | 'one_column_contains_unrenderable_unbreakable_content'
+        | 'fixed_four_column_contains_unrenderable_content'
     }
 
 export type AbcdRendererFontClosure = {
@@ -97,6 +99,9 @@ export type AbcdRendererFontMaterial = {
 }
 
 export function layoutAbcdOptionSet(optionSet: AbcdOptionSet): AbcdLayoutResult
+export function layoutFixedFourColumnClozeOptionSet(
+  optionSet: AbcdOptionSet,
+): AbcdLayoutResult
 export function abcdPlacementSignature(plan: SelectedAbcdLayoutPlan): string
 export const expectedAbcdRendererFontClosure: AbcdRendererFontClosure
 export function resolveAbcdRendererFontClosure(

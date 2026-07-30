@@ -26,6 +26,8 @@ const outputDir = option('--output-dir')
 const answersPdfPath = option('--answers-pdf')
 const instructionEvidencePath = option('--instruction-evidence')
 const reviewedEvidenceDir = option('--reviewed-evidence-dir')
+const requestFileName =
+  option('--request-file-name') || 'canonical-import-request.json'
 const write = process.argv.includes('--write')
 
 if (
@@ -41,7 +43,8 @@ if (
       + '<package-dir> --answers-pdf <answers.pdf> '
       + '--instruction-evidence <reviewed.json> '
       + '--reviewed-evidence-dir <dir> '
-      + '--output-dir <dir> [--write]',
+      + '--output-dir <dir> '
+      + '[--request-file-name <file.json>] [--write]',
   )
   process.exit(1)
 }
@@ -49,6 +52,14 @@ if (
 const absolutePackageDir = path.resolve(packageDir)
 const absoluteOutputDir = path.resolve(outputDir)
 const absoluteReviewedEvidenceDir = path.resolve(reviewedEvidenceDir)
+if (
+  path.basename(requestFileName) !== requestFileName
+  || !/^canonical-import-request(?:-v[1-9][0-9]*)?\.json$/.test(
+    requestFileName,
+  )
+) {
+  throw new Error(`Canonical request file name is unsafe: ${requestFileName}`)
+}
 const requiredPaths = {
   paperAsset: path.join(absolutePackageDir, 'paper-asset.json'),
   answerKey: path.join(absolutePackageDir, 'answer-key.json'),
@@ -198,7 +209,7 @@ const outputs = new Map(
   ]),
 )
 outputs.set(
-  'canonical-import-request.json',
+  requestFileName,
   Buffer.from(`${JSON.stringify(envelope, null, 2)}\n`),
 )
 
@@ -209,7 +220,7 @@ if (write) {
   }
   console.log(
     `WROTE ${paperId} canonical request: `
-      + path.join(absoluteOutputDir, 'canonical-import-request.json'),
+      + path.join(absoluteOutputDir, requestFileName),
   )
 } else {
   for (const [fileName, expectedBytes] of outputs) {

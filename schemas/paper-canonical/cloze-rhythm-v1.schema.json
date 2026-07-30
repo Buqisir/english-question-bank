@@ -1,0 +1,23 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"cloze-rhythm-v1",
+  "type":"object",
+  "additionalProperties":false,
+  "required":["schemaVersion","id","version","owner","paper","projectionContract","rules","semanticRoleClasses","adjacencyGraph","targets","blankGeometry","horizontalChoiceGeometry","goldenGeometryFramework","referenceMeasurement"],
+  "properties":{
+    "schemaVersion":{"const":"cloze-rhythm-v1"},
+    "id":{"const":"cloze-rhythm"},
+    "version":{"const":"1"},
+    "owner":{"const":"renderer_typography"},
+    "paper":{"const":"a4"},
+    "projectionContract":{"const":"canonical-projector-v1"},
+    "rules":{"type":"array"},
+    "semanticRoleClasses":{"type":"object"},
+    "adjacencyGraph":{"type":"array"},
+    "targets":{"type":"object"},
+    "blankGeometry":{"type":"object","additionalProperties":false,"required":["widthEm","numberAlignment","whiteSpace","verticalSpaceContribution","punctuationOwnership","atomicity"],"properties":{"widthEm":{"const":3.3},"numberAlignment":{"const":"center"},"whiteSpace":{"const":"nowrap"},"verticalSpaceContribution":{"const":0},"punctuationOwnership":{"const":"passage_text_outside_blank"},"atomicity":{"const":"inline_block_unbreakable"}}},
+    "horizontalChoiceGeometry":{"type":"object"},
+    "goldenGeometryFramework":{"type":"object"},
+    "referenceMeasurement":{"type":"object","additionalProperties":false,"required":["path","sha256"],"properties":{"path":{"type":"string"},"sha256":{"type":"string","pattern":"^sha256:[a-f0-9]{64}$"}}}
+  }
+}

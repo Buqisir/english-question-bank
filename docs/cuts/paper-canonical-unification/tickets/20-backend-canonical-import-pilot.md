@@ -340,3 +340,121 @@ successor closure commit is the exact HEAD reported in the focused re-review
 handoff. No Owner QA provisioning, Ticket 21, Cloze/other-family work,
 production/R2 action, unrelated lint repair, or generated-DOCX output was
 performed.
+
+Cloze Golden Geometry pre-QA repair closure (2026-07-29):
+Manifest v18 adds the immutable `cloze-rhythm-v1` authority, its exact schema
+and conformance fixture, Normalization Report v18, Publication v18, Screen
+v18, and Print/PDF v19. Manifest v1-v17 and all earlier consumer, renderer,
+family, evidence, source, and official-answer bytes remain immutable and
+resolvable; the v18 projected-occurrence integrity digest is added only to
+new v18 Cloze Consumption Plans, so exact old-v13 reload bytes remain
+unchanged. Generated DOCX remains retired.
+
+`qa/20-cloze-source-oracles-v1.json` independently binds the immutable
+original-question PDF, canonical paper asset, official answers, and reviewed
+Cloze Teacher analysis. `qa/20-cloze-golden-geometry-reference-measurements-v1.json`
+binds the page-09 golden JPEG and records only dimensionless measurements:
+vertical gaps use a local Latin baseline/font proxy, horizontal positions use
+local em or usable-width ratios, and no JPEG pixel is mapped to CSS px, PDF
+pt, or an inferred A4 scale.
+
+`qa/20-cloze-observed-coverage-oracle-v1.json` publishes the complete
+26-edge Cloze adjacency/alignment graph before renderer observation. Its six
+exact bundles cover plain and lecture Screen, Student and Teacher Print HTML,
+and Student and Teacher exact-A4 Chromium PDF. Required variants include
+baseline, long/wrapped options, same-passage cross-page continuation,
+choice-block pagination, and same/cross-page transition to the source-bound
+following Grammar Fill section. Every bundle fails closed on a missing,
+extra, duplicate, or wrong edge; the observed union must exactly equal the
+independent oracle set.
+
+The public proof binds the preceding Seven Choices Group identity; source
+part/section/instruction chrome and order; four source paragraph identities;
+all 15 Question/Blank pairs; 3.3em-class centered atomic blanks with
+punctuation outside and zero phantom vertical space; passage and paragraph
+rhythm; the passage-tail edge; Questions 41-55; fixed A/B/C/D origins with
+104pt Print text-start pitch, stable label/text anchors, equal fixed tracks
+and no distributed/hybrid shrink strategy; wrapped hanging continuations;
+row atomicity and pagination; all 15 official Teacher answers and reviewed
+explanations; and the following section identity. PDF text is reconciled
+through page/baseline/x geometry where Poppler content-stream order differs
+from visible line order, without weakening exact source-text checks.
+
+Duplicate/missing/wrong Group identity, wrong Question/Blank joins, and
+source option drift are poisoned before PaperBrowse or Print rendering. New
+v18 Cloze Consumption Plans carry digest-bound projected occurrences, so a
+post-loader text mutation is rejected before a public artifact exists. The
+independent source/golden oracle remains outside the production projector,
+DOM order, and renderer output; no failure is manufactured by changing a
+post-render observation.
+
+Focused verification passes canonical foundation/Publication,
+admission/recovery, Cloze/Grammar publication and consumption, PaperBrowse
+193/193, Continuation and Seven Choices/Reading regressions, Print renderer
+92/92, generated-DOCX retirement, app typecheck/build, the official backend
+pilot, `git diff --check`, and `pnpm -C app run verify:all`
+115 PASS / 1 declared off-repo SKIP / 0 FAIL. The official
+`--actual-artifacts` command writes the six public artifacts plus Cloze
+baseline/wrapped/cross-page variants under
+`.scratch/paper-canonical-ticket-20-qa/<exact-HEAD>/`; it does not start the
+Owner-QA server. No Owner QA provisioning, Grammar Fill/Writing/Listening
+implementation, Ticket 21, production/R2 action, unrelated lint repair, or
+generated-DOCX output was performed.
+
+Cloze focused-review Must Fix closure (2026-07-29):
+The observed ledger is now populated only by edge measurements returned from
+the real Screen, Print HTML, or exact-A4 PDF artifact assertion. Each required
+bundle/variant resolves an explicit checked-in edge profile; its actual set
+must exactly equal that independent profile, while every bundle union and the
+complete public union still close the 26-edge authority exactly. PDF evidence
+records source identities/text, baseline ratios, fixed x anchors, label/text
+gaps, four-track origins, hanging continuations, row/page relations, and
+Student/Teacher tail transitions from Poppler bbox geometry rather than
+manufacturing expected edge IDs.
+
+All Cloze adversaries now enter before the public producer. The immutable
+source D-option is repeated to exercise natural fixed-track wrapping; each
+source D-option is repeated for choice-block pagination; an immutable source
+passage sentence is appended for same-passage continuation; and producer
+`page_break` blocks exercise the two family-boundary transitions. The
+source-oracle bytes declare the exact identities, derivations, and repeat
+counts. Screen receives the redigested v18 Consumption Plan at its public API
+seam, while Print HTML/PDF receive the same redigested Plan and source-matched
+detail input. No Cloze CSS is injected after producer output.
+
+The Cloze-specific layout selector retains one 0/104/208/312pt A/B/C/D track
+plan for soft-wrapping content and fails closed on hard breaks, unsupported
+glyphs, or an overwide unbreakable token. Screen and Print keep label-plus-text
+atomic and hang continuation lines at the text-start anchor; they never fall
+back to one-column, two-by-two, distributed, or hybrid shrink layout for the
+Cloze family.
+
+New v18 Plans must carry the exact projected-occurrence digest set; deleting
+it or mutating an occurrence is rejected before rendering. Print Cloze chrome
+is read only from the immutable Publication-bound source asset version and
+its bound digest. A poisoned mutable `latest` asset cannot affect output, and
+a poisoned immutable version fails closed. Teacher HTML and PDF compare every
+Question explanation to the independently reconstructed reviewed-analysis
+text; an explanation poisoned before rendering is rejected by the oracle.
+
+The no-envelope compatibility path now accepts only the exact byte-pinned
+old-v13 Consumption Plan digest; deleting both v18 authority and occurrence
+digests while poisoning source text fails closed. Old-v13 Screen and Print
+plans retain their original bytes and still project the Cloze selection.
+Teacher HTML and PDF require every answer line to equal the official-answer
+text exactly, and a pre-producer answer poison is rejected.
+
+PDF passage evidence excludes only measured non-body header/footer lines,
+then asserts every remaining same-page internal passage step rather than
+filtering to conforming samples. Inline-blank zero-space values are measured
+from the real glyph-to-line baseline offset. Teacher row rhythm carries
+non-empty observed ratios and A-D baseline deltas, and every same-page
+Cloze-to-following-section transition is checked against its versioned
+two-step authority before entering the ledger.
+
+Focused red-green checks pass the backend pilot, A-D layout, Cloze/Grammar
+publication and consumption, Print renderer 92/92, and PaperBrowse 193/193.
+The complete exact-HEAD verification, official `--actual-artifacts` evidence,
+exact-A4 inspection, full `verify:all`, cleanup, and final commit are recorded
+by the focused review handoff. No Owner QA provisioning or out-of-scope family,
+Ticket 21, production/R2, or generated-DOCX action was performed.
