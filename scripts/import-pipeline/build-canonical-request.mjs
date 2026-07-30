@@ -33,7 +33,7 @@ const requestFileName =
   option('--request-file-name') || 'canonical-import-request.json'
 const write = process.argv.includes('--write')
 const applicationWritingEvidenceContract =
-  canonicalAuthorityRef.manifestVersion === '27'
+  ['27', '28'].includes(canonicalAuthorityRef.manifestVersion)
     ? {
         captureSourceName: 'application-writing-source-capture-v3.json',
         transcriptionSourceName:

@@ -837,3 +837,59 @@ admission, recovery, publication, and renderer regressions pass. Full
 0 FAIL, and `git diff --check` passes. No non-blocking `.d.mts` cleanup,
 Continuation implementation, Listening work, Ticket 21, Owner QA, or
 successor feature was performed.
+
+Continuation Writing Golden Geometry closure (2026-07-30):
+Manifest v28 publishes `continuation-writing-rhythm-v1`, Screen v28, and
+Print/PDF v29 without changing any published predecessor byte. The rhythm
+binds the exact page-12 reference and original 2026-I PDF through source
+digests, local font/em measurement, and usable-width ratios; JPEG pixels are
+not interpreted as CSS or A4 points. The canonical 145 mm × 57 mm response
+region remains normal-flow Continuation geometry, distinct from Application's
+atomic response movement.
+
+The family-visible graph covers the Application→Continuation boundary, exact
+part/section/instruction chrome, the source passage and continuation prompt,
+both supplied paragraph openings, their writable continuation areas,
+same-page and cross-page movement, and the source-proven end-of-paper
+boundary. Both supplied openings use one authority-owned 4 em first-line
+indent in Screen, Print HTML, and exact-A4 PDF. Direct public-seam regressions
+prove that cross-page movement preserves the second indent, does not indent
+part/section/instruction chrome, and keeps each supplied opening distinct from
+the student's writable continuation area. The source assets authorize no
+Continuation teacher answer, analysis, or rubric, so Teacher artifacts expose
+none.
+
+Real plain/lecture Screen, Student/Teacher Print HTML, and Student/Teacher
+exact-A4 Chromium PDF pass with baseline, useful wrapping, and cross-page
+adversaries. Visual inspection confirms aligned paragraph openings, usable
+writing space, no chrome indentation, clipping, overlap, or answer leakage.
+Grammar Fill public-geometry-fixtures v7 preserves every v6 content variant
+and projected-occurrence digest while advancing only its compatible
+Consumption Plan identity to Manifest v28. Full `pnpm -C app run verify:all`
+reports 115 PASS / 1 declared off-repo SKIP / 0 FAIL; focused canonical,
+publication, admission/recovery, rendered-behavior, generated-DOCX retirement,
+app build/typecheck, and `git diff --check` checks also pass. No Application
+reopening, inactive Listening work, whole-paper typography sweep, Ticket 21,
+Owner QA, production/R2, or generated-DOCX action was performed.
+
+Continuation Writing self-review Must Fix closure (2026-07-30):
+The first dual-axis review found that source passage checks still derived their
+expected text from the canonical output under test, and that the observed
+coverage oracle named wrapped-starter, writable-area, end-of-paper, and
+Teacher cross-page edges without executing all of those observations.
+
+The focused repair now reads the digest-bound accepted capture/transcription,
+checks every ordered text digest and the original PDF's independent
+material/prompt/starter anchors, and compares canonical plus public output to
+that source-derived text. Screen and Print response halves use normal-flow
+rows: each writable-area role begins after its supplied starter's actual
+height, so a narrow-screen wrapping adversary preserves the 4 em hanging
+origin without overlap. Executed coverage measures the two writable areas,
+real material wrapping, final-paper boundary, and both Student and Teacher
+cross-page exact-A4 PDFs before a bundle may be recorded; the oracle no longer
+attributes the Screen-only wrapped-starter observation to Teacher PDF.
+
+Focused Standards and Spec re-review both report PASS with no remaining Must
+Fix. Re-rendered baseline and cross-page Student/Teacher PDFs pass visual
+inspection. Final `pnpm -C app run verify:all` reports 115 PASS / 1 declared
+off-repo SKIP / 0 FAIL, and `git diff --check` passes.

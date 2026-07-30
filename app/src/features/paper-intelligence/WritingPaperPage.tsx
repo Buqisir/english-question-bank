@@ -8,6 +8,7 @@ import type { WritingGivenPart, WritingPageModel } from './writingPageModel'
 import { RetainedModelAnswer } from '../paper-browse/RetainedWritingLecture.tsx'
 import { paperSurfaceTokens } from '../../../../shared/papersurface/tokens.mjs'
 import { applicationWritingRhythm } from '../../../../shared/paper-canonical/applicationWritingRhythm.mjs'
+import { continuationWritingRhythm } from '../../../../shared/paper-canonical/continuationWritingRhythm.mjs'
 import './writingPaperPage.css'
 
 // Renders the writing section's A4 page chrome (part/section headings, 注意,
@@ -59,6 +60,31 @@ const applicationWritingPageStyle: WritingPageStyle = {
     `${applicationWritingRhythm.rendererMapping.screen.noticeMarginTopPx}px`,
   '--application-writing-response-margin-top':
     `${applicationWritingRhythm.rendererMapping.screen.responseMarginTopPx}px`,
+}
+
+const continuationWritingPageStyle: WritingPageStyle = {
+  '--continuation-writing-page-gap':
+    `${continuationWritingRhythm.rendererMapping.screen.pageBlockGapPx}px`,
+  '--continuation-writing-response-width':
+    `${continuationWritingRhythm.responseGeometry.widthMm}mm`,
+  '--continuation-writing-response-height':
+    `${continuationWritingRhythm.responseGeometry.heightMm}mm`,
+  '--continuation-writing-response-border':
+    `${continuationWritingRhythm.responseGeometry.borderPt}pt`,
+  '--continuation-writing-response-margin-top':
+    `${continuationWritingRhythm.rendererMapping.screen.responseMarginTopPx}px`,
+  '--continuation-writing-response-padding-block':
+    `${continuationWritingRhythm.rendererMapping.screen.responsePaddingTopBottomPx}px`,
+  '--continuation-writing-response-padding-inline':
+    `${continuationWritingRhythm.rendererMapping.screen.responsePaddingLeftRightPx}px`,
+  '--continuation-writing-starter-indent':
+    `${continuationWritingRhythm.starterGeometry.firstLineIndentEm}em`,
+  '--continuation-writing-starter-row-inset':
+    `${continuationWritingRhythm.starterGeometry.rowTopInsetEm}em`,
+  '--continuation-writing-starter-second-row':
+    `${continuationWritingRhythm.starterGeometry.secondRowStartRatio * 100}%`,
+  '--continuation-writing-starter-trailing-inset':
+    `${continuationWritingRhythm.starterGeometry.trailingInsetEm}em`,
 }
 
 function writingGivenText(part: WritingGivenPart): string {
@@ -121,12 +147,15 @@ export function WritingPaperPage({
       className={[
         'pi-writing-page',
         isApplicationWriting ? 'pi-writing-page--application' : '',
+        isContinuationWriting ? 'pi-writing-page--continuation' : '',
       ].filter(Boolean).join(' ')}
       data-pi-writing-page=""
       style={
         isApplicationWriting
           ? { ...writingPageTokenStyle, ...applicationWritingPageStyle }
-          : writingPageTokenStyle
+          : isContinuationWriting
+            ? { ...writingPageTokenStyle, ...continuationWritingPageStyle }
+            : writingPageTokenStyle
       }
     >
       {pageModel.blocks.map((block, index) => {
@@ -140,6 +169,9 @@ export function WritingPaperPage({
                 data-canonical-writing-chrome-role="part_heading"
                 data-canonical-application-writing-rhythm-role={
                   isApplicationWriting ? 'part_heading' : undefined
+                }
+                data-canonical-continuation-writing-rhythm-role={
+                  isContinuationWriting ? 'part_heading' : undefined
                 }
                 data-canonical-grammar-fill-rhythm-role={
                   grammarFillPredecessorGroupId
@@ -172,6 +204,9 @@ export function WritingPaperPage({
                     ? applicationWritingPredecessorGroupId
                     : undefined
                 }
+                data-canonical-continuation-writing-rhythm-role={
+                  isContinuationWriting ? 'section_heading' : undefined
+                }
               >
                 {block.text}
               </h3>
@@ -187,6 +222,9 @@ export function WritingPaperPage({
                   isContinuationWriting
                     ? 'continuation_prompt'
                     : undefined
+                }
+                data-canonical-continuation-writing-rhythm-role={
+                  isContinuationWriting ? 'instruction' : undefined
                 }
               >
                 {block.text}
@@ -221,6 +259,11 @@ export function WritingPaperPage({
                       ? 'response_box'
                       : undefined
                   }
+                  data-canonical-continuation-writing-rhythm-role={
+                    block.answerRegionRef === 'writing.continuation-box'
+                      ? 'response_box'
+                      : undefined
+                  }
                   data-writing-lecture-trigger={onAnswerBoxActivate ? '' : undefined}
                   role={onAnswerBoxActivate ? 'button' : undefined}
                   tabIndex={onAnswerBoxActivate ? 0 : undefined}
@@ -228,37 +271,62 @@ export function WritingPaperPage({
                   onKeyDown={handleAnswerBoxKeyDown}
                 >
                   <div className="pi-writing-answer-top">
-                    {block.givenTop.map((part, lineIndex) => (
-                      <p
-                        key={
-                          typeof part === 'string'
-                            ? `t${lineIndex}`
-                            : 'starterId' in part
-                              ? part.starterId
-                              : part.givenPartId
-                        }
-                        className={[
-                          'pi-writing-answer-given',
-                          typeof part !== 'string'
-                          && !('starterId' in part)
-                          && part.role === 'title'
-                            ? 'pi-writing-answer-given--title'
-                            : '',
-                        ].filter(Boolean).join(' ')}
-                        {...writingGivenIdentity(part)}
-                        data-canonical-application-writing-rhythm-role={
-                          typeof part !== 'string' && !('starterId' in part)
-                            ? part.role === 'title'
-                              ? 'given_title'
-                              : part.role === 'salutation'
-                                ? 'given_addressee'
-                                : undefined
-                            : undefined
-                        }
-                      >
-                        {writingGivenText(part)}
-                      </p>
-                    ))}
+                    {block.givenTop.map((part, lineIndex) => {
+                      const partKey = typeof part === 'string'
+                        ? `t${lineIndex}`
+                        : 'starterId' in part
+                          ? part.starterId
+                          : part.givenPartId
+                      const given = (
+                        <p
+                          className={[
+                            'pi-writing-answer-given',
+                            typeof part !== 'string'
+                            && !('starterId' in part)
+                            && part.role === 'title'
+                              ? 'pi-writing-answer-given--title'
+                              : '',
+                          ].filter(Boolean).join(' ')}
+                          {...writingGivenIdentity(part)}
+                          data-canonical-continuation-writing-rhythm-role={
+                            isContinuationWriting
+                            && typeof part !== 'string'
+                            && 'starterId' in part
+                              ? `starter_${lineIndex + 1}`
+                              : undefined
+                          }
+                          data-canonical-application-writing-rhythm-role={
+                            typeof part !== 'string' && !('starterId' in part)
+                              ? part.role === 'title'
+                                ? 'given_title'
+                                : part.role === 'salutation'
+                                  ? 'given_addressee'
+                                  : undefined
+                              : undefined
+                          }
+                        >
+                          {writingGivenText(part)}
+                        </p>
+                      )
+                      if (!isContinuationWriting) {
+                        return <Fragment key={partKey}>{given}</Fragment>
+                      }
+                      return (
+                        <div
+                          key={partKey}
+                          className="pi-writing-continuation-row"
+                        >
+                          {given}
+                          <span
+                            className="pi-writing-continuation-writable-area"
+                            data-canonical-continuation-writing-rhythm-role={
+                              `writable_after_starter_${lineIndex + 1}`
+                            }
+                            aria-hidden="true"
+                          />
+                        </div>
+                      )
+                    })}
                   </div>
                   {block.givenBottom.length > 0 && (
                     <div className="pi-writing-answer-bottom">

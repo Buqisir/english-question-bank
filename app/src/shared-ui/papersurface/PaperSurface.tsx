@@ -436,7 +436,11 @@ function CanonicalContinuationWritingMaterial({
       data-canonical-continuation-material=""
     >
       {blocks.map((block) => (
-        <p key={block.nodeId} data-canonical-block-id={block.nodeId}>
+        <p
+          key={block.nodeId}
+          data-canonical-block-id={block.nodeId}
+          data-canonical-continuation-writing-rhythm-role="material_paragraph"
+        >
           {block.inlines.map((inline) => (
             <span
               key={inline.nodeId}

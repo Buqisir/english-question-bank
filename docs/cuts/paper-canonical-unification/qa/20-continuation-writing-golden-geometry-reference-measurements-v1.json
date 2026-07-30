@@ -1,0 +1,76 @@
+{
+  "schemaVersion": "continuation-writing-golden-geometry-reference-v1",
+  "framework": {
+    "path": "docs/cuts/paper-canonical-unification/qa/golden-geometry-framework-v1.md",
+    "sha256": "46fee75e0ddaa62989985c1e3dea5be11f8501324fd0a95b409b610716c0be88"
+  },
+  "reference": {
+    "path": "docs/product/exam-paper-format-reference/images/page-12-continuation-box.jpeg",
+    "sha256": "20f3afa6ea6a43e6d27d7c9e47a1e0334c522ccfb3c2acd7d2abeacfe8a7aba3",
+    "pixelWidth": 869,
+    "pixelHeight": 1161,
+    "coordinateUse": "evidence_only_never_css_px_pdf_pt_or_a4_scale"
+  },
+  "sourceCompanion": {
+    "path": "test-fixtures/paper-import/paper-2026-i-canonical-pilot/canonical-evidence/02-original-question-source.pdf",
+    "sha256": "31a87069e6d530afba9123eec0487adf45e52e0b98530af80b62476f169e4d0f",
+    "page": 11,
+    "purpose": "source_text_and_two_starter_identity_only"
+  },
+  "measurements": {
+    "responseBox": {
+      "leftPx": 79,
+      "rightPx": 799,
+      "topPx": 481,
+      "bottomPx": 827,
+      "usableWidthPx": 720
+    },
+    "localTypographyProxy": {
+      "nearbyLatinBaselineStepPx": 32,
+      "referenceLineHeightEm": 1.75,
+      "derivedEmProxyPx": 18.2857142857,
+      "derivation": "nearbyLatinBaselineStepPx / referenceLineHeightEm"
+    },
+    "starterLines": [
+      {
+        "role": "starter_1",
+        "textLeftPx": 153,
+        "textTopPx": 496,
+        "indentEm": 4.046875,
+        "indentUsableWidthRatio": 0.1027777778,
+        "rowInsetEm": 0.8203125
+      },
+      {
+        "role": "starter_2",
+        "textLeftPx": 152,
+        "textTopPx": 669,
+        "indentEm": 3.9921875,
+        "indentUsableWidthRatio": 0.1013888889,
+        "rowInsetEm": 0.8203125
+      }
+    ],
+    "normalizedContract": {
+      "starterFirstLineIndentEm": 4,
+      "starterFirstLineIndentToleranceEm": 0.1,
+      "starterIndentUsableWidthRatio": 0.102,
+      "starterIndentUsableWidthRatioTolerance": 0.003,
+      "starterRowTopInsetEm": 1,
+      "secondStarterRowRatio": 0.5,
+      "bothStarterOriginsEqual": true
+    }
+  },
+  "unobserved": [
+    "wrapped_starter_line",
+    "cross_page_response_movement",
+    "teacher_reference_answer",
+    "teacher_analysis",
+    "teacher_rubric"
+  ],
+  "fixtureObligations": [
+    "wrapped_starter_preserves_hanging_origin",
+    "cross_page_response_movement_preserves_both_starter_indents",
+    "chrome_is_not_indented",
+    "supplied_starters_remain_distinct_from_student_writable_area",
+    "source_unapproved_teacher_tail_collapses"
+  ]
+}

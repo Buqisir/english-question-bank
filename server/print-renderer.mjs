@@ -54,6 +54,7 @@ import { sevenChoicesRhythm } from '../shared/paper-canonical/sevenChoicesRhythm
 import { clozeRhythm } from '../shared/paper-canonical/clozeRhythm.mjs'
 import { grammarFillRhythm } from '../shared/paper-canonical/grammarFillRhythm.mjs'
 import { applicationWritingRhythm } from '../shared/paper-canonical/applicationWritingRhythm.mjs'
+import { continuationWritingRhythm } from '../shared/paper-canonical/continuationWritingRhythm.mjs'
 import {
   resolveGrammarFillPublicGeometryFixture,
 } from '../shared/paper-canonical/grammarFillPublicGeometryFixtures.mjs'
@@ -455,13 +456,16 @@ function renderCanonicalWritingChrome(
     const rhythmAttr = applicationRhythmRole
       ? ` data-canonical-application-writing-rhythm-role="${applicationRhythmRole}"`
       : ''
+    const continuationRhythmAttr = family === 'continuation'
+      ? ` data-canonical-continuation-writing-rhythm-role="${role}"`
+      : ''
     const previousFamilyAttrs =
       family === 'application'
       && role === 'part_heading'
       && previousFamilyBoundary
         ? ` data-canonical-grammar-fill-rhythm-role="next_section" data-canonical-grammar-fill-section-id="${escapeHtml(previousFamilyBoundary.sectionId)}" data-canonical-grammar-fill-following-for="${escapeHtml(previousFamilyBoundary.groupId)}"`
         : ''
-    return `<p class="${className} ${className}--${role}" data-canonical-instruction-id="${escapeHtml(instruction.instructionId)}" data-canonical-writing-chrome-role="${role}"${rhythmAttr}${previousFamilyAttrs}>${escapeHtml(instruction.text)}</p>`
+    return `<p class="${className} ${className}--${role}" data-canonical-instruction-id="${escapeHtml(instruction.instructionId)}" data-canonical-writing-chrome-role="${role}"${rhythmAttr}${continuationRhythmAttr}${previousFamilyAttrs}>${escapeHtml(instruction.text)}</p>`
   }).join('')
 }
 
@@ -498,11 +502,11 @@ function renderCanonicalContinuationWriting(canonicalGroup, writingChrome) {
     'continuation',
   )
   const material = canonicalGroup.materialBlocks.map((block) =>
-    `<p data-canonical-block-id="${escapeHtml(block.nodeId)}">${renderCanonicalInlineNodes(block.inlines)}</p>`).join('')
+    `<p data-canonical-block-id="${escapeHtml(block.nodeId)}" data-canonical-continuation-writing-rhythm-role="material_paragraph">${renderCanonicalInlineNodes(block.inlines)}</p>`).join('')
   const response = canonicalGroup.answerRegion
   const starters = response.starterLines.map((starter, index) =>
-    `<p class="writing-starter-line writing-starter-line--${index + 1}" data-canonical-starter-id="${escapeHtml(starter.starterId)}" data-canonical-block-id="${escapeHtml(starter.contentRef)}">${renderCanonicalInlineNodes(starter.inlines)}</p>`).join('')
-  return `<div class="canonical-continuation-writing" data-canonical-writing-semantic-signature="${escapeHtml(canonicalGroup.semanticSignature)}" data-canonical-writing-occurrence-signature="${escapeHtml(canonicalGroup.occurrenceSignature)}" data-canonical-word-count-scope="${escapeHtml(canonicalGroup.wordCountRuling.countScope)}" data-canonical-word-count-target="${canonicalGroup.wordCountRuling.target}"><div class="canonical-continuation-chrome">${chrome}</div><div class="passage canonical-continuation-material">${material}</div><div class="writing-answer-box canonical-continuation-response" data-canonical-answer-region-ref="${escapeHtml(response.answerRegionRef)}" data-canonical-response-slot-id="${escapeHtml(response.responseSlotId)}" style="width:145mm;height:57mm;">${starters}</div></div>`
+    `<div class="writing-continuation-row"><p class="writing-starter-line" data-canonical-starter-id="${escapeHtml(starter.starterId)}" data-canonical-block-id="${escapeHtml(starter.contentRef)}" data-canonical-continuation-writing-rhythm-role="starter_${index + 1}">${renderCanonicalInlineNodes(starter.inlines)}</p><span class="writing-continuation-writable-area" data-canonical-continuation-writing-rhythm-role="writable_after_starter_${index + 1}"></span></div>`).join('')
+  return `<div class="canonical-continuation-writing" data-canonical-writing-semantic-signature="${escapeHtml(canonicalGroup.semanticSignature)}" data-canonical-writing-occurrence-signature="${escapeHtml(canonicalGroup.occurrenceSignature)}" data-canonical-word-count-scope="${escapeHtml(canonicalGroup.wordCountRuling.countScope)}" data-canonical-word-count-target="${canonicalGroup.wordCountRuling.target}"><div class="canonical-continuation-chrome">${chrome}</div><div class="passage canonical-continuation-material">${material}</div><div class="writing-answer-box canonical-continuation-response" data-canonical-continuation-writing-rhythm-role="response_box" data-canonical-answer-region-ref="${escapeHtml(response.answerRegionRef)}" data-canonical-response-slot-id="${escapeHtml(response.responseSlotId)}" style="width:${continuationWritingRhythm.responseGeometry.widthMm}mm;height:${continuationWritingRhythm.responseGeometry.heightMm}mm;">${starters}</div></div>`
 }
 
 function renderCanonicalQuestionOptions(
@@ -2516,6 +2520,12 @@ ${grammarFillGeometryFixtureCss}
 
 .canonical-continuation-response {
   box-sizing: border-box;
+  width: ${continuationWritingRhythm.responseGeometry.widthMm}mm;
+  height: ${continuationWritingRhythm.responseGeometry.heightMm}mm;
+  border-width: ${continuationWritingRhythm.responseGeometry.borderPt}pt;
+  margin-top: ${continuationWritingRhythm.rendererMapping.printPdf.responseMarginTopPt}pt;
+  padding: ${continuationWritingRhythm.rendererMapping.printPdf.responsePaddingPt}pt;
+  position: relative;
 }
 
 .canonical-application-given p,
@@ -2566,18 +2576,28 @@ ${grammarFillGeometryFixtureCss}
 }
 
 .writing-starter-line {
-  position: absolute;
-  left: 3mm;
-  right: 3mm;
-  margin: 0;
+  margin: 0 ${continuationWritingRhythm.starterGeometry.trailingInsetEm}em 0 ${continuationWritingRhythm.starterGeometry.firstLineIndentEm}em;
+  overflow-wrap: anywhere;
+  text-indent: 0;
 }
 
-.writing-starter-line--1 {
-  top: 1mm;
+.canonical-continuation-response {
+  display: grid;
+  grid-template-rows: ${continuationWritingRhythm.starterGeometry.secondRowStartRatio * 100}% minmax(0, 1fr);
 }
 
-.writing-starter-line--2 {
-  top: 50%;
+.writing-continuation-row {
+  display: flex;
+  min-height: 0;
+  flex-direction: column;
+  padding-top: ${continuationWritingRhythm.starterGeometry.rowTopInsetEm}em;
+  box-sizing: border-box;
+}
+
+.writing-continuation-writable-area {
+  display: block;
+  min-height: 0;
+  flex: 1;
 }
 
 /* Exam density: tighter */

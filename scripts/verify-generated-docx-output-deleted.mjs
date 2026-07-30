@@ -34,7 +34,7 @@ assert.deepEqual(
   'supported canonical consumers must be exactly Screen and Print/PDF',
 )
 
-assert.equal(canonicalAuthorityRef.manifestVersion, '27')
+assert.equal(canonicalAuthorityRef.manifestVersion, '28')
 const currentAuthority = resolveCanonicalAuthority(canonicalAuthorityRef)
 assert.equal(currentAuthority.ok, true)
 
@@ -42,13 +42,13 @@ const humanAuthority = read('docs/product/exam-paper-format-standards.md')
 const currentHumanAuthority = humanAuthority.split('## v2 历史排版证据')[0]
 assert.match(
   currentHumanAuthority,
-  /standards\/paper-canonical\/manifest-v27\.json/,
-  'the unique human-readable authority index must bind current manifest v27',
+  /standards\/paper-canonical\/manifest-v28\.json/,
+  'the unique human-readable authority index must bind current manifest v28',
 )
 assert.match(
   currentHumanAuthority,
-  /Screen v27、Print\/PDF v28/,
-  'the human-readable current output matrix must name only Screen v27 and Print/PDF v28',
+  /Screen v28、Print\/PDF v29/,
+  'the human-readable current output matrix must name only Screen v28 and Print/PDF v29',
 )
 assert.doesNotMatch(
   currentHumanAuthority,
@@ -285,6 +285,22 @@ assert.match(
   manifestV27Migration,
   /Manifest v27 contract[\s\S]*request-file-name[\s\S]*default runbook command/i,
   'manifest v27 must record authority-owned default producer selection',
+)
+const manifestV28Migration = read('standards/paper-canonical/manifest-v28-migration.md')
+assert.match(
+  manifestV28Migration,
+  /Manifest v28[\s\S]*Screen v28[\s\S]*Print\/PDF v29/i,
+  'manifest v28 must record the Continuation Writing Golden Geometry closure',
+)
+assert.match(
+  manifestV28Migration,
+  /Manifest v27[\s\S]*remain unchanged and resolvable/i,
+  'manifest v28 migration must preserve the immutable v27 closure',
+)
+assert.match(
+  manifestV28Migration,
+  /4em[\s\S]*JPEG pixel ratios/i,
+  'manifest v28 must record the dimensionless starter-indent authority',
 )
 assert.equal(
   Object.hasOwn(currentAuthority.closure.schemas, 'consumer-contract-v1'),

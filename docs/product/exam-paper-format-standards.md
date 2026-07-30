@@ -4,7 +4,7 @@
 
 本文件是唯一的人类可读索引；当前 canonical 编译、校验、发布和受支持的
 Screen / Print-PDF consumer 只从
-[`standards/paper-canonical/manifest-v27.json`](../../standards/paper-canonical/manifest-v27.json)
+[`standards/paper-canonical/manifest-v28.json`](../../standards/paper-canonical/manifest-v28.json)
 解析一份 digest-closed 的权威闭包。这里不复制卷型题号、分值、题组
 cardinality、清洗条件或字体/物理排版数值，也不能被 caller 当作第二套配置。
 
@@ -18,15 +18,25 @@ Renderer Typography、其 schema 及纯验证入口。未知版本、缺件、di
 任何会改变 admission、canonical 语义、Profile、normalization 或 renderer
 结果的变更，必须新增 versioned artifact、schema/semantic conformance fixture、
 迁移说明和 manifest 升版；已经被 Publication 引用的 artifact 不可原位修改。
-`manifest-v1.json` 至 `manifest-v26.json` 保留各自原始 digest-closed closure，
-供既有 Publication 解析；当前 Screen v27、Print/PDF v28 consumer contracts
-只绑定 v27 authority。v27 以不可变 Application capture/transcription v3
-逐字纠正原题 PDF 第 10 页的 `“Opinion”`、`未来大学生活中的学习` 和
-`写作词数应为 80 左右`，并以 `application-writing-rhythm-v2` 将 border、
-padding 和原子作答区移动严格限制在 Application selector；Continuation
-恢复既有答题框几何，只保留小节标题与 prompt 的已授权 chrome 边界。默认
-runbook producer 按 Manifest v27 的显式契约选择 v3 evidence，不再由
-`--request-file-name` 暗示 evidence 版本。迁移说明见
+`manifest-v1.json` 至 `manifest-v27.json` 保留各自原始 digest-closed closure，
+供既有 Publication 解析；当前 Screen v28、Print/PDF v29 consumer contracts
+只绑定 v28 authority。v28 新增 `continuation-writing-rhythm-v1`：它以原题
+PDF、page-12 金样图、Paper Asset 与 reviewed evidence 约束
+Application→Continuation 边界、写作部分/小节/instruction、材料、两个给定
+段首、145 mm × 57 mm normal-flow 作答区及卷尾。两个给定段首统一使用
+4 em 局部字体缩进，Screen、Print HTML 与 exact-A4 PDF 不得因跨页移动丢失
+缩进、误缩进 chrome，或把给定段首混同为学生续写区；来源未授权的 Teacher
+答案、分析与 rubric 必须保持缺席。public-geometry-fixtures v7 不改变
+Grammar Fill 的源文本、geometry 或 projected-occurrence digest，只把
+compatible Consumption Plan 推进到 v28。迁移说明见
+[`manifest-v28-migration.md`](../../standards/paper-canonical/manifest-v28-migration.md)。
+此前 v27 以不可变 Application capture/transcription v3 逐字纠正原题 PDF
+第 10 页的 `“Opinion”`、`未来大学生活中的学习` 和 `写作词数应为 80 左右`，
+并以 `application-writing-rhythm-v2` 将 border、padding 和原子作答区移动
+严格限制在 Application selector；Continuation 恢复既有答题框几何，只保留
+小节标题与 prompt 的已授权 chrome 边界。默认 runbook producer 按 Manifest
+v27 的显式契约选择 v3 evidence，不再由 `--request-file-name` 暗示 evidence
+版本。迁移说明见
 [`manifest-v27-migration.md`](../../standards/paper-canonical/manifest-v27-migration.md)。
 public-geometry-fixtures v6 不改变 Grammar Fill 的源文本、geometry 或
 projected-occurrence digest，只把 compatible Consumption Plan 推进到 v27。

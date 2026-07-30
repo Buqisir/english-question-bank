@@ -513,18 +513,18 @@ function assertSevenChoicesReferenceEvidence() {
   )
   assert.equal(
     canonicalAuthorityRef.manifestVersion,
-    '27',
-    'new Publications preserve Seven Choices inside the corrected Application Writing successor authority',
+    '28',
+    'new Publications preserve Seven Choices inside the Continuation Writing successor authority',
   )
   assert.equal(
     consumerContractRefs.screen.version,
-    '27',
-    'Screen v27 binds the complete geometry authority closure',
+    '28',
+    'Screen v28 binds the complete geometry authority closure',
   )
   assert.equal(
     consumerContractRefs.print_pdf.version,
-    '28',
-    'Print/PDF v28 binds the complete geometry authority closure',
+    '29',
+    'Print/PDF v29 binds the complete geometry authority closure',
   )
   assert.equal(
     sha256(preservedBytes),
@@ -14720,7 +14720,7 @@ try {
   )
   const requestPath = path.join(
     sourcePackageDir,
-    'canonical-evidence/canonical-import-request-v27.json',
+    'canonical-evidence/canonical-import-request-v28.json',
   )
   execFileSync(process.execPath, [
     path.join(

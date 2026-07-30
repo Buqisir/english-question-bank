@@ -31,6 +31,7 @@ import {
   buildCanonicalContinuationWritingConsumptionSurfaceData,
 } from '../shared/paper-normalization/canonicalPaperGroupSurfaceAdapter.mjs'
 import { consumerContractRefs } from '../shared/paper-canonical/consumers.mjs'
+import { continuationWritingRhythm } from '../shared/paper-canonical/continuationWritingRhythm.mjs'
 import { buildPrintHtml } from '../server/print-renderer.mjs'
 import {
   createFileSystemCanonicalPublicationStore,
@@ -69,6 +70,209 @@ const zhejiangWritingChrome = Object.freeze({
   application: '第一节 应用文写作（满分15分）',
   continuation: '第二节 读后续写（满分25分）',
 })
+const continuationSourceOracle = JSON.parse(readFileSync(
+  new URL(
+    `../${continuationWritingRhythm.publicArtifactOracle.path}`,
+    import.meta.url,
+  ),
+  'utf8',
+))
+const continuationCoverageOracle = JSON.parse(readFileSync(
+  new URL(
+    `../${continuationWritingRhythm.observedCoverageOracle.path}`,
+    import.meta.url,
+  ),
+  'utf8',
+))
+const executedCoverage = new Map(
+  Object.keys(continuationCoverageOracle.requiredBundles)
+    .map((bundle) => [bundle, new Set()]),
+)
+
+function sha256File(relativePath) {
+  return createHash('sha256')
+    .update(readFileSync(new URL(`../${relativePath}`, import.meta.url)))
+    .digest('hex')
+}
+
+function observeCoverage(bundle, edgeIds) {
+  const observed = executedCoverage.get(bundle)
+  assert.ok(observed, `unknown Continuation coverage bundle ${bundle}`)
+  for (const edgeId of edgeIds) {
+    assert.equal(
+      continuationCoverageOracle.requiredEdgeIds.includes(edgeId),
+      true,
+      `unknown Continuation coverage edge ${edgeId}`,
+    )
+    observed.add(edgeId)
+  }
+}
+
+function assertExecutedCoverage() {
+  for (const [bundle, requiredEdgeIds] of Object.entries(
+    continuationCoverageOracle.requiredBundles,
+  )) {
+    assert.deepEqual(
+      [...executedCoverage.get(bundle)].sort(),
+      [...requiredEdgeIds].sort(),
+      `${bundle} coverage is derived from executed public-seam observations`,
+    )
+  }
+}
+
+function sourceBoundContinuationText() {
+  for (const source of Object.values(continuationSourceOracle.sources)) {
+    assert.equal(
+      sha256File(source.path),
+      source.sha256,
+      `${source.path} remains the exact source-oracle input`,
+    )
+  }
+  const capture = JSON.parse(readFileSync(
+    new URL(
+      `../${continuationSourceOracle.sources.continuationCapture.path}`,
+      import.meta.url,
+    ),
+    'utf8',
+  ))
+  const transcription = JSON.parse(readFileSync(
+    new URL(
+      `../${continuationSourceOracle.sources.continuationTranscription.path}`,
+      import.meta.url,
+    ),
+    'utf8',
+  ))
+  const blocks = new Map(capture.group.content.blocks.map(
+    (block) => [
+      block.nodeId,
+      block.inlines.map((inline) => inline.text).join(''),
+    ],
+  ))
+  for (const block of transcription.orderedBlocks) {
+    assert.equal(
+      digestJson(blocks.get(block.blockId)),
+      block.textDigest,
+      `accepted transcription independently seals ${block.blockId}`,
+    )
+  }
+  const materialBlocks = continuationSourceOracle.materialBlockIds.map(
+    (nodeId) => ({ nodeId, text: blocks.get(nodeId) }),
+  )
+  const starters = continuationSourceOracle.starters.map((starter) => {
+    const text = blocks.get(starter.contentRef)
+    assert.equal(text, starter.text)
+    assert.equal(digestJson(text), `sha256:${starter.textSha256}`)
+    return { ...starter, text }
+  })
+  const pdfText = execFileSync(
+    'pdftotext',
+    [
+      '-f',
+      String(continuationSourceOracle.sources.originalQuestionPdf.page),
+      '-l',
+      String(continuationSourceOracle.sources.originalQuestionPdf.page),
+      path.resolve(continuationSourceOracle.sources.originalQuestionPdf.path),
+      '-',
+    ],
+    { encoding: 'utf8' },
+  )
+  const compactPdfText = comparableRenderedText(pdfText)
+  for (const { nodeId, text } of materialBlocks) {
+    const comparableText = comparableRenderedText(text)
+    assert.equal(
+      compactPdfText.includes(comparableText.slice(0, 36))
+        && compactPdfText.includes(comparableText.slice(-36)),
+      true,
+      `original source PDF independently contains the accepted start/end anchors for material ${nodeId}`,
+    )
+  }
+  for (const starter of starters) {
+    assert.equal(
+      compactPdfText.includes(comparableRenderedText(starter.text)),
+      true,
+      `original source PDF independently contains ${starter.starterId}`,
+    )
+  }
+  for (const role of ['section', 'instruction']) {
+    assert.equal(
+      compactPdfText.includes(
+        comparableRenderedText(continuationSourceOracle.chrome[role].text),
+      ),
+      true,
+      `original source PDF independently contains Continuation ${role}`,
+    )
+  }
+  return { materialBlocks, starters }
+}
+
+const continuationSourceText = sourceBoundContinuationText()
+
+function assertContinuationWritingGeometryEvidenceClosure() {
+  for (const reference of [
+    continuationWritingRhythm.referenceMeasurement,
+    continuationWritingRhythm.publicArtifactOracle,
+    continuationWritingRhythm.observedCoverageOracle,
+  ]) {
+    assert.equal(
+      `sha256:${sha256File(reference.path)}`,
+      reference.sha256,
+      `${reference.path} remains digest-bound to Continuation rhythm`,
+    )
+  }
+  const measurement = JSON.parse(readFileSync(
+    new URL(
+      `../${continuationWritingRhythm.referenceMeasurement.path}`,
+      import.meta.url,
+    ),
+    'utf8',
+  ))
+  assert.equal(
+    sha256File(measurement.reference.path),
+    measurement.reference.sha256,
+  )
+  assert.equal(
+    sha256File(measurement.sourceCompanion.path),
+    measurement.sourceCompanion.sha256,
+  )
+  assert.deepEqual(
+    measurement.measurements.normalizedContract,
+    {
+      starterFirstLineIndentEm:
+        continuationWritingRhythm.starterGeometry.firstLineIndentEm,
+      starterFirstLineIndentToleranceEm:
+        continuationWritingRhythm.starterGeometry
+          .firstLineIndentToleranceEm,
+      starterIndentUsableWidthRatio:
+        continuationWritingRhythm.starterGeometry.indentUsableWidthRatio,
+      starterIndentUsableWidthRatioTolerance:
+        continuationWritingRhythm.starterGeometry
+          .indentUsableWidthRatioTolerance,
+      starterRowTopInsetEm:
+        continuationWritingRhythm.starterGeometry.rowTopInsetEm,
+      secondStarterRowRatio:
+        continuationWritingRhythm.starterGeometry.secondRowStartRatio,
+      bothStarterOriginsEqual: true,
+    },
+  )
+  assert.deepEqual(
+    [...continuationCoverageOracle.requiredEdgeIds].sort(),
+    continuationWritingRhythm.adjacencyGraph
+      .map(({ edgeId }) => edgeId)
+      .sort(),
+    'observed coverage closes the entire Continuation role graph',
+  )
+  assert.deepEqual(
+    Object.keys(continuationCoverageOracle.requiredBundles).sort(),
+    [
+      'screen_plain',
+      'screen_lecture',
+      'student_print_html',
+      'teacher_print_html',
+      'student_pdf',
+      'teacher_pdf_cross_page',
+    ].sort(),
+  )
+}
 
 function assertNck1WritingAuthority() {
   const authority = resolveCanonicalAuthority(canonicalAuthorityRef)
@@ -419,8 +623,8 @@ function assertSchemaDescriptorIdentityClosure() {
     'canonical-paper-publication-v9',
     'normalization-report-v10',
     'canonical-paper-publication-v10',
-    'normalization-report-v27',
-    'canonical-paper-publication-v27',
+    'normalization-report-v28',
+    'canonical-paper-publication-v28',
   ]) {
     assert.equal(authority.closure.schemas[schemaId].$id, schemaId)
   }
@@ -1116,6 +1320,222 @@ function canonicalWritingChromeEntries(canonical) {
   ]
 }
 
+async function assertContinuationStarterIndent(
+  page,
+  response,
+  canonical,
+  label,
+) {
+  if (canonical.answerRegion.starterLines.length === 0) return
+  const observed = await response.evaluate((element) => {
+    const box = element.getBoundingClientRect()
+    const firstTextX = (node) => {
+      const range = document.createRange()
+      range.selectNodeContents(node)
+      return range.getClientRects()[0]?.x ?? null
+    }
+    const starters = [...element.querySelectorAll(
+      '[data-canonical-starter-id]',
+    )].map((starter) => {
+      const style = getComputedStyle(starter)
+      return {
+        starterId: starter.getAttribute('data-canonical-starter-id'),
+        textX: firstTextX(starter),
+        fontSizePx: Number.parseFloat(style.fontSize),
+      }
+    })
+    const chrome = [...document.querySelectorAll(
+      '[data-canonical-writing-chrome-role]',
+    )].map((node) => ({
+      role: node.getAttribute('data-canonical-writing-chrome-role'),
+      textIndentPx: Number.parseFloat(getComputedStyle(node).textIndent),
+    }))
+    return { boxX: box.x, starters, chrome }
+  })
+  assert.equal(observed.starters.length, 2, `${label} renders two starters`)
+  for (const starter of observed.starters) {
+    assert.ok(starter.textX !== null)
+    assert.ok(
+      Math.abs(
+        starter.textX
+          - observed.boxX
+          - (
+            continuationWritingRhythm.starterGeometry.firstLineIndentEm
+            * starter.fontSizePx
+          )
+      ) <= 1.5,
+      `${label} keeps ${starter.starterId} at the source-correct ${continuationWritingRhythm.starterGeometry.firstLineIndentEm}em first-line indent: ${JSON.stringify(observed)}`,
+    )
+  }
+  assert.ok(
+    Math.abs(
+      observed.starters[0].textX - observed.starters[1].textX,
+    ) <= 1.5,
+    `${label} keeps both supplied paragraph openings on one indent origin`,
+  )
+  assert.equal(
+    observed.chrome.every(({ textIndentPx }) => textIndentPx === 0),
+    true,
+    `${label} does not indent part/section/instruction chrome`,
+  )
+}
+
+async function assertContinuationWritableAreaSeparation(
+  response,
+  canonical,
+  label,
+  { requireWrappedStarter = false } = {},
+) {
+  if (canonical.answerRegion.starterLines.length === 0) return
+  const observed = await response.evaluate((element) => {
+    const responseRect = element.getBoundingClientRect()
+    const starters = [...element.querySelectorAll(
+      '[data-canonical-starter-id]',
+    )].map((starter) => {
+      const range = document.createRange()
+      range.selectNodeContents(starter)
+      const textRects = [...range.getClientRects()].map((rect) => ({
+        x: rect.x,
+        top: rect.top,
+        bottom: rect.bottom,
+      }))
+      const rect = starter.getBoundingClientRect()
+      return {
+        role: starter.getAttribute(
+          'data-canonical-continuation-writing-rhythm-role',
+        ),
+        top: rect.top,
+        bottom: rect.bottom,
+        textRects,
+      }
+    })
+    const writableAreas = [...element.querySelectorAll(
+      '[data-canonical-continuation-writing-rhythm-role^="writable_after_starter_"]',
+    )].map((area) => {
+      const rect = area.getBoundingClientRect()
+      return {
+        role: area.getAttribute(
+          'data-canonical-continuation-writing-rhythm-role',
+        ),
+        top: rect.top,
+        bottom: rect.bottom,
+        height: rect.height,
+      }
+    })
+    return {
+      response: {
+        top: responseRect.top,
+        bottom: responseRect.bottom,
+      },
+      starters,
+      writableAreas,
+    }
+  })
+  assert.deepEqual(
+    observed.starters.map(({ role }) => role),
+    ['starter_1', 'starter_2'],
+    `${label} exposes the two supplied openings as starter roles`,
+  )
+  assert.deepEqual(
+    observed.writableAreas.map(({ role }) => role),
+    ['writable_after_starter_1', 'writable_after_starter_2'],
+    `${label} exposes two distinct student writable areas`,
+  )
+  for (const [index, writableArea] of observed.writableAreas.entries()) {
+    assert.ok(
+      writableArea.top >= observed.starters[index].bottom - 0.5,
+      `${label} starts writable area ${index + 1} after its supplied opening`,
+    )
+    assert.ok(
+      writableArea.height > 0
+        && writableArea.bottom <= observed.response.bottom + 0.5,
+      `${label} keeps writable area ${index + 1} usable inside the response box: ${JSON.stringify(observed)}`,
+    )
+  }
+  assert.ok(
+    observed.writableAreas[0].bottom <= observed.starters[1].top + 0.5,
+    `${label} keeps the first writable area separate from starter 2`,
+  )
+  const wrappedStarters = observed.starters.filter(
+    ({ textRects }) => textRects.length > 1,
+  )
+  if (requireWrappedStarter) {
+    assert.ok(
+      wrappedStarters.length > 0,
+      `${label} forces a supplied opening to wrap`,
+    )
+  }
+  for (const starter of wrappedStarters) {
+    assert.equal(
+      starter.textRects.every(
+        ({ x }) => Math.abs(x - starter.textRects[0].x) <= 1.5,
+      ),
+      true,
+      `${label} keeps wrapped starter lines on the supplied-opening origin`,
+    )
+  }
+}
+
+async function assertContinuationEndBoundaryBrowser(page, response, label) {
+  const observed = await response.evaluate((element) => {
+    const responseRect = element.getBoundingClientRect()
+    const semanticNodes = [...document.querySelectorAll(
+      [
+        '[data-canonical-writing-chrome-role]',
+        '[data-canonical-continuation-writing-rhythm-role]',
+        '[data-canonical-block-id]',
+      ].join(','),
+    )]
+    const visibleSemanticAfterResponse = semanticNodes.filter((node) => {
+      if (element.contains(node)) return false
+      const rect = node.getBoundingClientRect()
+      return rect.height > 0
+        && rect.top >= responseRect.bottom - 0.5
+        && (node.textContent || '').trim().length > 0
+    }).length
+    const responses = [...document.querySelectorAll(
+      '[data-canonical-response-slot-id]',
+    )]
+    return {
+      visibleSemanticAfterResponse,
+      isLastResponse: responses.at(-1) === element,
+    }
+  })
+  assert.equal(
+    observed.visibleSemanticAfterResponse,
+    0,
+    `${label} has no following paper semantics after Continuation response`,
+  )
+  assert.equal(
+    observed.isLastResponse,
+    true,
+    `${label} observes Continuation response as the final paper response`,
+  )
+}
+
+async function assertContinuationMaterialWrap(page, canonical, label) {
+  const observed = await page.locator(
+    '[data-canonical-continuation-writing-rhythm-role="material_paragraph"]',
+  ).evaluateAll((elements) => elements.map((element) => {
+    const range = document.createRange()
+    range.selectNodeContents(element)
+    return {
+      blockId: element.getAttribute('data-canonical-block-id'),
+      lineCount: range.getClientRects().length,
+    }
+  }))
+  assert.deepEqual(
+    observed.map(({ blockId }) => blockId),
+    canonical.materialBlocks.map(({ nodeId }) => nodeId),
+    `${label} renders every source-bound material block in order`,
+  )
+  assert.equal(
+    observed.some(({ lineCount }) => lineCount > 1),
+    true,
+    `${label} exercises real material wrapping`,
+  )
+}
+
 function assertCanonicalWritingChromeTextLines(renderedText, canonical, label) {
   const lines = String(renderedText)
     .split(/\r?\n/)
@@ -1147,10 +1567,13 @@ function assertCanonicalWritingChromeHtmlStructure(html, canonical, label) {
   }
 }
 
-function extractPdfLines(pdfPath) {
+function extractPdfLines(pdfPath, pageNumber = null) {
+  const pageArgs = pageNumber === null
+    ? []
+    : ['-f', String(pageNumber), '-l', String(pageNumber)]
   const xml = execFileSync(
     'pdftotext',
-    ['-bbox-layout', pdfPath, '-'],
+    [...pageArgs, '-bbox-layout', pdfPath, '-'],
     { encoding: 'utf8' },
   )
   const matches = [...xml.matchAll(
@@ -1177,12 +1600,142 @@ function extractPdfLines(pdfPath) {
   })
 }
 
-function extractPdfLineGeometry(pdfPath, text) {
-  const found = extractPdfLines(pdfPath).filter(
+function extractPdfLineGeometry(pdfPath, text, pageNumber = null) {
+  const found = extractPdfLines(pdfPath, pageNumber).filter(
     (line) => compactText(line.text) === compactText(text),
   )
   assert.equal(found.length, 1, `${pdfPath} contains one visible line "${text}"`)
   return found[0]
+}
+
+function extractContinuationResponsePdfRect(pdfPath, pageNumber) {
+  const root = mkdtempSync(path.join(tmpdir(), 'eqb-continuation-svg-'))
+  try {
+    const svgPath = path.join(root, 'page.svg')
+    execFileSync('pdftocairo', [
+      '-f', String(pageNumber),
+      '-l', String(pageNumber),
+      '-svg',
+      pdfPath,
+      svgPath,
+    ])
+    const svg = readFileSync(svgPath, 'utf8')
+    const rectanglePattern =
+      /<path[^>]*d="M (-?[0-9.]+) (-?[0-9.]+) L (-?[0-9.]+) (-?[0-9.]+) L (-?[0-9.]+) (-?[0-9.]+) L (-?[0-9.]+) (-?[0-9.]+) Z[^>]*transform="matrix\((-?[0-9.]+), 0, 0, (-?[0-9.]+), (-?[0-9.]+), (-?[0-9.]+)\)"\/>/g
+    const rectangles = [...svg.matchAll(rectanglePattern)].map((match) => {
+      const scaleX = Number(match[9])
+      const scaleY = Number(match[10])
+      return {
+        x: Number(match[1]) * scaleX + Number(match[11]),
+        y: Number(match[2]) * scaleY + Number(match[12]),
+        width: Math.abs(Number(match[3]) - Number(match[1])) * scaleX,
+        height: Math.abs(Number(match[6]) - Number(match[2])) * scaleY,
+      }
+    })
+    const expectedWidthPt =
+      continuationWritingRhythm.responseGeometry.widthMm / 25.4 * 72
+    const expectedHeightPt =
+      continuationWritingRhythm.responseGeometry.heightMm / 25.4 * 72
+    const candidates = rectangles.filter(
+      (rectangle) =>
+        Math.abs(rectangle.width - expectedWidthPt) <= 1.5
+        && Math.abs(rectangle.height - expectedHeightPt) <= 1.5,
+    )
+    assert.equal(
+      candidates.length,
+      1,
+      `${pdfPath} page ${pageNumber} contains one Continuation response border`,
+    )
+    return candidates[0]
+  } finally {
+    rmSync(root, { recursive: true, force: true })
+  }
+}
+
+function assertContinuationStarterPdfIndent({
+  pdfPath,
+  pageNumber,
+  canonical,
+  starterFontSizePx,
+  label,
+}) {
+  if (canonical.answerRegion.starterLines.length === 0) return
+  const responseRect =
+    extractContinuationResponsePdfRect(pdfPath, pageNumber)
+  const starterLines = canonical.answerRegion.starterLines.map(
+    (starter) =>
+      extractPdfLineGeometry(pdfPath, starter.text, pageNumber),
+  )
+  const fontSizePt = starterFontSizePx * 72 / 96
+  const expectedIndentPt =
+    continuationWritingRhythm.starterGeometry.firstLineIndentEm
+    * fontSizePt
+  for (const [index, line] of starterLines.entries()) {
+    assert.ok(
+      Math.abs(line.xMin - responseRect.x - expectedIndentPt)
+        <= continuationWritingRhythm.targets.printPdf
+          .starterIndentTolerancePt,
+      `${label} keeps starter ${index + 1} at the authority-owned em indent in exact-A4 PDF`,
+    )
+  }
+  assert.ok(
+    Math.abs(starterLines[0].xMin - starterLines[1].xMin)
+      <= continuationWritingRhythm.targets.printPdf
+        .starterIndentTolerancePt,
+    `${label} keeps both starter origins aligned in exact-A4 PDF`,
+  )
+  for (const [instruction] of canonicalWritingChromeEntries(canonical)) {
+    if (instruction.renderPolicy !== 'render') continue
+    const chromeLine = extractPdfLineGeometry(
+      pdfPath,
+      instruction.text,
+      pageNumber === 1 ? 1 : null,
+    )
+    assert.ok(
+      Math.abs(chromeLine.xMin - starterLines[0].xMin)
+        > continuationWritingRhythm.targets.printPdf
+          .starterIndentTolerancePt,
+      `${label} does not apply the starter indent to ${instruction.instructionId}`,
+    )
+  }
+}
+
+function assertContinuationPdfEndBoundary(pdfPath, pageNumber, label) {
+  const responseRect = extractContinuationResponsePdfRect(pdfPath, pageNumber)
+  const textAfterResponse = extractPdfLines(pdfPath, pageNumber).filter(
+    (line) =>
+      line.yMin >= responseRect.y + responseRect.height - 0.5
+      && !/^英语试题第\d+页\(共\d+页\)$/.test(compactText(line.text)),
+  )
+  assert.deepEqual(
+    textAfterResponse,
+    [],
+    `${label} has no visible paper text after the Continuation response`,
+  )
+  assert.equal(
+    pageNumber,
+    pdfPageCount(pdfPath),
+    `${label} observes the Continuation response on the final paper page`,
+  )
+}
+
+function assertContinuationPdfMaterialWrap(pdfPath, canonical, label) {
+  const lines = extractPdfLines(pdfPath)
+  const wrapped = canonical.materialBlocks.some((block) => {
+    const compactBlock = comparableRenderedText(block.text)
+    return lines.filter((line) => {
+      const compactLine = comparableRenderedText(line.text)
+      return compactLine.length >= 12 && compactBlock.includes(compactLine)
+    }).length > 1
+  })
+  assert.equal(wrapped, true, `${label} exercises real material wrapping`)
+}
+
+function pdfPageCount(pdfPath) {
+  const info = execFileSync('pdfinfo', [pdfPath], { encoding: 'utf8' })
+  const match = info.match(/^Pages:\s+(\d+)$/m)
+  assert.ok(match, `${pdfPath} exposes a PDF page count`)
+  return Number(match[1])
 }
 
 function parsePgm(buffer) {
@@ -1429,14 +1982,37 @@ function assertVisibleCanonicalText(renderedText, canonical) {
   const compact = compactText(renderedText)
   assert.equal(compact.includes('POISONEDLEGACY'), false)
   assert.equal(compact.includes('FORGEDANALYSIS'), false)
-  for (const block of canonical.materialBlocks) {
+  const expectedMaterialBlocks = canonical.paperId
+    === continuationSourceOracle.paperId
+    ? continuationSourceText.materialBlocks
+    : canonical.materialBlocks
+  const expectedStarters = canonical.paperId === continuationSourceOracle.paperId
+    ? continuationSourceText.starters
+    : canonical.answerRegion.starterLines
+  if (canonical.paperId === continuationSourceOracle.paperId) {
+    assert.deepEqual(
+      canonical.materialBlocks.map(({ nodeId, text }) => ({ nodeId, text })),
+      expectedMaterialBlocks,
+      'canonical material is independently identical to the source-bound capture and PDF',
+    )
+    assert.deepEqual(
+      canonical.answerRegion.starterLines.map(
+        ({ starterId, contentRef, text }) => ({ starterId, contentRef, text }),
+      ),
+      expectedStarters.map(
+        ({ starterId, contentRef, text }) => ({ starterId, contentRef, text }),
+      ),
+      'canonical starters are independently identical to the source-bound capture and PDF',
+    )
+  }
+  for (const block of expectedMaterialBlocks) {
     assert.equal(
       compact.split(compactText(block.text)).length - 1,
       1,
       `material ${block.nodeId} must occur once`,
     )
   }
-  for (const starter of canonical.answerRegion.starterLines) {
+  for (const starter of expectedStarters) {
     assert.equal(
       compact.split(compactText(starter.text)).length - 1,
       1,
@@ -1476,6 +2052,7 @@ function recordWritingChromeRasterMetric(
 }
 
 assertNck1WritingAuthority()
+assertContinuationWritingGeometryEvidenceClosure()
 assertZhejiangWritingChromeAuthority()
 assertNck1InstructionEvidenceAdmission()
 assertSchemaDescriptorIdentityClosure()
@@ -1708,6 +2285,11 @@ const mixedPrintHtml = buildPrintHtml({
   ...mixedWritingBaseArgs,
   canonicalConsumption: mixedWritingConsumptions.printPdf,
 })
+const mixedTeacherPrintHtml = buildPrintHtml({
+  ...mixedWritingBaseArgs,
+  versionType: 'teacher',
+  canonicalConsumption: mixedWritingConsumptions.printPdf,
+})
 assertNck1WritingHeadingCounts(mixedPrintHtml, 'whole-paper Print HTML')
 assertNck1WholeWritingOrder(
   mixedPrintHtml,
@@ -1718,6 +2300,11 @@ assertNck1WholeWritingOrder(
 assertNoRendererLocalWritingGroupHeading(
   mixedPrintHtml,
   'whole-paper Print HTML',
+)
+assert.equal(
+  mixedTeacherPrintHtml.includes('data-writing-answer-supplement'),
+  false,
+  'whole-paper Teacher Print HTML has no unproved Continuation answer, analysis, or rubric',
 )
 if (persistActualArtifacts) {
   writeFileSync(
@@ -1922,6 +2509,41 @@ async function assertBrowserArtifacts() {
           { cause: error },
         )
       }
+      await assertContinuationStarterIndent(
+        page,
+        mixedContinuationResponse,
+        mixedContinuation,
+        'authenticated whole-paper Screen',
+      )
+      await assertContinuationWritableAreaSeparation(
+        mixedContinuationResponse,
+        mixedContinuation,
+        'authenticated whole-paper Screen',
+      )
+      await assertContinuationMaterialWrap(
+        page,
+        mixedContinuation,
+        'authenticated whole-paper Screen',
+      )
+      await assertContinuationEndBoundaryBrowser(
+        page,
+        mixedContinuationResponse,
+        'authenticated whole-paper Screen',
+      )
+      await page.setViewportSize({ width: 520, height: 900 })
+      await assertContinuationStarterIndent(
+        page,
+        mixedContinuationResponse,
+        mixedContinuation,
+        'narrow authenticated whole-paper Screen',
+      )
+      await assertContinuationWritableAreaSeparation(
+        mixedContinuationResponse,
+        mixedContinuation,
+        'narrow authenticated whole-paper Screen',
+        { requireWrappedStarter: true },
+      )
+      await page.setViewportSize({ width: 1280, height: 900 })
       assert.ok(authRequestCount > 0)
       const mixedWritingPages = page.locator('[data-pi-writing-page]')
       assert.equal(await mixedWritingPages.count(), 2)
@@ -1980,6 +2602,10 @@ async function assertBrowserArtifacts() {
       assertNoRendererLocalWritingGroupHeading(
         mixedScreenText,
         'authenticated whole-paper Screen',
+      )
+      observeCoverage(
+        'screen_plain',
+        continuationCoverageOracle.requiredBundles.screen_plain,
       )
       if (persistActualArtifacts) {
         await page.screenshot({
@@ -2192,12 +2818,30 @@ async function assertBrowserArtifacts() {
       await page.close()
     }
 
-    {
+    for (const [versionType, html] of [
+      ['student', mixedPrintHtml],
+      ['teacher', mixedTeacherPrintHtml],
+    ]) {
       const page = await browser.newPage()
-      await page.setContent(mixedPrintHtml, { waitUntil: 'load' })
+      await page.setContent(html, { waitUntil: 'load' })
+      const continuationResponse = page.locator(
+        `[data-canonical-response-slot-id="${mixedContinuation.answerRegion.responseSlotId}"]`,
+      )
+      await assertContinuationWritableAreaSeparation(
+        continuationResponse,
+        mixedContinuation,
+        `whole-paper cross-page ${versionType} Print HTML`,
+      )
+      const continuationStarterFontSizePx =
+        await continuationResponse.locator('[data-canonical-starter-id]')
+          .first()
+          .evaluate(
+            (element) =>
+              Number.parseFloat(getComputedStyle(element).fontSize),
+          )
       const root = mkdtempSync(path.join(tmpdir(), 'eqb-writing-chrome-pdf-'))
       try {
-        const pdfPath = path.join(root, 'whole-writing.pdf')
+        const pdfPath = path.join(root, `whole-writing-${versionType}.pdf`)
         await page.pdf({
           path: pdfPath,
           format: 'A4',
@@ -2209,21 +2853,70 @@ async function assertBrowserArtifacts() {
           ['-layout', pdfPath, '-'],
           { encoding: 'utf8' },
         )
-        assertNck1WritingHeadingCounts(pdfText, 'whole-paper Print PDF')
+        assertNck1WritingHeadingCounts(
+          pdfText,
+          `whole-paper ${versionType} Print PDF`,
+        )
         assertNck1WholeWritingOrder(
           pdfText,
           mixedApplication,
           mixedContinuation,
-          'whole-paper Print PDF',
+          `whole-paper ${versionType} Print PDF`,
         )
         assertNoRendererLocalWritingGroupHeading(
           pdfText,
-          'whole-paper Print PDF',
+          `whole-paper ${versionType} Print PDF`,
         )
+        assert.equal(
+          pdfPageCount(pdfPath),
+          2,
+          `whole-writing ${versionType} pagination adversary crosses the Application to Continuation boundary`,
+        )
+        for (const starter of mixedContinuation.answerRegion.starterLines) {
+          assert.equal(
+            extractPdfLines(pdfPath, 1).some(
+              (line) =>
+                compactText(line.text) === compactText(starter.text),
+            ),
+            false,
+            `cross-page ${versionType} movement keeps supplied starters out of the preceding page`,
+          )
+        }
+        assertContinuationStarterPdfIndent({
+          pdfPath,
+          pageNumber: 2,
+          canonical: mixedContinuation,
+          starterFontSizePx: continuationStarterFontSizePx,
+          label: `whole-paper cross-page ${versionType} Print PDF`,
+        })
+        assertContinuationPdfMaterialWrap(
+          pdfPath,
+          mixedContinuation,
+          `whole-paper cross-page ${versionType} Print PDF`,
+        )
+        assertContinuationPdfEndBoundary(
+          pdfPath,
+          2,
+          `whole-paper cross-page ${versionType} Print PDF`,
+        )
+        if (versionType === 'teacher') {
+          assert.equal(
+            pdfText.includes('FORGED ANALYSIS'),
+            false,
+            'Teacher cross-page PDF exposes no unproved Continuation answer or analysis',
+          )
+          observeCoverage(
+            'teacher_pdf_cross_page',
+            continuationCoverageOracle.requiredBundles.teacher_pdf_cross_page,
+          )
+        }
         if (persistActualArtifacts) {
           copyFileSync(
             pdfPath,
-            path.join(actualArtifactRoot, 'print-whole-writing-student.pdf'),
+            path.join(
+              actualArtifactRoot,
+              `print-whole-writing-${versionType}.pdf`,
+            ),
           )
         }
       } finally {
@@ -2317,6 +3010,12 @@ async function assertBrowserArtifacts() {
         assert.equal(
           await page.locator('[data-canonical-starter-id]').count(),
           canonical.answerRegion.starterLines.length,
+        )
+        await assertContinuationStarterIndent(
+          page,
+          response,
+          canonical,
+          `Screen ${label}/${teacher ? 'teacher' : 'student'}`,
         )
         assert.deepEqual(
           await page.locator(
@@ -2639,6 +3338,22 @@ async function assertBrowserArtifacts() {
           await writingPage.innerText(),
           `authenticated Screen ${label}/${analysisVariant.label}`,
         )
+        await assertContinuationWritableAreaSeparation(
+          response,
+          canonical,
+          `authenticated Screen ${label}/${analysisVariant.label}`,
+        )
+        await assertContinuationEndBoundaryBrowser(
+          page,
+          response,
+          `authenticated Screen ${label}/${analysisVariant.label}`,
+        )
+        if (label === 'two-starter' && analysisVariant.label === 'valid') {
+          observeCoverage(
+            'screen_lecture',
+            continuationCoverageOracle.requiredBundles.screen_lecture,
+          )
+        }
         productionSignatures.push({
           semantic: await response.getAttribute(
             'data-canonical-writing-semantic-signature',
@@ -2667,7 +3382,42 @@ async function assertBrowserArtifacts() {
       assert.ok(box)
       assert.ok(Math.abs(box.width - (145 / 25.4 * 96)) <= 1)
       assert.ok(Math.abs(box.height - (57 / 25.4 * 96)) <= 1)
+      await assertContinuationStarterIndent(
+        page,
+        response,
+        canonical,
+        `Print HTML ${label}/${versionType}`,
+      )
+      await assertContinuationWritableAreaSeparation(
+        response,
+        canonical,
+        `Print HTML ${label}/${versionType}`,
+      )
+      await assertContinuationMaterialWrap(
+        page,
+        canonical,
+        `Print HTML ${label}/${versionType}`,
+      )
+      await assertContinuationEndBoundaryBrowser(
+        page,
+        response,
+        `Print HTML ${label}/${versionType}`,
+      )
+      const starterFontSizePx = canonical.answerRegion.starterLines.length > 0
+        ? await response.locator('[data-canonical-starter-id]')
+          .first()
+          .evaluate(
+            (element) =>
+              Number.parseFloat(getComputedStyle(element).fontSize),
+          )
+        : null
       if (label === 'two-starter') {
+        observeCoverage(
+          `${versionType}_print_html`,
+          continuationCoverageOracle.requiredBundles[
+            `${versionType}_print_html`
+          ],
+        )
         const chromeLayout =
           await canonicalWritingChromeBrowserLayout(page)
         assert.deepEqual(
@@ -2696,6 +3446,12 @@ async function assertBrowserArtifacts() {
           preferCSSPageSize: true,
         })
         assert.equal(readFileSync(pdfPath).subarray(0, 4).toString(), '%PDF')
+        assert.equal(
+          execFileSync('pdfinfo', [pdfPath], { encoding: 'utf8' })
+            .includes('Page size:       594.96 x 841.92 pts (A4)'),
+          true,
+          `Print PDF ${label}/${versionType} is exact A4`,
+        )
         const pdfText = execFileSync(
           'pdftotext',
           ['-layout', pdfPath, '-'],
@@ -2717,6 +3473,29 @@ async function assertBrowserArtifacts() {
           `Print PDF ${label}/${versionType} suppresses the non-canonical visible title`,
         )
         if (label === 'two-starter') {
+          assertContinuationStarterPdfIndent({
+            pdfPath,
+            pageNumber: 1,
+            canonical,
+            starterFontSizePx,
+            label: `Print PDF ${label}/${versionType}`,
+          })
+          assertContinuationPdfMaterialWrap(
+            pdfPath,
+            canonical,
+            `Print PDF ${label}/${versionType}`,
+          )
+          assertContinuationPdfEndBoundary(
+            pdfPath,
+            1,
+            `Print PDF ${label}/${versionType}`,
+          )
+          if (versionType === 'student') {
+            observeCoverage(
+              'student_pdf',
+              continuationCoverageOracle.requiredBundles.student_pdf,
+            )
+          }
           assertCanonicalWritingChromePdfGeometry(
             pdfPath,
             canonical,
@@ -2754,6 +3533,7 @@ async function assertBrowserArtifacts() {
 }
 
 await assertBrowserArtifacts()
+assertExecutedCoverage()
 
 console.log(
   'paper canonical Continuation Writing rendered behavior verification passed',
