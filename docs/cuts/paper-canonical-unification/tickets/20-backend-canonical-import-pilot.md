@@ -893,3 +893,31 @@ Focused Standards and Spec re-review both report PASS with no remaining Must
 Fix. Re-rendered baseline and cross-page Student/Teacher PDFs pass visual
 inspection. Final `pnpm -C app run verify:all` reports 115 PASS / 1 declared
 off-repo SKIP / 0 FAIL, and `git diff --check` passes.
+
+Continuation Writing independent-review source-fidelity fix (2026-07-30):
+Manifest v29 publishes immutable Continuation capture/transcription v2,
+Continuation family v3, `continuation-writing-rhythm-v2`, Screen v29, and
+Print/PDF v30 without changing any Manifest v1-v28 or predecessor evidence
+byte. The successors bind exact v1 predecessor paths and SHA-256 digests and
+record Unicode NFC plus ASCII-whitespace collapse as their transformation
+lineage while preserving punctuation code points, punctuation-adjacent
+spacing, apostrophe code points, and word presence.
+
+The regression extracts the complete Continuation material directly from the
+original source PDF and compares the full normalized text independently
+against accepted evidence. It requires `ditch （沟）.`, rejects
+`ditch (沟) .`, and proves that the reviewed drift fails even if used as a
+successor oracle. Corrected text reaches real plain/lecture Screen,
+Student/Teacher Print HTML, and Student/Teacher exact-A4 PDF; the complete
+whole-paper PDFs are 8-page Student and 13-page Teacher A4 artifacts.
+
+`continuation-writing-rhythm-v2` preserves the already-PASS geometry and
+coverage graph: equal 4 em starter indentation, narrow-screen wrapping,
+normal-flow writable areas, cross-page movement, zero chrome indentation,
+Teacher analysis absence, and end-of-paper behavior. NCK1 v8, Zhejiang legacy
+v7, and Grammar Fill public-geometry-fixtures v8 advance only required current
+Plan compatibility. Application, Reading, Seven Choices, Cloze, Grammar Fill,
+and inactive Listening semantics remain unchanged. Focused source/public,
+publication, admission/recovery, default-producer, and actual-artifact checks
+pass. Final `pnpm -C app run verify:all` reports 115 PASS / 1 declared off-repo
+SKIP / 0 FAIL, and `git diff --check` passes.

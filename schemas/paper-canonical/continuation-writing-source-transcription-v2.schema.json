@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "continuation-writing-source-transcription-v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "paperId",
+    "sourceDocumentDigest",
+    "review",
+    "lineage",
+    "groupId",
+    "orderedBlocks",
+    "materialBlockRefs",
+    "starterProvision",
+    "answerRegionRef"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "continuation-writing-source-transcription-v2"
+    },
+    "paperId": {
+      "type": "string"
+    },
+    "sourceDocumentDigest": {
+      "type": "string"
+    },
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "method",
+        "status"
+      ],
+      "properties": {
+        "method": {
+          "const": "manual_source_transcription"
+        },
+        "status": {
+          "const": "accepted"
+        }
+      }
+    },
+    "lineage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "predecessor",
+        "sourceTextNormalization",
+        "preservedDistinctions"
+      ],
+      "properties": {
+        "kind": {
+          "const": "immutable_source_fidelity_successor"
+        },
+        "predecessor": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "schemaVersion",
+            "sha256"
+          ],
+          "properties": {
+            "schemaVersion": {
+              "const": "continuation-writing-source-transcription-v1"
+            },
+            "sha256": {
+              "type": "string"
+            }
+          }
+        },
+        "sourceTextNormalization": {
+          "const": "unicode_nfc_ascii_whitespace_collapse_v1"
+        },
+        "preservedDistinctions": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "punctuation_code_points",
+              "punctuation_adjacent_spacing",
+              "apostrophe_code_points",
+              "word_presence"
+            ]
+          },
+          "minItems": 4,
+          "maxItems": 4,
+          "uniqueItems": true
+        }
+      }
+    },
+    "groupId": {
+      "type": "string"
+    },
+    "orderedBlocks": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "materialBlockRefs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "starterProvision": {
+      "type": "object"
+    },
+    "answerRegionRef": {
+      "const": "writing.continuation-box"
+    }
+  }
+}

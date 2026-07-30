@@ -136,12 +136,12 @@ const continuationSlot = slotsForProfile(currentAuthority.profiles.get('nck1'))
   .find((slot) => slot.slotId === 'writing.continuation')
 const continuationGroup = twoStarter.compiled.artifacts.canonicalPaper.questionGroups
   .find((group) => group.variant.family === 'continuation-writing')
-assert.equal(continuationSlot.familyContractRef.version, '2')
+assert.equal(continuationSlot.familyContractRef.version, '3')
 assert.equal(continuationGroup.contractRef.familyContractVersion, continuationSlot.familyContractRef.version)
 {
   const mismatchedGroups = structuredClone(twoStarter.compiled.artifacts.canonicalPaper.questionGroups)
   const mismatchedGroup = mismatchedGroups.find((group) => group.variant.family === 'continuation-writing')
-  mismatchedGroup.contractRef.familyContractVersion = '1'
+  mismatchedGroup.contractRef.familyContractVersion = '2'
   const { sourceMap: _sourceMap, sourceFingerprint: _sourceFingerprint, semanticDigest: _semanticDigest, ...semantic } = mismatchedGroup
   mismatchedGroup.semanticDigest = digestJson(semantic)
   assert.throws(

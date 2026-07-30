@@ -1,8 +1,8 @@
 {
   "authority": {
     "manifestId": "paper-canonical",
-    "manifestVersion": "17",
-    "manifestDigest": "sha256:1ce065b53fdaf5b96c12126e5cb906da12c63a6d0b83463486f7df876a1ead96"
+    "manifestVersion": "29",
+    "manifestDigest": "sha256:b9e01b5aa887ee39a195049c0ce66ea4902ee6c3a583a0636e738718747098b0"
   },
   "evidence": {
     "documents": [
@@ -51,6 +51,18 @@
         "path": "07-reading-source-capture.json"
       },
       {
+        "inputKey": "grammar_fill_prompt_source_capture",
+        "roles": [
+          "structured_source",
+          "source_provenance"
+        ],
+        "declared": {
+          "mediaType": "application/vnd.eqb.grammar-fill-prompt-source-capture+json",
+          "originalName": "grammar-fill-prompt-source-capture.json"
+        },
+        "path": "18-grammar-fill-prompt-source-capture.json"
+      },
+      {
         "inputKey": "table_visual_proof",
         "roles": [
           "source_provenance"
@@ -71,7 +83,7 @@
           "mediaType": "application/vnd.eqb.application-writing-source-capture+json",
           "originalName": "application-writing-source-capture.json"
         },
-        "path": "10-application-writing-capture.json"
+        "path": "21-application-writing-capture-v3.json"
       },
       {
         "inputKey": "application_writing_transcription",
@@ -83,7 +95,7 @@
           "mediaType": "application/vnd.eqb.application-writing-source-transcription+json",
           "originalName": "application-writing-source-transcription.json"
         },
-        "path": "11-application-writing-transcription.json"
+        "path": "22-application-writing-transcription-v3.json"
       },
       {
         "inputKey": "continuation_writing_capture",
@@ -95,7 +107,7 @@
           "mediaType": "application/vnd.eqb.continuation-writing-source-capture+json",
           "originalName": "continuation-writing-source-capture.json"
         },
-        "path": "12-continuation-writing-capture.json"
+        "path": "23-continuation-writing-capture-v2.json"
       },
       {
         "inputKey": "continuation_writing_transcription",
@@ -107,7 +119,7 @@
           "mediaType": "application/vnd.eqb.continuation-writing-source-transcription+json",
           "originalName": "continuation-writing-source-transcription.json"
         },
-        "path": "13-continuation-writing-transcription.json"
+        "path": "24-continuation-writing-transcription-v2.json"
       },
       {
         "inputKey": "continuation_writing_instruction_evidence",

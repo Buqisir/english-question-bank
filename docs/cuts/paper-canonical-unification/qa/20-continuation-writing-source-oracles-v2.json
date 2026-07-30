@@ -1,0 +1,97 @@
+{
+  "schemaVersion": "continuation-writing-source-oracles-v2",
+  "paperId": "paper-2026-i",
+  "groupId": "group-2026-i-writing-continuation",
+  "sources": {
+    "originalQuestionPdf": {
+      "path": "test-fixtures/paper-import/paper-2026-i-canonical-pilot/canonical-evidence/02-original-question-source.pdf",
+      "sha256": "31a87069e6d530afba9123eec0487adf45e52e0b98530af80b62476f169e4d0f",
+      "page": 11
+    },
+    "paperAsset": {
+      "path": "test-fixtures/paper-import/paper-2026-i-canonical-pilot/canonical-evidence/04-paper_asset.json",
+      "sha256": "fe7feb2cc9554b00bbab96a7d4fe5e499513c564c28e6c314e0373e29b2ca7bf"
+    },
+    "officialAnswers": {
+      "path": "test-fixtures/paper-import/paper-2026-i-canonical-pilot/canonical-evidence/05-official_answers.json",
+      "sha256": "17502bb7685b83afc8847f3a44f8ac3c68defcb941ae75ba1ff14945c07daaf0"
+    },
+    "officialReferencePdf": {
+      "path": "test-fixtures/paper-import/paper-2026-i-canonical-pilot/canonical-evidence/06-source_answers_pdf.pdf",
+      "sha256": "2e4982f8d33e8a8787f270b7cf4fd3cd432fb9dce8d5732876fae149a1c78fc6"
+    },
+    "continuationCapture": {
+      "path": "test-fixtures/paper-import/paper-2026-i-canonical-pilot/canonical-evidence/23-continuation-writing-capture-v2.json",
+      "sha256": "3f73e4d9ad18fe7e121707f7ae1c17ebac88a315eb43780a474d35020bf3ca17",
+      "predecessorPath": "test-fixtures/paper-import/paper-2026-i-canonical-pilot/canonical-evidence/12-continuation-writing-capture.json",
+      "predecessorSha256": "93869d8ce85ecf365ee0226345ec6acfbc21e58074214f773e1203269990c6cd"
+    },
+    "continuationTranscription": {
+      "path": "test-fixtures/paper-import/paper-2026-i-canonical-pilot/canonical-evidence/24-continuation-writing-transcription-v2.json",
+      "sha256": "0f8f5fab47de87685da67086f673f485143aa665748c1ce14c3446d835f61149",
+      "predecessorPath": "test-fixtures/paper-import/paper-2026-i-canonical-pilot/canonical-evidence/13-continuation-writing-transcription.json",
+      "predecessorSha256": "5e76ee0f0b157cac6d619199a08fe5e7f819a16964eb56231701e8de7053c8a3"
+    }
+  },
+  "sourceTextVerification": {
+    "normalization": "unicode_nfc_ascii_whitespace_collapse_v1",
+    "preservedDistinctions": [
+      "punctuation_code_points",
+      "punctuation_adjacent_spacing",
+      "apostrophe_code_points",
+      "word_presence"
+    ],
+    "requiredVariant": "ditch （沟）.",
+    "rejectedVariant": "ditch (沟) ."
+  },
+  "chrome": {
+    "part": {
+      "instructionId": "part.writing",
+      "text": "第四部分 写作（共两节，满分40分）",
+      "renderOccurrence": "owned_by_preceding_application_occurrence"
+    },
+    "section": {
+      "instructionId": "section.writing.continuation",
+      "text": "第二节（满分25分）"
+    },
+    "instruction": {
+      "instructionId": "writing.continuation.prompt",
+      "text": "阅读下面材料，根据其内容和所给段落开头语续写两段话，使之构成一篇完整的短文。"
+    }
+  },
+  "materialBlockIds": [
+    "para-2026-i-writing-cont-title",
+    "para-2026-i-writing-cont-p1",
+    "para-2026-i-writing-cont-p2",
+    "para-2026-i-writing-cont-p3"
+  ],
+  "starters": [
+    {
+      "starterId": "starter:group-2026-i-writing-continuation:1",
+      "contentRef": "paragraph:group-2026-i-writing-continuation:starter:1",
+      "text": "Daniel and Rachel suggested that Emily continue her journey by train.",
+      "textSha256": "fa32344df1c1977d1ed61fc27bd27bdd7ff62f244175586f19da45133d891aa3"
+    },
+    {
+      "starterId": "starter:group-2026-i-writing-continuation:2",
+      "contentRef": "paragraph:group-2026-i-writing-continuation:starter:2",
+      "text": "Three days later, Emily returned to get her car.",
+      "textSha256": "06b63bd650297b986c60adc059426e814d2472a96b3b607eb985cf737a17f31b"
+    }
+  ],
+  "answerRegion": {
+    "answerRegionRef": "writing.continuation-box",
+    "responseSlotId": "writing.continuation",
+    "studentAuthoredArea": "two_half_height_regions_after_the_supplied_openings"
+  },
+  "teacherMaterial": {
+    "referenceAnswer": "source_proven_absent",
+    "analysis": "source_proven_absent",
+    "rubric": "source_proven_absent",
+    "evidence": "official answer JSON carries objective answers only and the supplied official reference PDF is listening material"
+  },
+  "followingBoundary": {
+    "kind": "end_of_paper",
+    "mustRemainAfterResponse": true
+  }
+}

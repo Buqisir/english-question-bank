@@ -1,0 +1,256 @@
+{
+  "schemaVersion": "continuation-writing-rhythm-v2",
+  "id": "continuation-writing-rhythm",
+  "version": "2",
+  "owner": "renderer_typography",
+  "paper": "a4",
+  "projectionContract": "canonical-projector-v1",
+  "rules": [
+    "typography_never_changes_canonical_text",
+    "visible_order_is_source_and_profile_owned",
+    "supplied_starters_are_source_owned",
+    "starter_first_line_indent_is_renderer_geometry",
+    "both_starters_share_one_indent_origin",
+    "student_writable_area_is_not_a_supplied_starter",
+    "normal_flow_preserves_starter_offsets_across_page_movement",
+    "teacher_material_requires_reviewed_source_authority",
+    "paper_end_remains_after_the_complete_response"
+  ],
+  "semanticRoleClasses": {
+    "previousFamilyBoundary": [
+      "application_response",
+      "application_teacher_tail"
+    ],
+    "chrome": [
+      "part_heading",
+      "section_heading",
+      "instruction"
+    ],
+    "material": [
+      "material_paragraph"
+    ],
+    "responseRegion": [
+      "response_box"
+    ],
+    "suppliedStarter": [
+      "starter_1",
+      "starter_2"
+    ],
+    "studentWritableArea": [
+      "writable_after_starter_1",
+      "writable_after_starter_2"
+    ],
+    "teacherTail": [
+      "reference_answer",
+      "analysis_line",
+      "rubric_line"
+    ],
+    "followingBoundary": [
+      "paper_end"
+    ]
+  },
+  "adjacencyGraph": [
+    {
+      "edgeId": "application_boundary_to_section",
+      "fromClass": "previousFamilyBoundary",
+      "toRole": "section_heading",
+      "pageRelation": "same_or_next_page",
+      "optionalCollapse": false
+    },
+    {
+      "edgeId": "section_to_instruction",
+      "fromRole": "section_heading",
+      "toRole": "instruction",
+      "baselineStepRatio": 1,
+      "optionalCollapse": false
+    },
+    {
+      "edgeId": "instruction_to_material",
+      "fromRole": "instruction",
+      "toRole": "material_paragraph",
+      "baselineStepRatio": 1,
+      "optionalCollapse": false
+    },
+    {
+      "edgeId": "material_paragraph_internal",
+      "fromRole": "material_paragraph",
+      "toRole": "material_paragraph",
+      "baselineStepRatio": 1,
+      "optionalCollapse": false
+    },
+    {
+      "edgeId": "material_wrapped_continuation",
+      "fromRole": "material_paragraph",
+      "toRole": "material_paragraph",
+      "pageRelation": "same_paragraph_wrapped_or_next_page_continuation",
+      "optionalCollapse": false
+    },
+    {
+      "edgeId": "material_to_response",
+      "fromRole": "material_paragraph",
+      "toRole": "response_box",
+      "baselineStepRatio": 1,
+      "optionalCollapse": false
+    },
+    {
+      "edgeId": "response_width",
+      "fromRole": "response_box",
+      "toRole": "response_box",
+      "horizontalRelation": "standards_owned_145mm",
+      "optionalCollapse": false
+    },
+    {
+      "edgeId": "response_height",
+      "fromRole": "response_box",
+      "toRole": "response_box",
+      "verticalRelation": "standards_owned_57mm",
+      "optionalCollapse": false
+    },
+    {
+      "edgeId": "response_normal_flow",
+      "fromRole": "response_box",
+      "toRole": "response_box",
+      "pageRelation": "normal_flow_not_application_atomicity",
+      "optionalCollapse": false
+    },
+    {
+      "edgeId": "response_move_next_page",
+      "fromRole": "response_box",
+      "toRole": "response_box",
+      "pageRelation": "next_page_preserve_starter_offsets",
+      "optionalCollapse": false
+    },
+    {
+      "edgeId": "response_to_starter_1",
+      "fromRole": "response_box",
+      "toRole": "starter_1",
+      "verticalRelation": "first_half_top_inset",
+      "optionalCollapse": false
+    },
+    {
+      "edgeId": "starter_1_first_line_indent",
+      "fromRole": "response_box",
+      "toRole": "starter_1",
+      "horizontalRelation": "four_local_em_from_border",
+      "optionalCollapse": false
+    },
+    {
+      "edgeId": "starter_1_to_writable_area",
+      "fromRole": "starter_1",
+      "toRole": "writable_after_starter_1",
+      "verticalRelation": "same_half_remaining_area",
+      "optionalCollapse": false
+    },
+    {
+      "edgeId": "writable_area_to_starter_2",
+      "fromRole": "writable_after_starter_1",
+      "toRole": "starter_2",
+      "verticalRelation": "second_half_start",
+      "optionalCollapse": false
+    },
+    {
+      "edgeId": "starter_2_first_line_indent",
+      "fromRole": "response_box",
+      "toRole": "starter_2",
+      "horizontalRelation": "four_local_em_from_border",
+      "optionalCollapse": false
+    },
+    {
+      "edgeId": "starter_2_to_writable_area",
+      "fromRole": "starter_2",
+      "toRole": "writable_after_starter_2",
+      "verticalRelation": "same_half_remaining_area",
+      "optionalCollapse": false
+    },
+    {
+      "edgeId": "starter_wrapped_hanging_origin",
+      "fromClass": "suppliedStarter",
+      "toClass": "suppliedStarter",
+      "horizontalRelation": "all_wrapped_lines_share_starter_text_origin",
+      "optionalCollapse": false
+    },
+    {
+      "edgeId": "teacher_tail_absence_collapse",
+      "fromRole": "response_box",
+      "toRole": "paper_end",
+      "extraBaselineStepRatio": 0,
+      "optionalCollapse": true
+    },
+    {
+      "edgeId": "response_to_paper_end",
+      "fromRole": "response_box",
+      "toRole": "paper_end",
+      "pageRelation": "same_or_next_page_after_complete_response",
+      "optionalCollapse": false
+    }
+  ],
+  "targets": {
+    "screen": {
+      "baselineStepPx": 24,
+      "oneStepTolerancePx": 1.5,
+      "starterIndentTolerancePx": 1.5
+    },
+    "printPdf": {
+      "baselineStepPt": 18,
+      "oneStepTolerancePt": 1.5,
+      "starterIndentTolerancePt": 1.5
+    }
+  },
+  "responseGeometry": {
+    "physicalAuthority": {
+      "path": "docs/product/exam-paper-format-standards.md",
+      "section": "8. 写作答题区"
+    },
+    "widthMm": 145,
+    "heightMm": 57,
+    "borderPt": 0.48,
+    "pagination": "normal_flow_preserve_starter_offsets",
+    "horizontalAlignment": "center",
+    "studentWritableArea": "remaining_area_after_each_supplied_starter"
+  },
+  "starterGeometry": {
+    "firstLineIndentEm": 4,
+    "firstLineIndentToleranceEm": 0.1,
+    "indentUsableWidthRatio": 0.102,
+    "indentUsableWidthRatioTolerance": 0.003,
+    "rowTopInsetEm": 1,
+    "secondRowStartRatio": 0.5,
+    "trailingInsetEm": 1,
+    "wrappedLineStrategy": "hanging_at_first_line_text_origin"
+  },
+  "rendererMapping": {
+    "screen": {
+      "pageBlockGapPx": 12,
+      "responseMarginTopPx": 14,
+      "responsePaddingTopBottomPx": 20,
+      "responsePaddingLeftRightPx": 24
+    },
+    "printPdf": {
+      "pageBlockGapPt": 9,
+      "responseMarginTopPt": 10.5,
+      "responsePaddingPt": 0
+    }
+  },
+  "goldenGeometryFramework": {
+    "id": "golden-geometry-framework-v1",
+    "path": "docs/cuts/paper-canonical-unification/qa/golden-geometry-framework-v1.md",
+    "sha256": "sha256:46fee75e0ddaa62989985c1e3dea5be11f8501324fd0a95b409b610716c0be88",
+    "axes": [
+      "vertical",
+      "horizontal"
+    ],
+    "familyValuesAreNotShared": true
+  },
+  "referenceMeasurement": {
+    "path": "docs/cuts/paper-canonical-unification/qa/20-continuation-writing-golden-geometry-reference-measurements-v1.json",
+    "sha256": "sha256:5ef504e9b294c617265bb1c01efd6c680c13a96181b34ffb66a1d0ceca0e11d2"
+  },
+  "publicArtifactOracle": {
+    "path": "docs/cuts/paper-canonical-unification/qa/20-continuation-writing-source-oracles-v2.json",
+    "sha256": "sha256:8edb2c8dcdb1857e20dc52fe72bc07913c5ad5f68b3001f7c0b81bdb0944e63a"
+  },
+  "observedCoverageOracle": {
+    "path": "docs/cuts/paper-canonical-unification/qa/20-continuation-writing-observed-coverage-oracle-v2.json",
+    "sha256": "sha256:bc11e665315c8c12cbcb12c1bd48c94b67f205461b0218e5329310533d667fda"
+  }
+}

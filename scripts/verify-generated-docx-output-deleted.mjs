@@ -34,7 +34,7 @@ assert.deepEqual(
   'supported canonical consumers must be exactly Screen and Print/PDF',
 )
 
-assert.equal(canonicalAuthorityRef.manifestVersion, '28')
+assert.equal(canonicalAuthorityRef.manifestVersion, '29')
 const currentAuthority = resolveCanonicalAuthority(canonicalAuthorityRef)
 assert.equal(currentAuthority.ok, true)
 
@@ -42,13 +42,13 @@ const humanAuthority = read('docs/product/exam-paper-format-standards.md')
 const currentHumanAuthority = humanAuthority.split('## v2 历史排版证据')[0]
 assert.match(
   currentHumanAuthority,
-  /standards\/paper-canonical\/manifest-v28\.json/,
-  'the unique human-readable authority index must bind current manifest v28',
+  /standards\/paper-canonical\/manifest-v29\.json/,
+  'the unique human-readable authority index must bind current manifest v29',
 )
 assert.match(
   currentHumanAuthority,
-  /Screen v28、Print\/PDF v29/,
-  'the human-readable current output matrix must name only Screen v28 and Print/PDF v29',
+  /Screen v29、Print\/PDF v30/,
+  'the human-readable current output matrix must name only Screen v29 and Print/PDF v30',
 )
 assert.doesNotMatch(
   currentHumanAuthority,
@@ -301,6 +301,22 @@ assert.match(
   manifestV28Migration,
   /4em[\s\S]*JPEG pixel ratios/i,
   'manifest v28 must record the dimensionless starter-indent authority',
+)
+const manifestV29Migration = read('standards/paper-canonical/manifest-v29-migration.md')
+assert.match(
+  manifestV29Migration,
+  /Manifest v29[\s\S]*Screen v29[\s\S]*Print\/PDF v30/i,
+  'manifest v29 must record the corrected Continuation source-fidelity closure',
+)
+assert.match(
+  manifestV29Migration,
+  /Manifest v1 through[\s\S]*Manifest v28[\s\S]*remain unchanged and[\s\S]*resolvable/i,
+  'manifest v29 migration must preserve every immutable predecessor closure',
+)
+assert.match(
+  manifestV29Migration,
+  /ditch （沟）\.[\s\S]*rejects `ditch \(沟\) \.`/i,
+  'manifest v29 must record the exact accepted and rejected punctuation variants',
 )
 assert.equal(
   Object.hasOwn(currentAuthority.closure.schemas, 'consumer-contract-v1'),

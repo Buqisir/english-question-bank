@@ -807,8 +807,16 @@ function appendContinuationWritingReferenceGroup({
     return
   }
   const closure = resolveCanonicalAuthority(canonicalAuthorityRef).closure
+  const continuationFamily = closure.families.get('continuation-writing')
+  const captureSchemaId = continuationFamily?.sourceEvidenceSchemaId
+  const transcriptionSchemaId =
+    continuationFamily?.sourceTranscriptionSchemaId
   const capture = continuationEntry.value
-  const schemaIssues = validateJsonSchema(capture, closure.schemas['continuation-writing-source-capture-v1'], '$.evidence.continuationWritingCapture')
+  const schemaIssues = validateJsonSchema(
+    capture,
+    closure.schemas[captureSchemaId],
+    '$.evidence.continuationWritingCapture',
+  )
   if (schemaIssues.length > 0) {
     diagnostics.push(...schemaIssues.map((item) => diagnostic('CONTINUATION_SOURCE_CAPTURE_INVALID', 'incomplete_source', item.path, item.message)))
     return
@@ -877,7 +885,7 @@ function appendContinuationWritingReferenceGroup({
   const transcription = transcriptionEntry?.value
   const transcriptionIssues = validateJsonSchema(
     transcription,
-    closure.schemas['continuation-writing-source-transcription-v1'],
+    closure.schemas[transcriptionSchemaId],
     '$.evidence.continuationWritingTranscription',
   )
   if (
@@ -890,6 +898,50 @@ function appendContinuationWritingReferenceGroup({
   ) {
     diagnostics.push(diagnostic('CONTINUATION_SOURCE_TRANSCRIPTION_INVALID', 'incomplete_source', '$.evidence.continuationWritingTranscription', 'Continuation Writing requires one reviewed transcription bound to the immutable source document and captured Group'))
     return
+  }
+  if (continuationFamily?.version === '3') {
+    const expectedPreservedDistinctions = [
+      'punctuation_code_points',
+      'punctuation_adjacent_spacing',
+      'apostrophe_code_points',
+      'word_presence',
+    ]
+    const validLineage = (lineage, predecessorSchemaVersion) => (
+      isRecordValue(lineage)
+      && exactKeys(lineage, [
+        'kind',
+        'predecessor',
+        'sourceTextNormalization',
+        'preservedDistinctions',
+      ])
+      && lineage.kind === 'immutable_source_fidelity_successor'
+      && lineage.sourceTextNormalization
+        === 'unicode_nfc_ascii_whitespace_collapse_v1'
+      && digestJson(lineage.preservedDistinctions)
+        === digestJson(expectedPreservedDistinctions)
+      && isRecordValue(lineage.predecessor)
+      && exactKeys(lineage.predecessor, ['schemaVersion', 'sha256'])
+      && lineage.predecessor.schemaVersion === predecessorSchemaVersion
+      && /^sha256:[a-f0-9]{64}$/.test(lineage.predecessor.sha256)
+    )
+    if (
+      !validLineage(
+        capture.lineage,
+        'continuation-writing-source-capture-v1',
+      )
+      || !validLineage(
+        transcription.lineage,
+        'continuation-writing-source-transcription-v1',
+      )
+    ) {
+      diagnostics.push(diagnostic(
+        'CONTINUATION_SOURCE_SUCCESSOR_LINEAGE_INVALID',
+        'incomplete_source',
+        '$.evidence.continuationWritingCapture.lineage',
+        'Continuation Writing v3 requires explicit immutable predecessor and punctuation-preserving source-text lineage',
+      ))
+      return
+    }
   }
   const capturedBlocks = (capture.group.content?.blocks || []).map((block) => ({
     blockId: block.nodeId,

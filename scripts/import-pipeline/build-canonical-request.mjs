@@ -33,7 +33,7 @@ const requestFileName =
   option('--request-file-name') || 'canonical-import-request.json'
 const write = process.argv.includes('--write')
 const applicationWritingEvidenceContract =
-  ['27', '28'].includes(canonicalAuthorityRef.manifestVersion)
+  ['27', '28', '29'].includes(canonicalAuthorityRef.manifestVersion)
     ? {
         captureSourceName: 'application-writing-source-capture-v3.json',
         transcriptionSourceName:
@@ -46,6 +46,23 @@ const applicationWritingEvidenceContract =
 if (!applicationWritingEvidenceContract) {
   throw new Error(
     'Canonical request producer has no Application Writing evidence contract '
+      + `for Manifest ${canonicalAuthorityRef.manifestVersion}`,
+  )
+}
+const continuationWritingEvidenceContract =
+  canonicalAuthorityRef.manifestVersion === '29'
+    ? {
+        captureSourceName: 'continuation-writing-source-capture-v2.json',
+        transcriptionSourceName:
+          'continuation-writing-source-transcription-v2.json',
+        captureOutputName: '23-continuation-writing-capture-v2.json',
+        transcriptionOutputName:
+          '24-continuation-writing-transcription-v2.json',
+      }
+    : null
+if (!continuationWritingEvidenceContract) {
+  throw new Error(
+    'Canonical request producer has no Continuation Writing evidence contract '
       + `for Manifest ${canonicalAuthorityRef.manifestVersion}`,
   )
 }
@@ -109,11 +126,11 @@ const requiredPaths = {
   ),
   continuationWritingCapture: path.join(
     absoluteReviewedEvidenceDir,
-    'continuation-writing-source-capture.json',
+    continuationWritingEvidenceContract.captureSourceName,
   ),
   continuationWritingTranscription: path.join(
     absoluteReviewedEvidenceDir,
-    'continuation-writing-source-transcription.json',
+    continuationWritingEvidenceContract.transcriptionSourceName,
   ),
   listeningQuestions: path.join(
     absoluteReviewedEvidenceDir,
@@ -211,10 +228,13 @@ const fileNames = new Map([
     'application_writing_transcription',
     applicationWritingEvidenceContract.transcriptionOutputName,
   ],
-  ['continuation_writing_capture', '12-continuation-writing-capture.json'],
+  [
+    'continuation_writing_capture',
+    continuationWritingEvidenceContract.captureOutputName,
+  ],
   [
     'continuation_writing_transcription',
-    '13-continuation-writing-transcription.json',
+    continuationWritingEvidenceContract.transcriptionOutputName,
   ],
   ['listening_questions', '14-listening-questions.json'],
   ['listening_answers', '15-listening-answers.json'],

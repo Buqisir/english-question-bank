@@ -4,7 +4,7 @@
 
 本文件是唯一的人类可读索引；当前 canonical 编译、校验、发布和受支持的
 Screen / Print-PDF consumer 只从
-[`standards/paper-canonical/manifest-v28.json`](../../standards/paper-canonical/manifest-v28.json)
+[`standards/paper-canonical/manifest-v29.json`](../../standards/paper-canonical/manifest-v29.json)
 解析一份 digest-closed 的权威闭包。这里不复制卷型题号、分值、题组
 cardinality、清洗条件或字体/物理排版数值，也不能被 caller 当作第二套配置。
 
@@ -18,9 +18,20 @@ Renderer Typography、其 schema 及纯验证入口。未知版本、缺件、di
 任何会改变 admission、canonical 语义、Profile、normalization 或 renderer
 结果的变更，必须新增 versioned artifact、schema/semantic conformance fixture、
 迁移说明和 manifest 升版；已经被 Publication 引用的 artifact 不可原位修改。
-`manifest-v1.json` 至 `manifest-v27.json` 保留各自原始 digest-closed closure，
-供既有 Publication 解析；当前 Screen v28、Print/PDF v29 consumer contracts
-只绑定 v28 authority。v28 新增 `continuation-writing-rhythm-v1`：它以原题
+`manifest-v1.json` 至 `manifest-v28.json` 保留各自原始 digest-closed closure，
+供既有 Publication 解析；当前 Screen v29、Print/PDF v30 consumer contracts
+只绑定 v29 authority。v29 以不可变 Continuation capture/transcription v2
+完整逐字核对原题 PDF 材料，在 Unicode NFC + ASCII 空白折叠后仍保留标点
+码位、标点相邻空格、撇号码位和词语有无，因而必须接受 `ditch （沟）.` 并
+拒绝 `ditch (沟) .`，而不是让输出反向证明 source oracle。
+`continuation-writing-rhythm-v2` 只重绑纠正后的 source/coverage oracle，保留
+v1 的两段段首 4 em、窄屏换行、normal-flow 作答区、跨页移动、chrome 零缩进、
+Teacher analysis 缺席和卷尾行为。NCK1 v8、Zhejiang legacy v7 与 Grammar
+Fill public-geometry-fixtures v8 只推进当前 Plan 身份兼容；Application、
+Reading、Seven Choices、Cloze、Grammar Fill 与 inactive Listening 语义不变。
+迁移说明见
+[`manifest-v29-migration.md`](../../standards/paper-canonical/manifest-v29-migration.md)。
+此前 v28 新增 `continuation-writing-rhythm-v1`：它以原题
 PDF、page-12 金样图、Paper Asset 与 reviewed evidence 约束
 Application→Continuation 边界、写作部分/小节/instruction、材料、两个给定
 段首、145 mm × 57 mm normal-flow 作答区及卷尾。两个给定段首统一使用

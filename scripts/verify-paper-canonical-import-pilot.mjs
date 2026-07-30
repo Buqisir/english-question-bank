@@ -513,18 +513,18 @@ function assertSevenChoicesReferenceEvidence() {
   )
   assert.equal(
     canonicalAuthorityRef.manifestVersion,
-    '28',
+    '29',
     'new Publications preserve Seven Choices inside the Continuation Writing successor authority',
   )
   assert.equal(
     consumerContractRefs.screen.version,
-    '28',
-    'Screen v28 binds the complete geometry authority closure',
+    '29',
+    'Screen v29 binds the complete geometry authority closure',
   )
   assert.equal(
     consumerContractRefs.print_pdf.version,
-    '29',
-    'Print/PDF v29 binds the complete geometry authority closure',
+    '30',
+    'Print/PDF v30 binds the complete geometry authority closure',
   )
   assert.equal(
     sha256(preservedBytes),
@@ -14693,11 +14693,19 @@ try {
         defaultDocumentPaths.application_writing_capture,
       applicationWritingTranscription:
         defaultDocumentPaths.application_writing_transcription,
+      continuationWritingCapture:
+        defaultDocumentPaths.continuation_writing_capture,
+      continuationWritingTranscription:
+        defaultDocumentPaths.continuation_writing_transcription,
     },
     {
       applicationWritingCapture: '21-application-writing-capture-v3.json',
       applicationWritingTranscription:
         '22-application-writing-transcription-v3.json',
+      continuationWritingCapture:
+        '23-continuation-writing-capture-v2.json',
+      continuationWritingTranscription:
+        '24-continuation-writing-transcription-v2.json',
     },
     'the documented default operator command selects the corrected successor Application evidence',
   )
@@ -14718,9 +14726,31 @@ try {
     ],
     'the documented default operator command publishes the exact source-PDF Application text',
   )
+  const defaultContinuationCapture = JSON.parse(
+    Buffer.from(defaultLoadedRequest.evidence.documents.find(
+      (document) => document.inputKey === 'continuation_writing_capture',
+    ).bytes),
+  )
+  const defaultContinuationMaterial =
+    defaultContinuationCapture.group.content.blocks
+      .filter((block) =>
+        defaultContinuationCapture.group.variant.materialBlockRefs
+          .includes(block.nodeId))
+      .map((block) => block.inlines.map((inline) => inline.text).join(''))
+      .join(' ')
+  assert.equal(
+    defaultContinuationMaterial.includes('ditch （沟）.'),
+    true,
+    'the documented default operator command selects the exact source-PDF Continuation punctuation',
+  )
+  assert.equal(
+    defaultContinuationMaterial.includes('ditch (沟) .'),
+    false,
+    'the documented default operator command rejects the reviewed Continuation punctuation drift',
+  )
   const requestPath = path.join(
     sourcePackageDir,
-    'canonical-evidence/canonical-import-request-v28.json',
+    'canonical-evidence/canonical-import-request-v29.json',
   )
   execFileSync(process.execPath, [
     path.join(

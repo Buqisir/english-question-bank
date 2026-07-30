@@ -1,0 +1,85 @@
+{
+  "schemaVersion": "continuation-writing-rhythm-v2-conformance",
+  "authority": {
+    "schemaVersion": "continuation-writing-rhythm-v2",
+    "id": "continuation-writing-rhythm",
+    "version": "2"
+  },
+  "expectedIssueCodes": [
+    "RENDERER_CONTINUATION_WRITING_RHYTHM_INVALID"
+  ],
+  "semanticAttacks": [
+    {
+      "caseId": "starter-indent-drift",
+      "path": [
+        "starterGeometry",
+        "firstLineIndentEm"
+      ],
+      "invalidValue": 2
+    },
+    {
+      "caseId": "second-row-origin-drift",
+      "path": [
+        "starterGeometry",
+        "secondRowStartRatio"
+      ],
+      "invalidValue": 0.6
+    },
+    {
+      "caseId": "response-width-drift",
+      "path": [
+        "responseGeometry",
+        "widthMm"
+      ],
+      "invalidValue": 144
+    },
+    {
+      "caseId": "response-height-drift",
+      "path": [
+        "responseGeometry",
+        "heightMm"
+      ],
+      "invalidValue": 65
+    },
+    {
+      "caseId": "application-atomicity-leak",
+      "path": [
+        "responseGeometry",
+        "pagination"
+      ],
+      "invalidValue": "unsplittable_move_whole_to_next_page"
+    },
+    {
+      "caseId": "golden-reference-digest-drift",
+      "path": [
+        "referenceMeasurement",
+        "sha256"
+      ],
+      "invalidValue": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    {
+      "caseId": "source-oracle-digest-drift",
+      "path": [
+        "publicArtifactOracle",
+        "sha256"
+      ],
+      "invalidValue": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+    },
+    {
+      "caseId": "coverage-oracle-digest-drift",
+      "path": [
+        "observedCoverageOracle",
+        "sha256"
+      ],
+      "invalidValue": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    },
+    {
+      "caseId": "duplicate-edge",
+      "operation": "duplicate-array-entry",
+      "path": [
+        "adjacencyGraph"
+      ],
+      "sourceIndex": 0
+    }
+  ]
+}

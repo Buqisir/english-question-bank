@@ -81,11 +81,11 @@ function buildPilotRequest(overrides = {}) {
     )),
     continuationWritingCaptureBytes: readFileSync(path.join(
       repositoryRoot,
-      'test-fixtures/paper-canonical/evidence/continuation-writing-paper-2026-i.json',
+      'test-fixtures/paper-canonical/evidence/continuation-writing-paper-2026-i-v2.json',
     )),
     continuationWritingTranscriptionBytes: readFileSync(path.join(
       repositoryRoot,
-      'test-fixtures/paper-canonical/evidence/continuation-writing-transcription-paper-2026-i.json',
+      'test-fixtures/paper-canonical/evidence/continuation-writing-transcription-paper-2026-i-v2.json',
     )),
     ...overrides,
   })

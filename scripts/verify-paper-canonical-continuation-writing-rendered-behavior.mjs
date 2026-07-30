@@ -120,6 +120,17 @@ function assertExecutedCoverage() {
   }
 }
 
+function assertCompleteContinuationMaterialSourceFidelity(
+  capturedMaterial,
+  sourcePdfMaterial,
+) {
+  assert.equal(
+    normalizeSourceMaterialText(capturedMaterial),
+    normalizeSourceMaterialText(sourcePdfMaterial),
+    'accepted Continuation capture preserves the complete original-PDF material text',
+  )
+}
+
 function sourceBoundContinuationText() {
   for (const source of Object.values(continuationSourceOracle.sources)) {
     assert.equal(
@@ -142,6 +153,39 @@ function sourceBoundContinuationText() {
     ),
     'utf8',
   ))
+  assert.equal(
+    `sha256:${sha256File(
+      continuationSourceOracle.sources.continuationCapture.predecessorPath,
+    )}`,
+    capture.lineage.predecessor.sha256,
+    'Continuation capture successor binds the exact immutable v1 predecessor',
+  )
+  assert.equal(
+    `sha256:${sha256File(
+      continuationSourceOracle.sources.continuationTranscription
+        .predecessorPath,
+    )}`,
+    transcription.lineage.predecessor.sha256,
+    'Continuation transcription successor binds the exact immutable v1 predecessor',
+  )
+  assert.equal(
+    capture.lineage.sourceTextNormalization,
+    continuationSourceOracle.sourceTextVerification.normalization,
+    'Continuation capture uses the independently declared source normalization',
+  )
+  assert.deepEqual(
+    capture.lineage.preservedDistinctions,
+    continuationSourceOracle.sourceTextVerification.preservedDistinctions,
+    'Continuation capture preserves every independently declared text distinction',
+  )
+  assert.deepEqual(
+    transcription.lineage,
+    {
+      ...capture.lineage,
+      predecessor: transcription.lineage.predecessor,
+    },
+    'capture and transcription successors use one exact transformation lineage',
+  )
   const blocks = new Map(capture.group.content.blocks.map(
     (block) => [
       block.nodeId,
@@ -177,15 +221,51 @@ function sourceBoundContinuationText() {
     { encoding: 'utf8' },
   )
   const compactPdfText = comparableRenderedText(pdfText)
-  for (const { nodeId, text } of materialBlocks) {
-    const comparableText = comparableRenderedText(text)
-    assert.equal(
-      compactPdfText.includes(comparableText.slice(0, 36))
-        && compactPdfText.includes(comparableText.slice(-36)),
-      true,
-      `original source PDF independently contains the accepted start/end anchors for material ${nodeId}`,
-    )
-  }
+  const normalizedPdfText = normalizeSourceMaterialText(pdfText)
+  const materialStart = normalizedPdfText.indexOf('Emily Sanders,')
+  const materialEndText = 'her entire holiday plan could be ruined.'
+  const materialEnd = normalizedPdfText.indexOf(materialEndText, materialStart)
+  assert.ok(
+    materialStart >= 0 && materialEnd >= materialStart,
+    'original source PDF exposes the complete Continuation material range',
+  )
+  const completePdfMaterial = normalizedPdfText.slice(
+    materialStart,
+    materialEnd + materialEndText.length,
+  )
+  const completeCapturedMaterial = normalizeSourceMaterialText(
+    materialBlocks.map(({ text }) => text).join(' '),
+  )
+  assertCompleteContinuationMaterialSourceFidelity(
+    completeCapturedMaterial,
+    completePdfMaterial,
+  )
+  const reviewedDriftMaterial = completeCapturedMaterial.replace(
+    continuationSourceOracle.sourceTextVerification.requiredVariant,
+    continuationSourceOracle.sourceTextVerification.rejectedVariant,
+  )
+  assert.throws(
+    () => assertCompleteContinuationMaterialSourceFidelity(
+      reviewedDriftMaterial,
+      completePdfMaterial,
+    ),
+    /complete original-PDF material text/,
+    'the independent complete-text oracle rejects the reviewed punctuation drift',
+  )
+  assert.equal(
+    completePdfMaterial.includes(
+      continuationSourceOracle.sourceTextVerification.requiredVariant,
+    ),
+    true,
+    'original source PDF preserves the reviewed full-width annotation punctuation',
+  )
+  assert.equal(
+    completePdfMaterial.includes(
+      continuationSourceOracle.sourceTextVerification.rejectedVariant,
+    ),
+    false,
+    'original source PDF rejects the reviewed punctuation-drift variant',
+  )
   for (const starter of starters) {
     assert.equal(
       compactPdfText.includes(comparableRenderedText(starter.text)),
@@ -394,7 +474,7 @@ function assertZhejiangWritingChromeAuthority() {
   const authority = resolveCanonicalAuthority(canonicalAuthorityRef)
   assert.equal(authority.ok, true)
   const profile = authority.closure.profiles.get('zhejiang-legacy')
-  assert.equal(profile.version, '6')
+  assert.equal(profile.version, '7')
   const writingPart = profile.parts.find((part) => part.partId === 'writing')
   assert.deepEqual(
     [
@@ -623,8 +703,8 @@ function assertSchemaDescriptorIdentityClosure() {
     'canonical-paper-publication-v9',
     'normalization-report-v10',
     'canonical-paper-publication-v10',
-    'normalization-report-v28',
-    'canonical-paper-publication-v28',
+    'normalization-report-v29',
+    'canonical-paper-publication-v29',
   ]) {
     assert.equal(authority.closure.schemas[schemaId].$id, schemaId)
   }
@@ -940,15 +1020,17 @@ async function loadIntegrityClosedWritingConsumptions(fixture) {
   ))
   const db = new DatabaseSync(path.join(rootDir, 'publication.sqlite'))
   try {
+    const publication = publishCanonicalPaperPublication({
+      rootDir,
+      db,
+      request: fixture.request,
+      sourceAssetVersion: 1,
+      sourceAsset: fixture.sourceAsset,
+    })
     assert.equal(
-      publishCanonicalPaperPublication({
-        rootDir,
-        db,
-        request: fixture.request,
-        sourceAssetVersion: 1,
-        sourceAsset: fixture.sourceAsset,
-      }).status,
+      publication.status,
       'published',
+      JSON.stringify(publication),
     )
     const store = createFileSystemCanonicalPublicationStore({ rootDir, db })
     const consumptions = {}
@@ -1097,6 +1179,13 @@ function comparableRenderedText(value) {
   return compactText(value)
     .replaceAll(/[‘’]/g, "'")
     .replaceAll(/[‐‑‒–—]/g, '-')
+}
+
+function normalizeSourceMaterialText(value) {
+  return String(value)
+    .normalize('NFC')
+    .replaceAll(/[\t\n\f\v ]+/g, ' ')
+    .trim()
 }
 
 function decodeXmlText(value) {
@@ -2003,6 +2092,19 @@ function assertVisibleCanonicalText(renderedText, canonical) {
         ({ starterId, contentRef, text }) => ({ starterId, contentRef, text }),
       ),
       'canonical starters are independently identical to the source-bound capture and PDF',
+    )
+    const normalizedVisibleText = normalizeSourceMaterialText(
+      visibleRenderedText(renderedText),
+    )
+    assert.equal(
+      normalizedVisibleText.includes('ditch （沟）.'),
+      true,
+      'public Continuation output preserves the exact source punctuation',
+    )
+    assert.equal(
+      normalizedVisibleText.includes('ditch (沟) .'),
+      false,
+      'public Continuation output rejects the reviewed punctuation-drift variant',
     )
   }
   for (const block of expectedMaterialBlocks) {

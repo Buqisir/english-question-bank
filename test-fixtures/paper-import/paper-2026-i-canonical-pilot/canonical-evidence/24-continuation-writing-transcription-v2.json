@@ -1,0 +1,64 @@
+{
+  "schemaVersion": "continuation-writing-source-transcription-v2",
+  "paperId": "paper-2026-i",
+  "sourceDocumentDigest": "sha256:31a87069e6d530afba9123eec0487adf45e52e0b98530af80b62476f169e4d0f",
+  "review": {
+    "method": "manual_source_transcription",
+    "status": "accepted"
+  },
+  "lineage": {
+    "kind": "immutable_source_fidelity_successor",
+    "predecessor": {
+      "schemaVersion": "continuation-writing-source-transcription-v1",
+      "sha256": "sha256:5e76ee0f0b157cac6d619199a08fe5e7f819a16964eb56231701e8de7053c8a3"
+    },
+    "sourceTextNormalization": "unicode_nfc_ascii_whitespace_collapse_v1",
+    "preservedDistinctions": [
+      "punctuation_code_points",
+      "punctuation_adjacent_spacing",
+      "apostrophe_code_points",
+      "word_presence"
+    ]
+  },
+  "groupId": "group-2026-i-writing-continuation",
+  "orderedBlocks": [
+    {
+      "blockId": "para-2026-i-writing-cont-title",
+      "textDigest": "sha256:9de0a02cea5a40fd083479dbc5e94c719353063688b50292e460e82d78a7d2e1"
+    },
+    {
+      "blockId": "para-2026-i-writing-cont-p1",
+      "textDigest": "sha256:33d417f85cf943bfb56f3769ac6369db3419617aaebcaa38dbd12337f80edadc"
+    },
+    {
+      "blockId": "para-2026-i-writing-cont-p2",
+      "textDigest": "sha256:2e4ff011686cbdf8b2bba82eff008b4fedaebc2f90d1b2b12e9e495351c323fa"
+    },
+    {
+      "blockId": "para-2026-i-writing-cont-p3",
+      "textDigest": "sha256:3da100df130cc94724dba6ccaab141e7a8c0f5503b8c398de7284315c5819362"
+    },
+    {
+      "blockId": "paragraph:group-2026-i-writing-continuation:starter:1",
+      "textDigest": "sha256:fa32344df1c1977d1ed61fc27bd27bdd7ff62f244175586f19da45133d891aa3"
+    },
+    {
+      "blockId": "paragraph:group-2026-i-writing-continuation:starter:2",
+      "textDigest": "sha256:06b63bd650297b986c60adc059426e814d2472a96b3b607eb985cf737a17f31b"
+    }
+  ],
+  "materialBlockRefs": [
+    "para-2026-i-writing-cont-title",
+    "para-2026-i-writing-cont-p1",
+    "para-2026-i-writing-cont-p2",
+    "para-2026-i-writing-cont-p3"
+  ],
+  "starterProvision": {
+    "kind": "ordered_source_starters",
+    "contentRefs": [
+      "paragraph:group-2026-i-writing-continuation:starter:1",
+      "paragraph:group-2026-i-writing-continuation:starter:2"
+    ]
+  },
+  "answerRegionRef": "writing.continuation-box"
+}
