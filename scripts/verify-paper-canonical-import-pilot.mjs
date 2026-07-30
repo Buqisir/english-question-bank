@@ -134,11 +134,11 @@ const applicationWritingReferencePath = path.join(
 )
 const applicationWritingSourceOraclePath = path.join(
   repositoryRoot,
-  'docs/cuts/paper-canonical-unification/qa/20-application-writing-source-oracles-v1.json',
+  'docs/cuts/paper-canonical-unification/qa/20-application-writing-source-oracles-v2.json',
 )
 const applicationWritingCoverageOraclePath = path.join(
   repositoryRoot,
-  'docs/cuts/paper-canonical-unification/qa/20-application-writing-observed-coverage-oracle-v1.json',
+  'docs/cuts/paper-canonical-unification/qa/20-application-writing-observed-coverage-oracle-v2.json',
 )
 const paperId = 'paper-2026-i'
 const provisionActualArtifacts = process.argv.includes('--actual-artifacts')
@@ -182,6 +182,14 @@ function assertApplicationWritingReferenceEvidence() {
     `sha256:${sha256(coverageOracleBytes)}`,
     'Application Writing authority binds the exact public observed-coverage oracle',
   )
+  assert.deepEqual(
+    coverageOracle.sourceOracle,
+    {
+      path: path.relative(repositoryRoot, applicationWritingSourceOraclePath),
+      sha256: sha256(sourceOracleBytes),
+    },
+    'Application Writing observed coverage binds the corrected successor source oracle',
+  )
   const referenceImage = path.join(repositoryRoot, reference.reference.path)
   assert.equal(
     sha256(readFileSync(referenceImage)),
@@ -199,6 +207,57 @@ function assertApplicationWritingReferenceEvidence() {
       `Application Writing source oracle binds ${source.path}`,
     )
   }
+  const originalQuestionPdfPath = path.join(
+    repositoryRoot,
+    sourceOracle.sources.originalQuestionPdf.path,
+  )
+  const rawSourcePageText = sourcePdfPageText(
+    originalQuestionPdfPath,
+    sourceOracle.sources.originalQuestionPdf.page,
+  )
+  const exactSourceTextClaims = [
+    '英文报“Opinion”栏目',
+    '未来大学生活中的学习（Study）',
+    '写作词数应为 80 左右',
+  ]
+  const forbiddenSourceTextDrift = [
+    '英文报”Opinion”栏目',
+    '未来大学生活的学习(Study)',
+    '写作词数应为80个左右',
+  ]
+  assert.deepEqual(
+    sourceOracle.sources.originalQuestionPdf.exactPageTextClaims,
+    exactSourceTextClaims,
+    'the successor source oracle records the independently reviewable PDF claims',
+  )
+  assert.deepEqual(
+    sourceOracle.sources.originalQuestionPdf.forbiddenPageTextDrift,
+    forbiddenSourceTextDrift,
+    'the successor source oracle records the rejected transcription drift',
+  )
+  for (const exactSourceText of exactSourceTextClaims) {
+    assert.equal(
+      rawSourcePageText.includes(exactSourceText),
+      true,
+      `original PDF page text independently contains ${exactSourceText}`,
+    )
+  }
+  for (const transcriptionDrift of forbiddenSourceTextDrift) {
+    assert.equal(
+      rawSourcePageText.includes(transcriptionDrift),
+      false,
+      `original PDF page text independently rejects ${transcriptionDrift}`,
+    )
+  }
+  assert.deepEqual(
+    sourceOracle.applicationWriting.promptBlocks.map((block) => block.text),
+    [
+      '你校英文报“Opinion”栏目正在征稿，请同学们对未来大学生活中的学习（Study）、社交（Socialize）、睡眠（Sleep）这三件事按重要性进行排序，并阐述理由。',
+      '请你写一篇短文向该栏目投稿。',
+      '注意：（1）写作词数应为 80 左右；（2）请按如下格式在答题卡的相应位置作答。',
+    ],
+    'reviewed Application evidence exactly transcribes the independently extracted source PDF page',
+  )
   assert.deepEqual(sourceOracle.applicationWriting.teacherTail, {
     referenceAnswer: 'absent_not_authorized',
     analysisOrRubric: 'absent_not_reviewed',
@@ -454,18 +513,18 @@ function assertSevenChoicesReferenceEvidence() {
   )
   assert.equal(
     canonicalAuthorityRef.manifestVersion,
-    '26',
-    'new Publications preserve Seven Choices inside the closed Application Writing successor authority',
+    '27',
+    'new Publications preserve Seven Choices inside the corrected Application Writing successor authority',
   )
   assert.equal(
     consumerContractRefs.screen.version,
-    '26',
-    'Screen v26 binds the complete geometry authority closure',
+    '27',
+    'Screen v27 binds the complete geometry authority closure',
   )
   assert.equal(
     consumerContractRefs.print_pdf.version,
-    '27',
-    'Print/PDF v27 binds the complete geometry authority closure',
+    '28',
+    'Print/PDF v28 binds the complete geometry authority closure',
   )
   assert.equal(
     sha256(preservedBytes),
@@ -10883,6 +10942,75 @@ async function assertApplicationWritingDomArtifact(
     0,
     `${label} collapses the source-unapproved Teacher tail without leakage`,
   )
+  const continuationResponse = continuationRoot.locator(
+    '[data-canonical-answer-region-ref="writing.continuation-box"]',
+  )
+  const continuationGeometry = await continuationResponse.evaluate((element) => {
+    const style = getComputedStyle(element)
+    return {
+      borderLeft: Number.parseFloat(style.borderLeftWidth),
+      paddingTop: Number.parseFloat(style.paddingTop),
+      paddingRight: Number.parseFloat(style.paddingRight),
+      paddingBottom: Number.parseFloat(style.paddingBottom),
+      paddingLeft: Number.parseFloat(style.paddingLeft),
+      breakInside: style.breakInside,
+      pageBreakInside: style.pageBreakInside,
+    }
+  })
+  const expectedContinuationGeometry = surface === 'screen'
+    ? {
+        borderLeft: 1,
+        paddingTop: 20,
+        paddingRight: 24,
+        paddingBottom: 20,
+        paddingLeft: 24,
+      }
+    : {
+        borderLeft: 1,
+        paddingTop: 0,
+        paddingRight: 0,
+        paddingBottom: 0,
+        paddingLeft: 0,
+      }
+  for (const [field, expected] of Object.entries(
+    expectedContinuationGeometry,
+  )) {
+    assert.equal(
+      Math.abs(continuationGeometry[field] - expected) <= 0.05,
+      true,
+      `${label} restores pre-Application-rhythm Continuation ${field}: ${JSON.stringify(continuationGeometry)}`,
+    )
+  }
+  assert.equal(
+    continuationGeometry.breakInside,
+    'auto',
+    `${label} does not apply Application response atomicity to Continuation`,
+  )
+  assert.equal(
+    continuationGeometry.pageBreakInside,
+    'auto',
+    `${label} does not apply Application page-break atomicity to Continuation`,
+  )
+  const applicationAtomicity = await response.evaluate((element) => {
+    const style = getComputedStyle(element)
+    return {
+      breakInside: style.breakInside,
+      pageBreakInside: style.pageBreakInside,
+    }
+  })
+  assert.deepEqual(
+    applicationAtomicity,
+    { breakInside: 'avoid', pageBreakInside: 'avoid' },
+    `${label} keeps atomic page movement on the Application response only`,
+  )
+  if (surface === 'printHtml') {
+    assert.equal(
+      await continuationRoot.locator('.canonical-continuation-chrome')
+        .evaluate((element) => getComputedStyle(element).breakInside),
+      'avoid',
+      `${label} keeps only the authorized Application-to-Continuation chrome boundary`,
+    )
+  }
   if (surface === 'screen') {
     const writingPageOrder = await page.locator('[data-pi-writing-page]')
       .evaluateAll((pages, ids) => {
@@ -14523,9 +14651,76 @@ try {
   assert.equal(validation.ok, true)
   const sourceDocument = validation.packageData.sourceDocx
   assert.equal(sourceDocument.kind, 'pdf')
+  const defaultRequestOutputDir = path.join(rootDir, 'default-request')
+  execFileSync(process.execPath, [
+    path.join(
+      repositoryRoot,
+      'scripts/import-pipeline/build-canonical-request.mjs',
+    ),
+    sourcePackageDir,
+    '--answers-pdf',
+    path.join(
+      sourcePackageDir,
+      'canonical-evidence/06-source_answers_pdf.pdf',
+    ),
+    '--instruction-evidence',
+    path.join(
+      sourcePackageDir,
+      'canonical-evidence/03-continuation_writing_instruction_evidence.json',
+    ),
+    '--reviewed-evidence-dir',
+    path.join(sourcePackageDir, 'reviewed-evidence'),
+    '--output-dir',
+    defaultRequestOutputDir,
+    '--write',
+  ], { stdio: 'pipe' })
+  const defaultRequestPath = path.join(
+    defaultRequestOutputDir,
+    'canonical-import-request.json',
+  )
+  const defaultRequestEnvelope = JSON.parse(
+    readFileSync(defaultRequestPath, 'utf8'),
+  )
+  const defaultDocumentPaths = Object.fromEntries(
+    defaultRequestEnvelope.evidence.documents.map((document) => [
+      document.inputKey,
+      document.path,
+    ]),
+  )
+  assert.deepEqual(
+    {
+      applicationWritingCapture:
+        defaultDocumentPaths.application_writing_capture,
+      applicationWritingTranscription:
+        defaultDocumentPaths.application_writing_transcription,
+    },
+    {
+      applicationWritingCapture: '21-application-writing-capture-v3.json',
+      applicationWritingTranscription:
+        '22-application-writing-transcription-v3.json',
+    },
+    'the documented default operator command selects the corrected successor Application evidence',
+  )
+  const defaultLoadedRequest = loadCanonicalImportRequest(defaultRequestPath)
+  const defaultApplicationCapture = JSON.parse(
+    Buffer.from(defaultLoadedRequest.evidence.documents.find(
+      (document) => document.inputKey === 'application_writing_capture',
+    ).bytes),
+  )
+  assert.deepEqual(
+    defaultApplicationCapture.group.content.blocks
+      .slice(0, 3)
+      .map((block) => block.inlines.map((inline) => inline.text).join('')),
+    [
+      '你校英文报“Opinion”栏目正在征稿，请同学们对未来大学生活中的学习（Study）、社交（Socialize）、睡眠（Sleep）这三件事按重要性进行排序，并阐述理由。',
+      '请你写一篇短文向该栏目投稿。',
+      '注意：（1）写作词数应为 80 左右；（2）请按如下格式在答题卡的相应位置作答。',
+    ],
+    'the documented default operator command publishes the exact source-PDF Application text',
+  )
   const requestPath = path.join(
     sourcePackageDir,
-    'canonical-evidence/canonical-import-request-v26.json',
+    'canonical-evidence/canonical-import-request-v27.json',
   )
   execFileSync(process.execPath, [
     path.join(

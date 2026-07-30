@@ -40,6 +40,9 @@ const writingPageTokenStyle: WritingPageStyle = {
   '--ps-line-height': paperSurfaceTokens.paperLineHeight,
   '--ps-page-margin-x': paperSurfaceTokens.pageMarginX,
   '--ps-page-margin-top': paperSurfaceTokens.pageMarginTop,
+}
+
+const applicationWritingPageStyle: WritingPageStyle = {
   '--application-writing-page-gap':
     `${applicationWritingRhythm.rendererMapping.screen.pageBlockGapPx}px`,
   '--application-writing-response-width':
@@ -120,7 +123,11 @@ export function WritingPaperPage({
         isApplicationWriting ? 'pi-writing-page--application' : '',
       ].filter(Boolean).join(' ')}
       data-pi-writing-page=""
-      style={writingPageTokenStyle}
+      style={
+        isApplicationWriting
+          ? { ...writingPageTokenStyle, ...applicationWritingPageStyle }
+          : writingPageTokenStyle
+      }
     >
       {pageModel.blocks.map((block, index) => {
         switch (block.kind) {

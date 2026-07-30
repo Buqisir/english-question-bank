@@ -2405,10 +2405,6 @@ body {
   break-after: avoid;
 }
 
-.writing-answer-box {
-  break-inside: avoid;
-}
-
 .answer {
   margin: 0.2em 0 0.2em 2em;
   font-size: 9.5pt;
@@ -2479,19 +2475,20 @@ ${grammarFillGeometryFixtureCss}
    relative 承载子行的 absolute 定位; 应用文框维持空框(无 starter 子元素时
    与刀前字节一致)。 */
 .writing-answer-box {
-  border: ${applicationWritingRhythm.responseGeometry.borderPt}pt solid #000;
+  border: 0.48pt solid #000;
   margin: 1em auto 0;
   position: relative;
-  break-inside: avoid;
-  page-break-inside: avoid;
 }
 
 .canonical-application-response {
+  border-width: ${applicationWritingRhythm.responseGeometry.borderPt}pt;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
   padding: ${applicationWritingRhythm.responseGeometry.paddingMm}mm;
   margin-top: ${applicationWritingRhythm.rendererMapping.printPdf.responseMarginTopPt}pt;
+  break-inside: avoid;
+  page-break-inside: avoid;
 }
 
 [data-canonical-writing-chrome-role] {

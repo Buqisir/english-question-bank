@@ -810,3 +810,30 @@ the frozen v4 variants and occurrence digests while advancing only the
 compatible Plan identity to Manifest v26. No Continuation implementation,
 inactive Listening, Ticket 21, Owner QA, production/R2, or generated-DOCX work
 was performed.
+
+Application Writing independent-review Must Fix closure (2026-07-30):
+Manifest v27 publishes `application-writing-rhythm-v2`, Screen v27, and
+Print/PDF v28 without changing any published v26 byte. Application border,
+padding, and atomic response movement now apply only to Application selectors;
+Continuation restores its prior Screen/Print border and padding, keeps normal
+response flow, and retains only the authorized section/prompt chrome boundary.
+
+Immutable Application capture/transcription v3 evidence corrects the original
+PDF page-10 text to `“Opinion”`, `未来大学生活中的学习（Study）`, and
+`写作词数应为 80 左右`. The verifier extracts page 10 directly with
+`pdftotext`, independently accepts those source claims, rejects the reviewed
+drift, and then checks the successor evidence and public output. The default
+documented producer command now selects v3 evidence through Manifest v27's
+explicit producer contract and emits canonical evidence 21/22; the request
+file name no longer selects evidence versions, and an unsupported authority
+fails closed.
+
+Grammar Fill public-geometry-fixtures v6 changes only its compatible Plan
+identity to Manifest v27; Reading, Seven Choices, Cloze, Grammar Fill geometry
+and projected-occurrence digests remain frozen. Focused public Screen,
+Student/Teacher Print HTML, exact-A4 PDF, source-text, default-runbook,
+admission, recovery, publication, and renderer regressions pass. Full
+`pnpm -C app run verify:all` reports 115 PASS / 1 declared off-repo SKIP /
+0 FAIL, and `git diff --check` passes. No non-blocking `.d.mts` cleanup,
+Continuation implementation, Listening work, Ticket 21, Owner QA, or
+successor feature was performed.

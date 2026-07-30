@@ -108,6 +108,13 @@ closure. Missing or conflicting evidence blocks compilation before any output
 is written; neither the producer nor package validator supplies an answer,
 reconstructs `[表: …]` marker text, or precloses Listening. Rerun the same
 command without `--write` to prove every output is byte-reproducible.
+The default file name is `canonical-import-request.json`; evidence selection is
+owned by the current authority's explicit producer contract, never inferred
+from that file name. Under Manifest v27, the command above must select
+`application-writing-source-capture-v3.json` and
+`application-writing-source-transcription-v3.json`, materialize them as
+`21-application-writing-capture-v3.json` and
+`22-application-writing-transcription-v3.json`, or fail closed before writing.
 
 Copy the current `canonicalAuthorityRef`; never copy an older request's
 authority block. Every `path` is non-empty, relative to the envelope, contains

@@ -4,7 +4,7 @@
 
 本文件是唯一的人类可读索引；当前 canonical 编译、校验、发布和受支持的
 Screen / Print-PDF consumer 只从
-[`standards/paper-canonical/manifest-v26.json`](../../standards/paper-canonical/manifest-v26.json)
+[`standards/paper-canonical/manifest-v27.json`](../../standards/paper-canonical/manifest-v27.json)
 解析一份 digest-closed 的权威闭包。这里不复制卷型题号、分值、题组
 cardinality、清洗条件或字体/物理排版数值，也不能被 caller 当作第二套配置。
 
@@ -18,9 +18,19 @@ Renderer Typography、其 schema 及纯验证入口。未知版本、缺件、di
 任何会改变 admission、canonical 语义、Profile、normalization 或 renderer
 结果的变更，必须新增 versioned artifact、schema/semantic conformance fixture、
 迁移说明和 manifest 升版；已经被 Publication 引用的 artifact 不可原位修改。
-`manifest-v1.json` 至 `manifest-v25.json` 保留各自原始 digest-closed closure，
-供既有 Publication 解析；当前 Screen v26、Print/PDF v27 consumer contracts
-只绑定 v26 authority。v26 新增 `application-writing-rhythm-v1`：它把
+`manifest-v1.json` 至 `manifest-v26.json` 保留各自原始 digest-closed closure，
+供既有 Publication 解析；当前 Screen v27、Print/PDF v28 consumer contracts
+只绑定 v27 authority。v27 以不可变 Application capture/transcription v3
+逐字纠正原题 PDF 第 10 页的 `“Opinion”`、`未来大学生活中的学习` 和
+`写作词数应为 80 左右`，并以 `application-writing-rhythm-v2` 将 border、
+padding 和原子作答区移动严格限制在 Application selector；Continuation
+恢复既有答题框几何，只保留小节标题与 prompt 的已授权 chrome 边界。默认
+runbook producer 按 Manifest v27 的显式契约选择 v3 evidence，不再由
+`--request-file-name` 暗示 evidence 版本。迁移说明见
+[`manifest-v27-migration.md`](../../standards/paper-canonical/manifest-v27-migration.md)。
+public-geometry-fixtures v6 不改变 Grammar Fill 的源文本、geometry 或
+projected-occurrence digest，只把 compatible Consumption Plan 推进到 v27。
+此前 v26 新增 `application-writing-rhythm-v1`：它把
 page-11 金样图仅作为局部 baseline/font proxy 和 em/usable-width ratio 的
 无量纲证据，不把 JPEG 像素换算成 CSS px、PDF pt 或整页 A4 比例；可见角色图
 由 2026-I 原题 PDF、Paper Asset、官方答案源和 Application Writing

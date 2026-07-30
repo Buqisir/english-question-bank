@@ -1,0 +1,121 @@
+{
+  "schemaVersion": "application-writing-source-oracles-v2",
+  "paperId": "paper-2026-i",
+  "sources": {
+    "originalQuestionPdf": {
+      "path": "test-fixtures/paper-import/paper-2026-i-canonical-pilot/canonical-evidence/02-original-question-source.pdf",
+      "sha256": "31a87069e6d530afba9123eec0487adf45e52e0b98530af80b62476f169e4d0f",
+      "page": 10,
+      "exactPageTextClaims": [
+        "英文报“Opinion”栏目",
+        "未来大学生活中的学习（Study）",
+        "写作词数应为 80 左右"
+      ],
+      "forbiddenPageTextDrift": [
+        "英文报”Opinion”栏目",
+        "未来大学生活的学习(Study)",
+        "写作词数应为80个左右"
+      ]
+    },
+    "paperAsset": {
+      "path": "test-fixtures/paper-import/paper-2026-i-canonical-pilot/canonical-evidence/04-paper_asset.json",
+      "sha256": "fe7feb2cc9554b00bbab96a7d4fe5e499513c564c28e6c314e0373e29b2ca7bf",
+      "sourceAssetVersion": 1
+    },
+    "officialAnswers": {
+      "path": "test-fixtures/paper-import/paper-2026-i-canonical-pilot/canonical-evidence/05-official_answers.json",
+      "sha256": "17502bb7685b83afc8847f3a44f8ac3c68defcb941ae75ba1ff14945c07daaf0",
+      "applicationWritingDisposition": "no_authorized_reference_answer"
+    },
+    "officialReferencePdf": {
+      "path": "test-fixtures/paper-import/paper-2026-i-canonical-pilot/canonical-evidence/06-source_answers_pdf.pdf",
+      "sha256": "2e4982f8d33e8a8787f270b7cf4fd3cd432fb9dce8d5732876fae149a1c78fc6",
+      "applicationWritingDisposition": "no_authorized_reference_answer"
+    },
+    "applicationCapture": {
+      "path": "test-fixtures/paper-import/paper-2026-i-canonical-pilot/canonical-evidence/21-application-writing-capture-v3.json",
+      "sha256": "463c94a1a4238617f4a9eb39d8a02125460de6ff79530803614ddb042de413a1"
+    },
+    "applicationTranscription": {
+      "path": "test-fixtures/paper-import/paper-2026-i-canonical-pilot/canonical-evidence/22-application-writing-transcription-v3.json",
+      "sha256": "178521b21056375b288c495acdb0214e43202d66b459ab823b14220c73b078a3"
+    }
+  },
+  "precedingGrammarFillBoundary": {
+    "groupId": "group-2026-i-grammar-fill",
+    "sectionText": "第二节(共10小题；每小题1.5分，满分15分)",
+    "promptText": "阅读下面短文，在空白处填入1个适当的单词或括号内单词的正确形式。"
+  },
+  "applicationWriting": {
+    "groupId": "group-2026-i-writing-application",
+    "writingTaskId": "wt-2026-i-application",
+    "slotId": "writing.application",
+    "chrome": [
+      {
+        "role": "part_heading",
+        "instructionId": "part.writing",
+        "text": "第四部分 写作（共两节，满分40分）"
+      },
+      {
+        "role": "section_heading",
+        "instructionId": "section.writing.application",
+        "text": "第一节（满分15分）"
+      }
+    ],
+    "promptParagraphCount": 2,
+    "promptBlocks": [
+      {
+        "blockId": "para-2026-i-writing-app-situation",
+        "role": "prompt_line",
+        "text": "你校英文报“Opinion”栏目正在征稿，请同学们对未来大学生活中的学习（Study）、社交（Socialize）、睡眠（Sleep）这三件事按重要性进行排序，并阐述理由。"
+      },
+      {
+        "blockId": "para-2026-i-writing-app-deliverable",
+        "role": "prompt_line",
+        "text": "请你写一篇短文向该栏目投稿。"
+      },
+      {
+        "blockId": "para-2026-i-writing-app-word-rule",
+        "role": "notice_line",
+        "text": "注意：（1）写作词数应为 80 左右；（2）请按如下格式在答题卡的相应位置作答。"
+      }
+    ],
+    "givenParts": [
+      {
+        "givenPartId": "given-part:group-2026-i-writing-application:title",
+        "blockId": "paragraph:group-2026-i-writing-application:given:title",
+        "role": "title",
+        "placement": "answer_region_top",
+        "text": "Ranking My College Life Essentials"
+      }
+    ],
+    "salutationOrAddressee": {
+      "presence": "absent"
+    },
+    "response": {
+      "answerRegionRef": "writing.application-box",
+      "responseSlotId": "writing.application"
+    },
+    "teacherTail": {
+      "referenceAnswer": "absent_not_authorized",
+      "analysisOrRubric": "absent_not_reviewed",
+      "requiredVisibleOccurrenceCount": 0
+    }
+  },
+  "followingContinuationWriting": {
+    "groupId": "group-2026-i-writing-continuation",
+    "sectionInstructionId": "section.writing.continuation",
+    "sectionText": "第二节（满分25分）",
+    "promptInstructionId": "writing.continuation.prompt",
+    "promptText": "阅读下面材料，根据其内容和所给段落开头语续写两段话，使之构成一篇完整的短文。"
+  },
+  "failClosedContradictions": [
+    "prompt_text_drift",
+    "prompt_block_order_drift",
+    "given_part_drift",
+    "response_binding_drift",
+    "invented_salutation_or_addressee",
+    "unauthorized_teacher_answer_or_analysis",
+    "following_continuation_identity_drift"
+  ]
+}

@@ -215,11 +215,13 @@ console.log('\nTest 6: Blank-marker styling (paperBlankPattern, real marker shap
   // 压住后文（撞字），.print-blank 必须显式归零缩进。
   const blankCssRule = html.match(/\.print-blank \{[^}]*\}/)?.[0] || ''
   assert('.print-blank rule resets text-indent to 0 (title-indent inheritance bug)', /text-indent:\s*0/.test(blankCssRule), blankCssRule.slice(0, 120))
-  // standard §3b 分页纪律(owner 2026-07-08):小题不拆、标题不落页尾、写作框不拆
+  // standard §3b 分页纪律(owner 2026-07-08):小题不拆、标题不落页尾。
+  // Application Writing Golden Geometry scopes atomic box movement to the
+  // canonical Application selector; Continuation keeps its historical flow.
   assert('§3b: .question is break-inside: avoid (单个小题不可拆)', html.match(/\.question \{[^}]*\}/g)?.some((r) => /break-inside:\s*avoid/.test(r)) === true, '')
   assert('§3b: section-header break-after: avoid (标题不落页尾)', /\.section-header,\s*\.group-meta,\s*\.group-header \{\s*break-after:\s*avoid/.test(html), '')
-  const boxBreakRule = html.match(/\.writing-answer-box \{\s*break-inside[^}]*\}/)?.[0] || (html.includes('.writing-answer-box {\n  break-inside: avoid;') ? 'ok' : '')
-  assert('§3b: writing-answer-box break-inside: avoid (写作框整框不拆)', html.match(/\.writing-answer-box \{[^}]*\}/g)?.some((r) => /break-inside:\s*avoid/.test(r)) === true, '')
+  assert('Continuation compatibility: shared writing-answer-box is not atomic', html.match(/\.writing-answer-box \{[^}]*\}/g)?.every((r) => !/break-inside:\s*avoid/.test(r) && !/page-break-inside:\s*avoid/.test(r)) === true, '')
+  assert('Application Writing: canonical response box moves atomically', html.match(/\.canonical-application-response \{[^}]*\}/g)?.some((r) => /break-inside:\s*avoid/.test(r) && /page-break-inside:\s*avoid/.test(r)) === true, '')
 
   // draft-numbering-style cr.md MF-1: the hard consistency assertion must be
   // proven to REJECT, not only to admit matched fixtures — otherwise deleting

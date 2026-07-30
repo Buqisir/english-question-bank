@@ -86,13 +86,11 @@
 
 /* Bordered answer box. Family modifiers below pin the physical dimensions. */
 .pi-writing-answer-box {
-  border: var(--application-writing-response-border, 0.48pt) solid #1a1a1a;
+  border: 1px solid #1a1a1a;
   min-height: 216px;
-  padding: var(--application-writing-response-padding, 3mm);
+  padding: 1.25rem 1.5rem;
   display: flex;
   flex-direction: column;
-  break-inside: avoid;
-  page-break-inside: avoid;
 }
 
 /* Default application given lines retain their established writing space. */
@@ -125,12 +123,16 @@
 }
 
 .pi-writing-answer-box--application {
+  border-width: var(--application-writing-response-border, 0.48pt);
   box-sizing: border-box;
   width: var(--application-writing-response-width, 144mm);
   height: var(--application-writing-response-height, 65mm);
   max-width: 100%;
   align-self: center;
+  padding: var(--application-writing-response-padding, 3mm);
   margin-top: var(--application-writing-response-margin-top, 12px);
+  break-inside: avoid;
+  page-break-inside: avoid;
 }
 
 .pi-writing-answer-box--continuation {

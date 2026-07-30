@@ -15,6 +15,9 @@ import {
 import {
   compileCanonicalPaper,
 } from '../../shared/paper-canonical/compiler.mjs'
+import {
+  canonicalAuthorityRef,
+} from '../../shared/paper-canonical/authority.mjs'
 
 function option(name) {
   const index = process.argv.indexOf(name)
@@ -29,11 +32,23 @@ const reviewedEvidenceDir = option('--reviewed-evidence-dir')
 const requestFileName =
   option('--request-file-name') || 'canonical-import-request.json'
 const write = process.argv.includes('--write')
-const requestVersion = Number(
-  requestFileName.match(/-v([1-9][0-9]*)\.json$/)?.[1] || 0,
-)
-const useApplicationWritingParagraphBoundaryEvidence =
-  requestVersion >= 26
+const applicationWritingEvidenceContract =
+  canonicalAuthorityRef.manifestVersion === '27'
+    ? {
+        captureSourceName: 'application-writing-source-capture-v3.json',
+        transcriptionSourceName:
+          'application-writing-source-transcription-v3.json',
+        captureOutputName: '21-application-writing-capture-v3.json',
+        transcriptionOutputName:
+          '22-application-writing-transcription-v3.json',
+      }
+    : null
+if (!applicationWritingEvidenceContract) {
+  throw new Error(
+    'Canonical request producer has no Application Writing evidence contract '
+      + `for Manifest ${canonicalAuthorityRef.manifestVersion}`,
+  )
+}
 
 if (
   !packageDir
@@ -86,15 +101,11 @@ const requiredPaths = {
   ),
   applicationWritingCapture: path.join(
     absoluteReviewedEvidenceDir,
-    useApplicationWritingParagraphBoundaryEvidence
-      ? 'application-writing-source-capture-v2.json'
-      : 'application-writing-source-capture.json',
+    applicationWritingEvidenceContract.captureSourceName,
   ),
   applicationWritingTranscription: path.join(
     absoluteReviewedEvidenceDir,
-    useApplicationWritingParagraphBoundaryEvidence
-      ? 'application-writing-source-transcription-v2.json'
-      : 'application-writing-source-transcription.json',
+    applicationWritingEvidenceContract.transcriptionSourceName,
   ),
   continuationWritingCapture: path.join(
     absoluteReviewedEvidenceDir,
@@ -194,15 +205,11 @@ const fileNames = new Map([
   ['source_provenance', '09-source-provenance.json'],
   [
     'application_writing_capture',
-    useApplicationWritingParagraphBoundaryEvidence
-      ? '19-application-writing-capture-v2.json'
-      : '10-application-writing-capture.json',
+    applicationWritingEvidenceContract.captureOutputName,
   ],
   [
     'application_writing_transcription',
-    useApplicationWritingParagraphBoundaryEvidence
-      ? '20-application-writing-transcription-v2.json'
-      : '11-application-writing-transcription.json',
+    applicationWritingEvidenceContract.transcriptionOutputName,
   ],
   ['continuation_writing_capture', '12-continuation-writing-capture.json'],
   [
