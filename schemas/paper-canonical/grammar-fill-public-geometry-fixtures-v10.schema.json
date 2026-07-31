@@ -1,0 +1,96 @@
+{
+  "$id": "grammar-fill-public-geometry-fixtures-v10",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "const": {
+    "compatibleConsumptionPlan": {
+      "authorityManifestId": "paper-canonical",
+      "authorityManifestVersion": "31",
+      "paperId": "paper-2026-i",
+      "sourceAssetVersion": 1,
+      "surfaceConsumerIds": {
+        "print_html": "print_pdf",
+        "print_pdf": "print_pdf",
+        "screen": "screen"
+      }
+    },
+    "constructionBoundary": "fixture_selected_before_public_producer_and_output_rendered_unchanged",
+    "horizontalUnit": "em",
+    "id": "grammar-fill-public-geometry-fixtures",
+    "owner": "renderer_typography",
+    "paper": "a4",
+    "schemaVersion": "grammar-fill-public-geometry-fixtures-v10",
+    "sourceOracle": {
+      "path": "docs/cuts/paper-canonical-unification/qa/20-grammar-fill-source-oracles-v3.json",
+      "sha256": "15ba1d55a0f06fd38cb1fce400163e5327366b355b467691222e7a7d4049f6a8"
+    },
+    "variants": {
+      "pdf-baseline": {
+        "groupId": "group-2026-i-grammar-fill",
+        "pageBreakBeforeQuestionId": "q-2026-i-055",
+        "paragraphWidths": [],
+        "projectedOccurrenceDigest": "sha256:530edf0a143cfe60fd774c3368c51f9948927c1b1d52af9c0a3407ba3a20147a",
+        "surface": "print_pdf"
+      },
+      "pdf-next-section-cross-page": {
+        "groupId": "group-2026-i-grammar-fill",
+        "pageBreakBeforeQuestionId": "q-2026-i-055",
+        "paragraphWidths": [],
+        "projectedOccurrenceDigest": "sha256:530edf0a143cfe60fd774c3368c51f9948927c1b1d52af9c0a3407ba3a20147a",
+        "surface": "print_pdf"
+      },
+      "pdf-passage-cross-page": {
+        "groupId": "group-2026-i-grammar-fill",
+        "pageBreakBeforeQuestionId": "q-2026-i-055",
+        "paragraphWidths": [
+          {
+            "paragraphId": "para-2026-i-grammar-fill-title",
+            "usableWidthEm": 40
+          },
+          {
+            "paragraphId": "para-2026-i-grammar-fill-p1",
+            "usableWidthEm": 40
+          },
+          {
+            "paragraphId": "para-2026-i-grammar-fill-p2",
+            "usableWidthEm": 17
+          }
+        ],
+        "projectedOccurrenceDigest": "sha256:577e7712cc0e7bc38c4402d41737cb9e289f72123c9df700150922620a7e1270",
+        "surface": "print_pdf"
+      },
+      "print-wrapped-line": {
+        "groupId": "group-2026-i-grammar-fill",
+        "pageBreakBeforeQuestionId": null,
+        "paragraphWidths": [
+          {
+            "paragraphId": "para-2026-i-grammar-fill-title",
+            "usableWidthEm": 40
+          },
+          {
+            "paragraphId": "para-2026-i-grammar-fill-p1",
+            "usableWidthEm": 40
+          }
+        ],
+        "projectedOccurrenceDigest": "sha256:8089dae2aa0b32c8f619af57ac1e97426f337b95d7604e0d49300d5f811abbf7",
+        "surface": "print_html"
+      },
+      "screen-wrapped-line": {
+        "groupId": "group-2026-i-grammar-fill",
+        "pageBreakBeforeQuestionId": null,
+        "paragraphWidths": [
+          {
+            "paragraphId": "para-2026-i-grammar-fill-title",
+            "usableWidthEm": 40
+          },
+          {
+            "paragraphId": "para-2026-i-grammar-fill-p1",
+            "usableWidthEm": 40
+          }
+        ],
+        "projectedOccurrenceDigest": "sha256:8089dae2aa0b32c8f619af57ac1e97426f337b95d7604e0d49300d5f811abbf7",
+        "surface": "screen"
+      }
+    },
+    "version": "10"
+  }
+}

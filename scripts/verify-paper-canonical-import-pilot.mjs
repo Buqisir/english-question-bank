@@ -110,7 +110,7 @@ const clozeSourceOraclePath = path.join(
 )
 const clozeCoverageOraclePath = path.join(
   repositoryRoot,
-  'docs/cuts/paper-canonical-unification/qa/20-cloze-observed-coverage-oracle-v2.json',
+  'docs/cuts/paper-canonical-unification/qa/20-cloze-observed-coverage-oracle-v3.json',
 )
 const grammarFillReferencePath = path.join(
   repositoryRoot,
@@ -140,6 +140,33 @@ const applicationWritingCoverageOraclePath = path.join(
   repositoryRoot,
   'docs/cuts/paper-canonical-unification/qa/20-application-writing-observed-coverage-oracle-v2.json',
 )
+const visibleStructureProfileOracle = JSON.parse(readFileSync(path.join(
+  repositoryRoot,
+  'docs/cuts/paper-canonical-unification/qa/20-visible-structure-profile-oracle-v1.json',
+), 'utf8'))
+const ownerGoldSectionHeadings =
+  visibleStructureProfileOracle.nodes.flatMap((node) =>
+    node.kind === 'instruction' && node.placement === 'section_heading'
+      ? [node.text]
+      : [])
+const ownerGoldGrammarFillSectionHeading =
+  visibleStructureProfileOracle.nodes.find(
+    (node) =>
+      node.kind === 'instruction'
+      && node.instructionId === 'section.language.grammar-fill',
+  ).text
+const ownerGoldSectionPairs = []
+let ownerGoldPartHeading = null
+for (const node of visibleStructureProfileOracle.nodes) {
+  if (node.kind !== 'instruction') continue
+  if (node.placement === 'part_heading') ownerGoldPartHeading = node.text
+  if (node.placement === 'section_heading') {
+    ownerGoldSectionPairs.push({
+      partHeading: ownerGoldPartHeading,
+      sectionHeading: node.text,
+    })
+  }
+}
 const paperId = 'paper-2026-i'
 const provisionActualArtifacts = process.argv.includes('--actual-artifacts')
 const keepQaServer = process.argv.includes('--qa-server')
@@ -513,18 +540,18 @@ function assertSevenChoicesReferenceEvidence() {
   )
   assert.equal(
     canonicalAuthorityRef.manifestVersion,
-    '30',
+    '31',
     'new Publications preserve Seven Choices inside the whole-paper typography successor authority',
   )
   assert.equal(
     consumerContractRefs.screen.version,
-    '30',
-    'Screen v30 binds the complete geometry authority closure',
+    '31',
+    'Screen v31 binds the complete geometry authority closure',
   )
   assert.equal(
     consumerContractRefs.print_pdf.version,
-    '31',
-    'Print/PDF v31 binds the complete geometry authority closure',
+    '32',
+    'Print/PDF v32 binds the complete geometry authority closure',
   )
   assert.equal(
     sha256(preservedBytes),
@@ -995,28 +1022,35 @@ function assertClozeCoverageOracle() {
   const successor = JSON.parse(bytes)
   assert.equal(
     successor.schemaVersion,
-    'cloze-observed-coverage-oracle-v2',
+    'cloze-observed-coverage-oracle-v3',
   )
-  const predecessorPath = path.join(
-    repositoryRoot,
-    successor.predecessor.path,
-  )
-  const predecessorBytes = readFileSync(predecessorPath)
-  assert.equal(
-    sha256(predecessorBytes),
-    successor.predecessor.sha256,
-    'Cloze coverage successor binds the immutable v1 predecessor bytes',
-  )
-  const oracle = JSON.parse(predecessorBytes)
-  oracle.schemaVersion = successor.schemaVersion
-  oracle.variantOracle.profiles = {
-    ...oracle.variantOracle.profiles,
-    ...successor.profileAdditions,
+  const materialize = (oraclePath) => {
+    const oracleBytes = readFileSync(oraclePath)
+    const document = JSON.parse(oracleBytes)
+    if (!document.predecessor) return document
+    const predecessorPath = path.join(
+      repositoryRoot,
+      document.predecessor.path,
+    )
+    const predecessorBytes = readFileSync(predecessorPath)
+    assert.equal(
+      sha256(predecessorBytes),
+      document.predecessor.sha256,
+      `${document.schemaVersion} binds its immutable predecessor bytes`,
+    )
+    const oracle = materialize(predecessorPath)
+    oracle.schemaVersion = document.schemaVersion
+    oracle.variantOracle.profiles = {
+      ...oracle.variantOracle.profiles,
+      ...document.profileAdditions,
+    }
+    oracle.variantOracle.profileByBundleVariant = {
+      ...oracle.variantOracle.profileByBundleVariant,
+      ...document.profileOverrides,
+    }
+    return oracle
   }
-  oracle.variantOracle.profileByBundleVariant = {
-    ...oracle.variantOracle.profileByBundleVariant,
-    ...successor.profileOverrides,
-  }
+  const oracle = materialize(clozeCoverageOraclePath)
   for (const binding of [
     oracle.authorityBoundary.sourceOracle,
     oracle.authorityBoundary.goldenReference,
@@ -3225,7 +3259,7 @@ async function assertScreenReadingVerticalRhythm(
       chromeGeometry.roles[index].bottom
         - chromeGeometry.roles[index - 1].bottom,
       1,
-      'chrome_internal',
+      `chrome_internal:${chromeGeometry.roles[index - 1].role}->${chromeGeometry.roles[index].role}`,
     )
   }
   assertStep(
@@ -3276,7 +3310,9 @@ async function assertScreenReadingVerticalRhythm(
   assert.equal(endGeometry.sectionRole, ending.nextSectionRole)
   assert.equal(
     normalizedVisibleText(endGeometry.sectionText),
-    normalizedVisibleText(ending.screenNextSectionVisibleText),
+    normalizedVisibleText(
+      '第二节 （共 5 小题；每小题 2.5 分，满分 12.5 分）',
+    ),
   )
   assertStep(endGeometry.step, 2, 'reading_to_next_section_same_page')
   return measurements
@@ -3926,10 +3962,10 @@ async function assertClozeDomGeometry(
     observation.chrome.map((entry) => normalizedVisibleText(entry.text)),
     [
       expected.oracle.publicVisibleChrome.part,
-      expected.oracle.publicVisibleChrome.section,
-      expected.oracle.publicVisibleChrome.instruction,
+      '第一节 （共 15 小题；每小题 1 分，满分 15 分）',
+      '阅读下面短文，从每题所给的A、B、C、D 四个选项中选出最佳选项。',
     ].map(normalizedVisibleText),
-    `${label} chrome text is source-bound rather than DOM-order authority`,
+    `${label} chrome text is Profile-bound rather than DOM-order authority`,
   )
   assert.deepEqual(
     observation.paragraphs.map((entry) => entry.id),
@@ -4140,7 +4176,7 @@ async function assertClozeDomGeometry(
       )
       && normalizedVisibleText(entry.text)
           === normalizedVisibleText(
-          expected.oracle.publicVisibleChrome.followingSection,
+          '第二节 （共 10 小题；每小题 1.5 分，满分 15 分）',
         )),
     true,
     `${label} binds the following Grammar Fill section identity and text`,
@@ -4566,8 +4602,8 @@ async function assertGrammarFillDomGeometry(
     observation.chrome.map((entry) => normalizedVisibleText(entry.text)),
     [
       expected.oracle.publicVisibleChrome.part,
-      expected.oracle.publicVisibleChrome.section,
-      expected.oracle.publicVisibleChrome.instruction,
+      '第二节 （共 10 小题；每小题 1.5 分，满分 15 分）',
+      '阅读下面短文，在空白处填入 1 个适当的单词或括号内单词的正确形式。',
     ].map(normalizedVisibleText),
   )
   assert.deepEqual(
@@ -6434,7 +6470,9 @@ async function assertPrintHtmlReadingVerticalRhythm(
   )
   assert.equal(
     normalizedVisibleText(observations.ending.sectionText),
-    normalizedVisibleText(ending.printPdfNextSectionVisibleText),
+    normalizedVisibleText(
+      '第二节 （共 5 小题；每小题 2.5 分，满分 12.5 分）',
+    ),
   )
   assertStep(
     observations.ending.step,
@@ -6611,6 +6649,71 @@ function pdfText(pdfPath) {
 
 function normalizedVisibleText(value) {
   return String(value || '').normalize('NFKC').replace(/\s+/g, ' ').trim()
+}
+
+async function assertOwnerGoldSectionHeadingsDom(page, label, surface) {
+  const selectors = surface === 'screen'
+    ? {
+        part: '.paper-browse-part-heading, .pi-writing-part',
+        section: '.paper-browse-section-heading, .pi-writing-section',
+      }
+    : {
+        part:
+          '.section-header--part, [data-canonical-writing-chrome-role="part_heading"]',
+        section:
+          '.section-header--section, [data-canonical-writing-chrome-role="section_heading"]',
+      }
+  const observation = await page.evaluate(({ selectors }) => {
+    const nodes = [...document.querySelectorAll(
+      `${selectors.part}, ${selectors.section}`,
+    )]
+    let partX = null
+    const sections = []
+    for (const node of nodes) {
+      if (node.matches(selectors.part)) {
+        partX = node.getBoundingClientRect().x
+        continue
+      }
+      const style = getComputedStyle(node)
+      sections.push({
+        text: node.textContent?.trim() || '',
+        x: node.getBoundingClientRect().x,
+        partX,
+        fontFamily: style.fontFamily,
+        fontSizePx: Number.parseFloat(style.fontSize),
+        lineHeightPx: Number.parseFloat(style.lineHeight),
+        marginLeftPx: Number.parseFloat(style.marginLeft),
+        paddingLeftPx: Number.parseFloat(style.paddingLeft),
+        textIndentPx: Number.parseFloat(style.textIndent),
+      })
+    }
+    return sections
+  }, { selectors })
+  assert.deepEqual(
+    observation.map((entry) => entry.text),
+    ownerGoldSectionHeadings,
+    `${label} exposes all six exact Owner-gold section headings once and in Profile order`,
+  )
+  for (const entry of observation) {
+    assert.match(
+      entry.fontFamily,
+      /SimSun|Songti SC|STSong/u,
+      `${label} keeps the complete section heading on one Chinese Song stack`,
+    )
+    assert.ok(
+      Math.abs(entry.fontSizePx - 14) <= 0.25
+      && Math.abs(entry.lineHeightPx - 24) <= 0.25,
+      `${label} keeps one 10.5pt/18pt section-heading baseline`,
+    )
+    assert.ok(
+      entry.partX !== null
+      && Math.abs(entry.x - entry.partX) <= 1
+      && Math.abs(entry.marginLeftPx) <= 0.1
+      && Math.abs(entry.paddingLeftPx) <= 0.1
+      && Math.abs(entry.textIndentPx) <= 0.1,
+      `${label} keeps section and part headings on the body-left edge`,
+    )
+  }
 }
 
 function sourceLexicalTokens(value) {
@@ -7460,10 +7563,39 @@ function assertPdfSevenChoicesRoleGraph(
   const chrome = sevenChoicesCoverageOracle.oracle.authorityBoundary
     .chromeAnchors.map((anchor) => {
       const wordIndex = locate(anchor.text, anchor.role, { tokenLimit: 5 })
+      const target = anchor.text
+        .normalize('NFKC')
+        .replace(/[^\p{L}\p{N}]/gu, '')
+      let observed = ''
+      let endWordIndex = wordIndex
+      while (
+        endWordIndex < words.length
+        && words[endWordIndex].page === words[wordIndex].page
+        && observed.length <= target.length
+      ) {
+        observed += words[endWordIndex].text
+          .normalize('NFKC')
+          .replace(/[^\p{L}\p{N}]/gu, '')
+        if (observed === target) break
+        if (!target.startsWith(observed)) break
+        endWordIndex += 1
+      }
+      assert.equal(
+        observed,
+        target,
+        `${label} closes the complete source-bound ${anchor.role} text`,
+      )
+      const anchorLines = pdfLinesForWordRange(
+        lines,
+        lineByWordIndex,
+        wordIndex,
+        endWordIndex + 1,
+      )
       return {
         ...anchor,
         wordIndex,
-        line: lineFor(wordIndex),
+        line: anchorLines[0],
+        lastLine: anchorLines.at(-1),
       }
     })
   let readingBoundaryLine = lineFor(readingTailIndex)
@@ -7616,12 +7748,17 @@ function assertPdfSevenChoicesRoleGraph(
       toText: chrome[index].text,
     })
   }
-  observe('chrome_to_passage', chrome.at(-1).line, paragraphs[0].lines[0], {
+  observe(
+    'chrome_to_passage',
+    chrome.at(-1).lastLine,
+    paragraphs[0].lines[0],
+    {
     fromIdentity: chrome.at(-1).identity,
     toIdentity: paragraphs[0].paragraphId,
     fromText: chrome.at(-1).text,
     toText: paragraphs[0].start,
-  })
+    },
+  )
 
   for (const paragraph of paragraphs) {
     assert.equal(
@@ -8200,6 +8337,10 @@ function uniquePdfLineForExactVisibleText(
   expectedText,
   label,
 ) {
+  const lineIdentity = (value) =>
+    String(value)
+      .normalize('NFKC')
+      .replace(/[^\p{L}\p{N}]/gu, '')
   assert.equal(
     countTextOccurrences(
       pdfText(pdfPath).replaceAll(/\s/g, ''),
@@ -8210,11 +8351,47 @@ function uniquePdfLineForExactVisibleText(
   )
   const matches = lines.filter(
     (line) =>
-      normalizedPdfToken(line.text.replaceAll(/\s/g, ''))
-      === normalizedPdfToken(expectedText.replaceAll(/\s/g, '')),
+      lineIdentity(line.text) === lineIdentity(expectedText),
   )
   assert.equal(matches.length, 1, `${label} resolves to one exact PDF line`)
   return matches[0]
+}
+
+function assertOwnerGoldSectionHeadingsPdf(pdfPath, label) {
+  const words = pdfWordsWithBoxes(pdfPath)
+  const lines = pdfRoleLines(words)
+  for (const { partHeading, sectionHeading } of ownerGoldSectionPairs) {
+    const partLine = uniquePdfLineForExactVisibleText(
+      lines,
+      pdfPath,
+      partHeading,
+      `${label} part heading for ${sectionHeading}`,
+    )
+    const sectionLine = uniquePdfLineForExactVisibleText(
+      lines,
+      pdfPath,
+      sectionHeading,
+      `${label} section heading ${sectionHeading}`,
+    )
+    const centers = sectionLine.wordIndexes.map((wordIndex) => {
+      const word = words[wordIndex]
+      return (word.yMin + word.yMax) / 2
+    })
+    assert.ok(
+      Math.abs(sectionLine.xMin - partLine.xMin) <= 1.5,
+      `${label} keeps ${sectionHeading} on its part body-left edge`,
+    )
+    assert.ok(
+      Math.max(...centers) - Math.min(...centers) <= 1.5,
+      `${label} keeps Chinese, digits, and decimal points on one baseline`,
+    )
+  }
+  const fonts = execFileSync('pdffonts', [pdfPath], { encoding: 'utf8' })
+  assert.match(
+    fonts,
+    /SimSun|Songti|STSong/u,
+    `${label} embeds one Chinese Song-family face`,
+  )
 }
 
 function exactPdfTokens(value) {
@@ -8358,11 +8535,11 @@ function assertPdfClozeGeometry(
     'Cloze part chrome',
   )
   const sectionIndex = markerIndex(
-    clozeSourceOracle.oracle.publicVisibleChrome.section,
+    '第一节 （共 15 小题；每小题 1 分，满分 15 分）',
     'Cloze section chrome',
   )
   const instructionIndex = markerIndex(
-    clozeSourceOracle.oracle.publicVisibleChrome.instruction,
+    '阅读下面短文，从每题所给的A、B、C、D 四个选项中选出最佳选项。',
     'Cloze instruction chrome',
   )
   const passageStartIndex = markerIndex(
@@ -8374,7 +8551,7 @@ function assertPdfClozeGeometry(
     'Cloze passage end',
   )
   const followingIndex = markerIndex(
-    clozeSourceOracle.oracle.publicVisibleChrome.followingSection,
+    '第二节 （共 10 小题；每小题 1.5 分，满分 15 分）',
     'Grammar Fill following section',
   )
   const followingWord = words[followingIndex]
@@ -9510,12 +9687,12 @@ function assertGrammarFillPdfArtifact(
     'source part context',
   )
   const sectionIndex = marker(
-    expected.oracle.publicVisibleChrome.section,
+    '第二节 （共 10 小题；每小题 1.5 分，满分 15 分）',
     'Grammar Fill subsection',
     partIndex,
   )
   const instructionIndex = marker(
-    expected.oracle.publicVisibleChrome.instruction,
+    '阅读下面短文，在空白处填入 1 个适当的单词或括号内单词的正确形式。',
     'Grammar Fill instruction',
     sectionIndex,
   )
@@ -10017,7 +10194,7 @@ function assertPdfReadingVerticalRhythm(
     questionAnchors.map((anchor) => [anchor.question.questionId, anchor]),
   )
   const expectedNextSectionText =
-    readingPdfRoleOracle.readingEnd.nextSectionVisibleText
+    '第二节 （共 5 小题；每小题 2.5 分，满分 12.5 分）'
   const nextSectionLine = uniquePdfLineForExactVisibleText(
     lines,
     pdfPath,
@@ -10422,7 +10599,7 @@ function assertPdfReadingContinuationAndEnd(pdfPath, consumption, label) {
     1,
     `${label} binds Reading D ending to its exact final option`,
   )
-  const sectionTokens = ending.printPdfNextSectionVisibleText
+  const sectionTokens = '第二节 （共 5 小题；每小题 2.5 分，满分 12.5 分）'
     .split(/\s+/)
     .map(normalizedPdfToken)
     .filter(Boolean)
@@ -12154,6 +12331,11 @@ async function renderSupportedArtifacts({
         0,
         'plain PaperSurface hides the lecture teaching panel',
       )
+      await assertOwnerGoldSectionHeadingsDom(
+        page,
+        'plain PaperSurface',
+        'screen',
+      )
       writeFileSync(path.join(outputDir, 'screen-plain.html'), plainHtml)
       await page.screenshot({
         path: path.join(outputDir, 'screen-plain.png'),
@@ -12182,6 +12364,11 @@ async function renderSupportedArtifacts({
         'lecture PaperSurface exposes the selected official answer',
       )
       const lectureHtml = await page.content()
+      await assertOwnerGoldSectionHeadingsDom(
+        page,
+        'lecture PaperSurface',
+        'screen',
+      )
       assertPassageLetterMarkup(
         lectureHtml,
         consumers.screen,
@@ -12533,11 +12720,11 @@ async function renderSupportedArtifacts({
         assert.notEqual(
           rejectedChromeResponse.status,
           200,
-          'Print producer fails closed before rendering digest-drifted immutable Cloze chrome',
+          'Print producer fails closed before rendering digest-drifted immutable canonical chrome',
         )
         assert.match(
           await rejectedChromeResponse.text(),
-          /Canonical Cloze chrome immutable source digest disagrees/,
+          /Canonical Grammar Fill chrome immutable source digest disagrees/,
         )
       } finally {
         writeFileSync(
@@ -12558,11 +12745,11 @@ async function renderSupportedArtifacts({
           },
           {
             type: 'section_header',
-            title: readingPdfRoleOracle.chrome.sectionTitleVisibleText,
+            title: '第一节 （共 15 小题；每小题 2.5 分，满分 37.5 分）',
           },
           {
             type: 'instruction',
-            text: readingPdfRoleOracle.chrome.instructionVisibleText,
+            text: '阅读下列短文，从每题所给的A、B、C、D 四个选项中选出最佳选项。',
           },
           ...readingPdfRoleOracle.readingGroups.map(({ groupId }) => ({
             type: 'question_group',
@@ -12571,7 +12758,7 @@ async function renderSupportedArtifacts({
           })),
           {
             type: 'section_header',
-            title: readingPdfRoleOracle.readingEnd.nextSectionVisibleText,
+            title: '第二节 （共 5 小题；每小题 2.5 分，满分 12.5 分）',
           },
         ],
         questionNumberStart: 3,
@@ -12637,6 +12824,11 @@ async function renderSupportedArtifacts({
         'Teacher Print HTML',
       )
       await page.setContent(printHtml.student, { waitUntil: 'load' })
+      await assertOwnerGoldSectionHeadingsDom(
+        page,
+        'Student Print HTML',
+        'print',
+      )
       applicationWritingCoverageLedger.student_print_html =
         await assertApplicationWritingDomArtifact(
           page,
@@ -12685,11 +12877,11 @@ async function renderSupportedArtifacts({
         },
         {
           type: 'section_header',
-          title: clozeSourceOracle.oracle.publicVisibleChrome.section,
+          title: '第一节 （共 15 小题；每小题 1 分，满分 15 分）',
         },
         {
           type: 'instruction',
-          text: clozeSourceOracle.oracle.publicVisibleChrome.instruction,
+          text: '阅读下面短文，从每题所给的A、B、C、D 四个选项中选出最佳选项。',
         },
         {
           type: 'question_group',
@@ -12699,7 +12891,11 @@ async function renderSupportedArtifacts({
         },
         {
           type: 'section_header',
-          title: clozeSourceOracle.oracle.publicVisibleChrome.followingSection,
+          title: '第二节 （共 10 小题；每小题 1.5 分，满分 15 分）',
+        },
+        {
+          type: 'instruction',
+          text: '阅读下面短文，在空白处填入 1 个适当的单词或括号内单词的正确形式。',
         },
         {
           type: 'question_group',
@@ -12725,11 +12921,11 @@ async function renderSupportedArtifacts({
         },
         {
           type: 'section_header',
-          title: grammarFillSourceOracle.oracle.publicVisibleChrome.section,
+          title: '第二节 （共 10 小题；每小题 1.5 分，满分 15 分）',
         },
         {
           type: 'instruction',
-          text: grammarFillSourceOracle.oracle.publicVisibleChrome.instruction,
+          text: '阅读下面短文，在空白处填入 1 个适当的单词或括号内单词的正确形式。',
         },
         {
           type: 'question_group',
@@ -13086,6 +13282,11 @@ async function renderSupportedArtifacts({
         proof: wrappedStudentPrintGrammarFillObservation,
       })
       await page.setContent(printHtml.teacher, { waitUntil: 'load' })
+      await assertOwnerGoldSectionHeadingsDom(
+        page,
+        'Teacher Print HTML',
+        'print',
+      )
       applicationWritingCoverageLedger.teacher_print_html =
         await assertApplicationWritingDomArtifact(
           page,
@@ -13797,6 +13998,7 @@ async function renderSupportedArtifacts({
         const label =
           `${versionType === 'student' ? 'Student' : 'Teacher'} Chromium PDF`
         assertPdfSemanticOrder(pdfPath, consumers.print_pdf, label)
+        assertOwnerGoldSectionHeadingsPdf(pdfPath, label)
         const pageBoxes = assertPdfA4AndUnclipped(pdfPath, label)
         assertRawPdfStandardFooters(pdfPath, pageBoxes.length, label)
         assertPdfReadingQuestionsNotSplit(
@@ -13971,8 +14173,7 @@ async function renderSupportedArtifacts({
               block.type === 'section_header'
               && normalizedVisibleText(block.title)
                 === normalizedVisibleText(
-                  clozeSourceOracle.oracle.publicVisibleChrome
-                    .followingSection,
+                  ownerGoldGrammarFillSectionHeading,
                 ),
           ),
         ),
@@ -13983,8 +14184,7 @@ async function renderSupportedArtifacts({
               block.type === 'section_header'
               && normalizedVisibleText(block.title)
                 === normalizedVisibleText(
-                  clozeSourceOracle.oracle.publicVisibleChrome
-                    .followingSection,
+                  ownerGoldGrammarFillSectionHeading,
                 ),
           ),
         ),
@@ -14996,7 +15196,7 @@ try {
   )
   const requestPath = path.join(
     sourcePackageDir,
-    'canonical-evidence/canonical-import-request-v30.json',
+    'canonical-evidence/canonical-import-request-v31.json',
   )
   execFileSync(process.execPath, [
     path.join(

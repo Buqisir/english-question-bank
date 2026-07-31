@@ -681,7 +681,6 @@ export function buildPrintHtml({
   normalizationDiagnostics = [],
   canonicalConsumption = null,
   sevenChoicesBankHeading = null,
-  clozeChrome = null,
   grammarFillChrome = null,
   grammarFillGeometryVariantId = null,
   grammarFillGeometrySurface = null,
@@ -920,7 +919,8 @@ export function buildPrintHtml({
       : -1
   const followingClozeSectionId =
     followingClozeSectionBlockIndex >= 0
-      ? clozeChrome?.followingSection?.sectionId
+      ? blocks[followingClozeSectionBlockIndex]?.sectionId
+        || blocks[followingClozeSectionBlockIndex]?.partId
         || `print-section-${followingClozeSectionBlockIndex}`
       : undefined
   const followingClozeGroupId =
@@ -1045,7 +1045,8 @@ export function buildPrintHtml({
       : -1
   const followingGrammarFillSectionId =
     followingGrammarFillSectionBlockIndex >= 0
-      ? grammarFillChrome?.followingSection?.sectionId
+      ? blocks[followingGrammarFillSectionBlockIndex]?.sectionId
+        || blocks[followingGrammarFillSectionBlockIndex]?.partId
         || `print-section-${followingGrammarFillSectionBlockIndex}`
       : undefined
   let firstGrammarFillPredecessorBlockIndex = -1
@@ -1072,12 +1073,6 @@ export function buildPrintHtml({
   const isGrammarFillChromeBlock = (blockIndex) =>
     blockIndex >= grammarFillChromeStartBlockIndex
     && blockIndex < firstGrammarFillGroupBlockIndex
-  const hasGrammarFillInstructionBlock =
-    firstGrammarFillGroupBlockIndex >= 0
-    && blocks.slice(
-      grammarFillChromeStartBlockIndex,
-      firstGrammarFillGroupBlockIndex,
-    ).some((block) => block.type === 'instruction')
   let firstReadingPredecessorBlockIndex = -1
   let readingChromeStartBlockIndex = firstReadingGroupBlockIndex
   if (firstReadingGroupBlockIndex >= 0) {
@@ -1216,44 +1211,12 @@ export function buildPrintHtml({
     for (const [blockIndex, block] of blocks.entries()) {
       if (block.type === 'section_header' && block.title) {
         if (canonicalWritingChromeBlockIndexes.has(blockIndex)) continue
-        if (
-          clozeChrome
-          && blockIndex === firstClozePredecessorBlockIndex
-          && clozeChrome.groupId === canonicalClozeGroupIds[0]
-        ) {
-          const previousFamilyGroupId =
-            canonicalSevenChoicesGroupIds.at(-1) || ''
-          sections.push(
-            `<h2 class="section-header section-header--part" id="${escapeHtml(clozeChrome.part.partId)}" data-canonical-seven-choices-rhythm-role="next_section" data-canonical-seven-choices-section-id="${escapeHtml(clozeChrome.part.partId)}" data-canonical-seven-choices-following-for="${escapeHtml(previousFamilyGroupId)}" data-canonical-cloze-rhythm-role="part_title" data-canonical-cloze-chrome="" data-canonical-cloze-preceding-for="${escapeHtml(clozeChrome.groupId)}" data-canonical-cloze-previous-family-group-id="${escapeHtml(previousFamilyGroupId)}" data-canonical-grammar-fill-rhythm-role="part_context">${escapeHtml(clozeChrome.part.text)}</h2>`,
-          )
-          sections.push(
-            `<h2 class="section-header section-header--section" id="${escapeHtml(clozeChrome.section.sectionId)}" data-canonical-cloze-rhythm-role="subsection" data-canonical-cloze-chrome="">${escapeHtml(clozeChrome.section.text)}</h2>`,
-          )
-          sections.push(
-            `<p class="reading-meta-instruction" data-canonical-cloze-rhythm-role="meta_instruction" data-canonical-cloze-chrome="">${escapeHtml(clozeChrome.instruction.text)}</p>`,
-          )
-          continue
-        }
-        // heading-fidelity cut (Locked Decision 1/2): 部/节判定单源 —
-        // 部标题(第X部分…)黑体加粗顶格, 节标题(第X节…)宋体常规缩进 2 字符.
-        // 层级靠字重与缩进区分, 两态共用 10.5pt (标准 §2/§4 一律不放大字号).
-        const visibleTitle =
-          blockIndex === followingGrammarFillSectionBlockIndex
-            && grammarFillChrome?.followingSection?.text
-            ? grammarFillChrome.followingSection.text
-            : blockIndex === followingClozeSectionBlockIndex
-              && clozeChrome?.followingSection?.text
-              ? clozeChrome.followingSection.text
-              : block.title
+        // Profile v10 owns every visible heading string. Renderers only add
+        // medium-specific geometry and rhythm metadata.
+        const visibleTitle = block.title
         const kind = headingKind(visibleTitle)
         const headingId =
-          blockIndex === followingGrammarFillSectionBlockIndex
-            && grammarFillChrome?.followingSection?.sectionId
-            ? grammarFillChrome.followingSection.sectionId
-            : blockIndex === followingClozeSectionBlockIndex
-              && clozeChrome?.followingSection?.sectionId
-              ? clozeChrome.followingSection.sectionId
-              : `print-section-${blockIndex}`
+          block.sectionId || block.partId || `print-section-${blockIndex}`
         const rhythmRole =
           blockIndex === followingReadingSectionBlockIndex
             ? 'next_section'
@@ -1337,16 +1300,6 @@ export function buildPrintHtml({
             ? ` data-canonical-grammar-fill-section-id="${escapeHtml(followingGrammarFillSectionId)}" data-canonical-grammar-fill-following-for="${escapeHtml(canonicalGrammarFillGroupIds.at(-1))}"`
             : ''
         sections.push(`<h2 class="section-header section-header--${kind}" id="${escapeHtml(headingId)}"${rhythmRoleAttr}${readingPredecessorAttrs}${readingFollowingAttrs}${sevenChoicesRhythmAttrs}${sevenChoicesPredecessorAttrs}${sevenChoicesBoundaryAttrs}${sevenChoicesFollowingAttrs}${clozeRhythmAttrs}${clozePredecessorAttrs}${clozeFollowingAttrs}${grammarFillRhythmAttrs}${grammarFillPartContextAttrs}${grammarFillPredecessorAttrs}${grammarFillFollowingAttrs}>${escapeHtml(visibleTitle)}</h2>`)
-        if (
-          grammarFillChrome
-          && grammarFillChrome.groupId === canonicalGrammarFillGroupIds[0]
-          && blockIndex === firstGrammarFillPredecessorBlockIndex
-          && !hasGrammarFillInstructionBlock
-        ) {
-          sections.push(
-            `<p class="reading-meta-instruction" data-canonical-grammar-fill-rhythm-role="meta_instruction" data-canonical-grammar-fill-chrome="">${escapeHtml(grammarFillChrome.instruction.text)}</p>`,
-          )
-        }
       } else if (
         block.type === 'instruction'
         && block.text
@@ -1955,8 +1908,8 @@ body {
   font-family: ${paperSurfaceTokens.paperFontStackZh};
   font-weight: normal;
   text-indent: 0;
-  /* 标准 §4: 节标题缩进 2 字符 (10.5pt 下 1 字符 ≈ 10.5pt → 21pt). */
-  padding-left: 21pt;
+  padding-left: 0;
+  white-space: nowrap;
 }
 
 .section-header[data-canonical-seven-choices-chrome] {
@@ -2333,6 +2286,7 @@ body {
 .reading-meta-instruction {
   margin: -7.03125pt 0 6.75pt;
   line-height: ${paperSurfaceTokens.paperLineHeight};
+  text-indent: 2em;
 }
 
 .reading-meta-instruction[data-canonical-seven-choices-rhythm-role="meta_instruction"] {
@@ -2559,14 +2513,16 @@ ${grammarFillGeometryFixtureCss}
 }
 
 [data-canonical-writing-chrome-role="section_heading"] {
-  margin: 0 0 9pt 2em;
-  font-family: ${paperSurfaceTokens.paperFontStack};
+  margin: 0 0 9pt;
+  font-family: ${paperSurfaceTokens.paperFontStackZh};
   font-weight: 400;
+  white-space: nowrap;
 }
 
 [data-canonical-writing-chrome-role="instruction"] {
   margin: 0 0 9pt;
   white-space: pre-line;
+  text-indent: 2em;
 }
 
 .canonical-continuation-response {

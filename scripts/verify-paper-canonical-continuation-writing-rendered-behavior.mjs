@@ -61,8 +61,8 @@ if (persistActualArtifacts) {
 }
 const nck1WritingChrome = Object.freeze({
   part: '第四部分 写作（共两节，满分40分）',
-  application: '第一节（满分15分）',
-  continuation: '第二节（满分25分）',
+  application: '第一节 （满分 15 分）',
+  continuation: '第二节 （满分 25 分）',
   continuationInstruction:
     '阅读下面材料，根据其内容和所给段落开头语续写两段话，使之构成一篇完整的短文。',
 })
@@ -704,8 +704,8 @@ function assertSchemaDescriptorIdentityClosure() {
     'canonical-paper-publication-v9',
     'normalization-report-v10',
     'canonical-paper-publication-v10',
-    'normalization-report-v30',
-    'canonical-paper-publication-v30',
+    'normalization-report-v31',
+    'canonical-paper-publication-v31',
   ]) {
     assert.equal(authority.closure.schemas[schemaId].$id, schemaId)
   }
@@ -1439,6 +1439,7 @@ async function assertContinuationStarterIndent(
     )].map((node) => ({
       role: node.getAttribute('data-canonical-writing-chrome-role'),
       textIndentPx: Number.parseFloat(getComputedStyle(node).textIndent),
+      fontSizePx: Number.parseFloat(getComputedStyle(node).fontSize),
     }))
     return { boxX: box.x, starters, chrome }
   })
@@ -1464,9 +1465,12 @@ async function assertContinuationStarterIndent(
     `${label} keeps both supplied paragraph openings on one indent origin`,
   )
   assert.equal(
-    observed.chrome.every(({ textIndentPx }) => textIndentPx === 0),
+    observed.chrome.every(({ role, textIndentPx, fontSizePx }) =>
+      role === 'instruction'
+        ? Math.abs(textIndentPx - 2 * fontSizePx) <= 1.5
+        : textIndentPx === 0),
     true,
-    `${label} does not indent part/section/instruction chrome`,
+    `${label} keeps headings flush-left and group instruction at 2em`,
   )
 }
 
@@ -2103,7 +2107,7 @@ function assertCanonicalWritingChromePdfGeometry(pdfPath, canonical, label) {
     canonical.paperChrome.section.text,
   )
   assert.ok(
-    Math.abs((section.xMin - part.xMin) - 21) <= 1,
+    Math.abs(section.xMin - part.xMin) <= 1,
     `${label} section heading keeps the canonical 2em/21pt indent`,
   )
   assert.ok(
@@ -3222,7 +3226,7 @@ async function assertBrowserArtifacts() {
         if (label === 'two-starter') {
           const chromeLayout =
             await canonicalWritingChromeBrowserLayout(page)
-          assert.equal(chromeLayout.sectionIndentPt, 21)
+          assert.equal(chromeLayout.sectionIndentPt, 0)
           assert.equal(chromeLayout.partToSectionTopPt, 27)
           assert.equal(chromeLayout.roles[0].fontSizePt, 10.5)
           assert.ok(chromeLayout.roles[0].fontWeight >= 700)

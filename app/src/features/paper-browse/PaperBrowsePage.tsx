@@ -392,6 +392,7 @@ function cssAttr(value: string): string {
 type PaperBrowseContentStyle = CSSProperties & Record<`--${string}`, string | number>
 const paperBrowseContentStyle: PaperBrowseContentStyle = {
   '--ps-font-stack': paperSurfaceTokens.paperFontStack,
+  '--ps-font-stack-zh': paperSurfaceTokens.paperFontStackZh,
   '--ps-font-stack-heading': paperSurfaceTokens.paperFontStackHeading,
   '--ps-font-size': paperSurfaceTokens.paperFontSizePx,
   '--ps-line-height': paperSurfaceTokens.paperLineHeight,

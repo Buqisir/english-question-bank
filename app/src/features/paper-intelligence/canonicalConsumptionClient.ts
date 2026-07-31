@@ -13,6 +13,12 @@ export type WholePaperConsumption = {
     manifestVersion: string
     manifestDigest: string
   }
+  profileRef?: {
+    profileId: string
+    profileVersion: string
+    profileDigest: string
+  }
+  visibleStructureDigest?: string
   consumerContractRef?: {
     id: string
     version: string
@@ -74,6 +80,13 @@ export async function loadScreenConsumption(
     || (
       Number(consumption.authorityRef?.manifestVersion) >= 30
       && !Array.isArray(consumption.visibleStructure)
+    )
+    || (
+      Number(consumption.authorityRef?.manifestVersion) >= 31
+      && (
+        !consumption.profileRef
+        || typeof consumption.visibleStructureDigest !== 'string'
+      )
     )
   ) throw new Error('Canonical consumption response is incomplete')
   if (

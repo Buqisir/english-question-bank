@@ -1,0 +1,79 @@
+{
+  "schemaVersion": "normalization-rules-v5",
+  "id": "normalization-rules",
+  "version": "5",
+  "owner": "normalization",
+  "rules": [
+    {
+      "ruleId": "direct-projection",
+      "version": "2",
+      "certainty": "exact",
+      "allowedOperations": [
+        "direct_projection",
+        "structural_tokenization",
+        "exact_join",
+        "anchor_identity"
+      ],
+      "operationProofs": {
+        "direct_projection": {
+          "kind": "source_identity",
+          "observationArity": 1
+        },
+        "structural_tokenization": {
+          "kind": "source_identity",
+          "observationArity": 1
+        },
+        "exact_join": {
+          "kind": "unique_observation_join",
+          "observationArity": 2
+        },
+        "anchor_identity": {
+          "kind": "source_identity",
+          "observationArity": 1
+        }
+      }
+    },
+    {
+      "ruleId": "guarded-representation-normalization",
+      "version": "2",
+      "certainty": "exact",
+      "allowedOperations": [
+        "representation_normalization"
+      ],
+      "operationProofs": {
+        "representation_normalization": {
+          "kind": "source_identity",
+          "observationArity": 1
+        }
+      }
+    },
+    {
+      "ruleId": "source-exact-transcription",
+      "version": "1",
+      "certainty": "exact",
+      "allowedOperations": [
+        "profile_instruction_correction"
+      ],
+      "operationProofs": {
+        "profile_instruction_correction": {
+          "kind": "profile_instruction_correction",
+          "observationArity": 1
+        }
+      }
+    },
+    {
+      "ruleId": "canonical-visible-typography",
+      "version": "2",
+      "certainty": "exact",
+      "allowedOperations": [
+        "canonical_visible_typography"
+      ],
+      "operationProofs": {
+        "canonical_visible_typography": {
+          "kind": "registered_exact_typography",
+          "observationArity": 1
+        }
+      }
+    }
+  ]
+}

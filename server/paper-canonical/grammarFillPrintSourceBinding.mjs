@@ -364,19 +364,6 @@ export function loadCanonicalGrammarFillPrintChrome({
   return {
     groupId,
     previousFamilyGroupId: previousGroup.groupId,
-    partContext: {
-      partId: partContext.partId,
-      text: partContext.text,
-    },
-    section: {
-      sectionId: section.sectionId,
-      text: section.text,
-    },
-    instruction: { text: instruction.text },
-    followingSection: {
-      sectionId: followingPart.partId,
-      text: followingPart.text,
-    },
     ...(sourceBinding ? { sourceBinding } : {}),
   }
 }

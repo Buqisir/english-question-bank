@@ -41,7 +41,7 @@ console.log('draft-student-field verify: additive student_label column + round-t
 // --- source backstop: the print/export path must never read student_label ---
 const storeSrc = readFileSync(path.join(rootDir, 'server/draft-paper/draftPaperStore.mjs'), 'utf8')
 const exportInputStart = storeSrc.indexOf('function buildDraftPaperExportInput(')
-const exportInputEnd = storeSrc.indexOf('\n  function loadCanonicalClozeChrome(', exportInputStart)
+const exportInputEnd = storeSrc.indexOf('\n  function ', exportInputStart + 1)
 const blocksStart = storeSrc.indexOf('function buildDraftPaperBlocks(')
 const blocksEnd = storeSrc.indexOf('\n  function buildDraftPaperExportInput(', blocksStart)
 assert('buildDraftPaperExportInput found in draftPaperStore.mjs', exportInputStart !== -1 && exportInputEnd > exportInputStart)

@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import assert from 'node:assert/strict'
+import { createHash } from 'node:crypto'
 import { readFileSync } from 'node:fs'
 import path from 'node:path'
 
@@ -24,6 +25,9 @@ import {
 import {
   canonicalizeVisibleEnglishTypography,
 } from '../shared/paper-canonical/visibleTypography.mjs'
+import {
+  replayCanonicalVisibleTypography,
+} from '../shared/paper-canonical/visibleTypographyReplay.mjs'
 import { buildPrintHtml } from '../server/print-renderer.mjs'
 import { digestJson } from '../shared/paper-canonical/stable.mjs'
 import {
@@ -39,6 +43,20 @@ const packageDir = path.join(
   'test-fixtures/paper-import/paper-2026-i-canonical-pilot',
 )
 const paperId = 'paper-2026-i'
+const visibleStructureOracle = JSON.parse(readFileSync(path.join(
+  repositoryRoot,
+  'docs/cuts/paper-canonical-unification/qa/20-visible-structure-profile-oracle-v1.json',
+), 'utf8'))
+const visibleTypographyOracle = JSON.parse(readFileSync(path.join(
+  repositoryRoot,
+  'docs/cuts/paper-canonical-unification/qa/20-visible-typography-source-oracle-v1.json',
+), 'utf8'))
+
+function sha256File(relativePath) {
+  return `sha256:${createHash('sha256')
+    .update(readFileSync(path.join(repositoryRoot, relativePath)))
+    .digest('hex')}`
+}
 
 function bytes(fileName) {
   return readFileSync(path.join(packageDir, fileName))
@@ -240,6 +258,40 @@ const projectedChrome = projectedPilot.nodes.filter(
     || node.kind === 'section'
     || node.kind === 'instruction',
 )
+const projectedVisibleStructure = projectedPilot.nodes.flatMap((node) => {
+  if (
+    node.kind === 'part'
+    || node.kind === 'section'
+    || node.kind === 'instruction'
+  ) return [node]
+  if (node.kind === 'group') {
+    return [{
+      kind: node.kind,
+      slotId: node.slotId,
+      groupId: node.groupId,
+      familyContractId: node.familyContractId,
+    }]
+  }
+  return []
+})
+assert.equal(
+  digestJson(JSON.parse(readFileSync(path.join(
+    repositoryRoot,
+    visibleStructureOracle.sourceProfile.path,
+  ), 'utf8'))),
+  visibleStructureOracle.sourceProfile.sha256,
+  'the independent visible-structure oracle binds immutable Profile v10',
+)
+assert.deepEqual(
+  projectedVisibleStructure,
+  visibleStructureOracle.nodes,
+  'the public projector matches the independently checked exact Profile node list',
+)
+assert.equal(
+  digestJson(projectedVisibleStructure),
+  visibleStructureOracle.visibleStructureDigest,
+  'the public projector matches the independent Profile node digest',
+)
 assert.equal(
   projectedChrome.some((node) =>
     node.partId === 'listening'
@@ -273,14 +325,14 @@ assert.deepEqual(
       kind: 'instruction',
       instructionId: 'section.reading-choice',
       placement: 'section_heading',
-      text: '第一节（共15小题；每小题2.5分，满分37.5分）',
+      text: '第一节 （共 15 小题；每小题 2.5 分，满分 37.5 分）',
       renderPolicy: 'render',
     },
     {
       kind: 'instruction',
       instructionId: 'reading.choice.prompt',
       placement: 'group_instruction',
-      text: '阅读下列短文，从每题所给的A、B、C、D四个选项中选出最佳选项。',
+      text: '阅读下列短文，从每题所给的A、B、C、D 四个选项中选出最佳选项。',
       renderPolicy: 'render',
     },
     {
@@ -295,7 +347,7 @@ const sevenChoicesChrome = projectedChrome.slice(6, 8)
 assert.deepEqual(
   sevenChoicesChrome.map((node) => node.text).filter(Boolean),
   [
-    '第二节（共5小题；每小题2.5分，满分12.5分）',
+    '第二节 （共 5 小题；每小题 2.5 分，满分 12.5 分）',
     '阅读下面短文，从短文后的选项中选出可以填入空白处的最佳选项。选项中有两项为多余选项。',
   ],
   'Seven Choices keeps its complete section title and visible instruction',
@@ -325,6 +377,37 @@ assert.equal(
   'you’re',
   'the registered exact rule covers English contractions without broad punctuation normalization',
 )
+assert.equal(
+  canonicalizeVisibleEnglishTypography('这是（中文）说明。'),
+  '这是（中文）说明。',
+  'ordinary Chinese prose keeps full-width parentheses byte-for-visible-text',
+)
+assert.equal(
+  canonicalizeVisibleEnglishTypography('ditch （沟）.'),
+  'ditch (沟).',
+  'an English-token-adjacent Chinese gloss uses canonical half-width parentheses',
+)
+for (const binding of visibleTypographyOracle.immutableSourceBindings) {
+  assert.equal(
+    sha256File(binding.path),
+    binding.sha256,
+    `the independent typography oracle binds immutable source ${binding.path}`,
+  )
+}
+for (const oracleCase of visibleTypographyOracle.cases) {
+  assert.equal(digestJson(oracleCase.before), oracleCase.beforeDigest)
+  assert.equal(digestJson(oracleCase.after), oracleCase.afterDigest)
+  assert.equal(
+    canonicalizeVisibleEnglishTypography(oracleCase.before),
+    oracleCase.after,
+    `the producer matches the fixed ${oracleCase.caseId} expectation`,
+  )
+  assert.equal(
+    replayCanonicalVisibleTypography(oracleCase.before),
+    oracleCase.after,
+    `the independent scanner matches the fixed ${oracleCase.caseId} expectation`,
+  )
+}
 assert.equal(
   readyPilot.artifacts.normalizationReport.transformationRecords.some(
     (record) =>
@@ -439,22 +522,9 @@ const browseGroupIds = browseAsset.content.blocks.flatMap((block) =>
 const browseConsumption = {
   disposition: 'ready',
   paperId,
-  visibleStructure: projectedPilot.nodes.flatMap((node) => {
-    if (
-      node.kind === 'part'
-      || node.kind === 'section'
-      || node.kind === 'instruction'
-    ) return [node]
-    if (node.kind === 'group') {
-      return [{
-        kind: node.kind,
-        slotId: node.slotId,
-        groupId: node.groupId,
-        familyContractId: node.familyContractId,
-      }]
-    }
-    return []
-  }),
+  authorityRef: canonicalAuthorityRef,
+  profileRef: readyPilot.artifacts.canonicalPaper.paperPlan.profileRef,
+  visibleStructure: projectedVisibleStructure,
   selections: [
     ...projectedPilot.nodes
       .filter((node) => node.kind === 'group')
@@ -478,6 +548,9 @@ const browseConsumption = {
       }, []),
   ],
 }
+browseConsumption.visibleStructureDigest = digestJson(
+  browseConsumption.visibleStructure,
+)
 assert.deepEqual(
   browseConsumption.selections.flatMap((selection) => selection.groupIds),
   browseGroupIds,
@@ -497,9 +570,9 @@ assert.deepEqual(
     .map((block) => block.text),
   [
     '第二部分 阅读（共两节，满分50分）',
-    '第一节（共15小题；每小题2.5分，满分37.5分）',
-    '阅读下列短文，从每题所给的A、B、C、D四个选项中选出最佳选项。',
-    '第二节（共5小题；每小题2.5分，满分12.5分）',
+    '第一节 （共 15 小题；每小题 2.5 分，满分 37.5 分）',
+    '阅读下列短文，从每题所给的A、B、C、D 四个选项中选出最佳选项。',
+    '第二节 （共 5 小题；每小题 2.5 分，满分 12.5 分）',
   ],
   'PaperBrowse consumes public canonical chrome instead of source-layout accidents',
 )
@@ -527,10 +600,71 @@ swappedGroupVisibleNodeConsumption.visibleStructure[readingAIndex] =
   swappedGroupVisibleNodeConsumption.visibleStructure[readingBIndex]
 swappedGroupVisibleNodeConsumption.visibleStructure[readingBIndex] =
   readingAGroupNode
+const missingSevenHeadingConsumption = structuredClone(browseConsumption)
+const sevenSectionIndex =
+  missingSevenHeadingConsumption.visibleStructure.findIndex(
+    (node) =>
+      node.kind === 'section'
+      && node.sectionId === 'reading.seven-choices',
+  )
+missingSevenHeadingConsumption.visibleStructure.splice(sevenSectionIndex, 2)
+missingSevenHeadingConsumption.visibleStructureDigest = digestJson(
+  missingSevenHeadingConsumption.visibleStructure,
+)
+const missingSevenInstructionConsumption = structuredClone(browseConsumption)
+const sevenInstructionIndex =
+  missingSevenInstructionConsumption.visibleStructure.findIndex(
+    (node) =>
+      node.kind === 'instruction'
+      && node.instructionId === 'reading.seven-choices.prompt',
+  )
+missingSevenInstructionConsumption.visibleStructure.splice(
+  sevenInstructionIndex,
+  1,
+)
+missingSevenInstructionConsumption.visibleStructureDigest = digestJson(
+  missingSevenInstructionConsumption.visibleStructure,
+)
+const wrongHeadingTextConsumption = structuredClone(browseConsumption)
+const grammarHeading =
+  wrongHeadingTextConsumption.visibleStructure.find(
+    (node) =>
+      node.kind === 'instruction'
+      && node.instructionId === 'section.language.grammar-fill',
+  )
+grammarHeading.text = '第二节 错误标题'
+wrongHeadingTextConsumption.visibleStructureDigest = digestJson(
+  wrongHeadingTextConsumption.visibleStructure,
+)
+const synchronizedSectionDriftConsumption = structuredClone(browseConsumption)
+const synchronizedSection =
+  synchronizedSectionDriftConsumption.visibleStructure.find(
+    (node) =>
+      node.kind === 'section'
+      && node.sectionId === 'language.grammar-fill',
+  )
+const synchronizedSectionHeading =
+  synchronizedSectionDriftConsumption.visibleStructure.find(
+    (node) =>
+      node.kind === 'instruction'
+      && node.instructionId === 'section.language.grammar-fill',
+  )
+synchronizedSection.sectionId = 'language.grammar-fill-drift'
+synchronizedSection.instructionId = 'section.language.grammar-fill-drift'
+synchronizedSectionHeading.instructionId =
+  'section.language.grammar-fill-drift'
+synchronizedSectionHeading.text = '同步改写且重算摘要的第二节'
+synchronizedSectionDriftConsumption.visibleStructureDigest = digestJson(
+  synchronizedSectionDriftConsumption.visibleStructure,
+)
 for (const [caseId, poisonedConsumption] of [
   ['unknown-node', unknownVisibleNodeConsumption],
   ['reordered-heading', reorderedVisibleNodeConsumption],
   ['swapped-same-section-Group', swappedGroupVisibleNodeConsumption],
+  ['missing-seven-heading', missingSevenHeadingConsumption],
+  ['missing-seven-instruction', missingSevenInstructionConsumption],
+  ['wrong-heading-text', wrongHeadingTextConsumption],
+  ['synchronized-section-drift', synchronizedSectionDriftConsumption],
 ]) {
   assert.throws(
     () =>

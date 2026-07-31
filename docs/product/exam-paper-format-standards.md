@@ -4,7 +4,7 @@
 
 本文件是唯一的人类可读索引；当前 canonical 编译、校验、发布和受支持的
 Screen / Print-PDF consumer 只从
-[`standards/paper-canonical/manifest-v30.json`](../../standards/paper-canonical/manifest-v30.json)
+[`standards/paper-canonical/manifest-v31.json`](../../standards/paper-canonical/manifest-v31.json)
 解析一份 digest-closed 的权威闭包。这里不复制卷型题号、分值、题组
 cardinality、清洗条件或字体/物理排版数值，也不能被 caller 当作第二套配置。
 
@@ -18,19 +18,23 @@ Renderer Typography、其 schema 及纯验证入口。未知版本、缺件、di
 任何会改变 admission、canonical 语义、Profile、normalization 或 renderer
 结果的变更，必须新增 versioned artifact、schema/semantic conformance fixture、
 迁移说明和 manifest 升版；已经被 Publication 引用的 artifact 不可原位修改。
-`manifest-v1.json` 至 `manifest-v29.json` 保留各自原始 digest-closed closure，
-供既有 Publication 解析；当前 Screen v30、Print/PDF v31 consumer contracts
-只绑定 v30 authority。v30 以 NCK1 Profile v9 发布 renderer-neutral 的完整
+`manifest-v1.json` 至 `manifest-v30.json` 保留各自原始 digest-closed closure，
+供既有 Publication 解析；当前 Screen v31、Print/PDF v32 consumer contracts
+只绑定 v31 authority。v31 以 NCK1 Profile v10 发布 renderer-neutral 的完整
 可见结构：inactive Listening 不产生标题、正文或空隙，首个可见部分仍是
 `第二部分 阅读（共两节，满分50分）`，且阅读理解、七选五的节标题和说明均
-由同一 Consumption Plan 进入 Screen、Print HTML 与 PDF。Normalization
-Rules v4 只登记中文释义半角括号、释义后标点相邻空格和英文字母间撇号三类
-精确可重放转换；原始 Source Capture 字节保持不变，可见 canonical text
-不再复制源排版事故。Application / Continuation rhythm v3 分别声明 Screen
+由同一 Profile/digest 绑定的 Consumption Plan 进入 plain/lecture Screen、
+Student/Teacher Print HTML 与 PDF。六个在用节标题均与部标题共享正文左缘，
+全文采用同一书宋栈和基线；`第X节` 后及数字与中文单位之间保留一个半角空格，
+中文全角括号、分号、逗号不变。题组指导语和段落首行从 2em 起笔，段落续行
+回到正文左缘。Normalization Rules v5 只在英文 token 邻接中文释义时收窄
+半角括号/标点空格转换，普通中文 `这是（中文）说明。` 保持原样，并保留英文
+弯撇号规则；原始 Source Capture 字节保持不变。Application / Continuation
+rhythm v3 分别声明 Screen
 1px 与 Print/PDF 0.5pt 的细线原语，正文首行统一 2em，续写给定段首仍为
 独立 4em 角色。正文行盒继续固定 18pt，不引入任何 18/19、18–23 或按页自适应。
 迁移说明见
-[`manifest-v30-migration.md`](../../standards/paper-canonical/manifest-v30-migration.md)。
+[`manifest-v31-migration.md`](../../standards/paper-canonical/manifest-v31-migration.md)。
 
 此前 v29 以不可变 Continuation capture/transcription v2
 完整逐字核对原题 PDF 材料，在 Unicode NFC + ASCII 空白折叠后仍保留标点
@@ -277,9 +281,12 @@ px 换算(A4=794px@96dpi):10.5pt ≈ 14px。
 
 - **部标题**:中黑加粗,**左顶格**,分值信息内嵌同行——
   「第二部分 阅读(共两节,满分50分)」。
-- **节标题**:书宋常规,**缩进 2 字符**(x≈89pt),分值内嵌——
-  「第一节(共15小题;每小题2.5分,满分37.5分)」。分值不另起行。
-- 层级靠**字重与缩进**区分,一律不放大字号。
+- **节标题**:书宋常规,**左顶格，与部标题共享正文左缘**，分值内嵌——
+  「第一节 （共 15 小题；每小题 2.5 分，满分 37.5 分）」。`第X节` 后、
+  数字与中文单位之间各一个半角空格；中文全角括号、分号、逗号保持不变。
+  整行（含数字和小数点）使用同一中文书宋栈和基线。分值不另起行。
+- 层级靠**字重**区分,一律不放大字号。
+- 题组指导语与篇章段落首行从普通 2em 首行原点起笔；篇章换行回到正文左缘。
 - 篇章标题 A/B/C/D:加粗居中,与上下正文各空一行;篇内副标题
   (文章原标题)同样加粗居中。
 

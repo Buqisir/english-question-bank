@@ -1,4 +1,5 @@
 const chineseGloss = '[\\u3400-\\u9fff]+'
+const englishToken = "[A-Za-z]+(?:[’'-][A-Za-z]+)*"
 
 /**
  * Registered semantic-preserving cleanup for visible English exam text.
@@ -10,14 +11,16 @@ const chineseGloss = '[\\u3400-\\u9fff]+'
 export function canonicalizeVisibleEnglishTypography(value) {
   if (typeof value !== 'string') return value
   return value
-    .replace(new RegExp(`（(${chineseGloss})）`, 'gu'), '($1)')
     .replace(
-      new RegExp(`([A-Za-z])\\s*\\((${chineseGloss})\\)`, 'gu'),
+      new RegExp(`(${englishToken})\\s*（(${chineseGloss})）`, 'gu'),
       '$1 ($2)',
     )
     .replace(
-      new RegExp(`\\((${chineseGloss})\\)\\s+([.,;:!?])`, 'gu'),
-      '($1)$2',
+      new RegExp(
+        `(${englishToken}\\s+\\(${chineseGloss}\\))\\s+([.,;:!?])`,
+        'gu',
+      ),
+      '$1$2',
     )
     .replace(/([A-Za-z])'([A-Za-z])/gu, '$1’$2')
 }

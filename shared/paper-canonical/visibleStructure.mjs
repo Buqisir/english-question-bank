@@ -1,8 +1,105 @@
+import nck1V9 from '../../standards/paper-canonical/profiles/nck1-v9.json' with { type: 'json' }
+import nck1V10 from '../../standards/paper-canonical/profiles/nck1-v10.json' with { type: 'json' }
+import nationalLegacyV3 from '../../standards/paper-canonical/profiles/national-legacy-v3.json' with { type: 'json' }
+import zhejiangLegacyV7 from '../../standards/paper-canonical/profiles/zhejiang-legacy-v7.json' with { type: 'json' }
+
+import { digestJson } from './stable.mjs'
+
+const registeredProfiles = new Map([
+  [`${nck1V9.profileId}@${nck1V9.version}`, nck1V9],
+  [`${nck1V10.profileId}@${nck1V10.version}`, nck1V10],
+  [
+    `${nationalLegacyV3.profileId}@${nationalLegacyV3.version}`,
+    nationalLegacyV3,
+  ],
+  [
+    `${zhejiangLegacyV7.profileId}@${zhejiangLegacyV7.version}`,
+    zhejiangLegacyV7,
+  ],
+])
+
 function reject(message) {
   const error = new Error(`Canonical visible structure is invalid: ${message}`)
   error.name = 'CanonicalVisibleStructureError'
   error.code = 'CANONICAL_CONSUMPTION_REJECTED'
   throw error
+}
+
+function profileVisibleStructure(profile, expectedGroups) {
+  const groupBySlotId = new Map(
+    expectedGroups.map((group) => [group.slotId, group]),
+  )
+  if (groupBySlotId.size !== expectedGroups.length) {
+    reject('the expected Profile Group ownership is duplicated')
+  }
+  const nodes = []
+  for (const part of profile.parts) {
+    const visibleSections = part.sections.filter((section) =>
+      section.slots.some((slot) => slot.activation === 'canonical_group'))
+    if (visibleSections.length === 0) continue
+    const partInstruction = profile.instructions[part.titleInstructionRef]
+    nodes.push({
+      kind: 'part',
+      partId: part.partId,
+      instructionId: part.titleInstructionRef,
+    })
+    nodes.push({
+      kind: 'instruction',
+      instructionId: partInstruction.instructionId,
+      placement: partInstruction.placement,
+      text: partInstruction.text,
+      renderPolicy: partInstruction.renderPolicy ?? 'render',
+    })
+    for (const section of visibleSections) {
+      const sectionInstruction =
+        profile.instructions[section.titleInstructionRef]
+      nodes.push({
+        kind: 'section',
+        sectionId: section.sectionId,
+        instructionId: section.titleInstructionRef,
+      })
+      nodes.push({
+        kind: 'instruction',
+        instructionId: sectionInstruction.instructionId,
+        placement: sectionInstruction.placement,
+        text: sectionInstruction.text,
+        renderPolicy: sectionInstruction.renderPolicy ?? 'render',
+      })
+      for (const slot of section.slots) {
+        if (slot.activation !== 'canonical_group') continue
+        for (const instructionId of slot.instructionRefs) {
+          const instruction = profile.instructions[instructionId]
+          nodes.push({
+            kind: 'instruction',
+            instructionId: instruction.instructionId,
+            placement: instruction.placement,
+            text: instruction.text,
+            renderPolicy: instruction.renderPolicy ?? 'render',
+          })
+        }
+        const group = groupBySlotId.get(slot.slotId)
+        if (
+          !group
+          || group.familyContractId !== slot.familyContractRef.id
+        ) {
+          reject(
+            `Profile slot ${slot.slotId} lacks its exact family-owned Group`,
+          )
+        }
+        nodes.push({
+          kind: 'group',
+          slotId: slot.slotId,
+          groupId: group.groupId,
+          familyContractId: group.familyContractId,
+        })
+        groupBySlotId.delete(slot.slotId)
+      }
+    }
+  }
+  if (groupBySlotId.size > 0) {
+    reject('Consumption Plan carries Groups outside the registered Profile')
+  }
+  return nodes
 }
 
 function isRecord(value) {
@@ -238,8 +335,35 @@ export function assertCanonicalConsumptionVisibleStructure(consumption) {
       })
     }
   }
-  return assertCanonicalVisibleStructure(
+  const visibleStructure = assertCanonicalVisibleStructure(
     consumption.visibleStructure,
     expectedGroups,
   )
+  const profileRef = consumption.profileRef
+  if (Number(consumption.authorityRef?.manifestVersion) >= 31) {
+    if (
+      !hasExactKeys(profileRef, [
+        'profileId',
+        'profileVersion',
+        'profileDigest',
+      ])
+    ) reject('the registered Profile reference is unavailable')
+    const profile = registeredProfiles.get(
+      `${profileRef.profileId}@${profileRef.profileVersion}`,
+    )
+    if (
+      !profile
+      || profileRef.profileDigest !== digestJson(profile)
+    ) reject('the registered Profile reference is stale or unknown')
+    const expectedStructure = profileVisibleStructure(profile, expectedGroups)
+    if (
+      consumption.visibleStructureDigest !== digestJson(visibleStructure)
+      || digestJson(visibleStructure) !== digestJson(expectedStructure)
+    ) {
+      reject(
+        'visible nodes, text, placement, ownership, or order disagree with the registered Profile',
+      )
+    }
+  }
+  return visibleStructure
 }

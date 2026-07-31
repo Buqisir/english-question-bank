@@ -299,7 +299,7 @@
 
 /* ─── 部/节标题、指导语 — 卷面字体体系（docs/product/
  * exam-paper-format-standards.md §2/§4，one-sheet-paper 决策2）───
- * 部标题=中黑加粗·左顶格·不放大；节标题=书宋常规（不加粗）·缩进2字符；
+ * 部标题=中黑加粗·左顶格·不放大；节标题=书宋常规（不加粗）·左顶格；
  * 指导语=书宋正文。三者与正文同一份左右页边距（继承 .paper-browse-content
  * 的 padding，不再单独设左右 margin），退役此前的 UI sans + 米棕配色。 */
 .paper-browse-part-heading {
@@ -316,17 +316,18 @@
 }
 
 .paper-browse-section-heading {
-  margin: 16px 0 0;
-  margin-left: var(--ps-passage-indent, 2em);
-  font-family: var(--ps-font-stack);
+  margin: 13px 0 0;
+  margin-left: 0;
+  font-family: var(--ps-font-stack-zh);
   font-size: var(--ps-font-size);
   line-height: var(--ps-line-height);
   font-weight: 400;
   color: inherit;
+  white-space: nowrap;
 }
 
 .paper-browse-section-heading[data-canonical-reading-following-for] {
-  margin-top: 14px;
+  margin-top: 11px;
 }
 
 .paper-browse-instruction {
@@ -337,6 +338,7 @@
   font-weight: 400;
   color: inherit;
   white-space: pre-line;
+  text-indent: 2em;
 }
 
 .paper-browse-instruction--merged {
@@ -364,7 +366,13 @@
 
 .paper-browse-content > [data-canonical-reading-chrome]
   + [data-canonical-reading-chrome] {
-  margin-top: -16px;
+  margin-top: -19px;
+}
+
+.paper-browse-content
+  > .paper-browse-section-heading[data-canonical-reading-chrome]
+  + .paper-browse-instruction[data-canonical-reading-chrome] {
+  margin-top: -14px;
 }
 
 .paper-browse-content > [data-canonical-seven-choices-chrome]

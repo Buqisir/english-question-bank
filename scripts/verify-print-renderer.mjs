@@ -145,10 +145,11 @@ console.log('\nTest 3b: heading-fidelity — part/section-header split, h1 卷�
   const partRule = html.match(/\.section-header--part \{[^}]*\}/)?.[0] || ''
   assert('② .section-header--part is bold, heading (Hei) font stack, no left indent', /font-weight:\s*bold/.test(partRule) && /SimHei/.test(partRule) && /padding-left:\s*0/.test(partRule), partRule)
 
-  // ③ section heading (第X节…): section-header--section class, Song stack, indented 21pt.
+  // ③ section heading (第X节…): section-header--section class, Song stack,
+  // owner-gold body-left alignment (the historical 21pt indent is retired).
   assert('③ section title carries section-header--section class', /<h2 class="section-header section-header--section"[^>]*>第一节/.test(html), '')
   const sectionRule = html.match(/\.section-header--section \{[^}]*\}/)?.[0] || ''
-  assert('③ .section-header--section is regular weight, Song(SimSun) font stack, padding-left 21pt (2 字符)', !/font-weight:\s*bold/.test(sectionRule) && /SimSun/.test(sectionRule) && /padding-left:\s*21pt/.test(sectionRule), sectionRule)
+  assert('③ .section-header--section is regular weight, Song(SimSun) font stack, and zero-indent', !/font-weight:\s*bold/.test(sectionRule) && /SimSun/.test(sectionRule) && /padding-left:\s*0/.test(sectionRule) && /text-indent:\s*0/.test(sectionRule), sectionRule)
 
   // ④ shared base rule: both states sit at 10.5pt, no 12pt residue anywhere.
   const baseRule = html.match(/\n\.section-header \{[^}]*\}/)?.[0] || ''

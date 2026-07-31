@@ -22,12 +22,14 @@ import {
 import { projectCanonicalPaper } from '../../shared/paper-canonical/projector.mjs'
 import { digestJson, sha256, stableStringify, withoutKey } from '../../shared/paper-canonical/stable.mjs'
 import {
+  assertCanonicalConsumptionVisibleStructure,
   assertCanonicalVisibleStructure,
 } from '../../shared/paper-canonical/visibleStructure.mjs'
 
-const publicationFileName = 'canonical-paper-publication-v30.json'
+const publicationFileName = 'canonical-paper-publication-v31.json'
 const publicationFileNames = [
   publicationFileName,
+  'canonical-paper-publication-v30.json',
   'canonical-paper-publication-v29.json',
   'canonical-paper-publication-v28.json',
   'canonical-paper-publication-v27.json',
@@ -1449,6 +1451,7 @@ function validateConsumptionPublication({
     manifest,
     selection: canonicalSelections(validated, contract),
     visibleStructure: canonicalVisibleStructure(validated),
+    profileRef: structuredClone(validated.plan.profileRef),
     mediaArtifacts: canonicalMediaArtifacts(validated),
   }
 }
@@ -1460,9 +1463,10 @@ function readyConsumption(
   canonical,
   legacy,
   visibleStructure,
+  profileRef,
   mediaArtifacts,
 ) {
-  return {
+  const consumption = {
     disposition: 'ready',
     paperId: request.paperId,
     sourceAssetVersion: ref.sourceAssetVersion,
@@ -1487,9 +1491,21 @@ function readyConsumption(
         ? { visibleStructure }
         : {}
     ),
+    ...(
+      Number(manifest.authority.manifestVersion) >= 31
+        ? {
+            profileRef,
+            visibleStructureDigest: digestJson(visibleStructure),
+          }
+        : {}
+    ),
     mediaArtifacts,
     diagnostics: [],
   }
+  if (Number(manifest.authority.manifestVersion) >= 31) {
+    assertCanonicalConsumptionVisibleStructure(consumption)
+  }
+  return consumption
 }
 
 function publicationDiagnostic(error) {
@@ -1529,6 +1545,7 @@ export async function loadPaperForConsumption(request, store) {
         manifest,
         selection,
         visibleStructure,
+        profileRef,
         mediaArtifacts,
       } = validateConsumptionPublication({
         ref,
@@ -1553,6 +1570,7 @@ export async function loadPaperForConsumption(request, store) {
         selection,
         legacy,
         visibleStructure,
+        profileRef,
         mediaArtifacts,
       )
     } catch (error) {
@@ -1603,6 +1621,7 @@ export function loadPaperForConsumptionSync(request, store) {
         manifest,
         selection,
         visibleStructure,
+        profileRef,
         mediaArtifacts,
       } = validateConsumptionPublication({
         ref,
@@ -1627,6 +1646,7 @@ export function loadPaperForConsumptionSync(request, store) {
         selection,
         legacy,
         visibleStructure,
+        profileRef,
         mediaArtifacts,
       )
     } catch (error) {

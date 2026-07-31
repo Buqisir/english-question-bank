@@ -7,7 +7,7 @@ import applicationWritingRhythmV3Conformance from '../test-fixtures/paper-canoni
 import clozeRhythmV2Conformance from '../test-fixtures/paper-canonical/cloze-rhythm-v2-conformance.json' with { type: 'json' }
 import continuationWritingRhythmV3Conformance from '../test-fixtures/paper-canonical/continuation-writing-rhythm-v3-conformance.json' with { type: 'json' }
 import grammarFillRhythmV4Conformance from '../test-fixtures/paper-canonical/grammar-fill-rhythm-v4-conformance.json' with { type: 'json' }
-import grammarFillPublicGeometryFixturesV9Conformance from '../test-fixtures/paper-canonical/grammar-fill-public-geometry-fixtures-v9-conformance.json' with { type: 'json' }
+import grammarFillPublicGeometryFixturesV10Conformance from '../test-fixtures/paper-canonical/grammar-fill-public-geometry-fixtures-v10-conformance.json' with { type: 'json' }
 import sevenChoicesRhythmV3Conformance from '../test-fixtures/paper-canonical/seven-choices-rhythm-v3-conformance.json' with { type: 'json' }
 
 import { canonicalAuthorityRef, compileCanonicalPaper, stableStringify, validateExactTransformationRecords } from '../shared/paper-canonical/compiler.mjs'
@@ -332,31 +332,31 @@ for (const leafPath of visitAuthorityLeaves(grammarFillRhythmV4)) {
     },
   )
 }
-const grammarFillPublicGeometryFixturesV9 =
+const grammarFillPublicGeometryFixturesV10 =
   closure.artifacts['renderer-grammar-fill-public-geometry-fixtures']
 assert.equal(
-  grammarFillPublicGeometryFixturesV9.schemaVersion,
-  'grammar-fill-public-geometry-fixtures-v9',
+  grammarFillPublicGeometryFixturesV10.schemaVersion,
+  'grammar-fill-public-geometry-fixtures-v10',
 )
 assert.deepEqual(
-  Object.keys(grammarFillPublicGeometryFixturesV9.variants).sort(),
-  [...grammarFillPublicGeometryFixturesV9Conformance.positive.variantIds]
+  Object.keys(grammarFillPublicGeometryFixturesV10.variants).sort(),
+  [...grammarFillPublicGeometryFixturesV10Conformance.positive.variantIds]
     .sort(),
 )
 assertRendererAuthorityMutationRejected(
   'renderer-grammar-fill-public-geometry-fixtures',
-  grammarFillPublicGeometryFixturesV9Conformance,
+  grammarFillPublicGeometryFixturesV10Conformance,
   'grammar-fill-public-geometry-fixtures-complete-value-closure',
   (artifact) => {
     artifact.variants['screen-wrapped-line']
       .paragraphWidths[0].usableWidthEm += 999
   },
 )
-for (const attack of grammarFillPublicGeometryFixturesV9Conformance
+for (const attack of grammarFillPublicGeometryFixturesV10Conformance
   .shadowGeometryAttacks) {
   assertRendererAuthorityMutationRejected(
     'renderer-grammar-fill-public-geometry-fixtures',
-    grammarFillPublicGeometryFixturesV9Conformance,
+    grammarFillPublicGeometryFixturesV10Conformance,
     attack.caseId,
     (artifact) => {
       artifact.variants['screen-wrapped-line'][attack.fieldName] =

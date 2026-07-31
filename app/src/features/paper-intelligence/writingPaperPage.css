@@ -73,15 +73,18 @@
 /* 节标题 (第X节…): standard §4 — 书宋, 10.5pt (不放大). Keeps the body serif
    stack (inherited from .pi-writing-page). */
 .pi-writing-section {
-  margin: 0 0 0 2em;
+  margin: 0;
+  font-family: var(--ps-font-stack-zh);
   font-size: var(--ps-font-size);
   font-weight: 400;
+  white-space: nowrap;
 }
 
 /* 注意 / prompt text — preserve the source line breaks (注意：\n（1）…\n（2）…). */
 .pi-writing-instruction {
   margin: 0;
   white-space: pre-line;
+  text-indent: 2em;
 }
 
 .pi-writing-passage {

@@ -1,4 +1,4 @@
-import contract from '../../standards/paper-canonical/rendering/grammar-fill-public-geometry-fixtures-v9.json' with { type: 'json' }
+import contract from '../../standards/paper-canonical/rendering/grammar-fill-public-geometry-fixtures-v10.json' with { type: 'json' }
 
 import { canonicalAuthorityRef } from './authority.mjs'
 import { resolveCanonicalConsumerOccurrence } from './consumerProjection.mjs'

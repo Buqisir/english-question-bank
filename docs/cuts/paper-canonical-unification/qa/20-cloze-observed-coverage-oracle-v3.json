@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "cloze-observed-coverage-oracle-v3",
+  "predecessor": {
+    "path": "docs/cuts/paper-canonical-unification/qa/20-cloze-observed-coverage-oracle-v2.json",
+    "sha256": "450d2fb94fe7d33d96058415fc6394bf9ec78be934bbd7f5b7e0ce24dcf6ad6f"
+  },
+  "profileAdditions": {
+    "pdf-student-owner-gold-single-chrome-baseline": [
+      "choice_label_text_atomicity",
+      "choice_label_to_text",
+      "choice_row_baseline",
+      "choice_row_question_to_first_track",
+      "choice_row_unsplittable",
+      "choice_tracks_internal",
+      "chrome_internal",
+      "chrome_to_passage",
+      "inline_blank_atomicity",
+      "inline_blank_no_phantom_space",
+      "inline_blank_punctuation_outside",
+      "paragraph_transition",
+      "passage_line_internal",
+      "passage_tail_to_first_choice_row",
+      "previous_family_to_chrome_same_page",
+      "student_tail_to_next_section_same_page"
+    ]
+  },
+  "profileOverrides": {
+    "pdf-student/student-baseline": "pdf-student-owner-gold-single-chrome-baseline"
+  },
+  "reason": "Owner-gold Profile-bound visible structure removes the duplicated renderer-local Cloze chrome while preserving fixed 18pt pagination and the dedicated cross-page variants."
+}

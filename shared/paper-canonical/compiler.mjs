@@ -10,6 +10,7 @@ import { validateReadingContract } from './reading.mjs'
 import { validateSevenChoicesContract } from './sevenChoices.mjs'
 import { cloneJson, digestJson, exactKeys, isRecordValue, sha256, stableStringify, withoutKey } from './stable.mjs'
 import { canonicalizeVisibleEnglishTypography } from './visibleTypography.mjs'
+import { replayCanonicalVisibleTypography } from './visibleTypographyReplay.mjs'
 
 const blockingPriority = ['answer_conflict', 'incomplete_source', 'unsupported', 'needs_review']
 
@@ -467,7 +468,7 @@ function appendVisibleTypographyTransformations(source, diagnostics) {
           recordId,
           sequence: ++transformationSequence,
           ruleId: 'canonical-visible-typography',
-          ruleVersion: '1',
+          ruleVersion: '2',
           target: {
             identity: inline.nodeId,
             path: 'content.text',
@@ -1178,7 +1179,7 @@ function appendContinuationWritingReferenceGroup({
         recordId,
         sequence: ++transformationSequence,
         ruleId: 'canonical-visible-typography',
-        ruleVersion: '1',
+        ruleVersion: '2',
         target: {
           identity: inline.nodeId,
           path: 'content.text',
@@ -1949,13 +1950,13 @@ export function validateExactTransformationRecords(records, capture, closure) {
       && observations.length === 1
       && observations[0]?.kind === 'canonical_visible_typography_source'
       && record.ruleId === 'canonical-visible-typography'
-      && record.ruleVersion === '1'
+      && record.ruleVersion === rule.version
       && record.operation === 'canonical_visible_typography'
       && record.target.identity === observations[0]?.value?.nodeId
       && record.target.path === 'content.text'
       && record.before === observations[0]?.value?.text
       && record.after !== record.before
-      && record.after === canonicalizeVisibleEnglishTypography(record.before)
+      && record.after === replayCanonicalVisibleTypography(record.before)
     )
     const exactProof = expectedPreconditions && stableStringify(record.preconditions) === stableStringify(expectedPreconditions) && stableStringify(record.inputSourceSpanIds) === stableStringify(expectedSpanIds) && (sourceIdentityProof || uniqueJoinProof || profileInstructionCorrectionProof || visibleTypographyProof)
     if (recordIds.has(record.recordId) || !Number.isInteger(record.sequence) || record.sequence <= previousSequence || !Array.isArray(record.inputSourceSpanIds) || record.inputSourceSpanIds.length === 0 || record.inputSourceSpanIds.some((id) => !sourceSpanIds.has(id)) || record.outputDigest !== digestJson(record.after) || !exactProof) {

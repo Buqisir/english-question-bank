@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "normalization-rules-v5",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "id",
+    "version",
+    "owner",
+    "rules"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "normalization-rules-v5"
+    },
+    "id": {
+      "type": "string"
+    },
+    "version": {
+      "const": "5"
+    },
+    "owner": {
+      "const": "normalization"
+    },
+    "rules": {
+      "type": "array"
+    }
+  }
+}

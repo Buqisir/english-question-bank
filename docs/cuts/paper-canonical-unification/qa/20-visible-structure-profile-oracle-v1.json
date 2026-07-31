@@ -1,0 +1,209 @@
+{
+  "schemaVersion": "ticket20-visible-structure-profile-oracle-v1",
+  "sourceProfile": {
+    "path": "standards/paper-canonical/profiles/nck1-v10.json",
+    "sha256": "sha256:4cff200e93338cacdd42ef1d7a3823c36ac9ea652c6b65080fe98a92175b8c7a"
+  },
+  "paperId": "paper-2026-i",
+  "expectedNodeCount": 32,
+  "visibleStructureDigest": "sha256:0d533fb62eb106dea5e0c740ca3e5632c51c77b69e051f3f9f62b4e9e274c60e",
+  "nodes": [
+    {
+      "kind": "part",
+      "partId": "reading",
+      "instructionId": "part.reading"
+    },
+    {
+      "kind": "instruction",
+      "instructionId": "part.reading",
+      "placement": "part_heading",
+      "text": "第二部分 阅读（共两节，满分50分）",
+      "renderPolicy": "render"
+    },
+    {
+      "kind": "section",
+      "sectionId": "reading.choice",
+      "instructionId": "section.reading-choice"
+    },
+    {
+      "kind": "instruction",
+      "instructionId": "section.reading-choice",
+      "placement": "section_heading",
+      "text": "第一节 （共 15 小题；每小题 2.5 分，满分 37.5 分）",
+      "renderPolicy": "render"
+    },
+    {
+      "kind": "instruction",
+      "instructionId": "reading.choice.prompt",
+      "placement": "group_instruction",
+      "text": "阅读下列短文，从每题所给的A、B、C、D 四个选项中选出最佳选项。",
+      "renderPolicy": "render"
+    },
+    {
+      "kind": "group",
+      "slotId": "reading.a",
+      "groupId": "group-2026-i-reading-a",
+      "familyContractId": "reading"
+    },
+    {
+      "kind": "group",
+      "slotId": "reading.b",
+      "groupId": "group-2026-i-reading-b",
+      "familyContractId": "reading"
+    },
+    {
+      "kind": "group",
+      "slotId": "reading.c",
+      "groupId": "group-2026-i-reading-c",
+      "familyContractId": "reading"
+    },
+    {
+      "kind": "group",
+      "slotId": "reading.d",
+      "groupId": "group-2026-i-reading-d",
+      "familyContractId": "reading"
+    },
+    {
+      "kind": "section",
+      "sectionId": "reading.seven-choices",
+      "instructionId": "section.seven-choices"
+    },
+    {
+      "kind": "instruction",
+      "instructionId": "section.seven-choices",
+      "placement": "section_heading",
+      "text": "第二节 （共 5 小题；每小题 2.5 分，满分 12.5 分）",
+      "renderPolicy": "render"
+    },
+    {
+      "kind": "instruction",
+      "instructionId": "reading.seven-choices.prompt",
+      "placement": "group_instruction",
+      "text": "阅读下面短文，从短文后的选项中选出可以填入空白处的最佳选项。选项中有两项为多余选项。",
+      "renderPolicy": "render"
+    },
+    {
+      "kind": "group",
+      "slotId": "reading.seven-choices",
+      "groupId": "group-2026-i-seven-choices",
+      "familyContractId": "seven-choices"
+    },
+    {
+      "kind": "part",
+      "partId": "language",
+      "instructionId": "part.language"
+    },
+    {
+      "kind": "instruction",
+      "instructionId": "part.language",
+      "placement": "part_heading",
+      "text": "第三部分 语言运用（共两节，满分30分）",
+      "renderPolicy": "render"
+    },
+    {
+      "kind": "section",
+      "sectionId": "language.cloze",
+      "instructionId": "section.language.cloze"
+    },
+    {
+      "kind": "instruction",
+      "instructionId": "section.language.cloze",
+      "placement": "section_heading",
+      "text": "第一节 （共 15 小题；每小题 1 分，满分 15 分）",
+      "renderPolicy": "render"
+    },
+    {
+      "kind": "instruction",
+      "instructionId": "language.cloze.prompt",
+      "placement": "group_instruction",
+      "text": "阅读下面短文，从每题所给的A、B、C、D 四个选项中选出最佳选项。",
+      "renderPolicy": "render"
+    },
+    {
+      "kind": "group",
+      "slotId": "language.cloze",
+      "groupId": "group-2026-i-cloze",
+      "familyContractId": "cloze"
+    },
+    {
+      "kind": "section",
+      "sectionId": "language.grammar-fill",
+      "instructionId": "section.language.grammar-fill"
+    },
+    {
+      "kind": "instruction",
+      "instructionId": "section.language.grammar-fill",
+      "placement": "section_heading",
+      "text": "第二节 （共 10 小题；每小题 1.5 分，满分 15 分）",
+      "renderPolicy": "render"
+    },
+    {
+      "kind": "instruction",
+      "instructionId": "language.grammar-fill.prompt",
+      "placement": "group_instruction",
+      "text": "阅读下面短文，在空白处填入 1 个适当的单词或括号内单词的正确形式。",
+      "renderPolicy": "render"
+    },
+    {
+      "kind": "group",
+      "slotId": "language.grammar-fill",
+      "groupId": "group-2026-i-grammar-fill",
+      "familyContractId": "grammar-fill"
+    },
+    {
+      "kind": "part",
+      "partId": "writing",
+      "instructionId": "part.writing"
+    },
+    {
+      "kind": "instruction",
+      "instructionId": "part.writing",
+      "placement": "part_heading",
+      "text": "第四部分 写作（共两节，满分40分）",
+      "renderPolicy": "render"
+    },
+    {
+      "kind": "section",
+      "sectionId": "writing.application",
+      "instructionId": "section.writing.application"
+    },
+    {
+      "kind": "instruction",
+      "instructionId": "section.writing.application",
+      "placement": "section_heading",
+      "text": "第一节 （满分 15 分）",
+      "renderPolicy": "render"
+    },
+    {
+      "kind": "group",
+      "slotId": "writing.application",
+      "groupId": "group-2026-i-writing-application",
+      "familyContractId": "application-writing"
+    },
+    {
+      "kind": "section",
+      "sectionId": "writing.continuation",
+      "instructionId": "section.writing.continuation"
+    },
+    {
+      "kind": "instruction",
+      "instructionId": "section.writing.continuation",
+      "placement": "section_heading",
+      "text": "第二节 （满分 25 分）",
+      "renderPolicy": "render"
+    },
+    {
+      "kind": "instruction",
+      "instructionId": "writing.continuation.prompt",
+      "placement": "group_instruction",
+      "text": "阅读下面材料，根据其内容和所给段落开头语续写两段话，使之构成一篇完整的短文。",
+      "renderPolicy": "render"
+    },
+    {
+      "kind": "group",
+      "slotId": "writing.continuation",
+      "groupId": "group-2026-i-writing-continuation",
+      "familyContractId": "continuation-writing"
+    }
+  ]
+}

@@ -1430,7 +1430,7 @@ async function assertActualPaperSurfaceArtifacts() {
       const applicationText = await applicationPage.innerText()
       for (const expected of [
         '第四部分 写作（共两节，满分40分）',
-        '第一节（满分15分）',
+        '第一节 （满分 15 分）',
       ]) {
         assert.equal(
           applicationText.includes(expected),

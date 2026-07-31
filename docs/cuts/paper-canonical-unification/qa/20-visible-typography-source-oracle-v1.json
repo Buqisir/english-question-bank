@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "ticket20-visible-typography-source-oracle-v1",
+  "immutableSourceBindings": [
+    {
+      "path": "test-fixtures/paper-canonical/evidence/continuation-writing-paper-2026-i-v2.json",
+      "sha256": "sha256:3f73e4d9ad18fe7e121707f7ae1c17ebac88a315eb43780a474d35020bf3ca17"
+    },
+    {
+      "path": "test-fixtures/paper-canonical/evidence/continuation-writing-transcription-paper-2026-i-v2.json",
+      "sha256": "sha256:0f8f5fab47de87685da67086f673f485143aa665748c1ce14c3446d835f61149"
+    },
+    {
+      "path": "test-fixtures/paper-import/paper-2026-i-canonical-pilot/paper.pdf",
+      "sha256": "sha256:31a87069e6d530afba9123eec0487adf45e52e0b98530af80b62476f169e4d0f"
+    }
+  ],
+  "cases": [
+    {
+      "caseId": "english-adjacent-fullwidth-gloss",
+      "before": "ditch （沟）.",
+      "after": "ditch (沟).",
+      "beforeDigest": "sha256:ee4d064952565aa80eed6615c674d82405b153b32fc1d5af90b8d0240c694f9f",
+      "afterDigest": "sha256:8001818f8981618955aa0d796e3194a27088371ca9db9d09ce4a8450030a1639"
+    },
+    {
+      "caseId": "ordinary-chinese-prose",
+      "before": "这是（中文）说明。",
+      "after": "这是（中文）说明。",
+      "beforeDigest": "sha256:1f03848f55bdf89c7abf93f227f88dab0ce8db9d5fb73c1ccfc425ef5bc24395",
+      "afterDigest": "sha256:1f03848f55bdf89c7abf93f227f88dab0ce8db9d5fb73c1ccfc425ef5bc24395"
+    },
+    {
+      "caseId": "curly-english-apostrophe",
+      "before": "didn't",
+      "after": "didn’t",
+      "beforeDigest": "sha256:1d1d88ab4b09b23bee1d77568d9702f6142e145165ec2c8485f31f2df99bced2",
+      "afterDigest": "sha256:7b1e024bdaa2e04aa2ab7749e1fc8474e216d80928572d95db30bf8244982bb4"
+    }
+  ]
+}
