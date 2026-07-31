@@ -330,8 +330,8 @@ for (const { paperId, assetPath } of corpusFiles) {
 }
 assert.deepEqual(corpusModes, {
   four_columns: 641,
-  two_by_two: 330,
-  one_column: 64,
+  two_by_two: 337,
+  one_column: 57,
   needs_review: 0,
 })
 assert.deepEqual(Object.fromEntries(boundaryModes), {

@@ -9,7 +9,10 @@ import { RetainedModelAnswer } from '../paper-browse/RetainedWritingLecture.tsx'
 import { paperSurfaceTokens } from '../../../../shared/papersurface/tokens.mjs'
 import { applicationWritingRhythm } from '../../../../shared/paper-canonical/applicationWritingRhythm.mjs'
 import { continuationWritingRhythm } from '../../../../shared/paper-canonical/continuationWritingRhythm.mjs'
-import { sectionHeadingRuntime } from '../../../../shared/paper-canonical/sectionHeadingContract.mjs'
+import {
+  sectionHeadingRuntime,
+  sectionHeadingTextRuns,
+} from '../../../../shared/paper-canonical/sectionHeadingContract.mjs'
 import './writingPaperPage.css'
 
 // Renders the writing section's A4 page chrome (part/section headings, 注意,
@@ -51,6 +54,8 @@ const writingPageTokenStyle: WritingPageStyle = {
     `${sectionHeadingRuntime.screen.partHeadingIndentEm}em`,
   '--ps-section-heading-indent':
     `${sectionHeadingRuntime.screen.sectionHeadingIndentEm}em`,
+  '--ps-section-heading-numeric-shift':
+    `${sectionHeadingRuntime.screen.numericRunBaselineShiftEm}em`,
   '--ps-group-instruction-indent':
     `${sectionHeadingRuntime.screen.groupInstructionFirstLineIndentEm}em`,
   '--ps-page-margin-x': paperSurfaceTokens.pageMarginX,
@@ -60,6 +65,8 @@ const writingPageTokenStyle: WritingPageStyle = {
 const applicationWritingPageStyle: WritingPageStyle = {
   '--application-writing-page-gap':
     `${applicationWritingRhythm.rendererMapping.screen.pageBlockGapPx}px`,
+  '--application-writing-section-to-prompt-gap':
+    `${applicationWritingRhythm.rendererMapping.screen.sectionToPromptGapPx}px`,
   '--application-writing-response-width':
     `${applicationWritingRhythm.responseGeometry.widthMm}mm`,
   '--application-writing-response-height':
@@ -79,6 +86,10 @@ const applicationWritingPageStyle: WritingPageStyle = {
 const continuationWritingPageStyle: WritingPageStyle = {
   '--continuation-writing-page-gap':
     `${continuationWritingRhythm.rendererMapping.screen.pageBlockGapPx}px`,
+  '--continuation-writing-section-to-instruction-gap':
+    `${continuationWritingRhythm.rendererMapping.screen.sectionToInstructionGapPx}px`,
+  '--continuation-writing-instruction-to-material-gap':
+    `${continuationWritingRhythm.rendererMapping.screen.instructionToMaterialGapPx}px`,
   '--continuation-writing-response-width':
     `${continuationWritingRhythm.responseGeometry.widthMm}mm`,
   '--continuation-writing-response-height':
@@ -103,6 +114,20 @@ const continuationWritingPageStyle: WritingPageStyle = {
 
 function writingGivenText(part: WritingGivenPart): string {
   return typeof part === 'string' ? part : part.text
+}
+
+function renderSectionHeadingText(text: string): ReactNode {
+  return sectionHeadingTextRuns(text).map((run, index) =>
+    run.kind === 'numeric'
+      ? (
+          <span
+            key={`${index}-${run.text}`}
+            data-canonical-section-heading-numeric-run=""
+          >
+            {run.text}
+          </span>
+        )
+      : run.text)
 }
 
 function writingGivenIdentity(part: WritingGivenPart): Record<string, string> {
@@ -196,7 +221,7 @@ export function WritingPaperPage({
                   grammarFillPredecessorGroupId
                 }
               >
-                {block.text}
+                {renderSectionHeadingText(block.text)}
               </h2>
             )
           case 'sectionHeading':
@@ -222,7 +247,7 @@ export function WritingPaperPage({
                   isContinuationWriting ? 'section_heading' : undefined
                 }
               >
-                {block.text}
+                {renderSectionHeadingText(block.text)}
               </h3>
             )
           case 'instruction':

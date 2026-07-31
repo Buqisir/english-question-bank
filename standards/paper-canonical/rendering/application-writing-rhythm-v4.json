@@ -1,0 +1,289 @@
+{
+  "schemaVersion": "application-writing-rhythm-v4",
+  "id": "application-writing-rhythm",
+  "version": "4",
+  "owner": "renderer_typography",
+  "paper": "a4",
+  "projectionContract": "canonical-projector-v1",
+  "rules": [
+    "typography_never_changes_canonical_text",
+    "section_to_prompt_is_one_visible_baseline_step",
+    "visible_order_is_source_and_profile_owned",
+    "response_region_is_one_atomic_family_unit",
+    "student_supplements_collapse_without_phantom_space",
+    "teacher_material_requires_reviewed_source_authority",
+    "following_continuation_identity_remains_continuation_owned"
+  ],
+  "semanticRoleClasses": {
+    "previousFamilyBoundary": [
+      "grammar_fill_tail"
+    ],
+    "chrome": [
+      "part_heading",
+      "section_heading"
+    ],
+    "promptContent": [
+      "prompt_line",
+      "notice_line"
+    ],
+    "responseRegion": [
+      "response_box",
+      "given_title",
+      "given_addressee",
+      "given_closing"
+    ],
+    "teacherTail": [
+      "reference_answer",
+      "rubric_line"
+    ],
+    "followingSection": [
+      "continuation_section",
+      "continuation_prompt"
+    ]
+  },
+  "adjacencyGraph": [
+    {
+      "edgeId": "grammar_fill_boundary_to_part_same_page",
+      "fromClass": "previousFamilyBoundary",
+      "toRole": "part_heading",
+      "baselineStepRatio": 2,
+      "optionalCollapse": false
+    },
+    {
+      "edgeId": "grammar_fill_boundary_to_part_cross_page",
+      "fromClass": "previousFamilyBoundary",
+      "toRole": "part_heading",
+      "pageRelation": "next_page_start",
+      "optionalCollapse": false
+    },
+    {
+      "edgeId": "part_to_section",
+      "fromRole": "part_heading",
+      "toRole": "section_heading",
+      "baselineStepRatio": 1,
+      "optionalCollapse": false
+    },
+    {
+      "edgeId": "section_to_prompt",
+      "fromRole": "section_heading",
+      "toRole": "prompt_line",
+      "baselineStepRatio": 1,
+      "optionalCollapse": false
+    },
+    {
+      "edgeId": "prompt_line_internal",
+      "fromRole": "prompt_line",
+      "toRole": "prompt_line",
+      "baselineStepRatio": 1,
+      "optionalCollapse": false
+    },
+    {
+      "edgeId": "prompt_wrapped_continuation",
+      "fromRole": "prompt_line",
+      "toRole": "prompt_line",
+      "pageRelation": "same_paragraph_wrapped_continuation",
+      "optionalCollapse": false
+    },
+    {
+      "edgeId": "prompt_to_notice",
+      "fromRole": "prompt_line",
+      "toRole": "notice_line",
+      "baselineStepRatio": 2,
+      "optionalCollapse": false
+    },
+    {
+      "edgeId": "notice_line_internal",
+      "fromRole": "notice_line",
+      "toRole": "notice_line",
+      "baselineStepRatio": 1,
+      "optionalCollapse": false
+    },
+    {
+      "edgeId": "notice_to_response",
+      "fromRole": "notice_line",
+      "toRole": "response_box",
+      "baselineStepRatio": 0.5,
+      "optionalCollapse": false
+    },
+    {
+      "edgeId": "response_given_title_alignment",
+      "fromRole": "response_box",
+      "toRole": "given_title",
+      "horizontalRelation": "centered_in_response_usable_width",
+      "optionalCollapse": true
+    },
+    {
+      "edgeId": "response_usable_width",
+      "fromRole": "response_box",
+      "toRole": "response_box",
+      "horizontalRelation": "standards_owned_144mm_with_3mm_insets",
+      "optionalCollapse": false
+    },
+    {
+      "edgeId": "response_usable_height",
+      "fromRole": "response_box",
+      "toRole": "response_box",
+      "verticalRelation": "standards_owned_65mm_with_3mm_insets",
+      "optionalCollapse": false
+    },
+    {
+      "edgeId": "response_atomicity_same_page",
+      "fromClass": "responseRegion",
+      "toClass": "responseRegion",
+      "pageRelation": "same_page_unsplittable",
+      "optionalCollapse": false
+    },
+    {
+      "edgeId": "response_atomicity_next_page",
+      "fromClass": "responseRegion",
+      "toClass": "responseRegion",
+      "pageRelation": "move_whole_unit_to_next_page",
+      "optionalCollapse": false
+    },
+    {
+      "edgeId": "student_response_to_next_section_same_page",
+      "fromRole": "response_box",
+      "toRole": "continuation_section",
+      "baselineStepRatio": 2,
+      "optionalCollapse": false
+    },
+    {
+      "edgeId": "student_response_to_next_section_cross_page",
+      "fromRole": "response_box",
+      "toRole": "continuation_section",
+      "pageRelation": "next_page_start",
+      "optionalCollapse": false
+    },
+    {
+      "edgeId": "student_supplement_absence_collapse",
+      "fromRole": "response_box",
+      "toRole": "continuation_section",
+      "extraBaselineStepRatio": 0,
+      "optionalCollapse": true
+    },
+    {
+      "edgeId": "teacher_response_to_reference_answer",
+      "fromRole": "response_box",
+      "toRole": "reference_answer",
+      "baselineStepRatio": 1,
+      "optionalCollapse": true
+    },
+    {
+      "edgeId": "reference_answer_internal",
+      "fromRole": "reference_answer",
+      "toRole": "reference_answer",
+      "baselineStepRatio": 1,
+      "optionalCollapse": true
+    },
+    {
+      "edgeId": "reference_answer_to_rubric",
+      "fromRole": "reference_answer",
+      "toRole": "rubric_line",
+      "baselineStepRatio": 1,
+      "optionalCollapse": true
+    },
+    {
+      "edgeId": "rubric_internal",
+      "fromRole": "rubric_line",
+      "toRole": "rubric_line",
+      "baselineStepRatio": 1,
+      "optionalCollapse": true
+    },
+    {
+      "edgeId": "teacher_tail_to_next_section_same_page",
+      "fromClass": "teacherTail",
+      "toRole": "continuation_section",
+      "baselineStepRatio": 2,
+      "optionalCollapse": true
+    },
+    {
+      "edgeId": "teacher_tail_to_next_section_cross_page",
+      "fromClass": "teacherTail",
+      "toRole": "continuation_section",
+      "pageRelation": "next_page_start",
+      "optionalCollapse": true
+    },
+    {
+      "edgeId": "unauthorized_teacher_tail_collapse",
+      "fromRole": "response_box",
+      "toRole": "continuation_section",
+      "extraBaselineStepRatio": 0,
+      "optionalCollapse": true
+    },
+    {
+      "edgeId": "continuation_section_to_prompt",
+      "fromRole": "continuation_section",
+      "toRole": "continuation_prompt",
+      "baselineStepRatio": 1,
+      "optionalCollapse": false
+    }
+  ],
+  "targets": {
+    "screen": {
+      "baselineStepPx": 24,
+      "oneStepTolerancePx": 1.5,
+      "halfStepTolerancePx": 1.5,
+      "twoStepTolerancePx": 1.5
+    },
+    "printPdf": {
+      "baselineStepPt": 18,
+      "oneStepTolerancePt": 1.5,
+      "halfStepTolerancePt": 1.5,
+      "twoStepTolerancePt": 1.5
+    }
+  },
+  "responseGeometry": {
+    "physicalAuthority": {
+      "path": "docs/product/exam-paper-format-standards.md",
+      "section": "8. 写作答题区"
+    },
+    "widthMm": 144,
+    "heightMm": 65,
+    "paddingMm": 3,
+    "atomicity": "unsplittable_move_whole_to_next_page",
+    "usableArea": "border_box_minus_two_3mm_insets",
+    "horizontalAlignment": "center",
+    "screenBorderPx": 1,
+    "printBorderPt": 0.5
+  },
+  "rendererMapping": {
+    "screen": {
+      "pageBlockGapPx": 0,
+      "sectionToPromptGapPx": 0,
+      "promptParagraphGapPx": 0,
+      "noticeMarginTopPx": 24,
+      "responseMarginTopPx": 12,
+      "followingSectionMarginTopPx": 48
+    },
+    "printPdf": {
+      "pageBlockGapPt": 0,
+      "sectionToPromptGapPt": 0,
+      "promptParagraphGapPt": 0,
+      "noticeMarginTopPt": 18,
+      "responseMarginTopPt": 9,
+      "followingSectionMarginTopPt": 36
+    }
+  },
+  "goldenGeometryFramework": {
+    "id": "golden-geometry-framework-v1",
+    "path": "docs/cuts/paper-canonical-unification/qa/golden-geometry-framework-v1.md",
+    "sha256": "sha256:46fee75e0ddaa62989985c1e3dea5be11f8501324fd0a95b409b610716c0be88",
+    "axes": [
+      "vertical",
+      "horizontal"
+    ],
+    "familyValuesAreNotShared": true
+  },
+  "referenceMeasurement": {
+    "path": "docs/cuts/paper-canonical-unification/qa/20-application-writing-golden-geometry-reference-measurements-v1.json",
+    "sha256": "sha256:df6c6e51f7aac0f2f1d882ad2e94db1fecd2704a6629090f2a5e14aac0fe58fc"
+  },
+  "publicArtifactOracle": {
+    "path": "docs/cuts/paper-canonical-unification/qa/20-application-writing-source-oracles-v2.json",
+    "sha256": "sha256:5c1cb9e76803d083d0cff42d97bd68e7d40b2775bd1b28ac1841aefa8873e4d7"
+  },
+  "observedCoverageOracle": {
+    "path": "docs/cuts/paper-canonical-unification/qa/20-application-writing-observed-coverage-oracle-v2.json",
+    "sha256": "sha256:24d74ca8918fb20ad32ec59a98ff008938671371cb625e0ab71491ce66d30a38"
+  }
+}

@@ -1,4 +1,4 @@
-import contract from '../../standards/paper-canonical/rendering/cloze-rhythm-v2.json' with { type: 'json' }
+import contract from '../../standards/paper-canonical/rendering/cloze-rhythm-v3.json' with { type: 'json' }
 
 function freezeRoleClasses(roleClasses) {
   return Object.freeze(

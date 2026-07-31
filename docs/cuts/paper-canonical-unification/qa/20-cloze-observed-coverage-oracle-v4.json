@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "cloze-observed-coverage-oracle-v4",
+  "predecessor": {
+    "path": "docs/cuts/paper-canonical-unification/qa/20-cloze-observed-coverage-oracle-v3.json",
+    "sha256": "5f2b183843f654545445796914a88f2ecb724b5d5b79e1a24bcd05cd17417700"
+  },
+  "edgeOverrides": {
+    "choice_row_question_to_first_track": {
+      "edgeId": "choice_row_question_to_first_track",
+      "fromRole": "choice_row",
+      "toRole": "choice_label",
+      "horizontalRelation": "gold_normalized_question_to_A_anchor",
+      "optionalCollapse": false
+    },
+    "choice_tracks_internal": {
+      "edgeId": "choice_tracks_internal",
+      "fromClass": "choiceLabel",
+      "toClass": "choiceLabel",
+      "horizontalRelation": "four_gold_normalized_fixed_origin_tracks",
+      "optionalCollapse": false
+    }
+  },
+  "profileAdditions": {
+    "pdf-teacher-passage-cross-gold-anchor": [
+      "answer_to_explanation",
+      "choice_block_cross_page",
+      "choice_label_text_atomicity",
+      "choice_label_to_text",
+      "choice_row_baseline",
+      "choice_row_question_to_first_track",
+      "choice_row_to_answer",
+      "choice_row_unsplittable",
+      "choice_tracks_internal",
+      "chrome_internal",
+      "chrome_to_passage",
+      "inline_blank_atomicity",
+      "inline_blank_no_phantom_space",
+      "inline_blank_punctuation_outside",
+      "paragraph_transition",
+      "passage_line_internal",
+      "passage_tail_to_first_choice_row",
+      "previous_family_to_chrome_cross_page",
+      "same_passage_cross_page",
+      "teacher_tail_to_next_row",
+      "teacher_tail_to_next_section_same_page",
+      "wrapped_option_continuation"
+    ]
+  },
+  "profileOverrides": {
+    "pdf-teacher/teacher-passage-cross-page": "pdf-teacher-passage-cross-gold-anchor"
+  },
+  "reason": "Owner-QA gold-normalized evidence replaces the equal-pitch Cloze assumption with the measured question-to-A anchor and four fixed option origins; the resulting fixed-width Teacher passage-cross proof keeps its following section on the same page without adaptive spacing."
+}

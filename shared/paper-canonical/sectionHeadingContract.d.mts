@@ -5,6 +5,7 @@ export interface SectionHeadingRuntimeSurface {
   readonly groupInstructionFirstLineIndentEm: number
   readonly passageFirstLineIndentEm: number
   readonly passageContinuationIndentEm: number
+  readonly numericRunBaselineShiftEm: number
 }
 
 export interface SectionHeadingRuntime {
@@ -23,3 +24,9 @@ export declare const sectionHeadingRuntime: SectionHeadingRuntime
 export declare function sectionHeadingRuntimeFromContract(
   contract: Readonly<Record<string, unknown>>,
 ): SectionHeadingRuntime
+export declare function sectionHeadingTextRuns(
+  text: string,
+): ReadonlyArray<Readonly<{
+  kind: 'numeric' | 'text'
+  text: string
+}>>

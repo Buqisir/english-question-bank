@@ -1,5 +1,5 @@
 import metrics from '../../standards/paper-canonical/rendering/times-compatible-metrics-v1.json' with { type: 'json' }
-import rendererTypography from '../../standards/paper-canonical/rendering/paper-typography-v6.json' with { type: 'json' }
+import rendererTypography from '../../standards/paper-canonical/rendering/paper-typography-v7.json' with { type: 'json' }
 
 import { digestJson, sha256 } from './stable.mjs'
 
@@ -18,11 +18,13 @@ const RULES = Object.freeze({
   fontMetricsDigest: digestJson(metrics),
   fontFaceId: metrics.fontFaceId,
   fontSizeHalfPoint: 21,
-  optionRowWidthTwip: 8764,
+  optionRowWidthTwip: rendererTypography.optionAnchorFramework.rowWidthTwip,
   minimumGutterTwip: 420,
   fitSafetyTwip: 20,
-  fourColumnPitchTwip: 2080,
-  twoColumnSecondTabTwip: 4020,
+  fourColumnPitchTwip:
+    rendererTypography.optionAnchorFramework.reading.fourColumnStartsTwip[1],
+  twoColumnSecondTabTwip:
+    rendererTypography.optionAnchorFramework.reading.twoColumnStartsTwip[1],
   oneColumnHangingIndentTwip: 420,
   questionStemAndOuterOptionBlockStartTwip:
     rendererTypography.coordinates.questionStemAndOuterOptionBlockStartTwip,

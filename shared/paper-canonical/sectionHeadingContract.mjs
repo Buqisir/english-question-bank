@@ -1,4 +1,4 @@
-import rendererTypography from '../../standards/paper-canonical/rendering/paper-typography-v6.json' with { type: 'json' }
+import rendererTypography from '../../standards/paper-canonical/rendering/paper-typography-v7.json' with { type: 'json' }
 
 function freeze(value) {
   if (value && typeof value === 'object') {
@@ -48,6 +48,11 @@ export function sectionHeadingRuntimeFromContract(contract) {
         anchors.passageContinuationIndentEm,
         'passageContinuationIndentEm',
       ),
+    numericRunBaselineShiftEm:
+      requireNumber(
+        typography.numericRunBaselineShiftEm,
+        'numericRunBaselineShiftEm',
+      ),
   }
   return freeze({
     screen: {
@@ -68,3 +73,18 @@ export const sectionHeadingContract =
 
 export const sectionHeadingRuntime =
   sectionHeadingRuntimeFromContract(sectionHeadingContract)
+
+export function sectionHeadingTextRuns(text) {
+  if (typeof text !== 'string') {
+    throw new TypeError('Section heading text must be a string')
+  }
+  return freeze(
+    text
+      .split(/(\d+(?:\.\d+)?)/u)
+      .filter((value) => value.length > 0)
+      .map((value) => ({
+        kind: /^\d+(?:\.\d+)?$/u.test(value) ? 'numeric' : 'text',
+        text: value,
+      })),
+  )
+}

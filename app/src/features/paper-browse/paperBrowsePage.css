@@ -327,6 +327,11 @@
   white-space: nowrap;
 }
 
+[data-canonical-section-heading-numeric-run] {
+  position: relative;
+  top: var(--ps-section-heading-numeric-shift);
+}
+
 .paper-browse-section-heading[data-canonical-reading-following-for] {
   margin-top: 11px;
 }
@@ -636,9 +641,14 @@
  * 定不了罩的 top，由 PaperBrowsePage 量出偏移写进 `--pb-writing-cut-top`
  * （ResizeObserver 跟重排），罩用它画上缘；于是这条内部线与罩上缘同位，
  * hover 时按全站规则隐去、由罩的墨绿边界接管（不再是"不隐去"的例外）。 */
-.paper-browse-content .pi-writing-section + * {
+.paper-browse-content .pi-writing-page--application .pi-writing-section + * {
   position: relative;
-  padding-top: 16px;
+  padding-top: var(--application-writing-section-to-prompt-gap);
+}
+
+.paper-browse-content .pi-writing-page--continuation .pi-writing-section + * {
+  position: relative;
+  padding-top: var(--continuation-writing-section-to-instruction-gap);
 }
 
 /* Pseudo-element instead of a plain border-top so the dashed line can

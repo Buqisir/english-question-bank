@@ -704,8 +704,8 @@ function assertSchemaDescriptorIdentityClosure() {
     'canonical-paper-publication-v9',
     'normalization-report-v10',
     'canonical-paper-publication-v10',
-    'normalization-report-v31',
-    'canonical-paper-publication-v31',
+    'normalization-report-v32',
+    'canonical-paper-publication-v32',
   ]) {
     assert.equal(authority.closure.schemas[schemaId].$id, schemaId)
   }
@@ -1212,7 +1212,7 @@ function visibleRenderedText(value) {
 }
 
 function assertNck1WritingHeadingCounts(renderedText, label) {
-  const compact = compactText(renderedText)
+  const compact = compactText(visibleRenderedText(renderedText))
   for (const heading of Object.values(nck1WritingChrome)) {
     assert.equal(
       compact.split(compactText(heading)).length - 1,
@@ -2047,11 +2047,8 @@ async function browserWritingChromeInk(page) {
       `[data-canonical-writing-chrome-role="${role}"]`,
     )
     const clip = await locator.evaluate((element) => {
-      const text = element.firstChild
-      if (!(text instanceof Text)) throw new Error('heading must own text')
       const range = document.createRange()
-      range.setStart(text, 0)
-      range.setEnd(text, text.length)
+      range.selectNodeContents(element)
       const box = range.getBoundingClientRect()
       return {
         x: box.x - 2,

@@ -284,10 +284,14 @@ const orderFacts = [
   studentCombined.indexOf('第三部分 完形填空'),
   studentCombined.indexOf('<span class="print-blank-num">41</span>'),
   studentCombined.indexOf('class="page-break"'),
-  studentCombined.indexOf('第四部分 语法填空（2026-I）'),
+  studentCombined.indexOf(
+    '第四部分 语法填空（<span data-canonical-section-heading-numeric-run="">2026</span>-I）',
+  ),
   studentCombined.indexOf('<span class="print-blank-num">56</span>'),
   studentCombined.lastIndexOf('class="page-break"'),
-  studentCombined.indexOf('第四部分 语法填空（960d0f8d）'),
+  studentCombined.indexOf(
+    '第四部分 语法填空（<span data-canonical-section-heading-numeric-run="">960</span>d<span data-canonical-section-heading-numeric-run="">0</span>f<span data-canonical-section-heading-numeric-run="">8</span>d）',
+  ),
   studentCombined.lastIndexOf('<span class="print-blank-num">56</span>'),
 ]
 assert.equal(

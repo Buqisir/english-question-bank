@@ -1,0 +1,363 @@
+{
+  "schemaVersion": "renderer-typography-v7",
+  "id": "paper-typography",
+  "version": "7",
+  "owner": "renderer_typography",
+  "paper": "a4",
+  "projectionContract": "canonical-projector-v1",
+  "rules": [
+    "typography_never_changes_canonical_text",
+    "blank_geometry_is_renderer_owned",
+    "option_layout_is_not_canonical_semantics",
+    "question_stem_and_outer_option_block_share_bound_origin",
+    "reading_option_modes_share_one_mid_column_anchor",
+    "reading_and_cloze_question_option_text_use_regular_weight",
+    "section_heading_numeric_runs_align_visible_glyph_bottoms",
+    "reading_passage_letter_comes_only_from_profile_slot_identity",
+    "reading_passage_letter_renders_once_before_passage_content",
+    "reading_visible_profile_instruction_precedes_first_passage"
+  ],
+  "coordinates": {
+    "questionStemAndOuterOptionBlockStartTwip": 346
+  },
+  "optionAnchorFramework": {
+    "rowWidthTwip": 8764,
+    "reading": {
+      "fourColumnStartsTwip": [
+        0,
+        2080,
+        4160,
+        6240
+      ],
+      "twoColumnStartsTwip": [
+        0,
+        4160
+      ],
+      "sharedMidAnchorUsableWidthRatio": 0.4746691011
+    },
+    "cloze": {
+      "questionLabelStartTwip": 0,
+      "optionColumnStartsTwip": [
+        346,
+        2556,
+        4638,
+        6731
+      ],
+      "optionColumnWidthsTwip": [
+        2210,
+        2082,
+        2093,
+        2033
+      ],
+      "labelToTextGapEm": 0.411765
+    },
+    "visibleWeight": {
+      "questionNumber": 400,
+      "optionLabel": 400,
+      "optionText": 400
+    }
+  },
+  "readingPassageLetters": {
+    "slotIdentity": [
+      {
+        "slotId": "reading.a",
+        "letter": "A",
+        "precedingKindByConsumer": {
+          "screen": "reading_heading",
+          "print_pdf": "reading_heading"
+        }
+      },
+      {
+        "slotId": "reading.b",
+        "letter": "B",
+        "precedingKindByConsumer": {
+          "screen": "prior_question_tail",
+          "print_pdf": "prior_question_tail"
+        }
+      },
+      {
+        "slotId": "reading.c",
+        "letter": "C",
+        "precedingKindByConsumer": {
+          "screen": "prior_question_tail",
+          "print_pdf": "prior_question_tail"
+        }
+      },
+      {
+        "slotId": "reading.d",
+        "letter": "D",
+        "precedingKindByConsumer": {
+          "screen": "prior_question_tail",
+          "print_pdf": "prior_question_tail"
+        }
+      }
+    ],
+    "horizontalPlacement": "reading_content_column_center",
+    "fontSizePt": 10.5,
+    "lineHeightPt": 18,
+    "fontWeight": 700,
+    "marginBeforePt": 0,
+    "marginAfterPt": 0,
+    "precedingGeometry": {
+      "normalizationRule": "local_baseline_step_ratio_mapped_to_actual_rendered_line_step",
+      "readingHeading": {
+        "referenceBaselineStepRatio": 1,
+        "referenceRatioTolerance": 0.05,
+        "screenBaselineStepPx": 24,
+        "screenTolerancePx": 1.25,
+        "screenBeforeAdjustmentPx": -16,
+        "pdfBaselineStepPt": 18,
+        "pdfTolerancePt": 1.5,
+        "pdfBeforeAdjustmentPt": -6.75
+      },
+      "priorQuestionTail": {
+        "referenceBaselineStepRatio": 2,
+        "referenceRatioTolerance": 0.05,
+        "screenBaselineStepPx": 48,
+        "screenTolerancePx": 1.25,
+        "screenBeforeAdjustmentPx": 13,
+        "pdfBaselineStepPt": 36,
+        "pdfTolerancePt": 1.5,
+        "pdfBeforeAdjustmentPt": 18
+      }
+    },
+    "followingGeometry": {
+      "referenceBaselineStepRatio": 1,
+      "referenceRatioTolerance": 0.05,
+      "screenBaselineStepPx": 24,
+      "screenTolerancePx": 0.75,
+      "pdfBaselineStepPt": 18,
+      "pdfTolerancePt": 0.5
+    },
+    "verticalRhythm": {
+      "semanticRoleClasses": {
+        "chrome": [
+          "part_title",
+          "subsection",
+          "meta_instruction"
+        ],
+        "passageContent": [
+          "passage_title",
+          "passage_subtitle",
+          "passage_body_line",
+          "native_table_line"
+        ],
+        "questionStem": [
+          "question_stem_line"
+        ],
+        "optionLine": [
+          "option_line"
+        ],
+        "teacherTail": [
+          "answer_line",
+          "explanation_line"
+        ]
+      },
+      "adjacencyGraph": [
+        {
+          "edgeId": "chrome_internal",
+          "fromClass": "chrome",
+          "toClass": "chrome",
+          "baselineStepRatio": 1,
+          "optionalCollapse": true
+        },
+        {
+          "edgeId": "chrome_to_a",
+          "fromClass": "chrome",
+          "toRole": "passage_letter",
+          "baselineStepRatio": 1,
+          "optionalCollapse": true
+        },
+        {
+          "edgeId": "letter_to_first_content",
+          "fromRole": "passage_letter",
+          "toClass": "passageContent",
+          "baselineStepRatio": 1,
+          "optionalCollapse": true
+        },
+        {
+          "edgeId": "passage_content_internal",
+          "fromClass": "passageContent",
+          "toClass": "passageContent",
+          "baselineStepRatio": 1,
+          "optionalCollapse": false
+        },
+        {
+          "edgeId": "passage_to_first_question",
+          "fromClass": "passageContent",
+          "toClass": "questionStem",
+          "baselineStepRatio": 2,
+          "optionalCollapse": false
+        },
+        {
+          "edgeId": "question_stem_internal",
+          "fromClass": "questionStem",
+          "toClass": "questionStem",
+          "baselineStepRatio": 1,
+          "optionalCollapse": false
+        },
+        {
+          "edgeId": "stem_to_options",
+          "fromClass": "questionStem",
+          "toClass": "optionLine",
+          "baselineStepRatio": 1,
+          "optionalCollapse": false
+        },
+        {
+          "edgeId": "option_line_internal",
+          "fromClass": "optionLine",
+          "toClass": "optionLine",
+          "baselineStepRatio": 1,
+          "optionalCollapse": false
+        },
+        {
+          "edgeId": "question_to_next_question",
+          "fromClass": "optionLine",
+          "toClass": "questionStem",
+          "baselineStepRatio": 1,
+          "optionalCollapse": false
+        },
+        {
+          "edgeId": "option_to_answer",
+          "fromClass": "optionLine",
+          "toRole": "answer_line",
+          "baselineStepRatio": 1,
+          "optionalCollapse": true
+        },
+        {
+          "edgeId": "answer_to_explanation",
+          "fromRole": "answer_line",
+          "toRole": "explanation_line",
+          "baselineStepRatio": 1,
+          "optionalCollapse": true
+        },
+        {
+          "edgeId": "teacher_tail_to_next_question",
+          "fromClass": "teacherTail",
+          "toClass": "questionStem",
+          "baselineStepRatio": 1,
+          "optionalCollapse": true
+        },
+        {
+          "edgeId": "reading_passage_transition",
+          "fromClass": "optionLine",
+          "toRole": "passage_letter",
+          "baselineStepRatio": 2,
+          "optionalCollapse": false
+        },
+        {
+          "edgeId": "teacher_reading_passage_transition",
+          "fromClass": "teacherTail",
+          "toRole": "passage_letter",
+          "baselineStepRatio": 2,
+          "optionalCollapse": true
+        },
+        {
+          "edgeId": "reading_to_next_section_same_page",
+          "fromClass": "optionLine",
+          "toRole": "next_section",
+          "baselineStepRatio": 2,
+          "optionalCollapse": false
+        },
+        {
+          "edgeId": "teacher_reading_to_next_section_same_page",
+          "fromClass": "teacherTail",
+          "toRole": "next_section",
+          "baselineStepRatio": 2,
+          "optionalCollapse": true
+        },
+        {
+          "edgeId": "same_passage_cross_page",
+          "fromClass": "passageContent",
+          "toClass": "passageContent",
+          "pageRelation": "next_page_continuation",
+          "optionalCollapse": false,
+          "repeatForbiddenRoles": [
+            "passage_letter",
+            "passage_title",
+            "passage_subtitle"
+          ]
+        },
+        {
+          "edgeId": "reading_to_next_section_cross_page",
+          "fromClass": "optionLine",
+          "toRole": "next_section",
+          "pageRelation": "next_page_start",
+          "optionalCollapse": false
+        }
+      ],
+      "targets": {
+        "screen": {
+          "baselineStepPx": 24,
+          "oneStepTolerancePx": 1.25,
+          "twoStepTolerancePx": 1.5
+        },
+        "printPdf": {
+          "baselineStepPt": 18,
+          "oneStepTolerancePt": 1.5,
+          "twoStepTolerancePt": 1.5
+        }
+      }
+    },
+    "referenceMeasurement": {
+      "path": "docs/cuts/paper-canonical-unification/qa/20-reading-vertical-rhythm-reference-measurements-v3.json",
+      "sha256": "sha256:3827f696fe64ee3086cb7d0b08f9e5b6a94cf01022ac2d5343d81ee743643f35"
+    }
+  },
+  "sectionHeadingContract": {
+    "contractId": "nck1-section-heading-owner-gold",
+    "version": "1",
+    "scope": {
+      "profileId": "nck1",
+      "activeSectionHeadingCount": 6,
+      "surfaces": [
+        "screen_plain",
+        "screen_lecture",
+        "print_html_student",
+        "print_html_teacher",
+        "pdf_student",
+        "pdf_teacher"
+      ]
+    },
+    "horizontalAnchors": {
+      "partHeadingIndentEm": 0,
+      "sectionHeadingIndentEm": 0,
+      "groupInstructionFirstLineIndentEm": 2,
+      "passageFirstLineIndentEm": 2,
+      "passageContinuationIndentEm": 0
+    },
+    "typography": {
+      "fontStack": "\"SimSun\", \"Songti SC\", \"STSong\", serif",
+      "singleFontStackForDigitsAndChinese": true,
+      "sharedBaseline": true,
+      "numericRunBaselineShiftEm": 0.2,
+      "visualAlignment": "numeric_and_chinese_visible_bottoms_match",
+      "fontSizePt": 10.5,
+      "lineHeightPt": 18
+    },
+    "textRules": {
+      "asciiSpaceAfterSectionOrdinal": 1,
+      "asciiSpaceBetweenNumberAndChineseUnit": 1,
+      "preserveFullWidthChineseParentheses": true,
+      "preserveFullWidthChineseSemicolon": true,
+      "preserveFullWidthChineseComma": true
+    },
+    "evidence": [
+      {
+        "role": "current_defect",
+        "path": "docs/cuts/paper-canonical-unification/qa/20-section-heading-current-defect.png",
+        "sha256": "sha256:4d0f8c598db32f63df6995bf3d586d188753d333dd47eb1ac5742ec79027a3c3"
+      },
+      {
+        "role": "gold_typography",
+        "path": "docs/cuts/paper-canonical-unification/qa/20-section-heading-gold-typography.png",
+        "sha256": "sha256:d1e4bcc5572074f978d37a638c15c17dec52b134ee4e8f82800442ef25358ba6"
+      },
+      {
+        "role": "gold_horizontal_anchors",
+        "path": "docs/cuts/paper-canonical-unification/qa/20-section-heading-gold-anchors.png",
+        "sha256": "sha256:c161f76085ea6f1b46d3070cb54e678cf65c636ae313df887a8c573f4c0e5951"
+      }
+    ]
+  }
+}

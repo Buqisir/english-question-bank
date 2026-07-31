@@ -74,6 +74,7 @@ import {
 } from '../../../../shared/paper-canonical/grammarFillRhythm.mjs'
 import {
   sectionHeadingRuntime,
+  sectionHeadingTextRuns,
 } from '../../../../shared/paper-canonical/sectionHeadingContract.mjs'
 import {
   resolveGrammarFillPublicGeometryFixture,
@@ -409,6 +410,8 @@ const paperBrowseContentStyle: PaperBrowseContentStyle = {
     `${sectionHeadingRuntime.screen.partHeadingIndentEm}em`,
   '--ps-section-heading-indent':
     `${sectionHeadingRuntime.screen.sectionHeadingIndentEm}em`,
+  '--ps-section-heading-numeric-shift':
+    `${sectionHeadingRuntime.screen.numericRunBaselineShiftEm}em`,
   '--ps-group-instruction-indent':
     `${sectionHeadingRuntime.screen.groupInstructionFirstLineIndentEm}em`,
   '--ps-seven-merged-instruction-margin-bottom':
@@ -435,6 +438,20 @@ const paperBrowseContentStyle: PaperBrowseContentStyle = {
     `${sectionHeadingRuntime.screen.passageFirstLineIndentEm}em`,
   '--ps-page-margin-x': paperSurfaceTokens.pageMarginX,
   '--ps-page-margin-top': paperSurfaceTokens.pageMarginTop,
+}
+
+function renderSectionHeadingText(text: string): ReactNode {
+  return sectionHeadingTextRuns(text).map((run, index) =>
+    run.kind === 'numeric'
+      ? (
+          <span
+            key={`${index}-${run.text}`}
+            data-canonical-section-heading-numeric-run=""
+          >
+            {run.text}
+          </span>
+        )
+      : run.text)
 }
 
 // 讲评栏 — 答案行. `null` means "don't render an answer row at all"
@@ -2855,7 +2872,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
                 : undefined
             }
           >
-            {block.text}
+            {renderSectionHeadingText(block.text)}
           </h2>
         )
       case 'sectionHeading': {
@@ -2979,7 +2996,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
                 : undefined
             }
           >
-            {block.text}
+            {renderSectionHeadingText(block.text)}
           </h3>
         )
       }

@@ -4,7 +4,7 @@
 
 本文件是唯一的人类可读索引；当前 canonical 编译、校验、发布和受支持的
 Screen / Print-PDF consumer 只从
-[`standards/paper-canonical/manifest-v31.json`](../../standards/paper-canonical/manifest-v31.json)
+[`standards/paper-canonical/manifest-v32.json`](../../standards/paper-canonical/manifest-v32.json)
 解析一份 digest-closed 的权威闭包。这里不复制卷型题号、分值、题组
 cardinality、清洗条件或字体/物理排版数值，也不能被 caller 当作第二套配置。
 
@@ -18,21 +18,32 @@ Renderer Typography、其 schema 及纯验证入口。未知版本、缺件、di
 任何会改变 admission、canonical 语义、Profile、normalization 或 renderer
 结果的变更，必须新增 versioned artifact、schema/semantic conformance fixture、
 迁移说明和 manifest 升版；已经被 Publication 引用的 artifact 不可原位修改。
-`manifest-v1.json` 至 `manifest-v30.json` 保留各自原始 digest-closed closure，
-供既有 Publication 解析；当前 Screen v31、Print/PDF v32 consumer contracts
-只绑定 v31 authority。v31 以 NCK1 Profile v10 发布 renderer-neutral 的完整
+`manifest-v1.json` 至 `manifest-v31.json` 保留各自原始 digest-closed closure，
+供既有 Publication 解析；当前 Screen v32、Print/PDF v33 consumer contracts
+只绑定 v32 authority。v32 继续以 NCK1 Profile v10 发布 renderer-neutral 的完整
 可见结构：inactive Listening 不产生标题、正文或空隙，首个可见部分仍是
 `第二部分 阅读（共两节，满分50分）`，且阅读理解、七选五的节标题和说明均
 由同一 Profile/digest 绑定的 Consumption Plan 进入 plain/lecture Screen、
 Student/Teacher Print HTML 与 PDF。六个在用节标题均与部标题共享正文左缘，
-全文采用同一书宋栈和基线；`第X节` 后及数字与中文单位之间保留一个半角空格，
+全文采用同一书宋栈；分值数字使用固定 0.2em 局部字形位移与中文可见基线对齐；
+`第X节` 后及数字与中文单位之间保留一个半角空格，
 中文全角括号、分号、逗号不变。题组指导语和段落首行从 2em 起笔，段落续行
-回到正文左缘。Normalization Rules v5 只在英文 token 邻接中文释义时收窄
+回到正文左缘。阅读题号到题干使用 1.647em 悬挂锚点；一行四项的 C 起点与
+一行两项的第二列共同绑定 4160/8764 可用内容宽度锚点。阅读与完形的题号、
+选项标号和选项正文均为 400 字重；完形题号与 A 之间不插入空格，四个选项
+使用金样归一化固定起点。应用文标题到首个 prompt 为一个 baseline step；
+续写标题到 instruction 为一个 baseline step，instruction 到材料为 1.5
+baseline steps，二者由独立 authority 拥有。Normalization Rules v5 只在英文 token 邻接中文释义时收窄
 半角括号/标点空格转换，普通中文 `这是（中文）说明。` 保持原样，并保留英文
 弯撇号规则；原始 Source Capture 字节保持不变。Application / Continuation
-rhythm v3 分别声明 Screen
+rhythm v4 分别声明 Screen
 1px 与 Print/PDF 0.5pt 的细线原语，正文首行统一 2em，续写给定段首仍为
 独立 4em 角色。正文行盒继续固定 18pt，不引入任何 18/19、18–23 或按页自适应。
+迁移说明见
+[`manifest-v32-migration.md`](../../standards/paper-canonical/manifest-v32-migration.md)。
+
+此前 v31 以 NCK1 Profile v10、Paper Typography v6、Normalization Rules v5
+和 Grammar Fill public-geometry-fixtures v10 闭合完整可见结构与中文标点；
 迁移说明见
 [`manifest-v31-migration.md`](../../standards/paper-canonical/manifest-v31-migration.md)。
 

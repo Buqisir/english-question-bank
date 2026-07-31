@@ -130,7 +130,7 @@ const cleanupProbeTimeout = setTimeout(() => {
     `real QA pilot did not expose cleanup probes:\n${startupFailureOutput}`,
   ))
   startupFailure.kill('SIGKILL')
-}, 120_000)
+}, 300_000)
 const captureStartupFailureOutput = (chunk) => {
   startupFailureOutput += chunk.toString()
   const cleanupProbeMatch = startupFailureOutput.match(

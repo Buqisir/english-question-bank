@@ -19,7 +19,20 @@ export const clozeRhythm: Readonly<{
     printPdf: Readonly<Record<string, number>>
   }>
   blankGeometry: Readonly<Record<string, string | number>>
-  horizontalChoiceGeometry: Readonly<Record<string, unknown>>
+  horizontalChoiceGeometry: Readonly<{
+    rowOccupancy: Readonly<Record<string, number>>
+    strategy: Readonly<Record<string, string | boolean>>
+    rendererMapping: Readonly<{
+      rowWidthPt: number
+      questionLabelWidthPt: number
+      questionLabelStartPt: number
+      columnStartsPt: ReadonlyArray<number>
+      columnWidthsPt: ReadonlyArray<number>
+      minimumGutterPt: number
+      labelToTextGapEm: number
+      visibleWeight: number
+    }>
+  }>
   goldenGeometryFramework: Readonly<Record<string, unknown>>
   referenceMeasurement: Readonly<{
     path: string

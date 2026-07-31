@@ -1120,6 +1120,10 @@ function PaperSurfaceQuestionItem({
   if (!trimmedStem && !hasOptions) {
     return null
   }
+  const clozeChoiceMapping =
+    clozeRhythmEnabled
+      ? clozeRhythm.horizontalChoiceGeometry.rendererMapping
+      : null
 
   return (
     <li
@@ -1145,13 +1149,34 @@ function PaperSurfaceQuestionItem({
           className="ps-question-stem-button"
           aria-pressed={isActive}
           aria-label={`Focus question ${question.questionNo}`}
+          style={clozeChoiceMapping
+            ? {
+                display: 'grid',
+                gridTemplateColumns:
+                  `${clozeChoiceMapping.questionLabelWidthPt}pt minmax(0, 1fr)`,
+                columnGap: 0,
+                width: `${clozeChoiceMapping.rowWidthPt}pt`,
+              }
+            : undefined}
         >
           <span className="ps-question-no">{question.questionNo}.</span>
           <span
             className={`ps-question-options-inline${question.canonicalPlacement ? ` ps-question-options-inline--${question.canonicalPlacement.mode}` : ''}`}
             data-canonical-placement-signature={question.canonicalPlacement?.signature}
-            data-canonical-column-starts-pt={question.canonicalPlacement?.columnStartsPt.join(',')}
-            style={question.canonicalPlacement
+            data-canonical-column-starts-pt={
+              clozeChoiceMapping?.columnStartsPt.join(',')
+              ?? question.canonicalPlacement?.columnStartsPt.join(',')
+            }
+            style={clozeChoiceMapping
+              ? {
+                  width:
+                    `${clozeChoiceMapping.rowWidthPt - clozeChoiceMapping.questionLabelWidthPt}pt`,
+                  gridTemplateColumns: clozeChoiceMapping.columnWidthsPt
+                    .map((width) => `${width}pt`)
+                    .join(' '),
+                  columnGap: 0,
+                }
+              : question.canonicalPlacement
               ? {
                   width: `${question.canonicalPlacement.rowWidthPt}pt`,
                   gridTemplateColumns: question.canonicalPlacement.columnWidthsPt

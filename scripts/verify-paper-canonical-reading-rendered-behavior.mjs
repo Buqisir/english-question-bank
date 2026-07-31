@@ -544,7 +544,7 @@ const oneColumnContinuationPt = oneColumnContinuationTwip / 20
 const questionStemStartPt = translateAbcdPlanToPointPlacement(
   oneColumnQuestion.layoutPlan,
 ).questionStemStartPt
-assert.equal(questionStemStartPt, 21)
+assert.equal(questionStemStartPt, 17.3)
 const questionStemStartTwip = questionStemStartPt * 20
 
 const figureFixture = makeCanonicalFigureFixture()

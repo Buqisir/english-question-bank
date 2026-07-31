@@ -129,7 +129,7 @@ const blocks = items.map((item) => ({
 }))
 const provisionActualArtifacts = process.argv.includes('--actual-artifacts')
 const artifactProof = {}
-const EXPECTED_FOUR_COLUMN_STARTS_PT = [0, 104, 208, 312]
+const EXPECTED_FOUR_COLUMN_STARTS_PT = [0, 110.5, 214.6, 319.25]
 
 async function readBrowserColumnStarts(page, rowSelector, optionSelector) {
   return page.locator(rowSelector).evaluateAll((rows, childSelector) =>
@@ -1045,7 +1045,19 @@ try {
         15,
       )
       assert.equal(
-        (student.match(/grid-template-columns:104pt 104pt 104pt 126\.2pt/g) || []).length,
+        (
+          student.match(
+            /grid-template-columns:110\.5pt 104\.1pt 104\.65pt 101\.65pt/g,
+          ) || []
+        ).length,
+        15,
+      )
+      assert.equal(
+        (
+          student.match(
+            /data-canonical-column-starts-pt="17\.3,127\.8,231\.9,336\.55"/g,
+          ) || []
+        ).length,
         15,
       )
       artifactProof.print = { student, teacher }

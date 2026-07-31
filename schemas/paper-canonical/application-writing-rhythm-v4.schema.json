@@ -1,0 +1,74 @@
+{
+  "$id": "application-writing-rhythm-v4",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "const": "application-writing-rhythm-v4"
+    },
+    "id": {
+      "const": "application-writing-rhythm"
+    },
+    "version": {
+      "const": "4"
+    },
+    "owner": {
+      "const": "renderer_typography"
+    },
+    "paper": {
+      "const": "a4"
+    },
+    "projectionContract": {
+      "const": "canonical-projector-v1"
+    },
+    "rules": {
+      "type": "array"
+    },
+    "semanticRoleClasses": {
+      "type": "object"
+    },
+    "adjacencyGraph": {
+      "type": "array"
+    },
+    "targets": {
+      "type": "object"
+    },
+    "responseGeometry": {
+      "type": "object"
+    },
+    "rendererMapping": {
+      "type": "object"
+    },
+    "goldenGeometryFramework": {
+      "type": "object"
+    },
+    "referenceMeasurement": {
+      "type": "object"
+    },
+    "publicArtifactOracle": {
+      "type": "object"
+    },
+    "observedCoverageOracle": {
+      "type": "object"
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "id",
+    "version",
+    "owner",
+    "paper",
+    "projectionContract",
+    "rules",
+    "semanticRoleClasses",
+    "adjacencyGraph",
+    "targets",
+    "responseGeometry",
+    "rendererMapping",
+    "goldenGeometryFramework",
+    "referenceMeasurement",
+    "publicArtifactOracle",
+    "observedCoverageOracle"
+  ],
+  "type": "object"
+}

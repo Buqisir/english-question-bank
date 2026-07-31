@@ -1,0 +1,139 @@
+{
+  "schemaVersion": "cloze-rhythm-v3-conformance-v1",
+  "authority": {
+    "schemaVersion": "cloze-rhythm-v3",
+    "id": "cloze-rhythm",
+    "version": "3"
+  },
+  "semanticAttacks": [
+    {
+      "caseId": "edge-ratio-drift",
+      "operation": "set",
+      "path": [
+        "adjacencyGraph",
+        0,
+        "baselineStepRatio"
+      ],
+      "invalidValue": 99
+    },
+    {
+      "caseId": "edge-endpoint-drift",
+      "operation": "set",
+      "path": [
+        "adjacencyGraph",
+        0,
+        "fromClass"
+      ],
+      "invalidValue": "chrome"
+    },
+    {
+      "caseId": "target-tolerance-drift",
+      "operation": "set",
+      "path": [
+        "targets",
+        "screen",
+        "oneStepTolerancePx"
+      ],
+      "invalidValue": 999
+    },
+    {
+      "caseId": "framework-drift",
+      "operation": "set",
+      "path": [
+        "goldenGeometryFramework",
+        "id"
+      ],
+      "invalidValue": "golden-geometry-framework-poisoned"
+    },
+    {
+      "caseId": "reference-digest-drift",
+      "operation": "set",
+      "path": [
+        "referenceMeasurement",
+        "sha256"
+      ],
+      "invalidValue": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    {
+      "caseId": "blank-alignment-drift",
+      "operation": "set",
+      "path": [
+        "blankGeometry",
+        "numberAlignment"
+      ],
+      "invalidValue": "left"
+    },
+    {
+      "caseId": "horizontal-strategy-drift",
+      "operation": "set",
+      "path": [
+        "horizontalChoiceGeometry",
+        "strategy",
+        "optionColumns"
+      ],
+      "invalidValue": "distributed"
+    },
+    {
+      "caseId": "missing-declared-field",
+      "operation": "delete",
+      "path": [
+        "horizontalChoiceGeometry",
+        "rendererMapping",
+        "minimumGutterPt"
+      ]
+    },
+    {
+      "caseId": "duplicate-declared-edge",
+      "operation": "duplicate-array-entry",
+      "path": [
+        "adjacencyGraph"
+      ],
+      "sourceIndex": 0
+    },
+    {
+      "caseId": "extra-declared-field",
+      "operation": "set",
+      "path": [
+        "horizontalChoiceGeometry",
+        "rendererMapping",
+        "unversionedExtra"
+      ],
+      "invalidValue": 1
+    },
+    {
+      "caseId": "question-A-anchor-drift",
+      "operation": "set",
+      "path": [
+        "horizontalChoiceGeometry",
+        "rendererMapping",
+        "questionLabelWidthPt"
+      ],
+      "invalidValue": 21
+    },
+    {
+      "caseId": "cloze-column-anchor-drift",
+      "operation": "set",
+      "path": [
+        "horizontalChoiceGeometry",
+        "rendererMapping",
+        "columnStartsPt",
+        2
+      ],
+      "invalidValue": 208
+    },
+    {
+      "caseId": "visible-weight-drift",
+      "operation": "set",
+      "path": [
+        "horizontalChoiceGeometry",
+        "rendererMapping",
+        "visibleWeight"
+      ],
+      "invalidValue": 700
+    }
+  ],
+  "expectedIssueCodes": [
+    "SCHEMA_CONST",
+    "RENDERER_CLOZE_RHYTHM_INVALID"
+  ]
+}

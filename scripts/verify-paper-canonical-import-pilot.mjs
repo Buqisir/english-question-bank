@@ -43,6 +43,10 @@ import {
 import {
   applicationWritingRhythm,
 } from '../shared/paper-canonical/applicationWritingRhythm.mjs'
+import {
+  sectionHeadingRuntime,
+  sectionHeadingTextRuns,
+} from '../shared/paper-canonical/sectionHeadingContract.mjs'
 import { digestJson } from '../shared/paper-canonical/stable.mjs'
 import { loadCanonicalImportRequest } from '../server/paper-canonical/importRequest.mjs'
 import {
@@ -110,7 +114,7 @@ const clozeSourceOraclePath = path.join(
 )
 const clozeCoverageOraclePath = path.join(
   repositoryRoot,
-  'docs/cuts/paper-canonical-unification/qa/20-cloze-observed-coverage-oracle-v3.json',
+  'docs/cuts/paper-canonical-unification/qa/20-cloze-observed-coverage-oracle-v4.json',
 )
 const grammarFillReferencePath = path.join(
   repositoryRoot,
@@ -577,18 +581,18 @@ function assertSevenChoicesReferenceEvidence() {
   )
   assert.equal(
     canonicalAuthorityRef.manifestVersion,
-    '31',
+    '32',
     'new Publications preserve Seven Choices inside the whole-paper typography successor authority',
   )
   assert.equal(
     consumerContractRefs.screen.version,
-    '31',
-    'Screen v31 binds the complete geometry authority closure',
+    '32',
+    'Screen v32 binds the complete geometry authority closure',
   )
   assert.equal(
     consumerContractRefs.print_pdf.version,
-    '32',
-    'Print/PDF v32 binds the complete geometry authority closure',
+    '33',
+    'Print/PDF v33 binds the complete geometry authority closure',
   )
   assert.equal(
     sha256(preservedBytes),
@@ -1043,13 +1047,21 @@ function assertClozeReferenceEvidence() {
     clozeRhythm.horizontalChoiceGeometry.rendererMapping,
     {
       rowWidthPt: 438.2,
-      questionLabelWidthPt: 21,
-      columnStartsPt: [0, 104, 208, 312],
-      columnOriginPitchPt: 104,
-      columnWidthsPt: [104, 104, 104, 126.2],
+      questionLabelWidthPt: 17.3,
+      questionLabelStartPt: 0,
+      columnStartsPt: [17.3, 127.8, 231.9, 336.55],
+      columnWidthsPt: [110.5, 104.1, 104.65, 101.65],
       minimumGutterPt: 21,
+      labelToTextGapEm: 0.411765,
+      visibleWeight: 400,
     },
-    'Cloze authority publishes the fixed four-track renderer mapping without a distributed or hybrid row',
+    'Cloze authority publishes the gold-normalized question/A and four-track anchors without a distributed or hybrid row',
+  )
+  assert.equal(
+    clozeRhythm.horizontalChoiceGeometry.rendererMapping
+      .questionLabelStartPt,
+    0,
+    'Cloze question labels share the passage continuation origin',
   )
   return { digest: sha256(bytes), evidence }
 }
@@ -1059,7 +1071,7 @@ function assertClozeCoverageOracle() {
   const successor = JSON.parse(bytes)
   assert.equal(
     successor.schemaVersion,
-    'cloze-observed-coverage-oracle-v3',
+    'cloze-observed-coverage-oracle-v4',
   )
   const materialize = (oraclePath) => {
     const oracleBytes = readFileSync(oraclePath)
@@ -1077,6 +1089,19 @@ function assertClozeCoverageOracle() {
     )
     const oracle = materialize(predecessorPath)
     oracle.schemaVersion = document.schemaVersion
+    if (document.edgeOverrides) {
+      const edgeIds = new Set(oracle.edges.map((edge) => edge.edgeId))
+      for (const edgeId of Object.keys(document.edgeOverrides)) {
+        assert.equal(
+          edgeIds.has(edgeId),
+          true,
+          `${document.schemaVersion} overrides an existing predecessor edge`,
+        )
+      }
+      oracle.edges = oracle.edges.map(
+        (edge) => document.edgeOverrides[edge.edgeId] ?? edge,
+      )
+    }
     oracle.variantOracle.profiles = {
       ...oracle.variantOracle.profiles,
       ...document.profileAdditions,
@@ -3271,9 +3296,18 @@ async function assertScreenReadingVerticalRhythm(
       && (element.compareDocumentPosition(firstCard)
         & Node.DOCUMENT_POSITION_FOLLOWING))
     const bottom = (element) => {
-      const range = document.createRange()
-      range.selectNodeContents(element)
-      return Math.max(...[...range.getClientRects()].map((rect) => rect.bottom))
+      const runBottoms = [...element.childNodes].flatMap((node) => {
+        const range = document.createRange()
+        range.selectNodeContents(node)
+        const numericShift = node instanceof Element
+          && node.hasAttribute('data-canonical-section-heading-numeric-run')
+          ? Number.parseFloat(getComputedStyle(node).top) || 0
+          : 0
+        return [...range.getClientRects()].map(
+          (rect) => rect.bottom - numericShift,
+        )
+      })
+      return Math.max(...runBottoms)
     }
     const letter = firstCard?.querySelector(
       '[data-canonical-reading-rhythm-role="passage_letter"]',
@@ -3290,6 +3324,38 @@ async function assertScreenReadingVerticalRhythm(
     chromeGeometry.roles.length > 0,
     true,
     `${label} exposes Reading chrome`,
+  )
+  const scoreGlyphAlignment = await page.evaluate(() => {
+    const heading = document.querySelector(
+      '[data-canonical-reading-rhythm-role="subsection"]',
+    )
+    const numericRun = heading?.querySelector(
+      '[data-canonical-section-heading-numeric-run]',
+    )
+    if (!(heading instanceof HTMLElement)
+      || !(numericRun instanceof HTMLElement)) return null
+    const style = getComputedStyle(heading)
+    const canvas = document.createElement('canvas')
+    const context = canvas.getContext('2d')
+    if (!context) return null
+    context.font = `${style.fontWeight} ${style.fontSize} ${style.fontFamily}`
+    const chinese = context.measureText('分')
+    const numeric = context.measureText('37.5')
+    return {
+      chineseDescent: chinese.actualBoundingBoxDescent,
+      numericDescent: numeric.actualBoundingBoxDescent,
+      numericShiftPx:
+        Number.parseFloat(getComputedStyle(numericRun).top) || 0,
+    }
+  })
+  assert.ok(scoreGlyphAlignment, `${label} exposes measurable score glyphs`)
+  assert.ok(
+    Math.abs(
+      scoreGlyphAlignment.numericDescent
+      + scoreGlyphAlignment.numericShiftPx
+      - scoreGlyphAlignment.chineseDescent
+    ) <= 0.75,
+    `${label} aligns the real numeric glyph descent with the Chinese score glyph descent: ${JSON.stringify(scoreGlyphAlignment)}`,
   )
   for (let index = 1; index < chromeGeometry.roles.length; index += 1) {
     assertStep(
@@ -3322,7 +3388,15 @@ async function assertScreenReadingVerticalRhythm(
     const bottom = (element) => {
       const range = document.createRange()
       range.selectNodeContents(element)
-      return Math.max(...[...range.getClientRects()].map((rect) => rect.bottom))
+      const numericRun = element.querySelector(
+        '[data-canonical-section-heading-numeric-run]',
+      )
+      const numericShift = numericRun
+        ? Number.parseFloat(getComputedStyle(numericRun).top) || 0
+        : 0
+      return Math.max(...[...range.getClientRects()].map(
+        (rect) => rect.bottom,
+      )) - numericShift
     }
     if (!option || !section) return null
     return {
@@ -3719,25 +3793,43 @@ async function assertClozeDomGeometry(
     if (!(group instanceof HTMLElement)) return { missingGroup: true }
     const visualLines = (element) => {
       if (!(element instanceof Element)) return []
-      const range = document.createRange()
-      range.selectNodeContents(element)
+      const walker = document.createTreeWalker(
+        element,
+        NodeFilter.SHOW_TEXT,
+        {
+          acceptNode: (node) => node.textContent?.trim()
+            ? NodeFilter.FILTER_ACCEPT
+            : NodeFilter.FILTER_REJECT,
+        },
+      )
       const lines = []
-      for (const rect of range.getClientRects()) {
-        const center = rect.y + rect.height / 2
-        const line = lines.find(
-          (candidate) => Math.abs(candidate.center - center) <= 1,
+      for (let node = walker.nextNode(); node; node = walker.nextNode()) {
+        const range = document.createRange()
+        range.selectNodeContents(node)
+        const numericRun = node.parentElement?.closest(
+          '[data-canonical-section-heading-numeric-run]',
         )
-        if (line) {
-          line.x = Math.min(line.x, rect.x)
-          line.right = Math.max(line.right, rect.right)
-        } else {
-          lines.push({
-            x: rect.x,
-            right: rect.right,
-            y: rect.y,
-            height: rect.height,
-            center,
-          })
+        const numericShift = numericRun
+          ? Number.parseFloat(getComputedStyle(numericRun).top) || 0
+          : 0
+        for (const rect of range.getClientRects()) {
+          const y = rect.y - numericShift
+          const center = y + rect.height / 2
+          const line = lines.find(
+            (candidate) => Math.abs(candidate.center - center) <= 1,
+          )
+          if (line) {
+            line.x = Math.min(line.x, rect.x)
+            line.right = Math.max(line.right, rect.right)
+          } else {
+            lines.push({
+              x: rect.x,
+              right: rect.right,
+              y,
+              height: rect.height,
+              center,
+            })
+          }
         }
       }
       return lines.sort((left, right) =>
@@ -3817,8 +3909,15 @@ async function assertClozeDomGeometry(
         rowRect: row.getBoundingClientRect().toJSON(),
         questionText: question?.textContent || '',
         questionLines: visualLines(question),
+        questionFontWeight: question
+          ? Number.parseInt(getComputedStyle(question).fontWeight, 10)
+          : null,
         labels: labels.map((element) => element.textContent || ''),
         texts: texts.map((element) => element.textContent || ''),
+        labelFontWeights: labels.map((element) =>
+          Number.parseInt(getComputedStyle(element).fontWeight, 10)),
+        textFontWeights: texts.map((element) =>
+          Number.parseInt(getComputedStyle(element).fontWeight, 10)),
         labelXs: labelRects.map((rect) => rect.x),
         labelYs: labelRects.map((rect) => rect.y),
         textXs: textRects.map((rect) => rect.x),
@@ -3829,6 +3928,9 @@ async function assertClozeDomGeometry(
         placementMode:
           placement?.getAttribute('data-canonical-placement-mode')
           || placement?.className,
+        placementColumnGap: placement
+          ? getComputedStyle(placement).columnGap
+          : null,
         lineHeight: Number.parseFloat(getComputedStyle(row).lineHeight),
         breakInside: getComputedStyle(row).breakInside,
       }
@@ -4120,16 +4222,43 @@ async function assertClozeDomGeometry(
       row.texts.map(normalizedVisibleText),
       sourceRow.options.map((option) => option.text),
     )
-    assert.equal(row.columnStartsPt, '0,104,208,312')
+    assert.equal(
+      row.columnStartsPt,
+      clozeRhythm.horizontalChoiceGeometry.rendererMapping
+        .columnStartsPt.join(','),
+    )
     assert.match(String(row.placementMode), /four_columns/)
     const relativeLabelXs = row.labelXs.map((x) => x - row.labelXs[0])
-    const expectedPitchPx = 104 * 96 / 72
+    const expectedRelativeLabelXs =
+      clozeRhythm.horizontalChoiceGeometry.rendererMapping.columnStartsPt
+        .map((x) =>
+          (
+            x
+            - clozeRhythm.horizontalChoiceGeometry.rendererMapping
+              .columnStartsPt[0]
+          ) * 96 / 72)
     assert.equal(
       relativeLabelXs.every(
-        (x, track) => Math.abs(x - expectedPitchPx * track) <= 2,
+        (x, track) =>
+          Math.abs(x - expectedRelativeLabelXs[track]) <= 2,
       ),
       true,
-      `${label} ${sourceRow.questionId} retains four fixed origin-pitch tracks`,
+      `${label} ${sourceRow.questionId} retains four gold-normalized fixed origins`,
+    )
+    assert.equal(row.questionFontWeight, 400)
+    assert.equal(row.labelFontWeights.every((weight) => weight === 400), true)
+    assert.equal(row.textFontWeights.every((weight) => weight === 400), true)
+    assert.equal(
+      `${normalizedVisibleText(row.questionText)}${
+        normalizedVisibleText(row.labels[0])
+      }`,
+      `${41 + index}.A.`,
+      `${label} ${sourceRow.questionId} renders the number/A token pair without inserted whitespace`,
+    )
+    assert.equal(
+      ['normal', '0px'].includes(row.placementColumnGap),
+      true,
+      `${label} ${sourceRow.questionId} adds no CSS gap between the question and A anchor tracks`,
     )
     assert.equal(
       row.labelYs.every((y) => Math.abs(y - row.labelYs[0]) <= 1),
@@ -4170,7 +4299,7 @@ async function assertClozeDomGeometry(
   observe('choice_row_question_to_first_track', {
     fromIdentity: firstRow.questionId,
     toIdentity: `${firstRow.questionId}:A`,
-    horizontalRelation: 'fixed_question_to_A_anchor',
+    horizontalRelation: 'gold_normalized_question_to_A_anchor',
     actualPx:
       firstRow.labelXs[0] - firstRow.questionLines[0].x,
   })
@@ -4184,7 +4313,7 @@ async function assertClozeDomGeometry(
   observe('choice_tracks_internal', {
     fromIdentity: firstRow.labels,
     toIdentity: firstRow.labels,
-    horizontalRelation: 'four_fixed_equal_origin_pitch_tracks',
+    horizontalRelation: 'four_gold_normalized_fixed_origin_tracks',
     relativeOriginsPx: firstRow.labelXs.map(
       (x) => x - firstRow.labelXs[0],
     ),
@@ -5838,12 +5967,18 @@ async function sevenChoicesDomObservation(page, groupSelector) {
       for (let node = walker.nextNode(); node; node = walker.nextNode()) {
         const range = document.createRange()
         range.selectNodeContents(node)
+        const numericRun = node.parentElement?.closest(
+          '[data-canonical-section-heading-numeric-run]',
+        )
+        const numericShift = numericRun
+          ? Number.parseFloat(getComputedStyle(numericRun).top) || 0
+          : 0
         for (const rect of range.getClientRects()) {
           if (rect.width > 0 && rect.height > 0) {
             rects.push({
               left: rect.left,
               right: rect.right,
-              bottom: rect.bottom,
+              bottom: rect.bottom - numericShift,
             })
           }
         }
@@ -5876,9 +6011,15 @@ async function sevenChoicesDomObservation(page, groupSelector) {
       if (!element) return null
       const range = document.createRange()
       range.selectNodeContents(element)
+      const numericRun = element.querySelector(
+        '[data-canonical-section-heading-numeric-run]',
+      )
+      const numericShift = numericRun
+        ? Number.parseFloat(getComputedStyle(numericRun).top) || 0
+        : 0
       const bottoms = [...range.getClientRects()]
         .filter((rect) => rect.width > 0 && rect.height > 0)
-        .map((rect) => rect.bottom)
+        .map((rect) => rect.bottom - numericShift)
       return bottoms.length > 0 ? Math.max(...bottoms) : null
     }
     const roleElements = [...document.querySelectorAll(
@@ -8445,40 +8586,62 @@ function assertOwnerGoldSectionHeadingsPdf(pdfPath, label) {
       sectionHeading,
       `${label} section heading ${sectionHeading}`,
     )
-    const centers = sectionLine.wordIndexes.map((wordIndex) => {
-      const word = words[wordIndex]
-      return (word.yMin + word.yMax) / 2
-    })
+    const sectionWords = sectionLine.wordIndexes.map(
+      (wordIndex) => words[wordIndex],
+    )
+    const numericWords = sectionWords.filter((word) =>
+      /[0-9]/u.test(word.text))
+    const textWords = sectionWords.filter((word) =>
+      !/[0-9]/u.test(word.text))
     assert.ok(
       Math.abs(sectionLine.xMin - partLine.xMin) <= 1.5,
       `${label} keeps ${sectionHeading} on its part body-left edge`,
     )
     assert.ok(
-      Math.max(...centers) - Math.min(...centers) <= 1.5,
-      `${label} keeps Chinese, digits, and decimal points on one baseline`,
+      numericWords.length > 0 && textWords.length > 0,
+      `${label} resolves both numeric and Chinese score runs`,
     )
-    const sectionHeadingRuns = textRuns.filter(
-      (run) =>
-        lineIdentity(run.text) === lineIdentity(sectionHeading),
+    const averageBottom = (runs) =>
+      runs.reduce((sum, word) => sum + word.yMax, 0) / runs.length
+    const expectedShiftPt =
+      sectionHeadingRuntime.printPdf.numericRunBaselineShiftEm
+      * sectionHeadingRuntime.printPdf.fontSizePt
+    assert.ok(
+      Math.abs(
+        averageBottom(numericWords)
+        - averageBottom(textWords)
+        - expectedShiftPt
+      ) <= 0.75,
+      `${label} applies the authority-owned numeric run shift without moving Chinese runs: ${JSON.stringify(sectionWords)}`,
     )
-    assert.equal(
-      sectionHeadingRuns.length,
-      1,
-      `${label} exposes ${sectionHeading} as one local PDF font run`,
-    )
-    assert.equal(
-      sectionHeadingRuns[0].fontFamilies.some(
-        (family) => /SimSun|Songti|STSong/u.test(family),
-      ),
-      true,
-      `${label} renders all of ${sectionHeading} in one Chinese Song-family run`,
-    )
+    for (const expectedRun of sectionHeadingTextRuns(sectionHeading)) {
+      const expectedIdentity = lineIdentity(expectedRun.text)
+      if (!expectedIdentity) continue
+      const matchingRuns = textRuns.filter(
+        (run) => {
+          const candidateIdentity = lineIdentity(run.text)
+          return candidateIdentity
+            && (
+              expectedIdentity.includes(candidateIdentity)
+              || candidateIdentity.includes(expectedIdentity)
+            )
+        },
+      )
+      assert.equal(
+        matchingRuns.some((run) => run.fontFamilies.some(
+          (family) => /SimSun|Songti|STSong/u.test(family),
+        )),
+        true,
+        `${label} renders ${JSON.stringify(expectedRun.text)} from ${sectionHeading} in the same Chinese Song-family font while retaining its semantic run identity`,
+      )
+    }
   }
 }
 
 function exactPdfTokens(value) {
   return normalizedVisibleText(value)
-    .split(/\s+/)
+    .split(/(\d+(?:\.\d+)?)/u)
+    .flatMap((segment) => segment.split(/\s+/))
     .map(normalizedPdfToken)
     .filter(Boolean)
 }
@@ -9070,9 +9233,21 @@ function assertPdfClozeGeometry(
             ? (followingWord.yMin + followingWord.yMax) / 2 - 1
             : 790
     const options = sourceRow.options.map((option, track) => {
-      const expectedX = firstTextX + 104 * track
+      const relativeStartPt =
+        clozeRhythm.horizontalChoiceGeometry.rendererMapping
+          .columnStartsPt[track]
+        - clozeRhythm.horizontalChoiceGeometry.rendererMapping
+          .columnStartsPt[0]
+      const expectedX = firstTextX + relativeStartPt
       const nextTrackBoundary =
-        track < 3 ? firstTextX + 104 * (track + 1) - 16 : 550
+        track < 3
+          ? firstTextX
+            + clozeRhythm.horizontalChoiceGeometry.rendererMapping
+              .columnStartsPt[track + 1]
+            - clozeRhythm.horizontalChoiceGeometry.rendererMapping
+              .columnStartsPt[0]
+            - 16
+          : 550
       const wordsInTrack = rowWords
         .filter((word) => {
           const centerY = (word.yMin + word.yMax) / 2
@@ -9125,10 +9300,19 @@ function assertPdfClozeGeometry(
     )
     assert.equal(
       relativeXs.every(
-        (x, track) => Math.abs(x - 104 * track) <= 2.5,
+        (x, track) =>
+          Math.abs(
+            x
+            - (
+              clozeRhythm.horizontalChoiceGeometry.rendererMapping
+                .columnStartsPt[track]
+              - clozeRhythm.horizontalChoiceGeometry.rendererMapping
+                .columnStartsPt[0]
+            )
+          ) <= 2.5,
       ),
       true,
-      `${label} row ${sourceRow.questionNo} retains fixed 104pt option text-start pitch`,
+      `${label} row ${sourceRow.questionNo} retains the gold-normalized fixed option text-start anchors`,
     )
     const yCenters = options.map(
       (option) => (option.word.yMin + option.word.yMax) / 2,
@@ -9152,9 +9336,14 @@ function assertPdfClozeGeometry(
       )
     }
     assert.equal(
-      options[0].word.xMin - questionWord.xMin > 20,
+      Math.abs(
+        options[0].labelWord.xMin
+        - questionWord.xMin
+        - clozeRhythm.horizontalChoiceGeometry.rendererMapping
+          .questionLabelWidthPt
+      ) <= 1.5,
       true,
-      `${label} row ${sourceRow.questionNo} retains its question-to-A anchor`,
+      `${label} row ${sourceRow.questionNo} retains its gold-normalized question-to-A anchor`,
     )
     return {
       questionId: sourceRow.questionId,
@@ -9432,7 +9621,7 @@ function assertPdfClozeGeometry(
   observe('choice_row_question_to_first_track', {
     fromIdentity: rowProofs.map((row) => row.questionId),
     toIdentity: rowProofs.map((row) => `${row.questionId}:A`),
-    horizontalRelation: 'fixed_question_to_A_anchor',
+    horizontalRelation: 'gold_normalized_question_to_A_anchor',
     actualOffsetsPt: rowProofs.map(
       (row) => row.options[0].labelWord.xMin
         - rowWords[row.questionIndex].xMin,
@@ -9451,7 +9640,7 @@ function assertPdfClozeGeometry(
   observe('choice_tracks_internal', {
     fromIdentity: rowProofs[0].options.map((option) => option.label),
     toIdentity: rowProofs[0].options.map((option) => option.label),
-    horizontalRelation: 'four_fixed_equal_origin_pitch_tracks',
+    horizontalRelation: 'four_gold_normalized_fixed_origin_tracks',
     relativeOriginsPt: rowProofs[0].xStarts.map(
       (x) => x - rowProofs[0].xStarts[0],
     ),
@@ -12761,7 +12950,7 @@ async function renderSupportedArtifacts({
           `Print producer ignores mutable latest Cloze chrome: ${immutableChromeHtml}`,
         )
         assert.equal(
-          immutableChromeHtml.includes(
+          immutableChromeHtml.replace(/<[^>]+>/gu, '').includes(
             '第三部分 语言运用（共两节，满分30分）',
           ),
           true,
@@ -15278,7 +15467,7 @@ try {
   )
   const requestPath = path.join(
     sourcePackageDir,
-    'canonical-evidence/canonical-import-request-v31.json',
+    'canonical-evidence/canonical-import-request-v32.json',
   )
   execFileSync(process.execPath, [
     path.join(
