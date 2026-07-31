@@ -51,8 +51,10 @@ import {
   continuationWritingRhythm,
 } from '../shared/paper-canonical/continuationWritingRhythm.mjs'
 import {
+  paperTypographyAuthorityBinding,
   paperTypographyRuntime,
   paperTypographyRuntimeFromAuthority,
+  paperTypographyRuntimeFromAuthorityForTest,
   sectionHeadingRuntime,
   sectionHeadingTextRuns,
 } from '../shared/paper-canonical/sectionHeadingContract.mjs'
@@ -88,11 +90,12 @@ import {
 import {
   assertCanonicalImportPilotEvidenceMutationRejections,
   assertCanonicalImportPilotEvidenceRoot,
+  assertCanonicalImportPilotTransientEvidenceRunsClean,
   canonicalImportPilotTamperRejectionMatrix,
+  cleanupCanonicalImportPilotTransientEvidenceRun,
   createCanonicalImportPilotTransientEvidenceRun,
   finalizeCanonicalImportPilotEvidenceRoot,
   inspectOfficialCanonicalImportPilotEvidenceRoot,
-  isCanonicalImportPilotTransientEvidenceRun,
   sealCanonicalImportPilotEvidenceStaging,
 } from './lib/canonicalImportPilotEvidenceRoot.mjs'
 
@@ -273,33 +276,242 @@ function continuationSemanticObservations(ledger) {
   }
 }
 
+function stableNonPdfSemanticClone(value) {
+  if (Array.isArray(value)) {
+    return value.map((entry) => stableNonPdfSemanticClone(entry))
+  }
+  if (!value || typeof value !== 'object') return value
+  const hasPdfMeasurement = Object.hasOwn(value, 'pdfMeasurement')
+  return Object.fromEntries(
+    Object.entries(value)
+      .filter(([key]) =>
+        ![
+          'pdfSha256',
+          'beforeDirectorySnapshotSha256',
+          'afterDirectorySnapshotSha256',
+        ].includes(key)
+        && !(key === 'proofDigest' && (
+          hasPdfMeasurement
+          || value.surface === 'pdf'
+        )))
+      .map(([key, child]) => [key, stableNonPdfSemanticClone(child)]),
+  )
+}
+
 function canonicalImportPilotSemanticObservation({ evidence, ledger }) {
-  // This is intentionally not a copy of evidence.json. PDF bytes (and any
-  // proof digest calculated from them) identify the particular sealed run,
-  // but Chromium may put nondeterministic metadata in later PDFs. The
-  // independent-rerun comparison therefore carries only the authority-bound
-  // public semantics that later runs must reproduce; the seal separately
-  // binds every byte in the official run.
+  // The semantic rerun comparison must preserve every stable non-PDF-byte
+  // observation in the evidence index. PDF artifact hashes, PDF-derived proof
+  // hashes, and directory snapshots that include generated PDFs are dropped;
+  // Chromium may change those raw bytes between runs. PDF path identity,
+  // visible geometry, and every non-PDF artifact digest remain part of the
+  // cross-run contract; the seal separately binds every official byte.
+  const evidenceProjection = stableNonPdfSemanticClone(evidence)
+  delete evidenceProjection.semanticObservationDigest
+  delete evidenceProjection.continuationPublicSeamLedger.sha256
+  const renderedArtifactDigests = evidenceProjection.renderedArtifactDigests || {}
+  delete evidenceProjection.renderedArtifactDigests
+  evidenceProjection.renderedArtifactIdentity = {
+    paths: Object.keys(renderedArtifactDigests).sort(),
+    nonPdfDigests: Object.fromEntries(
+      Object.entries(renderedArtifactDigests)
+        .filter(([relativePath]) => !/\.pdf$/iu.test(relativePath))
+        .sort(([left], [right]) => left.localeCompare(right)),
+    ),
+  }
   return JSON.parse(JSON.stringify({
-    evidence: {
-      schemaVersion: evidence.schemaVersion,
-      head: evidence.head,
-      sourcePackage: evidence.sourcePackage,
-      sourcePackageDigests: evidence.sourcePackageDigests,
-      canonicalRequestDigest: evidence.canonicalRequestDigest,
-      canonicalEvidenceDigests: evidence.canonicalEvidenceDigests,
-      consumers: evidence.consumers,
-      continuationPublicSeamLedger: {
-        path: evidence.continuationPublicSeamLedger.path,
-        schemaVersion: evidence.continuationPublicSeamLedger.schemaVersion,
-        expectedHead: evidence.continuationPublicSeamLedger.expectedHead,
-      },
-      tamperRejectionMatrix: evidence.tamperRejectionMatrix,
-      paperTypographyInstructionWeightCoverage:
-        evidence.paperTypographyInstructionWeightCoverage,
-    },
+    evidence: evidenceProjection,
     continuation: continuationSemanticObservations(ledger),
   }))
+}
+
+function mutateFirstSemanticLeaf(value) {
+  if (typeof value === 'string') return `${value}:semantic-drift`
+  if (typeof value === 'number') return value + 1
+  if (typeof value === 'boolean') return !value
+  if (Array.isArray(value)) {
+    const next = structuredClone(value)
+    if (next.length === 0) return ['semantic-drift']
+    next[0] = mutateFirstSemanticLeaf(next[0])
+    return next
+  }
+  if (value && typeof value === 'object') {
+    const next = structuredClone(value)
+    const key = Object.keys(next)[0]
+    if (!key) return { semanticDrift: true }
+    next[key] = mutateFirstSemanticLeaf(next[key])
+    return next
+  }
+  return 'semantic-drift'
+}
+
+function assertCanonicalImportPilotSemanticMutationCoverage({ evidence, ledger }) {
+  const baseline = canonicalImportPilotSemanticObservation({ evidence, ledger })
+  const baselineDigest = digestJson(baseline)
+  const mutateFirstKey = (value, key) => {
+    if (Array.isArray(value)) {
+      for (let index = 0; index < value.length; index += 1) {
+        const result = mutateFirstKey(value[index], key)
+        if (!result.found) continue
+        const next = structuredClone(value)
+        next[index] = result.value
+        return { found: true, value: next }
+      }
+      return { found: false, value }
+    }
+    if (!value || typeof value !== 'object') return { found: false, value }
+    const next = structuredClone(value)
+    if (Object.hasOwn(next, key)) {
+      next[key] = mutateFirstSemanticLeaf(next[key])
+      return { found: true, value: next }
+    }
+    for (const childKey of Object.keys(next)) {
+      const result = mutateFirstKey(next[childKey], key)
+      if (!result.found) continue
+      next[childKey] = result.value
+      return { found: true, value: next }
+    }
+    return { found: false, value }
+  }
+  for (const field of Object.keys(baseline.evidence)) {
+    if (field === 'renderedArtifactIdentity') continue
+    const candidateEvidence = structuredClone(evidence)
+    candidateEvidence[field] = mutateFirstSemanticLeaf(candidateEvidence[field])
+    assert.notEqual(
+      digestJson(canonicalImportPilotSemanticObservation({
+        evidence: candidateEvidence,
+        ledger,
+      })),
+      baselineDigest,
+      `semantic projection changes when evidence.${field} changes`,
+    )
+  }
+  for (const field of [
+    'schemaVersion',
+    'expectedHead',
+    'authority',
+    'oracle',
+    'observations',
+  ]) {
+    const candidateLedger = structuredClone(ledger)
+    candidateLedger[field] = mutateFirstSemanticLeaf(candidateLedger[field])
+    assert.notEqual(
+      digestJson(canonicalImportPilotSemanticObservation({
+        evidence,
+        ledger: candidateLedger,
+      })),
+      baselineDigest,
+      `semantic projection changes when continuation.${field} changes`,
+    )
+  }
+  const artifactPaths = Object.keys(evidence.renderedArtifactDigests || {})
+  assert.equal(artifactPaths.length > 0, true, 'semantic projection has rendered artifact identities')
+  const firstArtifactPath = artifactPaths[0]
+  const renamedEvidence = structuredClone(evidence)
+  const firstArtifactDigest = renamedEvidence.renderedArtifactDigests[firstArtifactPath]
+  delete renamedEvidence.renderedArtifactDigests[firstArtifactPath]
+  renamedEvidence.renderedArtifactDigests[`${firstArtifactPath}.renamed`] = firstArtifactDigest
+  assert.notEqual(
+    digestJson(canonicalImportPilotSemanticObservation({
+      evidence: renamedEvidence,
+      ledger,
+    })),
+    baselineDigest,
+    'semantic projection changes when a rendered artifact path identity changes',
+  )
+  const nonPdfPath = artifactPaths.find((relativePath) => !/\.pdf$/iu.test(relativePath))
+  assert.ok(nonPdfPath, 'semantic projection has a non-PDF rendered artifact digest')
+  const changedNonPdfEvidence = structuredClone(evidence)
+  changedNonPdfEvidence.renderedArtifactDigests[nonPdfPath] = '0'.repeat(64)
+  assert.notEqual(
+    digestJson(canonicalImportPilotSemanticObservation({
+      evidence: changedNonPdfEvidence,
+      ledger,
+    })),
+    baselineDigest,
+    'semantic projection changes when a non-PDF artifact digest changes',
+  )
+  const pdfPath = artifactPaths.find((relativePath) => /\.pdf$/iu.test(relativePath))
+  assert.ok(pdfPath, 'semantic projection has a PDF artifact digest')
+  const changedPdfEvidence = structuredClone(evidence)
+  changedPdfEvidence.renderedArtifactDigests[pdfPath] = '0'.repeat(64)
+  assert.equal(
+    digestJson(canonicalImportPilotSemanticObservation({
+      evidence: changedPdfEvidence,
+      ledger,
+    })),
+    baselineDigest,
+    'semantic projection excludes only the raw PDF artifact digest metadata bytes',
+  )
+  for (const excludedKey of [
+    'pdfSha256',
+    'beforeDirectorySnapshotSha256',
+    'afterDirectorySnapshotSha256',
+  ]) {
+    const mutation = mutateFirstKey(evidence, excludedKey)
+    assert.equal(
+      mutation.found,
+      true,
+      `evidence exposes the nondeterministic ${excludedKey} field only where expected`,
+    )
+    assert.equal(
+      digestJson(canonicalImportPilotSemanticObservation({
+        evidence: mutation.value,
+        ledger,
+      })),
+      baselineDigest,
+      `semantic projection excludes only the nondeterministic ${excludedKey} field`,
+    )
+  }
+  const mutateFirstPdfProofDigest = (value) => {
+    if (Array.isArray(value)) {
+      for (let index = 0; index < value.length; index += 1) {
+        const result = mutateFirstPdfProofDigest(value[index])
+        if (!result.found) continue
+        const next = structuredClone(value)
+        next[index] = result.value
+        return { found: true, value: next }
+      }
+      return { found: false, value }
+    }
+    if (!value || typeof value !== 'object') return { found: false, value }
+    const next = structuredClone(value)
+    if (Object.hasOwn(next, 'pdfMeasurement') && Object.hasOwn(next, 'proofDigest')) {
+      next.proofDigest = mutateFirstSemanticLeaf(next.proofDigest)
+      return { found: true, value: next }
+    }
+    for (const key of Object.keys(next)) {
+      const result = mutateFirstPdfProofDigest(next[key])
+      if (!result.found) continue
+      next[key] = result.value
+      return { found: true, value: next }
+    }
+    return { found: false, value }
+  }
+  const changedPdfProofEvidence = mutateFirstPdfProofDigest(evidence)
+  assert.equal(
+    changedPdfProofEvidence.found,
+    true,
+    'evidence exposes a PDF-derived proof digest for the nondeterminism probe',
+  )
+  assert.equal(
+    digestJson(canonicalImportPilotSemanticObservation({
+      evidence: changedPdfProofEvidence.value,
+      ledger,
+    })),
+    baselineDigest,
+    'semantic projection excludes PDF-derived proof digests while retaining their measured geometry',
+  )
+  const changedLedgerReferenceEvidence = structuredClone(evidence)
+  changedLedgerReferenceEvidence.continuationPublicSeamLedger.sha256 =
+    `sha256:${'0'.repeat(64)}`
+  assert.equal(
+    digestJson(canonicalImportPilotSemanticObservation({
+      evidence: changedLedgerReferenceEvidence,
+      ledger,
+    })),
+    baselineDigest,
+    'semantic projection excludes the ledger digest because it includes generated PDF artifact bytes',
+  )
 }
 
 function assertCanonicalImportPilotSemanticObservation({ outputDir, evidence }) {
@@ -554,6 +766,25 @@ function assertPaperTypographyV9InstructionAuthority() {
     },
     'Manifest v34 binds the unique current Paper Typography v9 source, version, path, and hash',
   )
+  assert.deepEqual(
+    paperTypographyAuthorityBinding,
+    {
+      id: typographyDescriptor.id,
+      authorityId: 'paper-typography',
+      owner: typographyDescriptor.owner,
+      path: typographyDescriptor.path,
+      schemaId: typographyDescriptor.schemaId,
+      schemaVersion: typographyDescriptor.schemaId,
+      version: '9',
+      source: 'docs/product/exam-paper-format-standards.md',
+      producer: 'paper-canonical-renderer-typography-v9',
+      manifestId: canonicalAuthorityRef.manifestId,
+      manifestVersion: canonicalAuthorityRef.manifestVersion,
+      manifestDigest: canonicalAuthorityRef.manifestDigest,
+      sha256: typographyDescriptor.sha256,
+    },
+    'the public Typography runtime binding closes path, hash, version, provenance, and manifest identity',
+  )
   assert.equal(
     canonicalAuthorityRef.manifestVersion,
     String(manifestV34.version),
@@ -569,30 +800,98 @@ function assertPaperTypographyV9InstructionAuthority() {
     paperTypographyV9.optionAnchorFramework.visibleWeight.instruction,
     'the public runtime reads the exact v9 instruction authority field',
   )
+  const assertRuntimeRejects = (label, authority, binding = paperTypographyAuthorityBinding) => {
+    assert.throws(
+      () => paperTypographyRuntimeFromAuthority(authority, binding),
+      /Paper Typography(?: v9)? authority/u,
+      label,
+    )
+  }
+  const wrongInstructionWeight = structuredClone(paperTypographyV9)
+  wrongInstructionWeight.optionAnchorFramework.visibleWeight.instruction = 583
+  assertRuntimeRejects(
+    'the runtime rejects a changed instruction weight while the fixed v9 hash remains bound',
+    wrongInstructionWeight,
+  )
+  const wrongSchemaVersion = structuredClone(paperTypographyV9)
+  wrongSchemaVersion.schemaVersion = 'renderer-typography-v8'
+  assertRuntimeRejects(
+    'the runtime rejects a Typography authority from the wrong schema version',
+    wrongSchemaVersion,
+  )
+  const wrongAuthorityVersion = structuredClone(paperTypographyV9)
+  wrongAuthorityVersion.version = '8'
+  assertRuntimeRejects(
+    'the runtime rejects a Typography authority from the wrong version',
+    wrongAuthorityVersion,
+  )
+  const wrongSource = structuredClone(paperTypographyV9)
+  wrongSource.provenance.source = 'untrusted-source.md'
+  assertRuntimeRejects(
+    'the runtime rejects a Typography authority with mutated provenance.source',
+    wrongSource,
+  )
+  const wrongProducer = structuredClone(paperTypographyV9)
+  wrongProducer.provenance.producer = 'untrusted-producer'
+  assertRuntimeRejects(
+    'the runtime rejects a Typography authority with mutated provenance.producer',
+    wrongProducer,
+  )
+  for (const [field, mutation] of [
+    ['path', (binding) => ({ ...binding, path: 'rendering/wrong-typography.json' })],
+    ['sha256', (binding) => ({ ...binding, sha256: `sha256:${'0'.repeat(64)}` })],
+    ['version', (binding) => ({ ...binding, version: '8' })],
+    ['source', (binding) => ({ ...binding, source: 'untrusted-source.md' })],
+    ['producer', (binding) => ({ ...binding, producer: 'untrusted-producer' })],
+  ]) {
+    assertRuntimeRejects(
+      `the runtime rejects a Typography binding with mutated ${field}`,
+      paperTypographyV9,
+      mutation(paperTypographyAuthorityBinding),
+    )
+  }
+  assertRuntimeRejects(
+    'the runtime rejects a Typography binding whose complete path/hash/version/source/producer closure is inconsistent',
+    paperTypographyV9,
+    {
+      ...paperTypographyAuthorityBinding,
+      path: 'rendering/wrong-typography.json',
+      sha256: `sha256:${'0'.repeat(64)}`,
+      version: '8',
+      source: 'untrusted-source.md',
+      producer: 'untrusted-producer',
+    },
+  )
   const mutatedAuthority = structuredClone(paperTypographyV9)
   mutatedAuthority.optionAnchorFramework.visibleWeight.instruction = 583
+  const mutatedBinding = {
+    ...paperTypographyAuthorityBinding,
+    sha256: digestJson(mutatedAuthority),
+  }
+  assertRuntimeRejects(
+    'the production runtime rejects a self-signed non-current Typography v9 binding even when its content hash is synchronized',
+    mutatedAuthority,
+    mutatedBinding,
+  )
   assert.equal(
-    paperTypographyRuntimeFromAuthority(mutatedAuthority)
+    paperTypographyRuntimeFromAuthorityForTest(mutatedAuthority, mutatedBinding)
       .visibleWeight.instruction,
     583,
-    'a distinguishable instruction authority mutation reaches the runtime seam',
+    'a distinguishable v9 instruction authority mutation reaches the runtime seam only with a synchronized content hash',
   )
   const missingInstruction = structuredClone(paperTypographyV9)
   delete missingInstruction.optionAnchorFramework.visibleWeight.instruction
-  assert.throws(
-    () => paperTypographyRuntimeFromAuthority(missingInstruction),
-    /instruction weight/u,
+  assertRuntimeRejects(
     'the runtime fails closed when Paper Typography v9 lacks the instruction role',
-  )
-  const wrongVersion = structuredClone(paperTypographyV9)
-  wrongVersion.schemaVersion = 'renderer-typography-v8'
-  assert.throws(
-    () => paperTypographyRuntimeFromAuthority(wrongVersion),
-    /v9 authority/u,
-    'the runtime rejects an instruction authority from the wrong version',
+    missingInstruction,
+    {
+      ...paperTypographyAuthorityBinding,
+      sha256: digestJson(missingInstruction),
+    },
   )
   return Object.freeze({
     authority: Object.freeze(mutatedAuthority),
+    binding: Object.freeze(mutatedBinding),
     expectedWeight: 583,
   })
 }
@@ -644,96 +943,6 @@ function measureContinuationPublicPdfLedgerSeams(
     measure('section_to_instruction', section, instruction, 1),
     measure('instruction_to_material', instruction, material, 1.5),
   ]
-}
-
-function assertNoPublicPaperShadowRegularWeightLiterals() {
-  const assertions = [
-    {
-      path: 'app/src/features/paper-browse/paperBrowsePage.css',
-      selector: '.paper-browse-section-heading',
-      role: 'section-heading',
-    },
-    {
-      path: 'app/src/features/paper-browse/paperBrowsePage.css',
-      selector: '.paper-browse-instruction',
-      role: 'instruction',
-    },
-    {
-      path: 'app/src/features/paper-intelligence/writingPaperPage.css',
-      selector: '.pi-writing-section',
-      role: 'section-heading',
-    },
-    {
-      path: 'app/src/features/paper-intelligence/writingPaperPage.css',
-      selector: '.pi-writing-instruction',
-      role: 'instruction',
-    },
-  ]
-  for (const assertion of assertions) {
-    const source = readFileSync(path.join(repositoryRoot, assertion.path), 'utf8')
-    const start = source.indexOf(assertion.selector)
-    const end = source.indexOf('\n}', start)
-    const rule = source.slice(start, end + 2)
-    assert.equal(start >= 0 && end > start, true, `public paper CSS rule exists: ${assertion.selector}`)
-    assert.doesNotMatch(
-      rule,
-      /font-weight:\s*(?:400|normal)\s*;/u,
-      `${assertion.selector} contains no shadow regular-weight literal`,
-    )
-    assert.match(
-      rule,
-      new RegExp(
-        `font-weight:\\s*var\\(--ps-${assertion.role}-visible-weight\\);`,
-        'u',
-      ),
-      `${assertion.selector} consumes its authority-injected public weight role`,
-    )
-  }
-  const printSource = readFileSync(
-    path.join(repositoryRoot, 'server/print-renderer.mjs'),
-    'utf8',
-  )
-  const printRuleWithWeight = (selector) => {
-    const rules = []
-    let start = printSource.indexOf(selector)
-    while (start >= 0) {
-      const end = printSource.indexOf('\n}', start)
-      if (end > start) rules.push(printSource.slice(start, end + 2))
-      start = printSource.indexOf(selector, start + selector.length)
-    }
-    return rules.find((rule) => rule.includes('font-weight:')) || ''
-  }
-  for (const { selector, role } of [
-    {
-      selector: '.section-header--section',
-      role: 'sectionHeading',
-    },
-    {
-      selector: '.reading-meta-instruction',
-      role: 'instruction',
-    },
-    {
-      selector: '[data-canonical-writing-chrome-role="section_heading"]',
-      role: 'sectionHeading',
-    },
-    {
-      selector: '[data-canonical-writing-chrome-role="instruction"]',
-      role: 'instruction',
-    },
-  ]) {
-    const rule = printRuleWithWeight(selector)
-    assert.equal(rule.length > 0, true, `public Print/PDF rule exists: ${selector}`)
-    assert.doesNotMatch(
-      rule,
-      /font-weight:\s*(?:400|normal)\s*;/u,
-      `${selector} contains no shadow regular-weight literal`,
-    )
-    assert.match(
-      rule,
-      new RegExp(`paperTypographyRuntime\\.visibleWeight\\.${role}`, 'u'),
-      `${selector} consumes the unique current Paper Typography ${role} role`,
-    )
-  }
 }
 
 function assertApplicationWritingReferenceEvidence() {
@@ -2465,7 +2674,7 @@ async function stopChild(child) {
   }
 }
 
-function paperTypographyMutationVitePlugin(authority) {
+function paperTypographyMutationVitePlugin(authority, binding) {
   const contractPath = path.join(
     repositoryRoot,
     'shared/paper-canonical/sectionHeadingContract.mjs',
@@ -2478,18 +2687,21 @@ function paperTypographyMutationVitePlugin(authority) {
     '  sectionHeadingRuntime,',
     '  sectionHeadingRuntimeFromContract,',
     '  paperTypographyRuntimeFromAuthority,',
+    '  paperTypographyRuntimeFromAuthorityForTest,',
     '  sectionHeadingTextRuns,',
     `} from ${JSON.stringify(baseSpecifier)}`,
     `const authority = ${JSON.stringify(authority)}`,
+    `const binding = ${JSON.stringify(binding)}`,
     'export {',
     '  sectionHeadingContract,',
     '  sectionHeadingRuntime,',
     '  sectionHeadingRuntimeFromContract,',
     '  paperTypographyRuntimeFromAuthority,',
+    '  paperTypographyRuntimeFromAuthorityForTest,',
     '  sectionHeadingTextRuns,',
     '}',
     'export const paperTypographyRuntime =',
-    '  paperTypographyRuntimeFromAuthority(authority)',
+    '  paperTypographyRuntimeFromAuthorityForTest(authority, binding)',
   ].join('\n')
   return {
     name: 'canonical-import-pilot-paper-typography-mutation',
@@ -2508,7 +2720,7 @@ function paperTypographyMutationVitePlugin(authority) {
   }
 }
 
-function writePaperTypographyMutationLoader({ rootDir, authority }) {
+function writePaperTypographyMutationLoader({ rootDir, authority, binding }) {
   const contractUrl = pathToFileURL(path.join(
     repositoryRoot,
     'shared/paper-canonical/sectionHeadingContract.mjs',
@@ -2519,18 +2731,21 @@ function writePaperTypographyMutationLoader({ rootDir, authority }) {
     '  sectionHeadingRuntime,',
     '  sectionHeadingRuntimeFromContract,',
     '  paperTypographyRuntimeFromAuthority,',
+    '  paperTypographyRuntimeFromAuthorityForTest,',
     '  sectionHeadingTextRuns,',
     `} from ${JSON.stringify(`${contractUrl}?canonical-import-pilot-unmutated`)}`,
     `const authority = ${JSON.stringify(authority)}`,
+    `const binding = ${JSON.stringify(binding)}`,
     'export {',
     '  sectionHeadingContract,',
     '  sectionHeadingRuntime,',
     '  sectionHeadingRuntimeFromContract,',
     '  paperTypographyRuntimeFromAuthority,',
+    '  paperTypographyRuntimeFromAuthorityForTest,',
     '  sectionHeadingTextRuns,',
     '}',
     'export const paperTypographyRuntime =',
-    '  paperTypographyRuntimeFromAuthority(authority)',
+    '  paperTypographyRuntimeFromAuthorityForTest(authority, binding)',
   ].join('\n')
   const replacementUrl = `data:text/javascript,${encodeURIComponent(wrapperSource)}`
   const loaderPath = path.join(rootDir, 'paper-typography-mutation-loader.mjs')
@@ -2555,8 +2770,13 @@ async function startPaperTypographyMutationApi({
   userDbPath,
   forbiddenToolDir,
   authority,
+  binding,
 }) {
-  const loaderPath = writePaperTypographyMutationLoader({ rootDir, authority })
+  const loaderPath = writePaperTypographyMutationLoader({
+    rootDir,
+    authority,
+    binding,
+  })
   const port = await availablePort()
   const baseUrl = `http://127.0.0.1:${port}`
   const api = spawn('node', [
@@ -2598,12 +2818,13 @@ async function assertScreenInstructionWeightAuthorityMutation({
   baseUrl,
   expectedWeight,
   authority,
+  binding,
   focusGroupId,
   questionId,
 }) {
   const mutatedVite = await vite.createServer({
     root: path.join(repositoryRoot, 'app'),
-    plugins: [paperTypographyMutationVitePlugin(authority)],
+    plugins: [paperTypographyMutationVitePlugin(authority, binding)],
     server: {
       host: '127.0.0.1',
       port: 0,
@@ -2668,6 +2889,8 @@ async function assertPrintInstructionWeightAuthorityMutation({
   draftPaperId,
   expectedWeight,
   authority,
+  binding,
+  baselinePdfObservations,
 }) {
   const api = await startPaperTypographyMutationApi({
     rootDir,
@@ -2676,8 +2899,13 @@ async function assertPrintInstructionWeightAuthorityMutation({
     userDbPath,
     forbiddenToolDir,
     authority,
+    binding,
   })
+  let browser = null
   try {
+    const playwright = await import('../app/node_modules/playwright/index.js')
+    browser = await playwright.default.chromium.launch({ headless: true })
+    const page = await browser.newPage({ viewport: { width: 1280, height: 900 } })
     const observations = {}
     for (const versionType of ['student', 'teacher']) {
       const htmlResponse = await fetch(
@@ -2690,6 +2918,17 @@ async function assertPrintInstructionWeightAuthorityMutation({
         `Paper Typography mutation ${versionType} Print HTML producer responds`,
       )
       let directRender
+      await page.setContent(html, { waitUntil: 'load' })
+      observations[`${versionType}_print_html`] = assertPublicInstructionWeights(
+        await observePublicInstructionWeights(page, {
+          label: `Paper Typography mutation ${versionType} Print HTML`,
+          surface: 'print',
+        }),
+        {
+          label: `Paper Typography mutation ${versionType} Print HTML`,
+          expectedWeight,
+        },
+      )
       try {
         directRender = await renderPaginatedPaper(html, {
           inspect: (page) => observePublicInstructionWeights(page, {
@@ -2705,14 +2944,15 @@ async function assertPrintInstructionWeightAuthorityMutation({
         '%PDF',
         `Paper Typography mutation ${versionType} direct PDF is generated from the mutated public HTML`,
       )
-      observations[`${versionType}_print_html`] = assertPublicInstructionWeights(
-        directRender.inspection,
+      observations[`${versionType}_direct_pdf`] = directRender.inspection
+      const directPdfVisualObservation = observePdfInstructionWeightBytes(
+        directRender.pdfBytes,
         {
-          label: `Paper Typography mutation ${versionType} Print HTML`,
-          expectedWeight,
+          label: `Paper Typography mutation ${versionType} direct PDF glyph raster`,
+          source: `${versionType}-direct-pdf-render-mutation`,
+          authorityWeight: expectedWeight,
         },
       )
-      observations[`${versionType}_direct_pdf`] = directRender.inspection
       const pdfResponse = await fetch(
         `${api.baseUrl}/api/draft-papers/${draftPaperId}/print-pdf`,
         {
@@ -2733,9 +2973,30 @@ async function assertPrintInstructionWeightAuthorityMutation({
         '%PDF',
         `Paper Typography mutation ${versionType} direct PDF producer keeps the real PDF route`,
       )
+      const apiPdfObservation = observePdfInstructionWeightBytes(
+        pdfBytes,
+        {
+          label: `Paper Typography mutation ${versionType} real print-pdf API PDF`,
+          source: `real-${versionType}-print-pdf-api-mutation`,
+          authorityWeight: expectedWeight,
+        },
+      )
+      assertPdfInstructionWeightObservationParity(
+        apiPdfObservation,
+        directPdfVisualObservation,
+        `Paper Typography mutation ${versionType} real API PDF and direct PDF`,
+      )
+      assert.notDeepEqual(
+        apiPdfObservation.raster,
+        baselinePdfObservations[versionType].raster,
+        `Paper Typography mutation ${versionType} real API PDF exposes a distinguishable v9 glyph raster`,
+      )
+      observations[`${versionType}_api_pdf`] = apiPdfObservation
+      observations[`${versionType}_direct_pdf_visual`] = directPdfVisualObservation
     }
     return Object.freeze(observations)
   } finally {
+    if (browser) await browser.close()
     await api.close()
   }
 }
@@ -9557,6 +9818,104 @@ function rasterVisibleInkBox(
   }
 }
 
+function observePdfInstructionWeightOutput(
+  pdfPath,
+  { label, source, authorityWeight },
+) {
+  const words = pdfWordsWithBoxes(pdfPath)
+  const lines = pdfRoleLines(words)
+  const instructionLine = uniquePdfLineForExactVisibleText(
+    lines,
+    pdfPath,
+    readingPdfRoleOracle.chrome.instructionVisibleText,
+    `${label} Reading instruction`,
+  )
+  const raster = rasterizePdfPage(pdfPath, instructionLine.page)
+  const inkBox = rasterVisibleInkBox(
+    raster,
+    instructionLine.pageWidth,
+    instructionLine.pageHeight,
+    instructionLine,
+  )
+  const scaleX = raster.width / instructionLine.pageWidth
+  const scaleY = raster.height / instructionLine.pageHeight
+  const xMin = Math.max(0, Math.floor((instructionLine.xMin - 1) * scaleX))
+  const xMax = Math.min(
+    raster.width - 1,
+    Math.ceil((instructionLine.xMax + 1) * scaleX),
+  )
+  const yMin = Math.max(0, Math.floor((instructionLine.yMin - 1) * scaleY))
+  const yMax = Math.min(
+    raster.height - 1,
+    Math.ceil((instructionLine.yMax + 1) * scaleY),
+  )
+  const crop = Buffer.alloc((xMax - xMin + 1) * (yMax - yMin + 1))
+  let offset = 0
+  let inkPixelCount = 0
+  let inkSum = 0
+  for (let y = yMin; y <= yMax; y += 1) {
+    for (let x = xMin; x <= xMax; x += 1) {
+      const pixel = raster.pixels[y * raster.width + x]
+      crop[offset] = pixel
+      offset += 1
+      if (pixel < 176) {
+        inkPixelCount += 1
+        inkSum += 255 - pixel
+      }
+    }
+  }
+  return Object.freeze({
+    source,
+    authorityWeight,
+    visibleText: instructionLine.text,
+    page: instructionLine.page,
+    raster: {
+      pageWidth: raster.width,
+      pageHeight: raster.height,
+      cropWidth: xMax - xMin + 1,
+      cropHeight: yMax - yMin + 1,
+      inkPixelCount,
+      inkSum,
+      visibleInkBox: inkBox,
+      pixelDigest: `sha256:${sha256(crop)}`,
+    },
+  })
+}
+
+function observePdfInstructionWeightBytes(
+  pdfBytes,
+  { label, source, authorityWeight },
+) {
+  const tempRoot = mkdtempSync(path.join(tmpdir(), 'eqb-typography-pdf-observation-'))
+  const pdfPath = path.join(tempRoot, 'output.pdf')
+  try {
+    writeFileSync(pdfPath, pdfBytes)
+    return observePdfInstructionWeightOutput(pdfPath, {
+      label,
+      source,
+      authorityWeight,
+    })
+  } finally {
+    rmSync(tempRoot, { recursive: true, force: true })
+  }
+}
+
+function assertPdfInstructionWeightObservationParity(left, right, label) {
+  assert.deepEqual(
+    {
+      visibleText: left.visibleText,
+      page: left.page,
+      raster: left.raster,
+    },
+    {
+      visibleText: right.visibleText,
+      page: right.page,
+      raster: right.raster,
+    },
+    `${label} preserves the observed instruction glyph raster across public PDF producers`,
+  )
+}
+
 function assertOwnerGoldSectionHeadingsPdf(pdfPath, label) {
   const words = pdfWordsWithBoxes(pdfPath)
   const lines = pdfRoleLines(words)
@@ -14568,6 +14927,12 @@ async function renderSupportedArtifacts({
           `print-${versionType}.pdf`,
         )
         writeFileSync(pdfPaths[versionType], pdfBytes)
+        instructionWeightObservations[`${versionType}_api_pdf`] =
+          observePdfInstructionWeightOutput(pdfPaths[versionType], {
+            label: `${versionType === 'student' ? 'Student' : 'Teacher'} real print-pdf API PDF`,
+            source: `real-${versionType}-print-pdf-api`,
+            authorityWeight: paperTypographyRuntime.visibleWeight.instruction,
+          })
       }
       for (const versionType of ['student', 'teacher']) {
         let directRender
@@ -14597,6 +14962,21 @@ async function renderSupportedArtifacts({
             label: `${versionType === 'student' ? 'Student' : 'Teacher'} direct PDF`,
           },
         )
+        const directPdfVisualObservation = observePdfInstructionWeightBytes(
+          directRender.pdfBytes,
+          {
+            label: `${versionType === 'student' ? 'Student' : 'Teacher'} direct PDF glyph raster`,
+            source: `${versionType}-direct-pdf-render`,
+            authorityWeight: paperTypographyRuntime.visibleWeight.instruction,
+          },
+        )
+        assertPdfInstructionWeightObservationParity(
+          instructionWeightObservations[`${versionType}_api_pdf`],
+          directPdfVisualObservation,
+          `${versionType === 'student' ? 'Student' : 'Teacher'} real API PDF and direct PDF`,
+        )
+        instructionWeightObservations[`${versionType}_direct_pdf_visual`] =
+          directPdfVisualObservation
       }
       await assertPrintHtmlReadingVerticalRhythm(
         page,
@@ -16855,13 +17235,19 @@ async function renderSupportedArtifacts({
         draftPaperId: draft.draftPaperId,
         expectedWeight: paperTypographyInstructionMutation.expectedWeight,
         authority: paperTypographyInstructionMutation.authority,
+        binding: paperTypographyInstructionMutation.binding,
+        baselinePdfObservations: {
+          student: instructionWeightObservations.student_api_pdf,
+          teacher: instructionWeightObservations.teacher_api_pdf,
+        },
       })
-    const mutationScreenObservations =
+      const mutationScreenObservations =
       await assertScreenInstructionWeightAuthorityMutation({
         vite,
         baseUrl,
         expectedWeight: paperTypographyInstructionMutation.expectedWeight,
         authority: paperTypographyInstructionMutation.authority,
+        binding: paperTypographyInstructionMutation.binding,
         focusGroupId: draft.firstGroup.groupId,
         questionId: draft.firstGroup.questionIds[0],
       })
@@ -16938,7 +17324,6 @@ const applicationWritingEvidence =
   assertApplicationWritingReferenceEvidence()
 const continuationLedgerEvidence =
   assertContinuationPublicSeamLedgerAuthority()
-assertNoPublicPaperShadowRegularWeightLiterals()
 const paperTypographyInstructionMutation =
   assertPaperTypographyV9InstructionAuthority()
 const rootDir = mkdtempSync(path.join(tmpdir(), 'eqb-canonical-import-pilot-'))
@@ -17528,6 +17913,10 @@ try {
   }
   assertPersistedContinuationPublicSeamLedger(continuationLedgerContext)
   assertContinuationPublicSeamLedgerMutationRejections(continuationLedgerContext)
+  assertCanonicalImportPilotSemanticMutationCoverage({
+    evidence,
+    ledger: persistedContinuationLedger,
+  })
   const transientSemanticObservation =
     assertCanonicalImportPilotSemanticObservation({ outputDir, evidence })
   let officialEvidence = null
@@ -17682,25 +18071,22 @@ try {
   console.log('PASS backend canonical import pilot')
 } finally {
   if (db) db.close()
-  if (transientActualArtifactDir && existsSync(transientActualArtifactDir)) {
-    assert.equal(
-      isCanonicalImportPilotTransientEvidenceRun({
+  if (transientActualArtifactDir) {
+    const cleanupExpectedHead = execFileSync('git', ['rev-parse', 'HEAD'], {
+      cwd: repositoryRoot,
+      encoding: 'utf8',
+    }).trim()
+    if (existsSync(transientActualArtifactDir)) {
+      cleanupCanonicalImportPilotTransientEvidenceRun({
         repositoryRoot,
-        expectedHead: execFileSync('git', ['rev-parse', 'HEAD'], {
-          cwd: repositoryRoot,
-          encoding: 'utf8',
-        }).trim(),
+        expectedHead: cleanupExpectedHead,
         rootDir: transientActualArtifactDir,
-      }),
-      true,
-      'cleanup may remove only the transient run directory, never an official evidence root',
-    )
-    rmSync(transientActualArtifactDir, { recursive: true, force: true })
-    assert.equal(
-      existsSync(transientActualArtifactDir),
-      false,
-      'the independently validated transient rerun directory is cleaned',
-    )
+      })
+    }
+    assertCanonicalImportPilotTransientEvidenceRunsClean({
+      repositoryRoot,
+      expectedHead: cleanupExpectedHead,
+    })
   }
   rmSync(rootDir, { recursive: true, force: true })
 }

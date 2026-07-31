@@ -15,10 +15,21 @@ import { mkdtempSync } from 'node:fs'
 import path from 'node:path'
 
 const ROOT_SEGMENT = '.scratch/paper-canonical-ticket-20-qa'
+const LEGACY_EVIDENCE_HEAD = 'eee654684f6609c4fd1486c7eec470b56c9576d2'
 const SEAL_FILE = 'seal.json'
 const EVIDENCE_FILE = 'evidence.json'
 const LEDGER_FILE = 'continuation-public-seam-ledger.json'
 const HEAD_FILE = 'HEAD.txt'
+
+const legacyCanonicalImportPilotTamperRejectionMatrix = Object.freeze([
+  Object.freeze({ caseId: 'partial_or_unsealed_root', rejection: 'OFFICIAL_EVIDENCE_ROOT_UNSEALED' }),
+  Object.freeze({ caseId: 'stale_or_wrong_head', rejection: 'OFFICIAL_EVIDENCE_HEAD_INVALID' }),
+  Object.freeze({ caseId: 'wrong_evidence_ledger_reference', rejection: 'OFFICIAL_EVIDENCE_LEDGER_REF_INVALID' }),
+  Object.freeze({ caseId: 'artifact_digest_drift', rejection: 'OFFICIAL_EVIDENCE_SEAL_INVALID' }),
+  Object.freeze({ caseId: 'missing_or_extra_artifact', rejection: 'OFFICIAL_EVIDENCE_SEAL_INVALID' }),
+  Object.freeze({ caseId: 'wrong_or_missing_ledger_observation', rejection: 'CONTINUATION_PUBLIC_SEAM_LEDGER_INVALID' }),
+  Object.freeze({ caseId: 'attempted_official_overwrite', rejection: 'OFFICIAL_EVIDENCE_ROOT_ALREADY_SEALED' }),
+])
 
 export const canonicalImportPilotTamperRejectionMatrix = Object.freeze([
   Object.freeze({ caseId: 'partial_or_unsealed_root', rejection: 'OFFICIAL_EVIDENCE_ROOT_UNSEALED' }),
@@ -27,6 +38,15 @@ export const canonicalImportPilotTamperRejectionMatrix = Object.freeze([
   Object.freeze({ caseId: 'artifact_digest_drift', rejection: 'OFFICIAL_EVIDENCE_SEAL_INVALID' }),
   Object.freeze({ caseId: 'missing_or_extra_artifact', rejection: 'OFFICIAL_EVIDENCE_SEAL_INVALID' }),
   Object.freeze({ caseId: 'wrong_or_missing_ledger_observation', rejection: 'CONTINUATION_PUBLIC_SEAM_LEDGER_INVALID' }),
+  Object.freeze({ caseId: 'semantic_passage_geometry_drift', rejection: 'OFFICIAL_EVIDENCE_SEAL_INVALID' }),
+  Object.freeze({ caseId: 'semantic_seven_choices_coverage_drift', rejection: 'OFFICIAL_EVIDENCE_SEAL_INVALID' }),
+  Object.freeze({ caseId: 'semantic_cloze_coverage_drift', rejection: 'OFFICIAL_EVIDENCE_SEAL_INVALID' }),
+  Object.freeze({ caseId: 'semantic_grammar_fill_coverage_drift', rejection: 'OFFICIAL_EVIDENCE_SEAL_INVALID' }),
+  Object.freeze({ caseId: 'semantic_application_writing_coverage_drift', rejection: 'OFFICIAL_EVIDENCE_SEAL_INVALID' }),
+  Object.freeze({ caseId: 'semantic_typography_observation_drift', rejection: 'OFFICIAL_EVIDENCE_SEAL_INVALID' }),
+  Object.freeze({ caseId: 'semantic_forbidden_artifact_state_drift', rejection: 'OFFICIAL_EVIDENCE_SEAL_INVALID' }),
+  Object.freeze({ caseId: 'semantic_artifact_path_identity_drift', rejection: 'OFFICIAL_EVIDENCE_ARTIFACT_DIGEST_INVALID' }),
+  Object.freeze({ caseId: 'semantic_non_pdf_artifact_digest_drift', rejection: 'OFFICIAL_EVIDENCE_ARTIFACT_DIGEST_INVALID' }),
   Object.freeze({ caseId: 'attempted_official_overwrite', rejection: 'OFFICIAL_EVIDENCE_ROOT_ALREADY_SEALED' }),
 ])
 
@@ -116,6 +136,13 @@ function fileSnapshot(rootDir, { omitSeal = false } = {}) {
     }))
 }
 
+function byteSnapshot(rootDir) {
+  return listEvidenceFiles(rootDir).map((relativePath) => ({
+    path: relativePath,
+    bytes: readFileSync(path.join(rootDir, relativePath)).toString('base64'),
+  }))
+}
+
 function sameJson(left, right) {
   return JSON.stringify(left) === JSON.stringify(right)
 }
@@ -146,7 +173,11 @@ function assertEvidenceIndex({ rootDir, expectedHead, evidence }) {
     || !/^sha256:[0-9a-f]{64}$/u.test(evidence.semanticObservationDigest)) {
     fail('OFFICIAL_EVIDENCE_INDEX_INVALID', 'Evidence index lacks a semantic-observation digest')
   }
-  if (!sameJson(evidence.tamperRejectionMatrix, canonicalImportPilotTamperRejectionMatrix)) {
+  if (
+    !sameJson(evidence.tamperRejectionMatrix, canonicalImportPilotTamperRejectionMatrix)
+    && !(expectedHead === LEGACY_EVIDENCE_HEAD
+      && sameJson(evidence.tamperRejectionMatrix, legacyCanonicalImportPilotTamperRejectionMatrix))
+  ) {
     fail('OFFICIAL_EVIDENCE_INDEX_INVALID', 'Evidence index tamper-rejection matrix is missing or stale')
   }
   if (!isRecord(evidence.renderedArtifactDigests)
@@ -213,6 +244,46 @@ export function isCanonicalImportPilotTransientEvidenceRun({
   return relative.length > 0 && !relative.startsWith('..') && !path.isAbsolute(relative)
 }
 
+export function assertCanonicalImportPilotTransientEvidenceRunsClean({
+  repositoryRoot,
+  expectedHead,
+}) {
+  assertHead(expectedHead)
+  const transientParent = path.join(rootBase(repositoryRoot), 'runs', expectedHead)
+  if (!existsSync(transientParent)) return
+  assertDirectory(transientParent, 'Transient evidence parent')
+  const entries = readdirSync(transientParent)
+  if (entries.length > 0) {
+    fail(
+      'OFFICIAL_EVIDENCE_TRANSIENT_OUTPUT_RETAINED',
+      `Transient evidence outputs remain for ${expectedHead}: ${entries.join(', ')}`,
+    )
+  }
+}
+
+export function cleanupCanonicalImportPilotTransientEvidenceRun({
+  repositoryRoot,
+  expectedHead,
+  rootDir,
+}) {
+  if (!isCanonicalImportPilotTransientEvidenceRun({
+    repositoryRoot,
+    expectedHead,
+    rootDir,
+  })) {
+    fail('OFFICIAL_EVIDENCE_PATH_INVALID', 'Transient cleanup target is not inside the exact HEAD run directory')
+  }
+  rmSync(rootDir, { recursive: true, force: true })
+  const transientParent = path.dirname(path.resolve(rootDir))
+  if (existsSync(transientParent) && readdirSync(transientParent).length === 0) {
+    rmdirSync(transientParent)
+  }
+  assertCanonicalImportPilotTransientEvidenceRunsClean({
+    repositoryRoot,
+    expectedHead,
+  })
+}
+
 export function sealCanonicalImportPilotEvidenceStaging({
   rootDir,
   expectedHead,
@@ -271,7 +342,7 @@ export function assertCanonicalImportPilotEvidenceRoot({
     rootDir: path.resolve(rootDir),
     evidence: Object.freeze(evidence),
     seal: Object.freeze(seal),
-    snapshot: Object.freeze(fileSnapshot(rootDir)),
+    snapshot: Object.freeze(byteSnapshot(rootDir)),
   })
 }
 
@@ -406,5 +477,67 @@ export function assertCanonicalImportPilotEvidenceMutationRejections({
   })
   rejected('stale-head', (candidate) => {
     writeFileSync(path.join(candidate, HEAD_FILE), `${'0'.repeat(40)}\n`)
+  })
+  const mutateEvidence = (candidate, mutate) => {
+    const evidencePath = path.join(candidate, EVIDENCE_FILE)
+    const evidence = readJson(evidencePath, 'Evidence index')
+    mutate(evidence)
+    writeFileSync(evidencePath, `${JSON.stringify(evidence, null, 2)}\n`)
+  }
+  const mutateFirstLeaf = (value) => {
+    if (typeof value === 'string') return `${value}:semantic-drift`
+    if (typeof value === 'number') return value + 1
+    if (typeof value === 'boolean') return !value
+    if (Array.isArray(value)) {
+      if (value.length === 0) return ['semantic-drift']
+      const next = structuredClone(value)
+      next[0] = mutateFirstLeaf(next[0])
+      return next
+    }
+    if (isRecord(value)) {
+      const next = structuredClone(value)
+      const key = Object.keys(next)[0]
+      if (!key) return { semanticDrift: true }
+      next[key] = mutateFirstLeaf(next[key])
+      return next
+    }
+    return 'semantic-drift'
+  }
+  for (const [caseId, field] of [
+    ['semantic_passage_geometry_drift', 'renderedPassageLetterGeometry'],
+    ['semantic_seven_choices_coverage_drift', 'sevenChoicesPublicSeamCoverage'],
+    ['semantic_cloze_coverage_drift', 'clozePublicSeamCoverage'],
+    ['semantic_grammar_fill_coverage_drift', 'grammarFillPublicSeamCoverage'],
+    ['semantic_application_writing_coverage_drift', 'applicationWritingPublicSeamCoverage'],
+    ['semantic_typography_observation_drift', 'paperTypographyInstructionWeightCoverage'],
+  ]) {
+    rejected(caseId, (candidate) => {
+      mutateEvidence(candidate, (evidence) => {
+        evidence[field] = mutateFirstLeaf(evidence[field])
+      })
+    })
+  }
+  rejected('semantic_forbidden_artifact_state_drift', (candidate) => {
+    mutateEvidence(candidate, (evidence) => {
+      evidence.forbiddenOutputArtifacts = [
+        ...evidence.forbiddenOutputArtifacts,
+        'forbidden-generated.docx',
+      ]
+    })
+  })
+  rejected('semantic_artifact_path_identity_drift', (candidate) => {
+    mutateEvidence(candidate, (evidence) => {
+      const [relativePath, digest] = Object.entries(evidence.renderedArtifactDigests)[0]
+      delete evidence.renderedArtifactDigests[relativePath]
+      evidence.renderedArtifactDigests[`${relativePath}.renamed`] = digest
+    })
+  })
+  rejected('semantic_non_pdf_artifact_digest_drift', (candidate) => {
+    mutateEvidence(candidate, (evidence) => {
+      const relativePath = Object.keys(evidence.renderedArtifactDigests)
+        .find((candidatePath) => !/\.pdf$/iu.test(candidatePath))
+      if (!relativePath) fail('OFFICIAL_EVIDENCE_INDEX_INVALID', 'No non-PDF artifact exists for the semantic digest mutation')
+      evidence.renderedArtifactDigests[relativePath] = '0'.repeat(64)
+    })
   })
 }

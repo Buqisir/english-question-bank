@@ -1,10 +1,24 @@
 #!/usr/bin/env node
-import { spawnSync } from 'node:child_process'
+import assert from 'node:assert/strict'
+import { execFileSync, spawnSync } from 'node:child_process'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import {
+  assertCanonicalImportPilotEvidenceRoot,
+  assertCanonicalImportPilotTransientEvidenceRunsClean,
+  inspectOfficialCanonicalImportPilotEvidenceRoot,
+} from './lib/canonicalImportPilotEvidenceRoot.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '..')
+const expectedHead = execFileSync('git', ['rev-parse', 'HEAD'], {
+  cwd: rootDir,
+  encoding: 'utf8',
+}).trim()
+const officialEvidenceBefore = inspectOfficialCanonicalImportPilotEvidenceRoot({
+  repositoryRoot: rootDir,
+  expectedHead,
+})
 
 const registry = {
   preflight: [
@@ -168,6 +182,28 @@ for (const script of registry.scripts) {
   results.push({ script, status })
 }
 
+let fullSuiteEvidenceRegressionFailure = null
+try {
+  if (officialEvidenceBefore) {
+    const officialEvidenceAfter = assertCanonicalImportPilotEvidenceRoot({
+      repositoryRoot: rootDir,
+      rootDir: officialEvidenceBefore.rootDir,
+      expectedHead,
+    })
+    assert.deepEqual(
+      officialEvidenceAfter.snapshot,
+      officialEvidenceBefore.snapshot,
+      'full-suite verification leaves every sealed official evidence byte unchanged',
+    )
+  }
+  assertCanonicalImportPilotTransientEvidenceRunsClean({
+    repositoryRoot: rootDir,
+    expectedHead,
+  })
+} catch (error) {
+  fullSuiteEvidenceRegressionFailure = error
+}
+
 const passed = results.filter((r) => r.status === 0)
 const skipped = results.filter((r) => r.status === SKIP_EXIT_CODE)
 const failed = results.filter((r) => r.status !== 0 && r.status !== SKIP_EXIT_CODE)
@@ -182,5 +218,11 @@ if (failed.length > 0) {
   console.log('FAILED:')
   for (const r of failed) console.log(`  - ${r.script} (exit ${r.status})`)
 }
+if (fullSuiteEvidenceRegressionFailure) {
+  console.log('FAILED:')
+  console.log(
+    `  - sealed official evidence/full-suite regression (${fullSuiteEvidenceRegressionFailure.message})`,
+  )
+}
 
-process.exit(failed.length > 0 ? 1 : 0)
+process.exit(failed.length > 0 || fullSuiteEvidenceRegressionFailure ? 1 : 0)

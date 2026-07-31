@@ -21,6 +21,21 @@ export interface SectionHeadingRuntime {
 
 export declare const sectionHeadingContract: Readonly<Record<string, unknown>>
 export declare const sectionHeadingRuntime: SectionHeadingRuntime
+export declare const paperTypographyAuthorityBinding: Readonly<{
+  readonly id: 'renderer-typography'
+  readonly authorityId: 'paper-typography'
+  readonly owner: 'renderer_typography'
+  readonly path: 'rendering/paper-typography-v9.json'
+  readonly schemaId: 'renderer-typography-v9'
+  readonly schemaVersion: 'renderer-typography-v9'
+  readonly version: '9'
+  readonly source: 'docs/product/exam-paper-format-standards.md'
+  readonly producer: 'paper-canonical-renderer-typography-v9'
+  readonly manifestId: 'paper-canonical'
+  readonly manifestVersion: '34'
+  readonly manifestDigest: string
+  readonly sha256: string
+}>
 export declare const paperTypographyRuntime: Readonly<{
   coordinates: Readonly<{
     questionStemAndOuterOptionBlockStartTwip: number
@@ -55,6 +70,11 @@ export declare const paperTypographyRuntime: Readonly<{
 }>
 export declare function paperTypographyRuntimeFromAuthority(
   authority: Readonly<Record<string, unknown>>,
+  binding?: Readonly<Record<string, unknown>>,
+): typeof paperTypographyRuntime
+export declare function paperTypographyRuntimeFromAuthorityForTest(
+  authority: Readonly<Record<string, unknown>>,
+  binding: Readonly<Record<string, unknown>>,
 ): typeof paperTypographyRuntime
 export declare function sectionHeadingRuntimeFromContract(
   contract: Readonly<Record<string, unknown>>,
