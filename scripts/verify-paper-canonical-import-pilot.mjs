@@ -280,13 +280,17 @@ function canonicalImportPilotSemanticObservation({ evidence, ledger }) {
     semanticObservationDigest,
     ...stableEvidence
   } = evidence
-  return {
+  // Evidence is JSON evidence. Normalize the in-memory projection through the
+  // same JSON boundary before comparison, so an optional field whose value is
+  // undefined cannot make a newly sealed byte record appear semantically
+  // different merely because JSON correctly omits that field on disk.
+  return JSON.parse(JSON.stringify({
     evidence: {
       ...stableEvidence,
       renderedArtifactPaths: Object.keys(renderedArtifactDigests).sort(),
     },
     continuation: continuationSemanticObservations(ledger),
-  }
+  }))
 }
 
 function assertCanonicalImportPilotSemanticObservation({ outputDir, evidence }) {
