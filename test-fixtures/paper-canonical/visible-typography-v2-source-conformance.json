@@ -1,0 +1,11 @@
+{
+  "schemaVersion": "canonical-visible-typography-conformance-source-v1",
+  "paperId": "paper-canonical-fixture",
+  "groupId": "group:writing.continuation",
+  "slotId": "writing.continuation",
+  "sourceNode": {
+    "kind": "text",
+    "nodeId": "text:group:writing.continuation:material",
+    "text": "ditch(沟) ."
+  }
+}

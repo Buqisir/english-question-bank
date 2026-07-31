@@ -12,16 +12,29 @@
     {
       "path": "test-fixtures/paper-import/paper-2026-i-canonical-pilot/paper.pdf",
       "sha256": "sha256:31a87069e6d530afba9123eec0487adf45e52e0b98530af80b62476f169e4d0f"
+    },
+    {
+      "path": "test-fixtures/paper-canonical/visible-typography-v2-source-conformance.json",
+      "sha256": "sha256:d7df7fd8a5e1bbab4158e52447a311116b7d386e0b3ebbde64c6890c7c64223b"
     }
   ],
   "cases": [
     {
       "caseId": "english-token-adjacent-ascii-gloss-punctuation",
       "sourceBinding": {
-        "kind": "canonical_fixture_inline",
-        "documentInputKey": "questions",
+        "kind": "checked_in_conformance_source_node",
+        "path": "test-fixtures/paper-canonical/visible-typography-v2-source-conformance.json",
+        "sha256": "sha256:d7df7fd8a5e1bbab4158e52447a311116b7d386e0b3ebbde64c6890c7c64223b",
+        "documentInputKey": "visible_typography_conformance_source",
+        "mediaType": "application/vnd.eqb.visible-typography-conformance-source+json",
+        "groupId": "group:writing.continuation",
         "slotId": "writing.continuation",
-        "nodeId": "text:group:writing.continuation:material"
+        "nodeId": "text:group:writing.continuation:material",
+        "coordinate": {
+          "kind": "byte_range",
+          "start": 303,
+          "end": 315
+        }
       },
       "before": "ditch(沟) .",
       "after": "ditch(沟).",

@@ -54,6 +54,17 @@ const visibleTypographyOracle = JSON.parse(readFileSync(path.join(
   repositoryRoot,
   'docs/cuts/paper-canonical-unification/qa/20-visible-typography-source-oracle-v1.json',
 ), 'utf8'))
+const pinnedVisibleTypographySource = Object.freeze({
+  path:
+    'test-fixtures/paper-canonical/visible-typography-v2-source-conformance.json',
+  sha256:
+    'sha256:d7df7fd8a5e1bbab4158e52447a311116b7d386e0b3ebbde64c6890c7c64223b',
+  coordinate: Object.freeze({
+    kind: 'byte_range',
+    start: 303,
+    end: 315,
+  }),
+})
 
 function sha256File(relativePath) {
   return `sha256:${createHash('sha256')
@@ -61,26 +72,134 @@ function sha256File(relativePath) {
     .digest('hex')}`
 }
 
+function sha256Bytes(value) {
+  return `sha256:${createHash('sha256').update(value).digest('hex')}`
+}
+
 function bytes(fileName) {
   return readFileSync(path.join(packageDir, fileName))
 }
 
-function sourceBoundTypographyRequest(oracleCase) {
-  const fixture = makeReadyCanonicalFixture()
+function findTextNode(value, nodeId) {
+  if (Array.isArray(value)) {
+    for (const item of value) {
+      const found = findTextNode(item, nodeId)
+      if (found) return found
+    }
+    return null
+  }
+  if (!value || typeof value !== 'object') return null
+  if (
+    value.kind === 'text'
+    && value.nodeId === nodeId
+    && typeof value.text === 'string'
+  ) {
+    return value
+  }
+  for (const child of Object.values(value)) {
+    const found = findTextNode(child, nodeId)
+    if (found) return found
+  }
+  return null
+}
+
+function loadPinnedVisibleTypographySource(oracleCase) {
   const binding = oracleCase.sourceBinding
+  assert.equal(
+    binding.path,
+    pinnedVisibleTypographySource.path,
+    'the fixed oracle cannot redirect the immutable conformance source path',
+  )
+  assert.equal(
+    binding.sha256,
+    pinnedVisibleTypographySource.sha256,
+    'the fixed oracle cannot redirect the immutable conformance source hash',
+  )
+  assert.deepEqual(
+    binding.coordinate,
+    pinnedVisibleTypographySource.coordinate,
+    'the fixed oracle cannot redirect the immutable conformance source coordinate',
+  )
+  const sourceBytes = readFileSync(path.join(repositoryRoot, binding.path))
+  assert.equal(
+    sha256Bytes(sourceBytes),
+    pinnedVisibleTypographySource.sha256,
+    'the checked-in conformance source bytes match their independent pin',
+  )
+  const source = JSON.parse(new TextDecoder().decode(sourceBytes))
+  assert.equal(
+    source.schemaVersion,
+    'canonical-visible-typography-conformance-source-v1',
+  )
+  assert.equal(source.paperId, 'paper-canonical-fixture')
+  assert.equal(source.groupId, binding.groupId)
+  assert.equal(source.slotId, binding.slotId)
+  assert.equal(source.sourceNode?.nodeId, binding.nodeId)
+  const coordinateText = new TextDecoder().decode(sourceBytes.subarray(
+    binding.coordinate.start,
+    binding.coordinate.end,
+  ))
+  assert.equal(
+    coordinateText,
+    source.sourceNode.text,
+    'the pinned byte range resolves the exact source-node text',
+  )
+  assert.equal(
+    coordinateText,
+    oracleCase.before,
+    'the fixed oracle before-value must come from immutable source bytes',
+  )
+  assert.equal(digestJson(coordinateText), oracleCase.beforeDigest)
+  assert.equal(
+    replayCanonicalVisibleTypography(coordinateText),
+    oracleCase.after,
+  )
+  assert.equal(digestJson(oracleCase.after), oracleCase.afterDigest)
+  return { binding, coordinateText, sourceBytes }
+}
+
+function sourceBoundTypographyRequest(oracleCase) {
+  const pinnedSource = loadPinnedVisibleTypographySource(oracleCase)
+  const fixture = makeReadyCanonicalFixture()
+  const binding = pinnedSource.binding
   const group = fixture.source.groups.find(
     (candidate) => candidate.slotId === binding.slotId,
   )
-  const inline = group?.content?.blocks
-    .flatMap((block) => block.inlines || [])
-    .find((candidate) => candidate.nodeId === binding.nodeId)
+  const inline = findTextNode(group?.content, binding.nodeId)
   assert.ok(inline, `source fixture carries ${binding.nodeId}`)
-  inline.text = oracleCase.before
+  inline.text = pinnedSource.coordinateText
+  const sourceObservationId =
+    'observation:visible-typography-conformance-source'
+  fixture.source.observations.push({
+    observationId: sourceObservationId,
+    kind: 'canonical_visible_typography_conformance_source',
+    documentInputKey: binding.documentInputKey,
+    value: {
+      nodeId: binding.nodeId,
+      text: pinnedSource.coordinateText,
+    },
+    span: structuredClone(binding.coordinate),
+  })
+  group.sourceSpanRefsByTarget = {
+    ...(group.sourceSpanRefsByTarget || {}),
+    [`content_node:${binding.nodeId}`]: [
+      `source-span:${sourceObservationId}`,
+    ],
+  }
+  fixture.request.evidence.documents.push({
+    inputKey: binding.documentInputKey,
+    roles: ['source_provenance'],
+    bytes: pinnedSource.sourceBytes,
+    declared: {
+      mediaType: binding.mediaType,
+      originalName: path.basename(binding.path),
+    },
+  })
   for (let pass = 0; pass < 3; pass += 1) {
     const sourceBytes = new TextEncoder().encode(JSON.stringify(fixture.source))
     for (const observation of fixture.source.observations) {
       if (
-        observation.documentInputKey === binding.documentInputKey
+        observation.documentInputKey === 'questions'
         && Number.isInteger(observation.span?.start)
         && Number.isInteger(observation.span?.end)
       ) {
@@ -90,14 +209,94 @@ function sourceBoundTypographyRequest(oracleCase) {
   }
   const sourceAsset = new TextEncoder().encode(JSON.stringify(fixture.source))
   const sourceDocument = fixture.request.evidence.documents.find(
-    (document) => document.inputKey === binding.documentInputKey,
+    (document) => document.inputKey === 'questions',
   )
-  assert.ok(sourceDocument, `request carries ${binding.documentInputKey}`)
+  assert.ok(sourceDocument, 'request carries the canonical fixture source')
   sourceDocument.bytes = sourceAsset
   return {
     request: fixture.request,
     sourceAsset,
+    pinnedSource,
   }
+}
+
+function assertPinnedVisibleTypographyArtifact({
+  oracleCase,
+  pinnedSource,
+  sourceCapture,
+  normalizationReport,
+  canonicalQuestionGroups,
+}) {
+  const loadedSource = loadPinnedVisibleTypographySource(oracleCase)
+  assert.equal(
+    sha256Bytes(pinnedSource.sourceBytes),
+    sha256Bytes(loadedSource.sourceBytes),
+  )
+  const record = normalizationReport.transformationRecords.find(
+    (candidate) =>
+      candidate.operation === 'canonical_visible_typography'
+      && candidate.target?.identity === loadedSource.binding.nodeId,
+  )
+  assert.ok(
+    record,
+    `the pinned source node emits one typography record; observed ${normalizationReport.transformationRecords
+      .filter((candidate) =>
+        candidate.operation === 'canonical_visible_typography')
+      .map((candidate) => candidate.target?.identity)
+      .join(', ')}`,
+  )
+  assert.deepEqual(
+    {
+      before: record.before,
+      after: record.after,
+      outputDigest: record.outputDigest,
+    },
+    {
+      before: loadedSource.coordinateText,
+      after: oracleCase.after,
+      outputDigest: oracleCase.afterDigest,
+    },
+  )
+  const observationId = record.preconditions.sourceObservationIds[0]
+  const observation = sourceCapture.observations.find(
+    (candidate) => candidate.observationId === observationId,
+  )
+  const sourceSpan = sourceCapture.sourceSpans.find(
+    (candidate) => candidate.sourceSpanId === observation?.sourceSpanId,
+  )
+  const document = sourceCapture.documents.find(
+    (candidate) => candidate.documentId === sourceSpan?.documentId,
+  )
+  assert.deepEqual(
+    observation?.value,
+    {
+      nodeId: loadedSource.binding.nodeId,
+      text: loadedSource.coordinateText,
+    },
+    'the compiler observation retains the fixed source-node value',
+  )
+  assert.equal(
+    document?.sha256,
+    loadedSource.binding.sha256,
+    'the compiler SourceSpan binds the checked-in source bytes',
+  )
+  assert.deepEqual(
+    sourceSpan?.coordinate,
+    loadedSource.binding.coordinate,
+    'the compiler SourceSpan binds the fixed source byte range',
+  )
+  const outputNode = findTextNode(
+    canonicalQuestionGroups.find(
+      (group) => group.identity?.groupId === loadedSource.binding.groupId,
+    )?.content,
+    loadedSource.binding.nodeId,
+  )
+  assert.equal(
+    outputNode?.text,
+    oracleCase.after,
+    'canonical output for the pinned source node matches independent replay',
+  )
+  return { observation, record }
 }
 
 function buildPilotRequest(overrides = {}) {
@@ -459,6 +658,33 @@ assert.ok(
   sourceBoundTypographyCase?.sourceBinding,
   'the exact v2 domain edge has one fixed source binding',
 )
+for (const [field, mutate] of [
+  ['path', (binding) => {
+    binding.path =
+      'test-fixtures/paper-canonical/foundationFixture.mjs'
+  }],
+  ['sha256', (binding) => {
+    binding.sha256 =
+      'sha256:0000000000000000000000000000000000000000000000000000000000000000'
+  }],
+  ['node identity', (binding) => {
+    binding.nodeId = 'text:manufactured-source-node'
+  }],
+  ['byte coordinate', (binding) => {
+    binding.coordinate = {
+      ...binding.coordinate,
+      start: binding.coordinate.start - 1,
+    }
+  }],
+]) {
+  const mismatchedCase = structuredClone(sourceBoundTypographyCase)
+  mutate(mismatchedCase.sourceBinding)
+  assert.throws(
+    () => sourceBoundTypographyRequest(mismatchedCase),
+    undefined,
+    `a ${field} mismatch fails before compilation can emit a positive artifact`,
+  )
+}
 const sourceBoundTypography = sourceBoundTypographyRequest(
   sourceBoundTypographyCase,
 )
@@ -474,13 +700,19 @@ assert.equal(
     2,
   ),
 )
-const sourceBoundTypographyRecord =
-  sourceBoundTypographyCompilation.artifacts.normalizationReport
-    .transformationRecords.find(
-      (record) =>
-        record.operation === 'canonical_visible_typography'
-        && record.before === sourceBoundTypographyCase.before,
-    )
+const {
+  observation: sourceBoundObservation,
+  record: sourceBoundTypographyRecord,
+} = assertPinnedVisibleTypographyArtifact({
+  oracleCase: sourceBoundTypographyCase,
+  pinnedSource: sourceBoundTypography.pinnedSource,
+  sourceCapture:
+    sourceBoundTypographyCompilation.artifacts.sourceCapture,
+  normalizationReport:
+    sourceBoundTypographyCompilation.artifacts.normalizationReport,
+  canonicalQuestionGroups:
+    sourceBoundTypographyCompilation.artifacts.canonicalPaper.questionGroups,
+})
 assert.deepEqual(
   {
     before: sourceBoundTypographyRecord?.before,
@@ -494,13 +726,6 @@ assert.deepEqual(
   },
   'the compiler emits the fixed exact-domain Transformation Record',
 )
-const sourceBoundObservation =
-  sourceBoundTypographyCompilation.artifacts.sourceCapture.observations.find(
-    (observation) =>
-      sourceBoundTypographyRecord?.preconditions.sourceObservationIds.includes(
-        observation.observationId,
-      ),
-  )
 assert.deepEqual(
   sourceBoundObservation?.value,
   {
@@ -528,6 +753,31 @@ const sealedTypographyReport = JSON.parse(new TextDecoder().decode(
     sealedTypographyReportDescriptor.relativePath
   ],
 ))
+const sealedSourceCaptureDescriptor =
+  sourceBoundAdmission.sealed.manifest.artifacts.find(
+    (artifact) => artifact.role === 'source_capture',
+  )
+const sealedSourceCapture = JSON.parse(new TextDecoder().decode(
+  sourceBoundAdmission.sealed.artifacts[
+    sealedSourceCaptureDescriptor.relativePath
+  ],
+))
+const sealedQuestionGroupsDescriptor =
+  sourceBoundAdmission.sealed.manifest.artifacts.find(
+    (artifact) => artifact.role === 'question_groups',
+  )
+const sealedQuestionGroups = JSON.parse(new TextDecoder().decode(
+  sourceBoundAdmission.sealed.artifacts[
+    sealedQuestionGroupsDescriptor.relativePath
+  ],
+))
+assertPinnedVisibleTypographyArtifact({
+  oracleCase: sourceBoundTypographyCase,
+  pinnedSource: sourceBoundTypography.pinnedSource,
+  sourceCapture: sealedSourceCapture,
+  normalizationReport: sealedTypographyReport,
+  canonicalQuestionGroups: sealedQuestionGroups.groups,
+})
 assert.equal(
   sealedTypographyReport.transformationRecords.some(
       (record) =>
@@ -537,6 +787,62 @@ assert.equal(
     ),
   true,
   'the immutable publication preserves the exact-domain Transformation Record',
+)
+const synchronizedDriftCase = structuredClone(sourceBoundTypographyCase)
+synchronizedDriftCase.before = 'ditch(沟) !'
+synchronizedDriftCase.after = 'ditch(沟)!'
+synchronizedDriftCase.beforeDigest = digestJson(synchronizedDriftCase.before)
+synchronizedDriftCase.afterDigest = digestJson(synchronizedDriftCase.after)
+const synchronizedDriftArtifacts = structuredClone(
+  sourceBoundTypographyCompilation.artifacts,
+)
+const synchronizedDriftRecord =
+  synchronizedDriftArtifacts.normalizationReport.transformationRecords.find(
+    (record) => record.recordId === sourceBoundTypographyRecord.recordId,
+  )
+const synchronizedDriftObservation =
+  synchronizedDriftArtifacts.sourceCapture.observations.find(
+    (observation) =>
+      observation.observationId === sourceBoundObservation.observationId,
+  )
+const synchronizedDriftNode = findTextNode(
+  synchronizedDriftArtifacts.canonicalPaper.questionGroups.find(
+    (group) =>
+      group.identity.groupId
+        === sourceBoundTypographyCase.sourceBinding.groupId,
+  )?.content,
+  sourceBoundTypographyCase.sourceBinding.nodeId,
+)
+synchronizedDriftObservation.value.text = synchronizedDriftCase.before
+synchronizedDriftRecord.before = synchronizedDriftCase.before
+synchronizedDriftRecord.after = synchronizedDriftCase.after
+synchronizedDriftRecord.preconditions.sourceValueDigests = [
+  digestJson(synchronizedDriftObservation.value),
+]
+synchronizedDriftRecord.outputDigest = synchronizedDriftCase.afterDigest
+synchronizedDriftNode.text = synchronizedDriftCase.after
+assert.equal(
+  validateExactTransformationRecords(
+    synchronizedDriftArtifacts.normalizationReport.transformationRecords,
+    synchronizedDriftArtifacts.sourceCapture,
+    resolveCanonicalAuthority(canonicalAuthorityRef).closure,
+  ).diagnostics.some(
+    (diagnostic) => diagnostic.code === 'TRANSFORMATION_CLOSURE_INVALID',
+  ),
+  false,
+  'the synchronized forged record still self-agrees without the source pin',
+)
+assert.throws(
+  () => assertPinnedVisibleTypographyArtifact({
+    oracleCase: synchronizedDriftCase,
+    pinnedSource: sourceBoundTypography.pinnedSource,
+    sourceCapture: synchronizedDriftArtifacts.sourceCapture,
+    normalizationReport: synchronizedDriftArtifacts.normalizationReport,
+    canonicalQuestionGroups:
+      synchronizedDriftArtifacts.canonicalPaper.questionGroups,
+  }),
+  undefined,
+  'synchronized oracle, record, observation, output, and digest drift fails against fixed source bytes',
 )
 const synchronizedErrorRecords = structuredClone(
   sourceBoundTypographyCompilation.artifacts.normalizationReport
