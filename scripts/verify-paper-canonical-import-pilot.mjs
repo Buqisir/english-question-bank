@@ -274,20 +274,29 @@ function continuationSemanticObservations(ledger) {
 }
 
 function canonicalImportPilotSemanticObservation({ evidence, ledger }) {
-  const {
-    renderedArtifactDigests,
-    continuationPublicSeamLedger,
-    semanticObservationDigest,
-    ...stableEvidence
-  } = evidence
-  // Evidence is JSON evidence. Normalize the in-memory projection through the
-  // same JSON boundary before comparison, so an optional field whose value is
-  // undefined cannot make a newly sealed byte record appear semantically
-  // different merely because JSON correctly omits that field on disk.
+  // This is intentionally not a copy of evidence.json. PDF bytes (and any
+  // proof digest calculated from them) identify the particular sealed run,
+  // but Chromium may put nondeterministic metadata in later PDFs. The
+  // independent-rerun comparison therefore carries only the authority-bound
+  // public semantics that later runs must reproduce; the seal separately
+  // binds every byte in the official run.
   return JSON.parse(JSON.stringify({
     evidence: {
-      ...stableEvidence,
-      renderedArtifactPaths: Object.keys(renderedArtifactDigests).sort(),
+      schemaVersion: evidence.schemaVersion,
+      head: evidence.head,
+      sourcePackage: evidence.sourcePackage,
+      sourcePackageDigests: evidence.sourcePackageDigests,
+      canonicalRequestDigest: evidence.canonicalRequestDigest,
+      canonicalEvidenceDigests: evidence.canonicalEvidenceDigests,
+      consumers: evidence.consumers,
+      continuationPublicSeamLedger: {
+        path: evidence.continuationPublicSeamLedger.path,
+        schemaVersion: evidence.continuationPublicSeamLedger.schemaVersion,
+        expectedHead: evidence.continuationPublicSeamLedger.expectedHead,
+      },
+      tamperRejectionMatrix: evidence.tamperRejectionMatrix,
+      paperTypographyInstructionWeightCoverage:
+        evidence.paperTypographyInstructionWeightCoverage,
     },
     continuation: continuationSemanticObservations(ledger),
   }))
