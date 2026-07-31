@@ -1,4 +1,4 @@
-import contract from '../../standards/paper-canonical/rendering/cloze-rhythm-v3.json' with { type: 'json' }
+import contract from '../../standards/paper-canonical/rendering/cloze-rhythm-v4.json' with { type: 'json' }
 
 function freezeRoleClasses(roleClasses) {
   return Object.freeze(
@@ -12,6 +12,9 @@ function freezeRoleClasses(roleClasses) {
 }
 
 export const clozeRhythm = Object.freeze({
+  paperTypographyDelegation: Object.freeze({
+    ...contract.paperTypographyDelegation,
+  }),
   semanticRoleClasses: freezeRoleClasses(contract.semanticRoleClasses),
   adjacencyGraph: Object.freeze(
     contract.adjacencyGraph.map((edge) => Object.freeze({ ...edge })),

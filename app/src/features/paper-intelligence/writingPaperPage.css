@@ -44,7 +44,7 @@
 }
 
 .pi-writing-page--continuation .pi-writing-part {
-  margin-bottom: var(--continuation-writing-page-gap, 0.75rem);
+  margin-bottom: 0;
 }
 
 /* The passage's own PaperSurface card blends into the single sheet (display-only
@@ -85,6 +85,13 @@
   line-height: var(--ps-section-heading-line-height);
   font-weight: 400;
   white-space: nowrap;
+}
+
+.pi-writing-part + .pi-writing-section {
+  margin-top: calc(
+    var(--ps-part-to-first-section-gap)
+      - var(--ps-part-to-first-section-glyph-overhang)
+  );
 }
 
 .pi-writing-page [data-canonical-section-heading-numeric-run] {

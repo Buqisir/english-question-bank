@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "renderer-typography-v8-adversaries-v1",
+  "authority": {
+    "id": "paper-typography",
+    "schemaVersion": "renderer-typography-v8",
+    "version": "8"
+  },
+  "attacks": [
+    {
+      "caseId": "wrong-valid-type-coordinate",
+      "path": ["coordinates", "questionStemAndOuterOptionBlockStartTwip"],
+      "invalidValue": 999
+    },
+    {
+      "caseId": "wrong-evidence-path",
+      "path": ["sectionHeadingContract", "evidence", 1, "path"],
+      "invalidValue": "docs/cuts/paper-canonical-unification/qa/poisoned.png"
+    },
+    {
+      "caseId": "wrong-evidence-hash",
+      "path": ["sectionHeadingContract", "evidence", 1, "sha256"],
+      "invalidValue": "sha256:poisoned"
+    },
+    {
+      "caseId": "wrong-version",
+      "path": ["version"],
+      "invalidValue": "999"
+    },
+    {
+      "caseId": "wrong-source",
+      "path": ["provenance", "source"],
+      "invalidValue": "docs/product/poisoned.md"
+    },
+    {
+      "caseId": "wrong-producer",
+      "path": ["provenance", "producer"],
+      "invalidValue": "poisoned-producer"
+    }
+  ]
+}

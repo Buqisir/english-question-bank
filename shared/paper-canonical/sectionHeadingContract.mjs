@@ -1,4 +1,4 @@
-import rendererTypography from '../../standards/paper-canonical/rendering/paper-typography-v7.json' with { type: 'json' }
+import rendererTypography from '../../standards/paper-canonical/rendering/paper-typography-v8.json' with { type: 'json' }
 
 function freeze(value) {
   if (value && typeof value === 'object') {
@@ -73,6 +73,17 @@ export const sectionHeadingContract =
 
 export const sectionHeadingRuntime =
   sectionHeadingRuntimeFromContract(sectionHeadingContract)
+
+export const paperTypographyRuntime = freeze({
+  coordinates: structuredClone(rendererTypography.coordinates),
+  visibleWeight: structuredClone(
+    rendererTypography.optionAnchorFramework.visibleWeight,
+  ),
+  partToFirstSectionGeometry: structuredClone(
+    rendererTypography.partToFirstSectionGeometry,
+  ),
+  footerContract: structuredClone(rendererTypography.footerContract),
+})
 
 export function sectionHeadingTextRuns(text) {
   if (typeof text !== 'string') {

@@ -1,4 +1,4 @@
-import contract from '../../standards/paper-canonical/rendering/grammar-fill-public-geometry-fixtures-v11.json' with { type: 'json' }
+import contract from '../../standards/paper-canonical/rendering/grammar-fill-public-geometry-fixtures-v12.json' with { type: 'json' }
 
 import { canonicalAuthorityRef } from './authority.mjs'
 import { resolveCanonicalConsumerOccurrence } from './consumerProjection.mjs'
@@ -77,7 +77,7 @@ export function resolveGrammarFillPublicGeometryFixture(
     || occurrenceDigest !== variant.projectedOccurrenceDigest
   ) {
     const error = new Error(
-      `Canonical Grammar Fill geometry fixture is unavailable: ${variantId}`,
+      `Canonical Grammar Fill geometry fixture is unavailable: ${variantId} (expected occurrence ${variant?.projectedOccurrenceDigest ?? 'missing'}, observed ${occurrenceDigest ?? 'missing'})`,
     )
     error.code = 'CANONICAL_GRAMMAR_FILL_GEOMETRY_FIXTURE_REJECTED'
     throw error

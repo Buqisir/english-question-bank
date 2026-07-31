@@ -42,6 +42,7 @@ import {
   grammarFillRhythm,
 } from '../../../../shared/paper-canonical/grammarFillRhythm.mjs'
 import {
+  paperTypographyRuntime,
   sectionHeadingRuntime,
 } from '../../../../shared/paper-canonical/sectionHeadingContract.mjs'
 import { renderCanonicalPaperSentenceContent } from './CanonicalPaperSentenceContent.tsx'
@@ -90,6 +91,16 @@ const paperSurfaceTokenStyle: PaperSurfaceStyle = {
     `${grammarFillRhythm.rendererMapping.screen.baselineStepPx}px`,
   '--ps-grammar-fill-prompt-gap':
     `${grammarFillRhythm.promptGeometry.gapEm}em`,
+  '--ps-grammar-fill-rule-lift':
+    `${grammarFillRhythm.ruleVerticalGeometry.rendererMapping.screenRuleLiftEm}em`,
+  '--ps-grammar-fill-rule-thickness':
+    `${grammarFillRhythm.ruleVerticalGeometry.screenRuleThicknessPx}px`,
+  '--ps-reading-visible-weight':
+    paperTypographyRuntime.visibleWeight.optionText,
+  '--ps-cloze-visible-weight':
+    clozeRhythm.horizontalChoiceGeometry.rendererMapping.visibleWeight,
+  '--ps-cloze-label-to-text-gap':
+    `${clozeRhythm.horizontalChoiceGeometry.rendererMapping.labelToTextGapEm}em`,
   '--ps-passage-indent':
     `${sectionHeadingRuntime.screen.passageFirstLineIndentEm}em`,
   '--ps-options-grid-columns': paperSurfaceTokens.optionsGridColumns,
@@ -1156,6 +1167,7 @@ function PaperSurfaceQuestionItem({
                   `${clozeChoiceMapping.questionLabelWidthPt}pt minmax(0, 1fr)`,
                 columnGap: 0,
                 width: `${clozeChoiceMapping.rowWidthPt}pt`,
+                alignItems: 'baseline',
               }
             : undefined}
         >

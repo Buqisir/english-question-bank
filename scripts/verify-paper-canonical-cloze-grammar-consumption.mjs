@@ -140,21 +140,27 @@ async function readBrowserColumnStarts(page, rowSelector, optionSelector) {
     }), optionSelector)
 }
 
-function assertBrowserColumnGates(rows, label) {
+function assertBrowserColumnGates(rows, label, { anchorColumn = 0 } = {}) {
   assert.equal(rows.length, 15, `${label}: all 15 Cloze rows render`)
   for (const [rowIndex, starts] of rows.entries()) {
     assert.equal(starts.length, 4, `${label}: row ${rowIndex + 1} has A-D`)
     starts.forEach((start, column) => {
+      if (anchorColumn !== 0 && column === 0) return
+      const normalizedStart = start - starts[anchorColumn]
+      const normalizedExpected =
+        EXPECTED_FOUR_COLUMN_STARTS_PT[column]
+        - EXPECTED_FOUR_COLUMN_STARTS_PT[anchorColumn]
       assert.equal(
-        Math.abs(start - EXPECTED_FOUR_COLUMN_STARTS_PT[column]) <= 1,
+        Math.abs(normalizedStart - normalizedExpected) <= 1,
         true,
         `${label}: row ${rowIndex + 1} column ${column + 1} stays within 1pt `
-        + `(actual ${start.toFixed(3)}, expected ${EXPECTED_FOUR_COLUMN_STARTS_PT[column]})`,
+        + `(actual ${normalizedStart.toFixed(3)}, expected ${normalizedExpected})`,
       )
     })
   }
   for (let column = 0; column < 4; column += 1) {
-    const starts = rows.map((row) => row[column])
+    if (anchorColumn !== 0 && column === 0) continue
+    const starts = rows.map((row) => row[column] - row[anchorColumn])
     assert.equal(
       Math.max(...starts) - Math.min(...starts) <= 0.5,
       true,
@@ -589,11 +595,12 @@ function readPdfColumnStarts(pdfBytes, outputRoot, label) {
   execFileSync('pdftotext', ['-bbox', pdfPath, bboxPath])
   const source = readFileSync(bboxPath, 'utf8')
   const words = [...source.matchAll(
-    /<word xMin="([^"]+)" yMin="([^"]+)" xMax="[^"]+" yMax="[^"]+">([A-D])\.<\/word>/g,
+    /<word xMin="([^"]+)" yMin="([^"]+)" xMax="[^"]+" yMax="[^"]+">(?:([0-9]+)\.)?([A-D])\.<\/word>/g,
   )].map((match) => ({
     x: Number(match[1]),
     y: Number(match[2]),
-    label: match[3],
+    questionNo: match[3] || null,
+    label: match[4],
   }))
   const rows = []
   for (let index = 0; index <= words.length - 4; index += 1) {
@@ -603,11 +610,16 @@ function readPdfColumnStarts(pdfBytes, outputRoot, label) {
       && Math.max(...candidate.map((word) => word.y))
         - Math.min(...candidate.map((word) => word.y)) <= 0.5
     ) {
-      rows.push(candidate.map((word) => word.x - candidate[0].x))
+      assert.equal(
+        candidate[0].questionNo !== null,
+        true,
+        `${label}: A is physically joined to its question number`,
+      )
+      rows.push(candidate.map((word) => word.x))
       index += 3
     }
   }
-  assertBrowserColumnGates(rows, label)
+  assertBrowserColumnGates(rows, label, { anchorColumn: 1 })
 }
 
 async function assertRejectedPhysicalRoutes({ baseUrl, draftPaperId, label }) {

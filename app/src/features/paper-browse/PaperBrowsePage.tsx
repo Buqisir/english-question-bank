@@ -73,6 +73,7 @@ import {
   grammarFillRhythm,
 } from '../../../../shared/paper-canonical/grammarFillRhythm.mjs'
 import {
+  paperTypographyRuntime,
   sectionHeadingRuntime,
   sectionHeadingTextRuns,
 } from '../../../../shared/paper-canonical/sectionHeadingContract.mjs'
@@ -412,6 +413,22 @@ const paperBrowseContentStyle: PaperBrowseContentStyle = {
     `${sectionHeadingRuntime.screen.sectionHeadingIndentEm}em`,
   '--ps-section-heading-numeric-shift':
     `${sectionHeadingRuntime.screen.numericRunBaselineShiftEm}em`,
+  '--ps-part-to-first-section-gap':
+    `${Math.max(
+      0,
+      paperTypographyRuntime.partToFirstSectionGeometry
+        .visibleGlyphBottomStepRatio
+        * paperTypographyRuntime.partToFirstSectionGeometry
+          .visibleGlyphHeightToFontSizeRatio.screen
+        * sectionHeadingRuntime.screen.fontSizePx
+      - sectionHeadingRuntime.screen.lineHeightPx,
+    )}px`,
+  '--ps-part-to-first-section-glyph-overhang':
+    `${(
+      paperTypographyRuntime.partToFirstSectionGeometry
+        .visibleGlyphHeightToFontSizeRatio.screen
+      - 1
+    ) * sectionHeadingRuntime.screen.fontSizePx}px`,
   '--ps-group-instruction-indent':
     `${sectionHeadingRuntime.screen.groupInstructionFirstLineIndentEm}em`,
   '--ps-seven-merged-instruction-margin-bottom':

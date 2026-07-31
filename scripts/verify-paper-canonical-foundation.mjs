@@ -7,10 +7,11 @@ import manifestV1 from '../standards/paper-canonical/manifest-v1.json' with { ty
 import manifestV13 from '../standards/paper-canonical/manifest-v13.json' with { type: 'json' }
 import manifestV30 from '../standards/paper-canonical/manifest-v30.json' with { type: 'json' }
 import applicationWritingRhythmV4Conformance from '../test-fixtures/paper-canonical/application-writing-rhythm-v4-conformance.json' with { type: 'json' }
-import clozeRhythmV3Conformance from '../test-fixtures/paper-canonical/cloze-rhythm-v3-conformance.json' with { type: 'json' }
+import clozeRhythmV4Conformance from '../test-fixtures/paper-canonical/cloze-rhythm-v4-conformance.json' with { type: 'json' }
 import continuationWritingRhythmV4Conformance from '../test-fixtures/paper-canonical/continuation-writing-rhythm-v4-conformance.json' with { type: 'json' }
-import grammarFillRhythmV4Conformance from '../test-fixtures/paper-canonical/grammar-fill-rhythm-v4-conformance.json' with { type: 'json' }
-import grammarFillPublicGeometryFixturesV11Conformance from '../test-fixtures/paper-canonical/grammar-fill-public-geometry-fixtures-v11-conformance.json' with { type: 'json' }
+import grammarFillRhythmV5Conformance from '../test-fixtures/paper-canonical/grammar-fill-rhythm-v5-conformance.json' with { type: 'json' }
+import rendererTypographyV8Adversaries from '../test-fixtures/paper-canonical/renderer-typography-v8-adversaries.json' with { type: 'json' }
+import grammarFillPublicGeometryFixturesV12Conformance from '../test-fixtures/paper-canonical/grammar-fill-public-geometry-fixtures-v12-conformance.json' with { type: 'json' }
 import sevenChoicesRhythmV3Conformance from '../test-fixtures/paper-canonical/seven-choices-rhythm-v3-conformance.json' with { type: 'json' }
 
 import { canonicalAuthorityRef, compileCanonicalPaper, stableStringify, validateExactTransformationRecords } from '../shared/paper-canonical/compiler.mjs'
@@ -203,14 +204,14 @@ for (const contradictoryProvision of [
     'the v2 provision contract closes prompt presence by provision kind',
   )
 }
-const clozeRhythmV2 = closure.artifacts['renderer-cloze-rhythm']
+const clozeRhythmV4 = closure.artifacts['renderer-cloze-rhythm']
 assert.deepEqual(
   {
-    schemaVersion: clozeRhythmV2.schemaVersion,
-    id: clozeRhythmV2.id,
-    version: clozeRhythmV2.version,
+    schemaVersion: clozeRhythmV4.schemaVersion,
+    id: clozeRhythmV4.id,
+    version: clozeRhythmV4.version,
   },
-  clozeRhythmV3Conformance.authority,
+  clozeRhythmV4Conformance.authority,
 )
 function assertRendererAuthorityMutationRejected(
   rendererId,
@@ -239,6 +240,40 @@ function assertRendererAuthorityMutationRejected(
       `${caseId} reports ${expectedIssueCode}`,
     )
   }
+}
+assert.deepEqual(
+  {
+    schemaVersion:
+      closure.artifacts['renderer-typography'].schemaVersion,
+    id: closure.artifacts['renderer-typography'].id,
+    version: closure.artifacts['renderer-typography'].version,
+  },
+  rendererTypographyV8Adversaries.authority,
+)
+for (const attack of rendererTypographyV8Adversaries.attacks) {
+  const artifacts = structuredClone(closure.artifacts)
+  let target = artifacts['renderer-typography']
+  for (const key of attack.path.slice(0, -1)) target = target[key]
+  target[attack.path.at(-1)] = attack.invalidValue
+  const manifest = structuredClone(closure.manifest)
+  manifest.artifacts.find(
+    (descriptor) => descriptor.id === 'renderer-typography',
+  ).sha256 = digestJson(artifacts['renderer-typography'])
+  const validation = validateAuthorityClosure({
+    manifest,
+    artifacts,
+    schemas: closure.schemas,
+  })
+  assert.equal(validation.ok, false, attack.caseId)
+  assert.equal(
+    validation.issues.some(
+      (issue) =>
+        issue.code === 'SCHEMA_CONST'
+        || issue.code === 'RENDERER_OWNER_QA_TYPOGRAPHY_CONTRACT_INVALID',
+    ),
+    true,
+    `${attack.caseId} fails closed after descriptor digest recomputation`,
+  )
 }
 for (const attack of applicationWritingRhythmV4Conformance.semanticAttacks) {
   assertRendererAuthorityMutationRejected(
@@ -274,10 +309,10 @@ for (const attack of continuationWritingRhythmV4Conformance.semanticAttacks) {
     },
   )
 }
-for (const attack of clozeRhythmV3Conformance.semanticAttacks) {
+for (const attack of clozeRhythmV4Conformance.semanticAttacks) {
   assertRendererAuthorityMutationRejected(
     'renderer-cloze-rhythm',
-    clozeRhythmV3Conformance,
+    clozeRhythmV4Conformance,
     attack.caseId,
     (artifact) => {
     let target = artifact
@@ -309,10 +344,10 @@ function visitAuthorityFields(value, path = [], fields = []) {
   }
   return fields
 }
-for (const fieldPath of visitAuthorityFields(clozeRhythmV2)) {
+for (const fieldPath of visitAuthorityFields(clozeRhythmV4)) {
   assertRendererAuthorityMutationRejected(
     'renderer-cloze-rhythm',
-    clozeRhythmV3Conformance,
+    clozeRhythmV4Conformance,
     `complete-field-closure:${fieldPath.join('.')}`,
     (artifact) => {
       let target = artifact
@@ -333,10 +368,10 @@ function visitAuthorityLeaves(value, path = [], leaves = []) {
   }
   return leaves
 }
-for (const leafPath of visitAuthorityLeaves(clozeRhythmV2)) {
+for (const leafPath of visitAuthorityLeaves(clozeRhythmV4)) {
   assertRendererAuthorityMutationRejected(
     'renderer-cloze-rhythm',
-    clozeRhythmV3Conformance,
+    clozeRhythmV4Conformance,
     `complete-value-closure:${leafPath.join('.')}`,
     (artifact) => {
       let target = artifact
@@ -351,20 +386,20 @@ for (const leafPath of visitAuthorityLeaves(clozeRhythmV2)) {
     },
   )
 }
-const grammarFillRhythmV4 =
+const grammarFillRhythmV5 =
   closure.artifacts['renderer-grammar-fill-rhythm']
 assert.deepEqual(
   {
-    schemaVersion: grammarFillRhythmV4.schemaVersion,
-    id: grammarFillRhythmV4.id,
-    version: grammarFillRhythmV4.version,
+    schemaVersion: grammarFillRhythmV5.schemaVersion,
+    id: grammarFillRhythmV5.id,
+    version: grammarFillRhythmV5.version,
   },
-  grammarFillRhythmV4Conformance.authority,
+  grammarFillRhythmV5Conformance.authority,
 )
-for (const attack of grammarFillRhythmV4Conformance.semanticAttacks) {
+for (const attack of grammarFillRhythmV5Conformance.semanticAttacks) {
   assertRendererAuthorityMutationRejected(
     'renderer-grammar-fill-rhythm',
-    grammarFillRhythmV4Conformance,
+    grammarFillRhythmV5Conformance,
     attack.caseId,
     (artifact) => {
       let target = artifact
@@ -382,10 +417,10 @@ for (const attack of grammarFillRhythmV4Conformance.semanticAttacks) {
     },
   )
 }
-for (const fieldPath of visitAuthorityFields(grammarFillRhythmV4)) {
+for (const fieldPath of visitAuthorityFields(grammarFillRhythmV5)) {
   assertRendererAuthorityMutationRejected(
     'renderer-grammar-fill-rhythm',
-    grammarFillRhythmV4Conformance,
+    grammarFillRhythmV5Conformance,
     `grammar-fill-complete-field-closure:${fieldPath.join('.')}`,
     (artifact) => {
       let target = artifact
@@ -394,10 +429,10 @@ for (const fieldPath of visitAuthorityFields(grammarFillRhythmV4)) {
     },
   )
 }
-for (const leafPath of visitAuthorityLeaves(grammarFillRhythmV4)) {
+for (const leafPath of visitAuthorityLeaves(grammarFillRhythmV5)) {
   assertRendererAuthorityMutationRejected(
     'renderer-grammar-fill-rhythm',
-    grammarFillRhythmV4Conformance,
+    grammarFillRhythmV5Conformance,
     `grammar-fill-complete-value-closure:${leafPath.join('.')}`,
     (artifact) => {
       let target = artifact
@@ -412,31 +447,31 @@ for (const leafPath of visitAuthorityLeaves(grammarFillRhythmV4)) {
     },
   )
 }
-const grammarFillPublicGeometryFixturesV11 =
+const grammarFillPublicGeometryFixturesV12 =
   closure.artifacts['renderer-grammar-fill-public-geometry-fixtures']
 assert.equal(
-  grammarFillPublicGeometryFixturesV11.schemaVersion,
-  'grammar-fill-public-geometry-fixtures-v11',
+  grammarFillPublicGeometryFixturesV12.schemaVersion,
+  'grammar-fill-public-geometry-fixtures-v12',
 )
 assert.deepEqual(
-  Object.keys(grammarFillPublicGeometryFixturesV11.variants).sort(),
-  [...grammarFillPublicGeometryFixturesV11Conformance.positive.variantIds]
+  Object.keys(grammarFillPublicGeometryFixturesV12.variants).sort(),
+  [...grammarFillPublicGeometryFixturesV12Conformance.positive.variantIds]
     .sort(),
 )
 assertRendererAuthorityMutationRejected(
   'renderer-grammar-fill-public-geometry-fixtures',
-  grammarFillPublicGeometryFixturesV11Conformance,
+  grammarFillPublicGeometryFixturesV12Conformance,
   'grammar-fill-public-geometry-fixtures-complete-value-closure',
   (artifact) => {
     artifact.variants['screen-wrapped-line']
       .paragraphWidths[0].usableWidthEm += 999
   },
 )
-for (const attack of grammarFillPublicGeometryFixturesV11Conformance
+for (const attack of grammarFillPublicGeometryFixturesV12Conformance
   .shadowGeometryAttacks) {
   assertRendererAuthorityMutationRejected(
     'renderer-grammar-fill-public-geometry-fixtures',
-    grammarFillPublicGeometryFixturesV11Conformance,
+    grammarFillPublicGeometryFixturesV12Conformance,
     attack.caseId,
     (artifact) => {
       artifact.variants['screen-wrapped-line'][attack.fieldName] =
@@ -452,14 +487,14 @@ fixtureRemovalManifest.artifacts = fixtureRemovalManifest.artifacts.filter(
 )
 fixtureRemovalManifest.schemas = fixtureRemovalManifest.schemas.filter(
   (descriptor) =>
-    descriptor.id !== 'grammar-fill-public-geometry-fixtures-v4',
+    descriptor.id !== 'grammar-fill-public-geometry-fixtures-v12',
 )
 const fixtureRemovalArtifacts = structuredClone(closure.artifacts)
 delete fixtureRemovalArtifacts[
   'renderer-grammar-fill-public-geometry-fixtures'
 ]
 const fixtureRemovalSchemas = structuredClone(closure.schemas)
-delete fixtureRemovalSchemas['grammar-fill-public-geometry-fixtures-v4']
+delete fixtureRemovalSchemas['grammar-fill-public-geometry-fixtures-v12']
 const fixtureRemovalValidation = validateAuthorityClosure({
   manifest: fixtureRemovalManifest,
   artifacts: fixtureRemovalArtifacts,

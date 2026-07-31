@@ -355,6 +355,25 @@
   margin-left: var(--ps-grammar-fill-prompt-gap);
 }
 
+.ps-paper-blank-unit[data-canonical-grammar-fill-unit]
+  .ps-paper-blank {
+  position: relative;
+  border-bottom: 0;
+  background: none;
+}
+
+.ps-paper-blank-unit[data-canonical-grammar-fill-unit]
+  .ps-paper-blank::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: var(--ps-grammar-fill-rule-lift);
+  border-bottom:
+    var(--ps-grammar-fill-rule-thickness) solid currentColor;
+  pointer-events: none;
+}
+
 /* ─── I15: clickable in-passage grammar-fill blank ─────────────── *
  * 'in-passage' focus mode only. Renders the blank's own text
  * (`56._____`, `57._____(absorb)`) inline as a focus button —
@@ -626,12 +645,15 @@ button.ps-paper-blank.ps-paper-blank--clickable {
 }
 
 [data-canonical-group-type="reading"] .ps-question-no,
-[data-canonical-group-type="cloze"] .ps-question-no,
 [data-canonical-group-type="reading"] .ps-option-label,
+[data-canonical-group-type="reading"] .ps-option-text {
+  font-weight: var(--ps-reading-visible-weight);
+}
+
+[data-canonical-group-type="cloze"] .ps-question-no,
 [data-canonical-group-type="cloze"] .ps-option-label,
-[data-canonical-group-type="reading"] .ps-option-text,
 [data-canonical-group-type="cloze"] .ps-option-text {
-  font-weight: 400;
+  font-weight: var(--ps-cloze-visible-weight);
 }
 
 .canonical-continuation-material p {
@@ -733,7 +755,7 @@ button.ps-paper-blank.ps-paper-blank--clickable {
   .ps-question-options-inline-item {
   display: grid;
   grid-template-columns: max-content minmax(0, 1fr);
-  column-gap: 0.411765em;
+  column-gap: var(--ps-cloze-label-to-text-gap);
   min-width: 0;
   align-items: baseline;
 }
@@ -748,6 +770,13 @@ button.ps-paper-blank.ps-paper-blank--clickable {
   .ps-question-options-inline--four_columns
   .ps-option-text {
   min-width: 0;
+}
+
+[data-canonical-group-type="cloze"]
+  .ps-question-stem-button
+  > .ps-question-no {
+  justify-self: end;
+  text-align: right;
 }
 
 .ps-question-options-inline--two_by_two {

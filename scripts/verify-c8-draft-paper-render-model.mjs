@@ -208,11 +208,11 @@ assert('draft render uses student version only', !draftBody.includes('【答案�
 assert('draft render emits section headers in type order', firstSection >= 0 && secondSection > firstSection && thirdSection > secondSection)
 assert('draft render emits a page break before the second group only', firstSection >= 0 && firstQuestion > firstSection && pageBreak > firstQuestion && secondSection > pageBreak)
 assert('draft render reopens a new section when group type returns later', thirdSection > secondSection)
-assert('draft render keeps the standard complete footer', draftHtml.includes('英语试题 第') && draftHtml.includes('counter(pages)'))
+assert('draft render keeps the standard complete footer', draftHtml.includes('英语试题第 ') && draftHtml.includes(' 页（共 ') && draftHtml.includes(' 页）') && draftHtml.includes('counter(pages)'))
 assert('draft store does not override the standard footer with a product title', !draftStore.includes('addDraftFooterCss'))
 assert(
   'print renderer owns page and total-page counters',
-  /content:\s*"英语试题 第"\s*counter\(page\)\s*"页\(共"\s*counter\(pages\)\s*"页\)"/.test(printRenderer),
+  /content:\s*"\$\{paperTypographyRuntime\.footerContract\.prefix\}"\s*counter\(page\)\s*"\$\{paperTypographyRuntime\.footerContract\.pageSuffix\}"\s*counter\(pages\)\s*"\$\{paperTypographyRuntime\.footerContract\.totalSuffix\}"/.test(printRenderer),
 )
 // draft-desk-b step4 (MF-2/MF-7, plan.md "步4 — PDF 换引擎收口 + Vivliostyle
 // 草稿卷退役"): exportDraftPaperPdf no longer calls buildDraftPrintHtml +

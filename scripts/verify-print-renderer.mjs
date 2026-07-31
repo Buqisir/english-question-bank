@@ -117,7 +117,7 @@ console.log('\nTest 3: CSS contract checks')
   assert('options-list class exists in CSS', html.includes('.options-list'), '')
   assert('exam density class on body', html.includes('class="exam"'), '')
   // 刀⑤ render-fidelity Chunk B — standard §1: footer page number.
-  assert('@bottom-center footer page number', html.includes('英语试题 第') && html.includes('counter(page)') && html.includes('counter(pages)'), '')
+  assert('@bottom-center footer page number', html.includes('英语试题第 ') && html.includes(' 页（共 ') && html.includes(' 页）') && html.includes('counter(page)') && html.includes('counter(pages)'), '')
   // 刀⑤ render-fidelity Chunk B — standard §3: line-height fixed 18pt (≈1.714 at 10.5pt).
   assert('line-height 1.714 (18pt fixed baseline, token-sourced)', html.includes('line-height: 1.714'), '')
   // 刀⑤ render-fidelity Chunk B — font stacks sourced from shared/papersurface/tokens.mjs.

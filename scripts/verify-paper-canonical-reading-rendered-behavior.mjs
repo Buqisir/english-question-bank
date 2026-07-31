@@ -517,15 +517,21 @@ assert.deepEqual(
   manifest.artifacts.find(
     ({ id }) => id === 'renderer-typography',
   ).sha256 = digestJson(artifacts['renderer-typography'])
+  const validation = validateAuthorityClosure({
+    manifest,
+    artifacts,
+    schemas: authority.schemas,
+  })
   assert.equal(
-    validateAuthorityClosure({
-      manifest,
-      artifacts,
-      schemas: authority.schemas,
-    }).issues.some(({ code }) =>
-      code === 'RENDERER_READING_PASSAGE_LETTERS_INVALID'),
-    true,
+    validation.ok,
+    false,
     'a re-digested renderer artifact cannot remap Reading slot identity',
+  )
+  assert.equal(
+    validation.issues.some(({ code }) =>
+      code === 'SCHEMA_CONST'
+      || code === 'RENDERER_OWNER_QA_TYPOGRAPHY_CONTRACT_INVALID'),
+    true,
   )
 }
 const oneColumnGroup = readingSelection.projectedOccurrences

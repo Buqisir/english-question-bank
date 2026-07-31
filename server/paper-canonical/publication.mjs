@@ -26,9 +26,10 @@ import {
   assertCanonicalVisibleStructure,
 } from '../../shared/paper-canonical/visibleStructure.mjs'
 
-const publicationFileName = 'canonical-paper-publication-v32.json'
+const publicationFileName = 'canonical-paper-publication-v33.json'
 const publicationFileNames = [
   publicationFileName,
+  'canonical-paper-publication-v32.json',
   'canonical-paper-publication-v31.json',
   'canonical-paper-publication-v30.json',
   'canonical-paper-publication-v29.json',

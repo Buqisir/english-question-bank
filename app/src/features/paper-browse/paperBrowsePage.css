@@ -327,6 +327,14 @@
   white-space: nowrap;
 }
 
+.paper-browse-part-heading + .paper-browse-section-heading {
+  margin-top: calc(
+    var(--ps-part-to-first-section-gap)
+      - var(--pb-block-gap)
+      - var(--ps-part-to-first-section-glyph-overhang)
+  );
+}
+
 [data-canonical-section-heading-numeric-run] {
   position: relative;
   top: var(--ps-section-heading-numeric-shift);
@@ -486,6 +494,16 @@
     .pi-writing-part[data-canonical-grammar-fill-following-for]
   ) {
   margin-top: var(--ps-grammar-fill-writing-margin-lecture);
+}
+
+.paper-browse-content
+  > .paper-browse-part-heading
+  + .paper-browse-section-heading {
+  margin-top: calc(
+    var(--ps-part-to-first-section-gap)
+      - var(--pb-block-gap)
+      - var(--ps-part-to-first-section-glyph-overhang)
+  );
 }
 
 /* dashed-line-unify: 屏幕卷面是连续流，「分页」是纸的语义——线退役

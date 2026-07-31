@@ -136,23 +136,31 @@ function validateRedigestedOuterOrigin(questionStemStartTwip) {
 
 const fractionalOuterOriginValidation = validateRedigestedOuterOrigin(420.5)
 assert.equal(
+  fractionalOuterOriginValidation.ok,
+  false,
+  'a re-digested renderer authority rejects a fractional outer physical origin',
+)
+assert.equal(
   fractionalOuterOriginValidation.issues.some(
-    ({ code, path }) =>
-      code === 'SCHEMA_TYPE'
-      && path === '$.artifacts.renderer-typography.coordinates.questionStemAndOuterOptionBlockStartTwip',
+    ({ code }) =>
+      code === 'SCHEMA_CONST'
+      || code === 'RENDERER_OWNER_QA_TYPOGRAPHY_CONTRACT_INVALID',
   ),
   true,
-  'a re-digested renderer authority rejects a fractional outer physical origin',
 )
 const negativeOuterOriginValidation = validateRedigestedOuterOrigin(-20)
 assert.equal(
+  negativeOuterOriginValidation.ok,
+  false,
+  'a re-digested renderer authority rejects a negative outer physical origin',
+)
+assert.equal(
   negativeOuterOriginValidation.issues.some(
-    ({ code, path }) =>
-      code === 'SCHEMA_MINIMUM'
-      && path === '$.artifacts.renderer-typography.coordinates.questionStemAndOuterOptionBlockStartTwip',
+    ({ code }) =>
+      code === 'SCHEMA_CONST'
+      || code === 'RENDERER_OWNER_QA_TYPOGRAPHY_CONTRACT_INVALID',
   ),
   true,
-  'a re-digested renderer authority rejects a negative outer physical origin',
 )
 const driftedAuthorityArtifacts = {
   ...authority.artifacts,

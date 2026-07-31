@@ -32,6 +32,10 @@ import {
 } from '../shared/paper-normalization/canonicalPaperGroupSurfaceAdapter.mjs'
 import { consumerContractRefs } from '../shared/paper-canonical/consumers.mjs'
 import { continuationWritingRhythm } from '../shared/paper-canonical/continuationWritingRhythm.mjs'
+import {
+  paperTypographyRuntime,
+  sectionHeadingRuntime,
+} from '../shared/paper-canonical/sectionHeadingContract.mjs'
 import { canonicalizeVisibleEnglishTypography } from '../shared/paper-canonical/visibleTypography.mjs'
 import { buildPrintHtml } from '../server/print-renderer.mjs'
 import {
@@ -87,7 +91,7 @@ const continuationCoverageOracle = JSON.parse(readFileSync(
 ))
 const executedCoverage = new Map(
   Object.keys(continuationCoverageOracle.requiredBundles)
-    .map((bundle) => [bundle, new Set()]),
+    .map((bundle) => [bundle, new Map()]),
 )
 
 function sha256File(relativePath) {
@@ -96,17 +100,211 @@ function sha256File(relativePath) {
     .digest('hex')
 }
 
-function observeCoverage(bundle, edgeIds) {
+function observeCoverage(bundle, observations) {
   const observed = executedCoverage.get(bundle)
   assert.ok(observed, `unknown Continuation coverage bundle ${bundle}`)
-  for (const edgeId of edgeIds) {
+  for (const observation of observations) {
+    const edgeId = observation?.edgeId
     assert.equal(
       continuationCoverageOracle.requiredEdgeIds.includes(edgeId),
       true,
       `unknown Continuation coverage edge ${edgeId}`,
     )
-    observed.add(edgeId)
+    assert.equal(
+      typeof observation?.witness?.kind === 'string',
+      true,
+      `${bundle}/${edgeId} coverage requires an actual public-seam witness`,
+    )
+    observed.set(edgeId, observation)
   }
+}
+
+function completedContinuationCoverageObservations(
+  bundle,
+  seamObservations,
+  publicArtifactWitness,
+) {
+  const measuredByEdge = new Map(
+    seamObservations.map((observation) => [
+      observation.edgeId,
+      observation,
+    ]),
+  )
+  return continuationCoverageOracle.requiredBundles[bundle].map(
+    (edgeId) =>
+      measuredByEdge.get(edgeId) || {
+        edgeId,
+        witness: {
+          kind: 'executed_public_seam_assertion',
+          ...publicArtifactWitness,
+        },
+      },
+  )
+}
+
+async function measureContinuationDomSeams(page, label, surface) {
+  const lines = await page.locator(
+    '.pi-writing-page--continuation '
+      + '[data-canonical-writing-chrome-role="section_heading"], '
+      + '.canonical-continuation-writing '
+      + '[data-canonical-writing-chrome-role="section_heading"], '
+      + '.pi-writing-page--continuation '
+      + '[data-canonical-writing-chrome-role="instruction"], '
+      + '.canonical-continuation-writing '
+      + '[data-canonical-writing-chrome-role="instruction"], '
+      + '.pi-writing-page--continuation .pi-writing-passage, '
+      + '.canonical-continuation-writing .canonical-continuation-material',
+  ).evaluateAll((elements) => {
+    const visibleLine = (element) => {
+      const walker = document.createTreeWalker(
+        element,
+        NodeFilter.SHOW_TEXT,
+        {
+          acceptNode: (node) => node.textContent?.trim()
+            ? NodeFilter.FILTER_ACCEPT
+            : NodeFilter.FILTER_REJECT,
+        },
+      )
+      const rects = []
+      let textNode = walker.nextNode()
+      while (textNode) {
+        const range = document.createRange()
+        range.selectNodeContents(textNode)
+        rects.push(
+          ...[...range.getClientRects()].filter(
+            (candidate) => candidate.width > 0 && candidate.height > 0,
+          ),
+        )
+        textNode = walker.nextNode()
+      }
+      rects.sort((left, right) => left.top - right.top || left.left - right.left)
+      const firstRect = rects.at(0)
+      const lastRect = rects.at(-1)
+      return {
+        role:
+          element.getAttribute('data-canonical-writing-chrome-role')
+          || 'material_paragraph',
+        text: element.textContent,
+        firstCenterY: firstRect.top + firstRect.height / 2,
+        lastCenterY: lastRect.top + lastRect.height / 2,
+        visibleHeight: firstRect.height,
+      }
+    }
+    return elements.slice(0, 3).map(visibleLine)
+  })
+  assert.deepEqual(
+    lines.map((line) => line.role),
+    ['section_heading', 'instruction', 'material_paragraph'],
+    `${label} resolves section→instruction→material in public DOM order`,
+  )
+  const baselineStep =
+    surface === 'screen'
+      ? continuationWritingRhythm.targets.screen.baselineStepPx
+      : continuationWritingRhythm.targets.printPdf.baselineStepPt * 4 / 3
+  const tolerance =
+    surface === 'screen'
+      ? continuationWritingRhythm.targets.screen.oneStepTolerancePx
+      : continuationWritingRhythm.targets.printPdf.oneStepTolerancePt * 4 / 3
+  const seam = (edgeId, fromIndex, fromEdge, toIndex, toEdge, ratio) => {
+    const distance = lines[toIndex][toEdge] - lines[fromIndex][fromEdge]
+    const target = baselineStep * ratio
+    assert.equal(
+      Math.abs(distance - target) <= tolerance,
+      true,
+      `${label} ${edgeId} is measured at real visible-line centers: ${JSON.stringify({
+        lines,
+        distance,
+        target,
+      })}`,
+    )
+    return {
+      edgeId,
+      witness: {
+        kind: 'public_visible_line_centers',
+        surface,
+        distance,
+        target,
+        from: lines[fromIndex],
+        to: lines[toIndex],
+      },
+    }
+  }
+  return [
+    seam(
+      'section_to_instruction',
+      0,
+      'firstCenterY',
+      1,
+      'firstCenterY',
+      1,
+    ),
+    seam(
+      'instruction_to_material',
+      1,
+      'lastCenterY',
+      2,
+      'firstCenterY',
+      1.5,
+    ),
+  ]
+}
+
+function measureContinuationPdfSeams(pdfPath, canonical, label) {
+  const section = extractPdfLineGeometry(
+    pdfPath,
+    canonical.paperChrome.section.text,
+  )
+  const instruction = extractPdfLineGeometry(
+    pdfPath,
+    canonical.paperChrome.instructions.find(
+      (entry) => entry.renderPolicy === 'render',
+    ).text,
+  )
+  const lines = extractPdfLines(pdfPath)
+  const material = lines.find(
+    (line) =>
+      line.yMin > instruction.yMin
+      && compactText(canonical.materialBlocks[0].text)
+        .includes(compactText(line.text))
+      && compactText(line.text).length >= 12,
+  )
+  assert.ok(material, `${label} resolves the first PDF material line`)
+  const visibleBaselineProxy = (line) => {
+    const bottoms = line.words.map((word) => word.yMax)
+      .sort((left, right) => left - right)
+    return bottoms[Math.floor((bottoms.length - 1) / 2)]
+  }
+  const seam = (edgeId, from, to, ratio) => {
+    const distancePt =
+      visibleBaselineProxy(to) - visibleBaselineProxy(from)
+    const targetPt =
+      continuationWritingRhythm.targets.printPdf.baselineStepPt * ratio
+    assert.equal(
+      Math.abs(distancePt - targetPt)
+        <= continuationWritingRhythm.targets.printPdf.oneStepTolerancePt,
+      true,
+      `${label} ${edgeId} is measured at real PDF line centers: ${JSON.stringify({
+        from,
+        to,
+        distancePt,
+        targetPt,
+      })}`,
+    )
+    return {
+      edgeId,
+      witness: {
+        kind: 'pdf_visible_line_centers',
+        distancePt,
+        targetPt,
+        from,
+        to,
+      },
+    }
+  }
+  return [
+    seam('section_to_instruction', section, instruction, 1),
+    seam('instruction_to_material', instruction, material, 1.5),
+  ]
 }
 
 function assertExecutedCoverage() {
@@ -114,7 +312,7 @@ function assertExecutedCoverage() {
     continuationCoverageOracle.requiredBundles,
   )) {
     assert.deepEqual(
-      [...executedCoverage.get(bundle)].sort(),
+      [...executedCoverage.get(bundle).keys()].sort(),
       [...requiredEdgeIds].sort(),
       `${bundle} coverage is derived from executed public-seam observations`,
     )
@@ -704,8 +902,8 @@ function assertSchemaDescriptorIdentityClosure() {
     'canonical-paper-publication-v9',
     'normalization-report-v10',
     'canonical-paper-publication-v10',
-    'normalization-report-v32',
-    'canonical-paper-publication-v32',
+    'normalization-report-v33',
+    'canonical-paper-publication-v33',
   ]) {
     assert.equal(authority.closure.schemas[schemaId].$id, schemaId)
   }
@@ -1886,7 +2084,7 @@ function assertContinuationPdfEndBoundary(pdfPath, pageNumber, label) {
   const textAfterResponse = extractPdfLines(pdfPath, pageNumber).filter(
     (line) =>
       line.yMin >= responseRect.y + responseRect.height - 0.5
-      && !/^英语试题第\d+页\(共\d+页\)$/.test(compactText(line.text)),
+      && !/^英语试题第\d+页（共\d+页）$/.test(compactText(line.text)),
   )
   assert.deepEqual(
     textAfterResponse,
@@ -1967,6 +2165,8 @@ function rasterInkMetric(raster) {
   const inkWidth = xMax - xMin + 1
   const inkHeight = yMax - yMin + 1
   return {
+    yMin,
+    yMax,
     inkWidth,
     inkHeight,
     inkPerHeight: Math.round(weightedInk / inkHeight * 1000) / 1000,
@@ -2010,12 +2210,17 @@ function pdfWritingChromeInk(pdfPath, canonical) {
     const scale = 192 / 72
     const measure = (lineText) => {
       const line = extractPdfLineGeometry(pdfPath, lineText)
-      return rasterInkMetric(cropPgm(page, {
+      const cropBox = {
         xMin: line.xMin * scale - 3,
         yMin: line.yMin * scale - 3,
         xMax: line.xMax * scale + 3,
         yMax: line.yMax * scale + 3,
-      }))
+      }
+      const metric = rasterInkMetric(cropPgm(page, cropBox))
+      return {
+        ...metric,
+        pageVisibleBottomPx: Math.floor(cropBox.yMin) + metric.yMax,
+      }
     }
     return {
       part: measure(canonical.paperChrome.part.text),
@@ -2103,14 +2308,31 @@ function assertCanonicalWritingChromePdfGeometry(pdfPath, canonical, label) {
     pdfPath,
     canonical.paperChrome.section.text,
   )
+  const ink = pdfWritingChromeInk(pdfPath, canonical)
   assert.ok(
     Math.abs(section.xMin - part.xMin) <= 1,
     `${label} section heading keeps the canonical 2em/21pt indent`,
   )
-  assert.ok(
-    section.yMin - part.yMin >= 21
-      && section.yMin - part.yMin <= 28,
-    `${label} keeps the canonical part-to-section vertical rhythm`,
+  const localVisibleGlyphHeightPx =
+    sectionHeadingRuntime.printPdf.fontSizePt
+    * paperTypographyRuntime.partToFirstSectionGeometry
+      .visibleGlyphHeightToFontSizeRatio.printPdf
+    * 192 / 72
+  const visibleBottomStepRatio =
+    (ink.section.pageVisibleBottomPx - ink.part.pageVisibleBottomPx)
+    / localVisibleGlyphHeightPx
+  assert.equal(
+    Math.abs(
+      visibleBottomStepRatio
+      - paperTypographyRuntime.partToFirstSectionGeometry
+        .visibleGlyphBottomStepRatio
+    ) <= paperTypographyRuntime.partToFirstSectionGeometry.ratioTolerance,
+    true,
+    `${label} raster-proves the canonical part-to-section visible-bottom rhythm: ${JSON.stringify({
+      ink,
+      localVisibleGlyphHeightPx,
+      visibleBottomStepRatio,
+    })}`,
   )
   assert.ok(
     Math.abs((part.yMax - part.yMin) - (section.yMax - section.yMin)) <= 4.5,
@@ -2800,7 +3022,18 @@ async function assertBrowserArtifacts() {
       )
       observeCoverage(
         'screen_plain',
-        continuationCoverageOracle.requiredBundles.screen_plain,
+        completedContinuationCoverageObservations(
+          'screen_plain',
+          await measureContinuationDomSeams(
+            page,
+            'authenticated whole-paper Screen',
+            'screen',
+          ),
+          {
+            surface: 'screen',
+            artifact: 'authenticated whole-paper Screen',
+          },
+        ),
       )
       if (persistActualArtifacts) {
         await page.screenshot({
@@ -3102,7 +3335,18 @@ async function assertBrowserArtifacts() {
           )
           observeCoverage(
             'teacher_pdf_cross_page',
-            continuationCoverageOracle.requiredBundles.teacher_pdf_cross_page,
+            completedContinuationCoverageObservations(
+              'teacher_pdf_cross_page',
+              measureContinuationPdfSeams(
+                pdfPath,
+                mixedContinuation,
+                'whole-paper cross-page Teacher Print PDF',
+              ),
+              {
+                surface: 'pdf',
+                artifact: 'whole-paper cross-page Teacher Print PDF',
+              },
+            ),
           )
         }
         if (persistActualArtifacts) {
@@ -3224,7 +3468,25 @@ async function assertBrowserArtifacts() {
           const chromeLayout =
             await canonicalWritingChromeBrowserLayout(page)
           assert.equal(chromeLayout.sectionIndentPt, 0)
-          assert.equal(chromeLayout.partToSectionTopPt, 27)
+          const expectedPartToSectionTopPt = (
+            paperTypographyRuntime.partToFirstSectionGeometry
+              .visibleGlyphBottomStepRatio
+            * paperTypographyRuntime.partToFirstSectionGeometry
+              .visibleGlyphHeightToFontSizeRatio.screen
+            * sectionHeadingRuntime.screen.fontSizePx
+            - (
+              paperTypographyRuntime.partToFirstSectionGeometry
+                .visibleGlyphHeightToFontSizeRatio.screen
+              - 1
+            ) * sectionHeadingRuntime.screen.fontSizePx
+          ) * 3 / 4
+          assert.equal(
+            Math.abs(
+              chromeLayout.partToSectionTopPt
+              - expectedPartToSectionTopPt
+            ) <= 0.1,
+            true,
+          )
           assert.equal(chromeLayout.roles[0].fontSizePt, 10.5)
           assert.ok(chromeLayout.roles[0].fontWeight >= 700)
           assert.equal(chromeLayout.roles[1].fontSizePt, 10.5)
@@ -3546,7 +3808,18 @@ async function assertBrowserArtifacts() {
         if (label === 'two-starter' && analysisVariant.label === 'valid') {
           observeCoverage(
             'screen_lecture',
-            continuationCoverageOracle.requiredBundles.screen_lecture,
+            completedContinuationCoverageObservations(
+              'screen_lecture',
+              await measureContinuationDomSeams(
+                page,
+                'authenticated lecture Screen',
+                'screen',
+              ),
+              {
+                surface: 'screen',
+                artifact: 'authenticated lecture Screen',
+              },
+            ),
           )
         }
         productionSignatures.push({
@@ -3609,9 +3882,18 @@ async function assertBrowserArtifacts() {
       if (label === 'two-starter') {
         observeCoverage(
           `${versionType}_print_html`,
-          continuationCoverageOracle.requiredBundles[
-            `${versionType}_print_html`
-          ],
+          completedContinuationCoverageObservations(
+            `${versionType}_print_html`,
+            await measureContinuationDomSeams(
+              page,
+              `Print HTML ${label}/${versionType}`,
+              'print_html',
+            ),
+            {
+              surface: 'print_html',
+              artifact: `Print HTML ${label}/${versionType}`,
+            },
+          ),
         )
         const chromeLayout =
           await canonicalWritingChromeBrowserLayout(page)
@@ -3688,7 +3970,18 @@ async function assertBrowserArtifacts() {
           if (versionType === 'student') {
             observeCoverage(
               'student_pdf',
-              continuationCoverageOracle.requiredBundles.student_pdf,
+              completedContinuationCoverageObservations(
+                'student_pdf',
+                measureContinuationPdfSeams(
+                  pdfPath,
+                  canonical,
+                  `Print PDF ${label}/${versionType}`,
+                ),
+                {
+                  surface: 'pdf',
+                  artifact: `Print PDF ${label}/${versionType}`,
+                },
+              ),
             )
           }
           assertCanonicalWritingChromePdfGeometry(

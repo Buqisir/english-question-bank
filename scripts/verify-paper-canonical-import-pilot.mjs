@@ -20,6 +20,7 @@ import { DatabaseSync } from 'node:sqlite'
 import manifestV17 from '../standards/paper-canonical/manifest-v17.json' with { type: 'json' }
 import { consumerContractRefs } from '../shared/paper-canonical/consumers.mjs'
 import { canonicalAuthorityRef } from '../shared/paper-canonical/authority.mjs'
+import { paperSurfaceTokens } from '../shared/papersurface/tokens.mjs'
 import {
   projectCanonicalConsumerGroup,
 } from '../shared/paper-canonical/consumerProjection.mjs'
@@ -44,6 +45,7 @@ import {
   applicationWritingRhythm,
 } from '../shared/paper-canonical/applicationWritingRhythm.mjs'
 import {
+  paperTypographyRuntime,
   sectionHeadingRuntime,
   sectionHeadingTextRuns,
 } from '../shared/paper-canonical/sectionHeadingContract.mjs'
@@ -581,18 +583,18 @@ function assertSevenChoicesReferenceEvidence() {
   )
   assert.equal(
     canonicalAuthorityRef.manifestVersion,
-    '32',
+    '33',
     'new Publications preserve Seven Choices inside the whole-paper typography successor authority',
   )
   assert.equal(
     consumerContractRefs.screen.version,
-    '32',
-    'Screen v32 binds the complete geometry authority closure',
+    '33',
+    'Screen v33 binds the complete geometry authority closure',
   )
   assert.equal(
     consumerContractRefs.print_pdf.version,
-    '33',
-    'Print/PDF v33 binds the complete geometry authority closure',
+    '34',
+    'Print/PDF v34 binds the complete geometry authority closure',
   )
   assert.equal(
     sha256(preservedBytes),
@@ -1049,6 +1051,7 @@ function assertClozeReferenceEvidence() {
       rowWidthPt: 438.2,
       questionLabelWidthPt: 17.3,
       questionLabelStartPt: 0,
+      questionToFirstOptionGlyphGapEm: 0,
       columnStartsPt: [17.3, 127.8, 231.9, 336.55],
       columnWidthsPt: [110.5, 104.1, 104.65, 101.65],
       minimumGutterPt: 21,
@@ -3358,6 +3361,12 @@ async function assertScreenReadingVerticalRhythm(
     `${label} aligns the real numeric glyph descent with the Chinese score glyph descent: ${JSON.stringify(scoreGlyphAlignment)}`,
   )
   for (let index = 1; index < chromeGeometry.roles.length; index += 1) {
+    if (
+      chromeGeometry.roles[index - 1].role === 'part_title'
+      && chromeGeometry.roles[index].role === 'subsection'
+    ) {
+      continue
+    }
     assertStep(
       chromeGeometry.roles[index].bottom
         - chromeGeometry.roles[index - 1].bottom,
@@ -3909,6 +3918,7 @@ async function assertClozeDomGeometry(
         rowRect: row.getBoundingClientRect().toJSON(),
         questionText: question?.textContent || '',
         questionLines: visualLines(question),
+        questionRight: question?.getBoundingClientRect().right ?? null,
         questionFontWeight: question
           ? Number.parseInt(getComputedStyle(question).fontWeight, 10)
           : null,
@@ -3919,6 +3929,7 @@ async function assertClozeDomGeometry(
         textFontWeights: texts.map((element) =>
           Number.parseInt(getComputedStyle(element).fontWeight, 10)),
         labelXs: labelRects.map((rect) => rect.x),
+        labelRights: labelRects.map((rect) => rect.right),
         labelYs: labelRects.map((rect) => rect.y),
         textXs: textRects.map((rect) => rect.x),
         textYs: textRects.map((rect) => rect.y),
@@ -4075,13 +4086,22 @@ async function assertClozeDomGeometry(
     (entry, index) =>
       entry.lines[0].center - observation.chrome[index].lines.at(-1).center,
   )
+  assert.deepEqual(
+    clozeRhythm.paperTypographyDelegation,
+    {
+      authorityId: 'renderer-typography',
+      authorityVersion: '8',
+      edgeId: 'part_title_to_first_subsection',
+    },
+    `${label} delegates only part→first subsection to Paper Typography v8`,
+  )
   assert.equal(
-    chromeGaps.every((gap) =>
+    chromeGaps.slice(1).every((gap) =>
       Math.abs(
         gap - clozeRhythm.targets.screen.baselineStepPx,
       ) <= clozeRhythm.targets.screen.oneStepTolerancePx),
     true,
-    `${label} measures every adjacent Cloze chrome role at one local baseline step: ${JSON.stringify(chromeGaps)}`,
+    `${label} keeps subsection→instruction at one Cloze baseline step while Paper Typography owns part→first subsection: ${JSON.stringify(chromeGaps)}`,
   )
   observe('chrome_internal', {
     fromIdentity: observation.chrome[0].role,
@@ -4260,6 +4280,31 @@ async function assertClozeDomGeometry(
       true,
       `${label} ${sourceRow.questionId} adds no CSS gap between the question and A anchor tracks`,
     )
+    const questionToAGlyphGapPx =
+      row.labelXs[0] - row.questionRight
+    assert.equal(
+      Math.abs(questionToAGlyphGapPx)
+        <= clozeRhythm.targets.screen.oneStepTolerancePx / 3,
+      true,
+      `${label} ${sourceRow.questionId} physically closes 41.→A. at visible DOM edges: ${questionToAGlyphGapPx}px`,
+    )
+    const labelToTextGapEm = row.textXs.map(
+      (textX, track) =>
+        (textX - row.labelRights[track])
+        / Number.parseFloat(paperSurfaceTokens.paperFontSizePx),
+    )
+    assert.equal(
+      labelToTextGapEm.every(
+        (gap) =>
+          Math.abs(
+            gap
+            - clozeRhythm.horizontalChoiceGeometry.rendererMapping
+              .labelToTextGapEm
+          ) <= 0.03,
+      ),
+      true,
+      `${label} ${sourceRow.questionId} physically retains the authoritative label→text gap: ${JSON.stringify(labelToTextGapEm)}`,
+    )
     assert.equal(
       row.labelYs.every((y) => Math.abs(y - row.labelYs[0]) <= 1),
       true,
@@ -4301,14 +4346,18 @@ async function assertClozeDomGeometry(
     toIdentity: `${firstRow.questionId}:A`,
     horizontalRelation: 'gold_normalized_question_to_A_anchor',
     actualPx:
-      firstRow.labelXs[0] - firstRow.questionLines[0].x,
+      firstRow.labelXs[0] - firstRow.questionRight,
   })
   observe('choice_label_to_text', {
     fromIdentity: observation.rows.map((row) => `${row.questionId}:label`),
     toIdentity: observation.rows.map((row) => `${row.questionId}:text`),
     horizontalRelation: 'fixed_em_gap',
-    actualGapsPx: observation.rows.flatMap((row) =>
-      row.textXs.map((x, track) => x - row.labelXs[track])),
+    actualGapEm: observation.rows.flatMap((row) =>
+      row.textXs.map(
+        (x, track) =>
+          (x - row.labelRights[track])
+          / Number.parseFloat(paperSurfaceTokens.paperFontSizePx),
+      )),
   })
   observe('choice_tracks_internal', {
     fromIdentity: firstRow.labels,
@@ -6849,22 +6898,58 @@ async function assertOwnerGoldSectionHeadingsDom(page, label, surface) {
         section:
           '.section-header--section, [data-canonical-writing-chrome-role="section_heading"]',
       }
-  const observation = await page.evaluate(({ selectors }) => {
+  const observation = await page.evaluate(({
+    selectors,
+    visibleGlyphHeightToFontSizeRatio,
+  }) => {
     const nodes = [...document.querySelectorAll(
       `${selectors.part}, ${selectors.section}`,
     )]
-    let partX = null
+    const visibleLine = (node) => {
+      const range = document.createRange()
+      range.selectNodeContents(node)
+      const rect = [...range.getClientRects()].find(
+        (candidate) => candidate.width > 0 && candidate.height > 0,
+      )
+      return {
+        top: rect.top,
+        bottom: rect.bottom,
+        height: rect.height,
+      }
+    }
+    let part = null
     const sections = []
     for (const node of nodes) {
       if (node.matches(selectors.part)) {
-        partX = node.getBoundingClientRect().x
+        part = {
+          text: node.textContent?.trim() || '',
+          x: node.getBoundingClientRect().x,
+          visibleLine: visibleLine(node),
+          pendingFirstSection: true,
+        }
         continue
       }
       const style = getComputedStyle(node)
+      const sectionVisibleLine = visibleLine(node)
       sections.push({
         text: node.textContent?.trim() || '',
+        partText: part?.text ?? null,
+        partVisibleHeight: part?.visibleLine.height ?? null,
+        visibleBottomStep:
+          part?.pendingFirstSection
+            ? sectionVisibleLine.bottom - part.visibleLine.bottom
+            : null,
         x: node.getBoundingClientRect().x,
-        partX,
+        partX: part?.x ?? null,
+        partToFirstSectionVisibleRatio:
+          part?.pendingFirstSection
+            ? (
+                sectionVisibleLine.bottom - part.visibleLine.bottom
+              ) / (
+                Number.parseFloat(style.fontSize)
+                * visibleGlyphHeightToFontSizeRatio
+              )
+            : null,
         fontFamily: style.fontFamily,
         fontSizePx: Number.parseFloat(style.fontSize),
         lineHeightPx: Number.parseFloat(style.lineHeight),
@@ -6872,9 +6957,15 @@ async function assertOwnerGoldSectionHeadingsDom(page, label, surface) {
         paddingLeftPx: Number.parseFloat(style.paddingLeft),
         textIndentPx: Number.parseFloat(style.textIndent),
       })
+      if (part) part.pendingFirstSection = false
     }
     return sections
-  }, { selectors })
+  }, {
+    selectors,
+    visibleGlyphHeightToFontSizeRatio:
+      paperTypographyRuntime.partToFirstSectionGeometry
+        .visibleGlyphHeightToFontSizeRatio.screen,
+  })
   assert.deepEqual(
     observation.map((entry) => entry.text),
     ownerGoldSectionHeadings,
@@ -6900,6 +6991,24 @@ async function assertOwnerGoldSectionHeadingsDom(page, label, surface) {
       `${label} keeps section and part headings on the body-left edge`,
     )
   }
+  const firstSectionRatios = observation.flatMap((entry) =>
+    entry.partToFirstSectionVisibleRatio === null
+      ? []
+      : [entry.partToFirstSectionVisibleRatio])
+  assert.equal(
+    firstSectionRatios.length > 0
+    && firstSectionRatios.every(
+      (ratio) =>
+        Math.abs(
+          ratio
+          - paperTypographyRuntime.partToFirstSectionGeometry
+            .visibleGlyphBottomStepRatio
+        ) <= paperTypographyRuntime.partToFirstSectionGeometry
+          .ratioTolerance,
+    ),
+    true,
+    `${label} measures part→first section at the gold glyph-normalized relation: ${JSON.stringify(observation.filter((entry) => entry.partToFirstSectionVisibleRatio !== null))}`,
+  )
 }
 
 function sourceLexicalTokens(value) {
@@ -8432,6 +8541,7 @@ function pdfRoleLines(words) {
     xMax: Math.max(...line.words.map((word) => word.xMax)),
     yMax: Math.max(...line.words.map((word) => word.yMax)),
     centerY: median(line.wordCenters),
+    words: line.words,
     wordIndexes: line.words.map((word) => word.wordIndex),
     text: line.words.map((word) => word.text).join(' '),
     }))
@@ -8455,9 +8565,24 @@ function pdfRoleLines(words) {
       `PDF page ${page} separates its measured footer from the body`,
     )
     assert.equal(
-      footerLine.text.replace(/\s+/gu, ''),
-      `英语试题第${page}页(共${pages.length}页`,
-      `PDF page ${page} exposes the normalized standard footer geometry`,
+      footerLine.text
+        .normalize('NFKC')
+        .replace(/[^\p{L}\p{N}]/gu, ''),
+      `英语试题第${page}页共${pages.length}页`,
+      `PDF page ${page} exposes the canonical dynamic footer identity for geometry measurement`,
+    )
+    assert.equal(
+      Math.abs(
+        (footerLine.xMin + footerLine.xMax) / 2
+        - footerLine.pageWidth / 2
+      ) <= 1.5,
+      true,
+      `PDF page ${page} centers the canonical dynamic footer`,
+    )
+    assert.equal(
+      footerLine.yMax > footerLine.yMin,
+      true,
+      `PDF page ${page} exposes visible footer glyph geometry`,
     )
     assert.equal(
       footerLine.text.includes('Canonical Import Pilot')
@@ -8503,11 +8628,11 @@ function assertRawPdfStandardFooters(pdfPath, pageCount, label) {
       .split(/\r?\n/u)
       .map((line) => line.trim())
       .filter(Boolean)
-    const footer = visibleLines.at(-1)?.replace(/\s+/gu, '')
+    const footer = visibleLines.at(-1)
     assert.equal(
       footer,
-      `英语试题第${page}页(共${pageCount}页)`,
-      `${label} page ${page} contains the complete standard footer in actual PDF text`,
+      `英语试题第 ${page} 页（共 ${pageCount} 页）`,
+      `${label} page ${page} contains the exact canonical fullwidth dynamic footer in actual PDF text`,
     )
     assert.equal(
       footer.includes('CanonicalImportPilot') || footer.includes('·'),
@@ -8549,30 +8674,155 @@ function pdfTextRunsWithFonts(pdfPath) {
     ['-xml', '-stdout', pdfPath],
     { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] },
   )
-  const fontFamilies = new Map()
-  for (const match of xml.matchAll(
-    /<fontspec id="([^"]+)"[^>]* family="([^"]+)"[^>]*\/>/gu,
-  )) {
-    const families = fontFamilies.get(match[1]) || new Set()
-    families.add(match[2])
-    fontFamilies.set(match[1], families)
+  const fontSpecs = new Map()
+  for (const match of xml.matchAll(/<fontspec\b([^>]*)\/>/gu)) {
+    const id = match[1].match(/\bid="([^"]+)"/u)?.[1]
+    const family = match[1].match(/\bfamily="([^"]+)"/u)?.[1]
+    const size = Number(match[1].match(/\bsize="([^"]+)"/u)?.[1])
+    if (!id) continue
+    const spec = fontSpecs.get(id) || {
+      families: new Set(),
+      size: Number.isFinite(size) ? size : null,
+    }
+    if (family) spec.families.add(family)
+    fontSpecs.set(id, spec)
   }
   return [...xml.matchAll(
     /<text\b[^>]*\bfont="([^"]+)"[^>]*>([\s\S]*?)<\/text>/gu,
   )].map((match) => ({
-    fontFamilies: [...(fontFamilies.get(match[1]) || [])],
+    fontFamilies: [...(fontSpecs.get(match[1])?.families || [])],
+    fontSize: fontSpecs.get(match[1])?.size ?? null,
     text: normalizedPdfToken(match[2].replace(/<[^>]+>/gu, '')),
   }))
+}
+
+function parsePgm(buffer) {
+  let offset = 0
+  const token = () => {
+    while (offset < buffer.length) {
+      if (buffer[offset] === 35) {
+        while (offset < buffer.length && buffer[offset] !== 10) offset += 1
+      } else if (buffer[offset] <= 32) {
+        offset += 1
+      } else {
+        break
+      }
+    }
+    const start = offset
+    while (offset < buffer.length && buffer[offset] > 32) offset += 1
+    return buffer.subarray(start, offset).toString('ascii')
+  }
+  assert.equal(token(), 'P5')
+  const width = Number(token())
+  const height = Number(token())
+  assert.equal(Number(token()), 255)
+  while (offset < buffer.length && buffer[offset] <= 32) offset += 1
+  const pixels = buffer.subarray(offset, offset + width * height)
+  assert.equal(pixels.length, width * height)
+  return { width, height, pixels }
+}
+
+function rasterizePdfPage(pdfPath, page) {
+  const rasterDir = mkdtempSync(path.join(
+    tmpdir(),
+    'eqb-pdf-glyph-raster-',
+  ))
+  const rasterPrefix = path.join(rasterDir, 'page')
+  try {
+    execFileSync('pdftoppm', [
+      '-f', String(page),
+      '-l', String(page),
+      '-singlefile',
+      '-r', '300',
+      '-gray',
+      pdfPath,
+      rasterPrefix,
+    ])
+    return parsePgm(readFileSync(`${rasterPrefix}.pgm`))
+  } finally {
+    rmSync(rasterDir, { recursive: true, force: true })
+  }
+}
+
+function rasterVisibleInkBox(
+  image,
+  pageWidth,
+  pageHeight,
+  pdfBox,
+  {
+    excludeYMin = Number.POSITIVE_INFINITY,
+    excludeYMax = Number.NEGATIVE_INFINITY,
+  } = {},
+) {
+  const scaleX = image.width / pageWidth
+  const scaleY = image.height / pageHeight
+  const xMin = Math.max(0, Math.floor((pdfBox.xMin - 1) * scaleX))
+  const xMax = Math.min(image.width - 1, Math.ceil((pdfBox.xMax + 1) * scaleX))
+  const yMin = Math.max(0, Math.floor((pdfBox.yMin - 1) * scaleY))
+  const yMax = Math.min(image.height - 1, Math.ceil((pdfBox.yMax + 1) * scaleY))
+  const ink = []
+  for (let y = yMin; y <= yMax; y += 1) {
+    if (y >= excludeYMin && y <= excludeYMax) continue
+    for (let x = xMin; x <= xMax; x += 1) {
+      if (image.pixels[y * image.width + x] < 176) ink.push({ x, y })
+    }
+  }
+  assert.equal(ink.length > 0, true, `raster crop exposes visible glyph ink`)
+  return {
+    xMin: Math.min(...ink.map((point) => point.x)),
+    xMax: Math.max(...ink.map((point) => point.x)),
+    yMin: Math.min(...ink.map((point) => point.y)),
+    yMax: Math.max(...ink.map((point) => point.y)),
+  }
 }
 
 function assertOwnerGoldSectionHeadingsPdf(pdfPath, label) {
   const words = pdfWordsWithBoxes(pdfPath)
   const lines = pdfRoleLines(words)
   const textRuns = pdfTextRunsWithFonts(pdfPath)
+  const rasterPages = new Map()
+  const measuredPartHeadings = new Set()
+  const rasterPage = (page) => {
+    if (!rasterPages.has(page)) {
+      rasterPages.set(page, rasterizePdfPage(pdfPath, page))
+    }
+    return rasterPages.get(page)
+  }
   const lineIdentity = (value) =>
     String(value)
       .normalize('NFKC')
       .replace(/[^\p{L}\p{N}]/gu, '')
+  const footerFontSizes = textRuns.flatMap((run) =>
+    lineIdentity(run.text).startsWith('英语试题第')
+    && Number.isFinite(run.fontSize)
+      ? [run.fontSize]
+      : [])
+  const bodyChineseFontSizes = textRuns.flatMap((run) =>
+    /\p{Script=Han}/u.test(run.text)
+    && !lineIdentity(run.text).startsWith('英语试题第')
+    && run.fontFamilies.some((family) => /SimSun|Songti|STSong/u.test(family))
+    && Number.isFinite(run.fontSize)
+      ? [run.fontSize]
+      : [])
+  assert.equal(
+    footerFontSizes.length > 0 && bodyChineseFontSizes.length > 0,
+    true,
+    `${label} exposes embedded footer and Chinese body font sizes`,
+  )
+  const footerToBodyFontRatio =
+    median(footerFontSizes) / median(bodyChineseFontSizes)
+  assert.equal(
+    Math.abs(
+      footerToBodyFontRatio
+      - paperTypographyRuntime.footerContract.fontSizeRelativeToBody
+    ) <= 0.05,
+    true,
+    `${label} independently measures the gold-relative footer/body font tier: ${JSON.stringify({
+      footerFontSizes,
+      bodyChineseFontSizes,
+      footerToBodyFontRatio,
+    })}`,
+  )
   for (const { partHeading, sectionHeading } of ownerGoldSectionPairs) {
     const partLine = uniquePdfLineForExactVisibleText(
       lines,
@@ -8589,6 +8839,9 @@ function assertOwnerGoldSectionHeadingsPdf(pdfPath, label) {
     const sectionWords = sectionLine.wordIndexes.map(
       (wordIndex) => words[wordIndex],
     )
+    const partWords = partLine.wordIndexes.map(
+      (wordIndex) => words[wordIndex],
+    )
     const numericWords = sectionWords.filter((word) =>
       /[0-9]/u.test(word.text))
     const textWords = sectionWords.filter((word) =>
@@ -8601,18 +8854,82 @@ function assertOwnerGoldSectionHeadingsPdf(pdfPath, label) {
       numericWords.length > 0 && textWords.length > 0,
       `${label} resolves both numeric and Chinese score runs`,
     )
-    const averageBottom = (runs) =>
-      runs.reduce((sum, word) => sum + word.yMax, 0) / runs.length
-    const expectedShiftPt =
-      sectionHeadingRuntime.printPdf.numericRunBaselineShiftEm
-      * sectionHeadingRuntime.printPdf.fontSizePt
+    const unionBox = (runs) => ({
+      xMin: Math.min(...runs.map((word) => word.xMin)),
+      yMin: Math.min(...runs.map((word) => word.yMin)),
+      xMax: Math.max(...runs.map((word) => word.xMax)),
+      yMax: Math.max(...runs.map((word) => word.yMax)),
+    })
+    const pageRaster = rasterPage(sectionLine.page)
+    if (!measuredPartHeadings.has(partHeading)) {
+      assert.equal(
+        partLine.page,
+        sectionLine.page,
+        `${label} measures the first section on its part-heading page`,
+      )
+      const partInk = rasterVisibleInkBox(
+        pageRaster,
+        partLine.pageWidth,
+        partLine.pageHeight,
+        unionBox(partWords),
+      )
+      const sectionInk = rasterVisibleInkBox(
+        pageRaster,
+        sectionLine.pageWidth,
+        sectionLine.pageHeight,
+        unionBox(sectionWords),
+      )
+      const localVisibleGlyphHeight =
+        sectionHeadingRuntime.printPdf.fontSizePt
+        * paperTypographyRuntime.partToFirstSectionGeometry
+          .visibleGlyphHeightToFontSizeRatio.printPdf
+        * pageRaster.height / partLine.pageHeight
+      const partToFirstSectionVisibleRatio =
+        (sectionInk.yMax - partInk.yMax)
+        / localVisibleGlyphHeight
+      assert.equal(
+        Math.abs(
+          partToFirstSectionVisibleRatio
+          - paperTypographyRuntime.partToFirstSectionGeometry
+            .visibleGlyphBottomStepRatio
+        ) <= paperTypographyRuntime.partToFirstSectionGeometry
+          .ratioTolerance,
+        true,
+        `${label} independently raster-proves part→first section against the gold normalized relation: ${JSON.stringify({
+          partInk,
+          sectionInk,
+          localVisibleGlyphHeight,
+          partToFirstSectionVisibleRatio,
+        })}`,
+      )
+      measuredPartHeadings.add(partHeading)
+    }
+    const numericInk = rasterVisibleInkBox(
+      pageRaster,
+      sectionLine.pageWidth,
+      sectionLine.pageHeight,
+      unionBox(numericWords),
+    )
+    const textInk = rasterVisibleInkBox(
+      pageRaster,
+      sectionLine.pageWidth,
+      sectionLine.pageHeight,
+      unionBox(textWords),
+    )
+    const visibleGlyphHeight = Math.max(
+      numericInk.yMax - numericInk.yMin + 1,
+      textInk.yMax - textInk.yMin + 1,
+    )
+    const visibleBottomDeltaRatio =
+      Math.abs(numericInk.yMax - textInk.yMax) / visibleGlyphHeight
     assert.ok(
-      Math.abs(
-        averageBottom(numericWords)
-        - averageBottom(textWords)
-        - expectedShiftPt
-      ) <= 0.75,
-      `${label} applies the authority-owned numeric run shift without moving Chinese runs: ${JSON.stringify(sectionWords)}`,
+      visibleBottomDeltaRatio <= 0.12,
+      `${label} independently raster-proves visible numeric/Chinese glyph-bottom alignment: ${JSON.stringify({
+        numericInk,
+        textInk,
+        visibleGlyphHeight,
+        visibleBottomDeltaRatio,
+      })}`,
     )
     for (const expectedRun of sectionHeadingTextRuns(sectionHeading)) {
       const expectedIdentity = lineIdentity(expectedRun.text)
@@ -8704,7 +9021,60 @@ function assertPdfClozeGeometry(
       (line) =>
         line.page === word.page
         && Math.abs(line.centerY - centerY) <= 2.5,
+      )
+  }
+  const rasterPages = new Map()
+  const rasterPage = (page) => {
+    if (!rasterPages.has(page)) {
+      rasterPages.set(page, rasterizePdfPage(pdfPath, page))
+    }
+    return rasterPages.get(page)
+  }
+  const splitMergedQuestionAndFirstLabel = (word, firstTextX) => {
+    const image = rasterPage(word.page)
+    const scaleX = image.width / word.pageWidth
+    const scaleY = image.height / word.pageHeight
+    const anchorX =
+      word.xMin
+      + clozeRhythm.horizontalChoiceGeometry.rendererMapping
+        .questionLabelWidthPt
+    const xMin = Math.floor((word.xMin - 1) * scaleX)
+    const xMax = Math.ceil((firstTextX - 0.25) * scaleX)
+    const yMin = Math.floor((word.yMin - 1) * scaleY)
+    const yMax = Math.ceil((word.yMax + 1) * scaleY)
+    const anchorPixel = anchorX * scaleX
+    const questionInk = []
+    const labelInk = []
+    for (let y = yMin; y <= yMax; y += 1) {
+      for (let x = xMin; x <= xMax; x += 1) {
+        if (image.pixels[y * image.width + x] >= 176) continue
+        if (x < anchorPixel) questionInk.push({ x, y })
+        else labelInk.push({ x, y })
+      }
+    }
+    assert.equal(
+      questionInk.length > 0 && labelInk.length > 0,
+      true,
+      `${label} raster-resolves both question and A-label glyph ink`,
     )
+    const questionXMax =
+      Math.max(...questionInk.map((point) => point.x)) / scaleX
+    const labelXMin =
+      Math.min(...labelInk.map((point) => point.x)) / scaleX
+    return {
+      glyphGapPt: labelXMin - questionXMax,
+      questionWord: {
+        ...word,
+        xMax: questionXMax,
+        text: word.text.replace(/[^\p{N}.]/gu, ''),
+      },
+      labelWord: {
+        ...word,
+        xMin: labelXMin,
+        xMax: word.xMax,
+        text: 'A',
+      },
+    }
   }
   const observedEdges = []
   const observe = (edgeId, evidence) => {
@@ -8868,7 +9238,8 @@ function assertPdfClozeGeometry(
     fromIdentity: ['part_title', 'subsection'],
     toIdentity: ['subsection', 'meta_instruction'],
     actualRatios: [
-      assertPdfStep('chrome_internal', partLine, sectionLine),
+      (sectionLine.centerY - partLine.centerY)
+        / clozeRhythm.targets.printPdf.baselineStepPt,
       assertPdfStep('chrome_internal', sectionLine, instructionLine),
     ],
     texts: [
@@ -8880,13 +9251,20 @@ function assertPdfClozeGeometry(
   const firstChoiceBoundaryIndex = words.findIndex(
     (word, index) =>
       index > passageStartIndex
-      && word.text === '41'
-      && words[index + 1]?.text === 'A',
+      && (
+        (
+          word.text === '41'
+          && words[index + 1]?.text === 'A'
+        )
+        || word.text.replace(/[^\p{L}\p{N}]/gu, '') === '41A'
+      ),
   )
   assert.equal(
     firstChoiceBoundaryIndex > passageEndIndex,
     true,
-    `${label} resolves the passage-to-choice source boundary`,
+    `${label} resolves the passage-to-choice source boundary: ${JSON.stringify(
+      words.slice(passageEndIndex + 1, passageEndIndex + 12),
+    )}`,
   )
   const paragraphAnchors = expectedPassageTexts.map((text, index) => {
     const tokens = exactPdfTokens(text.replace(/__(\d+)__/g, '$1'))
@@ -9170,39 +9548,69 @@ function assertPdfClozeGeometry(
     const firstOptionToken = exactPdfTokens(
       sourceRow.options[0].text,
     )[0]
-    const questionIndexes = rowWords.flatMap((word, wordIndex) =>
-      word.text === String(sourceRow.questionNo)
-      && word.xMin >= 65
-      && word.xMin <= 85
-      && rowWords[wordIndex + 1]?.text === 'A'
-      && rowWords[wordIndex + 1].page === word.page
-      && rowWords[wordIndex + 1].xMin > word.xMin
-      && Math.abs(
-        (rowWords[wordIndex + 1].yMin + rowWords[wordIndex + 1].yMax)
-          / 2
-        - (word.yMin + word.yMax) / 2,
-      ) <= 1
-      && rowWords[wordIndex + 2]?.text
-      && (
-        firstOptionToken.startsWith(rowWords[wordIndex + 2].text)
-        || rowWords[wordIndex + 2]?.text?.startsWith(firstOptionToken)
-      )
-        ? [wordIndex]
-        : [])
+    const questionIndexes = rowWords.flatMap((word, wordIndex) => {
+      const merged =
+        word.text.replace(/[^\p{L}\p{N}]/gu, '')
+          === `${sourceRow.questionNo}A`
+      const separate =
+        word.text === String(sourceRow.questionNo)
+        && rowWords[wordIndex + 1]?.text === 'A'
+        && rowWords[wordIndex + 1].page === word.page
+        && rowWords[wordIndex + 1].xMin > word.xMin
+        && Math.abs(
+          (rowWords[wordIndex + 1].yMin + rowWords[wordIndex + 1].yMax)
+            / 2
+          - (word.yMin + word.yMax) / 2,
+        ) <= 1
+      const firstTextWord = rowWords[
+        wordIndex + (merged ? 1 : 2)
+      ]
+      return (
+        (merged || separate)
+        && word.xMin >= 65
+        && word.xMin <= 85
+        && firstTextWord?.text
+        && (
+          firstOptionToken.startsWith(firstTextWord.text)
+          || firstTextWord.text.startsWith(firstOptionToken)
+        )
+      ) ? [wordIndex] : []
+    })
     assert.equal(
       questionIndexes.length,
       1,
       `${label} exposes one fixed-left row label ${sourceRow.questionNo}`,
     )
     const questionIndex = questionIndexes[0]
-    const questionWord = rowWords[questionIndex]
+    const rawQuestionWord = rowWords[questionIndex]
+    const mergedQuestionAndFirstLabel =
+      rawQuestionWord.text.replace(/[^\p{L}\p{N}]/gu, '')
+        === `${sourceRow.questionNo}A`
+    const firstTextIndex =
+      questionIndex + (mergedQuestionAndFirstLabel ? 1 : 2)
+    const splitGeometry = mergedQuestionAndFirstLabel
+      ? splitMergedQuestionAndFirstLabel(
+          rawQuestionWord,
+          rowWords[firstTextIndex].xMin,
+        )
+      : null
+    const questionWord =
+      splitGeometry?.questionWord ?? rawQuestionWord
     return {
       sourceRow,
       questionIndex,
       questionWord,
+      firstLabelWord:
+        splitGeometry?.labelWord ?? rowWords[questionIndex + 1],
+      questionToFirstLabelGlyphGapPt:
+        splitGeometry?.glyphGapPt
+        ?? (
+          rowWords[questionIndex + 1].xMin
+          - rawQuestionWord.xMax
+        ),
       page: questionWord.page,
       y: (questionWord.yMin + questionWord.yMax) / 2,
-      firstTextX: rowWords[questionIndex + 2].xMin,
+      firstTextX: rowWords[firstTextIndex].xMin,
     }
   })
   const collapsedWordText = (value) =>
@@ -9212,6 +9620,8 @@ function assertPdfClozeGeometry(
       sourceRow,
       questionIndex,
       questionWord,
+      firstLabelWord,
+      questionToFirstLabelGlyphGapPt,
       page,
       y,
       firstTextX,
@@ -9270,14 +9680,16 @@ function assertPdfClozeGeometry(
         expectedText,
         `${label} row ${sourceRow.questionNo} exposes ${option.label} source text`,
       )
-      const labelWords = rowWords.filter((word) => {
+      const labelWords = track === 0
+        ? [firstLabelWord]
+        : rowWords.filter((word) => {
         const centerY = (word.yMin + word.yMax) / 2
         return word.page === page
           && Math.abs(centerY - y) <= 1
           && word.text === option.label
           && word.xMin >= expectedX - 20
           && word.xMin < expectedX - 1
-      })
+        })
       assert.equal(
         labelWords.length,
         1,
@@ -9350,6 +9762,8 @@ function assertPdfClozeGeometry(
       questionNo: sourceRow.questionNo,
       answer: sourceRow.answer,
       questionIndex,
+      questionWord,
+      questionToFirstLabelGlyphGapPt,
       page,
       y,
       tailY: Math.max(
@@ -9618,14 +10032,38 @@ function assertPdfClozeGeometry(
       toPage: firstRowLine.page,
     })
   }
+  const questionToFirstOptionGlyphGapsPt = rowProofs.map(
+    (row) => row.questionToFirstLabelGlyphGapPt,
+  )
+  assert.equal(
+    questionToFirstOptionGlyphGapsPt.every(
+      (gap) => Math.abs(gap) <= 0.35,
+    ),
+    true,
+    `${label} physically emits 41.→A. with zero inter-token glyph gap in real PDF: ${JSON.stringify(questionToFirstOptionGlyphGapsPt)}`,
+  )
+  const physicalLabelToTextGapsEm = rowProofs.flatMap((row) =>
+    row.options.map(
+      (option) =>
+        (option.word.xMin - option.labelWord.xMax) / 10.5,
+    ))
+  assert.equal(
+    physicalLabelToTextGapsEm.every(
+      (gap) =>
+        Math.abs(
+          gap
+          - clozeRhythm.horizontalChoiceGeometry.rendererMapping
+            .labelToTextGapEm
+        ) <= 0.03,
+    ),
+    true,
+    `${label} physically retains the authoritative A.→option-text gap in real PDF: ${JSON.stringify(physicalLabelToTextGapsEm)}`,
+  )
   observe('choice_row_question_to_first_track', {
     fromIdentity: rowProofs.map((row) => row.questionId),
     toIdentity: rowProofs.map((row) => `${row.questionId}:A`),
     horizontalRelation: 'gold_normalized_question_to_A_anchor',
-    actualOffsetsPt: rowProofs.map(
-      (row) => row.options[0].labelWord.xMin
-        - rowWords[row.questionIndex].xMin,
-    ),
+    actualGlyphGapsPt: questionToFirstOptionGlyphGapsPt,
   })
   observe('choice_label_to_text', {
     fromIdentity: rowProofs.flatMap((row) =>
@@ -9633,9 +10071,7 @@ function assertPdfClozeGeometry(
     toIdentity: rowProofs.flatMap((row) =>
       row.options.map((option) => `${row.questionId}:${option.label}:text`)),
     horizontalRelation: 'fixed_em_gap',
-    actualGapEm: rowProofs.flatMap((row) =>
-      row.options.map((option) =>
-        (option.word.xMin - option.labelWord.xMax) / 10.5)),
+    actualGapEm: physicalLabelToTextGapsEm,
   })
   observe('choice_tracks_internal', {
     fromIdentity: rowProofs[0].options.map((option) => option.label),
@@ -10114,6 +10550,16 @@ function assertGrammarFillPdfArtifact(
     pdfPath,
     blankProofs.map((proof) => proof.word.page),
   )
+  const grammarFillRasterPages = new Map()
+  const grammarFillRasterPage = (page) => {
+    if (!grammarFillRasterPages.has(page)) {
+      grammarFillRasterPages.set(
+        page,
+        rasterizePdfPage(pdfPath, page),
+      )
+    }
+    return grammarFillRasterPages.get(page)
+  }
   for (const proof of blankProofs) {
     const centerX = (proof.word.xMin + proof.word.xMax) / 2
     const matches = rulings.filter(
@@ -10142,6 +10588,93 @@ function assertGrammarFillPdfArtifact(
       false,
       `${label} blank ${proof.questionId} emits no approximately 0.75pt rule`,
     )
+    if (proof.questionNo === 58) {
+      const adjacentBodyWord = words
+      .slice(firstPassageIndex, passageEndIndex + 1)
+      .filter((candidate) =>
+        candidate.page === proof.word.page
+        && candidate.wordIndex !== proof.promptWord?.wordIndex
+        && /^[A-Za-z]+$/u.test(candidate.text)
+        && !/[gjpqy]/iu.test(candidate.text)
+        && /[bdfhkltA-Z]/u.test(candidate.text)
+        && Math.abs(
+          (candidate.yMin + candidate.yMax)
+          - (proof.word.yMin + proof.word.yMax)
+        ) <= 8,
+      )
+      .sort((left, right) =>
+        Math.min(
+          Math.abs(left.xMax - proof.word.xMin),
+          Math.abs(left.xMin - proof.word.xMax),
+        )
+        - Math.min(
+          Math.abs(right.xMax - proof.word.xMin),
+          Math.abs(right.xMin - proof.word.xMax),
+        ))
+      .at(0)
+      assert.ok(
+        adjacentBodyWord,
+        `${label} blank ${proof.questionId} resolves the source-bound visible-body witness`,
+      )
+      const raster = grammarFillRasterPage(proof.word.page)
+      const scaleY = raster.height / proof.word.pageHeight
+      const ruleCenterPx =
+        (proof.ruling.yMin + proof.ruling.yMax) / 2 * scaleY
+      const ruleInkMinPx = proof.ruling.yMin * scaleY - 1
+      const ruleInkMaxPx = proof.ruling.yMax * scaleY + 1
+      const bodyInk = rasterVisibleInkBox(
+        raster,
+        proof.word.pageWidth,
+        proof.word.pageHeight,
+        adjacentBodyWord,
+        {
+          excludeYMin: ruleInkMinPx,
+          excludeYMax: ruleInkMaxPx,
+        },
+      )
+      const numberInk = rasterVisibleInkBox(
+        raster,
+        proof.word.pageWidth,
+        proof.word.pageHeight,
+        proof.word,
+        {
+          excludeYMin: ruleInkMinPx,
+          excludeYMax: ruleInkMaxPx,
+        },
+      )
+      const bodyGlyphHeight = bodyInk.yMax - bodyInk.yMin + 1
+      const bodyBottomToRuleCenterRatio =
+        (ruleCenterPx - bodyInk.yMax) / bodyGlyphHeight
+      const numberBottomToBodyBottomRatio =
+        Math.abs(numberInk.yMax - bodyInk.yMax) / bodyGlyphHeight
+      assert.equal(
+        Math.abs(
+          bodyBottomToRuleCenterRatio
+          - grammarFillRhythm.ruleVerticalGeometry
+            .bodyVisibleBottomToRuleCenterRatio
+        ) <= grammarFillRhythm.ruleVerticalGeometry.ratioTolerance,
+        true,
+        `${label} blank ${proof.questionId} independently raster-proves the raised rule against adjacent visible body glyphs: ${JSON.stringify({
+          adjacentBodyWord,
+          bodyInk,
+          numberInk,
+          ruleCenterPx,
+          bodyBottomToRuleCenterRatio,
+        })}`,
+      )
+      assert.equal(
+        numberBottomToBodyBottomRatio <= 0.3,
+        true,
+        `${label} blank ${proof.questionId} preserves the already-correct number/body visible height relation: ${numberBottomToBodyBottomRatio}`,
+      )
+      proof.visibleRuleGeometry = {
+        bodyBottomToRuleCenterRatio,
+        numberBottomToBodyBottomRatio,
+        ruleCenterPx,
+        bodyInk,
+        numberInk,
+      }
+    }
     assert.equal(/\.$/u.test(proof.word.text), false)
     if (proof.promptWord) {
       assert.equal(
@@ -10251,6 +10784,7 @@ function assertGrammarFillPdfArtifact(
       promptGapEm: proof.promptWord
         ? (proof.promptWord.xMin - proof.ruling.xMax) / 10.5
         : null,
+      visibleRuleGeometry: proof.visibleRuleGeometry,
     })),
     lineEndBlankId: lineEndBlank?.blankId || null,
     bodySeams: [...new Map(lines.map((line) => [
@@ -11527,6 +12061,45 @@ async function assertApplicationWritingDomArtifact(
     true,
     `${label} renders the exact source prompt as a wrapped public paragraph`,
   )
+  const sectionToPrompt = await applicationRoot.locator(
+    '[data-canonical-application-writing-rhythm-role="section_heading"], '
+      + '[data-canonical-application-writing-rhythm-role="prompt_line"]',
+  ).evaluateAll((elements) => {
+    const visibleLine = (element) => {
+      const range = document.createRange()
+      range.selectNodeContents(element)
+      const rect = [...range.getClientRects()].find(
+        (candidate) => candidate.width > 0 && candidate.height > 0,
+      )
+      return {
+        text: element.textContent,
+        centerY: rect.top + rect.height / 2,
+        visibleHeight: rect.height,
+      }
+    }
+    return elements.slice(0, 2).map(visibleLine)
+  })
+  assert.equal(sectionToPrompt.length, 2, `${label} measures section→prompt`)
+  const sectionToPromptDistance =
+    sectionToPrompt[1].centerY - sectionToPrompt[0].centerY
+  const sectionToPromptTarget =
+    surface === 'screen'
+      ? applicationWritingRhythm.targets.screen.baselineStepPx
+      : applicationWritingRhythm.targets.printPdf.baselineStepPt * 4 / 3
+  const sectionToPromptTolerance =
+    surface === 'screen'
+      ? applicationWritingRhythm.targets.screen.oneStepTolerancePx
+      : applicationWritingRhythm.targets.printPdf.oneStepTolerancePt * 4 / 3
+  assert.equal(
+    Math.abs(sectionToPromptDistance - sectionToPromptTarget)
+      <= sectionToPromptTolerance,
+    true,
+    `${label} observes section→prompt at the public glyph seam: ${JSON.stringify({
+      sectionToPrompt,
+      sectionToPromptDistance,
+      sectionToPromptTarget,
+    })}`,
+  )
   const response = applicationRoot.locator(
     `[data-canonical-response-slot-id="${application.response.responseSlotId}"]`,
   )
@@ -11727,7 +12300,7 @@ async function assertApplicationWritingDomArtifact(
       elements.map((element) => element.getAttribute('data-canonical-group-id')))
     assert.deepEqual(relation, [application.groupId, following.groupId])
   }
-  return surface === 'screen'
+  const observedEdgeIds = surface === 'screen'
     ? [
         'part_to_section',
         'section_to_prompt',
@@ -11763,6 +12336,19 @@ async function assertApplicationWritingDomArtifact(
         ...(teacher ? [] : ['student_response_to_next_section_same_page']),
         'continuation_section_to_prompt',
       ]
+  return observedEdgeIds.map((edgeId) => ({
+    edgeId,
+    surface,
+    witness:
+      edgeId === 'section_to_prompt'
+        ? {
+            kind: 'public_visible_line_centers',
+            distance: sectionToPromptDistance,
+            target: sectionToPromptTarget,
+            lines: sectionToPrompt,
+          }
+        : { kind: 'executed_public_seam_assertion', label },
+  }))
 }
 
 function assertApplicationWritingPdfArtifact({
@@ -11868,8 +12454,36 @@ function assertApplicationWritingPdfArtifact({
     true,
     `${label} preserves the source-bound Application-to-Continuation page relation`,
   )
-  return [
+  const lines = pdfRoleLines(pdfWordsWithBoxes(pdfPath))
+  const sectionLine = uniquePdfLineForExactVisibleText(
+    lines,
+    pdfPath,
+    application.chrome.find((entry) => entry.role === 'section_heading').text,
+    `${label} section→prompt section`,
+  )
+  const promptLine = lines.find(
+    (line) =>
+      line.page === sectionLine.page
+      && line.centerY > sectionLine.centerY,
+  )
+  assert.ok(promptLine, `${label} resolves the first prompt line`)
+  const sectionToPromptDistancePt =
+    promptLine.centerY - sectionLine.centerY
+  assert.equal(
+    Math.abs(
+      sectionToPromptDistancePt
+      - applicationWritingRhythm.targets.printPdf.baselineStepPt
+    ) <= applicationWritingRhythm.targets.printPdf.oneStepTolerancePt,
+    true,
+    `${label} observes section→prompt in real PDF text geometry: ${JSON.stringify({
+      sectionLine,
+      promptLine,
+      sectionToPromptDistancePt,
+    })}`,
+  )
+  const observedEdgeIds = [
     'grammar_fill_boundary_to_part_cross_page',
+    'section_to_prompt',
     'prompt_wrapped_continuation',
     'response_atomicity_same_page',
     teacher
@@ -11882,6 +12496,21 @@ function assertApplicationWritingPdfArtifact({
         ]
       : []),
   ]
+  return observedEdgeIds.map((edgeId) => ({
+    edgeId,
+    surface: 'pdf',
+    witness:
+      edgeId === 'section_to_prompt'
+        ? {
+            kind: 'pdf_visible_line_centers',
+            distancePt: sectionToPromptDistancePt,
+            targetPt:
+              applicationWritingRhythm.targets.printPdf.baselineStepPt,
+            sectionLine,
+            promptLine,
+          }
+        : { kind: 'executed_public_seam_assertion', label },
+  }))
 }
 
 function assertApplicationWritingResponseMovePdfArtifact({
@@ -11937,7 +12566,16 @@ function assertApplicationWritingResponseMovePdfArtifact({
     true,
     `${label} preserves Continuation order after the moved response region`,
   )
-  return ['response_atomicity_next_page']
+  return [{
+    edgeId: 'response_atomicity_next_page',
+    surface: 'pdf',
+    witness: {
+      kind: 'executed_public_seam_assertion',
+      label,
+      responsePage: applicationResponse.responsePage,
+      promptEndPage: promptEndPage[0],
+    },
+  }]
 }
 
 function assertApplicationWritingObservedCoverage(ledger) {
@@ -11950,14 +12588,37 @@ function assertApplicationWritingObservedCoverage(ledger) {
   for (const [bundleId, requiredEdgeIds] of Object.entries(
     expected.requiredBundles,
   )) {
+    assert.equal(
+      ledger[bundleId].every(
+        (observation) =>
+          observation
+          && typeof observation.edgeId === 'string'
+          && observation.witness?.kind,
+      ),
+      true,
+      `Application Writing ${bundleId} grants credit only from public-seam observations`,
+    )
+    const observedEdgeIds =
+      new Set(ledger[bundleId].map((observation) => observation.edgeId))
     assert.deepEqual(
-      [...new Set(ledger[bundleId])].sort(),
-      [...requiredEdgeIds].sort(),
-      `Application Writing ${bundleId} observes its exact required edge set`,
+      requiredEdgeIds.filter((edgeId) => !observedEdgeIds.has(edgeId)),
+      [],
+      `Application Writing ${bundleId} observes every required edge`,
+    )
+    assert.equal(
+      observedEdgeIds.has('section_to_prompt'),
+      bundleId === 'teacher_pdf_response_move'
+        ? false
+        : true,
+      `Application Writing ${bundleId} records section→prompt only from its actual public artifact`,
     )
   }
   assert.deepEqual(
-    [...new Set(Object.values(ledger).flat())].sort(),
+    [...new Set(
+      Object.values(ledger).flat()
+        .map((observation) => observation.edgeId)
+        .filter((edgeId) => expected.requiredEdgeIds.includes(edgeId)),
+    )].sort(),
     [...expected.requiredEdgeIds].sort(),
     'Application Writing public Screen, Print HTML, and exact-A4 PDFs execute the complete source-authorized edge set',
   )
@@ -15467,7 +16128,7 @@ try {
   )
   const requestPath = path.join(
     sourcePackageDir,
-    'canonical-evidence/canonical-import-request-v32.json',
+    'canonical-evidence/canonical-import-request-v33.json',
   )
   execFileSync(process.execPath, [
     path.join(

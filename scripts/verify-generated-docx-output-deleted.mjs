@@ -34,7 +34,7 @@ assert.deepEqual(
   'supported canonical consumers must be exactly Screen and Print/PDF',
 )
 
-assert.equal(canonicalAuthorityRef.manifestVersion, '32')
+assert.equal(canonicalAuthorityRef.manifestVersion, '33')
 const currentAuthority = resolveCanonicalAuthority(canonicalAuthorityRef)
 assert.equal(currentAuthority.ok, true)
 
@@ -42,13 +42,13 @@ const humanAuthority = read('docs/product/exam-paper-format-standards.md')
 const currentHumanAuthority = humanAuthority.split('## v2 历史排版证据')[0]
 assert.match(
   currentHumanAuthority,
-  /standards\/paper-canonical\/manifest-v32\.json/,
-  'the unique human-readable authority index must bind current manifest v32',
+  /standards\/paper-canonical\/manifest-v33\.json/,
+  'the unique human-readable authority index must bind current manifest v33',
 )
 assert.match(
   currentHumanAuthority,
-  /Screen v32、Print\/PDF v33/,
-  'the human-readable current output matrix must name only Screen v32 and Print/PDF v33',
+  /Screen v33、Print\/PDF v34/,
+  'the human-readable current output matrix must name only Screen v33 and Print/PDF v34',
 )
 assert.doesNotMatch(
   currentHumanAuthority,
@@ -355,6 +355,17 @@ assert.match(
   manifestV32Migration,
   /Manifest v1 through v31[\s\S]*remain unchanged and resolvable/i,
   'manifest v32 migration must preserve every immutable predecessor closure',
+)
+const manifestV33Migration = read('standards/paper-canonical/manifest-v33-migration.md')
+assert.match(
+  manifestV33Migration,
+  /Manifest v33[\s\S]*Screen v33[\s\S]*Print\/PDF v34/i,
+  'manifest v33 must record the bounded focused-review successor',
+)
+assert.match(
+  manifestV33Migration,
+  /Manifest v1 through v32[\s\S]*remain unchanged and resolvable/i,
+  'manifest v33 migration must preserve every immutable predecessor closure',
 )
 assert.equal(
   Object.hasOwn(currentAuthority.closure.schemas, 'consumer-contract-v1'),
