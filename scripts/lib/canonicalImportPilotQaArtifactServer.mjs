@@ -2,6 +2,10 @@ import { lstatSync, readFileSync } from 'node:fs'
 import { createServer } from 'node:http'
 import path from 'node:path'
 
+import {
+  assertCanonicalImportPilotEvidenceRoot,
+} from './canonicalImportPilotEvidenceRoot.mjs'
+
 const artifactDefinitions = {
   studentPrintHtml: {
     fileName: 'print-student.html',
@@ -33,6 +37,11 @@ export async function startCanonicalImportPilotQaArtifactServer({
     '.scratch/paper-canonical-ticket-20-qa',
     head,
   )
+  assertCanonicalImportPilotEvidenceRoot({
+    repositoryRoot,
+    rootDir: artifactDir,
+    expectedHead: head,
+  })
   const artifacts = Object.fromEntries(
     Object.entries(artifactDefinitions).map(([artifactId, definition]) => {
       const filePath = path.resolve(artifactDir, definition.fileName)

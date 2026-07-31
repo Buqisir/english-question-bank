@@ -107,7 +107,7 @@ function stripScriptTags(html) {
 // the paged.js polyfill script stripped) plus a same-source PDF and page
 // count. See module header for the locked render order this function
 // implements.
-export async function renderPaginatedPaper(printHtml) {
+export async function renderPaginatedPaper(printHtml, { inspect = null } = {}) {
   if (typeof printHtml !== 'string' || !printHtml.trim()) {
     throw new Error('renderPaginatedPaper: printHtml must be a non-empty string')
   }
@@ -144,6 +144,9 @@ export async function renderPaginatedPaper(printHtml) {
       )
     }
     const pageCount = await page.evaluate(() => window.__pagedPageCount)
+    const inspection = typeof inspect === 'function'
+      ? await inspect(page)
+      : null
 
     // Step 5: serialize from THIS SAME page, then strip every <script> tag —
     // see module header for why an un-stripped replay double-paginates.
@@ -180,6 +183,6 @@ export async function renderPaginatedPaper(printHtml) {
       preferCSSPageSize: true,
     })
 
-    return { paginatedHtml, pdfBytes, pageCount }
+    return { paginatedHtml, pdfBytes, pageCount, inspection }
   })
 }

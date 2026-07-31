@@ -53,6 +53,9 @@ export declare const paperTypographyRuntime: Readonly<{
     verticalPlacement: string
   }>
 }>
+export declare function paperTypographyRuntimeFromAuthority(
+  authority: Readonly<Record<string, unknown>>,
+): typeof paperTypographyRuntime
 export declare function sectionHeadingRuntimeFromContract(
   contract: Readonly<Record<string, unknown>>,
 ): SectionHeadingRuntime

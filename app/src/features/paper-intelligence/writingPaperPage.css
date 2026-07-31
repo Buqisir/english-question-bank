@@ -104,6 +104,7 @@
   margin: 0;
   white-space: pre-line;
   text-indent: var(--ps-group-instruction-indent);
+  font-weight: var(--ps-instruction-visible-weight);
 }
 
 .pi-writing-page--continuation .pi-writing-instruction {

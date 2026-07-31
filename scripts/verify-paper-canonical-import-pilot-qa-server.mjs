@@ -2,7 +2,8 @@
 
 import assert from 'node:assert/strict'
 import { spawn } from 'node:child_process'
-import { mkdtempSync, mkdirSync, rmSync, writeFileSync } from 'node:fs'
+import { createHash } from 'node:crypto'
+import { mkdtempSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
 
@@ -10,6 +11,10 @@ import {
   runCanonicalImportPilotQaSession,
   startCanonicalImportPilotQaArtifactServer,
 } from './lib/canonicalImportPilotQaArtifactServer.mjs'
+import {
+  canonicalImportPilotTamperRejectionMatrix,
+  sealCanonicalImportPilotEvidenceStaging,
+} from './lib/canonicalImportPilotEvidenceRoot.mjs'
 
 const head = '0123456789abcdef0123456789abcdef01234567'
 const projectRoot = path.resolve(import.meta.dirname, '..')
@@ -44,14 +49,53 @@ const expectedArtifacts = {
   },
 }
 
+function sha256(bytes) {
+  return `sha256:${createHash('sha256').update(bytes).digest('hex')}`
+}
+
 mkdirSync(artifactDir, { recursive: true })
 for (const artifact of Object.values(expectedArtifacts)) {
   writeFileSync(path.join(artifactDir, artifact.fileName), artifact.bytes)
 }
 writeFileSync(
-  path.join(repositoryRoot, '.scratch/paper-canonical-ticket-20-qa/HEAD.txt'),
-  'must-not-be-served\n',
+  path.join(artifactDir, 'HEAD.txt'),
+  `${head}\n`,
 )
+writeFileSync(
+  path.join(artifactDir, 'continuation-public-seam-ledger.json'),
+  `${JSON.stringify({
+    schemaVersion: 'continuation-public-seam-ledger-v1',
+    expectedHead: head,
+  }, null, 2)}\n`,
+)
+const renderedArtifactDigests = Object.fromEntries(
+  Object.values(expectedArtifacts).map((artifact) => [
+    artifact.fileName,
+    sha256(readFileSync(path.join(artifactDir, artifact.fileName))).slice('sha256:'.length),
+  ]),
+)
+writeFileSync(
+  path.join(artifactDir, 'evidence.json'),
+  `${JSON.stringify({
+    schemaVersion: 'canonical-import-pilot-evidence-v2',
+    head,
+    continuationPublicSeamLedger: {
+      path: 'continuation-public-seam-ledger.json',
+      sha256: sha256(readFileSync(
+        path.join(artifactDir, 'continuation-public-seam-ledger.json'),
+      )),
+      expectedHead: head,
+      schemaVersion: 'continuation-public-seam-ledger-v1',
+    },
+    semanticObservationDigest: `sha256:${'a'.repeat(64)}`,
+    tamperRejectionMatrix: canonicalImportPilotTamperRejectionMatrix,
+    renderedArtifactDigests,
+  }, null, 2)}\n`,
+)
+sealCanonicalImportPilotEvidenceStaging({
+  rootDir: artifactDir,
+  expectedHead: head,
+})
 
 let qaServer
 try {

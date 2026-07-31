@@ -2375,6 +2375,7 @@ body {
   margin: -5.4pt 0 6.75pt;
   line-height: ${paperSurfaceTokens.paperLineHeight};
   text-indent: ${sectionHeadingRuntime.printPdf.groupInstructionFirstLineIndentEm}em;
+  font-weight: ${paperTypographyRuntime.visibleWeight.instruction};
 }
 
 .reading-meta-instruction[data-canonical-seven-choices-rhythm-role="meta_instruction"] {
@@ -2705,6 +2706,7 @@ ${grammarFillGeometryFixtureCss}
   margin: 0 0 9pt;
   white-space: pre-line;
   text-indent: ${sectionHeadingRuntime.printPdf.groupInstructionFirstLineIndentEm}em;
+  font-weight: ${paperTypographyRuntime.visibleWeight.instruction};
 }
 
 .canonical-continuation-response {
