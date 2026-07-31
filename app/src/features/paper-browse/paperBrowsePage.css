@@ -322,7 +322,7 @@
   font-family: var(--ps-section-heading-font-stack);
   font-size: var(--ps-section-heading-font-size);
   line-height: var(--ps-section-heading-line-height);
-  font-weight: 400;
+  font-weight: var(--ps-section-heading-visible-weight);
   color: inherit;
   white-space: nowrap;
 }
@@ -349,7 +349,7 @@
   font-family: var(--ps-font-stack);
   font-size: var(--ps-font-size);
   line-height: var(--ps-line-height);
-  font-weight: 400;
+  font-weight: var(--ps-instruction-visible-weight);
   color: inherit;
   white-space: pre-line;
   text-indent: var(--ps-group-instruction-indent);

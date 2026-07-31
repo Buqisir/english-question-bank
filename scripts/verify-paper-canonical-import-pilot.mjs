@@ -45,6 +45,9 @@ import {
   applicationWritingRhythm,
 } from '../shared/paper-canonical/applicationWritingRhythm.mjs'
 import {
+  continuationWritingRhythm,
+} from '../shared/paper-canonical/continuationWritingRhythm.mjs'
+import {
   paperTypographyRuntime,
   sectionHeadingRuntime,
   sectionHeadingTextRuns,
@@ -72,6 +75,12 @@ import {
 } from '../server/draft-paper/paginationRenderer.mjs'
 import { closeChromiumPool } from '../server/draft-paper/chromiumPool.mjs'
 import { buildPrintHtml } from '../server/print-renderer.mjs'
+import {
+  assertContinuationPublicSeamLedgerMutationRejections,
+  assertPersistedContinuationPublicSeamLedger,
+  loadContinuationPublicSeamLedgerOracle,
+  persistContinuationPublicSeamLedger,
+} from './lib/continuationPublicSeamLedger.mjs'
 
 const repositoryRoot = path.resolve(import.meta.dirname, '..')
 const sourcePackageDir = path.join(
@@ -228,6 +237,273 @@ if (injectQaArtifactServerStartupFailure && !keepQaServer) {
 
 function sha256(bytes) {
   return createHash('sha256').update(bytes).digest('hex')
+}
+
+function assertContinuationPublicSeamLedgerAuthority() {
+  const sourcePath = path.join(
+    repositoryRoot,
+    continuationWritingRhythm.publicArtifactOracle.path,
+  )
+  const sourceBytes = readFileSync(sourcePath)
+  assert.equal(
+    continuationWritingRhythm.publicArtifactOracle.sha256,
+    `sha256:${sha256(sourceBytes)}`,
+    'Continuation v5 binds the exact source public-artifact oracle bytes',
+  )
+  const sourceOracle = JSON.parse(sourceBytes)
+  const ledgerOracle = loadContinuationPublicSeamLedgerOracle({
+    repositoryRoot,
+    continuationRhythm: continuationWritingRhythm,
+  })
+  assert.deepEqual(
+    ledgerOracle.oracle.authority.continuationRhythm,
+    {
+      schemaVersion: continuationWritingRhythm.schemaVersion,
+      id: continuationWritingRhythm.id,
+      version: continuationWritingRhythm.version,
+    },
+    'the independent persisted-ledger fixture binds the current Continuation authority version',
+  )
+  assert.deepEqual(
+    ledgerOracle.oracle.authority.producers,
+    [
+      'PaperBrowsePage',
+      'WritingPaperPage',
+      'buildPrintHtml',
+      'renderPaginatedPaper',
+    ],
+    'the persisted-ledger fixture names the real Screen and Print/PDF producers',
+  )
+  return Object.freeze({ sourceOracle, ledgerOracle })
+}
+
+async function measureContinuationPublicDomLedgerSeams(
+  page,
+  label,
+  surface,
+  materialBlockId,
+) {
+  const lines = await page.evaluate((blockId) => {
+    const roots = [...document.querySelectorAll(
+      '.pi-writing-page--continuation, .canonical-continuation-writing',
+    )]
+    const root = roots.find((candidate) => candidate.querySelector(
+      '[data-canonical-writing-chrome-role="section_heading"]',
+    ))
+    if (!root) return []
+    const section = root.querySelector(
+      '[data-canonical-writing-chrome-role="section_heading"]',
+    )
+    const instruction = root.querySelector(
+      '[data-canonical-writing-chrome-role="instruction"]',
+    )
+    const material = [...root.querySelectorAll('[data-canonical-block-id]')]
+      .find((candidate) => candidate.getAttribute('data-canonical-block-id') === blockId)
+      || root.querySelector('.pi-writing-passage, .canonical-continuation-material')
+    const visibleLine = (element, role) => {
+      if (!element) return null
+      const walker = document.createTreeWalker(
+        element,
+        NodeFilter.SHOW_TEXT,
+        {
+          acceptNode: (node) => node.textContent?.trim()
+            ? NodeFilter.FILTER_ACCEPT
+            : NodeFilter.FILTER_REJECT,
+        },
+      )
+      const rects = []
+      let node = walker.nextNode()
+      while (node) {
+        const range = document.createRange()
+        range.selectNodeContents(node)
+        rects.push(...[...range.getClientRects()].filter(
+          (rect) => rect.width > 0 && rect.height > 0,
+        ))
+        node = walker.nextNode()
+      }
+      rects.sort((left, right) => left.top - right.top || left.left - right.left)
+      const first = rects.at(0)
+      const last = rects.at(-1)
+      if (!first || !last) return null
+      return {
+        role,
+        firstCenterY: first.top + first.height / 2,
+        lastCenterY: last.top + last.height / 2,
+        fontWeight: Number.parseFloat(getComputedStyle(element).fontWeight),
+      }
+    }
+    return [
+      visibleLine(section, 'section_heading'),
+      visibleLine(instruction, 'instruction'),
+      visibleLine(material, 'material_paragraph'),
+    ]
+  }, materialBlockId)
+  assert.deepEqual(
+    lines.map((line) => line?.role),
+    ['section_heading', 'instruction', 'material_paragraph'],
+    `${label} resolves the source-bound Continuation public seam in DOM order`,
+  )
+  assert.equal(
+    lines[0].fontWeight,
+    paperTypographyRuntime.visibleWeight.sectionHeading,
+    `${label} section heading consumes the current Paper Typography regular-weight role`,
+  )
+  if (surface === 'screen') {
+    assert.equal(
+      lines[1].fontWeight,
+      paperTypographyRuntime.visibleWeight.instruction,
+      `${label} instruction consumes the current Paper Typography regular-weight role`,
+    )
+  }
+  const scale = surface === 'screen' ? 1 : 72 / 96
+  const baselineStep = surface === 'screen'
+    ? continuationWritingRhythm.targets.screen.baselineStepPx
+    : continuationWritingRhythm.targets.printPdf.baselineStepPt
+  const tolerance = surface === 'screen'
+    ? continuationWritingRhythm.targets.screen.oneStepTolerancePx
+    : continuationWritingRhythm.targets.printPdf.oneStepTolerancePt
+  const measure = (relationId, fromIndex, fromAnchor, toIndex, toAnchor, ratio) => {
+    const distance = (lines[toIndex][toAnchor] - lines[fromIndex][fromAnchor]) * scale
+    const target = baselineStep * ratio
+    assert.equal(
+      Math.abs(distance - target) <= tolerance,
+      true,
+      `${label} ${relationId} is measured from actual visible public line centers`,
+    )
+    return { relationId, distance }
+  }
+  return [
+    measure(
+      'section_to_instruction',
+      0,
+      'firstCenterY',
+      1,
+      'firstCenterY',
+      1,
+    ),
+    measure(
+      'instruction_to_material',
+      1,
+      'lastCenterY',
+      2,
+      'firstCenterY',
+      1.5,
+    ),
+  ]
+}
+
+function measureContinuationPublicPdfLedgerSeams(
+  pdfPath,
+  label,
+  { sectionText, instructionText, firstMaterialText },
+) {
+  const words = pdfWordsWithBoxes(pdfPath)
+  const lines = pdfRoleLines(words)
+  const section = uniquePdfLineForExactVisibleText(
+    lines,
+    pdfPath,
+    sectionText,
+    `${label} Continuation section`,
+  )
+  const instruction = uniquePdfLineForExactVisibleText(
+    lines,
+    pdfPath,
+    instructionText,
+    `${label} Continuation instruction`,
+  )
+  const materialIndex = collapsedPdfSequenceIndexes(
+    words,
+    firstMaterialText,
+    6,
+  )
+  assert.equal(
+    materialIndex.length,
+    1,
+    `${label} resolves exactly one first source material occurrence in its direct PDF`,
+  )
+  const material = lines.find((line) =>
+    line.wordIndexes.includes(materialIndex[0]))
+  assert.ok(material, `${label} resolves the actual first PDF material line`)
+  const measure = (relationId, from, to, ratio) => {
+    const distance = to.centerY - from.centerY
+    const target = continuationWritingRhythm.targets.printPdf.baselineStepPt * ratio
+    assert.equal(
+      Math.abs(distance - target)
+        <= continuationWritingRhythm.targets.printPdf.oneStepTolerancePt,
+      true,
+      `${label} ${relationId} is measured from direct-PDF word geometry`,
+    )
+    return { relationId, distance }
+  }
+  return [
+    measure('section_to_instruction', section, instruction, 1),
+    measure('instruction_to_material', instruction, material, 1.5),
+  ]
+}
+
+function assertNoPublicPaperShadowRegularWeightLiterals() {
+  const assertions = [
+    {
+      path: 'app/src/features/paper-browse/paperBrowsePage.css',
+      selector: '.paper-browse-section-heading',
+    },
+    {
+      path: 'app/src/features/paper-browse/paperBrowsePage.css',
+      selector: '.paper-browse-instruction',
+    },
+    {
+      path: 'app/src/features/paper-intelligence/writingPaperPage.css',
+      selector: '.pi-writing-section',
+    },
+  ]
+  for (const assertion of assertions) {
+    const source = readFileSync(path.join(repositoryRoot, assertion.path), 'utf8')
+    const start = source.indexOf(assertion.selector)
+    const end = source.indexOf('\n}', start)
+    const rule = source.slice(start, end + 2)
+    assert.equal(start >= 0 && end > start, true, `public paper CSS rule exists: ${assertion.selector}`)
+    assert.doesNotMatch(
+      rule,
+      /font-weight:\s*(?:400|normal)\s*;/u,
+      `${assertion.selector} contains no shadow regular-weight literal`,
+    )
+    assert.match(
+      rule,
+      /font-weight:\s*var\(--ps-(?:section-heading|instruction)-visible-weight\);/u,
+      `${assertion.selector} consumes the authority-injected public weight role`,
+    )
+  }
+  const printSource = readFileSync(
+    path.join(repositoryRoot, 'server/print-renderer.mjs'),
+    'utf8',
+  )
+  const printRuleWithWeight = (selector) => {
+    const rules = []
+    let start = printSource.indexOf(selector)
+    while (start >= 0) {
+      const end = printSource.indexOf('\n}', start)
+      if (end > start) rules.push(printSource.slice(start, end + 2))
+      start = printSource.indexOf(selector, start + selector.length)
+    }
+    return rules.find((rule) => rule.includes('font-weight:')) || ''
+  }
+  for (const selector of [
+    '.section-header--section',
+    '[data-canonical-writing-chrome-role="section_heading"]',
+  ]) {
+    const rule = printRuleWithWeight(selector)
+    assert.equal(rule.length > 0, true, `public Print/PDF rule exists: ${selector}`)
+    assert.doesNotMatch(
+      rule,
+      /font-weight:\s*(?:400|normal)\s*;/u,
+      `${selector} contains no shadow regular-weight literal`,
+    )
+    assert.match(
+      rule,
+      /paperTypographyRuntime\.visibleWeight\.sectionHeading/u,
+      `${selector} consumes the unique current Paper Typography role`,
+    )
+  }
 }
 
 function assertApplicationWritingReferenceEvidence() {
@@ -583,18 +859,18 @@ function assertSevenChoicesReferenceEvidence() {
   )
   assert.equal(
     canonicalAuthorityRef.manifestVersion,
-    '33',
+    '34',
     'new Publications preserve Seven Choices inside the whole-paper typography successor authority',
   )
   assert.equal(
     consumerContractRefs.screen.version,
-    '33',
-    'Screen v33 binds the complete geometry authority closure',
+    '34',
+    'Screen v34 binds the complete geometry authority closure',
   )
   assert.equal(
     consumerContractRefs.print_pdf.version,
-    '34',
-    'Print/PDF v34 binds the complete geometry authority closure',
+    '35',
+    'Print/PDF v35 binds the complete geometry authority closure',
   )
   assert.equal(
     sha256(preservedBytes),
@@ -12717,10 +12993,26 @@ async function renderSupportedArtifacts({
   const grammarFillCoverageObservations = []
   const grammarFillPoisonRejections = []
   const applicationWritingCoverageLedger = {}
+  const continuationPublicSeamMeasurements = {}
   const asset = JSON.parse(readFileSync(
     path.join(paperAssetsDir, paperId, 'latest', 'paper-asset.json'),
     'utf8',
   ))
+  const continuationGroup = asset.content.groups[
+    continuationLedgerEvidence.sourceOracle.groupId
+  ]
+  assert.ok(
+    continuationGroup?.passage?.paragraphs?.[0]?.text,
+    'the source-bound Continuation group exposes its first material paragraph for direct-artifact measurement',
+  )
+  const continuationPublicIdentity = {
+    sectionText: continuationLedgerEvidence.sourceOracle.chrome.section.text,
+    instructionText:
+      continuationLedgerEvidence.sourceOracle.chrome.instruction.text,
+    firstMaterialText: continuationGroup.passage.paragraphs[0].text,
+    firstMaterialBlockId:
+      continuationLedgerEvidence.sourceOracle.materialBlockIds[0],
+  }
   const userDbPath = path.join(path.dirname(dbPath), 'user-data.sqlite')
   const forbiddenToolDir = path.join(path.dirname(dbPath), 'forbidden-output-tools')
   const forbiddenToolMarker = path.join(
@@ -12832,6 +13124,13 @@ async function renderSupportedArtifacts({
         'plain PaperSurface hides official answers',
       )
       const plainHtml = await page.content()
+      continuationPublicSeamMeasurements.screen_plain =
+        await measureContinuationPublicDomLedgerSeams(
+          page,
+          'plain PaperSurface Continuation',
+          'screen',
+          continuationPublicIdentity.firstMaterialBlockId,
+        )
       assertPassageLetterMarkup(
         plainHtml,
         consumers.screen,
@@ -13296,6 +13595,13 @@ async function renderSupportedArtifacts({
         'lecture PaperSurface exposes the selected official answer',
       )
       const lectureHtml = await page.content()
+      continuationPublicSeamMeasurements.screen_lecture =
+        await measureContinuationPublicDomLedgerSeams(
+          page,
+          'lecture PaperSurface Continuation',
+          'screen',
+          continuationPublicIdentity.firstMaterialBlockId,
+        )
       await assertOwnerGoldSectionHeadingsDom(
         page,
         'lecture PaperSurface',
@@ -13761,6 +14067,13 @@ async function renderSupportedArtifacts({
         'Student Print HTML',
         'print',
       )
+      continuationPublicSeamMeasurements.student_print_html =
+        await measureContinuationPublicDomLedgerSeams(
+          page,
+          'Student Print HTML Continuation',
+          'printHtml',
+          continuationPublicIdentity.firstMaterialBlockId,
+        )
       applicationWritingCoverageLedger.student_print_html =
         await assertApplicationWritingDomArtifact(
           page,
@@ -14219,6 +14532,13 @@ async function renderSupportedArtifacts({
         'Teacher Print HTML',
         'print',
       )
+      continuationPublicSeamMeasurements.teacher_print_html =
+        await measureContinuationPublicDomLedgerSeams(
+          page,
+          'Teacher Print HTML Continuation',
+          'printHtml',
+          continuationPublicIdentity.firstMaterialBlockId,
+        )
       applicationWritingCoverageLedger.teacher_print_html =
         await assertApplicationWritingDomArtifact(
           page,
@@ -14981,6 +15301,15 @@ async function renderSupportedArtifacts({
           responseRegions: writingResponseRegions,
           pageBoxes,
         })
+        continuationPublicSeamMeasurements[
+          versionType === 'student'
+            ? 'student_direct_pdf'
+            : 'teacher_direct_pdf'
+        ] = measureContinuationPublicPdfLedgerSeams(
+          pdfPath,
+          `${label} Continuation`,
+          continuationPublicIdentity,
+        )
       }
       const applicationResponseMoveHtml = printHtml.teacher.replace(
         '</head>',
@@ -15991,6 +16320,7 @@ async function renderSupportedArtifacts({
       grammarFillCoverageLedger,
       grammarFillPoisonRejections,
       applicationWritingCoverageLedger,
+      continuationPublicSeamMeasurements,
       closeServices,
     }
   } finally {
@@ -16014,6 +16344,9 @@ const grammarFillReference = assertGrammarFillReferenceEvidence()
 const grammarFillCoverageOracle = assertGrammarFillCoverageOracle()
 const applicationWritingEvidence =
   assertApplicationWritingReferenceEvidence()
+const continuationLedgerEvidence =
+  assertContinuationPublicSeamLedgerAuthority()
+assertNoPublicPaperShadowRegularWeightLiterals()
 const rootDir = mkdtempSync(path.join(tmpdir(), 'eqb-canonical-import-pilot-'))
 const dbPath = path.join(rootDir, 'question-bank.sqlite')
 const paperAssetsDir = path.join(rootDir, 'paper-assets')
@@ -16128,7 +16461,7 @@ try {
   )
   const requestPath = path.join(
     sourcePackageDir,
-    'canonical-evidence/canonical-import-request-v33.json',
+    'canonical-evidence/canonical-import-request-v34.json',
   )
   execFileSync(process.execPath, [
     path.join(
@@ -16415,6 +16748,16 @@ try {
   const forbiddenOutputArtifacts = rendered.artifactFiles.filter(
     (relativePath) => /\.(?:docx|xml)$/i.test(relativePath),
   )
+  const continuationPublicSeamLedger = persistContinuationPublicSeamLedger({
+    repositoryRoot,
+    outputDir,
+    expectedHead: head,
+    authorityRef: canonicalAuthorityRef,
+    continuationRhythm: continuationWritingRhythm,
+    oracleBundle: continuationLedgerEvidence.ledgerOracle,
+    measurementsByBundle: rendered.continuationPublicSeamMeasurements,
+  })
+  writeFileSync(path.join(outputDir, 'HEAD.txt'), `${head}\n`)
   writeFileSync(path.join(outputDir, 'evidence.json'), `${JSON.stringify({
     schemaVersion: 'canonical-import-pilot-evidence-v1',
     head,
@@ -16536,11 +16879,22 @@ try {
       ],
       observedLedger: rendered.applicationWritingCoverageLedger,
     },
+    continuationPublicSeamLedger,
     renderedArtifactDigests,
     forbiddenOutputArtifacts,
     directPdfOutputToolSentinel: 'not_called',
   }, null, 2)}\n`)
-  writeFileSync(path.join(outputDir, 'HEAD.txt'), `${head}\n`)
+  const continuationLedgerContext = {
+    repositoryRoot,
+    outputDir,
+    expectedHead: head,
+    authorityRef: canonicalAuthorityRef,
+    continuationRhythm: continuationWritingRhythm,
+    oracleBundle: continuationLedgerEvidence.ledgerOracle,
+    requireOfficialRoot: provisionActualArtifacts,
+  }
+  assertPersistedContinuationPublicSeamLedger(continuationLedgerContext)
+  assertContinuationPublicSeamLedgerMutationRejections(continuationLedgerContext)
   if (provisionActualArtifacts) {
     console.log(`QA artifacts: ${outputDir}`)
   }

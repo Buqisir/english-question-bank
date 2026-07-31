@@ -407,6 +407,10 @@ const paperBrowseContentStyle: PaperBrowseContentStyle = {
     `${sectionHeadingRuntime.screen.fontSizePx}px`,
   '--ps-section-heading-line-height':
     `${sectionHeadingRuntime.screen.lineHeightPx}px`,
+  '--ps-section-heading-visible-weight':
+    paperTypographyRuntime.visibleWeight.sectionHeading,
+  '--ps-instruction-visible-weight':
+    paperTypographyRuntime.visibleWeight.instruction,
   '--ps-part-heading-indent':
     `${sectionHeadingRuntime.screen.partHeadingIndentEm}em`,
   '--ps-section-heading-indent':

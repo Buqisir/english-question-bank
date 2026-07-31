@@ -1,4 +1,4 @@
-import contract from '../../standards/paper-canonical/rendering/continuation-writing-rhythm-v4.json' with { type: 'json' }
+import contract from '../../standards/paper-canonical/rendering/continuation-writing-rhythm-v5.json' with { type: 'json' }
 
 function freezeRoleClasses(roleClasses) {
   return Object.freeze(
@@ -12,6 +12,9 @@ function freezeRoleClasses(roleClasses) {
 }
 
 export const continuationWritingRhythm = Object.freeze({
+  schemaVersion: contract.schemaVersion,
+  id: contract.id,
+  version: contract.version,
   semanticRoleClasses: freezeRoleClasses(contract.semanticRoleClasses),
   adjacencyGraph: Object.freeze(
     contract.adjacencyGraph.map((edge) => Object.freeze({ ...edge })),
@@ -34,5 +37,8 @@ export const continuationWritingRhythm = Object.freeze({
   publicArtifactOracle: Object.freeze({ ...contract.publicArtifactOracle }),
   observedCoverageOracle: Object.freeze({
     ...contract.observedCoverageOracle,
+  }),
+  actualArtifactLedgerOracle: Object.freeze({
+    ...contract.actualArtifactLedgerOracle,
   }),
 })

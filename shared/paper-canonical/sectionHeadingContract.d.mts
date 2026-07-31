@@ -29,6 +29,8 @@ export declare const paperTypographyRuntime: Readonly<{
     questionNumber: number
     optionLabel: number
     optionText: number
+    sectionHeading: number
+    instruction: number
   }>
   partToFirstSectionGeometry: Readonly<{
     normalization: string

@@ -4,7 +4,7 @@
 
 本文件是唯一的人类可读索引；当前 canonical 编译、校验、发布和受支持的
 Screen / Print-PDF consumer 只从
-[`standards/paper-canonical/manifest-v33.json`](../../standards/paper-canonical/manifest-v33.json)
+[`standards/paper-canonical/manifest-v34.json`](../../standards/paper-canonical/manifest-v34.json)
 解析一份 digest-closed 的权威闭包。这里不复制卷型题号、分值、题组
 cardinality、清洗条件或字体/物理排版数值，也不能被 caller 当作第二套配置。
 
@@ -18,9 +18,9 @@ Renderer Typography、其 schema 及纯验证入口。未知版本、缺件、di
 任何会改变 admission、canonical 语义、Profile、normalization 或 renderer
 结果的变更，必须新增 versioned artifact、schema/semantic conformance fixture、
 迁移说明和 manifest 升版；已经被 Publication 引用的 artifact 不可原位修改。
-`manifest-v1.json` 至 `manifest-v32.json` 保留各自原始 digest-closed closure，
-供既有 Publication 解析；当前 Screen v33、Print/PDF v34 consumer contracts
-只绑定 v33 authority。v33 继续以 NCK1 Profile v10 发布 renderer-neutral 的完整
+`manifest-v1.json` 至 `manifest-v33.json` 保留各自原始 digest-closed closure，
+供既有 Publication 解析；当前 Screen v34、Print/PDF v35 consumer contracts
+只绑定 v34 authority。v34 继续以 NCK1 Profile v10 发布 renderer-neutral 的完整
 可见结构：inactive Listening 不产生标题、正文或空隙，首个可见部分仍是
 `第二部分 阅读（共两节，满分50分）`，且阅读理解、七选五的节标题和说明均
 由同一 Profile/digest 绑定的 Consumption Plan 进入 plain/lecture Screen、
@@ -39,12 +39,14 @@ A/B/C/D 后到选项正文保持 0.411765em，四个选项使用金样归一化�
 续写标题到 instruction 为一个 baseline step，instruction 到材料为 1.5
 baseline steps，二者由独立 authority 拥有。Normalization Rules v5 只在英文 token 邻接中文释义时收窄
 半角括号/标点空格转换，普通中文 `这是（中文）说明。` 保持原样，并保留英文
-弯撇号规则；原始 Source Capture 字节保持不变。Application / Continuation
-rhythm v4 分别声明 Screen
+弯撇号规则；原始 Source Capture 字节保持不变。Application rhythm v4 /
+Continuation rhythm v5 分别声明 Screen
 1px 与 Print/PDF 0.5pt 的细线原语，正文首行统一 2em，续写给定段首仍为
 独立 4em 角色。正文行盒继续固定 18pt，不引入任何 18/19、18–23 或按页自适应。
-迁移说明见
-[`manifest-v33-migration.md`](../../standards/paper-canonical/manifest-v33-migration.md)。
+Paper Typography v9 是 section heading 和 instruction 常规字重的唯一运行时来源；
+Continuation Rhythm v5 另外绑定在 exact-final-HEAD 证据根持久化的六 bundle、两
+relation 观测 ledger。迁移说明见
+[`manifest-v34-migration.md`](../../standards/paper-canonical/manifest-v34-migration.md)。
 
 此前 v32 以 NCK1 Profile v10、Paper Typography v7、Normalization Rules v5
 和 Grammar Fill public-geometry-fixtures v11 闭合 Owner-QA geometry；

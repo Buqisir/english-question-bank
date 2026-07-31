@@ -1,0 +1,90 @@
+{
+  "schemaVersion": "continuation-public-seam-ledger-oracle-v1",
+  "sourceOracle": {
+    "path": "docs/cuts/paper-canonical-unification/qa/20-continuation-writing-source-oracles-v2.json",
+    "sha256": "8edb2c8dcdb1857e20dc52fe72bc07913c5ad5f68b3001f7c0b81bdb0944e63a"
+  },
+  "authority": {
+    "continuationRhythm": {
+      "schemaVersion": "continuation-writing-rhythm-v5",
+      "id": "continuation-writing-rhythm",
+      "version": "5"
+    },
+    "producers": [
+      "PaperBrowsePage",
+      "WritingPaperPage",
+      "buildPrintHtml",
+      "renderPaginatedPaper"
+    ]
+  },
+  "bundles": [
+    {
+      "bundleId": "screen_plain",
+      "artifactRole": "screen_plain_html",
+      "artifactPath": "screen-plain.html",
+      "surface": "screen",
+      "unit": "px"
+    },
+    {
+      "bundleId": "screen_lecture",
+      "artifactRole": "screen_lecture_html",
+      "artifactPath": "screen-lecture.html",
+      "surface": "screen",
+      "unit": "px"
+    },
+    {
+      "bundleId": "student_print_html",
+      "artifactRole": "student_print_html",
+      "artifactPath": "print-student.html",
+      "surface": "print_html",
+      "unit": "pt"
+    },
+    {
+      "bundleId": "teacher_print_html",
+      "artifactRole": "teacher_print_html",
+      "artifactPath": "print-teacher.html",
+      "surface": "print_html",
+      "unit": "pt"
+    },
+    {
+      "bundleId": "student_direct_pdf",
+      "artifactRole": "student_direct_pdf",
+      "artifactPath": "print-student.pdf",
+      "surface": "direct_pdf",
+      "unit": "pt"
+    },
+    {
+      "bundleId": "teacher_direct_pdf",
+      "artifactRole": "teacher_direct_pdf",
+      "artifactPath": "print-teacher.pdf",
+      "surface": "direct_pdf",
+      "unit": "pt"
+    }
+  ],
+  "relations": [
+    {
+      "relationId": "section_to_instruction",
+      "fromRole": "section_heading",
+      "toRole": "instruction",
+      "fromAnchor": "first_visible_line",
+      "toAnchor": "first_visible_line",
+      "expectedDimensionlessRatio": 1,
+      "ratioTolerance": 0.083334
+    },
+    {
+      "relationId": "instruction_to_material",
+      "fromRole": "instruction",
+      "toRole": "material_paragraph",
+      "fromAnchor": "last_visible_line",
+      "toAnchor": "first_visible_line",
+      "expectedDimensionlessRatio": 1.5,
+      "ratioTolerance": 0.083334
+    }
+  ],
+  "requirements": {
+    "observationsPerBundle": 2,
+    "expectedHeadBinding": "exact_final_git_head",
+    "artifactDigestBinding": "sha256_of_observed_artifact_bytes",
+    "evidenceRoot": ".scratch/paper-canonical-ticket-20-qa/<expectedHead>"
+  }
+}

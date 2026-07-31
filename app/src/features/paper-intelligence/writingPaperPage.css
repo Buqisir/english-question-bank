@@ -83,7 +83,7 @@
   font-family: var(--ps-section-heading-font-stack);
   font-size: var(--ps-section-heading-font-size);
   line-height: var(--ps-section-heading-line-height);
-  font-weight: 400;
+  font-weight: var(--ps-section-heading-visible-weight);
   white-space: nowrap;
 }
 

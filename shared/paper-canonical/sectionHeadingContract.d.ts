@@ -21,6 +21,38 @@ export interface SectionHeadingRuntime {
 
 export declare const sectionHeadingContract: Readonly<Record<string, unknown>>
 export declare const sectionHeadingRuntime: SectionHeadingRuntime
+export declare const paperTypographyRuntime: Readonly<{
+  coordinates: Readonly<{
+    questionStemAndOuterOptionBlockStartTwip: number
+  }>
+  visibleWeight: Readonly<{
+    questionNumber: number
+    optionLabel: number
+    optionText: number
+    sectionHeading: number
+    instruction: number
+  }>
+  partToFirstSectionGeometry: Readonly<{
+    normalization: string
+    visibleGlyphHeightToFontSizeRatio: Readonly<{
+      printPdf: number
+      screen: number
+    }>
+    visibleGlyphBottomStepRatio: number
+    ratioTolerance: number
+    surfaces: ReadonlyArray<string>
+  }>
+  footerContract: Readonly<{
+    format: string
+    prefix: string
+    pageSuffix: string
+    totalSuffix: string
+    pageCountSemantics: string
+    horizontalAlignment: string
+    fontSizeRelativeToBody: number
+    verticalPlacement: string
+  }>
+}>
 export declare function sectionHeadingRuntimeFromContract(
   contract: Readonly<Record<string, unknown>>,
 ): SectionHeadingRuntime

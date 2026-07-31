@@ -1948,7 +1948,7 @@ body {
 
 .section-header--section {
   font-family: ${sectionHeadingRuntime.printPdf.fontStack};
-  font-weight: normal;
+  font-weight: ${paperTypographyRuntime.visibleWeight.sectionHeading};
   text-indent: ${sectionHeadingRuntime.printPdf.sectionHeadingIndentEm}em;
   padding-left: 0;
   white-space: nowrap;
@@ -2663,7 +2663,7 @@ ${grammarFillGeometryFixtureCss}
   font-family: ${sectionHeadingRuntime.printPdf.fontStack};
   font-size: ${sectionHeadingRuntime.printPdf.fontSizePt}pt;
   line-height: ${sectionHeadingRuntime.printPdf.lineHeightPt}pt;
-  font-weight: 400;
+  font-weight: ${paperTypographyRuntime.visibleWeight.sectionHeading};
   white-space: nowrap;
 }
 

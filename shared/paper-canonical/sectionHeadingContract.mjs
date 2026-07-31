@@ -1,4 +1,4 @@
-import rendererTypography from '../../standards/paper-canonical/rendering/paper-typography-v8.json' with { type: 'json' }
+import rendererTypography from '../../standards/paper-canonical/rendering/paper-typography-v9.json' with { type: 'json' }
 
 function freeze(value) {
   if (value && typeof value === 'object') {
