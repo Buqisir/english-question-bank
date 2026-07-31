@@ -304,6 +304,7 @@
  * 的 padding，不再单独设左右 margin），退役此前的 UI sans + 米棕配色。 */
 .paper-browse-part-heading {
   margin: 24px 0 4px;
+  margin-left: var(--ps-part-heading-indent);
   font-family: var(--ps-font-stack-heading);
   font-size: var(--ps-font-size);
   line-height: var(--ps-line-height);
@@ -317,10 +318,10 @@
 
 .paper-browse-section-heading {
   margin: 13px 0 0;
-  margin-left: 0;
-  font-family: var(--ps-font-stack-zh);
-  font-size: var(--ps-font-size);
-  line-height: var(--ps-line-height);
+  margin-left: var(--ps-section-heading-indent);
+  font-family: var(--ps-section-heading-font-stack);
+  font-size: var(--ps-section-heading-font-size);
+  line-height: var(--ps-section-heading-line-height);
   font-weight: 400;
   color: inherit;
   white-space: nowrap;
@@ -338,7 +339,7 @@
   font-weight: 400;
   color: inherit;
   white-space: pre-line;
-  text-indent: 2em;
+  text-indent: var(--ps-group-instruction-indent);
 }
 
 .paper-browse-instruction--merged {

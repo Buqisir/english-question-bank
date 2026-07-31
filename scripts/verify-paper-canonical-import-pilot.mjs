@@ -155,6 +155,29 @@ const ownerGoldGrammarFillSectionHeading =
       node.kind === 'instruction'
       && node.instructionId === 'section.language.grammar-fill',
   ).text
+function ownerGoldOwnerIdForInstruction(kind, instructionId) {
+  const instructionIndex = visibleStructureProfileOracle.nodes.findIndex(
+    (node) =>
+      node.kind === 'instruction'
+      && node.instructionId === instructionId,
+  )
+  const owner = visibleStructureProfileOracle.nodes
+    .slice(0, instructionIndex)
+    .findLast((node) => node.kind === kind)
+  return kind === 'part' ? owner?.partId : owner?.sectionId
+}
+const ownerGoldGrammarFillSectionId = ownerGoldOwnerIdForInstruction(
+  'section',
+  'section.language.grammar-fill',
+)
+const ownerGoldWritingPartId = ownerGoldOwnerIdForInstruction(
+  'part',
+  'part.writing',
+)
+assert.ok(
+  ownerGoldGrammarFillSectionId && ownerGoldWritingPartId,
+  'the independent Profile oracle binds Grammar Fill and Writing chrome ownership',
+)
 const ownerGoldSectionPairs = []
 let ownerGoldPartHeading = null
 for (const node of visibleStructureProfileOracle.nodes) {
@@ -167,6 +190,20 @@ for (const node of visibleStructureProfileOracle.nodes) {
     })
   }
 }
+const ownerGoldLastReadingGroupIndex =
+  visibleStructureProfileOracle.nodes.findLastIndex(
+    (node) =>
+      node.kind === 'group'
+      && node.familyContractId === 'reading',
+  )
+const ownerGoldReadingFollowingSection =
+  visibleStructureProfileOracle.nodes
+    .slice(ownerGoldLastReadingGroupIndex + 1)
+    .find((node) => node.kind === 'section')
+assert.ok(
+  ownerGoldReadingFollowingSection?.sectionId,
+  'the independent Profile oracle declares the section after Reading D',
+)
 const paperId = 'paper-2026-i'
 const provisionActualArtifacts = process.argv.includes('--actual-artifacts')
 const keepQaServer = process.argv.includes('--qa-server')
@@ -3302,7 +3339,10 @@ async function assertScreenReadingVerticalRhythm(
       sectionText: section.textContent?.trim(),
       step: bottom(section) - bottom(option),
     }
-  }, ending)
+  }, {
+    ...ending,
+    nextSectionId: ownerGoldReadingFollowingSection.sectionId,
+  })
   assert.ok(endGeometry, `${label} exposes the Reading D ending boundary`)
   assert.equal(endGeometry.optionRole, 'option_line')
   assert.equal(endGeometry.optionQuestionId, ending.predecessorQuestionId)
@@ -4170,7 +4210,7 @@ async function assertClozeDomGeometry(
   assert.equal(
     observation.following.some((entry) =>
       (
-        entry.id === expected.oracle.publicIdentities.followingSection.sectionId
+        entry.id === ownerGoldGrammarFillSectionId
         || entry.groupId
           === expected.oracle.publicIdentities.followingSection.groupId
       )
@@ -4307,7 +4347,7 @@ async function assertClozeDomGeometry(
       ? observation.explanations.at(-1).questionId
       : observation.rows.at(-1).questionId,
     toIdentity:
-      expected.oracle.publicIdentities.followingSection.sectionId,
+      ownerGoldGrammarFillSectionId,
     actualRatio: assertStep(followingEdgeId, followingGapPx),
   })
   return { ...observation, observedEdges }
@@ -4329,7 +4369,11 @@ async function assertGrammarFillDomGeometry(
   } = {},
 ) {
   const expected = grammarFillSourceOracle
-  const observation = await page.evaluate(({ groupId, previousGroupId }) => {
+  const observation = await page.evaluate(({
+    groupId,
+    previousGroupId,
+    writingPartId,
+  }) => {
     const group = document.querySelector(
       `[data-canonical-group-id="${groupId}"], `
       + `[data-paper-browse-anchor="${groupId}"]`,
@@ -4509,7 +4553,7 @@ async function assertGrammarFillDomGeometry(
     const followingElements = role('next_section')
     if (followingElements.length === 0) {
       const fallback = document.querySelector(
-        '[data-paper-browse-anchor="part-2026-i-writing"]',
+        `[data-paper-browse-anchor="${writingPartId}"]`,
       ) || [...document.querySelectorAll('h1, h2, h3, h4')].find(
         (element) =>
           element.textContent?.includes('第四部分')
@@ -4580,6 +4624,7 @@ async function assertGrammarFillDomGeometry(
       expected.oracle.publicIdentities.grammarFill.groupId,
     previousGroupId:
       expected.oracle.publicIdentities.clozeBoundary.groupId,
+    writingPartId: ownerGoldWritingPartId,
   })
   assert.equal(observation.missingGroup, false, `${label} exposes Grammar Fill`)
   assert.equal(
@@ -8357,9 +8402,36 @@ function uniquePdfLineForExactVisibleText(
   return matches[0]
 }
 
+function pdfTextRunsWithFonts(pdfPath) {
+  const xml = execFileSync(
+    'pdftohtml',
+    ['-xml', '-stdout', pdfPath],
+    { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] },
+  )
+  const fontFamilies = new Map()
+  for (const match of xml.matchAll(
+    /<fontspec id="([^"]+)"[^>]* family="([^"]+)"[^>]*\/>/gu,
+  )) {
+    const families = fontFamilies.get(match[1]) || new Set()
+    families.add(match[2])
+    fontFamilies.set(match[1], families)
+  }
+  return [...xml.matchAll(
+    /<text\b[^>]*\bfont="([^"]+)"[^>]*>([\s\S]*?)<\/text>/gu,
+  )].map((match) => ({
+    fontFamilies: [...(fontFamilies.get(match[1]) || [])],
+    text: normalizedPdfToken(match[2].replace(/<[^>]+>/gu, '')),
+  }))
+}
+
 function assertOwnerGoldSectionHeadingsPdf(pdfPath, label) {
   const words = pdfWordsWithBoxes(pdfPath)
   const lines = pdfRoleLines(words)
+  const textRuns = pdfTextRunsWithFonts(pdfPath)
+  const lineIdentity = (value) =>
+    String(value)
+      .normalize('NFKC')
+      .replace(/[^\p{L}\p{N}]/gu, '')
   for (const { partHeading, sectionHeading } of ownerGoldSectionPairs) {
     const partLine = uniquePdfLineForExactVisibleText(
       lines,
@@ -8385,13 +8457,23 @@ function assertOwnerGoldSectionHeadingsPdf(pdfPath, label) {
       Math.max(...centers) - Math.min(...centers) <= 1.5,
       `${label} keeps Chinese, digits, and decimal points on one baseline`,
     )
+    const sectionHeadingRuns = textRuns.filter(
+      (run) =>
+        lineIdentity(run.text) === lineIdentity(sectionHeading),
+    )
+    assert.equal(
+      sectionHeadingRuns.length,
+      1,
+      `${label} exposes ${sectionHeading} as one local PDF font run`,
+    )
+    assert.equal(
+      sectionHeadingRuns[0].fontFamilies.some(
+        (family) => /SimSun|Songti|STSong/u.test(family),
+      ),
+      true,
+      `${label} renders all of ${sectionHeading} in one Chinese Song-family run`,
+    )
   }
-  const fonts = execFileSync('pdffonts', [pdfPath], { encoding: 'utf8' })
-  assert.match(
-    fonts,
-    /SimSun|Songti|STSong/u,
-    `${label} embeds one Chinese Song-family face`,
-  )
 }
 
 function exactPdfTokens(value) {

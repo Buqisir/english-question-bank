@@ -1,8 +1,11 @@
 #!/usr/bin/env node
 
 import assert from 'node:assert/strict'
+import { readFileSync } from 'node:fs'
+import path from 'node:path'
 import manifestV1 from '../standards/paper-canonical/manifest-v1.json' with { type: 'json' }
 import manifestV13 from '../standards/paper-canonical/manifest-v13.json' with { type: 'json' }
+import manifestV30 from '../standards/paper-canonical/manifest-v30.json' with { type: 'json' }
 import applicationWritingRhythmV3Conformance from '../test-fixtures/paper-canonical/application-writing-rhythm-v3-conformance.json' with { type: 'json' }
 import clozeRhythmV2Conformance from '../test-fixtures/paper-canonical/cloze-rhythm-v2-conformance.json' with { type: 'json' }
 import continuationWritingRhythmV3Conformance from '../test-fixtures/paper-canonical/continuation-writing-rhythm-v3-conformance.json' with { type: 'json' }
@@ -16,9 +19,15 @@ import { consumerContractRefs } from '../shared/paper-canonical/consumers.mjs'
 import { resolveGrammarFillPublicGeometryFixture } from '../shared/paper-canonical/grammarFillPublicGeometryFixtures.mjs'
 import { validateGrammarFillPromptProvision } from '../shared/paper-canonical/grammarFillPromptContract.mjs'
 import { projectCanonicalPaper } from '../shared/paper-canonical/projector.mjs'
+import {
+  sectionHeadingContract,
+  sectionHeadingRuntime,
+  sectionHeadingRuntimeFromContract,
+} from '../shared/paper-canonical/sectionHeadingContract.mjs'
 import { digestJson, sha256 } from '../shared/paper-canonical/stable.mjs'
 import { makeReadyCanonicalFixture } from '../test-fixtures/paper-canonical/foundationFixture.mjs'
 
+const repositoryRoot = path.resolve(import.meta.dirname, '..')
 const readyFixture = makeReadyCanonicalFixture()
 const source = readyFixture.source
 const profileInstructionEvidenceDocuments =
@@ -58,6 +67,75 @@ assert.equal(first.artifacts.canonicalPaper.paperPlan.completeness.status, 'comp
 assert.equal(first.artifacts.canonicalPaper.questionGroups.length, 9)
 
 const closure = resolveCanonicalAuthority(canonicalAuthorityRef).closure
+assert.deepEqual(
+  sectionHeadingContract,
+  closure.artifacts['renderer-typography'].sectionHeadingContract,
+  'the runtime adapter consumes the registered current typography authority leaf',
+)
+assert.deepEqual(
+  sectionHeadingRuntime,
+  {
+    screen: {
+      fontStack: '"SimSun", "Songti SC", "STSong", serif',
+      partHeadingIndentEm: 0,
+      sectionHeadingIndentEm: 0,
+      groupInstructionFirstLineIndentEm: 2,
+      passageFirstLineIndentEm: 2,
+      passageContinuationIndentEm: 0,
+      fontSizePx: 14,
+      lineHeightPx: 24,
+    },
+    printPdf: {
+      fontStack: '"SimSun", "Songti SC", "STSong", serif',
+      partHeadingIndentEm: 0,
+      sectionHeadingIndentEm: 0,
+      groupInstructionFirstLineIndentEm: 2,
+      passageFirstLineIndentEm: 2,
+      passageContinuationIndentEm: 0,
+      fontSizePt: 10.5,
+      lineHeightPt: 18,
+    },
+  },
+  'the shared adapter projects the versioned owner-gold contract for every surface',
+)
+const poisonedSectionHeadingContract = structuredClone(sectionHeadingContract)
+poisonedSectionHeadingContract.horizontalAnchors.sectionHeadingIndentEm = 1
+poisonedSectionHeadingContract.typography.fontStack = '"Poisoned Song"'
+poisonedSectionHeadingContract.typography.fontSizePt = 12
+assert.deepEqual(
+  sectionHeadingRuntimeFromContract(poisonedSectionHeadingContract),
+  {
+    screen: {
+      ...sectionHeadingRuntime.screen,
+      fontStack: '"Poisoned Song"',
+      sectionHeadingIndentEm: 1,
+      fontSizePx: 16,
+    },
+    printPdf: {
+      ...sectionHeadingRuntime.printPdf,
+      fontStack: '"Poisoned Song"',
+      sectionHeadingIndentEm: 1,
+      fontSizePt: 12,
+    },
+  },
+  'authority-leaf poison changes the shared Screen/Print/PDF runtime projection',
+)
+for (const evidence of sectionHeadingContract.evidence) {
+  const evidenceBytes = readFileSync(path.join(repositoryRoot, evidence.path))
+  assert.equal(
+    sha256(evidenceBytes),
+    evidence.sha256,
+    `${evidence.role} owner-gold evidence is byte-bound to its registered path`,
+  )
+  const poisonedEvidenceBytes = new Uint8Array(evidenceBytes.length + 1)
+  poisonedEvidenceBytes.set(evidenceBytes)
+  poisonedEvidenceBytes[evidenceBytes.length] = 0
+  assert.notEqual(
+    sha256(poisonedEvidenceBytes),
+    evidence.sha256,
+    `${evidence.role} owner-gold evidence rejects a one-byte poison`,
+  )
+}
 const applicationWritingRhythmV2 =
   closure.artifacts['renderer-application-writing-rhythm']
 assert.deepEqual(
@@ -531,6 +609,57 @@ const legacyV1Ledger = validateExactTransformationRecords([{
 }], first.artifacts.sourceCapture, legacyClosure)
 assert.equal(legacyV1Ledger.diagnostics.length, 0)
 assert.deepEqual(legacyV1Ledger.records.map((record) => record.recordId), ['record:legacy-exact'])
+const manifestV30AuthorityRef = {
+  manifestId: manifestV30.manifestId,
+  manifestVersion: manifestV30.version,
+  manifestDigest: digestJson(manifestV30),
+}
+const manifestV30Closure =
+  resolveCanonicalAuthority(manifestV30AuthorityRef).closure
+const legacyTypographyValue = {
+  nodeId: 'content-node:legacy-visible-typography',
+  text: '这是（中文）说明。',
+}
+const legacyTypographyCapture = {
+  sourceSpans: [{
+    sourceSpanId: 'span:legacy-visible-typography',
+  }],
+  observations: [{
+    observationId: 'observation:legacy-visible-typography',
+    sourceSpanId: 'span:legacy-visible-typography',
+    kind: 'canonical_visible_typography_source',
+    value: legacyTypographyValue,
+  }],
+}
+const legacyTypographyLedger = validateExactTransformationRecords([{
+  recordId: 'record:legacy-visible-typography',
+  sequence: 1,
+  ruleId: 'canonical-visible-typography',
+  ruleVersion: '1',
+  target: {
+    identity: legacyTypographyValue.nodeId,
+    path: 'content.text',
+  },
+  operation: 'canonical_visible_typography',
+  inputSourceSpanIds: ['span:legacy-visible-typography'],
+  before: legacyTypographyValue.text,
+  after: '这是(中文)说明。',
+  certainty: 'exact',
+  preconditions: {
+    sourceObservationIds: ['observation:legacy-visible-typography'],
+    sourceValueDigests: [digestJson(legacyTypographyValue)],
+  },
+  outputDigest: digestJson('这是(中文)说明。'),
+}], legacyTypographyCapture, manifestV30Closure)
+assert.equal(
+  legacyTypographyLedger.diagnostics.length,
+  0,
+  'immutable Manifest v30 reloads its registered v1 visible typography bytes',
+)
+assert.deepEqual(
+  legacyTypographyLedger.records.map((record) => record.recordId),
+  ['record:legacy-visible-typography'],
+)
 assert.deepEqual(
   ['nck1', 'zhejiang-legacy', 'national-legacy'].map((profileId) => {
     const slots = slotsForProfile(closure.profiles.get(profileId))

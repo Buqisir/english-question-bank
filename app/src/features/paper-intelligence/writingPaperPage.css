@@ -65,6 +65,7 @@
    body). Uses the heading (Hei) stack, not the body serif stack. */
 .pi-writing-part {
   margin: 0;
+  margin-left: var(--ps-part-heading-indent);
   font-family: var(--ps-font-stack-writing-part);
   font-size: var(--ps-font-size);
   font-weight: 700;
@@ -74,8 +75,10 @@
    stack (inherited from .pi-writing-page). */
 .pi-writing-section {
   margin: 0;
-  font-family: var(--ps-font-stack-zh);
-  font-size: var(--ps-font-size);
+  margin-left: var(--ps-section-heading-indent);
+  font-family: var(--ps-section-heading-font-stack);
+  font-size: var(--ps-section-heading-font-size);
+  line-height: var(--ps-section-heading-line-height);
   font-weight: 400;
   white-space: nowrap;
 }
@@ -84,7 +87,7 @@
 .pi-writing-instruction {
   margin: 0;
   white-space: pre-line;
-  text-indent: 2em;
+  text-indent: var(--ps-group-instruction-indent);
 }
 
 .pi-writing-passage {

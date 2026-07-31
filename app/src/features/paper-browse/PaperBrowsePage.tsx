@@ -73,6 +73,9 @@ import {
   grammarFillRhythm,
 } from '../../../../shared/paper-canonical/grammarFillRhythm.mjs'
 import {
+  sectionHeadingRuntime,
+} from '../../../../shared/paper-canonical/sectionHeadingContract.mjs'
+import {
   resolveGrammarFillPublicGeometryFixture,
 } from '../../../../shared/paper-canonical/grammarFillPublicGeometryFixtures.mjs'
 import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
@@ -396,6 +399,18 @@ const paperBrowseContentStyle: PaperBrowseContentStyle = {
   '--ps-font-stack-heading': paperSurfaceTokens.paperFontStackHeading,
   '--ps-font-size': paperSurfaceTokens.paperFontSizePx,
   '--ps-line-height': paperSurfaceTokens.paperLineHeight,
+  '--ps-section-heading-font-stack':
+    sectionHeadingRuntime.screen.fontStack,
+  '--ps-section-heading-font-size':
+    `${sectionHeadingRuntime.screen.fontSizePx}px`,
+  '--ps-section-heading-line-height':
+    `${sectionHeadingRuntime.screen.lineHeightPx}px`,
+  '--ps-part-heading-indent':
+    `${sectionHeadingRuntime.screen.partHeadingIndentEm}em`,
+  '--ps-section-heading-indent':
+    `${sectionHeadingRuntime.screen.sectionHeadingIndentEm}em`,
+  '--ps-group-instruction-indent':
+    `${sectionHeadingRuntime.screen.groupInstructionFirstLineIndentEm}em`,
   '--ps-seven-merged-instruction-margin-bottom':
     `${sevenChoicesRhythm.visibleGeometryAdjustments.screen.mergedInstructionMarginBottomPx}px`,
   '--ps-seven-following-section-margin-top-adjustment':
@@ -416,7 +431,8 @@ const paperBrowseContentStyle: PaperBrowseContentStyle = {
     `${grammarFillRhythm.rendererMapping.screen.writingCardMarginTopPx.plain}px`,
   '--ps-grammar-fill-writing-margin-lecture':
     `${grammarFillRhythm.rendererMapping.screen.writingCardMarginTopPx.lecture}px`,
-  '--ps-passage-indent': paperSurfaceTokens.passageIndent,
+  '--ps-passage-indent':
+    `${sectionHeadingRuntime.screen.passageFirstLineIndentEm}em`,
   '--ps-page-margin-x': paperSurfaceTokens.pageMarginX,
   '--ps-page-margin-top': paperSurfaceTokens.pageMarginTop,
 }

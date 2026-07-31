@@ -33,7 +33,8 @@
  * heading-fidelity cut (刀⑤ SW-B 销账, docs/cuts/heading-fidelity/plan.md):
  * `.section-header` 拆 part/section 两态 (headingKind.mjs 单源判定,
  * Screen 与 Print/PDF 共用) — 10.5pt 一律不放大, 部标题黑体加粗顶格 /
- * 节标题宋体常规缩进 2 字符; h1 卷名 → 20pt (标准唯一放大项).
+ * 节标题宋体常规并按 Owner-gold 与部标题共用 body-left;
+ * h1 卷名 → 20pt (标准唯一放大项).
  */
 
 import path from 'node:path'
@@ -53,6 +54,7 @@ import {
 import { sevenChoicesRhythm } from '../shared/paper-canonical/sevenChoicesRhythm.mjs'
 import { clozeRhythm } from '../shared/paper-canonical/clozeRhythm.mjs'
 import { grammarFillRhythm } from '../shared/paper-canonical/grammarFillRhythm.mjs'
+import { sectionHeadingRuntime } from '../shared/paper-canonical/sectionHeadingContract.mjs'
 import { applicationWritingRhythm } from '../shared/paper-canonical/applicationWritingRhythm.mjs'
 import { continuationWritingRhythm } from '../shared/paper-canonical/continuationWritingRhythm.mjs'
 import {
@@ -1860,10 +1862,12 @@ export function buildPrintHtml({
 body {
   font-family: ${paperSurfaceTokens.paperFontStack};
   font-size: 10.5pt;
-  /* standard §3: line-height is a FIXED 18pt baseline — same
-     paperLineHeight token the screen PaperSurface / writing page consume
-     (Chunk A), ≈1.714 at 10.5pt body text. */
-  line-height: ${paperSurfaceTokens.paperLineHeight};
+  /* standard §3: the shared Owner-gold runtime fixes the Print/PDF
+     baseline at 18pt for 10.5pt body and section-heading text. */
+  line-height: ${
+    sectionHeadingRuntime.printPdf.lineHeightPt
+    / sectionHeadingRuntime.printPdf.fontSizePt
+  };
   color: #000;
   margin: 0;
   padding: 0;
@@ -1893,21 +1897,21 @@ body {
    两态拆分 (headingKind.mjs 单源判定) — 层级靠字重与缩进区分, 两态一律
    10.5pt, 不放大字号 (12pt 旧值退场). */
 .section-header {
-  font-size: 10.5pt;
+  font-size: ${sectionHeadingRuntime.printPdf.fontSizePt}pt;
   margin: 1.2em 0 0.6em;
 }
 
 .section-header--part {
   font-family: ${paperSurfaceTokens.paperFontStackHeading};
   font-weight: bold;
-  text-indent: 0;
+  text-indent: ${sectionHeadingRuntime.printPdf.partHeadingIndentEm}em;
   padding-left: 0;
 }
 
 .section-header--section {
-  font-family: ${paperSurfaceTokens.paperFontStackZh};
+  font-family: ${sectionHeadingRuntime.printPdf.fontStack};
   font-weight: normal;
-  text-indent: 0;
+  text-indent: ${sectionHeadingRuntime.printPdf.sectionHeadingIndentEm}em;
   padding-left: 0;
   white-space: nowrap;
 }
@@ -2033,12 +2037,12 @@ body {
 
 .passage {
   margin: 0.5em 0;
-  text-indent: 2em;
+  text-indent: ${sectionHeadingRuntime.printPdf.passageFirstLineIndentEm}em;
 }
 
 .passage p {
   margin: 0 0 0.3em;
-  text-indent: 2em;
+  text-indent: ${sectionHeadingRuntime.printPdf.passageFirstLineIndentEm}em;
 }
 
 .question-group[data-canonical-group-type="sevenChoices"] .passage {
@@ -2196,7 +2200,7 @@ body {
 }
 
 .canonical-reading-body {
-  text-indent: 2em;
+  text-indent: ${sectionHeadingRuntime.printPdf.passageFirstLineIndentEm}em;
 }
 
 .canonical-reading-subtitle,
@@ -2284,17 +2288,23 @@ body {
 }
 
 .reading-meta-instruction {
-  margin: -7.03125pt 0 6.75pt;
+  margin: -5.4pt 0 6.75pt;
   line-height: ${paperSurfaceTokens.paperLineHeight};
-  text-indent: 2em;
+  text-indent: ${sectionHeadingRuntime.printPdf.groupInstructionFirstLineIndentEm}em;
 }
 
 .reading-meta-instruction[data-canonical-seven-choices-rhythm-role="meta_instruction"] {
   margin: -6.3pt 0 4.5pt;
 }
 
+@media print {
+  .reading-meta-instruction[data-canonical-seven-choices-rhythm-role="meta_instruction"] {
+    padding-top: 1.5pt;
+  }
+}
+
 .section-header[data-canonical-reading-following-for] {
-  margin-top: 17.25pt;
+  margin-top: 16.875pt;
 }
 
 .section-header[data-canonical-seven-choices-following-for] {
@@ -2514,7 +2524,10 @@ ${grammarFillGeometryFixtureCss}
 
 [data-canonical-writing-chrome-role="section_heading"] {
   margin: 0 0 9pt;
-  font-family: ${paperSurfaceTokens.paperFontStackZh};
+  margin-left: ${sectionHeadingRuntime.printPdf.sectionHeadingIndentEm}em;
+  font-family: ${sectionHeadingRuntime.printPdf.fontStack};
+  font-size: ${sectionHeadingRuntime.printPdf.fontSizePt}pt;
+  line-height: ${sectionHeadingRuntime.printPdf.lineHeightPt}pt;
   font-weight: 400;
   white-space: nowrap;
 }
@@ -2522,7 +2535,7 @@ ${grammarFillGeometryFixtureCss}
 [data-canonical-writing-chrome-role="instruction"] {
   margin: 0 0 9pt;
   white-space: pre-line;
-  text-indent: 2em;
+  text-indent: ${sectionHeadingRuntime.printPdf.groupInstructionFirstLineIndentEm}em;
 }
 
 .canonical-continuation-response {

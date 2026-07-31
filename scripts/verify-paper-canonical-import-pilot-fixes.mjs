@@ -560,6 +560,55 @@ const projectedBrowseAsset = projectAssetBlocksToCanonicalConsumption(
   browseAsset,
   browseConsumption,
 )
+const rawOwnerPoisonAsset = structuredClone(browseAsset)
+for (const [index, block] of rawOwnerPoisonAsset.content.blocks.entries()) {
+  if (block.type === 'partHeading') block.partId = `raw-part-${index}`
+  if (block.type === 'sectionHeading') block.sectionId = `raw-section-${index}`
+}
+const rawOwnerMissingAsset = structuredClone(browseAsset)
+rawOwnerMissingAsset.content.blocks =
+  rawOwnerMissingAsset.content.blocks.filter(
+    (block) =>
+      block.type !== 'partHeading' && block.type !== 'sectionHeading',
+  )
+const rawOwnerReorderedAsset = structuredClone(browseAsset)
+const rawOwnerHeadings = rawOwnerReorderedAsset.content.blocks.filter(
+  (block) =>
+    block.type === 'partHeading' || block.type === 'sectionHeading',
+).reverse()
+let rawOwnerHeadingIndex = 0
+rawOwnerReorderedAsset.content.blocks =
+  rawOwnerReorderedAsset.content.blocks.map((block) =>
+    block.type === 'partHeading' || block.type === 'sectionHeading'
+      ? rawOwnerHeadings[rawOwnerHeadingIndex++]
+      : block)
+const expectedProfileHeadingIdentities =
+  visibleStructureOracle.nodes.flatMap((node) =>
+    node.kind === 'part'
+      ? [{ kind: 'part', id: node.partId }]
+      : node.kind === 'section'
+        ? [{ kind: 'section', id: node.sectionId }]
+        : [])
+for (const [caseId, attackedAsset] of [
+  ['raw-heading-id-drift', rawOwnerPoisonAsset],
+  ['raw-heading-missing', rawOwnerMissingAsset],
+  ['raw-heading-reordered', rawOwnerReorderedAsset],
+]) {
+  const attackedProjection = projectAssetBlocksToCanonicalConsumption(
+    attackedAsset,
+    browseConsumption,
+  )
+  assert.deepEqual(
+    attackedProjection.content.blocks.flatMap((block) =>
+      block.type === 'partHeading'
+        ? [{ kind: 'part', id: block.partId }]
+        : block.type === 'sectionHeading'
+          ? [{ kind: 'section', id: block.sectionId }]
+          : []),
+    expectedProfileHeadingIdentities,
+    `PaperBrowse public projection keeps Profile node ownership for ${caseId}`,
+  )
+}
 assert.deepEqual(
   projectedBrowseAsset.content.blocks
     .filter((block) =>
@@ -657,6 +706,16 @@ synchronizedSectionHeading.text = '同步改写且重算摘要的第二节'
 synchronizedSectionDriftConsumption.visibleStructureDigest = digestJson(
   synchronizedSectionDriftConsumption.visibleStructure,
 )
+const staleProfileDowngradeConsumption = structuredClone(browseConsumption)
+const staleNck1Profile = JSON.parse(readFileSync(path.join(
+  repositoryRoot,
+  'standards/paper-canonical/profiles/nck1-v9.json',
+), 'utf8'))
+staleProfileDowngradeConsumption.profileRef = {
+  profileId: staleNck1Profile.profileId,
+  profileVersion: staleNck1Profile.version,
+  profileDigest: digestJson(staleNck1Profile),
+}
 for (const [caseId, poisonedConsumption] of [
   ['unknown-node', unknownVisibleNodeConsumption],
   ['reordered-heading', reorderedVisibleNodeConsumption],
@@ -665,6 +724,7 @@ for (const [caseId, poisonedConsumption] of [
   ['missing-seven-instruction', missingSevenInstructionConsumption],
   ['wrong-heading-text', wrongHeadingTextConsumption],
   ['synchronized-section-drift', synchronizedSectionDriftConsumption],
+  ['stale-profile-downgrade', staleProfileDowngradeConsumption],
 ]) {
   assert.throws(
     () =>

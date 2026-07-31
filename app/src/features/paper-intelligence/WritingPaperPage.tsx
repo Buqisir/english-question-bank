@@ -9,6 +9,7 @@ import { RetainedModelAnswer } from '../paper-browse/RetainedWritingLecture.tsx'
 import { paperSurfaceTokens } from '../../../../shared/papersurface/tokens.mjs'
 import { applicationWritingRhythm } from '../../../../shared/paper-canonical/applicationWritingRhythm.mjs'
 import { continuationWritingRhythm } from '../../../../shared/paper-canonical/continuationWritingRhythm.mjs'
+import { sectionHeadingRuntime } from '../../../../shared/paper-canonical/sectionHeadingContract.mjs'
 import './writingPaperPage.css'
 
 // Renders the writing section's A4 page chrome (part/section headings, 注意,
@@ -40,6 +41,18 @@ const writingPageTokenStyle: WritingPageStyle = {
     paperSurfaceTokens.paperFontStackWritingPart,
   '--ps-font-size': paperSurfaceTokens.paperFontSizePx,
   '--ps-line-height': paperSurfaceTokens.paperLineHeight,
+  '--ps-section-heading-font-stack':
+    sectionHeadingRuntime.screen.fontStack,
+  '--ps-section-heading-font-size':
+    `${sectionHeadingRuntime.screen.fontSizePx}px`,
+  '--ps-section-heading-line-height':
+    `${sectionHeadingRuntime.screen.lineHeightPx}px`,
+  '--ps-part-heading-indent':
+    `${sectionHeadingRuntime.screen.partHeadingIndentEm}em`,
+  '--ps-section-heading-indent':
+    `${sectionHeadingRuntime.screen.sectionHeadingIndentEm}em`,
+  '--ps-group-instruction-indent':
+    `${sectionHeadingRuntime.screen.groupInstructionFirstLineIndentEm}em`,
   '--ps-page-margin-x': paperSurfaceTokens.pageMarginX,
   '--ps-page-margin-top': paperSurfaceTokens.pageMarginTop,
 }

@@ -1956,7 +1956,10 @@ export function validateExactTransformationRecords(records, capture, closure) {
       && record.target.path === 'content.text'
       && record.before === observations[0]?.value?.text
       && record.after !== record.before
-      && record.after === replayCanonicalVisibleTypography(record.before)
+      && record.after === replayCanonicalVisibleTypography(
+        record.before,
+        record.ruleVersion,
+      )
     )
     const exactProof = expectedPreconditions && stableStringify(record.preconditions) === stableStringify(expectedPreconditions) && stableStringify(record.inputSourceSpanIds) === stableStringify(expectedSpanIds) && (sourceIdentityProof || uniqueJoinProof || profileInstructionCorrectionProof || visibleTypographyProof)
     if (recordIds.has(record.recordId) || !Number.isInteger(record.sequence) || record.sequence <= previousSequence || !Array.isArray(record.inputSourceSpanIds) || record.inputSourceSpanIds.length === 0 || record.inputSourceSpanIds.some((id) => !sourceSpanIds.has(id)) || record.outputDigest !== digestJson(record.after) || !exactProof) {

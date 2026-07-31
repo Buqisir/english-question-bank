@@ -74,39 +74,13 @@ export function projectAssetBlocksToCanonicalConsumption(
 
   if (Array.isArray(consumption.visibleStructure)) {
     const projectedBlocks: PaperContentBlock[] = []
-    const sourcePartIds: string[] = []
-    const sourceSectionIds: string[] = []
     const pageBreakAfterGroupIds = new Set<string>()
-    let sourcePartId: string | null = null
-    let sourceSectionId: string | null = null
-    for (const block of asset.content.blocks) {
-      if (block.type === 'partHeading') {
-        sourcePartId = block.partId
-        sourceSectionId = null
-      } else if (block.type === 'sectionHeading') {
-        sourceSectionId = block.sectionId
-      } else if (
-        block.type === 'group'
-        && consumedGroupIds.has(block.groupId)
-      ) {
-        if (
-          sourcePartId
-          && sourcePartIds.at(-1) !== sourcePartId
-        ) sourcePartIds.push(sourcePartId)
-        if (
-          sourceSectionId
-          && sourceSectionIds.at(-1) !== sourceSectionId
-        ) sourceSectionIds.push(sourceSectionId)
-      }
-    }
     for (const [index, block] of asset.content.blocks.entries()) {
       if (
         block.type === 'group'
         && asset.content.blocks[index + 1]?.type === 'pageBreakHint'
       ) pageBreakAfterGroupIds.add(block.groupId)
     }
-    let partIndex = 0
-    let sectionIndex = 0
     let pendingPart: {
       partId: string
       instructionId: string
@@ -136,7 +110,7 @@ export function projectAssetBlocksToCanonicalConsumption(
         ) {
           projectedBlocks.push({
             type: 'partHeading',
-            partId: sourcePartIds[partIndex++] || currentPart.partId,
+            partId: currentPart.partId,
             text: node.text,
           })
           pendingPart = null
@@ -149,8 +123,7 @@ export function projectAssetBlocksToCanonicalConsumption(
         ) {
           projectedBlocks.push({
             type: 'sectionHeading',
-            sectionId:
-              sourceSectionIds[sectionIndex++] || currentSection.sectionId,
+            sectionId: currentSection.sectionId,
             text: node.text,
           })
           pendingSection = null

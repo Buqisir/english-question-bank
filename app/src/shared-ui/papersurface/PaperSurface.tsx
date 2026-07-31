@@ -41,6 +41,9 @@ import {
 import {
   grammarFillRhythm,
 } from '../../../../shared/paper-canonical/grammarFillRhythm.mjs'
+import {
+  sectionHeadingRuntime,
+} from '../../../../shared/paper-canonical/sectionHeadingContract.mjs'
 import { renderCanonicalPaperSentenceContent } from './CanonicalPaperSentenceContent.tsx'
 import {
   renderLegacyPaperSentenceContent,
@@ -87,7 +90,8 @@ const paperSurfaceTokenStyle: PaperSurfaceStyle = {
     `${grammarFillRhythm.rendererMapping.screen.baselineStepPx}px`,
   '--ps-grammar-fill-prompt-gap':
     `${grammarFillRhythm.promptGeometry.gapEm}em`,
-  '--ps-passage-indent': paperSurfaceTokens.passageIndent,
+  '--ps-passage-indent':
+    `${sectionHeadingRuntime.screen.passageFirstLineIndentEm}em`,
   '--ps-options-grid-columns': paperSurfaceTokens.optionsGridColumns,
   '--ps-options-grid-gap-x': paperSurfaceTokens.optionsGridGapX,
   '--ps-paper-blank-width': paperSurfaceTokens.paperBlankWidth,

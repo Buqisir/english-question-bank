@@ -1,3 +1,4 @@
+import manifestV31 from '../../standards/paper-canonical/manifest-v31.json' with { type: 'json' }
 import nck1V9 from '../../standards/paper-canonical/profiles/nck1-v9.json' with { type: 'json' }
 import nck1V10 from '../../standards/paper-canonical/profiles/nck1-v10.json' with { type: 'json' }
 import nationalLegacyV3 from '../../standards/paper-canonical/profiles/national-legacy-v3.json' with { type: 'json' }
@@ -15,6 +16,22 @@ const registeredProfiles = new Map([
   [
     `${zhejiangLegacyV7.profileId}@${zhejiangLegacyV7.version}`,
     zhejiangLegacyV7,
+  ],
+])
+const manifestV31Profiles = new Map(
+  [nck1V10, nationalLegacyV3, zhejiangLegacyV7].map((profile) => [
+    profile.profileId,
+    {
+      profileId: profile.profileId,
+      profileVersion: profile.version,
+      profileDigest: digestJson(profile),
+    },
+  ]),
+)
+const registeredManifestProfiles = new Map([
+  [
+    `${manifestV31.manifestId}@${manifestV31.version}@${digestJson(manifestV31)}`,
+    manifestV31Profiles,
   ],
 ])
 
@@ -348,6 +365,18 @@ export function assertCanonicalConsumptionVisibleStructure(consumption) {
         'profileDigest',
       ])
     ) reject('the registered Profile reference is unavailable')
+    const authorityProfiles = registeredManifestProfiles.get(
+      `${consumption.authorityRef?.manifestId}@${consumption.authorityRef?.manifestVersion}@${consumption.authorityRef?.manifestDigest}`,
+    )
+    const authorityProfileRef = authorityProfiles?.get(profileRef.profileId)
+    if (
+      !authorityProfileRef
+      || digestJson(profileRef) !== digestJson(authorityProfileRef)
+    ) {
+      reject(
+        'the registered Profile reference is outside the declared Manifest closure',
+      )
+    }
     const profile = registeredProfiles.get(
       `${profileRef.profileId}@${profileRef.profileVersion}`,
     )
