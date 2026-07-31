@@ -34,6 +34,9 @@ import {
   makeReviewedReadingSourceCapture,
 } from '../test-fixtures/paper-canonical/readingReferenceFixture.mjs'
 import {
+  makeReadyCanonicalFixture,
+} from '../test-fixtures/paper-canonical/foundationFixture.mjs'
+import {
   projectAssetBlocksToCanonicalConsumption,
 } from '../app/src/features/paper-browse/paperBrowseCanonicalAssetProjection.ts'
 
@@ -60,6 +63,41 @@ function sha256File(relativePath) {
 
 function bytes(fileName) {
   return readFileSync(path.join(packageDir, fileName))
+}
+
+function sourceBoundTypographyRequest(oracleCase) {
+  const fixture = makeReadyCanonicalFixture()
+  const binding = oracleCase.sourceBinding
+  const group = fixture.source.groups.find(
+    (candidate) => candidate.slotId === binding.slotId,
+  )
+  const inline = group?.content?.blocks
+    .flatMap((block) => block.inlines || [])
+    .find((candidate) => candidate.nodeId === binding.nodeId)
+  assert.ok(inline, `source fixture carries ${binding.nodeId}`)
+  inline.text = oracleCase.before
+  for (let pass = 0; pass < 3; pass += 1) {
+    const sourceBytes = new TextEncoder().encode(JSON.stringify(fixture.source))
+    for (const observation of fixture.source.observations) {
+      if (
+        observation.documentInputKey === binding.documentInputKey
+        && Number.isInteger(observation.span?.start)
+        && Number.isInteger(observation.span?.end)
+      ) {
+        observation.span.end = sourceBytes.byteLength
+      }
+    }
+  }
+  const sourceAsset = new TextEncoder().encode(JSON.stringify(fixture.source))
+  const sourceDocument = fixture.request.evidence.documents.find(
+    (document) => document.inputKey === binding.documentInputKey,
+  )
+  assert.ok(sourceDocument, `request carries ${binding.documentInputKey}`)
+  sourceDocument.bytes = sourceAsset
+  return {
+    request: fixture.request,
+    sourceAsset,
+  }
 }
 
 function buildPilotRequest(overrides = {}) {
@@ -387,6 +425,11 @@ assert.equal(
   'ditch (沟).',
   'an English-token-adjacent Chinese gloss uses canonical half-width parentheses',
 )
+assert.equal(
+  canonicalizeVisibleEnglishTypography('ditch(沟) .'),
+  'ditch(沟).',
+  'an English-token-adjacent ASCII gloss removes source-layout punctuation spacing',
+)
 for (const binding of visibleTypographyOracle.immutableSourceBindings) {
   assert.equal(
     sha256File(binding.path),
@@ -408,6 +451,115 @@ for (const oracleCase of visibleTypographyOracle.cases) {
     `the independent scanner matches the fixed ${oracleCase.caseId} expectation`,
   )
 }
+const sourceBoundTypographyCase = visibleTypographyOracle.cases.find(
+  (oracleCase) =>
+    oracleCase.caseId === 'english-token-adjacent-ascii-gloss-punctuation',
+)
+assert.ok(
+  sourceBoundTypographyCase?.sourceBinding,
+  'the exact v2 domain edge has one fixed source binding',
+)
+const sourceBoundTypography = sourceBoundTypographyRequest(
+  sourceBoundTypographyCase,
+)
+const sourceBoundTypographyCompilation = compileCanonicalPaper(
+  sourceBoundTypography.request,
+)
+assert.equal(
+  sourceBoundTypographyCompilation.disposition,
+  'ready',
+  JSON.stringify(
+    sourceBoundTypographyCompilation.artifacts.normalizationReport.diagnostics,
+    null,
+    2,
+  ),
+)
+const sourceBoundTypographyRecord =
+  sourceBoundTypographyCompilation.artifacts.normalizationReport
+    .transformationRecords.find(
+      (record) =>
+        record.operation === 'canonical_visible_typography'
+        && record.before === sourceBoundTypographyCase.before,
+    )
+assert.deepEqual(
+  {
+    before: sourceBoundTypographyRecord?.before,
+    after: sourceBoundTypographyRecord?.after,
+    outputDigest: sourceBoundTypographyRecord?.outputDigest,
+  },
+  {
+    before: sourceBoundTypographyCase.before,
+    after: sourceBoundTypographyCase.after,
+    outputDigest: sourceBoundTypographyCase.afterDigest,
+  },
+  'the compiler emits the fixed exact-domain Transformation Record',
+)
+const sourceBoundObservation =
+  sourceBoundTypographyCompilation.artifacts.sourceCapture.observations.find(
+    (observation) =>
+      sourceBoundTypographyRecord?.preconditions.sourceObservationIds.includes(
+        observation.observationId,
+      ),
+  )
+assert.deepEqual(
+  sourceBoundObservation?.value,
+  {
+    nodeId: sourceBoundTypographyCase.sourceBinding.nodeId,
+    text: sourceBoundTypographyCase.before,
+  },
+  'the Transformation Record is bound to the immutable source observation',
+)
+const sourceBoundAdmission = admitCanonicalPaperImport({
+  request: sourceBoundTypography.request,
+  sourceAssetVersion: 1,
+  sourceAsset: sourceBoundTypography.sourceAsset,
+})
+assert.equal(
+  sourceBoundAdmission.ok,
+  true,
+  JSON.stringify(sourceBoundAdmission.diagnostics || [], null, 2),
+)
+const sealedTypographyReportDescriptor =
+  sourceBoundAdmission.sealed.manifest.artifacts.find(
+    (artifact) => artifact.role === 'normalization_report',
+  )
+const sealedTypographyReport = JSON.parse(new TextDecoder().decode(
+  sourceBoundAdmission.sealed.artifacts[
+    sealedTypographyReportDescriptor.relativePath
+  ],
+))
+assert.equal(
+  sealedTypographyReport.transformationRecords.some(
+      (record) =>
+        record.before === sourceBoundTypographyCase.before
+        && record.after === sourceBoundTypographyCase.after
+        && record.outputDigest === sourceBoundTypographyCase.afterDigest,
+    ),
+  true,
+  'the immutable publication preserves the exact-domain Transformation Record',
+)
+const synchronizedErrorRecords = structuredClone(
+  sourceBoundTypographyCompilation.artifacts.normalizationReport
+    .transformationRecords,
+)
+const synchronizedErrorRecord = synchronizedErrorRecords.find(
+  (record) => record.recordId === sourceBoundTypographyRecord.recordId,
+)
+synchronizedErrorRecord.after = synchronizedErrorRecord.before
+synchronizedErrorRecord.outputDigest = digestJson(
+  synchronizedErrorRecord.after,
+)
+assert.equal(
+  validateExactTransformationRecords(
+    synchronizedErrorRecords,
+    sourceBoundTypographyCompilation.artifacts.sourceCapture,
+    resolveCanonicalAuthority(canonicalAuthorityRef).closure,
+  ).diagnostics.some(
+    (diagnostic) => diagnostic.code === 'TRANSFORMATION_CLOSURE_INVALID',
+  ),
+  true,
+  'a synchronized digest-consistent producer error cannot self-prove against independent replay',
+)
 assert.equal(
   readyPilot.artifacts.normalizationReport.transformationRecords.some(
     (record) =>

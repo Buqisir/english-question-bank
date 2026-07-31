@@ -16,6 +16,19 @@
   ],
   "cases": [
     {
+      "caseId": "english-token-adjacent-ascii-gloss-punctuation",
+      "sourceBinding": {
+        "kind": "canonical_fixture_inline",
+        "documentInputKey": "questions",
+        "slotId": "writing.continuation",
+        "nodeId": "text:group:writing.continuation:material"
+      },
+      "before": "ditch(沟) .",
+      "after": "ditch(沟).",
+      "beforeDigest": "sha256:3affebabe08dddaa1d55118df5e4393e09d8375798fa6eeb97fa52e535c7105d",
+      "afterDigest": "sha256:1e8000e9aca307b04f3b4676e557dbc1614d4433fcb8e4945adf22978fae7766"
+    },
+    {
       "caseId": "english-adjacent-fullwidth-gloss",
       "before": "ditch （沟）.",
       "after": "ditch (沟).",

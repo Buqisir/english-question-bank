@@ -17,7 +17,7 @@ export function canonicalizeVisibleEnglishTypography(value) {
     )
     .replace(
       new RegExp(
-        `(${englishToken}\\s+\\(${chineseGloss}\\))\\s+([.,;:!?])`,
+        `(${englishToken}\\s*\\(${chineseGloss}\\))\\s+([.,;:!?])`,
         'gu',
       ),
       '$1$2',
