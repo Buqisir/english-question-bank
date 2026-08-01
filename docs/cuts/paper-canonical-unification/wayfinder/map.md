@@ -1,7 +1,7 @@
 # EQB 试卷 Canonical 大一统 — Wayfinder Map
 
 Status: done
-Next on PASS: implementation
+Next on PASS: owner-approval
 Terminal: no
 Phase receipt: `docs/cuts/paper-canonical-unification/phase-transition.md`
 
@@ -66,6 +66,16 @@ Phase receipt: `docs/cuts/paper-canonical-unification/phase-transition.md`
   implementation gates. This route update dispatches neither Ticket 24 nor a
   coordinator; Ticket 24 is the sole implementation frontier after the phase
   receipt binds the committed approval and all four gates pass.
+- Ticket 24 then produced committed exact fail-closed evidence: the approved
+  88-unit pilot measured 199 units after complete immutable source enrollment.
+  Under the guarded measured-replan authority, the owner approved proposal
+  peer `019fbed5-9d38-7f91-883a-42320826c69b` item `item-9` exactly as a
+  79-ticket route with Tickets 25–57, three separate-worktree profile lanes,
+  fixed serial integration order, and the published model routing.
+- The same peer has published replacement Tickets 25–79 and a manifest bound
+  to the unchanged accepted spec. This map is paused at `owner-approval`:
+  ticket-granularity approval is verified, exact manifest-digest approval is
+  pending, implementation dispatch is forbidden, and Ticket 25 has not begun.
 
 ## Decisions so far
 
