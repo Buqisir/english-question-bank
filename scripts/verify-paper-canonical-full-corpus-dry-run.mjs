@@ -37,6 +37,8 @@ const PROTECTED_ROOTS = Object.freeze([
   'scripts/import-pipeline/papers',
   'standards/paper-canonical',
   'shared/paper-canonical',
+  MANIFEST_REL,
+  LEDGER_REL,
 ])
 const EXPECTED_DENOMINATOR = Object.freeze({
   papers: 33,
