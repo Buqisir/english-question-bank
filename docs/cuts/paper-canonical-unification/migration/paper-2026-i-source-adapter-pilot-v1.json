@@ -1,0 +1,446 @@
+{
+  "binding": {
+    "authority": {
+      "manifestDigest": "sha256:b921439c93d8a402a79f127c153339b8d63e1524babf75843e8efa47caf7371b",
+      "manifestId": "paper-canonical",
+      "manifestVersion": "35"
+    },
+    "expectedBranch": "codex/paper-canonical-unification-20260725",
+    "paperId": "paper-2026-i",
+    "sourceEnvelopeRequest": "test-fixtures/paper-import/paper-2026-i-canonical-pilot/canonical-evidence/canonical-import-request-v35.json",
+    "sourceEnvelopeRequestSha256": "baca6e42aadf0894bb0bb0eff1d97ebde3a0b5c943e9896d8375815b4b9577ac",
+    "ticket22Evidence": "docs/cuts/paper-canonical-unification/migration/full-corpus-zero-write-dry-run-v1.json",
+    "ticket22EvidenceSha256": "8f3e142d1c4627ab076bbbb8ff9d9306d2a5fa8580ec4f22bcf77fe4d3b35263",
+    "ticketFixedPoint": "46c3a1717c1fa3b9496b8dc63a04f07dba923c84"
+  },
+  "capacity": {
+    "approved": {
+      "inspectionWorkUnits": 88,
+      "maxDiagnosticClusterPapers": 5,
+      "maxDiagnosticClusterUnits": 328,
+      "paperCount": 1,
+      "riskPoints": 17
+    },
+    "decision": "fail_closed",
+    "observed": {
+      "inspectionWorkUnits": 199,
+      "paperCount": 1,
+      "riskPoints": 0
+    },
+    "reasons": [
+      "inspection_work_units_199_exceed_approved_88"
+    ]
+  },
+  "compile": {
+    "diagnosticCodes": [],
+    "diagnosticCount": 0,
+    "disposition": "ready",
+    "familyCounts": {
+      "application-writing": 1,
+      "cloze": 1,
+      "continuation-writing": 1,
+      "grammar-fill": 1,
+      "reading": 4,
+      "seven-choices": 1
+    },
+    "inactiveSourceClosureCount": 2,
+    "semanticDigest": "sha256:d256d964a6883d211a9e7b7f86d87497fbab3da52ddf4425792e0f0413b10ece",
+    "sourceCapture": {
+      "assertionCount": 65,
+      "captureId": "source-capture:c755b8b5ec34a36f1fe63",
+      "digest": "sha256:c755b8b5ec34a36f1fe635caa23200e5778886d86fcc6cbda97bbff7e450058a",
+      "documentCount": 18,
+      "observationCount": 297,
+      "sourceSpanCount": 297
+    }
+  },
+  "diagnosticShape": {
+    "sourceAdapterPilot": {
+      "diagnosticCodes": [],
+      "disposition": "ready",
+      "familyCounts": {
+        "application-writing": 1,
+        "cloze": 1,
+        "continuation-writing": 1,
+        "grammar-fill": 1,
+        "reading": 4,
+        "seven-choices": 1
+      }
+    },
+    "ticket22": {
+      "diagnosticCodes": [
+        "SOURCE_ADAPTER_UNSUPPORTED"
+      ],
+      "disposition": "unsupported",
+      "familyStatus": "not_derivable_without_registered_source_adapter"
+    }
+  },
+  "evidenceDigest": "sha256:dd9fafe7a03afd8c0719c010a677f5dd0e1a7ffe88970fc1dde93ea716350e6a",
+  "measuredCost": {
+    "components": {
+      "closureDiagnosisCount": 0,
+      "compilerDiagnosticCodeCount": 0,
+      "compilerDiagnosticCount": 0,
+      "compilerSourceSpanRefCount": 0,
+      "immutableDocumentCount": 18,
+      "immutableEvidenceByteLength": 2068661
+    },
+    "inspectionWorkUnits": 199,
+    "model": "ticket-22-frozen-evidence-inspection-units-v1"
+  },
+  "measuredRisk": {
+    "band": "low",
+    "factors": {
+      "compilerDiagnosticCodeCount": 0,
+      "inactiveClosureUnclassified": false,
+      "profileUnproven": false,
+      "sourceAdapterUnavailable": false
+    },
+    "model": "ticket-22-source-closure-risk-points-v1",
+    "riskPoints": 0
+  },
+  "schemaVersion": "paper-canonical-source-adapter-pilot-v1",
+  "sourceEnvelope": {
+    "byteLength": 2068661,
+    "documentCount": 18,
+    "documents": [
+      {
+        "byteLength": 289,
+        "inputKey": "canonical_source_envelope",
+        "mediaType": "application/vnd.eqb.canonical-fixture+json",
+        "originalName": "canonical-source-envelope.json",
+        "path": "test-fixtures/paper-import/paper-2026-i-canonical-pilot/canonical-evidence/01-canonical-source-envelope.json",
+        "roles": [
+          "operator_assertions"
+        ],
+        "sha256": "d61aa40531edfa01faddc0699caaa5f7ac006ff27ffc5b8b6e5728444b64d776"
+      },
+      {
+        "byteLength": 129359,
+        "inputKey": "paper_asset",
+        "mediaType": "application/json",
+        "originalName": "paper-asset.json",
+        "path": "test-fixtures/paper-import/paper-2026-i-canonical-pilot/canonical-evidence/04-paper_asset.json",
+        "roles": [
+          "question_source"
+        ],
+        "sha256": "fe7feb2cc9554b00bbab96a7d4fe5e499513c564c28e6c314e0373e29b2ca7bf"
+      },
+      {
+        "byteLength": 8243,
+        "inputKey": "official_answers",
+        "mediaType": "application/json",
+        "originalName": "answer-key.json",
+        "path": "test-fixtures/paper-import/paper-2026-i-canonical-pilot/canonical-evidence/05-official_answers.json",
+        "roles": [
+          "official_answer_source"
+        ],
+        "sha256": "17502bb7685b83afc8847f3a44f8ac3c68defcb941ae75ba1ff14945c07daaf0"
+      },
+      {
+        "byteLength": 57073,
+        "inputKey": "reading_structure",
+        "mediaType": "application/json",
+        "originalName": "reading-source-capture-v1.json",
+        "path": "test-fixtures/paper-import/paper-2026-i-canonical-pilot/canonical-evidence/07-reading-source-capture.json",
+        "roles": [
+          "structured_source"
+        ],
+        "sha256": "2809b4760d850587598405729fcafb4d77088761cc4a5735aad768acbdd96aec"
+      },
+      {
+        "byteLength": 2361,
+        "inputKey": "grammar_fill_prompt_source_capture",
+        "mediaType": "application/vnd.eqb.grammar-fill-prompt-source-capture+json",
+        "originalName": "grammar-fill-prompt-source-capture.json",
+        "path": "test-fixtures/paper-import/paper-2026-i-canonical-pilot/canonical-evidence/18-grammar-fill-prompt-source-capture.json",
+        "roles": [
+          "structured_source",
+          "source_provenance"
+        ],
+        "sha256": "c20392a1ab530b6a327aa5a3b81b29682f85f7f6e5be48824c3398d814c477e8"
+      },
+      {
+        "byteLength": 86718,
+        "inputKey": "table_visual_proof",
+        "mediaType": "image/png",
+        "originalName": "reading-a-table-1.png",
+        "path": "test-fixtures/paper-import/paper-2026-i-canonical-pilot/canonical-evidence/08-reading-a-table-1.png",
+        "roles": [
+          "source_provenance"
+        ],
+        "sha256": "bd12fcedbb71fb608210ffeaf84864c8aa3d9096a71d955cfd1e5db2aec53b35"
+      },
+      {
+        "byteLength": 6115,
+        "inputKey": "application_writing_capture",
+        "mediaType": "application/vnd.eqb.application-writing-source-capture+json",
+        "originalName": "application-writing-source-capture.json",
+        "path": "test-fixtures/paper-import/paper-2026-i-canonical-pilot/canonical-evidence/21-application-writing-capture-v3.json",
+        "roles": [
+          "structured_source",
+          "source_provenance"
+        ],
+        "sha256": "463c94a1a4238617f4a9eb39d8a02125460de6ff79530803614ddb042de413a1"
+      },
+      {
+        "byteLength": 1305,
+        "inputKey": "application_writing_transcription",
+        "mediaType": "application/vnd.eqb.application-writing-source-transcription+json",
+        "originalName": "application-writing-source-transcription.json",
+        "path": "test-fixtures/paper-import/paper-2026-i-canonical-pilot/canonical-evidence/22-application-writing-transcription-v3.json",
+        "roles": [
+          "structured_source",
+          "source_provenance"
+        ],
+        "sha256": "178521b21056375b288c495acdb0214e43202d66b459ab823b14220c73b078a3"
+      },
+      {
+        "byteLength": 8613,
+        "inputKey": "continuation_writing_capture",
+        "mediaType": "application/vnd.eqb.continuation-writing-source-capture+json",
+        "originalName": "continuation-writing-source-capture.json",
+        "path": "test-fixtures/paper-import/paper-2026-i-canonical-pilot/canonical-evidence/23-continuation-writing-capture-v2.json",
+        "roles": [
+          "structured_source",
+          "source_provenance"
+        ],
+        "sha256": "3f73e4d9ad18fe7e121707f7ae1c17ebac88a315eb43780a474d35020bf3ca17"
+      },
+      {
+        "byteLength": 2287,
+        "inputKey": "continuation_writing_transcription",
+        "mediaType": "application/vnd.eqb.continuation-writing-source-transcription+json",
+        "originalName": "continuation-writing-source-transcription.json",
+        "path": "test-fixtures/paper-import/paper-2026-i-canonical-pilot/canonical-evidence/24-continuation-writing-transcription-v2.json",
+        "roles": [
+          "structured_source",
+          "source_provenance"
+        ],
+        "sha256": "0f8f5fab47de87685da67086f673f485143aa665748c1ce14c3446d835f61149"
+      },
+      {
+        "byteLength": 1209,
+        "inputKey": "continuation_writing_instruction_evidence",
+        "mediaType": "application/vnd.eqb.profile-writing-source-evidence+json",
+        "originalName": "continuation-writing-instruction-evidence.json",
+        "path": "test-fixtures/paper-import/paper-2026-i-canonical-pilot/canonical-evidence/03-continuation_writing_instruction_evidence.json",
+        "roles": [
+          "structured_source",
+          "source_provenance"
+        ],
+        "sha256": "c3b487c4a325ef789456d88535c78045eaf07f0450f0f868e48fb41ca8541109"
+      },
+      {
+        "byteLength": 3972,
+        "inputKey": "source_provenance",
+        "mediaType": "application/json",
+        "originalName": "import-meta.json",
+        "path": "test-fixtures/paper-import/paper-2026-i-canonical-pilot/canonical-evidence/09-source-provenance.json",
+        "roles": [
+          "source_provenance"
+        ],
+        "sha256": "dda79f448a049d9ce6293049b4e1dec51fba35cb683e4e7860f5390ab3d3e900"
+      },
+      {
+        "byteLength": 639812,
+        "inputKey": "original_question_source",
+        "mediaType": "application/pdf",
+        "originalName": "paper.pdf",
+        "path": "test-fixtures/paper-import/paper-2026-i-canonical-pilot/canonical-evidence/02-original-question-source.pdf",
+        "roles": [
+          "question_source",
+          "source_provenance"
+        ],
+        "sha256": "31a87069e6d530afba9123eec0487adf45e52e0b98530af80b62476f169e4d0f"
+      },
+      {
+        "byteLength": 1105941,
+        "inputKey": "listening_answer_source",
+        "mediaType": "application/pdf",
+        "originalName": "answers.pdf",
+        "path": "test-fixtures/paper-import/paper-2026-i-canonical-pilot/canonical-evidence/06-source_answers_pdf.pdf",
+        "roles": [
+          "official_answer_source",
+          "transcript_source",
+          "source_provenance"
+        ],
+        "sha256": "2e4982f8d33e8a8787f270b7cf4fd3cd432fb9dce8d5732876fae149a1c78fc6"
+      },
+      {
+        "byteLength": 4826,
+        "inputKey": "listening_questions",
+        "mediaType": "application/vnd.eqb.listening-questions+json",
+        "originalName": "questions.json",
+        "path": "test-fixtures/paper-import/paper-2026-i-canonical-pilot/canonical-evidence/14-listening-questions.json",
+        "roles": [
+          "structured_source",
+          "question_source"
+        ],
+        "sha256": "f845991e03fa494920d91eaae8340084f01154231ce36d9e4df06a67ea1b5610"
+      },
+      {
+        "byteLength": 414,
+        "inputKey": "listening_answers",
+        "mediaType": "application/vnd.eqb.listening-answers+json",
+        "originalName": "answers.json",
+        "path": "test-fixtures/paper-import/paper-2026-i-canonical-pilot/canonical-evidence/15-listening-answers.json",
+        "roles": [
+          "structured_source",
+          "official_answer_source"
+        ],
+        "sha256": "0a8e9a23c864d9d10db373f98fc0902e240fc3cc8386830588ee874826a958fd"
+      },
+      {
+        "byteLength": 8745,
+        "inputKey": "listening_transcript",
+        "mediaType": "application/vnd.eqb.listening-transcript+json",
+        "originalName": "transcript.json",
+        "path": "test-fixtures/paper-import/paper-2026-i-canonical-pilot/canonical-evidence/16-listening-transcript.json",
+        "roles": [
+          "structured_source",
+          "transcript_source"
+        ],
+        "sha256": "28350328ff9aeb5701f41bb8627966a82889b9cc473e8c9cce6d7f0b30030edd"
+      },
+      {
+        "byteLength": 1379,
+        "inputKey": "listening_inventory",
+        "mediaType": "application/vnd.eqb.listening-source-inventory+json",
+        "originalName": "listening-source-inventory.json",
+        "path": "test-fixtures/paper-import/paper-2026-i-canonical-pilot/canonical-evidence/17-listening-source-inventory.json",
+        "roles": [
+          "operator_assertions",
+          "source_provenance"
+        ],
+        "sha256": "fefdd2c15985a4ee289944c85a346ab4661741c99fc55432bc2d00d5f6f21f89"
+      }
+    ],
+    "envelopeDocument": {
+      "byteLength": 289,
+      "inputKey": "canonical_source_envelope",
+      "mediaType": "application/vnd.eqb.canonical-fixture+json",
+      "originalName": "canonical-source-envelope.json",
+      "path": "test-fixtures/paper-import/paper-2026-i-canonical-pilot/canonical-evidence/01-canonical-source-envelope.json",
+      "roles": [
+        "operator_assertions"
+      ],
+      "sha256": "d61aa40531edfa01faddc0699caaa5f7ac006ff27ffc5b8b6e5728444b64d776"
+    },
+    "historicalByteBindings": [
+      {
+        "byteLength": 129359,
+        "leftPath": "app/public/paper-assets/paper-2026-i/latest/paper-asset.json",
+        "rightPath": "test-fixtures/paper-import/paper-2026-i-canonical-pilot/paper-asset.json",
+        "sha256": "fe7feb2cc9554b00bbab96a7d4fe5e499513c564c28e6c314e0373e29b2ca7bf"
+      },
+      {
+        "byteLength": 8243,
+        "leftPath": "app/public/paper-assets/paper-2026-i/latest/answer-key.json",
+        "rightPath": "test-fixtures/paper-import/paper-2026-i-canonical-pilot/answer-key.json",
+        "sha256": "17502bb7685b83afc8847f3a44f8ac3c68defcb941ae75ba1ff14945c07daaf0"
+      },
+      {
+        "byteLength": 3972,
+        "leftPath": "app/public/paper-assets/paper-2026-i/latest/import-meta.json",
+        "rightPath": "test-fixtures/paper-import/paper-2026-i-canonical-pilot/import-meta.json",
+        "sha256": "dda79f448a049d9ce6293049b4e1dec51fba35cb683e4e7860f5390ab3d3e900"
+      },
+      {
+        "byteLength": 639812,
+        "leftPath": "scripts/import-pipeline/papers/paper-2026-i/source/paper.pdf",
+        "rightPath": "test-fixtures/paper-import/paper-2026-i-canonical-pilot/paper.pdf",
+        "sha256": "31a87069e6d530afba9123eec0487adf45e52e0b98530af80b62476f169e4d0f"
+      },
+      {
+        "byteLength": 1105941,
+        "leftPath": "scripts/import-pipeline/papers/paper-2026-i/source/answers.pdf",
+        "rightPath": "test-fixtures/paper-import/paper-2026-i-canonical-pilot/canonical-evidence/06-source_answers_pdf.pdf",
+        "sha256": "2e4982f8d33e8a8787f270b7cf4fd3cd432fb9dce8d5732876fae149a1c78fc6"
+      }
+    ],
+    "registeredAdapter": {
+      "adapterId": "canonical-fixture-evidence",
+      "mediaType": "application/vnd.eqb.canonical-fixture+json",
+      "version": "1"
+    },
+    "requestDigest": "sha256:995a0e330caf36036266b33b242d9c07461c5b70ea29e4051e3910e17d37f16f"
+  },
+  "ticket": "24-costed-immutable-source-adapter-pilot",
+  "ticket22Baseline": {
+    "authority": {
+      "manifestDigest": "sha256:b921439c93d8a402a79f127c153339b8d63e1524babf75843e8efa47caf7371b",
+      "manifestId": "paper-canonical",
+      "manifestVersion": "35"
+    },
+    "compilerRequestDigest": "sha256:0a292888539679f48de3bdd2d6ced824ea56e2dc8adfc4d5fa2e38c4c9815ebf",
+    "diagnosticCodes": [
+      "SOURCE_ADAPTER_UNSUPPORTED"
+    ],
+    "diagnosticDigest": "sha256:c92f30ef8875615601e07c50bdff8cc9acc773a08e9a4aa0ccfff1efaadc8673",
+    "evidencePath": "docs/cuts/paper-canonical-unification/migration/full-corpus-zero-write-dry-run-v1.json",
+    "evidenceSha256": "8f3e142d1c4627ab076bbbb8ff9d9306d2a5fa8580ec4f22bcf77fe4d3b35263",
+    "immutableDocumentCount": 12,
+    "immutableEvidenceByteLength": 350879,
+    "measuredCost": {
+      "components": {
+        "closureDiagnosisCount": 5,
+        "compilerDiagnosticCodeCount": 1,
+        "compilerDiagnosticCount": 1,
+        "compilerSourceSpanRefCount": 0,
+        "immutableDocumentCount": 12,
+        "immutableEvidenceByteLength": 350879
+      },
+      "inspectionWorkUnits": 88,
+      "model": "ticket-22-frozen-evidence-inspection-units-v1"
+    },
+    "measuredRisk": {
+      "band": "high",
+      "factors": {
+        "compilerDiagnosticCodeCount": 1,
+        "inactiveClosureUnclassified": true,
+        "profileUnproven": true,
+        "sourceAdapterUnavailable": true
+      },
+      "model": "ticket-22-source-closure-risk-points-v1",
+      "riskPoints": 17
+    }
+  },
+  "zeroMutation": {
+    "mutationCount": 0,
+    "protectedStateAfter": {
+      "digest": "sha256:5171f639ed22d8b2225381bd9c17dbf01bf03193bb5b948672289e05873aa476",
+      "fileCount": 707,
+      "paths": [
+        "app/public/paper-assets",
+        "data/question-bank.sqlite",
+        "scripts/import-pipeline/papers",
+        "standards/paper-canonical",
+        "shared/paper-canonical",
+        "test-fixtures/paper-canonical/evidence",
+        "test-fixtures/paper-import/paper-2026-i-canonical-pilot",
+        "docs/cuts/paper-canonical-unification/migration/full-corpus-zero-write-dry-run-v1.json",
+        "docs/cuts/paper-canonical-unification/migration/ledger-v1.json",
+        "docs/cuts/paper-canonical-unification/migration/manifest-v1.json"
+      ]
+    },
+    "protectedStateBefore": {
+      "digest": "sha256:5171f639ed22d8b2225381bd9c17dbf01bf03193bb5b948672289e05873aa476",
+      "fileCount": 707,
+      "paths": [
+        "app/public/paper-assets",
+        "data/question-bank.sqlite",
+        "scripts/import-pipeline/papers",
+        "standards/paper-canonical",
+        "shared/paper-canonical",
+        "test-fixtures/paper-canonical/evidence",
+        "test-fixtures/paper-import/paper-2026-i-canonical-pilot",
+        "docs/cuts/paper-canonical-unification/migration/full-corpus-zero-write-dry-run-v1.json",
+        "docs/cuts/paper-canonical-unification/migration/ledger-v1.json",
+        "docs/cuts/paper-canonical-unification/migration/manifest-v1.json"
+      ]
+    },
+    "ticketEvidenceWrite": "docs/cuts/paper-canonical-unification/migration/paper-2026-i-source-adapter-pilot-v1.json",
+    "writesPerformedByCompile": []
+  }
+}
