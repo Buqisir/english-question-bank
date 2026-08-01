@@ -17,7 +17,7 @@ family, cost, and risk shape without correcting any corpus problem.
 - [x] All 33 frozen papers run through the public compiler in zero-write mode.
 - [x] `ready + needs_review + unsupported + incomplete_source +
       answer_conflict = 33` with no paper leaving the denominator.
-- [x] Question source, official-answer source, attachments, Profile, and
+- [x] Question source, official-answer source, analysis supplements, Profile, and
       inactive closure are separately closed or explicitly diagnosed.
 - [x] Stable diagnostics retain exact evidence refs, authority versions,
       allowed recovery actions, family, shared recovery mechanism, and enough
