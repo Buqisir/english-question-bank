@@ -1,0 +1,3650 @@
+{
+  "schemaVersion": "paper-canonical-migration-ledger-v1",
+  "ledgerId": "paper-canonical-migration-ledger",
+  "version": "1",
+  "manifestPath": "docs/cuts/paper-canonical-unification/migration/manifest-v1.json",
+  "manifestDigest": "sha256:c800e5e7753cd1171b2e973abe53b2a2db8f401be67e5997fba794fb0a882c0a",
+  "binding": {
+    "inputFixedPoint": "064fa340969e6e1f8595fd8fb93171096d96fc4e",
+    "expectedBranch": "codex/paper-canonical-unification-20260725",
+    "corpusRoot": "app/public/paper-assets",
+    "corpusSelector": "*/latest",
+    "sourceAuthority": "checked-in latest bytes, not import config or DB version paths"
+  },
+  "queue": {
+    "schemaVersion": "migration-queue-v1",
+    "ordering": "queueId ascending, paperId lexical within paper queues",
+    "entries": [
+      {
+        "queueId": "migration.corpus",
+        "paperId": null,
+        "orderKey": "",
+        "scope": "corpus",
+        "status": "queued",
+        "primaryDisposition": "queued",
+        "anomalyIds": [
+          "anomaly.corpus.config-latest-set-drift",
+          "anomaly.corpus.database-version-refs-without-filesystem-trees"
+        ],
+        "recoveryActions": [
+          "do_not_reconstruct_missing_historical_version_tree",
+          "record_config_provenance_drift",
+          "retain_latest_as_denominator"
+        ],
+        "immutableEvidenceRefs": [
+          {
+            "kind": "config-inventory",
+            "path": "scripts/import-pipeline/papers",
+            "sha256": "sha256:5fd514a15b34fba930f36c045428d0955e6d4d11273c92a7f1443237cfb09feb"
+          },
+          {
+            "kind": "latest-tree",
+            "path": "app/public/paper-assets/paper-2020-bing/latest",
+            "sha256": "sha256:3ffeed2136d4ec1416fef47670cecb5e89d15189a6d5413c5e65b07c22eb7fe2"
+          },
+          {
+            "kind": "latest-tree",
+            "path": "app/public/paper-assets/paper-2020-i/latest",
+            "sha256": "sha256:23fe6fe4a8e3be6d3f7b549dc0555956465146151766016a30ebbd98874d030b"
+          },
+          {
+            "kind": "latest-tree",
+            "path": "app/public/paper-assets/paper-2020-ii/latest",
+            "sha256": "sha256:ad8b584a10d890086d9322b9eb50b962b08ba94b67d88ae9d0837783a8d2e10c"
+          },
+          {
+            "kind": "latest-tree",
+            "path": "app/public/paper-assets/paper-2020-jia/latest",
+            "sha256": "sha256:7f05abe47643445633463795e53822efdc612b7a128d84926176023f2c230da6"
+          },
+          {
+            "kind": "latest-tree",
+            "path": "app/public/paper-assets/paper-2021-i/latest",
+            "sha256": "sha256:27a768becd8a9932eb2d39c0b9f2bdef2e2402fe647039d9fd99b7c4d19b5c0b"
+          },
+          {
+            "kind": "latest-tree",
+            "path": "app/public/paper-assets/paper-2021-ii/latest",
+            "sha256": "sha256:098a79a623d9413e24cf8ce12d7bc77b476240fa08ec41b39ef57651b480740e"
+          },
+          {
+            "kind": "latest-tree",
+            "path": "app/public/paper-assets/paper-2021-jia/latest",
+            "sha256": "sha256:d94cb978bb63a29e8de117e1a08d944e9693e14503dcce994e9953384585b897"
+          },
+          {
+            "kind": "latest-tree",
+            "path": "app/public/paper-assets/paper-2021-yi/latest",
+            "sha256": "sha256:5a561769d53c64260507da806d9ee4dee57b3b7910f180d7ee32801cdb78e798"
+          },
+          {
+            "kind": "latest-tree",
+            "path": "app/public/paper-assets/paper-2022-i/latest",
+            "sha256": "sha256:a13e51110df08fe1ae3fbe63a2e5555dbe1344bb07ca6123dadc4e701c91d443"
+          },
+          {
+            "kind": "latest-tree",
+            "path": "app/public/paper-assets/paper-2022-ii/latest",
+            "sha256": "sha256:5a50bd59ec69a1d216064ea1f3e6cea23c69b32ffdf979294059389879b2c837"
+          },
+          {
+            "kind": "latest-tree",
+            "path": "app/public/paper-assets/paper-2022-jia/latest",
+            "sha256": "sha256:12ac8d27048df4f59a54ab8a07e6466d61f1f3060f0e540fff3837764ee36397"
+          },
+          {
+            "kind": "latest-tree",
+            "path": "app/public/paper-assets/paper-2022-yi/latest",
+            "sha256": "sha256:5b6068f7cef9f986e7ad3985df3b4da77d2ca81c28cce3556c8131b4334bb1fd"
+          },
+          {
+            "kind": "latest-tree",
+            "path": "app/public/paper-assets/paper-2023-i/latest",
+            "sha256": "sha256:ae37541a7178da03bb16579ef1d8cd4527525937b8c23938d9d02ad4f7ee38de"
+          },
+          {
+            "kind": "latest-tree",
+            "path": "app/public/paper-assets/paper-2023-ii/latest",
+            "sha256": "sha256:fc54f6249a85d0a2723ea23cb68f54b830d8f3aedf37c6de8fb2a37d5a2ce236"
+          },
+          {
+            "kind": "latest-tree",
+            "path": "app/public/paper-assets/paper-2023-jia/latest",
+            "sha256": "sha256:7d78ecff375c0a692f5e6ea951f48a80cc5055499678b5dc92858a87fc098347"
+          },
+          {
+            "kind": "latest-tree",
+            "path": "app/public/paper-assets/paper-2023-yi/latest",
+            "sha256": "sha256:103da595f3e0145f63a661ac49bb92d386af61129dd1afaf7112858a2a25e6f1"
+          },
+          {
+            "kind": "latest-tree",
+            "path": "app/public/paper-assets/paper-2024-i/latest",
+            "sha256": "sha256:d34a85ab375eeff1ee14d145fc35b91b2c584ded682b5433642f697b2810d3b7"
+          },
+          {
+            "kind": "latest-tree",
+            "path": "app/public/paper-assets/paper-2024-ii/latest",
+            "sha256": "sha256:83dd281276594685b5e7ae30e018a811375c5e6aaedd390181a601eaaab9a373"
+          },
+          {
+            "kind": "latest-tree",
+            "path": "app/public/paper-assets/paper-2024-jia/latest",
+            "sha256": "sha256:19a256d6ea78c2af1a510946890f568cfcad976b5cfb8933dd9787b86b8dde0d"
+          },
+          {
+            "kind": "latest-tree",
+            "path": "app/public/paper-assets/paper-2025-i/latest",
+            "sha256": "sha256:5a1fb77954a16b08d36f381a01851f245cc77d88c421bf0c4766ceeaefdd9813"
+          },
+          {
+            "kind": "latest-tree",
+            "path": "app/public/paper-assets/paper-2025-ii/latest",
+            "sha256": "sha256:a34c4fef9ce878f4c38a2c57503e76adbcee19bc81168194661b3733fb94ef9a"
+          },
+          {
+            "kind": "latest-tree",
+            "path": "app/public/paper-assets/paper-2026-i/latest",
+            "sha256": "sha256:2d59645c6daf744abc7644d396b37769f03cc2e1dae07820855e7a2d8a8d6df5"
+          },
+          {
+            "kind": "latest-tree",
+            "path": "app/public/paper-assets/paper-960d0f8d/latest",
+            "sha256": "sha256:0b274c59c6c4cd786907416a708cc61de704ddbd077e0672407c56ff11865d6c"
+          },
+          {
+            "kind": "latest-tree",
+            "path": "app/public/paper-assets/paper-zj-2020-jan/latest",
+            "sha256": "sha256:fe7df1504cde0de4d8fca0460ac3a263dac7c44a0c8ae0e5f197538d3ce35367"
+          },
+          {
+            "kind": "latest-tree",
+            "path": "app/public/paper-assets/paper-zj-2020-jul/latest",
+            "sha256": "sha256:c8490bb57b725281b6453151e0a9418513f03db7c2bb09bdffb1440aa6565811"
+          },
+          {
+            "kind": "latest-tree",
+            "path": "app/public/paper-assets/paper-zj-2021-jan/latest",
+            "sha256": "sha256:ccca5d79f35879c7ae6bb507b799a07780b91636a610f67be362e13482c1a293"
+          },
+          {
+            "kind": "latest-tree",
+            "path": "app/public/paper-assets/paper-zj-2021-jun/latest",
+            "sha256": "sha256:e80c8c4db988cdfa396eff86ed83dea0d8a7f94b5a412d63527b2c5567069895"
+          },
+          {
+            "kind": "latest-tree",
+            "path": "app/public/paper-assets/paper-zj-2022-jan/latest",
+            "sha256": "sha256:c67ba37acd942dfb2cd0f649fc51aae67e8706227a65de312c8f5e2a18b9e40f"
+          },
+          {
+            "kind": "latest-tree",
+            "path": "app/public/paper-assets/paper-zj-2022-jun/latest",
+            "sha256": "sha256:27947c9c6d071847e91a8f95d9884a9e881f3a837757ebfc9330f36dac2e4572"
+          },
+          {
+            "kind": "latest-tree",
+            "path": "app/public/paper-assets/paper-zj-2023-jan/latest",
+            "sha256": "sha256:27debc29bf32c5afa658aa8117ac1cdbf521c9742733a65e78eefcf046cc041f"
+          },
+          {
+            "kind": "latest-tree",
+            "path": "app/public/paper-assets/paper-zj-2024-jan/latest",
+            "sha256": "sha256:8b7cc8d86377533a34353f39cc0da5e65fd3dd0da238f1e3ef81f7be28a167de"
+          },
+          {
+            "kind": "latest-tree",
+            "path": "app/public/paper-assets/paper-zj-2025-jan/latest",
+            "sha256": "sha256:f2495de76ab8be24ba720fc5fe4afc2e43002413cf28ea07d3ff90f4b246313f"
+          },
+          {
+            "kind": "latest-tree",
+            "path": "app/public/paper-assets/paper-zj-2026-jan/latest",
+            "sha256": "sha256:516500591fc075751f17b6c4e33b25e976ada8503b3e07c3e1d0f27e393bbe77"
+          },
+          {
+            "kind": "database",
+            "path": "data/question-bank.sqlite",
+            "sha256": "6972c581fcd43f64999f7d7ff3778fcd995ba160563ecb877f39d7303913da80"
+          }
+        ],
+        "dispositionHistory": [
+          {
+            "disposition": "queued",
+            "attemptId": null,
+            "evidenceRefs": [
+              {
+                "kind": "config-inventory",
+                "path": "scripts/import-pipeline/papers",
+                "sha256": "sha256:5fd514a15b34fba930f36c045428d0955e6d4d11273c92a7f1443237cfb09feb"
+              },
+              {
+                "kind": "latest-tree",
+                "path": "app/public/paper-assets/paper-2020-bing/latest",
+                "sha256": "sha256:3ffeed2136d4ec1416fef47670cecb5e89d15189a6d5413c5e65b07c22eb7fe2"
+              },
+              {
+                "kind": "latest-tree",
+                "path": "app/public/paper-assets/paper-2020-i/latest",
+                "sha256": "sha256:23fe6fe4a8e3be6d3f7b549dc0555956465146151766016a30ebbd98874d030b"
+              },
+              {
+                "kind": "latest-tree",
+                "path": "app/public/paper-assets/paper-2020-ii/latest",
+                "sha256": "sha256:ad8b584a10d890086d9322b9eb50b962b08ba94b67d88ae9d0837783a8d2e10c"
+              },
+              {
+                "kind": "latest-tree",
+                "path": "app/public/paper-assets/paper-2020-jia/latest",
+                "sha256": "sha256:7f05abe47643445633463795e53822efdc612b7a128d84926176023f2c230da6"
+              },
+              {
+                "kind": "latest-tree",
+                "path": "app/public/paper-assets/paper-2021-i/latest",
+                "sha256": "sha256:27a768becd8a9932eb2d39c0b9f2bdef2e2402fe647039d9fd99b7c4d19b5c0b"
+              },
+              {
+                "kind": "latest-tree",
+                "path": "app/public/paper-assets/paper-2021-ii/latest",
+                "sha256": "sha256:098a79a623d9413e24cf8ce12d7bc77b476240fa08ec41b39ef57651b480740e"
+              },
+              {
+                "kind": "latest-tree",
+                "path": "app/public/paper-assets/paper-2021-jia/latest",
+                "sha256": "sha256:d94cb978bb63a29e8de117e1a08d944e9693e14503dcce994e9953384585b897"
+              },
+              {
+                "kind": "latest-tree",
+                "path": "app/public/paper-assets/paper-2021-yi/latest",
+                "sha256": "sha256:5a561769d53c64260507da806d9ee4dee57b3b7910f180d7ee32801cdb78e798"
+              },
+              {
+                "kind": "latest-tree",
+                "path": "app/public/paper-assets/paper-2022-i/latest",
+                "sha256": "sha256:a13e51110df08fe1ae3fbe63a2e5555dbe1344bb07ca6123dadc4e701c91d443"
+              },
+              {
+                "kind": "latest-tree",
+                "path": "app/public/paper-assets/paper-2022-ii/latest",
+                "sha256": "sha256:5a50bd59ec69a1d216064ea1f3e6cea23c69b32ffdf979294059389879b2c837"
+              },
+              {
+                "kind": "latest-tree",
+                "path": "app/public/paper-assets/paper-2022-jia/latest",
+                "sha256": "sha256:12ac8d27048df4f59a54ab8a07e6466d61f1f3060f0e540fff3837764ee36397"
+              },
+              {
+                "kind": "latest-tree",
+                "path": "app/public/paper-assets/paper-2022-yi/latest",
+                "sha256": "sha256:5b6068f7cef9f986e7ad3985df3b4da77d2ca81c28cce3556c8131b4334bb1fd"
+              },
+              {
+                "kind": "latest-tree",
+                "path": "app/public/paper-assets/paper-2023-i/latest",
+                "sha256": "sha256:ae37541a7178da03bb16579ef1d8cd4527525937b8c23938d9d02ad4f7ee38de"
+              },
+              {
+                "kind": "latest-tree",
+                "path": "app/public/paper-assets/paper-2023-ii/latest",
+                "sha256": "sha256:fc54f6249a85d0a2723ea23cb68f54b830d8f3aedf37c6de8fb2a37d5a2ce236"
+              },
+              {
+                "kind": "latest-tree",
+                "path": "app/public/paper-assets/paper-2023-jia/latest",
+                "sha256": "sha256:7d78ecff375c0a692f5e6ea951f48a80cc5055499678b5dc92858a87fc098347"
+              },
+              {
+                "kind": "latest-tree",
+                "path": "app/public/paper-assets/paper-2023-yi/latest",
+                "sha256": "sha256:103da595f3e0145f63a661ac49bb92d386af61129dd1afaf7112858a2a25e6f1"
+              },
+              {
+                "kind": "latest-tree",
+                "path": "app/public/paper-assets/paper-2024-i/latest",
+                "sha256": "sha256:d34a85ab375eeff1ee14d145fc35b91b2c584ded682b5433642f697b2810d3b7"
+              },
+              {
+                "kind": "latest-tree",
+                "path": "app/public/paper-assets/paper-2024-ii/latest",
+                "sha256": "sha256:83dd281276594685b5e7ae30e018a811375c5e6aaedd390181a601eaaab9a373"
+              },
+              {
+                "kind": "latest-tree",
+                "path": "app/public/paper-assets/paper-2024-jia/latest",
+                "sha256": "sha256:19a256d6ea78c2af1a510946890f568cfcad976b5cfb8933dd9787b86b8dde0d"
+              },
+              {
+                "kind": "latest-tree",
+                "path": "app/public/paper-assets/paper-2025-i/latest",
+                "sha256": "sha256:5a1fb77954a16b08d36f381a01851f245cc77d88c421bf0c4766ceeaefdd9813"
+              },
+              {
+                "kind": "latest-tree",
+                "path": "app/public/paper-assets/paper-2025-ii/latest",
+                "sha256": "sha256:a34c4fef9ce878f4c38a2c57503e76adbcee19bc81168194661b3733fb94ef9a"
+              },
+              {
+                "kind": "latest-tree",
+                "path": "app/public/paper-assets/paper-2026-i/latest",
+                "sha256": "sha256:2d59645c6daf744abc7644d396b37769f03cc2e1dae07820855e7a2d8a8d6df5"
+              },
+              {
+                "kind": "latest-tree",
+                "path": "app/public/paper-assets/paper-960d0f8d/latest",
+                "sha256": "sha256:0b274c59c6c4cd786907416a708cc61de704ddbd077e0672407c56ff11865d6c"
+              },
+              {
+                "kind": "latest-tree",
+                "path": "app/public/paper-assets/paper-zj-2020-jan/latest",
+                "sha256": "sha256:fe7df1504cde0de4d8fca0460ac3a263dac7c44a0c8ae0e5f197538d3ce35367"
+              },
+              {
+                "kind": "latest-tree",
+                "path": "app/public/paper-assets/paper-zj-2020-jul/latest",
+                "sha256": "sha256:c8490bb57b725281b6453151e0a9418513f03db7c2bb09bdffb1440aa6565811"
+              },
+              {
+                "kind": "latest-tree",
+                "path": "app/public/paper-assets/paper-zj-2021-jan/latest",
+                "sha256": "sha256:ccca5d79f35879c7ae6bb507b799a07780b91636a610f67be362e13482c1a293"
+              },
+              {
+                "kind": "latest-tree",
+                "path": "app/public/paper-assets/paper-zj-2021-jun/latest",
+                "sha256": "sha256:e80c8c4db988cdfa396eff86ed83dea0d8a7f94b5a412d63527b2c5567069895"
+              },
+              {
+                "kind": "latest-tree",
+                "path": "app/public/paper-assets/paper-zj-2022-jan/latest",
+                "sha256": "sha256:c67ba37acd942dfb2cd0f649fc51aae67e8706227a65de312c8f5e2a18b9e40f"
+              },
+              {
+                "kind": "latest-tree",
+                "path": "app/public/paper-assets/paper-zj-2022-jun/latest",
+                "sha256": "sha256:27947c9c6d071847e91a8f95d9884a9e881f3a837757ebfc9330f36dac2e4572"
+              },
+              {
+                "kind": "latest-tree",
+                "path": "app/public/paper-assets/paper-zj-2023-jan/latest",
+                "sha256": "sha256:27debc29bf32c5afa658aa8117ac1cdbf521c9742733a65e78eefcf046cc041f"
+              },
+              {
+                "kind": "latest-tree",
+                "path": "app/public/paper-assets/paper-zj-2024-jan/latest",
+                "sha256": "sha256:8b7cc8d86377533a34353f39cc0da5e65fd3dd0da238f1e3ef81f7be28a167de"
+              },
+              {
+                "kind": "latest-tree",
+                "path": "app/public/paper-assets/paper-zj-2025-jan/latest",
+                "sha256": "sha256:f2495de76ab8be24ba720fc5fe4afc2e43002413cf28ea07d3ff90f4b246313f"
+              },
+              {
+                "kind": "latest-tree",
+                "path": "app/public/paper-assets/paper-zj-2026-jan/latest",
+                "sha256": "sha256:516500591fc075751f17b6c4e33b25e976ada8503b3e07c3e1d0f27e393bbe77"
+              },
+              {
+                "kind": "database",
+                "path": "data/question-bank.sqlite",
+                "sha256": "6972c581fcd43f64999f7d7ff3778fcd995ba160563ecb877f39d7303913da80"
+              }
+            ]
+          }
+        ],
+        "failedAttempts": [],
+        "recompileAttempts": [],
+        "reviewDecision": null,
+        "publication": null,
+        "surfaceProof": null,
+        "rollbackProof": null,
+        "retainedAttemptCount": 0
+      },
+      {
+        "queueId": "migration.paper.paper-2020-bing",
+        "paperId": "paper-2020-bing",
+        "orderKey": "paper-2020-bing",
+        "scope": "whole-paper",
+        "status": "queued",
+        "primaryDisposition": "queued",
+        "anomalyIds": [
+          "anomaly.reading-heading-suffix.paper-2020-bing.group-2020-bing-reading-a-q23",
+          "anomaly.reading-heading-suffix.paper-2020-bing.group-2020-bing-reading-b-q27",
+          "anomaly.reading-heading-suffix.paper-2020-bing.group-2020-bing-reading-c-q31"
+        ],
+        "recoveryActions": [
+          "source_bound_boundary_or_marker_review"
+        ],
+        "immutableEvidenceRefs": [
+          {
+            "kind": "asset-projection",
+            "present": true,
+            "path": "app/public/paper-assets/paper-2020-bing/latest/paper-asset.json",
+            "byteLength": 129411,
+            "sha256": "31a752e5971070b30218480b3e83c64c6205df18d121ac30015201e621c78f1f"
+          },
+          {
+            "kind": "source-provenance",
+            "present": true,
+            "path": "app/public/paper-assets/paper-2020-bing/latest/import-meta.json",
+            "byteLength": 3441,
+            "sha256": "0fecba7a7645cbc32e0c3a58f150a7b3a19d0f8a27dab29e462038c8837d0f3a"
+          },
+          {
+            "kind": "official-answer-lead",
+            "present": true,
+            "path": "app/public/paper-assets/paper-2020-bing/latest/answer-key.json",
+            "byteLength": 9436,
+            "sha256": "d2fa96b5e8a29c91737061a1a90865f9999c09b62c19b87edae36b0a00dc2532"
+          }
+        ],
+        "dispositionHistory": [
+          {
+            "disposition": "queued",
+            "attemptId": null,
+            "evidenceRefs": [
+              {
+                "kind": "asset-projection",
+                "present": true,
+                "path": "app/public/paper-assets/paper-2020-bing/latest/paper-asset.json",
+                "byteLength": 129411,
+                "sha256": "31a752e5971070b30218480b3e83c64c6205df18d121ac30015201e621c78f1f"
+              },
+              {
+                "kind": "source-provenance",
+                "present": true,
+                "path": "app/public/paper-assets/paper-2020-bing/latest/import-meta.json",
+                "byteLength": 3441,
+                "sha256": "0fecba7a7645cbc32e0c3a58f150a7b3a19d0f8a27dab29e462038c8837d0f3a"
+              },
+              {
+                "kind": "official-answer-lead",
+                "present": true,
+                "path": "app/public/paper-assets/paper-2020-bing/latest/answer-key.json",
+                "byteLength": 9436,
+                "sha256": "d2fa96b5e8a29c91737061a1a90865f9999c09b62c19b87edae36b0a00dc2532"
+              }
+            ]
+          }
+        ],
+        "failedAttempts": [],
+        "recompileAttempts": [],
+        "reviewDecision": null,
+        "publication": null,
+        "surfaceProof": null,
+        "rollbackProof": null,
+        "retainedAttemptCount": 0
+      },
+      {
+        "queueId": "migration.paper.paper-2020-i",
+        "paperId": "paper-2020-i",
+        "orderKey": "paper-2020-i",
+        "scope": "whole-paper",
+        "status": "queued",
+        "primaryDisposition": "queued",
+        "anomalyIds": [
+          "anomaly.reading-heading-suffix.paper-2020-i.group-2020-i-reading-a-q23",
+          "anomaly.reading-heading-suffix.paper-2020-i.group-2020-i-reading-b-q27",
+          "anomaly.reading-heading-suffix.paper-2020-i.group-2020-i-reading-c-q31"
+        ],
+        "recoveryActions": [
+          "source_bound_boundary_or_marker_review"
+        ],
+        "immutableEvidenceRefs": [
+          {
+            "kind": "asset-projection",
+            "present": true,
+            "path": "app/public/paper-assets/paper-2020-i/latest/paper-asset.json",
+            "byteLength": 134899,
+            "sha256": "598fdfd3e57f39d6244238c7d0a28383ff2fd2e522acb03f4ea9a1bd414c2cd7"
+          },
+          {
+            "kind": "source-provenance",
+            "present": true,
+            "path": "app/public/paper-assets/paper-2020-i/latest/import-meta.json",
+            "byteLength": 3994,
+            "sha256": "340ee05a411f687fd7c766506a1034e875efd9e536e3d8ddaf387397dc100cf7"
+          },
+          {
+            "kind": "official-answer-lead",
+            "present": true,
+            "path": "app/public/paper-assets/paper-2020-i/latest/answer-key.json",
+            "byteLength": 8239,
+            "sha256": "ed825d83c0e97ed0a5586130dc7e2b76b7f316ca41e8c89cdf3ad6eeca506b97"
+          }
+        ],
+        "dispositionHistory": [
+          {
+            "disposition": "queued",
+            "attemptId": null,
+            "evidenceRefs": [
+              {
+                "kind": "asset-projection",
+                "present": true,
+                "path": "app/public/paper-assets/paper-2020-i/latest/paper-asset.json",
+                "byteLength": 134899,
+                "sha256": "598fdfd3e57f39d6244238c7d0a28383ff2fd2e522acb03f4ea9a1bd414c2cd7"
+              },
+              {
+                "kind": "source-provenance",
+                "present": true,
+                "path": "app/public/paper-assets/paper-2020-i/latest/import-meta.json",
+                "byteLength": 3994,
+                "sha256": "340ee05a411f687fd7c766506a1034e875efd9e536e3d8ddaf387397dc100cf7"
+              },
+              {
+                "kind": "official-answer-lead",
+                "present": true,
+                "path": "app/public/paper-assets/paper-2020-i/latest/answer-key.json",
+                "byteLength": 8239,
+                "sha256": "ed825d83c0e97ed0a5586130dc7e2b76b7f316ca41e8c89cdf3ad6eeca506b97"
+              }
+            ]
+          }
+        ],
+        "failedAttempts": [],
+        "recompileAttempts": [],
+        "reviewDecision": null,
+        "publication": null,
+        "surfaceProof": null,
+        "rollbackProof": null,
+        "retainedAttemptCount": 0
+      },
+      {
+        "queueId": "migration.paper.paper-2020-ii",
+        "paperId": "paper-2020-ii",
+        "orderKey": "paper-2020-ii",
+        "scope": "whole-paper",
+        "status": "queued",
+        "primaryDisposition": "queued",
+        "anomalyIds": [],
+        "recoveryActions": [],
+        "immutableEvidenceRefs": [
+          {
+            "kind": "asset-projection",
+            "present": true,
+            "path": "app/public/paper-assets/paper-2020-ii/latest/paper-asset.json",
+            "byteLength": 137899,
+            "sha256": "72c218482cea3825ef2d8156b4088fd69d08081e0e14bbb74b365bcaecfff93b"
+          },
+          {
+            "kind": "source-provenance",
+            "present": true,
+            "path": "app/public/paper-assets/paper-2020-ii/latest/import-meta.json",
+            "byteLength": 4024,
+            "sha256": "5f50c1c2c209d6f8323b883cf8d18dc96df701b8e37e8b887f8e21e46b8d3e24"
+          },
+          {
+            "kind": "official-answer-lead",
+            "present": true,
+            "path": "app/public/paper-assets/paper-2020-ii/latest/answer-key.json",
+            "byteLength": 8339,
+            "sha256": "ac91bdbb3c61731e6f845f0724b630cbf05c3af9f0963aa09c593b797ca45153"
+          }
+        ],
+        "dispositionHistory": [
+          {
+            "disposition": "queued",
+            "attemptId": null,
+            "evidenceRefs": [
+              {
+                "kind": "asset-projection",
+                "present": true,
+                "path": "app/public/paper-assets/paper-2020-ii/latest/paper-asset.json",
+                "byteLength": 137899,
+                "sha256": "72c218482cea3825ef2d8156b4088fd69d08081e0e14bbb74b365bcaecfff93b"
+              },
+              {
+                "kind": "source-provenance",
+                "present": true,
+                "path": "app/public/paper-assets/paper-2020-ii/latest/import-meta.json",
+                "byteLength": 4024,
+                "sha256": "5f50c1c2c209d6f8323b883cf8d18dc96df701b8e37e8b887f8e21e46b8d3e24"
+              },
+              {
+                "kind": "official-answer-lead",
+                "present": true,
+                "path": "app/public/paper-assets/paper-2020-ii/latest/answer-key.json",
+                "byteLength": 8339,
+                "sha256": "ac91bdbb3c61731e6f845f0724b630cbf05c3af9f0963aa09c593b797ca45153"
+              }
+            ]
+          }
+        ],
+        "failedAttempts": [],
+        "recompileAttempts": [],
+        "reviewDecision": null,
+        "publication": null,
+        "surfaceProof": null,
+        "rollbackProof": null,
+        "retainedAttemptCount": 0
+      },
+      {
+        "queueId": "migration.paper.paper-2020-jia",
+        "paperId": "paper-2020-jia",
+        "orderKey": "paper-2020-jia",
+        "scope": "whole-paper",
+        "status": "queued",
+        "primaryDisposition": "queued",
+        "anomalyIds": [
+          "anomaly.reading-heading-suffix.paper-2020-jia.group-2020-jia-reading-a-q23",
+          "anomaly.reading-heading-suffix.paper-2020-jia.group-2020-jia-reading-b-q27",
+          "anomaly.reading-heading-suffix.paper-2020-jia.group-2020-jia-reading-c-q31"
+        ],
+        "recoveryActions": [
+          "source_bound_boundary_or_marker_review"
+        ],
+        "immutableEvidenceRefs": [
+          {
+            "kind": "asset-projection",
+            "present": true,
+            "path": "app/public/paper-assets/paper-2020-jia/latest/paper-asset.json",
+            "byteLength": 138589,
+            "sha256": "920624a8e769316d80ebccd0d9a707c067fdf6c43b85a5aaa4bb8740179f2e54"
+          },
+          {
+            "kind": "source-provenance",
+            "present": true,
+            "path": "app/public/paper-assets/paper-2020-jia/latest/import-meta.json",
+            "byteLength": 3642,
+            "sha256": "7e498189596709aee3583a87471e47800565b89b618108cc3134fd0bbff3a5ab"
+          },
+          {
+            "kind": "official-answer-lead",
+            "present": true,
+            "path": "app/public/paper-assets/paper-2020-jia/latest/answer-key.json",
+            "byteLength": 9337,
+            "sha256": "1474ffbb71bf1ac348eb310cc393375aeaa541af2bb66d49f7eabc43cfb930b4"
+          }
+        ],
+        "dispositionHistory": [
+          {
+            "disposition": "queued",
+            "attemptId": null,
+            "evidenceRefs": [
+              {
+                "kind": "asset-projection",
+                "present": true,
+                "path": "app/public/paper-assets/paper-2020-jia/latest/paper-asset.json",
+                "byteLength": 138589,
+                "sha256": "920624a8e769316d80ebccd0d9a707c067fdf6c43b85a5aaa4bb8740179f2e54"
+              },
+              {
+                "kind": "source-provenance",
+                "present": true,
+                "path": "app/public/paper-assets/paper-2020-jia/latest/import-meta.json",
+                "byteLength": 3642,
+                "sha256": "7e498189596709aee3583a87471e47800565b89b618108cc3134fd0bbff3a5ab"
+              },
+              {
+                "kind": "official-answer-lead",
+                "present": true,
+                "path": "app/public/paper-assets/paper-2020-jia/latest/answer-key.json",
+                "byteLength": 9337,
+                "sha256": "1474ffbb71bf1ac348eb310cc393375aeaa541af2bb66d49f7eabc43cfb930b4"
+              }
+            ]
+          }
+        ],
+        "failedAttempts": [],
+        "recompileAttempts": [],
+        "reviewDecision": null,
+        "publication": null,
+        "surfaceProof": null,
+        "rollbackProof": null,
+        "retainedAttemptCount": 0
+      },
+      {
+        "queueId": "migration.paper.paper-2021-i",
+        "paperId": "paper-2021-i",
+        "orderKey": "paper-2021-i",
+        "scope": "whole-paper",
+        "status": "queued",
+        "primaryDisposition": "queued",
+        "anomalyIds": [],
+        "recoveryActions": [],
+        "immutableEvidenceRefs": [
+          {
+            "kind": "asset-projection",
+            "present": true,
+            "path": "app/public/paper-assets/paper-2021-i/latest/paper-asset.json",
+            "byteLength": 140192,
+            "sha256": "4c23fcc029812dddf4ecc262a9a05e8ecb1b600ae0934886c9bc9acae071d18d"
+          },
+          {
+            "kind": "source-provenance",
+            "present": true,
+            "path": "app/public/paper-assets/paper-2021-i/latest/import-meta.json",
+            "byteLength": 3950,
+            "sha256": "3df44215c0a769d7708f613c92234e1675114554cf389cb809bbb5c099385751"
+          },
+          {
+            "kind": "official-answer-lead",
+            "present": true,
+            "path": "app/public/paper-assets/paper-2021-i/latest/answer-key.json",
+            "byteLength": 8228,
+            "sha256": "5ca8e52c876b42acf571fae08c3e3320141b67f638c551e830cc1b60893c637a"
+          }
+        ],
+        "dispositionHistory": [
+          {
+            "disposition": "queued",
+            "attemptId": null,
+            "evidenceRefs": [
+              {
+                "kind": "asset-projection",
+                "present": true,
+                "path": "app/public/paper-assets/paper-2021-i/latest/paper-asset.json",
+                "byteLength": 140192,
+                "sha256": "4c23fcc029812dddf4ecc262a9a05e8ecb1b600ae0934886c9bc9acae071d18d"
+              },
+              {
+                "kind": "source-provenance",
+                "present": true,
+                "path": "app/public/paper-assets/paper-2021-i/latest/import-meta.json",
+                "byteLength": 3950,
+                "sha256": "3df44215c0a769d7708f613c92234e1675114554cf389cb809bbb5c099385751"
+              },
+              {
+                "kind": "official-answer-lead",
+                "present": true,
+                "path": "app/public/paper-assets/paper-2021-i/latest/answer-key.json",
+                "byteLength": 8228,
+                "sha256": "5ca8e52c876b42acf571fae08c3e3320141b67f638c551e830cc1b60893c637a"
+              }
+            ]
+          }
+        ],
+        "failedAttempts": [],
+        "recompileAttempts": [],
+        "reviewDecision": null,
+        "publication": null,
+        "surfaceProof": null,
+        "rollbackProof": null,
+        "retainedAttemptCount": 0
+      },
+      {
+        "queueId": "migration.paper.paper-2021-ii",
+        "paperId": "paper-2021-ii",
+        "orderKey": "paper-2021-ii",
+        "scope": "whole-paper",
+        "status": "queued",
+        "primaryDisposition": "queued",
+        "anomalyIds": [
+          "anomaly.reading-heading-suffix.paper-2021-ii.group-2021-ii-reading-a-q23",
+          "anomaly.reading-heading-suffix.paper-2021-ii.group-2021-ii-reading-b-q27",
+          "anomaly.reading-heading-suffix.paper-2021-ii.group-2021-ii-reading-c-q31",
+          "anomaly.seven-marker-local-ordinal.paper-2021-ii.group-2021-ii-seven-choices"
+        ],
+        "recoveryActions": [
+          "source_bound_boundary_or_marker_review"
+        ],
+        "immutableEvidenceRefs": [
+          {
+            "kind": "asset-projection",
+            "present": true,
+            "path": "app/public/paper-assets/paper-2021-ii/latest/paper-asset.json",
+            "byteLength": 133228,
+            "sha256": "350d3f9024e4e816d8c60a0e0ff9f0796254c6a8f77bc2dc22679f1f6d0119e1"
+          },
+          {
+            "kind": "source-provenance",
+            "present": true,
+            "path": "app/public/paper-assets/paper-2021-ii/latest/import-meta.json",
+            "byteLength": 4116,
+            "sha256": "9f06256bd34cd531c785a3601f4a91e860224df13677a458be8bdef45085fcea"
+          },
+          {
+            "kind": "official-answer-lead",
+            "present": true,
+            "path": "app/public/paper-assets/paper-2021-ii/latest/answer-key.json",
+            "byteLength": 8338,
+            "sha256": "9873c5660b924a9368330155fa72e437730f61f7f8458b7350d94acdb5d0d0c4"
+          }
+        ],
+        "dispositionHistory": [
+          {
+            "disposition": "queued",
+            "attemptId": null,
+            "evidenceRefs": [
+              {
+                "kind": "asset-projection",
+                "present": true,
+                "path": "app/public/paper-assets/paper-2021-ii/latest/paper-asset.json",
+                "byteLength": 133228,
+                "sha256": "350d3f9024e4e816d8c60a0e0ff9f0796254c6a8f77bc2dc22679f1f6d0119e1"
+              },
+              {
+                "kind": "source-provenance",
+                "present": true,
+                "path": "app/public/paper-assets/paper-2021-ii/latest/import-meta.json",
+                "byteLength": 4116,
+                "sha256": "9f06256bd34cd531c785a3601f4a91e860224df13677a458be8bdef45085fcea"
+              },
+              {
+                "kind": "official-answer-lead",
+                "present": true,
+                "path": "app/public/paper-assets/paper-2021-ii/latest/answer-key.json",
+                "byteLength": 8338,
+                "sha256": "9873c5660b924a9368330155fa72e437730f61f7f8458b7350d94acdb5d0d0c4"
+              }
+            ]
+          }
+        ],
+        "failedAttempts": [],
+        "recompileAttempts": [],
+        "reviewDecision": null,
+        "publication": null,
+        "surfaceProof": null,
+        "rollbackProof": null,
+        "retainedAttemptCount": 0
+      },
+      {
+        "queueId": "migration.paper.paper-2021-jia",
+        "paperId": "paper-2021-jia",
+        "orderKey": "paper-2021-jia",
+        "scope": "whole-paper",
+        "status": "queued",
+        "primaryDisposition": "queued",
+        "anomalyIds": [
+          "anomaly.reading-heading-suffix.paper-2021-jia.group-2021-jia-reading-a-q23",
+          "anomaly.reading-heading-suffix.paper-2021-jia.group-2021-jia-reading-b-q27",
+          "anomaly.reading-heading-suffix.paper-2021-jia.group-2021-jia-reading-c-q31",
+          "anomaly.seven-marker-local-ordinal.paper-2021-jia.group-2021-jia-seven-choices"
+        ],
+        "recoveryActions": [
+          "source_bound_boundary_or_marker_review"
+        ],
+        "immutableEvidenceRefs": [
+          {
+            "kind": "asset-projection",
+            "present": true,
+            "path": "app/public/paper-assets/paper-2021-jia/latest/paper-asset.json",
+            "byteLength": 122448,
+            "sha256": "d41a386b0cfec3940afb9841106718099d94c079b9e963f4d9170815845104f3"
+          },
+          {
+            "kind": "source-provenance",
+            "present": true,
+            "path": "app/public/paper-assets/paper-2021-jia/latest/import-meta.json",
+            "byteLength": 3721,
+            "sha256": "21caf693e9ae417d91e2c3d1fbab4535bae5920690891feee4b673c5d7735dd3"
+          },
+          {
+            "kind": "official-answer-lead",
+            "present": true,
+            "path": "app/public/paper-assets/paper-2021-jia/latest/answer-key.json",
+            "byteLength": 9329,
+            "sha256": "b9226e662e79246df5b5432cb8039b5800fa9267df30f6612f8972d0eb4b5fde"
+          }
+        ],
+        "dispositionHistory": [
+          {
+            "disposition": "queued",
+            "attemptId": null,
+            "evidenceRefs": [
+              {
+                "kind": "asset-projection",
+                "present": true,
+                "path": "app/public/paper-assets/paper-2021-jia/latest/paper-asset.json",
+                "byteLength": 122448,
+                "sha256": "d41a386b0cfec3940afb9841106718099d94c079b9e963f4d9170815845104f3"
+              },
+              {
+                "kind": "source-provenance",
+                "present": true,
+                "path": "app/public/paper-assets/paper-2021-jia/latest/import-meta.json",
+                "byteLength": 3721,
+                "sha256": "21caf693e9ae417d91e2c3d1fbab4535bae5920690891feee4b673c5d7735dd3"
+              },
+              {
+                "kind": "official-answer-lead",
+                "present": true,
+                "path": "app/public/paper-assets/paper-2021-jia/latest/answer-key.json",
+                "byteLength": 9329,
+                "sha256": "b9226e662e79246df5b5432cb8039b5800fa9267df30f6612f8972d0eb4b5fde"
+              }
+            ]
+          }
+        ],
+        "failedAttempts": [],
+        "recompileAttempts": [],
+        "reviewDecision": null,
+        "publication": null,
+        "surfaceProof": null,
+        "rollbackProof": null,
+        "retainedAttemptCount": 0
+      },
+      {
+        "queueId": "migration.paper.paper-2021-yi",
+        "paperId": "paper-2021-yi",
+        "orderKey": "paper-2021-yi",
+        "scope": "whole-paper",
+        "status": "queued",
+        "primaryDisposition": "queued",
+        "anomalyIds": [
+          "anomaly.reading-heading-suffix.paper-2021-yi.group-2021-yi-reading-a-q23",
+          "anomaly.reading-heading-suffix.paper-2021-yi.group-2021-yi-reading-b-q27",
+          "anomaly.reading-heading-suffix.paper-2021-yi.group-2021-yi-reading-c-q31",
+          "anomaly.seven-marker-local-ordinal.paper-2021-yi.group-2021-yi-seven-choices"
+        ],
+        "recoveryActions": [
+          "source_bound_boundary_or_marker_review"
+        ],
+        "immutableEvidenceRefs": [
+          {
+            "kind": "asset-projection",
+            "present": true,
+            "path": "app/public/paper-assets/paper-2021-yi/latest/paper-asset.json",
+            "byteLength": 130654,
+            "sha256": "ee1e91a3337a7681c9c9bb1f4d449880332e940965fc237074b4de93c0f7e7de"
+          },
+          {
+            "kind": "source-provenance",
+            "present": true,
+            "path": "app/public/paper-assets/paper-2021-yi/latest/import-meta.json",
+            "byteLength": 3720,
+            "sha256": "76760e9b65fff0248fd0764cf39ebc7967d69b91311a8889b0945a29b89542ae"
+          },
+          {
+            "kind": "official-answer-lead",
+            "present": true,
+            "path": "app/public/paper-assets/paper-2021-yi/latest/answer-key.json",
+            "byteLength": 9231,
+            "sha256": "e2223427770440a9b68bd7c2b2aff003f87d00f7712b7a043a37a4144fca6d3b"
+          }
+        ],
+        "dispositionHistory": [
+          {
+            "disposition": "queued",
+            "attemptId": null,
+            "evidenceRefs": [
+              {
+                "kind": "asset-projection",
+                "present": true,
+                "path": "app/public/paper-assets/paper-2021-yi/latest/paper-asset.json",
+                "byteLength": 130654,
+                "sha256": "ee1e91a3337a7681c9c9bb1f4d449880332e940965fc237074b4de93c0f7e7de"
+              },
+              {
+                "kind": "source-provenance",
+                "present": true,
+                "path": "app/public/paper-assets/paper-2021-yi/latest/import-meta.json",
+                "byteLength": 3720,
+                "sha256": "76760e9b65fff0248fd0764cf39ebc7967d69b91311a8889b0945a29b89542ae"
+              },
+              {
+                "kind": "official-answer-lead",
+                "present": true,
+                "path": "app/public/paper-assets/paper-2021-yi/latest/answer-key.json",
+                "byteLength": 9231,
+                "sha256": "e2223427770440a9b68bd7c2b2aff003f87d00f7712b7a043a37a4144fca6d3b"
+              }
+            ]
+          }
+        ],
+        "failedAttempts": [],
+        "recompileAttempts": [],
+        "reviewDecision": null,
+        "publication": null,
+        "surfaceProof": null,
+        "rollbackProof": null,
+        "retainedAttemptCount": 0
+      },
+      {
+        "queueId": "migration.paper.paper-2022-i",
+        "paperId": "paper-2022-i",
+        "orderKey": "paper-2022-i",
+        "scope": "whole-paper",
+        "status": "queued",
+        "primaryDisposition": "queued",
+        "anomalyIds": [
+          "anomaly.reading-heading-suffix.paper-2022-i.group-2022-i-reading-a-q23",
+          "anomaly.reading-heading-suffix.paper-2022-i.group-2022-i-reading-b-q27",
+          "anomaly.reading-heading-suffix.paper-2022-i.group-2022-i-reading-c-q31",
+          "anomaly.seven-marker-local-ordinal.paper-2022-i.group-2022-i-seven-choices"
+        ],
+        "recoveryActions": [
+          "source_bound_boundary_or_marker_review"
+        ],
+        "immutableEvidenceRefs": [
+          {
+            "kind": "asset-projection",
+            "present": true,
+            "path": "app/public/paper-assets/paper-2022-i/latest/paper-asset.json",
+            "byteLength": 140851,
+            "sha256": "16a08b962f4d2e0d9bc5c32d8636073f5fef900d01710a8d060e4de0ae10e7ef"
+          },
+          {
+            "kind": "source-provenance",
+            "present": true,
+            "path": "app/public/paper-assets/paper-2022-i/latest/import-meta.json",
+            "byteLength": 3910,
+            "sha256": "6750aadb7236aa98cabbd58cd12c3026cdf272af18977bc55afdcb1f521e1bed"
+          },
+          {
+            "kind": "official-answer-lead",
+            "present": true,
+            "path": "app/public/paper-assets/paper-2022-i/latest/answer-key.json",
+            "byteLength": 8241,
+            "sha256": "edd29002e1c3dc6936eb2924f3d15ac87bd8195e115b28271d4529453b971037"
+          }
+        ],
+        "dispositionHistory": [
+          {
+            "disposition": "queued",
+            "attemptId": null,
+            "evidenceRefs": [
+              {
+                "kind": "asset-projection",
+                "present": true,
+                "path": "app/public/paper-assets/paper-2022-i/latest/paper-asset.json",
+                "byteLength": 140851,
+                "sha256": "16a08b962f4d2e0d9bc5c32d8636073f5fef900d01710a8d060e4de0ae10e7ef"
+              },
+              {
+                "kind": "source-provenance",
+                "present": true,
+                "path": "app/public/paper-assets/paper-2022-i/latest/import-meta.json",
+                "byteLength": 3910,
+                "sha256": "6750aadb7236aa98cabbd58cd12c3026cdf272af18977bc55afdcb1f521e1bed"
+              },
+              {
+                "kind": "official-answer-lead",
+                "present": true,
+                "path": "app/public/paper-assets/paper-2022-i/latest/answer-key.json",
+                "byteLength": 8241,
+                "sha256": "edd29002e1c3dc6936eb2924f3d15ac87bd8195e115b28271d4529453b971037"
+              }
+            ]
+          }
+        ],
+        "failedAttempts": [],
+        "recompileAttempts": [],
+        "reviewDecision": null,
+        "publication": null,
+        "surfaceProof": null,
+        "rollbackProof": null,
+        "retainedAttemptCount": 0
+      },
+      {
+        "queueId": "migration.paper.paper-2022-ii",
+        "paperId": "paper-2022-ii",
+        "orderKey": "paper-2022-ii",
+        "scope": "whole-paper",
+        "status": "queued",
+        "primaryDisposition": "queued",
+        "anomalyIds": [
+          "anomaly.reading-heading-suffix.paper-2022-ii.group-2022-ii-reading-a-q23",
+          "anomaly.reading-heading-suffix.paper-2022-ii.group-2022-ii-reading-b-q27",
+          "anomaly.reading-heading-suffix.paper-2022-ii.group-2022-ii-reading-c-q31",
+          "anomaly.seven-marker-local-ordinal.paper-2022-ii.group-2022-ii-seven-choices"
+        ],
+        "recoveryActions": [
+          "source_bound_boundary_or_marker_review"
+        ],
+        "immutableEvidenceRefs": [
+          {
+            "kind": "asset-projection",
+            "present": true,
+            "path": "app/public/paper-assets/paper-2022-ii/latest/paper-asset.json",
+            "byteLength": 140017,
+            "sha256": "23385841243dd485394635351c98be315ce3086e3d7a7e4a93465cdf0e9f60a9"
+          },
+          {
+            "kind": "source-provenance",
+            "present": true,
+            "path": "app/public/paper-assets/paper-2022-ii/latest/import-meta.json",
+            "byteLength": 4105,
+            "sha256": "2685308f493bc24f377f2c98454f92a38f077f43ad93dccbeb55c049d487397b"
+          },
+          {
+            "kind": "official-answer-lead",
+            "present": true,
+            "path": "app/public/paper-assets/paper-2022-ii/latest/answer-key.json",
+            "byteLength": 8325,
+            "sha256": "446106864f0f4ef50a96d959513db8ffe53a7a691c7ae7330a64a967f1a51168"
+          }
+        ],
+        "dispositionHistory": [
+          {
+            "disposition": "queued",
+            "attemptId": null,
+            "evidenceRefs": [
+              {
+                "kind": "asset-projection",
+                "present": true,
+                "path": "app/public/paper-assets/paper-2022-ii/latest/paper-asset.json",
+                "byteLength": 140017,
+                "sha256": "23385841243dd485394635351c98be315ce3086e3d7a7e4a93465cdf0e9f60a9"
+              },
+              {
+                "kind": "source-provenance",
+                "present": true,
+                "path": "app/public/paper-assets/paper-2022-ii/latest/import-meta.json",
+                "byteLength": 4105,
+                "sha256": "2685308f493bc24f377f2c98454f92a38f077f43ad93dccbeb55c049d487397b"
+              },
+              {
+                "kind": "official-answer-lead",
+                "present": true,
+                "path": "app/public/paper-assets/paper-2022-ii/latest/answer-key.json",
+                "byteLength": 8325,
+                "sha256": "446106864f0f4ef50a96d959513db8ffe53a7a691c7ae7330a64a967f1a51168"
+              }
+            ]
+          }
+        ],
+        "failedAttempts": [],
+        "recompileAttempts": [],
+        "reviewDecision": null,
+        "publication": null,
+        "surfaceProof": null,
+        "rollbackProof": null,
+        "retainedAttemptCount": 0
+      },
+      {
+        "queueId": "migration.paper.paper-2022-jia",
+        "paperId": "paper-2022-jia",
+        "orderKey": "paper-2022-jia",
+        "scope": "whole-paper",
+        "status": "queued",
+        "primaryDisposition": "queued",
+        "anomalyIds": [
+          "anomaly.reading-heading-suffix.paper-2022-jia.group-2022-jia-reading-a-q23",
+          "anomaly.reading-heading-suffix.paper-2022-jia.group-2022-jia-reading-b-q27",
+          "anomaly.reading-heading-suffix.paper-2022-jia.group-2022-jia-reading-c-q31",
+          "anomaly.seven-marker-local-ordinal.paper-2022-jia.group-2022-jia-seven-choices"
+        ],
+        "recoveryActions": [
+          "source_bound_boundary_or_marker_review"
+        ],
+        "immutableEvidenceRefs": [
+          {
+            "kind": "asset-projection",
+            "present": true,
+            "path": "app/public/paper-assets/paper-2022-jia/latest/paper-asset.json",
+            "byteLength": 131749,
+            "sha256": "81dbec136ea23853a301ca11340b47ed3a5c20ce7514c186d66c47d35db89cd2"
+          },
+          {
+            "kind": "source-provenance",
+            "present": true,
+            "path": "app/public/paper-assets/paper-2022-jia/latest/import-meta.json",
+            "byteLength": 3616,
+            "sha256": "1da074a74a9a14ba72b8edcf717e4f352511e9a0a4744094aaab08e389ef01f6"
+          },
+          {
+            "kind": "official-answer-lead",
+            "present": true,
+            "path": "app/public/paper-assets/paper-2022-jia/latest/answer-key.json",
+            "byteLength": 9333,
+            "sha256": "39b2291941dad4e39ac2badfd7d637d0dd15cf5565b3a3379de5f8fec916babb"
+          }
+        ],
+        "dispositionHistory": [
+          {
+            "disposition": "queued",
+            "attemptId": null,
+            "evidenceRefs": [
+              {
+                "kind": "asset-projection",
+                "present": true,
+                "path": "app/public/paper-assets/paper-2022-jia/latest/paper-asset.json",
+                "byteLength": 131749,
+                "sha256": "81dbec136ea23853a301ca11340b47ed3a5c20ce7514c186d66c47d35db89cd2"
+              },
+              {
+                "kind": "source-provenance",
+                "present": true,
+                "path": "app/public/paper-assets/paper-2022-jia/latest/import-meta.json",
+                "byteLength": 3616,
+                "sha256": "1da074a74a9a14ba72b8edcf717e4f352511e9a0a4744094aaab08e389ef01f6"
+              },
+              {
+                "kind": "official-answer-lead",
+                "present": true,
+                "path": "app/public/paper-assets/paper-2022-jia/latest/answer-key.json",
+                "byteLength": 9333,
+                "sha256": "39b2291941dad4e39ac2badfd7d637d0dd15cf5565b3a3379de5f8fec916babb"
+              }
+            ]
+          }
+        ],
+        "failedAttempts": [],
+        "recompileAttempts": [],
+        "reviewDecision": null,
+        "publication": null,
+        "surfaceProof": null,
+        "rollbackProof": null,
+        "retainedAttemptCount": 0
+      },
+      {
+        "queueId": "migration.paper.paper-2022-yi",
+        "paperId": "paper-2022-yi",
+        "orderKey": "paper-2022-yi",
+        "scope": "whole-paper",
+        "status": "queued",
+        "primaryDisposition": "queued",
+        "anomalyIds": [
+          "anomaly.reading-heading-suffix.paper-2022-yi.group-2022-yi-reading-a-q23",
+          "anomaly.reading-heading-suffix.paper-2022-yi.group-2022-yi-reading-b-q27",
+          "anomaly.reading-heading-suffix.paper-2022-yi.group-2022-yi-reading-c-q31",
+          "anomaly.seven-marker-local-ordinal.paper-2022-yi.group-2022-yi-seven-choices"
+        ],
+        "recoveryActions": [
+          "source_bound_boundary_or_marker_review"
+        ],
+        "immutableEvidenceRefs": [
+          {
+            "kind": "asset-projection",
+            "present": true,
+            "path": "app/public/paper-assets/paper-2022-yi/latest/paper-asset.json",
+            "byteLength": 134962,
+            "sha256": "c48a46caadd60b3f4de855ae7ac72cace8e85adc8480c5b5ef8d1a62e3a4cf38"
+          },
+          {
+            "kind": "source-provenance",
+            "present": true,
+            "path": "app/public/paper-assets/paper-2022-yi/latest/import-meta.json",
+            "byteLength": 3677,
+            "sha256": "72619ff06f793618f00d0db0c1eb126521cb71024112480006261fd8ae806925"
+          },
+          {
+            "kind": "official-answer-lead",
+            "present": true,
+            "path": "app/public/paper-assets/paper-2022-yi/latest/answer-key.json",
+            "byteLength": 9238,
+            "sha256": "b9c407cb1d3ff4277fab10d1c18e565bf37dc2b0cf6e5112953b116c674af240"
+          }
+        ],
+        "dispositionHistory": [
+          {
+            "disposition": "queued",
+            "attemptId": null,
+            "evidenceRefs": [
+              {
+                "kind": "asset-projection",
+                "present": true,
+                "path": "app/public/paper-assets/paper-2022-yi/latest/paper-asset.json",
+                "byteLength": 134962,
+                "sha256": "c48a46caadd60b3f4de855ae7ac72cace8e85adc8480c5b5ef8d1a62e3a4cf38"
+              },
+              {
+                "kind": "source-provenance",
+                "present": true,
+                "path": "app/public/paper-assets/paper-2022-yi/latest/import-meta.json",
+                "byteLength": 3677,
+                "sha256": "72619ff06f793618f00d0db0c1eb126521cb71024112480006261fd8ae806925"
+              },
+              {
+                "kind": "official-answer-lead",
+                "present": true,
+                "path": "app/public/paper-assets/paper-2022-yi/latest/answer-key.json",
+                "byteLength": 9238,
+                "sha256": "b9c407cb1d3ff4277fab10d1c18e565bf37dc2b0cf6e5112953b116c674af240"
+              }
+            ]
+          }
+        ],
+        "failedAttempts": [],
+        "recompileAttempts": [],
+        "reviewDecision": null,
+        "publication": null,
+        "surfaceProof": null,
+        "rollbackProof": null,
+        "retainedAttemptCount": 0
+      },
+      {
+        "queueId": "migration.paper.paper-2023-i",
+        "paperId": "paper-2023-i",
+        "orderKey": "paper-2023-i",
+        "scope": "whole-paper",
+        "status": "queued",
+        "primaryDisposition": "queued",
+        "anomalyIds": [
+          "anomaly.seven-marker-local-ordinal.paper-2023-i.group-2023-i-seven-choices"
+        ],
+        "recoveryActions": [
+          "source_bound_boundary_or_marker_review"
+        ],
+        "immutableEvidenceRefs": [
+          {
+            "kind": "asset-projection",
+            "present": true,
+            "path": "app/public/paper-assets/paper-2023-i/latest/paper-asset.json",
+            "byteLength": 133363,
+            "sha256": "ebf76c5a60ca91d660a9421be25604497f58a704aa04fb236f0bd8f1b288f1cf"
+          },
+          {
+            "kind": "source-provenance",
+            "present": true,
+            "path": "app/public/paper-assets/paper-2023-i/latest/import-meta.json",
+            "byteLength": 4105,
+            "sha256": "b1be451fb56fb8ca9ef843eaeaa6f5c682516e5573a568becd413000f5ea8e68"
+          },
+          {
+            "kind": "official-answer-lead",
+            "present": true,
+            "path": "app/public/paper-assets/paper-2023-i/latest/answer-key.json",
+            "byteLength": 8231,
+            "sha256": "cde1eb2f4d8b61efd1f3017b853d6369fbd3cea972a369b525085776894fa5be"
+          }
+        ],
+        "dispositionHistory": [
+          {
+            "disposition": "queued",
+            "attemptId": null,
+            "evidenceRefs": [
+              {
+                "kind": "asset-projection",
+                "present": true,
+                "path": "app/public/paper-assets/paper-2023-i/latest/paper-asset.json",
+                "byteLength": 133363,
+                "sha256": "ebf76c5a60ca91d660a9421be25604497f58a704aa04fb236f0bd8f1b288f1cf"
+              },
+              {
+                "kind": "source-provenance",
+                "present": true,
+                "path": "app/public/paper-assets/paper-2023-i/latest/import-meta.json",
+                "byteLength": 4105,
+                "sha256": "b1be451fb56fb8ca9ef843eaeaa6f5c682516e5573a568becd413000f5ea8e68"
+              },
+              {
+                "kind": "official-answer-lead",
+                "present": true,
+                "path": "app/public/paper-assets/paper-2023-i/latest/answer-key.json",
+                "byteLength": 8231,
+                "sha256": "cde1eb2f4d8b61efd1f3017b853d6369fbd3cea972a369b525085776894fa5be"
+              }
+            ]
+          }
+        ],
+        "failedAttempts": [],
+        "recompileAttempts": [],
+        "reviewDecision": null,
+        "publication": null,
+        "surfaceProof": null,
+        "rollbackProof": null,
+        "retainedAttemptCount": 0
+      },
+      {
+        "queueId": "migration.paper.paper-2023-ii",
+        "paperId": "paper-2023-ii",
+        "orderKey": "paper-2023-ii",
+        "scope": "whole-paper",
+        "status": "queued",
+        "primaryDisposition": "queued",
+        "anomalyIds": [],
+        "recoveryActions": [],
+        "immutableEvidenceRefs": [
+          {
+            "kind": "asset-projection",
+            "present": true,
+            "path": "app/public/paper-assets/paper-2023-ii/latest/paper-asset.json",
+            "byteLength": 145545,
+            "sha256": "d4b0c04d2ea861faeeb8f59ef67a89fe7462377950f14bfbe28d3f8f79f53efc"
+          },
+          {
+            "kind": "source-provenance",
+            "present": true,
+            "path": "app/public/paper-assets/paper-2023-ii/latest/import-meta.json",
+            "byteLength": 4118,
+            "sha256": "d827ba9b70099238d1f6ad7e729ac146f66ecf59c272ab0366a4bf342616b116"
+          },
+          {
+            "kind": "official-answer-lead",
+            "present": true,
+            "path": "app/public/paper-assets/paper-2023-ii/latest/answer-key.json",
+            "byteLength": 8327,
+            "sha256": "b6539a4288bf3464097faa84a2bec25699875f2e7e3de57e356662c4a41e9922"
+          }
+        ],
+        "dispositionHistory": [
+          {
+            "disposition": "queued",
+            "attemptId": null,
+            "evidenceRefs": [
+              {
+                "kind": "asset-projection",
+                "present": true,
+                "path": "app/public/paper-assets/paper-2023-ii/latest/paper-asset.json",
+                "byteLength": 145545,
+                "sha256": "d4b0c04d2ea861faeeb8f59ef67a89fe7462377950f14bfbe28d3f8f79f53efc"
+              },
+              {
+                "kind": "source-provenance",
+                "present": true,
+                "path": "app/public/paper-assets/paper-2023-ii/latest/import-meta.json",
+                "byteLength": 4118,
+                "sha256": "d827ba9b70099238d1f6ad7e729ac146f66ecf59c272ab0366a4bf342616b116"
+              },
+              {
+                "kind": "official-answer-lead",
+                "present": true,
+                "path": "app/public/paper-assets/paper-2023-ii/latest/answer-key.json",
+                "byteLength": 8327,
+                "sha256": "b6539a4288bf3464097faa84a2bec25699875f2e7e3de57e356662c4a41e9922"
+              }
+            ]
+          }
+        ],
+        "failedAttempts": [],
+        "recompileAttempts": [],
+        "reviewDecision": null,
+        "publication": null,
+        "surfaceProof": null,
+        "rollbackProof": null,
+        "retainedAttemptCount": 0
+      },
+      {
+        "queueId": "migration.paper.paper-2023-jia",
+        "paperId": "paper-2023-jia",
+        "orderKey": "paper-2023-jia",
+        "scope": "whole-paper",
+        "status": "queued",
+        "primaryDisposition": "queued",
+        "anomalyIds": [
+          "anomaly.reading-heading-suffix.paper-2023-jia.group-2023-jia-reading-a-q23",
+          "anomaly.reading-heading-suffix.paper-2023-jia.group-2023-jia-reading-b-q27",
+          "anomaly.reading-heading-suffix.paper-2023-jia.group-2023-jia-reading-c-q31",
+          "anomaly.seven-marker-local-ordinal.paper-2023-jia.group-2023-jia-seven-choices"
+        ],
+        "recoveryActions": [
+          "source_bound_boundary_or_marker_review"
+        ],
+        "immutableEvidenceRefs": [
+          {
+            "kind": "asset-projection",
+            "present": true,
+            "path": "app/public/paper-assets/paper-2023-jia/latest/paper-asset.json",
+            "byteLength": 130906,
+            "sha256": "939760dd347950a8cd335601c5c66299d23cb9190b2a945e8d3edab25d706344"
+          },
+          {
+            "kind": "source-provenance",
+            "present": true,
+            "path": "app/public/paper-assets/paper-2023-jia/latest/import-meta.json",
+            "byteLength": 3764,
+            "sha256": "3fd6c7f6d126d0258152f9f8ac4858d2e6f76b6d3416c68dd33550a3507bf53f"
+          },
+          {
+            "kind": "official-answer-lead",
+            "present": true,
+            "path": "app/public/paper-assets/paper-2023-jia/latest/answer-key.json",
+            "byteLength": 9333,
+            "sha256": "588d059216a370bc7596fcd38f392686e9131695354de246b8280b06171ebc78"
+          }
+        ],
+        "dispositionHistory": [
+          {
+            "disposition": "queued",
+            "attemptId": null,
+            "evidenceRefs": [
+              {
+                "kind": "asset-projection",
+                "present": true,
+                "path": "app/public/paper-assets/paper-2023-jia/latest/paper-asset.json",
+                "byteLength": 130906,
+                "sha256": "939760dd347950a8cd335601c5c66299d23cb9190b2a945e8d3edab25d706344"
+              },
+              {
+                "kind": "source-provenance",
+                "present": true,
+                "path": "app/public/paper-assets/paper-2023-jia/latest/import-meta.json",
+                "byteLength": 3764,
+                "sha256": "3fd6c7f6d126d0258152f9f8ac4858d2e6f76b6d3416c68dd33550a3507bf53f"
+              },
+              {
+                "kind": "official-answer-lead",
+                "present": true,
+                "path": "app/public/paper-assets/paper-2023-jia/latest/answer-key.json",
+                "byteLength": 9333,
+                "sha256": "588d059216a370bc7596fcd38f392686e9131695354de246b8280b06171ebc78"
+              }
+            ]
+          }
+        ],
+        "failedAttempts": [],
+        "recompileAttempts": [],
+        "reviewDecision": null,
+        "publication": null,
+        "surfaceProof": null,
+        "rollbackProof": null,
+        "retainedAttemptCount": 0
+      },
+      {
+        "queueId": "migration.paper.paper-2023-yi",
+        "paperId": "paper-2023-yi",
+        "orderKey": "paper-2023-yi",
+        "scope": "whole-paper",
+        "status": "queued",
+        "primaryDisposition": "queued",
+        "anomalyIds": [
+          "anomaly.reading-heading-suffix.paper-2023-yi.group-2023-yi-reading-a-q23",
+          "anomaly.reading-heading-suffix.paper-2023-yi.group-2023-yi-reading-b-q27",
+          "anomaly.reading-heading-suffix.paper-2023-yi.group-2023-yi-reading-c-q31",
+          "anomaly.seven-marker-local-ordinal.paper-2023-yi.group-2023-yi-seven-choices"
+        ],
+        "recoveryActions": [
+          "source_bound_boundary_or_marker_review"
+        ],
+        "immutableEvidenceRefs": [
+          {
+            "kind": "asset-projection",
+            "present": true,
+            "path": "app/public/paper-assets/paper-2023-yi/latest/paper-asset.json",
+            "byteLength": 124718,
+            "sha256": "2e8c36e2d2fdc336ea3925c264b1884f1d367d7138ceadebfc05ed6d47767ddb"
+          },
+          {
+            "kind": "source-provenance",
+            "present": true,
+            "path": "app/public/paper-assets/paper-2023-yi/latest/import-meta.json",
+            "byteLength": 3604,
+            "sha256": "1119444d556028b65014d3305900e7d86f363dd5d6726eb88c3d7e5b3fdf5331"
+          },
+          {
+            "kind": "official-answer-lead",
+            "present": true,
+            "path": "app/public/paper-assets/paper-2023-yi/latest/answer-key.json",
+            "byteLength": 9244,
+            "sha256": "e5302bbf3831470febd236ca86a976f28572e826e7bc529454bbb34a9bcd12ea"
+          }
+        ],
+        "dispositionHistory": [
+          {
+            "disposition": "queued",
+            "attemptId": null,
+            "evidenceRefs": [
+              {
+                "kind": "asset-projection",
+                "present": true,
+                "path": "app/public/paper-assets/paper-2023-yi/latest/paper-asset.json",
+                "byteLength": 124718,
+                "sha256": "2e8c36e2d2fdc336ea3925c264b1884f1d367d7138ceadebfc05ed6d47767ddb"
+              },
+              {
+                "kind": "source-provenance",
+                "present": true,
+                "path": "app/public/paper-assets/paper-2023-yi/latest/import-meta.json",
+                "byteLength": 3604,
+                "sha256": "1119444d556028b65014d3305900e7d86f363dd5d6726eb88c3d7e5b3fdf5331"
+              },
+              {
+                "kind": "official-answer-lead",
+                "present": true,
+                "path": "app/public/paper-assets/paper-2023-yi/latest/answer-key.json",
+                "byteLength": 9244,
+                "sha256": "e5302bbf3831470febd236ca86a976f28572e826e7bc529454bbb34a9bcd12ea"
+              }
+            ]
+          }
+        ],
+        "failedAttempts": [],
+        "recompileAttempts": [],
+        "reviewDecision": null,
+        "publication": null,
+        "surfaceProof": null,
+        "rollbackProof": null,
+        "retainedAttemptCount": 0
+      },
+      {
+        "queueId": "migration.paper.paper-2024-i",
+        "paperId": "paper-2024-i",
+        "orderKey": "paper-2024-i",
+        "scope": "whole-paper",
+        "status": "queued",
+        "primaryDisposition": "queued",
+        "anomalyIds": [],
+        "recoveryActions": [],
+        "immutableEvidenceRefs": [
+          {
+            "kind": "asset-projection",
+            "present": true,
+            "path": "app/public/paper-assets/paper-2024-i/latest/paper-asset.json",
+            "byteLength": 136794,
+            "sha256": "b706d2ef636074432152c4de77f0433a46d4e6d46baaa13ae7a7ef416b773fbd"
+          },
+          {
+            "kind": "source-provenance",
+            "present": true,
+            "path": "app/public/paper-assets/paper-2024-i/latest/import-meta.json",
+            "byteLength": 4003,
+            "sha256": "3e3934b03777762ecff285ad673c2e85de527326bd186b60b7c431f8ab6fc53e"
+          },
+          {
+            "kind": "official-answer-lead",
+            "present": true,
+            "path": "app/public/paper-assets/paper-2024-i/latest/answer-key.json",
+            "byteLength": 8245,
+            "sha256": "f6c4250b196c2e152dc6d27ae64a52a61f6e363fea969f80948a8f38e494422c"
+          }
+        ],
+        "dispositionHistory": [
+          {
+            "disposition": "queued",
+            "attemptId": null,
+            "evidenceRefs": [
+              {
+                "kind": "asset-projection",
+                "present": true,
+                "path": "app/public/paper-assets/paper-2024-i/latest/paper-asset.json",
+                "byteLength": 136794,
+                "sha256": "b706d2ef636074432152c4de77f0433a46d4e6d46baaa13ae7a7ef416b773fbd"
+              },
+              {
+                "kind": "source-provenance",
+                "present": true,
+                "path": "app/public/paper-assets/paper-2024-i/latest/import-meta.json",
+                "byteLength": 4003,
+                "sha256": "3e3934b03777762ecff285ad673c2e85de527326bd186b60b7c431f8ab6fc53e"
+              },
+              {
+                "kind": "official-answer-lead",
+                "present": true,
+                "path": "app/public/paper-assets/paper-2024-i/latest/answer-key.json",
+                "byteLength": 8245,
+                "sha256": "f6c4250b196c2e152dc6d27ae64a52a61f6e363fea969f80948a8f38e494422c"
+              }
+            ]
+          }
+        ],
+        "failedAttempts": [],
+        "recompileAttempts": [],
+        "reviewDecision": null,
+        "publication": null,
+        "surfaceProof": null,
+        "rollbackProof": null,
+        "retainedAttemptCount": 0
+      },
+      {
+        "queueId": "migration.paper.paper-2024-ii",
+        "paperId": "paper-2024-ii",
+        "orderKey": "paper-2024-ii",
+        "scope": "whole-paper",
+        "status": "queued",
+        "primaryDisposition": "queued",
+        "anomalyIds": [
+          "anomaly.seven-marker-local-ordinal.paper-2024-ii.group-2024-ii-seven-choices"
+        ],
+        "recoveryActions": [
+          "source_bound_boundary_or_marker_review"
+        ],
+        "immutableEvidenceRefs": [
+          {
+            "kind": "asset-projection",
+            "present": true,
+            "path": "app/public/paper-assets/paper-2024-ii/latest/paper-asset.json",
+            "byteLength": 147668,
+            "sha256": "6728f9c56f4f6956246c67eff7f31a07cb2622ef7bfaf974706aff5ec2f79c3a"
+          },
+          {
+            "kind": "source-provenance",
+            "present": true,
+            "path": "app/public/paper-assets/paper-2024-ii/latest/import-meta.json",
+            "byteLength": 4171,
+            "sha256": "82c37a4e003594cf45e3a1c3a412acd6b59a4f7a29f7270f69d04c2c604dfd1b"
+          },
+          {
+            "kind": "official-answer-lead",
+            "present": true,
+            "path": "app/public/paper-assets/paper-2024-ii/latest/answer-key.json",
+            "byteLength": 8326,
+            "sha256": "be98fbabf907cae96a49aabdbc2f9294d7267a064e3a7fc11c5d07439184be5f"
+          }
+        ],
+        "dispositionHistory": [
+          {
+            "disposition": "queued",
+            "attemptId": null,
+            "evidenceRefs": [
+              {
+                "kind": "asset-projection",
+                "present": true,
+                "path": "app/public/paper-assets/paper-2024-ii/latest/paper-asset.json",
+                "byteLength": 147668,
+                "sha256": "6728f9c56f4f6956246c67eff7f31a07cb2622ef7bfaf974706aff5ec2f79c3a"
+              },
+              {
+                "kind": "source-provenance",
+                "present": true,
+                "path": "app/public/paper-assets/paper-2024-ii/latest/import-meta.json",
+                "byteLength": 4171,
+                "sha256": "82c37a4e003594cf45e3a1c3a412acd6b59a4f7a29f7270f69d04c2c604dfd1b"
+              },
+              {
+                "kind": "official-answer-lead",
+                "present": true,
+                "path": "app/public/paper-assets/paper-2024-ii/latest/answer-key.json",
+                "byteLength": 8326,
+                "sha256": "be98fbabf907cae96a49aabdbc2f9294d7267a064e3a7fc11c5d07439184be5f"
+              }
+            ]
+          }
+        ],
+        "failedAttempts": [],
+        "recompileAttempts": [],
+        "reviewDecision": null,
+        "publication": null,
+        "surfaceProof": null,
+        "rollbackProof": null,
+        "retainedAttemptCount": 0
+      },
+      {
+        "queueId": "migration.paper.paper-2024-jia",
+        "paperId": "paper-2024-jia",
+        "orderKey": "paper-2024-jia",
+        "scope": "whole-paper",
+        "status": "queued",
+        "primaryDisposition": "queued",
+        "anomalyIds": [
+          "anomaly.seven-marker-local-ordinal.paper-2024-jia.group-2024-jia-seven-choices"
+        ],
+        "recoveryActions": [
+          "source_bound_boundary_or_marker_review"
+        ],
+        "immutableEvidenceRefs": [
+          {
+            "kind": "asset-projection",
+            "present": true,
+            "path": "app/public/paper-assets/paper-2024-jia/latest/paper-asset.json",
+            "byteLength": 132795,
+            "sha256": "172adb09041279b207640f79e1d461b8670267fc676355f8290f998382d845d8"
+          },
+          {
+            "kind": "source-provenance",
+            "present": true,
+            "path": "app/public/paper-assets/paper-2024-jia/latest/import-meta.json",
+            "byteLength": 3649,
+            "sha256": "63fa31ad8b1b7955d4755644d1a24f8fad7d080f6ce47c606f273794eaeeed44"
+          },
+          {
+            "kind": "official-answer-lead",
+            "present": true,
+            "path": "app/public/paper-assets/paper-2024-jia/latest/answer-key.json",
+            "byteLength": 9326,
+            "sha256": "e0732966d95469ef94d1a5296dea619fa74b7554eecf6bf9de1bdfe4b96ddbe9"
+          }
+        ],
+        "dispositionHistory": [
+          {
+            "disposition": "queued",
+            "attemptId": null,
+            "evidenceRefs": [
+              {
+                "kind": "asset-projection",
+                "present": true,
+                "path": "app/public/paper-assets/paper-2024-jia/latest/paper-asset.json",
+                "byteLength": 132795,
+                "sha256": "172adb09041279b207640f79e1d461b8670267fc676355f8290f998382d845d8"
+              },
+              {
+                "kind": "source-provenance",
+                "present": true,
+                "path": "app/public/paper-assets/paper-2024-jia/latest/import-meta.json",
+                "byteLength": 3649,
+                "sha256": "63fa31ad8b1b7955d4755644d1a24f8fad7d080f6ce47c606f273794eaeeed44"
+              },
+              {
+                "kind": "official-answer-lead",
+                "present": true,
+                "path": "app/public/paper-assets/paper-2024-jia/latest/answer-key.json",
+                "byteLength": 9326,
+                "sha256": "e0732966d95469ef94d1a5296dea619fa74b7554eecf6bf9de1bdfe4b96ddbe9"
+              }
+            ]
+          }
+        ],
+        "failedAttempts": [],
+        "recompileAttempts": [],
+        "reviewDecision": null,
+        "publication": null,
+        "surfaceProof": null,
+        "rollbackProof": null,
+        "retainedAttemptCount": 0
+      },
+      {
+        "queueId": "migration.paper.paper-2025-i",
+        "paperId": "paper-2025-i",
+        "orderKey": "paper-2025-i",
+        "scope": "whole-paper",
+        "status": "queued",
+        "primaryDisposition": "queued",
+        "anomalyIds": [],
+        "recoveryActions": [],
+        "immutableEvidenceRefs": [
+          {
+            "kind": "asset-projection",
+            "present": true,
+            "path": "app/public/paper-assets/paper-2025-i/latest/paper-asset.json",
+            "byteLength": 140079,
+            "sha256": "77bf44921521aed4b407ea7ff8129ece9c5a48fcf6459fdcdc1a3e49b6479615"
+          },
+          {
+            "kind": "source-provenance",
+            "present": true,
+            "path": "app/public/paper-assets/paper-2025-i/latest/import-meta.json",
+            "byteLength": 4294,
+            "sha256": "95ff824a5188ded2a2f92cc7538b58e61a8f1520802e0512e822e97126cb7385"
+          },
+          {
+            "kind": "official-answer-lead",
+            "present": true,
+            "path": "app/public/paper-assets/paper-2025-i/latest/answer-key.json",
+            "byteLength": 8240,
+            "sha256": "38dc3345eda621f0fc6c85b10ab76239d7949a773efad273807189b8b5b55edd"
+          }
+        ],
+        "dispositionHistory": [
+          {
+            "disposition": "queued",
+            "attemptId": null,
+            "evidenceRefs": [
+              {
+                "kind": "asset-projection",
+                "present": true,
+                "path": "app/public/paper-assets/paper-2025-i/latest/paper-asset.json",
+                "byteLength": 140079,
+                "sha256": "77bf44921521aed4b407ea7ff8129ece9c5a48fcf6459fdcdc1a3e49b6479615"
+              },
+              {
+                "kind": "source-provenance",
+                "present": true,
+                "path": "app/public/paper-assets/paper-2025-i/latest/import-meta.json",
+                "byteLength": 4294,
+                "sha256": "95ff824a5188ded2a2f92cc7538b58e61a8f1520802e0512e822e97126cb7385"
+              },
+              {
+                "kind": "official-answer-lead",
+                "present": true,
+                "path": "app/public/paper-assets/paper-2025-i/latest/answer-key.json",
+                "byteLength": 8240,
+                "sha256": "38dc3345eda621f0fc6c85b10ab76239d7949a773efad273807189b8b5b55edd"
+              }
+            ]
+          }
+        ],
+        "failedAttempts": [],
+        "recompileAttempts": [],
+        "reviewDecision": null,
+        "publication": null,
+        "surfaceProof": null,
+        "rollbackProof": null,
+        "retainedAttemptCount": 0
+      },
+      {
+        "queueId": "migration.paper.paper-2025-ii",
+        "paperId": "paper-2025-ii",
+        "orderKey": "paper-2025-ii",
+        "scope": "whole-paper",
+        "status": "queued",
+        "primaryDisposition": "queued",
+        "anomalyIds": [
+          "anomaly.seven-marker-local-ordinal.paper-2025-ii.group-2025-ii-seven-choices"
+        ],
+        "recoveryActions": [
+          "source_bound_boundary_or_marker_review"
+        ],
+        "immutableEvidenceRefs": [
+          {
+            "kind": "asset-projection",
+            "present": true,
+            "path": "app/public/paper-assets/paper-2025-ii/latest/paper-asset.json",
+            "byteLength": 140331,
+            "sha256": "26a7297ec2be5c8d73dc0bc3f6419e982aa320b506851e0bbaeee91b14d82ddb"
+          },
+          {
+            "kind": "source-provenance",
+            "present": true,
+            "path": "app/public/paper-assets/paper-2025-ii/latest/import-meta.json",
+            "byteLength": 4276,
+            "sha256": "400c87e967d0ba16181228e09b691bf72376162c9292c2712062666150e1dd2e"
+          },
+          {
+            "kind": "official-answer-lead",
+            "present": true,
+            "path": "app/public/paper-assets/paper-2025-ii/latest/answer-key.json",
+            "byteLength": 8323,
+            "sha256": "2647ba1eff97eea8ca2f3317d5f821b346c02fa82189365770491286514a89db"
+          }
+        ],
+        "dispositionHistory": [
+          {
+            "disposition": "queued",
+            "attemptId": null,
+            "evidenceRefs": [
+              {
+                "kind": "asset-projection",
+                "present": true,
+                "path": "app/public/paper-assets/paper-2025-ii/latest/paper-asset.json",
+                "byteLength": 140331,
+                "sha256": "26a7297ec2be5c8d73dc0bc3f6419e982aa320b506851e0bbaeee91b14d82ddb"
+              },
+              {
+                "kind": "source-provenance",
+                "present": true,
+                "path": "app/public/paper-assets/paper-2025-ii/latest/import-meta.json",
+                "byteLength": 4276,
+                "sha256": "400c87e967d0ba16181228e09b691bf72376162c9292c2712062666150e1dd2e"
+              },
+              {
+                "kind": "official-answer-lead",
+                "present": true,
+                "path": "app/public/paper-assets/paper-2025-ii/latest/answer-key.json",
+                "byteLength": 8323,
+                "sha256": "2647ba1eff97eea8ca2f3317d5f821b346c02fa82189365770491286514a89db"
+              }
+            ]
+          }
+        ],
+        "failedAttempts": [],
+        "recompileAttempts": [],
+        "reviewDecision": null,
+        "publication": null,
+        "surfaceProof": null,
+        "rollbackProof": null,
+        "retainedAttemptCount": 0
+      },
+      {
+        "queueId": "migration.paper.paper-2026-i",
+        "paperId": "paper-2026-i",
+        "orderKey": "paper-2026-i",
+        "scope": "whole-paper",
+        "status": "queued",
+        "primaryDisposition": "queued",
+        "anomalyIds": [
+          "anomaly.figure-manifest-incomplete-digest.paper-2026-i.figures",
+          "anomaly.source-type-mismatch.paper-2026-i.primary",
+          "anomaly.writing-analysis-missing.paper-2026-i.writing"
+        ],
+        "recoveryActions": [
+          "restore_or_recapture_immutable_source_evidence",
+          "source_bound_writing_shape_review"
+        ],
+        "immutableEvidenceRefs": [
+          {
+            "kind": "asset-projection",
+            "present": true,
+            "path": "app/public/paper-assets/paper-2026-i/latest/paper-asset.json",
+            "byteLength": 129359,
+            "sha256": "fe7feb2cc9554b00bbab96a7d4fe5e499513c564c28e6c314e0373e29b2ca7bf"
+          },
+          {
+            "kind": "source-provenance",
+            "present": true,
+            "path": "app/public/paper-assets/paper-2026-i/latest/import-meta.json",
+            "byteLength": 3972,
+            "sha256": "dda79f448a049d9ce6293049b4e1dec51fba35cb683e4e7860f5390ab3d3e900"
+          },
+          {
+            "kind": "official-answer-lead",
+            "present": true,
+            "path": "app/public/paper-assets/paper-2026-i/latest/answer-key.json",
+            "byteLength": 8243,
+            "sha256": "17502bb7685b83afc8847f3a44f8ac3c68defcb941ae75ba1ff14945c07daaf0"
+          }
+        ],
+        "dispositionHistory": [
+          {
+            "disposition": "queued",
+            "attemptId": null,
+            "evidenceRefs": [
+              {
+                "kind": "asset-projection",
+                "present": true,
+                "path": "app/public/paper-assets/paper-2026-i/latest/paper-asset.json",
+                "byteLength": 129359,
+                "sha256": "fe7feb2cc9554b00bbab96a7d4fe5e499513c564c28e6c314e0373e29b2ca7bf"
+              },
+              {
+                "kind": "source-provenance",
+                "present": true,
+                "path": "app/public/paper-assets/paper-2026-i/latest/import-meta.json",
+                "byteLength": 3972,
+                "sha256": "dda79f448a049d9ce6293049b4e1dec51fba35cb683e4e7860f5390ab3d3e900"
+              },
+              {
+                "kind": "official-answer-lead",
+                "present": true,
+                "path": "app/public/paper-assets/paper-2026-i/latest/answer-key.json",
+                "byteLength": 8243,
+                "sha256": "17502bb7685b83afc8847f3a44f8ac3c68defcb941ae75ba1ff14945c07daaf0"
+              }
+            ]
+          }
+        ],
+        "failedAttempts": [],
+        "recompileAttempts": [],
+        "reviewDecision": null,
+        "publication": null,
+        "surfaceProof": null,
+        "rollbackProof": null,
+        "retainedAttemptCount": 0
+      },
+      {
+        "queueId": "migration.paper.paper-960d0f8d",
+        "paperId": "paper-960d0f8d",
+        "orderKey": "paper-960d0f8d",
+        "scope": "whole-paper",
+        "status": "queued",
+        "primaryDisposition": "queued",
+        "anomalyIds": [
+          "anomaly.grammar-marker-local-ordinal.paper-960d0f8d.group-960d0f8d-grammar-fill",
+          "anomaly.mixed-grammar-marker-dialect.paper-960d0f8d.group-960d0f8d-grammar-fill",
+          "anomaly.mixed-seven-marker-dialect.paper-960d0f8d.group-960d0f8d-seven-choices"
+        ],
+        "recoveryActions": [
+          "source_bound_boundary_or_marker_review"
+        ],
+        "immutableEvidenceRefs": [
+          {
+            "kind": "asset-projection",
+            "present": true,
+            "path": "app/public/paper-assets/paper-960d0f8d/latest/paper-asset.json",
+            "byteLength": 150793,
+            "sha256": "2578eb70e069c6d39a6d92bbc5254a8c23ed08b152287c2c80167d2121df2a14"
+          },
+          {
+            "kind": "source-provenance",
+            "present": true,
+            "path": "app/public/paper-assets/paper-960d0f8d/latest/import-meta.json",
+            "byteLength": 4212,
+            "sha256": "91fb2a6d85746c9194108a0e59fd0efc9f222ae7ccb73a55153eb7557b1954e4"
+          },
+          {
+            "kind": "official-answer-lead",
+            "present": true,
+            "path": "app/public/paper-assets/paper-960d0f8d/latest/answer-key.json",
+            "byteLength": 8421,
+            "sha256": "86b085d93a418f8112f6c777c8a354b097bb5f7cc9849634c7690e36c730a77d"
+          }
+        ],
+        "dispositionHistory": [
+          {
+            "disposition": "queued",
+            "attemptId": null,
+            "evidenceRefs": [
+              {
+                "kind": "asset-projection",
+                "present": true,
+                "path": "app/public/paper-assets/paper-960d0f8d/latest/paper-asset.json",
+                "byteLength": 150793,
+                "sha256": "2578eb70e069c6d39a6d92bbc5254a8c23ed08b152287c2c80167d2121df2a14"
+              },
+              {
+                "kind": "source-provenance",
+                "present": true,
+                "path": "app/public/paper-assets/paper-960d0f8d/latest/import-meta.json",
+                "byteLength": 4212,
+                "sha256": "91fb2a6d85746c9194108a0e59fd0efc9f222ae7ccb73a55153eb7557b1954e4"
+              },
+              {
+                "kind": "official-answer-lead",
+                "present": true,
+                "path": "app/public/paper-assets/paper-960d0f8d/latest/answer-key.json",
+                "byteLength": 8421,
+                "sha256": "86b085d93a418f8112f6c777c8a354b097bb5f7cc9849634c7690e36c730a77d"
+              }
+            ]
+          }
+        ],
+        "failedAttempts": [],
+        "recompileAttempts": [],
+        "reviewDecision": null,
+        "publication": null,
+        "surfaceProof": null,
+        "rollbackProof": null,
+        "retainedAttemptCount": 0
+      },
+      {
+        "queueId": "migration.paper.paper-zj-2020-jan",
+        "paperId": "paper-zj-2020-jan",
+        "orderKey": "paper-zj-2020-jan",
+        "scope": "whole-paper",
+        "status": "queued",
+        "primaryDisposition": "queued",
+        "anomalyIds": [
+          "anomaly.reading-heading-suffix.paper-zj-2020-jan.group-zj-2020-jan-reading-a-q23",
+          "anomaly.reading-heading-suffix.paper-zj-2020-jan.group-zj-2020-jan-reading-b-q26"
+        ],
+        "recoveryActions": [
+          "source_bound_boundary_or_marker_review"
+        ],
+        "immutableEvidenceRefs": [
+          {
+            "kind": "asset-projection",
+            "present": true,
+            "path": "app/public/paper-assets/paper-zj-2020-jan/latest/paper-asset.json",
+            "byteLength": 124267,
+            "sha256": "e0b7bda8541b5f36adca1fbc8e48148e249a15fdc7a4f35559dee156da777d61"
+          },
+          {
+            "kind": "source-provenance",
+            "present": true,
+            "path": "app/public/paper-assets/paper-zj-2020-jan/latest/import-meta.json",
+            "byteLength": 4133,
+            "sha256": "2d8af84e387c806813798da60be4bab314b83d6d5de1478f7a86925a1427d81d"
+          },
+          {
+            "kind": "official-answer-lead",
+            "present": true,
+            "path": "app/public/paper-assets/paper-zj-2020-jan/latest/answer-key.json",
+            "byteLength": 8710,
+            "sha256": "7c8294f2b5e4d648cde479df7c9992df8c24cdf688ee7e6a5f11c17881184016"
+          }
+        ],
+        "dispositionHistory": [
+          {
+            "disposition": "queued",
+            "attemptId": null,
+            "evidenceRefs": [
+              {
+                "kind": "asset-projection",
+                "present": true,
+                "path": "app/public/paper-assets/paper-zj-2020-jan/latest/paper-asset.json",
+                "byteLength": 124267,
+                "sha256": "e0b7bda8541b5f36adca1fbc8e48148e249a15fdc7a4f35559dee156da777d61"
+              },
+              {
+                "kind": "source-provenance",
+                "present": true,
+                "path": "app/public/paper-assets/paper-zj-2020-jan/latest/import-meta.json",
+                "byteLength": 4133,
+                "sha256": "2d8af84e387c806813798da60be4bab314b83d6d5de1478f7a86925a1427d81d"
+              },
+              {
+                "kind": "official-answer-lead",
+                "present": true,
+                "path": "app/public/paper-assets/paper-zj-2020-jan/latest/answer-key.json",
+                "byteLength": 8710,
+                "sha256": "7c8294f2b5e4d648cde479df7c9992df8c24cdf688ee7e6a5f11c17881184016"
+              }
+            ]
+          }
+        ],
+        "failedAttempts": [],
+        "recompileAttempts": [],
+        "reviewDecision": null,
+        "publication": null,
+        "surfaceProof": null,
+        "rollbackProof": null,
+        "retainedAttemptCount": 0
+      },
+      {
+        "queueId": "migration.paper.paper-zj-2020-jul",
+        "paperId": "paper-zj-2020-jul",
+        "orderKey": "paper-zj-2020-jul",
+        "scope": "whole-paper",
+        "status": "queued",
+        "primaryDisposition": "queued",
+        "anomalyIds": [
+          "anomaly.continuation-starter-cardinality.paper-zj-2020-jul.group-zj-2020-jul-writing-continuation-0",
+          "anomaly.reading-heading-suffix.paper-zj-2020-jul.group-zj-2020-jul-reading-a-q24",
+          "anomaly.reading-heading-suffix.paper-zj-2020-jul.group-zj-2020-jul-reading-b-q27"
+        ],
+        "recoveryActions": [
+          "source_bound_boundary_or_marker_review",
+          "source_bound_writing_shape_review"
+        ],
+        "immutableEvidenceRefs": [
+          {
+            "kind": "asset-projection",
+            "present": true,
+            "path": "app/public/paper-assets/paper-zj-2020-jul/latest/paper-asset.json",
+            "byteLength": 120325,
+            "sha256": "3698679f6e261a111696b8122ed34f66b4e7a29d65379629fb5a2f93fd6d1eb6"
+          },
+          {
+            "kind": "source-provenance",
+            "present": true,
+            "path": "app/public/paper-assets/paper-zj-2020-jul/latest/import-meta.json",
+            "byteLength": 4229,
+            "sha256": "f9856f3cc97440e770887e73ef08e08d2f72e941797c5cfd9e83ea8518128719"
+          },
+          {
+            "kind": "official-answer-lead",
+            "present": true,
+            "path": "app/public/paper-assets/paper-zj-2020-jul/latest/answer-key.json",
+            "byteLength": 8713,
+            "sha256": "2a0c5ad4df2d92bd3ec4c2c61d0af517c05e803b2f441c88dec51089c436c81b"
+          }
+        ],
+        "dispositionHistory": [
+          {
+            "disposition": "queued",
+            "attemptId": null,
+            "evidenceRefs": [
+              {
+                "kind": "asset-projection",
+                "present": true,
+                "path": "app/public/paper-assets/paper-zj-2020-jul/latest/paper-asset.json",
+                "byteLength": 120325,
+                "sha256": "3698679f6e261a111696b8122ed34f66b4e7a29d65379629fb5a2f93fd6d1eb6"
+              },
+              {
+                "kind": "source-provenance",
+                "present": true,
+                "path": "app/public/paper-assets/paper-zj-2020-jul/latest/import-meta.json",
+                "byteLength": 4229,
+                "sha256": "f9856f3cc97440e770887e73ef08e08d2f72e941797c5cfd9e83ea8518128719"
+              },
+              {
+                "kind": "official-answer-lead",
+                "present": true,
+                "path": "app/public/paper-assets/paper-zj-2020-jul/latest/answer-key.json",
+                "byteLength": 8713,
+                "sha256": "2a0c5ad4df2d92bd3ec4c2c61d0af517c05e803b2f441c88dec51089c436c81b"
+              }
+            ]
+          }
+        ],
+        "failedAttempts": [],
+        "recompileAttempts": [],
+        "reviewDecision": null,
+        "publication": null,
+        "surfaceProof": null,
+        "rollbackProof": null,
+        "retainedAttemptCount": 0
+      },
+      {
+        "queueId": "migration.paper.paper-zj-2021-jan",
+        "paperId": "paper-zj-2021-jan",
+        "orderKey": "paper-zj-2021-jan",
+        "scope": "whole-paper",
+        "status": "queued",
+        "primaryDisposition": "queued",
+        "anomalyIds": [
+          "anomaly.grammar-marker-local-ordinal.paper-zj-2021-jan.group-zj-2021-jan-grammar-fill",
+          "anomaly.seven-marker-local-ordinal.paper-zj-2021-jan.group-zj-2021-jan-seven-choices"
+        ],
+        "recoveryActions": [
+          "source_bound_boundary_or_marker_review"
+        ],
+        "immutableEvidenceRefs": [
+          {
+            "kind": "asset-projection",
+            "present": true,
+            "path": "app/public/paper-assets/paper-zj-2021-jan/latest/paper-asset.json",
+            "byteLength": 122424,
+            "sha256": "c45b857db5afdffc1e2936b711b775fb2bb4e13b1bcb9cd7bcdb4b32912ca4f4"
+          },
+          {
+            "kind": "source-provenance",
+            "present": true,
+            "path": "app/public/paper-assets/paper-zj-2021-jan/latest/import-meta.json",
+            "byteLength": 3830,
+            "sha256": "d95c499c4f9ca4b5cf6d7a73251466a7a08d3b5198b9bb057b73bfa5b7cd5fa6"
+          },
+          {
+            "kind": "official-answer-lead",
+            "present": true,
+            "path": "app/public/paper-assets/paper-zj-2021-jan/latest/answer-key.json",
+            "byteLength": 8713,
+            "sha256": "6dc60be2c5cb3bf8db1a4d2aeaf1e778c0da115c9abf640523c7883248dd1103"
+          }
+        ],
+        "dispositionHistory": [
+          {
+            "disposition": "queued",
+            "attemptId": null,
+            "evidenceRefs": [
+              {
+                "kind": "asset-projection",
+                "present": true,
+                "path": "app/public/paper-assets/paper-zj-2021-jan/latest/paper-asset.json",
+                "byteLength": 122424,
+                "sha256": "c45b857db5afdffc1e2936b711b775fb2bb4e13b1bcb9cd7bcdb4b32912ca4f4"
+              },
+              {
+                "kind": "source-provenance",
+                "present": true,
+                "path": "app/public/paper-assets/paper-zj-2021-jan/latest/import-meta.json",
+                "byteLength": 3830,
+                "sha256": "d95c499c4f9ca4b5cf6d7a73251466a7a08d3b5198b9bb057b73bfa5b7cd5fa6"
+              },
+              {
+                "kind": "official-answer-lead",
+                "present": true,
+                "path": "app/public/paper-assets/paper-zj-2021-jan/latest/answer-key.json",
+                "byteLength": 8713,
+                "sha256": "6dc60be2c5cb3bf8db1a4d2aeaf1e778c0da115c9abf640523c7883248dd1103"
+              }
+            ]
+          }
+        ],
+        "failedAttempts": [],
+        "recompileAttempts": [],
+        "reviewDecision": null,
+        "publication": null,
+        "surfaceProof": null,
+        "rollbackProof": null,
+        "retainedAttemptCount": 0
+      },
+      {
+        "queueId": "migration.paper.paper-zj-2021-jun",
+        "paperId": "paper-zj-2021-jun",
+        "orderKey": "paper-zj-2021-jun",
+        "scope": "whole-paper",
+        "status": "queued",
+        "primaryDisposition": "queued",
+        "anomalyIds": [
+          "anomaly.grammar-marker-local-ordinal.paper-zj-2021-jun.group-zj-2021-jun-grammar-fill",
+          "anomaly.reading-heading-suffix.paper-zj-2021-jun.group-zj-2021-jun-reading-a-q23",
+          "anomaly.reading-heading-suffix.paper-zj-2021-jun.group-zj-2021-jun-reading-b-q27",
+          "anomaly.seven-marker-local-ordinal.paper-zj-2021-jun.group-zj-2021-jun-seven-choices"
+        ],
+        "recoveryActions": [
+          "source_bound_boundary_or_marker_review"
+        ],
+        "immutableEvidenceRefs": [
+          {
+            "kind": "asset-projection",
+            "present": true,
+            "path": "app/public/paper-assets/paper-zj-2021-jun/latest/paper-asset.json",
+            "byteLength": 116295,
+            "sha256": "d4f6f71a4d08d3fbe9d753caf9be1048ba0b04c05af480279b256fc858226580"
+          },
+          {
+            "kind": "source-provenance",
+            "present": true,
+            "path": "app/public/paper-assets/paper-zj-2021-jun/latest/import-meta.json",
+            "byteLength": 3812,
+            "sha256": "67618ba5d155306010ba8df2e1e05af323e69b3595011f90294473d047913515"
+          },
+          {
+            "kind": "official-answer-lead",
+            "present": true,
+            "path": "app/public/paper-assets/paper-zj-2021-jun/latest/answer-key.json",
+            "byteLength": 8728,
+            "sha256": "22c2002a27de22ead0433ed9bec45b1a7f4177cae987543deca4b0189417cb4d"
+          }
+        ],
+        "dispositionHistory": [
+          {
+            "disposition": "queued",
+            "attemptId": null,
+            "evidenceRefs": [
+              {
+                "kind": "asset-projection",
+                "present": true,
+                "path": "app/public/paper-assets/paper-zj-2021-jun/latest/paper-asset.json",
+                "byteLength": 116295,
+                "sha256": "d4f6f71a4d08d3fbe9d753caf9be1048ba0b04c05af480279b256fc858226580"
+              },
+              {
+                "kind": "source-provenance",
+                "present": true,
+                "path": "app/public/paper-assets/paper-zj-2021-jun/latest/import-meta.json",
+                "byteLength": 3812,
+                "sha256": "67618ba5d155306010ba8df2e1e05af323e69b3595011f90294473d047913515"
+              },
+              {
+                "kind": "official-answer-lead",
+                "present": true,
+                "path": "app/public/paper-assets/paper-zj-2021-jun/latest/answer-key.json",
+                "byteLength": 8728,
+                "sha256": "22c2002a27de22ead0433ed9bec45b1a7f4177cae987543deca4b0189417cb4d"
+              }
+            ]
+          }
+        ],
+        "failedAttempts": [],
+        "recompileAttempts": [],
+        "reviewDecision": null,
+        "publication": null,
+        "surfaceProof": null,
+        "rollbackProof": null,
+        "retainedAttemptCount": 0
+      },
+      {
+        "queueId": "migration.paper.paper-zj-2022-jan",
+        "paperId": "paper-zj-2022-jan",
+        "orderKey": "paper-zj-2022-jan",
+        "scope": "whole-paper",
+        "status": "queued",
+        "primaryDisposition": "queued",
+        "anomalyIds": [
+          "anomaly.reading-heading-suffix.paper-zj-2022-jan.group-zj-2022-jan-reading-a-q23",
+          "anomaly.reading-heading-suffix.paper-zj-2022-jan.group-zj-2022-jan-reading-b-q26",
+          "anomaly.seven-marker-local-ordinal.paper-zj-2022-jan.group-zj-2022-jan-seven-choices"
+        ],
+        "recoveryActions": [
+          "source_bound_boundary_or_marker_review"
+        ],
+        "immutableEvidenceRefs": [
+          {
+            "kind": "asset-projection",
+            "present": true,
+            "path": "app/public/paper-assets/paper-zj-2022-jan/latest/paper-asset.json",
+            "byteLength": 121118,
+            "sha256": "76b0e999063eb3007a1916e88c497d961b4f02906b8ca5d4636811430475ece1"
+          },
+          {
+            "kind": "source-provenance",
+            "present": true,
+            "path": "app/public/paper-assets/paper-zj-2022-jan/latest/import-meta.json",
+            "byteLength": 4054,
+            "sha256": "b3197a62f79cd236296d29368a883f338f32234eb09df6b5453b4c3f525007d7"
+          },
+          {
+            "kind": "official-answer-lead",
+            "present": true,
+            "path": "app/public/paper-assets/paper-zj-2022-jan/latest/answer-key.json",
+            "byteLength": 8747,
+            "sha256": "856a55834a2f807823115ac8aed7ce3fa17fe15041cf0a1725ed8ee353d88187"
+          }
+        ],
+        "dispositionHistory": [
+          {
+            "disposition": "queued",
+            "attemptId": null,
+            "evidenceRefs": [
+              {
+                "kind": "asset-projection",
+                "present": true,
+                "path": "app/public/paper-assets/paper-zj-2022-jan/latest/paper-asset.json",
+                "byteLength": 121118,
+                "sha256": "76b0e999063eb3007a1916e88c497d961b4f02906b8ca5d4636811430475ece1"
+              },
+              {
+                "kind": "source-provenance",
+                "present": true,
+                "path": "app/public/paper-assets/paper-zj-2022-jan/latest/import-meta.json",
+                "byteLength": 4054,
+                "sha256": "b3197a62f79cd236296d29368a883f338f32234eb09df6b5453b4c3f525007d7"
+              },
+              {
+                "kind": "official-answer-lead",
+                "present": true,
+                "path": "app/public/paper-assets/paper-zj-2022-jan/latest/answer-key.json",
+                "byteLength": 8747,
+                "sha256": "856a55834a2f807823115ac8aed7ce3fa17fe15041cf0a1725ed8ee353d88187"
+              }
+            ]
+          }
+        ],
+        "failedAttempts": [],
+        "recompileAttempts": [],
+        "reviewDecision": null,
+        "publication": null,
+        "surfaceProof": null,
+        "rollbackProof": null,
+        "retainedAttemptCount": 0
+      },
+      {
+        "queueId": "migration.paper.paper-zj-2022-jun",
+        "paperId": "paper-zj-2022-jun",
+        "orderKey": "paper-zj-2022-jun",
+        "scope": "whole-paper",
+        "status": "queued",
+        "primaryDisposition": "queued",
+        "anomalyIds": [
+          "anomaly.continuation-starter-cardinality.paper-zj-2022-jun.group-zj-2022-jun-writing-continuation-3",
+          "anomaly.reading-heading-suffix.paper-zj-2022-jun.group-zj-2022-jun-reading-a-q23",
+          "anomaly.reading-heading-suffix.paper-zj-2022-jun.group-zj-2022-jun-reading-b-q26",
+          "anomaly.seven-marker-local-ordinal.paper-zj-2022-jun.group-zj-2022-jun-seven-choices"
+        ],
+        "recoveryActions": [
+          "source_bound_boundary_or_marker_review",
+          "source_bound_writing_shape_review"
+        ],
+        "immutableEvidenceRefs": [
+          {
+            "kind": "asset-projection",
+            "present": true,
+            "path": "app/public/paper-assets/paper-zj-2022-jun/latest/paper-asset.json",
+            "byteLength": 119564,
+            "sha256": "929159382b2f3fc3c398487b45d9563223d792486ab6fd8bee70217afdaa586c"
+          },
+          {
+            "kind": "source-provenance",
+            "present": true,
+            "path": "app/public/paper-assets/paper-zj-2022-jun/latest/import-meta.json",
+            "byteLength": 4017,
+            "sha256": "0a91658996c823ffc9c360c02231de8ce324e05e1c6f9ed83977bd456387fd06"
+          },
+          {
+            "kind": "official-answer-lead",
+            "present": true,
+            "path": "app/public/paper-assets/paper-zj-2022-jun/latest/answer-key.json",
+            "byteLength": 8722,
+            "sha256": "4a0fcfd854a9b9f8790b1f738785442c49cf58c4009da91e517b124f482acaee"
+          }
+        ],
+        "dispositionHistory": [
+          {
+            "disposition": "queued",
+            "attemptId": null,
+            "evidenceRefs": [
+              {
+                "kind": "asset-projection",
+                "present": true,
+                "path": "app/public/paper-assets/paper-zj-2022-jun/latest/paper-asset.json",
+                "byteLength": 119564,
+                "sha256": "929159382b2f3fc3c398487b45d9563223d792486ab6fd8bee70217afdaa586c"
+              },
+              {
+                "kind": "source-provenance",
+                "present": true,
+                "path": "app/public/paper-assets/paper-zj-2022-jun/latest/import-meta.json",
+                "byteLength": 4017,
+                "sha256": "0a91658996c823ffc9c360c02231de8ce324e05e1c6f9ed83977bd456387fd06"
+              },
+              {
+                "kind": "official-answer-lead",
+                "present": true,
+                "path": "app/public/paper-assets/paper-zj-2022-jun/latest/answer-key.json",
+                "byteLength": 8722,
+                "sha256": "4a0fcfd854a9b9f8790b1f738785442c49cf58c4009da91e517b124f482acaee"
+              }
+            ]
+          }
+        ],
+        "failedAttempts": [],
+        "recompileAttempts": [],
+        "reviewDecision": null,
+        "publication": null,
+        "surfaceProof": null,
+        "rollbackProof": null,
+        "retainedAttemptCount": 0
+      },
+      {
+        "queueId": "migration.paper.paper-zj-2023-jan",
+        "paperId": "paper-zj-2023-jan",
+        "orderKey": "paper-zj-2023-jan",
+        "scope": "whole-paper",
+        "status": "queued",
+        "primaryDisposition": "queued",
+        "anomalyIds": [
+          "anomaly.reading-heading-suffix.paper-zj-2023-jan.group-zj-2023-jan-reading-a-q23",
+          "anomaly.reading-heading-suffix.paper-zj-2023-jan.group-zj-2023-jan-reading-b-q27",
+          "anomaly.reading-heading-suffix.paper-zj-2023-jan.group-zj-2023-jan-reading-c-q31",
+          "anomaly.seven-marker-local-ordinal.paper-zj-2023-jan.group-zj-2023-jan-seven-choices"
+        ],
+        "recoveryActions": [
+          "source_bound_boundary_or_marker_review"
+        ],
+        "immutableEvidenceRefs": [
+          {
+            "kind": "asset-projection",
+            "present": true,
+            "path": "app/public/paper-assets/paper-zj-2023-jan/latest/paper-asset.json",
+            "byteLength": 141116,
+            "sha256": "15013d3fc7d3c5b107dad2703af3e5aef39f4b91d10d79734b77f7d831c47a4e"
+          },
+          {
+            "kind": "source-provenance",
+            "present": true,
+            "path": "app/public/paper-assets/paper-zj-2023-jan/latest/import-meta.json",
+            "byteLength": 4145,
+            "sha256": "491174202a3f6ccae64b8f1aa377d91d7f2f16ebfda634c0d97d14ab0c796603"
+          },
+          {
+            "kind": "official-answer-lead",
+            "present": true,
+            "path": "app/public/paper-assets/paper-zj-2023-jan/latest/answer-key.json",
+            "byteLength": 8712,
+            "sha256": "71c17ab722d4115dfbc75e57d34323a9bbf719dbf5aa56663a39e48216072734"
+          }
+        ],
+        "dispositionHistory": [
+          {
+            "disposition": "queued",
+            "attemptId": null,
+            "evidenceRefs": [
+              {
+                "kind": "asset-projection",
+                "present": true,
+                "path": "app/public/paper-assets/paper-zj-2023-jan/latest/paper-asset.json",
+                "byteLength": 141116,
+                "sha256": "15013d3fc7d3c5b107dad2703af3e5aef39f4b91d10d79734b77f7d831c47a4e"
+              },
+              {
+                "kind": "source-provenance",
+                "present": true,
+                "path": "app/public/paper-assets/paper-zj-2023-jan/latest/import-meta.json",
+                "byteLength": 4145,
+                "sha256": "491174202a3f6ccae64b8f1aa377d91d7f2f16ebfda634c0d97d14ab0c796603"
+              },
+              {
+                "kind": "official-answer-lead",
+                "present": true,
+                "path": "app/public/paper-assets/paper-zj-2023-jan/latest/answer-key.json",
+                "byteLength": 8712,
+                "sha256": "71c17ab722d4115dfbc75e57d34323a9bbf719dbf5aa56663a39e48216072734"
+              }
+            ]
+          }
+        ],
+        "failedAttempts": [],
+        "recompileAttempts": [],
+        "reviewDecision": null,
+        "publication": null,
+        "surfaceProof": null,
+        "rollbackProof": null,
+        "retainedAttemptCount": 0
+      },
+      {
+        "queueId": "migration.paper.paper-zj-2024-jan",
+        "paperId": "paper-zj-2024-jan",
+        "orderKey": "paper-zj-2024-jan",
+        "scope": "whole-paper",
+        "status": "queued",
+        "primaryDisposition": "queued",
+        "anomalyIds": [
+          "anomaly.placeholder-paper-title.paper-zj-2024-jan.paper",
+          "anomaly.seven-marker-local-ordinal.paper-zj-2024-jan.group-zj-2024-jan-seven-choices"
+        ],
+        "recoveryActions": [
+          "source_bound_boundary_or_marker_review",
+          "source_bound_metadata_review"
+        ],
+        "immutableEvidenceRefs": [
+          {
+            "kind": "asset-projection",
+            "present": true,
+            "path": "app/public/paper-assets/paper-zj-2024-jan/latest/paper-asset.json",
+            "byteLength": 141295,
+            "sha256": "9e7cff02e83f8b001c295de93d591cc01821e00beb658fd8baf91823c2a78f57"
+          },
+          {
+            "kind": "source-provenance",
+            "present": true,
+            "path": "app/public/paper-assets/paper-zj-2024-jan/latest/import-meta.json",
+            "byteLength": 4471,
+            "sha256": "7a56c4d6ff557ba7479af54a28f58a47dc13f9f620cd25ed0cd593b541cb1ee5"
+          },
+          {
+            "kind": "official-answer-lead",
+            "present": true,
+            "path": "app/public/paper-assets/paper-zj-2024-jan/latest/answer-key.json",
+            "byteLength": 8701,
+            "sha256": "1620618bf5711585f9c102347c1198abfaf4e83552316bc1903f45c296dd3928"
+          }
+        ],
+        "dispositionHistory": [
+          {
+            "disposition": "queued",
+            "attemptId": null,
+            "evidenceRefs": [
+              {
+                "kind": "asset-projection",
+                "present": true,
+                "path": "app/public/paper-assets/paper-zj-2024-jan/latest/paper-asset.json",
+                "byteLength": 141295,
+                "sha256": "9e7cff02e83f8b001c295de93d591cc01821e00beb658fd8baf91823c2a78f57"
+              },
+              {
+                "kind": "source-provenance",
+                "present": true,
+                "path": "app/public/paper-assets/paper-zj-2024-jan/latest/import-meta.json",
+                "byteLength": 4471,
+                "sha256": "7a56c4d6ff557ba7479af54a28f58a47dc13f9f620cd25ed0cd593b541cb1ee5"
+              },
+              {
+                "kind": "official-answer-lead",
+                "present": true,
+                "path": "app/public/paper-assets/paper-zj-2024-jan/latest/answer-key.json",
+                "byteLength": 8701,
+                "sha256": "1620618bf5711585f9c102347c1198abfaf4e83552316bc1903f45c296dd3928"
+              }
+            ]
+          }
+        ],
+        "failedAttempts": [],
+        "recompileAttempts": [],
+        "reviewDecision": null,
+        "publication": null,
+        "surfaceProof": null,
+        "rollbackProof": null,
+        "retainedAttemptCount": 0
+      },
+      {
+        "queueId": "migration.paper.paper-zj-2025-jan",
+        "paperId": "paper-zj-2025-jan",
+        "orderKey": "paper-zj-2025-jan",
+        "scope": "whole-paper",
+        "status": "queued",
+        "primaryDisposition": "queued",
+        "anomalyIds": [
+          "anomaly.placeholder-paper-title.paper-zj-2025-jan.paper"
+        ],
+        "recoveryActions": [
+          "source_bound_metadata_review"
+        ],
+        "immutableEvidenceRefs": [
+          {
+            "kind": "asset-projection",
+            "present": true,
+            "path": "app/public/paper-assets/paper-zj-2025-jan/latest/paper-asset.json",
+            "byteLength": 142028,
+            "sha256": "7d9333604ae4ecc3f5a79d45dd6cae65c7041fc522a3874bddc0f388ca30bedd"
+          },
+          {
+            "kind": "source-provenance",
+            "present": true,
+            "path": "app/public/paper-assets/paper-zj-2025-jan/latest/import-meta.json",
+            "byteLength": 4666,
+            "sha256": "e6d1bce69f89a702d8ed103046166cf0dc6847dad3af06c3bcd6475175562831"
+          },
+          {
+            "kind": "official-answer-lead",
+            "present": true,
+            "path": "app/public/paper-assets/paper-zj-2025-jan/latest/answer-key.json",
+            "byteLength": 8681,
+            "sha256": "f73bff66b0575b019e816fb9548ab196ec038b1f2988b68734f2ad5c9246d909"
+          }
+        ],
+        "dispositionHistory": [
+          {
+            "disposition": "queued",
+            "attemptId": null,
+            "evidenceRefs": [
+              {
+                "kind": "asset-projection",
+                "present": true,
+                "path": "app/public/paper-assets/paper-zj-2025-jan/latest/paper-asset.json",
+                "byteLength": 142028,
+                "sha256": "7d9333604ae4ecc3f5a79d45dd6cae65c7041fc522a3874bddc0f388ca30bedd"
+              },
+              {
+                "kind": "source-provenance",
+                "present": true,
+                "path": "app/public/paper-assets/paper-zj-2025-jan/latest/import-meta.json",
+                "byteLength": 4666,
+                "sha256": "e6d1bce69f89a702d8ed103046166cf0dc6847dad3af06c3bcd6475175562831"
+              },
+              {
+                "kind": "official-answer-lead",
+                "present": true,
+                "path": "app/public/paper-assets/paper-zj-2025-jan/latest/answer-key.json",
+                "byteLength": 8681,
+                "sha256": "f73bff66b0575b019e816fb9548ab196ec038b1f2988b68734f2ad5c9246d909"
+              }
+            ]
+          }
+        ],
+        "failedAttempts": [],
+        "recompileAttempts": [],
+        "reviewDecision": null,
+        "publication": null,
+        "surfaceProof": null,
+        "rollbackProof": null,
+        "retainedAttemptCount": 0
+      },
+      {
+        "queueId": "migration.paper.paper-zj-2026-jan",
+        "paperId": "paper-zj-2026-jan",
+        "orderKey": "paper-zj-2026-jan",
+        "scope": "whole-paper",
+        "status": "queued",
+        "primaryDisposition": "queued",
+        "anomalyIds": [
+          "anomaly.placeholder-paper-title.paper-zj-2026-jan.paper"
+        ],
+        "recoveryActions": [
+          "source_bound_metadata_review"
+        ],
+        "immutableEvidenceRefs": [
+          {
+            "kind": "asset-projection",
+            "present": true,
+            "path": "app/public/paper-assets/paper-zj-2026-jan/latest/paper-asset.json",
+            "byteLength": 146718,
+            "sha256": "aca1cf9a2022179134bf39e301632c9b2b3d5ec95186d96656a70611c4a77a3c"
+          },
+          {
+            "kind": "source-provenance",
+            "present": true,
+            "path": "app/public/paper-assets/paper-zj-2026-jan/latest/import-meta.json",
+            "byteLength": 4255,
+            "sha256": "28de2597a196ca5ffacfeb6279cec8e1fbc476ecd7a23462b5cceba033f91f42"
+          },
+          {
+            "kind": "official-answer-lead",
+            "present": true,
+            "path": "app/public/paper-assets/paper-zj-2026-jan/latest/answer-key.json",
+            "byteLength": 8702,
+            "sha256": "edc78730691e12f911d03dbc70e75a7fc59038b2ae77c32a344f5f53ab628154"
+          }
+        ],
+        "dispositionHistory": [
+          {
+            "disposition": "queued",
+            "attemptId": null,
+            "evidenceRefs": [
+              {
+                "kind": "asset-projection",
+                "present": true,
+                "path": "app/public/paper-assets/paper-zj-2026-jan/latest/paper-asset.json",
+                "byteLength": 146718,
+                "sha256": "aca1cf9a2022179134bf39e301632c9b2b3d5ec95186d96656a70611c4a77a3c"
+              },
+              {
+                "kind": "source-provenance",
+                "present": true,
+                "path": "app/public/paper-assets/paper-zj-2026-jan/latest/import-meta.json",
+                "byteLength": 4255,
+                "sha256": "28de2597a196ca5ffacfeb6279cec8e1fbc476ecd7a23462b5cceba033f91f42"
+              },
+              {
+                "kind": "official-answer-lead",
+                "present": true,
+                "path": "app/public/paper-assets/paper-zj-2026-jan/latest/answer-key.json",
+                "byteLength": 8702,
+                "sha256": "edc78730691e12f911d03dbc70e75a7fc59038b2ae77c32a344f5f53ab628154"
+              }
+            ]
+          }
+        ],
+        "failedAttempts": [],
+        "recompileAttempts": [],
+        "reviewDecision": null,
+        "publication": null,
+        "surfaceProof": null,
+        "rollbackProof": null,
+        "retainedAttemptCount": 0
+      }
+    ],
+    "failedAttemptsRetained": true,
+    "queueEntryCount": 34
+  },
+  "accounting": {
+    "paper": {
+      "inScope": 33,
+      "pending": 33,
+      "blocked": 0,
+      "readyUnpublished": 0,
+      "publishedUnverified": 0,
+      "canonicalSelected": 0,
+      "rolledBack": 0
+    },
+    "profile": {
+      "nck1": {
+        "inScope": 18,
+        "pending": 18,
+        "blocked": 0,
+        "canonicalSelected": 0
+      },
+      "national-legacy": {
+        "inScope": 9,
+        "pending": 9,
+        "blocked": 0,
+        "canonicalSelected": 0
+      },
+      "zhejiang-legacy": {
+        "inScope": 6,
+        "pending": 6,
+        "blocked": 0,
+        "canonicalSelected": 0
+      }
+    },
+    "family": {
+      "reading": {
+        "inScope": 126,
+        "pending": 126,
+        "blocked": 0,
+        "readyUnpublished": 0,
+        "publishedUnverified": 0,
+        "canonicalSelected": 0,
+        "rolledBack": 0
+      },
+      "seven-choices": {
+        "inScope": 33,
+        "pending": 33,
+        "blocked": 0,
+        "readyUnpublished": 0,
+        "publishedUnverified": 0,
+        "canonicalSelected": 0,
+        "rolledBack": 0
+      },
+      "cloze": {
+        "inScope": 33,
+        "pending": 33,
+        "blocked": 0,
+        "readyUnpublished": 0,
+        "publishedUnverified": 0,
+        "canonicalSelected": 0,
+        "rolledBack": 0
+      },
+      "grammar-fill": {
+        "inScope": 33,
+        "pending": 33,
+        "blocked": 0,
+        "readyUnpublished": 0,
+        "publishedUnverified": 0,
+        "canonicalSelected": 0,
+        "rolledBack": 0
+      },
+      "application-writing": {
+        "inScope": 24,
+        "pending": 24,
+        "blocked": 0,
+        "readyUnpublished": 0,
+        "publishedUnverified": 0,
+        "canonicalSelected": 0,
+        "rolledBack": 0,
+        "profileBackedNA": 9
+      },
+      "continuation-writing": {
+        "inScope": 24,
+        "pending": 24,
+        "blocked": 0,
+        "readyUnpublished": 0,
+        "publishedUnverified": 0,
+        "canonicalSelected": 0,
+        "rolledBack": 0,
+        "profileBackedNA": 9
+      },
+      "listening-inactive": {
+        "inScope": 2,
+        "pending": 2,
+        "blocked": 0,
+        "readyUnpublished": 0,
+        "publishedUnverified": 0,
+        "canonicalSelected": 0,
+        "rolledBack": 0,
+        "paperCount": 1,
+        "questionCount": 20,
+        "transcriptSegmentCount": 10
+      }
+    },
+    "disposition": {
+      "queued": 33,
+      "needs_review": 0,
+      "unsupported": 0,
+      "incomplete_source": 0,
+      "answer_conflict": 0,
+      "cleared": 0
+    },
+    "publication": {
+      "latestInputs": 33,
+      "canonicalPublications": 0,
+      "canonicalSelected": 0,
+      "rollbackTargets": 0
+    },
+    "surfaces": {
+      "screen": {
+        "inScope": 33,
+        "pending": 33,
+        "pass": 0
+      },
+      "printHtml": {
+        "inScope": 33,
+        "pending": 33,
+        "pass": 0
+      },
+      "pdf": {
+        "inScope": 33,
+        "pending": 33,
+        "pass": 0
+      }
+    },
+    "equations": {
+      "paper": "pending + blocked + readyUnpublished + publishedUnverified + canonicalSelected + rolledBack = inScope",
+      "family": "same equation for each family denominator; profile-backed N/A remains explicit"
+    }
+  },
+  "knownAnomalies": {
+    "paperAnomalyCount": 81,
+    "corpusAnomalies": [
+      {
+        "id": "anomaly.corpus.config-latest-set-drift",
+        "code": "config-latest-set-drift",
+        "scope": "corpus",
+        "disposition": "needs_review",
+        "recoveryActions": [
+          "retain_latest_as_denominator",
+          "record_config_provenance_drift"
+        ],
+        "evidenceRefs": [
+          {
+            "kind": "config-inventory",
+            "path": "scripts/import-pipeline/papers",
+            "sha256": "sha256:5fd514a15b34fba930f36c045428d0955e6d4d11273c92a7f1443237cfb09feb"
+          },
+          {
+            "kind": "latest-tree",
+            "path": "app/public/paper-assets/paper-2020-bing/latest",
+            "sha256": "sha256:3ffeed2136d4ec1416fef47670cecb5e89d15189a6d5413c5e65b07c22eb7fe2"
+          },
+          {
+            "kind": "latest-tree",
+            "path": "app/public/paper-assets/paper-2020-i/latest",
+            "sha256": "sha256:23fe6fe4a8e3be6d3f7b549dc0555956465146151766016a30ebbd98874d030b"
+          },
+          {
+            "kind": "latest-tree",
+            "path": "app/public/paper-assets/paper-2020-ii/latest",
+            "sha256": "sha256:ad8b584a10d890086d9322b9eb50b962b08ba94b67d88ae9d0837783a8d2e10c"
+          },
+          {
+            "kind": "latest-tree",
+            "path": "app/public/paper-assets/paper-2020-jia/latest",
+            "sha256": "sha256:7f05abe47643445633463795e53822efdc612b7a128d84926176023f2c230da6"
+          },
+          {
+            "kind": "latest-tree",
+            "path": "app/public/paper-assets/paper-2021-i/latest",
+            "sha256": "sha256:27a768becd8a9932eb2d39c0b9f2bdef2e2402fe647039d9fd99b7c4d19b5c0b"
+          },
+          {
+            "kind": "latest-tree",
+            "path": "app/public/paper-assets/paper-2021-ii/latest",
+            "sha256": "sha256:098a79a623d9413e24cf8ce12d7bc77b476240fa08ec41b39ef57651b480740e"
+          },
+          {
+            "kind": "latest-tree",
+            "path": "app/public/paper-assets/paper-2021-jia/latest",
+            "sha256": "sha256:d94cb978bb63a29e8de117e1a08d944e9693e14503dcce994e9953384585b897"
+          },
+          {
+            "kind": "latest-tree",
+            "path": "app/public/paper-assets/paper-2021-yi/latest",
+            "sha256": "sha256:5a561769d53c64260507da806d9ee4dee57b3b7910f180d7ee32801cdb78e798"
+          },
+          {
+            "kind": "latest-tree",
+            "path": "app/public/paper-assets/paper-2022-i/latest",
+            "sha256": "sha256:a13e51110df08fe1ae3fbe63a2e5555dbe1344bb07ca6123dadc4e701c91d443"
+          },
+          {
+            "kind": "latest-tree",
+            "path": "app/public/paper-assets/paper-2022-ii/latest",
+            "sha256": "sha256:5a50bd59ec69a1d216064ea1f3e6cea23c69b32ffdf979294059389879b2c837"
+          },
+          {
+            "kind": "latest-tree",
+            "path": "app/public/paper-assets/paper-2022-jia/latest",
+            "sha256": "sha256:12ac8d27048df4f59a54ab8a07e6466d61f1f3060f0e540fff3837764ee36397"
+          },
+          {
+            "kind": "latest-tree",
+            "path": "app/public/paper-assets/paper-2022-yi/latest",
+            "sha256": "sha256:5b6068f7cef9f986e7ad3985df3b4da77d2ca81c28cce3556c8131b4334bb1fd"
+          },
+          {
+            "kind": "latest-tree",
+            "path": "app/public/paper-assets/paper-2023-i/latest",
+            "sha256": "sha256:ae37541a7178da03bb16579ef1d8cd4527525937b8c23938d9d02ad4f7ee38de"
+          },
+          {
+            "kind": "latest-tree",
+            "path": "app/public/paper-assets/paper-2023-ii/latest",
+            "sha256": "sha256:fc54f6249a85d0a2723ea23cb68f54b830d8f3aedf37c6de8fb2a37d5a2ce236"
+          },
+          {
+            "kind": "latest-tree",
+            "path": "app/public/paper-assets/paper-2023-jia/latest",
+            "sha256": "sha256:7d78ecff375c0a692f5e6ea951f48a80cc5055499678b5dc92858a87fc098347"
+          },
+          {
+            "kind": "latest-tree",
+            "path": "app/public/paper-assets/paper-2023-yi/latest",
+            "sha256": "sha256:103da595f3e0145f63a661ac49bb92d386af61129dd1afaf7112858a2a25e6f1"
+          },
+          {
+            "kind": "latest-tree",
+            "path": "app/public/paper-assets/paper-2024-i/latest",
+            "sha256": "sha256:d34a85ab375eeff1ee14d145fc35b91b2c584ded682b5433642f697b2810d3b7"
+          },
+          {
+            "kind": "latest-tree",
+            "path": "app/public/paper-assets/paper-2024-ii/latest",
+            "sha256": "sha256:83dd281276594685b5e7ae30e018a811375c5e6aaedd390181a601eaaab9a373"
+          },
+          {
+            "kind": "latest-tree",
+            "path": "app/public/paper-assets/paper-2024-jia/latest",
+            "sha256": "sha256:19a256d6ea78c2af1a510946890f568cfcad976b5cfb8933dd9787b86b8dde0d"
+          },
+          {
+            "kind": "latest-tree",
+            "path": "app/public/paper-assets/paper-2025-i/latest",
+            "sha256": "sha256:5a1fb77954a16b08d36f381a01851f245cc77d88c421bf0c4766ceeaefdd9813"
+          },
+          {
+            "kind": "latest-tree",
+            "path": "app/public/paper-assets/paper-2025-ii/latest",
+            "sha256": "sha256:a34c4fef9ce878f4c38a2c57503e76adbcee19bc81168194661b3733fb94ef9a"
+          },
+          {
+            "kind": "latest-tree",
+            "path": "app/public/paper-assets/paper-2026-i/latest",
+            "sha256": "sha256:2d59645c6daf744abc7644d396b37769f03cc2e1dae07820855e7a2d8a8d6df5"
+          },
+          {
+            "kind": "latest-tree",
+            "path": "app/public/paper-assets/paper-960d0f8d/latest",
+            "sha256": "sha256:0b274c59c6c4cd786907416a708cc61de704ddbd077e0672407c56ff11865d6c"
+          },
+          {
+            "kind": "latest-tree",
+            "path": "app/public/paper-assets/paper-zj-2020-jan/latest",
+            "sha256": "sha256:fe7df1504cde0de4d8fca0460ac3a263dac7c44a0c8ae0e5f197538d3ce35367"
+          },
+          {
+            "kind": "latest-tree",
+            "path": "app/public/paper-assets/paper-zj-2020-jul/latest",
+            "sha256": "sha256:c8490bb57b725281b6453151e0a9418513f03db7c2bb09bdffb1440aa6565811"
+          },
+          {
+            "kind": "latest-tree",
+            "path": "app/public/paper-assets/paper-zj-2021-jan/latest",
+            "sha256": "sha256:ccca5d79f35879c7ae6bb507b799a07780b91636a610f67be362e13482c1a293"
+          },
+          {
+            "kind": "latest-tree",
+            "path": "app/public/paper-assets/paper-zj-2021-jun/latest",
+            "sha256": "sha256:e80c8c4db988cdfa396eff86ed83dea0d8a7f94b5a412d63527b2c5567069895"
+          },
+          {
+            "kind": "latest-tree",
+            "path": "app/public/paper-assets/paper-zj-2022-jan/latest",
+            "sha256": "sha256:c67ba37acd942dfb2cd0f649fc51aae67e8706227a65de312c8f5e2a18b9e40f"
+          },
+          {
+            "kind": "latest-tree",
+            "path": "app/public/paper-assets/paper-zj-2022-jun/latest",
+            "sha256": "sha256:27947c9c6d071847e91a8f95d9884a9e881f3a837757ebfc9330f36dac2e4572"
+          },
+          {
+            "kind": "latest-tree",
+            "path": "app/public/paper-assets/paper-zj-2023-jan/latest",
+            "sha256": "sha256:27debc29bf32c5afa658aa8117ac1cdbf521c9742733a65e78eefcf046cc041f"
+          },
+          {
+            "kind": "latest-tree",
+            "path": "app/public/paper-assets/paper-zj-2024-jan/latest",
+            "sha256": "sha256:8b7cc8d86377533a34353f39cc0da5e65fd3dd0da238f1e3ef81f7be28a167de"
+          },
+          {
+            "kind": "latest-tree",
+            "path": "app/public/paper-assets/paper-zj-2025-jan/latest",
+            "sha256": "sha256:f2495de76ab8be24ba720fc5fe4afc2e43002413cf28ea07d3ff90f4b246313f"
+          },
+          {
+            "kind": "latest-tree",
+            "path": "app/public/paper-assets/paper-zj-2026-jan/latest",
+            "sha256": "sha256:516500591fc075751f17b6c4e33b25e976ada8503b3e07c3e1d0f27e393bbe77"
+          }
+        ]
+      },
+      {
+        "id": "anomaly.corpus.database-version-refs-without-filesystem-trees",
+        "code": "database-version-refs-without-filesystem-trees",
+        "scope": "corpus",
+        "disposition": "needs_review",
+        "recoveryActions": [
+          "do_not_reconstruct_missing_historical_version_tree"
+        ],
+        "evidenceRefs": [
+          {
+            "kind": "database",
+            "path": "data/question-bank.sqlite",
+            "sha256": "6972c581fcd43f64999f7d7ff3778fcd995ba160563ecb877f39d7303913da80"
+          }
+        ]
+      }
+    ],
+    "paperAnomalyIds": [
+      "anomaly.continuation-starter-cardinality.paper-zj-2020-jul.group-zj-2020-jul-writing-continuation-0",
+      "anomaly.continuation-starter-cardinality.paper-zj-2022-jun.group-zj-2022-jun-writing-continuation-3",
+      "anomaly.figure-manifest-incomplete-digest.paper-2026-i.figures",
+      "anomaly.grammar-marker-local-ordinal.paper-960d0f8d.group-960d0f8d-grammar-fill",
+      "anomaly.grammar-marker-local-ordinal.paper-zj-2021-jan.group-zj-2021-jan-grammar-fill",
+      "anomaly.grammar-marker-local-ordinal.paper-zj-2021-jun.group-zj-2021-jun-grammar-fill",
+      "anomaly.mixed-grammar-marker-dialect.paper-960d0f8d.group-960d0f8d-grammar-fill",
+      "anomaly.mixed-seven-marker-dialect.paper-960d0f8d.group-960d0f8d-seven-choices",
+      "anomaly.placeholder-paper-title.paper-zj-2024-jan.paper",
+      "anomaly.placeholder-paper-title.paper-zj-2025-jan.paper",
+      "anomaly.placeholder-paper-title.paper-zj-2026-jan.paper",
+      "anomaly.reading-heading-suffix.paper-2020-bing.group-2020-bing-reading-a-q23",
+      "anomaly.reading-heading-suffix.paper-2020-bing.group-2020-bing-reading-b-q27",
+      "anomaly.reading-heading-suffix.paper-2020-bing.group-2020-bing-reading-c-q31",
+      "anomaly.reading-heading-suffix.paper-2020-i.group-2020-i-reading-a-q23",
+      "anomaly.reading-heading-suffix.paper-2020-i.group-2020-i-reading-b-q27",
+      "anomaly.reading-heading-suffix.paper-2020-i.group-2020-i-reading-c-q31",
+      "anomaly.reading-heading-suffix.paper-2020-jia.group-2020-jia-reading-a-q23",
+      "anomaly.reading-heading-suffix.paper-2020-jia.group-2020-jia-reading-b-q27",
+      "anomaly.reading-heading-suffix.paper-2020-jia.group-2020-jia-reading-c-q31",
+      "anomaly.reading-heading-suffix.paper-2021-ii.group-2021-ii-reading-a-q23",
+      "anomaly.reading-heading-suffix.paper-2021-ii.group-2021-ii-reading-b-q27",
+      "anomaly.reading-heading-suffix.paper-2021-ii.group-2021-ii-reading-c-q31",
+      "anomaly.reading-heading-suffix.paper-2021-jia.group-2021-jia-reading-a-q23",
+      "anomaly.reading-heading-suffix.paper-2021-jia.group-2021-jia-reading-b-q27",
+      "anomaly.reading-heading-suffix.paper-2021-jia.group-2021-jia-reading-c-q31",
+      "anomaly.reading-heading-suffix.paper-2021-yi.group-2021-yi-reading-a-q23",
+      "anomaly.reading-heading-suffix.paper-2021-yi.group-2021-yi-reading-b-q27",
+      "anomaly.reading-heading-suffix.paper-2021-yi.group-2021-yi-reading-c-q31",
+      "anomaly.reading-heading-suffix.paper-2022-i.group-2022-i-reading-a-q23",
+      "anomaly.reading-heading-suffix.paper-2022-i.group-2022-i-reading-b-q27",
+      "anomaly.reading-heading-suffix.paper-2022-i.group-2022-i-reading-c-q31",
+      "anomaly.reading-heading-suffix.paper-2022-ii.group-2022-ii-reading-a-q23",
+      "anomaly.reading-heading-suffix.paper-2022-ii.group-2022-ii-reading-b-q27",
+      "anomaly.reading-heading-suffix.paper-2022-ii.group-2022-ii-reading-c-q31",
+      "anomaly.reading-heading-suffix.paper-2022-jia.group-2022-jia-reading-a-q23",
+      "anomaly.reading-heading-suffix.paper-2022-jia.group-2022-jia-reading-b-q27",
+      "anomaly.reading-heading-suffix.paper-2022-jia.group-2022-jia-reading-c-q31",
+      "anomaly.reading-heading-suffix.paper-2022-yi.group-2022-yi-reading-a-q23",
+      "anomaly.reading-heading-suffix.paper-2022-yi.group-2022-yi-reading-b-q27",
+      "anomaly.reading-heading-suffix.paper-2022-yi.group-2022-yi-reading-c-q31",
+      "anomaly.reading-heading-suffix.paper-2023-jia.group-2023-jia-reading-a-q23",
+      "anomaly.reading-heading-suffix.paper-2023-jia.group-2023-jia-reading-b-q27",
+      "anomaly.reading-heading-suffix.paper-2023-jia.group-2023-jia-reading-c-q31",
+      "anomaly.reading-heading-suffix.paper-2023-yi.group-2023-yi-reading-a-q23",
+      "anomaly.reading-heading-suffix.paper-2023-yi.group-2023-yi-reading-b-q27",
+      "anomaly.reading-heading-suffix.paper-2023-yi.group-2023-yi-reading-c-q31",
+      "anomaly.reading-heading-suffix.paper-zj-2020-jan.group-zj-2020-jan-reading-a-q23",
+      "anomaly.reading-heading-suffix.paper-zj-2020-jan.group-zj-2020-jan-reading-b-q26",
+      "anomaly.reading-heading-suffix.paper-zj-2020-jul.group-zj-2020-jul-reading-a-q24",
+      "anomaly.reading-heading-suffix.paper-zj-2020-jul.group-zj-2020-jul-reading-b-q27",
+      "anomaly.reading-heading-suffix.paper-zj-2021-jun.group-zj-2021-jun-reading-a-q23",
+      "anomaly.reading-heading-suffix.paper-zj-2021-jun.group-zj-2021-jun-reading-b-q27",
+      "anomaly.reading-heading-suffix.paper-zj-2022-jan.group-zj-2022-jan-reading-a-q23",
+      "anomaly.reading-heading-suffix.paper-zj-2022-jan.group-zj-2022-jan-reading-b-q26",
+      "anomaly.reading-heading-suffix.paper-zj-2022-jun.group-zj-2022-jun-reading-a-q23",
+      "anomaly.reading-heading-suffix.paper-zj-2022-jun.group-zj-2022-jun-reading-b-q26",
+      "anomaly.reading-heading-suffix.paper-zj-2023-jan.group-zj-2023-jan-reading-a-q23",
+      "anomaly.reading-heading-suffix.paper-zj-2023-jan.group-zj-2023-jan-reading-b-q27",
+      "anomaly.reading-heading-suffix.paper-zj-2023-jan.group-zj-2023-jan-reading-c-q31",
+      "anomaly.seven-marker-local-ordinal.paper-2021-ii.group-2021-ii-seven-choices",
+      "anomaly.seven-marker-local-ordinal.paper-2021-jia.group-2021-jia-seven-choices",
+      "anomaly.seven-marker-local-ordinal.paper-2021-yi.group-2021-yi-seven-choices",
+      "anomaly.seven-marker-local-ordinal.paper-2022-i.group-2022-i-seven-choices",
+      "anomaly.seven-marker-local-ordinal.paper-2022-ii.group-2022-ii-seven-choices",
+      "anomaly.seven-marker-local-ordinal.paper-2022-jia.group-2022-jia-seven-choices",
+      "anomaly.seven-marker-local-ordinal.paper-2022-yi.group-2022-yi-seven-choices",
+      "anomaly.seven-marker-local-ordinal.paper-2023-i.group-2023-i-seven-choices",
+      "anomaly.seven-marker-local-ordinal.paper-2023-jia.group-2023-jia-seven-choices",
+      "anomaly.seven-marker-local-ordinal.paper-2023-yi.group-2023-yi-seven-choices",
+      "anomaly.seven-marker-local-ordinal.paper-2024-ii.group-2024-ii-seven-choices",
+      "anomaly.seven-marker-local-ordinal.paper-2024-jia.group-2024-jia-seven-choices",
+      "anomaly.seven-marker-local-ordinal.paper-2025-ii.group-2025-ii-seven-choices",
+      "anomaly.seven-marker-local-ordinal.paper-zj-2021-jan.group-zj-2021-jan-seven-choices",
+      "anomaly.seven-marker-local-ordinal.paper-zj-2021-jun.group-zj-2021-jun-seven-choices",
+      "anomaly.seven-marker-local-ordinal.paper-zj-2022-jan.group-zj-2022-jan-seven-choices",
+      "anomaly.seven-marker-local-ordinal.paper-zj-2022-jun.group-zj-2022-jun-seven-choices",
+      "anomaly.seven-marker-local-ordinal.paper-zj-2023-jan.group-zj-2023-jan-seven-choices",
+      "anomaly.seven-marker-local-ordinal.paper-zj-2024-jan.group-zj-2024-jan-seven-choices",
+      "anomaly.source-type-mismatch.paper-2026-i.primary",
+      "anomaly.writing-analysis-missing.paper-2026-i.writing"
+    ]
+  },
+  "retainedLegacyImportAttempts": [
+    {
+      "id": "pir-37d8a14f-43bf-4860-b810-d39cd95d7836",
+      "paperId": "paper-2020-bing",
+      "assetVersion": 1,
+      "status": "published",
+      "validationReportSha256": "sha256:615abd9a94de6d0f0b9610f9c0c999fe9cc30cf3c15dad93c4b925d409868495",
+      "publishReportSha256": "sha256:e0be9022bc1c3e7ad47affbab3d65978507412dbc53b1c5f13d96adc013a21e9",
+      "errorSha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "pir-574c62dc-5bd9-45e0-aa20-e9984a3b4475",
+      "paperId": "paper-2020-i",
+      "assetVersion": 1,
+      "status": "published",
+      "validationReportSha256": "sha256:ad0333effff0e7ffcece03646cfea6df8138f03940d73143317da8743fb9aede",
+      "publishReportSha256": "sha256:f659e1443d9b7c6c21c91978132e8fe81ba6c3ea25e388b3bf3544fb1e2f7fb0",
+      "errorSha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "pir-a0d7d6ff-5a3d-46aa-9ca5-990df7c145c8",
+      "paperId": "paper-2020-ii",
+      "assetVersion": 1,
+      "status": "published",
+      "validationReportSha256": "sha256:5d054a60f493f6e25a0e2b5acea6fc38db09203cbc10a42021fe6135c315b2de",
+      "publishReportSha256": "sha256:2f35d64d7d2fc3dea7dbba4859136f64d3d1e81283b868740f5ff15c46463066",
+      "errorSha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "pir-08f9c876-562d-43c6-b5e2-46044ab29ee1",
+      "paperId": "paper-2020-jia",
+      "assetVersion": 1,
+      "status": "published",
+      "validationReportSha256": "sha256:7b79b35db9427c3b94eb81e7c8a1454fa2beb2439e8e67ced3230f1c5b6d5374",
+      "publishReportSha256": "sha256:698d4aaddfac75d61b56dea6137094d2a60b0fcada2de56fa4b8d4387c918f27",
+      "errorSha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "pir-7cb38268-aa8d-467b-bb89-4dd1c895ef7f",
+      "paperId": "paper-2021-i",
+      "assetVersion": 1,
+      "status": "published",
+      "validationReportSha256": "sha256:95cc4a47ff51d0033f1dca2fa12efa2fa52441432e2d395be2ed4e091b984d69",
+      "publishReportSha256": "sha256:f216a9a96cfba9781230bb1784e221106b23989bb395cdb005e9727b2a2aa803",
+      "errorSha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "pir-207a7307-f9fb-49eb-8137-ee39d4e84490",
+      "paperId": "paper-2021-ii",
+      "assetVersion": 1,
+      "status": "published",
+      "validationReportSha256": "sha256:7c9a04721e1d6d40f83521c867a204b51af2e2232e9a64c13cfc02e33dc38af1",
+      "publishReportSha256": "sha256:64b0f096b6d4c4228353a5c53e44c34ee70c34c8a581d1ccefb1c434604c6f09",
+      "errorSha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "pir-49ab3181-e1c1-4ce4-ad8a-1f266deb7b8c",
+      "paperId": "paper-2021-jia",
+      "assetVersion": 1,
+      "status": "published",
+      "validationReportSha256": "sha256:f82baf167e4687ca2a412722dea835f6301ee153abc2db12f9d0b3a047cfbcc4",
+      "publishReportSha256": "sha256:6d53097a81528bbab40c29ab5879c47d37b5f78a1dc33f229fa7d6a032ba68b0",
+      "errorSha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "pir-9bddef6f-64db-499c-85c1-659c5aa7661e",
+      "paperId": "paper-2021-yi",
+      "assetVersion": 1,
+      "status": "published",
+      "validationReportSha256": "sha256:426e8633d0e1ec0027362613aa20041eac058b2d1d059c1b899c2f6ad8423d90",
+      "publishReportSha256": "sha256:24ffe26c8720e63b08cd0b42ef4250b49ee97206b0e34dbeba9f4dbe661f721f",
+      "errorSha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "pir-401c690e-569f-464d-b8a8-ff9ce222c81c",
+      "paperId": "paper-2022-i",
+      "assetVersion": 1,
+      "status": "published",
+      "validationReportSha256": "sha256:dafb20922538f5b534cc27428ec2cb60456815dc93f54560ff24488647b861f3",
+      "publishReportSha256": "sha256:3c7d424c8891b83e9d56949a70a1777c9f118fe843dc82d9a7552794704b5504",
+      "errorSha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "pir-1df67d5e-abd1-4459-b6f6-31b25d08c071",
+      "paperId": "paper-2022-ii",
+      "assetVersion": 1,
+      "status": "published",
+      "validationReportSha256": "sha256:d4594dea3fcc6bd9230bf53d4915c735499e9d358ffb3632fc60b5a7158d1c95",
+      "publishReportSha256": "sha256:da148caddfd7520edae36b302e22704e3333e4d696c31615f264da84ec242508",
+      "errorSha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "pir-24a77dde-5f3f-4109-80a7-60878f7ead0b",
+      "paperId": "paper-2022-jia",
+      "assetVersion": 1,
+      "status": "published",
+      "validationReportSha256": "sha256:67af4bc2feb1c2f1d79ba19ebea79c1463d98cce2b6e98d7d9dfce44fdd9dbb1",
+      "publishReportSha256": "sha256:5967bc5459f3442923768d57da4f83412d0e42db110dff9370dca9f1ca68f12d",
+      "errorSha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "pir-f91baeba-0579-49f8-9f84-0fc59dc3c935",
+      "paperId": "paper-2022-yi",
+      "assetVersion": 1,
+      "status": "published",
+      "validationReportSha256": "sha256:a80d838adc343af49f06d9424d28cee2f28138a5e8fe687d67ba752871fa14bd",
+      "publishReportSha256": "sha256:a7202c5639f8814717275b7de7f1e26cd3a5c54a227985ec2fe2862cf2eca200",
+      "errorSha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "pir-86b8d774-5f12-4b91-858a-62f6075ea43b",
+      "paperId": "paper-2023-i",
+      "assetVersion": 1,
+      "status": "published",
+      "validationReportSha256": "sha256:3eb54fe816e72b14e1ed96d8169d81a2a6b8d307b4a4b25dc42eaa2d820fc943",
+      "publishReportSha256": "sha256:6a40bbefc5867c8f0ada707c943da47503b15c848886738a9fee29b2c98b57b6",
+      "errorSha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "pir-a722428b-b57a-4a19-92ee-688e17d4e57b",
+      "paperId": "paper-2023-ii",
+      "assetVersion": 1,
+      "status": "published",
+      "validationReportSha256": "sha256:92a745336b0260b15624fcece3d1d7dde4520d55e44f09d04965dce990558d73",
+      "publishReportSha256": "sha256:9c6fd9c3d686d6a2518e2d9e68b8254b3f279f6877d05e61a5a8e08cb19c838b",
+      "errorSha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "pir-6fab7912-4f25-4372-95be-f5fcc5fe876d",
+      "paperId": "paper-2023-jia",
+      "assetVersion": 1,
+      "status": "published",
+      "validationReportSha256": "sha256:8388fd2a05db98cc79df426255c75f6a82bef657bd6c236d082e130fc7d1d7b0",
+      "publishReportSha256": "sha256:c085938584abb547a6ff642cc11b8a968f759ff5e6a34499cadcc712eaa35a10",
+      "errorSha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "pir-9c8c2abb-2051-49aa-a397-6d50af75de39",
+      "paperId": "paper-2023-yi",
+      "assetVersion": 1,
+      "status": "published",
+      "validationReportSha256": "sha256:20c0fa664316e44d328870c638f524aa2c3efb5e5f8915feec5459d1f98cd68a",
+      "publishReportSha256": "sha256:c02b40d2aca89778a421a061956c74e4b7b1c92be2f75cb0802fe0db525a9379",
+      "errorSha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "pir-820dc547-dc4a-44a4-99df-9de6fa5a5b7a",
+      "paperId": "paper-2024-i",
+      "assetVersion": 1,
+      "status": "published",
+      "validationReportSha256": "sha256:50e1fc56a923130f76bfe97c50a854bd800e4968b35e57cc04efb01585c722da",
+      "publishReportSha256": "sha256:cdb3c77d67704f29d8d37e01be2a474fbd6d45c4c40cda098014b2cf54e67e8c",
+      "errorSha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "pir-e21efc07-b315-4cac-85e0-06be5a5036b6",
+      "paperId": "paper-2024-i",
+      "assetVersion": 2,
+      "status": "published",
+      "validationReportSha256": "sha256:2fa322a772da432d79f90ba5e15ccc27b87d52ae5f6fca35a4735dbe754c2283",
+      "publishReportSha256": "sha256:d92385e8bb1870302d68a8d8ee8780d6a3d4d61e96f69c79f4371668a39897c5",
+      "errorSha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "pir-646f7c99-fce4-410e-9992-dc71a4d4bf13",
+      "paperId": "paper-2024-i",
+      "assetVersion": 3,
+      "status": "published",
+      "validationReportSha256": "sha256:3bff52bb6f2f0dbed9457c43723b5cd3ea0a683f2f4593e23d34d512d0947a92",
+      "publishReportSha256": "sha256:55ddcb249a5203b45f79371ced2eda324c8a0fe9c225f5efa53ed282537c6dee",
+      "errorSha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "pir-3ca37471-3e2e-4490-a2bc-fd18df7bca7e",
+      "paperId": "paper-2024-i",
+      "assetVersion": 4,
+      "status": "published",
+      "validationReportSha256": "sha256:d7aaab0c90bfe5bcd0542bb2134fb8aa945b022589e936a8d6c823a0ad72bf44",
+      "publishReportSha256": "sha256:d87fb95d2e1af045e35368560e83e142fc1b5e4d804e0f6e319a3f938cc02520",
+      "errorSha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "pir-5ab91c16-5d31-4f20-a3d8-1e2e20d22f7a",
+      "paperId": "paper-2024-i",
+      "assetVersion": 5,
+      "status": "published",
+      "validationReportSha256": "sha256:ccb0fcf3a3b9bee5d12b8d453280bdc1f2800a29a83760dde6a49d854300c871",
+      "publishReportSha256": "sha256:fe5252390f2f4d5ceb6fc66a8522efbc0015f7e8393de8aa14d0607b89d6905a",
+      "errorSha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "pir-90eeeaa0-f390-4396-b54a-d37b6a74ce67",
+      "paperId": "paper-2024-ii",
+      "assetVersion": 1,
+      "status": "published",
+      "validationReportSha256": "sha256:2bfc32e23a13c108bbc1106b2e2e8a8899a6de23a2b704162f9dfb755c5c6d6f",
+      "publishReportSha256": "sha256:8aaefbf0e42fd3ca2024b1533218ae6c211cdb04db2ce3be9b71d87ab286485e",
+      "errorSha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "pir-1dea2750-981c-4ae5-a3c1-303de90e5722",
+      "paperId": "paper-2024-jia",
+      "assetVersion": 1,
+      "status": "published",
+      "validationReportSha256": "sha256:7ea8d4492d82fefd975285fa56321b9e4a5206bfc3a663e517f5f34adf85eb7a",
+      "publishReportSha256": "sha256:b2e5f0f882e55f2a3d2890a47d6dfd0cd0329548ba378b603716213b3d4e54e9",
+      "errorSha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "pir-4945b0fb-37b8-434c-81ab-ba551fdd56bb",
+      "paperId": "paper-2025-i",
+      "assetVersion": 1,
+      "status": "published",
+      "validationReportSha256": "sha256:2bab25c3ddf9538bdef6faacf726993e39fa67be1a7614c57a8663d6c61f3a7f",
+      "publishReportSha256": "sha256:ff551ce7635bad75364aaf5b9bf4c4fb0760bbfdacaeaf460e202472b7478231",
+      "errorSha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "pir-f44bd50b-b481-437c-ab6d-17fc0422747f",
+      "paperId": "paper-2025-i",
+      "assetVersion": 2,
+      "status": "published",
+      "validationReportSha256": "sha256:e943ac801af50f7775ad5b08e46f40fda928eaafefad7cd52482a67b8fd4da2d",
+      "publishReportSha256": "sha256:7270034845e121c82e2b08e829fd93c09a0864a045cc7262b958022bbbf0aafa",
+      "errorSha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "pir-cffb09c4-891a-4698-a327-c0f99beaf0e9",
+      "paperId": "paper-2025-i",
+      "assetVersion": 3,
+      "status": "published",
+      "validationReportSha256": "sha256:9a4571b2205081b115255790e0db9eab8040b5d44ed9d1ebc668bff049992b9d",
+      "publishReportSha256": "sha256:11fc066c95327409688dbbcaee0cdca507f713670d7d39c7bfa9a9b1e5455fdf",
+      "errorSha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "pir-d7398600-3e84-4054-b083-5e310d4f0d4a",
+      "paperId": "paper-2025-ii",
+      "assetVersion": 1,
+      "status": "published",
+      "validationReportSha256": "sha256:45555fde857cd504e29075f4c60fa61b1dd80ce89068ba61847a62a26fbc973c",
+      "publishReportSha256": "sha256:0b0671c9cf5337fd433964e34511829d29f01d61b37039490d9488b94d07d0bc",
+      "errorSha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "pir-23d8edae-13f2-410c-83fa-c1d987da0e57",
+      "paperId": "paper-2026-i",
+      "assetVersion": 1,
+      "status": "published",
+      "validationReportSha256": "sha256:b126599a7e9f1403c71d8df89b44b38a850b191cf7c2b5c69ca79624d04c02f8",
+      "publishReportSha256": "sha256:4505e0aac219d2b87a64df4b9cda06ee1493fd5510ec4e2413aeb7ab073d9d6e",
+      "errorSha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "pir-8dbb4251-ab02-436a-a642-c10594c7c882",
+      "paperId": "paper-960d0f8d",
+      "assetVersion": 1,
+      "status": "published",
+      "validationReportSha256": "sha256:4394c965c2215816bdd792b02eb9609f14806d524c29787e6e19e4b567f81a08",
+      "publishReportSha256": "sha256:7657d5fde6b68f67b9c4390a9e756bd0a529a403e61e4e184e72ed86dc951c03",
+      "errorSha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "pir-1f4fc798-2019-4d3c-af77-0eda4f87b18f",
+      "paperId": "paper-zj-2020-jan",
+      "assetVersion": 1,
+      "status": "published",
+      "validationReportSha256": "sha256:b22f17c9d37055687e47aca1e90ff58ac73895ce10999eb3512f5a4705cbab86",
+      "publishReportSha256": "sha256:8b078e6da92b40b0b31c93a74db398657ea56862d53c291280abd905491b750e",
+      "errorSha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "pir-84bea986-3eb2-47ac-81cc-33c844b157a5",
+      "paperId": "paper-zj-2020-jul",
+      "assetVersion": 1,
+      "status": "published",
+      "validationReportSha256": "sha256:b4517c7ca977e58a56c1fb115bbe28ae0f48783253731b54eef5b74d721bc9b2",
+      "publishReportSha256": "sha256:30c1370082d227f74742c9db531d844cd2c9613760f969922b946c803298f3db",
+      "errorSha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "pir-4467832c-2129-49c6-a8fd-5f7167d72ff7",
+      "paperId": "paper-zj-2021-jan",
+      "assetVersion": 1,
+      "status": "published",
+      "validationReportSha256": "sha256:05e5676a1f5db1732bfb73e05ca245f97bab6f0487a12b0e4f644d88ec0f7eaf",
+      "publishReportSha256": "sha256:35bf65d6a3edf1bde8d725a350bdbd06c98518dfa832dc6ee865b0a1e90b4a1d",
+      "errorSha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "pir-138298fe-087d-464f-97b1-0faf2f22425c",
+      "paperId": "paper-zj-2021-jun",
+      "assetVersion": 1,
+      "status": "published",
+      "validationReportSha256": "sha256:dcc365f269700765e1f70b033a392eaa6d214805602b7047eff82c6c3055ce23",
+      "publishReportSha256": "sha256:4905390d829df1b33e1b705592b471f7aca5b57ea46a3b6322ee848e6a89a24b",
+      "errorSha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "pir-1971f4ad-512e-49ff-822c-2026771b10d3",
+      "paperId": "paper-zj-2022-jan",
+      "assetVersion": 1,
+      "status": "published",
+      "validationReportSha256": "sha256:6c29ef465fb4e5175f7db2c9fb75a2bd5de150fd68f4a21354e36fd907496b65",
+      "publishReportSha256": "sha256:8f9b16ab8ce8e0bb0d3fd87e22e6eb60a9106e5c9b768099b849a9bcd7bd1094",
+      "errorSha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "pir-9d9fdb90-c900-430e-b95c-fd63d5114a31",
+      "paperId": "paper-zj-2022-jun",
+      "assetVersion": 1,
+      "status": "published",
+      "validationReportSha256": "sha256:0521269c2ecfef1a9bfb4d5ca678c041d9d5ede1b331c7c35a6e644d4bf92ab5",
+      "publishReportSha256": "sha256:3eb80d05e9b8d18c7ee1dd0faa7362b887595ff6d1a3ea4fea77d94a9dd9bc27",
+      "errorSha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "pir-36e3c9c8-2354-471d-985a-8386067c5ef3",
+      "paperId": "paper-zj-2023-jan",
+      "assetVersion": 1,
+      "status": "published",
+      "validationReportSha256": "sha256:e100aa348dd8f37b1452f6170b19ad09d10a11003ccbb8ea81a662555acae311",
+      "publishReportSha256": "sha256:a88a95c5393ecf5963c8ffd39ae52e8f55761b5987d7888908be31f64056cb97",
+      "errorSha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "pir-20c1969c-5348-4643-a6d3-0214462dbd5c",
+      "paperId": "paper-zj-2024-jan",
+      "assetVersion": 1,
+      "status": "published",
+      "validationReportSha256": "sha256:7a984ada3662744a00cbedd4efaeb12b88194ad96b5516ecc85b6a9d8c93d406",
+      "publishReportSha256": "sha256:941296f95a5b441cf4cf12d5da0da2632f52bfdb1ef1e2fac7afa2cb2f2544be",
+      "errorSha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "pir-95285cc4-aee3-4875-a4e7-01fbbc2ae432",
+      "paperId": "paper-zj-2025-jan",
+      "assetVersion": 1,
+      "status": "published",
+      "validationReportSha256": "sha256:316746fc598cc3c4b66ddf0635b8e4dd45aa4735d6becd2232563ff4c4822b6d",
+      "publishReportSha256": "sha256:22481e2e4625acb78dc6eaa2ee9b6e738c157b06703f3e2a7aefc34123563c26",
+      "errorSha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "pir-050e6dc8-115b-4f59-81b8-36f9f31b8209",
+      "paperId": "paper-zj-2026-jan",
+      "assetVersion": 1,
+      "status": "published",
+      "validationReportSha256": "sha256:3744e7dab4e1fd51c6221cdc8caa571219ecd8b7017405feab53959eb0e9deaa",
+      "publishReportSha256": "sha256:3b9915ccb2048a87370e29b60abbcd7788c4d2a01cc9feebf15e434b975a290f",
+      "errorSha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "zeroMutation": {
+    "mode": "read_only_census",
+    "comparedState": "latest trees, import configs, question-bank database bytes, and canonical authority refs",
+    "beforeStateDigest": "sha256:1f3caae0f6383c5e650d5e361fad78424853c911038ba2fee0a4373ca0a5b8f6",
+    "afterStateDigest": "sha256:1f3caae0f6383c5e650d5e361fad78424853c911038ba2fee0a4373ca0a5b8f6",
+    "equal": true,
+    "mutationCount": 0,
+    "writesPerformedByCensus": []
+  },
+  "scopeBoundary": {
+    "noCorrections": true,
+    "noPublication": true,
+    "noLatestSwitch": true,
+    "noRendering": true,
+    "noCompilerDryRun": true,
+    "noTicket22Action": true,
+    "copiedSourcePassages": false,
+    "copiedAnswers": false,
+    "copiedPrivateData": false,
+    "copiedCredentials": false,
+    "copiedMutableSourceBytes": false
+  },
+  "ledgerDigest": "sha256:98a5be0fa14a79ab9aa660a80d986f8b359accfc0fcabdab2cc3b71025f8aab8"
+}
