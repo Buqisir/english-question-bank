@@ -104,12 +104,51 @@ publication stage. No second publication peer or later provenance-recovery
 peer is allowed: the same `$to-tickets` peer truthfully owns both proposal and
 publication.
 
-Publication pauses at `owner-approval` for approval of the produced exact
-manifest SHA-256. Ticket-granularity approval never implies manifest-digest
-approval. Silence, blanket approval of unknown bytes, a stale peer or approval
-identity, a changed proposal, dirty or mismatched repository state, or another
-writer fails closed. This lifecycle does not authorize automatic
-implementation dispatch.
+After publication returns, a full preflight selects exactly one result: record
+manifest approval under a valid owner-selected policy, or pause for owner
+input. The ordinary policy remains explicit approval of the produced exact
+manifest SHA-256. Ticket-granularity approval never implies manifest approval;
+conditional approval is never inferred from silence, a generic continue,
+granularity approval alone, or historical preference. This lifecycle does not
+authorize automatic implementation dispatch.
+
+### Conditional manifest approval
+
+The owner may opt in by explicitly approving one exact ticket-granularity
+proposal identity and a deterministic publication/equivalence predicate. This
+approves that predicate, not unknown content. It authorizes automatic binding
+of the produced exact manifest SHA-256 only if every clause below is proven in
+one post-publication preflight:
+
+1. the proposal task/turn identity and owner granularity-approval identity are
+   exact, unchanged, and equal to the authorization;
+2. published ticket count, titles, blockers, paper membership, capacity
+   annotations, model routes, parallel lanes, merge order, and downstream
+   obligations equal the approved proposal;
+3. every manifest path and digest matches the current ticket bytes;
+4. accepted-spec binding, `$to-tickets` provenance, ticket-set binding,
+   route/map/receipt identity, clean exact HEAD, ancestry, and exclusive-writer
+   checks pass;
+5. implementation dispatch stayed forbidden throughout evaluation; and
+6. there is no new relevant verifier failure, malformed evidence, drift, or
+   partial publication.
+
+A documented verifier failure may remain only when machine evidence proves it
+is identical to the pre-publication baseline and outside every changed or
+authority surface; the approval evidence must still report it. If any clause
+fails or cannot be proven, do not approve or start implementation: pause for
+owner input with the exact anomaly.
+
+On PASS, one bounded approval-recording peer may commit only the predicate
+evidence, approval record, and receipt. Its record cites the exact
+conditional-authorization source, proposal and granularity identities,
+machine-verification evidence, actual generated manifest SHA-256, and result
+commit, and states that it did not dispatch implementation. Creating this peer
+is allowed only after every predicate fact is already proven and no writer
+overlaps. It must not also start implementation. The coordinator then performs
+another full preflight and re-verifies all four implementation gates before
+any implementation dispatch; no additional owner message containing the
+hexadecimal digest is required.
 
 ### Implementation gates
 
@@ -121,8 +160,9 @@ Implementation is forbidden until all four gates verify:
    current SHA-256 matches;
 3. the ticket-set receipt binds that exact accepted-spec SHA-256;
 4. the owner explicitly approved the exact ticket granularity, and the later
-   committed manifest-digest approval binds that exact ticket-set manifest
-   SHA-256.
+   committed manifest approval binds that exact ticket-set manifest SHA-256
+   either by explicit exact-digest approval or by a valid conditional-predicate
+   approval record.
 
 Filenames, directory existence, prose claims, historical chat, and old
 handoffs satisfy none of these gates.
@@ -140,12 +180,13 @@ lineage; a review failure authorizes no automatic retry or refill.
 
 ### Pause and resume
 
-Coordination pauses at `owner-approval` until the owner commits approval of the
-exact ticket-set digest and explicitly resumes. It also pauses at `owner-qa`
-after the exact checkable state is provisioned, and for grilling or other
-owner input, `needs-attention`, `BLOCKED`, dirty or mismatched repository
-state, malformed evidence, route mismatch, duplicate dispatch, cycles, or lost
-ledger certainty.
+Coordination pauses at `owner-approval` until either the owner commits explicit
+approval of the exact ticket-set digest and resumes, or a previously explicit
+conditional policy passes and its bounded approval record is committed. It
+also pauses at `owner-qa` after the exact checkable state is provisioned, and
+for grilling or other owner input, `needs-attention`, `BLOCKED`, dirty or
+mismatched repository state, malformed evidence, route mismatch, duplicate
+dispatch, cycles, or lost ledger certainty.
 
 Resume requires another full preflight of the saved worktree, branch, HEAD,
 clean state, fixed point, current committed map/receipt, route binding,

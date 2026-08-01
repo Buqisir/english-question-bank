@@ -80,11 +80,11 @@ const globalCoordinatorSkillPath =
 const globalCoordinatorYamlPath =
   '/Users/huangxuewei/.codex/skills/coordinate-eqb-wayfinder/agents/openai.yaml'
 const reviewedDispatchDigest =
-  'd4380aa997aff015c64ccae642eeb58af98c3ae6b0ee5f3ccb45633a63e80d91'
+  'e538eb62496b064f5ee40f6ab7e1886339e2e8dc840098bdc70ba70b76dbb395'
 const reviewedGlobalCoordinatorSkillDigest =
-  '3ff5aa94b6ba20f7e0789151b64bc10e5fb949823548220b6fd3ac5f8a3ec5bb'
+  'ddad3e97ca2fb6b913040969ef4b1a073588842b5e4f6afbe58a0940523f8cd2'
 const reviewedGlobalCoordinatorYamlDigest =
-  '8e831e13e2204ec5004271b3f6594385d2016bdb607606b9e3e9e33f16dacd07'
+  '064e1a9c970291ee6030f7650677823d0746c6664092760071bb272b1d62402b'
 
 const compact = (source) => source.replace(/\s+/g, ' ')
 const sourceDigest = (source) =>
@@ -477,6 +477,11 @@ function coordinatorSkillErrors(source) {
     'bind the approval identity to the unchanged peer and proposal',
     'resume that same peer once through the official Codex top-level task messaging mechanism',
     'clean state and no concurrent writer',
+    'let the authority select an owner pause or one bounded approval-recording peer under a valid conditional policy',
+    'every predicate fact is already proven and no writer overlaps',
+    'constrain it to the predicate evidence, approval record, and receipt',
+    'forbid it from starting implementation',
+    'After it returns, preflight again before any later dispatch',
   ]) {
     if (!normalized.includes(requiredLifecycleText)) {
       errors.push(`coordinator lacks guarded same-peer lifecycle: ${requiredLifecycleText}`)
@@ -595,6 +600,20 @@ function coordinatorDispatchAuthorityErrors(source) {
   ) {
     errors.push('dispatch authority must own both owner pauses')
   }
+  for (const conditionalInvariant of [
+    'This approves that predicate, not unknown content',
+    'published ticket count, titles, blockers, paper membership, capacity annotations, model routes, parallel lanes, merge order, and downstream obligations equal the approved proposal',
+    'every manifest path and digest matches the current ticket bytes',
+    'implementation dispatch stayed forbidden throughout evaluation',
+    'there is no new relevant verifier failure, malformed evidence, drift, or partial publication',
+    'Creating this peer is allowed only after every predicate fact is already proven and no writer overlaps',
+    'It must not also start implementation',
+    're-verifies all four implementation gates before any implementation dispatch',
+  ]) {
+    if (!normalized.includes(conditionalInvariant)) {
+      errors.push(`dispatch authority lacks conditional approval invariant: ${conditionalInvariant}`)
+    }
+  }
   if (
     !normalized.includes(
       'One implementation task keeps implementation, TDD, ordinary Standards + Spec review, ordinary fixes, verification, and commit together',
@@ -677,6 +696,109 @@ function ownerApprovalErrors(approval, ticketManifestDigest) {
     approval?.recordedManifestDigest !== approval?.ticketManifestDigest
   ) {
     errors.push('owner ticket-granularity approval is absent or stale')
+  }
+  return errors
+}
+
+const conditionalPredicateClauses = [
+  ['proposalIdentityExact', 'proposal task/turn identity changed or is unproven'],
+  ['granularityIdentityExact', 'owner granularity-approval identity changed or is unproven'],
+  ['proposalEquivalent', 'published ticket semantics differ from the approved proposal'],
+  ['ticketBytesMatchManifest', 'manifest paths/digests do not match current ticket bytes'],
+  ['acceptedSpecBinding', 'accepted-spec binding is unproven'],
+  ['toTicketsProvenance', 'to-tickets provenance is unproven'],
+  ['ticketSetBinding', 'ticket-set binding is unproven'],
+  ['routeMapReceiptIdentity', 'route/map/receipt identity is unproven'],
+  ['cleanExactHead', 'clean exact HEAD is unproven'],
+  ['ancestry', 'required ancestry is unproven'],
+  ['exclusiveWriter', 'a competing writer exists or exclusivity is unproven'],
+  ['implementationForbidden', 'implementation dispatch was not forbidden throughout evaluation'],
+  ['noNewRelevantVerifierFailure', 'a new relevant verifier failure exists or is unproven'],
+  ['baselineVerifierExceptionsReported', 'baseline verifier exceptions were not reported'],
+  ['noMalformedEvidence', 'predicate evidence is malformed or incomplete'],
+  ['noDrift', 'publication or authority drift exists or is unproven'],
+  ['noPartialPublication', 'publication is partial or completeness is unproven'],
+]
+
+function manifestApprovalErrors(approval, ticketManifestDigest) {
+  const errors = []
+  const mode = approval?.mode
+  const expectedAction =
+    mode === 'exact-digest'
+      ? 'approve-manifest-digest'
+      : mode === 'conditional-predicate'
+        ? 'apply-conditional-manifest-approval'
+        : null
+  const exactIdentityPattern =
+    /^(?:[0-9a-f]{8,}(?:-[0-9a-f]+)+|[a-z][a-z0-9-]*:[^\s]+)$/i
+  const sourceIsExact = exactIdentityPattern.test(
+    approval?.sourceIdentity ?? '',
+  )
+
+  if (
+    approval?.committed !== true ||
+    approval?.actor !== 'owner' ||
+    approval?.action !== expectedAction ||
+    !sourceIsExact ||
+    !fullCommitPattern.test(approval?.resultCommit ?? '') ||
+    !/^docs\/.+/.test(approval?.recordPath ?? '') ||
+    !sha256Pattern.test(approval?.ticketManifestDigest ?? '') ||
+    approval.ticketManifestDigest !== ticketManifestDigest ||
+    approval?.ancestor !== true ||
+    approval?.recordExists !== true ||
+    approval?.recordedStatus !== 'verified' ||
+    approval?.recordedMode !== mode ||
+    approval?.recordedActor !== 'owner' ||
+    approval?.recordedAction !== expectedAction ||
+    approval?.recordedSourceIdentity !== approval?.sourceIdentity ||
+    approval?.recordedManifestDigest !== approval?.ticketManifestDigest ||
+    approval?.implementationDispatched !== 'no' ||
+    approval?.recordedImplementationDispatched !== 'no'
+  ) {
+    errors.push('owner manifest approval is absent, stale, or not approval-only')
+  }
+
+  if (mode === 'exact-digest') {
+    if (
+      approval?.predicateEvidencePath !== 'not-applicable' ||
+      approval?.predicateEvidenceDigest !== 'not-applicable' ||
+      approval?.recordedPredicateEvidencePath !== 'not-applicable' ||
+      approval?.recordedPredicateEvidenceDigest !== 'not-applicable'
+    ) {
+      errors.push('exact-digest approval must not claim conditional predicate evidence')
+    }
+    return errors
+  }
+
+  if (mode !== 'conditional-predicate') {
+    errors.push('owner manifest approval mode is missing or unknown')
+    return errors
+  }
+
+  if (approval?.explicitConditionalAuthorization !== true) {
+    errors.push('conditional manifest approval was not explicitly authorized')
+  }
+  if (
+    !exactIdentityPattern.test(approval?.proposalIdentity ?? '') ||
+    !exactIdentityPattern.test(approval?.granularityIdentity ?? '') ||
+    approval?.recordedProposalIdentity !== approval?.proposalIdentity ||
+    approval?.recordedGranularityIdentity !== approval?.granularityIdentity
+  ) {
+    errors.push('conditional manifest approval identities are missing or stale')
+  }
+  if (
+    !/^docs\/.+/.test(approval?.predicateEvidencePath ?? '') ||
+    !sha256Pattern.test(approval?.predicateEvidenceDigest ?? '') ||
+    approval?.predicateEvidenceDigest !== approval?.actualPredicateEvidenceDigest ||
+    approval?.recordedPredicateEvidencePath !== approval?.predicateEvidencePath ||
+    approval?.recordedPredicateEvidenceDigest !== approval?.predicateEvidenceDigest
+  ) {
+    errors.push('conditional manifest approval lacks exact predicate evidence')
+  }
+  for (const [field, anomaly] of conditionalPredicateClauses) {
+    if (approval?.predicate?.[field] !== true) {
+      errors.push(`conditional manifest approval anomaly: ${anomaly}`)
+    }
   }
   return errors
 }
@@ -813,6 +935,24 @@ function parsePhaseReceipt(source, mapSource, mapSourcePath, head) {
     /^docs\/.+/.test(approvalRecordPath ?? '')
       ? committedArtifactText(approvalResultCommit, approvalRecordPath)
       : ''
+  const manifestApprovalResultCommit = markdownField(
+    source,
+    'Owner manifest-digest approval result commit',
+  )
+  const manifestApprovalRecordPath = markdownField(
+    source,
+    'Owner manifest-digest approval record',
+  )
+  const manifestApprovalRecordSource =
+    fullCommitPattern.test(manifestApprovalResultCommit ?? '') &&
+    /^docs\/.+/.test(manifestApprovalRecordPath ?? '')
+      ? committedArtifactText(
+          manifestApprovalResultCommit,
+          manifestApprovalRecordPath,
+        )
+      : ''
+  const predicateFieldVerified = (field) =>
+    markdownField(manifestApprovalRecordSource, field) === 'verified'
 
   return {
     previous,
@@ -909,6 +1049,163 @@ function parsePhaseReceipt(source, mapSource, mapSourcePath, head) {
         'Owner approval ticket-set manifest SHA-256',
       ),
     },
+    manifestApproval: {
+      committed:
+        markdownField(source, 'Owner manifest-digest approval') === 'verified',
+      mode: markdownField(source, 'Owner manifest-digest approval mode'),
+      actor: markdownField(source, 'Owner manifest-digest approval actor'),
+      action: markdownField(source, 'Owner manifest-digest approval action'),
+      sourceIdentity: markdownField(
+        source,
+        'Owner manifest-digest approval source',
+      ),
+      proposalIdentity: markdownField(
+        source,
+        'Owner manifest-digest approval proposal identity',
+      ),
+      granularityIdentity: markdownField(
+        source,
+        'Owner manifest-digest approval granularity identity',
+      ),
+      explicitConditionalAuthorization:
+        markdownField(
+          manifestApprovalRecordSource,
+          'Conditional manifest authorization',
+        ) === 'explicit',
+      predicateEvidencePath: markdownField(
+        source,
+        'Owner manifest-digest approval predicate evidence',
+      ),
+      predicateEvidenceDigest: markdownField(
+        source,
+        'Owner manifest-digest approval predicate evidence SHA-256',
+      ),
+      actualPredicateEvidenceDigest:
+        fullCommitPattern.test(manifestApprovalResultCommit ?? '') &&
+        /^docs\/.+/.test(
+          markdownField(
+            source,
+            'Owner manifest-digest approval predicate evidence',
+          ) ?? '',
+        )
+          ? committedArtifactDigest(
+              manifestApprovalResultCommit,
+              markdownField(
+                source,
+                'Owner manifest-digest approval predicate evidence',
+              ),
+            )
+          : '',
+      resultCommit: manifestApprovalResultCommit,
+      recordPath: manifestApprovalRecordPath,
+      ticketManifestDigest: markdownField(
+        source,
+        'Owner manifest-digest approval ticket-set manifest SHA-256',
+      ),
+      ancestor:
+        fullCommitPattern.test(manifestApprovalResultCommit ?? '') &&
+        fullCommitPattern.test(head ?? '') &&
+        commitIsAncestor(manifestApprovalResultCommit, head),
+      recordExists: Boolean(manifestApprovalRecordSource),
+      recordedStatus: markdownField(
+        manifestApprovalRecordSource,
+        'Owner manifest-digest approval',
+      ),
+      recordedMode: markdownField(
+        manifestApprovalRecordSource,
+        'Owner manifest-digest approval mode',
+      ),
+      recordedActor: markdownField(
+        manifestApprovalRecordSource,
+        'Owner manifest-digest approval actor',
+      ),
+      recordedAction: markdownField(
+        manifestApprovalRecordSource,
+        'Owner manifest-digest approval action',
+      ),
+      recordedSourceIdentity: markdownField(
+        manifestApprovalRecordSource,
+        'Owner manifest-digest approval source',
+      ),
+      recordedProposalIdentity: markdownField(
+        manifestApprovalRecordSource,
+        'Owner manifest-digest approval proposal identity',
+      ),
+      recordedGranularityIdentity: markdownField(
+        manifestApprovalRecordSource,
+        'Owner manifest-digest approval granularity identity',
+      ),
+      recordedPredicateEvidencePath: markdownField(
+        manifestApprovalRecordSource,
+        'Owner manifest-digest approval predicate evidence',
+      ),
+      recordedPredicateEvidenceDigest: markdownField(
+        manifestApprovalRecordSource,
+        'Owner manifest-digest approval predicate evidence SHA-256',
+      ),
+      recordedManifestDigest: markdownField(
+        manifestApprovalRecordSource,
+        'Owner manifest-digest approval ticket-set manifest SHA-256',
+      ),
+      implementationDispatched: markdownField(
+        source,
+        'Implementation dispatched by approval record',
+      ),
+      recordedImplementationDispatched: markdownField(
+        manifestApprovalRecordSource,
+        'Implementation dispatched by approval record',
+      ),
+      predicate: {
+        proposalIdentityExact: predicateFieldVerified(
+          'Conditional proposal identity exact',
+        ),
+        granularityIdentityExact: predicateFieldVerified(
+          'Conditional granularity identity exact',
+        ),
+        proposalEquivalent: predicateFieldVerified(
+          'Conditional proposal equivalence',
+        ),
+        ticketBytesMatchManifest: predicateFieldVerified(
+          'Conditional ticket bytes match manifest',
+        ),
+        acceptedSpecBinding: predicateFieldVerified(
+          'Conditional accepted-spec binding',
+        ),
+        toTicketsProvenance: predicateFieldVerified(
+          'Conditional to-tickets provenance',
+        ),
+        ticketSetBinding: predicateFieldVerified(
+          'Conditional ticket-set binding',
+        ),
+        routeMapReceiptIdentity: predicateFieldVerified(
+          'Conditional route/map/receipt identity',
+        ),
+        cleanExactHead: predicateFieldVerified('Conditional clean exact HEAD'),
+        ancestry: predicateFieldVerified('Conditional ancestry'),
+        exclusiveWriter: predicateFieldVerified('Conditional exclusive writer'),
+        implementationForbidden:
+          markdownField(
+            manifestApprovalRecordSource,
+            'Conditional implementation dispatch during evaluation',
+          ) === 'forbidden',
+        noNewRelevantVerifierFailure: predicateFieldVerified(
+          'Conditional no new relevant verifier failure',
+        ),
+        baselineVerifierExceptionsReported: /^(?:none|documented:.+)$/i.test(
+          markdownField(
+            manifestApprovalRecordSource,
+            'Conditional baseline verifier exceptions',
+          ) ?? '',
+        ),
+        noMalformedEvidence: predicateFieldVerified(
+          'Conditional no malformed evidence',
+        ),
+        noDrift: predicateFieldVerified('Conditional no drift'),
+        noPartialPublication: predicateFieldVerified(
+          'Conditional no partial publication',
+        ),
+      },
+    },
   }
 }
 
@@ -956,6 +1253,7 @@ function phaseTransitionErrors(state) {
     spec,
     tickets,
     approval,
+    manifestApproval,
     measuredReplanAuthorized,
   } = state
 
@@ -988,6 +1286,9 @@ function phaseTransitionErrors(state) {
 
   if (previous === 'owner-approval') {
     errors.push(...ownerApprovalErrors(approval, tickets.manifestDigest))
+    errors.push(
+      ...manifestApprovalErrors(manifestApproval, tickets.manifestDigest),
+    )
   } else if (previous !== 'DONE' && phaseEntrySkills.has(previous)) {
     errors.push(
       ...artifactProofErrors(
@@ -1021,6 +1322,9 @@ function phaseTransitionErrors(state) {
     tickets.boundSpecDigest === spec.digest
   const approvalBound =
     ownerApprovalErrors(approval, tickets.manifestDigest).length === 0
+  const manifestApprovalBound =
+    manifestApprovalErrors(manifestApproval, tickets.manifestDigest).length ===
+    0
 
   if (
     ['to-tickets', 'owner-approval'].includes(current) ||
@@ -1041,9 +1345,16 @@ function phaseTransitionErrors(state) {
   if (implementationGatePhases.has(current) && !approvalBound) {
     errors.push('owner ticket-granularity approval is absent or stale')
   }
+  if (implementationGatePhases.has(current) && !manifestApprovalBound) {
+    errors.push('owner manifest approval is absent or stale')
+  }
 
   const implementationAllowed =
-    specProven && ticketsProven && ticketsBound && approvalBound
+    specProven &&
+    ticketsProven &&
+    ticketsBound &&
+    approvalBound &&
+    manifestApprovalBound
   if (
     implementationDispatch !==
     (implementationAllowed ? 'allowed' : 'forbidden')
@@ -1418,6 +1729,7 @@ Treat \`dispatch-protocols.md\` as the sole owner of legal transitions, gates, p
 Do not classify, merge, split, retry, or advance a route independently of \`dispatch-protocols.md\`.
 Create exactly one fresh top-level peer through official Codex top-level task creation.
 For the guarded \`$to-tickets\` lifecycle, record the peer id and exact proposal identity, bind the approval identity to the unchanged peer and proposal, verify clean state and no concurrent writer, and resume that same peer once through the official Codex top-level task messaging mechanism.
+After publication, let the authority select an owner pause or one bounded approval-recording peer under a valid conditional policy. Require every predicate fact is already proven and no writer overlaps, forbid it from starting implementation, and constrain it to the predicate evidence, approval record, and receipt. After it returns, preflight again before any later dispatch.
 Top-level task creation and that one guarded same-peer message are the only execution mechanisms.
 `
 const portableCoordinatorSkillDigest = sourceDigest(portableCoordinatorSkill)
@@ -1608,6 +1920,22 @@ if (requireGlobalCoordinator && globalCoordinatorFilesExist) {
     'installed global coordinator executes the canonical dispatch contract without copying it',
   )
 }
+for (const field of [
+  'Owner manifest-digest approval mode:',
+  'Owner manifest-digest approval source:',
+  'Owner manifest-digest approval proposal identity:',
+  'Owner manifest-digest approval granularity identity:',
+  'Owner manifest-digest approval predicate evidence:',
+  'Owner manifest-digest approval predicate evidence SHA-256:',
+  'Owner manifest-digest approval result commit:',
+  'Owner manifest-digest approval ticket-set manifest SHA-256:',
+  'Implementation dispatched by approval record:',
+]) {
+  assert(
+    issueTracker.includes(field),
+    `issue-tracker schema binds conditional approval field: ${field}`,
+  )
+}
 
 const fixtureSourceHead = '1'.repeat(40)
 const fixtureSpecCommit = '2'.repeat(40)
@@ -1628,6 +1956,67 @@ function verifiedProvenance(phase, digest = 'd'.repeat(64)) {
     artifactDigest: digest,
     actualArtifactDigest: digest,
     currentArtifactDigest: digest,
+  }
+}
+
+function verifiedExactManifestApproval() {
+  return {
+    committed: true,
+    mode: 'exact-digest',
+    actor: 'owner',
+    action: 'approve-manifest-digest',
+    sourceIdentity: 'owner-message:item-exact-digest',
+    proposalIdentity: 'not-applicable',
+    granularityIdentity: 'not-applicable',
+    explicitConditionalAuthorization: false,
+    predicateEvidencePath: 'not-applicable',
+    predicateEvidenceDigest: 'not-applicable',
+    actualPredicateEvidenceDigest: '',
+    resultCommit: fixtureApprovalCommit,
+    recordPath: 'docs/cuts/example/manifest-approval.md',
+    ticketManifestDigest: fixtureTicketsDigest,
+    ancestor: true,
+    recordExists: true,
+    recordedStatus: 'verified',
+    recordedMode: 'exact-digest',
+    recordedActor: 'owner',
+    recordedAction: 'approve-manifest-digest',
+    recordedSourceIdentity: 'owner-message:item-exact-digest',
+    recordedProposalIdentity: 'not-applicable',
+    recordedGranularityIdentity: 'not-applicable',
+    recordedPredicateEvidencePath: 'not-applicable',
+    recordedPredicateEvidenceDigest: 'not-applicable',
+    recordedManifestDigest: fixtureTicketsDigest,
+    implementationDispatched: 'no',
+    recordedImplementationDispatched: 'no',
+    predicate: {},
+  }
+}
+
+function verifiedConditionalManifestApproval() {
+  const predicate = Object.fromEntries(
+    conditionalPredicateClauses.map(([field]) => [field, true]),
+  )
+  return {
+    ...verifiedExactManifestApproval(),
+    mode: 'conditional-predicate',
+    action: 'apply-conditional-manifest-approval',
+    sourceIdentity: 'owner-message:item-conditional-policy',
+    proposalIdentity: 'peer:proposal-task/item-9',
+    granularityIdentity: 'owner-message:item-granularity',
+    explicitConditionalAuthorization: true,
+    predicateEvidencePath: 'docs/cuts/example/manifest-approval-evidence.md',
+    predicateEvidenceDigest: 'f'.repeat(64),
+    actualPredicateEvidenceDigest: 'f'.repeat(64),
+    recordedMode: 'conditional-predicate',
+    recordedAction: 'apply-conditional-manifest-approval',
+    recordedSourceIdentity: 'owner-message:item-conditional-policy',
+    recordedProposalIdentity: 'peer:proposal-task/item-9',
+    recordedGranularityIdentity: 'owner-message:item-granularity',
+    recordedPredicateEvidencePath:
+      'docs/cuts/example/manifest-approval-evidence.md',
+    recordedPredicateEvidenceDigest: 'f'.repeat(64),
+    predicate,
   }
 }
 
@@ -1656,6 +2045,9 @@ function phaseFixture(previous, current) {
         recordedAction: 'approve-ticket-granularity',
         recordedManifestDigest: fixtureTicketsDigest,
       }
+    : {}
+  const manifestApproval = approvalReady
+    ? verifiedExactManifestApproval()
     : {}
   const provenance = new Map()
   if (phaseEntrySkills.has(previous)) {
@@ -1723,10 +2115,19 @@ function phaseFixture(previous, current) {
         }
       : { provenance: {} },
     approval,
+    manifestApproval,
     measuredReplanAuthorized:
       previous === 'implementation' && current === 'to-tickets',
   }
 }
+
+assert(
+  manifestApprovalErrors(
+    verifiedExactManifestApproval(),
+    fixtureTicketsDigest,
+  ).length === 0,
+  'ordinary explicit exact-digest approval remains valid',
+)
 
 for (const [previous, nextPhases] of legalPhaseTransitions) {
   for (const current of nextPhases) {
@@ -1936,6 +2337,92 @@ for (const approvalMutation of [
       error.includes('owner ticket-granularity approval is absent or stale'),
     ),
     'missing or stale owner approval fails closed',
+  )
+}
+
+const conditionalApprovalPass = phaseFixture('owner-approval', 'implementation')
+conditionalApprovalPass.manifestApproval =
+  verifiedConditionalManifestApproval()
+assert(
+  phaseReceiptErrors(conditionalApprovalPass).length === 0,
+  'explicit conditional-predicate approval passes only with complete exact evidence',
+)
+
+for (const { name, mutate, expectedError } of [
+  {
+    name: 'silence',
+    mutate: (approval) => {
+      approval.sourceIdentity = 'silence'
+      approval.recordedSourceIdentity = 'silence'
+      approval.explicitConditionalAuthorization = false
+    },
+    expectedError: 'not explicitly authorized',
+  },
+  {
+    name: 'generic approval',
+    mutate: (approval) => {
+      approval.sourceIdentity = 'continue'
+      approval.recordedSourceIdentity = 'continue'
+    },
+    expectedError: 'absent, stale, or not approval-only',
+  },
+  {
+    name: 'proposal-only approval',
+    mutate: (approval) => {
+      approval.sourceIdentity = 'proposal-only'
+      approval.recordedSourceIdentity = 'proposal-only'
+      approval.explicitConditionalAuthorization = false
+    },
+    expectedError: 'not explicitly authorized',
+  },
+  {
+    name: 'missing predicate evidence',
+    mutate: (approval) => {
+      approval.predicateEvidencePath = 'pending'
+      approval.predicateEvidenceDigest = 'pending'
+    },
+    expectedError: 'lacks exact predicate evidence',
+  },
+  {
+    name: 'changed ticket bytes',
+    mutate: (approval) => {
+      approval.predicate.ticketBytesMatchManifest = false
+    },
+    expectedError: 'manifest paths/digests do not match current ticket bytes',
+  },
+  {
+    name: 'new verifier failure',
+    mutate: (approval) => {
+      approval.predicate.noNewRelevantVerifierFailure = false
+    },
+    expectedError: 'a new relevant verifier failure exists or is unproven',
+  },
+  {
+    name: 'competing writer',
+    mutate: (approval) => {
+      approval.predicate.exclusiveWriter = false
+    },
+    expectedError: 'a competing writer exists or exclusivity is unproven',
+  },
+  {
+    name: 'approval plus implementation in one task',
+    mutate: (approval) => {
+      approval.implementationDispatched = 'yes'
+      approval.recordedImplementationDispatched = 'yes'
+    },
+    expectedError: 'absent, stale, or not approval-only',
+  },
+]) {
+  const invalid = phaseFixture('owner-approval', 'implementation')
+  invalid.manifestApproval = verifiedConditionalManifestApproval()
+  mutate(invalid.manifestApproval)
+  const errors = phaseReceiptErrors(invalid)
+  assert(
+    errors.some((error) => error.includes(expectedError)) &&
+      errors.some((error) =>
+        error.includes('Implementation dispatch does not match the four gates'),
+      ),
+    `conditional manifest approval rejects ${name}`,
   )
 }
 

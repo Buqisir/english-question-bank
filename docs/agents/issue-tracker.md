@@ -132,7 +132,25 @@ Owner approval action: approve-ticket-granularity
 Owner approval result commit: <40-hex commit>
 Owner approval record: <repo-relative path>
 Owner approval ticket-set manifest SHA-256: <64-hex digest>
+Owner manifest-digest approval: pending | verified
+Owner manifest-digest approval mode: pending | exact-digest | conditional-predicate
+Owner manifest-digest approval actor: owner | pending
+Owner manifest-digest approval action: pending | approve-manifest-digest | apply-conditional-manifest-approval
+Owner manifest-digest approval source: <exact owner task/turn/message identity | pending>
+Owner manifest-digest approval proposal identity: <exact proposal task/turn identity | pending>
+Owner manifest-digest approval granularity identity: <exact owner granularity-approval identity | pending>
+Owner manifest-digest approval predicate evidence: <repo-relative path | not-applicable | pending>
+Owner manifest-digest approval predicate evidence SHA-256: <64-hex digest | not-applicable | pending>
+Owner manifest-digest approval result commit: <40-hex commit | pending>
+Owner manifest-digest approval record: <repo-relative path | pending>
+Owner manifest-digest approval ticket-set manifest SHA-256: <64-hex digest | pending>
+Implementation dispatched by approval record: no | pending
 ```
+
+Conditional predicate evidence is a separate committed artifact. It reports
+every mandatory clause named by `dispatch-protocols.md`, including any allowed
+baseline verifier exception, while the receipt and approval record bind its
+exact path and SHA-256.
 
 Fields that belong to a pending phase may be omitted or use the shown pending
 sentinel. Once its status is `verified`, every field in that group is
