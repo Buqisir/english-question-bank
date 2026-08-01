@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "renderer-typography-v10-adversaries-v1",
+  "authority": {
+    "id": "paper-typography",
+    "schemaVersion": "renderer-typography-v10",
+    "version": "10"
+  },
+  "attacks": [
+    {
+      "caseId": "wrong-valid-type-coordinate",
+      "path": ["coordinates", "questionStemAndOuterOptionBlockStartTwip"],
+      "invalidValue": 999
+    },
+    {
+      "caseId": "wrong-regular-section-heading-weight",
+      "path": ["optionAnchorFramework", "visibleWeight", "sectionHeading"],
+      "invalidValue": 700
+    },
+    {
+      "caseId": "wrong-regular-instruction-weight",
+      "path": ["optionAnchorFramework", "visibleWeight", "instruction"],
+      "invalidValue": 700
+    },
+    {
+      "caseId": "wrong-evidence-path",
+      "path": ["sectionHeadingContract", "evidence", 1, "path"],
+      "invalidValue": "docs/cuts/paper-canonical-unification/qa/poisoned.png"
+    },
+    {
+      "caseId": "wrong-evidence-hash",
+      "path": ["sectionHeadingContract", "evidence", 1, "sha256"],
+      "invalidValue": "sha256:poisoned"
+    },
+    {
+      "caseId": "wrong-numeric-run-baseline",
+      "path": ["sectionHeadingContract", "typography", "numericRunBaselineShiftEm"],
+      "invalidValue": 0.2
+    },
+    {
+      "caseId": "wrong-version",
+      "path": ["version"],
+      "invalidValue": "999"
+    },
+    {
+      "caseId": "wrong-source",
+      "path": ["provenance", "source"],
+      "invalidValue": "docs/product/poisoned.md"
+    },
+    {
+      "caseId": "wrong-producer",
+      "path": ["provenance", "producer"],
+      "invalidValue": "poisoned-producer"
+    }
+  ]
+}

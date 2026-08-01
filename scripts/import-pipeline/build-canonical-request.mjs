@@ -33,7 +33,7 @@ const requestFileName =
   option('--request-file-name') || 'canonical-import-request.json'
 const write = process.argv.includes('--write')
 const applicationWritingEvidenceContract =
-  ['27', '28', '29', '30', '31', '32', '33', '34'].includes(
+  ['27', '28', '29', '30', '31', '32', '33', '34', '35'].includes(
     canonicalAuthorityRef.manifestVersion,
   )
     ? {
@@ -52,7 +52,7 @@ if (!applicationWritingEvidenceContract) {
   )
 }
 const continuationWritingEvidenceContract =
-  ['29', '30', '31', '32', '33', '34'].includes(
+  ['29', '30', '31', '32', '33', '34', '35'].includes(
     canonicalAuthorityRef.manifestVersion,
   )
     ? {

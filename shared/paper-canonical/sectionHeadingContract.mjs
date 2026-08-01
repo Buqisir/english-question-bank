@@ -1,4 +1,4 @@
-import rendererTypography from '../../standards/paper-canonical/rendering/paper-typography-v9.json' with { type: 'json' }
+import rendererTypography from '../../standards/paper-canonical/rendering/paper-typography-v10.json' with { type: 'json' }
 import { canonicalAuthorityRef, resolveCanonicalAuthority } from './authority.mjs'
 import { digestJson } from './stable.mjs'
 
@@ -85,7 +85,7 @@ function requireVisibleWeight(value, field) {
 
 const canonicalAuthority = resolveCanonicalAuthority(canonicalAuthorityRef)
 if (!canonicalAuthority.ok) {
-  throw new Error('Paper Typography v9 authority cannot resolve the current manifest')
+  throw new Error('Paper Typography v10 authority cannot resolve the current manifest')
 }
 const canonicalTypographyAuthority =
   canonicalAuthority.closure.artifacts['renderer-typography']
@@ -93,7 +93,7 @@ const canonicalTypographyDescriptor = canonicalAuthority.closure.manifest.artifa
   (artifact) => artifact.id === 'renderer-typography',
 )
 if (!canonicalTypographyAuthority || !canonicalTypographyDescriptor) {
-  throw new Error('Paper Typography v9 authority is absent from the current manifest closure')
+  throw new Error('Paper Typography v10 authority is absent from the current manifest closure')
 }
 
 const PAPER_TYPOGRAPHY_BINDING_IDENTITY = Object.freeze({
@@ -118,17 +118,17 @@ export const paperTypographyAuthorityBinding = Object.freeze({
 
 function assertPaperTypographyAuthorityBinding(authority, binding) {
   if (!binding || typeof binding !== 'object') {
-    throw new Error('Paper Typography v9 authority binding is unavailable')
+    throw new Error('Paper Typography v10 authority binding is unavailable')
   }
   for (const [field, expected] of Object.entries(
     PAPER_TYPOGRAPHY_BINDING_IDENTITY,
   )) {
     if (binding[field] !== expected) {
-      throw new Error(`Paper Typography v9 authority binding has invalid ${field}`)
+      throw new Error(`Paper Typography v10 authority binding has invalid ${field}`)
     }
   }
   if (!/^sha256:[0-9a-f]{64}$/u.test(binding.sha256 || '')) {
-    throw new Error('Paper Typography v9 authority binding lacks a valid hash')
+    throw new Error('Paper Typography v10 authority binding lacks a valid hash')
   }
   if (
     authority?.schemaVersion !== binding.schemaVersion
@@ -138,10 +138,10 @@ function assertPaperTypographyAuthorityBinding(authority, binding) {
     || authority?.provenance?.source !== binding.source
     || authority?.provenance?.producer !== binding.producer
   ) {
-    throw new Error('Paper Typography v9 authority metadata does not match its binding')
+    throw new Error('Paper Typography v10 authority metadata does not match its binding')
   }
   if (digestJson(authority) !== binding.sha256) {
-    throw new Error('Paper Typography v9 authority hash does not match its binding')
+    throw new Error('Paper Typography v10 authority hash does not match its binding')
   }
 }
 
@@ -153,11 +153,15 @@ function paperTypographyRuntimeFromBoundAuthority(
   assertPaperTypographyAuthorityBinding(authority, binding)
   if (!allowNonCanonicalMutation
     && binding.sha256 !== paperTypographyAuthorityBinding.sha256) {
-    throw new Error('Paper Typography v9 authority hash is not the current Manifest v34 artifact')
+    throw new Error('Paper Typography v10 authority hash is not the current Manifest v35 artifact')
   }
   const visibleWeight = authority?.optionAnchorFramework?.visibleWeight
+  const partToFirstSectionGeometry = authority?.partToFirstSectionGeometry
   if (!visibleWeight) {
-    throw new Error('Paper Typography v9 authority is unavailable')
+    throw new Error('Paper Typography v10 authority is unavailable')
+  }
+  if (!partToFirstSectionGeometry) {
+    throw new Error('Paper Typography v10 lacks part-to-first-section geometry')
   }
   return freeze({
     coordinates: structuredClone(authority.coordinates),
@@ -177,9 +181,13 @@ function paperTypographyRuntimeFromBoundAuthority(
         'instruction',
       ),
     },
-    partToFirstSectionGeometry: structuredClone(
-      authority.partToFirstSectionGeometry,
-    ),
+    partToFirstSectionGeometry: {
+      ...structuredClone(partToFirstSectionGeometry),
+      printPdfNumericRunBaselineCalibrationEm: requireNumber(
+        partToFirstSectionGeometry.printPdfNumericRunBaselineCalibrationEm,
+        'printPdfNumericRunBaselineCalibrationEm',
+      ),
+    },
     footerContract: structuredClone(authority.footerContract),
   })
 }
@@ -199,7 +207,7 @@ export function paperTypographyRuntimeFromAuthority(
 
 /**
  * Test-only seam for a fully bound, distinguishable authority mutation. The
- * production factory above remains pinned to the current Manifest v34 hash.
+ * production factory above remains pinned to the current Manifest v35 hash.
  */
 export function paperTypographyRuntimeFromAuthorityForTest(authority, binding) {
   return paperTypographyRuntimeFromBoundAuthority(

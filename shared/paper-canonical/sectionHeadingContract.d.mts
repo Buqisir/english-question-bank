@@ -25,14 +25,14 @@ export declare const paperTypographyAuthorityBinding: Readonly<{
   readonly id: 'renderer-typography'
   readonly authorityId: 'paper-typography'
   readonly owner: 'renderer_typography'
-  readonly path: 'rendering/paper-typography-v9.json'
-  readonly schemaId: 'renderer-typography-v9'
-  readonly schemaVersion: 'renderer-typography-v9'
-  readonly version: '9'
+  readonly path: 'rendering/paper-typography-v10.json'
+  readonly schemaId: 'renderer-typography-v10'
+  readonly schemaVersion: 'renderer-typography-v10'
+  readonly version: '10'
   readonly source: 'docs/product/exam-paper-format-standards.md'
-  readonly producer: 'paper-canonical-renderer-typography-v9'
+  readonly producer: 'paper-canonical-renderer-typography-v10'
   readonly manifestId: 'paper-canonical'
-  readonly manifestVersion: '34'
+  readonly manifestVersion: '35'
   readonly manifestDigest: string
   readonly sha256: string
 }>
@@ -49,6 +49,7 @@ export declare const paperTypographyRuntime: Readonly<{
   }>
   partToFirstSectionGeometry: Readonly<{
     normalization: string
+    printPdfNumericRunBaselineCalibrationEm: number
     visibleGlyphHeightToFontSizeRatio: Readonly<{
       printPdf: number
       screen: number

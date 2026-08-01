@@ -19,8 +19,8 @@ import { pathToFileURL } from 'node:url'
 import { DatabaseSync } from 'node:sqlite'
 
 import manifestV17 from '../standards/paper-canonical/manifest-v17.json' with { type: 'json' }
-import manifestV34 from '../standards/paper-canonical/manifest-v34.json' with { type: 'json' }
-import paperTypographyV9 from '../standards/paper-canonical/rendering/paper-typography-v9.json' with { type: 'json' }
+import manifestV35 from '../standards/paper-canonical/manifest-v35.json' with { type: 'json' }
+import paperTypographyV10 from '../standards/paper-canonical/rendering/paper-typography-v10.json' with { type: 'json' }
 import { consumerContractRefs } from '../shared/paper-canonical/consumers.mjs'
 import { canonicalAuthorityRef } from '../shared/paper-canonical/authority.mjs'
 import { paperSurfaceTokens } from '../shared/papersurface/tokens.mjs'
@@ -55,6 +55,7 @@ import {
   paperTypographyRuntime,
   paperTypographyRuntimeFromAuthority,
   paperTypographyRuntimeFromAuthorityForTest,
+  sectionHeadingRuntimeFromContract,
   sectionHeadingRuntime,
   sectionHeadingTextRuns,
 } from '../shared/paper-canonical/sectionHeadingContract.mjs'
@@ -751,8 +752,8 @@ function assertPublicInstructionWeights(
   return observations
 }
 
-function assertPaperTypographyV9InstructionAuthority() {
-  const typographyDescriptor = manifestV34.artifacts.find(
+function assertPaperTypographyV10InstructionAuthority() {
+  const typographyDescriptor = manifestV35.artifacts.find(
     (artifact) => artifact.id === 'renderer-typography',
   )
   assert.deepEqual(
@@ -760,11 +761,11 @@ function assertPaperTypographyV9InstructionAuthority() {
     {
       id: 'renderer-typography',
       owner: 'renderer_typography',
-      path: 'rendering/paper-typography-v9.json',
-      schemaId: 'renderer-typography-v9',
-      sha256: digestJson(paperTypographyV9),
+      path: 'rendering/paper-typography-v10.json',
+      schemaId: 'renderer-typography-v10',
+      sha256: digestJson(paperTypographyV10),
     },
-    'Manifest v34 binds the unique current Paper Typography v9 source, version, path, and hash',
+    'Manifest v35 binds the unique current Paper Typography v10 source, version, path, and hash',
   )
   assert.deepEqual(
     paperTypographyAuthorityBinding,
@@ -775,9 +776,9 @@ function assertPaperTypographyV9InstructionAuthority() {
       path: typographyDescriptor.path,
       schemaId: typographyDescriptor.schemaId,
       schemaVersion: typographyDescriptor.schemaId,
-      version: '9',
+      version: '10',
       source: 'docs/product/exam-paper-format-standards.md',
-      producer: 'paper-canonical-renderer-typography-v9',
+      producer: 'paper-canonical-renderer-typography-v10',
       manifestId: canonicalAuthorityRef.manifestId,
       manifestVersion: canonicalAuthorityRef.manifestVersion,
       manifestDigest: canonicalAuthorityRef.manifestDigest,
@@ -787,89 +788,98 @@ function assertPaperTypographyV9InstructionAuthority() {
   )
   assert.equal(
     canonicalAuthorityRef.manifestVersion,
-    String(manifestV34.version),
-    'the current canonical authority selects Manifest v34 rather than a historical Typography authority',
+    String(manifestV35.version),
+    'the current canonical authority selects Manifest v35 rather than a historical Typography authority',
   )
   assert.equal(
-    paperTypographyV9.schemaVersion,
-    'renderer-typography-v9',
-    'the public instruction source is exactly Paper Typography v9',
+    paperTypographyV10.schemaVersion,
+    'renderer-typography-v10',
+    'the public instruction source is exactly Paper Typography v10',
   )
   assert.equal(
     paperTypographyRuntime.visibleWeight.instruction,
-    paperTypographyV9.optionAnchorFramework.visibleWeight.instruction,
-    'the public runtime reads the exact v9 instruction authority field',
+    paperTypographyV10.optionAnchorFramework.visibleWeight.instruction,
+    'the public runtime reads the exact v10 instruction authority field',
   )
   const assertRuntimeRejects = (label, authority, binding = paperTypographyAuthorityBinding) => {
     assert.throws(
       () => paperTypographyRuntimeFromAuthority(authority, binding),
-      /Paper Typography(?: v9)? authority/u,
+      /Paper Typography(?: v\d+)? authority/u,
       label,
     )
   }
-  const wrongInstructionWeight = structuredClone(paperTypographyV9)
+  const wrongInstructionWeight = structuredClone(paperTypographyV10)
   wrongInstructionWeight.optionAnchorFramework.visibleWeight.instruction = 583
   assertRuntimeRejects(
-    'the runtime rejects a changed instruction weight while the fixed v9 hash remains bound',
+    'the runtime rejects a changed instruction weight while the fixed v10 hash remains bound',
     wrongInstructionWeight,
   )
-  const wrongSchemaVersion = structuredClone(paperTypographyV9)
-  wrongSchemaVersion.schemaVersion = 'renderer-typography-v8'
+  const wrongSchemaVersion = structuredClone(paperTypographyV10)
+  wrongSchemaVersion.schemaVersion = 'renderer-typography-v9'
   assertRuntimeRejects(
     'the runtime rejects a Typography authority from the wrong schema version',
     wrongSchemaVersion,
   )
-  const wrongAuthorityVersion = structuredClone(paperTypographyV9)
-  wrongAuthorityVersion.version = '8'
+  const wrongAuthorityVersion = structuredClone(paperTypographyV10)
+  wrongAuthorityVersion.version = '9'
   assertRuntimeRejects(
     'the runtime rejects a Typography authority from the wrong version',
     wrongAuthorityVersion,
   )
-  const wrongSource = structuredClone(paperTypographyV9)
+  const wrongSource = structuredClone(paperTypographyV10)
   wrongSource.provenance.source = 'untrusted-source.md'
   assertRuntimeRejects(
     'the runtime rejects a Typography authority with mutated provenance.source',
     wrongSource,
   )
-  const wrongProducer = structuredClone(paperTypographyV9)
+  const wrongProducer = structuredClone(paperTypographyV10)
   wrongProducer.provenance.producer = 'untrusted-producer'
   assertRuntimeRejects(
     'the runtime rejects a Typography authority with mutated provenance.producer',
     wrongProducer,
   )
+  const wrongNumericRunBaseline = structuredClone(paperTypographyV10)
+  wrongNumericRunBaseline.sectionHeadingContract.typography
+    .numericRunBaselineShiftEm = 0.2
+  assertRuntimeRejects(
+    'the runtime rejects a Typography authority with a mutated numeric-run baseline while the fixed v10 hash remains bound',
+    wrongNumericRunBaseline,
+  )
   for (const [field, mutation] of [
     ['path', (binding) => ({ ...binding, path: 'rendering/wrong-typography.json' })],
     ['sha256', (binding) => ({ ...binding, sha256: `sha256:${'0'.repeat(64)}` })],
-    ['version', (binding) => ({ ...binding, version: '8' })],
+    ['version', (binding) => ({ ...binding, version: '9' })],
     ['source', (binding) => ({ ...binding, source: 'untrusted-source.md' })],
     ['producer', (binding) => ({ ...binding, producer: 'untrusted-producer' })],
   ]) {
     assertRuntimeRejects(
       `the runtime rejects a Typography binding with mutated ${field}`,
-      paperTypographyV9,
+      paperTypographyV10,
       mutation(paperTypographyAuthorityBinding),
     )
   }
   assertRuntimeRejects(
     'the runtime rejects a Typography binding whose complete path/hash/version/source/producer closure is inconsistent',
-    paperTypographyV9,
+    paperTypographyV10,
     {
       ...paperTypographyAuthorityBinding,
       path: 'rendering/wrong-typography.json',
       sha256: `sha256:${'0'.repeat(64)}`,
-      version: '8',
+      version: '9',
       source: 'untrusted-source.md',
       producer: 'untrusted-producer',
     },
   )
-  const mutatedAuthority = structuredClone(paperTypographyV9)
+  const mutatedAuthority = structuredClone(paperTypographyV10)
   mutatedAuthority.optionAnchorFramework.visibleWeight.instruction = 583
+  mutatedAuthority.sectionHeadingContract.typography
+    .numericRunBaselineShiftEm = 0.2
   const mutatedBinding = {
     ...paperTypographyAuthorityBinding,
     sha256: digestJson(mutatedAuthority),
   }
   assertRuntimeRejects(
-    'the production runtime rejects a self-signed non-current Typography v9 binding even when its content hash is synchronized',
+    'the production runtime rejects a self-signed non-current Typography v10 binding even when its content hash is synchronized',
     mutatedAuthority,
     mutatedBinding,
   )
@@ -877,12 +887,18 @@ function assertPaperTypographyV9InstructionAuthority() {
     paperTypographyRuntimeFromAuthorityForTest(mutatedAuthority, mutatedBinding)
       .visibleWeight.instruction,
     583,
-    'a distinguishable v9 instruction authority mutation reaches the runtime seam only with a synchronized content hash',
+    'a distinguishable v10 instruction authority mutation reaches the runtime seam only with a synchronized content hash',
   )
-  const missingInstruction = structuredClone(paperTypographyV9)
+  assert.equal(
+    sectionHeadingRuntimeFromContract(mutatedAuthority.sectionHeadingContract)
+      .screen.numericRunBaselineShiftEm,
+    0.2,
+    'a distinguishable v10 baseline mutation reaches the section-heading runtime seam only with a synchronized content hash',
+  )
+  const missingInstruction = structuredClone(paperTypographyV10)
   delete missingInstruction.optionAnchorFramework.visibleWeight.instruction
   assertRuntimeRejects(
-    'the runtime fails closed when Paper Typography v9 lacks the instruction role',
+    'the runtime fails closed when Paper Typography v10 lacks the instruction role',
     missingInstruction,
     {
       ...paperTypographyAuthorityBinding,
@@ -893,6 +909,7 @@ function assertPaperTypographyV9InstructionAuthority() {
     authority: Object.freeze(mutatedAuthority),
     binding: Object.freeze(mutatedBinding),
     expectedWeight: 583,
+    expectedNumericRunBaselineShiftEm: 0.2,
   })
 }
 
@@ -1298,18 +1315,18 @@ function assertSevenChoicesReferenceEvidence() {
   )
   assert.equal(
     canonicalAuthorityRef.manifestVersion,
-    '34',
+    '35',
     'new Publications preserve Seven Choices inside the whole-paper typography successor authority',
   )
   assert.equal(
     consumerContractRefs.screen.version,
-    '34',
-    'Screen v34 binds the complete geometry authority closure',
+    '35',
+    'Screen v35 binds the complete geometry authority closure',
   )
   assert.equal(
     consumerContractRefs.print_pdf.version,
-    '35',
-    'Print/PDF v35 binds the complete geometry authority closure',
+    '36',
+    'Print/PDF v36 binds the complete geometry authority closure',
   )
   assert.equal(
     sha256(preservedBytes),
@@ -2683,8 +2700,6 @@ function paperTypographyMutationVitePlugin(authority, binding) {
   const virtualId = '\u0000canonical-import-pilot-paper-typography-mutation'
   const source = [
     'import {',
-    '  sectionHeadingContract,',
-    '  sectionHeadingRuntime,',
     '  sectionHeadingRuntimeFromContract,',
     '  paperTypographyRuntimeFromAuthority,',
     '  paperTypographyRuntimeFromAuthorityForTest,',
@@ -2692,9 +2707,10 @@ function paperTypographyMutationVitePlugin(authority, binding) {
     `} from ${JSON.stringify(baseSpecifier)}`,
     `const authority = ${JSON.stringify(authority)}`,
     `const binding = ${JSON.stringify(binding)}`,
+    'export const sectionHeadingContract = authority.sectionHeadingContract',
+    'export const sectionHeadingRuntime =',
+    '  sectionHeadingRuntimeFromContract(sectionHeadingContract)',
     'export {',
-    '  sectionHeadingContract,',
-    '  sectionHeadingRuntime,',
     '  sectionHeadingRuntimeFromContract,',
     '  paperTypographyRuntimeFromAuthority,',
     '  paperTypographyRuntimeFromAuthorityForTest,',
@@ -2727,8 +2743,6 @@ function writePaperTypographyMutationLoader({ rootDir, authority, binding }) {
   )).href
   const wrapperSource = [
     'import {',
-    '  sectionHeadingContract,',
-    '  sectionHeadingRuntime,',
     '  sectionHeadingRuntimeFromContract,',
     '  paperTypographyRuntimeFromAuthority,',
     '  paperTypographyRuntimeFromAuthorityForTest,',
@@ -2736,9 +2750,10 @@ function writePaperTypographyMutationLoader({ rootDir, authority, binding }) {
     `} from ${JSON.stringify(`${contractUrl}?canonical-import-pilot-unmutated`)}`,
     `const authority = ${JSON.stringify(authority)}`,
     `const binding = ${JSON.stringify(binding)}`,
+    'export const sectionHeadingContract = authority.sectionHeadingContract',
+    'export const sectionHeadingRuntime =',
+    '  sectionHeadingRuntimeFromContract(sectionHeadingContract)',
     'export {',
-    '  sectionHeadingContract,',
-    '  sectionHeadingRuntime,',
     '  sectionHeadingRuntimeFromContract,',
     '  paperTypographyRuntimeFromAuthority,',
     '  paperTypographyRuntimeFromAuthorityForTest,',
@@ -2821,6 +2836,7 @@ async function assertScreenInstructionWeightAuthorityMutation({
   binding,
   focusGroupId,
   questionId,
+  expectedNumericRunBaselineShiftEm,
 }) {
   const mutatedVite = await vite.createServer({
     root: path.join(repositoryRoot, 'app'),
@@ -2857,6 +2873,14 @@ async function assertScreenInstructionWeightAuthorityMutation({
         expectedWeight,
       },
     )
+    const plainNumericRuns = await assertPublicSectionHeadingNumericRuns(
+      page,
+      'Paper Typography mutation Screen plain',
+      {
+        surface: 'screen',
+        expectedNumericRunBaselineShiftEm,
+      },
+    )
     const lectureUrl = new URL(plainUrl)
     lectureUrl.searchParams.set('lecture', '1')
     lectureUrl.searchParams.set('focusGroupId', focusGroupId)
@@ -2873,7 +2897,20 @@ async function assertScreenInstructionWeightAuthorityMutation({
         expectedWeight,
       },
     )
-    return Object.freeze({ plain, lecture })
+    const lectureNumericRuns = await assertPublicSectionHeadingNumericRuns(
+      page,
+      'Paper Typography mutation Screen lecture',
+      {
+        surface: 'screen',
+        expectedNumericRunBaselineShiftEm,
+      },
+    )
+    return Object.freeze({
+      plain,
+      lecture,
+      plainNumericRuns,
+      lectureNumericRuns,
+    })
   } finally {
     if (browser) await browser.close()
     await mutatedVite.close()
@@ -2891,6 +2928,8 @@ async function assertPrintInstructionWeightAuthorityMutation({
   authority,
   binding,
   baselinePdfObservations,
+  baselineNumericPdfObservations,
+  expectedNumericRunBaselineShiftEm,
 }) {
   const api = await startPaperTypographyMutationApi({
     rootDir,
@@ -2929,6 +2968,15 @@ async function assertPrintInstructionWeightAuthorityMutation({
           expectedWeight,
         },
       )
+      observations[`${versionType}_print_html_numeric_runs`] =
+        await assertPublicSectionHeadingNumericRuns(
+          page,
+          `Paper Typography mutation ${versionType} Print HTML`,
+          {
+            surface: 'print',
+            expectedNumericRunBaselineShiftEm,
+          },
+        )
       try {
         directRender = await renderPaginatedPaper(html, {
           inspect: (page) => observePublicInstructionWeights(page, {
@@ -2989,10 +3037,20 @@ async function assertPrintInstructionWeightAuthorityMutation({
       assert.notDeepEqual(
         apiPdfObservation.raster,
         baselinePdfObservations[versionType].raster,
-        `Paper Typography mutation ${versionType} real API PDF exposes a distinguishable v9 glyph raster`,
+        `Paper Typography mutation ${versionType} real API PDF exposes a distinguishable v10 glyph raster`,
+      )
+      const apiPdfNumericRuns = observePdfSectionHeadingNumericRunsBytes(
+        pdfBytes,
+        `Paper Typography mutation ${versionType} real print-pdf API PDF`,
+      )
+      assertPdfSectionHeadingNumericMutation(
+        baselineNumericPdfObservations[versionType],
+        apiPdfNumericRuns,
+        `Paper Typography mutation ${versionType} real print-pdf API PDF`,
       )
       observations[`${versionType}_api_pdf`] = apiPdfObservation
       observations[`${versionType}_direct_pdf_visual`] = directPdfVisualObservation
+      observations[`${versionType}_api_pdf_numeric_runs`] = apiPdfNumericRuns
     }
     return Object.freeze(observations)
   } finally {
@@ -4369,38 +4427,6 @@ async function assertScreenReadingVerticalRhythm(
     chromeGeometry.roles.length > 0,
     true,
     `${label} exposes Reading chrome`,
-  )
-  const scoreGlyphAlignment = await page.evaluate(() => {
-    const heading = document.querySelector(
-      '[data-canonical-reading-rhythm-role="subsection"]',
-    )
-    const numericRun = heading?.querySelector(
-      '[data-canonical-section-heading-numeric-run]',
-    )
-    if (!(heading instanceof HTMLElement)
-      || !(numericRun instanceof HTMLElement)) return null
-    const style = getComputedStyle(heading)
-    const canvas = document.createElement('canvas')
-    const context = canvas.getContext('2d')
-    if (!context) return null
-    context.font = `${style.fontWeight} ${style.fontSize} ${style.fontFamily}`
-    const chinese = context.measureText('分')
-    const numeric = context.measureText('37.5')
-    return {
-      chineseDescent: chinese.actualBoundingBoxDescent,
-      numericDescent: numeric.actualBoundingBoxDescent,
-      numericShiftPx:
-        Number.parseFloat(getComputedStyle(numericRun).top) || 0,
-    }
-  })
-  assert.ok(scoreGlyphAlignment, `${label} exposes measurable score glyphs`)
-  assert.ok(
-    Math.abs(
-      scoreGlyphAlignment.numericDescent
-      + scoreGlyphAlignment.numericShiftPx
-      - scoreGlyphAlignment.chineseDescent
-    ) <= 0.75,
-    `${label} aligns the real numeric glyph descent with the Chinese score glyph descent: ${JSON.stringify(scoreGlyphAlignment)}`,
   )
   for (let index = 1; index < chromeGeometry.roles.length; index += 1) {
     if (
@@ -7928,6 +7954,501 @@ function normalizedVisibleText(value) {
   return String(value || '').normalize('NFKC').replace(/\s+/g, ' ').trim()
 }
 
+async function assertScreenQuestionNumberPassageAlignment(page, label) {
+  const originalViewport = page.viewportSize()
+  await page.setViewportSize({ width: 428, height: 990 })
+  const observe = () => page.evaluate(() => {
+    const group = document.querySelector(
+      '[data-canonical-group-type="reading"]',
+    )
+    const questionNumber = group?.querySelector('.ps-question-no')
+    const passage = group?.querySelector('.ps-canonical-reading-paragraph')
+    if (!(group instanceof HTMLElement)
+      || !(questionNumber instanceof HTMLElement)
+      || !(passage instanceof HTMLElement)) return null
+    const firstVisibleCharacter = (element, { minimumLeft = false } = {}) => {
+      const candidates = []
+      const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT)
+      for (let node = walker.nextNode(); node; node = walker.nextNode()) {
+        for (let index = 0; index < node.textContent.length; index += 1) {
+          const character = node.textContent[index]
+          if (!character.trim()) continue
+          const range = document.createRange()
+          range.setStart(node, index)
+          range.setEnd(node, index + 1)
+          const rect = [...range.getClientRects()].find(
+            (candidate) => candidate.width > 0 && candidate.height > 0,
+          )
+          if (rect) candidates.push({ character, rect })
+        }
+      }
+      if (candidates.length === 0) return null
+      return minimumLeft
+        ? candidates.sort((left, right) => left.rect.left - right.rect.left)[0]
+        : candidates[0]
+    }
+    const number = firstVisibleCharacter(questionNumber)
+    const body = firstVisibleCharacter(passage, { minimumLeft: true })
+    if (!number || !body) return null
+    const visibleGlyphLeft = ({ element, character, rect }) => {
+      const style = getComputedStyle(element)
+      const canvas = document.createElement('canvas')
+      const context = canvas.getContext('2d')
+      if (!context) return null
+      context.font = `${style.fontWeight} ${style.fontSize} ${style.fontFamily}`
+      const metrics = context.measureText(character)
+      return rect.left - metrics.actualBoundingBoxLeft
+    }
+    const questionVisibleGlyphLeft = visibleGlyphLeft({
+      element: questionNumber,
+      character: number.character,
+      rect: number.rect,
+    })
+    const passageVisibleGlyphLeft = visibleGlyphLeft({
+      element: passage,
+      character: body.character,
+      rect: body.rect,
+    })
+    const question = questionNumber.closest('.ps-question')
+    const questionStyle = question ? getComputedStyle(question) : null
+    return {
+      questionCharacter: number.character,
+      passageCharacter: body.character,
+      questionVisibleGlyphLeft,
+      passageVisibleGlyphLeft,
+      visibleGlyphDeltaPx: questionVisibleGlyphLeft - passageVisibleGlyphLeft,
+      questionPaddingLeftPx: questionStyle
+        ? Number.parseFloat(questionStyle.paddingLeft)
+        : null,
+      questionBorderLeftPx: questionStyle
+        ? Number.parseFloat(questionStyle.borderLeftWidth)
+        : null,
+      active: question?.classList.contains('ps-question--active') || false,
+    }
+  })
+  try {
+    const baseline = await observe()
+    assert.ok(baseline, `${label} exposes a Reading question and passage glyph`)
+    assert.equal(
+      Math.abs(baseline.visibleGlyphDeltaPx) <= 0.75,
+      true,
+      `${label} aligns the question-number visible glyph left edge with the nearby unindented passage body glyph: ${JSON.stringify(baseline)}`,
+    )
+    assert.equal(
+      baseline.questionPaddingLeftPx <= 0.1
+      && baseline.questionBorderLeftPx <= 0.1,
+      true,
+      `${label} uses no question-container layout rail offset: ${JSON.stringify(baseline)}`,
+    )
+    const poison = await page.addStyleTag({
+      content: '.ps-question{padding-left:6px!important;border-left:2px solid transparent!important}',
+    })
+    try {
+      const mutated = await observe()
+      assert.ok(mutated, `${label} exposes the Screen rail adversary`)
+      assert.equal(
+        Math.abs(mutated.visibleGlyphDeltaPx) >= 7,
+        true,
+        `${label} public seam detects a Screen-only question rail offset: ${JSON.stringify(mutated)}`,
+      )
+    } finally {
+      await poison.evaluate((element) => element.remove())
+    }
+  } finally {
+    if (originalViewport) await page.setViewportSize(originalViewport)
+  }
+}
+
+async function assertPublicSectionHeadingNumericRuns(
+  page,
+  label,
+  {
+    surface,
+    expectedNumericRunBaselineShiftEm =
+      sectionHeadingRuntime.screen.numericRunBaselineShiftEm,
+  },
+) {
+  const songtiFingerprint = {
+    probeText: '2.5分',
+    glyphMetrics: {
+      advancePx: 30.197982788085938,
+      actualBoundingBoxLeftPx: -0.32199999690055847,
+      actualBoundingBoxRightPx: 29.721982955932617,
+      actualBoundingBoxAscentPx: 10.569999694824219,
+      actualBoundingBoxDescentPx: 2.1700000762939453,
+      fontBoundingBoxAscentPx: 15,
+      fontBoundingBoxDescentPx: 5,
+    },
+  }
+  const heitiFingerprint = {
+    probeText: '50分',
+    glyphMetrics: {
+      advancePx: 29.511993408203125,
+      actualBoundingBoxLeftPx: -0.4620000123977661,
+      actualBoundingBoxRightPx: 28.923992156982422,
+      actualBoundingBoxAscentPx: 11.34000015258789,
+      actualBoundingBoxDescentPx: 1.4840011596679688,
+      fontBoundingBoxAscentPx: 12,
+      fontBoundingBoxDescentPx: 2,
+    },
+  }
+  const expectedRuns = [
+    { text: '5', platformGlyphFace: 'Songti SC', ...songtiFingerprint },
+    { text: '2.5', platformGlyphFace: 'Songti SC', ...songtiFingerprint },
+    { text: '12.5', platformGlyphFace: 'Songti SC', ...songtiFingerprint },
+    { text: '50', platformGlyphFace: 'Heiti SC', ...heitiFingerprint },
+  ]
+  const observations = await page.evaluate((expected) => {
+    const lineBox = (rect) => ({
+      left: rect.left,
+      top: rect.top,
+      right: rect.right,
+      bottom: rect.bottom,
+      width: rect.width,
+      height: rect.height,
+    })
+    const fontDeclaration = (style, fontFamily = style.fontFamily) => [
+      style.fontStyle,
+      style.fontVariant,
+      style.fontWeight,
+      style.fontSize,
+      fontFamily,
+    ].join(' ')
+    const glyphMetrics = (style, text, fontFamily = style.fontFamily) => {
+      const canvas = document.createElement('canvas')
+      const context = canvas.getContext('2d')
+      if (!context) return null
+      context.font = fontDeclaration(style, fontFamily)
+      const metrics = context.measureText(text)
+      return {
+        advancePx: metrics.width,
+        actualBoundingBoxLeftPx: metrics.actualBoundingBoxLeft,
+        actualBoundingBoxRightPx: metrics.actualBoundingBoxRight,
+        actualBoundingBoxAscentPx: metrics.actualBoundingBoxAscent,
+        actualBoundingBoxDescentPx: metrics.actualBoundingBoxDescent,
+        visibleGlyphHeightPx:
+          metrics.actualBoundingBoxAscent + metrics.actualBoundingBoxDescent,
+        fontBoundingBoxAscentPx: metrics.fontBoundingBoxAscent,
+        fontBoundingBoxDescentPx: metrics.fontBoundingBoxDescent,
+      }
+    }
+    const fontFamilies = (fontFamily) => {
+      const families = []
+      let quote = null
+      let current = ''
+      for (const character of fontFamily) {
+        if ((character === '"' || character === "'") && !quote) {
+          quote = character
+        } else if (character === quote) {
+          quote = null
+        }
+        if (character === ',' && !quote) {
+          if (current.trim()) families.push(current.trim())
+          current = ''
+        } else {
+          current += character
+        }
+      }
+      if (current.trim()) families.push(current.trim())
+      return families
+    }
+    const platformFamilyName = (family) => family
+      .trim()
+      .replace(/^(?:"|')|(?:"|')$/gu, '')
+    const sameGlyphMetrics = (left, right) => [
+      'advancePx',
+      'actualBoundingBoxLeftPx',
+      'actualBoundingBoxRightPx',
+      'actualBoundingBoxAscentPx',
+      'actualBoundingBoxDescentPx',
+      'fontBoundingBoxAscentPx',
+      'fontBoundingBoxDescentPx',
+    ].every((property) =>
+      Number.isFinite(left?.[property])
+      && Number.isFinite(right?.[property])
+      && Math.abs(left[property] - right[property]) <= 0.02)
+    const platformGlyphFace = (style, text) => {
+      const activeMetrics = glyphMetrics(style, text)
+      const matchingFamilies = fontFamilies(style.fontFamily)
+        .filter((family) => !/^(?:serif|sans-serif|monospace|cursive|fantasy)$/iu.test(
+          platformFamilyName(family),
+        ))
+        .filter((family) => sameGlyphMetrics(
+          activeMetrics,
+          glyphMetrics(style, text, family),
+        ))
+        .map(platformFamilyName)
+      return {
+        matchingFamilies,
+        family: matchingFamilies.length === 1 ? matchingFamilies[0] : null,
+      }
+    }
+    const rangeForNodeCharacter = (node, index) => {
+      const range = document.createRange()
+      range.setStart(node, index)
+      range.setEnd(node, index + 1)
+      return [...range.getClientRects()].find(
+        (rect) => rect.width > 0 && rect.height > 0,
+      ) || null
+    }
+    const spanForExpected = (text) => [...document.querySelectorAll(
+      '[data-canonical-section-heading-numeric-run]',
+    )].find((candidate) => candidate.textContent?.trim() === text)
+    return expected.map(({ text, probeText }) => {
+      const numericRun = spanForExpected(text)
+      if (!(numericRun instanceof HTMLElement)) return null
+      const heading = numericRun.parentElement
+      if (!(heading instanceof HTMLElement)) return null
+      const numericRange = document.createRange()
+      numericRange.selectNodeContents(numericRun)
+      const numericRect = [...numericRange.getClientRects()].find(
+        (rect) => rect.width > 0 && rect.height > 0,
+      )
+      if (!numericRect) return null
+      const chineseCandidates = []
+      const walker = document.createTreeWalker(heading, NodeFilter.SHOW_TEXT)
+      for (let node = walker.nextNode(); node; node = walker.nextNode()) {
+        if (numericRun.contains(node.parentElement)) continue
+        for (let index = 0; index < node.textContent.length; index += 1) {
+          const character = node.textContent[index]
+          if (!/\p{Script=Han}/u.test(character)) continue
+          const rect = rangeForNodeCharacter(node, index)
+          if (!rect) continue
+          chineseCandidates.push({
+            character,
+            rect,
+            element: node.parentElement instanceof HTMLElement
+              ? node.parentElement
+              : heading,
+          })
+        }
+      }
+      const chinese = chineseCandidates.sort((left, right) => {
+        const leftDistance = Math.abs(
+          (left.rect.left + left.rect.right) / 2
+          - (numericRect.left + numericRect.right) / 2,
+        )
+        const rightDistance = Math.abs(
+          (right.rect.left + right.rect.right) / 2
+          - (numericRect.left + numericRect.right) / 2,
+        )
+        return leftDistance - rightDistance
+      })[0]
+      if (!chinese) return null
+      const numericStyle = getComputedStyle(numericRun)
+      const chineseStyle = getComputedStyle(chinese.element)
+      const numericGlyphBox = glyphMetrics(numericStyle, text)
+      const chineseGlyphBox = glyphMetrics(chineseStyle, chinese.character)
+      if (!numericGlyphBox || !chineseGlyphBox) return null
+      const numericBaselineY =
+        numericRect.top + numericGlyphBox.fontBoundingBoxAscentPx
+      const chineseBaselineY =
+        chinese.rect.top + chineseGlyphBox.fontBoundingBoxAscentPx
+      const numericVisibleGlyphBottomY =
+        numericBaselineY + numericGlyphBox.actualBoundingBoxDescentPx
+      const chineseVisibleGlyphBottomY =
+        chineseBaselineY + chineseGlyphBox.actualBoundingBoxDescentPx
+      return {
+        text,
+        headingText: heading.textContent?.trim() || '',
+        numeric: {
+          fontFamily: numericStyle.fontFamily,
+          fontWeight: numericStyle.fontWeight,
+          fontSizePx: Number.parseFloat(numericStyle.fontSize),
+          lineHeightPx: Number.parseFloat(numericStyle.lineHeight),
+          position: numericStyle.position,
+          topPx: Number.parseFloat(numericStyle.top),
+          lineBox: lineBox(numericRect),
+          glyphBox: numericGlyphBox,
+          platformGlyphFace: platformGlyphFace(numericStyle, text),
+          platformGlyphFingerprint: {
+            probeText,
+            glyphBox: glyphMetrics(numericStyle, probeText),
+            genericFallbackGlyphBox: glyphMetrics(
+              numericStyle,
+              probeText,
+              '__canonical_missing_font_face__',
+            ),
+          },
+          baselineY: numericBaselineY,
+          visibleGlyphBottomY: numericVisibleGlyphBottomY,
+        },
+        chinese: {
+          character: chinese.character,
+          fontFamily: chineseStyle.fontFamily,
+          fontWeight: chineseStyle.fontWeight,
+          fontSizePx: Number.parseFloat(chineseStyle.fontSize),
+          lineHeightPx: Number.parseFloat(chineseStyle.lineHeight),
+          lineBox: lineBox(chinese.rect),
+          glyphBox: chineseGlyphBox,
+          platformGlyphFace: platformGlyphFace(
+            chineseStyle,
+            chinese.character,
+          ),
+          platformGlyphFingerprint: {
+            probeText,
+            glyphBox: glyphMetrics(chineseStyle, probeText),
+            genericFallbackGlyphBox: glyphMetrics(
+              chineseStyle,
+              probeText,
+              '__canonical_missing_font_face__',
+            ),
+          },
+          baselineY: chineseBaselineY,
+          visibleGlyphBottomY: chineseVisibleGlyphBottomY,
+        },
+        baselineDeltaPx: numericBaselineY - chineseBaselineY,
+        visibleGlyphBottomDeltaPx:
+          numericVisibleGlyphBottomY - chineseVisibleGlyphBottomY,
+        localVisibleGlyphHeightPx: Math.max(
+          numericGlyphBox.visibleGlyphHeightPx,
+          chineseGlyphBox.visibleGlyphHeightPx,
+        ),
+      }
+    })
+  }, expectedRuns)
+  assert.deepEqual(
+    observations.map((observation) => observation?.text),
+    expectedRuns.map(({ text }) => text),
+    `${label} ${surface} exposes the four reviewed public score-numeral runs`,
+  )
+  for (const expectedRun of expectedRuns) {
+    const observation = observations.find(
+      (candidate) => candidate.text === expectedRun.text,
+    )
+    assert.ok(observation, `${label} ${surface} exposes ${expectedRun.text}`)
+    const expectedShiftPx =
+      observation.numeric.fontSizePx * expectedNumericRunBaselineShiftEm
+    assert.equal(
+      observation.numeric.position,
+      'relative',
+      `${label} ${surface} ${observation.text} retains an explicit public baseline run`,
+    )
+    assert.equal(
+      Math.abs(observation.numeric.topPx - expectedShiftPx) <= 0.25,
+      true,
+      `${label} ${surface} ${observation.text} consumes the authoritative numeric baseline shift: ${JSON.stringify(observation)}`,
+    )
+    assert.equal(
+      Math.abs(observation.baselineDeltaPx - expectedShiftPx) <= 0.75,
+      true,
+      `${label} ${surface} ${observation.text} shifts the real numeric line box against its adjacent Chinese glyph by the authoritative baseline amount: ${JSON.stringify(observation)}`,
+    )
+    const expectedVisibleGlyphBottomDeltaPx =
+      expectedShiftPx
+      + observation.numeric.glyphBox.actualBoundingBoxDescentPx
+      - observation.chinese.glyphBox.actualBoundingBoxDescentPx
+    assert.equal(
+      Math.abs(
+        observation.visibleGlyphBottomDeltaPx
+        - expectedVisibleGlyphBottomDeltaPx,
+      ) <= 0.75,
+      true,
+      `${label} ${surface} ${observation.text} consumes the authoritative baseline shift in its visible glyph bottoms: ${JSON.stringify(observation)}`,
+    )
+    assert.equal(
+      Math.abs(
+        observation.visibleGlyphBottomDeltaPx
+        / observation.localVisibleGlyphHeightPx,
+      ) <= 0.2,
+      true,
+      `${label} ${surface} ${observation.text} keeps numeric and adjacent-Chinese visible glyph bottoms locally calibrated: ${JSON.stringify(observation)}`,
+    )
+    for (const property of [
+      'fontFamily',
+      'fontWeight',
+      'fontSizePx',
+      'lineHeightPx',
+    ]) {
+      assert.equal(
+        observation.numeric[property],
+        observation.chinese[property],
+        `${label} ${surface} ${observation.text} and adjacent Chinese glyph keep the same resolved ${property}: ${JSON.stringify(observation)}`,
+      )
+    }
+    for (const run of [observation.numeric, observation.chinese]) {
+      assert.deepEqual(
+        run.platformGlyphFace.matchingFamilies,
+        [expectedRun.platformGlyphFace],
+        `${label} ${surface} ${observation.text} resolves ${run === observation.numeric ? 'numeric' : 'adjacent Chinese'} glyphs to one exact platform face through candidate-specific public glyph metrics: ${JSON.stringify(observation)}`,
+      )
+      for (const [property, expectedValue] of Object.entries(
+        expectedRun.glyphMetrics,
+      )) {
+        assert.equal(
+          Math.abs(
+            run.platformGlyphFingerprint.glyphBox[property] - expectedValue,
+          ) <= 0.05,
+          true,
+          `${label} ${surface} ${observation.text} locks the ${run === observation.numeric ? 'numeric' : 'adjacent Chinese'} ${expectedRun.platformGlyphFace} glyph fingerprint independently of its declared CSS stack: ${JSON.stringify(observation)}`,
+        )
+      }
+      const genericFallbackDistance = Math.max(...Object.keys(
+        expectedRun.glyphMetrics,
+      ).map((property) => Math.abs(
+        run.platformGlyphFingerprint.glyphBox[property]
+        - run.platformGlyphFingerprint.genericFallbackGlyphBox[property],
+      )))
+      assert.equal(
+        genericFallbackDistance > 0.5,
+        true,
+        `${label} ${surface} ${observation.text} candidate-specific glyph fingerprint differs from the silent generic fallback: ${JSON.stringify(observation)}`,
+      )
+    }
+    for (const glyph of [observation.numeric.glyphBox, observation.chinese.glyphBox]) {
+      assert.equal(
+        Number.isFinite(glyph?.visibleGlyphHeightPx)
+        && glyph.visibleGlyphHeightPx > 0,
+        true,
+        `${label} ${surface} exposes a measurable visible glyph bbox: ${JSON.stringify(observation)}`,
+      )
+    }
+  }
+  return Object.freeze(observations)
+}
+
+async function assertPublicSectionHeadingNumericRunAdversaries(
+  page,
+  label,
+  { surface },
+) {
+  const adversaries = [
+    {
+      label: 'unsupported 0.2em baseline shift',
+      css: '[data-canonical-section-heading-numeric-run]{top:.2em!important}',
+    },
+    {
+      label: 'unsupported Arial numeric fallback',
+      css: '[data-canonical-section-heading-numeric-run]{font-family:Arial!important}',
+    },
+    {
+      label: 'silent missing-face generic fallback',
+      css: '[data-canonical-section-heading-numeric-run]{font-family:"__canonical_missing_font_face__",serif!important}',
+    },
+  ]
+  for (const adversary of adversaries) {
+    const poison = await page.addStyleTag({ content: adversary.css })
+    try {
+      let rejection = null
+      try {
+        await assertPublicSectionHeadingNumericRuns(
+          page,
+          `${label} ${adversary.label}`,
+          { surface },
+        )
+      } catch (error) {
+        rejection = error
+      }
+      assert.ok(
+        rejection,
+        `${label} ${surface} rejects the ${adversary.label} public typography adversary`,
+      )
+    } finally {
+      await poison.evaluate((element) => element.remove())
+    }
+  }
+}
+
 async function assertOwnerGoldSectionHeadingsDom(page, label, surface) {
   const selectors = surface === 'screen'
     ? {
@@ -9729,13 +10250,80 @@ function pdfTextRunsWithFonts(pdfPath) {
     if (family) spec.families.add(family)
     fontSpecs.set(id, spec)
   }
+  const attribute = (attributes, name) =>
+    attributes.match(new RegExp(`\\b${name}="([^"]+)"`, 'u'))?.[1] ?? null
+  const fontFamilyName = (family) => family.replace(/^[A-Z]{6}\+/u, '')
   return [...xml.matchAll(
-    /<text\b[^>]*\bfont="([^"]+)"[^>]*>([\s\S]*?)<\/text>/gu,
-  )].map((match) => ({
-    fontFamilies: [...(fontSpecs.get(match[1])?.families || [])],
-    fontSize: fontSpecs.get(match[1])?.size ?? null,
-    text: normalizedPdfToken(match[2].replace(/<[^>]+>/gu, '')),
-  }))
+    /<page\b([^>]*)>([\s\S]*?)<\/page>/gu,
+  )].flatMap((pageMatch) => {
+    const page = Number(attribute(pageMatch[1], 'number'))
+    const pageWidth = Number(attribute(pageMatch[1], 'width'))
+    const pageHeight = Number(attribute(pageMatch[1], 'height'))
+    assert.equal(
+      Number.isInteger(page)
+      && Number.isFinite(pageWidth)
+      && Number.isFinite(pageHeight),
+      true,
+      `PDF font extraction resolves page geometry for ${pdfPath}`,
+    )
+    return [...pageMatch[2].matchAll(
+      /<text\b([^>]*)>([\s\S]*?)<\/text>/gu,
+    )].flatMap((textMatch) => {
+      const fontId = attribute(textMatch[1], 'font')
+      const left = Number(attribute(textMatch[1], 'left'))
+      const top = Number(attribute(textMatch[1], 'top'))
+      const width = Number(attribute(textMatch[1], 'width'))
+      const height = Number(attribute(textMatch[1], 'height'))
+      const text = normalizedPdfToken(textMatch[2].replace(/<[^>]+>/gu, ''))
+      if (
+        !fontId
+        || !text
+        || !Number.isFinite(left)
+        || !Number.isFinite(top)
+        || !Number.isFinite(width)
+        || !Number.isFinite(height)
+      ) return []
+      const fontFamilies = [...(fontSpecs.get(fontId)?.families || [])]
+      return [{
+        page,
+        pageWidth,
+        pageHeight,
+        xMin: left,
+        yMin: top,
+        xMax: left + width,
+        yMax: top + height,
+        fontFamilies,
+        fontFamilyNames: fontFamilies.map(fontFamilyName),
+        fontSize: fontSpecs.get(fontId)?.size ?? null,
+        text,
+      }]
+    })
+  })
+}
+
+function pdfTextRunBoxForPdfBox(run, box) {
+  assert.equal(run.page, box.page, 'PDF text run and bounding box share one page')
+  const scaleX = run.pageWidth / box.pageWidth
+  const scaleY = run.pageHeight / box.pageHeight
+  return {
+    xMin: box.xMin * scaleX,
+    yMin: box.yMin * scaleY,
+    xMax: box.xMax * scaleX,
+    yMax: box.yMax * scaleY,
+  }
+}
+
+function pdfBoxesOverlap(left, right, tolerance = 2) {
+  return left.xMax >= right.xMin - tolerance
+    && left.xMin <= right.xMax + tolerance
+    && left.yMax >= right.yMin - tolerance
+    && left.yMin <= right.yMax + tolerance
+}
+
+function pdfTextRunsForLine(textRuns, line) {
+  return textRuns.filter((run) =>
+    run.page === line.page
+    && pdfBoxesOverlap(run, pdfTextRunBoxForPdfBox(run, line)))
 }
 
 function parsePgm(buffer) {
@@ -9940,7 +10528,7 @@ function assertOwnerGoldSectionHeadingsPdf(pdfPath, label) {
   const bodyChineseFontSizes = textRuns.flatMap((run) =>
     /\p{Script=Han}/u.test(run.text)
     && !lineIdentity(run.text).startsWith('英语试题第')
-    && run.fontFamilies.some((family) => /SimSun|Songti|STSong/u.test(family))
+    && run.fontFamilyNames.some((family) => /SimSun|Songti|STSong/u.test(family))
     && Number.isFinite(run.fontSize)
       ? [run.fontSize]
       : [])
@@ -9979,6 +10567,7 @@ function assertOwnerGoldSectionHeadingsPdf(pdfPath, label) {
     const sectionWords = sectionLine.wordIndexes.map(
       (wordIndex) => words[wordIndex],
     )
+    const sectionFontRuns = pdfTextRunsForLine(textRuns, sectionLine)
     const partWords = partLine.wordIndexes.map(
       (wordIndex) => words[wordIndex],
     )
@@ -9993,6 +10582,10 @@ function assertOwnerGoldSectionHeadingsPdf(pdfPath, label) {
     assert.ok(
       numericWords.length > 0 && textWords.length > 0,
       `${label} resolves both numeric and Chinese score runs`,
+    )
+    assert.ok(
+      sectionFontRuns.length > 0,
+      `${label} scopes embedded score fonts to the matched ${sectionHeading} PDF heading line`,
     )
     const unionBox = (runs) => ({
       xMin: Math.min(...runs.map((word) => word.xMin)),
@@ -10050,23 +10643,34 @@ function assertOwnerGoldSectionHeadingsPdf(pdfPath, label) {
       sectionLine.pageHeight,
       unionBox(numericWords),
     )
+    const adjacentChineseWords = textWords.filter((word) =>
+      /\p{Script=Han}/u.test(word.text))
+    assert.equal(
+      adjacentChineseWords.length > 0,
+      true,
+      `${label} resolves an adjacent Chinese score glyph for ${sectionHeading}`,
+    )
+    const adjacentChineseWord = adjacentChineseWords
+      .map((word) => ({ word, gap: pdfBoxGap(unionBox(numericWords), word) }))
+      .sort((left, right) => left.gap - right.gap)[0].word
     const textInk = rasterVisibleInkBox(
       pageRaster,
       sectionLine.pageWidth,
       sectionLine.pageHeight,
-      unionBox(textWords),
+      unionBox([adjacentChineseWord]),
     )
     const visibleGlyphHeight = Math.max(
       numericInk.yMax - numericInk.yMin + 1,
       textInk.yMax - textInk.yMin + 1,
     )
     const visibleBottomDeltaRatio =
-      Math.abs(numericInk.yMax - textInk.yMax) / visibleGlyphHeight
+      (numericInk.yMax - textInk.yMax) / visibleGlyphHeight
     assert.ok(
-      visibleBottomDeltaRatio <= 0.12,
-      `${label} independently raster-proves visible numeric/Chinese glyph-bottom alignment: ${JSON.stringify({
+      Math.abs(visibleBottomDeltaRatio) <= 0.2,
+      `${label} independently raster-proves the locally normalized numeric/adjacent-Chinese glyph-bottom calibration: ${JSON.stringify({
         numericInk,
         textInk,
+        adjacentChineseWord,
         visibleGlyphHeight,
         visibleBottomDeltaRatio,
       })}`,
@@ -10074,7 +10678,7 @@ function assertOwnerGoldSectionHeadingsPdf(pdfPath, label) {
     for (const expectedRun of sectionHeadingTextRuns(sectionHeading)) {
       const expectedIdentity = lineIdentity(expectedRun.text)
       if (!expectedIdentity) continue
-      const matchingRuns = textRuns.filter(
+      const matchingRuns = sectionFontRuns.filter(
         (run) => {
           const candidateIdentity = lineIdentity(run.text)
           return candidateIdentity
@@ -10085,7 +10689,7 @@ function assertOwnerGoldSectionHeadingsPdf(pdfPath, label) {
         },
       )
       assert.equal(
-        matchingRuns.some((run) => run.fontFamilies.some(
+        matchingRuns.some((run) => run.fontFamilyNames.some(
           (family) => /SimSun|Songti|STSong/u.test(family),
         )),
         true,
@@ -10093,6 +10697,215 @@ function assertOwnerGoldSectionHeadingsPdf(pdfPath, label) {
       )
     }
   }
+}
+
+function pdfUnionBox(words) {
+  return {
+    xMin: Math.min(...words.map((word) => word.xMin)),
+    yMin: Math.min(...words.map((word) => word.yMin)),
+    xMax: Math.max(...words.map((word) => word.xMax)),
+    yMax: Math.max(...words.map((word) => word.yMax)),
+  }
+}
+
+function pdfBoxGap(left, right) {
+  return Math.max(0, left.xMin - right.xMax, right.xMin - left.xMax)
+}
+
+function scoreHeadingForNumericRun(text) {
+  const headings = [...new Set([
+    ...ownerGoldSectionHeadings,
+    ...ownerGoldSectionPairs.flatMap(({ partHeading }) =>
+      partHeading ? [partHeading] : []),
+  ])].filter((heading) =>
+    sectionHeadingTextRuns(heading).some((run) =>
+      run.kind === 'numeric' && run.text === text))
+  assert.equal(
+    headings.length > 0,
+    true,
+    `Owner-gold headings bind an exact score-numeral context for ${text}`,
+  )
+  return headings.find((heading) => heading.includes('12.5')) || headings[0]
+}
+
+function observePdfSectionHeadingNumericRuns(pdfPath, label) {
+  const words = pdfWordsWithBoxes(pdfPath)
+  const lines = pdfRoleLines(words)
+  const textRuns = pdfTextRunsWithFonts(pdfPath)
+  const observations = []
+  for (const text of ['5', '2.5', '12.5', '50']) {
+    const expectedFontFamily = text === '50'
+      ? 'STHeitiSC-Medium'
+      : 'STSongti-SC'
+    const heading = scoreHeadingForNumericRun(text)
+    const line = uniquePdfLineForExactVisibleText(
+      lines,
+      pdfPath,
+      heading,
+      `${label} score heading ${text}`,
+    )
+    const lineWords = line.wordIndexes.map((index) => words[index])
+    const lineFontRuns = pdfTextRunsForLine(textRuns, line)
+    const numericWords = lineWords.filter((word) => word.text === text)
+    const chineseWords = lineWords.filter((word) => /\p{Script=Han}/u.test(word.text))
+    assert.equal(
+      numericWords.length > 0 && chineseWords.length > 0,
+      true,
+      `${label} score heading ${text} exposes both numeric and adjacent Chinese vector glyph runs`,
+    )
+    const numericBox = pdfUnionBox(numericWords)
+    const adjacentChinese = chineseWords
+      .map((word) => ({ word, gap: pdfBoxGap(numericBox, word) }))
+      .sort((left, right) => left.gap - right.gap)[0].word
+    const numericFontRuns = lineFontRuns.filter((run) => run.text === text)
+    const chineseFontRuns = lineFontRuns.filter((run) =>
+      run.text.includes(adjacentChinese.text)
+      && pdfBoxesOverlap(
+        run,
+        pdfTextRunBoxForPdfBox(run, adjacentChinese),
+      ))
+    const numericFamilies = [...new Set(numericFontRuns.flatMap(
+      (run) => run.fontFamilyNames,
+    ))].sort()
+    const chineseFamilies = [...new Set(chineseFontRuns.flatMap(
+      (run) => run.fontFamilyNames,
+    ))].sort()
+    const numericFontSizes = [...new Set(numericFontRuns.map(
+      (run) => run.fontSize,
+    ).filter(Number.isFinite))].sort((left, right) => left - right)
+    const chineseFontSizes = [...new Set(chineseFontRuns.map(
+      (run) => run.fontSize,
+    ).filter(Number.isFinite))].sort((left, right) => left - right)
+    assert.equal(
+      numericFontRuns.length,
+      1,
+      `${label} score heading ${text} resolves exactly one numeric font run inside its matched PDF heading bounds`,
+    )
+    assert.equal(
+      chineseFontRuns.length,
+      1,
+      `${label} score heading ${text} resolves exactly one adjacent-Chinese font run inside its matched PDF heading bounds`,
+    )
+    assert.deepEqual(
+      numericFamilies,
+      [expectedFontFamily],
+      `${label} score heading ${text} embeds its bounded numeric glyph in the exact expected PDF face: ${JSON.stringify({ heading, line, numericFontRuns, numericFamilies })}`,
+    )
+    assert.deepEqual(
+      chineseFamilies,
+      [expectedFontFamily],
+      `${label} score heading ${text} embeds its bounded adjacent-Chinese glyph in the exact expected PDF face: ${JSON.stringify({ heading, line, chineseFontRuns, chineseFamilies })}`,
+    )
+    assert.equal(
+      numericFontSizes.some((size) => chineseFontSizes.includes(size)),
+      true,
+      `${label} score heading ${text} keeps the numeric and adjacent Chinese glyph in one embedded size: ${JSON.stringify({ numericFontSizes, chineseFontSizes })}`,
+    )
+    const chineseBox = pdfUnionBox([adjacentChinese])
+    observations.push({
+      text,
+      heading,
+      page: line.page,
+      headingVectorBox: {
+        xMin: line.xMin,
+        yMin: line.yMin,
+        xMax: line.xMax,
+        yMax: line.yMax,
+      },
+      numeric: {
+        fontFamilies: numericFamilies,
+        fontSizes: numericFontSizes,
+        vectorBox: numericBox,
+      },
+      chinese: {
+        text: adjacentChinese.text,
+        fontFamilies: chineseFamilies,
+        fontSizes: chineseFontSizes,
+        vectorBox: chineseBox,
+      },
+      vectorTopDeltaPt: numericBox.yMin - chineseBox.yMin,
+      vectorBottomDeltaPt: numericBox.yMax - chineseBox.yMax,
+      localVisibleGlyphHeightPt: Math.max(
+        numericBox.yMax - numericBox.yMin,
+        chineseBox.yMax - chineseBox.yMin,
+      ),
+    })
+  }
+  return Object.freeze(observations)
+}
+
+function observePdfSectionHeadingNumericRunsBytes(pdfBytes, label) {
+  const tempRoot = mkdtempSync(path.join(
+    tmpdir(),
+    'eqb-section-heading-numeric-pdf-observation-',
+  ))
+  const pdfPath = path.join(tempRoot, 'output.pdf')
+  try {
+    writeFileSync(pdfPath, pdfBytes)
+    return observePdfSectionHeadingNumericRuns(pdfPath, label)
+  } finally {
+    rmSync(tempRoot, { recursive: true, force: true })
+  }
+}
+
+function assertPdfSectionHeadingNumericMutation(
+  baseline,
+  mutated,
+  label,
+) {
+  assert.deepEqual(
+    mutated.map((observation) => observation.text),
+    baseline.map((observation) => observation.text),
+    `${label} retains every score-numeral identity under the public typography mutation`,
+  )
+  for (const baselineObservation of baseline) {
+    const mutatedObservation = mutated.find((observation) =>
+      observation.text === baselineObservation.text)
+    assert.ok(mutatedObservation, `${label} retains ${baselineObservation.text}`)
+    assert.deepEqual(
+      mutatedObservation.numeric.fontFamilies,
+      baselineObservation.numeric.fontFamilies,
+      `${label} preserves the ${baselineObservation.text} embedded numeric family while changing only baseline shift`,
+    )
+    assert.deepEqual(
+      mutatedObservation.chinese.fontFamilies,
+      baselineObservation.chinese.fontFamilies,
+      `${label} preserves the ${baselineObservation.text} adjacent Chinese family while changing only baseline shift`,
+    )
+    assert.equal(
+      mutatedObservation.vectorTopDeltaPt
+        > baselineObservation.vectorTopDeltaPt + 0.5,
+      true,
+      `${label} exposes the distinguishable public numeric baseline mutation for ${baselineObservation.text}: ${JSON.stringify({ baselineObservation, mutatedObservation })}`,
+    )
+  }
+}
+
+function assertPdfQuestionNumberPassageAlignment(pdfPath, label) {
+  const words = pdfWordsWithBoxes(pdfPath)
+  const questionCandidates = words.filter((word) => word.text === '21')
+  const passageCandidates = words.filter((word) =>
+    word.text.toLocaleLowerCase('en-US') === 'packed')
+  assert.equal(
+    questionCandidates.length,
+    1,
+    `${label} resolves one accepted Reading question-number glyph run`,
+  )
+  const question = questionCandidates[0]
+  assert.equal(
+    passageCandidates.length > 0,
+    true,
+    `${label} resolves a canonical unindented Reading passage-body glyph run`,
+  )
+  const passage = passageCandidates.sort((left, right) =>
+    Math.abs(left.xMin - question.xMin) - Math.abs(right.xMin - question.xMin)
+    || Math.abs(left.yMin - question.yMin) - Math.abs(right.yMin - question.yMin),
+  )[0]
+  assert.equal(
+    Math.abs(question.xMin - passage.xMin) <= 0.25,
+    true,
+    `${label} preserves the accepted PDF question-number/passage-body left-edge alignment: ${JSON.stringify({ question, passage })}`,
+  )
 }
 
 function exactPdfTokens(value) {
@@ -13859,6 +14672,7 @@ async function renderSupportedArtifacts({
   const applicationWritingCoverageLedger = {}
   const continuationPublicSeamMeasurements = {}
   const instructionWeightObservations = {}
+  const numericRunObservations = {}
   const asset = JSON.parse(readFileSync(
     path.join(paperAssetsDir, paperId, 'latest', 'paper-asset.json'),
     'utf8',
@@ -14002,6 +14816,17 @@ async function renderSupportedArtifacts({
           surface: 'screen',
         }),
         { label: 'plain PaperSurface' },
+      )
+      numericRunObservations.screen_plain =
+        await assertPublicSectionHeadingNumericRuns(
+          page,
+          'plain PaperSurface',
+          { surface: 'screen' },
+        )
+      await assertPublicSectionHeadingNumericRunAdversaries(
+        page,
+        'plain PaperSurface',
+        { surface: 'screen' },
       )
       assertPassageLetterMarkup(
         plainHtml,
@@ -14439,6 +15264,10 @@ async function renderSupportedArtifacts({
         'plain PaperSurface',
         'screen',
       )
+      await assertScreenQuestionNumberPassageAlignment(
+        page,
+        'plain PaperSurface',
+      )
       writeFileSync(path.join(outputDir, 'screen-plain.html'), plainHtml)
       await page.screenshot({
         path: path.join(outputDir, 'screen-plain.png'),
@@ -14481,10 +15310,25 @@ async function renderSupportedArtifacts({
         }),
         { label: 'lecture PaperSurface' },
       )
+      numericRunObservations.screen_lecture =
+        await assertPublicSectionHeadingNumericRuns(
+          page,
+          'lecture PaperSurface',
+          { surface: 'screen' },
+        )
+      await assertPublicSectionHeadingNumericRunAdversaries(
+        page,
+        'lecture PaperSurface',
+        { surface: 'screen' },
+      )
       await assertOwnerGoldSectionHeadingsDom(
         page,
         'lecture PaperSurface',
         'screen',
+      )
+      await assertScreenQuestionNumberPassageAlignment(
+        page,
+        'lecture PaperSurface',
       )
       assertPassageLetterMarkup(
         lectureHtml,
@@ -15011,6 +15855,17 @@ async function renderSupportedArtifacts({
           }),
           { label: 'Student Print HTML' },
         )
+      numericRunObservations.student_print_html =
+        await assertPublicSectionHeadingNumericRuns(
+          page,
+          'Student Print HTML',
+          { surface: 'print' },
+        )
+      await assertPublicSectionHeadingNumericRunAdversaries(
+        page,
+        'Student Print HTML',
+        { surface: 'print' },
+      )
       applicationWritingCoverageLedger.student_print_html =
         await assertApplicationWritingDomArtifact(
           page,
@@ -15484,6 +16339,17 @@ async function renderSupportedArtifacts({
           }),
           { label: 'Teacher Print HTML' },
         )
+      numericRunObservations.teacher_print_html =
+        await assertPublicSectionHeadingNumericRuns(
+          page,
+          'Teacher Print HTML',
+          { surface: 'print' },
+        )
+      await assertPublicSectionHeadingNumericRunAdversaries(
+        page,
+        'Teacher Print HTML',
+        { surface: 'print' },
+      )
       applicationWritingCoverageLedger.teacher_print_html =
         await assertApplicationWritingDomArtifact(
           page,
@@ -16196,6 +17062,9 @@ async function renderSupportedArtifacts({
           `${versionType === 'student' ? 'Student' : 'Teacher'} Chromium PDF`
         assertPdfSemanticOrder(pdfPath, consumers.print_pdf, label)
         assertOwnerGoldSectionHeadingsPdf(pdfPath, label)
+        assertPdfQuestionNumberPassageAlignment(pdfPath, label)
+        numericRunObservations[`${versionType}_api_pdf`] =
+          observePdfSectionHeadingNumericRuns(pdfPath, label)
         const pageBoxes = assertPdfA4AndUnclipped(pdfPath, label)
         assertRawPdfStandardFooters(pdfPath, pageBoxes.length, label)
         assertPdfReadingQuestionsNotSplit(
@@ -17240,6 +18109,13 @@ async function renderSupportedArtifacts({
           student: instructionWeightObservations.student_api_pdf,
           teacher: instructionWeightObservations.teacher_api_pdf,
         },
+        baselineNumericPdfObservations: {
+          student: numericRunObservations.student_api_pdf,
+          teacher: numericRunObservations.teacher_api_pdf,
+        },
+        expectedNumericRunBaselineShiftEm:
+          paperTypographyInstructionMutation
+            .expectedNumericRunBaselineShiftEm,
       })
       const mutationScreenObservations =
       await assertScreenInstructionWeightAuthorityMutation({
@@ -17250,6 +18126,9 @@ async function renderSupportedArtifacts({
         binding: paperTypographyInstructionMutation.binding,
         focusGroupId: draft.firstGroup.groupId,
         questionId: draft.firstGroup.questionIds[0],
+        expectedNumericRunBaselineShiftEm:
+          paperTypographyInstructionMutation
+            .expectedNumericRunBaselineShiftEm,
       })
     instructionWeightObservations.authority_mutation = {
       expectedWeight: paperTypographyInstructionMutation.expectedWeight,
@@ -17299,6 +18178,7 @@ async function renderSupportedArtifacts({
       applicationWritingCoverageLedger,
       continuationPublicSeamMeasurements,
       instructionWeightObservations,
+      numericRunObservations,
       closeServices,
     }
   } finally {
@@ -17325,7 +18205,7 @@ const applicationWritingEvidence =
 const continuationLedgerEvidence =
   assertContinuationPublicSeamLedgerAuthority()
 const paperTypographyInstructionMutation =
-  assertPaperTypographyV9InstructionAuthority()
+  assertPaperTypographyV10InstructionAuthority()
 const rootDir = mkdtempSync(path.join(tmpdir(), 'eqb-canonical-import-pilot-'))
 const dbPath = path.join(rootDir, 'question-bank.sqlite')
 const paperAssetsDir = path.join(rootDir, 'paper-assets')
@@ -17441,7 +18321,7 @@ try {
   )
   const requestPath = path.join(
     sourcePackageDir,
-    'canonical-evidence/canonical-import-request-v34.json',
+    'canonical-evidence/canonical-import-request-v35.json',
   )
   execFileSync(process.execPath, [
     path.join(
@@ -17873,9 +18753,9 @@ try {
         manifestId: canonicalAuthorityRef.manifestId,
         manifestVersion: canonicalAuthorityRef.manifestVersion,
         manifestDigest: canonicalAuthorityRef.manifestDigest,
-        sourcePath: 'standards/paper-canonical/rendering/paper-typography-v9.json',
-        sourceSchemaVersion: paperTypographyV9.schemaVersion,
-        sourceDigest: digestJson(paperTypographyV9),
+        sourcePath: 'standards/paper-canonical/rendering/paper-typography-v10.json',
+        sourceSchemaVersion: paperTypographyV10.schemaVersion,
+        sourceDigest: digestJson(paperTypographyV10),
         instructionWeight: paperTypographyRuntime.visibleWeight.instruction,
       },
       producers: [
@@ -17885,6 +18765,9 @@ try {
         'renderPaginatedPaper',
       ],
       observations: rendered.instructionWeightObservations,
+      numericRunBaselineShiftEm:
+        sectionHeadingRuntime.screen.numericRunBaselineShiftEm,
+      numericRunObservations: rendered.numericRunObservations,
     },
     continuationPublicSeamLedger,
     tamperRejectionMatrix: canonicalImportPilotTamperRejectionMatrix,

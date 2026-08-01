@@ -547,16 +547,21 @@ button.ps-paper-blank.ps-paper-blank--clickable {
 /* ─── Question item ────────────────────────────────────────────── */
 
 .ps-question {
+  position: relative;
   margin-bottom: 14px;
-  padding-left: 6px;
-  border-left: 2px solid transparent;
   /* emil-processing: token 泄漏归队 —— verify-motion-tokens.mjs 排除本文件
      不扫，但硬编码值仍是一处漂移源，归队到全站 motion token 词汇表。 */
-  transition: border-color var(--motion-micro) var(--ease-hover);
 }
 
-.ps-question--active {
-  border-left-color: var(--ps-active-rail);
+.ps-question--active::before {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -6px;
+  width: 2px;
+  content: '';
+  background: var(--ps-active-rail);
+  transition: background-color var(--motion-micro) var(--ease-hover);
 }
 
 /* ─── Question stem button ─────────────────────────────────────── */

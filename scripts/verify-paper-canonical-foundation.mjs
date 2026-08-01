@@ -10,8 +10,8 @@ import applicationWritingRhythmV4Conformance from '../test-fixtures/paper-canoni
 import clozeRhythmV4Conformance from '../test-fixtures/paper-canonical/cloze-rhythm-v4-conformance.json' with { type: 'json' }
 import continuationWritingRhythmV5Conformance from '../test-fixtures/paper-canonical/continuation-writing-rhythm-v5-conformance.json' with { type: 'json' }
 import grammarFillRhythmV5Conformance from '../test-fixtures/paper-canonical/grammar-fill-rhythm-v5-conformance.json' with { type: 'json' }
-import rendererTypographyV9Adversaries from '../test-fixtures/paper-canonical/renderer-typography-v9-adversaries.json' with { type: 'json' }
-import grammarFillPublicGeometryFixturesV13Conformance from '../test-fixtures/paper-canonical/grammar-fill-public-geometry-fixtures-v13-conformance.json' with { type: 'json' }
+import rendererTypographyV10Adversaries from '../test-fixtures/paper-canonical/renderer-typography-v10-adversaries.json' with { type: 'json' }
+import grammarFillPublicGeometryFixturesV14Conformance from '../test-fixtures/paper-canonical/grammar-fill-public-geometry-fixtures-v14-conformance.json' with { type: 'json' }
 import sevenChoicesRhythmV3Conformance from '../test-fixtures/paper-canonical/seven-choices-rhythm-v3-conformance.json' with { type: 'json' }
 
 import { canonicalAuthorityRef, compileCanonicalPaper, stableStringify, validateExactTransformationRecords } from '../shared/paper-canonical/compiler.mjs'
@@ -84,7 +84,7 @@ assert.deepEqual(
       groupInstructionFirstLineIndentEm: 2,
       passageFirstLineIndentEm: 2,
       passageContinuationIndentEm: 0,
-      numericRunBaselineShiftEm: 0.2,
+      numericRunBaselineShiftEm: 0.1,
       fontSizePx: 14,
       lineHeightPx: 24,
     },
@@ -95,7 +95,7 @@ assert.deepEqual(
       groupInstructionFirstLineIndentEm: 2,
       passageFirstLineIndentEm: 2,
       passageContinuationIndentEm: 0,
-      numericRunBaselineShiftEm: 0.2,
+      numericRunBaselineShiftEm: 0.1,
       fontSizePt: 10.5,
       lineHeightPt: 18,
     },
@@ -249,7 +249,7 @@ assert.deepEqual(
     id: closure.artifacts['renderer-typography'].id,
     version: closure.artifacts['renderer-typography'].version,
   },
-  rendererTypographyV9Adversaries.authority,
+  rendererTypographyV10Adversaries.authority,
 )
 assert.deepEqual(
   paperTypographyRuntime.visibleWeight,
@@ -262,7 +262,7 @@ assert.deepEqual(
   },
   'the current paper typography authority is the sole source of public regular weights',
 )
-for (const attack of rendererTypographyV9Adversaries.attacks) {
+for (const attack of rendererTypographyV10Adversaries.attacks) {
   const artifacts = structuredClone(closure.artifacts)
   let target = artifacts['renderer-typography']
   for (const key of attack.path.slice(0, -1)) target = target[key]
@@ -459,31 +459,31 @@ for (const leafPath of visitAuthorityLeaves(grammarFillRhythmV5)) {
     },
   )
 }
-const grammarFillPublicGeometryFixturesV13 =
+const grammarFillPublicGeometryFixturesV14 =
   closure.artifacts['renderer-grammar-fill-public-geometry-fixtures']
 assert.equal(
-  grammarFillPublicGeometryFixturesV13.schemaVersion,
-  'grammar-fill-public-geometry-fixtures-v13',
+  grammarFillPublicGeometryFixturesV14.schemaVersion,
+  'grammar-fill-public-geometry-fixtures-v14',
 )
 assert.deepEqual(
-  Object.keys(grammarFillPublicGeometryFixturesV13.variants).sort(),
-  [...grammarFillPublicGeometryFixturesV13Conformance.positive.variantIds]
+  Object.keys(grammarFillPublicGeometryFixturesV14.variants).sort(),
+  [...grammarFillPublicGeometryFixturesV14Conformance.positive.variantIds]
     .sort(),
 )
 assertRendererAuthorityMutationRejected(
   'renderer-grammar-fill-public-geometry-fixtures',
-  grammarFillPublicGeometryFixturesV13Conformance,
+  grammarFillPublicGeometryFixturesV14Conformance,
   'grammar-fill-public-geometry-fixtures-complete-value-closure',
   (artifact) => {
     artifact.variants['screen-wrapped-line']
       .paragraphWidths[0].usableWidthEm += 999
   },
 )
-for (const attack of grammarFillPublicGeometryFixturesV13Conformance
+for (const attack of grammarFillPublicGeometryFixturesV14Conformance
   .shadowGeometryAttacks) {
   assertRendererAuthorityMutationRejected(
     'renderer-grammar-fill-public-geometry-fixtures',
-    grammarFillPublicGeometryFixturesV13Conformance,
+    grammarFillPublicGeometryFixturesV14Conformance,
     attack.caseId,
     (artifact) => {
       artifact.variants['screen-wrapped-line'][attack.fieldName] =
@@ -499,14 +499,14 @@ fixtureRemovalManifest.artifacts = fixtureRemovalManifest.artifacts.filter(
 )
 fixtureRemovalManifest.schemas = fixtureRemovalManifest.schemas.filter(
   (descriptor) =>
-    descriptor.id !== 'grammar-fill-public-geometry-fixtures-v13',
+    descriptor.id !== 'grammar-fill-public-geometry-fixtures-v14',
 )
 const fixtureRemovalArtifacts = structuredClone(closure.artifacts)
 delete fixtureRemovalArtifacts[
   'renderer-grammar-fill-public-geometry-fixtures'
 ]
 const fixtureRemovalSchemas = structuredClone(closure.schemas)
-delete fixtureRemovalSchemas['grammar-fill-public-geometry-fixtures-v13']
+delete fixtureRemovalSchemas['grammar-fill-public-geometry-fixtures-v14']
 const fixtureRemovalValidation = validateAuthorityClosure({
   manifest: fixtureRemovalManifest,
   artifacts: fixtureRemovalArtifacts,

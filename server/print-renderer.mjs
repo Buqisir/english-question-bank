@@ -89,6 +89,30 @@ function renderSectionHeadingText(text) {
     .join('')
 }
 
+function partToFirstSectionMarginTopPt({ printPdf = false } = {}) {
+  const geometry = paperTypographyRuntime.partToFirstSectionGeometry
+  const fontSizePt = sectionHeadingRuntime.printPdf.fontSizePt
+  const visibleGlyphHeightRatio = printPdf
+    ? geometry.visibleGlyphHeightToFontSizeRatio.printPdf
+    : geometry.visibleGlyphHeightToFontSizeRatio.screen
+  const glyphOverhangPt = printPdf
+    ? 0
+    : (geometry.visibleGlyphHeightToFontSizeRatio.screen - 1) * fontSizePt
+  const numericBaselineCompensationPt = printPdf
+    ? (
+      sectionHeadingRuntime.printPdf.numericRunBaselineShiftEm
+      - geometry.printPdfNumericRunBaselineCalibrationEm
+    ) * fontSizePt
+    : 0
+  return Math.max(
+    0,
+    geometry.visibleGlyphBottomStepRatio * visibleGlyphHeightRatio * fontSizePt
+      - sectionHeadingRuntime.printPdf.lineHeightPt
+      - glyphOverhangPt
+      + numericBaselineCompensationPt,
+  )
+}
+
 const groupTypeLabels = {
   reading: '阅读理解',
   cloze: '完形填空',
@@ -1975,20 +1999,7 @@ body {
 
 .section-header[data-canonical-reading-rhythm-role="part_title"]
   + .section-header[data-canonical-reading-rhythm-role="subsection"] {
-  margin-top: ${Math.max(
-    0,
-    paperTypographyRuntime.partToFirstSectionGeometry
-      .visibleGlyphBottomStepRatio
-      * paperTypographyRuntime.partToFirstSectionGeometry
-        .visibleGlyphHeightToFontSizeRatio.screen
-      * sectionHeadingRuntime.printPdf.fontSizePt
-      - sectionHeadingRuntime.printPdf.lineHeightPt
-      - (
-        paperTypographyRuntime.partToFirstSectionGeometry
-          .visibleGlyphHeightToFontSizeRatio.screen
-        - 1
-      ) * sectionHeadingRuntime.printPdf.fontSizePt,
-  )}pt;
+  margin-top: ${partToFirstSectionMarginTopPt()}pt;
 }
 
 .page-break {
@@ -2026,20 +2037,7 @@ body {
 }
 
 .section-header--part + .section-header--section {
-  margin-top: ${Math.max(
-    0,
-    paperTypographyRuntime.partToFirstSectionGeometry
-      .visibleGlyphBottomStepRatio
-      * paperTypographyRuntime.partToFirstSectionGeometry
-        .visibleGlyphHeightToFontSizeRatio.screen
-      * sectionHeadingRuntime.printPdf.fontSizePt
-      - sectionHeadingRuntime.printPdf.lineHeightPt
-      - (
-        paperTypographyRuntime.partToFirstSectionGeometry
-          .visibleGlyphHeightToFontSizeRatio.screen
-        - 1
-      ) * sectionHeadingRuntime.printPdf.fontSizePt,
-  )}pt;
+  margin-top: ${partToFirstSectionMarginTopPt()}pt;
 }
 
 .reading-meta-instruction[data-canonical-cloze-chrome] {
@@ -2642,20 +2640,7 @@ ${grammarFillGeometryFixtureCss}
 
 [data-canonical-writing-chrome-role="part_heading"]
   + [data-canonical-writing-chrome-role="section_heading"] {
-  margin-top: ${Math.max(
-    0,
-    paperTypographyRuntime.partToFirstSectionGeometry
-      .visibleGlyphBottomStepRatio
-      * paperTypographyRuntime.partToFirstSectionGeometry
-        .visibleGlyphHeightToFontSizeRatio.screen
-      * sectionHeadingRuntime.printPdf.fontSizePt
-      - sectionHeadingRuntime.printPdf.lineHeightPt
-      - (
-        paperTypographyRuntime.partToFirstSectionGeometry
-          .visibleGlyphHeightToFontSizeRatio.screen
-        - 1
-      ) * sectionHeadingRuntime.printPdf.fontSizePt,
-  )}pt;
+  margin-top: ${partToFirstSectionMarginTopPt()}pt;
 }
 
 [data-canonical-writing-chrome-role="section_heading"] {
@@ -2670,20 +2655,7 @@ ${grammarFillGeometryFixtureCss}
 
 [data-canonical-writing-chrome-role="part_heading"]
   + [data-canonical-writing-chrome-role="section_heading"] {
-  margin-top: ${Math.max(
-    0,
-    paperTypographyRuntime.partToFirstSectionGeometry
-      .visibleGlyphBottomStepRatio
-      * paperTypographyRuntime.partToFirstSectionGeometry
-        .visibleGlyphHeightToFontSizeRatio.screen
-      * sectionHeadingRuntime.printPdf.fontSizePt
-      - sectionHeadingRuntime.printPdf.lineHeightPt
-      - (
-        paperTypographyRuntime.partToFirstSectionGeometry
-          .visibleGlyphHeightToFontSizeRatio.screen
-        - 1
-      ) * sectionHeadingRuntime.printPdf.fontSizePt,
-  )}pt;
+  margin-top: ${partToFirstSectionMarginTopPt()}pt;
 }
 
 @media print {
@@ -2691,14 +2663,7 @@ ${grammarFillGeometryFixtureCss}
   [data-canonical-writing-chrome-role="section_heading"][
     data-canonical-part-first-section
   ] {
-    margin-top: ${
-    paperTypographyRuntime.partToFirstSectionGeometry
-      .visibleGlyphBottomStepRatio
-      * paperTypographyRuntime.partToFirstSectionGeometry
-        .visibleGlyphHeightToFontSizeRatio.printPdf
-      * sectionHeadingRuntime.printPdf.fontSizePt
-      - sectionHeadingRuntime.printPdf.lineHeightPt
-  }pt;
+    margin-top: ${partToFirstSectionMarginTopPt({ printPdf: true })}pt;
   }
 }
 

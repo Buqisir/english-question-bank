@@ -2,6 +2,7 @@ import manifestV31 from '../../standards/paper-canonical/manifest-v31.json' with
 import manifestV32 from '../../standards/paper-canonical/manifest-v32.json' with { type: 'json' }
 import manifestV33 from '../../standards/paper-canonical/manifest-v33.json' with { type: 'json' }
 import manifestV34 from '../../standards/paper-canonical/manifest-v34.json' with { type: 'json' }
+import manifestV35 from '../../standards/paper-canonical/manifest-v35.json' with { type: 'json' }
 import nck1V9 from '../../standards/paper-canonical/profiles/nck1-v9.json' with { type: 'json' }
 import nck1V10 from '../../standards/paper-canonical/profiles/nck1-v10.json' with { type: 'json' }
 import nationalLegacyV3 from '../../standards/paper-canonical/profiles/national-legacy-v3.json' with { type: 'json' }
@@ -34,6 +35,7 @@ const manifestV31Profiles = new Map(
 const manifestV32Profiles = new Map(manifestV31Profiles)
 const manifestV33Profiles = new Map(manifestV32Profiles)
 const manifestV34Profiles = new Map(manifestV33Profiles)
+const manifestV35Profiles = new Map(manifestV34Profiles)
 const registeredManifestProfiles = new Map([
   [
     `${manifestV31.manifestId}@${manifestV31.version}@${digestJson(manifestV31)}`,
@@ -50,6 +52,10 @@ const registeredManifestProfiles = new Map([
   [
     `${manifestV34.manifestId}@${manifestV34.version}@${digestJson(manifestV34)}`,
     manifestV34Profiles,
+  ],
+  [
+    `${manifestV35.manifestId}@${manifestV35.version}@${digestJson(manifestV35)}`,
+    manifestV35Profiles,
   ],
 ])
 

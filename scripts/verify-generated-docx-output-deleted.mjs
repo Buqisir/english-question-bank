@@ -34,7 +34,7 @@ assert.deepEqual(
   'supported canonical consumers must be exactly Screen and Print/PDF',
 )
 
-assert.equal(canonicalAuthorityRef.manifestVersion, '34')
+assert.equal(canonicalAuthorityRef.manifestVersion, '35')
 const currentAuthority = resolveCanonicalAuthority(canonicalAuthorityRef)
 assert.equal(currentAuthority.ok, true)
 
@@ -42,13 +42,23 @@ const humanAuthority = read('docs/product/exam-paper-format-standards.md')
 const currentHumanAuthority = humanAuthority.split('## v2 历史排版证据')[0]
 assert.match(
   currentHumanAuthority,
-  /standards\/paper-canonical\/manifest-v34\.json/,
-  'the unique human-readable authority index must bind current manifest v34',
+  /standards\/paper-canonical\/manifest-v35\.json/,
+  'the unique human-readable authority index must bind current manifest v35',
 )
 assert.match(
   currentHumanAuthority,
-  /Screen v34、Print\/PDF v35/,
-  'the human-readable current output matrix must name only Screen v34 and Print/PDF v35',
+  /Screen v35、Print\/PDF v36/,
+  'the human-readable current output matrix must name only Screen v35 and Print/PDF v36',
+)
+assert.match(
+  currentHumanAuthority,
+  /Paper Typography v10 是 section heading numeric baseline 和 instruction 常规字重的唯一运行时来源/,
+  'the human-readable authority index delegates the current numeric baseline to Paper Typography v10',
+)
+assert.doesNotMatch(
+  currentHumanAuthority,
+  /分值数字使用固定\s*[\d.]+em\s*局部字形位移/,
+  'the human-readable authority index must not duplicate a stale numeric baseline value outside its digest-bound Typography authority',
 )
 assert.doesNotMatch(
   currentHumanAuthority,
@@ -377,6 +387,17 @@ assert.match(
   manifestV34Migration,
   /Manifest v1 through v33[\s\S]*unchanged and resolvable/i,
   'manifest v34 migration must preserve every immutable predecessor closure',
+)
+const manifestV35Migration = read('standards/paper-canonical/manifest-v35-migration.md')
+assert.match(
+  manifestV35Migration,
+  /Manifest v35[\s\S]*Screen v35[\s\S]*Print\/PDF v36/i,
+  'manifest v35 must record the bounded Typography baseline successor',
+)
+assert.match(
+  manifestV35Migration,
+  /Manifest v1 through v34[\s\S]*unchanged and resolvable/i,
+  'manifest v35 migration must preserve every immutable predecessor closure',
 )
 assert.equal(
   Object.hasOwn(currentAuthority.closure.schemas, 'consumer-contract-v1'),
