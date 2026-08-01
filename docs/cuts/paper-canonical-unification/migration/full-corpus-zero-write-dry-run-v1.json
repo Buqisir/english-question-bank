@@ -8502,25 +8502,29 @@
   "zeroMutation": {
     "mutationCount": 0,
     "protectedStateAfter": {
-      "digest": "sha256:8040730b60c4a6e6eacc8a18a7c618eb5f64aa3ef7adc7d8086f2413359a7c4c",
-      "fileCount": 618,
+      "digest": "sha256:2c95ef018b3ce21259ed6629d4b7c8580546af991d08eb766c56b6cdf861620e",
+      "fileCount": 620,
       "paths": [
         "app/public/paper-assets",
         "data/question-bank.sqlite",
         "scripts/import-pipeline/papers",
         "standards/paper-canonical",
-        "shared/paper-canonical"
+        "shared/paper-canonical",
+        "docs/cuts/paper-canonical-unification/migration/manifest-v1.json",
+        "docs/cuts/paper-canonical-unification/migration/ledger-v1.json"
       ]
     },
     "protectedStateBefore": {
-      "digest": "sha256:8040730b60c4a6e6eacc8a18a7c618eb5f64aa3ef7adc7d8086f2413359a7c4c",
-      "fileCount": 618,
+      "digest": "sha256:2c95ef018b3ce21259ed6629d4b7c8580546af991d08eb766c56b6cdf861620e",
+      "fileCount": 620,
       "paths": [
         "app/public/paper-assets",
         "data/question-bank.sqlite",
         "scripts/import-pipeline/papers",
         "standards/paper-canonical",
-        "shared/paper-canonical"
+        "shared/paper-canonical",
+        "docs/cuts/paper-canonical-unification/migration/manifest-v1.json",
+        "docs/cuts/paper-canonical-unification/migration/ledger-v1.json"
       ]
     },
     "ticketEvidenceWrite": "docs/cuts/paper-canonical-unification/migration/full-corpus-zero-write-dry-run-v1.json",
