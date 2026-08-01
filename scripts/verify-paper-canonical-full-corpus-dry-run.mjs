@@ -326,7 +326,7 @@ function buildEvidence({ manifest, ledger, beforeState }) {
         code,
         disposition,
         path: diagnosticPath,
-        sourceSpanRefCount: sourceSpanRefs.length,
+        sourceSpanRefs: [...sourceSpanRefs].sort(),
       }))
       .sort((left, right) => stableStringify(left).localeCompare(stableStringify(right)))
     return {
