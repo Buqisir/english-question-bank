@@ -7,8 +7,8 @@ Next on PASS: owner-approval
 Terminal: no
 
 Wayfinder map: `docs/cuts/paper-canonical-unification/wayfinder/map.md`
-Current map binding: pending
-Current map binding commit: pending
+Current map binding: verified
+Current map binding commit: `8adecf11250e06da0a4e02593b104c87b04b810c`
 Current map artifact: `docs/cuts/paper-canonical-unification/wayfinder/map.md`
 Current map artifact SHA-256: `52d84a32debd61442ff6612e22831c5cce5495ff1758b0472e2dbc93ab9731e5`
 
@@ -31,18 +31,18 @@ To-spec outcome: accepted
 Accepted spec: `docs/cuts/paper-canonical-unification/spec.md`
 Accepted spec SHA-256: `c6cbbe778d94e1205612fa5ac535e2198020317b09064190fec1d0b6660d868b`
 
-To-tickets provenance: pending
+To-tickets provenance: verified
 To-tickets entry skill: `/Users/huangxuewei/.claude/skills/to-tickets/SKILL.md`
 To-tickets source HEAD: `3a31ac860a9f9ca68b797f290d0f6dcd88c9c143`
 To-tickets proposal peer: `019fbed5-9d38-7f91-883a-42320826c69b`
 To-tickets proposal item: `item-9`
 To-tickets publication peer: `019fbed5-9d38-7f91-883a-42320826c69b`
-To-tickets result commit: pending
+To-tickets result commit: `8adecf11250e06da0a4e02593b104c87b04b810c`
 To-tickets artifact: `docs/cuts/paper-canonical-unification/ticket-set-manifest.md`
 To-tickets artifact SHA-256: `5441ad646e0a84762cd84c406d2724ace6cc18ffa0cc174666407aef5dba2ce6`
-To-tickets outcome: pending
+To-tickets outcome: complete
 
-Ticket-set binding: pending
+Ticket-set binding: verified
 Ticket-set manifest: `docs/cuts/paper-canonical-unification/ticket-set-manifest.md`
 Ticket-set manifest SHA-256: `5441ad646e0a84762cd84c406d2724ace6cc18ffa0cc174666407aef5dba2ce6`
 Ticket-set accepted-spec SHA-256: `c6cbbe778d94e1205612fa5ac535e2198020317b09064190fec1d0b6660d868b`
@@ -54,7 +54,7 @@ Owner approval source task: `019fbe68-10d0-7371-9927-467af87c4d6c`
 Owner approval proposal peer: `019fbed5-9d38-7f91-883a-42320826c69b`
 Owner approval proposal item: `item-9`
 Owner approval exact message: “approve-ticket-granularity：批准总票数 79、Tickets 25–57 粒度、三 lane DAG、固定集成顺序及模型路由。”
-Owner approval result commit: pending
+Owner approval result commit: `8adecf11250e06da0a4e02593b104c87b04b810c`
 Owner approval record: `docs/cuts/paper-canonical-unification/measured-replan-79-owner-granularity-approval.md`
 Owner approval ticket-set manifest SHA-256: pending
 
