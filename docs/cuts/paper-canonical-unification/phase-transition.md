@@ -8,9 +8,9 @@ Terminal: no
 
 Wayfinder map: `docs/cuts/paper-canonical-unification/wayfinder/map.md`
 Current map binding: verified
-Current map binding commit: `83e83de80a45df6c5dec6bf5e6a85db03d0ac53a`
+Current map binding commit: `bba15bc5353e13cef7c59d932bdcab9d12b6ae7b`
 Current map artifact: `docs/cuts/paper-canonical-unification/wayfinder/map.md`
-Current map artifact SHA-256: `24da6a4cd7a75f225f09c323ea6ef2b5aa5c354221729edf33c8e4c758726521`
+Current map artifact SHA-256: `f05ba70f11366efa3e6d4bf4c4b1d200d1ea321c1f3db6f319089919277df575`
 Wayfinder status: done
 Wayfinder provenance: verified
 Wayfinder entry skill: `/Users/huangxuewei/.claude/skills/wayfinder/SKILL.md`
@@ -28,16 +28,16 @@ To-spec artifact SHA-256: `c6cbbe778d94e1205612fa5ac535e2198020317b09064190fec1d
 To-spec outcome: accepted
 Accepted spec: `docs/cuts/paper-canonical-unification/spec.md`
 Accepted spec SHA-256: `c6cbbe778d94e1205612fa5ac535e2198020317b09064190fec1d0b6660d868b`
-To-tickets provenance: pending
+To-tickets provenance: verified
 To-tickets entry skill: `/Users/huangxuewei/.claude/skills/to-tickets/SKILL.md`
-To-tickets source HEAD: `b41ad774bca35864fce21aa80a19d0dbfcb9e91c`
-To-tickets result commit: `2dd684e9d70a4e4e8cb7967eab090952cb54e291`
+To-tickets source HEAD: `4ddd92ead0cf4a1e8796e93894972e7102a39834`
+To-tickets result commit: `bba15bc5353e13cef7c59d932bdcab9d12b6ae7b`
 To-tickets artifact: `docs/cuts/paper-canonical-unification/ticket-set-manifest.md`
-To-tickets artifact SHA-256: `0fab79f5161cbe563552c17891f08292d45887b4a3f0bc008db72a20632b745f`
+To-tickets artifact SHA-256: `9a595e744fbfaec289a9723ae90ede172d60dce3041c982b5377c05bb8f59377`
 To-tickets outcome: complete
-Ticket-set binding: pending
+Ticket-set binding: verified
 Ticket-set manifest: `docs/cuts/paper-canonical-unification/ticket-set-manifest.md`
-Ticket-set manifest SHA-256: `3ad05df6c5b79b95ded495cf000981322a70d24d09c8d6c1dbdc905665a23ab6`
+Ticket-set manifest SHA-256: `9a595e744fbfaec289a9723ae90ede172d60dce3041c982b5377c05bb8f59377`
 Ticket-set accepted-spec SHA-256: `c6cbbe778d94e1205612fa5ac535e2198020317b09064190fec1d0b6660d868b`
 Owner ticket-granularity approval: pending
 Implementation dispatch: forbidden
@@ -47,7 +47,8 @@ Measured-replan approval actor: owner
 Measured-replan approval source task: `019fbdec-6f5a-7381-a0b7-53beb390b387`
 Measured-replan publication source HEAD: `7aeb5a963eff14e103c1645a600d72d8705ef53e`
 Measured-replan publication result commit: `83e83de80a45df6c5dec6bf5e6a85db03d0ac53a`
-Measured-replan manifest SHA-256: `3ad05df6c5b79b95ded495cf000981322a70d24d09c8d6c1dbdc905665a23ab6`
+Measured-replan publication manifest SHA-256: `3ad05df6c5b79b95ded495cf000981322a70d24d09c8d6c1dbdc905665a23ab6`
+Measured-replan current manifest SHA-256: `9a595e744fbfaec289a9723ae90ede172d60dce3041c982b5377c05bb8f59377`
 Measured-replan exact manifest-digest approval: pending
 
 ## Preserved results
@@ -75,12 +76,11 @@ The owner explicitly approved Ticket 23's measured granularity as Tickets
 route without implementing Ticket 24.
 
 The new exact manifest SHA-256
-`3ad05df6c5b79b95ded495cf000981322a70d24d09c8d6c1dbdc905665a23ab6`
-has not been approved. The publication was performed under the owner-attached
-`$implement` skill, so commit
-`83e83de80a45df6c5dec6bf5e6a85db03d0ac53a` cannot truthfully be recorded as
-a `$to-tickets` result. Current governance provides no authorized provenance
-bridge from this measured-replan implementation task to the required
-`to-tickets -> owner-approval` edge. The initiative therefore fails closed at
-`owner-approval`; ticket-set binding, implementation, and coordinator dispatch
+`9a595e744fbfaec289a9723ae90ede172d60dce3041c982b5377c05bb8f59377`
+has not been approved. Fresh owner-attached `$to-tickets` result commit
+`bba15bc5353e13cef7c59d932bdcab9d12b6ae7b` independently verifies and binds
+the exact approved ticket set without changing Tickets 24–53. Publication
+commit `83e83de80a45df6c5dec6bf5e6a85db03d0ac53a` remains historical publication
+evidence and is not recorded as `$to-tickets` provenance. The initiative now
+pauses truthfully at `owner-approval`; implementation and coordinator dispatch
 remain forbidden. Ticket 24 must not begin.
