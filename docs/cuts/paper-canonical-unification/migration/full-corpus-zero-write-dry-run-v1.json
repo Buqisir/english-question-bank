@@ -80,7 +80,6 @@
     "frozenLedgerPath": "docs/cuts/paper-canonical-unification/migration/ledger-v1.json",
     "frozenManifestDigest": "sha256:9bcddee5a927505143b97c07981ef915cafab1a584765cb504ad36b4cbb18eca",
     "frozenManifestPath": "docs/cuts/paper-canonical-unification/migration/manifest-v1.json",
-    "invocationHead": "1bd4d6d557c8c1358fcc9b024164119d7552936d",
     "ticketFixedPoint": "95439efb625199fabe7361bfca10bb8fe833f396"
   },
   "denominator": {
