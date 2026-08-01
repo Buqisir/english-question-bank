@@ -31,7 +31,8 @@ receipt names one validated durable frontier. The coordinator is
 repository-read-only and may use only official Codex top-level task tools to
 create and compactly wait on exactly one fresh peer at a time in the
 initiative's same exact saved worktree. It may not delegate, fork, resume,
-create another coordinator, or overlap writers.
+create another coordinator, or overlap writers, except for the one same-peer
+`$to-tickets` publication resume defined below.
 
 The global skill executes the project authorities in this file,
 `issue-tracker.md`, `model-routing.md`, `testing-cadence.md`, and
@@ -48,7 +49,7 @@ edge fail:
 | `to-spec` | `to-tickets` |
 | `to-tickets` | `owner-approval` |
 | `owner-approval` | `implementation`, after all four implementation gates pass |
-| `implementation` | `implementation`, `independent-review`, `owner-qa`, or `release` |
+| `implementation` | `implementation`, `independent-review`, `owner-qa`, `release`, or the guarded measured-replan re-entry to `to-tickets` below |
 | `independent-review` | `independent-fix` on a canonical failed result; `implementation`, `owner-qa`, or `release` on PASS |
 | `independent-fix` | `focused-re-review` |
 | `focused-re-review` | `independent-fix` on a canonical failed result; `implementation`, `owner-qa`, or `release` on PASS |
@@ -69,6 +70,47 @@ The historical `$wayfinder` result and a later governance route correction are
 different provenance. A route-binding commit must be described as governance,
 not as execution by `$wayfinder`.
 
+### Guarded measured-replan re-entry
+
+`implementation` may re-enter `to-tickets` only when every condition below is
+proven together:
+
+1. a committed current implementation result explicitly failed closed;
+2. immutable, hashable measured evidence proves that the approved ticket
+   capacity or route assumption is invalid;
+3. continuing the declared implementation successor would be unsafe or false;
+4. the owner explicitly authorizes one bounded measured replan; and
+5. the coordinator freshly verifies the exact worktree, branch, HEAD, clean
+   state, current route binding, and absence of another writer.
+
+Missing or stale evidence, an ordinary implementation failure, or a desire to
+improve the plan does not select this edge. On entry, implementation dispatch
+is immediately forbidden. It remains forbidden until the replacement manifest
+has truthful `$to-tickets` provenance, binds the accepted spec, and passes both
+distinct owner approvals: exact ticket granularity and then the exact produced
+manifest SHA-256. Only after those approvals do the existing four
+implementation gates authorize implementation again.
+
+### Coordinator-managed to-tickets lifecycle
+
+One fresh `$to-tickets` peer may draft the complete proposal and pause before
+publication for owner ticket-granularity approval. The proposal identity is
+the peer id plus the exact proposed ticket set presented for approval.
+
+After the owner explicitly approves that exact proposal, the coordinator may
+perform another full preflight and resume that same exact peer once through the
+official Codex top-level task messaging mechanism so the peer performs its own
+publication stage. No second publication peer or later provenance-recovery
+peer is allowed: the same `$to-tickets` peer truthfully owns both proposal and
+publication.
+
+Publication pauses at `owner-approval` for approval of the produced exact
+manifest SHA-256. Ticket-granularity approval never implies manifest-digest
+approval. Silence, blanket approval of unknown bytes, a stale peer or approval
+identity, a changed proposal, dirty or mismatched repository state, or another
+writer fails closed. This lifecycle does not authorize automatic
+implementation dispatch.
+
 ### Implementation gates
 
 Implementation is forbidden until all four gates verify:
@@ -78,8 +120,9 @@ Implementation is forbidden until all four gates verify:
 2. the ticket-set manifest has committed `$to-tickets` provenance and its
    current SHA-256 matches;
 3. the ticket-set receipt binds that exact accepted-spec SHA-256;
-4. the owner's committed ticket-granularity approval binds that exact
-   ticket-set manifest SHA-256.
+4. the owner explicitly approved the exact ticket granularity, and the later
+   committed manifest-digest approval binds that exact ticket-set manifest
+   SHA-256.
 
 Filenames, directory existence, prose claims, historical chat, and old
 handoffs satisfy none of these gates.

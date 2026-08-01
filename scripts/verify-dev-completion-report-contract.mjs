@@ -80,11 +80,11 @@ const globalCoordinatorSkillPath =
 const globalCoordinatorYamlPath =
   '/Users/huangxuewei/.codex/skills/coordinate-eqb-wayfinder/agents/openai.yaml'
 const reviewedDispatchDigest =
-  'c49e17686456b6acff5492ad97605032b0b2e71ed2ed8bd2537acf51116c8f2a'
+  'd4380aa997aff015c64ccae642eeb58af98c3ae6b0ee5f3ccb45633a63e80d91'
 const reviewedGlobalCoordinatorSkillDigest =
-  'f63d95003fde929d92af2a0473370ed672aa740ea37ad593d3cb62817fe72008'
+  '3ff5aa94b6ba20f7e0789151b64bc10e5fb949823548220b6fd3ac5f8a3ec5bb'
 const reviewedGlobalCoordinatorYamlDigest =
-  'e20c155c48eb9deba8ee8f9dc526729e544dadf8b5fd6dc0970cce8ea2e6c8e9'
+  '8e831e13e2204ec5004271b3f6594385d2016bdb607606b9e3e9e33f16dacd07'
 
 const compact = (source) => source.replace(/\s+/g, ' ')
 const sourceDigest = (source) =>
@@ -472,6 +472,16 @@ function coordinatorSkillErrors(source) {
   if (!normalized.includes('Create exactly one fresh top-level peer')) {
     errors.push('coordinator must create exactly one fresh top-level peer')
   }
+  for (const requiredLifecycleText of [
+    'record the peer id and exact proposal identity',
+    'bind the approval identity to the unchanged peer and proposal',
+    'resume that same peer once through the official Codex top-level task messaging mechanism',
+    'clean state and no concurrent writer',
+  ]) {
+    if (!normalized.includes(requiredLifecycleText)) {
+      errors.push(`coordinator lacks guarded same-peer lifecycle: ${requiredLifecycleText}`)
+    }
+  }
   if (
     !normalized.includes(
       'Do not classify, merge, split, retry, or advance a route independently of `dispatch-protocols.md`',
@@ -480,12 +490,12 @@ function coordinatorSkillErrors(source) {
     errors.push('coordinator must not reinterpret the dispatch authority')
   }
   if (
+    !normalized.includes('through official Codex top-level task creation') ||
     !normalized.includes(
-      'The only execution mechanism is official Codex top-level task creation',
-    ) ||
-    !normalized.includes('all other execution mechanisms are forbidden')
+      'Top-level task creation and that one guarded same-peer message are the only execution mechanisms',
+    )
   ) {
-    errors.push('official top-level task creation must remain the sole mechanism')
+    errors.push('official creation and one guarded same-peer message must be the only mechanisms')
   }
   for (const mechanic of [
     'Hook',
@@ -502,14 +512,10 @@ function coordinatorSkillErrors(source) {
     }
   }
   if (
-    (source.match(/\bpeer(?:s)?\b/gi) ?? []).length !== 1 ||
-    (source.match(/\btask(?:s)?\b/gi) ?? []).length !== 1 ||
-    (source.match(/\bsuccessor(?:s)?\b/gi) ?? []).length !== 1
-  ) {
-    errors.push('coordinator must authorize exactly one fresh top-level peer')
-  }
-  if (
-    /\b(?:second|another|additional|multiple|concurrent|parallel|extra|replacement|two)\b/i.test(
+    /\b(?:create|launch|start)\b[^\n.]{0,80}\b(?:second|another|additional|multiple|parallel|extra|replacement|two)\b[^\n.]{0,40}\b(?:peers?|top-level tasks?|successors?)\b/i.test(
+      source,
+    ) ||
+    /\b(?:a\s+)?(?:second|another|additional|multiple|concurrent|parallel|extra|replacement|two)\s+(?:top-level\s+)?(?:peers?|tasks?|successors?)\b[^\n.]{0,50}\b(?:may be created|is created|is allowed|are allowed|permitted)\b/i.test(
       source,
     )
   ) {
@@ -517,7 +523,6 @@ function coordinatorSkillErrors(source) {
   }
   for (const copiedDetail of [
     '`to-spec`',
-    '`to-tickets`',
     'owner ticket-granularity approval',
     'owner-QA pause',
     'ordinary Standards',
@@ -556,27 +561,23 @@ function coordinatorDispatchAuthorityErrors(source) {
       /### Owner-started Wayfinder coordinator exception\n([\s\S]*?)(?=\n### )/,
     )?.[1] ?? ''
   const normalizedCoordinatorSection = compact(coordinatorSection)
-  const topologyContradictionSource = normalizedCoordinatorSection.replace(
-    'It may not delegate, fork, resume, create another coordinator, or overlap writers.',
-    '',
-  )
-
   if (
     !normalizedCoordinatorSection.includes(
       'repository-read-only and may use only official Codex top-level task tools to create and compactly wait on exactly one fresh peer at a time',
     ) ||
     !normalizedCoordinatorSection.includes(
-      'It may not delegate, fork, resume, create another coordinator, or overlap writers',
+      'It may not delegate, fork, resume, create another coordinator, or overlap writers, except for the one same-peer `$to-tickets` publication resume defined below',
+    ) ||
+    !normalized.includes(
+      'resume that same exact peer once through the official Codex top-level task messaging mechanism',
     )
   ) {
     errors.push('dispatch authority must own the exact coordinator topology')
   }
   if (
-    /\b(?:coordinator|it)\s+(?:may|can|should|must|will)\s+(?!not\b)[^\n.]{0,80}\b(?:delegate|fork|resume|overlap)\b/i.test(
-      topologyContradictionSource,
-    ) ||
+    /\b(?:coordinator|it)\s+(?:may|can|should|must|will)\s+(?!not\b)[^\n.]{0,80}\b(?:delegate|fork|overlap)\b/i.test(normalizedCoordinatorSection) ||
     /\b(?:second|another|additional|multiple|concurrent|parallel|extra|two)\b[^\n.]{0,80}\b(?:peers?|top-level tasks?|successors?|writers?)\b/i.test(
-      topologyContradictionSource,
+      normalizedCoordinatorSection.replace('another coordinator', ''),
     )
   ) {
     errors.push('dispatch authority contradicts its sole coordinator topology')
@@ -709,7 +710,13 @@ const legalPhaseTransitions = new Map([
   ['owner-approval', new Set(['implementation'])],
   [
     'implementation',
-    new Set(['implementation', 'independent-review', 'owner-qa', 'release']),
+    new Set([
+      'implementation',
+      'to-tickets',
+      'independent-review',
+      'owner-qa',
+      'release',
+    ]),
   ],
   [
     'independent-review',
@@ -724,6 +731,29 @@ const legalPhaseTransitions = new Map([
   ['release', new Set(['DONE'])],
   ['DONE', new Set()],
 ])
+
+function dispatchTableTransitions(source) {
+  return new Map(
+    [...source.matchAll(/^\| `([^`]+)` \| ([^\n]+) \|$/gm)].map(
+      ([, previous, nextCell]) => [
+        previous,
+        new Set([...nextCell.matchAll(/`([^`]+)`/g)].map((match) => match[1])),
+      ],
+    ),
+  )
+}
+
+function transitionMapsEqual(actual, expected) {
+  return (
+    actual.size === expected.size &&
+    [...expected].every(
+      ([phase, nextPhases]) =>
+        actual.has(phase) &&
+        actual.get(phase).size === nextPhases.size &&
+        [...nextPhases].every((next) => actual.get(phase).has(next)),
+    )
+  )
+}
 const implementationGatePhases = new Set([
   'implementation',
   'independent-review',
@@ -926,6 +956,7 @@ function phaseTransitionErrors(state) {
     spec,
     tickets,
     approval,
+    measuredReplanAuthorized,
   } = state
 
   if (!legalPhaseTransitions.has(previous)) {
@@ -943,6 +974,13 @@ function phaseTransitionErrors(state) {
     !legalPhaseTransitions.get(previous).has(current)
   ) {
     errors.push(`illegal phase transition: ${previous} -> ${current}`)
+  }
+  if (
+    previous === 'implementation' &&
+    current === 'to-tickets' &&
+    measuredReplanAuthorized !== true
+  ) {
+    errors.push('implementation re-entry to to-tickets lacks guarded measured-replan authorization')
   }
   if ((current === 'DONE') !== terminal) {
     errors.push('Terminal must be yes only for DONE')
@@ -1378,8 +1416,9 @@ disable-model-invocation: true
 Act only as the initiative's repository-read-only coordinator.
 Treat \`dispatch-protocols.md\` as the sole owner of legal transitions, gates, pauses, resumes, and successor routing.
 Do not classify, merge, split, retry, or advance a route independently of \`dispatch-protocols.md\`.
-The only execution mechanism is official Codex top-level task creation; all other execution mechanisms are forbidden.
-Create exactly one fresh top-level peer.
+Create exactly one fresh top-level peer through official Codex top-level task creation.
+For the guarded \`$to-tickets\` lifecycle, record the peer id and exact proposal identity, bind the approval identity to the unchanged peer and proposal, verify clean state and no concurrent writer, and resume that same peer once through the official Codex top-level task messaging mechanism.
+Top-level task creation and that one guarded same-peer message are the only execution mechanisms.
 `
 const portableCoordinatorSkillDigest = sourceDigest(portableCoordinatorSkill)
 
@@ -1456,7 +1495,7 @@ for (const contradiction of [
   assert(
     coordinatorSkillErrors(
       `${portableCoordinatorSkill}\n${contradiction}\n`,
-    ).some((error) => error.includes('exactly one fresh top-level peer')),
+    ).some((error) => error.includes('alternate execution topology')),
     `portable coordinator skill parser rejects: ${contradiction}`,
   )
 }
@@ -1484,6 +1523,24 @@ assert(
   coordinatorDispatchAuthorityErrors(dispatch).length === 0,
   'tracked dispatch authority preserves every coordinator-critical invariant',
 )
+assert(
+  transitionMapsEqual(dispatchTableTransitions(dispatch), legalPhaseTransitions),
+  'documented phase table exactly matches the executable transition matrix',
+)
+for (const requiredGuardText of [
+  'a committed current implementation result explicitly failed closed',
+  'immutable, hashable measured evidence proves that the approved ticket capacity or route assumption is invalid',
+  'continuing the declared implementation successor would be unsafe or false',
+  'the owner explicitly authorizes one bounded measured replan',
+  'implementation dispatch is immediately forbidden',
+  'truthful `$to-tickets` provenance',
+  'exact ticket granularity and then the exact produced manifest SHA-256',
+]) {
+  assert(
+    compact(dispatch).includes(requiredGuardText),
+    `guarded implementation-to-tickets prose requires: ${requiredGuardText}`,
+  )
+}
 for (const contradiction of [
   'The coordinator may fork.',
   'A second peer is allowed.',
@@ -1666,6 +1723,8 @@ function phaseFixture(previous, current) {
         }
       : { provenance: {} },
     approval,
+    measuredReplanAuthorized:
+      previous === 'implementation' && current === 'to-tickets',
   }
 }
 
@@ -1677,6 +1736,15 @@ for (const [previous, nextPhases] of legalPhaseTransitions) {
     )
   }
 }
+
+const unguardedMeasuredReplan = phaseFixture('implementation', 'to-tickets')
+unguardedMeasuredReplan.measuredReplanAuthorized = false
+assert(
+  phaseReceiptErrors(unguardedMeasuredReplan).some((error) =>
+    error.includes('lacks guarded measured-replan authorization'),
+  ),
+  'implementation-to-tickets re-entry fails closed without every measured-replan guard',
+)
 
 const staleBindingFixture = phaseFixture('wayfinder', 'to-spec')
 staleBindingFixture.binding.currentArtifactDigest = 'e'.repeat(64)
