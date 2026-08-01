@@ -34,7 +34,7 @@ initiative's same exact saved worktree. It may not delegate, fork, resume,
 create another coordinator, or overlap writers.
 
 The global skill executes the project authorities in this file,
-`issue-tracker.md`, `model-routing.md`, and
+`issue-tracker.md`, `model-routing.md`, `testing-cadence.md`, and
 `owner-qa-handoff-template.md`. It does not own or copy their detailed rules.
 
 ### Closed development phase state machine
@@ -218,8 +218,8 @@ Invocation availability and handoff referenceability are separate.
 - A non-Codex harness must declare `NATURAL-LANGUAGE FALLBACK` before using the
   documented equivalent.
 
-Use the owner-approved role defaults in `model-routing.md`. Any deviation,
-including `max` or `ultra`, requires explicit owner direction.
+Use the owner-approved workload routes in `model-routing.md`. Any model or
+effort outside that authority requires explicit owner direction.
 
 ## Sequential worktrees
 

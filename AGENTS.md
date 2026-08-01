@@ -63,7 +63,8 @@ Detailed task-boundary, attachment, blocker, and handoff rules have one owner:
 machine, implementation gates, pause/resume rules, and successor routing.
 Tracked path and receipt/ticket field schema live in
 `docs/agents/issue-tracker.md`; the current model table lives in
-`docs/agents/model-routing.md`; owner QA has the separate single owner
+`docs/agents/model-routing.md`; testing cadence lives in
+`docs/agents/testing-cadence.md`; owner QA has the separate single owner
 `docs/agents/owner-qa-handoff-template.md`. The global coordinator executes
 those project authorities without restating them. The full new-task template
 exists only in `dispatch-protocols.md`.
@@ -111,6 +112,9 @@ to the owner as separate work.
 
 Process strength follows actual risk.
 
+`docs/agents/testing-cadence.md` is the single owner of general test scheduling.
+Specs and tickets may require stricter proof, but may not weaken its gates.
+
 - Small and reversible: `/implement` in the current task is enough.
 - Normal feature: use a spec when needed, tickets when multi-session, and owner
   QA when user-visible.
@@ -127,7 +131,7 @@ Before merging to `main`:
 - run the narrowest relevant checks;
 - pass the required independent review for high-risk work;
 - pass real-browser and owner QA for user-visible work;
-- prove the full suite with `pnpm -C app run verify:all` or PR CI;
+- satisfy the closure cadence in `docs/agents/testing-cadence.md`;
 - after merge, confirm `main` CI is green;
 - update `docs/STATUS.md` in at most five lines for material releases.
 
