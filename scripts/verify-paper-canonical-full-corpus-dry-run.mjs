@@ -290,7 +290,7 @@ function closureDiagnostic({ paper, tree, diagnostics }) {
   }
 }
 
-function buildEvidence({ manifest, ledger, beforeState, preflight }) {
+function buildEvidence({ manifest, ledger, beforeState }) {
   assert.equal(
     manifest.manifestDigest,
     digestJson(withoutKey(manifest, 'manifestDigest')),
@@ -369,7 +369,6 @@ function buildEvidence({ manifest, ledger, beforeState, preflight }) {
     ticket: '22-full-corpus-zero-write-dry-run',
     binding: {
       ticketFixedPoint: TICKET_FIXED_POINT,
-      invocationHead: preflight.head,
       expectedBranch: EXPECTED_BRANCH,
       frozenManifestPath: MANIFEST_REL,
       frozenManifestDigest: manifest.manifestDigest,
@@ -398,11 +397,11 @@ function buildEvidence({ manifest, ledger, beforeState, preflight }) {
 function main() {
   const writeEvidence = process.argv.includes('--write-evidence')
   assert.equal(process.argv.length, writeEvidence ? 3 : 2, 'Usage: node scripts/verify-paper-canonical-full-corpus-dry-run.mjs [--write-evidence]')
-  const preflight = assertPreflight({ allowEvidenceWrite: writeEvidence })
+  assertPreflight({ allowEvidenceWrite: writeEvidence })
   const manifest = readJson(MANIFEST_REL)
   const ledger = readJson(LEDGER_REL)
   const beforeState = protectedState()
-  const evidence = buildEvidence({ manifest, ledger, beforeState, preflight })
+  const evidence = buildEvidence({ manifest, ledger, beforeState })
   const afterState = protectedState()
   assert.deepEqual(afterState, beforeState, 'concurrent writer detected: protected corpus state changed during zero-write compile')
   evidence.zeroMutation.protectedStateAfter = afterState
