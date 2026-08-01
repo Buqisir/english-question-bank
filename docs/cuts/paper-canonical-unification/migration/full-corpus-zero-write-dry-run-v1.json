@@ -166,97 +166,97 @@
           "status": "legacy_projection_available_not_source_capture_closed"
         }
       },
-      "diagnosticDigest": "sha256:9ce2f94bf651ff13daaf4043bfc67e7edbd225daa7d61add501968bee73edddc",
+      "diagnosticDigest": "sha256:bcb69c0e9bca237732990816841d32f9d398587d7bd278ca61ab85c68f478dd1",
       "diagnostics": [
         {
           "code": "APPLICATION_SOURCE_CAPTURE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "CONTINUATION_SOURCE_CAPTURE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_INVALID",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_REQUIRED",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "READING_STRUCTURE_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         }
       ],
       "disposition": "incomplete_source",
@@ -412,103 +412,103 @@
           "status": "legacy_projection_available_not_source_capture_closed"
         }
       },
-      "diagnosticDigest": "sha256:d1cfb5433ce735051d493cb09a73cfc517ffef661c123d513cf204abc5c67625",
+      "diagnosticDigest": "sha256:259c082640015e6296ff25dd2948e702d98a86dd6412f53f78e4302dbb0ca4a7",
       "diagnostics": [
         {
           "code": "APPLICATION_SOURCE_CAPTURE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "CONTINUATION_INSTRUCTION_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.continuationInstruction",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "CONTINUATION_SOURCE_CAPTURE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_INVALID",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_REQUIRED",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "READING_STRUCTURE_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         }
       ],
       "disposition": "incomplete_source",
@@ -663,103 +663,103 @@
           "status": "legacy_projection_available_not_source_capture_closed"
         }
       },
-      "diagnosticDigest": "sha256:d1cfb5433ce735051d493cb09a73cfc517ffef661c123d513cf204abc5c67625",
+      "diagnosticDigest": "sha256:259c082640015e6296ff25dd2948e702d98a86dd6412f53f78e4302dbb0ca4a7",
       "diagnostics": [
         {
           "code": "APPLICATION_SOURCE_CAPTURE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "CONTINUATION_INSTRUCTION_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.continuationInstruction",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "CONTINUATION_SOURCE_CAPTURE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_INVALID",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_REQUIRED",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "READING_STRUCTURE_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         }
       ],
       "disposition": "incomplete_source",
@@ -909,97 +909,97 @@
           "status": "legacy_projection_available_not_source_capture_closed"
         }
       },
-      "diagnosticDigest": "sha256:9ce2f94bf651ff13daaf4043bfc67e7edbd225daa7d61add501968bee73edddc",
+      "diagnosticDigest": "sha256:bcb69c0e9bca237732990816841d32f9d398587d7bd278ca61ab85c68f478dd1",
       "diagnostics": [
         {
           "code": "APPLICATION_SOURCE_CAPTURE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "CONTINUATION_SOURCE_CAPTURE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_INVALID",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_REQUIRED",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "READING_STRUCTURE_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         }
       ],
       "disposition": "incomplete_source",
@@ -1154,103 +1154,103 @@
           "status": "legacy_projection_available_not_source_capture_closed"
         }
       },
-      "diagnosticDigest": "sha256:d1cfb5433ce735051d493cb09a73cfc517ffef661c123d513cf204abc5c67625",
+      "diagnosticDigest": "sha256:259c082640015e6296ff25dd2948e702d98a86dd6412f53f78e4302dbb0ca4a7",
       "diagnostics": [
         {
           "code": "APPLICATION_SOURCE_CAPTURE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "CONTINUATION_INSTRUCTION_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.continuationInstruction",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "CONTINUATION_SOURCE_CAPTURE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_INVALID",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_REQUIRED",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "READING_STRUCTURE_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         }
       ],
       "disposition": "incomplete_source",
@@ -1406,103 +1406,103 @@
           "status": "legacy_projection_available_not_source_capture_closed"
         }
       },
-      "diagnosticDigest": "sha256:d1cfb5433ce735051d493cb09a73cfc517ffef661c123d513cf204abc5c67625",
+      "diagnosticDigest": "sha256:259c082640015e6296ff25dd2948e702d98a86dd6412f53f78e4302dbb0ca4a7",
       "diagnostics": [
         {
           "code": "APPLICATION_SOURCE_CAPTURE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "CONTINUATION_INSTRUCTION_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.continuationInstruction",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "CONTINUATION_SOURCE_CAPTURE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_INVALID",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_REQUIRED",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "READING_STRUCTURE_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         }
       ],
       "disposition": "incomplete_source",
@@ -1652,97 +1652,97 @@
           "status": "legacy_projection_available_not_source_capture_closed"
         }
       },
-      "diagnosticDigest": "sha256:9ce2f94bf651ff13daaf4043bfc67e7edbd225daa7d61add501968bee73edddc",
+      "diagnosticDigest": "sha256:bcb69c0e9bca237732990816841d32f9d398587d7bd278ca61ab85c68f478dd1",
       "diagnostics": [
         {
           "code": "APPLICATION_SOURCE_CAPTURE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "CONTINUATION_SOURCE_CAPTURE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_INVALID",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_REQUIRED",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "READING_STRUCTURE_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         }
       ],
       "disposition": "incomplete_source",
@@ -1892,97 +1892,97 @@
           "status": "legacy_projection_available_not_source_capture_closed"
         }
       },
-      "diagnosticDigest": "sha256:9ce2f94bf651ff13daaf4043bfc67e7edbd225daa7d61add501968bee73edddc",
+      "diagnosticDigest": "sha256:bcb69c0e9bca237732990816841d32f9d398587d7bd278ca61ab85c68f478dd1",
       "diagnostics": [
         {
           "code": "APPLICATION_SOURCE_CAPTURE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "CONTINUATION_SOURCE_CAPTURE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_INVALID",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_REQUIRED",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "READING_STRUCTURE_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         }
       ],
       "disposition": "incomplete_source",
@@ -2138,103 +2138,103 @@
           "status": "legacy_projection_available_not_source_capture_closed"
         }
       },
-      "diagnosticDigest": "sha256:d1cfb5433ce735051d493cb09a73cfc517ffef661c123d513cf204abc5c67625",
+      "diagnosticDigest": "sha256:259c082640015e6296ff25dd2948e702d98a86dd6412f53f78e4302dbb0ca4a7",
       "diagnostics": [
         {
           "code": "APPLICATION_SOURCE_CAPTURE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "CONTINUATION_INSTRUCTION_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.continuationInstruction",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "CONTINUATION_SOURCE_CAPTURE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_INVALID",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_REQUIRED",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "READING_STRUCTURE_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         }
       ],
       "disposition": "incomplete_source",
@@ -2390,103 +2390,103 @@
           "status": "legacy_projection_available_not_source_capture_closed"
         }
       },
-      "diagnosticDigest": "sha256:d1cfb5433ce735051d493cb09a73cfc517ffef661c123d513cf204abc5c67625",
+      "diagnosticDigest": "sha256:259c082640015e6296ff25dd2948e702d98a86dd6412f53f78e4302dbb0ca4a7",
       "diagnostics": [
         {
           "code": "APPLICATION_SOURCE_CAPTURE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "CONTINUATION_INSTRUCTION_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.continuationInstruction",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "CONTINUATION_SOURCE_CAPTURE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_INVALID",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_REQUIRED",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "READING_STRUCTURE_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         }
       ],
       "disposition": "incomplete_source",
@@ -2636,97 +2636,97 @@
           "status": "legacy_projection_available_not_source_capture_closed"
         }
       },
-      "diagnosticDigest": "sha256:9ce2f94bf651ff13daaf4043bfc67e7edbd225daa7d61add501968bee73edddc",
+      "diagnosticDigest": "sha256:bcb69c0e9bca237732990816841d32f9d398587d7bd278ca61ab85c68f478dd1",
       "diagnostics": [
         {
           "code": "APPLICATION_SOURCE_CAPTURE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "CONTINUATION_SOURCE_CAPTURE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_INVALID",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_REQUIRED",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "READING_STRUCTURE_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         }
       ],
       "disposition": "incomplete_source",
@@ -2876,97 +2876,97 @@
           "status": "legacy_projection_available_not_source_capture_closed"
         }
       },
-      "diagnosticDigest": "sha256:9ce2f94bf651ff13daaf4043bfc67e7edbd225daa7d61add501968bee73edddc",
+      "diagnosticDigest": "sha256:bcb69c0e9bca237732990816841d32f9d398587d7bd278ca61ab85c68f478dd1",
       "diagnostics": [
         {
           "code": "APPLICATION_SOURCE_CAPTURE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "CONTINUATION_SOURCE_CAPTURE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_INVALID",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_REQUIRED",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "READING_STRUCTURE_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         }
       ],
       "disposition": "incomplete_source",
@@ -3122,103 +3122,103 @@
           "status": "legacy_projection_available_not_source_capture_closed"
         }
       },
-      "diagnosticDigest": "sha256:d1cfb5433ce735051d493cb09a73cfc517ffef661c123d513cf204abc5c67625",
+      "diagnosticDigest": "sha256:259c082640015e6296ff25dd2948e702d98a86dd6412f53f78e4302dbb0ca4a7",
       "diagnostics": [
         {
           "code": "APPLICATION_SOURCE_CAPTURE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "CONTINUATION_INSTRUCTION_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.continuationInstruction",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "CONTINUATION_SOURCE_CAPTURE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_INVALID",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_REQUIRED",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "READING_STRUCTURE_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         }
       ],
       "disposition": "incomplete_source",
@@ -3373,103 +3373,103 @@
           "status": "legacy_projection_available_not_source_capture_closed"
         }
       },
-      "diagnosticDigest": "sha256:d1cfb5433ce735051d493cb09a73cfc517ffef661c123d513cf204abc5c67625",
+      "diagnosticDigest": "sha256:259c082640015e6296ff25dd2948e702d98a86dd6412f53f78e4302dbb0ca4a7",
       "diagnostics": [
         {
           "code": "APPLICATION_SOURCE_CAPTURE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "CONTINUATION_INSTRUCTION_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.continuationInstruction",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "CONTINUATION_SOURCE_CAPTURE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_INVALID",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_REQUIRED",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "READING_STRUCTURE_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         }
       ],
       "disposition": "incomplete_source",
@@ -3619,97 +3619,97 @@
           "status": "legacy_projection_available_not_source_capture_closed"
         }
       },
-      "diagnosticDigest": "sha256:9ce2f94bf651ff13daaf4043bfc67e7edbd225daa7d61add501968bee73edddc",
+      "diagnosticDigest": "sha256:bcb69c0e9bca237732990816841d32f9d398587d7bd278ca61ab85c68f478dd1",
       "diagnostics": [
         {
           "code": "APPLICATION_SOURCE_CAPTURE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "CONTINUATION_SOURCE_CAPTURE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_INVALID",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_REQUIRED",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "READING_STRUCTURE_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         }
       ],
       "disposition": "incomplete_source",
@@ -3859,97 +3859,97 @@
           "status": "legacy_projection_available_not_source_capture_closed"
         }
       },
-      "diagnosticDigest": "sha256:9ce2f94bf651ff13daaf4043bfc67e7edbd225daa7d61add501968bee73edddc",
+      "diagnosticDigest": "sha256:bcb69c0e9bca237732990816841d32f9d398587d7bd278ca61ab85c68f478dd1",
       "diagnostics": [
         {
           "code": "APPLICATION_SOURCE_CAPTURE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "CONTINUATION_SOURCE_CAPTURE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_INVALID",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_REQUIRED",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "READING_STRUCTURE_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         }
       ],
       "disposition": "incomplete_source",
@@ -4104,103 +4104,103 @@
           "status": "legacy_projection_available_not_source_capture_closed"
         }
       },
-      "diagnosticDigest": "sha256:d1cfb5433ce735051d493cb09a73cfc517ffef661c123d513cf204abc5c67625",
+      "diagnosticDigest": "sha256:259c082640015e6296ff25dd2948e702d98a86dd6412f53f78e4302dbb0ca4a7",
       "diagnostics": [
         {
           "code": "APPLICATION_SOURCE_CAPTURE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "CONTINUATION_INSTRUCTION_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.continuationInstruction",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "CONTINUATION_SOURCE_CAPTURE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_INVALID",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_REQUIRED",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "READING_STRUCTURE_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         }
       ],
       "disposition": "incomplete_source",
@@ -4356,103 +4356,103 @@
           "status": "legacy_projection_available_not_source_capture_closed"
         }
       },
-      "diagnosticDigest": "sha256:d1cfb5433ce735051d493cb09a73cfc517ffef661c123d513cf204abc5c67625",
+      "diagnosticDigest": "sha256:259c082640015e6296ff25dd2948e702d98a86dd6412f53f78e4302dbb0ca4a7",
       "diagnostics": [
         {
           "code": "APPLICATION_SOURCE_CAPTURE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "CONTINUATION_INSTRUCTION_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.continuationInstruction",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "CONTINUATION_SOURCE_CAPTURE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_INVALID",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_REQUIRED",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "READING_STRUCTURE_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         }
       ],
       "disposition": "incomplete_source",
@@ -4602,97 +4602,97 @@
           "status": "legacy_projection_available_not_source_capture_closed"
         }
       },
-      "diagnosticDigest": "sha256:9ce2f94bf651ff13daaf4043bfc67e7edbd225daa7d61add501968bee73edddc",
+      "diagnosticDigest": "sha256:bcb69c0e9bca237732990816841d32f9d398587d7bd278ca61ab85c68f478dd1",
       "diagnostics": [
         {
           "code": "APPLICATION_SOURCE_CAPTURE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "CONTINUATION_SOURCE_CAPTURE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_INVALID",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_REQUIRED",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "READING_STRUCTURE_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         }
       ],
       "disposition": "incomplete_source",
@@ -4847,103 +4847,103 @@
           "status": "legacy_projection_available_not_source_capture_closed"
         }
       },
-      "diagnosticDigest": "sha256:d1cfb5433ce735051d493cb09a73cfc517ffef661c123d513cf204abc5c67625",
+      "diagnosticDigest": "sha256:259c082640015e6296ff25dd2948e702d98a86dd6412f53f78e4302dbb0ca4a7",
       "diagnostics": [
         {
           "code": "APPLICATION_SOURCE_CAPTURE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "CONTINUATION_INSTRUCTION_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.continuationInstruction",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "CONTINUATION_SOURCE_CAPTURE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_INVALID",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_REQUIRED",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "READING_STRUCTURE_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         }
       ],
       "disposition": "incomplete_source",
@@ -5099,103 +5099,103 @@
           "status": "legacy_projection_available_not_source_capture_closed"
         }
       },
-      "diagnosticDigest": "sha256:d1cfb5433ce735051d493cb09a73cfc517ffef661c123d513cf204abc5c67625",
+      "diagnosticDigest": "sha256:259c082640015e6296ff25dd2948e702d98a86dd6412f53f78e4302dbb0ca4a7",
       "diagnostics": [
         {
           "code": "APPLICATION_SOURCE_CAPTURE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "CONTINUATION_INSTRUCTION_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.continuationInstruction",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "CONTINUATION_SOURCE_CAPTURE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_INVALID",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_REQUIRED",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "READING_STRUCTURE_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         }
       ],
       "disposition": "incomplete_source",
@@ -5377,109 +5377,109 @@
           "status": "legacy_projection_available_not_source_capture_closed"
         }
       },
-      "diagnosticDigest": "sha256:7749446446eebedcd4007d3ef0b85c2a4f0e821c15fe2caf75372ddda7636c28",
+      "diagnosticDigest": "sha256:b37aa4ae1aba626ef5de6be1ef38af32006b50264e9434747b22c4fbb6d88f16",
       "diagnostics": [
         {
           "code": "APPLICATION_SOURCE_CAPTURE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "CONTINUATION_INSTRUCTION_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.continuationInstruction",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "CONTINUATION_SOURCE_CAPTURE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_INVALID",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_REQUIRED",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "LISTENING_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "READING_STRUCTURE_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         }
       ],
       "disposition": "incomplete_source",
@@ -5635,103 +5635,103 @@
           "status": "legacy_projection_available_not_source_capture_closed"
         }
       },
-      "diagnosticDigest": "sha256:d1cfb5433ce735051d493cb09a73cfc517ffef661c123d513cf204abc5c67625",
+      "diagnosticDigest": "sha256:259c082640015e6296ff25dd2948e702d98a86dd6412f53f78e4302dbb0ca4a7",
       "diagnostics": [
         {
           "code": "APPLICATION_SOURCE_CAPTURE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "CONTINUATION_INSTRUCTION_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.continuationInstruction",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "CONTINUATION_SOURCE_CAPTURE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_INVALID",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_REQUIRED",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "READING_STRUCTURE_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         }
       ],
       "disposition": "incomplete_source",
@@ -5887,97 +5887,97 @@
           "status": "legacy_projection_available_not_source_capture_closed"
         }
       },
-      "diagnosticDigest": "sha256:9ce2f94bf651ff13daaf4043bfc67e7edbd225daa7d61add501968bee73edddc",
+      "diagnosticDigest": "sha256:bcb69c0e9bca237732990816841d32f9d398587d7bd278ca61ab85c68f478dd1",
       "diagnostics": [
         {
           "code": "APPLICATION_SOURCE_CAPTURE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "CONTINUATION_SOURCE_CAPTURE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_INVALID",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_REQUIRED",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "READING_STRUCTURE_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         }
       ],
       "disposition": "incomplete_source",
@@ -6134,97 +6134,97 @@
           "status": "legacy_projection_available_not_source_capture_closed"
         }
       },
-      "diagnosticDigest": "sha256:9ce2f94bf651ff13daaf4043bfc67e7edbd225daa7d61add501968bee73edddc",
+      "diagnosticDigest": "sha256:bcb69c0e9bca237732990816841d32f9d398587d7bd278ca61ab85c68f478dd1",
       "diagnostics": [
         {
           "code": "APPLICATION_SOURCE_CAPTURE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "CONTINUATION_SOURCE_CAPTURE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_INVALID",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_REQUIRED",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "READING_STRUCTURE_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         }
       ],
       "disposition": "incomplete_source",
@@ -6380,97 +6380,97 @@
           "status": "legacy_projection_available_not_source_capture_closed"
         }
       },
-      "diagnosticDigest": "sha256:9ce2f94bf651ff13daaf4043bfc67e7edbd225daa7d61add501968bee73edddc",
+      "diagnosticDigest": "sha256:bcb69c0e9bca237732990816841d32f9d398587d7bd278ca61ab85c68f478dd1",
       "diagnostics": [
         {
           "code": "APPLICATION_SOURCE_CAPTURE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "CONTINUATION_SOURCE_CAPTURE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_INVALID",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_REQUIRED",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "READING_STRUCTURE_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         }
       ],
       "disposition": "incomplete_source",
@@ -6626,97 +6626,97 @@
           "status": "legacy_projection_available_not_source_capture_closed"
         }
       },
-      "diagnosticDigest": "sha256:9ce2f94bf651ff13daaf4043bfc67e7edbd225daa7d61add501968bee73edddc",
+      "diagnosticDigest": "sha256:bcb69c0e9bca237732990816841d32f9d398587d7bd278ca61ab85c68f478dd1",
       "diagnostics": [
         {
           "code": "APPLICATION_SOURCE_CAPTURE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "CONTINUATION_SOURCE_CAPTURE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_INVALID",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_REQUIRED",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "READING_STRUCTURE_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         }
       ],
       "disposition": "incomplete_source",
@@ -6872,97 +6872,97 @@
           "status": "legacy_projection_available_not_source_capture_closed"
         }
       },
-      "diagnosticDigest": "sha256:9ce2f94bf651ff13daaf4043bfc67e7edbd225daa7d61add501968bee73edddc",
+      "diagnosticDigest": "sha256:bcb69c0e9bca237732990816841d32f9d398587d7bd278ca61ab85c68f478dd1",
       "diagnostics": [
         {
           "code": "APPLICATION_SOURCE_CAPTURE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "CONTINUATION_SOURCE_CAPTURE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_INVALID",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_REQUIRED",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "READING_STRUCTURE_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         }
       ],
       "disposition": "incomplete_source",
@@ -7119,97 +7119,97 @@
           "status": "legacy_projection_available_not_source_capture_closed"
         }
       },
-      "diagnosticDigest": "sha256:9ce2f94bf651ff13daaf4043bfc67e7edbd225daa7d61add501968bee73edddc",
+      "diagnosticDigest": "sha256:bcb69c0e9bca237732990816841d32f9d398587d7bd278ca61ab85c68f478dd1",
       "diagnostics": [
         {
           "code": "APPLICATION_SOURCE_CAPTURE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "CONTINUATION_SOURCE_CAPTURE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_INVALID",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_REQUIRED",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "READING_STRUCTURE_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         }
       ],
       "disposition": "incomplete_source",
@@ -7365,103 +7365,103 @@
           "status": "legacy_projection_available_not_source_capture_closed"
         }
       },
-      "diagnosticDigest": "sha256:d1cfb5433ce735051d493cb09a73cfc517ffef661c123d513cf204abc5c67625",
+      "diagnosticDigest": "sha256:259c082640015e6296ff25dd2948e702d98a86dd6412f53f78e4302dbb0ca4a7",
       "diagnostics": [
         {
           "code": "APPLICATION_SOURCE_CAPTURE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "CONTINUATION_INSTRUCTION_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.continuationInstruction",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "CONTINUATION_SOURCE_CAPTURE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_INVALID",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_REQUIRED",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "READING_STRUCTURE_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         }
       ],
       "disposition": "incomplete_source",
@@ -7618,103 +7618,103 @@
           "status": "legacy_projection_available_not_source_capture_closed"
         }
       },
-      "diagnosticDigest": "sha256:d1cfb5433ce735051d493cb09a73cfc517ffef661c123d513cf204abc5c67625",
+      "diagnosticDigest": "sha256:259c082640015e6296ff25dd2948e702d98a86dd6412f53f78e4302dbb0ca4a7",
       "diagnostics": [
         {
           "code": "APPLICATION_SOURCE_CAPTURE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "CONTINUATION_INSTRUCTION_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.continuationInstruction",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "CONTINUATION_SOURCE_CAPTURE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_INVALID",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_REQUIRED",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "READING_STRUCTURE_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         }
       ],
       "disposition": "incomplete_source",
@@ -7870,103 +7870,103 @@
           "status": "legacy_projection_available_not_source_capture_closed"
         }
       },
-      "diagnosticDigest": "sha256:d1cfb5433ce735051d493cb09a73cfc517ffef661c123d513cf204abc5c67625",
+      "diagnosticDigest": "sha256:259c082640015e6296ff25dd2948e702d98a86dd6412f53f78e4302dbb0ca4a7",
       "diagnostics": [
         {
           "code": "APPLICATION_SOURCE_CAPTURE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "CONTINUATION_INSTRUCTION_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.continuationInstruction",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "CONTINUATION_SOURCE_CAPTURE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_INVALID",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_REQUIRED",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "READING_STRUCTURE_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         }
       ],
       "disposition": "incomplete_source",
@@ -8122,103 +8122,103 @@
           "status": "legacy_projection_available_not_source_capture_closed"
         }
       },
-      "diagnosticDigest": "sha256:d1cfb5433ce735051d493cb09a73cfc517ffef661c123d513cf204abc5c67625",
+      "diagnosticDigest": "sha256:259c082640015e6296ff25dd2948e702d98a86dd6412f53f78e4302dbb0ca4a7",
       "diagnostics": [
         {
           "code": "APPLICATION_SOURCE_CAPTURE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "CONTINUATION_INSTRUCTION_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.continuationInstruction",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "CONTINUATION_SOURCE_CAPTURE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture.rows",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_INVALID",
           "disposition": "incomplete_source",
           "path": "$.evidence.grammarFillPromptSourceCapture",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "GRAMMAR_FILL_PROMPT_SOURCE_CAPTURE_REQUIRED",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         },
         {
           "code": "READING_STRUCTURE_EVIDENCE_INCOMPLETE",
           "disposition": "incomplete_source",
           "path": "$.evidence.documents",
-          "sourceSpanRefCount": 0
+          "sourceSpanRefs": []
         }
       ],
       "disposition": "incomplete_source",
