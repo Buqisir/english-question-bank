@@ -1,7 +1,7 @@
 # EQB 试卷 Canonical 大一统 — Wayfinder Map
 
 Status: done
-Next on PASS: owner-approval
+Next on PASS: implementation
 Terminal: no
 Phase receipt: `docs/cuts/paper-canonical-unification/phase-transition.md`
 
@@ -60,9 +60,12 @@ Phase receipt: `docs/cuts/paper-canonical-unification/phase-transition.md`
   total count 53, then published without beginning Ticket 24. A fresh
   owner-attached `$to-tickets` recovery independently verified those exact
   unchanged ticket bytes and provides the manifest's truthful committed
-  provenance. The replacement manifest's exact SHA-256 remains separately
-  unapproved, so the current route is `owner-approval` and implementation
-  dispatch is forbidden.
+  provenance. The owner has now approved the exact current manifest SHA-256
+  `9a595e744fbfaec289a9723ae90ede172d60dce3041c982b5377c05bb8f59377` and
+  explicitly resumed only to record that approval and re-verify the four
+  implementation gates. This route update dispatches neither Ticket 24 nor a
+  coordinator; Ticket 24 is the sole implementation frontier after the phase
+  receipt binds the committed approval and all four gates pass.
 
 ## Decisions so far
 
