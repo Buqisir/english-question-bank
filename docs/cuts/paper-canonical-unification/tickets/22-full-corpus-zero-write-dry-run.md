@@ -1,6 +1,6 @@
 # 22 — Full-corpus zero-write compile dry run
 
-Status: ready
+Status: done
 Blocked by: 21 — Freeze the 33-paper corpus and migration ledger
 Next on PASS: independent review
 Independent review PASS: `docs/cuts/paper-canonical-unification/tickets/23-hard-measured-migration-replan.md`
