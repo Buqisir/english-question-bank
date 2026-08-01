@@ -28,14 +28,14 @@ To-spec artifact SHA-256: `c6cbbe778d94e1205612fa5ac535e2198020317b09064190fec1d
 To-spec outcome: accepted
 Accepted spec: `docs/cuts/paper-canonical-unification/spec.md`
 Accepted spec SHA-256: `c6cbbe778d94e1205612fa5ac535e2198020317b09064190fec1d0b6660d868b`
-To-tickets provenance: verified
+To-tickets provenance: pending
 To-tickets entry skill: `/Users/huangxuewei/.claude/skills/to-tickets/SKILL.md`
 To-tickets source HEAD: `b41ad774bca35864fce21aa80a19d0dbfcb9e91c`
-To-tickets result commit: `83e83de80a45df6c5dec6bf5e6a85db03d0ac53a`
+To-tickets result commit: `2dd684e9d70a4e4e8cb7967eab090952cb54e291`
 To-tickets artifact: `docs/cuts/paper-canonical-unification/ticket-set-manifest.md`
-To-tickets artifact SHA-256: `3ad05df6c5b79b95ded495cf000981322a70d24d09c8d6c1dbdc905665a23ab6`
+To-tickets artifact SHA-256: `0fab79f5161cbe563552c17891f08292d45887b4a3f0bc008db72a20632b745f`
 To-tickets outcome: complete
-Ticket-set binding: verified
+Ticket-set binding: pending
 Ticket-set manifest: `docs/cuts/paper-canonical-unification/ticket-set-manifest.md`
 Ticket-set manifest SHA-256: `3ad05df6c5b79b95ded495cf000981322a70d24d09c8d6c1dbdc905665a23ab6`
 Ticket-set accepted-spec SHA-256: `c6cbbe778d94e1205612fa5ac535e2198020317b09064190fec1d0b6660d868b`
@@ -76,7 +76,11 @@ route without implementing Ticket 24.
 
 The new exact manifest SHA-256
 `3ad05df6c5b79b95ded495cf000981322a70d24d09c8d6c1dbdc905665a23ab6`
-has not been approved. The initiative therefore pauses at `owner-approval`;
-implementation and coordinator dispatch are forbidden until the owner binds
-that exact digest and all four implementation gates verify. Ticket 24 is the
-sole possible implementation frontier after those gates pass.
+has not been approved. The publication was performed under the owner-attached
+`$implement` skill, so commit
+`83e83de80a45df6c5dec6bf5e6a85db03d0ac53a` cannot truthfully be recorded as
+a `$to-tickets` result. Current governance provides no authorized provenance
+bridge from this measured-replan implementation task to the required
+`to-tickets -> owner-approval` edge. The initiative therefore fails closed at
+`owner-approval`; ticket-set binding, implementation, and coordinator dispatch
+remain forbidden. Ticket 24 must not begin.
