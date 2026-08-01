@@ -57,9 +57,12 @@ Phase receipt: `docs/cuts/paper-canonical-unification/phase-transition.md`
   four gates, Ticket 16 is the sole implementation frontier. No later ticket
   is eligible and this map update itself does not start Ticket 16.
 - Ticket 23's measured proposal was explicitly approved at Tickets 24–53 and
-  total count 53, then published without beginning Ticket 24. The replacement
-  manifest's exact SHA-256 remains separately unapproved, so the current route
-  is `owner-approval` and implementation dispatch is forbidden.
+  total count 53, then published without beginning Ticket 24. A fresh
+  owner-attached `$to-tickets` recovery independently verified those exact
+  unchanged ticket bytes and provides the manifest's truthful committed
+  provenance. The replacement manifest's exact SHA-256 remains separately
+  unapproved, so the current route is `owner-approval` and implementation
+  dispatch is forbidden.
 
 ## Decisions so far
 

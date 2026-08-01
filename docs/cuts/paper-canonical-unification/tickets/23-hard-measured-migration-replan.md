@@ -1,6 +1,6 @@
 # 23 — Hard measured migration replan checkpoint
 
-Status: blocked
+Status: done
 Blocked by: Ticket 22 independent review PASS
 Next on PASS: owner-approval
 Terminal: no
@@ -40,7 +40,7 @@ tickets and manifest.
 - [x] This ticket performs no source/answer correction, corpus mutation,
       diagnostic-cluster implementation, canary, cohort migration, legacy
       retirement, release, production, or R2 work.
-- [ ] Appropriate route/document verifiers and `git diff --check` pass for the
+- [x] Appropriate route/document verifiers and `git diff --check` pass for the
       approved publication.
 
 ## Superseded-ticket mapping
@@ -60,6 +60,6 @@ tickets and manifest.
 
 ## Result
 
-Commit: Publication `83e83de80a45df6c5dec6bf5e6a85db03d0ac53a`; initial gate receipt `ee9068c022e9f050d32392d57ed265a261c49777`.
-Verify: Ticket/document/successor/hash/gate checks PASS; `git diff --check` PASS; `verify-dev-completion-report-contract.mjs` BLOCKED because the new manifest has no truthful `$to-tickets` provenance, with two additional unchanged expected-HEAD governance failures; final `verify:all` stopped immediately after the Standards blocker was confirmed.
-Notes: Owner explicitly approved the complete measured proposal from Codex task `019fbdec-6f5a-7381-a0b7-53beb390b387` with: “批准 Ticket 23 measured replan 的逐票粒度，按 Tickets 24–53、总票数 53 发布。” Tickets 24–53 and the replacement manifest were published at that approved granularity, but current governance requires the owner-approval gate's manifest to have verified `$to-tickets` provenance. This task was explicitly attached to `$implement`; recording its commit as a `$to-tickets` result would be false provenance. The ticket therefore fails closed before exact manifest-digest approval. This approval does not approve the manifest's exact SHA-256 and does not authorize Ticket 24.
+Commit: Approved ticket publication `83e83de80a45df6c5dec6bf5e6a85db03d0ac53a`; truthful `$to-tickets` result commit and binding commit are recorded by `phase-transition.md` and the current task result.
+Verify: Exact approved-proposal comparison, ticket/document/successor/hash/route checks, current phase-gate validation, Tickets 24–53 byte preservation, and `git diff --check` PASS. `verify-dev-completion-report-contract.mjs` proves the current `to-tickets -> owner-approval` route but remains 306 PASS / 2 unrelated pre-existing governance FAIL; `verify-architecture-housekeeping.mjs` proves the route binding but remains 82 PASS / 1 matching pre-existing model-routing assertion FAIL. This bounded recovery does not modify those unrelated authorities or tests.
+Notes: Owner explicitly approved the complete measured proposal from Codex task `019fbdec-6f5a-7381-a0b7-53beb390b387` with: “批准 Ticket 23 measured replan 的逐票粒度，按 Tickets 24–53、总票数 53 发布。” A fresh owner-attached `$to-tickets` task independently verified and truthfully adopted the exact published Tickets 24–53 without changing their bytes, then rebound the exact current manifest to the accepted spec and `owner-approval` route. The earlier `$implement` publication remains publication evidence only and is not recorded as `$to-tickets` provenance. This recovery does not approve the manifest's exact SHA-256 and does not authorize Ticket 24.

@@ -1,8 +1,8 @@
 # Paper canonical unification measured replacement ticket-set manifest
 
 Status: published; owner manifest-digest approval pending
-Source phase: Ticket 23 post-approval measured-replan publication
-Source HEAD: `7aeb5a963eff14e103c1645a600d72d8705ef53e`
+Source phase: truthful `$to-tickets` provenance recovery for the approved Ticket 23 measured replan
+Source HEAD: `4ddd92ead0cf4a1e8796e93894972e7102a39834`
 Approved proposal task: `019fbdec-6f5a-7381-a0b7-53beb390b387`
 Owner approval: “批准 Ticket 23 measured replan 的逐票粒度，按 Tickets 24–53、总票数 53 发布。”
 Accepted spec: `docs/cuts/paper-canonical-unification/spec.md`
@@ -21,6 +21,12 @@ This manifest publishes exactly the owner-approved Tickets 24–53 measured
 replan. The approval binds each Title, Blocked by edge, What it delivers
 statement, diagnostic-cluster membership, migration-cohort membership,
 old-ticket mapping, capacity/fail-closed rule, and proposed total count of 53.
+
+The fresh owner-attached `$to-tickets` recovery independently verified and
+adopted the already-published exact set without changing Tickets 24–53. Its own
+committed result is the sole `$to-tickets` provenance for this manifest; commit
+`83e83de80a45df6c5dec6bf5e6a85db03d0ac53a` remains publication evidence and
+is not reclassified as `$to-tickets` execution.
 
 The owner approved ticket granularity only. The owner has not approved this
 manifest's exact SHA-256. Every current manifest byte change invalidates a later
@@ -159,7 +165,7 @@ remain historical evidence only and never become parallel dispatch authority.
 | `docs/cuts/paper-canonical-unification/tickets/20-backend-canonical-import-pilot.md` | `b1eb6b765f81806507d2a44e77cd1db3c5c41a77b6302e554c4d3df8a9f831f8` |
 | `docs/cuts/paper-canonical-unification/tickets/21-freeze-corpus-migration-ledger.md` | `1f25438f9e9a4fb7cf86755b99251310a5e56741bab767635fe74da8b08847c9` |
 | `docs/cuts/paper-canonical-unification/tickets/22-full-corpus-zero-write-dry-run.md` | `0c3dff2f039e8f2af6e9237367bfd244c6e3d9a3973be7290853d7194744dca2` |
-| `docs/cuts/paper-canonical-unification/tickets/23-hard-measured-migration-replan.md` | `6a88ee82808be4f6330bc80be84fc556ae3ec46f596fc5d33479fc27e7a613e0` |
+| `docs/cuts/paper-canonical-unification/tickets/23-hard-measured-migration-replan.md` | `e29189f9b07716f2c31adae7d870f55c9db4cdd2edaa46863d11ab6914344a59` |
 | `docs/cuts/paper-canonical-unification/tickets/24-costed-immutable-source-adapter-pilot.md` | `6ee03690b6b2ec483315242d6302995a6ec324fa798b2a8efeae6d692b81837c` |
 | `docs/cuts/paper-canonical-unification/tickets/25-source-adapter-recovery-cluster-a.md` | `a80207de91e856aeadb33b25cc902f309ea210417f6a3b68f1e60dc8eeae6044` |
 | `docs/cuts/paper-canonical-unification/tickets/26-source-adapter-recovery-cluster-b.md` | `05b7aa77e1213f0a88ca8aff09865c23566f2749207562633ef170ee084332fc` |
