@@ -41,6 +41,6 @@ old Tickets 21–71.
 
 ## Result
 
-Commit: `1bd4d6d5fa8b77979ba8e0203c6c6f253381e6e8` through `4022658a69a412c8c1c4c091531da7cd40ba9c2c`
+Commit: `1bd4d6d5fa8b77979ba8e0203c6c6f253381e6e8` through `4022658a82f286455b0e1dc4c63a90c570e6ceaf`
 Verify: `node scripts/verify-paper-canonical-migration-ledger.mjs` PASS; `node scripts/verify-paper-canonical-full-corpus-dry-run.mjs` PASS and byte-reproducible; `node --check scripts/verify-paper-canonical-full-corpus-dry-run.mjs` PASS; `pnpm -C app run verify:all` = `PASS 115 / SKIP 1 / FAIL 0` (wall-clock `313s`); `git diff --check` PASS.
 Notes: The frozen 33-paper denominator produced `ready=0`, `needs_review=0`, `unsupported=0`, `incomplete_source=33`, and `answer_conflict=0`. The durable evidence is `docs/cuts/paper-canonical-unification/migration/full-corpus-zero-write-dry-run-v1.json`; its protected-state digest includes assets, database, import inputs, authority, manifest, and ledger, and is byte-identical before/after compilation. Fixture fan-out: 33 papers. Real diagnostic defects caught: 2 (ledger queue location and invocation-HEAD reproducibility); ordinary independent-review Must Fix count: 0; observed executable rework cycles: 2. Cost/quota was not exposed by the runtime. No correction, publication, selection switch, migration, correction batch, pilot, canary, or cohort action occurred.

@@ -146,90 +146,92 @@ function assertPreflight({ allowEvidenceWrite }) {
   return { branch, head }
 }
 
-function fileRecord(tree, relativePath) {
-  return tree.files.find((file) => file.relativePath === relativePath) || null
-}
-
 function document({ inputKey, roles, bytes, mediaType, originalName }) {
-  if (!bytes) return null
+  assert.ok(bytes instanceof Uint8Array, `${inputKey} requires immutable bytes`)
   return { inputKey, roles, bytes, declared: { mediaType, originalName } }
 }
 
-function profileNeedsInactiveListening(profileId) {
-  return profileId === 'nck1'
+function documentRolesFor(file) {
+  if (file.role === 'asset-projection') return ['legacy_projection']
+  if (file.role === 'official-answer-lead') return ['official_answer_lead']
+  if (file.role === 'source-provenance') return ['source_provenance']
+  if (file.role === 'analysis-supplement') return ['analysis_supplement']
+  return ['frozen_latest_evidence']
 }
 
-function sourceEnvelope({ paperId, profileId, sourceAssetVersion }) {
-  return Buffer.from(JSON.stringify({
-    paperId,
-    profileId,
-    sourceAssetVersion,
-    profileInstructionSourceDigest: null,
-    observations: [],
-    assertions: [],
-    groups: [],
-    transformations: [],
-    inactiveSlots: {},
-    inactiveSourceClosures: [],
-  }))
+function mediaTypeFor(file) {
+  if (file.path.endsWith('.json')) return 'application/json'
+  return 'application/octet-stream'
+}
+
+function frozenEvidenceRefs(paper) {
+  assert.ok(Array.isArray(paper.latestTree?.files) && paper.latestTree.files.length > 0, `${paper.paperId} must retain frozen latest files`)
+  return paper.latestTree.files
+    .map((file) => ({
+      path: file.path,
+      relativePath: file.relativePath,
+      role: file.role,
+      byteLength: file.byteLength,
+      sha256: file.sha256,
+    }))
+    .sort((left, right) => left.path.localeCompare(right.path))
+}
+
+function assertFrozenLatestTree(paper) {
+  const latestRoot = path.posix.join('app/public/paper-assets', paper.paperId, 'latest')
+  const expected = frozenEvidenceRefs(paper)
+  const actual = walkFiles(latestRoot).map(({ rel, bytes }) => ({
+    path: rel,
+    relativePath: path.posix.relative(latestRoot, rel),
+    byteLength: bytes.byteLength,
+    sha256: sha256(bytes),
+  })).sort((left, right) => left.path.localeCompare(right.path))
+  assert.deepEqual(
+    actual.map(({ path: filePath, relativePath, byteLength, sha256: digest }) => ({ path: filePath, relativePath, byteLength, sha256: digest })),
+    expected.map(({ path: filePath, relativePath, byteLength, sha256: digest }) => ({ path: filePath, relativePath, byteLength, sha256: digest })),
+    `${paper.paperId} latest tree must match the frozen manifest before compilation`,
+  )
+  return expected
 }
 
 function requestForPaper(paper) {
-  const latestRoot = path.join('app/public/paper-assets', paper.paperId, 'latest')
-  const assetBytes = readFileSync(abs(path.join(latestRoot, 'paper-asset.json')))
-  const answerBytes = readFileSync(abs(path.join(latestRoot, 'answer-key.json')))
-  const importMetaPath = path.join(latestRoot, 'import-meta.json')
-  const sourceAssetVersion = JSON.parse(answerBytes).sourceAssetVersion
-  const documents = [
-    document({
-      inputKey: 'canonical_source_envelope',
-      roles: ['operator_assertions'],
-      bytes: sourceEnvelope({
-        paperId: paper.paperId,
-        profileId: paper.profileCandidate.candidateProfileId,
-        sourceAssetVersion,
-      }),
-      mediaType: 'application/vnd.eqb.canonical-fixture+json',
-      originalName: 'ticket-22-source-envelope.json',
-    }),
-    document({
-      inputKey: 'paper_asset',
-      roles: ['question_source'],
-      bytes: assetBytes,
-      mediaType: 'application/json',
-      originalName: 'paper-asset.json',
-    }),
-    document({
-      inputKey: 'official_answers',
-      roles: ['official_answer_source'],
-      bytes: answerBytes,
-      mediaType: 'application/json',
-      originalName: 'answer-key.json',
-    }),
-  ]
-  if (existsSync(abs(importMetaPath))) documents.push(document({
-    inputKey: 'source_provenance',
-    roles: ['source_provenance'],
-    bytes: readFileSync(abs(importMetaPath)),
-    mediaType: 'application/json',
-    originalName: 'import-meta.json',
+  const evidenceRefs = assertFrozenLatestTree(paper)
+  const documents = evidenceRefs.map((file, index) => document({
+    inputKey: `frozen_latest_${String(index + 1).padStart(2, '0')}_${file.relativePath.replaceAll(/[^a-zA-Z0-9]+/g, '_')}`,
+    roles: documentRolesFor(file),
+    bytes: readFileSync(abs(file.path)),
+    mediaType: mediaTypeFor(file),
+    originalName: path.posix.basename(file.path),
   }))
-  const listening = [
-    ['questions', 'application/vnd.eqb.listening-questions+json', ['structured_source', 'question_source']],
-    ['answers', 'application/vnd.eqb.listening-answers+json', ['structured_source', 'official_answer_source']],
-    ['transcript', 'application/vnd.eqb.listening-transcript+json', ['structured_source', 'transcript_source']],
-  ]
-  for (const [name, mediaType, roles] of listening) {
-    const rel = path.join(latestRoot, 'listening', `${name}.json`)
-    if (existsSync(abs(rel))) documents.push(document({
-      inputKey: `listening_${name}`,
-      roles,
-      bytes: readFileSync(abs(rel)),
-      mediaType,
-      originalName: `${name}.json`,
-    }))
+  assert.equal(
+    documents.some((item) => item.declared.mediaType === 'application/vnd.eqb.canonical-fixture+json' || item.roles.includes('operator_assertions')),
+    false,
+    'Ticket 22 compiler requests must not synthesize fixture or operator-assertion evidence',
+  )
+  return { authority: canonicalAuthorityRef, evidence: { documents }, evidenceRefs }
+}
+
+function requestFingerprint(request) {
+  return digestJson(request.evidence.documents.map((item) => ({
+    inputKey: item.inputKey,
+    roles: item.roles,
+    mediaType: item.declared.mediaType,
+    originalName: item.declared.originalName,
+    sha256: sha256(item.bytes),
+  })))
+}
+
+function assertProfileCandidateCannotAffectRequest(paper, request) {
+  const candidateChanged = structuredClone(paper)
+  candidateChanged.profileCandidate = {
+    status: 'candidate_not_source_confirmed',
+    candidateProfileId: 'intentionally-ignored',
   }
-  return { authority: canonicalAuthorityRef, evidence: { documents } }
+  assert.equal(
+    requestFingerprint(requestForPaper(candidateChanged)),
+    requestFingerprint(request),
+    `${paper.paperId} compiler request must not depend on the manifest Profile candidate`,
+  )
 }
 
 function recoveryMechanisms(diagnostics) {
@@ -243,53 +245,163 @@ function recoveryMechanisms(diagnostics) {
     else if (code.startsWith('LISTENING_') || code.startsWith('INACTIVE_SOURCE_')) mechanisms.add('restore_or_close_inactive_listening_evidence')
     else if (code.startsWith('OFFICIAL_ANSWER_')) mechanisms.add('restore_immutable_official_answer_evidence')
     else if (code.startsWith('PROFILE_')) mechanisms.add('verify_profile_from_source_evidence')
+    else if (code === 'SOURCE_ADAPTER_UNSUPPORTED') mechanisms.add('supply_registered_immutable_source_adapter')
     else mechanisms.add('restore_or_bound_missing_immutable_source_evidence')
   }
   return [...mechanisms].sort()
 }
 
-function closureDiagnostic({ paper, tree, diagnostics }) {
-  const source = fileRecord(tree, 'paper-asset.json')
-  const answer = fileRecord(tree, 'answer-key.json')
-  const attachments = tree.files
-    .filter((file) => !['paper-asset.json', 'answer-key.json', 'import-meta.json'].includes(file.relativePath))
-    .map((file) => ({ path: file.path, sha256: file.sha256, byteLength: file.byteLength, role: file.role }))
-  const codes = new Set(diagnostics.map((item) => item.code))
+function evidenceRefsForRole(evidenceRefs, role) {
+  return evidenceRefs.filter((item) => item.role === role)
+}
+
+function evidenceBoundDiagnosis(code, evidenceRefs) {
+  assert.ok(evidenceRefs.length > 0, `${code} must bind exact frozen evidence`)
+  return { code, evidenceRefs }
+}
+
+function closureDiagnostic({ evidenceRefs }) {
+  const source = evidenceRefsForRole(evidenceRefs, 'asset-projection')
+  const answer = evidenceRefsForRole(evidenceRefs, 'official-answer-lead')
+  const provenance = evidenceRefsForRole(evidenceRefs, 'source-provenance')
+  const analysisSupplements = evidenceRefsForRole(evidenceRefs, 'analysis-supplement')
+  const profileEvidence = [...source, ...provenance]
   return {
     questionSource: {
-      status: source ? 'legacy_projection_available_not_source_capture_closed' : 'missing',
-      evidenceRefs: source ? [{ path: source.path, sha256: source.sha256, byteLength: source.byteLength }] : [],
-      diagnostic: source ? 'QUESTION_SOURCE_CAPTURE_NOT_PRESENT_IN_FROZEN_LATEST' : 'QUESTION_SOURCE_PROJECTION_MISSING',
+      status: source.length > 0 ? 'legacy_projection_available_not_source_capture_closed' : 'missing',
+      diagnoses: [evidenceBoundDiagnosis(
+        source.length > 0 ? 'QUESTION_SOURCE_CAPTURE_NOT_PRESENT_IN_FROZEN_LATEST' : 'QUESTION_SOURCE_PROJECTION_MISSING',
+        source.length > 0 ? source : evidenceRefs,
+      )],
     },
     officialAnswerSource: {
-      status: answer ? 'answer_key_lead_available_not_official_source_capture_closed' : 'missing',
-      evidenceRefs: answer ? [{ path: answer.path, sha256: answer.sha256, byteLength: answer.byteLength }] : [],
-      diagnostic: codes.has('OFFICIAL_ANSWER_MISSING')
-        ? 'OFFICIAL_ANSWER_MISSING'
-        : 'OFFICIAL_ANSWER_SOURCE_CAPTURE_NOT_PRESENT_IN_FROZEN_LATEST',
+      status: answer.length > 0 ? 'answer_key_lead_available_not_official_source_capture_closed' : 'missing',
+      diagnoses: [evidenceBoundDiagnosis(
+        answer.length > 0 ? 'OFFICIAL_ANSWER_SOURCE_CAPTURE_NOT_PRESENT_IN_FROZEN_LATEST' : 'OFFICIAL_ANSWER_MISSING',
+        answer.length > 0 ? answer : evidenceRefs,
+      )],
     },
-    attachments: {
-      status: attachments.length > 0 ? 'available_but_not_complete_source_capture' : 'none_present',
-      evidenceRefs: attachments,
-      diagnostic: attachments.length > 0
-        ? 'ATTACHMENTS_NOT_SUFFICIENT_FOR_CANONICAL_SOURCE_CLOSURE'
-        : 'ATTACHMENTS_ABSENT_FROM_FROZEN_LATEST',
+    analysisSupplements: {
+      status: analysisSupplements.length > 0 ? 'available_but_not_canonical_source_capture' : 'none_present',
+      diagnoses: [evidenceBoundDiagnosis(
+        analysisSupplements.length > 0 ? 'ANALYSIS_SUPPLEMENT_NOT_CANONICAL_SOURCE_CAPTURE' : 'ANALYSIS_SUPPLEMENT_ABSENT',
+        analysisSupplements.length > 0 ? analysisSupplements : evidenceRefs,
+      )],
     },
     profile: {
-      status: 'ledger_candidate_requires_source_proof',
-      profileId: paper.profileCandidate.candidateProfileId,
-      evidenceRefs: paper.profileCandidate.evidenceRefs || [],
-      diagnostic: 'PROFILE_CANDIDATE_NOT_SOURCE_PROVEN',
+      status: 'unresolved_without_source_proof',
+      profileId: null,
+      diagnoses: [evidenceBoundDiagnosis('PROFILE_SOURCE_PROOF_MISSING', profileEvidence)],
     },
     inactiveClosure: {
-      status: profileNeedsInactiveListening(paper.profileCandidate.candidateProfileId)
-        ? (codes.has('INACTIVE_SOURCE_MISSING') ? 'diagnosed_missing' : 'requires_source_closure')
-        : 'not_applicable_for_profile',
-      diagnostic: profileNeedsInactiveListening(paper.profileCandidate.candidateProfileId)
-        ? (codes.has('INACTIVE_SOURCE_MISSING') ? 'INACTIVE_SOURCE_MISSING' : 'INACTIVE_SOURCE_CLOSURE_NOT_REACHED_AFTER_EARLIER_BLOCK')
-        : null,
+      status: 'unclassified_without_source_proven_profile',
+      diagnoses: [evidenceBoundDiagnosis(
+        'INACTIVE_SOURCE_CLOSURE_UNCLASSIFIED_WITHOUT_SOURCE_PROVEN_PROFILE',
+        profileEvidence,
+      )],
     },
   }
+}
+
+function evidenceBoundCompilerDiagnostics(diagnostics, evidenceRefs) {
+  return diagnostics.map(({ code, disposition, path: diagnosticPath, sourceSpanRefs }) => ({
+    code,
+    disposition,
+    path: diagnosticPath,
+    sourceSpanRefs: [...sourceSpanRefs].sort(),
+    evidenceRefs,
+  })).sort((left, right) => stableStringify(left).localeCompare(stableStringify(right)))
+}
+
+function compilerDerivedFamily(diagnostics) {
+  const familyByPrefix = [
+    ['APPLICATION_', 'application-writing'],
+    ['CONTINUATION_', 'continuation-writing'],
+    ['GRAMMAR_FILL_', 'grammar-fill'],
+    ['READING_', 'reading'],
+    ['SEVEN_CHOICES_', 'seven-choices'],
+    ['CLOZE_', 'cloze'],
+    ['LISTENING_', 'listening'],
+  ]
+  const families = [...new Set(diagnostics.flatMap((item) =>
+    familyByPrefix.filter(([prefix]) => item.code.startsWith(prefix)).map(([, family]) => family),
+  ))].sort()
+  return {
+    status: families.length > 0 ? 'derived_from_compiler_diagnostic_codes' : 'not_derivable_without_registered_source_adapter',
+    families,
+    diagnosticCodes: [...new Set(diagnostics.map((item) => item.code))].sort(),
+  }
+}
+
+function deterministicMeasurement({ request, diagnostics, closure }) {
+  const evidenceByteLength = request.evidenceRefs.reduce((sum, item) => sum + item.byteLength, 0)
+  const diagnosticCodeCount = new Set(diagnostics.map((item) => item.code)).size
+  const sourceSpanRefCount = diagnostics.reduce((sum, item) => sum + item.sourceSpanRefs.length, 0)
+  const closureDiagnosisCount = Object.values(closure).reduce((sum, item) => sum + item.diagnoses.length, 0)
+  const sourceAdapterUnavailable = diagnostics.some((item) => item.code === 'SOURCE_ADAPTER_UNSUPPORTED')
+  const profileUnproven = closure.profile.status === 'unresolved_without_source_proof'
+  const inactiveUnclassified = closure.inactiveClosure.status === 'unclassified_without_source_proven_profile'
+  const workUnits = request.evidenceRefs.length * 4
+    + Math.ceil(evidenceByteLength / 16384)
+    + diagnostics.length * 8
+    + closureDiagnosisCount * 2
+    + sourceSpanRefCount
+  const riskPoints = (sourceAdapterUnavailable ? 8 : 0)
+    + (profileUnproven ? 5 : 0)
+    + (inactiveUnclassified ? 3 : 0)
+    + Math.min(4, diagnosticCodeCount)
+  return {
+    measuredCost: {
+      model: 'ticket-22-frozen-evidence-inspection-units-v1',
+      components: {
+        immutableDocumentCount: request.evidenceRefs.length,
+        immutableEvidenceByteLength: evidenceByteLength,
+        compilerDiagnosticCount: diagnostics.length,
+        compilerDiagnosticCodeCount: diagnosticCodeCount,
+        compilerSourceSpanRefCount: sourceSpanRefCount,
+        closureDiagnosisCount,
+      },
+      inspectionWorkUnits: workUnits,
+    },
+    measuredRisk: {
+      model: 'ticket-22-source-closure-risk-points-v1',
+      factors: {
+        sourceAdapterUnavailable,
+        profileUnproven,
+        inactiveClosureUnclassified: inactiveUnclassified,
+        compilerDiagnosticCodeCount: diagnosticCodeCount,
+      },
+      riskPoints,
+      band: riskPoints >= 12 ? 'high' : riskPoints >= 6 ? 'moderate' : 'low',
+    },
+  }
+}
+
+function assertEvidenceBoundRun(run) {
+  assert.equal(Object.hasOwn(run, 'family'), false, 'Ticket 22 must not copy family counts from the migration manifest')
+  assert.equal(Object.hasOwn(run, 'allowedRecoveryActions'), false, 'Ticket 22 must not mix ledger recovery guesses into compiler recovery')
+  assert.equal(Object.hasOwn(run.closure, 'attachments'), false, 'analysis supplements must not be classified as attachments')
+  for (const diagnostic of run.diagnostics) {
+    assert.ok(
+      diagnostic.sourceSpanRefs.length > 0 || diagnostic.evidenceRefs.length > 0,
+      `compiler diagnostic ${diagnostic.code} must bind source spans or exact evidence`,
+    )
+  }
+  for (const category of Object.values(run.closure)) {
+    for (const diagnosis of category.diagnoses) {
+      assert.ok(diagnosis.evidenceRefs.length > 0, `closure diagnosis ${diagnosis.code} must bind exact evidence`)
+    }
+  }
+  assert.equal(
+    run.measuredCost.model,
+    'ticket-22-frozen-evidence-inspection-units-v1',
+    'Ticket 22 cost must name its deterministic model',
+  )
+  assert.equal(
+    run.measuredRisk.model,
+    'ticket-22-source-closure-risk-points-v1',
+    'Ticket 22 risk must name its deterministic model',
+  )
 }
 
 function buildEvidence({ manifest, ledger, beforeState }) {
@@ -320,41 +432,33 @@ function buildEvidence({ manifest, ledger, beforeState }) {
   const runs = manifest.papers.map((paper) => {
     const queue = queueByPaperId.get(paper.paperId)
     assert.ok(queue, `ledger lacks frozen queue entry for ${paper.paperId}`)
-    const compilation = compileCanonicalPaper(requestForPaper(paper))
-    const diagnostics = compilation.artifacts.normalizationReport.diagnostics
-      .map(({ code, disposition, path: diagnosticPath, sourceSpanRefs }) => ({
-        code,
-        disposition,
-        path: diagnosticPath,
-        sourceSpanRefs: [...sourceSpanRefs].sort(),
-      }))
-      .sort((left, right) => stableStringify(left).localeCompare(stableStringify(right)))
+    const request = requestForPaper(paper)
+    assertProfileCandidateCannotAffectRequest(paper, request)
+    const compilation = compileCanonicalPaper(request)
+    const rawDiagnostics = compilation.artifacts.normalizationReport.diagnostics
+    const diagnostics = evidenceBoundCompilerDiagnostics(rawDiagnostics, request.evidenceRefs)
+    const closure = closureDiagnostic({ evidenceRefs: request.evidenceRefs })
+    const measurement = deterministicMeasurement({
+      request,
+      diagnostics: rawDiagnostics,
+      closure,
+    })
     return {
       paperId: paper.paperId,
       orderKey: queue.orderKey,
       disposition: compilation.disposition,
       authority: compilation.artifacts.normalizationReport.authority,
-      immutableEvidenceRefs: queue.immutableEvidenceRefs,
-      family: Object.fromEntries(Object.entries(paper.families).map(([id, value]) => [id, {
-        groupCount: value.groupCount,
-        objectiveQuestionCount: value.objectiveQuestionCount,
-        questionOwnedAbcdSets: value.questionOwnedAbcdSets,
-      }])),
-      closure: closureDiagnostic({ paper, tree: paper.latestTree, diagnostics }),
+      immutableEvidenceRefs: request.evidenceRefs,
+      compilerRequestDigest: requestFingerprint(request),
+      compilerDerivedFamily: compilerDerivedFamily(rawDiagnostics),
+      closure,
       diagnostics,
       diagnosticDigest: digestJson(diagnostics),
-      allowedRecoveryActions: [...new Set([
-        ...(queue.recoveryActions || []),
-        ...recoveryMechanisms(diagnostics),
-      ])].sort(),
-      measuredWork: {
-        compilerInputDocumentCount: requestForPaper(paper).evidence.documents.length,
-        latestFileCount: paper.latestTree.fileCount,
-        latestByteLength: paper.latestTree.byteLength,
-        diagnosticCount: diagnostics.length,
-      },
+      compilerDerivedRecoveryActions: recoveryMechanisms(rawDiagnostics),
+      ...measurement,
     }
   })
+  for (const run of runs) assertEvidenceBoundRun(run)
   const dispositionCounts = Object.fromEntries(
     ['ready', 'needs_review', 'unsupported', 'incomplete_source', 'answer_conflict']
       .map((disposition) => [disposition, runs.filter((run) => run.disposition === disposition).length]),
@@ -363,9 +467,9 @@ function buildEvidence({ manifest, ledger, beforeState }) {
   const diagnosticCodeCounts = Object.fromEntries([...new Set(runs.flatMap((run) => run.diagnostics.map((item) => item.code)))]
     .sort()
     .map((code) => [code, runs.reduce((count, run) => count + run.diagnostics.filter((item) => item.code === code).length, 0)]))
-  const mechanismCounts = Object.fromEntries([...new Set(runs.flatMap((run) => run.allowedRecoveryActions))]
+  const mechanismCounts = Object.fromEntries([...new Set(runs.flatMap((run) => run.compilerDerivedRecoveryActions))]
     .sort()
-    .map((mechanism) => [mechanism, runs.filter((run) => run.allowedRecoveryActions.includes(mechanism)).map((run) => run.paperId)]))
+    .map((mechanism) => [mechanism, runs.filter((run) => run.compilerDerivedRecoveryActions.includes(mechanism)).map((run) => run.paperId)]))
   return {
     schemaVersion: 'paper-canonical-full-corpus-zero-write-dry-run-v1',
     ticket: '22-full-corpus-zero-write-dry-run',
