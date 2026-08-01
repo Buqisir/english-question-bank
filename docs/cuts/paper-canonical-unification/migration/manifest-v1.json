@@ -20286,11 +20286,11 @@
   "stateProof": {
     "mode": "read_only_census",
     "comparedState": "latest trees, import configs, question-bank database bytes, and canonical authority refs",
-    "beforeStateDigest": "sha256:1f3caae0f6383c5e650d5e361fad78424853c911038ba2fee0a4373ca0a5b8f6",
-    "afterStateDigest": "sha256:1f3caae0f6383c5e650d5e361fad78424853c911038ba2fee0a4373ca0a5b8f6",
+    "beforeStateDigest": "sha256:adf24d2edb0366a2a4286cabc3c661a5cee6f9d0c014f49e29e42174e48c9048",
+    "afterStateDigest": "sha256:adf24d2edb0366a2a4286cabc3c661a5cee6f9d0c014f49e29e42174e48c9048",
     "equal": true,
     "mutationCount": 0,
     "writesPerformedByCensus": []
   },
-  "manifestDigest": "sha256:c800e5e7753cd1171b2e973abe53b2a2db8f401be67e5997fba794fb0a882c0a"
+  "manifestDigest": "sha256:9bcddee5a927505143b97c07981ef915cafab1a584765cb504ad36b4cbb18eca"
 }

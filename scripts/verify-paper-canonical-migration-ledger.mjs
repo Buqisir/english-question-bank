@@ -7,7 +7,9 @@
  * The default action is a read-only check. `--write` is the only action that
  * writes, and it writes only the two checked-in migration artifacts named
  * below. It never writes paper-assets, the question-bank database, or a
- * publication/version tree.
+ * publication/version tree. `--allow-head-move` is an explicit regeneration
+ * escape hatch after the fixed-point implementation commit; the scoped input
+ * diff check remains active.
  */
 
 import { execFileSync } from 'node:child_process'
@@ -857,8 +859,9 @@ function buildCorpusState({ latestIds, configFiles, dbSnapshot, authority }) {
       ? { path: dbSnapshot.path, byteLength: dbSnapshot.byteLength, sha256: dbSnapshot.sha256 }
       : { path: dbSnapshot.path, present: false },
     authority: {
-      manifest: authority.manifest.authorityDigest,
-      consumers: authority.consumers.map((consumer) => `${consumer.id}:${consumer.contractDigest}`).sort(),
+      manifest: `${authority.manifest.fileSha256}:${authority.manifest.authorityDigest}`,
+      profiles: authority.profileArtifacts.map((profile) => `${profile.id}:${profile.fileSha256}:${profile.authorityDigest}`).sort(),
+      consumers: authority.consumers.map((consumer) => `${consumer.id}:${consumer.sha256}:${consumer.contractDigest}`).sort(),
     },
   }
   return {
@@ -1250,8 +1253,9 @@ function run() {
   const args = new Set(process.argv.slice(2))
   const write = args.has('--write')
   const strictPreflight = args.has('--preflight')
-  const allowDirty = !strictPreflight && (write || args.has('--allow-dirty'))
-  const state = gitPreflight({ strictHead: strictPreflight || write, allowDirty })
+  const allowHeadMove = args.has('--allow-head-move')
+  const allowDirty = !strictPreflight && args.has('--allow-dirty')
+  const state = gitPreflight({ strictHead: strictPreflight || (write && !allowHeadMove), allowDirty })
   if (!existsSync(abs(DB_REL))) {
     console.log('SKIP migration ledger: data/question-bank.sqlite is absent')
     process.exitCode = 2
