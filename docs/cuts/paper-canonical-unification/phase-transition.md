@@ -1,16 +1,16 @@
 # Paper canonical unification phase transition
 
 Status: active
-Previous phase: owner-approval
-Current phase: implementation
-Next on PASS: implementation
+Previous phase: to-tickets
+Current phase: owner-approval
+Next on PASS: owner-approval
 Terminal: no
 
 Wayfinder map: `docs/cuts/paper-canonical-unification/wayfinder/map.md`
 Current map binding: verified
-Current map binding commit: `308df2dcb65033db22bf3aeb065a00989b02a2b4`
+Current map binding commit: `83e83de80a45df6c5dec6bf5e6a85db03d0ac53a`
 Current map artifact: `docs/cuts/paper-canonical-unification/wayfinder/map.md`
-Current map artifact SHA-256: `83e733e665bbd9f8d6dcd4037854a2b2f7baa43259f577235ea5eb8b00d88f19`
+Current map artifact SHA-256: `24da6a4cd7a75f225f09c323ea6ef2b5aa5c354221729edf33c8e4c758726521`
 Wayfinder status: done
 Wayfinder provenance: verified
 Wayfinder entry skill: `/Users/huangxuewei/.claude/skills/wayfinder/SKILL.md`
@@ -31,21 +31,24 @@ Accepted spec SHA-256: `c6cbbe778d94e1205612fa5ac535e2198020317b09064190fec1d0b6
 To-tickets provenance: verified
 To-tickets entry skill: `/Users/huangxuewei/.claude/skills/to-tickets/SKILL.md`
 To-tickets source HEAD: `b41ad774bca35864fce21aa80a19d0dbfcb9e91c`
-To-tickets result commit: `2dd684e9d70a4e4e8cb7967eab090952cb54e291`
+To-tickets result commit: `83e83de80a45df6c5dec6bf5e6a85db03d0ac53a`
 To-tickets artifact: `docs/cuts/paper-canonical-unification/ticket-set-manifest.md`
-To-tickets artifact SHA-256: `0fab79f5161cbe563552c17891f08292d45887b4a3f0bc008db72a20632b745f`
+To-tickets artifact SHA-256: `3ad05df6c5b79b95ded495cf000981322a70d24d09c8d6c1dbdc905665a23ab6`
 To-tickets outcome: complete
 Ticket-set binding: verified
 Ticket-set manifest: `docs/cuts/paper-canonical-unification/ticket-set-manifest.md`
-Ticket-set manifest SHA-256: `0fab79f5161cbe563552c17891f08292d45887b4a3f0bc008db72a20632b745f`
+Ticket-set manifest SHA-256: `3ad05df6c5b79b95ded495cf000981322a70d24d09c8d6c1dbdc905665a23ab6`
 Ticket-set accepted-spec SHA-256: `c6cbbe778d94e1205612fa5ac535e2198020317b09064190fec1d0b6660d868b`
-Owner ticket-granularity approval: verified
-Owner approval actor: owner
-Owner approval action: approve-ticket-granularity
-Owner approval result commit: `308df2dcb65033db22bf3aeb065a00989b02a2b4`
-Owner approval record: `docs/cuts/paper-canonical-unification/owner-approval.md`
-Owner approval ticket-set manifest SHA-256: `0fab79f5161cbe563552c17891f08292d45887b4a3f0bc008db72a20632b745f`
-Implementation dispatch: allowed
+Owner ticket-granularity approval: pending
+Implementation dispatch: forbidden
+
+Measured-replan granularity approval: verified
+Measured-replan approval actor: owner
+Measured-replan approval source task: `019fbdec-6f5a-7381-a0b7-53beb390b387`
+Measured-replan publication source HEAD: `7aeb5a963eff14e103c1645a600d72d8705ef53e`
+Measured-replan publication result commit: `83e83de80a45df6c5dec6bf5e6a85db03d0ac53a`
+Measured-replan manifest SHA-256: `3ad05df6c5b79b95ded495cf000981322a70d24d09c8d6c1dbdc905665a23ab6`
+Measured-replan exact manifest-digest approval: pending
 
 ## Preserved results
 
@@ -60,20 +63,20 @@ Ticket 01's preserved accepted result commit remains
 
 ## Current route
 
-The owner-approved current set preserves completed Tickets 01–15 and publishes
-replacement Tickets 16–23. The former Tickets 16–71, their manifest, and their
-approval remain exact-byte historical evidence under
+The current set preserves completed Tickets 01–23 and publishes the explicitly
+approved measured route Tickets 24–53. The former Tickets 16–71, their
+manifest, and their approval remain exact-byte historical evidence under
 `docs/cuts/paper-canonical-unification/history/2026-07-26-superseded-ticket-set/`
 and are never parallel dispatch authority.
 
-The owner approved exact replacement manifest SHA-256
-`0fab79f5161cbe563552c17891f08292d45887b4a3f0bc008db72a20632b745f`
-and explicitly resumed only to record that approval. All four implementation
-gates are now bound for verification. Ticket 16 is the sole implementation
-frontier; this approval-recording task dispatches neither Ticket 16 nor a
-coordinator.
+The owner explicitly approved Ticket 23's measured granularity as Tickets
+24–53 with total count 53. Commit
+`83e83de80a45df6c5dec6bf5e6a85db03d0ac53a` publishes that exact approved
+route without implementing Ticket 24.
 
-Ticket 22 is zero-write diagnostics only and cannot repair corpus problems.
-Ticket 23 may only propose follow-on tickets from independently reviewed
-measured results and must wait for fresh explicit owner approval before
-publishing them.
+The new exact manifest SHA-256
+`3ad05df6c5b79b95ded495cf000981322a70d24d09c8d6c1dbdc905665a23ab6`
+has not been approved. The initiative therefore pauses at `owner-approval`;
+implementation and coordinator dispatch are forbidden until the owner binds
+that exact digest and all four implementation gates verify. Ticket 24 is the
+sole possible implementation frontier after those gates pass.
