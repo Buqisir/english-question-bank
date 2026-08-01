@@ -15,9 +15,15 @@ import assert from 'node:assert/strict'
 import { execFileSync, spawnSync } from 'node:child_process'
 import { createHash } from 'node:crypto'
 import {
+  cpSync,
   existsSync,
+  lstatSync,
+  mkdirSync,
+  mkdtempSync,
   readFileSync,
   readdirSync,
+  renameSync,
+  rmSync,
   statSync,
   writeFileSync,
 } from 'node:fs'
@@ -39,7 +45,19 @@ const TICKET_FIXED_POINT = '46c3a1717c1fa3b9496b8dc63a04f07dba923c84'
 const PAPER_ID = 'paper-2026-i'
 const DRY_RUN_REL = 'docs/cuts/paper-canonical-unification/migration/full-corpus-zero-write-dry-run-v1.json'
 const REQUEST_REL = 'test-fixtures/paper-import/paper-2026-i-canonical-pilot/canonical-evidence/canonical-import-request-v35.json'
-const EVIDENCE_REL = 'docs/cuts/paper-canonical-unification/migration/paper-2026-i-source-adapter-pilot-v1.json'
+const SCRIPT_REL = 'scripts/verify-paper-canonical-source-adapter-pilot.mjs'
+const PREDECESSOR_EVIDENCE_REL = 'docs/cuts/paper-canonical-unification/migration/paper-2026-i-source-adapter-pilot-v1.json'
+const PREDECESSOR_EVIDENCE_SHA256 = 'daafad2512d33b767014e8dea259d7ca2ce19218d15e505e8d545d3c8579411e'
+const EVIDENCE_REL = 'docs/cuts/paper-canonical-unification/migration/paper-2026-i-source-adapter-pilot-v2.json'
+const EXACT_EVIDENCE_ROOT_REL = '.scratch/paper-canonical-ticket-24-source-adapter-pilot'
+const EXACT_CANDIDATE_SCHEMA = 'paper-canonical-source-adapter-pilot-exact-candidate-v1'
+const EXACT_SEAL_SCHEMA = 'paper-canonical-source-adapter-pilot-exact-candidate-seal-v1'
+const DIRECT_CANDIDATE_MODULES = Object.freeze([
+  SCRIPT_REL,
+  'shared/paper-canonical/authority.mjs',
+  'shared/paper-canonical/compiler.mjs',
+  'server/paper-canonical/importRequest.mjs',
+])
 const IMMUTABLE_ROOTS = Object.freeze([
   'app/public/paper-assets',
   'data/question-bank.sqlite',
@@ -106,6 +124,42 @@ function readJson(rel) {
 
 function git(args) {
   return execFileSync('git', args, { cwd: ROOT, encoding: 'utf8' }).trim()
+}
+
+function currentHead() {
+  return git(['rev-parse', 'HEAD'])
+}
+
+function currentTree() {
+  return git(['rev-parse', 'HEAD^{tree}'])
+}
+
+function assertCleanWorktree(label) {
+  assert.equal(
+    git(['status', '--porcelain', '--untracked-files=all']),
+    '',
+    label + ' requires a clean tracked candidate',
+  )
+}
+
+function directCandidateModules() {
+  return DIRECT_CANDIDATE_MODULES.map((relativePath) => ({
+    path: relativePath,
+    sha256: sha256(readFileSync(abs(relativePath))),
+  }))
+}
+
+function predecessorEvidence() {
+  const bytes = readFileSync(abs(PREDECESSOR_EVIDENCE_REL))
+  assert.equal(
+    sha256(bytes),
+    PREDECESSOR_EVIDENCE_SHA256,
+    'the initial Ticket 24 evidence record is immutable and must remain byte-identical',
+  )
+  return {
+    path: PREDECESSOR_EVIDENCE_REL,
+    sha256: PREDECESSOR_EVIDENCE_SHA256,
+  }
 }
 
 function assertPreflight() {
@@ -356,8 +410,299 @@ function comparableMeasurement({ documents, compilation }) {
   }
 }
 
+function exactEvidenceRoot(head) {
+  return abs(path.posix.join(EXACT_EVIDENCE_ROOT_REL, head))
+}
+
+function exactFail(code, message) {
+  const error = new Error('Ticket 24 exact-candidate evidence rejected: ' + message)
+  error.code = code
+  throw error
+}
+
+function exactAssert(condition, code, message) {
+  if (!condition) exactFail(code, message)
+}
+
+function assertExactDirectory(rootDir, label) {
+  exactAssert(existsSync(rootDir), 'T24_EXACT_EVIDENCE_MISSING', label + ' is missing')
+  const stat = lstatSync(rootDir)
+  exactAssert(
+    stat.isDirectory() && !stat.isSymbolicLink(),
+    'T24_EXACT_EVIDENCE_PATH_INVALID',
+    label + ' must be a real directory',
+  )
+}
+
+function listExactEvidenceFiles(rootDir, prefix = '') {
+  const files = []
+  for (const entry of readdirSync(path.join(rootDir, prefix), { withFileTypes: true })
+    .sort((left, right) => left.name.localeCompare(right.name))) {
+    const relativePath = prefix
+      ? path.posix.join(prefix, entry.name)
+      : entry.name
+    const filePath = path.join(rootDir, relativePath)
+    const stat = lstatSync(filePath)
+    exactAssert(
+      !stat.isSymbolicLink(),
+      'T24_EXACT_EVIDENCE_PATH_INVALID',
+      'exact-candidate evidence may not contain a symbolic link: ' + relativePath,
+    )
+    if (stat.isDirectory()) {
+      files.push(...listExactEvidenceFiles(rootDir, relativePath))
+    } else if (stat.isFile()) {
+      files.push(relativePath)
+    } else {
+      exactFail(
+        'T24_EXACT_EVIDENCE_PATH_INVALID',
+        'exact-candidate evidence has an unsupported entry: ' + relativePath,
+      )
+    }
+  }
+  return files
+}
+
+function exactFileSnapshot(rootDir, { omitSeal = false } = {}) {
+  return listExactEvidenceFiles(rootDir)
+    .filter((relativePath) => !omitSeal || relativePath !== 'seal.json')
+    .map((relativePath) => ({
+      path: relativePath,
+      sha256: sha256(readFileSync(path.join(rootDir, relativePath))),
+    }))
+}
+
+function readExactJson(filePath, label) {
+  exactAssert(existsSync(filePath), 'T24_EXACT_EVIDENCE_MISSING', label + ' is missing')
+  try {
+    return JSON.parse(readFileSync(filePath, 'utf8'))
+  } catch (error) {
+    exactFail(
+      'T24_EXACT_EVIDENCE_INVALID',
+      label + ' is not readable JSON: ' + error.message,
+    )
+  }
+}
+
+function buildExactCandidateRecord(head) {
+  const evidenceBytes = readFileSync(abs(EVIDENCE_REL))
+  const evidence = JSON.parse(evidenceBytes)
+  return {
+    schemaVersion: EXACT_CANDIDATE_SCHEMA,
+    ticket: '24-costed-immutable-source-adapter-pilot',
+    head,
+    tree: currentTree(),
+    branch: EXPECTED_BRANCH,
+    evidence: {
+      path: EVIDENCE_REL,
+      sha256: sha256(evidenceBytes),
+      evidenceDigest: evidence.evidenceDigest,
+    },
+    directCandidateModules: directCandidateModules(),
+  }
+}
+
+function buildExactSeal(rootDir, head) {
+  return {
+    schemaVersion: EXACT_SEAL_SCHEMA,
+    head,
+    candidate: {
+      path: 'candidate.json',
+      sha256: sha256(readFileSync(path.join(rootDir, 'candidate.json'))),
+    },
+    evidence: {
+      path: 'evidence.json',
+      sha256: sha256(readFileSync(path.join(rootDir, 'evidence.json'))),
+    },
+    files: exactFileSnapshot(rootDir, { omitSeal: true }),
+  }
+}
+
+function writeExactSeal(rootDir, head) {
+  writeFileSync(
+    path.join(rootDir, 'seal.json'),
+    JSON.stringify(buildExactSeal(rootDir, head), null, 2) + '\n',
+  )
+}
+
+function assertExactCandidateEvidence({
+  rootDir,
+  expectedHead,
+  requireOfficialPath = true,
+}) {
+  assertCleanWorktree('Ticket 24 exact-candidate evidence')
+  const actualHead = currentHead()
+  exactAssert(
+    actualHead === expectedHead,
+    'T24_EXACT_CANDIDATE_HEAD_INVALID',
+    'current HEAD does not match the sealed candidate',
+  )
+  if (requireOfficialPath) {
+    exactAssert(
+      path.resolve(rootDir) === exactEvidenceRoot(expectedHead),
+      'T24_EXACT_EVIDENCE_PATH_INVALID',
+      'evidence root is not the exact-HEAD official directory',
+    )
+  }
+  assertExactDirectory(rootDir, 'exact-candidate evidence root')
+  const candidatePath = path.join(rootDir, 'candidate.json')
+  const evidencePath = path.join(rootDir, 'evidence.json')
+  const sealPath = path.join(rootDir, 'seal.json')
+  const candidate = readExactJson(candidatePath, 'candidate.json')
+  exactAssert(
+    candidate?.schemaVersion === EXACT_CANDIDATE_SCHEMA,
+    'T24_EXACT_CANDIDATE_INVALID',
+    'candidate.json has an unsupported schema',
+  )
+  exactAssert(
+    candidate.head === expectedHead,
+    'T24_EXACT_CANDIDATE_HEAD_INVALID',
+    'candidate.json HEAD is stale or wrong',
+  )
+  exactAssert(
+    candidate.tree === currentTree(),
+    'T24_EXACT_CANDIDATE_TREE_INVALID',
+    'candidate.json tree does not match the exact current candidate',
+  )
+  exactAssert(
+    candidate.branch === EXPECTED_BRANCH,
+    'T24_EXACT_CANDIDATE_INVALID',
+    'candidate.json branch does not match the approved Ticket 24 worktree',
+  )
+  const checkedInEvidence = readFileSync(abs(EVIDENCE_REL))
+  const sealedEvidence = readFileSync(evidencePath)
+  exactAssert(
+    sealedEvidence.equals(checkedInEvidence),
+    'T24_EXACT_EVIDENCE_INVALID',
+    'sealed evidence bytes do not match the checked-in Ticket 24 successor record',
+  )
+  const parsedEvidence = readExactJson(evidencePath, 'evidence.json')
+  exactAssert(
+    candidate.evidence?.path === EVIDENCE_REL
+      && candidate.evidence?.sha256 === sha256(checkedInEvidence)
+      && candidate.evidence?.evidenceDigest === parsedEvidence.evidenceDigest,
+    'T24_EXACT_CANDIDATE_INVALID',
+    'candidate.json does not bind the checked-in measurement record',
+  )
+  exactAssert(
+    stableStringify(candidate.directCandidateModules) === stableStringify(directCandidateModules()),
+    'T24_EXACT_CANDIDATE_MODULE_INVALID',
+    'candidate.json direct compiler/verifier module digests drifted',
+  )
+  const seal = readExactJson(sealPath, 'seal.json')
+  exactAssert(
+    stableStringify(seal) === stableStringify(buildExactSeal(rootDir, expectedHead)),
+    'T24_EXACT_EVIDENCE_SEAL_INVALID',
+    'seal.json does not bind every exact-candidate evidence file',
+  )
+  return {
+    rootDir: path.resolve(rootDir),
+    head: expectedHead,
+    tree: candidate.tree,
+  }
+}
+
+function rewriteCandidateAndSeal(rootDir, expectedHead, mutate) {
+  const candidatePath = path.join(rootDir, 'candidate.json')
+  const candidate = readExactJson(candidatePath, 'candidate.json')
+  mutate(candidate)
+  writeFileSync(candidatePath, JSON.stringify(candidate, null, 2) + '\n')
+  writeExactSeal(rootDir, expectedHead)
+}
+
+function assertExactCandidateTamperRejection({ rootDir, expectedHead }) {
+  const probeParent = path.join(path.dirname(rootDir), '.probes')
+  mkdirSync(probeParent, { recursive: true })
+  const probeRoot = mkdtempSync(path.join(probeParent, expectedHead.slice(0, 12) + '-'))
+  const reject = (caseId, mutate) => {
+    const candidateRoot = path.join(probeRoot, caseId)
+    cpSync(rootDir, candidateRoot, { recursive: true })
+    try {
+      mutate(candidateRoot)
+      let rejected = false
+      try {
+        assertExactCandidateEvidence({
+          rootDir: candidateRoot,
+          expectedHead,
+          requireOfficialPath: false,
+        })
+      } catch (error) {
+        rejected = typeof error?.code === 'string'
+          && error.code.startsWith('T24_EXACT_')
+      }
+      exactAssert(
+        rejected,
+        'T24_EXACT_CANDIDATE_TAMPER_ACCEPTED',
+        'mutation probe unexpectedly passed: ' + caseId,
+      )
+    } finally {
+      rmSync(candidateRoot, { recursive: true, force: true })
+    }
+  }
+  try {
+    reject('candidate-head-resealed', (candidateRoot) => {
+      rewriteCandidateAndSeal(candidateRoot, expectedHead, (candidate) => {
+        candidate.head = '0'.repeat(40)
+      })
+    })
+    reject('candidate-tree-resealed', (candidateRoot) => {
+      rewriteCandidateAndSeal(candidateRoot, expectedHead, (candidate) => {
+        candidate.tree = '0'.repeat(40)
+      })
+    })
+    reject('verifier-digest-resealed', (candidateRoot) => {
+      rewriteCandidateAndSeal(candidateRoot, expectedHead, (candidate) => {
+        candidate.directCandidateModules[0].sha256 = '0'.repeat(64)
+      })
+    })
+    reject('measurement-bytes-resealed', (candidateRoot) => {
+      writeFileSync(
+        path.join(candidateRoot, 'evidence.json'),
+        readFileSync(path.join(candidateRoot, 'evidence.json'), 'utf8') + '\n',
+      )
+      writeExactSeal(candidateRoot, expectedHead)
+    })
+  } finally {
+    rmSync(probeRoot, { recursive: true, force: true })
+  }
+}
+
+function sealExactCandidateEvidence() {
+  assertCleanWorktree('Ticket 24 exact-candidate sealing')
+  const head = currentHead()
+  const rootDir = exactEvidenceRoot(head)
+  const parent = path.dirname(rootDir)
+  mkdirSync(parent, { recursive: true })
+  if (existsSync(rootDir)) {
+    assertExactCandidateEvidence({ rootDir, expectedHead: head })
+    exactFail(
+      'T24_EXACT_EVIDENCE_ALREADY_SEALED',
+      'an immutable exact-candidate root already exists for this HEAD',
+    )
+  }
+  const stagingRoot = mkdtempSync(path.join(parent, '.staging-' + head.slice(0, 12) + '-'))
+  try {
+    const candidate = buildExactCandidateRecord(head)
+    writeFileSync(path.join(stagingRoot, 'HEAD.txt'), head + '\n')
+    writeFileSync(path.join(stagingRoot, 'candidate.json'), JSON.stringify(candidate, null, 2) + '\n')
+    writeFileSync(path.join(stagingRoot, 'evidence.json'), readFileSync(abs(EVIDENCE_REL)))
+    writeExactSeal(stagingRoot, head)
+    assertExactCandidateEvidence({
+      rootDir: stagingRoot,
+      expectedHead: head,
+      requireOfficialPath: false,
+    })
+    assertExactCandidateTamperRejection({ rootDir: stagingRoot, expectedHead: head })
+    renameSync(stagingRoot, rootDir)
+    return assertExactCandidateEvidence({ rootDir, expectedHead: head })
+  } catch (error) {
+    rmSync(stagingRoot, { recursive: true, force: true })
+    throw error
+  }
+}
+
 function buildEvidence({ beforeState }) {
   const baseline = ticket22Baseline()
+  const predecessor = predecessorEvidence()
   const adapter = registeredEnvelope()
   const { request, documents, sourceEnvelope } = loadPilotRequest()
   assertEnvelopeFailsClosed(request)
@@ -417,7 +762,7 @@ function buildEvidence({ beforeState }) {
     ),
   ]
   const result = {
-    schemaVersion: 'paper-canonical-source-adapter-pilot-v1',
+    schemaVersion: 'paper-canonical-source-adapter-pilot-v2',
     ticket: '24-costed-immutable-source-adapter-pilot',
     binding: {
       ticketFixedPoint: TICKET_FIXED_POINT,
@@ -428,6 +773,14 @@ function buildEvidence({ beforeState }) {
       ticket22EvidenceSha256: baseline.evidenceSha256,
       sourceEnvelopeRequest: REQUEST_REL,
       sourceEnvelopeRequestSha256: sha256(readFileSync(abs(REQUEST_REL))),
+      initialPilotEvidence: predecessor,
+    },
+    candidateInputs: {
+      verificationProgram: {
+        path: SCRIPT_REL,
+        sha256: sha256(readFileSync(abs(SCRIPT_REL))),
+      },
+      directCandidateModules: directCandidateModules(),
     },
     ticket22Baseline: baseline,
     sourceEnvelope: {
@@ -482,11 +835,15 @@ function buildEvidence({ beforeState }) {
 }
 
 function main() {
-  const writeEvidence = process.argv.includes('--write-evidence')
+  const command = process.argv[2] || null
   assert.equal(
     process.argv.length,
-    writeEvidence ? 3 : 2,
-    'Usage: node scripts/verify-paper-canonical-source-adapter-pilot.mjs [--write-evidence]',
+    command ? 3 : 2,
+    'Usage: node scripts/verify-paper-canonical-source-adapter-pilot.mjs [--write-evidence|--seal-exact-head|--verify-exact-head]',
+  )
+  assert.ok(
+    [null, '--write-evidence', '--seal-exact-head', '--verify-exact-head'].includes(command),
+    'unknown Ticket 24 source-adapter pilot command',
   )
   assertPreflight()
   const beforeState = immutableState()
@@ -504,7 +861,7 @@ function main() {
     evidenceDigest: digestJson(evidence),
   }
   const bytes = Buffer.from(`${JSON.stringify(stableValue(sealedEvidence), null, 2)}\n`)
-  if (writeEvidence) {
+  if (command === '--write-evidence') {
     writeFileSync(abs(EVIDENCE_REL), bytes)
     console.log(`WROTE ${EVIDENCE_REL}`)
   } else {
@@ -519,6 +876,22 @@ function main() {
       bytes,
       'checked-in Ticket 24 pilot evidence drifted',
     )
+  }
+  if (command === '--seal-exact-head') {
+    const sealed = sealExactCandidateEvidence()
+    console.log('SEALED ' + sealed.rootDir)
+  }
+  if (command === '--verify-exact-head') {
+    const head = currentHead()
+    const sealed = assertExactCandidateEvidence({
+      rootDir: exactEvidenceRoot(head),
+      expectedHead: head,
+    })
+    assertExactCandidateTamperRejection({
+      rootDir: sealed.rootDir,
+      expectedHead: sealed.head,
+    })
+    console.log('SEALED-CANDIDATE PASS ' + sealed.head)
   }
   console.log(
     `PASS source-adapter pilot fail-closed: ${sealedEvidence.measuredCost.inspectionWorkUnits} units > ${CAPACITY.inspectionWorkUnits} approved`,
