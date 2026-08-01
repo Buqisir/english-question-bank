@@ -1,16 +1,16 @@
 # Paper canonical unification phase transition
 
 Status: active
-Previous phase: to-tickets
-Current phase: owner-approval
-Next on PASS: owner-approval
+Previous phase: owner-approval
+Current phase: implementation
+Next on PASS: implementation
 Terminal: no
 
 Wayfinder map: `docs/cuts/paper-canonical-unification/wayfinder/map.md`
 Current map binding: verified
-Current map binding commit: `bba15bc5353e13cef7c59d932bdcab9d12b6ae7b`
+Current map binding commit: `c4437186080801f05b4403eb0c4fec3e4f2b6047`
 Current map artifact: `docs/cuts/paper-canonical-unification/wayfinder/map.md`
-Current map artifact SHA-256: `f05ba70f11366efa3e6d4bf4c4b1d200d1ea321c1f3db6f319089919277df575`
+Current map artifact SHA-256: `91d2902994ca0c9a7b9ccccf1e88be67bc427ca89756ded6e7aeb9c85a77c162`
 Wayfinder status: done
 Wayfinder provenance: verified
 Wayfinder entry skill: `/Users/huangxuewei/.claude/skills/wayfinder/SKILL.md`
@@ -39,8 +39,13 @@ Ticket-set binding: verified
 Ticket-set manifest: `docs/cuts/paper-canonical-unification/ticket-set-manifest.md`
 Ticket-set manifest SHA-256: `9a595e744fbfaec289a9723ae90ede172d60dce3041c982b5377c05bb8f59377`
 Ticket-set accepted-spec SHA-256: `c6cbbe778d94e1205612fa5ac535e2198020317b09064190fec1d0b6660d868b`
-Owner ticket-granularity approval: pending
-Implementation dispatch: forbidden
+Owner ticket-granularity approval: verified
+Owner approval actor: owner
+Owner approval action: approve-ticket-granularity
+Owner approval result commit: `c4437186080801f05b4403eb0c4fec3e4f2b6047`
+Owner approval record: `docs/cuts/paper-canonical-unification/owner-approval.md`
+Owner approval ticket-set manifest SHA-256: `9a595e744fbfaec289a9723ae90ede172d60dce3041c982b5377c05bb8f59377`
+Implementation dispatch: allowed
 
 Measured-replan granularity approval: verified
 Measured-replan approval actor: owner
@@ -49,7 +54,7 @@ Measured-replan publication source HEAD: `7aeb5a963eff14e103c1645a600d72d8705ef5
 Measured-replan publication result commit: `83e83de80a45df6c5dec6bf5e6a85db03d0ac53a`
 Measured-replan publication manifest SHA-256: `3ad05df6c5b79b95ded495cf000981322a70d24d09c8d6c1dbdc905665a23ab6`
 Measured-replan current manifest SHA-256: `9a595e744fbfaec289a9723ae90ede172d60dce3041c982b5377c05bb8f59377`
-Measured-replan exact manifest-digest approval: pending
+Measured-replan exact manifest-digest approval: verified
 
 ## Preserved results
 
@@ -76,11 +81,14 @@ The owner explicitly approved Ticket 23's measured granularity as Tickets
 route without implementing Ticket 24.
 
 The new exact manifest SHA-256
-`9a595e744fbfaec289a9723ae90ede172d60dce3041c982b5377c05bb8f59377`
-has not been approved. Fresh owner-attached `$to-tickets` result commit
-`bba15bc5353e13cef7c59d932bdcab9d12b6ae7b` independently verifies and binds
-the exact approved ticket set without changing Tickets 24–53. Publication
-commit `83e83de80a45df6c5dec6bf5e6a85db03d0ac53a` remains historical publication
-evidence and is not recorded as `$to-tickets` provenance. The initiative now
-pauses truthfully at `owner-approval`; implementation and coordinator dispatch
-remain forbidden. Ticket 24 must not begin.
+`9a595e744fbfaec289a9723ae90ede172d60dce3041c982b5377c05bb8f59377` is
+approved by the canonical owner-approval record committed in
+`c4437186080801f05b4403eb0c4fec3e4f2b6047`. Fresh owner-attached
+`$to-tickets` result commit `bba15bc5353e13cef7c59d932bdcab9d12b6ae7b`
+independently verifies and binds the exact approved ticket set without
+changing Tickets 24–53. Publication commit
+`83e83de80a45df6c5dec6bf5e6a85db03d0ac53a` remains historical publication
+evidence and is not recorded as `$to-tickets` provenance. All four
+implementation gates now verify; Ticket 24 is the sole implementation
+frontier, and this approval-recording task does not begin it or start a
+coordinator.
