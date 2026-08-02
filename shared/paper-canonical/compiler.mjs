@@ -28,6 +28,9 @@ import {
   inspectTicket26LegacyEnvelopeSource,
   ticket26LegacyCompilerDocumentsMatch,
 } from '../../server/paper-canonical/legacyTicket26SourceAdapter.mjs'
+import {
+  isRegisteredConfirmedCanonicalHistoricalReplayCapability,
+} from '../../server/paper-canonical/registeredConfirmedCanonicalAdmission.mjs'
 import { validateReadingContract } from './reading.mjs'
 import { validateSevenChoicesContract } from './sevenChoices.mjs'
 import { cloneJson, digestJson, exactKeys, isRecordValue, sha256, stableStringify, withoutKey } from './stable.mjs'
@@ -54,13 +57,22 @@ function sameAuthorityRef(left, right) {
   )
 }
 
-function trustedLegacyCaptureCandidateAuthorityFor(authority) {
-  return trustedLegacyCaptureCandidateAuthorities.find((candidate) =>
+function trustedLegacyCaptureCandidateAuthorityFor(
+  authority,
+  { allowsHistoricalReplay = false } = {},
+) {
+  const candidates = allowsHistoricalReplay
+    ? trustedLegacyCaptureCandidateAuthorities
+    : [trustedLegacyCaptureCandidateAuthorityRef]
+  return candidates.find((candidate) =>
     sameAuthorityRef(authority, candidate)) || null
 }
 
-function legacySourceAdapterVersionForAuthority(authority) {
-  return authority?.manifestVersion === '41' ? '3' : '4'
+function legacySourceAdapterVersionForAuthority(
+  authority,
+  { allowsHistoricalReplay = false } = {},
+) {
+  return authority?.manifestVersion === '41' && allowsHistoricalReplay ? '3' : '4'
 }
 
 function diagnostic(code, disposition, path, message, sourceSpanRefs = []) {
@@ -2968,14 +2980,23 @@ function blockedResult(disposition, capture, authority, diagnostics, records = [
  * exact authority reference; profiles, adapters, renderers, storage, and
  * caller mode are deliberately not caller-selectable.
  */
-export function compileCanonicalPaper(request) {
+export function compileCanonicalPaper(
+  request,
+  { historicalReplayCapability = null } = {},
+) {
+  const allowsHistoricalReplay =
+    isRegisteredConfirmedCanonicalHistoricalReplayCapability(
+      historicalReplayCapability,
+    )
   const { documents, diagnostics } = captureRequestEvidence(request)
   const requestedLegacyAuthority = trustedLegacyCaptureCandidateAuthorityFor(
     request?.authority,
+    { allowsHistoricalReplay },
   )
   const parsed = parseFixtureEvidence(documents, diagnostics, {
     legacySourceAdapterVersion: legacySourceAdapterVersionForAuthority(
       requestedLegacyAuthority,
+      { allowsHistoricalReplay },
     ),
   })
   const capture = buildSourceCapture(documents, parsed, diagnostics)
@@ -2990,7 +3011,10 @@ export function compileCanonicalPaper(request) {
     && closure.authorityRef.manifestDigest
       === trustedDocxCandidateAuthorityRef.manifestDigest
   const acceptsTrustedLegacyCaptureCandidate = request?.[trustedLegacyCaptureCandidateCompile] === true
-    && Boolean(trustedLegacyCaptureCandidateAuthorityFor(closure.authorityRef))
+    && Boolean(trustedLegacyCaptureCandidateAuthorityFor(
+      closure.authorityRef,
+      { allowsHistoricalReplay },
+    ))
   if (
     closure.authorityRef.manifestDigest !== canonicalAuthorityRef.manifestDigest
     && !acceptsTrustedDocxCandidate
@@ -3101,8 +3125,15 @@ function compileTrustedDocxCandidate(request) {
 function compileTrustedLegacyCaptureCandidate(
   request,
   authority = trustedLegacyCaptureCandidateAuthorityRef,
+  historicalReplayCapability = null,
 ) {
-  const trustedAuthority = trustedLegacyCaptureCandidateAuthorityFor(authority)
+  const allowsHistoricalReplay =
+    isRegisteredConfirmedCanonicalHistoricalReplayCapability(
+      historicalReplayCapability,
+    )
+  const trustedAuthority = trustedLegacyCaptureCandidateAuthorityFor(authority, {
+    allowsHistoricalReplay,
+  })
   if (!trustedAuthority) {
     throw new Error('Trusted legacy Candidate compilation requires one registered authority')
   }
@@ -3110,7 +3141,7 @@ function compileTrustedLegacyCaptureCandidate(
     ...request,
     authority: trustedAuthority,
     [trustedLegacyCaptureCandidateCompile]: true,
-  })
+  }, { historicalReplayCapability })
 }
 
 const trustedDocxCandidateSchemaVersion = 'trusted-docx-import-candidate-v1'
@@ -3268,8 +3299,15 @@ function isTrustedLegacyCaptureCandidateShape(candidate) {
 function trustedLegacyCaptureCandidateFromBytes(
   sourceBytes,
   authority = trustedLegacyCaptureCandidateAuthorityRef,
+  historicalReplayCapability = null,
 ) {
-  const trustedAuthority = trustedLegacyCaptureCandidateAuthorityFor(authority)
+  const allowsHistoricalReplay =
+    isRegisteredConfirmedCanonicalHistoricalReplayCapability(
+      historicalReplayCapability,
+    )
+  const trustedAuthority = trustedLegacyCaptureCandidateAuthorityFor(authority, {
+    allowsHistoricalReplay,
+  })
   if (!trustedAuthority) {
     return {
       candidate: null,
@@ -3280,7 +3318,9 @@ function trustedLegacyCaptureCandidateFromBytes(
   let inspection
   try {
     inspection = inspectTicket26LegacyEnvelopeSource(immutableBytes, {
-      adapterVersion: legacySourceAdapterVersionForAuthority(trustedAuthority),
+      adapterVersion: legacySourceAdapterVersionForAuthority(trustedAuthority, {
+        allowsHistoricalReplay,
+      }),
     })
   } catch {
     inspection = null
@@ -3313,7 +3353,7 @@ function suppliedTrustedCandidateBody(candidate) {
   return body
 }
 
-function candidateRoute(candidate) {
+function candidateRoute(candidate, historicalReplayCapability = null) {
   if (isTrustedDocxCandidateShape(candidate)) {
     return {
       rerun: () => trustedDocxCandidateFromBytes(candidate.sourceBytes, candidate.operatorChoices),
@@ -3324,16 +3364,24 @@ function candidateRoute(candidate) {
     }
   }
   if (isTrustedLegacyCaptureCandidateShape(candidate)) {
-    const authority = trustedLegacyCaptureCandidateAuthorityFor(candidate.authority)
+    const allowsHistoricalReplay =
+      isRegisteredConfirmedCanonicalHistoricalReplayCapability(
+        historicalReplayCapability,
+      )
+    const authority = trustedLegacyCaptureCandidateAuthorityFor(candidate.authority, {
+      allowsHistoricalReplay,
+    })
     if (!authority) return null
     return {
       rerun: () => trustedLegacyCaptureCandidateFromBytes(
         candidate.sourceBytes,
         authority,
+        historicalReplayCapability,
       ),
       compile: (rerun) => compileTrustedLegacyCaptureCandidate(
         buildTicket26LegacyCompilerRequest(rerun.candidate.sourceBytes),
         authority,
+        historicalReplayCapability,
       ),
     }
   }
@@ -3375,11 +3423,15 @@ export function importCanonicalCandidate(sourceBytes, operatorChoices) {
  * bounded confirmation. It either returns one complete Canonical Paper or no
  * paper and unresolved issues.
  */
-export function rederiveConfirmedCanonicalCandidate(candidate, teacherConfirmation) {
+export function rederiveConfirmedCanonicalCandidate(
+  candidate,
+  teacherConfirmation,
+  historicalReplayCapability = null,
+) {
   if (!exactKeys(teacherConfirmation, ['schemaVersion', 'candidateDigest', 'sourceDigest', 'confirmed']) || teacherConfirmation.schemaVersion !== confirmationSchemaVersion) {
     return { unresolvedIssues: [trustedDocxIssue('CALLER_SEMANTICS_REJECTED', 'Teacher Confirmation may bind only the candidate digest, source digest, and explicit confirmation')] }
   }
-  const route = candidateRoute(candidate)
+  const route = candidateRoute(candidate, historicalReplayCapability)
   if (!route) {
     return { unresolvedIssues: [trustedDocxIssue('CANDIDATE_REQUIRED', 'Teacher Confirmation requires one trusted Import Candidate')] }
   }

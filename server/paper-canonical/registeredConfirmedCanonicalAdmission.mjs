@@ -35,6 +35,10 @@ const admittedAuthorities = [
   trustedLegacyCaptureCandidateAuthorityRef,
 ]
 const admittedProofs = new WeakMap()
+const registeredHistoricalReplayCapability = Object.freeze({})
+const registeredHistoricalReplayCapabilities = new WeakSet([
+  registeredHistoricalReplayCapability,
+])
 
 function admissionError(code, message) {
   const error = new Error(message)
@@ -68,6 +72,15 @@ function registeredAuthority(authority) {
 // below; this helper is only the corresponding read-side compatibility edge.
 export function isRegisteredConfirmedCanonicalPublicationAuthority(authority) {
   return Boolean(registeredAuthority(authority))
+}
+
+// The v41 authority is historic-only. This module keeps the sole capability
+// object private, while the compiler can verify it without accepting caller
+// data, symbols, or proxies as a replay grant.
+export function isRegisteredConfirmedCanonicalHistoricalReplayCapability(
+  capability,
+) {
+  return registeredHistoricalReplayCapabilities.has(capability)
 }
 
 function repositoryBytes(relativePath, label) {
@@ -276,7 +289,36 @@ function sourceAssetFor(compilation, sourceDigest) {
       'Registered Candidate source bytes do not close the re-derived capture',
     )
   }
-  return bytes
+  return { bytes, documentId: matches[0].documentId }
+}
+
+function proofIdentity({ record, authority, candidate, canonical, sourceDocumentId }) {
+  return Object.freeze({
+    paperId: record.paperId,
+    authority: Object.freeze({ ...authority }),
+    candidateDigest: candidate.candidateDigest,
+    sourceDigest: candidate.source.sha256,
+    sourceDocumentId,
+    canonicalArtifactDigest: digestJson(canonical),
+  })
+}
+
+function proofSnapshotDigest({ compilation, sourceAsset, identity }) {
+  const canonicalPaper = compilation?.artifacts?.canonicalPaper
+  return digestJson({
+    compilation,
+    sourceAsset: {
+      documentId: identity.sourceDocumentId,
+      sha256: sha256(sourceAsset),
+      byteLength: sourceAsset.byteLength,
+    },
+    identity,
+    canonicalIdentity: {
+      paperId: canonicalPaper?.paperPlan?.paperId,
+      authority: canonicalPaper?.paperPlan?.authorityRef,
+      digest: digestJson(canonicalPaper),
+    },
+  })
 }
 
 function expectedCanonicalFor(candidate, compilation, canonical) {
@@ -334,10 +376,16 @@ export function resolveRegisteredConfirmedCanonicalAdmission(envelope) {
     )
   }
 
-  const confirmed = rederiveConfirmedCanonicalCandidate({
-    ...candidate,
-    sourceBytes: new Uint8Array(sourceBytes),
-  }, confirmation)
+  const confirmed = rederiveConfirmedCanonicalCandidate(
+    {
+      ...candidate,
+      sourceBytes: new Uint8Array(sourceBytes),
+    },
+    confirmation,
+    sameAuthority(authority, trustedLegacyHistoricalCandidateAuthorityRef)
+      ? registeredHistoricalReplayCapability
+      : null,
+  )
   if (!confirmed.compilation) {
     const codes = confirmed.unresolvedIssues?.map((issue) => issue.code).join(', ') || 'unknown'
     throw admissionError(
@@ -357,19 +405,35 @@ export function resolveRegisteredConfirmedCanonicalAdmission(envelope) {
     )
   }
 
-  const sourceAsset = sourceAssetFor(confirmed.compilation, candidate.source.sha256)
-  const proof = Object.freeze({})
-  admittedProofs.set(proof, {
-    compilation: confirmed.compilation,
-    sourceAssetDigest: sha256(sourceAsset),
+  const sourceAsset = sourceAssetFor(
+    confirmed.compilation,
+    candidate.source.sha256,
+  )
+  const identity = proofIdentity({
+    record,
+    authority,
+    candidate,
+    canonical,
+    sourceDocumentId: sourceAsset.documentId,
   })
+  const proof = Object.freeze({})
+  admittedProofs.set(proof, Object.freeze({
+    compilation: confirmed.compilation,
+    sourceAssetDigest: sha256(sourceAsset.bytes),
+    identity,
+    snapshotDigest: proofSnapshotDigest({
+      compilation: confirmed.compilation,
+      sourceAsset: sourceAsset.bytes,
+      identity,
+    }),
+  }))
   return {
     compilation: confirmed.compilation,
-    sourceAsset,
+    sourceAsset: sourceAsset.bytes,
     proof,
     identity: {
       paperId: record.paperId,
-      authority,
+      authority: { ...authority },
       candidateDigest: candidate.candidateDigest,
       sourceDigest: candidate.source.sha256,
     },
@@ -382,10 +446,19 @@ export function isRegisteredConfirmedCanonicalAdmission({
   sourceAsset,
 }) {
   const admitted = admittedProofs.get(proof)
-  return Boolean(
-    admitted
-    && admitted.compilation === compilation
-    && sourceAsset instanceof Uint8Array
-    && admitted.sourceAssetDigest === sha256(sourceAsset),
-  )
+  if (
+    !admitted
+    || admitted.compilation !== compilation
+    || !(sourceAsset instanceof Uint8Array)
+    || admitted.sourceAssetDigest !== sha256(sourceAsset)
+  ) return false
+  try {
+    return admitted.snapshotDigest === proofSnapshotDigest({
+      compilation,
+      sourceAsset,
+      identity: admitted.identity,
+    })
+  } catch {
+    return false
+  }
 }

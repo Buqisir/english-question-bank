@@ -14,9 +14,22 @@ import { DatabaseSync } from 'node:sqlite'
 import {
   publishCanonicalPaperPublication,
   recoverCanonicalPaperPublication,
+  sealCanonicalPublication,
 } from '../server/paper-canonical/publication.mjs'
-import { registeredConfirmedCanonicalAdmissionSchemaVersion } from '../server/paper-canonical/registeredConfirmedCanonicalAdmission.mjs'
+import {
+  isRegisteredConfirmedCanonicalAdmission,
+  registeredConfirmedCanonicalAdmissionSchemaVersion,
+  resolveRegisteredConfirmedCanonicalAdmission,
+} from '../server/paper-canonical/registeredConfirmedCanonicalAdmission.mjs'
+import {
+  trustedLegacyHistoricalCandidateAuthorityRef,
+} from '../shared/paper-canonical/authority.mjs'
+import {
+  compileCanonicalPaper,
+  confirmCanonicalCandidate,
+} from '../shared/paper-canonical/compiler.mjs'
 import { digestJson } from '../shared/paper-canonical/stable.mjs'
+import { buildTicket26LegacyCompilerRequest } from '../server/paper-canonical/legacyTicket26SourceAdapter.mjs'
 
 const records = {
   historicV41: {
@@ -106,6 +119,17 @@ function canonicalFrom(value) {
   return value.canonicalPaper || value
 }
 
+function jsonValue(filePath) {
+  return JSON.parse(new TextDecoder().decode(bytes(filePath)))
+}
+
+function candidateWithSource(record) {
+  return {
+    ...candidateFrom(jsonValue(record.candidate)),
+    sourceBytes: bytes(record.source),
+  }
+}
+
 function restampCandidate(candidate) {
   const body = { ...candidate }
   delete body.candidateDigest
@@ -155,6 +179,86 @@ try {
 
   const historic = evidence(records.historicV41)
   const current = evidence(records.currentV42)
+
+  const ordinaryHistoricalConfirmation = confirmCanonicalCandidate(
+    candidateWithSource(records.historicV41),
+    jsonValue(records.historicV41.confirmation),
+  )
+  assert.equal(Object.hasOwn(ordinaryHistoricalConfirmation, 'canonicalPaper'), false)
+  assert.equal(
+    ordinaryHistoricalConfirmation.unresolvedIssues.some(
+      (issue) => issue.code === 'CANDIDATE_REQUIRED',
+    ),
+    true,
+    'ordinary public confirmation cannot replay the historic v41 authority',
+  )
+  const ordinaryHistoricalCompile = compileCanonicalPaper(new Proxy({
+    ...buildTicket26LegacyCompilerRequest(bytes(records.historicV41.source)),
+    authority: trustedLegacyHistoricalCandidateAuthorityRef,
+  }, {
+    get(target, property, receiver) {
+      return typeof property === 'symbol'
+        ? true
+        : Reflect.get(target, property, receiver)
+    },
+  }))
+  assert.equal(Object.hasOwn(ordinaryHistoricalCompile.artifacts, 'canonicalPaper'), false)
+  assert.equal(
+    ordinaryHistoricalCompile.artifacts.normalizationReport.diagnostics.some(
+      (diagnostic) => diagnostic.code === 'AUTHORITY_RETIRED',
+    ),
+    true,
+    'a caller proxy cannot manufacture the v41 replay capability',
+  )
+  const ordinaryCurrentConfirmation = confirmCanonicalCandidate(
+    candidateWithSource(records.currentV42),
+    jsonValue(records.currentV42.confirmation),
+  )
+  assert.equal(
+    ordinaryCurrentConfirmation.canonicalPaper?.paperPlan?.authorityRef
+      ?.manifestVersion,
+    '42',
+    'current v42 trusted legacy confirmation remains public',
+  )
+
+  function rejectsMutatedRegisteredProof(label, mutate) {
+    const registered = resolveRegisteredConfirmedCanonicalAdmission(historic)
+    const before = {
+      tree: snapshotTree(publicationRoot),
+      database: snapshotDatabase(db),
+    }
+    mutate(registered.compilation)
+    assert.equal(
+      isRegisteredConfirmedCanonicalAdmission({
+        proof: registered.proof,
+        compilation: registered.compilation,
+        sourceAsset: registered.sourceAsset,
+      }),
+      false,
+      `${label} invalidates the registered admission proof`,
+    )
+    assert.throws(
+      () => sealCanonicalPublication({
+        compilation: registered.compilation,
+        sourceAssetVersion: 1,
+        sourceAsset: registered.sourceAsset,
+        registeredConfirmationProof: registered.proof,
+      }),
+      { code: 'CANONICAL_PUBLICATION_AUTHORITY_RETIRED' },
+      `${label} is rejected before sealing`,
+    )
+    assert.deepEqual(snapshotTree(publicationRoot), before.tree, `${label} writes no files`)
+    assert.deepEqual(snapshotDatabase(db), before.database, `${label} writes no rows`)
+  }
+
+  rejectsMutatedRegisteredProof('paper id mutation', (compilation) => {
+    compilation.artifacts.canonicalPaper.paperPlan.paperId = 'paper-mutated'
+  })
+  rejectsMutatedRegisteredProof('nested semantic mutation', (compilation) => {
+    compilation.artifacts.canonicalPaper.questionGroups[0].content.blocks[0]
+      .inlines[0].text = 'mutated semantic source text'
+  })
+
   const tamperedCapture = new Uint8Array(historic.sourceBytes)
   tamperedCapture[tamperedCapture.byteLength - 1] ^= 1
   const unknownAuthorityCandidate = jsonBytes(historic.candidateBytes, (value) => {
@@ -337,6 +441,9 @@ try {
     status: 'PASS',
     acceptedAuthorities: ['v41', 'v42', 'v37'],
     rejectedWithoutWrites: 13,
+    publicV41Confirmation: 'rejected',
+    publicV42Confirmation: 'accepted',
+    proofMutationsRejected: 2,
     recovery: 'pre_commit_rolled_back',
   }))
 } finally {
