@@ -139,6 +139,7 @@ Owner manifest-digest approval action: pending | approve-manifest-digest | apply
 Owner manifest-digest approval source: <exact owner task/turn/message identity | pending>
 Owner manifest-digest approval proposal identity: <exact proposal task/turn identity | pending>
 Owner manifest-digest approval granularity identity: <exact owner granularity-approval identity | pending>
+Owner manifest-digest approval recording peer: <exact approval-recording peer identity | not-applicable | pending>
 Owner manifest-digest approval predicate evidence: <repo-relative path | not-applicable | pending>
 Owner manifest-digest approval predicate evidence SHA-256: <64-hex digest | not-applicable | pending>
 Owner manifest-digest approval result commit: <40-hex commit | pending>
@@ -151,6 +152,15 @@ Conditional predicate evidence is a separate committed artifact. It reports
 every mandatory clause named by `dispatch-protocols.md`, including any allowed
 baseline verifier exception, while the receipt and approval record bind its
 exact path and SHA-256.
+
+For a conditional approval, `Owner manifest-digest approval result commit` is
+the approval-route commit that contains the predicate evidence, approval
+record, and updated map route. The immediately following receipt-only binding
+commit records that already-known commit hash and binds the map bytes at it.
+The receipt and approval record bind the same exact approval-recording peer
+identity. The approval record never claims the hash of the commit that contains
+itself. This peer-identity field is required for conditional-predicate mode;
+exact-digest mode may omit it or use `not-applicable`.
 
 Fields that belong to a pending phase may be omitted or use the shown pending
 sentinel. Once its status is `verified`, every field in that group is

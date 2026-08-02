@@ -139,16 +139,35 @@ authority surface; the approval evidence must still report it. If any clause
 fails or cannot be proven, do not approve or start implementation: pause for
 owner input with the exact anomaly.
 
-On PASS, one bounded approval-recording peer may commit only the predicate
-evidence, approval record, and receipt. Its record cites the exact
-conditional-authorization source, proposal and granularity identities,
-machine-verification evidence, actual generated manifest SHA-256, and result
-commit, and states that it did not dispatch implementation. Creating this peer
-is allowed only after every predicate fact is already proven and no writer
-overlaps. It must not also start implementation. The coordinator then performs
-another full preflight and re-verifies all four implementation gates before
-any implementation dispatch; no additional owner message containing the
-hexadecimal digest is required.
+On PASS, one bounded approval-recording peer may update only the minimum
+complete route surface: predicate evidence, approval record, the Wayfinder
+map's route field, and the receipt including its current-map binding. Creating
+this peer is allowed only after every predicate fact is already proven and no
+writer overlaps. It must not also start implementation. It must use this
+deterministic two-commit sequence:
+
+1. The approval-route commit writes only the predicate evidence, approval
+   record, and map `Next on PASS`. The record cites the exact conditional-
+   authorization source, proposal and granularity identities, machine-
+   verification evidence, actual generated manifest SHA-256, and the exact
+   approval-recording peer identity, and states that it did not dispatch
+   implementation. It must not claim the hash of the commit that contains it.
+2. The immediately following binding commit writes only the receipt. It records
+   the approval-route commit as the manifest-approval result commit, binds the
+   exact map path and SHA-256 at that ancestor commit, and makes receipt
+   `Current phase`, receipt `Next on PASS`, and map `Next on PASS` agree. It may
+   mark implementation dispatch allowed only when all four implementation
+   gates verify against the resulting exact HEAD.
+
+The first commit is a deliberately non-dispatchable intermediate state. Until
+the second commit is complete and the worktree is clean, every observer must
+fail closed; interruption never authorizes implementation or a replacement
+peer. Both commits belong to the same exclusive writer, and the approval-route
+commit must be the direct parent of the binding commit. The coordinator then
+performs another full preflight of the exact bytes, ancestry, route agreement,
+and exclusive-writer state, and re-verifies all four implementation gates
+before any implementation dispatch; no additional owner message containing
+the hexadecimal digest is required.
 
 ### Implementation gates
 

@@ -64,6 +64,8 @@ const currentPaperPhase = readText(
   ROOT,
   'docs/cuts/paper-canonical-unification/phase-transition.md',
 )
+const currentPaperPhasePath =
+  'docs/cuts/paper-canonical-unification/phase-transition.md'
 const currentPaperMapPath =
   'docs/cuts/paper-canonical-unification/wayfinder/map.md'
 const currentPaperMap = readText(ROOT, currentPaperMapPath)
@@ -80,9 +82,9 @@ const globalCoordinatorSkillPath =
 const globalCoordinatorYamlPath =
   '/Users/huangxuewei/.codex/skills/coordinate-eqb-wayfinder/agents/openai.yaml'
 const reviewedDispatchDigest =
-  'e538eb62496b064f5ee40f6ab7e1886339e2e8dc840098bdc70ba70b76dbb395'
+  '405813344f62442a38b1f0c51d9526caba6c66b55a17ca8b8e117c2c89d665c6'
 const reviewedGlobalCoordinatorSkillDigest =
-  'ddad3e97ca2fb6b913040969ef4b1a073588842b5e4f6afbe58a0940523f8cd2'
+  '5283214f3300f55a0cd91c6f491c1750a09d6d2a2bf4a637be7d46623c23f5d3'
 const reviewedGlobalCoordinatorYamlDigest =
   '064e1a9c970291ee6030f7650677823d0746c6664092760071bb272b1d62402b'
 
@@ -276,35 +278,75 @@ function ticketRouteErrors(source) {
   return []
 }
 
-const reviewRouteKinds = new Set([
-  'independent-standards-review',
-  'independent-spec-review',
-  'independent-dual-axis-review',
-  'focused-re-review',
-])
-const nonReviewRouteKinds = new Set([
-  'coordinator',
-  'wayfinder',
-  'grilling',
-  'domain-modeling',
-  'to-spec',
-  'to-tickets',
-  'product-investigation',
-  'implementation',
-  'fix',
-  'qa-preparation',
-  'release',
-  'shipping',
+const modelRouteRowSelectors = {
+  coordinatorPlanning: (work) => work.startsWith('Coordinator, Wayfinder,'),
+  deterministicMechanical: (work) =>
+    work.startsWith('Deterministic, repetitive,'),
+  normalImplementation: (work) =>
+    work === 'Normal implementation and semantic fixes',
+  crossCutClosure: (work) =>
+    work.startsWith('First-of-kind source adapters;'),
+  ordinaryReview: (work) =>
+    work === 'Independent Standards/Spec review and focused re-review',
+  aggregateReview: (work) => work.startsWith('High-risk aggregate review:'),
+}
+const modelRouteSelectors = new Map([
+  ['coordinator', modelRouteRowSelectors.coordinatorPlanning],
+  ['planning', modelRouteRowSelectors.coordinatorPlanning],
+  ['deterministic-mechanical', modelRouteRowSelectors.deterministicMechanical],
+  ['normal-implementation', modelRouteRowSelectors.normalImplementation],
+  ['semantic-fix', modelRouteRowSelectors.normalImplementation],
+  ['first-of-kind', modelRouteRowSelectors.crossCutClosure],
+  ['cross-cut', modelRouteRowSelectors.crossCutClosure],
+  ['full-semantic-closure', modelRouteRowSelectors.crossCutClosure],
+  ['screen-print-pdf-closure', modelRouteRowSelectors.crossCutClosure],
+  ['independent-review', modelRouteRowSelectors.ordinaryReview],
+  ['focused-re-review', modelRouteRowSelectors.ordinaryReview],
+  ['high-risk-aggregate-review', modelRouteRowSelectors.aggregateReview],
 ])
 
-function expectedCurrentModelRoute(routeKind) {
-  if (reviewRouteKinds.has(routeKind)) {
-    return { model: 'gpt-5.6-sol', effort: 'high' }
+function modelRoutingTableRows(source) {
+  const table = source.match(
+    /\| Work \| Model \| Effort \|\n\| --- \| --- \| --- \|\n((?:\|[^\n]+\|\n?)+)/,
+  )?.[1]
+  if (!table) {
+    throw new Error('authoritative model-routing table is missing or malformed')
   }
-  if (nonReviewRouteKinds.has(routeKind)) {
-    return { model: 'gpt-5.6-sol', effort: 'medium' }
+
+  const rows = table
+    .trim()
+    .split('\n')
+    .map((line) => {
+      const cells = line
+        .split('|')
+        .slice(1, -1)
+        .map((cell) => cell.trim().replace(/^`|`$/g, ''))
+      if (cells.length !== 3 || cells.some((cell) => !cell)) {
+        throw new Error('authoritative model-routing row is malformed')
+      }
+      return { work: cells[0], model: cells[1], effort: cells[2] }
+    })
+
+  if (rows.length !== 6) {
+    throw new Error('authoritative model-routing table must contain six routes')
   }
-  return null
+  return rows
+}
+
+function expectedCurrentModelRoute(routeKind, authority = modelRouting) {
+  const selector = modelRouteSelectors.get(routeKind)
+  if (!selector) {
+    return null
+  }
+  const matches = modelRoutingTableRows(authority).filter(({ work }) =>
+    selector(work),
+  )
+  if (matches.length !== 1) {
+    throw new Error(
+      `authoritative model-routing table does not select exactly one row for ${routeKind}`,
+    )
+  }
+  return { model: matches[0].model, effort: matches[0].effort }
 }
 
 function currentModelRouteErrors({
@@ -312,9 +354,16 @@ function currentModelRouteErrors({
   model,
   effort,
   source = 'current-authority',
+  authority = modelRouting,
 }) {
   const errors = []
-  const expected = expectedCurrentModelRoute(routeKind)
+  let expected
+  try {
+    expected = expectedCurrentModelRoute(routeKind, authority)
+  } catch (error) {
+    errors.push(error.message)
+    return errors
+  }
 
   if (!expected) {
     errors.push(`unknown current route kind: ${routeKind}`)
@@ -334,6 +383,8 @@ function currentModelRouteErrors({
 const fullCommitPattern = /^[0-9a-f]{40}$/
 const sha256Pattern = /^[0-9a-f]{64}$/
 const absoluteSkillPattern = /^\/.+\/SKILL\.md$/
+const exactApprovalIdentityPattern =
+  /^(?:[0-9a-f]{8,}(?:-[0-9a-f]+)+|[a-z][a-z0-9-]*:[^\s]+)$/i
 
 function markdownField(source, field) {
   const escaped = field.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
@@ -381,6 +432,117 @@ function commitIsAncestor(commit, head) {
     return true
   } catch {
     return false
+  }
+}
+
+function commitParent(commit) {
+  try {
+    return execFileSync('git', ['rev-parse', `${commit}^`], {
+      cwd: ROOT,
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'ignore'],
+    }).trim()
+  } catch {
+    return ''
+  }
+}
+
+function commitChangedPaths(commit) {
+  try {
+    return execFileSync(
+      'git',
+      [
+        'diff-tree',
+        '--root',
+        '--no-commit-id',
+        '--name-only',
+        '-r',
+        '--no-renames',
+        commit,
+      ],
+      {
+        cwd: ROOT,
+        encoding: 'utf8',
+        stdio: ['ignore', 'pipe', 'ignore'],
+      },
+    )
+      .trim()
+      .split('\n')
+      .filter(Boolean)
+  } catch {
+    return []
+  }
+}
+
+function firstCommitAfterAncestor(ancestor, head) {
+  try {
+    return (
+      execFileSync(
+        'git',
+        ['rev-list', '--ancestry-path', '--reverse', `${ancestor}..${head}`],
+        {
+          cwd: ROOT,
+          encoding: 'utf8',
+          stdio: ['ignore', 'pipe', 'ignore'],
+        },
+      )
+        .trim()
+        .split('\n')
+        .filter(Boolean)[0] ?? ''
+    )
+  } catch {
+    return ''
+  }
+}
+
+function onlyMarkdownFieldChanged(
+  before,
+  after,
+  field,
+  expectedBefore,
+  expectedAfter,
+) {
+  const escaped = field.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+  const pattern = new RegExp(`^${escaped}:[^\\r\\n]*$`, 'gm')
+  const beforeMatches = [...before.matchAll(pattern)]
+  const afterMatches = [...after.matchAll(pattern)]
+  if (
+    beforeMatches.length !== 1 ||
+    afterMatches.length !== 1 ||
+    beforeMatches[0][0] !== `${field}: ${expectedBefore}` ||
+    afterMatches[0][0] !== `${field}: ${expectedAfter}`
+  ) {
+    return false
+  }
+  const sentinel = `${field}: <route-field-sentinel>`
+  return (
+    before.replace(pattern, sentinel) === after.replace(pattern, sentinel)
+  )
+}
+
+function worktreeIsClean() {
+  try {
+    return (
+      execFileSync('git', ['status', '--porcelain=v1'], {
+        cwd: ROOT,
+        encoding: 'utf8',
+        stdio: ['ignore', 'pipe', 'ignore'],
+      }).trim() === ''
+    )
+  } catch {
+    return false
+  }
+}
+
+function currentGitHead() {
+  try {
+    return execFileSync('git', ['rev-parse', 'HEAD'], {
+      cwd: ROOT,
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'ignore'],
+    }).trim()
+  } catch {
+    return ''
   }
 }
 
@@ -479,9 +641,10 @@ function coordinatorSkillErrors(source) {
     'clean state and no concurrent writer',
     'let the authority select an owner pause or one bounded approval-recording peer under a valid conditional policy',
     'every predicate fact is already proven and no writer overlaps',
-    'constrain it to the predicate evidence, approval record, and receipt',
+    "constrain it to the authority's minimum complete route surface and deterministic commit/binding sequence",
+    'Treat any incomplete sequence as non-dispatchable',
     'forbid it from starting implementation',
-    'After it returns, preflight again before any later dispatch',
+    'After it returns, preflight the exact bytes, ancestry, route agreement, and writer state again before any later dispatch',
   ]) {
     if (!normalized.includes(requiredLifecycleText)) {
       errors.push(`coordinator lacks guarded same-peer lifecycle: ${requiredLifecycleText}`)
@@ -608,6 +771,13 @@ function coordinatorDispatchAuthorityErrors(source) {
     'there is no new relevant verifier failure, malformed evidence, drift, or partial publication',
     'Creating this peer is allowed only after every predicate fact is already proven and no writer overlaps',
     'It must not also start implementation',
+    'one bounded approval-recording peer may update only the minimum complete route surface',
+    'The approval-route commit writes only the predicate evidence, approval record, and map `Next on PASS`',
+    'the exact approval-recording peer identity',
+    'The immediately following binding commit writes only the receipt',
+    'It must not claim the hash of the commit that contains it',
+    'The first commit is a deliberately non-dispatchable intermediate state',
+    'the approval-route commit must be the direct parent of the binding commit',
     're-verifies all four implementation gates before any implementation dispatch',
   ]) {
     if (!normalized.includes(conditionalInvariant)) {
@@ -729,9 +899,7 @@ function manifestApprovalErrors(approval, ticketManifestDigest) {
       : mode === 'conditional-predicate'
         ? 'apply-conditional-manifest-approval'
         : null
-  const exactIdentityPattern =
-    /^(?:[0-9a-f]{8,}(?:-[0-9a-f]+)+|[a-z][a-z0-9-]*:[^\s]+)$/i
-  const sourceIsExact = exactIdentityPattern.test(
+  const sourceIsExact = exactApprovalIdentityPattern.test(
     approval?.sourceIdentity ?? '',
   )
 
@@ -760,6 +928,12 @@ function manifestApprovalErrors(approval, ticketManifestDigest) {
 
   if (mode === 'exact-digest') {
     if (
+      ![undefined, 'not-applicable'].includes(
+        approval?.recordingPeerIdentity,
+      ) ||
+      ![undefined, 'not-applicable'].includes(
+        approval?.recordedRecordingPeerIdentity,
+      ) ||
       approval?.predicateEvidencePath !== 'not-applicable' ||
       approval?.predicateEvidenceDigest !== 'not-applicable' ||
       approval?.recordedPredicateEvidencePath !== 'not-applicable' ||
@@ -779,10 +953,12 @@ function manifestApprovalErrors(approval, ticketManifestDigest) {
     errors.push('conditional manifest approval was not explicitly authorized')
   }
   if (
-    !exactIdentityPattern.test(approval?.proposalIdentity ?? '') ||
-    !exactIdentityPattern.test(approval?.granularityIdentity ?? '') ||
+    !exactApprovalIdentityPattern.test(approval?.proposalIdentity ?? '') ||
+    !exactApprovalIdentityPattern.test(approval?.granularityIdentity ?? '') ||
+    !exactApprovalIdentityPattern.test(approval?.recordingPeerIdentity ?? '') ||
     approval?.recordedProposalIdentity !== approval?.proposalIdentity ||
-    approval?.recordedGranularityIdentity !== approval?.granularityIdentity
+    approval?.recordedGranularityIdentity !== approval?.granularityIdentity ||
+    approval?.recordedRecordingPeerIdentity !== approval?.recordingPeerIdentity
   ) {
     errors.push('conditional manifest approval identities are missing or stale')
   }
@@ -913,7 +1089,13 @@ function provenanceFromReceipt(source, phase) {
   }
 }
 
-function parsePhaseReceipt(source, mapSource, mapSourcePath, head) {
+function parsePhaseReceipt(
+  source,
+  mapSource,
+  mapSourcePath,
+  head,
+  receiptSourcePath,
+) {
   const previous = markdownField(source, 'Previous phase')
   const current = markdownField(source, 'Current phase')
   const next = markdownField(source, 'Next on PASS')
@@ -953,6 +1135,179 @@ function parsePhaseReceipt(source, mapSource, mapSourcePath, head) {
       : ''
   const predicateFieldVerified = (field) =>
     markdownField(manifestApprovalRecordSource, field) === 'verified'
+  const manifestApprovalMode = markdownField(
+    source,
+    'Owner manifest-digest approval mode',
+  )
+  const approvalRecordingPeerIdentity = markdownField(
+    source,
+    'Owner manifest-digest approval recording peer',
+  )
+  const recordedApprovalRecordingPeerIdentity = markdownField(
+    manifestApprovalRecordSource,
+    'Owner manifest-digest approval recording peer',
+  )
+  const conditionalExclusiveWriter = predicateFieldVerified(
+    'Conditional exclusive writer',
+  )
+  const conditionalImplementationForbidden =
+    markdownField(
+      manifestApprovalRecordSource,
+      'Conditional implementation dispatch during evaluation',
+    ) === 'forbidden'
+  const recordedImplementationDispatched = markdownField(
+    manifestApprovalRecordSource,
+    'Implementation dispatched by approval record',
+  )
+  const approvalBindingCommit =
+    fullCommitPattern.test(manifestApprovalResultCommit ?? '') &&
+    fullCommitPattern.test(head ?? '')
+      ? firstCommitAfterAncestor(manifestApprovalResultCommit, head)
+      : ''
+  const approvalRouteParent = fullCommitPattern.test(
+    manifestApprovalResultCommit ?? '',
+  )
+    ? commitParent(manifestApprovalResultCommit)
+    : ''
+  const approvalBindingReceiptSource =
+    fullCommitPattern.test(approvalBindingCommit) &&
+    /^docs\/.+/.test(receiptSourcePath ?? '')
+      ? committedArtifactText(approvalBindingCommit, receiptSourcePath)
+      : ''
+  const bindingMapPath = markdownField(
+    approvalBindingReceiptSource,
+    'Wayfinder map',
+  )
+  const bindingApprovalRecordPath = markdownField(
+    approvalBindingReceiptSource,
+    'Owner manifest-digest approval record',
+  )
+  const bindingPredicateEvidencePath = markdownField(
+    approvalBindingReceiptSource,
+    'Owner manifest-digest approval predicate evidence',
+  )
+  const bindingApprovalRecordingPeerIdentity = markdownField(
+    approvalBindingReceiptSource,
+    'Owner manifest-digest approval recording peer',
+  )
+  const approvalSequence =
+    manifestApprovalMode === 'conditional-predicate'
+      ? {
+          writerCount: conditionalExclusiveWriter ? 1 : 0,
+          exclusiveWriter: conditionalExclusiveWriter,
+          samePeer:
+            exactApprovalIdentityPattern.test(
+              bindingApprovalRecordingPeerIdentity ?? '',
+            ) &&
+            bindingApprovalRecordingPeerIdentity ===
+              recordedApprovalRecordingPeerIdentity,
+          predicateEvidencePath: bindingPredicateEvidencePath,
+          approvalRecordPath: bindingApprovalRecordPath,
+          mapPath: bindingMapPath,
+          receiptPath: receiptSourcePath,
+          approvalRouteChangedPaths: fullCommitPattern.test(
+            manifestApprovalResultCommit ?? '',
+          )
+            ? commitChangedPaths(manifestApprovalResultCommit)
+            : [],
+          bindingChangedPaths: fullCommitPattern.test(approvalBindingCommit)
+            ? commitChangedPaths(approvalBindingCommit)
+            : [],
+          approvalRouteCommit: manifestApprovalResultCommit,
+          bindingCommit: approvalBindingCommit,
+          bindingParent: fullCommitPattern.test(approvalBindingCommit)
+            ? commitParent(approvalBindingCommit)
+            : '',
+          approvalRouteAncestorOfBinding:
+            fullCommitPattern.test(manifestApprovalResultCommit ?? '') &&
+            fullCommitPattern.test(approvalBindingCommit) &&
+            commitIsAncestor(
+              manifestApprovalResultCommit,
+              approvalBindingCommit,
+            ),
+          bindingIsCurrentHeadOrAncestor:
+            fullCommitPattern.test(approvalBindingCommit) &&
+            fullCommitPattern.test(head ?? '') &&
+            commitIsAncestor(approvalBindingCommit, head) &&
+            head === currentGitHead(),
+          approvalRecordClaimsContainingCommit:
+            markdownField(
+              manifestApprovalRecordSource,
+              'Owner manifest-digest approval result commit',
+            ) === manifestApprovalResultCommit,
+          receiptApprovalResultCommit: markdownField(
+            approvalBindingReceiptSource,
+            'Owner manifest-digest approval result commit',
+          ),
+          mapNext: markdownField(
+            committedArtifactText(
+              manifestApprovalResultCommit,
+              bindingMapPath,
+            ),
+            'Next on PASS',
+          ),
+          mapOnlyRouteFieldChanged:
+            fullCommitPattern.test(approvalRouteParent) &&
+            fullCommitPattern.test(manifestApprovalResultCommit ?? '') &&
+            /^docs\/.+/.test(bindingMapPath ?? '') &&
+            onlyMarkdownFieldChanged(
+              committedArtifactText(approvalRouteParent, bindingMapPath),
+              committedArtifactText(
+                manifestApprovalResultCommit,
+                bindingMapPath,
+              ),
+              'Next on PASS',
+              'owner-approval',
+              'implementation',
+            ),
+          receiptCurrent: markdownField(
+            approvalBindingReceiptSource,
+            'Current phase',
+          ),
+          receiptNext: markdownField(
+            approvalBindingReceiptSource,
+            'Next on PASS',
+          ),
+          receiptMapBindingCommit: markdownField(
+            approvalBindingReceiptSource,
+            'Current map binding commit',
+          ),
+          receiptMapBindingPath: markdownField(
+            approvalBindingReceiptSource,
+            'Current map artifact',
+          ),
+          receiptMapBindingDigest: markdownField(
+            approvalBindingReceiptSource,
+            'Current map artifact SHA-256',
+          ),
+          mapDigestAtApprovalRouteCommit:
+            fullCommitPattern.test(manifestApprovalResultCommit ?? '') &&
+            /^docs\/.+/.test(bindingMapPath ?? '')
+              ? committedArtifactDigest(
+                  manifestApprovalResultCommit,
+                  bindingMapPath,
+                )
+              : '',
+          currentMapDigest:
+            fullCommitPattern.test(approvalBindingCommit) &&
+            /^docs\/.+/.test(bindingMapPath ?? '')
+              ? committedArtifactDigest(
+                  approvalBindingCommit,
+                  bindingMapPath,
+                )
+            : '',
+          implementationDispatchedBeforeBinding: !(
+            recordedImplementationDispatched === 'no' &&
+            conditionalImplementationForbidden
+          ),
+          cleanAfterBinding: worktreeIsClean(),
+          allImplementationGatesVerified:
+            markdownField(
+              approvalBindingReceiptSource,
+              'Implementation dispatch',
+            ) === 'allowed',
+        }
+      : null
 
   return {
     previous,
@@ -1052,7 +1407,7 @@ function parsePhaseReceipt(source, mapSource, mapSourcePath, head) {
     manifestApproval: {
       committed:
         markdownField(source, 'Owner manifest-digest approval') === 'verified',
-      mode: markdownField(source, 'Owner manifest-digest approval mode'),
+      mode: manifestApprovalMode,
       actor: markdownField(source, 'Owner manifest-digest approval actor'),
       action: markdownField(source, 'Owner manifest-digest approval action'),
       sourceIdentity: markdownField(
@@ -1067,6 +1422,7 @@ function parsePhaseReceipt(source, mapSource, mapSourcePath, head) {
         source,
         'Owner manifest-digest approval granularity identity',
       ),
+      recordingPeerIdentity: approvalRecordingPeerIdentity,
       explicitConditionalAuthorization:
         markdownField(
           manifestApprovalRecordSource,
@@ -1135,6 +1491,8 @@ function parsePhaseReceipt(source, mapSource, mapSourcePath, head) {
         manifestApprovalRecordSource,
         'Owner manifest-digest approval granularity identity',
       ),
+      recordedRecordingPeerIdentity:
+        recordedApprovalRecordingPeerIdentity,
       recordedPredicateEvidencePath: markdownField(
         manifestApprovalRecordSource,
         'Owner manifest-digest approval predicate evidence',
@@ -1151,10 +1509,7 @@ function parsePhaseReceipt(source, mapSource, mapSourcePath, head) {
         source,
         'Implementation dispatched by approval record',
       ),
-      recordedImplementationDispatched: markdownField(
-        manifestApprovalRecordSource,
-        'Implementation dispatched by approval record',
-      ),
+      recordedImplementationDispatched,
       predicate: {
         proposalIdentityExact: predicateFieldVerified(
           'Conditional proposal identity exact',
@@ -1206,6 +1561,7 @@ function parsePhaseReceipt(source, mapSource, mapSourcePath, head) {
         ),
       },
     },
+    approvalSequence,
   }
 }
 
@@ -1240,6 +1596,81 @@ function currentMapBindingErrors(binding) {
   return errors
 }
 
+function samePathSet(actual = [], expected = []) {
+  return (
+    actual.length === expected.length &&
+    [...new Set(actual)].length === actual.length &&
+    expected.every((path) => actual.includes(path))
+  )
+}
+
+function conditionalApprovalWriteSequenceErrors(sequence) {
+  const errors = []
+  const approvalRouteSurface = [
+    sequence?.predicateEvidencePath,
+    sequence?.approvalRecordPath,
+    sequence?.mapPath,
+  ]
+  const bindingSurface = [sequence?.receiptPath]
+
+  if (
+    sequence?.writerCount !== 1 ||
+    sequence?.exclusiveWriter !== true ||
+    sequence?.samePeer !== true
+  ) {
+    errors.push('conditional approval sequence requires one exclusive peer')
+  }
+  if (
+    !samePathSet(sequence?.approvalRouteChangedPaths, approvalRouteSurface) ||
+    !samePathSet(sequence?.bindingChangedPaths, bindingSurface)
+  ) {
+    errors.push('conditional approval sequence exceeds its minimum route surface')
+  }
+  if (
+    !fullCommitPattern.test(sequence?.approvalRouteCommit ?? '') ||
+    !fullCommitPattern.test(sequence?.bindingCommit ?? '') ||
+    sequence?.bindingParent !== sequence?.approvalRouteCommit ||
+    sequence?.approvalRouteCommit === sequence?.bindingCommit ||
+    sequence?.approvalRouteAncestorOfBinding !== true ||
+    sequence?.bindingIsCurrentHeadOrAncestor !== true
+  ) {
+    errors.push('conditional approval binding commit must directly follow its approval-route commit')
+  }
+  if (
+    sequence?.approvalRecordClaimsContainingCommit !== false ||
+    sequence?.receiptApprovalResultCommit !== sequence?.approvalRouteCommit
+  ) {
+    errors.push('conditional approval must not require a commit to claim its own hash')
+  }
+  if (
+    sequence?.mapNext !== 'implementation' ||
+    sequence?.receiptCurrent !== 'implementation' ||
+    sequence?.receiptNext !== 'implementation'
+  ) {
+    errors.push('conditional approval route fields must agree on implementation')
+  }
+  if (sequence?.mapOnlyRouteFieldChanged !== true) {
+    errors.push('conditional approval map may change only Next on PASS to implementation')
+  }
+  if (
+    sequence?.receiptMapBindingCommit !== sequence?.approvalRouteCommit ||
+    sequence?.receiptMapBindingPath !== sequence?.mapPath ||
+    !sha256Pattern.test(sequence?.receiptMapBindingDigest ?? '') ||
+    sequence?.receiptMapBindingDigest !== sequence?.mapDigestAtApprovalRouteCommit ||
+    sequence?.receiptMapBindingDigest !== sequence?.currentMapDigest
+  ) {
+    errors.push('conditional approval receipt must bind exact current map bytes at the approval-route commit')
+  }
+  if (
+    sequence?.implementationDispatchedBeforeBinding !== false ||
+    sequence?.cleanAfterBinding !== true ||
+    sequence?.allImplementationGatesVerified !== true
+  ) {
+    errors.push('conditional approval remains non-dispatchable until clean binding and all gates pass')
+  }
+  return errors
+}
+
 function phaseTransitionErrors(state) {
   const errors = []
   const {
@@ -1254,8 +1685,15 @@ function phaseTransitionErrors(state) {
     tickets,
     approval,
     manifestApproval,
+    approvalSequence,
     measuredReplanAuthorized,
   } = state
+  const approvalSequenceErrors =
+    manifestApproval?.mode === 'conditional-predicate'
+      ? conditionalApprovalWriteSequenceErrors(approvalSequence)
+      : []
+
+  errors.push(...approvalSequenceErrors)
 
   if (!legalPhaseTransitions.has(previous)) {
     errors.push(`unknown previous phase route kind: ${previous}`)
@@ -1324,7 +1762,7 @@ function phaseTransitionErrors(state) {
     ownerApprovalErrors(approval, tickets.manifestDigest).length === 0
   const manifestApprovalBound =
     manifestApprovalErrors(manifestApproval, tickets.manifestDigest).length ===
-    0
+      0 && approvalSequenceErrors.length === 0
 
   if (
     ['to-tickets', 'owner-approval'].includes(current) ||
@@ -1729,7 +2167,7 @@ Treat \`dispatch-protocols.md\` as the sole owner of legal transitions, gates, p
 Do not classify, merge, split, retry, or advance a route independently of \`dispatch-protocols.md\`.
 Create exactly one fresh top-level peer through official Codex top-level task creation.
 For the guarded \`$to-tickets\` lifecycle, record the peer id and exact proposal identity, bind the approval identity to the unchanged peer and proposal, verify clean state and no concurrent writer, and resume that same peer once through the official Codex top-level task messaging mechanism.
-After publication, let the authority select an owner pause or one bounded approval-recording peer under a valid conditional policy. Require every predicate fact is already proven and no writer overlaps, forbid it from starting implementation, and constrain it to the predicate evidence, approval record, and receipt. After it returns, preflight again before any later dispatch.
+After publication, let the authority select an owner pause or one bounded approval-recording peer under a valid conditional policy. Require every predicate fact is already proven and no writer overlaps, forbid it from starting implementation, and constrain it to the authority's minimum complete route surface and deterministic commit/binding sequence. Treat any incomplete sequence as non-dispatchable. After it returns, preflight the exact bytes, ancestry, route agreement, and writer state again before any later dispatch.
 Top-level task creation and that one guarded same-peer message are the only execution mechanisms.
 `
 const portableCoordinatorSkillDigest = sourceDigest(portableCoordinatorSkill)
@@ -1831,9 +2269,14 @@ assert(
   ).some((error) => error.includes('must not copy dispatch detail')),
   'portable coordinator skill parser rejects copied phase detail',
 )
+const dispatchAuthorityErrors = coordinatorDispatchAuthorityErrors(dispatch)
 assert(
-  coordinatorDispatchAuthorityErrors(dispatch).length === 0,
-  'tracked dispatch authority preserves every coordinator-critical invariant',
+  dispatchAuthorityErrors.length === 0,
+  `tracked dispatch authority preserves every coordinator-critical invariant${
+    dispatchAuthorityErrors.length
+      ? ` (${dispatchAuthorityErrors.join('; ')})`
+      : ''
+  }`,
 )
 assert(
   transitionMapsEqual(dispatchTableTransitions(dispatch), legalPhaseTransitions),
@@ -1925,6 +2368,7 @@ for (const field of [
   'Owner manifest-digest approval source:',
   'Owner manifest-digest approval proposal identity:',
   'Owner manifest-digest approval granularity identity:',
+  'Owner manifest-digest approval recording peer:',
   'Owner manifest-digest approval predicate evidence:',
   'Owner manifest-digest approval predicate evidence SHA-256:',
   'Owner manifest-digest approval result commit:',
@@ -1936,6 +2380,21 @@ for (const field of [
     `issue-tracker schema binds conditional approval field: ${field}`,
   )
 }
+assert(
+  compact(issueTracker).includes(
+    '`Owner manifest-digest approval result commit` is the approval-route commit',
+  ) &&
+    compact(issueTracker).includes(
+      'The immediately following receipt-only binding commit records that already-known commit hash',
+    ) &&
+    compact(issueTracker).includes(
+      'The receipt and approval record bind the same exact approval-recording peer identity',
+    ) &&
+    compact(issueTracker).includes(
+      'The approval record never claims the hash of the commit that contains itself',
+    ),
+  'issue-tracker defines the non-self-referential approval result-commit binding',
+)
 
 const fixtureSourceHead = '1'.repeat(40)
 const fixtureSpecCommit = '2'.repeat(40)
@@ -1968,6 +2427,7 @@ function verifiedExactManifestApproval() {
     sourceIdentity: 'owner-message:item-exact-digest',
     proposalIdentity: 'not-applicable',
     granularityIdentity: 'not-applicable',
+    recordingPeerIdentity: 'not-applicable',
     explicitConditionalAuthorization: false,
     predicateEvidencePath: 'not-applicable',
     predicateEvidenceDigest: 'not-applicable',
@@ -1984,6 +2444,7 @@ function verifiedExactManifestApproval() {
     recordedSourceIdentity: 'owner-message:item-exact-digest',
     recordedProposalIdentity: 'not-applicable',
     recordedGranularityIdentity: 'not-applicable',
+    recordedRecordingPeerIdentity: 'not-applicable',
     recordedPredicateEvidencePath: 'not-applicable',
     recordedPredicateEvidenceDigest: 'not-applicable',
     recordedManifestDigest: fixtureTicketsDigest,
@@ -2004,6 +2465,7 @@ function verifiedConditionalManifestApproval() {
     sourceIdentity: 'owner-message:item-conditional-policy',
     proposalIdentity: 'peer:proposal-task/item-9',
     granularityIdentity: 'owner-message:item-granularity',
+    recordingPeerIdentity: 'peer:approval-recording-task',
     explicitConditionalAuthorization: true,
     predicateEvidencePath: 'docs/cuts/example/manifest-approval-evidence.md',
     predicateEvidenceDigest: 'f'.repeat(64),
@@ -2013,10 +2475,57 @@ function verifiedConditionalManifestApproval() {
     recordedSourceIdentity: 'owner-message:item-conditional-policy',
     recordedProposalIdentity: 'peer:proposal-task/item-9',
     recordedGranularityIdentity: 'owner-message:item-granularity',
+    recordedRecordingPeerIdentity: 'peer:approval-recording-task',
     recordedPredicateEvidencePath:
       'docs/cuts/example/manifest-approval-evidence.md',
     recordedPredicateEvidenceDigest: 'f'.repeat(64),
     predicate,
+  }
+}
+
+function verifiedConditionalApprovalWriteSequence() {
+  const approvalRouteCommit = '5'.repeat(40)
+  const bindingCommit = '6'.repeat(40)
+  const mapDigest = '7'.repeat(64)
+  const predicateEvidencePath =
+    'docs/cuts/example/conditional-approval-evidence.md'
+  const approvalRecordPath =
+    'docs/cuts/example/conditional-manifest-approval.md'
+  const mapPath = 'docs/cuts/example/wayfinder/map.md'
+  const receiptPath = 'docs/cuts/example/phase-transition.md'
+  return {
+    writerCount: 1,
+    exclusiveWriter: true,
+    samePeer: true,
+    predicateEvidencePath,
+    approvalRecordPath,
+    mapPath,
+    receiptPath,
+    approvalRouteChangedPaths: [
+      predicateEvidencePath,
+      approvalRecordPath,
+      mapPath,
+    ],
+    bindingChangedPaths: [receiptPath],
+    approvalRouteCommit,
+    bindingCommit,
+    bindingParent: approvalRouteCommit,
+    approvalRouteAncestorOfBinding: true,
+    bindingIsCurrentHeadOrAncestor: true,
+    approvalRecordClaimsContainingCommit: false,
+    receiptApprovalResultCommit: approvalRouteCommit,
+    mapNext: 'implementation',
+    mapOnlyRouteFieldChanged: true,
+    receiptCurrent: 'implementation',
+    receiptNext: 'implementation',
+    receiptMapBindingCommit: approvalRouteCommit,
+    receiptMapBindingPath: mapPath,
+    receiptMapBindingDigest: mapDigest,
+    mapDigestAtApprovalRouteCommit: mapDigest,
+    currentMapDigest: mapDigest,
+    implementationDispatchedBeforeBinding: false,
+    cleanAfterBinding: true,
+    allImplementationGatesVerified: true,
   }
 }
 
@@ -2116,6 +2625,7 @@ function phaseFixture(previous, current) {
       : { provenance: {} },
     approval,
     manifestApproval,
+    approvalSequence: null,
     measuredReplanAuthorized:
       previous === 'implementation' && current === 'to-tickets',
   }
@@ -2343,10 +2853,167 @@ for (const approvalMutation of [
 const conditionalApprovalPass = phaseFixture('owner-approval', 'implementation')
 conditionalApprovalPass.manifestApproval =
   verifiedConditionalManifestApproval()
+conditionalApprovalPass.approvalSequence =
+  verifiedConditionalApprovalWriteSequence()
 assert(
   phaseReceiptErrors(conditionalApprovalPass).length === 0,
   'explicit conditional-predicate approval passes only with complete exact evidence',
 )
+
+const missingConditionalSequence = phaseFixture(
+  'owner-approval',
+  'implementation',
+)
+missingConditionalSequence.manifestApproval =
+  verifiedConditionalManifestApproval()
+assert(
+  phaseReceiptErrors(missingConditionalSequence).some((error) =>
+    error.includes('minimum route surface'),
+  ) &&
+    phaseReceiptErrors(missingConditionalSequence).some((error) =>
+      error.includes('Implementation dispatch does not match the four gates'),
+    ),
+  'real phase-receipt seam rejects conditional approval without its commit sequence',
+)
+
+const mapBeforeApproval = `Status: done
+Next on PASS: owner-approval
+
+## Notes
+Stable bytes.
+`
+const mapAfterApproval = mapBeforeApproval.replace(
+  'Next on PASS: owner-approval',
+  'Next on PASS: implementation',
+)
+assert(
+  onlyMarkdownFieldChanged(
+    mapBeforeApproval,
+    mapAfterApproval,
+    'Next on PASS',
+    'owner-approval',
+    'implementation',
+  ),
+  'map byte comparison accepts only the exact approval route-field change',
+)
+for (const extraMapMutation of [
+  mapAfterApproval.replace('Stable bytes.', 'Changed bytes.'),
+  mapAfterApproval.replace(
+    'Next on PASS: implementation\n',
+    'Next on PASS: implementation\n\n',
+  ),
+  mapAfterApproval.replace(
+    'Next on PASS: implementation',
+    'Next on PASS: implementation ',
+  ),
+]) {
+  assert(
+    !onlyMarkdownFieldChanged(
+      mapBeforeApproval,
+      extraMapMutation,
+      'Next on PASS',
+      'owner-approval',
+      'implementation',
+    ),
+    'map byte comparison rejects every extra map-byte change',
+  )
+}
+
+const conditionalApprovalDescendant = phaseFixture(
+  'implementation',
+  'independent-review',
+)
+conditionalApprovalDescendant.manifestApproval =
+  verifiedConditionalManifestApproval()
+conditionalApprovalDescendant.approvalSequence =
+  verifiedConditionalApprovalWriteSequence()
+assert(
+  phaseReceiptErrors(conditionalApprovalDescendant).length === 0,
+  'later phase validates the historical conditional-approval binding separately from its current route',
+)
+
+assert(
+  conditionalApprovalWriteSequenceErrors(
+    verifiedConditionalApprovalWriteSequence(),
+  ).length === 0,
+  'conditional approval uses one exact two-commit route-and-binding sequence',
+)
+
+for (const { name, mutate, expectedError } of [
+  {
+    name: 'an extra changed artifact',
+    mutate: (sequence) => {
+      sequence.approvalRouteChangedPaths.push('docs/cuts/example/spec.md')
+    },
+    expectedError: 'exceeds its minimum route surface',
+  },
+  {
+    name: 'a second writer',
+    mutate: (sequence) => {
+      sequence.writerCount = 2
+      sequence.exclusiveWriter = false
+    },
+    expectedError: 'requires one exclusive peer',
+  },
+  {
+    name: 'a non-adjacent binding commit',
+    mutate: (sequence) => {
+      sequence.bindingParent = '8'.repeat(40)
+    },
+    expectedError: 'must directly follow',
+  },
+  {
+    name: 'unproven commit ancestry',
+    mutate: (sequence) => {
+      sequence.approvalRouteAncestorOfBinding = false
+    },
+    expectedError: 'must directly follow',
+  },
+  {
+    name: 'extra map-byte changes',
+    mutate: (sequence) => {
+      sequence.mapOnlyRouteFieldChanged = false
+    },
+    expectedError: 'map may change only Next on PASS',
+  },
+  {
+    name: 'a self-referential approval record',
+    mutate: (sequence) => {
+      sequence.approvalRecordClaimsContainingCommit = true
+    },
+    expectedError: 'must not require a commit to claim its own hash',
+  },
+  {
+    name: 'route disagreement',
+    mutate: (sequence) => {
+      sequence.receiptNext = 'owner-approval'
+    },
+    expectedError: 'route fields must agree',
+  },
+  {
+    name: 'a stale map digest',
+    mutate: (sequence) => {
+      sequence.currentMapDigest = '9'.repeat(64)
+    },
+    expectedError: 'bind exact current map bytes',
+  },
+  {
+    name: 'implementation before binding',
+    mutate: (sequence) => {
+      sequence.implementationDispatchedBeforeBinding = true
+    },
+    expectedError: 'remains non-dispatchable',
+  },
+]) {
+  const invalid = verifiedConditionalApprovalWriteSequence()
+  mutate(invalid)
+  assert(
+    conditionalApprovalWriteSequenceErrors(invalid).some((error) =>
+      error.includes(expectedError),
+    ),
+    `conditional approval sequence rejects ${name}`,
+  )
+}
 
 for (const { name, mutate, expectedError } of [
   {
@@ -2384,6 +3051,13 @@ for (const { name, mutate, expectedError } of [
     expectedError: 'lacks exact predicate evidence',
   },
   {
+    name: 'changed approval-recording peer',
+    mutate: (approval) => {
+      approval.recordedRecordingPeerIdentity = 'peer:different-task'
+    },
+    expectedError: 'identities are missing or stale',
+  },
+  {
     name: 'changed ticket bytes',
     mutate: (approval) => {
       approval.predicate.ticketBytesMatchManifest = false
@@ -2415,6 +3089,7 @@ for (const { name, mutate, expectedError } of [
 ]) {
   const invalid = phaseFixture('owner-approval', 'implementation')
   invalid.manifestApproval = verifiedConditionalManifestApproval()
+  invalid.approvalSequence = verifiedConditionalApprovalWriteSequence()
   mutate(invalid.manifestApproval)
   const errors = phaseReceiptErrors(invalid)
   assert(
@@ -2503,17 +3178,15 @@ assert(
 
 assert(
   currentModelRouteErrors({
-    routeKind: 'implementation',
+    routeKind: 'normal-implementation',
     model: 'gpt-5.6-terra',
-    effort: 'medium',
-  }).some((error) =>
-    error.includes('requires gpt-5.6-sol / medium'),
-  ),
-  'current generated handoff rejects gpt-5.6-terra',
+    effort: 'high',
+  }).length === 0,
+  'normal implementation uses the authoritative Terra High route',
 )
 assert(
   currentModelRouteErrors({
-    routeKind: 'implementation',
+    routeKind: 'normal-implementation',
     model: 'gpt-5.6-sol',
     effort: 'medium',
     source: 'historical-handoff',
@@ -2522,26 +3195,68 @@ assert(
   ),
   'current task rejects a model inherited from historical text',
 )
-for (const routeKind of nonReviewRouteKinds) {
+for (const [routeKind, model, effort] of [
+  ['coordinator', 'gpt-5.6-sol', 'medium'],
+  ['planning', 'gpt-5.6-sol', 'medium'],
+  ['deterministic-mechanical', 'gpt-5.6-luna', 'max'],
+  ['normal-implementation', 'gpt-5.6-terra', 'high'],
+  ['semantic-fix', 'gpt-5.6-terra', 'high'],
+  ['first-of-kind', 'gpt-5.6-terra', 'max'],
+  ['cross-cut', 'gpt-5.6-terra', 'max'],
+  ['full-semantic-closure', 'gpt-5.6-terra', 'max'],
+  ['screen-print-pdf-closure', 'gpt-5.6-terra', 'max'],
+  ['independent-review', 'gpt-5.6-sol', 'medium'],
+  ['focused-re-review', 'gpt-5.6-sol', 'medium'],
+  ['high-risk-aggregate-review', 'gpt-5.6-sol', 'high'],
+]) {
   assert(
     currentModelRouteErrors({
       routeKind,
-      model: 'gpt-5.6-sol',
-      effort: 'medium',
+      model,
+      effort,
     }).length === 0,
-    `${routeKind} uses gpt-5.6-sol / medium`,
+    `${routeKind} uses ${model} / ${effort} from the authoritative table`,
   )
 }
-for (const routeKind of reviewRouteKinds) {
+
+for (const [routeKind, staleModel, staleEffort] of [
+  ['deterministic-mechanical', 'gpt-5.6-sol', 'medium'],
+  ['normal-implementation', 'gpt-5.6-sol', 'medium'],
+  ['semantic-fix', 'gpt-5.6-luna', 'max'],
+  ['first-of-kind', 'gpt-5.6-terra', 'high'],
+  ['independent-review', 'gpt-5.6-sol', 'high'],
+  ['focused-re-review', 'gpt-5.6-sol', 'high'],
+  ['high-risk-aggregate-review', 'gpt-5.6-sol', 'medium'],
+]) {
   assert(
     currentModelRouteErrors({
       routeKind,
-      model: 'gpt-5.6-sol',
-      effort: 'high',
-    }).length === 0,
-    `${routeKind} uses gpt-5.6-sol / high`,
+      model: staleModel,
+      effort: staleEffort,
+    }).some((error) => error.includes('requires')),
+    `${routeKind} rejects a wrong or stale route`,
   )
 }
+assert(
+  currentModelRouteErrors({
+    routeKind: 'normal-implementation',
+    model: 'gpt-5.6-terra',
+    effort: 'high',
+    authority: modelRouting.replace(
+      '| Normal implementation and semantic fixes |',
+      '| Renamed implementation route |',
+    ),
+  }).some((error) => error.includes('does not select exactly one row')),
+  'model routing fails closed when the authoritative row is missing or stale',
+)
+assert(
+  currentModelRouteErrors({
+    routeKind: 'unknown-workload',
+    model: 'gpt-5.6-sol',
+    effort: 'medium',
+  }).some((error) => error.includes('unknown current route kind')),
+  'unknown model route kinds fail closed',
+)
 
 const currentHead = execFileSync('git', ['rev-parse', 'HEAD'], {
   cwd: ROOT,
@@ -2552,6 +3267,7 @@ const currentPaperPhaseState = parsePhaseReceipt(
   currentPaperMap,
   currentPaperMapPath,
   currentHead,
+  currentPaperPhasePath,
 )
 const currentPaperPhaseErrors = phaseReceiptErrors(currentPaperPhaseState)
 assert(
@@ -2821,16 +3537,15 @@ assert(
   'Matt workflow preserves bounded internal-review ownership',
 )
 assert(
-  modelRouting.includes(
-    'Coordinator, Wayfinder, grilling, domain modeling, to-spec, to-tickets, product investigation, implementation, fixes, QA preparation, and mechanical shipping',
-  ) &&
-    modelRouting.includes('`gpt-5.6-sol` | `medium`') &&
-    modelRouting.includes('Every independent Standards review') &&
-    modelRouting.includes('`gpt-5.6-sol` | `high`') &&
-    modelRouting.includes('No current default EQB route uses `gpt-5.6-terra`') &&
-    modelRouting.includes('never inherit model choices from historical text') &&
-    dispatch.includes('owner-approved role defaults'),
-  'model routing preserves the owner-approved role matrix',
+  modelRoutingTableRows(modelRouting).length === 6 &&
+    [...modelRouteSelectors.values()].every(
+      (selector) =>
+        modelRoutingTableRows(modelRouting).filter(({ work }) => selector(work))
+          .length === 1,
+    ) &&
+    agents.includes('current model table lives in') &&
+    dispatch.includes('Use the owner-approved workload routes in'),
+  'model routing is structurally bound to its single authoritative table',
 )
 assert(
   dispatch.includes('Closed development phase state machine') &&
