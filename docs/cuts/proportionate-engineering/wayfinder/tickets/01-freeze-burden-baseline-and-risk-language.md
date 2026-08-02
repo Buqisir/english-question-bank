@@ -1,7 +1,7 @@
 # Freeze the burden baseline and risk language
 
-Status: open
-Claim: unclaimed
+Status: done
+Claim: 019fbe68-10d0-7371-9927-467af87c4d6c
 Blocked by: None
 Next on PASS: parallel frontier handoff
 Parallel frontier: `docs/cuts/proportionate-engineering/wayfinder/tickets/02-audit-governance-and-coordination-gates.md`, `docs/cuts/proportionate-engineering/wayfinder/tickets/03-audit-verification-review-and-visual-proof.md`, `docs/cuts/proportionate-engineering/wayfinder/tickets/04-audit-canonical-data-and-contract-fanout.md`, `docs/cuts/proportionate-engineering/wayfinder/tickets/05-audit-module-depth-and-hotspots.md`, `docs/cuts/proportionate-engineering/wayfinder/tickets/06-design-the-ui-micro-change-lane.md`, `docs/cuts/proportionate-engineering/wayfinder/tickets/07-audit-legacy-operations-and-model-routing.md`
@@ -71,3 +71,24 @@ One fresh context, target 40–60K tokens. Model `gpt-5.6-sol`, effort `medium`.
 - Four before-state action traces with every action mapped to a named failure or
   marked currently unjustified.
 - No new ledger, verifier, approval, or policy authority.
+
+## Resolution
+
+Resolved at source HEAD `9cc1da509cdc8d5276e93a56b5ceff533b9490f6`.
+The linked [burden baseline and risk language](../../research/burden-baseline-and-risk-language-2026-08-02.md)
+freezes Git-blob-bound denominators, separates incomparable inventories,
+defines Data Addition, Shared Contract Change, UI Micro-change, Atomic
+Publication, Risk Tier, and Risk Closure, and records four current action
+traces with every retained action tied to a named failure.
+
+The governing measurement is not LOC or raw speed. Later tickets must decide
+whether a lighter existing mechanism closes the same failure and whether
+deletion measurably increases risk, with control strength following blast
+radius, irreversibility, and automation authority. No time, cost, quota,
+billing, defect-rate, flake-rate, or model-quality claim was inferred.
+
+Result commit: pending
+Verify: exact-HEAD recount; link/path/status/route checks; `git diff --check`
+Notes: Tickets 02–07 remain untouched and repository-read-only; Ticket 08 is
+still their sole later recorder. No reform, paper-canonical authority, Ticket
+25, approval, review, publication, or successor task was started.

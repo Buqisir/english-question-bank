@@ -1,7 +1,7 @@
 # Proportionate Engineering Reform — Wayfinder Map
 
 Status: charted
-Next on PASS: `docs/cuts/proportionate-engineering/wayfinder/tickets/01-freeze-burden-baseline-and-risk-language.md`
+Next on PASS: parallel frontier handoff
 Terminal: no
 External blocker kind: project-wide proportionate-engineering Wayfinder
 
@@ -68,7 +68,7 @@ External blocker kind: project-wide proportionate-engineering Wayfinder
 
 ## Decisions so far
 
-<!-- Empty until a child ticket is resolved. Each decision lives in its ticket. -->
+- [Freeze the burden baseline and risk language](tickets/01-freeze-burden-baseline-and-risk-language.md) — froze exact-HEAD path denominators, canonical risk terms, and named-failure action traces for the six read-only audits.
 
 ## Fog
 
