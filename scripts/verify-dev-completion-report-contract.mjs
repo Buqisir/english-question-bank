@@ -618,6 +618,15 @@ const reservedExternalBlockerKinds = new Set([
   'not-required',
   'not-set',
   'empty',
+  'nil',
+  'n-i-l',
+  'tbc',
+  't-b-c',
+  'not-available',
+  'not-specified',
+  'unspecified',
+  'no-blocker',
+  'no-blocker-kind',
 ])
 const externalBlockerClosurePattern = /^(docs\/.+)@([0-9a-f]{40})$/
 
@@ -625,12 +634,16 @@ function externalBlockerKindIsValid(kind) {
   if (!externalBlockerKindPattern.test(kind ?? '')) {
     return false
   }
-  const normalized = kind
+  const canonical = kind
     .trim()
     .toLowerCase()
     .replace(/[\s._/]+/g, '-')
     .replace(/-+/g, '-')
-  return !reservedExternalBlockerKinds.has(normalized)
+    .replace(/^-+|-+$/g, '')
+  return (
+    canonical.length > 0 &&
+    !reservedExternalBlockerKinds.has(canonical)
+  )
 }
 
 function parseExternalBlockerClosureEvidence(evidence, expectedKind, head) {
@@ -3717,11 +3730,17 @@ assert(
 for (const placeholderKind of [
   '',
   'pending',
+  'pending.',
   'none',
+  'none-',
   'not-applicable',
+  'not-applicable.',
   'not_applicable',
   'not applicable',
   'n/a',
+  'N.A.',
+  'nil',
+  'tbc',
   'unknown',
   'not_required',
   'not set',
@@ -3735,6 +3754,19 @@ for (const placeholderKind of [
       error.includes('External blocker kind'),
     ),
     `external blocker rejects placeholder kind: ${placeholderKind}`,
+  )
+}
+
+for (const durableKind of [
+  'project-wide-proportionate-engineering-wayfinder',
+  'project-wide proportionate-engineering Wayfinder',
+]) {
+  const durableBlocker = structuredClone(externallyBlockedImplementation)
+  durableBlocker.externalBlockerKind = durableKind
+  durableBlocker.implementationDispatch = 'forbidden'
+  assert(
+    phaseReceiptErrors(durableBlocker).length === 0,
+    `external blocker accepts durable kind: ${durableKind}`,
   )
 }
 
