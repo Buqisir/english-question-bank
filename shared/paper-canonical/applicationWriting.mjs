@@ -47,6 +47,63 @@ function contentRefText(ref, index) {
   return (block?.inlines || []).filter((inline) => selected.has(inline.nodeId)).map((inline) => inline.text || '').join('')
 }
 
+function validateOpaqueApplicationWritingContract({ content, variant }) {
+  const issues = []
+  if (
+    !isRecordValue(variant)
+    || !exactKeys(variant, [
+      'family',
+      'mode',
+      'writingTaskId',
+      'sourceTaskType',
+      'contentBlockRefs',
+      'wordCountTarget',
+      'wordCountTargetCertainty',
+      'wordCountScope',
+      'choiceOwnership',
+      'response',
+    ])
+    || variant.family !== 'application-writing'
+    || variant.mode !== 'legacy_opaque'
+    || typeof variant.writingTaskId !== 'string'
+    || variant.writingTaskId.length === 0
+    || variant.sourceTaskType !== 'application'
+    || !Number.isInteger(variant.wordCountTarget)
+    || variant.wordCountTarget < 1
+    || variant.wordCountTargetCertainty !== 'explicit_legacy_field'
+    || variant.wordCountScope !== 'unspecified'
+  ) {
+    return [issue('APPLICATION_OPAQUE_VARIANT_INVALID', 'needs_review', '$.variant', 'Opaque legacy Application Writing preserves only explicit source task metadata')]
+  }
+
+  const sourceBlockIds = (content?.blocks || []).map((block) => block?.nodeId)
+  if (
+    sourceBlockIds.length === 0
+    || sourceBlockIds.some((blockId) => typeof blockId !== 'string')
+    || !Array.isArray(variant.contentBlockRefs)
+    || variant.contentBlockRefs.join('\u0000') !== sourceBlockIds.join('\u0000')
+  ) {
+    issues.push(issue('APPLICATION_OPAQUE_CONTENT_ORDER_INVALID', 'incomplete_source', '$.variant.contentBlockRefs', 'Opaque legacy Application Writing must retain every complete source block in source order'))
+  }
+  if (
+    !isRecordValue(variant.choiceOwnership)
+    || !exactKeys(variant.choiceOwnership, ['ownership'])
+    || variant.choiceOwnership.ownership !== 'none'
+  ) {
+    issues.push(issue('APPLICATION_CHOICES_FORBIDDEN', 'needs_review', '$.variant.choiceOwnership', 'Application Writing owns no choices'))
+  }
+  if (
+    !isRecordValue(variant.response)
+    || !exactKeys(variant.response, ['kind', 'answerRegionRef', 'ownership'])
+    || variant.response.kind !== 'generic_response_box'
+    || variant.response.answerRegionRef !== 'writing.application-box'
+    || variant.response.ownership !== 'product'
+  ) {
+    issues.push(issue('APPLICATION_OPAQUE_RESPONSE_INVALID', 'needs_review', '$.variant.response', 'Opaque legacy Application Writing uses one explicit product-owned generic response box'))
+  }
+  return issues
+}
+
 export function validateApplicationWritingContract({
   groupId,
   questionIds,
@@ -58,6 +115,9 @@ export function validateApplicationWritingContract({
   const issues = []
   if ((questionIds || []).length > 0 || (blankIds || []).length > 0) {
     issues.push(issue('APPLICATION_MEMBER_CARDINALITY_INVALID', 'needs_review', '$.groups', 'Application Writing has zero Questions and zero Blanks'))
+  }
+  if (variant?.mode === 'legacy_opaque') {
+    return [...issues, ...validateOpaqueApplicationWritingContract({ content, variant })]
   }
   if (
     !isRecordValue(variant)

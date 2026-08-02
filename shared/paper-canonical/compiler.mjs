@@ -605,7 +605,7 @@ function appendReadingReferenceGroups({
       || !groupRange
       || group?.groupType !== 'reading'
       || !Array.isArray(group.questionIds)
-      || group.questionIds.length !== slot.questionCardinality.count
+      || !questionCardinalityMatches(slot.questionCardinality, group.questionIds.length)
     ) {
       diagnostics.push(diagnostic('READING_GROUP_EVIDENCE_INCOMPLETE', 'incomplete_source', '$.evidence.readingCapture', `Reading slot ${slot.slotId} lacks one exact structured source Group`))
       continue
@@ -2228,6 +2228,9 @@ function collectGrammarFillTargetIds(variant) {
 
 function collectApplicationWritingTargetIds(variant) {
   if (variant?.family !== 'application-writing') return []
+  if (variant.mode === 'legacy_opaque') {
+    return [{ kind: 'writing_task', id: variant.writingTaskId }]
+  }
   return [
     { kind: 'writing_task', id: variant.writingTaskId },
     { kind: 'word_ruling', id: variant.wordCountRuling?.authorityObservationRef },
@@ -2241,6 +2244,9 @@ function collectApplicationWritingTargetIds(variant) {
 
 function collectContinuationWritingTargetIds(variant) {
   if (variant?.family !== 'continuation-writing') return []
+  if (variant.mode === 'legacy_opaque') {
+    return [{ kind: 'writing_task', id: variant.writingTaskId }]
+  }
   return [
     { kind: 'writing_task', id: variant.writingTaskId },
     { kind: 'word_ruling', id: variant.wordCountRuling?.authorityObservationRef },
@@ -2253,6 +2259,7 @@ function collectContinuationWritingTargetIds(variant) {
 
 function applicationWritingSourceSpanRefs(variant, content, capture, target) {
   if (variant?.family !== 'application-writing') return null
+  if (variant.mode === 'legacy_opaque') return null
   const observationRef = target.kind === 'word_ruling'
     ? variant.wordCountRuling?.authorityObservationRef
     : target.kind === 'response_binding'
@@ -2288,6 +2295,7 @@ function applicationWritingSourceSpanRefs(variant, content, capture, target) {
 
 function continuationWritingSourceSpanRefs(variant, content, capture, target) {
   if (variant?.family !== 'continuation-writing') return null
+  if (variant.mode === 'legacy_opaque') return null
   const observationRef = target.kind === 'word_ruling'
     ? variant.wordCountRuling?.authorityObservationRef
     : target.kind === 'response_binding'
@@ -2485,9 +2493,13 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
     : family.familyContractId === 'reading'
       ? ['family', 'passageBlockRoles', 'questions', 'choiceOwnership']
       : family.familyContractId === 'application-writing'
-        ? ['family', 'writingTaskId', 'promptBlockRefs', 'situation', 'contentRequirements', 'wordCountRuling', 'givenSkeleton', 'choiceOwnership', 'response']
+        ? variant.mode === 'legacy_opaque'
+          ? ['family', 'mode', 'writingTaskId', 'sourceTaskType', 'contentBlockRefs', 'wordCountTarget', 'wordCountTargetCertainty', 'wordCountScope', 'choiceOwnership', 'response']
+          : ['family', 'writingTaskId', 'promptBlockRefs', 'situation', 'contentRequirements', 'wordCountRuling', 'givenSkeleton', 'choiceOwnership', 'response']
       : family.familyContractId === 'continuation-writing'
-        ? ['family', 'writingTaskId', 'materialBlockRefs', 'wordCountRuling', 'starterProvision', 'choiceOwnership', 'response']
+        ? variant.mode === 'legacy_opaque'
+          ? ['family', 'mode', 'writingTaskId', 'sourceTaskType', 'contentBlockRefs', 'sourceStarterBlockRefs', 'wordCountTarget', 'wordCountTargetCertainty', 'wordCountScope', 'choiceOwnership', 'response']
+          : ['family', 'writingTaskId', 'materialBlockRefs', 'wordCountRuling', 'starterProvision', 'choiceOwnership', 'response']
       : family.familyContractId === 'grammar-fill'
         && Number(family.version) >= 2
         ? ['family', 'promptBindings', 'choiceOwnership']
@@ -2610,6 +2622,14 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
   return { diagnostics, artifact }
 }
 
+function questionCardinalityMatches(rule, count) {
+  return rule?.kind === 'exact'
+    ? count === rule.count
+    : rule?.kind === 'one_of'
+      ? rule.counts.includes(count)
+      : false
+}
+
 function buildPlan(source, capture, closure, groups, acceptedRecords, reviewDecisions) {
   const diagnostics = []
   const profile = closure.profiles.get(source.profileId)
@@ -2624,7 +2644,8 @@ function buildPlan(source, capture, closure, groups, acceptedRecords, reviewDeci
   for (const group of groups) if (!allowedSlots.has(group.slotId)) diagnostics.push(diagnostic('GROUP_SLOT_UNEXPECTED', 'unsupported', '$.groups', `Unknown profile slot ${group.slotId}`))
   const bindings = []
   const numberingAssignments = []
-  for (const slot of slots) {
+  let previousFlexibleRangeEnd = null
+  for (const [slotIndex, slot] of slots.entries()) {
     if (slot.activation === 'inactive_source') {
       const sourceSliceRefs = source.inactiveSlots?.[slot.slotId]
       const sourceClosure = source.inactiveSourceClosures?.find(
@@ -2688,19 +2709,45 @@ function buildPlan(source, capture, closure, groups, acceptedRecords, reviewDeci
       diagnostics.push(diagnostic('GROUP_PROFILE_FAMILY_MISMATCH', 'needs_review', `$.groups.${group.groupId}`, 'Group family identity or version disagrees with Profile slot'))
       continue
     }
-    if (slot.questionCardinality.kind === 'exact' && group.questionRefs.length !== slot.questionCardinality.count) {
+    if (!questionCardinalityMatches(slot.questionCardinality, group.questionRefs.length)) {
       diagnostics.push(diagnostic('GROUP_CARDINALITY_MISMATCH', 'needs_review', `$.groups.${group.groupId}`, 'Group question cardinality does not match Profile slot'))
       continue
     }
     bindings.push({ slotId: slot.slotId, state: 'bound', groupRef: { groupId: group.identity.groupId } })
     if (slot.numberingRule.kind === 'range') {
+      const flexibleRange = slot.questionCardinality.kind === 'one_of'
+      const rangeStart = flexibleRange && previousFlexibleRangeEnd !== null
+        ? previousFlexibleRangeEnd + 1
+        : slot.numberingRule.start
       group.questionRefs.forEach((question, index) => numberingAssignments.push({
         slotId: slot.slotId,
         groupId: group.identity.groupId,
         questionId: question.questionId,
         sourceNumberSpan: group.sourceMap.entries.find((entry) => entry.target.kind === 'question' && entry.target.id === question.questionId)?.sourceSpanRefs[0] || group.sourceMap.entries[0]?.sourceSpanRefs[0],
-        canonicalNumber: slot.numberingRule.start + index,
+        canonicalNumber: rangeStart + index,
       }))
+      if (flexibleRange) {
+        previousFlexibleRangeEnd = rangeStart + group.questionRefs.length - 1
+        const nextRangeSlot = slots.slice(slotIndex + 1).find(
+          (candidate) => candidate.activation === 'canonical_group'
+            && candidate.numberingRule.kind === 'range',
+        )
+        if (
+          !nextRangeSlot
+          || nextRangeSlot.questionCardinality.kind !== 'one_of'
+        ) {
+          const expectedEnd = nextRangeSlot
+            ? nextRangeSlot.numberingRule.start - 1
+            : slot.numberingRule.end
+          if (previousFlexibleRangeEnd !== expectedEnd) {
+            diagnostics.push(diagnostic('GROUP_NUMBERING_RANGE_MISMATCH', 'needs_review', `$.groups.${group.groupId}`, 'Flexible Profile cardinality does not close its numbered range'))
+          }
+        }
+      } else {
+        previousFlexibleRangeEnd = null
+      }
+    } else {
+      previousFlexibleRangeEnd = null
     }
   }
   if (diagnostics.length > 0) return { diagnostics, plan: null }
@@ -3243,7 +3290,12 @@ export function confirmCanonicalCandidate(candidate, teacherConfirmation) {
     }
   }
   return {
-    canonicalPaper: compilation.artifacts.canonicalPaper,
+    canonicalPaper: {
+      ...compilation.artifacts.canonicalPaper,
+      ...(candidate.schemaVersion === trustedLegacyCaptureCandidateSchemaVersion
+        ? { sourceCapture: compilation.artifacts.sourceCapture }
+        : {}),
+    },
     confirmation: {
       schemaVersion: confirmationSchemaVersion,
       candidateDigest: rerun.candidate.candidateDigest,

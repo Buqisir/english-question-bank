@@ -520,11 +520,47 @@ function renderCanonicalWritingChrome(
   }).join('')
 }
 
+function renderCanonicalOpaqueWriting(
+  canonicalGroup,
+  writingChrome,
+  family,
+  previousFamilyBoundary = null,
+) {
+  const application = family === 'application'
+  const chrome = renderCanonicalWritingChrome(
+    writingChrome,
+    application ? 'canonical-application-instruction' : 'canonical-continuation-instruction',
+    family,
+    previousFamilyBoundary,
+  )
+  const source = canonicalGroup.sourceBlocks.map((block) =>
+    `<p data-canonical-block-id="${escapeHtml(block.nodeId)}" data-canonical-legacy-opaque-source-block="">${renderCanonicalInlineNodes(block.inlines)}</p>`).join('')
+  const response = canonicalGroup.answerRegion
+  const geometry = application
+    ? applicationWritingRhythm.responseGeometry
+    : continuationWritingRhythm.responseGeometry
+  const familyClass = application
+    ? 'canonical-application-writing'
+    : 'canonical-continuation-writing'
+  const responseClass = application
+    ? 'canonical-application-response'
+    : 'canonical-continuation-response'
+  return `<div class="${familyClass} canonical-legacy-opaque-writing" data-canonical-writing-mode="legacy_opaque" data-canonical-writing-semantic-signature="${escapeHtml(canonicalGroup.semanticSignature)}" data-canonical-writing-occurrence-signature="${escapeHtml(canonicalGroup.occurrenceSignature)}" data-canonical-word-count-target="${canonicalGroup.wordCountTarget}" data-canonical-word-count-certainty="${escapeHtml(canonicalGroup.wordCountTargetCertainty)}" data-canonical-word-count-scope="${escapeHtml(canonicalGroup.wordCountScope)}">${application ? chrome : `<div class="canonical-continuation-chrome">${chrome}</div>`}<div class="passage canonical-legacy-opaque-source">${source}</div><div class="writing-answer-box ${responseClass} canonical-legacy-opaque-response" data-canonical-legacy-opaque-response="" data-canonical-response-ownership="${escapeHtml(response.ownership)}" data-canonical-answer-region-ref="${escapeHtml(response.answerRegionRef)}" data-canonical-response-slot-id="${escapeHtml(response.responseSlotId)}" style="width:${geometry.widthMm}mm;height:${geometry.heightMm}mm;"></div></div>`
+}
+
 function renderCanonicalApplicationWriting(
   canonicalGroup,
   writingChrome,
   previousFamilyBoundary,
 ) {
+  if (canonicalGroup.writingMode === 'legacy_opaque') {
+    return renderCanonicalOpaqueWriting(
+      canonicalGroup,
+      writingChrome,
+      'application',
+      previousFamilyBoundary,
+    )
+  }
   const renderGivenParts = (parts, position) => parts.map((part) =>
     `<p class="canonical-application-given canonical-application-given--${position}" data-canonical-given-part-id="${escapeHtml(part.givenPartId)}" data-canonical-given-role="${escapeHtml(part.role)}" data-canonical-given-placement="${escapeHtml(part.placement)}" data-canonical-application-writing-rhythm-role="${part.role === 'title' ? 'given_title' : position === 'bottom' ? 'given_closing' : 'given_addressee'}">${renderCanonicalInlineNodes(part.inlines)}</p>`).join('')
   const prompt = canonicalGroup.promptBlocks.map((block) => {
@@ -547,6 +583,9 @@ function renderCanonicalApplicationWriting(
 }
 
 function renderCanonicalContinuationWriting(canonicalGroup, writingChrome) {
+  if (canonicalGroup.writingMode === 'legacy_opaque') {
+    return renderCanonicalOpaqueWriting(canonicalGroup, writingChrome, 'continuation')
+  }
   const chrome = renderCanonicalWritingChrome(
     writingChrome,
     'canonical-continuation-instruction',

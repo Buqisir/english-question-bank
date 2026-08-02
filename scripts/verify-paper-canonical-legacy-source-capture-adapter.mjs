@@ -143,10 +143,10 @@ const legacyAuthority = resolveCanonicalAuthority(trustedLegacyCaptureCandidateA
 assert.equal(legacyAuthority.ok, true)
 assert.equal(canonicalAuthorityRef.manifestVersion, '36', 'the migration source adapter must not advance current/publication authority')
 assert.equal(trustedDocxCandidateAuthorityRef.manifestVersion, '37', 'the DOCX candidate seam must retain v37')
-assert.equal(trustedLegacyCaptureCandidateAuthorityRef.manifestVersion, '38')
-assert.equal(legacyAuthority.closure.artifacts.adapter.adapters.find((entry) => entry.adapterId === 'ticket-26-legacy-source-capture').version, '1')
+assert.equal(trustedLegacyCaptureCandidateAuthorityRef.manifestVersion, '39')
+assert.equal(legacyAuthority.closure.artifacts.adapter.adapters.find((entry) => entry.adapterId === 'ticket-26-legacy-source-capture').version, '2')
 assert.ok(legacyAuthority.closure.schemas['ticket-26-legacy-source-envelope-v1'])
-assert.equal(Object.hasOwn(compilerModule, 'compileTrustedLegacyCaptureCandidate'), false, 'ordinary callers must not reach the privileged v38 compiler')
+assert.equal(Object.hasOwn(compilerModule, 'compileTrustedLegacyCaptureCandidate'), false, 'ordinary callers must not reach the privileged v39 compiler')
 assert.deepEqual(Object.keys(trustedImport).sort(), ['confirmCanonicalCandidate', 'importCanonicalCandidate'])
 
 const firstImport = importCanonicalCandidate(legacyInput(captureBytes))
@@ -154,7 +154,7 @@ const secondImport = importCanonicalCandidate(legacyInput(captureBytes))
 assert.deepEqual(firstImport, secondImport, 'exact legacy capture derivation must be deterministic')
 assert.ok(firstImport.candidate, 'the exact committed capture must produce an Import Candidate')
 assert.equal(firstImport.candidate.schemaVersion, 'trusted-ticket-26-legacy-import-candidate-v1')
-assert.equal(firstImport.candidate.authority.manifestVersion, '38')
+assert.equal(firstImport.candidate.authority.manifestVersion, '39')
 assert.equal(firstImport.candidate.source.sha256, sha256(captureBytes))
 assert.equal(firstImport.candidate.source.byteLength, captureBytes.byteLength)
 assert.equal(firstImport.candidate.source.paperId, 'paper-2020-i', 'paper identity must be resolved from the trusted binding')
@@ -171,7 +171,7 @@ const genericBypass = compilerModule.compileCanonicalPaper({
   ...buildTicket26LegacyCompilerRequest(captureBytes),
   authority: trustedLegacyCaptureCandidateAuthorityRef,
 })
-assert.equal('canonicalPaper' in genericBypass.artifacts, false, 'generic compilation must not bypass Teacher Confirmation for v38')
+assert.equal('canonicalPaper' in genericBypass.artifacts, false, 'generic compilation must not bypass Teacher Confirmation for v39')
 assert.ok(genericBypass.artifacts.normalizationReport.diagnostics.some((item) => item.code === 'AUTHORITY_RETIRED'))
 
 const docxBytes = new Uint8Array(await readFile(new URL('test-fixtures/paper-import/paper-2025-i-docx-source-adapter/2025-nck1-answer-source.docx', root)))
@@ -278,7 +278,7 @@ const allSources = await Promise.all(batch.membership.paperIds.map(async (paperI
   const candidate = importCanonicalCandidate(legacyInput(bytes))
   assert.ok(candidate.candidate, `${paperId} must enter the shared candidate seam`)
   assert.equal(candidate.candidate.source.paperId, paperId, `${paperId} identity must come from the trusted registry`)
-  assert.equal(candidate.candidate.authority.manifestVersion, '38')
+  assert.equal(candidate.candidate.authority.manifestVersion, '39')
   return { paperId, bytes, projected, candidate: candidate.candidate }
 }))
 assert.equal(allSources.length, 31, 'the full Ticket 26 batch must project 31 of 31 captures')
@@ -317,8 +317,23 @@ assert.deepEqual(
 const nck1Application = nck1Source.groups.find((group) => group.slotId === 'writing.application')
 assert.deepEqual(
   nck1Application.variant,
-  { family: 'application-writing', choiceOwnership: { ownership: 'none' } },
-  'Application Writing must not fabricate closed semantic fields from unlabelled source paragraphs',
+  {
+    family: 'application-writing',
+    mode: 'legacy_opaque',
+    writingTaskId: nck1Application.writingTask.writingTaskId,
+    sourceTaskType: 'application',
+    contentBlockRefs: nck1Application.content.blocks.map((block) => block.nodeId),
+    wordCountTarget: nck1Application.writingTask.wordCountTarget,
+    wordCountTargetCertainty: 'explicit_legacy_field',
+    wordCountScope: 'unspecified',
+    choiceOwnership: { ownership: 'none' },
+    response: {
+      kind: 'generic_response_box',
+      answerRegionRef: 'writing.application-box',
+      ownership: 'product',
+    },
+  },
+  'Application Writing must preserve its complete source stream without inventing rich semantic roles',
 )
 assert.deepEqual(
   nck1Application.content.blocks.map((block) => block.nodeId),
@@ -352,18 +367,21 @@ for (const { paperId, group } of applicationGroups) {
 
 const nck1Continuation = nck1Source.groups.find((group) => group.slotId === 'writing.continuation')
 assert.equal(nck1Continuation.variant.writingTaskId, nck1Continuation.writingTask.writingTaskId)
-assert.equal(nck1Continuation.variant.wordCountRuling.target, nck1Continuation.writingTask.wordCountTarget)
+assert.equal(nck1Continuation.variant.mode, 'legacy_opaque')
+assert.equal(nck1Continuation.variant.wordCountTarget, nck1Continuation.writingTask.wordCountTarget)
+assert.equal(nck1Continuation.variant.wordCountScope, 'unspecified')
 assert.deepEqual(
-  nck1Continuation.variant.starterProvision.starters.map((starter) => blockText(
+  nck1Continuation.variant.sourceStarterBlockRefs.map((blockId) => blockText(
     nck1Continuation.content,
-    starter.contentRef,
+    blockId,
   )),
   nck1Continuation.writingTask.continuationStarters,
-  'Continuation starters must be copied only from the frozen ordered starter field',
+  'Continuation source starter-array entries must be retained without response-bound placement claims',
 )
 assert.equal(
-  observationById(nck1Source, nck1Continuation.variant.response.authorityObservationRef)?.kind,
-  'continuation_response_binding',
+  nck1Source.observations.some((observation) => observation.kind.startsWith('continuation_')),
+  false,
+  'the adapter must not manufacture Continuation word-count, starter, absence, or response observations',
 )
 
 const nationalSource = sourceByPaperId.get('paper-2020-bing')
@@ -382,14 +400,15 @@ assert.ok(contentText(unmatchedGrammar.content).includes('56._____'))
 
 const ambiguousStarterSource = sourceByPaperId.get('paper-zj-2022-jun')
 const ambiguousContinuation = ambiguousStarterSource.groups.find((group) => group.slotId === 'writing.continuation')
-assert.equal(ambiguousContinuation.variant.starterProvision.starters.length, 3)
+assert.equal(ambiguousContinuation.variant.mode, 'legacy_opaque')
+assert.equal(ambiguousContinuation.variant.sourceStarterBlockRefs.length, 3)
 assert.deepEqual(
-  ambiguousContinuation.variant.starterProvision.starters.map((starter) => blockText(
+  ambiguousContinuation.variant.sourceStarterBlockRefs.map((blockId) => blockText(
     ambiguousContinuation.content,
-    starter.contentRef,
+    blockId,
   )),
   ambiguousContinuation.writingTask.continuationStarters,
-  'a three-entry frozen starter field must be preserved whole rather than guessed into two starters',
+  'a three-entry frozen starter field must be preserved whole rather than guessed into response starters',
 )
 
 const confirmation = {
@@ -405,12 +424,8 @@ assert.equal(
   'confirmed legacy input must yield exactly one Canonical Paper or one unresolved result, never a partial paper',
 )
 assert.equal('publication' in confirmationResult, false, 'Teacher Confirmation must not publish')
-assert.equal(confirmationResult.canonicalPaper, undefined, 'unlabelled Application Writing source must not fabricate a complete Canonical Paper')
-assert.deepEqual(
-  [...new Set(confirmationResult.unresolvedIssues.map(({ code }) => code))].sort(),
-  ['APPLICATION_VARIANT_INVALID', 'GROUP_VARIANT_INVALID', 'SCHEMA_REQUIRED'],
-  'the representative application source must remain precisely unresolved at the existing closed writing contract',
-)
+assert.ok(confirmationResult.canonicalPaper, 'opaque Application Writing confirms as one complete Canonical Paper')
+assert.ok(confirmationResult.canonicalPaper.sourceCapture, 'confirmation carries the exact compiled Source Capture for downstream projection')
 assert.deepEqual(
   confirmCanonicalCandidate(firstImport.candidate, { ...confirmation, sourceDigest: 'sha256:forged' }).unresolvedIssues.map(({ code }) => code),
   ['CONFIRMATION_SOURCE_MISMATCH'],
@@ -439,30 +454,30 @@ const confirmations = allSources.map(({ paperId, candidate }) => {
       : { disposition: 'unresolved', codes: [...new Set(result.unresolvedIssues.map(({ code }) => code))].sort() }),
   }
 })
-const applicationPaperIds = new Set(applicationGroups.map(({ paperId }) => paperId))
-const sourceClosedPaperIds = allSources
-  .filter(({ paperId }) => !applicationPaperIds.has(paperId))
-  .map(({ paperId }) => paperId)
-assert.deepEqual(
-  confirmations.filter((item) => item.disposition === 'canonical').map(({ paperId }) => paperId),
-  sourceClosedPaperIds,
-  'only frozen sources without an unclosed Application Writing boundary may complete',
-)
-assert.equal(confirmations.filter((item) => item.disposition === 'canonical').length, 9)
-assert.equal(confirmations.filter((item) => item.disposition === 'unresolved').length, applicationGroups.length)
 assert.deepEqual(
   confirmations
     .filter((item) => item.disposition === 'unresolved')
-    .map(({ paperId, codes }) => ({
-      paperId,
-      codes: codes.filter((code) => ['APPLICATION_VARIANT_INVALID', 'GROUP_VARIANT_INVALID', 'SCHEMA_REQUIRED'].includes(code)),
-    })),
-  applicationGroups.map(({ paperId }) => ({
-    paperId,
-    codes: ['APPLICATION_VARIANT_INVALID', 'GROUP_VARIANT_INVALID', 'SCHEMA_REQUIRED'],
-  })),
-  'the full 31-paper accounting must be anchored to the explicit frozen application fields rather than an adapter-completed variant',
+    .map(({ paperId, codes }) => ({ paperId, codes })),
+  [
+    {
+      paperId: 'paper-960d0f8d',
+      codes: [
+        'GRAMMAR_FILL_PROMPT_SOURCE_DISAGREEMENT',
+        'REFERENCE_BLANK_OCCURRENCE',
+      ],
+    },
+    {
+      paperId: 'paper-zj-2020-jul',
+      codes: [
+        'GROUP_CARDINALITY_MISMATCH',
+        'GROUP_NUMBERING_RANGE_MISMATCH',
+      ],
+    },
+  ],
+  'the measured full batch retains only the unrelated frozen grammar and reading/profile conflicts',
 )
+assert.equal(confirmations.filter((item) => item.disposition === 'canonical').length, 29)
+assert.equal(confirmations.filter((item) => item.disposition === 'unresolved').length, 2)
 const dryRun = process.argv.includes('--dry-run')
 const unresolved = dryRun ? confirmations : []
 const unresolvedPaperIds = unresolved.filter((item) => item.disposition === 'unresolved').map((item) => item.paperId)

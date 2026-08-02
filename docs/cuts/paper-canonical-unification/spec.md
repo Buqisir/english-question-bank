@@ -109,6 +109,11 @@ item under this spec.
   Source Spans are diagnostic/audit data. A field may be admitted without a
   dedicated span when deterministic derivation plus confirmation closes the
   risk; missing or contradictory active meaning still fails closed.
+- Writing has two trusted-depth modes: rich new imports remain strict; frozen
+  legacy JSON uses a lossless opaque mode that retains every source block,
+  inline, order, and span plus explicit task identity/type and word target,
+  makes no rich role, response-boundary, absence, or author-only-scope claim,
+  and follows the source stream with one product-owned generic response box.
 - Canonical Paper is complete or absent. Publication validates in memory,
   stages, reopens, commits atomically, reloads exactly, and preserves the
   existing retry/recovery/rollback guarantees.

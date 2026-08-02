@@ -55,6 +55,8 @@ function sourceMapCoverageIssues(group, sourceCapture, family) {
             ? group.variant.givenSkeleton.parts.map((part) => `given_part:${part.givenPartId}`)
             : [`given_absence:${group.variant.givenSkeleton.answerRegionAbsenceAssertionRef}`]),
         ]
+      : family.variantSchemaId === 'canonical-application-writing-variant-v2'
+        ? [`writing_task:${group.variant.writingTaskId}`]
       : []),
     ...(family.variantSchemaId === 'canonical-continuation-writing-variant-v1'
       ? [
@@ -65,6 +67,8 @@ function sourceMapCoverageIssues(group, sourceCapture, family) {
             ? group.variant.starterProvision.starters.map((starter) => `starter:${starter.starterId}`)
             : [`starter_absence:${group.variant.starterProvision.absenceAssertionRef}`]),
         ]
+      : family.variantSchemaId === 'canonical-continuation-writing-variant-v2'
+        ? [`writing_task:${group.variant.writingTaskId}`]
       : []),
   ])
   const seen = new Set()
@@ -209,7 +213,10 @@ function assertCanonicalPackage(canonicalPackage) {
         )
       }
     }
-    if (family.variantSchemaId === 'canonical-application-writing-variant-v1') {
+    if (
+      family.variantSchemaId === 'canonical-application-writing-variant-v1'
+      || family.variantSchemaId === 'canonical-application-writing-variant-v2'
+    ) {
       const applicationIssues = validateApplicationWritingContract({
         groupId: group.identity.groupId,
         questionIds: group.questionRefs.map(({ questionId }) => questionId),
@@ -220,7 +227,10 @@ function assertCanonicalPackage(canonicalPackage) {
       })
       if (applicationIssues.length > 0) throw projectionError('Application Writing canonical contract is not closed', applicationIssues)
     }
-    if (family.variantSchemaId === 'canonical-continuation-writing-variant-v1') {
+    if (
+      family.variantSchemaId === 'canonical-continuation-writing-variant-v1'
+      || family.variantSchemaId === 'canonical-continuation-writing-variant-v2'
+    ) {
       const continuationIssues = validateContinuationWritingContract({
         groupId: group.identity.groupId,
         profileId: profile.profileId,
@@ -375,30 +385,50 @@ export function projectCanonicalPaper(canonicalPackage) {
                   projectProfileInstruction(profile, instructionId)),
               },
               writingTaskId: group.variant.writingTaskId,
-              prompt: {
-                blocks: group.variant.promptBlockRefs.map((blockId) => cloneJson(group.content.blocks.find((block) => block.nodeId === blockId))),
-              },
-              situation: cloneJson(group.variant.situation),
-              contentRequirements: cloneJson(group.variant.contentRequirements),
-              wordCountRuling: cloneJson(group.variant.wordCountRuling),
-              answerRegion: {
-                answerRegionRef: group.variant.response.answerRegionRef,
-                responseSlotId: slot.slotId,
-                givenTop: cloneJson(group.variant.givenSkeleton.presence === 'provided'
-                  ? group.variant.givenSkeleton.parts.filter((part) => part.placement === 'answer_region_top')
-                  : []),
-                givenBottom: cloneJson(group.variant.givenSkeleton.presence === 'provided'
-                  ? group.variant.givenSkeleton.parts.filter((part) => part.placement === 'answer_region_bottom')
-                  : []),
-              },
-              anchors: {
-                contentNodeIds: contentIdentityLists(group.content).contentNodeIds,
-                requirementIds: group.variant.contentRequirements.map((requirement) => requirement.requirementId),
-                givenPartIds: group.variant.givenSkeleton.presence === 'provided'
-                  ? group.variant.givenSkeleton.parts.map((part) => part.givenPartId)
-                  : [],
-                responseSlotId: slot.slotId,
-              },
+              ...(group.variant.mode === 'legacy_opaque'
+                ? {
+                    writingMode: 'legacy_opaque',
+                    sourceTaskType: group.variant.sourceTaskType,
+                    sourceBlocks: group.variant.contentBlockRefs.map((blockId) => cloneJson(group.content.blocks.find((block) => block.nodeId === blockId))),
+                    wordCountTarget: group.variant.wordCountTarget,
+                    wordCountTargetCertainty: group.variant.wordCountTargetCertainty,
+                    wordCountScope: group.variant.wordCountScope,
+                    answerRegion: {
+                      answerRegionRef: group.variant.response.answerRegionRef,
+                      responseSlotId: slot.slotId,
+                      ownership: group.variant.response.ownership,
+                    },
+                    anchors: {
+                      contentNodeIds: contentIdentityLists(group.content).contentNodeIds,
+                      responseSlotId: slot.slotId,
+                    },
+                  }
+                : {
+                    prompt: {
+                      blocks: group.variant.promptBlockRefs.map((blockId) => cloneJson(group.content.blocks.find((block) => block.nodeId === blockId))),
+                    },
+                    situation: cloneJson(group.variant.situation),
+                    contentRequirements: cloneJson(group.variant.contentRequirements),
+                    wordCountRuling: cloneJson(group.variant.wordCountRuling),
+                    answerRegion: {
+                      answerRegionRef: group.variant.response.answerRegionRef,
+                      responseSlotId: slot.slotId,
+                      givenTop: cloneJson(group.variant.givenSkeleton.presence === 'provided'
+                        ? group.variant.givenSkeleton.parts.filter((part) => part.placement === 'answer_region_top')
+                        : []),
+                      givenBottom: cloneJson(group.variant.givenSkeleton.presence === 'provided'
+                        ? group.variant.givenSkeleton.parts.filter((part) => part.placement === 'answer_region_bottom')
+                        : []),
+                    },
+                    anchors: {
+                      contentNodeIds: contentIdentityLists(group.content).contentNodeIds,
+                      requirementIds: group.variant.contentRequirements.map((requirement) => requirement.requirementId),
+                      givenPartIds: group.variant.givenSkeleton.presence === 'provided'
+                        ? group.variant.givenSkeleton.parts.map((part) => part.givenPartId)
+                        : [],
+                      responseSlotId: slot.slotId,
+                    },
+                  }),
             }
           : {}
         const continuationWriting = group.variant.family === 'continuation-writing'
@@ -422,24 +452,45 @@ export function projectCanonicalPaper(canonicalPackage) {
                   projectProfileInstruction(profile, instructionId)),
               },
               writingTaskId: group.variant.writingTaskId,
-              material: {
-                blocks: group.variant.materialBlockRefs.map((blockId) => cloneJson(group.content.blocks.find((block) => block.nodeId === blockId))),
-              },
-              wordCountRuling: cloneJson(group.variant.wordCountRuling),
-              answerRegion: {
-                answerRegionRef: group.variant.response.answerRegionRef,
-                responseSlotId: slot.slotId,
-                starterLines: cloneJson(group.variant.starterProvision.kind === 'ordered_source_starters'
-                  ? group.variant.starterProvision.starters
-                  : []),
-              },
-              anchors: {
-                contentNodeIds: contentIdentityLists(group.content).contentNodeIds,
-                starterIds: group.variant.starterProvision.kind === 'ordered_source_starters'
-                  ? group.variant.starterProvision.starters.map((starter) => starter.starterId)
-                  : [],
-                responseSlotId: slot.slotId,
-              },
+              ...(group.variant.mode === 'legacy_opaque'
+                ? {
+                    writingMode: 'legacy_opaque',
+                    sourceTaskType: group.variant.sourceTaskType,
+                    sourceBlocks: group.variant.contentBlockRefs.map((blockId) => cloneJson(group.content.blocks.find((block) => block.nodeId === blockId))),
+                    sourceStarterBlockRefs: cloneJson(group.variant.sourceStarterBlockRefs),
+                    wordCountTarget: group.variant.wordCountTarget,
+                    wordCountTargetCertainty: group.variant.wordCountTargetCertainty,
+                    wordCountScope: group.variant.wordCountScope,
+                    answerRegion: {
+                      answerRegionRef: group.variant.response.answerRegionRef,
+                      responseSlotId: slot.slotId,
+                      ownership: group.variant.response.ownership,
+                    },
+                    anchors: {
+                      contentNodeIds: contentIdentityLists(group.content).contentNodeIds,
+                      responseSlotId: slot.slotId,
+                    },
+                  }
+                : {
+                    material: {
+                      blocks: group.variant.materialBlockRefs.map((blockId) => cloneJson(group.content.blocks.find((block) => block.nodeId === blockId))),
+                    },
+                    wordCountRuling: cloneJson(group.variant.wordCountRuling),
+                    answerRegion: {
+                      answerRegionRef: group.variant.response.answerRegionRef,
+                      responseSlotId: slot.slotId,
+                      starterLines: cloneJson(group.variant.starterProvision.kind === 'ordered_source_starters'
+                        ? group.variant.starterProvision.starters
+                        : []),
+                    },
+                    anchors: {
+                      contentNodeIds: contentIdentityLists(group.content).contentNodeIds,
+                      starterIds: group.variant.starterProvision.kind === 'ordered_source_starters'
+                        ? group.variant.starterProvision.starters.map((starter) => starter.starterId)
+                        : [],
+                      responseSlotId: slot.slotId,
+                    },
+                  }),
             }
           : {}
         nodes.push({

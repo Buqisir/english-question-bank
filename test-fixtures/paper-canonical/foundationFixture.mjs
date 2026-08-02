@@ -304,7 +304,10 @@ export function makeReadyCanonicalFixture() {
       })
       continue
     }
-    const questionIds = Array.from({ length: slot.questionCardinality.count }, (_, index) => `question:${slot.slotId}:${index + 1}`)
+    const questionCount = slot.questionCardinality.kind === 'one_of'
+      ? slot.questionCardinality.counts[0]
+      : slot.questionCardinality.count
+    const questionIds = Array.from({ length: questionCount }, (_, index) => `question:${slot.slotId}:${index + 1}`)
     const blankIds = ['grammar-fill', 'cloze', 'seven-choices'].includes(slot.familyContractRef.id)
       ? questionIds.map((_, index) => `blank:${slot.slotId}:${index + 1}`)
       : []

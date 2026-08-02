@@ -355,7 +355,158 @@ function projectReadingConsumerGroup(input, occurrence) {
   })
 }
 
+function projectOpaqueLegacyWritingConsumerGroup(input, occurrence, {
+  familyContractId,
+  groupType,
+  sourceTaskType,
+  answerRegionRef,
+}) {
+  const { groupId } = input
+  if (
+    occurrence.writingMode !== 'legacy_opaque'
+    || occurrence.sourceTaskType !== sourceTaskType
+    || typeof occurrence.paperChrome?.part?.partId !== 'string'
+    || typeof occurrence.paperChrome.part.instructionId !== 'string'
+    || typeof occurrence.paperChrome.part.text !== 'string'
+    || !['render', 'suppress'].includes(occurrence.paperChrome.part.renderPolicy)
+    || typeof occurrence.paperChrome?.section?.sectionId !== 'string'
+    || typeof occurrence.paperChrome.section.instructionId !== 'string'
+    || typeof occurrence.paperChrome.section.text !== 'string'
+    || !['render', 'suppress'].includes(occurrence.paperChrome.section.renderPolicy)
+    || !Array.isArray(occurrence.paperChrome.instructions)
+    || occurrence.paperChrome.instructions.some(
+      (instruction) =>
+        typeof instruction?.instructionId !== 'string'
+        || typeof instruction.text !== 'string'
+        || typeof instruction.placement !== 'string'
+        || !['render', 'suppress'].includes(instruction.renderPolicy),
+    )
+    || new Set([
+      occurrence.paperChrome.part.instructionId,
+      occurrence.paperChrome.section.instructionId,
+      ...occurrence.paperChrome.instructions.map((instruction) => instruction.instructionId),
+    ]).size !== occurrence.paperChrome.instructions.length + 2
+    || !Array.isArray(occurrence.numbering)
+    || occurrence.numbering.length !== 0
+    || !Array.isArray(occurrence.blanks)
+    || occurrence.blanks.length !== 0
+    || occurrence.choices?.ownership !== 'none'
+    || Object.keys(occurrence.choices).length !== 1
+    || typeof occurrence.writingTaskId !== 'string'
+    || !Array.isArray(occurrence.content?.blocks)
+    || !Array.isArray(occurrence.sourceBlocks)
+    || !Number.isInteger(occurrence.wordCountTarget)
+    || occurrence.wordCountTarget < 1
+    || occurrence.wordCountTargetCertainty !== 'explicit_legacy_field'
+    || occurrence.wordCountScope !== 'unspecified'
+    || occurrence.answerRegion?.answerRegionRef !== answerRegionRef
+    || typeof occurrence.answerRegion?.responseSlotId !== 'string'
+    || occurrence.answerRegion.ownership !== 'product'
+  ) {
+    throw rejected(`Opaque legacy ${familyContractId} occurrence ${groupId} is incomplete`)
+  }
+  const contentBlocks = occurrence.content.blocks
+  if (
+    contentBlocks.some(
+      (block) =>
+        block?.kind !== 'paragraph'
+        || typeof block.nodeId !== 'string'
+        || !Array.isArray(block.inlines),
+    )
+    || new Set(contentBlocks.map((block) => block.nodeId)).size !== contentBlocks.length
+    || occurrence.sourceBlocks.length !== contentBlocks.length
+    || occurrence.sourceBlocks.some(
+      (block, index) => digestJson(block) !== digestJson(contentBlocks[index]),
+    )
+  ) {
+    throw rejected(`Opaque legacy ${familyContractId} occurrence ${groupId} does not preserve ordered source content`)
+  }
+  const sourceBlocks = contentBlocks.map((block) => ({
+    nodeId: block.nodeId,
+    text: textContent(block.inlines),
+    inlines: structuredClone(block.inlines),
+  }))
+  const sourceStarterBlockRefs = sourceTaskType === 'continuation'
+    ? occurrence.sourceStarterBlockRefs
+    : undefined
+  if (
+    sourceTaskType === 'continuation'
+    && (
+      !Array.isArray(sourceStarterBlockRefs)
+      || new Set(sourceStarterBlockRefs).size !== sourceStarterBlockRefs.length
+      || sourceStarterBlockRefs.some((blockId) => !sourceBlocks.some((block) => block.nodeId === blockId))
+      || sourceStarterBlockRefs.some(
+        (blockId, index) => sourceBlocks.findIndex((block) => block.nodeId === blockId)
+          < (index === 0 ? 0 : sourceBlocks.findIndex((block) => block.nodeId === sourceStarterBlockRefs[index - 1])),
+      )
+    )
+  ) {
+    throw rejected(`Opaque legacy ${familyContractId} occurrence ${groupId} has invalid source starter metadata`)
+  }
+  const contentNodeIds = contentBlocks.flatMap((block) => [
+    block.nodeId,
+    ...block.inlines.map((inline) => inline.nodeId),
+  ])
+  if (
+    !occurrence.anchors
+    || new Set(occurrence.anchors.contentNodeIds).size !== contentNodeIds.length
+    || contentNodeIds.some((nodeId) => !occurrence.anchors.contentNodeIds.includes(nodeId))
+    || occurrence.anchors.responseSlotId !== occurrence.answerRegion.responseSlotId
+  ) {
+    throw rejected(`Opaque legacy ${familyContractId} occurrence ${groupId} has invalid anchors`)
+  }
+  const answerRegion = {
+    answerRegionRef: occurrence.answerRegion.answerRegionRef,
+    responseSlotId: occurrence.answerRegion.responseSlotId,
+    ownership: occurrence.answerRegion.ownership,
+  }
+  const semantic = {
+    paperId: input.consumption.paperId,
+    groupId,
+    familyContractId,
+    writingMode: occurrence.writingMode,
+    sourceTaskType,
+    paperChrome: structuredClone(occurrence.paperChrome),
+    writingTaskId: occurrence.writingTaskId,
+    sourceBlocks,
+    ...(sourceStarterBlockRefs === undefined
+      ? {}
+      : { sourceStarterBlockRefs: structuredClone(sourceStarterBlockRefs) }),
+    wordCountTarget: occurrence.wordCountTarget,
+    wordCountTargetCertainty: occurrence.wordCountTargetCertainty,
+    wordCountScope: occurrence.wordCountScope,
+    answerRegion,
+    anchors: structuredClone(occurrence.anchors),
+  }
+  return Object.freeze({
+    groupType,
+    ...semantic,
+    questions: Object.freeze([]),
+    occurrenceSignature: digestJson({
+      groupId,
+      paperChromeInstructionIds: [
+        occurrence.paperChrome.part.instructionId,
+        occurrence.paperChrome.section.instructionId,
+        ...occurrence.paperChrome.instructions.map((instruction) => instruction.instructionId),
+      ],
+      sourceBlockIds: sourceBlocks.map((block) => block.nodeId),
+      ...(sourceStarterBlockRefs === undefined ? {} : { sourceStarterBlockRefs }),
+      answerRegionRef: answerRegion.answerRegionRef,
+      responseSlotId: answerRegion.responseSlotId,
+    }),
+    semanticSignature: digestJson(semantic),
+  })
+}
+
 function projectApplicationWritingConsumerGroup(input, occurrence) {
+  if (occurrence.writingMode === 'legacy_opaque') {
+    return projectOpaqueLegacyWritingConsumerGroup(input, occurrence, {
+      familyContractId: 'application-writing',
+      groupType: 'writing',
+      sourceTaskType: 'application',
+      answerRegionRef: 'writing.application-box',
+    })
+  }
   const { groupId } = input
   if (
     typeof occurrence.paperChrome?.part?.partId !== 'string'
@@ -549,6 +700,14 @@ function projectApplicationWritingConsumerGroup(input, occurrence) {
 }
 
 function projectContinuationWritingConsumerGroup(input, occurrence) {
+  if (occurrence.writingMode === 'legacy_opaque') {
+    return projectOpaqueLegacyWritingConsumerGroup(input, occurrence, {
+      familyContractId: 'continuation-writing',
+      groupType: 'continuation',
+      sourceTaskType: 'continuation',
+      answerRegionRef: 'writing.continuation-box',
+    })
+  }
   const { groupId } = input
   if (
     typeof occurrence.paperChrome?.part?.partId !== 'string'

@@ -25,6 +25,57 @@ function exactObservation(sourceCapture, observationId, kind, expectedValue) {
   return Object.entries(expectedValue).every(([key, value]) => matches[0].value[key] === value)
 }
 
+function validateOpaqueContinuationWritingContract({
+  questionIds,
+  blankIds,
+  content,
+  variant,
+}) {
+  if (
+    questionIds.length !== 0
+    || blankIds.length !== 0
+    || !isRecordValue(variant)
+    || !exactKeys(variant, ['family', 'mode', 'writingTaskId', 'sourceTaskType', 'contentBlockRefs', 'sourceStarterBlockRefs', 'wordCountTarget', 'wordCountTargetCertainty', 'wordCountScope', 'choiceOwnership', 'response'])
+    || variant.family !== 'continuation-writing'
+    || variant.mode !== 'legacy_opaque'
+    || typeof variant.writingTaskId !== 'string'
+    || variant.writingTaskId.length === 0
+    || variant.sourceTaskType !== 'continuation'
+    || !Array.isArray(variant.contentBlockRefs)
+    || variant.contentBlockRefs.length === 0
+    || !Array.isArray(variant.sourceStarterBlockRefs)
+    || new Set(variant.sourceStarterBlockRefs).size !== variant.sourceStarterBlockRefs.length
+    || !Number.isInteger(variant.wordCountTarget)
+    || variant.wordCountTarget < 1
+    || variant.wordCountTargetCertainty !== 'explicit_legacy_field'
+    || variant.wordCountScope !== 'unspecified'
+    || !isRecordValue(variant.choiceOwnership)
+    || !exactKeys(variant.choiceOwnership, ['ownership'])
+    || variant.choiceOwnership.ownership !== 'none'
+    || !isRecordValue(variant.response)
+    || !exactKeys(variant.response, ['kind', 'answerRegionRef', 'ownership'])
+    || variant.response.kind !== 'generic_response_box'
+    || variant.response.answerRegionRef !== 'writing.continuation-box'
+    || variant.response.ownership !== 'product'
+  ) {
+    return [issue('CONTINUATION_VARIANT_INVALID', 'needs_review', '$.variant', 'Opaque legacy Continuation Writing must preserve source content without inferred response semantics')]
+  }
+  const contentBlockRefs = (content?.blocks || []).map((block) => block?.nodeId)
+  if (
+    new Set(contentBlockRefs).size !== contentBlockRefs.length
+    || variant.contentBlockRefs.length !== contentBlockRefs.length
+    || variant.contentBlockRefs.some((blockId, index) => blockId !== contentBlockRefs[index])
+    || variant.sourceStarterBlockRefs.some((blockId) => !contentBlockRefs.includes(blockId))
+    || variant.sourceStarterBlockRefs.some(
+      (blockId, index) => contentBlockRefs.indexOf(blockId)
+        < (index === 0 ? 0 : contentBlockRefs.indexOf(variant.sourceStarterBlockRefs[index - 1])),
+    )
+  ) {
+    return [issue('CONTINUATION_CONTENT_OWNERSHIP_INCOMPLETE', 'needs_review', '$.content.blocks', 'Opaque legacy Continuation Writing must retain one complete ordered source block stream')]
+  }
+  return []
+}
+
 export function validateContinuationWritingContract({
   groupId,
   profileId,
@@ -37,6 +88,14 @@ export function validateContinuationWritingContract({
   const issues = []
   if (questionIds.length !== 0 || blankIds.length !== 0) {
     issues.push(issue('CONTINUATION_MEMBER_CARDINALITY_INVALID', 'needs_review', '$.groups', 'Continuation Writing owns zero Questions, Blanks, and Options'))
+  }
+  if (variant?.mode === 'legacy_opaque') {
+    return validateOpaqueContinuationWritingContract({
+      questionIds,
+      blankIds,
+      content,
+      variant,
+    })
   }
   if (
     !isRecordValue(variant)

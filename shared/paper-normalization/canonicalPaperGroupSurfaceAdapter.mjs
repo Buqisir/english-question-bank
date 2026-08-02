@@ -393,7 +393,10 @@ export function buildCanonicalApplicationWritingConsumptionSurfaceData({
     familyContractId: 'application-writing',
     groupId,
   })
-  const paragraphs = canonicalGroup.promptBlocks.map((block) => {
+  const sourceBlocks = canonicalGroup.writingMode === 'legacy_opaque'
+    ? canonicalGroup.sourceBlocks
+    : canonicalGroup.promptBlocks
+  const paragraphs = sourceBlocks.map((block) => {
     const segmented = segmentPaperText(block.text, {
       sectionId: block.nodeId,
     }).paragraphs[0]
@@ -410,13 +413,16 @@ export function buildCanonicalApplicationWritingConsumptionSurfaceData({
   })
   const answerBox = {
     kind: 'answerBox',
-    label: '应用文写作答题区',
+    label: canonicalGroup.writingMode === 'legacy_opaque' ? '写作答题区' : '应用文写作答题区',
     answerRegionRef: canonicalGroup.answerRegion.answerRegionRef,
     responseSlotId: canonicalGroup.answerRegion.responseSlotId,
+    ...(canonicalGroup.writingMode === 'legacy_opaque'
+      ? { ownership: canonicalGroup.answerRegion.ownership }
+      : {}),
     semanticSignature: canonicalGroup.semanticSignature,
     occurrenceSignature: canonicalGroup.occurrenceSignature,
-    givenTop: canonicalGroup.answerRegion.givenTop,
-    givenBottom: canonicalGroup.answerRegion.givenBottom,
+    givenTop: canonicalGroup.answerRegion.givenTop || [],
+    givenBottom: canonicalGroup.answerRegion.givenBottom || [],
   }
   const writingChrome = projectCanonicalWritingChrome({
     consumption,
@@ -429,7 +435,10 @@ export function buildCanonicalApplicationWritingConsumptionSurfaceData({
     occurrenceSignature: canonicalGroup.occurrenceSignature,
     answerRegion: canonicalGroup.answerRegion,
     anchors: canonicalGroup.anchors,
-    promptBlocks: canonicalGroup.promptBlocks,
+    ...(canonicalGroup.writingMode === 'legacy_opaque'
+      ? { writingMode: canonicalGroup.writingMode }
+      : {}),
+    promptBlocks: sourceBlocks,
     pageModel: {
       blocks: [
         ...(writingChrome.part
@@ -482,7 +491,10 @@ export function buildCanonicalContinuationWritingConsumptionSurfaceData({
     familyContractId: 'continuation-writing',
     groupId,
   })
-  const paragraphs = canonicalGroup.materialBlocks.map((block) => {
+  const sourceBlocks = canonicalGroup.writingMode === 'legacy_opaque'
+    ? canonicalGroup.sourceBlocks
+    : canonicalGroup.materialBlocks
+  const paragraphs = sourceBlocks.map((block) => {
     const segmented = segmentPaperText(block.text, {
       sectionId: block.nodeId,
     }).paragraphs[0]
@@ -499,12 +511,15 @@ export function buildCanonicalContinuationWritingConsumptionSurfaceData({
   })
   const answerBox = {
     kind: 'answerBox',
-    label: '读后续写答题区',
+    label: canonicalGroup.writingMode === 'legacy_opaque' ? '写作答题区' : '读后续写答题区',
     answerRegionRef: canonicalGroup.answerRegion.answerRegionRef,
     responseSlotId: canonicalGroup.answerRegion.responseSlotId,
+    ...(canonicalGroup.writingMode === 'legacy_opaque'
+      ? { ownership: canonicalGroup.answerRegion.ownership }
+      : {}),
     semanticSignature: canonicalGroup.semanticSignature,
     occurrenceSignature: canonicalGroup.occurrenceSignature,
-    givenTop: canonicalGroup.answerRegion.starterLines,
+    givenTop: canonicalGroup.answerRegion.starterLines || [],
     givenBottom: [],
   }
   const writingChrome = projectCanonicalWritingChrome({
@@ -518,8 +533,18 @@ export function buildCanonicalContinuationWritingConsumptionSurfaceData({
     occurrenceSignature: canonicalGroup.occurrenceSignature,
     answerRegion: canonicalGroup.answerRegion,
     anchors: canonicalGroup.anchors,
-    materialBlocks: canonicalGroup.materialBlocks,
+    ...(canonicalGroup.writingMode === 'legacy_opaque'
+      ? { writingMode: canonicalGroup.writingMode }
+      : {}),
+    materialBlocks: sourceBlocks,
     wordCountRuling: canonicalGroup.wordCountRuling,
+    ...(canonicalGroup.writingMode === 'legacy_opaque'
+      ? {
+          wordCountTarget: canonicalGroup.wordCountTarget,
+          wordCountTargetCertainty: canonicalGroup.wordCountTargetCertainty,
+          wordCountScope: canonicalGroup.wordCountScope,
+        }
+      : {}),
     pageModel: {
       blocks: [
         ...(writingChrome.part
