@@ -696,11 +696,23 @@ function conditionalDispatchHistory(startCommit, endCommit, receiptPath) {
 }
 
 function previousActiveExternalBlockerObservation(observations) {
-  return (
-    observations
-      .slice(1)
-      .find(({ status }) => status === 'active') ?? null
-  )
+  const [current, ...history] = observations
+  if (current?.status !== 'none') {
+    return null
+  }
+  for (const observation of history) {
+    if (observation.status === 'active') {
+      return observation
+    }
+    if (
+      observation.status !== 'none' ||
+      observation.kind !== current.kind ||
+      observation.evidence !== current.evidence
+    ) {
+      return null
+    }
+  }
+  return null
 }
 
 function previousExternalBlockerState(head, receiptPath) {
@@ -3752,6 +3764,18 @@ assert(
     activeBlockerObservation,
   ])?.commit === activeBlockerObservation.commit,
   'closure history traverses repeated none receipt states to the earlier active identity',
+)
+assert(
+  previousActiveExternalBlockerObservation([
+    closedBlockerObservation,
+    {
+      ...closedBlockerObservation,
+      commit: '3'.repeat(40),
+      kind: 'different blocker',
+    },
+    activeBlockerObservation,
+  ]) === null,
+  'closure history rejects a divergent none state instead of skipping it',
 )
 assert(
   previousActiveExternalBlockerObservation([closedBlockerObservation]) ===
