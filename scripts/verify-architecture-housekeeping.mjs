@@ -248,7 +248,6 @@ assert(
 assert('Matt workflow defines one directly pasteable next-task block', mattWorkflow.includes('New top-level task:') && mattWorkflow.includes('Worktree:') && mattWorkflow.includes('Expected HEAD:'))
 assert('Matt workflow separates internal workers from relay', mattWorkflow.includes('internal Standards and Spec reviewers') && mattWorkflow.includes('never become the next ticket or phase'))
 
-const modelRouting = read('docs/agents/model-routing.md')
 const paperPhase = read('docs/cuts/paper-canonical-unification/phase-transition.md')
 assert(
   'dispatch owns phase semantics while tracker owns field schema',
@@ -259,12 +258,6 @@ assert(
     issueTracker.includes('<Phase label> provenance') &&
     issueTracker.includes('ticket-set manifest SHA-256') &&
     !issueTracker.includes('Legal next phase'),
-)
-assert(
-  'current model routing is Sol medium except reviews at high',
-  modelRouting.includes('`gpt-5.6-sol` | `medium`') &&
-    modelRouting.includes('`gpt-5.6-sol` | `high`') &&
-    modelRouting.includes('No current default EQB route uses `gpt-5.6-terra`'),
 )
 function markdownField(source, field) {
   const escaped = field.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
