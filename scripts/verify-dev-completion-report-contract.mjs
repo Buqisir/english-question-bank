@@ -101,7 +101,7 @@ const globalCoordinatorSkillPath =
 const globalCoordinatorYamlPath =
   '/Users/huangxuewei/.codex/skills/coordinate-eqb-wayfinder/agents/openai.yaml'
 const reviewedDispatchDigest =
-  '26796c00ef10ac3560f8d332033adcb6de39d952a6e6a9e6526d970704ed5fd6'
+  'b42cfcdd0f8a2205ef273a5e974ea6e7e617180b19680d705e94cb3a795cb657'
 const reviewedGlobalCoordinatorSkillDigest =
   '5283214f3300f55a0cd91c6f491c1750a09d6d2a2bf4a637be7d46623c23f5d3'
 const reviewedGlobalCoordinatorYamlDigest =
@@ -628,6 +628,42 @@ function conditionalDispatchHistory(startCommit, endCommit, receiptPath) {
   } catch {
     return { verified: false, observations: [] }
   }
+}
+
+function previousExternalBlockerState(head, receiptPath) {
+  if (!fullCommitPattern.test(head ?? '') || !/^docs\/.+/.test(receiptPath ?? '')) {
+    return null
+  }
+
+  try {
+    const commits = execFileSync(
+      'git',
+      ['log', '--format=%H', head, '--', receiptPath],
+      {
+        cwd: ROOT,
+        encoding: 'utf8',
+        stdio: ['ignore', 'pipe', 'ignore'],
+      },
+    )
+      .trim()
+      .split('\n')
+      .filter(Boolean)
+    const candidates = commits[0] === head ? commits.slice(1) : commits
+    for (const commit of candidates) {
+      const receipt = committedArtifactText(commit, receiptPath)
+      const status = markdownField(receipt, 'External implementation blocker')
+      if (status !== undefined) {
+        return {
+          status,
+          kind: markdownField(receipt, 'External blocker kind'),
+          evidence: markdownField(receipt, 'External blocker closure evidence'),
+        }
+      }
+    }
+  } catch {
+    return null
+  }
+  return null
 }
 
 function parseCoordinatorYaml(source) {
@@ -1438,6 +1474,10 @@ function parsePhaseReceipt(
       externalBlockerKind,
       head,
     ),
+    previousExternalBlocker: previousExternalBlockerState(
+      head,
+      receiptSourcePath,
+    ),
     mapStatus: markdownField(mapSource, 'Status'),
     mapNext: markdownField(mapSource, 'Next on PASS'),
     binding: {
@@ -1800,6 +1840,7 @@ function externalBlockerErrors(state) {
     externalBlockerKind: kind,
     externalBlockerClosureEvidence: evidence,
     externalBlockerClosure: closure,
+    previousExternalBlocker,
   } = state
   const errors = []
   const groupAbsent = [status, kind, evidence].every((value) => value === undefined)
@@ -1833,6 +1874,14 @@ function externalBlockerErrors(state) {
     ) {
       errors.push('External blocker closure evidence is not durable, resolvable, and consistent')
     }
+    if (
+      !['active', 'none'].includes(previousExternalBlocker?.status) ||
+      previousExternalBlocker?.kind !== kind ||
+      (previousExternalBlocker?.status === 'none' &&
+        previousExternalBlocker?.evidence !== evidence)
+    ) {
+      errors.push('External blocker closure does not match the prior committed blocker identity')
+    }
   }
   return errors
 }
@@ -1850,6 +1899,7 @@ function phaseTransitionErrors(state) {
     externalBlockerKind,
     externalBlockerClosureEvidence,
     externalBlockerClosure,
+    previousExternalBlocker,
     provenance,
     outcomes,
     spec,
@@ -1870,6 +1920,7 @@ function phaseTransitionErrors(state) {
     externalBlockerKind,
     externalBlockerClosureEvidence,
     externalBlockerClosure,
+    previousExternalBlocker,
   })
   errors.push(...externalBlockerStateErrors)
 
@@ -3557,6 +3608,11 @@ durablyClosedExternalBlocker.externalBlockerClosure = {
   artifactStatus: 'done',
   artifactKind: 'project-wide proportionate-engineering Wayfinder',
 }
+durablyClosedExternalBlocker.previousExternalBlocker = {
+  status: 'active',
+  kind: 'project-wide proportionate-engineering Wayfinder',
+  evidence: 'pending',
+}
 durablyClosedExternalBlocker.implementationDispatch = 'allowed'
 assert(
   phaseReceiptErrors(durablyClosedExternalBlocker).length === 0,
@@ -3586,6 +3642,15 @@ for (const [name, mutate] of [
       fixture.externalBlockerClosure = {
         ...fixture.externalBlockerClosure,
         ancestor: false,
+      }
+    },
+  ],
+  [
+    'closure changes the prior blocker kind',
+    (fixture) => {
+      fixture.previousExternalBlocker = {
+        ...fixture.previousExternalBlocker,
+        kind: 'different blocker',
       }
     },
   ],

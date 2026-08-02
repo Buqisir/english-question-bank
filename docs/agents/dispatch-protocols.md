@@ -195,7 +195,8 @@ declared, all three fields are required and the blocker kind remains stable:
 
 - `active` requires a non-placeholder durable blocker kind, closure evidence
   `pending`, and `Implementation dispatch: forbidden`;
-- `none` is a closure transition, not an empty-state sentinel. It requires the
+- `none` is a closure transition, not an empty-state sentinel. The verifier
+  compares it with the most recent committed receipt state; it requires the
   same durable blocker kind and closure evidence in the exact form
   `<repo-relative-path>@<40-hex-commit>`;
 - the evidence commit must resolve and be an ancestor of the receipt HEAD, the
