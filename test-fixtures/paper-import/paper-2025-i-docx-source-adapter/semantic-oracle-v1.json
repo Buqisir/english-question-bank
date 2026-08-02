@@ -1,0 +1,94 @@
+{
+  "schemaVersion": "trusted-docx-semantic-oracle-v1",
+  "review": {
+    "method": "immutable_docx_source_review",
+    "scope": "Ticket 25 trusted DOCX candidate seam",
+    "note": "These expectations are fixed from the pinned DOCX source, not from an Import Candidate at test runtime."
+  },
+  "source": {
+    "relativePath": "test-fixtures/paper-import/paper-2025-i-docx-source-adapter/2025-nck1-answer-source.docx",
+    "originalName": "2025-nck1-answer-source.docx",
+    "byteLength": 135250,
+    "sha256": "sha256:33a93bfa4af0ebab48ae7aaef036a44b7004fff6ea2b90f2814ed12dee01b047"
+  },
+  "semanticExpectations": {
+    "paperId": "paper-2025-i",
+    "profileId": "nck1",
+    "groups": [
+      {
+        "slotId": "reading.a",
+        "groupId": "group-2025-i-reading-a",
+        "family": "reading",
+        "questionRange": [21, 23],
+        "textAnchor": "The greening of planes, trains and automobiles"
+      },
+      {
+        "slotId": "reading.b",
+        "groupId": "group-2025-i-reading-b",
+        "family": "reading",
+        "questionRange": [24, 27],
+        "textAnchor": "In my ninth-grade writing class last year"
+      },
+      {
+        "slotId": "reading.c",
+        "groupId": "group-2025-i-reading-c",
+        "family": "reading",
+        "questionRange": [28, 31],
+        "textAnchor": "While safety improvements might have been made to our streets"
+      },
+      {
+        "slotId": "reading.d",
+        "groupId": "group-2025-i-reading-d",
+        "family": "reading",
+        "questionRange": [32, 35],
+        "textAnchor": "Microplastics have become a common source of pollution"
+      },
+      {
+        "slotId": "reading.seven-choices",
+        "groupId": "group-2025-i-seven-choices",
+        "family": "seven-choices",
+        "questionRange": [36, 40],
+        "textAnchor": "An Unsung Hero"
+      },
+      {
+        "slotId": "language.cloze",
+        "groupId": "group-2025-i-cloze",
+        "family": "cloze",
+        "questionRange": [41, 55],
+        "textAnchor": "One August afternoon, I sat in my kitchen"
+      },
+      {
+        "slotId": "language.grammar-fill",
+        "groupId": "group-2025-i-grammar-fill",
+        "family": "grammar-fill",
+        "questionRange": [56, 65],
+        "textAnchor": "An exhibition at the Jiushi Art Museum in Shanghai"
+      },
+      {
+        "slotId": "writing.application",
+        "groupId": "group-2025-i-writing-application",
+        "family": "application-writing",
+        "questionRange": null,
+        "textAnchor": "请给Jenny写一封邮件"
+      },
+      {
+        "slotId": "writing.continuation",
+        "groupId": "group-2025-i-writing-continuation",
+        "family": "continuation-writing",
+        "questionRange": null,
+        "textAnchor": "With the biscuits my wife had made"
+      }
+    ],
+    "objectiveQuestionRange": [21, 65],
+    "officialAnswersInQuestionOrder": [
+      "C", "C", "B", "D", "D", "B", "A", "C", "A", "B", "A", "C", "A", "B", "D",
+      "E", "D", "C", "F", "G", "C", "D", "A", "C", "B", "B", "A", "C", "D", "A",
+      "B", "C", "D", "A", "B", "which", "the", "to present", "guidance", "are revealed",
+      "tries", "by", "strategic", "and", "digitally"
+    ],
+    "inactiveSlots": {
+      "listening.short-dialogue": "not_supplied",
+      "listening.long-form": "not_supplied"
+    }
+  }
+}
