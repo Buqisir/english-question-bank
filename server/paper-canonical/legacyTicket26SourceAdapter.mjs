@@ -26,7 +26,7 @@ const ledgerRelativePath = 'docs/cuts/paper-canonical-unification/migration/ledg
 const expectedRoles = ['asset-projection', 'source-provenance', 'official-answer-lead']
 const figureInventoryRole = 'figure-inventory'
 const figureMediaRole = 'figure-media'
-const legacySourceAdapterVersion = '4'
+const currentLegacySourceAdapterVersion = '4'
 const textDecoder = new TextDecoder()
 const textEncoder = new TextEncoder()
 const pngSignature = [137, 80, 78, 71, 13, 10, 26, 10]
@@ -54,6 +54,14 @@ function sameStrings(left, right) {
     && Array.isArray(right)
     && left.length === right.length
     && left.every((value, index) => value === right[index])
+}
+
+function legacySourceAdapterVersionFor(options) {
+  const version = options?.adapterVersion ?? currentLegacySourceAdapterVersion
+  if (!['3', currentLegacySourceAdapterVersion].includes(version)) {
+    throw new Error(`Unsupported trusted Ticket 26 legacy source adapter version: ${String(version)}`)
+  }
+  return version
 }
 
 function roleToken(value) {
@@ -811,7 +819,7 @@ function opaqueApplicationWritingVariant({ writingTask, content }) {
   }
 }
 
-function ticket26Observations(record, asset) {
+function ticket26Observations(record, asset, adapterVersion) {
   const inputKeyByDocumentId = new Map(record.documents.map((document) => [document.documentId, document.inputKey]))
   const byteLengthByInputKey = new Map(record.documents.map((document) => [document.inputKey, document.byteLength]))
   const observations = record.captureValue.observations.map((observation) => ({
@@ -820,7 +828,7 @@ function ticket26Observations(record, asset) {
     documentInputKey: inputKeyByDocumentId.get(observation.documentId),
     value: observation.value,
     span: { start: 0, end: byteLengthByInputKey.get(inputKeyByDocumentId.get(observation.documentId)) },
-    extraction: { adapterId: 'ticket-26-legacy-source-capture', version: legacySourceAdapterVersion },
+    extraction: { adapterId: 'ticket-26-legacy-source-capture', version: adapterVersion },
   }))
   const assetDocument = record.documents.find((document) => document.role === 'asset-projection')
   for (const group of Object.values(asset.content.groups)) {
@@ -840,7 +848,7 @@ function ticket26Observations(record, asset) {
           ...(typeof blank?.prompt === 'string' && blank.prompt.length > 0 ? { prompt: blank.prompt } : {}),
         },
         span: { start: 0, end: assetDocument.byteLength },
-        extraction: { adapterId: 'ticket-26-legacy-source-capture', version: legacySourceAdapterVersion },
+        extraction: { adapterId: 'ticket-26-legacy-source-capture', version: adapterVersion },
       })
     }
   }
@@ -907,7 +915,8 @@ function structuralVariant({ group, slot, questionIds, blankIds, questions, answ
  * paper-figures-manifest-v1 may replace one exact declared marker with an
  * opaque Figure; it never infers a table grid or any unlabelled semantics.
  */
-export function deriveTicket26LegacySource(sourceCaptureBytes) {
+export function deriveTicket26LegacySource(sourceCaptureBytes, options = {}) {
+  const adapterVersion = legacySourceAdapterVersionFor(options)
   const record = resolveTicket26LegacySourceCapture(sourceCaptureBytes)
   if (!record) throw new Error('Ticket 26 legacy source capture is not trusted')
   const asset = record.documents.find((document) => document.role === 'asset-projection').value
@@ -918,10 +927,12 @@ export function deriveTicket26LegacySource(sourceCaptureBytes) {
   const profileId = profileForStructuralShape(groups, writingTasks)
   const answersByQuestionId = answerByQuestionId(answerKey)
   const figuresByGroupId = new Map()
-  for (const figure of record.figures || []) {
-    const current = figuresByGroupId.get(figure.groupId) || []
-    current.push(figure)
-    figuresByGroupId.set(figure.groupId, current)
+  if (adapterVersion === currentLegacySourceAdapterVersion) {
+    for (const figure of record.figures || []) {
+      const current = figuresByGroupId.get(figure.groupId) || []
+      current.push(figure)
+      figuresByGroupId.set(figure.groupId, current)
+    }
   }
   let readingIndex = 0
   const assetSpanId = sourceSpanId(record, 'asset-projection')
@@ -1022,7 +1033,7 @@ export function deriveTicket26LegacySource(sourceCaptureBytes) {
       captureId: record.capture.captureId,
       digest: record.capture.digest,
     },
-    observations: ticket26Observations(record, asset),
+    observations: ticket26Observations(record, asset, adapterVersion),
     assertions,
     groups: projectedGroups,
     transformations: [],
@@ -1052,10 +1063,14 @@ function sameRoleSet(left, right) {
  * byte binding; source semantics are always re-derived from the committed
  * capture registry.
  */
-export function inspectTicket26LegacyEnvelopeSource(sourceCaptureBytes) {
+export function inspectTicket26LegacyEnvelopeSource(sourceCaptureBytes, options = {}) {
   const record = resolveTicket26LegacySourceCapture(sourceCaptureBytes)
   if (!record) return { ok: false, record: null, source: null }
-  return { ok: true, record, source: deriveTicket26LegacySource(record.captureBytes) }
+  return {
+    ok: true,
+    record,
+    source: deriveTicket26LegacySource(record.captureBytes, options),
+  }
 }
 
 /**

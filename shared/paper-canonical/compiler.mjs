@@ -3,6 +3,7 @@ import {
   resolveCanonicalAuthority,
   slotsForProfile,
   trustedDocxCandidateAuthorityRef,
+  trustedLegacyHistoricalCandidateAuthorityRef,
   trustedLegacyCaptureCandidateAuthorityRef,
   validateJsonSchema,
 } from './authority.mjs'
@@ -37,6 +38,30 @@ import { canonicalizeVisibleEnglishTypography } from './visibleTypography.mjs'
 import { replayCanonicalVisibleTypography } from './visibleTypographyReplay.mjs'
 
 const blockingPriority = ['answer_conflict', 'incomplete_source', 'unsupported', 'needs_review']
+
+const trustedLegacyCaptureCandidateAuthorities = [
+  trustedLegacyHistoricalCandidateAuthorityRef,
+  trustedLegacyCaptureCandidateAuthorityRef,
+]
+
+function sameAuthorityRef(left, right) {
+  return Boolean(
+    left
+    && right
+    && left.manifestId === right.manifestId
+    && left.manifestVersion === right.manifestVersion
+    && left.manifestDigest === right.manifestDigest,
+  )
+}
+
+function trustedLegacyCaptureCandidateAuthorityFor(authority) {
+  return trustedLegacyCaptureCandidateAuthorities.find((candidate) =>
+    sameAuthorityRef(authority, candidate)) || null
+}
+
+function legacySourceAdapterVersionForAuthority(authority) {
+  return authority?.manifestVersion === '41' ? '3' : '4'
+}
 
 function diagnostic(code, disposition, path, message, sourceSpanRefs = []) {
   return { code, disposition, path, message, sourceSpanRefs }
@@ -1853,7 +1878,11 @@ function parseDocxSourceEnvelope(documents, diagnostics) {
   }
 }
 
-function parseTicket26LegacySourceEnvelope(documents, diagnostics) {
+function parseTicket26LegacySourceEnvelope(
+  documents,
+  diagnostics,
+  { legacySourceAdapterVersion = '4' } = {},
+) {
   const envelopes = documents.filter(
     (document) => document.mediaType === TICKET_26_LEGACY_SOURCE_ENVELOPE_MEDIA_TYPE,
   )
@@ -1892,7 +1921,9 @@ function parseTicket26LegacySourceEnvelope(documents, diagnostics) {
       diagnostics.push(diagnostic('TICKET_26_LEGACY_CAPTURE_BINDING_MISMATCH', 'incomplete_source', '$.evidence.documents', 'Ticket 26 legacy envelope no longer binds the supplied immutable capture bytes'))
       return null
     }
-    const inspection = inspectTicket26LegacyEnvelopeSource(sourceCapture.bytes)
+    const inspection = inspectTicket26LegacyEnvelopeSource(sourceCapture.bytes, {
+      adapterVersion: legacySourceAdapterVersion,
+    })
     if (!inspection.ok || !ticket26LegacyCompilerDocumentsMatch(inspection.record, documents)) {
       diagnostics.push(diagnostic('TICKET_26_LEGACY_CAPTURE_UNTRUSTED', 'incomplete_source', '$.evidence.documents', 'Ticket 26 legacy capture identity or nested immutable document binding is not trusted'))
       return null
@@ -1910,10 +1941,14 @@ function parseTicket26LegacySourceEnvelope(documents, diagnostics) {
   }
 }
 
-function parseFixtureEvidence(documents, diagnostics) {
+function parseFixtureEvidence(documents, diagnostics, options = {}) {
   const docxEnvelope = parseDocxSourceEnvelope(documents, diagnostics)
   if (docxEnvelope !== undefined) return docxEnvelope
-  const ticket26LegacyEnvelope = parseTicket26LegacySourceEnvelope(documents, diagnostics)
+  const ticket26LegacyEnvelope = parseTicket26LegacySourceEnvelope(
+    documents,
+    diagnostics,
+    options,
+  )
   if (ticket26LegacyEnvelope !== undefined) return ticket26LegacyEnvelope
   const source = documents.find((document) => document.mediaType === 'application/vnd.eqb.canonical-fixture+json')
   if (!source) {
@@ -2935,7 +2970,14 @@ function blockedResult(disposition, capture, authority, diagnostics, records = [
  */
 export function compileCanonicalPaper(request) {
   const { documents, diagnostics } = captureRequestEvidence(request)
-  const parsed = parseFixtureEvidence(documents, diagnostics)
+  const requestedLegacyAuthority = trustedLegacyCaptureCandidateAuthorityFor(
+    request?.authority,
+  )
+  const parsed = parseFixtureEvidence(documents, diagnostics, {
+    legacySourceAdapterVersion: legacySourceAdapterVersionForAuthority(
+      requestedLegacyAuthority,
+    ),
+  })
   const capture = buildSourceCapture(documents, parsed, diagnostics)
   const reviewDecisions = normalizeReviewDecisions(request?.reviewDecisions, capture, diagnostics)
   const authorityResolution = resolveCanonicalAuthority(request?.authority)
@@ -2948,8 +2990,7 @@ export function compileCanonicalPaper(request) {
     && closure.authorityRef.manifestDigest
       === trustedDocxCandidateAuthorityRef.manifestDigest
   const acceptsTrustedLegacyCaptureCandidate = request?.[trustedLegacyCaptureCandidateCompile] === true
-    && closure.authorityRef.manifestDigest
-      === trustedLegacyCaptureCandidateAuthorityRef.manifestDigest
+    && Boolean(trustedLegacyCaptureCandidateAuthorityFor(closure.authorityRef))
   if (
     closure.authorityRef.manifestDigest !== canonicalAuthorityRef.manifestDigest
     && !acceptsTrustedDocxCandidate
@@ -3057,10 +3098,17 @@ function compileTrustedDocxCandidate(request) {
   })
 }
 
-function compileTrustedLegacyCaptureCandidate(request) {
+function compileTrustedLegacyCaptureCandidate(
+  request,
+  authority = trustedLegacyCaptureCandidateAuthorityRef,
+) {
+  const trustedAuthority = trustedLegacyCaptureCandidateAuthorityFor(authority)
+  if (!trustedAuthority) {
+    throw new Error('Trusted legacy Candidate compilation requires one registered authority')
+  }
   return compileCanonicalPaper({
     ...request,
-    authority: trustedLegacyCaptureCandidateAuthorityRef,
+    authority: trustedAuthority,
     [trustedLegacyCaptureCandidateCompile]: true,
   })
 }
@@ -3172,10 +3220,16 @@ function trustedDocxCandidateFromBytes(sourceBytes, operatorChoices) {
   }
 }
 
-function trustedLegacyCaptureCandidateBody({ sourceBytes, inspection, interpretation, issues }) {
+function trustedLegacyCaptureCandidateBody({
+  sourceBytes,
+  inspection,
+  interpretation,
+  issues,
+  authority,
+}) {
   return {
     schemaVersion: trustedLegacyCaptureCandidateSchemaVersion,
-    authority: trustedLegacyCaptureCandidateAuthorityRef,
+    authority,
     source: {
       mediaType: TICKET_26_LEGACY_CAPTURE_MEDIA_TYPE,
       sha256: sha256(sourceBytes),
@@ -3211,11 +3265,23 @@ function isTrustedLegacyCaptureCandidateShape(candidate) {
     && exactKeys(candidate.operatorChoices, [])
 }
 
-function trustedLegacyCaptureCandidateFromBytes(sourceBytes) {
+function trustedLegacyCaptureCandidateFromBytes(
+  sourceBytes,
+  authority = trustedLegacyCaptureCandidateAuthorityRef,
+) {
+  const trustedAuthority = trustedLegacyCaptureCandidateAuthorityFor(authority)
+  if (!trustedAuthority) {
+    return {
+      candidate: null,
+      issues: [trustedDocxIssue('AUTHORITY_UNAVAILABLE', 'Import Candidate requires one registered legacy source authority')],
+    }
+  }
   const immutableBytes = new Uint8Array(sourceBytes)
   let inspection
   try {
-    inspection = inspectTicket26LegacyEnvelopeSource(immutableBytes)
+    inspection = inspectTicket26LegacyEnvelopeSource(immutableBytes, {
+      adapterVersion: legacySourceAdapterVersionForAuthority(trustedAuthority),
+    })
   } catch {
     inspection = null
   }
@@ -3230,6 +3296,7 @@ function trustedLegacyCaptureCandidateFromBytes(sourceBytes) {
     inspection,
     interpretation: inspection.source,
     issues: [],
+    authority: trustedAuthority,
   })
   return {
     candidate: {
@@ -3257,10 +3324,16 @@ function candidateRoute(candidate) {
     }
   }
   if (isTrustedLegacyCaptureCandidateShape(candidate)) {
+    const authority = trustedLegacyCaptureCandidateAuthorityFor(candidate.authority)
+    if (!authority) return null
     return {
-      rerun: () => trustedLegacyCaptureCandidateFromBytes(candidate.sourceBytes),
+      rerun: () => trustedLegacyCaptureCandidateFromBytes(
+        candidate.sourceBytes,
+        authority,
+      ),
       compile: (rerun) => compileTrustedLegacyCaptureCandidate(
         buildTicket26LegacyCompilerRequest(rerun.candidate.sourceBytes),
+        authority,
       ),
     }
   }
@@ -3302,7 +3375,7 @@ export function importCanonicalCandidate(sourceBytes, operatorChoices) {
  * bounded confirmation. It either returns one complete Canonical Paper or no
  * paper and unresolved issues.
  */
-export function confirmCanonicalCandidate(candidate, teacherConfirmation) {
+export function rederiveConfirmedCanonicalCandidate(candidate, teacherConfirmation) {
   if (!exactKeys(teacherConfirmation, ['schemaVersion', 'candidateDigest', 'sourceDigest', 'confirmed']) || teacherConfirmation.schemaVersion !== confirmationSchemaVersion) {
     return { unresolvedIssues: [trustedDocxIssue('CALLER_SEMANTICS_REJECTED', 'Teacher Confirmation may bind only the candidate digest, source digest, and explicit confirmation')] }
   }
@@ -3341,17 +3414,28 @@ export function confirmCanonicalCandidate(candidate, teacherConfirmation) {
     }
   }
   return {
+    compilation,
+    candidate: rerun.candidate,
+    confirmation: {
+      schemaVersion: confirmationSchemaVersion,
+      candidateDigest: rerun.candidate.candidateDigest,
+      sourceDigest: rerun.candidate.source.sha256,
+    },
+  }
+}
+
+export function confirmCanonicalCandidate(candidate, teacherConfirmation) {
+  const confirmed = rederiveConfirmedCanonicalCandidate(candidate, teacherConfirmation)
+  if (!confirmed.compilation) return confirmed
+  const { compilation } = confirmed
+  return {
     canonicalPaper: {
       ...compilation.artifacts.canonicalPaper,
       ...(candidate.schemaVersion === trustedLegacyCaptureCandidateSchemaVersion
         ? { sourceCapture: compilation.artifacts.sourceCapture }
         : {}),
     },
-    confirmation: {
-      schemaVersion: confirmationSchemaVersion,
-      candidateDigest: rerun.candidate.candidateDigest,
-      sourceDigest: rerun.candidate.source.sha256,
-    },
+    confirmation: confirmed.confirmation,
   }
 }
 

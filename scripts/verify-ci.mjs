@@ -30,6 +30,7 @@ const registry = {
   'scripts/verify-paper-canonical-foundation.mjs',
   'scripts/verify-paper-canonical-publication.mjs',
   'scripts/verify-paper-canonical-import-admission.mjs',
+  'scripts/verify-paper-canonical-registered-confirmation-admission.mjs',
   'scripts/verify-paper-canonical-import-recovery.mjs',
   'scripts/verify-paper-canonical-import-pilot-fixes.mjs',
   'scripts/verify-paper-canonical-import-pilot.mjs',

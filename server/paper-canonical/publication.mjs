@@ -16,6 +16,11 @@ import {
   validateExactTransformationRecords,
 } from '../../shared/paper-canonical/compiler.mjs'
 import {
+  isRegisteredConfirmedCanonicalAdmission,
+  isRegisteredConfirmedCanonicalPublicationAuthority,
+  resolveRegisteredConfirmedCanonicalAdmission,
+} from './registeredConfirmedCanonicalAdmission.mjs'
+import {
   consumerContractRefs,
   resolveConsumerContract,
 } from '../../shared/paper-canonical/consumers.mjs'
@@ -30,6 +35,9 @@ const publicationFileName =
   `canonical-paper-publication-v${canonicalAuthorityRef.manifestVersion}.json`
 const publicationFileNames = [
   publicationFileName,
+  'canonical-paper-publication-v42.json',
+  'canonical-paper-publication-v41.json',
+  'canonical-paper-publication-v37.json',
   'canonical-paper-publication-v35.json',
   'canonical-paper-publication-v34.json',
   'canonical-paper-publication-v33.json',
@@ -219,6 +227,10 @@ function validatePublicationLineage({ sourceCapture, plan, groups, normalization
   const closesInactiveSource = Number(
     authorityClosure.authorityRef.manifestVersion,
   ) >= 11
+  const requiresInactiveSourceClosure = closesInactiveSource
+    && !isRegisteredConfirmedCanonicalPublicationAuthority(
+      authorityClosure.authorityRef,
+    )
   const { spans } = validateSourceCaptureIntegrity(sourceCapture, { requireEmbeddedEvidence: !legacyAuthority })
   const records = normalizationReport.transformationRecords || []
   const recordIds = new Set(records.map((record) => record.recordId))
@@ -245,7 +257,7 @@ function validatePublicationLineage({ sourceCapture, plan, groups, normalization
   const inactiveSourceClosures = closesInactiveSource
     ? normalizationReport.inactiveSourceClosures || []
     : []
-  if (closesInactiveSource) {
+  if (requiresInactiveSourceClosure) {
     const profile = authorityClosure.profiles.get(plan.profileRef?.profileId)
     const inactiveSlots = profile
       ? profile.parts.flatMap((part) =>
@@ -350,14 +362,26 @@ function validatePublicationLineage({ sourceCapture, plan, groups, normalization
   if (normalizationReport.sourceFingerprint !== expectedSourceFingerprint || stableStringify(normalizationReport.directSourceMap) !== stableStringify(expectedDirectSourceMap) || normalizationReport.semanticDigest !== expectedSemanticDigest) throw publicationError('CANONICAL_PUBLICATION_LINEAGE_INVALID', 'Normalization Report does not close its direct source lineage')
 }
 
-export function sealCanonicalPublication({ compilation, sourceAssetVersion, sourceAsset }) {
+export function sealCanonicalPublication({
+  compilation,
+  sourceAssetVersion,
+  sourceAsset,
+  registeredConfirmationProof = null,
+}) {
   if (compilation?.disposition !== 'ready') throw publicationError('CANONICAL_PUBLICATION_BLOCKED', 'Only a complete ready compilation may be published')
   if (!(sourceAsset instanceof Uint8Array) || !Number.isInteger(sourceAssetVersion) || sourceAssetVersion < 1) throw publicationError('CANONICAL_PUBLICATION_INPUT_INVALID', 'Publication needs immutable source asset bytes and a positive version')
   const { sourceCapture, canonicalPaper, normalizationReport } = compilation.artifacts
   const authority = resolveCanonicalAuthority(canonicalPaper?.paperPlan?.authorityRef)
   if (!authority.ok) throw publicationError('CANONICAL_PUBLICATION_AUTHORITY_INVALID', 'Compilation does not bind a known authority')
   const closure = authority.closure
-  if (closure.authorityRef.manifestDigest !== canonicalAuthorityRef.manifestDigest) throw publicationError('CANONICAL_PUBLICATION_AUTHORITY_RETIRED', 'Only the current canonical authority may create a new publication')
+  if (
+    closure.authorityRef.manifestDigest !== canonicalAuthorityRef.manifestDigest
+    && !isRegisteredConfirmedCanonicalAdmission({
+      proof: registeredConfirmationProof,
+      compilation,
+      sourceAsset,
+    })
+  ) throw publicationError('CANONICAL_PUBLICATION_AUTHORITY_RETIRED', 'Only the current canonical authority or one exact registered confirmed chain may create a new publication')
   const artifactPaths = artifactPathsFor(closure.authorityRef)
   assertPaperId(canonicalPaper?.paperPlan?.paperId)
   validateSourceCaptureIntegrity(sourceCapture)
@@ -1005,8 +1029,31 @@ export function admitCanonicalPaperImport({
   request,
   sourceAssetVersion,
   sourceAsset,
+  registeredConfirmation,
 }) {
-  const compilation = compileCanonicalPaper(request)
+  let compilation
+  let effectiveSourceAsset = sourceAsset
+  let registeredConfirmationProof = null
+  try {
+    if (registeredConfirmation !== undefined) {
+      if (request !== undefined || sourceAsset !== undefined) {
+        throw publicationError(
+          'CANONICAL_PUBLICATION_REGISTERED_INPUT_INVALID',
+          'Registered confirmation admission resolves its own source and does not accept an import request or source override',
+        )
+      }
+      const registered = resolveRegisteredConfirmedCanonicalAdmission(
+        registeredConfirmation,
+      )
+      compilation = registered.compilation
+      effectiveSourceAsset = registered.sourceAsset
+      registeredConfirmationProof = registered.proof
+    } else {
+      compilation = compileCanonicalPaper(request)
+    }
+  } catch (error) {
+    return admissionFailure(compilation, error)
+  }
   if (compilation.disposition !== 'ready') {
     return admissionFailure(compilation)
   }
@@ -1014,7 +1061,8 @@ export function admitCanonicalPaperImport({
     const sealed = sealCanonicalPublication({
       compilation,
       sourceAssetVersion,
-      sourceAsset,
+      sourceAsset: effectiveSourceAsset,
+      registeredConfirmationProof,
     })
     const ref = {
       paperId: sealed.manifest.paperId,
@@ -1045,12 +1093,14 @@ export function publishCanonicalPaperPublication({
   request,
   sourceAssetVersion,
   sourceAsset,
+  registeredConfirmation,
   failurePoint = null,
 }) {
   const admission = admitCanonicalPaperImport({
     request,
     sourceAssetVersion,
     sourceAsset,
+    registeredConfirmation,
   })
   if (!admission.ok) return admission
   const { sealed } = admission

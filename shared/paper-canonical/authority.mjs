@@ -2532,6 +2532,10 @@ export const canonicalAuthorityRef = authorities.find((authority) => authority.m
 // Ticket 25 can derive and confirm source-bound candidates under v37 without
 // advancing publication/current authority beyond the existing v36 closure.
 export const trustedDocxCandidateAuthorityRef = authorities.find((authority) => authority.manifest.version === '37').authorityRef
+// Ticket 31a may replay only the exact pre-v42 legacy Candidate authority
+// recorded by the immutable confirmation lanes. It is not a current import
+// authority and cannot be selected by ordinary callers.
+export const trustedLegacyHistoricalCandidateAuthorityRef = authorities.find((authority) => authority.manifest.version === '41').authorityRef
 // Ticket 26's committed legacy JSON capture is a migration Source. It can use
 // the same Candidate -> Teacher Confirmation seam under v42 without advancing
 // the v36 publication/current authority.
