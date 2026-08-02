@@ -34,6 +34,67 @@ function contentText(content) {
     .join('')
 }
 
+function groupInlines(group) {
+  return (group.content?.blocks || []).flatMap((block) => block.inlines || [])
+}
+
+function reconstructedPassage(group) {
+  const questionNoByBlankId = new Map(
+    group.blankIds.map((blankId, index) => [blankId, group.questions[index]?.questionNo]),
+  )
+  return (group.content?.blocks || []).map((block) => (block.inlines || []).map((inline) => (
+    inline.kind === 'blank_ref'
+      ? `__${questionNoByBlankId.get(inline.blankId)}__`
+      : inline.text || ''
+  )).join('')).join('\n')
+}
+
+function assertMarkerProjection(group) {
+  const inlines = groupInlines(group)
+  const blankRefs = inlines.filter((inline) => inline.kind === 'blank_ref')
+  assert.deepEqual(
+    blankRefs.map((inline) => inline.blankId),
+    group.blankIds,
+    `${group.groupId} must retain ordered Blank identities from its frozen question membership`,
+  )
+  assert.equal(new Set(blankRefs.map((inline) => inline.blankId)).size, group.blankIds.length)
+  assert.equal(
+    inlines.some((inline) => inline.kind === 'text' && /__\d+__/.test(inline.text)),
+    false,
+    `${group.groupId} must not leave a matched source marker as raw text`,
+  )
+  assert.equal(
+    reconstructedPassage(group),
+    (group.passage?.paragraphs || []).map((paragraph) => paragraph.text).join('\n'),
+    `${group.groupId} marker projection must preserve all frozen passage text`,
+  )
+  for (const blankId of group.blankIds) {
+    assert.deepEqual(
+      group.sourceSpanRefsByTarget[`blank:${blankId}`],
+      [group.sourceSpanId],
+      `${group.groupId} ${blankId} must retain its frozen asset source span`,
+    )
+  }
+}
+
+function contentRefText(content, ref) {
+  const block = (content.blocks || []).find((candidate) => candidate.nodeId === ref?.blockId)
+  const selected = new Set(ref?.inlineNodeIds || [])
+  return (block?.inlines || [])
+    .filter((inline) => selected.has(inline.nodeId))
+    .map((inline) => inline.text || '')
+    .join('')
+}
+
+function blockText(content, blockId) {
+  const block = (content.blocks || []).find((candidate) => candidate.nodeId === blockId)
+  return contentText({ blocks: block ? [block] : [] })
+}
+
+function observationById(source, observationId) {
+  return source.observations.find((observation) => observation.observationId === observationId)
+}
+
 function candidateWithReboundDigest(candidate) {
   const { candidateDigest: _candidateDigest, sourceBytes: _sourceBytes, ...body } = candidate
   return { ...candidate, candidateDigest: digestJson(body) }
@@ -236,6 +297,100 @@ assert.deepEqual(
   'one shared structural mapper must cover all three frozen profile shapes',
 )
 
+const sourceByPaperId = new Map(allSources.map((entry) => [entry.paperId, entry.projected]))
+for (const paperId of ['paper-2020-i', 'paper-2020-bing', 'paper-zj-2020-jan']) {
+  const projected = sourceByPaperId.get(paperId)
+  for (const slotId of ['reading.seven-choices', 'language.cloze', 'language.grammar-fill']) {
+    assertMarkerProjection(
+      projected.groups.find((group) => group.slotId === slotId),
+    )
+  }
+}
+
+const nck1Source = sourceByPaperId.get('paper-2020-i')
+const nck1Grammar = nck1Source.groups.find((group) => group.slotId === 'language.grammar-fill')
+const grammarBlankId = 'blank-2020-i-058'
+const grammarBlankPosition = groupInlines(nck1Grammar).findIndex(
+  (inline) => inline.kind === 'blank_ref' && inline.blankId === grammarBlankId,
+)
+assert.equal(
+  groupInlines(nck1Grammar)[grammarBlankPosition + 1]?.text,
+  ' (form)',
+  'a source prompt remains the immediate sibling of its grammar Blank even when the following source byte is NBSP',
+)
+assert.deepEqual(
+  nck1Grammar.sourceSpanRefsByTarget[`prompt_provision:${grammarBlankId}`],
+  [`source-span:observation:ticket-26:paper-2020-i:grammar-fill-prompt:${grammarBlankId}`],
+)
+
+const nck1Application = nck1Source.groups.find((group) => group.slotId === 'writing.application')
+assert.equal(nck1Application.variant.writingTaskId, nck1Application.writingTask.writingTaskId)
+assert.deepEqual(
+  nck1Application.variant.promptBlockRefs,
+  nck1Application.content.blocks.map((block) => block.nodeId),
+  'Application Writing must retain every source prompt block in source order',
+)
+for (const ref of Object.values(nck1Application.variant.situation)) {
+  assert.ok(contentRefText(nck1Application.content, ref).length > 0)
+}
+assert.equal(nck1Application.variant.contentRequirements.length, 1)
+assert.equal(nck1Application.variant.wordCountRuling.target, nck1Application.writingTask.wordCountTarget)
+assert.ok(contentRefText(
+  nck1Application.content,
+  nck1Application.variant.wordCountRuling.sourceRef,
+).includes(String(nck1Application.writingTask.wordCountTarget)))
+assert.equal(nck1Application.variant.givenSkeleton.presence, 'none')
+assert.equal(
+  observationById(nck1Source, nck1Application.variant.wordCountRuling.authorityObservationRef)?.kind,
+  'application_word_count_ruling',
+)
+assert.equal(
+  observationById(nck1Source, nck1Application.variant.response.authorityObservationRef)?.kind,
+  'application_response_binding',
+)
+
+const nck1Continuation = nck1Source.groups.find((group) => group.slotId === 'writing.continuation')
+assert.equal(nck1Continuation.variant.writingTaskId, nck1Continuation.writingTask.writingTaskId)
+assert.equal(nck1Continuation.variant.wordCountRuling.target, nck1Continuation.writingTask.wordCountTarget)
+assert.deepEqual(
+  nck1Continuation.variant.starterProvision.starters.map((starter) => blockText(
+    nck1Continuation.content,
+    starter.contentRef,
+  )),
+  nck1Continuation.writingTask.continuationStarters,
+  'Continuation starters must be copied only from the frozen ordered starter field',
+)
+assert.equal(
+  observationById(nck1Source, nck1Continuation.variant.response.authorityObservationRef)?.kind,
+  'continuation_response_binding',
+)
+
+const nationalSource = sourceByPaperId.get('paper-2020-bing')
+assert.deepEqual(
+  Object.keys(nationalSource.inactiveSlots).sort(),
+  ['listening.long-form', 'listening.short-dialogue', 'writing.guided-writing', 'writing.short-error-correction'],
+)
+for (const refs of Object.values(nationalSource.inactiveSlots)) {
+  assert.deepEqual(refs, [nationalSource.groups[0].sourceSpanId])
+}
+
+const unmatchedMarkerSource = sourceByPaperId.get('paper-960d0f8d')
+const unmatchedGrammar = unmatchedMarkerSource.groups.find((group) => group.slotId === 'language.grammar-fill')
+assert.equal(groupInlines(unmatchedGrammar).filter((inline) => inline.kind === 'blank_ref').length, 0)
+assert.ok(contentText(unmatchedGrammar.content).includes('56._____'))
+
+const ambiguousStarterSource = sourceByPaperId.get('paper-zj-2022-jun')
+const ambiguousContinuation = ambiguousStarterSource.groups.find((group) => group.slotId === 'writing.continuation')
+assert.equal(ambiguousContinuation.variant.starterProvision.starters.length, 3)
+assert.deepEqual(
+  ambiguousContinuation.variant.starterProvision.starters.map((starter) => blockText(
+    ambiguousContinuation.content,
+    starter.contentRef,
+  )),
+  ambiguousContinuation.writingTask.continuationStarters,
+  'a three-entry frozen starter field must be preserved whole rather than guessed into two starters',
+)
+
 const confirmation = {
   schemaVersion: 'teacher-confirmation-v1',
   candidateDigest: firstImport.candidate.candidateDigest,
@@ -249,6 +404,7 @@ assert.equal(
   'confirmed legacy input must yield exactly one Canonical Paper or one unresolved result, never a partial paper',
 )
 assert.equal('publication' in confirmationResult, false, 'Teacher Confirmation must not publish')
+assert.ok(confirmationResult.canonicalPaper, 'the representative NCK1 source must now close as one complete unpublished Canonical Paper')
 assert.deepEqual(
   confirmCanonicalCandidate(firstImport.candidate, { ...confirmation, sourceDigest: 'sha256:forged' }).unresolvedIssues.map(({ code }) => code),
   ['CONFIRMATION_SOURCE_MISMATCH'],
@@ -262,23 +418,47 @@ assert.deepEqual(
   ['TEACHER_CONFIRMATION_REQUIRED'],
 )
 
+const confirmations = allSources.map(({ paperId, candidate }) => {
+  const result = confirmCanonicalCandidate(candidate, {
+    schemaVersion: 'teacher-confirmation-v1',
+    candidateDigest: candidate.candidateDigest,
+    sourceDigest: candidate.source.sha256,
+    confirmed: true,
+  })
+  return {
+    paperId,
+    result,
+    ...(result.canonicalPaper
+      ? { disposition: 'canonical' }
+      : { disposition: 'unresolved', codes: [...new Set(result.unresolvedIssues.map(({ code }) => code))].sort() }),
+  }
+})
+assert.equal(confirmations.filter((item) => item.disposition === 'canonical').length, 24)
+assert.deepEqual(
+  confirmations.filter((item) => item.disposition === 'unresolved').map(({ paperId, codes }) => ({ paperId, codes })),
+  [
+    { paperId: 'paper-960d0f8d', codes: ['APPLICATION_WORD_RULING_UNPROVEN', 'GRAMMAR_FILL_PROMPT_SOURCE_DISAGREEMENT', 'REFERENCE_BLANK_OCCURRENCE'] },
+    { paperId: 'paper-zj-2020-jan', codes: ['CONTINUATION_CONTENT_OWNERSHIP_INCOMPLETE', 'CONTINUATION_PROFILE_CARDINALITY_UNSUPPORTED'] },
+    { paperId: 'paper-zj-2020-jul', codes: ['GROUP_CARDINALITY_MISMATCH'] },
+    { paperId: 'paper-zj-2021-jan', codes: ['CONTINUATION_CONTENT_OWNERSHIP_INCOMPLETE', 'CONTINUATION_PROFILE_CARDINALITY_UNSUPPORTED'] },
+    { paperId: 'paper-zj-2021-jun', codes: ['CONTINUATION_CONTENT_OWNERSHIP_INCOMPLETE', 'CONTINUATION_PROFILE_CARDINALITY_UNSUPPORTED'] },
+    { paperId: 'paper-zj-2022-jan', codes: ['CONTINUATION_CONTENT_OWNERSHIP_INCOMPLETE', 'CONTINUATION_PROFILE_CARDINALITY_UNSUPPORTED'] },
+    { paperId: 'paper-zj-2022-jun', codes: ['CONTINUATION_CONTENT_OWNERSHIP_INCOMPLETE', 'CONTINUATION_STARTER_BOUNDARY_AMBIGUOUS'] },
+  ],
+  'the full 31-paper accounting must stay deterministic and fail closed only for source/contract gaps the adapter cannot guess',
+)
+const canonicalGrammar = confirmationResult.canonicalPaper.questionGroups.find(
+  (group) => group.identity.groupId === nck1Grammar.groupId,
+)
+for (const blankId of nck1Grammar.blankIds) {
+  assert.ok(canonicalGrammar.sourceMap.entries.some((entry) => (
+    entry.target.kind === 'blank'
+    && entry.target.id === blankId
+    && entry.sourceSpanRefs.includes(nck1Grammar.sourceSpanId)
+  )))
+}
 const dryRun = process.argv.includes('--dry-run')
-const unresolved = dryRun
-  ? allSources.map(({ paperId, candidate }) => {
-      const result = confirmCanonicalCandidate(candidate, {
-        schemaVersion: 'teacher-confirmation-v1',
-        candidateDigest: candidate.candidateDigest,
-        sourceDigest: candidate.source.sha256,
-        confirmed: true,
-      })
-      return {
-        paperId,
-        ...(result.canonicalPaper
-          ? { disposition: 'canonical' }
-          : { disposition: 'unresolved', codes: [...new Set(result.unresolvedIssues.map(({ code }) => code))].sort() }),
-      }
-    })
-  : []
+const unresolved = dryRun ? confirmations : []
 const unresolvedPaperIds = unresolved.filter((item) => item.disposition === 'unresolved').map((item) => item.paperId)
 const unresolvedByCodeSet = Object.values(unresolved
   .filter((item) => item.disposition === 'unresolved')

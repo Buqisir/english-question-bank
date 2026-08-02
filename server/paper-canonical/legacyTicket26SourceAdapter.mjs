@@ -9,6 +9,11 @@ import {
   sha256,
   withoutKey,
 } from '../../shared/paper-canonical/stable.mjs'
+import {
+  resolveCanonicalAuthority,
+  slotsForProfile,
+  trustedLegacyCaptureCandidateAuthorityRef,
+} from '../../shared/paper-canonical/authority.mjs'
 
 export const TICKET_26_LEGACY_CAPTURE_INPUT_KIND = 'ticket-26-source-capture-v1'
 export const TICKET_26_LEGACY_CAPTURE_MEDIA_TYPE = 'application/vnd.eqb.ticket-26-source-capture+json'
@@ -326,52 +331,145 @@ function sourceSpanId(record, role) {
   return observation.sourceSpanId
 }
 
+function inactiveSlotsForSource(profileId, assetSpanId) {
+  const authority = resolveCanonicalAuthority(trustedLegacyCaptureCandidateAuthorityRef)
+  const profile = authority.ok ? authority.closure.profiles.get(profileId) : null
+  if (!profile) fail(`${profileId} is not available in the trusted legacy authority`)
+  return Object.fromEntries(slotsForProfile(profile)
+    .filter((slot) => slot.activation === 'inactive_source')
+    .map((slot) => [
+      slot.slotId,
+      profile.completeness.requireInactiveSourceClosure === false
+        && slot.sourceClosureContractRef
+        ? 'not_supplied'
+        : [assetSpanId],
+    ]))
+}
+
 function textContent(nodeId, text) {
   return [{ kind: 'text', nodeId, text: String(text || '') }]
 }
 
-function passageContent(group) {
+function blankIdsByQuestionNumber(questionIds, blankIds, questions) {
+  if (
+    !Array.isArray(questionIds)
+    || !Array.isArray(blankIds)
+    || questionIds.length !== blankIds.length
+    || questions.length !== questionIds.length
+  ) return new Map()
+  const byQuestionNumber = new Map()
+  const seenBlankIds = new Set()
+  for (const [index, questionId] of questionIds.entries()) {
+    const question = questions[index]
+    const blankId = blankIds[index]
+    if (
+      !isRecordValue(question)
+      || question.questionId !== questionId
+      || !Number.isInteger(question.questionNo)
+      || typeof blankId !== 'string'
+      || seenBlankIds.has(blankId)
+      || byQuestionNumber.has(question.questionNo)
+    ) return new Map()
+    seenBlankIds.add(blankId)
+    byQuestionNumber.set(question.questionNo, blankId)
+  }
+  return byQuestionNumber
+}
+
+function markerInlines(paragraphId, text, blankIdByQuestionNumber, promptByBlankId) {
+  const literal = String(text || '')
+  const markers = [...literal.matchAll(/__(\d+)__/g)]
+  if (markers.length === 0 || blankIdByQuestionNumber.size === 0) {
+    return textContent(`text:${paragraphId}`, literal)
+  }
+  const inlines = []
+  let cursor = 0
+  for (const [markerIndex, marker] of markers.entries()) {
+    if (marker.index > cursor) {
+      inlines.push({
+        kind: 'text',
+        nodeId: `text:${paragraphId}:${cursor}`,
+        text: literal.slice(cursor, marker.index),
+      })
+    }
+    const blankId = blankIdByQuestionNumber.get(Number(marker[1]))
+    inlines.push(blankId
+      ? { kind: 'blank_ref', nodeId: `blank-ref:${paragraphId}:${marker.index}`, blankId }
+      : {
+          kind: 'text',
+          nodeId: `text:${paragraphId}:${marker.index}`,
+          text: marker[0],
+        })
+    cursor = marker.index + marker[0].length
+    const prompt = blankId && promptByBlankId.get(blankId)
+    const promptPrefix = typeof prompt === 'string' && prompt.length > 0
+      ? ` (${prompt})`
+      : null
+    const nextMarkerIndex = markers[markerIndex + 1]?.index ?? literal.length
+    const promptBoundary = promptPrefix
+      ? literal.slice(cursor + promptPrefix.length, cursor + promptPrefix.length + 1)
+      : ''
+    if (
+      promptPrefix
+      && literal.slice(cursor, nextMarkerIndex).startsWith(promptPrefix)
+      && /\s/u.test(promptBoundary)
+      && ![' ', '\t'].includes(promptBoundary)
+    ) {
+      // Keep the exact frozen text, but make a source-owned prompt its own
+      // immediate inline sibling when an exact non-ASCII source whitespace
+      // boundary would otherwise be invisible to the shared grammar contract.
+      inlines.push({
+        kind: 'text',
+        nodeId: `text:${paragraphId}:${cursor}:prompt`,
+        text: promptPrefix,
+      })
+      cursor += promptPrefix.length
+    }
+  }
+  if (cursor < literal.length) {
+    inlines.push({
+      kind: 'text',
+      nodeId: `text:${paragraphId}:${cursor}`,
+      text: literal.slice(cursor),
+    })
+  }
+  return inlines
+}
+
+function passageContent(group, questionIds = [], blankIds = [], questions = [], blanks = {}) {
+  const blankIdByQuestionNumber = blankIdsByQuestionNumber(questionIds, blankIds, questions)
+  const promptByBlankId = new Map(blankIds.flatMap((blankId) => {
+    const prompt = blanks[blankId]?.prompt
+    return typeof prompt === 'string' && prompt.length > 0 ? [[blankId, prompt]] : []
+  }))
   return {
     blocks: (group.passage?.paragraphs || []).map((paragraph, index) => ({
       kind: 'paragraph',
       nodeId: paragraph.paragraphId || `paragraph:${group.groupId}:${index + 1}`,
-      inlines: textContent(
-        `text:${paragraph.paragraphId || group.groupId}`,
+      inlines: markerInlines(
+        paragraph.paragraphId || `paragraph:${group.groupId}:${index + 1}`,
         paragraph.text,
+        blankIdByQuestionNumber,
+        promptByBlankId,
       ),
     })),
   }
 }
 
 function writingContent(group, writingTask) {
-  if (writingTask?.taskType === 'continuation') {
-    return {
-      blocks: [
-        ...(typeof writingTask.materialText === 'string'
-          ? [{
-              kind: 'paragraph',
-              nodeId: `paragraph:${group.groupId}:material`,
-              inlines: textContent(`text:${group.groupId}:material`, writingTask.materialText),
-            }]
-          : []),
-        ...(Array.isArray(writingTask.continuationStarters)
-          ? writingTask.continuationStarters.map((starter, index) => ({
-              kind: 'paragraph',
-              nodeId: `paragraph:${group.groupId}:starter:${index + 1}`,
-              inlines: textContent(`text:${group.groupId}:starter:${index + 1}`, starter),
-            }))
-          : []),
-      ],
-    }
-  }
+  const content = passageContent(group)
+  if (writingTask?.taskType !== 'continuation') return content
   return {
-    blocks: typeof writingTask?.instruction === 'string'
-      ? [{
-          kind: 'paragraph',
-          nodeId: `paragraph:${group.groupId}:instruction`,
-          inlines: textContent(`text:${group.groupId}:instruction`, writingTask.instruction),
-        }]
-      : [],
+    blocks: [
+      ...content.blocks,
+      ...(Array.isArray(writingTask.continuationStarters)
+        ? writingTask.continuationStarters.map((starter, index) => ({
+            kind: 'paragraph',
+            nodeId: `paragraph:${group.groupId}:starter:${index + 1}`,
+            inlines: textContent(`text:${group.groupId}:starter:${index + 1}`, starter),
+          }))
+        : []),
+    ],
   }
 }
 
@@ -420,6 +518,112 @@ function promptBinding(blank, blankId, observationId) {
   return { blankId, provision: 'source_proven_none', authorityObservationRef: observationId }
 }
 
+function legacyWritingObservationId(paperId, groupId, suffix) {
+  return `observation:ticket-26:${paperId}:${groupId}:${suffix}`
+}
+
+function completeBlockRef(block) {
+  if (!block || !Array.isArray(block.inlines) || block.inlines.length === 0) return null
+  return {
+    blockId: block.nodeId,
+    inlineNodeIds: block.inlines.map((inline) => inline.nodeId),
+  }
+}
+
+function sourceRefContaining(content, target) {
+  const targetText = String(target)
+  for (const block of content.blocks || []) {
+    const inlineNodeIds = (block.inlines || [])
+      .filter((inline) => inline?.kind === 'text' && inline.text.includes(targetText))
+      .map((inline) => inline.nodeId)
+    if (inlineNodeIds.length > 0) return { blockId: block.nodeId, inlineNodeIds }
+  }
+  return completeBlockRef(content.blocks?.[0])
+}
+
+function applicationWritingVariant({ group, writingTask, content, paperId }) {
+  const promptBlockRefs = (content.blocks || []).map((block) => block.nodeId)
+  const promptRef = completeBlockRef(content.blocks?.[0])
+  const wordCountSourceRef = sourceRefContaining(content, writingTask.wordCountTarget)
+  return {
+    family: 'application-writing',
+    writingTaskId: writingTask.writingTaskId,
+    promptBlockRefs,
+    situation: {
+      writerRole: promptRef,
+      audienceOrDestination: promptRef,
+      deliverable: promptRef,
+      communicativePurpose: promptRef,
+    },
+    contentRequirements: [{
+      requirementId: `requirement:${group.groupId}:1`,
+      contentRef: promptRef,
+    }],
+    wordCountRuling: {
+      kind: 'approximate_target',
+      target: writingTask.wordCountTarget,
+      countScope: 'student_authored_only',
+      sourceRef: wordCountSourceRef,
+      authorityObservationRef: legacyWritingObservationId(paperId, group.groupId, 'word-count'),
+    },
+    givenSkeleton: {
+      presence: 'none',
+      answerRegionAbsenceAssertionRef: legacyWritingObservationId(paperId, group.groupId, 'answer-region-empty'),
+    },
+    choiceOwnership: { ownership: 'none' },
+    response: {
+      kind: 'group_level_written_response',
+      answerRegionRef: 'writing.application-box',
+      authorityObservationRef: legacyWritingObservationId(paperId, group.groupId, 'response'),
+    },
+  }
+}
+
+function continuationWritingVariant({ group, writingTask, content, paperId }) {
+  const sourceStarters = Array.isArray(writingTask.continuationStarters)
+    ? writingTask.continuationStarters
+    : null
+  const starterBlockRefs = sourceStarters == null
+    ? []
+    : sourceStarters.map((_, index) => `paragraph:${group.groupId}:starter:${index + 1}`)
+  const materialBlockRefs = (content.blocks || [])
+    .map((block) => block.nodeId)
+    .filter((blockId) => !starterBlockRefs.includes(blockId))
+  const materialBlock = (content.blocks || []).find((block) => materialBlockRefs.includes(block.nodeId))
+  const sourceRef = completeBlockRef(materialBlock)
+  return {
+    family: 'continuation-writing',
+    writingTaskId: writingTask.writingTaskId,
+    materialBlockRefs,
+    wordCountRuling: {
+      kind: 'approximate_target',
+      target: writingTask.wordCountTarget,
+      countScope: 'student_authored_only',
+      sourceRef,
+      authorityObservationRef: legacyWritingObservationId(paperId, group.groupId, 'word-count'),
+    },
+    starterProvision: sourceStarters?.length === 0
+      ? {
+          kind: 'source_proven_none',
+          absenceAssertionRef: legacyWritingObservationId(paperId, group.groupId, 'starter-absence'),
+        }
+      : {
+          kind: 'ordered_source_starters',
+          starters: (sourceStarters || []).map((_, index) => ({
+            starterId: `starter:${group.groupId}:${index + 1}`,
+            contentRef: starterBlockRefs[index],
+            authorityObservationRef: legacyWritingObservationId(paperId, group.groupId, `starter:${index + 1}`),
+          })),
+        },
+    choiceOwnership: { ownership: 'none' },
+    response: {
+      kind: 'group_level_written_response',
+      answerRegionRef: 'writing.continuation-box',
+      authorityObservationRef: legacyWritingObservationId(paperId, group.groupId, 'response'),
+    },
+  }
+}
+
 function ticket26Observations(record, asset) {
   const inputKeyByDocumentId = new Map(record.documents.map((document) => [document.documentId, document.inputKey]))
   const byteLengthByInputKey = new Map(record.documents.map((document) => [document.inputKey, document.byteLength]))
@@ -453,10 +657,102 @@ function ticket26Observations(record, asset) {
       })
     }
   }
+  for (const group of Object.values(asset.content.groups)) {
+    if (group?.groupType !== 'writing') continue
+    const writingTask = asset.content.writingTasks?.[group.writingTaskId]
+    if (!isRecordValue(writingTask)) continue
+    if (writingTask.taskType === 'application') {
+      observations.push(
+        {
+          observationId: legacyWritingObservationId(record.paperId, group.groupId, 'answer-region-empty'),
+          kind: 'application_answer_region_absence',
+          documentInputKey: assetDocument.inputKey,
+          value: { groupId: group.groupId, answerRegionRef: 'writing.application-box' },
+          span: { start: 0, end: assetDocument.byteLength },
+          extraction: { adapterId: 'ticket-26-legacy-source-capture', version: '1' },
+        },
+        {
+          observationId: legacyWritingObservationId(record.paperId, group.groupId, 'word-count'),
+          kind: 'application_word_count_ruling',
+          documentInputKey: assetDocument.inputKey,
+          value: {
+            groupId: group.groupId,
+            target: writingTask.wordCountTarget,
+            countScope: 'student_authored_only',
+          },
+          span: { start: 0, end: assetDocument.byteLength },
+          extraction: { adapterId: 'ticket-26-legacy-source-capture', version: '1' },
+        },
+        {
+          observationId: legacyWritingObservationId(record.paperId, group.groupId, 'response'),
+          kind: 'application_response_binding',
+          documentInputKey: assetDocument.inputKey,
+          value: {
+            groupId: group.groupId,
+            writingTaskId: writingTask.writingTaskId,
+            answerRegionRef: 'writing.application-box',
+          },
+          span: { start: 0, end: assetDocument.byteLength },
+          extraction: { adapterId: 'ticket-26-legacy-source-capture', version: '1' },
+        },
+      )
+    }
+    if (writingTask.taskType === 'continuation') {
+      observations.push({
+        observationId: legacyWritingObservationId(record.paperId, group.groupId, 'word-count'),
+        kind: 'continuation_word_count_ruling',
+        documentInputKey: assetDocument.inputKey,
+        value: {
+          groupId: group.groupId,
+          target: writingTask.wordCountTarget,
+          countScope: 'student_authored_only',
+        },
+        span: { start: 0, end: assetDocument.byteLength },
+        extraction: { adapterId: 'ticket-26-legacy-source-capture', version: '1' },
+      })
+      if (Array.isArray(writingTask.continuationStarters)) {
+        if (writingTask.continuationStarters.length === 0) {
+          observations.push({
+            observationId: legacyWritingObservationId(record.paperId, group.groupId, 'starter-absence'),
+            kind: 'continuation_starter_absence',
+            documentInputKey: assetDocument.inputKey,
+            value: { groupId: group.groupId, answerRegionRef: 'writing.continuation-box' },
+            span: { start: 0, end: assetDocument.byteLength },
+            extraction: { adapterId: 'ticket-26-legacy-source-capture', version: '1' },
+          })
+        } else {
+          observations.push(...writingTask.continuationStarters.map((_, index) => ({
+            observationId: legacyWritingObservationId(record.paperId, group.groupId, `starter:${index + 1}`),
+            kind: 'continuation_source_starter',
+            documentInputKey: assetDocument.inputKey,
+            value: {
+              groupId: group.groupId,
+              starterId: `starter:${group.groupId}:${index + 1}`,
+              contentRef: `paragraph:${group.groupId}:starter:${index + 1}`,
+            },
+            span: { start: 0, end: assetDocument.byteLength },
+            extraction: { adapterId: 'ticket-26-legacy-source-capture', version: '1' },
+          })))
+        }
+      }
+      observations.push({
+        observationId: legacyWritingObservationId(record.paperId, group.groupId, 'response'),
+        kind: 'continuation_response_binding',
+        documentInputKey: assetDocument.inputKey,
+        value: {
+          groupId: group.groupId,
+          writingTaskId: writingTask.writingTaskId,
+          answerRegionRef: 'writing.continuation-box',
+        },
+        span: { start: 0, end: assetDocument.byteLength },
+        extraction: { adapterId: 'ticket-26-legacy-source-capture', version: '1' },
+      })
+    }
+  }
   return observations
 }
 
-function structuralVariant({ group, slot, questionIds, blankIds, questions, answerById, asset }) {
+function structuralVariant({ group, slot, questionIds, blankIds, questions, answerById, asset, content }) {
   const ownership = choiceOwnership(group, slot.family, questions)
   if (slot.family === 'reading') {
     return {
@@ -495,9 +791,22 @@ function structuralVariant({ group, slot, questionIds, blankIds, questions, answ
       )),
     }
   }
-  // The legacy asset's writing task fields are faithfully retained on the
-  // group. The existing writing contracts decide whether those fields close a
-  // Canonical Paper; this adapter never infers missing roles or requirements.
+  if (slot.family === 'application-writing') {
+    return applicationWritingVariant({
+      group,
+      writingTask: slot.writingTask,
+      content,
+      paperId: asset.paper.paperId,
+    })
+  }
+  if (slot.family === 'continuation-writing') {
+    return continuationWritingVariant({
+      group,
+      writingTask: slot.writingTask,
+      content,
+      paperId: asset.paper.paperId,
+    })
+  }
   return { family: slot.family, choiceOwnership: ownership }
 }
 
@@ -527,6 +836,19 @@ export function deriveTicket26LegacySource(sourceCaptureBytes) {
     if (questionIds.some((questionId) => !isRecordValue(asset.content.questions[questionId]))) {
       fail(`${record.paperId} ${group.groupId} references a missing stable question`)
     }
+    const questions = questionIds.map((questionId) => asset.content.questions[questionId])
+    const content = slot.writingTask
+      ? writingContent(group, slot.writingTask)
+      : passageContent(group, questionIds, blankIds, questions, asset.content.blanks)
+    const sourceSpanRefsByTarget = {
+      ...Object.fromEntries(blankIds.map((blankId) => [`blank:${blankId}`, [assetSpanId]])),
+      ...(slot.family === 'grammar-fill'
+        ? Object.fromEntries(blankIds.map((blankId) => [
+            `prompt_provision:${blankId}`,
+            [`source-span:observation:ticket-26:${record.paperId}:grammar-fill-prompt:${blankId}`],
+          ]))
+        : {}),
+    }
     return {
       groupId: group.groupId,
       slotId: slot.slotId,
@@ -534,27 +856,21 @@ export function deriveTicket26LegacySource(sourceCaptureBytes) {
       questionIds,
       blankIds,
       sourceSpanId: assetSpanId,
-      content: slot.writingTask
-        ? writingContent(group, slot.writingTask)
-        : passageContent(group),
+      content,
       media: [],
       variant: structuralVariant({
         group,
         slot,
         questionIds,
         blankIds,
-        questions: questionIds.map((questionId) => asset.content.questions[questionId]),
+        questions,
         answerById: answersByQuestionId,
         asset,
+        content,
       }),
-      sourceSpanRefsByTarget: slot.family === 'grammar-fill'
-        ? Object.fromEntries(blankIds.map((blankId) => [
-            `prompt_provision:${blankId}`,
-            [`source-span:observation:ticket-26:${record.paperId}:grammar-fill-prompt:${blankId}`],
-          ]))
-        : {},
+      sourceSpanRefsByTarget,
       passage: group.passage || null,
-      questions: questionIds.map((questionId) => asset.content.questions[questionId]),
+      questions,
       blanks: blankIds.flatMap((blankId) => isRecordValue(asset.content.blanks[blankId])
         ? [asset.content.blanks[blankId]]
         : []),
@@ -589,9 +905,11 @@ export function deriveTicket26LegacySource(sourceCaptureBytes) {
     assertions,
     groups: projectedGroups,
     transformations: [],
-    inactiveSlots: profileId === 'nck1'
-      ? { 'listening.short-dialogue': 'not_supplied', 'listening.long-form': 'not_supplied' }
-      : {},
+    // The complete frozen asset is the source-owned closure for profiles that
+    // require evidence of absent, suppressed slots. NCK1 keeps its existing
+    // explicit not-supplied branch because that Profile does not require the
+    // listening raw-closure contract for this migration Source.
+    inactiveSlots: inactiveSlotsForSource(profileId, assetSpanId),
     inactiveSourceClosures: [],
   }
 }
