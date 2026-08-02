@@ -293,6 +293,57 @@ assert.notEqual(
 )
 assertDiagnostic(forgedEnvelopeResult, 'DOCX_SOURCE_DERIVATION_MISMATCH')
 
+const swappedQuestionStems = mutateEnvelope(request, (envelope) => {
+  const reading = envelope.source.groups.find((group) => group.slotId === 'reading.a')
+  const [firstQuestion, secondQuestion] = reading.variant.questions
+  assert.ok(firstQuestion?.stem && secondQuestion?.stem)
+  ;[firstQuestion.stem, secondQuestion.stem] = [secondQuestion.stem, firstQuestion.stem]
+})
+const swappedQuestionStemsResult = compileCanonicalPaper(swappedQuestionStems)
+assertDiagnostic(swappedQuestionStemsResult, 'DOCX_SOURCE_DERIVATION_MISMATCH')
+
+const swappedGroupContent = mutateEnvelope(request, (envelope) => {
+  const readingA = envelope.source.groups.find((group) => group.slotId === 'reading.a')
+  const readingB = envelope.source.groups.find((group) => group.slotId === 'reading.b')
+  assert.ok(readingA?.content && readingB?.content)
+  ;[readingA.content, readingB.content] = [readingB.content, readingA.content]
+})
+const swappedGroupContentResult = compileCanonicalPaper(swappedGroupContent)
+assertDiagnostic(swappedGroupContentResult, 'DOCX_SOURCE_DERIVATION_MISMATCH')
+
+const swappedFamilies = mutateEnvelope(request, (envelope) => {
+  const reading = envelope.source.groups.find((group) => group.slotId === 'reading.a')
+  const sevenChoices = envelope.source.groups.find(
+    (group) => group.slotId === 'reading.seven-choices',
+  )
+  assert.ok(reading?.variant?.family && sevenChoices?.variant?.family)
+  ;[reading.family, sevenChoices.family] = [sevenChoices.family, reading.family]
+  ;[reading.variant.family, sevenChoices.variant.family] = [
+    sevenChoices.variant.family,
+    reading.variant.family,
+  ]
+})
+const swappedFamiliesResult = compileCanonicalPaper(swappedFamilies)
+assertDiagnostic(swappedFamiliesResult, 'DOCX_SOURCE_DERIVATION_MISMATCH')
+
+const swappedGroupOrder = mutateEnvelope(request, (envelope) => {
+  ;[envelope.source.groups[0], envelope.source.groups[1]] = [
+    envelope.source.groups[1],
+    envelope.source.groups[0],
+  ]
+})
+const swappedGroupOrderResult = compileCanonicalPaper(swappedGroupOrder)
+assertDiagnostic(swappedGroupOrderResult, 'DOCX_SOURCE_DERIVATION_MISMATCH')
+
+const swappedQuestionOwnership = mutateEnvelope(request, (envelope) => {
+  const reading = envelope.source.groups.find((group) => group.slotId === 'reading.a')
+  const [firstSet, secondSet] = reading.variant.choiceOwnership.sets
+  assert.ok(firstSet?.questionId && secondSet?.questionId)
+  ;[firstSet.questionId, secondSet.questionId] = [secondSet.questionId, firstSet.questionId]
+})
+const swappedQuestionOwnershipResult = compileCanonicalPaper(swappedQuestionOwnership)
+assertDiagnostic(swappedQuestionOwnershipResult, 'DOCX_SOURCE_DERIVATION_MISMATCH')
+
 const nonDocxBytes = new Uint8Array([0x00])
 const nonDocxSource = structuredClone(proof.source)
 nonDocxSource.profileInstructionSourceDigest = sha256(nonDocxBytes)

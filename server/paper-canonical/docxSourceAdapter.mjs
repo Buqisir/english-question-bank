@@ -124,34 +124,6 @@ export function extractDocxDocumentText(docxBytes) {
   )
 }
 
-function normalizedSemanticText(value) {
-  return String(value || '')
-    .normalize('NFKC')
-    .toLowerCase()
-    .replace(/[^\p{L}\p{N}]+/gu, '')
-}
-
-function sourceTextFragments(source) {
-  const fragments = []
-  function visit(value, key = '') {
-    if (Array.isArray(value)) {
-      value.forEach((item) => visit(item, key))
-      return
-    }
-    if (value && typeof value === 'object') {
-      Object.entries(value).forEach(([nestedKey, item]) => visit(item, nestedKey))
-      return
-    }
-    if (key !== 'text' || typeof value !== 'string') return
-    for (const line of value.split('\n')) {
-      const normalized = normalizedSemanticText(line)
-      if (normalized.length >= 8) fragments.push(normalized)
-    }
-  }
-  for (const group of source?.groups || []) visit(group)
-  return fragments
-}
-
 function rawGroupsBySlot(parsed) {
   return new Map([
     ...parsed.readingGroups.map((group, index) => [`reading.${'abcd'[index]}`, group]),
@@ -182,104 +154,271 @@ function objectiveQuestions(parsed) {
   ]
 }
 
-function identityProjectionFromParsed(parsed) {
-  return [...rawGroupsBySlot(parsed)].map(([slotId, group]) => ({
-    slotId,
-    groupId: group.groupId,
-    questionIds: group.questions.map((question) => question.id),
-    blankIds: [...(group.blankIds || [])],
-  }))
-}
-
-function identityProjectionFromSource(source) {
-  return (source?.groups || []).map((group) => ({
-    slotId: group.slotId,
-    groupId: group.groupId,
-    questionIds: [...(group.questionIds || [])],
-    blankIds: [...(group.blankIds || [])],
-  }))
-}
-
-function answerProjectionFromParsed(parsed) {
-  return objectiveQuestions(parsed).map((question) => ({
-    questionId: question.id,
-    answer: question.answerKey,
-  }))
-}
-
-function answerProjectionFromSource(source) {
-  return (source?.assertions || []).map((assertion) => ({
-    questionId: assertion.questionId,
-    answer: assertion.answer,
-  }))
-}
-
-function normalizedOptions(options) {
+function projectedOptions(options) {
   return Object.entries(options || {}).map(([label, text]) => ({
     label,
-    text: normalizedSemanticText(text),
+    text: projectedText(text),
   }))
 }
 
-function optionProjectionFromParsed(parsed) {
-  return [
-    ...parsed.readingGroups.flatMap((group) => group.questions.map((question) => ({
-      owner: question.id,
-      options: normalizedOptions(question.options),
-    }))),
-    {
-      owner: parsed.seven.groupId,
-      options: (parsed.seven.optionBank || []).map((option) => ({
-        label: option.label,
-        text: normalizedSemanticText(option.text),
-      })),
-    },
-    ...parsed.cloze.questions.map((question) => ({
-      owner: question.id,
-      options: normalizedOptions(question.options),
-    })),
-  ]
+const familyBySlot = new Map([
+  ['reading.a', 'reading'],
+  ['reading.b', 'reading'],
+  ['reading.c', 'reading'],
+  ['reading.d', 'reading'],
+  ['reading.seven-choices', 'seven-choices'],
+  ['language.cloze', 'cloze'],
+  ['language.grammar-fill', 'grammar-fill'],
+  ['writing.application', 'application-writing'],
+  ['writing.continuation', 'continuation-writing'],
+])
+
+function projectedText(value) {
+  return String(value || '')
 }
 
-function optionProjectionFromSource(source) {
-  return (source?.groups || []).flatMap((group) => {
-    const ownership = group.variant?.choiceOwnership
-    if (ownership?.ownership === 'shared_bank') {
-      return [{
-        owner: group.groupId,
-        options: (ownership.options || []).map((option) => ({
-          label: option.label,
-          text: normalizedSemanticText(option.content?.[0]?.text),
-        })),
-      }]
+function sourceInlineProjection(inlines) {
+  return (inlines || []).map((inline) => inline.kind === 'text'
+    ? { kind: 'text', text: projectedText(inline.text) }
+    : inline.kind === 'blank_ref'
+      ? { kind: 'blank_ref', blankId: inline.blankId }
+      : { kind: inline.kind })
+}
+
+function parsedParagraphProjection(rawGroup, family) {
+  if (family === 'application-writing') {
+    return [{
+      kind: 'paragraph',
+      inlines: [{
+        kind: 'text',
+        text: projectedText(rawGroup.paragraphs.map((paragraph) => paragraph.text).join('\n')),
+      }],
+    }]
+  }
+  if (family === 'continuation-writing') {
+    return [
+      {
+        kind: 'paragraph',
+        inlines: [{
+          kind: 'text',
+          text: projectedText(rawGroup.paragraphs.map((paragraph) => paragraph.text).join('\n')),
+        }],
+      },
+      ...(rawGroup.continuationStarters || []).map((starter) => ({
+        kind: 'paragraph',
+        inlines: [{ kind: 'text', text: projectedText(starter) }],
+      })),
+    ]
+  }
+  const blankIdByMarker = new Map((rawGroup.questions || []).map((question, index) => [
+    String(question.questionNo || question.stem || ''),
+    rawGroup.blankIds?.[index],
+  ]))
+  return (rawGroup.paragraphs || []).map((paragraph) => {
+    const text = String(paragraph.text || '')
+    const markerPattern = family === 'seven-choices'
+      ? new RegExp(`(?<!\\d)(${[...blankIdByMarker.keys()].join('|')})(?!\\d)`, 'g')
+      : family === 'cloze' || family === 'grammar-fill'
+        ? /__(\d+)__/g
+        : null
+    if (!markerPattern) {
+      return {
+        kind: 'paragraph',
+        inlines: [{ kind: 'text', text: projectedText(text) }],
+      }
     }
-    if (ownership?.ownership === 'per_question') {
-      return (ownership.sets || []).map((set) => ({
-        owner: set.questionId,
-        options: (set.options || []).map((option) => ({
-          label: option.label,
-          text: normalizedSemanticText(option.content?.[0]?.text),
-        })),
-      }))
+    const inlines = []
+    let cursor = 0
+    let match
+    while ((match = markerPattern.exec(text)) !== null) {
+      if (match.index > cursor) {
+        inlines.push({
+          kind: 'text',
+          text: projectedText(text.slice(cursor, match.index)),
+        })
+      }
+      inlines.push({ kind: 'blank_ref', blankId: blankIdByMarker.get(match[1]) })
+      cursor = match.index + match[0].length
     }
-    return []
+    if (cursor < text.length || inlines.length === 0) {
+      inlines.push({ kind: 'text', text: projectedText(text.slice(cursor)) })
+    }
+    return { kind: 'paragraph', inlines }
   })
+}
+
+function parsedChoiceOwnership(group, family) {
+  if (family === 'seven-choices') {
+    return {
+      ownership: 'shared_bank',
+      owner: group.groupId,
+      options: (group.optionBank || []).map((option) => ({
+        optionId: `option:${option.label}`,
+        label: option.label,
+        text: projectedText(option.text),
+      })),
+    }
+  }
+  if (family === 'reading' || family === 'cloze') {
+    return {
+      ownership: 'per_question',
+      sets: group.questions.map((question) => ({
+        questionId: question.id,
+        options: projectedOptions(question.options).map((option) => ({
+          optionId: `option:${question.id}:${option.label}`,
+          ...option,
+        })),
+      })),
+    }
+  }
+  return { ownership: 'none' }
+}
+
+function sourceChoiceOwnership(group) {
+  const ownership = group.variant?.choiceOwnership
+  if (ownership?.ownership === 'shared_bank') {
+    return {
+      ownership: 'shared_bank',
+      owner: group.groupId,
+      options: (ownership.options || []).map((option) => ({
+        optionId: option.optionId,
+        label: option.label,
+        text: projectedText(option.content?.[0]?.text),
+      })),
+    }
+  }
+  if (ownership?.ownership === 'per_question') {
+    return {
+      ownership: 'per_question',
+      sets: (ownership.sets || []).map((set) => ({
+        questionId: set.questionId,
+        options: (set.options || []).map((option) => ({
+          optionId: option.optionId,
+          label: option.label,
+          text: projectedText(option.content?.[0]?.text),
+        })),
+      })),
+    }
+  }
+  return { ownership: ownership?.ownership }
+}
+
+function parsedQuestionProjection(group, family) {
+  if (family === 'reading') {
+    return group.questions.map((question) => ({
+      questionId: question.id,
+      stem: [{ kind: 'text', text: projectedText(question.stem) }],
+      correctOptionId: `option:${question.id}:${question.answerKey}`,
+    }))
+  }
+  if (family === 'seven-choices') {
+    return group.questions.map((question, index) => ({
+      questionId: question.id,
+      blankId: group.blankIds[index],
+      correctOptionId: `option:${question.answerKey}`,
+      authorityAssertionRef: `answer:${question.id}`,
+    }))
+  }
+  return []
+}
+
+function sourceQuestionProjection(group) {
+  if (group.family === 'reading') {
+    return (group.variant?.questions || []).map((question) => ({
+      questionId: question.questionId,
+      stem: sourceInlineProjection(question.stem),
+      correctOptionId: question.correctOptionId,
+    }))
+  }
+  if (group.family === 'seven-choices') {
+    return (group.variant?.members || []).map((member) => ({
+      questionId: member.questionId,
+      blankId: member.blankId,
+      correctOptionId: member.answer?.optionId,
+      authorityAssertionRef: member.answer?.authorityAssertionRef,
+    }))
+  }
+  return []
+}
+
+function parsedGroupProjection(slotId, group) {
+  const family = familyBySlot.get(slotId)
+  return {
+    slotId,
+    groupId: group.groupId,
+    family,
+    variantFamily: family,
+    questionIds: group.questions.map((question) => question.id),
+    blankIds: [...(group.blankIds || [])],
+    content: parsedParagraphProjection(group, family),
+    questions: parsedQuestionProjection(group, family),
+    choiceOwnership: parsedChoiceOwnership(group, family),
+    wordCountTarget: family === 'application-writing'
+      ? null
+      : family === 'continuation-writing'
+        ? null
+        : undefined,
+  }
+}
+
+function sourceGroupProjection(group) {
+  return {
+    slotId: group.slotId,
+    groupId: group.groupId,
+    family: group.family,
+    variantFamily: group.variant?.family,
+    questionIds: [...(group.questionIds || [])],
+    blankIds: [...(group.blankIds || [])],
+    content: (group.content?.blocks || []).map((block) => ({
+      kind: block.kind,
+      inlines: sourceInlineProjection(block.inlines),
+    })),
+    questions: sourceQuestionProjection(group),
+    choiceOwnership: sourceChoiceOwnership(group),
+    wordCountTarget: group.variant?.wordCountRuling?.target,
+  }
+}
+
+function semanticProjectionFromParsed(parsed, rawText) {
+  const groups = [...rawGroupsBySlot(parsed)].map(([slotId, group]) => {
+    const projection = parsedGroupProjection(slotId, group)
+    if (projection.family === 'application-writing') {
+      projection.wordCountTarget = wordCountTarget(rawText, '写作')
+    } else if (projection.family === 'continuation-writing') {
+      projection.wordCountTarget = wordCountTarget(rawText, '续写')
+    } else {
+      delete projection.wordCountTarget
+    }
+    return projection
+  })
+  return {
+    profileId: 'nck1',
+    groups,
+    assertions: objectiveQuestions(parsed).map((question) => ({
+      assertionId: `answer:${question.id}`,
+      questionId: question.id,
+      answer: question.answerKey,
+      authority: 'official',
+    })),
+  }
+}
+
+function semanticProjectionFromSource(source) {
+  return {
+    profileId: source?.profileId,
+    groups: (source?.groups || []).map(sourceGroupProjection),
+    assertions: (source?.assertions || []).map((assertion) => ({
+      assertionId: assertion.assertionId,
+      questionId: assertion.questionId,
+      answer: assertion.answer,
+      authority: assertion.authority,
+    })),
+  }
 }
 
 function wordCountTarget(rawText, label) {
   const match = new RegExp(`${label}词数应为\\s*(\\d+)\\s*个左右`).exec(rawText)
   return match ? Number(match[1]) : null
-}
-
-function sourceWordCountTargets(source) {
-  return {
-    application: source?.groups?.find(
-      (group) => group.slotId === 'writing.application',
-    )?.variant?.wordCountRuling?.target,
-    continuation: source?.groups?.find(
-      (group) => group.slotId === 'writing.continuation',
-    )?.variant?.wordCountRuling?.target,
-  }
 }
 
 /**
@@ -364,21 +503,10 @@ export function inspectDocxEnvelopeSource(docxBytes, source) {
   const rawText = extractDocxDocumentText(docxBytes)
   const parsed = buildGroups(rawText, source?.paperId || '')
   hydrateSevenChoiceBank(parsed, rawText)
-  const normalizedRawText = normalizedSemanticText(rawText)
-  const missingSourceText = sourceTextFragments(source).filter(
-    (fragment) => !normalizedRawText.includes(fragment),
-  )
-  const identityMatches = digestJson(identityProjectionFromSource(source))
-    === digestJson(identityProjectionFromParsed(parsed))
-  const answerMatches = digestJson(answerProjectionFromSource(source))
-    === digestJson(answerProjectionFromParsed(parsed))
-  const optionMatches = digestJson(optionProjectionFromSource(source))
-    === digestJson(optionProjectionFromParsed(parsed))
-  const profileMatches = source?.profileId === 'nck1'
-  const wordCountMatches = digestJson(sourceWordCountTargets(source)) === digestJson({
-    application: wordCountTarget(rawText, '写作'),
-    continuation: wordCountTarget(rawText, '续写'),
-  })
+  const derivedProjection = semanticProjectionFromParsed(parsed, rawText)
+  const envelopeProjection = semanticProjectionFromSource(source)
+  const semanticProjectionMatches = digestJson(envelopeProjection)
+    === digestJson(derivedProjection)
   const listening = inspectDocxListeningEvidence(docxBytes)
   const inactiveClosureMatches = listening.transcript.coverage === 'exactly_once'
     || (
@@ -386,21 +514,12 @@ export function inspectDocxEnvelopeSource(docxBytes, source) {
       && (source?.inactiveSourceClosures || []).length === 0
     )
   return {
-    ok: missingSourceText.length === 0
-      && identityMatches
-      && answerMatches
-      && optionMatches
-      && profileMatches
-      && wordCountMatches
-      && inactiveClosureMatches,
+    ok: semanticProjectionMatches && inactiveClosureMatches,
+    verifiedSource: semanticProjectionMatches ? structuredClone(source) : null,
     sourceByteRange: documentXml.compressedRange,
     rawTextDigest: sha256(new TextEncoder().encode(rawText)),
-    missingSourceTextCount: missingSourceText.length,
-    identityMatches,
-    answerMatches,
-    optionMatches,
-    profileMatches,
-    wordCountMatches,
+    semanticProjectionMatches,
+    derivedProjectionDigest: digestJson(derivedProjection),
     inactiveClosureMatches,
     listening,
   }

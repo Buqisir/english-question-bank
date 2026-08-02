@@ -1806,11 +1806,11 @@ function parseDocxSourceEnvelope(documents, diagnostics) {
         'Inactive Listening requires source-derived questions, A-C Options, answers, ten transcripts, exact supplied timing, and a closed package audio inventory',
       ))
     }
-    for (const observation of envelope.source.observations || []) {
+    for (const observation of inspection.verifiedSource.observations || []) {
       observation.span = { ...inspection.sourceByteRange }
     }
     return {
-      value: envelope.source,
+      value: inspection.verifiedSource,
       adapter: 'docx-source-envelope',
       envelope,
       sourceDocumentId: source.documentId,

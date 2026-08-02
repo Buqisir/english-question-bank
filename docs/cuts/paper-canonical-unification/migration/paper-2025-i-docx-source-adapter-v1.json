@@ -17,7 +17,7 @@
     "producer": [
       {
         "path": "server/paper-canonical/docxSourceAdapter.mjs",
-        "sha256": "6dacea8a42370016ae6b98922d4e1ef6c6447a879189a8a07ae993856b07cc90"
+        "sha256": "ab22e93f1a2082cea31ff38bf17ffe09333edc996d49e39b076c4ad592cbe0c9"
       },
       {
         "path": "test-fixtures/paper-import/paper-2025-i-docx-source-adapter/sourceProof.mjs",
@@ -25,7 +25,7 @@
       },
       {
         "path": "shared/paper-canonical/compiler.mjs",
-        "sha256": "b020d1e75f61100f19915e21272c9dcfc380859be45d39859c47ec6c922ba35f"
+        "sha256": "c591e2ce232ce8c1242396653aaf967ad821b93b1a94f5bfbce961e0864ed812"
       }
     ]
   },
