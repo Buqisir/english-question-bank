@@ -344,6 +344,66 @@ const swappedQuestionOwnership = mutateEnvelope(request, (envelope) => {
 const swappedQuestionOwnershipResult = compileCanonicalPaper(swappedQuestionOwnership)
 assertDiagnostic(swappedQuestionOwnershipResult, 'DOCX_SOURCE_DERIVATION_MISMATCH')
 
+const swappedNodeIds = mutateEnvelope(request, (envelope) => {
+  const reading = envelope.source.groups.find((group) => group.slotId === 'reading.a')
+  const [firstBlock, secondBlock] = reading.content.blocks
+  assert.ok(firstBlock?.nodeId && secondBlock?.nodeId)
+  ;[firstBlock.nodeId, secondBlock.nodeId] = [secondBlock.nodeId, firstBlock.nodeId]
+})
+const swappedNodeIdsResult = compileCanonicalPaper(swappedNodeIds)
+assertDiagnostic(swappedNodeIdsResult, 'DOCX_SOURCE_DERIVATION_MISMATCH')
+
+const swappedStarterOrder = mutateEnvelope(request, (envelope) => {
+  const continuation = envelope.source.groups.find(
+    (group) => group.slotId === 'writing.continuation',
+  )
+  const starters = continuation.variant.starterProvision.starters
+  assert.equal(starters.length, 2)
+  ;[starters[0], starters[1]] = [starters[1], starters[0]]
+})
+const swappedStarterOrderResult = compileCanonicalPaper(swappedStarterOrder)
+assertDiagnostic(swappedStarterOrderResult, 'DOCX_SOURCE_DERIVATION_MISMATCH')
+
+const swappedResponseOwnership = mutateEnvelope(request, (envelope) => {
+  const application = envelope.source.groups.find(
+    (group) => group.slotId === 'writing.application',
+  )
+  const continuation = envelope.source.groups.find(
+    (group) => group.slotId === 'writing.continuation',
+  )
+  assert.ok(application?.variant?.response && continuation?.variant?.response)
+  ;[application.variant.response, continuation.variant.response] = [
+    continuation.variant.response,
+    application.variant.response,
+  ]
+})
+const swappedResponseOwnershipResult = compileCanonicalPaper(swappedResponseOwnership)
+assertDiagnostic(swappedResponseOwnershipResult, 'DOCX_SOURCE_DERIVATION_MISMATCH')
+
+const swappedPromptBindingOrder = mutateEnvelope(request, (envelope) => {
+  const grammarFill = envelope.source.groups.find(
+    (group) => group.slotId === 'language.grammar-fill',
+  )
+  const bindings = grammarFill.variant.promptBindings
+  assert.ok(bindings.length > 1)
+  ;[bindings[0], bindings[1]] = [bindings[1], bindings[0]]
+})
+const swappedPromptBindingOrderResult = compileCanonicalPaper(swappedPromptBindingOrder)
+assertDiagnostic(swappedPromptBindingOrderResult, 'DOCX_SOURCE_DERIVATION_MISMATCH')
+
+const swappedSourceMapOwnership = mutateEnvelope(request, (envelope) => {
+  const grammarFill = envelope.source.groups.find(
+    (group) => group.slotId === 'language.grammar-fill',
+  )
+  const entries = Object.entries(grammarFill.sourceSpanRefsByTarget)
+  assert.ok(entries.length > 1)
+  const [[firstTarget, firstRefs], [secondTarget, secondRefs]] = entries
+  grammarFill.sourceSpanRefsByTarget[firstTarget] = secondRefs
+  grammarFill.sourceSpanRefsByTarget[secondTarget] = firstRefs
+})
+const swappedSourceMapOwnershipResult = compileCanonicalPaper(swappedSourceMapOwnership)
+assertDiagnostic(swappedSourceMapOwnershipResult, 'DOCX_SOURCE_DERIVATION_MISMATCH')
+
 const nonDocxBytes = new Uint8Array([0x00])
 const nonDocxSource = structuredClone(proof.source)
 nonDocxSource.profileInstructionSourceDigest = sha256(nonDocxBytes)
@@ -394,7 +454,7 @@ const unboundProfileDigest = mutateEnvelope(request, (envelope) => {
 })
 const profileDigestResult = compileCanonicalPaper(unboundProfileDigest)
 assert.notEqual(profileDigestResult.disposition, 'ready')
-assertDiagnostic(profileDigestResult, 'DOCX_SOURCE_PROFILE_UNBOUND')
+assertDiagnostic(profileDigestResult, 'DOCX_SOURCE_DERIVATION_MISMATCH')
 
 const conflictingAnswer = mutateEnvelope(request, (envelope) => {
   const original = envelope.source.assertions[0]

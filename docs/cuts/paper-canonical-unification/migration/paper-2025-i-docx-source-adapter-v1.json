@@ -17,15 +17,15 @@
     "producer": [
       {
         "path": "server/paper-canonical/docxSourceAdapter.mjs",
-        "sha256": "ab22e93f1a2082cea31ff38bf17ffe09333edc996d49e39b076c4ad592cbe0c9"
+        "sha256": "7215c98c3ef9a8b21f9d2a7a928f73fbf3261fc11d510b3278fb8c568d006ad1"
       },
       {
         "path": "test-fixtures/paper-import/paper-2025-i-docx-source-adapter/sourceProof.mjs",
-        "sha256": "4810afb121ee46f03b35490213c034d72a502c226a4bf74de9a26129713e9678"
+        "sha256": "0263744821418c7bd8555789856b2aced1d960b1def44e19ab96391842317d2a"
       },
       {
         "path": "shared/paper-canonical/compiler.mjs",
-        "sha256": "c591e2ce232ce8c1242396653aaf967ad821b93b1a94f5bfbce961e0864ed812"
+        "sha256": "2c097555d63d6e62a4902d4f46293938500b37b0f9e5c384a6847932c112b7d8"
       }
     ]
   },
@@ -272,7 +272,7 @@
     "diagnosticCodes": [
       "DOCX_LISTENING_SOURCE_INCOMPLETE"
     ],
-    "compilationDigest": "sha256:16d0286d83cc5873215026727de8ea747c7f83964359adad2c2d8e6e7b53ced0"
+    "compilationDigest": "sha256:0853fae5f7e520c6904edfecfb499641d997a765256bcc69efeb1a3f0704eaf3"
   },
   "capacity": {
     "baseline": {
@@ -291,7 +291,7 @@
     "actual": {
       "model": "ticket-25-docx-source-adapter-inspection-units-v1",
       "sourceDocumentCount": 2,
-      "sourceDocumentByteLength": 210377,
+      "sourceDocumentByteLength": 210271,
       "diagnosticCount": 1,
       "diagnosticCodes": [
         "DOCX_LISTENING_SOURCE_INCOMPLETE"

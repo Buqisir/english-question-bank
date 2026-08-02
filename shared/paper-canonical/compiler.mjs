@@ -1787,7 +1787,7 @@ function parseDocxSourceEnvelope(documents, diagnostics) {
         'DOCX_SOURCE_DERIVATION_MISMATCH',
         'incomplete_source',
         '$.docxSourceEnvelope.source',
-        'DOCX envelope semantics do not match the registered adapter derivation',
+        'DOCX envelope source does not exactly match the registered adapter derivation',
       ))
       return null
     }
@@ -1805,9 +1805,6 @@ function parseDocxSourceEnvelope(documents, diagnostics) {
         '$.docxSourceEnvelope.source.inactiveSourceClosures',
         'Inactive Listening requires source-derived questions, A-C Options, answers, ten transcripts, exact supplied timing, and a closed package audio inventory',
       ))
-    }
-    for (const observation of inspection.verifiedSource.observations || []) {
-      observation.span = { ...inspection.sourceByteRange }
     }
     return {
       value: inspection.verifiedSource,

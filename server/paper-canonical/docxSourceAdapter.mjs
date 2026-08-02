@@ -154,13 +154,6 @@ function objectiveQuestions(parsed) {
   ]
 }
 
-function projectedOptions(options) {
-  return Object.entries(options || {}).map(([label, text]) => ({
-    label,
-    text: projectedText(text),
-  }))
-}
-
 const familyBySlot = new Map([
   ['reading.a', 'reading'],
   ['reading.b', 'reading'],
@@ -173,252 +166,420 @@ const familyBySlot = new Map([
   ['writing.continuation', 'continuation-writing'],
 ])
 
-function projectedText(value) {
-  return String(value || '')
+function contentText(nodeId, text) {
+  return [{ kind: 'text', nodeId, text: String(text || '') }]
 }
 
-function sourceInlineProjection(inlines) {
-  return (inlines || []).map((inline) => inline.kind === 'text'
-    ? { kind: 'text', text: projectedText(inline.text) }
-    : inline.kind === 'blank_ref'
-      ? { kind: 'blank_ref', blankId: inline.blankId }
-      : { kind: inline.kind })
+function markerNumber(question) {
+  return String(question.questionNo || question.stem || '')
 }
 
-function parsedParagraphProjection(rawGroup, family) {
-  if (family === 'application-writing') {
-    return [{
-      kind: 'paragraph',
-      inlines: [{
-        kind: 'text',
-        text: projectedText(rawGroup.paragraphs.map((paragraph) => paragraph.text).join('\n')),
-      }],
-    }]
-  }
-  if (family === 'continuation-writing') {
-    return [
-      {
-        kind: 'paragraph',
-        inlines: [{
-          kind: 'text',
-          text: projectedText(rawGroup.paragraphs.map((paragraph) => paragraph.text).join('\n')),
-        }],
-      },
-      ...(rawGroup.continuationStarters || []).map((starter) => ({
-        kind: 'paragraph',
-        inlines: [{ kind: 'text', text: projectedText(starter) }],
-      })),
-    ]
-  }
+function paragraphBlocks(rawGroup, blankIds = []) {
   const blankIdByMarker = new Map((rawGroup.questions || []).map((question, index) => [
-    String(question.questionNo || question.stem || ''),
-    rawGroup.blankIds?.[index],
+    markerNumber(question),
+    blankIds[index],
   ]))
-  return (rawGroup.paragraphs || []).map((paragraph) => {
-    const text = String(paragraph.text || '')
-    const markerPattern = family === 'seven-choices'
-      ? new RegExp(`(?<!\\d)(${[...blankIdByMarker.keys()].join('|')})(?!\\d)`, 'g')
-      : family === 'cloze' || family === 'grammar-fill'
-        ? /__(\d+)__/g
-        : null
-    if (!markerPattern) {
-      return {
-        kind: 'paragraph',
-        inlines: [{ kind: 'text', text: projectedText(text) }],
-      }
-    }
+  const markerPattern = rawGroup.groupType === 'sevenChoices'
+    ? new RegExp(
+        `(?<!\\d)(${(rawGroup.questions || []).map(markerNumber).join('|')})(?!\\d)`,
+        'g',
+      )
+    : /__(\d+)__/g
+  return (rawGroup.paragraphs || []).map((paragraph, index) => {
     const inlines = []
+    const text = String(paragraph.text || '')
     let cursor = 0
     let match
     while ((match = markerPattern.exec(text)) !== null) {
       if (match.index > cursor) {
         inlines.push({
           kind: 'text',
-          text: projectedText(text.slice(cursor, match.index)),
+          nodeId: `text:${paragraph.id || rawGroup.groupId}:${cursor}`,
+          text: text.slice(cursor, match.index),
         })
       }
-      inlines.push({ kind: 'blank_ref', blankId: blankIdByMarker.get(match[1]) })
+      const blankId = blankIdByMarker.get(match[1])
+      inlines.push(blankId
+        ? { kind: 'blank_ref', nodeId: `blank-ref:${blankId}`, blankId }
+        : {
+            kind: 'text',
+            nodeId: `text:${paragraph.id || rawGroup.groupId}:${match.index}`,
+            text: match[0],
+          })
       cursor = match.index + match[0].length
     }
     if (cursor < text.length || inlines.length === 0) {
-      inlines.push({ kind: 'text', text: projectedText(text.slice(cursor)) })
+      inlines.push({
+        kind: 'text',
+        nodeId: `text:${paragraph.id || rawGroup.groupId}:${cursor || index}`,
+        text: text.slice(cursor),
+      })
     }
-    return { kind: 'paragraph', inlines }
+    return {
+      kind: 'paragraph',
+      nodeId: paragraph.id || `paragraph:${rawGroup.groupId}:${index + 1}`,
+      inlines,
+    }
   })
 }
 
-function parsedChoiceOwnership(group, family) {
+function optionContent(groupId, questionId, options) {
+  return Object.entries(options || {}).map(([label, text]) => ({
+    optionId: `option:${questionId}:${label}`,
+    label,
+    content: contentText(`text:${groupId}:${questionId}:option:${label}`, text),
+  }))
+}
+
+function choiceOwnership(rawGroup, family) {
   if (family === 'seven-choices') {
     return {
       ownership: 'shared_bank',
-      owner: group.groupId,
-      options: (group.optionBank || []).map((option) => ({
+      bankId: `bank:${rawGroup.groupId}`,
+      options: (rawGroup.optionBank || []).map((option) => ({
         optionId: `option:${option.label}`,
         label: option.label,
-        text: projectedText(option.text),
+        content: contentText(
+          `text:${rawGroup.groupId}:option:${option.label}`,
+          option.text,
+        ),
       })),
     }
   }
   if (family === 'reading' || family === 'cloze') {
     return {
       ownership: 'per_question',
-      sets: group.questions.map((question) => ({
+      sets: rawGroup.questions.map((question) => ({
         questionId: question.id,
-        options: projectedOptions(question.options).map((option) => ({
-          optionId: `option:${question.id}:${option.label}`,
-          ...option,
-        })),
+        options: optionContent(rawGroup.groupId, question.id, question.options),
       })),
     }
   }
   return { ownership: 'none' }
 }
 
-function sourceChoiceOwnership(group) {
-  const ownership = group.variant?.choiceOwnership
-  if (ownership?.ownership === 'shared_bank') {
-    return {
-      ownership: 'shared_bank',
-      owner: group.groupId,
-      options: (ownership.options || []).map((option) => ({
-        optionId: option.optionId,
-        label: option.label,
-        text: projectedText(option.content?.[0]?.text),
-      })),
-    }
-  }
-  if (ownership?.ownership === 'per_question') {
-    return {
-      ownership: 'per_question',
-      sets: (ownership.sets || []).map((set) => ({
-        questionId: set.questionId,
-        options: (set.options || []).map((option) => ({
-          optionId: option.optionId,
-          label: option.label,
-          text: projectedText(option.content?.[0]?.text),
-        })),
-      })),
-    }
-  }
-  return { ownership: ownership?.ownership }
+function wordCountTarget(rawText, label) {
+  const match = new RegExp(`${label}词数应为\\s*(\\d+)\\s*个左右`).exec(rawText)
+  if (!match) throw new Error(`DOCX source lacks ${label} word-count instruction`)
+  return Number(match[1])
 }
 
-function parsedQuestionProjection(group, family) {
+function deriveVariant(rawGroup, family, blankIds, rawText) {
+  const ownership = choiceOwnership(rawGroup, family)
   if (family === 'reading') {
-    return group.questions.map((question) => ({
-      questionId: question.id,
-      stem: [{ kind: 'text', text: projectedText(question.stem) }],
-      correctOptionId: `option:${question.id}:${question.answerKey}`,
-    }))
+    return {
+      family,
+      passageBlockRoles: [],
+      questions: rawGroup.questions.map((question) => ({
+        questionId: question.id,
+        stem: contentText(`text:${question.id}:stem`, question.stem),
+        correctOptionId: `option:${question.id}:${question.answerKey}`,
+      })),
+      choiceOwnership: ownership,
+    }
   }
   if (family === 'seven-choices') {
-    return group.questions.map((question, index) => ({
-      questionId: question.id,
-      blankId: group.blankIds[index],
-      correctOptionId: `option:${question.answerKey}`,
-      authorityAssertionRef: `answer:${question.id}`,
-    }))
-  }
-  return []
-}
-
-function sourceQuestionProjection(group) {
-  if (group.family === 'reading') {
-    return (group.variant?.questions || []).map((question) => ({
-      questionId: question.questionId,
-      stem: sourceInlineProjection(question.stem),
-      correctOptionId: question.correctOptionId,
-    }))
-  }
-  if (group.family === 'seven-choices') {
-    return (group.variant?.members || []).map((member) => ({
-      questionId: member.questionId,
-      blankId: member.blankId,
-      correctOptionId: member.answer?.optionId,
-      authorityAssertionRef: member.answer?.authorityAssertionRef,
-    }))
-  }
-  return []
-}
-
-function parsedGroupProjection(slotId, group) {
-  const family = familyBySlot.get(slotId)
-  return {
-    slotId,
-    groupId: group.groupId,
-    family,
-    variantFamily: family,
-    questionIds: group.questions.map((question) => question.id),
-    blankIds: [...(group.blankIds || [])],
-    content: parsedParagraphProjection(group, family),
-    questions: parsedQuestionProjection(group, family),
-    choiceOwnership: parsedChoiceOwnership(group, family),
-    wordCountTarget: family === 'application-writing'
-      ? null
-      : family === 'continuation-writing'
-        ? null
-        : undefined,
-  }
-}
-
-function sourceGroupProjection(group) {
-  return {
-    slotId: group.slotId,
-    groupId: group.groupId,
-    family: group.family,
-    variantFamily: group.variant?.family,
-    questionIds: [...(group.questionIds || [])],
-    blankIds: [...(group.blankIds || [])],
-    content: (group.content?.blocks || []).map((block) => ({
-      kind: block.kind,
-      inlines: sourceInlineProjection(block.inlines),
-    })),
-    questions: sourceQuestionProjection(group),
-    choiceOwnership: sourceChoiceOwnership(group),
-    wordCountTarget: group.variant?.wordCountRuling?.target,
-  }
-}
-
-function semanticProjectionFromParsed(parsed, rawText) {
-  const groups = [...rawGroupsBySlot(parsed)].map(([slotId, group]) => {
-    const projection = parsedGroupProjection(slotId, group)
-    if (projection.family === 'application-writing') {
-      projection.wordCountTarget = wordCountTarget(rawText, '写作')
-    } else if (projection.family === 'continuation-writing') {
-      projection.wordCountTarget = wordCountTarget(rawText, '续写')
-    } else {
-      delete projection.wordCountTarget
+    return {
+      family,
+      choiceOwnership: ownership,
+      members: rawGroup.questions.map((question, index) => ({
+        questionId: question.id,
+        blankId: blankIds[index],
+        answer: {
+          optionId: `option:${question.answerKey}`,
+          authorityAssertionRef: `answer:${question.id}`,
+        },
+      })),
     }
-    return projection
-  })
+  }
+  if (family === 'grammar-fill') {
+    return {
+      family,
+      choiceOwnership: ownership,
+      promptBindings: blankIds.map((blankId) => ({
+        blankId,
+        provision: 'source_proven_none',
+        authorityObservationRef: `observation:grammar-fill-prompt:${blankId}`,
+      })),
+    }
+  }
+  if (family === 'application-writing') {
+    const groupId = rawGroup.groupId
+    const blockId = `paragraph:${groupId}:prompt`
+    const inlineNodeIds = [`text:${groupId}:prompt`]
+    const contentRef = { blockId, inlineNodeIds }
+    return {
+      family,
+      writingTaskId: `writing-task:${groupId}`,
+      promptBlockRefs: [blockId],
+      situation: {
+        writerRole: contentRef,
+        audienceOrDestination: contentRef,
+        deliverable: contentRef,
+        communicativePurpose: contentRef,
+      },
+      contentRequirements: [{
+        requirementId: `requirement:${groupId}:1`,
+        contentRef,
+      }],
+      wordCountRuling: {
+        kind: 'approximate_target',
+        target: wordCountTarget(rawText, '写作'),
+        countScope: 'student_authored_only',
+        sourceRef: contentRef,
+        authorityObservationRef: `observation:${groupId}:word-count`,
+      },
+      givenSkeleton: {
+        presence: 'none',
+        answerRegionAbsenceAssertionRef:
+          `observation:${groupId}:answer-region-empty`,
+      },
+      choiceOwnership: ownership,
+      response: {
+        kind: 'group_level_written_response',
+        answerRegionRef: 'writing.application-box',
+        authorityObservationRef: `observation:${groupId}:response`,
+      },
+    }
+  }
+  if (family === 'continuation-writing') {
+    const groupId = rawGroup.groupId
+    const materialBlockId = `paragraph:${groupId}:material`
+    const starterBlockIds = [1, 2].map(
+      (index) => `paragraph:${groupId}:starter:${index}`,
+    )
+    if ((rawGroup.continuationStarters || []).length !== starterBlockIds.length) {
+      throw new Error('DOCX source continuation starters are incomplete')
+    }
+    return {
+      family,
+      writingTaskId: `writing-task:${groupId}`,
+      materialBlockRefs: [materialBlockId],
+      wordCountRuling: {
+        kind: 'approximate_target',
+        target: wordCountTarget(rawText, '续写'),
+        countScope: 'student_authored_only',
+        sourceRef: {
+          blockId: materialBlockId,
+          inlineNodeIds: [`text:${groupId}:material`],
+        },
+        authorityObservationRef: `observation:${groupId}:word-count`,
+      },
+      starterProvision: {
+        kind: 'ordered_source_starters',
+        starters: starterBlockIds.map((contentRef, index) => ({
+          starterId: `starter:${groupId}:${index + 1}`,
+          contentRef,
+          authorityObservationRef: `observation:${groupId}:starter:${index + 1}`,
+        })),
+      },
+      choiceOwnership: ownership,
+      response: {
+        kind: 'group_level_written_response',
+        answerRegionRef: 'writing.continuation-box',
+        authorityObservationRef: `observation:${groupId}:response`,
+      },
+    }
+  }
+  return { family, choiceOwnership: ownership }
+}
+
+function deriveContent(rawGroup, family, blankIds) {
+  if (family === 'application-writing') {
+    const groupId = rawGroup.groupId
+    return {
+      blocks: [{
+        kind: 'paragraph',
+        nodeId: `paragraph:${groupId}:prompt`,
+        inlines: contentText(
+          `text:${groupId}:prompt`,
+          rawGroup.paragraphs.map((paragraph) => paragraph.text).join('\n'),
+        ),
+      }],
+    }
+  }
+  if (family === 'continuation-writing') {
+    const groupId = rawGroup.groupId
+    return {
+      blocks: [
+        {
+          kind: 'paragraph',
+          nodeId: `paragraph:${groupId}:material`,
+          inlines: contentText(
+            `text:${groupId}:material`,
+            rawGroup.paragraphs.map((paragraph) => paragraph.text).join('\n'),
+          ),
+        },
+        ...(rawGroup.continuationStarters || []).map((starter, index) => ({
+          kind: 'paragraph',
+          nodeId: `paragraph:${groupId}:starter:${index + 1}`,
+          inlines: contentText(
+            `text:${groupId}:starter:${index + 1}`,
+            starter,
+          ),
+        })),
+      ],
+    }
+  }
+  return { blocks: paragraphBlocks(rawGroup, blankIds) }
+}
+
+function sourceObservation({ observationId, kind, value, sourceByteRange }) {
   return {
-    profileId: 'nck1',
-    groups,
+    observationId,
+    kind,
+    documentInputKey: 'source_docx',
+    value,
+    span: { ...sourceByteRange },
+    extraction: { adapterId: 'docx-source-envelope', version: '1' },
+  }
+}
+
+function writingObservations(group, family, sourceByteRange) {
+  const groupId = group.groupId
+  if (family === 'application-writing') {
+    return [
+      sourceObservation({
+        observationId: `observation:${groupId}:answer-region-empty`,
+        kind: 'application_answer_region_absence',
+        value: { groupId, answerRegionRef: 'writing.application-box' },
+        sourceByteRange,
+      }),
+      sourceObservation({
+        observationId: `observation:${groupId}:word-count`,
+        kind: 'application_word_count_ruling',
+        value: {
+          groupId,
+          target: group.variant.wordCountRuling.target,
+          countScope: 'student_authored_only',
+        },
+        sourceByteRange,
+      }),
+      sourceObservation({
+        observationId: `observation:${groupId}:response`,
+        kind: 'application_response_binding',
+        value: {
+          groupId,
+          writingTaskId: group.variant.writingTaskId,
+          answerRegionRef: group.variant.response.answerRegionRef,
+        },
+        sourceByteRange,
+      }),
+    ]
+  }
+  if (family === 'continuation-writing') {
+    return [
+      sourceObservation({
+        observationId: `observation:${groupId}:word-count`,
+        kind: 'continuation_word_count_ruling',
+        value: {
+          groupId,
+          target: group.variant.wordCountRuling.target,
+          countScope: 'student_authored_only',
+        },
+        sourceByteRange,
+      }),
+      ...group.variant.starterProvision.starters.map((starter) =>
+        sourceObservation({
+          observationId: starter.authorityObservationRef,
+          kind: 'continuation_source_starter',
+          value: {
+            groupId,
+            starterId: starter.starterId,
+            contentRef: starter.contentRef,
+          },
+          sourceByteRange,
+        })),
+      sourceObservation({
+        observationId: `observation:${groupId}:response`,
+        kind: 'continuation_response_binding',
+        value: {
+          groupId,
+          writingTaskId: group.variant.writingTaskId,
+          answerRegionRef: group.variant.response.answerRegionRef,
+        },
+        sourceByteRange,
+      }),
+    ]
+  }
+  return []
+}
+
+function deriveNck1Identity(rawText) {
+  const title = /^\s*(\d{4})年全国高考一卷英语真题/m.exec(rawText)
+  if (!title) throw new Error('DOCX source lacks a supported NCK1 paper identity')
+  return { paperId: `paper-${title[1]}-i`, profileId: 'nck1' }
+}
+
+/**
+ * Derive the complete compiler source from immutable DOCX bytes. The envelope
+ * may assert this value, but none of its caller-authored fields are consumed.
+ */
+export function deriveDocxCanonicalSource(docxBytes) {
+  const { documentXml } = readDocxPackage(docxBytes)
+  const rawText = extractDocxDocumentText(docxBytes)
+  const identity = deriveNck1Identity(rawText)
+  const parsed = buildGroups(rawText, identity.paperId)
+  hydrateSevenChoiceBank(parsed, rawText)
+  const sourceByteRange = documentXml.compressedRange
+  const observations = []
+  const groups = [...rawGroupsBySlot(parsed)].map(([slotId, rawGroup]) => {
+    const family = familyBySlot.get(slotId)
+    if (!family) throw new Error(`DOCX source slot ${slotId} is unsupported`)
+    const blankIds = [...(rawGroup.blankIds || [])]
+    const group = {
+      groupId: rawGroup.groupId,
+      slotId,
+      family,
+      questionIds: rawGroup.questions.map((question) => question.id),
+      blankIds,
+      sourceSpanId: `source-span:observation:${slotId}`,
+      content: deriveContent(rawGroup, family, blankIds),
+      media: [],
+      variant: deriveVariant(rawGroup, family, blankIds, rawText),
+      sourceSpanRefsByTarget: family === 'grammar-fill'
+        ? Object.fromEntries(blankIds.map((blankId) => [
+            `prompt_provision:${blankId}`,
+            [`source-span:observation:grammar-fill-prompt:${blankId}`],
+          ]))
+        : {},
+    }
+    observations.push(sourceObservation({
+      observationId: `observation:${slotId}`,
+      kind: 'docx_section',
+      value: slotId,
+      sourceByteRange,
+    }))
+    if (family === 'grammar-fill') {
+      observations.push(...blankIds.map((blankId) => sourceObservation({
+        observationId: `observation:grammar-fill-prompt:${blankId}`,
+        kind: 'grammar_fill_prompt_provision',
+        value: { blankId, provision: 'source_proven_none' },
+        sourceByteRange,
+      })))
+    }
+    observations.push(...writingObservations(group, family, sourceByteRange))
+    return group
+  })
+  const groupByQuestionId = new Map(groups.flatMap((group) =>
+    group.questionIds.map((questionId) => [questionId, group])))
+  return {
+    ...identity,
+    sourceAssetVersion: 1,
+    profileInstructionSourceDigest: sha256(docxBytes),
+    observations,
     assertions: objectiveQuestions(parsed).map((question) => ({
       assertionId: `answer:${question.id}`,
       questionId: question.id,
       answer: question.answerKey,
       authority: 'official',
+      sourceSpanId: groupByQuestionId.get(question.id).sourceSpanId,
     })),
+    groups,
+    transformations: [],
+    inactiveSlots: {},
+    inactiveSourceClosures: [],
   }
-}
-
-function semanticProjectionFromSource(source) {
-  return {
-    profileId: source?.profileId,
-    groups: (source?.groups || []).map(sourceGroupProjection),
-    assertions: (source?.assertions || []).map((assertion) => ({
-      assertionId: assertion.assertionId,
-      questionId: assertion.questionId,
-      answer: assertion.answer,
-      authority: assertion.authority,
-    })),
-  }
-}
-
-function wordCountTarget(rawText, label) {
-  const match = new RegExp(`${label}词数应为\\s*(\\d+)\\s*个左右`).exec(rawText)
-  return match ? Number(match[1]) : null
 }
 
 /**
@@ -501,25 +662,21 @@ export function inspectDocxListeningEvidence(docxBytes) {
 export function inspectDocxEnvelopeSource(docxBytes, source) {
   const { documentXml } = readDocxPackage(docxBytes)
   const rawText = extractDocxDocumentText(docxBytes)
-  const parsed = buildGroups(rawText, source?.paperId || '')
-  hydrateSevenChoiceBank(parsed, rawText)
-  const derivedProjection = semanticProjectionFromParsed(parsed, rawText)
-  const envelopeProjection = semanticProjectionFromSource(source)
-  const semanticProjectionMatches = digestJson(envelopeProjection)
-    === digestJson(derivedProjection)
+  const derivedSource = deriveDocxCanonicalSource(docxBytes)
+  const completeSourceMatches = digestJson(source) === digestJson(derivedSource)
   const listening = inspectDocxListeningEvidence(docxBytes)
   const inactiveClosureMatches = listening.transcript.coverage === 'exactly_once'
     || (
-      Object.keys(source?.inactiveSlots || {}).length === 0
-      && (source?.inactiveSourceClosures || []).length === 0
+      Object.keys(derivedSource.inactiveSlots).length === 0
+      && derivedSource.inactiveSourceClosures.length === 0
     )
   return {
-    ok: semanticProjectionMatches && inactiveClosureMatches,
-    verifiedSource: semanticProjectionMatches ? structuredClone(source) : null,
+    ok: completeSourceMatches && inactiveClosureMatches,
+    verifiedSource: completeSourceMatches ? derivedSource : null,
     sourceByteRange: documentXml.compressedRange,
     rawTextDigest: sha256(new TextEncoder().encode(rawText)),
-    semanticProjectionMatches,
-    derivedProjectionDigest: digestJson(derivedProjection),
+    completeSourceMatches,
+    derivedSourceDigest: digestJson(derivedSource),
     inactiveClosureMatches,
     listening,
   }
