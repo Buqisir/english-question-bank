@@ -25,8 +25,10 @@ Each ticket contains:
 
 Status: ready | in-progress | done | blocked
 Blocked by: <ticket titles or None>
-Next on PASS: <ticket path | independent review | owner QA | release | DONE>
+Next on PASS: <ticket path | parallel frontier handoff | parallel join handoff | independent review | owner QA | release | DONE>
 Terminal: yes | no
+Parallel frontier: <comma-separated sibling ticket paths | not-applicable>
+Parallel join: <one join ticket path | not-applicable>
 
 ## What to build
 
@@ -148,21 +150,19 @@ Owner manifest-digest approval ticket-set manifest SHA-256: <64-hex digest | pen
 Implementation dispatched by approval record: no | pending
 ```
 
-An owner-explicit external implementation blocker may keep a fully approved
-route non-dispatchable without invalidating the four canonical authority gates:
+The receipt stores this optional external-blocker field group:
 
 ```text
 Canonical authority gates: verified | pending
 External implementation blocker: none | active
-External blocker kind: <concise durable identity | not-applicable>
-External blocker closure evidence: <repo-relative path or commit | pending | not-applicable>
+External blocker kind: <concise durable identity>
+External blocker closure evidence: <repo-relative path>@<40-hex commit> | pending
 Implementation dispatch: forbidden | allowed
 ```
 
-When the external blocker is `active` and closure evidence is `pending`,
-`Implementation dispatch` must remain `forbidden` even if all four canonical
-authority gates are verified. The blocker does not authorize creating or
-executing its own successor task.
+This file defines only the stored field shapes. The allowed combinations,
+closure-transition proof, dispatch gate, and failure behavior live only in
+`dispatch-protocols.md`.
 
 Conditional predicate evidence is a separate committed artifact. It reports
 every mandatory clause named by `dispatch-protocols.md`, including any allowed

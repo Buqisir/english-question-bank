@@ -4,6 +4,8 @@ Status: ready
 Blocked by: Tickets 27, 28, and 29 PASS
 Next on PASS: `docs/cuts/paper-canonical-unification/tickets/31-atomic-canary-publication-recovery.md`
 Terminal: no
+Parallel frontier: not-applicable
+Parallel join: not-applicable
 Model: gpt-5.6-terra
 Effort: max
 Parallel lane: serial join; sole writer of shared migration accounting
@@ -29,6 +31,7 @@ Paper accounting without publishing or switching current refs.
 - [ ] Frozen counts and zero-write state invariants remain exact.
 - [ ] No authority version changes and no new adapter behavior are introduced.
 - [ ] Narrow lane and aggregate checks plus `git diff --check` pass; a new full suite/review is not repeated for unchanged accepted shared behavior.
+- [ ] Ticket 30 is dispatched only after all three lane-result handoffs resolve to exact PASS commits.
 
 ## Superseded-ticket mapping
 

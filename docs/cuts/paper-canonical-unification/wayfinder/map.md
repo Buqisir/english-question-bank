@@ -1,7 +1,7 @@
 # EQB 试卷 Canonical 大一统 — Wayfinder Map
 
 Status: done
-Next on PASS: implementation
+Next on PASS: owner-approval
 Terminal: no
 Phase receipt: `docs/cuts/paper-canonical-unification/phase-transition.md`
 Implementation dispatch: forbidden
@@ -28,12 +28,15 @@ External implementation blocker: separate project-wide proportionate-engineering
   narrowly checked, teacher-confirmed, atomically published data operations.
 - Tickets 27–29 are the only parallel lanes after Ticket 26 and write disjoint
   paper-specific surfaces. Ticket 30 integrates them in order 27 → 28 → 29.
-- Even after conditional approval and all four canonical authority gates pass,
-  Ticket 25 remains blocked until a separate project-wide proportionate-
-  engineering Wayfinder is durably closed. This cut does not create or execute
-  that map. The audit must preserve authentication, per-user isolation, atomic
-  publication, backup, and public Screen/Print/PDF correctness while removing
-  accidental heavyweight mechanisms from low-risk, reversible work.
+- The historical conditional approval attempt is rejected because the receipt
+  history was not continuously fail-closed. Corrected ticket bytes and the
+  produced manifest require fresh owner approval, so the current route is
+  `owner-approval` and all paper implementation remains forbidden.
+- The separate project-wide proportionate-engineering Wayfinder remains an
+  additional active blocker. This cut does not create or execute that map. The
+  audit must preserve authentication, per-user isolation, atomic publication,
+  backup, and public Screen/Print/PDF correctness while removing accidental
+  heavyweight mechanisms from low-risk, reversible work.
 - No implementation, successor, lane, or external Wayfinder was dispatched by
   this planning and authority task.
 

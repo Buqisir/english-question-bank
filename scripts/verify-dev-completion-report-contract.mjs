@@ -69,6 +69,10 @@ const currentPaperPhasePath =
 const currentPaperMapPath =
   'docs/cuts/paper-canonical-unification/wayfinder/map.md'
 const currentPaperMap = readText(ROOT, currentPaperMapPath)
+const currentPaperConditionalEvidence = readText(
+  ROOT,
+  'docs/cuts/paper-canonical-unification/conditional-manifest-approval-evidence.md',
+)
 const currentPaperTicket01 = readText(
   ROOT,
   'docs/cuts/paper-canonical-unification/tickets/01-canonical-foundation.md',
@@ -77,12 +81,27 @@ const currentPaperTicket02 = readText(
   ROOT,
   'docs/cuts/paper-canonical-unification/tickets/02-route-authority-repair.md',
 )
+const parallelTicketPaths = [
+  'docs/cuts/paper-canonical-unification/tickets/27-nck1-confirmation-lane.md',
+  'docs/cuts/paper-canonical-unification/tickets/28-national-legacy-confirmation-lane.md',
+  'docs/cuts/paper-canonical-unification/tickets/29-zhejiang-legacy-confirmation-lane.md',
+]
+const parallelJoinTicketPath =
+  'docs/cuts/paper-canonical-unification/tickets/30-integrate-confirmed-canonical-corpus.md'
+const currentPaperTicket26 = readText(
+  ROOT,
+  'docs/cuts/paper-canonical-unification/tickets/26-deterministic-source-materialization.md',
+)
+const currentPaperLaneTickets = parallelTicketPaths.map((path) =>
+  readText(ROOT, path),
+)
+const currentPaperTicket30 = readText(ROOT, parallelJoinTicketPath)
 const globalCoordinatorSkillPath =
   '/Users/huangxuewei/.codex/skills/coordinate-eqb-wayfinder/SKILL.md'
 const globalCoordinatorYamlPath =
   '/Users/huangxuewei/.codex/skills/coordinate-eqb-wayfinder/agents/openai.yaml'
 const reviewedDispatchDigest =
-  '405813344f62442a38b1f0c51d9526caba6c66b55a17ca8b8e117c2c89d665c6'
+  '26796c00ef10ac3560f8d332033adcb6de39d952a6e6a9e6526d970704ed5fd6'
 const reviewedGlobalCoordinatorSkillDigest =
   '5283214f3300f55a0cd91c6f491c1750a09d6d2a2bf4a637be7d46623c23f5d3'
 const reviewedGlobalCoordinatorYamlDigest =
@@ -543,6 +562,71 @@ function currentGitHead() {
     }).trim()
   } catch {
     return ''
+  }
+}
+
+const externalBlockerKindPattern = /^[a-z0-9][a-z0-9 ._/-]{2,159}$/i
+const externalBlockerClosurePattern = /^(docs\/.+)@([0-9a-f]{40})$/
+
+function parseExternalBlockerClosureEvidence(evidence, expectedKind, head) {
+  const match = evidence?.match(externalBlockerClosurePattern)
+  if (!match) {
+    return { formatValid: false }
+  }
+
+  const [, artifactPath, commit] = match
+  const artifactSource = committedArtifactText(commit, artifactPath)
+  return {
+    formatValid: true,
+    artifactPath,
+    commit,
+    ancestor:
+      fullCommitPattern.test(head ?? '') && commitIsAncestor(commit, head),
+    artifactExists: artifactSource.length > 0,
+    artifactStatus: markdownField(artifactSource, 'Status'),
+    artifactKind: markdownField(artifactSource, 'External blocker kind'),
+    expectedKind,
+  }
+}
+
+function conditionalDispatchHistory(startCommit, endCommit, receiptPath) {
+  if (
+    !fullCommitPattern.test(startCommit ?? '') ||
+    !fullCommitPattern.test(endCommit ?? '') ||
+    !/^docs\/.+/.test(receiptPath ?? '') ||
+    !commitIsAncestor(startCommit, endCommit)
+  ) {
+    return { verified: false, observations: [] }
+  }
+
+  try {
+    const descendants = execFileSync(
+      'git',
+      ['rev-list', '--ancestry-path', '--reverse', `${startCommit}..${endCommit}`],
+      {
+        cwd: ROOT,
+        encoding: 'utf8',
+        stdio: ['ignore', 'pipe', 'ignore'],
+      },
+    )
+      .trim()
+      .split('\n')
+      .filter(Boolean)
+    const observations = [startCommit, ...descendants].map((commit) => ({
+      commit,
+      state: markdownField(
+        committedArtifactText(commit, receiptPath),
+        'Implementation dispatch',
+      ),
+    }))
+    return {
+      verified:
+        observations.length > 0 &&
+        observations.every(({ state }) => state === 'forbidden'),
+      observations,
+    }
+  } catch {
+    return { verified: false, observations: [] }
   }
 }
 
@@ -1190,6 +1274,27 @@ function parsePhaseReceipt(
     approvalBindingReceiptSource,
     'Owner manifest-digest approval recording peer',
   )
+  const manifestApprovalProposalIdentity = markdownField(
+    source,
+    'Owner manifest-digest approval proposal identity',
+  )
+  const manifestApprovalProposalCommit = manifestApprovalProposalIdentity?.match(
+    /^result-commit:([0-9a-f]{40})$/,
+  )?.[1]
+  const dispatchHistory = conditionalDispatchHistory(
+    manifestApprovalProposalCommit,
+    approvalBindingCommit,
+    receiptSourcePath,
+  )
+  const externalImplementationBlocker = markdownField(
+    source,
+    'External implementation blocker',
+  )
+  const externalBlockerKind = markdownField(source, 'External blocker kind')
+  const externalBlockerClosureEvidence = markdownField(
+    source,
+    'External blocker closure evidence',
+  )
   const approvalSequence =
     manifestApprovalMode === 'conditional-predicate'
       ? {
@@ -1296,6 +1401,8 @@ function parsePhaseReceipt(
                   bindingMapPath,
                 )
             : '',
+          dispatchHistoryVerified: dispatchHistory.verified,
+          dispatchHistoryObservations: dispatchHistory.observations,
           implementationDispatchedBeforeBinding: !(
             recordedImplementationDispatched === 'no' &&
             conditionalImplementationForbidden
@@ -1323,13 +1430,13 @@ function parsePhaseReceipt(
       source,
       'Canonical authority gates',
     ),
-    externalImplementationBlocker: markdownField(
-      source,
-      'External implementation blocker',
-    ),
-    externalBlockerClosureEvidence: markdownField(
-      source,
-      'External blocker closure evidence',
+    externalImplementationBlocker,
+    externalBlockerKind,
+    externalBlockerClosureEvidence,
+    externalBlockerClosure: parseExternalBlockerClosureEvidence(
+      externalBlockerClosureEvidence,
+      externalBlockerKind,
+      head,
     ),
     mapStatus: markdownField(mapSource, 'Status'),
     mapNext: markdownField(mapSource, 'Next on PASS'),
@@ -1430,10 +1537,7 @@ function parsePhaseReceipt(
         source,
         'Owner manifest-digest approval source',
       ),
-      proposalIdentity: markdownField(
-        source,
-        'Owner manifest-digest approval proposal identity',
-      ),
+      proposalIdentity: manifestApprovalProposalIdentity,
       granularityIdentity: markdownField(
         source,
         'Owner manifest-digest approval granularity identity',
@@ -1684,6 +1788,52 @@ function conditionalApprovalWriteSequenceErrors(sequence) {
   ) {
     errors.push('conditional approval remains non-dispatchable until clean binding and all gates pass')
   }
+  if (sequence?.dispatchHistoryVerified !== true) {
+    errors.push('conditional approval history contains a non-forbidden or unproven dispatch state')
+  }
+  return errors
+}
+
+function externalBlockerErrors(state) {
+  const {
+    externalImplementationBlocker: status,
+    externalBlockerKind: kind,
+    externalBlockerClosureEvidence: evidence,
+    externalBlockerClosure: closure,
+  } = state
+  const errors = []
+  const groupAbsent = [status, kind, evidence].every((value) => value === undefined)
+
+  if (groupAbsent) {
+    return errors
+  }
+  if (![status, kind, evidence].every((value) => value !== undefined)) {
+    errors.push('External implementation blocker field group is incomplete')
+    return errors
+  }
+  if (!['active', 'none'].includes(status)) {
+    errors.push('External implementation blocker is malformed')
+  }
+  if (!externalBlockerKindPattern.test(kind ?? '')) {
+    errors.push('External blocker kind is missing or malformed')
+  }
+  if (status === 'active' && evidence !== 'pending') {
+    errors.push('Active external blocker requires pending closure evidence')
+  }
+  if (status === 'none') {
+    if (evidence === 'pending') {
+      errors.push('External blocker cannot close with pending evidence')
+    }
+    if (
+      closure?.formatValid !== true ||
+      closure?.ancestor !== true ||
+      closure?.artifactExists !== true ||
+      !['done', 'closed'].includes(closure?.artifactStatus) ||
+      closure?.artifactKind !== kind
+    ) {
+      errors.push('External blocker closure evidence is not durable, resolvable, and consistent')
+    }
+  }
   return errors
 }
 
@@ -1697,7 +1847,9 @@ function phaseTransitionErrors(state) {
     implementationDispatch,
     canonicalAuthorityGates,
     externalImplementationBlocker,
+    externalBlockerKind,
     externalBlockerClosureEvidence,
+    externalBlockerClosure,
     provenance,
     outcomes,
     spec,
@@ -1713,6 +1865,13 @@ function phaseTransitionErrors(state) {
       : []
 
   errors.push(...approvalSequenceErrors)
+  const externalBlockerStateErrors = externalBlockerErrors({
+    externalImplementationBlocker,
+    externalBlockerKind,
+    externalBlockerClosureEvidence,
+    externalBlockerClosure,
+  })
+  errors.push(...externalBlockerStateErrors)
 
   if (!legalPhaseTransitions.has(previous)) {
     errors.push(`unknown previous phase route kind: ${previous}`)
@@ -1812,20 +1971,12 @@ function phaseTransitionErrors(state) {
     ticketsBound &&
     approvalBound &&
     manifestApprovalBound
+  const externalBlockerDeclared = externalImplementationBlocker !== undefined
+  const externalBlockerClosed =
+    externalImplementationBlocker === 'none' &&
+    externalBlockerStateErrors.length === 0
   const externalBlockerActive =
-    externalImplementationBlocker === 'active' &&
-    externalBlockerClosureEvidence === 'pending'
-  if (
-    ![undefined, 'none', 'active'].includes(externalImplementationBlocker)
-  ) {
-    errors.push('External implementation blocker is malformed')
-  }
-  if (
-    externalImplementationBlocker === 'active' &&
-    externalBlockerClosureEvidence !== 'pending'
-  ) {
-    errors.push('Active external implementation blocker requires pending closure evidence')
-  }
+    externalBlockerDeclared && !externalBlockerClosed
   if (
     externalBlockerActive &&
     implementationAllowed &&
@@ -2563,6 +2714,11 @@ function verifiedConditionalApprovalWriteSequence() {
     receiptMapBindingDigest: mapDigest,
     mapDigestAtApprovalRouteCommit: mapDigest,
     currentMapDigest: mapDigest,
+    dispatchHistoryVerified: true,
+    dispatchHistoryObservations: [
+      { commit: approvalRouteCommit, state: 'forbidden' },
+      { commit: bindingCommit, state: 'forbidden' },
+    ],
     implementationDispatchedBeforeBinding: false,
     cleanAfterBinding: true,
     allImplementationGatesVerified: true,
@@ -3340,6 +3496,26 @@ assert(
       'independent review',
   'Ticket 02 bootstrap uses the pre-existing implementation-to-independent-review edge',
 )
+assert(
+  markdownField(currentPaperTicket26, 'Next on PASS') ===
+    'parallel frontier handoff' &&
+    parallelTicketPaths.every((path) =>
+      markdownField(currentPaperTicket26, 'Parallel frontier')?.includes(path),
+    ),
+  'Ticket 26 has one declared handoff for the exact three-lane parallel frontier',
+)
+for (const [index, laneTicket] of currentPaperLaneTickets.entries()) {
+  assert(
+    markdownField(laneTicket, 'Next on PASS') === 'parallel join handoff' &&
+      markdownField(laneTicket, 'Parallel join') === parallelJoinTicketPath,
+    `Ticket ${index + 27} has one lane-result handoff to the deterministic join`,
+  )
+}
+assert(
+  /Blocked by:\s*Tickets 27, 28, and 29 PASS/.test(currentPaperTicket30) &&
+    /fixed\s+order Ticket 27 → Ticket 28 → Ticket 29/.test(currentPaperTicket30),
+  'Ticket 30 requires all three lane PASS results and preserves fixed integration order',
+)
 
 const externallyBlockedImplementation = phaseFixture(
   'owner-approval',
@@ -3347,7 +3523,10 @@ const externallyBlockedImplementation = phaseFixture(
 )
 externallyBlockedImplementation.canonicalAuthorityGates = 'verified'
 externallyBlockedImplementation.externalImplementationBlocker = 'active'
+externallyBlockedImplementation.externalBlockerKind =
+  'project-wide proportionate-engineering Wayfinder'
 externallyBlockedImplementation.externalBlockerClosureEvidence = 'pending'
+externallyBlockedImplementation.externalBlockerClosure = { formatValid: false }
 externallyBlockedImplementation.implementationDispatch = 'forbidden'
 assert(
   phaseReceiptErrors(externallyBlockedImplementation).length === 0,
@@ -3359,6 +3538,96 @@ assert(
     error.includes('external blocker'),
   ),
   'an active external blocker rejects implementation dispatch',
+)
+
+const durablyClosedExternalBlocker = phaseFixture(
+  'owner-approval',
+  'implementation',
+)
+durablyClosedExternalBlocker.canonicalAuthorityGates = 'verified'
+durablyClosedExternalBlocker.externalImplementationBlocker = 'none'
+durablyClosedExternalBlocker.externalBlockerKind =
+  'project-wide proportionate-engineering Wayfinder'
+durablyClosedExternalBlocker.externalBlockerClosureEvidence =
+  `docs/cuts/proportionate-engineering/wayfinder/map.md@${fixtureApprovalCommit}`
+durablyClosedExternalBlocker.externalBlockerClosure = {
+  formatValid: true,
+  ancestor: true,
+  artifactExists: true,
+  artifactStatus: 'done',
+  artifactKind: 'project-wide proportionate-engineering Wayfinder',
+}
+durablyClosedExternalBlocker.implementationDispatch = 'allowed'
+assert(
+  phaseReceiptErrors(durablyClosedExternalBlocker).length === 0,
+  'durable matching external-blocker closure permits verified implementation gates',
+)
+
+for (const [name, mutate] of [
+  [
+    'none plus pending plus allowed',
+    (fixture) => {
+      fixture.externalBlockerClosureEvidence = 'pending'
+      fixture.externalBlockerClosure = { formatValid: false }
+    },
+  ],
+  [
+    'closure artifact kind mismatch',
+    (fixture) => {
+      fixture.externalBlockerClosure = {
+        ...fixture.externalBlockerClosure,
+        artifactKind: 'different blocker',
+      }
+    },
+  ],
+  [
+    'closure evidence commit is not an ancestor',
+    (fixture) => {
+      fixture.externalBlockerClosure = {
+        ...fixture.externalBlockerClosure,
+        ancestor: false,
+      }
+    },
+  ],
+]) {
+  const invalid = structuredClone(durablyClosedExternalBlocker)
+  mutate(invalid)
+  assert(
+    phaseReceiptErrors(invalid).some((error) =>
+      error.toLowerCase().includes('external blocker'),
+    ),
+    `external blocker rejects ${name}`,
+  )
+}
+
+const conditionalHistoryBypass = phaseFixture(
+  'owner-approval',
+  'implementation',
+)
+conditionalHistoryBypass.manifestApproval =
+  verifiedConditionalManifestApproval()
+conditionalHistoryBypass.approvalSequence =
+  verifiedConditionalApprovalWriteSequence()
+conditionalHistoryBypass.approvalSequence.dispatchHistoryVerified = false
+assert(
+  phaseReceiptErrors(conditionalHistoryBypass).some((error) =>
+    error.includes('history contains a non-forbidden'),
+  ),
+  'conditional approval rejects a historically allowed dispatch state',
+)
+assert(
+  markdownField(currentPaperConditionalEvidence, 'Status') === 'rejected' &&
+    [
+      '5a8233caaf29e0e86321d77df2f079b16e725f73',
+      '85037b6bbc5a01a7f8f355a089162e6bfc6ff253',
+      '8971e445a06a492f742ce16c4d8d78242523b1f7',
+      '697d603b0ec6bda345ad2f2fe1bd0df0d34de44d',
+      '4c0e23726ddcf92ff60b9cc35b16b9ec12776271',
+    ].every((commit) => currentPaperConditionalEvidence.includes(commit)) &&
+    currentPaperConditionalEvidence.includes(
+      'earlier evidence line claiming dispatch stayed\nforbidden throughout evaluation was false and is withdrawn',
+    ),
+  'current conditional evidence truthfully records the independently readable dispatch history',
 )
 
 section('canonical handoff')

@@ -186,6 +186,29 @@ Implementation is forbidden until all four gates verify:
 Filenames, directory existence, prose claims, historical chat, and old
 handoffs satisfy none of these gates.
 
+### External implementation blockers
+
+An owner-explicit external blocker is an additional fail-closed gate; it never
+substitutes for or obscures the four canonical authority gates. The receipt
+field group is optional when no external blocker has ever been declared. Once
+declared, all three fields are required and the blocker kind remains stable:
+
+- `active` requires a non-placeholder durable blocker kind, closure evidence
+  `pending`, and `Implementation dispatch: forbidden`;
+- `none` is a closure transition, not an empty-state sentinel. It requires the
+  same durable blocker kind and closure evidence in the exact form
+  `<repo-relative-path>@<40-hex-commit>`;
+- the evidence commit must resolve and be an ancestor of the receipt HEAD, the
+  named artifact must exist at that commit, and that artifact must declare
+  `Status: done` or `Status: closed` plus an identical `External blocker kind`;
+- `none + pending`, `none + not-applicable`, a missing or changed kind, an
+  unresolvable/non-ancestor commit, a missing artifact, or inconsistent closure
+  content all fail closed. Dispatch may become `allowed` only after this
+  closure proof and all four canonical authority gates pass.
+
+An active blocker does not authorize creating or executing the work that would
+close it. That work still needs its own owner-selected route and authority.
+
 ### Review and fix routes
 
 One implementation task keeps implementation, TDD, ordinary Standards + Spec
@@ -219,7 +242,7 @@ owner QA, release, or closeout remains.
 New tickets declare:
 
 ```text
-Next on PASS: <ticket path | independent review | owner QA | release | DONE>
+Next on PASS: <ticket path | parallel frontier handoff | parallel join handoff | independent review | owner QA | release | DONE>
 Terminal: yes | no
 ```
 
@@ -227,6 +250,33 @@ Terminal: yes | no
 fields before its final response and does not improvise the route from chat
 history. `Terminal: yes` permits `DONE` only after every ticket, required
 review, owner QA, and release closeout is actually complete.
+
+### Declared parallel frontier and join
+
+Use this bounded form only when an accepted spec and manifest require genuinely
+parallel sibling tickets with disjoint write surfaces and isolated worktrees.
+It reuses manual owner dispatch; it creates no coordinator, task queue, or
+additional approval layer.
+
+- The serial fan-out ticket declares exactly
+  `Next on PASS: parallel frontier handoff` and one `Parallel frontier` field
+  containing the exact sibling ticket paths. Its final response has one legal
+  completion exit: one parallel-frontier handoff containing the complete task
+  blocks for those siblings. The owner may open those siblings from the same
+  exact PASS commit.
+- Each sibling declares exactly `Next on PASS: parallel join handoff` and one
+  `Parallel join` field naming the single join ticket. Its final response has
+  one legal completion exit: a lane-result handoff to that join. This records
+  the lane's exact PASS result but does not dispatch a join whose other blockers
+  are unresolved.
+- The join ticket names every sibling in `Blocked by`. It becomes dispatchable
+  only after all declared lane results pass, then integrates them in its fixed
+  documented order. A failed or missing lane remains a blocker; an early lane
+  result never chooses or starts another lane.
+
+These two handoff labels are legal only as the matched pair above. They do not
+permit arbitrary multi-successor routes, overlapping writers, or parallel
+writes to shared integration surfaces.
 
 ## Exactly one completion exit
 
@@ -236,6 +286,7 @@ Choose from current initiative state:
 | --- | --- |
 | Work remains on the current ticket and can be completed here | `Next：留在当前任务` with a concrete prompt |
 | Current ticket passed and `Next on PASS` names a required successor | New top-level task handoff below, matching that route |
+| A declared fan-out or lane ticket passed | The single matched parallel-frontier or parallel-join handoff above |
 | The exact page is provisioned and owner acceptance is pending | `owner-qa-handoff-template.md` |
 | The whole initiative, including review, QA, and release closeout, is complete | `DONE` |
 

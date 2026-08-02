@@ -23,8 +23,9 @@ per-paper recovery and fixed-denominator accounting.
 
 ## Acceptance criteria
 
-- [ ] Exactly the 29 non-canary papers publish once from their exact confirmed candidates, with no missing or duplicate current identity.
+- [ ] Exactly the 29 non-canary papers publish once from their exact Teacher-Confirmed Canonical Papers, with no missing or duplicate current identity.
 - [ ] Each paper binds source digest, confirmation identity, Canonical Paper digest, publication digest, and exact reload.
+- [ ] Each published Canonical Paper retains its exact Source Capture, Import Candidate, and Teacher Confirmation identities.
 - [ ] Narrow deterministic admission, atomicity, and proportionate canary/public-surface checks pass; failures retain explicit retry/recovery state.
 - [ ] The frozen 33-paper denominator, group/question/option accounting, and rollback inventory close exactly.
 - [ ] No unchanged-adapter paper causes an authority bump, per-paper full suite, or fresh code review.

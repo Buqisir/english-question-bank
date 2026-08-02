@@ -23,8 +23,9 @@ public seams; edited-file and path filters are routing hints, never sole proof.
 
 Maintain a small, auditable impact map from each shared producer or authority
 through its consumers to the required verifiers and artifacts. Unknown, stale,
-or cross-cut impact widens selection conservatively. This affects narrow-test
-routing only; ticket closure still retains the final full suite in Layer 3.
+or cross-cut impact widens selection conservatively. Test weight follows the
+concrete failure being prevented, blast radius, irreversibility, and automation
+authority; raw elapsed time is measurement evidence, not the governing KPI.
 
 Geometry and typography changes require actual Screen output and every
 relevant Student/Teacher Print HTML and Chromium PDF artifact. Hash-only,
@@ -33,24 +34,41 @@ Visual baselines and artifacts are reusable only for the exact candidate in
 the same pinned OS, browser, font, and rendering environment. Candidate or
 environment drift invalidates reuse.
 
-## Layer 3 — ticket closure
+## Layer 3 — risk-tiered ticket closure
 
-On the final candidate:
+Every final candidate runs the affected narrow deterministic checks. Add the
+least heavy mechanism that prevents each concrete remaining failure; remove a
+step when deleting it does not measurably increase risk or a lighter existing
+mechanism already closes that risk.
 
-1. run the affected narrow checks;
-2. run `pnpm -C app run verify:all` once on that final state;
-3. pass every required independent review gate;
-4. use Owner QA only when the work is user-visible.
+A shared adapter, schema, publication, or renderer behavior change runs
+`pnpm -C app run verify:all` once on its final state and passes the required
+independent Standards/Spec review lineage. The same final-suite and independent-
+review control remains required for changes to authentication, permissions or
+per-user isolation, persistence/migration behavior, production configuration,
+atomic-publication behavior, or shared Screen/Print/PDF correctness when those
+changes can affect users or durable data. A post-review executable fix reruns
+affected narrow checks and one final full suite on the new final state.
 
-If a post-review fix changes executable behavior or evidence, rerun the
-affected narrow checks and one final full suite on the new final state before
-advancing.
+Importing paper data through an unchanged accepted adapter, schema, publisher,
+and renderer is a data closure, not a shared-behavior change. It requires exact
+source/candidate/confirmation/publication identities, narrow deterministic
+admission checks, Teacher Confirmation, atomic publication/reload/retry checks,
+fixed-denominator accounting, and canary or public-surface QA proportionate to
+the actual paper and publication risk. Ticket closure alone does not trigger
+`verify:all`, an authority version bump, an independent dual-axis review, or
+another approval/evidence layer that merely rechecks the same facts.
+Any discovered need to change shared behavior fails closed and takes the shared-
+change path above.
 
-A one-line documentation or SHA identity repair instead uses direct
-resolvability, link, and format checks plus the required focused re-review in
-an existing independent-review lineage. It does not automatically trigger
-unrelated renderer suites or the full application suite unless current
-authority or actual impact requires them.
+Owner QA remains required when the work is user-visible.
+
+A one-line documentation or SHA identity repair uses direct resolvability,
+link, and format checks. It uses a focused re-review only when repairing a
+concrete Must Fix in an existing independent-review lineage; ordinary low-risk
+prose does not create a review lineage or evidence approval chain. It does not
+trigger unrelated renderer suites or the full application suite unless actual
+impact requires them.
 
 ## Gates that remain mandatory
 
@@ -64,7 +82,7 @@ not weaken or replace:
 - the real public compiler and answer-visibility boundaries;
 - recovery and rollback proof;
 - actual Screen, Student/Teacher Print HTML, and Chromium PDF evidence;
-- required independent review and user-visible Owner QA.
+- risk-required independent review and user-visible Owner QA.
 
 Repeated prerequisite identity facts may be established once for one exact
 candidate and shared by the scheduled groups that consume them. Any candidate

@@ -1,27 +1,29 @@
 # Paper canonical unification proportionate-trust ticket-set manifest
 
-Status: published-awaiting-conditional-route-binding
+Status: published-awaiting-owner-approval-after-review-fix
 Source phase: owner-authorized `implementation → to-tickets → owner-approval`
 Proposal identity: owner-delegated planning task from source thread `019fbe68-10d0-7371-9927-467af87c4d6c`
 Publication source HEAD: `76e068469071787ac24f76170e21020ff22a3fcf`
-Owner granularity approval record: `docs/cuts/paper-canonical-unification/proportionate-route-owner-granularity-approval.md`
+Historical granularity approval record: `docs/cuts/paper-canonical-unification/proportionate-route-owner-granularity-approval.md@5a8233caaf29e0e86321d77df2f079b16e725f73`
 Accepted spec: `docs/cuts/paper-canonical-unification/spec.md`
 Accepted spec SHA-256: `180bcb1d921746f5b8af0467c1dd04924c6312b791de11708ee7f593e657f417`
 Total ticket count: 36
 Preserved completed baseline: Tickets 01–24
 Replacement route: Tickets 25–36
-Owner manifest-digest approval: conditional-predicate authorized, binding pending
+Current owner ticket-granularity approval: pending
+Current owner manifest-digest approval: pending
 Implementation dispatch: forbidden
 External implementation blocker: separate project-wide proportionate-engineering Wayfinder must be durably closed
 
 ## Binding and lifecycle
 
-The owner directly authorized the semantic simplification, exact replacement
-route, publication, and conditional manifest approval in the delegated task.
-No additional interview or separate publish/approval task is required. The
-conditional approval may bind the produced manifest only if every requested
-decision and obligation matches, all paths/digests and provenance are exact,
-there is no malformed evidence or drift, and no implementation is dispatched.
+The owner directly authorized the semantic simplification and replacement route
+in the delegated planning task. The historical conditional approval attempt is
+not current authority: Git shows `Implementation dispatch: allowed` in the
+receipt during the claimed fail-closed interval, and this review fix changes
+ticket bytes and the exact manifest digest. Current ticket granularity and the
+produced exact manifest digest therefore remain pending owner approval after
+focused re-review.
 
 Even after all four canonical authority gates verify, paper implementation
 remains forbidden until a separate project-wide proportionate-engineering
@@ -53,14 +55,17 @@ artifacts, and Ticket 25 is additionally blocked by the external Wayfinder.
 ## Parallel DAG and write-surface contract
 
 Ticket 25 and its independent review are serial. Ticket 26 is mechanical and
-serial. Tickets 27–29 may then run in parallel from the exact Ticket 26 PASS
-commit in distinct worktrees. Each lane writes only its listed papers'
+serial, then returns one parallel-frontier handoff for Tickets 27–29. The owner
+may open those lanes in parallel from the exact Ticket 26 PASS commit in
+distinct worktrees. Each lane writes only its listed papers'
 candidates, Teacher Confirmation records, fixtures, and evidence. Shared
 modules, schemas, authority versions, migration ledger/manifest, publication
 refs, renderers, tickets, map, and phase receipt are protected.
 
-Ticket 30 integrates in fixed order 27 → 28 → 29 and is the sole writer of
-shared migration accounting. Tickets 31–36 are serial. Any shared change found
+Each lane returns one parallel-join handoff to Ticket 30 without dispatching a
+blocked join. Only after all three lane PASS results exist does Ticket 30
+integrate in fixed order 27 → 28 → 29 as the sole writer of shared migration
+accounting. Tickets 31–36 are serial. Any shared change found
 inside a data-only lane or migration ticket fails closed and requires fresh
 shared-change authority rather than a lane-local framework or validator.
 
@@ -118,13 +123,13 @@ release closeout, and explicit production/R2 exclusion.
 | `docs/cuts/paper-canonical-unification/tickets/23-hard-measured-migration-replan.md` | `e29189f9b07716f2c31adae7d870f55c9db4cdd2edaa46863d11ab6914344a59` |
 | `docs/cuts/paper-canonical-unification/tickets/24-costed-immutable-source-adapter-pilot.md` | `489a5ac672baec7faf7f5862874c4a48d780d470955f4131b752ca84fe8c5fee` |
 | `docs/cuts/paper-canonical-unification/tickets/25-trusted-docx-candidate-confirmation-seam.md` | `7ea8623841aed914ba0ac39cc832166ff0e83b585d4f4ea300cc03047f53718a` |
-| `docs/cuts/paper-canonical-unification/tickets/26-deterministic-source-materialization.md` | `8074a9f5ec95346ae531dbc9aaf7ff2ec88ee08f297b10001e88ec8c080a5968` |
-| `docs/cuts/paper-canonical-unification/tickets/27-nck1-confirmation-lane.md` | `d44cb64af5122ee1230f92363e5616e7c0c16bb4b5371a6529e31edb18ff1675` |
-| `docs/cuts/paper-canonical-unification/tickets/28-national-legacy-confirmation-lane.md` | `9d9123c65877bbdbc807196034f39f6848d891b057f65618f4ef2ffab892238e` |
-| `docs/cuts/paper-canonical-unification/tickets/29-zhejiang-legacy-confirmation-lane.md` | `198e0407ec326676b4bc2246b9780975b60de4bdabb18865369aad8d983fa196` |
-| `docs/cuts/paper-canonical-unification/tickets/30-integrate-confirmed-canonical-corpus.md` | `eb73920aa1658250bb3f6cbb8ec97cc56105f933dda7a44c3da0983107dd49a5` |
+| `docs/cuts/paper-canonical-unification/tickets/26-deterministic-source-materialization.md` | `21f7b4e049b7ea9f48b251c7db8015ccc8149bd690f24e447604511797824c3d` |
+| `docs/cuts/paper-canonical-unification/tickets/27-nck1-confirmation-lane.md` | `ad3839c013e40dc6423f21639b78aa9418af0ad98fe051783a0a4d768e027c1d` |
+| `docs/cuts/paper-canonical-unification/tickets/28-national-legacy-confirmation-lane.md` | `cedd138665f188354bd5a6e56aa1fc389cb788e91fb6a8aaf9d62d56cfedf595` |
+| `docs/cuts/paper-canonical-unification/tickets/29-zhejiang-legacy-confirmation-lane.md` | `e16bc9a2468dea9e91fab8bac8baec7243857f30a7fcea0b1cacd1aeb10eac78` |
+| `docs/cuts/paper-canonical-unification/tickets/30-integrate-confirmed-canonical-corpus.md` | `f65cb9bf87450abe0e6f65ff6ab577075d496b02d4654de684a1fc384e543ab6` |
 | `docs/cuts/paper-canonical-unification/tickets/31-atomic-canary-publication-recovery.md` | `8bb4c4dd25bca86b4ee1901d3d27b4b93647e3f6d4dc8245fce50d688c015351` |
-| `docs/cuts/paper-canonical-unification/tickets/32-remaining-corpus-migration.md` | `425844558f66e4abe7ac1dcdf525c064077510e4f4a1ea5c157e4f1b464dec18` |
+| `docs/cuts/paper-canonical-unification/tickets/32-remaining-corpus-migration.md` | `a1cc7775eed00b90c7037cffcd3585b604ef9e59c2c7b3e1aa6a60fed966d8d0` |
 | `docs/cuts/paper-canonical-unification/tickets/33-shared-screen-print-pdf-proof.md` | `70cee1d7c9517d38c799415e3f1753b1e3831ca7d46cec3207345cf044e02f15` |
 | `docs/cuts/paper-canonical-unification/tickets/34-retire-legacy-canonical-fallbacks.md` | `ca56110468d21e3c67e13059ef33fb8deb1eded70ee669b1dfce2c27bafd794c` |
 | `docs/cuts/paper-canonical-unification/tickets/35-post-retirement-owner-qa.md` | `f9f0bad71bbe3b8dfb0bc25156d993e96db3504dfe5b76902c8afa4e0e56f705` |
@@ -132,5 +137,6 @@ release closeout, and explicit production/R2 exclusion.
 
 ## Publication boundary
 
-This manifest publishes route authority only. It does not create the external
-Wayfinder, dispatch Ticket 25, start implementation, or open any lane.
+This manifest publishes corrected route bytes for focused re-review and later
+owner approval only. It does not create the external Wayfinder, dispatch Ticket
+25, start implementation, or open any lane.

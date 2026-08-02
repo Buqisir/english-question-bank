@@ -2,8 +2,10 @@
 
 Status: ready
 Blocked by: Ticket 25 independent review PASS
-Next on PASS: parallel frontier — Tickets 27, 28, and 29
+Next on PASS: parallel frontier handoff
 Terminal: no
+Parallel frontier: `docs/cuts/paper-canonical-unification/tickets/27-nck1-confirmation-lane.md`, `docs/cuts/paper-canonical-unification/tickets/28-national-legacy-confirmation-lane.md`, `docs/cuts/paper-canonical-unification/tickets/29-zhejiang-legacy-confirmation-lane.md`
+Parallel join: not-applicable
 Model: gpt-5.6-luna
 Effort: max
 Parallel lane: serial mechanical expand before paper-family lanes
@@ -35,6 +37,7 @@ All frozen papers except the Ticket 25 seam pair `paper-2025-i` and
 - [ ] Outputs make no Profile, answer, group, confirmation, or readiness claim.
 - [ ] Any need to change the accepted shared seam fails closed and routes back to a separately authorized shared change.
 - [ ] Narrow materialization and zero-mutation checks plus `git diff --check` pass; no full suite or independent review is added solely for these data artifacts.
+- [ ] Return one parallel-frontier handoff for Tickets 27–29 from this exact PASS commit; do not start a lane or create another coordinator.
 
 ## Superseded-ticket mapping
 

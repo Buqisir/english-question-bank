@@ -2,8 +2,10 @@
 
 Status: ready
 Blocked by: Ticket 26 PASS
-Next on PASS: `docs/cuts/paper-canonical-unification/tickets/30-integrate-confirmed-canonical-corpus.md`
+Next on PASS: parallel join handoff
 Terminal: no
+Parallel frontier: not-applicable
+Parallel join: `docs/cuts/paper-canonical-unification/tickets/30-integrate-confirmed-canonical-corpus.md`
 Model: gpt-5.6-terra
 Effort: max
 Parallel lane: Zhejiang-legacy; isolated worktree from exact Ticket 26 PASS commit
@@ -33,6 +35,7 @@ complete unpublished Canonical Papers or fail with exact unresolved issues.
 - [ ] Dual-session/Profile variation is expressed as confirmed paper data, not a new mirrored validation layer.
 - [ ] The unchanged adapter/schema/authority versions are preserved.
 - [ ] Narrow per-paper checks and lane aggregate accounting pass; no per-paper full suite, authority bump, or independent code review is performed.
+- [ ] Return one lane-result handoff to Ticket 30; do not dispatch the join until Tickets 27–29 all PASS.
 
 ## Superseded-ticket mapping
 
