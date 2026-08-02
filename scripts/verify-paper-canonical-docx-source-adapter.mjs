@@ -1,523 +1,218 @@
-#!/usr/bin/env node
-
-/**
- * Ticket 25: compile one NCK1 paper from its immutable DOCX source through
- * the generic source-adapter seam. This is deliberately zero-write except for
- * the checked-in deterministic evidence record created by --write-evidence.
- */
-
 import assert from 'node:assert/strict'
-import { createHash } from 'node:crypto'
-import {
-  existsSync,
-  readFileSync,
-  readdirSync,
-  statSync,
-  writeFileSync,
-} from 'node:fs'
-import path from 'node:path'
-import { fileURLToPath } from 'node:url'
+import { readFile } from 'node:fs/promises'
+import { canonicalAuthorityRef, resolveCanonicalAuthority, trustedDocxCandidateAuthorityRef } from '../shared/paper-canonical/authority.mjs'
+import { compileCanonicalPaper, compileTrustedDocxCandidate } from '../shared/paper-canonical/compiler.mjs'
+import { digestJson, sha256 } from '../shared/paper-canonical/stable.mjs'
+import { confirmCanonicalCandidate, importCanonicalCandidate } from '../server/paper-canonical/trustedDocxCanonicalImport.mjs'
 
-import { canonicalAuthorityRef, compileCanonicalPaper } from '../shared/paper-canonical/compiler.mjs'
-import { digestJson } from '../shared/paper-canonical/stable.mjs'
-import {
-  buildDocxCanonicalImportRequest,
-  DOCX_SOURCE_ENVELOPE_MEDIA_TYPE,
-} from '../server/paper-canonical/docxSourceAdapter.mjs'
-import {
-  makeReadyCanonicalFixture,
-} from '../test-fixtures/paper-canonical/foundationFixture.mjs'
-import {
-  makePaper2025IDocxSourceProof,
-} from '../test-fixtures/paper-import/paper-2025-i-docx-source-adapter/sourceProof.mjs'
+const root = new URL('..', import.meta.url)
+const docxBytes = new Uint8Array(await readFile(new URL('test-fixtures/paper-import/paper-2025-i-docx-source-adapter/2025-nck1-answer-source.docx', root)))
+const pdfBytes = new Uint8Array(await readFile(new URL('scripts/import-pipeline/papers/paper-2026-i/source/paper.pdf', root)))
+const candidateAuthority = resolveCanonicalAuthority(trustedDocxCandidateAuthorityRef)
+assert.equal(candidateAuthority.ok, true)
+assert.equal(canonicalAuthorityRef.manifestVersion, '36', 'Ticket 25 must not advance publication/current authority')
+assert.equal(candidateAuthority.closure.profiles.get('nck1').version, '11')
+assert.equal(candidateAuthority.closure.profiles.get('nck1').completeness.requireInactiveSourceClosure, false)
+assert.equal(candidateAuthority.closure.artifacts.adapter.adapters.find((entry) => entry.adapterId === 'docx-source-envelope').version, '2')
+assert.equal(Object.hasOwn(candidateAuthority.closure.schemas, 'docx-source-envelope-v1'), false)
+assert.equal(Object.hasOwn(candidateAuthority.closure.schemas, 'docx-source-envelope-v2'), true)
 
-const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
-const PAPER_ID = 'paper-2025-i'
-const SOURCE_REL =
-  'test-fixtures/paper-import/paper-2025-i-docx-source-adapter/2025-nck1-answer-source.docx'
-const SOURCE_PROOF_REL =
-  'test-fixtures/paper-import/paper-2025-i-docx-source-adapter/sourceProof.mjs'
-const EVIDENCE_REL =
-  'docs/cuts/paper-canonical-unification/migration/paper-2025-i-docx-source-adapter-v1.json'
-const DRY_RUN_REL =
-  'docs/cuts/paper-canonical-unification/migration/full-corpus-zero-write-dry-run-v1.json'
-const PROTECTED_ROOTS = Object.freeze([
-  'app/public/paper-assets',
-  'data/question-bank.sqlite',
-  'scripts/import-pipeline/papers',
-  'docs/cuts/paper-canonical-unification/migration/ledger-v1.json',
-  'docs/cuts/paper-canonical-unification/migration/manifest-v1.json',
-])
-const EXPECTED_SOURCE = Object.freeze({
-  byteLength: 135250,
-  sha256: '33a93bfa4af0ebab48ae7aaef036a44b7004fff6ea2b90f2814ed12dee01b047',
-})
-const EXPECTED_FAMILIES = Object.freeze({
-  reading: 4,
-  'seven-choices': 1,
-  cloze: 1,
-  'grammar-fill': 1,
-  'application-writing': 1,
-  'continuation-writing': 1,
-})
+const first = importCanonicalCandidate(docxBytes, { originalName: '2025-nck1-answer-source.docx' })
+const second = importCanonicalCandidate(docxBytes, { originalName: '2025-nck1-answer-source.docx' })
+assert.deepEqual(first, second, 'trusted candidate derivation must be deterministic')
+assert.ok(first.candidate, 'DOCX bytes must produce a candidate even when unresolved')
+assert.equal(first.candidate.authority.manifestVersion, '37', 'Ticket 25 must bind its versioned candidate authority')
+assert.equal(first.candidate.source.byteLength, docxBytes.byteLength)
+assert.equal(first.candidate.source.sha256, sha256(docxBytes), 'candidate must bind the exact immutable DOCX bytes')
+assert.equal(first.candidate.sourceBytes.byteLength, docxBytes.byteLength)
+assert.equal('canonicalPaper' in first.candidate, false, 'candidate stage must not return a Canonical Paper')
+assert.ok(first.candidate.interpretation.observations.every((observation) =>
+  Number.isInteger(observation.span.start) && Number.isInteger(observation.span.end)), 'trusted derivation must retain source spans as diagnostics')
+const { candidateDigest: firstCandidateDigest, sourceBytes: _firstSourceBytes, ...firstCandidateBody } = first.candidate
+assert.equal(firstCandidateDigest, digestJson(firstCandidateBody), 'candidate digest must bind the complete candidate interpretation')
 
-function abs(relativePath) {
-  return path.join(ROOT, relativePath)
+const sourceDocument = {
+  inputKey: 'source_docx',
+  mediaType: first.candidate.source.mediaType,
+  sha256: first.candidate.source.sha256,
+  byteLength: first.candidate.source.byteLength,
 }
-
-function sha256(value) {
-  return createHash('sha256').update(value).digest('hex')
-}
-
-function readJson(relativePath) {
-  return JSON.parse(readFileSync(abs(relativePath), 'utf8'))
-}
-
-function walkFiles(relativePath) {
-  const target = abs(relativePath)
-  if (!existsSync(target)) return []
-  const stat = statSync(target)
-  if (stat.isFile()) return [{ relativePath, bytes: readFileSync(target) }]
-  assert.equal(stat.isDirectory(), true, `${relativePath} must be a file or directory`)
-  const files = []
-  function visit(currentRelativePath) {
-    for (const entry of readdirSync(abs(currentRelativePath), { withFileTypes: true })
-      .sort((left, right) => left.name.localeCompare(right.name))) {
-      const nextRelativePath = path.posix.join(currentRelativePath, entry.name)
-      assert.equal(entry.isSymbolicLink(), false, `${nextRelativePath} must not be a symlink`)
-      if (entry.isDirectory()) visit(nextRelativePath)
-      else if (entry.isFile()) files.push({
-        relativePath: nextRelativePath,
-        bytes: readFileSync(abs(nextRelativePath)),
-      })
-      else throw new Error(`unsupported protected entry: ${nextRelativePath}`)
-    }
-  }
-  visit(relativePath)
-  return files
-}
-
-function protectedState() {
-  const files = PROTECTED_ROOTS.flatMap(walkFiles)
-    .map(({ relativePath, bytes }) => ({
-      path: relativePath,
-      byteLength: bytes.byteLength,
-      sha256: sha256(bytes),
-    }))
-    .sort((left, right) => left.path.localeCompare(right.path))
-  return {
-    paths: [...PROTECTED_ROOTS],
-    fileCount: files.length,
-    digest: digestJson(files),
-  }
-}
-
-function diagnostics(result) {
-  return result.artifacts.normalizationReport.diagnostics
-}
-
-function assertDiagnostic(result, code) {
-  assert.ok(
-    diagnostics(result).some((diagnostic) => diagnostic.code === code),
-    `expected ${code}; got ${diagnostics(result).map((diagnostic) => diagnostic.code).join(', ')}`,
-  )
-}
-
-function mutateEnvelope(request, mutate) {
-  const candidate = structuredClone(request)
-  const document = candidate.evidence.documents.find(
-    (item) => item.declared.mediaType === DOCX_SOURCE_ENVELOPE_MEDIA_TYPE,
-  )
-  assert.ok(document, 'DOCX request must contain one source envelope')
-  const envelope = JSON.parse(new TextDecoder().decode(document.bytes))
-  mutate(envelope)
-  document.bytes = new TextEncoder().encode(JSON.stringify(envelope))
-  return candidate
-}
-
-function baseline() {
-  const run = readJson(DRY_RUN_REL).runs.find(
-    (candidate) => candidate.paperId === PAPER_ID,
-  )
-  assert.ok(run, 'Ticket 22 baseline must retain paper-2025-i')
-  assert.equal(run.measuredCost.inspectionWorkUnits, 67)
-  assert.equal(run.measuredCost.components.immutableDocumentCount, 8)
-  assert.equal(run.measuredCost.components.immutableEvidenceByteLength, 277857)
-  assert.equal(run.measuredRisk.riskPoints, 17)
-  return run
-}
-
-function measure({ request, compilation, baselineRun }) {
-  const sourceDocuments = compilation.artifacts.sourceCapture.documents
-  const documentByteLength = sourceDocuments.reduce(
-    (total, document) => total + document.byteLength,
-    0,
-  )
-  const diagnosticCodes = [...new Set(diagnostics(compilation).map(
-    (diagnostic) => diagnostic.code,
-  ))].sort()
-  const floorIncrement = 4 + Math.ceil(EXPECTED_SOURCE.byteLength / 16384)
-  const floor = baselineRun.measuredCost.inspectionWorkUnits + floorIncrement
-  assert.equal(floor, 80, 'Ticket 25 capacity floor must preserve B67 + raw-DOCX increment')
-  const actualUnits = sourceDocuments.length * 4
-    + Math.ceil(documentByteLength / 16384)
-    + diagnostics(compilation).length * 8
-  const inactiveClosureUnclassified = diagnosticCodes.includes(
-    'DOCX_LISTENING_SOURCE_INCOMPLETE',
-  )
-  const riskPoints = inactiveClosureUnclassified ? 8 : 0
-  return {
-    baseline: {
-      inspectionWorkUnits: baselineRun.measuredCost.inspectionWorkUnits,
-      immutableDocumentCount: baselineRun.measuredCost.components.immutableDocumentCount,
-      immutableEvidenceByteLength: baselineRun.measuredCost.components.immutableEvidenceByteLength,
-      riskPoints: baselineRun.measuredRisk.riskPoints,
-    },
-    floor: {
-      formula: 'B + 4 per digest-verified raw DOCX + ceil(raw DOCX bytes / 16384)',
-      rawDocxByteLength: EXPECTED_SOURCE.byteLength,
-      incrementWorkUnits: floorIncrement,
-      inspectionWorkUnits: floor,
-      status: 'floor_not_complete_envelope_estimate',
-    },
-    actual: {
-      model: 'ticket-25-docx-source-adapter-inspection-units-v1',
-      sourceDocumentCount: sourceDocuments.length,
-      sourceDocumentByteLength: documentByteLength,
-      diagnosticCount: diagnostics(compilation).length,
-      diagnosticCodes,
-      inspectionWorkUnits: actualUnits,
-      risk: {
-        model: 'ticket-25-source-adapter-risk-points-v1',
-        sourceAdapterUnavailable: false,
-        profileUnproven: false,
-        inactiveClosureUnclassified,
-        diagnosticCodeCount: diagnosticCodes.length,
-        riskPoints,
-        band: riskPoints === 0 ? 'low' : 'medium',
+const genericBypass = compileCanonicalPaper({
+  authority: first.candidate.authority,
+  evidence: {
+    documents: [
+      {
+        inputKey: sourceDocument.inputKey,
+        roles: ['question_source', 'official_answer_source', 'source_provenance'],
+        bytes: docxBytes,
+        declared: { mediaType: sourceDocument.mediaType, originalName: '2025-nck1-answer-source.docx' },
       },
-    },
-    requestDocumentKeys: request.evidence.documents.map((document) => document.inputKey),
-  }
-}
-
-const before = protectedState()
-const docxBytes = readFileSync(abs(SOURCE_REL))
-assert.equal(docxBytes.byteLength, EXPECTED_SOURCE.byteLength)
-assert.equal(sha256(docxBytes), EXPECTED_SOURCE.sha256)
-
-const proof = makePaper2025IDocxSourceProof(docxBytes)
-assert.deepEqual(proof.familyCounts, EXPECTED_FAMILIES)
-assert.equal(proof.officialAnswerCount, 45)
-assert.equal(proof.inactiveListening.questions.length, 20)
-assert.deepEqual(
-  proof.inactiveListening.questions.map((question) => question.questionNo),
-  Array.from({ length: 20 }, (_, index) => index + 1),
-)
-assert.equal(
-  proof.inactiveListening.questions.every((question) =>
-    Object.keys(question.options).join('') === 'ABC'
-    && Object.hasOwn(question.options, question.answer)),
-  true,
-)
-assert.deepEqual(proof.inactiveListening.transcript, {
-  expectedSegmentCount: 10,
-  segmentIds: [],
-  segments: [],
-  coverage: 'incomplete_source',
+      {
+        inputKey: 'docx_source_envelope',
+        roles: ['operator_assertions'],
+        bytes: new TextEncoder().encode(JSON.stringify({
+          schemaVersion: 'docx-source-envelope-v2',
+          sourceDocument,
+        })),
+        declared: {
+          mediaType: 'application/vnd.eqb.docx-source-envelope+json',
+          originalName: 'docx-source-envelope.json',
+        },
+      },
+    ],
+  },
 })
-assert.deepEqual(proof.inactiveListening.timing, { disposition: 'not_supplied' })
-assert.deepEqual(proof.inactiveListening.audio, {
-  disposition: 'not_supplied',
-  packageEntries: [],
+assert.equal('canonicalPaper' in genericBypass.artifacts, false, 'the generic compiler must not bypass Teacher Confirmation for candidate authority')
+assert.ok(genericBypass.artifacts.normalizationReport.diagnostics.some((diagnostic) => diagnostic.code === 'AUTHORITY_RETIRED'))
+
+const semanticEnvelopeBypass = compileTrustedDocxCandidate({
+  evidence: {
+    documents: [
+      {
+        inputKey: sourceDocument.inputKey,
+        roles: ['question_source', 'official_answer_source', 'source_provenance'],
+        bytes: docxBytes,
+        declared: { mediaType: sourceDocument.mediaType, originalName: '2025-nck1-answer-source.docx' },
+      },
+      {
+        inputKey: 'docx_source_envelope',
+        roles: ['operator_assertions'],
+        bytes: new TextEncoder().encode(JSON.stringify({
+          schemaVersion: 'docx-source-envelope-v2',
+          sourceDocument,
+          source: { groups: [{ groupId: 'forged' }] },
+        })),
+        declared: {
+          mediaType: 'application/vnd.eqb.docx-source-envelope+json',
+          originalName: 'docx-source-envelope.json',
+        },
+      },
+    ],
+  },
 })
+assert.equal('canonicalPaper' in semanticEnvelopeBypass.artifacts, false, 'the v2 envelope must reject caller-authored source semantics')
+assert.ok(semanticEnvelopeBypass.artifacts.normalizationReport.diagnostics.some((diagnostic) => diagnostic.code === 'DOCX_SOURCE_ENVELOPE_INVALID'))
 
-const request = buildDocxCanonicalImportRequest({
-  docxBytes,
-  source: proof.source,
-  originalName: '2025-nck1-answer-source.docx',
-})
-assert.deepEqual(request.authority, canonicalAuthorityRef)
-assert.deepEqual(
-  request.evidence.documents.map((document) => document.inputKey),
-  ['source_docx', 'docx_source_envelope'],
-)
-assert.equal(
-  request.evidence.documents.some((document) =>
-    document.declared.mediaType === 'application/vnd.eqb.canonical-fixture+json'
-    || document.inputKey === 'paper_asset'
-    || document.inputKey === 'official_answers'),
-  false,
-  'the DOCX path must not include a legacy projection fallback',
-)
-
-const first = compileCanonicalPaper(request)
-const second = compileCanonicalPaper(request)
-assert.equal(first.disposition, 'incomplete_source')
-assert.equal(digestJson(first), digestJson(second), 'DOCX compilation must be deterministic')
-assert.equal(first.artifacts.sourceCapture.assertions.length, 45)
-assertDiagnostic(first, 'DOCX_LISTENING_SOURCE_INCOMPLETE')
-assert.equal(Object.hasOwn(first.artifacts, 'canonicalPaper'), false)
-assert.deepEqual(first.artifacts.normalizationReport.inactiveSourceClosures, [])
-
-const missingDocument = structuredClone(request)
-missingDocument.evidence.documents = missingDocument.evidence.documents.filter(
-  (document) => document.inputKey !== 'source_docx',
-)
-const missingResult = compileCanonicalPaper(missingDocument)
-assert.notEqual(missingResult.disposition, 'ready')
-assertDiagnostic(missingResult, 'DOCX_SOURCE_DOCUMENT_MISSING')
-
-const driftedDocument = structuredClone(request)
-const rawDocument = driftedDocument.evidence.documents.find(
-  (document) => document.inputKey === 'source_docx',
-)
-rawDocument.bytes = new Uint8Array([...rawDocument.bytes, 0])
-const driftedResult = compileCanonicalPaper(driftedDocument)
-assert.notEqual(driftedResult.disposition, 'ready')
-assertDiagnostic(driftedResult, 'DOCX_SOURCE_DIGEST_MISMATCH')
-
-const forgedEnvelopeSemantics = mutateEnvelope(request, (envelope) => {
-  const reading = envelope.source.groups.find((group) => group.slotId === 'reading.a')
-  const text = reading?.content?.blocks?.[0]?.inlines?.find(
-    (inline) => inline.kind === 'text',
-  )
-  assert.ok(text, 'paper-2025-i source proof must expose one Reading A text node')
-  text.text = 'SYNCHRONIZED FORGERY NOT PRESENT IN THE IMMUTABLE DOCX'
-})
-const forgedEnvelopeResult = compileCanonicalPaper(forgedEnvelopeSemantics)
-assert.notEqual(
-  forgedEnvelopeResult.disposition,
-  'ready',
-  'caller-authored envelope semantics must not override the immutable DOCX',
-)
-assertDiagnostic(forgedEnvelopeResult, 'DOCX_SOURCE_DERIVATION_MISMATCH')
-
-const swappedQuestionStems = mutateEnvelope(request, (envelope) => {
-  const reading = envelope.source.groups.find((group) => group.slotId === 'reading.a')
-  const [firstQuestion, secondQuestion] = reading.variant.questions
-  assert.ok(firstQuestion?.stem && secondQuestion?.stem)
-  ;[firstQuestion.stem, secondQuestion.stem] = [secondQuestion.stem, firstQuestion.stem]
-})
-const swappedQuestionStemsResult = compileCanonicalPaper(swappedQuestionStems)
-assertDiagnostic(swappedQuestionStemsResult, 'DOCX_SOURCE_DERIVATION_MISMATCH')
-
-const swappedGroupContent = mutateEnvelope(request, (envelope) => {
-  const readingA = envelope.source.groups.find((group) => group.slotId === 'reading.a')
-  const readingB = envelope.source.groups.find((group) => group.slotId === 'reading.b')
-  assert.ok(readingA?.content && readingB?.content)
-  ;[readingA.content, readingB.content] = [readingB.content, readingA.content]
-})
-const swappedGroupContentResult = compileCanonicalPaper(swappedGroupContent)
-assertDiagnostic(swappedGroupContentResult, 'DOCX_SOURCE_DERIVATION_MISMATCH')
-
-const swappedFamilies = mutateEnvelope(request, (envelope) => {
-  const reading = envelope.source.groups.find((group) => group.slotId === 'reading.a')
-  const sevenChoices = envelope.source.groups.find(
-    (group) => group.slotId === 'reading.seven-choices',
-  )
-  assert.ok(reading?.variant?.family && sevenChoices?.variant?.family)
-  ;[reading.family, sevenChoices.family] = [sevenChoices.family, reading.family]
-  ;[reading.variant.family, sevenChoices.variant.family] = [
-    sevenChoices.variant.family,
-    reading.variant.family,
-  ]
-})
-const swappedFamiliesResult = compileCanonicalPaper(swappedFamilies)
-assertDiagnostic(swappedFamiliesResult, 'DOCX_SOURCE_DERIVATION_MISMATCH')
-
-const swappedGroupOrder = mutateEnvelope(request, (envelope) => {
-  ;[envelope.source.groups[0], envelope.source.groups[1]] = [
-    envelope.source.groups[1],
-    envelope.source.groups[0],
-  ]
-})
-const swappedGroupOrderResult = compileCanonicalPaper(swappedGroupOrder)
-assertDiagnostic(swappedGroupOrderResult, 'DOCX_SOURCE_DERIVATION_MISMATCH')
-
-const swappedQuestionOwnership = mutateEnvelope(request, (envelope) => {
-  const reading = envelope.source.groups.find((group) => group.slotId === 'reading.a')
-  const [firstSet, secondSet] = reading.variant.choiceOwnership.sets
-  assert.ok(firstSet?.questionId && secondSet?.questionId)
-  ;[firstSet.questionId, secondSet.questionId] = [secondSet.questionId, firstSet.questionId]
-})
-const swappedQuestionOwnershipResult = compileCanonicalPaper(swappedQuestionOwnership)
-assertDiagnostic(swappedQuestionOwnershipResult, 'DOCX_SOURCE_DERIVATION_MISMATCH')
-
-const swappedNodeIds = mutateEnvelope(request, (envelope) => {
-  const reading = envelope.source.groups.find((group) => group.slotId === 'reading.a')
-  const [firstBlock, secondBlock] = reading.content.blocks
-  assert.ok(firstBlock?.nodeId && secondBlock?.nodeId)
-  ;[firstBlock.nodeId, secondBlock.nodeId] = [secondBlock.nodeId, firstBlock.nodeId]
-})
-const swappedNodeIdsResult = compileCanonicalPaper(swappedNodeIds)
-assertDiagnostic(swappedNodeIdsResult, 'DOCX_SOURCE_DERIVATION_MISMATCH')
-
-const swappedStarterOrder = mutateEnvelope(request, (envelope) => {
-  const continuation = envelope.source.groups.find(
-    (group) => group.slotId === 'writing.continuation',
-  )
-  const starters = continuation.variant.starterProvision.starters
-  assert.equal(starters.length, 2)
-  ;[starters[0], starters[1]] = [starters[1], starters[0]]
-})
-const swappedStarterOrderResult = compileCanonicalPaper(swappedStarterOrder)
-assertDiagnostic(swappedStarterOrderResult, 'DOCX_SOURCE_DERIVATION_MISMATCH')
-
-const swappedResponseOwnership = mutateEnvelope(request, (envelope) => {
-  const application = envelope.source.groups.find(
-    (group) => group.slotId === 'writing.application',
-  )
-  const continuation = envelope.source.groups.find(
-    (group) => group.slotId === 'writing.continuation',
-  )
-  assert.ok(application?.variant?.response && continuation?.variant?.response)
-  ;[application.variant.response, continuation.variant.response] = [
-    continuation.variant.response,
-    application.variant.response,
-  ]
-})
-const swappedResponseOwnershipResult = compileCanonicalPaper(swappedResponseOwnership)
-assertDiagnostic(swappedResponseOwnershipResult, 'DOCX_SOURCE_DERIVATION_MISMATCH')
-
-const swappedPromptBindingOrder = mutateEnvelope(request, (envelope) => {
-  const grammarFill = envelope.source.groups.find(
-    (group) => group.slotId === 'language.grammar-fill',
-  )
-  const bindings = grammarFill.variant.promptBindings
-  assert.ok(bindings.length > 1)
-  ;[bindings[0], bindings[1]] = [bindings[1], bindings[0]]
-})
-const swappedPromptBindingOrderResult = compileCanonicalPaper(swappedPromptBindingOrder)
-assertDiagnostic(swappedPromptBindingOrderResult, 'DOCX_SOURCE_DERIVATION_MISMATCH')
-
-const swappedSourceMapOwnership = mutateEnvelope(request, (envelope) => {
-  const grammarFill = envelope.source.groups.find(
-    (group) => group.slotId === 'language.grammar-fill',
-  )
-  const entries = Object.entries(grammarFill.sourceSpanRefsByTarget)
-  assert.ok(entries.length > 1)
-  const [[firstTarget, firstRefs], [secondTarget, secondRefs]] = entries
-  grammarFill.sourceSpanRefsByTarget[firstTarget] = secondRefs
-  grammarFill.sourceSpanRefsByTarget[secondTarget] = firstRefs
-})
-const swappedSourceMapOwnershipResult = compileCanonicalPaper(swappedSourceMapOwnership)
-assertDiagnostic(swappedSourceMapOwnershipResult, 'DOCX_SOURCE_DERIVATION_MISMATCH')
-
-const nonDocxBytes = new Uint8Array([0x00])
-const nonDocxSource = structuredClone(proof.source)
-nonDocxSource.profileInstructionSourceDigest = sha256(nonDocxBytes)
-for (const observation of nonDocxSource.observations) {
-  observation.span = { start: 0, end: nonDocxBytes.byteLength }
-}
-const synchronizedNonDocx = buildDocxCanonicalImportRequest({
-  docxBytes: nonDocxBytes,
-  source: nonDocxSource,
-  originalName: 'forged.docx',
-})
-const synchronizedNonDocxResult = compileCanonicalPaper(synchronizedNonDocx)
-assert.notEqual(
-  synchronizedNonDocxResult.disposition,
-  'ready',
-  'declared DOCX media type and synchronized envelope metadata cannot admit arbitrary bytes',
-)
-assertDiagnostic(synchronizedNonDocxResult, 'DOCX_SOURCE_DOCUMENT_INVALID')
-
-const malformedWithLegacyFixture = structuredClone(request)
-const malformedEnvelope = malformedWithLegacyFixture.evidence.documents.find(
-  (document) => document.inputKey === 'docx_source_envelope',
-)
-malformedEnvelope.bytes = new TextEncoder().encode('{}')
-malformedWithLegacyFixture.evidence.documents.push(
-  structuredClone(makeReadyCanonicalFixture().request.evidence.documents[0]),
-)
-const malformedResult = compileCanonicalPaper(malformedWithLegacyFixture)
-assert.notEqual(malformedResult.disposition, 'ready')
-assertDiagnostic(malformedResult, 'DOCX_SOURCE_ENVELOPE_INVALID')
-
-const unknownDiagnosticShape = mutateEnvelope(request, (envelope) => {
-  envelope.unexpectedDiagnosticShape = true
-})
-const shapeResult = compileCanonicalPaper(unknownDiagnosticShape)
-assert.notEqual(shapeResult.disposition, 'ready')
-assertDiagnostic(shapeResult, 'DOCX_SOURCE_ENVELOPE_INVALID')
-
-const unprovedProfile = mutateEnvelope(request, (envelope) => {
-  envelope.source.profileId = 'unproved-profile'
-})
-const profileResult = compileCanonicalPaper(unprovedProfile)
-assert.notEqual(profileResult.disposition, 'ready')
-assertDiagnostic(profileResult, 'DOCX_SOURCE_DERIVATION_MISMATCH')
-
-const unboundProfileDigest = mutateEnvelope(request, (envelope) => {
-  envelope.source.profileInstructionSourceDigest = 'forged-profile-digest'
-})
-const profileDigestResult = compileCanonicalPaper(unboundProfileDigest)
-assert.notEqual(profileDigestResult.disposition, 'ready')
-assertDiagnostic(profileDigestResult, 'DOCX_SOURCE_DERIVATION_MISMATCH')
-
-const conflictingAnswer = mutateEnvelope(request, (envelope) => {
-  const original = envelope.source.assertions[0]
-  envelope.source.assertions.push({
-    ...original,
-    assertionId: 'forged-docx-answer-conflict',
-    answer: original.answer === 'A' ? 'B' : 'A',
+for (const [field, value] of Object.entries({
+  groups: [{ groupId: 'forged' }],
+  questions: [{ questionId: 'forged' }],
+  answers: [{ questionId: 'forged', answer: 'A' }],
+  profile: { profileId: 'forged' },
+})) {
+  const callerSemantics = importCanonicalCandidate(docxBytes, {
+    originalName: '2025-nck1-answer-source.docx',
+    [field]: value,
   })
-})
-const answerResult = compileCanonicalPaper(conflictingAnswer)
-assert.equal(answerResult.disposition, 'incomplete_source')
-assertDiagnostic(answerResult, 'DOCX_SOURCE_DERIVATION_MISMATCH')
-
-const baselineRun = baseline()
-const after = protectedState()
-assert.deepEqual(after, before, 'Ticket 25 compiler proof must not mutate frozen corpus state')
-const measurement = measure({ request, compilation: first, baselineRun })
-
-const evidence = {
-  schemaVersion: 'paper-canonical-docx-source-adapter-proof-v1',
-  ticket: '25-generic-docx-source-adapter-seam-and-nck1-proof',
-  binding: {
-    authority: canonicalAuthorityRef,
-    source: {
-      paperId: PAPER_ID,
-      path: SOURCE_REL,
-      byteLength: EXPECTED_SOURCE.byteLength,
-      sha256: EXPECTED_SOURCE.sha256,
-      rawTextDigest: proof.rawTextDigest,
-    },
-    producer: [
-      'server/paper-canonical/docxSourceAdapter.mjs',
-      SOURCE_PROOF_REL,
-      'shared/paper-canonical/compiler.mjs',
-    ].map((relativePath) => ({
-      path: relativePath,
-      sha256: sha256(readFileSync(abs(relativePath))),
-    })),
-  },
-  failClosed: {
-    disposition: first.disposition,
-    profileId: proof.source.profileId,
-    derivedFamilyCounts: proof.familyCounts,
-    officialAnswerCount: first.artifacts.sourceCapture.assertions.length,
-    inactiveListeningSourceProof: proof.inactiveListening,
-    inactiveSlots: first.artifacts.normalizationReport.inactiveSourceClosures,
-    diagnosticCodes: diagnostics(first).map((diagnostic) => diagnostic.code),
-    compilationDigest: digestJson(first),
-  },
-  capacity: measurement,
-  zeroMutation: {
-    mutationCount: 0,
-    protectedStateBefore: before,
-    protectedStateAfter: after,
-    writesPerformedByProof: [],
-  },
+  assert.equal(callerSemantics.candidate, null)
+  assert.deepEqual(callerSemantics.issues.map(({ code }) => code), ['CALLER_SEMANTICS_REJECTED'])
 }
 
-if (process.argv.includes('--write-evidence')) {
-  writeFileSync(abs(EVIDENCE_REL), `${JSON.stringify(evidence, null, 2)}\n`)
-} else {
-  assert.equal(existsSync(abs(EVIDENCE_REL)), true, `${EVIDENCE_REL} must be checked in`)
-  assert.deepEqual(readJson(EVIDENCE_REL), evidence, 'Ticket 25 evidence must be reproducible')
+const confirmation = {
+  schemaVersion: 'teacher-confirmation-v1',
+  candidateDigest: first.candidate.candidateDigest,
+  sourceDigest: first.candidate.source.sha256,
+  confirmed: true,
+}
+const currentAuthorityResult = confirmCanonicalCandidate(first.candidate, confirmation)
+assert.ok(currentAuthorityResult.canonicalPaper, 'candidate-bound Teacher Confirmation must return one complete Canonical Paper')
+assert.equal(currentAuthorityResult.canonicalPaper.questionGroups.length, 9)
+assert.deepEqual(currentAuthorityResult.canonicalPaper.paperPlan.authorityRef, first.candidate.authority)
+assert.equal('publication' in currentAuthorityResult, false, 'confirmation must not publish either seam fixture')
+const inactiveBindings = currentAuthorityResult.canonicalPaper.paperPlan.slotBindings.filter((binding) => binding.state === 'inactive')
+assert.deepEqual(inactiveBindings, [
+  { slotId: 'listening.short-dialogue', state: 'inactive', sourceState: 'not_supplied' },
+  { slotId: 'listening.long-form', state: 'inactive', sourceState: 'not_supplied' },
+])
+assert.equal(currentAuthorityResult.canonicalPaper.paperPlan.slotBindings.some((binding) => binding.state === 'bound' && binding.slotId.startsWith('listening.')), false)
+
+const forgedBytes = new Uint8Array(first.candidate.sourceBytes)
+forgedBytes[0] ^= 1
+const forgedCandidate = { ...first.candidate, sourceBytes: forgedBytes }
+const forgedResult = confirmCanonicalCandidate(forgedCandidate, confirmation)
+assert.deepEqual(forgedResult.unresolvedIssues.map(({ code }) => code), ['CANDIDATE_BINDING_MISMATCH'])
+
+const forgedInterpretation = {
+  ...first.candidate,
+  interpretation: { ...first.candidate.interpretation, paperId: 'paper-forged-i' },
+}
+assert.deepEqual(
+  confirmCanonicalCandidate(forgedInterpretation, confirmation).unresolvedIssues.map(({ code }) => code),
+  ['CANDIDATE_BINDING_MISMATCH'],
+)
+
+const forgedActiveContent = {
+  ...first.candidate,
+  interpretation: {
+    ...first.candidate.interpretation,
+    groups: first.candidate.interpretation.groups.slice(1),
+  },
+}
+const { candidateDigest: _candidateDigest, sourceBytes: _sourceBytes, ...forgedActiveBody } = forgedActiveContent
+forgedActiveContent.candidateDigest = digestJson(forgedActiveBody)
+assert.deepEqual(
+  confirmCanonicalCandidate(forgedActiveContent, confirmation).unresolvedIssues.map(({ code }) => code),
+  ['CANDIDATE_BINDING_MISMATCH'],
+  'missing active content cannot become authoritative even with a recomputed candidate digest',
+)
+
+const forgedContradiction = {
+  ...first.candidate,
+  interpretation: {
+    ...first.candidate.interpretation,
+    assertions: [
+      ...first.candidate.interpretation.assertions,
+      {
+        ...first.candidate.interpretation.assertions[0],
+        assertionId: 'forged-contradiction',
+        answer: first.candidate.interpretation.assertions[0].answer === 'A' ? 'B' : 'A',
+      },
+    ],
+  },
+}
+const { candidateDigest: _contradictionDigest, sourceBytes: _contradictionBytes, ...forgedContradictionBody } = forgedContradiction
+forgedContradiction.candidateDigest = digestJson(forgedContradictionBody)
+assert.deepEqual(
+  confirmCanonicalCandidate(forgedContradiction, confirmation).unresolvedIssues.map(({ code }) => code),
+  ['CANDIDATE_BINDING_MISMATCH'],
+  'contradictory active answers cannot become authoritative even with a recomputed candidate digest',
+)
+
+const wrongDigest = confirmCanonicalCandidate(first.candidate, { ...confirmation, sourceDigest: 'sha256:forged' })
+assert.deepEqual(wrongDigest.unresolvedIssues.map(({ code }) => code), ['CONFIRMATION_SOURCE_MISMATCH'])
+
+const staleCandidate = confirmCanonicalCandidate(first.candidate, { ...confirmation, candidateDigest: 'sha256:forged' })
+assert.deepEqual(staleCandidate.unresolvedIssues.map(({ code }) => code), ['CONFIRMATION_CANDIDATE_MISMATCH'])
+
+const withheldConfirmation = confirmCanonicalCandidate(first.candidate, { ...confirmation, confirmed: false })
+assert.deepEqual(withheldConfirmation.unresolvedIssues.map(({ code }) => code), ['TEACHER_CONFIRMATION_REQUIRED'])
+
+for (const [field, value] of Object.entries({
+  groups: [{ groupId: 'forged' }],
+  questions: [{ questionId: 'forged' }],
+  answers: [{ questionId: 'forged', answer: 'A' }],
+  profile: { profileId: 'forged' },
+})) {
+  const callerSemantics = confirmCanonicalCandidate(first.candidate, {
+    ...confirmation,
+    [field]: value,
+  })
+  assert.deepEqual(callerSemantics.unresolvedIssues.map(({ code }) => code), ['CALLER_SEMANTICS_REJECTED'])
 }
 
-console.log('paper canonical DOCX source-adapter proof: OK')
+const nonDocx = importCanonicalCandidate(pdfBytes, { originalName: 'paper-2026-i.pdf' })
+const nonDocxRerun = importCanonicalCandidate(pdfBytes, { originalName: 'paper-2026-i.pdf' })
+assert.deepEqual(nonDocx, nonDocxRerun, 'non-DOCX source rejection must be deterministic')
+assert.ok(nonDocx.candidate?.issues.length > 0, 'paper-2026-i must remain unresolved at the DOCX seam')
+assert.equal('canonicalPaper' in confirmCanonicalCandidate(nonDocx.candidate, {
+  schemaVersion: 'teacher-confirmation-v1',
+  candidateDigest: nonDocx.candidate.candidateDigest,
+  sourceDigest: nonDocx.candidate.source.sha256,
+  confirmed: true,
+}), false)
+
+console.log(JSON.stringify({
+  status: 'PASS',
+  paper2025CandidateDigest: first.candidate.candidateDigest,
+  paper2025BlockingCodes: first.issues.map(({ code }) => code),
+  paper2026BlockingCodes: nonDocx.issues.map(({ code }) => code),
+}))

@@ -248,6 +248,12 @@ function assertCanonicalPackage(canonicalPackage) {
   )
   for (const slot of inactiveSlots) {
     const binding = inactive.find((candidate) => candidate.slotId === slot.slotId)
+    if (binding?.sourceState === 'not_supplied') {
+      if (Object.hasOwn(binding, 'groupRef') || Object.hasOwn(binding, 'sourceSliceRefs') || Object.hasOwn(binding, 'sourceClosureRef')) {
+        throw projectionError(`Plan inactive binding for ${slot.slotId} is not an exact not_supplied closure`, [])
+      }
+      continue
+    }
     if (
       !binding
       || Object.hasOwn(binding, 'groupRef')

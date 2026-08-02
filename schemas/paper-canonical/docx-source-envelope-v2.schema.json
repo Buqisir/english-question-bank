@@ -1,0 +1,23 @@
+{
+  "$id": "docx-source-envelope-v2",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": { "const": "docx-source-envelope-v2" },
+    "sourceDocument": {
+      "additionalProperties": false,
+      "properties": {
+        "byteLength": { "minimum": 1, "type": "integer" },
+        "inputKey": { "type": "string" },
+        "mediaType": {
+          "const": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+        },
+        "sha256": { "type": "string" }
+      },
+      "required": ["inputKey", "mediaType", "sha256", "byteLength"],
+      "type": "object"
+    }
+  },
+  "required": ["schemaVersion", "sourceDocument"],
+  "type": "object"
+}

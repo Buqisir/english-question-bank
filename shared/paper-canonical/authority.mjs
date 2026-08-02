@@ -34,6 +34,7 @@ import manifestV33 from '../../standards/paper-canonical/manifest-v33.json' with
 import manifestV34 from '../../standards/paper-canonical/manifest-v34.json' with { type: 'json' }
 import manifestV35 from '../../standards/paper-canonical/manifest-v35.json' with { type: 'json' }
 import manifestV36 from '../../standards/paper-canonical/manifest-v36.json' with { type: 'json' }
+import manifestV37 from '../../standards/paper-canonical/manifest-v37.json' with { type: 'json' }
 import legacyRhythmManifestV13 from '../../standards/paper-canonical/history/manifest-v13-reading-rhythm/manifest-v13.json' with { type: 'json' }
 import legacyRhythmTypographyV3 from '../../standards/paper-canonical/history/manifest-v13-reading-rhythm/paper-typography-v3.json' with { type: 'json' }
 import legacyRhythmTypographyV3Schema from '../../standards/paper-canonical/history/manifest-v13-reading-rhythm/renderer-typography-v3.schema.json' with { type: 'json' }
@@ -48,6 +49,7 @@ import sourceAdaptersV6 from '../../standards/paper-canonical/adapters/source-ad
 import sourceAdaptersV7 from '../../standards/paper-canonical/adapters/source-adapters-v7.json' with { type: 'json' }
 import sourceAdaptersV8 from '../../standards/paper-canonical/adapters/source-adapters-v8.json' with { type: 'json' }
 import sourceAdaptersV9 from '../../standards/paper-canonical/adapters/source-adapters-v9.json' with { type: 'json' }
+import sourceAdaptersV10 from '../../standards/paper-canonical/adapters/source-adapters-v10.json' with { type: 'json' }
 import nck1 from '../../standards/paper-canonical/profiles/nck1-v1.json' with { type: 'json' }
 import zhejiangLegacy from '../../standards/paper-canonical/profiles/zhejiang-legacy-v1.json' with { type: 'json' }
 import nck1V2 from '../../standards/paper-canonical/profiles/nck1-v2.json' with { type: 'json' }
@@ -59,6 +61,7 @@ import nck1V7 from '../../standards/paper-canonical/profiles/nck1-v7.json' with 
 import nck1V8 from '../../standards/paper-canonical/profiles/nck1-v8.json' with { type: 'json' }
 import nck1V9 from '../../standards/paper-canonical/profiles/nck1-v9.json' with { type: 'json' }
 import nck1V10 from '../../standards/paper-canonical/profiles/nck1-v10.json' with { type: 'json' }
+import nck1V11 from '../../standards/paper-canonical/profiles/nck1-v11.json' with { type: 'json' }
 import zhejiangLegacyV2 from '../../standards/paper-canonical/profiles/zhejiang-legacy-v2.json' with { type: 'json' }
 import zhejiangLegacyV3 from '../../standards/paper-canonical/profiles/zhejiang-legacy-v3.json' with { type: 'json' }
 import zhejiangLegacyV4 from '../../standards/paper-canonical/profiles/zhejiang-legacy-v4.json' with { type: 'json' }
@@ -163,6 +166,7 @@ import normalizationV4Schema from '../../schemas/paper-canonical/normalization-r
 import normalizationV5Schema from '../../schemas/paper-canonical/normalization-rules-v5.schema.json' with { type: 'json' }
 import sourceAdaptersSchema from '../../schemas/paper-canonical/source-adapters-v1.schema.json' with { type: 'json' }
 import docxSourceEnvelopeSchema from '../../schemas/paper-canonical/docx-source-envelope-v1.schema.json' with { type: 'json' }
+import docxSourceEnvelopeV2Schema from '../../schemas/paper-canonical/docx-source-envelope-v2.schema.json' with { type: 'json' }
 import typographyV1Schema from '../../schemas/paper-canonical/renderer-typography-v1.schema.json' with { type: 'json' }
 import typographyV2Schema from '../../schemas/paper-canonical/renderer-typography-v2.schema.json' with { type: 'json' }
 import typographyV3Schema from '../../schemas/paper-canonical/renderer-typography-v3.schema.json' with { type: 'json' }
@@ -249,6 +253,7 @@ import reportV33Schema from '../../schemas/paper-canonical/normalization-report-
 import reportV34Schema from '../../schemas/paper-canonical/normalization-report-v34.schema.json' with { type: 'json' }
 import reportV35Schema from '../../schemas/paper-canonical/normalization-report-v35.schema.json' with { type: 'json' }
 import reportV36Schema from '../../schemas/paper-canonical/normalization-report-v36.schema.json' with { type: 'json' }
+import reportV37Schema from '../../schemas/paper-canonical/normalization-report-v37.schema.json' with { type: 'json' }
 import legacyReportV9Schema from '../../schemas/paper-canonical/normalization-report-v9.schema.json' with { type: 'json' }
 import publicationSchema from '../../schemas/paper-canonical/canonical-paper-publication-v1.schema.json' with { type: 'json' }
 import publicationV2Schema from '../../schemas/paper-canonical/canonical-paper-publication-v2.schema.json' with { type: 'json' }
@@ -286,6 +291,7 @@ import publicationV33Schema from '../../schemas/paper-canonical/canonical-paper-
 import publicationV34Schema from '../../schemas/paper-canonical/canonical-paper-publication-v34.schema.json' with { type: 'json' }
 import publicationV35Schema from '../../schemas/paper-canonical/canonical-paper-publication-v35.schema.json' with { type: 'json' }
 import publicationV36Schema from '../../schemas/paper-canonical/canonical-paper-publication-v36.schema.json' with { type: 'json' }
+import publicationV37Schema from '../../schemas/paper-canonical/canonical-paper-publication-v37.schema.json' with { type: 'json' }
 import legacyPublicationV9Schema from '../../schemas/paper-canonical/canonical-paper-publication-v9.schema.json' with { type: 'json' }
 import consumerSchema from '../../schemas/paper-canonical/consumer-contract-v1.schema.json' with { type: 'json' }
 import consumerV2Schema from '../../schemas/paper-canonical/consumer-contract-v2.schema.json' with { type: 'json' }
@@ -523,7 +529,7 @@ function validateNck1WritingChrome(profile) {
     ? '第二节 （满分 25 分）'
     : '第二节（满分25分）'
   const valid = (
-    ['3', '4', '5', '6', '7', '8', '9', '10'].includes(profile.version)
+    ['3', '4', '5', '6', '7', '8', '9', '10', '11'].includes(profile.version)
     && writingParts.length === 1
     && part.ordinal === 4
     && part.titleInstructionRef === 'part.writing'
@@ -1771,6 +1777,11 @@ const artifactsV36 = {
   'renderer-grammar-fill-public-geometry-fixtures':
     grammarFillPublicGeometryFixturesV15,
 }
+const artifactsV37 = {
+  ...artifactsV36,
+  adapter: sourceAdaptersV10,
+  'profile-nck1': nck1V11,
+}
 const schemasV1 = { ...sharedSchemas, 'renderer-typography-v1': typographyV1Schema, 'normalization-rules-v1': normalizationSchema, 'normalization-report-v1': reportSchema, 'canonical-paper-publication-v1': publicationSchema }
 const schemasV2 = { ...sharedSchemas, 'renderer-typography-v1': typographyV1Schema, 'normalization-rules-v2': normalizationV2Schema, 'normalization-report-v2': reportV2Schema, 'canonical-paper-publication-v2': publicationV2Schema }
 const schemasV3 = { ...sharedSchemas, 'renderer-typography-v2': typographyV2Schema, 'normalization-rules-v2': normalizationV2Schema, 'normalization-report-v3': reportV3Schema, 'canonical-paper-publication-v3': publicationV3Schema }
@@ -2235,6 +2246,19 @@ const schemasV36 = {
   'normalization-report-v36': reportV36Schema,
   'canonical-paper-publication-v36': publicationV36Schema,
 }
+const schemasV37 = {
+  ...Object.fromEntries(
+    Object.entries(schemasV36).filter(([schemaId]) =>
+      ![
+        'docx-source-envelope-v1',
+        'normalization-report-v36',
+        'canonical-paper-publication-v36',
+      ].includes(schemaId)),
+  ),
+  'docx-source-envelope-v2': docxSourceEnvelopeV2Schema,
+  'normalization-report-v37': reportV37Schema,
+  'canonical-paper-publication-v37': publicationV37Schema,
+}
 const validationV1 = validateAuthorityClosure({ manifest: manifestV1, artifacts: artifactsV1, schemas: schemasV1 })
 const validationV2 = validateAuthorityClosure({ manifest: manifestV2, artifacts: artifactsV2, schemas: schemasV2 })
 const validationV3 = validateAuthorityClosure({ manifest: manifestV3, artifacts: artifactsV3, schemas: schemasV3 })
@@ -2276,6 +2300,7 @@ const validationV33 = validateAuthorityClosure({ manifest: manifestV33, artifact
 const validationV34 = validateAuthorityClosure({ manifest: manifestV34, artifacts: artifactsV34, schemas: schemasV34 })
 const validationV35 = validateAuthorityClosure({ manifest: manifestV35, artifacts: artifactsV35, schemas: schemasV35 })
 const validationV36 = validateAuthorityClosure({ manifest: manifestV36, artifacts: artifactsV36, schemas: schemasV36 })
+const validationV37 = validateAuthorityClosure({ manifest: manifestV37, artifacts: artifactsV37, schemas: schemasV37 })
 const validations = [
   validationV1,
   validationV2,
@@ -2314,6 +2339,7 @@ const validations = [
   validationV34,
   validationV35,
   validationV36,
+  validationV37,
 ]
 if (validations.some((validation) => !validation.ok)) {
   throw new Error(`Invalid checked-in canonical authority: ${JSON.stringify(validations.flatMap((validation) => validation.issues))}`)
@@ -2365,6 +2391,7 @@ const authorities = [
   { manifest: manifestV34, artifacts: artifactsV34, schemas: schemasV34 },
   { manifest: manifestV35, artifacts: artifactsV35, schemas: schemasV35 },
   { manifest: manifestV36, artifacts: artifactsV36, schemas: schemasV36 },
+  { manifest: manifestV37, artifacts: artifactsV37, schemas: schemasV37 },
 ].map((authority) => ({
   ...authority,
   authorityRef: authorityRef(authority.manifest),
@@ -2373,6 +2400,9 @@ const authorities = [
 }))
 
 export const canonicalAuthorityRef = authorities.find((authority) => authority.manifest.version === '36').authorityRef
+// Ticket 25 can derive and confirm source-bound candidates under v37 without
+// advancing publication/current authority beyond the existing v36 closure.
+export const trustedDocxCandidateAuthorityRef = authorities.find((authority) => authority.manifest.version === '37').authorityRef
 
 export function resolveCanonicalAuthority(authorityRef) {
   const authority = authorities.find((candidate) => candidate.authorityRef.manifestId === authorityRef?.manifestId && candidate.authorityRef.manifestVersion === authorityRef?.manifestVersion && candidate.authorityRef.manifestDigest === authorityRef?.manifestDigest)

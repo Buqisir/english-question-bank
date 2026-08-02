@@ -1,9 +1,6 @@
-import { canonicalAuthorityRef } from '../../shared/paper-canonical/authority.mjs'
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { buildGroups } from '../../scripts/import-pipeline/lib.mjs'
 import { inflateRawSync } from 'node:zlib'
-
-const textEncoder = new TextEncoder()
 
 export const DOCX_SOURCE_ENVELOPE_MEDIA_TYPE =
   'application/vnd.eqb.docx-source-envelope+json'
@@ -424,28 +421,28 @@ function deriveContent(rawGroup, family, blankIds) {
   return { blocks: paragraphBlocks(rawGroup, blankIds) }
 }
 
-function sourceObservation({ observationId, kind, value, sourceByteRange }) {
+function sourceObservation({ observationId, kind, value, sourceByteRange, adapterVersion }) {
   return {
     observationId,
     kind,
     documentInputKey: 'source_docx',
     value,
     span: { ...sourceByteRange },
-    extraction: { adapterId: 'docx-source-envelope', version: '1' },
+    extraction: { adapterId: 'docx-source-envelope', version: adapterVersion },
   }
 }
 
-function writingObservations(group, family, sourceByteRange) {
+function writingObservations(group, family, sourceByteRange, observe) {
   const groupId = group.groupId
   if (family === 'application-writing') {
     return [
-      sourceObservation({
+      observe({
         observationId: `observation:${groupId}:answer-region-empty`,
         kind: 'application_answer_region_absence',
         value: { groupId, answerRegionRef: 'writing.application-box' },
         sourceByteRange,
       }),
-      sourceObservation({
+      observe({
         observationId: `observation:${groupId}:word-count`,
         kind: 'application_word_count_ruling',
         value: {
@@ -455,7 +452,7 @@ function writingObservations(group, family, sourceByteRange) {
         },
         sourceByteRange,
       }),
-      sourceObservation({
+      observe({
         observationId: `observation:${groupId}:response`,
         kind: 'application_response_binding',
         value: {
@@ -469,7 +466,7 @@ function writingObservations(group, family, sourceByteRange) {
   }
   if (family === 'continuation-writing') {
     return [
-      sourceObservation({
+      observe({
         observationId: `observation:${groupId}:word-count`,
         kind: 'continuation_word_count_ruling',
         value: {
@@ -480,7 +477,7 @@ function writingObservations(group, family, sourceByteRange) {
         sourceByteRange,
       }),
       ...group.variant.starterProvision.starters.map((starter) =>
-        sourceObservation({
+        observe({
           observationId: starter.authorityObservationRef,
           kind: 'continuation_source_starter',
           value: {
@@ -490,7 +487,7 @@ function writingObservations(group, family, sourceByteRange) {
           },
           sourceByteRange,
         })),
-      sourceObservation({
+      observe({
         observationId: `observation:${groupId}:response`,
         kind: 'continuation_response_binding',
         value: {
@@ -512,10 +509,14 @@ function deriveNck1Identity(rawText) {
 }
 
 /**
- * Derive the complete compiler source from immutable DOCX bytes. The envelope
- * may assert this value, but none of its caller-authored fields are consumed.
+ * Derive the complete compiler source from immutable DOCX bytes. Inactive
+ * listening is explicitly not supplied by this source and is never rendered
+ * as a canonical group.
  */
-export function deriveDocxCanonicalSource(docxBytes) {
+export function deriveDocxCanonicalSource(docxBytes, { adapterVersion = '2' } = {}) {
+  if (!['1', '2'].includes(adapterVersion)) {
+    throw new Error(`DOCX source adapter version ${adapterVersion} is unsupported`)
+  }
   const { documentXml } = readDocxPackage(docxBytes)
   const rawText = extractDocxDocumentText(docxBytes)
   const identity = deriveNck1Identity(rawText)
@@ -523,6 +524,7 @@ export function deriveDocxCanonicalSource(docxBytes) {
   hydrateSevenChoiceBank(parsed, rawText)
   const sourceByteRange = documentXml.compressedRange
   const observations = []
+  const observe = (args) => sourceObservation({ ...args, adapterVersion })
   const groups = [...rawGroupsBySlot(parsed)].map(([slotId, rawGroup]) => {
     const family = familyBySlot.get(slotId)
     if (!family) throw new Error(`DOCX source slot ${slotId} is unsupported`)
@@ -544,21 +546,21 @@ export function deriveDocxCanonicalSource(docxBytes) {
           ]))
         : {},
     }
-    observations.push(sourceObservation({
+    observations.push(observe({
       observationId: `observation:${slotId}`,
       kind: 'docx_section',
       value: slotId,
       sourceByteRange,
     }))
     if (family === 'grammar-fill') {
-      observations.push(...blankIds.map((blankId) => sourceObservation({
+      observations.push(...blankIds.map((blankId) => observe({
         observationId: `observation:grammar-fill-prompt:${blankId}`,
         kind: 'grammar_fill_prompt_provision',
         value: { blankId, provision: 'source_proven_none' },
         sourceByteRange,
       })))
     }
-    observations.push(...writingObservations(group, family, sourceByteRange))
+    observations.push(...writingObservations(group, family, sourceByteRange, observe))
     return group
   })
   const groupByQuestionId = new Map(groups.flatMap((group) =>
@@ -577,7 +579,12 @@ export function deriveDocxCanonicalSource(docxBytes) {
     })),
     groups,
     transformations: [],
-    inactiveSlots: {},
+    inactiveSlots: adapterVersion === '2'
+      ? {
+          'listening.short-dialogue': 'not_supplied',
+          'listening.long-form': 'not_supplied',
+        }
+      : {},
     inactiveSourceClosures: [],
   }
 }
@@ -659,116 +666,30 @@ export function inspectDocxListeningEvidence(docxBytes) {
  * Re-open and parse the immutable DOCX at the public compiler boundary. This
  * makes the envelope a transport shape rather than semantic authority.
  */
-export function inspectDocxEnvelopeSource(docxBytes, source) {
+export function inspectDocxEnvelopeSource(docxBytes, {
+  adapterVersion = '2',
+  assertedSource,
+} = {}) {
   const { documentXml } = readDocxPackage(docxBytes)
   const rawText = extractDocxDocumentText(docxBytes)
-  const derivedSource = deriveDocxCanonicalSource(docxBytes)
-  const completeSourceMatches = digestJson(source) === digestJson(derivedSource)
+  const derivedSource = deriveDocxCanonicalSource(docxBytes, { adapterVersion })
   const listening = inspectDocxListeningEvidence(docxBytes)
-  const inactiveClosureMatches = listening.transcript.coverage === 'exactly_once'
-    || (
-      Object.keys(derivedSource.inactiveSlots).length === 0
+  const inactiveClosureMatches = adapterVersion === '2'
+    ? [
+        'listening.short-dialogue',
+        'listening.long-form',
+      ].every((slotId) => derivedSource.inactiveSlots[slotId] === 'not_supplied')
+    : Object.keys(derivedSource.inactiveSlots).length === 0
       && derivedSource.inactiveSourceClosures.length === 0
-    )
+  const completeSourceMatches = assertedSource === undefined
+    || digestJson(assertedSource) === digestJson(derivedSource)
   return {
     ok: completeSourceMatches && inactiveClosureMatches,
     verifiedSource: completeSourceMatches ? derivedSource : null,
     sourceByteRange: documentXml.compressedRange,
     rawTextDigest: sha256(new TextEncoder().encode(rawText)),
     completeSourceMatches,
-    derivedSourceDigest: digestJson(derivedSource),
     inactiveClosureMatches,
     listening,
-  }
-}
-
-function immutableDocument(document) {
-  if (
-    !document
-    || typeof document.inputKey !== 'string'
-    || !Array.isArray(document.roles)
-    || !(document.bytes instanceof Uint8Array)
-    || typeof document.declared?.mediaType !== 'string'
-  ) {
-    throw new TypeError('DOCX source adapter supplemental evidence must be immutable documents')
-  }
-  return {
-    inputKey: document.inputKey,
-    roles: [...document.roles],
-    bytes: new Uint8Array(document.bytes),
-    declared: {
-      mediaType: document.declared.mediaType,
-      ...(document.declared.originalName
-        ? { originalName: document.declared.originalName }
-        : {}),
-    },
-  }
-}
-
-/**
- * Package structured source facts with their immutable DOCX evidence. The
- * compiler owns validation and never treats this as a legacy asset projection.
- */
-export function buildDocxCanonicalImportRequest({
-  docxBytes,
-  source,
-  originalName = 'source.docx',
-  supplementalDocuments = [],
-}) {
-  if (!(docxBytes instanceof Uint8Array) || docxBytes.byteLength === 0) {
-    throw new TypeError('DOCX source adapter requires immutable DOCX bytes')
-  }
-  if (!source || typeof source !== 'object' || Array.isArray(source)) {
-    throw new TypeError('DOCX source adapter requires structured source facts')
-  }
-  if (!Array.isArray(supplementalDocuments)) {
-    throw new TypeError('DOCX source adapter supplemental evidence must be an array')
-  }
-  const supplemental = supplementalDocuments.map(immutableDocument)
-  const inputKeys = new Set(['source_docx', 'docx_source_envelope'])
-  for (const document of supplemental) {
-    if (inputKeys.has(document.inputKey)) {
-      throw new TypeError(`DOCX source adapter duplicate evidence input ${document.inputKey}`)
-    }
-    inputKeys.add(document.inputKey)
-  }
-
-  const sourceDocument = {
-    inputKey: 'source_docx',
-    mediaType: DOCX_MEDIA_TYPE,
-    sha256: sha256(docxBytes),
-    byteLength: docxBytes.byteLength,
-  }
-  const envelope = {
-    schemaVersion: 'docx-source-envelope-v1',
-    sourceDocument,
-    source,
-  }
-  return {
-    authority: canonicalAuthorityRef,
-    evidence: {
-      documents: [
-        {
-          inputKey: sourceDocument.inputKey,
-          roles: [
-            'question_source',
-            'official_answer_source',
-            'source_provenance',
-          ],
-          bytes: new Uint8Array(docxBytes),
-          declared: { mediaType: DOCX_MEDIA_TYPE, originalName },
-        },
-        {
-          inputKey: 'docx_source_envelope',
-          roles: ['operator_assertions'],
-          bytes: textEncoder.encode(JSON.stringify(envelope)),
-          declared: {
-            mediaType: DOCX_SOURCE_ENVELOPE_MEDIA_TYPE,
-            originalName: 'docx-source-envelope.json',
-          },
-        },
-        ...supplemental,
-      ],
-    },
   }
 }

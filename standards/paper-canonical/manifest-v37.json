@@ -1,0 +1,380 @@
+{
+  "artifacts": [
+    {
+      "id": "core",
+      "owner": "core",
+      "path": "core/core-invariants-v2.json",
+      "schemaId": "core-invariants-v2",
+      "sha256": "sha256:0c989deb8cb42b27302769e5a12aff297341585eb10adf9691952afd9d9a6510"
+    },
+    {
+      "id": "adapter",
+      "owner": "source_adapter",
+      "path": "adapters/source-adapters-v10.json",
+      "schemaId": "source-adapters-v1",
+      "sha256": "sha256:234934abfa8e222c1f48605418ae2e1d5d90d0fd57892b5189e9890e33ab634a"
+    },
+    {
+      "id": "profile-nck1",
+      "owner": "profile",
+      "path": "profiles/nck1-v11.json",
+      "schemaId": "paper-format-profile-v1",
+      "sha256": "sha256:d0abb70e1cd08af8931778bef02f4b966a2c38b8072f4eb9100ec3a2253a2e51"
+    },
+    {
+      "id": "profile-zhejiang-legacy",
+      "owner": "profile",
+      "path": "profiles/zhejiang-legacy-v7.json",
+      "schemaId": "paper-format-profile-v1",
+      "sha256": "sha256:2f8efa39597dfe0b990d4104113ddbcda6f141bacc3fa40f4edc0ccdf6263a40"
+    },
+    {
+      "id": "profile-national-legacy",
+      "owner": "profile",
+      "path": "profiles/national-legacy-v3.json",
+      "schemaId": "paper-format-profile-v1",
+      "sha256": "sha256:26dcda14930ecf41c60ff39a2aa072c53e947df96ff999c0f0a9131b398be18d"
+    },
+    {
+      "id": "family-reading",
+      "owner": "family",
+      "path": "families/reading-v1.json",
+      "schemaId": "canonical-family-contract-v1",
+      "sha256": "sha256:4b4837721e3025531ca0df8f98c73c80fa39cdd24918b632956ea6bf1dc18b67"
+    },
+    {
+      "id": "family-seven-choices",
+      "owner": "family",
+      "path": "families/seven-choices-v1.json",
+      "schemaId": "canonical-family-contract-v1",
+      "sha256": "sha256:851f3e4507b7b7821cda7f5eea11e7193aabcf168dfdd57531583ebd3697080e"
+    },
+    {
+      "id": "family-cloze",
+      "owner": "family",
+      "path": "families/cloze-v1.json",
+      "schemaId": "canonical-family-contract-v1",
+      "sha256": "sha256:c961b221dbb0d2f9cd57d4eeabfe01680f5144a93e3989dc8628583f3ed1c5b8"
+    },
+    {
+      "id": "family-grammar-fill",
+      "owner": "family",
+      "path": "families/grammar-fill-v3.json",
+      "schemaId": "canonical-family-contract-v6",
+      "sha256": "sha256:8284b7d7467f4064b83ec9460905f7b209801aab0aabd7220b53304b461f3e5b"
+    },
+    {
+      "id": "family-application-writing",
+      "owner": "family",
+      "path": "families/application-writing-v3.json",
+      "schemaId": "canonical-family-contract-v3",
+      "sha256": "sha256:768808d2b1a4f2c7d4a2c01af3bafbbc302ff34174767d9870c0312e96d55958"
+    },
+    {
+      "id": "family-continuation-writing",
+      "owner": "family",
+      "path": "families/continuation-writing-v3.json",
+      "schemaId": "canonical-family-contract-v7",
+      "sha256": "sha256:213a03b131b984b2ed6136e5ccb06094bb0b446342f89d86333a4416e1f1d524"
+    },
+    {
+      "id": "normalization",
+      "owner": "normalization",
+      "path": "normalization/normalization-rules-v5.json",
+      "schemaId": "normalization-rules-v5",
+      "sha256": "sha256:20cc55ea481c16ff6d040318e0c97e69945bc0d5292397625a0c0acba3f40a86"
+    },
+    {
+      "id": "renderer-typography",
+      "owner": "renderer_typography",
+      "path": "rendering/paper-typography-v10.json",
+      "schemaId": "renderer-typography-v10",
+      "sha256": "sha256:2e3fac8de76c040a8b54b0960d6c15557f962a8be76f0d3f5eeb1581bea6e287"
+    },
+    {
+      "id": "renderer-seven-choices-rhythm",
+      "owner": "renderer_typography",
+      "path": "rendering/seven-choices-rhythm-v3.json",
+      "schemaId": "seven-choices-rhythm-v3",
+      "sha256": "sha256:74cad6a2c84526d5db76dcc13a0caeba7ff17f120f22aceba46e6f3af1109f74"
+    },
+    {
+      "id": "renderer-cloze-rhythm",
+      "owner": "renderer_typography",
+      "path": "rendering/cloze-rhythm-v4.json",
+      "schemaId": "cloze-rhythm-v4",
+      "sha256": "sha256:797ff4b585b7f85b510f78693edf7af8ba5b6836e5df65fbcab83db7dd3a269c"
+    },
+    {
+      "id": "renderer-grammar-fill-rhythm",
+      "owner": "renderer_typography",
+      "path": "rendering/grammar-fill-rhythm-v5.json",
+      "schemaId": "grammar-fill-rhythm-v5",
+      "sha256": "sha256:d1da9b1f508307b4bb2868e9f6ae8e70e5b254e68f63a41585eed4467aba3b21"
+    },
+    {
+      "id": "renderer-grammar-fill-public-geometry-fixtures",
+      "owner": "renderer_typography",
+      "path": "rendering/grammar-fill-public-geometry-fixtures-v15.json",
+      "schemaId": "grammar-fill-public-geometry-fixtures-v15",
+      "sha256": "sha256:9562eef5bb75e31739ec173d41d29231683aaa7a687c07bc0f74d2271d5a4e21"
+    },
+    {
+      "id": "renderer-application-writing-rhythm",
+      "owner": "renderer_typography",
+      "path": "rendering/application-writing-rhythm-v4.json",
+      "schemaId": "application-writing-rhythm-v4",
+      "sha256": "sha256:9499db6962f0f7979dae754aeaba1544e2bc1c0e438a72f7da099c83940ce32f"
+    },
+    {
+      "id": "renderer-continuation-writing-rhythm",
+      "owner": "renderer_typography",
+      "path": "rendering/continuation-writing-rhythm-v5.json",
+      "schemaId": "continuation-writing-rhythm-v5",
+      "sha256": "sha256:53464d09c506ab5393a3c01e46901881deb33ec4a81ad7d40fd46e549633afb8"
+    }
+  ],
+  "factOwners": [
+    {
+      "artifactKinds": [
+        "core"
+      ],
+      "owner": "core"
+    },
+    {
+      "artifactKinds": [
+        "profile"
+      ],
+      "owner": "profile"
+    },
+    {
+      "artifactKinds": [
+        "family"
+      ],
+      "owner": "family"
+    },
+    {
+      "artifactKinds": [
+        "normalization"
+      ],
+      "owner": "normalization"
+    },
+    {
+      "artifactKinds": [
+        "source_adapter"
+      ],
+      "owner": "source_adapter"
+    },
+    {
+      "artifactKinds": [
+        "renderer_typography"
+      ],
+      "owner": "renderer_typography"
+    }
+  ],
+  "manifestId": "paper-canonical",
+  "schemaVersion": "standard-manifest-v1",
+  "schemas": [
+    {
+      "id": "standard-manifest-v1",
+      "path": "../../schemas/paper-canonical/standard-manifest-v1.schema.json",
+      "sha256": "sha256:6468d60b2bbe9f8b954ed9217d01f45e160ab8f9a8cdd81b0c20c71e2bcbdaf6"
+    },
+    {
+      "id": "core-invariants-v1",
+      "path": "../../schemas/paper-canonical/core-invariants-v1.schema.json",
+      "sha256": "sha256:2bfea48cc307573ca0f506f00c869582eb9c4cd5b0a3a8bbb872ec341f6137a6"
+    },
+    {
+      "id": "paper-format-profile-v1",
+      "path": "../../schemas/paper-canonical/paper-format-profile-v1.schema.json",
+      "sha256": "sha256:c3ebf09ae3076c775ba14bfbf4c02bb6b2ba303e446b710926afa3a4b5ecd0eb"
+    },
+    {
+      "id": "canonical-family-contract-v1",
+      "path": "../../schemas/paper-canonical/canonical-family-contract-v1.schema.json",
+      "sha256": "sha256:2f7d1d618cd8f86fcbe795f6890f73155aacaa0bc95811ce442b68704945b173"
+    },
+    {
+      "id": "canonical-family-contract-v3",
+      "path": "../../schemas/paper-canonical/canonical-family-contract-v3.schema.json",
+      "sha256": "sha256:14cf16040a4ae912a0e18d1a8ae2afc260dfa741e3cbddc39bbbbaed3de897ef"
+    },
+    {
+      "id": "canonical-application-writing-variant-v1",
+      "path": "../../schemas/paper-canonical/canonical-application-writing-variant-v1.schema.json",
+      "sha256": "sha256:ddc442bf0cd29b15aa786ffe5823081f2e7060dffa6349f4705b277609531835"
+    },
+    {
+      "id": "application-writing-source-capture-v1",
+      "path": "../../schemas/paper-canonical/application-writing-source-capture-v1.schema.json",
+      "sha256": "sha256:af695e9069ad4ad8251ed774982a5b26bc7f9ee514fdf634cc140ecc14fb9aa5"
+    },
+    {
+      "id": "application-writing-source-transcription-v1",
+      "path": "../../schemas/paper-canonical/application-writing-source-transcription-v1.schema.json",
+      "sha256": "sha256:acbbbc605d647e11672fdf9a0b44293fcb334ef7faeecc77475d70541f362eb8"
+    },
+    {
+      "id": "source-adapters-v1",
+      "path": "../../schemas/paper-canonical/source-adapters-v1.schema.json",
+      "sha256": "sha256:de3c074ddb9adfcce3f24e1f077f27e99e1e6680b8779396843d23adf6c5c5a2"
+    },
+    {
+      "id": "seven-choices-rhythm-v3",
+      "path": "../../schemas/paper-canonical/seven-choices-rhythm-v3.schema.json",
+      "sha256": "sha256:6ba5527c91ff6581050acc7043a261d9e579cd0d2dff5738f8dca605677e62b5"
+    },
+    {
+      "id": "source-capture-v1",
+      "path": "../../schemas/paper-canonical/source-capture-v1.schema.json",
+      "sha256": "sha256:38b9f3b1074f79ddf489c72a5dbc3f684bee7930fa702245a921bfa993489a7c"
+    },
+    {
+      "id": "canonical-paper-plan-v1",
+      "path": "../../schemas/paper-canonical/canonical-paper-plan-v1.schema.json",
+      "sha256": "sha256:49c5d05a7f3242f7569cdd4c2fdb8b004718cd997c267db3c4cce3cdbbc24300"
+    },
+    {
+      "id": "canonical-question-group-v1",
+      "path": "../../schemas/paper-canonical/canonical-question-group-v1.schema.json",
+      "sha256": "sha256:b37d3d4a7af4e54a79f8306a8230b6c42f0320198adda5a3ef9477fb116cd225"
+    },
+    {
+      "id": "consumer-contract-v2",
+      "path": "../../schemas/paper-canonical/consumer-contract-v2.schema.json",
+      "sha256": "sha256:342af8ff6a354aa4e09dc82a8dd81845225cdbadc61e6bd28e73e5966d77732e"
+    },
+    {
+      "id": "canonical-family-contract-v7",
+      "path": "../../schemas/paper-canonical/canonical-family-contract-v7.schema.json",
+      "sha256": "sha256:734c018b6495665768d51267fbbae65a42f81de1ced18dba04eae882611ef92d"
+    },
+    {
+      "id": "canonical-continuation-writing-variant-v1",
+      "path": "../../schemas/paper-canonical/canonical-continuation-writing-variant-v1.schema.json",
+      "sha256": "sha256:2d4374777f31dd16b79926a1af98734b2ebb7c5f16bf7dbe92d3351f3d692ca7"
+    },
+    {
+      "id": "continuation-writing-source-capture-v2",
+      "path": "../../schemas/paper-canonical/continuation-writing-source-capture-v2.schema.json",
+      "sha256": "sha256:7b0f99bc2afde9e2fd431c228fc746524db0ca1fcf9f20bcb68b882d79dee0a9"
+    },
+    {
+      "id": "continuation-writing-source-transcription-v2",
+      "path": "../../schemas/paper-canonical/continuation-writing-source-transcription-v2.schema.json",
+      "sha256": "sha256:7d9a8ba9f3760f6353eb060ea1b6af9f6b18e0cd6c61a3078991979b240fd64b"
+    },
+    {
+      "id": "profile-writing-source-evidence-v1",
+      "path": "../../schemas/paper-canonical/profile-writing-source-evidence-v1.schema.json",
+      "sha256": "sha256:08485b2b5b8dadcdb4487790ab62a286b149aa61f16fb71a68545923208f5c21"
+    },
+    {
+      "id": "normalization-report-v9",
+      "path": "../../schemas/paper-canonical/normalization-report-v9-identity-corrected.schema.json",
+      "sha256": "sha256:f8d17592e40b97cff6ae62744dd59cf98eb4779894b1887e413d86706fb9916b"
+    },
+    {
+      "id": "canonical-paper-publication-v9",
+      "path": "../../schemas/paper-canonical/canonical-paper-publication-v9-identity-corrected.schema.json",
+      "sha256": "sha256:9256188a494f04ef6f2a95041e47052a3c41225f20a2b59056ad0f86a2801026"
+    },
+    {
+      "id": "normalization-report-v10",
+      "path": "../../schemas/paper-canonical/normalization-report-v10.schema.json",
+      "sha256": "sha256:81628ec17abe1d2eeb9464e08f7553c14e2611deaa849b9e496b9b805dd0ce28"
+    },
+    {
+      "id": "canonical-paper-publication-v10",
+      "path": "../../schemas/paper-canonical/canonical-paper-publication-v10.schema.json",
+      "sha256": "sha256:9c1ea44a675976581062f13465a4680518907a3263b6791bab1315b628ef3101"
+    },
+    {
+      "id": "listening-source-inventory-v1",
+      "path": "../../schemas/paper-canonical/listening-source-inventory-v1.schema.json",
+      "sha256": "sha256:fbf40e3c457ac1923ec3efce4168584269e4e338d7110aff7baa082a2d825d78"
+    },
+    {
+      "id": "cloze-rhythm-v4",
+      "path": "../../schemas/paper-canonical/cloze-rhythm-v4.schema.json",
+      "sha256": "sha256:771247df0ce5e8d4ffb3f08cd498c3602c4852bc0b88d94211922aed3efce7be"
+    },
+    {
+      "id": "core-invariants-v2",
+      "path": "../../schemas/paper-canonical/core-invariants-v2.schema.json",
+      "sha256": "sha256:f6e2783bbdb0198774fc6b7393c2812994102fc0bfcdf42fe1abd1c424c952f5"
+    },
+    {
+      "id": "canonical-grammar-fill-variant-v1",
+      "path": "../../schemas/paper-canonical/canonical-grammar-fill-variant-v1.schema.json",
+      "sha256": "sha256:17f3bc256f94a657ad1ea68a3ec28f94c81c50d5ab0ab48298f46e13df9538cf"
+    },
+    {
+      "id": "grammar-fill-prompt-source-capture-v1",
+      "path": "../../schemas/paper-canonical/grammar-fill-prompt-source-capture-v1.schema.json",
+      "sha256": "sha256:e791420f6cb3acad54c1942bba231d7c2417ada9987e4dc8c2e55b8787eca0f2"
+    },
+    {
+      "id": "canonical-question-group-v2",
+      "path": "../../schemas/paper-canonical/canonical-question-group-v2.schema.json",
+      "sha256": "sha256:929fea77f39b559b4810bb132826b15c380524bea2083387c42ed5a41b1703c0"
+    },
+    {
+      "id": "grammar-fill-rhythm-v5",
+      "path": "../../schemas/paper-canonical/grammar-fill-rhythm-v5.schema.json",
+      "sha256": "sha256:e27518dd1208793a3c75a5b4b6e2b5cfbf67eb18a65ac78f23e94dbe3a7bd96a"
+    },
+    {
+      "id": "canonical-family-contract-v6",
+      "path": "../../schemas/paper-canonical/canonical-family-contract-v6.schema.json",
+      "sha256": "sha256:cf9bb2b9a7374724ba1de05d8161d19101ff41e191860b9b6fbc87328935844a"
+    },
+    {
+      "id": "grammar-fill-prompt-provision-v2",
+      "path": "../../schemas/paper-canonical/grammar-fill-prompt-provision-v2.schema.json",
+      "sha256": "sha256:a9161235a0fd8d6f0d7f35697f707ad3f7695e0eb9d111334788e8492e2a4364"
+    },
+    {
+      "id": "application-writing-rhythm-v4",
+      "path": "../../schemas/paper-canonical/application-writing-rhythm-v4.schema.json",
+      "sha256": "sha256:0a57ad01b488e521dcab2f1d0dff088648fdb60b7cf7fc89a1e19b04ea28ec2e"
+    },
+    {
+      "id": "continuation-writing-rhythm-v5",
+      "path": "../../schemas/paper-canonical/continuation-writing-rhythm-v5.schema.json",
+      "sha256": "sha256:ec4b3f823b651e8a28c77906ddaed23475afadcdbcdbb8a69394a919c5880526"
+    },
+    {
+      "id": "normalization-rules-v5",
+      "path": "../../schemas/paper-canonical/normalization-rules-v5.schema.json",
+      "sha256": "sha256:e0ad6ba7307df05801e142981c852a131e7ac2303371ff8a6f3f72346465ce87"
+    },
+    {
+      "id": "renderer-typography-v10",
+      "path": "../../schemas/paper-canonical/renderer-typography-v10.schema.json",
+      "sha256": "sha256:f3e36e7557a1106bbf2cd24286825edbb00839bc0dac180d4a79c4cc3c540c97"
+    },
+    {
+      "id": "grammar-fill-public-geometry-fixtures-v15",
+      "path": "../../schemas/paper-canonical/grammar-fill-public-geometry-fixtures-v15.schema.json",
+      "sha256": "sha256:1aa7a827590d169bfb840a89910528ee73431f7c1f5eaddf67802e8a0b893dd5"
+    },
+    {
+      "id": "docx-source-envelope-v2",
+      "path": "../../schemas/paper-canonical/docx-source-envelope-v2.schema.json",
+      "sha256": "sha256:010d2f38bd9b8bcb891e6db6c97e113dcc5466ce4b1fd021f385214fe09a2252"
+    },
+    {
+      "id": "normalization-report-v37",
+      "path": "../../schemas/paper-canonical/normalization-report-v37.schema.json",
+      "sha256": "sha256:7fdbd956188697345615b3cac205159dacca3e0c62a93419efe5fd509d5e5d6f"
+    },
+    {
+      "id": "canonical-paper-publication-v37",
+      "path": "../../schemas/paper-canonical/canonical-paper-publication-v37.schema.json",
+      "sha256": "sha256:cdf9f45d5d2590acfb08e7f51b1e214a0e4a882feb1347086b244fd62399fa9f"
+    }
+  ],
+  "version": "37"
+}

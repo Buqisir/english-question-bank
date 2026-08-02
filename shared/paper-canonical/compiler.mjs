@@ -1,4 +1,10 @@
-import { canonicalAuthorityRef, resolveCanonicalAuthority, slotsForProfile, validateJsonSchema } from './authority.mjs'
+import {
+  canonicalAuthorityRef,
+  resolveCanonicalAuthority,
+  slotsForProfile,
+  trustedDocxCandidateAuthorityRef,
+  validateJsonSchema,
+} from './authority.mjs'
 import { validateApplicationWritingContract } from './applicationWriting.mjs'
 import { validateContinuationWritingContract } from './continuationWriting.mjs'
 import {
@@ -10,6 +16,8 @@ import { inspectDocxEnvelopeSource } from '../../server/paper-canonical/docxSour
 import { validateReadingContract } from './reading.mjs'
 import { validateSevenChoicesContract } from './sevenChoices.mjs'
 import { cloneJson, digestJson, exactKeys, isRecordValue, sha256, stableStringify, withoutKey } from './stable.mjs'
+
+const trustedDocxCandidateCompile = Symbol('trustedDocxCandidateCompile')
 import { canonicalizeVisibleEnglishTypography } from './visibleTypography.mjs'
 import { replayCanonicalVisibleTypography } from './visibleTypographyReplay.mjs'
 
@@ -1728,16 +1736,18 @@ function parseDocxSourceEnvelope(documents, diagnostics) {
   try {
     const envelope = JSON.parse(new TextDecoder().decode(envelopeDocument.bytes))
     const sourceDocument = envelope?.sourceDocument
+    const legacyEnvelope = envelope?.schemaVersion === 'docx-source-envelope-v1'
+    const trustedEnvelope = envelope?.schemaVersion === 'docx-source-envelope-v2'
     if (
       !isRecordValue(envelope)
-      || envelope.schemaVersion !== 'docx-source-envelope-v1'
+      || (!legacyEnvelope && !trustedEnvelope)
       || !isRecordValue(sourceDocument)
       || typeof sourceDocument.inputKey !== 'string'
       || typeof sourceDocument.sha256 !== 'string'
       || !Number.isInteger(sourceDocument.byteLength)
-      || !isRecordValue(envelope.source)
+      || (legacyEnvelope && !isRecordValue(envelope.source))
     ) {
-      diagnostics.push(diagnostic('DOCX_SOURCE_ENVELOPE_INVALID', 'incomplete_source', '$.evidence.documents', 'DOCX source envelope must declare one source-bound structured source'))
+      diagnostics.push(diagnostic('DOCX_SOURCE_ENVELOPE_INVALID', 'incomplete_source', '$.evidence.documents', 'DOCX source envelope must declare one source-bound immutable document'))
       return null
     }
     const sourceCandidates = documents.filter(
@@ -1772,7 +1782,10 @@ function parseDocxSourceEnvelope(documents, diagnostics) {
     }
     let inspection
     try {
-      inspection = inspectDocxEnvelopeSource(source.bytes, envelope.source)
+      inspection = inspectDocxEnvelopeSource(source.bytes, {
+        adapterVersion: legacyEnvelope ? '1' : '2',
+        ...(legacyEnvelope ? { assertedSource: envelope.source } : {}),
+      })
     } catch (error) {
       diagnostics.push(diagnostic(
         'DOCX_SOURCE_DOCUMENT_INVALID',
@@ -1784,20 +1797,25 @@ function parseDocxSourceEnvelope(documents, diagnostics) {
     }
     if (!inspection.ok) {
       diagnostics.push(diagnostic(
-        'DOCX_SOURCE_DERIVATION_MISMATCH',
+        legacyEnvelope ? 'DOCX_SOURCE_DERIVATION_MISMATCH' : 'DOCX_SOURCE_DERIVATION_INVALID',
         'incomplete_source',
-        '$.docxSourceEnvelope.source',
-        'DOCX envelope source does not exactly match the registered adapter derivation',
+        legacyEnvelope ? '$.docxSourceEnvelope.source' : '$.docxSourceEnvelope.sourceDocument',
+        legacyEnvelope
+          ? 'DOCX envelope source does not exactly match the registered adapter derivation'
+          : 'The trusted DOCX adapter did not derive a complete source state',
       ))
       return null
     }
     if (
-      inspection.listening.questions.length !== 20
-      || inspection.listening.questions.some((question) =>
-        Object.keys(question.options).join('') !== 'ABC'
-        || !Object.hasOwn(question.options, question.answer))
-      || inspection.listening.transcript.coverage !== 'exactly_once'
-      || inspection.listening.timing.disposition === 'supplied_unparsed'
+      legacyEnvelope
+      && (
+        inspection.listening.questions.length !== 20
+        || inspection.listening.questions.some((question) =>
+          Object.keys(question.options).join('') !== 'ABC'
+          || !Object.hasOwn(question.options, question.answer))
+        || inspection.listening.transcript.coverage !== 'exactly_once'
+        || inspection.listening.timing.disposition === 'supplied_unparsed'
+      )
     ) {
       diagnostics.push(diagnostic(
         'DOCX_LISTENING_SOURCE_INCOMPLETE',
@@ -1950,7 +1968,7 @@ function validateCapture(capture, closure) {
 function validateDocxSourceBinding(parsed, capture, diagnostics) {
   if (parsed?.adapter !== 'docx-source-envelope') return
   if (parsed.value.profileInstructionSourceDigest !== parsed.sourceDocumentDigest) {
-    diagnostics.push(diagnostic('DOCX_SOURCE_PROFILE_UNBOUND', 'incomplete_source', '$.docxSourceEnvelope.source.profileInstructionSourceDigest', 'DOCX source profile proof must bind the immutable DOCX digest'))
+    diagnostics.push(diagnostic('DOCX_SOURCE_PROFILE_UNBOUND', 'incomplete_source', '$.sourceCapture.profileInstructionSourceDigest', 'DOCX source profile proof must bind the immutable DOCX digest'))
   }
   if (capture.observations.some(
     (observation) => observation.documentId !== parsed.sourceDocumentId,
@@ -2538,6 +2556,18 @@ function buildPlan(source, capture, closure, groups, acceptedRecords, reviewDeci
       const sourceClosure = source.inactiveSourceClosures?.find(
         (candidate) => candidate?.slotId === slot.slotId,
       )
+      if (
+        profile.completeness.requireInactiveSourceClosure === false
+        && sourceSliceRefs === 'not_supplied'
+        && slot.renderPolicy === 'suppress'
+      ) {
+        if (groupBySlot.has(slot.slotId)) {
+          diagnostics.push(diagnostic('INACTIVE_SLOT_GROUP_FORBIDDEN', 'incomplete_source', `$.groups.${slot.slotId}`, 'A non-rendered not_supplied slot cannot produce a Canonical Group'))
+        } else {
+          bindings.push({ slotId: slot.slotId, state: 'inactive', sourceState: 'not_supplied' })
+        }
+        continue
+      }
       if (!Array.isArray(sourceSliceRefs) || sourceSliceRefs.length === 0 || sourceSliceRefs.some((id) => !capture.sourceSpans.some((span) => span.sourceSpanId === id))) {
         diagnostics.push(diagnostic('INACTIVE_SOURCE_MISSING', 'incomplete_source', `$.inactiveSlots.${slot.slotId}`, 'Required inactive source closure is missing'))
       } else if (
@@ -2742,18 +2772,29 @@ export function compileCanonicalPaper(request) {
     return blockedResult(dispositionFor(diagnostics), capture, request?.authority || null, diagnostics, [], reviewDecisions)
   }
   const closure = authorityResolution.closure
-  if (closure.authorityRef.manifestDigest !== canonicalAuthorityRef.manifestDigest) {
+  const acceptsTrustedDocxCandidate = request?.[trustedDocxCandidateCompile] === true
+    && closure.authorityRef.manifestDigest
+      === trustedDocxCandidateAuthorityRef.manifestDigest
+  if (
+    closure.authorityRef.manifestDigest !== canonicalAuthorityRef.manifestDigest
+    && !acceptsTrustedDocxCandidate
+  ) {
     diagnostics.push(diagnostic('AUTHORITY_RETIRED', 'unsupported', '$.authority', 'Only the current canonical authority may compile new papers'))
     return blockedResult(dispositionFor(diagnostics), capture, closure.authorityRef, diagnostics, [], [])
   }
   const effectiveReviewDecisions = closure.authorityRef.manifestVersion === '1' ? [] : reviewDecisions
   diagnostics.push(...validateCapture(capture, closure).map((item) => diagnostic(item.code, 'incomplete_source', item.path, item.message)))
   if (parsed?.adapter === 'docx-source-envelope') {
-    diagnostics.push(...validateJsonSchema(
-      parsed.envelope,
-      closure.schemas['docx-source-envelope-v1'],
-      '$.docxSourceEnvelope',
-    ).map((item) => diagnostic('DOCX_SOURCE_ENVELOPE_INVALID', 'incomplete_source', item.path, item.message)))
+    const envelopeSchema = closure.schemas[parsed.envelope.schemaVersion]
+    if (!envelopeSchema) {
+      diagnostics.push(diagnostic('DOCX_SOURCE_ENVELOPE_INVALID', 'incomplete_source', '$.docxSourceEnvelope.schemaVersion', 'DOCX source envelope schema is unavailable for this authority'))
+    } else {
+      diagnostics.push(...validateJsonSchema(
+        parsed.envelope,
+        envelopeSchema,
+        '$.docxSourceEnvelope',
+      ).map((item) => diagnostic('DOCX_SOURCE_ENVELOPE_INVALID', 'incomplete_source', item.path, item.message)))
+    }
   }
   validateDocxSourceBinding(parsed, capture, diagnostics)
   if (!parsed) return blockedResult(dispositionFor(diagnostics), capture, closure.authorityRef, diagnostics, [], reviewDecisions)
@@ -2775,7 +2816,14 @@ export function compileCanonicalPaper(request) {
     if (built.artifact) builtGroups.push({ ...built.artifact, slotId: rawGroup.slotId })
   }
   if (dispositionFor(diagnostics) !== 'ready') return blockedResult(dispositionFor(diagnostics), capture, closure.authorityRef, diagnostics, transformations.records, effectiveReviewDecisions)
-  const planResult = buildPlan(source, capture, closure, builtGroups, transformations.records, effectiveReviewDecisions)
+  const planResult = buildPlan(
+    source,
+    capture,
+    closure,
+    builtGroups,
+    transformations.records,
+    effectiveReviewDecisions,
+  )
   diagnostics.push(...planResult.diagnostics)
   if (dispositionFor(diagnostics) !== 'ready') return blockedResult(dispositionFor(diagnostics), capture, closure.authorityRef, diagnostics, transformations.records, effectiveReviewDecisions)
   const builtGroupById = new Map(
@@ -2817,6 +2865,14 @@ export function compileCanonicalPaper(request) {
       normalizationReport: report,
     },
   }
+}
+
+export function compileTrustedDocxCandidate(request) {
+  return compileCanonicalPaper({
+    ...request,
+    authority: trustedDocxCandidateAuthorityRef,
+    [trustedDocxCandidateCompile]: true,
+  })
 }
 
 export { canonicalAuthorityRef, stableStringify }
