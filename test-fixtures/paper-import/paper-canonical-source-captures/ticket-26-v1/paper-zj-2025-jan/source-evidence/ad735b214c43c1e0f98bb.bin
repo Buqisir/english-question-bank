@@ -1,0 +1,105 @@
+{
+  "schemaVersion": "import-meta-v1",
+  "paperId": "paper-zj-2025-jan",
+  "sourceFileName": "source.docx",
+  "sourceFileSha256": "211ab91c6306be1de984cec6500b4a7dbf502d263c5ad3cc7614b87b1894ad94",
+  "importedBy": "paper-import-ai",
+  "importedAt": "2026-06-09T05:03:26.058Z",
+  "paper": {
+    "year": 2025,
+    "region": "浙江",
+    "paperName": "2025年1月浙江卷",
+    "examCode": "zj-2025-jan",
+    "subject": "English",
+    "sourceType": "真题",
+    "defaultTags": [
+      "真题",
+      "2025",
+      "浙江卷",
+      "1月"
+    ]
+  },
+  "groups": {
+    "group-zj-2025-jan-reading-a": {
+      "groupId": "group-zj-2025-jan-reading-a",
+      "difficulty": "中",
+      "summary": "本文是一则图书馆馆际互借（Interlibrary Loan, ILL）服务的应用文/通知，按小标题分块介绍服务内容、借阅资格、所需时间、借期规则、通知取件方式以及收费标准。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading A"
+    },
+    "group-zj-2025-jan-reading-b": {
+      "groupId": "group-zj-2025-jan-reading-b",
+      "difficulty": "中",
+      "summary": "文章是一位母亲的现身说法，探讨父母该如何与孩子谈论食物。作者因童年被反复告诫不要吃胖而与食物关系受损，于是反思自己给女儿的饮食建议是否带来负面影响，并引用心理学教授 Markey 的观点，提出在食物问题上“少说为妙”、采用“责任分工”原则，让孩子自己决定吃什么、吃多少，最后作者实践后发现这些策略确实有效。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading B"
+    },
+    "group-zj-2025-jan-reading-c": {
+      "groupId": "group-zj-2025-jan-reading-c",
+      "difficulty": "中",
+      "summary": "本文是一篇说明文，介绍了一种名为“矩阵种植”(matrix planting)的新型园艺设计理念：模仿自然进行园艺，减少人工干预与化肥、电动工具的使用，让自然承担更多“重活”。文章依次说明其理念、起源、代表性设计师的美学发展、看似自然实则精心规划的本质，以及对园丁和地球的多重益处。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading C"
+    },
+    "group-zj-2025-jan-reading-d": {
+      "groupId": "group-zj-2025-jan-reading-d",
+      "difficulty": "中",
+      "summary": "本文是一篇说明文/议论文，围绕新技术（如语音助手、自动驾驶汽车）的性别化问题展开。介绍了斯坦福学者 Ashley Martin 的研究：去性别化看似能减少刻板印象，但性别其实是人们与拟人化产品建立情感连接的重要方式，而且彻底去性别化很难实现。文章最后提出拟人化也可成为改变刻板印象的机会。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading D"
+    },
+    "group-zj-2025-jan-seven-choices": {
+      "groupId": "group-zj-2025-jan-seven-choices",
+      "difficulty": "中",
+      "summary": "本文是一篇说明文，围绕\"如何更有效地沟通\"给出若干建议。开篇指出沟通中最常见的错误是想表达太多，强调清晰简洁的重要性；随后以小标题加正文的形式列举多条实用技巧：心系听众、用词精简、让听众参与、选择合适的传递方式等，最后总结培养沟通能力虽费时但值得。七选五考查对小标题概括、段内衔接句以及转折/递进逻辑关系的把握。",
+      "tags": [
+        "七选五"
+      ],
+      "displayTitleOverride": "七选五"
+    },
+    "group-zj-2025-jan-cloze": {
+      "groupId": "group-zj-2025-jan-cloze",
+      "difficulty": "中",
+      "summary": "完形填空",
+      "tags": [
+        "完形填空"
+      ],
+      "displayTitleOverride": "完形填空"
+    },
+    "group-zj-2025-jan-grammar-fill": {
+      "groupId": "group-zj-2025-jan-grammar-fill",
+      "difficulty": "中",
+      "summary": "语法填空",
+      "tags": [
+        "语法填空"
+      ],
+      "displayTitleOverride": "语法填空"
+    },
+    "group-zj-2025-jan-writing-application": {
+      "groupId": "group-zj-2025-jan-writing-application",
+      "difficulty": "中",
+      "summary": "应用文写作",
+      "tags": [
+        "应用文写作"
+      ],
+      "displayTitleOverride": "应用文写作"
+    },
+    "group-zj-2025-jan-writing-continuation": {
+      "groupId": "group-zj-2025-jan-writing-continuation",
+      "difficulty": "中",
+      "summary": "读后续写",
+      "tags": [
+        "读后续写"
+      ],
+      "displayTitleOverride": "读后续写"
+    }
+  }
+}

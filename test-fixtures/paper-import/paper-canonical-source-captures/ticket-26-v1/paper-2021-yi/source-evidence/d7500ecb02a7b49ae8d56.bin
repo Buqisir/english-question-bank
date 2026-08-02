@@ -1,0 +1,86 @@
+{
+  "schemaVersion": "import-meta-v1",
+  "paperId": "paper-2021-yi",
+  "sourceFileName": "2021年全国乙卷-答案版.docx",
+  "sourceFileSha256": "156d7bed853b88b2fa1f19e34c1d6ceedb1400810bb73586a4f29c31dafd121e",
+  "importedBy": "paper-import-ai",
+  "importedAt": "2026-06-19T08:55:54.079Z",
+  "paper": {
+    "year": 2021,
+    "region": "全国乙卷",
+    "paperName": "2021年全国乙卷",
+    "examCode": "2021-yi",
+    "subject": "English",
+    "sourceType": "真题",
+    "defaultTags": [
+      "真题",
+      "2021",
+      "全国乙卷"
+    ]
+  },
+  "groups": {
+    "group-2021-yi-reading-a": {
+      "groupId": "group-2021-yi-reading-a",
+      "difficulty": "中",
+      "summary": "本文是一篇介绍性应用文，主题为“世界上最大的体育场”。文章先回顾古希腊罗马时期的体育场历史（罗马斗兽场与马克西穆斯竞技场），再说明现代安全规定使容量略低，接着交代数据来源，最后以项目符号列表方式列出当今世界容量最大的几座体育场及其容量与启用日期。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading A"
+    },
+    "group-2021-yi-reading-b": {
+      "groupId": "group-2021-yi-reading-b",
+      "difficulty": "中",
+      "summary": "本文是一篇议论性随笔，探讨了在人人都有手机的时代，为何仍有超过一半的澳大利亚家庭保留座机。作者结合调查数据与自身家庭情况，分析了年龄、家庭构成等影响因素，并以反问收尾，暗示座机终将退出历史舞台。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading B"
+    },
+    "group-2021-yi-reading-c": {
+      "groupId": "group-2021-yi-reading-c",
+      "difficulty": "中",
+      "summary": "本文介绍艺术家 Benjamin Von Wong 用塑料垃圾制作大型雕塑，借此让公众重新审视一次性塑料制品、关注塑料污染问题，并向大企业施压减少塑料足迹。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading C"
+    },
+    "group-2021-yi-reading-d": {
+      "groupId": "group-2021-yi-reading-d",
+      "difficulty": "中",
+      "summary": "本文是一篇说明文，探讨背景噪音水平与创造性思维之间的关系。作者从采访者偏爱共享办公空间的现象切入，引出一项关于噪音水平的研究，说明适度的背景噪音（约70分贝）最有利于创造性思考，并解释开放式办公室让人讨厌的原因在于无法摆脱他人对话的干扰。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading D"
+    },
+    "group-2021-yi-seven-choices": {
+      "groupId": "group-2021-yi-seven-choices",
+      "difficulty": "中",
+      "summary": "本文围绕《How to Be Interesting》作者 Jessica Hagy 的观点，讲述如何在晚宴上把自己变成一个有趣的人。文章按「行动—提问—应对话痨—化解尴尬沉默」四个小建议层层展开，是典型的建议技巧类七选五说明文。五个空覆盖段首主题句、段中衔接句与段末收束句。",
+      "tags": [
+        "七选五"
+      ],
+      "displayTitleOverride": "七选五"
+    },
+    "group-2021-yi-cloze": {
+      "groupId": "group-2021-yi-cloze",
+      "difficulty": "中",
+      "summary": "完形填空",
+      "tags": [
+        "完形填空"
+      ],
+      "displayTitleOverride": "完形填空"
+    },
+    "group-2021-yi-grammar-fill": {
+      "groupId": "group-2021-yi-grammar-fill",
+      "difficulty": "中",
+      "summary": "语法填空",
+      "tags": [
+        "语法填空"
+      ],
+      "displayTitleOverride": "语法填空"
+    }
+  }
+}

@@ -1,0 +1,104 @@
+{
+  "schemaVersion": "import-meta-v1",
+  "paperId": "paper-2020-i",
+  "sourceFileName": "2020年新课标I卷-答案版.docx",
+  "sourceFileSha256": "96ed0fd208ee95f4989cbf2b651a70ba57baf09d917af7a94e793191f63ef7d2",
+  "importedBy": "paper-import-ai",
+  "importedAt": "2026-06-05T07:27:39.985Z",
+  "paper": {
+    "year": 2020,
+    "region": "全国新课标Ⅰ",
+    "paperName": "2020年新课标Ⅰ卷",
+    "examCode": "2020-i",
+    "subject": "English",
+    "sourceType": "真题",
+    "defaultTags": [
+      "真题",
+      "2020",
+      "新课标Ⅰ卷"
+    ]
+  },
+  "groups": {
+    "group-2020-i-reading-a": {
+      "groupId": "group-2020-i-reading-a",
+      "difficulty": "中",
+      "summary": "这是一则应用文（征诗比赛广告），主题为纪念飞行员 Amelia Earhart 的 POETRY CHALLENGE 征诗活动，介绍写作主题、奖项设置与参赛规则。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading A"
+    },
+    "group-2020-i-reading-b": {
+      "groupId": "group-2020-i-reading-b",
+      "difficulty": "中",
+      "summary": "本文是一篇人物记叙文，讲述了 Jennifer Mauer 凭借超出常人的毅力，克服家庭与经济困难，成为大家庭中第一个获得学士学位（护理专业）的人，并以此激励家人。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading B"
+    },
+    "group-2020-i-reading-c": {
+      "groupId": "group-2020-i-reading-c",
+      "difficulty": "中",
+      "summary": "本文是一篇书评，介绍 Toni Bissell 的著作《Chasing the Sea》。文章从作者重返乌兹别克斯坦的缘由谈起，叙述其旅程中遇到的人与事，展现乌兹别克斯坦社会的温暖与阴暗面，并评价该书的写作特点。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading C"
+    },
+    "group-2020-i-reading-d": {
+      "groupId": "group-2020-i-reading-d",
+      "difficulty": "中",
+      "summary": "本文介绍《消费者研究杂志》的一项研究：用餐同伴的体型与进食量都会影响我们自己的进食量；研究通过两个实验发现，人们会模仿同伴多吃，而当同伴身材瘦却吃得多时，受试者吃得明显更多。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading D"
+    },
+    "group-2020-i-seven-choices": {
+      "groupId": "group-2020-i-seven-choices",
+      "difficulty": "中",
+      "summary": "本篇为一篇说明文式的演讲技巧指南，围绕“如何成为一名优秀的公众演讲者”展开，逐段给出具体原则：放松自然地面对听众、出错不必停下道歉、通过练习成为高效演讲者、以及演讲宜短不宜长。七选五的五个空分别考查首段主旨衔接、段中对比衔接、段末补充说明、段中目标转折和段首主题句。",
+      "tags": [
+        "七选五"
+      ],
+      "displayTitleOverride": "七选五"
+    },
+    "group-2020-i-cloze": {
+      "groupId": "group-2020-i-cloze",
+      "difficulty": "中",
+      "summary": "完形填空",
+      "tags": [
+        "完形填空"
+      ],
+      "displayTitleOverride": "完形填空"
+    },
+    "group-2020-i-grammar-fill": {
+      "groupId": "group-2020-i-grammar-fill",
+      "difficulty": "中",
+      "summary": "语法填空",
+      "tags": [
+        "语法填空"
+      ],
+      "displayTitleOverride": "语法填空"
+    },
+    "group-2020-i-writing-application": {
+      "groupId": "group-2020-i-writing-application",
+      "difficulty": "中",
+      "summary": "应用文写作",
+      "tags": [
+        "应用文写作"
+      ],
+      "displayTitleOverride": "应用文写作"
+    },
+    "group-2020-i-writing-continuation": {
+      "groupId": "group-2020-i-writing-continuation",
+      "difficulty": "中",
+      "summary": "读后续写",
+      "tags": [
+        "读后续写"
+      ],
+      "displayTitleOverride": "读后续写"
+    }
+  }
+}

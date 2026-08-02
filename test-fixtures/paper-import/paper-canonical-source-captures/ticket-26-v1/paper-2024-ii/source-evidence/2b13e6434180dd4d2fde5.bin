@@ -1,0 +1,104 @@
+{
+  "schemaVersion": "import-meta-v1",
+  "paperId": "paper-2024-ii",
+  "sourceFileName": "2024年新课标Ⅱ卷-答案版.docx",
+  "sourceFileSha256": "57c0ffc8f176fb8f8ca824608c67fd661c15842d11064442e00ba709c62504b7",
+  "importedBy": "paper-import-ai",
+  "importedAt": "2026-06-05T07:27:42.275Z",
+  "paper": {
+    "year": 2024,
+    "region": "全国新课标Ⅱ",
+    "paperName": "2024年新课标Ⅱ卷",
+    "examCode": "2024-ii",
+    "subject": "English",
+    "sourceType": "真题",
+    "defaultTags": [
+      "真题",
+      "2024",
+      "新课标Ⅱ卷"
+    ]
+  },
+  "groups": {
+    "group-2024-ii-reading-a": {
+      "groupId": "group-2024-ii-reading-a",
+      "difficulty": "中",
+      "summary": "本文是一则关于 Carlow Autumn Walking Festival 的应用文（活动广告），向初级、有经验和高级徒步者介绍四条不同的徒步路线，每条路线列出主题介绍、日期时间、出发地点和时长。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading A"
+    },
+    "group-2024-ii-reading-b": {
+      "groupId": "group-2024-ii-reading-b",
+      "difficulty": "中",
+      "summary": "本文是一篇新闻报道，介绍旧金山湾区捷运系统（BART）在检票口设置的故事亭（kiosk）项目：乘客可按时长选择并打印纸质短篇故事，旨在改善乘车体验、推介本地作家，并探讨短篇故事能否提振日渐下滑的公共交通客流量。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading B"
+    },
+    "group-2024-ii-reading-c": {
+      "groupId": "group-2024-ii-reading-c",
+      "difficulty": "中",
+      "summary": "本文是一篇说明文，介绍室内园艺系统 Babylon Micro-Farm（BMF）。文章先指出普通蔬果运输距离长，引出 BMF 能缩短从田间到餐桌的距离，随后说明其适用对象、依托的新技术、环保优势，最后介绍 BMF 员工践行可持续生活方式。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading C"
+    },
+    "group-2024-ii-reading-d": {
+      "groupId": "group-2024-ii-reading-d",
+      "difficulty": "中",
+      "summary": "本文是一篇书评，推介 Catriona Campbell 所著的 AI by Design: A Plan for Living with Artificial Intelligence。文章介绍该书的写作风格、核心观点（AI 将日益强大，人类必须保持对 AI 的控制并进行全球监管），并在结尾强烈推荐此书。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading D"
+    },
+    "group-2024-ii-seven-choices": {
+      "groupId": "group-2024-ii-seven-choices",
+      "difficulty": "中",
+      "summary": "本文是一篇说明性建议类文章，主题为过度旅游（overtourism）及游客如何通过明智决策减轻热门目的地压力。结构为引言段提出问题，随后以小标题形式给出若干条具体建议，最后以呼吁回馈当地社区收尾。七选五考查段首设问、小标题概括以及段内衔接句的还原。",
+      "tags": [
+        "七选五"
+      ],
+      "displayTitleOverride": "七选五"
+    },
+    "group-2024-ii-cloze": {
+      "groupId": "group-2024-ii-cloze",
+      "difficulty": "中",
+      "summary": "完形填空",
+      "tags": [
+        "完形填空"
+      ],
+      "displayTitleOverride": "完形填空"
+    },
+    "group-2024-ii-grammar-fill": {
+      "groupId": "group-2024-ii-grammar-fill",
+      "difficulty": "中",
+      "summary": "语法填空",
+      "tags": [
+        "语法填空"
+      ],
+      "displayTitleOverride": "语法填空"
+    },
+    "group-2024-ii-writing-application": {
+      "groupId": "group-2024-ii-writing-application",
+      "difficulty": "中",
+      "summary": "应用文写作",
+      "tags": [
+        "应用文写作"
+      ],
+      "displayTitleOverride": "应用文写作"
+    },
+    "group-2024-ii-writing-continuation": {
+      "groupId": "group-2024-ii-writing-continuation",
+      "difficulty": "中",
+      "summary": "读后续写",
+      "tags": [
+        "读后续写"
+      ],
+      "displayTitleOverride": "读后续写"
+    }
+  }
+}

@@ -1,0 +1,2806 @@
+{
+  "schemaVersion": "paper-asset-v1",
+  "paper": {
+    "paperId": "paper-zj-2021-jun",
+    "title": "2021年浙江卷高考真题英语试卷（6月）-答案版",
+    "subject": "English",
+    "source": "AI 导题",
+    "assetVersion": 1,
+    "status": "published"
+  },
+  "sources": {
+    "primarySourceType": "docx",
+    "docx": {
+      "fileName": "2021年浙江卷高考真题英语试卷（6月）-答案版.docx",
+      "sha256": "77e48ff126b6dba429d26e169e6734f5b48e216ed40275e332f18fa51757e074",
+      "sourcePath": "",
+      "sourceNote": "未上传答案解析版"
+    }
+  },
+  "layoutTree": {
+    "parts": [
+      {
+        "partId": "part-zj-2021-jun-reading",
+        "title": "第二部分 阅读",
+        "sections": [
+          {
+            "sectionId": "section-zj-2021-jun-reading-choice",
+            "title": "第一节 阅读理解",
+            "groups": [
+              {
+                "groupId": "group-zj-2021-jun-reading-a",
+                "title": "Reading A"
+              },
+              {
+                "groupId": "group-zj-2021-jun-reading-b",
+                "title": "Reading B"
+              },
+              {
+                "groupId": "group-zj-2021-jun-reading-c",
+                "title": "Reading C"
+              }
+            ]
+          },
+          {
+            "sectionId": "section-zj-2021-jun-reading-seven",
+            "title": "第二节 七选五",
+            "groups": [
+              {
+                "groupId": "group-zj-2021-jun-seven-choices",
+                "title": "七选五"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "partId": "part-zj-2021-jun-language",
+        "title": "第三部分 语言运用",
+        "sections": [
+          {
+            "sectionId": "section-zj-2021-jun-cloze",
+            "title": "第一节 完形填空",
+            "groups": [
+              {
+                "groupId": "group-zj-2021-jun-cloze",
+                "title": "完形填空"
+              }
+            ]
+          },
+          {
+            "sectionId": "section-zj-2021-jun-grammar-fill",
+            "title": "第二节 语法填空",
+            "groups": [
+              {
+                "groupId": "group-zj-2021-jun-grammar-fill",
+                "title": "语法填空"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "partId": "part-zj-2021-jun-writing",
+        "title": "第四部分 写作",
+        "sections": [
+          {
+            "sectionId": "section-zj-2021-jun-writing-application",
+            "title": "第一节 应用文写作",
+            "groups": [
+              {
+                "groupId": "group-zj-2021-jun-writing-application",
+                "title": "应用文写作"
+              }
+            ]
+          },
+          {
+            "sectionId": "section-zj-2021-jun-writing-continuation",
+            "title": "第二节 读后续写",
+            "groups": [
+              {
+                "groupId": "group-zj-2021-jun-writing-continuation",
+                "title": "读后续写"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "content": {
+    "blocks": [
+      {
+        "type": "partHeading",
+        "partId": "part-zj-2021-jun-reading",
+        "text": "第二部分 阅读理解（共两节，满分35分）"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-zj-2021-jun-reading-choice",
+        "text": "第一节（共10小题；每小题2.5分，满分25分）"
+      },
+      {
+        "type": "group",
+        "groupId": "group-zj-2021-jun-reading-a"
+      },
+      {
+        "type": "group",
+        "groupId": "group-zj-2021-jun-reading-b"
+      },
+      {
+        "type": "group",
+        "groupId": "group-zj-2021-jun-reading-c"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-zj-2021-jun-reading-seven",
+        "text": "第二节（共5小题；每小题2分，满分10分）"
+      },
+      {
+        "type": "instruction",
+        "text": "阅读下面短文，从短文后的选项中选出可以填入空白处的最佳选项。选项中有两项为多余选项。"
+      },
+      {
+        "type": "group",
+        "groupId": "group-zj-2021-jun-seven-choices"
+      },
+      {
+        "type": "pageBreakHint"
+      },
+      {
+        "type": "partHeading",
+        "partId": "part-zj-2021-jun-language",
+        "text": "第三部分 语言运用（共两节，满分45分）"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-zj-2021-jun-cloze",
+        "text": "第一节（共20小题；每小题1.5分，满分30分）"
+      },
+      {
+        "type": "instruction",
+        "text": "阅读下面短文，从每题所给的A、B、C、D四个选项中选出最佳选项。"
+      },
+      {
+        "type": "group",
+        "groupId": "group-zj-2021-jun-cloze"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-zj-2021-jun-grammar-fill",
+        "text": "第二节(共10小题；每小题1.5分，满分15分)"
+      },
+      {
+        "type": "instruction",
+        "text": "阅读下面短文，在空白处填入1个适当的单词或括号内单词的正确形式。"
+      },
+      {
+        "type": "group",
+        "groupId": "group-zj-2021-jun-grammar-fill"
+      },
+      {
+        "type": "pageBreakHint"
+      },
+      {
+        "type": "partHeading",
+        "partId": "part-zj-2021-jun-writing",
+        "text": "第四部分 写作（共两节，满分40分）"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-zj-2021-jun-writing-application",
+        "text": "第一节（满分15分）"
+      },
+      {
+        "type": "group",
+        "groupId": "group-zj-2021-jun-writing-application"
+      },
+      {
+        "type": "instruction",
+        "text": "注意：\n（1）写作词数应为80个左右；\n（2）请按如下格式在答题卡的相应位置作答。"
+      },
+      {
+        "type": "answerBox",
+        "writingTaskId": "wt-zj-2021-jun-application",
+        "label": "应用文写作答题区"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-zj-2021-jun-writing-continuation",
+        "text": "第二节（满分25分）"
+      },
+      {
+        "type": "instruction",
+        "text": "阅读下面材料，根据其内容和所给段落开头语续写两段，使之构成一篇完整的短文。"
+      },
+      {
+        "type": "group",
+        "groupId": "group-zj-2021-jun-writing-continuation"
+      },
+      {
+        "type": "instruction",
+        "text": "注意：\n（1）续写词数应为150个左右；\n（2）请按如下格式在答题卡的相应位置作答。"
+      },
+      {
+        "type": "instruction",
+        "text": "Paragraph 1: When I brought my paycheck home, it was 199 – my dad wanted to talk to me.\n\nParagraph 2: Paragraph 2:"
+      },
+      {
+        "type": "answerBox",
+        "writingTaskId": "wt-zj-2021-jun-continuation",
+        "label": "读后续写答题区"
+      }
+    ],
+    "groups": {
+      "group-zj-2021-jun-reading-a": {
+        "groupId": "group-zj-2021-jun-reading-a",
+        "groupType": "reading",
+        "title": "Reading A",
+        "questionIds": [
+          "q-zj-2021-jun-021",
+          "q-zj-2021-jun-022",
+          "q-zj-2021-jun-023"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-zj-2021-jun-reading-a-1",
+              "text": "Leslie Nielsen’s childhood was a difficult one, but he had one particular shining star in his life – his uncle, who was a well-known actor. The admiration and respect his uncle earned inspired Nielsen to make a career (职业) in acting. Even though he often felt he would be discovered to be a no-talent, he moved forward, gaining a scholarship to the Neighborhood Playhouse and making his first television appearance a few years later in 1948. However, becoming a full-time, successful actor would still be an uphill battle for another eight years until he landed a number of film roles that finally got him noticed."
+            },
+            {
+              "paragraphId": "para-zj-2021-jun-reading-a-2",
+              "text": "But even then, what he had wasn’t quite what he wanted. Nielsen always felt he should be doing comedy but his good looks and distinguished voice kept him busy in dramatic roles. It wasn’t until 1980 – 32 years into his career – that he landed the role it would seem he was made for in Airplane! That movie led him into the second half of his career where his comedic presence alone could make a movie a financial success even when movie reviewers would not rate it highly."
+            },
+            {
+              "paragraphId": "para-zj-2021-jun-reading-a-3",
+              "text": "Did Nielsen then feel content in his career? Yes and no. He was thrilled to be doing the comedy that he always felt he should do, but even during his last few years, he always had a sense of curiosity, wondering what new role or challenge might be just around the corner. He never stopped working, never retired."
+            },
+            {
+              "paragraphId": "para-zj-2021-jun-reading-a-4",
+              "text": "Leslie Nielsen’s devotion to acting is wonderfully inspiring. He built a hugely successful career with little more than plain old hard work and determination. He showed us that even a single desire, never given up on, can make for a remarkable life."
+            }
+          ]
+        }
+      },
+      "group-zj-2021-jun-reading-b": {
+        "groupId": "group-zj-2021-jun-reading-b",
+        "groupType": "reading",
+        "title": "Reading B",
+        "questionIds": [
+          "q-zj-2021-jun-024",
+          "q-zj-2021-jun-025",
+          "q-zj-2021-jun-026",
+          "q-zj-2021-jun-027"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-zj-2021-jun-reading-b-1",
+              "text": "We live in a town with three beaches. There are two parks less than 10 minutes’ walk from home where neighbourhood children gather to play. However, what my children want to do after school is pick up a screen – any screen – and stare at it for hours. They are not alone. Today’s children spend an average of four and a half hours a day looking at screens, split between watching television and using the Internet."
+            },
+            {
+              "paragraphId": "para-zj-2021-jun-reading-b-2",
+              "text": "In the past few years, an increasing number of people and organisations have begun coming up with plans to counter this trend. A couple of years ago, film-maker David Bond realised that his children, then aged five and three, were attached to screens to the point where he was able to say “chocolate” into his three-year-old son’s ear without getting a response. He realised that something needed to change, and, being a London media type, appointed himself “marketing director for Nature”. He documented his journey as he set about treating nature as a brand to be marketed to young people. The result was Project Wild Thing, a film which charts the birth of the Wild Network, a group of organisations with the common goal of getting children out into nature."
+            },
+            {
+              "paragraphId": "para-zj-2021-jun-reading-b-3",
+              "text": "“Just five more minutes outdoors can make a difference,” David Bond says. “There is a lot of really interesting evidence which seems to be suggesting that if children are inspired up to the age of seven, then being outdoors will be a habit for life.” His own children have got into the habit of playing outside now: “We just send them out into the garden and tell them not to come back in for a while.”"
+            },
+            {
+              "paragraphId": "para-zj-2021-jun-reading-b-4",
+              "text": "Summer is upon us. There is an amazing world out there, and it needs our children as much as they need it. Let us get them out and let them play."
+            }
+          ]
+        }
+      },
+      "group-zj-2021-jun-reading-c": {
+        "groupId": "group-zj-2021-jun-reading-c",
+        "groupType": "reading",
+        "title": "Reading C",
+        "questionIds": [
+          "q-zj-2021-jun-028",
+          "q-zj-2021-jun-029",
+          "q-zj-2021-jun-030"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-zj-2021-jun-reading-c-1",
+              "text": "If you ever get the impression that your dog can “tell” whether you look content or annoyed, you may be onto something. Dogs may indeed be able to distinguish between happy and angry human faces, according to a new study."
+            },
+            {
+              "paragraphId": "para-zj-2021-jun-reading-c-2",
+              "text": "Researchers trained a group of 11 dogs to distinguish between images (图像) of the same person making either a happy or an angry face. During the training stage, each dog was shown only the upper half or the lower half of the person’s face. The researchers then tested the dogs’ ability to distinguish between human facial expressions by showing them the other half of the person’s face or images totally different from the ones used in training. The researchers found that the dogs were able to pick the angry or happy face by touching a picture of it with their noses more often than one would expect by random chance."
+            },
+            {
+              "paragraphId": "para-zj-2021-jun-reading-c-3",
+              "text": "The study showed the animals had figured out how to apply what they learned about human faces during training to new faces in the testing stage. “We can rule out that the dogs simply distinguish between the pictures based on a simple cue, such as the sight of teeth,” said study author Corsin Muller. “Instead, our results suggest that the successful dogs realized that a smiling mouth means the same thing as smiling eyes, and the same rule applies to an angry mouth having the same meaning as angry eyes.”"
+            },
+            {
+              "paragraphId": "para-zj-2021-jun-reading-c-4",
+              "text": "“With our study, we think we can now confidently conclude that at least some dogs can distinguish human facial expressions,” Muller told Live Science."
+            },
+            {
+              "paragraphId": "para-zj-2021-jun-reading-c-5",
+              "text": "At this point, it is not clear why dogs seem to be equipped with the ability to recognize different facial expressions in humans. “To us, the most likely explanation appears to be that the basis lies in their living with humans, which gives them a lot of exposure to human facial expressions,” and this exposure has provided them with many chances to learn to distinguish between them, Muller said."
+            }
+          ]
+        }
+      },
+      "group-zj-2021-jun-seven-choices": {
+        "groupId": "group-zj-2021-jun-seven-choices",
+        "groupType": "sevenChoices",
+        "title": "七选五",
+        "questionIds": [
+          "q-zj-2021-jun-031",
+          "q-zj-2021-jun-032",
+          "q-zj-2021-jun-033",
+          "q-zj-2021-jun-034",
+          "q-zj-2021-jun-035"
+        ],
+        "blankIds": [
+          "blank-zj-2021-jun-031",
+          "blank-zj-2021-jun-032",
+          "blank-zj-2021-jun-033",
+          "blank-zj-2021-jun-034",
+          "blank-zj-2021-jun-035"
+        ],
+        "optionBank": [
+          {
+            "label": "A",
+            "text": "And that’s totally fine."
+          },
+          {
+            "label": "B",
+            "text": "That makes it extra hard to learn and practice it."
+          },
+          {
+            "label": "C",
+            "text": "He likes to think of sending postcards as a family-friendly hobby."
+          },
+          {
+            "label": "D",
+            "text": "Many love to make a connection with someone from across the world."
+          },
+          {
+            "label": "E",
+            "text": "On August 5, the number of postcards exchanged by members topped 31 million."
+          },
+          {
+            "label": "F",
+            "text": "Similarly, if you speak only Chinese, receiving a card in Swedish takes part of the fun away."
+          },
+          {
+            "label": "G",
+            "text": "In short, he loves postcards, and the excitement of getting a hand-written note from someone far away."
+          }
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-zj-2021-jun-seven-title",
+              "text": "You’ve got mail…and it’s a postcard"
+            },
+            {
+              "paragraphId": "para-zj-2021-jun-seven-p1",
+              "text": "Paulo Magalhaes, a 34-year-old Portuguese computer engineer, loves to open his mailbox and find a brightly colored picture of Rome’s Colosseum. Or Africa’s Victoria Falls. Or China’s Great Wall. __31__ 1"
+            },
+            {
+              "paragraphId": "para-zj-2021-jun-seven-p2",
+              "text": "“I often send postcards to family and friends,” he says to China Daily, “but you can imagine that after a while, you never receive as many as you send, and you realize that not everyone is into it. __32__ 2  “ Seeking other like-minded souls, however, Paulo started looking in a somewhat unlikely place: online. Many would say the Internet is a place for people who have given up on the traditional postal service, but Paulo’s hunch (直觉) paid off."
+            },
+            {
+              "paragraphId": "para-zj-2021-jun-seven-p3",
+              "text": "Today his hobby has developed into the website postcrossing. com, a social network that has grown to 575,217 registered users in 214 countries and regions since he started it 10 years ago. __33__ 3   Running the website has almost turned into a full-time job."
+            },
+            {
+              "paragraphId": "para-zj-2021-jun-seven-p4",
+              "text": "Language is certainly a barrier for many people. For postcrossing to work worldwide, a common communication language is needed so that everyone can understand each other. As cool as it may be to receive a postcard written in Chinese, the concept doesn’t work if one doesn’t understand it. __34__ 4   So a common language is required and in postcrossing that’s English since it’s widely spoken."
+            },
+            {
+              "paragraphId": "para-zj-2021-jun-seven-p5",
+              "text": "“Many people in China have limited exposure to English. __35__ 5   That said, we know of many postcrossing members, including Chinese, who have actually improved their English skills through their use of postcrossing,” Paulo says."
+            }
+          ]
+        }
+      },
+      "group-zj-2021-jun-cloze": {
+        "groupId": "group-zj-2021-jun-cloze",
+        "groupType": "cloze",
+        "title": "完形填空",
+        "questionIds": [
+          "q-zj-2021-jun-036",
+          "q-zj-2021-jun-037",
+          "q-zj-2021-jun-038",
+          "q-zj-2021-jun-039",
+          "q-zj-2021-jun-040",
+          "q-zj-2021-jun-041",
+          "q-zj-2021-jun-042",
+          "q-zj-2021-jun-043",
+          "q-zj-2021-jun-044",
+          "q-zj-2021-jun-045",
+          "q-zj-2021-jun-046",
+          "q-zj-2021-jun-047",
+          "q-zj-2021-jun-048",
+          "q-zj-2021-jun-049",
+          "q-zj-2021-jun-050",
+          "q-zj-2021-jun-051",
+          "q-zj-2021-jun-052",
+          "q-zj-2021-jun-053",
+          "q-zj-2021-jun-054",
+          "q-zj-2021-jun-055"
+        ],
+        "blankIds": [
+          "blank-zj-2021-jun-036",
+          "blank-zj-2021-jun-037",
+          "blank-zj-2021-jun-038",
+          "blank-zj-2021-jun-039",
+          "blank-zj-2021-jun-040",
+          "blank-zj-2021-jun-041",
+          "blank-zj-2021-jun-042",
+          "blank-zj-2021-jun-043",
+          "blank-zj-2021-jun-044",
+          "blank-zj-2021-jun-045",
+          "blank-zj-2021-jun-046",
+          "blank-zj-2021-jun-047",
+          "blank-zj-2021-jun-048",
+          "blank-zj-2021-jun-049",
+          "blank-zj-2021-jun-050",
+          "blank-zj-2021-jun-051",
+          "blank-zj-2021-jun-052",
+          "blank-zj-2021-jun-053",
+          "blank-zj-2021-jun-054",
+          "blank-zj-2021-jun-055"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-zj-2021-jun-cloze-title",
+              "text": "My mother is 92. Unless I have to be out of town, each week I take my mother to do her __36__ and visit the doctor, providing __37__ and transportation. During the week, however, she likes to go to a nearby store to __38__ some small things she needs."
+            },
+            {
+              "paragraphId": "para-zj-2021-jun-cloze-p1",
+              "text": "Last week she walked up to the store, but when she went to pay for her groceries, she was __39__ about three dollars. The only __40__ to pay for the groceries was to take off the __41__ she could do without: a bottle of rubbing alcohol (医用酒精) and a bar of soap. By taking off these, she was able to __42__ the new total to the amount of cash she had with her."
+            },
+            {
+              "paragraphId": "para-zj-2021-jun-cloze-p2",
+              "text": "At this store, people __43__ and then go off to the side to __44__ their own groceries. My mother was putting her groceries into shopping bags when a __45__ came up to her and said, “Here are the things that you __46__ ,” handing her the rubbing alcohol and the __47__ . My mother, who is never speechless, was speechless. She __48__ for the woman’s name and address so that she could __49__ her. The woman told her it was her __50__ ."
+            },
+            {
+              "paragraphId": "para-zj-2021-jun-cloze-p3",
+              "text": "My mother was so __51__ by her gesture that she decided to go back to the store and give the cashier (收银员) a five-dollar bill to keep on hand __52__ the same happened to someone else if they didn’t have enough __53__ for all of their groceries."
+            },
+            {
+              "paragraphId": "para-zj-2021-jun-cloze-p4",
+              "text": "So, whoever you are, thank you for the random act of __54__ that not only helped my mother out, but __55__ too."
+            }
+          ]
+        }
+      },
+      "group-zj-2021-jun-grammar-fill": {
+        "groupId": "group-zj-2021-jun-grammar-fill",
+        "groupType": "grammarFill",
+        "title": "语法填空",
+        "questionIds": [
+          "q-zj-2021-jun-056",
+          "q-zj-2021-jun-057",
+          "q-zj-2021-jun-058",
+          "q-zj-2021-jun-059",
+          "q-zj-2021-jun-060",
+          "q-zj-2021-jun-061",
+          "q-zj-2021-jun-062",
+          "q-zj-2021-jun-063",
+          "q-zj-2021-jun-064",
+          "q-zj-2021-jun-065"
+        ],
+        "blankIds": [
+          "blank-zj-2021-jun-056",
+          "blank-zj-2021-jun-057",
+          "blank-zj-2021-jun-058",
+          "blank-zj-2021-jun-059",
+          "blank-zj-2021-jun-060",
+          "blank-zj-2021-jun-061",
+          "blank-zj-2021-jun-062",
+          "blank-zj-2021-jun-063",
+          "blank-zj-2021-jun-064",
+          "blank-zj-2021-jun-065"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-zj-2021-jun-grammar-fill-title",
+              "text": "It doesn’t impress like George Washington’s plantation on the Potomac, but Lincoln’s home in downtown Springfield, Illinois, __56__ (prove) irresistible to visitors since it opened to the public. Beautifully restored (修复) to its 1860 appearance, the house was Abraham and Mary Lincoln’s home for 17 years. In 1844 they bought it __57__1,200 and some land from Charles Dresser, who performed their __58__ (marry) ceremony in 1842."
+            },
+            {
+              "paragraphId": "para-zj-2021-jun-grammar-fill-p1",
+              "text": "When the house was built, it was much __59__ (small) than it is today. Mary’s niece wrote, “The little home __60__ (paint) white. It was sweet and fresh. Mary loved it. She was extremely pretty, and her house was a reflection of __61__ (she) , everything in good taste and in perfect order.”"
+            },
+            {
+              "paragraphId": "para-zj-2021-jun-grammar-fill-p2",
+              "text": "Although Mary loved flowers, __62__she nor her husband was known as a gardener. A long-time neighbor said they never planted trees and only kept a garden for one year. Mary’s sister, Frances Todd Wallace, often came over __63__ (plant) flowers in the front yard."
+            },
+            {
+              "paragraphId": "para-zj-2021-jun-grammar-fill-p3",
+              "text": "__64__Lincolns enlarged the house to a full two stories in 1856 to meet the needs of their growing family. Three of the four Lincoln sons were born here. After Lincoln was elected President of the US in 1861, they rented the house and __65__ (sell) most of their furniture."
+            }
+          ]
+        }
+      },
+      "group-zj-2021-jun-writing-application": {
+        "groupId": "group-zj-2021-jun-writing-application",
+        "groupType": "writing",
+        "title": "应用文写作",
+        "questionIds": [],
+        "writingTaskId": "wt-zj-2021-jun-application",
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-zj-2021-jun-writing-app-title",
+              "text": "昨天你参观了学校举办的学生国画作品展。请给校英文报写一篇宣传稿，内容包括："
+            },
+            {
+              "paragraphId": "para-zj-2021-jun-writing-app-p1",
+              "text": "（1）展览时间"
+            },
+            {
+              "paragraphId": "para-zj-2021-jun-writing-app-p2",
+              "text": "（2）观展感受；"
+            },
+            {
+              "paragraphId": "para-zj-2021-jun-writing-app-p3",
+              "text": "（3）推荐观展。"
+            },
+            {
+              "paragraphId": "para-zj-2021-jun-writing-app-p4",
+              "text": "（1）词数80左右；"
+            },
+            {
+              "paragraphId": "para-zj-2021-jun-writing-app-p5",
+              "text": "（2）可以适当增加细节，以使行文连贯。"
+            }
+          ]
+        }
+      },
+      "group-zj-2021-jun-writing-continuation": {
+        "groupId": "group-zj-2021-jun-writing-continuation",
+        "groupType": "writing",
+        "title": "读后续写",
+        "questionIds": [],
+        "writingTaskId": "wt-zj-2021-jun-continuation",
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-zj-2021-jun-writing-cont-title",
+              "text": "My dad, George, only had an eighth grade education. A quiet man, he didn’t understand my world of school activities. From age 14, he worked. And his dad, Albert, took the money my dad earned and used it to pay family expenses."
+            },
+            {
+              "paragraphId": "para-zj-2021-jun-writing-cont-p1",
+              "text": "I didn’t really understand his world either: He was a livestock trucker, and I thought that I would surpass (超过) anything he had accomplished by the time I walked across the stage at high school graduation."
+            },
+            {
+              "paragraphId": "para-zj-2021-jun-writing-cont-p2",
+              "text": "Summers in the mid-70s were spent at home shooting baskets, hitting a baseball, or throwing a football, preparing for my future as a quarterback on a football team. In poor weather, I read about sports or practiced my trombone (长号) ."
+            },
+            {
+              "paragraphId": "para-zj-2021-jun-writing-cont-p3",
+              "text": "The summer before my eighth grade I was one of a group of boys that a neighboring farmer hired to work in his field. He explained our basic task, the tractor fired up and we were off, riding down the field looking for weeds to spray with chemicals. After a short way, the farmer stopped and pointed at a weed which we missed. Then we began again. This happened over and over, but we soon learned to identify different grasses like cockleburs, lamb’s-quarters, foxtails, and the king of weeds, the pretty purple thistle. It was tiring work, but I looked forward to the pay, even though I wasn’t sure how much it would amount to."
+            },
+            {
+              "paragraphId": "para-zj-2021-jun-writing-cont-p4",
+              "text": "At home, my dad said, “A job’s a big step to growing up. I’m glad you will be contributing to the household.” My dad’s words made me realize that my earnings might not be mine to do with as I wished."
+            },
+            {
+              "paragraphId": "para-zj-2021-jun-writing-cont-p5",
+              "text": "My labors lasted about two weeks, and the farmer said there might be more work, but I wasn’t interested. I decided it was not fair that I had to contribute my money."
+            }
+          ]
+        }
+      }
+    },
+    "questions": {
+      "q-zj-2021-jun-021": {
+        "questionId": "q-zj-2021-jun-021",
+        "questionNo": 21,
+        "groupId": "group-zj-2021-jun-reading-a",
+        "stem": "Why did Nielsen want to be an actor?",
+        "options": [
+          {
+            "label": "A",
+            "text": "He enjoyed watching movies."
+          },
+          {
+            "label": "B",
+            "text": "He was eager to earn money."
+          },
+          {
+            "label": "C",
+            "text": "He wanted to be like his uncle."
+          },
+          {
+            "label": "D",
+            "text": "He felt he was good at acting."
+          }
+        ]
+      },
+      "q-zj-2021-jun-022": {
+        "questionId": "q-zj-2021-jun-022",
+        "questionNo": 22,
+        "groupId": "group-zj-2021-jun-reading-a",
+        "stem": "What do we know about Nielsen in the second half of his career?",
+        "options": [
+          {
+            "label": "A",
+            "text": "He directed some high quality movies."
+          },
+          {
+            "label": "B",
+            "text": "He avoided taking on new challenges."
+          },
+          {
+            "label": "C",
+            "text": "He focused on playing dramatic roles."
+          },
+          {
+            "label": "D",
+            "text": "He became a successful comedy actor."
+          }
+        ]
+      },
+      "q-zj-2021-jun-023": {
+        "questionId": "q-zj-2021-jun-023",
+        "questionNo": 23,
+        "groupId": "group-zj-2021-jun-reading-a",
+        "stem": "What does Nielsen's career story tell us? B",
+        "options": [
+          {
+            "label": "A",
+            "text": "Art is long, life is short."
+          },
+          {
+            "label": "B",
+            "text": "He who laughs last laughs longest."
+          },
+          {
+            "label": "C",
+            "text": "It's never too late to learn."
+          },
+          {
+            "label": "D",
+            "text": "Where there's a will there's a way."
+          }
+        ]
+      },
+      "q-zj-2021-jun-024": {
+        "questionId": "q-zj-2021-jun-024",
+        "questionNo": 24,
+        "groupId": "group-zj-2021-jun-reading-b",
+        "stem": "What is the problem with the author's children?",
+        "options": [
+          {
+            "label": "A",
+            "text": "They often annoy the neighbours."
+          },
+          {
+            "label": "B",
+            "text": "They are tired of doing their homework."
+          },
+          {
+            "label": "C",
+            "text": "They have no friends to play with."
+          },
+          {
+            "label": "D",
+            "text": "They stay in front of screens for too long."
+          }
+        ]
+      },
+      "q-zj-2021-jun-025": {
+        "questionId": "q-zj-2021-jun-025",
+        "questionNo": 25,
+        "groupId": "group-zj-2021-jun-reading-b",
+        "stem": "How did David Bond advocate his idea?",
+        "options": [
+          {
+            "label": "A",
+            "text": "By making a documentary film."
+          },
+          {
+            "label": "B",
+            "text": "By organizing outdoor activities."
+          },
+          {
+            "label": "C",
+            "text": "By advertising in London media."
+          },
+          {
+            "label": "D",
+            "text": "By creating a network of friends."
+          }
+        ]
+      },
+      "q-zj-2021-jun-026": {
+        "questionId": "q-zj-2021-jun-026",
+        "questionNo": 26,
+        "groupId": "group-zj-2021-jun-reading-b",
+        "stem": "Which of the following can replace the underlined word \"charts\" in Paragraph 2?",
+        "options": [
+          {
+            "label": "A",
+            "text": "records"
+          },
+          {
+            "label": "B",
+            "text": "predicts"
+          },
+          {
+            "label": "C",
+            "text": "delays"
+          },
+          {
+            "label": "D",
+            "text": "confirms"
+          }
+        ]
+      },
+      "q-zj-2021-jun-027": {
+        "questionId": "q-zj-2021-jun-027",
+        "questionNo": 27,
+        "groupId": "group-zj-2021-jun-reading-b",
+        "stem": "What can be a suitable title for the text? C",
+        "options": [
+          {
+            "label": "A",
+            "text": "Let Children Have Fun"
+          },
+          {
+            "label": "B",
+            "text": "Young Children Need More Free Time"
+          },
+          {
+            "label": "C",
+            "text": "Market Nature to Children"
+          },
+          {
+            "label": "D",
+            "text": "David Bond: A Role Model for Children"
+          }
+        ]
+      },
+      "q-zj-2021-jun-028": {
+        "questionId": "q-zj-2021-jun-028",
+        "questionNo": 28,
+        "groupId": "group-zj-2021-jun-reading-c",
+        "stem": "The new study focused on whether dogs can          .",
+        "options": [
+          {
+            "label": "A",
+            "text": "distinguish shapes"
+          },
+          {
+            "label": "B",
+            "text": "make sense of human faces"
+          },
+          {
+            "label": "C",
+            "text": "feel happy or angry"
+          },
+          {
+            "label": "D",
+            "text": "communicate with each other"
+          }
+        ]
+      },
+      "q-zj-2021-jun-029": {
+        "questionId": "q-zj-2021-jun-029",
+        "questionNo": 29,
+        "groupId": "group-zj-2021-jun-reading-c",
+        "stem": "What can we learn about the study from Paragraph 2?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Researchers tested the dogs in random order."
+          },
+          {
+            "label": "B",
+            "text": "Diverse methods were adopted during training."
+          },
+          {
+            "label": "C",
+            "text": "Pictures used in the two stages were different."
+          },
+          {
+            "label": "D",
+            "text": "The dogs were photographed before the test."
+          }
+        ]
+      },
+      "q-zj-2021-jun-030": {
+        "questionId": "q-zj-2021-jun-030",
+        "questionNo": 30,
+        "groupId": "group-zj-2021-jun-reading-c",
+        "stem": "What is the last paragraph mainly about?",
+        "options": [
+          {
+            "label": "A",
+            "text": "A suggestion for future studies."
+          },
+          {
+            "label": "B",
+            "text": "A possible reason for the study findings."
+          },
+          {
+            "label": "C",
+            "text": "A major limitation of the study."
+          },
+          {
+            "label": "D",
+            "text": "An explanation of the research method."
+          }
+        ]
+      },
+      "q-zj-2021-jun-031": {
+        "questionId": "q-zj-2021-jun-031",
+        "questionNo": 31,
+        "groupId": "group-zj-2021-jun-seven-choices",
+        "stem": "31",
+        "blankId": "blank-zj-2021-jun-031"
+      },
+      "q-zj-2021-jun-032": {
+        "questionId": "q-zj-2021-jun-032",
+        "questionNo": 32,
+        "groupId": "group-zj-2021-jun-seven-choices",
+        "stem": "32",
+        "blankId": "blank-zj-2021-jun-032"
+      },
+      "q-zj-2021-jun-033": {
+        "questionId": "q-zj-2021-jun-033",
+        "questionNo": 33,
+        "groupId": "group-zj-2021-jun-seven-choices",
+        "stem": "33",
+        "blankId": "blank-zj-2021-jun-033"
+      },
+      "q-zj-2021-jun-034": {
+        "questionId": "q-zj-2021-jun-034",
+        "questionNo": 34,
+        "groupId": "group-zj-2021-jun-seven-choices",
+        "stem": "34",
+        "blankId": "blank-zj-2021-jun-034"
+      },
+      "q-zj-2021-jun-035": {
+        "questionId": "q-zj-2021-jun-035",
+        "questionNo": 35,
+        "groupId": "group-zj-2021-jun-seven-choices",
+        "stem": "35",
+        "blankId": "blank-zj-2021-jun-035"
+      },
+      "q-zj-2021-jun-036": {
+        "questionId": "q-zj-2021-jun-036",
+        "questionNo": 36,
+        "groupId": "group-zj-2021-jun-cloze",
+        "stem": "36",
+        "blankId": "blank-zj-2021-jun-036",
+        "options": [
+          {
+            "label": "A",
+            "text": "exercise"
+          },
+          {
+            "label": "B",
+            "text": "housework"
+          },
+          {
+            "label": "C",
+            "text": "cooking"
+          },
+          {
+            "label": "D",
+            "text": "shopping"
+          }
+        ]
+      },
+      "q-zj-2021-jun-037": {
+        "questionId": "q-zj-2021-jun-037",
+        "questionNo": 37,
+        "groupId": "group-zj-2021-jun-cloze",
+        "stem": "37",
+        "blankId": "blank-zj-2021-jun-037",
+        "options": [
+          {
+            "label": "A",
+            "text": "reward"
+          },
+          {
+            "label": "B",
+            "text": "medicine"
+          },
+          {
+            "label": "C",
+            "text": "company"
+          },
+          {
+            "label": "D",
+            "text": "shelter"
+          }
+        ]
+      },
+      "q-zj-2021-jun-038": {
+        "questionId": "q-zj-2021-jun-038",
+        "questionNo": 38,
+        "groupId": "group-zj-2021-jun-cloze",
+        "stem": "38",
+        "blankId": "blank-zj-2021-jun-038",
+        "options": [
+          {
+            "label": "A",
+            "text": "return"
+          },
+          {
+            "label": "B",
+            "text": "collect"
+          },
+          {
+            "label": "C",
+            "text": "order"
+          },
+          {
+            "label": "D",
+            "text": "buy"
+          }
+        ]
+      },
+      "q-zj-2021-jun-039": {
+        "questionId": "q-zj-2021-jun-039",
+        "questionNo": 39,
+        "groupId": "group-zj-2021-jun-cloze",
+        "stem": "39",
+        "blankId": "blank-zj-2021-jun-039",
+        "options": [
+          {
+            "label": "A",
+            "text": "short"
+          },
+          {
+            "label": "B",
+            "text": "cautious"
+          },
+          {
+            "label": "C",
+            "text": "wrong"
+          },
+          {
+            "label": "D",
+            "text": "concerned"
+          }
+        ]
+      },
+      "q-zj-2021-jun-040": {
+        "questionId": "q-zj-2021-jun-040",
+        "questionNo": 40,
+        "groupId": "group-zj-2021-jun-cloze",
+        "stem": "40",
+        "blankId": "blank-zj-2021-jun-040",
+        "options": [
+          {
+            "label": "A",
+            "text": "aim"
+          },
+          {
+            "label": "B",
+            "text": "way"
+          },
+          {
+            "label": "C",
+            "text": "advice"
+          },
+          {
+            "label": "D",
+            "text": "reason"
+          }
+        ]
+      },
+      "q-zj-2021-jun-041": {
+        "questionId": "q-zj-2021-jun-041",
+        "questionNo": 41,
+        "groupId": "group-zj-2021-jun-cloze",
+        "stem": "41",
+        "blankId": "blank-zj-2021-jun-041",
+        "options": [
+          {
+            "label": "A",
+            "text": "weight"
+          },
+          {
+            "label": "B",
+            "text": "things"
+          },
+          {
+            "label": "C",
+            "text": "mask"
+          },
+          {
+            "label": "D",
+            "text": "glasses"
+          }
+        ]
+      },
+      "q-zj-2021-jun-042": {
+        "questionId": "q-zj-2021-jun-042",
+        "questionNo": 42,
+        "groupId": "group-zj-2021-jun-cloze",
+        "stem": "42",
+        "blankId": "blank-zj-2021-jun-042",
+        "options": [
+          {
+            "label": "A",
+            "text": "raise"
+          },
+          {
+            "label": "B",
+            "text": "add"
+          },
+          {
+            "label": "C",
+            "text": "bring"
+          },
+          {
+            "label": "D",
+            "text": "switch"
+          }
+        ]
+      },
+      "q-zj-2021-jun-043": {
+        "questionId": "q-zj-2021-jun-043",
+        "questionNo": 43,
+        "groupId": "group-zj-2021-jun-cloze",
+        "stem": "43",
+        "blankId": "blank-zj-2021-jun-043",
+        "options": [
+          {
+            "label": "A",
+            "text": "show up"
+          },
+          {
+            "label": "B",
+            "text": "call in"
+          },
+          {
+            "label": "C",
+            "text": "check out"
+          },
+          {
+            "label": "D",
+            "text": "sit down"
+          }
+        ]
+      },
+      "q-zj-2021-jun-044": {
+        "questionId": "q-zj-2021-jun-044",
+        "questionNo": 44,
+        "groupId": "group-zj-2021-jun-cloze",
+        "stem": "44",
+        "blankId": "blank-zj-2021-jun-044",
+        "options": [
+          {
+            "label": "A",
+            "text": "store"
+          },
+          {
+            "label": "B",
+            "text": "select"
+          },
+          {
+            "label": "C",
+            "text": "deliver"
+          },
+          {
+            "label": "D",
+            "text": "bag"
+          }
+        ]
+      },
+      "q-zj-2021-jun-045": {
+        "questionId": "q-zj-2021-jun-045",
+        "questionNo": 45,
+        "groupId": "group-zj-2021-jun-cloze",
+        "stem": "45",
+        "blankId": "blank-zj-2021-jun-045",
+        "options": [
+          {
+            "label": "A",
+            "text": "stranger"
+          },
+          {
+            "label": "B",
+            "text": "cashier"
+          },
+          {
+            "label": "C",
+            "text": "friend"
+          },
+          {
+            "label": "D",
+            "text": "doctor"
+          }
+        ]
+      },
+      "q-zj-2021-jun-046": {
+        "questionId": "q-zj-2021-jun-046",
+        "questionNo": 46,
+        "groupId": "group-zj-2021-jun-cloze",
+        "stem": "46",
+        "blankId": "blank-zj-2021-jun-046",
+        "options": [
+          {
+            "label": "A",
+            "text": "looked for"
+          },
+          {
+            "label": "B",
+            "text": "talked about"
+          },
+          {
+            "label": "C",
+            "text": "threw away"
+          },
+          {
+            "label": "D",
+            "text": "put back"
+          }
+        ]
+      },
+      "q-zj-2021-jun-047": {
+        "questionId": "q-zj-2021-jun-047",
+        "questionNo": 47,
+        "groupId": "group-zj-2021-jun-cloze",
+        "stem": "47",
+        "blankId": "blank-zj-2021-jun-047",
+        "options": [
+          {
+            "label": "A",
+            "text": "receipt"
+          },
+          {
+            "label": "B",
+            "text": "soap"
+          },
+          {
+            "label": "C",
+            "text": "cash"
+          },
+          {
+            "label": "D",
+            "text": "bottle"
+          }
+        ]
+      },
+      "q-zj-2021-jun-048": {
+        "questionId": "q-zj-2021-jun-048",
+        "questionNo": 48,
+        "groupId": "group-zj-2021-jun-cloze",
+        "stem": "48",
+        "blankId": "blank-zj-2021-jun-048",
+        "options": [
+          {
+            "label": "A",
+            "text": "asked"
+          },
+          {
+            "label": "B",
+            "text": "waited"
+          },
+          {
+            "label": "C",
+            "text": "cared"
+          },
+          {
+            "label": "D",
+            "text": "searched"
+          }
+        ]
+      },
+      "q-zj-2021-jun-049": {
+        "questionId": "q-zj-2021-jun-049",
+        "questionNo": 49,
+        "groupId": "group-zj-2021-jun-cloze",
+        "stem": "49",
+        "blankId": "blank-zj-2021-jun-049",
+        "options": [
+          {
+            "label": "A",
+            "text": "repay"
+          },
+          {
+            "label": "B",
+            "text": "trust"
+          },
+          {
+            "label": "C",
+            "text": "recognize"
+          },
+          {
+            "label": "D",
+            "text": "help"
+          }
+        ]
+      },
+      "q-zj-2021-jun-050": {
+        "questionId": "q-zj-2021-jun-050",
+        "questionNo": 50,
+        "groupId": "group-zj-2021-jun-cloze",
+        "stem": "50",
+        "blankId": "blank-zj-2021-jun-050",
+        "options": [
+          {
+            "label": "A",
+            "text": "luck"
+          },
+          {
+            "label": "B",
+            "text": "chance"
+          },
+          {
+            "label": "C",
+            "text": "gift"
+          },
+          {
+            "label": "D",
+            "text": "turn"
+          }
+        ]
+      },
+      "q-zj-2021-jun-051": {
+        "questionId": "q-zj-2021-jun-051",
+        "questionNo": 51,
+        "groupId": "group-zj-2021-jun-cloze",
+        "stem": "51",
+        "blankId": "blank-zj-2021-jun-051",
+        "options": [
+          {
+            "label": "A",
+            "text": "surprised"
+          },
+          {
+            "label": "B",
+            "text": "amused"
+          },
+          {
+            "label": "C",
+            "text": "touched"
+          },
+          {
+            "label": "D",
+            "text": "convinced"
+          }
+        ]
+      },
+      "q-zj-2021-jun-052": {
+        "questionId": "q-zj-2021-jun-052",
+        "questionNo": 52,
+        "groupId": "group-zj-2021-jun-cloze",
+        "stem": "52",
+        "blankId": "blank-zj-2021-jun-052",
+        "options": [
+          {
+            "label": "A",
+            "text": "in case"
+          },
+          {
+            "label": "B",
+            "text": "even if"
+          },
+          {
+            "label": "C",
+            "text": "as though"
+          },
+          {
+            "label": "D",
+            "text": "so that"
+          }
+        ]
+      },
+      "q-zj-2021-jun-053": {
+        "questionId": "q-zj-2021-jun-053",
+        "questionNo": 53,
+        "groupId": "group-zj-2021-jun-cloze",
+        "stem": "53",
+        "blankId": "blank-zj-2021-jun-053",
+        "options": [
+          {
+            "label": "A",
+            "text": "energy"
+          },
+          {
+            "label": "B",
+            "text": "money"
+          },
+          {
+            "label": "C",
+            "text": "space"
+          },
+          {
+            "label": "D",
+            "text": "time"
+          }
+        ]
+      },
+      "q-zj-2021-jun-054": {
+        "questionId": "q-zj-2021-jun-054",
+        "questionNo": 54,
+        "groupId": "group-zj-2021-jun-cloze",
+        "stem": "54",
+        "blankId": "blank-zj-2021-jun-054",
+        "options": [
+          {
+            "label": "A",
+            "text": "faith"
+          },
+          {
+            "label": "B",
+            "text": "courage"
+          },
+          {
+            "label": "C",
+            "text": "kindness"
+          },
+          {
+            "label": "D",
+            "text": "honor"
+          }
+        ]
+      },
+      "q-zj-2021-jun-055": {
+        "questionId": "q-zj-2021-jun-055",
+        "questionNo": 55,
+        "groupId": "group-zj-2021-jun-cloze",
+        "stem": "55",
+        "blankId": "blank-zj-2021-jun-055",
+        "options": [
+          {
+            "label": "A",
+            "text": "made her day"
+          },
+          {
+            "label": "B",
+            "text": "changed her mind"
+          },
+          {
+            "label": "C",
+            "text": "caught her eye"
+          },
+          {
+            "label": "D",
+            "text": "met her demand"
+          }
+        ]
+      },
+      "q-zj-2021-jun-056": {
+        "questionId": "q-zj-2021-jun-056",
+        "questionNo": 56,
+        "groupId": "group-zj-2021-jun-grammar-fill",
+        "stem": "56",
+        "blankId": "blank-zj-2021-jun-056"
+      },
+      "q-zj-2021-jun-057": {
+        "questionId": "q-zj-2021-jun-057",
+        "questionNo": 57,
+        "groupId": "group-zj-2021-jun-grammar-fill",
+        "stem": "57",
+        "blankId": "blank-zj-2021-jun-057"
+      },
+      "q-zj-2021-jun-058": {
+        "questionId": "q-zj-2021-jun-058",
+        "questionNo": 58,
+        "groupId": "group-zj-2021-jun-grammar-fill",
+        "stem": "58",
+        "blankId": "blank-zj-2021-jun-058"
+      },
+      "q-zj-2021-jun-059": {
+        "questionId": "q-zj-2021-jun-059",
+        "questionNo": 59,
+        "groupId": "group-zj-2021-jun-grammar-fill",
+        "stem": "59",
+        "blankId": "blank-zj-2021-jun-059"
+      },
+      "q-zj-2021-jun-060": {
+        "questionId": "q-zj-2021-jun-060",
+        "questionNo": 60,
+        "groupId": "group-zj-2021-jun-grammar-fill",
+        "stem": "60",
+        "blankId": "blank-zj-2021-jun-060"
+      },
+      "q-zj-2021-jun-061": {
+        "questionId": "q-zj-2021-jun-061",
+        "questionNo": 61,
+        "groupId": "group-zj-2021-jun-grammar-fill",
+        "stem": "61",
+        "blankId": "blank-zj-2021-jun-061"
+      },
+      "q-zj-2021-jun-062": {
+        "questionId": "q-zj-2021-jun-062",
+        "questionNo": 62,
+        "groupId": "group-zj-2021-jun-grammar-fill",
+        "stem": "62",
+        "blankId": "blank-zj-2021-jun-062"
+      },
+      "q-zj-2021-jun-063": {
+        "questionId": "q-zj-2021-jun-063",
+        "questionNo": 63,
+        "groupId": "group-zj-2021-jun-grammar-fill",
+        "stem": "63",
+        "blankId": "blank-zj-2021-jun-063"
+      },
+      "q-zj-2021-jun-064": {
+        "questionId": "q-zj-2021-jun-064",
+        "questionNo": 64,
+        "groupId": "group-zj-2021-jun-grammar-fill",
+        "stem": "64",
+        "blankId": "blank-zj-2021-jun-064"
+      },
+      "q-zj-2021-jun-065": {
+        "questionId": "q-zj-2021-jun-065",
+        "questionNo": 65,
+        "groupId": "group-zj-2021-jun-grammar-fill",
+        "stem": "65",
+        "blankId": "blank-zj-2021-jun-065"
+      }
+    },
+    "blanks": {
+      "blank-zj-2021-jun-056": {
+        "blankId": "blank-zj-2021-jun-056",
+        "groupId": "group-zj-2021-jun-grammar-fill",
+        "questionId": "q-zj-2021-jun-056",
+        "prompt": "prove"
+      },
+      "blank-zj-2021-jun-057": {
+        "blankId": "blank-zj-2021-jun-057",
+        "groupId": "group-zj-2021-jun-grammar-fill",
+        "questionId": "q-zj-2021-jun-057"
+      },
+      "blank-zj-2021-jun-058": {
+        "blankId": "blank-zj-2021-jun-058",
+        "groupId": "group-zj-2021-jun-grammar-fill",
+        "questionId": "q-zj-2021-jun-058",
+        "prompt": "marry"
+      },
+      "blank-zj-2021-jun-059": {
+        "blankId": "blank-zj-2021-jun-059",
+        "groupId": "group-zj-2021-jun-grammar-fill",
+        "questionId": "q-zj-2021-jun-059",
+        "prompt": "small"
+      },
+      "blank-zj-2021-jun-060": {
+        "blankId": "blank-zj-2021-jun-060",
+        "groupId": "group-zj-2021-jun-grammar-fill",
+        "questionId": "q-zj-2021-jun-060",
+        "prompt": "paint"
+      },
+      "blank-zj-2021-jun-061": {
+        "blankId": "blank-zj-2021-jun-061",
+        "groupId": "group-zj-2021-jun-grammar-fill",
+        "questionId": "q-zj-2021-jun-061",
+        "prompt": "she"
+      },
+      "blank-zj-2021-jun-062": {
+        "blankId": "blank-zj-2021-jun-062",
+        "groupId": "group-zj-2021-jun-grammar-fill",
+        "questionId": "q-zj-2021-jun-062"
+      },
+      "blank-zj-2021-jun-063": {
+        "blankId": "blank-zj-2021-jun-063",
+        "groupId": "group-zj-2021-jun-grammar-fill",
+        "questionId": "q-zj-2021-jun-063",
+        "prompt": "plant"
+      },
+      "blank-zj-2021-jun-064": {
+        "blankId": "blank-zj-2021-jun-064",
+        "groupId": "group-zj-2021-jun-grammar-fill",
+        "questionId": "q-zj-2021-jun-064"
+      },
+      "blank-zj-2021-jun-065": {
+        "blankId": "blank-zj-2021-jun-065",
+        "groupId": "group-zj-2021-jun-grammar-fill",
+        "questionId": "q-zj-2021-jun-065",
+        "prompt": "sell"
+      }
+    },
+    "writingTasks": {
+      "wt-zj-2021-jun-application": {
+        "writingTaskId": "wt-zj-2021-jun-application",
+        "groupId": "group-zj-2021-jun-writing-application",
+        "taskType": "application",
+        "title": "应用文写作",
+        "instruction": "昨天你参观了学校举办的学生国画作品展。请给校英文报写一篇宣传稿，内容包括：\n（1）展览时间\n（2）观展感受；\n（3）推荐观展。\n（1）词数80左右；\n（2）可以适当增加细节，以使行文连贯。",
+        "wordCountTarget": 80
+      },
+      "wt-zj-2021-jun-continuation": {
+        "writingTaskId": "wt-zj-2021-jun-continuation",
+        "groupId": "group-zj-2021-jun-writing-continuation",
+        "taskType": "continuation",
+        "title": "读后续写",
+        "instruction": "My dad, George, only had an eighth grade education. A quiet man, he didn’t understand my world of school activities. From age 14, he worked. And his dad, Albert, took the money my dad earned and used it to pay family expenses.\nI didn’t really understand his world either: He was a livestock trucker, and I thought that I would surpass (超过) anything he had accomplished by the time I walked across the stage at high school graduation.\nSummers in the mid-70s were spent at home shooting baskets, hitting a baseball, or throwing a football, preparing for my future as a quarterback on a football team. In poor weather, I read about sports or practiced my trombone (长号) .\nThe summer before my eighth grade I was one of a group of boys that a neighboring farmer hired to work in his field. He explained our basic task, the tractor fired up and we were off, riding down the field looking for weeds to spray with chemicals. After a short way, the farmer stopped and pointed at a weed which we missed. Then we began again. This happened over and over, but we soon learned to identify different grasses like cockleburs, lamb’s-quarters, foxtails, and the king of weeds, the pretty purple thistle. It was tiring work, but I looked forward to the pay, even though I wasn’t sure how much it would amount to.\nAt home, my dad said, “A job’s a big step to growing up. I’m glad you will be contributing to the household.” My dad’s words made me realize that my earnings might not be mine to do with as I wished.\nMy labors lasted about two weeks, and the farmer said there might be more work, but I wasn’t interested. I decided it was not fair that I had to contribute my money.",
+        "continuationStarters": [
+          "When I brought my paycheck home, it was 199 – my dad wanted to talk to me.",
+          "Paragraph 2:"
+        ],
+        "materialText": "My dad, George, only had an eighth grade education. A quiet man, he didn’t understand my world of school activities. From age 14, he worked. And his dad, Albert, took the money my dad earned and used it to pay family expenses.\n\nI didn’t really understand his world either: He was a livestock trucker, and I thought that I would surpass (超过) anything he had accomplished by the time I walked across the stage at high school graduation.\n\nSummers in the mid-70s were spent at home shooting baskets, hitting a baseball, or throwing a football, preparing for my future as a quarterback on a football team. In poor weather, I read about sports or practiced my trombone (长号) .\n\nThe summer before my eighth grade I was one of a group of boys that a neighboring farmer hired to work in his field. He explained our basic task, the tractor fired up and we were off, riding down the field looking for weeds to spray with chemicals. After a short way, the farmer stopped and pointed at a weed which we missed. Then we began again. This happened over and over, but we soon learned to identify different grasses like cockleburs, lamb’s-quarters, foxtails, and the king of weeds, the pretty purple thistle. It was tiring work, but I looked forward to the pay, even though I wasn’t sure how much it would amount to.\n\nAt home, my dad said, “A job’s a big step to growing up. I’m glad you will be contributing to the household.” My dad’s words made me realize that my earnings might not be mine to do with as I wished.\n\nMy labors lasted about two weeks, and the farmer said there might be more work, but I wasn’t interested. I decided it was not fair that I had to contribute my money.",
+        "wordCountTarget": 150
+      }
+    }
+  },
+  "answerKey": {
+    "answers": {
+      "q-zj-2021-jun-021": {
+        "questionId": "q-zj-2021-jun-021",
+        "questionNo": 21,
+        "answer": "C",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2021-jun-022": {
+        "questionId": "q-zj-2021-jun-022",
+        "questionNo": 22,
+        "answer": "D",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2021-jun-023": {
+        "questionId": "q-zj-2021-jun-023",
+        "questionNo": 23,
+        "answer": "D",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2021-jun-024": {
+        "questionId": "q-zj-2021-jun-024",
+        "questionNo": 24,
+        "answer": "D",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2021-jun-025": {
+        "questionId": "q-zj-2021-jun-025",
+        "questionNo": 25,
+        "answer": "A",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2021-jun-026": {
+        "questionId": "q-zj-2021-jun-026",
+        "questionNo": 26,
+        "answer": "A",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2021-jun-027": {
+        "questionId": "q-zj-2021-jun-027",
+        "questionNo": 27,
+        "answer": "C",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2021-jun-028": {
+        "questionId": "q-zj-2021-jun-028",
+        "questionNo": 28,
+        "answer": "B",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2021-jun-029": {
+        "questionId": "q-zj-2021-jun-029",
+        "questionNo": 29,
+        "answer": "C",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2021-jun-030": {
+        "questionId": "q-zj-2021-jun-030",
+        "questionNo": 30,
+        "answer": "B",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2021-jun-031": {
+        "questionId": "q-zj-2021-jun-031",
+        "questionNo": 31,
+        "answer": "G",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2021-jun-032": {
+        "questionId": "q-zj-2021-jun-032",
+        "questionNo": 32,
+        "answer": "A",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2021-jun-033": {
+        "questionId": "q-zj-2021-jun-033",
+        "questionNo": 33,
+        "answer": "E",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2021-jun-034": {
+        "questionId": "q-zj-2021-jun-034",
+        "questionNo": 34,
+        "answer": "F",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2021-jun-035": {
+        "questionId": "q-zj-2021-jun-035",
+        "questionNo": 35,
+        "answer": "B",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2021-jun-036": {
+        "questionId": "q-zj-2021-jun-036",
+        "questionNo": 36,
+        "answer": "D",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2021-jun-037": {
+        "questionId": "q-zj-2021-jun-037",
+        "questionNo": 37,
+        "answer": "C",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2021-jun-038": {
+        "questionId": "q-zj-2021-jun-038",
+        "questionNo": 38,
+        "answer": "D",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2021-jun-039": {
+        "questionId": "q-zj-2021-jun-039",
+        "questionNo": 39,
+        "answer": "A",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2021-jun-040": {
+        "questionId": "q-zj-2021-jun-040",
+        "questionNo": 40,
+        "answer": "B",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2021-jun-041": {
+        "questionId": "q-zj-2021-jun-041",
+        "questionNo": 41,
+        "answer": "B",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2021-jun-042": {
+        "questionId": "q-zj-2021-jun-042",
+        "questionNo": 42,
+        "answer": "C",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2021-jun-043": {
+        "questionId": "q-zj-2021-jun-043",
+        "questionNo": 43,
+        "answer": "C",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2021-jun-044": {
+        "questionId": "q-zj-2021-jun-044",
+        "questionNo": 44,
+        "answer": "D",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2021-jun-045": {
+        "questionId": "q-zj-2021-jun-045",
+        "questionNo": 45,
+        "answer": "A",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2021-jun-046": {
+        "questionId": "q-zj-2021-jun-046",
+        "questionNo": 46,
+        "answer": "D",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2021-jun-047": {
+        "questionId": "q-zj-2021-jun-047",
+        "questionNo": 47,
+        "answer": "B",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2021-jun-048": {
+        "questionId": "q-zj-2021-jun-048",
+        "questionNo": 48,
+        "answer": "A",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2021-jun-049": {
+        "questionId": "q-zj-2021-jun-049",
+        "questionNo": 49,
+        "answer": "A",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2021-jun-050": {
+        "questionId": "q-zj-2021-jun-050",
+        "questionNo": 50,
+        "answer": "C",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2021-jun-051": {
+        "questionId": "q-zj-2021-jun-051",
+        "questionNo": 51,
+        "answer": "C",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2021-jun-052": {
+        "questionId": "q-zj-2021-jun-052",
+        "questionNo": 52,
+        "answer": "A",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2021-jun-053": {
+        "questionId": "q-zj-2021-jun-053",
+        "questionNo": 53,
+        "answer": "B",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2021-jun-054": {
+        "questionId": "q-zj-2021-jun-054",
+        "questionNo": 54,
+        "answer": "C",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2021-jun-055": {
+        "questionId": "q-zj-2021-jun-055",
+        "questionNo": 55,
+        "answer": "A",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2021-jun-056": {
+        "questionId": "q-zj-2021-jun-056",
+        "questionNo": 56,
+        "answer": "has proved/has proven",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2021-jun-057": {
+        "questionId": "q-zj-2021-jun-057",
+        "questionNo": 57,
+        "answer": "for",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2021-jun-058": {
+        "questionId": "q-zj-2021-jun-058",
+        "questionNo": 58,
+        "answer": "marriage",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2021-jun-059": {
+        "questionId": "q-zj-2021-jun-059",
+        "questionNo": 59,
+        "answer": "smaller",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2021-jun-060": {
+        "questionId": "q-zj-2021-jun-060",
+        "questionNo": 60,
+        "answer": "was painted",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2021-jun-061": {
+        "questionId": "q-zj-2021-jun-061",
+        "questionNo": 61,
+        "answer": "herself",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2021-jun-062": {
+        "questionId": "q-zj-2021-jun-062",
+        "questionNo": 62,
+        "answer": "neither",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2021-jun-063": {
+        "questionId": "q-zj-2021-jun-063",
+        "questionNo": 63,
+        "answer": "to plant",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2021-jun-064": {
+        "questionId": "q-zj-2021-jun-064",
+        "questionNo": 64,
+        "answer": "The",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2021-jun-065": {
+        "questionId": "q-zj-2021-jun-065",
+        "questionNo": 65,
+        "answer": "sold",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      }
+    }
+  },
+  "analysis": {
+    "meta": {
+      "generatedBy": "external-ai",
+      "promptVersion": "reading-choice-analysis-v1",
+      "reviewStatus": "reviewed",
+      "importMode": "paper-import-ai",
+      "model": "claude-opus-4-8",
+      "reviewedBy": "import-pipeline",
+      "reviewedAt": "2026-06-18T00:00:00Z"
+    },
+    "groups": {
+      "group-zj-2021-jun-reading-a": {
+        "overview": "本文是一篇人物传记，记述著名演员 Leslie Nielsen 的演艺生涯。文章按时间顺序展开：从他童年受当演员的叔叔启发立志从艺，到历经多年奋斗终于在喜剧中找到归属，再到他一生从不退休、始终保持好奇心，最后点明他凭借坚持与努力成就了非凡人生。",
+        "discourseStructure": {
+          "summary": "全文按时间线推进：起因（受叔叔启发立志）→ 奋斗（长期演正剧却渴望喜剧，1980年凭《Airplane!》转型）→ 心态（满足又始终好奇，从不退休）→ 主旨升华（坚持单一梦想成就非凡人生）。",
+          "paragraphs": [
+            {
+              "paragraphId": "para-zj-2021-jun-reading-a-1",
+              "summary": "Nielsen 童年艰难，但当知名演员的叔叔成为他的指路明星，叔叔赢得的钦佩与尊重激发他立志从艺；尽管常怕自己没天赋，他仍不断前进，获奖学金、1948年首登荧屏，又经八年苦战才靠若干电影角色崭露头角。",
+              "function": "开篇交代人物从艺的起因（受叔叔启发）与早期奋斗历程，回答第21题。"
+            },
+            {
+              "paragraphId": "para-zj-2021-jun-reading-a-2",
+              "summary": "即便出名后，所得仍非所愿：他一直觉得自己该演喜剧，但好相貌和独特嗓音让他困于正剧角色；直到1980年（入行32年）凭《Airplane!》找到天造之合的角色，由此进入生涯下半场——其喜剧魅力即便影评不高也能让电影盈利。",
+              "function": "转折段，叙述其职业生涯下半场的转型与喜剧上的商业成功，回答第22题。"
+            },
+            {
+              "paragraphId": "para-zj-2021-jun-reading-a-3",
+              "summary": "回答他是否满足：既满足又不满足——能演一直想演的喜剧令他激动，但即便晚年仍保持好奇，想着下一个新角色或挑战；他从不停止工作，从不退休。",
+              "function": "刻画其晚年心态，承上启下，体现其对事业的持续热情。"
+            },
+            {
+              "paragraphId": "para-zj-2021-jun-reading-a-4",
+              "summary": "总结升华：Nielsen 对表演的投入极具激励性，他几乎仅凭质朴的努力与决心建立辉煌事业，向我们证明：只要不放弃，单一的愿望也能成就非凡人生。",
+              "function": "结尾点题升华，揭示文章主旨（坚持梦想），回答第23题。"
+            }
+          ]
+        }
+      },
+      "group-zj-2021-jun-reading-b": {
+        "overview": "本文是一篇议论性说明文，针对当下儿童沉迷电子屏幕的问题，介绍了电影人David Bond如何把“自然”当作品牌推销给孩子（Project Wild Thing 与 Wild Network），呼吁让孩子走出户外、回归自然。",
+        "discourseStructure": {
+          "summary": "全文按“提出问题—介绍应对—引用观点—发出呼吁”的逻辑展开：先以作者自家孩子沉迷屏幕引出普遍现象，再介绍David Bond把自然当品牌营销的做法，接着引用其观点强调早期户外习惯的重要性，最后号召让孩子出门玩耍。",
+          "paragraphs": [
+            {
+              "paragraphId": "para-zj-2021-jun-reading-b-1",
+              "summary": "作者家附近虽有海滩和公园，但自家孩子放学后只想盯着屏幕，并指出这是当今儿童的普遍现象。",
+              "function": "提出问题：以个人经历切入，引出儿童长时间看屏幕的普遍现象。"
+            },
+            {
+              "paragraphId": "para-zj-2021-jun-reading-b-2",
+              "summary": "介绍电影人David Bond因孩子沉迷屏幕而行动，自封“自然的营销总监”，把自然当品牌推销，并拍摄纪录片Project Wild Thing，催生了致力于让孩子走进自然的Wild Network。",
+              "function": "介绍应对措施：呈现一个具体人物如何用营销手段应对该问题。"
+            },
+            {
+              "paragraphId": "para-zj-2021-jun-reading-b-3",
+              "summary": "引用David Bond的话，指出哪怕多五分钟户外时间也有意义，七岁前受到熏陶可形成终身户外习惯，并以自己孩子已养成户外玩耍习惯为例。",
+              "function": "引证观点：用专家话语与亲身实例支撑户外活动的价值。"
+            },
+            {
+              "paragraphId": "para-zj-2021-jun-reading-b-4",
+              "summary": "夏天来临，户外世界精彩且需要孩子，作者呼吁让孩子走出去尽情玩耍。",
+              "function": "总结呼吁：以号召收尾，升华主题。"
+            }
+          ]
+        }
+      },
+      "group-zj-2021-jun-reading-c": {
+        "overview": "本文是一篇科普说明文，介绍了一项关于狗能否分辨人类面部表情的新研究。研究发现，至少部分狗能够区分人类高兴和生气的面孔，并探讨了产生这一能力的可能原因。",
+        "discourseStructure": {
+          "summary": "文章按照\"提出结论—介绍实验—解读结果—得出结论—探讨原因\"的顺序展开：先抛出狗能分辨人类表情的研究结论，再描述训练与测试的实验过程，接着借研究者之口解读结果含义，重申结论，最后分析狗具备此能力的可能成因。",
+          "paragraphs": [
+            {
+              "paragraphId": "para-zj-2021-jun-reading-c-1",
+              "summary": "引出话题：如果你觉得狗能看出你高兴还是恼火，可能确有其事；一项新研究表明狗或许能区分人类高兴与生气的面孔。",
+              "function": "以读者的日常体验切入，引出研究的核心发现，点明文章主题。"
+            },
+            {
+              "paragraphId": "para-zj-2021-jun-reading-c-2",
+              "summary": "介绍实验过程：研究者训练11只狗区分同一人高兴或生气的面孔图像，训练时只展示半张脸，测试时用另一半脸或全新图像，结果狗辨认表情的成功率高于随机概率。",
+              "function": "详细描述研究的训练与测试方法及结果，提供支撑结论的实验证据。"
+            },
+            {
+              "paragraphId": "para-zj-2021-jun-reading-c-3",
+              "summary": "解读结果：狗把训练中学到的关于人脸的知识迁移到新面孔；研究者指出可排除狗仅凭露齿等简单线索辨别，成功的狗领悟到笑的嘴和笑的眼睛含义相同。",
+              "function": "借研究作者之口阐释实验结果的深层含义，排除简单线索的解释。"
+            },
+            {
+              "paragraphId": "para-zj-2021-jun-reading-c-4",
+              "summary": "得出结论：研究者表示现在可以有把握地断定，至少一些狗能够区分人类的面部表情。",
+              "function": "概括并重申研究的核心结论。"
+            },
+            {
+              "paragraphId": "para-zj-2021-jun-reading-c-5",
+              "summary": "探讨原因：目前尚不清楚狗为何具备识别人类表情的能力，研究者认为最可能的解释是狗与人类共同生活，大量接触人类面部表情，从而获得学习区分的机会。",
+              "function": "分析研究发现背后的可能成因，对全文进行延伸性收尾。"
+            }
+          ]
+        }
+      }
+    },
+    "questions": {
+      "q-zj-2021-jun-021": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查 Nielsen 想成为演员的原因，需在首段定位激发他从艺的直接因素。",
+        "stemTranslationZh": "Nielsen 为什么想成为一名演员？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "他喜欢看电影。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "He enjoyed watching movies.",
+              "explanation": "原文未提及 Nielsen 喜欢看电影；他从艺的动因是受当演员的叔叔启发，与“看电影”无关。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "他渴望赚钱。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "He was eager to earn money.",
+              "explanation": "原文未提及他从艺是为了赚钱；文中讲他受叔叔赢得的钦佩与尊重所激励，动机是钦佩而非金钱。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "他想要像他的叔叔一样。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-zj-2021-jun-reading-a-1",
+                "quote": "The admiration and respect his uncle earned inspired Nielsen to make a career (职业) in acting.",
+                "anchor": "叔叔赢得的钦佩与尊重激发他从艺"
+              },
+              {
+                "role": "secondary",
+                "paragraphId": "para-zj-2021-jun-reading-a-1",
+                "quote": "his uncle, who was a well-known actor",
+                "anchor": "叔叔是知名演员"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "他觉得自己擅长表演。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeAttitude",
+              "sourceQuote": "Even though he often felt he would be discovered to be a no-talent, he moved forward",
+              "sourceHighlight": "he would be discovered to be a no-talent",
+              "optionText": "He felt he was good at acting.",
+              "optionHighlight": "good at acting",
+              "explanation": "选项称他觉得自己擅长表演，与原文相反：他常担心自己会被发现“没有天赋”(a no-talent)，属对其自我评价的黑白颠倒。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2021-jun-reading-a-1",
+                "quote": "Even though he often felt he would be discovered to be a no-talent, he moved forward",
+                "anchor": "他常怕被发现没天赋"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "He wanted to be like his uncle.",
+            "sourceRole": "correctOption",
+            "targetText": "The admiration and respect his uncle earned inspired Nielsen to make a career (职业) in acting.",
+            "targetParagraphId": "para-zj-2021-jun-reading-a-1",
+            "relationType": "paraphrase",
+            "note": "正确项 be like his uncle 是对原文 his uncle earned ... inspired Nielsen to make a career in acting 的同义概括——叔叔的成就激励他走上与叔叔相同的演艺道路。"
+          },
+          {
+            "sourceText": "Why did Nielsen want to be an actor",
+            "sourceRole": "stem",
+            "targetText": "inspired Nielsen to make a career (职业) in acting",
+            "targetParagraphId": "para-zj-2021-jun-reading-a-1",
+            "relationType": "locationCue",
+            "note": "题干 want to be an actor 对应原文 make a career in acting，inspired 一词提示从艺动因的定位句。"
+          }
+        ]
+      },
+      "q-zj-2021-jun-022": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查 Nielsen 职业生涯下半场的情况，需定位第二段对 the second half of his career 的描述。",
+        "stemTranslationZh": "关于 Nielsen 职业生涯的下半场，我们可以知道什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "他执导了一些高质量的电影。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "He directed some high quality movies.",
+              "explanation": "原文未提及他执导（direct）电影；文中说的是他作为演员的喜剧表演（comedic presence），且影评并不高，与“高质量”相悖。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "他回避接受新挑战。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeAction",
+              "sourceQuote": "he always had a sense of curiosity, wondering what new role or challenge might be just around the corner",
+              "sourceHighlight": "wondering what new role or challenge",
+              "optionText": "He avoided taking on new challenges.",
+              "optionHighlight": "avoided taking on new challenges",
+              "explanation": "选项称他回避新挑战，与原文相反：他始终保持好奇，期待新角色或新挑战，从不停止工作，属对其行为的黑白颠倒。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2021-jun-reading-a-3",
+                "quote": "he always had a sense of curiosity, wondering what new role or challenge might be just around the corner",
+                "anchor": "他始终好奇期待新挑战"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "他专注于出演正剧角色。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "timeOrderReversal",
+              "sourceQuote": "his good looks and distinguished voice kept him busy in dramatic roles",
+              "sourceHighlight": "dramatic roles",
+              "optionText": "He focused on playing dramatic roles.",
+              "optionHighlight": "playing dramatic roles",
+              "explanation": "原文中“困于正剧角色(dramatic roles)”是发生在生涯下半场之前；下半场他转向喜剧，故把先前阶段的特征错置到下半场，属时序颠倒。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2021-jun-reading-a-2",
+                "quote": "his good looks and distinguished voice kept him busy in dramatic roles",
+                "anchor": "下半场之前才忙于正剧角色"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "他成为了一名成功的喜剧演员。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-zj-2021-jun-reading-a-2",
+                "quote": "That movie led him into the second half of his career where his comedic presence alone could make a movie a financial success",
+                "anchor": "下半场其喜剧魅力可让电影盈利"
+              },
+              {
+                "role": "secondary",
+                "paragraphId": "para-zj-2021-jun-reading-a-3",
+                "quote": "He was thrilled to be doing the comedy that he always felt he should do",
+                "anchor": "他终于做着自己想做的喜剧"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "the second half of his career",
+            "sourceRole": "stem",
+            "targetText": "That movie led him into the second half of his career",
+            "targetParagraphId": "para-zj-2021-jun-reading-a-2",
+            "relationType": "locationCue",
+            "note": "题干 the second half of his career 与原文措辞完全一致，定位至第二段末尾对下半场的描述。"
+          },
+          {
+            "sourceText": "He became a successful comedy actor.",
+            "sourceRole": "correctOption",
+            "targetText": "his comedic presence alone could make a movie a financial success",
+            "targetParagraphId": "para-zj-2021-jun-reading-a-2",
+            "relationType": "paraphrase",
+            "note": "正确项 successful comedy actor 是对原文 comedic presence ... make a movie a financial success 的同义替换——喜剧表演（comedy）带来商业成功（financial success）即“成功的喜剧演员”。"
+          }
+        ]
+      },
+      "q-zj-2021-jun-023": {
+        "skill": {
+          "primary": "inference"
+        },
+        "questionFocus": "考查对文章主旨/寓意的归纳，需从全文（尤其末段）提炼 Nielsen 生涯故事给人的启示。",
+        "stemTranslationZh": "Nielsen 的职业生涯故事告诉我们什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "艺术长存，人生短暂。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Art is long, life is short.",
+              "explanation": "原文未传达“艺术长存而人生短暂”之意；文章主旨在于坚持梦想与努力，而非艺术与生命长短的对比。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "笑到最后的人笑得最好。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "He was thrilled to be doing the comedy",
+              "optionText": "He who laughs last laughs longest.",
+              "matchType": "wordFamily",
+              "relationNote": "谚语中的 laughs 与原文喜剧主题 comedy（让人发笑）形成词义联想钩子，诱导考生误选；但本谚语强调“最终胜利”，与文章“坚持成就梦想”的主旨不符。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2021-jun-reading-a-3",
+                "quote": "He was thrilled to be doing the comedy that he always felt he should do",
+                "anchor": "喜剧主题制造 laughs 联想"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "活到老，学到老。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overgeneralization",
+              "sourceQuote": "He never stopped working, never retired.",
+              "sourceHighlight": "never stopped working",
+              "optionText": "It's never too late to learn.",
+              "optionHighlight": "never too late to learn",
+              "explanation": "原文强调他从不停止工作、从不退休，落点在“坚持”而非“学习”；该谚语把主旨偷换为“学习永不嫌晚”，超出文意范围。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2021-jun-reading-a-3",
+                "quote": "He never stopped working, never retired.",
+                "anchor": "落点是坚持而非学习"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "有志者，事竟成。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-zj-2021-jun-reading-a-4",
+                "quote": "He showed us that even a single desire, never given up on, can make for a remarkable life.",
+                "anchor": "坚持单一愿望成就非凡人生"
+              },
+              {
+                "role": "secondary",
+                "paragraphId": "para-zj-2021-jun-reading-a-4",
+                "quote": "He built a hugely successful career with little more than plain old hard work and determination.",
+                "anchor": "凭努力与决心建立辉煌事业"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Where there's a will there's a way.",
+            "sourceRole": "correctOption",
+            "targetText": "He showed us that even a single desire, never given up on, can make for a remarkable life.",
+            "targetParagraphId": "para-zj-2021-jun-reading-a-4",
+            "relationType": "paraphrase",
+            "note": "正确项谚语 Where there's a will there's a way（有志者事竟成）正是对末段 a single desire, never given up on, can make for a remarkable life 的寓意概括——will 对应 desire/determination，a way 对应 remarkable life。"
+          },
+          {
+            "sourceText": "career story tell us",
+            "sourceRole": "stem",
+            "targetText": "He built a hugely successful career with little more than plain old hard work and determination.",
+            "targetParagraphId": "para-zj-2021-jun-reading-a-4",
+            "relationType": "locationCue",
+            "note": "题干问 career story 的启示，定位至末段总结句，hard work and determination 提示坚持/意志这一主旨方向。"
+          }
+        ]
+      },
+      "q-zj-2021-jun-024": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查对第一段中作者自家孩子所存在问题的细节理解。",
+        "stemTranslationZh": "作者的孩子存在什么问题？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "他们经常惹恼邻居。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "where neighbourhood children gather to play",
+              "optionText": "They often annoy the neighbours.",
+              "matchType": "wordFamily",
+              "relationNote": "原文只提到 neighbourhood（邻里）的孩子聚在公园玩，选项借用 neighbours（邻居）这一同词族词制造干扰，原文从未说作者的孩子惹恼邻居。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2021-jun-reading-b-1",
+                "quote": "where neighbourhood children gather to play",
+                "anchor": "neighbourhood children gather to play"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "他们厌倦了做作业。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "They are tired of doing their homework.",
+              "explanation": "原文未提及孩子做作业或厌倦作业，纯属无中生有。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "他们没有朋友一起玩。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "negationReversal",
+              "sourceQuote": "There are two parks less than 10 minutes’ walk from home where neighbourhood children gather to play.",
+              "sourceHighlight": "neighbourhood children gather to play",
+              "optionText": "They have no friends to play with.",
+              "optionHighlight": "no friends to play with",
+              "explanation": "原文说附近公园里有邻里孩子聚在一起玩，说明并不缺玩伴；选项却说“没有朋友一起玩”，与原文事实相反。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2021-jun-reading-b-1",
+                "quote": "where neighbourhood children gather to play",
+                "anchor": "孩子可以聚在一起玩"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "他们在屏幕前待的时间太长。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-zj-2021-jun-reading-b-1",
+                "quote": "what my children want to do after school is pick up a screen – any screen – and stare at it for hours",
+                "anchor": "放学后只想盯着屏幕看好几个小时"
+              },
+              {
+                "role": "support",
+                "paragraphId": "para-zj-2021-jun-reading-b-1",
+                "quote": "Today’s children spend an average of four and a half hours a day looking at screens",
+                "anchor": "每天平均四个半小时看屏幕"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "They stay in front of screens for too long.",
+            "sourceRole": "correctOption",
+            "targetText": "stare at it for hours",
+            "targetParagraphId": "para-zj-2021-jun-reading-b-1",
+            "relationType": "paraphrase",
+            "note": "选项用 stay in front of screens for too long 概括原文 stare at it (a screen) for hours，for too long 对应 for hours。"
+          }
+        ]
+      },
+      "q-zj-2021-jun-025": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查对第二段中David Bond宣传其理念所采取方式的细节理解。",
+        "stemTranslationZh": "David Bond是如何宣传他的理念的？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "通过制作一部纪录片。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-zj-2021-jun-reading-b-2",
+                "quote": "He documented his journey as he set about treating nature as a brand to be marketed to young people. The result was Project Wild Thing, a film which charts the birth of the Wild Network",
+                "anchor": "记录历程并拍成电影Project Wild Thing"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "通过组织户外活动。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "getting children out into nature",
+              "optionText": "By organizing outdoor activities.",
+              "matchType": "wordFamily",
+              "relationNote": "原文 getting children out into nature 与 outdoor（户外）语义相关，易让人误以为他靠“组织户外活动”宣传；但宣传手段是拍纪录片，而非组织户外活动。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2021-jun-reading-b-2",
+                "quote": "getting children out into nature",
+                "anchor": "让孩子走进自然"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "通过在伦敦媒体上做广告。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "being a London media type",
+              "optionText": "By advertising in London media.",
+              "matchType": "exact",
+              "relationNote": "原文 London media 只是说明David Bond本人的媒体人身份，选项原词照搬 London media 并曲解为“在伦敦媒体上打广告”，属偷换。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2021-jun-reading-b-2",
+                "quote": "being a London media type",
+                "anchor": "他本人是伦敦媒体人"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "通过建立一个朋友网络。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "the birth of the Wild Network, a group of organisations with the common goal of getting children out into nature",
+              "sourceEntity": "the Wild Network, a group of organisations",
+              "optionText": "By creating a network of friends.",
+              "optionEntity": "a network of friends",
+              "explanation": "原文的 Wild Network 是“组织联盟”（a group of organisations），而非“朋友网络”；且它是纪录片催生的结果，并非宣传手段本身，对象与性质都被错配。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2021-jun-reading-b-2",
+                "quote": "the birth of the Wild Network, a group of organisations",
+                "anchor": "Wild Network是组织联盟"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "By making a documentary film.",
+            "sourceRole": "correctOption",
+            "targetText": "The result was Project Wild Thing, a film",
+            "targetParagraphId": "para-zj-2021-jun-reading-b-2",
+            "relationType": "paraphrase",
+            "note": "选项 making a documentary film 对应原文 documented his journey 并拍成 a film（Project Wild Thing），documentary 与 documented 同词族。"
+          },
+          {
+            "sourceText": "advocate his idea",
+            "sourceRole": "stem",
+            "targetText": "treating nature as a brand to be marketed to young people",
+            "targetParagraphId": "para-zj-2021-jun-reading-b-2",
+            "relationType": "locationCue",
+            "note": "题干 advocate his idea（宣传理念）定位到原文把自然当品牌营销给年轻人这一做法，他借助拍片来推行该理念。"
+          }
+        ]
+      },
+      "q-zj-2021-jun-026": {
+        "skill": {
+          "primary": "wordMeaning"
+        },
+        "questionFocus": "考查根据语境推测第二段画线词 charts 的词义。",
+        "stemTranslationZh": "下列哪一项可以替换第二段中画线的单词“charts”？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "记录",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-zj-2021-jun-reading-b-2",
+                "quote": "He documented his journey as he set about treating nature as a brand to be marketed to young people. The result was Project Wild Thing, a film which charts the birth of the Wild Network",
+                "anchor": "前句 documented 提示 charts 意为“记录”"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "预测",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "predicts",
+              "explanation": "原文未提及对Wild Network诞生作任何预测，charts在此指对已发生过程的记录而非预测，原文未支持“预测”义。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "推迟",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "delays",
+              "explanation": "原文未提及推迟Wild Network的诞生，与上下文“记录其诞生”的语义无关，属无中生有。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "证实",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "confirms",
+              "explanation": "原文是说电影“记录”了Wild Network的诞生，并非去“证实”其诞生，confirms与语境不符，原文未支持该义。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "charts",
+            "sourceRole": "stem",
+            "targetText": "He documented his journey",
+            "targetParagraphId": "para-zj-2021-jun-reading-b-2",
+            "relationType": "paraphrase",
+            "note": "画线词 charts 与前句 documented 构成同义复现：a film which charts the birth = 记录Wild Network诞生的电影，故 charts ≈ records。"
+          }
+        ]
+      },
+      "q-zj-2021-jun-027": {
+        "skill": {
+          "primary": "title"
+        },
+        "questionFocus": "考查对全文主旨的把握，为文章选择最恰当的标题。",
+        "stemTranslationZh": "下列哪一项可以作为本文合适的标题？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "让孩子们玩得开心",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overgeneralization",
+              "sourceQuote": "Let us get them out and let them play.",
+              "sourceHighlight": "let them play",
+              "optionText": "Let Children Have Fun",
+              "optionHighlight": "Have Fun",
+              "explanation": "文末确有“让孩子出去玩”的呼吁，但全文核心是“把自然当品牌推销给孩子、让孩子回归户外”，泛泛的“让孩子玩得开心”范围过宽、丢失了“自然/户外”这一关键限定，概括不准。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2021-jun-reading-b-4",
+                "quote": "Let us get them out and let them play.",
+                "anchor": "让孩子出去玩"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "幼儿需要更多自由时间",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Young Children Need More Free Time",
+              "explanation": "原文讨论的是让孩子走出屏幕、走进自然，并未主张孩子需要“更多自由时间”，该标题在原文中没有依据。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "向孩子推销自然",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-zj-2021-jun-reading-b-2",
+                "quote": "treating nature as a brand to be marketed to young people",
+                "anchor": "把自然当品牌推销给年轻人"
+              },
+              {
+                "role": "support",
+                "paragraphId": "para-zj-2021-jun-reading-b-2",
+                "quote": "appointed himself “marketing director for Nature”",
+                "anchor": "自封“自然的营销总监”"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "David Bond：孩子们的榜样",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "understatement",
+              "sourceQuote": "appointed himself “marketing director for Nature”",
+              "sourceHighlight": "marketing director for Nature",
+              "optionText": "David Bond: A Role Model for Children",
+              "optionHighlight": "A Role Model for Children",
+              "explanation": "David Bond只是文中用来阐释“向孩子推销自然”这一主旨的例子，且原文并未称他是孩子的榜样；以单个人物为题以偏概全，无法涵盖全文主旨。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2021-jun-reading-b-2",
+                "quote": "appointed himself “marketing director for Nature”",
+                "anchor": "David Bond只是论证主旨的例子"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Market Nature to Children",
+            "sourceRole": "correctOption",
+            "targetText": "treating nature as a brand to be marketed to young people",
+            "targetParagraphId": "para-zj-2021-jun-reading-b-2",
+            "relationType": "paraphrase",
+            "note": "标题 Market Nature to Children 与原文 nature as a brand to be marketed to young people 同义：market（动词，推销）对应 be marketed，children 对应 young people。"
+          }
+        ]
+      },
+      "q-zj-2021-jun-028": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查对全文研究核心内容的把握，即这项新研究关注的是狗的哪种能力。",
+        "stemTranslationZh": "这项新研究关注的是狗能否__________。",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "分辨形状",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "研究关注狗能否分辨形状",
+              "explanation": "原文未提及狗分辨\"形状\"的能力。研究对象始终是人类面部表情（happy/angry faces），与几何形状无关。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "理解人类的面孔",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-zj-2021-jun-reading-c-1",
+                "quote": "Dogs may indeed be able to distinguish between happy and angry human faces, according to a new study.",
+                "anchor": "新研究：狗能区分高兴与生气的人脸"
+              },
+              {
+                "role": "support",
+                "paragraphId": "para-zj-2021-jun-reading-c-2",
+                "quote": "The researchers then tested the dogs’ ability to distinguish between human facial expressions",
+                "anchor": "测试狗区分人类面部表情的能力"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "感到高兴或生气",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "Researchers trained a group of 11 dogs to distinguish between images (图像) of the same person making either a happy or an angry face.",
+              "sourceEntity": "a happy or an angry face（人所做的高兴或生气的表情）",
+              "optionText": "feel happy or angry",
+              "optionEntity": "dogs feel happy or angry（狗自身感到高兴或生气）",
+              "explanation": "原文中high兴/生气是被观察的\"人脸表情\"，研究的是狗去\"识别\"这些表情，而非狗自身\"感受\"情绪。选项把情绪主体由\"被识别的人\"错配成\"狗\"。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "彼此交流",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "研究关注狗能否彼此交流",
+              "explanation": "原文未提及狗之间相互交流的内容。研究聚焦狗对人类面部表情的辨别能力，与狗群内部沟通无关。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "make sense of human faces",
+            "sourceRole": "correctOption",
+            "targetText": "distinguish between happy and angry human faces",
+            "targetParagraphId": "para-zj-2021-jun-reading-c-1",
+            "relationType": "paraphrase",
+            "note": "正确选项用 make sense of human faces（理解人脸）概括原文 distinguish between happy and angry human faces（区分高兴与生气的人脸），二者为同义替换。"
+          },
+          {
+            "sourceText": "The new study focused on",
+            "sourceRole": "stem",
+            "targetText": "according to a new study",
+            "targetParagraphId": "para-zj-2021-jun-reading-c-1",
+            "relationType": "locationCue",
+            "note": "题干 The new study 对应首段 a new study，定位到研究核心发现所在句。"
+          }
+        ]
+      },
+      "q-zj-2021-jun-029": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查对第二段实验细节的理解，即从训练阶段到测试阶段所用图片的关系。",
+        "stemTranslationZh": "从第二段我们可以了解到关于这项研究的什么信息？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "研究者按随机顺序测试这些狗。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "more often than one would expect by random chance",
+              "optionText": "Researchers tested the dogs in random order.",
+              "matchType": "wordFamily",
+              "relationNote": "选项借用原文 random chance 中的 random 一词制造干扰。原文 random 修饰的是\"随机概率\"（成功率高于偶然水平），并非指\"测试顺序随机\"。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2021-jun-reading-c-2",
+                "quote": "more often than one would expect by random chance",
+                "anchor": "高于随机概率（非测试顺序随机）"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "训练期间采用了多种方法。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "训练期间采用了多种多样的方法",
+              "explanation": "原文未提及训练采用\"多种方法\"。第二段只描述了训练时给狗看人脸的上半部分或下半部分这一种做法，并未说明使用了多样化的训练手段。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "两个阶段所用的图片是不同的。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-zj-2021-jun-reading-c-2",
+                "quote": "The researchers then tested the dogs’ ability to distinguish between human facial expressions by showing them the other half of the person’s face or images totally different from the ones used in training.",
+                "anchor": "测试用另一半脸或与训练完全不同的图片"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "这些狗在测试前被拍了照。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "During the training stage, each dog was shown only the upper half or the lower half of the person’s face.",
+              "sourceEntity": "the person’s face（被拍摄/展示的是人的脸）",
+              "optionText": "The dogs were photographed before the test.",
+              "optionEntity": "The dogs were photographed（被拍摄的是狗）",
+              "explanation": "原文中被展示在图像里的是\"人\"的脸，狗是观看者；选项把被拍摄对象错配成\"狗\"，与原文不符。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Pictures used in the two stages were different",
+            "sourceRole": "correctOption",
+            "targetText": "images totally different from the ones used in training",
+            "targetParagraphId": "para-zj-2021-jun-reading-c-2",
+            "relationType": "paraphrase",
+            "note": "正确选项 Pictures used in the two stages were different 对应原文 images totally different from the ones used in training，将\"测试图片与训练图片完全不同\"概括为\"两阶段图片不同\"。"
+          }
+        ]
+      },
+      "q-zj-2021-jun-030": {
+        "skill": {
+          "primary": "mainIdea"
+        },
+        "questionFocus": "考查对末段主旨的概括，即最后一段主要讲了什么内容。",
+        "stemTranslationZh": "最后一段主要讲的是什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "对未来研究的一条建议。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "最后一段是对未来研究提出建议",
+              "explanation": "原文未提及对今后研究的任何建议。末段讨论的是狗具备识别表情能力的可能原因，而非提出后续研究方向。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "对研究发现的一个可能原因。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-zj-2021-jun-reading-c-5",
+                "quote": "the most likely explanation appears to be that the basis lies in their living with humans, which gives them a lot of exposure to human facial expressions",
+                "anchor": "最可能的解释：与人共同生活、大量接触人脸"
+              },
+              {
+                "role": "support",
+                "paragraphId": "para-zj-2021-jun-reading-c-5",
+                "quote": "it is not clear why dogs seem to be equipped with the ability to recognize different facial expressions in humans",
+                "anchor": "尚不清楚狗为何具备识别表情的能力（引出原因探讨）"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "研究的一个主要局限。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "it is not clear why dogs seem to be equipped with the ability to recognize different facial expressions in humans",
+              "optionText": "A major limitation of the study.",
+              "matchType": "wordFamily",
+              "relationNote": "末段 it is not clear why（尚不清楚原因）易被误读为研究存在\"局限\"。但该句是为引出对成因的推测，整段重心在给出\"可能原因\"，并非陈述研究的不足之处。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2021-jun-reading-c-5",
+                "quote": "it is not clear why dogs seem to be equipped with the ability to recognize different facial expressions in humans",
+                "anchor": "尚不清楚原因（引出推测，非陈述局限）"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "对研究方法的一个说明。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overgeneralization",
+              "sourceQuote": "this exposure has provided them with many chances to learn to distinguish between them",
+              "sourceHighlight": "many chances to learn to distinguish",
+              "optionText": "An explanation of the research method.",
+              "optionHighlight": "the research method",
+              "explanation": "对研究方法（训练与测试过程）的说明出现在第二段，而非末段。末段说明的是狗习得该能力的\"原因\"，选项把末段内容偷换成\"研究方法\"，张冠李戴。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "A possible reason for the study findings",
+            "sourceRole": "correctOption",
+            "targetText": "the most likely explanation appears to be that the basis lies in their living with humans",
+            "targetParagraphId": "para-zj-2021-jun-reading-c-5",
+            "relationType": "paraphrase",
+            "note": "正确选项 A possible reason（一个可能原因）对应末段 the most likely explanation（最可能的解释），possible reason 与 likely explanation 为同义替换。"
+          }
+        ]
+      }
+    }
+  }
+}

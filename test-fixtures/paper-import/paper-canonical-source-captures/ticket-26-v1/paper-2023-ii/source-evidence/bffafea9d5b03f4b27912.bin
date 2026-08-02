@@ -1,0 +1,104 @@
+{
+  "schemaVersion": "import-meta-v1",
+  "paperId": "paper-2023-ii",
+  "sourceFileName": "2023年新课标Ⅱ卷-答案版.docx",
+  "sourceFileSha256": "26d167ff95e75c04c7693faa37f779cb7459127f2c660e796f69b486bc615ea6",
+  "importedBy": "paper-import-ai",
+  "importedAt": "2026-06-05T07:27:41.775Z",
+  "paper": {
+    "year": 2023,
+    "region": "全国新课标Ⅱ",
+    "paperName": "2023年新课标Ⅱ卷",
+    "examCode": "2023-ii",
+    "subject": "English",
+    "sourceType": "真题",
+    "defaultTags": [
+      "真题",
+      "2023",
+      "新课标Ⅱ卷"
+    ]
+  },
+  "groups": {
+    "group-2023-ii-reading-a": {
+      "groupId": "group-2023-ii-reading-a",
+      "difficulty": "中",
+      "summary": "一篇应用文，介绍黄石国家公园今年夏季提供的四个护林员（ranger）项目，分别列出每个项目的名称、举办日期、活动内容和集合地点。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading A"
+    },
+    "group-2023-ii-reading-b": {
+      "groupId": "group-2023-ii-reading-b",
+      "difficulty": "中",
+      "summary": "本文介绍 Abby Jaramillo 与另一位教师创办的校园园艺项目 Urban Sprouts，该项目面向低收入学校的中学生，旨在培养科学技能、环保意识与健康生活方式，并讲述项目的开展、挑战及其超越营养层面的多重积极影响。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading B"
+    },
+    "group-2023-ii-reading-c": {
+      "groupId": "group-2023-ii-reading-c",
+      "difficulty": "中",
+      "summary": "本文是一本名为《Reading Art: Art for Book Lovers》画册的导言，介绍该书如何用近三百件艺术作品来呈现“书与阅读”这一日常主题，并探讨书籍在艺术中的象征意义以及纸质书在数字时代依然不可替代的价值。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading C"
+    },
+    "group-2023-ii-reading-d": {
+      "groupId": "group-2023-ii-reading-d",
+      "difficulty": "中",
+      "summary": "本文是一篇科普说明文，介绍了一项关于城市自然环境对人类福祉重要性的研究。研究团队通过编码公园游客的自然体验，提炼出一套“自然语言”，帮助人们识别并参与对自己最有意义的自然活动，并强调要保护自然以便人与自然互动。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading D"
+    },
+    "group-2023-ii-seven-choices": {
+      "groupId": "group-2023-ii-seven-choices",
+      "difficulty": "中",
+      "summary": "本文是一位在社交媒体分享创作历程的画家写给艺术初学者的建议短文，以若干条分点小贴士（start small、paint often、challenge yourself、share your work 等）展开。七选五的五个空分布在各条建议内部或开头，需要根据每条建议的话题场与前后句的衔接关系，选出概括或承接的句子。",
+      "tags": [
+        "七选五"
+      ],
+      "displayTitleOverride": "七选五"
+    },
+    "group-2023-ii-cloze": {
+      "groupId": "group-2023-ii-cloze",
+      "difficulty": "中",
+      "summary": "完形填空",
+      "tags": [
+        "完形填空"
+      ],
+      "displayTitleOverride": "完形填空"
+    },
+    "group-2023-ii-grammar-fill": {
+      "groupId": "group-2023-ii-grammar-fill",
+      "difficulty": "中",
+      "summary": "语法填空",
+      "tags": [
+        "语法填空"
+      ],
+      "displayTitleOverride": "语法填空"
+    },
+    "group-2023-ii-writing-application": {
+      "groupId": "group-2023-ii-writing-application",
+      "difficulty": "中",
+      "summary": "应用文写作",
+      "tags": [
+        "应用文写作"
+      ],
+      "displayTitleOverride": "应用文写作"
+    },
+    "group-2023-ii-writing-continuation": {
+      "groupId": "group-2023-ii-writing-continuation",
+      "difficulty": "中",
+      "summary": "读后续写",
+      "tags": [
+        "读后续写"
+      ],
+      "displayTitleOverride": "读后续写"
+    }
+  }
+}

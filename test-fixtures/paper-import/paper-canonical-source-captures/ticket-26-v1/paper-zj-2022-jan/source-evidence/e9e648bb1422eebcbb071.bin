@@ -1,0 +1,96 @@
+{
+  "schemaVersion": "import-meta-v1",
+  "paperId": "paper-zj-2022-jan",
+  "sourceFileName": "2022年浙江卷高考真题英语试卷（1月）-答案版.docx",
+  "sourceFileSha256": "9c87c643ca84e3f2b5979ec1b65fc8a3628ec3661f5b8123c6338514bb4f92cf",
+  "importedBy": "paper-import-ai",
+  "importedAt": "2026-06-18T14:47:45.078Z",
+  "paper": {
+    "year": 2022,
+    "region": "浙江",
+    "paperName": "2022年1月浙江卷",
+    "examCode": "zj-2022-jan",
+    "subject": "English",
+    "sourceType": "真题",
+    "defaultTags": [
+      "真题",
+      "2022",
+      "浙江卷",
+      "1月"
+    ]
+  },
+  "groups": {
+    "group-zj-2022-jan-reading-a": {
+      "groupId": "group-zj-2022-jan-reading-a",
+      "difficulty": "中",
+      "summary": "记叙文。讲述 Merebeth 由地产公司办公室经理转行成为自雇宠物运输专员的经历，以及她对四处漫游（wanderlust）的热爱、这份热爱的来源（父亲）和她独立自主的工作状态。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading A"
+    },
+    "group-zj-2022-jan-reading-b": {
+      "groupId": "group-zj-2022-jan-reading-b",
+      "difficulty": "中",
+      "summary": "本文是一篇书评，评介历史学家 Maury Klein 的著作 The Power Makers: Steam, Electricity, and the Men Who Invented Modern America。文章先指出电力是美国崛起的命脉，再说明电力时代实为蒸汽时代的第二阶段，随后按时间梳理书中讲述的蒸汽机与电力革命的发展，最后点评作者用虚构人物 Ned 串联叙事的写作手法。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading B"
+    },
+    "group-zj-2022-jan-reading-c": {
+      "groupId": "group-zj-2022-jan-reading-c",
+      "difficulty": "中",
+      "summary": "本文是一篇科普说明文，报道一项瑞典研究的发现：中年时心血管体能良好的女性日后患失智症的风险显著更低，即使患病也会推迟约十年。文章按照「引出新发现—专家评价—研究方法与分组—结果数据—研究局限」的顺序展开。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading C"
+    },
+    "group-zj-2022-jan-seven-choices": {
+      "groupId": "group-zj-2022-jan-seven-choices",
+      "difficulty": "中",
+      "summary": "本文是一篇讲时间管理的说明文。作者以「同样的24小时」开篇，提出自己通过若干具体选择把每一天用到极致，同时保持快乐与放松，随后用若干带小标题的段落逐条给出建议：分清主次、围绕意义做选择、停止在各项之间硬性平衡时间而改为合并活动、做主动学习者、放轻松。七选五的五个空分别落在文章引出句、两个段落小标题位、一个段落中段衔接位和结尾段，考查总起句、小标题概括以及指代/逻辑衔接。",
+      "tags": [
+        "七选五"
+      ],
+      "displayTitleOverride": "七选五"
+    },
+    "group-zj-2022-jan-cloze": {
+      "groupId": "group-zj-2022-jan-cloze",
+      "difficulty": "中",
+      "summary": "完形填空",
+      "tags": [
+        "完形填空"
+      ],
+      "displayTitleOverride": "完形填空"
+    },
+    "group-zj-2022-jan-grammar-fill": {
+      "groupId": "group-zj-2022-jan-grammar-fill",
+      "difficulty": "中",
+      "summary": "语法填空",
+      "tags": [
+        "语法填空"
+      ],
+      "displayTitleOverride": "语法填空"
+    },
+    "group-zj-2022-jan-writing-application": {
+      "groupId": "group-zj-2022-jan-writing-application",
+      "difficulty": "中",
+      "summary": "应用文写作",
+      "tags": [
+        "应用文写作"
+      ],
+      "displayTitleOverride": "应用文写作"
+    },
+    "group-zj-2022-jan-writing-continuation": {
+      "groupId": "group-zj-2022-jan-writing-continuation",
+      "difficulty": "中",
+      "summary": "读后续写",
+      "tags": [
+        "读后续写"
+      ],
+      "displayTitleOverride": "读后续写"
+    }
+  }
+}

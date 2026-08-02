@@ -1,0 +1,86 @@
+{
+  "schemaVersion": "import-meta-v1",
+  "paperId": "paper-2023-jia",
+  "sourceFileName": "2023年全国甲卷-答案版.docx",
+  "sourceFileSha256": "a9c98aed8c9073e6cb843178ef38e47da184e5e1d20dfa810c0357848e62f8f1",
+  "importedBy": "paper-import-ai",
+  "importedAt": "2026-06-19T09:01:44.506Z",
+  "paper": {
+    "year": 2023,
+    "region": "全国甲卷",
+    "paperName": "2023年全国甲卷",
+    "examCode": "2023-jia",
+    "subject": "English",
+    "sourceType": "真题",
+    "defaultTags": [
+      "真题",
+      "2023",
+      "全国甲卷"
+    ]
+  },
+  "groups": {
+    "group-2023-jia-reading-a": {
+      "groupId": "group-2023-jia-reading-a",
+      "difficulty": "中",
+      "summary": "一篇曼谷美食指南类应用文，逐一介绍曼谷五家值得一去的餐厅（Nahm、Issaya Siamese Club、Bo. lan、Gaggan），每家给出主厨、菜式风格、地位排名与就餐氛围等信息，属于典型的高考阅读 A 篇广告/指南文体。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading A"
+    },
+    "group-2023-jia-reading-b": {
+      "groupId": "group-2023-jia-reading-b",
+      "difficulty": "中",
+      "summary": "本文是一篇人物报道，讲述26岁的Terri Bolton热爱并擅长DIY（自己动手），其技能源自已故的祖父、建筑工人Derek Lloyd；文章还引出一项新研究，说明DIY正日益流行且由女性引领潮流。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading B"
+    },
+    "group-2023-jia-reading-c": {
+      "groupId": "group-2023-jia-reading-c",
+      "difficulty": "中",
+      "summary": "本文是一篇书评，作者讲述自己少年时因一本哲学入门书爱上哲学，大学时期热情被浇灭，后来 Eric Weiner 的《The Socrates Express》重新唤起了他对哲学的热爱，并向读者推荐这本书。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading C"
+    },
+    "group-2023-jia-reading-d": {
+      "groupId": "group-2023-jia-reading-d",
+      "difficulty": "中",
+      "summary": "本文是一篇说明文，介绍灰熊（grizzly bears）在美国的处境与种群恢复历程：人们对它既敬畏又恐惧；它一度因猎杀濒临灭绝，1975 年被列入《濒危物种法》后受到法律保护，种群逐步恢复；如今数量回升又引发是否撤销保护的争议；最后说明只要人们采取预防措施，便能与灰熊和平共处。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading D"
+    },
+    "group-2023-jia-seven-choices": {
+      "groupId": "group-2023-jia-seven-choices",
+      "difficulty": "中",
+      "summary": "本文是一篇说明文，主题为如何成为更有耐心的人（Tricks To Becoming A More Patient Person）。文章先以谜语点出交通堵塞、排长队、等待假期开始这些场景的共同点——都需要一点额外的耐心，随后在数字时代背景下分小标题给出培养耐心的几个技巧：练习感恩、让自己学会等待、接受不适。七选五考查在小标题和段落内填入能与上下文衔接的句子。",
+      "tags": [
+        "七选五"
+      ],
+      "displayTitleOverride": "七选五"
+    },
+    "group-2023-jia-cloze": {
+      "groupId": "group-2023-jia-cloze",
+      "difficulty": "中",
+      "summary": "完形填空",
+      "tags": [
+        "完形填空"
+      ],
+      "displayTitleOverride": "完形填空"
+    },
+    "group-2023-jia-grammar-fill": {
+      "groupId": "group-2023-jia-grammar-fill",
+      "difficulty": "中",
+      "summary": "语法填空",
+      "tags": [
+        "语法填空"
+      ],
+      "displayTitleOverride": "语法填空"
+    }
+  }
+}
