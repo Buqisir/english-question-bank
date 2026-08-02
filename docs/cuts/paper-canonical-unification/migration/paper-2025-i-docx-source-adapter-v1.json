@@ -17,22 +17,22 @@
     "producer": [
       {
         "path": "server/paper-canonical/docxSourceAdapter.mjs",
-        "sha256": "a6d6bd4d8f5a8bba47f5d7f1fb08aa7fc53ef4353c6df4e9c013892e239563f1"
+        "sha256": "6dacea8a42370016ae6b98922d4e1ef6c6447a879189a8a07ae993856b07cc90"
       },
       {
         "path": "test-fixtures/paper-import/paper-2025-i-docx-source-adapter/sourceProof.mjs",
-        "sha256": "8760f1e2e297631aa99ff1b763996c2b8e239ff5b0b907654d295a4d7534aeac"
+        "sha256": "4810afb121ee46f03b35490213c034d72a502c226a4bf74de9a26129713e9678"
       },
       {
         "path": "shared/paper-canonical/compiler.mjs",
-        "sha256": "a6a3ebec275a68ebc9413b75198ad47545ebf9951a7ad7d366234a76d9afcdbe"
+        "sha256": "b020d1e75f61100f19915e21272c9dcfc380859be45d39859c47ec6c922ba35f"
       }
     ]
   },
-  "ready": {
-    "disposition": "ready",
+  "failClosed": {
+    "disposition": "incomplete_source",
     "profileId": "nck1",
-    "familyCounts": {
+    "derivedFamilyCounts": {
       "reading": 4,
       "seven-choices": 1,
       "cloze": 1,
@@ -41,34 +41,238 @@
       "continuation-writing": 1
     },
     "officialAnswerCount": 45,
-    "inactiveListeningSourceProof": [
-      {
-        "slotId": "listening.short-dialogue",
-        "questionCount": 5,
-        "officialAnswerCount": 5,
-        "optionLabels": "ABC"
+    "inactiveListeningSourceProof": {
+      "sourceSlice": {
+        "kind": "docx_extracted_text_range",
+        "documentXmlCompressedRange": {
+          "start": 1222,
+          "end": 18916
+        },
+        "extractedTextStart": 18,
+        "extractedTextEnd": 2630,
+        "extractedTextDigest": "sha256:36093dc0115b0f52028f93025ece45bb0b11fcf7cec71d5998fcd145a57713dd"
       },
-      {
-        "slotId": "listening.long-form",
-        "questionCount": 15,
-        "officialAnswerCount": 15,
-        "optionLabels": "ABC"
-      }
-    ],
-    "inactiveSlots": [
-      {
-        "slotId": "listening.short-dialogue",
-        "status": "closed",
-        "officialAnswerCount": 5
+      "questions": [
+        {
+          "questionNo": 1,
+          "stem": "What will the man do next?",
+          "options": {
+            "A": "Unpack his suitcase.",
+            "B": "Board a flight.",
+            "C": "Fill out a form."
+          },
+          "answer": "C"
+        },
+        {
+          "questionNo": 2,
+          "stem": "What does Sarah plan to do after graduation?",
+          "options": {
+            "A": "Do volunteer work.",
+            "B": "Pursue a higher degree.",
+            "C": "Run the family business."
+          },
+          "answer": "A"
+        },
+        {
+          "questionNo": 3,
+          "stem": "What are the speakers talking about?",
+          "options": {
+            "A": "Buying a car.",
+            "B": "Moving house.",
+            "C": "Fixing the window."
+          },
+          "answer": "B"
+        },
+        {
+          "questionNo": 4,
+          "stem": "What does the woman think of the ski area?",
+          "options": {
+            "A": "It's a bit crowded.",
+            "B": "It has poor snow.",
+            "C": "It's too far away."
+          },
+          "answer": "A"
+        },
+        {
+          "questionNo": 5,
+          "stem": "Where are the speakers heading?",
+          "options": {
+            "A": "The Art Centre.",
+            "B": "The Grand Theatre.",
+            "C": "The Stone Bridge."
+          },
+          "answer": "B"
+        },
+        {
+          "questionNo": 6,
+          "stem": "What did the woman do?",
+          "options": {
+            "A": "She went over the speed limit.",
+            "B": "She parked in a school zone.",
+            "C": "She drove through a red light."
+          },
+          "answer": "A"
+        },
+        {
+          "questionNo": 7,
+          "stem": "What time does school finish on Wednesdays?",
+          "options": {
+            "A": "At 2:00 pm.",
+            "B": "At 2:30 pm.",
+            "C": "At 3:30 pm."
+          },
+          "answer": "A"
+        },
+        {
+          "questionNo": 8,
+          "stem": "What is the relationship between the speakers?",
+          "options": {
+            "A": "Fellow workers.",
+            "B": "Former schoolmates.",
+            "C": "Family relatives."
+          },
+          "answer": "B"
+        },
+        {
+          "questionNo": 9,
+          "stem": "Who will Grace have dinner with?",
+          "options": {
+            "A": "Fiona.",
+            "B": "Jennifer.",
+            "C": "David."
+          },
+          "answer": "C"
+        },
+        {
+          "questionNo": 10,
+          "stem": "What is Kevin going to do next?",
+          "options": {
+            "A": "Buy a drink.",
+            "B": "Play basketball.",
+            "C": "Greet a friend."
+          },
+          "answer": "C"
+        },
+        {
+          "questionNo": 11,
+          "stem": "What does the woman say about news programs?",
+          "options": {
+            "A": "They are replaced by documentaries.",
+            "B": "They have been reduced in number.",
+            "C": "They focus on the life of celebrities."
+          },
+          "answer": "B"
+        },
+        {
+          "questionNo": 12,
+          "stem": "What is the man's attitude toward reality shows?",
+          "options": {
+            "A": "Favorable.",
+            "B": "Critical.",
+            "C": "Uncertain."
+          },
+          "answer": "A"
+        },
+        {
+          "questionNo": 13,
+          "stem": "What does the woman expect TV programs to be?",
+          "options": {
+            "A": "Educational.",
+            "B": "Diverse.",
+            "C": "Entertaining."
+          },
+          "answer": "A"
+        },
+        {
+          "questionNo": 14,
+          "stem": "Who is Cathy?",
+          "options": {
+            "A": "A school teacher.",
+            "B": "A radio host.",
+            "C": "A government official."
+          },
+          "answer": "B"
+        },
+        {
+          "questionNo": 15,
+          "stem": "What can the visiting adults do in the school?",
+          "options": {
+            "A": "Give speeches.",
+            "B": "Observe classes.",
+            "C": "Organize activities."
+          },
+          "answer": "B"
+        },
+        {
+          "questionNo": 16,
+          "stem": "How can the students benefit from the school program?",
+          "options": {
+            "A": "Earn extra credits",
+            "B": "Find job opportunities.",
+            "C": "Learn about adult's life."
+          },
+          "answer": "C"
+        },
+        {
+          "questionNo": 17,
+          "stem": "What is the goal of the school program?",
+          "options": {
+            "A": "To improve student-teacher relationship.",
+            "B": "To promote the idea of work-life balance.",
+            "C": "To enhance school-community interaction."
+          },
+          "answer": "C"
+        },
+        {
+          "questionNo": 18,
+          "stem": "Where is the speaker's city located?",
+          "options": {
+            "A": "By the lake.",
+            "B": "On the coast.",
+            "C": "In the Valley."
+          },
+          "answer": "B"
+        },
+        {
+          "questionNo": 19,
+          "stem": "What do the numbers on the signs stand for?",
+          "options": {
+            "A": "The duration of flooding.",
+            "B": "The rise in air temperature.",
+            "C": "The height above sea level."
+          },
+          "answer": "C"
+        },
+        {
+          "questionNo": 20,
+          "stem": "What does the success of the project indicate?",
+          "options": {
+            "A": "Art can make a difference.",
+            "B": "The homeowners are creative.",
+            "C": "Climate change is controllable."
+          },
+          "answer": "A"
+        }
+      ],
+      "transcript": {
+        "expectedSegmentCount": 10,
+        "segmentIds": [],
+        "segments": [],
+        "coverage": "incomplete_source"
       },
-      {
-        "slotId": "listening.long-form",
-        "status": "closed",
-        "officialAnswerCount": 15
+      "timing": {
+        "disposition": "not_supplied"
+      },
+      "audio": {
+        "disposition": "not_supplied",
+        "packageEntries": []
       }
+    },
+    "inactiveSlots": [],
+    "diagnosticCodes": [
+      "DOCX_LISTENING_SOURCE_INCOMPLETE"
     ],
-    "diagnosticCodes": [],
-    "compilationDigest": "sha256:af6c5f0b5be0e21eb3e207f951b44a7df721209d910e5c8bff8e520690017ea8"
+    "compilationDigest": "sha256:16d0286d83cc5873215026727de8ea747c7f83964359adad2c2d8e6e7b53ced0"
   },
   "capacity": {
     "baseline": {
@@ -87,18 +291,20 @@
     "actual": {
       "model": "ticket-25-docx-source-adapter-inspection-units-v1",
       "sourceDocumentCount": 2,
-      "sourceDocumentByteLength": 214092,
-      "diagnosticCount": 0,
-      "diagnosticCodes": [],
-      "inspectionWorkUnits": 22,
+      "sourceDocumentByteLength": 210377,
+      "diagnosticCount": 1,
+      "diagnosticCodes": [
+        "DOCX_LISTENING_SOURCE_INCOMPLETE"
+      ],
+      "inspectionWorkUnits": 29,
       "risk": {
         "model": "ticket-25-source-adapter-risk-points-v1",
         "sourceAdapterUnavailable": false,
         "profileUnproven": false,
-        "inactiveClosureUnclassified": false,
-        "diagnosticCodeCount": 0,
-        "riskPoints": 0,
-        "band": "low"
+        "inactiveClosureUnclassified": true,
+        "diagnosticCodeCount": 1,
+        "riskPoints": 8,
+        "band": "medium"
       }
     },
     "requestDocumentKeys": [

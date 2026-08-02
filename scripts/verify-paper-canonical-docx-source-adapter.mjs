@@ -135,18 +135,6 @@ function mutateEnvelope(request, mutate) {
   return candidate
 }
 
-function familyCounts(compilation) {
-  return Object.fromEntries(
-    compilation.artifacts.canonicalPaper.questionGroups
-      .reduce((counts, group) => {
-        const family = group.variant.family
-        counts.set(family, (counts.get(family) || 0) + 1)
-        return counts
-      }, new Map())
-      .entries(),
-  )
-}
-
 function baseline() {
   const run = readJson(DRY_RUN_REL).runs.find(
     (candidate) => candidate.paperId === PAPER_ID,
@@ -174,6 +162,10 @@ function measure({ request, compilation, baselineRun }) {
   const actualUnits = sourceDocuments.length * 4
     + Math.ceil(documentByteLength / 16384)
     + diagnostics(compilation).length * 8
+  const inactiveClosureUnclassified = diagnosticCodes.includes(
+    'DOCX_LISTENING_SOURCE_INCOMPLETE',
+  )
+  const riskPoints = inactiveClosureUnclassified ? 8 : 0
   return {
     baseline: {
       inspectionWorkUnits: baselineRun.measuredCost.inspectionWorkUnits,
@@ -199,10 +191,10 @@ function measure({ request, compilation, baselineRun }) {
         model: 'ticket-25-source-adapter-risk-points-v1',
         sourceAdapterUnavailable: false,
         profileUnproven: false,
-        inactiveClosureUnclassified: false,
+        inactiveClosureUnclassified,
         diagnosticCodeCount: diagnosticCodes.length,
-        riskPoints: 0,
-        band: 'low',
+        riskPoints,
+        band: riskPoints === 0 ? 'low' : 'medium',
       },
     },
     requestDocumentKeys: request.evidence.documents.map((document) => document.inputKey),
@@ -217,20 +209,28 @@ assert.equal(sha256(docxBytes), EXPECTED_SOURCE.sha256)
 const proof = makePaper2025IDocxSourceProof(docxBytes)
 assert.deepEqual(proof.familyCounts, EXPECTED_FAMILIES)
 assert.equal(proof.officialAnswerCount, 45)
-assert.deepEqual(proof.inactiveListening, [
-  {
-    slotId: 'listening.short-dialogue',
-    questionCount: 5,
-    officialAnswerCount: 5,
-    optionLabels: 'ABC',
-  },
-  {
-    slotId: 'listening.long-form',
-    questionCount: 15,
-    officialAnswerCount: 15,
-    optionLabels: 'ABC',
-  },
-])
+assert.equal(proof.inactiveListening.questions.length, 20)
+assert.deepEqual(
+  proof.inactiveListening.questions.map((question) => question.questionNo),
+  Array.from({ length: 20 }, (_, index) => index + 1),
+)
+assert.equal(
+  proof.inactiveListening.questions.every((question) =>
+    Object.keys(question.options).join('') === 'ABC'
+    && Object.hasOwn(question.options, question.answer)),
+  true,
+)
+assert.deepEqual(proof.inactiveListening.transcript, {
+  expectedSegmentCount: 10,
+  segmentIds: [],
+  segments: [],
+  coverage: 'incomplete_source',
+})
+assert.deepEqual(proof.inactiveListening.timing, { disposition: 'not_supplied' })
+assert.deepEqual(proof.inactiveListening.audio, {
+  disposition: 'not_supplied',
+  packageEntries: [],
+})
 
 const request = buildDocxCanonicalImportRequest({
   docxBytes,
@@ -253,23 +253,12 @@ assert.equal(
 
 const first = compileCanonicalPaper(request)
 const second = compileCanonicalPaper(request)
-assert.equal(first.disposition, 'ready')
+assert.equal(first.disposition, 'incomplete_source')
 assert.equal(digestJson(first), digestJson(second), 'DOCX compilation must be deterministic')
-assert.deepEqual(familyCounts(first), EXPECTED_FAMILIES)
 assert.equal(first.artifacts.sourceCapture.assertions.length, 45)
-assert.deepEqual(
-  first.artifacts.normalizationReport.inactiveSourceClosures.map((closure) => ({
-    slotId: closure.slotId,
-    status: closure.status,
-    officialAnswerCount: closure.officialAnswerCount,
-  })),
-  [
-    { slotId: 'listening.short-dialogue', status: 'closed', officialAnswerCount: 5 },
-    { slotId: 'listening.long-form', status: 'closed', officialAnswerCount: 15 },
-  ],
-)
-assert.equal(first.artifacts.canonicalPaper.paperPlan.profileRef.profileId, 'nck1')
-assert.equal(diagnostics(first).length, 0)
+assertDiagnostic(first, 'DOCX_LISTENING_SOURCE_INCOMPLETE')
+assert.equal(Object.hasOwn(first.artifacts, 'canonicalPaper'), false)
+assert.deepEqual(first.artifacts.normalizationReport.inactiveSourceClosures, [])
 
 const missingDocument = structuredClone(request)
 missingDocument.evidence.documents = missingDocument.evidence.documents.filter(
@@ -287,6 +276,41 @@ rawDocument.bytes = new Uint8Array([...rawDocument.bytes, 0])
 const driftedResult = compileCanonicalPaper(driftedDocument)
 assert.notEqual(driftedResult.disposition, 'ready')
 assertDiagnostic(driftedResult, 'DOCX_SOURCE_DIGEST_MISMATCH')
+
+const forgedEnvelopeSemantics = mutateEnvelope(request, (envelope) => {
+  const reading = envelope.source.groups.find((group) => group.slotId === 'reading.a')
+  const text = reading?.content?.blocks?.[0]?.inlines?.find(
+    (inline) => inline.kind === 'text',
+  )
+  assert.ok(text, 'paper-2025-i source proof must expose one Reading A text node')
+  text.text = 'SYNCHRONIZED FORGERY NOT PRESENT IN THE IMMUTABLE DOCX'
+})
+const forgedEnvelopeResult = compileCanonicalPaper(forgedEnvelopeSemantics)
+assert.notEqual(
+  forgedEnvelopeResult.disposition,
+  'ready',
+  'caller-authored envelope semantics must not override the immutable DOCX',
+)
+assertDiagnostic(forgedEnvelopeResult, 'DOCX_SOURCE_DERIVATION_MISMATCH')
+
+const nonDocxBytes = new Uint8Array([0x00])
+const nonDocxSource = structuredClone(proof.source)
+nonDocxSource.profileInstructionSourceDigest = sha256(nonDocxBytes)
+for (const observation of nonDocxSource.observations) {
+  observation.span = { start: 0, end: nonDocxBytes.byteLength }
+}
+const synchronizedNonDocx = buildDocxCanonicalImportRequest({
+  docxBytes: nonDocxBytes,
+  source: nonDocxSource,
+  originalName: 'forged.docx',
+})
+const synchronizedNonDocxResult = compileCanonicalPaper(synchronizedNonDocx)
+assert.notEqual(
+  synchronizedNonDocxResult.disposition,
+  'ready',
+  'declared DOCX media type and synchronized envelope metadata cannot admit arbitrary bytes',
+)
+assertDiagnostic(synchronizedNonDocxResult, 'DOCX_SOURCE_DOCUMENT_INVALID')
 
 const malformedWithLegacyFixture = structuredClone(request)
 const malformedEnvelope = malformedWithLegacyFixture.evidence.documents.find(
@@ -312,7 +336,7 @@ const unprovedProfile = mutateEnvelope(request, (envelope) => {
 })
 const profileResult = compileCanonicalPaper(unprovedProfile)
 assert.notEqual(profileResult.disposition, 'ready')
-assertDiagnostic(profileResult, 'CONTINUATION_PROFILE_CARDINALITY_UNSUPPORTED')
+assertDiagnostic(profileResult, 'DOCX_SOURCE_DERIVATION_MISMATCH')
 
 const unboundProfileDigest = mutateEnvelope(request, (envelope) => {
   envelope.source.profileInstructionSourceDigest = 'forged-profile-digest'
@@ -330,8 +354,8 @@ const conflictingAnswer = mutateEnvelope(request, (envelope) => {
   })
 })
 const answerResult = compileCanonicalPaper(conflictingAnswer)
-assert.equal(answerResult.disposition, 'answer_conflict')
-assertDiagnostic(answerResult, 'OFFICIAL_ANSWER_CONFLICT')
+assert.equal(answerResult.disposition, 'incomplete_source')
+assertDiagnostic(answerResult, 'DOCX_SOURCE_DERIVATION_MISMATCH')
 
 const baselineRun = baseline()
 const after = protectedState()
@@ -359,19 +383,13 @@ const evidence = {
       sha256: sha256(readFileSync(abs(relativePath))),
     })),
   },
-  ready: {
+  failClosed: {
     disposition: first.disposition,
-    profileId: first.artifacts.canonicalPaper.paperPlan.profileRef.profileId,
-    familyCounts: familyCounts(first),
+    profileId: proof.source.profileId,
+    derivedFamilyCounts: proof.familyCounts,
     officialAnswerCount: first.artifacts.sourceCapture.assertions.length,
     inactiveListeningSourceProof: proof.inactiveListening,
-    inactiveSlots: first.artifacts.normalizationReport.inactiveSourceClosures.map(
-      (closure) => ({
-        slotId: closure.slotId,
-        status: closure.status,
-        officialAnswerCount: closure.officialAnswerCount,
-      }),
-    ),
+    inactiveSlots: first.artifacts.normalizationReport.inactiveSourceClosures,
     diagnosticCodes: diagnostics(first).map((diagnostic) => diagnostic.code),
     compilationDigest: digestJson(first),
   },

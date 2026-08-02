@@ -1,5 +1,6 @@
-import { canonicalAuthorityRef } from '../../shared/paper-canonical/compiler.mjs'
-import { sha256 } from '../../shared/paper-canonical/stable.mjs'
+import { canonicalAuthorityRef } from '../../shared/paper-canonical/authority.mjs'
+import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
+import { buildGroups } from '../../scripts/import-pipeline/lib.mjs'
 import { inflateRawSync } from 'node:zlib'
 
 const textEncoder = new TextEncoder()
@@ -29,7 +30,7 @@ function findEndOfCentralDirectory(buffer) {
   throw new Error('DOCX ZIP central directory is missing')
 }
 
-function readDocumentXml(docxBytes) {
+function readDocxPackage(docxBytes) {
   const buffer = Buffer.from(docxBytes)
   const eocdOffset = findEndOfCentralDirectory(buffer)
   requireRange(buffer, eocdOffset, 22, 'ZIP directory')
@@ -39,6 +40,8 @@ function readDocumentXml(docxBytes) {
     throw new Error('ZIP64 DOCX source is unsupported')
   }
   let offset = centralOffset
+  const entries = []
+  let documentXml = null
   for (let index = 0; index < entryCount; index += 1) {
     requireRange(buffer, offset, 46, 'ZIP central entry')
     if (buffer.readUInt32LE(offset) !== CENTRAL_FILE_SIGNATURE) {
@@ -56,6 +59,7 @@ function readDocumentXml(docxBytes) {
     const name = buffer
       .toString('utf8', offset + 46, offset + 46 + nameLength)
       .replaceAll('\\', '/')
+    entries.push(name)
     if (name === 'word/document.xml') {
       if ((flags & 0x1) !== 0) throw new Error('Encrypted DOCX source is unsupported')
       if (uncompressedSize > MAX_DOCUMENT_XML_BYTES) {
@@ -79,11 +83,15 @@ function readDocumentXml(docxBytes) {
       if (content.length !== uncompressedSize) {
         throw new Error('DOCX document XML size mismatch')
       }
-      return content.toString('utf8')
+      documentXml = {
+        compressedRange: { start: dataOffset, end: dataOffset + compressedSize },
+        text: content.toString('utf8'),
+      }
     }
     offset += 46 + nameLength + extraLength + commentLength
   }
-  throw new Error('DOCX document XML is missing')
+  if (!documentXml) throw new Error('DOCX document XML is missing')
+  return { documentXml, entries }
 }
 
 function decodeXml(value) {
@@ -106,7 +114,7 @@ export function extractDocxDocumentText(docxBytes) {
   if (!(docxBytes instanceof Uint8Array) || docxBytes.byteLength === 0) {
     throw new TypeError('DOCX text extraction requires immutable DOCX bytes')
   }
-  const xml = readDocumentXml(docxBytes)
+  const xml = readDocxPackage(docxBytes).documentXml.text
   return decodeXml(
     xml
       .replace(/<w:tab\b[^>]*\/?\s*>/g, '\t')
@@ -114,6 +122,288 @@ export function extractDocxDocumentText(docxBytes) {
       .replace(/<\/w:p>/g, '\n')
       .replace(/<[^>]+>/g, ''),
   )
+}
+
+function normalizedSemanticText(value) {
+  return String(value || '')
+    .normalize('NFKC')
+    .toLowerCase()
+    .replace(/[^\p{L}\p{N}]+/gu, '')
+}
+
+function sourceTextFragments(source) {
+  const fragments = []
+  function visit(value, key = '') {
+    if (Array.isArray(value)) {
+      value.forEach((item) => visit(item, key))
+      return
+    }
+    if (value && typeof value === 'object') {
+      Object.entries(value).forEach(([nestedKey, item]) => visit(item, nestedKey))
+      return
+    }
+    if (key !== 'text' || typeof value !== 'string') return
+    for (const line of value.split('\n')) {
+      const normalized = normalizedSemanticText(line)
+      if (normalized.length >= 8) fragments.push(normalized)
+    }
+  }
+  for (const group of source?.groups || []) visit(group)
+  return fragments
+}
+
+function rawGroupsBySlot(parsed) {
+  return new Map([
+    ...parsed.readingGroups.map((group, index) => [`reading.${'abcd'[index]}`, group]),
+    ['reading.seven-choices', parsed.seven],
+    ['language.cloze', parsed.cloze],
+    ['language.grammar-fill', parsed.grammar],
+    ['writing.application', parsed.application],
+    ['writing.continuation', parsed.continuation],
+  ])
+}
+
+function hydrateSevenChoiceBank(parsed, rawText) {
+  const title = parsed.seven.paragraphs[0]?.text
+  const start = typeof title === 'string' ? rawText.indexOf(title) : -1
+  const answerStart = start >= 0 ? rawText.indexOf('【答案】[[', start) : -1
+  if (start < 0 || answerStart < 0) return
+  parsed.seven.optionBank = [...rawText.slice(start, answerStart).matchAll(
+    /(?:^|\n)[ \t　]*([A-G])[．.]\s*([^\n]+)/g,
+  )].map((match) => ({ label: match[1], text: match[2].trim() }))
+}
+
+function objectiveQuestions(parsed) {
+  return [
+    ...parsed.readingGroups.flatMap((group) => group.questions),
+    ...parsed.seven.questions,
+    ...parsed.cloze.questions,
+    ...parsed.grammar.questions,
+  ]
+}
+
+function identityProjectionFromParsed(parsed) {
+  return [...rawGroupsBySlot(parsed)].map(([slotId, group]) => ({
+    slotId,
+    groupId: group.groupId,
+    questionIds: group.questions.map((question) => question.id),
+    blankIds: [...(group.blankIds || [])],
+  }))
+}
+
+function identityProjectionFromSource(source) {
+  return (source?.groups || []).map((group) => ({
+    slotId: group.slotId,
+    groupId: group.groupId,
+    questionIds: [...(group.questionIds || [])],
+    blankIds: [...(group.blankIds || [])],
+  }))
+}
+
+function answerProjectionFromParsed(parsed) {
+  return objectiveQuestions(parsed).map((question) => ({
+    questionId: question.id,
+    answer: question.answerKey,
+  }))
+}
+
+function answerProjectionFromSource(source) {
+  return (source?.assertions || []).map((assertion) => ({
+    questionId: assertion.questionId,
+    answer: assertion.answer,
+  }))
+}
+
+function normalizedOptions(options) {
+  return Object.entries(options || {}).map(([label, text]) => ({
+    label,
+    text: normalizedSemanticText(text),
+  }))
+}
+
+function optionProjectionFromParsed(parsed) {
+  return [
+    ...parsed.readingGroups.flatMap((group) => group.questions.map((question) => ({
+      owner: question.id,
+      options: normalizedOptions(question.options),
+    }))),
+    {
+      owner: parsed.seven.groupId,
+      options: (parsed.seven.optionBank || []).map((option) => ({
+        label: option.label,
+        text: normalizedSemanticText(option.text),
+      })),
+    },
+    ...parsed.cloze.questions.map((question) => ({
+      owner: question.id,
+      options: normalizedOptions(question.options),
+    })),
+  ]
+}
+
+function optionProjectionFromSource(source) {
+  return (source?.groups || []).flatMap((group) => {
+    const ownership = group.variant?.choiceOwnership
+    if (ownership?.ownership === 'shared_bank') {
+      return [{
+        owner: group.groupId,
+        options: (ownership.options || []).map((option) => ({
+          label: option.label,
+          text: normalizedSemanticText(option.content?.[0]?.text),
+        })),
+      }]
+    }
+    if (ownership?.ownership === 'per_question') {
+      return (ownership.sets || []).map((set) => ({
+        owner: set.questionId,
+        options: (set.options || []).map((option) => ({
+          label: option.label,
+          text: normalizedSemanticText(option.content?.[0]?.text),
+        })),
+      }))
+    }
+    return []
+  })
+}
+
+function wordCountTarget(rawText, label) {
+  const match = new RegExp(`${label}词数应为\\s*(\\d+)\\s*个左右`).exec(rawText)
+  return match ? Number(match[1]) : null
+}
+
+function sourceWordCountTargets(source) {
+  return {
+    application: source?.groups?.find(
+      (group) => group.slotId === 'writing.application',
+    )?.variant?.wordCountRuling?.target,
+    continuation: source?.groups?.find(
+      (group) => group.slotId === 'writing.continuation',
+    )?.variant?.wordCountRuling?.target,
+  }
+}
+
+/**
+ * Inspect the inactive NCK1 Listening slice directly from the immutable DOCX.
+ * Absence is evidence only for optional timing and package audio inventory;
+ * the ten transcript segments remain required and therefore fail closed when
+ * the DOCX does not contain them.
+ */
+export function inspectDocxListeningEvidence(docxBytes) {
+  const { documentXml, entries } = readDocxPackage(docxBytes)
+  const rawText = extractDocxDocumentText(docxBytes)
+  const listeningStart = rawText.indexOf('一、听力选择题')
+  const readingStart = rawText.indexOf('二、阅读理解')
+  if (listeningStart < 0 || readingStart <= listeningStart) {
+    throw new Error('DOCX source lacks a bounded NCK1 listening section')
+  }
+  const sourceSlice = rawText.slice(listeningStart, readingStart)
+  const questions = [...sourceSlice.matchAll(
+    /(?:^|\n)(?:\(\d+\)\s*(?:\([^\n)]*分\))?|[1-5]\.\([^\n)]*分\))\s*([^\n?]+\?)\nA．([^\n]+)\nB．([^\n]+)\nC．([^\n]+)\n【答案】\s*([ABC])/gm,
+  )].map((match, index) => ({
+    questionNo: index + 1,
+    stem: match[1].trim(),
+    options: { A: match[2].trim(), B: match[3].trim(), C: match[4].trim() },
+    answer: match[5],
+  }))
+  const transcriptMarkers = [...rawText.matchAll(
+    /(?:^|\n)\s*Text\s*(10|[1-9])\b/gm,
+  )]
+  const transcriptSegments = transcriptMarkers.map((match, index) => {
+    const start = match.index
+    const nextStart = transcriptMarkers[index + 1]?.index
+    const referenceAnswerStart = rawText.indexOf('---参考答案---', start)
+    const end = nextStart
+      ?? (referenceAnswerStart >= 0 ? referenceAnswerStart : rawText.length)
+    const text = rawText.slice(start, end)
+    return {
+      textId: `Text ${match[1]}`,
+      extractedTextStart: start,
+      extractedTextEnd: end,
+      extractedTextDigest: sha256(new TextEncoder().encode(text)),
+    }
+  })
+  const transcriptIds = transcriptSegments.map((segment) =>
+    Number(segment.textId.slice('Text '.length)))
+  const audioEntries = entries.filter((entry) =>
+    /\.(?:mp3|m4a|wav|aac|ogg)$/i.test(entry))
+  return {
+    sourceSlice: {
+      kind: 'docx_extracted_text_range',
+      documentXmlCompressedRange: { ...documentXml.compressedRange },
+      extractedTextStart: listeningStart,
+      extractedTextEnd: readingStart,
+      extractedTextDigest: sha256(new TextEncoder().encode(sourceSlice)),
+    },
+    questions,
+    transcript: {
+      expectedSegmentCount: 10,
+      segmentIds: transcriptIds,
+      segments: transcriptSegments,
+      coverage: transcriptIds.length === 10
+        && transcriptIds.every((value, index) => value === index + 1)
+        ? 'exactly_once'
+        : 'incomplete_source',
+    },
+    timing: {
+      disposition: /(?:timeRange|timingTable|\b\d+[′']\d+[″"])/.test(rawText)
+        ? 'supplied_unparsed'
+        : 'not_supplied',
+    },
+    audio: audioEntries.length === 0
+      ? { disposition: 'not_supplied', packageEntries: [] }
+      : { disposition: 'captured_uninterpreted', packageEntries: audioEntries },
+  }
+}
+
+/**
+ * Re-open and parse the immutable DOCX at the public compiler boundary. This
+ * makes the envelope a transport shape rather than semantic authority.
+ */
+export function inspectDocxEnvelopeSource(docxBytes, source) {
+  const { documentXml } = readDocxPackage(docxBytes)
+  const rawText = extractDocxDocumentText(docxBytes)
+  const parsed = buildGroups(rawText, source?.paperId || '')
+  hydrateSevenChoiceBank(parsed, rawText)
+  const normalizedRawText = normalizedSemanticText(rawText)
+  const missingSourceText = sourceTextFragments(source).filter(
+    (fragment) => !normalizedRawText.includes(fragment),
+  )
+  const identityMatches = digestJson(identityProjectionFromSource(source))
+    === digestJson(identityProjectionFromParsed(parsed))
+  const answerMatches = digestJson(answerProjectionFromSource(source))
+    === digestJson(answerProjectionFromParsed(parsed))
+  const optionMatches = digestJson(optionProjectionFromSource(source))
+    === digestJson(optionProjectionFromParsed(parsed))
+  const profileMatches = source?.profileId === 'nck1'
+  const wordCountMatches = digestJson(sourceWordCountTargets(source)) === digestJson({
+    application: wordCountTarget(rawText, '写作'),
+    continuation: wordCountTarget(rawText, '续写'),
+  })
+  const listening = inspectDocxListeningEvidence(docxBytes)
+  const inactiveClosureMatches = listening.transcript.coverage === 'exactly_once'
+    || (
+      Object.keys(source?.inactiveSlots || {}).length === 0
+      && (source?.inactiveSourceClosures || []).length === 0
+    )
+  return {
+    ok: missingSourceText.length === 0
+      && identityMatches
+      && answerMatches
+      && optionMatches
+      && profileMatches
+      && wordCountMatches
+      && inactiveClosureMatches,
+    sourceByteRange: documentXml.compressedRange,
+    rawTextDigest: sha256(new TextEncoder().encode(rawText)),
+    missingSourceTextCount: missingSourceText.length,
+    identityMatches,
+    answerMatches,
+    optionMatches,
+    profileMatches,
+    wordCountMatches,
+    inactiveClosureMatches,
+    listening,
+  }
 }
 
 function immutableDocument(document) {

@@ -6,6 +6,7 @@ import {
   validateGrammarFillPromptProvision,
 } from './grammarFillPromptContract.mjs'
 import { appendListeningInactiveClosures } from './listeningInactive.mjs'
+import { inspectDocxEnvelopeSource } from '../../server/paper-canonical/docxSourceAdapter.mjs'
 import { validateReadingContract } from './reading.mjs'
 import { validateSevenChoicesContract } from './sevenChoices.mjs'
 import { cloneJson, digestJson, exactKeys, isRecordValue, sha256, stableStringify, withoutKey } from './stable.mjs'
@@ -1769,12 +1770,52 @@ function parseDocxSourceEnvelope(documents, diagnostics) {
       diagnostics.push(diagnostic('DOCX_SOURCE_ROLE_INCOMPLETE', 'incomplete_source', '$.evidence.documents', 'DOCX source must explicitly carry question, official-answer, and provenance roles'))
       return null
     }
+    let inspection
+    try {
+      inspection = inspectDocxEnvelopeSource(source.bytes, envelope.source)
+    } catch (error) {
+      diagnostics.push(diagnostic(
+        'DOCX_SOURCE_DOCUMENT_INVALID',
+        'incomplete_source',
+        '$.evidence.documents',
+        `DOCX source bytes cannot be opened by the registered adapter: ${error.message}`,
+      ))
+      return null
+    }
+    if (!inspection.ok) {
+      diagnostics.push(diagnostic(
+        'DOCX_SOURCE_DERIVATION_MISMATCH',
+        'incomplete_source',
+        '$.docxSourceEnvelope.source',
+        'DOCX envelope semantics do not match the registered adapter derivation',
+      ))
+      return null
+    }
+    if (
+      inspection.listening.questions.length !== 20
+      || inspection.listening.questions.some((question) =>
+        Object.keys(question.options).join('') !== 'ABC'
+        || !Object.hasOwn(question.options, question.answer))
+      || inspection.listening.transcript.coverage !== 'exactly_once'
+      || inspection.listening.timing.disposition === 'supplied_unparsed'
+    ) {
+      diagnostics.push(diagnostic(
+        'DOCX_LISTENING_SOURCE_INCOMPLETE',
+        'incomplete_source',
+        '$.docxSourceEnvelope.source.inactiveSourceClosures',
+        'Inactive Listening requires source-derived questions, A-C Options, answers, ten transcripts, exact supplied timing, and a closed package audio inventory',
+      ))
+    }
+    for (const observation of envelope.source.observations || []) {
+      observation.span = { ...inspection.sourceByteRange }
+    }
     return {
       value: envelope.source,
       adapter: 'docx-source-envelope',
       envelope,
       sourceDocumentId: source.documentId,
       sourceDocumentDigest: source.sha256,
+      inspection,
     }
   } catch (error) {
     diagnostics.push(diagnostic('DOCX_SOURCE_ENVELOPE_INVALID', 'incomplete_source', '$.evidence.documents', `DOCX source envelope is unreadable: ${error.message}`))

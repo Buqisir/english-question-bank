@@ -1,5 +1,6 @@
 import {
   extractDocxDocumentText,
+  inspectDocxListeningEvidence,
 } from '../../../server/paper-canonical/docxSourceAdapter.mjs'
 import { digestJson, sha256 } from '../../../shared/paper-canonical/stable.mjs'
 import { buildGroups } from '../../../scripts/import-pipeline/lib.mjs'
@@ -103,42 +104,18 @@ function hydrateSevenChoiceBank(parsed, rawText) {
   parsed.seven.optionBank = options
 }
 
-function inactiveListeningProof(rawText, source) {
-  const listeningStart = rawText.indexOf('一、听力选择题')
-  const readingStart = rawText.indexOf('二、阅读理解')
-  if (listeningStart < 0 || readingStart <= listeningStart) {
-    throw new Error('DOCX source lacks a bounded NCK1 listening section')
+function inactiveListeningProof(docxBytes) {
+  const proof = inspectDocxListeningEvidence(docxBytes)
+  if (
+    proof.questions.length !== 20
+    || proof.questions.some((question, index) =>
+      question.questionNo !== index + 1
+      || Object.keys(question.options).join('') !== 'ABC'
+      || !Object.hasOwn(question.options, question.answer))
+  ) {
+    throw new Error('DOCX source listening questions, A-C Options, or answers are incomplete')
   }
-  const answers = [...rawText.slice(listeningStart, readingStart).matchAll(
-    /【答案】\s*([ABC])/g,
-  )].map((match) => match[1])
-  if (answers.length !== 20) {
-    throw new Error(`DOCX source listening answer count is ${answers.length}, expected 20`)
-  }
-  const closures = source.inactiveSourceClosures.map((closure) => ({
-    slotId: closure.slotId,
-    questionCount: closure.questionCount,
-    officialAnswerCount: closure.officialAnswerCount,
-    optionLabels: closure.optionLabels.join(''),
-  }))
-  const expected = [
-    {
-      slotId: 'listening.short-dialogue',
-      questionCount: 5,
-      officialAnswerCount: answers.slice(0, 5).length,
-      optionLabels: 'ABC',
-    },
-    {
-      slotId: 'listening.long-form',
-      questionCount: 15,
-      officialAnswerCount: answers.slice(5).length,
-      optionLabels: 'ABC',
-    },
-  ]
-  if (JSON.stringify(closures) !== JSON.stringify(expected)) {
-    throw new Error('DOCX source inactive listening closure does not match raw answer evidence')
-  }
-  return expected
+  return proof
 }
 
 function rawGroupsBySlot(parsed) {
@@ -300,7 +277,21 @@ export function makePaper2025IDocxSourceProof(docxBytes) {
   const parsed = buildGroups(rawText, PAPER_ID)
   hydrateSevenChoiceBank(parsed, rawText)
   const source = exactSourceFromParsedDocx(parsed, rawText)
-  const inactiveListening = inactiveListeningProof(rawText, source)
+  const inactiveListening = inactiveListeningProof(docxBytes)
+  const listeningSlotIds = new Set([
+    'listening.short-dialogue',
+    'listening.long-form',
+  ])
+  source.observations = source.observations.filter(
+    (observation) => !listeningSlotIds.has(
+      observation.observationId.replace(/^observation:/, ''),
+    ),
+  )
+  source.transformations = source.transformations.filter(
+    (record) => !listeningSlotIds.has(record.target?.identity),
+  )
+  source.inactiveSlots = {}
+  source.inactiveSourceClosures = []
   const digest = sha256(docxBytes)
   source.profileInstructionSourceDigest = digest
   for (const observation of source.observations) {
