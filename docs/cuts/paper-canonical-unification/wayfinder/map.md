@@ -1,7 +1,7 @@
 # EQB 试卷 Canonical 大一统 — Wayfinder Map
 
 Status: done
-Next on PASS: owner-approval
+Next on PASS: implementation
 Terminal: no
 Phase receipt: `docs/cuts/paper-canonical-unification/phase-transition.md`
 
