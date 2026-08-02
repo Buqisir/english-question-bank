@@ -26,7 +26,8 @@ implementation from Ticket 10 is consumed, not redesigned.
 ### Exact decision to return
 
 Apply the accepted cadence, verifier deletions/splits, Screen/Print/PDF canary
-rules, and UI micro-change lane.
+rules, and UI micro-change lane through executable test/CI/workflow changes.
+Prose-only policy changes cannot close this ticket.
 
 ### Classification candidates
 
@@ -60,3 +61,8 @@ One fresh context, 70–90K tokens. Terra Max for the cross-cut final candidate.
 - Shared mapping/renderer changes still trigger full/deep proof and independent
   review; unchanged paper data and local UI changes do not.
 - Target-page real-click/screenshot/Owner-QA route is executable and bounded.
+- One representative local color/spacing/copy/motion change completes with only
+  affected lint/typecheck/component checks and target-page evidence, without
+  backend full suite, schema/version ceremony, or dual-axis review.
+- Do not create independent review for low-risk docs/UI changes; use it only if
+  this ticket's actual diff also changes a high-risk shared behavior.

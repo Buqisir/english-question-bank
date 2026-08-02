@@ -26,7 +26,9 @@ touch Ticket 25/current paper-canonical route artifacts.
 ### Exact decision to return
 
 Implement the accepted Data Addition lane and escalation predicates while
-preserving Shared Contract Change handling.
+preserving Shared Contract Change handling. Closure requires a concrete deep
+Interface or executable workflow deletion/downgrade plus replacement tests;
+another policy statement alone cannot pass.
 
 ### Classification candidates
 
@@ -60,3 +62,9 @@ One fresh context, 70–90K tokens. Terra Max.
   and one new-shape case escalate.
 - Atomic Publication is proven as all-fields/version visibility, not repeated
   consumer-surface proof.
+- The known-shape lane demonstrably omits per-paper authority bump, full suite,
+  dual-axis review, manifest approval, and manual Screen/Print/PDF proof while
+  retaining source digest, narrow validation, Teacher Confirmation, atomicity,
+  and a proportionate canary.
+- Because this ticket changes high-risk shared publication behavior, use the
+  existing risk-required independent review lineage once; add no new ceremony.

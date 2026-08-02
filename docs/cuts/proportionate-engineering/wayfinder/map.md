@@ -44,15 +44,27 @@ External blocker kind: project-wide proportionate-engineering Wayfinder
   denominators before any burden ratio is used.
 - P0/P1 reforms and their four-workflow before/after measurement must close
   before paper-canonical Ticket 25 can resume. This map does not itself approve
-  or dispatch Ticket 25.
+  or dispatch Ticket 25. P2 improvements become a non-blocking backlog once
+  P0/P1 closes and business development resumes; they do not delay Ticket 25.
 - Tickets 02–07 are safe for parallel read-only evidence collection after
-  Ticket 01 fixes definitions. Their durable resolution writes are disjoint
-  only in separate worktrees; integration and shared-authority writes remain
-  serial. Repetitive inventory is Luna Max work only after the counting seam
-  and expected output are fixed; cross-cut decisions remain Sol Medium.
+  Ticket 01 fixes definitions. Those six tasks make no repository or same-
+  worktree writes, do not claim/close their ticket files, and return structured
+  evidence packets only. Ticket 08 is the sole later writer that records all
+  six resolutions and their map gists in one serial synthesis commit.
+  Repetitive inventory is Luna Max work only after the counting seam and
+  expected output are fixed; cross-cut decisions remain Sol Medium.
 - Reform self-check: one map, no separate proof ledger, no new approval loop,
   no giant verifier, no per-ticket ceremony. Replace existing authority and
   tests instead of duplicating them, with one acceptance check per actual risk.
+- This 13-ticket map is the last meta-governance layer. It may not spawn
+  publish, digest-approval, map-approval, review-of-map, or ticket-management
+  tickets. Reform tickets close only through concrete deletion, downgrade,
+  replacement tests at a public Interface, deep-seam change, or removal of a
+  redundant workflow; writing another principle or policy layer is not closure.
+- No separate independent review is created for read-only investigation,
+  synthesis-only recording, low-risk documentation, or a qualifying UI micro-
+  change. A reform uses independent review only when its actual diff changes
+  high-risk shared behavior under current risk authority.
 
 ## Decisions so far
 
@@ -60,14 +72,15 @@ External blocker kind: project-wide proportionate-engineering Wayfinder
 
 ## Fog
 
-- Exact deep-module reform slices beyond the first highest-leverage seam depend
-  on the hotspot change simulations and must be graduated only when their
-  Interfaces and write surfaces are precise.
+- Exact deep-module improvements beyond the first highest-leverage P1 tranche
+  depend on hotspot change simulations and become non-blocking P2 backlog once
+  precise; this map creates no additional child ticket for them.
 - Exact stale compatibility deletions depend on live caller and production-data
   evidence; absence of a current caller is not sufficient when persisted old
   data can still reach the route.
 - Any genuinely new content shape found during canonical data-lane work must
-  leave the data-operation lane and graduate into a Shared Contract Change.
-- Lower-priority P2 cleanup may remain after the P0/P1 blocker closes only when
-  the final acceptance ticket proves it is not required for the four common
-  workflows or a preserved high-risk control.
+  leave the data-operation lane and use the existing Shared Contract Change
+  route; it does not grow this map.
+- Lower-priority P2 cleanup becomes non-blocking backlog after P0/P1 closure;
+  it may be noted in Fog but must not create another ticket in this map or delay
+  business development and Ticket 25.

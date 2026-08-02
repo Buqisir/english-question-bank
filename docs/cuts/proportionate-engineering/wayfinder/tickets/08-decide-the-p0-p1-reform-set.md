@@ -20,15 +20,19 @@ overlapping write surfaces.
 
 ### Affected files and surfaces
 
-Read the six resolution assets and current authorities. Write only this
-ticket's resolution and update the map with its one-line gist.
+Read the six exact read-only task result packets and current authorities. This
+is their sole durable recorder: write their evidence-backed resolutions into
+Tickets 02–07, mark those six done, append their one-line map gists, and record
+this synthesis resolution in the same serial commit. Create no research asset,
+publication ticket, approval ticket, map-review ticket, or ticket-management
+ticket.
 
 ### Exact decision to return
 
 Which candidates are accepted as keep/downgrade/delete/deepen/split, what exact
 P0/P1 sequence must close before Ticket 25, what can remain P2, and which
-additional architecture tranches (if any) are now precise enough to graduate
-from Fog?
+architecture work fits the already-charted first tranche? Anything else becomes
+non-blocking P2 backlog in Fog, not another child ticket.
 
 ### Classification candidates
 
@@ -47,8 +51,9 @@ P0 cross-cut decision: it controls every following write and the blocker exit.
 
 ### Dependencies, parallelism, and write conflicts
 
-All six audits must be done. This synthesis is serial and is not parallel-safe.
-It may add only newly precise child tickets; it may not implement reforms.
+All six read-only packets must be complete and exact. This is the only serial
+recording task and is not parallel-safe. It may not add tickets or implement
+reforms; the 13-ticket ceiling is closed.
 
 ### Fresh task size and route
 
@@ -61,3 +66,5 @@ One fresh context, 60–80K tokens. Sol Medium.
 - Before/target action counts for all four workflows.
 - P0/P1 set is fresh-context-sized and creates no ledger, approval loop, or
   giant verifier.
+- Recording the six results adds no new principle/policy authority and creates
+  no independent review merely for investigation or synthesis.

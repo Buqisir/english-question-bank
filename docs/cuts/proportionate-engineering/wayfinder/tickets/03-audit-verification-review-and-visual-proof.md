@@ -3,10 +3,13 @@
 Status: open
 Claim: unclaimed
 Blocked by: Freeze the burden baseline and risk language
-Next on PASS: `docs/cuts/proportionate-engineering/wayfinder/tickets/04-audit-canonical-data-and-contract-fanout.md`
+Next on PASS: parallel join handoff
+Parallel frontier: not-applicable
+Parallel join: `docs/cuts/proportionate-engineering/wayfinder/tickets/08-decide-the-p0-p1-reform-set.md`
 Terminal: no
 Type: research
 Priority: P0
+Execution: repository-read-only; no repository or same-worktree writes
 Map: `docs/cuts/proportionate-engineering/wayfinder/map.md`
 
 ## Question
@@ -24,7 +27,9 @@ public seam, and current trigger.
 
 `scripts/verify-*.mjs`, package/CI entrypoints, review/testing authorities,
 PaperSurface and Screen/Print/PDF verifiers and QA evidence, especially the
-18,975-line import-pilot verifier and other largest scripts.
+18,975-line import-pilot verifier and other largest scripts. Repository-read-
+only: return a structured evidence packet; make no file, claim, status,
+resolution, branch, commit, or same-worktree change.
 
 ### Exact decision to return
 
@@ -50,8 +55,8 @@ portfolio execution makes low-risk work disproportionately expensive.
 
 ### Dependencies, parallelism, and write conflicts
 
-Baseline first; read-only evidence is parallel-safe with Tickets 02 and 04–07.
-Future central testing/CI writes conflict with governance and UI-lane reforms.
+Baseline first; explicitly parallel-safe with Tickets 02 and 04–07 because all
+six are repository-read-only. Ticket 08 alone records and closes their results.
 
 ### Fresh task size and route
 

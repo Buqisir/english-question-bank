@@ -3,7 +3,9 @@
 Status: open
 Claim: unclaimed
 Blocked by: None
-Next on PASS: `docs/cuts/proportionate-engineering/wayfinder/tickets/02-audit-governance-and-coordination-gates.md`
+Next on PASS: parallel frontier handoff
+Parallel frontier: `docs/cuts/proportionate-engineering/wayfinder/tickets/02-audit-governance-and-coordination-gates.md`, `docs/cuts/proportionate-engineering/wayfinder/tickets/03-audit-verification-review-and-visual-proof.md`, `docs/cuts/proportionate-engineering/wayfinder/tickets/04-audit-canonical-data-and-contract-fanout.md`, `docs/cuts/proportionate-engineering/wayfinder/tickets/05-audit-module-depth-and-hotspots.md`, `docs/cuts/proportionate-engineering/wayfinder/tickets/06-design-the-ui-micro-change-lane.md`, `docs/cuts/proportionate-engineering/wayfinder/tickets/07-audit-legacy-operations-and-model-routing.md`
+Parallel join: not-applicable
 Terminal: no
 Type: research
 Priority: P0
@@ -54,9 +56,10 @@ could weaken real safety or preserve needless burden.
 
 ### Dependencies, parallelism, and write conflicts
 
-No dependency. Its fixed definitions unblock Tickets 02–07. Deterministic
-recounts are suitable for Luna Max after this ticket defines the seam; the
-classification decision is Sol Medium. No other ticket may write its asset.
+No dependency. Its fixed definitions unblock the explicit parallel read-only
+frontier in Tickets 02–07. Deterministic recounts are suitable for Luna Max
+after this ticket defines the seam; the classification decision is Sol Medium.
+No other ticket may write its asset.
 
 ### Fresh task size and route
 

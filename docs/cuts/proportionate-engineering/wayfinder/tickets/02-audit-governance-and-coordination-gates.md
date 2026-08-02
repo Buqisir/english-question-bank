@@ -3,10 +3,13 @@
 Status: open
 Claim: unclaimed
 Blocked by: Freeze the burden baseline and risk language
-Next on PASS: `docs/cuts/proportionate-engineering/wayfinder/tickets/03-audit-verification-review-and-visual-proof.md`
+Next on PASS: parallel join handoff
+Parallel frontier: not-applicable
+Parallel join: `docs/cuts/proportionate-engineering/wayfinder/tickets/08-decide-the-p0-p1-reform-set.md`
 Terminal: no
 Type: research
 Priority: P0
+Execution: repository-read-only; no repository or same-worktree writes
 Map: `docs/cuts/proportionate-engineering/wayfinder/map.md`
 
 ## Question
@@ -23,7 +26,9 @@ evidence, repeated approvals, and successor-only tasks.
 
 `AGENTS.md`, `docs/agents/**`, steering workflow notes, governance verifiers,
 phase receipts, maps, approval records, manifests, handoffs, and representative
-cut histories. Read-only investigation; write one linked research asset.
+cut histories. This task is repository-read-only: write no file, claim, status,
+resolution, branch, commit, or same-worktree byte. Return one structured
+evidence packet for Ticket 08 to record.
 
 ### Exact decision to return
 
@@ -50,9 +55,9 @@ burden directly blocks routine work and Ticket 25.
 
 ### Dependencies, parallelism, and write conflicts
 
-Blocked only by the baseline ticket. Evidence collection is parallel-safe with
-Tickets 03–07. It shares future write surfaces with all governance reform, so
-resolution integration is serial. One research asset only.
+Blocked only by the baseline ticket. It is explicitly parallel-safe with
+Tickets 03–07 because all six are repository-read-only and make no same-
+worktree writes. Ticket 08 alone records and closes their results.
 
 ### Fresh task size and route
 

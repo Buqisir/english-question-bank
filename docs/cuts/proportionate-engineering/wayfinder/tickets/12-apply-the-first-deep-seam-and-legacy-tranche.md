@@ -20,13 +20,15 @@ fan-out without an architecture rewrite.
 ### Affected files and surfaces
 
 Exactly the first-tranche Interface, implementation, callers, replacement
-tests, and compatibility/docs surface selected by Ticket 08. If that surface is
-not precise or exceeds one fresh context, stop and graduate smaller tickets.
+tests, and compatibility/docs surface selected by Ticket 08. Ticket 08 cannot
+PASS unless that one tranche is already precise and fits one fresh context;
+Ticket 12 may not split it into additional tickets.
 
 ### Exact decision to return
 
 Deepen/split/delete only the selected tranche and report the observed locality
-gain; retain legacy paths that still protect reachable persisted data.
+gain; retain legacy paths that still protect reachable persisted data. A
+documentation-only description of a future seam cannot pass.
 
 ### Classification candidates
 
@@ -45,8 +47,8 @@ the selected seam.
 
 ### Dependencies, parallelism, and write conflicts
 
-Serial after Ticket 11. Any extra precise tranches graduated by Ticket 08 block
-Ticket 13 and use disjoint write surfaces.
+Serial after Ticket 11. Additional precise improvements are non-blocking P2
+backlog and neither grow this map nor block Ticket 13.
 
 ### Fresh task size and route
 
@@ -58,3 +60,5 @@ otherwise Terra High as fixed by Ticket 08.
 - Change simulation touches fewer callers and fewer test layers.
 - Tests cross the same Interface as callers; replaced shallow tests are gone.
 - Compatibility deletion has reachable-data and recovery evidence.
+- Independent review occurs only if the actual selected tranche changes high-
+  risk shared behavior; otherwise normal in-ticket review is sufficient.

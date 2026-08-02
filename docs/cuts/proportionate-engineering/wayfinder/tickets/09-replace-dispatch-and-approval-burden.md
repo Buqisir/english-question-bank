@@ -26,7 +26,9 @@ spec/tickets/manifest/approval receipts.
 ### Exact decision to return
 
 Apply exactly the accepted governance keep/downgrade/delete set and report the
-new low-risk route plus preserved fail-closed transitions.
+new low-risk route plus preserved fail-closed transitions. Closure requires
+deleting or simplifying executable routing/validation workflow and removing
+its superseded tests or steps; a prose-only policy edit cannot pass.
 
 ### Classification candidates
 
@@ -58,3 +60,6 @@ executable risk requiring Terra Max.
 - Focused adversarial route tests at the retained public Interface.
 - Deleted superseded assertions/tests rather than layered replacements.
 - Measured action reduction for the low-risk route with named failures closed.
+- No publish/digest/map approval, review-of-map, or ticket-management successor.
+- Independent review only if the actual diff changes high-risk shared dispatch
+  behavior; low-risk docs cleanup does not create a dual-axis lineage.

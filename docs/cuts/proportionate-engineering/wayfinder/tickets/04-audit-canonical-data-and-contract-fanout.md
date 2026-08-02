@@ -3,10 +3,13 @@
 Status: open
 Claim: unclaimed
 Blocked by: Freeze the burden baseline and risk language
-Next on PASS: `docs/cuts/proportionate-engineering/wayfinder/tickets/05-audit-module-depth-and-hotspots.md`
+Next on PASS: parallel join handoff
+Parallel frontier: not-applicable
+Parallel join: `docs/cuts/proportionate-engineering/wayfinder/tickets/08-decide-the-p0-p1-reform-set.md`
 Terminal: no
 Type: research
 Priority: P0
+Execution: repository-read-only; no repository or same-worktree writes
 Map: `docs/cuts/proportionate-engineering/wayfinder/map.md`
 
 ## Question
@@ -24,6 +27,8 @@ reload/retry, canary, manifests, and consumers.
 Canonical standards/schemas/manifests/consumers, shared compiler/authority/
 publication modules, import scripts and runbooks, current migration tickets,
 paper assets, public Screen/Print/PDF seams, and atomic publication/recovery.
+Repository-read-only: return a structured evidence packet; make no file, claim,
+status, resolution, branch, commit, or same-worktree change.
 
 ### Exact decision to return
 
@@ -50,8 +55,8 @@ atomicity without re-proving unchanged consumers.
 
 ### Dependencies, parallelism, and write conflicts
 
-Baseline first; read-only evidence is parallel-safe with Tickets 02–03 and
-05–07. Future writes overlap canonical authority, compiler, and testing reforms.
+Baseline first; explicitly parallel-safe with Tickets 02–03 and 05–07 because
+all six are repository-read-only. Ticket 08 alone records and closes results.
 
 ### Fresh task size and route
 

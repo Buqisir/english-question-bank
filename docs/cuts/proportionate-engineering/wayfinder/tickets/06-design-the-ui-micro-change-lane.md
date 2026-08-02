@@ -3,10 +3,13 @@
 Status: open
 Claim: unclaimed
 Blocked by: Freeze the burden baseline and risk language
-Next on PASS: `docs/cuts/proportionate-engineering/wayfinder/tickets/07-audit-legacy-operations-and-model-routing.md`
+Next on PASS: parallel join handoff
+Parallel frontier: not-applicable
+Parallel join: `docs/cuts/proportionate-engineering/wayfinder/tickets/08-decide-the-p0-p1-reform-set.md`
 Terminal: no
 Type: research
 Priority: P0
+Execution: repository-read-only; no repository or same-worktree writes
 Map: `docs/cuts/proportionate-engineering/wayfinder/map.md`
 
 ## Question
@@ -23,6 +26,8 @@ a durable lightweight route plus explicit escalation predicates.
 App styling and local presentation modules, component checks, lint/typecheck,
 UI authorities, screenshot/real-click/Owner-QA practice, PaperSurface anchors,
 print/export styles, shared tokens, and animation accessibility.
+Repository-read-only: return a structured evidence packet; make no file, claim,
+status, resolution, branch, commit, or same-worktree change.
 
 ### Exact decision to return
 
@@ -49,8 +54,8 @@ the actual seam is shared or affects public paper correctness.
 
 ### Dependencies, parallelism, and write conflicts
 
-Baseline first; read-only evidence is parallel-safe with Tickets 02–05 and 07.
-Future authority writes overlap the testing reform and must integrate serially.
+Baseline first; explicitly parallel-safe with Tickets 02–05 and 07 because all
+six are repository-read-only. Ticket 08 alone records and closes their results.
 
 ### Fresh task size and route
 

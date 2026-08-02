@@ -3,10 +3,13 @@
 Status: open
 Claim: unclaimed
 Blocked by: Freeze the burden baseline and risk language
-Next on PASS: `docs/cuts/proportionate-engineering/wayfinder/tickets/06-design-the-ui-micro-change-lane.md`
+Next on PASS: parallel join handoff
+Parallel frontier: not-applicable
+Parallel join: `docs/cuts/proportionate-engineering/wayfinder/tickets/08-decide-the-p0-p1-reform-set.md`
 Terminal: no
 Type: research
 Priority: P1
+Execution: repository-read-only; no repository or same-worktree writes
 Map: `docs/cuts/proportionate-engineering/wayfinder/map.md`
 
 ## Question
@@ -24,6 +27,8 @@ clusters.
 
 Named hotspots plus their callers, adapters, tests, and documentation. Inspect
 in-process, local-substitutable, remote-owned, and true-external dependencies.
+Repository-read-only: return a structured evidence packet; make no file, claim,
+status, resolution, branch, commit, or same-worktree change.
 
 ### Exact decision to return
 
@@ -50,9 +55,9 @@ rewrite is authorized without change-simulation evidence.
 
 ### Dependencies, parallelism, and write conflicts
 
-Baseline first; read-only evidence is parallel-safe with Tickets 02–04 and
-06–07. Every resulting implementation seam needs its own non-overlapping write
-surface; only the first tranche is charted now.
+Baseline first; explicitly parallel-safe with Tickets 02–04 and 06–07 because
+all six are repository-read-only. Ticket 08 alone records and closes results.
+Only the first concrete implementation tranche is charted now.
 
 ### Fresh task size and route
 
