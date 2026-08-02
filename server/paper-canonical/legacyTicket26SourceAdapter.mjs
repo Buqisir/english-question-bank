@@ -376,9 +376,27 @@ function blankIdsByQuestionNumber(questionIds, blankIds, questions) {
   return byQuestionNumber
 }
 
-function markerInlines(paragraphId, text, blankIdByQuestionNumber, promptByBlankId) {
+function legacyBlankMarkers(literal, acceptNumericGrammarMarkers) {
+  // The only alternate legacy shape is a standalone source-declared NN._____.
+  const pattern = acceptNumericGrammarMarkers
+    ? /__(?<embeddedNumber>\d+)__|(?<!\S)(?<numericNumber>\d+)\.(?<numericBlank>_____)(?![\p{L}\p{N}_])/gu
+    : /__(?<embeddedNumber>\d+)__/g
+  return [...literal.matchAll(pattern)].map((marker) => ({
+    index: marker.index,
+    raw: marker[0],
+    questionNo: Number(marker.groups.embeddedNumber || marker.groups.numericNumber),
+  }))
+}
+
+function markerInlines(
+  paragraphId,
+  text,
+  blankIdByQuestionNumber,
+  promptByBlankId,
+  acceptNumericGrammarMarkers = false,
+) {
   const literal = String(text || '')
-  const markers = [...literal.matchAll(/__(\d+)__/g)]
+  const markers = legacyBlankMarkers(literal, acceptNumericGrammarMarkers)
   if (markers.length === 0 || blankIdByQuestionNumber.size === 0) {
     return textContent(`text:${paragraphId}`, literal)
   }
@@ -392,15 +410,15 @@ function markerInlines(paragraphId, text, blankIdByQuestionNumber, promptByBlank
         text: literal.slice(cursor, marker.index),
       })
     }
-    const blankId = blankIdByQuestionNumber.get(Number(marker[1]))
+    const blankId = blankIdByQuestionNumber.get(marker.questionNo)
     inlines.push(blankId
       ? { kind: 'blank_ref', nodeId: `blank-ref:${paragraphId}:${marker.index}`, blankId }
       : {
           kind: 'text',
           nodeId: `text:${paragraphId}:${marker.index}`,
-          text: marker[0],
+          text: marker.raw,
         })
-    cursor = marker.index + marker[0].length
+    cursor = marker.index + marker.raw.length
     const prompt = blankId && promptByBlankId.get(blankId)
     const promptPrefix = typeof prompt === 'string' && prompt.length > 0
       ? ` (${prompt})`
@@ -436,7 +454,14 @@ function markerInlines(paragraphId, text, blankIdByQuestionNumber, promptByBlank
   return inlines
 }
 
-function passageContent(group, questionIds = [], blankIds = [], questions = [], blanks = {}) {
+function passageContent(
+  group,
+  questionIds = [],
+  blankIds = [],
+  questions = [],
+  blanks = {},
+  acceptNumericGrammarMarkers = false,
+) {
   const blankIdByQuestionNumber = blankIdsByQuestionNumber(questionIds, blankIds, questions)
   const promptByBlankId = new Map(blankIds.flatMap((blankId) => {
     const prompt = blanks[blankId]?.prompt
@@ -451,6 +476,7 @@ function passageContent(group, questionIds = [], blankIds = [], questions = [], 
         paragraph.text,
         blankIdByQuestionNumber,
         promptByBlankId,
+        acceptNumericGrammarMarkers,
       ),
     })),
   }
@@ -568,7 +594,7 @@ function ticket26Observations(record, asset) {
     documentInputKey: inputKeyByDocumentId.get(observation.documentId),
     value: observation.value,
     span: { start: 0, end: byteLengthByInputKey.get(inputKeyByDocumentId.get(observation.documentId)) },
-    extraction: { adapterId: 'ticket-26-legacy-source-capture', version: '2' },
+    extraction: { adapterId: 'ticket-26-legacy-source-capture', version: '3' },
   }))
   const assetDocument = record.documents.find((document) => document.role === 'asset-projection')
   for (const group of Object.values(asset.content.groups)) {
@@ -588,7 +614,7 @@ function ticket26Observations(record, asset) {
           ...(typeof blank?.prompt === 'string' && blank.prompt.length > 0 ? { prompt: blank.prompt } : {}),
         },
         span: { start: 0, end: assetDocument.byteLength },
-        extraction: { adapterId: 'ticket-26-legacy-source-capture', version: '2' },
+        extraction: { adapterId: 'ticket-26-legacy-source-capture', version: '3' },
       })
     }
   }
@@ -679,7 +705,14 @@ export function deriveTicket26LegacySource(sourceCaptureBytes) {
     const questions = questionIds.map((questionId) => asset.content.questions[questionId])
     const content = slot.writingTask
       ? writingContent(group, slot.writingTask)
-      : passageContent(group, questionIds, blankIds, questions, asset.content.blanks)
+      : passageContent(
+          group,
+          questionIds,
+          blankIds,
+          questions,
+          asset.content.blanks,
+          slot.family === 'grammar-fill',
+        )
     const sourceSpanRefsByTarget = {
       ...Object.fromEntries(blankIds.map((blankId) => [`blank:${blankId}`, [assetSpanId]])),
       ...(slot.family === 'grammar-fill'

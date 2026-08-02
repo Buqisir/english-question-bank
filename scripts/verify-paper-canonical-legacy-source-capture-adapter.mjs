@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict'
 import { readFile } from 'node:fs/promises'
+import manifestV40 from '../standards/paper-canonical/manifest-v40.json' with { type: 'json' }
 import {
   canonicalAuthorityRef,
   resolveCanonicalAuthority,
@@ -45,6 +46,17 @@ function reconstructedPassage(group) {
   return (group.content?.blocks || []).map((block) => (block.inlines || []).map((inline) => (
     inline.kind === 'blank_ref'
       ? `__${questionNoByBlankId.get(inline.blankId)}__`
+      : inline.text || ''
+  )).join('')).join('\n')
+}
+
+function reconstructedLegacyNumericPassage(group) {
+  const questionNoByBlankId = new Map(
+    group.blankIds.map((blankId, index) => [blankId, group.questions[index]?.questionNo]),
+  )
+  return (group.content?.blocks || []).map((block) => (block.inlines || []).map((inline) => (
+    inline.kind === 'blank_ref'
+      ? `${questionNoByBlankId.get(inline.blankId)}._____`
       : inline.text || ''
   )).join('')).join('\n')
 }
@@ -143,10 +155,10 @@ const legacyAuthority = resolveCanonicalAuthority(trustedLegacyCaptureCandidateA
 assert.equal(legacyAuthority.ok, true)
 assert.equal(canonicalAuthorityRef.manifestVersion, '36', 'the migration source adapter must not advance current/publication authority')
 assert.equal(trustedDocxCandidateAuthorityRef.manifestVersion, '37', 'the DOCX candidate seam must retain v37')
-assert.equal(trustedLegacyCaptureCandidateAuthorityRef.manifestVersion, '40')
-assert.equal(legacyAuthority.closure.artifacts.adapter.adapters.find((entry) => entry.adapterId === 'ticket-26-legacy-source-capture').version, '2')
+assert.equal(trustedLegacyCaptureCandidateAuthorityRef.manifestVersion, '41')
+assert.equal(legacyAuthority.closure.artifacts.adapter.adapters.find((entry) => entry.adapterId === 'ticket-26-legacy-source-capture').version, '3')
 assert.ok(legacyAuthority.closure.schemas['ticket-26-legacy-source-envelope-v1'])
-assert.equal(Object.hasOwn(compilerModule, 'compileTrustedLegacyCaptureCandidate'), false, 'ordinary callers must not reach the privileged v40 compiler')
+assert.equal(Object.hasOwn(compilerModule, 'compileTrustedLegacyCaptureCandidate'), false, 'ordinary callers must not reach the privileged v41 compiler')
 assert.deepEqual(Object.keys(trustedImport).sort(), ['confirmCanonicalCandidate', 'importCanonicalCandidate'])
 
 const firstImport = importCanonicalCandidate(legacyInput(captureBytes))
@@ -154,7 +166,7 @@ const secondImport = importCanonicalCandidate(legacyInput(captureBytes))
 assert.deepEqual(firstImport, secondImport, 'exact legacy capture derivation must be deterministic')
 assert.ok(firstImport.candidate, 'the exact committed capture must produce an Import Candidate')
 assert.equal(firstImport.candidate.schemaVersion, 'trusted-ticket-26-legacy-import-candidate-v1')
-assert.equal(firstImport.candidate.authority.manifestVersion, '40')
+assert.equal(firstImport.candidate.authority.manifestVersion, '41')
 assert.equal(firstImport.candidate.source.sha256, sha256(captureBytes))
 assert.equal(firstImport.candidate.source.byteLength, captureBytes.byteLength)
 assert.equal(firstImport.candidate.source.paperId, 'paper-2020-i', 'paper identity must be resolved from the trusted binding')
@@ -171,7 +183,7 @@ const genericBypass = compilerModule.compileCanonicalPaper({
   ...buildTicket26LegacyCompilerRequest(captureBytes),
   authority: trustedLegacyCaptureCandidateAuthorityRef,
 })
-assert.equal('canonicalPaper' in genericBypass.artifacts, false, 'generic compilation must not bypass Teacher Confirmation for v40')
+assert.equal('canonicalPaper' in genericBypass.artifacts, false, 'generic compilation must not bypass Teacher Confirmation for v41')
 assert.ok(genericBypass.artifacts.normalizationReport.diagnostics.some((item) => item.code === 'AUTHORITY_RETIRED'))
 
 const docxBytes = new Uint8Array(await readFile(new URL('test-fixtures/paper-import/paper-2025-i-docx-source-adapter/2025-nck1-answer-source.docx', root)))
@@ -278,7 +290,7 @@ const allSources = await Promise.all(batch.membership.paperIds.map(async (paperI
   const candidate = importCanonicalCandidate(legacyInput(bytes))
   assert.ok(candidate.candidate, `${paperId} must enter the shared candidate seam`)
   assert.equal(candidate.candidate.source.paperId, paperId, `${paperId} identity must come from the trusted registry`)
-  assert.equal(candidate.candidate.authority.manifestVersion, '40')
+  assert.equal(candidate.candidate.authority.manifestVersion, '41')
   return { paperId, bytes, projected, candidate: candidate.candidate }
 }))
 assert.equal(allSources.length, 31, 'the full Ticket 26 batch must project 31 of 31 captures')
@@ -289,48 +301,92 @@ assert.deepEqual(
 )
 
 const sourceByPaperId = new Map(allSources.map((entry) => [entry.paperId, entry.projected]))
+const legacyV40Authority = resolveCanonicalAuthority({
+  manifestId: manifestV40.manifestId,
+  manifestVersion: manifestV40.version,
+  manifestDigest: digestJson(manifestV40),
+})
+assert.equal(legacyV40Authority.ok, true, 'the prior v40 authority must remain available')
+const zhejiangV9Profile = legacyV40Authority.closure.profiles.get('zhejiang-legacy')
+assert.equal(zhejiangV9Profile.version, '9', 'v41 must preserve the prior Zhejiang v9 authority')
+assert.deepEqual(
+  zhejiangV9Profile.parts
+    .flatMap((part) => part.sections)
+    .find((section) => section.sectionId === 'reading.choice')
+    .slots
+    .map((slot) => slot.questionCardinality),
+  [
+    { kind: 'exact', count: 3 },
+    { kind: 'one_of', counts: [3, 4] },
+    { kind: 'one_of', counts: [3, 4] },
+  ],
+  'the historical v9 3/4/3-compatible profile remains immutable',
+)
 const zhejiangProfile = legacyAuthority.closure.profiles.get('zhejiang-legacy')
+assert.equal(zhejiangProfile.version, '10')
 const zhejiangReadingChoice = zhejiangProfile.parts
   .flatMap((part) => part.sections)
   .find((section) => section.sectionId === 'reading.choice')
 assert.ok(zhejiangReadingChoice)
-const zhejiang2021Reading = sourceByPaperId.get('paper-zj-2021-jun').groups
-  .filter((group) => group.family === 'reading')
 assert.deepEqual(
-  zhejiang2021Reading.map((group) => ({
-    slotId: group.slotId,
-    questionCount: group.questionIds.length,
+  zhejiangReadingChoice.slots.map((slot) => ({
+    slotId: slot.slotId,
+    questionCardinality: slot.questionCardinality,
+    numberingRule: slot.numberingRule,
+    scoringRule: slot.scoringRule,
   })),
   [
-    { slotId: 'reading.a', questionCount: 3 },
-    { slotId: 'reading.b', questionCount: 4 },
-    { slotId: 'reading.c', questionCount: 3 },
+    {
+      slotId: 'reading.a',
+      questionCardinality: { kind: 'one_of', counts: [3, 4] },
+      numberingRule: { end: 23, kind: 'range', start: 21 },
+      scoringRule: { kind: 'per_question', points: 2.5 },
+    },
+    {
+      slotId: 'reading.b',
+      questionCardinality: { kind: 'one_of', counts: [3, 4] },
+      numberingRule: { end: 26, kind: 'range', start: 24 },
+      scoringRule: { kind: 'per_question', points: 2.5 },
+    },
+    {
+      slotId: 'reading.c',
+      questionCardinality: { kind: 'one_of', counts: [3, 4] },
+      numberingRule: { end: 30, kind: 'range', start: 27 },
+      scoringRule: { kind: 'per_question', points: 2.5 },
+    },
   ],
-  'the frozen Zhejiang representative supplies the supported 3/4/3 reading layout',
+  'Zhejiang v10 derives all three reading groups from one contiguous 21-30 authority',
 )
-const zhejiangQuestionCountBySlot = new Map(
-  zhejiang2021Reading.map((group) => [group.slotId, group.questionIds.length]),
+const permittedZhejiangLayouts = zhejiangReadingChoice.slots[0].questionCardinality.counts.flatMap((a) =>
+  zhejiangReadingChoice.slots[1].questionCardinality.counts.flatMap((b) =>
+    zhejiangReadingChoice.slots[2].questionCardinality.counts.map((c) => [a, b, c])),
+).filter((counts) => (
+  zhejiangReadingChoice.slots[0].numberingRule.start + counts.reduce((total, count) => total + count, 0) - 1
+    === zhejiangReadingChoice.slots.at(-1).numberingRule.end
+))
+assert.deepEqual(
+  permittedZhejiangLayouts,
+  [[3, 3, 4], [3, 4, 3], [4, 3, 3]],
+  'the contiguous authority must reject every non-observed Zhejiang reading permutation',
 )
-const zhejiangReadingScore = zhejiangReadingChoice.slots.reduce((total, slot) => {
-  const questionCount = zhejiangQuestionCountBySlot.get(slot.slotId)
-  assert.equal(slot.scoringRule.kind, 'per_question')
-  assert.equal(slot.scoringRule.points, 2.5)
-  const derivedTotal = slot.scoringRule.points * questionCount
-  const configuredTotal = Object.hasOwn(slot.scoringRule, 'total')
-    ? slot.scoringRule.total
-    : derivedTotal
-  assert.equal(
-    configuredTotal,
-    derivedTotal,
-    `${slot.slotId} score must agree with its frozen bound question count`,
+for (const { paperId, counts } of [
+  { paperId: 'paper-zj-2020-jan', counts: [3, 3, 4] },
+  { paperId: 'paper-zj-2021-jun', counts: [3, 4, 3] },
+  { paperId: 'paper-zj-2020-jul', counts: [4, 3, 3] },
+]) {
+  const reading = sourceByPaperId.get(paperId).groups.filter((group) => group.family === 'reading')
+  assert.deepEqual(reading.map((group) => group.questionIds.length), counts, `${paperId} must retain its frozen Zhejiang reading layout`)
+  assert.deepEqual(
+    reading.flatMap((group) => group.questions.map((question) => question.questionNo)),
+    [21, 22, 23, 24, 25, 26, 27, 28, 29, 30],
+    `${paperId} must retain one contiguous 21-30 reading number sequence`,
   )
-  return total + configuredTotal
-}, 0)
-assert.equal(
-  zhejiangReadingScore,
-  zhejiangReadingChoice.score,
-  'the supported 3/4/3 reading layout must close the 25-point section total',
-)
+  assert.equal(
+    reading.reduce((total, group) => total + group.questionIds.length * 2.5, 0),
+    zhejiangReadingChoice.score,
+    `${paperId} must close the Zhejiang reading section at 25 points`,
+  )
+}
 for (const paperId of ['paper-2020-i', 'paper-2020-bing', 'paper-zj-2020-jan']) {
   const projected = sourceByPaperId.get(paperId)
   for (const slotId of ['reading.seven-choices', 'language.cloze', 'language.grammar-fill']) {
@@ -437,8 +493,37 @@ for (const refs of Object.values(nationalSource.inactiveSlots)) {
 
 const unmatchedMarkerSource = sourceByPaperId.get('paper-960d0f8d')
 const unmatchedGrammar = unmatchedMarkerSource.groups.find((group) => group.slotId === 'language.grammar-fill')
-assert.equal(groupInlines(unmatchedGrammar).filter((inline) => inline.kind === 'blank_ref').length, 0)
-assert.ok(contentText(unmatchedGrammar.content).includes('56._____'))
+const unmatchedMarkerCandidate = allSources.find(({ paperId }) => paperId === 'paper-960d0f8d').candidate
+assert.deepEqual(
+  unmatchedMarkerCandidate.interpretation.assertions
+    .filter((assertion) => unmatchedGrammar.questionIds.includes(assertion.questionId)),
+  unmatchedMarkerSource.assertions
+    .filter((assertion) => unmatchedGrammar.questionIds.includes(assertion.questionId)),
+  'numeric Grammar Fill projection must retain the frozen answer identities',
+)
+assert.deepEqual(
+  groupInlines(unmatchedGrammar)
+    .filter((inline) => inline.kind === 'blank_ref')
+    .map((inline) => inline.blankId),
+  unmatchedGrammar.blankIds,
+  'a frozen numeric-marker Grammar Fill source must bind each source-declared Blank once and in source order',
+)
+assert.equal(
+  reconstructedLegacyNumericPassage(unmatchedGrammar),
+  unmatchedGrammar.passage.paragraphs.map((paragraph) => paragraph.text).join('\n'),
+  'numeric Grammar Fill marker projection must preserve the exact frozen visible source text',
+)
+assert.deepEqual(
+  unmatchedGrammar.variant.promptBindings.map(({ blankId, provision }) => ({ blankId, provision })),
+  unmatchedGrammar.blankIds.map((blankId) => ({ blankId, provision: 'source_proven_none' })),
+  'the numeric-marker source must not manufacture Grammar Fill prompts',
+)
+for (const numericProse of ['25-30g a day', '800g a day', '10g per day', '3-5g every few days']) {
+  assert.ok(
+    contentText(unmatchedGrammar.content).includes(numericProse),
+    `unrelated numeric prose ${numericProse} must remain literal text rather than becoming a Blank`,
+  )
+}
 
 const ambiguousStarterSource = sourceByPaperId.get('paper-zj-2022-jun')
 const ambiguousContinuation = ambiguousStarterSource.groups.find((group) => group.slotId === 'writing.continuation')
@@ -500,26 +585,36 @@ assert.deepEqual(
   confirmations
     .filter((item) => item.disposition === 'unresolved')
     .map(({ paperId, codes }) => ({ paperId, codes })),
-  [
-    {
-      paperId: 'paper-960d0f8d',
-      codes: [
-        'GRAMMAR_FILL_PROMPT_SOURCE_DISAGREEMENT',
-        'REFERENCE_BLANK_OCCURRENCE',
-      ],
-    },
-    {
-      paperId: 'paper-zj-2020-jul',
-      codes: [
-        'GROUP_CARDINALITY_MISMATCH',
-        'GROUP_NUMBERING_RANGE_MISMATCH',
-      ],
-    },
-  ],
-  'the measured full batch retains only the unrelated frozen grammar and reading/profile conflicts',
+  [],
+  'the bounded legacy source adaptations must close every frozen Ticket 26 paper without unresolved output',
 )
-assert.equal(confirmations.filter((item) => item.disposition === 'canonical').length, 29)
-assert.equal(confirmations.filter((item) => item.disposition === 'unresolved').length, 2)
+assert.equal(confirmations.filter((item) => item.disposition === 'canonical').length, 31)
+assert.equal(confirmations.filter((item) => item.disposition === 'unresolved').length, 0)
+for (const { paperId, result } of confirmations) {
+  assert.equal(
+    Number(Boolean(result.canonicalPaper)) + Number(Array.isArray(result.unresolvedIssues)),
+    1,
+    `${paperId} must remain all-or-none after Teacher Confirmation`,
+  )
+  assert.equal(
+    result.canonicalPaper?.paperPlan?.completeness?.status,
+    'complete',
+    `${paperId} must form one complete Canonical Paper`,
+  )
+  assert.equal(
+    'publication' in result,
+    false,
+    `${paperId} confirmation must remain unpublished`,
+  )
+}
+const unmatchedMarkerConfirmation = confirmations.find(({ paperId }) => paperId === 'paper-960d0f8d').result
+assert.deepEqual(
+  unmatchedMarkerConfirmation.canonicalPaper.sourceCapture.assertions
+    .filter((assertion) => unmatchedGrammar.questionIds.includes(assertion.questionId)),
+  unmatchedMarkerSource.assertions
+    .filter((assertion) => unmatchedGrammar.questionIds.includes(assertion.questionId)),
+  'Teacher Confirmation must preserve the numeric Grammar Fill answer identities',
+)
 const dryRun = process.argv.includes('--dry-run')
 const unresolved = dryRun ? confirmations : []
 const unresolvedPaperIds = unresolved.filter((item) => item.disposition === 'unresolved').map((item) => item.paperId)

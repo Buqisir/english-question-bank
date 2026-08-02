@@ -38,6 +38,7 @@ import manifestV37 from '../../standards/paper-canonical/manifest-v37.json' with
 import manifestV38 from '../../standards/paper-canonical/manifest-v38.json' with { type: 'json' }
 import manifestV39 from '../../standards/paper-canonical/manifest-v39.json' with { type: 'json' }
 import manifestV40 from '../../standards/paper-canonical/manifest-v40.json' with { type: 'json' }
+import manifestV41 from '../../standards/paper-canonical/manifest-v41.json' with { type: 'json' }
 import legacyRhythmManifestV13 from '../../standards/paper-canonical/history/manifest-v13-reading-rhythm/manifest-v13.json' with { type: 'json' }
 import legacyRhythmTypographyV3 from '../../standards/paper-canonical/history/manifest-v13-reading-rhythm/paper-typography-v3.json' with { type: 'json' }
 import legacyRhythmTypographyV3Schema from '../../standards/paper-canonical/history/manifest-v13-reading-rhythm/renderer-typography-v3.schema.json' with { type: 'json' }
@@ -55,6 +56,7 @@ import sourceAdaptersV9 from '../../standards/paper-canonical/adapters/source-ad
 import sourceAdaptersV10 from '../../standards/paper-canonical/adapters/source-adapters-v10.json' with { type: 'json' }
 import sourceAdaptersV11 from '../../standards/paper-canonical/adapters/source-adapters-v11.json' with { type: 'json' }
 import sourceAdaptersV12 from '../../standards/paper-canonical/adapters/source-adapters-v12.json' with { type: 'json' }
+import sourceAdaptersV13 from '../../standards/paper-canonical/adapters/source-adapters-v13.json' with { type: 'json' }
 import nck1 from '../../standards/paper-canonical/profiles/nck1-v1.json' with { type: 'json' }
 import zhejiangLegacy from '../../standards/paper-canonical/profiles/zhejiang-legacy-v1.json' with { type: 'json' }
 import nck1V2 from '../../standards/paper-canonical/profiles/nck1-v2.json' with { type: 'json' }
@@ -76,6 +78,7 @@ import zhejiangLegacyV6 from '../../standards/paper-canonical/profiles/zhejiang-
 import zhejiangLegacyV7 from '../../standards/paper-canonical/profiles/zhejiang-legacy-v7.json' with { type: 'json' }
 import zhejiangLegacyV8 from '../../standards/paper-canonical/profiles/zhejiang-legacy-v8.json' with { type: 'json' }
 import zhejiangLegacyV9 from '../../standards/paper-canonical/profiles/zhejiang-legacy-v9.json' with { type: 'json' }
+import zhejiangLegacyV10 from '../../standards/paper-canonical/profiles/zhejiang-legacy-v10.json' with { type: 'json' }
 import nationalLegacy from '../../standards/paper-canonical/profiles/national-legacy-v1.json' with { type: 'json' }
 import nationalLegacyV2 from '../../standards/paper-canonical/profiles/national-legacy-v2.json' with { type: 'json' }
 import nationalLegacyV3 from '../../standards/paper-canonical/profiles/national-legacy-v3.json' with { type: 'json' }
@@ -633,7 +636,7 @@ function validateZhejiangWritingChrome(profile) {
   const application = sections[0]
   const continuation = sections[1]
   const valid = (
-    ['4', '5', '6', '7', '8', '9'].includes(profile?.version)
+    ['4', '5', '6', '7', '8', '9', '10'].includes(profile?.version)
     && writingParts.length === 1
     && part.ordinal === 4
     && part.titleInstructionRef === 'part.writing'
@@ -1850,6 +1853,11 @@ const artifactsV40 = {
   ...artifactsV39,
   'profile-zhejiang-legacy': zhejiangLegacyV9,
 }
+const artifactsV41 = {
+  ...artifactsV40,
+  adapter: sourceAdaptersV13,
+  'profile-zhejiang-legacy': zhejiangLegacyV10,
+}
 const schemasV1 = { ...sharedSchemas, 'renderer-typography-v1': typographyV1Schema, 'normalization-rules-v1': normalizationSchema, 'normalization-report-v1': reportSchema, 'canonical-paper-publication-v1': publicationSchema }
 const schemasV2 = { ...sharedSchemas, 'renderer-typography-v1': typographyV1Schema, 'normalization-rules-v2': normalizationV2Schema, 'normalization-report-v2': reportV2Schema, 'canonical-paper-publication-v2': publicationV2Schema }
 const schemasV3 = { ...sharedSchemas, 'renderer-typography-v2': typographyV2Schema, 'normalization-rules-v2': normalizationV2Schema, 'normalization-report-v3': reportV3Schema, 'canonical-paper-publication-v3': publicationV3Schema }
@@ -2357,6 +2365,7 @@ const schemasV39 = {
   'canonical-paper-publication-v39': publicationV39Schema,
 }
 const schemasV40 = schemasV39
+const schemasV41 = schemasV40
 const validationV1 = validateAuthorityClosure({ manifest: manifestV1, artifacts: artifactsV1, schemas: schemasV1 })
 const validationV2 = validateAuthorityClosure({ manifest: manifestV2, artifacts: artifactsV2, schemas: schemasV2 })
 const validationV3 = validateAuthorityClosure({ manifest: manifestV3, artifacts: artifactsV3, schemas: schemasV3 })
@@ -2402,6 +2411,7 @@ const validationV37 = validateAuthorityClosure({ manifest: manifestV37, artifact
 const validationV38 = validateAuthorityClosure({ manifest: manifestV38, artifacts: artifactsV38, schemas: schemasV38 })
 const validationV39 = validateAuthorityClosure({ manifest: manifestV39, artifacts: artifactsV39, schemas: schemasV39 })
 const validationV40 = validateAuthorityClosure({ manifest: manifestV40, artifacts: artifactsV40, schemas: schemasV40 })
+const validationV41 = validateAuthorityClosure({ manifest: manifestV41, artifacts: artifactsV41, schemas: schemasV41 })
 const validations = [
   validationV1,
   validationV2,
@@ -2444,6 +2454,7 @@ const validations = [
   validationV38,
   validationV39,
   validationV40,
+  validationV41,
 ]
 if (validations.some((validation) => !validation.ok)) {
   throw new Error(`Invalid checked-in canonical authority: ${JSON.stringify(validations.flatMap((validation) => validation.issues))}`)
@@ -2499,6 +2510,7 @@ const authorities = [
   { manifest: manifestV38, artifacts: artifactsV38, schemas: schemasV38 },
   { manifest: manifestV39, artifacts: artifactsV39, schemas: schemasV39 },
   { manifest: manifestV40, artifacts: artifactsV40, schemas: schemasV40 },
+  { manifest: manifestV41, artifacts: artifactsV41, schemas: schemasV41 },
 ].map((authority) => ({
   ...authority,
   authorityRef: authorityRef(authority.manifest),
@@ -2511,9 +2523,9 @@ export const canonicalAuthorityRef = authorities.find((authority) => authority.m
 // advancing publication/current authority beyond the existing v36 closure.
 export const trustedDocxCandidateAuthorityRef = authorities.find((authority) => authority.manifest.version === '37').authorityRef
 // Ticket 26's committed legacy JSON capture is a migration Source. It can use
-// the same Candidate -> Teacher Confirmation seam under v40 without advancing
+// the same Candidate -> Teacher Confirmation seam under v41 without advancing
 // the v36 publication/current authority.
-export const trustedLegacyCaptureCandidateAuthorityRef = authorities.find((authority) => authority.manifest.version === '40').authorityRef
+export const trustedLegacyCaptureCandidateAuthorityRef = authorities.find((authority) => authority.manifest.version === '41').authorityRef
 
 export function resolveCanonicalAuthority(authorityRef) {
   const authority = authorities.find((candidate) => candidate.authorityRef.manifestId === authorityRef?.manifestId && candidate.authorityRef.manifestVersion === authorityRef?.manifestVersion && candidate.authorityRef.manifestDigest === authorityRef?.manifestDigest)
