@@ -1,0 +1,12 @@
+{
+  "artifactDigest": "sha256:3d66362affaef46838f160b0faf3bc3baa04f18ad41e846abbcfc1d344f49d91",
+  "paperId": "paper-2024-jia",
+  "schemaVersion": "ticket-28-teacher-confirmation-artifact-v1",
+  "sourceCapturePath": "test-fixtures/paper-import/paper-canonical-source-captures/ticket-26-v1/paper-2024-jia/source-capture-v1.json",
+  "teacherConfirmation": {
+    "candidateDigest": "sha256:107039e94bc8843b92068b84f1b9158915be6bcadf67ac031ce69e5f75549f61",
+    "confirmed": true,
+    "schemaVersion": "teacher-confirmation-v1",
+    "sourceDigest": "sha256:0d493e3ffaae42a0fbe273f6e3a9df7932d264942a5d3bd4455f30534859085b"
+  }
+}
