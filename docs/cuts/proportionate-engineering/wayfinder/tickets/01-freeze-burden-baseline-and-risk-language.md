@@ -87,7 +87,7 @@ deletion measurably increases risk, with control strength following blast
 radius, irreversibility, and automation authority. No time, cost, quota,
 billing, defect-rate, flake-rate, or model-quality claim was inferred.
 
-Result commit: pending
+Result commit: `6ff93db29adb21c6e205eb2181e1c570f3073456`
 Verify: exact-HEAD recount; link/path/status/route checks; `git diff --check`
 Notes: Tickets 02–07 remain untouched and repository-read-only; Ticket 08 is
 still their sole later recorder. No reform, paper-canonical authority, Ticket
