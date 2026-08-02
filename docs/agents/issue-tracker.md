@@ -148,6 +148,22 @@ Owner manifest-digest approval ticket-set manifest SHA-256: <64-hex digest | pen
 Implementation dispatched by approval record: no | pending
 ```
 
+An owner-explicit external implementation blocker may keep a fully approved
+route non-dispatchable without invalidating the four canonical authority gates:
+
+```text
+Canonical authority gates: verified | pending
+External implementation blocker: none | active
+External blocker kind: <concise durable identity | not-applicable>
+External blocker closure evidence: <repo-relative path or commit | pending | not-applicable>
+Implementation dispatch: forbidden | allowed
+```
+
+When the external blocker is `active` and closure evidence is `pending`,
+`Implementation dispatch` must remain `forbidden` even if all four canonical
+authority gates are verified. The blocker does not authorize creating or
+executing its own successor task.
+
 Conditional predicate evidence is a separate committed artifact. It reports
 every mandatory clause named by `dispatch-protocols.md`, including any allowed
 baseline verifier exception, while the receipt and approval record bind its

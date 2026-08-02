@@ -1304,6 +1304,10 @@ function parsePhaseReceipt(
           allImplementationGatesVerified:
             markdownField(
               approvalBindingReceiptSource,
+              'Canonical authority gates',
+            ) === 'verified' ||
+            markdownField(
+              approvalBindingReceiptSource,
               'Implementation dispatch',
             ) === 'allowed',
         }
@@ -1315,6 +1319,18 @@ function parsePhaseReceipt(
     next,
     terminal: markdownField(source, 'Terminal') === 'yes',
     implementationDispatch: markdownField(source, 'Implementation dispatch'),
+    canonicalAuthorityGates: markdownField(
+      source,
+      'Canonical authority gates',
+    ),
+    externalImplementationBlocker: markdownField(
+      source,
+      'External implementation blocker',
+    ),
+    externalBlockerClosureEvidence: markdownField(
+      source,
+      'External blocker closure evidence',
+    ),
     mapStatus: markdownField(mapSource, 'Status'),
     mapNext: markdownField(mapSource, 'Next on PASS'),
     binding: {
@@ -1679,6 +1695,9 @@ function phaseTransitionErrors(state) {
     next,
     terminal,
     implementationDispatch,
+    canonicalAuthorityGates,
+    externalImplementationBlocker,
+    externalBlockerClosureEvidence,
     provenance,
     outcomes,
     spec,
@@ -1793,11 +1812,32 @@ function phaseTransitionErrors(state) {
     ticketsBound &&
     approvalBound &&
     manifestApprovalBound
+  const externalBlockerActive =
+    externalImplementationBlocker === 'active' &&
+    externalBlockerClosureEvidence === 'pending'
+  if (
+    ![undefined, 'none', 'active'].includes(externalImplementationBlocker)
+  ) {
+    errors.push('External implementation blocker is malformed')
+  }
+  if (
+    externalImplementationBlocker === 'active' &&
+    externalBlockerClosureEvidence !== 'pending'
+  ) {
+    errors.push('Active external implementation blocker requires pending closure evidence')
+  }
+  if (
+    externalBlockerActive &&
+    implementationAllowed &&
+    canonicalAuthorityGates !== 'verified'
+  ) {
+    errors.push('External blocker must not obscure the four canonical authority gates')
+  }
   if (
     implementationDispatch !==
-    (implementationAllowed ? 'allowed' : 'forbidden')
+    (implementationAllowed && !externalBlockerActive ? 'allowed' : 'forbidden')
   ) {
-    errors.push('Implementation dispatch does not match the four gates')
+    errors.push('Implementation dispatch does not match the four gates and external blocker')
   }
 
   if (['independent-review', 'focused-re-review'].includes(previous)) {
@@ -3299,6 +3339,26 @@ assert(
     markdownField(currentPaperTicket02, 'Next on PASS') ===
       'independent review',
   'Ticket 02 bootstrap uses the pre-existing implementation-to-independent-review edge',
+)
+
+const externallyBlockedImplementation = phaseFixture(
+  'owner-approval',
+  'implementation',
+)
+externallyBlockedImplementation.canonicalAuthorityGates = 'verified'
+externallyBlockedImplementation.externalImplementationBlocker = 'active'
+externallyBlockedImplementation.externalBlockerClosureEvidence = 'pending'
+externallyBlockedImplementation.implementationDispatch = 'forbidden'
+assert(
+  phaseReceiptErrors(externallyBlockedImplementation).length === 0,
+  'an explicit pending external blocker keeps verified implementation gates non-dispatchable',
+)
+externallyBlockedImplementation.implementationDispatch = 'allowed'
+assert(
+  phaseReceiptErrors(externallyBlockedImplementation).some((error) =>
+    error.includes('external blocker'),
+  ),
+  'an active external blocker rejects implementation dispatch',
 )
 
 section('canonical handoff')
