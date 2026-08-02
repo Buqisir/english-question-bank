@@ -1,16 +1,16 @@
 # Paper canonical unification phase transition
 
 Status: active
-Previous phase: to-tickets
-Current phase: owner-approval
-Next on PASS: owner-approval
+Previous phase: owner-approval
+Current phase: implementation
+Next on PASS: implementation
 Terminal: no
 
 Wayfinder map: `docs/cuts/paper-canonical-unification/wayfinder/map.md`
 Current map binding: verified
-Current map binding commit: `8adecf11250e06da0a4e02593b104c87b04b810c`
+Current map binding commit: `349d9c24199126b8f2a072c23a9e8ec664cb73a3`
 Current map artifact: `docs/cuts/paper-canonical-unification/wayfinder/map.md`
-Current map artifact SHA-256: `52d84a32debd61442ff6612e22831c5cce5495ff1758b0472e2dbc93ab9731e5`
+Current map artifact SHA-256: `c409ed7e5d58745e84dccc17fd7580b825e54e956dde9a4e40caedbb77941ffc`
 
 Wayfinder status: done
 Wayfinder provenance: verified
@@ -54,18 +54,26 @@ Owner approval source task: `019fbe68-10d0-7371-9927-467af87c4d6c`
 Owner approval proposal peer: `019fbed5-9d38-7f91-883a-42320826c69b`
 Owner approval proposal item: `item-9`
 Owner approval exact message: “approve-ticket-granularity：批准总票数 79、Tickets 25–57 粒度、三 lane DAG、固定集成顺序及模型路由。”
-Owner approval result commit: `8adecf11250e06da0a4e02593b104c87b04b810c`
-Owner approval record: `docs/cuts/paper-canonical-unification/measured-replan-79-owner-granularity-approval.md`
-Owner approval ticket-set manifest SHA-256: pending
+Owner approval result commit: `349d9c24199126b8f2a072c23a9e8ec664cb73a3`
+Owner approval record: `docs/cuts/paper-canonical-unification/owner-approval.md`
+Owner approval ticket-set manifest SHA-256: `5441ad646e0a84762cd84c406d2724ace6cc18ffa0cc174666407aef5dba2ce6`
 
-Owner manifest-digest approval: pending
-Owner manifest-digest approval actor: pending
-Owner manifest-digest approval action: pending
-Owner manifest-digest approval result commit: pending
-Owner manifest-digest approval record: pending
-Owner manifest-digest approval ticket-set manifest SHA-256: pending
+Owner manifest-digest approval: verified
+Owner manifest-digest approval mode: conditional-predicate
+Owner manifest-digest approval actor: owner
+Owner manifest-digest approval action: apply-conditional-manifest-approval
+Owner manifest-digest approval source: owner-message:conditional-policy-task-019fbe68-10d0-7371-9927-467af87c4d6c
+Owner manifest-digest approval proposal identity: proposal:task-019fbed5-9d38-7f91-883a-42320826c69b/turn-019fbed5-9e9f-70d0-9f46-9b62ade3b3bb/item-9
+Owner manifest-digest approval granularity identity: owner-granularity:task-019fbe68-10d0-7371-9927-467af87c4d6c/proposal-019fbed5-9d38-7f91-883a-42320826c69b/item-9
+Owner manifest-digest approval recording peer: peer:019fc04d-17f4-7ee1-8814-2c63cece73c0
+Owner manifest-digest approval predicate evidence: `docs/cuts/paper-canonical-unification/conditional-manifest-approval-evidence.md`
+Owner manifest-digest approval predicate evidence SHA-256: `0396eb048619e7f5d235404d393ab2e0645e664ab55eb86a2e6379a418f4880a`
+Owner manifest-digest approval result commit: `349d9c24199126b8f2a072c23a9e8ec664cb73a3`
+Owner manifest-digest approval record: `docs/cuts/paper-canonical-unification/owner-approval.md`
+Owner manifest-digest approval ticket-set manifest SHA-256: `5441ad646e0a84762cd84c406d2724ace6cc18ffa0cc174666407aef5dba2ce6`
+Implementation dispatched by approval record: no
 
-Implementation dispatch: forbidden
+Implementation dispatch: allowed
 
 ## Guarded measured-replan evidence
 
@@ -99,7 +107,11 @@ obligations.
 
 ## Current route
 
-Publication is paused at owner exact manifest-digest approval. Granularity/DAG
-approval is verified, but the exact produced manifest SHA-256 has not been
-approved. Implementation dispatch is forbidden; Ticket 25 and all lanes remain
-unstarted.
+The exact item-9 proposal and the produced 79-ticket manifest passed the
+conditional predicate under the owner's explicit policy. Approval-route commit
+`349d9c24199126b8f2a072c23a9e8ec664cb73a3` records the predicate evidence,
+conditional approval, and the implementation route; the immediately following
+receipt-only commit binds that result and the exact map bytes. All four
+implementation gates are verified at the resulting exact HEAD, so dispatch is
+allowed by the receipt. This approval recording did not start or dispatch
+Ticket 25 or any lane.
