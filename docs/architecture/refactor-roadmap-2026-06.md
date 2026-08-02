@@ -2,9 +2,8 @@
 
 Status: Historical technical record — non-authoritative.
 This is a compact inventory of technical decisions and unresolved candidates,
-not a work queue. If a candidate is revived, the owner opens a new top-level
-task under `docs/steering/codex-matt-workflow.md` after checking
-`docs/STATUS.md`.
+not a work queue. If a candidate is revived, follow the current `AGENTS.md`
+after checking `docs/STATUS.md`.
 
 ## Architectural constraints
 

@@ -2,8 +2,8 @@
 
 Status: Historical technical record — non-authoritative.
 This document contains technical decisions and unresolved candidates only. It
-does not route work. If an item is revived, the owner opens a new top-level task
-under `docs/steering/codex-matt-workflow.md` after checking `docs/STATUS.md`.
+does not route work. If an item is revived, follow the current `AGENTS.md` after
+checking `docs/STATUS.md`.
 
 ## Completed lane
 

@@ -1,6 +1,15 @@
 # Proportionate Engineering Reform — Wayfinder Map
 
-Status: charted
+Status: superseded
+
+## Supersession
+
+The owner superseded the Tickets 09–13 route with the one-time deletion-first
+governance cleanup authorized in source thread
+`019fbe68-10d0-7371-9927-467af87c4d6c`. Tickets 09–13 are not current work and
+create no approval, review, publication, recovery, or completion blocker.
+Ticket 25 may start after the cleanup commit. The remaining map content is
+historical evidence only.
 
 ## Notes
 

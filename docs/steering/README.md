@@ -1,91 +1,22 @@
 # EQB steering index
 
-Read this index before product, UI, planning, implementation, review, QA, or
-shipping work. Load only the note relevant to the task.
+Start with the owner's request and the accepted spec/ticket. Load only the
+smallest note relevant to an actual product or UI decision; this index is not a
+reading quota.
 
-## Collaboration
+- `cut-workflow-protocol.md` — proportionate path for small, multi-session, or
+  genuinely foggy work.
+- `product-scope-discipline.md` — every visible feature must serve a concrete
+  teacher task.
+- `ui-mockup-before-dev-protocol.md` — use mockups for structural visual
+  decisions, not routine micro-changes.
+- `cut-note-protocol.md` — optional material lessons, never a merge gate.
+- `../agents/owner-qa-handoff-template.md` — compact exact-page Owner QA.
 
-### Matt development workflow
+Non-negotiable product posture:
 
-File: `codex-matt-workflow.md`
-
-Use it to choose `grill-with-docs`, Wayfinder, spec/tickets, implementation,
-review, handoff, QA, and shipping. The owner manually dispatches every
-successor under `../agents/dispatch-protocols.md`.
-
-### Product and engineering workflow
-
-File: `cut-workflow-protocol.md`
-
-Use it to classify Small / Normal / Huge context shape and normal / high product
-risk, then choose the smallest sufficient path.
-
-### DEV completion
-
-File: `dev-completion-protocol.md`
-
-Use it for the short ticket result. Detailed dispatch/handoff boundaries,
-deterministic exit selection, and the only complete new-task handoff template
-live in `../agents/dispatch-protocols.md`.
-
-### Owner QA handoff
-
-File: `../agents/owner-qa-handoff-template.md`
-
-Use it for the single canonical QA provisioning contract and handoff format
-across prototypes, implementation, re-QA, responsive checks, real-data
-acceptance, and post-review owner QA.
-
-### Issue tracker
-
-File: `../agents/issue-tracker.md`
-
-Multi-session truth lives in tracked `spec.md`, tickets, and optional Wayfinder
-files under `docs/cuts/<feature>/`.
-
-### Review depth
-
-File: `../agents/review-levels.md`
-
-Ordinary `/implement` owns its review. High-risk work adds one independent
-top-level `/code-review`.
-
-## Product direction
-
-### Product scope discipline
-
-File: `product-scope-discipline.md`
-
-Every visible field must serve a concrete teacher task. Do not turn the focused
-workbench into an AI dashboard just because data exists.
-
-### UI mockup before implementation
-
-File: `ui-mockup-before-dev-protocol.md`
-
-Use for structural visual work. Settle the visual contract before production
-implementation; stop after two non-converging rounds and return to the problem.
-
-### Cut notes
-
-File: `cut-note-protocol.md`
-
-Use only when a material release creates knowledge worth preserving. Cut notes
-are optional memory, not a merge gate.
-
-## Non-negotiable product posture
-
-- Teacher task before feature excitement.
-- Passage-first, not isolated-question-first.
-- AI output requires human confirmation.
-- Student versions hide answers/explanations.
-- Teacher versions include them for review and teaching.
-- PaperSurface insight defaults to a short passage map.
-- Dense diagnostic dashboards require a separate product justification.
-- User-visible work requires real browser QA and owner acceptance.
-
-## Reading discipline
-
-Start with the accepted spec/ticket and the smallest relevant code surface.
-Do not load every steering note, historical cut, or case-law entry. Files are
-context pointers, not a reading quota.
+- passage-first teacher workflow;
+- AI output requires human confirmation;
+- student versions hide answers/explanations and teacher versions include them;
+- PaperSurface insight defaults to a short passage map;
+- visible behavior requires real browser QA and owner acceptance.

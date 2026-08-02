@@ -55,18 +55,8 @@ paper.
 Tickets 01–24 and their Git history remain completed evidence. The Ticket 25
 commits through `76e068469071787ac24f76170e21020ff22a3fcf` are reusable partial
 implementation evidence only; they are not a ready result and do not authorize
-Ticket 26 or any lane. The unfinished Tickets 25–79 route is superseded by the
-smallest fresh-context tracer-bullet DAG that retains every delivery and
-release obligation.
-
-After this replacement authority is committed, paper implementation remains
-dispatch-forbidden until a separate project-wide proportionate-engineering
-Wayfinder has audited and closed unnecessary heavyweight mechanisms. That
-external audit is not part of this cut and no map for it is created here. It
-must preserve necessary high-risk controls for authentication, per-user data
-isolation, atomic publication, backup, and public Screen/Print/PDF correctness
-while distinguishing them from accidental machinery on low-risk, reversible
-work.
+Ticket 26 or any lane. Ticket 25 is ready and unstarted; it is the next work
+item under this spec.
 
 ## User Stories
 
@@ -92,7 +82,7 @@ work.
 20. As a migration operator, I want ordinary papers imported in batches through the unchanged adapter, so that repeated code-level ceremonies do not dominate data work.
 21. As a reviewer, I want shared-code changes versioned, fully tested once on the final candidate, and independently reviewed, so that high-blast-radius changes retain strong proof.
 22. As a reviewer, I want data-only imports checked narrowly with exact digests and confirmation evidence, so that their proof matches their actual authority.
-23. As the product owner, I want real Screen, Student/Teacher Print HTML, and Chromium PDF evidence for the migrated corpus, so that structured data cannot self-prove visible behavior.
+23. As the product owner, I want a real affected-surface canary for data-only migration and full Screen/Print/PDF proof only when shared renderer behavior changes, so that visible proof matches actual risk.
 24. As the product owner, I want one post-retirement Owner QA checkpoint, so that product acceptance happens on the exact reviewed state.
 25. As a maintainer, I want legacy selection retired only after the fixed corpus and supported surfaces are proven, so that deletion cannot hide missing coverage.
 26. As a release operator, I want repository closeout to exclude production deployment, database/config mutation, and R2 backfill, so that repository proof does not imply production authority.
@@ -144,11 +134,9 @@ work.
 - Family lanes may run in parallel only from the same accepted base and only
   when their paper-specific Source Captures, candidates, confirmation records,
   and fixtures do not overlap. Shared modules, schemas, registries, authority
-  files, migration ledgers, manifests, and route receipts remain serial.
-- The replacement ticket set may be fully approved while implementation
-  dispatch remains forbidden. Ticket 25 also requires durable closure of the
-  separate project-wide proportionate-engineering Wayfinder; this task neither
-  creates nor executes that audit.
+  files, migration ledgers, and product publication references remain serial.
+- Ticket 25 starts directly from its completed Ticket 24 predecessor. It has no
+  external governance, manifest/digest, receipt, or publication-task gate.
 
 ## Testing Decisions
 
@@ -171,8 +159,10 @@ work.
   It does not repeat authority versioning, the full suite, or independent code
   review solely because another paper was imported.
 - The fixed 33-paper denominator, zero-write invariants, no-silent-fabrication
-  cases, atomicity, recovery, Student/Teacher visibility, and shared Screen/
-  Print/PDF consumption remain mandatory closure evidence.
+  cases, atomicity, recovery, and Student/Teacher visibility remain mandatory.
+  Unchanged shared rendering uses a light affected-surface canary; deep
+  Screen/Student/Teacher Print/PDF proof is required only for a shared renderer
+  behavior change.
 
 ## Out of Scope
 
@@ -189,6 +179,5 @@ work.
 
 The earlier Tickets 25–79 remain recoverable from Git and are summarized by
 one non-dispatchable supersession record. No old unfinished ticket file remains
-current route authority. Ticket 25 is the sole implementation frontier only
-after the replacement spec, ticket manifest, owner approval, map, and phase
-receipt are committed and all four implementation gates verify.
+current route authority. The current map and Ticket 25 record the direct next
+step; former manifest, approval, and phase artifacts are historical evidence.

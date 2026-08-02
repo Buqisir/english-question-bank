@@ -1,8 +1,8 @@
 # Model and effort guidance
 
-Manual owner dispatch remains the default. These routes choose a workload
-fit; they do not authorize dispatch or change product, review, test, QA, or
-release gates. Every handoff reports both model and effort.
+These routes are optional workload guidance. They do not authorize broader
+scope or weaken the proportionate test, review, QA, or production rules in
+`AGENTS.md`.
 
 ## Default routes
 
@@ -25,10 +25,9 @@ type. In particular:
 - a focused re-review retains the Sol effort of its review gate: Medium by
   default, or High for a high-risk aggregate lineage.
 
-Apply the table to each independently executing worker or review gate. A
-worker that genuinely spans multiple applicable rows uses the highest-risk
-route or splits at a proven seam; a separately required independent reviewer
-uses its Sol review row. Model choice never lowers a required gate.
+Classify the concrete work by its highest-risk part. A separately required
+independent reviewer uses the Sol review row. Model choice never lowers the
+proof required by the changed behavior.
 
 ## Escalation and availability
 

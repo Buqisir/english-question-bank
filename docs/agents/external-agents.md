@@ -26,5 +26,4 @@
 - Historical external-agent handoff rules are no longer the default workflow.
   Only use external DEV prompts when the owner explicitly asks. In that
   exception, put the entire prompt in a repo file or a fenced chat block, and
-  require the report shape from `docs/agents/dev-completion-report-template.md`
-  and `docs/steering/dev-completion-protocol.md`.
+  follow the current bounded result guidance in `AGENTS.md`.

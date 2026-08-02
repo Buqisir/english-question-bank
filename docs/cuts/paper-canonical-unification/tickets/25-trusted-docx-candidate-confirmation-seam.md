@@ -1,7 +1,7 @@
 # 25 — Trusted DOCX candidate and Teacher Confirmation seam
 
 Status: ready
-Blocked by: Ticket 24 completed fail-closed predecessor; replacement authority committed; external project-wide proportionate-engineering Wayfinder closed
+Blocked by: None; Ticket 24 is complete
 Next on PASS: independent review
 Terminal: no
 Model: gpt-5.6-terra
