@@ -1,0 +1,3445 @@
+{
+  "schemaVersion": "paper-asset-v1",
+  "paper": {
+    "paperId": "paper-zj-2026-jan",
+    "title": "source",
+    "subject": "English",
+    "source": "AI 导题",
+    "assetVersion": 1,
+    "status": "published"
+  },
+  "sources": {
+    "primarySourceType": "docx",
+    "docx": {
+      "fileName": "source.docx",
+      "sha256": "b6575a69964381568fd5ed4da655efac4818a7df73a4407bb3e967d4fc070d06",
+      "sourcePath": "",
+      "sourceNote": "未上传答案解析版"
+    }
+  },
+  "layoutTree": {
+    "parts": [
+      {
+        "partId": "part-zj-2026-jan-reading",
+        "title": "第二部分 阅读",
+        "sections": [
+          {
+            "sectionId": "section-zj-2026-jan-reading-choice",
+            "title": "第一节 阅读理解",
+            "groups": [
+              {
+                "groupId": "group-zj-2026-jan-reading-a",
+                "title": "Reading A"
+              },
+              {
+                "groupId": "group-zj-2026-jan-reading-b",
+                "title": "Reading B"
+              },
+              {
+                "groupId": "group-zj-2026-jan-reading-c",
+                "title": "Reading C"
+              },
+              {
+                "groupId": "group-zj-2026-jan-reading-d",
+                "title": "Reading D"
+              }
+            ]
+          },
+          {
+            "sectionId": "section-zj-2026-jan-reading-seven",
+            "title": "第二节 七选五",
+            "groups": [
+              {
+                "groupId": "group-zj-2026-jan-seven-choices",
+                "title": "七选五"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "partId": "part-zj-2026-jan-language",
+        "title": "第三部分 语言运用",
+        "sections": [
+          {
+            "sectionId": "section-zj-2026-jan-cloze",
+            "title": "第一节 完形填空",
+            "groups": [
+              {
+                "groupId": "group-zj-2026-jan-cloze",
+                "title": "完形填空"
+              }
+            ]
+          },
+          {
+            "sectionId": "section-zj-2026-jan-grammar-fill",
+            "title": "第二节 语法填空",
+            "groups": [
+              {
+                "groupId": "group-zj-2026-jan-grammar-fill",
+                "title": "语法填空"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "partId": "part-zj-2026-jan-writing",
+        "title": "第四部分 写作",
+        "sections": [
+          {
+            "sectionId": "section-zj-2026-jan-writing-application",
+            "title": "第一节 应用文写作",
+            "groups": [
+              {
+                "groupId": "group-zj-2026-jan-writing-application",
+                "title": "应用文写作"
+              }
+            ]
+          },
+          {
+            "sectionId": "section-zj-2026-jan-writing-continuation",
+            "title": "第二节 读后续写",
+            "groups": [
+              {
+                "groupId": "group-zj-2026-jan-writing-continuation",
+                "title": "读后续写"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "content": {
+    "blocks": [
+      {
+        "type": "partHeading",
+        "partId": "part-zj-2026-jan-reading",
+        "text": "第二部分 阅读"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-zj-2026-jan-reading-choice",
+        "text": "第一节 阅读理解"
+      },
+      {
+        "type": "group",
+        "groupId": "group-zj-2026-jan-reading-a"
+      },
+      {
+        "type": "group",
+        "groupId": "group-zj-2026-jan-reading-b"
+      },
+      {
+        "type": "group",
+        "groupId": "group-zj-2026-jan-reading-c"
+      },
+      {
+        "type": "group",
+        "groupId": "group-zj-2026-jan-reading-d"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-zj-2026-jan-reading-seven",
+        "text": "第二节 (共5小题；每小题2.5分，满分12.5分)"
+      },
+      {
+        "type": "instruction",
+        "text": "阅读下面短文，从短文后的选项中选出可以填入空白处的最佳选项。选项中有两项为多余选项。"
+      },
+      {
+        "type": "group",
+        "groupId": "group-zj-2026-jan-seven-choices"
+      },
+      {
+        "type": "pageBreakHint"
+      },
+      {
+        "type": "partHeading",
+        "partId": "part-zj-2026-jan-language",
+        "text": "第三部分 语言运用(共两节，满分30分)"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-zj-2026-jan-cloze",
+        "text": "第一节(共15小题；每小题1分，满分15分)"
+      },
+      {
+        "type": "instruction",
+        "text": "阅读下面短文，从每题所给的A、B、C、D四个选项中选出最佳选项。"
+      },
+      {
+        "type": "group",
+        "groupId": "group-zj-2026-jan-cloze"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-zj-2026-jan-grammar-fill",
+        "text": "第二节(共10小题；每小题1.5分，满分15分)"
+      },
+      {
+        "type": "instruction",
+        "text": "阅读下面短文，在空白处填入1个适当的单词或括号内单词的正确形式。"
+      },
+      {
+        "type": "group",
+        "groupId": "group-zj-2026-jan-grammar-fill"
+      },
+      {
+        "type": "pageBreakHint"
+      },
+      {
+        "type": "partHeading",
+        "partId": "part-zj-2026-jan-writing",
+        "text": "第四部分 写作（共两节，满分40分）"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-zj-2026-jan-writing-application",
+        "text": "第一节（满分15分）"
+      },
+      {
+        "type": "group",
+        "groupId": "group-zj-2026-jan-writing-application"
+      },
+      {
+        "type": "instruction",
+        "text": "注意：\n（1）写作词数应为80个左右；\n（2）请按如下格式在答题卡的相应位置作答。"
+      },
+      {
+        "type": "answerBox",
+        "writingTaskId": "wt-zj-2026-jan-application",
+        "label": "应用文写作答题区"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-zj-2026-jan-writing-continuation",
+        "text": "第二节（满分25分）"
+      },
+      {
+        "type": "instruction",
+        "text": "阅读下面材料，根据其内容和所给段落开头语续写两段，使之构成一篇完整的短文。"
+      },
+      {
+        "type": "group",
+        "groupId": "group-zj-2026-jan-writing-continuation"
+      },
+      {
+        "type": "instruction",
+        "text": "注意：\n（1）续写词数应为150个左右；\n（2）请按如下格式在答题卡的相应位置作答。"
+      },
+      {
+        "type": "instruction",
+        "text": "Paragraph 1: As I turned to leave, two police officers pulled up in a patrol car.\n\nParagraph 2: We tied the rope to a tree and discussed what to do with the cow."
+      },
+      {
+        "type": "answerBox",
+        "writingTaskId": "wt-zj-2026-jan-continuation",
+        "label": "读后续写答题区"
+      }
+    ],
+    "groups": {
+      "group-zj-2026-jan-reading-a": {
+        "groupId": "group-zj-2026-jan-reading-a",
+        "groupType": "reading",
+        "title": "Reading A",
+        "questionIds": [
+          "q-zj-2026-jan-021",
+          "q-zj-2026-jan-022",
+          "q-zj-2026-jan-023"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-zj-2026-jan-reading-a-1",
+              "text": "The City of Burlington public art program is presenting a series of temporary public art signs at the Beachway in conjunction with the Ontario Culture Days. This project will select 10 visual artists and 10 writers to create artwork that will be displayed on temporary signs along the multi-use path. This call is open to Burlington-based artists and is open to all art forms that can be presented in a sign format. This includes, but is not limited to: visual art, graphic art, photography, poetry, short story, non-fiction, etc. Submissions may be from existing or newly created work."
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-reading-a-2",
+              "text": "The artist fee for this project is $400. The City of Burlington will pay for all costs related to the production, installation (安装) and maintenance of the signs."
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-reading-a-3",
+              "text": "Estimated Project Timeline"
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-reading-a-4",
+              "text": "August 2"
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-reading-a-5",
+              "text": "Call for Artists responses due"
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-reading-a-6",
+              "text": "By August 12"
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-reading-a-7",
+              "text": "Successful artists selected; enter into a con tract"
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-reading-a-8",
+              "text": "with the City of Burlington"
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-reading-a-9",
+              "text": "September 6"
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-reading-a-10",
+              "text": "Final artwork files due"
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-reading-a-11",
+              "text": "September 23~October 13"
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-reading-a-12",
+              "text": "Artwork displayed for duration of Culture Days"
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-reading-a-13",
+              "text": "celebration"
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-reading-a-14",
+              "text": "Application Package"
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-reading-a-15",
+              "text": "Artwork Statement: Please provide a brief statement (maximum 150 words) outlining your artwork concept."
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-reading-a-16",
+              "text": "Artwork or Writing Submission:"
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-reading-a-17",
+              "text": "• Visual Art Submission: Please submit an artwork sketch (草图) of your concept. This can be a work in progress rather than a completed piece. If you are proposing to use a completed artwork, please submit it as your “sketch”."
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-reading-a-18",
+              "text": "• Writing Submission: Submissions must be a maximum of 250 words. It may be a stand-alone piece such as a poem or short story or a part taken from a larger piece."
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-reading-a-19",
+              "text": "Artist Biography: Please provide a short introduction (maximum 50 words) to the artist written in the third person."
+            }
+          ]
+        }
+      },
+      "group-zj-2026-jan-reading-b": {
+        "groupId": "group-zj-2026-jan-reading-b",
+        "groupType": "reading",
+        "title": "Reading B",
+        "questionIds": [
+          "q-zj-2026-jan-024",
+          "q-zj-2026-jan-025",
+          "q-zj-2026-jan-026",
+          "q-zj-2026-jan-027"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-zj-2026-jan-reading-b-1",
+              "text": "When you’re a teacher, a big part of your job is battling student misconceptions. Often students come to the classroom believing that learning can’t be fun and that what they learn isn’t relevant to the real world – much less to their personal interests. I’ve discovered that if I show students how what they learn is relevant to my hobbies, they’re much more willing to make connections to their personal interests and develop their own hobbies."
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-reading-b-2",
+              "text": "No matter what subject I’m teaching, I find ways to bring my hobbies into the classroom. For example, I’m a car enthusiast, so when I teach physics, I contextualize concepts with my knowledge about cars. If we’re covering friction, for example, I bring different tires (轮胎) into my classroom so that my students can conduct lab experiments with them to see how friction works in real-life applications."
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-reading-b-3",
+              "text": "When I first brought my hobbies to my classroom, I was focused on how doing so would build engagement and help my students understand concepts in science. But I quickly learned that the practice also helped me build stronger relationships with them. When I let them see an aspect of my life outside of school, some students who were also interested in cars connected with me more and became more engaged in my courses. Even those who didn’t share that interest with me seemed more engaged once I showed a different side of myself."
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-reading-b-4",
+              "text": "What started as an experiment is now more of a philosophy. Even when I’m planning classes, I tend to think about how I can bring in my hobbies. I find that doing so energizes my instruction, engages my students, and demonstrates to them how abstract concepts play out in the real world. Best of all, my passion for my hobbies seems to inspire them to be passionate about finding their own."
+            }
+          ]
+        }
+      },
+      "group-zj-2026-jan-reading-c": {
+        "groupId": "group-zj-2026-jan-reading-c",
+        "groupType": "reading",
+        "title": "Reading C",
+        "questionIds": [
+          "q-zj-2026-jan-028",
+          "q-zj-2026-jan-029",
+          "q-zj-2026-jan-030",
+          "q-zj-2026-jan-031"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-zj-2026-jan-reading-c-1",
+              "text": "Human beings have always loved reviews: word of mouth has long been regarded as one of the most valuable marketing tools available to a company. Consumers enjoy reading and giving reviews. However, the problem is that a lot of the reviews are fake (假的) . Shabnam Azimi and Alexander Krasnikov of Loyola University of Chicago and Kwong Chan of Northeastern University recently published a study on fake reviews."
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-reading-c-2",
+              "text": "The study used a dataset of 1,600 reviews of Chicago hotels. Some of them were real; others were fake. The reviews were presented to 400 subjects. Each subject got eight reviews to read: a balanced set of two positive fake, two positive real, two negative fake and two negative real, presented in a random order. The reviews were written by real people who were given information about the hotel."
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-reading-c-3",
+              "text": "The results show that consumers generally trust negative reviews more than positive ones. Moreover, we humans tend to assume that positive reviews might be fake. “Overall, negative reviews are less common. So, we pay more attention to them. When a negative review is fake, we get tricked,” Azimi says."
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-reading-c-4",
+              "text": "When it came to faking a review, length was important to believability, as was detail. Along, negative review of a hotel, complete with lots of information, tended to convince participants. A lengthy, positive review, on the other hand, was regarded as suspicious, and participants tended to trust writers that kept their glowing reviews short. Emotion was also important in convincing readers – or the lack of emotion, at least. Azimi says study participants tended not to trust reviews where the writers expressed their feelings in a big way. The more dispassionate that negative write-up, the more likely it was to take the reader in."
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-reading-c-5",
+              "text": "The fake reviews written for Azimi’s study were put together by humans, but increasingly, fake reviews are being written by AI, which makes them look more real. Though many companies use algorithms (算法) to weed out fake reviews, Azimi points out that the machines are programmed by humans, and given our limited ability to spot fake reviews, this isn’t a good sign."
+            }
+          ]
+        }
+      },
+      "group-zj-2026-jan-reading-d": {
+        "groupId": "group-zj-2026-jan-reading-d",
+        "groupType": "reading",
+        "title": "Reading D",
+        "questionIds": [
+          "q-zj-2026-jan-032",
+          "q-zj-2026-jan-033",
+          "q-zj-2026-jan-034",
+          "q-zj-2026-jan-035"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-zj-2026-jan-reading-d-1",
+              "text": "Carbon removal is crucial for fighting climate change. Scientists at Salk Institute are making use of the natural capacity of plants to absorb carbon dioxide by enhancing their root systems. This optimization (优化) aims to increase the amount of carbon stored and extend the duration of its storage."
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-reading-d-2",
+              "text": "To design these climate-saving plants, the scientists are using a research tool called SLEAP – an AI software that tracks multiple features of root growth. Created by Salk Fellow Talmo Pereira, SLEAP was initially designed to track animal movement in the lab. Now, Pereira has teamed up with plant scientist Professor Wolfgang Busch to apply SLEAP to plants."
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-reading-d-3",
+              "text": "In a study published in Plant Phenomics, Busch and Pereira establish a new procedure for using SLEAP to analyze plant root phenotypes – how deep and wide they grow, how massive their root systems become, and other physical qualities. Prior to SLEAP, tracking the physical characteristics of both plants and animals required a lot of labor that slowed the scientific process. SLEAP uses computer vision (the ability for computers to understand images) and deep learning (an AI approach for training a computer to learn and work like the human brain) to help researchers process images much more quickly."
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-reading-d-4",
+              "text": "The application of SLEAP to plants has already enabled researchers to establish the most extensive catalog (目录) of plant root phenotypes to date. What’s more, tracking these physical root system characteristics helps scientists find genes (基因) associated with those characteristics, as well as whether multiple root characteristics are determined by the same genes or independently. This allows the Salk team to determine what genes are most beneficial to their plant designs."
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-reading-d-5",
+              "text": "“Our cooperation is truly proof of what makes Salk science so special and impactful,” says Pereira. “We’re not just ‘borrowing’ from different disciplines – we’re really putting them on equal footing in order to create something greater than the sum of its parts.”"
+            }
+          ]
+        }
+      },
+      "group-zj-2026-jan-seven-choices": {
+        "groupId": "group-zj-2026-jan-seven-choices",
+        "groupType": "sevenChoices",
+        "title": "七选五",
+        "questionIds": [
+          "q-zj-2026-jan-036",
+          "q-zj-2026-jan-037",
+          "q-zj-2026-jan-038",
+          "q-zj-2026-jan-039",
+          "q-zj-2026-jan-040"
+        ],
+        "blankIds": [
+          "blank-zj-2026-jan-036",
+          "blank-zj-2026-jan-037",
+          "blank-zj-2026-jan-038",
+          "blank-zj-2026-jan-039",
+          "blank-zj-2026-jan-040"
+        ],
+        "optionBank": [
+          {
+            "label": "A",
+            "text": "Both are to blame."
+          },
+          {
+            "label": "B",
+            "text": "Probably the latter is true."
+          },
+          {
+            "label": "C",
+            "text": "Don’t just read the words; think the ideas."
+          },
+          {
+            "label": "D",
+            "text": "Spend a few minutes reading the material aloud."
+          },
+          {
+            "label": "E",
+            "text": "Your eyes were engaged, but your mind was not."
+          },
+          {
+            "label": "F",
+            "text": "Then, start denying yourself the right in order to break the habit."
+          },
+          {
+            "label": "G",
+            "text": "Rereading because you did not understand is a reasonable fix-up strategy."
+          }
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-zj-2026-jan-seven-title",
+              "text": "During your initial reading of material, do you ever go back and reread sentences or paragraphs? Is it because the material is too difficult to comprehend on the first reading or because you are asleep? __36__ You are napping (打盹) or daydreaming. Halfway down the page you realize that you have no idea what you have read. __37__ Thus, you go back and reread, not because you did not understand, but because you were not paying attention. This type of rereading is called regression."
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-seven-p1",
+              "text": "Napping and daydreaming are habits caused by lack of involvement with the material. Be demanding on yourself and expect 100 percent attention to the task. Engage your mind. Visualize the incoming ideas, and relate the new material to what you already know. __38__ If your mind is truly occupied with the text, you will not be able to think about Friday night or where to go on Saturday."
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-seven-p2",
+              "text": "Regression is a crutch (拐杖) that allows you to make up for wasted time. First of all, become aware of when and why you are regressing. __39__ Say, “OK. I missed that paragraph because I was thinking of something else, but I’m going to keep on going and start paying close attention.”"
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-seven-p3",
+              "text": "__40__ Good readers who monitor their own comprehension use it in the reading process. However, regressing because your mind was asleep is a waste of time."
+            }
+          ]
+        }
+      },
+      "group-zj-2026-jan-cloze": {
+        "groupId": "group-zj-2026-jan-cloze",
+        "groupType": "cloze",
+        "title": "完形填空",
+        "questionIds": [
+          "q-zj-2026-jan-041",
+          "q-zj-2026-jan-042",
+          "q-zj-2026-jan-043",
+          "q-zj-2026-jan-044",
+          "q-zj-2026-jan-045",
+          "q-zj-2026-jan-046",
+          "q-zj-2026-jan-047",
+          "q-zj-2026-jan-048",
+          "q-zj-2026-jan-049",
+          "q-zj-2026-jan-050",
+          "q-zj-2026-jan-051",
+          "q-zj-2026-jan-052",
+          "q-zj-2026-jan-053",
+          "q-zj-2026-jan-054",
+          "q-zj-2026-jan-055"
+        ],
+        "blankIds": [
+          "blank-zj-2026-jan-041",
+          "blank-zj-2026-jan-042",
+          "blank-zj-2026-jan-043",
+          "blank-zj-2026-jan-044",
+          "blank-zj-2026-jan-045",
+          "blank-zj-2026-jan-046",
+          "blank-zj-2026-jan-047",
+          "blank-zj-2026-jan-048",
+          "blank-zj-2026-jan-049",
+          "blank-zj-2026-jan-050",
+          "blank-zj-2026-jan-051",
+          "blank-zj-2026-jan-052",
+          "blank-zj-2026-jan-053",
+          "blank-zj-2026-jan-054",
+          "blank-zj-2026-jan-055"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-zj-2026-jan-cloze-title",
+              "text": "阅读下面短文，从每题所给的A"
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-cloze-p1",
+              "text": "D四个选项中选出最佳选项。"
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-cloze-p2",
+              "text": "Ursula has always called the beautiful small town of Beaverton her home. Although she’d had childhood __41__ of exploring the world and studied international business with a desire to pursue a __42__ in Toronto, finding a job proved more __43__ than she’d expected."
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-cloze-p3",
+              "text": "“I decided that if nobody was going to __44__ me, I would just create a job for myself,” says Ursula. She was born and raised on a large family farm, so the __45__ of an agriculture tourism business came naturally to her and began to __46__ ."
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-cloze-p4",
+              "text": "“I __47__ the plan to my family, and asked if they could rent me a small 10 acres (英亩) . They __48__ at first, unwilling to take a risk, but I finally __49__ to get the green light,” she says."
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-cloze-p5",
+              "text": "Four years later, those beautiful 10 acres of fields had turned into 20 acres filled with over 400,000 sunflowers. “ __50__ , I had little confidence in the beginning,” says Ursula, “but the Sunflower Farm rose to fame and has become one of the most sought-after __51__ in the province.”"
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-cloze-p6",
+              "text": "While many visitors have never been to a farm at all, __52__ a sunflower farm, the unique setting allows them to __53__ the city for a while, breathe in the fresh air, gain a newfound __54__ for agriculture, and maybe even __55__ with their farming roots and what they may have taken for granted for too long."
+            }
+          ]
+        }
+      },
+      "group-zj-2026-jan-grammar-fill": {
+        "groupId": "group-zj-2026-jan-grammar-fill",
+        "groupType": "grammarFill",
+        "title": "语法填空",
+        "questionIds": [
+          "q-zj-2026-jan-056",
+          "q-zj-2026-jan-057",
+          "q-zj-2026-jan-058",
+          "q-zj-2026-jan-059",
+          "q-zj-2026-jan-060",
+          "q-zj-2026-jan-061",
+          "q-zj-2026-jan-062",
+          "q-zj-2026-jan-063",
+          "q-zj-2026-jan-064",
+          "q-zj-2026-jan-065"
+        ],
+        "blankIds": [
+          "blank-zj-2026-jan-056",
+          "blank-zj-2026-jan-057",
+          "blank-zj-2026-jan-058",
+          "blank-zj-2026-jan-059",
+          "blank-zj-2026-jan-060",
+          "blank-zj-2026-jan-061",
+          "blank-zj-2026-jan-062",
+          "blank-zj-2026-jan-063",
+          "blank-zj-2026-jan-064",
+          "blank-zj-2026-jan-065"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-zj-2026-jan-grammar-fill-title",
+              "text": "There are few people who could find joy in waiting for a microwave (微波炉) __56__ (finish) heating, but my mum did it. One of my earliest memories is being held __57__her arms, counting down the flashing green __58__ (number) together. Mum is small, but I remember feeling so high up there. She would dance us left and right around the kitchen, our eyes __59__ (watch) the microwave like it was a space rocket countdown, __60__ (excite) and tension building to that final moment: BEEPI The microwave had a loud alarm, but we overshadowed that noise with our own performance, tipping our heads back and shouting into the air – a scream __61__always ended in laughter."
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-grammar-fill-p1",
+              "text": "My mum would find fun even when completing the most boring of tasks. I remember __62__ (push) in a supermarket trolley (手推车) over __63__uneven car park ground like riding a rollercoaster. She would speed up, the wind blowing our hair back __64__my tiny voice singing out, “Weeee-ee-ee-ee!”"
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-grammar-fill-p2",
+              "text": "I realise now that Mum didn’t find the joy in these tasks: she created it. Who cares if neighbours can hear you singing along to a microwave? Life is full of so many __65__ (seeming) uneventful moments, but we can turn any of them into a celebration."
+            }
+          ]
+        }
+      },
+      "group-zj-2026-jan-writing-application": {
+        "groupId": "group-zj-2026-jan-writing-application",
+        "groupType": "writing",
+        "title": "应用文写作",
+        "questionIds": [],
+        "writingTaskId": "wt-zj-2026-jan-application",
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-zj-2026-jan-writing-app-title",
+              "text": "你发现图书馆的书籍存在被勾画涂写的现象，请写一篇文章向校英文报投稿。内容包括："
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-writing-app-p1",
+              "text": "（1）说明具体情况；"
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-writing-app-p2",
+              "text": "（2）呼吁爱护书籍。"
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-writing-app-p3",
+              "text": "（1）写作词数应为80个左右；"
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-writing-app-p4",
+              "text": "（2）请按如下格式在答题卡的相应位置作答。"
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-writing-app-p5",
+              "text": "Treasure Library Books: Our Shared Responsibility"
+            }
+          ]
+        }
+      },
+      "group-zj-2026-jan-writing-continuation": {
+        "groupId": "group-zj-2026-jan-writing-continuation",
+        "groupType": "writing",
+        "title": "读后续写",
+        "questionIds": [],
+        "writingTaskId": "wt-zj-2026-jan-continuation",
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-zj-2026-jan-writing-cont-title",
+              "text": "阅读下面材料，根据其内容和所给段落开头语续写两段，使之构成一篇完整的短文。"
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-writing-cont-p1",
+              "text": "I was driving my daughter Lila to her swimming lesson when we spotted a cow wandering down the main road. A thick rope was tied around its neck, dragging on the pavement behind it. The cow was ambling along in the middle of the traffic, tail flicking lazily, while a line of cars followed cautiously, their drivers leaning out of windows to stare. A group of kids on bicycles had gathered at a safe distance, cheering and pointing as the cow nudged a stop sign with its head."
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-writing-cont-p2",
+              "text": "“Look, Mom!” Lila gasped, pressing her face against the car window. “City people are all scared of it! But you can handle anything, right? You herded cows on Grandpa’s farm when you were a kid.”"
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-writing-cont-p3",
+              "text": "I smiled, recalling the summer I’d spent on my grandfather’s dairy farm, chasing strays back into the pasture with a stick and a loud voice. “It’s just a lost cow, sweetie,” I said, “but we need to get you to swim class first. I’ll check on it after I drop you off.” We inched past the cow, which lifted its head and let out a low moo as we passed. Lila waved, and the cow tilted its head as if waving back. I dropped Lila at the pool, promising to be back in an hour, then turned the car around to find the cow. By the time I got back to the main road, the traffic had cleared, but the cow was still there – standing in a patch of grass by the sidewalk, chewing on a dandelion. It was a reddish-brown cow, smaller than the Holsteins on Grandpa’s farm, with big, gentle eyes. And there was something about it, a skittishness in its posture, that made it different from the cows I’d known back home. It didn’t seem like a farm cow at all."
+            }
+          ]
+        }
+      }
+    },
+    "questions": {
+      "q-zj-2026-jan-021": {
+        "questionId": "q-zj-2026-jan-021",
+        "questionNo": 21,
+        "groupId": "group-zj-2026-jan-reading-a",
+        "stem": "What is the purpose of this text?",
+        "options": [
+          {
+            "label": "A",
+            "text": "To raise money for local artists."
+          },
+          {
+            "label": "B",
+            "text": "To release a collection of artwork."
+          },
+          {
+            "label": "C",
+            "text": "To introduce a cultural festival."
+          },
+          {
+            "label": "D",
+            "text": "To call for artworks for a project."
+          }
+        ]
+      },
+      "q-zj-2026-jan-022": {
+        "questionId": "q-zj-2026-jan-022",
+        "questionNo": 22,
+        "groupId": "group-zj-2026-jan-reading-a",
+        "stem": "How long will the public art signs be on display?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Ten days."
+          },
+          {
+            "label": "B",
+            "text": "Three weeks."
+          },
+          {
+            "label": "C",
+            "text": "One month."
+          },
+          {
+            "label": "D",
+            "text": "Two months."
+          }
+        ]
+      },
+      "q-zj-2026-jan-023": {
+        "questionId": "q-zj-2026-jan-023",
+        "questionNo": 23,
+        "groupId": "group-zj-2026-jan-reading-a",
+        "stem": "Which of the following meets the application requirements?",
+        "options": [
+          {
+            "label": "A",
+            "text": "A 150-word poem."
+          },
+          {
+            "label": "B",
+            "text": "A 100-word self-introduction."
+          },
+          {
+            "label": "C",
+            "text": "A 300-word story."
+          },
+          {
+            "label": "D",
+            "text": "A 200-word artwork statement."
+          }
+        ]
+      },
+      "q-zj-2026-jan-024": {
+        "questionId": "q-zj-2026-jan-024",
+        "questionNo": 24,
+        "groupId": "group-zj-2026-jan-reading-b",
+        "stem": "What poses a challenge to teachers according to the author?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Students’ misunderstandings about teachers."
+          },
+          {
+            "label": "B",
+            "text": "Students’ false assumptions about learning."
+          },
+          {
+            "label": "C",
+            "text": "The irrelevance of textbooks to students’ life."
+          },
+          {
+            "label": "D",
+            "text": "The gap between teachers’ and students’ hobbies."
+          }
+        ]
+      },
+      "q-zj-2026-jan-025": {
+        "questionId": "q-zj-2026-jan-025",
+        "questionNo": 25,
+        "groupId": "group-zj-2026-jan-reading-b",
+        "stem": "Why does the author bring tires into the classroom?",
+        "options": [
+          {
+            "label": "A",
+            "text": "To teach an engineering skill."
+          },
+          {
+            "label": "B",
+            "text": "To explain the structure of a car."
+          },
+          {
+            "label": "C",
+            "text": "To share a real-life experience."
+          },
+          {
+            "label": "D",
+            "text": "To illustrate a scientific concept."
+          }
+        ]
+      },
+      "q-zj-2026-jan-026": {
+        "questionId": "q-zj-2026-jan-026",
+        "questionNo": 26,
+        "groupId": "group-zj-2026-jan-reading-b",
+        "stem": "What was the unexpected outcome of the author’s teaching method?",
+        "options": [
+          {
+            "label": "A",
+            "text": "A higher class attendance rate."
+          },
+          {
+            "label": "B",
+            "text": "Better examination results."
+          },
+          {
+            "label": "C",
+            "text": "A closer teacher-student bond."
+          },
+          {
+            "label": "D",
+            "text": "More spare time for students."
+          }
+        ]
+      },
+      "q-zj-2026-jan-027": {
+        "questionId": "q-zj-2026-jan-027",
+        "questionNo": 27,
+        "groupId": "group-zj-2026-jan-reading-b",
+        "stem": "Which of the following best describes the author as a teacher?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Innovative."
+          },
+          {
+            "label": "B",
+            "text": "Humorous."
+          },
+          {
+            "label": "C",
+            "text": "Decisive."
+          },
+          {
+            "label": "D",
+            "text": "Sympathetic."
+          }
+        ]
+      },
+      "q-zj-2026-jan-028": {
+        "questionId": "q-zj-2026-jan-028",
+        "questionNo": 28,
+        "groupId": "group-zj-2026-jan-reading-c",
+        "stem": "Which aspect of the study does paragraph 2 mainly talk about?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Its design"
+          },
+          {
+            "label": "B",
+            "text": "Its findings."
+          },
+          {
+            "label": "C",
+            "text": "Its purposes."
+          },
+          {
+            "label": "D",
+            "text": "Its significance."
+          }
+        ]
+      },
+      "q-zj-2026-jan-029": {
+        "questionId": "q-zj-2026-jan-029",
+        "questionNo": 29,
+        "groupId": "group-zj-2026-jan-reading-c",
+        "stem": "What does the underlined word “glowing” in paragraph 4 mean?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Funny."
+          },
+          {
+            "label": "B",
+            "text": "Abusive."
+          },
+          {
+            "label": "C",
+            "text": "Insightful."
+          },
+          {
+            "label": "D",
+            "text": "Praising."
+          }
+        ]
+      },
+      "q-zj-2026-jan-030": {
+        "questionId": "q-zj-2026-jan-030",
+        "questionNo": 30,
+        "groupId": "group-zj-2026-jan-reading-c",
+        "stem": "What kind of review would readers most likely trust?",
+        "options": [
+          {
+            "label": "A",
+            "text": "A long, positive one."
+          },
+          {
+            "label": "B",
+            "text": "An unemotional, negative one."
+          },
+          {
+            "label": "C",
+            "text": "A short, negative one."
+          },
+          {
+            "label": "D",
+            "text": "An enthusiastic, positive one."
+          }
+        ]
+      },
+      "q-zj-2026-jan-031": {
+        "questionId": "q-zj-2026-jan-031",
+        "questionNo": 31,
+        "groupId": "group-zj-2026-jan-reading-c",
+        "stem": "What can be inferred from the last paragraph?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Many companies are producing fake reviews."
+          },
+          {
+            "label": "B",
+            "text": "Writing fake reviews will be declared illegal."
+          },
+          {
+            "label": "C",
+            "text": "Machines can detect fake reviews accurately."
+          },
+          {
+            "label": "D",
+            "text": "It will be harder to recognize fake reviews."
+          }
+        ]
+      },
+      "q-zj-2026-jan-032": {
+        "questionId": "q-zj-2026-jan-032",
+        "questionNo": 32,
+        "groupId": "group-zj-2026-jan-reading-d",
+        "stem": "What do the scientists at Salk Institute hope to achieve?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Keeping more carbon in plants."
+          },
+          {
+            "label": "B",
+            "text": "Optimizing the use of energy."
+          },
+          {
+            "label": "C",
+            "text": "Enhancing biological diversity."
+          },
+          {
+            "label": "D",
+            "text": "Reducing carbon absorption."
+          }
+        ]
+      },
+      "q-zj-2026-jan-033": {
+        "questionId": "q-zj-2026-jan-033",
+        "questionNo": 33,
+        "groupId": "group-zj-2026-jan-reading-d",
+        "stem": "Why did Pereira create SLEAP?",
+        "options": [
+          {
+            "label": "A",
+            "text": "To generate plant images."
+          },
+          {
+            "label": "B",
+            "text": "To conduct research on animals."
+          },
+          {
+            "label": "C",
+            "text": "To study climate patterns."
+          },
+          {
+            "label": "D",
+            "text": "To track features of root growth."
+          }
+        ]
+      },
+      "q-zj-2026-jan-034": {
+        "questionId": "q-zj-2026-jan-034",
+        "questionNo": 34,
+        "groupId": "group-zj-2026-jan-reading-d",
+        "stem": "What will SLEAP help the scientists do?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Pick out diseased plants in the forest."
+          },
+          {
+            "label": "B",
+            "text": "Collect samples of plant root systems."
+          },
+          {
+            "label": "C",
+            "text": "Identify genes for desirable plant roots."
+          },
+          {
+            "label": "D",
+            "text": "Preserve the genes of endangered plants."
+          }
+        ]
+      },
+      "q-zj-2026-jan-035": {
+        "questionId": "q-zj-2026-jan-035",
+        "questionNo": 35,
+        "groupId": "group-zj-2026-jan-reading-d",
+        "stem": "What can be inferred from Pereira’s words?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Academic disciplines are of equal importance."
+          },
+          {
+            "label": "B",
+            "text": "Computer programming is a must for scientists."
+          },
+          {
+            "label": "C",
+            "text": "Interdisciplinary approach promotes creativity."
+          },
+          {
+            "label": "D",
+            "text": "Cooperation outweighs competition in research."
+          }
+        ]
+      },
+      "q-zj-2026-jan-036": {
+        "questionId": "q-zj-2026-jan-036",
+        "questionNo": 36,
+        "groupId": "group-zj-2026-jan-seven-choices",
+        "stem": "36",
+        "blankId": "blank-zj-2026-jan-036"
+      },
+      "q-zj-2026-jan-037": {
+        "questionId": "q-zj-2026-jan-037",
+        "questionNo": 37,
+        "groupId": "group-zj-2026-jan-seven-choices",
+        "stem": "37",
+        "blankId": "blank-zj-2026-jan-037"
+      },
+      "q-zj-2026-jan-038": {
+        "questionId": "q-zj-2026-jan-038",
+        "questionNo": 38,
+        "groupId": "group-zj-2026-jan-seven-choices",
+        "stem": "38",
+        "blankId": "blank-zj-2026-jan-038"
+      },
+      "q-zj-2026-jan-039": {
+        "questionId": "q-zj-2026-jan-039",
+        "questionNo": 39,
+        "groupId": "group-zj-2026-jan-seven-choices",
+        "stem": "39",
+        "blankId": "blank-zj-2026-jan-039"
+      },
+      "q-zj-2026-jan-040": {
+        "questionId": "q-zj-2026-jan-040",
+        "questionNo": 40,
+        "groupId": "group-zj-2026-jan-seven-choices",
+        "stem": "40",
+        "blankId": "blank-zj-2026-jan-040"
+      },
+      "q-zj-2026-jan-041": {
+        "questionId": "q-zj-2026-jan-041",
+        "questionNo": 41,
+        "groupId": "group-zj-2026-jan-cloze",
+        "stem": "41",
+        "blankId": "blank-zj-2026-jan-041",
+        "options": [
+          {
+            "label": "A",
+            "text": "stories"
+          },
+          {
+            "label": "B",
+            "text": "needs"
+          },
+          {
+            "label": "C",
+            "text": "habits"
+          },
+          {
+            "label": "D",
+            "text": "dreams"
+          }
+        ]
+      },
+      "q-zj-2026-jan-042": {
+        "questionId": "q-zj-2026-jan-042",
+        "questionNo": 42,
+        "groupId": "group-zj-2026-jan-cloze",
+        "stem": "42",
+        "blankId": "blank-zj-2026-jan-042",
+        "options": [
+          {
+            "label": "A",
+            "text": "career"
+          },
+          {
+            "label": "B",
+            "text": "degree"
+          },
+          {
+            "label": "C",
+            "text": "hobby"
+          },
+          {
+            "label": "D",
+            "text": "project"
+          }
+        ]
+      },
+      "q-zj-2026-jan-043": {
+        "questionId": "q-zj-2026-jan-043",
+        "questionNo": 43,
+        "groupId": "group-zj-2026-jan-cloze",
+        "stem": "43",
+        "blankId": "blank-zj-2026-jan-043",
+        "options": [
+          {
+            "label": "A",
+            "text": "practical"
+          },
+          {
+            "label": "B",
+            "text": "important"
+          },
+          {
+            "label": "C",
+            "text": "difficult"
+          },
+          {
+            "label": "D",
+            "text": "dangerous"
+          }
+        ]
+      },
+      "q-zj-2026-jan-044": {
+        "questionId": "q-zj-2026-jan-044",
+        "questionNo": 44,
+        "groupId": "group-zj-2026-jan-cloze",
+        "stem": "44",
+        "blankId": "blank-zj-2026-jan-044",
+        "options": [
+          {
+            "label": "A",
+            "text": "invite"
+          },
+          {
+            "label": "B",
+            "text": "notice"
+          },
+          {
+            "label": "C",
+            "text": "hire"
+          },
+          {
+            "label": "D",
+            "text": "cover"
+          }
+        ]
+      },
+      "q-zj-2026-jan-045": {
+        "questionId": "q-zj-2026-jan-045",
+        "questionNo": 45,
+        "groupId": "group-zj-2026-jan-cloze",
+        "stem": "45",
+        "blankId": "blank-zj-2026-jan-045",
+        "options": [
+          {
+            "label": "A",
+            "text": "issue"
+          },
+          {
+            "label": "B",
+            "text": "idea"
+          },
+          {
+            "label": "C",
+            "text": "truth"
+          },
+          {
+            "label": "D",
+            "text": "founder"
+          }
+        ]
+      },
+      "q-zj-2026-jan-046": {
+        "questionId": "q-zj-2026-jan-046",
+        "questionNo": 46,
+        "groupId": "group-zj-2026-jan-cloze",
+        "stem": "46",
+        "blankId": "blank-zj-2026-jan-046",
+        "options": [
+          {
+            "label": "A",
+            "text": "gain ground"
+          },
+          {
+            "label": "B",
+            "text": "take root"
+          },
+          {
+            "label": "C",
+            "text": "work wonders"
+          },
+          {
+            "label": "D",
+            "text": "raise concerns"
+          }
+        ]
+      },
+      "q-zj-2026-jan-047": {
+        "questionId": "q-zj-2026-jan-047",
+        "questionNo": 47,
+        "groupId": "group-zj-2026-jan-cloze",
+        "stem": "47",
+        "blankId": "blank-zj-2026-jan-047",
+        "options": [
+          {
+            "label": "A",
+            "text": "proposed"
+          },
+          {
+            "label": "B",
+            "text": "adapted"
+          },
+          {
+            "label": "C",
+            "text": "preferred"
+          },
+          {
+            "label": "D",
+            "text": "proved"
+          }
+        ]
+      },
+      "q-zj-2026-jan-048": {
+        "questionId": "q-zj-2026-jan-048",
+        "questionNo": 48,
+        "groupId": "group-zj-2026-jan-cloze",
+        "stem": "48",
+        "blankId": "blank-zj-2026-jan-048",
+        "options": [
+          {
+            "label": "A",
+            "text": "apologized"
+          },
+          {
+            "label": "B",
+            "text": "refused"
+          },
+          {
+            "label": "C",
+            "text": "panicked"
+          },
+          {
+            "label": "D",
+            "text": "regretted"
+          }
+        ]
+      },
+      "q-zj-2026-jan-049": {
+        "questionId": "q-zj-2026-jan-049",
+        "questionNo": 49,
+        "groupId": "group-zj-2026-jan-cloze",
+        "stem": "49",
+        "blankId": "blank-zj-2026-jan-049",
+        "options": [
+          {
+            "label": "A",
+            "text": "pretended"
+          },
+          {
+            "label": "B",
+            "text": "returned"
+          },
+          {
+            "label": "C",
+            "text": "promised"
+          },
+          {
+            "label": "D",
+            "text": "managed"
+          }
+        ]
+      },
+      "q-zj-2026-jan-050": {
+        "questionId": "q-zj-2026-jan-050",
+        "questionNo": 50,
+        "groupId": "group-zj-2026-jan-cloze",
+        "stem": "50",
+        "blankId": "blank-zj-2026-jan-050",
+        "options": [
+          {
+            "label": "A",
+            "text": "Supposedly"
+          },
+          {
+            "label": "B",
+            "text": "Admittedly"
+          },
+          {
+            "label": "C",
+            "text": "Similarly"
+          },
+          {
+            "label": "D",
+            "text": "Consequently"
+          }
+        ]
+      },
+      "q-zj-2026-jan-051": {
+        "questionId": "q-zj-2026-jan-051",
+        "questionNo": 51,
+        "groupId": "group-zj-2026-jan-cloze",
+        "stem": "51",
+        "blankId": "blank-zj-2026-jan-051",
+        "options": [
+          {
+            "label": "A",
+            "text": "occupations"
+          },
+          {
+            "label": "B",
+            "text": "solutions"
+          },
+          {
+            "label": "C",
+            "text": "institutions"
+          },
+          {
+            "label": "D",
+            "text": "destinations"
+          }
+        ]
+      },
+      "q-zj-2026-jan-052": {
+        "questionId": "q-zj-2026-jan-052",
+        "questionNo": 52,
+        "groupId": "group-zj-2026-jan-cloze",
+        "stem": "52",
+        "blankId": "blank-zj-2026-jan-052",
+        "options": [
+          {
+            "label": "A",
+            "text": "let alone"
+          },
+          {
+            "label": "B",
+            "text": "except for"
+          },
+          {
+            "label": "C",
+            "text": "such as"
+          },
+          {
+            "label": "D",
+            "text": "regardless of"
+          }
+        ]
+      },
+      "q-zj-2026-jan-053": {
+        "questionId": "q-zj-2026-jan-053",
+        "questionNo": 53,
+        "groupId": "group-zj-2026-jan-cloze",
+        "stem": "53",
+        "blankId": "blank-zj-2026-jan-053",
+        "options": [
+          {
+            "label": "A",
+            "text": "miss"
+          },
+          {
+            "label": "B",
+            "text": "leave"
+          },
+          {
+            "label": "C",
+            "text": "seize"
+          },
+          {
+            "label": "D",
+            "text": "tour"
+          }
+        ]
+      },
+      "q-zj-2026-jan-054": {
+        "questionId": "q-zj-2026-jan-054",
+        "questionNo": 54,
+        "groupId": "group-zj-2026-jan-cloze",
+        "stem": "54",
+        "blankId": "blank-zj-2026-jan-054",
+        "options": [
+          {
+            "label": "A",
+            "text": "demand"
+          },
+          {
+            "label": "B",
+            "text": "support"
+          },
+          {
+            "label": "C",
+            "text": "appreciation"
+          },
+          {
+            "label": "D",
+            "text": "excuse"
+          }
+        ]
+      },
+      "q-zj-2026-jan-055": {
+        "questionId": "q-zj-2026-jan-055",
+        "questionNo": 55,
+        "groupId": "group-zj-2026-jan-cloze",
+        "stem": "55",
+        "blankId": "blank-zj-2026-jan-055",
+        "options": [
+          {
+            "label": "A",
+            "text": "deal"
+          },
+          {
+            "label": "B",
+            "text": "part"
+          },
+          {
+            "label": "C",
+            "text": "compete"
+          },
+          {
+            "label": "D",
+            "text": "reconnect"
+          }
+        ]
+      },
+      "q-zj-2026-jan-056": {
+        "questionId": "q-zj-2026-jan-056",
+        "questionNo": 56,
+        "groupId": "group-zj-2026-jan-grammar-fill",
+        "stem": "56",
+        "blankId": "blank-zj-2026-jan-056"
+      },
+      "q-zj-2026-jan-057": {
+        "questionId": "q-zj-2026-jan-057",
+        "questionNo": 57,
+        "groupId": "group-zj-2026-jan-grammar-fill",
+        "stem": "57",
+        "blankId": "blank-zj-2026-jan-057"
+      },
+      "q-zj-2026-jan-058": {
+        "questionId": "q-zj-2026-jan-058",
+        "questionNo": 58,
+        "groupId": "group-zj-2026-jan-grammar-fill",
+        "stem": "58",
+        "blankId": "blank-zj-2026-jan-058"
+      },
+      "q-zj-2026-jan-059": {
+        "questionId": "q-zj-2026-jan-059",
+        "questionNo": 59,
+        "groupId": "group-zj-2026-jan-grammar-fill",
+        "stem": "59",
+        "blankId": "blank-zj-2026-jan-059"
+      },
+      "q-zj-2026-jan-060": {
+        "questionId": "q-zj-2026-jan-060",
+        "questionNo": 60,
+        "groupId": "group-zj-2026-jan-grammar-fill",
+        "stem": "60",
+        "blankId": "blank-zj-2026-jan-060"
+      },
+      "q-zj-2026-jan-061": {
+        "questionId": "q-zj-2026-jan-061",
+        "questionNo": 61,
+        "groupId": "group-zj-2026-jan-grammar-fill",
+        "stem": "61",
+        "blankId": "blank-zj-2026-jan-061"
+      },
+      "q-zj-2026-jan-062": {
+        "questionId": "q-zj-2026-jan-062",
+        "questionNo": 62,
+        "groupId": "group-zj-2026-jan-grammar-fill",
+        "stem": "62",
+        "blankId": "blank-zj-2026-jan-062"
+      },
+      "q-zj-2026-jan-063": {
+        "questionId": "q-zj-2026-jan-063",
+        "questionNo": 63,
+        "groupId": "group-zj-2026-jan-grammar-fill",
+        "stem": "63",
+        "blankId": "blank-zj-2026-jan-063"
+      },
+      "q-zj-2026-jan-064": {
+        "questionId": "q-zj-2026-jan-064",
+        "questionNo": 64,
+        "groupId": "group-zj-2026-jan-grammar-fill",
+        "stem": "64",
+        "blankId": "blank-zj-2026-jan-064"
+      },
+      "q-zj-2026-jan-065": {
+        "questionId": "q-zj-2026-jan-065",
+        "questionNo": 65,
+        "groupId": "group-zj-2026-jan-grammar-fill",
+        "stem": "65",
+        "blankId": "blank-zj-2026-jan-065"
+      }
+    },
+    "blanks": {
+      "blank-zj-2026-jan-056": {
+        "blankId": "blank-zj-2026-jan-056",
+        "groupId": "group-zj-2026-jan-grammar-fill",
+        "questionId": "q-zj-2026-jan-056",
+        "prompt": "finish"
+      },
+      "blank-zj-2026-jan-057": {
+        "blankId": "blank-zj-2026-jan-057",
+        "groupId": "group-zj-2026-jan-grammar-fill",
+        "questionId": "q-zj-2026-jan-057"
+      },
+      "blank-zj-2026-jan-058": {
+        "blankId": "blank-zj-2026-jan-058",
+        "groupId": "group-zj-2026-jan-grammar-fill",
+        "questionId": "q-zj-2026-jan-058",
+        "prompt": "number"
+      },
+      "blank-zj-2026-jan-059": {
+        "blankId": "blank-zj-2026-jan-059",
+        "groupId": "group-zj-2026-jan-grammar-fill",
+        "questionId": "q-zj-2026-jan-059",
+        "prompt": "watch"
+      },
+      "blank-zj-2026-jan-060": {
+        "blankId": "blank-zj-2026-jan-060",
+        "groupId": "group-zj-2026-jan-grammar-fill",
+        "questionId": "q-zj-2026-jan-060",
+        "prompt": "excite"
+      },
+      "blank-zj-2026-jan-061": {
+        "blankId": "blank-zj-2026-jan-061",
+        "groupId": "group-zj-2026-jan-grammar-fill",
+        "questionId": "q-zj-2026-jan-061"
+      },
+      "blank-zj-2026-jan-062": {
+        "blankId": "blank-zj-2026-jan-062",
+        "groupId": "group-zj-2026-jan-grammar-fill",
+        "questionId": "q-zj-2026-jan-062",
+        "prompt": "push"
+      },
+      "blank-zj-2026-jan-063": {
+        "blankId": "blank-zj-2026-jan-063",
+        "groupId": "group-zj-2026-jan-grammar-fill",
+        "questionId": "q-zj-2026-jan-063"
+      },
+      "blank-zj-2026-jan-064": {
+        "blankId": "blank-zj-2026-jan-064",
+        "groupId": "group-zj-2026-jan-grammar-fill",
+        "questionId": "q-zj-2026-jan-064"
+      },
+      "blank-zj-2026-jan-065": {
+        "blankId": "blank-zj-2026-jan-065",
+        "groupId": "group-zj-2026-jan-grammar-fill",
+        "questionId": "q-zj-2026-jan-065",
+        "prompt": "seeming"
+      }
+    },
+    "writingTasks": {
+      "wt-zj-2026-jan-application": {
+        "writingTaskId": "wt-zj-2026-jan-application",
+        "groupId": "group-zj-2026-jan-writing-application",
+        "taskType": "application",
+        "title": "应用文写作",
+        "instruction": "你发现图书馆的书籍存在被勾画涂写的现象，请写一篇文章向校英文报投稿。内容包括：\n（1）说明具体情况；\n（2）呼吁爱护书籍。\n（1）写作词数应为80个左右；\n（2）请按如下格式在答题卡的相应位置作答。\nTreasure Library Books: Our Shared Responsibility",
+        "wordCountTarget": 80
+      },
+      "wt-zj-2026-jan-continuation": {
+        "writingTaskId": "wt-zj-2026-jan-continuation",
+        "groupId": "group-zj-2026-jan-writing-continuation",
+        "taskType": "continuation",
+        "title": "读后续写",
+        "instruction": "阅读下面材料，根据其内容和所给段落开头语续写两段，使之构成一篇完整的短文。\nI was driving my daughter Lila to her swimming lesson when we spotted a cow wandering down the main road. A thick rope was tied around its neck, dragging on the pavement behind it. The cow was ambling along in the middle of the traffic, tail flicking lazily, while a line of cars followed cautiously, their drivers leaning out of windows to stare. A group of kids on bicycles had gathered at a safe distance, cheering and pointing as the cow nudged a stop sign with its head.\n“Look, Mom!” Lila gasped, pressing her face against the car window. “City people are all scared of it! But you can handle anything, right? You herded cows on Grandpa’s farm when you were a kid.”\nI smiled, recalling the summer I’d spent on my grandfather’s dairy farm, chasing strays back into the pasture with a stick and a loud voice. “It’s just a lost cow, sweetie,” I said, “but we need to get you to swim class first. I’ll check on it after I drop you off.” We inched past the cow, which lifted its head and let out a low moo as we passed. Lila waved, and the cow tilted its head as if waving back. I dropped Lila at the pool, promising to be back in an hour, then turned the car around to find the cow. By the time I got back to the main road, the traffic had cleared, but the cow was still there – standing in a patch of grass by the sidewalk, chewing on a dandelion. It was a reddish-brown cow, smaller than the Holsteins on Grandpa’s farm, with big, gentle eyes. And there was something about it, a skittishness in its posture, that made it different from the cows I’d known back home. It didn’t seem like a farm cow at all.",
+        "continuationStarters": [
+          "As I turned to leave, two police officers pulled up in a patrol car.",
+          "We tied the rope to a tree and discussed what to do with the cow."
+        ],
+        "materialText": "阅读下面材料，根据其内容和所给段落开头语续写两段，使之构成一篇完整的短文。\n\nI was driving my daughter Lila to her swimming lesson when we spotted a cow wandering down the main road. A thick rope was tied around its neck, dragging on the pavement behind it. The cow was ambling along in the middle of the traffic, tail flicking lazily, while a line of cars followed cautiously, their drivers leaning out of windows to stare. A group of kids on bicycles had gathered at a safe distance, cheering and pointing as the cow nudged a stop sign with its head.\n\n“Look, Mom!” Lila gasped, pressing her face against the car window. “City people are all scared of it! But you can handle anything, right? You herded cows on Grandpa’s farm when you were a kid.”\n\nI smiled, recalling the summer I’d spent on my grandfather’s dairy farm, chasing strays back into the pasture with a stick and a loud voice. “It’s just a lost cow, sweetie,” I said, “but we need to get you to swim class first. I’ll check on it after I drop you off.” We inched past the cow, which lifted its head and let out a low moo as we passed. Lila waved, and the cow tilted its head as if waving back. I dropped Lila at the pool, promising to be back in an hour, then turned the car around to find the cow. By the time I got back to the main road, the traffic had cleared, but the cow was still there – standing in a patch of grass by the sidewalk, chewing on a dandelion. It was a reddish-brown cow, smaller than the Holsteins on Grandpa’s farm, with big, gentle eyes. And there was something about it, a skittishness in its posture, that made it different from the cows I’d known back home. It didn’t seem like a farm cow at all.",
+        "wordCountTarget": 150
+      }
+    }
+  },
+  "answerKey": {
+    "answers": {
+      "q-zj-2026-jan-021": {
+        "questionId": "q-zj-2026-jan-021",
+        "questionNo": 21,
+        "answer": "D",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2026-jan-022": {
+        "questionId": "q-zj-2026-jan-022",
+        "questionNo": 22,
+        "answer": "B",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2026-jan-023": {
+        "questionId": "q-zj-2026-jan-023",
+        "questionNo": 23,
+        "answer": "A",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2026-jan-024": {
+        "questionId": "q-zj-2026-jan-024",
+        "questionNo": 24,
+        "answer": "B",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2026-jan-025": {
+        "questionId": "q-zj-2026-jan-025",
+        "questionNo": 25,
+        "answer": "D",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2026-jan-026": {
+        "questionId": "q-zj-2026-jan-026",
+        "questionNo": 26,
+        "answer": "C",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2026-jan-027": {
+        "questionId": "q-zj-2026-jan-027",
+        "questionNo": 27,
+        "answer": "A",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2026-jan-028": {
+        "questionId": "q-zj-2026-jan-028",
+        "questionNo": 28,
+        "answer": "A",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2026-jan-029": {
+        "questionId": "q-zj-2026-jan-029",
+        "questionNo": 29,
+        "answer": "D",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2026-jan-030": {
+        "questionId": "q-zj-2026-jan-030",
+        "questionNo": 30,
+        "answer": "B",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2026-jan-031": {
+        "questionId": "q-zj-2026-jan-031",
+        "questionNo": 31,
+        "answer": "D",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2026-jan-032": {
+        "questionId": "q-zj-2026-jan-032",
+        "questionNo": 32,
+        "answer": "A",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2026-jan-033": {
+        "questionId": "q-zj-2026-jan-033",
+        "questionNo": 33,
+        "answer": "B",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2026-jan-034": {
+        "questionId": "q-zj-2026-jan-034",
+        "questionNo": 34,
+        "answer": "C",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2026-jan-035": {
+        "questionId": "q-zj-2026-jan-035",
+        "questionNo": 35,
+        "answer": "C",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2026-jan-036": {
+        "questionId": "q-zj-2026-jan-036",
+        "questionNo": 36,
+        "answer": "B",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2026-jan-037": {
+        "questionId": "q-zj-2026-jan-037",
+        "questionNo": 37,
+        "answer": "E",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2026-jan-038": {
+        "questionId": "q-zj-2026-jan-038",
+        "questionNo": 38,
+        "answer": "C",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2026-jan-039": {
+        "questionId": "q-zj-2026-jan-039",
+        "questionNo": 39,
+        "answer": "F",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2026-jan-040": {
+        "questionId": "q-zj-2026-jan-040",
+        "questionNo": 40,
+        "answer": "G",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2026-jan-041": {
+        "questionId": "q-zj-2026-jan-041",
+        "questionNo": 41,
+        "answer": "D",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2026-jan-042": {
+        "questionId": "q-zj-2026-jan-042",
+        "questionNo": 42,
+        "answer": "A",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2026-jan-043": {
+        "questionId": "q-zj-2026-jan-043",
+        "questionNo": 43,
+        "answer": "C",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2026-jan-044": {
+        "questionId": "q-zj-2026-jan-044",
+        "questionNo": 44,
+        "answer": "C",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2026-jan-045": {
+        "questionId": "q-zj-2026-jan-045",
+        "questionNo": 45,
+        "answer": "B",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2026-jan-046": {
+        "questionId": "q-zj-2026-jan-046",
+        "questionNo": 46,
+        "answer": "B",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2026-jan-047": {
+        "questionId": "q-zj-2026-jan-047",
+        "questionNo": 47,
+        "answer": "A",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2026-jan-048": {
+        "questionId": "q-zj-2026-jan-048",
+        "questionNo": 48,
+        "answer": "B",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2026-jan-049": {
+        "questionId": "q-zj-2026-jan-049",
+        "questionNo": 49,
+        "answer": "D",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2026-jan-050": {
+        "questionId": "q-zj-2026-jan-050",
+        "questionNo": 50,
+        "answer": "B",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2026-jan-051": {
+        "questionId": "q-zj-2026-jan-051",
+        "questionNo": 51,
+        "answer": "D",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2026-jan-052": {
+        "questionId": "q-zj-2026-jan-052",
+        "questionNo": 52,
+        "answer": "A",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2026-jan-053": {
+        "questionId": "q-zj-2026-jan-053",
+        "questionNo": 53,
+        "answer": "B",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2026-jan-054": {
+        "questionId": "q-zj-2026-jan-054",
+        "questionNo": 54,
+        "answer": "C",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2026-jan-055": {
+        "questionId": "q-zj-2026-jan-055",
+        "questionNo": 55,
+        "answer": "D",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2026-jan-056": {
+        "questionId": "q-zj-2026-jan-056",
+        "questionNo": 56,
+        "answer": "to finish",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2026-jan-057": {
+        "questionId": "q-zj-2026-jan-057",
+        "questionNo": 57,
+        "answer": "in",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2026-jan-058": {
+        "questionId": "q-zj-2026-jan-058",
+        "questionNo": 58,
+        "answer": "numbers",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2026-jan-059": {
+        "questionId": "q-zj-2026-jan-059",
+        "questionNo": 59,
+        "answer": "watching",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2026-jan-060": {
+        "questionId": "q-zj-2026-jan-060",
+        "questionNo": 60,
+        "answer": "excitement",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2026-jan-061": {
+        "questionId": "q-zj-2026-jan-061",
+        "questionNo": 61,
+        "answer": "that/which",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2026-jan-062": {
+        "questionId": "q-zj-2026-jan-062",
+        "questionNo": 62,
+        "answer": "being pushed",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2026-jan-063": {
+        "questionId": "q-zj-2026-jan-063",
+        "questionNo": 63,
+        "answer": "the",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2026-jan-064": {
+        "questionId": "q-zj-2026-jan-064",
+        "questionNo": 64,
+        "answer": "and",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2026-jan-065": {
+        "questionId": "q-zj-2026-jan-065",
+        "questionNo": 65,
+        "answer": "seemingly",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      }
+    }
+  },
+  "analysis": {
+    "meta": {
+      "generatedBy": "external-ai",
+      "promptVersion": "reading-choice-analysis-v1",
+      "reviewStatus": "reviewed",
+      "importMode": "paper-import-ai",
+      "model": "claude-opus-4-8",
+      "reviewedBy": "import-pipeline",
+      "reviewedAt": "2026-06-08T00:00:00Z"
+    },
+    "groups": {
+      "group-zj-2026-jan-reading-a": {
+        "overview": "本文是一则应用文（公共艺术征集启事），来自加拿大 Burlington 市公共艺术项目，面向本地艺术家与作家征集作品，用于在 Beachway 多功能步道沿线的临时标牌上展示，配合安大略文化节。文中给出报酬、项目时间线及投稿要求。",
+        "discourseStructure": {
+          "summary": "全文先介绍征集项目背景与对象，再说明报酬，随后以时间线列出项目进度安排，最后详细列出投稿材料包（作品陈述、作品/写作投稿、艺术家简介）的字数与形式要求。",
+          "paragraphs": [
+            {
+              "paragraphId": "para-zj-2026-jan-reading-a-1",
+              "summary": "Burlington 市公共艺术项目将选出 10 名视觉艺术家与 10 名作家，为多功能步道沿线临时标牌创作作品，面向本地艺术家及各类可制成标牌形式的艺术门类开放。",
+              "function": "引出征集启事的主旨与征集对象、范围"
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-reading-a-2",
+              "summary": "说明艺术家报酬为 400 美元，标牌的制作、安装与维护费用由市政府承担。",
+              "function": "说明报酬与费用承担"
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-reading-a-3",
+              "summary": "时间线标题：预估项目时间安排。",
+              "function": "时间线小标题"
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-reading-a-4",
+              "summary": "时间节点：8 月 2 日。",
+              "function": "时间线日期项"
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-reading-a-5",
+              "summary": "对应 8 月 2 日：征集回应截止。",
+              "function": "时间线事项项"
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-reading-a-6",
+              "summary": "时间节点：8 月 12 日前。",
+              "function": "时间线日期项"
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-reading-a-7",
+              "summary": "对应 8 月 12 日前：入选艺术家确定并签订合同。",
+              "function": "时间线事项项"
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-reading-a-8",
+              "summary": "续上一项：与 Burlington 市签约。",
+              "function": "时间线事项项续行"
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-reading-a-9",
+              "summary": "时间节点：9 月 6 日。",
+              "function": "时间线日期项"
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-reading-a-10",
+              "summary": "对应 9 月 6 日：最终作品文件提交截止。",
+              "function": "时间线事项项"
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-reading-a-11",
+              "summary": "时间节点：9 月 23 日至 10 月 13 日。",
+              "function": "时间线日期区间项"
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-reading-a-12",
+              "summary": "对应 9 月 23 日至 10 月 13 日：作品在文化节期间展示。",
+              "function": "时间线事项项"
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-reading-a-13",
+              "summary": "续上一项：庆祝活动。",
+              "function": "时间线事项项续行"
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-reading-a-14",
+              "summary": "投稿材料包小标题。",
+              "function": "材料要求小标题"
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-reading-a-15",
+              "summary": "作品陈述：需提供概述创作理念的简短陈述，最多 150 词。",
+              "function": "列出作品陈述要求"
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-reading-a-16",
+              "summary": "作品或写作投稿小标题。",
+              "function": "投稿要求小标题"
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-reading-a-17",
+              "summary": "视觉艺术投稿：提交创作理念的草图，可为半成品；若用已完成作品则作为草图提交。",
+              "function": "列出视觉艺术投稿要求"
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-reading-a-18",
+              "summary": "写作投稿：最多 250 词，可为独立作品如诗歌或短篇小说，也可为较大作品的节选。",
+              "function": "列出写作投稿要求"
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-reading-a-19",
+              "summary": "艺术家简介：需以第三人称提供简短介绍，最多 50 词。",
+              "function": "列出艺术家简介要求"
+            }
+          ]
+        }
+      },
+      "group-zj-2026-jan-reading-b": {
+        "overview": "一位教师以第一人称叙述自己如何把个人爱好（尤其是对汽车的热爱）带入课堂，用以打破学生的错误观念、激发学习兴趣，并在此过程中意外地拉近了师生关系，最终把这一做法发展为自己的教学理念。",
+        "discourseStructure": {
+          "summary": "文章按\"问题—做法—意外收获—升华为理念\"的顺序展开：先指出学生的错误观念是教学难题，再举例说明自己如何用汽车爱好讲物理，接着叙述意外收获的师生关系，最后把实验升华为贯穿教学的philosophy。",
+          "paragraphs": [
+            {
+              "paragraphId": "para-zj-2026-jan-reading-b-1",
+              "summary": "指出教师工作的一大部分是对抗学生的错误观念：学生常认为学习不能有趣、与现实和个人兴趣无关；作者发现展示所学与自己爱好的关联能让学生更愿意建立联系。",
+              "function": "提出问题并引出作者的核心做法"
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-reading-b-2",
+              "summary": "以教物理为例：作者是汽车爱好者，讲摩擦力时把不同轮胎带进课堂，让学生做实验，理解摩擦在现实中的应用。",
+              "function": "用具体事例说明做法"
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-reading-b-3",
+              "summary": "作者最初只关注此做法对提升参与度和理解科学概念的作用，但很快发现它还帮助自己与学生建立了更牢固的关系，无论学生是否同样喜欢汽车都更投入。",
+              "function": "叙述意外收获——师生关系的拉近"
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-reading-b-4",
+              "summary": "曾经的实验如今成了一种理念：备课时也会想着怎样融入爱好，这既激活教学、调动学生，又展示抽象概念如何落地，最重要的是激励学生去寻找自己的热爱。",
+              "function": "升华主题，总结做法的意义"
+            }
+          ]
+        }
+      },
+      "group-zj-2026-jan-reading-c": {
+        "overview": "本文是一篇说明文，介绍了一项关于假评论（fake reviews）的研究。文章先指出消费者喜爱评论但很多评论是假的，随后说明研究的实验设计，再呈现研究发现：人们更信任负面评论且容易被假的负面评论欺骗，长度、细节和情感的缺失会增强假评论的可信度，最后指出AI正越来越多地用于撰写假评论，使其更难被识别。",
+        "discourseStructure": {
+          "summary": "文章按\"引入话题—介绍实验设计—呈现研究结果—展望未来风险\"的逻辑展开：第1段引出假评论问题并交代研究背景，第2段描述实验设计，第3、4段呈现具体研究发现，第5段指出AI使假评论更难辨别的隐忧。",
+          "paragraphs": [
+            {
+              "paragraphId": "para-zj-2026-jan-reading-c-1",
+              "summary": "人们一直喜爱评论，口碑是宝贵的营销工具，但很多评论是假的；介绍三位学者发表了关于假评论的研究。",
+              "function": "引入主题并交代研究背景。"
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-reading-c-2",
+              "summary": "研究使用1600条芝加哥酒店评论数据集，向400名受试者各呈现八条真假、正负均衡的评论，评论由获得酒店信息的真人撰写。",
+              "function": "说明研究的实验设计与方法。"
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-reading-c-3",
+              "summary": "研究结果显示消费者普遍更信任负面评论，且倾向于认为正面评论可能是假的；由于负面评论较少见，人们更关注它们，因而容易被假的负面评论欺骗。",
+              "function": "呈现研究的核心发现之一。"
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-reading-c-4",
+              "summary": "长度和细节会增强假评论的可信度：详尽的长篇负面评论令人信服，而长篇正面评论显得可疑；情感的缺失同样重要，越是冷静客观的负面评论越能骗过读者。",
+              "function": "进一步说明影响假评论可信度的因素。"
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-reading-c-5",
+              "summary": "该研究的假评论由人撰写，但如今越来越多的假评论由AI生成，使其更逼真；尽管企业用算法识别假评论，但算法由人编写，加之人类辨别能力有限，前景并不乐观。",
+              "function": "指出AI带来的新隐忧并收束全文。"
+            }
+          ]
+        }
+      },
+      "group-zj-2026-jan-reading-d": {
+        "overview": "本文为科普说明文，介绍 Salk Institute 的科学家如何借助原为追踪动物运动而开发的 AI 软件 SLEAP，分析植物根系表型，进而设计能储存更多二氧化碳的“气候拯救植物”，体现了跨学科合作的价值。",
+        "discourseStructure": {
+          "summary": "文章先点明碳清除对应对气候变化的重要性并引出研究目标，再介绍核心工具 SLEAP 的来历与跨学科迁移，接着说明其工作原理与效率优势，然后阐述其在植物研究中的成果与对基因筛选的帮助，最后以研究者引语升华跨学科合作的意义。",
+          "paragraphs": [
+            {
+              "paragraphId": "para-zj-2026-jan-reading-d-1",
+              "summary": "Salk Institute 的科学家通过增强植物根系来利用植物吸收二氧化碳的天然能力，以增加碳储量并延长储存时间。",
+              "function": "提出研究背景与目标，引出全文主题"
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-reading-d-2",
+              "summary": "介绍研究工具 SLEAP——一款追踪根系生长多项特征的 AI 软件，原由 Pereira 设计用于追踪实验室动物运动，现与植物学家 Busch 合作迁移到植物上。",
+              "function": "引出核心工具并交代其跨学科来源"
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-reading-d-3",
+              "summary": "SLEAP 建立了分析植物根系表型的新流程，利用计算机视觉与深度学习大幅加快了原本耗费大量人力的图像处理过程。",
+              "function": "说明工具的工作原理与效率优势"
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-reading-d-4",
+              "summary": "SLEAP 帮助建立了迄今最完整的植物根系表型目录，并助力科学家找到与根系特征相关的基因，从而确定最有利于植物设计的基因。",
+              "function": "阐述工具带来的研究成果及对基因筛选的帮助"
+            },
+            {
+              "paragraphId": "para-zj-2026-jan-reading-d-5",
+              "summary": "Pereira 表示这种合作并非简单地从不同学科“借用”，而是让各学科平等协作，创造出大于各部分之和的成果。",
+              "function": "以研究者引语升华跨学科合作的价值"
+            }
+          ]
+        }
+      }
+    },
+    "questions": {
+      "q-zj-2026-jan-021": {
+        "skill": {
+          "primary": "authorPurpose"
+        },
+        "questionFocus": "考查全文写作目的，需把握这则应用文是面向艺术家发出的作品征集启事。",
+        "stemTranslationZh": "这篇文章的目的是什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "为本地艺术家筹款。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeAction",
+              "sourceQuote": "The artist fee for this project is $400. The City of Burlington will pay for all costs related to the production, installation (安装) and maintenance of the signs.",
+              "sourceHighlight": "The artist fee for this project is $400",
+              "optionText": "To raise money for local artists.",
+              "optionHighlight": "To raise money for local artists",
+              "explanation": "原文是市政府向艺术家支付报酬并承担费用（付钱给艺术家），并非为艺术家筹款（向外募款），方向相反。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2026-jan-reading-a-2",
+                "quote": "The City of Burlington will pay for all costs related to the production, installation (安装) and maintenance of the signs.",
+                "anchor": "市政府支付费用"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "发布一批艺术作品集。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overstatement",
+              "sourceQuote": "This call is open to Burlington-based artists and is open to all art forms that can be presented in a sign format.",
+              "sourceHighlight": "This call is open to",
+              "optionText": "To release a collection of artwork.",
+              "optionHighlight": "To release a collection of artwork",
+              "explanation": "原文是发出征集启事、邀请投稿，作品尚未创作完成或入选，谈不上发布成品作品集，夸大了文本的实际功能。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2026-jan-reading-a-1",
+                "quote": "Submissions may be from existing or newly created work.",
+                "anchor": "尚在征集投稿阶段"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "介绍一个文化节。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "in conjunction with the Ontario Culture Days",
+              "optionText": "To introduce a cultural festival.",
+              "matchType": "wordFamily",
+              "relationNote": "选项借用原文出现的 Culture Days（文化节）一词制造干扰；文化节只是本征集项目的背景，并非全文目的。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2026-jan-reading-a-1",
+                "quote": "in conjunction with the Ontario Culture Days",
+                "anchor": "文化节仅为背景"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "为一个项目征集艺术作品。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-zj-2026-jan-reading-a-1",
+                "quote": "This call is open to Burlington-based artists and is open to all art forms that can be presented in a sign format.",
+                "anchor": "面向艺术家发出征集"
+              },
+              {
+                "role": "secondary",
+                "paragraphId": "para-zj-2026-jan-reading-a-1",
+                "quote": "This project will select 10 visual artists and 10 writers to create artwork that will be displayed on temporary signs along the multi-use path.",
+                "anchor": "为项目征选创作者与作品"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "To call for artworks for a project.",
+            "sourceRole": "correctOption",
+            "targetText": "This call is open to Burlington-based artists and is open to all art forms that can be presented in a sign format.",
+            "targetParagraphId": "para-zj-2026-jan-reading-a-1",
+            "relationType": "paraphrase",
+            "note": "选项 call for artworks 对应原文 This call is open to... art forms，即向艺术家征集作品，二者为同义替换。"
+          },
+          {
+            "sourceText": "for a project",
+            "sourceRole": "correctOption",
+            "targetText": "This project will select 10 visual artists and 10 writers to create artwork",
+            "targetParagraphId": "para-zj-2026-jan-reading-a-1",
+            "relationType": "locationCue",
+            "note": "选项中的 a project 定位到原文 This project will select 10 visual artists and 10 writers，点明征集服务于一个具体项目。"
+          }
+        ]
+      },
+      "q-zj-2026-jan-022": {
+        "skill": {
+          "primary": "detail",
+          "secondary": "inference"
+        },
+        "questionFocus": "考查公共艺术标牌展示时长，需在时间线中定位展示区间并计算其跨度。",
+        "stemTranslationZh": "公共艺术标牌将展示多长时间？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "十天。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "understatement",
+              "sourceQuote": "September 23~October 13",
+              "sourceHighlight": "September 23~October 13",
+              "optionText": "Ten days.",
+              "optionHighlight": "Ten days",
+              "explanation": "从 9 月 23 日到 10 月 13 日约为三周（21 天），十天大大低估了实际展示时长。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2026-jan-reading-a-11",
+                "quote": "September 23~October 13",
+                "anchor": "展示日期区间"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "三周。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-zj-2026-jan-reading-a-11",
+                "quote": "September 23~October 13",
+                "anchor": "展示区间约三周"
+              },
+              {
+                "role": "secondary",
+                "paragraphId": "para-zj-2026-jan-reading-a-12",
+                "quote": "Artwork displayed for duration of Culture Days",
+                "anchor": "对应展示事项"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "一个月。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overstatement",
+              "sourceQuote": "September 23~October 13",
+              "sourceHighlight": "September 23~October 13",
+              "optionText": "One month.",
+              "optionHighlight": "One month",
+              "explanation": "9 月 23 日至 10 月 13 日约三周，并不足一个月，选项夸大了时长。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2026-jan-reading-a-11",
+                "quote": "September 23~October 13",
+                "anchor": "展示日期区间"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "两个月。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overstatement",
+              "sourceQuote": "September 23~October 13",
+              "sourceHighlight": "September 23~October 13",
+              "optionText": "Two months.",
+              "optionHighlight": "Two months",
+              "explanation": "展示仅约三周，两个月远超实际区间，可能误将 8 月起的整个项目周期当作展示时长，严重高估。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2026-jan-reading-a-11",
+                "quote": "September 23~October 13",
+                "anchor": "展示日期区间"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "How long will the public art signs be on display?",
+            "sourceRole": "stem",
+            "targetText": "Artwork displayed for duration of Culture Days",
+            "targetParagraphId": "para-zj-2026-jan-reading-a-12",
+            "relationType": "locationCue",
+            "note": "题干用 on display 定位到时间线中 Artwork displayed for duration of Culture Days 一项，确定展示对应的时间区间。"
+          },
+          {
+            "sourceText": "How long",
+            "sourceRole": "stem",
+            "targetText": "September 23~October 13",
+            "targetParagraphId": "para-zj-2026-jan-reading-a-11",
+            "relationType": "calculation",
+            "note": "题干 How long 需根据展示日期 September 23~October 13 推算时长，约 21 天即三周。"
+          }
+        ]
+      },
+      "q-zj-2026-jan-023": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查对各类投稿材料字数与形式要求的细节理解，需逐项核对选项是否符合上限规定。",
+        "stemTranslationZh": "下列哪一项符合申请要求？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "一首 150 词的诗。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-zj-2026-jan-reading-a-18",
+                "quote": "Submissions must be a maximum of 250 words. It may be a stand-alone piece such as a poem or short story or a part taken from a larger piece.",
+                "anchor": "写作投稿上限 250 词且诗歌可投"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "一份 100 词的自我介绍。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overstatement",
+              "sourceQuote": "Artist Biography: Please provide a short introduction (maximum 50 words) to the artist written in the third person.",
+              "sourceHighlight": "maximum 50 words",
+              "optionText": "A 100-word self-introduction.",
+              "optionHighlight": "A 100-word self-introduction",
+              "explanation": "艺术家简介上限为 50 词，100 词超过上限；且要求用第三人称介绍，self-introduction（自我介绍）也不符。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2026-jan-reading-a-19",
+                "quote": "Please provide a short introduction (maximum 50 words) to the artist written in the third person.",
+                "anchor": "简介上限 50 词且用第三人称"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "一篇 300 词的故事。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overstatement",
+              "sourceQuote": "Submissions must be a maximum of 250 words. It may be a stand-alone piece such as a poem or short story or a part taken from a larger piece.",
+              "sourceHighlight": "maximum of 250 words",
+              "optionText": "A 300-word story.",
+              "optionHighlight": "A 300-word story",
+              "explanation": "写作投稿上限为 250 词，300 词超过上限，故事虽属允许体裁但字数不符。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2026-jan-reading-a-18",
+                "quote": "Submissions must be a maximum of 250 words.",
+                "anchor": "写作上限 250 词"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "一份 200 词的作品陈述。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overstatement",
+              "sourceQuote": "Artwork Statement: Please provide a brief statement (maximum 150 words) outlining your artwork concept.",
+              "sourceHighlight": "maximum 150 words",
+              "optionText": "A 200-word artwork statement.",
+              "optionHighlight": "A 200-word artwork statement",
+              "explanation": "作品陈述上限为 150 词，200 词超过上限，不符合要求。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2026-jan-reading-a-15",
+                "quote": "Please provide a brief statement (maximum 150 words) outlining your artwork concept.",
+                "anchor": "作品陈述上限 150 词"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "A 150-word poem.",
+            "sourceRole": "correctOption",
+            "targetText": "Submissions must be a maximum of 250 words. It may be a stand-alone piece such as a poem or short story or a part taken from a larger piece.",
+            "targetParagraphId": "para-zj-2026-jan-reading-a-18",
+            "relationType": "calculation",
+            "note": "正确选项 A 150-word poem 对应写作投稿要求：poem 属允许体裁，且 150 词不超过 maximum of 250 words 的上限，符合要求。"
+          }
+        ]
+      },
+      "q-zj-2026-jan-024": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查作者认为对教师构成挑战的是什么，需定位首段对教学难题的描述。",
+        "stemTranslationZh": "根据作者所说，什么给教师带来了挑战？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "学生对教师的误解。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "a big part of your job is battling student misconceptions",
+              "sourceEntity": "student misconceptions (学生的错误观念)",
+              "optionText": "Students’ misunderstandings about teachers.",
+              "optionEntity": "misunderstandings about teachers (对教师的误解)",
+              "explanation": "原文的误解对象是\"学习\"，而非\"教师\"；选项把误解的对象错配成teachers，属对象错配。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2026-jan-reading-b-1",
+                "quote": "Often students come to the classroom believing that learning can’t be fun",
+                "anchor": "误解的对象是learning"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "学生对学习的错误假设。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-zj-2026-jan-reading-b-1",
+                "quote": "a big part of your job is battling student misconceptions",
+                "anchor": "教师工作的一大难题是对抗学生的误解"
+              },
+              {
+                "role": "support",
+                "paragraphId": "para-zj-2026-jan-reading-b-1",
+                "quote": "Often students come to the classroom believing that learning can’t be fun and that what they learn isn’t relevant to the real world",
+                "anchor": "误解的具体内容是关于learning"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "教科书与学生生活无关。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "what they learn isn’t relevant to the real world",
+              "optionText": "The irrelevance of textbooks to students’ life.",
+              "matchType": "wordFamily",
+              "relationNote": "原文说的是学生认为\"所学内容\"与现实无关，选项借irrelevant/relevant的词族钩子换成\"教科书\"与生活无关，且这是学生的误解而非真正的挑战本身。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2026-jan-reading-b-1",
+                "quote": "what they learn isn’t relevant to the real world",
+                "anchor": "原文谈所学内容，非textbooks"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "教师与学生爱好之间的差距。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "The gap between teachers’ and students’ hobbies.",
+              "explanation": "原文未提及师生爱好之间存在\"差距\"这一挑战，属无中生有。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "poses a challenge to teachers",
+            "sourceRole": "stem",
+            "targetText": "a big part of your job is battling student misconceptions",
+            "targetParagraphId": "para-zj-2026-jan-reading-b-1",
+            "relationType": "paraphrase",
+            "note": "题干 poses a challenge to teachers 对应原文 battling student misconceptions，挑战即指对抗学生的错误观念。"
+          },
+          {
+            "sourceText": "false assumptions about learning",
+            "sourceRole": "correctOption",
+            "targetText": "believing that learning can’t be fun",
+            "targetParagraphId": "para-zj-2026-jan-reading-b-1",
+            "relationType": "paraphrase",
+            "note": "正确项 false assumptions about learning 同义替换原文 believing that learning can’t be fun（关于learning的错误信念）。"
+          }
+        ]
+      },
+      "q-zj-2026-jan-025": {
+        "skill": {
+          "primary": "detail",
+          "secondary": "inference"
+        },
+        "questionFocus": "考查作者把轮胎带进课堂的目的，需定位第二段教摩擦力的事例并理解其意图。",
+        "stemTranslationZh": "作者为什么把轮胎带进课堂？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "为了教授一项工程技能。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "To teach an engineering skill.",
+              "explanation": "原文是用轮胎做实验来理解物理中的摩擦概念，并未提及教授任何\"工程技能\"，属无中生有。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "为了讲解汽车的构造。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "I contextualize concepts with my knowledge about cars",
+              "optionText": "To explain the structure of a car.",
+              "matchType": "wordFamily",
+              "relationNote": "原文反复出现cars作为讲解物理概念的背景，选项借\"car\"词钩偷换为讲解汽车\"构造\"，但作者目的是讲摩擦力概念，而非汽车结构。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2026-jan-reading-b-2",
+                "quote": "I’m a car enthusiast, so when I teach physics, I contextualize concepts with my knowledge about cars",
+                "anchor": "用汽车背景讲概念，非讲汽车构造"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "为了分享一段真实的生活经历。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overgeneralization",
+              "sourceQuote": "I bring different tires (轮胎) into my classroom so that my students can conduct lab experiments with them to see how friction works in real-life applications",
+              "sourceHighlight": "to see how friction works in real-life applications",
+              "optionText": "To share a real-life experience.",
+              "optionHighlight": "share a real-life experience",
+              "explanation": "原文目的明确是让学生看到摩擦力在现实应用中如何起作用，选项把具体的\"演示科学概念\"泛化为笼统的\"分享生活经历\"，范围被放大且偏离了科学教学目的。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2026-jan-reading-b-2",
+                "quote": "to see how friction works in real-life applications",
+                "anchor": "目的是演示摩擦力，非分享经历"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "为了说明一个科学概念。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-zj-2026-jan-reading-b-2",
+                "quote": "If we’re covering friction, for example, I bring different tires (轮胎) into my classroom so that my students can conduct lab experiments with them to see how friction works in real-life applications",
+                "anchor": "带轮胎是为让学生看摩擦力如何起作用"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Why does the author bring tires into the classroom",
+            "sourceRole": "stem",
+            "targetText": "I bring different tires (轮胎) into my classroom so that my students can conduct lab experiments with them",
+            "targetParagraphId": "para-zj-2026-jan-reading-b-2",
+            "relationType": "locationCue",
+            "note": "题干 bring tires into the classroom 直接定位到原文 bring different tires into my classroom，so that 引出目的状语。"
+          },
+          {
+            "sourceText": "To illustrate a scientific concept",
+            "sourceRole": "correctOption",
+            "targetText": "to see how friction works in real-life applications",
+            "targetParagraphId": "para-zj-2026-jan-reading-b-2",
+            "relationType": "paraphrase",
+            "note": "正确项 illustrate a scientific concept 对应原文以friction（摩擦力，scientific concept）为例的演示目的，friction 即 scientific concept 的具体化。"
+          }
+        ]
+      },
+      "q-zj-2026-jan-026": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查作者教学法带来的意外结果，需定位第三段but quickly learned之后的转折内容。",
+        "stemTranslationZh": "作者教学方法带来的意外结果是什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "更高的课堂出勤率。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "A higher class attendance rate.",
+              "explanation": "原文谈到学生更投入（more engaged），但未提及\"出勤率\"提高，属无中生有。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "更好的考试成绩。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Better examination results.",
+              "explanation": "原文未提及考试成绩或分数的改善，属无中生有。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "更亲密的师生关系。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-zj-2026-jan-reading-b-3",
+                "quote": "But I quickly learned that the practice also helped me build stronger relationships with them",
+                "anchor": "意外发现：帮助建立更牢固的师生关系"
+              },
+              {
+                "role": "support",
+                "paragraphId": "para-zj-2026-jan-reading-b-3",
+                "quote": "some students who were also interested in cars connected with me more and became more engaged in my courses",
+                "anchor": "学生与作者更亲近"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "学生有更多空闲时间。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "More spare time for students.",
+              "explanation": "原文未提及学生因此获得更多空闲时间，属无中生有。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "unexpected outcome",
+            "sourceRole": "stem",
+            "targetText": "But I quickly learned that the practice also helped me build stronger relationships with them",
+            "targetParagraphId": "para-zj-2026-jan-reading-b-3",
+            "relationType": "locationCue",
+            "note": "题干 unexpected outcome 对应原文 But I quickly learned ... also（最初聚焦于参与度，但很快意外发现），转折与also标示出意料之外的结果。"
+          },
+          {
+            "sourceText": "A closer teacher-student bond",
+            "sourceRole": "correctOption",
+            "targetText": "build stronger relationships with them",
+            "targetParagraphId": "para-zj-2026-jan-reading-b-3",
+            "relationType": "paraphrase",
+            "note": "正确项 closer teacher-student bond 同义替换原文 stronger relationships，bond 即 relationships。"
+          }
+        ]
+      },
+      "q-zj-2026-jan-027": {
+        "skill": {
+          "primary": "attitude",
+          "secondary": "inference"
+        },
+        "questionFocus": "考查对作者作为教师形象的概括，需综合全文其将爱好带入课堂、把实验升华为理念的创新做法。",
+        "stemTranslationZh": "下列哪一项最能描述作为教师的作者？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "富有创新精神的。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-zj-2026-jan-reading-b-4",
+                "quote": "What started as an experiment is now more of a philosophy.",
+                "anchor": "把实验性的做法发展为理念，体现创新"
+              },
+              {
+                "role": "support",
+                "paragraphId": "para-zj-2026-jan-reading-b-2",
+                "quote": "No matter what subject I’m teaching, I find ways to bring my hobbies into the classroom",
+                "anchor": "主动想方设法把爱好融入教学"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "幽默风趣的。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Humorous.",
+              "explanation": "原文虽提及让学习变有趣（fun），但未表现作者本人幽默风趣的特质，属无中生有。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "果断坚决的。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Decisive.",
+              "explanation": "原文未体现作者做决定果断的特质，属无中生有。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "富有同情心的。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Sympathetic.",
+              "explanation": "原文未表现作者富有同情心这一特质，属无中生有。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Innovative",
+            "sourceRole": "correctOption",
+            "targetText": "What started as an experiment is now more of a philosophy.",
+            "targetParagraphId": "para-zj-2026-jan-reading-b-4",
+            "relationType": "paraphrase",
+            "note": "正确项 Innovative（创新）由原文 experiment（实验）发展为 philosophy（理念）的过程推断而来，体现作者勇于尝试新教法。"
+          },
+          {
+            "sourceText": "Innovative",
+            "sourceRole": "correctOption",
+            "targetText": "I find ways to bring my hobbies into the classroom",
+            "targetParagraphId": "para-zj-2026-jan-reading-b-2",
+            "relationType": "locationCue",
+            "note": "find ways to bring my hobbies into the classroom 显示作者主动创新教学方式，支持 Innovative 的概括。"
+          }
+        ]
+      },
+      "q-zj-2026-jan-028": {
+        "skill": {
+          "primary": "mainIdea"
+        },
+        "questionFocus": "考查对第2段段落主旨的把握，判断该段主要讲述研究的哪一方面。",
+        "stemTranslationZh": "第2段主要谈论了这项研究的哪个方面？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "它的设计。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-zj-2026-jan-reading-c-2",
+                "quote": "The study used a dataset of 1,600 reviews of Chicago hotels.",
+                "anchor": "使用1600条评论数据集"
+              },
+              {
+                "role": "support",
+                "paragraphId": "para-zj-2026-jan-reading-c-2",
+                "quote": "Each subject got eight reviews to read: a balanced set of two positive fake, two positive real, two negative fake and two negative real, presented in a random order.",
+                "anchor": "受试者阅读的评论安排"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "它的发现。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overgeneralization",
+              "sourceQuote": "The results show that consumers generally trust negative reviews more than positive ones.",
+              "sourceHighlight": "The results show that",
+              "optionText": "Its findings.",
+              "optionHighlight": "findings",
+              "explanation": "研究发现（findings）出现在第3、4段，而非第2段；第2段仅描述实验设计，将后文内容归入第2段属于范围偷换。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "它的目的。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Paragraph 2 mainly talks about the study's purposes.",
+              "explanation": "原文未提及该研究的目的，第2段只描述数据集、受试者和评论安排等实验设计内容。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "它的意义。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Paragraph 2 mainly talks about the study's significance.",
+              "explanation": "原文未提及该研究的意义，第2段只交代实验如何设计与开展。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Its design",
+            "sourceRole": "correctOption",
+            "targetText": "Each subject got eight reviews to read: a balanced set of two positive fake, two positive real, two negative fake and two negative real, presented in a random order.",
+            "targetParagraphId": "para-zj-2026-jan-reading-c-2",
+            "relationType": "paraphrase",
+            "note": "选项中的 design（设计）对应第2段对数据集、受试者人数和评论 balanced set 等实验安排的描述，这些都属于研究的 design。"
+          }
+        ]
+      },
+      "q-zj-2026-jan-029": {
+        "skill": {
+          "primary": "wordMeaning"
+        },
+        "questionFocus": "考查根据上下文推测划线词 glowing 的含义。",
+        "stemTranslationZh": "第4段中划线词\"glowing\"是什么意思？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "有趣的。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "glowing means funny",
+              "explanation": "原文未提及评论是否有趣，glowing 修饰的是 positive review，与\"有趣\"无关。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "辱骂的。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeAttitude",
+              "sourceQuote": "A lengthy, positive review, on the other hand, was regarded as suspicious, and participants tended to trust writers that kept their glowing reviews short.",
+              "sourceHighlight": "positive review",
+              "optionText": "Abusive.",
+              "optionHighlight": "Abusive",
+              "explanation": "glowing reviews 与前文 positive review 呼应，是\"褒扬的\"正面评价，而 abusive（辱骂的）是负面态度，极性相反。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2026-jan-reading-c-4",
+                "quote": "A lengthy, positive review, on the other hand, was regarded as suspicious",
+                "anchor": "glowing 对应 positive 而非负面"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "有洞察力的。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "glowing means insightful",
+              "explanation": "原文上下文表明 glowing 指评价的正面/褒扬性质，而非评论是否具有洞察力，文中未涉及 insightful 之意。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "赞扬的。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-zj-2026-jan-reading-c-4",
+                "quote": "A lengthy, positive review, on the other hand, was regarded as suspicious, and participants tended to trust writers that kept their glowing reviews short.",
+                "anchor": "glowing reviews 即 positive review"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "glowing",
+            "sourceRole": "stem",
+            "targetText": "A lengthy, positive review",
+            "targetParagraphId": "para-zj-2026-jan-reading-c-4",
+            "relationType": "paraphrase",
+            "note": "划线词 glowing 与同句前文的 positive review 指代同一类评论，由 positive（正面、褒扬）可推知 glowing 意为 praising（赞扬的）。"
+          }
+        ]
+      },
+      "q-zj-2026-jan-030": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查对第4段细节的整合，判断读者最可能信任哪种类型的评论。",
+        "stemTranslationZh": "读者最可能信任哪种类型的评论？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "一篇又长又正面的评论。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeAttitude",
+              "sourceQuote": "A lengthy, positive review, on the other hand, was regarded as suspicious",
+              "sourceHighlight": "was regarded as suspicious",
+              "optionText": "A long, positive one.",
+              "optionHighlight": "A long, positive one",
+              "explanation": "原文明确指出又长又正面的评论被视为可疑（suspicious），即不被信任，选项却说读者会信任它，态度颠倒。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2026-jan-reading-c-4",
+                "quote": "A lengthy, positive review, on the other hand, was regarded as suspicious",
+                "anchor": "长正面评论被视为可疑"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "一篇不带情感的负面评论。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-zj-2026-jan-reading-c-4",
+                "quote": "The more dispassionate that negative write-up, the more likely it was to take the reader in.",
+                "anchor": "越冷静的负面评论越能骗过读者"
+              },
+              {
+                "role": "support",
+                "paragraphId": "para-zj-2026-jan-reading-c-4",
+                "quote": "Azimi says study participants tended not to trust reviews where the writers expressed their feelings in a big way.",
+                "anchor": "情感强烈的评论不被信任"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "一篇简短的负面评论。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "participants tended to trust writers that kept their glowing reviews short",
+              "sourceEntity": "glowing reviews (positive) kept short",
+              "optionText": "A short, negative one.",
+              "optionEntity": "a short, negative review",
+              "explanation": "原文中\"简短\"才被信任的是 glowing（正面）评论；负面评论被信任靠的是长度、细节与冷静，而非简短，选项将\"简短\"错配给了负面评论。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2026-jan-reading-c-4",
+                "quote": "Along, negative review of a hotel, complete with lots of information, tended to convince participants.",
+                "anchor": "令人信服的负面评论是长篇详尽的"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "一篇热情洋溢的正面评论。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeAttitude",
+              "sourceQuote": "Azimi says study participants tended not to trust reviews where the writers expressed their feelings in a big way.",
+              "sourceHighlight": "tended not to trust",
+              "optionText": "An enthusiastic, positive one.",
+              "optionHighlight": "An enthusiastic, positive one",
+              "explanation": "原文指出受试者倾向于不信任情感表达强烈的评论，而 enthusiastic（热情洋溢）正属于强烈情感的正面评论，与读者信任的方向相反。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2026-jan-reading-c-4",
+                "quote": "Azimi says study participants tended not to trust reviews where the writers expressed their feelings in a big way.",
+                "anchor": "情感强烈的评论不被信任"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "An unemotional, negative one",
+            "sourceRole": "correctOption",
+            "targetText": "The more dispassionate that negative write-up, the more likely it was to take the reader in.",
+            "targetParagraphId": "para-zj-2026-jan-reading-c-4",
+            "relationType": "paraphrase",
+            "note": "选项 unemotional（不带情感）对应原文 dispassionate（冷静客观），negative one 对应 negative write-up，越冷静的负面评论越能 take the reader in（骗过读者），即最被信任。"
+          }
+        ]
+      },
+      "q-zj-2026-jan-031": {
+        "skill": {
+          "primary": "inference"
+        },
+        "questionFocus": "考查根据末段对AI与算法的论述进行推断。",
+        "stemTranslationZh": "从最后一段可以推断出什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "许多公司正在制造假评论。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeAction",
+              "sourceQuote": "Though many companies use algorithms (算法) to weed out fake reviews",
+              "sourceHighlight": "weed out fake reviews",
+              "optionText": "Many companies are producing fake reviews.",
+              "optionHighlight": "producing fake reviews",
+              "explanation": "原文说许多公司用算法\"清除\"（weed out）假评论，而选项称公司在\"制造\"假评论，行为方向完全相反。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2026-jan-reading-c-5",
+                "quote": "Though many companies use algorithms (算法) to weed out fake reviews",
+                "anchor": "公司用算法清除假评论"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "撰写假评论将被宣布为违法。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Writing fake reviews will be declared illegal.",
+              "explanation": "原文未提及任何关于法律或违法的内容，无法推断撰写假评论将被宣布违法。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "机器能够准确地检测假评论。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeTrend",
+              "sourceQuote": "Azimi points out that the machines are programmed by humans, and given our limited ability to spot fake reviews, this isn’t a good sign.",
+              "sourceHighlight": "this isn’t a good sign",
+              "optionText": "Machines can detect fake reviews accurately.",
+              "optionHighlight": "accurately",
+              "explanation": "原文指出机器由人编写、人类辨别假评论能力有限，这不是好兆头，暗示机器难以准确识别；选项却说机器能准确检测，与原文意思相反。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2026-jan-reading-c-5",
+                "quote": "the machines are programmed by humans, and given our limited ability to spot fake reviews, this isn’t a good sign",
+                "anchor": "机器由人编程，前景不乐观"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "识别假评论将变得更难。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-zj-2026-jan-reading-c-5",
+                "quote": "increasingly, fake reviews are being written by AI, which makes them look more real",
+                "anchor": "AI使假评论更逼真"
+              },
+              {
+                "role": "support",
+                "paragraphId": "para-zj-2026-jan-reading-c-5",
+                "quote": "given our limited ability to spot fake reviews, this isn’t a good sign",
+                "anchor": "人类辨别能力有限，前景不乐观"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "It will be harder to recognize fake reviews",
+            "sourceRole": "correctOption",
+            "targetText": "increasingly, fake reviews are being written by AI, which makes them look more real",
+            "targetParagraphId": "para-zj-2026-jan-reading-c-5",
+            "relationType": "paraphrase",
+            "note": "AI 写的假评论 look more real（更逼真）加之人类 limited ability to spot fake reviews（辨别能力有限），可推断 recognize fake reviews 会变得 harder（更难识别）。"
+          }
+        ]
+      },
+      "q-zj-2026-jan-032": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查对首段中科学家研究目标的细节理解。",
+        "stemTranslationZh": "Salk Institute 的科学家希望实现什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "在植物中储存更多的碳。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-zj-2026-jan-reading-d-1",
+                "quote": "This optimization (优化) aims to increase the amount of carbon stored and extend the duration of its storage.",
+                "anchor": "increase the amount of carbon stored"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "优化能源的使用。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "This optimization (优化) aims to increase the amount of carbon stored",
+              "optionText": "Optimizing the use of energy.",
+              "matchType": "wordFamily",
+              "relationNote": "选项借用原文 optimization 的同族词 Optimizing 制造干扰，但原文优化的对象是储碳量，而非能源使用。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2026-jan-reading-d-1",
+                "quote": "This optimization (优化) aims to increase the amount of carbon stored and extend the duration of its storage.",
+                "anchor": "optimization aims to increase carbon stored"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "增强生物多样性。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Enhancing biological diversity.",
+              "explanation": "原文未提及增强生物多样性，科学家目标是增加碳储量与延长储存时间，属无中生有。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "减少碳吸收。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeAction",
+              "sourceQuote": "Scientists at Salk Institute are making use of the natural capacity of plants to absorb carbon dioxide by enhancing their root systems.",
+              "sourceHighlight": "absorb carbon dioxide",
+              "optionText": "Reducing carbon absorption.",
+              "optionHighlight": "Reducing carbon absorption",
+              "explanation": "原文是要利用并增强植物吸收二氧化碳的能力，选项却说减少碳吸收，与原文方向相反。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2026-jan-reading-d-1",
+                "quote": "Scientists at Salk Institute are making use of the natural capacity of plants to absorb carbon dioxide by enhancing their root systems.",
+                "anchor": "making use of capacity to absorb carbon dioxide"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Keeping more carbon in plants",
+            "sourceRole": "correctOption",
+            "targetText": "increase the amount of carbon stored and extend the duration of its storage",
+            "targetParagraphId": "para-zj-2026-jan-reading-d-1",
+            "relationType": "paraphrase",
+            "note": "选项 Keeping more carbon in plants 是对原文 increase the amount of carbon stored 与 extend the duration of its storage 的同义概括。"
+          }
+        ]
+      },
+      "q-zj-2026-jan-033": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查对第二段中 SLEAP 最初设计目的的细节理解。",
+        "stemTranslationZh": "Pereira 为什么创建 SLEAP？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "为了生成植物图像。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "To generate plant images.",
+              "explanation": "原文提到 SLEAP 帮助研究者更快处理图像，但并未说它用于生成植物图像，且其最初目的是追踪动物运动，属无中生有。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "为了对动物进行研究。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-zj-2026-jan-reading-d-2",
+                "quote": "SLEAP was initially designed to track animal movement in the lab.",
+                "anchor": "initially designed to track animal movement"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "为了研究气候模式。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "To study climate patterns.",
+              "explanation": "原文虽涉及应对气候变化的大背景，但从未说创建 SLEAP 是为研究气候模式，属无中生有。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "为了追踪根系生长的特征。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "conditionRemoved",
+              "sourceQuote": "an AI software that tracks multiple features of root growth. Created by Salk Fellow Talmo Pereira, SLEAP was initially designed to track animal movement in the lab.",
+              "sourceHighlight": "tracks multiple features of root growth",
+              "optionText": "To track features of root growth.",
+              "optionHighlight": "To track features of root growth",
+              "explanation": "追踪根系生长特征是 SLEAP 现在应用于植物后的用途，而题干问的是创建目的；选项把现用途偷换为创建初衷，忽略了 initially designed to track animal movement 这一条件。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2026-jan-reading-d-2",
+                "quote": "SLEAP was initially designed to track animal movement in the lab.",
+                "anchor": "initially designed to track animal movement"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Why did Pereira create SLEAP",
+            "sourceRole": "stem",
+            "targetText": "SLEAP was initially designed to track animal movement in the lab",
+            "targetParagraphId": "para-zj-2026-jan-reading-d-2",
+            "relationType": "locationCue",
+            "note": "题干 create 对应原文 designed，并由 initially 锁定“最初目的”，定位到追踪动物运动这一答案。"
+          },
+          {
+            "sourceText": "To conduct research on animals",
+            "sourceRole": "correctOption",
+            "targetText": "to track animal movement in the lab",
+            "targetParagraphId": "para-zj-2026-jan-reading-d-2",
+            "relationType": "paraphrase",
+            "note": "选项 conduct research on animals 是对原文 track animal movement in the lab 的同义概括。"
+          }
+        ]
+      },
+      "q-zj-2026-jan-034": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查对第四段中 SLEAP 对基因筛选作用的细节理解。",
+        "stemTranslationZh": "SLEAP 将帮助科学家做什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "挑出森林中患病的植物。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Pick out diseased plants in the forest.",
+              "explanation": "原文从未提及森林中患病植物的挑选，SLEAP 用于分析根系表型与筛选基因，属无中生有。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "采集植物根系的样本。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "understatement",
+              "sourceQuote": "tracking these physical root system characteristics helps scientists find genes (基因) associated with those characteristics",
+              "sourceHighlight": "find genes (基因) associated with those characteristics",
+              "optionText": "Collect samples of plant root systems.",
+              "optionHighlight": "Collect samples of plant root systems",
+              "explanation": "原文说 SLEAP 帮助追踪根系特征并据此找到相关基因，选项却降格为“采集根系样本”，弱化并偏离了原文的实际功能。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2026-jan-reading-d-4",
+                "quote": "tracking these physical root system characteristics helps scientists find genes (基因) associated with those characteristics",
+                "anchor": "helps scientists find genes"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "识别出有利于理想植物根系的基因。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-zj-2026-jan-reading-d-4",
+                "quote": "tracking these physical root system characteristics helps scientists find genes (基因) associated with those characteristics",
+                "anchor": "find genes associated with those characteristics"
+              },
+              {
+                "role": "supporting",
+                "paragraphId": "para-zj-2026-jan-reading-d-4",
+                "quote": "This allows the Salk team to determine what genes are most beneficial to their plant designs.",
+                "anchor": "determine what genes are most beneficial"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "保存濒危植物的基因。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "helps scientists find genes (基因) associated with those characteristics",
+              "optionText": "Preserve the genes of endangered plants.",
+              "matchType": "exact",
+              "relationNote": "选项借用原文反复出现的 genes 一词制造干扰，但原文是寻找与根系特征相关的有益基因，而非保存濒危植物的基因。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2026-jan-reading-d-4",
+                "quote": "helps scientists find genes (基因) associated with those characteristics",
+                "anchor": "find genes associated with characteristics"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Identify genes for desirable plant roots",
+            "sourceRole": "correctOption",
+            "targetText": "find genes (基因) associated with those characteristics",
+            "targetParagraphId": "para-zj-2026-jan-reading-d-4",
+            "relationType": "paraphrase",
+            "note": "选项 Identify genes 对应原文 find genes，desirable plant roots 对应原文最终 most beneficial to their plant designs 的根系特征。"
+          }
+        ]
+      },
+      "q-zj-2026-jan-035": {
+        "skill": {
+          "primary": "inference"
+        },
+        "questionFocus": "考查对末段 Pereira 引语所体现的跨学科合作价值的推断。",
+        "stemTranslationZh": "从 Pereira 的话中可以推断出什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "各学术学科同等重要。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "we’re really putting them on equal footing in order to create something greater than the sum of its parts",
+              "optionText": "Academic disciplines are of equal importance.",
+              "matchType": "wordFamily",
+              "relationNote": "选项借用原文 equal footing 中的 equal 制造干扰，但原文 equal footing 强调让各学科平等协作以创造更大成果，而非泛泛断言所有学科同等重要。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2026-jan-reading-d-5",
+                "quote": "we’re really putting them on equal footing in order to create something greater than the sum of its parts",
+                "anchor": "putting them on equal footing"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "计算机编程是科学家的必备技能。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Computer programming is a must for scientists.",
+              "explanation": "Pereira 的话只谈跨学科平等合作，未提及计算机编程是科学家必备，属无中生有。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "跨学科方法促进创造力。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-zj-2026-jan-reading-d-5",
+                "quote": "we’re really putting them on equal footing in order to create something greater than the sum of its parts.",
+                "anchor": "create something greater than the sum of its parts"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "在研究中合作比竞争更重要。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Cooperation outweighs competition in research.",
+              "explanation": "原文只强调跨学科合作的价值，并未将合作与竞争作比较，属无中生有。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Interdisciplinary approach promotes creativity",
+            "sourceRole": "correctOption",
+            "targetText": "putting them on equal footing in order to create something greater than the sum of its parts",
+            "targetParagraphId": "para-zj-2026-jan-reading-d-5",
+            "relationType": "paraphrase",
+            "note": "选项 Interdisciplinary approach 对应原文不同学科平等协作，promotes creativity 对应 create something greater than the sum of its parts 的创造性成果。"
+          }
+        ]
+      }
+    }
+  }
+}

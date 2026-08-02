@@ -1,0 +1,3294 @@
+{
+  "schemaVersion": "paper-asset-v1",
+  "paper": {
+    "paperId": "paper-2023-i",
+    "title": "2023年新课标Ⅰ卷-答案版",
+    "subject": "English",
+    "source": "AI 导题",
+    "assetVersion": 1,
+    "status": "published"
+  },
+  "sources": {
+    "primarySourceType": "docx",
+    "docx": {
+      "fileName": "2023年新课标Ⅰ卷-答案版.docx",
+      "sha256": "791b4d659998c07f92e497ee2ffd5c29677861028dd510f564c6f661dcfc8db4",
+      "sourcePath": "",
+      "sourceNote": "未上传答案解析版"
+    }
+  },
+  "layoutTree": {
+    "parts": [
+      {
+        "partId": "part-2023-i-reading",
+        "title": "第二部分 阅读",
+        "sections": [
+          {
+            "sectionId": "section-2023-i-reading-choice",
+            "title": "第一节 阅读理解",
+            "groups": [
+              {
+                "groupId": "group-2023-i-reading-a",
+                "title": "Reading A"
+              },
+              {
+                "groupId": "group-2023-i-reading-b",
+                "title": "Reading B"
+              },
+              {
+                "groupId": "group-2023-i-reading-c",
+                "title": "Reading C"
+              },
+              {
+                "groupId": "group-2023-i-reading-d",
+                "title": "Reading D"
+              }
+            ]
+          },
+          {
+            "sectionId": "section-2023-i-reading-seven",
+            "title": "第二节 七选五",
+            "groups": [
+              {
+                "groupId": "group-2023-i-seven-choices",
+                "title": "七选五"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "partId": "part-2023-i-language",
+        "title": "第三部分 语言运用",
+        "sections": [
+          {
+            "sectionId": "section-2023-i-cloze",
+            "title": "第一节 完形填空",
+            "groups": [
+              {
+                "groupId": "group-2023-i-cloze",
+                "title": "完形填空"
+              }
+            ]
+          },
+          {
+            "sectionId": "section-2023-i-grammar-fill",
+            "title": "第二节 语法填空",
+            "groups": [
+              {
+                "groupId": "group-2023-i-grammar-fill",
+                "title": "语法填空"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "partId": "part-2023-i-writing",
+        "title": "第四部分 写作",
+        "sections": [
+          {
+            "sectionId": "section-2023-i-writing-application",
+            "title": "第一节 应用文写作",
+            "groups": [
+              {
+                "groupId": "group-2023-i-writing-application",
+                "title": "应用文写作"
+              }
+            ]
+          },
+          {
+            "sectionId": "section-2023-i-writing-continuation",
+            "title": "第二节 读后续写",
+            "groups": [
+              {
+                "groupId": "group-2023-i-writing-continuation",
+                "title": "读后续写"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "content": {
+    "blocks": [
+      {
+        "type": "partHeading",
+        "partId": "part-2023-i-reading",
+        "text": "第二部分 阅读"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-2023-i-reading-choice",
+        "text": "第一节 阅读理解"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2023-i-reading-a"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2023-i-reading-b"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2023-i-reading-c"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2023-i-reading-d"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-2023-i-reading-seven",
+        "text": "第二节 (共5小题；每小题2.5分，满分12.5分)"
+      },
+      {
+        "type": "instruction",
+        "text": "阅读下面短文，从短文后的选项中选出可以填入空白处的最佳选项。选项中有两项为多余选项。"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2023-i-seven-choices"
+      },
+      {
+        "type": "pageBreakHint"
+      },
+      {
+        "type": "partHeading",
+        "partId": "part-2023-i-language",
+        "text": "第三部分 语言运用(共两节，满分30分)"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-2023-i-cloze",
+        "text": "第一节(共15小题；每小题1分，满分15分)"
+      },
+      {
+        "type": "instruction",
+        "text": "阅读下面短文，从每题所给的A、B、C、D四个选项中选出最佳选项。"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2023-i-cloze"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-2023-i-grammar-fill",
+        "text": "第二节(共10小题；每小题1.5分，满分15分)"
+      },
+      {
+        "type": "instruction",
+        "text": "阅读下面短文，在空白处填入1个适当的单词或括号内单词的正确形式。"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2023-i-grammar-fill"
+      },
+      {
+        "type": "pageBreakHint"
+      },
+      {
+        "type": "partHeading",
+        "partId": "part-2023-i-writing",
+        "text": "第四部分 写作（共两节，满分40分）"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-2023-i-writing-application",
+        "text": "第一节（满分15分）"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2023-i-writing-application"
+      },
+      {
+        "type": "instruction",
+        "text": "注意：\n（1）写作词数应为80个左右；\n（2）请按如下格式在答题卡的相应位置作答。"
+      },
+      {
+        "type": "answerBox",
+        "writingTaskId": "wt-2023-i-application",
+        "label": "应用文写作答题区"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-2023-i-writing-continuation",
+        "text": "第二节（满分25分）"
+      },
+      {
+        "type": "instruction",
+        "text": "阅读下面材料，根据其内容和所给段落开头语续写两段，使之构成一篇完整的短文。"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2023-i-writing-continuation"
+      },
+      {
+        "type": "instruction",
+        "text": "注意：\n（1）续写词数应为150个左右；\n（2）请按如下格式在答题卡的相应位置作答。"
+      },
+      {
+        "type": "instruction",
+        "text": "Paragraph 1: A few weeks later, when I almost forgot the contest, there came the news.\n\nParagraph 2: I went to my teacher's office after the award presentation."
+      },
+      {
+        "type": "answerBox",
+        "writingTaskId": "wt-2023-i-continuation",
+        "label": "读后续写答题区"
+      }
+    ],
+    "groups": {
+      "group-2023-i-reading-a": {
+        "groupId": "group-2023-i-reading-a",
+        "groupType": "reading",
+        "title": "Reading A",
+        "questionIds": [
+          "q-2023-i-021",
+          "q-2023-i-022",
+          "q-2023-i-023"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2023-i-reading-a-1",
+              "text": "Bike Rental & Guided Tours"
+            },
+            {
+              "paragraphId": "para-2023-i-reading-a-2",
+              "text": "Welcome to Amsterdam, welcome to MacBike. You see much more from the seat of a bike! Cycling is the most economical, sustainable and fun way to explore the city, with its beautiful canals, parks, squares and countless lights. You can also bike along lovely landscapes outside of Amsterdam."
+            },
+            {
+              "paragraphId": "para-2023-i-reading-a-3",
+              "text": "Why MacBike"
+            },
+            {
+              "paragraphId": "para-2023-i-reading-a-4",
+              "text": "MacBike has been around for almost 30 years and is the biggest bicycle rental company in Amsterdam. With over 2,500 bikes stored in our five rental shops at strategic locations, we make sure there is always a bike available for you. We offer the newest bicycles in a wide variety, including basic bikes with foot brake (刹车) , bikes with hand brake and gears (排挡) , bikes with child seats, and children’s bikes."
+            },
+            {
+              "paragraphId": "para-2023-i-reading-a-5",
+              "text": "Prices\n \nHand Brake, Three Gears\nFoot Brake, No Gears\n1 hour\n€7.50\n€5.00\n3 hours\n€11.00\n€7.50\n1 day (24 hours)\n€14.75\n€9.75\nEach additional day\n€8.00\n€6.00"
+            },
+            {
+              "paragraphId": "para-2023-i-reading-a-6",
+              "text": "Guided City Tours"
+            },
+            {
+              "paragraphId": "para-2023-i-reading-a-7",
+              "text": "The 2.5-hour tour covers the Gooyer Windmill, the Skinny Bridge, the Rijksmuseum, Heineken Brewery and much more. The tour departs from Dam Square every hour on the hour, starting at 1:00 pm every day. You can buy your ticket in a MacBike shop or book online."
+            }
+          ]
+        }
+      },
+      "group-2023-i-reading-b": {
+        "groupId": "group-2023-i-reading-b",
+        "groupType": "reading",
+        "title": "Reading B",
+        "questionIds": [
+          "q-2023-i-024",
+          "q-2023-i-025",
+          "q-2023-i-026",
+          "q-2023-i-027"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2023-i-reading-b-1",
+              "text": "When John Todd was a child, he loved to explore the woods around his house, observing how nature solved problems. A dirty stream, for example, often became clear after flowing through plants and along rocks where tiny creatures lived. When he got older, John started to wonder if this process could be used to clean up the messes people were making."
+            },
+            {
+              "paragraphId": "para-2023-i-reading-b-2",
+              "text": "After studying agriculture, medicine, and fisheries in college, John went back to observing nature and asking questions. Why can certain plants trap harmful bacteria (细菌) ? Which kinds of fish can eat cancer-causing chemicals? With the right combination of animals and plants, he figured, maybe he could clean up waste the way nature did. He decided to build what he would later call an eco-machine."
+            },
+            {
+              "paragraphId": "para-2023-i-reading-b-3",
+              "text": "The task John set for himself was to remove harmful substances from some sludge (污泥) . First, he constructed a series of clear fiberglass tanks connected to each other. Then he went around to local ponds and streams and brought back some plants and animals. He placed them in the tanks and waited. Little by little, these different kinds of life got used to one another and formed their own ecosystem. After a few weeks, John added the sludge."
+            },
+            {
+              "paragraphId": "para-2023-i-reading-b-4",
+              "text": "He was amazed at the results. The plants and animals in the eco-machine took the sludge as food and began to eat it! Within weeks, it had all been digested, and all that was left was pure water."
+            },
+            {
+              "paragraphId": "para-2023-i-reading-b-5",
+              "text": "Over the years, John has taken on many big jobs. He developed a greenhouse – like facility that treated sewage (污水) from 1,600 homes in South Burlington. He also designed an eco-machine to clean canal water in Fuzhou, a city in southeast China."
+            },
+            {
+              "paragraphId": "para-2023-i-reading-b-6",
+              "text": "“Ecological design” is the name John gives to what he does. “Life on Earth is kind of a box of spare parts for the inventor,” he says. “You put organisms in new relationships and observe what’s happening. Then you let these new systems develop their own ways to self-repair.”"
+            }
+          ]
+        }
+      },
+      "group-2023-i-reading-c": {
+        "groupId": "group-2023-i-reading-c",
+        "groupType": "reading",
+        "title": "Reading C",
+        "questionIds": [
+          "q-2023-i-028",
+          "q-2023-i-029",
+          "q-2023-i-030",
+          "q-2023-i-031"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2023-i-reading-c-1",
+              "text": "The goal of this book is to make the case for digital minimalism, including a detailed exploration of what it asks and why it works, and then to teach you how to adopt this philosophy if you decide it’s right for you."
+            },
+            {
+              "paragraphId": "para-2023-i-reading-c-2",
+              "text": "To do so, I divided the book into two parts. In part one, I describe the philosophical foundations of digital minimalism, starting with an examination of the forces that are making so many people’s digital lives increasingly intolerable, before moving on to a detailed discussion of the digital minimalism philosophy."
+            },
+            {
+              "paragraphId": "para-2023-i-reading-c-3",
+              "text": "Part one concludes by introducing my suggested method for adopting this philosophy: the digital declutter. This process requires you to step away from optional online activities for thirty days. At the end of the thirty days, you will then add back a small number of carefully chosen online activities that you believe will provide massive benefits to the things you value."
+            },
+            {
+              "paragraphId": "para-2023-i-reading-c-4",
+              "text": "In the final chapter of part one, I’ll guide you through carrying out your own digital declutter. In doing so, I’ll draw on an experiment I ran in 2018 in which over 1,600 people agreed to perform a digital declutter. You’ll hear these participants’ stories and learn what strategies worked well for them, and what traps they encountered that you should avoid."
+            },
+            {
+              "paragraphId": "para-2023-i-reading-c-5",
+              "text": "The second part of this book takes a closer look at some ideas that will help you cultivate (培养) a sustainable digital minimalism lifestyle. In these chapters, I examine issues such as the importance of solitude (独处) and the necessity of cultivating high-quality leisure to replace the time most now spent on mindless device use. Each chapter concludes with a collection of practices, which are designed to help you act on the big ideas of the chapter. You can view these practices as a toolbox meant to aid your efforts to build a minimalist lifestyle that works for your particular circumstances."
+            }
+          ]
+        }
+      },
+      "group-2023-i-reading-d": {
+        "groupId": "group-2023-i-reading-d",
+        "groupType": "reading",
+        "title": "Reading D",
+        "questionIds": [
+          "q-2023-i-032",
+          "q-2023-i-033",
+          "q-2023-i-034",
+          "q-2023-i-035"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2023-i-reading-d-1",
+              "text": "On March 7, 1907, the English statistician Francis Galton published a paper which illustrated what has come to be known as the “wisdom of crowds” effect. The experiment of estimation he conducted showed that in some cases, the average of a large number of independent estimates could be quite accurate."
+            },
+            {
+              "paragraphId": "para-2023-i-reading-d-2",
+              "text": "This effect capitalizes on the fact that when people make errors, those errors aren’t always the same. Some people will tend to overestimate, and some to underestimate. When enough of these errors are averaged together, they cancel each other out, resulting in a more accurate estimate. If people are similar and tend to make the same errors, then their errors won’t cancel each other out. In more technical terms, the wisdom of crowds requires that people’s estimates be independent. If for whatever reasons, people’s errors become correlated or dependent, the accuracy of the estimate will go down."
+            },
+            {
+              "paragraphId": "para-2023-i-reading-d-3",
+              "text": "But a new study led by Joaquin Navajas offered an interesting twist (转折) on this classic phenomenon. The key finding of the study was that when crowds were further divided into smaller groups that were allowed to have a discussion, the averages from these groups were more accurate than those from an equal number of independent individuals. For instance, the average obtained from the estimates of four discussion groups of five was significantly more accurate than the average obtained from 20 independent individuals."
+            },
+            {
+              "paragraphId": "para-2023-i-reading-d-4",
+              "text": "In a follow-up study with 100 university students, the researchers tried to get a better sense of what the group members actually did in their discussion. Did they tend to go with those most confident about their estimates? Did they follow those least willing to change their minds? This happened some of the time, but it wasn’t the dominant response. Most frequently, the groups reported that they “shared arguments and reasoned together”. Somehow, these arguments and reasoning resulted in a global reduction in error. Although the studies led by Navajas have limitations and many questions remain, the potential implications for group discussion and decision-making are enormous."
+            }
+          ]
+        }
+      },
+      "group-2023-i-seven-choices": {
+        "groupId": "group-2023-i-seven-choices",
+        "groupType": "sevenChoices",
+        "title": "七选五",
+        "questionIds": [
+          "q-2023-i-036",
+          "q-2023-i-037",
+          "q-2023-i-038",
+          "q-2023-i-039",
+          "q-2023-i-040"
+        ],
+        "blankIds": [
+          "blank-2023-i-036",
+          "blank-2023-i-037",
+          "blank-2023-i-038",
+          "blank-2023-i-039",
+          "blank-2023-i-040"
+        ],
+        "optionBank": [
+          {
+            "label": "A",
+            "text": "A little self-forgiveness also goes a long way."
+          },
+          {
+            "label": "B",
+            "text": "Now list all the characteristics you like about yourself."
+          },
+          {
+            "label": "C",
+            "text": "They might even like to have a go at doing the exercise."
+          },
+          {
+            "label": "D",
+            "text": "It’s just as important to show yourself some forgiveness."
+          },
+          {
+            "label": "E",
+            "text": "It doesn’t mean you have to ignore what’s happened or forget it."
+          },
+          {
+            "label": "F",
+            "text": "Whatever it is, no matter how small it might seem, write it down."
+          },
+          {
+            "label": "G",
+            "text": "Whatever the mistake, remember it isn’t a fixed aspect of your personality."
+          }
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2023-i-seven-title",
+              "text": "Personal Forgiveness"
+            },
+            {
+              "paragraphId": "para-2023-i-seven-p1",
+              "text": "Taking responsibility for mistakes is a positive step, but don’t beat yourself up about them. To err (犯错) is human. __36__ 1   You can use the following writing exercise to help you do this."
+            },
+            {
+              "paragraphId": "para-2023-i-seven-p2",
+              "text": "In a journal or on a piece of paper, put the heading “Personal Strengths.” __37__ 2   Are you caring? Creative? Generous? A good listener? Fun to be around? They don’t have to be world-changing, just aspects of your personality that you’re proud of."
+            },
+            {
+              "paragraphId": "para-2023-i-seven-p3",
+              "text": "At the top of a second page, put the heading “Acts of Kindness.” On this one, list all the positive things you’ve done for others. It might be the time when you helped a friend with their homework, when you did the ironing without being asked, or when you baked cookies after the family had had a tiring day. __38__ 3"
+            },
+            {
+              "paragraphId": "para-2023-i-seven-p4",
+              "text": "You could ask a friend or family member to help add to your list. __39__ 4   That way, you could exchange thoughts on what makes each of you special and the aspects of your personality that shine through. In fact, don’t wait until you’ve made a mistake to try this – it’s a great way to boost self-confidence at any time."
+            },
+            {
+              "paragraphId": "para-2023-i-seven-p5",
+              "text": "It’s something of a cliché (陈词滥调) that most people learn not from their successes but their mistakes. The thing is, it’s true. __40__ 5   We’re all changing and learning all the time and mistakes are a positive way to develop and grow."
+            }
+          ]
+        }
+      },
+      "group-2023-i-cloze": {
+        "groupId": "group-2023-i-cloze",
+        "groupType": "cloze",
+        "title": "完形填空",
+        "questionIds": [
+          "q-2023-i-041",
+          "q-2023-i-042",
+          "q-2023-i-043",
+          "q-2023-i-044",
+          "q-2023-i-045",
+          "q-2023-i-046",
+          "q-2023-i-047",
+          "q-2023-i-048",
+          "q-2023-i-049",
+          "q-2023-i-050",
+          "q-2023-i-051",
+          "q-2023-i-052",
+          "q-2023-i-053",
+          "q-2023-i-054",
+          "q-2023-i-055"
+        ],
+        "blankIds": [
+          "blank-2023-i-041",
+          "blank-2023-i-042",
+          "blank-2023-i-043",
+          "blank-2023-i-044",
+          "blank-2023-i-045",
+          "blank-2023-i-046",
+          "blank-2023-i-047",
+          "blank-2023-i-048",
+          "blank-2023-i-049",
+          "blank-2023-i-050",
+          "blank-2023-i-051",
+          "blank-2023-i-052",
+          "blank-2023-i-053",
+          "blank-2023-i-054",
+          "blank-2023-i-055"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2023-i-cloze-title",
+              "text": "On Oct.11, hundreds of runners competed in a cross-country race in Minnesota. Melanie Bailey should have __41__ the course earlier than she did. Her __42__ came because she was carrying a __43__ across the finish line."
+            },
+            {
+              "paragraphId": "para-2023-i-cloze-p1",
+              "text": "As reported by a local newspaper, Bailey was more than two-thirds of the way through her __44__ when a runner in front of her began crying in pain. She __45__ to help her fellow runner, Danielle Lenoue. Bailey took her arm to see if she could walk forward with __46__ . She couldn’t. Bailey then __47__ to let Lenoue climb onto her back and carried her all the way to the finish line, then another 300 feet to where Lenoue could get __48__ attention."
+            },
+            {
+              "paragraphId": "para-2023-i-cloze-p2",
+              "text": "Once there, Lenoue was __49__ and later taken to a hospital, where she learned that she had serious injuries in one of her knees. She would have struggled with extreme __50__ to make it to that aid checkpoint without Bailey’s help."
+            },
+            {
+              "paragraphId": "para-2023-i-cloze-p3",
+              "text": "As for Bailey, she is more __51__ about why her act is considered a big __52__ , “She was just crying. I couldn’t __53__ her,” Bailey told the reporter. “I feel like I was just doing the right thing.”"
+            },
+            {
+              "paragraphId": "para-2023-i-cloze-p4",
+              "text": "Although the two young women were strangers before the __54__ , they’ve since become friends. Neither won the race, but the __55__ of human kindness won the day."
+            }
+          ]
+        }
+      },
+      "group-2023-i-grammar-fill": {
+        "groupId": "group-2023-i-grammar-fill",
+        "groupType": "grammarFill",
+        "title": "语法填空",
+        "questionIds": [
+          "q-2023-i-056",
+          "q-2023-i-057",
+          "q-2023-i-058",
+          "q-2023-i-059",
+          "q-2023-i-060",
+          "q-2023-i-061",
+          "q-2023-i-062",
+          "q-2023-i-063",
+          "q-2023-i-064",
+          "q-2023-i-065"
+        ],
+        "blankIds": [
+          "blank-2023-i-056",
+          "blank-2023-i-057",
+          "blank-2023-i-058",
+          "blank-2023-i-059",
+          "blank-2023-i-060",
+          "blank-2023-i-061",
+          "blank-2023-i-062",
+          "blank-2023-i-063",
+          "blank-2023-i-064",
+          "blank-2023-i-065"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2023-i-grammar-fill-title",
+              "text": "Xiao long bao (soup dumplings) , those amazing constructions of delicate dumpling wrappers, encasing hot,  __56__ (taste) soup and sweet, fresh meat, are far and away my favorite Chinese street food. The dumplings arrive steaming and dangerously hot. To eat one, you have to decide whether  __57__ (bite) a small hole in it first, releasing the stream and risking a spill (溢出) ,  __58__to put the whole dumpling in your mouth, letting the hot soup explode on your tongue. Shanghai may be the  __59__ (recognize) home of the soup dumplings but food historians will actually point you to the neighboring canal town of Nanxiang as Xiao long Bao’s birthplace. There you will find them prepared differently – more dumpling and less soup, and the wrappers are pressed  __60__hand rather than rolled. Nanxiang aside, the best Xiao long bao have a fine skin, allowing them  __61__ (lift) out of the steamer basket without allowing them tearing or spilling any of  __62__ (they) contents. The meat should be fresh with __63__touch of sweetness and the soup hot, clear and delicious. No matter where I buy them, one steamer is  __64__ (rare) enough, yet two seems greedy, so I am always left  __65__ (want) more next time."
+            }
+          ]
+        }
+      },
+      "group-2023-i-writing-application": {
+        "groupId": "group-2023-i-writing-application",
+        "groupType": "writing",
+        "title": "应用文写作",
+        "questionIds": [],
+        "writingTaskId": "wt-2023-i-application",
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2023-i-writing-app-title",
+              "text": "假定你是李华，外教Ryan准备将学生随机分为两人一组，让大家课后练习口语，你认为这样分组存在问题。请你给外教写一封邮件，内容包括："
+            },
+            {
+              "paragraphId": "para-2023-i-writing-app-p1",
+              "text": "1. 说明问题；"
+            },
+            {
+              "paragraphId": "para-2023-i-writing-app-p2",
+              "text": "2. 提出建议。"
+            },
+            {
+              "paragraphId": "para-2023-i-writing-app-p3",
+              "text": "1. 写作词数应为80个左右；"
+            },
+            {
+              "paragraphId": "para-2023-i-writing-app-p4",
+              "text": "2. 请按如下格式在答题卡的相应位置作答。"
+            },
+            {
+              "paragraphId": "para-2023-i-writing-app-p5",
+              "text": "Dear Ryan,"
+            },
+            {
+              "paragraphId": "para-2023-i-writing-app-p6",
+              "text": "I’m Li Hua from Class 3."
+            },
+            {
+              "paragraphId": "para-2023-i-writing-app-p7",
+              "text": "Yours sincerely,"
+            },
+            {
+              "paragraphId": "para-2023-i-writing-app-p8",
+              "text": "Li Hua"
+            }
+          ]
+        }
+      },
+      "group-2023-i-writing-continuation": {
+        "groupId": "group-2023-i-writing-continuation",
+        "groupType": "writing",
+        "title": "读后续写",
+        "questionIds": [],
+        "writingTaskId": "wt-2023-i-continuation",
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2023-i-writing-cont-title",
+              "text": "阅读下面材料, 根据其内容和所给段落开头语续写两段, 使之构成一篇完整的短文。"
+            },
+            {
+              "paragraphId": "para-2023-i-writing-cont-p1",
+              "text": "When I was in middle school, my social studies teacher asked me to enter a writing contest. I said no without thinking. I did not love writing. My family came from Brazil, so English was only my second language. Writing was so difficult and painful for me that my teacher had allowed me to present my paper on the sinking of the Titanic by acting out a play, where I played all the parts. No one laughed harder than he did."
+            },
+            {
+              "paragraphId": "para-2023-i-writing-cont-p2",
+              "text": "So, why did he suddenly force me to do something at which I was sure to fail? His reply: “Because I love your stories. If you’re willing to apply yourself, I think you have a good shot at this.” Encouraged by his words, I agreed to give it a try."
+            },
+            {
+              "paragraphId": "para-2023-i-writing-cont-p3",
+              "text": "I chose Paul Revere’s horse as my subject. Paul Revere was a silversmith (银匠) in Boston who rode a horse at night on April 18, 1775 to Lexington to warn people that British soldiers were coming. My story would come straight from the horse’s mouth. Not a brilliant idea, but funny; and unlikely to be anyone else’s choice."
+            },
+            {
+              "paragraphId": "para-2023-i-writing-cont-p4",
+              "text": "What did the horse think, as he sped through the night? Did he get tired? Have doubts? Did he want to quit? I sympathized immediately. I got tired. I had doubts. I wanted to quit. But, like Revere’s horse, I kept going. I worked hard. I checked my spelling. I asked my older sister to correct my grammar. I checked out a half dozen books on Paul Revere from the library. I even read a few of them."
+            },
+            {
+              "paragraphId": "para-2023-i-writing-cont-p5",
+              "text": "When I handed in the essay to my teacher, he read it, laughed out loud, and said, “Great. Now, write it again.” I wrote it again, and again and again. When I finally finished it, the thought of winning had given way to the enjoyment of writing. If I didn’t win, I wouldn’t care."
+            }
+          ]
+        }
+      }
+    },
+    "questions": {
+      "q-2023-i-021": {
+        "questionId": "q-2023-i-021",
+        "questionNo": 21,
+        "groupId": "group-2023-i-reading-a",
+        "stem": "What is an advantage of MacBike?",
+        "options": [
+          {
+            "label": "A",
+            "text": "It gives children a discount."
+          },
+          {
+            "label": "B",
+            "text": "It offers many types of bikes."
+          },
+          {
+            "label": "C",
+            "text": "It organizes free cycle tours."
+          },
+          {
+            "label": "D",
+            "text": "It has over 2,500 rental shops."
+          }
+        ]
+      },
+      "q-2023-i-022": {
+        "questionId": "q-2023-i-022",
+        "questionNo": 22,
+        "groupId": "group-2023-i-reading-a",
+        "stem": "How much do you pay for renting a bike with hand brake and three gears for two days?",
+        "options": [
+          {
+            "label": "A",
+            "text": "€15.75."
+          },
+          {
+            "label": "B",
+            "text": "€19.50."
+          },
+          {
+            "label": "C",
+            "text": "€22.75."
+          },
+          {
+            "label": "D",
+            "text": "€29.50."
+          }
+        ]
+      },
+      "q-2023-i-023": {
+        "questionId": "q-2023-i-023",
+        "questionNo": 23,
+        "groupId": "group-2023-i-reading-a",
+        "stem": "Where does the guided city tour start?",
+        "options": [
+          {
+            "label": "A",
+            "text": "The Gooyer, Windmill."
+          },
+          {
+            "label": "B",
+            "text": "The Skinny Bridge."
+          },
+          {
+            "label": "C",
+            "text": "Heineken Brewery."
+          },
+          {
+            "label": "D",
+            "text": "Dam Square."
+          }
+        ]
+      },
+      "q-2023-i-024": {
+        "questionId": "q-2023-i-024",
+        "questionNo": 24,
+        "groupId": "group-2023-i-reading-b",
+        "stem": "What can we learn about John from the first two paragraphs?",
+        "options": [
+          {
+            "label": "A",
+            "text": "He was fond of traveling."
+          },
+          {
+            "label": "B",
+            "text": "He enjoyed being alone."
+          },
+          {
+            "label": "C",
+            "text": "He had an inquiring mind."
+          },
+          {
+            "label": "D",
+            "text": "He longed to be a doctor."
+          }
+        ]
+      },
+      "q-2023-i-025": {
+        "questionId": "q-2023-i-025",
+        "questionNo": 25,
+        "groupId": "group-2023-i-reading-b",
+        "stem": "Why did John put the sludge into the tanks?",
+        "options": [
+          {
+            "label": "A",
+            "text": "To feed the animals."
+          },
+          {
+            "label": "B",
+            "text": "To build an ecosystem."
+          },
+          {
+            "label": "C",
+            "text": "To protect the plants."
+          },
+          {
+            "label": "D",
+            "text": "To test the eco-machine."
+          }
+        ]
+      },
+      "q-2023-i-026": {
+        "questionId": "q-2023-i-026",
+        "questionNo": 26,
+        "groupId": "group-2023-i-reading-b",
+        "stem": "What is the author's purpose in mentioning Fuzhou?",
+        "options": [
+          {
+            "label": "A",
+            "text": "To review John's research plans."
+          },
+          {
+            "label": "B",
+            "text": "To show an application of John's idea."
+          },
+          {
+            "label": "C",
+            "text": "To compare John's different jobs."
+          },
+          {
+            "label": "D",
+            "text": "To erase doubts about John's invention."
+          }
+        ]
+      },
+      "q-2023-i-027": {
+        "questionId": "q-2023-i-027",
+        "questionNo": 27,
+        "groupId": "group-2023-i-reading-b",
+        "stem": "What is the basis for John's work?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Nature can repair itself."
+          },
+          {
+            "label": "B",
+            "text": "Organisms need water to survive."
+          },
+          {
+            "label": "C",
+            "text": "Life on Earth is diverse."
+          },
+          {
+            "label": "D",
+            "text": "Most tiny creatures live in groups."
+          }
+        ]
+      },
+      "q-2023-i-028": {
+        "questionId": "q-2023-i-028",
+        "questionNo": 28,
+        "groupId": "group-2023-i-reading-c",
+        "stem": "What is the book aimed at?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Teaching critical thinking skills."
+          },
+          {
+            "label": "B",
+            "text": "Advocating a simple digital lifestyle."
+          },
+          {
+            "label": "C",
+            "text": "Solving philosophical problems."
+          },
+          {
+            "label": "D",
+            "text": "Promoting the use of a digital device."
+          }
+        ]
+      },
+      "q-2023-i-029": {
+        "questionId": "q-2023-i-029",
+        "questionNo": 29,
+        "groupId": "group-2023-i-reading-c",
+        "stem": "What does the underlined word “declutter” in paragraph 3 mean?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Clear-up."
+          },
+          {
+            "label": "B",
+            "text": "Add-on."
+          },
+          {
+            "label": "C",
+            "text": "Check-in."
+          },
+          {
+            "label": "D",
+            "text": "Take-over."
+          }
+        ]
+      },
+      "q-2023-i-030": {
+        "questionId": "q-2023-i-030",
+        "questionNo": 30,
+        "groupId": "group-2023-i-reading-c",
+        "stem": "What is presented in the final chapter of part one?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Theoretical models."
+          },
+          {
+            "label": "B",
+            "text": "Statistical methods."
+          },
+          {
+            "label": "C",
+            "text": "Practical examples."
+          },
+          {
+            "label": "D",
+            "text": "Historical analyses."
+          }
+        ]
+      },
+      "q-2023-i-031": {
+        "questionId": "q-2023-i-031",
+        "questionNo": 31,
+        "groupId": "group-2023-i-reading-c",
+        "stem": "What does the author suggest readers do with the practices offered in part two?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Use them as needed."
+          },
+          {
+            "label": "B",
+            "text": "Recommend them to friends."
+          },
+          {
+            "label": "C",
+            "text": "Evaluate their effects."
+          },
+          {
+            "label": "D",
+            "text": "Identify the ideas behind them."
+          }
+        ]
+      },
+      "q-2023-i-032": {
+        "questionId": "q-2023-i-032",
+        "questionNo": 32,
+        "groupId": "group-2023-i-reading-d",
+        "stem": "What is paragraph 2 of the text mainly about?",
+        "options": [
+          {
+            "label": "A",
+            "text": "The methods of estimation."
+          },
+          {
+            "label": "B",
+            "text": "The underlying logic of the effect."
+          },
+          {
+            "label": "C",
+            "text": "The causes of people's errors."
+          },
+          {
+            "label": "D",
+            "text": "The design of Galton's experiment."
+          }
+        ]
+      },
+      "q-2023-i-033": {
+        "questionId": "q-2023-i-033",
+        "questionNo": 33,
+        "groupId": "group-2023-i-reading-d",
+        "stem": "Navajas' study found that the average accuracy could increase even if ________.",
+        "options": [
+          {
+            "label": "A",
+            "text": "the crowds were relatively small"
+          },
+          {
+            "label": "B",
+            "text": "there were occasional underestimates"
+          },
+          {
+            "label": "C",
+            "text": "individuals did not communicate"
+          },
+          {
+            "label": "D",
+            "text": "estimates were not fully independent"
+          }
+        ]
+      },
+      "q-2023-i-034": {
+        "questionId": "q-2023-i-034",
+        "questionNo": 34,
+        "groupId": "group-2023-i-reading-d",
+        "stem": "What did the follow-up study focus on?",
+        "options": [
+          {
+            "label": "A",
+            "text": "The size of the groups."
+          },
+          {
+            "label": "B",
+            "text": "The dominant members."
+          },
+          {
+            "label": "C",
+            "text": "The discussion process."
+          },
+          {
+            "label": "D",
+            "text": "The individual estimates."
+          }
+        ]
+      },
+      "q-2023-i-035": {
+        "questionId": "q-2023-i-035",
+        "questionNo": 35,
+        "groupId": "group-2023-i-reading-d",
+        "stem": "What is the author's attitude toward Navajas' studies?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Unclear."
+          },
+          {
+            "label": "B",
+            "text": "Dismissive."
+          },
+          {
+            "label": "C",
+            "text": "Doubtful."
+          },
+          {
+            "label": "D",
+            "text": "Approving."
+          }
+        ]
+      },
+      "q-2023-i-036": {
+        "questionId": "q-2023-i-036",
+        "questionNo": 36,
+        "groupId": "group-2023-i-seven-choices",
+        "stem": "36",
+        "blankId": "blank-2023-i-036"
+      },
+      "q-2023-i-037": {
+        "questionId": "q-2023-i-037",
+        "questionNo": 37,
+        "groupId": "group-2023-i-seven-choices",
+        "stem": "37",
+        "blankId": "blank-2023-i-037"
+      },
+      "q-2023-i-038": {
+        "questionId": "q-2023-i-038",
+        "questionNo": 38,
+        "groupId": "group-2023-i-seven-choices",
+        "stem": "38",
+        "blankId": "blank-2023-i-038"
+      },
+      "q-2023-i-039": {
+        "questionId": "q-2023-i-039",
+        "questionNo": 39,
+        "groupId": "group-2023-i-seven-choices",
+        "stem": "39",
+        "blankId": "blank-2023-i-039"
+      },
+      "q-2023-i-040": {
+        "questionId": "q-2023-i-040",
+        "questionNo": 40,
+        "groupId": "group-2023-i-seven-choices",
+        "stem": "40",
+        "blankId": "blank-2023-i-040"
+      },
+      "q-2023-i-041": {
+        "questionId": "q-2023-i-041",
+        "questionNo": 41,
+        "groupId": "group-2023-i-cloze",
+        "stem": "41",
+        "blankId": "blank-2023-i-041",
+        "options": [
+          {
+            "label": "A",
+            "text": "designed"
+          },
+          {
+            "label": "B",
+            "text": "followed"
+          },
+          {
+            "label": "C",
+            "text": "changed"
+          },
+          {
+            "label": "D",
+            "text": "finished"
+          }
+        ]
+      },
+      "q-2023-i-042": {
+        "questionId": "q-2023-i-042",
+        "questionNo": 42,
+        "groupId": "group-2023-i-cloze",
+        "stem": "42",
+        "blankId": "blank-2023-i-042",
+        "options": [
+          {
+            "label": "A",
+            "text": "delay"
+          },
+          {
+            "label": "B",
+            "text": "chance"
+          },
+          {
+            "label": "C",
+            "text": "preference"
+          },
+          {
+            "label": "D",
+            "text": "warning"
+          }
+        ]
+      },
+      "q-2023-i-043": {
+        "questionId": "q-2023-i-043",
+        "questionNo": 43,
+        "groupId": "group-2023-i-cloze",
+        "stem": "43",
+        "blankId": "blank-2023-i-043",
+        "options": [
+          {
+            "label": "A",
+            "text": "judge"
+          },
+          {
+            "label": "B",
+            "text": "volunteer"
+          },
+          {
+            "label": "C",
+            "text": "classmate"
+          },
+          {
+            "label": "D",
+            "text": "competitor"
+          }
+        ]
+      },
+      "q-2023-i-044": {
+        "questionId": "q-2023-i-044",
+        "questionNo": 44,
+        "groupId": "group-2023-i-cloze",
+        "stem": "44",
+        "blankId": "blank-2023-i-044",
+        "options": [
+          {
+            "label": "A",
+            "text": "race"
+          },
+          {
+            "label": "B",
+            "text": "school"
+          },
+          {
+            "label": "C",
+            "text": "town"
+          },
+          {
+            "label": "D",
+            "text": "training"
+          }
+        ]
+      },
+      "q-2023-i-045": {
+        "questionId": "q-2023-i-045",
+        "questionNo": 45,
+        "groupId": "group-2023-i-cloze",
+        "stem": "45",
+        "blankId": "blank-2023-i-045",
+        "options": [
+          {
+            "label": "A",
+            "text": "agreed"
+          },
+          {
+            "label": "B",
+            "text": "returned"
+          },
+          {
+            "label": "C",
+            "text": "stopped"
+          },
+          {
+            "label": "D",
+            "text": "promised"
+          }
+        ]
+      },
+      "q-2023-i-046": {
+        "questionId": "q-2023-i-046",
+        "questionNo": 46,
+        "groupId": "group-2023-i-cloze",
+        "stem": "46",
+        "blankId": "blank-2023-i-046",
+        "options": [
+          {
+            "label": "A",
+            "text": "courage"
+          },
+          {
+            "label": "B",
+            "text": "aid"
+          },
+          {
+            "label": "C",
+            "text": "patience"
+          },
+          {
+            "label": "D",
+            "text": "advice"
+          }
+        ]
+      },
+      "q-2023-i-047": {
+        "questionId": "q-2023-i-047",
+        "questionNo": 47,
+        "groupId": "group-2023-i-cloze",
+        "stem": "47",
+        "blankId": "blank-2023-i-047",
+        "options": [
+          {
+            "label": "A",
+            "text": "went away"
+          },
+          {
+            "label": "B",
+            "text": "stood up"
+          },
+          {
+            "label": "C",
+            "text": "stepped aside"
+          },
+          {
+            "label": "D",
+            "text": "bent down"
+          }
+        ]
+      },
+      "q-2023-i-048": {
+        "questionId": "q-2023-i-048",
+        "questionNo": 48,
+        "groupId": "group-2023-i-cloze",
+        "stem": "48",
+        "blankId": "blank-2023-i-048",
+        "options": [
+          {
+            "label": "A",
+            "text": "medical"
+          },
+          {
+            "label": "B",
+            "text": "public"
+          },
+          {
+            "label": "C",
+            "text": "constant"
+          },
+          {
+            "label": "D",
+            "text": "equal"
+          }
+        ]
+      },
+      "q-2023-i-049": {
+        "questionId": "q-2023-i-049",
+        "questionNo": 49,
+        "groupId": "group-2023-i-cloze",
+        "stem": "49",
+        "blankId": "blank-2023-i-049",
+        "options": [
+          {
+            "label": "A",
+            "text": "founded"
+          },
+          {
+            "label": "B",
+            "text": "evaluated"
+          },
+          {
+            "label": "C",
+            "text": "identified"
+          },
+          {
+            "label": "D",
+            "text": "appreciated"
+          }
+        ]
+      },
+      "q-2023-i-050": {
+        "questionId": "q-2023-i-050",
+        "questionNo": 50,
+        "groupId": "group-2023-i-cloze",
+        "stem": "50",
+        "blankId": "blank-2023-i-050",
+        "options": [
+          {
+            "label": "A",
+            "text": "hunger"
+          },
+          {
+            "label": "B",
+            "text": "pain"
+          },
+          {
+            "label": "C",
+            "text": "cold"
+          },
+          {
+            "label": "D",
+            "text": "tiredness"
+          }
+        ]
+      },
+      "q-2023-i-051": {
+        "questionId": "q-2023-i-051",
+        "questionNo": 51,
+        "groupId": "group-2023-i-cloze",
+        "stem": "51",
+        "blankId": "blank-2023-i-051",
+        "options": [
+          {
+            "label": "A",
+            "text": "worried"
+          },
+          {
+            "label": "B",
+            "text": "ashamed"
+          },
+          {
+            "label": "C",
+            "text": "confused"
+          },
+          {
+            "label": "D",
+            "text": "discouraged"
+          }
+        ]
+      },
+      "q-2023-i-052": {
+        "questionId": "q-2023-i-052",
+        "questionNo": 52,
+        "groupId": "group-2023-i-cloze",
+        "stem": "52",
+        "blankId": "blank-2023-i-052",
+        "options": [
+          {
+            "label": "A",
+            "text": "game"
+          },
+          {
+            "label": "B",
+            "text": "crime"
+          },
+          {
+            "label": "C",
+            "text": "potential"
+          },
+          {
+            "label": "D",
+            "text": "deal"
+          }
+        ]
+      },
+      "q-2023-i-053": {
+        "questionId": "q-2023-i-053",
+        "questionNo": 53,
+        "groupId": "group-2023-i-cloze",
+        "stem": "53",
+        "blankId": "blank-2023-i-053",
+        "options": [
+          {
+            "label": "A",
+            "text": "leave"
+          },
+          {
+            "label": "B",
+            "text": "cure"
+          },
+          {
+            "label": "C",
+            "text": "bother"
+          },
+          {
+            "label": "D",
+            "text": "understand"
+          }
+        ]
+      },
+      "q-2023-i-054": {
+        "questionId": "q-2023-i-054",
+        "questionNo": 54,
+        "groupId": "group-2023-i-cloze",
+        "stem": "54",
+        "blankId": "blank-2023-i-054",
+        "options": [
+          {
+            "label": "A",
+            "text": "ride"
+          },
+          {
+            "label": "B",
+            "text": "test"
+          },
+          {
+            "label": "C",
+            "text": "meet"
+          },
+          {
+            "label": "D",
+            "text": "show"
+          }
+        ]
+      },
+      "q-2023-i-055": {
+        "questionId": "q-2023-i-055",
+        "questionNo": 55,
+        "groupId": "group-2023-i-cloze",
+        "stem": "55",
+        "blankId": "blank-2023-i-055",
+        "options": [
+          {
+            "label": "A",
+            "text": "secret"
+          },
+          {
+            "label": "B",
+            "text": "display"
+          },
+          {
+            "label": "C",
+            "text": "benefit"
+          },
+          {
+            "label": "D",
+            "text": "exchange"
+          }
+        ]
+      },
+      "q-2023-i-056": {
+        "questionId": "q-2023-i-056",
+        "questionNo": 56,
+        "groupId": "group-2023-i-grammar-fill",
+        "stem": "56",
+        "blankId": "blank-2023-i-056"
+      },
+      "q-2023-i-057": {
+        "questionId": "q-2023-i-057",
+        "questionNo": 57,
+        "groupId": "group-2023-i-grammar-fill",
+        "stem": "57",
+        "blankId": "blank-2023-i-057"
+      },
+      "q-2023-i-058": {
+        "questionId": "q-2023-i-058",
+        "questionNo": 58,
+        "groupId": "group-2023-i-grammar-fill",
+        "stem": "58",
+        "blankId": "blank-2023-i-058"
+      },
+      "q-2023-i-059": {
+        "questionId": "q-2023-i-059",
+        "questionNo": 59,
+        "groupId": "group-2023-i-grammar-fill",
+        "stem": "59",
+        "blankId": "blank-2023-i-059"
+      },
+      "q-2023-i-060": {
+        "questionId": "q-2023-i-060",
+        "questionNo": 60,
+        "groupId": "group-2023-i-grammar-fill",
+        "stem": "60",
+        "blankId": "blank-2023-i-060"
+      },
+      "q-2023-i-061": {
+        "questionId": "q-2023-i-061",
+        "questionNo": 61,
+        "groupId": "group-2023-i-grammar-fill",
+        "stem": "61",
+        "blankId": "blank-2023-i-061"
+      },
+      "q-2023-i-062": {
+        "questionId": "q-2023-i-062",
+        "questionNo": 62,
+        "groupId": "group-2023-i-grammar-fill",
+        "stem": "62",
+        "blankId": "blank-2023-i-062"
+      },
+      "q-2023-i-063": {
+        "questionId": "q-2023-i-063",
+        "questionNo": 63,
+        "groupId": "group-2023-i-grammar-fill",
+        "stem": "63",
+        "blankId": "blank-2023-i-063"
+      },
+      "q-2023-i-064": {
+        "questionId": "q-2023-i-064",
+        "questionNo": 64,
+        "groupId": "group-2023-i-grammar-fill",
+        "stem": "64",
+        "blankId": "blank-2023-i-064"
+      },
+      "q-2023-i-065": {
+        "questionId": "q-2023-i-065",
+        "questionNo": 65,
+        "groupId": "group-2023-i-grammar-fill",
+        "stem": "65",
+        "blankId": "blank-2023-i-065"
+      }
+    },
+    "blanks": {
+      "blank-2023-i-056": {
+        "blankId": "blank-2023-i-056",
+        "groupId": "group-2023-i-grammar-fill",
+        "questionId": "q-2023-i-056",
+        "prompt": "taste"
+      },
+      "blank-2023-i-057": {
+        "blankId": "blank-2023-i-057",
+        "groupId": "group-2023-i-grammar-fill",
+        "questionId": "q-2023-i-057",
+        "prompt": "bite"
+      },
+      "blank-2023-i-058": {
+        "blankId": "blank-2023-i-058",
+        "groupId": "group-2023-i-grammar-fill",
+        "questionId": "q-2023-i-058"
+      },
+      "blank-2023-i-059": {
+        "blankId": "blank-2023-i-059",
+        "groupId": "group-2023-i-grammar-fill",
+        "questionId": "q-2023-i-059",
+        "prompt": "recognize"
+      },
+      "blank-2023-i-060": {
+        "blankId": "blank-2023-i-060",
+        "groupId": "group-2023-i-grammar-fill",
+        "questionId": "q-2023-i-060"
+      },
+      "blank-2023-i-061": {
+        "blankId": "blank-2023-i-061",
+        "groupId": "group-2023-i-grammar-fill",
+        "questionId": "q-2023-i-061",
+        "prompt": "lift"
+      },
+      "blank-2023-i-062": {
+        "blankId": "blank-2023-i-062",
+        "groupId": "group-2023-i-grammar-fill",
+        "questionId": "q-2023-i-062",
+        "prompt": "they"
+      },
+      "blank-2023-i-063": {
+        "blankId": "blank-2023-i-063",
+        "groupId": "group-2023-i-grammar-fill",
+        "questionId": "q-2023-i-063"
+      },
+      "blank-2023-i-064": {
+        "blankId": "blank-2023-i-064",
+        "groupId": "group-2023-i-grammar-fill",
+        "questionId": "q-2023-i-064",
+        "prompt": "rare"
+      },
+      "blank-2023-i-065": {
+        "blankId": "blank-2023-i-065",
+        "groupId": "group-2023-i-grammar-fill",
+        "questionId": "q-2023-i-065",
+        "prompt": "want"
+      }
+    },
+    "writingTasks": {
+      "wt-2023-i-application": {
+        "writingTaskId": "wt-2023-i-application",
+        "groupId": "group-2023-i-writing-application",
+        "taskType": "application",
+        "title": "应用文写作",
+        "instruction": "假定你是李华，外教Ryan准备将学生随机分为两人一组，让大家课后练习口语，你认为这样分组存在问题。请你给外教写一封邮件，内容包括：\n1. 说明问题；\n2. 提出建议。\n1. 写作词数应为80个左右；\n2. 请按如下格式在答题卡的相应位置作答。\nDear Ryan,\nI’m Li Hua from Class 3.\nYours sincerely,\nLi Hua",
+        "wordCountTarget": 80
+      },
+      "wt-2023-i-continuation": {
+        "writingTaskId": "wt-2023-i-continuation",
+        "groupId": "group-2023-i-writing-continuation",
+        "taskType": "continuation",
+        "title": "读后续写",
+        "instruction": "阅读下面材料, 根据其内容和所给段落开头语续写两段, 使之构成一篇完整的短文。\nWhen I was in middle school, my social studies teacher asked me to enter a writing contest. I said no without thinking. I did not love writing. My family came from Brazil, so English was only my second language. Writing was so difficult and painful for me that my teacher had allowed me to present my paper on the sinking of the Titanic by acting out a play, where I played all the parts. No one laughed harder than he did.\nSo, why did he suddenly force me to do something at which I was sure to fail? His reply: “Because I love your stories. If you’re willing to apply yourself, I think you have a good shot at this.” Encouraged by his words, I agreed to give it a try.\nI chose Paul Revere’s horse as my subject. Paul Revere was a silversmith (银匠) in Boston who rode a horse at night on April 18, 1775 to Lexington to warn people that British soldiers were coming. My story would come straight from the horse’s mouth. Not a brilliant idea, but funny; and unlikely to be anyone else’s choice.\nWhat did the horse think, as he sped through the night? Did he get tired? Have doubts? Did he want to quit? I sympathized immediately. I got tired. I had doubts. I wanted to quit. But, like Revere’s horse, I kept going. I worked hard. I checked my spelling. I asked my older sister to correct my grammar. I checked out a half dozen books on Paul Revere from the library. I even read a few of them.\nWhen I handed in the essay to my teacher, he read it, laughed out loud, and said, “Great. Now, write it again.” I wrote it again, and again and again. When I finally finished it, the thought of winning had given way to the enjoyment of writing. If I didn’t win, I wouldn’t care.",
+        "continuationStarters": [
+          "A few weeks later, when I almost forgot the contest, there came the news.",
+          "I went to my teacher's office after the award presentation."
+        ],
+        "materialText": "阅读下面材料, 根据其内容和所给段落开头语续写两段, 使之构成一篇完整的短文。\n\nWhen I was in middle school, my social studies teacher asked me to enter a writing contest. I said no without thinking. I did not love writing. My family came from Brazil, so English was only my second language. Writing was so difficult and painful for me that my teacher had allowed me to present my paper on the sinking of the Titanic by acting out a play, where I played all the parts. No one laughed harder than he did.\n\nSo, why did he suddenly force me to do something at which I was sure to fail? His reply: “Because I love your stories. If you’re willing to apply yourself, I think you have a good shot at this.” Encouraged by his words, I agreed to give it a try.\n\nI chose Paul Revere’s horse as my subject. Paul Revere was a silversmith (银匠) in Boston who rode a horse at night on April 18, 1775 to Lexington to warn people that British soldiers were coming. My story would come straight from the horse’s mouth. Not a brilliant idea, but funny; and unlikely to be anyone else’s choice.\n\nWhat did the horse think, as he sped through the night? Did he get tired? Have doubts? Did he want to quit? I sympathized immediately. I got tired. I had doubts. I wanted to quit. But, like Revere’s horse, I kept going. I worked hard. I checked my spelling. I asked my older sister to correct my grammar. I checked out a half dozen books on Paul Revere from the library. I even read a few of them.\n\nWhen I handed in the essay to my teacher, he read it, laughed out loud, and said, “Great. Now, write it again.” I wrote it again, and again and again. When I finally finished it, the thought of winning had given way to the enjoyment of writing. If I didn’t win, I wouldn’t care.",
+        "wordCountTarget": 150
+      }
+    }
+  },
+  "answerKey": {
+    "answers": {
+      "q-2023-i-021": {
+        "questionId": "q-2023-i-021",
+        "questionNo": 21,
+        "answer": "B",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-i-022": {
+        "questionId": "q-2023-i-022",
+        "questionNo": 22,
+        "answer": "C",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-i-023": {
+        "questionId": "q-2023-i-023",
+        "questionNo": 23,
+        "answer": "D",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-i-024": {
+        "questionId": "q-2023-i-024",
+        "questionNo": 24,
+        "answer": "C",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-i-025": {
+        "questionId": "q-2023-i-025",
+        "questionNo": 25,
+        "answer": "D",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-i-026": {
+        "questionId": "q-2023-i-026",
+        "questionNo": 26,
+        "answer": "B",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-i-027": {
+        "questionId": "q-2023-i-027",
+        "questionNo": 27,
+        "answer": "A",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-i-028": {
+        "questionId": "q-2023-i-028",
+        "questionNo": 28,
+        "answer": "B",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-i-029": {
+        "questionId": "q-2023-i-029",
+        "questionNo": 29,
+        "answer": "A",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-i-030": {
+        "questionId": "q-2023-i-030",
+        "questionNo": 30,
+        "answer": "C",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-i-031": {
+        "questionId": "q-2023-i-031",
+        "questionNo": 31,
+        "answer": "A",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-i-032": {
+        "questionId": "q-2023-i-032",
+        "questionNo": 32,
+        "answer": "B",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-i-033": {
+        "questionId": "q-2023-i-033",
+        "questionNo": 33,
+        "answer": "D",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-i-034": {
+        "questionId": "q-2023-i-034",
+        "questionNo": 34,
+        "answer": "C",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-i-035": {
+        "questionId": "q-2023-i-035",
+        "questionNo": 35,
+        "answer": "D",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-i-036": {
+        "questionId": "q-2023-i-036",
+        "questionNo": 36,
+        "answer": "D",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-i-037": {
+        "questionId": "q-2023-i-037",
+        "questionNo": 37,
+        "answer": "B",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-i-038": {
+        "questionId": "q-2023-i-038",
+        "questionNo": 38,
+        "answer": "F",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-i-039": {
+        "questionId": "q-2023-i-039",
+        "questionNo": 39,
+        "answer": "C",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-i-040": {
+        "questionId": "q-2023-i-040",
+        "questionNo": 40,
+        "answer": "G",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-i-041": {
+        "questionId": "q-2023-i-041",
+        "questionNo": 41,
+        "answer": "D",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-i-042": {
+        "questionId": "q-2023-i-042",
+        "questionNo": 42,
+        "answer": "A",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-i-043": {
+        "questionId": "q-2023-i-043",
+        "questionNo": 43,
+        "answer": "D",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-i-044": {
+        "questionId": "q-2023-i-044",
+        "questionNo": 44,
+        "answer": "A",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-i-045": {
+        "questionId": "q-2023-i-045",
+        "questionNo": 45,
+        "answer": "C",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-i-046": {
+        "questionId": "q-2023-i-046",
+        "questionNo": 46,
+        "answer": "B",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-i-047": {
+        "questionId": "q-2023-i-047",
+        "questionNo": 47,
+        "answer": "D",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-i-048": {
+        "questionId": "q-2023-i-048",
+        "questionNo": 48,
+        "answer": "A",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-i-049": {
+        "questionId": "q-2023-i-049",
+        "questionNo": 49,
+        "answer": "B",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-i-050": {
+        "questionId": "q-2023-i-050",
+        "questionNo": 50,
+        "answer": "B",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-i-051": {
+        "questionId": "q-2023-i-051",
+        "questionNo": 51,
+        "answer": "C",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-i-052": {
+        "questionId": "q-2023-i-052",
+        "questionNo": 52,
+        "answer": "D",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-i-053": {
+        "questionId": "q-2023-i-053",
+        "questionNo": 53,
+        "answer": "A",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-i-054": {
+        "questionId": "q-2023-i-054",
+        "questionNo": 54,
+        "answer": "C",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-i-055": {
+        "questionId": "q-2023-i-055",
+        "questionNo": 55,
+        "answer": "B",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-i-056": {
+        "questionId": "q-2023-i-056",
+        "questionNo": 56,
+        "answer": "tasty",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-i-057": {
+        "questionId": "q-2023-i-057",
+        "questionNo": 57,
+        "answer": "to bite",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-i-058": {
+        "questionId": "q-2023-i-058",
+        "questionNo": 58,
+        "answer": "or",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-i-059": {
+        "questionId": "q-2023-i-059",
+        "questionNo": 59,
+        "answer": "recognized",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-i-060": {
+        "questionId": "q-2023-i-060",
+        "questionNo": 60,
+        "answer": "by",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-i-061": {
+        "questionId": "q-2023-i-061",
+        "questionNo": 61,
+        "answer": "to be lifted",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-i-062": {
+        "questionId": "q-2023-i-062",
+        "questionNo": 62,
+        "answer": "their",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-i-063": {
+        "questionId": "q-2023-i-063",
+        "questionNo": 63,
+        "answer": "a",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-i-064": {
+        "questionId": "q-2023-i-064",
+        "questionNo": 64,
+        "answer": "rarely",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2023-i-065": {
+        "questionId": "q-2023-i-065",
+        "questionNo": 65,
+        "answer": "wanting",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      }
+    }
+  },
+  "analysis": {
+    "meta": {
+      "generatedBy": "external-ai",
+      "promptVersion": "reading-choice-analysis-v1",
+      "reviewStatus": "reviewed",
+      "importMode": "paper-import-ai",
+      "model": "claude-opus-4-8",
+      "reviewedBy": "claude-opus-4-8",
+      "reviewedAt": "2026-06-05T00:00:00Z"
+    },
+    "groups": {
+      "group-2023-i-reading-a": {
+        "overview": "本篇为阿姆斯特丹 MacBike 自行车租赁与导览游的应用文（广告/宣传材料），介绍公司优势、租车价格表以及城市导览游信息。",
+        "discourseStructure": {
+          "summary": "全文按小标题分块：先欢迎并介绍骑行游城市的体验，再说明选择 MacBike 的理由（规模与车型多样），随后给出价格表，最后介绍导览游的路线、出发地点与时间。",
+          "paragraphs": [
+            {
+              "paragraphId": "para-2023-i-reading-a-1",
+              "summary": "总标题：自行车租赁与导览游。",
+              "function": "点明文本主题，引出全文。"
+            },
+            {
+              "paragraphId": "para-2023-i-reading-a-2",
+              "summary": "欢迎语，强调骑行是探索阿姆斯特丹及周边风光最经济、环保又有趣的方式。",
+              "function": "引入并宣传骑行体验，吸引读者。"
+            },
+            {
+              "paragraphId": "para-2023-i-reading-a-3",
+              "summary": "小标题：为什么选择 MacBike。",
+              "function": "引出公司优势部分。"
+            },
+            {
+              "paragraphId": "para-2023-i-reading-a-4",
+              "summary": "介绍 MacBike 近30年历史、是最大租赁公司、五家门店、2500余辆车，并提供多种车型。",
+              "function": "陈述公司优势，论证为何选择 MacBike。"
+            },
+            {
+              "paragraphId": "para-2023-i-reading-a-5",
+              "summary": "价格表：按手刹三档与脚刹无档两类，列出1小时、3小时、1天及每加一天的租金。",
+              "function": "提供租车价格信息。"
+            },
+            {
+              "paragraphId": "para-2023-i-reading-a-6",
+              "summary": "小标题：城市导览游。",
+              "function": "引出导览游信息部分。"
+            },
+            {
+              "paragraphId": "para-2023-i-reading-a-7",
+              "summary": "介绍2.5小时导览游覆盖的景点、从 Dam Square 每天下午1点起每小时整点出发，以及购票方式。",
+              "function": "提供导览游路线、出发地点、时间与购票方式。"
+            }
+          ]
+        }
+      },
+      "group-2023-i-reading-b": {
+        "overview": "本文是一篇人物记叙说明文，讲述 John Todd 如何从童年观察自然净化污水的现象出发，运用生态学原理设计出 eco-machine 来处理污泥与污水，并将其应用于实际工程，最终提出“生态设计”理念。",
+        "discourseStructure": {
+          "summary": "全文按时间与逻辑推进：先写童年观察自然引发好奇，再写大学后回到自然提问并决定造机器，接着详述实验过程与惊人结果，随后列举大型实际应用，最后用 John 本人的话点明其“生态设计”核心思想。",
+          "paragraphs": [
+            {
+              "paragraphId": "para-2023-i-reading-b-1",
+              "summary": "John 童年喜欢探索树林，观察自然如何解决问题，长大后开始思考能否用这一过程清理人类制造的污染。",
+              "function": "引入人物背景与最初的好奇心，提出贯穿全文的核心问题。"
+            },
+            {
+              "paragraphId": "para-2023-i-reading-b-2",
+              "summary": "大学学习农业、医学和渔业后，John 回到观察自然、不断提问，设想用合适的动植物组合像自然那样清理废物，决定建造 eco-machine。",
+              "function": "承接好奇心，展现其探究精神并引出 eco-machine 的构想。"
+            },
+            {
+              "paragraphId": "para-2023-i-reading-b-3",
+              "summary": "John 给自己设定去除污泥中有害物质的任务，建造一系列连通的玻璃纤维水箱，放入本地动植物使其形成生态系统，几周后加入污泥。",
+              "function": "详述 eco-machine 的搭建与实验步骤。"
+            },
+            {
+              "paragraphId": "para-2023-i-reading-b-4",
+              "summary": "动植物把污泥当作食物吃掉，几周内污泥被全部消化，只剩纯净的水，结果令人惊叹。",
+              "function": "呈现实验的惊人结果，证明构想成立。"
+            },
+            {
+              "paragraphId": "para-2023-i-reading-b-5",
+              "summary": "多年来 John 承担多项大工程，包括处理南伯灵顿 1600 户家庭污水的设施，以及为中国福州设计清理运河水的 eco-machine。",
+              "function": "列举实际应用，展示其理念在现实中的推广。"
+            },
+            {
+              "paragraphId": "para-2023-i-reading-b-6",
+              "summary": "John 把自己所做的称为“生态设计”，用“地球生命是发明者的备件箱”作比，强调把生物置于新关系中并让系统自我修复。",
+              "function": "用人物原话总结其核心思想，升华主题。"
+            }
+          ]
+        }
+      },
+      "group-2023-i-reading-c": {
+        "overview": "本文是一本关于“数字极简主义”(digital minimalism) 的书的前言/导读，作者说明全书的写作目的与章节结构：先论证数字极简主义的哲学基础并提出“数字整理”(digital declutter) 方法，再在第二部分给出可操作的实践工具。",
+        "discourseStructure": {
+          "summary": "全文按“总—分”展开：先点明全书目的，再依次介绍第一部分（哲学基础 + digital declutter 方法 + 最后一章的实操指导）与第二部分（可持续生活方式与实践工具箱）。",
+          "paragraphs": [
+            {
+              "paragraphId": "para-2023-i-reading-c-1",
+              "summary": "开门见山点出本书目的：论证数字极简主义，并教读者如何采纳这一理念。",
+              "function": "总起，提出全书写作目的"
+            },
+            {
+              "paragraphId": "para-2023-i-reading-c-2",
+              "summary": "说明全书分为两部分，第一部分先讲数字极简主义的哲学基础。",
+              "function": "引出结构，介绍第一部分前半内容"
+            },
+            {
+              "paragraphId": "para-2023-i-reading-c-3",
+              "summary": "第一部分以介绍 digital declutter 方法收尾：先远离可选线上活动30天，再有选择地加回少量高价值活动。",
+              "function": "介绍第一部分提出的方法"
+            },
+            {
+              "paragraphId": "para-2023-i-reading-c-4",
+              "summary": "第一部分最后一章指导读者自行进行 digital declutter，并引用2018年1600多人参与的实验，分享参与者的故事与经验教训。",
+              "function": "介绍第一部分最后一章内容"
+            },
+            {
+              "paragraphId": "para-2023-i-reading-c-5",
+              "summary": "第二部分深入探讨可持续的数字极简生活方式，每章结尾给出一组实践，作为帮助读者构建生活方式的工具箱。",
+              "function": "介绍第二部分内容与实践工具的用途"
+            }
+          ]
+        }
+      },
+      "group-2023-i-reading-d": {
+        "overview": "本文是一篇科普说明文，介绍“群体智慧”（wisdom of crowds）效应及Navajas团队对这一经典现象的最新研究。文章先引出经典效应，再解释其内在机制，接着用新研究提出转折，最后通过后续实验探讨群体讨论如何降低误差并展望意义。",
+        "discourseStructure": {
+          "summary": "全文按“引出经典现象→解释内在逻辑→新研究提出转折→后续实验探究机制并展望”的递进结构展开。",
+          "paragraphs": [
+            {
+              "paragraphId": "para-2023-i-reading-d-1",
+              "summary": "1907年Galton发表论文，提出“群体智慧”效应：大量独立估计的平均值有时相当准确。",
+              "function": "引入话题，提出经典的“群体智慧”效应。"
+            },
+            {
+              "paragraphId": "para-2023-i-reading-d-2",
+              "summary": "解释群体智慧效应的内在逻辑：个体误差有高估有低估，平均后相互抵消，但前提是估计相互独立。",
+              "function": "阐释该效应背后的运作机制与前提条件。"
+            },
+            {
+              "paragraphId": "para-2023-i-reading-d-3",
+              "summary": "Navajas的新研究提出转折：把人群分成可讨论的小组后，小组平均值比同等数量独立个体的平均值更准确。",
+              "function": "用新研究对经典现象提出转折性发现。"
+            },
+            {
+              "paragraphId": "para-2023-i-reading-d-4",
+              "summary": "后续实验探究小组讨论中成员的实际做法，发现“分享论据、共同推理”最常见，能整体降低误差，并展望其意义。",
+              "function": "深入探究讨论机制并总结研究的潜在意义与态度。"
+            }
+          ]
+        }
+      }
+    },
+    "questions": {
+      "q-2023-i-021": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查 MacBike 的一项优势，需在公司介绍段落中定位与选项对应的事实信息。",
+        "stemTranslationZh": "MacBike 的一项优势是什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "它给儿童折扣。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "It gives children a discount.",
+              "explanation": "原文虽提到 bikes with child seats 和 children’s bikes，但从未提及对儿童给予折扣，属无中生有。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "它提供多种类型的自行车。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2023-i-reading-a-4",
+                "quote": "We offer the newest bicycles in a wide variety",
+                "anchor": "wide variety of bikes"
+              },
+              {
+                "role": "secondary",
+                "paragraphId": "para-2023-i-reading-a-4",
+                "quote": "including basic bikes with foot brake (刹车) , bikes with hand brake and gears (排挡) , bikes with child seats, and children’s bikes.",
+                "anchor": "列举多种车型"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "它组织免费的骑行游。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeTrend",
+              "sourceQuote": "You can buy your ticket in a MacBike shop or book online.",
+              "sourceHighlight": "buy your ticket",
+              "optionText": "It organizes free cycle tours.",
+              "optionHighlight": "free",
+              "explanation": "原文明确导览游需要购票（buy your ticket），与选项所说的 free（免费）相反，属黑白颠倒。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2023-i-reading-a-7",
+                "quote": "You can buy your ticket in a MacBike shop or book online.",
+                "anchor": "需购票"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "它拥有2500多家租赁门店。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "With over 2,500 bikes stored in our five rental shops at strategic locations",
+              "sourceEntity": "over 2,500 bikes",
+              "optionText": "It has over 2,500 rental shops.",
+              "optionEntity": "over 2,500 rental shops",
+              "explanation": "原文说 2500余辆是 bikes（自行车），门店只有 five（五家），选项把数量主体由自行车错配成门店，属对象错配。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2023-i-reading-a-4",
+                "quote": "With over 2,500 bikes stored in our five rental shops at strategic locations",
+                "anchor": "2500辆车/五家店"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "It offers many types of bikes.",
+            "sourceRole": "correctOption",
+            "targetText": "We offer the newest bicycles in a wide variety",
+            "targetParagraphId": "para-2023-i-reading-a-4",
+            "relationType": "paraphrase",
+            "note": "选项 many types of bikes 与原文 a wide variety of bicycles 为同义替换，均表示车型多样。"
+          }
+        ]
+      },
+      "q-2023-i-022": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查价格计算，需根据价格表中手刹三档车型的1天价格加上每加一天的价格，算出两天费用。",
+        "stemTranslationZh": "租一辆带手刹和三档的自行车两天，要付多少钱？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "15.75欧元。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "understatement",
+              "sourceQuote": "1 day (24 hours)\n€14.75",
+              "sourceHighlight": "€14.75",
+              "optionText": "€15.75.",
+              "optionHighlight": "€15.75",
+              "optionEntity": "€15.75",
+              "explanation": "15.75 接近1天价格 14.75 但被改动且只算一天，未加上第二天 8.00，金额被低估。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2023-i-reading-a-5",
+                "quote": "1 day (24 hours)\n€14.75",
+                "anchor": "1天14.75"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "19.50欧元。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "understatement",
+              "sourceQuote": "Each additional day\n€8.00",
+              "sourceHighlight": "€8.00",
+              "optionText": "€19.50.",
+              "optionHighlight": "€19.50",
+              "explanation": "误用脚刹无档列价格组合或错算，未取手刹三档的 14.75 + 8.00 = 22.75，金额被低估。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2023-i-reading-a-5",
+                "quote": "Each additional day\n€8.00",
+                "anchor": "每加一天8.00"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "22.75欧元。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2023-i-reading-a-5",
+                "quote": "1 day (24 hours)\n€14.75",
+                "anchor": "1天14.75"
+              },
+              {
+                "role": "secondary",
+                "paragraphId": "para-2023-i-reading-a-5",
+                "quote": "Each additional day\n€8.00",
+                "anchor": "每加一天8.00"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "29.50欧元。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overstatement",
+              "sourceQuote": "1 day (24 hours)\n€14.75",
+              "sourceHighlight": "€14.75",
+              "optionText": "€29.50.",
+              "optionHighlight": "€29.50",
+              "explanation": "29.50 约为 14.75 的两倍，误把第二天也按整天 14.75 计算，而非每加一天 8.00，金额被高估。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2023-i-reading-a-5",
+                "quote": "1 day (24 hours)\n€14.75",
+                "anchor": "1天14.75"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "two days",
+            "sourceRole": "stem",
+            "targetText": "Each additional day\n€8.00",
+            "targetParagraphId": "para-2023-i-reading-a-5",
+            "relationType": "calculation",
+            "note": "题干 two days 需用手刹三档的 1 day €14.75 加上 Each additional day €8.00，14.75 + 8.00 = 22.75。"
+          },
+          {
+            "sourceText": "hand brake and three gears",
+            "sourceRole": "stem",
+            "targetText": "1 day (24 hours)\n€14.75",
+            "targetParagraphId": "para-2023-i-reading-a-5",
+            "relationType": "locationCue",
+            "note": "题干 hand brake and three gears 对应价格表 Hand Brake, Three Gears 一列，定位到第一天价格 €14.75。"
+          }
+        ]
+      },
+      "q-2023-i-023": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查导览游的出发地点，需在导览游段落中定位 depart from 的地点信息。",
+        "stemTranslationZh": "城市导览游从哪里出发？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "高耶风车。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "tour covers the Gooyer Windmill",
+              "optionText": "The Gooyer, Windmill.",
+              "matchType": "exact",
+              "relationNote": "Gooyer Windmill 是导览游 covers（途经/涵盖）的景点之一，并非出发地点，用原文出现的地名设钩误导。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2023-i-reading-a-7",
+                "quote": "tour covers the Gooyer Windmill",
+                "anchor": "途经景点"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "瘦桥。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "the Skinny Bridge",
+              "optionText": "The Skinny Bridge.",
+              "matchType": "exact",
+              "relationNote": "Skinny Bridge 是导览游途经的景点之一，并非出发地点，用原文地名设钩误导。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2023-i-reading-a-7",
+                "quote": "the Skinny Bridge",
+                "anchor": "途经景点"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "喜力啤酒厂。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "Heineken Brewery",
+              "optionText": "Heineken Brewery.",
+              "matchType": "exact",
+              "relationNote": "Heineken Brewery 是导览游途经的景点之一，并非出发地点，用原文地名设钩误导。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2023-i-reading-a-7",
+                "quote": "Heineken Brewery",
+                "anchor": "途经景点"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "水坝广场。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2023-i-reading-a-7",
+                "quote": "The tour departs from Dam Square every hour on the hour",
+                "anchor": "从Dam Square出发"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Where does the guided city tour start?",
+            "sourceRole": "stem",
+            "targetText": "The tour departs from Dam Square every hour on the hour",
+            "targetParagraphId": "para-2023-i-reading-a-7",
+            "relationType": "paraphrase",
+            "note": "题干 start（出发/开始）与原文 departs from 为同义替换，定位到出发地 Dam Square。"
+          }
+        ]
+      },
+      "q-2023-i-024": {
+        "skill": {
+          "primary": "inference"
+        },
+        "questionFocus": "考查从前两段对 John 性格特点的推断。",
+        "stemTranslationZh": "从前两段中我们可以了解到关于 John 的什么信息？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "他喜欢旅行。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "he loved to explore the woods around his house",
+              "optionText": "He was fond of traveling.",
+              "matchType": "wordFamily",
+              "relationNote": "原文 explore the woods（探索树林）只是观察自然，与 traveling（旅行）只是模糊的语义联想，并非 John 喜欢旅行。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2023-i-reading-b-1",
+                "quote": "he loved to explore the woods around his house, observing how nature solved problems",
+                "anchor": "探索树林是为了观察自然"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "他享受独处。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "He enjoyed being alone.",
+              "explanation": "原文未提及 John 享受独处，前两段只描述他观察自然、不断提问，无任何关于独处偏好的信息。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "他有一颗好奇探究的心。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2023-i-reading-b-1",
+                "quote": "John started to wonder if this process could be used to clean up the messes people were making",
+                "anchor": "开始思考能否用自然过程清理污染"
+              },
+              {
+                "role": "secondary",
+                "paragraphId": "para-2023-i-reading-b-2",
+                "quote": "John went back to observing nature and asking questions",
+                "anchor": "回到观察自然、不断提问"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "他渴望成为一名医生。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "After studying agriculture, medicine, and fisheries in college",
+              "optionText": "He longed to be a doctor.",
+              "matchType": "wordFamily",
+              "relationNote": "原文 medicine（医学）只是大学所学科目之一，选项借 medicine 的词族联想推出“想当医生”，原文并无此意。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2023-i-reading-b-2",
+                "quote": "After studying agriculture, medicine, and fisheries in college",
+                "anchor": "大学学习多门学科"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "He had an inquiring mind.",
+            "sourceRole": "correctOption",
+            "targetText": "John went back to observing nature and asking questions",
+            "targetParagraphId": "para-2023-i-reading-b-2",
+            "relationType": "paraphrase",
+            "note": "选项 inquiring mind（好奇探究的心）是对原文 observing nature and asking questions（观察自然、不断提问）以及 started to wonder 的同义概括。"
+          }
+        ]
+      },
+      "q-2023-i-025": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查 John 把污泥放入水箱这一行为目的的细节理解。",
+        "stemTranslationZh": "John 为什么把污泥放入水箱？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "为了喂养动物。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "The plants and animals in the eco-machine took the sludge as food and began to eat it!",
+              "optionText": "To feed the animals.",
+              "matchType": "wordFamily",
+              "relationNote": "原文 took the sludge as food（把污泥当作食物）是实验产生的结果，并非 John 放入污泥的目的；选项借 food/eat 的词族联想偷换为“喂养动物”这一目的。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2023-i-reading-b-4",
+                "quote": "The plants and animals in the eco-machine took the sludge as food and began to eat it!",
+                "anchor": "吃掉污泥是结果而非目的"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "为了建立一个生态系统。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "timeOrderReversal",
+              "subtype": "timeOrderReversal",
+              "sourceQuote": "these different kinds of life got used to one another and formed their own ecosystem. After a few weeks, John added the sludge.",
+              "sourceHighlight": "formed their own ecosystem. After a few weeks, John added the sludge",
+              "optionText": "To build an ecosystem.",
+              "optionHighlight": "To build an ecosystem.",
+              "explanation": "原文是先形成生态系统、之后才加入污泥，建立生态系统是加污泥之前已完成的步骤，而非加污泥的目的，选项颠倒了先后关系。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2023-i-reading-b-3",
+                "quote": "these different kinds of life got used to one another and formed their own ecosystem. After a few weeks, John added the sludge.",
+                "anchor": "先建生态系统，后加污泥"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "为了保护植物。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "To protect the plants.",
+              "explanation": "原文未提及加入污泥是为了保护植物，污泥是被处理的有害对象，与保护植物无关。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "为了测试这台 eco-machine。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2023-i-reading-b-3",
+                "quote": "The task John set for himself was to remove harmful substances from some sludge",
+                "anchor": "任务是去除污泥中的有害物质"
+              },
+              {
+                "role": "secondary",
+                "paragraphId": "para-2023-i-reading-b-4",
+                "quote": "Within weeks, it had all been digested, and all that was left was pure water.",
+                "anchor": "加入污泥后检验机器净化效果"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "To test the eco-machine.",
+            "sourceRole": "correctOption",
+            "targetText": "The task John set for himself was to remove harmful substances from some sludge",
+            "targetParagraphId": "para-2023-i-reading-b-3",
+            "relationType": "paraphrase",
+            "note": "John 先设定 remove harmful substances from some sludge 的任务并搭建 eco-machine，再加入污泥，正是为了 test the eco-machine（检验机器能否净化污泥）。"
+          },
+          {
+            "sourceText": "To test the eco-machine.",
+            "sourceRole": "correctOption",
+            "targetText": "He placed them in the tanks and waited.",
+            "targetParagraphId": "para-2023-i-reading-b-3",
+            "relationType": "locationCue",
+            "note": "原文先 waited 让系统形成，再加污泥观察结果，体现这是对 eco-machine 的检验过程。"
+          }
+        ]
+      },
+      "q-2023-i-026": {
+        "skill": {
+          "primary": "authorPurpose"
+        },
+        "questionFocus": "考查作者提及福州这一例子的写作目的。",
+        "stemTranslationZh": "作者提及福州的目的是什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "为了回顾 John 的研究计划。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overstatement",
+              "sourceQuote": "He also designed an eco-machine to clean canal water in Fuzhou, a city in southeast China.",
+              "sourceHighlight": "designed an eco-machine to clean canal water in Fuzhou",
+              "optionText": "To review John's research plans.",
+              "optionHighlight": "review John's research plans",
+              "explanation": "福州是已完成的实际工程应用，而非 research plans（研究计划），选项把已落地的应用偷换成尚未实现的计划，且“回顾”也无依据。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2023-i-reading-b-5",
+                "quote": "He also designed an eco-machine to clean canal water in Fuzhou, a city in southeast China.",
+                "anchor": "福州是实际工程应用"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "为了展示 John 想法的一项应用。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2023-i-reading-b-5",
+                "quote": "He also designed an eco-machine to clean canal water in Fuzhou, a city in southeast China.",
+                "anchor": "为福州设计 eco-machine 清理运河水"
+              },
+              {
+                "role": "secondary",
+                "paragraphId": "para-2023-i-reading-b-5",
+                "quote": "Over the years, John has taken on many big jobs.",
+                "anchor": "多年来承担多项大工程"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "为了比较 John 的不同工作。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "To compare John's different jobs.",
+              "explanation": "原文只是并列举出南伯灵顿和福州两个应用例子，并未对 John 的不同工作进行比较，原文未提及 compare 之意。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "为了消除人们对 John 发明的怀疑。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "To erase doubts about John's invention.",
+              "explanation": "原文未提及有人对 John 的发明存在 doubts（怀疑），因此谈不上消除怀疑，属无中生有。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "To show an application of John's idea.",
+            "sourceRole": "correctOption",
+            "targetText": "He also designed an eco-machine to clean canal water in Fuzhou, a city in southeast China.",
+            "targetParagraphId": "para-2023-i-reading-b-5",
+            "relationType": "paraphrase",
+            "note": "福州例子是 designed an eco-machine to clean canal water 的实际工程，正是 an application of John's idea（John 理念的一项应用）。"
+          }
+        ]
+      },
+      "q-2023-i-027": {
+        "skill": {
+          "primary": "inference"
+        },
+        "questionFocus": "考查对 John 工作所依据的核心理念的推断概括。",
+        "stemTranslationZh": "John 工作的基础是什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "自然能够自我修复。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2023-i-reading-b-6",
+                "quote": "Then you let these new systems develop their own ways to self-repair.",
+                "anchor": "让系统发展出自我修复的方式"
+              },
+              {
+                "role": "secondary",
+                "paragraphId": "para-2023-i-reading-b-1",
+                "quote": "observing how nature solved problems",
+                "anchor": "观察自然如何自行解决问题"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "生物需要水才能生存。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "all that was left was pure water",
+              "optionText": "Organisms need water to survive.",
+              "matchType": "wordFamily",
+              "relationNote": "原文 pure water 是净化后的产物，选项借 water 的词钩臆造出“生物需要水才能生存”，这并非 John 工作的依据。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2023-i-reading-b-4",
+                "quote": "all that was left was pure water",
+                "anchor": "纯水是净化结果"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "地球上的生命是多样的。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "Life on Earth is kind of a box of spare parts for the inventor",
+              "optionText": "Life on Earth is diverse.",
+              "matchType": "wordFamily",
+              "relationNote": "原文 Life on Earth 后接的是 a box of spare parts 的比喻，强调可作为发明素材，而非强调生命的 diverse（多样）；选项借相同措辞偷换含义。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2023-i-reading-b-6",
+                "quote": "Life on Earth is kind of a box of spare parts for the inventor",
+                "anchor": "生命是发明者的备件箱"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "大多数微小生物成群生活。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Most tiny creatures live in groups.",
+              "explanation": "原文只提到 tiny creatures lived（生活着微小生物），未提及它们是否“成群”生活，更非 John 工作的依据，属无中生有。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Nature can repair itself.",
+            "sourceRole": "correctOption",
+            "targetText": "you let these new systems develop their own ways to self-repair",
+            "targetParagraphId": "para-2023-i-reading-b-6",
+            "relationType": "paraphrase",
+            "note": "选项 repair itself（自我修复）是对原文 develop their own ways to self-repair（自行发展出自我修复方式）的同义替换，正是 John 工作的根本依据。"
+          }
+        ]
+      },
+      "q-2023-i-028": {
+        "skill": {
+          "primary": "mainIdea"
+        },
+        "questionFocus": "考查全书的写作目的/主旨，即这本书想要倡导什么。",
+        "stemTranslationZh": "这本书的目的是什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "教授批判性思维技能。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Teaching critical thinking skills.",
+              "explanation": "原文未提及教授“批判性思维技能”，本书目的是论证数字极简主义，与批判性思维无关。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "倡导一种简约的数字生活方式。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2023-i-reading-c-1",
+                "quote": "The goal of this book is to make the case for digital minimalism",
+                "anchor": "本书目的：论证 digital minimalism"
+              },
+              {
+                "role": "secondary",
+                "paragraphId": "para-2023-i-reading-c-5",
+                "quote": "build a minimalist lifestyle",
+                "anchor": "构建极简生活方式"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "解决哲学问题。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "the philosophical foundations of digital minimalism",
+              "optionText": "Solving philosophical problems.",
+              "matchType": "wordFamily",
+              "relationNote": "原文出现 philosophical（哲学的），但只是说数字极简主义的“哲学基础”，并非“解决哲学问题”，选项借 philosophical 一词的同族词制造干扰。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "推广某种数字设备的使用。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeAction",
+              "sourceQuote": "the time most now spent on mindless device use",
+              "sourceHighlight": "mindless device use",
+              "optionText": "Promoting the use of a digital device.",
+              "optionHighlight": "Promoting the use of a digital device",
+              "explanation": "原文主张减少“无意识地使用设备”的时间，本书是反对而非“推广”设备使用，选项与原文态度相反。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2023-i-reading-c-5",
+                "quote": "the time most now spent on mindless device use",
+                "anchor": "反对无意识用设备"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Advocating a simple digital lifestyle.",
+            "sourceRole": "correctOption",
+            "targetText": "The goal of this book is to make the case for digital minimalism",
+            "targetParagraphId": "para-2023-i-reading-c-1",
+            "relationType": "paraphrase",
+            "note": "选项 Advocating a simple digital lifestyle 是原文 make the case for digital minimalism 的同义替换：make the case for ≈ advocate，digital minimalism ≈ simple digital lifestyle。"
+          }
+        ]
+      },
+      "q-2023-i-029": {
+        "skill": {
+          "primary": "wordMeaning"
+        },
+        "questionFocus": "考查第三段画线词 declutter 的词义猜测，需结合后文对该过程的解释。",
+        "stemTranslationZh": "第三段中画线词 “declutter” 是什么意思？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "清理。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2023-i-reading-c-3",
+                "quote": "This process requires you to step away from optional online activities for thirty days.",
+                "anchor": "远离可选线上活动30天"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "添加。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeAction",
+              "sourceQuote": "This process requires you to step away from optional online activities for thirty days.",
+              "sourceHighlight": "step away from optional online activities",
+              "optionText": "Add-on.",
+              "optionHighlight": "Add-on",
+              "explanation": "declutter 指“远离/清除”可选线上活动，而 Add-on 是“添加”，与原文动作方向相反；原文中加回活动是在30天之后，不是 declutter 本身的含义。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2023-i-reading-c-3",
+                "quote": "step away from optional online activities",
+                "anchor": "远离可选线上活动"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "登记/签到。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Check-in.",
+              "explanation": "原文未提及任何“签到/登记”含义，与 declutter（清理）无关。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "接管。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Take-over.",
+              "explanation": "原文未提及“接管”之意，declutter 强调的是清除而非接管。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Clear-up.",
+            "sourceRole": "correctOption",
+            "targetText": "step away from optional online activities",
+            "targetParagraphId": "para-2023-i-reading-c-3",
+            "relationType": "paraphrase",
+            "note": "declutter 的含义由后文 step away from optional online activities（远离可选线上活动）解释，即“清理/清除”，对应选项 Clear-up。"
+          }
+        ]
+      },
+      "q-2023-i-030": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查第一部分最后一章呈现了什么内容（细节定位）。",
+        "stemTranslationZh": "第一部分的最后一章呈现了什么内容？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "理论模型。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Theoretical models.",
+              "explanation": "最后一章是引用真实实验、分享参与者故事与策略，并非呈现“理论模型”，原文未提及理论模型。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "统计方法。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "over 1,600 people agreed to perform a digital declutter",
+              "optionText": "Statistical methods.",
+              "matchType": "wordFamily",
+              "relationNote": "原文出现 over 1,600 people 这一数字，易让人联想到“统计”，但原文只是描述实验参与人数，并未讲授“统计方法”，属于数字钩子干扰。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "实际例子。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2023-i-reading-c-4",
+                "quote": "You’ll hear these participants’ stories and learn what strategies worked well for them, and what traps they encountered that you should avoid.",
+                "anchor": "参与者真实故事与经验教训"
+              },
+              {
+                "role": "secondary",
+                "paragraphId": "para-2023-i-reading-c-4",
+                "quote": "an experiment I ran in 2018 in which over 1,600 people agreed to perform a digital declutter",
+                "anchor": "2018年真实实验"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "历史分析。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Historical analyses.",
+              "explanation": "原文未提及对历史的分析，最后一章引用的是2018年的实验与参与者经历，而非历史分析。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Practical examples.",
+            "sourceRole": "correctOption",
+            "targetText": "You’ll hear these participants’ stories and learn what strategies worked well for them, and what traps they encountered that you should avoid.",
+            "targetParagraphId": "para-2023-i-reading-c-4",
+            "relationType": "paraphrase",
+            "note": "选项 Practical examples 对应原文中参与者的真实故事、奏效的策略与遇到的陷阱（participants’ stories / strategies / traps），即第一部分最后一章给出的实际例子。"
+          }
+        ]
+      },
+      "q-2023-i-031": {
+        "skill": {
+          "primary": "detail",
+          "secondary": "inference"
+        },
+        "questionFocus": "考查作者建议读者如何对待第二部分提供的 practices（实践）。",
+        "stemTranslationZh": "对于第二部分提供的实践，作者建议读者怎么做？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "按需使用它们。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2023-i-reading-c-5",
+                "quote": "You can view these practices as a toolbox meant to aid your efforts to build a minimalist lifestyle that works for your particular circumstances.",
+                "anchor": "把实践当成工具箱，按自身情况使用"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "把它们推荐给朋友。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Recommend them to friends.",
+              "explanation": "原文未提及把实践“推荐给朋友”，作者只建议读者自己用来构建适合自己的生活方式。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "评估它们的效果。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Evaluate their effects.",
+              "explanation": "原文未提及让读者“评估实践的效果”，只是把实践视为帮助行动的工具箱。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "识别这些实践背后的理念。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overstatement",
+              "sourceQuote": "which are designed to help you act on the big ideas of the chapter",
+              "sourceHighlight": "act on the big ideas of the chapter",
+              "optionText": "Identify the ideas behind them.",
+              "optionHighlight": "Identify the ideas behind them",
+              "explanation": "原文说实践是帮助读者“付诸行动”(act on) 这些大想法，而非让读者去“识别/找出”背后的理念，选项把动作偷换并夸大成识别理念。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2023-i-reading-c-5",
+                "quote": "which are designed to help you act on the big ideas of the chapter",
+                "anchor": "实践用于付诸行动而非识别理念"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Use them as needed.",
+            "sourceRole": "correctOption",
+            "targetText": "a toolbox meant to aid your efforts to build a minimalist lifestyle that works for your particular circumstances",
+            "targetParagraphId": "para-2023-i-reading-c-5",
+            "relationType": "paraphrase",
+            "note": "选项 Use them as needed 对应原文把 practices 视为 toolbox，用以 build a minimalist lifestyle that works for your particular circumstances（适合自身具体情况），即按需取用。"
+          }
+        ]
+      },
+      "q-2023-i-032": {
+        "skill": {
+          "primary": "mainIdea"
+        },
+        "questionFocus": "考查对第二段段落主旨的概括能力。",
+        "stemTranslationZh": "本文第二段主要讲的是什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "估计的方法。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "第二段在讲述各种估计的方法。",
+              "explanation": "原文未提及具体的“估计方法”，第二段讲的是误差为何能相互抵消的原理，而非方法。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "该效应的内在逻辑。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2023-i-reading-d-2",
+                "quote": "When enough of these errors are averaged together, they cancel each other out, resulting in a more accurate estimate.",
+                "anchor": "误差相互抵消的原理"
+              },
+              {
+                "role": "secondary",
+                "paragraphId": "para-2023-i-reading-d-2",
+                "quote": "the wisdom of crowds requires that people’s estimates be independent",
+                "anchor": "效应的前提条件"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "人们产生误差的原因。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "understatement",
+              "sourceQuote": "This effect capitalizes on the fact that when people make errors, those errors aren’t always the same.",
+              "sourceHighlight": "when people make errors",
+              "optionText": "The causes of people's errors.",
+              "optionHighlight": "The causes of people's errors",
+              "explanation": "原文只是以“人会犯错”为前提来解释误差如何相互抵消，并未探讨误差的成因；把段落主旨缩小为“误差的原因”是范围偷换。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "Galton实验的设计。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "This effect capitalizes on the fact that when people make errors, those errors aren’t always the same.",
+              "sourceEntity": "This effect",
+              "optionText": "The design of Galton's experiment.",
+              "optionEntity": "Galton's experiment",
+              "explanation": "第二段讲的是“该效应”的运作逻辑，而非Galton实验的设计；Galton的实验属于第一段内容，对象错配。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "The underlying logic of the effect.",
+            "sourceRole": "correctOption",
+            "targetText": "When enough of these errors are averaged together, they cancel each other out, resulting in a more accurate estimate.",
+            "targetParagraphId": "para-2023-i-reading-d-2",
+            "relationType": "paraphrase",
+            "note": "选项 underlying logic 对应原文用 errors cancel each other out 等机制性句子解释 effect 为何成立。"
+          }
+        ]
+      },
+      "q-2023-i-033": {
+        "skill": {
+          "primary": "detail",
+          "secondary": "inference"
+        },
+        "questionFocus": "考查对Navajas研究发现的细节理解与推断。",
+        "stemTranslationZh": "Navajas的研究发现，即使________，平均准确度也能提高。",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "人群规模相对较小",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "准确度的提高与人群规模较小有关。",
+              "explanation": "原文比较的是“可讨论的小组”与“同等数量的独立个体”，并未把准确度提高归因于人群规模小，属无中生有。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "偶尔出现低估",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "Some people will tend to overestimate, and some to underestimate.",
+              "optionText": "there were occasional underestimates",
+              "matchType": "wordFamily",
+              "relationNote": "选项用 underestimates 勾连第二段 underestimate 一词，但低估是经典效应的描述，并非Navajas新研究“即使……也能提高”的条件。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "个体之间不交流",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeAction",
+              "sourceQuote": "when crowds were further divided into smaller groups that were allowed to have a discussion",
+              "sourceHighlight": "allowed to have a discussion",
+              "optionText": "individuals did not communicate",
+              "optionHighlight": "did not communicate",
+              "explanation": "Navajas的新发现恰恰是允许讨论交流后更准确，选项说“不交流”与原文“允许讨论”方向相反，黑白颠倒。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "估计并非完全独立",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2023-i-reading-d-3",
+                "quote": "when crowds were further divided into smaller groups that were allowed to have a discussion, the averages from these groups were more accurate than those from an equal number of independent individuals",
+                "anchor": "讨论小组比独立个体更准确"
+              },
+              {
+                "role": "secondary",
+                "paragraphId": "para-2023-i-reading-d-2",
+                "quote": "the wisdom of crowds requires that people’s estimates be independent",
+                "anchor": "经典效应要求估计独立"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "estimates were not fully independent",
+            "sourceRole": "correctOption",
+            "targetText": "when crowds were further divided into smaller groups that were allowed to have a discussion",
+            "targetParagraphId": "para-2023-i-reading-d-3",
+            "relationType": "paraphrase",
+            "note": "原文 allowed to have a discussion 意味着小组成员互相影响、估计不再完全独立，正是选项 not fully independent 的同义替换。"
+          },
+          {
+            "sourceText": "independent",
+            "sourceRole": "correctOption",
+            "targetText": "the wisdom of crowds requires that people’s estimates be independent",
+            "targetParagraphId": "para-2023-i-reading-d-2",
+            "relationType": "locationCue",
+            "note": "第二段 independent 一词是定位线索，帮助理解 Navajas 研究打破了“估计须独立”这一前提。"
+          }
+        ]
+      },
+      "q-2023-i-034": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查对后续实验研究焦点的细节理解。",
+        "stemTranslationZh": "这项后续研究关注的是什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "小组的规模。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "smaller groups",
+              "optionText": "The size of the groups.",
+              "matchType": "wordFamily",
+              "relationNote": "选项用 size of the groups 勾连前一段 smaller groups 的措辞，但后续研究关注的是讨论中成员做了什么，而非小组规模。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2023-i-reading-d-3",
+                "quote": "when crowds were further divided into smaller groups",
+                "anchor": "smaller groups 出现于上一段"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "占主导地位的成员。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overstatement",
+              "sourceQuote": "Did they tend to go with those most confident about their estimates?",
+              "sourceHighlight": "those most confident about their estimates",
+              "optionText": "The dominant members.",
+              "optionHighlight": "The dominant members",
+              "explanation": "原文只是以设问形式探讨“是否听从最自信者”，并指出这不是主要做法；把它当作研究焦点是夸大了一个被否定的次要可能，范围偷换。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "讨论的过程。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2023-i-reading-d-4",
+                "quote": "the researchers tried to get a better sense of what the group members actually did in their discussion",
+                "anchor": "探究成员在讨论中实际做了什么"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "个体的估计。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "what the group members actually did in their discussion",
+              "sourceEntity": "the group members in their discussion",
+              "optionText": "The individual estimates.",
+              "optionEntity": "individual estimates",
+              "explanation": "后续研究关注的是小组成员在讨论中的行为，而非独立个体的估计；研究对象由“讨论中的群体”被错配成“个体估计”。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "The discussion process.",
+            "sourceRole": "correctOption",
+            "targetText": "what the group members actually did in their discussion",
+            "targetParagraphId": "para-2023-i-reading-d-4",
+            "relationType": "paraphrase",
+            "note": "选项 discussion process 是原文 what the group members actually did in their discussion 的概括同义替换。"
+          }
+        ]
+      },
+      "q-2023-i-035": {
+        "skill": {
+          "primary": "attitude"
+        },
+        "questionFocus": "考查作者对Navajas研究所持的态度。",
+        "stemTranslationZh": "作者对Navajas的研究持何种态度？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "不明确的。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeAttitude",
+              "sourceQuote": "the potential implications for group discussion and decision-making are enormous",
+              "sourceHighlight": "enormous",
+              "optionText": "Unclear.",
+              "optionHighlight": "Unclear",
+              "explanation": "作者明确指出研究意义巨大，态度清晰正面，选项“不明确”与原文鲜明的肯定态度相反。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "轻视的。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeAttitude",
+              "sourceQuote": "the potential implications for group discussion and decision-making are enormous",
+              "sourceHighlight": "enormous",
+              "optionText": "Dismissive.",
+              "optionHighlight": "Dismissive",
+              "explanation": "作者称研究潜在意义巨大，是积极肯定，选项“轻视”与作者态度完全相反。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "怀疑的。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overstatement",
+              "sourceQuote": "Although the studies led by Navajas have limitations and many questions remain",
+              "sourceHighlight": "have limitations and many questions remain",
+              "optionText": "Doubtful.",
+              "optionHighlight": "Doubtful",
+              "explanation": "作者只是用 Although 让步承认研究有局限、仍有问题，主句仍肯定其意义巨大；把这点局限夸大为整体“怀疑”是范围偷换。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "赞许的。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2023-i-reading-d-4",
+                "quote": "the potential implications for group discussion and decision-making are enormous",
+                "anchor": "潜在意义巨大"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Approving.",
+            "sourceRole": "correctOption",
+            "targetText": "the potential implications for group discussion and decision-making are enormous",
+            "targetParagraphId": "para-2023-i-reading-d-4",
+            "relationType": "paraphrase",
+            "note": "作者用 implications are enormous 表达积极评价，对应选项 Approving 的赞许态度。"
+          }
+        ]
+      }
+    }
+  }
+}

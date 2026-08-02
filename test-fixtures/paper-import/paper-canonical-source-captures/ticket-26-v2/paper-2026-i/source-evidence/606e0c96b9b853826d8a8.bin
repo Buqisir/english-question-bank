@@ -1,0 +1,104 @@
+{
+  "schemaVersion": "import-meta-v1",
+  "paperId": "paper-2026-i",
+  "sourceFileName": "paper.pdf",
+  "sourceFileSha256": "31a87069e6d530afba9123eec0487adf45e52e0b98530af80b62476f169e4d0f",
+  "importedBy": "paper-import-ai",
+  "importedAt": "2026-07-08T07:10:21.284Z",
+  "paper": {
+    "year": 2026,
+    "region": "全国新课标Ⅰ",
+    "paperName": "2026年新课标Ⅰ卷",
+    "examCode": "2026-i",
+    "subject": "English",
+    "sourceType": "真题",
+    "defaultTags": [
+      "真题",
+      "2026",
+      "新课标Ⅰ卷"
+    ]
+  },
+  "groups": {
+    "group-2026-i-reading-a": {
+      "groupId": "group-2026-i-reading-a",
+      "difficulty": "中",
+      "summary": "本文是一则围绕洛杉矶 SoFi 体育场的实用信息类应用文，介绍即将举行的橄榄球赛事、附近酒店以及停车规则。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading A"
+    },
+    "group-2026-i-reading-b": {
+      "groupId": "group-2026-i-reading-b",
+      "difficulty": "中",
+      "summary": "记叙文。作者通过儿子 Kevin 不会用纸质词典这件小事，回忆自己 13 岁得到第一本词典、用铅笔标记查过的词以记录进步的经历，最终领悟到学习的关键不在于词汇本身或学习方式，而在于求知的渴望与好奇心。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading B"
+    },
+    "group-2026-i-reading-c": {
+      "groupId": "group-2026-i-reading-c",
+      "difficulty": "中",
+      "summary": "文章报道一项新研究：纽约市大力植树本是绿化好事，但主流树种橡树与枫香树释放的异戊二烯会与污染物反应生成地面臭氧，可能反而恶化空气质量；研究者与公园部门科学家就如何取舍给出不同侧重的看法。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading C"
+    },
+    "group-2026-i-reading-d": {
+      "groupId": "group-2026-i-reading-d",
+      "difficulty": "中",
+      "summary": "本文报道剑桥大学心理学家的一项实验，探究“主动评判艺术之美”相较于“仅仅观看艺术”对认知（尤其是抽象思维）的影响。文章依次介绍实验设计、抽象思维得分结果、情绪状态测量的用意，并以研究者的结论收尾。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading D"
+    },
+    "group-2026-i-seven-choices": {
+      "groupId": "group-2026-i-seven-choices",
+      "difficulty": "中",
+      "summary": "本文说明 AI（机器学习与算法）如何全方位重塑博物馆：从个性化参观、文物保护、儿童教育到未来的伦理与隐私挑战。七选五五空分别落在首段总起句、第一段虚拟导览衔接、第二段修复能力衔接、第三段分龄教育概述与末段隐私议题。",
+      "tags": [
+        "七选五"
+      ],
+      "displayTitleOverride": "七选五"
+    },
+    "group-2026-i-cloze": {
+      "groupId": "group-2026-i-cloze",
+      "difficulty": "中",
+      "summary": "完形填空",
+      "tags": [
+        "完形填空"
+      ],
+      "displayTitleOverride": "完形填空"
+    },
+    "group-2026-i-grammar-fill": {
+      "groupId": "group-2026-i-grammar-fill",
+      "difficulty": "中",
+      "summary": "语法填空",
+      "tags": [
+        "语法填空"
+      ],
+      "displayTitleOverride": "语法填空"
+    },
+    "group-2026-i-writing-application": {
+      "groupId": "group-2026-i-writing-application",
+      "difficulty": "中",
+      "summary": "应用文写作",
+      "tags": [
+        "应用文写作"
+      ],
+      "displayTitleOverride": "应用文写作"
+    },
+    "group-2026-i-writing-continuation": {
+      "groupId": "group-2026-i-writing-continuation",
+      "difficulty": "中",
+      "summary": "读后续写",
+      "tags": [
+        "读后续写"
+      ],
+      "displayTitleOverride": "读后续写"
+    }
+  }
+}

@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict'
 import { readFile } from 'node:fs/promises'
 import manifestV40 from '../standards/paper-canonical/manifest-v40.json' with { type: 'json' }
+import manifestV41 from '../standards/paper-canonical/manifest-v41.json' with { type: 'json' }
 import {
   canonicalAuthorityRef,
   resolveCanonicalAuthority,
@@ -17,9 +18,17 @@ import {
 import * as trustedImport from '../server/paper-canonical/trustedDocxCanonicalImport.mjs'
 
 const root = new URL('..', import.meta.url)
-const capturePath = 'test-fixtures/paper-import/paper-canonical-source-captures/ticket-26-v1/paper-2020-i/source-capture-v1.json'
+const predecessorCapturePath = 'test-fixtures/paper-import/paper-canonical-source-captures/ticket-26-v1/paper-2020-i/source-capture-v1.json'
+const capturePath = 'test-fixtures/paper-import/paper-canonical-source-captures/ticket-26-v2/paper-2020-i/source-capture-v1.json'
 const captureBytes = new Uint8Array(await readFile(new URL(capturePath, root)))
-const batch = JSON.parse(await readFile(new URL('test-fixtures/paper-import/paper-canonical-source-captures/ticket-26-v1/batch-evidence.json', root), 'utf8'))
+const predecessorBatch = JSON.parse(await readFile(new URL('test-fixtures/paper-import/paper-canonical-source-captures/ticket-26-v1/batch-evidence.json', root), 'utf8'))
+const batch = JSON.parse(await readFile(new URL('test-fixtures/paper-import/paper-canonical-source-captures/ticket-26-v2/batch-evidence.json', root), 'utf8'))
+const paper2026CapturePath = 'test-fixtures/paper-import/paper-canonical-source-captures/ticket-26-v2/paper-2026-i/source-capture-v1.json'
+const paper2026CaptureBytes = new Uint8Array(await readFile(new URL(paper2026CapturePath, root)))
+const paper2026FrozenAssetBytes = new Uint8Array(await readFile(new URL('app/public/paper-assets/paper-2026-i/latest/paper-asset.json', root)))
+const paper2026FrozenAsset = JSON.parse(new TextDecoder().decode(paper2026FrozenAssetBytes))
+const paper2026FrozenAnswers = JSON.parse(await readFile(new URL('app/public/paper-assets/paper-2026-i/latest/answer-key.json', root), 'utf8'))
+const paper2026FrozenFigures = JSON.parse(await readFile(new URL('app/public/paper-assets/paper-2026-i/latest/figures/manifest.json', root), 'utf8'))
 const semanticOracles = JSON.parse(await readFile(new URL('test-fixtures/paper-import/paper-canonical-legacy-source-adapter/semantic-oracles-v1.json', root), 'utf8'))
 const { confirmCanonicalCandidate, importCanonicalCandidate } = trustedImport
 
@@ -103,6 +112,44 @@ function candidateWithReboundDigest(candidate) {
   return { ...candidate, candidateDigest: digestJson(body) }
 }
 
+assert.equal(predecessorBatch.batchDigest, 'sha256:f0e783ac08b9e42b606359a390360359e12e6996a1ed9d31bf82d69d959c8c41')
+assert.equal(predecessorBatch.membership.frozenPaperCount, 33)
+assert.deepEqual(predecessorBatch.membership.excludedPaperIds, ['paper-2025-i', 'paper-2026-i'])
+assert.equal(predecessorBatch.membership.materializedPaperCount, 31)
+assert.equal(predecessorBatch.membership.paperIds.length, 31)
+assert.equal(new Set(predecessorBatch.membership.paperIds).size, 31)
+assert.equal(predecessorBatch.membership.paperIds.includes('paper-2026-i'), false)
+assert.equal(predecessorBatch.atomicBatch.mode, 'all_or_none')
+assert.equal(batch.membership.frozenPaperCount, 33)
+assert.equal(batch.batchDigest, 'sha256:64e0d1f4db7ff530710a3f73803a382bef6a2d10d737d926f8fbd6800f99acf5')
+assert.deepEqual(batch.membership.excludedPaperIds, ['paper-2025-i'])
+assert.equal(batch.membership.materializedPaperCount, 32)
+assert.equal(batch.membership.paperIds.includes('paper-2026-i'), true)
+assert.equal(batch.atomicBatch.mode, 'all_or_none')
+assert.equal(batch.atomicBatch.preservesExistingBytes, true)
+assert.deepEqual(
+  batch.membership.paperIds.filter((paperId) => paperId !== 'paper-2026-i'),
+  predecessorBatch.membership.paperIds,
+  'v2 must add exactly paper-2026-i to the immutable predecessor membership',
+)
+for (const paperId of predecessorBatch.membership.paperIds) {
+  const predecessorBytes = new Uint8Array(await readFile(new URL(
+    `test-fixtures/paper-import/paper-canonical-source-captures/ticket-26-v1/${paperId}/source-capture-v1.json`,
+    root,
+  )))
+  const v2Bytes = new Uint8Array(await readFile(new URL(
+    `test-fixtures/paper-import/paper-canonical-source-captures/ticket-26-v2/${paperId}/source-capture-v1.json`,
+    root,
+  )))
+  assert.deepEqual(v2Bytes, predecessorBytes, `${paperId} must retain byte-identical predecessor source capture evidence`)
+}
+assert.deepEqual(
+  captureBytes,
+  new Uint8Array(await readFile(new URL(predecessorCapturePath, root))),
+  'the representative predecessor capture must remain byte-identical in v2',
+)
+assert.equal(sha256(paper2026CaptureBytes), 'sha256:398b386bd2a1d343a96623232d81914b5d5fb6f8308d188761bd9f224f4a84cd')
+
 const resolved = resolveTicket26LegacySourceCapture(captureBytes)
 assert.ok(resolved, 'the exact committed Ticket 26 capture must resolve through the trusted registry')
 assert.equal(resolved.paperId, 'paper-2020-i')
@@ -152,13 +199,20 @@ assert.equal(source.groups.find((group) => group.slotId === 'writing.application
 assert.equal(source.groups.find((group) => group.slotId === 'writing.continuation').writingTask.continuationStarters.length, 2)
 
 const legacyAuthority = resolveCanonicalAuthority(trustedLegacyCaptureCandidateAuthorityRef)
+const legacyV41Authority = resolveCanonicalAuthority({
+  manifestId: manifestV41.manifestId,
+  manifestVersion: manifestV41.version,
+  manifestDigest: digestJson(manifestV41),
+})
 assert.equal(legacyAuthority.ok, true)
+assert.equal(legacyV41Authority.ok, true, 'the prior v41 authority must remain resolvable')
 assert.equal(canonicalAuthorityRef.manifestVersion, '36', 'the migration source adapter must not advance current/publication authority')
 assert.equal(trustedDocxCandidateAuthorityRef.manifestVersion, '37', 'the DOCX candidate seam must retain v37')
-assert.equal(trustedLegacyCaptureCandidateAuthorityRef.manifestVersion, '41')
-assert.equal(legacyAuthority.closure.artifacts.adapter.adapters.find((entry) => entry.adapterId === 'ticket-26-legacy-source-capture').version, '3')
+assert.equal(trustedLegacyCaptureCandidateAuthorityRef.manifestVersion, '42')
+assert.equal(legacyV41Authority.closure.artifacts.adapter.adapters.find((entry) => entry.adapterId === 'ticket-26-legacy-source-capture').version, '3')
+assert.equal(legacyAuthority.closure.artifacts.adapter.adapters.find((entry) => entry.adapterId === 'ticket-26-legacy-source-capture').version, '4')
 assert.ok(legacyAuthority.closure.schemas['ticket-26-legacy-source-envelope-v1'])
-assert.equal(Object.hasOwn(compilerModule, 'compileTrustedLegacyCaptureCandidate'), false, 'ordinary callers must not reach the privileged v41 compiler')
+assert.equal(Object.hasOwn(compilerModule, 'compileTrustedLegacyCaptureCandidate'), false, 'ordinary callers must not reach the privileged v42 compiler')
 assert.deepEqual(Object.keys(trustedImport).sort(), ['confirmCanonicalCandidate', 'importCanonicalCandidate'])
 
 const firstImport = importCanonicalCandidate(legacyInput(captureBytes))
@@ -166,7 +220,7 @@ const secondImport = importCanonicalCandidate(legacyInput(captureBytes))
 assert.deepEqual(firstImport, secondImport, 'exact legacy capture derivation must be deterministic')
 assert.ok(firstImport.candidate, 'the exact committed capture must produce an Import Candidate')
 assert.equal(firstImport.candidate.schemaVersion, 'trusted-ticket-26-legacy-import-candidate-v1')
-assert.equal(firstImport.candidate.authority.manifestVersion, '41')
+assert.equal(firstImport.candidate.authority.manifestVersion, '42')
 assert.equal(firstImport.candidate.source.sha256, sha256(captureBytes))
 assert.equal(firstImport.candidate.source.byteLength, captureBytes.byteLength)
 assert.equal(firstImport.candidate.source.paperId, 'paper-2020-i', 'paper identity must be resolved from the trusted binding')
@@ -183,13 +237,23 @@ const genericBypass = compilerModule.compileCanonicalPaper({
   ...buildTicket26LegacyCompilerRequest(captureBytes),
   authority: trustedLegacyCaptureCandidateAuthorityRef,
 })
-assert.equal('canonicalPaper' in genericBypass.artifacts, false, 'generic compilation must not bypass Teacher Confirmation for v41')
+assert.equal('canonicalPaper' in genericBypass.artifacts, false, 'generic compilation must not bypass Teacher Confirmation for v42')
 assert.ok(genericBypass.artifacts.normalizationReport.diagnostics.some((item) => item.code === 'AUTHORITY_RETIRED'))
 
 const docxBytes = new Uint8Array(await readFile(new URL('test-fixtures/paper-import/paper-2025-i-docx-source-adapter/2025-nck1-answer-source.docx', root)))
 const docxCandidate = importCanonicalCandidate(docxBytes, { originalName: '2025-nck1-answer-source.docx' })
 assert.equal(docxCandidate.candidate?.schemaVersion, 'trusted-docx-import-candidate-v1', 'existing DOCX input must retain its source type and candidate schema')
 assert.equal(docxCandidate.candidate?.authority.manifestVersion, '37', 'existing DOCX input must retain v37 authority')
+const paper2026DocxAttempt = importCanonicalCandidate(
+  paper2026FrozenAssetBytes,
+  { originalName: 'paper-2026-i-paper-asset.json' },
+)
+assert.equal(paper2026DocxAttempt.candidate, null, 'paper-2026-i frozen JSON must never become a DOCX candidate')
+assert.deepEqual(
+  paper2026DocxAttempt.issues.map(({ code }) => code),
+  ['DOCX_SOURCE_DOCUMENT_INVALID'],
+  'the v37 DOCX adapter must reject paper-2026-i non-DOCX source bytes',
+)
 
 const arbitraryJson = new TextEncoder().encode(JSON.stringify({
   schemaVersion: 'source-capture-v1',
@@ -230,11 +294,23 @@ changedRole.documents[2].roles = ['asset-projection']
 const changedRoleResult = importCanonicalCandidate(legacyInput(new TextEncoder().encode(JSON.stringify(changedRole))))
 assert.deepEqual(changedRoleResult.issues.map(({ code }) => code), ['TICKET_26_LEGACY_CAPTURE_UNTRUSTED'], 'changed nested source roles must be rejected')
 
-const otherCapture = JSON.parse(await readFile(new URL('test-fixtures/paper-import/paper-canonical-source-captures/ticket-26-v1/paper-2020-bing/source-capture-v1.json', root), 'utf8'))
+const otherCapture = JSON.parse(await readFile(new URL('test-fixtures/paper-import/paper-canonical-source-captures/ticket-26-v2/paper-2020-bing/source-capture-v1.json', root), 'utf8'))
 const swappedAnswerKey = structuredClone(captureJson)
 swappedAnswerKey.documents[2] = otherCapture.documents.find((document) => document.roles[0] === 'official-answer-lead')
 const swappedAnswerResult = importCanonicalCandidate(legacyInput(new TextEncoder().encode(JSON.stringify(swappedAnswerKey))))
 assert.deepEqual(swappedAnswerResult.issues.map(({ code }) => code), ['TICKET_26_LEGACY_CAPTURE_UNTRUSTED'], 'a swapped official answer key must be rejected')
+
+const paper2026CaptureJson = JSON.parse(new TextDecoder().decode(paper2026CaptureBytes))
+assert.equal(paper2026CaptureJson.digest, 'sha256:0212a1e5f5cfe2b7c9e2ea0550ac1e6b029b05838324856c1356cd8c3e129a15')
+const changedFigureMedia = structuredClone(paper2026CaptureJson)
+const figureMediaIndex = changedFigureMedia.documents.findIndex((document) => document.roles[0] === 'figure-media')
+assert.notEqual(figureMediaIndex, -1, 'paper-2026-i capture must carry its frozen PNG as figure media')
+changedFigureMedia.documents[figureMediaIndex].encodedBytes = `${changedFigureMedia.documents[figureMediaIndex].encodedBytes.slice(0, -2)}AA`
+assert.deepEqual(
+  importCanonicalCandidate(legacyInput(new TextEncoder().encode(JSON.stringify(changedFigureMedia)))).issues.map(({ code }) => code),
+  ['TICKET_26_LEGACY_CAPTURE_UNTRUSTED'],
+  'a caller-substituted Figure PNG cannot become legacy source authority',
+)
 
 for (const oracle of semanticOracles.oracles) {
   const oracleBytes = new Uint8Array(await readFile(new URL(oracle.source.relativePath, root)))
@@ -278,7 +354,7 @@ assert.deepEqual(synchronizedConfirmation.unresolvedIssues.map(({ code }) => cod
 
 const allSources = await Promise.all(batch.membership.paperIds.map(async (paperId) => {
   const bytes = new Uint8Array(await readFile(new URL(
-    `test-fixtures/paper-import/paper-canonical-source-captures/ticket-26-v1/${paperId}/source-capture-v1.json`,
+    `test-fixtures/paper-import/paper-canonical-source-captures/ticket-26-v2/${paperId}/source-capture-v1.json`,
     root,
   )))
   const trusted = resolveTicket26LegacySourceCapture(bytes)
@@ -290,10 +366,10 @@ const allSources = await Promise.all(batch.membership.paperIds.map(async (paperI
   const candidate = importCanonicalCandidate(legacyInput(bytes))
   assert.ok(candidate.candidate, `${paperId} must enter the shared candidate seam`)
   assert.equal(candidate.candidate.source.paperId, paperId, `${paperId} identity must come from the trusted registry`)
-  assert.equal(candidate.candidate.authority.manifestVersion, '41')
+  assert.equal(candidate.candidate.authority.manifestVersion, '42')
   return { paperId, bytes, projected, candidate: candidate.candidate }
 }))
-assert.equal(allSources.length, 31, 'the full Ticket 26 batch must project 31 of 31 captures')
+assert.equal(allSources.length, 32, 'the full Ticket 26 batch must project 32 of 32 captures')
 assert.deepEqual(
   [...new Set(allSources.map(({ projected }) => projected.profileId))].sort(),
   ['national-legacy', 'nck1', 'zhejiang-legacy'],
@@ -301,6 +377,96 @@ assert.deepEqual(
 )
 
 const sourceByPaperId = new Map(allSources.map((entry) => [entry.paperId, entry.projected]))
+const paper2026Entry = allSources.find((entry) => entry.paperId === 'paper-2026-i')
+const paper2026Resolved = resolveTicket26LegacySourceCapture(paper2026CaptureBytes)
+assert.ok(paper2026Entry, 'paper-2026-i must enter the same 32-paper legacy source batch')
+assert.ok(paper2026Resolved, 'paper-2026-i must resolve only through its exact v2 capture bytes')
+assert.equal(paper2026Resolved.capture.path, paper2026CapturePath)
+assert.deepEqual(
+  paper2026Resolved.documents.map(({ role, inputKey, mediaType }) => ({ role, inputKey, mediaType })),
+  [
+    { role: 'asset-projection', inputKey: 'latest_asset_projection', mediaType: 'application/json' },
+    { role: 'source-provenance', inputKey: 'latest_source_provenance', mediaType: 'application/json' },
+    { role: 'official-answer-lead', inputKey: 'latest_official_answer_lead', mediaType: 'application/json' },
+    { role: 'figure-inventory', inputKey: 'latest_figure_inventory', mediaType: 'application/json' },
+    { role: 'figure-media', inputKey: 'latest_figure_media_fig_paper_2026_i_reading_a_table_1', mediaType: 'image/png' },
+  ],
+  'paper-2026-i must carry only its exact frozen JSON source documents plus declared figure inventory and PNG',
+)
+const paper2026Source = paper2026Entry.projected
+assert.equal(paper2026Source.profileId, 'nck1')
+assert.equal(paper2026Source.groups.length, 9)
+assert.equal(paper2026Source.assertions.length, 45)
+assert.deepEqual(
+  paper2026Source.groups.map((group) => group.groupId),
+  paper2026FrozenAsset.layoutTree.parts
+    .flatMap((part) => part.sections)
+    .flatMap((section) => section.groups)
+    .map((group) => group.groupId),
+  'paper-2026-i must retain frozen legacy group order',
+)
+for (const answer of Object.values(paper2026FrozenAnswers.answers)) {
+  assert.equal(
+    paper2026Source.assertions.find((candidate) => candidate.questionId === answer.questionId)?.answer,
+    answer.answer,
+    `${answer.questionId} must remain bound to the exact frozen official answer key`,
+  )
+}
+const paper2026ReadingA = paper2026Source.groups.find((group) => group.groupId === 'group-2026-i-reading-a')
+const paper2026Figure = paper2026FrozenFigures.figures[0]
+const paper2026FigureDocument = paper2026Resolved.documents.find((document) => document.role === 'figure-media')
+const paper2026InventoryDocument = paper2026Resolved.documents.find((document) => document.role === 'figure-inventory')
+const paper2026FigureMediaSpan = paper2026Resolved.captureValue.observations.find((observation) => observation.documentId === paper2026FigureDocument.documentId && observation.kind === 'immutable_source_document').sourceSpanId
+const paper2026FigureInventorySpan = paper2026Resolved.captureValue.observations.find((observation) => observation.documentId === paper2026InventoryDocument.documentId && observation.kind === 'immutable_source_document').sourceSpanId
+const paper2026FigureBlock = paper2026ReadingA.content.blocks.find((block) => block.kind === 'figure')
+assert.deepEqual(
+  paper2026FigureBlock,
+  {
+    kind: 'figure',
+    nodeId: `figure:${paper2026Figure.figureId}`,
+    mediaId: paper2026Figure.figureId,
+    caption: [{
+      kind: 'text',
+      nodeId: `text:figure:${paper2026Figure.figureId}:caption`,
+      text: paper2026Figure.caption,
+    }],
+  },
+  'the frozen marker must become one opaque Figure, not invented table rows or cells',
+)
+assert.deepEqual(
+  paper2026ReadingA.media,
+  [{
+    mediaId: paper2026Figure.figureId,
+    mimeType: 'image/png',
+    sha256: paper2026FigureDocument.sha256,
+    pixelWidth: 1780,
+    pixelHeight: 348,
+    sourceArtifactRef: { artifactId: paper2026FigureDocument.immutableArtifactRef.artifactId },
+  }],
+  'the Figure media must close the exact frozen PNG bytes and dimensions',
+)
+const frozenReadingAParagraph = paper2026FrozenAsset.content.groups['group-2026-i-reading-a'].passage.paragraphs[2]
+assert.equal(
+  blockText(paper2026ReadingA.content, frozenReadingAParagraph.paragraphId),
+  frozenReadingAParagraph.text.slice(paper2026Figure.placeholderMarker.length),
+  'the Figure marker replacement must preserve every remaining frozen paragraph character and order',
+)
+assert.equal(contentText(paper2026ReadingA.content).includes(paper2026Figure.placeholderMarker), false)
+assert.deepEqual(
+  paper2026ReadingA.sourceSpanRefsByTarget[`media:${paper2026Figure.figureId}`],
+  [paper2026FigureMediaSpan, paper2026FigureInventorySpan],
+  'Figure media must be source-mapped to its exact PNG and frozen inventory declaration',
+)
+assert.deepEqual(
+  paper2026ReadingA.sourceSpanRefsByTarget[`content_node:figure:${paper2026Figure.figureId}`],
+  [paper2026ReadingA.sourceSpanId, paper2026FigureInventorySpan, paper2026FigureMediaSpan],
+  'Figure placement must bind the legacy marker, inventory declaration, and PNG source spans',
+)
+assert.deepEqual(
+  paper2026Entry.candidate.source.documents.map(({ role, sha256: digest, byteLength }) => ({ role, digest, byteLength })),
+  paper2026Resolved.documents.map(({ role, sha256: digest, byteLength }) => ({ role, digest, byteLength })),
+  'paper-2026-i Candidate must consume only the exact trusted capture documents',
+)
 const legacyV40Authority = resolveCanonicalAuthority({
   manifestId: manifestV40.manifestId,
   manifestVersion: manifestV40.version,
@@ -451,7 +617,7 @@ assert.equal(
 const applicationGroups = allSources.flatMap(({ paperId, projected }) => projected.groups
   .filter((group) => group.family === 'application-writing')
   .map((group) => ({ paperId, group })))
-assert.equal(applicationGroups.length, 22)
+assert.equal(applicationGroups.length, 23)
 for (const { paperId, group } of applicationGroups) {
   assert.equal(group.writingTask?.taskType, 'application', `${paperId} must retain its explicit task type`)
   for (const field of ['situation', 'contentRequirements', 'givenSkeleton', 'response', 'answerRegion']) {
@@ -588,7 +754,7 @@ assert.deepEqual(
   [],
   'the bounded legacy source adaptations must close every frozen Ticket 26 paper without unresolved output',
 )
-assert.equal(confirmations.filter((item) => item.disposition === 'canonical').length, 31)
+assert.equal(confirmations.filter((item) => item.disposition === 'canonical').length, 32)
 assert.equal(confirmations.filter((item) => item.disposition === 'unresolved').length, 0)
 for (const { paperId, result } of confirmations) {
   assert.equal(
@@ -615,6 +781,18 @@ assert.deepEqual(
     .filter((assertion) => unmatchedGrammar.questionIds.includes(assertion.questionId)),
   'Teacher Confirmation must preserve the numeric Grammar Fill answer identities',
 )
+const paper2026Confirmation = confirmations.find(({ paperId }) => paperId === 'paper-2026-i').result
+assert.ok(paper2026Confirmation.canonicalPaper, 'paper-2026-i exact source must confirm to one complete unpublished Canonical Paper')
+assert.equal(paper2026Confirmation.canonicalPaper.paperPlan.completeness.status, 'complete')
+assert.equal('publication' in paper2026Confirmation, false)
+assert.deepEqual(
+  {
+    trustedLegacyJson: confirmations.filter((item) => item.disposition === 'canonical').length,
+    trustedDocxV37: Number(Boolean(docxCandidate.candidate)),
+  },
+  { trustedLegacyJson: 32, trustedDocxV37: 1 },
+  'zero-write accounting must close 32 legacy JSON inputs plus the sole v37 DOCX seam input',
+)
 const dryRun = process.argv.includes('--dry-run')
 const unresolved = dryRun ? confirmations : []
 const unresolvedPaperIds = unresolved.filter((item) => item.disposition === 'unresolved').map((item) => item.paperId)
@@ -632,6 +810,6 @@ console.log(JSON.stringify({
   status: 'PASS',
   paperId: source.paperId,
   groupCount: source.groups.length,
-  candidateAccounting: { candidates: allSources.length, expected: 31 },
+  candidateAccounting: { candidates: allSources.length, expected: 32, combinedTrustedInputs: allSources.length + Number(Boolean(docxCandidate.candidate)) },
   ...(dryRun ? { unresolvedPaperIds, unresolvedByCodeSet } : {}),
 }))

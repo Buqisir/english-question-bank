@@ -1,0 +1,106 @@
+{
+  "schemaVersion": "import-meta-v1",
+  "paperId": "paper-zj-2026-jan",
+  "sourceFileName": "source.docx",
+  "sourceFileSha256": "b6575a69964381568fd5ed4da655efac4818a7df73a4407bb3e967d4fc070d06",
+  "importedBy": "paper-import-ai",
+  "importedAt": "2026-06-09T05:22:18.431Z",
+  "paper": {
+    "year": 2026,
+    "region": "浙江",
+    "paperName": "2026年1月浙江卷",
+    "examCode": "zj-2026-jan",
+    "subject": "English",
+    "sourceType": "真题",
+    "defaultTags": [
+      "真题",
+      "2026",
+      "浙江卷",
+      "1月",
+      "新高考全国卷一"
+    ]
+  },
+  "groups": {
+    "group-zj-2026-jan-reading-a": {
+      "groupId": "group-zj-2026-jan-reading-a",
+      "difficulty": "中",
+      "summary": "本文是一则应用文（公共艺术征集启事），来自加拿大 Burlington 市公共艺术项目，面向本地艺术家与作家征集作品，用于在 Beachway 多功能步道沿线的临时标牌上展示，配合安大略文化节。文中给出报酬、项目时间线及投稿要求。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading A"
+    },
+    "group-zj-2026-jan-reading-b": {
+      "groupId": "group-zj-2026-jan-reading-b",
+      "difficulty": "中",
+      "summary": "一位教师以第一人称叙述自己如何把个人爱好（尤其是对汽车的热爱）带入课堂，用以打破学生的错误观念、激发学习兴趣，并在此过程中意外地拉近了师生关系，最终把这一做法发展为自己的教学理念。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading B"
+    },
+    "group-zj-2026-jan-reading-c": {
+      "groupId": "group-zj-2026-jan-reading-c",
+      "difficulty": "中",
+      "summary": "本文是一篇说明文，介绍了一项关于假评论（fake reviews）的研究。文章先指出消费者喜爱评论但很多评论是假的，随后说明研究的实验设计，再呈现研究发现：人们更信任负面评论且容易被假的负面评论欺骗，长度、细节和情感的缺失会增强假评论的可信度，最后指出AI正越来越多地用于撰写假评论，使其更难被识别。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading C"
+    },
+    "group-zj-2026-jan-reading-d": {
+      "groupId": "group-zj-2026-jan-reading-d",
+      "difficulty": "中",
+      "summary": "本文为科普说明文，介绍 Salk Institute 的科学家如何借助原为追踪动物运动而开发的 AI 软件 SLEAP，分析植物根系表型，进而设计能储存更多二氧化碳的“气候拯救植物”，体现了跨学科合作的价值。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading D"
+    },
+    "group-zj-2026-jan-seven-choices": {
+      "groupId": "group-zj-2026-jan-seven-choices",
+      "difficulty": "中",
+      "summary": "本文讨论阅读中的“回读”(regression)现象：区分因走神而回读（浪费时间）与因真正没读懂而回读（合理的修复策略），并给出保持专注、克服回读坏习惯的方法。",
+      "tags": [
+        "七选五"
+      ],
+      "displayTitleOverride": "七选五"
+    },
+    "group-zj-2026-jan-cloze": {
+      "groupId": "group-zj-2026-jan-cloze",
+      "difficulty": "中",
+      "summary": "完形填空",
+      "tags": [
+        "完形填空"
+      ],
+      "displayTitleOverride": "完形填空"
+    },
+    "group-zj-2026-jan-grammar-fill": {
+      "groupId": "group-zj-2026-jan-grammar-fill",
+      "difficulty": "中",
+      "summary": "语法填空",
+      "tags": [
+        "语法填空"
+      ],
+      "displayTitleOverride": "语法填空"
+    },
+    "group-zj-2026-jan-writing-application": {
+      "groupId": "group-zj-2026-jan-writing-application",
+      "difficulty": "中",
+      "summary": "应用文写作",
+      "tags": [
+        "应用文写作"
+      ],
+      "displayTitleOverride": "应用文写作"
+    },
+    "group-zj-2026-jan-writing-continuation": {
+      "groupId": "group-zj-2026-jan-writing-continuation",
+      "difficulty": "中",
+      "summary": "读后续写",
+      "tags": [
+        "读后续写"
+      ],
+      "displayTitleOverride": "读后续写"
+    }
+  }
+}

@@ -1,0 +1,104 @@
+{
+  "schemaVersion": "import-meta-v1",
+  "paperId": "paper-2025-ii",
+  "sourceFileName": "2025年新课标Ⅱ卷-答案版.docx",
+  "sourceFileSha256": "8f69042d114cf90601c818d1178d895c69213ad2667cb432e4e2f06e4d59e6c2",
+  "importedBy": "paper-import-ai",
+  "importedAt": "2026-06-05T07:27:42.783Z",
+  "paper": {
+    "year": 2025,
+    "region": "全国新课标Ⅱ",
+    "paperName": "2025年新课标Ⅱ卷",
+    "examCode": "2025-ii",
+    "subject": "English",
+    "sourceType": "真题",
+    "defaultTags": [
+      "真题",
+      "2025",
+      "新课标Ⅱ卷"
+    ]
+  },
+  "groups": {
+    "group-2025-ii-reading-a": {
+      "groupId": "group-2025-ii-reading-a",
+      "difficulty": "中",
+      "summary": "本文是一篇应用文（旅游推介），介绍英国值得一游的几座集镇（market towns），分别概述每座小镇的历史特色、可看可玩之处与代表性体验。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading A"
+    },
+    "group-2025-ii-reading-b": {
+      "groupId": "group-2025-ii-reading-b",
+      "difficulty": "中",
+      "summary": "本文介绍 Kathy Ho 在 Lucile Packard 儿童医院斯坦福分院（LPCH）内开办的医院学校。她教授住院患儿，工作中身兼教练、顾问与安慰者等多重角色；身心健康优先于学业，但帮助孩子跟上学习进度对他们的康复与心理都至关重要。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading B"
+    },
+    "group-2025-ii-reading-c": {
+      "groupId": "group-2025-ii-reading-c",
+      "difficulty": "中",
+      "summary": "本文是一篇说明文，借由网店店主 Detrinidad 的成功案例引出居家时间增加带动室内植物产业爆发的现象，并通过研究者 Knuth 的研究阐述植物对人身心健康（降压、提升学业与工作效率）的益处，最后给出养护植物的心态建议。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading C"
+    },
+    "group-2025-ii-reading-d": {
+      "groupId": "group-2025-ii-reading-d",
+      "difficulty": "中",
+      "summary": "本文介绍纽约市 Blue Hill 餐厅在三月开展的一项名为 wastED 的限时实验：将菜单改为专门使用通常会被丢弃的食材，以提高人们对食物浪费问题的关注。文章从作者对浪费食物的个人感受切入，引出餐饮业食物浪费现状、实验内容、数据支撑、食材来源说明，最后交代实验作为短期项目已结束并升华主题。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading D"
+    },
+    "group-2025-ii-seven-choices": {
+      "groupId": "group-2025-ii-seven-choices",
+      "difficulty": "中",
+      "summary": "本篇为说明文，主题是“以家庭为单位做志愿服务的意外好处”。文章用一个引入段加四个带小标题（bullet）的分述段，分别从“感觉时间更多”“更长寿/身体健康”“对孩子和青少年的终身影响”“与家人共度更多时光”四个角度展开，结构清晰，属于典型的“总—分”小标题式七选五。",
+      "tags": [
+        "七选五"
+      ],
+      "displayTitleOverride": "七选五"
+    },
+    "group-2025-ii-cloze": {
+      "groupId": "group-2025-ii-cloze",
+      "difficulty": "中",
+      "summary": "完形填空",
+      "tags": [
+        "完形填空"
+      ],
+      "displayTitleOverride": "完形填空"
+    },
+    "group-2025-ii-grammar-fill": {
+      "groupId": "group-2025-ii-grammar-fill",
+      "difficulty": "中",
+      "summary": "语法填空",
+      "tags": [
+        "语法填空"
+      ],
+      "displayTitleOverride": "语法填空"
+    },
+    "group-2025-ii-writing-application": {
+      "groupId": "group-2025-ii-writing-application",
+      "difficulty": "中",
+      "summary": "应用文写作",
+      "tags": [
+        "应用文写作"
+      ],
+      "displayTitleOverride": "应用文写作"
+    },
+    "group-2025-ii-writing-continuation": {
+      "groupId": "group-2025-ii-writing-continuation",
+      "difficulty": "中",
+      "summary": "读后续写",
+      "tags": [
+        "读后续写"
+      ],
+      "displayTitleOverride": "读后续写"
+    }
+  }
+}

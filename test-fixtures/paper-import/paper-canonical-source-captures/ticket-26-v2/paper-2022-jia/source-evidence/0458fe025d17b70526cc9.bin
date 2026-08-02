@@ -1,0 +1,86 @@
+{
+  "schemaVersion": "import-meta-v1",
+  "paperId": "paper-2022-jia",
+  "sourceFileName": "2022年全国甲卷-答案版.docx",
+  "sourceFileSha256": "690f068167b4e0f8827716b830cc224fb171ab79d4970dfc4febf3df4b81be39",
+  "importedBy": "paper-import-ai",
+  "importedAt": "2026-06-19T08:35:49.943Z",
+  "paper": {
+    "year": 2022,
+    "region": "全国甲卷",
+    "paperName": "2022年全国甲卷",
+    "examCode": "2022-jia",
+    "subject": "English",
+    "sourceType": "真题",
+    "defaultTags": [
+      "真题",
+      "2022",
+      "全国甲卷"
+    ]
+  },
+  "groups": {
+    "group-2022-jia-reading-a": {
+      "groupId": "group-2022-jia-reading-a",
+      "difficulty": "中",
+      "summary": "应用文（旅游/娱乐场所介绍），介绍威尔士卡迪夫四个剧院与娱乐场所：St David's Hall、The Glee Club、Sherman Cymru、New Theatre，逐条给出特色、演出类型与地址网址。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading A"
+    },
+    "group-2022-jia-reading-b": {
+      "groupId": "group-2022-jia-reading-b",
+      "difficulty": "中",
+      "summary": "本文是一篇科普说明文，介绍了一项关于戈芬氏凤头鹦鹉（Goffin's cockatoos）形状识别能力的实验。研究发现这种鹦鹉具备与两岁人类幼儿类似的“以自我为参照系”的空间认知能力，能够通过视觉识别选择正确形状的“钥匙”取出箱中的坚果。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading B"
+    },
+    "group-2022-jia-reading-c": {
+      "groupId": "group-2022-jia-reading-c",
+      "difficulty": "中",
+      "summary": "本文是一篇人物记叙文，讲述71岁的Ginni Bazlinton自幼热爱旅行，退休后独自前往南极的难忘经历，以及这段旅程让她意识到南极是一片应被人类尊重和保护的珍贵土地。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading C"
+    },
+    "group-2022-jia-reading-d": {
+      "groupId": "group-2022-jia-reading-d",
+      "difficulty": "中",
+      "summary": "本文是一篇游记随笔，作者游历澳大利亚悉尼，通过与渡轮驾驶员 Andrew、城市官方历史学家 Shirley、年轻商人 Anthony 的交谈，探讨悉尼在现代化进程中传统与进步之间的矛盾，以及这座城市“既古老又年轻”的独特魅力。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading D"
+    },
+    "group-2022-jia-seven-choices": {
+      "groupId": "group-2022-jia-seven-choices",
+      "difficulty": "中",
+      "summary": "本文是一篇说明文，介绍世界各地外出就餐时需要了解的文化餐桌礼节。文章用小标题分块，分别讲筷子礼节、用手还是用餐具、提出要求三类情境，最后落到一条总规律。七选五的五个空分布在引言句、各分项段落与结尾，分别考查主旨概括、指代衔接、并列转折与“the more…the more”结构。",
+      "tags": [
+        "七选五"
+      ],
+      "displayTitleOverride": "七选五"
+    },
+    "group-2022-jia-cloze": {
+      "groupId": "group-2022-jia-cloze",
+      "difficulty": "中",
+      "summary": "完形填空",
+      "tags": [
+        "完形填空"
+      ],
+      "displayTitleOverride": "完形填空"
+    },
+    "group-2022-jia-grammar-fill": {
+      "groupId": "group-2022-jia-grammar-fill",
+      "difficulty": "中",
+      "summary": "语法填空",
+      "tags": [
+        "语法填空"
+      ],
+      "displayTitleOverride": "语法填空"
+    }
+  }
+}

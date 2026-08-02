@@ -1,0 +1,104 @@
+{
+  "schemaVersion": "import-meta-v1",
+  "paperId": "paper-2024-i",
+  "sourceFileName": "2024年新课标Ⅰ卷-答案版.docx",
+  "sourceFileSha256": "ad26ff39e1d8a0cd34de1a52e0836bb6f6e3888ad5f6c8be843c4f5ce015d55a",
+  "importedBy": "paper-import-ai",
+  "importedAt": "2026-06-05T07:27:42.021Z",
+  "paper": {
+    "year": 2024,
+    "region": "全国新课标Ⅰ",
+    "paperName": "2024年新课标Ⅰ卷",
+    "examCode": "2024-i",
+    "subject": "English",
+    "sourceType": "真题",
+    "defaultTags": [
+      "真题",
+      "2024",
+      "新课标Ⅰ卷"
+    ]
+  },
+  "groups": {
+    "group-2024-i-reading-a": {
+      "groupId": "group-2024-i-reading-a",
+      "difficulty": "中",
+      "summary": "本文是一则招募 Habitat Restoration Team（栖息地修复团队）志愿者的应用文广告，介绍了活动宗旨、团体报名、年龄与技能要求、需携带物品以及近期活动安排。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading A"
+    },
+    "group-2024-i-reading-b": {
+      "groupId": "group-2024-i-reading-b",
+      "difficulty": "中",
+      "summary": "本文是一篇人物/说明类记叙文，介绍兽医 Dr. William Farber 推行的“holistic” medicine（整体疗法），即把西医传统疗法与针灸、按摩疗法、草药结合。文章通过 Farber 自身经历、宠物病例和协会增长数据，说明这种疗法日益受到认可。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading B"
+    },
+    "group-2024-i-reading-c": {
+      "groupId": "group-2024-i-reading-c",
+      "difficulty": "中",
+      "summary": "本文探讨纸质阅读与数字阅读（含音频、视频）在理解与学习效果上的差异，论证纸质阅读在需要深度思考的任务上更有优势，并提醒教育者不要假设所有媒介效果相同。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading C"
+    },
+    "group-2024-i-reading-d": {
+      "groupId": "group-2024-i-reading-d",
+      "difficulty": "中",
+      "summary": "本文是一篇科普说明文，介绍斯坦福大学一项关于生物多样性记录的研究。文章指出如今的生物多样性记录多为照片、视频等数字观察数据，虽便于收集，但研究发现这类观察数据存在偏差，并给出改进建议。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading D"
+    },
+    "group-2024-i-seven-choices": {
+      "groupId": "group-2024-i-seven-choices",
+      "difficulty": "中",
+      "summary": "本文是一篇关于作家如何使用词典与同义词词典的说明性短文，作者强调拼写正确对投稿的重要性，并分享自己偏爱纸质工具书、词典的多重用途以及阅读词典本身可以是一种乐趣。七选五考查段落内及段落间的衔接与逻辑关系。",
+      "tags": [
+        "七选五"
+      ],
+      "displayTitleOverride": "七选五"
+    },
+    "group-2024-i-cloze": {
+      "groupId": "group-2024-i-cloze",
+      "difficulty": "中",
+      "summary": "完形填空",
+      "tags": [
+        "完形填空"
+      ],
+      "displayTitleOverride": "完形填空"
+    },
+    "group-2024-i-grammar-fill": {
+      "groupId": "group-2024-i-grammar-fill",
+      "difficulty": "中",
+      "summary": "语法填空",
+      "tags": [
+        "语法填空"
+      ],
+      "displayTitleOverride": "语法填空"
+    },
+    "group-2024-i-writing-application": {
+      "groupId": "group-2024-i-writing-application",
+      "difficulty": "中",
+      "summary": "应用文写作",
+      "tags": [
+        "应用文写作"
+      ],
+      "displayTitleOverride": "应用文写作"
+    },
+    "group-2024-i-writing-continuation": {
+      "groupId": "group-2024-i-writing-continuation",
+      "difficulty": "中",
+      "summary": "读后续写",
+      "tags": [
+        "读后续写"
+      ],
+      "displayTitleOverride": "读后续写"
+    }
+  }
+}

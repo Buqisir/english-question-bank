@@ -1,0 +1,86 @@
+{
+  "schemaVersion": "import-meta-v1",
+  "paperId": "paper-2024-jia",
+  "sourceFileName": "2024年全国甲卷-答案版.docx",
+  "sourceFileSha256": "46665e1e6950c9a3202d3febe80fd98bbf631492e1d906659c6e559eb6bc0784",
+  "importedBy": "paper-import-ai",
+  "importedAt": "2026-06-19T09:01:45.540Z",
+  "paper": {
+    "year": 2024,
+    "region": "全国甲卷",
+    "paperName": "2024年全国甲卷",
+    "examCode": "2024-jia",
+    "subject": "English",
+    "sourceType": "真题",
+    "defaultTags": [
+      "真题",
+      "2024",
+      "全国甲卷"
+    ]
+  },
+  "groups": {
+    "group-2024-jia-reading-a": {
+      "groupId": "group-2024-jia-reading-a",
+      "difficulty": "中",
+      "summary": "本文是一则哈佛 ARTS FIRST 艺术节的活动宣传单，先总述艺术节性质，再分条介绍水彩、无脊椎动物手工、陶轮拉坯、编织等多个面向公众的艺术体验项目。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading A"
+    },
+    "group-2024-jia-reading-b": {
+      "groupId": "group-2024-jia-reading-b",
+      "difficulty": "中",
+      "summary": "本文是一篇说明文，介绍猫表达需求与认知环境的几种独特方式：用喵叫与人交流、用嗅觉判断环境和辨识主人、以及把户外的小物件叼回送给主人。全文以猫的行为为线索，逐段展开。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading B"
+    },
+    "group-2024-jia-reading-c": {
+      "groupId": "group-2024-jia-reading-c",
+      "difficulty": "中",
+      "summary": "本文是一篇说明性新闻报道，介绍俄罗斯政府资助的医疗列车 Saint Lukas。这趟列车不载普通乘客，只为中部和东部偏远乡村地区的居民提供基础医疗服务，借此缓解俄罗斯农村地区医疗资源匮乏的问题。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading C"
+    },
+    "group-2024-jia-reading-d": {
+      "groupId": "group-2024-jia-reading-d",
+      "difficulty": "中",
+      "summary": "本文是一篇议论性记叙文，作者从大学时与教授讨论小说结局的经历出发，引出对“结局”的思考，进而引出本期《Writer's Digest》以“如何写好结局”为主题，向读者推荐相关内容。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading D"
+    },
+    "group-2024-jia-seven-choices": {
+      "groupId": "group-2024-jia-seven-choices",
+      "difficulty": "中",
+      "summary": "本文是一篇说明文，主题为“适度饮食”（moderation），即只吃身体所需的量、吃到满足而不过饱。全文先界定 moderation 的含义，再分点给出实现适度饮食的若干建议：放慢进食速度、与他人共餐并远离不健康零食、控制情绪化进食、全天合理分配饮食。七选五的五个空分布在首段定义处和各建议段的段首/段中，主要考查段首主题句的概括能力以及与上下文的话题场对齐和逻辑衔接。",
+      "tags": [
+        "七选五"
+      ],
+      "displayTitleOverride": "七选五"
+    },
+    "group-2024-jia-cloze": {
+      "groupId": "group-2024-jia-cloze",
+      "difficulty": "中",
+      "summary": "完形填空",
+      "tags": [
+        "完形填空"
+      ],
+      "displayTitleOverride": "完形填空"
+    },
+    "group-2024-jia-grammar-fill": {
+      "groupId": "group-2024-jia-grammar-fill",
+      "difficulty": "中",
+      "summary": "语法填空",
+      "tags": [
+        "语法填空"
+      ],
+      "displayTitleOverride": "语法填空"
+    }
+  }
+}

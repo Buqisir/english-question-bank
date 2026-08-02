@@ -20,12 +20,16 @@ export const TICKET_26_LEGACY_CAPTURE_MEDIA_TYPE = 'application/vnd.eqb.ticket-2
 export const TICKET_26_LEGACY_SOURCE_ENVELOPE_MEDIA_TYPE = 'application/vnd.eqb.ticket-26-legacy-source-envelope+json'
 
 const repositoryRoot = fileURLToPath(new URL('../../', import.meta.url)).replace(/\/$/, '')
-const batchRelativePath = 'test-fixtures/paper-import/paper-canonical-source-captures/ticket-26-v1/batch-evidence.json'
+const batchRelativePath = 'test-fixtures/paper-import/paper-canonical-source-captures/ticket-26-v2/batch-evidence.json'
 const manifestRelativePath = 'docs/cuts/paper-canonical-unification/migration/manifest-v1.json'
 const ledgerRelativePath = 'docs/cuts/paper-canonical-unification/migration/ledger-v1.json'
 const expectedRoles = ['asset-projection', 'source-provenance', 'official-answer-lead']
+const figureInventoryRole = 'figure-inventory'
+const figureMediaRole = 'figure-media'
+const legacySourceAdapterVersion = '4'
 const textDecoder = new TextDecoder()
 const textEncoder = new TextEncoder()
+const pngSignature = [137, 80, 78, 71, 13, 10, 26, 10]
 
 let trustedRegistry
 
@@ -50,6 +54,10 @@ function sameStrings(left, right) {
     && Array.isArray(right)
     && left.length === right.length
     && left.every((value, index) => value === right[index])
+}
+
+function roleToken(value) {
+  return String(value).replace(/[^a-z0-9]+/gi, '_').toLowerCase()
 }
 
 function repositoryFile(relativePath) {
@@ -114,19 +122,32 @@ function inventoryForPaper(manifest, paperId) {
   return paper
 }
 
-function documentForRole(capture, role) {
-  const documents = capture.documents.filter((document) => sameStrings(document?.roles, [role]))
-  if (documents.length !== 1) fail(`capture must have exactly one ${role} document`)
+function documentForExpected(capture, expected) {
+  const documents = Array.isArray(capture.documents)
+    ? capture.documents.filter((document) => (
+        document?.inputKey === expected.inputKey
+        && sameStrings(document?.roles, [expected.role])
+      ))
+    : []
+  if (documents.length !== 1) fail(`capture must have exactly one ${expected.role} document for ${expected.inputKey}`)
   return documents[0]
 }
 
+function inventoryRoleForCaptureRole(role) {
+  return role === figureMediaRole ? 'corpus-extra' : role
+}
+
+function mediaTypeForCaptureRole(role) {
+  return role === figureMediaRole ? 'image/png' : 'application/json'
+}
+
 function validateNestedDocument({ capture, expected, inventoryPaper }) {
-  const document = documentForRole(capture, expected.role)
+  const document = documentForExpected(capture, expected)
   if (
     document.inputKey !== expected.inputKey
     || document.sha256 !== expected.sha256
     || document.byteLength !== expected.byteLength
-    || document.mediaType !== 'application/json'
+    || document.mediaType !== mediaTypeForCaptureRole(expected.role)
     || document.originalName !== basename(expected.path)
   ) {
     fail(`${expected.paperId} ${expected.role} capture metadata does not match the committed batch`)
@@ -134,7 +155,7 @@ function validateNestedDocument({ capture, expected, inventoryPaper }) {
   const inventoryFile = inventoryPaper.latestTree.files.find((file) => file?.path === expected.path)
   if (
     !inventoryFile
-    || inventoryFile.role !== expected.role
+    || inventoryFile.role !== inventoryRoleForCaptureRole(expected.role)
     || prefixedDigest(inventoryFile.sha256) !== expected.sha256
     || inventoryFile.byteLength !== expected.byteLength
   ) {
@@ -163,7 +184,42 @@ function validateNestedDocument({ capture, expected, inventoryPaper }) {
   ) {
     fail(`${expected.paperId} ${expected.role} immutable artifact identity drifted`)
   }
-  return { ...document, role: expected.role, bytes, value: parseJson(bytes, `${expected.paperId} ${expected.role}`) }
+  return {
+    ...document,
+    role: expected.role,
+    bytes,
+    value: document.mediaType === 'application/json'
+      ? parseJson(bytes, `${expected.paperId} ${expected.role}`)
+      : null,
+  }
+}
+
+function validateBatchSourceDocuments(batchPaper) {
+  const documents = batchPaper.sourceDocuments
+  if (!Array.isArray(documents)) fail(`${batchPaper.paperId} source documents are not ordered`)
+  const roles = documents.map((document) => document?.role)
+  const knownRoles = new Set([...expectedRoles, figureInventoryRole, figureMediaRole])
+  if (roles.some((role) => !knownRoles.has(role))) fail(`${batchPaper.paperId} has an unsupported captured source role`)
+  if (!sameStrings(roles.slice(0, expectedRoles.length), expectedRoles)) {
+    fail(`${batchPaper.paperId} required source document role order drifted`)
+  }
+  const inventories = documents.filter((document) => document?.role === figureInventoryRole)
+  const media = documents.filter((document) => document?.role === figureMediaRole)
+  if (inventories.length === 0 && media.length === 0 && documents.length === expectedRoles.length) return
+  if (
+    inventories.length !== 1
+    || media.length === 0
+    || documents.length !== expectedRoles.length + 1 + media.length
+    || documents[expectedRoles.length]?.role !== figureInventoryRole
+    || documents.slice(expectedRoles.length + 1).some((document) => document?.role !== figureMediaRole)
+  ) {
+    fail(`${batchPaper.paperId} figure evidence must be one inventory followed by its PNG media`)
+  }
+  const inputKeys = documents.map((document) => document?.inputKey)
+  const paths = documents.map((document) => document?.path)
+  if (new Set(inputKeys).size !== inputKeys.length || new Set(paths).size !== paths.length) {
+    fail(`${batchPaper.paperId} captured source document identities are not unique`)
+  }
 }
 
 function validateMaterializedDocumentShapes(record) {
@@ -192,6 +248,129 @@ function validateMaterializedDocumentShapes(record) {
   }
 }
 
+function pngDimensions(bytes, label) {
+  if (
+    !(bytes instanceof Uint8Array)
+    || bytes.byteLength < 24
+    || pngSignature.some((byte, index) => bytes[index] !== byte)
+    || bytes[8] !== 0
+    || bytes[9] !== 0
+    || bytes[10] !== 0
+    || bytes[11] !== 13
+    || String.fromCharCode(...bytes.slice(12, 16)) !== 'IHDR'
+  ) fail(`${label} is not a closed PNG source document`)
+  const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength)
+  const pixelWidth = view.getUint32(16)
+  const pixelHeight = view.getUint32(20)
+  if (pixelWidth < 1 || pixelHeight < 1) fail(`${label} has no positive PNG dimensions`)
+  return { pixelWidth, pixelHeight }
+}
+
+function sourceSpanIdForDocument(record, document) {
+  const observations = Array.isArray(record.captureValue.observations)
+    ? record.captureValue.observations.filter((item) => (
+        item?.kind === 'immutable_source_document'
+        && item.documentId === document?.documentId
+      ))
+    : []
+  if (observations.length !== 1 || typeof observations[0].sourceSpanId !== 'string') {
+    fail(`${record.paperId} lacks one immutable source span for ${document?.inputKey || 'an unknown document'}`)
+  }
+  return observations[0].sourceSpanId
+}
+
+/**
+ * A frozen figure inventory is a generic source bridge, not a table parser.
+ * It can project a figure only when the inventory identifies one existing
+ * image, one Reading group, and one exact source marker. The image stays an
+ * opaque Figure because frozen legacy JSON does not contain table-cell labels.
+ */
+function trustedFigureEvidence(record, asset) {
+  const inventoryDocuments = record.documents.filter((document) => document.role === figureInventoryRole)
+  const mediaDocuments = record.documents.filter((document) => document.role === figureMediaRole)
+  if (inventoryDocuments.length === 0 && mediaDocuments.length === 0) return []
+  if (inventoryDocuments.length !== 1 || mediaDocuments.length === 0) {
+    fail(`${record.paperId} figure capture does not close one inventory and its media`)
+  }
+  const inventory = inventoryDocuments[0].value
+  if (
+    !isRecordValue(inventory)
+    || !exactKeys(inventory, ['schemaVersion', 'paperId', 'figures'])
+    || inventory.schemaVersion !== 'paper-figures-manifest-v1'
+    || inventory.paperId !== record.paperId
+    || !Array.isArray(inventory.figures)
+    || inventory.figures.length === 0
+  ) fail(`${record.paperId} figure inventory is not a closed frozen source declaration`)
+
+  const mediaByInputKey = new Map(mediaDocuments.map((document) => [document.inputKey, document]))
+  if (mediaByInputKey.size !== mediaDocuments.length) fail(`${record.paperId} figure media input keys are not unique`)
+  const figureIds = new Set()
+  const markers = new Set()
+  const figures = inventory.figures.map((figure, index) => {
+    const expectedMarker = `[${figure?.kind === 'table' ? '表' : figure?.kind === 'figure' ? '图' : ''}: ${figure?.figureId}]`
+    if (
+      !isRecordValue(figure)
+      || !exactKeys(figure, [
+        'figureId',
+        'groupId',
+        'kind',
+        'file',
+        'caption',
+        'sourceDocument',
+        'sourcePage',
+        'placeholderMarker',
+        'note',
+      ])
+      || typeof figure.figureId !== 'string'
+      || figure.figureId.length === 0
+      || typeof figure.groupId !== 'string'
+      || figure.groupId.length === 0
+      || !['figure', 'table'].includes(figure.kind)
+      || typeof figure.file !== 'string'
+      || figure.file.length === 0
+      || figure.file !== basename(figure.file)
+      || typeof figure.caption !== 'string'
+      || figure.caption.length === 0
+      || typeof figure.sourceDocument !== 'string'
+      || figure.sourceDocument.length === 0
+      || !Number.isInteger(figure.sourcePage)
+      || figure.sourcePage < 1
+      || typeof figure.note !== 'string'
+      || figure.placeholderMarker !== expectedMarker
+      || figureIds.has(figure.figureId)
+      || markers.has(figure.placeholderMarker)
+    ) fail(`${record.paperId} figure inventory entry ${index} is not an exact source declaration`)
+    const group = asset.content.groups[figure.groupId]
+    if (!isRecordValue(group) || group.groupType !== 'reading') {
+      fail(`${record.paperId} figure ${figure.figureId} does not name a stable Reading source group`)
+    }
+    const document = mediaByInputKey.get(`latest_${roleToken(figureMediaRole)}_${roleToken(figure.figureId)}`)
+    if (
+      !document
+      || document.mediaType !== 'image/png'
+      || document.originalName !== figure.file
+      || document.role !== figureMediaRole
+    ) fail(`${record.paperId} figure ${figure.figureId} is not bound to its declared frozen PNG`)
+    figureIds.add(figure.figureId)
+    markers.add(figure.placeholderMarker)
+    return {
+      caption: figure.caption,
+      document,
+      figureId: figure.figureId,
+      groupId: figure.groupId,
+      inventorySourceSpanId: sourceSpanIdForDocument(record, inventoryDocuments[0]),
+      mediaId: figure.figureId,
+      mediaSourceSpanId: sourceSpanIdForDocument(record, document),
+      placeholderMarker: figure.placeholderMarker,
+      ...pngDimensions(document.bytes, `${record.paperId} figure ${figure.figureId}`),
+    }
+  })
+  if (figures.length !== mediaDocuments.length) {
+    fail(`${record.paperId} figure inventory and PNG media do not close one-to-one`)
+  }
+  return figures
+}
+
 function buildTrustedRegistry() {
   const batchBytes = repositoryFile(batchRelativePath)
   const batch = parseJson(batchBytes, 'Ticket 26 batch evidence')
@@ -202,24 +381,22 @@ function buildTrustedRegistry() {
     || !Array.isArray(batch.papers)
     || !isRecordValue(batch.membership)
     || batch.membership.frozenPaperCount !== 33
-    || batch.membership.materializedPaperCount !== 31
-    || !sameStrings(batch.membership.excludedPaperIds, ['paper-2025-i', 'paper-2026-i'])
+    || batch.membership.materializedPaperCount !== 32
+    || !sameStrings(batch.membership.excludedPaperIds, ['paper-2025-i'])
     || !sameStrings(batch.membership.paperIds, batch.papers.map((paper) => paper?.paperId))
   ) {
     fail('batch identity, membership, or digest drifted')
   }
-  if (new Set(batch.membership.paperIds).size !== 31) fail('batch paper membership is not unique')
+  if (new Set(batch.membership.paperIds).size !== 32) fail('batch paper membership is not unique')
   const { manifest } = validateSourceAuthority(batch)
   const byCaptureDigest = new Map()
   for (const batchPaper of batch.papers) {
     if (!isRecordValue(batchPaper) || typeof batchPaper.paperId !== 'string' || !Array.isArray(batchPaper.sourceDocuments) || !isRecordValue(batchPaper.capture)) {
       fail('batch paper entry is malformed')
     }
-    const capturePath = `test-fixtures/paper-import/paper-canonical-source-captures/ticket-26-v1/${batchPaper.paperId}/source-capture-v1.json`
+    const capturePath = `test-fixtures/paper-import/paper-canonical-source-captures/ticket-26-v2/${batchPaper.paperId}/source-capture-v1.json`
     if (batchPaper.capture.path !== capturePath) fail(`${batchPaper.paperId} capture path is not its committed identity path`)
-    if (!sameStrings(batchPaper.sourceDocuments.map((document) => document?.role), expectedRoles)) {
-      fail(`${batchPaper.paperId} source document roles are not the exact Ticket 26 set`)
-    }
+    validateBatchSourceDocuments(batchPaper)
     const rawCaptureBytes = repositoryFile(capturePath)
     const capture = parseJson(rawCaptureBytes, `${batchPaper.paperId} source capture`)
     const base = captureBase(capture)
@@ -246,6 +423,7 @@ function buildTrustedRegistry() {
       documents,
     }
     validateMaterializedDocumentShapes(record)
+    record.figures = trustedFigureEvidence(record, record.documents.find((document) => document.role === 'asset-projection').value)
     const captureDigest = sha256(rawCaptureBytes)
     if (byCaptureDigest.has(captureDigest)) fail(`${batchPaper.paperId} capture bytes duplicate another paper`)
     byCaptureDigest.set(captureDigest, record)
@@ -324,11 +502,9 @@ function structuralSlot(group, readingIndex, writingTasks) {
 }
 
 function sourceSpanId(record, role) {
-  const document = record.documents.find((item) => item.role === role)
-  const observation = record.captureValue.observations
-    ?.find((item) => item?.value?.role === role && item.kind === 'immutable_source_document')
-  if (!document || !observation?.sourceSpanId) fail(`${record.paperId} lacks a ${role} source span`)
-  return observation.sourceSpanId
+  const documents = record.documents.filter((document) => document.role === role)
+  if (documents.length !== 1) fail(`${record.paperId} lacks exactly one ${role} source document`)
+  return sourceSpanIdForDocument(record, documents[0])
 }
 
 function inactiveSlotsForSource(profileId, assetSpanId) {
@@ -461,24 +637,74 @@ function passageContent(
   questions = [],
   blanks = {},
   acceptNumericGrammarMarkers = false,
+  figures = [],
 ) {
   const blankIdByQuestionNumber = blankIdsByQuestionNumber(questionIds, blankIds, questions)
   const promptByBlankId = new Map(blankIds.flatMap((blankId) => {
     const prompt = blanks[blankId]?.prompt
     return typeof prompt === 'string' && prompt.length > 0 ? [[blankId, prompt]] : []
   }))
-  return {
-    blocks: (group.passage?.paragraphs || []).map((paragraph, index) => ({
+  const figuresByMarker = new Map(figures.map((figure) => [figure.placeholderMarker, figure]))
+  if (figuresByMarker.size !== figures.length) fail(`${group.groupId} figure marker identities are not unique`)
+  const usedFigureIds = new Set()
+  const blocks = []
+  for (const [index, paragraph] of (group.passage?.paragraphs || []).entries()) {
+    const paragraphId = paragraph.paragraphId || `paragraph:${group.groupId}:${index + 1}`
+    const literal = String(paragraph.text || '')
+    const embeddedMarkers = [...figuresByMarker.keys()].filter((marker) => (
+      literal.includes(marker) && !literal.startsWith(marker)
+    ))
+    if (embeddedMarkers.length > 0) {
+      fail(`${group.groupId} figure marker must begin one exact frozen source paragraph`)
+    }
+    const matchedFigures = [...figuresByMarker.values()].filter((figure) => literal.startsWith(figure.placeholderMarker))
+    if (matchedFigures.length > 1) fail(`${group.groupId} has ambiguous frozen figure markers`)
+    const figure = matchedFigures[0]
+    if (figure) {
+      const remainder = literal.slice(figure.placeholderMarker.length)
+      if (remainder.length > 0 && !/^\s/u.test(remainder)) {
+        fail(`${group.groupId} figure marker has an unclosed frozen source boundary`)
+      }
+      if (usedFigureIds.has(figure.figureId)) fail(`${group.groupId} repeats frozen figure ${figure.figureId}`)
+      usedFigureIds.add(figure.figureId)
+      blocks.push({
+        kind: 'figure',
+        nodeId: `figure:${figure.figureId}`,
+        mediaId: figure.mediaId,
+        caption: textContent(`text:figure:${figure.figureId}:caption`, figure.caption),
+      })
+      if (remainder.length > 0) {
+        blocks.push({
+          kind: 'paragraph',
+          nodeId: paragraphId,
+          inlines: markerInlines(
+            paragraphId,
+            remainder,
+            blankIdByQuestionNumber,
+            promptByBlankId,
+            acceptNumericGrammarMarkers,
+          ),
+        })
+      }
+      continue
+    }
+    blocks.push({
       kind: 'paragraph',
-      nodeId: paragraph.paragraphId || `paragraph:${group.groupId}:${index + 1}`,
+      nodeId: paragraphId,
       inlines: markerInlines(
-        paragraph.paragraphId || `paragraph:${group.groupId}:${index + 1}`,
-        paragraph.text,
+        paragraphId,
+        literal,
         blankIdByQuestionNumber,
         promptByBlankId,
         acceptNumericGrammarMarkers,
       ),
-    })),
+    })
+  }
+  if (usedFigureIds.size !== figures.length) {
+    fail(`${group.groupId} does not place every frozen figure marker exactly once`)
+  }
+  return {
+    blocks,
   }
 }
 
@@ -594,7 +820,7 @@ function ticket26Observations(record, asset) {
     documentInputKey: inputKeyByDocumentId.get(observation.documentId),
     value: observation.value,
     span: { start: 0, end: byteLengthByInputKey.get(inputKeyByDocumentId.get(observation.documentId)) },
-    extraction: { adapterId: 'ticket-26-legacy-source-capture', version: '3' },
+    extraction: { adapterId: 'ticket-26-legacy-source-capture', version: legacySourceAdapterVersion },
   }))
   const assetDocument = record.documents.find((document) => document.role === 'asset-projection')
   for (const group of Object.values(asset.content.groups)) {
@@ -614,7 +840,7 @@ function ticket26Observations(record, asset) {
           ...(typeof blank?.prompt === 'string' && blank.prompt.length > 0 ? { prompt: blank.prompt } : {}),
         },
         span: { start: 0, end: assetDocument.byteLength },
-        extraction: { adapterId: 'ticket-26-legacy-source-capture', version: '3' },
+        extraction: { adapterId: 'ticket-26-legacy-source-capture', version: legacySourceAdapterVersion },
       })
     }
   }
@@ -677,9 +903,9 @@ function structuralVariant({ group, slot, questionIds, blankIds, questions, answ
 }
 
 /**
- * Project only fields that already have stable names in paper-asset-v1,
- * import-meta-v1, and answer-key-v1. This is intentionally structural: it
- * performs no title, prompt, marker, or family-content heuristic.
+ * Project only stable fields from the frozen legacy JSON documents. An optional
+ * paper-figures-manifest-v1 may replace one exact declared marker with an
+ * opaque Figure; it never infers a table grid or any unlabelled semantics.
  */
 export function deriveTicket26LegacySource(sourceCaptureBytes) {
   const record = resolveTicket26LegacySourceCapture(sourceCaptureBytes)
@@ -691,6 +917,12 @@ export function deriveTicket26LegacySource(sourceCaptureBytes) {
   const writingTasks = asset.content.writingTasks || {}
   const profileId = profileForStructuralShape(groups, writingTasks)
   const answersByQuestionId = answerByQuestionId(answerKey)
+  const figuresByGroupId = new Map()
+  for (const figure of record.figures || []) {
+    const current = figuresByGroupId.get(figure.groupId) || []
+    current.push(figure)
+    figuresByGroupId.set(figure.groupId, current)
+  }
   let readingIndex = 0
   const assetSpanId = sourceSpanId(record, 'asset-projection')
   const answerSpanId = sourceSpanId(record, 'official-answer-lead')
@@ -703,6 +935,7 @@ export function deriveTicket26LegacySource(sourceCaptureBytes) {
       fail(`${record.paperId} ${group.groupId} references a missing stable question`)
     }
     const questions = questionIds.map((questionId) => asset.content.questions[questionId])
+    const figures = figuresByGroupId.get(group.groupId) || []
     const content = slot.writingTask
       ? writingContent(group, slot.writingTask)
       : passageContent(
@@ -712,9 +945,15 @@ export function deriveTicket26LegacySource(sourceCaptureBytes) {
           questions,
           asset.content.blanks,
           slot.family === 'grammar-fill',
+          figures,
         )
     const sourceSpanRefsByTarget = {
       ...Object.fromEntries(blankIds.map((blankId) => [`blank:${blankId}`, [assetSpanId]])),
+      ...Object.fromEntries(figures.flatMap((figure) => [
+        [`media:${figure.mediaId}`, [figure.mediaSourceSpanId, figure.inventorySourceSpanId]],
+        [`content_node:figure:${figure.figureId}`, [assetSpanId, figure.inventorySourceSpanId, figure.mediaSourceSpanId]],
+        [`content_node:text:figure:${figure.figureId}:caption`, [figure.inventorySourceSpanId]],
+      ])),
       ...(slot.family === 'grammar-fill'
         ? Object.fromEntries(blankIds.map((blankId) => [
             `prompt_provision:${blankId}`,
@@ -730,7 +969,16 @@ export function deriveTicket26LegacySource(sourceCaptureBytes) {
       blankIds,
       sourceSpanId: assetSpanId,
       content,
-      media: [],
+      media: figures.map((figure) => ({
+        mediaId: figure.mediaId,
+        mimeType: 'image/png',
+        sha256: figure.document.sha256,
+        pixelWidth: figure.pixelWidth,
+        pixelHeight: figure.pixelHeight,
+        sourceArtifactRef: {
+          artifactId: figure.document.immutableArtifactRef.artifactId,
+        },
+      })),
       variant: structuralVariant({
         group,
         slot,
@@ -791,6 +1039,8 @@ const compilerRolesByCaptureRole = {
   'asset-projection': ['question_source', 'structured_source'],
   'source-provenance': ['source_provenance'],
   'official-answer-lead': ['official_answer_source'],
+  'figure-inventory': ['structured_source', 'source_provenance'],
+  'figure-media': ['question_source', 'source_provenance'],
 }
 
 function sameRoleSet(left, right) {
@@ -809,7 +1059,7 @@ export function inspectTicket26LegacyEnvelopeSource(sourceCaptureBytes) {
 }
 
 /**
- * Verify that the compiler request contains the exact three frozen documents
+ * Verify that the compiler request contains every exact frozen document
  * selected by the trusted capture, not look-alike caller-supplied JSON.
  */
 export function ticket26LegacyCompilerDocumentsMatch(record, documents) {
@@ -823,9 +1073,11 @@ export function ticket26LegacyCompilerDocumentsMatch(record, documents) {
   ) return false
   return record.documents.every((expected) => {
     const matches = documents.filter((document) => document.inputKey === expected.inputKey)
+    const expectedDocumentRoles = compilerRolesByCaptureRole[expected.role]
     return matches.length === 1
       && matches[0].mediaType === expected.mediaType
-      && sameRoleSet(matches[0].roles, compilerRolesByCaptureRole[expected.role])
+      && Array.isArray(expectedDocumentRoles)
+      && sameRoleSet(matches[0].roles, expectedDocumentRoles)
       && sameBytes(matches[0].bytes, expected.bytes)
   })
 }

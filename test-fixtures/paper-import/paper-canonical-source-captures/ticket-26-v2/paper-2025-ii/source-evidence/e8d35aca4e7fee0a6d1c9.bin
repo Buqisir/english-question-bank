@@ -1,0 +1,3367 @@
+{
+  "schemaVersion": "paper-asset-v1",
+  "paper": {
+    "paperId": "paper-2025-ii",
+    "title": "2025年新课标Ⅱ卷-答案版",
+    "subject": "English",
+    "source": "AI 导题",
+    "assetVersion": 1,
+    "status": "published"
+  },
+  "sources": {
+    "primarySourceType": "docx",
+    "docx": {
+      "fileName": "2025年新课标Ⅱ卷-答案版.docx",
+      "sha256": "8f69042d114cf90601c818d1178d895c69213ad2667cb432e4e2f06e4d59e6c2",
+      "sourcePath": "",
+      "sourceNote": "未上传答案解析版"
+    }
+  },
+  "layoutTree": {
+    "parts": [
+      {
+        "partId": "part-2025-ii-reading",
+        "title": "第二部分 阅读",
+        "sections": [
+          {
+            "sectionId": "section-2025-ii-reading-choice",
+            "title": "第一节 阅读理解",
+            "groups": [
+              {
+                "groupId": "group-2025-ii-reading-a",
+                "title": "Reading A"
+              },
+              {
+                "groupId": "group-2025-ii-reading-b",
+                "title": "Reading B"
+              },
+              {
+                "groupId": "group-2025-ii-reading-c",
+                "title": "Reading C"
+              },
+              {
+                "groupId": "group-2025-ii-reading-d",
+                "title": "Reading D"
+              }
+            ]
+          },
+          {
+            "sectionId": "section-2025-ii-reading-seven",
+            "title": "第二节 七选五",
+            "groups": [
+              {
+                "groupId": "group-2025-ii-seven-choices",
+                "title": "七选五"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "partId": "part-2025-ii-language",
+        "title": "第三部分 语言运用",
+        "sections": [
+          {
+            "sectionId": "section-2025-ii-cloze",
+            "title": "第一节 完形填空",
+            "groups": [
+              {
+                "groupId": "group-2025-ii-cloze",
+                "title": "完形填空"
+              }
+            ]
+          },
+          {
+            "sectionId": "section-2025-ii-grammar-fill",
+            "title": "第二节 语法填空",
+            "groups": [
+              {
+                "groupId": "group-2025-ii-grammar-fill",
+                "title": "语法填空"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "partId": "part-2025-ii-writing",
+        "title": "第四部分 写作",
+        "sections": [
+          {
+            "sectionId": "section-2025-ii-writing-application",
+            "title": "第一节 应用文写作",
+            "groups": [
+              {
+                "groupId": "group-2025-ii-writing-application",
+                "title": "应用文写作"
+              }
+            ]
+          },
+          {
+            "sectionId": "section-2025-ii-writing-continuation",
+            "title": "第二节 读后续写",
+            "groups": [
+              {
+                "groupId": "group-2025-ii-writing-continuation",
+                "title": "读后续写"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "content": {
+    "blocks": [
+      {
+        "type": "partHeading",
+        "partId": "part-2025-ii-reading",
+        "text": "第二部分 阅读"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-2025-ii-reading-choice",
+        "text": "第一节 阅读理解"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2025-ii-reading-a"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2025-ii-reading-b"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2025-ii-reading-c"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2025-ii-reading-d"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-2025-ii-reading-seven",
+        "text": "第二节 (共5小题；每小题2.5分，满分12.5分)"
+      },
+      {
+        "type": "instruction",
+        "text": "阅读下面短文，从短文后的选项中选出可以填入空白处的最佳选项。选项中有两项为多余选项。"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2025-ii-seven-choices"
+      },
+      {
+        "type": "pageBreakHint"
+      },
+      {
+        "type": "partHeading",
+        "partId": "part-2025-ii-language",
+        "text": "第三部分 语言运用(共两节，满分30分)"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-2025-ii-cloze",
+        "text": "第一节(共15小题；每小题1分，满分15分)"
+      },
+      {
+        "type": "instruction",
+        "text": "阅读下面短文，从每题所给的A、B、C、D四个选项中选出最佳选项。"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2025-ii-cloze"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-2025-ii-grammar-fill",
+        "text": "第二节(共10小题；每小题1.5分，满分15分)"
+      },
+      {
+        "type": "instruction",
+        "text": "阅读下面短文，在空白处填入1个适当的单词或括号内单词的正确形式。"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2025-ii-grammar-fill"
+      },
+      {
+        "type": "pageBreakHint"
+      },
+      {
+        "type": "partHeading",
+        "partId": "part-2025-ii-writing",
+        "text": "第四部分 写作（共两节，满分40分）"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-2025-ii-writing-application",
+        "text": "第一节（满分15分）"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2025-ii-writing-application"
+      },
+      {
+        "type": "instruction",
+        "text": "注意：\n（1）写作词数应为80个左右；\n（2）请按如下格式在答题卡的相应位置作答。"
+      },
+      {
+        "type": "answerBox",
+        "writingTaskId": "wt-2025-ii-application",
+        "label": "应用文写作答题区"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-2025-ii-writing-continuation",
+        "text": "第二节（满分25分）"
+      },
+      {
+        "type": "instruction",
+        "text": "阅读下面材料，根据其内容和所给段落开头语续写两段，使之构成一篇完整的短文。"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2025-ii-writing-continuation"
+      },
+      {
+        "type": "instruction",
+        "text": "注意：\n（1）续写词数应为150个左右；\n（2）请按如下格式在答题卡的相应位置作答。"
+      },
+      {
+        "type": "instruction",
+        "text": "Paragraph 1: In a class discussion, I was invited to explain the meaning of my name.\n\nParagraph 2: Many of my classmates got interested and came up to me after class."
+      },
+      {
+        "type": "answerBox",
+        "writingTaskId": "wt-2025-ii-continuation",
+        "label": "读后续写答题区"
+      }
+    ],
+    "groups": {
+      "group-2025-ii-reading-a": {
+        "groupId": "group-2025-ii-reading-a",
+        "groupType": "reading",
+        "title": "Reading A",
+        "questionIds": [
+          "q-2025-ii-021",
+          "q-2025-ii-022",
+          "q-2025-ii-023"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2025-ii-reading-a-1",
+              "text": "English Market Towns to Visit in the UK"
+            },
+            {
+              "paragraphId": "para-2025-ii-reading-a-2",
+              "text": "English market towns come in many shapes and sizes. Each has a personality shaped by the goods and services produced and traded for centuries. But each town has more to do than shop."
+            },
+            {
+              "paragraphId": "para-2025-ii-reading-a-3",
+              "text": "Hereford, Herefordshire"
+            },
+            {
+              "paragraphId": "para-2025-ii-reading-a-4",
+              "text": "Hereford has remained a lively market town since 1189. Skirting the town square, you’ll find lovely shops, eateries, and the Black and White House Museum. The Hereford Cathedral is the most impressive building in town. It’s also home to an ancient library. One of the four original copies of the Magna Carta is displayed there."
+            },
+            {
+              "paragraphId": "para-2025-ii-reading-a-5",
+              "text": "Ludlow, Shropshire"
+            },
+            {
+              "paragraphId": "para-2025-ii-reading-a-6",
+              "text": "Ludlow is known as the Foodie Center of England. Butcher shops, greengrocers, bakeries, and cheese shops line the town square. Bordering the square, the Ludlow Castle is a “must explore” medieval stronghold. The three-day Ludlow Food Festival is held each September."
+            },
+            {
+              "paragraphId": "para-2025-ii-reading-a-7",
+              "text": "Shrewsbury, Shropshire"
+            },
+            {
+              "paragraphId": "para-2025-ii-reading-a-8",
+              "text": "Getting to Shrewsbury Town Center from London is challenging but worth the anxiety. The River Severn has a significant turn through town, almost making an island of Shrewsbury Town Center. The shape creates a perfect market where goods could be shipped and received using the river as a highway. Flowers are everywhere-hanging baskets, window boxes, and planters-just what you imagine in an attractive English market town."
+            },
+            {
+              "paragraphId": "para-2025-ii-reading-a-9",
+              "text": "Mevagissey, Cornwall"
+            },
+            {
+              "paragraphId": "para-2025-ii-reading-a-10",
+              "text": "Even if you haven’t been to the small fishing village Mevagissey, you’ve probably seen it in a movie or British TV show. The working harbor (港口) took shape in 1774. Fishermen go out to sea daily and sell their fish in harbor-side markets. Don’t leave the harbor without a traditional Cornish pie. It’s delicious."
+            }
+          ]
+        }
+      },
+      "group-2025-ii-reading-b": {
+        "groupId": "group-2025-ii-reading-b",
+        "groupType": "reading",
+        "title": "Reading B",
+        "questionIds": [
+          "q-2025-ii-024",
+          "q-2025-ii-025",
+          "q-2025-ii-026",
+          "q-2025-ii-027"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2025-ii-reading-b-1",
+              "text": "Kathy Ho teaches high school inside Lucile Packard Children’s Hospital Stanford (LPCH). “Sometimes I don’t like saying that I’m a teacher,” says Ho. “People get in their minds an idea of what teachers do, but that’s not really what it is here.”"
+            },
+            {
+              "paragraphId": "para-2025-ii-reading-b-2",
+              "text": "“Here” is room 386, where each year, about 500 LPCH patients also become students. The hospital school is free of parents, doctors, and medical procedures. It’s a place of learning. About half of Ho’s students stay for a week or less; others are there for more than a year. Most of Ho’s students will recover, which means that preparing them to return to school is an increasingly important component of care."
+            },
+            {
+              "paragraphId": "para-2025-ii-reading-b-3",
+              "text": "Still, in room 386, academics don’t come first. Physical health and mental health are the priority. “If you’re scared about something and thinking only about that, there’s no way you’re going to be able to learn,” Ho says. “I’m a coach, an adviser, and a comforter, and that’s what it means to be a hospital teacher.”"
+            },
+            {
+              "paragraphId": "para-2025-ii-reading-b-4",
+              "text": "There are up to 30 students at any given time in Ho’s class. She generally works with their regular teachers to get lessons and tests being used at their home schools. Some teachers don’t give the kids any assignments; they express sympathy instead. “I feel like it is a disservice to the kids,” Ho says. “They think their teachers don’t care about their schoolwork.”"
+            },
+            {
+              "paragraphId": "para-2025-ii-reading-b-5",
+              "text": "Ho recognizes the psychological benefit of helping kids keep up with their peers (同龄人) outside the hospital. “I actually think the medicine is only a small piece for some problems,” says Julie Good, director of pain management services at LPCH. “It’s about problem-solving around what it means to have a full life. Those kids have dreams. School can keep those dreams alive by giving kids a way to learn and grow.”"
+            }
+          ]
+        }
+      },
+      "group-2025-ii-reading-c": {
+        "groupId": "group-2025-ii-reading-c",
+        "groupType": "reading",
+        "title": "Reading C",
+        "questionIds": [
+          "q-2025-ii-028",
+          "q-2025-ii-029",
+          "q-2025-ii-030",
+          "q-2025-ii-031"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2025-ii-reading-c-1",
+              "text": "When Sonja Detrinidad opened her online shop selling houseplants, she didn’t have high hopes for it. But the opposite happened: She was flooded, shipping out 1,200 orders in June of 2020 alone. In the past year, Detrinidad sent out more than 70,000 plants. Her success is just one example of increased time at home leading to an explosion in the houseplant industry."
+            },
+            {
+              "paragraphId": "para-2025-ii-reading-c-2",
+              "text": "“Plants are in fashion right now,” says Dr. Melinda Knuth, a researcher from the University of Florida. “People who live in plant-rich environments report a higher life satisfaction rating, ” she says. “Adding more nature to our environment can change our mood and how we think.” Plants can improve our state of mind in a few ways but the biggest is by decreasing our level of cortisol, the stress hormone (激素) in our body."
+            },
+            {
+              "paragraphId": "para-2025-ii-reading-c-3",
+              "text": "“Students who are around plants perform better academically than students who are in a classroom without plants,” says Knuth. “This productivity also translates into the workplace for adults. Our study showed that there was a 30% decrease in sick leave for people who were in plant-rich workplaces.”"
+            },
+            {
+              "paragraphId": "para-2025-ii-reading-c-4",
+              "text": "If you’re among the groups of people who are enjoying the mental and physical health benefits of surrounding yourself with plants, don’t beat yourself up if one (or a few!) doesn’t make it. “Doctors practice medicine and lawyers practice law and you should allow yourself the practice it takes to sustain a plant. Tending to plants is an exercise in patience and learning. Be invested in taking care of it, but if it dies, go get another one,” Detrinidad says."
+            }
+          ]
+        }
+      },
+      "group-2025-ii-reading-d": {
+        "groupId": "group-2025-ii-reading-d",
+        "groupType": "reading",
+        "title": "Reading D",
+        "questionIds": [
+          "q-2025-ii-032",
+          "q-2025-ii-033",
+          "q-2025-ii-034",
+          "q-2025-ii-035"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2025-ii-reading-d-1",
+              "text": "Does your soul die a little every time you throw away unused food? Mine does. Maybe that feeling comes from growing up in South Africa, where the phrase “there are children starving in Africa” was more of an uncomfortable reminder of fact than a prayer at dinner time."
+            },
+            {
+              "paragraphId": "para-2025-ii-reading-d-2",
+              "text": "Food waste is a growing concern in the restaurant, supermarket, and supply chain industries. From technological solutions to educational campaigns, food producers and sellers are looking for ways to use more of what we’re already growing. But last month, one popular New York City restaurant tried a different way: It changed its menu to exclusively (专门) offer food that would otherwise be thrown away."
+            },
+            {
+              "paragraphId": "para-2025-ii-reading-d-3",
+              "text": "For two weeks in March, Greenwich Village’s Blue Hill restaurant was renamed wastED, and served items like fried skate cartilage, a juice pulp burger, and a dumpster diver’s vegetable salad. Each dish was tailor-made to raise awareness regarding food waste."
+            },
+            {
+              "paragraphId": "para-2025-ii-reading-d-4",
+              "text": "A study by the Food Waste Alliance determined that the average restaurant generates 33 pounds of food waste for every 1,000 in revenue (收入) , and of that waste only 15.7% is donated or recycled. Up to 84.3% is simply thrown out. Restaurants like Silo in the UK have experimented with zero-waste systems, but wastED took the concept to its logical conclusion."
+            },
+            {
+              "paragraphId": "para-2025-ii-reading-d-5",
+              "text": "It should be noted that none of the items on wastED’s menu was technically made from garbage. Instead, all the ingredients (配料) used were examples of meat cuts and produce that most restaurants would never consider serving. Things like kale ribs, fish collars, rejected sweet potatoes, and cucumber butts were all re-appropriated and, with the help of a number of good chefs, turned into excellent cuisine."
+            },
+            {
+              "paragraphId": "para-2025-ii-reading-d-6",
+              "text": "Though wastED received enthusiastic reviews, it was designed from the start as a short-lived experiment; Blue Hill has since returned to its regular menu. Nevertheless, it serves as a reminder that there are many ways to address problems of sustainability, and that you can make an amazing meal out of almost anything."
+            }
+          ]
+        }
+      },
+      "group-2025-ii-seven-choices": {
+        "groupId": "group-2025-ii-seven-choices",
+        "groupType": "sevenChoices",
+        "title": "七选五",
+        "questionIds": [
+          "q-2025-ii-036",
+          "q-2025-ii-037",
+          "q-2025-ii-038",
+          "q-2025-ii-039",
+          "q-2025-ii-040"
+        ],
+        "blankIds": [
+          "blank-2025-ii-036",
+          "blank-2025-ii-037",
+          "blank-2025-ii-038",
+          "blank-2025-ii-039",
+          "blank-2025-ii-040"
+        ],
+        "optionBank": [
+          {
+            "label": "A",
+            "text": "Helping the community lowers rates of depression."
+          },
+          {
+            "label": "B",
+            "text": "Volunteering as a family may be just the thing you need."
+          },
+          {
+            "label": "C",
+            "text": "Volunteering has a lifelong effect on kids and teenagers."
+          },
+          {
+            "label": "D",
+            "text": "Volunteering can be the first step in breaking down prejudice."
+          },
+          {
+            "label": "E",
+            "text": "For adults, volunteering can provide significant physical health benefits."
+          },
+          {
+            "label": "F",
+            "text": "You may even learn that your kid has a talent you didn’t know about before."
+          },
+          {
+            "label": "G",
+            "text": "Volunteering makes you feel capable and inspires you to make the most of each day."
+          }
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2025-ii-seven-title",
+              "text": "Unexpected Benefits of Volunteering as a Family"
+            },
+            {
+              "paragraphId": "para-2025-ii-seven-p1",
+              "text": "Are you looking for a way to bring your family together? Hoping to find a hobby that can be shared by both the little ones and adults?  __36__  1   You may know the “feel-good” emotions that come with helping others, but there are even more unexpected ways volunteering will positively affect the whole family."
+            },
+            {
+              "paragraphId": "para-2025-ii-seven-p2",
+              "text": "●You’ll feel like you have more time."
+            },
+            {
+              "paragraphId": "para-2025-ii-seven-p3",
+              "text": "People often feel they are too busy to volunteer. Yet, research has found that giving your time to community causes actually makes you feel like you have more of it.  __37__  2"
+            },
+            {
+              "paragraphId": "para-2025-ii-seven-p4",
+              "text": "●You can live longer if you volunteer regularly."
+            },
+            {
+              "paragraphId": "para-2025-ii-seven-p5",
+              "text": "__38__  3   Washington University found that adults 55 and older who volunteered had better memory and maintained overall health longer than others their age. Volunteers are also more likely to look after their own health and are more focused on adding physical activity into their lives."
+            },
+            {
+              "paragraphId": "para-2025-ii-seven-p6",
+              "text": "●  __39__  4"
+            },
+            {
+              "paragraphId": "para-2025-ii-seven-p7",
+              "text": "Volunteering during teenage years has been linked to some major positive effects such as improved grades and increased self-confidence. These effects aren’t just short-term but have been proved to affect a teen’s well-being in the years to come."
+            },
+            {
+              "paragraphId": "para-2025-ii-seven-p8",
+              "text": "●You’ll have more time with family."
+            },
+            {
+              "paragraphId": "para-2025-ii-seven-p9",
+              "text": "Families who volunteer together have the unique experience of working toward a common goal.  __40__  5   Everyone brings something unique to the table and can connect with each other in a new way. And, there are tasks for every age and ability, so all your children can feel proud of their work."
+            }
+          ]
+        }
+      },
+      "group-2025-ii-cloze": {
+        "groupId": "group-2025-ii-cloze",
+        "groupType": "cloze",
+        "title": "完形填空",
+        "questionIds": [
+          "q-2025-ii-041",
+          "q-2025-ii-042",
+          "q-2025-ii-043",
+          "q-2025-ii-044",
+          "q-2025-ii-045",
+          "q-2025-ii-046",
+          "q-2025-ii-047",
+          "q-2025-ii-048",
+          "q-2025-ii-049",
+          "q-2025-ii-050",
+          "q-2025-ii-051",
+          "q-2025-ii-052",
+          "q-2025-ii-053",
+          "q-2025-ii-054",
+          "q-2025-ii-055"
+        ],
+        "blankIds": [
+          "blank-2025-ii-041",
+          "blank-2025-ii-042",
+          "blank-2025-ii-043",
+          "blank-2025-ii-044",
+          "blank-2025-ii-045",
+          "blank-2025-ii-046",
+          "blank-2025-ii-047",
+          "blank-2025-ii-048",
+          "blank-2025-ii-049",
+          "blank-2025-ii-050",
+          "blank-2025-ii-051",
+          "blank-2025-ii-052",
+          "blank-2025-ii-053",
+          "blank-2025-ii-054",
+          "blank-2025-ii-055"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2025-ii-cloze-title",
+              "text": "Evelyn Donohue is a 65-year-old grandma. She only started to __41__ seven years ago after having a __42__ call. She’d been struggling with eating disorders and health issues, which __43__ led her to getting surgery. After that experience, she knew that she needed to make a __44__ . Determined to turn her life around, Ms Donohue began to work out and follow a __45__ lifestyle, before discovering a __46__ for weightlifting."
+            },
+            {
+              "paragraphId": "para-2025-ii-cloze-p1",
+              "text": "Since setting out on the journey, the __47__ lover has not only managed to __48__ an impressive set of muscles – but also a huge following on social media."
+            },
+            {
+              "paragraphId": "para-2025-ii-cloze-p2",
+              "text": "The well-liked grandma regularly posts workout content, explaining there’s no __49__ others can’t look this good. She said it was all down to some key aspects."
+            },
+            {
+              "paragraphId": "para-2025-ii-cloze-p3",
+              "text": "“Hold on: Consider failure as a __50__ to success and never give up. Stick to your plan,” she said. “ __51__ others: Lift others up on your journey. Success is sweeter when __52__ .” She previously explained that “you do not need to have an amazing body to exercise... the __53__ is to feel good, not look good.”"
+            },
+            {
+              "paragraphId": "para-2025-ii-cloze-p4",
+              "text": "Ms Donohue used to be laughed at for being too old to work out, but she has proved the __54__ wrong in the best possible way and has indeed become an __55__ for many social media users."
+            }
+          ]
+        }
+      },
+      "group-2025-ii-grammar-fill": {
+        "groupId": "group-2025-ii-grammar-fill",
+        "groupType": "grammarFill",
+        "title": "语法填空",
+        "questionIds": [
+          "q-2025-ii-056",
+          "q-2025-ii-057",
+          "q-2025-ii-058",
+          "q-2025-ii-059",
+          "q-2025-ii-060",
+          "q-2025-ii-061",
+          "q-2025-ii-062",
+          "q-2025-ii-063",
+          "q-2025-ii-064",
+          "q-2025-ii-065"
+        ],
+        "blankIds": [
+          "blank-2025-ii-056",
+          "blank-2025-ii-057",
+          "blank-2025-ii-058",
+          "blank-2025-ii-059",
+          "blank-2025-ii-060",
+          "blank-2025-ii-061",
+          "blank-2025-ii-062",
+          "blank-2025-ii-063",
+          "blank-2025-ii-064",
+          "blank-2025-ii-065"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2025-ii-grammar-fill-title",
+              "text": "I was born and raised in Cleveland, Ohio in the United States. Yet now, I live in the countryside of Zhejiang, China with my Chinese husband and his family,  __56__bamboo and tea bushes (灌木) grow wild in the mountains, chickens are always free-range, and  __57__ (center) heating doesn’t exist."
+            },
+            {
+              "paragraphId": "para-2025-ii-grammar-fill-p1",
+              "text": "Nothing in my life before prepared me  __58__this one-and to be sure, the first time I came here I never imagined I would ever feel comfortable in this area. But it’s amazing how you can adapt  __59__learn in a new environment. Over time, I’ve found  __60__ (I) feeling extremely at home here. And in the process, I’ve experienced things that really surprise me at times. The “sunshine scent (香味) ” of freshly sunned clothes  __61__ (be) one of them."
+            },
+            {
+              "paragraphId": "para-2025-ii-grammar-fill-p2",
+              "text": "Growing up, my family and our neighbors never used clotheslines to dry clothing, denying me the chance  __62__ (discover) one of the great wonders of sunshine – the sweet “sunshine scent” after sunning clothes for an entire day. The sun-dried clothes smell especially pleasant where I live, thanks to the  __63__ (absent) of smog and plenty of blue sky  __64__ (afternoon) with lots of fresh air."
+            },
+            {
+              "paragraphId": "para-2025-ii-grammar-fill-p3",
+              "text": "If you’ve never experienced the “sunshine scent” from a sheet or shirt  __65__ (leave) to sun for a day, well, you’re missing out on one of life’s wonders."
+            }
+          ]
+        }
+      },
+      "group-2025-ii-writing-application": {
+        "groupId": "group-2025-ii-writing-application",
+        "groupType": "writing",
+        "title": "应用文写作",
+        "questionIds": [],
+        "writingTaskId": "wt-2025-ii-application",
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2025-ii-writing-app-title",
+              "text": "假定你是校英文报编辑李华，外教Chris上个月答应写一篇介绍加拿大体育运动的文章。请给 Chris写一封邮件，内容包括："
+            },
+            {
+              "paragraphId": "para-2025-ii-writing-app-p1",
+              "text": "(1)询问进展；"
+            },
+            {
+              "paragraphId": "para-2025-ii-writing-app-p2",
+              "text": "(2)提醒交稿时间。"
+            },
+            {
+              "paragraphId": "para-2025-ii-writing-app-p3",
+              "text": "(1)写作词数应为80个左右；"
+            },
+            {
+              "paragraphId": "para-2025-ii-writing-app-p4",
+              "text": "(2)请按如下格式在答题卡的相应位置作答。"
+            },
+            {
+              "paragraphId": "para-2025-ii-writing-app-p5",
+              "text": "Dear Chris,"
+            },
+            {
+              "paragraphId": "para-2025-ii-writing-app-p6",
+              "text": "Best wishes,"
+            },
+            {
+              "paragraphId": "para-2025-ii-writing-app-p7",
+              "text": "Li Hua"
+            }
+          ]
+        }
+      },
+      "group-2025-ii-writing-continuation": {
+        "groupId": "group-2025-ii-writing-continuation",
+        "groupType": "writing",
+        "title": "读后续写",
+        "questionIds": [],
+        "writingTaskId": "wt-2025-ii-continuation",
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2025-ii-writing-cont-title",
+              "text": "阅读下面材料，根据其内容和所给段落开头语续写两段，使之构成一篇完整的短文。"
+            },
+            {
+              "paragraphId": "para-2025-ii-writing-cont-p1",
+              "text": "“What is your name? ” is a question most frequently asked when people meet for the first time. But for me, it was the first challenge I encountered as an international student in Ireland."
+            },
+            {
+              "paragraphId": "para-2025-ii-writing-cont-p2",
+              "text": "The pronunciation system of the Chinese language is quite different from that of English. For native speakers of English, some Chinese words are rather difficult to pronounce. My given name Qiuyu (秋雨) , for instance, happened to be a great challenge for many of them. Every time I gave a self-introduction, I had to explain how to pronounce my name at least five times, yet they still could not say it the way I did."
+            },
+            {
+              "paragraphId": "para-2025-ii-writing-cont-p3",
+              "text": "Once in a lecture, the professor tried repeating my name after me over and over in front of thirty classmates. I really did not know whether I should continue correcting him or simply drop the matter. I feared that my classmates might grow tired of my efforts or even lose patience with me. After all, I did care about how others would think of me. I realized that if I didn’t stop, the entire lecture would be ruined. “It’s okay, professor,” I shrugged (耸肩) . The awkward moment ended with the class erupting into laughter. I forced a smile, unsure how to respond further."
+            },
+            {
+              "paragraphId": "para-2025-ii-writing-cont-p4",
+              "text": "After that incident, I stopped acting as a “Chinese teacher.” Instead of correcting others when they were struggling to pronounce my name, I just smiled and nodded approvingly. This approach spared me the discomfort of having to over-explain. However, I soon found that by doing so, I might be losing something more important: the opportunity to share a small part of my cultural identity."
+            }
+          ]
+        }
+      }
+    },
+    "questions": {
+      "q-2025-ii-021": {
+        "questionId": "q-2025-ii-021",
+        "questionNo": 21,
+        "groupId": "group-2025-ii-reading-a",
+        "stem": "Where can you find an original copy of the Magna Carta?",
+        "options": [
+          {
+            "label": "A",
+            "text": "In the Ludlow Castle."
+          },
+          {
+            "label": "B",
+            "text": "In the Foodie Center of England."
+          },
+          {
+            "label": "C",
+            "text": "In the Hereford Cathedral."
+          },
+          {
+            "label": "D",
+            "text": "In the Black and White House Museum."
+          }
+        ]
+      },
+      "q-2025-ii-022": {
+        "questionId": "q-2025-ii-022",
+        "questionNo": 22,
+        "groupId": "group-2025-ii-reading-a",
+        "stem": "What is a feature of Shrewsbury Town Center?",
+        "options": [
+          {
+            "label": "A",
+            "text": "It's situated near a big island."
+          },
+          {
+            "label": "B",
+            "text": "It's almost surrounded by water."
+          },
+          {
+            "label": "C",
+            "text": "It's known for its flower festival."
+          },
+          {
+            "label": "D",
+            "text": "It's easily accessible from London."
+          }
+        ]
+      },
+      "q-2025-ii-023": {
+        "questionId": "q-2025-ii-023",
+        "questionNo": 23,
+        "groupId": "group-2025-ii-reading-a",
+        "stem": "What does the author suggest visitors do in Mevagissey?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Try the Cornish pie."
+          },
+          {
+            "label": "B",
+            "text": "Watch a British TV show."
+          },
+          {
+            "label": "C",
+            "text": "Go fishing in the sea."
+          },
+          {
+            "label": "D",
+            "text": "Take pictures of the harbor."
+          }
+        ]
+      },
+      "q-2025-ii-024": {
+        "questionId": "q-2025-ii-024",
+        "questionNo": 24,
+        "groupId": "group-2025-ii-reading-b",
+        "stem": "Who does Ho teach at LPCH?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Sick children."
+          },
+          {
+            "label": "B",
+            "text": "Young nurses."
+          },
+          {
+            "label": "C",
+            "text": "Medical students."
+          },
+          {
+            "label": "D",
+            "text": "Patients' parents."
+          }
+        ]
+      },
+      "q-2025-ii-025": {
+        "questionId": "q-2025-ii-025",
+        "questionNo": 25,
+        "groupId": "group-2025-ii-reading-b",
+        "stem": "What is a characteristic of Ho's job?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Prioritizing academics."
+          },
+          {
+            "label": "B",
+            "text": "Encouraging innovation."
+          },
+          {
+            "label": "C",
+            "text": "Treating various diseases."
+          },
+          {
+            "label": "D",
+            "text": "Playing multiple roles."
+          }
+        ]
+      },
+      "q-2025-ii-026": {
+        "questionId": "q-2025-ii-026",
+        "questionNo": 26,
+        "groupId": "group-2025-ii-reading-b",
+        "stem": "What does the underlined word “it” refer to in paragraph 4?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Offering regular lessons."
+          },
+          {
+            "label": "B",
+            "text": "Paying extra attention."
+          },
+          {
+            "label": "C",
+            "text": "Assigning no schoolwork."
+          },
+          {
+            "label": "D",
+            "text": "Showing no sympathy."
+          }
+        ]
+      },
+      "q-2025-ii-027": {
+        "questionId": "q-2025-ii-027",
+        "questionNo": 27,
+        "groupId": "group-2025-ii-reading-b",
+        "stem": "How does the hospital school benefit the students according to Good?",
+        "options": [
+          {
+            "label": "A",
+            "text": "It eases peer pressure."
+          },
+          {
+            "label": "B",
+            "text": "It helps them live in hope."
+          },
+          {
+            "label": "C",
+            "text": "It frees them from aches."
+          },
+          {
+            "label": "D",
+            "text": "It entertains them with stories."
+          }
+        ]
+      },
+      "q-2025-ii-028": {
+        "questionId": "q-2025-ii-028",
+        "questionNo": 28,
+        "groupId": "group-2025-ii-reading-c",
+        "stem": "How was Detrinidad's business when it started?",
+        "options": [
+          {
+            "label": "A",
+            "text": "It faced tough competition."
+          },
+          {
+            "label": "B",
+            "text": "It suffered a great loss."
+          },
+          {
+            "label": "C",
+            "text": "It got lots of financial support."
+          },
+          {
+            "label": "D",
+            "text": "It went surprisingly well."
+          }
+        ]
+      },
+      "q-2025-ii-029": {
+        "questionId": "q-2025-ii-029",
+        "questionNo": 29,
+        "groupId": "group-2025-ii-reading-c",
+        "stem": "What is one of Knuth's findings about plants?",
+        "options": [
+          {
+            "label": "A",
+            "text": "They appeal more to students."
+          },
+          {
+            "label": "B",
+            "text": "They purify the environment."
+          },
+          {
+            "label": "C",
+            "text": "They raise the cortisol level."
+          },
+          {
+            "label": "D",
+            "text": "They enhance productivity."
+          }
+        ]
+      },
+      "q-2025-ii-030": {
+        "questionId": "q-2025-ii-030",
+        "questionNo": 30,
+        "groupId": "group-2025-ii-reading-c",
+        "stem": "What does Detrinidad try to explain by mentioning doctors and lawyers?",
+        "options": [
+          {
+            "label": "A",
+            "text": "The necessity of social skills."
+          },
+          {
+            "label": "B",
+            "text": "The meaning of sustainability."
+          },
+          {
+            "label": "C",
+            "text": "The importance of repeated efforts."
+          },
+          {
+            "label": "D",
+            "text": "The value of professional opinions."
+          }
+        ]
+      },
+      "q-2025-ii-031": {
+        "questionId": "q-2025-ii-031",
+        "questionNo": 31,
+        "groupId": "group-2025-ii-reading-c",
+        "stem": "What can be a suitable title for the text?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Time to Replace Houseplants"
+          },
+          {
+            "label": "B",
+            "text": "Plants Boost Your Mood"
+          },
+          {
+            "label": "C",
+            "text": "Tips on Choosing Houseplants"
+          },
+          {
+            "label": "D",
+            "text": "Plants Brighten Your Home"
+          }
+        ]
+      },
+      "q-2025-ii-032": {
+        "questionId": "q-2025-ii-032",
+        "questionNo": 32,
+        "groupId": "group-2025-ii-reading-d",
+        "stem": "What can be inferred about the author's early life?",
+        "options": [
+          {
+            "label": "A",
+            "text": "He witnessed food shortage."
+          },
+          {
+            "label": "B",
+            "text": "He enjoyed the local cuisine."
+          },
+          {
+            "label": "C",
+            "text": "He donated food to Africans."
+          },
+          {
+            "label": "D",
+            "text": "He helped to cook at home."
+          }
+        ]
+      },
+      "q-2025-ii-033": {
+        "questionId": "q-2025-ii-033",
+        "questionNo": 33,
+        "groupId": "group-2025-ii-reading-d",
+        "stem": "Why did Blue Hill carry out the experiment?",
+        "options": [
+          {
+            "label": "A",
+            "text": "To customize dishes for guests."
+          },
+          {
+            "label": "B",
+            "text": "To make the public aware of food waste."
+          },
+          {
+            "label": "C",
+            "text": "To test a food processing method."
+          },
+          {
+            "label": "D",
+            "text": "To improve the UK's zero-waste systems."
+          }
+        ]
+      },
+      "q-2025-ii-034": {
+        "questionId": "q-2025-ii-034",
+        "questionNo": 34,
+        "groupId": "group-2025-ii-reading-d",
+        "stem": "What is paragraph 5 mainly about?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Why the ingredients were used."
+          },
+          {
+            "label": "B",
+            "text": "Which dishes were best liked."
+          },
+          {
+            "label": "C",
+            "text": "What the dishes were made of."
+          },
+          {
+            "label": "D",
+            "text": "Where the ingredients were bought."
+          }
+        ]
+      },
+      "q-2025-ii-035": {
+        "questionId": "q-2025-ii-035",
+        "questionNo": 35,
+        "groupId": "group-2025-ii-reading-d",
+        "stem": "What can we learn about wastED?",
+        "options": [
+          {
+            "label": "A",
+            "text": "It has ended as planned."
+          },
+          {
+            "label": "B",
+            "text": "It is creating new jobs."
+          },
+          {
+            "label": "C",
+            "text": "It has regained popularity."
+          },
+          {
+            "label": "D",
+            "text": "It is criticized by top chefs."
+          }
+        ]
+      },
+      "q-2025-ii-036": {
+        "questionId": "q-2025-ii-036",
+        "questionNo": 36,
+        "groupId": "group-2025-ii-seven-choices",
+        "stem": "36",
+        "blankId": "blank-2025-ii-036"
+      },
+      "q-2025-ii-037": {
+        "questionId": "q-2025-ii-037",
+        "questionNo": 37,
+        "groupId": "group-2025-ii-seven-choices",
+        "stem": "37",
+        "blankId": "blank-2025-ii-037"
+      },
+      "q-2025-ii-038": {
+        "questionId": "q-2025-ii-038",
+        "questionNo": 38,
+        "groupId": "group-2025-ii-seven-choices",
+        "stem": "38",
+        "blankId": "blank-2025-ii-038"
+      },
+      "q-2025-ii-039": {
+        "questionId": "q-2025-ii-039",
+        "questionNo": 39,
+        "groupId": "group-2025-ii-seven-choices",
+        "stem": "39",
+        "blankId": "blank-2025-ii-039"
+      },
+      "q-2025-ii-040": {
+        "questionId": "q-2025-ii-040",
+        "questionNo": 40,
+        "groupId": "group-2025-ii-seven-choices",
+        "stem": "40",
+        "blankId": "blank-2025-ii-040"
+      },
+      "q-2025-ii-041": {
+        "questionId": "q-2025-ii-041",
+        "questionNo": 41,
+        "groupId": "group-2025-ii-cloze",
+        "stem": "41",
+        "blankId": "blank-2025-ii-041",
+        "options": [
+          {
+            "label": "A",
+            "text": "write"
+          },
+          {
+            "label": "B",
+            "text": "travel"
+          },
+          {
+            "label": "C",
+            "text": "exercise"
+          },
+          {
+            "label": "D",
+            "text": "recover"
+          }
+        ]
+      },
+      "q-2025-ii-042": {
+        "questionId": "q-2025-ii-042",
+        "questionNo": 42,
+        "groupId": "group-2025-ii-cloze",
+        "stem": "42",
+        "blankId": "blank-2025-ii-042",
+        "options": [
+          {
+            "label": "A",
+            "text": "goodwill"
+          },
+          {
+            "label": "B",
+            "text": "timeout"
+          },
+          {
+            "label": "C",
+            "text": "long-distance"
+          },
+          {
+            "label": "D",
+            "text": "wake-up"
+          }
+        ]
+      },
+      "q-2025-ii-043": {
+        "questionId": "q-2025-ii-043",
+        "questionNo": 43,
+        "groupId": "group-2025-ii-cloze",
+        "stem": "43",
+        "blankId": "blank-2025-ii-043",
+        "options": [
+          {
+            "label": "A",
+            "text": "normally"
+          },
+          {
+            "label": "B",
+            "text": "ultimately"
+          },
+          {
+            "label": "C",
+            "text": "suddenly"
+          },
+          {
+            "label": "D",
+            "text": "automatically"
+          }
+        ]
+      },
+      "q-2025-ii-044": {
+        "questionId": "q-2025-ii-044",
+        "questionNo": 44,
+        "groupId": "group-2025-ii-cloze",
+        "stem": "44",
+        "blankId": "blank-2025-ii-044",
+        "options": [
+          {
+            "label": "A",
+            "text": "change"
+          },
+          {
+            "label": "B",
+            "text": "fortune"
+          },
+          {
+            "label": "C",
+            "text": "wish"
+          },
+          {
+            "label": "D",
+            "text": "deal"
+          }
+        ]
+      },
+      "q-2025-ii-045": {
+        "questionId": "q-2025-ii-045",
+        "questionNo": 45,
+        "groupId": "group-2025-ii-cloze",
+        "stem": "45",
+        "blankId": "blank-2025-ii-045",
+        "options": [
+          {
+            "label": "A",
+            "text": "risky"
+          },
+          {
+            "label": "B",
+            "text": "traditional"
+          },
+          {
+            "label": "C",
+            "text": "comfortable"
+          },
+          {
+            "label": "D",
+            "text": "healthy"
+          }
+        ]
+      },
+      "q-2025-ii-046": {
+        "questionId": "q-2025-ii-046",
+        "questionNo": 46,
+        "groupId": "group-2025-ii-cloze",
+        "stem": "46",
+        "blankId": "blank-2025-ii-046",
+        "options": [
+          {
+            "label": "A",
+            "text": "demand"
+          },
+          {
+            "label": "B",
+            "text": "secret"
+          },
+          {
+            "label": "C",
+            "text": "passion"
+          },
+          {
+            "label": "D",
+            "text": "cure"
+          }
+        ]
+      },
+      "q-2025-ii-047": {
+        "questionId": "q-2025-ii-047",
+        "questionNo": 47,
+        "groupId": "group-2025-ii-cloze",
+        "stem": "47",
+        "blankId": "blank-2025-ii-047",
+        "options": [
+          {
+            "label": "A",
+            "text": "peace"
+          },
+          {
+            "label": "B",
+            "text": "fitness"
+          },
+          {
+            "label": "C",
+            "text": "fun"
+          },
+          {
+            "label": "D",
+            "text": "nature"
+          }
+        ]
+      },
+      "q-2025-ii-048": {
+        "questionId": "q-2025-ii-048",
+        "questionNo": 48,
+        "groupId": "group-2025-ii-cloze",
+        "stem": "48",
+        "blankId": "blank-2025-ii-048",
+        "options": [
+          {
+            "label": "A",
+            "text": "grow"
+          },
+          {
+            "label": "B",
+            "text": "control"
+          },
+          {
+            "label": "C",
+            "text": "activate"
+          },
+          {
+            "label": "D",
+            "text": "relax"
+          }
+        ]
+      },
+      "q-2025-ii-049": {
+        "questionId": "q-2025-ii-049",
+        "questionNo": 49,
+        "groupId": "group-2025-ii-cloze",
+        "stem": "49",
+        "blankId": "blank-2025-ii-049",
+        "options": [
+          {
+            "label": "A",
+            "text": "need"
+          },
+          {
+            "label": "B",
+            "text": "choice"
+          },
+          {
+            "label": "C",
+            "text": "reason"
+          },
+          {
+            "label": "D",
+            "text": "difference"
+          }
+        ]
+      },
+      "q-2025-ii-050": {
+        "questionId": "q-2025-ii-050",
+        "questionNo": 50,
+        "groupId": "group-2025-ii-cloze",
+        "stem": "50",
+        "blankId": "blank-2025-ii-050",
+        "options": [
+          {
+            "label": "A",
+            "text": "green light"
+          },
+          {
+            "label": "B",
+            "text": "road block"
+          },
+          {
+            "label": "C",
+            "text": "passing mark"
+          },
+          {
+            "label": "D",
+            "text": "stepping stone"
+          }
+        ]
+      },
+      "q-2025-ii-051": {
+        "questionId": "q-2025-ii-051",
+        "questionNo": 51,
+        "groupId": "group-2025-ii-cloze",
+        "stem": "51",
+        "blankId": "blank-2025-ii-051",
+        "options": [
+          {
+            "label": "A",
+            "text": "Help"
+          },
+          {
+            "label": "B",
+            "text": "Consult"
+          },
+          {
+            "label": "C",
+            "text": "Follow"
+          },
+          {
+            "label": "D",
+            "text": "Forgive"
+          }
+        ]
+      },
+      "q-2025-ii-052": {
+        "questionId": "q-2025-ii-052",
+        "questionNo": 52,
+        "groupId": "group-2025-ii-cloze",
+        "stem": "52",
+        "blankId": "blank-2025-ii-052",
+        "options": [
+          {
+            "label": "A",
+            "text": "accepted"
+          },
+          {
+            "label": "B",
+            "text": "shared"
+          },
+          {
+            "label": "C",
+            "text": "expected"
+          },
+          {
+            "label": "D",
+            "text": "celebrated"
+          }
+        ]
+      },
+      "q-2025-ii-053": {
+        "questionId": "q-2025-ii-053",
+        "questionNo": 53,
+        "groupId": "group-2025-ii-cloze",
+        "stem": "53",
+        "blankId": "blank-2025-ii-053",
+        "options": [
+          {
+            "label": "A",
+            "text": "goal"
+          },
+          {
+            "label": "B",
+            "text": "case"
+          },
+          {
+            "label": "C",
+            "text": "duty"
+          },
+          {
+            "label": "D",
+            "text": "cost"
+          }
+        ]
+      },
+      "q-2025-ii-054": {
+        "questionId": "q-2025-ii-054",
+        "questionNo": 54,
+        "groupId": "group-2025-ii-cloze",
+        "stem": "54",
+        "blankId": "blank-2025-ii-054",
+        "options": [
+          {
+            "label": "A",
+            "text": "instructors"
+          },
+          {
+            "label": "B",
+            "text": "admirers"
+          },
+          {
+            "label": "C",
+            "text": "beginners"
+          },
+          {
+            "label": "D",
+            "text": "doubters"
+          }
+        ]
+      },
+      "q-2025-ii-055": {
+        "questionId": "q-2025-ii-055",
+        "questionNo": 55,
+        "groupId": "group-2025-ii-cloze",
+        "stem": "55",
+        "blankId": "blank-2025-ii-055",
+        "options": [
+          {
+            "label": "A",
+            "text": "authority"
+          },
+          {
+            "label": "B",
+            "text": "excuse"
+          },
+          {
+            "label": "C",
+            "text": "inspiration"
+          },
+          {
+            "label": "D",
+            "text": "option"
+          }
+        ]
+      },
+      "q-2025-ii-056": {
+        "questionId": "q-2025-ii-056",
+        "questionNo": 56,
+        "groupId": "group-2025-ii-grammar-fill",
+        "stem": "56",
+        "blankId": "blank-2025-ii-056"
+      },
+      "q-2025-ii-057": {
+        "questionId": "q-2025-ii-057",
+        "questionNo": 57,
+        "groupId": "group-2025-ii-grammar-fill",
+        "stem": "57",
+        "blankId": "blank-2025-ii-057"
+      },
+      "q-2025-ii-058": {
+        "questionId": "q-2025-ii-058",
+        "questionNo": 58,
+        "groupId": "group-2025-ii-grammar-fill",
+        "stem": "58",
+        "blankId": "blank-2025-ii-058"
+      },
+      "q-2025-ii-059": {
+        "questionId": "q-2025-ii-059",
+        "questionNo": 59,
+        "groupId": "group-2025-ii-grammar-fill",
+        "stem": "59",
+        "blankId": "blank-2025-ii-059"
+      },
+      "q-2025-ii-060": {
+        "questionId": "q-2025-ii-060",
+        "questionNo": 60,
+        "groupId": "group-2025-ii-grammar-fill",
+        "stem": "60",
+        "blankId": "blank-2025-ii-060"
+      },
+      "q-2025-ii-061": {
+        "questionId": "q-2025-ii-061",
+        "questionNo": 61,
+        "groupId": "group-2025-ii-grammar-fill",
+        "stem": "61",
+        "blankId": "blank-2025-ii-061"
+      },
+      "q-2025-ii-062": {
+        "questionId": "q-2025-ii-062",
+        "questionNo": 62,
+        "groupId": "group-2025-ii-grammar-fill",
+        "stem": "62",
+        "blankId": "blank-2025-ii-062"
+      },
+      "q-2025-ii-063": {
+        "questionId": "q-2025-ii-063",
+        "questionNo": 63,
+        "groupId": "group-2025-ii-grammar-fill",
+        "stem": "63",
+        "blankId": "blank-2025-ii-063"
+      },
+      "q-2025-ii-064": {
+        "questionId": "q-2025-ii-064",
+        "questionNo": 64,
+        "groupId": "group-2025-ii-grammar-fill",
+        "stem": "64",
+        "blankId": "blank-2025-ii-064"
+      },
+      "q-2025-ii-065": {
+        "questionId": "q-2025-ii-065",
+        "questionNo": 65,
+        "groupId": "group-2025-ii-grammar-fill",
+        "stem": "65",
+        "blankId": "blank-2025-ii-065"
+      }
+    },
+    "blanks": {
+      "blank-2025-ii-056": {
+        "blankId": "blank-2025-ii-056",
+        "groupId": "group-2025-ii-grammar-fill",
+        "questionId": "q-2025-ii-056"
+      },
+      "blank-2025-ii-057": {
+        "blankId": "blank-2025-ii-057",
+        "groupId": "group-2025-ii-grammar-fill",
+        "questionId": "q-2025-ii-057",
+        "prompt": "center"
+      },
+      "blank-2025-ii-058": {
+        "blankId": "blank-2025-ii-058",
+        "groupId": "group-2025-ii-grammar-fill",
+        "questionId": "q-2025-ii-058"
+      },
+      "blank-2025-ii-059": {
+        "blankId": "blank-2025-ii-059",
+        "groupId": "group-2025-ii-grammar-fill",
+        "questionId": "q-2025-ii-059"
+      },
+      "blank-2025-ii-060": {
+        "blankId": "blank-2025-ii-060",
+        "groupId": "group-2025-ii-grammar-fill",
+        "questionId": "q-2025-ii-060",
+        "prompt": "I"
+      },
+      "blank-2025-ii-061": {
+        "blankId": "blank-2025-ii-061",
+        "groupId": "group-2025-ii-grammar-fill",
+        "questionId": "q-2025-ii-061",
+        "prompt": "be"
+      },
+      "blank-2025-ii-062": {
+        "blankId": "blank-2025-ii-062",
+        "groupId": "group-2025-ii-grammar-fill",
+        "questionId": "q-2025-ii-062",
+        "prompt": "discover"
+      },
+      "blank-2025-ii-063": {
+        "blankId": "blank-2025-ii-063",
+        "groupId": "group-2025-ii-grammar-fill",
+        "questionId": "q-2025-ii-063",
+        "prompt": "absent"
+      },
+      "blank-2025-ii-064": {
+        "blankId": "blank-2025-ii-064",
+        "groupId": "group-2025-ii-grammar-fill",
+        "questionId": "q-2025-ii-064",
+        "prompt": "afternoon"
+      },
+      "blank-2025-ii-065": {
+        "blankId": "blank-2025-ii-065",
+        "groupId": "group-2025-ii-grammar-fill",
+        "questionId": "q-2025-ii-065",
+        "prompt": "leave"
+      }
+    },
+    "writingTasks": {
+      "wt-2025-ii-application": {
+        "writingTaskId": "wt-2025-ii-application",
+        "groupId": "group-2025-ii-writing-application",
+        "taskType": "application",
+        "title": "应用文写作",
+        "instruction": "假定你是校英文报编辑李华，外教Chris上个月答应写一篇介绍加拿大体育运动的文章。请给 Chris写一封邮件，内容包括：\n(1)询问进展；\n(2)提醒交稿时间。\n(1)写作词数应为80个左右；\n(2)请按如下格式在答题卡的相应位置作答。\nDear Chris,\nBest wishes,\nLi Hua",
+        "wordCountTarget": 80
+      },
+      "wt-2025-ii-continuation": {
+        "writingTaskId": "wt-2025-ii-continuation",
+        "groupId": "group-2025-ii-writing-continuation",
+        "taskType": "continuation",
+        "title": "读后续写",
+        "instruction": "阅读下面材料，根据其内容和所给段落开头语续写两段，使之构成一篇完整的短文。\n“What is your name? ” is a question most frequently asked when people meet for the first time. But for me, it was the first challenge I encountered as an international student in Ireland.\nThe pronunciation system of the Chinese language is quite different from that of English. For native speakers of English, some Chinese words are rather difficult to pronounce. My given name Qiuyu (秋雨) , for instance, happened to be a great challenge for many of them. Every time I gave a self-introduction, I had to explain how to pronounce my name at least five times, yet they still could not say it the way I did.\nOnce in a lecture, the professor tried repeating my name after me over and over in front of thirty classmates. I really did not know whether I should continue correcting him or simply drop the matter. I feared that my classmates might grow tired of my efforts or even lose patience with me. After all, I did care about how others would think of me. I realized that if I didn’t stop, the entire lecture would be ruined. “It’s okay, professor,” I shrugged (耸肩) . The awkward moment ended with the class erupting into laughter. I forced a smile, unsure how to respond further.\nAfter that incident, I stopped acting as a “Chinese teacher.” Instead of correcting others when they were struggling to pronounce my name, I just smiled and nodded approvingly. This approach spared me the discomfort of having to over-explain. However, I soon found that by doing so, I might be losing something more important: the opportunity to share a small part of my cultural identity.",
+        "continuationStarters": [
+          "In a class discussion, I was invited to explain the meaning of my name.",
+          "Many of my classmates got interested and came up to me after class."
+        ],
+        "materialText": "阅读下面材料，根据其内容和所给段落开头语续写两段，使之构成一篇完整的短文。\n\n“What is your name? ” is a question most frequently asked when people meet for the first time. But for me, it was the first challenge I encountered as an international student in Ireland.\n\nThe pronunciation system of the Chinese language is quite different from that of English. For native speakers of English, some Chinese words are rather difficult to pronounce. My given name Qiuyu (秋雨) , for instance, happened to be a great challenge for many of them. Every time I gave a self-introduction, I had to explain how to pronounce my name at least five times, yet they still could not say it the way I did.\n\nOnce in a lecture, the professor tried repeating my name after me over and over in front of thirty classmates. I really did not know whether I should continue correcting him or simply drop the matter. I feared that my classmates might grow tired of my efforts or even lose patience with me. After all, I did care about how others would think of me. I realized that if I didn’t stop, the entire lecture would be ruined. “It’s okay, professor,” I shrugged (耸肩) . The awkward moment ended with the class erupting into laughter. I forced a smile, unsure how to respond further.\n\nAfter that incident, I stopped acting as a “Chinese teacher.” Instead of correcting others when they were struggling to pronounce my name, I just smiled and nodded approvingly. This approach spared me the discomfort of having to over-explain. However, I soon found that by doing so, I might be losing something more important: the opportunity to share a small part of my cultural identity.",
+        "wordCountTarget": 150
+      }
+    }
+  },
+  "answerKey": {
+    "answers": {
+      "q-2025-ii-021": {
+        "questionId": "q-2025-ii-021",
+        "questionNo": 21,
+        "answer": "C",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2025-ii-022": {
+        "questionId": "q-2025-ii-022",
+        "questionNo": 22,
+        "answer": "B",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2025-ii-023": {
+        "questionId": "q-2025-ii-023",
+        "questionNo": 23,
+        "answer": "A",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2025-ii-024": {
+        "questionId": "q-2025-ii-024",
+        "questionNo": 24,
+        "answer": "A",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2025-ii-025": {
+        "questionId": "q-2025-ii-025",
+        "questionNo": 25,
+        "answer": "D",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2025-ii-026": {
+        "questionId": "q-2025-ii-026",
+        "questionNo": 26,
+        "answer": "C",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2025-ii-027": {
+        "questionId": "q-2025-ii-027",
+        "questionNo": 27,
+        "answer": "B",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2025-ii-028": {
+        "questionId": "q-2025-ii-028",
+        "questionNo": 28,
+        "answer": "D",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2025-ii-029": {
+        "questionId": "q-2025-ii-029",
+        "questionNo": 29,
+        "answer": "D",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2025-ii-030": {
+        "questionId": "q-2025-ii-030",
+        "questionNo": 30,
+        "answer": "C",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2025-ii-031": {
+        "questionId": "q-2025-ii-031",
+        "questionNo": 31,
+        "answer": "B",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2025-ii-032": {
+        "questionId": "q-2025-ii-032",
+        "questionNo": 32,
+        "answer": "A",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2025-ii-033": {
+        "questionId": "q-2025-ii-033",
+        "questionNo": 33,
+        "answer": "B",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2025-ii-034": {
+        "questionId": "q-2025-ii-034",
+        "questionNo": 34,
+        "answer": "C",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2025-ii-035": {
+        "questionId": "q-2025-ii-035",
+        "questionNo": 35,
+        "answer": "A",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2025-ii-036": {
+        "questionId": "q-2025-ii-036",
+        "questionNo": 36,
+        "answer": "B",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2025-ii-037": {
+        "questionId": "q-2025-ii-037",
+        "questionNo": 37,
+        "answer": "G",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2025-ii-038": {
+        "questionId": "q-2025-ii-038",
+        "questionNo": 38,
+        "answer": "E",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2025-ii-039": {
+        "questionId": "q-2025-ii-039",
+        "questionNo": 39,
+        "answer": "C",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2025-ii-040": {
+        "questionId": "q-2025-ii-040",
+        "questionNo": 40,
+        "answer": "F",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2025-ii-041": {
+        "questionId": "q-2025-ii-041",
+        "questionNo": 41,
+        "answer": "C",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2025-ii-042": {
+        "questionId": "q-2025-ii-042",
+        "questionNo": 42,
+        "answer": "D",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2025-ii-043": {
+        "questionId": "q-2025-ii-043",
+        "questionNo": 43,
+        "answer": "B",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2025-ii-044": {
+        "questionId": "q-2025-ii-044",
+        "questionNo": 44,
+        "answer": "A",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2025-ii-045": {
+        "questionId": "q-2025-ii-045",
+        "questionNo": 45,
+        "answer": "D",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2025-ii-046": {
+        "questionId": "q-2025-ii-046",
+        "questionNo": 46,
+        "answer": "C",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2025-ii-047": {
+        "questionId": "q-2025-ii-047",
+        "questionNo": 47,
+        "answer": "B",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2025-ii-048": {
+        "questionId": "q-2025-ii-048",
+        "questionNo": 48,
+        "answer": "A",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2025-ii-049": {
+        "questionId": "q-2025-ii-049",
+        "questionNo": 49,
+        "answer": "C",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2025-ii-050": {
+        "questionId": "q-2025-ii-050",
+        "questionNo": 50,
+        "answer": "D",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2025-ii-051": {
+        "questionId": "q-2025-ii-051",
+        "questionNo": 51,
+        "answer": "A",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2025-ii-052": {
+        "questionId": "q-2025-ii-052",
+        "questionNo": 52,
+        "answer": "B",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2025-ii-053": {
+        "questionId": "q-2025-ii-053",
+        "questionNo": 53,
+        "answer": "A",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2025-ii-054": {
+        "questionId": "q-2025-ii-054",
+        "questionNo": 54,
+        "answer": "D",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2025-ii-055": {
+        "questionId": "q-2025-ii-055",
+        "questionNo": 55,
+        "answer": "C",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2025-ii-056": {
+        "questionId": "q-2025-ii-056",
+        "questionNo": 56,
+        "answer": "where",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2025-ii-057": {
+        "questionId": "q-2025-ii-057",
+        "questionNo": 57,
+        "answer": "central",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2025-ii-058": {
+        "questionId": "q-2025-ii-058",
+        "questionNo": 58,
+        "answer": "for",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2025-ii-059": {
+        "questionId": "q-2025-ii-059",
+        "questionNo": 59,
+        "answer": "and",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2025-ii-060": {
+        "questionId": "q-2025-ii-060",
+        "questionNo": 60,
+        "answer": "myself",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2025-ii-061": {
+        "questionId": "q-2025-ii-061",
+        "questionNo": 61,
+        "answer": "is",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2025-ii-062": {
+        "questionId": "q-2025-ii-062",
+        "questionNo": 62,
+        "answer": "to discover",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2025-ii-063": {
+        "questionId": "q-2025-ii-063",
+        "questionNo": 63,
+        "answer": "absence",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2025-ii-064": {
+        "questionId": "q-2025-ii-064",
+        "questionNo": 64,
+        "answer": "afternoons",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2025-ii-065": {
+        "questionId": "q-2025-ii-065",
+        "questionNo": 65,
+        "answer": "left",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      }
+    }
+  },
+  "analysis": {
+    "meta": {
+      "generatedBy": "external-ai",
+      "promptVersion": "reading-choice-analysis-v1",
+      "reviewStatus": "reviewed",
+      "importMode": "paper-import-ai",
+      "model": "claude-opus-4-8",
+      "reviewedBy": "xiaochuan",
+      "reviewedAt": "2026-06-05T00:00:00Z"
+    },
+    "groups": {
+      "group-2025-ii-reading-a": {
+        "overview": "本文是一篇应用文（旅游推介），介绍英国值得一游的几座集镇（market towns），分别概述每座小镇的历史特色、可看可玩之处与代表性体验。",
+        "discourseStructure": {
+          "summary": "总分结构：先用引言说明英国集镇各具特色、不只是购物之地，随后以小标题分段逐一介绍 Hereford、Ludlow、Shrewsbury、Mevagissey 四座小镇的亮点。",
+          "paragraphs": [
+            {
+              "paragraphId": "para-2025-ii-reading-a-1",
+              "summary": "文章标题：英国值得一游的集镇。",
+              "function": "标题，点明全文主题。"
+            },
+            {
+              "paragraphId": "para-2025-ii-reading-a-2",
+              "summary": "引言：英国集镇形态各异，因数百年的货物与服务贸易而各具个性，且不只是购物之地。",
+              "function": "总起引言，统领下文分项介绍。"
+            },
+            {
+              "paragraphId": "para-2025-ii-reading-a-3",
+              "summary": "小标题：Hereford, Herefordshire。",
+              "function": "分项小标题，引出第一座小镇。"
+            },
+            {
+              "paragraphId": "para-2025-ii-reading-a-4",
+              "summary": "介绍 Hereford：自1189年起便是热闹集镇，镇广场周边有店铺、餐馆与黑白屋博物馆；最宏伟的建筑是 Hereford 大教堂，内设古图书馆，展出《大宪章》四份原始抄本之一。",
+              "function": "分述第一座小镇的历史与看点。"
+            },
+            {
+              "paragraphId": "para-2025-ii-reading-a-5",
+              "summary": "小标题：Ludlow, Shropshire。",
+              "function": "分项小标题，引出第二座小镇。"
+            },
+            {
+              "paragraphId": "para-2025-ii-reading-a-6",
+              "summary": "介绍 Ludlow：被誉为英格兰美食中心，广场周边美食店林立，旁有 Ludlow 城堡，每年九月举办为期三天的美食节。",
+              "function": "分述第二座小镇的美食特色与活动。"
+            },
+            {
+              "paragraphId": "para-2025-ii-reading-a-7",
+              "summary": "小标题：Shrewsbury, Shropshire。",
+              "function": "分项小标题，引出第三座小镇。"
+            },
+            {
+              "paragraphId": "para-2025-ii-reading-a-8",
+              "summary": "介绍 Shrewsbury：从伦敦前往颇具挑战但值得；塞文河在镇中急转，几乎将镇中心环成一座岛屿，形成可借河运货的理想集市；处处鲜花盛开。",
+              "function": "分述第三座小镇的地理形态与景致。"
+            },
+            {
+              "paragraphId": "para-2025-ii-reading-a-9",
+              "summary": "小标题：Mevagissey, Cornwall。",
+              "function": "分项小标题，引出第四座小镇。"
+            },
+            {
+              "paragraphId": "para-2025-ii-reading-a-10",
+              "summary": "介绍 Mevagissey：常出现在影视作品中的小渔村，1774年形成作业港口，渔民每日出海并在港边市场售鱼；建议游客离开前尝尝传统的康沃尔派。",
+              "function": "分述第四座小镇并给出体验建议，收束全文。"
+            }
+          ]
+        }
+      },
+      "group-2025-ii-reading-b": {
+        "overview": "本文介绍 Kathy Ho 在 Lucile Packard 儿童医院斯坦福分院（LPCH）内开办的医院学校。她教授住院患儿，工作中身兼教练、顾问与安慰者等多重角色；身心健康优先于学业，但帮助孩子跟上学习进度对他们的康复与心理都至关重要。",
+        "discourseStructure": {
+          "summary": "由人物引入，先点出医院教师身份的特殊性；继而说明医院学校的对象与意义；再阐述其工作中身心优先、角色多元的特点；接着对比 Ho 与其他教师对待作业的不同态度；最后借专家之口升华到 \"让孩子的梦想存活\" 的价值。",
+          "paragraphs": [
+            {
+              "paragraphId": "para-2025-ii-reading-b-1",
+              "summary": "Kathy Ho 在 LPCH 医院内教高中，她觉得 \"教师\" 一词难以概括这里的工作。",
+              "function": "人物与场景引入，点出医院教师身份的不寻常。"
+            },
+            {
+              "paragraphId": "para-2025-ii-reading-b-2",
+              "summary": "介绍 386 房间这所医院学校：每年约 500 名患儿成为学生，是一个不受家长、医生和医疗程序干扰的学习场所；多数学生会康复，因此帮他们准备返校愈发重要。",
+              "function": "说明医院学校的对象、性质与教育意义。"
+            },
+            {
+              "paragraphId": "para-2025-ii-reading-b-3",
+              "summary": "在 386 房间学业并非首位，身心健康才是优先；Ho 自述身兼教练、顾问和安慰者。",
+              "function": "阐明工作的优先次序与多重角色特征。"
+            },
+            {
+              "paragraphId": "para-2025-ii-reading-b-4",
+              "summary": "Ho 与学生原校老师配合获取课程与考试；一些老师只表达同情而不留作业，Ho 认为这其实是对孩子的伤害。",
+              "function": "通过对比凸显 Ho 重视布置学业的态度。"
+            },
+            {
+              "paragraphId": "para-2025-ii-reading-b-5",
+              "summary": "Ho 认识到帮孩子跟上同龄人的心理益处；疼痛管理主任 Good 指出医学只是一小部分，学校通过给孩子学习与成长的途径让他们的梦想存活。",
+              "function": "借专家观点升华主题，点明医院学校的深层价值。"
+            }
+          ]
+        }
+      },
+      "group-2025-ii-reading-c": {
+        "overview": "本文是一篇说明文，借由网店店主 Detrinidad 的成功案例引出居家时间增加带动室内植物产业爆发的现象，并通过研究者 Knuth 的研究阐述植物对人身心健康（降压、提升学业与工作效率）的益处，最后给出养护植物的心态建议。",
+        "discourseStructure": {
+          "summary": "全文采用 现象引入—专家解读—研究佐证—心态建议 的递进结构：先以个体案例点出室内植物热，再由研究者从心理与生理两方面解释益处，继而用学业与职场数据佐证，最后回到读者给出养护建议。",
+          "paragraphs": [
+            {
+              "paragraphId": "para-2025-ii-reading-c-1",
+              "summary": "Detrinidad 开网店卖室内植物，原本期望不高，却生意火爆，2020 年 6 月一个月就发出 1200 单，一年发出逾 7 万株，成为居家时间增加带动植物产业爆发的一个缩影。",
+              "function": "用具体案例引入主题，点出室内植物产业的爆发现象。"
+            },
+            {
+              "paragraphId": "para-2025-ii-reading-c-2",
+              "summary": "研究者 Knuth 指出植物正流行，身处植物丰富环境的人生活满意度更高，自然能改变情绪与思维方式，植物改善心境的最大途径是降低压力激素皮质醇水平。",
+              "function": "引入专家观点，从心理与生理层面解释植物对人的益处。"
+            },
+            {
+              "paragraphId": "para-2025-ii-reading-c-3",
+              "summary": "Knuth 进一步用研究数据说明：身处植物环境的学生学业表现更好，这种生产力同样体现在成人职场，植物丰富的工作场所病假减少了 30%。",
+              "function": "用学业与职场的研究数据佐证植物提升效率的益处。"
+            },
+            {
+              "paragraphId": "para-2025-ii-reading-c-4",
+              "summary": "Detrinidad 建议享受植物身心益处的人不必因养不活植物而自责，养护植物如同医生行医、律师执业需要不断练习，是耐心与学习的过程，植物若死了再买一株即可。",
+              "function": "回到读者，给出养护植物的心态建议，呼应养植需要反复练习的主题。"
+            }
+          ]
+        }
+      },
+      "group-2025-ii-reading-d": {
+        "overview": "本文介绍纽约市 Blue Hill 餐厅在三月开展的一项名为 wastED 的限时实验：将菜单改为专门使用通常会被丢弃的食材，以提高人们对食物浪费问题的关注。文章从作者对浪费食物的个人感受切入，引出餐饮业食物浪费现状、实验内容、数据支撑、食材来源说明，最后交代实验作为短期项目已结束并升华主题。",
+        "discourseStructure": {
+          "summary": "文章按\"个人感受导入—问题背景与实验引出—实验具体内容—数据佐证—食材性质澄清—实验结局与主题升华\"的顺序展开。",
+          "paragraphs": [
+            {
+              "paragraphId": "para-2025-ii-reading-d-1",
+              "summary": "作者以\"每次扔掉没吃完的食物都心痛\"的个人感受开篇，并追溯到自己在南非的成长经历。",
+              "function": "情感化导入，建立作者对食物浪费的态度，为全文话题做铺垫。"
+            },
+            {
+              "paragraphId": "para-2025-ii-reading-d-2",
+              "summary": "指出食物浪费是餐饮、超市和供应链行业日益严重的问题，并引出纽约一家餐厅尝试的不同做法：菜单专门提供本会被丢弃的食物。",
+              "function": "交代背景问题，引出 wastED 实验。"
+            },
+            {
+              "paragraphId": "para-2025-ii-reading-d-3",
+              "summary": "具体说明三月里 Blue Hill 更名为 wastED，提供如炸鳐鱼软骨、果渣汉堡等菜品，每道菜都为唤起对食物浪费的关注而定制。",
+              "function": "描述实验的具体内容与目的。"
+            },
+            {
+              "paragraphId": "para-2025-ii-reading-d-4",
+              "summary": "引用 Food Waste Alliance 的研究数据说明餐厅食物浪费严重，并指出 wastED 将零浪费理念推向极致。",
+              "function": "用数据佐证食物浪费问题，凸显实验意义。"
+            },
+            {
+              "paragraphId": "para-2025-ii-reading-d-5",
+              "summary": "澄清 wastED 菜单上的食材并非真正的垃圾，而是大多数餐厅不会考虑使用的肉块和农产品，经厨师之手变成佳肴。",
+              "function": "说明菜品的食材构成，澄清对\"垃圾\"的误解。"
+            },
+            {
+              "paragraphId": "para-2025-ii-reading-d-6",
+              "summary": "指出 wastED 虽广受好评，但从一开始就被设计为短期实验，Blue Hill 已恢复常规菜单，并升华出可持续性问题有多种解决途径的主题。",
+              "function": "交代实验结局并升华主题。"
+            }
+          ]
+        }
+      }
+    },
+    "questions": {
+      "q-2025-ii-021": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查细节定位：《大宪章》原始抄本的展出地点。",
+        "stemTranslationZh": "你在哪里可以找到《大宪章》的一份原始抄本？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "在 Ludlow 城堡里。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "Bordering the square, the Ludlow Castle is a “must explore” medieval stronghold.",
+              "sourceEntity": "the Ludlow Castle",
+              "optionText": "In the Ludlow Castle.",
+              "optionEntity": "the Ludlow Castle",
+              "explanation": "Ludlow 城堡出现在介绍 Ludlow 的段落，与《大宪章》无关；《大宪章》抄本展于 Hereford 大教堂，地点对象错配。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2025-ii-reading-a-6",
+                "quote": "Bordering the square, the Ludlow Castle is a “must explore” medieval stronghold.",
+                "anchor": "Ludlow 城堡"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "在英格兰美食中心。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "Ludlow is known as the Foodie Center of England.",
+              "sourceEntity": "the Foodie Center of England",
+              "optionText": "In the Foodie Center of England.",
+              "optionEntity": "the Foodie Center of England",
+              "explanation": "“英格兰美食中心”指的是 Ludlow，该段并未提及《大宪章》，与展出地点无关，属对象错配。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2025-ii-reading-a-6",
+                "quote": "Ludlow is known as the Foodie Center of England.",
+                "anchor": "美食中心 Ludlow"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "在 Hereford 大教堂里。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2025-ii-reading-a-4",
+                "quote": "One of the four original copies of the Magna Carta is displayed there.",
+                "anchor": "《大宪章》原始抄本展于此"
+              },
+              {
+                "role": "secondary",
+                "paragraphId": "para-2025-ii-reading-a-4",
+                "quote": "The Hereford Cathedral is the most impressive building in town. It’s also home to an ancient library.",
+                "anchor": "Hereford 大教堂内的古图书馆"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "在黑白屋博物馆里。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "Skirting the town square, you’ll find lovely shops, eateries, and the Black and White House Museum.",
+              "sourceEntity": "the Black and White House Museum",
+              "optionText": "In the Black and White House Museum.",
+              "optionEntity": "the Black and White House Museum",
+              "explanation": "黑白屋博物馆只是镇广场周边的看点之一，《大宪章》抄本展于 Hereford 大教堂而非该博物馆，地点对象错配。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2025-ii-reading-a-4",
+                "quote": "Skirting the town square, you’ll find lovely shops, eateries, and the Black and White House Museum.",
+                "anchor": "黑白屋博物馆"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "an original copy of the Magna Carta",
+            "sourceRole": "stem",
+            "targetText": "One of the four original copies of the Magna Carta is displayed there.",
+            "targetParagraphId": "para-2025-ii-reading-a-4",
+            "relationType": "locationCue",
+            "note": "题干 an original copy of the Magna Carta 对应原文 One of the four original copies of the Magna Carta is displayed there，其中 there 回指上文的 The Hereford Cathedral，故答案为 Hereford 大教堂。"
+          },
+          {
+            "sourceText": "In the Hereford Cathedral.",
+            "sourceRole": "correctOption",
+            "targetText": "The Hereford Cathedral is the most impressive building in town.",
+            "targetParagraphId": "para-2025-ii-reading-a-4",
+            "relationType": "locationCue",
+            "note": "正确选项 In the Hereford Cathedral 与原文 The Hereford Cathedral 同名定位，后文 there 即指此教堂。"
+          }
+        ]
+      },
+      "q-2025-ii-022": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查细节理解：Shrewsbury Town Center 的地理特征。",
+        "stemTranslationZh": "Shrewsbury 镇中心的一个特点是什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "它位于一座大岛附近。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overstatement",
+              "sourceQuote": "The River Severn has a significant turn through town, almost making an island of Shrewsbury Town Center.",
+              "sourceHighlight": "almost making an island of Shrewsbury Town Center",
+              "optionText": "It's situated near a big island.",
+              "optionHighlight": "near a big island",
+              "explanation": "原文说河流急转“几乎把镇中心变成一座岛屿”，是镇中心自身近乎成岛，并非位于一座“大岛”附近，曲解并夸大了原意。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2025-ii-reading-a-8",
+                "quote": "The River Severn has a significant turn through town, almost making an island of Shrewsbury Town Center.",
+                "anchor": "几乎成岛"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "它几乎被水包围。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2025-ii-reading-a-8",
+                "quote": "The River Severn has a significant turn through town, almost making an island of Shrewsbury Town Center.",
+                "anchor": "塞文河急转几乎成岛"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "它以花卉节而闻名。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "It's known for its flower festival.",
+              "explanation": "原文仅提到镇中处处是鲜花（hanging baskets, window boxes, and planters），并未提及任何“花卉节”，属无中生有。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "它从伦敦很容易到达。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeTrend",
+              "sourceQuote": "Getting to Shrewsbury Town Center from London is challenging but worth the anxiety.",
+              "sourceHighlight": "challenging",
+              "optionText": "It's easily accessible from London.",
+              "optionHighlight": "easily accessible",
+              "explanation": "原文说从伦敦前往“颇具挑战（challenging）”，选项却说“很容易到达（easily accessible）”，与原文意思正好相反。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2025-ii-reading-a-8",
+                "quote": "Getting to Shrewsbury Town Center from London is challenging but worth the anxiety.",
+                "anchor": "前往颇具挑战"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "It's almost surrounded by water.",
+            "sourceRole": "correctOption",
+            "targetText": "almost making an island of Shrewsbury Town Center",
+            "targetParagraphId": "para-2025-ii-reading-a-8",
+            "relationType": "paraphrase",
+            "note": "正确选项 almost surrounded by water 是原文 almost making an island of Shrewsbury Town Center 的同义替换：被河水环绕几乎成岛即“几乎被水包围”。"
+          }
+        ]
+      },
+      "q-2025-ii-023": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查细节理解：作者建议游客在 Mevagissey 做什么。",
+        "stemTranslationZh": "作者建议游客在 Mevagissey 做什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "尝尝康沃尔派。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2025-ii-reading-a-10",
+                "quote": "Don’t leave the harbor without a traditional Cornish pie.",
+                "anchor": "别忘了尝康沃尔派"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "看一部英国电视节目。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "you’ve probably seen it in a movie or British TV show",
+              "optionText": "Watch a British TV show.",
+              "matchType": "exact",
+              "relationNote": "原文 British TV show 只是说这个渔村“可能在电影或英国电视节目里见过它”，是引出小镇知名度，并非建议游客去看电视节目，借原词设套。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2025-ii-reading-a-10",
+                "quote": "you’ve probably seen it in a movie or British TV show",
+                "anchor": "影视中见过此地"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "出海去钓鱼。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "Fishermen go out to sea daily and sell their fish in harbor-side markets.",
+              "sourceEntity": "Fishermen",
+              "optionText": "Go fishing in the sea.",
+              "optionEntity": "visitors (implied subject)",
+              "explanation": "出海捕鱼的是当地“渔民（Fishermen）”，而非作者建议游客去做的事，行为主体错配。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2025-ii-reading-a-10",
+                "quote": "Fishermen go out to sea daily and sell their fish in harbor-side markets.",
+                "anchor": "渔民出海"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "给港口拍照。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Take pictures of the harbor.",
+              "explanation": "原文多次提到 harbor（港口），但从未建议游客给港口拍照，属无中生有。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Try the Cornish pie.",
+            "sourceRole": "correctOption",
+            "targetText": "Don’t leave the harbor without a traditional Cornish pie.",
+            "targetParagraphId": "para-2025-ii-reading-a-10",
+            "relationType": "paraphrase",
+            "note": "正确选项 Try the Cornish pie 对应原文 Don’t leave the harbor without a traditional Cornish pie：用 don’t leave...without（离开前别错过）的双重否定表达“一定要尝”，即作者给游客的建议。"
+          }
+        ]
+      },
+      "q-2025-ii-024": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查 Ho 在 LPCH 教授的对象是谁，需定位到对学生身份的描述。",
+        "stemTranslationZh": "Ho 在 LPCH 教的是哪些人？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "患病的孩子。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2025-ii-reading-b-2",
+                "quote": "where each year, about 500 LPCH patients also become students",
+                "anchor": "约500名患儿成为学生"
+              },
+              {
+                "role": "secondary",
+                "paragraphId": "para-2025-ii-reading-b-1",
+                "quote": "Kathy Ho teaches high school inside Lucile Packard Children’s Hospital Stanford (LPCH).",
+                "anchor": "在儿童医院内教高中"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "年轻的护士。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Ho teaches young nurses.",
+              "explanation": "原文未提及 Ho 教护士，她教的是成为学生的患儿，护士属无中生有。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "医学院学生。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "where each year, about 500 LPCH patients also become students",
+              "sourceEntity": "LPCH patients also become students",
+              "optionText": "Medical students.",
+              "optionEntity": "Medical students",
+              "explanation": "原文的 students 指成为学生的住院患儿，并非医学院学生，对象错配。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "患者的父母。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeAction",
+              "sourceQuote": "The hospital school is free of parents, doctors, and medical procedures.",
+              "sourceHighlight": "free of parents",
+              "optionText": "Patients' parents.",
+              "optionHighlight": "parents",
+              "explanation": "原文明确说医院学校 \"不受家长干扰\"，家长恰恰被排除在外，选项却说教家长，恰好相反。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2025-ii-reading-b-2",
+                "quote": "The hospital school is free of parents, doctors, and medical procedures.",
+                "anchor": "学校不受家长干扰"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Who does Ho teach",
+            "sourceRole": "stem",
+            "targetText": "where each year, about 500 LPCH patients also become students",
+            "targetParagraphId": "para-2025-ii-reading-b-2",
+            "relationType": "locationCue",
+            "note": "题干问 Who does Ho teach，原文用 patients also become students 点明教学对象是患儿，对应 Sick children。"
+          }
+        ]
+      },
+      "q-2025-ii-025": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查 Ho 工作的特点，需归纳她对自身角色的描述。",
+        "stemTranslationZh": "Ho 这份工作的一个特点是什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "把学业放在首位。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeAction",
+              "sourceQuote": "Still, in room 386, academics don’t come first.",
+              "sourceHighlight": "academics don’t come first",
+              "optionText": "Prioritizing academics.",
+              "optionHighlight": "Prioritizing academics",
+              "explanation": "原文说在 386 房间学业并不优先，选项却称把学业放首位，与原文恰好相反。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2025-ii-reading-b-3",
+                "quote": "Still, in room 386, academics don’t come first.",
+                "anchor": "学业不优先"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "鼓励创新。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Ho's job is characterized by encouraging innovation.",
+              "explanation": "原文未提及鼓励创新，属无中生有。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "治疗各种疾病。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "The hospital school is free of parents, doctors, and medical procedures.",
+              "sourceEntity": "medical procedures",
+              "optionText": "Treating various diseases.",
+              "optionEntity": "Treating various diseases",
+              "explanation": "治病是医生的工作，原文说学校不涉及医疗程序，将医疗职责错配给作为教师的 Ho。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "扮演多重角色。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2025-ii-reading-b-3",
+                "quote": "I’m a coach, an adviser, and a comforter, and that’s what it means to be a hospital teacher.",
+                "anchor": "教练、顾问、安慰者"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Playing multiple roles",
+            "sourceRole": "correctOption",
+            "targetText": "I’m a coach, an adviser, and a comforter",
+            "targetParagraphId": "para-2025-ii-reading-b-3",
+            "relationType": "paraphrase",
+            "note": "选项 Playing multiple roles 是对原文并列的 a coach, an adviser, and a comforter 三种角色的同义概括。"
+          }
+        ]
+      },
+      "q-2025-ii-026": {
+        "skill": {
+          "primary": "detail",
+          "secondary": "inference"
+        },
+        "questionFocus": "考查第四段下划线词 it 的指代，需回溯前文找到 it 所指的行为。",
+        "stemTranslationZh": "第四段中下划线词 \"it\" 指代的是什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "提供常规课程。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "Some teachers don’t give the kids any assignments; they express sympathy instead.",
+              "sourceEntity": "don’t give the kids any assignments",
+              "optionText": "Offering regular lessons.",
+              "optionEntity": "Offering regular lessons",
+              "explanation": "it 指代的是 \"不留作业\" 这一做法，而非提供常规课程，指代对象错配。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "给予额外关注。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeAction",
+              "sourceQuote": "They think their teachers don’t care about their schoolwork.",
+              "sourceHighlight": "don’t care about their schoolwork",
+              "optionText": "Paying extra attention.",
+              "optionHighlight": "Paying extra attention",
+              "explanation": "it 指向让孩子觉得老师不关心其学业的做法，给予额外关注与之相反。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2025-ii-reading-b-4",
+                "quote": "They think their teachers don’t care about their schoolwork.",
+                "anchor": "孩子觉得老师不关心学业"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "不布置任何作业。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2025-ii-reading-b-4",
+                "quote": "Some teachers don’t give the kids any assignments; they express sympathy instead.",
+                "anchor": "一些老师不留作业"
+              },
+              {
+                "role": "secondary",
+                "paragraphId": "para-2025-ii-reading-b-4",
+                "quote": "I feel like it is a disservice to the kids",
+                "anchor": "it 是对孩子的伤害"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "不表达同情。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "negationReversal",
+              "sourceQuote": "Some teachers don’t give the kids any assignments; they express sympathy instead.",
+              "sourceHighlight": "they express sympathy instead",
+              "optionText": "Showing no sympathy.",
+              "optionHighlight": "Showing no sympathy",
+              "explanation": "原文说那些老师 \"反而表达同情\"，选项却说不表达同情，且 it 指的是不留作业而非是否同情，否定关系颠倒。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2025-ii-reading-b-4",
+                "quote": "Some teachers don’t give the kids any assignments; they express sympathy instead.",
+                "anchor": "反而表达同情"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "it",
+            "sourceRole": "stem",
+            "targetText": "Some teachers don’t give the kids any assignments",
+            "targetParagraphId": "para-2025-ii-reading-b-4",
+            "relationType": "locationCue",
+            "note": "下划线 it 出现在 I feel like it is a disservice to the kids 中，回指前句 don’t give the kids any assignments，即 Assigning no schoolwork。"
+          }
+        ]
+      },
+      "q-2025-ii-027": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查 Good 认为医院学校如何使学生受益，需定位到 Good 的话语。",
+        "stemTranslationZh": "根据 Good 的说法，医院学校如何使学生受益？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "它缓解同伴压力。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "helping kids keep up with their peers (同龄人) outside the hospital",
+              "optionText": "It eases peer pressure.",
+              "matchType": "exact",
+              "relationNote": "原文出现 peers 一词，选项借 peer pressure 制造词钩干扰，但原文谈的是跟上同龄人，未提缓解同伴压力。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2025-ii-reading-b-5",
+                "quote": "helping kids keep up with their peers (同龄人) outside the hospital",
+                "anchor": "跟上同龄人"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "它帮助他们怀抱希望地生活。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2025-ii-reading-b-5",
+                "quote": "School can keep those dreams alive by giving kids a way to learn and grow.",
+                "anchor": "学校让梦想存活"
+              },
+              {
+                "role": "secondary",
+                "paragraphId": "para-2025-ii-reading-b-5",
+                "quote": "Those kids have dreams.",
+                "anchor": "孩子们有梦想"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "它让他们摆脱病痛。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "I actually think the medicine is only a small piece for some problems",
+              "sourceEntity": "the medicine",
+              "optionText": "It frees them from aches.",
+              "optionEntity": "frees them from aches",
+              "explanation": "摆脱病痛属于 medicine 的范畴，Good 恰恰说医学只是一小部分，把缓解病痛错配给学校的益处。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "它用故事来娱乐他们。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "The hospital school entertains them with stories.",
+              "explanation": "原文未提及用故事娱乐孩子，属无中生有。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "It helps them live in hope",
+            "sourceRole": "correctOption",
+            "targetText": "School can keep those dreams alive by giving kids a way to learn and grow.",
+            "targetParagraphId": "para-2025-ii-reading-b-5",
+            "relationType": "paraphrase",
+            "note": "选项 live in hope 是对原文 keep those dreams alive（让梦想存活）的同义替换，dreams 对应 hope。"
+          }
+        ]
+      },
+      "q-2025-ii-028": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查对 Detrinidad 网店起步时经营状况的细节理解。",
+        "stemTranslationZh": "Detrinidad 的生意刚开始时情况如何？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "它面临激烈的竞争。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "It faced tough competition.",
+              "explanation": "原文未提及网店起步时面临任何竞争，属无中生有。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "它遭受了巨大的损失。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeTrend",
+              "sourceQuote": "But the opposite happened: She was flooded, shipping out 1,200 orders in June of 2020 alone.",
+              "sourceHighlight": "She was flooded",
+              "optionText": "It suffered a great loss.",
+              "optionHighlight": "suffered a great loss",
+              "explanation": "原文说生意火爆订单如潮（She was flooded），与选项所说遭受巨大损失方向相反，属黑白颠倒。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2025-ii-reading-c-1",
+                "quote": "But the opposite happened: She was flooded, shipping out 1,200 orders in June of 2020 alone.",
+                "anchor": "She was flooded"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "它获得了大量资金支持。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "It got lots of financial support.",
+              "explanation": "原文未提及网店获得任何资金支持，属无中生有。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "它进展得出乎意料地好。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2025-ii-reading-c-1",
+                "quote": "she didn’t have high hopes for it. But the opposite happened: She was flooded, shipping out 1,200 orders in June of 2020 alone.",
+                "anchor": "the opposite happened: She was flooded"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "It went surprisingly well.",
+            "sourceRole": "correctOption",
+            "targetText": "she didn’t have high hopes for it. But the opposite happened: She was flooded",
+            "targetParagraphId": "para-2025-ii-reading-c-1",
+            "relationType": "paraphrase",
+            "note": "原文用 didn’t have high hopes + the opposite happened + flooded 表达期望不高却生意火爆，对应选项 surprisingly well（出乎意料地好）。"
+          }
+        ]
+      },
+      "q-2025-ii-029": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查对 Knuth 关于植物研究发现的细节理解。",
+        "stemTranslationZh": "Knuth 关于植物的发现之一是什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "它们对学生更有吸引力。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overstatement",
+              "sourceQuote": "Students who are around plants perform better academically than students who are in a classroom without plants",
+              "sourceHighlight": "perform better academically",
+              "optionText": "They appeal more to students.",
+              "optionHighlight": "appeal more to students",
+              "explanation": "原文只说身处植物环境的学生学业表现更好，并未说植物对学生更有吸引力，选项偷换为吸引力概念。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2025-ii-reading-c-3",
+                "quote": "Students who are around plants perform better academically than students who are in a classroom without plants",
+                "anchor": "perform better academically"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "它们净化环境。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "They purify the environment.",
+              "explanation": "原文虽提到 Adding more nature to our environment，但从未提及植物净化环境，属无中生有。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "它们升高皮质醇水平。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeTrend",
+              "sourceQuote": "the biggest is by decreasing our level of cortisol, the stress hormone (激素) in our body.",
+              "sourceHighlight": "decreasing our level of cortisol",
+              "optionText": "They raise the cortisol level.",
+              "optionHighlight": "raise the cortisol level",
+              "explanation": "原文说植物降低皮质醇水平（decreasing），选项说升高（raise），方向相反，属黑白颠倒。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2025-ii-reading-c-2",
+                "quote": "the biggest is by decreasing our level of cortisol, the stress hormone (激素) in our body.",
+                "anchor": "decreasing our level of cortisol"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "它们提升生产力。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2025-ii-reading-c-3",
+                "quote": "This productivity also translates into the workplace for adults. Our study showed that there was a 30% decrease in sick leave for people who were in plant-rich workplaces.",
+                "anchor": "This productivity also translates into the workplace"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "They enhance productivity.",
+            "sourceRole": "correctOption",
+            "targetText": "This productivity also translates into the workplace for adults.",
+            "targetParagraphId": "para-2025-ii-reading-c-3",
+            "relationType": "wordFamily",
+            "note": "选项 enhance productivity 与原文 productivity 同词族，原文用学生学业表现更好与职场病假减少 30% 佐证植物提升生产力。"
+          }
+        ]
+      },
+      "q-2025-ii-030": {
+        "skill": {
+          "primary": "inference"
+        },
+        "questionFocus": "考查对 Detrinidad 提及医生与律师这一类比意图的推断理解。",
+        "stemTranslationZh": "Detrinidad 通过提及医生和律师试图说明什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "社交技能的必要性。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "The necessity of social skills.",
+              "explanation": "原文谈的是养护植物需要练习，从未涉及社交技能，属无中生有。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "可持续性的含义。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "the practice it takes to sustain a plant",
+              "optionText": "The meaning of sustainability.",
+              "matchType": "wordFamily",
+              "relationNote": "选项 sustainability 与原文 sustain 同词族，借原文词钩制造干扰，但医生律师的类比意在说明养植需要反复练习，而非可持续性的含义。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2025-ii-reading-c-4",
+                "quote": "you should allow yourself the practice it takes to sustain a plant",
+                "anchor": "the practice it takes to sustain a plant"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "反复努力的重要性。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2025-ii-reading-c-4",
+                "quote": "Doctors practice medicine and lawyers practice law and you should allow yourself the practice it takes to sustain a plant.",
+                "anchor": "the practice it takes to sustain a plant"
+              },
+              {
+                "role": "secondary",
+                "paragraphId": "para-2025-ii-reading-c-4",
+                "quote": "Tending to plants is an exercise in patience and learning.",
+                "anchor": "an exercise in patience and learning"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "专业意见的价值。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "Doctors practice medicine and lawyers practice law",
+              "optionText": "The value of professional opinions.",
+              "matchType": "wordFamily",
+              "relationNote": "选项借 doctors/lawyers 这类专业人士制造 professional opinions 的词钩干扰，但作者类比意在用医生律师都需 practice 来说明养植需要练习，而非强调专业意见的价值。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2025-ii-reading-c-4",
+                "quote": "Doctors practice medicine and lawyers practice law and you should allow yourself the practice it takes to sustain a plant.",
+                "anchor": "Doctors practice medicine and lawyers practice law"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "The importance of repeated efforts.",
+            "sourceRole": "correctOption",
+            "targetText": "Doctors practice medicine and lawyers practice law and you should allow yourself the practice it takes to sustain a plant.",
+            "targetParagraphId": "para-2025-ii-reading-c-4",
+            "relationType": "paraphrase",
+            "note": "原文用 doctors/lawyers practice 的类比与 the practice it takes 强调养植需要反复练习，对应选项 repeated efforts（反复努力）。"
+          }
+        ]
+      },
+      "q-2025-ii-031": {
+        "skill": {
+          "primary": "title"
+        },
+        "questionFocus": "考查对全文主旨的把握，选出最恰当的标题。",
+        "stemTranslationZh": "什么是本文合适的标题？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "是时候更换室内植物了",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overstatement",
+              "sourceQuote": "if it dies, go get another one",
+              "sourceHighlight": "if it dies, go get another one",
+              "optionText": "Time to Replace Houseplants",
+              "optionHighlight": "Time to Replace Houseplants",
+              "explanation": "原文只是末段建议植物若死了再买一株，这只是养护心态的细节，把它拔高为全文标题以偏概全。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2025-ii-reading-c-4",
+                "quote": "if it dies, go get another one",
+                "anchor": "if it dies, go get another one"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "植物提振你的心情",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2025-ii-reading-c-2",
+                "quote": "Adding more nature to our environment can change our mood and how we think.",
+                "anchor": "change our mood and how we think"
+              },
+              {
+                "role": "secondary",
+                "paragraphId": "para-2025-ii-reading-c-2",
+                "quote": "Plants can improve our state of mind in a few ways but the biggest is by decreasing our level of cortisol, the stress hormone (激素) in our body.",
+                "anchor": "Plants can improve our state of mind"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "选择室内植物的小贴士",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Tips on Choosing Houseplants",
+              "explanation": "原文谈植物对身心的益处与养护心态，从未提供挑选室内植物的小贴士，属无中生有。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "植物点亮你的家",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "understatement",
+              "sourceQuote": "Adding more nature to our environment can change our mood and how we think.",
+              "sourceHighlight": "change our mood and how we think",
+              "optionText": "Plants Brighten Your Home",
+              "optionHighlight": "Brighten Your Home",
+              "explanation": "全文强调植物改善身心状态、提升效率，选项却把主题缩小为美化家居的居家装饰，偏离心理与健康主旨。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2025-ii-reading-c-2",
+                "quote": "Adding more nature to our environment can change our mood and how we think.",
+                "anchor": "change our mood and how we think"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Plants Boost Your Mood",
+            "sourceRole": "correctOption",
+            "targetText": "Adding more nature to our environment can change our mood and how we think.",
+            "targetParagraphId": "para-2025-ii-reading-c-2",
+            "relationType": "paraphrase",
+            "note": "标题 Boost Your Mood 对应原文 change our mood 与 improve our state of mind，紧扣全文植物改善身心状态的主旨。"
+          }
+        ]
+      },
+      "q-2025-ii-032": {
+        "skill": {
+          "primary": "inference"
+        },
+        "questionFocus": "考查对作者早年生活的推断，需结合第一段中作者在南非成长经历及\"非洲有孩子在挨饿\"这句话所暗示的信息进行推理。",
+        "stemTranslationZh": "关于作者的早年生活，可以推断出什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "他目睹过食物短缺。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2025-ii-reading-d-1",
+                "quote": "Maybe that feeling comes from growing up in South Africa, where the phrase “there are children starving in Africa” was more of an uncomfortable reminder of fact than a prayer at dinner time.",
+                "anchor": "在南非成长，\"非洲有孩子挨饿\"是事实的提醒"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "他喜爱当地的美食。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "He enjoyed the local cuisine.",
+              "explanation": "原文未提及作者早年喜爱当地美食，第一段只谈及他在南非成长及对食物浪费的感受，无任何关于喜爱当地饮食的信息。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "他向非洲人捐赠过食物。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "there are children starving in Africa",
+              "optionText": "He donated food to Africans.",
+              "matchType": "wordFamily",
+              "relationNote": "选项利用原文 Africa/Africans 与 starving children 的词面联系制造干扰，但原文只是说\"非洲有孩子在挨饿\"是事实提醒，并未说作者向非洲人捐过食物。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "他在家帮忙做饭。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "He helped to cook at home.",
+              "explanation": "原文未提及作者早年在家帮忙做饭，第一段只提到\"dinner time\"这一用餐场景词，并无作者下厨的相关信息。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "early life",
+            "sourceRole": "stem",
+            "targetText": "growing up in South Africa",
+            "targetParagraphId": "para-2025-ii-reading-d-1",
+            "relationType": "locationCue",
+            "note": "题干用 early life 问作者早年生活，原文用 growing up in South Africa 对应作者的成长阶段，是定位线索。"
+          },
+          {
+            "sourceText": "He witnessed food shortage.",
+            "sourceRole": "correctOption",
+            "targetText": "“there are children starving in Africa” was more of an uncomfortable reminder of fact",
+            "targetParagraphId": "para-2025-ii-reading-d-1",
+            "relationType": "paraphrase",
+            "note": "正确选项 witnessed food shortage 是对原文 children starving（孩子挨饿）作为\"事实提醒 reminder of fact\"的同义概括，starving 对应 food shortage。"
+          }
+        ]
+      },
+      "q-2025-ii-033": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查 Blue Hill 开展 wastED 实验的目的，定位第三段每道菜\"为唤起对食物浪费的关注而定制\"这一句。",
+        "stemTranslationZh": "Blue Hill 为什么要开展这项实验？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "为顾客定制菜品。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "Each dish was tailor-made to raise awareness regarding food waste.",
+              "optionText": "To customize dishes for guests.",
+              "matchType": "wordFamily",
+              "relationNote": "选项 customize 与原文 tailor-made（量身定制）属同义词面钩子，但原文 tailor-made 的目的是 raise awareness（唤起关注），而非为顾客定制，混淆了手段与目的。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2025-ii-reading-d-3",
+                "quote": "Each dish was tailor-made to raise awareness regarding food waste.",
+                "anchor": "每道菜为唤起对食物浪费的关注而定制"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "让公众意识到食物浪费问题。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2025-ii-reading-d-3",
+                "quote": "Each dish was tailor-made to raise awareness regarding food waste.",
+                "anchor": "每道菜旨在唤起对食物浪费的关注"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "测试一种食品加工方法。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "To test a food processing method.",
+              "explanation": "原文未提及实验目的是测试某种食品加工方法，实验目的明确是唤起对食物浪费的关注。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "改进英国的零浪费系统。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "Restaurants like Silo in the UK have experimented with zero-waste systems, but wastED took the concept to its logical conclusion.",
+              "sourceEntity": "Restaurants like Silo in the UK",
+              "optionText": "To improve the UK's zero-waste systems.",
+              "optionEntity": "the UK's zero-waste systems",
+              "explanation": "原文提到英国 Silo 等餐厅尝试零浪费系统是作为对比背景，wastED 是纽约餐厅的实验，目的并非改进英国的零浪费系统，选项错配了对象。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Why did Blue Hill carry out the experiment",
+            "sourceRole": "stem",
+            "targetText": "to raise awareness regarding food waste",
+            "targetParagraphId": "para-2025-ii-reading-d-3",
+            "relationType": "locationCue",
+            "note": "题干用 Why 问实验目的，原文用 to raise awareness regarding food waste 的不定式表目的，是定位线索。"
+          },
+          {
+            "sourceText": "To make the public aware of food waste.",
+            "sourceRole": "correctOption",
+            "targetText": "to raise awareness regarding food waste",
+            "targetParagraphId": "para-2025-ii-reading-d-3",
+            "relationType": "paraphrase",
+            "note": "正确选项 make the public aware of food waste 是原文 raise awareness regarding food waste 的同义替换，aware 对应 awareness。"
+          }
+        ]
+      },
+      "q-2025-ii-034": {
+        "skill": {
+          "primary": "mainIdea"
+        },
+        "questionFocus": "考查第五段的段落主旨，该段澄清并列举了 wastED 菜品所用的食材种类。",
+        "stemTranslationZh": "第五段主要讲的是什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "为什么使用这些食材。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overstatement",
+              "sourceQuote": "Instead, all the ingredients (配料) used were examples of meat cuts and produce that most restaurants would never consider serving.",
+              "sourceHighlight": "all the ingredients (配料) used were examples of meat cuts and produce",
+              "optionText": "Why the ingredients were used.",
+              "optionHighlight": "Why the ingredients were used",
+              "explanation": "第五段重点是说明食材\"是什么 what\"——即列举所用的肉块和农产品，而非解释\"为什么 why\"使用这些食材，选项偏离了段落实际焦点。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2025-ii-reading-d-5",
+                "quote": "Instead, all the ingredients (配料) used were examples of meat cuts and produce that most restaurants would never consider serving.",
+                "anchor": "所用食材都是大多数餐厅不会考虑使用的肉块和农产品"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "哪些菜品最受欢迎。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Which dishes were best liked.",
+              "explanation": "第五段未提及哪些菜品最受欢迎，菜品受欢迎（enthusiastic reviews）出现在第六段，且并未区分哪道菜最受欢迎。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "这些菜是用什么做的。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2025-ii-reading-d-5",
+                "quote": "Instead, all the ingredients (配料) used were examples of meat cuts and produce that most restaurants would never consider serving.",
+                "anchor": "所用食材是大多数餐厅不会考虑使用的肉块和农产品"
+              },
+              {
+                "role": "secondary",
+                "paragraphId": "para-2025-ii-reading-d-5",
+                "quote": "Things like kale ribs, fish collars, rejected sweet potatoes, and cucumber butts were all re-appropriated and, with the help of a number of good chefs, turned into excellent cuisine.",
+                "anchor": "羽衣甘蓝梗、鱼鳃骨、被淘汰的红薯、黄瓜尾等被重新利用做成佳肴"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "这些食材是在哪里购买的。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Where the ingredients were bought.",
+              "explanation": "第五段未提及食材的购买地点，只说明了食材的种类与性质。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "What is paragraph 5 mainly about",
+            "sourceRole": "stem",
+            "targetText": "all the ingredients (配料) used were examples of meat cuts and produce",
+            "targetParagraphId": "para-2025-ii-reading-d-5",
+            "relationType": "locationCue",
+            "note": "题干问第五段主旨，原文核心句围绕 ingredients used（所用食材）展开，是段落主旨的定位线索。"
+          },
+          {
+            "sourceText": "What the dishes were made of.",
+            "sourceRole": "correctOption",
+            "targetText": "Things like kale ribs, fish collars, rejected sweet potatoes, and cucumber butts were all re-appropriated",
+            "targetParagraphId": "para-2025-ii-reading-d-5",
+            "relationType": "paraphrase",
+            "note": "正确选项 what the dishes were made of（菜是用什么做的）对应原文对 ingredients 的列举，made of 同义于原文所述的食材构成。"
+          }
+        ]
+      },
+      "q-2025-ii-035": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查关于 wastED 的细节，定位第六段\"从一开始就被设计为短期实验，Blue Hill 已恢复常规菜单\"这一信息。",
+        "stemTranslationZh": "关于 wastED，我们可以了解到什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "它已如计划那样结束了。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2025-ii-reading-d-6",
+                "quote": "it was designed from the start as a short-lived experiment; Blue Hill has since returned to its regular menu",
+                "anchor": "从一开始就被设计为短期实验，Blue Hill 已恢复常规菜单"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "它正在创造新的工作岗位。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "It is creating new jobs.",
+              "explanation": "原文未提及 wastED 正在创造新的工作岗位，第六段只谈实验的结束与意义。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "它重新获得了人气。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeTrend",
+              "sourceQuote": "it was designed from the start as a short-lived experiment; Blue Hill has since returned to its regular menu",
+              "sourceHighlight": "Blue Hill has since returned to its regular menu",
+              "optionText": "It has regained popularity.",
+              "optionHighlight": "regained popularity",
+              "explanation": "原文说餐厅此后已恢复常规菜单，wastED 作为短期实验已结束，选项却说它\"重新获得人气\"，与实验已结束的事实趋势相反。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2025-ii-reading-d-6",
+                "quote": "it was designed from the start as a short-lived experiment; Blue Hill has since returned to its regular menu",
+                "anchor": "短期实验已结束，已恢复常规菜单"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "它受到顶级厨师的批评。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeAttitude",
+              "sourceQuote": "Things like kale ribs, fish collars, rejected sweet potatoes, and cucumber butts were all re-appropriated and, with the help of a number of good chefs, turned into excellent cuisine.",
+              "sourceHighlight": "with the help of a number of good chefs, turned into excellent cuisine",
+              "optionText": "It is criticized by top chefs.",
+              "optionHighlight": "criticized by top chefs",
+              "explanation": "原文说在众多优秀厨师的帮助下食材被做成佳肴，体现厨师的正面参与，选项却说\"受到顶级厨师批评\"，态度黑白颠倒。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2025-ii-reading-d-5",
+                "quote": "Things like kale ribs, fish collars, rejected sweet potatoes, and cucumber butts were all re-appropriated and, with the help of a number of good chefs, turned into excellent cuisine.",
+                "anchor": "在众多优秀厨师帮助下做成佳肴"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "What can we learn about wastED",
+            "sourceRole": "stem",
+            "targetText": "Blue Hill has since returned to its regular menu",
+            "targetParagraphId": "para-2025-ii-reading-d-6",
+            "relationType": "locationCue",
+            "note": "题干问关于 wastED 的信息，原文第六段 Blue Hill has since returned to its regular menu 是关键定位线索。"
+          },
+          {
+            "sourceText": "It has ended as planned.",
+            "sourceRole": "correctOption",
+            "targetText": "it was designed from the start as a short-lived experiment",
+            "targetParagraphId": "para-2025-ii-reading-d-6",
+            "relationType": "paraphrase",
+            "note": "正确选项 ended as planned（如计划结束）是对原文 designed from the start as a short-lived experiment（一开始就设计为短期实验）的同义替换，as planned 对应 designed from the start。"
+          }
+        ]
+      }
+    }
+  }
+}
