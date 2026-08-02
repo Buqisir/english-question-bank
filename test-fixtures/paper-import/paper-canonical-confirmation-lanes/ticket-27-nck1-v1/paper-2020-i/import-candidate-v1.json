@@ -1,0 +1,4967 @@
+{
+  "schemaVersion": "trusted-ticket-26-legacy-import-candidate-v1",
+  "authority": {
+    "manifestId": "paper-canonical",
+    "manifestVersion": "41",
+    "manifestDigest": "sha256:b025bdc677a59a09548575e3df1e911ecd0273c5f6a9056d70603107c1970c83"
+  },
+  "source": {
+    "mediaType": "application/vnd.eqb.ticket-26-source-capture+json",
+    "sha256": "sha256:493e3e49f23a6f278bef782407a311f157101ed09fbffcd5fcabbdc7aa3ef63b",
+    "byteLength": 204421,
+    "captureId": "source-capture:daa1ccc8b12e99e9ae6ec",
+    "captureDigest": "sha256:daa1ccc8b12e99e9ae6ecfc3eaf526e7c1fe94c795753ee0ffda830113bfd89a",
+    "paperId": "paper-2020-i",
+    "documents": [
+      {
+        "role": "asset-projection",
+        "sha256": "sha256:598fdfd3e57f39d6244238c7d0a28383ff2fd2e522acb03f4ea9a1bd414c2cd7",
+        "byteLength": 134899
+      },
+      {
+        "role": "source-provenance",
+        "sha256": "sha256:340ee05a411f687fd7c766506a1034e875efd9e536e3d8ddaf387397dc100cf7",
+        "byteLength": 3994
+      },
+      {
+        "role": "official-answer-lead",
+        "sha256": "sha256:ed825d83c0e97ed0a5586130dc7e2b76b7f316ca41e8c89cdf3ad6eeca506b97",
+        "byteLength": 8239
+      }
+    ]
+  },
+  "operatorChoices": {},
+  "interpretation": {
+    "paperId": "paper-2020-i",
+    "profileId": "nck1",
+    "sourceAssetVersion": 1,
+    "provenance": {
+      "sourceFileName": "2020年新课标I卷-答案版.docx",
+      "sourceFileSha256": "96ed0fd208ee95f4989cbf2b651a70ba57baf09d917af7a94e793191f63ef7d2",
+      "paper": {
+        "year": 2020,
+        "region": "全国新课标Ⅰ",
+        "paperName": "2020年新课标Ⅰ卷",
+        "examCode": "2020-i",
+        "subject": "English",
+        "sourceType": "真题",
+        "defaultTags": [
+          "真题",
+          "2020",
+          "新课标Ⅰ卷"
+        ]
+      }
+    },
+    "capture": {
+      "captureId": "source-capture:daa1ccc8b12e99e9ae6ec",
+      "digest": "sha256:daa1ccc8b12e99e9ae6ecfc3eaf526e7c1fe94c795753ee0ffda830113bfd89a"
+    },
+    "observations": [
+      {
+        "observationId": "observation:ticket-26:paper-2020-i:asset_projection:document",
+        "kind": "immutable_source_document",
+        "documentInputKey": "latest_asset_projection",
+        "value": {
+          "byteLength": 134899,
+          "path": "app/public/paper-assets/paper-2020-i/latest/paper-asset.json",
+          "role": "asset-projection",
+          "sha256": "sha256:598fdfd3e57f39d6244238c7d0a28383ff2fd2e522acb03f4ea9a1bd414c2cd7"
+        },
+        "span": {
+          "start": 0,
+          "end": 134899
+        },
+        "extraction": {
+          "adapterId": "ticket-26-legacy-source-capture",
+          "version": "3"
+        }
+      },
+      {
+        "observationId": "observation:ticket-26:paper-2020-i:asset_projection:json-root",
+        "kind": "ordered_json_parse_observation",
+        "documentInputKey": "latest_asset_projection",
+        "value": {
+          "format": "json",
+          "rootType": "object",
+          "entryCount": 7
+        },
+        "span": {
+          "start": 0,
+          "end": 134899
+        },
+        "extraction": {
+          "adapterId": "ticket-26-legacy-source-capture",
+          "version": "3"
+        }
+      },
+      {
+        "observationId": "observation:ticket-26:paper-2020-i:source_provenance:document",
+        "kind": "immutable_source_document",
+        "documentInputKey": "latest_source_provenance",
+        "value": {
+          "byteLength": 3994,
+          "path": "app/public/paper-assets/paper-2020-i/latest/import-meta.json",
+          "role": "source-provenance",
+          "sha256": "sha256:340ee05a411f687fd7c766506a1034e875efd9e536e3d8ddaf387397dc100cf7"
+        },
+        "span": {
+          "start": 0,
+          "end": 3994
+        },
+        "extraction": {
+          "adapterId": "ticket-26-legacy-source-capture",
+          "version": "3"
+        }
+      },
+      {
+        "observationId": "observation:ticket-26:paper-2020-i:source_provenance:json-root",
+        "kind": "ordered_json_parse_observation",
+        "documentInputKey": "latest_source_provenance",
+        "value": {
+          "format": "json",
+          "rootType": "object",
+          "entryCount": 8
+        },
+        "span": {
+          "start": 0,
+          "end": 3994
+        },
+        "extraction": {
+          "adapterId": "ticket-26-legacy-source-capture",
+          "version": "3"
+        }
+      },
+      {
+        "observationId": "observation:ticket-26:paper-2020-i:official_answer_lead:document",
+        "kind": "immutable_source_document",
+        "documentInputKey": "latest_official_answer_lead",
+        "value": {
+          "byteLength": 8239,
+          "path": "app/public/paper-assets/paper-2020-i/latest/answer-key.json",
+          "role": "official-answer-lead",
+          "sha256": "sha256:ed825d83c0e97ed0a5586130dc7e2b76b7f316ca41e8c89cdf3ad6eeca506b97"
+        },
+        "span": {
+          "start": 0,
+          "end": 8239
+        },
+        "extraction": {
+          "adapterId": "ticket-26-legacy-source-capture",
+          "version": "3"
+        }
+      },
+      {
+        "observationId": "observation:ticket-26:paper-2020-i:official_answer_lead:json-root",
+        "kind": "ordered_json_parse_observation",
+        "documentInputKey": "latest_official_answer_lead",
+        "value": {
+          "format": "json",
+          "rootType": "object",
+          "entryCount": 4
+        },
+        "span": {
+          "start": 0,
+          "end": 8239
+        },
+        "extraction": {
+          "adapterId": "ticket-26-legacy-source-capture",
+          "version": "3"
+        }
+      },
+      {
+        "observationId": "observation:ticket-26:paper-2020-i:grammar-fill-prompt:blank-2020-i-056",
+        "kind": "grammar_fill_prompt_provision",
+        "documentInputKey": "latest_asset_projection",
+        "value": {
+          "blankId": "blank-2020-i-056",
+          "provision": "source_prompt",
+          "prompt": "wealth"
+        },
+        "span": {
+          "start": 0,
+          "end": 134899
+        },
+        "extraction": {
+          "adapterId": "ticket-26-legacy-source-capture",
+          "version": "3"
+        }
+      },
+      {
+        "observationId": "observation:ticket-26:paper-2020-i:grammar-fill-prompt:blank-2020-i-057",
+        "kind": "grammar_fill_prompt_provision",
+        "documentInputKey": "latest_asset_projection",
+        "value": {
+          "blankId": "blank-2020-i-057",
+          "provision": "source_proven_none"
+        },
+        "span": {
+          "start": 0,
+          "end": 134899
+        },
+        "extraction": {
+          "adapterId": "ticket-26-legacy-source-capture",
+          "version": "3"
+        }
+      },
+      {
+        "observationId": "observation:ticket-26:paper-2020-i:grammar-fill-prompt:blank-2020-i-058",
+        "kind": "grammar_fill_prompt_provision",
+        "documentInputKey": "latest_asset_projection",
+        "value": {
+          "blankId": "blank-2020-i-058",
+          "provision": "source_prompt",
+          "prompt": "form"
+        },
+        "span": {
+          "start": 0,
+          "end": 134899
+        },
+        "extraction": {
+          "adapterId": "ticket-26-legacy-source-capture",
+          "version": "3"
+        }
+      },
+      {
+        "observationId": "observation:ticket-26:paper-2020-i:grammar-fill-prompt:blank-2020-i-059",
+        "kind": "grammar_fill_prompt_provision",
+        "documentInputKey": "latest_asset_projection",
+        "value": {
+          "blankId": "blank-2020-i-059",
+          "provision": "source_proven_none"
+        },
+        "span": {
+          "start": 0,
+          "end": 134899
+        },
+        "extraction": {
+          "adapterId": "ticket-26-legacy-source-capture",
+          "version": "3"
+        }
+      },
+      {
+        "observationId": "observation:ticket-26:paper-2020-i:grammar-fill-prompt:blank-2020-i-060",
+        "kind": "grammar_fill_prompt_provision",
+        "documentInputKey": "latest_asset_projection",
+        "value": {
+          "blankId": "blank-2020-i-060",
+          "provision": "source_prompt",
+          "prompt": "call"
+        },
+        "span": {
+          "start": 0,
+          "end": 134899
+        },
+        "extraction": {
+          "adapterId": "ticket-26-legacy-source-capture",
+          "version": "3"
+        }
+      },
+      {
+        "observationId": "observation:ticket-26:paper-2020-i:grammar-fill-prompt:blank-2020-i-061",
+        "kind": "grammar_fill_prompt_provision",
+        "documentInputKey": "latest_asset_projection",
+        "value": {
+          "blankId": "blank-2020-i-061",
+          "provision": "source_prompt",
+          "prompt": "be"
+        },
+        "span": {
+          "start": 0,
+          "end": 134899
+        },
+        "extraction": {
+          "adapterId": "ticket-26-legacy-source-capture",
+          "version": "3"
+        }
+      },
+      {
+        "observationId": "observation:ticket-26:paper-2020-i:grammar-fill-prompt:blank-2020-i-062",
+        "kind": "grammar_fill_prompt_provision",
+        "documentInputKey": "latest_asset_projection",
+        "value": {
+          "blankId": "blank-2020-i-062",
+          "provision": "source_prompt",
+          "prompt": "they"
+        },
+        "span": {
+          "start": 0,
+          "end": 134899
+        },
+        "extraction": {
+          "adapterId": "ticket-26-legacy-source-capture",
+          "version": "3"
+        }
+      },
+      {
+        "observationId": "observation:ticket-26:paper-2020-i:grammar-fill-prompt:blank-2020-i-063",
+        "kind": "grammar_fill_prompt_provision",
+        "documentInputKey": "latest_asset_projection",
+        "value": {
+          "blankId": "blank-2020-i-063",
+          "provision": "source_prompt",
+          "prompt": "walk"
+        },
+        "span": {
+          "start": 0,
+          "end": 134899
+        },
+        "extraction": {
+          "adapterId": "ticket-26-legacy-source-capture",
+          "version": "3"
+        }
+      },
+      {
+        "observationId": "observation:ticket-26:paper-2020-i:grammar-fill-prompt:blank-2020-i-064",
+        "kind": "grammar_fill_prompt_provision",
+        "documentInputKey": "latest_asset_projection",
+        "value": {
+          "blankId": "blank-2020-i-064",
+          "provision": "source_prompt",
+          "prompt": "accurate"
+        },
+        "span": {
+          "start": 0,
+          "end": 134899
+        },
+        "extraction": {
+          "adapterId": "ticket-26-legacy-source-capture",
+          "version": "3"
+        }
+      },
+      {
+        "observationId": "observation:ticket-26:paper-2020-i:grammar-fill-prompt:blank-2020-i-065",
+        "kind": "grammar_fill_prompt_provision",
+        "documentInputKey": "latest_asset_projection",
+        "value": {
+          "blankId": "blank-2020-i-065",
+          "provision": "source_proven_none"
+        },
+        "span": {
+          "start": 0,
+          "end": 134899
+        },
+        "extraction": {
+          "adapterId": "ticket-26-legacy-source-capture",
+          "version": "3"
+        }
+      }
+    ],
+    "assertions": [
+      {
+        "assertionId": "answer:q-2020-i-021",
+        "questionId": "q-2020-i-021",
+        "answer": "A",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2020-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2020-i-022",
+        "questionId": "q-2020-i-022",
+        "answer": "C",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2020-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2020-i-023",
+        "questionId": "q-2020-i-023",
+        "answer": "B",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2020-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2020-i-024",
+        "questionId": "q-2020-i-024",
+        "answer": "C",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2020-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2020-i-025",
+        "questionId": "q-2020-i-025",
+        "answer": "A",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2020-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2020-i-026",
+        "questionId": "q-2020-i-026",
+        "answer": "B",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2020-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2020-i-027",
+        "questionId": "q-2020-i-027",
+        "answer": "C",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2020-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2020-i-028",
+        "questionId": "q-2020-i-028",
+        "answer": "B",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2020-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2020-i-029",
+        "questionId": "q-2020-i-029",
+        "answer": "D",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2020-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2020-i-030",
+        "questionId": "q-2020-i-030",
+        "answer": "B",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2020-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2020-i-031",
+        "questionId": "q-2020-i-031",
+        "answer": "A",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2020-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2020-i-032",
+        "questionId": "q-2020-i-032",
+        "answer": "D",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2020-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2020-i-033",
+        "questionId": "q-2020-i-033",
+        "answer": "D",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2020-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2020-i-034",
+        "questionId": "q-2020-i-034",
+        "answer": "A",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2020-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2020-i-035",
+        "questionId": "q-2020-i-035",
+        "answer": "C",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2020-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2020-i-036",
+        "questionId": "q-2020-i-036",
+        "answer": "G",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2020-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2020-i-037",
+        "questionId": "q-2020-i-037",
+        "answer": "A",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2020-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2020-i-038",
+        "questionId": "q-2020-i-038",
+        "answer": "C",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2020-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2020-i-039",
+        "questionId": "q-2020-i-039",
+        "answer": "B",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2020-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2020-i-040",
+        "questionId": "q-2020-i-040",
+        "answer": "D",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2020-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2020-i-041",
+        "questionId": "q-2020-i-041",
+        "answer": "C",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2020-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2020-i-042",
+        "questionId": "q-2020-i-042",
+        "answer": "A",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2020-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2020-i-043",
+        "questionId": "q-2020-i-043",
+        "answer": "C",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2020-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2020-i-044",
+        "questionId": "q-2020-i-044",
+        "answer": "D",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2020-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2020-i-045",
+        "questionId": "q-2020-i-045",
+        "answer": "A",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2020-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2020-i-046",
+        "questionId": "q-2020-i-046",
+        "answer": "B",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2020-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2020-i-047",
+        "questionId": "q-2020-i-047",
+        "answer": "B",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2020-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2020-i-048",
+        "questionId": "q-2020-i-048",
+        "answer": "D",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2020-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2020-i-049",
+        "questionId": "q-2020-i-049",
+        "answer": "C",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2020-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2020-i-050",
+        "questionId": "q-2020-i-050",
+        "answer": "B",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2020-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2020-i-051",
+        "questionId": "q-2020-i-051",
+        "answer": "C",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2020-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2020-i-052",
+        "questionId": "q-2020-i-052",
+        "answer": "A",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2020-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2020-i-053",
+        "questionId": "q-2020-i-053",
+        "answer": "B",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2020-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2020-i-054",
+        "questionId": "q-2020-i-054",
+        "answer": "D",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2020-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2020-i-055",
+        "questionId": "q-2020-i-055",
+        "answer": "D",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2020-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2020-i-056",
+        "questionId": "q-2020-i-056",
+        "answer": "wealthy",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2020-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2020-i-057",
+        "questionId": "q-2020-i-057",
+        "answer": "or",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2020-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2020-i-058",
+        "questionId": "q-2020-i-058",
+        "answer": "formed",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2020-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2020-i-059",
+        "questionId": "q-2020-i-059",
+        "answer": "which/that",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2020-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2020-i-060",
+        "questionId": "q-2020-i-060",
+        "answer": "are called",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2020-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2020-i-061",
+        "questionId": "q-2020-i-061",
+        "answer": "is",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2020-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2020-i-062",
+        "questionId": "q-2020-i-062",
+        "answer": "themselves",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2020-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2020-i-063",
+        "questionId": "q-2020-i-063",
+        "answer": "walking",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2020-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2020-i-064",
+        "questionId": "q-2020-i-064",
+        "answer": "accuracy",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2020-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2020-i-065",
+        "questionId": "q-2020-i-065",
+        "answer": "for",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2020-i:official_answer_lead:document"
+      }
+    ],
+    "groups": [
+      {
+        "groupId": "group-2020-i-reading-a",
+        "slotId": "reading.a",
+        "family": "reading",
+        "questionIds": [
+          "q-2020-i-021",
+          "q-2020-i-022",
+          "q-2020-i-023"
+        ],
+        "blankIds": [],
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2020-i:asset_projection:document",
+        "content": {
+          "blocks": [
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2020-i-reading-a-1",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-reading-a-1",
+                  "text": "POETRY CHALLENGE"
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2020-i-reading-a-2",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-reading-a-2",
+                  "text": "Write a poem about how courage, determination, and strength have helped you face challenges in your life. \n Prizes"
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2020-i-reading-a-3",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-reading-a-3",
+                  "text": "3 Grand Prizes: Trip to Washington, D. C. for each of three winners, a parent and one other person of the winner’s choice. Trip includes round-trip air tickets, hotel stay for two nights, and tours of the National Air and Space Museum and the office of National Geographic World."
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2020-i-reading-a-4",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-reading-a-4",
+                  "text": "6 First Prizes: The book Sky Pioneer: A Photobiography of Amelia Earhart signed by author Corinne Szabo and pilot Linda Finch."
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2020-i-reading-a-5",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-reading-a-5",
+                  "text": "50 Honorable Mentions: Judges will choose up to 50 honorable mention winners, who will each receive a T-shirt in memory of Earhart’s final flight. \n Rules"
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2020-i-reading-a-6",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-reading-a-6",
+                  "text": "Follow all rules carefully to prevent disqualification."
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2020-i-reading-a-7",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-reading-a-7",
+                  "text": "■Write a poem using 100 words or fewer. Your poem can be any format, any number of lines."
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2020-i-reading-a-8",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-reading-a-8",
+                  "text": "■Write by hand or type on a single sheet of paper. You may use both the front and back of the paper."
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2020-i-reading-a-9",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-reading-a-9",
+                  "text": "■On the same sheet of paper, write or type your name, address, telephone number, and birth date."
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2020-i-reading-a-10",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-reading-a-10",
+                  "text": "■Mail your entry to us by October 31 this year."
+                }
+              ]
+            }
+          ]
+        },
+        "media": [],
+        "variant": {
+          "family": "reading",
+          "passageBlockRoles": [],
+          "questions": [
+            {
+              "questionId": "q-2020-i-021",
+              "stem": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:q-2020-i-021:stem",
+                  "text": "How many people can each grand prize winner take on the free trip?"
+                }
+              ],
+              "correctOptionId": "option:q-2020-i-021:A"
+            },
+            {
+              "questionId": "q-2020-i-022",
+              "stem": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:q-2020-i-022:stem",
+                  "text": "What will each of the honorable mention winners get?"
+                }
+              ],
+              "correctOptionId": "option:q-2020-i-022:C"
+            },
+            {
+              "questionId": "q-2020-i-023",
+              "stem": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:q-2020-i-023:stem",
+                  "text": "Which of the following will result in disqualification? B"
+                }
+              ],
+              "correctOptionId": "option:q-2020-i-023:B"
+            }
+          ],
+          "choiceOwnership": {
+            "ownership": "per_question",
+            "sets": [
+              {
+                "questionId": "q-2020-i-021",
+                "options": [
+                  {
+                    "optionId": "option:q-2020-i-021:A",
+                    "label": "A",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-reading-a:q-2020-i-021:option:A",
+                        "text": "Two."
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-021:B",
+                    "label": "B",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-reading-a:q-2020-i-021:option:B",
+                        "text": "Three."
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-021:C",
+                    "label": "C",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-reading-a:q-2020-i-021:option:C",
+                        "text": "Four."
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-021:D",
+                    "label": "D",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-reading-a:q-2020-i-021:option:D",
+                        "text": "Six."
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "questionId": "q-2020-i-022",
+                "options": [
+                  {
+                    "optionId": "option:q-2020-i-022:A",
+                    "label": "A",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-reading-a:q-2020-i-022:option:A",
+                        "text": "A plane ticket."
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-022:B",
+                    "label": "B",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-reading-a:q-2020-i-022:option:B",
+                        "text": "A book by Corinne Szabo."
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-022:C",
+                    "label": "C",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-reading-a:q-2020-i-022:option:C",
+                        "text": "A special T-shirt."
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-022:D",
+                    "label": "D",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-reading-a:q-2020-i-022:option:D",
+                        "text": "A photo of Amelia Earhart."
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "questionId": "q-2020-i-023",
+                "options": [
+                  {
+                    "optionId": "option:q-2020-i-023:A",
+                    "label": "A",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-reading-a:q-2020-i-023:option:A",
+                        "text": "Typing your poem out."
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-023:B",
+                    "label": "B",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-reading-a:q-2020-i-023:option:B",
+                        "text": "Writing a poem of 120 words."
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-023:C",
+                    "label": "C",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-reading-a:q-2020-i-023:option:C",
+                        "text": "Using both sides of the paper."
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-023:D",
+                    "label": "D",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-reading-a:q-2020-i-023:option:D",
+                        "text": "Mailing your entry on October 30."
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "sourceSpanRefsByTarget": {},
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2020-i-reading-a-1",
+              "text": "POETRY CHALLENGE"
+            },
+            {
+              "paragraphId": "para-2020-i-reading-a-2",
+              "text": "Write a poem about how courage, determination, and strength have helped you face challenges in your life. \n Prizes"
+            },
+            {
+              "paragraphId": "para-2020-i-reading-a-3",
+              "text": "3 Grand Prizes: Trip to Washington, D. C. for each of three winners, a parent and one other person of the winner’s choice. Trip includes round-trip air tickets, hotel stay for two nights, and tours of the National Air and Space Museum and the office of National Geographic World."
+            },
+            {
+              "paragraphId": "para-2020-i-reading-a-4",
+              "text": "6 First Prizes: The book Sky Pioneer: A Photobiography of Amelia Earhart signed by author Corinne Szabo and pilot Linda Finch."
+            },
+            {
+              "paragraphId": "para-2020-i-reading-a-5",
+              "text": "50 Honorable Mentions: Judges will choose up to 50 honorable mention winners, who will each receive a T-shirt in memory of Earhart’s final flight. \n Rules"
+            },
+            {
+              "paragraphId": "para-2020-i-reading-a-6",
+              "text": "Follow all rules carefully to prevent disqualification."
+            },
+            {
+              "paragraphId": "para-2020-i-reading-a-7",
+              "text": "■Write a poem using 100 words or fewer. Your poem can be any format, any number of lines."
+            },
+            {
+              "paragraphId": "para-2020-i-reading-a-8",
+              "text": "■Write by hand or type on a single sheet of paper. You may use both the front and back of the paper."
+            },
+            {
+              "paragraphId": "para-2020-i-reading-a-9",
+              "text": "■On the same sheet of paper, write or type your name, address, telephone number, and birth date."
+            },
+            {
+              "paragraphId": "para-2020-i-reading-a-10",
+              "text": "■Mail your entry to us by October 31 this year."
+            }
+          ]
+        },
+        "questions": [
+          {
+            "questionId": "q-2020-i-021",
+            "questionNo": 21,
+            "groupId": "group-2020-i-reading-a",
+            "stem": "How many people can each grand prize winner take on the free trip?",
+            "options": [
+              {
+                "label": "A",
+                "text": "Two."
+              },
+              {
+                "label": "B",
+                "text": "Three."
+              },
+              {
+                "label": "C",
+                "text": "Four."
+              },
+              {
+                "label": "D",
+                "text": "Six."
+              }
+            ]
+          },
+          {
+            "questionId": "q-2020-i-022",
+            "questionNo": 22,
+            "groupId": "group-2020-i-reading-a",
+            "stem": "What will each of the honorable mention winners get?",
+            "options": [
+              {
+                "label": "A",
+                "text": "A plane ticket."
+              },
+              {
+                "label": "B",
+                "text": "A book by Corinne Szabo."
+              },
+              {
+                "label": "C",
+                "text": "A special T-shirt."
+              },
+              {
+                "label": "D",
+                "text": "A photo of Amelia Earhart."
+              }
+            ]
+          },
+          {
+            "questionId": "q-2020-i-023",
+            "questionNo": 23,
+            "groupId": "group-2020-i-reading-a",
+            "stem": "Which of the following will result in disqualification? B",
+            "options": [
+              {
+                "label": "A",
+                "text": "Typing your poem out."
+              },
+              {
+                "label": "B",
+                "text": "Writing a poem of 120 words."
+              },
+              {
+                "label": "C",
+                "text": "Using both sides of the paper."
+              },
+              {
+                "label": "D",
+                "text": "Mailing your entry on October 30."
+              }
+            ]
+          }
+        ],
+        "blanks": [],
+        "optionBank": [],
+        "writingTask": null
+      },
+      {
+        "groupId": "group-2020-i-reading-b",
+        "slotId": "reading.b",
+        "family": "reading",
+        "questionIds": [
+          "q-2020-i-024",
+          "q-2020-i-025",
+          "q-2020-i-026",
+          "q-2020-i-027"
+        ],
+        "blankIds": [],
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2020-i:asset_projection:document",
+        "content": {
+          "blocks": [
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2020-i-reading-b-1",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-reading-b-1",
+                  "text": "Jennifer Mauer has needed more willpower than the typical college student to pursue her goal of earning a nursing degree. That willpower bore fruit when Jennifer graduated from University of Wisconsin﹣Eau Claire and became the first in her large family to earn a bachelor’s degree. Mauer, of Edgar, Wisconsin, grew up on a farm in a family of 10 children. Her dad worked at a job away from the farm, and her mother ran the farm with the kids. After high school, Jennifer attended a local technical college, working to pay her tuition (学费) , because there was no extra money set aside for a college education. After graduation, she worked to help her sisters and brothers pay for their schooling. Jennifer now is married and has three children of her own. She decided to go back to college to advance her career and to be able to better support her family while doing something she loves: nursing. She chose the UW﹣Eau Claire program at Ministry Saint Joseph’s Hospital in Marshfield because she was able to pursue her four﹣year degree close to home. She could drive to class and be home in the evening to help with her kids. Jennifer received great support from her family as she worked to earn her degree: Her husband worked two jobs to cover the bills, and her 68﹣year﹣old mother helped take care of the children at times. Through it all, she remained in good academic standing and graduated with honors. Jennifer sacrificed (牺牲) to achieve her goal, giving up many nights with her kids and missing important events to study. “Some nights my heart was breaking to have to pick between my kids and studying for exams or papers, “ she says. However, her children have learned an important lesson witnessing their mother earn her degree. Jennifer is a first﹣generation graduate and an inspiration to her family﹣and that’s pretty powerful."
+                }
+              ]
+            }
+          ]
+        },
+        "media": [],
+        "variant": {
+          "family": "reading",
+          "passageBlockRoles": [],
+          "questions": [
+            {
+              "questionId": "q-2020-i-024",
+              "stem": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:q-2020-i-024:stem",
+                  "text": "What did Jennifer do after high school？"
+                }
+              ],
+              "correctOptionId": "option:q-2020-i-024:C"
+            },
+            {
+              "questionId": "q-2020-i-025",
+              "stem": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:q-2020-i-025:stem",
+                  "text": "Why did Jennifer choose the program at Ministry Saint Joseph's Hospital in Marshfield？"
+                }
+              ],
+              "correctOptionId": "option:q-2020-i-025:A"
+            },
+            {
+              "questionId": "q-2020-i-026",
+              "stem": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:q-2020-i-026:stem",
+                  "text": "What did Jennifer sacrifice to achieve her goal？"
+                }
+              ],
+              "correctOptionId": "option:q-2020-i-026:B"
+            },
+            {
+              "questionId": "q-2020-i-027",
+              "stem": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:q-2020-i-027:stem",
+                  "text": "What can we learn from Jennifer's story？ C"
+                }
+              ],
+              "correctOptionId": "option:q-2020-i-027:C"
+            }
+          ],
+          "choiceOwnership": {
+            "ownership": "per_question",
+            "sets": [
+              {
+                "questionId": "q-2020-i-024",
+                "options": [
+                  {
+                    "optionId": "option:q-2020-i-024:A",
+                    "label": "A",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-reading-b:q-2020-i-024:option:A",
+                        "text": "She helped her dad with his work．"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-024:B",
+                    "label": "B",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-reading-b:q-2020-i-024:option:B",
+                        "text": "She ran the family farm on her own．"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-024:C",
+                    "label": "C",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-reading-b:q-2020-i-024:option:C",
+                        "text": "She supported herself through college．"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-024:D",
+                    "label": "D",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-reading-b:q-2020-i-024:option:D",
+                        "text": "She taught her sisters and brothers at home．"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "questionId": "q-2020-i-025",
+                "options": [
+                  {
+                    "optionId": "option:q-2020-i-025:A",
+                    "label": "A",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-reading-b:q-2020-i-025:option:A",
+                        "text": "To take care of her kids easily．"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-025:B",
+                    "label": "B",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-reading-b:q-2020-i-025:option:B",
+                        "text": "To learn from the best nurses．"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-025:C",
+                    "label": "C",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-reading-b:q-2020-i-025:option:C",
+                        "text": "To save money for her parents．"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-025:D",
+                    "label": "D",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-reading-b:q-2020-i-025:option:D",
+                        "text": "To find a well﹣paid job there．"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "questionId": "q-2020-i-026",
+                "options": [
+                  {
+                    "optionId": "option:q-2020-i-026:A",
+                    "label": "A",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-reading-b:q-2020-i-026:option:A",
+                        "text": "Her health．"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-026:B",
+                    "label": "B",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-reading-b:q-2020-i-026:option:B",
+                        "text": "Her time with family．"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-026:C",
+                    "label": "C",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-reading-b:q-2020-i-026:option:C",
+                        "text": "Her reputation．"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-026:D",
+                    "label": "D",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-reading-b:q-2020-i-026:option:D",
+                        "text": "Her chance of promotion．"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "questionId": "q-2020-i-027",
+                "options": [
+                  {
+                    "optionId": "option:q-2020-i-027:A",
+                    "label": "A",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-reading-b:q-2020-i-027:option:A",
+                        "text": "Time is money．"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-027:B",
+                    "label": "B",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-reading-b:q-2020-i-027:option:B",
+                        "text": "Love breaks down barriers．"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-027:C",
+                    "label": "C",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-reading-b:q-2020-i-027:option:C",
+                        "text": "Hard work pays off．"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-027:D",
+                    "label": "D",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-reading-b:q-2020-i-027:option:D",
+                        "text": "Education is the key to success．"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "sourceSpanRefsByTarget": {},
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2020-i-reading-b-1",
+              "text": "Jennifer Mauer has needed more willpower than the typical college student to pursue her goal of earning a nursing degree. That willpower bore fruit when Jennifer graduated from University of Wisconsin﹣Eau Claire and became the first in her large family to earn a bachelor’s degree. Mauer, of Edgar, Wisconsin, grew up on a farm in a family of 10 children. Her dad worked at a job away from the farm, and her mother ran the farm with the kids. After high school, Jennifer attended a local technical college, working to pay her tuition (学费) , because there was no extra money set aside for a college education. After graduation, she worked to help her sisters and brothers pay for their schooling. Jennifer now is married and has three children of her own. She decided to go back to college to advance her career and to be able to better support her family while doing something she loves: nursing. She chose the UW﹣Eau Claire program at Ministry Saint Joseph’s Hospital in Marshfield because she was able to pursue her four﹣year degree close to home. She could drive to class and be home in the evening to help with her kids. Jennifer received great support from her family as she worked to earn her degree: Her husband worked two jobs to cover the bills, and her 68﹣year﹣old mother helped take care of the children at times. Through it all, she remained in good academic standing and graduated with honors. Jennifer sacrificed (牺牲) to achieve her goal, giving up many nights with her kids and missing important events to study. “Some nights my heart was breaking to have to pick between my kids and studying for exams or papers, “ she says. However, her children have learned an important lesson witnessing their mother earn her degree. Jennifer is a first﹣generation graduate and an inspiration to her family﹣and that’s pretty powerful."
+            }
+          ]
+        },
+        "questions": [
+          {
+            "questionId": "q-2020-i-024",
+            "questionNo": 24,
+            "groupId": "group-2020-i-reading-b",
+            "stem": "What did Jennifer do after high school？",
+            "options": [
+              {
+                "label": "A",
+                "text": "She helped her dad with his work．"
+              },
+              {
+                "label": "B",
+                "text": "She ran the family farm on her own．"
+              },
+              {
+                "label": "C",
+                "text": "She supported herself through college．"
+              },
+              {
+                "label": "D",
+                "text": "She taught her sisters and brothers at home．"
+              }
+            ]
+          },
+          {
+            "questionId": "q-2020-i-025",
+            "questionNo": 25,
+            "groupId": "group-2020-i-reading-b",
+            "stem": "Why did Jennifer choose the program at Ministry Saint Joseph's Hospital in Marshfield？",
+            "options": [
+              {
+                "label": "A",
+                "text": "To take care of her kids easily．"
+              },
+              {
+                "label": "B",
+                "text": "To learn from the best nurses．"
+              },
+              {
+                "label": "C",
+                "text": "To save money for her parents．"
+              },
+              {
+                "label": "D",
+                "text": "To find a well﹣paid job there．"
+              }
+            ]
+          },
+          {
+            "questionId": "q-2020-i-026",
+            "questionNo": 26,
+            "groupId": "group-2020-i-reading-b",
+            "stem": "What did Jennifer sacrifice to achieve her goal？",
+            "options": [
+              {
+                "label": "A",
+                "text": "Her health．"
+              },
+              {
+                "label": "B",
+                "text": "Her time with family．"
+              },
+              {
+                "label": "C",
+                "text": "Her reputation．"
+              },
+              {
+                "label": "D",
+                "text": "Her chance of promotion．"
+              }
+            ]
+          },
+          {
+            "questionId": "q-2020-i-027",
+            "questionNo": 27,
+            "groupId": "group-2020-i-reading-b",
+            "stem": "What can we learn from Jennifer's story？ C",
+            "options": [
+              {
+                "label": "A",
+                "text": "Time is money．"
+              },
+              {
+                "label": "B",
+                "text": "Love breaks down barriers．"
+              },
+              {
+                "label": "C",
+                "text": "Hard work pays off．"
+              },
+              {
+                "label": "D",
+                "text": "Education is the key to success．"
+              }
+            ]
+          }
+        ],
+        "blanks": [],
+        "optionBank": [],
+        "writingTask": null
+      },
+      {
+        "groupId": "group-2020-i-reading-c",
+        "slotId": "reading.c",
+        "family": "reading",
+        "questionIds": [
+          "q-2020-i-028",
+          "q-2020-i-029",
+          "q-2020-i-030",
+          "q-2020-i-031"
+        ],
+        "blankIds": [],
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2020-i:asset_projection:document",
+        "content": {
+          "blocks": [
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2020-i-reading-c-1",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-reading-c-1",
+                  "text": "In the mid-1990s, Toni Bissell taught English as a volunteer in Uzbekistan. He left after seven months, physically broken and having lost his mind. A few years later, still attracted to the country, he returned to Uzbekistan to write an article about the disappearance of the Aral Sea."
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2020-i-reading-c-2",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-reading-c-2",
+                  "text": "His visit, however, ended up involving a lot more than that. Hence this book, Chasing the Sea: Lost Among the Ghosts of Empire in Central Asia, which talks about a road trip from Tashkent to Karakalpakstan, where millions of lives have been destroyed by the slow drying up of the sea. It is the story of an American travelling to a strange land, and of the people he meets on his way: Rustam, his translator, a lovely 24-year-old who picked up his colorful English in California, Oleg and Natasha, his hosts in Tashkent, and a string of foreign aid workers."
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2020-i-reading-c-3",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-reading-c-3",
+                  "text": "This is a quick look at life in Uzbekistan, made of friendliness and warmth, but also its darker side of society. In Samarkand, Mr Bissell admires the architectural wonders, while on his way to Bukhara he gets a taste of police methods when suspected of drug dealing. In Ferghana, he attends a mountain funeral (葬礼) followed by a strange drinking party. And in Karakalpakstan, he is saddened by the dust storms, diseases and fishing boats stuck miles from the sea."
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2020-i-reading-c-4",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-reading-c-4",
+                  "text": "Mr Bissell skillfully organizes historical insights and cultural references, making his tale a well-rounded picture of Uzbekistan, seen from Western eyes. His judgment and references are decidedly American, as well as his delicate stomach. As the author explains, this is neither a travel nor a history book, or even a piece of reportage. Whatever it is, the result is a fine and vivid description of the purest of Central Asian traditions."
+                }
+              ]
+            }
+          ]
+        },
+        "media": [],
+        "variant": {
+          "family": "reading",
+          "passageBlockRoles": [],
+          "questions": [
+            {
+              "questionId": "q-2020-i-028",
+              "stem": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:q-2020-i-028:stem",
+                  "text": "What made Mr Bissell return to Uzbekistan？"
+                }
+              ],
+              "correctOptionId": "option:q-2020-i-028:B"
+            },
+            {
+              "questionId": "q-2020-i-029",
+              "stem": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:q-2020-i-029:stem",
+                  "text": "What does the underlined word \"that\" in paragraph 2 refer to？"
+                }
+              ],
+              "correctOptionId": "option:q-2020-i-029:D"
+            },
+            {
+              "questionId": "q-2020-i-030",
+              "stem": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:q-2020-i-030:stem",
+                  "text": "Which of the following best describes Mr Bissell's road trip in Uzbekistan？"
+                }
+              ],
+              "correctOptionId": "option:q-2020-i-030:B"
+            },
+            {
+              "questionId": "q-2020-i-031",
+              "stem": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:q-2020-i-031:stem",
+                  "text": "What is the purpose of this text？ D"
+                }
+              ],
+              "correctOptionId": "option:q-2020-i-031:A"
+            }
+          ],
+          "choiceOwnership": {
+            "ownership": "per_question",
+            "sets": [
+              {
+                "questionId": "q-2020-i-028",
+                "options": [
+                  {
+                    "optionId": "option:q-2020-i-028:A",
+                    "label": "A",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-reading-c:q-2020-i-028:option:A",
+                        "text": "His friends' invitation．"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-028:B",
+                    "label": "B",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-reading-c:q-2020-i-028:option:B",
+                        "text": "His interest in the country．"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-028:C",
+                    "label": "C",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-reading-c:q-2020-i-028:option:C",
+                        "text": "His love for teaching．"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-028:D",
+                    "label": "D",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-reading-c:q-2020-i-028:option:D",
+                        "text": "His desire to regain health．"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "questionId": "q-2020-i-029",
+                "options": [
+                  {
+                    "optionId": "option:q-2020-i-029:A",
+                    "label": "A",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-reading-c:q-2020-i-029:option:A",
+                        "text": "Developing a serious mental disease．"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-029:B",
+                    "label": "B",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-reading-c:q-2020-i-029:option:B",
+                        "text": "Taking a guided tour in Central Asia．"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-029:C",
+                    "label": "C",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-reading-c:q-2020-i-029:option:C",
+                        "text": "Working as a volunteer in Uzbekistan．"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-029:D",
+                    "label": "D",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-reading-c:q-2020-i-029:option:D",
+                        "text": "Writing an article about the Aral Sea．"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "questionId": "q-2020-i-030",
+                "options": [
+                  {
+                    "optionId": "option:q-2020-i-030:A",
+                    "label": "A",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-reading-c:q-2020-i-030:option:A",
+                        "text": "Romantic．"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-030:B",
+                    "label": "B",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-reading-c:q-2020-i-030:option:B",
+                        "text": "Eventful．"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-030:C",
+                    "label": "C",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-reading-c:q-2020-i-030:option:C",
+                        "text": "Pleasant．"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-030:D",
+                    "label": "D",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-reading-c:q-2020-i-030:option:D",
+                        "text": "Dangerous．"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "questionId": "q-2020-i-031",
+                "options": [
+                  {
+                    "optionId": "option:q-2020-i-031:A",
+                    "label": "A",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-reading-c:q-2020-i-031:option:A",
+                        "text": "To introduce a book．"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-031:B",
+                    "label": "B",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-reading-c:q-2020-i-031:option:B",
+                        "text": "To explain a cultural phenomenon．"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-031:C",
+                    "label": "C",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-reading-c:q-2020-i-031:option:C",
+                        "text": "To remember a writer．"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-031:D",
+                    "label": "D",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-reading-c:q-2020-i-031:option:D",
+                        "text": "To recommend a travel destination．"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "sourceSpanRefsByTarget": {},
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2020-i-reading-c-1",
+              "text": "In the mid-1990s, Toni Bissell taught English as a volunteer in Uzbekistan. He left after seven months, physically broken and having lost his mind. A few years later, still attracted to the country, he returned to Uzbekistan to write an article about the disappearance of the Aral Sea."
+            },
+            {
+              "paragraphId": "para-2020-i-reading-c-2",
+              "text": "His visit, however, ended up involving a lot more than that. Hence this book, Chasing the Sea: Lost Among the Ghosts of Empire in Central Asia, which talks about a road trip from Tashkent to Karakalpakstan, where millions of lives have been destroyed by the slow drying up of the sea. It is the story of an American travelling to a strange land, and of the people he meets on his way: Rustam, his translator, a lovely 24-year-old who picked up his colorful English in California, Oleg and Natasha, his hosts in Tashkent, and a string of foreign aid workers."
+            },
+            {
+              "paragraphId": "para-2020-i-reading-c-3",
+              "text": "This is a quick look at life in Uzbekistan, made of friendliness and warmth, but also its darker side of society. In Samarkand, Mr Bissell admires the architectural wonders, while on his way to Bukhara he gets a taste of police methods when suspected of drug dealing. In Ferghana, he attends a mountain funeral (葬礼) followed by a strange drinking party. And in Karakalpakstan, he is saddened by the dust storms, diseases and fishing boats stuck miles from the sea."
+            },
+            {
+              "paragraphId": "para-2020-i-reading-c-4",
+              "text": "Mr Bissell skillfully organizes historical insights and cultural references, making his tale a well-rounded picture of Uzbekistan, seen from Western eyes. His judgment and references are decidedly American, as well as his delicate stomach. As the author explains, this is neither a travel nor a history book, or even a piece of reportage. Whatever it is, the result is a fine and vivid description of the purest of Central Asian traditions."
+            }
+          ]
+        },
+        "questions": [
+          {
+            "questionId": "q-2020-i-028",
+            "questionNo": 28,
+            "groupId": "group-2020-i-reading-c",
+            "stem": "What made Mr Bissell return to Uzbekistan？",
+            "options": [
+              {
+                "label": "A",
+                "text": "His friends' invitation．"
+              },
+              {
+                "label": "B",
+                "text": "His interest in the country．"
+              },
+              {
+                "label": "C",
+                "text": "His love for teaching．"
+              },
+              {
+                "label": "D",
+                "text": "His desire to regain health．"
+              }
+            ]
+          },
+          {
+            "questionId": "q-2020-i-029",
+            "questionNo": 29,
+            "groupId": "group-2020-i-reading-c",
+            "stem": "What does the underlined word \"that\" in paragraph 2 refer to？",
+            "options": [
+              {
+                "label": "A",
+                "text": "Developing a serious mental disease．"
+              },
+              {
+                "label": "B",
+                "text": "Taking a guided tour in Central Asia．"
+              },
+              {
+                "label": "C",
+                "text": "Working as a volunteer in Uzbekistan．"
+              },
+              {
+                "label": "D",
+                "text": "Writing an article about the Aral Sea．"
+              }
+            ]
+          },
+          {
+            "questionId": "q-2020-i-030",
+            "questionNo": 30,
+            "groupId": "group-2020-i-reading-c",
+            "stem": "Which of the following best describes Mr Bissell's road trip in Uzbekistan？",
+            "options": [
+              {
+                "label": "A",
+                "text": "Romantic．"
+              },
+              {
+                "label": "B",
+                "text": "Eventful．"
+              },
+              {
+                "label": "C",
+                "text": "Pleasant．"
+              },
+              {
+                "label": "D",
+                "text": "Dangerous．"
+              }
+            ]
+          },
+          {
+            "questionId": "q-2020-i-031",
+            "questionNo": 31,
+            "groupId": "group-2020-i-reading-c",
+            "stem": "What is the purpose of this text？ D",
+            "options": [
+              {
+                "label": "A",
+                "text": "To introduce a book．"
+              },
+              {
+                "label": "B",
+                "text": "To explain a cultural phenomenon．"
+              },
+              {
+                "label": "C",
+                "text": "To remember a writer．"
+              },
+              {
+                "label": "D",
+                "text": "To recommend a travel destination．"
+              }
+            ]
+          }
+        ],
+        "blanks": [],
+        "optionBank": [],
+        "writingTask": null
+      },
+      {
+        "groupId": "group-2020-i-reading-d",
+        "slotId": "reading.d",
+        "family": "reading",
+        "questionIds": [
+          "q-2020-i-032",
+          "q-2020-i-033",
+          "q-2020-i-034",
+          "q-2020-i-035"
+        ],
+        "blankIds": [],
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2020-i:asset_projection:document",
+        "content": {
+          "blocks": [
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2020-i-reading-d-1",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-reading-d-1",
+                  "text": "According to a recent study in the Journal of Consumer Research, both the size and consumption habits of our eating companions can influence our food intake. And contrary to existing research that says you should avoid eating with heavier people who order large portions (份) , it’s the beanpoles with big appetites you really need to avoid. To test the effect of social influence on eating habits, the researchers conducted two experiments. In the first, 95 undergraduate women were individually invited into a lab to ostensibly (表面上) participate in a study about movie viewership. Before the film began, each woman was asked to help herself to a snack. An actor hired by the researchers grabbed her food first. In her natural state, the actor weighed 105 pounds. But in half the cases she wore a specially designed fat suit which increased her weight to 180 pounds."
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2020-i-reading-d-2",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-reading-d-2",
+                  "text": "Both the fat and thin versions of the actor took a large amount of food. The participants followed suit, taking more food than they normally would have. However, they took significantly more when the actor was thin."
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2020-i-reading-d-3",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-reading-d-3",
+                  "text": "For the second test, in one case the thin actor took two pieces of candy from the snack bowls. In the other case, she took 30 pieces. The results were similar to the first test: the participants followed suit but took significantly more candy when the thin actor took 30 pieces."
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2020-i-reading-d-4",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-reading-d-4",
+                  "text": "The tests show that the social environment is extremely influential when we’re making decisions. If this fellow participant is going to eat more, so will I. Call it the “I’ll have what she’s having” effect. However, we’ll adjust the influence. If an overweight person is having a large portion, I’ll hold back a bit because I see the results of his eating habits. But if a thin person eats a lot, I’ll follow suit. If he can eat much and keep slim, why can’t I?"
+                }
+              ]
+            }
+          ]
+        },
+        "media": [],
+        "variant": {
+          "family": "reading",
+          "passageBlockRoles": [],
+          "questions": [
+            {
+              "questionId": "q-2020-i-032",
+              "stem": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:q-2020-i-032:stem",
+                  "text": "What is the recent study mainly about？"
+                }
+              ],
+              "correctOptionId": "option:q-2020-i-032:D"
+            },
+            {
+              "questionId": "q-2020-i-033",
+              "stem": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:q-2020-i-033:stem",
+                  "text": "What does the underlined word \"beanpoles\" in paragraph 1 refer to？"
+                }
+              ],
+              "correctOptionId": "option:q-2020-i-033:D"
+            },
+            {
+              "questionId": "q-2020-i-034",
+              "stem": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:q-2020-i-034:stem",
+                  "text": "Why did the researchers hire the actor？"
+                }
+              ],
+              "correctOptionId": "option:q-2020-i-034:A"
+            },
+            {
+              "questionId": "q-2020-i-035",
+              "stem": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:q-2020-i-035:stem",
+                  "text": "On what basis do we \"adjust the influence\" according to the last paragraph？"
+                }
+              ],
+              "correctOptionId": "option:q-2020-i-035:C"
+            }
+          ],
+          "choiceOwnership": {
+            "ownership": "per_question",
+            "sets": [
+              {
+                "questionId": "q-2020-i-032",
+                "options": [
+                  {
+                    "optionId": "option:q-2020-i-032:A",
+                    "label": "A",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-reading-d:q-2020-i-032:option:A",
+                        "text": "Food safety．"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-032:B",
+                    "label": "B",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-reading-d:q-2020-i-032:option:B",
+                        "text": "Movie viewership．"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-032:C",
+                    "label": "C",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-reading-d:q-2020-i-032:option:C",
+                        "text": "Consumer demand．"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-032:D",
+                    "label": "D",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-reading-d:q-2020-i-032:option:D",
+                        "text": "Eating behavior．"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "questionId": "q-2020-i-033",
+                "options": [
+                  {
+                    "optionId": "option:q-2020-i-033:A",
+                    "label": "A",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-reading-d:q-2020-i-033:option:A",
+                        "text": "Big eaters．"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-033:B",
+                    "label": "B",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-reading-d:q-2020-i-033:option:B",
+                        "text": "Overweight persons．"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-033:C",
+                    "label": "C",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-reading-d:q-2020-i-033:option:C",
+                        "text": "Picky eaters．"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-033:D",
+                    "label": "D",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-reading-d:q-2020-i-033:option:D",
+                        "text": "Tall thin persons．"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "questionId": "q-2020-i-034",
+                "options": [
+                  {
+                    "optionId": "option:q-2020-i-034:A",
+                    "label": "A",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-reading-d:q-2020-i-034:option:A",
+                        "text": "To see how she would affect the participants．"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-034:B",
+                    "label": "B",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-reading-d:q-2020-i-034:option:B",
+                        "text": "To test if the participants could recognize her．"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-034:C",
+                    "label": "C",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-reading-d:q-2020-i-034:option:C",
+                        "text": "To find out what she would do in the two tests．"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-034:D",
+                    "label": "D",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-reading-d:q-2020-i-034:option:D",
+                        "text": "To study why she could keep her weight down．"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "questionId": "q-2020-i-035",
+                "options": [
+                  {
+                    "optionId": "option:q-2020-i-035:A",
+                    "label": "A",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-reading-d:q-2020-i-035:option:A",
+                        "text": "How hungry we are．"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-035:B",
+                    "label": "B",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-reading-d:q-2020-i-035:option:B",
+                        "text": "How slim we want to be．"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-035:C",
+                    "label": "C",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-reading-d:q-2020-i-035:option:C",
+                        "text": "How we perceive others．"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-035:D",
+                    "label": "D",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-reading-d:q-2020-i-035:option:D",
+                        "text": "How we feel about the food．"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "sourceSpanRefsByTarget": {},
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2020-i-reading-d-1",
+              "text": "According to a recent study in the Journal of Consumer Research, both the size and consumption habits of our eating companions can influence our food intake. And contrary to existing research that says you should avoid eating with heavier people who order large portions (份) , it’s the beanpoles with big appetites you really need to avoid. To test the effect of social influence on eating habits, the researchers conducted two experiments. In the first, 95 undergraduate women were individually invited into a lab to ostensibly (表面上) participate in a study about movie viewership. Before the film began, each woman was asked to help herself to a snack. An actor hired by the researchers grabbed her food first. In her natural state, the actor weighed 105 pounds. But in half the cases she wore a specially designed fat suit which increased her weight to 180 pounds."
+            },
+            {
+              "paragraphId": "para-2020-i-reading-d-2",
+              "text": "Both the fat and thin versions of the actor took a large amount of food. The participants followed suit, taking more food than they normally would have. However, they took significantly more when the actor was thin."
+            },
+            {
+              "paragraphId": "para-2020-i-reading-d-3",
+              "text": "For the second test, in one case the thin actor took two pieces of candy from the snack bowls. In the other case, she took 30 pieces. The results were similar to the first test: the participants followed suit but took significantly more candy when the thin actor took 30 pieces."
+            },
+            {
+              "paragraphId": "para-2020-i-reading-d-4",
+              "text": "The tests show that the social environment is extremely influential when we’re making decisions. If this fellow participant is going to eat more, so will I. Call it the “I’ll have what she’s having” effect. However, we’ll adjust the influence. If an overweight person is having a large portion, I’ll hold back a bit because I see the results of his eating habits. But if a thin person eats a lot, I’ll follow suit. If he can eat much and keep slim, why can’t I?"
+            }
+          ]
+        },
+        "questions": [
+          {
+            "questionId": "q-2020-i-032",
+            "questionNo": 32,
+            "groupId": "group-2020-i-reading-d",
+            "stem": "What is the recent study mainly about？",
+            "options": [
+              {
+                "label": "A",
+                "text": "Food safety．"
+              },
+              {
+                "label": "B",
+                "text": "Movie viewership．"
+              },
+              {
+                "label": "C",
+                "text": "Consumer demand．"
+              },
+              {
+                "label": "D",
+                "text": "Eating behavior．"
+              }
+            ]
+          },
+          {
+            "questionId": "q-2020-i-033",
+            "questionNo": 33,
+            "groupId": "group-2020-i-reading-d",
+            "stem": "What does the underlined word \"beanpoles\" in paragraph 1 refer to？",
+            "options": [
+              {
+                "label": "A",
+                "text": "Big eaters．"
+              },
+              {
+                "label": "B",
+                "text": "Overweight persons．"
+              },
+              {
+                "label": "C",
+                "text": "Picky eaters．"
+              },
+              {
+                "label": "D",
+                "text": "Tall thin persons．"
+              }
+            ]
+          },
+          {
+            "questionId": "q-2020-i-034",
+            "questionNo": 34,
+            "groupId": "group-2020-i-reading-d",
+            "stem": "Why did the researchers hire the actor？",
+            "options": [
+              {
+                "label": "A",
+                "text": "To see how she would affect the participants．"
+              },
+              {
+                "label": "B",
+                "text": "To test if the participants could recognize her．"
+              },
+              {
+                "label": "C",
+                "text": "To find out what she would do in the two tests．"
+              },
+              {
+                "label": "D",
+                "text": "To study why she could keep her weight down．"
+              }
+            ]
+          },
+          {
+            "questionId": "q-2020-i-035",
+            "questionNo": 35,
+            "groupId": "group-2020-i-reading-d",
+            "stem": "On what basis do we \"adjust the influence\" according to the last paragraph？",
+            "options": [
+              {
+                "label": "A",
+                "text": "How hungry we are．"
+              },
+              {
+                "label": "B",
+                "text": "How slim we want to be．"
+              },
+              {
+                "label": "C",
+                "text": "How we perceive others．"
+              },
+              {
+                "label": "D",
+                "text": "How we feel about the food．"
+              }
+            ]
+          }
+        ],
+        "blanks": [],
+        "optionBank": [],
+        "writingTask": null
+      },
+      {
+        "groupId": "group-2020-i-seven-choices",
+        "slotId": "reading.seven-choices",
+        "family": "seven-choices",
+        "questionIds": [
+          "q-2020-i-036",
+          "q-2020-i-037",
+          "q-2020-i-038",
+          "q-2020-i-039",
+          "q-2020-i-040"
+        ],
+        "blankIds": [
+          "blank-2020-i-036",
+          "blank-2020-i-037",
+          "blank-2020-i-038",
+          "blank-2020-i-039",
+          "blank-2020-i-040"
+        ],
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2020-i:asset_projection:document",
+        "content": {
+          "blocks": [
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2020-i-seven-title",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-seven-title:0",
+                  "text": "Some individuals are born with a gift for public speaking. "
+                },
+                {
+                  "kind": "blank_ref",
+                  "nodeId": "blank-ref:para-2020-i-seven-title:59",
+                  "blankId": "blank-2020-i-036"
+                },
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-seven-title:65",
+                  "text": "   Do you want to be a good public speaker? Here are some principles you must master."
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2020-i-seven-p1",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-seven-p1:0",
+                  "text": "People want to listen to someone who is interesting, relaxed and comfortable. Too often, when you stand up to give a speech, you focus on the “public” at the expense of the “speaking.” "
+                },
+                {
+                  "kind": "blank_ref",
+                  "nodeId": "blank-ref:para-2020-i-seven-p1:185",
+                  "blankId": "blank-2020-i-037"
+                },
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-seven-p1:191",
+                  "text": "   Focus on the speaking. Talk directly to your audience, be yourself and make a connection."
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2020-i-seven-p2",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-seven-p2:0",
+                  "text": "Even the most successful public speaker will make mistakes. Yet, the only one who cares about any mistake is the one who is speaking. People’s attention wanders constantly. In fact, most people only absorb about 20 percent of a speaker’s message. So, don’t stop speaking when you make a mistake unless it’s a truly serious one. "
+                },
+                {
+                  "kind": "blank_ref",
+                  "nodeId": "blank-ref:para-2020-i-seven-p2:328",
+                  "blankId": "blank-2020-i-038"
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2020-i-seven-p3",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-seven-p3:0",
+                  "text": "Your goal is not to be a perfect public speaker. "
+                },
+                {
+                  "kind": "blank_ref",
+                  "nodeId": "blank-ref:para-2020-i-seven-p3:49",
+                  "blankId": "blank-2020-i-039"
+                },
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-seven-p3:55",
+                  "text": "   And like everything else in life, that takes practice. Remember, even world champion athletes practice their skills on a consistent basis."
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2020-i-seven-p4",
+              "inlines": [
+                {
+                  "kind": "blank_ref",
+                  "nodeId": "blank-ref:para-2020-i-seven-p4:0",
+                  "blankId": "blank-2020-i-040"
+                },
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-seven-p4:6",
+                  "text": "   It’s rare to hear someone say, “I wish that speaker had spoken longer. “ On the other hand, you probably can’t count the times that you’ve thought, “I’m glad that talk is over. It seemed to go on forever!” So surprise your audience. Always make your presentation just a bit shorter than anticipated. It’s better to leave your listeners wishing for more than shifting restlessly in their seats waiting for your speech finally to end."
+                }
+              ]
+            }
+          ]
+        },
+        "media": [],
+        "variant": {
+          "family": "seven-choices",
+          "choiceOwnership": {
+            "ownership": "shared_bank",
+            "bankId": "bank:group-2020-i-seven-choices",
+            "options": [
+              {
+                "optionId": "option:A",
+                "label": "A",
+                "content": [
+                  {
+                    "kind": "text",
+                    "nodeId": "text:group-2020-i-seven-choices:option:A",
+                    "text": "Do the opposite."
+                  }
+                ]
+              },
+              {
+                "optionId": "option:B",
+                "label": "B",
+                "content": [
+                  {
+                    "kind": "text",
+                    "nodeId": "text:group-2020-i-seven-choices:option:B",
+                    "text": "You want to be an effective public speaker."
+                  }
+                ]
+              },
+              {
+                "optionId": "option:C",
+                "label": "C",
+                "content": [
+                  {
+                    "kind": "text",
+                    "nodeId": "text:group-2020-i-seven-choices:option:C",
+                    "text": "You don’t need to apologize for a minor slip."
+                  }
+                ]
+              },
+              {
+                "optionId": "option:D",
+                "label": "D",
+                "content": [
+                  {
+                    "kind": "text",
+                    "nodeId": "text:group-2020-i-seven-choices:option:D",
+                    "text": "When it comes to public speaking, less is usually more."
+                  }
+                ]
+              },
+              {
+                "optionId": "option:E",
+                "label": "E",
+                "content": [
+                  {
+                    "kind": "text",
+                    "nodeId": "text:group-2020-i-seven-choices:option:E",
+                    "text": "The objective of most speeches is to benefit the audience."
+                  }
+                ]
+              },
+              {
+                "optionId": "option:F",
+                "label": "F",
+                "content": [
+                  {
+                    "kind": "text",
+                    "nodeId": "text:group-2020-i-seven-choices:option:F",
+                    "text": "Take the fear out of public speaking by focusing on your listeners."
+                  }
+                ]
+              },
+              {
+                "optionId": "option:G",
+                "label": "G",
+                "content": [
+                  {
+                    "kind": "text",
+                    "nodeId": "text:group-2020-i-seven-choices:option:G",
+                    "text": "However, the majority of people are effective speakers because they train to be."
+                  }
+                ]
+              }
+            ]
+          },
+          "members": [
+            {
+              "questionId": "q-2020-i-036",
+              "blankId": "blank-2020-i-036",
+              "answer": {
+                "optionId": "option:G",
+                "authorityAssertionRef": "answer:q-2020-i-036"
+              }
+            },
+            {
+              "questionId": "q-2020-i-037",
+              "blankId": "blank-2020-i-037",
+              "answer": {
+                "optionId": "option:A",
+                "authorityAssertionRef": "answer:q-2020-i-037"
+              }
+            },
+            {
+              "questionId": "q-2020-i-038",
+              "blankId": "blank-2020-i-038",
+              "answer": {
+                "optionId": "option:C",
+                "authorityAssertionRef": "answer:q-2020-i-038"
+              }
+            },
+            {
+              "questionId": "q-2020-i-039",
+              "blankId": "blank-2020-i-039",
+              "answer": {
+                "optionId": "option:B",
+                "authorityAssertionRef": "answer:q-2020-i-039"
+              }
+            },
+            {
+              "questionId": "q-2020-i-040",
+              "blankId": "blank-2020-i-040",
+              "answer": {
+                "optionId": "option:D",
+                "authorityAssertionRef": "answer:q-2020-i-040"
+              }
+            }
+          ]
+        },
+        "sourceSpanRefsByTarget": {
+          "blank:blank-2020-i-036": [
+            "source-span:observation:ticket-26:paper-2020-i:asset_projection:document"
+          ],
+          "blank:blank-2020-i-037": [
+            "source-span:observation:ticket-26:paper-2020-i:asset_projection:document"
+          ],
+          "blank:blank-2020-i-038": [
+            "source-span:observation:ticket-26:paper-2020-i:asset_projection:document"
+          ],
+          "blank:blank-2020-i-039": [
+            "source-span:observation:ticket-26:paper-2020-i:asset_projection:document"
+          ],
+          "blank:blank-2020-i-040": [
+            "source-span:observation:ticket-26:paper-2020-i:asset_projection:document"
+          ]
+        },
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2020-i-seven-title",
+              "text": "Some individuals are born with a gift for public speaking. __36__   Do you want to be a good public speaker? Here are some principles you must master."
+            },
+            {
+              "paragraphId": "para-2020-i-seven-p1",
+              "text": "People want to listen to someone who is interesting, relaxed and comfortable. Too often, when you stand up to give a speech, you focus on the “public” at the expense of the “speaking.” __37__   Focus on the speaking. Talk directly to your audience, be yourself and make a connection."
+            },
+            {
+              "paragraphId": "para-2020-i-seven-p2",
+              "text": "Even the most successful public speaker will make mistakes. Yet, the only one who cares about any mistake is the one who is speaking. People’s attention wanders constantly. In fact, most people only absorb about 20 percent of a speaker’s message. So, don’t stop speaking when you make a mistake unless it’s a truly serious one. __38__"
+            },
+            {
+              "paragraphId": "para-2020-i-seven-p3",
+              "text": "Your goal is not to be a perfect public speaker. __39__   And like everything else in life, that takes practice. Remember, even world champion athletes practice their skills on a consistent basis."
+            },
+            {
+              "paragraphId": "para-2020-i-seven-p4",
+              "text": "__40__   It’s rare to hear someone say, “I wish that speaker had spoken longer. “ On the other hand, you probably can’t count the times that you’ve thought, “I’m glad that talk is over. It seemed to go on forever!” So surprise your audience. Always make your presentation just a bit shorter than anticipated. It’s better to leave your listeners wishing for more than shifting restlessly in their seats waiting for your speech finally to end."
+            }
+          ]
+        },
+        "questions": [
+          {
+            "questionId": "q-2020-i-036",
+            "questionNo": 36,
+            "groupId": "group-2020-i-seven-choices",
+            "stem": "36",
+            "blankId": "blank-2020-i-036"
+          },
+          {
+            "questionId": "q-2020-i-037",
+            "questionNo": 37,
+            "groupId": "group-2020-i-seven-choices",
+            "stem": "37",
+            "blankId": "blank-2020-i-037"
+          },
+          {
+            "questionId": "q-2020-i-038",
+            "questionNo": 38,
+            "groupId": "group-2020-i-seven-choices",
+            "stem": "38",
+            "blankId": "blank-2020-i-038"
+          },
+          {
+            "questionId": "q-2020-i-039",
+            "questionNo": 39,
+            "groupId": "group-2020-i-seven-choices",
+            "stem": "39",
+            "blankId": "blank-2020-i-039"
+          },
+          {
+            "questionId": "q-2020-i-040",
+            "questionNo": 40,
+            "groupId": "group-2020-i-seven-choices",
+            "stem": "40",
+            "blankId": "blank-2020-i-040"
+          }
+        ],
+        "blanks": [],
+        "optionBank": [
+          {
+            "label": "A",
+            "text": "Do the opposite."
+          },
+          {
+            "label": "B",
+            "text": "You want to be an effective public speaker."
+          },
+          {
+            "label": "C",
+            "text": "You don’t need to apologize for a minor slip."
+          },
+          {
+            "label": "D",
+            "text": "When it comes to public speaking, less is usually more."
+          },
+          {
+            "label": "E",
+            "text": "The objective of most speeches is to benefit the audience."
+          },
+          {
+            "label": "F",
+            "text": "Take the fear out of public speaking by focusing on your listeners."
+          },
+          {
+            "label": "G",
+            "text": "However, the majority of people are effective speakers because they train to be."
+          }
+        ],
+        "writingTask": null
+      },
+      {
+        "groupId": "group-2020-i-cloze",
+        "slotId": "language.cloze",
+        "family": "cloze",
+        "questionIds": [
+          "q-2020-i-041",
+          "q-2020-i-042",
+          "q-2020-i-043",
+          "q-2020-i-044",
+          "q-2020-i-045",
+          "q-2020-i-046",
+          "q-2020-i-047",
+          "q-2020-i-048",
+          "q-2020-i-049",
+          "q-2020-i-050",
+          "q-2020-i-051",
+          "q-2020-i-052",
+          "q-2020-i-053",
+          "q-2020-i-054",
+          "q-2020-i-055"
+        ],
+        "blankIds": [
+          "blank-2020-i-041",
+          "blank-2020-i-042",
+          "blank-2020-i-043",
+          "blank-2020-i-044",
+          "blank-2020-i-045",
+          "blank-2020-i-046",
+          "blank-2020-i-047",
+          "blank-2020-i-048",
+          "blank-2020-i-049",
+          "blank-2020-i-050",
+          "blank-2020-i-051",
+          "blank-2020-i-052",
+          "blank-2020-i-053",
+          "blank-2020-i-054",
+          "blank-2020-i-055"
+        ],
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2020-i:asset_projection:document",
+        "content": {
+          "blocks": [
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2020-i-cloze-title",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-cloze-title:0",
+                  "text": "Molai grew up in a tiny village in India. The village lay near some wetlands which became his second "
+                },
+                {
+                  "kind": "blank_ref",
+                  "nodeId": "blank-ref:para-2020-i-cloze-title:101",
+                  "blankId": "blank-2020-i-041"
+                },
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-cloze-title:107",
+                  "text": " . He learned the value and beauty of "
+                },
+                {
+                  "kind": "blank_ref",
+                  "nodeId": "blank-ref:para-2020-i-cloze-title:145",
+                  "blankId": "blank-2020-i-042"
+                },
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-cloze-title:151",
+                  "text": " there from a very young age."
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2020-i-cloze-p1",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-cloze-p1:0",
+                  "text": "When he was 16, Molai began to notice something "
+                },
+                {
+                  "kind": "blank_ref",
+                  "nodeId": "blank-ref:para-2020-i-cloze-p1:48",
+                  "blankId": "blank-2020-i-043"
+                },
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-cloze-p1:54",
+                  "text": " happening around his home. A flood had hit the area earlier that year and the "
+                },
+                {
+                  "kind": "blank_ref",
+                  "nodeId": "blank-ref:para-2020-i-cloze-p1:133",
+                  "blankId": "blank-2020-i-044"
+                },
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-cloze-p1:139",
+                  "text": " it caused had driven away a number of birds. "
+                },
+                {
+                  "kind": "blank_ref",
+                  "nodeId": "blank-ref:para-2020-i-cloze-p1:185",
+                  "blankId": "blank-2020-i-045"
+                },
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-cloze-p1:191",
+                  "text": " , the number of snakes had declined as well. He "
+                },
+                {
+                  "kind": "blank_ref",
+                  "nodeId": "blank-ref:para-2020-i-cloze-p1:240",
+                  "blankId": "blank-2020-i-046"
+                },
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-cloze-p1:246",
+                  "text": " that it was because there weren’t enough trees to protect them from the "
+                },
+                {
+                  "kind": "blank_ref",
+                  "nodeId": "blank-ref:para-2020-i-cloze-p1:319",
+                  "blankId": "blank-2020-i-047"
+                },
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-cloze-p1:325",
+                  "text": " . The solution, of course, was to plant trees so the animals could seek "
+                },
+                {
+                  "kind": "blank_ref",
+                  "nodeId": "blank-ref:para-2020-i-cloze-p1:398",
+                  "blankId": "blank-2020-i-048"
+                },
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-cloze-p1:404",
+                  "text": " during the daytime. He turned to the "
+                },
+                {
+                  "kind": "blank_ref",
+                  "nodeId": "blank-ref:para-2020-i-cloze-p1:442",
+                  "blankId": "blank-2020-i-049"
+                },
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-cloze-p1:448",
+                  "text": " department for help but was told that nothing would grow there. However, Molai went looking on his own and "
+                },
+                {
+                  "kind": "blank_ref",
+                  "nodeId": "blank-ref:para-2020-i-cloze-p1:556",
+                  "blankId": "blank-2020-i-050"
+                },
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-cloze-p1:562",
+                  "text": " a nearby island where he began to plant trees. "
+                },
+                {
+                  "kind": "blank_ref",
+                  "nodeId": "blank-ref:para-2020-i-cloze-p1:610",
+                  "blankId": "blank-2020-i-051"
+                },
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-cloze-p1:616",
+                  "text": " young plants in the dry season was "
+                },
+                {
+                  "kind": "blank_ref",
+                  "nodeId": "blank-ref:para-2020-i-cloze-p1:652",
+                  "blankId": "blank-2020-i-052"
+                },
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-cloze-p1:658",
+                  "text": " for a lone boy. Molai built at the "
+                },
+                {
+                  "kind": "blank_ref",
+                  "nodeId": "blank-ref:para-2020-i-cloze-p1:694",
+                  "blankId": "blank-2020-i-053"
+                },
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-cloze-p1:700",
+                  "text": " of each sapling (幼树) a bamboo platform, where he placed earthen pots with small holes to "
+                },
+                {
+                  "kind": "blank_ref",
+                  "nodeId": "blank-ref:para-2020-i-cloze-p1:790",
+                  "blankId": "blank-2020-i-054"
+                },
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-cloze-p1:796",
+                  "text": " rainwater. The water would then drip (滴落) on the plants below."
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2020-i-cloze-p2",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-cloze-p2:0",
+                  "text": "Molai "
+                },
+                {
+                  "kind": "blank_ref",
+                  "nodeId": "blank-ref:para-2020-i-cloze-p2:6",
+                  "blankId": "blank-2020-i-055"
+                },
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-cloze-p2:12",
+                  "text": " to plant trees for the next 37 years. His efforts have resulted in 1,360 acres of naturally-grown land that has become home to many plants and animals."
+                }
+              ]
+            }
+          ]
+        },
+        "media": [],
+        "variant": {
+          "family": "cloze",
+          "choiceOwnership": {
+            "ownership": "per_question",
+            "sets": [
+              {
+                "questionId": "q-2020-i-041",
+                "options": [
+                  {
+                    "optionId": "option:q-2020-i-041:A",
+                    "label": "A",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-cloze:q-2020-i-041:option:A",
+                        "text": "dream"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-041:B",
+                    "label": "B",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-cloze:q-2020-i-041:option:B",
+                        "text": "job"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-041:C",
+                    "label": "C",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-cloze:q-2020-i-041:option:C",
+                        "text": "home"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-041:D",
+                    "label": "D",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-cloze:q-2020-i-041:option:D",
+                        "text": "choice"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "questionId": "q-2020-i-042",
+                "options": [
+                  {
+                    "optionId": "option:q-2020-i-042:A",
+                    "label": "A",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-cloze:q-2020-i-042:option:A",
+                        "text": "nature"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-042:B",
+                    "label": "B",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-cloze:q-2020-i-042:option:B",
+                        "text": "youth"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-042:C",
+                    "label": "C",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-cloze:q-2020-i-042:option:C",
+                        "text": "culture"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-042:D",
+                    "label": "D",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-cloze:q-2020-i-042:option:D",
+                        "text": "knowledge"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "questionId": "q-2020-i-043",
+                "options": [
+                  {
+                    "optionId": "option:q-2020-i-043:A",
+                    "label": "A",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-cloze:q-2020-i-043:option:A",
+                        "text": "precious"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-043:B",
+                    "label": "B",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-cloze:q-2020-i-043:option:B",
+                        "text": "interesting"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-043:C",
+                    "label": "C",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-cloze:q-2020-i-043:option:C",
+                        "text": "disturbing"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-043:D",
+                    "label": "D",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-cloze:q-2020-i-043:option:D",
+                        "text": "awkward"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "questionId": "q-2020-i-044",
+                "options": [
+                  {
+                    "optionId": "option:q-2020-i-044:A",
+                    "label": "A",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-cloze:q-2020-i-044:option:A",
+                        "text": "waste"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-044:B",
+                    "label": "B",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-cloze:q-2020-i-044:option:B",
+                        "text": "tension"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-044:C",
+                    "label": "C",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-cloze:q-2020-i-044:option:C",
+                        "text": "pain"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-044:D",
+                    "label": "D",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-cloze:q-2020-i-044:option:D",
+                        "text": "damage"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "questionId": "q-2020-i-045",
+                "options": [
+                  {
+                    "optionId": "option:q-2020-i-045:A",
+                    "label": "A",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-cloze:q-2020-i-045:option:A",
+                        "text": "Besides"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-045:B",
+                    "label": "B",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-cloze:q-2020-i-045:option:B",
+                        "text": "However"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-045:C",
+                    "label": "C",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-cloze:q-2020-i-045:option:C",
+                        "text": "Therefore"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-045:D",
+                    "label": "D",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-cloze:q-2020-i-045:option:D",
+                        "text": "Otherwise"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "questionId": "q-2020-i-046",
+                "options": [
+                  {
+                    "optionId": "option:q-2020-i-046:A",
+                    "label": "A",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-cloze:q-2020-i-046:option:A",
+                        "text": "agreed"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-046:B",
+                    "label": "B",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-cloze:q-2020-i-046:option:B",
+                        "text": "realized"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-046:C",
+                    "label": "C",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-cloze:q-2020-i-046:option:C",
+                        "text": "remembered"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-046:D",
+                    "label": "D",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-cloze:q-2020-i-046:option:D",
+                        "text": "predicted"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "questionId": "q-2020-i-047",
+                "options": [
+                  {
+                    "optionId": "option:q-2020-i-047:A",
+                    "label": "A",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-cloze:q-2020-i-047:option:A",
+                        "text": "noise"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-047:B",
+                    "label": "B",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-cloze:q-2020-i-047:option:B",
+                        "text": "heat"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-047:C",
+                    "label": "C",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-cloze:q-2020-i-047:option:C",
+                        "text": "disease"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-047:D",
+                    "label": "D",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-cloze:q-2020-i-047:option:D",
+                        "text": "dust"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "questionId": "q-2020-i-048",
+                "options": [
+                  {
+                    "optionId": "option:q-2020-i-048:A",
+                    "label": "A",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-cloze:q-2020-i-048:option:A",
+                        "text": "directions"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-048:B",
+                    "label": "B",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-cloze:q-2020-i-048:option:B",
+                        "text": "partners"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-048:C",
+                    "label": "C",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-cloze:q-2020-i-048:option:C",
+                        "text": "help"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-048:D",
+                    "label": "D",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-cloze:q-2020-i-048:option:D",
+                        "text": "shelter"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "questionId": "q-2020-i-049",
+                "options": [
+                  {
+                    "optionId": "option:q-2020-i-049:A",
+                    "label": "A",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-cloze:q-2020-i-049:option:A",
+                        "text": "labor"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-049:B",
+                    "label": "B",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-cloze:q-2020-i-049:option:B",
+                        "text": "police"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-049:C",
+                    "label": "C",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-cloze:q-2020-i-049:option:C",
+                        "text": "forest"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-049:D",
+                    "label": "D",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-cloze:q-2020-i-049:option:D",
+                        "text": "finance"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "questionId": "q-2020-i-050",
+                "options": [
+                  {
+                    "optionId": "option:q-2020-i-050:A",
+                    "label": "A",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-cloze:q-2020-i-050:option:A",
+                        "text": "rebuilt"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-050:B",
+                    "label": "B",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-cloze:q-2020-i-050:option:B",
+                        "text": "discovered"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-050:C",
+                    "label": "C",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-cloze:q-2020-i-050:option:C",
+                        "text": "left"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-050:D",
+                    "label": "D",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-cloze:q-2020-i-050:option:D",
+                        "text": "managed"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "questionId": "q-2020-i-051",
+                "options": [
+                  {
+                    "optionId": "option:q-2020-i-051:A",
+                    "label": "A",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-cloze:q-2020-i-051:option:A",
+                        "text": "Decorating"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-051:B",
+                    "label": "B",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-cloze:q-2020-i-051:option:B",
+                        "text": "Observing"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-051:C",
+                    "label": "C",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-cloze:q-2020-i-051:option:C",
+                        "text": "Watering"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-051:D",
+                    "label": "D",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-cloze:q-2020-i-051:option:D",
+                        "text": "Guarding"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "questionId": "q-2020-i-052",
+                "options": [
+                  {
+                    "optionId": "option:q-2020-i-052:A",
+                    "label": "A",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-cloze:q-2020-i-052:option:A",
+                        "text": "tough"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-052:B",
+                    "label": "B",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-cloze:q-2020-i-052:option:B",
+                        "text": "illegal"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-052:C",
+                    "label": "C",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-cloze:q-2020-i-052:option:C",
+                        "text": "fantastic"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-052:D",
+                    "label": "D",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-cloze:q-2020-i-052:option:D",
+                        "text": "beneficial"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "questionId": "q-2020-i-053",
+                "options": [
+                  {
+                    "optionId": "option:q-2020-i-053:A",
+                    "label": "A",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-cloze:q-2020-i-053:option:A",
+                        "text": "back"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-053:B",
+                    "label": "B",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-cloze:q-2020-i-053:option:B",
+                        "text": "top"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-053:C",
+                    "label": "C",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-cloze:q-2020-i-053:option:C",
+                        "text": "foot"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-053:D",
+                    "label": "D",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-cloze:q-2020-i-053:option:D",
+                        "text": "side"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "questionId": "q-2020-i-054",
+                "options": [
+                  {
+                    "optionId": "option:q-2020-i-054:A",
+                    "label": "A",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-cloze:q-2020-i-054:option:A",
+                        "text": "cool down"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-054:B",
+                    "label": "B",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-cloze:q-2020-i-054:option:B",
+                        "text": "keep off"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-054:C",
+                    "label": "C",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-cloze:q-2020-i-054:option:C",
+                        "text": "purify"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-054:D",
+                    "label": "D",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-cloze:q-2020-i-054:option:D",
+                        "text": "collect"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "questionId": "q-2020-i-055",
+                "options": [
+                  {
+                    "optionId": "option:q-2020-i-055:A",
+                    "label": "A",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-cloze:q-2020-i-055:option:A",
+                        "text": "returned"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-055:B",
+                    "label": "B",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-cloze:q-2020-i-055:option:B",
+                        "text": "learned"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-055:C",
+                    "label": "C",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-cloze:q-2020-i-055:option:C",
+                        "text": "failed"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2020-i-055:D",
+                    "label": "D",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2020-i-cloze:q-2020-i-055:option:D",
+                        "text": "continued"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "sourceSpanRefsByTarget": {
+          "blank:blank-2020-i-041": [
+            "source-span:observation:ticket-26:paper-2020-i:asset_projection:document"
+          ],
+          "blank:blank-2020-i-042": [
+            "source-span:observation:ticket-26:paper-2020-i:asset_projection:document"
+          ],
+          "blank:blank-2020-i-043": [
+            "source-span:observation:ticket-26:paper-2020-i:asset_projection:document"
+          ],
+          "blank:blank-2020-i-044": [
+            "source-span:observation:ticket-26:paper-2020-i:asset_projection:document"
+          ],
+          "blank:blank-2020-i-045": [
+            "source-span:observation:ticket-26:paper-2020-i:asset_projection:document"
+          ],
+          "blank:blank-2020-i-046": [
+            "source-span:observation:ticket-26:paper-2020-i:asset_projection:document"
+          ],
+          "blank:blank-2020-i-047": [
+            "source-span:observation:ticket-26:paper-2020-i:asset_projection:document"
+          ],
+          "blank:blank-2020-i-048": [
+            "source-span:observation:ticket-26:paper-2020-i:asset_projection:document"
+          ],
+          "blank:blank-2020-i-049": [
+            "source-span:observation:ticket-26:paper-2020-i:asset_projection:document"
+          ],
+          "blank:blank-2020-i-050": [
+            "source-span:observation:ticket-26:paper-2020-i:asset_projection:document"
+          ],
+          "blank:blank-2020-i-051": [
+            "source-span:observation:ticket-26:paper-2020-i:asset_projection:document"
+          ],
+          "blank:blank-2020-i-052": [
+            "source-span:observation:ticket-26:paper-2020-i:asset_projection:document"
+          ],
+          "blank:blank-2020-i-053": [
+            "source-span:observation:ticket-26:paper-2020-i:asset_projection:document"
+          ],
+          "blank:blank-2020-i-054": [
+            "source-span:observation:ticket-26:paper-2020-i:asset_projection:document"
+          ],
+          "blank:blank-2020-i-055": [
+            "source-span:observation:ticket-26:paper-2020-i:asset_projection:document"
+          ]
+        },
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2020-i-cloze-title",
+              "text": "Molai grew up in a tiny village in India. The village lay near some wetlands which became his second __41__ . He learned the value and beauty of __42__ there from a very young age."
+            },
+            {
+              "paragraphId": "para-2020-i-cloze-p1",
+              "text": "When he was 16, Molai began to notice something __43__ happening around his home. A flood had hit the area earlier that year and the __44__ it caused had driven away a number of birds. __45__ , the number of snakes had declined as well. He __46__ that it was because there weren’t enough trees to protect them from the __47__ . The solution, of course, was to plant trees so the animals could seek __48__ during the daytime. He turned to the __49__ department for help but was told that nothing would grow there. However, Molai went looking on his own and __50__ a nearby island where he began to plant trees. __51__ young plants in the dry season was __52__ for a lone boy. Molai built at the __53__ of each sapling (幼树) a bamboo platform, where he placed earthen pots with small holes to __54__ rainwater. The water would then drip (滴落) on the plants below."
+            },
+            {
+              "paragraphId": "para-2020-i-cloze-p2",
+              "text": "Molai __55__ to plant trees for the next 37 years. His efforts have resulted in 1,360 acres of naturally-grown land that has become home to many plants and animals."
+            }
+          ]
+        },
+        "questions": [
+          {
+            "questionId": "q-2020-i-041",
+            "questionNo": 41,
+            "groupId": "group-2020-i-cloze",
+            "stem": "41",
+            "blankId": "blank-2020-i-041",
+            "options": [
+              {
+                "label": "A",
+                "text": "dream"
+              },
+              {
+                "label": "B",
+                "text": "job"
+              },
+              {
+                "label": "C",
+                "text": "home"
+              },
+              {
+                "label": "D",
+                "text": "choice"
+              }
+            ]
+          },
+          {
+            "questionId": "q-2020-i-042",
+            "questionNo": 42,
+            "groupId": "group-2020-i-cloze",
+            "stem": "42",
+            "blankId": "blank-2020-i-042",
+            "options": [
+              {
+                "label": "A",
+                "text": "nature"
+              },
+              {
+                "label": "B",
+                "text": "youth"
+              },
+              {
+                "label": "C",
+                "text": "culture"
+              },
+              {
+                "label": "D",
+                "text": "knowledge"
+              }
+            ]
+          },
+          {
+            "questionId": "q-2020-i-043",
+            "questionNo": 43,
+            "groupId": "group-2020-i-cloze",
+            "stem": "43",
+            "blankId": "blank-2020-i-043",
+            "options": [
+              {
+                "label": "A",
+                "text": "precious"
+              },
+              {
+                "label": "B",
+                "text": "interesting"
+              },
+              {
+                "label": "C",
+                "text": "disturbing"
+              },
+              {
+                "label": "D",
+                "text": "awkward"
+              }
+            ]
+          },
+          {
+            "questionId": "q-2020-i-044",
+            "questionNo": 44,
+            "groupId": "group-2020-i-cloze",
+            "stem": "44",
+            "blankId": "blank-2020-i-044",
+            "options": [
+              {
+                "label": "A",
+                "text": "waste"
+              },
+              {
+                "label": "B",
+                "text": "tension"
+              },
+              {
+                "label": "C",
+                "text": "pain"
+              },
+              {
+                "label": "D",
+                "text": "damage"
+              }
+            ]
+          },
+          {
+            "questionId": "q-2020-i-045",
+            "questionNo": 45,
+            "groupId": "group-2020-i-cloze",
+            "stem": "45",
+            "blankId": "blank-2020-i-045",
+            "options": [
+              {
+                "label": "A",
+                "text": "Besides"
+              },
+              {
+                "label": "B",
+                "text": "However"
+              },
+              {
+                "label": "C",
+                "text": "Therefore"
+              },
+              {
+                "label": "D",
+                "text": "Otherwise"
+              }
+            ]
+          },
+          {
+            "questionId": "q-2020-i-046",
+            "questionNo": 46,
+            "groupId": "group-2020-i-cloze",
+            "stem": "46",
+            "blankId": "blank-2020-i-046",
+            "options": [
+              {
+                "label": "A",
+                "text": "agreed"
+              },
+              {
+                "label": "B",
+                "text": "realized"
+              },
+              {
+                "label": "C",
+                "text": "remembered"
+              },
+              {
+                "label": "D",
+                "text": "predicted"
+              }
+            ]
+          },
+          {
+            "questionId": "q-2020-i-047",
+            "questionNo": 47,
+            "groupId": "group-2020-i-cloze",
+            "stem": "47",
+            "blankId": "blank-2020-i-047",
+            "options": [
+              {
+                "label": "A",
+                "text": "noise"
+              },
+              {
+                "label": "B",
+                "text": "heat"
+              },
+              {
+                "label": "C",
+                "text": "disease"
+              },
+              {
+                "label": "D",
+                "text": "dust"
+              }
+            ]
+          },
+          {
+            "questionId": "q-2020-i-048",
+            "questionNo": 48,
+            "groupId": "group-2020-i-cloze",
+            "stem": "48",
+            "blankId": "blank-2020-i-048",
+            "options": [
+              {
+                "label": "A",
+                "text": "directions"
+              },
+              {
+                "label": "B",
+                "text": "partners"
+              },
+              {
+                "label": "C",
+                "text": "help"
+              },
+              {
+                "label": "D",
+                "text": "shelter"
+              }
+            ]
+          },
+          {
+            "questionId": "q-2020-i-049",
+            "questionNo": 49,
+            "groupId": "group-2020-i-cloze",
+            "stem": "49",
+            "blankId": "blank-2020-i-049",
+            "options": [
+              {
+                "label": "A",
+                "text": "labor"
+              },
+              {
+                "label": "B",
+                "text": "police"
+              },
+              {
+                "label": "C",
+                "text": "forest"
+              },
+              {
+                "label": "D",
+                "text": "finance"
+              }
+            ]
+          },
+          {
+            "questionId": "q-2020-i-050",
+            "questionNo": 50,
+            "groupId": "group-2020-i-cloze",
+            "stem": "50",
+            "blankId": "blank-2020-i-050",
+            "options": [
+              {
+                "label": "A",
+                "text": "rebuilt"
+              },
+              {
+                "label": "B",
+                "text": "discovered"
+              },
+              {
+                "label": "C",
+                "text": "left"
+              },
+              {
+                "label": "D",
+                "text": "managed"
+              }
+            ]
+          },
+          {
+            "questionId": "q-2020-i-051",
+            "questionNo": 51,
+            "groupId": "group-2020-i-cloze",
+            "stem": "51",
+            "blankId": "blank-2020-i-051",
+            "options": [
+              {
+                "label": "A",
+                "text": "Decorating"
+              },
+              {
+                "label": "B",
+                "text": "Observing"
+              },
+              {
+                "label": "C",
+                "text": "Watering"
+              },
+              {
+                "label": "D",
+                "text": "Guarding"
+              }
+            ]
+          },
+          {
+            "questionId": "q-2020-i-052",
+            "questionNo": 52,
+            "groupId": "group-2020-i-cloze",
+            "stem": "52",
+            "blankId": "blank-2020-i-052",
+            "options": [
+              {
+                "label": "A",
+                "text": "tough"
+              },
+              {
+                "label": "B",
+                "text": "illegal"
+              },
+              {
+                "label": "C",
+                "text": "fantastic"
+              },
+              {
+                "label": "D",
+                "text": "beneficial"
+              }
+            ]
+          },
+          {
+            "questionId": "q-2020-i-053",
+            "questionNo": 53,
+            "groupId": "group-2020-i-cloze",
+            "stem": "53",
+            "blankId": "blank-2020-i-053",
+            "options": [
+              {
+                "label": "A",
+                "text": "back"
+              },
+              {
+                "label": "B",
+                "text": "top"
+              },
+              {
+                "label": "C",
+                "text": "foot"
+              },
+              {
+                "label": "D",
+                "text": "side"
+              }
+            ]
+          },
+          {
+            "questionId": "q-2020-i-054",
+            "questionNo": 54,
+            "groupId": "group-2020-i-cloze",
+            "stem": "54",
+            "blankId": "blank-2020-i-054",
+            "options": [
+              {
+                "label": "A",
+                "text": "cool down"
+              },
+              {
+                "label": "B",
+                "text": "keep off"
+              },
+              {
+                "label": "C",
+                "text": "purify"
+              },
+              {
+                "label": "D",
+                "text": "collect"
+              }
+            ]
+          },
+          {
+            "questionId": "q-2020-i-055",
+            "questionNo": 55,
+            "groupId": "group-2020-i-cloze",
+            "stem": "55",
+            "blankId": "blank-2020-i-055",
+            "options": [
+              {
+                "label": "A",
+                "text": "returned"
+              },
+              {
+                "label": "B",
+                "text": "learned"
+              },
+              {
+                "label": "C",
+                "text": "failed"
+              },
+              {
+                "label": "D",
+                "text": "continued"
+              }
+            ]
+          }
+        ],
+        "blanks": [],
+        "optionBank": [],
+        "writingTask": null
+      },
+      {
+        "groupId": "group-2020-i-grammar-fill",
+        "slotId": "language.grammar-fill",
+        "family": "grammar-fill",
+        "questionIds": [
+          "q-2020-i-056",
+          "q-2020-i-057",
+          "q-2020-i-058",
+          "q-2020-i-059",
+          "q-2020-i-060",
+          "q-2020-i-061",
+          "q-2020-i-062",
+          "q-2020-i-063",
+          "q-2020-i-064",
+          "q-2020-i-065"
+        ],
+        "blankIds": [
+          "blank-2020-i-056",
+          "blank-2020-i-057",
+          "blank-2020-i-058",
+          "blank-2020-i-059",
+          "blank-2020-i-060",
+          "blank-2020-i-061",
+          "blank-2020-i-062",
+          "blank-2020-i-063",
+          "blank-2020-i-064",
+          "blank-2020-i-065"
+        ],
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2020-i:asset_projection:document",
+        "content": {
+          "blocks": [
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2020-i-grammar-fill-title",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-grammar-fill-title:0",
+                  "text": "Many people have the hobby of collecting things, e. g. stamps, postcards or antiques. In the 18th and 19th centuries, "
+                },
+                {
+                  "kind": "blank_ref",
+                  "nodeId": "blank-ref:para-2020-i-grammar-fill-title:118",
+                  "blankId": "blank-2020-i-056"
+                },
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-grammar-fill-title:124",
+                  "text": " (wealth) people travelled and collected plants, historical objects and works of art. They kept their collection at home until it got too big "
+                },
+                {
+                  "kind": "blank_ref",
+                  "nodeId": "blank-ref:para-2020-i-grammar-fill-title:266",
+                  "blankId": "blank-2020-i-057"
+                },
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-grammar-fill-title:272",
+                  "text": "until they died, and then it was given to a museum. The 80, 000 objects collected by Sir Hans Sloane, for example, "
+                },
+                {
+                  "kind": "blank_ref",
+                  "nodeId": "blank-ref:para-2020-i-grammar-fill-title:387",
+                  "blankId": "blank-2020-i-058"
+                },
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-grammar-fill-title:393:prompt",
+                  "text": " (form)"
+                },
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-grammar-fill-title:400",
+                  "text": " the core collection of the British Museum "
+                },
+                {
+                  "kind": "blank_ref",
+                  "nodeId": "blank-ref:para-2020-i-grammar-fill-title:443",
+                  "blankId": "blank-2020-i-059"
+                },
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-grammar-fill-title:449",
+                  "text": "opened in 1759."
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2020-i-grammar-fill-p1",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-grammar-fill-p1:0",
+                  "text": "The parts of a museum open to the public "
+                },
+                {
+                  "kind": "blank_ref",
+                  "nodeId": "blank-ref:para-2020-i-grammar-fill-p1:41",
+                  "blankId": "blank-2020-i-060"
+                },
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-grammar-fill-p1:47",
+                  "text": " (call) galleries or rooms. Often, only a small part of a museum’s collection "
+                },
+                {
+                  "kind": "blank_ref",
+                  "nodeId": "blank-ref:para-2020-i-grammar-fill-p1:125",
+                  "blankId": "blank-2020-i-061"
+                },
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-grammar-fill-p1:131",
+                  "text": " (be) on display. Most of it is stored away or used for research."
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2020-i-grammar-fill-p2",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-grammar-fill-p2:0",
+                  "text": "Many museums are lively places and they attract a lot of visitors. As well as looking at exhibits, visitors can play with computer simulations (模拟) and imagine"
+                },
+                {
+                  "kind": "blank_ref",
+                  "nodeId": "blank-ref:para-2020-i-grammar-fill-p2:159",
+                  "blankId": "blank-2020-i-062"
+                },
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-grammar-fill-p2:165",
+                  "text": " (they) living at a different time in history or "
+                },
+                {
+                  "kind": "blank_ref",
+                  "nodeId": "blank-ref:para-2020-i-grammar-fill-p2:214",
+                  "blankId": "blank-2020-i-063"
+                },
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-grammar-fill-p2:220",
+                  "text": " (walk) through a rainforest. At the Jorvik Centre in York, the city’s Viking settlement is recreated, and people experience the sights, sounds and smells of the old town. Historical "
+                },
+                {
+                  "kind": "blank_ref",
+                  "nodeId": "blank-ref:para-2020-i-grammar-fill-p2:403",
+                  "blankId": "blank-2020-i-064"
+                },
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-grammar-fill-p2:409",
+                  "text": " (accurate) is important but so is entertainment. Museums must compete "
+                },
+                {
+                  "kind": "blank_ref",
+                  "nodeId": "blank-ref:para-2020-i-grammar-fill-p2:480",
+                  "blankId": "blank-2020-i-065"
+                },
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-grammar-fill-p2:486",
+                  "text": "people’s spare time and money with other amusements. Most museums also welcome school groups and arrange special activities for children."
+                }
+              ]
+            }
+          ]
+        },
+        "media": [],
+        "variant": {
+          "family": "grammar-fill",
+          "choiceOwnership": {
+            "ownership": "none"
+          },
+          "promptBindings": [
+            {
+              "blankId": "blank-2020-i-056",
+              "provision": "source_prompt",
+              "prompt": "wealth",
+              "authorityObservationRef": "observation:ticket-26:paper-2020-i:grammar-fill-prompt:blank-2020-i-056"
+            },
+            {
+              "blankId": "blank-2020-i-057",
+              "provision": "source_proven_none",
+              "authorityObservationRef": "observation:ticket-26:paper-2020-i:grammar-fill-prompt:blank-2020-i-057"
+            },
+            {
+              "blankId": "blank-2020-i-058",
+              "provision": "source_prompt",
+              "prompt": "form",
+              "authorityObservationRef": "observation:ticket-26:paper-2020-i:grammar-fill-prompt:blank-2020-i-058"
+            },
+            {
+              "blankId": "blank-2020-i-059",
+              "provision": "source_proven_none",
+              "authorityObservationRef": "observation:ticket-26:paper-2020-i:grammar-fill-prompt:blank-2020-i-059"
+            },
+            {
+              "blankId": "blank-2020-i-060",
+              "provision": "source_prompt",
+              "prompt": "call",
+              "authorityObservationRef": "observation:ticket-26:paper-2020-i:grammar-fill-prompt:blank-2020-i-060"
+            },
+            {
+              "blankId": "blank-2020-i-061",
+              "provision": "source_prompt",
+              "prompt": "be",
+              "authorityObservationRef": "observation:ticket-26:paper-2020-i:grammar-fill-prompt:blank-2020-i-061"
+            },
+            {
+              "blankId": "blank-2020-i-062",
+              "provision": "source_prompt",
+              "prompt": "they",
+              "authorityObservationRef": "observation:ticket-26:paper-2020-i:grammar-fill-prompt:blank-2020-i-062"
+            },
+            {
+              "blankId": "blank-2020-i-063",
+              "provision": "source_prompt",
+              "prompt": "walk",
+              "authorityObservationRef": "observation:ticket-26:paper-2020-i:grammar-fill-prompt:blank-2020-i-063"
+            },
+            {
+              "blankId": "blank-2020-i-064",
+              "provision": "source_prompt",
+              "prompt": "accurate",
+              "authorityObservationRef": "observation:ticket-26:paper-2020-i:grammar-fill-prompt:blank-2020-i-064"
+            },
+            {
+              "blankId": "blank-2020-i-065",
+              "provision": "source_proven_none",
+              "authorityObservationRef": "observation:ticket-26:paper-2020-i:grammar-fill-prompt:blank-2020-i-065"
+            }
+          ]
+        },
+        "sourceSpanRefsByTarget": {
+          "blank:blank-2020-i-056": [
+            "source-span:observation:ticket-26:paper-2020-i:asset_projection:document"
+          ],
+          "blank:blank-2020-i-057": [
+            "source-span:observation:ticket-26:paper-2020-i:asset_projection:document"
+          ],
+          "blank:blank-2020-i-058": [
+            "source-span:observation:ticket-26:paper-2020-i:asset_projection:document"
+          ],
+          "blank:blank-2020-i-059": [
+            "source-span:observation:ticket-26:paper-2020-i:asset_projection:document"
+          ],
+          "blank:blank-2020-i-060": [
+            "source-span:observation:ticket-26:paper-2020-i:asset_projection:document"
+          ],
+          "blank:blank-2020-i-061": [
+            "source-span:observation:ticket-26:paper-2020-i:asset_projection:document"
+          ],
+          "blank:blank-2020-i-062": [
+            "source-span:observation:ticket-26:paper-2020-i:asset_projection:document"
+          ],
+          "blank:blank-2020-i-063": [
+            "source-span:observation:ticket-26:paper-2020-i:asset_projection:document"
+          ],
+          "blank:blank-2020-i-064": [
+            "source-span:observation:ticket-26:paper-2020-i:asset_projection:document"
+          ],
+          "blank:blank-2020-i-065": [
+            "source-span:observation:ticket-26:paper-2020-i:asset_projection:document"
+          ],
+          "prompt_provision:blank-2020-i-056": [
+            "source-span:observation:ticket-26:paper-2020-i:grammar-fill-prompt:blank-2020-i-056"
+          ],
+          "prompt_provision:blank-2020-i-057": [
+            "source-span:observation:ticket-26:paper-2020-i:grammar-fill-prompt:blank-2020-i-057"
+          ],
+          "prompt_provision:blank-2020-i-058": [
+            "source-span:observation:ticket-26:paper-2020-i:grammar-fill-prompt:blank-2020-i-058"
+          ],
+          "prompt_provision:blank-2020-i-059": [
+            "source-span:observation:ticket-26:paper-2020-i:grammar-fill-prompt:blank-2020-i-059"
+          ],
+          "prompt_provision:blank-2020-i-060": [
+            "source-span:observation:ticket-26:paper-2020-i:grammar-fill-prompt:blank-2020-i-060"
+          ],
+          "prompt_provision:blank-2020-i-061": [
+            "source-span:observation:ticket-26:paper-2020-i:grammar-fill-prompt:blank-2020-i-061"
+          ],
+          "prompt_provision:blank-2020-i-062": [
+            "source-span:observation:ticket-26:paper-2020-i:grammar-fill-prompt:blank-2020-i-062"
+          ],
+          "prompt_provision:blank-2020-i-063": [
+            "source-span:observation:ticket-26:paper-2020-i:grammar-fill-prompt:blank-2020-i-063"
+          ],
+          "prompt_provision:blank-2020-i-064": [
+            "source-span:observation:ticket-26:paper-2020-i:grammar-fill-prompt:blank-2020-i-064"
+          ],
+          "prompt_provision:blank-2020-i-065": [
+            "source-span:observation:ticket-26:paper-2020-i:grammar-fill-prompt:blank-2020-i-065"
+          ]
+        },
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2020-i-grammar-fill-title",
+              "text": "Many people have the hobby of collecting things, e. g. stamps, postcards or antiques. In the 18th and 19th centuries, __56__ (wealth) people travelled and collected plants, historical objects and works of art. They kept their collection at home until it got too big __57__until they died, and then it was given to a museum. The 80, 000 objects collected by Sir Hans Sloane, for example, __58__ (form) the core collection of the British Museum __59__opened in 1759."
+            },
+            {
+              "paragraphId": "para-2020-i-grammar-fill-p1",
+              "text": "The parts of a museum open to the public __60__ (call) galleries or rooms. Often, only a small part of a museum’s collection __61__ (be) on display. Most of it is stored away or used for research."
+            },
+            {
+              "paragraphId": "para-2020-i-grammar-fill-p2",
+              "text": "Many museums are lively places and they attract a lot of visitors. As well as looking at exhibits, visitors can play with computer simulations (模拟) and imagine__62__ (they) living at a different time in history or __63__ (walk) through a rainforest. At the Jorvik Centre in York, the city’s Viking settlement is recreated, and people experience the sights, sounds and smells of the old town. Historical __64__ (accurate) is important but so is entertainment. Museums must compete __65__people’s spare time and money with other amusements. Most museums also welcome school groups and arrange special activities for children."
+            }
+          ]
+        },
+        "questions": [
+          {
+            "questionId": "q-2020-i-056",
+            "questionNo": 56,
+            "groupId": "group-2020-i-grammar-fill",
+            "stem": "56",
+            "blankId": "blank-2020-i-056"
+          },
+          {
+            "questionId": "q-2020-i-057",
+            "questionNo": 57,
+            "groupId": "group-2020-i-grammar-fill",
+            "stem": "57",
+            "blankId": "blank-2020-i-057"
+          },
+          {
+            "questionId": "q-2020-i-058",
+            "questionNo": 58,
+            "groupId": "group-2020-i-grammar-fill",
+            "stem": "58",
+            "blankId": "blank-2020-i-058"
+          },
+          {
+            "questionId": "q-2020-i-059",
+            "questionNo": 59,
+            "groupId": "group-2020-i-grammar-fill",
+            "stem": "59",
+            "blankId": "blank-2020-i-059"
+          },
+          {
+            "questionId": "q-2020-i-060",
+            "questionNo": 60,
+            "groupId": "group-2020-i-grammar-fill",
+            "stem": "60",
+            "blankId": "blank-2020-i-060"
+          },
+          {
+            "questionId": "q-2020-i-061",
+            "questionNo": 61,
+            "groupId": "group-2020-i-grammar-fill",
+            "stem": "61",
+            "blankId": "blank-2020-i-061"
+          },
+          {
+            "questionId": "q-2020-i-062",
+            "questionNo": 62,
+            "groupId": "group-2020-i-grammar-fill",
+            "stem": "62",
+            "blankId": "blank-2020-i-062"
+          },
+          {
+            "questionId": "q-2020-i-063",
+            "questionNo": 63,
+            "groupId": "group-2020-i-grammar-fill",
+            "stem": "63",
+            "blankId": "blank-2020-i-063"
+          },
+          {
+            "questionId": "q-2020-i-064",
+            "questionNo": 64,
+            "groupId": "group-2020-i-grammar-fill",
+            "stem": "64",
+            "blankId": "blank-2020-i-064"
+          },
+          {
+            "questionId": "q-2020-i-065",
+            "questionNo": 65,
+            "groupId": "group-2020-i-grammar-fill",
+            "stem": "65",
+            "blankId": "blank-2020-i-065"
+          }
+        ],
+        "blanks": [
+          {
+            "blankId": "blank-2020-i-056",
+            "groupId": "group-2020-i-grammar-fill",
+            "questionId": "q-2020-i-056",
+            "prompt": "wealth"
+          },
+          {
+            "blankId": "blank-2020-i-057",
+            "groupId": "group-2020-i-grammar-fill",
+            "questionId": "q-2020-i-057"
+          },
+          {
+            "blankId": "blank-2020-i-058",
+            "groupId": "group-2020-i-grammar-fill",
+            "questionId": "q-2020-i-058",
+            "prompt": "form"
+          },
+          {
+            "blankId": "blank-2020-i-059",
+            "groupId": "group-2020-i-grammar-fill",
+            "questionId": "q-2020-i-059"
+          },
+          {
+            "blankId": "blank-2020-i-060",
+            "groupId": "group-2020-i-grammar-fill",
+            "questionId": "q-2020-i-060",
+            "prompt": "call"
+          },
+          {
+            "blankId": "blank-2020-i-061",
+            "groupId": "group-2020-i-grammar-fill",
+            "questionId": "q-2020-i-061",
+            "prompt": "be"
+          },
+          {
+            "blankId": "blank-2020-i-062",
+            "groupId": "group-2020-i-grammar-fill",
+            "questionId": "q-2020-i-062",
+            "prompt": "they"
+          },
+          {
+            "blankId": "blank-2020-i-063",
+            "groupId": "group-2020-i-grammar-fill",
+            "questionId": "q-2020-i-063",
+            "prompt": "walk"
+          },
+          {
+            "blankId": "blank-2020-i-064",
+            "groupId": "group-2020-i-grammar-fill",
+            "questionId": "q-2020-i-064",
+            "prompt": "accurate"
+          },
+          {
+            "blankId": "blank-2020-i-065",
+            "groupId": "group-2020-i-grammar-fill",
+            "questionId": "q-2020-i-065"
+          }
+        ],
+        "optionBank": [],
+        "writingTask": null
+      },
+      {
+        "groupId": "group-2020-i-writing-application",
+        "slotId": "writing.application",
+        "family": "application-writing",
+        "questionIds": [],
+        "blankIds": [],
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2020-i:asset_projection:document",
+        "content": {
+          "blocks": [
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2020-i-writing-app-title",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-writing-app-title",
+                  "text": "假定你是李华，上周日你校举办了5公里越野赛跑活动．请你为校英文报写一篇报道，内容包括："
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2020-i-writing-app-p1",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-writing-app-p1",
+                  "text": "(1)参加人员；"
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2020-i-writing-app-p2",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-writing-app-p2",
+                  "text": "(2)跑步路线：从校门口到南山脚下；"
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2020-i-writing-app-p3",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-writing-app-p3",
+                  "text": "(3)活动反响。"
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2020-i-writing-app-p4",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-writing-app-p4",
+                  "text": "(1)写作词数应为80左右；"
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2020-i-writing-app-p5",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-writing-app-p5",
+                  "text": "(2)请按如下格式在答题卡的相应位置作答。 \n A Cross-Country Running Race"
+                }
+              ]
+            }
+          ]
+        },
+        "media": [],
+        "variant": {
+          "family": "application-writing",
+          "mode": "legacy_opaque",
+          "writingTaskId": "wt-2020-i-application",
+          "sourceTaskType": "application",
+          "contentBlockRefs": [
+            "para-2020-i-writing-app-title",
+            "para-2020-i-writing-app-p1",
+            "para-2020-i-writing-app-p2",
+            "para-2020-i-writing-app-p3",
+            "para-2020-i-writing-app-p4",
+            "para-2020-i-writing-app-p5"
+          ],
+          "wordCountTarget": 80,
+          "wordCountTargetCertainty": "explicit_legacy_field",
+          "wordCountScope": "unspecified",
+          "choiceOwnership": {
+            "ownership": "none"
+          },
+          "response": {
+            "kind": "generic_response_box",
+            "answerRegionRef": "writing.application-box",
+            "ownership": "product"
+          }
+        },
+        "sourceSpanRefsByTarget": {},
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2020-i-writing-app-title",
+              "text": "假定你是李华，上周日你校举办了5公里越野赛跑活动．请你为校英文报写一篇报道，内容包括："
+            },
+            {
+              "paragraphId": "para-2020-i-writing-app-p1",
+              "text": "(1)参加人员；"
+            },
+            {
+              "paragraphId": "para-2020-i-writing-app-p2",
+              "text": "(2)跑步路线：从校门口到南山脚下；"
+            },
+            {
+              "paragraphId": "para-2020-i-writing-app-p3",
+              "text": "(3)活动反响。"
+            },
+            {
+              "paragraphId": "para-2020-i-writing-app-p4",
+              "text": "(1)写作词数应为80左右；"
+            },
+            {
+              "paragraphId": "para-2020-i-writing-app-p5",
+              "text": "(2)请按如下格式在答题卡的相应位置作答。 \n A Cross-Country Running Race"
+            }
+          ]
+        },
+        "questions": [],
+        "blanks": [],
+        "optionBank": [],
+        "writingTask": {
+          "writingTaskId": "wt-2020-i-application",
+          "groupId": "group-2020-i-writing-application",
+          "taskType": "application",
+          "title": "应用文写作",
+          "instruction": "假定你是李华，上周日你校举办了5公里越野赛跑活动．请你为校英文报写一篇报道，内容包括：\n(1)参加人员；\n(2)跑步路线：从校门口到南山脚下；\n(3)活动反响。\n(1)写作词数应为80左右；\n(2)请按如下格式在答题卡的相应位置作答。 \n A Cross-Country Running Race",
+          "wordCountTarget": 80
+        }
+      },
+      {
+        "groupId": "group-2020-i-writing-continuation",
+        "slotId": "writing.continuation",
+        "family": "continuation-writing",
+        "questionIds": [],
+        "blankIds": [],
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2020-i:asset_projection:document",
+        "content": {
+          "blocks": [
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2020-i-writing-cont-title",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-writing-cont-title",
+                  "text": "阅读下面材料，根据其内容和所给段落开头语续写两段，使之构成一篇完整的短文。"
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2020-i-writing-cont-p1",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-writing-cont-p1",
+                  "text": "The Meredith family lived in a small community. As the economy was in decline, some people in the town had lost their jobs. Many of their families were struggling to make ends meet. People were trying to help each other meet the challenges."
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2020-i-writing-cont-p2",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-writing-cont-p2",
+                  "text": "Mrs. Meredith was a most kind and thoughtful woman. She spent a great deal of time visiting the poor. She knew they had problems, and they needed all kinds of help. When she had time, she would bring food and medicine to them."
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2020-i-writing-cont-p3",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-writing-cont-p3",
+                  "text": "One morning she told her children about a family she had visited the day before. There was a man sick in bed, his wife, who took care of him and could not go out to work, and their little boy. The little boy – his name was Bernard – had interested her very much."
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2020-i-writing-cont-p4",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-writing-cont-p4",
+                  "text": "“I wish you could see him,” she said to her own children, John, Harry, and Clara. “He is such a help to his mother. He wants very much to earn some money, but I don’t see what he can do.”"
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2020-i-writing-cont-p5",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-writing-cont-p5",
+                  "text": "After their mother left the room, the children sat thinking about Bernard. “I wish we could help him to earn money,” said Clara. “His family is suffering so much.”"
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2020-i-writing-cont-p6",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-writing-cont-p6",
+                  "text": "“So do I,” said Harry. “We really should do something to assist them.”"
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2020-i-writing-cont-p7",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-writing-cont-p7",
+                  "text": "For some moments, John said nothing, but, suddenly, he sprang to his feet and cried, “I have a great idea! I have a solution that we can all help accomplish (完成) .”"
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2020-i-writing-cont-p8",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2020-i-writing-cont-p8",
+                  "text": "The other children also jumped up all attention. When John had an idea, it was sure to be a good one. “I tell you what we can do,” said John. “You know that big box of corn Uncle John sent us? Well, we can make popcorn (爆米花) , and put it into paper bags, and Bernard can take it around to the houses and sell it.”"
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "paragraph:group-2020-i-writing-continuation:starter:1",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:group-2020-i-writing-continuation:starter:1",
+                  "text": "When Mrs.Meredith heard of John's idea, she thought it was a good one, too."
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "paragraph:group-2020-i-writing-continuation:starter:2",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:group-2020-i-writing-continuation:starter:2",
+                  "text": "With everything ready, Bernard started out on his new business."
+                }
+              ]
+            }
+          ]
+        },
+        "media": [],
+        "variant": {
+          "family": "continuation-writing",
+          "mode": "legacy_opaque",
+          "writingTaskId": "wt-2020-i-continuation",
+          "sourceTaskType": "continuation",
+          "contentBlockRefs": [
+            "para-2020-i-writing-cont-title",
+            "para-2020-i-writing-cont-p1",
+            "para-2020-i-writing-cont-p2",
+            "para-2020-i-writing-cont-p3",
+            "para-2020-i-writing-cont-p4",
+            "para-2020-i-writing-cont-p5",
+            "para-2020-i-writing-cont-p6",
+            "para-2020-i-writing-cont-p7",
+            "para-2020-i-writing-cont-p8",
+            "paragraph:group-2020-i-writing-continuation:starter:1",
+            "paragraph:group-2020-i-writing-continuation:starter:2"
+          ],
+          "sourceStarterBlockRefs": [
+            "paragraph:group-2020-i-writing-continuation:starter:1",
+            "paragraph:group-2020-i-writing-continuation:starter:2"
+          ],
+          "wordCountTarget": 150,
+          "wordCountTargetCertainty": "explicit_legacy_field",
+          "wordCountScope": "unspecified",
+          "choiceOwnership": {
+            "ownership": "none"
+          },
+          "response": {
+            "kind": "generic_response_box",
+            "answerRegionRef": "writing.continuation-box",
+            "ownership": "product"
+          }
+        },
+        "sourceSpanRefsByTarget": {},
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2020-i-writing-cont-title",
+              "text": "阅读下面材料，根据其内容和所给段落开头语续写两段，使之构成一篇完整的短文。"
+            },
+            {
+              "paragraphId": "para-2020-i-writing-cont-p1",
+              "text": "The Meredith family lived in a small community. As the economy was in decline, some people in the town had lost their jobs. Many of their families were struggling to make ends meet. People were trying to help each other meet the challenges."
+            },
+            {
+              "paragraphId": "para-2020-i-writing-cont-p2",
+              "text": "Mrs. Meredith was a most kind and thoughtful woman. She spent a great deal of time visiting the poor. She knew they had problems, and they needed all kinds of help. When she had time, she would bring food and medicine to them."
+            },
+            {
+              "paragraphId": "para-2020-i-writing-cont-p3",
+              "text": "One morning she told her children about a family she had visited the day before. There was a man sick in bed, his wife, who took care of him and could not go out to work, and their little boy. The little boy – his name was Bernard – had interested her very much."
+            },
+            {
+              "paragraphId": "para-2020-i-writing-cont-p4",
+              "text": "“I wish you could see him,” she said to her own children, John, Harry, and Clara. “He is such a help to his mother. He wants very much to earn some money, but I don’t see what he can do.”"
+            },
+            {
+              "paragraphId": "para-2020-i-writing-cont-p5",
+              "text": "After their mother left the room, the children sat thinking about Bernard. “I wish we could help him to earn money,” said Clara. “His family is suffering so much.”"
+            },
+            {
+              "paragraphId": "para-2020-i-writing-cont-p6",
+              "text": "“So do I,” said Harry. “We really should do something to assist them.”"
+            },
+            {
+              "paragraphId": "para-2020-i-writing-cont-p7",
+              "text": "For some moments, John said nothing, but, suddenly, he sprang to his feet and cried, “I have a great idea! I have a solution that we can all help accomplish (完成) .”"
+            },
+            {
+              "paragraphId": "para-2020-i-writing-cont-p8",
+              "text": "The other children also jumped up all attention. When John had an idea, it was sure to be a good one. “I tell you what we can do,” said John. “You know that big box of corn Uncle John sent us? Well, we can make popcorn (爆米花) , and put it into paper bags, and Bernard can take it around to the houses and sell it.”"
+            }
+          ]
+        },
+        "questions": [],
+        "blanks": [],
+        "optionBank": [],
+        "writingTask": {
+          "writingTaskId": "wt-2020-i-continuation",
+          "groupId": "group-2020-i-writing-continuation",
+          "taskType": "continuation",
+          "title": "读后续写",
+          "instruction": "阅读下面材料，根据其内容和所给段落开头语续写两段，使之构成一篇完整的短文。\nThe Meredith family lived in a small community. As the economy was in decline, some people in the town had lost their jobs. Many of their families were struggling to make ends meet. People were trying to help each other meet the challenges.\nMrs. Meredith was a most kind and thoughtful woman. She spent a great deal of time visiting the poor. She knew they had problems, and they needed all kinds of help. When she had time, she would bring food and medicine to them.\nOne morning she told her children about a family she had visited the day before. There was a man sick in bed, his wife, who took care of him and could not go out to work, and their little boy. The little boy – his name was Bernard – had interested her very much.\n“I wish you could see him,” she said to her own children, John, Harry, and Clara. “He is such a help to his mother. He wants very much to earn some money, but I don’t see what he can do.”\nAfter their mother left the room, the children sat thinking about Bernard. “I wish we could help him to earn money,” said Clara. “His family is suffering so much.”\n“So do I,” said Harry. “We really should do something to assist them.”\nFor some moments, John said nothing, but, suddenly, he sprang to his feet and cried, “I have a great idea! I have a solution that we can all help accomplish (完成) .”\nThe other children also jumped up all attention. When John had an idea, it was sure to be a good one. “I tell you what we can do,” said John. “You know that big box of corn Uncle John sent us? Well, we can make popcorn (爆米花) , and put it into paper bags, and Bernard can take it around to the houses and sell it.”",
+          "continuationStarters": [
+            "When Mrs.Meredith heard of John's idea, she thought it was a good one, too.",
+            "With everything ready, Bernard started out on his new business."
+          ],
+          "materialText": "阅读下面材料，根据其内容和所给段落开头语续写两段，使之构成一篇完整的短文。\n\nThe Meredith family lived in a small community. As the economy was in decline, some people in the town had lost their jobs. Many of their families were struggling to make ends meet. People were trying to help each other meet the challenges.\n\nMrs. Meredith was a most kind and thoughtful woman. She spent a great deal of time visiting the poor. She knew they had problems, and they needed all kinds of help. When she had time, she would bring food and medicine to them.\n\nOne morning she told her children about a family she had visited the day before. There was a man sick in bed, his wife, who took care of him and could not go out to work, and their little boy. The little boy – his name was Bernard – had interested her very much.\n\n“I wish you could see him,” she said to her own children, John, Harry, and Clara. “He is such a help to his mother. He wants very much to earn some money, but I don’t see what he can do.”\n\nAfter their mother left the room, the children sat thinking about Bernard. “I wish we could help him to earn money,” said Clara. “His family is suffering so much.”\n\n“So do I,” said Harry. “We really should do something to assist them.”\n\nFor some moments, John said nothing, but, suddenly, he sprang to his feet and cried, “I have a great idea! I have a solution that we can all help accomplish (完成) .”\n\nThe other children also jumped up all attention. When John had an idea, it was sure to be a good one. “I tell you what we can do,” said John. “You know that big box of corn Uncle John sent us? Well, we can make popcorn (爆米花) , and put it into paper bags, and Bernard can take it around to the houses and sell it.”",
+          "wordCountTarget": 150
+        }
+      }
+    ],
+    "transformations": [],
+    "inactiveSlots": {
+      "listening.short-dialogue": "not_supplied",
+      "listening.long-form": "not_supplied"
+    },
+    "inactiveSourceClosures": []
+  },
+  "issues": [],
+  "candidateDigest": "sha256:2ac6bdb579ea4e429d4835bd8f28de8df04e406c7d11526697b089da6e04504d"
+}
