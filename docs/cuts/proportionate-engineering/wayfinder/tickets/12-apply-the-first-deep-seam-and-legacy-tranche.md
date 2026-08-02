@@ -19,16 +19,23 @@ fan-out without an architecture rewrite.
 
 ### Affected files and surfaces
 
-Exactly the first-tranche Interface, implementation, callers, replacement
-tests, and compatibility/docs surface selected by Ticket 08. Ticket 08 cannot
-PASS unless that one tranche is already precise and fits one fresh context;
-Ticket 12 may not split it into additional tickets.
+Exactly one new pure Rendered Behavior Plan Module under
+`shared/paper-canonical/**`, the Screen and Print callers that currently derive
+the same family/chrome/rhythm relationships, their replacement/public-seam
+tests, and the no-op `saveAssemblyBasket()` definition/import/call/assertions.
+Keep the independent Assembly Basket migration reader. Ticket 12 may not split
+the tranche into additional tickets.
 
 ### Exact decision to return
 
-Deepen/split/delete only the selected tranche and report the observed locality
-gain; retain legacy paths that still protect reachable persisted data. A
-documentation-only description of a future seam cannot pass.
+Implement a renderer-neutral `planCanonicalRenderedBehavior` Interface over
+ordered blocks and canonical consumption. It returns family/group
+relationships and block roles, not DOM/CSS/React/HTML. Screen and Print retain
+media rendering and geometry but delete their duplicate shared derivation.
+Replace shallow expectations at the Plan Interface while retaining Screen DOM,
+Print HTML and risk-required real PDF observations. Also delete only the proven
+no-op Assembly Basket writer seam; retain all reachable legacy consumer/Print
+compatibility paths. A documentation-only description cannot pass.
 
 ### Classification candidates
 
@@ -59,6 +66,12 @@ otherwise Terra High as fixed by Ticket 08.
 
 - Change simulation touches fewer callers and fewer test layers.
 - Tests cross the same Interface as callers; replaced shallow tests are gone.
-- Compatibility deletion has reachable-data and recovery evidence.
+- Family insertion/reorder, page-break/heading boundary, duplicate/missing
+  canonical occurrence, and previous/next binding are covered at the Plan
+  Interface; Screen and Print each prove mapping to it.
+- No-op writer deletion leaves in-memory basket behavior and the migration
+  reader unchanged.
+- No compiler, authority, publication, schema, production/R2 or visual-redesign
+  surface changes.
 - Independent review occurs only if the actual selected tranche changes high-
   risk shared behavior; otherwise normal in-ticket review is sufficient.

@@ -1,7 +1,7 @@
 # Audit verification, review, and visual proof
 
-Status: open
-Claim: unclaimed
+Status: done
+Claim: 019fc243-8ba3-7832-92c4-69ad0147b0c3
 Blocked by: Freeze the burden baseline and risk language
 Next on PASS: parallel join handoff
 Parallel frontier: not-applicable
@@ -69,3 +69,42 @@ may be delegated to Luna Max only after columns and expected output are fixed.
 - Named-failure cadence with replacement-not-layering proposals.
 - Explicit Screen/Print/PDF deep-test triggers and canary rules preserving
   public correctness without per-paper manual proof.
+
+## Resolution
+
+Evidence packet: Codex task `019fc243-8ba3-7832-92c4-69ad0147b0c3`, read-only
+at `19cc7ef5e8bf446c269343c03bf3285390d2cce8`; packet result PASS. It bound the
+portfolio at 140 top-level verifier files / 82,247 lines, with 117 aggregate
+entries, 18 untriggered top-level scripts, and an older explicitly HEAD-bound
+313.801-second observation. Counts and elapsed time are locators, not KPIs.
+
+Decision:
+
+- **Keep** sealed exact-candidate evidence, zero-write/state integrity,
+  synchronized-forgery rejection, the public compiler, Student/Teacher
+  visibility, recovery/rollback, actual affected Screen/Print/PDF artifacts,
+  risk-required independent review, and user-visible Owner QA. Each retains a
+  unique high-blast-radius mutant; no lighter present check closes it.
+- **Delete duplicate execution / deepen** QA lifecycle testing: exercise the QA
+  session Interface with injected artifact-server and retained-service
+  Adapters instead of rerunning the entire import pilot merely to prove cleanup.
+- **Split and replace** the import-pilot monolith behind admission, publisher,
+  visibility, family-geometry, and QA-lifecycle Interfaces. Keep one thin real
+  `Source -> compile -> atomic publish/reload -> Screen -> Student/Teacher
+  Print/PDF` canary; delete a shallow matrix only after the retained Interface
+  test catches its named mutant at the same or earlier gate.
+- **Split triggers** by deterministic producer-to-consumer impact, with
+  conservative full-suite fallback for unknown, stale, cross-cut, auth,
+  persistence, publication, or shared-renderer impact. Shared contract changes
+  still run one final full suite and one independent review lineage.
+- **Downgrade** unchanged known-shape Data Addition to narrow deterministic
+  checks plus an actual-paper, risk-triggered canary. Do not require per-paper
+  authority bumps, full suites, independent review, or universal manual
+  Screen/Print/PDF proof.
+- **Keep review tiers; delete recursion**: ordinary review stays in the
+  implementation task; one independent high-risk lineage uses focused
+  re-review only after a Must Fix.
+
+Ticket 11 owns the accepted verifier/import-pilot/visual-trigger surface.
+Manual/untriggered script retirement remains P2 until each unique caller and
+mutant is mapped.

@@ -1,7 +1,7 @@
 # Audit legacy, operations, safety, and model routing
 
-Status: open
-Claim: unclaimed
+Status: done
+Claim: 019fc243-9687-7ab3-aeee-f215d13301cc
 Blocked by: Freeze the burden baseline and risk language
 Next on PASS: parallel join handoff
 Parallel frontier: not-applicable
@@ -68,3 +68,38 @@ use Luna Max after their expected outputs are specified.
 - Preserved-control table for auth, isolation, persistence, backups,
   production configuration, and recoverability.
 - Model/parallelization route based only on workload and observed evidence.
+
+## Resolution
+
+Evidence packet: Codex task `019fc243-9687-7ab3-aeee-f215d13301cc`, read-only
+at `19cc7ef5e8bf446c269343c03bf3285390d2cce8`; packet result PASS. A read-only
+local census found 33 `latest` papers, zero canonical publication rows, and zero
+canonical latest refs. Those local databases are not production truth; the
+committed production/R2 record may be stale and no live operation was run.
+
+Decision:
+
+- **Keep** authentication, owner/member authorization, per-user persistence
+  isolation, transactional migration/recovery, atomic bank transport, additive
+  R2 backup/restore proof, and exact production-posture checks. UI hiding,
+  health-only smoke, ordinary copy, or schema-presence checks do not close their
+  unique auth-bypass, cross-user leak, data-loss, partial-migration, wrong-
+  release, or off-site recovery failures.
+- **Keep** whole-paper legacy projection, the Print compatibility allowlist,
+  Canonical legacy-family capability, and the Assembly Basket migration reader
+  until persisted production/browser evidence proves them unreachable.
+- **Delete in Ticket 12** only the proven no-op `saveAssemblyBasket()` writer,
+  its sole call/import, and assertions. Its independent migration reader stays.
+- **Keep current model routing.** Luna Max is limited to mechanically specified
+  inventories; Sol retains deletion, security/durability, and cross-packet
+  judgment. Observed tasks were not a controlled model comparison and prove
+  nothing about cost, quota, billing, or intelligence.
+- **Keep parallel read-only evidence collection with one serial writer.** Do
+  not generalize it into parallel same-worktree writers.
+
+Exact-release deploy hardening, separating destructive R2 retention from daily
+additive backup, moving lazy user-schema migration behind its Interface,
+current-vs-history document cleanup, migration-script retirement, ADR/status
+cleanup, backup-script retirement, and legacy consumer deletion all remain
+non-blocking P2. They require fresh production/browser/live-data authority and
+must not touch production/R2 or delay Ticket 25.

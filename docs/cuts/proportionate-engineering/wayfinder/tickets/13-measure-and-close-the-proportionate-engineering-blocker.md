@@ -33,6 +33,13 @@ actions without weakening named failures, and is the external blocker kind
 ready to cite this exact committed map as its resolvable `Status: done` closure
 artifact? Only open P0/P1 work blocks closure; P2 is non-blocking backlog.
 
+Use Ticket 08's accepted targets as the fixed comparison: Data Addition
+`10 -> 10`, UI Micro-change `7 -> 6`, Shared Contract Change `9 -> 9`, and
+persistence/auth `9 -> 9`. A flat count is not PASS by itself: verify that
+Tickets 09–12 removed or replaced the selected duplicate mechanisms inside the
+retained actions and that every retained action still catches its unique named
+failure.
+
 ### Classification candidates
 
 Keep the final set, or fail closed and return the exact missing risk closure;
@@ -61,6 +68,8 @@ One fresh context, 60–80K tokens. Sol High for aggregate acceptance judgment.
 
 - Exact before/after action tables for all four workflows, with unnecessary
   actions removed and no invented cost data.
+- Explain unchanged counts as preserved unique risk closures; do not manufacture
+  a lower target by merging distinct failures.
 - Named-failure/mutant or fault evidence for every retained safety control.
 - No new ledger, approval loop, duplicate authority, or giant verifier.
 - Map `Status: done`, no open P0/P1 child, and kind-identical durable closure

@@ -1,7 +1,7 @@
 # Design the UI micro-change lane
 
-Status: open
-Claim: unclaimed
+Status: done
+Claim: 019fc243-90fb-7980-ba36-2b9d3cfa2204
 Blocked by: Freeze the burden baseline and risk language
 Next on PASS: parallel join handoff
 Parallel frontier: not-applicable
@@ -67,3 +67,33 @@ One fresh context, 40–60K tokens. Sol Medium.
 - Minimal check matrix and escalation decision table.
 - One simulated local change avoids backend suite/schema/version/dual-axis
   review while retaining target-page real-click evidence.
+
+## Resolution
+
+Evidence packet: Codex task `019fc243-90fb-7980-ba36-2b9d3cfa2204`, read-only
+at `19cc7ef5e8bf446c269343c03bf3285390d2cce8`; packet result PASS. Direct radius
+and motion verifiers were observed passing (`2 checks` and `43 PASS / 0 FAIL`)
+only as availability evidence, not as proof of a simulated diff.
+
+Decision:
+
+- **Split** presentation into atomic CSS, local presentation, and shared/high-
+  risk presentation by actual Interface and consumer fan-out, not file path or
+  LOC. Local copy/spacing/typography/motion may use the light lane when one
+  page/state and all dependencies are closed.
+- **Keep** diff/dependency classification, affected app build and direct
+  verifier, exact target-page real-click/screenshot evidence, accessibility
+  proof when implicated, and user-visible Owner QA.
+- **Downgrade** the separate light visual sanity-review action by merging it
+  into the exact target-page browser/screenshot inspection; it owns no unique
+  surviving mutant.
+- **Delete** backend full suite, schema/authority versioning, independent dual-
+  axis review, and any new ledger/approval/verifier for a qualifying local
+  micro-change.
+- **Escalate** new selectors/behavior/state/URL/responsive structure; shared
+  tokens or public UI Modules; focus/ARIA/keyboard/contrast/reduced-motion;
+  PaperSurface; Print/PDF/export; domain/schema/server/auth/persistence; or
+  unknown/cross-cut dependencies to their existing risk route.
+
+Ticket 11 owns the executable UI route. Moving local selectors out of
+`App.css` is non-blocking P2 locality work.

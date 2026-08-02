@@ -1,7 +1,7 @@
 # Proportionate Engineering Reform — Wayfinder Map
 
 Status: charted
-Next on PASS: parallel frontier handoff
+Next on PASS: `docs/cuts/proportionate-engineering/wayfinder/tickets/09-replace-dispatch-and-approval-burden.md`
 Terminal: no
 External blocker kind: project-wide proportionate-engineering Wayfinder
 
@@ -69,6 +69,13 @@ External blocker kind: project-wide proportionate-engineering Wayfinder
 ## Decisions so far
 
 - [Freeze the burden baseline and risk language](tickets/01-freeze-burden-baseline-and-risk-language.md) — froze exact-HEAD path denominators, canonical risk terms, and named-failure action traces for the six read-only audits.
+- [Audit governance and coordination gates](tickets/02-audit-governance-and-coordination-gates.md) — retained unique owner/identity/transition gates but selected manual dispatch and one typed receipt route over agent dispatch, conditional approval peers, and map-route duplication.
+- [Audit verification, review, and visual proof](tickets/03-audit-verification-review-and-visual-proof.md) — kept unique high-risk public proof while selecting impact-triggered suites, direct QA lifecycle tests, a thin real canary, and replacement rather than layered verifier matrices.
+- [Audit Canonical Paper data operations and contract fan-out](tickets/04-audit-canonical-data-and-contract-fanout.md) — split unchanged-shape Data Addition from Shared Contract Change around candidate-bound Teacher Confirmation and one atomic publisher with risk-triggered canaries.
+- [Audit module depth and architecture hotspots](tickets/05-audit-module-depth-and-hotspots.md) — selected one pure Rendered Behavior Plan Interface to replace duplicate Screen/Print derived semantics; all other hotspots are P2.
+- [Design the UI micro-change lane](tickets/06-design-the-ui-micro-change-lane.md) — split atomic/local/shared presentation, kept affected checks plus target-page Owner QA, and merged standalone sanity review into browser evidence.
+- [Audit legacy, operations, safety, and model routing](tickets/07-audit-legacy-operations-and-model-routing.md) — preserved reachable compatibility and all security/durability controls, selected only a proven no-op deletion, and kept evidence-based model/parallel routes.
+- [Decide the P0/P1 reform set](tickets/08-decide-the-p0-p1-reform-set.md) — fixed the non-overlapping serial P0/P1 route across Tickets 09–12 and closure Ticket 13; only UI actions target 7-to-6 while unique-risk counts remain intact.
 
 ## Fog
 
@@ -84,3 +91,19 @@ External blocker kind: project-wide proportionate-engineering Wayfinder
 - Lower-priority P2 cleanup becomes non-blocking backlog after P0/P1 closure;
   it may be noted in Fog but must not create another ticket in this map or delay
   business development and Ticket 25.
+- P2 architecture: split `server/api.mjs`, host-page composition, publication
+  internals, and authority-registry layout; localize touched `App.css`
+  selectors; consider further verifier decomposition only after the accepted
+  public Interfaces land.
+- P2 compatibility/legacy: retire legacy whole-paper/Print adapters, Assembly
+  Basket migration reader, historical manifests/consumer artifacts, and old
+  migration/backup scripts only after fresh reachable production/browser/data
+  and recovery evidence. The 33-paper local snapshot proves deletion is unsafe
+  now, not current production state.
+- P2 operations: exact-release deploy hardening, separating destructive R2
+  retention from additive backup, startup-owned user-schema migration, and
+  current-vs-history status/ADR cleanup require separate fresh authority; they
+  do not authorize production/R2 access and do not block Ticket 25.
+- P2 portfolio: classify the 18 untriggered verifier scripts and source-regex
+  assertions by live caller and unique mutant before any deletion; absence from
+  CI or high LOC is not proof.

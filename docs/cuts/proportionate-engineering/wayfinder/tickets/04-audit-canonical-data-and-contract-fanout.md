@@ -1,7 +1,7 @@
 # Audit Canonical Paper data operations and contract fan-out
 
-Status: open
-Claim: unclaimed
+Status: done
+Claim: 019fc243-8e25-7b50-acd3-7dce12eac7d2
 Blocked by: Freeze the burden baseline and risk language
 Next on PASS: parallel join handoff
 Parallel frontier: not-applicable
@@ -69,3 +69,37 @@ One fresh context, 70–90K tokens. Sol Medium.
   anomaly canary.
 - A deletion test proving Atomic Publication is visibility atomicity, not
   universal per-paper consumer revalidation.
+
+## Resolution
+
+Evidence packet: Codex task `019fc243-8e25-7b50-acd3-7dce12eac7d2`, read-only
+at `19cc7ef5e8bf446c269343c03bf3285390d2cce8`; packet result PASS. As a concrete
+fan-out contrast, shared DOCX-seam commit `0b5c7b56` changed 37 files, including
+authority/schema, two Consumer Contracts, shared compiler/publication Modules,
+and nine verifiers; this is not a Data Addition.
+
+Decision:
+
+- **Split** Data Addition from Shared Contract Change. Data Addition requires
+  an unchanged registered Adapter, schema, authority, compiler, publisher,
+  loader, Consumer Contracts, renderer, and known content shape. Any required
+  shared write, new shape/rule, identity ambiguity, atomicity failure, or canary
+  anomaly fails closed into Shared Contract Change.
+- **Deepen** one candidate-bound Interface from immutable source bytes and
+  deterministic issues through Teacher Confirmation to a confirmed Canonical
+  Paper. Keep whole-source and candidate/confirmation/publication identities;
+  delete per-field proof digests once the complete candidate closure exists.
+- **Keep and deepen** one public Atomic Publication Interface owning pre-write
+  admission, all-fields/version commit, exact committed reload, idempotent
+  retry, recovery, digest conflict rejection, and verified rollback. Delete
+  per-sidecar publication/proof.
+- **Downgrade** known-shape public proof to automated Screen/Print-PDF consumer
+  admission plus one proportionate actual-paper canary. Deep actual Screen,
+  Student/Teacher Print HTML and Chromium PDF proof remains mandatory for a
+  shared renderer/geometry/typography/anchor/visibility change, a new shape, or
+  a canary anomaly.
+- **Keep** Teacher Confirmation. It uniquely prevents compiler/AI interpretation
+  from becoming semantic authority without the teacher trust decision.
+
+Ticket 10 owns the accepted Data Addition Interface and escalation predicates.
+Historical manifest/consumer cleanup is P2 pending reachable-data evidence.

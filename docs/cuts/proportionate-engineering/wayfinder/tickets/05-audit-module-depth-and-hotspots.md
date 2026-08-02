@@ -1,7 +1,7 @@
 # Audit module depth and architecture hotspots
 
-Status: open
-Claim: unclaimed
+Status: done
+Claim: 019fc243-942d-7fc0-95b2-da715a952799
 Blocked by: Freeze the burden baseline and risk language
 Next on PASS: parallel join handoff
 Parallel frontier: not-applicable
@@ -69,3 +69,38 @@ One fresh context, 70–90K tokens. Sol Medium.
   selected hotspot.
 - Deletion-test results and one precise first-tranche Interface/write surface.
 - Proposed tests cross the same Interface as callers and replace old layers.
+
+## Resolution
+
+Evidence packet: Codex task `019fc243-942d-7fc0-95b2-da715a952799`, read-only
+at `19cc7ef5e8bf446c269343c03bf3285390d2cce8`; packet result PASS. No P0
+architecture safety gap was found. The highest-leverage P1 hotspot is duplicate
+caller-authored rendered behavior: Screen derives roughly 291 lines and Print
+roughly 381 lines of the same family order, chrome, rhythm, predecessor, and
+following-section semantics.
+
+Decision:
+
+- **Keep** `compileCanonicalPaper`, authority resolution, whole-publication
+  loading, and atomic journal/recovery. Their deletion makes necessary
+  authority, source, visibility, and recovery complexity reappear across many
+  callers.
+- **Deepen** one pure `Rendered Behavior Plan` Module whose small Interface
+  accepts renderer-neutral ordered blocks plus canonical consumption and
+  returns family/group relationships and block roles. Screen and Print keep
+  media rendering and geometry, but no longer independently own the shared
+  derived semantics.
+- **Replace tests** at that Interface, then retain one Screen DOM observation
+  and one Print HTML observation plus risk-required real PDF evidence. Delete
+  renderer-local/source-shape expectations only when equivalent behavior has
+  moved to the shared Interface test.
+- **Split** import-pilot internals while retaining one CLI and final aggregate
+  result; this overlaps Ticket 03 and is therefore one Ticket 11 reform, not a
+  second candidate.
+- **Keep for now** the legacy Print group Adapter. Although shallow, current
+  production callers can still reach it when whole-paper consumption is absent;
+  deletion requires persisted-data migration and Screen/Print/PDF evidence.
+
+Ticket 12 owns only the Rendered Behavior Plan tranche and its replacement
+tests. `server/api.mjs`, host-page composition, publication internals,
+authority-registry layout, and legacy Print removal are non-blocking P2.

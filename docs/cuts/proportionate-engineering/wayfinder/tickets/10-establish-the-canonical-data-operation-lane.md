@@ -19,9 +19,10 @@ Teacher Confirmation, atomic publication/reload/retry, and canary routing.
 
 ### Affected files and surfaces
 
-Only the canonical import/publication Interface, its direct behavioral tests,
-and minimal current authority named by Ticket 08. Do not import a new paper or
-touch Ticket 25/current paper-canonical route artifacts.
+Only the canonical candidate-confirmation/publication Interfaces, their direct
+behavioral tests, and the minimum current import/testing authority needed to
+route unchanged behavior. Do not import a new paper or touch Ticket 25, any
+paper-canonical spec/ticket/manifest/approval receipt, or production/R2.
 
 ### Exact decision to return
 
@@ -29,6 +30,15 @@ Implement the accepted Data Addition lane and escalation predicates while
 preserving Shared Contract Change handling. Closure requires a concrete deep
 Interface or executable workflow deletion/downgrade plus replacement tests;
 another policy statement alone cannot pass.
+
+The Interface must bind immutable source identity, deterministic candidate and
+ordered issues, exact candidate-bound Teacher Confirmation, confirmed Canonical
+Paper identity, and one atomic publisher result. It owns all-fields/version
+visibility, committed reload, idempotent retry, recovery, digest conflict and
+verified rollback. New Adapter/media/profile/family/content shape, diagnostic/
+normalization/confirmation rule, caller-authored consumed semantic, shared
+Module write, unresolved identity, atomic fault or actual-paper canary anomaly
+must fail closed into Shared Contract Change.
 
 ### Classification candidates
 
@@ -66,5 +76,7 @@ One fresh context, 70–90K tokens. Terra Max.
   dual-axis review, manifest approval, and manual Screen/Print/PDF proof while
   retaining source digest, narrow validation, Teacher Confirmation, atomicity,
   and a proportionate canary.
+- Baseline action target remains 10 -> 10 because all ten actions own unique
+  failures; reduction is in duplicated mechanisms within those actions.
 - Because this ticket changes high-risk shared publication behavior, use the
   existing risk-required independent review lineage once; add no new ceremony.
