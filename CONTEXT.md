@@ -9,12 +9,24 @@ The exam paper, mock paper, self-made material, or imported file family that a p
 _Avoid_: file, origin, paper when referring to provenance broadly
 
 **Source Capture**:
-The immutable, traceable evidence package of exactly what one or more Import Files contain before EQB interprets them: original document bytes and digests plus ordered observations, document roles, provenance, and Source Spans. Source correction creates a new capture; normalized text, canonical structure, and Analysis never overwrite it.
+The immutable provenance package for one import attempt: exact Import File bytes, whole-file digests, document roles, ordered observations, and any available Source Spans. Source correction creates a new capture; interpreted content and Analysis never overwrite it.
 _Avoid_: canonical paper, cleaned paper, normalized asset
 
 **Source Span**:
-A typed address into one immutable Source Capture observation or binary artifact, bound to its source-document digest and pre-normalization coordinates. Canonical content and Transformation Records point back to Source Spans; normalized-text offsets are not Source Spans.
+A typed address into one immutable Source Capture observation or binary artifact, bound to its source-document digest and pre-normalization coordinates. It is diagnostic and audit evidence, not a universal per-field admission proof.
 _Avoid_: canonical path, normalized offset, mutable text range
+
+**Import Candidate**:
+The deterministic, unpublished interpretation derived by a trusted source adapter from one Source Capture, accompanied by validation issues and still requiring Teacher Confirmation before it can become a Canonical Paper.
+_Avoid_: canonical paper, caller-authored payload, draft publication
+
+**Teacher Confirmation**:
+The explicit, candidate-bound decisions by a teacher that accept or resolve semantic import issues. It is the semantic trust boundary between an Import Candidate and a Canonical Paper.
+_Avoid_: parser success, automatic approval, informal review note
+
+**Canonical Paper**:
+The complete renderer-neutral paper semantics produced only after deterministic validation and Teacher Confirmation have no unresolved blocking issue. It is the single meaning consumed by Screen, Print, and PDF and is published atomically or not at all.
+_Avoid_: import candidate, rendered paper, partial sidecar
 
 **Paper Format Profile**:
 A reusable, versioned definition of one legitimate paper family: its parts, sections, group slots, numbering, scoring, instructions, and answer regions.
@@ -25,11 +37,11 @@ One paper's validated instantiation of a Paper Format Profile, linking every req
 _Avoid_: paper asset, layout tree, rendered document
 
 **Canonical Paper Publication**:
-One immutable, versioned, integrity-closed set that binds a single source paper asset instance to one complete Canonical Paper Plan, its exact Canonical Question Groups, Source Capture closure, Normalization Report, provenance/digests, and executable authority closure. It is admitted or rejected as a whole; its additive sidecars are not independently publishable.
+One immutable, versioned, integrity-closed set that binds a confirmed Canonical Paper to its Source Capture, Teacher Confirmation, provenance/digests, and executable authority closure. It is admitted or rejected as a whole; its additive sidecars are not independently publishable.
 _Avoid_: individual sidecar, mutable latest directory, partially canonical paper
 
 **Inactive Source Slot**:
-A Paper Format Profile slot whose required source evidence is closed in a Canonical Paper Plan but deliberately produces no Canonical Question Group and appears on no current consumption surface. It preserves a real part of the source paper without pretending that family is active.
+A Paper Format Profile slot that deliberately produces no Canonical Question Group and appears on no current consumption surface. Its source state is recorded explicitly, including `not_supplied`; activating it later requires a separate source/content contract.
 _Avoid_: incomplete Question Group, hidden Question Group, raw group
 
 **Canonical Question Group**:
@@ -157,12 +169,14 @@ own light axis); using "考点" loosely when one of these specific axes is meant
 
 ## Relationships
 
-- A **Source Capture** can compile into one **Canonical Paper Plan**, many **Canonical Question Groups**, and one **Normalization Report**.
-- A **Canonical Paper Publication** binds exactly one source paper asset instance, one complete **Canonical Paper Plan**, its exact **Canonical Question Groups**, one **Source Capture** closure, one **Normalization Report**, and one executable authority closure.
-- Every source-backed canonical value or relationship either maps directly to one or more **Source Spans** or is justified by an ordered **Transformation Record**.
+- A trusted adapter derives one **Import Candidate** and its deterministic issues from one **Source Capture**; callers do not author the candidate's semantics.
+- **Teacher Confirmation** binds to one exact **Import Candidate** and either yields one complete **Canonical Paper** or leaves explicit unresolved issues.
+- A **Canonical Paper** contains one complete **Canonical Paper Plan** and its exact **Canonical Question Groups**.
+- A **Canonical Paper Publication** binds exactly one confirmed **Canonical Paper**, its **Source Capture**, its **Teacher Confirmation**, and one executable authority closure.
+- **Source Spans** and **Transformation Records** support diagnosis and audit without becoming a universal per-field admission requirement.
 - A **Paper Format Profile** can be instantiated by many **Canonical Paper Plans**; each Canonical Paper Plan uses exactly one versioned Paper Format Profile.
 - A **Canonical Paper Plan** links its active paper slots to **Canonical Question Groups** but does not contain their passage or question content.
-- An **Inactive Source Slot** links to one validated source closure instead of a **Canonical Question Group**.
+- An **Inactive Source Slot** links to an explicit source state such as `not_supplied` instead of a **Canonical Question Group**.
 - A **Normalization Report** records the source-to-canonical outcome without becoming paper content or Analysis.
 - A **Source** can contain many **Passages**.
 - A **Passage** belongs to exactly one **Source** in V0.

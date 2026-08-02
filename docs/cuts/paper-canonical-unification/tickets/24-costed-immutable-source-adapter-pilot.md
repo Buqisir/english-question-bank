@@ -1,8 +1,8 @@
 # 24 — Costed immutable-source-adapter pilot — `paper-2026-i`
 
-Status: ready
+Status: done
 Blocked by: Ticket 23 approved publication and exact manifest-digest approval
-Next on PASS: `docs/cuts/paper-canonical-unification/tickets/25-source-adapter-recovery-cluster-a.md`
+Next on PASS: `docs/cuts/paper-canonical-unification/tickets/25-trusted-docx-candidate-confirmation-seam.md`
 Terminal: no
 
 ## What to build
@@ -20,9 +20,9 @@ Terminal: no
 
 ## Acceptance criteria
 
-- [ ] Deliver exactly the approved slice above without merging, splitting, or broadening it.
-- [ ] Preserve the approved blocker, membership, old-ticket mapping, and capacity/fail-closed rule.
-- [ ] Run the affected checks required by current repository authority and record the result below.
+- [x] Deliver exactly the approved slice above without merging, splitting, or broadening it.
+- [x] Preserve the approved blocker, membership, old-ticket mapping, and capacity/fail-closed rule.
+- [x] Run the affected checks required by current repository authority and record the result below.
 
 ## Superseded-ticket mapping
 
@@ -30,6 +30,6 @@ Old 21–50 pilot
 
 ## Result
 
-Commit:
-Verify:
-Notes:
+Commit: `bd6bf2ca2acd2ca200ceb33621dca6065ad32ef6`; sealed follow-up evidence `dc9e05d7`
+Verify: source-adapter pilot and exact zero-write state checks PASS at the recorded candidate
+Notes: The approved 88-unit pilot measured 199 units and failed closed as required. This completed predecessor authorized replanning, not implementation of its old successor.
