@@ -52,11 +52,8 @@ successor; a completed non-terminal ticket must provide it.
 生成并返回唯一后继任务的完整 handoff。“不得开始下一票”不得解释为“不得生成
 下一票 handoff”。
 
-The sole agent-side dispatch exception is an owner-explicit invocation of
-`$coordinate-eqb-wayfinder` for an already-charted EQB Wayfinder initiative
-with a validated durable phase frontier. That coordinator stays
-repository-read-only and creates exactly one fresh top-level peer at a time in
-the same saved worktree.
+There is no agent-side dispatch exception. The owner opens every successor
+top-level task manually after reading the returned handoff.
 
 Detailed task-boundary, attachment, blocker, and handoff rules have one owner:
 `docs/agents/dispatch-protocols.md`. It also owns the closed phase state
@@ -65,9 +62,8 @@ Tracked path and receipt/ticket field schema live in
 `docs/agents/issue-tracker.md`; the current model table lives in
 `docs/agents/model-routing.md`; testing cadence lives in
 `docs/agents/testing-cadence.md`; owner QA has the separate single owner
-`docs/agents/owner-qa-handoff-template.md`. The global coordinator executes
-those project authorities without restating them. The full new-task template
-exists only in `dispatch-protocols.md`.
+`docs/agents/owner-qa-handoff-template.md`. The full new-task template exists
+only in `dispatch-protocols.md`.
 
 ## Deterministic completion exit
 

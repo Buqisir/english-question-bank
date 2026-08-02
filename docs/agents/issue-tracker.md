@@ -5,7 +5,7 @@ be able to read the same decisions, so `.scratch/` is never durable routing
 state.
 
 This project configuration overrides the global `/to-spec` and `/to-tickets`
-local-`.scratch` default. In EQB, anything consumed by a fresh task is written
+local-`.scratch/` default. In EQB, anything consumed by a fresh task is written
 to the tracked paths below.
 
 ## Normal multi-session feature
@@ -24,7 +24,7 @@ Each ticket contains:
 # <NN> — <title>
 
 Status: ready | in-progress | done | blocked
-Blocked by: <ticket titles or None>
+Blocked by: <ticket titles or exact ticket dependencies | None>
 Next on PASS: <ticket path | parallel frontier handoff | parallel join handoff | independent review | owner QA | release | DONE>
 Terminal: yes | no
 
@@ -68,12 +68,10 @@ docs/cuts/<feature>/wayfinder/
     <decision-title>.md
 ```
 
-`map.md` is a low-resolution index:
+`map.md` is a low-resolution index, never a route artifact:
 
 ```markdown
 Status: charted | done
-Next on PASS: <one frontier ticket | post-map route | DONE>
-Terminal: yes | no
 
 ## Notes
 
@@ -88,19 +86,21 @@ Its field schema is:
 ```text
 Status: open | done
 Claim: unclaimed | <task id>
-Blocked by: <ticket titles | None>
+Blocked by: <ticket titles or exact ticket dependencies | None>
 Next on PASS: <route kind or ticket path>
 Terminal: yes | no
 Type: research | prototype | grilling | task
 ```
 
-The map links closed tickets with one-line gists. Route and transition
+The map links closed tickets with one-line gists. It never duplicates ticket
+blockers, live phase state, or route/digest bindings. Route and transition
 semantics live only in `dispatch-protocols.md`.
 
 ## Development phase receipt
 
 Huge/foggy initiatives keep one tracked
-`docs/cuts/<feature>/phase-transition.md` receipt. Its core field schema is:
+`docs/cuts/<feature>/phase-transition.md` receipt. It is the only live phase
+state. Its core field schema is:
 
 ```text
 Status: active | done
@@ -108,24 +108,21 @@ Previous phase: <route kind>
 Current phase: <route kind>
 Next on PASS: <route kind>
 Terminal: yes | no
-Wayfinder map: <repo-relative path>
-Current map binding: pending | verified
-Current map binding commit: <40-hex commit>
-Current map artifact: <repo-relative path>
-Current map artifact SHA-256: <64-hex digest>
+Worktree: <absolute path>
+Branch: <branch>
+HEAD: <40-hex commit>
+Fixed point: <40-hex commit>
+Current ticket: <repo-relative ticket path>
 Implementation dispatch: forbidden | allowed
 ```
 
-Every completed task phase uses this reusable provenance group, where
-`<Phase label>` is the human label for the exact route kind:
+Every completed task phase uses this minimum machine-checkable artifact group,
+where `<Phase label>` is the human label for the exact route kind:
 
 ```text
-<Phase label> provenance: pending | verified
-<Phase label> entry skill: <absolute SKILL.md path | none>
-<Phase label> source HEAD: <40-hex commit>
-<Phase label> result commit: <40-hex commit>
 <Phase label> artifact: <repo-relative path>
 <Phase label> artifact SHA-256: <64-hex digest>
+<Phase label> result commit: <40-hex commit>
 <Phase label> outcome: passed | failed | accepted | complete
 ```
 
@@ -135,65 +132,41 @@ Every completed task phase uses this reusable provenance group, where
 ```text
 Accepted spec: <repo-relative path | none>
 Accepted spec SHA-256: <64-hex digest | pending>
-Ticket-set binding: pending | verified
+Accepted spec result commit: <40-hex commit | pending>
 Ticket-set manifest: <repo-relative path | pending>
 Ticket-set manifest SHA-256: <64-hex digest | pending>
+Ticket-set result commit: <40-hex commit | pending>
 Ticket-set accepted-spec SHA-256: <64-hex digest | pending>
-Owner ticket-granularity approval: pending | verified
-Owner approval actor: owner
-Owner approval action: approve-ticket-granularity
-Owner approval result commit: <40-hex commit>
-Owner approval record: <repo-relative path>
-Owner approval ticket-set manifest SHA-256: <64-hex digest>
-Owner manifest-digest approval: pending | verified
-Owner manifest-digest approval mode: pending | exact-digest | conditional-predicate
-Owner manifest-digest approval actor: owner | pending
-Owner manifest-digest approval action: pending | approve-manifest-digest | apply-conditional-manifest-approval
-Owner manifest-digest approval source: <exact owner task/turn/message identity | pending>
-Owner manifest-digest approval proposal identity: <exact proposal task/turn identity | pending>
-Owner manifest-digest approval granularity identity: <exact owner granularity-approval identity | pending>
-Owner manifest-digest approval recording peer: <exact approval-recording peer identity | not-applicable | pending>
-Owner manifest-digest approval predicate evidence: <repo-relative path | not-applicable | pending>
-Owner manifest-digest approval predicate evidence SHA-256: <64-hex digest | not-applicable | pending>
-Owner manifest-digest approval result commit: <40-hex commit | pending>
-Owner manifest-digest approval record: <repo-relative path | pending>
-Owner manifest-digest approval ticket-set manifest SHA-256: <64-hex digest | pending>
-Implementation dispatched by approval record: no | pending
+Owner semantic approval: pending | verified
+Owner approval actor: owner | pending
+Owner approval action: approve-ticket-set | pending
+Owner approval source: <exact owner task/turn/message identity | pending>
+Owner approval result commit: <40-hex commit | pending>
+Owner approval record: <repo-relative path | pending>
+Owner approval ticket-set manifest SHA-256: <64-hex digest | pending>
 ```
 
-The receipt stores this optional external-blocker field group:
+The owner approval is one semantic decision about the proposed ticket set.
+The verifier, not the owner, compares the stored spec and manifest digests
+with the bytes at the recorded commits and checks ancestry to the receipt HEAD.
+The receipt may contain at most one external dependency:
 
 ```text
-Canonical authority gates: verified | pending
-External implementation blocker: none | active
-External blocker kind: <concise durable identity>
-External blocker closure evidence: <repo-relative path>@<40-hex commit> | pending
-Implementation dispatch: forbidden | allowed
+External blocker dependency: none | <repo-relative ticket path>@<40-hex commit>
 ```
 
-This file defines only the stored field shapes. The allowed combinations,
-closure-transition proof, dispatch gate, and failure behavior live only in
-`dispatch-protocols.md`.
+The cited artifact must be a closed ticket at that exact ancestor commit.
+No additional approval record or route-binding artifact is part of this
+Interface.
 
-Conditional predicate evidence is a separate committed artifact. It reports
-every mandatory clause named by `dispatch-protocols.md`, including any allowed
-baseline verifier exception, while the receipt and approval record bind its
-exact path and SHA-256.
+Historic receipts and manifests can retain their original fields as immutable
+evidence. They are not a current route Interface. A later authorized task that
+changes such a route must write the current receipt shape and pass the current
+Interface before it can dispatch implementation.
 
-For a conditional approval, `Owner manifest-digest approval result commit` is
-the approval-route commit that contains the predicate evidence, approval
-record, and updated map route. The immediately following receipt-only binding
-commit records that already-known commit hash and binds the map bytes at it.
-The receipt and approval record bind the same exact approval-recording peer
-identity. The approval record never claims the hash of the commit that contains
-itself. This peer-identity field is required for conditional-predicate mode;
-exact-digest mode may omit it or use `not-applicable`.
-
-Fields that belong to a pending phase may be omitted or use the shown pending
-sentinel. Once its status is `verified`, every field in that group is
-required. `dispatch-protocols.md` is the sole owner of allowed route kinds,
-legal transitions, implementation gates, pause/resume behavior, and successor
-routing; this file owns storage paths and field shape only.
+This file defines only stored field shapes. The allowed combinations,
+preflight, closure-transition proof, dispatch gate, and failure behavior live
+only in `dispatch-protocols.md`.
 
 ## Optional assets
 

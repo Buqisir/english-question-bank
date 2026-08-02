@@ -7,9 +7,8 @@ rules, successor routing, and new-task handoff format.
 ## Dispatch and handoff
 
 `dispatch` means creating, opening, starting, running, supervising, or waiting
-on a successor top-level task. Manual owner dispatch is the default. Ordinary
-tasks do not dispatch; the sole agent-side exception is an owner-explicit
-invocation of `$coordinate-eqb-wayfinder` under the contract below.
+on a successor top-level task. The owner dispatches every successor manually.
+Ordinary tasks never dispatch, and there is no agent-side dispatch exception.
 
 `handoff` means returning one complete, copyable instruction for the owner to
 open the required successor. Generating a handoff does not create or run the
@@ -23,20 +22,30 @@ Subagents cannot be successor phases. Bounded workers explicitly required by a
 current skill or runbook may work only inside that operation and must report
 back to the current task.
 
-### Owner-started Wayfinder coordinator exception
+## One route Interface
 
-This exception is authorized only after the owner explicitly invokes
-`$coordinate-eqb-wayfinder` for a charted EQB initiative whose map or phase
-receipt names one validated durable frontier. The coordinator is
-repository-read-only and may use only official Codex top-level task tools to
-create and compactly wait on exactly one fresh peer at a time in the
-initiative's same exact saved worktree. It may not delegate, fork, resume,
-create another coordinator, or overlap writers, except for the one same-peer
-`$to-tickets` publication resume defined below.
+The route Module exposes one typed Interface selected by artifact kind. Its
+Implementation belongs in
+`scripts/verify-dev-completion-report-contract.mjs`; callers and tests use the
+same Interface rather than reimplementing route checks in maps, manifests, or
+handoffs.
 
-The global skill executes the project authorities in this file,
-`issue-tracker.md`, `model-routing.md`, `testing-cadence.md`, and
-`owner-qa-handoff-template.md`. It does not own or copy their detailed rules.
+| Artifact kind | Interface responsibility | Not responsible for |
+| --- | --- | --- |
+| `wayfinder-map` | Index shape: map status plus decision gists and Fog | Ticket fields, phase state, routes, or dispatch |
+| `ticket` | One work item's declared exit and conditional parallel pair | Live initiative phase state or an external implementation dependency |
+| `phase-receipt` | The sole live phase state, closed phase edge, implementation gates, preflight, and one external dependency | Map status or map bytes |
+
+The receipt is the only live phase state for a huge/foggy initiative. A
+Wayfinder map is an index: it may say whether charting is done, but carries no
+`Previous phase`, `Current phase`, `Next on PASS`, `Terminal`, parallel field,
+implementation-dispatch, or blocker field. A map is never parsed or validated
+as a ticket.
+
+The Interface is intentionally small: it accepts only the artifact kind and
+its declared fields, returns all violations, and leaves Git/Markdown parsing
+inside its implementation. This gives one seam for route tests and localizes
+future changes to the corresponding artifact adapter.
 
 ### Closed development phase state machine
 
@@ -48,7 +57,7 @@ edge fail:
 | `wayfinder` | `to-spec` |
 | `to-spec` | `to-tickets` |
 | `to-tickets` | `owner-approval` |
-| `owner-approval` | `implementation`, after all four implementation gates pass |
+| `owner-approval` | `implementation`, after all implementation gates pass |
 | `implementation` | `implementation`, `independent-review`, `owner-qa`, `release`, or the guarded measured-replan re-entry to `to-tickets` below |
 | `independent-review` | `independent-fix` on a canonical failed result; `implementation`, `owner-qa`, or `release` on PASS |
 | `independent-fix` | `focused-re-review` |
@@ -57,18 +66,11 @@ edge fail:
 | `release` | `DONE` |
 | `DONE` | none |
 
-`Current phase`, receipt `Next on PASS`, and map `Next on PASS` must be the
-same exact route kind. The receipt's `Previous phase` must have complete
-committed provenance under the field schema in `issue-tracker.md`. The map
-must also have a current-route binding: its binding commit is an ancestor of
-HEAD, the artifact exists at that commit, the committed and current bytes both
-match the bound SHA-256, and the three route fields above agree. Missing,
-malformed, stale, contradictory, or unbound evidence fails closed at the
-earliest unproven phase.
-
-The historical `$wayfinder` result and a later governance route correction are
-different provenance. A route-binding commit must be described as governance,
-not as execution by `$wayfinder`.
+A receipt's `Current phase` and `Next on PASS` must be the same exact route
+kind. Its `Previous phase` must be a legal predecessor with the minimum
+committed artifact identity required by `issue-tracker.md`. Missing,
+malformed, stale, or contradictory receipt evidence fails closed at the
+earliest unproven phase. A map's status or bytes cannot make an edge legal.
 
 ### Guarded measured-replan re-entry
 
@@ -80,135 +82,58 @@ proven together:
    capacity or route assumption is invalid;
 3. continuing the declared implementation successor would be unsafe or false;
 4. the owner explicitly authorizes one bounded measured replan; and
-5. the coordinator freshly verifies the exact worktree, branch, HEAD, clean
-   state, current route binding, and absence of another writer.
+5. the receiving task freshly verifies the exact worktree, branch, HEAD, clean
+   state, fixed point, and absence of another writer.
 
 Missing or stale evidence, an ordinary implementation failure, or a desire to
 improve the plan does not select this edge. On entry, implementation dispatch
-is immediately forbidden. It remains forbidden until the replacement manifest
-has truthful `$to-tickets` provenance, binds the accepted spec, and passes both
-distinct owner approvals: exact ticket granularity and then the exact produced
-manifest SHA-256. Only after those approvals do the existing four
-implementation gates authorize implementation again.
-
-### Coordinator-managed to-tickets lifecycle
-
-One fresh `$to-tickets` peer may draft the complete proposal and pause before
-publication for owner ticket-granularity approval. The proposal identity is
-the peer id plus the exact proposed ticket set presented for approval.
-
-After the owner explicitly approves that exact proposal, the coordinator may
-perform another full preflight and resume that same exact peer once through the
-official Codex top-level task messaging mechanism so the peer performs its own
-publication stage. No second publication peer or later provenance-recovery
-peer is allowed: the same `$to-tickets` peer truthfully owns both proposal and
-publication.
-
-After publication returns, a full preflight selects exactly one result: record
-manifest approval under a valid owner-selected policy, or pause for owner
-input. The ordinary policy remains explicit approval of the produced exact
-manifest SHA-256. Ticket-granularity approval never implies manifest approval;
-conditional approval is never inferred from silence, a generic continue,
-granularity approval alone, or historical preference. This lifecycle does not
-authorize automatic implementation dispatch.
-
-### Conditional manifest approval
-
-The owner may opt in by explicitly approving one exact ticket-granularity
-proposal identity and a deterministic publication/equivalence predicate. This
-approves that predicate, not unknown content. It authorizes automatic binding
-of the produced exact manifest SHA-256 only if every clause below is proven in
-one post-publication preflight:
-
-1. the proposal task/turn identity and owner granularity-approval identity are
-   exact, unchanged, and equal to the authorization;
-2. published ticket count, titles, blockers, paper membership, capacity
-   annotations, model routes, parallel lanes, merge order, and downstream
-   obligations equal the approved proposal;
-3. every manifest path and digest matches the current ticket bytes;
-4. accepted-spec binding, `$to-tickets` provenance, ticket-set binding,
-   route/map/receipt identity, clean exact HEAD, ancestry, and exclusive-writer
-   checks pass;
-5. implementation dispatch stayed forbidden throughout evaluation; and
-6. there is no new relevant verifier failure, malformed evidence, drift, or
-   partial publication.
-
-A documented verifier failure may remain only when machine evidence proves it
-is identical to the pre-publication baseline and outside every changed or
-authority surface; the approval evidence must still report it. If any clause
-fails or cannot be proven, do not approve or start implementation: pause for
-owner input with the exact anomaly.
-
-On PASS, one bounded approval-recording peer may update only the minimum
-complete route surface: predicate evidence, approval record, the Wayfinder
-map's route field, and the receipt including its current-map binding. Creating
-this peer is allowed only after every predicate fact is already proven and no
-writer overlaps. It must not also start implementation. It must use this
-deterministic two-commit sequence:
-
-1. The approval-route commit writes only the predicate evidence, approval
-   record, and map `Next on PASS`. The record cites the exact conditional-
-   authorization source, proposal and granularity identities, machine-
-   verification evidence, actual generated manifest SHA-256, and the exact
-   approval-recording peer identity, and states that it did not dispatch
-   implementation. It must not claim the hash of the commit that contains it.
-2. The immediately following binding commit writes only the receipt. It records
-   the approval-route commit as the manifest-approval result commit, binds the
-   exact map path and SHA-256 at that ancestor commit, and makes receipt
-   `Current phase`, receipt `Next on PASS`, and map `Next on PASS` agree. It may
-   mark implementation dispatch allowed only when all four implementation
-   gates verify against the resulting exact HEAD.
-
-The first commit is a deliberately non-dispatchable intermediate state. Until
-the second commit is complete and the worktree is clean, every observer must
-fail closed; interruption never authorizes implementation or a replacement
-peer. Both commits belong to the same exclusive writer, and the approval-route
-commit must be the direct parent of the binding commit. The coordinator then
-performs another full preflight of the exact bytes, ancestry, route agreement,
-and exclusive-writer state, and re-verifies all four implementation gates
-before any implementation dispatch; no additional owner message containing
-the hexadecimal digest is required.
+is immediately forbidden. The replacement path returns through `to-tickets`,
+one owner semantic approval, machine artifact binding, and a fresh receiving
+task preflight; it does not resume or create a peer.
 
 ### Implementation gates
 
 Implementation is forbidden until all four gates verify:
 
-1. the accepted spec has committed `$to-spec` provenance and its current
-   SHA-256 matches;
-2. the ticket-set manifest has committed `$to-tickets` provenance and its
-   current SHA-256 matches;
-3. the ticket-set receipt binds that exact accepted-spec SHA-256;
-4. the owner explicitly approved the exact ticket granularity, and the later
-   committed manifest approval binds that exact ticket-set manifest SHA-256
-   either by explicit exact-digest approval or by a valid conditional-predicate
-   approval record.
+1. the accepted spec has committed `to-spec` provenance, an exact artifact
+   path, and a machine-checked current byte identity;
+2. the ticket-set manifest has committed `to-tickets` provenance, an exact
+   artifact path, a machine-checked current byte identity, and a binding to the
+   accepted spec;
+3. the owner has recorded one explicit semantic approval of that ticket set;
+   the owner approves the proposed work, not a hexadecimal digest; and
+4. the receiving task's exact checkout/writer preflight passes.
+
+The machine compares the stored artifact identities with bytes at their
+recorded commits and verifies ancestry to the receipt HEAD. This preserves
+substitution and stale-authority detection without requiring routine
+low-risk work to make an owner read, repeat, or understand a digest.
 
 Filenames, directory existence, prose claims, historical chat, and old
 handoffs satisfy none of these gates.
 
-### External implementation blockers
+### Exact checkout and writer preflight
 
-An owner-explicit external blocker is an additional fail-closed gate; it never
-substitutes for or obscures the four canonical authority gates. The receipt
-field group is optional when no external blocker has ever been declared. Once
-declared, all three fields are required and the blocker kind remains stable:
+Before any write, resume, or implementation dispatch, the receiving task
+checks one exact worktree path, branch, expected HEAD/fixed point, clean
+status, and the absence of another writer for that worktree. A dirty checkout,
+stale HEAD, mismatched branch, unresolved fixed point, or concurrent writer is
+a hard stop. Manual owner dispatch does not waive this preflight.
 
-- `active` requires a non-placeholder durable blocker kind, closure evidence
-  `pending`, and `Implementation dispatch: forbidden`;
-- `none` is a closure transition, not an empty-state sentinel. The verifier
-  compares it with the most recent committed receipt state; it requires the
-  same durable blocker kind and closure evidence in the exact form
-  `<repo-relative-path>@<40-hex-commit>`;
-- the evidence commit must resolve and be an ancestor of the receipt HEAD, the
-  named artifact must exist at that commit, and that artifact must declare
-  `Status: done` or `Status: closed` plus an identical `External blocker kind`;
-- `none + pending`, `none + not-applicable`, a missing or changed kind, an
-  unresolvable/non-ancestor commit, a missing artifact, or inconsistent closure
-  content all fail closed. Dispatch may become `allowed` only after this
-  closure proof and all four canonical authority gates pass.
+### External implementation dependency
 
-An active blocker does not authorize creating or executing the work that would
-close it. That work still needs its own owner-selected route and authority.
+An external blocker has one representation: an optional receipt field
+`External blocker dependency` with either `none` or exactly
+`<repo-relative-ticket-path>@<40-hex-commit>`. When declared, the cited commit
+must be an ancestor of the receipt HEAD; the cited artifact must be a ticket at
+that exact path with `Status: done` or `Status: closed`. A map, manifest,
+generic “kind,” open ticket, changed path, unresolvable commit, or multiple
+dependencies fails closed.
+
+This is the one exact closed-ticket DAG dependency. It replaces copies of the
+same blocker in maps, manifests, and receipt field groups. The dependency does
+not dispatch or execute the work that closes it; that ticket still requires
+manual owner dispatch and its own preflight.
 
 ### Review and fix routes
 
@@ -223,20 +148,18 @@ lineage; a review failure authorizes no automatic retry or refill.
 
 ### Pause and resume
 
-Coordination pauses at `owner-approval` until either the owner commits explicit
-approval of the exact ticket-set digest and resumes, or a previously explicit
-conditional policy passes and its bounded approval record is committed. It
-also pauses at `owner-qa` after the exact checkable state is provisioned, and
-for grilling or other owner input, `needs-attention`, `BLOCKED`, dirty or
-mismatched repository state, malformed evidence, route mismatch, duplicate
-dispatch, cycles, or lost ledger certainty.
+Coordination pauses at `owner-approval` until the owner records the one
+semantic decision, at `owner-qa` after the exact checkable state is
+provisioned, and for grilling or other owner input, `needs-attention`,
+`BLOCKED`, dirty or mismatched repository state, malformed evidence, route
+mismatch, cycles, or lost writer certainty.
 
 Resume requires another full preflight of the saved worktree, branch, HEAD,
-clean state, fixed point, current committed map/receipt, route binding,
-provenance, gates, model route, and absence of another writer. A pause never
-authorizes retry, refill, a replacement root, or a second concurrent writer.
-`DONE` requires `Terminal: yes` and proof that no ticket, independent review,
-owner QA, release, or closeout remains.
+clean state, fixed point, current receipt, artifact identities, gates, model
+route, and absence of another writer. A pause never authorizes retry, refill,
+a replacement root, or a second concurrent writer. `DONE` requires
+`Terminal: yes` and proof that no ticket, independent review, owner QA,
+release, or closeout remains.
 
 ## Durable route on every ticket
 
@@ -311,8 +234,8 @@ If the current ticket is blocked:
   requires one; otherwise remain in the current task.
 
 Do not repair a blocker by inventing a coordinator, relay state, dispatch
-ledger, automatic successor, or new workflow platform. Only the owner-explicit
-exception above can start coordination, and its pause conditions fail closed.
+ledger, automatic successor, or new workflow platform. Only the owner can
+dispatch a new top-level task.
 
 ## New top-level task handoff
 
@@ -388,8 +311,7 @@ Multi-ticket work uses one explicit feature worktree sequentially:
 
 1. The handoff records absolute worktree, branch, clean HEAD, spec, ticket, and
    fixed point.
-2. The owner opens the next task manually, or an already-authorized
-   `$coordinate-eqb-wayfinder` creates the one exact durable successor.
+2. The owner opens the next task manually.
 3. The new task verifies those facts before writing.
 4. It completes one ticket, commits it, and returns the new exact HEAD.
 

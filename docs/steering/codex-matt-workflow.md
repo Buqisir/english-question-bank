@@ -24,8 +24,7 @@ huge and foggy
                       └─ fresh implement task per approved ticket
 ```
 
-Manual owner dispatch is the default. The sole agent-side exception is an
-owner-explicit `$coordinate-eqb-wayfinder` for an already-charted map under
+The owner manually dispatches every successor under
 `../agents/dispatch-protocols.md`; ordinary task agents never create the next
 task.
 
@@ -86,8 +85,7 @@ routing. Do not copy the ticket body into the next prompt.
 - choose the exit declared by `Next on PASS`.
 
 The implementation task does not dispatch or supervise the successor. It must
-still generate the declared handoff when the initiative remains open; an
-already-authorized coordinator may consume that handoff without changing it.
+still generate the declared handoff when the initiative remains open.
 
 ## Review and QA
 
@@ -148,8 +146,7 @@ Before merging:
 - user-visible work has browser and owner QA;
 - `pnpm -C app run verify:all` or PR CI is green.
 
-The owner manually opens one ship task when shipping is a required successor,
-unless the sole authorized coordinator follows the exact durable route.
+The owner manually opens one ship task when shipping is a required successor.
 After merge, confirm `main` CI and update `docs/STATUS.md` briefly for material
 releases.
 

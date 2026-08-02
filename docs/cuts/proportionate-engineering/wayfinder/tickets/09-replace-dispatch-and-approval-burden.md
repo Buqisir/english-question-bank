@@ -1,9 +1,9 @@
 # Replace disproportionate dispatch and approval burden
 
-Status: open
-Claim: unclaimed
+Status: done
+Claim: 019fc257-2c44-7381-a372-21cd289a0066
 Blocked by: Decide the P0/P1 reform set
-Next on PASS: `docs/cuts/proportionate-engineering/wayfinder/tickets/10-establish-the-canonical-data-operation-lane.md`
+Next on PASS: independent review
 Terminal: no
 Type: task
 Priority: P0
@@ -73,3 +73,33 @@ cut executable route change.
 - No publish/digest/map approval, review-of-map, or ticket-management successor.
 - Independent review only if the actual diff changes high-risk shared dispatch
   behavior; low-risk docs cleanup does not create a dual-axis lineage.
+
+## Result
+
+Commit: resolve the closure commit with `git log -1 --format=%H -- docs/cuts/proportionate-engineering/wayfinder/tickets/09-replace-dispatch-and-approval-burden.md`.
+
+Verify:
+
+- `node --check scripts/verify-dev-completion-report-contract.mjs`
+- `node scripts/verify-dev-completion-report-contract.mjs` — 36 passed, 0 failed
+  (0.3 seconds observed).
+- `git diff --check`
+
+Notes:
+
+- Replaced the retired coordinator, conditional-manifest, map-binding, and
+  repeated-blocker assertions with one artifact-kind route Interface.
+- The retained direct failures are agent-side dispatch, stale checkout
+  authority, concurrent writers, unapproved scope, substituted bytes, illegal
+  phase edges, and malformed/open/non-ancestor external dependencies.
+- This is a high-risk shared-dispatch behavior change. Its one declared
+  successor is an independent Standards/Spec review before any Ticket 10 work.
+
+Action reduction (routine low-risk route): 7 mandatory manual/execution
+actions to 3. The removed actions are ticket-granularity approval, conditional
+approval peer, post-publication re-entry, human digest approval, map route
+update, map-to-receipt binding commit, and a second approval-route preflight.
+The retained actions are one owner semantic approval (unapproved scope),
+machine byte identity/ancestry (substituted or stale bytes), and one receiving
+checkout/writer preflight (dirty or concurrent writer); the closed receipt
+matrix retains the illegal-edge failure.

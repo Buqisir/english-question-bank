@@ -1,9 +1,6 @@
 # Proportionate Engineering Reform — Wayfinder Map
 
 Status: charted
-Next on PASS: `docs/cuts/proportionate-engineering/wayfinder/tickets/09-replace-dispatch-and-approval-burden.md`
-Terminal: no
-External blocker kind: project-wide proportionate-engineering Wayfinder
 
 ## Notes
 
@@ -76,6 +73,7 @@ External blocker kind: project-wide proportionate-engineering Wayfinder
 - [Design the UI micro-change lane](tickets/06-design-the-ui-micro-change-lane.md) — split atomic/local/shared presentation, kept affected checks plus target-page Owner QA, and merged standalone sanity review into browser evidence.
 - [Audit legacy, operations, safety, and model routing](tickets/07-audit-legacy-operations-and-model-routing.md) — preserved reachable compatibility and all security/durability controls, selected only a proven no-op deletion, and kept evidence-based model/parallel routes.
 - [Decide the P0/P1 reform set](tickets/08-decide-the-p0-p1-reform-set.md) — fixed the non-overlapping serial P0/P1 route across Tickets 09–12 and closure Ticket 13; only UI actions target 7-to-6 while unique-risk counts remain intact.
+- [Replace disproportionate dispatch and approval burden](tickets/09-replace-dispatch-and-approval-burden.md) — replaced the duplicate approval ceremony with one artifact-kind route Interface, one semantic owner decision, machine identity/ancestry checks, receipt-only phase state, and one closed-ticket dependency.
 
 ## Fog
 
