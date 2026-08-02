@@ -27,8 +27,6 @@ Status: ready | in-progress | done | blocked
 Blocked by: <ticket titles or None>
 Next on PASS: <ticket path | parallel frontier handoff | parallel join handoff | independent review | owner QA | release | DONE>
 Terminal: yes | no
-Parallel frontier: <comma-separated sibling ticket paths | not-applicable>
-Parallel join: <one join ticket path | not-applicable>
 
 ## What to build
 
@@ -44,6 +42,19 @@ Commit:
 Verify:
 Notes:
 ```
+
+`Parallel frontier` and `Parallel join` are one conditional matched-route field
+group. Ordinary serial tickets omit both fields. A ticket whose `Next on PASS`
+is `parallel frontier handoff` or `parallel join handoff` includes both fields:
+
+```text
+Parallel frontier: <comma-separated sibling ticket paths | not-applicable>
+Parallel join: <one join ticket path | not-applicable>
+```
+
+This file owns that conditional stored shape only. Deterministic frontier/join
+values, topology, handoff behavior, and failure semantics live only in
+`dispatch-protocols.md`.
 
 Task boundaries, dispatch authorization, and route semantics live only in
 `dispatch-protocols.md`.

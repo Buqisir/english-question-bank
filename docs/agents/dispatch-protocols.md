@@ -259,6 +259,12 @@ parallel sibling tickets with disjoint write surfaces and isolated worktrees.
 It reuses manual owner dispatch; it creates no coordinator, task queue, or
 additional approval layer.
 
+`Parallel frontier` and `Parallel join` form one conditional matched-route
+field group. Ordinary serial routes omit both. The exact
+`parallel frontier handoff` and `parallel join handoff` routes include both;
+the field selected by that route contains its deterministic path value and the
+other field is exactly `not-applicable`.
+
 - The serial fan-out ticket declares exactly
   `Next on PASS: parallel frontier handoff` and one `Parallel frontier` field
   containing the exact sibling ticket paths. Its final response has one legal

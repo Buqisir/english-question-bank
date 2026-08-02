@@ -101,7 +101,7 @@ const globalCoordinatorSkillPath =
 const globalCoordinatorYamlPath =
   '/Users/huangxuewei/.codex/skills/coordinate-eqb-wayfinder/agents/openai.yaml'
 const reviewedDispatchDigest =
-  'b42cfcdd0f8a2205ef273a5e974ea6e7e617180b19680d705e94cb3a795cb657'
+  '328993218476c8e2ee3120bad2399fb30c3b332b4fe5c1e1af35388f76ecf4fc'
 const reviewedGlobalCoordinatorSkillDigest =
   '5283214f3300f55a0cd91c6f491c1750a09d6d2a2bf4a637be7d46623c23f5d3'
 const reviewedGlobalCoordinatorYamlDigest =
@@ -286,15 +286,51 @@ function completionExitErrors({
 }
 
 function ticketRouteErrors(source) {
-  if (!/^Terminal:\s*no\s*$/im.test(source)) {
-    return []
-  }
-
   const route = source.match(/^Next on PASS:\s*(.*?)\s*$/im)?.[1]?.trim()
-  if (!route || /^<.*>$/.test(route)) {
-    return ['Terminal: no requires a non-empty, non-placeholder Next on PASS']
+  const frontier = markdownField(source, 'Parallel frontier')
+  const join = markdownField(source, 'Parallel join')
+  const parallelPaths = (value) =>
+    value
+      ?.split(',')
+      .map((path) => path.trim().replace(/^`|`$/g, ''))
+      .filter(Boolean) ?? []
+  const frontierPaths = parallelPaths(frontier)
+  const joinPaths = parallelPaths(join)
+  const parallelFieldsPresent = [frontier, join].map(
+    (value) => value !== undefined,
+  )
+  const errors = []
+
+  if (
+    /^Terminal:\s*no\s*$/im.test(source) &&
+    (!route || /^<.*>$/.test(route))
+  ) {
+    errors.push('Terminal: no requires a non-empty, non-placeholder Next on PASS')
   }
-  return []
+  if (route === 'parallel frontier handoff') {
+    if (!parallelFieldsPresent.every(Boolean)) {
+      errors.push('parallel frontier handoff requires both matched-route fields')
+    } else if (
+      frontierPaths.length === 0 ||
+      !frontierPaths.every((path) => /^docs\/.+\.md$/.test(path)) ||
+      join !== 'not-applicable'
+    ) {
+      errors.push('parallel frontier handoff has malformed matched-route values')
+    }
+  } else if (route === 'parallel join handoff') {
+    if (!parallelFieldsPresent.every(Boolean)) {
+      errors.push('parallel join handoff requires both matched-route fields')
+    } else if (
+      frontier !== 'not-applicable' ||
+      joinPaths.length !== 1 ||
+      !/^docs\/.+\.md$/.test(joinPaths[0])
+    ) {
+      errors.push('parallel join handoff has malformed matched-route values')
+    }
+  } else if (parallelFieldsPresent.some(Boolean)) {
+    errors.push('ordinary serial routes must omit both parallel matched-route fields')
+  }
+  return errors
 }
 
 const modelRouteRowSelectors = {
@@ -566,7 +602,36 @@ function currentGitHead() {
 }
 
 const externalBlockerKindPattern = /^[a-z0-9][a-z0-9 ._/-]{2,159}$/i
+const reservedExternalBlockerKinds = new Set([
+  'pending',
+  'none',
+  'not-applicable',
+  'n-a',
+  'na',
+  'null',
+  'undefined',
+  'unknown',
+  'tbd',
+  'todo',
+  'placeholder',
+  'unset',
+  'not-required',
+  'not-set',
+  'empty',
+])
 const externalBlockerClosurePattern = /^(docs\/.+)@([0-9a-f]{40})$/
+
+function externalBlockerKindIsValid(kind) {
+  if (!externalBlockerKindPattern.test(kind ?? '')) {
+    return false
+  }
+  const normalized = kind
+    .trim()
+    .toLowerCase()
+    .replace(/[\s._/]+/g, '-')
+    .replace(/-+/g, '-')
+  return !reservedExternalBlockerKinds.has(normalized)
+}
 
 function parseExternalBlockerClosureEvidence(evidence, expectedKind, head) {
   const match = evidence?.match(externalBlockerClosurePattern)
@@ -630,6 +695,14 @@ function conditionalDispatchHistory(startCommit, endCommit, receiptPath) {
   }
 }
 
+function previousActiveExternalBlockerObservation(observations) {
+  return (
+    observations
+      .slice(1)
+      .find(({ status }) => status === 'active') ?? null
+  )
+}
+
 function previousExternalBlockerState(head, receiptPath) {
   if (!fullCommitPattern.test(head ?? '') || !/^docs\/.+/.test(receiptPath ?? '')) {
     return null
@@ -648,22 +721,19 @@ function previousExternalBlockerState(head, receiptPath) {
       .trim()
       .split('\n')
       .filter(Boolean)
-    const candidates = commits[0] === head ? commits.slice(1) : commits
-    for (const commit of candidates) {
+    const observations = commits.map((commit) => {
       const receipt = committedArtifactText(commit, receiptPath)
-      const status = markdownField(receipt, 'External implementation blocker')
-      if (status !== undefined) {
-        return {
-          status,
-          kind: markdownField(receipt, 'External blocker kind'),
-          evidence: markdownField(receipt, 'External blocker closure evidence'),
-        }
+      return {
+        commit,
+        status: markdownField(receipt, 'External implementation blocker'),
+        kind: markdownField(receipt, 'External blocker kind'),
+        evidence: markdownField(receipt, 'External blocker closure evidence'),
       }
-    }
+    })
+    return previousActiveExternalBlockerObservation(observations)
   } catch {
     return null
   }
-  return null
 }
 
 function parseCoordinatorYaml(source) {
@@ -1855,7 +1925,7 @@ function externalBlockerErrors(state) {
   if (!['active', 'none'].includes(status)) {
     errors.push('External implementation blocker is malformed')
   }
-  if (!externalBlockerKindPattern.test(kind ?? '')) {
+  if (!externalBlockerKindIsValid(kind)) {
     errors.push('External blocker kind is missing or malformed')
   }
   if (status === 'active' && evidence !== 'pending') {
@@ -1875,10 +1945,9 @@ function externalBlockerErrors(state) {
       errors.push('External blocker closure evidence is not durable, resolvable, and consistent')
     }
     if (
-      !['active', 'none'].includes(previousExternalBlocker?.status) ||
+      previousExternalBlocker?.status !== 'active' ||
       previousExternalBlocker?.kind !== kind ||
-      (previousExternalBlocker?.status === 'none' &&
-        previousExternalBlocker?.evidence !== evidence)
+      previousExternalBlocker?.evidence !== 'pending'
     ) {
       errors.push('External blocker closure does not match the prior committed blocker identity')
     }
@@ -2340,6 +2409,36 @@ assert(
   ),
   'tracked Terminal: no ticket text rejects a missing Next on PASS',
 )
+assert(
+  ticketRouteErrors(
+    'Terminal: no\nNext on PASS: docs/cuts/example/tickets/02.md\n',
+  ).length === 0,
+  'ordinary serial tickets omit both parallel matched-route fields',
+)
+assert(
+  ticketRouteErrors(
+    'Terminal: no\nNext on PASS: docs/cuts/example/tickets/02.md\nParallel frontier: not-applicable\nParallel join: not-applicable\n',
+  ).some((error) => error.includes('ordinary serial routes')),
+  'ordinary serial tickets reject parallel placeholder fields',
+)
+assert(
+  ticketRouteErrors(
+    'Terminal: no\nNext on PASS: parallel frontier handoff\nParallel frontier: docs/cuts/example/tickets/02.md, docs/cuts/example/tickets/03.md\nParallel join: not-applicable\n',
+  ).length === 0,
+  'parallel-frontier tickets require the matched deterministic field pair',
+)
+assert(
+  ticketRouteErrors(
+    'Terminal: no\nNext on PASS: parallel join handoff\nParallel frontier: not-applicable\nParallel join: docs/cuts/example/tickets/04.md\n',
+  ).length === 0,
+  'parallel-join tickets require the matched deterministic field pair',
+)
+assert(
+  ticketRouteErrors(
+    'Terminal: no\nNext on PASS: parallel join handoff\nParallel join: docs/cuts/example/tickets/04.md\n',
+  ).some((error) => error.includes('both matched-route fields')),
+  'parallel routes reject an incomplete matched-route field pair',
+)
 const trackedTicketRouteErrors = markdownFilesUnder(resolve(ROOT, 'docs/cuts'))
   .flatMap((path) =>
     ticketRouteErrors(readFileSync(path, 'utf8')).map(
@@ -2636,6 +2735,18 @@ assert(
       'The approval record never claims the hash of the commit that contains itself',
     ),
   'issue-tracker defines the non-self-referential approval result-commit binding',
+)
+assert(
+  compact(issueTracker).includes(
+    'Ordinary serial tickets omit both fields',
+  ) &&
+    compact(issueTracker).includes(
+      'includes both fields',
+    ) &&
+    compact(issueTracker).includes(
+      'semantics live only in `dispatch-protocols.md`',
+    ),
+  'issue-tracker stores parallel fields only as a conditional matched-route pair',
 )
 
 const fixtureSourceHead = '1'.repeat(40)
@@ -3591,6 +3702,63 @@ assert(
   'an active external blocker rejects implementation dispatch',
 )
 
+for (const placeholderKind of [
+  '',
+  'pending',
+  'none',
+  'not-applicable',
+  'not_applicable',
+  'not applicable',
+  'n/a',
+  'unknown',
+  'not_required',
+  'not set',
+  'empty',
+]) {
+  const placeholderBlocker = structuredClone(externallyBlockedImplementation)
+  placeholderBlocker.externalBlockerKind = placeholderKind
+  placeholderBlocker.implementationDispatch = 'forbidden'
+  assert(
+    phaseReceiptErrors(placeholderBlocker).some((error) =>
+      error.includes('External blocker kind'),
+    ),
+    `external blocker rejects placeholder kind: ${placeholderKind}`,
+  )
+}
+
+const activeBlockerObservation = {
+  commit: '1'.repeat(40),
+  status: 'active',
+  kind: 'project-wide proportionate-engineering Wayfinder',
+  evidence: 'pending',
+}
+const closedBlockerObservation = {
+  commit: '2'.repeat(40),
+  status: 'none',
+  kind: activeBlockerObservation.kind,
+  evidence: `docs/cuts/proportionate-engineering/wayfinder/map.md@${fixtureApprovalCommit}`,
+}
+assert(
+  previousActiveExternalBlockerObservation([
+    closedBlockerObservation,
+    activeBlockerObservation,
+  ])?.commit === activeBlockerObservation.commit,
+  'advanced HEAD closure history traverses past the current none receipt to the earlier active identity',
+)
+assert(
+  previousActiveExternalBlockerObservation([
+    { ...closedBlockerObservation, commit: '3'.repeat(40) },
+    closedBlockerObservation,
+    activeBlockerObservation,
+  ])?.commit === activeBlockerObservation.commit,
+  'closure history traverses repeated none receipt states to the earlier active identity',
+)
+assert(
+  previousActiveExternalBlockerObservation([closedBlockerObservation]) ===
+    null,
+  'the current none receipt cannot serve as its own previous active proof',
+)
+
 const durablyClosedExternalBlocker = phaseFixture(
   'owner-approval',
   'implementation',
@@ -3609,6 +3777,7 @@ durablyClosedExternalBlocker.externalBlockerClosure = {
   artifactKind: 'project-wide proportionate-engineering Wayfinder',
 }
 durablyClosedExternalBlocker.previousExternalBlocker = {
+  commit: '1'.repeat(40),
   status: 'active',
   kind: 'project-wide proportionate-engineering Wayfinder',
   evidence: 'pending',
@@ -3651,6 +3820,16 @@ for (const [name, mutate] of [
       fixture.previousExternalBlocker = {
         ...fixture.previousExternalBlocker,
         kind: 'different blocker',
+      }
+    },
+  ],
+  [
+    'the current none closure as its own previous identity after HEAD advances',
+    (fixture) => {
+      fixture.previousExternalBlocker = {
+        status: 'none',
+        kind: fixture.externalBlockerKind,
+        evidence: fixture.externalBlockerClosureEvidence,
       }
     },
   ],

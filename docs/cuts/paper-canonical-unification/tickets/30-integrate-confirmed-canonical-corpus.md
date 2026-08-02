@@ -4,8 +4,6 @@ Status: ready
 Blocked by: Tickets 27, 28, and 29 PASS
 Next on PASS: `docs/cuts/paper-canonical-unification/tickets/31-atomic-canary-publication-recovery.md`
 Terminal: no
-Parallel frontier: not-applicable
-Parallel join: not-applicable
 Model: gpt-5.6-terra
 Effort: max
 Parallel lane: serial join; sole writer of shared migration accounting

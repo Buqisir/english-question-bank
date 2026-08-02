@@ -127,7 +127,7 @@ release closeout, and explicit production/R2 exclusion.
 | `docs/cuts/paper-canonical-unification/tickets/27-nck1-confirmation-lane.md` | `ad3839c013e40dc6423f21639b78aa9418af0ad98fe051783a0a4d768e027c1d` |
 | `docs/cuts/paper-canonical-unification/tickets/28-national-legacy-confirmation-lane.md` | `cedd138665f188354bd5a6e56aa1fc389cb788e91fb6a8aaf9d62d56cfedf595` |
 | `docs/cuts/paper-canonical-unification/tickets/29-zhejiang-legacy-confirmation-lane.md` | `e16bc9a2468dea9e91fab8bac8baec7243857f30a7fcea0b1cacd1aeb10eac78` |
-| `docs/cuts/paper-canonical-unification/tickets/30-integrate-confirmed-canonical-corpus.md` | `f65cb9bf87450abe0e6f65ff6ab577075d496b02d4654de684a1fc384e543ab6` |
+| `docs/cuts/paper-canonical-unification/tickets/30-integrate-confirmed-canonical-corpus.md` | `515aa918e32a5a4a56b6d38818b86a395e265657e13accd29fd7d543d8e85f8c` |
 | `docs/cuts/paper-canonical-unification/tickets/31-atomic-canary-publication-recovery.md` | `8bb4c4dd25bca86b4ee1901d3d27b4b93647e3f6d4dc8245fce50d688c015351` |
 | `docs/cuts/paper-canonical-unification/tickets/32-remaining-corpus-migration.md` | `a1cc7775eed00b90c7037cffcd3585b604ef9e59c2c7b3e1aa6a60fed966d8d0` |
 | `docs/cuts/paper-canonical-unification/tickets/33-shared-screen-print-pdf-proof.md` | `70cee1d7c9517d38c799415e3f1753b1e3831ca7d46cec3207345cf044e02f15` |
