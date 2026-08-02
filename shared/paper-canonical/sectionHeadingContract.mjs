@@ -153,7 +153,7 @@ function paperTypographyRuntimeFromBoundAuthority(
   assertPaperTypographyAuthorityBinding(authority, binding)
   if (!allowNonCanonicalMutation
     && binding.sha256 !== paperTypographyAuthorityBinding.sha256) {
-    throw new Error('Paper Typography v10 authority hash is not the current Manifest v35 artifact')
+    throw new Error('Paper Typography v10 authority hash is not the current Manifest v36 artifact')
   }
   const visibleWeight = authority?.optionAnchorFramework?.visibleWeight
   const partToFirstSectionGeometry = authority?.partToFirstSectionGeometry
@@ -207,7 +207,7 @@ export function paperTypographyRuntimeFromAuthority(
 
 /**
  * Test-only seam for a fully bound, distinguishable authority mutation. The
- * production factory above remains pinned to the current Manifest v35 hash.
+ * production factory above remains pinned to the current Manifest v36 hash.
  */
 export function paperTypographyRuntimeFromAuthorityForTest(authority, binding) {
   return paperTypographyRuntimeFromBoundAuthority(

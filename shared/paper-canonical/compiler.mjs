@@ -1714,7 +1714,77 @@ function captureRequestEvidence(request) {
   return { documents, diagnostics }
 }
 
+function parseDocxSourceEnvelope(documents, diagnostics) {
+  const envelopes = documents.filter(
+    (document) => document.mediaType === 'application/vnd.eqb.docx-source-envelope+json',
+  )
+  if (envelopes.length === 0) return undefined
+  if (envelopes.length !== 1) {
+    diagnostics.push(diagnostic('DOCX_SOURCE_ENVELOPE_AMBIGUOUS', 'incomplete_source', '$.evidence.documents', 'DOCX source evidence requires exactly one envelope'))
+    return null
+  }
+  const envelopeDocument = envelopes[0]
+  try {
+    const envelope = JSON.parse(new TextDecoder().decode(envelopeDocument.bytes))
+    const sourceDocument = envelope?.sourceDocument
+    if (
+      !isRecordValue(envelope)
+      || envelope.schemaVersion !== 'docx-source-envelope-v1'
+      || !isRecordValue(sourceDocument)
+      || typeof sourceDocument.inputKey !== 'string'
+      || typeof sourceDocument.sha256 !== 'string'
+      || !Number.isInteger(sourceDocument.byteLength)
+      || !isRecordValue(envelope.source)
+    ) {
+      diagnostics.push(diagnostic('DOCX_SOURCE_ENVELOPE_INVALID', 'incomplete_source', '$.evidence.documents', 'DOCX source envelope must declare one source-bound structured source'))
+      return null
+    }
+    const sourceCandidates = documents.filter(
+      (document) => document.inputKey === sourceDocument.inputKey,
+    )
+    if (sourceCandidates.length > 1) {
+      diagnostics.push(diagnostic('DOCX_SOURCE_DOCUMENT_AMBIGUOUS', 'incomplete_source', '$.evidence.documents', 'DOCX source envelope must bind exactly one immutable document'))
+      return null
+    }
+    const source = sourceCandidates[0]
+    if (!source) {
+      diagnostics.push(diagnostic('DOCX_SOURCE_DOCUMENT_MISSING', 'incomplete_source', '$.evidence.documents', 'DOCX source envelope references a missing immutable document'))
+      return null
+    }
+    if (
+      source.mediaType
+        !== 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+      || sourceDocument.mediaType !== source.mediaType
+      || sourceDocument.sha256 !== source.sha256
+      || sourceDocument.byteLength !== source.byteLength
+    ) {
+      diagnostics.push(diagnostic('DOCX_SOURCE_DIGEST_MISMATCH', 'incomplete_source', '$.evidence.documents', 'DOCX source envelope no longer binds the supplied immutable DOCX bytes'))
+      return null
+    }
+    if (![
+      'question_source',
+      'official_answer_source',
+      'source_provenance',
+    ].every((role) => source.roles.includes(role))) {
+      diagnostics.push(diagnostic('DOCX_SOURCE_ROLE_INCOMPLETE', 'incomplete_source', '$.evidence.documents', 'DOCX source must explicitly carry question, official-answer, and provenance roles'))
+      return null
+    }
+    return {
+      value: envelope.source,
+      adapter: 'docx-source-envelope',
+      envelope,
+      sourceDocumentId: source.documentId,
+      sourceDocumentDigest: source.sha256,
+    }
+  } catch (error) {
+    diagnostics.push(diagnostic('DOCX_SOURCE_ENVELOPE_INVALID', 'incomplete_source', '$.evidence.documents', `DOCX source envelope is unreadable: ${error.message}`))
+    return null
+  }
+}
+
 function parseFixtureEvidence(documents, diagnostics) {
+  const docxEnvelope = parseDocxSourceEnvelope(documents, diagnostics)
+  if (docxEnvelope !== undefined) return docxEnvelope
   const source = documents.find((document) => document.mediaType === 'application/vnd.eqb.canonical-fixture+json')
   if (!source) {
     diagnostics.push(diagnostic('SOURCE_ADAPTER_UNSUPPORTED', 'unsupported', '$.evidence.documents', 'No registered source adapter can read the supplied evidence'))
@@ -1837,6 +1907,18 @@ function validateCapture(capture, closure) {
     }
   }
   return issues
+}
+
+function validateDocxSourceBinding(parsed, capture, diagnostics) {
+  if (parsed?.adapter !== 'docx-source-envelope') return
+  if (parsed.value.profileInstructionSourceDigest !== parsed.sourceDocumentDigest) {
+    diagnostics.push(diagnostic('DOCX_SOURCE_PROFILE_UNBOUND', 'incomplete_source', '$.docxSourceEnvelope.source.profileInstructionSourceDigest', 'DOCX source profile proof must bind the immutable DOCX digest'))
+  }
+  if (capture.observations.some(
+    (observation) => observation.documentId !== parsed.sourceDocumentId,
+  )) {
+    diagnostics.push(diagnostic('DOCX_SOURCE_SPAN_UNBOUND', 'incomplete_source', '$.sourceCapture.observations', 'DOCX source facts may not resolve through supplemental or legacy documents'))
+  }
 }
 
 function validateAnswerAssertions(capture, diagnostics) {
@@ -2628,6 +2710,14 @@ export function compileCanonicalPaper(request) {
   }
   const effectiveReviewDecisions = closure.authorityRef.manifestVersion === '1' ? [] : reviewDecisions
   diagnostics.push(...validateCapture(capture, closure).map((item) => diagnostic(item.code, 'incomplete_source', item.path, item.message)))
+  if (parsed?.adapter === 'docx-source-envelope') {
+    diagnostics.push(...validateJsonSchema(
+      parsed.envelope,
+      closure.schemas['docx-source-envelope-v1'],
+      '$.docxSourceEnvelope',
+    ).map((item) => diagnostic('DOCX_SOURCE_ENVELOPE_INVALID', 'incomplete_source', item.path, item.message)))
+  }
+  validateDocxSourceBinding(parsed, capture, diagnostics)
   if (!parsed) return blockedResult(dispositionFor(diagnostics), capture, closure.authorityRef, diagnostics, [], reviewDecisions)
   const source = parsed.value
   if (typeof source.paperId !== 'string' || typeof source.profileId !== 'string' || !Array.isArray(source.groups)) {

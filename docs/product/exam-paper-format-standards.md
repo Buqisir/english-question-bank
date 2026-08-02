@@ -4,7 +4,7 @@
 
 本文件是唯一的人类可读索引；当前 canonical 编译、校验、发布和受支持的
 Screen / Print-PDF consumer 只从
-[`standards/paper-canonical/manifest-v35.json`](../../standards/paper-canonical/manifest-v35.json)
+[`standards/paper-canonical/manifest-v36.json`](../../standards/paper-canonical/manifest-v36.json)
 解析一份 digest-closed 的权威闭包。这里不复制卷型题号、分值、题组
 cardinality、清洗条件或字体/物理排版数值，也不能被 caller 当作第二套配置。
 
@@ -18,9 +18,9 @@ Renderer Typography、其 schema 及纯验证入口。未知版本、缺件、di
 任何会改变 admission、canonical 语义、Profile、normalization 或 renderer
 结果的变更，必须新增 versioned artifact、schema/semantic conformance fixture、
 迁移说明和 manifest 升版；已经被 Publication 引用的 artifact 不可原位修改。
-`manifest-v1.json` 至 `manifest-v34.json` 保留各自原始 digest-closed closure，
-供既有 Publication 解析；当前 Screen v35、Print/PDF v36 consumer contracts
-只绑定 v35 authority。v35 继续以 NCK1 Profile v10 发布 renderer-neutral 的完整
+`manifest-v1.json` 至 `manifest-v35.json` 保留各自原始 digest-closed closure，
+供既有 Publication 解析；当前 Screen v36、Print/PDF v37 consumer contracts
+只绑定 v36 authority。v36 继续以 NCK1 Profile v10 发布 renderer-neutral 的完整
 可见结构：inactive Listening 不产生标题、正文或空隙，首个可见部分仍是
 `第二部分 阅读（共两节，满分50分）`，且阅读理解、七选五的节标题和说明均
 由同一 Profile/digest 绑定的 Consumption Plan 进入 plain/lecture Screen、
@@ -47,7 +47,7 @@ Continuation rhythm v5 分别声明 Screen
 Paper Typography v10 是 section heading numeric baseline 和 instruction 常规字重的唯一运行时来源；
 Continuation Rhythm v5 另外绑定在 exact-final-HEAD 证据根持久化的六 bundle、两
 relation 观测 ledger。迁移说明见
-[`manifest-v35-migration.md`](../../standards/paper-canonical/manifest-v35-migration.md)。
+[`manifest-v36-migration.md`](../../standards/paper-canonical/manifest-v36-migration.md)。
 
 此前 v32 以 NCK1 Profile v10、Paper Typography v7、Normalization Rules v5
 和 Grammar Fill public-geometry-fixtures v11 闭合 Owner-QA geometry；

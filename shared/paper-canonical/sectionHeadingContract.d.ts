@@ -32,7 +32,7 @@ export declare const paperTypographyAuthorityBinding: Readonly<{
   readonly source: 'docs/product/exam-paper-format-standards.md'
   readonly producer: 'paper-canonical-renderer-typography-v10'
   readonly manifestId: 'paper-canonical'
-  readonly manifestVersion: '35'
+  readonly manifestVersion: '36'
   readonly manifestDigest: string
   readonly sha256: string
 }>

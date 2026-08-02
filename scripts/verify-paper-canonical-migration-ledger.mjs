@@ -786,15 +786,15 @@ function configPaperIds(configFiles) {
 }
 
 function buildAuthoritySummary() {
-  const manifestPath = 'standards/paper-canonical/manifest-v35.json'
+  const manifestPath = 'standards/paper-canonical/manifest-v36.json'
   const manifestBytes = readFileSync(abs(manifestPath))
   const manifest = JSON.parse(manifestBytes)
   if (canonicalAuthorityRef.manifestId !== manifest.manifestId || canonicalAuthorityRef.manifestVersion !== manifest.version) {
-    throw new Error('canonical authority reference does not point to Manifest v35')
+    throw new Error('canonical authority reference does not point to Manifest v36')
   }
   const consumers = [
-    { id: 'screen', path: 'standards/paper-canonical/consumers/screen-v35.json' },
-    { id: 'print_pdf', path: 'standards/paper-canonical/consumers/print-pdf-v36.json' },
+    { id: 'screen', path: 'standards/paper-canonical/consumers/screen-v36.json' },
+    { id: 'print_pdf', path: 'standards/paper-canonical/consumers/print-pdf-v37.json' },
   ].map(({ id, path: contractPath }) => {
     const bytes = readFileSync(abs(contractPath))
     const contract = JSON.parse(bytes)

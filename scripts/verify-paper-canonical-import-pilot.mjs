@@ -19,7 +19,7 @@ import { pathToFileURL } from 'node:url'
 import { DatabaseSync } from 'node:sqlite'
 
 import manifestV17 from '../standards/paper-canonical/manifest-v17.json' with { type: 'json' }
-import manifestV35 from '../standards/paper-canonical/manifest-v35.json' with { type: 'json' }
+import manifestV36 from '../standards/paper-canonical/manifest-v36.json' with { type: 'json' }
 import paperTypographyV10 from '../standards/paper-canonical/rendering/paper-typography-v10.json' with { type: 'json' }
 import { consumerContractRefs } from '../shared/paper-canonical/consumers.mjs'
 import { canonicalAuthorityRef } from '../shared/paper-canonical/authority.mjs'
@@ -753,7 +753,7 @@ function assertPublicInstructionWeights(
 }
 
 function assertPaperTypographyV10InstructionAuthority() {
-  const typographyDescriptor = manifestV35.artifacts.find(
+  const typographyDescriptor = manifestV36.artifacts.find(
     (artifact) => artifact.id === 'renderer-typography',
   )
   assert.deepEqual(
@@ -765,7 +765,7 @@ function assertPaperTypographyV10InstructionAuthority() {
       schemaId: 'renderer-typography-v10',
       sha256: digestJson(paperTypographyV10),
     },
-    'Manifest v35 binds the unique current Paper Typography v10 source, version, path, and hash',
+    'Manifest v36 binds the unique current Paper Typography v10 source, version, path, and hash',
   )
   assert.deepEqual(
     paperTypographyAuthorityBinding,
@@ -788,8 +788,8 @@ function assertPaperTypographyV10InstructionAuthority() {
   )
   assert.equal(
     canonicalAuthorityRef.manifestVersion,
-    String(manifestV35.version),
-    'the current canonical authority selects Manifest v35 rather than a historical Typography authority',
+    String(manifestV36.version),
+    'the current canonical authority selects Manifest v36 rather than a historical Typography authority',
   )
   assert.equal(
     paperTypographyV10.schemaVersion,
@@ -1315,18 +1315,18 @@ function assertSevenChoicesReferenceEvidence() {
   )
   assert.equal(
     canonicalAuthorityRef.manifestVersion,
-    '35',
+    '36',
     'new Publications preserve Seven Choices inside the whole-paper typography successor authority',
   )
   assert.equal(
     consumerContractRefs.screen.version,
-    '35',
-    'Screen v35 binds the complete geometry authority closure',
+    '36',
+    'Screen v36 binds the complete geometry authority closure',
   )
   assert.equal(
     consumerContractRefs.print_pdf.version,
-    '36',
-    'Print/PDF v36 binds the complete geometry authority closure',
+    '37',
+    'Print/PDF v37 binds the complete geometry authority closure',
   )
   assert.equal(
     sha256(preservedBytes),
@@ -18321,7 +18321,7 @@ try {
   )
   const requestPath = path.join(
     sourcePackageDir,
-    'canonical-evidence/canonical-import-request-v35.json',
+    'canonical-evidence/canonical-import-request-v36.json',
   )
   execFileSync(process.execPath, [
     path.join(

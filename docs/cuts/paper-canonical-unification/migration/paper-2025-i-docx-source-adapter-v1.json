@@ -1,0 +1,135 @@
+{
+  "schemaVersion": "paper-canonical-docx-source-adapter-proof-v1",
+  "ticket": "25-generic-docx-source-adapter-seam-and-nck1-proof",
+  "binding": {
+    "authority": {
+      "manifestId": "paper-canonical",
+      "manifestVersion": "36",
+      "manifestDigest": "sha256:380824bab5f66a26bd06a65f071f9e798710bc9e456e6d4796ecca425de451ca"
+    },
+    "source": {
+      "paperId": "paper-2025-i",
+      "path": "test-fixtures/paper-import/paper-2025-i-docx-source-adapter/2025-nck1-answer-source.docx",
+      "byteLength": 135250,
+      "sha256": "33a93bfa4af0ebab48ae7aaef036a44b7004fff6ea2b90f2814ed12dee01b047",
+      "rawTextDigest": "sha256:ccc7459ede139bdb8f398ae905d8c0a9138f37ef9541b1c4d9a99ed33e9a7d76"
+    },
+    "producer": [
+      {
+        "path": "server/paper-canonical/docxSourceAdapter.mjs",
+        "sha256": "a6d6bd4d8f5a8bba47f5d7f1fb08aa7fc53ef4353c6df4e9c013892e239563f1"
+      },
+      {
+        "path": "test-fixtures/paper-import/paper-2025-i-docx-source-adapter/sourceProof.mjs",
+        "sha256": "8760f1e2e297631aa99ff1b763996c2b8e239ff5b0b907654d295a4d7534aeac"
+      },
+      {
+        "path": "shared/paper-canonical/compiler.mjs",
+        "sha256": "a6a3ebec275a68ebc9413b75198ad47545ebf9951a7ad7d366234a76d9afcdbe"
+      }
+    ]
+  },
+  "ready": {
+    "disposition": "ready",
+    "profileId": "nck1",
+    "familyCounts": {
+      "reading": 4,
+      "seven-choices": 1,
+      "cloze": 1,
+      "grammar-fill": 1,
+      "application-writing": 1,
+      "continuation-writing": 1
+    },
+    "officialAnswerCount": 45,
+    "inactiveListeningSourceProof": [
+      {
+        "slotId": "listening.short-dialogue",
+        "questionCount": 5,
+        "officialAnswerCount": 5,
+        "optionLabels": "ABC"
+      },
+      {
+        "slotId": "listening.long-form",
+        "questionCount": 15,
+        "officialAnswerCount": 15,
+        "optionLabels": "ABC"
+      }
+    ],
+    "inactiveSlots": [
+      {
+        "slotId": "listening.short-dialogue",
+        "status": "closed",
+        "officialAnswerCount": 5
+      },
+      {
+        "slotId": "listening.long-form",
+        "status": "closed",
+        "officialAnswerCount": 15
+      }
+    ],
+    "diagnosticCodes": [],
+    "compilationDigest": "sha256:af6c5f0b5be0e21eb3e207f951b44a7df721209d910e5c8bff8e520690017ea8"
+  },
+  "capacity": {
+    "baseline": {
+      "inspectionWorkUnits": 67,
+      "immutableDocumentCount": 8,
+      "immutableEvidenceByteLength": 277857,
+      "riskPoints": 17
+    },
+    "floor": {
+      "formula": "B + 4 per digest-verified raw DOCX + ceil(raw DOCX bytes / 16384)",
+      "rawDocxByteLength": 135250,
+      "incrementWorkUnits": 13,
+      "inspectionWorkUnits": 80,
+      "status": "floor_not_complete_envelope_estimate"
+    },
+    "actual": {
+      "model": "ticket-25-docx-source-adapter-inspection-units-v1",
+      "sourceDocumentCount": 2,
+      "sourceDocumentByteLength": 214092,
+      "diagnosticCount": 0,
+      "diagnosticCodes": [],
+      "inspectionWorkUnits": 22,
+      "risk": {
+        "model": "ticket-25-source-adapter-risk-points-v1",
+        "sourceAdapterUnavailable": false,
+        "profileUnproven": false,
+        "inactiveClosureUnclassified": false,
+        "diagnosticCodeCount": 0,
+        "riskPoints": 0,
+        "band": "low"
+      }
+    },
+    "requestDocumentKeys": [
+      "source_docx",
+      "docx_source_envelope"
+    ]
+  },
+  "zeroMutation": {
+    "mutationCount": 0,
+    "protectedStateBefore": {
+      "paths": [
+        "app/public/paper-assets",
+        "data/question-bank.sqlite",
+        "scripts/import-pipeline/papers",
+        "docs/cuts/paper-canonical-unification/migration/ledger-v1.json",
+        "docs/cuts/paper-canonical-unification/migration/manifest-v1.json"
+      ],
+      "fileCount": 302,
+      "digest": "sha256:9adba0104135d89db06c33098f2aa0267b53cf09c5eaf435021a4a49e580bb87"
+    },
+    "protectedStateAfter": {
+      "paths": [
+        "app/public/paper-assets",
+        "data/question-bank.sqlite",
+        "scripts/import-pipeline/papers",
+        "docs/cuts/paper-canonical-unification/migration/ledger-v1.json",
+        "docs/cuts/paper-canonical-unification/migration/manifest-v1.json"
+      ],
+      "fileCount": 302,
+      "digest": "sha256:9adba0104135d89db06c33098f2aa0267b53cf09c5eaf435021a4a49e580bb87"
+    },
+    "writesPerformedByProof": []
+  }
+}
