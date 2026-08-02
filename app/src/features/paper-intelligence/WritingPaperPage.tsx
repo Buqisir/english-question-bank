@@ -314,6 +314,7 @@ export function WritingPaperPage({
                   data-canonical-writing-occurrence-signature={block.occurrenceSignature}
                   data-canonical-answer-region-ref={block.answerRegionRef}
                   data-canonical-response-slot-id={block.responseSlotId}
+                  data-canonical-response-ownership={block.ownership}
                   data-canonical-application-writing-rhythm-role={
                     block.answerRegionRef === 'writing.application-box'
                       ? 'response_box'

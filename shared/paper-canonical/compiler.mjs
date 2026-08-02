@@ -2630,6 +2630,56 @@ function questionCardinalityMatches(rule, count) {
       : false
 }
 
+function scoreTotalForBoundSlot(slot, group, diagnostics) {
+  const rule = slot.scoringRule
+  if (!isRecordValue(rule)) {
+    diagnostics.push(diagnostic('PROFILE_SCORING_RULE_INVALID', 'needs_review', `$.profile.slots.${slot.slotId}.scoringRule`, 'Bound profile slot has no closed scoring rule'))
+    return null
+  }
+  if (rule.kind === 'group_total') {
+    if (!Number.isFinite(rule.total)) {
+      diagnostics.push(diagnostic('PROFILE_SCORING_RULE_INVALID', 'needs_review', `$.profile.slots.${slot.slotId}.scoringRule.total`, 'Group-total scoring requires one finite total'))
+      return null
+    }
+    return rule.total
+  }
+  if (rule.kind !== 'per_question' || !Number.isFinite(rule.points)) {
+    diagnostics.push(diagnostic('PROFILE_SCORING_RULE_INVALID', 'needs_review', `$.profile.slots.${slot.slotId}.scoringRule`, 'Per-question scoring requires one finite point value'))
+    return null
+  }
+  if (!group) {
+    if (!Number.isFinite(rule.total)) {
+      diagnostics.push(diagnostic('PROFILE_SCORING_RULE_INVALID', 'needs_review', `$.profile.slots.${slot.slotId}.scoringRule.total`, 'Unbound per-question scoring requires one static total'))
+      return null
+    }
+    return rule.total
+  }
+  const derivedTotal = rule.points * group.questionRefs.length
+  if (Object.hasOwn(rule, 'total') && rule.total !== derivedTotal) {
+    diagnostics.push(diagnostic('GROUP_SCORE_MISMATCH', 'needs_review', `$.groups.${group.identity.groupId}`, 'Per-question Profile scoring total disagrees with the bound frozen question count'))
+    return null
+  }
+  return derivedTotal
+}
+
+function validateBoundSectionScores(profile, groupBySlot, diagnostics) {
+  for (const part of profile.parts) {
+    for (const section of part.sections) {
+      let sectionTotal = 0
+      for (const slot of section.slots) {
+        const group = slot.activation === 'canonical_group'
+          ? groupBySlot.get(slot.slotId)
+          : null
+        const slotTotal = scoreTotalForBoundSlot(slot, group, diagnostics)
+        if (slotTotal !== null) sectionTotal += slotTotal
+      }
+      if (sectionTotal !== section.score) {
+        diagnostics.push(diagnostic('SECTION_SCORE_MISMATCH', 'needs_review', `$.profile.parts.${part.partId}.sections.${section.sectionId}`, 'Bound slot scores do not close the declared section total'))
+      }
+    }
+  }
+}
+
 function buildPlan(source, capture, closure, groups, acceptedRecords, reviewDecisions) {
   const diagnostics = []
   const profile = closure.profiles.get(source.profileId)
@@ -2750,6 +2800,7 @@ function buildPlan(source, capture, closure, groups, acceptedRecords, reviewDeci
       previousFlexibleRangeEnd = null
     }
   }
+  if (diagnostics.length === 0) validateBoundSectionScores(profile, groupBySlot, diagnostics)
   if (diagnostics.length > 0) return { diagnostics, plan: null }
   const legacyAuthority = closure.authorityRef.manifestVersion === '1'
   const profileDigest = digestJson(profile)

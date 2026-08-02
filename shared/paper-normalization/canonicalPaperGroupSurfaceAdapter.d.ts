@@ -1,3 +1,8 @@
+/**
+ * Type declarations for `canonicalPaperGroupSurfaceAdapter.mjs`.
+ * Keep this file in sync with `canonicalPaperGroupSurfaceAdapter.d.ts` and `canonicalPaperGroupSurfaceAdapter.d.mts`.
+ */
+
 import type {
   PaperEvidence,
   PaperQuestion,
@@ -189,54 +194,102 @@ export type CanonicalApplicationWritingGivenPart = {
   }>
 }
 
-export function buildCanonicalApplicationWritingConsumptionSurfaceData(input: {
-  consumption: unknown
-  groupId: string
-  renderedGroupIds?: ReadonlyArray<string>
-}): {
+export type CanonicalWritingSourceBlock = {
+  readonly nodeId: string
+  readonly text: string
+  readonly inlines: ReadonlyArray<{
+    readonly kind: 'text'
+    readonly nodeId: string
+    readonly text: string
+  }>
+}
+
+export type CanonicalWritingChromePrelude =
+  | { readonly kind: 'passage' }
+  | { readonly kind: 'partHeading'; readonly instructionId: string; readonly text: string }
+  | { readonly kind: 'sectionHeading'; readonly instructionId: string; readonly text: string }
+  | { readonly kind: 'instruction'; readonly instructionId: string; readonly text: string }
+
+export type CanonicalRichWritingPageModel<TGivenPart> = {
+  readonly blocks: ReadonlyArray<
+    | CanonicalWritingChromePrelude
+    | {
+        readonly kind: 'answerBox'
+        readonly label: string
+        readonly answerRegionRef: string
+        readonly responseSlotId: string
+        readonly semanticSignature: string
+        readonly occurrenceSignature: string
+        readonly givenTop: ReadonlyArray<TGivenPart>
+        readonly givenBottom: ReadonlyArray<TGivenPart>
+      }
+  >
+}
+
+export type CanonicalOpaqueWritingPageModel = {
+  readonly blocks: ReadonlyArray<
+    | CanonicalWritingChromePrelude
+    | {
+        readonly kind: 'answerBox'
+        readonly label: string
+        readonly answerRegionRef: string
+        readonly responseSlotId: string
+        readonly ownership: 'product'
+        readonly semanticSignature: string
+        readonly occurrenceSignature: string
+        readonly givenTop: ReadonlyArray<never>
+        readonly givenBottom: ReadonlyArray<never>
+      }
+  >
+}
+
+type CanonicalApplicationWritingSurfaceCommon = {
   readonly status: 'ready'
   readonly semanticDigest: string
   readonly occurrenceSignature: string
-  readonly answerRegion: {
-    readonly answerRegionRef: string
-    readonly responseSlotId: string
-    readonly givenTop: ReadonlyArray<CanonicalApplicationWritingGivenPart>
-    readonly givenBottom: ReadonlyArray<CanonicalApplicationWritingGivenPart>
-  }
   readonly anchors: Record<string, ReadonlyArray<string> | string>
-  readonly promptBlocks: ReadonlyArray<{
-    readonly nodeId: string
-    readonly text: string
-    readonly inlines: ReadonlyArray<{
-      readonly kind: 'text'
-      readonly nodeId: string
-      readonly text: string
-    }>
-  }>
-  readonly pageModel: {
-    readonly blocks: ReadonlyArray<
-      | { readonly kind: 'passage' }
-      | { readonly kind: 'partHeading'; readonly instructionId: string; readonly text: string }
-      | { readonly kind: 'sectionHeading'; readonly instructionId: string; readonly text: string }
-      | { readonly kind: 'instruction'; readonly instructionId: string; readonly text: string }
-      | {
-          readonly kind: 'answerBox'
-          readonly label: string
-          readonly answerRegionRef: string
-          readonly responseSlotId: string
-          readonly semanticSignature: string
-          readonly occurrenceSignature: string
-          readonly givenTop: ReadonlyArray<CanonicalApplicationWritingGivenPart>
-          readonly givenBottom: ReadonlyArray<CanonicalApplicationWritingGivenPart>
-        }
-    >
-  }
+  readonly promptBlocks: ReadonlyArray<CanonicalWritingSourceBlock>
   readonly surfaceData: {
     readonly textMap: PaperTextMap
     readonly questions: ReadonlyArray<PaperQuestion>
     readonly evidence: ReadonlyArray<PaperEvidence>
   }
 }
+
+export type CanonicalRichApplicationWritingConsumptionSurfaceData =
+  CanonicalApplicationWritingSurfaceCommon
+  & {
+    readonly writingMode?: undefined
+    readonly answerRegion: {
+      readonly answerRegionRef: string
+      readonly responseSlotId: string
+      readonly givenTop: ReadonlyArray<CanonicalApplicationWritingGivenPart>
+      readonly givenBottom: ReadonlyArray<CanonicalApplicationWritingGivenPart>
+    }
+    readonly pageModel: CanonicalRichWritingPageModel<CanonicalApplicationWritingGivenPart>
+  }
+
+export type CanonicalLegacyOpaqueApplicationWritingConsumptionSurfaceData =
+  CanonicalApplicationWritingSurfaceCommon
+  & {
+    readonly writingMode: 'legacy_opaque'
+    readonly answerRegion: {
+      readonly answerRegionRef: string
+      readonly responseSlotId: string
+      readonly ownership: 'product'
+    }
+    readonly pageModel: CanonicalOpaqueWritingPageModel
+  }
+
+export type CanonicalApplicationWritingConsumptionSurfaceData =
+  | CanonicalRichApplicationWritingConsumptionSurfaceData
+  | CanonicalLegacyOpaqueApplicationWritingConsumptionSurfaceData
+
+export function buildCanonicalApplicationWritingConsumptionSurfaceData(input: {
+  consumption: unknown
+  groupId: string
+  renderedGroupIds?: ReadonlyArray<string>
+}): CanonicalApplicationWritingConsumptionSurfaceData
 
 export type CanonicalContinuationWritingStarter = {
   readonly starterId: string
@@ -250,54 +303,57 @@ export type CanonicalContinuationWritingStarter = {
   }>
 }
 
-export function buildCanonicalContinuationWritingConsumptionSurfaceData(input: {
-  consumption: unknown
-  groupId: string
-  renderedGroupIds?: ReadonlyArray<string>
-}): {
+type CanonicalContinuationWritingSurfaceCommon = {
   readonly status: 'ready'
   readonly semanticDigest: string
   readonly occurrenceSignature: string
-  readonly answerRegion: {
-    readonly answerRegionRef: string
-    readonly responseSlotId: string
-    readonly starterLines: ReadonlyArray<CanonicalContinuationWritingStarter>
-  }
   readonly anchors: Record<string, ReadonlyArray<string>>
-  readonly materialBlocks: ReadonlyArray<{
-    readonly nodeId: string
-    readonly text: string
-    readonly inlines: ReadonlyArray<{
-      readonly kind: 'text'
-      readonly nodeId: string
-      readonly text: string
-    }>
-  }>
-  readonly wordCountRuling: {
-    readonly countScope: 'student_authored_only'
-    readonly target: number
-  }
-  readonly pageModel: {
-    readonly blocks: ReadonlyArray<
-      | { readonly kind: 'passage' }
-      | { readonly kind: 'partHeading'; readonly instructionId: string; readonly text: string }
-      | { readonly kind: 'sectionHeading'; readonly instructionId: string; readonly text: string }
-      | { readonly kind: 'instruction'; readonly instructionId: string; readonly text: string }
-      | {
-          readonly kind: 'answerBox'
-          readonly label: string
-          readonly answerRegionRef: string
-          readonly responseSlotId: string
-          readonly semanticSignature: string
-          readonly occurrenceSignature: string
-          readonly givenTop: ReadonlyArray<CanonicalContinuationWritingStarter>
-          readonly givenBottom: ReadonlyArray<never>
-        }
-    >
-  }
+  readonly materialBlocks: ReadonlyArray<CanonicalWritingSourceBlock>
   readonly surfaceData: {
     readonly textMap: PaperTextMap
     readonly questions: ReadonlyArray<PaperQuestion>
     readonly evidence: ReadonlyArray<PaperEvidence>
   }
 }
+
+export type CanonicalRichContinuationWritingConsumptionSurfaceData =
+  CanonicalContinuationWritingSurfaceCommon
+  & {
+    readonly writingMode?: undefined
+    readonly answerRegion: {
+      readonly answerRegionRef: string
+      readonly responseSlotId: string
+      readonly starterLines: ReadonlyArray<CanonicalContinuationWritingStarter>
+    }
+    readonly wordCountRuling: {
+      readonly countScope: 'student_authored_only'
+      readonly target: number
+    }
+    readonly pageModel: CanonicalRichWritingPageModel<CanonicalContinuationWritingStarter>
+  }
+
+export type CanonicalLegacyOpaqueContinuationWritingConsumptionSurfaceData =
+  CanonicalContinuationWritingSurfaceCommon
+  & {
+    readonly writingMode: 'legacy_opaque'
+    readonly answerRegion: {
+      readonly answerRegionRef: string
+      readonly responseSlotId: string
+      readonly ownership: 'product'
+    }
+    readonly wordCountRuling?: undefined
+    readonly wordCountTarget: number
+    readonly wordCountTargetCertainty: 'explicit_legacy_field'
+    readonly wordCountScope: 'unspecified'
+    readonly pageModel: CanonicalOpaqueWritingPageModel
+  }
+
+export type CanonicalContinuationWritingConsumptionSurfaceData =
+  | CanonicalRichContinuationWritingConsumptionSurfaceData
+  | CanonicalLegacyOpaqueContinuationWritingConsumptionSurfaceData
+
+export function buildCanonicalContinuationWritingConsumptionSurfaceData(input: {
+  consumption: unknown
+  groupId: string
+  renderedGroupIds?: ReadonlyArray<string>
+}): CanonicalContinuationWritingConsumptionSurfaceData

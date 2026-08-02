@@ -57,4 +57,10 @@ assertDeclarationCompanions({
   dmtsPath: 'shared/paper-canonical/consumerProjection.d.mts',
 })
 
+assertDeclarationCompanions({
+  label: 'writingPageModel',
+  dtsPath: 'app/src/features/paper-intelligence/writingPageModel.d.ts',
+  dmtsPath: 'app/src/features/paper-intelligence/writingPageModel.d.mts',
+})
+
 summary()

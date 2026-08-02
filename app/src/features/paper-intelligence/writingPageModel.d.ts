@@ -1,3 +1,4 @@
+// Keep this file in sync with writingPageModel.d.ts and writingPageModel.d.mts.
 import type { PaperAssetV1, PaperParagraph, PaperWritingTask } from '../../domain/paperAsset.ts'
 
 // Ordered paper-order chrome for one writing group's A4 page. `passage` marks
@@ -13,6 +14,7 @@ export type WritingChromeBlock =
       label: string
       answerRegionRef?: string
       responseSlotId?: string
+      ownership?: 'product'
       semanticSignature?: string
       occurrenceSignature?: string
       givenTop: ReadonlyArray<WritingGivenPart>

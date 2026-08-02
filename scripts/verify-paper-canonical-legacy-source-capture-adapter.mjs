@@ -143,10 +143,10 @@ const legacyAuthority = resolveCanonicalAuthority(trustedLegacyCaptureCandidateA
 assert.equal(legacyAuthority.ok, true)
 assert.equal(canonicalAuthorityRef.manifestVersion, '36', 'the migration source adapter must not advance current/publication authority')
 assert.equal(trustedDocxCandidateAuthorityRef.manifestVersion, '37', 'the DOCX candidate seam must retain v37')
-assert.equal(trustedLegacyCaptureCandidateAuthorityRef.manifestVersion, '39')
+assert.equal(trustedLegacyCaptureCandidateAuthorityRef.manifestVersion, '40')
 assert.equal(legacyAuthority.closure.artifacts.adapter.adapters.find((entry) => entry.adapterId === 'ticket-26-legacy-source-capture').version, '2')
 assert.ok(legacyAuthority.closure.schemas['ticket-26-legacy-source-envelope-v1'])
-assert.equal(Object.hasOwn(compilerModule, 'compileTrustedLegacyCaptureCandidate'), false, 'ordinary callers must not reach the privileged v39 compiler')
+assert.equal(Object.hasOwn(compilerModule, 'compileTrustedLegacyCaptureCandidate'), false, 'ordinary callers must not reach the privileged v40 compiler')
 assert.deepEqual(Object.keys(trustedImport).sort(), ['confirmCanonicalCandidate', 'importCanonicalCandidate'])
 
 const firstImport = importCanonicalCandidate(legacyInput(captureBytes))
@@ -154,7 +154,7 @@ const secondImport = importCanonicalCandidate(legacyInput(captureBytes))
 assert.deepEqual(firstImport, secondImport, 'exact legacy capture derivation must be deterministic')
 assert.ok(firstImport.candidate, 'the exact committed capture must produce an Import Candidate')
 assert.equal(firstImport.candidate.schemaVersion, 'trusted-ticket-26-legacy-import-candidate-v1')
-assert.equal(firstImport.candidate.authority.manifestVersion, '39')
+assert.equal(firstImport.candidate.authority.manifestVersion, '40')
 assert.equal(firstImport.candidate.source.sha256, sha256(captureBytes))
 assert.equal(firstImport.candidate.source.byteLength, captureBytes.byteLength)
 assert.equal(firstImport.candidate.source.paperId, 'paper-2020-i', 'paper identity must be resolved from the trusted binding')
@@ -171,7 +171,7 @@ const genericBypass = compilerModule.compileCanonicalPaper({
   ...buildTicket26LegacyCompilerRequest(captureBytes),
   authority: trustedLegacyCaptureCandidateAuthorityRef,
 })
-assert.equal('canonicalPaper' in genericBypass.artifacts, false, 'generic compilation must not bypass Teacher Confirmation for v39')
+assert.equal('canonicalPaper' in genericBypass.artifacts, false, 'generic compilation must not bypass Teacher Confirmation for v40')
 assert.ok(genericBypass.artifacts.normalizationReport.diagnostics.some((item) => item.code === 'AUTHORITY_RETIRED'))
 
 const docxBytes = new Uint8Array(await readFile(new URL('test-fixtures/paper-import/paper-2025-i-docx-source-adapter/2025-nck1-answer-source.docx', root)))
@@ -278,7 +278,7 @@ const allSources = await Promise.all(batch.membership.paperIds.map(async (paperI
   const candidate = importCanonicalCandidate(legacyInput(bytes))
   assert.ok(candidate.candidate, `${paperId} must enter the shared candidate seam`)
   assert.equal(candidate.candidate.source.paperId, paperId, `${paperId} identity must come from the trusted registry`)
-  assert.equal(candidate.candidate.authority.manifestVersion, '39')
+  assert.equal(candidate.candidate.authority.manifestVersion, '40')
   return { paperId, bytes, projected, candidate: candidate.candidate }
 }))
 assert.equal(allSources.length, 31, 'the full Ticket 26 batch must project 31 of 31 captures')
@@ -289,6 +289,48 @@ assert.deepEqual(
 )
 
 const sourceByPaperId = new Map(allSources.map((entry) => [entry.paperId, entry.projected]))
+const zhejiangProfile = legacyAuthority.closure.profiles.get('zhejiang-legacy')
+const zhejiangReadingChoice = zhejiangProfile.parts
+  .flatMap((part) => part.sections)
+  .find((section) => section.sectionId === 'reading.choice')
+assert.ok(zhejiangReadingChoice)
+const zhejiang2021Reading = sourceByPaperId.get('paper-zj-2021-jun').groups
+  .filter((group) => group.family === 'reading')
+assert.deepEqual(
+  zhejiang2021Reading.map((group) => ({
+    slotId: group.slotId,
+    questionCount: group.questionIds.length,
+  })),
+  [
+    { slotId: 'reading.a', questionCount: 3 },
+    { slotId: 'reading.b', questionCount: 4 },
+    { slotId: 'reading.c', questionCount: 3 },
+  ],
+  'the frozen Zhejiang representative supplies the supported 3/4/3 reading layout',
+)
+const zhejiangQuestionCountBySlot = new Map(
+  zhejiang2021Reading.map((group) => [group.slotId, group.questionIds.length]),
+)
+const zhejiangReadingScore = zhejiangReadingChoice.slots.reduce((total, slot) => {
+  const questionCount = zhejiangQuestionCountBySlot.get(slot.slotId)
+  assert.equal(slot.scoringRule.kind, 'per_question')
+  assert.equal(slot.scoringRule.points, 2.5)
+  const derivedTotal = slot.scoringRule.points * questionCount
+  const configuredTotal = Object.hasOwn(slot.scoringRule, 'total')
+    ? slot.scoringRule.total
+    : derivedTotal
+  assert.equal(
+    configuredTotal,
+    derivedTotal,
+    `${slot.slotId} score must agree with its frozen bound question count`,
+  )
+  return total + configuredTotal
+}, 0)
+assert.equal(
+  zhejiangReadingScore,
+  zhejiangReadingChoice.score,
+  'the supported 3/4/3 reading layout must close the 25-point section total',
+)
 for (const paperId of ['paper-2020-i', 'paper-2020-bing', 'paper-zj-2020-jan']) {
   const projected = sourceByPaperId.get(paperId)
   for (const slotId of ['reading.seven-choices', 'language.cloze', 'language.grammar-fill']) {

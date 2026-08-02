@@ -158,8 +158,98 @@ for (const testCase of cases) {
   for (const block of canonical.sourceBlocks) {
     assert.equal(compactText(html).includes(compactText(block.text)), true)
   }
-  rendered.push({ ...testCase, canonical, html })
+  rendered.push({ ...testCase, canonical, consumption, html })
 }
+
+async function assertActualOpaqueScreenArtifacts() {
+  const vite = await import('../app/node_modules/vite/dist/node/index.js')
+  const viteServer = await vite.createServer({
+    root: path.resolve('app'),
+    server: { host: '127.0.0.1', port: 0 },
+  })
+  await viteServer.listen()
+  const appUrl = viteServer.resolvedUrls?.local?.[0]
+  assert.ok(appUrl)
+  const playwright = await import('../app/node_modules/playwright/index.js')
+  const browser = await playwright.default.chromium.launch({ headless: true })
+  try {
+    for (const { label, canonical, consumption } of rendered) {
+      const isApplication = label === 'application'
+      const qaPath = isApplication
+        ? 'canonical-application-writing-qa.html'
+        : 'canonical-continuation-writing-qa.html'
+      const consumptionPath = isApplication
+        ? '**/qa/canonical-application-writing-consumption.json'
+        : '**/qa/canonical-continuation-writing-consumption.json'
+      const sourceSelector = isApplication
+        ? '[data-canonical-application-prompt] > [data-canonical-block-id]'
+        : '[data-canonical-continuation-material] > [data-canonical-block-id]'
+      const page = await browser.newPage({
+        viewport: { width: 1280, height: 900 },
+      })
+      try {
+        await page.route(consumptionPath, (route) => route.fulfill({
+          status: 200,
+          contentType: 'application/json',
+          body: JSON.stringify(consumption),
+        }))
+        const url = new URL(qaPath, appUrl)
+        url.searchParams.set('groupId', canonical.groupId)
+        await page.goto(url.href)
+
+        const response = page.locator(
+          `[data-canonical-response-slot-id="${canonical.answerRegion.responseSlotId}"]`,
+        )
+        await response.waitFor()
+        assert.equal(await response.count(), 1)
+        assert.equal(
+          await response.getAttribute('data-canonical-response-ownership'),
+          'product',
+          `${label}: Screen renders the product-owned generic response region`,
+        )
+        assert.equal(await response.getAttribute('aria-label'), '写作答题区')
+        assert.equal(await response.locator('[data-canonical-block-id]').count(), 0)
+        assert.equal(await page.locator('[data-canonical-given-part-id]').count(), 0)
+        assert.equal(await page.locator('[data-canonical-starter-id]').count(), 0)
+
+        assert.deepEqual(
+          await page.locator(sourceSelector).evaluateAll((elements) => elements.map(
+            (element) => element.getAttribute('data-canonical-block-id'),
+          )),
+          canonical.sourceBlocks.map((block) => block.nodeId),
+          `${label}: Screen renders every frozen source block in source order`,
+        )
+        for (const block of canonical.sourceBlocks) {
+          const sourceBlock = page.locator(
+            `${sourceSelector}[data-canonical-block-id="${block.nodeId}"]`,
+          )
+          assert.equal(await sourceBlock.count(), 1)
+          assert.equal(
+            compactText(await sourceBlock.innerText()).includes(compactText(block.text)),
+            true,
+            `${label}: Screen visibly retains ${block.nodeId}`,
+          )
+        }
+        const lastSourceBlock = page.locator(sourceSelector).last()
+        const [lastSourceBottom, responseTop] = await Promise.all([
+          lastSourceBlock.evaluate((element) => element.getBoundingClientRect().bottom),
+          response.evaluate((element) => element.getBoundingClientRect().top),
+        ])
+        assert.ok(
+          responseTop >= lastSourceBottom,
+          `${label}: generic response follows the complete frozen source stream`,
+        )
+      } finally {
+        await page.close()
+      }
+    }
+  } finally {
+    await browser.close()
+    await viteServer.close()
+  }
+}
+
+await assertActualOpaqueScreenArtifacts()
 
 const playwright = await import('../app/node_modules/playwright/index.js')
 const browser = await playwright.default.chromium.launch({ headless: true })
