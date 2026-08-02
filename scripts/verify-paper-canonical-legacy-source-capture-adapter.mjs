@@ -77,15 +77,6 @@ function assertMarkerProjection(group) {
   }
 }
 
-function contentRefText(content, ref) {
-  const block = (content.blocks || []).find((candidate) => candidate.nodeId === ref?.blockId)
-  const selected = new Set(ref?.inlineNodeIds || [])
-  return (block?.inlines || [])
-    .filter((inline) => selected.has(inline.nodeId))
-    .map((inline) => inline.text || '')
-    .join('')
-}
-
 function blockText(content, blockId) {
   const block = (content.blocks || []).find((candidate) => candidate.nodeId === blockId)
   return contentText({ blocks: block ? [block] : [] })
@@ -324,30 +315,40 @@ assert.deepEqual(
 )
 
 const nck1Application = nck1Source.groups.find((group) => group.slotId === 'writing.application')
-assert.equal(nck1Application.variant.writingTaskId, nck1Application.writingTask.writingTaskId)
 assert.deepEqual(
-  nck1Application.variant.promptBlockRefs,
+  nck1Application.variant,
+  { family: 'application-writing', choiceOwnership: { ownership: 'none' } },
+  'Application Writing must not fabricate closed semantic fields from unlabelled source paragraphs',
+)
+assert.deepEqual(
   nck1Application.content.blocks.map((block) => block.nodeId),
-  'Application Writing must retain every source prompt block in source order',
+  nck1Application.passage.paragraphs.map((paragraph) => paragraph.paragraphId),
+  'Application Writing must retain the frozen paragraph structure without classifying it as prompt or answer-region content',
 )
-for (const ref of Object.values(nck1Application.variant.situation)) {
-  assert.ok(contentRefText(nck1Application.content, ref).length > 0)
+assert.ok(contentText(nck1Application.content).includes('A Cross-Country Running Race'))
+assert.equal(
+  nck1Application.sourceSpanId,
+  'source-span:observation:ticket-26:paper-2020-i:asset_projection:document',
+)
+assert.equal(
+  nck1Source.observations.some((observation) => observation.kind.startsWith('application_')),
+  false,
+  'the adapter must not manufacture application absence, word-count, or response observations',
+)
+const applicationGroups = allSources.flatMap(({ paperId, projected }) => projected.groups
+  .filter((group) => group.family === 'application-writing')
+  .map((group) => ({ paperId, group })))
+assert.equal(applicationGroups.length, 22)
+for (const { paperId, group } of applicationGroups) {
+  assert.equal(group.writingTask?.taskType, 'application', `${paperId} must retain its explicit task type`)
+  for (const field of ['situation', 'contentRequirements', 'givenSkeleton', 'response', 'answerRegion']) {
+    assert.equal(
+      Object.hasOwn(group.writingTask, field),
+      false,
+      `${paperId} frozen writingTask has no structurally labelled ${field} field`,
+    )
+  }
 }
-assert.equal(nck1Application.variant.contentRequirements.length, 1)
-assert.equal(nck1Application.variant.wordCountRuling.target, nck1Application.writingTask.wordCountTarget)
-assert.ok(contentRefText(
-  nck1Application.content,
-  nck1Application.variant.wordCountRuling.sourceRef,
-).includes(String(nck1Application.writingTask.wordCountTarget)))
-assert.equal(nck1Application.variant.givenSkeleton.presence, 'none')
-assert.equal(
-  observationById(nck1Source, nck1Application.variant.wordCountRuling.authorityObservationRef)?.kind,
-  'application_word_count_ruling',
-)
-assert.equal(
-  observationById(nck1Source, nck1Application.variant.response.authorityObservationRef)?.kind,
-  'application_response_binding',
-)
 
 const nck1Continuation = nck1Source.groups.find((group) => group.slotId === 'writing.continuation')
 assert.equal(nck1Continuation.variant.writingTaskId, nck1Continuation.writingTask.writingTaskId)
@@ -404,7 +405,12 @@ assert.equal(
   'confirmed legacy input must yield exactly one Canonical Paper or one unresolved result, never a partial paper',
 )
 assert.equal('publication' in confirmationResult, false, 'Teacher Confirmation must not publish')
-assert.ok(confirmationResult.canonicalPaper, 'the representative NCK1 source must now close as one complete unpublished Canonical Paper')
+assert.equal(confirmationResult.canonicalPaper, undefined, 'unlabelled Application Writing source must not fabricate a complete Canonical Paper')
+assert.deepEqual(
+  [...new Set(confirmationResult.unresolvedIssues.map(({ code }) => code))].sort(),
+  ['APPLICATION_VARIANT_INVALID', 'GROUP_VARIANT_INVALID', 'SCHEMA_REQUIRED'],
+  'the representative application source must remain precisely unresolved at the existing closed writing contract',
+)
 assert.deepEqual(
   confirmCanonicalCandidate(firstImport.candidate, { ...confirmation, sourceDigest: 'sha256:forged' }).unresolvedIssues.map(({ code }) => code),
   ['CONFIRMATION_SOURCE_MISMATCH'],
@@ -433,30 +439,30 @@ const confirmations = allSources.map(({ paperId, candidate }) => {
       : { disposition: 'unresolved', codes: [...new Set(result.unresolvedIssues.map(({ code }) => code))].sort() }),
   }
 })
-assert.equal(confirmations.filter((item) => item.disposition === 'canonical').length, 24)
+const applicationPaperIds = new Set(applicationGroups.map(({ paperId }) => paperId))
+const sourceClosedPaperIds = allSources
+  .filter(({ paperId }) => !applicationPaperIds.has(paperId))
+  .map(({ paperId }) => paperId)
 assert.deepEqual(
-  confirmations.filter((item) => item.disposition === 'unresolved').map(({ paperId, codes }) => ({ paperId, codes })),
-  [
-    { paperId: 'paper-960d0f8d', codes: ['APPLICATION_WORD_RULING_UNPROVEN', 'GRAMMAR_FILL_PROMPT_SOURCE_DISAGREEMENT', 'REFERENCE_BLANK_OCCURRENCE'] },
-    { paperId: 'paper-zj-2020-jan', codes: ['CONTINUATION_CONTENT_OWNERSHIP_INCOMPLETE', 'CONTINUATION_PROFILE_CARDINALITY_UNSUPPORTED'] },
-    { paperId: 'paper-zj-2020-jul', codes: ['GROUP_CARDINALITY_MISMATCH'] },
-    { paperId: 'paper-zj-2021-jan', codes: ['CONTINUATION_CONTENT_OWNERSHIP_INCOMPLETE', 'CONTINUATION_PROFILE_CARDINALITY_UNSUPPORTED'] },
-    { paperId: 'paper-zj-2021-jun', codes: ['CONTINUATION_CONTENT_OWNERSHIP_INCOMPLETE', 'CONTINUATION_PROFILE_CARDINALITY_UNSUPPORTED'] },
-    { paperId: 'paper-zj-2022-jan', codes: ['CONTINUATION_CONTENT_OWNERSHIP_INCOMPLETE', 'CONTINUATION_PROFILE_CARDINALITY_UNSUPPORTED'] },
-    { paperId: 'paper-zj-2022-jun', codes: ['CONTINUATION_CONTENT_OWNERSHIP_INCOMPLETE', 'CONTINUATION_STARTER_BOUNDARY_AMBIGUOUS'] },
-  ],
-  'the full 31-paper accounting must stay deterministic and fail closed only for source/contract gaps the adapter cannot guess',
+  confirmations.filter((item) => item.disposition === 'canonical').map(({ paperId }) => paperId),
+  sourceClosedPaperIds,
+  'only frozen sources without an unclosed Application Writing boundary may complete',
 )
-const canonicalGrammar = confirmationResult.canonicalPaper.questionGroups.find(
-  (group) => group.identity.groupId === nck1Grammar.groupId,
+assert.equal(confirmations.filter((item) => item.disposition === 'canonical').length, 9)
+assert.equal(confirmations.filter((item) => item.disposition === 'unresolved').length, applicationGroups.length)
+assert.deepEqual(
+  confirmations
+    .filter((item) => item.disposition === 'unresolved')
+    .map(({ paperId, codes }) => ({
+      paperId,
+      codes: codes.filter((code) => ['APPLICATION_VARIANT_INVALID', 'GROUP_VARIANT_INVALID', 'SCHEMA_REQUIRED'].includes(code)),
+    })),
+  applicationGroups.map(({ paperId }) => ({
+    paperId,
+    codes: ['APPLICATION_VARIANT_INVALID', 'GROUP_VARIANT_INVALID', 'SCHEMA_REQUIRED'],
+  })),
+  'the full 31-paper accounting must be anchored to the explicit frozen application fields rather than an adapter-completed variant',
 )
-for (const blankId of nck1Grammar.blankIds) {
-  assert.ok(canonicalGrammar.sourceMap.entries.some((entry) => (
-    entry.target.kind === 'blank'
-    && entry.target.id === blankId
-    && entry.sourceSpanRefs.includes(nck1Grammar.sourceSpanId)
-  )))
-}
 const dryRun = process.argv.includes('--dry-run')
 const unresolved = dryRun ? confirmations : []
 const unresolvedPaperIds = unresolved.filter((item) => item.disposition === 'unresolved').map((item) => item.paperId)

@@ -530,55 +530,6 @@ function completeBlockRef(block) {
   }
 }
 
-function sourceRefContaining(content, target) {
-  const targetText = String(target)
-  for (const block of content.blocks || []) {
-    const inlineNodeIds = (block.inlines || [])
-      .filter((inline) => inline?.kind === 'text' && inline.text.includes(targetText))
-      .map((inline) => inline.nodeId)
-    if (inlineNodeIds.length > 0) return { blockId: block.nodeId, inlineNodeIds }
-  }
-  return completeBlockRef(content.blocks?.[0])
-}
-
-function applicationWritingVariant({ group, writingTask, content, paperId }) {
-  const promptBlockRefs = (content.blocks || []).map((block) => block.nodeId)
-  const promptRef = completeBlockRef(content.blocks?.[0])
-  const wordCountSourceRef = sourceRefContaining(content, writingTask.wordCountTarget)
-  return {
-    family: 'application-writing',
-    writingTaskId: writingTask.writingTaskId,
-    promptBlockRefs,
-    situation: {
-      writerRole: promptRef,
-      audienceOrDestination: promptRef,
-      deliverable: promptRef,
-      communicativePurpose: promptRef,
-    },
-    contentRequirements: [{
-      requirementId: `requirement:${group.groupId}:1`,
-      contentRef: promptRef,
-    }],
-    wordCountRuling: {
-      kind: 'approximate_target',
-      target: writingTask.wordCountTarget,
-      countScope: 'student_authored_only',
-      sourceRef: wordCountSourceRef,
-      authorityObservationRef: legacyWritingObservationId(paperId, group.groupId, 'word-count'),
-    },
-    givenSkeleton: {
-      presence: 'none',
-      answerRegionAbsenceAssertionRef: legacyWritingObservationId(paperId, group.groupId, 'answer-region-empty'),
-    },
-    choiceOwnership: { ownership: 'none' },
-    response: {
-      kind: 'group_level_written_response',
-      answerRegionRef: 'writing.application-box',
-      authorityObservationRef: legacyWritingObservationId(paperId, group.groupId, 'response'),
-    },
-  }
-}
-
 function continuationWritingVariant({ group, writingTask, content, paperId }) {
   const sourceStarters = Array.isArray(writingTask.continuationStarters)
     ? writingTask.continuationStarters
@@ -661,42 +612,6 @@ function ticket26Observations(record, asset) {
     if (group?.groupType !== 'writing') continue
     const writingTask = asset.content.writingTasks?.[group.writingTaskId]
     if (!isRecordValue(writingTask)) continue
-    if (writingTask.taskType === 'application') {
-      observations.push(
-        {
-          observationId: legacyWritingObservationId(record.paperId, group.groupId, 'answer-region-empty'),
-          kind: 'application_answer_region_absence',
-          documentInputKey: assetDocument.inputKey,
-          value: { groupId: group.groupId, answerRegionRef: 'writing.application-box' },
-          span: { start: 0, end: assetDocument.byteLength },
-          extraction: { adapterId: 'ticket-26-legacy-source-capture', version: '1' },
-        },
-        {
-          observationId: legacyWritingObservationId(record.paperId, group.groupId, 'word-count'),
-          kind: 'application_word_count_ruling',
-          documentInputKey: assetDocument.inputKey,
-          value: {
-            groupId: group.groupId,
-            target: writingTask.wordCountTarget,
-            countScope: 'student_authored_only',
-          },
-          span: { start: 0, end: assetDocument.byteLength },
-          extraction: { adapterId: 'ticket-26-legacy-source-capture', version: '1' },
-        },
-        {
-          observationId: legacyWritingObservationId(record.paperId, group.groupId, 'response'),
-          kind: 'application_response_binding',
-          documentInputKey: assetDocument.inputKey,
-          value: {
-            groupId: group.groupId,
-            writingTaskId: writingTask.writingTaskId,
-            answerRegionRef: 'writing.application-box',
-          },
-          span: { start: 0, end: assetDocument.byteLength },
-          extraction: { adapterId: 'ticket-26-legacy-source-capture', version: '1' },
-        },
-      )
-    }
     if (writingTask.taskType === 'continuation') {
       observations.push({
         observationId: legacyWritingObservationId(record.paperId, group.groupId, 'word-count'),
@@ -790,14 +705,6 @@ function structuralVariant({ group, slot, questionIds, blankIds, questions, answ
         `observation:ticket-26:${asset.paper.paperId}:grammar-fill-prompt:${blankId}`,
       )),
     }
-  }
-  if (slot.family === 'application-writing') {
-    return applicationWritingVariant({
-      group,
-      writingTask: slot.writingTask,
-      content,
-      paperId: asset.paper.paperId,
-    })
   }
   if (slot.family === 'continuation-writing') {
     return continuationWritingVariant({
