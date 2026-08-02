@@ -34,14 +34,14 @@ Accepted spec SHA-256: `180bcb1d921746f5b8af0467c1dd04924c6312b791de11708ee7f593
 To-tickets provenance: verified
 To-tickets entry skill: `/Users/huangxuewei/.claude/skills/to-tickets/SKILL.md`
 To-tickets source HEAD: `76e068469071787ac24f76170e21020ff22a3fcf`
-To-tickets result commit: `498a600007857e7eba1e46f044b00ca070264650`
+To-tickets result commit: `8d5c08244371e066deddd9466bf68260dad83ea6`
 To-tickets artifact: `docs/cuts/paper-canonical-unification/ticket-set-manifest.md`
-To-tickets artifact SHA-256: `91f29cf57a92d1661382ce710ae4714deacf1266eb39bfb2322eadb1ecd719d0`
+To-tickets artifact SHA-256: `9bea913c5dba538492642f0738a84a03fefd8180992fa7e3db8ffc3d700778c1`
 To-tickets outcome: complete
 
 Ticket-set binding: verified
 Ticket-set manifest: `docs/cuts/paper-canonical-unification/ticket-set-manifest.md`
-Ticket-set manifest SHA-256: `91f29cf57a92d1661382ce710ae4714deacf1266eb39bfb2322eadb1ecd719d0`
+Ticket-set manifest SHA-256: `9bea913c5dba538492642f0738a84a03fefd8180992fa7e3db8ffc3d700778c1`
 Ticket-set accepted-spec SHA-256: `180bcb1d921746f5b8af0467c1dd04924c6312b791de11708ee7f593e657f417`
 
 Owner ticket-granularity approval: pending
@@ -76,7 +76,7 @@ Implementation dispatch: forbidden
 
 The accepted spec and corrected ticket-set manifest have exact current
 provenance and binding at commit
-`498a600007857e7eba1e46f044b00ca070264650`. Current ticket-granularity and
+`8d5c08244371e066deddd9466bf68260dad83ea6`. Current ticket-granularity and
 exact-manifest-digest approvals are pending, so the four canonical authority
 gates are not closed and implementation dispatch is forbidden.
 
