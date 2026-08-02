@@ -1,0 +1,6 @@
+{
+  "schemaVersion": "teacher-confirmation-v1",
+  "candidateDigest": "sha256:05227edc483d9312b37fa1d07f0e41fef8c8aa52e0ff3fa82c244f5e58f1da4d",
+  "sourceDigest": "sha256:a83545889c01467c33c1e41afe8ec34aab5dfff7f6fc89fd3a7391c618b4326f",
+  "confirmed": true
+}

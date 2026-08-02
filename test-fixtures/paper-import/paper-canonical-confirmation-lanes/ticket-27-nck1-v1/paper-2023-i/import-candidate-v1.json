@@ -1,0 +1,5032 @@
+{
+  "schemaVersion": "trusted-ticket-26-legacy-import-candidate-v1",
+  "authority": {
+    "manifestId": "paper-canonical",
+    "manifestVersion": "41",
+    "manifestDigest": "sha256:b025bdc677a59a09548575e3df1e911ecd0273c5f6a9056d70603107c1970c83"
+  },
+  "source": {
+    "mediaType": "application/vnd.eqb.ticket-26-source-capture+json",
+    "sha256": "sha256:b66bcd20b12d11d56a44923b96436774a2ec814f339d245181a6ab32a1283f00",
+    "byteLength": 202509,
+    "captureId": "source-capture:43485ab160c2aa349d59d",
+    "captureDigest": "sha256:43485ab160c2aa349d59d3c1af3046b19a9da2e32bf5fc3b2e6838c652608bd5",
+    "paperId": "paper-2023-i",
+    "documents": [
+      {
+        "role": "asset-projection",
+        "sha256": "sha256:ebf76c5a60ca91d660a9421be25604497f58a704aa04fb236f0bd8f1b288f1cf",
+        "byteLength": 133363
+      },
+      {
+        "role": "source-provenance",
+        "sha256": "sha256:b1be451fb56fb8ca9ef843eaeaa6f5c682516e5573a568becd413000f5ea8e68",
+        "byteLength": 4105
+      },
+      {
+        "role": "official-answer-lead",
+        "sha256": "sha256:cde1eb2f4d8b61efd1f3017b853d6369fbd3cea972a369b525085776894fa5be",
+        "byteLength": 8231
+      }
+    ]
+  },
+  "operatorChoices": {},
+  "interpretation": {
+    "paperId": "paper-2023-i",
+    "profileId": "nck1",
+    "sourceAssetVersion": 1,
+    "provenance": {
+      "sourceFileName": "2023年新课标Ⅰ卷-答案版.docx",
+      "sourceFileSha256": "791b4d659998c07f92e497ee2ffd5c29677861028dd510f564c6f661dcfc8db4",
+      "paper": {
+        "year": 2023,
+        "region": "全国新课标Ⅰ",
+        "paperName": "2023年新课标Ⅰ卷",
+        "examCode": "2023-i",
+        "subject": "English",
+        "sourceType": "真题",
+        "defaultTags": [
+          "真题",
+          "2023",
+          "新课标Ⅰ卷"
+        ]
+      }
+    },
+    "capture": {
+      "captureId": "source-capture:43485ab160c2aa349d59d",
+      "digest": "sha256:43485ab160c2aa349d59d3c1af3046b19a9da2e32bf5fc3b2e6838c652608bd5"
+    },
+    "observations": [
+      {
+        "observationId": "observation:ticket-26:paper-2023-i:asset_projection:document",
+        "kind": "immutable_source_document",
+        "documentInputKey": "latest_asset_projection",
+        "value": {
+          "byteLength": 133363,
+          "path": "app/public/paper-assets/paper-2023-i/latest/paper-asset.json",
+          "role": "asset-projection",
+          "sha256": "sha256:ebf76c5a60ca91d660a9421be25604497f58a704aa04fb236f0bd8f1b288f1cf"
+        },
+        "span": {
+          "start": 0,
+          "end": 133363
+        },
+        "extraction": {
+          "adapterId": "ticket-26-legacy-source-capture",
+          "version": "3"
+        }
+      },
+      {
+        "observationId": "observation:ticket-26:paper-2023-i:asset_projection:json-root",
+        "kind": "ordered_json_parse_observation",
+        "documentInputKey": "latest_asset_projection",
+        "value": {
+          "format": "json",
+          "rootType": "object",
+          "entryCount": 7
+        },
+        "span": {
+          "start": 0,
+          "end": 133363
+        },
+        "extraction": {
+          "adapterId": "ticket-26-legacy-source-capture",
+          "version": "3"
+        }
+      },
+      {
+        "observationId": "observation:ticket-26:paper-2023-i:source_provenance:document",
+        "kind": "immutable_source_document",
+        "documentInputKey": "latest_source_provenance",
+        "value": {
+          "byteLength": 4105,
+          "path": "app/public/paper-assets/paper-2023-i/latest/import-meta.json",
+          "role": "source-provenance",
+          "sha256": "sha256:b1be451fb56fb8ca9ef843eaeaa6f5c682516e5573a568becd413000f5ea8e68"
+        },
+        "span": {
+          "start": 0,
+          "end": 4105
+        },
+        "extraction": {
+          "adapterId": "ticket-26-legacy-source-capture",
+          "version": "3"
+        }
+      },
+      {
+        "observationId": "observation:ticket-26:paper-2023-i:source_provenance:json-root",
+        "kind": "ordered_json_parse_observation",
+        "documentInputKey": "latest_source_provenance",
+        "value": {
+          "format": "json",
+          "rootType": "object",
+          "entryCount": 8
+        },
+        "span": {
+          "start": 0,
+          "end": 4105
+        },
+        "extraction": {
+          "adapterId": "ticket-26-legacy-source-capture",
+          "version": "3"
+        }
+      },
+      {
+        "observationId": "observation:ticket-26:paper-2023-i:official_answer_lead:document",
+        "kind": "immutable_source_document",
+        "documentInputKey": "latest_official_answer_lead",
+        "value": {
+          "byteLength": 8231,
+          "path": "app/public/paper-assets/paper-2023-i/latest/answer-key.json",
+          "role": "official-answer-lead",
+          "sha256": "sha256:cde1eb2f4d8b61efd1f3017b853d6369fbd3cea972a369b525085776894fa5be"
+        },
+        "span": {
+          "start": 0,
+          "end": 8231
+        },
+        "extraction": {
+          "adapterId": "ticket-26-legacy-source-capture",
+          "version": "3"
+        }
+      },
+      {
+        "observationId": "observation:ticket-26:paper-2023-i:official_answer_lead:json-root",
+        "kind": "ordered_json_parse_observation",
+        "documentInputKey": "latest_official_answer_lead",
+        "value": {
+          "format": "json",
+          "rootType": "object",
+          "entryCount": 4
+        },
+        "span": {
+          "start": 0,
+          "end": 8231
+        },
+        "extraction": {
+          "adapterId": "ticket-26-legacy-source-capture",
+          "version": "3"
+        }
+      },
+      {
+        "observationId": "observation:ticket-26:paper-2023-i:grammar-fill-prompt:blank-2023-i-056",
+        "kind": "grammar_fill_prompt_provision",
+        "documentInputKey": "latest_asset_projection",
+        "value": {
+          "blankId": "blank-2023-i-056",
+          "provision": "source_prompt",
+          "prompt": "taste"
+        },
+        "span": {
+          "start": 0,
+          "end": 133363
+        },
+        "extraction": {
+          "adapterId": "ticket-26-legacy-source-capture",
+          "version": "3"
+        }
+      },
+      {
+        "observationId": "observation:ticket-26:paper-2023-i:grammar-fill-prompt:blank-2023-i-057",
+        "kind": "grammar_fill_prompt_provision",
+        "documentInputKey": "latest_asset_projection",
+        "value": {
+          "blankId": "blank-2023-i-057",
+          "provision": "source_prompt",
+          "prompt": "bite"
+        },
+        "span": {
+          "start": 0,
+          "end": 133363
+        },
+        "extraction": {
+          "adapterId": "ticket-26-legacy-source-capture",
+          "version": "3"
+        }
+      },
+      {
+        "observationId": "observation:ticket-26:paper-2023-i:grammar-fill-prompt:blank-2023-i-058",
+        "kind": "grammar_fill_prompt_provision",
+        "documentInputKey": "latest_asset_projection",
+        "value": {
+          "blankId": "blank-2023-i-058",
+          "provision": "source_proven_none"
+        },
+        "span": {
+          "start": 0,
+          "end": 133363
+        },
+        "extraction": {
+          "adapterId": "ticket-26-legacy-source-capture",
+          "version": "3"
+        }
+      },
+      {
+        "observationId": "observation:ticket-26:paper-2023-i:grammar-fill-prompt:blank-2023-i-059",
+        "kind": "grammar_fill_prompt_provision",
+        "documentInputKey": "latest_asset_projection",
+        "value": {
+          "blankId": "blank-2023-i-059",
+          "provision": "source_prompt",
+          "prompt": "recognize"
+        },
+        "span": {
+          "start": 0,
+          "end": 133363
+        },
+        "extraction": {
+          "adapterId": "ticket-26-legacy-source-capture",
+          "version": "3"
+        }
+      },
+      {
+        "observationId": "observation:ticket-26:paper-2023-i:grammar-fill-prompt:blank-2023-i-060",
+        "kind": "grammar_fill_prompt_provision",
+        "documentInputKey": "latest_asset_projection",
+        "value": {
+          "blankId": "blank-2023-i-060",
+          "provision": "source_proven_none"
+        },
+        "span": {
+          "start": 0,
+          "end": 133363
+        },
+        "extraction": {
+          "adapterId": "ticket-26-legacy-source-capture",
+          "version": "3"
+        }
+      },
+      {
+        "observationId": "observation:ticket-26:paper-2023-i:grammar-fill-prompt:blank-2023-i-061",
+        "kind": "grammar_fill_prompt_provision",
+        "documentInputKey": "latest_asset_projection",
+        "value": {
+          "blankId": "blank-2023-i-061",
+          "provision": "source_prompt",
+          "prompt": "lift"
+        },
+        "span": {
+          "start": 0,
+          "end": 133363
+        },
+        "extraction": {
+          "adapterId": "ticket-26-legacy-source-capture",
+          "version": "3"
+        }
+      },
+      {
+        "observationId": "observation:ticket-26:paper-2023-i:grammar-fill-prompt:blank-2023-i-062",
+        "kind": "grammar_fill_prompt_provision",
+        "documentInputKey": "latest_asset_projection",
+        "value": {
+          "blankId": "blank-2023-i-062",
+          "provision": "source_prompt",
+          "prompt": "they"
+        },
+        "span": {
+          "start": 0,
+          "end": 133363
+        },
+        "extraction": {
+          "adapterId": "ticket-26-legacy-source-capture",
+          "version": "3"
+        }
+      },
+      {
+        "observationId": "observation:ticket-26:paper-2023-i:grammar-fill-prompt:blank-2023-i-063",
+        "kind": "grammar_fill_prompt_provision",
+        "documentInputKey": "latest_asset_projection",
+        "value": {
+          "blankId": "blank-2023-i-063",
+          "provision": "source_proven_none"
+        },
+        "span": {
+          "start": 0,
+          "end": 133363
+        },
+        "extraction": {
+          "adapterId": "ticket-26-legacy-source-capture",
+          "version": "3"
+        }
+      },
+      {
+        "observationId": "observation:ticket-26:paper-2023-i:grammar-fill-prompt:blank-2023-i-064",
+        "kind": "grammar_fill_prompt_provision",
+        "documentInputKey": "latest_asset_projection",
+        "value": {
+          "blankId": "blank-2023-i-064",
+          "provision": "source_prompt",
+          "prompt": "rare"
+        },
+        "span": {
+          "start": 0,
+          "end": 133363
+        },
+        "extraction": {
+          "adapterId": "ticket-26-legacy-source-capture",
+          "version": "3"
+        }
+      },
+      {
+        "observationId": "observation:ticket-26:paper-2023-i:grammar-fill-prompt:blank-2023-i-065",
+        "kind": "grammar_fill_prompt_provision",
+        "documentInputKey": "latest_asset_projection",
+        "value": {
+          "blankId": "blank-2023-i-065",
+          "provision": "source_prompt",
+          "prompt": "want"
+        },
+        "span": {
+          "start": 0,
+          "end": 133363
+        },
+        "extraction": {
+          "adapterId": "ticket-26-legacy-source-capture",
+          "version": "3"
+        }
+      }
+    ],
+    "assertions": [
+      {
+        "assertionId": "answer:q-2023-i-021",
+        "questionId": "q-2023-i-021",
+        "answer": "B",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2023-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2023-i-022",
+        "questionId": "q-2023-i-022",
+        "answer": "C",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2023-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2023-i-023",
+        "questionId": "q-2023-i-023",
+        "answer": "D",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2023-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2023-i-024",
+        "questionId": "q-2023-i-024",
+        "answer": "C",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2023-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2023-i-025",
+        "questionId": "q-2023-i-025",
+        "answer": "D",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2023-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2023-i-026",
+        "questionId": "q-2023-i-026",
+        "answer": "B",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2023-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2023-i-027",
+        "questionId": "q-2023-i-027",
+        "answer": "A",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2023-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2023-i-028",
+        "questionId": "q-2023-i-028",
+        "answer": "B",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2023-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2023-i-029",
+        "questionId": "q-2023-i-029",
+        "answer": "A",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2023-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2023-i-030",
+        "questionId": "q-2023-i-030",
+        "answer": "C",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2023-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2023-i-031",
+        "questionId": "q-2023-i-031",
+        "answer": "A",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2023-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2023-i-032",
+        "questionId": "q-2023-i-032",
+        "answer": "B",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2023-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2023-i-033",
+        "questionId": "q-2023-i-033",
+        "answer": "D",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2023-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2023-i-034",
+        "questionId": "q-2023-i-034",
+        "answer": "C",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2023-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2023-i-035",
+        "questionId": "q-2023-i-035",
+        "answer": "D",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2023-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2023-i-036",
+        "questionId": "q-2023-i-036",
+        "answer": "D",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2023-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2023-i-037",
+        "questionId": "q-2023-i-037",
+        "answer": "B",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2023-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2023-i-038",
+        "questionId": "q-2023-i-038",
+        "answer": "F",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2023-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2023-i-039",
+        "questionId": "q-2023-i-039",
+        "answer": "C",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2023-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2023-i-040",
+        "questionId": "q-2023-i-040",
+        "answer": "G",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2023-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2023-i-041",
+        "questionId": "q-2023-i-041",
+        "answer": "D",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2023-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2023-i-042",
+        "questionId": "q-2023-i-042",
+        "answer": "A",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2023-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2023-i-043",
+        "questionId": "q-2023-i-043",
+        "answer": "D",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2023-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2023-i-044",
+        "questionId": "q-2023-i-044",
+        "answer": "A",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2023-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2023-i-045",
+        "questionId": "q-2023-i-045",
+        "answer": "C",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2023-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2023-i-046",
+        "questionId": "q-2023-i-046",
+        "answer": "B",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2023-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2023-i-047",
+        "questionId": "q-2023-i-047",
+        "answer": "D",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2023-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2023-i-048",
+        "questionId": "q-2023-i-048",
+        "answer": "A",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2023-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2023-i-049",
+        "questionId": "q-2023-i-049",
+        "answer": "B",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2023-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2023-i-050",
+        "questionId": "q-2023-i-050",
+        "answer": "B",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2023-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2023-i-051",
+        "questionId": "q-2023-i-051",
+        "answer": "C",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2023-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2023-i-052",
+        "questionId": "q-2023-i-052",
+        "answer": "D",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2023-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2023-i-053",
+        "questionId": "q-2023-i-053",
+        "answer": "A",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2023-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2023-i-054",
+        "questionId": "q-2023-i-054",
+        "answer": "C",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2023-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2023-i-055",
+        "questionId": "q-2023-i-055",
+        "answer": "B",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2023-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2023-i-056",
+        "questionId": "q-2023-i-056",
+        "answer": "tasty",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2023-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2023-i-057",
+        "questionId": "q-2023-i-057",
+        "answer": "to bite",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2023-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2023-i-058",
+        "questionId": "q-2023-i-058",
+        "answer": "or",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2023-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2023-i-059",
+        "questionId": "q-2023-i-059",
+        "answer": "recognized",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2023-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2023-i-060",
+        "questionId": "q-2023-i-060",
+        "answer": "by",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2023-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2023-i-061",
+        "questionId": "q-2023-i-061",
+        "answer": "to be lifted",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2023-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2023-i-062",
+        "questionId": "q-2023-i-062",
+        "answer": "their",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2023-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2023-i-063",
+        "questionId": "q-2023-i-063",
+        "answer": "a",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2023-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2023-i-064",
+        "questionId": "q-2023-i-064",
+        "answer": "rarely",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2023-i:official_answer_lead:document"
+      },
+      {
+        "assertionId": "answer:q-2023-i-065",
+        "questionId": "q-2023-i-065",
+        "answer": "wanting",
+        "authority": "official",
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2023-i:official_answer_lead:document"
+      }
+    ],
+    "groups": [
+      {
+        "groupId": "group-2023-i-reading-a",
+        "slotId": "reading.a",
+        "family": "reading",
+        "questionIds": [
+          "q-2023-i-021",
+          "q-2023-i-022",
+          "q-2023-i-023"
+        ],
+        "blankIds": [],
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2023-i:asset_projection:document",
+        "content": {
+          "blocks": [
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2023-i-reading-a-1",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-reading-a-1",
+                  "text": "Bike Rental & Guided Tours"
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2023-i-reading-a-2",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-reading-a-2",
+                  "text": "Welcome to Amsterdam, welcome to MacBike. You see much more from the seat of a bike! Cycling is the most economical, sustainable and fun way to explore the city, with its beautiful canals, parks, squares and countless lights. You can also bike along lovely landscapes outside of Amsterdam."
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2023-i-reading-a-3",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-reading-a-3",
+                  "text": "Why MacBike"
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2023-i-reading-a-4",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-reading-a-4",
+                  "text": "MacBike has been around for almost 30 years and is the biggest bicycle rental company in Amsterdam. With over 2,500 bikes stored in our five rental shops at strategic locations, we make sure there is always a bike available for you. We offer the newest bicycles in a wide variety, including basic bikes with foot brake (刹车) , bikes with hand brake and gears (排挡) , bikes with child seats, and children’s bikes."
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2023-i-reading-a-5",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-reading-a-5",
+                  "text": "Prices\n \nHand Brake, Three Gears\nFoot Brake, No Gears\n1 hour\n€7.50\n€5.00\n3 hours\n€11.00\n€7.50\n1 day (24 hours)\n€14.75\n€9.75\nEach additional day\n€8.00\n€6.00"
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2023-i-reading-a-6",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-reading-a-6",
+                  "text": "Guided City Tours"
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2023-i-reading-a-7",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-reading-a-7",
+                  "text": "The 2.5-hour tour covers the Gooyer Windmill, the Skinny Bridge, the Rijksmuseum, Heineken Brewery and much more. The tour departs from Dam Square every hour on the hour, starting at 1:00 pm every day. You can buy your ticket in a MacBike shop or book online."
+                }
+              ]
+            }
+          ]
+        },
+        "media": [],
+        "variant": {
+          "family": "reading",
+          "passageBlockRoles": [],
+          "questions": [
+            {
+              "questionId": "q-2023-i-021",
+              "stem": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:q-2023-i-021:stem",
+                  "text": "What is an advantage of MacBike?"
+                }
+              ],
+              "correctOptionId": "option:q-2023-i-021:B"
+            },
+            {
+              "questionId": "q-2023-i-022",
+              "stem": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:q-2023-i-022:stem",
+                  "text": "How much do you pay for renting a bike with hand brake and three gears for two days?"
+                }
+              ],
+              "correctOptionId": "option:q-2023-i-022:C"
+            },
+            {
+              "questionId": "q-2023-i-023",
+              "stem": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:q-2023-i-023:stem",
+                  "text": "Where does the guided city tour start?"
+                }
+              ],
+              "correctOptionId": "option:q-2023-i-023:D"
+            }
+          ],
+          "choiceOwnership": {
+            "ownership": "per_question",
+            "sets": [
+              {
+                "questionId": "q-2023-i-021",
+                "options": [
+                  {
+                    "optionId": "option:q-2023-i-021:A",
+                    "label": "A",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-reading-a:q-2023-i-021:option:A",
+                        "text": "It gives children a discount."
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-021:B",
+                    "label": "B",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-reading-a:q-2023-i-021:option:B",
+                        "text": "It offers many types of bikes."
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-021:C",
+                    "label": "C",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-reading-a:q-2023-i-021:option:C",
+                        "text": "It organizes free cycle tours."
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-021:D",
+                    "label": "D",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-reading-a:q-2023-i-021:option:D",
+                        "text": "It has over 2,500 rental shops."
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "questionId": "q-2023-i-022",
+                "options": [
+                  {
+                    "optionId": "option:q-2023-i-022:A",
+                    "label": "A",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-reading-a:q-2023-i-022:option:A",
+                        "text": "€15.75."
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-022:B",
+                    "label": "B",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-reading-a:q-2023-i-022:option:B",
+                        "text": "€19.50."
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-022:C",
+                    "label": "C",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-reading-a:q-2023-i-022:option:C",
+                        "text": "€22.75."
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-022:D",
+                    "label": "D",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-reading-a:q-2023-i-022:option:D",
+                        "text": "€29.50."
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "questionId": "q-2023-i-023",
+                "options": [
+                  {
+                    "optionId": "option:q-2023-i-023:A",
+                    "label": "A",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-reading-a:q-2023-i-023:option:A",
+                        "text": "The Gooyer, Windmill."
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-023:B",
+                    "label": "B",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-reading-a:q-2023-i-023:option:B",
+                        "text": "The Skinny Bridge."
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-023:C",
+                    "label": "C",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-reading-a:q-2023-i-023:option:C",
+                        "text": "Heineken Brewery."
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-023:D",
+                    "label": "D",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-reading-a:q-2023-i-023:option:D",
+                        "text": "Dam Square."
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "sourceSpanRefsByTarget": {},
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2023-i-reading-a-1",
+              "text": "Bike Rental & Guided Tours"
+            },
+            {
+              "paragraphId": "para-2023-i-reading-a-2",
+              "text": "Welcome to Amsterdam, welcome to MacBike. You see much more from the seat of a bike! Cycling is the most economical, sustainable and fun way to explore the city, with its beautiful canals, parks, squares and countless lights. You can also bike along lovely landscapes outside of Amsterdam."
+            },
+            {
+              "paragraphId": "para-2023-i-reading-a-3",
+              "text": "Why MacBike"
+            },
+            {
+              "paragraphId": "para-2023-i-reading-a-4",
+              "text": "MacBike has been around for almost 30 years and is the biggest bicycle rental company in Amsterdam. With over 2,500 bikes stored in our five rental shops at strategic locations, we make sure there is always a bike available for you. We offer the newest bicycles in a wide variety, including basic bikes with foot brake (刹车) , bikes with hand brake and gears (排挡) , bikes with child seats, and children’s bikes."
+            },
+            {
+              "paragraphId": "para-2023-i-reading-a-5",
+              "text": "Prices\n \nHand Brake, Three Gears\nFoot Brake, No Gears\n1 hour\n€7.50\n€5.00\n3 hours\n€11.00\n€7.50\n1 day (24 hours)\n€14.75\n€9.75\nEach additional day\n€8.00\n€6.00"
+            },
+            {
+              "paragraphId": "para-2023-i-reading-a-6",
+              "text": "Guided City Tours"
+            },
+            {
+              "paragraphId": "para-2023-i-reading-a-7",
+              "text": "The 2.5-hour tour covers the Gooyer Windmill, the Skinny Bridge, the Rijksmuseum, Heineken Brewery and much more. The tour departs from Dam Square every hour on the hour, starting at 1:00 pm every day. You can buy your ticket in a MacBike shop or book online."
+            }
+          ]
+        },
+        "questions": [
+          {
+            "questionId": "q-2023-i-021",
+            "questionNo": 21,
+            "groupId": "group-2023-i-reading-a",
+            "stem": "What is an advantage of MacBike?",
+            "options": [
+              {
+                "label": "A",
+                "text": "It gives children a discount."
+              },
+              {
+                "label": "B",
+                "text": "It offers many types of bikes."
+              },
+              {
+                "label": "C",
+                "text": "It organizes free cycle tours."
+              },
+              {
+                "label": "D",
+                "text": "It has over 2,500 rental shops."
+              }
+            ]
+          },
+          {
+            "questionId": "q-2023-i-022",
+            "questionNo": 22,
+            "groupId": "group-2023-i-reading-a",
+            "stem": "How much do you pay for renting a bike with hand brake and three gears for two days?",
+            "options": [
+              {
+                "label": "A",
+                "text": "€15.75."
+              },
+              {
+                "label": "B",
+                "text": "€19.50."
+              },
+              {
+                "label": "C",
+                "text": "€22.75."
+              },
+              {
+                "label": "D",
+                "text": "€29.50."
+              }
+            ]
+          },
+          {
+            "questionId": "q-2023-i-023",
+            "questionNo": 23,
+            "groupId": "group-2023-i-reading-a",
+            "stem": "Where does the guided city tour start?",
+            "options": [
+              {
+                "label": "A",
+                "text": "The Gooyer, Windmill."
+              },
+              {
+                "label": "B",
+                "text": "The Skinny Bridge."
+              },
+              {
+                "label": "C",
+                "text": "Heineken Brewery."
+              },
+              {
+                "label": "D",
+                "text": "Dam Square."
+              }
+            ]
+          }
+        ],
+        "blanks": [],
+        "optionBank": [],
+        "writingTask": null
+      },
+      {
+        "groupId": "group-2023-i-reading-b",
+        "slotId": "reading.b",
+        "family": "reading",
+        "questionIds": [
+          "q-2023-i-024",
+          "q-2023-i-025",
+          "q-2023-i-026",
+          "q-2023-i-027"
+        ],
+        "blankIds": [],
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2023-i:asset_projection:document",
+        "content": {
+          "blocks": [
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2023-i-reading-b-1",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-reading-b-1",
+                  "text": "When John Todd was a child, he loved to explore the woods around his house, observing how nature solved problems. A dirty stream, for example, often became clear after flowing through plants and along rocks where tiny creatures lived. When he got older, John started to wonder if this process could be used to clean up the messes people were making."
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2023-i-reading-b-2",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-reading-b-2",
+                  "text": "After studying agriculture, medicine, and fisheries in college, John went back to observing nature and asking questions. Why can certain plants trap harmful bacteria (细菌) ? Which kinds of fish can eat cancer-causing chemicals? With the right combination of animals and plants, he figured, maybe he could clean up waste the way nature did. He decided to build what he would later call an eco-machine."
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2023-i-reading-b-3",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-reading-b-3",
+                  "text": "The task John set for himself was to remove harmful substances from some sludge (污泥) . First, he constructed a series of clear fiberglass tanks connected to each other. Then he went around to local ponds and streams and brought back some plants and animals. He placed them in the tanks and waited. Little by little, these different kinds of life got used to one another and formed their own ecosystem. After a few weeks, John added the sludge."
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2023-i-reading-b-4",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-reading-b-4",
+                  "text": "He was amazed at the results. The plants and animals in the eco-machine took the sludge as food and began to eat it! Within weeks, it had all been digested, and all that was left was pure water."
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2023-i-reading-b-5",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-reading-b-5",
+                  "text": "Over the years, John has taken on many big jobs. He developed a greenhouse – like facility that treated sewage (污水) from 1,600 homes in South Burlington. He also designed an eco-machine to clean canal water in Fuzhou, a city in southeast China."
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2023-i-reading-b-6",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-reading-b-6",
+                  "text": "“Ecological design” is the name John gives to what he does. “Life on Earth is kind of a box of spare parts for the inventor,” he says. “You put organisms in new relationships and observe what’s happening. Then you let these new systems develop their own ways to self-repair.”"
+                }
+              ]
+            }
+          ]
+        },
+        "media": [],
+        "variant": {
+          "family": "reading",
+          "passageBlockRoles": [],
+          "questions": [
+            {
+              "questionId": "q-2023-i-024",
+              "stem": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:q-2023-i-024:stem",
+                  "text": "What can we learn about John from the first two paragraphs?"
+                }
+              ],
+              "correctOptionId": "option:q-2023-i-024:C"
+            },
+            {
+              "questionId": "q-2023-i-025",
+              "stem": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:q-2023-i-025:stem",
+                  "text": "Why did John put the sludge into the tanks?"
+                }
+              ],
+              "correctOptionId": "option:q-2023-i-025:D"
+            },
+            {
+              "questionId": "q-2023-i-026",
+              "stem": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:q-2023-i-026:stem",
+                  "text": "What is the author's purpose in mentioning Fuzhou?"
+                }
+              ],
+              "correctOptionId": "option:q-2023-i-026:B"
+            },
+            {
+              "questionId": "q-2023-i-027",
+              "stem": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:q-2023-i-027:stem",
+                  "text": "What is the basis for John's work?"
+                }
+              ],
+              "correctOptionId": "option:q-2023-i-027:A"
+            }
+          ],
+          "choiceOwnership": {
+            "ownership": "per_question",
+            "sets": [
+              {
+                "questionId": "q-2023-i-024",
+                "options": [
+                  {
+                    "optionId": "option:q-2023-i-024:A",
+                    "label": "A",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-reading-b:q-2023-i-024:option:A",
+                        "text": "He was fond of traveling."
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-024:B",
+                    "label": "B",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-reading-b:q-2023-i-024:option:B",
+                        "text": "He enjoyed being alone."
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-024:C",
+                    "label": "C",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-reading-b:q-2023-i-024:option:C",
+                        "text": "He had an inquiring mind."
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-024:D",
+                    "label": "D",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-reading-b:q-2023-i-024:option:D",
+                        "text": "He longed to be a doctor."
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "questionId": "q-2023-i-025",
+                "options": [
+                  {
+                    "optionId": "option:q-2023-i-025:A",
+                    "label": "A",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-reading-b:q-2023-i-025:option:A",
+                        "text": "To feed the animals."
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-025:B",
+                    "label": "B",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-reading-b:q-2023-i-025:option:B",
+                        "text": "To build an ecosystem."
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-025:C",
+                    "label": "C",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-reading-b:q-2023-i-025:option:C",
+                        "text": "To protect the plants."
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-025:D",
+                    "label": "D",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-reading-b:q-2023-i-025:option:D",
+                        "text": "To test the eco-machine."
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "questionId": "q-2023-i-026",
+                "options": [
+                  {
+                    "optionId": "option:q-2023-i-026:A",
+                    "label": "A",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-reading-b:q-2023-i-026:option:A",
+                        "text": "To review John's research plans."
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-026:B",
+                    "label": "B",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-reading-b:q-2023-i-026:option:B",
+                        "text": "To show an application of John's idea."
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-026:C",
+                    "label": "C",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-reading-b:q-2023-i-026:option:C",
+                        "text": "To compare John's different jobs."
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-026:D",
+                    "label": "D",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-reading-b:q-2023-i-026:option:D",
+                        "text": "To erase doubts about John's invention."
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "questionId": "q-2023-i-027",
+                "options": [
+                  {
+                    "optionId": "option:q-2023-i-027:A",
+                    "label": "A",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-reading-b:q-2023-i-027:option:A",
+                        "text": "Nature can repair itself."
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-027:B",
+                    "label": "B",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-reading-b:q-2023-i-027:option:B",
+                        "text": "Organisms need water to survive."
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-027:C",
+                    "label": "C",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-reading-b:q-2023-i-027:option:C",
+                        "text": "Life on Earth is diverse."
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-027:D",
+                    "label": "D",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-reading-b:q-2023-i-027:option:D",
+                        "text": "Most tiny creatures live in groups."
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "sourceSpanRefsByTarget": {},
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2023-i-reading-b-1",
+              "text": "When John Todd was a child, he loved to explore the woods around his house, observing how nature solved problems. A dirty stream, for example, often became clear after flowing through plants and along rocks where tiny creatures lived. When he got older, John started to wonder if this process could be used to clean up the messes people were making."
+            },
+            {
+              "paragraphId": "para-2023-i-reading-b-2",
+              "text": "After studying agriculture, medicine, and fisheries in college, John went back to observing nature and asking questions. Why can certain plants trap harmful bacteria (细菌) ? Which kinds of fish can eat cancer-causing chemicals? With the right combination of animals and plants, he figured, maybe he could clean up waste the way nature did. He decided to build what he would later call an eco-machine."
+            },
+            {
+              "paragraphId": "para-2023-i-reading-b-3",
+              "text": "The task John set for himself was to remove harmful substances from some sludge (污泥) . First, he constructed a series of clear fiberglass tanks connected to each other. Then he went around to local ponds and streams and brought back some plants and animals. He placed them in the tanks and waited. Little by little, these different kinds of life got used to one another and formed their own ecosystem. After a few weeks, John added the sludge."
+            },
+            {
+              "paragraphId": "para-2023-i-reading-b-4",
+              "text": "He was amazed at the results. The plants and animals in the eco-machine took the sludge as food and began to eat it! Within weeks, it had all been digested, and all that was left was pure water."
+            },
+            {
+              "paragraphId": "para-2023-i-reading-b-5",
+              "text": "Over the years, John has taken on many big jobs. He developed a greenhouse – like facility that treated sewage (污水) from 1,600 homes in South Burlington. He also designed an eco-machine to clean canal water in Fuzhou, a city in southeast China."
+            },
+            {
+              "paragraphId": "para-2023-i-reading-b-6",
+              "text": "“Ecological design” is the name John gives to what he does. “Life on Earth is kind of a box of spare parts for the inventor,” he says. “You put organisms in new relationships and observe what’s happening. Then you let these new systems develop their own ways to self-repair.”"
+            }
+          ]
+        },
+        "questions": [
+          {
+            "questionId": "q-2023-i-024",
+            "questionNo": 24,
+            "groupId": "group-2023-i-reading-b",
+            "stem": "What can we learn about John from the first two paragraphs?",
+            "options": [
+              {
+                "label": "A",
+                "text": "He was fond of traveling."
+              },
+              {
+                "label": "B",
+                "text": "He enjoyed being alone."
+              },
+              {
+                "label": "C",
+                "text": "He had an inquiring mind."
+              },
+              {
+                "label": "D",
+                "text": "He longed to be a doctor."
+              }
+            ]
+          },
+          {
+            "questionId": "q-2023-i-025",
+            "questionNo": 25,
+            "groupId": "group-2023-i-reading-b",
+            "stem": "Why did John put the sludge into the tanks?",
+            "options": [
+              {
+                "label": "A",
+                "text": "To feed the animals."
+              },
+              {
+                "label": "B",
+                "text": "To build an ecosystem."
+              },
+              {
+                "label": "C",
+                "text": "To protect the plants."
+              },
+              {
+                "label": "D",
+                "text": "To test the eco-machine."
+              }
+            ]
+          },
+          {
+            "questionId": "q-2023-i-026",
+            "questionNo": 26,
+            "groupId": "group-2023-i-reading-b",
+            "stem": "What is the author's purpose in mentioning Fuzhou?",
+            "options": [
+              {
+                "label": "A",
+                "text": "To review John's research plans."
+              },
+              {
+                "label": "B",
+                "text": "To show an application of John's idea."
+              },
+              {
+                "label": "C",
+                "text": "To compare John's different jobs."
+              },
+              {
+                "label": "D",
+                "text": "To erase doubts about John's invention."
+              }
+            ]
+          },
+          {
+            "questionId": "q-2023-i-027",
+            "questionNo": 27,
+            "groupId": "group-2023-i-reading-b",
+            "stem": "What is the basis for John's work?",
+            "options": [
+              {
+                "label": "A",
+                "text": "Nature can repair itself."
+              },
+              {
+                "label": "B",
+                "text": "Organisms need water to survive."
+              },
+              {
+                "label": "C",
+                "text": "Life on Earth is diverse."
+              },
+              {
+                "label": "D",
+                "text": "Most tiny creatures live in groups."
+              }
+            ]
+          }
+        ],
+        "blanks": [],
+        "optionBank": [],
+        "writingTask": null
+      },
+      {
+        "groupId": "group-2023-i-reading-c",
+        "slotId": "reading.c",
+        "family": "reading",
+        "questionIds": [
+          "q-2023-i-028",
+          "q-2023-i-029",
+          "q-2023-i-030",
+          "q-2023-i-031"
+        ],
+        "blankIds": [],
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2023-i:asset_projection:document",
+        "content": {
+          "blocks": [
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2023-i-reading-c-1",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-reading-c-1",
+                  "text": "The goal of this book is to make the case for digital minimalism, including a detailed exploration of what it asks and why it works, and then to teach you how to adopt this philosophy if you decide it’s right for you."
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2023-i-reading-c-2",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-reading-c-2",
+                  "text": "To do so, I divided the book into two parts. In part one, I describe the philosophical foundations of digital minimalism, starting with an examination of the forces that are making so many people’s digital lives increasingly intolerable, before moving on to a detailed discussion of the digital minimalism philosophy."
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2023-i-reading-c-3",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-reading-c-3",
+                  "text": "Part one concludes by introducing my suggested method for adopting this philosophy: the digital declutter. This process requires you to step away from optional online activities for thirty days. At the end of the thirty days, you will then add back a small number of carefully chosen online activities that you believe will provide massive benefits to the things you value."
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2023-i-reading-c-4",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-reading-c-4",
+                  "text": "In the final chapter of part one, I’ll guide you through carrying out your own digital declutter. In doing so, I’ll draw on an experiment I ran in 2018 in which over 1,600 people agreed to perform a digital declutter. You’ll hear these participants’ stories and learn what strategies worked well for them, and what traps they encountered that you should avoid."
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2023-i-reading-c-5",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-reading-c-5",
+                  "text": "The second part of this book takes a closer look at some ideas that will help you cultivate (培养) a sustainable digital minimalism lifestyle. In these chapters, I examine issues such as the importance of solitude (独处) and the necessity of cultivating high-quality leisure to replace the time most now spent on mindless device use. Each chapter concludes with a collection of practices, which are designed to help you act on the big ideas of the chapter. You can view these practices as a toolbox meant to aid your efforts to build a minimalist lifestyle that works for your particular circumstances."
+                }
+              ]
+            }
+          ]
+        },
+        "media": [],
+        "variant": {
+          "family": "reading",
+          "passageBlockRoles": [],
+          "questions": [
+            {
+              "questionId": "q-2023-i-028",
+              "stem": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:q-2023-i-028:stem",
+                  "text": "What is the book aimed at?"
+                }
+              ],
+              "correctOptionId": "option:q-2023-i-028:B"
+            },
+            {
+              "questionId": "q-2023-i-029",
+              "stem": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:q-2023-i-029:stem",
+                  "text": "What does the underlined word “declutter” in paragraph 3 mean?"
+                }
+              ],
+              "correctOptionId": "option:q-2023-i-029:A"
+            },
+            {
+              "questionId": "q-2023-i-030",
+              "stem": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:q-2023-i-030:stem",
+                  "text": "What is presented in the final chapter of part one?"
+                }
+              ],
+              "correctOptionId": "option:q-2023-i-030:C"
+            },
+            {
+              "questionId": "q-2023-i-031",
+              "stem": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:q-2023-i-031:stem",
+                  "text": "What does the author suggest readers do with the practices offered in part two?"
+                }
+              ],
+              "correctOptionId": "option:q-2023-i-031:A"
+            }
+          ],
+          "choiceOwnership": {
+            "ownership": "per_question",
+            "sets": [
+              {
+                "questionId": "q-2023-i-028",
+                "options": [
+                  {
+                    "optionId": "option:q-2023-i-028:A",
+                    "label": "A",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-reading-c:q-2023-i-028:option:A",
+                        "text": "Teaching critical thinking skills."
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-028:B",
+                    "label": "B",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-reading-c:q-2023-i-028:option:B",
+                        "text": "Advocating a simple digital lifestyle."
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-028:C",
+                    "label": "C",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-reading-c:q-2023-i-028:option:C",
+                        "text": "Solving philosophical problems."
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-028:D",
+                    "label": "D",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-reading-c:q-2023-i-028:option:D",
+                        "text": "Promoting the use of a digital device."
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "questionId": "q-2023-i-029",
+                "options": [
+                  {
+                    "optionId": "option:q-2023-i-029:A",
+                    "label": "A",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-reading-c:q-2023-i-029:option:A",
+                        "text": "Clear-up."
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-029:B",
+                    "label": "B",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-reading-c:q-2023-i-029:option:B",
+                        "text": "Add-on."
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-029:C",
+                    "label": "C",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-reading-c:q-2023-i-029:option:C",
+                        "text": "Check-in."
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-029:D",
+                    "label": "D",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-reading-c:q-2023-i-029:option:D",
+                        "text": "Take-over."
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "questionId": "q-2023-i-030",
+                "options": [
+                  {
+                    "optionId": "option:q-2023-i-030:A",
+                    "label": "A",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-reading-c:q-2023-i-030:option:A",
+                        "text": "Theoretical models."
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-030:B",
+                    "label": "B",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-reading-c:q-2023-i-030:option:B",
+                        "text": "Statistical methods."
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-030:C",
+                    "label": "C",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-reading-c:q-2023-i-030:option:C",
+                        "text": "Practical examples."
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-030:D",
+                    "label": "D",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-reading-c:q-2023-i-030:option:D",
+                        "text": "Historical analyses."
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "questionId": "q-2023-i-031",
+                "options": [
+                  {
+                    "optionId": "option:q-2023-i-031:A",
+                    "label": "A",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-reading-c:q-2023-i-031:option:A",
+                        "text": "Use them as needed."
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-031:B",
+                    "label": "B",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-reading-c:q-2023-i-031:option:B",
+                        "text": "Recommend them to friends."
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-031:C",
+                    "label": "C",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-reading-c:q-2023-i-031:option:C",
+                        "text": "Evaluate their effects."
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-031:D",
+                    "label": "D",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-reading-c:q-2023-i-031:option:D",
+                        "text": "Identify the ideas behind them."
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "sourceSpanRefsByTarget": {},
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2023-i-reading-c-1",
+              "text": "The goal of this book is to make the case for digital minimalism, including a detailed exploration of what it asks and why it works, and then to teach you how to adopt this philosophy if you decide it’s right for you."
+            },
+            {
+              "paragraphId": "para-2023-i-reading-c-2",
+              "text": "To do so, I divided the book into two parts. In part one, I describe the philosophical foundations of digital minimalism, starting with an examination of the forces that are making so many people’s digital lives increasingly intolerable, before moving on to a detailed discussion of the digital minimalism philosophy."
+            },
+            {
+              "paragraphId": "para-2023-i-reading-c-3",
+              "text": "Part one concludes by introducing my suggested method for adopting this philosophy: the digital declutter. This process requires you to step away from optional online activities for thirty days. At the end of the thirty days, you will then add back a small number of carefully chosen online activities that you believe will provide massive benefits to the things you value."
+            },
+            {
+              "paragraphId": "para-2023-i-reading-c-4",
+              "text": "In the final chapter of part one, I’ll guide you through carrying out your own digital declutter. In doing so, I’ll draw on an experiment I ran in 2018 in which over 1,600 people agreed to perform a digital declutter. You’ll hear these participants’ stories and learn what strategies worked well for them, and what traps they encountered that you should avoid."
+            },
+            {
+              "paragraphId": "para-2023-i-reading-c-5",
+              "text": "The second part of this book takes a closer look at some ideas that will help you cultivate (培养) a sustainable digital minimalism lifestyle. In these chapters, I examine issues such as the importance of solitude (独处) and the necessity of cultivating high-quality leisure to replace the time most now spent on mindless device use. Each chapter concludes with a collection of practices, which are designed to help you act on the big ideas of the chapter. You can view these practices as a toolbox meant to aid your efforts to build a minimalist lifestyle that works for your particular circumstances."
+            }
+          ]
+        },
+        "questions": [
+          {
+            "questionId": "q-2023-i-028",
+            "questionNo": 28,
+            "groupId": "group-2023-i-reading-c",
+            "stem": "What is the book aimed at?",
+            "options": [
+              {
+                "label": "A",
+                "text": "Teaching critical thinking skills."
+              },
+              {
+                "label": "B",
+                "text": "Advocating a simple digital lifestyle."
+              },
+              {
+                "label": "C",
+                "text": "Solving philosophical problems."
+              },
+              {
+                "label": "D",
+                "text": "Promoting the use of a digital device."
+              }
+            ]
+          },
+          {
+            "questionId": "q-2023-i-029",
+            "questionNo": 29,
+            "groupId": "group-2023-i-reading-c",
+            "stem": "What does the underlined word “declutter” in paragraph 3 mean?",
+            "options": [
+              {
+                "label": "A",
+                "text": "Clear-up."
+              },
+              {
+                "label": "B",
+                "text": "Add-on."
+              },
+              {
+                "label": "C",
+                "text": "Check-in."
+              },
+              {
+                "label": "D",
+                "text": "Take-over."
+              }
+            ]
+          },
+          {
+            "questionId": "q-2023-i-030",
+            "questionNo": 30,
+            "groupId": "group-2023-i-reading-c",
+            "stem": "What is presented in the final chapter of part one?",
+            "options": [
+              {
+                "label": "A",
+                "text": "Theoretical models."
+              },
+              {
+                "label": "B",
+                "text": "Statistical methods."
+              },
+              {
+                "label": "C",
+                "text": "Practical examples."
+              },
+              {
+                "label": "D",
+                "text": "Historical analyses."
+              }
+            ]
+          },
+          {
+            "questionId": "q-2023-i-031",
+            "questionNo": 31,
+            "groupId": "group-2023-i-reading-c",
+            "stem": "What does the author suggest readers do with the practices offered in part two?",
+            "options": [
+              {
+                "label": "A",
+                "text": "Use them as needed."
+              },
+              {
+                "label": "B",
+                "text": "Recommend them to friends."
+              },
+              {
+                "label": "C",
+                "text": "Evaluate their effects."
+              },
+              {
+                "label": "D",
+                "text": "Identify the ideas behind them."
+              }
+            ]
+          }
+        ],
+        "blanks": [],
+        "optionBank": [],
+        "writingTask": null
+      },
+      {
+        "groupId": "group-2023-i-reading-d",
+        "slotId": "reading.d",
+        "family": "reading",
+        "questionIds": [
+          "q-2023-i-032",
+          "q-2023-i-033",
+          "q-2023-i-034",
+          "q-2023-i-035"
+        ],
+        "blankIds": [],
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2023-i:asset_projection:document",
+        "content": {
+          "blocks": [
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2023-i-reading-d-1",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-reading-d-1",
+                  "text": "On March 7, 1907, the English statistician Francis Galton published a paper which illustrated what has come to be known as the “wisdom of crowds” effect. The experiment of estimation he conducted showed that in some cases, the average of a large number of independent estimates could be quite accurate."
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2023-i-reading-d-2",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-reading-d-2",
+                  "text": "This effect capitalizes on the fact that when people make errors, those errors aren’t always the same. Some people will tend to overestimate, and some to underestimate. When enough of these errors are averaged together, they cancel each other out, resulting in a more accurate estimate. If people are similar and tend to make the same errors, then their errors won’t cancel each other out. In more technical terms, the wisdom of crowds requires that people’s estimates be independent. If for whatever reasons, people’s errors become correlated or dependent, the accuracy of the estimate will go down."
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2023-i-reading-d-3",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-reading-d-3",
+                  "text": "But a new study led by Joaquin Navajas offered an interesting twist (转折) on this classic phenomenon. The key finding of the study was that when crowds were further divided into smaller groups that were allowed to have a discussion, the averages from these groups were more accurate than those from an equal number of independent individuals. For instance, the average obtained from the estimates of four discussion groups of five was significantly more accurate than the average obtained from 20 independent individuals."
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2023-i-reading-d-4",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-reading-d-4",
+                  "text": "In a follow-up study with 100 university students, the researchers tried to get a better sense of what the group members actually did in their discussion. Did they tend to go with those most confident about their estimates? Did they follow those least willing to change their minds? This happened some of the time, but it wasn’t the dominant response. Most frequently, the groups reported that they “shared arguments and reasoned together”. Somehow, these arguments and reasoning resulted in a global reduction in error. Although the studies led by Navajas have limitations and many questions remain, the potential implications for group discussion and decision-making are enormous."
+                }
+              ]
+            }
+          ]
+        },
+        "media": [],
+        "variant": {
+          "family": "reading",
+          "passageBlockRoles": [],
+          "questions": [
+            {
+              "questionId": "q-2023-i-032",
+              "stem": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:q-2023-i-032:stem",
+                  "text": "What is paragraph 2 of the text mainly about?"
+                }
+              ],
+              "correctOptionId": "option:q-2023-i-032:B"
+            },
+            {
+              "questionId": "q-2023-i-033",
+              "stem": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:q-2023-i-033:stem",
+                  "text": "Navajas' study found that the average accuracy could increase even if ________."
+                }
+              ],
+              "correctOptionId": "option:q-2023-i-033:D"
+            },
+            {
+              "questionId": "q-2023-i-034",
+              "stem": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:q-2023-i-034:stem",
+                  "text": "What did the follow-up study focus on?"
+                }
+              ],
+              "correctOptionId": "option:q-2023-i-034:C"
+            },
+            {
+              "questionId": "q-2023-i-035",
+              "stem": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:q-2023-i-035:stem",
+                  "text": "What is the author's attitude toward Navajas' studies?"
+                }
+              ],
+              "correctOptionId": "option:q-2023-i-035:D"
+            }
+          ],
+          "choiceOwnership": {
+            "ownership": "per_question",
+            "sets": [
+              {
+                "questionId": "q-2023-i-032",
+                "options": [
+                  {
+                    "optionId": "option:q-2023-i-032:A",
+                    "label": "A",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-reading-d:q-2023-i-032:option:A",
+                        "text": "The methods of estimation."
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-032:B",
+                    "label": "B",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-reading-d:q-2023-i-032:option:B",
+                        "text": "The underlying logic of the effect."
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-032:C",
+                    "label": "C",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-reading-d:q-2023-i-032:option:C",
+                        "text": "The causes of people's errors."
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-032:D",
+                    "label": "D",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-reading-d:q-2023-i-032:option:D",
+                        "text": "The design of Galton's experiment."
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "questionId": "q-2023-i-033",
+                "options": [
+                  {
+                    "optionId": "option:q-2023-i-033:A",
+                    "label": "A",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-reading-d:q-2023-i-033:option:A",
+                        "text": "the crowds were relatively small"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-033:B",
+                    "label": "B",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-reading-d:q-2023-i-033:option:B",
+                        "text": "there were occasional underestimates"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-033:C",
+                    "label": "C",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-reading-d:q-2023-i-033:option:C",
+                        "text": "individuals did not communicate"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-033:D",
+                    "label": "D",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-reading-d:q-2023-i-033:option:D",
+                        "text": "estimates were not fully independent"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "questionId": "q-2023-i-034",
+                "options": [
+                  {
+                    "optionId": "option:q-2023-i-034:A",
+                    "label": "A",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-reading-d:q-2023-i-034:option:A",
+                        "text": "The size of the groups."
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-034:B",
+                    "label": "B",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-reading-d:q-2023-i-034:option:B",
+                        "text": "The dominant members."
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-034:C",
+                    "label": "C",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-reading-d:q-2023-i-034:option:C",
+                        "text": "The discussion process."
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-034:D",
+                    "label": "D",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-reading-d:q-2023-i-034:option:D",
+                        "text": "The individual estimates."
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "questionId": "q-2023-i-035",
+                "options": [
+                  {
+                    "optionId": "option:q-2023-i-035:A",
+                    "label": "A",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-reading-d:q-2023-i-035:option:A",
+                        "text": "Unclear."
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-035:B",
+                    "label": "B",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-reading-d:q-2023-i-035:option:B",
+                        "text": "Dismissive."
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-035:C",
+                    "label": "C",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-reading-d:q-2023-i-035:option:C",
+                        "text": "Doubtful."
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-035:D",
+                    "label": "D",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-reading-d:q-2023-i-035:option:D",
+                        "text": "Approving."
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "sourceSpanRefsByTarget": {},
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2023-i-reading-d-1",
+              "text": "On March 7, 1907, the English statistician Francis Galton published a paper which illustrated what has come to be known as the “wisdom of crowds” effect. The experiment of estimation he conducted showed that in some cases, the average of a large number of independent estimates could be quite accurate."
+            },
+            {
+              "paragraphId": "para-2023-i-reading-d-2",
+              "text": "This effect capitalizes on the fact that when people make errors, those errors aren’t always the same. Some people will tend to overestimate, and some to underestimate. When enough of these errors are averaged together, they cancel each other out, resulting in a more accurate estimate. If people are similar and tend to make the same errors, then their errors won’t cancel each other out. In more technical terms, the wisdom of crowds requires that people’s estimates be independent. If for whatever reasons, people’s errors become correlated or dependent, the accuracy of the estimate will go down."
+            },
+            {
+              "paragraphId": "para-2023-i-reading-d-3",
+              "text": "But a new study led by Joaquin Navajas offered an interesting twist (转折) on this classic phenomenon. The key finding of the study was that when crowds were further divided into smaller groups that were allowed to have a discussion, the averages from these groups were more accurate than those from an equal number of independent individuals. For instance, the average obtained from the estimates of four discussion groups of five was significantly more accurate than the average obtained from 20 independent individuals."
+            },
+            {
+              "paragraphId": "para-2023-i-reading-d-4",
+              "text": "In a follow-up study with 100 university students, the researchers tried to get a better sense of what the group members actually did in their discussion. Did they tend to go with those most confident about their estimates? Did they follow those least willing to change their minds? This happened some of the time, but it wasn’t the dominant response. Most frequently, the groups reported that they “shared arguments and reasoned together”. Somehow, these arguments and reasoning resulted in a global reduction in error. Although the studies led by Navajas have limitations and many questions remain, the potential implications for group discussion and decision-making are enormous."
+            }
+          ]
+        },
+        "questions": [
+          {
+            "questionId": "q-2023-i-032",
+            "questionNo": 32,
+            "groupId": "group-2023-i-reading-d",
+            "stem": "What is paragraph 2 of the text mainly about?",
+            "options": [
+              {
+                "label": "A",
+                "text": "The methods of estimation."
+              },
+              {
+                "label": "B",
+                "text": "The underlying logic of the effect."
+              },
+              {
+                "label": "C",
+                "text": "The causes of people's errors."
+              },
+              {
+                "label": "D",
+                "text": "The design of Galton's experiment."
+              }
+            ]
+          },
+          {
+            "questionId": "q-2023-i-033",
+            "questionNo": 33,
+            "groupId": "group-2023-i-reading-d",
+            "stem": "Navajas' study found that the average accuracy could increase even if ________.",
+            "options": [
+              {
+                "label": "A",
+                "text": "the crowds were relatively small"
+              },
+              {
+                "label": "B",
+                "text": "there were occasional underestimates"
+              },
+              {
+                "label": "C",
+                "text": "individuals did not communicate"
+              },
+              {
+                "label": "D",
+                "text": "estimates were not fully independent"
+              }
+            ]
+          },
+          {
+            "questionId": "q-2023-i-034",
+            "questionNo": 34,
+            "groupId": "group-2023-i-reading-d",
+            "stem": "What did the follow-up study focus on?",
+            "options": [
+              {
+                "label": "A",
+                "text": "The size of the groups."
+              },
+              {
+                "label": "B",
+                "text": "The dominant members."
+              },
+              {
+                "label": "C",
+                "text": "The discussion process."
+              },
+              {
+                "label": "D",
+                "text": "The individual estimates."
+              }
+            ]
+          },
+          {
+            "questionId": "q-2023-i-035",
+            "questionNo": 35,
+            "groupId": "group-2023-i-reading-d",
+            "stem": "What is the author's attitude toward Navajas' studies?",
+            "options": [
+              {
+                "label": "A",
+                "text": "Unclear."
+              },
+              {
+                "label": "B",
+                "text": "Dismissive."
+              },
+              {
+                "label": "C",
+                "text": "Doubtful."
+              },
+              {
+                "label": "D",
+                "text": "Approving."
+              }
+            ]
+          }
+        ],
+        "blanks": [],
+        "optionBank": [],
+        "writingTask": null
+      },
+      {
+        "groupId": "group-2023-i-seven-choices",
+        "slotId": "reading.seven-choices",
+        "family": "seven-choices",
+        "questionIds": [
+          "q-2023-i-036",
+          "q-2023-i-037",
+          "q-2023-i-038",
+          "q-2023-i-039",
+          "q-2023-i-040"
+        ],
+        "blankIds": [
+          "blank-2023-i-036",
+          "blank-2023-i-037",
+          "blank-2023-i-038",
+          "blank-2023-i-039",
+          "blank-2023-i-040"
+        ],
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2023-i:asset_projection:document",
+        "content": {
+          "blocks": [
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2023-i-seven-title",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-seven-title",
+                  "text": "Personal Forgiveness"
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2023-i-seven-p1",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-seven-p1:0",
+                  "text": "Taking responsibility for mistakes is a positive step, but don’t beat yourself up about them. To err (犯错) is human. "
+                },
+                {
+                  "kind": "blank_ref",
+                  "nodeId": "blank-ref:para-2023-i-seven-p1:116",
+                  "blankId": "blank-2023-i-036"
+                },
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-seven-p1:122",
+                  "text": " 1   You can use the following writing exercise to help you do this."
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2023-i-seven-p2",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-seven-p2:0",
+                  "text": "In a journal or on a piece of paper, put the heading “Personal Strengths.” "
+                },
+                {
+                  "kind": "blank_ref",
+                  "nodeId": "blank-ref:para-2023-i-seven-p2:75",
+                  "blankId": "blank-2023-i-037"
+                },
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-seven-p2:81",
+                  "text": " 2   Are you caring? Creative? Generous? A good listener? Fun to be around? They don’t have to be world-changing, just aspects of your personality that you’re proud of."
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2023-i-seven-p3",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-seven-p3:0",
+                  "text": "At the top of a second page, put the heading “Acts of Kindness.” On this one, list all the positive things you’ve done for others. It might be the time when you helped a friend with their homework, when you did the ironing without being asked, or when you baked cookies after the family had had a tiring day. "
+                },
+                {
+                  "kind": "blank_ref",
+                  "nodeId": "blank-ref:para-2023-i-seven-p3:309",
+                  "blankId": "blank-2023-i-038"
+                },
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-seven-p3:315",
+                  "text": " 3"
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2023-i-seven-p4",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-seven-p4:0",
+                  "text": "You could ask a friend or family member to help add to your list. "
+                },
+                {
+                  "kind": "blank_ref",
+                  "nodeId": "blank-ref:para-2023-i-seven-p4:66",
+                  "blankId": "blank-2023-i-039"
+                },
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-seven-p4:72",
+                  "text": " 4   That way, you could exchange thoughts on what makes each of you special and the aspects of your personality that shine through. In fact, don’t wait until you’ve made a mistake to try this – it’s a great way to boost self-confidence at any time."
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2023-i-seven-p5",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-seven-p5:0",
+                  "text": "It’s something of a cliché (陈词滥调) that most people learn not from their successes but their mistakes. The thing is, it’s true. "
+                },
+                {
+                  "kind": "blank_ref",
+                  "nodeId": "blank-ref:para-2023-i-seven-p5:127",
+                  "blankId": "blank-2023-i-040"
+                },
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-seven-p5:133",
+                  "text": " 5   We’re all changing and learning all the time and mistakes are a positive way to develop and grow."
+                }
+              ]
+            }
+          ]
+        },
+        "media": [],
+        "variant": {
+          "family": "seven-choices",
+          "choiceOwnership": {
+            "ownership": "shared_bank",
+            "bankId": "bank:group-2023-i-seven-choices",
+            "options": [
+              {
+                "optionId": "option:A",
+                "label": "A",
+                "content": [
+                  {
+                    "kind": "text",
+                    "nodeId": "text:group-2023-i-seven-choices:option:A",
+                    "text": "A little self-forgiveness also goes a long way."
+                  }
+                ]
+              },
+              {
+                "optionId": "option:B",
+                "label": "B",
+                "content": [
+                  {
+                    "kind": "text",
+                    "nodeId": "text:group-2023-i-seven-choices:option:B",
+                    "text": "Now list all the characteristics you like about yourself."
+                  }
+                ]
+              },
+              {
+                "optionId": "option:C",
+                "label": "C",
+                "content": [
+                  {
+                    "kind": "text",
+                    "nodeId": "text:group-2023-i-seven-choices:option:C",
+                    "text": "They might even like to have a go at doing the exercise."
+                  }
+                ]
+              },
+              {
+                "optionId": "option:D",
+                "label": "D",
+                "content": [
+                  {
+                    "kind": "text",
+                    "nodeId": "text:group-2023-i-seven-choices:option:D",
+                    "text": "It’s just as important to show yourself some forgiveness."
+                  }
+                ]
+              },
+              {
+                "optionId": "option:E",
+                "label": "E",
+                "content": [
+                  {
+                    "kind": "text",
+                    "nodeId": "text:group-2023-i-seven-choices:option:E",
+                    "text": "It doesn’t mean you have to ignore what’s happened or forget it."
+                  }
+                ]
+              },
+              {
+                "optionId": "option:F",
+                "label": "F",
+                "content": [
+                  {
+                    "kind": "text",
+                    "nodeId": "text:group-2023-i-seven-choices:option:F",
+                    "text": "Whatever it is, no matter how small it might seem, write it down."
+                  }
+                ]
+              },
+              {
+                "optionId": "option:G",
+                "label": "G",
+                "content": [
+                  {
+                    "kind": "text",
+                    "nodeId": "text:group-2023-i-seven-choices:option:G",
+                    "text": "Whatever the mistake, remember it isn’t a fixed aspect of your personality."
+                  }
+                ]
+              }
+            ]
+          },
+          "members": [
+            {
+              "questionId": "q-2023-i-036",
+              "blankId": "blank-2023-i-036",
+              "answer": {
+                "optionId": "option:D",
+                "authorityAssertionRef": "answer:q-2023-i-036"
+              }
+            },
+            {
+              "questionId": "q-2023-i-037",
+              "blankId": "blank-2023-i-037",
+              "answer": {
+                "optionId": "option:B",
+                "authorityAssertionRef": "answer:q-2023-i-037"
+              }
+            },
+            {
+              "questionId": "q-2023-i-038",
+              "blankId": "blank-2023-i-038",
+              "answer": {
+                "optionId": "option:F",
+                "authorityAssertionRef": "answer:q-2023-i-038"
+              }
+            },
+            {
+              "questionId": "q-2023-i-039",
+              "blankId": "blank-2023-i-039",
+              "answer": {
+                "optionId": "option:C",
+                "authorityAssertionRef": "answer:q-2023-i-039"
+              }
+            },
+            {
+              "questionId": "q-2023-i-040",
+              "blankId": "blank-2023-i-040",
+              "answer": {
+                "optionId": "option:G",
+                "authorityAssertionRef": "answer:q-2023-i-040"
+              }
+            }
+          ]
+        },
+        "sourceSpanRefsByTarget": {
+          "blank:blank-2023-i-036": [
+            "source-span:observation:ticket-26:paper-2023-i:asset_projection:document"
+          ],
+          "blank:blank-2023-i-037": [
+            "source-span:observation:ticket-26:paper-2023-i:asset_projection:document"
+          ],
+          "blank:blank-2023-i-038": [
+            "source-span:observation:ticket-26:paper-2023-i:asset_projection:document"
+          ],
+          "blank:blank-2023-i-039": [
+            "source-span:observation:ticket-26:paper-2023-i:asset_projection:document"
+          ],
+          "blank:blank-2023-i-040": [
+            "source-span:observation:ticket-26:paper-2023-i:asset_projection:document"
+          ]
+        },
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2023-i-seven-title",
+              "text": "Personal Forgiveness"
+            },
+            {
+              "paragraphId": "para-2023-i-seven-p1",
+              "text": "Taking responsibility for mistakes is a positive step, but don’t beat yourself up about them. To err (犯错) is human. __36__ 1   You can use the following writing exercise to help you do this."
+            },
+            {
+              "paragraphId": "para-2023-i-seven-p2",
+              "text": "In a journal or on a piece of paper, put the heading “Personal Strengths.” __37__ 2   Are you caring? Creative? Generous? A good listener? Fun to be around? They don’t have to be world-changing, just aspects of your personality that you’re proud of."
+            },
+            {
+              "paragraphId": "para-2023-i-seven-p3",
+              "text": "At the top of a second page, put the heading “Acts of Kindness.” On this one, list all the positive things you’ve done for others. It might be the time when you helped a friend with their homework, when you did the ironing without being asked, or when you baked cookies after the family had had a tiring day. __38__ 3"
+            },
+            {
+              "paragraphId": "para-2023-i-seven-p4",
+              "text": "You could ask a friend or family member to help add to your list. __39__ 4   That way, you could exchange thoughts on what makes each of you special and the aspects of your personality that shine through. In fact, don’t wait until you’ve made a mistake to try this – it’s a great way to boost self-confidence at any time."
+            },
+            {
+              "paragraphId": "para-2023-i-seven-p5",
+              "text": "It’s something of a cliché (陈词滥调) that most people learn not from their successes but their mistakes. The thing is, it’s true. __40__ 5   We’re all changing and learning all the time and mistakes are a positive way to develop and grow."
+            }
+          ]
+        },
+        "questions": [
+          {
+            "questionId": "q-2023-i-036",
+            "questionNo": 36,
+            "groupId": "group-2023-i-seven-choices",
+            "stem": "36",
+            "blankId": "blank-2023-i-036"
+          },
+          {
+            "questionId": "q-2023-i-037",
+            "questionNo": 37,
+            "groupId": "group-2023-i-seven-choices",
+            "stem": "37",
+            "blankId": "blank-2023-i-037"
+          },
+          {
+            "questionId": "q-2023-i-038",
+            "questionNo": 38,
+            "groupId": "group-2023-i-seven-choices",
+            "stem": "38",
+            "blankId": "blank-2023-i-038"
+          },
+          {
+            "questionId": "q-2023-i-039",
+            "questionNo": 39,
+            "groupId": "group-2023-i-seven-choices",
+            "stem": "39",
+            "blankId": "blank-2023-i-039"
+          },
+          {
+            "questionId": "q-2023-i-040",
+            "questionNo": 40,
+            "groupId": "group-2023-i-seven-choices",
+            "stem": "40",
+            "blankId": "blank-2023-i-040"
+          }
+        ],
+        "blanks": [],
+        "optionBank": [
+          {
+            "label": "A",
+            "text": "A little self-forgiveness also goes a long way."
+          },
+          {
+            "label": "B",
+            "text": "Now list all the characteristics you like about yourself."
+          },
+          {
+            "label": "C",
+            "text": "They might even like to have a go at doing the exercise."
+          },
+          {
+            "label": "D",
+            "text": "It’s just as important to show yourself some forgiveness."
+          },
+          {
+            "label": "E",
+            "text": "It doesn’t mean you have to ignore what’s happened or forget it."
+          },
+          {
+            "label": "F",
+            "text": "Whatever it is, no matter how small it might seem, write it down."
+          },
+          {
+            "label": "G",
+            "text": "Whatever the mistake, remember it isn’t a fixed aspect of your personality."
+          }
+        ],
+        "writingTask": null
+      },
+      {
+        "groupId": "group-2023-i-cloze",
+        "slotId": "language.cloze",
+        "family": "cloze",
+        "questionIds": [
+          "q-2023-i-041",
+          "q-2023-i-042",
+          "q-2023-i-043",
+          "q-2023-i-044",
+          "q-2023-i-045",
+          "q-2023-i-046",
+          "q-2023-i-047",
+          "q-2023-i-048",
+          "q-2023-i-049",
+          "q-2023-i-050",
+          "q-2023-i-051",
+          "q-2023-i-052",
+          "q-2023-i-053",
+          "q-2023-i-054",
+          "q-2023-i-055"
+        ],
+        "blankIds": [
+          "blank-2023-i-041",
+          "blank-2023-i-042",
+          "blank-2023-i-043",
+          "blank-2023-i-044",
+          "blank-2023-i-045",
+          "blank-2023-i-046",
+          "blank-2023-i-047",
+          "blank-2023-i-048",
+          "blank-2023-i-049",
+          "blank-2023-i-050",
+          "blank-2023-i-051",
+          "blank-2023-i-052",
+          "blank-2023-i-053",
+          "blank-2023-i-054",
+          "blank-2023-i-055"
+        ],
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2023-i:asset_projection:document",
+        "content": {
+          "blocks": [
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2023-i-cloze-title",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-cloze-title:0",
+                  "text": "On Oct.11, hundreds of runners competed in a cross-country race in Minnesota. Melanie Bailey should have "
+                },
+                {
+                  "kind": "blank_ref",
+                  "nodeId": "blank-ref:para-2023-i-cloze-title:105",
+                  "blankId": "blank-2023-i-041"
+                },
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-cloze-title:111",
+                  "text": " the course earlier than she did. Her "
+                },
+                {
+                  "kind": "blank_ref",
+                  "nodeId": "blank-ref:para-2023-i-cloze-title:149",
+                  "blankId": "blank-2023-i-042"
+                },
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-cloze-title:155",
+                  "text": " came because she was carrying a "
+                },
+                {
+                  "kind": "blank_ref",
+                  "nodeId": "blank-ref:para-2023-i-cloze-title:188",
+                  "blankId": "blank-2023-i-043"
+                },
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-cloze-title:194",
+                  "text": " across the finish line."
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2023-i-cloze-p1",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-cloze-p1:0",
+                  "text": "As reported by a local newspaper, Bailey was more than two-thirds of the way through her "
+                },
+                {
+                  "kind": "blank_ref",
+                  "nodeId": "blank-ref:para-2023-i-cloze-p1:89",
+                  "blankId": "blank-2023-i-044"
+                },
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-cloze-p1:95",
+                  "text": " when a runner in front of her began crying in pain. She "
+                },
+                {
+                  "kind": "blank_ref",
+                  "nodeId": "blank-ref:para-2023-i-cloze-p1:152",
+                  "blankId": "blank-2023-i-045"
+                },
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-cloze-p1:158",
+                  "text": " to help her fellow runner, Danielle Lenoue. Bailey took her arm to see if she could walk forward with "
+                },
+                {
+                  "kind": "blank_ref",
+                  "nodeId": "blank-ref:para-2023-i-cloze-p1:261",
+                  "blankId": "blank-2023-i-046"
+                },
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-cloze-p1:267",
+                  "text": " . She couldn’t. Bailey then "
+                },
+                {
+                  "kind": "blank_ref",
+                  "nodeId": "blank-ref:para-2023-i-cloze-p1:296",
+                  "blankId": "blank-2023-i-047"
+                },
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-cloze-p1:302",
+                  "text": " to let Lenoue climb onto her back and carried her all the way to the finish line, then another 300 feet to where Lenoue could get "
+                },
+                {
+                  "kind": "blank_ref",
+                  "nodeId": "blank-ref:para-2023-i-cloze-p1:433",
+                  "blankId": "blank-2023-i-048"
+                },
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-cloze-p1:439",
+                  "text": " attention."
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2023-i-cloze-p2",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-cloze-p2:0",
+                  "text": "Once there, Lenoue was "
+                },
+                {
+                  "kind": "blank_ref",
+                  "nodeId": "blank-ref:para-2023-i-cloze-p2:23",
+                  "blankId": "blank-2023-i-049"
+                },
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-cloze-p2:29",
+                  "text": " and later taken to a hospital, where she learned that she had serious injuries in one of her knees. She would have struggled with extreme "
+                },
+                {
+                  "kind": "blank_ref",
+                  "nodeId": "blank-ref:para-2023-i-cloze-p2:168",
+                  "blankId": "blank-2023-i-050"
+                },
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-cloze-p2:174",
+                  "text": " to make it to that aid checkpoint without Bailey’s help."
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2023-i-cloze-p3",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-cloze-p3:0",
+                  "text": "As for Bailey, she is more "
+                },
+                {
+                  "kind": "blank_ref",
+                  "nodeId": "blank-ref:para-2023-i-cloze-p3:27",
+                  "blankId": "blank-2023-i-051"
+                },
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-cloze-p3:33",
+                  "text": " about why her act is considered a big "
+                },
+                {
+                  "kind": "blank_ref",
+                  "nodeId": "blank-ref:para-2023-i-cloze-p3:72",
+                  "blankId": "blank-2023-i-052"
+                },
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-cloze-p3:78",
+                  "text": " , “She was just crying. I couldn’t "
+                },
+                {
+                  "kind": "blank_ref",
+                  "nodeId": "blank-ref:para-2023-i-cloze-p3:114",
+                  "blankId": "blank-2023-i-053"
+                },
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-cloze-p3:120",
+                  "text": " her,” Bailey told the reporter. “I feel like I was just doing the right thing.”"
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2023-i-cloze-p4",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-cloze-p4:0",
+                  "text": "Although the two young women were strangers before the "
+                },
+                {
+                  "kind": "blank_ref",
+                  "nodeId": "blank-ref:para-2023-i-cloze-p4:55",
+                  "blankId": "blank-2023-i-054"
+                },
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-cloze-p4:61",
+                  "text": " , they’ve since become friends. Neither won the race, but the "
+                },
+                {
+                  "kind": "blank_ref",
+                  "nodeId": "blank-ref:para-2023-i-cloze-p4:124",
+                  "blankId": "blank-2023-i-055"
+                },
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-cloze-p4:130",
+                  "text": " of human kindness won the day."
+                }
+              ]
+            }
+          ]
+        },
+        "media": [],
+        "variant": {
+          "family": "cloze",
+          "choiceOwnership": {
+            "ownership": "per_question",
+            "sets": [
+              {
+                "questionId": "q-2023-i-041",
+                "options": [
+                  {
+                    "optionId": "option:q-2023-i-041:A",
+                    "label": "A",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-cloze:q-2023-i-041:option:A",
+                        "text": "designed"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-041:B",
+                    "label": "B",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-cloze:q-2023-i-041:option:B",
+                        "text": "followed"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-041:C",
+                    "label": "C",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-cloze:q-2023-i-041:option:C",
+                        "text": "changed"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-041:D",
+                    "label": "D",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-cloze:q-2023-i-041:option:D",
+                        "text": "finished"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "questionId": "q-2023-i-042",
+                "options": [
+                  {
+                    "optionId": "option:q-2023-i-042:A",
+                    "label": "A",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-cloze:q-2023-i-042:option:A",
+                        "text": "delay"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-042:B",
+                    "label": "B",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-cloze:q-2023-i-042:option:B",
+                        "text": "chance"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-042:C",
+                    "label": "C",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-cloze:q-2023-i-042:option:C",
+                        "text": "preference"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-042:D",
+                    "label": "D",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-cloze:q-2023-i-042:option:D",
+                        "text": "warning"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "questionId": "q-2023-i-043",
+                "options": [
+                  {
+                    "optionId": "option:q-2023-i-043:A",
+                    "label": "A",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-cloze:q-2023-i-043:option:A",
+                        "text": "judge"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-043:B",
+                    "label": "B",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-cloze:q-2023-i-043:option:B",
+                        "text": "volunteer"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-043:C",
+                    "label": "C",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-cloze:q-2023-i-043:option:C",
+                        "text": "classmate"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-043:D",
+                    "label": "D",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-cloze:q-2023-i-043:option:D",
+                        "text": "competitor"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "questionId": "q-2023-i-044",
+                "options": [
+                  {
+                    "optionId": "option:q-2023-i-044:A",
+                    "label": "A",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-cloze:q-2023-i-044:option:A",
+                        "text": "race"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-044:B",
+                    "label": "B",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-cloze:q-2023-i-044:option:B",
+                        "text": "school"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-044:C",
+                    "label": "C",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-cloze:q-2023-i-044:option:C",
+                        "text": "town"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-044:D",
+                    "label": "D",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-cloze:q-2023-i-044:option:D",
+                        "text": "training"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "questionId": "q-2023-i-045",
+                "options": [
+                  {
+                    "optionId": "option:q-2023-i-045:A",
+                    "label": "A",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-cloze:q-2023-i-045:option:A",
+                        "text": "agreed"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-045:B",
+                    "label": "B",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-cloze:q-2023-i-045:option:B",
+                        "text": "returned"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-045:C",
+                    "label": "C",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-cloze:q-2023-i-045:option:C",
+                        "text": "stopped"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-045:D",
+                    "label": "D",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-cloze:q-2023-i-045:option:D",
+                        "text": "promised"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "questionId": "q-2023-i-046",
+                "options": [
+                  {
+                    "optionId": "option:q-2023-i-046:A",
+                    "label": "A",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-cloze:q-2023-i-046:option:A",
+                        "text": "courage"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-046:B",
+                    "label": "B",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-cloze:q-2023-i-046:option:B",
+                        "text": "aid"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-046:C",
+                    "label": "C",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-cloze:q-2023-i-046:option:C",
+                        "text": "patience"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-046:D",
+                    "label": "D",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-cloze:q-2023-i-046:option:D",
+                        "text": "advice"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "questionId": "q-2023-i-047",
+                "options": [
+                  {
+                    "optionId": "option:q-2023-i-047:A",
+                    "label": "A",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-cloze:q-2023-i-047:option:A",
+                        "text": "went away"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-047:B",
+                    "label": "B",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-cloze:q-2023-i-047:option:B",
+                        "text": "stood up"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-047:C",
+                    "label": "C",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-cloze:q-2023-i-047:option:C",
+                        "text": "stepped aside"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-047:D",
+                    "label": "D",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-cloze:q-2023-i-047:option:D",
+                        "text": "bent down"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "questionId": "q-2023-i-048",
+                "options": [
+                  {
+                    "optionId": "option:q-2023-i-048:A",
+                    "label": "A",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-cloze:q-2023-i-048:option:A",
+                        "text": "medical"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-048:B",
+                    "label": "B",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-cloze:q-2023-i-048:option:B",
+                        "text": "public"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-048:C",
+                    "label": "C",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-cloze:q-2023-i-048:option:C",
+                        "text": "constant"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-048:D",
+                    "label": "D",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-cloze:q-2023-i-048:option:D",
+                        "text": "equal"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "questionId": "q-2023-i-049",
+                "options": [
+                  {
+                    "optionId": "option:q-2023-i-049:A",
+                    "label": "A",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-cloze:q-2023-i-049:option:A",
+                        "text": "founded"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-049:B",
+                    "label": "B",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-cloze:q-2023-i-049:option:B",
+                        "text": "evaluated"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-049:C",
+                    "label": "C",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-cloze:q-2023-i-049:option:C",
+                        "text": "identified"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-049:D",
+                    "label": "D",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-cloze:q-2023-i-049:option:D",
+                        "text": "appreciated"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "questionId": "q-2023-i-050",
+                "options": [
+                  {
+                    "optionId": "option:q-2023-i-050:A",
+                    "label": "A",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-cloze:q-2023-i-050:option:A",
+                        "text": "hunger"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-050:B",
+                    "label": "B",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-cloze:q-2023-i-050:option:B",
+                        "text": "pain"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-050:C",
+                    "label": "C",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-cloze:q-2023-i-050:option:C",
+                        "text": "cold"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-050:D",
+                    "label": "D",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-cloze:q-2023-i-050:option:D",
+                        "text": "tiredness"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "questionId": "q-2023-i-051",
+                "options": [
+                  {
+                    "optionId": "option:q-2023-i-051:A",
+                    "label": "A",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-cloze:q-2023-i-051:option:A",
+                        "text": "worried"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-051:B",
+                    "label": "B",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-cloze:q-2023-i-051:option:B",
+                        "text": "ashamed"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-051:C",
+                    "label": "C",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-cloze:q-2023-i-051:option:C",
+                        "text": "confused"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-051:D",
+                    "label": "D",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-cloze:q-2023-i-051:option:D",
+                        "text": "discouraged"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "questionId": "q-2023-i-052",
+                "options": [
+                  {
+                    "optionId": "option:q-2023-i-052:A",
+                    "label": "A",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-cloze:q-2023-i-052:option:A",
+                        "text": "game"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-052:B",
+                    "label": "B",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-cloze:q-2023-i-052:option:B",
+                        "text": "crime"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-052:C",
+                    "label": "C",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-cloze:q-2023-i-052:option:C",
+                        "text": "potential"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-052:D",
+                    "label": "D",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-cloze:q-2023-i-052:option:D",
+                        "text": "deal"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "questionId": "q-2023-i-053",
+                "options": [
+                  {
+                    "optionId": "option:q-2023-i-053:A",
+                    "label": "A",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-cloze:q-2023-i-053:option:A",
+                        "text": "leave"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-053:B",
+                    "label": "B",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-cloze:q-2023-i-053:option:B",
+                        "text": "cure"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-053:C",
+                    "label": "C",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-cloze:q-2023-i-053:option:C",
+                        "text": "bother"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-053:D",
+                    "label": "D",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-cloze:q-2023-i-053:option:D",
+                        "text": "understand"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "questionId": "q-2023-i-054",
+                "options": [
+                  {
+                    "optionId": "option:q-2023-i-054:A",
+                    "label": "A",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-cloze:q-2023-i-054:option:A",
+                        "text": "ride"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-054:B",
+                    "label": "B",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-cloze:q-2023-i-054:option:B",
+                        "text": "test"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-054:C",
+                    "label": "C",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-cloze:q-2023-i-054:option:C",
+                        "text": "meet"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-054:D",
+                    "label": "D",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-cloze:q-2023-i-054:option:D",
+                        "text": "show"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "questionId": "q-2023-i-055",
+                "options": [
+                  {
+                    "optionId": "option:q-2023-i-055:A",
+                    "label": "A",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-cloze:q-2023-i-055:option:A",
+                        "text": "secret"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-055:B",
+                    "label": "B",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-cloze:q-2023-i-055:option:B",
+                        "text": "display"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-055:C",
+                    "label": "C",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-cloze:q-2023-i-055:option:C",
+                        "text": "benefit"
+                      }
+                    ]
+                  },
+                  {
+                    "optionId": "option:q-2023-i-055:D",
+                    "label": "D",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "nodeId": "text:group-2023-i-cloze:q-2023-i-055:option:D",
+                        "text": "exchange"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "sourceSpanRefsByTarget": {
+          "blank:blank-2023-i-041": [
+            "source-span:observation:ticket-26:paper-2023-i:asset_projection:document"
+          ],
+          "blank:blank-2023-i-042": [
+            "source-span:observation:ticket-26:paper-2023-i:asset_projection:document"
+          ],
+          "blank:blank-2023-i-043": [
+            "source-span:observation:ticket-26:paper-2023-i:asset_projection:document"
+          ],
+          "blank:blank-2023-i-044": [
+            "source-span:observation:ticket-26:paper-2023-i:asset_projection:document"
+          ],
+          "blank:blank-2023-i-045": [
+            "source-span:observation:ticket-26:paper-2023-i:asset_projection:document"
+          ],
+          "blank:blank-2023-i-046": [
+            "source-span:observation:ticket-26:paper-2023-i:asset_projection:document"
+          ],
+          "blank:blank-2023-i-047": [
+            "source-span:observation:ticket-26:paper-2023-i:asset_projection:document"
+          ],
+          "blank:blank-2023-i-048": [
+            "source-span:observation:ticket-26:paper-2023-i:asset_projection:document"
+          ],
+          "blank:blank-2023-i-049": [
+            "source-span:observation:ticket-26:paper-2023-i:asset_projection:document"
+          ],
+          "blank:blank-2023-i-050": [
+            "source-span:observation:ticket-26:paper-2023-i:asset_projection:document"
+          ],
+          "blank:blank-2023-i-051": [
+            "source-span:observation:ticket-26:paper-2023-i:asset_projection:document"
+          ],
+          "blank:blank-2023-i-052": [
+            "source-span:observation:ticket-26:paper-2023-i:asset_projection:document"
+          ],
+          "blank:blank-2023-i-053": [
+            "source-span:observation:ticket-26:paper-2023-i:asset_projection:document"
+          ],
+          "blank:blank-2023-i-054": [
+            "source-span:observation:ticket-26:paper-2023-i:asset_projection:document"
+          ],
+          "blank:blank-2023-i-055": [
+            "source-span:observation:ticket-26:paper-2023-i:asset_projection:document"
+          ]
+        },
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2023-i-cloze-title",
+              "text": "On Oct.11, hundreds of runners competed in a cross-country race in Minnesota. Melanie Bailey should have __41__ the course earlier than she did. Her __42__ came because she was carrying a __43__ across the finish line."
+            },
+            {
+              "paragraphId": "para-2023-i-cloze-p1",
+              "text": "As reported by a local newspaper, Bailey was more than two-thirds of the way through her __44__ when a runner in front of her began crying in pain. She __45__ to help her fellow runner, Danielle Lenoue. Bailey took her arm to see if she could walk forward with __46__ . She couldn’t. Bailey then __47__ to let Lenoue climb onto her back and carried her all the way to the finish line, then another 300 feet to where Lenoue could get __48__ attention."
+            },
+            {
+              "paragraphId": "para-2023-i-cloze-p2",
+              "text": "Once there, Lenoue was __49__ and later taken to a hospital, where she learned that she had serious injuries in one of her knees. She would have struggled with extreme __50__ to make it to that aid checkpoint without Bailey’s help."
+            },
+            {
+              "paragraphId": "para-2023-i-cloze-p3",
+              "text": "As for Bailey, she is more __51__ about why her act is considered a big __52__ , “She was just crying. I couldn’t __53__ her,” Bailey told the reporter. “I feel like I was just doing the right thing.”"
+            },
+            {
+              "paragraphId": "para-2023-i-cloze-p4",
+              "text": "Although the two young women were strangers before the __54__ , they’ve since become friends. Neither won the race, but the __55__ of human kindness won the day."
+            }
+          ]
+        },
+        "questions": [
+          {
+            "questionId": "q-2023-i-041",
+            "questionNo": 41,
+            "groupId": "group-2023-i-cloze",
+            "stem": "41",
+            "blankId": "blank-2023-i-041",
+            "options": [
+              {
+                "label": "A",
+                "text": "designed"
+              },
+              {
+                "label": "B",
+                "text": "followed"
+              },
+              {
+                "label": "C",
+                "text": "changed"
+              },
+              {
+                "label": "D",
+                "text": "finished"
+              }
+            ]
+          },
+          {
+            "questionId": "q-2023-i-042",
+            "questionNo": 42,
+            "groupId": "group-2023-i-cloze",
+            "stem": "42",
+            "blankId": "blank-2023-i-042",
+            "options": [
+              {
+                "label": "A",
+                "text": "delay"
+              },
+              {
+                "label": "B",
+                "text": "chance"
+              },
+              {
+                "label": "C",
+                "text": "preference"
+              },
+              {
+                "label": "D",
+                "text": "warning"
+              }
+            ]
+          },
+          {
+            "questionId": "q-2023-i-043",
+            "questionNo": 43,
+            "groupId": "group-2023-i-cloze",
+            "stem": "43",
+            "blankId": "blank-2023-i-043",
+            "options": [
+              {
+                "label": "A",
+                "text": "judge"
+              },
+              {
+                "label": "B",
+                "text": "volunteer"
+              },
+              {
+                "label": "C",
+                "text": "classmate"
+              },
+              {
+                "label": "D",
+                "text": "competitor"
+              }
+            ]
+          },
+          {
+            "questionId": "q-2023-i-044",
+            "questionNo": 44,
+            "groupId": "group-2023-i-cloze",
+            "stem": "44",
+            "blankId": "blank-2023-i-044",
+            "options": [
+              {
+                "label": "A",
+                "text": "race"
+              },
+              {
+                "label": "B",
+                "text": "school"
+              },
+              {
+                "label": "C",
+                "text": "town"
+              },
+              {
+                "label": "D",
+                "text": "training"
+              }
+            ]
+          },
+          {
+            "questionId": "q-2023-i-045",
+            "questionNo": 45,
+            "groupId": "group-2023-i-cloze",
+            "stem": "45",
+            "blankId": "blank-2023-i-045",
+            "options": [
+              {
+                "label": "A",
+                "text": "agreed"
+              },
+              {
+                "label": "B",
+                "text": "returned"
+              },
+              {
+                "label": "C",
+                "text": "stopped"
+              },
+              {
+                "label": "D",
+                "text": "promised"
+              }
+            ]
+          },
+          {
+            "questionId": "q-2023-i-046",
+            "questionNo": 46,
+            "groupId": "group-2023-i-cloze",
+            "stem": "46",
+            "blankId": "blank-2023-i-046",
+            "options": [
+              {
+                "label": "A",
+                "text": "courage"
+              },
+              {
+                "label": "B",
+                "text": "aid"
+              },
+              {
+                "label": "C",
+                "text": "patience"
+              },
+              {
+                "label": "D",
+                "text": "advice"
+              }
+            ]
+          },
+          {
+            "questionId": "q-2023-i-047",
+            "questionNo": 47,
+            "groupId": "group-2023-i-cloze",
+            "stem": "47",
+            "blankId": "blank-2023-i-047",
+            "options": [
+              {
+                "label": "A",
+                "text": "went away"
+              },
+              {
+                "label": "B",
+                "text": "stood up"
+              },
+              {
+                "label": "C",
+                "text": "stepped aside"
+              },
+              {
+                "label": "D",
+                "text": "bent down"
+              }
+            ]
+          },
+          {
+            "questionId": "q-2023-i-048",
+            "questionNo": 48,
+            "groupId": "group-2023-i-cloze",
+            "stem": "48",
+            "blankId": "blank-2023-i-048",
+            "options": [
+              {
+                "label": "A",
+                "text": "medical"
+              },
+              {
+                "label": "B",
+                "text": "public"
+              },
+              {
+                "label": "C",
+                "text": "constant"
+              },
+              {
+                "label": "D",
+                "text": "equal"
+              }
+            ]
+          },
+          {
+            "questionId": "q-2023-i-049",
+            "questionNo": 49,
+            "groupId": "group-2023-i-cloze",
+            "stem": "49",
+            "blankId": "blank-2023-i-049",
+            "options": [
+              {
+                "label": "A",
+                "text": "founded"
+              },
+              {
+                "label": "B",
+                "text": "evaluated"
+              },
+              {
+                "label": "C",
+                "text": "identified"
+              },
+              {
+                "label": "D",
+                "text": "appreciated"
+              }
+            ]
+          },
+          {
+            "questionId": "q-2023-i-050",
+            "questionNo": 50,
+            "groupId": "group-2023-i-cloze",
+            "stem": "50",
+            "blankId": "blank-2023-i-050",
+            "options": [
+              {
+                "label": "A",
+                "text": "hunger"
+              },
+              {
+                "label": "B",
+                "text": "pain"
+              },
+              {
+                "label": "C",
+                "text": "cold"
+              },
+              {
+                "label": "D",
+                "text": "tiredness"
+              }
+            ]
+          },
+          {
+            "questionId": "q-2023-i-051",
+            "questionNo": 51,
+            "groupId": "group-2023-i-cloze",
+            "stem": "51",
+            "blankId": "blank-2023-i-051",
+            "options": [
+              {
+                "label": "A",
+                "text": "worried"
+              },
+              {
+                "label": "B",
+                "text": "ashamed"
+              },
+              {
+                "label": "C",
+                "text": "confused"
+              },
+              {
+                "label": "D",
+                "text": "discouraged"
+              }
+            ]
+          },
+          {
+            "questionId": "q-2023-i-052",
+            "questionNo": 52,
+            "groupId": "group-2023-i-cloze",
+            "stem": "52",
+            "blankId": "blank-2023-i-052",
+            "options": [
+              {
+                "label": "A",
+                "text": "game"
+              },
+              {
+                "label": "B",
+                "text": "crime"
+              },
+              {
+                "label": "C",
+                "text": "potential"
+              },
+              {
+                "label": "D",
+                "text": "deal"
+              }
+            ]
+          },
+          {
+            "questionId": "q-2023-i-053",
+            "questionNo": 53,
+            "groupId": "group-2023-i-cloze",
+            "stem": "53",
+            "blankId": "blank-2023-i-053",
+            "options": [
+              {
+                "label": "A",
+                "text": "leave"
+              },
+              {
+                "label": "B",
+                "text": "cure"
+              },
+              {
+                "label": "C",
+                "text": "bother"
+              },
+              {
+                "label": "D",
+                "text": "understand"
+              }
+            ]
+          },
+          {
+            "questionId": "q-2023-i-054",
+            "questionNo": 54,
+            "groupId": "group-2023-i-cloze",
+            "stem": "54",
+            "blankId": "blank-2023-i-054",
+            "options": [
+              {
+                "label": "A",
+                "text": "ride"
+              },
+              {
+                "label": "B",
+                "text": "test"
+              },
+              {
+                "label": "C",
+                "text": "meet"
+              },
+              {
+                "label": "D",
+                "text": "show"
+              }
+            ]
+          },
+          {
+            "questionId": "q-2023-i-055",
+            "questionNo": 55,
+            "groupId": "group-2023-i-cloze",
+            "stem": "55",
+            "blankId": "blank-2023-i-055",
+            "options": [
+              {
+                "label": "A",
+                "text": "secret"
+              },
+              {
+                "label": "B",
+                "text": "display"
+              },
+              {
+                "label": "C",
+                "text": "benefit"
+              },
+              {
+                "label": "D",
+                "text": "exchange"
+              }
+            ]
+          }
+        ],
+        "blanks": [],
+        "optionBank": [],
+        "writingTask": null
+      },
+      {
+        "groupId": "group-2023-i-grammar-fill",
+        "slotId": "language.grammar-fill",
+        "family": "grammar-fill",
+        "questionIds": [
+          "q-2023-i-056",
+          "q-2023-i-057",
+          "q-2023-i-058",
+          "q-2023-i-059",
+          "q-2023-i-060",
+          "q-2023-i-061",
+          "q-2023-i-062",
+          "q-2023-i-063",
+          "q-2023-i-064",
+          "q-2023-i-065"
+        ],
+        "blankIds": [
+          "blank-2023-i-056",
+          "blank-2023-i-057",
+          "blank-2023-i-058",
+          "blank-2023-i-059",
+          "blank-2023-i-060",
+          "blank-2023-i-061",
+          "blank-2023-i-062",
+          "blank-2023-i-063",
+          "blank-2023-i-064",
+          "blank-2023-i-065"
+        ],
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2023-i:asset_projection:document",
+        "content": {
+          "blocks": [
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2023-i-grammar-fill-title",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-grammar-fill-title:0",
+                  "text": "Xiao long bao (soup dumplings) , those amazing constructions of delicate dumpling wrappers, encasing hot,  "
+                },
+                {
+                  "kind": "blank_ref",
+                  "nodeId": "blank-ref:para-2023-i-grammar-fill-title:107",
+                  "blankId": "blank-2023-i-056"
+                },
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-grammar-fill-title:113",
+                  "text": " (taste) soup and sweet, fresh meat, are far and away my favorite Chinese street food. The dumplings arrive steaming and dangerously hot. To eat one, you have to decide whether  "
+                },
+                {
+                  "kind": "blank_ref",
+                  "nodeId": "blank-ref:para-2023-i-grammar-fill-title:291",
+                  "blankId": "blank-2023-i-057"
+                },
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-grammar-fill-title:297",
+                  "text": " (bite) a small hole in it first, releasing the stream and risking a spill (溢出) ,  "
+                },
+                {
+                  "kind": "blank_ref",
+                  "nodeId": "blank-ref:para-2023-i-grammar-fill-title:380",
+                  "blankId": "blank-2023-i-058"
+                },
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-grammar-fill-title:386",
+                  "text": "to put the whole dumpling in your mouth, letting the hot soup explode on your tongue. Shanghai may be the  "
+                },
+                {
+                  "kind": "blank_ref",
+                  "nodeId": "blank-ref:para-2023-i-grammar-fill-title:493",
+                  "blankId": "blank-2023-i-059"
+                },
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-grammar-fill-title:499",
+                  "text": " (recognize) home of the soup dumplings but food historians will actually point you to the neighboring canal town of Nanxiang as Xiao long Bao’s birthplace. There you will find them prepared differently – more dumpling and less soup, and the wrappers are pressed  "
+                },
+                {
+                  "kind": "blank_ref",
+                  "nodeId": "blank-ref:para-2023-i-grammar-fill-title:763",
+                  "blankId": "blank-2023-i-060"
+                },
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-grammar-fill-title:769",
+                  "text": "hand rather than rolled. Nanxiang aside, the best Xiao long bao have a fine skin, allowing them  "
+                },
+                {
+                  "kind": "blank_ref",
+                  "nodeId": "blank-ref:para-2023-i-grammar-fill-title:866",
+                  "blankId": "blank-2023-i-061"
+                },
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-grammar-fill-title:872",
+                  "text": " (lift) out of the steamer basket without allowing them tearing or spilling any of  "
+                },
+                {
+                  "kind": "blank_ref",
+                  "nodeId": "blank-ref:para-2023-i-grammar-fill-title:956",
+                  "blankId": "blank-2023-i-062"
+                },
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-grammar-fill-title:962",
+                  "text": " (they) contents. The meat should be fresh with "
+                },
+                {
+                  "kind": "blank_ref",
+                  "nodeId": "blank-ref:para-2023-i-grammar-fill-title:1010",
+                  "blankId": "blank-2023-i-063"
+                },
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-grammar-fill-title:1016",
+                  "text": "touch of sweetness and the soup hot, clear and delicious. No matter where I buy them, one steamer is  "
+                },
+                {
+                  "kind": "blank_ref",
+                  "nodeId": "blank-ref:para-2023-i-grammar-fill-title:1118",
+                  "blankId": "blank-2023-i-064"
+                },
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-grammar-fill-title:1124",
+                  "text": " (rare) enough, yet two seems greedy, so I am always left  "
+                },
+                {
+                  "kind": "blank_ref",
+                  "nodeId": "blank-ref:para-2023-i-grammar-fill-title:1183",
+                  "blankId": "blank-2023-i-065"
+                },
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-grammar-fill-title:1189",
+                  "text": " (want) more next time."
+                }
+              ]
+            }
+          ]
+        },
+        "media": [],
+        "variant": {
+          "family": "grammar-fill",
+          "choiceOwnership": {
+            "ownership": "none"
+          },
+          "promptBindings": [
+            {
+              "blankId": "blank-2023-i-056",
+              "provision": "source_prompt",
+              "prompt": "taste",
+              "authorityObservationRef": "observation:ticket-26:paper-2023-i:grammar-fill-prompt:blank-2023-i-056"
+            },
+            {
+              "blankId": "blank-2023-i-057",
+              "provision": "source_prompt",
+              "prompt": "bite",
+              "authorityObservationRef": "observation:ticket-26:paper-2023-i:grammar-fill-prompt:blank-2023-i-057"
+            },
+            {
+              "blankId": "blank-2023-i-058",
+              "provision": "source_proven_none",
+              "authorityObservationRef": "observation:ticket-26:paper-2023-i:grammar-fill-prompt:blank-2023-i-058"
+            },
+            {
+              "blankId": "blank-2023-i-059",
+              "provision": "source_prompt",
+              "prompt": "recognize",
+              "authorityObservationRef": "observation:ticket-26:paper-2023-i:grammar-fill-prompt:blank-2023-i-059"
+            },
+            {
+              "blankId": "blank-2023-i-060",
+              "provision": "source_proven_none",
+              "authorityObservationRef": "observation:ticket-26:paper-2023-i:grammar-fill-prompt:blank-2023-i-060"
+            },
+            {
+              "blankId": "blank-2023-i-061",
+              "provision": "source_prompt",
+              "prompt": "lift",
+              "authorityObservationRef": "observation:ticket-26:paper-2023-i:grammar-fill-prompt:blank-2023-i-061"
+            },
+            {
+              "blankId": "blank-2023-i-062",
+              "provision": "source_prompt",
+              "prompt": "they",
+              "authorityObservationRef": "observation:ticket-26:paper-2023-i:grammar-fill-prompt:blank-2023-i-062"
+            },
+            {
+              "blankId": "blank-2023-i-063",
+              "provision": "source_proven_none",
+              "authorityObservationRef": "observation:ticket-26:paper-2023-i:grammar-fill-prompt:blank-2023-i-063"
+            },
+            {
+              "blankId": "blank-2023-i-064",
+              "provision": "source_prompt",
+              "prompt": "rare",
+              "authorityObservationRef": "observation:ticket-26:paper-2023-i:grammar-fill-prompt:blank-2023-i-064"
+            },
+            {
+              "blankId": "blank-2023-i-065",
+              "provision": "source_prompt",
+              "prompt": "want",
+              "authorityObservationRef": "observation:ticket-26:paper-2023-i:grammar-fill-prompt:blank-2023-i-065"
+            }
+          ]
+        },
+        "sourceSpanRefsByTarget": {
+          "blank:blank-2023-i-056": [
+            "source-span:observation:ticket-26:paper-2023-i:asset_projection:document"
+          ],
+          "blank:blank-2023-i-057": [
+            "source-span:observation:ticket-26:paper-2023-i:asset_projection:document"
+          ],
+          "blank:blank-2023-i-058": [
+            "source-span:observation:ticket-26:paper-2023-i:asset_projection:document"
+          ],
+          "blank:blank-2023-i-059": [
+            "source-span:observation:ticket-26:paper-2023-i:asset_projection:document"
+          ],
+          "blank:blank-2023-i-060": [
+            "source-span:observation:ticket-26:paper-2023-i:asset_projection:document"
+          ],
+          "blank:blank-2023-i-061": [
+            "source-span:observation:ticket-26:paper-2023-i:asset_projection:document"
+          ],
+          "blank:blank-2023-i-062": [
+            "source-span:observation:ticket-26:paper-2023-i:asset_projection:document"
+          ],
+          "blank:blank-2023-i-063": [
+            "source-span:observation:ticket-26:paper-2023-i:asset_projection:document"
+          ],
+          "blank:blank-2023-i-064": [
+            "source-span:observation:ticket-26:paper-2023-i:asset_projection:document"
+          ],
+          "blank:blank-2023-i-065": [
+            "source-span:observation:ticket-26:paper-2023-i:asset_projection:document"
+          ],
+          "prompt_provision:blank-2023-i-056": [
+            "source-span:observation:ticket-26:paper-2023-i:grammar-fill-prompt:blank-2023-i-056"
+          ],
+          "prompt_provision:blank-2023-i-057": [
+            "source-span:observation:ticket-26:paper-2023-i:grammar-fill-prompt:blank-2023-i-057"
+          ],
+          "prompt_provision:blank-2023-i-058": [
+            "source-span:observation:ticket-26:paper-2023-i:grammar-fill-prompt:blank-2023-i-058"
+          ],
+          "prompt_provision:blank-2023-i-059": [
+            "source-span:observation:ticket-26:paper-2023-i:grammar-fill-prompt:blank-2023-i-059"
+          ],
+          "prompt_provision:blank-2023-i-060": [
+            "source-span:observation:ticket-26:paper-2023-i:grammar-fill-prompt:blank-2023-i-060"
+          ],
+          "prompt_provision:blank-2023-i-061": [
+            "source-span:observation:ticket-26:paper-2023-i:grammar-fill-prompt:blank-2023-i-061"
+          ],
+          "prompt_provision:blank-2023-i-062": [
+            "source-span:observation:ticket-26:paper-2023-i:grammar-fill-prompt:blank-2023-i-062"
+          ],
+          "prompt_provision:blank-2023-i-063": [
+            "source-span:observation:ticket-26:paper-2023-i:grammar-fill-prompt:blank-2023-i-063"
+          ],
+          "prompt_provision:blank-2023-i-064": [
+            "source-span:observation:ticket-26:paper-2023-i:grammar-fill-prompt:blank-2023-i-064"
+          ],
+          "prompt_provision:blank-2023-i-065": [
+            "source-span:observation:ticket-26:paper-2023-i:grammar-fill-prompt:blank-2023-i-065"
+          ]
+        },
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2023-i-grammar-fill-title",
+              "text": "Xiao long bao (soup dumplings) , those amazing constructions of delicate dumpling wrappers, encasing hot,  __56__ (taste) soup and sweet, fresh meat, are far and away my favorite Chinese street food. The dumplings arrive steaming and dangerously hot. To eat one, you have to decide whether  __57__ (bite) a small hole in it first, releasing the stream and risking a spill (溢出) ,  __58__to put the whole dumpling in your mouth, letting the hot soup explode on your tongue. Shanghai may be the  __59__ (recognize) home of the soup dumplings but food historians will actually point you to the neighboring canal town of Nanxiang as Xiao long Bao’s birthplace. There you will find them prepared differently – more dumpling and less soup, and the wrappers are pressed  __60__hand rather than rolled. Nanxiang aside, the best Xiao long bao have a fine skin, allowing them  __61__ (lift) out of the steamer basket without allowing them tearing or spilling any of  __62__ (they) contents. The meat should be fresh with __63__touch of sweetness and the soup hot, clear and delicious. No matter where I buy them, one steamer is  __64__ (rare) enough, yet two seems greedy, so I am always left  __65__ (want) more next time."
+            }
+          ]
+        },
+        "questions": [
+          {
+            "questionId": "q-2023-i-056",
+            "questionNo": 56,
+            "groupId": "group-2023-i-grammar-fill",
+            "stem": "56",
+            "blankId": "blank-2023-i-056"
+          },
+          {
+            "questionId": "q-2023-i-057",
+            "questionNo": 57,
+            "groupId": "group-2023-i-grammar-fill",
+            "stem": "57",
+            "blankId": "blank-2023-i-057"
+          },
+          {
+            "questionId": "q-2023-i-058",
+            "questionNo": 58,
+            "groupId": "group-2023-i-grammar-fill",
+            "stem": "58",
+            "blankId": "blank-2023-i-058"
+          },
+          {
+            "questionId": "q-2023-i-059",
+            "questionNo": 59,
+            "groupId": "group-2023-i-grammar-fill",
+            "stem": "59",
+            "blankId": "blank-2023-i-059"
+          },
+          {
+            "questionId": "q-2023-i-060",
+            "questionNo": 60,
+            "groupId": "group-2023-i-grammar-fill",
+            "stem": "60",
+            "blankId": "blank-2023-i-060"
+          },
+          {
+            "questionId": "q-2023-i-061",
+            "questionNo": 61,
+            "groupId": "group-2023-i-grammar-fill",
+            "stem": "61",
+            "blankId": "blank-2023-i-061"
+          },
+          {
+            "questionId": "q-2023-i-062",
+            "questionNo": 62,
+            "groupId": "group-2023-i-grammar-fill",
+            "stem": "62",
+            "blankId": "blank-2023-i-062"
+          },
+          {
+            "questionId": "q-2023-i-063",
+            "questionNo": 63,
+            "groupId": "group-2023-i-grammar-fill",
+            "stem": "63",
+            "blankId": "blank-2023-i-063"
+          },
+          {
+            "questionId": "q-2023-i-064",
+            "questionNo": 64,
+            "groupId": "group-2023-i-grammar-fill",
+            "stem": "64",
+            "blankId": "blank-2023-i-064"
+          },
+          {
+            "questionId": "q-2023-i-065",
+            "questionNo": 65,
+            "groupId": "group-2023-i-grammar-fill",
+            "stem": "65",
+            "blankId": "blank-2023-i-065"
+          }
+        ],
+        "blanks": [
+          {
+            "blankId": "blank-2023-i-056",
+            "groupId": "group-2023-i-grammar-fill",
+            "questionId": "q-2023-i-056",
+            "prompt": "taste"
+          },
+          {
+            "blankId": "blank-2023-i-057",
+            "groupId": "group-2023-i-grammar-fill",
+            "questionId": "q-2023-i-057",
+            "prompt": "bite"
+          },
+          {
+            "blankId": "blank-2023-i-058",
+            "groupId": "group-2023-i-grammar-fill",
+            "questionId": "q-2023-i-058"
+          },
+          {
+            "blankId": "blank-2023-i-059",
+            "groupId": "group-2023-i-grammar-fill",
+            "questionId": "q-2023-i-059",
+            "prompt": "recognize"
+          },
+          {
+            "blankId": "blank-2023-i-060",
+            "groupId": "group-2023-i-grammar-fill",
+            "questionId": "q-2023-i-060"
+          },
+          {
+            "blankId": "blank-2023-i-061",
+            "groupId": "group-2023-i-grammar-fill",
+            "questionId": "q-2023-i-061",
+            "prompt": "lift"
+          },
+          {
+            "blankId": "blank-2023-i-062",
+            "groupId": "group-2023-i-grammar-fill",
+            "questionId": "q-2023-i-062",
+            "prompt": "they"
+          },
+          {
+            "blankId": "blank-2023-i-063",
+            "groupId": "group-2023-i-grammar-fill",
+            "questionId": "q-2023-i-063"
+          },
+          {
+            "blankId": "blank-2023-i-064",
+            "groupId": "group-2023-i-grammar-fill",
+            "questionId": "q-2023-i-064",
+            "prompt": "rare"
+          },
+          {
+            "blankId": "blank-2023-i-065",
+            "groupId": "group-2023-i-grammar-fill",
+            "questionId": "q-2023-i-065",
+            "prompt": "want"
+          }
+        ],
+        "optionBank": [],
+        "writingTask": null
+      },
+      {
+        "groupId": "group-2023-i-writing-application",
+        "slotId": "writing.application",
+        "family": "application-writing",
+        "questionIds": [],
+        "blankIds": [],
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2023-i:asset_projection:document",
+        "content": {
+          "blocks": [
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2023-i-writing-app-title",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-writing-app-title",
+                  "text": "假定你是李华，外教Ryan准备将学生随机分为两人一组，让大家课后练习口语，你认为这样分组存在问题。请你给外教写一封邮件，内容包括："
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2023-i-writing-app-p1",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-writing-app-p1",
+                  "text": "1. 说明问题；"
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2023-i-writing-app-p2",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-writing-app-p2",
+                  "text": "2. 提出建议。"
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2023-i-writing-app-p3",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-writing-app-p3",
+                  "text": "1. 写作词数应为80个左右；"
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2023-i-writing-app-p4",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-writing-app-p4",
+                  "text": "2. 请按如下格式在答题卡的相应位置作答。"
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2023-i-writing-app-p5",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-writing-app-p5",
+                  "text": "Dear Ryan,"
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2023-i-writing-app-p6",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-writing-app-p6",
+                  "text": "I’m Li Hua from Class 3."
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2023-i-writing-app-p7",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-writing-app-p7",
+                  "text": "Yours sincerely,"
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2023-i-writing-app-p8",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-writing-app-p8",
+                  "text": "Li Hua"
+                }
+              ]
+            }
+          ]
+        },
+        "media": [],
+        "variant": {
+          "family": "application-writing",
+          "mode": "legacy_opaque",
+          "writingTaskId": "wt-2023-i-application",
+          "sourceTaskType": "application",
+          "contentBlockRefs": [
+            "para-2023-i-writing-app-title",
+            "para-2023-i-writing-app-p1",
+            "para-2023-i-writing-app-p2",
+            "para-2023-i-writing-app-p3",
+            "para-2023-i-writing-app-p4",
+            "para-2023-i-writing-app-p5",
+            "para-2023-i-writing-app-p6",
+            "para-2023-i-writing-app-p7",
+            "para-2023-i-writing-app-p8"
+          ],
+          "wordCountTarget": 80,
+          "wordCountTargetCertainty": "explicit_legacy_field",
+          "wordCountScope": "unspecified",
+          "choiceOwnership": {
+            "ownership": "none"
+          },
+          "response": {
+            "kind": "generic_response_box",
+            "answerRegionRef": "writing.application-box",
+            "ownership": "product"
+          }
+        },
+        "sourceSpanRefsByTarget": {},
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2023-i-writing-app-title",
+              "text": "假定你是李华，外教Ryan准备将学生随机分为两人一组，让大家课后练习口语，你认为这样分组存在问题。请你给外教写一封邮件，内容包括："
+            },
+            {
+              "paragraphId": "para-2023-i-writing-app-p1",
+              "text": "1. 说明问题；"
+            },
+            {
+              "paragraphId": "para-2023-i-writing-app-p2",
+              "text": "2. 提出建议。"
+            },
+            {
+              "paragraphId": "para-2023-i-writing-app-p3",
+              "text": "1. 写作词数应为80个左右；"
+            },
+            {
+              "paragraphId": "para-2023-i-writing-app-p4",
+              "text": "2. 请按如下格式在答题卡的相应位置作答。"
+            },
+            {
+              "paragraphId": "para-2023-i-writing-app-p5",
+              "text": "Dear Ryan,"
+            },
+            {
+              "paragraphId": "para-2023-i-writing-app-p6",
+              "text": "I’m Li Hua from Class 3."
+            },
+            {
+              "paragraphId": "para-2023-i-writing-app-p7",
+              "text": "Yours sincerely,"
+            },
+            {
+              "paragraphId": "para-2023-i-writing-app-p8",
+              "text": "Li Hua"
+            }
+          ]
+        },
+        "questions": [],
+        "blanks": [],
+        "optionBank": [],
+        "writingTask": {
+          "writingTaskId": "wt-2023-i-application",
+          "groupId": "group-2023-i-writing-application",
+          "taskType": "application",
+          "title": "应用文写作",
+          "instruction": "假定你是李华，外教Ryan准备将学生随机分为两人一组，让大家课后练习口语，你认为这样分组存在问题。请你给外教写一封邮件，内容包括：\n1. 说明问题；\n2. 提出建议。\n1. 写作词数应为80个左右；\n2. 请按如下格式在答题卡的相应位置作答。\nDear Ryan,\nI’m Li Hua from Class 3.\nYours sincerely,\nLi Hua",
+          "wordCountTarget": 80
+        }
+      },
+      {
+        "groupId": "group-2023-i-writing-continuation",
+        "slotId": "writing.continuation",
+        "family": "continuation-writing",
+        "questionIds": [],
+        "blankIds": [],
+        "sourceSpanId": "source-span:observation:ticket-26:paper-2023-i:asset_projection:document",
+        "content": {
+          "blocks": [
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2023-i-writing-cont-title",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-writing-cont-title",
+                  "text": "阅读下面材料, 根据其内容和所给段落开头语续写两段, 使之构成一篇完整的短文。"
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2023-i-writing-cont-p1",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-writing-cont-p1",
+                  "text": "When I was in middle school, my social studies teacher asked me to enter a writing contest. I said no without thinking. I did not love writing. My family came from Brazil, so English was only my second language. Writing was so difficult and painful for me that my teacher had allowed me to present my paper on the sinking of the Titanic by acting out a play, where I played all the parts. No one laughed harder than he did."
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2023-i-writing-cont-p2",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-writing-cont-p2",
+                  "text": "So, why did he suddenly force me to do something at which I was sure to fail? His reply: “Because I love your stories. If you’re willing to apply yourself, I think you have a good shot at this.” Encouraged by his words, I agreed to give it a try."
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2023-i-writing-cont-p3",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-writing-cont-p3",
+                  "text": "I chose Paul Revere’s horse as my subject. Paul Revere was a silversmith (银匠) in Boston who rode a horse at night on April 18, 1775 to Lexington to warn people that British soldiers were coming. My story would come straight from the horse’s mouth. Not a brilliant idea, but funny; and unlikely to be anyone else’s choice."
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2023-i-writing-cont-p4",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-writing-cont-p4",
+                  "text": "What did the horse think, as he sped through the night? Did he get tired? Have doubts? Did he want to quit? I sympathized immediately. I got tired. I had doubts. I wanted to quit. But, like Revere’s horse, I kept going. I worked hard. I checked my spelling. I asked my older sister to correct my grammar. I checked out a half dozen books on Paul Revere from the library. I even read a few of them."
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "para-2023-i-writing-cont-p5",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:para-2023-i-writing-cont-p5",
+                  "text": "When I handed in the essay to my teacher, he read it, laughed out loud, and said, “Great. Now, write it again.” I wrote it again, and again and again. When I finally finished it, the thought of winning had given way to the enjoyment of writing. If I didn’t win, I wouldn’t care."
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "paragraph:group-2023-i-writing-continuation:starter:1",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:group-2023-i-writing-continuation:starter:1",
+                  "text": "A few weeks later, when I almost forgot the contest, there came the news."
+                }
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "nodeId": "paragraph:group-2023-i-writing-continuation:starter:2",
+              "inlines": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:group-2023-i-writing-continuation:starter:2",
+                  "text": "I went to my teacher's office after the award presentation."
+                }
+              ]
+            }
+          ]
+        },
+        "media": [],
+        "variant": {
+          "family": "continuation-writing",
+          "mode": "legacy_opaque",
+          "writingTaskId": "wt-2023-i-continuation",
+          "sourceTaskType": "continuation",
+          "contentBlockRefs": [
+            "para-2023-i-writing-cont-title",
+            "para-2023-i-writing-cont-p1",
+            "para-2023-i-writing-cont-p2",
+            "para-2023-i-writing-cont-p3",
+            "para-2023-i-writing-cont-p4",
+            "para-2023-i-writing-cont-p5",
+            "paragraph:group-2023-i-writing-continuation:starter:1",
+            "paragraph:group-2023-i-writing-continuation:starter:2"
+          ],
+          "sourceStarterBlockRefs": [
+            "paragraph:group-2023-i-writing-continuation:starter:1",
+            "paragraph:group-2023-i-writing-continuation:starter:2"
+          ],
+          "wordCountTarget": 150,
+          "wordCountTargetCertainty": "explicit_legacy_field",
+          "wordCountScope": "unspecified",
+          "choiceOwnership": {
+            "ownership": "none"
+          },
+          "response": {
+            "kind": "generic_response_box",
+            "answerRegionRef": "writing.continuation-box",
+            "ownership": "product"
+          }
+        },
+        "sourceSpanRefsByTarget": {},
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2023-i-writing-cont-title",
+              "text": "阅读下面材料, 根据其内容和所给段落开头语续写两段, 使之构成一篇完整的短文。"
+            },
+            {
+              "paragraphId": "para-2023-i-writing-cont-p1",
+              "text": "When I was in middle school, my social studies teacher asked me to enter a writing contest. I said no without thinking. I did not love writing. My family came from Brazil, so English was only my second language. Writing was so difficult and painful for me that my teacher had allowed me to present my paper on the sinking of the Titanic by acting out a play, where I played all the parts. No one laughed harder than he did."
+            },
+            {
+              "paragraphId": "para-2023-i-writing-cont-p2",
+              "text": "So, why did he suddenly force me to do something at which I was sure to fail? His reply: “Because I love your stories. If you’re willing to apply yourself, I think you have a good shot at this.” Encouraged by his words, I agreed to give it a try."
+            },
+            {
+              "paragraphId": "para-2023-i-writing-cont-p3",
+              "text": "I chose Paul Revere’s horse as my subject. Paul Revere was a silversmith (银匠) in Boston who rode a horse at night on April 18, 1775 to Lexington to warn people that British soldiers were coming. My story would come straight from the horse’s mouth. Not a brilliant idea, but funny; and unlikely to be anyone else’s choice."
+            },
+            {
+              "paragraphId": "para-2023-i-writing-cont-p4",
+              "text": "What did the horse think, as he sped through the night? Did he get tired? Have doubts? Did he want to quit? I sympathized immediately. I got tired. I had doubts. I wanted to quit. But, like Revere’s horse, I kept going. I worked hard. I checked my spelling. I asked my older sister to correct my grammar. I checked out a half dozen books on Paul Revere from the library. I even read a few of them."
+            },
+            {
+              "paragraphId": "para-2023-i-writing-cont-p5",
+              "text": "When I handed in the essay to my teacher, he read it, laughed out loud, and said, “Great. Now, write it again.” I wrote it again, and again and again. When I finally finished it, the thought of winning had given way to the enjoyment of writing. If I didn’t win, I wouldn’t care."
+            }
+          ]
+        },
+        "questions": [],
+        "blanks": [],
+        "optionBank": [],
+        "writingTask": {
+          "writingTaskId": "wt-2023-i-continuation",
+          "groupId": "group-2023-i-writing-continuation",
+          "taskType": "continuation",
+          "title": "读后续写",
+          "instruction": "阅读下面材料, 根据其内容和所给段落开头语续写两段, 使之构成一篇完整的短文。\nWhen I was in middle school, my social studies teacher asked me to enter a writing contest. I said no without thinking. I did not love writing. My family came from Brazil, so English was only my second language. Writing was so difficult and painful for me that my teacher had allowed me to present my paper on the sinking of the Titanic by acting out a play, where I played all the parts. No one laughed harder than he did.\nSo, why did he suddenly force me to do something at which I was sure to fail? His reply: “Because I love your stories. If you’re willing to apply yourself, I think you have a good shot at this.” Encouraged by his words, I agreed to give it a try.\nI chose Paul Revere’s horse as my subject. Paul Revere was a silversmith (银匠) in Boston who rode a horse at night on April 18, 1775 to Lexington to warn people that British soldiers were coming. My story would come straight from the horse’s mouth. Not a brilliant idea, but funny; and unlikely to be anyone else’s choice.\nWhat did the horse think, as he sped through the night? Did he get tired? Have doubts? Did he want to quit? I sympathized immediately. I got tired. I had doubts. I wanted to quit. But, like Revere’s horse, I kept going. I worked hard. I checked my spelling. I asked my older sister to correct my grammar. I checked out a half dozen books on Paul Revere from the library. I even read a few of them.\nWhen I handed in the essay to my teacher, he read it, laughed out loud, and said, “Great. Now, write it again.” I wrote it again, and again and again. When I finally finished it, the thought of winning had given way to the enjoyment of writing. If I didn’t win, I wouldn’t care.",
+          "continuationStarters": [
+            "A few weeks later, when I almost forgot the contest, there came the news.",
+            "I went to my teacher's office after the award presentation."
+          ],
+          "materialText": "阅读下面材料, 根据其内容和所给段落开头语续写两段, 使之构成一篇完整的短文。\n\nWhen I was in middle school, my social studies teacher asked me to enter a writing contest. I said no without thinking. I did not love writing. My family came from Brazil, so English was only my second language. Writing was so difficult and painful for me that my teacher had allowed me to present my paper on the sinking of the Titanic by acting out a play, where I played all the parts. No one laughed harder than he did.\n\nSo, why did he suddenly force me to do something at which I was sure to fail? His reply: “Because I love your stories. If you’re willing to apply yourself, I think you have a good shot at this.” Encouraged by his words, I agreed to give it a try.\n\nI chose Paul Revere’s horse as my subject. Paul Revere was a silversmith (银匠) in Boston who rode a horse at night on April 18, 1775 to Lexington to warn people that British soldiers were coming. My story would come straight from the horse’s mouth. Not a brilliant idea, but funny; and unlikely to be anyone else’s choice.\n\nWhat did the horse think, as he sped through the night? Did he get tired? Have doubts? Did he want to quit? I sympathized immediately. I got tired. I had doubts. I wanted to quit. But, like Revere’s horse, I kept going. I worked hard. I checked my spelling. I asked my older sister to correct my grammar. I checked out a half dozen books on Paul Revere from the library. I even read a few of them.\n\nWhen I handed in the essay to my teacher, he read it, laughed out loud, and said, “Great. Now, write it again.” I wrote it again, and again and again. When I finally finished it, the thought of winning had given way to the enjoyment of writing. If I didn’t win, I wouldn’t care.",
+          "wordCountTarget": 150
+        }
+      }
+    ],
+    "transformations": [],
+    "inactiveSlots": {
+      "listening.short-dialogue": "not_supplied",
+      "listening.long-form": "not_supplied"
+    },
+    "inactiveSourceClosures": []
+  },
+  "issues": [],
+  "candidateDigest": "sha256:1413c741670830146143e800998a17bd0a52c30ceeaacf9f850fd1a6e746e76a"
+}
