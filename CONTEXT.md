@@ -12,6 +12,10 @@ _Avoid_: file, origin, paper when referring to provenance broadly
 The immutable provenance package for one import attempt: exact Import File bytes, whole-file digests, document roles, ordered observations, and any available Source Spans. Source correction creates a new capture; interpreted content and Analysis never overwrite it.
 _Avoid_: canonical paper, cleaned paper, normalized asset
 
+**Import Source Type**:
+The trusted origin form accepted at the canonical-import seam: a DOCX is a new-import source, while the exact committed Ticket 26 frozen JSON capture is a legacy-migration source; both must derive the same Import Candidate before Teacher Confirmation.
+_Avoid_: treating a legacy capture as a missing DOCX or as caller-authored canonical semantics
+
 **Source Span**:
 A typed address into one immutable Source Capture observation or binary artifact, bound to its source-document digest and pre-normalization coordinates. It is diagnostic and audit evidence, not a universal per-field admission proof.
 _Avoid_: canonical path, normalized offset, mutable text range

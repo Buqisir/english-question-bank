@@ -35,6 +35,7 @@ import manifestV34 from '../../standards/paper-canonical/manifest-v34.json' with
 import manifestV35 from '../../standards/paper-canonical/manifest-v35.json' with { type: 'json' }
 import manifestV36 from '../../standards/paper-canonical/manifest-v36.json' with { type: 'json' }
 import manifestV37 from '../../standards/paper-canonical/manifest-v37.json' with { type: 'json' }
+import manifestV38 from '../../standards/paper-canonical/manifest-v38.json' with { type: 'json' }
 import legacyRhythmManifestV13 from '../../standards/paper-canonical/history/manifest-v13-reading-rhythm/manifest-v13.json' with { type: 'json' }
 import legacyRhythmTypographyV3 from '../../standards/paper-canonical/history/manifest-v13-reading-rhythm/paper-typography-v3.json' with { type: 'json' }
 import legacyRhythmTypographyV3Schema from '../../standards/paper-canonical/history/manifest-v13-reading-rhythm/renderer-typography-v3.schema.json' with { type: 'json' }
@@ -50,6 +51,7 @@ import sourceAdaptersV7 from '../../standards/paper-canonical/adapters/source-ad
 import sourceAdaptersV8 from '../../standards/paper-canonical/adapters/source-adapters-v8.json' with { type: 'json' }
 import sourceAdaptersV9 from '../../standards/paper-canonical/adapters/source-adapters-v9.json' with { type: 'json' }
 import sourceAdaptersV10 from '../../standards/paper-canonical/adapters/source-adapters-v10.json' with { type: 'json' }
+import sourceAdaptersV11 from '../../standards/paper-canonical/adapters/source-adapters-v11.json' with { type: 'json' }
 import nck1 from '../../standards/paper-canonical/profiles/nck1-v1.json' with { type: 'json' }
 import zhejiangLegacy from '../../standards/paper-canonical/profiles/zhejiang-legacy-v1.json' with { type: 'json' }
 import nck1V2 from '../../standards/paper-canonical/profiles/nck1-v2.json' with { type: 'json' }
@@ -167,6 +169,7 @@ import normalizationV5Schema from '../../schemas/paper-canonical/normalization-r
 import sourceAdaptersSchema from '../../schemas/paper-canonical/source-adapters-v1.schema.json' with { type: 'json' }
 import docxSourceEnvelopeSchema from '../../schemas/paper-canonical/docx-source-envelope-v1.schema.json' with { type: 'json' }
 import docxSourceEnvelopeV2Schema from '../../schemas/paper-canonical/docx-source-envelope-v2.schema.json' with { type: 'json' }
+import ticket26LegacySourceEnvelopeSchema from '../../schemas/paper-canonical/ticket-26-legacy-source-envelope-v1.schema.json' with { type: 'json' }
 import typographyV1Schema from '../../schemas/paper-canonical/renderer-typography-v1.schema.json' with { type: 'json' }
 import typographyV2Schema from '../../schemas/paper-canonical/renderer-typography-v2.schema.json' with { type: 'json' }
 import typographyV3Schema from '../../schemas/paper-canonical/renderer-typography-v3.schema.json' with { type: 'json' }
@@ -254,6 +257,7 @@ import reportV34Schema from '../../schemas/paper-canonical/normalization-report-
 import reportV35Schema from '../../schemas/paper-canonical/normalization-report-v35.schema.json' with { type: 'json' }
 import reportV36Schema from '../../schemas/paper-canonical/normalization-report-v36.schema.json' with { type: 'json' }
 import reportV37Schema from '../../schemas/paper-canonical/normalization-report-v37.schema.json' with { type: 'json' }
+import reportV38Schema from '../../schemas/paper-canonical/normalization-report-v38.schema.json' with { type: 'json' }
 import legacyReportV9Schema from '../../schemas/paper-canonical/normalization-report-v9.schema.json' with { type: 'json' }
 import publicationSchema from '../../schemas/paper-canonical/canonical-paper-publication-v1.schema.json' with { type: 'json' }
 import publicationV2Schema from '../../schemas/paper-canonical/canonical-paper-publication-v2.schema.json' with { type: 'json' }
@@ -292,6 +296,7 @@ import publicationV34Schema from '../../schemas/paper-canonical/canonical-paper-
 import publicationV35Schema from '../../schemas/paper-canonical/canonical-paper-publication-v35.schema.json' with { type: 'json' }
 import publicationV36Schema from '../../schemas/paper-canonical/canonical-paper-publication-v36.schema.json' with { type: 'json' }
 import publicationV37Schema from '../../schemas/paper-canonical/canonical-paper-publication-v37.schema.json' with { type: 'json' }
+import publicationV38Schema from '../../schemas/paper-canonical/canonical-paper-publication-v38.schema.json' with { type: 'json' }
 import legacyPublicationV9Schema from '../../schemas/paper-canonical/canonical-paper-publication-v9.schema.json' with { type: 'json' }
 import consumerSchema from '../../schemas/paper-canonical/consumer-contract-v1.schema.json' with { type: 'json' }
 import consumerV2Schema from '../../schemas/paper-canonical/consumer-contract-v2.schema.json' with { type: 'json' }
@@ -1782,6 +1787,10 @@ const artifactsV37 = {
   adapter: sourceAdaptersV10,
   'profile-nck1': nck1V11,
 }
+const artifactsV38 = {
+  ...artifactsV37,
+  adapter: sourceAdaptersV11,
+}
 const schemasV1 = { ...sharedSchemas, 'renderer-typography-v1': typographyV1Schema, 'normalization-rules-v1': normalizationSchema, 'normalization-report-v1': reportSchema, 'canonical-paper-publication-v1': publicationSchema }
 const schemasV2 = { ...sharedSchemas, 'renderer-typography-v1': typographyV1Schema, 'normalization-rules-v2': normalizationV2Schema, 'normalization-report-v2': reportV2Schema, 'canonical-paper-publication-v2': publicationV2Schema }
 const schemasV3 = { ...sharedSchemas, 'renderer-typography-v2': typographyV2Schema, 'normalization-rules-v2': normalizationV2Schema, 'normalization-report-v3': reportV3Schema, 'canonical-paper-publication-v3': publicationV3Schema }
@@ -2259,6 +2268,18 @@ const schemasV37 = {
   'normalization-report-v37': reportV37Schema,
   'canonical-paper-publication-v37': publicationV37Schema,
 }
+const schemasV38 = {
+  ...Object.fromEntries(
+    Object.entries(schemasV37).filter(([schemaId]) =>
+      ![
+        'normalization-report-v37',
+        'canonical-paper-publication-v37',
+      ].includes(schemaId)),
+  ),
+  'ticket-26-legacy-source-envelope-v1': ticket26LegacySourceEnvelopeSchema,
+  'normalization-report-v38': reportV38Schema,
+  'canonical-paper-publication-v38': publicationV38Schema,
+}
 const validationV1 = validateAuthorityClosure({ manifest: manifestV1, artifacts: artifactsV1, schemas: schemasV1 })
 const validationV2 = validateAuthorityClosure({ manifest: manifestV2, artifacts: artifactsV2, schemas: schemasV2 })
 const validationV3 = validateAuthorityClosure({ manifest: manifestV3, artifacts: artifactsV3, schemas: schemasV3 })
@@ -2301,6 +2322,7 @@ const validationV34 = validateAuthorityClosure({ manifest: manifestV34, artifact
 const validationV35 = validateAuthorityClosure({ manifest: manifestV35, artifacts: artifactsV35, schemas: schemasV35 })
 const validationV36 = validateAuthorityClosure({ manifest: manifestV36, artifacts: artifactsV36, schemas: schemasV36 })
 const validationV37 = validateAuthorityClosure({ manifest: manifestV37, artifacts: artifactsV37, schemas: schemasV37 })
+const validationV38 = validateAuthorityClosure({ manifest: manifestV38, artifacts: artifactsV38, schemas: schemasV38 })
 const validations = [
   validationV1,
   validationV2,
@@ -2340,6 +2362,7 @@ const validations = [
   validationV35,
   validationV36,
   validationV37,
+  validationV38,
 ]
 if (validations.some((validation) => !validation.ok)) {
   throw new Error(`Invalid checked-in canonical authority: ${JSON.stringify(validations.flatMap((validation) => validation.issues))}`)
@@ -2392,6 +2415,7 @@ const authorities = [
   { manifest: manifestV35, artifacts: artifactsV35, schemas: schemasV35 },
   { manifest: manifestV36, artifacts: artifactsV36, schemas: schemasV36 },
   { manifest: manifestV37, artifacts: artifactsV37, schemas: schemasV37 },
+  { manifest: manifestV38, artifacts: artifactsV38, schemas: schemasV38 },
 ].map((authority) => ({
   ...authority,
   authorityRef: authorityRef(authority.manifest),
@@ -2403,6 +2427,10 @@ export const canonicalAuthorityRef = authorities.find((authority) => authority.m
 // Ticket 25 can derive and confirm source-bound candidates under v37 without
 // advancing publication/current authority beyond the existing v36 closure.
 export const trustedDocxCandidateAuthorityRef = authorities.find((authority) => authority.manifest.version === '37').authorityRef
+// Ticket 26's committed legacy JSON capture is a migration Source. It can use
+// the same Candidate -> Teacher Confirmation seam under v38 without advancing
+// the v36 publication/current authority.
+export const trustedLegacyCaptureCandidateAuthorityRef = authorities.find((authority) => authority.manifest.version === '38').authorityRef
 
 export function resolveCanonicalAuthority(authorityRef) {
   const authority = authorities.find((candidate) => candidate.authorityRef.manifestId === authorityRef?.manifestId && candidate.authorityRef.manifestVersion === authorityRef?.manifestVersion && candidate.authorityRef.manifestDigest === authorityRef?.manifestDigest)

@@ -1,0 +1,86 @@
+{
+  "schemaVersion": "ticket-26-legacy-semantic-oracles-v1",
+  "oracles": [
+    {
+      "paperId": "paper-2020-i",
+      "profileId": "nck1",
+      "source": {
+        "relativePath": "test-fixtures/paper-import/paper-canonical-source-captures/ticket-26-v1/paper-2020-i/source-capture-v1.json",
+        "sha256": "sha256:493e3e49f23a6f278bef782407a311f157101ed09fbffcd5fcabbdc7aa3ef63b",
+        "byteLength": 204421
+      },
+      "familySlots": [
+        { "slotId": "reading.a", "family": "reading" },
+        { "slotId": "reading.b", "family": "reading" },
+        { "slotId": "reading.c", "family": "reading" },
+        { "slotId": "reading.d", "family": "reading" },
+        { "slotId": "reading.seven-choices", "family": "seven-choices" },
+        { "slotId": "language.cloze", "family": "cloze" },
+        { "slotId": "language.grammar-fill", "family": "grammar-fill" },
+        { "slotId": "writing.application", "family": "application-writing" },
+        { "slotId": "writing.continuation", "family": "continuation-writing" }
+      ],
+      "group": {
+        "slotId": "reading.a",
+        "groupId": "group-2020-i-reading-a",
+        "family": "reading",
+        "questionId": "q-2020-i-021",
+        "textAnchor": "POETRY CHALLENGE"
+      },
+      "officialAnswer": "A"
+    },
+    {
+      "paperId": "paper-2020-bing",
+      "profileId": "national-legacy",
+      "source": {
+        "relativePath": "test-fixtures/paper-import/paper-canonical-source-captures/ticket-26-v1/paper-2020-bing/source-capture-v1.json",
+        "sha256": "sha256:31f2e1de9130e8eedbefd6bf7272a5132cda7ea2c7605e1cc8fbeddde7b1828b",
+        "byteLength": 198020
+      },
+      "familySlots": [
+        { "slotId": "reading.a", "family": "reading" },
+        { "slotId": "reading.b", "family": "reading" },
+        { "slotId": "reading.c", "family": "reading" },
+        { "slotId": "reading.d", "family": "reading" },
+        { "slotId": "reading.seven-choices", "family": "seven-choices" },
+        { "slotId": "language.cloze", "family": "cloze" },
+        { "slotId": "language.grammar-fill", "family": "grammar-fill" }
+      ],
+      "group": {
+        "slotId": "reading.a",
+        "groupId": "group-2020-bing-reading-a",
+        "family": "reading",
+        "questionId": "q-2020-bing-021",
+        "textAnchor": "Journey Back in Time with Scholars"
+      },
+      "officialAnswer": "A"
+    },
+    {
+      "paperId": "paper-zj-2020-jan",
+      "profileId": "zhejiang-legacy",
+      "source": {
+        "relativePath": "test-fixtures/paper-import/paper-canonical-source-captures/ticket-26-v1/paper-zj-2020-jan/source-capture-v1.json",
+        "sha256": "sha256:699e510e4800eb1ea63752aacf1e789b5defafa83cb81ec6a7260749513445c1",
+        "byteLength": 191162
+      },
+      "familySlots": [
+        { "slotId": "reading.a", "family": "reading" },
+        { "slotId": "reading.b", "family": "reading" },
+        { "slotId": "reading.c", "family": "reading" },
+        { "slotId": "reading.seven-choices", "family": "seven-choices" },
+        { "slotId": "language.cloze", "family": "cloze" },
+        { "slotId": "language.grammar-fill", "family": "grammar-fill" },
+        { "slotId": "writing.application", "family": "application-writing" },
+        { "slotId": "writing.continuation", "family": "continuation-writing" }
+      ],
+      "group": {
+        "slotId": "reading.a",
+        "groupId": "group-zj-2020-jan-reading-a",
+        "family": "reading",
+        "questionId": "q-zj-2020-jan-021",
+        "textAnchor": "I never knew anyone who’d grown up in Jackson"
+      },
+      "officialAnswer": "B"
+    }
+  ]
+}

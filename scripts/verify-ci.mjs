@@ -34,6 +34,7 @@ const registry = {
   'scripts/verify-paper-canonical-import-pilot-fixes.mjs',
   'scripts/verify-paper-canonical-import-pilot.mjs',
   'scripts/verify-paper-canonical-docx-source-adapter.mjs',
+  'scripts/verify-paper-canonical-legacy-source-capture-adapter.mjs',
   'scripts/verify-paper-canonical-import-pilot-qa-server.mjs',
   'scripts/verify-paper-canonical-cloze-grammar-publication.mjs',
   'scripts/verify-paper-canonical-seven-choices-publication.mjs',
