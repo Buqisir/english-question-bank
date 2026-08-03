@@ -309,9 +309,8 @@ function findPaperAssetGroup(groupId) {
         label: 'Canonical paper-asset group source',
       })
       const group = asset?.content?.groups?.[groupId]
-      if (group && asset?.paper?.paperId === entry.name) {
-        return { asset, group, paperId: entry.name }
-      }
+      if (!group || asset?.paper?.paperId !== entry.name) continue
+      if (group) return { asset, group, paperId: entry.name }
     } catch {
       // Ignore invalid paper-asset files; import validation owns that error.
     }

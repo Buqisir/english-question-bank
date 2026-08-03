@@ -42,8 +42,8 @@ const humanAuthority = read('docs/product/exam-paper-format-standards.md')
 const currentHumanAuthority = humanAuthority.split('## v2 历史排版证据')[0]
 assert.match(
   currentHumanAuthority,
-  /standards\/paper-canonical\/manifest-v36\.json/,
-  'the unique human-readable authority index must bind current manifest v36',
+  /standards\/paper-canonical\/manifest-v44\.json/,
+  'the unique human-readable authority index must bind current manifest v44',
 )
 assert.match(
   currentHumanAuthority,

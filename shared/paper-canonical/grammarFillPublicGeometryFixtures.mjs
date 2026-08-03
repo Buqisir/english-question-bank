@@ -1,6 +1,10 @@
-import contract from '../../standards/paper-canonical/rendering/grammar-fill-public-geometry-fixtures-v16.json' with { type: 'json' }
+import v15Contract from '../../standards/paper-canonical/rendering/grammar-fill-public-geometry-fixtures-v15.json' with { type: 'json' }
+import v16Contract from '../../standards/paper-canonical/rendering/grammar-fill-public-geometry-fixtures-v16.json' with { type: 'json' }
 
-import { paper2026ISuccessorCandidateAuthorityRef } from './authority.mjs'
+import {
+  canonicalAuthorityRef,
+  paper2026ISuccessorCandidateAuthorityRef,
+} from './authority.mjs'
 import { resolveCanonicalConsumerOccurrence } from './consumerProjection.mjs'
 import { consumerContractRefs } from './consumers.mjs'
 
@@ -14,7 +18,26 @@ function freezeObject(value) {
   return value
 }
 
-export const grammarFillPublicGeometryFixtures = freezeObject(contract)
+export const grammarFillPublicGeometryFixtures = freezeObject(v16Contract)
+
+const grammarFillFixtureBindings = Object.freeze([
+  Object.freeze({
+    authorityRef: canonicalAuthorityRef,
+    fixtures: freezeObject(v15Contract),
+  }),
+  Object.freeze({
+    authorityRef: paper2026ISuccessorCandidateAuthorityRef,
+    fixtures: grammarFillPublicGeometryFixtures,
+  }),
+])
+
+function fixtureBindingForConsumption(consumption) {
+  return grammarFillFixtureBindings.find(({ authorityRef }) =>
+    consumption?.authorityRef?.manifestId === authorityRef.manifestId
+    && consumption.authorityRef?.manifestVersion === authorityRef.manifestVersion
+    && consumption.authorityRef?.manifestDigest === authorityRef.manifestDigest,
+  ) || null
+}
 
 export function resolveGrammarFillPublicGeometryFixture(
   variantId,
@@ -22,9 +45,12 @@ export function resolveGrammarFillPublicGeometryFixture(
   consumption,
 ) {
   if (variantId == null) return null
-  const variant = grammarFillPublicGeometryFixtures.variants[variantId]
+  const binding = fixtureBindingForConsumption(consumption)
+  const fixtures = binding?.fixtures
+  const authorityRef = binding?.authorityRef
+  const variant = fixtures?.variants[variantId]
   const expectedConsumerId =
-    grammarFillPublicGeometryFixtures.compatibleConsumptionPlan
+    fixtures?.compatibleConsumptionPlan
       .surfaceConsumerIds[expectedSurface]
   const expectedConsumerContract = consumerContractRefs[expectedConsumerId]
   const selection = consumption?.selections?.find(
@@ -48,21 +74,21 @@ export function resolveGrammarFillPublicGeometryFixture(
     || variant.surface !== expectedSurface
     || consumption?.disposition !== 'ready'
     || consumption.authorityRef?.manifestId
-      !== paper2026ISuccessorCandidateAuthorityRef.manifestId
+      !== authorityRef?.manifestId
     || consumption.authorityRef?.manifestVersion
-      !== paper2026ISuccessorCandidateAuthorityRef.manifestVersion
+      !== authorityRef?.manifestVersion
     || consumption.authorityRef?.manifestDigest
-      !== paper2026ISuccessorCandidateAuthorityRef.manifestDigest
-    || grammarFillPublicGeometryFixtures.compatibleConsumptionPlan
+      !== authorityRef?.manifestDigest
+    || fixtures?.compatibleConsumptionPlan
       .authorityManifestId
-      !== paper2026ISuccessorCandidateAuthorityRef.manifestId
-    || grammarFillPublicGeometryFixtures.compatibleConsumptionPlan
+      !== authorityRef?.manifestId
+    || fixtures?.compatibleConsumptionPlan
       .authorityManifestVersion
-      !== paper2026ISuccessorCandidateAuthorityRef.manifestVersion
+      !== authorityRef?.manifestVersion
     || consumption.paperId
-      !== grammarFillPublicGeometryFixtures.compatibleConsumptionPlan.paperId
+      !== fixtures?.compatibleConsumptionPlan.paperId
     || consumption.sourceAssetVersion
-      !== grammarFillPublicGeometryFixtures.compatibleConsumptionPlan
+      !== fixtures?.compatibleConsumptionPlan
         .sourceAssetVersion
     || !/^sha256:[a-f0-9]{64}$/.test(consumption.sourceAssetDigest || '')
     || !/^sha256:[a-f0-9]{64}$/.test(consumption.publicationDigest || '')
