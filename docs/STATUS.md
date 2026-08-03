@@ -1,7 +1,10 @@
 # 当前状态（medium / large cut 收官时更新）
 
-Last updated: 2026-07-26（Wayfinder 阶段治理校正；
-**生产仍为 5cabb5c**：本刀只改协作规则，不触发生产部署）
+Last updated: 2026-08-03
+Canonical repository closure: 33 papers / 273 groups / 1530 questions / 4140 question-owned options.
+Ticket 35 focused re-review PASS；Owner QA PASS。
+Local final suite PASS 120 / SKIP 1 / FAIL 0；main CI run 30847313636 green（verify 116/4/0 + E2E PASS）。
+Repository-only release：未部署生产，未改生产 DB/config，未同步 R2，未做 backfill。
 
 下一步队列（2026-07-17 晚刷新，均未圈、owner 圈了再动）：
 ① **R3 写作双 facet**（解析字段路线图下一站，program 在
