@@ -1,0 +1,1340 @@
+{
+  "schemaVersion": "ticket-32-lane-admission-v1",
+  "baseHead": "a374dab8bf78efb99181bcb5bace06100d85c1ce",
+  "laneId": "lane-b-luna-max",
+  "ticket": {
+    "id": "32",
+    "path": "docs/cuts/paper-canonical-unification/tickets/32-remaining-corpus-migration.md"
+  },
+  "paperIds": [
+    "paper-2020-i",
+    "paper-2020-ii",
+    "paper-2021-i",
+    "paper-2021-ii",
+    "paper-2022-i",
+    "paper-2022-ii",
+    "paper-2023-i",
+    "paper-2023-ii",
+    "paper-2021-jia",
+    "paper-2022-jia"
+  ],
+  "membershipDigest": "sha256:f9b2e62ca16b30ac56a4c00472c4abf7684842c6af4a3fbe9d78da9e52ca3fdb",
+  "aggregate": {
+    "paperCount": 10,
+    "sourceCaptureCount": 10,
+    "candidateCount": 10,
+    "confirmationCount": 10,
+    "completeUnpublishedCanonicalPaperCount": 10,
+    "groupCount": 86,
+    "questionCount": 460,
+    "optionCount": 1240,
+    "canonicalBytes": 7650264,
+    "blankRefCount": 310,
+    "optionBankOptionCount": 70,
+    "sourceTypeCounts": {
+      "legacy-json": 10
+    },
+    "profileCounts": {
+      "national-legacy": 2,
+      "nck1": 8
+    },
+    "familyCounts": {
+      "application-writing": {
+        "blankRefCount": 0,
+        "groupCount": 8,
+        "optionBankOptionCount": 0,
+        "optionCount": 0,
+        "questionCount": 0
+      },
+      "cloze": {
+        "blankRefCount": 160,
+        "groupCount": 10,
+        "optionBankOptionCount": 0,
+        "optionCount": 640,
+        "questionCount": 160
+      },
+      "continuation-writing": {
+        "blankRefCount": 0,
+        "groupCount": 8,
+        "optionBankOptionCount": 0,
+        "optionCount": 0,
+        "questionCount": 0
+      },
+      "grammar-fill": {
+        "blankRefCount": 100,
+        "groupCount": 10,
+        "optionBankOptionCount": 0,
+        "optionCount": 0,
+        "questionCount": 100
+      },
+      "reading": {
+        "blankRefCount": 0,
+        "groupCount": 40,
+        "optionBankOptionCount": 0,
+        "optionCount": 600,
+        "questionCount": 150
+      },
+      "seven-choices": {
+        "blankRefCount": 50,
+        "groupCount": 10,
+        "optionBankOptionCount": 70,
+        "optionCount": 0,
+        "questionCount": 50
+      }
+    },
+    "publicationCount": 0,
+    "currentRefCount": 0
+  },
+  "papers": [
+    {
+      "paperId": "paper-2020-i",
+      "familyCounts": {
+        "application-writing": {
+          "blankRefCount": 0,
+          "groupCount": 1,
+          "optionBankOptionCount": 0,
+          "optionCount": 0,
+          "questionCount": 0
+        },
+        "cloze": {
+          "blankRefCount": 15,
+          "groupCount": 1,
+          "optionBankOptionCount": 0,
+          "optionCount": 60,
+          "questionCount": 15
+        },
+        "continuation-writing": {
+          "blankRefCount": 0,
+          "groupCount": 1,
+          "optionBankOptionCount": 0,
+          "optionCount": 0,
+          "questionCount": 0
+        },
+        "grammar-fill": {
+          "blankRefCount": 10,
+          "groupCount": 1,
+          "optionBankOptionCount": 0,
+          "optionCount": 0,
+          "questionCount": 10
+        },
+        "reading": {
+          "blankRefCount": 0,
+          "groupCount": 4,
+          "optionBankOptionCount": 0,
+          "optionCount": 60,
+          "questionCount": 15
+        },
+        "seven-choices": {
+          "blankRefCount": 5,
+          "groupCount": 1,
+          "optionBankOptionCount": 7,
+          "optionCount": 0,
+          "questionCount": 5
+        }
+      },
+      "profileId": "nck1",
+      "profileRef": {
+        "profileId": "nck1",
+        "profileVersion": "12",
+        "profileDigest": "sha256:0dd7de904d7a0346716b117ca5ead8a6fdc66b894d7700da79698e7d0fe546db"
+      },
+      "sourceType": "legacy-json",
+      "authority": {
+        "manifestId": "paper-canonical",
+        "manifestVersion": "41",
+        "manifestDigest": "sha256:b025bdc677a59a09548575e3df1e911ecd0273c5f6a9056d70603107c1970c83"
+      },
+      "sourceCapture": {
+        "path": "test-fixtures/paper-import/paper-canonical-source-captures/ticket-26-v1/paper-2020-i/source-capture-v1.json",
+        "sourceCaptureId": "source-capture:daa1ccc8b12e99e9ae6ec",
+        "sourceCaptureDigest": "sha256:daa1ccc8b12e99e9ae6ecfc3eaf526e7c1fe94c795753ee0ffda830113bfd89a",
+        "fileSha256": "sha256:493e3e49f23a6f278bef782407a311f157101ed09fbffcd5fcabbdc7aa3ef63b",
+        "byteLength": 204421
+      },
+      "candidate": {
+        "path": "test-fixtures/paper-import/paper-canonical-confirmation-lanes/ticket-27-nck1-v1/paper-2020-i/import-candidate-v1.json",
+        "candidateDigest": "sha256:2ac6bdb579ea4e429d4835bd8f28de8df04e406c7d11526697b089da6e04504d",
+        "fileSha256": "sha256:474f9ea214618973ccfe5a1b3c1f0e1ce2c3f6571d69662c9a3a6574d55cb5d8",
+        "byteLength": 192732
+      },
+      "confirmation": {
+        "path": "test-fixtures/paper-import/paper-canonical-confirmation-lanes/ticket-27-nck1-v1/paper-2020-i/teacher-confirmation-v1.json",
+        "confirmationDigest": "sha256:f63c7fcec57735445ebd4fb93fa5d413b334f67f7d31edae86b7a71d1539ac99",
+        "candidateDigest": "sha256:2ac6bdb579ea4e429d4835bd8f28de8df04e406c7d11526697b089da6e04504d",
+        "sourceDigest": "sha256:493e3e49f23a6f278bef782407a311f157101ed09fbffcd5fcabbdc7aa3ef63b",
+        "fileSha256": "sha256:569bfeaae5865932d74aebc3a8ae5e1d2edde95f600f8b1373d160b8db9e1eac",
+        "byteLength": 259
+      },
+      "canonicalPaper": {
+        "path": "test-fixtures/paper-import/paper-canonical-confirmation-lanes/ticket-27-nck1-v1/paper-2020-i/canonical-paper-v1.json",
+        "canonicalPaperDigest": "sha256:cbf50b6637ec5e45b4dd349ce91395b12d8abc09f53e53f2764c3cffcfe2493c",
+        "fileSha256": "sha256:6ecfedd373899b68fa11a609904e2bf6dee936a9c06af43c794892143967593e",
+        "byteLength": 747920,
+        "completeness": "complete",
+        "publication": "unpublished",
+        "groupCount": 9,
+        "questionCount": 45,
+        "optionCount": 120
+      },
+      "counts": {
+        "groupCount": 9,
+        "questionCount": 45,
+        "optionCount": 120,
+        "blankRefCount": 30,
+        "optionBankOptionCount": 7,
+        "canonicalBytes": 747920
+      },
+      "bindings": {
+        "sourceToCandidate": {
+          "sourceCaptureId": "source-capture:daa1ccc8b12e99e9ae6ec",
+          "sourceCaptureDigest": "sha256:daa1ccc8b12e99e9ae6ecfc3eaf526e7c1fe94c795753ee0ffda830113bfd89a",
+          "sourceCaptureFileSha256": "sha256:493e3e49f23a6f278bef782407a311f157101ed09fbffcd5fcabbdc7aa3ef63b",
+          "candidateSourcePaperId": "paper-2020-i",
+          "candidateSourceFileSha256": "sha256:493e3e49f23a6f278bef782407a311f157101ed09fbffcd5fcabbdc7aa3ef63b",
+          "candidateSourceByteLength": 204421
+        },
+        "candidateToConfirmation": {
+          "candidateDigest": "sha256:2ac6bdb579ea4e429d4835bd8f28de8df04e406c7d11526697b089da6e04504d",
+          "confirmationCandidateDigest": "sha256:2ac6bdb579ea4e429d4835bd8f28de8df04e406c7d11526697b089da6e04504d"
+        },
+        "sourceToConfirmation": {
+          "sourceCaptureFileSha256": "sha256:493e3e49f23a6f278bef782407a311f157101ed09fbffcd5fcabbdc7aa3ef63b",
+          "confirmationSourceDigest": "sha256:493e3e49f23a6f278bef782407a311f157101ed09fbffcd5fcabbdc7aa3ef63b"
+        },
+        "confirmationToCanonical": {
+          "canonicalPaperId": "paper-2020-i",
+          "canonicalProfileId": "nck1",
+          "canonicalAuthority": {
+            "manifestId": "paper-canonical",
+            "manifestVersion": "41",
+            "manifestDigest": "sha256:b025bdc677a59a09548575e3df1e911ecd0273c5f6a9056d70603107c1970c83"
+          }
+        }
+      }
+    },
+    {
+      "paperId": "paper-2020-ii",
+      "familyCounts": {
+        "application-writing": {
+          "blankRefCount": 0,
+          "groupCount": 1,
+          "optionBankOptionCount": 0,
+          "optionCount": 0,
+          "questionCount": 0
+        },
+        "cloze": {
+          "blankRefCount": 15,
+          "groupCount": 1,
+          "optionBankOptionCount": 0,
+          "optionCount": 60,
+          "questionCount": 15
+        },
+        "continuation-writing": {
+          "blankRefCount": 0,
+          "groupCount": 1,
+          "optionBankOptionCount": 0,
+          "optionCount": 0,
+          "questionCount": 0
+        },
+        "grammar-fill": {
+          "blankRefCount": 10,
+          "groupCount": 1,
+          "optionBankOptionCount": 0,
+          "optionCount": 0,
+          "questionCount": 10
+        },
+        "reading": {
+          "blankRefCount": 0,
+          "groupCount": 4,
+          "optionBankOptionCount": 0,
+          "optionCount": 60,
+          "questionCount": 15
+        },
+        "seven-choices": {
+          "blankRefCount": 5,
+          "groupCount": 1,
+          "optionBankOptionCount": 7,
+          "optionCount": 0,
+          "questionCount": 5
+        }
+      },
+      "profileId": "nck1",
+      "profileRef": {
+        "profileId": "nck1",
+        "profileVersion": "12",
+        "profileDigest": "sha256:0dd7de904d7a0346716b117ca5ead8a6fdc66b894d7700da79698e7d0fe546db"
+      },
+      "sourceType": "legacy-json",
+      "authority": {
+        "manifestId": "paper-canonical",
+        "manifestVersion": "41",
+        "manifestDigest": "sha256:b025bdc677a59a09548575e3df1e911ecd0273c5f6a9056d70603107c1970c83"
+      },
+      "sourceCapture": {
+        "path": "test-fixtures/paper-import/paper-canonical-source-captures/ticket-26-v1/paper-2020-ii/source-capture-v1.json",
+        "sourceCaptureId": "source-capture:f90b394a8c4e47b2e84d2",
+        "sourceCaptureDigest": "sha256:f90b394a8c4e47b2e84d22fc11192ca82d87b41073a0d84d06f78511d3fb1f1a",
+        "fileSha256": "sha256:f1d3acf3e1870c0016777912d0ce2dd69d5eca2809ba2185db237e9613806d41",
+        "byteLength": 208614
+      },
+      "candidate": {
+        "path": "test-fixtures/paper-import/paper-canonical-confirmation-lanes/ticket-27-nck1-v1/paper-2020-ii/import-candidate-v1.json",
+        "candidateDigest": "sha256:7f61c165cefdead02006710ded6b9dda0b066d3d0561f5691fb61986348e50f1",
+        "fileSha256": "sha256:252d8202b509dced60152eed5f4be4a9242bb0c3ee3f90746902a0a6afad692e",
+        "byteLength": 197847
+      },
+      "confirmation": {
+        "path": "test-fixtures/paper-import/paper-canonical-confirmation-lanes/ticket-27-nck1-v1/paper-2020-ii/teacher-confirmation-v1.json",
+        "confirmationDigest": "sha256:929d209c95543a020db921799703ce35c8f4398b5cd6e02f4c0275787045c0af",
+        "candidateDigest": "sha256:7f61c165cefdead02006710ded6b9dda0b066d3d0561f5691fb61986348e50f1",
+        "sourceDigest": "sha256:f1d3acf3e1870c0016777912d0ce2dd69d5eca2809ba2185db237e9613806d41",
+        "fileSha256": "sha256:033cf56fdfd0a13a3ab8c5685309f3a019dcb6715112f7d3805bc38c7ad190d9",
+        "byteLength": 259
+      },
+      "canonicalPaper": {
+        "path": "test-fixtures/paper-import/paper-canonical-confirmation-lanes/ticket-27-nck1-v1/paper-2020-ii/canonical-paper-v1.json",
+        "canonicalPaperDigest": "sha256:516b915fa680a4da6bb345706067d19d071bb60235e2cd096241c5426ab7d73c",
+        "fileSha256": "sha256:69169582b547768044ec289923bfe6b039965439154050270414b16cd917f84b",
+        "byteLength": 770343,
+        "completeness": "complete",
+        "publication": "unpublished",
+        "groupCount": 9,
+        "questionCount": 45,
+        "optionCount": 120
+      },
+      "counts": {
+        "groupCount": 9,
+        "questionCount": 45,
+        "optionCount": 120,
+        "blankRefCount": 30,
+        "optionBankOptionCount": 7,
+        "canonicalBytes": 770343
+      },
+      "bindings": {
+        "sourceToCandidate": {
+          "sourceCaptureId": "source-capture:f90b394a8c4e47b2e84d2",
+          "sourceCaptureDigest": "sha256:f90b394a8c4e47b2e84d22fc11192ca82d87b41073a0d84d06f78511d3fb1f1a",
+          "sourceCaptureFileSha256": "sha256:f1d3acf3e1870c0016777912d0ce2dd69d5eca2809ba2185db237e9613806d41",
+          "candidateSourcePaperId": "paper-2020-ii",
+          "candidateSourceFileSha256": "sha256:f1d3acf3e1870c0016777912d0ce2dd69d5eca2809ba2185db237e9613806d41",
+          "candidateSourceByteLength": 208614
+        },
+        "candidateToConfirmation": {
+          "candidateDigest": "sha256:7f61c165cefdead02006710ded6b9dda0b066d3d0561f5691fb61986348e50f1",
+          "confirmationCandidateDigest": "sha256:7f61c165cefdead02006710ded6b9dda0b066d3d0561f5691fb61986348e50f1"
+        },
+        "sourceToConfirmation": {
+          "sourceCaptureFileSha256": "sha256:f1d3acf3e1870c0016777912d0ce2dd69d5eca2809ba2185db237e9613806d41",
+          "confirmationSourceDigest": "sha256:f1d3acf3e1870c0016777912d0ce2dd69d5eca2809ba2185db237e9613806d41"
+        },
+        "confirmationToCanonical": {
+          "canonicalPaperId": "paper-2020-ii",
+          "canonicalProfileId": "nck1",
+          "canonicalAuthority": {
+            "manifestId": "paper-canonical",
+            "manifestVersion": "41",
+            "manifestDigest": "sha256:b025bdc677a59a09548575e3df1e911ecd0273c5f6a9056d70603107c1970c83"
+          }
+        }
+      }
+    },
+    {
+      "paperId": "paper-2021-i",
+      "familyCounts": {
+        "application-writing": {
+          "blankRefCount": 0,
+          "groupCount": 1,
+          "optionBankOptionCount": 0,
+          "optionCount": 0,
+          "questionCount": 0
+        },
+        "cloze": {
+          "blankRefCount": 15,
+          "groupCount": 1,
+          "optionBankOptionCount": 0,
+          "optionCount": 60,
+          "questionCount": 15
+        },
+        "continuation-writing": {
+          "blankRefCount": 0,
+          "groupCount": 1,
+          "optionBankOptionCount": 0,
+          "optionCount": 0,
+          "questionCount": 0
+        },
+        "grammar-fill": {
+          "blankRefCount": 10,
+          "groupCount": 1,
+          "optionBankOptionCount": 0,
+          "optionCount": 0,
+          "questionCount": 10
+        },
+        "reading": {
+          "blankRefCount": 0,
+          "groupCount": 4,
+          "optionBankOptionCount": 0,
+          "optionCount": 60,
+          "questionCount": 15
+        },
+        "seven-choices": {
+          "blankRefCount": 5,
+          "groupCount": 1,
+          "optionBankOptionCount": 7,
+          "optionCount": 0,
+          "questionCount": 5
+        }
+      },
+      "profileId": "nck1",
+      "profileRef": {
+        "profileId": "nck1",
+        "profileVersion": "12",
+        "profileDigest": "sha256:0dd7de904d7a0346716b117ca5ead8a6fdc66b894d7700da79698e7d0fe546db"
+      },
+      "sourceType": "legacy-json",
+      "authority": {
+        "manifestId": "paper-canonical",
+        "manifestVersion": "41",
+        "manifestDigest": "sha256:b025bdc677a59a09548575e3df1e911ecd0273c5f6a9056d70603107c1970c83"
+      },
+      "sourceCapture": {
+        "path": "test-fixtures/paper-import/paper-canonical-source-captures/ticket-26-v1/paper-2021-i/source-capture-v1.json",
+        "sourceCaptureId": "source-capture:4968a033b05a9c2ad3bb7",
+        "sourceCaptureDigest": "sha256:4968a033b05a9c2ad3bb7ad6ccbff8eb72cc6d29505e6999931a55cc43912685",
+        "fileSha256": "sha256:a83545889c01467c33c1e41afe8ec34aab5dfff7f6fc89fd3a7391c618b4326f",
+        "byteLength": 211401
+      },
+      "candidate": {
+        "path": "test-fixtures/paper-import/paper-canonical-confirmation-lanes/ticket-27-nck1-v1/paper-2021-i/import-candidate-v1.json",
+        "candidateDigest": "sha256:05227edc483d9312b37fa1d07f0e41fef8c8aa52e0ff3fa82c244f5e58f1da4d",
+        "fileSha256": "sha256:f90898f2775ab2c4c7db2314874ef01b5841055f38a38df89ba217f565169435",
+        "byteLength": 193456
+      },
+      "confirmation": {
+        "path": "test-fixtures/paper-import/paper-canonical-confirmation-lanes/ticket-27-nck1-v1/paper-2021-i/teacher-confirmation-v1.json",
+        "confirmationDigest": "sha256:e55fad07f8d363f4b35bf27b197d4c90ccc6aa66d3f605d3f41547190d4d0c60",
+        "candidateDigest": "sha256:05227edc483d9312b37fa1d07f0e41fef8c8aa52e0ff3fa82c244f5e58f1da4d",
+        "sourceDigest": "sha256:a83545889c01467c33c1e41afe8ec34aab5dfff7f6fc89fd3a7391c618b4326f",
+        "fileSha256": "sha256:606cbbbc1fee5a14bfe445038f827b28899ecd3f0e724c70a236875af6ff27f7",
+        "byteLength": 259
+      },
+      "canonicalPaper": {
+        "path": "test-fixtures/paper-import/paper-canonical-confirmation-lanes/ticket-27-nck1-v1/paper-2021-i/canonical-paper-v1.json",
+        "canonicalPaperDigest": "sha256:19ac824e3915fb36c1f0688d16ac8f9da8892151b200d121de1ccd14589a9ec5",
+        "fileSha256": "sha256:26e4a27435a157f87498431132eb4015f30b45d377b2613099747c3e6d521372",
+        "byteLength": 765922,
+        "completeness": "complete",
+        "publication": "unpublished",
+        "groupCount": 9,
+        "questionCount": 45,
+        "optionCount": 120
+      },
+      "counts": {
+        "groupCount": 9,
+        "questionCount": 45,
+        "optionCount": 120,
+        "blankRefCount": 30,
+        "optionBankOptionCount": 7,
+        "canonicalBytes": 765922
+      },
+      "bindings": {
+        "sourceToCandidate": {
+          "sourceCaptureId": "source-capture:4968a033b05a9c2ad3bb7",
+          "sourceCaptureDigest": "sha256:4968a033b05a9c2ad3bb7ad6ccbff8eb72cc6d29505e6999931a55cc43912685",
+          "sourceCaptureFileSha256": "sha256:a83545889c01467c33c1e41afe8ec34aab5dfff7f6fc89fd3a7391c618b4326f",
+          "candidateSourcePaperId": "paper-2021-i",
+          "candidateSourceFileSha256": "sha256:a83545889c01467c33c1e41afe8ec34aab5dfff7f6fc89fd3a7391c618b4326f",
+          "candidateSourceByteLength": 211401
+        },
+        "candidateToConfirmation": {
+          "candidateDigest": "sha256:05227edc483d9312b37fa1d07f0e41fef8c8aa52e0ff3fa82c244f5e58f1da4d",
+          "confirmationCandidateDigest": "sha256:05227edc483d9312b37fa1d07f0e41fef8c8aa52e0ff3fa82c244f5e58f1da4d"
+        },
+        "sourceToConfirmation": {
+          "sourceCaptureFileSha256": "sha256:a83545889c01467c33c1e41afe8ec34aab5dfff7f6fc89fd3a7391c618b4326f",
+          "confirmationSourceDigest": "sha256:a83545889c01467c33c1e41afe8ec34aab5dfff7f6fc89fd3a7391c618b4326f"
+        },
+        "confirmationToCanonical": {
+          "canonicalPaperId": "paper-2021-i",
+          "canonicalProfileId": "nck1",
+          "canonicalAuthority": {
+            "manifestId": "paper-canonical",
+            "manifestVersion": "41",
+            "manifestDigest": "sha256:b025bdc677a59a09548575e3df1e911ecd0273c5f6a9056d70603107c1970c83"
+          }
+        }
+      }
+    },
+    {
+      "paperId": "paper-2021-ii",
+      "familyCounts": {
+        "application-writing": {
+          "blankRefCount": 0,
+          "groupCount": 1,
+          "optionBankOptionCount": 0,
+          "optionCount": 0,
+          "questionCount": 0
+        },
+        "cloze": {
+          "blankRefCount": 15,
+          "groupCount": 1,
+          "optionBankOptionCount": 0,
+          "optionCount": 60,
+          "questionCount": 15
+        },
+        "continuation-writing": {
+          "blankRefCount": 0,
+          "groupCount": 1,
+          "optionBankOptionCount": 0,
+          "optionCount": 0,
+          "questionCount": 0
+        },
+        "grammar-fill": {
+          "blankRefCount": 10,
+          "groupCount": 1,
+          "optionBankOptionCount": 0,
+          "optionCount": 0,
+          "questionCount": 10
+        },
+        "reading": {
+          "blankRefCount": 0,
+          "groupCount": 4,
+          "optionBankOptionCount": 0,
+          "optionCount": 60,
+          "questionCount": 15
+        },
+        "seven-choices": {
+          "blankRefCount": 5,
+          "groupCount": 1,
+          "optionBankOptionCount": 7,
+          "optionCount": 0,
+          "questionCount": 5
+        }
+      },
+      "profileId": "nck1",
+      "profileRef": {
+        "profileId": "nck1",
+        "profileVersion": "12",
+        "profileDigest": "sha256:0dd7de904d7a0346716b117ca5ead8a6fdc66b894d7700da79698e7d0fe546db"
+      },
+      "sourceType": "legacy-json",
+      "authority": {
+        "manifestId": "paper-canonical",
+        "manifestVersion": "41",
+        "manifestDigest": "sha256:b025bdc677a59a09548575e3df1e911ecd0273c5f6a9056d70603107c1970c83"
+      },
+      "sourceCapture": {
+        "path": "test-fixtures/paper-import/paper-canonical-source-captures/ticket-26-v1/paper-2021-ii/source-capture-v1.json",
+        "sourceCaptureId": "source-capture:8f1a23d36699190c0f3a1",
+        "sourceCaptureDigest": "sha256:8f1a23d36699190c0f3a13e506a94d6a873b5816e03db182d115a4f7db8810cb",
+        "fileSha256": "sha256:c51feedebdd805f30d5c28e82e640f4876e1535f1688570422adb5eae9ec7daf",
+        "byteLength": 202506
+      },
+      "candidate": {
+        "path": "test-fixtures/paper-import/paper-canonical-confirmation-lanes/ticket-27-nck1-v1/paper-2021-ii/import-candidate-v1.json",
+        "candidateDigest": "sha256:e9c5ae3252c0c4e872b98740f118a254a5a352e38f3525087c3ddce4550e1614",
+        "fileSha256": "sha256:e45ebff535c8c8ceb51b95576b31256727b75fdac018d7020b2f66c8dd73a577",
+        "byteLength": 198591
+      },
+      "confirmation": {
+        "path": "test-fixtures/paper-import/paper-canonical-confirmation-lanes/ticket-27-nck1-v1/paper-2021-ii/teacher-confirmation-v1.json",
+        "confirmationDigest": "sha256:5ce0397b593d752599210c030ef8f07a8dff5fe342d5abe04ed68c886cd25ed7",
+        "candidateDigest": "sha256:e9c5ae3252c0c4e872b98740f118a254a5a352e38f3525087c3ddce4550e1614",
+        "sourceDigest": "sha256:c51feedebdd805f30d5c28e82e640f4876e1535f1688570422adb5eae9ec7daf",
+        "fileSha256": "sha256:81c055cd5a3be3795491d5db3ee2d21082b4e1adfa9777e09e7fa2eb7daa2efe",
+        "byteLength": 259
+      },
+      "canonicalPaper": {
+        "path": "test-fixtures/paper-import/paper-canonical-confirmation-lanes/ticket-27-nck1-v1/paper-2021-ii/canonical-paper-v1.json",
+        "canonicalPaperDigest": "sha256:ad5597935ff29ee96a6f612b6e82d7f927bbaf87a42a03ddfd5566ed390499bb",
+        "fileSha256": "sha256:4ccd42b0e7881ed23ee4d57c218c4383bc9f6342d7acd62a334352dfee208032",
+        "byteLength": 758465,
+        "completeness": "complete",
+        "publication": "unpublished",
+        "groupCount": 9,
+        "questionCount": 45,
+        "optionCount": 120
+      },
+      "counts": {
+        "groupCount": 9,
+        "questionCount": 45,
+        "optionCount": 120,
+        "blankRefCount": 30,
+        "optionBankOptionCount": 7,
+        "canonicalBytes": 758465
+      },
+      "bindings": {
+        "sourceToCandidate": {
+          "sourceCaptureId": "source-capture:8f1a23d36699190c0f3a1",
+          "sourceCaptureDigest": "sha256:8f1a23d36699190c0f3a13e506a94d6a873b5816e03db182d115a4f7db8810cb",
+          "sourceCaptureFileSha256": "sha256:c51feedebdd805f30d5c28e82e640f4876e1535f1688570422adb5eae9ec7daf",
+          "candidateSourcePaperId": "paper-2021-ii",
+          "candidateSourceFileSha256": "sha256:c51feedebdd805f30d5c28e82e640f4876e1535f1688570422adb5eae9ec7daf",
+          "candidateSourceByteLength": 202506
+        },
+        "candidateToConfirmation": {
+          "candidateDigest": "sha256:e9c5ae3252c0c4e872b98740f118a254a5a352e38f3525087c3ddce4550e1614",
+          "confirmationCandidateDigest": "sha256:e9c5ae3252c0c4e872b98740f118a254a5a352e38f3525087c3ddce4550e1614"
+        },
+        "sourceToConfirmation": {
+          "sourceCaptureFileSha256": "sha256:c51feedebdd805f30d5c28e82e640f4876e1535f1688570422adb5eae9ec7daf",
+          "confirmationSourceDigest": "sha256:c51feedebdd805f30d5c28e82e640f4876e1535f1688570422adb5eae9ec7daf"
+        },
+        "confirmationToCanonical": {
+          "canonicalPaperId": "paper-2021-ii",
+          "canonicalProfileId": "nck1",
+          "canonicalAuthority": {
+            "manifestId": "paper-canonical",
+            "manifestVersion": "41",
+            "manifestDigest": "sha256:b025bdc677a59a09548575e3df1e911ecd0273c5f6a9056d70603107c1970c83"
+          }
+        }
+      }
+    },
+    {
+      "paperId": "paper-2022-i",
+      "familyCounts": {
+        "application-writing": {
+          "blankRefCount": 0,
+          "groupCount": 1,
+          "optionBankOptionCount": 0,
+          "optionCount": 0,
+          "questionCount": 0
+        },
+        "cloze": {
+          "blankRefCount": 15,
+          "groupCount": 1,
+          "optionBankOptionCount": 0,
+          "optionCount": 60,
+          "questionCount": 15
+        },
+        "continuation-writing": {
+          "blankRefCount": 0,
+          "groupCount": 1,
+          "optionBankOptionCount": 0,
+          "optionCount": 0,
+          "questionCount": 0
+        },
+        "grammar-fill": {
+          "blankRefCount": 10,
+          "groupCount": 1,
+          "optionBankOptionCount": 0,
+          "optionCount": 0,
+          "questionCount": 10
+        },
+        "reading": {
+          "blankRefCount": 0,
+          "groupCount": 4,
+          "optionBankOptionCount": 0,
+          "optionCount": 60,
+          "questionCount": 15
+        },
+        "seven-choices": {
+          "blankRefCount": 5,
+          "groupCount": 1,
+          "optionBankOptionCount": 7,
+          "optionCount": 0,
+          "questionCount": 5
+        }
+      },
+      "profileId": "nck1",
+      "profileRef": {
+        "profileId": "nck1",
+        "profileVersion": "12",
+        "profileDigest": "sha256:0dd7de904d7a0346716b117ca5ead8a6fdc66b894d7700da79698e7d0fe546db"
+      },
+      "sourceType": "legacy-json",
+      "authority": {
+        "manifestId": "paper-canonical",
+        "manifestVersion": "41",
+        "manifestDigest": "sha256:b025bdc677a59a09548575e3df1e911ecd0273c5f6a9056d70603107c1970c83"
+      },
+      "sourceCapture": {
+        "path": "test-fixtures/paper-import/paper-canonical-source-captures/ticket-26-v1/paper-2022-i/source-capture-v1.json",
+        "sourceCaptureId": "source-capture:11a74ca22a7d0186c0344",
+        "sourceCaptureDigest": "sha256:11a74ca22a7d0186c0344c0d548c5c75b8776a8308368eb067b23f4bc508d93b",
+        "fileSha256": "sha256:954606b983a148ce611f5ec76bdadfe083545c64574973cd1fe20e1ae7e971d9",
+        "byteLength": 212245
+      },
+      "candidate": {
+        "path": "test-fixtures/paper-import/paper-canonical-confirmation-lanes/ticket-27-nck1-v1/paper-2022-i/import-candidate-v1.json",
+        "candidateDigest": "sha256:fcf0ea0b74b56978aa6ad26bfd5208d76f307e92d882cc8b2b86e9726c80703b",
+        "fileSha256": "sha256:0185d3d4b38d8f121f8118b62ec4ba8a37284b137fe51acb24904839a9d9fb34",
+        "byteLength": 197854
+      },
+      "confirmation": {
+        "path": "test-fixtures/paper-import/paper-canonical-confirmation-lanes/ticket-27-nck1-v1/paper-2022-i/teacher-confirmation-v1.json",
+        "confirmationDigest": "sha256:82c594ebe1d0a5764d93816b2ff592528bb4172d5e805bb4530dd1f720caf922",
+        "candidateDigest": "sha256:fcf0ea0b74b56978aa6ad26bfd5208d76f307e92d882cc8b2b86e9726c80703b",
+        "sourceDigest": "sha256:954606b983a148ce611f5ec76bdadfe083545c64574973cd1fe20e1ae7e971d9",
+        "fileSha256": "sha256:7c75f328e36ab8e316d757d55fe55ed4f504a5d7d97d8a38685ac0eb31da8ad2",
+        "byteLength": 259
+      },
+      "canonicalPaper": {
+        "path": "test-fixtures/paper-import/paper-canonical-confirmation-lanes/ticket-27-nck1-v1/paper-2022-i/canonical-paper-v1.json",
+        "canonicalPaperDigest": "sha256:b583f8c3dacf0cf32214033bd0cd20574d6d98291369a472a04aad7f8cbcc4bd",
+        "fileSha256": "sha256:8c353dee423f22da472a617c986939714f99cefddedda4d90cc282aca6e180ed",
+        "byteLength": 776461,
+        "completeness": "complete",
+        "publication": "unpublished",
+        "groupCount": 9,
+        "questionCount": 45,
+        "optionCount": 120
+      },
+      "counts": {
+        "groupCount": 9,
+        "questionCount": 45,
+        "optionCount": 120,
+        "blankRefCount": 30,
+        "optionBankOptionCount": 7,
+        "canonicalBytes": 776461
+      },
+      "bindings": {
+        "sourceToCandidate": {
+          "sourceCaptureId": "source-capture:11a74ca22a7d0186c0344",
+          "sourceCaptureDigest": "sha256:11a74ca22a7d0186c0344c0d548c5c75b8776a8308368eb067b23f4bc508d93b",
+          "sourceCaptureFileSha256": "sha256:954606b983a148ce611f5ec76bdadfe083545c64574973cd1fe20e1ae7e971d9",
+          "candidateSourcePaperId": "paper-2022-i",
+          "candidateSourceFileSha256": "sha256:954606b983a148ce611f5ec76bdadfe083545c64574973cd1fe20e1ae7e971d9",
+          "candidateSourceByteLength": 212245
+        },
+        "candidateToConfirmation": {
+          "candidateDigest": "sha256:fcf0ea0b74b56978aa6ad26bfd5208d76f307e92d882cc8b2b86e9726c80703b",
+          "confirmationCandidateDigest": "sha256:fcf0ea0b74b56978aa6ad26bfd5208d76f307e92d882cc8b2b86e9726c80703b"
+        },
+        "sourceToConfirmation": {
+          "sourceCaptureFileSha256": "sha256:954606b983a148ce611f5ec76bdadfe083545c64574973cd1fe20e1ae7e971d9",
+          "confirmationSourceDigest": "sha256:954606b983a148ce611f5ec76bdadfe083545c64574973cd1fe20e1ae7e971d9"
+        },
+        "confirmationToCanonical": {
+          "canonicalPaperId": "paper-2022-i",
+          "canonicalProfileId": "nck1",
+          "canonicalAuthority": {
+            "manifestId": "paper-canonical",
+            "manifestVersion": "41",
+            "manifestDigest": "sha256:b025bdc677a59a09548575e3df1e911ecd0273c5f6a9056d70603107c1970c83"
+          }
+        }
+      }
+    },
+    {
+      "paperId": "paper-2022-ii",
+      "familyCounts": {
+        "application-writing": {
+          "blankRefCount": 0,
+          "groupCount": 1,
+          "optionBankOptionCount": 0,
+          "optionCount": 0,
+          "questionCount": 0
+        },
+        "cloze": {
+          "blankRefCount": 15,
+          "groupCount": 1,
+          "optionBankOptionCount": 0,
+          "optionCount": 60,
+          "questionCount": 15
+        },
+        "continuation-writing": {
+          "blankRefCount": 0,
+          "groupCount": 1,
+          "optionBankOptionCount": 0,
+          "optionCount": 0,
+          "questionCount": 0
+        },
+        "grammar-fill": {
+          "blankRefCount": 10,
+          "groupCount": 1,
+          "optionBankOptionCount": 0,
+          "optionCount": 0,
+          "questionCount": 10
+        },
+        "reading": {
+          "blankRefCount": 0,
+          "groupCount": 4,
+          "optionBankOptionCount": 0,
+          "optionCount": 60,
+          "questionCount": 15
+        },
+        "seven-choices": {
+          "blankRefCount": 5,
+          "groupCount": 1,
+          "optionBankOptionCount": 7,
+          "optionCount": 0,
+          "questionCount": 5
+        }
+      },
+      "profileId": "nck1",
+      "profileRef": {
+        "profileId": "nck1",
+        "profileVersion": "12",
+        "profileDigest": "sha256:0dd7de904d7a0346716b117ca5ead8a6fdc66b894d7700da79698e7d0fe546db"
+      },
+      "sourceType": "legacy-json",
+      "authority": {
+        "manifestId": "paper-canonical",
+        "manifestVersion": "41",
+        "manifestDigest": "sha256:b025bdc677a59a09548575e3df1e911ecd0273c5f6a9056d70603107c1970c83"
+      },
+      "sourceCapture": {
+        "path": "test-fixtures/paper-import/paper-canonical-source-captures/ticket-26-v1/paper-2022-ii/source-capture-v1.json",
+        "sourceCaptureId": "source-capture:bd396d32cf30400826606",
+        "sourceCaptureDigest": "sha256:bd396d32cf30400826606766dcd8c55f95b7772eb69b11206668362494b64b86",
+        "fileSha256": "sha256:47d72f7373c6092672fe7a4151e50895ce065d9432b01c0be2b9a08d8e9580a6",
+        "byteLength": 211526
+      },
+      "candidate": {
+        "path": "test-fixtures/paper-import/paper-canonical-confirmation-lanes/ticket-27-nck1-v1/paper-2022-ii/import-candidate-v1.json",
+        "candidateDigest": "sha256:e5e6f8c86b57986411f2e42d9a3b89ae06c39020c1f1a4fb61fbf927625c7639",
+        "fileSha256": "sha256:58561b1601043db6be99f849417aaf1934ffa25ef0dbf66983026b37e2b0ea7b",
+        "byteLength": 204322
+      },
+      "confirmation": {
+        "path": "test-fixtures/paper-import/paper-canonical-confirmation-lanes/ticket-27-nck1-v1/paper-2022-ii/teacher-confirmation-v1.json",
+        "confirmationDigest": "sha256:146082b3260f2f821f13d75958d83abac618c8303e4b5b9351e28ad4b141e94f",
+        "candidateDigest": "sha256:e5e6f8c86b57986411f2e42d9a3b89ae06c39020c1f1a4fb61fbf927625c7639",
+        "sourceDigest": "sha256:47d72f7373c6092672fe7a4151e50895ce065d9432b01c0be2b9a08d8e9580a6",
+        "fileSha256": "sha256:021ca34d008bc9074926ab01e6e206f426969fe1b819010121673aeee5ba8b4d",
+        "byteLength": 259
+      },
+      "canonicalPaper": {
+        "path": "test-fixtures/paper-import/paper-canonical-confirmation-lanes/ticket-27-nck1-v1/paper-2022-ii/canonical-paper-v1.json",
+        "canonicalPaperDigest": "sha256:779f75d239588569c8eef5d59d3f781994ac0a5f1ec74da5240047c3675da4f8",
+        "fileSha256": "sha256:423fb53c7e5fbecc54f8bcc9c125215fb524f57d4840094fb34b3947fe6fba43",
+        "byteLength": 789006,
+        "completeness": "complete",
+        "publication": "unpublished",
+        "groupCount": 9,
+        "questionCount": 45,
+        "optionCount": 120
+      },
+      "counts": {
+        "groupCount": 9,
+        "questionCount": 45,
+        "optionCount": 120,
+        "blankRefCount": 30,
+        "optionBankOptionCount": 7,
+        "canonicalBytes": 789006
+      },
+      "bindings": {
+        "sourceToCandidate": {
+          "sourceCaptureId": "source-capture:bd396d32cf30400826606",
+          "sourceCaptureDigest": "sha256:bd396d32cf30400826606766dcd8c55f95b7772eb69b11206668362494b64b86",
+          "sourceCaptureFileSha256": "sha256:47d72f7373c6092672fe7a4151e50895ce065d9432b01c0be2b9a08d8e9580a6",
+          "candidateSourcePaperId": "paper-2022-ii",
+          "candidateSourceFileSha256": "sha256:47d72f7373c6092672fe7a4151e50895ce065d9432b01c0be2b9a08d8e9580a6",
+          "candidateSourceByteLength": 211526
+        },
+        "candidateToConfirmation": {
+          "candidateDigest": "sha256:e5e6f8c86b57986411f2e42d9a3b89ae06c39020c1f1a4fb61fbf927625c7639",
+          "confirmationCandidateDigest": "sha256:e5e6f8c86b57986411f2e42d9a3b89ae06c39020c1f1a4fb61fbf927625c7639"
+        },
+        "sourceToConfirmation": {
+          "sourceCaptureFileSha256": "sha256:47d72f7373c6092672fe7a4151e50895ce065d9432b01c0be2b9a08d8e9580a6",
+          "confirmationSourceDigest": "sha256:47d72f7373c6092672fe7a4151e50895ce065d9432b01c0be2b9a08d8e9580a6"
+        },
+        "confirmationToCanonical": {
+          "canonicalPaperId": "paper-2022-ii",
+          "canonicalProfileId": "nck1",
+          "canonicalAuthority": {
+            "manifestId": "paper-canonical",
+            "manifestVersion": "41",
+            "manifestDigest": "sha256:b025bdc677a59a09548575e3df1e911ecd0273c5f6a9056d70603107c1970c83"
+          }
+        }
+      }
+    },
+    {
+      "paperId": "paper-2023-i",
+      "familyCounts": {
+        "application-writing": {
+          "blankRefCount": 0,
+          "groupCount": 1,
+          "optionBankOptionCount": 0,
+          "optionCount": 0,
+          "questionCount": 0
+        },
+        "cloze": {
+          "blankRefCount": 15,
+          "groupCount": 1,
+          "optionBankOptionCount": 0,
+          "optionCount": 60,
+          "questionCount": 15
+        },
+        "continuation-writing": {
+          "blankRefCount": 0,
+          "groupCount": 1,
+          "optionBankOptionCount": 0,
+          "optionCount": 0,
+          "questionCount": 0
+        },
+        "grammar-fill": {
+          "blankRefCount": 10,
+          "groupCount": 1,
+          "optionBankOptionCount": 0,
+          "optionCount": 0,
+          "questionCount": 10
+        },
+        "reading": {
+          "blankRefCount": 0,
+          "groupCount": 4,
+          "optionBankOptionCount": 0,
+          "optionCount": 60,
+          "questionCount": 15
+        },
+        "seven-choices": {
+          "blankRefCount": 5,
+          "groupCount": 1,
+          "optionBankOptionCount": 7,
+          "optionCount": 0,
+          "questionCount": 5
+        }
+      },
+      "profileId": "nck1",
+      "profileRef": {
+        "profileId": "nck1",
+        "profileVersion": "12",
+        "profileDigest": "sha256:0dd7de904d7a0346716b117ca5ead8a6fdc66b894d7700da79698e7d0fe546db"
+      },
+      "sourceType": "legacy-json",
+      "authority": {
+        "manifestId": "paper-canonical",
+        "manifestVersion": "41",
+        "manifestDigest": "sha256:b025bdc677a59a09548575e3df1e911ecd0273c5f6a9056d70603107c1970c83"
+      },
+      "sourceCapture": {
+        "path": "test-fixtures/paper-import/paper-canonical-source-captures/ticket-26-v1/paper-2023-i/source-capture-v1.json",
+        "sourceCaptureId": "source-capture:43485ab160c2aa349d59d",
+        "sourceCaptureDigest": "sha256:43485ab160c2aa349d59d3c1af3046b19a9da2e32bf5fc3b2e6838c652608bd5",
+        "fileSha256": "sha256:b66bcd20b12d11d56a44923b96436774a2ec814f339d245181a6ab32a1283f00",
+        "byteLength": 202509
+      },
+      "candidate": {
+        "path": "test-fixtures/paper-import/paper-canonical-confirmation-lanes/ticket-27-nck1-v1/paper-2023-i/import-candidate-v1.json",
+        "candidateDigest": "sha256:1413c741670830146143e800998a17bd0a52c30ceeaacf9f850fd1a6e746e76a",
+        "fileSha256": "sha256:c35692f12d46fd0ca46f4b2f53bfb498c8216c2378cf4037e3125ef8f1242818",
+        "byteLength": 195502
+      },
+      "confirmation": {
+        "path": "test-fixtures/paper-import/paper-canonical-confirmation-lanes/ticket-27-nck1-v1/paper-2023-i/teacher-confirmation-v1.json",
+        "confirmationDigest": "sha256:99a1fcfa2acd8357683aac1eff90d3c912a5efeb7ce4d181a8af057b4700a3d6",
+        "candidateDigest": "sha256:1413c741670830146143e800998a17bd0a52c30ceeaacf9f850fd1a6e746e76a",
+        "sourceDigest": "sha256:b66bcd20b12d11d56a44923b96436774a2ec814f339d245181a6ab32a1283f00",
+        "fileSha256": "sha256:4ef39470bb9eac31da1d89b539849667d828b516addcecded4eea60932a4340d",
+        "byteLength": 259
+      },
+      "canonicalPaper": {
+        "path": "test-fixtures/paper-import/paper-canonical-confirmation-lanes/ticket-27-nck1-v1/paper-2023-i/canonical-paper-v1.json",
+        "canonicalPaperDigest": "sha256:3be456bf8b54fd4afaa0b986f766da9588032b751b0cd35a08695109075a4f2f",
+        "fileSha256": "sha256:0805032c7361d19a05fc3c53c52dc6c84ad9e31243efa3aba519397e880b72e3",
+        "byteLength": 748127,
+        "completeness": "complete",
+        "publication": "unpublished",
+        "groupCount": 9,
+        "questionCount": 45,
+        "optionCount": 120
+      },
+      "counts": {
+        "groupCount": 9,
+        "questionCount": 45,
+        "optionCount": 120,
+        "blankRefCount": 30,
+        "optionBankOptionCount": 7,
+        "canonicalBytes": 748127
+      },
+      "bindings": {
+        "sourceToCandidate": {
+          "sourceCaptureId": "source-capture:43485ab160c2aa349d59d",
+          "sourceCaptureDigest": "sha256:43485ab160c2aa349d59d3c1af3046b19a9da2e32bf5fc3b2e6838c652608bd5",
+          "sourceCaptureFileSha256": "sha256:b66bcd20b12d11d56a44923b96436774a2ec814f339d245181a6ab32a1283f00",
+          "candidateSourcePaperId": "paper-2023-i",
+          "candidateSourceFileSha256": "sha256:b66bcd20b12d11d56a44923b96436774a2ec814f339d245181a6ab32a1283f00",
+          "candidateSourceByteLength": 202509
+        },
+        "candidateToConfirmation": {
+          "candidateDigest": "sha256:1413c741670830146143e800998a17bd0a52c30ceeaacf9f850fd1a6e746e76a",
+          "confirmationCandidateDigest": "sha256:1413c741670830146143e800998a17bd0a52c30ceeaacf9f850fd1a6e746e76a"
+        },
+        "sourceToConfirmation": {
+          "sourceCaptureFileSha256": "sha256:b66bcd20b12d11d56a44923b96436774a2ec814f339d245181a6ab32a1283f00",
+          "confirmationSourceDigest": "sha256:b66bcd20b12d11d56a44923b96436774a2ec814f339d245181a6ab32a1283f00"
+        },
+        "confirmationToCanonical": {
+          "canonicalPaperId": "paper-2023-i",
+          "canonicalProfileId": "nck1",
+          "canonicalAuthority": {
+            "manifestId": "paper-canonical",
+            "manifestVersion": "41",
+            "manifestDigest": "sha256:b025bdc677a59a09548575e3df1e911ecd0273c5f6a9056d70603107c1970c83"
+          }
+        }
+      }
+    },
+    {
+      "paperId": "paper-2023-ii",
+      "familyCounts": {
+        "application-writing": {
+          "blankRefCount": 0,
+          "groupCount": 1,
+          "optionBankOptionCount": 0,
+          "optionCount": 0,
+          "questionCount": 0
+        },
+        "cloze": {
+          "blankRefCount": 15,
+          "groupCount": 1,
+          "optionBankOptionCount": 0,
+          "optionCount": 60,
+          "questionCount": 15
+        },
+        "continuation-writing": {
+          "blankRefCount": 0,
+          "groupCount": 1,
+          "optionBankOptionCount": 0,
+          "optionCount": 0,
+          "questionCount": 0
+        },
+        "grammar-fill": {
+          "blankRefCount": 10,
+          "groupCount": 1,
+          "optionBankOptionCount": 0,
+          "optionCount": 0,
+          "questionCount": 10
+        },
+        "reading": {
+          "blankRefCount": 0,
+          "groupCount": 4,
+          "optionBankOptionCount": 0,
+          "optionCount": 60,
+          "questionCount": 15
+        },
+        "seven-choices": {
+          "blankRefCount": 5,
+          "groupCount": 1,
+          "optionBankOptionCount": 7,
+          "optionCount": 0,
+          "questionCount": 5
+        }
+      },
+      "profileId": "nck1",
+      "profileRef": {
+        "profileId": "nck1",
+        "profileVersion": "12",
+        "profileDigest": "sha256:0dd7de904d7a0346716b117ca5ead8a6fdc66b894d7700da79698e7d0fe546db"
+      },
+      "sourceType": "legacy-json",
+      "authority": {
+        "manifestId": "paper-canonical",
+        "manifestVersion": "41",
+        "manifestDigest": "sha256:b025bdc677a59a09548575e3df1e911ecd0273c5f6a9056d70603107c1970c83"
+      },
+      "sourceCapture": {
+        "path": "test-fixtures/paper-import/paper-canonical-source-captures/ticket-26-v1/paper-2023-ii/source-capture-v1.json",
+        "sourceCaptureId": "source-capture:ed90257b1fd0440b4fe65",
+        "sourceCaptureDigest": "sha256:ed90257b1fd0440b4fe6546b0f2759dc0854a32edcacb3351add9b19d7aa9736",
+        "fileSha256": "sha256:7de2b8f23c48bb8fa4998cf17dd59aec84e4f887e9919745cb09b9875110a7ec",
+        "byteLength": 218914
+      },
+      "candidate": {
+        "path": "test-fixtures/paper-import/paper-canonical-confirmation-lanes/ticket-27-nck1-v1/paper-2023-ii/import-candidate-v1.json",
+        "candidateDigest": "sha256:c6108fd94aeb060d4c6fefe3d7a7ddb263a04d1f20ebdff0cfc1eb2c094b7c46",
+        "fileSha256": "sha256:dbaf9de68a0c11977a56f095dd820763c43bc9188e501f82f7abfffe1b946c9a",
+        "byteLength": 200003
+      },
+      "confirmation": {
+        "path": "test-fixtures/paper-import/paper-canonical-confirmation-lanes/ticket-27-nck1-v1/paper-2023-ii/teacher-confirmation-v1.json",
+        "confirmationDigest": "sha256:a51be032a1ff9a709d5639302914412b3dbd354b5774b57c1900cee92e2bfe01",
+        "candidateDigest": "sha256:c6108fd94aeb060d4c6fefe3d7a7ddb263a04d1f20ebdff0cfc1eb2c094b7c46",
+        "sourceDigest": "sha256:7de2b8f23c48bb8fa4998cf17dd59aec84e4f887e9919745cb09b9875110a7ec",
+        "fileSha256": "sha256:f7f9afb07d37c06fd2551317d6a539decf90084b03ce7a12870d248bf620e363",
+        "byteLength": 259
+      },
+      "canonicalPaper": {
+        "path": "test-fixtures/paper-import/paper-canonical-confirmation-lanes/ticket-27-nck1-v1/paper-2023-ii/canonical-paper-v1.json",
+        "canonicalPaperDigest": "sha256:9ef9b15c71d28be76f1fff1e5d00cc6a160b52c15186344b23bde766a573de49",
+        "fileSha256": "sha256:08a55ccb9d6e85048f472a0313a8a436770e2d3ebf9d4aaf756f6f66535f6d7d",
+        "byteLength": 794724,
+        "completeness": "complete",
+        "publication": "unpublished",
+        "groupCount": 9,
+        "questionCount": 45,
+        "optionCount": 120
+      },
+      "counts": {
+        "groupCount": 9,
+        "questionCount": 45,
+        "optionCount": 120,
+        "blankRefCount": 30,
+        "optionBankOptionCount": 7,
+        "canonicalBytes": 794724
+      },
+      "bindings": {
+        "sourceToCandidate": {
+          "sourceCaptureId": "source-capture:ed90257b1fd0440b4fe65",
+          "sourceCaptureDigest": "sha256:ed90257b1fd0440b4fe6546b0f2759dc0854a32edcacb3351add9b19d7aa9736",
+          "sourceCaptureFileSha256": "sha256:7de2b8f23c48bb8fa4998cf17dd59aec84e4f887e9919745cb09b9875110a7ec",
+          "candidateSourcePaperId": "paper-2023-ii",
+          "candidateSourceFileSha256": "sha256:7de2b8f23c48bb8fa4998cf17dd59aec84e4f887e9919745cb09b9875110a7ec",
+          "candidateSourceByteLength": 218914
+        },
+        "candidateToConfirmation": {
+          "candidateDigest": "sha256:c6108fd94aeb060d4c6fefe3d7a7ddb263a04d1f20ebdff0cfc1eb2c094b7c46",
+          "confirmationCandidateDigest": "sha256:c6108fd94aeb060d4c6fefe3d7a7ddb263a04d1f20ebdff0cfc1eb2c094b7c46"
+        },
+        "sourceToConfirmation": {
+          "sourceCaptureFileSha256": "sha256:7de2b8f23c48bb8fa4998cf17dd59aec84e4f887e9919745cb09b9875110a7ec",
+          "confirmationSourceDigest": "sha256:7de2b8f23c48bb8fa4998cf17dd59aec84e4f887e9919745cb09b9875110a7ec"
+        },
+        "confirmationToCanonical": {
+          "canonicalPaperId": "paper-2023-ii",
+          "canonicalProfileId": "nck1",
+          "canonicalAuthority": {
+            "manifestId": "paper-canonical",
+            "manifestVersion": "41",
+            "manifestDigest": "sha256:b025bdc677a59a09548575e3df1e911ecd0273c5f6a9056d70603107c1970c83"
+          }
+        }
+      }
+    },
+    {
+      "paperId": "paper-2021-jia",
+      "familyCounts": {
+        "cloze": {
+          "blankRefCount": 20,
+          "groupCount": 1,
+          "optionBankOptionCount": 0,
+          "optionCount": 80,
+          "questionCount": 20
+        },
+        "grammar-fill": {
+          "blankRefCount": 10,
+          "groupCount": 1,
+          "optionBankOptionCount": 0,
+          "optionCount": 0,
+          "questionCount": 10
+        },
+        "reading": {
+          "blankRefCount": 0,
+          "groupCount": 4,
+          "optionBankOptionCount": 0,
+          "optionCount": 60,
+          "questionCount": 15
+        },
+        "seven-choices": {
+          "blankRefCount": 5,
+          "groupCount": 1,
+          "optionBankOptionCount": 7,
+          "optionCount": 0,
+          "questionCount": 5
+        }
+      },
+      "profileId": "national-legacy",
+      "profileRef": {
+        "profileDigest": "sha256:26dcda14930ecf41c60ff39a2aa072c53e947df96ff999c0f0a9131b398be18d",
+        "profileId": "national-legacy",
+        "profileVersion": "3"
+      },
+      "sourceType": "legacy-json",
+      "authority": {
+        "manifestDigest": "sha256:b025bdc677a59a09548575e3df1e911ecd0273c5f6a9056d70603107c1970c83",
+        "manifestId": "paper-canonical",
+        "manifestVersion": "41"
+      },
+      "sourceCapture": {
+        "path": "test-fixtures/paper-import/paper-canonical-source-captures/ticket-26-v1/paper-2021-jia/source-capture-v1.json",
+        "sourceCaptureId": "source-capture:be287297cbf3ea85621d3",
+        "sourceCaptureDigest": "sha256:be287297cbf3ea85621d30b47e36d38a9d4eaed0e3087ac342c96fc5a74f6fa4",
+        "fileSha256": "sha256:09fc41d5826b26bd3f500e5583e4f56b377aedb92ea61239269e31bd8943655f",
+        "byteLength": 188947
+      },
+      "candidate": {
+        "path": "test-fixtures/paper-import/paper-canonical-confirmation-lanes/ticket-28-national-legacy-v1/paper-2021-jia/candidate-v1.json",
+        "candidateDigest": "sha256:b02d9fb7bdfb614333b9b50d7ceebeb071f1287e0ff749d3635cba383a051ba9",
+        "fileSha256": "sha256:69fa207417241e9d07d5ec457d1afcc1374c6c7d40ad32ff8e4db763d95cc7a4",
+        "byteLength": 200635
+      },
+      "confirmation": {
+        "path": "test-fixtures/paper-import/paper-canonical-confirmation-lanes/ticket-28-national-legacy-v1/paper-2021-jia/teacher-confirmation-v1.json",
+        "confirmationDigest": "sha256:7d7750c5a3866d18c68bf9ff91341aaffacc64c055af1a2a2194dca804b15fee",
+        "candidateDigest": "sha256:b02d9fb7bdfb614333b9b50d7ceebeb071f1287e0ff749d3635cba383a051ba9",
+        "sourceDigest": "sha256:09fc41d5826b26bd3f500e5583e4f56b377aedb92ea61239269e31bd8943655f",
+        "fileSha256": "sha256:023a8773f056215f1d0d51762dd4de09aa0151d6efe3338ab95683919f00eb26",
+        "byteLength": 625
+      },
+      "canonicalPaper": {
+        "path": "test-fixtures/paper-import/paper-canonical-confirmation-lanes/ticket-28-national-legacy-v1/paper-2021-jia/canonical-paper-v1.json",
+        "canonicalPaperDigest": "sha256:ae980e8ad67b0e2b2f414cdde3a99f5408534860a4d73b1ace5e7e456b0af5ee",
+        "fileSha256": "sha256:2002875b8a8548df41ec57991e251560b5ccadf979ecf3feafb37850dcbf5e60",
+        "byteLength": 726926,
+        "completeness": "complete",
+        "publication": "unpublished",
+        "groupCount": 7,
+        "questionCount": 50,
+        "optionCount": 140
+      },
+      "counts": {
+        "groupCount": 7,
+        "questionCount": 50,
+        "optionCount": 140,
+        "blankRefCount": 35,
+        "optionBankOptionCount": 7,
+        "canonicalBytes": 726926
+      },
+      "bindings": {
+        "sourceToCandidate": {
+          "sourceCaptureId": "source-capture:be287297cbf3ea85621d3",
+          "sourceCaptureDigest": "sha256:be287297cbf3ea85621d30b47e36d38a9d4eaed0e3087ac342c96fc5a74f6fa4",
+          "sourceCaptureFileSha256": "sha256:09fc41d5826b26bd3f500e5583e4f56b377aedb92ea61239269e31bd8943655f",
+          "candidateSourcePaperId": "paper-2021-jia",
+          "candidateSourceFileSha256": "sha256:09fc41d5826b26bd3f500e5583e4f56b377aedb92ea61239269e31bd8943655f",
+          "candidateSourceByteLength": 188947
+        },
+        "candidateToConfirmation": {
+          "candidateDigest": "sha256:b02d9fb7bdfb614333b9b50d7ceebeb071f1287e0ff749d3635cba383a051ba9",
+          "confirmationCandidateDigest": "sha256:b02d9fb7bdfb614333b9b50d7ceebeb071f1287e0ff749d3635cba383a051ba9"
+        },
+        "sourceToConfirmation": {
+          "sourceCaptureFileSha256": "sha256:09fc41d5826b26bd3f500e5583e4f56b377aedb92ea61239269e31bd8943655f",
+          "confirmationSourceDigest": "sha256:09fc41d5826b26bd3f500e5583e4f56b377aedb92ea61239269e31bd8943655f"
+        },
+        "confirmationToCanonical": {
+          "canonicalPaperId": "paper-2021-jia",
+          "canonicalProfileId": "national-legacy",
+          "canonicalAuthority": {
+            "manifestDigest": "sha256:b025bdc677a59a09548575e3df1e911ecd0273c5f6a9056d70603107c1970c83",
+            "manifestId": "paper-canonical",
+            "manifestVersion": "41"
+          }
+        }
+      }
+    },
+    {
+      "paperId": "paper-2022-jia",
+      "familyCounts": {
+        "cloze": {
+          "blankRefCount": 20,
+          "groupCount": 1,
+          "optionBankOptionCount": 0,
+          "optionCount": 80,
+          "questionCount": 20
+        },
+        "grammar-fill": {
+          "blankRefCount": 10,
+          "groupCount": 1,
+          "optionBankOptionCount": 0,
+          "optionCount": 0,
+          "questionCount": 10
+        },
+        "reading": {
+          "blankRefCount": 0,
+          "groupCount": 4,
+          "optionBankOptionCount": 0,
+          "optionCount": 60,
+          "questionCount": 15
+        },
+        "seven-choices": {
+          "blankRefCount": 5,
+          "groupCount": 1,
+          "optionBankOptionCount": 7,
+          "optionCount": 0,
+          "questionCount": 5
+        }
+      },
+      "profileId": "national-legacy",
+      "profileRef": {
+        "profileDigest": "sha256:26dcda14930ecf41c60ff39a2aa072c53e947df96ff999c0f0a9131b398be18d",
+        "profileId": "national-legacy",
+        "profileVersion": "3"
+      },
+      "sourceType": "legacy-json",
+      "authority": {
+        "manifestDigest": "sha256:b025bdc677a59a09548575e3df1e911ecd0273c5f6a9056d70603107c1970c83",
+        "manifestId": "paper-canonical",
+        "manifestVersion": "41"
+      },
+      "sourceCapture": {
+        "path": "test-fixtures/paper-import/paper-canonical-source-captures/ticket-26-v1/paper-2022-jia/source-capture-v1.json",
+        "sourceCaptureId": "source-capture:a3bda7b895f62635e6c3b",
+        "sourceCaptureDigest": "sha256:a3bda7b895f62635e6c3bb0f1d857089b4db95675063d5e84457ee3384336d4d",
+        "fileSha256": "sha256:e230f92eac8e5203a581d0899d89a536494ddf75d2d4d578b1ab1fdc994dbcb7",
+        "byteLength": 201215
+      },
+      "candidate": {
+        "path": "test-fixtures/paper-import/paper-canonical-confirmation-lanes/ticket-28-national-legacy-v1/paper-2022-jia/candidate-v1.json",
+        "candidateDigest": "sha256:2f2887334fa174a6a9ec034c6757610b698a3e508b24d3c0d2d2d23edfe8f924",
+        "fileSha256": "sha256:55e50d0e146ec806b5eb870b61c9e1bf66c1619c895be9490be17d5308c0d6f6",
+        "byteLength": 210826
+      },
+      "confirmation": {
+        "path": "test-fixtures/paper-import/paper-canonical-confirmation-lanes/ticket-28-national-legacy-v1/paper-2022-jia/teacher-confirmation-v1.json",
+        "confirmationDigest": "sha256:201f0e74edaec2b68d1559cfe2cf512276cfe824824fad5469b6818ea173d0e4",
+        "candidateDigest": "sha256:2f2887334fa174a6a9ec034c6757610b698a3e508b24d3c0d2d2d23edfe8f924",
+        "sourceDigest": "sha256:e230f92eac8e5203a581d0899d89a536494ddf75d2d4d578b1ab1fdc994dbcb7",
+        "fileSha256": "sha256:23c6b4956e507a1a6bd6b1216a39f27bba66847ce52b84b5afe9c70dab864315",
+        "byteLength": 625
+      },
+      "canonicalPaper": {
+        "path": "test-fixtures/paper-import/paper-canonical-confirmation-lanes/ticket-28-national-legacy-v1/paper-2022-jia/canonical-paper-v1.json",
+        "canonicalPaperDigest": "sha256:809c79e91cbea0b5bafb72f614d8cef897cc1c73784fa98650367cd65e41f0af",
+        "fileSha256": "sha256:2f1ac4306bf6871077e7237a95e6274e67f12cc58d048efa96c0e00e096f8d29",
+        "byteLength": 772370,
+        "completeness": "complete",
+        "publication": "unpublished",
+        "groupCount": 7,
+        "questionCount": 50,
+        "optionCount": 140
+      },
+      "counts": {
+        "groupCount": 7,
+        "questionCount": 50,
+        "optionCount": 140,
+        "blankRefCount": 35,
+        "optionBankOptionCount": 7,
+        "canonicalBytes": 772370
+      },
+      "bindings": {
+        "sourceToCandidate": {
+          "sourceCaptureId": "source-capture:a3bda7b895f62635e6c3b",
+          "sourceCaptureDigest": "sha256:a3bda7b895f62635e6c3bb0f1d857089b4db95675063d5e84457ee3384336d4d",
+          "sourceCaptureFileSha256": "sha256:e230f92eac8e5203a581d0899d89a536494ddf75d2d4d578b1ab1fdc994dbcb7",
+          "candidateSourcePaperId": "paper-2022-jia",
+          "candidateSourceFileSha256": "sha256:e230f92eac8e5203a581d0899d89a536494ddf75d2d4d578b1ab1fdc994dbcb7",
+          "candidateSourceByteLength": 201215
+        },
+        "candidateToConfirmation": {
+          "candidateDigest": "sha256:2f2887334fa174a6a9ec034c6757610b698a3e508b24d3c0d2d2d23edfe8f924",
+          "confirmationCandidateDigest": "sha256:2f2887334fa174a6a9ec034c6757610b698a3e508b24d3c0d2d2d23edfe8f924"
+        },
+        "sourceToConfirmation": {
+          "sourceCaptureFileSha256": "sha256:e230f92eac8e5203a581d0899d89a536494ddf75d2d4d578b1ab1fdc994dbcb7",
+          "confirmationSourceDigest": "sha256:e230f92eac8e5203a581d0899d89a536494ddf75d2d4d578b1ab1fdc994dbcb7"
+        },
+        "confirmationToCanonical": {
+          "canonicalPaperId": "paper-2022-jia",
+          "canonicalProfileId": "national-legacy",
+          "canonicalAuthority": {
+            "manifestDigest": "sha256:b025bdc677a59a09548575e3df1e911ecd0273c5f6a9056d70603107c1970c83",
+            "manifestId": "paper-canonical",
+            "manifestVersion": "41"
+          }
+        }
+      }
+    }
+  ],
+  "invariants": {
+    "exactPaperIds": true,
+    "membershipDigestRecomputed": true,
+    "noCanaryPaperIds": true,
+    "selectedCanaryPaperIds": [],
+    "noDuplicatePaperIds": true,
+    "allSourceCapturesPresent": true,
+    "allImportCandidatesPresent": true,
+    "allTeacherConfirmationsPresent": true,
+    "allCanonicalPapersComplete": true,
+    "allCanonicalPapersUnpublished": true,
+    "allCandidateIssuesEmpty": true,
+    "allBindingsExact": true,
+    "allDigestsRecomputed": true,
+    "noSelectedPaperPublication": true,
+    "noSelectedPaperCurrentRef": true,
+    "aggregateExact": true
+  }
+}
