@@ -1,0 +1,2108 @@
+{
+  "schemaVersion": "ticket-32-lane-admission-v1",
+  "status": "PASS",
+  "ticket": {
+    "number": 32,
+    "path": "docs/cuts/paper-canonical-unification/tickets/32-remaining-corpus-migration.md",
+    "baseBranch": "codex/ticket-31-test-efficiency-closure-20260802",
+    "baseHead": "a374dab8bf78efb99181bcb5bace06100d85c1ce",
+    "lane": "C",
+    "runtimeRoute": "luna-xhigh"
+  },
+  "manifest": {
+    "path": "docs/cuts/paper-canonical-unification/migration/manifest-v2.json",
+    "byteLength": 76303,
+    "fileSha256": "sha256:3b9ccd6d2820187cb8658d13a07e98fce5ea8796740a7283a848f33b4711c8b5",
+    "manifestId": "paper-canonical-migration",
+    "manifestDigest": "sha256:9992329a6de0fa3dcbff9fea8a0d6d92b660f0e8049b7978ceb5ff0000610e41",
+    "publication": {
+      "canonicalSelections": 0,
+      "currentRefs": 0,
+      "publications": 0
+    }
+  },
+  "membership": {
+    "order": "explicit-allowlist-order",
+    "paperIds": [
+      "paper-2024-i",
+      "paper-zj-2023-jan",
+      "paper-zj-2024-jan",
+      "paper-zj-2025-jan",
+      "paper-2023-jia",
+      "paper-zj-2020-jul",
+      "paper-zj-2021-jan",
+      "paper-zj-2021-jun",
+      "paper-zj-2022-jan"
+    ],
+    "count": 9,
+    "membershipDigest": "sha256:a210565b1f7659d3620f38c78947d64a5de2648cde42dc4d201ec7d3838f87ea",
+    "canaryPaperIds": [],
+    "duplicatePaperIds": []
+  },
+  "aggregate": {
+    "paperCount": 9,
+    "groupCount": 75,
+    "questionCount": 410,
+    "optionSetCount": 275,
+    "optionCount": 1100,
+    "canonicalBytes": 6244217,
+    "familyCounts": {
+      "application-writing": {
+        "groupCount": 8,
+        "questionCount": 0,
+        "optionSetCount": 0,
+        "optionCount": 0,
+        "variantOptionCount": 0
+      },
+      "cloze": {
+        "groupCount": 9,
+        "questionCount": 160,
+        "optionSetCount": 160,
+        "optionCount": 640,
+        "variantOptionCount": 0
+      },
+      "continuation-writing": {
+        "groupCount": 8,
+        "questionCount": 0,
+        "optionSetCount": 0,
+        "optionCount": 0,
+        "variantOptionCount": 0
+      },
+      "grammar-fill": {
+        "groupCount": 9,
+        "questionCount": 90,
+        "optionSetCount": 0,
+        "optionCount": 0,
+        "variantOptionCount": 0
+      },
+      "reading": {
+        "groupCount": 32,
+        "questionCount": 115,
+        "optionSetCount": 115,
+        "optionCount": 460,
+        "variantOptionCount": 0
+      },
+      "seven-choices": {
+        "groupCount": 9,
+        "questionCount": 45,
+        "optionSetCount": 0,
+        "optionCount": 0,
+        "variantOptionCount": 63
+      }
+    },
+    "profileCounts": {
+      "national-legacy": 1,
+      "nck1": 4,
+      "zhejiang-legacy": 4
+    },
+    "sourceTypeCounts": {
+      "legacy-json": 9
+    },
+    "authorityManifestVersionCounts": {
+      "41": 9
+    },
+    "expected": {
+      "papers": 9,
+      "groups": 75,
+      "questions": 410,
+      "options": 1100,
+      "canonicalBytes": 6244217
+    }
+  },
+  "papers": [
+    {
+      "paperId": "paper-2024-i",
+      "family": [
+        "reading",
+        "seven-choices",
+        "cloze",
+        "grammar-fill",
+        "application-writing",
+        "continuation-writing"
+      ],
+      "profile": {
+        "profileId": "nck1",
+        "profileVersion": "12",
+        "profileDigest": "sha256:0dd7de904d7a0346716b117ca5ead8a6fdc66b894d7700da79698e7d0fe546db"
+      },
+      "profileId": "nck1",
+      "sourceType": "legacy-json",
+      "authority": {
+        "manifestDigest": "sha256:b025bdc677a59a09548575e3df1e911ecd0273c5f6a9056d70603107c1970c83",
+        "manifestId": "paper-canonical",
+        "manifestVersion": "41"
+      },
+      "lane": {
+        "ticket": 27,
+        "commit": "5cab456282803c9ca4de71cef960be5b83438710",
+        "evidencePath": "test-fixtures/paper-import/paper-canonical-confirmation-lanes/ticket-27-nck1-v1/lane-evidence-v1.json",
+        "evidenceFileSha256": "sha256:743ba271759d3c397fcaf52abfa9f09608500d7b1d6a181094e22b64fdce6c36"
+      },
+      "sourceCapture": {
+        "path": "test-fixtures/paper-import/paper-canonical-source-captures/ticket-26-v1/paper-2024-i/source-capture-v1.json",
+        "byteLength": 206965,
+        "fileSha256": "sha256:a791afd24430f2a5ffb2ac3ba7359436f0586a85f4eec71f1cc75ee9b00bd914",
+        "sourceCaptureId": "source-capture:6de5f07408385de113995",
+        "sourceCaptureDigest": "sha256:6de5f07408385de113995a4fb4578700f58e71596745330d1928ad0e23d52aae"
+      },
+      "candidate": {
+        "path": "test-fixtures/paper-import/paper-canonical-confirmation-lanes/ticket-27-nck1-v1/paper-2024-i/import-candidate-v1.json",
+        "byteLength": 200459,
+        "fileSha256": "sha256:b7e03e0f4f389f7559c93977dfeb87bf09c57858579d1a71382cbfa5366573b3",
+        "candidateDigest": "sha256:ba3c52c1eb7163cd2cb835be15a5f15ba7131067a27d366cc513a03d45ad9526"
+      },
+      "confirmation": {
+        "path": "test-fixtures/paper-import/paper-canonical-confirmation-lanes/ticket-27-nck1-v1/paper-2024-i/teacher-confirmation-v1.json",
+        "byteLength": 259,
+        "fileSha256": "sha256:368ec0a06016f127e786783c92c0af9f3948766a9032af2f5f73d7c147a5c450",
+        "confirmationDigest": "sha256:850808c7a9b935a3bb55ca5522ed77e65069f01092b7906bcb0399697710ae65",
+        "candidateDigest": "sha256:ba3c52c1eb7163cd2cb835be15a5f15ba7131067a27d366cc513a03d45ad9526",
+        "sourceDigest": "sha256:a791afd24430f2a5ffb2ac3ba7359436f0586a85f4eec71f1cc75ee9b00bd914"
+      },
+      "canonicalPaper": {
+        "path": "test-fixtures/paper-import/paper-canonical-confirmation-lanes/ticket-27-nck1-v1/paper-2024-i/canonical-paper-v1.json",
+        "byteLength": 765760,
+        "fileSha256": "sha256:0e74556ef13d69c311d289fe697e3b718ed08ed797bb2a14e2a80cd142d91c58",
+        "canonicalArtifactDigest": "sha256:b50802471d28881dbf77f005c539d303700804fccf529dad1b905f0ba329999a",
+        "canonicalPaperDigest": "sha256:b50802471d28881dbf77f005c539d303700804fccf529dad1b905f0ba329999a",
+        "planId": "plan:efd9f76707f3d56777711",
+        "groupCount": 9,
+        "questionCount": 45,
+        "optionSetCount": 30,
+        "optionCount": 120,
+        "completeness": "complete",
+        "publication": "unpublished",
+        "embeddedSourceCapture": {
+          "captureId": "source-capture:dfbb0646e878d7f2d2121",
+          "captureDigest": "sha256:dfbb0646e878d7f2d2121d83cd454975acac7aab71b760c07db461dd1d68fdc9"
+        }
+      },
+      "bindings": {
+        "sourceToCandidate": {
+          "fileSha256": "sha256:a791afd24430f2a5ffb2ac3ba7359436f0586a85f4eec71f1cc75ee9b00bd914",
+          "byteLength": 206965,
+          "captureId": "source-capture:6de5f07408385de113995",
+          "captureDigest": "sha256:6de5f07408385de113995a4fb4578700f58e71596745330d1928ad0e23d52aae",
+          "exact": true
+        },
+        "sourceToConfirmation": {
+          "sourceDigest": "sha256:a791afd24430f2a5ffb2ac3ba7359436f0586a85f4eec71f1cc75ee9b00bd914",
+          "exact": true
+        },
+        "candidateToConfirmation": {
+          "candidateDigest": "sha256:ba3c52c1eb7163cd2cb835be15a5f15ba7131067a27d366cc513a03d45ad9526",
+          "exact": true
+        },
+        "candidateToCanonical": {
+          "paperId": "paper-2024-i",
+          "authority": {
+            "manifestId": "paper-canonical",
+            "manifestVersion": "41",
+            "manifestDigest": "sha256:b025bdc677a59a09548575e3df1e911ecd0273c5f6a9056d70603107c1970c83"
+          },
+          "exact": true
+        },
+        "confirmationToCanonical": {
+          "canonicalPaperDigest": "sha256:b50802471d28881dbf77f005c539d303700804fccf529dad1b905f0ba329999a",
+          "confirmationDigest": "sha256:850808c7a9b935a3bb55ca5522ed77e65069f01092b7906bcb0399697710ae65",
+          "exact": true
+        }
+      },
+      "families": {
+        "application-writing": {
+          "groupCount": 1,
+          "questionCount": 0,
+          "optionSetCount": 0,
+          "optionCount": 0,
+          "variantOptionCount": 0
+        },
+        "cloze": {
+          "groupCount": 1,
+          "questionCount": 15,
+          "optionSetCount": 15,
+          "optionCount": 60,
+          "variantOptionCount": 0
+        },
+        "continuation-writing": {
+          "groupCount": 1,
+          "questionCount": 0,
+          "optionSetCount": 0,
+          "optionCount": 0,
+          "variantOptionCount": 0
+        },
+        "grammar-fill": {
+          "groupCount": 1,
+          "questionCount": 10,
+          "optionSetCount": 0,
+          "optionCount": 0,
+          "variantOptionCount": 0
+        },
+        "reading": {
+          "groupCount": 4,
+          "questionCount": 15,
+          "optionSetCount": 15,
+          "optionCount": 60,
+          "variantOptionCount": 0
+        },
+        "seven-choices": {
+          "groupCount": 1,
+          "questionCount": 5,
+          "optionSetCount": 0,
+          "optionCount": 0,
+          "variantOptionCount": 7
+        }
+      },
+      "groups": [
+        {
+          "groupId": "group-2024-i-reading-a",
+          "family": "reading",
+          "questionCount": 3,
+          "optionSetCount": 3,
+          "optionCount": 12,
+          "variantOptionCount": 0,
+          "semanticDigest": "sha256:3f0887c7dfd2de9b6406a6b0e3d6b931f427d3abd1556f1d7e680f37dd00e260"
+        },
+        {
+          "groupId": "group-2024-i-reading-b",
+          "family": "reading",
+          "questionCount": 4,
+          "optionSetCount": 4,
+          "optionCount": 16,
+          "variantOptionCount": 0,
+          "semanticDigest": "sha256:e975b721aad162fd0d4a1abbfb89ab03d9bd3451a1a62e9f0b4ba5a5105d9c83"
+        },
+        {
+          "groupId": "group-2024-i-reading-c",
+          "family": "reading",
+          "questionCount": 4,
+          "optionSetCount": 4,
+          "optionCount": 16,
+          "variantOptionCount": 0,
+          "semanticDigest": "sha256:b1769430bdf4b1e5f957b349986d790341db1998ac3ef38587c19563d1c222ab"
+        },
+        {
+          "groupId": "group-2024-i-reading-d",
+          "family": "reading",
+          "questionCount": 4,
+          "optionSetCount": 4,
+          "optionCount": 16,
+          "variantOptionCount": 0,
+          "semanticDigest": "sha256:332df7749b860867dc02f7a5798e49687867ea28294fd7d4c510ad7b16e8615d"
+        },
+        {
+          "groupId": "group-2024-i-seven-choices",
+          "family": "seven-choices",
+          "questionCount": 5,
+          "optionSetCount": 0,
+          "optionCount": 0,
+          "variantOptionCount": 7,
+          "semanticDigest": "sha256:23a0668f7b6cd9a275b0f50d8fd73eb0e38b1e9131824f46b229b69db0f43a9b"
+        },
+        {
+          "groupId": "group-2024-i-cloze",
+          "family": "cloze",
+          "questionCount": 15,
+          "optionSetCount": 15,
+          "optionCount": 60,
+          "variantOptionCount": 0,
+          "semanticDigest": "sha256:96eda926ffb67bfec3d183eb9a0845a9517a2bda697dc8c59209b2ffc0b40aeb"
+        },
+        {
+          "groupId": "group-2024-i-grammar-fill",
+          "family": "grammar-fill",
+          "questionCount": 10,
+          "optionSetCount": 0,
+          "optionCount": 0,
+          "variantOptionCount": 0,
+          "semanticDigest": "sha256:f0bb1c1135717fe3031a05bdbfb5710aeb8332718178b70d3b9c4fcdf74d4d0d"
+        },
+        {
+          "groupId": "group-2024-i-writing-application",
+          "family": "application-writing",
+          "questionCount": 0,
+          "optionSetCount": 0,
+          "optionCount": 0,
+          "variantOptionCount": 0,
+          "semanticDigest": "sha256:c2a864b766e43c17fa28913c46d3c5d87dc25b901e162f7b11e1680e165a6295"
+        },
+        {
+          "groupId": "group-2024-i-writing-continuation",
+          "family": "continuation-writing",
+          "questionCount": 0,
+          "optionSetCount": 0,
+          "optionCount": 0,
+          "variantOptionCount": 0,
+          "semanticDigest": "sha256:109e59b6bacd74837d8d0af157619f03a0d8a2246afe40a88665ee6a5d8c9e40"
+        }
+      ]
+    },
+    {
+      "paperId": "paper-zj-2023-jan",
+      "family": [
+        "reading",
+        "seven-choices",
+        "cloze",
+        "grammar-fill",
+        "application-writing",
+        "continuation-writing"
+      ],
+      "profile": {
+        "profileId": "nck1",
+        "profileVersion": "12",
+        "profileDigest": "sha256:0dd7de904d7a0346716b117ca5ead8a6fdc66b894d7700da79698e7d0fe546db"
+      },
+      "profileId": "nck1",
+      "sourceType": "legacy-json",
+      "authority": {
+        "manifestDigest": "sha256:b025bdc677a59a09548575e3df1e911ecd0273c5f6a9056d70603107c1970c83",
+        "manifestId": "paper-canonical",
+        "manifestVersion": "41"
+      },
+      "lane": {
+        "ticket": 27,
+        "commit": "5cab456282803c9ca4de71cef960be5b83438710",
+        "evidencePath": "test-fixtures/paper-import/paper-canonical-confirmation-lanes/ticket-27-nck1-v1/lane-evidence-v1.json",
+        "evidenceFileSha256": "sha256:743ba271759d3c397fcaf52abfa9f09608500d7b1d6a181094e22b64fdce6c36"
+      },
+      "sourceCapture": {
+        "path": "test-fixtures/paper-import/paper-canonical-source-captures/ticket-26-v1/paper-zj-2023-jan/source-capture-v1.json",
+        "byteLength": 213642,
+        "fileSha256": "sha256:a8834f0fb38efb7e14f2da16a3b5b3e345ddf1d3e85853b0626325e6ed61ba9c",
+        "sourceCaptureId": "source-capture:5e84eba10cf5eb606d32c",
+        "sourceCaptureDigest": "sha256:5e84eba10cf5eb606d32c09f9ac0d55e2a570ab350497bebbbac8b1e0b3fafc4"
+      },
+      "candidate": {
+        "path": "test-fixtures/paper-import/paper-canonical-confirmation-lanes/ticket-27-nck1-v1/paper-zj-2023-jan/import-candidate-v1.json",
+        "byteLength": 203752,
+        "fileSha256": "sha256:b1a3f3f9ce6e3bb162a6433f7b474a74459de96d151939505bf982dc024d0784",
+        "candidateDigest": "sha256:0df650eb1dafed911fdb4643bbb85ea8c63a0dd6e74b7ba3650acddb6da24aa4"
+      },
+      "confirmation": {
+        "path": "test-fixtures/paper-import/paper-canonical-confirmation-lanes/ticket-27-nck1-v1/paper-zj-2023-jan/teacher-confirmation-v1.json",
+        "byteLength": 259,
+        "fileSha256": "sha256:d5a8d5c79684acad7e1effbcf790f8677cbc872829f79dd0750bffffbfd5ad8b",
+        "confirmationDigest": "sha256:ae4da7bdf89fb0fb4b1e2fbc3009d575d33e6a2a6229f6d50b9107e6d41e62ce",
+        "candidateDigest": "sha256:0df650eb1dafed911fdb4643bbb85ea8c63a0dd6e74b7ba3650acddb6da24aa4",
+        "sourceDigest": "sha256:a8834f0fb38efb7e14f2da16a3b5b3e345ddf1d3e85853b0626325e6ed61ba9c"
+      },
+      "canonicalPaper": {
+        "path": "test-fixtures/paper-import/paper-canonical-confirmation-lanes/ticket-27-nck1-v1/paper-zj-2023-jan/canonical-paper-v1.json",
+        "byteLength": 786214,
+        "fileSha256": "sha256:7f14525eb2b1d148dda9795295269cf9baf446597b0067413ee365995c6750d9",
+        "canonicalArtifactDigest": "sha256:0529b6e2c58590baf661f1abc2fb6dd5900a16bd105faeb87c1af9131376a677",
+        "canonicalPaperDigest": "sha256:0529b6e2c58590baf661f1abc2fb6dd5900a16bd105faeb87c1af9131376a677",
+        "planId": "plan:510f58d1493480185ca72",
+        "groupCount": 9,
+        "questionCount": 45,
+        "optionSetCount": 30,
+        "optionCount": 120,
+        "completeness": "complete",
+        "publication": "unpublished",
+        "embeddedSourceCapture": {
+          "captureId": "source-capture:748c246b863555b1323f3",
+          "captureDigest": "sha256:748c246b863555b1323f307a3c6ff21c2fe6ddf85762a4dfe277ee005981abf3"
+        }
+      },
+      "bindings": {
+        "sourceToCandidate": {
+          "fileSha256": "sha256:a8834f0fb38efb7e14f2da16a3b5b3e345ddf1d3e85853b0626325e6ed61ba9c",
+          "byteLength": 213642,
+          "captureId": "source-capture:5e84eba10cf5eb606d32c",
+          "captureDigest": "sha256:5e84eba10cf5eb606d32c09f9ac0d55e2a570ab350497bebbbac8b1e0b3fafc4",
+          "exact": true
+        },
+        "sourceToConfirmation": {
+          "sourceDigest": "sha256:a8834f0fb38efb7e14f2da16a3b5b3e345ddf1d3e85853b0626325e6ed61ba9c",
+          "exact": true
+        },
+        "candidateToConfirmation": {
+          "candidateDigest": "sha256:0df650eb1dafed911fdb4643bbb85ea8c63a0dd6e74b7ba3650acddb6da24aa4",
+          "exact": true
+        },
+        "candidateToCanonical": {
+          "paperId": "paper-zj-2023-jan",
+          "authority": {
+            "manifestId": "paper-canonical",
+            "manifestVersion": "41",
+            "manifestDigest": "sha256:b025bdc677a59a09548575e3df1e911ecd0273c5f6a9056d70603107c1970c83"
+          },
+          "exact": true
+        },
+        "confirmationToCanonical": {
+          "canonicalPaperDigest": "sha256:0529b6e2c58590baf661f1abc2fb6dd5900a16bd105faeb87c1af9131376a677",
+          "confirmationDigest": "sha256:ae4da7bdf89fb0fb4b1e2fbc3009d575d33e6a2a6229f6d50b9107e6d41e62ce",
+          "exact": true
+        }
+      },
+      "families": {
+        "application-writing": {
+          "groupCount": 1,
+          "questionCount": 0,
+          "optionSetCount": 0,
+          "optionCount": 0,
+          "variantOptionCount": 0
+        },
+        "cloze": {
+          "groupCount": 1,
+          "questionCount": 15,
+          "optionSetCount": 15,
+          "optionCount": 60,
+          "variantOptionCount": 0
+        },
+        "continuation-writing": {
+          "groupCount": 1,
+          "questionCount": 0,
+          "optionSetCount": 0,
+          "optionCount": 0,
+          "variantOptionCount": 0
+        },
+        "grammar-fill": {
+          "groupCount": 1,
+          "questionCount": 10,
+          "optionSetCount": 0,
+          "optionCount": 0,
+          "variantOptionCount": 0
+        },
+        "reading": {
+          "groupCount": 4,
+          "questionCount": 15,
+          "optionSetCount": 15,
+          "optionCount": 60,
+          "variantOptionCount": 0
+        },
+        "seven-choices": {
+          "groupCount": 1,
+          "questionCount": 5,
+          "optionSetCount": 0,
+          "optionCount": 0,
+          "variantOptionCount": 7
+        }
+      },
+      "groups": [
+        {
+          "groupId": "group-zj-2023-jan-reading-a",
+          "family": "reading",
+          "questionCount": 3,
+          "optionSetCount": 3,
+          "optionCount": 12,
+          "variantOptionCount": 0,
+          "semanticDigest": "sha256:e53febbb9a81d6b25e1661508f20c31a581083f92b793e7e33a280582c3d745f"
+        },
+        {
+          "groupId": "group-zj-2023-jan-reading-b",
+          "family": "reading",
+          "questionCount": 4,
+          "optionSetCount": 4,
+          "optionCount": 16,
+          "variantOptionCount": 0,
+          "semanticDigest": "sha256:c6eb8b965abe2ab8a3e7052b2cbb6facda831516720e52bc265a2a1a4a0ef505"
+        },
+        {
+          "groupId": "group-zj-2023-jan-reading-c",
+          "family": "reading",
+          "questionCount": 4,
+          "optionSetCount": 4,
+          "optionCount": 16,
+          "variantOptionCount": 0,
+          "semanticDigest": "sha256:1cece55b2b2c326d79bbd0b1dbe4fdd993c41d376a14405e8fff7bc0ecd6d055"
+        },
+        {
+          "groupId": "group-zj-2023-jan-reading-d",
+          "family": "reading",
+          "questionCount": 4,
+          "optionSetCount": 4,
+          "optionCount": 16,
+          "variantOptionCount": 0,
+          "semanticDigest": "sha256:128375981ff4ffd348c6dd40faa6da53f0a51a3ee26a6fb54748273faedaae01"
+        },
+        {
+          "groupId": "group-zj-2023-jan-seven-choices",
+          "family": "seven-choices",
+          "questionCount": 5,
+          "optionSetCount": 0,
+          "optionCount": 0,
+          "variantOptionCount": 7,
+          "semanticDigest": "sha256:c10395205ef2c56ed39e72daca9acb8c8d706194706b46af6f02fa534b50734a"
+        },
+        {
+          "groupId": "group-zj-2023-jan-cloze",
+          "family": "cloze",
+          "questionCount": 15,
+          "optionSetCount": 15,
+          "optionCount": 60,
+          "variantOptionCount": 0,
+          "semanticDigest": "sha256:8271683e5bbc088bd8bfb3e1693010d69f416f34a82ee2b4c37b59a453870a78"
+        },
+        {
+          "groupId": "group-zj-2023-jan-grammar-fill",
+          "family": "grammar-fill",
+          "questionCount": 10,
+          "optionSetCount": 0,
+          "optionCount": 0,
+          "variantOptionCount": 0,
+          "semanticDigest": "sha256:39ac5da1cb545c6fee4ba22fde5dc22a75f8d1ea1faec8e2d7f8023f7efe23d3"
+        },
+        {
+          "groupId": "group-zj-2023-jan-writing-application",
+          "family": "application-writing",
+          "questionCount": 0,
+          "optionSetCount": 0,
+          "optionCount": 0,
+          "variantOptionCount": 0,
+          "semanticDigest": "sha256:4ea7ef908595c6b2abbba3b2ec15ee91c5f30fedc96015ac29fdd2d997c11f11"
+        },
+        {
+          "groupId": "group-zj-2023-jan-writing-continuation",
+          "family": "continuation-writing",
+          "questionCount": 0,
+          "optionSetCount": 0,
+          "optionCount": 0,
+          "variantOptionCount": 0,
+          "semanticDigest": "sha256:dd70c4eef406a690744f3c069369d3f673ffe8c38f0cead87e4fefc5b5c062c4"
+        }
+      ]
+    },
+    {
+      "paperId": "paper-zj-2024-jan",
+      "family": [
+        "reading",
+        "seven-choices",
+        "cloze",
+        "grammar-fill",
+        "application-writing",
+        "continuation-writing"
+      ],
+      "profile": {
+        "profileId": "nck1",
+        "profileVersion": "12",
+        "profileDigest": "sha256:0dd7de904d7a0346716b117ca5ead8a6fdc66b894d7700da79698e7d0fe546db"
+      },
+      "profileId": "nck1",
+      "sourceType": "legacy-json",
+      "authority": {
+        "manifestDigest": "sha256:b025bdc677a59a09548575e3df1e911ecd0273c5f6a9056d70603107c1970c83",
+        "manifestId": "paper-canonical",
+        "manifestVersion": "41"
+      },
+      "lane": {
+        "ticket": 27,
+        "commit": "5cab456282803c9ca4de71cef960be5b83438710",
+        "evidencePath": "test-fixtures/paper-import/paper-canonical-confirmation-lanes/ticket-27-nck1-v1/lane-evidence-v1.json",
+        "evidenceFileSha256": "sha256:743ba271759d3c397fcaf52abfa9f09608500d7b1d6a181094e22b64fdce6c36"
+      },
+      "sourceCapture": {
+        "path": "test-fixtures/paper-import/paper-canonical-source-captures/ticket-26-v1/paper-zj-2024-jan/source-capture-v1.json",
+        "byteLength": 214306,
+        "fileSha256": "sha256:234f2654d27c0b375c22e6ed869d64b78e86d519a430c04793e019d150bfdada",
+        "sourceCaptureId": "source-capture:1225803ffad300bb88644",
+        "sourceCaptureDigest": "sha256:1225803ffad300bb88644c13cd25dfee2e3cfcc7e4195a19389df9cc178a9c26"
+      },
+      "candidate": {
+        "path": "test-fixtures/paper-import/paper-canonical-confirmation-lanes/ticket-27-nck1-v1/paper-zj-2024-jan/import-candidate-v1.json",
+        "byteLength": 202269,
+        "fileSha256": "sha256:9d39e8f175dcb292cb5c28c9eab2d2df87d4d9ecf3e2d0d63a0528435ff5fbfb",
+        "candidateDigest": "sha256:34b1f5bcf6363a2fdb5f9e21dc4f52d5741eee01d0732f669da3261fba9870bd"
+      },
+      "confirmation": {
+        "path": "test-fixtures/paper-import/paper-canonical-confirmation-lanes/ticket-27-nck1-v1/paper-zj-2024-jan/teacher-confirmation-v1.json",
+        "byteLength": 259,
+        "fileSha256": "sha256:65e942221a7808cf780547a207c88353a9e1434b2c0868f0e0786c44f01ae3de",
+        "confirmationDigest": "sha256:51e263d3595f39e647649d89a05a46ad05716bc2f135fa7b67814e8c34982132",
+        "candidateDigest": "sha256:34b1f5bcf6363a2fdb5f9e21dc4f52d5741eee01d0732f669da3261fba9870bd",
+        "sourceDigest": "sha256:234f2654d27c0b375c22e6ed869d64b78e86d519a430c04793e019d150bfdada"
+      },
+      "canonicalPaper": {
+        "path": "test-fixtures/paper-import/paper-canonical-confirmation-lanes/ticket-27-nck1-v1/paper-zj-2024-jan/canonical-paper-v1.json",
+        "byteLength": 781986,
+        "fileSha256": "sha256:bfa24c241517b5ac2ca2bb2ef66cf030e8c4177eade8fe9b43948d44ca3f381b",
+        "canonicalArtifactDigest": "sha256:d442c39e09f28342b93af62e8030d33e4a56ae6848e0b9cf29d07d5a94f7f1d1",
+        "canonicalPaperDigest": "sha256:d442c39e09f28342b93af62e8030d33e4a56ae6848e0b9cf29d07d5a94f7f1d1",
+        "planId": "plan:51571377405e2d3422119",
+        "groupCount": 9,
+        "questionCount": 45,
+        "optionSetCount": 30,
+        "optionCount": 120,
+        "completeness": "complete",
+        "publication": "unpublished",
+        "embeddedSourceCapture": {
+          "captureId": "source-capture:1c951d0890af254997c7b",
+          "captureDigest": "sha256:1c951d0890af254997c7baa7da6ac369200b0693015d3a4d469c7a26d0d49c5f"
+        }
+      },
+      "bindings": {
+        "sourceToCandidate": {
+          "fileSha256": "sha256:234f2654d27c0b375c22e6ed869d64b78e86d519a430c04793e019d150bfdada",
+          "byteLength": 214306,
+          "captureId": "source-capture:1225803ffad300bb88644",
+          "captureDigest": "sha256:1225803ffad300bb88644c13cd25dfee2e3cfcc7e4195a19389df9cc178a9c26",
+          "exact": true
+        },
+        "sourceToConfirmation": {
+          "sourceDigest": "sha256:234f2654d27c0b375c22e6ed869d64b78e86d519a430c04793e019d150bfdada",
+          "exact": true
+        },
+        "candidateToConfirmation": {
+          "candidateDigest": "sha256:34b1f5bcf6363a2fdb5f9e21dc4f52d5741eee01d0732f669da3261fba9870bd",
+          "exact": true
+        },
+        "candidateToCanonical": {
+          "paperId": "paper-zj-2024-jan",
+          "authority": {
+            "manifestId": "paper-canonical",
+            "manifestVersion": "41",
+            "manifestDigest": "sha256:b025bdc677a59a09548575e3df1e911ecd0273c5f6a9056d70603107c1970c83"
+          },
+          "exact": true
+        },
+        "confirmationToCanonical": {
+          "canonicalPaperDigest": "sha256:d442c39e09f28342b93af62e8030d33e4a56ae6848e0b9cf29d07d5a94f7f1d1",
+          "confirmationDigest": "sha256:51e263d3595f39e647649d89a05a46ad05716bc2f135fa7b67814e8c34982132",
+          "exact": true
+        }
+      },
+      "families": {
+        "application-writing": {
+          "groupCount": 1,
+          "questionCount": 0,
+          "optionSetCount": 0,
+          "optionCount": 0,
+          "variantOptionCount": 0
+        },
+        "cloze": {
+          "groupCount": 1,
+          "questionCount": 15,
+          "optionSetCount": 15,
+          "optionCount": 60,
+          "variantOptionCount": 0
+        },
+        "continuation-writing": {
+          "groupCount": 1,
+          "questionCount": 0,
+          "optionSetCount": 0,
+          "optionCount": 0,
+          "variantOptionCount": 0
+        },
+        "grammar-fill": {
+          "groupCount": 1,
+          "questionCount": 10,
+          "optionSetCount": 0,
+          "optionCount": 0,
+          "variantOptionCount": 0
+        },
+        "reading": {
+          "groupCount": 4,
+          "questionCount": 15,
+          "optionSetCount": 15,
+          "optionCount": 60,
+          "variantOptionCount": 0
+        },
+        "seven-choices": {
+          "groupCount": 1,
+          "questionCount": 5,
+          "optionSetCount": 0,
+          "optionCount": 0,
+          "variantOptionCount": 7
+        }
+      },
+      "groups": [
+        {
+          "groupId": "group-zj-2024-jan-reading-a",
+          "family": "reading",
+          "questionCount": 3,
+          "optionSetCount": 3,
+          "optionCount": 12,
+          "variantOptionCount": 0,
+          "semanticDigest": "sha256:5d6bdd7dbf9e8b9c64373af25ad67715192d4c4943c0e6cde0225e18156ecfc3"
+        },
+        {
+          "groupId": "group-zj-2024-jan-reading-b",
+          "family": "reading",
+          "questionCount": 4,
+          "optionSetCount": 4,
+          "optionCount": 16,
+          "variantOptionCount": 0,
+          "semanticDigest": "sha256:a6d23e4f92f505277817cf2a4e87755e89752496a26b347416f3d0d440f29d05"
+        },
+        {
+          "groupId": "group-zj-2024-jan-reading-c",
+          "family": "reading",
+          "questionCount": 4,
+          "optionSetCount": 4,
+          "optionCount": 16,
+          "variantOptionCount": 0,
+          "semanticDigest": "sha256:c986c0aec1693e27e0e79d57fc2322cf5e88f5c3ee623be71871620f267a45ac"
+        },
+        {
+          "groupId": "group-zj-2024-jan-reading-d",
+          "family": "reading",
+          "questionCount": 4,
+          "optionSetCount": 4,
+          "optionCount": 16,
+          "variantOptionCount": 0,
+          "semanticDigest": "sha256:8417fe0a75f3ddf1a2f0da7cce0509fe74732b33b4d538887876b26411af0f4d"
+        },
+        {
+          "groupId": "group-zj-2024-jan-seven-choices",
+          "family": "seven-choices",
+          "questionCount": 5,
+          "optionSetCount": 0,
+          "optionCount": 0,
+          "variantOptionCount": 7,
+          "semanticDigest": "sha256:4db5e60e0697d962596e7008af2cceeda2bdcee2ff7ecfaaf4ced55edbf8e20b"
+        },
+        {
+          "groupId": "group-zj-2024-jan-cloze",
+          "family": "cloze",
+          "questionCount": 15,
+          "optionSetCount": 15,
+          "optionCount": 60,
+          "variantOptionCount": 0,
+          "semanticDigest": "sha256:6a6f8d9da5e6bc7371f0852aa22b4bbd39fea2284b0853a0e2f2089625ac7ee5"
+        },
+        {
+          "groupId": "group-zj-2024-jan-grammar-fill",
+          "family": "grammar-fill",
+          "questionCount": 10,
+          "optionSetCount": 0,
+          "optionCount": 0,
+          "variantOptionCount": 0,
+          "semanticDigest": "sha256:11de6309b61dbc7d11e816302a822ef1cddc143baa293521c3d1d3389b64223f"
+        },
+        {
+          "groupId": "group-zj-2024-jan-writing-application",
+          "family": "application-writing",
+          "questionCount": 0,
+          "optionSetCount": 0,
+          "optionCount": 0,
+          "variantOptionCount": 0,
+          "semanticDigest": "sha256:26d4315f901b37bacf9c7c3fac0c8a9bd7fe3a0b7090fbdcd0b255b255a1a572"
+        },
+        {
+          "groupId": "group-zj-2024-jan-writing-continuation",
+          "family": "continuation-writing",
+          "questionCount": 0,
+          "optionSetCount": 0,
+          "optionCount": 0,
+          "variantOptionCount": 0,
+          "semanticDigest": "sha256:cebb13018bad8be18f9285c7fdce7e60f4f570e58fd4d844ffda477c9955788d"
+        }
+      ]
+    },
+    {
+      "paperId": "paper-zj-2025-jan",
+      "family": [
+        "reading",
+        "seven-choices",
+        "cloze",
+        "grammar-fill",
+        "application-writing",
+        "continuation-writing"
+      ],
+      "profile": {
+        "profileId": "nck1",
+        "profileVersion": "12",
+        "profileDigest": "sha256:0dd7de904d7a0346716b117ca5ead8a6fdc66b894d7700da79698e7d0fe546db"
+      },
+      "profileId": "nck1",
+      "sourceType": "legacy-json",
+      "authority": {
+        "manifestDigest": "sha256:b025bdc677a59a09548575e3df1e911ecd0273c5f6a9056d70603107c1970c83",
+        "manifestId": "paper-canonical",
+        "manifestVersion": "41"
+      },
+      "lane": {
+        "ticket": 27,
+        "commit": "5cab456282803c9ca4de71cef960be5b83438710",
+        "evidencePath": "test-fixtures/paper-import/paper-canonical-confirmation-lanes/ticket-27-nck1-v1/lane-evidence-v1.json",
+        "evidenceFileSha256": "sha256:743ba271759d3c397fcaf52abfa9f09608500d7b1d6a181094e22b64fdce6c36"
+      },
+      "sourceCapture": {
+        "path": "test-fixtures/paper-import/paper-canonical-source-captures/ticket-26-v1/paper-zj-2025-jan/source-capture-v1.json",
+        "byteLength": 215514,
+        "fileSha256": "sha256:62978ab4bb29ca10783732be8828fe22d21aa79352e05c8e2f3f091c57f79cf7",
+        "sourceCaptureId": "source-capture:7310fc413c12e36698010",
+        "sourceCaptureDigest": "sha256:7310fc413c12e36698010129e730bca1e3150346f2fcad09cd79c1414148df02"
+      },
+      "candidate": {
+        "path": "test-fixtures/paper-import/paper-canonical-confirmation-lanes/ticket-27-nck1-v1/paper-zj-2025-jan/import-candidate-v1.json",
+        "byteLength": 207320,
+        "fileSha256": "sha256:6c2b79d2fe0bcc2e996d70b9e9a8f223ebe16406ecf5275d7354ec157d2d983e",
+        "candidateDigest": "sha256:4c4d67db6684af0072ce69dc42ba16fdf0c1958d38528b7e3d46ac911e432bdb"
+      },
+      "confirmation": {
+        "path": "test-fixtures/paper-import/paper-canonical-confirmation-lanes/ticket-27-nck1-v1/paper-zj-2025-jan/teacher-confirmation-v1.json",
+        "byteLength": 259,
+        "fileSha256": "sha256:4d799ba4da7f3bd98100fc9f1b5fc96bf29ea2ad7b0d5d50932ae31ad4362f1d",
+        "confirmationDigest": "sha256:c467603db790ba7705aa5d5aa7bfabba2997e0b6d75a93b269d78701ac71642f",
+        "candidateDigest": "sha256:4c4d67db6684af0072ce69dc42ba16fdf0c1958d38528b7e3d46ac911e432bdb",
+        "sourceDigest": "sha256:62978ab4bb29ca10783732be8828fe22d21aa79352e05c8e2f3f091c57f79cf7"
+      },
+      "canonicalPaper": {
+        "path": "test-fixtures/paper-import/paper-canonical-confirmation-lanes/ticket-27-nck1-v1/paper-zj-2025-jan/canonical-paper-v1.json",
+        "byteLength": 796269,
+        "fileSha256": "sha256:2928fa3c8376860ec7806ced5d5fb434c5fb00be538951cdb1221fb2fc7e6164",
+        "canonicalArtifactDigest": "sha256:45895985f34ffbfa883079e183ff4f192828a68180b55d8785bc6bbb0e2a1702",
+        "canonicalPaperDigest": "sha256:45895985f34ffbfa883079e183ff4f192828a68180b55d8785bc6bbb0e2a1702",
+        "planId": "plan:7205f08bd73a4c0d91a4c",
+        "groupCount": 9,
+        "questionCount": 45,
+        "optionSetCount": 30,
+        "optionCount": 120,
+        "completeness": "complete",
+        "publication": "unpublished",
+        "embeddedSourceCapture": {
+          "captureId": "source-capture:923416103ce5c3709eb62",
+          "captureDigest": "sha256:923416103ce5c3709eb6291ee8efa8b3fb73d92e846090564eee4e906f633706"
+        }
+      },
+      "bindings": {
+        "sourceToCandidate": {
+          "fileSha256": "sha256:62978ab4bb29ca10783732be8828fe22d21aa79352e05c8e2f3f091c57f79cf7",
+          "byteLength": 215514,
+          "captureId": "source-capture:7310fc413c12e36698010",
+          "captureDigest": "sha256:7310fc413c12e36698010129e730bca1e3150346f2fcad09cd79c1414148df02",
+          "exact": true
+        },
+        "sourceToConfirmation": {
+          "sourceDigest": "sha256:62978ab4bb29ca10783732be8828fe22d21aa79352e05c8e2f3f091c57f79cf7",
+          "exact": true
+        },
+        "candidateToConfirmation": {
+          "candidateDigest": "sha256:4c4d67db6684af0072ce69dc42ba16fdf0c1958d38528b7e3d46ac911e432bdb",
+          "exact": true
+        },
+        "candidateToCanonical": {
+          "paperId": "paper-zj-2025-jan",
+          "authority": {
+            "manifestId": "paper-canonical",
+            "manifestVersion": "41",
+            "manifestDigest": "sha256:b025bdc677a59a09548575e3df1e911ecd0273c5f6a9056d70603107c1970c83"
+          },
+          "exact": true
+        },
+        "confirmationToCanonical": {
+          "canonicalPaperDigest": "sha256:45895985f34ffbfa883079e183ff4f192828a68180b55d8785bc6bbb0e2a1702",
+          "confirmationDigest": "sha256:c467603db790ba7705aa5d5aa7bfabba2997e0b6d75a93b269d78701ac71642f",
+          "exact": true
+        }
+      },
+      "families": {
+        "application-writing": {
+          "groupCount": 1,
+          "questionCount": 0,
+          "optionSetCount": 0,
+          "optionCount": 0,
+          "variantOptionCount": 0
+        },
+        "cloze": {
+          "groupCount": 1,
+          "questionCount": 15,
+          "optionSetCount": 15,
+          "optionCount": 60,
+          "variantOptionCount": 0
+        },
+        "continuation-writing": {
+          "groupCount": 1,
+          "questionCount": 0,
+          "optionSetCount": 0,
+          "optionCount": 0,
+          "variantOptionCount": 0
+        },
+        "grammar-fill": {
+          "groupCount": 1,
+          "questionCount": 10,
+          "optionSetCount": 0,
+          "optionCount": 0,
+          "variantOptionCount": 0
+        },
+        "reading": {
+          "groupCount": 4,
+          "questionCount": 15,
+          "optionSetCount": 15,
+          "optionCount": 60,
+          "variantOptionCount": 0
+        },
+        "seven-choices": {
+          "groupCount": 1,
+          "questionCount": 5,
+          "optionSetCount": 0,
+          "optionCount": 0,
+          "variantOptionCount": 7
+        }
+      },
+      "groups": [
+        {
+          "groupId": "group-zj-2025-jan-reading-a",
+          "family": "reading",
+          "questionCount": 3,
+          "optionSetCount": 3,
+          "optionCount": 12,
+          "variantOptionCount": 0,
+          "semanticDigest": "sha256:d785eafdc10215c8f06880eab6b91a44a2b57e8aaf139f65ef2439b17be0576c"
+        },
+        {
+          "groupId": "group-zj-2025-jan-reading-b",
+          "family": "reading",
+          "questionCount": 4,
+          "optionSetCount": 4,
+          "optionCount": 16,
+          "variantOptionCount": 0,
+          "semanticDigest": "sha256:bb7718bf13c290ea65316e57e1905ae522bfa6ca092500781796ccfdc12fe4a7"
+        },
+        {
+          "groupId": "group-zj-2025-jan-reading-c",
+          "family": "reading",
+          "questionCount": 4,
+          "optionSetCount": 4,
+          "optionCount": 16,
+          "variantOptionCount": 0,
+          "semanticDigest": "sha256:365d8541a7de97b71d2e3a47c4df1664c7293710e3d33d51752426a25d20727c"
+        },
+        {
+          "groupId": "group-zj-2025-jan-reading-d",
+          "family": "reading",
+          "questionCount": 4,
+          "optionSetCount": 4,
+          "optionCount": 16,
+          "variantOptionCount": 0,
+          "semanticDigest": "sha256:51349eddbe67c3a76dc7971013af473e0942ba6e6513d7d1b2d61f84c196f001"
+        },
+        {
+          "groupId": "group-zj-2025-jan-seven-choices",
+          "family": "seven-choices",
+          "questionCount": 5,
+          "optionSetCount": 0,
+          "optionCount": 0,
+          "variantOptionCount": 7,
+          "semanticDigest": "sha256:40d05de6a73a10b9c83f75c7d90585ce50eb937c7465477c08d4fb1f4ac68f0d"
+        },
+        {
+          "groupId": "group-zj-2025-jan-cloze",
+          "family": "cloze",
+          "questionCount": 15,
+          "optionSetCount": 15,
+          "optionCount": 60,
+          "variantOptionCount": 0,
+          "semanticDigest": "sha256:b31cd42279fdfd1d2e4c177c97f9ef8cd2f4acae2820f1314a08873c795cf11d"
+        },
+        {
+          "groupId": "group-zj-2025-jan-grammar-fill",
+          "family": "grammar-fill",
+          "questionCount": 10,
+          "optionSetCount": 0,
+          "optionCount": 0,
+          "variantOptionCount": 0,
+          "semanticDigest": "sha256:897d2afed14edc76491561d7d3f906163cbbaee4f390ed692c219273d543c50b"
+        },
+        {
+          "groupId": "group-zj-2025-jan-writing-application",
+          "family": "application-writing",
+          "questionCount": 0,
+          "optionSetCount": 0,
+          "optionCount": 0,
+          "variantOptionCount": 0,
+          "semanticDigest": "sha256:b9efb4700a4938120289578d5f8529a9635e7299176e3ceb169c27e0d9b61cb9"
+        },
+        {
+          "groupId": "group-zj-2025-jan-writing-continuation",
+          "family": "continuation-writing",
+          "questionCount": 0,
+          "optionSetCount": 0,
+          "optionCount": 0,
+          "variantOptionCount": 0,
+          "semanticDigest": "sha256:f43d4f97327e3e76e480c6ba4a944be97ddf5021e7bd41115895a0cc980c4a26"
+        }
+      ]
+    },
+    {
+      "paperId": "paper-2023-jia",
+      "family": [
+        "reading",
+        "seven-choices",
+        "cloze",
+        "grammar-fill"
+      ],
+      "profile": {
+        "profileId": "national-legacy",
+        "profileVersion": "3",
+        "profileDigest": "sha256:26dcda14930ecf41c60ff39a2aa072c53e947df96ff999c0f0a9131b398be18d"
+      },
+      "profileId": "national-legacy",
+      "sourceType": "legacy-json",
+      "authority": {
+        "manifestDigest": "sha256:b025bdc677a59a09548575e3df1e911ecd0273c5f6a9056d70603107c1970c83",
+        "manifestId": "paper-canonical",
+        "manifestVersion": "41"
+      },
+      "lane": {
+        "ticket": 28,
+        "commit": "e2d1eece81df1c64711fac20fae3111248da05c6",
+        "evidencePath": "test-fixtures/paper-import/paper-canonical-confirmation-lanes/ticket-28-national-legacy-v1/lane-evidence-v1.json",
+        "evidenceFileSha256": "sha256:798682d50f71b517b8ab160aa18157137437a32ddbf13c169234207018f1b914"
+      },
+      "sourceCapture": {
+        "path": "test-fixtures/paper-import/paper-canonical-source-captures/ticket-26-v1/paper-2023-jia/source-capture-v1.json",
+        "byteLength": 200287,
+        "fileSha256": "sha256:81e1c80b64586161839a57a58ec282e241fa31c20ea4f9a9d60531fdf48dd093",
+        "sourceCaptureId": "source-capture:8068f0ec864f65c5032dd",
+        "sourceCaptureDigest": "sha256:8068f0ec864f65c5032dd31fe3ded204d9d25204a3dcb8c87cbdeb637be38b2e"
+      },
+      "candidate": {
+        "path": "test-fixtures/paper-import/paper-canonical-confirmation-lanes/ticket-28-national-legacy-v1/paper-2023-jia/candidate-v1.json",
+        "byteLength": 206748,
+        "fileSha256": "sha256:31532ae49a536930334fd8ba2287f61d3a7beeec03eac2af3de473e3c87ad864",
+        "candidateDigest": "sha256:20615dbedbeee87f6636cb31b9f458b2cccc16e22043e3adadcf4a2175ebc141"
+      },
+      "confirmation": {
+        "path": "test-fixtures/paper-import/paper-canonical-confirmation-lanes/ticket-28-national-legacy-v1/paper-2023-jia/teacher-confirmation-v1.json",
+        "byteLength": 625,
+        "fileSha256": "sha256:4a80d2b4666070a0706b2354716823a9bd7fd8c2c16b0e7378fb10655fdaa938",
+        "confirmationDigest": "sha256:6955d03ab9338bb5f71374f687fda0fbf07dd7ebb5a9ad095f83c20ac634996f",
+        "candidateDigest": "sha256:20615dbedbeee87f6636cb31b9f458b2cccc16e22043e3adadcf4a2175ebc141",
+        "sourceDigest": "sha256:81e1c80b64586161839a57a58ec282e241fa31c20ea4f9a9d60531fdf48dd093"
+      },
+      "canonicalPaper": {
+        "path": "test-fixtures/paper-import/paper-canonical-confirmation-lanes/ticket-28-national-legacy-v1/paper-2023-jia/canonical-paper-v1.json",
+        "byteLength": 760517,
+        "fileSha256": "sha256:8834c8a66d813d718931059df07bb9fdfc8906b298ea7c06d7f130d7a5ce5ce1",
+        "canonicalArtifactDigest": "sha256:3d329bdad8a05448ffffbedde413e64ca1e93799492bfeb71285a40df7f7dd9a",
+        "canonicalPaperDigest": "sha256:c637badaeeeaa084cf164b7cb3968a3afbb3e601a8ba36b932fb0071529daa71",
+        "planId": "plan:2f7d4788aefa4a9fb6389",
+        "groupCount": 7,
+        "questionCount": 50,
+        "optionSetCount": 35,
+        "optionCount": 140,
+        "completeness": "complete",
+        "publication": "unpublished",
+        "embeddedSourceCapture": {
+          "captureId": "source-capture:e075e8f2aeb5e207472a7",
+          "captureDigest": "sha256:e075e8f2aeb5e207472a7b89e2aefcf46d4994a9894e629b11b1cb01bdb5413a"
+        }
+      },
+      "bindings": {
+        "sourceToCandidate": {
+          "fileSha256": "sha256:81e1c80b64586161839a57a58ec282e241fa31c20ea4f9a9d60531fdf48dd093",
+          "byteLength": 200287,
+          "captureId": "source-capture:8068f0ec864f65c5032dd",
+          "captureDigest": "sha256:8068f0ec864f65c5032dd31fe3ded204d9d25204a3dcb8c87cbdeb637be38b2e",
+          "exact": true
+        },
+        "sourceToConfirmation": {
+          "sourceDigest": "sha256:81e1c80b64586161839a57a58ec282e241fa31c20ea4f9a9d60531fdf48dd093",
+          "exact": true
+        },
+        "candidateToConfirmation": {
+          "candidateDigest": "sha256:20615dbedbeee87f6636cb31b9f458b2cccc16e22043e3adadcf4a2175ebc141",
+          "exact": true
+        },
+        "candidateToCanonical": {
+          "paperId": "paper-2023-jia",
+          "authority": {
+            "manifestDigest": "sha256:b025bdc677a59a09548575e3df1e911ecd0273c5f6a9056d70603107c1970c83",
+            "manifestId": "paper-canonical",
+            "manifestVersion": "41"
+          },
+          "exact": true
+        },
+        "confirmationToCanonical": {
+          "canonicalPaperDigest": "sha256:c637badaeeeaa084cf164b7cb3968a3afbb3e601a8ba36b932fb0071529daa71",
+          "confirmationDigest": "sha256:6955d03ab9338bb5f71374f687fda0fbf07dd7ebb5a9ad095f83c20ac634996f",
+          "exact": true
+        }
+      },
+      "families": {
+        "cloze": {
+          "groupCount": 1,
+          "questionCount": 20,
+          "optionSetCount": 20,
+          "optionCount": 80,
+          "variantOptionCount": 0
+        },
+        "grammar-fill": {
+          "groupCount": 1,
+          "questionCount": 10,
+          "optionSetCount": 0,
+          "optionCount": 0,
+          "variantOptionCount": 0
+        },
+        "reading": {
+          "groupCount": 4,
+          "questionCount": 15,
+          "optionSetCount": 15,
+          "optionCount": 60,
+          "variantOptionCount": 0
+        },
+        "seven-choices": {
+          "groupCount": 1,
+          "questionCount": 5,
+          "optionSetCount": 0,
+          "optionCount": 0,
+          "variantOptionCount": 7
+        }
+      },
+      "groups": [
+        {
+          "groupId": "group-2023-jia-reading-a",
+          "family": "reading",
+          "questionCount": 3,
+          "optionSetCount": 3,
+          "optionCount": 12,
+          "variantOptionCount": 0,
+          "semanticDigest": "sha256:574221fc3dcb180867094f6d0ab60502e35448a6c49a3eae674e2238db4734a0"
+        },
+        {
+          "groupId": "group-2023-jia-reading-b",
+          "family": "reading",
+          "questionCount": 4,
+          "optionSetCount": 4,
+          "optionCount": 16,
+          "variantOptionCount": 0,
+          "semanticDigest": "sha256:0eaca98889c03cc29db58457344f1de17cad11eebe669f04ce34fea0ec3b7e84"
+        },
+        {
+          "groupId": "group-2023-jia-reading-c",
+          "family": "reading",
+          "questionCount": 4,
+          "optionSetCount": 4,
+          "optionCount": 16,
+          "variantOptionCount": 0,
+          "semanticDigest": "sha256:29021ff2ca218e6a6ab2ed070e2263823ba8b4884f1858cd92b5a5f46c4e3ce5"
+        },
+        {
+          "groupId": "group-2023-jia-reading-d",
+          "family": "reading",
+          "questionCount": 4,
+          "optionSetCount": 4,
+          "optionCount": 16,
+          "variantOptionCount": 0,
+          "semanticDigest": "sha256:712ddc1d9d92df359214aab926f494ffd7e51a7e981e4f91085d983cbb074003"
+        },
+        {
+          "groupId": "group-2023-jia-seven-choices",
+          "family": "seven-choices",
+          "questionCount": 5,
+          "optionSetCount": 0,
+          "optionCount": 0,
+          "variantOptionCount": 7,
+          "semanticDigest": "sha256:36b2040abc999073698dbf0358d322120aeff3246ff0b3a500f5d292e36b3518"
+        },
+        {
+          "groupId": "group-2023-jia-cloze",
+          "family": "cloze",
+          "questionCount": 20,
+          "optionSetCount": 20,
+          "optionCount": 80,
+          "variantOptionCount": 0,
+          "semanticDigest": "sha256:70c110942f3e8e8fb2784403700ccba958aac02d2ad9b27fe9e0b2c41ba33b7b"
+        },
+        {
+          "groupId": "group-2023-jia-grammar-fill",
+          "family": "grammar-fill",
+          "questionCount": 10,
+          "optionSetCount": 0,
+          "optionCount": 0,
+          "variantOptionCount": 0,
+          "semanticDigest": "sha256:c153037570897a9f1586e6fa12fdfd5784758fd28e73bac83a9572d77b6fe2cf"
+        }
+      ]
+    },
+    {
+      "paperId": "paper-zj-2020-jul",
+      "family": [
+        "reading",
+        "seven-choices",
+        "cloze",
+        "grammar-fill",
+        "application-writing",
+        "continuation-writing"
+      ],
+      "profile": {
+        "profileId": "zhejiang-legacy",
+        "profileVersion": "10",
+        "profileDigest": "sha256:de2feeda4d0a2ae912112e3f37a4c1b8e11e4b0df18b71d238562724717038b3"
+      },
+      "profileId": "zhejiang-legacy",
+      "sourceType": "legacy-json",
+      "authority": {
+        "manifestDigest": "sha256:b025bdc677a59a09548575e3df1e911ecd0273c5f6a9056d70603107c1970c83",
+        "manifestId": "paper-canonical",
+        "manifestVersion": "41"
+      },
+      "lane": {
+        "ticket": 29,
+        "commit": "fd033b09d5add2be4ea8713b7c661ea4d9305e8b",
+        "evidencePath": "test-fixtures/paper-import/paper-canonical-confirmation-lanes/ticket-29-zhejiang-legacy-v1/lane-evidence-v1.json",
+        "evidenceFileSha256": "sha256:4a82382d54d23bd1cd3926b22ed198f5be205cb56a0b1c87e1f5714429abb9d6"
+      },
+      "sourceCapture": {
+        "path": "test-fixtures/paper-import/paper-canonical-source-captures/ticket-26-v1/paper-zj-2020-jul/source-capture-v1.json",
+        "byteLength": 186038,
+        "fileSha256": "sha256:43e02e2954e12d3474a7c688c0e7d1223c5b58ed68ba98fa64c907f90814b08b",
+        "sourceCaptureId": "source-capture:0b9680d2cd79aa53bc989",
+        "sourceCaptureDigest": "sha256:0b9680d2cd79aa53bc989558b9b892449b632f28b6f24a9eff9b0c61664a4142"
+      },
+      "candidate": {
+        "path": "test-fixtures/paper-import/paper-canonical-confirmation-lanes/ticket-29-zhejiang-legacy-v1/paper-zj-2020-jul/import-candidate-v1.json",
+        "byteLength": 111930,
+        "fileSha256": "sha256:0a823437c5c8119908e57890a8bcfdb6f674ccc2ef2361a929916c292b716ed1",
+        "candidateDigest": "sha256:9bb406d9070b51824b13fd16406b12d986834d169681bb625df748b4df10e3cf"
+      },
+      "confirmation": {
+        "path": "test-fixtures/paper-import/paper-canonical-confirmation-lanes/ticket-29-zhejiang-legacy-v1/paper-zj-2020-jul/teacher-confirmation-v1.json",
+        "byteLength": 242,
+        "fileSha256": "sha256:21817a57a9cfdc9a1ead2eb4e389baae78d5fb9fcf98014d053adb8720709157",
+        "confirmationDigest": "sha256:4e808665ee2b3ae0e9adf32737c10d9e465f5c15850604950be6c22b99ee4766",
+        "candidateDigest": "sha256:9bb406d9070b51824b13fd16406b12d986834d169681bb625df748b4df10e3cf",
+        "sourceDigest": "sha256:43e02e2954e12d3474a7c688c0e7d1223c5b58ed68ba98fa64c907f90814b08b"
+      },
+      "canonicalPaper": {
+        "path": "test-fixtures/paper-import/paper-canonical-confirmation-lanes/ticket-29-zhejiang-legacy-v1/paper-zj-2020-jul/canonical-paper-v1.json",
+        "byteLength": 585736,
+        "fileSha256": "sha256:9042355ba94d05c8a7fc36ee6bb95ce548ccc6db777d80e25bbb12b00f189909",
+        "canonicalArtifactDigest": "sha256:a0b7b9b2b709f420352a9bdb960afbf409ad0d47cb4b140ea708aaac20282875",
+        "canonicalPaperDigest": "sha256:f40d6e9fb42648c720c4cf215f159d48b1eb1d056d7fd684f50a9ea7739fc782",
+        "planId": "plan:22f8ef9d2b14d23fb0449",
+        "groupCount": 8,
+        "questionCount": 45,
+        "optionSetCount": 30,
+        "optionCount": 120,
+        "completeness": "complete",
+        "publication": "unpublished",
+        "embeddedSourceCapture": {
+          "captureId": "source-capture:82f1e21e5d3a801af361a",
+          "captureDigest": "sha256:82f1e21e5d3a801af361abd442ab24c975a074b5d6c87cc49a3c623bb38f4cb2"
+        }
+      },
+      "bindings": {
+        "sourceToCandidate": {
+          "fileSha256": "sha256:43e02e2954e12d3474a7c688c0e7d1223c5b58ed68ba98fa64c907f90814b08b",
+          "byteLength": 186038,
+          "captureId": "source-capture:0b9680d2cd79aa53bc989",
+          "captureDigest": "sha256:0b9680d2cd79aa53bc989558b9b892449b632f28b6f24a9eff9b0c61664a4142",
+          "exact": true
+        },
+        "sourceToConfirmation": {
+          "sourceDigest": "sha256:43e02e2954e12d3474a7c688c0e7d1223c5b58ed68ba98fa64c907f90814b08b",
+          "exact": true
+        },
+        "candidateToConfirmation": {
+          "candidateDigest": "sha256:9bb406d9070b51824b13fd16406b12d986834d169681bb625df748b4df10e3cf",
+          "exact": true
+        },
+        "candidateToCanonical": {
+          "paperId": "paper-zj-2020-jul",
+          "authority": {
+            "manifestDigest": "sha256:b025bdc677a59a09548575e3df1e911ecd0273c5f6a9056d70603107c1970c83",
+            "manifestId": "paper-canonical",
+            "manifestVersion": "41"
+          },
+          "exact": true
+        },
+        "confirmationToCanonical": {
+          "canonicalPaperDigest": "sha256:f40d6e9fb42648c720c4cf215f159d48b1eb1d056d7fd684f50a9ea7739fc782",
+          "confirmationDigest": "sha256:4e808665ee2b3ae0e9adf32737c10d9e465f5c15850604950be6c22b99ee4766",
+          "exact": true
+        }
+      },
+      "families": {
+        "application-writing": {
+          "groupCount": 1,
+          "questionCount": 0,
+          "optionSetCount": 0,
+          "optionCount": 0,
+          "variantOptionCount": 0
+        },
+        "cloze": {
+          "groupCount": 1,
+          "questionCount": 20,
+          "optionSetCount": 20,
+          "optionCount": 80,
+          "variantOptionCount": 0
+        },
+        "continuation-writing": {
+          "groupCount": 1,
+          "questionCount": 0,
+          "optionSetCount": 0,
+          "optionCount": 0,
+          "variantOptionCount": 0
+        },
+        "grammar-fill": {
+          "groupCount": 1,
+          "questionCount": 10,
+          "optionSetCount": 0,
+          "optionCount": 0,
+          "variantOptionCount": 0
+        },
+        "reading": {
+          "groupCount": 3,
+          "questionCount": 10,
+          "optionSetCount": 10,
+          "optionCount": 40,
+          "variantOptionCount": 0
+        },
+        "seven-choices": {
+          "groupCount": 1,
+          "questionCount": 5,
+          "optionSetCount": 0,
+          "optionCount": 0,
+          "variantOptionCount": 7
+        }
+      },
+      "groups": [
+        {
+          "groupId": "group-zj-2020-jul-reading-a",
+          "family": "reading",
+          "questionCount": 4,
+          "optionSetCount": 4,
+          "optionCount": 16,
+          "variantOptionCount": 0,
+          "semanticDigest": "sha256:76a1b36265a1cc5494c8aee47ecfba2fd401c74bd833833f47b1748be3161c71"
+        },
+        {
+          "groupId": "group-zj-2020-jul-reading-b",
+          "family": "reading",
+          "questionCount": 3,
+          "optionSetCount": 3,
+          "optionCount": 12,
+          "variantOptionCount": 0,
+          "semanticDigest": "sha256:826929d2d6e73102dcf831dbf35c16313ce4c44846314451aee7af69f0456cb7"
+        },
+        {
+          "groupId": "group-zj-2020-jul-reading-c",
+          "family": "reading",
+          "questionCount": 3,
+          "optionSetCount": 3,
+          "optionCount": 12,
+          "variantOptionCount": 0,
+          "semanticDigest": "sha256:0d3f0d88954f45b0274b8108bcd268fc4d0cd78c42883902fdc2c215906a8602"
+        },
+        {
+          "groupId": "group-zj-2020-jul-seven-choices",
+          "family": "seven-choices",
+          "questionCount": 5,
+          "optionSetCount": 0,
+          "optionCount": 0,
+          "variantOptionCount": 7,
+          "semanticDigest": "sha256:8631c4ab1eacf2f4d6057e291ccdec7f48d2159047d5124deb960e04576bbd78"
+        },
+        {
+          "groupId": "group-zj-2020-jul-cloze",
+          "family": "cloze",
+          "questionCount": 20,
+          "optionSetCount": 20,
+          "optionCount": 80,
+          "variantOptionCount": 0,
+          "semanticDigest": "sha256:6e7407158ca87877bee2a8876a8ab153ffac8cc9e847655026d98d6b19dd0754"
+        },
+        {
+          "groupId": "group-zj-2020-jul-grammar-fill",
+          "family": "grammar-fill",
+          "questionCount": 10,
+          "optionSetCount": 0,
+          "optionCount": 0,
+          "variantOptionCount": 0,
+          "semanticDigest": "sha256:e8c2fcece631625350d779558a1305250263038e6cbec97fd8739bc1e3c26057"
+        },
+        {
+          "groupId": "group-zj-2020-jul-writing-application",
+          "family": "application-writing",
+          "questionCount": 0,
+          "optionSetCount": 0,
+          "optionCount": 0,
+          "variantOptionCount": 0,
+          "semanticDigest": "sha256:8651f324d6377054da2d04eb1ab64a253d4ab5c1256ff3a765354c4eebfc8213"
+        },
+        {
+          "groupId": "group-zj-2020-jul-writing-continuation",
+          "family": "continuation-writing",
+          "questionCount": 0,
+          "optionSetCount": 0,
+          "optionCount": 0,
+          "variantOptionCount": 0,
+          "semanticDigest": "sha256:23393b9543528a8b80392de0c09bd5d162839350097e22bfdbb0aeee20bdf727"
+        }
+      ]
+    },
+    {
+      "paperId": "paper-zj-2021-jan",
+      "family": [
+        "reading",
+        "seven-choices",
+        "cloze",
+        "grammar-fill",
+        "application-writing",
+        "continuation-writing"
+      ],
+      "profile": {
+        "profileId": "zhejiang-legacy",
+        "profileVersion": "10",
+        "profileDigest": "sha256:de2feeda4d0a2ae912112e3f37a4c1b8e11e4b0df18b71d238562724717038b3"
+      },
+      "profileId": "zhejiang-legacy",
+      "sourceType": "legacy-json",
+      "authority": {
+        "manifestDigest": "sha256:b025bdc677a59a09548575e3df1e911ecd0273c5f6a9056d70603107c1970c83",
+        "manifestId": "paper-canonical",
+        "manifestVersion": "41"
+      },
+      "lane": {
+        "ticket": 29,
+        "commit": "fd033b09d5add2be4ea8713b7c661ea4d9305e8b",
+        "evidencePath": "test-fixtures/paper-import/paper-canonical-confirmation-lanes/ticket-29-zhejiang-legacy-v1/lane-evidence-v1.json",
+        "evidenceFileSha256": "sha256:4a82382d54d23bd1cd3926b22ed198f5be205cb56a0b1c87e1f5714429abb9d6"
+      },
+      "sourceCapture": {
+        "path": "test-fixtures/paper-import/paper-canonical-source-captures/ticket-26-v1/paper-zj-2021-jan/source-capture-v1.json",
+        "byteLength": 188302,
+        "fileSha256": "sha256:1e25adc7723ce3bddb45000ce11e08745c49940aa2d86d2a0c7b9468c5285bd7",
+        "sourceCaptureId": "source-capture:484975498b46c284d3617",
+        "sourceCaptureDigest": "sha256:484975498b46c284d3617ee67eec8176ec4932ad33861dc6768f9bb7aa12189c"
+      },
+      "candidate": {
+        "path": "test-fixtures/paper-import/paper-canonical-confirmation-lanes/ticket-29-zhejiang-legacy-v1/paper-zj-2021-jan/import-candidate-v1.json",
+        "byteLength": 115572,
+        "fileSha256": "sha256:b3e393c32ebd07a54a64c0613b9d2b195aa95f16c73b0e66d705daaacfac9671",
+        "candidateDigest": "sha256:4fb61032ab999d5a2715912e3d87aac1076907adb21b38fe7e520ff7a3abd0a3"
+      },
+      "confirmation": {
+        "path": "test-fixtures/paper-import/paper-canonical-confirmation-lanes/ticket-29-zhejiang-legacy-v1/paper-zj-2021-jan/teacher-confirmation-v1.json",
+        "byteLength": 242,
+        "fileSha256": "sha256:c50b5c6da2f1781b4a7a33f30ab37b75dfeb64c3d0632429538d6017624b0406",
+        "confirmationDigest": "sha256:1917d0a34f9195aca6e71cf19a5ed091cadbf612e6f23eba4643c9e868d4ecd2",
+        "candidateDigest": "sha256:4fb61032ab999d5a2715912e3d87aac1076907adb21b38fe7e520ff7a3abd0a3",
+        "sourceDigest": "sha256:1e25adc7723ce3bddb45000ce11e08745c49940aa2d86d2a0c7b9468c5285bd7"
+      },
+      "canonicalPaper": {
+        "path": "test-fixtures/paper-import/paper-canonical-confirmation-lanes/ticket-29-zhejiang-legacy-v1/paper-zj-2021-jan/canonical-paper-v1.json",
+        "byteLength": 596965,
+        "fileSha256": "sha256:c3f03b6b36619b360ff582dd5b0d4d14649e67b9c253dbb6c822db6b368f3433",
+        "canonicalArtifactDigest": "sha256:1e46281b3e78eb07cf7b83ed759824736ae12a446f615f8d2735d4bcc032d85f",
+        "canonicalPaperDigest": "sha256:4d194bc5a90fd73b07eecfaa0f198abfabd5577b6692f5c9be6627d43ff06a4d",
+        "planId": "plan:6435bf12fab45ddde57e3",
+        "groupCount": 8,
+        "questionCount": 45,
+        "optionSetCount": 30,
+        "optionCount": 120,
+        "completeness": "complete",
+        "publication": "unpublished",
+        "embeddedSourceCapture": {
+          "captureId": "source-capture:337d113d44426b913aa8f",
+          "captureDigest": "sha256:337d113d44426b913aa8fd2e5581ce4e81183b933a986a0bbbd8189065440d3d"
+        }
+      },
+      "bindings": {
+        "sourceToCandidate": {
+          "fileSha256": "sha256:1e25adc7723ce3bddb45000ce11e08745c49940aa2d86d2a0c7b9468c5285bd7",
+          "byteLength": 188302,
+          "captureId": "source-capture:484975498b46c284d3617",
+          "captureDigest": "sha256:484975498b46c284d3617ee67eec8176ec4932ad33861dc6768f9bb7aa12189c",
+          "exact": true
+        },
+        "sourceToConfirmation": {
+          "sourceDigest": "sha256:1e25adc7723ce3bddb45000ce11e08745c49940aa2d86d2a0c7b9468c5285bd7",
+          "exact": true
+        },
+        "candidateToConfirmation": {
+          "candidateDigest": "sha256:4fb61032ab999d5a2715912e3d87aac1076907adb21b38fe7e520ff7a3abd0a3",
+          "exact": true
+        },
+        "candidateToCanonical": {
+          "paperId": "paper-zj-2021-jan",
+          "authority": {
+            "manifestDigest": "sha256:b025bdc677a59a09548575e3df1e911ecd0273c5f6a9056d70603107c1970c83",
+            "manifestId": "paper-canonical",
+            "manifestVersion": "41"
+          },
+          "exact": true
+        },
+        "confirmationToCanonical": {
+          "canonicalPaperDigest": "sha256:4d194bc5a90fd73b07eecfaa0f198abfabd5577b6692f5c9be6627d43ff06a4d",
+          "confirmationDigest": "sha256:1917d0a34f9195aca6e71cf19a5ed091cadbf612e6f23eba4643c9e868d4ecd2",
+          "exact": true
+        }
+      },
+      "families": {
+        "application-writing": {
+          "groupCount": 1,
+          "questionCount": 0,
+          "optionSetCount": 0,
+          "optionCount": 0,
+          "variantOptionCount": 0
+        },
+        "cloze": {
+          "groupCount": 1,
+          "questionCount": 20,
+          "optionSetCount": 20,
+          "optionCount": 80,
+          "variantOptionCount": 0
+        },
+        "continuation-writing": {
+          "groupCount": 1,
+          "questionCount": 0,
+          "optionSetCount": 0,
+          "optionCount": 0,
+          "variantOptionCount": 0
+        },
+        "grammar-fill": {
+          "groupCount": 1,
+          "questionCount": 10,
+          "optionSetCount": 0,
+          "optionCount": 0,
+          "variantOptionCount": 0
+        },
+        "reading": {
+          "groupCount": 3,
+          "questionCount": 10,
+          "optionSetCount": 10,
+          "optionCount": 40,
+          "variantOptionCount": 0
+        },
+        "seven-choices": {
+          "groupCount": 1,
+          "questionCount": 5,
+          "optionSetCount": 0,
+          "optionCount": 0,
+          "variantOptionCount": 7
+        }
+      },
+      "groups": [
+        {
+          "groupId": "group-zj-2021-jan-reading-a",
+          "family": "reading",
+          "questionCount": 3,
+          "optionSetCount": 3,
+          "optionCount": 12,
+          "variantOptionCount": 0,
+          "semanticDigest": "sha256:f4d80664cfebda99f6f473922653b66b302eb4348ba9b1fcf3a8268ecd93a49e"
+        },
+        {
+          "groupId": "group-zj-2021-jan-reading-b",
+          "family": "reading",
+          "questionCount": 3,
+          "optionSetCount": 3,
+          "optionCount": 12,
+          "variantOptionCount": 0,
+          "semanticDigest": "sha256:79622ac96d024267bfeb67e6dcc271d3d15af728c671d5571350dd01260531cc"
+        },
+        {
+          "groupId": "group-zj-2021-jan-reading-c",
+          "family": "reading",
+          "questionCount": 4,
+          "optionSetCount": 4,
+          "optionCount": 16,
+          "variantOptionCount": 0,
+          "semanticDigest": "sha256:067564cd9770e263d76107adb74d92d8b5f28fa0d7c4b9b0b817aa29386404eb"
+        },
+        {
+          "groupId": "group-zj-2021-jan-seven-choices",
+          "family": "seven-choices",
+          "questionCount": 5,
+          "optionSetCount": 0,
+          "optionCount": 0,
+          "variantOptionCount": 7,
+          "semanticDigest": "sha256:f20b3a9d913e7957200e81b490d1eaadbebc24f1124161db5cfc48ed4a261035"
+        },
+        {
+          "groupId": "group-zj-2021-jan-cloze",
+          "family": "cloze",
+          "questionCount": 20,
+          "optionSetCount": 20,
+          "optionCount": 80,
+          "variantOptionCount": 0,
+          "semanticDigest": "sha256:bac775a562d12a88cb45858763733c4b53e0a6cdb3f3053dacbf187571b4f9f9"
+        },
+        {
+          "groupId": "group-zj-2021-jan-grammar-fill",
+          "family": "grammar-fill",
+          "questionCount": 10,
+          "optionSetCount": 0,
+          "optionCount": 0,
+          "variantOptionCount": 0,
+          "semanticDigest": "sha256:28dbd53ebf8b1f948f1f7eae8842e7bc6cf8900e6227cd193db62308b39427fc"
+        },
+        {
+          "groupId": "group-zj-2021-jan-writing-application",
+          "family": "application-writing",
+          "questionCount": 0,
+          "optionSetCount": 0,
+          "optionCount": 0,
+          "variantOptionCount": 0,
+          "semanticDigest": "sha256:33b0d0de19c68a29d84dea3e1be421e4c819128bd899083ee662d3d6ba6b0787"
+        },
+        {
+          "groupId": "group-zj-2021-jan-writing-continuation",
+          "family": "continuation-writing",
+          "questionCount": 0,
+          "optionSetCount": 0,
+          "optionCount": 0,
+          "variantOptionCount": 0,
+          "semanticDigest": "sha256:29d7f27c2354cccd961c8aa067993c84e4b4956a9ab19ec9ef1731dd56dd8662"
+        }
+      ]
+    },
+    {
+      "paperId": "paper-zj-2021-jun",
+      "family": [
+        "reading",
+        "seven-choices",
+        "cloze",
+        "grammar-fill",
+        "application-writing",
+        "continuation-writing"
+      ],
+      "profile": {
+        "profileId": "zhejiang-legacy",
+        "profileVersion": "10",
+        "profileDigest": "sha256:de2feeda4d0a2ae912112e3f37a4c1b8e11e4b0df18b71d238562724717038b3"
+      },
+      "profileId": "zhejiang-legacy",
+      "sourceType": "legacy-json",
+      "authority": {
+        "manifestDigest": "sha256:b025bdc677a59a09548575e3df1e911ecd0273c5f6a9056d70603107c1970c83",
+        "manifestId": "paper-canonical",
+        "manifestVersion": "41"
+      },
+      "lane": {
+        "ticket": 29,
+        "commit": "fd033b09d5add2be4ea8713b7c661ea4d9305e8b",
+        "evidencePath": "test-fixtures/paper-import/paper-canonical-confirmation-lanes/ticket-29-zhejiang-legacy-v1/lane-evidence-v1.json",
+        "evidenceFileSha256": "sha256:4a82382d54d23bd1cd3926b22ed198f5be205cb56a0b1c87e1f5714429abb9d6"
+      },
+      "sourceCapture": {
+        "path": "test-fixtures/paper-import/paper-canonical-source-captures/ticket-26-v1/paper-zj-2021-jun/source-capture-v1.json",
+        "byteLength": 180126,
+        "fileSha256": "sha256:38f5716e4b2cb8baa2c20fd245e79fb3d9bdea587a27b2371367fa59bdf8a0e1",
+        "sourceCaptureId": "source-capture:02dc1b5f7f77093b4ad7c",
+        "sourceCaptureDigest": "sha256:02dc1b5f7f77093b4ad7c3b20f86db9ce7548200dcac51a87b9b5236126c74d0"
+      },
+      "candidate": {
+        "path": "test-fixtures/paper-import/paper-canonical-confirmation-lanes/ticket-29-zhejiang-legacy-v1/paper-zj-2021-jun/import-candidate-v1.json",
+        "byteLength": 113872,
+        "fileSha256": "sha256:bfdb7ca5fad0a3c9653a2f8d8c77ce78ebd3cc1780cde553ed9032cbfbc6591b",
+        "candidateDigest": "sha256:1681cfe14a8bddbb2be74b787959f4a30bbafbc62d208e290fcee6143a335ca8"
+      },
+      "confirmation": {
+        "path": "test-fixtures/paper-import/paper-canonical-confirmation-lanes/ticket-29-zhejiang-legacy-v1/paper-zj-2021-jun/teacher-confirmation-v1.json",
+        "byteLength": 242,
+        "fileSha256": "sha256:c586ad088c4330c876278fd984a1695caa49191846ff59d6959e356cd3bb1c0b",
+        "confirmationDigest": "sha256:db29a042b084817cae59ae483684e4541a24cb5e62104992b1f189427222f11f",
+        "candidateDigest": "sha256:1681cfe14a8bddbb2be74b787959f4a30bbafbc62d208e290fcee6143a335ca8",
+        "sourceDigest": "sha256:38f5716e4b2cb8baa2c20fd245e79fb3d9bdea587a27b2371367fa59bdf8a0e1"
+      },
+      "canonicalPaper": {
+        "path": "test-fixtures/paper-import/paper-canonical-confirmation-lanes/ticket-29-zhejiang-legacy-v1/paper-zj-2021-jun/canonical-paper-v1.json",
+        "byteLength": 575483,
+        "fileSha256": "sha256:01d29fe822a8cad24d41503faef72bf3e413f80d38f3a8c06622777835d0109b",
+        "canonicalArtifactDigest": "sha256:534588ff2ca34c5688b8ada4a067a774deb256f6b793a291fa32f80459ff5a42",
+        "canonicalPaperDigest": "sha256:f1c3027ee94a94c12c73777581ad926d39aaa7efb797bf401b6353a6d52018ef",
+        "planId": "plan:e8d82619a949bb649d966",
+        "groupCount": 8,
+        "questionCount": 45,
+        "optionSetCount": 30,
+        "optionCount": 120,
+        "completeness": "complete",
+        "publication": "unpublished",
+        "embeddedSourceCapture": {
+          "captureId": "source-capture:e55e3ad6998c3d45a1e15",
+          "captureDigest": "sha256:e55e3ad6998c3d45a1e1571b5172931e70fc20753ab5c1ad24b21829a25713ad"
+        }
+      },
+      "bindings": {
+        "sourceToCandidate": {
+          "fileSha256": "sha256:38f5716e4b2cb8baa2c20fd245e79fb3d9bdea587a27b2371367fa59bdf8a0e1",
+          "byteLength": 180126,
+          "captureId": "source-capture:02dc1b5f7f77093b4ad7c",
+          "captureDigest": "sha256:02dc1b5f7f77093b4ad7c3b20f86db9ce7548200dcac51a87b9b5236126c74d0",
+          "exact": true
+        },
+        "sourceToConfirmation": {
+          "sourceDigest": "sha256:38f5716e4b2cb8baa2c20fd245e79fb3d9bdea587a27b2371367fa59bdf8a0e1",
+          "exact": true
+        },
+        "candidateToConfirmation": {
+          "candidateDigest": "sha256:1681cfe14a8bddbb2be74b787959f4a30bbafbc62d208e290fcee6143a335ca8",
+          "exact": true
+        },
+        "candidateToCanonical": {
+          "paperId": "paper-zj-2021-jun",
+          "authority": {
+            "manifestDigest": "sha256:b025bdc677a59a09548575e3df1e911ecd0273c5f6a9056d70603107c1970c83",
+            "manifestId": "paper-canonical",
+            "manifestVersion": "41"
+          },
+          "exact": true
+        },
+        "confirmationToCanonical": {
+          "canonicalPaperDigest": "sha256:f1c3027ee94a94c12c73777581ad926d39aaa7efb797bf401b6353a6d52018ef",
+          "confirmationDigest": "sha256:db29a042b084817cae59ae483684e4541a24cb5e62104992b1f189427222f11f",
+          "exact": true
+        }
+      },
+      "families": {
+        "application-writing": {
+          "groupCount": 1,
+          "questionCount": 0,
+          "optionSetCount": 0,
+          "optionCount": 0,
+          "variantOptionCount": 0
+        },
+        "cloze": {
+          "groupCount": 1,
+          "questionCount": 20,
+          "optionSetCount": 20,
+          "optionCount": 80,
+          "variantOptionCount": 0
+        },
+        "continuation-writing": {
+          "groupCount": 1,
+          "questionCount": 0,
+          "optionSetCount": 0,
+          "optionCount": 0,
+          "variantOptionCount": 0
+        },
+        "grammar-fill": {
+          "groupCount": 1,
+          "questionCount": 10,
+          "optionSetCount": 0,
+          "optionCount": 0,
+          "variantOptionCount": 0
+        },
+        "reading": {
+          "groupCount": 3,
+          "questionCount": 10,
+          "optionSetCount": 10,
+          "optionCount": 40,
+          "variantOptionCount": 0
+        },
+        "seven-choices": {
+          "groupCount": 1,
+          "questionCount": 5,
+          "optionSetCount": 0,
+          "optionCount": 0,
+          "variantOptionCount": 7
+        }
+      },
+      "groups": [
+        {
+          "groupId": "group-zj-2021-jun-reading-a",
+          "family": "reading",
+          "questionCount": 3,
+          "optionSetCount": 3,
+          "optionCount": 12,
+          "variantOptionCount": 0,
+          "semanticDigest": "sha256:dc657b2dc4dc3bae7a34f7de28d8adf44d055ceeb620b6164a036e9d7104abcb"
+        },
+        {
+          "groupId": "group-zj-2021-jun-reading-b",
+          "family": "reading",
+          "questionCount": 4,
+          "optionSetCount": 4,
+          "optionCount": 16,
+          "variantOptionCount": 0,
+          "semanticDigest": "sha256:f150f6df6e475b733b688ddbfb86507115432c3700f95535c7aa339bcd709271"
+        },
+        {
+          "groupId": "group-zj-2021-jun-reading-c",
+          "family": "reading",
+          "questionCount": 3,
+          "optionSetCount": 3,
+          "optionCount": 12,
+          "variantOptionCount": 0,
+          "semanticDigest": "sha256:d4995bf1c23e1d6841859413de135a72369e63d09a492e7ba13ec80a083db801"
+        },
+        {
+          "groupId": "group-zj-2021-jun-seven-choices",
+          "family": "seven-choices",
+          "questionCount": 5,
+          "optionSetCount": 0,
+          "optionCount": 0,
+          "variantOptionCount": 7,
+          "semanticDigest": "sha256:229805c2cf01e4b7e848029a4cbbd8c7d0268315ae2aa068be704f0b243ad21e"
+        },
+        {
+          "groupId": "group-zj-2021-jun-cloze",
+          "family": "cloze",
+          "questionCount": 20,
+          "optionSetCount": 20,
+          "optionCount": 80,
+          "variantOptionCount": 0,
+          "semanticDigest": "sha256:877f751e11fcb2ed84dbf4f2261b0aeec3c3ea0fb76bc3a0ffa72f4e49e50269"
+        },
+        {
+          "groupId": "group-zj-2021-jun-grammar-fill",
+          "family": "grammar-fill",
+          "questionCount": 10,
+          "optionSetCount": 0,
+          "optionCount": 0,
+          "variantOptionCount": 0,
+          "semanticDigest": "sha256:1eeda05120a35197b0127a6baf3d9a333209a4c57258e6adbe7771da00f105a9"
+        },
+        {
+          "groupId": "group-zj-2021-jun-writing-application",
+          "family": "application-writing",
+          "questionCount": 0,
+          "optionSetCount": 0,
+          "optionCount": 0,
+          "variantOptionCount": 0,
+          "semanticDigest": "sha256:488e63ce9e5e9ef0f1cff8d77cb6bc6c4367330b552778171f02d35a73e8cd5f"
+        },
+        {
+          "groupId": "group-zj-2021-jun-writing-continuation",
+          "family": "continuation-writing",
+          "questionCount": 0,
+          "optionSetCount": 0,
+          "optionCount": 0,
+          "variantOptionCount": 0,
+          "semanticDigest": "sha256:23ec4e703483b1fc59beb927fcc3cf815513e7569d1d7f13bd399fbddc61e82a"
+        }
+      ]
+    },
+    {
+      "paperId": "paper-zj-2022-jan",
+      "family": [
+        "reading",
+        "seven-choices",
+        "cloze",
+        "grammar-fill",
+        "application-writing",
+        "continuation-writing"
+      ],
+      "profile": {
+        "profileId": "zhejiang-legacy",
+        "profileVersion": "10",
+        "profileDigest": "sha256:de2feeda4d0a2ae912112e3f37a4c1b8e11e4b0df18b71d238562724717038b3"
+      },
+      "profileId": "zhejiang-legacy",
+      "sourceType": "legacy-json",
+      "authority": {
+        "manifestDigest": "sha256:b025bdc677a59a09548575e3df1e911ecd0273c5f6a9056d70603107c1970c83",
+        "manifestId": "paper-canonical",
+        "manifestVersion": "41"
+      },
+      "lane": {
+        "ticket": 29,
+        "commit": "fd033b09d5add2be4ea8713b7c661ea4d9305e8b",
+        "evidencePath": "test-fixtures/paper-import/paper-canonical-confirmation-lanes/ticket-29-zhejiang-legacy-v1/lane-evidence-v1.json",
+        "evidenceFileSha256": "sha256:4a82382d54d23bd1cd3926b22ed198f5be205cb56a0b1c87e1f5714429abb9d6"
+      },
+      "sourceCapture": {
+        "path": "test-fixtures/paper-import/paper-canonical-source-captures/ticket-26-v1/paper-zj-2022-jan/source-capture-v1.json",
+        "byteLength": 186906,
+        "fileSha256": "sha256:d32e4c114fab230aa8394b31b693f306004a573e8bf3439b64a2a38cbb0d5a30",
+        "sourceCaptureId": "source-capture:dd4cb4893cf05a0de1cde",
+        "sourceCaptureDigest": "sha256:dd4cb4893cf05a0de1cdee3ef69fdca86431b4659df4de588c2d5f6467491916"
+      },
+      "candidate": {
+        "path": "test-fixtures/paper-import/paper-canonical-confirmation-lanes/ticket-29-zhejiang-legacy-v1/paper-zj-2022-jan/import-candidate-v1.json",
+        "byteLength": 116141,
+        "fileSha256": "sha256:d3eb6ece526569bb2d0af3c6363e3cddd71c78581060195987b160173933f659",
+        "candidateDigest": "sha256:936796af57074804cf993051235f12b3f74c33729dfbe204520e0dc5b1b443bc"
+      },
+      "confirmation": {
+        "path": "test-fixtures/paper-import/paper-canonical-confirmation-lanes/ticket-29-zhejiang-legacy-v1/paper-zj-2022-jan/teacher-confirmation-v1.json",
+        "byteLength": 242,
+        "fileSha256": "sha256:d5bec5f4fd5699e80586be06c6815bb154ae1659d83d514ef53a3035c304ffce",
+        "confirmationDigest": "sha256:b0ec5bab5c841516f5e9761f8b44ddc8938553b6bc1585fe68794e32e9d2785d",
+        "candidateDigest": "sha256:936796af57074804cf993051235f12b3f74c33729dfbe204520e0dc5b1b443bc",
+        "sourceDigest": "sha256:d32e4c114fab230aa8394b31b693f306004a573e8bf3439b64a2a38cbb0d5a30"
+      },
+      "canonicalPaper": {
+        "path": "test-fixtures/paper-import/paper-canonical-confirmation-lanes/ticket-29-zhejiang-legacy-v1/paper-zj-2022-jan/canonical-paper-v1.json",
+        "byteLength": 595287,
+        "fileSha256": "sha256:aaadb99f799d6dbd6c904de9b36c383df235d7a279ef2631a5f41b1bea7e092b",
+        "canonicalArtifactDigest": "sha256:24266f906fc446e47bea653df2b51e927b6e05199adf891c8fc3a9521544c8ba",
+        "canonicalPaperDigest": "sha256:e694c232b2ad167625227a6936721fc6a5f08bb498de5f6ef1e3ada4c9a3e4e0",
+        "planId": "plan:7a91f0bc8f68239086528",
+        "groupCount": 8,
+        "questionCount": 45,
+        "optionSetCount": 30,
+        "optionCount": 120,
+        "completeness": "complete",
+        "publication": "unpublished",
+        "embeddedSourceCapture": {
+          "captureId": "source-capture:50dbebb50acd12202b350",
+          "captureDigest": "sha256:50dbebb50acd12202b35005c0e81447813724767010668a3e6e6a6cf6066ef60"
+        }
+      },
+      "bindings": {
+        "sourceToCandidate": {
+          "fileSha256": "sha256:d32e4c114fab230aa8394b31b693f306004a573e8bf3439b64a2a38cbb0d5a30",
+          "byteLength": 186906,
+          "captureId": "source-capture:dd4cb4893cf05a0de1cde",
+          "captureDigest": "sha256:dd4cb4893cf05a0de1cdee3ef69fdca86431b4659df4de588c2d5f6467491916",
+          "exact": true
+        },
+        "sourceToConfirmation": {
+          "sourceDigest": "sha256:d32e4c114fab230aa8394b31b693f306004a573e8bf3439b64a2a38cbb0d5a30",
+          "exact": true
+        },
+        "candidateToConfirmation": {
+          "candidateDigest": "sha256:936796af57074804cf993051235f12b3f74c33729dfbe204520e0dc5b1b443bc",
+          "exact": true
+        },
+        "candidateToCanonical": {
+          "paperId": "paper-zj-2022-jan",
+          "authority": {
+            "manifestDigest": "sha256:b025bdc677a59a09548575e3df1e911ecd0273c5f6a9056d70603107c1970c83",
+            "manifestId": "paper-canonical",
+            "manifestVersion": "41"
+          },
+          "exact": true
+        },
+        "confirmationToCanonical": {
+          "canonicalPaperDigest": "sha256:e694c232b2ad167625227a6936721fc6a5f08bb498de5f6ef1e3ada4c9a3e4e0",
+          "confirmationDigest": "sha256:b0ec5bab5c841516f5e9761f8b44ddc8938553b6bc1585fe68794e32e9d2785d",
+          "exact": true
+        }
+      },
+      "families": {
+        "application-writing": {
+          "groupCount": 1,
+          "questionCount": 0,
+          "optionSetCount": 0,
+          "optionCount": 0,
+          "variantOptionCount": 0
+        },
+        "cloze": {
+          "groupCount": 1,
+          "questionCount": 20,
+          "optionSetCount": 20,
+          "optionCount": 80,
+          "variantOptionCount": 0
+        },
+        "continuation-writing": {
+          "groupCount": 1,
+          "questionCount": 0,
+          "optionSetCount": 0,
+          "optionCount": 0,
+          "variantOptionCount": 0
+        },
+        "grammar-fill": {
+          "groupCount": 1,
+          "questionCount": 10,
+          "optionSetCount": 0,
+          "optionCount": 0,
+          "variantOptionCount": 0
+        },
+        "reading": {
+          "groupCount": 3,
+          "questionCount": 10,
+          "optionSetCount": 10,
+          "optionCount": 40,
+          "variantOptionCount": 0
+        },
+        "seven-choices": {
+          "groupCount": 1,
+          "questionCount": 5,
+          "optionSetCount": 0,
+          "optionCount": 0,
+          "variantOptionCount": 7
+        }
+      },
+      "groups": [
+        {
+          "groupId": "group-zj-2022-jan-reading-a",
+          "family": "reading",
+          "questionCount": 3,
+          "optionSetCount": 3,
+          "optionCount": 12,
+          "variantOptionCount": 0,
+          "semanticDigest": "sha256:67fa0a2c57aa6551cc8db0890364db1a999aefda196a5ecbd85ed9cf32e89926"
+        },
+        {
+          "groupId": "group-zj-2022-jan-reading-b",
+          "family": "reading",
+          "questionCount": 3,
+          "optionSetCount": 3,
+          "optionCount": 12,
+          "variantOptionCount": 0,
+          "semanticDigest": "sha256:3d6a6f95de3702fb23865bbf7a897c0ccdd8bb17f793ad15da1791cf1db62aad"
+        },
+        {
+          "groupId": "group-zj-2022-jan-reading-c",
+          "family": "reading",
+          "questionCount": 4,
+          "optionSetCount": 4,
+          "optionCount": 16,
+          "variantOptionCount": 0,
+          "semanticDigest": "sha256:47f6fac6e7557312b4325033a626e6eb54d004b7463f77575c7c0c267c562d28"
+        },
+        {
+          "groupId": "group-zj-2022-jan-seven-choices",
+          "family": "seven-choices",
+          "questionCount": 5,
+          "optionSetCount": 0,
+          "optionCount": 0,
+          "variantOptionCount": 7,
+          "semanticDigest": "sha256:c7e9ace56a2e784d78c562b166a0e85ea503bb420051afeb8b156f58cfe73157"
+        },
+        {
+          "groupId": "group-zj-2022-jan-cloze",
+          "family": "cloze",
+          "questionCount": 20,
+          "optionSetCount": 20,
+          "optionCount": 80,
+          "variantOptionCount": 0,
+          "semanticDigest": "sha256:41f439c32821035d6e795ad54843e42fca4e51a6769ea89268fd0bcd9efe8516"
+        },
+        {
+          "groupId": "group-zj-2022-jan-grammar-fill",
+          "family": "grammar-fill",
+          "questionCount": 10,
+          "optionSetCount": 0,
+          "optionCount": 0,
+          "variantOptionCount": 0,
+          "semanticDigest": "sha256:6a7343548ec047f2c32f6b9fc0b4bf84619d02fccdc44b462c36994b29c557dc"
+        },
+        {
+          "groupId": "group-zj-2022-jan-writing-application",
+          "family": "application-writing",
+          "questionCount": 0,
+          "optionSetCount": 0,
+          "optionCount": 0,
+          "variantOptionCount": 0,
+          "semanticDigest": "sha256:7926442b6cc624f086f4a6558311794d9da2f0280fb4bd605a357aa31fed6329"
+        },
+        {
+          "groupId": "group-zj-2022-jan-writing-continuation",
+          "family": "continuation-writing",
+          "questionCount": 0,
+          "optionSetCount": 0,
+          "optionCount": 0,
+          "variantOptionCount": 0,
+          "semanticDigest": "sha256:41edfc0ee93aa0b71f22ba328d7941c14bc7eace28d2428cac22e542cf521d6d"
+        }
+      ]
+    }
+  ],
+  "invariants": {
+    "exactAllowlist": true,
+    "exactRegisteredManifestMembership": true,
+    "exactSourceCandidateConfirmationCanonicalPaths": true,
+    "exactFileDigests": true,
+    "exactSemanticDigests": true,
+    "exactAuthorityBindings": true,
+    "exactSourceCandidateBindings": true,
+    "exactCandidateConfirmationBindings": true,
+    "exactCanonicalConfirmationBindings": true,
+    "allComplete": true,
+    "allUnpublished": true,
+    "noCanary": true,
+    "noDuplicates": true,
+    "noMissing": true,
+    "zeroPublicationWrites": true,
+    "zeroPublicationStoreOrCurrentRefTouch": true
+  },
+  "verification": {
+    "method": "independent-live-byte-replay",
+    "source": "manifest-v2 plus actual source/candidate/confirmation/canonical bytes",
+    "jsonParse": "PASS",
+    "fileAndSemanticDigestReplay": "PASS",
+    "bindingReplay": "PASS",
+    "countReplay": "PASS",
+    "membershipReplay": "PASS",
+    "publicationExecution": "NOT_RUN",
+    "publicationStoreMutation": "NOT_OBSERVED",
+    "diffScope": "PASS"
+  }
+}
