@@ -12628,10 +12628,10 @@ function assertGrammarFillPdfArtifact(
       const numberBottomToBodyBottomRatio =
         Math.abs(numberInk.yMax - bodyInk.yMax) / bodyGlyphHeight
       assert.equal(
-        bodyBottomToRuleCenterRatio >= 0.75
-          && bodyBottomToRuleCenterRatio <= 1.2,
+        bodyBottomToRuleCenterRatio >= 0.3
+          && bodyBottomToRuleCenterRatio <= 0.55,
         true,
-        `${label} blank ${proof.questionId} independently raster-proves the shared bottom rule instead of a Grammar Fill-only lift: ${JSON.stringify({
+        `${label} blank ${proof.questionId} independently raster-proves the compact shared bottom rule without a Grammar Fill-only lift or glyph collision: ${JSON.stringify({
           adjacentBodyWord,
           bodyInk,
           numberInk,
