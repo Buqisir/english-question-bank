@@ -248,7 +248,18 @@ const paper2026DocxAttempt = importCanonicalCandidate(
   paper2026FrozenAssetBytes,
   { originalName: 'paper-2026-i-paper-asset.json' },
 )
-assert.equal(paper2026DocxAttempt.candidate, null, 'paper-2026-i frozen JSON must never become a DOCX candidate')
+assert.ok(paper2026DocxAttempt.candidate, 'paper-2026-i frozen JSON must return a diagnostic DOCX Candidate')
+assert.equal(paper2026DocxAttempt.candidate.schemaVersion, 'trusted-docx-import-candidate-v1')
+assert.equal(paper2026DocxAttempt.candidate.authority.manifestVersion, '37')
+assert.equal(paper2026DocxAttempt.candidate.interpretation, null)
+assert.equal(paper2026DocxAttempt.candidate.source.sha256, sha256(paper2026FrozenAssetBytes))
+assert.equal(paper2026DocxAttempt.candidate.source.byteLength, paper2026FrozenAssetBytes.byteLength)
+assert.equal('canonicalPaper' in paper2026DocxAttempt.candidate, false)
+assert.deepEqual(
+  paper2026DocxAttempt.candidate.issues.map(({ code }) => code),
+  ['DOCX_SOURCE_DOCUMENT_INVALID'],
+  'the diagnostic DOCX Candidate must carry one blocking invalid-source issue',
+)
 assert.deepEqual(
   paper2026DocxAttempt.issues.map(({ code }) => code),
   ['DOCX_SOURCE_DOCUMENT_INVALID'],
@@ -352,7 +363,27 @@ const synchronizedConfirmation = confirmCanonicalCandidate(candidateWithReboundD
 })
 assert.deepEqual(synchronizedConfirmation.unresolvedIssues.map(({ code }) => code), ['CANDIDATE_BINDING_MISMATCH'], 'a recomputed candidate digest cannot make synchronized semantic drift authoritative')
 
-const allSources = await Promise.all(batch.membership.paperIds.map(async (paperId) => {
+const retainedPaperIds = new Set([
+  'paper-2020-i',
+  'paper-2020-bing',
+  'paper-960d0f8d',
+  'paper-2026-i',
+  'paper-zj-2020-jan',
+  'paper-zj-2021-jun',
+  'paper-zj-2020-jul',
+  'paper-zj-2022-jun',
+])
+const sourceByPaperId = new Map()
+const projectedProfiles = new Set()
+const confirmations = []
+let sourceCount = 0
+let applicationGroupCount = 0
+let paper2026CandidateDocuments = null
+let paper2026ConfirmationSummary = null
+let unmatchedMarkerCandidateAssertions = null
+let unmatchedMarkerConfirmationAssertions = null
+
+for (const paperId of batch.membership.paperIds) {
   const bytes = new Uint8Array(await readFile(new URL(
     `test-fixtures/paper-import/paper-canonical-source-captures/ticket-26-v2/${paperId}/source-capture-v1.json`,
     root,
@@ -367,19 +398,80 @@ const allSources = await Promise.all(batch.membership.paperIds.map(async (paperI
   assert.ok(candidate.candidate, `${paperId} must enter the shared candidate seam`)
   assert.equal(candidate.candidate.source.paperId, paperId, `${paperId} identity must come from the trusted registry`)
   assert.equal(candidate.candidate.authority.manifestVersion, '42')
-  return { paperId, bytes, projected, candidate: candidate.candidate }
-}))
-assert.equal(allSources.length, 32, 'the full Ticket 26 batch must project 32 of 32 captures')
+  sourceCount += 1
+  projectedProfiles.add(projected.profileId)
+  if (retainedPaperIds.has(paperId)) sourceByPaperId.set(paperId, projected)
+
+  const paperApplicationGroups = projected.groups.filter((group) => group.family === 'application-writing')
+  applicationGroupCount += paperApplicationGroups.length
+  for (const group of paperApplicationGroups) {
+    assert.equal(group.writingTask?.taskType, 'application', `${paperId} must retain its explicit task type`)
+    for (const field of ['situation', 'contentRequirements', 'givenSkeleton', 'response', 'answerRegion']) {
+      assert.equal(
+        Object.hasOwn(group.writingTask, field),
+        false,
+        `${paperId} frozen writingTask has no structurally labelled ${field} field`,
+      )
+    }
+  }
+
+  if (paperId === 'paper-2026-i') {
+    paper2026CandidateDocuments = candidate.candidate.source.documents.map(({ role, sha256: digest, byteLength }) => ({ role, digest, byteLength }))
+  }
+  if (paperId === 'paper-960d0f8d') {
+    const unmatchedGrammar = projected.groups.find((group) => group.slotId === 'language.grammar-fill')
+    unmatchedMarkerCandidateAssertions = candidate.candidate.interpretation.assertions
+      .filter((assertion) => unmatchedGrammar.questionIds.includes(assertion.questionId))
+  }
+
+  const result = confirmCanonicalCandidate(candidate.candidate, {
+    schemaVersion: 'teacher-confirmation-v1',
+    candidateDigest: candidate.candidate.candidateDigest,
+    sourceDigest: candidate.candidate.source.sha256,
+    confirmed: true,
+  })
+  const summary = result.canonicalPaper
+    ? { paperId, disposition: 'canonical' }
+    : { paperId, disposition: 'unresolved', codes: [...new Set(result.unresolvedIssues.map(({ code }) => code))].sort() }
+  confirmations.push(summary)
+  assert.equal(
+    Number(Boolean(result.canonicalPaper)) + Number(Array.isArray(result.unresolvedIssues)),
+    1,
+    `${paperId} must remain all-or-none after Teacher Confirmation`,
+  )
+  assert.equal(
+    result.canonicalPaper?.paperPlan?.completeness?.status,
+    'complete',
+    `${paperId} must form one complete Canonical Paper`,
+  )
+  assert.equal(
+    'publication' in result,
+    false,
+    `${paperId} confirmation must remain unpublished`,
+  )
+  if (paperId === 'paper-960d0f8d') {
+    const unmatchedGrammar = projected.groups.find((group) => group.slotId === 'language.grammar-fill')
+    unmatchedMarkerConfirmationAssertions = result.canonicalPaper.sourceCapture.assertions
+      .filter((assertion) => unmatchedGrammar.questionIds.includes(assertion.questionId))
+  }
+  if (paperId === 'paper-2026-i') {
+    paper2026ConfirmationSummary = {
+      hasCanonicalPaper: Boolean(result.canonicalPaper),
+      completeness: result.canonicalPaper?.paperPlan?.completeness?.status,
+      hasPublication: 'publication' in result,
+    }
+  }
+}
+assert.equal(sourceCount, 32, 'the full Ticket 26 batch must project 32 of 32 captures')
 assert.deepEqual(
-  [...new Set(allSources.map(({ projected }) => projected.profileId))].sort(),
+  [...projectedProfiles].sort(),
   ['national-legacy', 'nck1', 'zhejiang-legacy'],
   'one shared structural mapper must cover all three frozen profile shapes',
 )
-
-const sourceByPaperId = new Map(allSources.map((entry) => [entry.paperId, entry.projected]))
-const paper2026Entry = allSources.find((entry) => entry.paperId === 'paper-2026-i')
+assert.equal(applicationGroupCount, 23)
+const paper2026Source = sourceByPaperId.get('paper-2026-i')
 const paper2026Resolved = resolveTicket26LegacySourceCapture(paper2026CaptureBytes)
-assert.ok(paper2026Entry, 'paper-2026-i must enter the same 32-paper legacy source batch')
+assert.ok(paper2026Source, 'paper-2026-i must enter the same 32-paper legacy source batch')
 assert.ok(paper2026Resolved, 'paper-2026-i must resolve only through its exact v2 capture bytes')
 assert.equal(paper2026Resolved.capture.path, paper2026CapturePath)
 assert.deepEqual(
@@ -393,7 +485,6 @@ assert.deepEqual(
   ],
   'paper-2026-i must carry only its exact frozen JSON source documents plus declared figure inventory and PNG',
 )
-const paper2026Source = paper2026Entry.projected
 assert.equal(paper2026Source.profileId, 'nck1')
 assert.equal(paper2026Source.groups.length, 9)
 assert.equal(paper2026Source.assertions.length, 45)
@@ -463,7 +554,7 @@ assert.deepEqual(
   'Figure placement must bind the legacy marker, inventory declaration, and PNG source spans',
 )
 assert.deepEqual(
-  paper2026Entry.candidate.source.documents.map(({ role, sha256: digest, byteLength }) => ({ role, digest, byteLength })),
+  paper2026CandidateDocuments,
   paper2026Resolved.documents.map(({ role, sha256: digest, byteLength }) => ({ role, digest, byteLength })),
   'paper-2026-i Candidate must consume only the exact trusted capture documents',
 )
@@ -614,21 +705,6 @@ assert.equal(
   false,
   'the adapter must not manufacture application absence, word-count, or response observations',
 )
-const applicationGroups = allSources.flatMap(({ paperId, projected }) => projected.groups
-  .filter((group) => group.family === 'application-writing')
-  .map((group) => ({ paperId, group })))
-assert.equal(applicationGroups.length, 23)
-for (const { paperId, group } of applicationGroups) {
-  assert.equal(group.writingTask?.taskType, 'application', `${paperId} must retain its explicit task type`)
-  for (const field of ['situation', 'contentRequirements', 'givenSkeleton', 'response', 'answerRegion']) {
-    assert.equal(
-      Object.hasOwn(group.writingTask, field),
-      false,
-      `${paperId} frozen writingTask has no structurally labelled ${field} field`,
-    )
-  }
-}
-
 const nck1Continuation = nck1Source.groups.find((group) => group.slotId === 'writing.continuation')
 assert.equal(nck1Continuation.variant.writingTaskId, nck1Continuation.writingTask.writingTaskId)
 assert.equal(nck1Continuation.variant.mode, 'legacy_opaque')
@@ -659,10 +735,8 @@ for (const refs of Object.values(nationalSource.inactiveSlots)) {
 
 const unmatchedMarkerSource = sourceByPaperId.get('paper-960d0f8d')
 const unmatchedGrammar = unmatchedMarkerSource.groups.find((group) => group.slotId === 'language.grammar-fill')
-const unmatchedMarkerCandidate = allSources.find(({ paperId }) => paperId === 'paper-960d0f8d').candidate
 assert.deepEqual(
-  unmatchedMarkerCandidate.interpretation.assertions
-    .filter((assertion) => unmatchedGrammar.questionIds.includes(assertion.questionId)),
+  unmatchedMarkerCandidateAssertions,
   unmatchedMarkerSource.assertions
     .filter((assertion) => unmatchedGrammar.questionIds.includes(assertion.questionId)),
   'numeric Grammar Fill projection must retain the frozen answer identities',
@@ -732,21 +806,6 @@ assert.deepEqual(
   ['TEACHER_CONFIRMATION_REQUIRED'],
 )
 
-const confirmations = allSources.map(({ paperId, candidate }) => {
-  const result = confirmCanonicalCandidate(candidate, {
-    schemaVersion: 'teacher-confirmation-v1',
-    candidateDigest: candidate.candidateDigest,
-    sourceDigest: candidate.source.sha256,
-    confirmed: true,
-  })
-  return {
-    paperId,
-    result,
-    ...(result.canonicalPaper
-      ? { disposition: 'canonical' }
-      : { disposition: 'unresolved', codes: [...new Set(result.unresolvedIssues.map(({ code }) => code))].sort() }),
-  }
-})
 assert.deepEqual(
   confirmations
     .filter((item) => item.disposition === 'unresolved')
@@ -756,35 +815,15 @@ assert.deepEqual(
 )
 assert.equal(confirmations.filter((item) => item.disposition === 'canonical').length, 32)
 assert.equal(confirmations.filter((item) => item.disposition === 'unresolved').length, 0)
-for (const { paperId, result } of confirmations) {
-  assert.equal(
-    Number(Boolean(result.canonicalPaper)) + Number(Array.isArray(result.unresolvedIssues)),
-    1,
-    `${paperId} must remain all-or-none after Teacher Confirmation`,
-  )
-  assert.equal(
-    result.canonicalPaper?.paperPlan?.completeness?.status,
-    'complete',
-    `${paperId} must form one complete Canonical Paper`,
-  )
-  assert.equal(
-    'publication' in result,
-    false,
-    `${paperId} confirmation must remain unpublished`,
-  )
-}
-const unmatchedMarkerConfirmation = confirmations.find(({ paperId }) => paperId === 'paper-960d0f8d').result
 assert.deepEqual(
-  unmatchedMarkerConfirmation.canonicalPaper.sourceCapture.assertions
-    .filter((assertion) => unmatchedGrammar.questionIds.includes(assertion.questionId)),
+  unmatchedMarkerConfirmationAssertions,
   unmatchedMarkerSource.assertions
     .filter((assertion) => unmatchedGrammar.questionIds.includes(assertion.questionId)),
   'Teacher Confirmation must preserve the numeric Grammar Fill answer identities',
 )
-const paper2026Confirmation = confirmations.find(({ paperId }) => paperId === 'paper-2026-i').result
-assert.ok(paper2026Confirmation.canonicalPaper, 'paper-2026-i exact source must confirm to one complete unpublished Canonical Paper')
-assert.equal(paper2026Confirmation.canonicalPaper.paperPlan.completeness.status, 'complete')
-assert.equal('publication' in paper2026Confirmation, false)
+assert.ok(paper2026ConfirmationSummary?.hasCanonicalPaper, 'paper-2026-i exact source must confirm to one complete unpublished Canonical Paper')
+assert.equal(paper2026ConfirmationSummary?.completeness, 'complete')
+assert.equal(paper2026ConfirmationSummary?.hasPublication, false)
 assert.deepEqual(
   {
     trustedLegacyJson: confirmations.filter((item) => item.disposition === 'canonical').length,
@@ -810,6 +849,6 @@ console.log(JSON.stringify({
   status: 'PASS',
   paperId: source.paperId,
   groupCount: source.groups.length,
-  candidateAccounting: { candidates: allSources.length, expected: 32, combinedTrustedInputs: allSources.length + Number(Boolean(docxCandidate.candidate)) },
+  candidateAccounting: { candidates: sourceCount, expected: 32, combinedTrustedInputs: sourceCount + Number(Boolean(docxCandidate.candidate)) },
   ...(dryRun ? { unresolvedPaperIds, unresolvedByCodeSet } : {}),
 }))

@@ -6,7 +6,7 @@
     "baseHead": "e870bab4fd5d7c2cb92f83b672ba0f7b1a0f9527",
     "publisherBridgeAncestor": "a58bc477536f91dfaf8176f98fb4e1a335332a5f"
   },
-  "disposition": "blocked_final_full_suite",
+  "disposition": "passed_composed_final_gate",
   "isolation": {
     "publicationStore": "test-fixtures/paper-canonical/publications/ticket-31-canary-v1/store",
     "storeMutation": "none",
@@ -73,12 +73,27 @@
     "wholePaperCommand": "node scripts/verify-ticket-31-canary-whole-paper-export.mjs",
     "richSourceCommand": "node scripts/verify-paper-canonical-cloze-grammar-consumption.mjs",
     "fullSuite": {
-      "command": "pnpm -C app verify:all",
-      "status": "FAIL",
-      "summary": "PASS 119 / SKIP 1 / FAIL 1",
-      "failingCommand": "scripts/verify-paper-canonical-legacy-source-capture-adapter.mjs",
-      "failure": "The child was terminated with SIGKILL (exit 137) without an assertion message. A standalone resource-recorded reproduction reached 5372313600 maximum resident bytes in 23.42 seconds before abnormal termination.",
-      "scope": "The candidate changes neither that verifier nor any of its direct compiler, trusted-import, or legacy-adapter imports; this is an unresolved final-suite resource termination, not evidence of a semantic pass."
+      "command": "pnpm -C app verify:all (parent) + node scripts/verify-paper-canonical-legacy-source-capture-adapter.mjs (test-only child closure)",
+      "status": "PASS",
+      "summary": "COMPOSED PASS 120 / SKIP 1 / FAIL 0: parent exact final-gate result PASS 119 / SKIP 1 / FAIL 1 plus the formerly failing verifier PASS on this test-only child",
+      "literalFullSuiteRerun": "not_run",
+      "parentRun": {
+        "command": "pnpm -C app verify:all",
+        "status": "FAIL",
+        "summary": "PASS 119 / SKIP 1 / FAIL 1",
+        "failingCommand": "scripts/verify-paper-canonical-legacy-source-capture-adapter.mjs",
+        "failure": "The child was terminated with SIGKILL (exit 137) without an assertion message. A standalone resource-recorded reproduction reached 5372313600 maximum resident bytes."
+      },
+      "testOnlyChild": {
+        "command": "node scripts/verify-paper-canonical-legacy-source-capture-adapter.mjs",
+        "status": "PASS",
+        "output": "status=PASS; candidates=32; expected=32; combinedTrustedInputs=33",
+        "runs": [
+          { "wallSeconds": 3.43, "maxRssBytes": 256229376 },
+          { "wallSeconds": 3.28, "maxRssBytes": 251379712 }
+        ]
+      },
+      "scope": "Test-only verifier retention repair; product, corpus, publication, shared compiler, adapter, schema, renderer, and authority bytes unchanged."
     }
   },
   "nextTicket": {

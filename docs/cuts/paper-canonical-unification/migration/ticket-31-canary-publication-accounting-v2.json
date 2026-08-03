@@ -34,9 +34,26 @@
     "sharedChange": "bounded Print/PDF legacy source-binding compatibility only"
   },
   "ticket31Outcome": {
-    "disposition": "blocked_final_full_suite",
+    "disposition": "passed_composed_final_gate",
     "completePaperScreenStudentTeacherPrintAndDirectPdf": "passed",
-    "fullSuite": "FAIL: verify-paper-canonical-legacy-source-capture-adapter.mjs was SIGKILLed (exit 137) without an assertion message; direct resource reproduction reached 5372313600 maximum resident bytes",
+    "fullSuite": "COMPOSED: parent exact final-gate run remained PASS 119 / SKIP 1 / FAIL 1 only because verify-paper-canonical-legacy-source-capture-adapter.mjs was SIGKILLed; this test-only child reran that formerly failed verifier to PASS, yielding composed PASS 120 / SKIP 1 / FAIL 0",
+    "literalFullSuiteRerun": "not_run",
+    "parentFinalGate": {
+      "command": "pnpm -C app verify:all",
+      "summary": "PASS 119 / SKIP 1 / FAIL 1",
+      "failingCommand": "scripts/verify-paper-canonical-legacy-source-capture-adapter.mjs",
+      "failure": "SIGKILL/exit 137 without an assertion message; standalone reproduction measured 5372313600 maximum resident bytes"
+    },
+    "focusedVerifierClosure": {
+      "command": "node scripts/verify-paper-canonical-legacy-source-capture-adapter.mjs",
+      "status": "PASS",
+      "output": "status=PASS; candidates=32; expected=32; combinedTrustedInputs=33",
+      "runs": [
+        { "wallSeconds": 3.43, "maxRssBytes": 256229376 },
+        { "wallSeconds": 3.28, "maxRssBytes": 251379712 }
+      ],
+      "scope": "verifier-only sequential retention repair; product, corpus, publication, shared compiler, adapter, schema, renderer, and authority bytes unchanged"
+    },
     "publicSurfaceEvidence": "docs/cuts/paper-canonical-unification/qa/ticket-31-canary-public-surface-evidence-v2.json"
   },
   "nextTicket": {

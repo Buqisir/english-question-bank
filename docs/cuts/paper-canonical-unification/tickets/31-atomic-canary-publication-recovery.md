@@ -1,6 +1,6 @@
 # 31 — Atomic canary publication and recovery
 
-Status: ready
+Status: PASS
 Blocked by: Ticket 30 PASS
 Next on PASS: `docs/cuts/paper-canonical-unification/tickets/32-remaining-corpus-migration.md`
 Terminal: no
@@ -41,6 +41,6 @@ Collapses old Tickets 59–62 into one canary batch.
 
 ## Result
 
-Commit:
-Verify:
-Notes:
+Commit: this test-only child on `codex/ticket-31-test-efficiency-closure-20260802`
+Verify: composed final gate — parent exact `PASS 119 / SKIP 1 / FAIL 1` plus `node scripts/verify-paper-canonical-legacy-source-capture-adapter.mjs` test-only child `PASS`, composed `PASS 120 / SKIP 1 / FAIL 0`; literal `pnpm -C app verify:all` rerun not run; `git diff --check` PASS
+Notes: Sequentially processes all 32 legacy captures while retaining only later-used projected papers and compact accounting summaries. The invalid-DOCX assertion now matches the reviewed public contract: diagnostic `trusted-docx-import-candidate-v1`, `interpretation: null`, blocking `DOCX_SOURCE_DOCUMENT_INVALID`, and no Canonical Paper. Product, corpus, publication, shared compiler/adapter/schema/renderer/authority bytes are unchanged. Ticket 32 remains `not_started` and is not dispatched or authorized by this task.
