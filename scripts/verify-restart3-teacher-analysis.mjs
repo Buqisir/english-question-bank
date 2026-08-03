@@ -246,8 +246,10 @@ console.log('\n-- 4. findPaperAssetGroup contract regression (server/api.mjs) --
 const apiSource = read('server/api.mjs')
 assert('findPaperAssetGroup still exists', /function findPaperAssetGroup\(groupId\)/.test(apiSource))
 assert(
-  'findPaperAssetGroup still returns { asset, group } shape for existing callers',
-  /if \(group\) return \{ asset, group, paperId: entry\.name \}/.test(apiSource),
+  'findPaperAssetGroup keeps the valid { asset, group, paperId } shape and propagates identity conflicts first',
+  /if \(!validMatch\) validMatch = \{ asset, group, paperId: entry\.name \}/.test(apiSource)
+    && /if \(asset\?\.paper\?\.paperId !== entry\.name\) \{\s*identityConflict = \{ identityConflict: true \}\s*continue\s*\}/.test(apiSource)
+    && /return identityConflict \|\| validMatch/.test(apiSource),
 )
 assert(
   'existing print-ready call site still destructures asset/group only (untouched)',
