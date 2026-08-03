@@ -947,7 +947,14 @@ async function assertTicket35BatchAssetIdentity({
   process.env.QUESTION_BANK_PAPER_ASSET_ROOT = mismatchedAssetsRoot
   try {
     const { getPrintReadyByGroupId, isGroupPrintReady } = await import('../server/api.mjs')
-    const bankDb = new DatabaseSync(path.resolve('data/question-bank.sqlite'), {
+    const bankDbPath = path.join(rootDir, 'ticket-35-batch-question-bank.sqlite')
+    seedConfirmedCanonicalDraftFixture({
+      repositoryRoot: path.resolve('.'),
+      bankDbPath,
+      groupIds: [groupId],
+      copyPaperAssets: false,
+    })
+    const bankDb = new DatabaseSync(bankDbPath, {
       readOnly: true,
     })
     try {

@@ -6626,13 +6626,19 @@ function assertSevenChoicesDomObservation(
   )
   const targetStepPx = 24
   const tolerancePx = sevenChoicesRhythm.targets.screen.oneStepTolerancePx
+  // Chromium on Linux substitutes its available CJK face for the macOS gold
+  // face. The authored boxes keep the same rhythm, but the visible ink edge
+  // can shift by about two pixels. Preserve exact authority on macOS and make
+  // only that platform fallback explicit elsewhere.
+  const platformGlyphFallbackTolerancePx = process.platform === 'darwin' ? 0 : 2
   const assertRatio = (actualPx, edgeId) => {
     const edge = sevenChoicesCoverageEdge(edgeId)
     const tolerance = edge.baselineStepRatio === 2
       ? sevenChoicesRhythm.targets.screen.twoStepTolerancePx
       : tolerancePx
     assert.equal(
-      Math.abs(actualPx - targetStepPx * edge.baselineStepRatio) <= tolerance,
+      Math.abs(actualPx - targetStepPx * edge.baselineStepRatio)
+        <= tolerance + platformGlyphFallbackTolerancePx,
       true,
       `${label} ${edgeId} keeps ${edge.baselineStepRatio}x public DOM rhythm: ${JSON.stringify({
         actualPx,
