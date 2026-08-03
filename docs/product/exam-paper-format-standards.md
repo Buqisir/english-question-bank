@@ -6,10 +6,16 @@
 canonical authority 是
 [`standards/paper-canonical/manifest-v36.json`](../../standards/paper-canonical/manifest-v36.json)，
 它仍是一般 canonical 编译、校验、发布与当前 Screen v36、Print/PDF v37
-consumer contracts 的唯一全局闭包。`paper-2026-i` 的 scoped successor 是
-[`standards/paper-canonical/manifest-v44.json`](../../standards/paper-canonical/manifest-v44.json)：
-它只绑定该卷 immutable v3 Publication 及其同一份 source 所派生的 Screen、
-Student/Teacher Print HTML/PDF；不推进或替代全局 accepted v36 authority。这里不复制
+consumer contracts 的唯一全局闭包。`paper-2026-i` 的历史 scoped successors 是
+[`manifest-v43.json`](../../standards/paper-canonical/manifest-v43.json) 和
+[`manifest-v44.json`](../../standards/paper-canonical/manifest-v44.json) 分别绑定的
+immutable v2/v3 Publications，均为不可变历史；当前 scoped successor 是
+[`manifest-v45.json`](../../standards/paper-canonical/manifest-v45.json)，只绑定该卷
+immutable v4 Publication
+([`canonical-paper-publication-ref-v1.json`](../../test-fixtures/paper-canonical/publications/ticket-32-remaining-v1/store/paper-2026-i/latest/canonical-paper-publication-ref-v1.json)，
+`paper-2026-i` / `v4` / `sha256:11ff66bfb0fadda5edd7c78a05d0ab5aed939cc644708abfeb00aed48b749a34`)
+及其同一份 source 所派生的 Screen、Student/Teacher Print HTML/PDF；它不推进或替代
+全局 accepted v36 authority。这里不复制
 卷型题号、分值、题组 cardinality、清洗条件或字体/物理排版数值，也不能被 caller
 当作第二套配置。
 
