@@ -59,6 +59,10 @@ export function grammarFillScreenRulingForCanonicalConsumption({
   if (!boundRhythm || digestJson(boundRhythm) !== digestJson(rhythm)) {
     throw new Error('Grammar Fill Screen ruling disagrees with the bound renderer authority')
   }
+  // Only the v44/v7 successor owns the new Screen projection. Historical
+  // bound rhythms retain their immutable static PaperSurface semantics after
+  // the exact artifact check above.
+  if (rhythm.schemaVersion !== 'grammar-fill-rhythm-v7') return null
   const ruling = grammarFillBlankRulingForRhythm(rhythm)
   if (ruling.ruleVerticalAlignment !== 'blank-bottom') {
     throw new Error('Grammar Fill Screen ruling requires the shared bottom-rule relation')

@@ -549,7 +549,7 @@ async function withActualDraftApi({
     await waitForHttp(`${baseUrl}/api/health`, child)
     setCanonicalReference(bankDbPath, canonicalReference)
     const draft = seedDraftRows(userDbPath, groupIds)
-    await callback({ baseUrl, bankDbPath, ...draft })
+    await callback({ baseUrl, bankDbPath, userDbPath, ...draft })
   } finally {
     child.kill('SIGTERM')
     const closed = new Promise((resolve) => {
@@ -832,11 +832,19 @@ const ticket35GroupIds = [
 ]
 
 function ticket35V3Source() {
+  return ticket35Source('v3')
+}
+
+function ticket35V2Source() {
+  return ticket35Source('v2')
+}
+
+function ticket35Source(versionName) {
   const versionRoot = path.join(
     ticket35PublicationStore,
     fixture.source.paperId,
     'versions',
-    'v3',
+    versionName,
   )
   const sourceCaptureBytes = readFileSync(path.join(versionRoot, 'paper-asset.json'))
   const sourceCapture = JSON.parse(sourceCaptureBytes)
@@ -897,15 +905,18 @@ function ticket35WritingSourceText(paperAsset) {
   return { notice, starters }
 }
 
-// The list page takes the batch readiness path.  A zero-question Writing
-// group makes the identity boundary observable: without a valid immutable
-// asset it must retain the same fail-closed "no questions" result as the
-// single-group path, rather than borrowing a same-named group from a
-// directory whose contained Paper Asset names another paper.
-async function assertTicket35BatchAssetIdentity({ rootDir, paperAsset }) {
+// Both list rendering and the public draft-add route must reject an immutable
+// Paper Asset whose internal paper identity conflicts with the directory that
+// contains it.  Use an otherwise DB-ready Cloze group: a zero-question Writing
+// group would hide a batch fallback behind its ordinary readiness failure.
+async function assertTicket35BatchAssetIdentity({
+  rootDir,
+  paperAsset,
+  canonicalReference,
+}) {
   const mismatchedAssetsRoot = path.join(rootDir, 'ticket-35-batch-paper-id-mismatch')
   const directoryPaperId = paperAsset.paper.paperId
-  const groupId = 'group-2026-i-writing-application'
+  const groupId = 'group-2026-i-cloze'
   const mismatchedAsset = structuredClone(paperAsset)
   mismatchedAsset.paper.paperId = 'paper-2026-i-conflicting-asset'
   const assetPath = path.join(
@@ -929,13 +940,13 @@ async function assertTicket35BatchAssetIdentity({ rootDir, paperAsset }) {
       const batch = getPrintReadyByGroupId(bankDb, [groupId]).get(groupId)
       assert.deepEqual(
         single,
-        { ok: false, reason: '题组没有小题' },
-        'a directory/asset identity conflict gives the single path no immutable Writing source',
+        { ok: false, reason: '试卷资产身份不一致' },
+        'a directory/asset identity conflict makes the DB-ready single Cloze group fail closed',
       )
       assert.deepEqual(
         batch,
         single,
-        'the batch path rejects a directory/asset identity conflict before projecting a Writing group',
+        'the batch path reports the same explicit identity conflict instead of falling back to DB readiness',
       )
       assert.equal(
         readFileSync(assetPath, 'utf8'),
@@ -945,6 +956,60 @@ async function assertTicket35BatchAssetIdentity({ rootDir, paperAsset }) {
     } finally {
       bankDb.close()
     }
+
+    await withActualDraftApi({
+      fixtureRoot: path.join(rootDir, 'ticket-35-batch-paper-id-http'),
+      paperAssetsRoot: mismatchedAssetsRoot,
+      canonicalReference,
+      groupIds: [],
+    }, async ({ baseUrl, userDbPath, draftPaperId }) => {
+      const before = new DatabaseSync(userDbPath, { readOnly: true })
+      const beforeItems = before.prepare(
+        'SELECT group_id FROM draft_paper_items WHERE draft_paper_id = ? ORDER BY order_index ASC',
+      ).all(draftPaperId)
+      before.close()
+
+      const addResponse = await fetchPublic(
+        `${baseUrl}/api/draft-papers/current/items`,
+        {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ groupId }),
+        },
+      )
+      const add = await readHttpResponse(addResponse)
+      assert.equal(addResponse.ok, false, 'public draft add rejects a conflicting DB-ready Cloze asset')
+      assert.equal(add.json?.error, '试卷资产身份不一致', 'public draft add exposes the carried identity conflict')
+
+      const after = new DatabaseSync(userDbPath, { readOnly: true })
+      const afterItems = after.prepare(
+        'SELECT group_id FROM draft_paper_items WHERE draft_paper_id = ? ORDER BY order_index ASC',
+      ).all(draftPaperId)
+      after.close()
+      assert.deepEqual(afterItems, beforeItems, 'identity conflict rejects before the draft write')
+
+      const htmlResponse = await fetchPublic(
+        `${baseUrl}/api/draft-papers/${draftPaperId}/print-html?versionType=student`,
+      )
+      const html = await htmlResponse.text()
+      assert.equal(htmlResponse.ok, false, 'identity conflict leaves no public Print HTML output')
+      assert.equal(JSON.parse(html).error, '请先添加题组', 'rejected identity conflict leaves the draft empty before Print HTML')
+      const pdfResponse = await fetchPublic(
+        `${baseUrl}/api/draft-papers/${draftPaperId}/print-pdf`,
+        {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ versionType: 'student' }),
+        },
+      )
+      const pdfBytes = Buffer.from(await pdfResponse.arrayBuffer())
+      assert.notEqual(pdfBytes.subarray(0, 4).toString(), '%PDF', 'identity conflict leaves no PDF export output')
+      assert.equal(
+        readFileSync(assetPath, 'utf8'),
+        mismatchedAssetBytes,
+        'public identity rejection preserves source asset bytes',
+      )
+    })
   } finally {
     if (previousPaperAssetsRoot === undefined) delete process.env.QUESTION_BANK_PAPER_ASSET_ROOT
     else process.env.QUESTION_BANK_PAPER_ASSET_ROOT = previousPaperAssetsRoot
@@ -1047,8 +1112,32 @@ async function assertTicket35Screen(page, paperAsset, outputDir) {
   }
 }
 
+async function assertTicket35V43Screen(page) {
+  const observation = await page.locator(
+    '[data-canonical-group-type="grammarFill"] .ps-paper-blank',
+  ).first().evaluate((blank) => ({
+    rhythm: blank.getAttribute('data-canonical-grammar-fill-rhythm'),
+    ruleWidth: getComputedStyle(blank).getPropertyValue('--ps-paper-blank-rule-width').trim(),
+    ruleAlignItems: getComputedStyle(blank).getPropertyValue('--ps-paper-blank-rule-align-items').trim(),
+    border: getComputedStyle(blank).borderBottomWidth,
+    alignItems: getComputedStyle(blank).alignItems,
+  }))
+  assert.deepEqual(
+    observation,
+    {
+      rhythm: null,
+      ruleWidth: '',
+      ruleAlignItems: '',
+      border: '1px',
+      alignItems: 'flex-end',
+    },
+    'v43 Screen retains its historical static Grammar Fill ruling instead of receiving the v44/v7 successor projection',
+  )
+}
+
 async function assertTicket35CompletePublication({ rootDir }) {
   const { paperAsset } = ticket35V3Source()
+  const { paperAsset: v43PaperAsset } = ticket35V2Source()
   const canonicalReference = ticket35V3Reference()
   const grammarFillAuthority = grammarFillRhythmForPaperAuthority({
     paperId: canonicalReference.paperId,
@@ -1086,6 +1175,39 @@ async function assertTicket35CompletePublication({ rootDir }) {
     : null
   if (outputDir) mkdirSync(outputDir, { recursive: true })
 
+  const v43Root = path.join(rootDir, 'ticket-35-v43-publication')
+  cpSync(ticket35PublicationStore, v43Root, { recursive: true })
+  const v43Publication = JSON.parse(readFileSync(path.join(
+    v43Root,
+    fixture.source.paperId,
+    'versions',
+    'v2',
+    'canonical',
+    'canonical-paper-publication-v43.json',
+  ), 'utf8'))
+  writeFileSync(path.join(
+    v43Root,
+    fixture.source.paperId,
+    'latest',
+    'canonical-paper-publication-ref-v1.json',
+  ), `${stableStringify({
+    paperId: fixture.source.paperId,
+    publicationDigest: v43Publication.publicationDigest,
+    sourceAssetVersion: 2,
+    versionName: 'v2',
+  })}\n`)
+  const v43Db = new DatabaseSync(path.join(v43Root, 'publication.sqlite'))
+  try {
+    v43Db.prepare(
+      'UPDATE canonical_paper_publications SET is_current = 0 WHERE paper_id = ?',
+    ).run(fixture.source.paperId)
+    v43Db.prepare(
+      'UPDATE canonical_paper_publications SET is_current = 1 WHERE paper_id = ? AND version_name = ?',
+    ).run(fixture.source.paperId, 'v2')
+  } finally {
+    v43Db.close()
+  }
+
   const fixtureDb = new DatabaseSync(path.join(ticket35PublicationStore, 'publication.sqlite'), {
     readOnly: true,
   })
@@ -1119,6 +1241,39 @@ async function assertTicket35CompletePublication({ rootDir }) {
       rootDir: ticket35PublicationStore,
       db: fixtureDb,
     })
+    const v43RuntimeDb = new DatabaseSync(path.join(v43Root, 'publication.sqlite'), {
+      readOnly: true,
+    })
+    try {
+      const v43Consumption = createCanonicalConsumerRuntime({
+        rootDir: v43Root,
+        db: v43RuntimeDb,
+      }).load({ paperId: fixture.source.paperId, consumerId: 'screen' })
+      assert.equal(v43Consumption.disposition, 'ready')
+      assert.equal(v43Consumption.sourceAssetVersion, 2)
+      assert.equal(v43Consumption.authorityRef?.manifestVersion, '43')
+      const v43GrammarFillSurface = buildCanonicalConsumptionSurfaceData({
+        consumption: v43Consumption,
+        familyContractId: 'grammar-fill',
+        groupId: 'group-2026-i-grammar-fill',
+      })
+      assert.equal(
+        Object.hasOwn(v43GrammarFillSurface.surfaceData, 'grammarFillScreenRuling'),
+        false,
+        'v43 carries no v44/v7 Screen ruling projection',
+      )
+      await assertActualPaperBrowseBoundary({
+        readyConsumption: v43Consumption,
+        browserAssetSource: v43PaperAsset,
+        legacyConsumption: null,
+        invalidConsumption: null,
+        outputDir: null,
+        verifyRejection: false,
+        onReady: assertTicket35V43Screen,
+      })
+    } finally {
+      v43RuntimeDb.close()
+    }
     const screenConsumption = runtime.load({ paperId: fixture.source.paperId, consumerId: 'screen' })
     assert.equal(screenConsumption.disposition, 'ready')
     assert.equal(screenConsumption.sourceAssetVersion, 3)
@@ -1146,7 +1301,7 @@ async function assertTicket35CompletePublication({ rootDir }) {
     fixtureDb.close()
   }
 
-  await assertTicket35BatchAssetIdentity({ rootDir, paperAsset })
+  await assertTicket35BatchAssetIdentity({ rootDir, paperAsset, canonicalReference })
 
   await withActualDraftApi({
     fixtureRoot: path.join(rootDir, 'ticket-35-v3-http'),

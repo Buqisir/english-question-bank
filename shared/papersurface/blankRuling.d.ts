@@ -33,7 +33,7 @@ export function grammarFillBlankRulingForRhythm(rhythm: Readonly<{
 export function grammarFillScreenRulingForCanonicalConsumption(input: Readonly<{
   paperId: unknown
   authorityRef: unknown
-}>): GrammarFillScreenRuling
+}>): GrammarFillScreenRuling | null
 
 export const paperBlankRuling: {
   readonly cloze: PaperBlankRuling

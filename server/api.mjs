@@ -296,6 +296,8 @@ function normalizePaperAssetQuestions(asset) {
 
 function findPaperAssetGroup(groupId) {
   if (!existsSync(paperAssetsDir)) return null
+  let validMatch = null
+  let identityConflict = null
   for (const entry of readdirSync(paperAssetsDir, { withFileTypes: true })) {
     if (!entry.isDirectory()) continue
     const { assetPath } = resolvePaperAssetReadPaths(paperAssetsDir, entry.name)
@@ -309,13 +311,17 @@ function findPaperAssetGroup(groupId) {
         label: 'Canonical paper-asset group source',
       })
       const group = asset?.content?.groups?.[groupId]
-      if (!group || asset?.paper?.paperId !== entry.name) continue
-      if (group) return { asset, group, paperId: entry.name }
+      if (!group) continue
+      if (asset?.paper?.paperId !== entry.name) {
+        identityConflict = { identityConflict: true }
+        continue
+      }
+      if (!validMatch) validMatch = { asset, group, paperId: entry.name }
     } catch {
       // Ignore invalid paper-asset files; import validation owns that error.
     }
   }
-  return null
+  return identityConflict || validMatch
 }
 
 function normalizePaperAssetGroupType(groupType) {
@@ -402,9 +408,13 @@ const PRINT_READY_AGGREGATE_SQL = `
 // single-row path (isGroupPrintReady) and the batch path (getPrintReadyByGroupId)
 // so the two never drift. `group` is one row of PRINT_READY_AGGREGATE_SQL (or
 // null/undefined when the group doesn't exist); `paperAssetMatch` is the
-// { asset, group } pair from a paper-asset scan, or null/undefined when absent.
+// { asset, group } pair, an explicit identity-conflict judgment, or
+// null/undefined when no paper-asset group was found.
 function computePrintReadyJudgment(group, paperAssetMatch) {
   if (!group) return { ok: false, reason: '题组不存在' }
+  if (paperAssetMatch?.identityConflict) {
+    return { ok: false, reason: '试卷资产身份不一致' }
+  }
   if (!PRINT_READY_GROUP_TYPES.has(group.group_type)) {
     if (group.group_type === 'listening') return { ok: false, reason: '听力题组暂不支持打印' }
     return { ok: false, reason: '题型暂不支持打印' }
@@ -467,7 +477,13 @@ function buildPaperAssetGroupIndex() {
         label: 'Canonical paper-asset group source',
       })
       const groups = asset?.content?.groups
-      if (!groups || typeof groups !== 'object' || asset?.paper?.paperId !== entry.name) continue
+      if (!groups || typeof groups !== 'object') continue
+      if (asset?.paper?.paperId !== entry.name) {
+        for (const [groupId, group] of Object.entries(groups)) {
+          if (group) index.set(groupId, { identityConflict: true })
+        }
+        continue
+      }
       for (const [groupId, group] of Object.entries(groups)) {
         if (group && !index.has(groupId)) index.set(groupId, { asset, group, paperId: entry.name })
       }
