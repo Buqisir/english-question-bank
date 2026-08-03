@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "ticket-33-shared-surface-proof-v1",
+  "status": "FAIL_CLOSED",
+  "ticket": {
+    "number": 33,
+    "supersedesFailClosedPreflight": "docs/cuts/paper-canonical-unification/qa/ticket-33-input-preflight-v1.json",
+    "durabilityRepair": "396940ad3611ad2bedc7faae228671bc76ab4bf3",
+    "nextTicketStarted": false
+  },
+  "replay": {
+    "paperId": "paper-2025-i",
+    "consumerId": "print_pdf",
+    "currentVersion": "v1",
+    "sourceAuthorityShape": "trusted-docx",
+    "canonicalPublication": "sha256:a914723ea33b8b54210fdcf0a2d3e6417b04e56fc0687c44d03c46c36090c7a6",
+    "sourceAsset": {
+      "path": "test-fixtures/paper-canonical/publications/ticket-32-remaining-v1/store/paper-2025-i/versions/v1/paper-asset.json",
+      "byteLength": 135250,
+      "sha256": "sha256:33a93bfa4af0ebab48ae7aaef036a44b7004fff6ea2b90f2814ed12dee01b047",
+      "leadingBytesHex": "504b0304",
+      "jsonParseable": false
+    },
+    "failures": [
+      {
+        "versionType": "student",
+        "code": "CANONICAL_CONSUMPTION_REJECTED",
+        "message": "paper-2025-i student Print HTML: Canonical Grammar Fill chrome immutable source asset is invalid"
+      },
+      {
+        "versionType": "teacher",
+        "code": "CANONICAL_CONSUMPTION_REJECTED",
+        "message": "paper-2025-i teacher Print HTML: Canonical Grammar Fill chrome immutable source asset is invalid"
+      }
+    ]
+  },
+  "withheld": {
+    "wholeCorpusTrace": "not claimed after the representative public Print seam rejected",
+    "screenAndPdfRepresentativeRender": "not run because Student and Teacher Print HTML are prerequisites"
+  },
+  "requiredFixLineage": {
+    "kind": "shared Print/PDF trusted-DOCX immutable-source handling",
+    "mustPreserve": [
+      "immutable source binding",
+      "fail-closed integrity checks",
+      "canonical publication bytes"
+    ],
+    "ticket34Started": false
+  },
+  "invariants": {
+    "sharedBehaviorChanged": false,
+    "productionOrR2Touched": false,
+    "ticket34Started": false
+  },
+  "evidenceDigest": "sha256:08fde9e4ca5df200a4cb638fddb9a1ab009fec6a3a6f551ed0adc440e5d5b39b"
+}

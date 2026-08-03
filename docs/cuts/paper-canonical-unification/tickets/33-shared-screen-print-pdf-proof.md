@@ -1,7 +1,7 @@
 # 33 — Shared Screen, Print, and PDF corpus proof
 
 Status: BLOCKED
-Blocked by: replayable Ticket 32 current-publication index
+Blocked by: trusted-DOCX current publication rejects at the real shared Print/PDF consumer seam
 Next on PASS: `docs/cuts/paper-canonical-unification/tickets/34-retire-legacy-canonical-fallbacks.md`
 Terminal: no
 Model: gpt-5.6-terra
@@ -62,3 +62,7 @@ durable representative Screen/Print/PDF artifact set.
 Commit: bounded Ticket 33 input-preflight evidence on `codex/ticket-33-proportionate-shared-surface-proof-20260802`
 Verify: `node scripts/verify-paper-canonical-ticket-32-remaining-migration.mjs --check --exact-reload` FAIL — `paper-2025-i SQLite current identity must close` (actual `null`); `git ls-tree -r --name-only 4e3d4f347bba84b5f2fa2aca4c11d02f1ab209b1 -- test-fixtures/paper-canonical/publications/ticket-32-remaining-v1/store/publication.sqlite` returns no tracked file
 Notes: FAIL_CLOSED before any Screen, Print HTML, or PDF proof. The 29 immutable latest refs exist, but the Ticket 32 SQLite current index is ignored and absent in a fresh worktree, so the real public consumer cannot exact-reload those 29 Published Canonical Papers. No shared behavior, Ticket 31/32 store, or Ticket 34 was changed. Exact evidence: `docs/cuts/paper-canonical-unification/qa/ticket-33-input-preflight-v1.json`.
+
+Commit: pending on `codex/ticket-33-proportionate-shared-surface-proof-retry-20260802`
+Verify: `node scripts/verify-paper-canonical-ticket-32-remaining-migration.mjs --check --exact-reload` PASS (29 current identities); `node scripts/verify-paper-canonical-ticket-33-shared-surface-proof.mjs --fail-closed` and `--check` PASS as deterministic FAIL_CLOSED evidence.
+Notes: the accepted Ticket 32 durability repair is integrated, so the prior SQLite-index blocker is retained as history rather than current status. The first required trusted-DOCX representative, `paper-2025-i`, exact-reloads `v1` and selects canonical publication `sha256:a914723ea33b8b54210fdcf0a2d3e6417b04e56fc0687c44d03c46c36090c7a6`, but both real public Student and Teacher Print HTML exports reject `paper-asset.json` as invalid JSON. Its source digest closes to the selected immutable 135250-byte DOCX/ZIP asset (`sha256:33a93bfa4af0ebab48ae7aaef036a44b7004fff6ea2b90f2814ed12dee01b047`, leading bytes `504b0304`). Ticket 33 therefore remains FAIL_CLOSED before whole-corpus claims or Screen/PDF renders. A separately versioned shared Print/PDF trusted-DOCX immutable-source repair is required; it must preserve immutable-source binding, fail-closed integrity checking, and canonical publication bytes. No shared behavior, production/R2, or Ticket 34 was changed or started. Exact evidence: `docs/cuts/paper-canonical-unification/qa/ticket-33-shared-surface-proof-v1.json`.
