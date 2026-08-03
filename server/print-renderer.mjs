@@ -602,7 +602,7 @@ function renderCanonicalOpaqueWriting(
   const responseClass = application
     ? 'canonical-application-response'
     : 'canonical-continuation-response'
-  const starters = application
+  const starters = application || !canonicalGroup.sourceStarterLinesInResponse
     ? ''
     : canonicalGroup.sourceStarterBlockRefs.map((contentRef, index) => {
         const block = canonicalGroup.sourceBlocks.find(
@@ -2624,6 +2624,11 @@ body {
   text-align: left;
   text-indent: 0;
   vertical-align: baseline;
+}
+
+.print-blank-unit[data-canonical-grammar-fill-unit] > :where(.print-blank) {
+  margin-left: 0;
+  margin-right: 0;
 }
 
 .print-blank-unit[data-canonical-grammar-fill-unit] > :where(.print-blank-hint) {

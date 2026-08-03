@@ -440,9 +440,10 @@ function canonicalInlineNodeIds(group) {
           row.cells.flatMap((cell) =>
             cell.inlines.map((inline) => inline.nodeId)))
       }
-      return (block.kind === 'figure'
-        ? block.captionInlines
-        : block.inlines).map((inline) => inline.nodeId)
+      // Figure caption/provenance remains in the canonical source Block but
+      // is not public paper content on Screen or Print/PDF.
+      return (block.kind === 'figure' ? [] : block.inlines)
+        .map((inline) => inline.nodeId)
     }),
     ...group.questions.flatMap((question) => [
       ...question.stemContent.map((inline) => inline.nodeId),
@@ -836,6 +837,7 @@ const figureHtml = buildPrintHtml({
 assert.equal(count(figureHtml, /data-canonical-media-id=/g), 1)
 assert.equal(figureHtml.includes('data:image/png;base64,'), true)
 assert.equal(figureHtml.includes('〔表格：见原卷〕'), false)
+assert.equal(figureHtml.includes('<figcaption'), false)
 assert.equal(figureHtml.includes('data-canonical-correct-option-id='), false)
 writeFileSync(
   path.join(actualArtifactRoot, 'reading-figure-student.html'),
@@ -955,6 +957,7 @@ async function assertActualBrowserArtifacts() {
         assert.equal(await page.locator('table td').count(), 12)
       } else if (label === 'figure') {
         assert.equal(await page.locator('figure img').count(), 1)
+        assert.equal(await page.locator('figure figcaption').count(), 0)
         assert.equal(
           (await page.locator('figure img').getAttribute('src'))
             ?.startsWith('data:image/png;base64,'),

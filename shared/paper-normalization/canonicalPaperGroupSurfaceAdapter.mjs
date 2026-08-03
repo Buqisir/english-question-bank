@@ -510,6 +510,7 @@ export function buildCanonicalContinuationWritingConsumptionSurfaceData({
     ? canonicalGroup.sourceBlocks
     : canonicalGroup.materialBlocks
   const starterLines = canonicalGroup.writingMode === 'legacy_opaque'
+    && canonicalGroup.sourceStarterLinesInResponse
     ? canonicalGroup.sourceStarterBlockRefs.map((contentRef) => {
         const block = sourceBlocks.find((candidate) => candidate.nodeId === contentRef)
         if (!block) {

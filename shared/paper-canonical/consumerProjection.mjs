@@ -444,6 +444,10 @@ function projectOpaqueLegacyWritingConsumerGroup(input, occurrence, {
   const sourceStarterBlockRefs = sourceTaskType === 'continuation'
     ? occurrence.sourceStarterBlockRefs
     : undefined
+  const sourceStarterLinesInResponse =
+    input.consumption?.paperId === 'paper-2026-i'
+    && input.consumption?.sourceAssetVersion === 2
+    && groupId === 'group-2026-i-writing-continuation'
   const sourceOwnedInstructions = Array.isArray(occurrence.sourceOwnedInstructions)
     ? occurrence.sourceOwnedInstructions.map((instruction) => ({
         sourceBlockIndex: instruction.sourceBlockIndex,
@@ -496,6 +500,7 @@ function projectOpaqueLegacyWritingConsumerGroup(input, occurrence, {
     ...(sourceStarterBlockRefs === undefined
       ? {}
       : { sourceStarterBlockRefs: structuredClone(sourceStarterBlockRefs) }),
+    ...(sourceStarterLinesInResponse ? { sourceStarterLinesInResponse } : {}),
     wordCountTarget: occurrence.wordCountTarget,
     wordCountTargetCertainty: occurrence.wordCountTargetCertainty,
     wordCountScope: occurrence.wordCountScope,
