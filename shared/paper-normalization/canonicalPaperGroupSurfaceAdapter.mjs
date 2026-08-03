@@ -396,7 +396,22 @@ export function buildCanonicalApplicationWritingConsumptionSurfaceData({
   const sourceBlocks = canonicalGroup.writingMode === 'legacy_opaque'
     ? canonicalGroup.sourceBlocks
     : canonicalGroup.promptBlocks
-  const paragraphs = sourceBlocks.map((block) => {
+  const sourceOwnedInstructions = canonicalGroup.writingMode === 'legacy_opaque'
+    ? canonicalGroup.sourceOwnedInstructions || []
+    : []
+  const promptBlocks = [
+    ...sourceBlocks,
+    ...sourceOwnedInstructions.map((instruction) => ({
+      nodeId: `source-instruction:${instruction.sourceBlockIndex}`,
+      text: instruction.text,
+      inlines: [{
+        kind: 'text',
+        nodeId: `source-instruction:${instruction.sourceBlockIndex}:text`,
+        text: instruction.text,
+      }],
+    })),
+  ]
+  const paragraphs = promptBlocks.map((block) => {
     const segmented = segmentPaperText(block.text, {
       sectionId: block.nodeId,
     }).paragraphs[0]
@@ -438,7 +453,7 @@ export function buildCanonicalApplicationWritingConsumptionSurfaceData({
     ...(canonicalGroup.writingMode === 'legacy_opaque'
       ? { writingMode: canonicalGroup.writingMode }
       : {}),
-    promptBlocks: sourceBlocks,
+    promptBlocks,
     pageModel: {
       blocks: [
         ...(writingChrome.part
@@ -494,6 +509,23 @@ export function buildCanonicalContinuationWritingConsumptionSurfaceData({
   const sourceBlocks = canonicalGroup.writingMode === 'legacy_opaque'
     ? canonicalGroup.sourceBlocks
     : canonicalGroup.materialBlocks
+  const starterLines = canonicalGroup.writingMode === 'legacy_opaque'
+    ? canonicalGroup.sourceStarterBlockRefs.map((contentRef) => {
+        const block = sourceBlocks.find((candidate) => candidate.nodeId === contentRef)
+        if (!block) {
+          throw new Error(
+            `Canonical Continuation Writing starter ${contentRef} is absent from source blocks`,
+          )
+        }
+        return {
+          starterId: contentRef,
+          contentRef,
+          authorityObservationRef: canonicalGroup.occurrenceSignature,
+          text: block.text,
+          inlines: block.inlines,
+        }
+      })
+    : canonicalGroup.answerRegion.starterLines
   const paragraphs = sourceBlocks.map((block) => {
     const segmented = segmentPaperText(block.text, {
       sectionId: block.nodeId,
@@ -519,7 +551,7 @@ export function buildCanonicalContinuationWritingConsumptionSurfaceData({
       : {}),
     semanticSignature: canonicalGroup.semanticSignature,
     occurrenceSignature: canonicalGroup.occurrenceSignature,
-    givenTop: canonicalGroup.answerRegion.starterLines || [],
+    givenTop: starterLines || [],
     givenBottom: [],
   }
   const writingChrome = projectCanonicalWritingChrome({

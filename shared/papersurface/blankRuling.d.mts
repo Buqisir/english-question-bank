@@ -10,6 +10,7 @@ export type PaperBlankRuling = {
   readonly lineStyle: 'single-thin'
   readonly screenLineWidthPx: number
   readonly printLineWidthPt: number
+  readonly ruleVerticalAlignment: 'blank-bottom'
   readonly whiteSpace: 'nowrap'
   readonly hintPlacement: 'immediately-after'
 }

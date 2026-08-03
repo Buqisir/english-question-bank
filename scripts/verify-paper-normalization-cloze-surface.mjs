@@ -100,11 +100,13 @@ assert.deepEqual(paperBlankRuling.cloze, {
   lineStyle: 'single-thin',
   screenLineWidthPx: 1,
   printLineWidthPt: 0.5,
+  ruleVerticalAlignment: 'blank-bottom',
   whiteSpace: 'nowrap',
   hintPlacement: 'immediately-after',
 })
 assert.deepEqual(paperBlankRuling.grammarFill, paperBlankRuling.cloze)
 assert.equal(paperBlankRuling.sevenChoices.width, '4.6em')
+assert.equal(paperBlankRuling.sevenChoices.ruleVerticalAlignment, 'blank-bottom')
 assert.equal(paperSurfaceTokens.paperBlankWidth, paperBlankRuling.sevenChoices.width)
 
 const canonicalRendererSource = await readFile(

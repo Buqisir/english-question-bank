@@ -331,6 +331,15 @@ function getPaperAssetPrintReady(asset, group) {
   const questions = asset?.content?.questions && typeof asset.content.questions === 'object'
     ? asset.content.questions
     : {}
+  // A canonical Writing Task deliberately owns its response region rather than
+  // Questions. Check its source-owned material before the objective-question
+  // gate so a complete same-paper draft can reach the whole-paper validator.
+  if (groupType === 'writing' || groupType === 'continuation') {
+    if (!paperAssetParagraphText(group)) {
+      return { ok: false, reason: '题组缺少材料或提示' }
+    }
+    return { ok: true, reason: null }
+  }
   if (questionIds.length === 0) return { ok: false, reason: '题组没有小题' }
 
   for (const questionId of questionIds) {
@@ -353,7 +362,7 @@ function getPaperAssetPrintReady(asset, group) {
     }
   }
 
-  if (groupType === 'writing' || groupType === 'continuation' || groupType === 'reading' || groupType === 'seven_choices' || groupType === 'cloze') {
+  if (groupType === 'reading' || groupType === 'seven_choices' || groupType === 'cloze') {
     if (!paperAssetParagraphText(group)) return { ok: false, reason: '题组缺少材料或提示' }
   }
 

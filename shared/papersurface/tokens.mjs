@@ -65,14 +65,8 @@ export const paperSurfaceTokens = Object.freeze({
    * (which stays 书宋 per standard §4).
    */
   paperFontStackHeading: '"SimHei", "Heiti SC", "STHeiti", sans-serif',
-  /**
-   * Canonical writing part headings can be pure English (`Writing`) or mixed
-   * Chinese/English. Pin their Latin glyphs to Arial so Chromium does not
-   * substitute an incompatible Hei face while the Chinese glyphs still fall
-   * through to the standard black-style stack.
-   */
-  paperFontStackWritingPart:
-    '"Arial", "Helvetica Neue", "SimHei", "Heiti SC", "STHeiti", sans-serif',
+  /** Ticket 35: writing uses the same score-run treatment as every part. */
+  paperFontStackWritingPart: '"SimHei", "Heiti SC", "STHeiti", sans-serif',
   paperFontFamilyWritingPartEn: 'Arial',
   paperInk: '#111111',
   paperMuted: '#555555',

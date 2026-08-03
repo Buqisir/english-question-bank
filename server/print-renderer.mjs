@@ -509,7 +509,7 @@ function renderCanonicalReadingBlocks(canonicalGroup) {
       return `<table class="canonical-reading-table" data-canonical-block-id="${escapeHtml(block.nodeId)}" data-canonical-block-kind="table" data-canonical-reading-rhythm-role="native_table_line" data-canonical-table-columns="${block.columnCount}"><tbody>${block.rows.map((row) => `<tr data-canonical-row-id="${escapeHtml(row.rowId)}">${row.cells.map((cell) => `<td colspan="${cell.columnSpan}" rowspan="${cell.rowSpan}" data-canonical-cell-id="${escapeHtml(cell.cellId)}" data-canonical-column-start="${cell.columnStart}">${renderCanonicalInlineNodes(cell.inlines)}</td>`).join('')}</tr>`).join('')}</tbody></table>`
     }
     const src = `data:${block.mediaArtifact.mimeType};base64,${block.mediaArtifact.encodedBytes}`
-    return `<figure class="canonical-reading-figure" data-canonical-block-id="${escapeHtml(block.nodeId)}" data-canonical-block-kind="figure" data-canonical-media-id="${escapeHtml(block.mediaId)}" data-canonical-media-sha256="${escapeHtml(block.media.sha256)}" data-canonical-source-artifact-id="${escapeHtml(block.media.sourceArtifactRef.artifactId)}"><img src="${escapeHtml(src)}" alt="${escapeHtml(block.caption || block.mediaId)}">${block.caption ? `<figcaption>${renderCanonicalInlineNodes(block.captionInlines)}</figcaption>` : ''}</figure>`
+    return `<figure class="canonical-reading-figure" data-canonical-block-id="${escapeHtml(block.nodeId)}" data-canonical-block-kind="figure" data-canonical-media-id="${escapeHtml(block.mediaId)}" data-canonical-media-sha256="${escapeHtml(block.media.sha256)}" data-canonical-source-artifact-id="${escapeHtml(block.media.sourceArtifactRef.artifactId)}"><img src="${escapeHtml(src)}" alt=""></figure>`
   }).join('')}</div>`
 }
 
@@ -577,8 +577,21 @@ function renderCanonicalOpaqueWriting(
     family,
     previousFamilyBoundary,
   )
-  const source = canonicalGroup.sourceBlocks.map((block) =>
-    `<p data-canonical-block-id="${escapeHtml(block.nodeId)}" data-canonical-legacy-opaque-source-block="">${renderCanonicalInlineNodes(block.inlines)}</p>`).join('')
+  const source = [
+    ...canonicalGroup.sourceBlocks.map((block) =>
+      `<p data-canonical-block-id="${escapeHtml(block.nodeId)}" data-canonical-legacy-opaque-source-block="">${renderCanonicalInlineNodes(block.inlines)}</p>`),
+    ...(
+      application
+        ? (canonicalGroup.sourceOwnedInstructions || []).map((instruction) => {
+            const noticeLines = applicationWritingNoticeLines(instruction.text)
+            const content = noticeLines
+              ? noticeLines.map((line) => `<span class="canonical-application-notice-line canonical-application-notice-line--${line.kind}" data-canonical-application-notice-line="${line.kind}">${escapeHtml(line.text)}</span>`).join('')
+              : escapeHtml(instruction.text)
+            return `<p data-canonical-source-block-index="${instruction.sourceBlockIndex}" data-canonical-application-writing-rhythm-role="${noticeLines ? 'notice_line' : 'prompt_line'}"${noticeLines ? ' data-canonical-application-notice=""' : ''}>${content}</p>`
+          })
+        : []
+    ),
+  ].join('')
   const response = canonicalGroup.answerRegion
   const geometry = application
     ? applicationWritingRhythm.responseGeometry
@@ -589,7 +602,20 @@ function renderCanonicalOpaqueWriting(
   const responseClass = application
     ? 'canonical-application-response'
     : 'canonical-continuation-response'
-  return `<div class="${familyClass} canonical-legacy-opaque-writing" data-canonical-writing-mode="legacy_opaque" data-canonical-writing-semantic-signature="${escapeHtml(canonicalGroup.semanticSignature)}" data-canonical-writing-occurrence-signature="${escapeHtml(canonicalGroup.occurrenceSignature)}" data-canonical-word-count-target="${canonicalGroup.wordCountTarget}" data-canonical-word-count-certainty="${escapeHtml(canonicalGroup.wordCountTargetCertainty)}" data-canonical-word-count-scope="${escapeHtml(canonicalGroup.wordCountScope)}">${application ? chrome : `<div class="canonical-continuation-chrome">${chrome}</div>`}<div class="passage canonical-legacy-opaque-source">${source}</div><div class="writing-answer-box ${responseClass} canonical-legacy-opaque-response" data-canonical-legacy-opaque-response="" data-canonical-response-ownership="${escapeHtml(response.ownership)}" data-canonical-answer-region-ref="${escapeHtml(response.answerRegionRef)}" data-canonical-response-slot-id="${escapeHtml(response.responseSlotId)}" style="width:${geometry.widthMm}mm;height:${geometry.heightMm}mm;"></div></div>`
+  const starters = application
+    ? ''
+    : canonicalGroup.sourceStarterBlockRefs.map((contentRef, index) => {
+        const block = canonicalGroup.sourceBlocks.find(
+          (candidate) => candidate.nodeId === contentRef,
+        )
+        if (!block) {
+          throw new Error(
+            `Canonical Continuation Writing starter ${contentRef} is absent from source blocks`,
+          )
+        }
+        return `<div class="writing-continuation-row"><p class="writing-starter-line" data-canonical-starter-id="${escapeHtml(contentRef)}" data-canonical-block-id="${escapeHtml(contentRef)}" data-canonical-continuation-writing-rhythm-role="starter_${index + 1}">${renderCanonicalInlineNodes(block.inlines)}</p><span class="writing-continuation-writable-area" data-canonical-continuation-writing-rhythm-role="writable_after_starter_${index + 1}"></span></div>`
+      }).join('')
+  return `<div class="${familyClass} canonical-legacy-opaque-writing" data-canonical-writing-mode="legacy_opaque" data-canonical-writing-semantic-signature="${escapeHtml(canonicalGroup.semanticSignature)}" data-canonical-writing-occurrence-signature="${escapeHtml(canonicalGroup.occurrenceSignature)}" data-canonical-word-count-target="${canonicalGroup.wordCountTarget}" data-canonical-word-count-certainty="${escapeHtml(canonicalGroup.wordCountTargetCertainty)}" data-canonical-word-count-scope="${escapeHtml(canonicalGroup.wordCountScope)}">${application ? chrome : `<div class="canonical-continuation-chrome">${chrome}</div>`}<div class="passage canonical-legacy-opaque-source">${source}</div><div class="writing-answer-box ${responseClass} canonical-legacy-opaque-response" data-canonical-legacy-opaque-response="" data-canonical-response-ownership="${escapeHtml(response.ownership)}" data-canonical-answer-region-ref="${escapeHtml(response.answerRegionRef)}" data-canonical-response-slot-id="${escapeHtml(response.responseSlotId)}" style="width:${geometry.widthMm}mm;height:${geometry.heightMm}mm;">${starters}</div></div>`
 }
 
 function renderCanonicalApplicationWriting(
@@ -674,7 +700,10 @@ function renderCanonicalQuestionOptions(
 }
 
 function cssBackgroundForBlankRuling(ruling) {
-  if (ruling.lineStyle !== 'single-thin') {
+  if (
+    ruling.lineStyle !== 'single-thin'
+    || ruling.ruleVerticalAlignment !== 'blank-bottom'
+  ) {
     throw new Error(`Unsupported paper blank line style ${ruling.lineStyle}`)
   }
   return `linear-gradient(#000, #000) bottom / 100% ${ruling.printLineWidthPt}pt no-repeat`
@@ -2376,11 +2405,6 @@ body {
   height: auto;
 }
 
-.canonical-reading-figure figcaption {
-  color: #555;
-  font-size: 9pt;
-}
-
 .options-inline {
   margin: 0.2em 0 0.2em 2em;
 }
@@ -2391,6 +2415,12 @@ body {
 
 .options-inline--numbered .qnum {
   margin-right: 0.6em;
+}
+
+.question-group[data-canonical-group-type="cloze"]
+  .options-inline--numbered
+  .qnum {
+  margin-right: 0;
 }
 
 .canonical-options {
@@ -2527,14 +2557,6 @@ body {
   width: ${clozeRhythm.horizontalChoiceGeometry.rendererMapping.rowWidthPt}pt;
 }
 
-.question-group[data-canonical-group-type="cloze"]
-  .options-inline--numbered
-  .qnum {
-  justify-self: end;
-  text-align: right;
-  margin-right: 0;
-}
-
 .options-inline--canonical > .canonical-options {
   margin-right: 0;
 }
@@ -2602,29 +2624,6 @@ body {
   text-align: left;
   text-indent: 0;
   vertical-align: baseline;
-}
-
-.print-blank-unit[data-canonical-grammar-fill-unit] > :where(.print-blank) {
-  position: relative;
-  margin-left: 0;
-  margin-right: 0;
-  background: none;
-}
-
-.print-blank-unit[data-canonical-grammar-fill-unit]
-  > :where(.print-blank)::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 1em;
-  background:
-    linear-gradient(#000, #000) bottom / 100%
-    ${grammarFillRhythm.ruleVerticalGeometry.printPdfRuleThicknessPt}pt
-    no-repeat;
-  transform:
-    translateY(-${grammarFillRhythm.ruleVerticalGeometry.rendererMapping.printPdfRuleLiftEm}em);
 }
 
 .print-blank-unit[data-canonical-grammar-fill-unit] > :where(.print-blank-hint) {

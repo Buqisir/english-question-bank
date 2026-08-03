@@ -647,10 +647,7 @@ function CanonicalReadingBlocks({
               block.media.sourceArtifactRef.artifactId
             }
           >
-            <img src={src} alt={block.caption || block.mediaId} />
-            {block.caption && (
-              <figcaption>{renderInlines(block.captionInlines)}</figcaption>
-            )}
+            <img src={src} alt="" />
           </figure>
         )
         })}

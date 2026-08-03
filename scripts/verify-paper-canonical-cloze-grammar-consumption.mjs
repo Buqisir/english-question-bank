@@ -39,6 +39,7 @@ import {
 import {
   createCanonicalConsumerRuntime,
 } from '../server/paper-canonical/consumerRuntime.mjs'
+import { clozeRhythm } from '../shared/paper-canonical/clozeRhythm.mjs'
 import {
   createPaperCanonicalConsumerRoutes,
 } from '../server/paper-canonical/consumerRoutes.mjs'
@@ -173,9 +174,12 @@ async function assertActualPaperBrowseBoundary({
   readyConsumption,
   legacyConsumption,
   invalidConsumption,
+  browserAssetSource = asset,
+  onReady = null,
   outputDir = null,
+  verifyRejection = true,
 }) {
-  const browserAsset = structuredClone(asset)
+  const browserAsset = structuredClone(browserAssetSource)
   const readyGroupIds = new Set(
     readyConsumption.selections.flatMap((selection) => selection.groupIds),
   )
@@ -358,6 +362,7 @@ async function assertActualPaperBrowseBoundary({
       ),
       'Screen',
     )
+    if (onReady) await onReady(page)
 
     const grammarQaUrl = new URL(qaUrl)
     grammarQaUrl.searchParams.set('focusGroupId', 'group-2026-i-grammar-fill')
@@ -385,29 +390,31 @@ async function assertActualPaperBrowseBoundary({
       })
     }
 
-    consumption = legacyConsumption
-    await page.goto(qaUrl.href)
-    await page.getByText(
-      /whole-family selection|Family cloze has no unambiguous whole-family selection/,
-    ).waitFor()
-    assert.equal(
-      await page.locator(
-        '[data-paper-browse-anchor="group-2026-i-cloze"] [data-paper-question-id]',
-      ).count(),
-      0,
-      'a caller-supplied legacy Screen plan exposes no question output',
-    )
+    if (verifyRejection) {
+      consumption = legacyConsumption
+      await page.goto(qaUrl.href)
+      await page.getByText(
+        /whole-family selection|Family cloze has no unambiguous whole-family selection/,
+      ).waitFor()
+      assert.equal(
+        await page.locator(
+          '[data-paper-browse-anchor="group-2026-i-cloze"] [data-paper-question-id]',
+        ).count(),
+        0,
+        'a caller-supplied legacy Screen plan exposes no question output',
+      )
 
-    consumption = invalidConsumption
-    await page.reload()
-    await page.getByText(
-      /partial or ambiguous|Canonical visible structure is invalid/,
-    ).waitFor()
-    assert.equal(
-      await page.locator('[data-paper-question-id]').count(),
-      0,
-      'actual PaperBrowsePage exposes no partial paper after plan rejection',
-    )
+      consumption = invalidConsumption
+      await page.reload()
+      await page.getByText(
+        /partial or ambiguous|Canonical visible structure is invalid/,
+      ).waitFor()
+      assert.equal(
+        await page.locator('[data-paper-question-id]').count(),
+        0,
+        'actual PaperBrowsePage exposes no partial paper after plan rejection',
+      )
+    }
   } finally {
     await browser.close()
     await viteServer.close()
@@ -446,7 +453,7 @@ async function waitForHttp(url, child, timeoutMs = 20_000) {
   throw new Error(`Timed out waiting for ${url}\n${child.output}`)
 }
 
-function seedDraftRows(userDbPath) {
+function seedDraftRows(userDbPath, groupIds = items.map((item) => item.detail.id)) {
   const userId = 'local'
   const draftPaperId = 'draft-paper-canonical-reference'
   const userDb = new DatabaseSync(userDbPath)
@@ -462,12 +469,12 @@ function seedDraftRows(userDbPath) {
       page_break_before, created_at, updated_at
     ) VALUES (?, ?, ?, ?, ?, 0, datetime('now'), datetime('now'))
   `)
-  for (const [index, item] of items.entries()) {
+  for (const [index, groupId] of groupIds.entries()) {
     insertItem.run(
       `draft-item-${index + 1}`,
       draftPaperId,
-      item.detail.id,
-      item.detail.paperId,
+      groupId,
+      fixture.source.paperId,
       index + 1,
     )
   }
@@ -509,6 +516,7 @@ async function withActualDraftApi({
   fixtureRoot,
   paperAssetsRoot,
   canonicalReference,
+  groupIds,
 }, callback) {
   mkdirSync(fixtureRoot, { recursive: true })
   const bankDbPath = path.join(fixtureRoot, 'question-bank.sqlite')
@@ -534,7 +542,7 @@ async function withActualDraftApi({
   try {
     await waitForHttp(`${baseUrl}/api/health`, child)
     setCanonicalReference(bankDbPath, canonicalReference)
-    const draft = seedDraftRows(userDbPath)
+    const draft = seedDraftRows(userDbPath, groupIds)
     await callback({ baseUrl, bankDbPath, ...draft })
   } finally {
     child.kill('SIGTERM')
@@ -579,30 +587,54 @@ function readPdfColumnStarts(pdfBytes, outputRoot, label) {
   execFileSync('pdftotext', ['-bbox', pdfPath, bboxPath])
   const source = readFileSync(bboxPath, 'utf8')
   const words = [...source.matchAll(
-    /<word xMin="([^"]+)" yMin="([^"]+)" xMax="[^"]+" yMax="[^"]+">(?:([0-9]+)\.)?([A-D])\.<\/word>/g,
-  )].map((match) => ({
-    x: Number(match[1]),
-    y: Number(match[2]),
-    questionNo: match[3] || null,
-    label: match[4],
-  }))
+    /<word xMin="([^"]+)" yMin="([^"]+)" xMax="[^"]+" yMax="[^"]+">([^<]+)<\/word>/g,
+  )].map((match) => {
+    const combined = match[3].match(/^(?:([0-9]+)\.)?([A-D])\.$/)
+    return {
+      x: Number(match[1]),
+      y: Number(match[2]),
+      text: match[3],
+      questionNo: combined?.[1] || match[3].match(/^([0-9]+)\.$/)?.[1] || null,
+      label: combined?.[2] || null,
+    }
+  })
+  const optionWords = words.filter((word) => word.label)
   const rows = []
-  for (let index = 0; index <= words.length - 4; index += 1) {
-    const candidate = words.slice(index, index + 4)
+  const questionStarts = []
+  for (let index = 0; index <= optionWords.length - 4; index += 1) {
+    const candidate = optionWords.slice(index, index + 4)
     if (
-      candidate.map((word) => word.label).join('') === 'ABCD'
+      candidate.map((word) => word.label || '').join('') === 'ABCD'
       && Math.max(...candidate.map((word) => word.y))
         - Math.min(...candidate.map((word) => word.y)) <= 0.5
     ) {
-      assert.equal(
-        candidate[0].questionNo !== null,
-        true,
-        `${label}: A is physically joined to its question number`,
+      const question = words.find(
+        (word) => word.questionNo && Math.abs(word.y - candidate[0].y) <= 0.5,
       )
+      assert.equal(
+        question?.questionNo !== undefined,
+        true,
+        `${label}: every Cloze option row retains its question label`,
+      )
+      assert.equal(
+        Math.abs(
+          candidate[0].x
+          - question.x
+          - clozeRhythm.horizontalChoiceGeometry.rendererMapping.questionLabelWidthPt,
+        ) <= 1,
+        true,
+        `${label}: question label starts at the passage boundary rather than ending inside its column (actual ${candidate[0].x - question.x})`,
+      )
+      questionStarts.push(question.x)
       rows.push(candidate.map((word) => word.x))
       index += 3
     }
   }
+  assert.equal(
+    Math.max(...questionStarts) - Math.min(...questionStarts) <= 0.5,
+    true,
+    `${label}: all Cloze question labels share the passage left boundary`,
+  )
   assertBrowserColumnGates(rows, label, { anchorColumn: 1 })
 }
 
@@ -737,6 +769,309 @@ async function assertActualDraftPrintPdfBoundary({
     canonicalReference,
   }, ({ baseUrl, draftPaperId }) =>
     assertRejectedPhysicalRoutes({ baseUrl, draftPaperId, label: 'corrupt Publication' }))
+}
+
+// Ticket 35 Owner QA: a Writing Question Group deliberately owns zero
+// Questions. The public draft-add route must therefore reach the canonical
+// whole-paper gate instead of rejecting the group as if it were malformed
+// objective content. This is deliberately an HTTP assertion: the failed Owner
+// QA flow encountered the friendly `题组没有小题` response at this exact seam.
+async function assertWritingDraftGateDoesNotRequireQuestions({
+  rootDir,
+  paperAssetsRoot,
+  canonicalReference,
+}) {
+  await withActualDraftApi({
+    fixtureRoot: path.join(rootDir, 'actual-http-writing-readiness'),
+    paperAssetsRoot,
+    canonicalReference,
+  }, async ({ baseUrl }) => {
+    for (const groupId of [
+      'group-2026-i-writing-application',
+      'group-2026-i-writing-continuation',
+    ]) {
+      const response = await fetchPublic(
+        `${baseUrl}/api/draft-papers/current/items`,
+        {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ groupId }),
+        },
+      )
+      const result = await readHttpResponse(response)
+      assert.notEqual(
+        result.json?.error,
+        '题组没有小题',
+        `real public draft add recognizes ${groupId} as a zero-question Writing Task`,
+      )
+    }
+  })
+}
+
+const ticket35PublicationStore = path.resolve(
+  'test-fixtures/paper-canonical/publications/ticket-32-remaining-v1/store',
+)
+const ticket35GroupIds = [
+  'group-2026-i-reading-a',
+  'group-2026-i-reading-b',
+  'group-2026-i-reading-c',
+  'group-2026-i-reading-d',
+  'group-2026-i-seven-choices',
+  'group-2026-i-cloze',
+  'group-2026-i-grammar-fill',
+  'group-2026-i-writing-application',
+  'group-2026-i-writing-continuation',
+]
+
+function ticket35V2Source() {
+  const versionRoot = path.join(
+    ticket35PublicationStore,
+    fixture.source.paperId,
+    'versions',
+    'v2',
+  )
+  const sourceCaptureBytes = readFileSync(path.join(versionRoot, 'paper-asset.json'))
+  const sourceCapture = JSON.parse(sourceCaptureBytes)
+  const assetObservation = sourceCapture.observations.find(
+    (observation) => observation?.value?.role === 'asset-projection',
+  )
+  const assetDocument = sourceCapture.documents.find(
+    (document) => document.documentId === assetObservation?.documentId,
+  )
+  assert.ok(assetDocument?.encodedBytes, 'Ticket 35 v2 has one sealed asset-projection document')
+  const assetBytes = Buffer.from(assetDocument.encodedBytes, 'base64')
+  assert.equal(assetBytes.byteLength, assetDocument.byteLength)
+  assert.equal(sha256(assetBytes), assetDocument.sha256)
+  const paperAsset = JSON.parse(assetBytes)
+  assert.equal(paperAsset.schemaVersion, 'paper-asset-v1')
+  return { versionRoot, paperAsset }
+}
+
+function ticket35V2Reference() {
+  const db = new DatabaseSync(path.join(ticket35PublicationStore, 'publication.sqlite'), {
+    readOnly: true,
+  })
+  try {
+    const row = db.prepare(`
+      SELECT paper_id, version_name, source_asset_version, publication_digest
+      FROM canonical_paper_publications
+      WHERE paper_id = ? AND is_current = 1
+    `).get(fixture.source.paperId)
+    assert.ok(row, 'Ticket 35 v2 Publication is current in its immutable fixture store')
+    assert.equal(row.version_name, 'v2')
+    return {
+      paperId: row.paper_id,
+      versionName: row.version_name,
+      sourceAssetVersion: row.source_asset_version,
+      publicationDigest: row.publication_digest,
+    }
+  } finally {
+    db.close()
+  }
+}
+
+function ticket35WritingSourceText(paperAsset) {
+  const blocks = paperAsset.content.blocks
+  const application = blocks.findIndex(
+    (block) => block.type === 'group' && block.groupId === 'group-2026-i-writing-application',
+  )
+  const notice = blocks[application + 1]?.text
+  const continuation = blocks.find(
+    (block) => block.type === 'instruction' && String(block.text).startsWith('Paragraph 1:'),
+  )?.text
+  assert.equal(typeof notice, 'string', 'Ticket 35 source owns the Application Writing notice')
+  const starters = String(continuation || '')
+    .split(/\n\s*\n/)
+    .map((line) => line.replace(/^Paragraph \d+:\s*/, '').trim())
+    .filter(Boolean)
+  assert.deepEqual(starters.length, 2, 'Ticket 35 source owns two Continuation starters')
+  return { notice, starters }
+}
+
+async function assertTicket35Screen(page, paperAsset, outputDir) {
+  const { notice, starters } = ticket35WritingSourceText(paperAsset)
+  const observation = await page.evaluate(({ noticeText, starterLines }) => {
+    const application = document.querySelector('[data-paper-browse-anchor="group-2026-i-writing-application"]')
+    const continuation = document.querySelector('[data-paper-browse-anchor="group-2026-i-writing-continuation"]')
+    const grammarBlank = document.querySelector('[data-canonical-group-type="grammarFill"] .ps-paper-blank')
+    const clozeOptions = document.querySelector('[data-canonical-group-type="cloze"] .ps-question-options-inline--four_columns')
+    const clozeRow = clozeOptions?.closest('.ps-question-stem-button')
+    const clozeNumber = clozeRow?.querySelector('.ps-question-no')
+    const part = [...document.querySelectorAll('h1, h2, h3')].find((node) => node.textContent?.includes('第四部分'))
+    const peer = [...document.querySelectorAll('h1, h2, h3')].find((node) => node.textContent?.includes('第三部分'))
+    const font = (node) => node ? (() => {
+      const style = getComputedStyle(node)
+      return [style.fontFamily, style.fontSize, style.fontWeight, style.fontVariantNumeric]
+    })() : null
+    const normalize = (value) => value.replace(/\s+/g, ' ').trim()
+    const prompt = application?.querySelector('.pi-writing-passage')
+    const response = application?.querySelector('[data-canonical-answer-region-ref]')
+    return {
+      applicationNoticeBeforeResponse: Boolean(
+        application && prompt && response
+        && normalize(application.innerText).includes(normalize(noticeText))
+        && prompt.getBoundingClientRect().bottom <= response.getBoundingClientRect().top,
+      ),
+      startersInResponse: starterLines.every((starter) => Boolean(
+        [...document.querySelectorAll('[data-canonical-starter-id]')]
+          .find((node) => node.textContent?.trim() === starter)
+          ?.closest('[data-canonical-answer-region-ref]'),
+      )),
+      figureCaptions: [...document.querySelectorAll('figcaption')].map((node) => node.textContent?.trim()),
+      grammarBorder: grammarBlank ? getComputedStyle(grammarBlank).borderBottomWidth : null,
+      grammarPseudo: grammarBlank ? getComputedStyle(grammarBlank, '::after').content : null,
+      clozeNumberOffset: clozeRow && clozeNumber
+        ? clozeNumber.getBoundingClientRect().left - clozeRow.getBoundingClientRect().left
+        : Number.NaN,
+      writingHeading: font(part),
+      peerHeading: font(peer),
+      applicationPresent: Boolean(application),
+      continuationPresent: Boolean(continuation),
+    }
+  }, { noticeText: notice, starterLines: starters })
+  assert.equal(observation.applicationPresent, true, 'v2 Screen contains Application Writing')
+  assert.equal(observation.continuationPresent, true, 'v2 Screen contains Continuation Writing')
+  assert.equal(observation.applicationNoticeBeforeResponse, true, `v2 Screen keeps the exact Application notice before the response box: ${JSON.stringify(observation)}`)
+  assert.equal(observation.startersInResponse, true, 'v2 Screen puts both Continuation starters inside the response box')
+  assert.deepEqual(observation.figureCaptions, [], 'v2 Screen hides internal figure provenance captions')
+  assert.equal(observation.grammarBorder, '1px', 'v2 Screen uses the shared inline blank rule for Grammar Fill')
+  assert.equal(observation.grammarPseudo, 'none', 'v2 Screen has no independent Grammar Fill rule lift')
+  assert.equal(Math.abs(observation.clozeNumberOffset) <= 0.5, true, 'v2 Screen starts Cloze question labels at the passage boundary')
+  assert.deepEqual(observation.writingHeading, observation.peerHeading, 'v2 Screen gives every part score run one typographic treatment')
+  if (outputDir) {
+    writeFileSync(path.join(outputDir, 'screen.html'), await page.content())
+    await page.screenshot({ path: path.join(outputDir, 'screen.png'), fullPage: true })
+  }
+}
+
+async function assertTicket35CompletePublication({ rootDir }) {
+  const { paperAsset } = ticket35V2Source()
+  const canonicalReference = ticket35V2Reference()
+  const v2Root = path.join(rootDir, 'ticket-35-v2-publication')
+  cpSync(
+    path.join(ticket35PublicationStore, fixture.source.paperId),
+    path.join(v2Root, fixture.source.paperId),
+    { recursive: true },
+  )
+  const outputDir = provisionActualArtifacts
+    ? path.resolve('.scratch', 'ticket-35-owner-qa', execFileSync(
+        'git', ['rev-parse', '--short=12', 'HEAD'], { encoding: 'utf8' },
+      ).trim())
+    : null
+  if (outputDir) mkdirSync(outputDir, { recursive: true })
+
+  const fixtureDb = new DatabaseSync(path.join(ticket35PublicationStore, 'publication.sqlite'), {
+    readOnly: true,
+  })
+  try {
+    const runtime = createCanonicalConsumerRuntime({
+      rootDir: ticket35PublicationStore,
+      db: fixtureDb,
+    })
+    const screenConsumption = runtime.load({ paperId: fixture.source.paperId, consumerId: 'screen' })
+    assert.equal(screenConsumption.disposition, 'ready')
+    assert.equal(screenConsumption.sourceAssetVersion, 2)
+    await assertActualPaperBrowseBoundary({
+      readyConsumption: screenConsumption,
+      browserAssetSource: paperAsset,
+      legacyConsumption: null,
+      invalidConsumption: null,
+      outputDir: null,
+      verifyRejection: false,
+      onReady: (page) => assertTicket35Screen(page, paperAsset, outputDir),
+    })
+  } finally {
+    fixtureDb.close()
+  }
+
+  await withActualDraftApi({
+    fixtureRoot: path.join(rootDir, 'ticket-35-v2-http'),
+    paperAssetsRoot: v2Root,
+    canonicalReference,
+    groupIds: ticket35GroupIds,
+  }, async ({ baseUrl, draftPaperId }) => {
+    const playwright = await import('../app/node_modules/playwright/index.js')
+    const browser = await playwright.default.chromium.launch({ headless: true })
+    try {
+      const page = await browser.newPage()
+      const { notice, starters } = ticket35WritingSourceText(paperAsset)
+      for (const versionType of ['student', 'teacher']) {
+        const htmlResponse = await fetchPublic(
+          `${baseUrl}/api/draft-papers/${draftPaperId}/print-html?versionType=${versionType}`,
+        )
+        const html = await htmlResponse.text()
+        assert.equal(htmlResponse.status, 200, `v2 complete ${versionType} public Print HTML succeeds: ${html}`)
+        await page.setContent(html, { waitUntil: 'load' })
+        const observation = await page.evaluate(({ noticeText, starterLines }) => {
+          const application = document.querySelector('[data-canonical-group-id="group-2026-i-writing-application"]')
+          const continuation = document.querySelector('[data-canonical-group-id="group-2026-i-writing-continuation"]')
+          const grammarBlank = document.querySelector('[data-canonical-group-type="grammarFill"] .print-blank')
+          const clozeRow = document.querySelector('[data-canonical-group-type="cloze"] .options-inline--numbered')
+          const clozeNumber = clozeRow?.querySelector('.qnum')
+          const headingNodes = [...document.querySelectorAll(
+            '.section-header, [data-canonical-writing-chrome-role="part_heading"]',
+          )]
+          const part = headingNodes.find((node) => node.textContent?.includes('第四部分'))
+          const peer = headingNodes.find((node) => node.textContent?.includes('第三部分'))
+          const font = (node) => node ? (() => {
+            const style = getComputedStyle(node)
+            return [style.fontFamily, style.fontSize, style.fontWeight, style.fontVariantNumeric]
+          })() : null
+          const normalize = (value) => value.replace(/\s+/g, ' ').trim()
+          const response = application?.querySelector('[data-canonical-answer-region-ref]')
+          return {
+            groupIds: [...document.querySelectorAll('[data-canonical-group-id]')].map((node) => node.getAttribute('data-canonical-group-id')),
+            partHeadings: headingNodes.map((node) => node.textContent?.trim()),
+            applicationNoticeBeforeResponse: Boolean(
+              application && response
+              && normalize(application.innerText).includes(normalize(noticeText))
+              && application.querySelector('.canonical-application-prompt, .canonical-legacy-opaque-source')?.getBoundingClientRect().bottom
+                <= response.getBoundingClientRect().top,
+            ),
+            startersInResponse: starterLines.every((starter) => Boolean(
+              [...document.querySelectorAll('[data-canonical-starter-id]')]
+                .find((node) => node.textContent?.trim() === starter)
+                ?.closest('[data-canonical-answer-region-ref]'),
+            )),
+            figureCaptions: [...document.querySelectorAll('figcaption')].map((node) => node.textContent?.trim()),
+            grammarRule: grammarBlank ? getComputedStyle(grammarBlank).backgroundImage : '',
+            grammarPseudo: grammarBlank ? getComputedStyle(grammarBlank, '::after').content : null,
+            clozeNumberOffset: clozeRow && clozeNumber ? clozeNumber.getBoundingClientRect().left - clozeRow.getBoundingClientRect().left : Number.NaN,
+            writingHeading: font(part),
+            peerHeading: font(peer),
+          }
+        }, { noticeText: notice, starterLines: starters })
+        assert.deepEqual(observation.groupIds.filter(Boolean), ticket35GroupIds, `v2 complete ${versionType} document retains all canonical groups in source order`)
+        assert.equal(observation.partHeadings.some((text) => text?.includes('第二部分')), true, `v2 complete ${versionType} document retains Reading chrome`)
+        assert.equal(observation.partHeadings.some((text) => text?.includes('第三部分')), true, `v2 complete ${versionType} document retains Language chrome`)
+        assert.equal(observation.partHeadings.some((text) => text?.includes('第四部分')), true, `v2 complete ${versionType} document retains Writing chrome: ${JSON.stringify(observation)}`)
+        assert.equal(observation.applicationNoticeBeforeResponse, true, `v2 complete ${versionType} Print keeps the exact Application notice before its response box`)
+        assert.equal(observation.startersInResponse, true, `v2 complete ${versionType} Print puts both Continuation starters inside the response box`)
+        assert.deepEqual(observation.figureCaptions, [], `v2 complete ${versionType} Print hides internal figure provenance captions`)
+        assert.equal(observation.grammarRule.includes('linear-gradient'), true, `v2 complete ${versionType} Print uses the shared inline blank rule for Grammar Fill`)
+        assert.equal(observation.grammarPseudo, 'none', `v2 complete ${versionType} Print has no independent Grammar Fill rule lift`)
+        assert.equal(Math.abs(observation.clozeNumberOffset) <= 0.5, true, `v2 complete ${versionType} Print starts Cloze question labels at the passage boundary`)
+        assert.deepEqual(observation.writingHeading, observation.peerHeading, `v2 complete ${versionType} Print gives every part score run one typographic treatment`)
+        const pdfResponse = await fetchPublic(
+          `${baseUrl}/api/draft-papers/${draftPaperId}/print-pdf`,
+          {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify({ versionType }),
+          },
+        )
+        const pdfBytes = Buffer.from(await pdfResponse.arrayBuffer())
+        assert.equal(pdfResponse.status, 200, `v2 complete ${versionType} public Print PDF succeeds: ${pdfBytes.toString('utf8')}`)
+        assert.equal(pdfBytes.subarray(0, 4).toString(), '%PDF')
+        if (outputDir) {
+          writeFileSync(path.join(outputDir, `print-${versionType}.html`), html)
+          writeFileSync(path.join(outputDir, `print-${versionType}.pdf`), pdfBytes)
+        }
+      }
+    } finally {
+      await browser.close()
+    }
+  })
 }
 
 function cloneCanonicalPaperRoot(sourceRoot, targetRoot) {
@@ -1250,6 +1585,12 @@ try {
     partialReference,
     corruptPaperAssetsRoot,
   })
+  await assertWritingDraftGateDoesNotRequireQuestions({
+    rootDir,
+    paperAssetsRoot: httpPaperAssetsRoot,
+    canonicalReference,
+  })
+  await assertTicket35CompletePublication({ rootDir })
   legacyDb.close()
   const mismatchedBlankJoin = structuredClone(complete)
   const clozeOccurrence = mismatchedBlankJoin.selections

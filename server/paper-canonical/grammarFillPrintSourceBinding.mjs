@@ -4,6 +4,7 @@ import path from 'node:path'
 
 import { grammarFillRhythmForPaperAuthority } from '../../shared/paper-canonical/grammarFillRhythm.mjs'
 import { immutablePublicationSourceForConsumption } from './publication.mjs'
+import { loadCanonicalSourceAssetRepresentation } from './sourceAssetRepresentation.mjs'
 
 const docxMediaType =
   'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
@@ -32,9 +33,7 @@ function assertSafeRelativePath(relativePath, label, prefix = null) {
     || (prefix && !relativePath.startsWith(prefix))
     || relativePath.includes('..')
     || path.isAbsolute(relativePath)
-  ) {
-    reject(`Canonical Grammar Fill ${label} path is invalid`)
-  }
+  ) reject(`Canonical Grammar Fill ${label} path is invalid`)
 }
 
 function formatGrammarFillAnalysis(entry) {
@@ -42,57 +41,6 @@ function formatGrammarFillAnalysis(entry) {
     entry?.reason ? `【${entry.answer}】${entry.reason}` : '',
     entry?.teachingNote ? `点拨：${entry.teachingNote}` : '',
   ].filter(Boolean).join('\n')
-}
-
-function loadChromeSourceAsset({ sourceAsset, versionDir }) {
-  if (Array.isArray(sourceAsset?.content?.blocks)) {
-    return {
-      asset: sourceAsset,
-      digest: null,
-      kind: 'source_asset',
-    }
-  }
-  if (sourceAsset?.schemaVersion !== 'source-capture-v1') {
-    reject('Canonical Grammar Fill chrome immutable source blocks are invalid')
-  }
-  const documents = sourceAsset.documents?.filter(
-    (document) => document.roles?.includes('asset-projection'),
-  )
-  if (documents?.length !== 1) {
-    reject('Canonical Grammar Fill legacy structured source identity is ambiguous')
-  }
-  const document = documents[0]
-  const ref = document.immutableArtifactRef
-  assertSafeRelativePath(
-    ref?.relativePath,
-    'legacy structured source artifact',
-    'source-evidence/',
-  )
-  const sourcePath = path.join(versionDir, ref.relativePath)
-  if (!existsSync(sourcePath)) {
-    reject('Canonical Grammar Fill legacy structured source is unavailable')
-  }
-  const sourceBytes = readFileSync(sourcePath)
-  const sourceDigest = digestBytes(sourceBytes)
-  if (
-    sourceDigest !== document.sha256
-    || sourceDigest !== ref.sha256
-    || sourceBytes.byteLength !== ref.byteLength
-  ) {
-    reject('Canonical Grammar Fill legacy structured source digest disagrees')
-  }
-  const asset = readJson(
-    sourceBytes,
-    'legacy structured source asset',
-  )
-  if (!Array.isArray(asset?.content?.blocks)) {
-    reject('Canonical Grammar Fill legacy structured source blocks are invalid')
-  }
-  return {
-    asset,
-    digest: sourceDigest,
-    kind: 'legacy_source_capture',
-  }
 }
 
 export function loadCanonicalGrammarFillPrintChrome({
@@ -112,7 +60,8 @@ export function loadCanonicalGrammarFillPrintChrome({
   }
   const groupId = selection.groupIds[0]
   const item = exportItems.find((candidate) => candidate.detail.id === groupId)
-  const sourcePaperId = item?.detail.paperId
+  const itemPaperId = item?.detail.paperId
+  const sourcePaperId = canonicalConsumption?.paperId
   if (typeof sourcePaperId !== 'string' || sourcePaperId.length === 0) {
     reject('Canonical Grammar Fill chrome paper identity is unavailable')
   }
@@ -123,6 +72,7 @@ export function loadCanonicalGrammarFillPrintChrome({
     !publicationSource
     || publicationSource.paperId !== sourcePaperId
     || canonicalConsumption.paperId !== sourcePaperId
+    || (typeof itemPaperId === 'string' && itemPaperId.length > 0 && itemPaperId !== sourcePaperId)
     || publicationSource.sourceAssetVersion
       !== canonicalConsumption.sourceAssetVersion
     || publicationSource.publicationDigest
@@ -163,9 +113,11 @@ export function loadCanonicalGrammarFillPrintChrome({
     assetBytes,
     'chrome immutable source asset',
   )
-  const chromeSource = loadChromeSourceAsset({
+  const chromeSource = loadCanonicalSourceAssetRepresentation({
     sourceAsset: asset,
     versionDir,
+    reject,
+    label: 'Canonical Grammar Fill chrome immutable source',
   })
   const chromeAsset = chromeSource.asset
   const chromeAssetDigest = chromeSource.digest || sourceAssetDigest

@@ -65,17 +65,57 @@ export function createCanonicalConsumerRuntime({ rootDir, db }) {
     const paperIds = new Set(
       candidates.map((item) => item.detail?.paperId).filter(Boolean),
     )
-    if (
-      paperIds.size !== 1
-      || candidates.some((item) => !item.detail?.paperId)
-    ) throw rejected({
-      disposition: 'incompatible',
-      diagnostics: [{ code: 'CANONICAL_SOURCE_PAPER_ID_UNAVAILABLE' }],
-    })
-    const consumption = load({
-      paperId: [...paperIds][0],
-      consumerId,
-    })
+    let consumption
+    if (paperIds.size === 1 && candidates.every((item) => item.detail?.paperId)) {
+      consumption = load({
+        paperId: [...paperIds][0],
+        consumerId,
+      })
+    } else {
+      let currentPaperIds
+      try {
+        currentPaperIds = db.prepare(`
+          SELECT paper_id
+          FROM canonical_paper_publications
+          WHERE is_current = 1
+          ORDER BY paper_id ASC
+        `).all().map((row) => row.paper_id)
+      } catch {
+        currentPaperIds = []
+      }
+      const matches = []
+      for (const paperId of currentPaperIds) {
+        try {
+          const candidate = load({ paperId, consumerId })
+          const supportsAllGroups = candidates.every((item) => {
+            const familyContractId = selectedFamilyContractIdForGroup({
+              consumption: candidate,
+              groupId: item.detail.id,
+            })
+            const expectedFamilyContractId = FAMILY_BY_GROUP_TYPE.get(
+              item.detail.groupType,
+            )
+            return Boolean(
+              familyContractId
+              && (!expectedFamilyContractId || familyContractId === expectedFamilyContractId)
+              && (expectedFamilyContractId || [
+                'application-writing',
+                'continuation-writing',
+              ].includes(familyContractId)),
+            )
+          })
+          if (supportsAllGroups) matches.push(candidate)
+        } catch {
+          // A current Publication that cannot prove every requested group is
+          // not an identity candidate for this fail-closed public request.
+        }
+      }
+      if (matches.length !== 1) throw rejected({
+        disposition: 'incompatible',
+        diagnostics: [{ code: 'CANONICAL_SOURCE_PAPER_ID_UNAVAILABLE' }],
+      })
+      consumption = matches[0]
+    }
     for (const item of candidates) {
       const selectedFamilyContractId = selectedFamilyContractIdForGroup({
         consumption,

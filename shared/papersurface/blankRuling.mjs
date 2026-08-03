@@ -11,6 +11,9 @@ const shortBlankRuling = Object.freeze({
   lineStyle: 'single-thin',
   screenLineWidthPx: 1,
   printLineWidthPt: 0.5,
+  // Ticket 35: all inline blank families share this vertical number-to-rule
+  // relationship. Width remains family-specific below.
+  ruleVerticalAlignment: 'blank-bottom',
   whiteSpace: 'nowrap',
   hintPlacement: 'immediately-after',
 })

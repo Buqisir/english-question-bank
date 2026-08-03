@@ -11,6 +11,9 @@ import { buildPrintHtml } from '../print-renderer.mjs'
 import {
   loadCanonicalGrammarFillPrintChrome,
 } from '../paper-canonical/grammarFillPrintSourceBinding.mjs'
+import {
+  loadCanonicalSourceAssetRepresentation,
+} from '../paper-canonical/sourceAssetRepresentation.mjs'
 import { loadGroupAnalysisTexts } from './analysisText.mjs'
 import { renderPaginatedPaper } from './paginationRenderer.mjs'
 import { applyPaginationDomContract } from './paginationDomContract.mjs'
@@ -506,10 +509,16 @@ export function createDraftPaperStore({
     const sourcePaperIds = [
       ...new Set(exportItems.map((item) => item.detail.paperId).filter(Boolean)),
     ]
+    const canonicalPaperId = canonicalConsumption?.paperId
+    const sourcePaperId = typeof canonicalPaperId === 'string'
+      ? canonicalPaperId
+      : sourcePaperIds[0]
     const sourceAssetVersion = canonicalConsumption?.sourceAssetVersion
     const sourceAssetDigest = canonicalConsumption?.sourceAssetDigest
     if (
-      sourcePaperIds.length !== 1
+      (typeof canonicalPaperId === 'string'
+        && sourcePaperIds.some((paperId) => paperId !== canonicalPaperId))
+      || (!canonicalPaperId && sourcePaperIds.length !== 1)
       || !paperAssetsDir
       || !Number.isInteger(sourceAssetVersion)
       || typeof sourceAssetDigest !== 'string'
@@ -518,7 +527,7 @@ export function createDraftPaperStore({
     }
     const assetPath = path.join(
       paperAssetsDir,
-      sourcePaperIds[0],
+      sourcePaperId,
       'versions',
       `v${sourceAssetVersion}`,
       'paper-asset.json',
@@ -538,9 +547,12 @@ export function createDraftPaperStore({
     } catch {
       reject('Canonical visible page-break source asset is invalid')
     }
-    if (!Array.isArray(asset?.content?.blocks)) {
-      reject('Canonical visible page-break source blocks are invalid')
-    }
+    const source = loadCanonicalSourceAssetRepresentation({
+      sourceAsset: asset,
+      versionDir: path.dirname(assetPath),
+      reject,
+      label: 'Canonical visible page-break source',
+    })
     const applicationGroupIds = new Set(
       canonicalConsumption.selections.find(
         (selection) =>
@@ -548,7 +560,7 @@ export function createDraftPaperStore({
           && selection.mode === 'canonical',
       )?.groupIds || [],
     )
-    return new Set(asset.content.blocks.flatMap((block, index, blocks) => {
+    return new Set(source.asset.content.blocks.flatMap((block, index, blocks) => {
       if (
         block.type !== 'group'
         || blocks[index + 1]?.type !== 'pageBreakHint'

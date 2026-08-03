@@ -1301,7 +1301,79 @@ export function createFileSystemCanonicalPublicationStore({ rootDir, db }) {
   }
 }
 
-function canonicalSelections(validated, contract) {
+function sourceOwnedApplicationInstructions(validated, sourceAsset) {
+  if (validated.plan.paperId !== 'paper-2026-i') return new Map()
+  let sourceCapture
+  try {
+    sourceCapture = JSON.parse(new TextDecoder().decode(sourceAsset))
+  } catch {
+    return new Map()
+  }
+  if (sourceCapture?.schemaVersion !== 'source-capture-v1') return new Map()
+  const assetObservation = sourceCapture.observations?.find(
+    (observation) => observation?.value?.role === 'asset-projection',
+  )
+  const assetDocument = sourceCapture.documents?.find(
+    (document) => document.documentId === assetObservation?.documentId,
+  )
+  if (
+    !assetDocument
+    || typeof assetDocument.encodedBytes !== 'string'
+  ) return new Map()
+  const assetBytes = Buffer.from(assetDocument.encodedBytes, 'base64')
+  if (
+    assetBytes.byteLength !== assetDocument.byteLength
+    || sha256(assetBytes) !== assetDocument.sha256
+  ) {
+    throw publicationError(
+      'CANONICAL_PUBLICATION_SOURCE_ASSET_INVALID',
+      'Ticket 26 asset-projection source evidence is corrupt',
+    )
+  }
+  const asset = readJsonBytes(assetBytes, 'Ticket 26 asset-projection source evidence')
+  const blocks = asset?.content?.blocks
+  if (asset?.schemaVersion !== 'paper-asset-v1' || !Array.isArray(blocks)) return new Map()
+  const instructionsByGroupId = new Map()
+  for (const occurrence of validated.projected.nodes) {
+    if (
+      occurrence?.kind !== 'group'
+      || occurrence.familyContractId !== 'application-writing'
+      || occurrence.writingMode !== 'legacy_opaque'
+      || occurrence.groupId !== 'group-2026-i-writing-application'
+      || typeof occurrence.groupId !== 'string'
+      || typeof occurrence.writingTaskId !== 'string'
+    ) continue
+    const groupIndex = blocks.findIndex(
+      (block) => block?.type === 'group' && block.groupId === occurrence.groupId,
+    )
+    const instruction = blocks[groupIndex + 1]
+    const response = blocks[groupIndex + 2]
+    if (
+      groupIndex < 0
+      || instruction?.type !== 'instruction'
+      || typeof instruction.text !== 'string'
+      || instruction.text.length === 0
+      || response?.type !== 'answerBox'
+      || response.writingTaskId !== occurrence.writingTaskId
+    ) {
+      throw publicationError(
+        'CANONICAL_PUBLICATION_SOURCE_ASSET_INVALID',
+        `Legacy Application Writing ${occurrence.groupId} lacks one source-owned instruction before its response box`,
+      )
+    }
+    instructionsByGroupId.set(occurrence.groupId, [{
+      sourceBlockIndex: groupIndex + 1,
+      text: instruction.text,
+    }])
+  }
+  return instructionsByGroupId
+}
+
+function canonicalSelections(validated, contract, sourceAsset) {
+  const applicationInstructions = sourceOwnedApplicationInstructions(
+    validated,
+    sourceAsset,
+  )
   const groupIdsByFamily = new Map()
   for (const group of validated.groups) {
     const familyId = group.contractRef.familyContractId
@@ -1318,9 +1390,16 @@ function canonicalSelections(validated, contract) {
         `Consumer Contract cannot project canonical family ${familyContractId}`,
       )
     }
-    const projectedOccurrences = validated.projected.nodes.filter(
-      (node) => node.kind === 'group' && groupIds.includes(node.groupId),
-    )
+    const projectedOccurrences = validated.projected.nodes
+      .filter((node) => node.kind === 'group' && groupIds.includes(node.groupId))
+      .map((occurrence) => {
+        const sourceOwnedInstructions = applicationInstructions.get(
+          occurrence.groupId,
+        )
+        return sourceOwnedInstructions
+          ? { ...occurrence, sourceOwnedInstructions }
+          : occurrence
+      })
     selections.push({
       mode: 'canonical',
       familyContractId,
@@ -1473,7 +1552,7 @@ function validateConsumptionPublication({
   })
   return {
     manifest,
-    selection: canonicalSelections(validated, contract),
+    selection: canonicalSelections(validated, contract, sourceAsset),
     visibleStructure: canonicalVisibleStructure(validated),
     profileRef: structuredClone(validated.plan.profileRef),
     mediaArtifacts: canonicalMediaArtifacts(validated),

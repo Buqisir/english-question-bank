@@ -395,6 +395,21 @@ function projectOpaqueLegacyWritingConsumerGroup(input, occurrence, {
     || typeof occurrence.writingTaskId !== 'string'
     || !Array.isArray(occurrence.content?.blocks)
     || !Array.isArray(occurrence.sourceBlocks)
+    || (
+      input.consumption?.paperId === 'paper-2026-i'
+      && input.consumption?.sourceAssetVersion === 2
+      && groupId === 'group-2026-i-writing-application'
+      && (
+        !Array.isArray(occurrence.sourceOwnedInstructions)
+        || occurrence.sourceOwnedInstructions.length !== 1
+        || occurrence.sourceOwnedInstructions.some(
+          (instruction) =>
+            !Number.isInteger(instruction?.sourceBlockIndex)
+            || typeof instruction.text !== 'string'
+            || instruction.text.length === 0,
+        )
+      )
+    )
     || !Number.isInteger(occurrence.wordCountTarget)
     || occurrence.wordCountTarget < 1
     || occurrence.wordCountTargetCertainty !== 'explicit_legacy_field'
@@ -428,6 +443,12 @@ function projectOpaqueLegacyWritingConsumerGroup(input, occurrence, {
   }))
   const sourceStarterBlockRefs = sourceTaskType === 'continuation'
     ? occurrence.sourceStarterBlockRefs
+    : undefined
+  const sourceOwnedInstructions = Array.isArray(occurrence.sourceOwnedInstructions)
+    ? occurrence.sourceOwnedInstructions.map((instruction) => ({
+        sourceBlockIndex: instruction.sourceBlockIndex,
+        text: instruction.text,
+      }))
     : undefined
   if (
     sourceTaskType === 'continuation'
@@ -469,6 +490,9 @@ function projectOpaqueLegacyWritingConsumerGroup(input, occurrence, {
     paperChrome: structuredClone(occurrence.paperChrome),
     writingTaskId: occurrence.writingTaskId,
     sourceBlocks,
+    ...(sourceOwnedInstructions === undefined
+      ? {}
+      : { sourceOwnedInstructions }),
     ...(sourceStarterBlockRefs === undefined
       ? {}
       : { sourceStarterBlockRefs: structuredClone(sourceStarterBlockRefs) }),
@@ -481,6 +505,9 @@ function projectOpaqueLegacyWritingConsumerGroup(input, occurrence, {
   return Object.freeze({
     groupType,
     ...semantic,
+    ...(sourceOwnedInstructions === undefined
+      ? {}
+      : { sourceOwnedInstructions }),
     questions: Object.freeze([]),
     occurrenceSignature: digestJson({
       groupId,
