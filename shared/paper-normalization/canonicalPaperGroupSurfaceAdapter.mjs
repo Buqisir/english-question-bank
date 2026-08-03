@@ -1,4 +1,5 @@
 import { segmentPaperText } from '../papersurface/segmentPaperText.mjs'
+import { grammarFillScreenRulingForCanonicalConsumption } from '../papersurface/blankRuling.mjs'
 import { translateAbcdPlanToPointPlacement } from '../paper-canonical/abcdLayout.mjs'
 import {
   projectCanonicalConsumerGroup,
@@ -232,6 +233,12 @@ export function buildCanonicalConsumptionSurfaceData({
     groupId,
   })
   const paragraphModels = buildParagraphModels(canonicalGroup)
+  const grammarFillScreenRuling = canonicalGroup.groupType === 'grammarFill'
+    ? grammarFillScreenRulingForCanonicalConsumption({
+        paperId: canonicalGroup.paperId,
+        authorityRef: consumption.authorityRef,
+      })
+    : null
   return {
     status: 'ready',
     semanticDigest: canonicalGroup.semanticSignature,
@@ -255,6 +262,9 @@ export function buildCanonicalConsumptionSurfaceData({
       semanticParagraphs: paragraphModels.map(
         (model) => model.semanticParagraph,
       ),
+      ...(grammarFillScreenRuling
+        ? { grammarFillScreenRuling }
+        : {}),
       questions: canonicalGroup.questions.map((question, order) => {
         const placement = question.layoutPlan
           ? translateAbcdPlanToPointPlacement(question.layoutPlan)

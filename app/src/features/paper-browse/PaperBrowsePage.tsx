@@ -72,6 +72,7 @@ import {
 import {
   grammarFillRhythm,
 } from '../../../../shared/paper-canonical/grammarFillRhythm.mjs'
+import type { GrammarFillScreenRuling } from '../../../../shared/papersurface/blankRuling.mjs'
 import {
   paperTypographyRuntime,
   sectionHeadingRuntime,
@@ -382,6 +383,20 @@ function cssAttr(value: string): string {
     return CSS.escape(value)
   }
   return value.replace(/[^a-zA-Z0-9_-]/g, '\\$&')
+}
+
+function grammarFillScreenRulingFromSurfaceData(
+  surfaceData: unknown,
+): GrammarFillScreenRuling | undefined {
+  if (
+    !surfaceData
+    || typeof surfaceData !== 'object'
+    || !('grammarFillScreenRuling' in surfaceData)
+  ) return undefined
+  const ruling = surfaceData.grammarFillScreenRuling
+  return ruling && typeof ruling === 'object'
+    ? ruling as GrammarFillScreenRuling
+    : undefined
 }
 
 // one-sheet-paper: single-sheet typography tokens, injected on
@@ -1945,6 +1960,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
       <PaperSurface
         textMap={surfaceData.textMap}
         semanticParagraphs={surfaceData.semanticParagraphs}
+        canonicalGrammarFillScreenRuling={grammarFillScreenRulingFromSurfaceData(surfaceData)}
         annotations={[]}
         evidence={surfaceData.evidence}
         questions={surfaceData.questions}

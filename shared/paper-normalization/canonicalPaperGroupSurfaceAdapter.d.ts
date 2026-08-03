@@ -9,6 +9,9 @@ import type {
   PaperTextMap,
 } from '../papersurface/types'
 import type {
+  GrammarFillScreenRuling,
+} from '../papersurface/blankRuling.mjs'
+import type {
   PaperGroupNormalizationIssue,
 } from './normalizePaperGroup.mjs'
 
@@ -38,6 +41,7 @@ export type CanonicalSurfaceParagraph = {
 export type CanonicalPaperGroupSurfaceData = {
   readonly textMap: PaperTextMap
   readonly semanticParagraphs: ReadonlyArray<CanonicalSurfaceParagraph>
+  readonly grammarFillScreenRuling?: GrammarFillScreenRuling
   readonly questions: ReadonlyArray<PaperQuestion>
   readonly evidence: ReadonlyArray<PaperEvidence>
 }

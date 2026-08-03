@@ -42,8 +42,18 @@ const humanAuthority = read('docs/product/exam-paper-format-standards.md')
 const currentHumanAuthority = humanAuthority.split('## v2 历史排版证据')[0]
 assert.match(
   currentHumanAuthority,
-  /standards\/paper-canonical\/manifest-v44\.json/,
-  'the unique human-readable authority index must bind current manifest v44',
+  /全局 accepted\s+canonical authority[\s\S]*standards\/paper-canonical\/manifest-v36\.json/,
+  'the human-readable authority index must distinguish the runtime global v36 authority',
+)
+assert.match(
+  currentHumanAuthority,
+  /paper-2026-i[\s\S]*scoped successor[\s\S]*standards\/paper-canonical\/manifest-v44\.json/,
+  'the human-readable authority index must scope v44 to the paper-2026-i successor',
+)
+assert.doesNotMatch(
+  currentHumanAuthority,
+  /当前 canonical 编译、校验、发布和受支持的[\s\S]{0,120}manifest-v44\.json/,
+  'the human-readable authority index must not present scoped v44 as the global current authority',
 )
 assert.match(
   currentHumanAuthority,

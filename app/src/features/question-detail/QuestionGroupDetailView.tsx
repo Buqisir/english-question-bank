@@ -63,6 +63,7 @@ import {
   canonicalConsumptionForGroup,
   loadScreenConsumption,
 } from '../paper-intelligence/canonicalConsumptionClient.ts'
+import type { GrammarFillScreenRuling } from '../../../../shared/papersurface/blankRuling.mjs'
 import './QuestionGroupDetailView.css'
 
 // similar-passages-entry (E6, was similar-entrypoints E3): the four
@@ -172,6 +173,13 @@ type LoadState =
 
 export function QuestionGroupPaperSurface({ entry }: { entry: PeekModel }) {
   const surfaceData = entry.model.surfaceData
+  const grammarFillScreenRuling = (
+    'grammarFillScreenRuling' in surfaceData
+    && surfaceData.grammarFillScreenRuling
+    && typeof surfaceData.grammarFillScreenRuling === 'object'
+  )
+    ? surfaceData.grammarFillScreenRuling as GrammarFillScreenRuling
+    : undefined
   const surfaceEl = (
     <PaperSurface
       textMap={surfaceData.textMap}
@@ -183,6 +191,7 @@ export function QuestionGroupPaperSurface({ entry }: { entry: PeekModel }) {
           ? surfaceData.semanticParagraphs
           : undefined
       }
+      canonicalGrammarFillScreenRuling={grammarFillScreenRuling}
       annotations={[]}
       evidence={surfaceData.evidence}
       questions={surfaceData.questions}

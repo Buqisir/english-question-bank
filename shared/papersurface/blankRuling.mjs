@@ -1,3 +1,7 @@
+import { resolveCanonicalAuthority } from '../paper-canonical/authority.mjs'
+import { grammarFillRhythmForPaperAuthority } from '../paper-canonical/grammarFillRhythm.mjs'
+import { digestJson } from '../paper-canonical/stable.mjs'
+
 /**
  * Presentation-only ruling for semantic paper blanks.
  *
@@ -30,6 +34,42 @@ export function grammarFillBlankRulingForRhythm(rhythm) {
     ...shortBlankRuling,
     screenLineWidthPx: geometry.screenRuleThicknessPx,
     printLineWidthPt: geometry.printPdfRuleThicknessPt,
+  })
+}
+
+/**
+ * The Screen projection is derived only from the exact authority already
+ * carried by a verified Consumption Plan.  Keeping the manifest lookup and
+ * its bound renderer artifact together prevents a caller-supplied v5 default
+ * or a CSS-only token from silently replacing a scoped successor ruling.
+ */
+export function grammarFillScreenRulingForCanonicalConsumption({
+  paperId,
+  authorityRef,
+}) {
+  const authority = resolveCanonicalAuthority(authorityRef)
+  if (!authority.ok) {
+    throw new Error('Grammar Fill Screen ruling authority is unavailable')
+  }
+  const rhythm = grammarFillRhythmForPaperAuthority({
+    paperId,
+    manifestVersion: authority.closure.authorityRef.manifestVersion,
+  })
+  const boundRhythm = authority.closure.artifacts['renderer-grammar-fill-rhythm']
+  if (!boundRhythm || digestJson(boundRhythm) !== digestJson(rhythm)) {
+    throw new Error('Grammar Fill Screen ruling disagrees with the bound renderer authority')
+  }
+  const ruling = grammarFillBlankRulingForRhythm(rhythm)
+  if (ruling.ruleVerticalAlignment !== 'blank-bottom') {
+    throw new Error('Grammar Fill Screen ruling requires the shared bottom-rule relation')
+  }
+  return Object.freeze({
+    rhythmSchemaVersion: rhythm.schemaVersion,
+    blankWidth: `${rhythm.blankGeometry.widthEm}em`,
+    screenRuleWidth: `${ruling.screenLineWidthPx}px`,
+    ruleAlignItems: 'flex-end',
+    baselineStep: `${rhythm.targets.screen.baselineStepPx}px`,
+    promptGap: `${rhythm.promptGeometry.gapEm}em`,
   })
 }
 

@@ -467,7 +467,7 @@ function buildPaperAssetGroupIndex() {
         label: 'Canonical paper-asset group source',
       })
       const groups = asset?.content?.groups
-      if (!groups || typeof groups !== 'object') continue
+      if (!groups || typeof groups !== 'object' || asset?.paper?.paperId !== entry.name) continue
       for (const [groupId, group] of Object.entries(groups)) {
         if (group && !index.has(groupId)) index.set(groupId, { asset, group, paperId: entry.name })
       }

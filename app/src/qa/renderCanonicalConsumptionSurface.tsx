@@ -12,6 +12,7 @@ export function renderCanonicalConsumptionSurface(
     <PaperSurface
       textMap={surfaceData.textMap}
       semanticParagraphs={surfaceData.semanticParagraphs}
+      canonicalGrammarFillScreenRuling={surfaceData.grammarFillScreenRuling}
       annotations={[]}
       evidence={surfaceData.evidence}
       questions={[...surfaceData.questions]}

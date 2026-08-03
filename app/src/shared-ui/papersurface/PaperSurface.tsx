@@ -41,6 +41,7 @@ import {
 import {
   grammarFillRhythm,
 } from '../../../../shared/paper-canonical/grammarFillRhythm.mjs'
+import type { GrammarFillScreenRuling } from '../../../../shared/papersurface/blankRuling.mjs'
 import {
   paperTypographyRuntime,
   sectionHeadingRuntime,
@@ -149,6 +150,8 @@ type PaperSurfaceComponentProps = Omit<PaperSurfaceProps, 'blankFocusMode'> & {
    * oracle derived from the same canonical group.
    */
   readonly semanticParagraphs?: ReadonlyArray<CanonicalSurfaceParagraph>
+  /** Exact Consumption-derived Grammar Fill ruling for a canonical group. */
+  readonly canonicalGrammarFillScreenRuling?: GrammarFillScreenRuling
   /** Ordered canonical Reading content rendered natively without marker parsing. */
   readonly canonicalReadingBlocks?: ReadonlyArray<CanonicalReadingSurfaceBlock>
   readonly canonicalReadingPassageLetter?: 'A' | 'B' | 'C' | 'D'
@@ -198,6 +201,7 @@ export function PaperSurface(props: PaperSurfaceComponentProps): ReactNode {
     blankFocusMode = 'rail',
     blankQuestionIdByNo,
     semanticParagraphs,
+    canonicalGrammarFillScreenRuling,
     canonicalReadingBlocks,
     canonicalReadingPassageLetter,
     canonicalReadingSemanticSignature,
@@ -273,6 +277,14 @@ export function PaperSurface(props: PaperSurfaceComponentProps): ReactNode {
     }
   }, [blankFocusMode, questions, blankQuestionIdByNo, lectureFocus, handleQuestionClick])
 
+  const surfaceStyle: PaperSurfaceStyle = canonicalGrammarFillScreenRuling
+    ? {
+        ...paperSurfaceTokenStyle,
+        '--ps-grammar-fill-baseline-step': canonicalGrammarFillScreenRuling.baselineStep,
+        '--ps-grammar-fill-prompt-gap': canonicalGrammarFillScreenRuling.promptGap,
+      }
+    : paperSurfaceTokenStyle
+
   // Group evidence by section for neutral anchor emission.
   const evidenceBySection = useMemo(() => {
     if (!evidence || evidence.length === 0) return new Map<string, PaperEvidence[]>()
@@ -335,7 +347,7 @@ export function PaperSurface(props: PaperSurfaceComponentProps): ReactNode {
     return (
       <div
         className="ps-surface"
-        style={paperSurfaceTokenStyle}
+        style={surfaceStyle}
         data-ps-mode="reading"
       >
         <article className="ps-page">
@@ -352,7 +364,7 @@ export function PaperSurface(props: PaperSurfaceComponentProps): ReactNode {
   return (
     <div
       className="ps-surface"
-      style={paperSurfaceTokenStyle}
+      style={surfaceStyle}
       data-ps-mode="lecture"
     >
       <article className="ps-page">
@@ -389,6 +401,7 @@ export function PaperSurface(props: PaperSurfaceComponentProps): ReactNode {
             onQuestionClick={handleQuestionClick}
             blankFocus={blankFocus}
             semanticParagraphs={semanticParagraphs}
+            grammarFillScreenRuling={canonicalGrammarFillScreenRuling}
             sevenChoicesRhythmEnabled={sevenChoicesRhythmEnabled}
             clozeRhythmEnabled={clozeRhythmEnabled}
             clozeFollowingSectionId={clozeFollowingSectionId}
@@ -713,6 +726,7 @@ type PaperSurfaceSectionProps = {
   onQuestionClick: (questionId: string) => void
   blankFocus: BlankFocusContext
   semanticParagraphs?: ReadonlyArray<CanonicalSurfaceParagraph>
+  grammarFillScreenRuling?: GrammarFillScreenRuling
   sevenChoicesRhythmEnabled: boolean
   clozeRhythmEnabled: boolean
   clozeFollowingSectionId?: string
@@ -729,6 +743,7 @@ function PaperSurfaceSection({
   onQuestionClick,
   blankFocus,
   semanticParagraphs,
+  grammarFillScreenRuling,
   sevenChoicesRhythmEnabled,
   clozeRhythmEnabled,
   clozeFollowingSectionId,
@@ -777,6 +792,7 @@ function PaperSurfaceSection({
             activeEvidenceId={activeEvidenceId}
             blankFocus={blankFocus}
             semanticParagraph={semanticParagraphs?.find((item) => item.id === para.id)}
+            grammarFillScreenRuling={grammarFillScreenRuling}
             sevenChoicesRhythmEnabled={sevenChoicesRhythmEnabled}
             clozeRhythmEnabled={clozeRhythmEnabled}
           />
@@ -809,6 +825,7 @@ type PaperSurfaceParagraphProps = {
   activeEvidenceId: string | null
   blankFocus: BlankFocusContext
   semanticParagraph?: CanonicalSurfaceParagraph
+  grammarFillScreenRuling?: GrammarFillScreenRuling
   sevenChoicesRhythmEnabled: boolean
   clozeRhythmEnabled: boolean
 }
@@ -820,6 +837,7 @@ function PaperSurfaceParagraph({
   activeEvidenceId,
   blankFocus,
   semanticParagraph,
+  grammarFillScreenRuling,
   sevenChoicesRhythmEnabled,
   clozeRhythmEnabled,
 }: PaperSurfaceParagraphProps): ReactNode {
@@ -874,6 +892,7 @@ function PaperSurfaceParagraph({
             semanticParagraph?.sentences.find((item) => item.id === sentence.id)?.nodes
           }
           semanticGroupType={semanticParagraph?.groupType}
+          grammarFillScreenRuling={grammarFillScreenRuling}
         />
       ))}
     </p>
@@ -890,6 +909,7 @@ type PaperSurfaceSentenceProps = {
   blankFocus: BlankFocusContext
   semanticNodes?: CanonicalSurfaceParagraph['sentences'][number]['nodes']
   semanticGroupType?: CanonicalSurfaceParagraph['groupType']
+  grammarFillScreenRuling?: GrammarFillScreenRuling
 }
 
 function PaperSurfaceSentence({
@@ -900,6 +920,7 @@ function PaperSurfaceSentence({
   blankFocus,
   semanticNodes,
   semanticGroupType,
+  grammarFillScreenRuling,
 }: PaperSurfaceSentenceProps): ReactNode {
   // Resolve the active evidence (if any) that lives inside THIS
   // sentence. PaperSurface stays dumb: the active id and the
@@ -948,6 +969,7 @@ function PaperSurfaceSentence({
           semanticGroupType,
           blankFocus,
           activeEv,
+          grammarFillScreenRuling,
         )
       ) : hasInlineActive && activeEv ? (
         <>

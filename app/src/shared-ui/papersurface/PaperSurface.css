@@ -323,12 +323,12 @@
 
 .ps-paper-blank {
   display: inline-flex;
-  align-items: flex-end;
+  align-items: var(--ps-paper-blank-rule-align-items, flex-end);
   justify-content: center;
   width: var(--ps-paper-blank-width);
   white-space: nowrap;
   text-align: center;
-  border-bottom: 1px solid currentColor;
+  border-bottom: var(--ps-paper-blank-rule-width, 1px) solid currentColor;
   font-variant-numeric: tabular-nums;
   line-height: 1.05;
   text-indent: 0;
@@ -408,7 +408,7 @@ button.ps-paper-blank.ps-paper-blank--clickable {
      inherits font) — inherit so the number + currentColor underline
      follow the surface ink, same as I15's grammar-fill button. */
   color: inherit;
-  border-bottom: 1px solid currentColor;
+  border-bottom: var(--ps-paper-blank-rule-width, 1px) solid currentColor;
   border-radius: 0;
   background: transparent;
   cursor: pointer;

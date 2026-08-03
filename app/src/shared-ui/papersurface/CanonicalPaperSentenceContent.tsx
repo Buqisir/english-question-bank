@@ -1,6 +1,7 @@
 import type { CSSProperties, ReactElement, ReactNode } from 'react'
 import { paperSurfaceAnchorAttrs } from '../../../../shared/papersurface/anchorKeys.mjs'
 import { paperBlankRuling } from '../../../../shared/papersurface/blankRuling.mjs'
+import type { GrammarFillScreenRuling } from '../../../../shared/papersurface/blankRuling.mjs'
 import { clozeRhythm } from '../../../../shared/paper-canonical/clozeRhythm.mjs'
 import { grammarFillRhythm } from '../../../../shared/paper-canonical/grammarFillRhythm.mjs'
 import type {
@@ -29,6 +30,7 @@ export function renderCanonicalPaperSentenceContent(
   groupType: CanonicalSurfaceParagraph['groupType'],
   blankFocus: CanonicalBlankFocus,
   activeEvidence?: PaperEvidence,
+  grammarFillScreenRuling?: GrammarFillScreenRuling,
 ): ReactNode {
   const visibleLength = nodes.reduce(
     (length, node) => length + canonicalNodeVisibleText(node).length,
@@ -108,8 +110,15 @@ export function renderCanonicalPaperSentenceContent(
       '--ps-paper-blank-width': groupType === 'cloze'
         ? `${clozeRhythm.blankGeometry.widthEm}em`
         : groupType === 'grammarFill'
-          ? `${grammarFillRhythm.blankGeometry.widthEm}em`
+          ? grammarFillScreenRuling?.blankWidth
+            ?? `${grammarFillRhythm.blankGeometry.widthEm}em`
           : paperBlankRuling[groupType].width,
+      ...(groupType === 'grammarFill' && grammarFillScreenRuling
+        ? {
+            '--ps-paper-blank-rule-width': grammarFillScreenRuling.screenRuleWidth,
+            '--ps-paper-blank-rule-align-items': grammarFillScreenRuling.ruleAlignItems,
+          }
+        : {}),
     } as CanonicalBlankStyle
     const canonicalPairAttrs = (
       groupType === 'sevenChoices'
@@ -131,6 +140,8 @@ export function renderCanonicalPaperSentenceContent(
               } : {
                 'data-canonical-grammar-fill-rhythm-role':
                   'inline_blank_marker',
+                'data-canonical-grammar-fill-rhythm':
+                  grammarFillScreenRuling?.rhythmSchemaVersion,
               }),
         }
       : {}

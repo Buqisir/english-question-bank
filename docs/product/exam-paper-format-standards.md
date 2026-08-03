@@ -2,11 +2,16 @@
 
 ## 当前可执行权威
 
-本文件是唯一的人类可读索引；当前 canonical 编译、校验、发布和受支持的
-Screen / Print-PDF consumer 只从
-[`standards/paper-canonical/manifest-v44.json`](../../standards/paper-canonical/manifest-v44.json)
-解析一份 digest-closed 的权威闭包。这里不复制卷型题号、分值、题组
-cardinality、清洗条件或字体/物理排版数值，也不能被 caller 当作第二套配置。
+本文件是唯一的人类可读索引，但必须区分两条已接受的 authority：全局 accepted
+canonical authority 是
+[`standards/paper-canonical/manifest-v36.json`](../../standards/paper-canonical/manifest-v36.json)，
+它仍是一般 canonical 编译、校验、发布与当前 Screen v36、Print/PDF v37
+consumer contracts 的唯一全局闭包。`paper-2026-i` 的 scoped successor 是
+[`standards/paper-canonical/manifest-v44.json`](../../standards/paper-canonical/manifest-v44.json)：
+它只绑定该卷 immutable v3 Publication 及其同一份 source 所派生的 Screen、
+Student/Teacher Print HTML/PDF；不推进或替代全局 accepted v36 authority。这里不复制
+卷型题号、分值、题组 cardinality、清洗条件或字体/物理排版数值，也不能被 caller
+当作第二套配置。
 
 机器 manifest 分别绑定 Core Invariants、NCK1 / Zhejiang legacy / national
 legacy Profiles、各 family contract、Normalization Rules、Source Adapters、

@@ -897,6 +897,61 @@ function ticket35WritingSourceText(paperAsset) {
   return { notice, starters }
 }
 
+// The list page takes the batch readiness path.  A zero-question Writing
+// group makes the identity boundary observable: without a valid immutable
+// asset it must retain the same fail-closed "no questions" result as the
+// single-group path, rather than borrowing a same-named group from a
+// directory whose contained Paper Asset names another paper.
+async function assertTicket35BatchAssetIdentity({ rootDir, paperAsset }) {
+  const mismatchedAssetsRoot = path.join(rootDir, 'ticket-35-batch-paper-id-mismatch')
+  const directoryPaperId = paperAsset.paper.paperId
+  const groupId = 'group-2026-i-writing-application'
+  const mismatchedAsset = structuredClone(paperAsset)
+  mismatchedAsset.paper.paperId = 'paper-2026-i-conflicting-asset'
+  const assetPath = path.join(
+    mismatchedAssetsRoot,
+    directoryPaperId,
+    'paper-asset.json',
+  )
+  mkdirSync(path.dirname(assetPath), { recursive: true })
+  const mismatchedAssetBytes = `${stableStringify(mismatchedAsset)}\n`
+  writeFileSync(assetPath, mismatchedAssetBytes)
+
+  const previousPaperAssetsRoot = process.env.QUESTION_BANK_PAPER_ASSET_ROOT
+  process.env.QUESTION_BANK_PAPER_ASSET_ROOT = mismatchedAssetsRoot
+  try {
+    const { getPrintReadyByGroupId, isGroupPrintReady } = await import('../server/api.mjs')
+    const bankDb = new DatabaseSync(path.resolve('data/question-bank.sqlite'), {
+      readOnly: true,
+    })
+    try {
+      const single = isGroupPrintReady(bankDb, groupId)
+      const batch = getPrintReadyByGroupId(bankDb, [groupId]).get(groupId)
+      assert.deepEqual(
+        single,
+        { ok: false, reason: '题组没有小题' },
+        'a directory/asset identity conflict gives the single path no immutable Writing source',
+      )
+      assert.deepEqual(
+        batch,
+        single,
+        'the batch path rejects a directory/asset identity conflict before projecting a Writing group',
+      )
+      assert.equal(
+        readFileSync(assetPath, 'utf8'),
+        mismatchedAssetBytes,
+        'batch identity rejection mutates no mismatched source asset',
+      )
+    } finally {
+      bankDb.close()
+    }
+  } finally {
+    if (previousPaperAssetsRoot === undefined) delete process.env.QUESTION_BANK_PAPER_ASSET_ROOT
+    else process.env.QUESTION_BANK_PAPER_ASSET_ROOT = previousPaperAssetsRoot
+    rmSync(mismatchedAssetsRoot, { recursive: true, force: true })
+  }
+}
+
 async function assertTicket35Screen(page, paperAsset, outputDir) {
   const { notice, starters } = ticket35WritingSourceText(paperAsset)
   const observation = await page.evaluate(({ noticeText, starterLines }) => {
@@ -940,7 +995,15 @@ async function assertTicket35Screen(page, paperAsset, outputDir) {
       publicProvenanceAttributes: [...document.querySelectorAll(
         '[data-canonical-media-sha256], [data-canonical-source-artifact-id]',
       )].map((node) => node.getAttributeNames().filter((name) => name.startsWith('data-canonical-'))),
+      grammarRhythm: grammarBlank?.getAttribute('data-canonical-grammar-fill-rhythm') || null,
+      grammarRuleWidth: grammarBlank
+        ? getComputedStyle(grammarBlank).getPropertyValue('--ps-paper-blank-rule-width').trim()
+        : null,
+      grammarRuleAlignItems: grammarBlank
+        ? getComputedStyle(grammarBlank).getPropertyValue('--ps-paper-blank-rule-align-items').trim()
+        : null,
       grammarBorder: grammarBlank ? getComputedStyle(grammarBlank).borderBottomWidth : null,
+      grammarAlignItems: grammarBlank ? getComputedStyle(grammarBlank).alignItems : null,
       grammarPseudo: grammarBlank ? getComputedStyle(grammarBlank, '::after').content : null,
       clozeNumberOffset: clozeRow && clozeNumber
         ? clozeNumber.getBoundingClientRect().left - clozeRow.getBoundingClientRect().left
@@ -968,7 +1031,11 @@ async function assertTicket35Screen(page, paperAsset, outputDir) {
   )
   assert.deepEqual(observation.figureCaptions, [], 'v3 Screen hides internal figure provenance captions')
   assert.deepEqual(observation.publicProvenanceAttributes, [], 'v3 Screen emits no public provenance attributes')
+  assert.equal(observation.grammarRhythm, 'grammar-fill-rhythm-v7', 'v3 Screen derives Grammar Fill from the digest-bound v44/v7 authority')
+  assert.equal(observation.grammarRuleWidth, '1px', 'v3 Screen receives the v7 rule thickness through its rendered blank')
+  assert.equal(observation.grammarRuleAlignItems, 'flex-end', 'v3 Screen receives the v7 blank-bottom relation through its rendered blank')
   assert.equal(observation.grammarBorder, '1px', 'v3 Screen uses the shared inline blank rule for Grammar Fill')
+  assert.equal(observation.grammarAlignItems, 'flex-end', 'v3 Screen consumes the authority-derived blank-bottom alignment in CSS')
   assert.equal(observation.grammarPseudo, 'none', 'v3 Screen has no independent Grammar Fill rule lift')
   assert.equal(Math.abs(observation.clozeNumberOffset) <= 0.5, true, 'v3 Screen starts Cloze question labels at the passage boundary')
   assert.equal(Math.abs(observation.clozeNumberToPassageContinuationOffset) <= 0.5, true, 'v3 Screen aligns the Cloze qnum box with the passage continuation boundary')
@@ -1055,6 +1122,17 @@ async function assertTicket35CompletePublication({ rootDir }) {
     const screenConsumption = runtime.load({ paperId: fixture.source.paperId, consumerId: 'screen' })
     assert.equal(screenConsumption.disposition, 'ready')
     assert.equal(screenConsumption.sourceAssetVersion, 3)
+    assert.equal(screenConsumption.authorityRef?.manifestVersion, '44')
+    const grammarFillScreenSurface = buildCanonicalConsumptionSurfaceData({
+      consumption: screenConsumption,
+      familyContractId: 'grammar-fill',
+      groupId: 'group-2026-i-grammar-fill',
+    })
+    assert.equal(
+      grammarFillScreenSurface.surfaceData.grammarFillScreenRuling?.rhythmSchemaVersion,
+      'grammar-fill-rhythm-v7',
+      'the v44 Screen surface derives its rule from the exact bound v7 authority before PaperSurface receives it',
+    )
     await assertActualPaperBrowseBoundary({
       readyConsumption: screenConsumption,
       browserAssetSource: paperAsset,
@@ -1067,6 +1145,8 @@ async function assertTicket35CompletePublication({ rootDir }) {
   } finally {
     fixtureDb.close()
   }
+
+  await assertTicket35BatchAssetIdentity({ rootDir, paperAsset })
 
   await withActualDraftApi({
     fixtureRoot: path.join(rootDir, 'ticket-35-v3-http'),

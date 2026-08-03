@@ -34,6 +34,6 @@ Replaces old Ticket 78.
 
 ## Result
 
-Commit: candidate branch `codex/ticket-35-owner-qa-fixes-20260803` (exact tip recorded in the implementation handoff)
-Verify: affected public Screen plus complete immutable Publication v3 Student/Teacher Print HTML/PDF; focused writing, grammar geometry, canonical consumption, import-pilot, and frontend build checks pass.
+Commit: candidate branch `codex/ticket-35-owner-qa-fixes-20260803`; this bounded fix round follows focused review of `84270979707d92dff106bc7076655f50f07b54a6` (exact new tip is recorded in the implementation handoff).
+Verify: affected public Screen now consumes the exact v44/v7 Grammar Fill ruling; complete immutable Publication v3 Student/Teacher Print HTML/PDF, batch paper-identity fail-closed, writing, grammar geometry, canonical consumption, import-pilot, and frontend build checks pass.
 Notes: Fix candidate; focused re-review pending in the existing review lineage. Owner QA remains FAIL pending focused re-review and owner re-QA of this candidate.
