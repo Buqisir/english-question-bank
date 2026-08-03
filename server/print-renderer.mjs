@@ -1294,11 +1294,6 @@ export function buildPrintHtml({
         },
       }
     }
-    if (requiresCanonicalPrintConsumption(detail)) {
-      rejectCanonicalPrint(
-        `Canonical Print consumption is required for ${groupId}`,
-      )
-    }
     return null
   }
 

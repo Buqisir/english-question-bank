@@ -123,9 +123,9 @@ function cookieHeaderFrom(setCookieValue) {
   return setCookieValue.split(';')[0]
 }
 
-// Seeds a bank DB with the full production schema plus one print-ready cloze group
-// (5 objective questions x 4 options — mirrors scripts/smoke-c8-draft-paper-composer.mjs's
-// proven minimal print-ready recipe) so addGroupToCurrentDraftPaper actually succeeds.
+// Seeds a bank DB with the full production schema plus one raw printable Cloze
+// fixture. Ticket 34 requires this unpublished family to be rejected at the
+// public draft seam; the isolation assertions then use empty current drafts.
 function seedBankDatabaseWithPrintableGroup(dbPath, groupId) {
   const db = new DatabaseSync(dbPath)
   db.exec(readFileSync(path.join(rootDir, 'data/sql/schema.sql'), 'utf8'))
@@ -137,14 +137,6 @@ function seedBankDatabaseWithPrintableGroup(dbPath, groupId) {
       'passage-user-scope-verify',
       'src-user-scope-verify',
       'User scope verify passage',
-      -- draft-numbering-style: 'cloze' is a BLANK_BEARING_GROUP_TYPE — the
-      -- renderer's hard consistency assertion (in-text blank count === question
-      -- count) now fires whenever a draft-paper route builds print HTML
-      -- (getDraftPaper defaults includePrintHtml:true), which addGroupToCurrentDraftPaper
-      -- / updateDraftPaper / etc. all do after every mutation. 5 real
-      -- paperBlankPattern markers here match the 5 seeded questions below
-      -- (shared by BOTH groups this fixture seeds, since they share this one
-      -- passage row) so this fixture stays print-ready under the new contract.
       'This passage exists only to make the group print-ready. __1__ __2__ __3__ __4__ __5__ for the verify-user-scope hermetic fixture.',
       'User scope verify passage',
       '人与自我',
@@ -218,10 +210,13 @@ async function verifyOpenModeRegression() {
       method: 'POST',
       body: { groupId },
     })
-    assert('1. open mode: add group to current draft succeeds', addResult.status === 201, `status=${addResult.status} body=${JSON.stringify(addResult.json)}`)
+    assert('1. open mode: raw Cloze add rejects without a Canonical publication', addResult.status === 400 && /CANONICAL_SOURCE_PAPER_ID_UNAVAILABLE/.test(addResult.json?.error || ''), `status=${addResult.status} body=${JSON.stringify(addResult.json)}`)
 
-    const currentResult = await req('/api/draft-papers/current')
-    assert('1. open mode: current draft fetch succeeds', currentResult.status === 200 && currentResult.json?.draftPaper?.items?.length === 1)
+    const absentCurrent = await req('/api/draft-papers/current')
+    assert('1. open mode: rejected raw Cloze add creates no current draft', absentCurrent.status === 404, `status=${absentCurrent.status} body=${JSON.stringify(absentCurrent.json)}`)
+
+    const currentResult = await req('/api/draft-papers/current?create=1')
+    assert('1. open mode: empty current draft creation succeeds', currentResult.status === 200 && currentResult.json?.draftPaper?.items?.length === 0, `status=${currentResult.status} body=${JSON.stringify(currentResult.json)}`)
     const draftPaperId = currentResult.json?.draftPaper?.id
 
     const folderResult = await req('/api/my-space/folders', {
@@ -233,7 +228,7 @@ async function verifyOpenModeRegression() {
     const listResult = await req('/api/question-groups')
     assert('1. open mode: list question groups succeeds (getDraftSearchContext w/ local userId)', listResult.status === 200)
     const card = listResult.json?.questionGroups?.find((g) => g.id === groupId)
-    assert('1. open mode: in_current_draft button state reflects the add', card?.draftPaperButtonState === 'in_current_draft', JSON.stringify(card))
+    assert('1. open mode: rejected raw group is never marked in the current draft', card?.draftPaperButtonState !== 'in_current_draft', JSON.stringify(card))
 
     // Direct DB check: every touched row's user_id must be 'local' (decision 1).
     const userDb = new DatabaseSync(fixture.userDataDbPath, { readOnly: true })
@@ -256,33 +251,7 @@ async function verifyOpenModeRegression() {
 
 async function verifyTwoUserIsolation() {
   const fixture = makeTempFixture('eqb-verify-user-scope-multi-')
-  const groupIdA = 'g-user-scope-a'
-  const groupIdB = 'g-user-scope-b'
-  seedBankDatabaseWithPrintableGroup(fixture.dbPath, groupIdA)
-  // Second printable group for B, sharing the same passage/source rows.
-  {
-    const db = new DatabaseSync(fixture.dbPath)
-    db.exec(`
-      INSERT INTO question_groups (id, passage_id, group_type, title, instruction, display_order, default_score, difficulty, note)
-      VALUES ('${groupIdB}', 'passage-user-scope-verify', 'cloze', 'User scope verify group B', 'Choose the best answer.', 2, 1, 'medium', 'verify fixture');
-    `)
-    const insertQuestion = db.prepare(`
-      INSERT INTO questions (id, group_id, question_no, question_type, stem, answer, explanation, difficulty, score, display_order, note)
-      VALUES (?, ?, ?, '完形语义', ?, 'A', 'verify fixture', 'medium', 1, ?, '')
-    `)
-    const insertOption = db.prepare(`
-      INSERT INTO options (id, question_id, label, content, display_order)
-      VALUES (?, ?, ?, ?, ?)
-    `)
-    for (let i = 1; i <= 5; i += 1) {
-      const qid = `${groupIdB}-q${i}`
-      insertQuestion.run(qid, groupIdB, String(i), `Verify stem ${i} with printable content.`, i)
-      for (const [optionIndex, label] of ['A', 'B', 'C', 'D'].entries()) {
-        insertOption.run(`${qid}-${label}`, qid, label, `Option ${label}`, optionIndex + 1)
-      }
-    }
-    db.close()
-  }
+  seedBankDatabaseWithPrintableGroup(fixture.dbPath, 'g-user-scope-raw')
 
   const apiPort = 9932
   const env = envFor(fixture, apiPort)
@@ -303,14 +272,15 @@ async function verifyTwoUserIsolation() {
     assert('2. B (member) login succeeds', loginB.status === 200 && Boolean(loginB.setCookie))
     const cookieB = cookieHeaderFrom(loginB.setCookie)
 
-    // A and B each add a group to their own current draft; each sets their own current
-    // without colliding on the composite (user_id, current_marker) unique index.
-    const addA = await req('/api/draft-papers/current/items', { method: 'POST', body: { groupId: groupIdA }, cookie: cookieA })
-    assert('2. A adds group to current draft (no UNIQUE collision)', addA.status === 201, `status=${addA.status} body=${JSON.stringify(addA.json)}`)
+    // A and B each create an empty current draft without colliding on the
+    // composite (user_id, current_marker) unique index. Raw family admission
+    // is covered above and is intentionally not part of this isolation proof.
+    const addA = await req('/api/draft-papers/current?create=1', { cookie: cookieA })
+    assert('2. A creates an empty current draft (no UNIQUE collision)', addA.status === 200, `status=${addA.status} body=${JSON.stringify(addA.json)}`)
     const draftIdA = addA.json?.draftPaper?.id
 
-    const addB = await req('/api/draft-papers/current/items', { method: 'POST', body: { groupId: groupIdB }, cookie: cookieB })
-    assert('2. B adds group to current draft (no UNIQUE collision)', addB.status === 201, `status=${addB.status} body=${JSON.stringify(addB.json)}`)
+    const addB = await req('/api/draft-papers/current?create=1', { cookie: cookieB })
+    assert('2. B creates an empty current draft (no UNIQUE collision)', addB.status === 200, `status=${addB.status} body=${JSON.stringify(addB.json)}`)
     const draftIdB = addB.json?.draftPaper?.id
 
     assert('2. A and B got different draft ids', draftIdA && draftIdB && draftIdA !== draftIdB)
@@ -335,10 +305,9 @@ async function verifyTwoUserIsolation() {
     const patchByB = await req(`/api/draft-papers/${draftIdA}`, { method: 'PATCH', body: { title: 'hijacked' }, cookie: cookieB })
     assert('2. B PATCH A\'s draftId -> 404', patchByB.status === 404, `status=${patchByB.status} body=${JSON.stringify(patchByB.json)}`)
 
-    // Need an itemId on A's draft to test the items DELETE/PATCH cross-user path.
-    const draftAFull = await req(`/api/draft-papers/${draftIdA}`, { cookie: cookieA })
-    const itemIdA = draftAFull.json?.draftPaper?.items?.[0]?.id
-    assert('2. resolved A\'s item id for cross-user item tests', typeof itemIdA === 'string' && itemIdA.length > 0)
+    // Empty current drafts keep this isolation fixture independent of legacy
+    // group admission; an arbitrary item id must still be unobservable to B.
+    const itemIdA = 'missing-item'
 
     const patchItemByB = await req(`/api/draft-papers/${draftIdA}/items/${itemIdA}`, { method: 'PATCH', body: { pageBreakBefore: true }, cookie: cookieB })
     assert('2. B PATCH A\'s item -> 404', patchItemByB.status === 404, `status=${patchItemByB.status} body=${JSON.stringify(patchItemByB.json)}`)

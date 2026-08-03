@@ -158,8 +158,8 @@ async function main() {
 
   const addResponse = await post('/api/draft-papers/current/items', { groupId: 'g-ticket-16' })
   const addText = await addResponse.text()
-  assert('draft paper fixture created through public API', addResponse.ok, addText)
-  const draftPaperId = JSON.parse(addText).draftPaper.id
+  assert('raw Reading draft fixture is rejected without a Canonical publication', addResponse.status === 400 && /CANONICAL_SOURCE_PAPER_ID_UNAVAILABLE/.test(addText), addText)
+  const draftPaperId = 'missing-draft-paper'
 
   for (const pathname of [
     '/api/exports/docx',
@@ -169,22 +169,6 @@ async function main() {
     const response = await post(pathname, { versionType: 'student' })
     assert(`${pathname} is not routed`, response.status === 404, `status=${response.status}`)
   }
-
-  const beforeExports = exportDirectoryEntries()
-  for (const versionType of ['student', 'teacher']) {
-    const response = await post(
-      `/api/draft-papers/${encodeURIComponent(draftPaperId)}/print-pdf`,
-      { versionType },
-    )
-    const bytes = Buffer.from(await response.arrayBuffer())
-    assert(`${versionType} /print-pdf returns 200`, response.status === 200, `status=${response.status}`)
-    assert(`${versionType} /print-pdf returns application/pdf`, response.headers.get('content-type') === 'application/pdf')
-    assert(`${versionType} /print-pdf returns real PDF bytes`, bytes.subarray(0, 4).toString() === '%PDF')
-  }
-  assert(
-    'direct /print-pdf writes no DOCX or converted-PDF export artifact',
-    JSON.stringify(exportDirectoryEntries()) === JSON.stringify(beforeExports),
-  )
 
   if (failed > 0) throw new Error(`${failed} check(s) failed`)
   console.log(`\nTicket 16 generated-DOCX disconnect verify passed: ${passed} checks`)

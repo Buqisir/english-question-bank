@@ -1034,6 +1034,26 @@ export function createDraftPaperStore({
     rows.forEach((row, index) => update.run(index + 1, row.id))
   }
 
+  // Canonical Paper is the only active source for printable families.  Resolve
+  // the whole prospective draft before its first write so an unavailable,
+  // corrupt, wrong-family, or legacy-only group cannot leave a newly-created
+  // draft or an inserted item behind when the public route rejects it.
+  function assertCanonicalDraftAddition(userDb, draftPaperId, groupId) {
+    if (!resolveCanonicalConsumption) return
+    const groupIds = draftPaperId
+      ? userDb
+        .prepare('SELECT group_id FROM draft_paper_items WHERE draft_paper_id = ? ORDER BY order_index ASC, created_at ASC')
+        .all(draftPaperId)
+        .map((item) => item.group_id)
+      : []
+    const items = [...groupIds, groupId].map((candidateGroupId) => {
+      const detail = getQuestionGroupDetail(candidateGroupId)
+      if (!detail) throw new Error(`questionGroupId not found: ${candidateGroupId}`)
+      return { detail }
+    })
+    resolveCanonicalConsumption({ consumerId: 'print_pdf', items })
+  }
+
   // Write-side guard preserved (plan.md decision 8): adding a group that no longer
   // exists in the bank still throws. Orphan tolerance only applies to the read side
   // (a group already in a draft that later disappears from the bank).
@@ -1056,6 +1076,7 @@ export function createDraftPaperStore({
       .prepare('SELECT id FROM draft_paper_items WHERE draft_paper_id = ? AND group_id = ?')
       .get(draftPaperId, groupId)
     if (existing) return existing.id
+    assertCanonicalDraftAddition(userDb, draftPaperId, groupId)
     const count = userDb
       .prepare('SELECT COUNT(*) AS count FROM draft_paper_items WHERE draft_paper_id = ?')
       .get(draftPaperId)?.count || 0
@@ -1102,7 +1123,11 @@ export function createDraftPaperStore({
     const userDb = openUserDatabase({ readOnly: false })
     const bankDb = openDatabase()
     try {
-      let current
+      let current = getCurrentDraftPaperRow(userDb, userId)
+      // `createDraftPaper` may add old-shape SQLite columns. Reject a raw
+      // active-family input before that transaction begins, so a rollback
+      // cannot leave its schema-presence cache out of sync with the database.
+      if (!current) assertCanonicalDraftAddition(userDb, null, groupId)
       userDb.exec('BEGIN')
       try {
         current = getCurrentDraftPaperRow(userDb, userId)

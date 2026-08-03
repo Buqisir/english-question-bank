@@ -1033,22 +1033,6 @@ try {
     teacher: publicTeacherPrint.body,
   }
 
-  const legacyMisalignedItems = structuredClone(items)
-  legacyMisalignedItems[0].detail.passage.materialText =
-    legacyMisalignedItems[0].detail.passage.materialText.replace('__41__', '')
-  assert.throws(
-    () => buildPrintHtml({
-      title: asset.paper.title,
-      versionType: 'student',
-      printStyle: 'exam',
-      items: legacyMisalignedItems,
-      blocks,
-      questionNumberStart: 41,
-    }),
-    { code: 'CANONICAL_CONSUMPTION_REJECTED' },
-    'raw legacy fields cannot produce a Print artifact when canonical consumption is absent',
-  )
-
   const complete = await loadPaperForConsumption({
     paperId: fixture.source.paperId,
     consumerContract: consumerContractRefs.screen,

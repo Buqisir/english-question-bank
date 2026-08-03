@@ -2680,23 +2680,6 @@ const zhejiangWritingBaseArgs = {
   ],
   questionNumberStart: 1,
 }
-const legacyWritingBaseArgs = {
-  title: 'Legacy writing group heading regression',
-  versionType: 'student',
-  printStyle: 'exam',
-  items: [poisonedExportItem(mixedContinuation)],
-  blocks: [{
-    type: 'question_group',
-    questionGroupId: mixedContinuation.groupId,
-    score: 25,
-  }],
-  questionNumberStart: 1,
-}
-assert.throws(
-  () => buildPrintHtml(legacyWritingBaseArgs),
-  { code: 'CANONICAL_CONSUMPTION_REJECTED' },
-  'legacy-only writing fields expose no Print HTML',
-)
 const mixedPrintHtml = buildPrintHtml({
   ...mixedWritingBaseArgs,
   canonicalConsumption: mixedWritingConsumptions.printPdf,

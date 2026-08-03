@@ -1320,13 +1320,13 @@ function assertSevenChoicesReferenceEvidence() {
   )
   assert.equal(
     consumerContractRefs.screen.version,
-    '36',
-    'Screen v36 binds the complete geometry authority closure',
+    '37',
+    'Screen v37 binds the complete geometry authority closure',
   )
   assert.equal(
     consumerContractRefs.print_pdf.version,
-    '37',
-    'Print/PDF v37 binds the complete geometry authority closure',
+    '38',
+    'Print/PDF v38 binds the complete geometry authority closure',
   )
   assert.equal(
     sha256(preservedBytes),
