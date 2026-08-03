@@ -1872,6 +1872,7 @@ export function getQuestionGroupDetail(id) {
       sevenChoicesParseResult,
     }
     const paperAssetMatch = findPaperAssetGroup(id)
+    if (paperAssetMatch?.identityConflict) return null
     if (paperAssetMatch) {
       return applyPaperAssetToQuestionGroupDetail(baseDetail, paperAssetMatch.asset, paperAssetMatch.group, questions)
     }

@@ -969,6 +969,21 @@ async function assertTicket35BatchAssetIdentity({
       ).all(draftPaperId)
       before.close()
 
+      const detailResponse = await fetchPublic(
+        `${baseUrl}/api/question-groups/${groupId}`,
+      )
+      const detail = await readHttpResponse(detailResponse)
+      assert.equal(
+        detailResponse.status,
+        404,
+        'public question-group detail fails closed instead of projecting a conflicting Cloze asset',
+      )
+      assert.equal(
+        detail.json?.error,
+        'Question group not found',
+        'conflicting Cloze detail exposes no partial canonical projection',
+      )
+
       const addResponse = await fetchPublic(
         `${baseUrl}/api/draft-papers/current/items`,
         {

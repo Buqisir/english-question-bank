@@ -13,8 +13,8 @@
  *    seven-choices) against real tracked paper-zj-2026-jan analysis JSON —
  *    each produces non-empty, ≤600-char Chinese text; writing groups are
  *    excluded (no lookup attempted).
- * 3. findPaperAssetGroup contract regression: still returns { asset, group }
- *    for its two existing call sites, plus additive paperId field.
+ * 3. findPaperAssetGroup contract regression: valid matches retain { asset,
+ *    group, paperId }; identity conflicts fail closed before detail projection.
  * 4. Missing-analysis paper (no writing-analysis-v1.json, e.g. paper-2024-jia
  *    per the plan) does not throat/crash the loader.
  */
@@ -256,8 +256,8 @@ assert(
   /getPaperAssetPrintReady\(paperAssetMatch\.asset, paperAssetMatch\.group\)/.test(apiSource),
 )
 assert(
-  'existing question-group-detail call site still destructures asset/group only (untouched)',
-  /applyPaperAssetToQuestionGroupDetail\(baseDetail, paperAssetMatch\.asset, paperAssetMatch\.group, questions\)/.test(apiSource),
+  'question-group detail fails closed for identity conflicts before projecting valid asset/group matches',
+  /const paperAssetMatch = findPaperAssetGroup\(id\)\s*if \(paperAssetMatch\?\.identityConflict\) return null\s*if \(paperAssetMatch\) \{\s*return applyPaperAssetToQuestionGroupDetail\(baseDetail, paperAssetMatch\.asset, paperAssetMatch\.group, questions\)/.test(apiSource),
 )
 assert(
   'paperAssetsDir now injected into draftPaperStore factory call',
