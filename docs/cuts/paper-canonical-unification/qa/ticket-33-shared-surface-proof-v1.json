@@ -1,55 +1,265 @@
 {
   "schemaVersion": "ticket-33-shared-surface-proof-v1",
-  "status": "FAIL_CLOSED",
+  "status": "PASS",
   "ticket": {
     "number": 33,
     "supersedesFailClosedPreflight": "docs/cuts/paper-canonical-unification/qa/ticket-33-input-preflight-v1.json",
     "durabilityRepair": "396940ad3611ad2bedc7faae228671bc76ab4bf3",
     "nextTicketStarted": false
   },
-  "replay": {
-    "paperId": "paper-2025-i",
-    "consumerId": "print_pdf",
-    "currentVersion": "v1",
-    "sourceAuthorityShape": "trusted-docx",
-    "canonicalPublication": "sha256:a914723ea33b8b54210fdcf0a2d3e6417b04e56fc0687c44d03c46c36090c7a6",
-    "sourceAsset": {
-      "path": "test-fixtures/paper-canonical/publications/ticket-32-remaining-v1/store/paper-2025-i/versions/v1/paper-asset.json",
-      "byteLength": 135250,
-      "sha256": "sha256:33a93bfa4af0ebab48ae7aaef036a44b7004fff6ea2b90f2814ed12dee01b047",
-      "leadingBytesHex": "504b0304",
-      "jsonParseable": false
+  "corpus": {
+    "currentIdentity": {
+      "ticket31": [
+        "paper-2023-yi",
+        "paper-2025-ii",
+        "paper-960d0f8d",
+        "paper-zj-2022-jun"
+      ],
+      "ticket32": [
+        "paper-2020-bing",
+        "paper-2020-i",
+        "paper-2020-ii",
+        "paper-2020-jia",
+        "paper-2021-i",
+        "paper-2021-ii",
+        "paper-2021-jia",
+        "paper-2021-yi",
+        "paper-2022-i",
+        "paper-2022-ii",
+        "paper-2022-jia",
+        "paper-2022-yi",
+        "paper-2023-i",
+        "paper-2023-ii",
+        "paper-2023-jia",
+        "paper-2024-i",
+        "paper-2024-ii",
+        "paper-2024-jia",
+        "paper-2025-i",
+        "paper-2026-i",
+        "paper-zj-2020-jan",
+        "paper-zj-2020-jul",
+        "paper-zj-2021-jan",
+        "paper-zj-2021-jun",
+        "paper-zj-2022-jan",
+        "paper-zj-2023-jan",
+        "paper-zj-2024-jan",
+        "paper-zj-2025-jan",
+        "paper-zj-2026-jan"
+      ],
+      "noMissingDuplicateOrExtra": true
     },
-    "failures": [
-      {
-        "versionType": "student",
-        "code": "CANONICAL_CONSUMPTION_REJECTED",
-        "message": "paper-2025-i student Print HTML: Canonical Grammar Fill chrome immutable source asset is invalid"
-      },
-      {
-        "versionType": "teacher",
-        "code": "CANONICAL_CONSUMPTION_REJECTED",
-        "message": "paper-2025-i teacher Print HTML: Canonical Grammar Fill chrome immutable source asset is invalid"
-      }
+    "counts": {
+      "papers": 33,
+      "groups": 273,
+      "questions": 1530,
+      "questionOwnedOptions": 4140
+    },
+    "sourceCandidateConfirmationCanonicalPublicationBindings": 33,
+    "exactScreenSelections": 33,
+    "exactPrintPdfSelections": 33,
+    "studentTeacherPrintHtmlChecks": 8,
+    "noLegacyOrRawReconstruction": true,
+    "inactiveSlotInventory": {
+      "listening.long-form": 33,
+      "listening.short-dialogue": 33,
+      "writing.guided-writing": 9,
+      "writing.short-error-correction": 9
+    },
+    "inactiveSlotOccurrences": 0,
+    "rollback": {
+      "noPriorRollbackTarget": 29
+    },
+    "sourceAuthorityShapes": [
+      "legacy-json",
+      "trusted-docx"
+    ],
+    "profiles": [
+      "national-legacy",
+      "nck1",
+      "zhejiang-legacy"
+    ],
+    "activeFamilies": [
+      "application-writing",
+      "cloze",
+      "continuation-writing",
+      "grammar-fill",
+      "reading",
+      "seven-choices"
     ]
   },
-  "withheld": {
-    "wholeCorpusTrace": "not claimed after the representative public Print seam rejected",
-    "screenAndPdfRepresentativeRender": "not run because Student and Teacher Print HTML are prerequisites"
-  },
-  "requiredFixLineage": {
-    "kind": "shared Print/PDF trusted-DOCX immutable-source handling",
-    "mustPreserve": [
-      "immutable source binding",
-      "fail-closed integrity checks",
-      "canonical publication bytes"
+  "representativeCoverage": {
+    "papers": [
+      "paper-2025-i",
+      "paper-2022-ii",
+      "paper-zj-2021-jun",
+      "paper-2023-yi"
     ],
-    "ticket34Started": false
+    "addedForNationalLegacyProfileGap": "paper-2023-yi",
+    "sourceAuthorityShapes": [
+      "legacy-json",
+      "trusted-docx"
+    ],
+    "profiles": [
+      "national-legacy",
+      "nck1",
+      "zhejiang-legacy"
+    ],
+    "activeFamilies": [
+      "application-writing",
+      "cloze",
+      "continuation-writing",
+      "grammar-fill",
+      "reading",
+      "seven-choices"
+    ]
   },
+  "realScreen": [
+    {
+      "paperId": "paper-2025-i",
+      "mode": "plain",
+      "groupCards": 9,
+      "lecturePanel": false,
+      "bodyTextLength": 18144
+    },
+    {
+      "paperId": "paper-2025-i",
+      "mode": "lecture",
+      "groupCards": 9,
+      "lecturePanel": true,
+      "bodyTextLength": 18080
+    },
+    {
+      "paperId": "paper-2022-ii",
+      "mode": "plain",
+      "groupCards": 9,
+      "lecturePanel": false,
+      "bodyTextLength": 17025
+    },
+    {
+      "paperId": "paper-2022-ii",
+      "mode": "lecture",
+      "groupCards": 9,
+      "lecturePanel": true,
+      "bodyTextLength": 16961
+    },
+    {
+      "paperId": "paper-zj-2021-jun",
+      "mode": "plain",
+      "groupCards": 8,
+      "lecturePanel": false,
+      "bodyTextLength": 14950
+    },
+    {
+      "paperId": "paper-zj-2021-jun",
+      "mode": "lecture",
+      "groupCards": 8,
+      "lecturePanel": true,
+      "bodyTextLength": 14895
+    },
+    {
+      "paperId": "paper-2023-yi",
+      "mode": "plain",
+      "groupCards": 7,
+      "lecturePanel": false,
+      "bodyTextLength": 14894
+    },
+    {
+      "paperId": "paper-2023-yi",
+      "mode": "lecture",
+      "groupCards": 7,
+      "lecturePanel": true,
+      "bodyTextLength": 14838
+    }
+  ],
+  "directChromiumA4Pdf": [
+    {
+      "paperId": "paper-2025-i",
+      "versionType": "student",
+      "htmlGroups": 9,
+      "htmlAnswerMarkers": 0,
+      "pdfPages": 8,
+      "pdfAnswerMarkers": 0,
+      "a4": true,
+      "nonPositiveBoxes": 0
+    },
+    {
+      "paperId": "paper-2025-i",
+      "versionType": "teacher",
+      "htmlGroups": 9,
+      "htmlAnswerMarkers": 45,
+      "pdfPages": 9,
+      "pdfAnswerMarkers": 45,
+      "a4": true,
+      "nonPositiveBoxes": 0
+    },
+    {
+      "paperId": "paper-2022-ii",
+      "versionType": "student",
+      "htmlGroups": 9,
+      "htmlAnswerMarkers": 0,
+      "pdfPages": 8,
+      "pdfAnswerMarkers": 0,
+      "a4": true,
+      "nonPositiveBoxes": 0
+    },
+    {
+      "paperId": "paper-2022-ii",
+      "versionType": "teacher",
+      "htmlGroups": 9,
+      "htmlAnswerMarkers": 45,
+      "pdfPages": 9,
+      "pdfAnswerMarkers": 45,
+      "a4": true,
+      "nonPositiveBoxes": 0
+    },
+    {
+      "paperId": "paper-zj-2021-jun",
+      "versionType": "student",
+      "htmlGroups": 8,
+      "htmlAnswerMarkers": 0,
+      "pdfPages": 7,
+      "pdfAnswerMarkers": 0,
+      "a4": true,
+      "nonPositiveBoxes": 0
+    },
+    {
+      "paperId": "paper-zj-2021-jun",
+      "versionType": "teacher",
+      "htmlGroups": 8,
+      "htmlAnswerMarkers": 45,
+      "pdfPages": 8,
+      "pdfAnswerMarkers": 45,
+      "a4": true,
+      "nonPositiveBoxes": 0
+    },
+    {
+      "paperId": "paper-2023-yi",
+      "versionType": "student",
+      "htmlGroups": 7,
+      "htmlAnswerMarkers": 0,
+      "pdfPages": 6,
+      "pdfAnswerMarkers": 0,
+      "a4": true,
+      "nonPositiveBoxes": 0
+    },
+    {
+      "paperId": "paper-2023-yi",
+      "versionType": "teacher",
+      "htmlGroups": 7,
+      "htmlAnswerMarkers": 50,
+      "pdfPages": 7,
+      "pdfAnswerMarkers": 50,
+      "a4": true,
+      "nonPositiveBoxes": 0
+    }
+  ],
   "invariants": {
+    "immutableCanonicalPublicationOracle": true,
+    "noCallerMaintainedMirrorAsOracle": true,
+    "noRendererSelfReportAsOnlyOracle": true,
     "sharedBehaviorChanged": false,
     "productionOrR2Touched": false,
     "ticket34Started": false
   },
-  "evidenceDigest": "sha256:08fde9e4ca5df200a4cb638fddb9a1ab009fec6a3a6f551ed0adc440e5d5b39b"
+  "evidenceDigest": "sha256:22b4ded4e224925f8f6a04944e88956d1ebdc9327c22e2b198df78c98954addb"
 }

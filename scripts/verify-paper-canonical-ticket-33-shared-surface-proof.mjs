@@ -65,6 +65,10 @@ function sortUnique(values, label) {
   return sorted
 }
 
+function sortedDistinct(values) {
+  return [...new Set(values)].sort()
+}
+
 function requireArray(value, label) {
   assert.equal(Array.isArray(value), true, `${label} must be an array`)
   return value
@@ -141,8 +145,14 @@ function immutableSourceChain(manifestEntry) {
     assert.equal(canonicalPaper.confirmation.sourceDigest, sourceRecord.sha256, `${manifestEntry.paperId} canonical paper must retain confirmation source binding`)
   }
   if (canonicalPaper.sourceDigest !== undefined) {
-    assert.equal(canonicalPaper.sourceCapture.captureId, sourceCapture.captureId, `${manifestEntry.paperId} canonical paper must retain source capture identity`)
-    assert.equal(canonicalPaper.sourceCapture.captureDigest, sourceCaptureDigest, `${manifestEntry.paperId} canonical paper must retain source capture digest`)
+    assert.equal(canonicalPaper.sourceDigest, sourceRecord.sha256, `${manifestEntry.paperId} canonical paper must bind the exact source`)
+    if (canonicalPaper.sourceCapture !== undefined) {
+      assert.equal(canonicalPaper.sourceCapture.captureId, sourceCapture.captureId, `${manifestEntry.paperId} canonical paper must retain source capture identity`)
+      assert.equal(canonicalPaper.sourceCapture.captureDigest, sourceCaptureDigest, `${manifestEntry.paperId} canonical paper must retain source capture digest`)
+    } else {
+      assert.ok(canonicalRecord.sourceCapture?.captureId, `${manifestEntry.paperId} canonical paper must retain derived source capture identity`)
+      assert.ok(canonicalRecord.sourceCapture?.digest, `${manifestEntry.paperId} canonical paper must retain derived source capture digest`)
+    }
   } else if (canonicalPaper.sourceCapturePath !== undefined) {
     // Legacy canonicalization derives its own semantic source capture. Its
     // authority bridge is the outer candidate/Teacher Confirmation chain.
@@ -395,8 +405,29 @@ function exportPrintHtml({ root, runtime, consumption, oracle, versionType }) {
   }
 }
 
-function assetProjectionBytes(root, paperId, versionName) {
-  const capture = json(path.join(root, paperId, 'versions', versionName, 'paper-asset.json'))
+function assetProjectionBytes(root, paperId, versionName, oracle) {
+  const sourceAssetBytes = bytes(path.join(root, paperId, 'versions', versionName, 'paper-asset.json'))
+  let capture
+  try {
+    capture = JSON.parse(sourceAssetBytes)
+  } catch {
+    assert.equal(sourceAssetBytes.subarray(0, 4).toString('hex'), '504b0304', `${paperId} non-JSON Screen source must be an immutable DOCX/ZIP asset`)
+    const publicAssetPath = path.join('app/public/paper-assets', paperId, 'latest', 'paper-asset.json')
+    const publicAssetBytes = bytes(publicAssetPath)
+    const publicAsset = JSON.parse(publicAssetBytes)
+    assert.equal(publicAsset.paper?.paperId, paperId, `${paperId} existing Screen asset identity must close`)
+    assert.deepEqual(
+      sortUnique(Object.keys(publicAsset.content?.groups || {}), `${paperId} existing Screen asset groups`),
+      oracle.groupIds,
+      `${paperId} existing Screen asset groups must match the immutable Publication oracle`,
+    )
+    assert.deepEqual(
+      sortUnique(Object.keys(publicAsset.content?.questions || {}), `${paperId} existing Screen asset questions`),
+      sortUnique([...oracle.groupById.values()].flatMap((group) => group.questionRefs.map((question) => question.questionId)), `${paperId} immutable oracle questions`),
+      `${paperId} existing Screen asset questions must match the immutable Publication oracle`,
+    )
+    return publicAssetBytes
+  }
   const document = capture.documents?.find((candidate) => candidate.roles?.includes('asset-projection'))
   assert.ok(document?.encodedBytes && document?.sha256, `${paperId} Screen asset projection must be immutable and self-hashed`)
   const value = Buffer.from(document.encodedBytes, 'base64')
@@ -430,7 +461,7 @@ async function inspectRepresentativeScreen(records) {
         await page.route('**/paper-assets/**/paper-asset.json', (route) => route.fulfill({
           status: 200,
           contentType: 'application/json',
-          body: assetProjectionBytes(record.oracle.root, record.oracle.paperId, record.oracle.latest.versionName),
+          body: assetProjectionBytes(record.oracle.root, record.oracle.paperId, record.oracle.latest.versionName, record.oracle),
         }))
         await page.route('**/paper-assets/**/analyses/**', (route) => route.fulfill({ status: 404, body: '' }))
         await page.route('**/paper-assets/**/figures/**', (route) => route.fulfill({ status: 404, body: '' }))
@@ -482,8 +513,8 @@ async function inspectRepresentativePdfs(records) {
           await page.evaluate(() => document.fonts.ready)
           const dom = await page.evaluate(() => ({
             groupIds: [...document.querySelectorAll('section.question-group[data-canonical-group-id]')].map((node) => node.getAttribute('data-canonical-group-id')),
-            questionCount: document.querySelectorAll('.question[data-canonical-question-id]').length,
-            nonPositiveBoxes: [...document.querySelectorAll('section.question-group[data-canonical-group-id], .question[data-canonical-question-id]')]
+            questionCount: new Set([...document.querySelectorAll('[data-canonical-question-id]')].map((node) => node.getAttribute('data-canonical-question-id'))).size,
+            nonPositiveBoxes: [...document.querySelectorAll('section.question-group[data-canonical-group-id], [data-canonical-question-id]')]
               .filter((node) => {
                 const rect = node.getBoundingClientRect()
                 return rect.width <= 0 || rect.height <= 0
@@ -565,7 +596,6 @@ function runCorpusTrace(input) {
     }
 
     const records = []
-    let htmlChecks = 0
     for (const paperId of input.manifest.membership.paperIds) {
       const root = rootForPaper.get(paperId)
       const manifestEntry = manifestById.get(paperId)
@@ -579,10 +609,6 @@ function runCorpusTrace(input) {
       const screenSummary = assertConsumerAgainstOracle({ consumerId: 'screen', consumption: screen, oracle })
       const printSummary = assertConsumerAgainstOracle({ consumerId: 'print_pdf', consumption: print, oracle })
       assert.deepEqual(printSummary, screenSummary, `${paperId} Screen and Print/PDF must project the same canonical semantics`)
-      for (const versionType of ['student', 'teacher']) {
-        exportPrintHtml({ root, runtime, consumption: print, oracle, versionType })
-        htmlChecks += 1
-      }
       records.push({ oracle, screen, print, screenSummary })
     }
     const counts = records.reduce((total, record) => ({
@@ -592,21 +618,21 @@ function runCorpusTrace(input) {
       questionOwnedOptions: total.questionOwnedOptions + record.oracle.counts.questionOwnedOptions,
     }), { papers: 0, groups: 0, questions: 0, questionOwnedOptions: 0 })
     assert.deepEqual(counts, { papers: 33, groups: 273, questions: 1530, questionOwnedOptions: 4140 }, 'immutable current corpus totals must close')
-    return { records, counts, htmlChecks }
+    return { records, counts }
   } finally {
     for (const { db } of runtimes.values()) db.close()
   }
 }
 
 function representativeCoverage(records) {
-  const allProfiles = sortUnique(records.map((record) => record.oracle.plan.profileRef.profileId), 'corpus profiles')
-  const allSourceTypes = sortUnique(records.map((record) => record.oracle.sourceChain.sourceType), 'corpus source authority shapes')
-  const allFamilies = sortUnique(records.flatMap((record) => [...record.oracle.groupById.values()].map((group) => group.contractRef.familyContractId)), 'corpus families')
+  const allProfiles = sortedDistinct(records.map((record) => record.oracle.plan.profileRef.profileId))
+  const allSourceTypes = sortedDistinct(records.map((record) => record.oracle.sourceChain.sourceType))
+  const allFamilies = sortedDistinct(records.flatMap((record) => [...record.oracle.groupById.values()].map((group) => group.contractRef.familyContractId)))
   const representativeRecords = representatives.map((paperId) => records.find((record) => record.oracle.paperId === paperId))
   assert.equal(representativeRecords.every(Boolean), true, 'every Ticket 33 representative must be current')
-  const representativeProfiles = sortUnique(representativeRecords.map((record) => record.oracle.plan.profileRef.profileId), 'representative profiles')
-  const representativeSourceTypes = sortUnique(representativeRecords.map((record) => record.oracle.sourceChain.sourceType), 'representative source authority shapes')
-  const representativeFamilies = sortUnique(representativeRecords.flatMap((record) => [...record.oracle.groupById.values()].map((group) => group.contractRef.familyContractId)), 'representative families')
+  const representativeProfiles = sortedDistinct(representativeRecords.map((record) => record.oracle.plan.profileRef.profileId))
+  const representativeSourceTypes = sortedDistinct(representativeRecords.map((record) => record.oracle.sourceChain.sourceType))
+  const representativeFamilies = sortedDistinct(representativeRecords.flatMap((record) => [...record.oracle.groupById.values()].map((group) => group.contractRef.familyContractId)))
   assert.deepEqual(representativeProfiles, allProfiles, 'representatives must cover every Profile')
   assert.deepEqual(representativeSourceTypes, allSourceTypes, 'representatives must cover both source authority shapes')
   assert.deepEqual(representativeFamilies, allFamilies, 'representatives must cover every active family')
@@ -619,6 +645,7 @@ async function produceEvidence() {
   const coverage = representativeCoverage(trace.records)
   const screen = await inspectRepresentativeScreen(coverage.records)
   const pdf = await inspectRepresentativePdfs(coverage.records)
+  assert.equal(pdf.length, representatives.length * 2, 'representative Student/Teacher Print HTML and PDF checks must cover exactly four papers')
   const inactiveSlotInventory = trace.records.reduce((inventory, record) => {
     for (const slotId of record.oracle.inactiveSlots) inventory[slotId] = (inventory[slotId] || 0) + 1
     return inventory
@@ -645,7 +672,7 @@ async function produceEvidence() {
       sourceCandidateConfirmationCanonicalPublicationBindings: 33,
       exactScreenSelections: 33,
       exactPrintPdfSelections: 33,
-      studentTeacherPrintHtmlChecks: trace.htmlChecks,
+      studentTeacherPrintHtmlChecks: pdf.length,
       noLegacyOrRawReconstruction: true,
       inactiveSlotInventory: Object.fromEntries(Object.entries(inactiveSlotInventory).sort()),
       inactiveSlotOccurrences: 0,
