@@ -71,6 +71,7 @@ import {
 import { applicationWritingRhythm } from '../shared/paper-canonical/applicationWritingRhythm.mjs'
 import { continuationWritingRhythm } from '../shared/paper-canonical/continuationWritingRhythm.mjs'
 import {
+  hasGrammarFillPublicGeometryFixtureAuthority,
   resolveGrammarFillPublicGeometryFixture,
 } from '../shared/paper-canonical/grammarFillPublicGeometryFixtures.mjs'
 import { digestJson } from '../shared/paper-canonical/stable.mjs'
@@ -866,12 +867,6 @@ export function buildPrintHtml({
   const startNum = Number.isInteger(questionNumberStart) && questionNumberStart >= 1 ? questionNumberStart : 1
   const isExam = printStyle === 'exam'
   const isTeacher = versionType === 'teacher'
-  assertCanonicalGrammarFillSourceBinding({
-    canonicalConsumption,
-    grammarFillChrome,
-    items,
-    teacher: isTeacher,
-  })
   const hasCanonicalGrammarFill = canonicalConsumption?.selections?.some(
     (selection) => selection.familyContractId === 'grammar-fill'
       && selection.mode === 'canonical'
@@ -901,6 +896,22 @@ export function buildPrintHtml({
     )
     error.code = 'CANONICAL_GRAMMAR_FILL_GEOMETRY_FIXTURE_REJECTED'
     throw error
+  }
+  const hasBoundGrammarFillFixtureAuthority =
+    hasGrammarFillPublicGeometryFixtureAuthority(
+      canonicalConsumption,
+      grammarFillGeometrySurface,
+    )
+  if (
+    grammarFillGeometryVariantId == null
+    || hasBoundGrammarFillFixtureAuthority
+  ) {
+    assertCanonicalGrammarFillSourceBinding({
+      canonicalConsumption,
+      grammarFillChrome,
+      items,
+      teacher: isTeacher,
+    })
   }
   const grammarFillGeometryFixture =
     resolveGrammarFillPublicGeometryFixture(

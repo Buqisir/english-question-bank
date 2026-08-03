@@ -39,6 +39,23 @@ function fixtureBindingForConsumption(consumption) {
   ) || null
 }
 
+export function hasGrammarFillPublicGeometryFixtureAuthority(
+  consumption,
+  expectedSurface = null,
+) {
+  const binding = fixtureBindingForConsumption(consumption)
+  if (!binding || expectedSurface == null) return binding !== null
+  const expectedConsumerId = binding.fixtures.compatibleConsumptionPlan
+    .surfaceConsumerIds[expectedSurface]
+  const expectedConsumerContract = consumerContractRefs[expectedConsumerId]
+  return Boolean(
+    expectedConsumerContract
+    && consumption?.consumerContractRef?.id === expectedConsumerContract.id
+    && consumption.consumerContractRef?.version === expectedConsumerContract.version
+    && consumption.consumerContractRef?.digest === expectedConsumerContract.digest,
+  )
+}
+
 export function resolveGrammarFillPublicGeometryFixture(
   variantId,
   expectedSurface,

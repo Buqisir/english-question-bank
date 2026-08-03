@@ -12,10 +12,10 @@ function freezeObject(value) {
   return value
 }
 
-export const grammarFillRhythm = freezeObject(v7Contract)
+export const grammarFillRhythm = freezeObject(v5Contract)
 
 const paper2026IV43GrammarFillRhythm = freezeObject(v6Contract)
-const paper2026IV44GrammarFillRhythm = grammarFillRhythm
+const paper2026IV44GrammarFillRhythm = freezeObject(v7Contract)
 
 export function grammarFillRhythmForPaperAuthority({ paperId, manifestVersion }) {
   if (paperId === 'paper-2026-i' && Number(manifestVersion) === 44) {
@@ -24,5 +24,5 @@ export function grammarFillRhythmForPaperAuthority({ paperId, manifestVersion })
   if (paperId === 'paper-2026-i' && Number(manifestVersion) === 43) {
     return paper2026IV43GrammarFillRhythm
   }
-  return freezeObject(v5Contract)
+  return grammarFillRhythm
 }

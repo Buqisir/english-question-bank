@@ -20,6 +20,9 @@ const shortBlankRuling = Object.freeze({
 
 export function grammarFillBlankRulingForRhythm(rhythm) {
   const geometry = rhythm?.ruleVerticalGeometry
+  if (rhythm?.schemaVersion === 'grammar-fill-rhythm-v5') {
+    return shortBlankRuling
+  }
   if (geometry?.verticalAlignment !== 'blank-bottom') {
     throw new Error('Grammar Fill blank ruling requires a bound bottom-rule authority')
   }
