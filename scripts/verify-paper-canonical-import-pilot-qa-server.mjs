@@ -140,6 +140,15 @@ try {
   rmSync(repositoryRoot, { recursive: true, force: true })
 }
 
+// The retained-service probe below launches the complete visual import pilot.
+// Its gold locks macOS Songti/Heiti glyph metrics that Ubuntu cannot prove by
+// substituting another CJK face. The platform-neutral QA server assertions
+// above still ran; report the missing authority-font layer truthfully.
+if (process.platform !== 'darwin') {
+  console.log('SKIP canonical import visual pilot cleanup probe: macOS authority glyph faces unavailable')
+  process.exit(2)
+}
+
 const startupFailure = spawn(process.execPath, [
   'scripts/verify-paper-canonical-import-pilot.mjs',
   '--actual-artifacts',
