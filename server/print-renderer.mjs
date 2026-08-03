@@ -351,7 +351,9 @@ function assertCanonicalGrammarFillSourceBinding({
   }
   if (
     binding.paperId !== oracle.paperId
-    || binding.sourceAssetVersion !== oracle.sourceAssetVersion
+    || binding.sourceAssetVersion !== canonicalConsumption.sourceAssetVersion
+    || binding.sourceDigests?.paperAsset
+      !== `sha256:${oracle.sourceBindings.paperAsset.sha256}`
     || binding.groupId !== groupId
     || selection.groupIds.length !== 1
     || selection.groupIds[0] !== groupId
@@ -2683,6 +2685,7 @@ body {
   white-space: ${sharedInlineBlankRuling.whiteSpace};
   background: ${cssBackgroundForBlankRuling(sharedInlineBlankRuling)};
   text-align: ${sharedInlineBlankRuling.numberAlignment};
+  line-height: 1.05;
   vertical-align: baseline;
   margin: 0 0.15em;
   /* inline-block 会继承段落首行缩进并作用于自身首行，把题号推出横线（owner QA 实测撞字），必须归零 */
@@ -2694,6 +2697,7 @@ body {
 
 .print-blank-num {
   display: inline-block;
+  line-height: 1.05;
 }
 
 ${grammarFillGeometryFixtureCss}

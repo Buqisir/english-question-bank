@@ -9,6 +9,7 @@ import {
   trustedLegacyCaptureCandidateAuthorityRef,
   paper2026IPrintSuccessorCandidateAuthorityRef,
   paper2026ISuccessorCandidateAuthorityRef,
+  paper2026IOwnerQaContentSuccessorCandidateAuthorityRef,
 } from '../../shared/paper-canonical/authority.mjs'
 import {
   rederiveConfirmedCanonicalCandidate,
@@ -35,12 +36,15 @@ const paper2026IPrintSuccessorCorrectionPath =
   'docs/cuts/paper-canonical-unification/migration/paper-2026-i-successor-correction-v1.json'
 const paper2026ITicket35SuccessorCorrectionPath =
   'docs/cuts/paper-canonical-unification/migration/paper-2026-i-ticket-35-authority-successor-v1.json'
+const paper2026IOwnerQaContentSuccessorCorrectionPath =
+  'docs/cuts/paper-canonical-unification/migration/paper-2026-i-owner-qa-content-successor-v1.json'
 const admittedAuthorities = [
   trustedDocxCandidateAuthorityRef,
   trustedLegacyHistoricalCandidateAuthorityRef,
   trustedLegacyCaptureCandidateAuthorityRef,
   paper2026IPrintSuccessorCandidateAuthorityRef,
   paper2026ISuccessorCandidateAuthorityRef,
+  paper2026IOwnerQaContentSuccessorCandidateAuthorityRef,
 ]
 const admittedProofs = new WeakMap()
 const registeredHistoricalReplayCapability = Object.freeze({})
@@ -279,6 +283,35 @@ function paper2026ITicket35SuccessorRecord(paperId) {
   return record
 }
 
+function paper2026IOwnerQaContentSuccessorRecord(paperId) {
+  if (paperId !== 'paper-2026-i') return null
+  const bytes = repositoryBytes(
+    paper2026IOwnerQaContentSuccessorCorrectionPath,
+    'paper-2026-i Owner QA content successor correction registry',
+  )
+  const record = parseJson(bytes, 'paper-2026-i Owner QA content successor correction registry')
+  if (
+    record?.schemaVersion !== 'paper-2026-i-owner-qa-content-successor-v1'
+    || record.correctionId !== 'paper-2026-i-v44-owner-qa-content-successor'
+    || record.paperId !== paperId
+    || record.sourceType !== 'legacy-json'
+    || record.evidenceDigest !== digestJson(withoutKey(record, 'evidenceDigest'))
+    || !sameAuthority(record.authority, paper2026IOwnerQaContentSuccessorCandidateAuthorityRef)
+    || record.predecessor?.authority?.manifestVersion !== '44'
+    || record.predecessor?.versionName !== 'v3'
+    || record.predecessor?.sourceAssetVersion !== 3
+    || record.sourceBinding?.officialAnswerInputKey !== 'latest_official_answer_lead'
+    || record.sourceBinding?.expectedProjectedOccurrenceDigest
+      !== 'sha256:f864c176a692e39611bd08f3574f2e626934554b7056057e54f78ac145b40cd4'
+  ) {
+    throw admissionError(
+      'CANONICAL_PUBLICATION_REGISTERED_REGISTRY_INVALID',
+      'paper-2026-i Owner QA content successor registry is not the exact v45 immutable chain',
+    )
+  }
+  return record
+}
+
 function registeredRecord(manifest, paperId, suppliedCandidateBytes) {
   const records = [
     ...manifest.papers.filter((record) => record?.paperId === paperId),
@@ -286,6 +319,7 @@ function registeredRecord(manifest, paperId, suppliedCandidateBytes) {
       ? [
           paper2026IPrintSuccessorRecord(paperId),
           paper2026ITicket35SuccessorRecord(paperId),
+          paper2026IOwnerQaContentSuccessorRecord(paperId),
         ]
       : []),
   ]

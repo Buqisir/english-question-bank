@@ -42,6 +42,7 @@ import manifestV41 from '../../standards/paper-canonical/manifest-v41.json' with
 import manifestV42 from '../../standards/paper-canonical/manifest-v42.json' with { type: 'json' }
 import manifestV43 from '../../standards/paper-canonical/manifest-v43.json' with { type: 'json' }
 import manifestV44 from '../../standards/paper-canonical/manifest-v44.json' with { type: 'json' }
+import manifestV45 from '../../standards/paper-canonical/manifest-v45.json' with { type: 'json' }
 import legacyRhythmManifestV13 from '../../standards/paper-canonical/history/manifest-v13-reading-rhythm/manifest-v13.json' with { type: 'json' }
 import legacyRhythmTypographyV3 from '../../standards/paper-canonical/history/manifest-v13-reading-rhythm/paper-typography-v3.json' with { type: 'json' }
 import legacyRhythmTypographyV3Schema from '../../standards/paper-canonical/history/manifest-v13-reading-rhythm/renderer-typography-v3.schema.json' with { type: 'json' }
@@ -74,6 +75,7 @@ import nck1V9 from '../../standards/paper-canonical/profiles/nck1-v9.json' with 
 import nck1V10 from '../../standards/paper-canonical/profiles/nck1-v10.json' with { type: 'json' }
 import nck1V11 from '../../standards/paper-canonical/profiles/nck1-v11.json' with { type: 'json' }
 import nck1V12 from '../../standards/paper-canonical/profiles/nck1-v12.json' with { type: 'json' }
+import nck1V13 from '../../standards/paper-canonical/profiles/nck1-v13.json' with { type: 'json' }
 import zhejiangLegacyV2 from '../../standards/paper-canonical/profiles/zhejiang-legacy-v2.json' with { type: 'json' }
 import zhejiangLegacyV3 from '../../standards/paper-canonical/profiles/zhejiang-legacy-v3.json' with { type: 'json' }
 import zhejiangLegacyV4 from '../../standards/paper-canonical/profiles/zhejiang-legacy-v4.json' with { type: 'json' }
@@ -83,6 +85,7 @@ import zhejiangLegacyV7 from '../../standards/paper-canonical/profiles/zhejiang-
 import zhejiangLegacyV8 from '../../standards/paper-canonical/profiles/zhejiang-legacy-v8.json' with { type: 'json' }
 import zhejiangLegacyV9 from '../../standards/paper-canonical/profiles/zhejiang-legacy-v9.json' with { type: 'json' }
 import zhejiangLegacyV10 from '../../standards/paper-canonical/profiles/zhejiang-legacy-v10.json' with { type: 'json' }
+import zhejiangLegacyV11 from '../../standards/paper-canonical/profiles/zhejiang-legacy-v11.json' with { type: 'json' }
 import nationalLegacy from '../../standards/paper-canonical/profiles/national-legacy-v1.json' with { type: 'json' }
 import nationalLegacyV2 from '../../standards/paper-canonical/profiles/national-legacy-v2.json' with { type: 'json' }
 import nationalLegacyV3 from '../../standards/paper-canonical/profiles/national-legacy-v3.json' with { type: 'json' }
@@ -591,7 +594,7 @@ function validateNck1WritingChrome(profile) {
     ? '第二节 （满分 25 分）'
     : '第二节（满分25分）'
   const valid = (
-    ['3', '4', '5', '6', '7', '8', '9', '10', '11', '12'].includes(profile.version)
+    ['3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13'].includes(profile.version)
     && writingParts.length === 1
     && part.ordinal === 4
     && part.titleInstructionRef === 'part.writing'
@@ -646,7 +649,7 @@ function validateZhejiangWritingChrome(profile) {
   const application = sections[0]
   const continuation = sections[1]
   const valid = (
-    ['4', '5', '6', '7', '8', '9', '10'].includes(profile?.version)
+    ['4', '5', '6', '7', '8', '9', '10', '11'].includes(profile?.version)
     && writingParts.length === 1
     && part.ordinal === 4
     && part.titleInstructionRef === 'part.writing'
@@ -1887,6 +1890,12 @@ const artifactsV44 = {
   'renderer-grammar-fill-rhythm': grammarFillRhythmV7,
   'renderer-grammar-fill-public-geometry-fixtures': grammarFillPublicGeometryFixturesV16,
 }
+const artifactsV45 = {
+  ...artifactsV44,
+  'profile-nck1': nck1V13,
+  'profile-zhejiang-legacy': zhejiangLegacyV11,
+  'family-application-writing': applicationWritingV3,
+}
 const schemasV1 = { ...sharedSchemas, 'renderer-typography-v1': typographyV1Schema, 'normalization-rules-v1': normalizationSchema, 'normalization-report-v1': reportSchema, 'canonical-paper-publication-v1': publicationSchema }
 const schemasV2 = { ...sharedSchemas, 'renderer-typography-v1': typographyV1Schema, 'normalization-rules-v2': normalizationV2Schema, 'normalization-report-v2': reportV2Schema, 'canonical-paper-publication-v2': publicationV2Schema }
 const schemasV3 = { ...sharedSchemas, 'renderer-typography-v2': typographyV2Schema, 'normalization-rules-v2': normalizationV2Schema, 'normalization-report-v3': reportV3Schema, 'canonical-paper-publication-v3': publicationV3Schema }
@@ -2405,6 +2414,11 @@ const schemasV44 = {
   'grammar-fill-rhythm-v7': grammarFillRhythmV7Schema,
   'grammar-fill-public-geometry-fixtures-v16': grammarFillPublicGeometryFixturesV16Schema,
 }
+const schemasV45 = {
+  ...schemasV44,
+  'canonical-family-contract-v3': familyV3Schema,
+  'canonical-application-writing-variant-v1': applicationWritingVariantSchema,
+}
 const validationV1 = validateAuthorityClosure({ manifest: manifestV1, artifacts: artifactsV1, schemas: schemasV1 })
 const validationV2 = validateAuthorityClosure({ manifest: manifestV2, artifacts: artifactsV2, schemas: schemasV2 })
 const validationV3 = validateAuthorityClosure({ manifest: manifestV3, artifacts: artifactsV3, schemas: schemasV3 })
@@ -2454,6 +2468,7 @@ const validationV41 = validateAuthorityClosure({ manifest: manifestV41, artifact
 const validationV42 = validateAuthorityClosure({ manifest: manifestV42, artifacts: artifactsV42, schemas: schemasV42 })
 const validationV43 = validateAuthorityClosure({ manifest: manifestV43, artifacts: artifactsV43, schemas: schemasV43 })
 const validationV44 = validateAuthorityClosure({ manifest: manifestV44, artifacts: artifactsV44, schemas: schemasV44 })
+const validationV45 = validateAuthorityClosure({ manifest: manifestV45, artifacts: artifactsV45, schemas: schemasV45 })
 const validations = [
   validationV1,
   validationV2,
@@ -2500,6 +2515,7 @@ const validations = [
   validationV42,
   validationV43,
   validationV44,
+  validationV45,
 ]
 if (validations.some((validation) => !validation.ok)) {
   throw new Error(`Invalid checked-in canonical authority: ${JSON.stringify(validations.flatMap((validation) => validation.issues))}`)
@@ -2559,6 +2575,7 @@ const authorities = [
   { manifest: manifestV42, artifacts: artifactsV42, schemas: schemasV42 },
   { manifest: manifestV43, artifacts: artifactsV43, schemas: schemasV43 },
   { manifest: manifestV44, artifacts: artifactsV44, schemas: schemasV44 },
+  { manifest: manifestV45, artifacts: artifactsV45, schemas: schemasV45 },
 ].map((authority) => ({
   ...authority,
   authorityRef: authorityRef(authority.manifest),
@@ -2583,6 +2600,7 @@ export const trustedLegacyCaptureCandidateAuthorityRef = authorities.find((autho
 // than changing the authority of those already-published immutable bytes.
 export const paper2026IPrintSuccessorCandidateAuthorityRef = authorities.find((authority) => authority.manifest.version === '43').authorityRef
 export const paper2026ISuccessorCandidateAuthorityRef = authorities.find((authority) => authority.manifest.version === '44').authorityRef
+export const paper2026IOwnerQaContentSuccessorCandidateAuthorityRef = authorities.find((authority) => authority.manifest.version === '45').authorityRef
 
 export function resolveCanonicalAuthority(authorityRef) {
   const authority = authorities.find((candidate) => candidate.authorityRef.manifestId === authorityRef?.manifestId && candidate.authorityRef.manifestVersion === authorityRef?.manifestVersion && candidate.authorityRef.manifestDigest === authorityRef?.manifestDigest)

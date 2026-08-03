@@ -446,7 +446,7 @@ function projectOpaqueLegacyWritingConsumerGroup(input, occurrence, {
     : undefined
   const sourceStarterLinesInResponse =
     input.consumption?.paperId === 'paper-2026-i'
-    && input.consumption?.authorityRef?.manifestVersion === '44'
+    && ['44', '45'].includes(input.consumption?.authorityRef?.manifestVersion)
     && groupId === 'group-2026-i-writing-continuation'
   const sourceOwnedInstructions = Array.isArray(occurrence.sourceOwnedInstructions)
     ? occurrence.sourceOwnedInstructions.map((instruction) => ({

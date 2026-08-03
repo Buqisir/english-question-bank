@@ -9,13 +9,16 @@ import manifestV41 from '../../standards/paper-canonical/manifest-v41.json' with
 import manifestV42 from '../../standards/paper-canonical/manifest-v42.json' with { type: 'json' }
 import manifestV43 from '../../standards/paper-canonical/manifest-v43.json' with { type: 'json' }
 import manifestV44 from '../../standards/paper-canonical/manifest-v44.json' with { type: 'json' }
+import manifestV45 from '../../standards/paper-canonical/manifest-v45.json' with { type: 'json' }
 import nck1V9 from '../../standards/paper-canonical/profiles/nck1-v9.json' with { type: 'json' }
 import nck1V10 from '../../standards/paper-canonical/profiles/nck1-v10.json' with { type: 'json' }
 import nck1V11 from '../../standards/paper-canonical/profiles/nck1-v11.json' with { type: 'json' }
 import nck1V12 from '../../standards/paper-canonical/profiles/nck1-v12.json' with { type: 'json' }
+import nck1V13 from '../../standards/paper-canonical/profiles/nck1-v13.json' with { type: 'json' }
 import nationalLegacyV3 from '../../standards/paper-canonical/profiles/national-legacy-v3.json' with { type: 'json' }
 import zhejiangLegacyV7 from '../../standards/paper-canonical/profiles/zhejiang-legacy-v7.json' with { type: 'json' }
 import zhejiangLegacyV10 from '../../standards/paper-canonical/profiles/zhejiang-legacy-v10.json' with { type: 'json' }
+import zhejiangLegacyV11 from '../../standards/paper-canonical/profiles/zhejiang-legacy-v11.json' with { type: 'json' }
 
 import { digestJson } from './stable.mjs'
 
@@ -24,6 +27,7 @@ const registeredProfiles = new Map([
   [`${nck1V10.profileId}@${nck1V10.version}`, nck1V10],
   [`${nck1V11.profileId}@${nck1V11.version}`, nck1V11],
   [`${nck1V12.profileId}@${nck1V12.version}`, nck1V12],
+  [`${nck1V13.profileId}@${nck1V13.version}`, nck1V13],
   [
     `${nationalLegacyV3.profileId}@${nationalLegacyV3.version}`,
     nationalLegacyV3,
@@ -35,6 +39,10 @@ const registeredProfiles = new Map([
   [
     `${zhejiangLegacyV10.profileId}@${zhejiangLegacyV10.version}`,
     zhejiangLegacyV10,
+  ],
+  [
+    `${zhejiangLegacyV11.profileId}@${zhejiangLegacyV11.version}`,
+    zhejiangLegacyV11,
   ],
 ])
 const manifestV31Profiles = new Map(
@@ -79,6 +87,18 @@ const manifestV41Profiles = new Map([
 const manifestV42Profiles = new Map(manifestV41Profiles)
 const manifestV43Profiles = new Map(manifestV42Profiles)
 const manifestV44Profiles = new Map(manifestV43Profiles)
+const manifestV45Profiles = new Map([
+  nck1V13,
+  nationalLegacyV3,
+  zhejiangLegacyV11,
+].map((profile) => [
+  profile.profileId,
+  {
+    profileId: profile.profileId,
+    profileVersion: profile.version,
+    profileDigest: digestJson(profile),
+  },
+]))
 const registeredManifestProfiles = new Map([
   [
     `${manifestV31.manifestId}@${manifestV31.version}@${digestJson(manifestV31)}`,
@@ -123,6 +143,10 @@ const registeredManifestProfiles = new Map([
   [
     `${manifestV44.manifestId}@${manifestV44.version}@${digestJson(manifestV44)}`,
     manifestV44Profiles,
+  ],
+  [
+    `${manifestV45.manifestId}@${manifestV45.version}@${digestJson(manifestV45)}`,
+    manifestV45Profiles,
   ],
 ])
 

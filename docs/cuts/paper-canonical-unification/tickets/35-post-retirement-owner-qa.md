@@ -34,6 +34,6 @@ Replaces old Ticket 78.
 
 ## Result
 
-Commit: candidate branch `codex/ticket-35-owner-qa-fixes-20260803`; this bounded fix round follows focused review of `84270979707d92dff106bc7076655f50f07b54a6` (exact new tip is recorded in the implementation handoff).
-Verify: affected public Screen now consumes the exact v44/v7 Grammar Fill ruling; complete immutable Publication v3 Student/Teacher Print HTML/PDF, batch paper-identity fail-closed, writing, grammar geometry, canonical consumption, import-pilot, and frontend build checks pass.
+Commit: candidate branch `codex/ticket-35-owner-qa-fixes-20260803`; this bounded Owner-QA follow-up succeeds the focused-reviewed v44/v3 candidate without modifying its frozen bytes.
+Verify: scoped v45/v4 immutable content successor binds the source PDF correction and existing structured Application Writing evidence; Screen and complete Student/Teacher public Print/PDF assert the em dash, answer-region title, shared Print-only blank-number relation, existing Cloze geometry, continuation uniqueness, provenance absence, and fail-closed identity behavior.
 Notes: Fix candidate; focused re-review pending in the existing review lineage. Owner QA remains FAIL pending focused re-review and owner re-QA of this candidate.

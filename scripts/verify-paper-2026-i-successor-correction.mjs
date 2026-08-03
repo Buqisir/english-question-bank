@@ -45,6 +45,16 @@ const ticket35AccountingPath = path.join(
   repositoryRoot,
   'docs/cuts/paper-canonical-unification/migration/paper-2026-i-ticket-35-authority-successor-publication-accounting-v1.json',
 )
+const ownerQaContentCorrectionPath = path.join(
+  repositoryRoot,
+  'docs/cuts/paper-canonical-unification/migration/paper-2026-i-owner-qa-content-successor-v1.json',
+)
+const ownerQaContentAccountingPath = path.join(
+  repositoryRoot,
+  'docs/cuts/paper-canonical-unification/migration/paper-2026-i-owner-qa-content-successor-publication-accounting-v1.json',
+)
+const currentPublicationVersion = 'v4'
+const currentPublicationAuthorityVersion = '45'
 const expectedOccurrenceDigest =
   'sha256:f864c176a692e39611bd08f3574f2e626934554b7056057e54f78ac145b40cd4'
 
@@ -104,7 +114,7 @@ function sourceAnswerByQuestionId(rootDir) {
   const sourceCapture = json(path.join(
     rootDir,
     paperId,
-    'versions/v3/canonical/source-capture-v1.json',
+    `versions/${currentPublicationVersion}/canonical/source-capture-v1.json`,
   ))
   const documents = sourceCapture.documents.filter((document) =>
     document.inputKey === 'latest_official_answer_lead'
@@ -115,7 +125,7 @@ function sourceAnswerByQuestionId(rootDir) {
   const source = json(path.join(
     rootDir,
     paperId,
-    'versions/v3',
+    `versions/${currentPublicationVersion}`,
     documents[0].immutableArtifactRef.relativePath,
   ))
   assert.equal(typeof source.answers, 'object', 'official answer source must contain answers')
@@ -293,9 +303,12 @@ function copiedTargetStore() {
 }
 
 function rewriteSourceCapture(rootDir, mutate) {
-  const versionDir = path.join(rootDir, paperId, 'versions/v3')
+  const versionDir = path.join(rootDir, paperId, `versions/${currentPublicationVersion}`)
   const capturePath = path.join(versionDir, 'canonical/source-capture-v1.json')
-  const publicationPath = path.join(versionDir, 'canonical/canonical-paper-publication-v44.json')
+  const publicationPath = path.join(
+    versionDir,
+    `canonical/canonical-paper-publication-v${currentPublicationAuthorityVersion}.json`,
+  )
   const capture = json(capturePath)
   mutate(capture)
   const captureBytes = canonicalBytes(capture)
@@ -375,14 +388,14 @@ function assertPrintBindingAdversaries() {
   expectPublicRejection({
     label: 'swapped immutable source asset fails closed',
     mutate: (rootDir) => writeFileSync(
-      path.join(rootDir, paperId, 'versions/v3/paper-asset.json'),
-      readFileSync(path.join(rootDir, paperId, 'versions/v3/source-evidence/606e0c96b9b853826d8a8.bin')),
+      path.join(rootDir, paperId, `versions/${currentPublicationVersion}/paper-asset.json`),
+      readFileSync(path.join(rootDir, paperId, `versions/${currentPublicationVersion}/source-evidence/606e0c96b9b853826d8a8.bin`)),
     ),
   })
   expectPublicRejection({
     label: 'tampered immutable source asset fails closed',
     mutate: (rootDir) => {
-      const assetPath = path.join(rootDir, paperId, 'versions/v3/paper-asset.json')
+      const assetPath = path.join(rootDir, paperId, `versions/${currentPublicationVersion}/paper-asset.json`)
       const value = Buffer.from(readFileSync(assetPath))
       value[value.length - 1] ^= 0x01
       writeFileSync(assetPath, value)
@@ -421,10 +434,14 @@ function assertSuccessorEvidence() {
   const correction = json(correctionPath)
   const accounting = json(accountingPath)
   const ticket35Accounting = json(ticket35AccountingPath)
+  const ownerQaContentCorrection = json(ownerQaContentCorrectionPath)
+  const ownerQaContentAccounting = json(ownerQaContentAccountingPath)
   assert.equal(correction.schemaVersion, 'paper-2026-i-successor-correction-v1')
   assert.equal(accounting.schemaVersion, 'paper-2026-i-successor-publication-accounting-v1')
   assert.equal(correction.evidenceDigest, digestJson(withoutKey(correction, 'evidenceDigest')), 'correction evidence digest must close')
   assert.equal(accounting.evidenceDigest, digestJson(withoutKey(accounting, 'evidenceDigest')), 'successor accounting digest must close')
+  assert.equal(ownerQaContentCorrection.evidenceDigest, digestJson(withoutKey(ownerQaContentCorrection, 'evidenceDigest')), 'Owner QA content successor evidence digest must close')
+  assert.equal(ownerQaContentAccounting.evidenceDigest, digestJson(withoutKey(ownerQaContentAccounting, 'evidenceDigest')), 'Owner QA content publication accounting digest must close')
   assert.equal(correction.paperId, paperId)
   assert.equal(correction.sourceBinding.expectedProjectedOccurrenceDigest, expectedOccurrenceDigest)
   assert.equal(correction.authority.manifestVersion, '43')
@@ -432,6 +449,10 @@ function assertSuccessorEvidence() {
   assert.equal(accounting.successor.publication.versionName, 'v2')
   assert.equal(accounting.successor.publication.sourceAssetVersion, 2)
   assert.equal(accounting.successor.latest.identity.publicationDigest, accounting.successor.publication.publicationDigest)
+  assert.equal(ownerQaContentCorrection.schemaVersion, 'paper-2026-i-owner-qa-content-successor-v1')
+  assert.equal(ownerQaContentCorrection.authority.manifestVersion, currentPublicationAuthorityVersion)
+  assert.equal(ownerQaContentAccounting.successor.publication.versionName, currentPublicationVersion)
+  assert.equal(ownerQaContentAccounting.successor.publication.sourceAssetVersion, 4)
   const predecessorManifest = json(path.join(repositoryRoot, 'standards/paper-canonical/manifest-v42.json'))
   const predecessorRhythm = json(path.join(repositoryRoot, 'standards/paper-canonical/rendering/grammar-fill-rhythm-v5.json'))
   assert.equal(digestJson(predecessorManifest), accounting.predecessor.authority.manifestDigest, 'v42 authority manifest must remain immutable')
@@ -471,8 +492,8 @@ function assertSuccessorEvidence() {
     accounting.predecessor.immutableVersionTree,
     'predecessor v1 immutable bytes must remain unchanged',
   )
-  const latest = assertArtifact(ticket35Accounting.successor.latest, 'Ticket 35 current latest ref')
-  assert.deepEqual(JSON.parse(latest), ticket35Accounting.successor.latest.identity, 'latest ref must name the v44 successor exactly')
+  const ticket35Publication = JSON.parse(assertArtifact(ticket35Accounting.successor.publication, 'Ticket 35 v44 Publication'))
+  assert.equal(ticket35Publication.authority.manifestVersion, '44', 'v44 Publication remains immutable history')
   const publication = JSON.parse(assertArtifact(accounting.successor.publication, 'successor Publication'))
   assert.equal(publication.publicationDigest, accounting.successor.publication.publicationDigest, 'successor Publication digest must close')
   assert.equal(publication.authority.manifestVersion, '43', 'successor Publication authority must be v43')
@@ -483,7 +504,11 @@ function assertSuccessorEvidence() {
   try {
     assert.equal(db.prepare('PRAGMA integrity_check').get().integrity_check, 'ok', 'SQLite integrity must close')
     const rows = db.prepare('SELECT version_name, source_asset_version, publication_digest, is_current FROM canonical_paper_publications WHERE paper_id = ? ORDER BY version_name').all(paperId).map((row) => ({ ...row }))
-    assert.deepEqual(rows, ticket35Accounting.durableIndex.paper2026IRows, 'SQLite retains the exact V43 predecessor and V44 current identity')
+    assert.deepEqual(
+      rows,
+      ownerQaContentAccounting.durableIndex.paper2026IRows,
+      'SQLite retains the immutable v43/v44 history and the current v45 content successor identity',
+    )
     assert.equal(db.prepare('SELECT paper_id FROM canonical_paper_publications WHERE is_current = 1').all().length, 29, 'SQLite retains exactly 29 logical current identities')
   } finally {
     db.close()
@@ -497,11 +522,12 @@ function assertSuccessorEvidence() {
   assert.equal(questionCount(successorCanonical), questionCount(predecessorCanonical), 'successor must preserve predecessor question count')
   assert.deepEqual(accounting.logicalCounts.frozenCorpus, { papers: 33, groups: 273, questions: 1530, questionOwnedOptions: 4140 }, '33-paper aggregate logical counts must remain unchanged')
   assertRegisteredAdmission(correction)
-  return { correction, accounting, ticket35Accounting }
+  assertRegisteredAdmission(ownerQaContentCorrection)
+  return { correction, accounting, ticket35Accounting, ownerQaContentCorrection, ownerQaContentAccounting }
 }
 
 function assertIdempotentRetry() {
-  const output = execFileSync(process.execPath, ['scripts/materialize-paper-2026-i-ticket-35-authority-successor.mjs', '--check'], {
+  const output = execFileSync(process.execPath, ['scripts/materialize-paper-2026-i-ticket-35-authority-successor.mjs', '--owner-qa-content-successor', '--check'], {
     cwd: repositoryRoot,
     encoding: 'utf8',
   })
@@ -515,8 +541,8 @@ const evidence = assertSuccessorEvidence()
 const retry = assertIdempotentRetry()
 const entries = withRuntime(storeRoot, (runtime) => {
   const consumption = runtime.load({ paperId, consumerId: 'print_pdf' })
-  assert.equal(consumption.authorityRef.manifestVersion, '44', 'public Print consumes the v44 successor')
-  assert.equal(consumption.sourceAssetVersion, 3, 'public Print consumes source asset v3')
+  assert.equal(consumption.authorityRef.manifestVersion, currentPublicationAuthorityVersion, 'public Print consumes the v45 content successor')
+  assert.equal(consumption.sourceAssetVersion, 4, 'public Print consumes source asset v4')
   const payload = canonicalPrintPayload(consumption, sourceAnswerByQuestionId(storeRoot))
   return ['student', 'teacher'].map((versionType) => {
     const html = publicPrintHtml({ rootDir: storeRoot, consumption, versionType, payload: canonicalPrintPayload(consumption, sourceAnswerByQuestionId(storeRoot)) })

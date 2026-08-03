@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 
 /**
- * The only producer for the paper-2026-i v44 Ticket 35 authority successor. It never rewrites
- * v2 bytes: it derives a new Candidate -> Confirmation -> Canonical chain
- * from the frozen Ticket 26 capture, then atomically publishes source asset v3.
+ * The only producer for the paper-2026-i Ticket 35 successors. It never
+ * rewrites predecessor bytes: each mode derives a new Candidate ->
+ * Confirmation -> Canonical chain from the frozen Ticket 26 capture, then
+ * atomically publishes its next source asset version.
  */
 
 import assert from 'node:assert/strict'
@@ -22,17 +23,31 @@ import { digestJson, sha256, stableStringify, withoutKey } from '../shared/paper
 
 const repositoryRoot = fileURLToPath(new URL('..', import.meta.url)).replace(/\/$/, '')
 const paperId = 'paper-2026-i'
-const successorAuthorityVersion = '44'
-const sourceAssetVersion = 3
+const ownerQaContentSuccessor = process.argv.includes('--owner-qa-content-successor')
+const successorAuthorityVersion = ownerQaContentSuccessor ? '45' : '44'
+const sourceAssetVersion = ownerQaContentSuccessor ? 4 : 3
+const predecessorVersionName = ownerQaContentSuccessor ? 'v3' : 'v2'
+const successorVersionName = ownerQaContentSuccessor ? 'v4' : 'v3'
+const successorCorrectionId = ownerQaContentSuccessor
+  ? 'paper-2026-i-v44-owner-qa-content-successor'
+  : 'paper-2026-i-v43-grammar-fill-rule-successor'
+const successorRegistrySchemaVersion = ownerQaContentSuccessor
+  ? 'paper-2026-i-owner-qa-content-successor-v1'
+  : 'paper-2026-i-ticket-35-authority-successor-v1'
 const expectedOccurrenceDigest =
   'sha256:f864c176a692e39611bd08f3574f2e626934554b7056057e54f78ac145b40cd4'
 const manifestV2Path = 'docs/cuts/paper-canonical-unification/migration/manifest-v2.json'
 const predecessorRoot = 'test-fixtures/paper-canonical/publications/ticket-32-remaining-v1/store'
 const successorRoot = 'test-fixtures/paper-import/paper-canonical-ticket-35-authority-successor/paper-2026-i-v1'
-const successorRegistryPath =
-  'docs/cuts/paper-canonical-unification/migration/paper-2026-i-ticket-35-authority-successor-v1.json'
-const accountingPath =
-  'docs/cuts/paper-canonical-unification/migration/paper-2026-i-ticket-35-authority-successor-publication-accounting-v1.json'
+const ownerQaSuccessorRoot =
+  'test-fixtures/paper-import/paper-canonical-ticket-35-owner-qa-content-successor/paper-2026-i-v1'
+const materializationRoot = ownerQaContentSuccessor ? ownerQaSuccessorRoot : successorRoot
+const successorRegistryPath = ownerQaContentSuccessor
+  ? 'docs/cuts/paper-canonical-unification/migration/paper-2026-i-owner-qa-content-successor-v1.json'
+  : 'docs/cuts/paper-canonical-unification/migration/paper-2026-i-ticket-35-authority-successor-v1.json'
+const accountingPath = ownerQaContentSuccessor
+  ? 'docs/cuts/paper-canonical-unification/migration/paper-2026-i-owner-qa-content-successor-publication-accounting-v1.json'
+  : 'docs/cuts/paper-canonical-unification/migration/paper-2026-i-ticket-35-authority-successor-publication-accounting-v1.json'
 
 function absolutePath(relativePath) {
   assert.equal(typeof relativePath, 'string', 'repository path must be a string')
@@ -114,8 +129,8 @@ function recordForPaper() {
 }
 
 function predecessorSnapshot(record) {
-  const versionRoot = `${predecessorRoot}/${paperId}/versions/v2`
-  const publicationPath = `${versionRoot}/canonical/canonical-paper-publication-v43.json`
+  const versionRoot = `${predecessorRoot}/${paperId}/versions/${predecessorVersionName}`
+  const publicationPath = `${versionRoot}/canonical/canonical-paper-publication-v${ownerQaContentSuccessor ? '44' : '43'}.json`
   const publication = json(publicationPath)
   return {
     authority: publication.authority,
@@ -128,8 +143,8 @@ function predecessorSnapshot(record) {
       byteLength: bytes(publicationPath).byteLength,
       fileSha256: sha256(bytes(publicationPath)),
       publicationDigest: publication.publicationDigest,
-      versionName: 'v2',
-      sourceAssetVersion: 2,
+      versionName: predecessorVersionName,
+      sourceAssetVersion: sourceAssetVersion - 1,
     },
     immutableVersionTree: compactSnapshot(treeSnapshot(versionRoot)),
   }
@@ -138,10 +153,10 @@ function predecessorSnapshot(record) {
 function materializeAuthorityArtifacts() {
   const rhythm = json('standards/paper-canonical/rendering/grammar-fill-rhythm-v7.json')
   const rhythmSchema = json('schemas/paper-canonical/grammar-fill-rhythm-v7.schema.json')
-  const manifest = json('standards/paper-canonical/manifest-v44.json')
+  const manifest = json(`standards/paper-canonical/manifest-v${successorAuthorityVersion}.json`)
   assert.equal(rhythm.schemaVersion, 'grammar-fill-rhythm-v7')
   assert.equal(rhythm.version, '7')
-  assert.equal(rhythm.publicArtifactOracle.sourceAssetVersion, sourceAssetVersion)
+  assert.equal(rhythm.publicArtifactOracle.sourceAssetVersion, 3)
   assert.equal(rhythm.publicArtifactOracle.expectedProjectedOccurrenceDigest, expectedOccurrenceDigest)
   assert.deepEqual(rhythmSchema.const, rhythm)
   assert.equal(
@@ -157,12 +172,12 @@ function persistedCandidate(candidate) {
 }
 
 function successorRegistry({ record, predecessor, candidate, confirmation, canonicalPaper }) {
-  const candidatePath = `${successorRoot}/import-candidate-v1.json`
-  const confirmationPath = `${successorRoot}/teacher-confirmation-v1.json`
-  const canonicalPath = `${successorRoot}/canonical-paper-v1.json`
+  const candidatePath = `${materializationRoot}/import-candidate-v1.json`
+  const confirmationPath = `${materializationRoot}/teacher-confirmation-v1.json`
+  const canonicalPath = `${materializationRoot}/canonical-paper-v1.json`
   const body = {
-    schemaVersion: 'paper-2026-i-ticket-35-authority-successor-v1',
-    correctionId: 'paper-2026-i-v43-grammar-fill-rule-successor',
+    schemaVersion: successorRegistrySchemaVersion,
+    correctionId: successorCorrectionId,
     paperId,
     sourceType: 'legacy-json',
     authority: canonicalPaper.paperPlan.authorityRef,
@@ -201,11 +216,17 @@ function successorRegistry({ record, predecessor, candidate, confirmation, canon
 
 async function materializeSuccessor({ record, predecessor }) {
   const sourceCaptureBytes = bytes(record.sourceCapture.path)
-  const { importPaper2026ISuccessorCandidate, confirmCanonicalCandidate } = await import('../shared/paper-canonical/compiler.mjs')
-  const imported = importPaper2026ISuccessorCandidate(sourceCaptureBytes)
+  const {
+    importPaper2026ISuccessorCandidate,
+    importPaper2026IOwnerQaContentSuccessorCandidate,
+    confirmCanonicalCandidate,
+  } = await import('../shared/paper-canonical/compiler.mjs')
+  const imported = ownerQaContentSuccessor
+    ? importPaper2026IOwnerQaContentSuccessorCandidate(sourceCaptureBytes)
+    : importPaper2026ISuccessorCandidate(sourceCaptureBytes)
   assert.ok(imported.candidate, 'the frozen source capture must derive one successor Candidate')
   assert.deepEqual(imported.issues, [], 'the successor Candidate must have no issues')
-  assert.equal(imported.candidate.authority.manifestVersion, successorAuthorityVersion, 'only paper-2026-i receives the v44 successor authority')
+  assert.equal(imported.candidate.authority.manifestVersion, successorAuthorityVersion, 'only paper-2026-i receives the selected successor authority')
   const confirmation = {
     schemaVersion: 'teacher-confirmation-v1',
     candidateDigest: imported.candidate.candidateDigest,
@@ -214,12 +235,12 @@ async function materializeSuccessor({ record, predecessor }) {
   }
   const confirmed = confirmCanonicalCandidate(imported.candidate, confirmation)
   assert.ok(confirmed.canonicalPaper, 'the exact confirmed successor Candidate must derive one Canonical Paper')
-  assert.equal(confirmed.canonicalPaper.paperPlan.authorityRef.manifestVersion, successorAuthorityVersion, 'successor Canonical Paper must retain v44')
+  assert.equal(confirmed.canonicalPaper.paperPlan.authorityRef.manifestVersion, successorAuthorityVersion, 'successor Canonical Paper must retain its selected authority')
   const candidate = persistedCandidate(imported.candidate)
   const canonicalPaper = confirmed.canonicalPaper
-  writeExact(`${successorRoot}/import-candidate-v1.json`, candidate)
-  writeExact(`${successorRoot}/teacher-confirmation-v1.json`, confirmation)
-  writeExact(`${successorRoot}/canonical-paper-v1.json`, canonicalPaper)
+  writeExact(`${materializationRoot}/import-candidate-v1.json`, candidate)
+  writeExact(`${materializationRoot}/teacher-confirmation-v1.json`, confirmation)
+  writeExact(`${materializationRoot}/canonical-paper-v1.json`, canonicalPaper)
   const registry = successorRegistry({ record, predecessor, candidate, confirmation, canonicalPaper })
   writeExact(successorRegistryPath, registry)
   return { candidate, confirmation, canonicalPaper, registry, sourceCaptureBytes }
@@ -238,16 +259,16 @@ async function publishSuccessor({ materialized }) {
         schemaVersion: 'registered-confirmed-canonical-admission-v1',
         paperId,
         sourceBytes: materialized.sourceCaptureBytes,
-        candidateBytes: bytes(`${successorRoot}/import-candidate-v1.json`),
-        confirmationBytes: bytes(`${successorRoot}/teacher-confirmation-v1.json`),
-        canonicalPaperBytes: bytes(`${successorRoot}/canonical-paper-v1.json`),
+        candidateBytes: bytes(`${materializationRoot}/import-candidate-v1.json`),
+        confirmationBytes: bytes(`${materializationRoot}/teacher-confirmation-v1.json`),
+        canonicalPaperBytes: bytes(`${materializationRoot}/canonical-paper-v1.json`),
       },
     })
     assert.ok(
       ['published', 'idempotent'].includes(published.status),
       `successor publication must publish once or retry identically: ${JSON.stringify(published)}`,
     )
-    assert.equal(published.versionName, 'v3', 'successor publication must occupy immutable version v3')
+    assert.equal(published.versionName, successorVersionName, 'successor publication must occupy its next immutable version')
     return published
   } finally {
     db.close()
@@ -256,14 +277,14 @@ async function publishSuccessor({ materialized }) {
 
 function publicationAccounting({ record, predecessor, materialized, published }) {
   const currentPath = `${predecessorRoot}/${paperId}/latest/canonical-paper-publication-ref-v1.json`
-  const publicationPath = `${predecessorRoot}/${paperId}/versions/v3/canonical/canonical-paper-publication-v44.json`
+  const publicationPath = `${predecessorRoot}/${paperId}/versions/${successorVersionName}/canonical/canonical-paper-publication-v${successorAuthorityVersion}.json`
   const current = json(currentPath)
   const publication = json(publicationPath)
-  const oldTree = compactSnapshot(treeSnapshot(`${predecessorRoot}/${paperId}/versions/v2`))
-  assert.deepEqual(oldTree, predecessor.immutableVersionTree, 'v2 immutable version bytes must remain unchanged')
-  assert.equal(current.versionName, 'v3', 'latest must move only to the successor')
+  const oldTree = compactSnapshot(treeSnapshot(`${predecessorRoot}/${paperId}/versions/${predecessorVersionName}`))
+  assert.deepEqual(oldTree, predecessor.immutableVersionTree, 'predecessor immutable version bytes must remain unchanged')
+  assert.equal(current.versionName, successorVersionName, 'latest must move only to the successor')
   assert.equal(current.publicationDigest, publication.publicationDigest, 'latest must bind the successor publication digest')
-  assert.equal(publication.authority.manifestVersion, successorAuthorityVersion, 'successor publication must retain v44')
+  assert.equal(publication.authority.manifestVersion, successorAuthorityVersion, 'successor publication must retain its selected authority')
   const canonicalGroups = materialized.canonicalPaper.questionGroups
   const predecessorCanonicalArtifact = json(record.canonicalPaper.path)
   const predecessorCanonical = (
@@ -282,12 +303,14 @@ function publicationAccounting({ record, predecessor, materialized, published })
   } finally {
     db.close()
   }
-  assert.equal(rows.length, 3, 'paper-2026-i retains one predecessor and two successors immutable publication')
-  assert.deepEqual(rows.filter((row) => row.is_current === 1).map((row) => row.version_name), ['v3'], 'only v3 is current')
+  assert.equal(rows.length, sourceAssetVersion, 'paper-2026-i retains every immutable publication version')
+  assert.deepEqual(rows.filter((row) => row.is_current === 1).map((row) => row.version_name), [successorVersionName], 'only the successor is current')
   for (const suffix of ['-wal', '-shm', '-journal']) assert.equal(existsSync(`${absolutePath(`${predecessorRoot}/publication.sqlite`)}${suffix}`), false, `SQLite must not retain ${suffix.slice(1)} sidecar`)
   assert.equal(existsSync(absolutePath(`${predecessorRoot}/${paperId}/.canonical-latest-swap-v1.json`)), false, 'successor must leave no recovery journal')
   const body = {
-    schemaVersion: 'paper-2026-i-ticket-35-authority-successor-publication-accounting-v1',
+    schemaVersion: ownerQaContentSuccessor
+      ? 'paper-2026-i-owner-qa-content-successor-publication-accounting-v1'
+      : 'paper-2026-i-ticket-35-authority-successor-publication-accounting-v1',
     status: 'PASS',
     correctionId: materialized.registry.correctionId,
     paperId,
@@ -302,7 +325,7 @@ function publicationAccounting({ record, predecessor, materialized, published })
         path: publicationPath,
         byteLength: bytes(publicationPath).byteLength,
         fileSha256: sha256(bytes(publicationPath)),
-        versionName: 'v3',
+        versionName: successorVersionName,
         sourceAssetVersion,
         publicationDigest: publication.publicationDigest,
       },
@@ -336,7 +359,7 @@ function publicationAccounting({ record, predecessor, materialized, published })
 
 function parseMode(argv) {
   const args = new Set(argv)
-  for (const arg of args) assert.equal(['--produce', '--check'].includes(arg), true, `unknown argument ${arg}`)
+  for (const arg of args) assert.equal(['--produce', '--check', '--owner-qa-content-successor'].includes(arg), true, `unknown argument ${arg}`)
   assert.equal(args.has('--produce') !== args.has('--check'), true, 'choose exactly one of --produce or --check')
   return args.has('--produce') ? 'produce' : 'check'
 }
@@ -364,4 +387,5 @@ console.log(JSON.stringify({
   candidateDigest: materialized.candidate.candidateDigest,
   canonicalPaperDigest: digestJson(materialized.canonicalPaper),
   expectedOccurrenceDigest,
+  ownerQaContentSuccessor,
 }))

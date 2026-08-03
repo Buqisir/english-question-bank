@@ -7,6 +7,7 @@ import {
   trustedLegacyCaptureCandidateAuthorityRef,
   paper2026IPrintSuccessorCandidateAuthorityRef,
   paper2026ISuccessorCandidateAuthorityRef,
+  paper2026IOwnerQaContentSuccessorCandidateAuthorityRef,
   validateJsonSchema,
 } from './authority.mjs'
 import { validateApplicationWritingContract } from './applicationWriting.mjs'
@@ -26,6 +27,7 @@ import {
   TICKET_26_LEGACY_CAPTURE_MEDIA_TYPE,
   TICKET_26_LEGACY_CAPTURE_INPUT_KIND,
   TICKET_26_LEGACY_SOURCE_ENVELOPE_MEDIA_TYPE,
+  applyTicket26OwnerQaContentSuccessor,
   buildTicket26LegacyCompilerRequest,
   inspectTicket26LegacyEnvelopeSource,
   ticket26LegacyCompilerDocumentsMatch,
@@ -49,9 +51,15 @@ const trustedLegacyCaptureCandidateAuthorities = [
   trustedLegacyCaptureCandidateAuthorityRef,
   paper2026IPrintSuccessorCandidateAuthorityRef,
   paper2026ISuccessorCandidateAuthorityRef,
+  paper2026IOwnerQaContentSuccessorCandidateAuthorityRef,
 ]
 const paper2026ISuccessorSourceCaptureSha256 =
   'sha256:398b386bd2a1d343a96623232d81914b5d5fb6f8308d188761bd9f224f4a84cd'
+const paper2026IOwnerQaContentSuccessorChoice =
+  'paper-2026-i-owner-qa-content-successor-v1'
+const trustedOwnerQaContentSuccessorCompile = Symbol(
+  'trustedOwnerQaContentSuccessorCompile',
+)
 
 function sameAuthorityRef(left, right) {
   return Boolean(
@@ -73,6 +81,7 @@ function trustedLegacyCaptureCandidateAuthorityFor(
       trustedLegacyCaptureCandidateAuthorityRef,
       paper2026IPrintSuccessorCandidateAuthorityRef,
       paper2026ISuccessorCandidateAuthorityRef,
+      paper2026IOwnerQaContentSuccessorCandidateAuthorityRef,
     ]
   return candidates.find((candidate) =>
     sameAuthorityRef(authority, candidate)) || null
@@ -1903,7 +1912,7 @@ function parseDocxSourceEnvelope(documents, diagnostics) {
 function parseTicket26LegacySourceEnvelope(
   documents,
   diagnostics,
-  { legacySourceAdapterVersion = '4' } = {},
+  { legacySourceAdapterVersion = '4', ownerQaContentSuccessor = false } = {},
 ) {
   const envelopes = documents.filter(
     (document) => document.mediaType === TICKET_26_LEGACY_SOURCE_ENVELOPE_MEDIA_TYPE,
@@ -1951,7 +1960,12 @@ function parseTicket26LegacySourceEnvelope(
       return null
     }
     return {
-      value: inspection.source,
+      value: ownerQaContentSuccessor
+        ? applyTicket26OwnerQaContentSuccessor(
+            sourceCapture.bytes,
+            inspection.source,
+          )
+        : inspection.source,
       adapter: 'ticket-26-legacy-source-envelope',
       envelope,
       sourceDocumentId: sourceCapture.documentId,
@@ -2999,6 +3013,8 @@ export function compileCanonicalPaper(
       historicalReplayCapability,
     )
   const { documents, diagnostics } = captureRequestEvidence(request)
+  const ownerQaContentSuccessor = request?.[trustedOwnerQaContentSuccessorCompile]
+    === paper2026IOwnerQaContentSuccessorChoice
   const requestedLegacyAuthority = trustedLegacyCaptureCandidateAuthorityFor(
     request?.authority,
     { allowsHistoricalReplay },
@@ -3008,6 +3024,7 @@ export function compileCanonicalPaper(
       requestedLegacyAuthority,
       { allowsHistoricalReplay },
     ),
+    ownerQaContentSuccessor,
   })
   const capture = buildSourceCapture(documents, parsed, diagnostics)
   const reviewDecisions = normalizeReviewDecisions(request?.reviewDecisions, capture, diagnostics)
@@ -3136,6 +3153,7 @@ function compileTrustedLegacyCaptureCandidate(
   request,
   authority = trustedLegacyCaptureCandidateAuthorityRef,
   historicalReplayCapability = null,
+  operatorChoices = {},
 ) {
   const allowsHistoricalReplay =
     isRegisteredConfirmedCanonicalHistoricalReplayCapability(
@@ -3151,6 +3169,9 @@ function compileTrustedLegacyCaptureCandidate(
     ...request,
     authority: trustedAuthority,
     [trustedLegacyCaptureCandidateCompile]: true,
+    ...(operatorChoices.sourceCorrection === paper2026IOwnerQaContentSuccessorChoice
+      ? { [trustedOwnerQaContentSuccessorCompile]: paper2026IOwnerQaContentSuccessorChoice }
+      : {}),
   }, { historicalReplayCapability })
 }
 
@@ -3267,6 +3288,7 @@ function trustedLegacyCaptureCandidateBody({
   interpretation,
   issues,
   authority,
+  operatorChoices = {},
 }) {
   return {
     schemaVersion: trustedLegacyCaptureCandidateSchemaVersion,
@@ -3284,7 +3306,7 @@ function trustedLegacyCaptureCandidateBody({
         byteLength: document.byteLength,
       })),
     },
-    operatorChoices: {},
+    operatorChoices,
     interpretation,
     issues,
   }
@@ -3303,13 +3325,20 @@ function isTrustedLegacyCaptureCandidateShape(candidate) {
   ])
     && candidate.schemaVersion === trustedLegacyCaptureCandidateSchemaVersion
     && candidate.sourceBytes instanceof Uint8Array
-    && exactKeys(candidate.operatorChoices, [])
+    && (
+      exactKeys(candidate.operatorChoices, [])
+      || (
+        exactKeys(candidate.operatorChoices, ['sourceCorrection'])
+        && candidate.operatorChoices.sourceCorrection === paper2026IOwnerQaContentSuccessorChoice
+      )
+    )
 }
 
 function trustedLegacyCaptureCandidateFromBytes(
   sourceBytes,
   authority = trustedLegacyCaptureCandidateAuthorityRef,
   historicalReplayCapability = null,
+  operatorChoices = {},
 ) {
   const allowsHistoricalReplay =
     isRegisteredConfirmedCanonicalHistoricalReplayCapability(
@@ -3325,6 +3354,8 @@ function trustedLegacyCaptureCandidateFromBytes(
     }
   }
   const immutableBytes = new Uint8Array(sourceBytes)
+  const ownerQaContentSuccessor = operatorChoices?.sourceCorrection
+    === paper2026IOwnerQaContentSuccessorChoice
   let inspection
   try {
     inspection = inspectTicket26LegacyEnvelopeSource(immutableBytes, {
@@ -3344,9 +3375,14 @@ function trustedLegacyCaptureCandidateFromBytes(
   const body = trustedLegacyCaptureCandidateBody({
     sourceBytes: immutableBytes,
     inspection,
-    interpretation: inspection.source,
+    interpretation: ownerQaContentSuccessor
+      ? applyTicket26OwnerQaContentSuccessor(immutableBytes, inspection.source)
+      : inspection.source,
     issues: [],
     authority: trustedAuthority,
+    operatorChoices: ownerQaContentSuccessor
+      ? { sourceCorrection: paper2026IOwnerQaContentSuccessorChoice }
+      : {},
   })
   return {
     candidate: {
@@ -3371,6 +3407,24 @@ export function importPaper2026ISuccessorCandidate(sourceCaptureBytes) {
   return trustedLegacyCaptureCandidateFromBytes(
     sourceCaptureBytes,
     paper2026ISuccessorCandidateAuthorityRef,
+  )
+}
+
+export function importPaper2026IOwnerQaContentSuccessorCandidate(sourceCaptureBytes) {
+  if (
+    !(sourceCaptureBytes instanceof Uint8Array)
+    || sha256(sourceCaptureBytes) !== paper2026ISuccessorSourceCaptureSha256
+  ) {
+    return {
+      candidate: null,
+      issues: [trustedDocxIssue('TICKET_26_LEGACY_CAPTURE_UNTRUSTED', 'paper-2026-i Owner QA content successor requires its exact committed source capture bytes')],
+    }
+  }
+  return trustedLegacyCaptureCandidateFromBytes(
+    sourceCaptureBytes,
+    paper2026IOwnerQaContentSuccessorCandidateAuthorityRef,
+    null,
+    { sourceCorrection: paper2026IOwnerQaContentSuccessorChoice },
   )
 }
 
@@ -3399,15 +3453,17 @@ function candidateRoute(candidate, historicalReplayCapability = null) {
     })
     if (!authority) return null
     return {
-      rerun: () => trustedLegacyCaptureCandidateFromBytes(
+    rerun: () => trustedLegacyCaptureCandidateFromBytes(
         candidate.sourceBytes,
         authority,
         historicalReplayCapability,
+        candidate.operatorChoices,
       ),
       compile: (rerun) => compileTrustedLegacyCaptureCandidate(
         buildTicket26LegacyCompilerRequest(rerun.candidate.sourceBytes),
         authority,
         historicalReplayCapability,
+        rerun.candidate.operatorChoices,
       ),
     }
   }

@@ -27,6 +27,12 @@ const expectedRoles = ['asset-projection', 'source-provenance', 'official-answer
 const figureInventoryRole = 'figure-inventory'
 const figureMediaRole = 'figure-media'
 const currentLegacySourceAdapterVersion = '4'
+const ownerQaSourcePdfSha256 = '31a87069e6d530afba9123eec0487adf45e52e0b98530af80b62476f169e4d0f'
+const ownerQaLegacyOzoneText = 'ground-level ozone (臭氧) 一a major factor'
+const ownerQaCorrectedOzoneText = 'ground-level ozone (臭氧)—a major factor'
+const ownerQaApplicationCapturePath = 'test-fixtures/paper-canonical/evidence/application-writing-paper-2026-i-corrected.json'
+const ownerQaApplicationTranscriptionPath = 'test-fixtures/paper-canonical/evidence/application-writing-transcription-paper-2026-i-corrected.json'
+const ownerQaApplicationTitle = 'Ranking My College Life Essentials'
 const textDecoder = new TextDecoder()
 const textEncoder = new TextEncoder()
 const pngSignature = [137, 80, 78, 71, 13, 10, 26, 10]
@@ -62,6 +68,18 @@ function legacySourceAdapterVersionFor(options) {
     throw new Error(`Unsupported trusted Ticket 26 legacy source adapter version: ${String(version)}`)
   }
   return version
+}
+
+function ownerQaSourceAsset(asset, meta) {
+  if (meta?.sourceFileSha256 !== ownerQaSourcePdfSha256) {
+    fail('Owner QA source correction does not bind the expected immutable paper.pdf')
+  }
+  const paragraph = asset.content?.groups?.['group-2026-i-reading-c']?.passage?.paragraphs
+    ?.find((candidate) => typeof candidate?.text === 'string' && candidate.text.includes('ground-level ozone'))
+  if (!paragraph || !paragraph.text.includes(ownerQaLegacyOzoneText)) {
+    fail('Owner QA source correction cannot locate the exact legacy Reading C ozone text')
+  }
+  return asset
 }
 
 function roleToken(value) {
@@ -231,8 +249,8 @@ function validateBatchSourceDocuments(batchPaper) {
 }
 
 function validateMaterializedDocumentShapes(record) {
-  const asset = record.documents.find((document) => document.role === 'asset-projection').value
   const meta = record.documents.find((document) => document.role === 'source-provenance').value
+  const asset = record.documents.find((document) => document.role === 'asset-projection').value
   const answers = record.documents.find((document) => document.role === 'official-answer-lead').value
   if (
     asset.schemaVersion !== 'paper-asset-v1'
@@ -253,6 +271,69 @@ function validateMaterializedDocumentShapes(record) {
   }
   if (isRecordValue(asset.answerKey) && isRecordValue(asset.answerKey.answers) && digestJson(asset.answerKey.answers) !== digestJson(answers.answers)) {
     fail(`${record.paperId} embedded asset answers disagree with the frozen official answer key`)
+  }
+}
+
+function ownerQaStructuredApplicationSource(asset, meta) {
+  if (meta?.sourceFileSha256 !== ownerQaSourcePdfSha256) {
+    fail('Owner QA Application Writing projection does not bind the expected immutable paper.pdf')
+  }
+  const captureBytes = repositoryFile(ownerQaApplicationCapturePath)
+  const transcriptionBytes = repositoryFile(ownerQaApplicationTranscriptionPath)
+  const capture = parseJson(captureBytes, 'Owner QA Application Writing source capture')
+  const transcription = parseJson(transcriptionBytes, 'Owner QA Application Writing source transcription')
+  const group = capture?.group
+  const titlePart = group?.variant?.givenSkeleton?.parts?.find(
+    (part) => part?.role === 'title' && part?.placement === 'answer_region_top',
+  )
+  const titleBlock = group?.content?.blocks?.find(
+    (block) => block?.nodeId === titlePart?.blockRef,
+  )
+  const title = titleBlock?.inlines?.map((inline) => inline?.text || '').join('')
+  const rawTitle = asset?.content?.writingTasks?.['wt-2026-i-application']?.applicationGiven
+  if (
+    capture?.schemaVersion !== 'application-writing-source-capture-v1'
+    || transcription?.schemaVersion !== 'application-writing-source-transcription-v1'
+    || capture.paperId !== asset.paper?.paperId
+    || transcription.paperId !== asset.paper?.paperId
+    || capture.sourceDocumentDigest !== `sha256:${meta.sourceFileSha256}`
+    || transcription.sourceDocumentDigest !== capture.sourceDocumentDigest
+    || group?.groupId !== 'group-2026-i-writing-application'
+    || group?.slotId !== 'writing.application'
+    || group?.variant?.writingTaskId !== 'wt-2026-i-application'
+    || group?.variant?.response?.answerRegionRef !== 'writing.application-box'
+    || !titlePart
+    || title !== ownerQaApplicationTitle
+    || rawTitle !== title
+    || transcription?.answerRegion?.answerRegionRef !== group.variant.response.answerRegionRef
+    || !Array.isArray(transcription?.answerRegion?.partBlockIds)
+    || !transcription.answerRegion.partBlockIds.includes(titlePart.blockRef)
+  ) {
+    fail('Owner QA Application Writing structured source does not close over the immutable source title')
+  }
+  const observations = group.observations
+  const expectedObservationIds = [
+    'observation:application:group-2026-i-writing-application:word-count',
+    'observation:application:group-2026-i-writing-application:given:title',
+    'observation:application:group-2026-i-writing-application:response',
+  ]
+  if (
+    !Array.isArray(observations)
+    || observations.length !== expectedObservationIds.length
+    || !observations.every((observation, index) => (
+      isRecordValue(observation)
+      && exactKeys(observation, ['observationId', 'kind', 'value'])
+      && observation.observationId === expectedObservationIds[index]
+      && typeof observation.kind === 'string'
+      && isRecordValue(observation.value)
+    ))
+  ) {
+    fail('Owner QA Application Writing structured evidence has no closed reviewed observations')
+  }
+  return {
+    content: structuredClone(group.content),
+    variant: structuredClone(group.variant),
+    observations: structuredClone(observations),
   }
 }
 
@@ -1044,6 +1125,73 @@ export function deriveTicket26LegacySource(sourceCaptureBytes, options = {}) {
     inactiveSlots: inactiveSlotsForSource(profileId, assetSpanId),
     inactiveSourceClosures: [],
   }
+}
+
+/**
+ * The v4 Owner-QA source successor is a content correction over one exact
+ * frozen capture. It is deliberately not a new source adapter: v45 retains
+ * adapter v4 while v44 remains immutable history; this successor verifies the original PDF,
+ * its legacy Application title, and the pre-existing structured evidence.
+ */
+export function applyTicket26OwnerQaContentSuccessor(sourceCaptureBytes, source) {
+  const record = resolveTicket26LegacySourceCapture(sourceCaptureBytes)
+  if (!record || record.paperId !== 'paper-2026-i') {
+    throw new Error('Owner QA content successor requires the exact paper-2026-i Ticket 26 capture')
+  }
+  const rawAsset = record.documents.find((document) => document.role === 'asset-projection').value
+  const meta = record.documents.find((document) => document.role === 'source-provenance').value
+  const asset = ownerQaSourceAsset(rawAsset, meta)
+  const corrected = structuredClone(source)
+  if (corrected?.provenance?.sourceFileSha256 !== meta.sourceFileSha256) {
+    throw new Error('Owner QA content successor source provenance is not the bound paper.pdf')
+  }
+  const reading = corrected.groups?.find((group) => group.groupId === 'group-2026-i-reading-c')
+  const paragraph = reading?.content?.blocks?.find((block) => (
+    block?.kind === 'paragraph'
+    && block.inlines?.some((inline) => String(inline?.text || '').includes('ground-level ozone'))
+  ))
+  const readingText = paragraph?.inlines?.map((inline) => inline?.text || '').join('')
+  if (!paragraph || !readingText?.includes(ownerQaLegacyOzoneText)) {
+    throw new Error('Owner QA content successor cannot locate the exact Reading C source text')
+  }
+  for (const inline of paragraph.inlines) {
+    if (typeof inline?.text === 'string') {
+      inline.text = inline.text.replace(ownerQaLegacyOzoneText, ownerQaCorrectedOzoneText)
+    }
+  }
+  const application = corrected.groups?.find(
+    (group) => group.groupId === 'group-2026-i-writing-application',
+  )
+  const structuredApplication = ownerQaStructuredApplicationSource(asset, meta)
+  if (!application || application.slotId !== 'writing.application') {
+    throw new Error('Owner QA content successor cannot locate Application Writing')
+  }
+  application.content = structuredApplication.content
+  application.variant = structuredApplication.variant
+  const assetDocument = record.documents.find((document) => document.role === 'asset-projection')
+  const observationIds = new Set(corrected.observations?.map((observation) => observation?.observationId))
+  if (!assetDocument || observationIds.size !== corrected.observations?.length) {
+    throw new Error('Owner QA content successor has no closed source-observation identity set')
+  }
+  for (const observation of structuredApplication.observations) {
+    if (
+      !isRecordValue(observation)
+      || !exactKeys(observation, ['observationId', 'kind', 'value'])
+      || observationIds.has(observation.observationId)
+    ) {
+      throw new Error('Owner QA content successor cannot attach a closed Application source observation')
+    }
+    observationIds.add(observation.observationId)
+    corrected.observations.push({
+      observationId: observation.observationId,
+      kind: observation.kind,
+      documentInputKey: assetDocument.inputKey,
+      value: structuredClone(observation.value),
+      span: { start: 0, end: assetDocument.byteLength },
+      extraction: { adapterId: 'application-writing-source-capture', version: '2' },
+    })
+  }
+  return corrected
 }
 
 const compilerRolesByCaptureRole = {

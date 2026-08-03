@@ -170,7 +170,7 @@ export function loadCanonicalGrammarFillPrintChrome({
   let sourceBinding = null
   if (requiresPublicSourceBinding) {
     if (
-      sourceAssetVersion !== publicOracle.sourceAssetVersion
+      sourceAssetVersion < publicOracle.sourceAssetVersion
       || chromeAssetDigest
         !== `sha256:${publicOracle.sourceBindings.paperAsset.sha256}`
       || groupId !== publicOracle.grammarFill.groupId

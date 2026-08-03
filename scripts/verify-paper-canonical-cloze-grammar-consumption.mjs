@@ -830,9 +830,17 @@ const ticket35GroupIds = [
   'group-2026-i-writing-application',
   'group-2026-i-writing-continuation',
 ]
+const ownerQaOzoneText = 'ground-level ozone (臭氧)—a major factor'
+const ownerQaLegacyOzoneText = 'ground-level ozone (臭氧) 一a major factor'
+const ownerQaApplicationTitle = 'Ranking My College Life Essentials'
+const ownerQaBlankWidthsPx = Object.freeze({
+  q36: 64.390625,
+  q41: 46.1875,
+  q56: 46.1875,
+})
 
-function ticket35V3Source() {
-  return ticket35Source('v3')
+function ticket35V4Source() {
+  return ticket35Source('v4')
 }
 
 function ticket35V2Source() {
@@ -863,7 +871,7 @@ function ticket35Source(versionName) {
   return { versionRoot, paperAsset }
 }
 
-function ticket35V3Reference() {
+function ticket35V4Reference() {
   const db = new DatabaseSync(path.join(ticket35PublicationStore, 'publication.sqlite'), {
     readOnly: true,
   })
@@ -873,9 +881,9 @@ function ticket35V3Reference() {
       FROM canonical_paper_publications
       WHERE paper_id = ? AND is_current = 1
     `).get(fixture.source.paperId)
-    assert.ok(row, 'Ticket 35 v3 Publication is current in its immutable fixture store')
-    assert.equal(row.version_name, 'v3')
-    assert.equal(row.source_asset_version, 3)
+    assert.ok(row, 'Ticket 35 v4 Publication is current in its immutable fixture store')
+    assert.equal(row.version_name, 'v4')
+    assert.equal(row.source_asset_version, 4)
     return {
       paperId: row.paper_id,
       versionName: row.version_name,
@@ -1034,7 +1042,13 @@ async function assertTicket35BatchAssetIdentity({
 
 async function assertTicket35Screen(page, paperAsset, outputDir) {
   const { notice, starters } = ticket35WritingSourceText(paperAsset)
-  const observation = await page.evaluate(({ noticeText, starterLines }) => {
+  const observation = await page.evaluate(({
+    noticeText,
+    starterLines,
+    ozoneText,
+    legacyOzoneText,
+    applicationTitle,
+  }) => {
     const application = document.querySelector('[data-paper-browse-anchor="group-2026-i-writing-application"]')
     const continuation = document.querySelector('[data-paper-browse-anchor="group-2026-i-writing-continuation"]')
     const grammarBlank = document.querySelector('[data-canonical-group-type="grammarFill"] .ps-paper-blank')
@@ -1098,8 +1112,36 @@ async function assertTicket35Screen(page, paperAsset, outputDir) {
       peerHeading: font(peer),
       applicationPresent: Boolean(application),
       continuationPresent: Boolean(continuation),
+      ownerQaContent: {
+        hasOzoneEmDash: document.body.innerText.includes(ozoneText),
+        hasLegacyOzoneText: document.body.innerText.includes(legacyOzoneText),
+        applicationTitleOccurrences: application
+          ? application.innerText.split(applicationTitle).length - 1
+          : 0,
+        applicationTitleInsideResponse: response
+          ? response.innerText.split(applicationTitle).length - 1
+          : 0,
+        screenQ36BlankBottomRelation: document.querySelector(
+          '[data-canonical-group-type="sevenChoices"] .ps-paper-blank[data-canonical-question-id="q-2026-i-036"]',
+        )
+          ? {
+              alignItems: getComputedStyle(document.querySelector(
+                '[data-canonical-group-type="sevenChoices"] .ps-paper-blank[data-canonical-question-id="q-2026-i-036"]',
+              )).alignItems,
+              borderBottomWidth: getComputedStyle(document.querySelector(
+                '[data-canonical-group-type="sevenChoices"] .ps-paper-blank[data-canonical-question-id="q-2026-i-036"]',
+              )).borderBottomWidth,
+            }
+          : null,
+      },
     }
-  }, { noticeText: notice, starterLines: starters })
+  }, {
+    noticeText: notice,
+    starterLines: starters,
+    ozoneText: ownerQaOzoneText,
+    legacyOzoneText: ownerQaLegacyOzoneText,
+    applicationTitle: ownerQaApplicationTitle,
+  })
   assert.equal(observation.applicationPresent, true, 'v3 Screen contains Application Writing')
   assert.equal(observation.continuationPresent, true, 'v3 Screen contains Continuation Writing')
   assert.equal(observation.applicationNoticeBeforeResponse, true, `v3 Screen keeps the exact Application notice before the response box: ${JSON.stringify(observation)}`)
@@ -1125,6 +1167,7 @@ async function assertTicket35Screen(page, paperAsset, outputDir) {
     writeFileSync(path.join(outputDir, 'screen.html'), await page.content())
     await page.screenshot({ path: path.join(outputDir, 'screen.png'), fullPage: true })
   }
+  return observation
 }
 
 async function assertTicket35V43Screen(page) {
@@ -1151,12 +1194,12 @@ async function assertTicket35V43Screen(page) {
 }
 
 async function assertTicket35CompletePublication({ rootDir }) {
-  const { paperAsset } = ticket35V3Source()
+  const { paperAsset } = ticket35V4Source()
   const { paperAsset: v43PaperAsset } = ticket35V2Source()
-  const canonicalReference = ticket35V3Reference()
+  const canonicalReference = ticket35V4Reference()
   const grammarFillAuthority = grammarFillRhythmForPaperAuthority({
     paperId: canonicalReference.paperId,
-    manifestVersion: 44,
+    manifestVersion: 45,
   })
   assert.equal(grammarFillAuthority.version, '7', 'Ticket 35 selects the bound Grammar Fill v7 authority')
   assert.equal(
@@ -1177,10 +1220,10 @@ async function assertTicket35CompletePublication({ rootDir }) {
     /bound bottom-rule authority/,
     'the contradictory v6 lift cannot fall through to an unversioned shared blank ruling',
   )
-  const v3Root = path.join(rootDir, 'ticket-35-v3-publication')
+  const v4Root = path.join(rootDir, 'ticket-35-v4-publication')
   cpSync(
     path.join(ticket35PublicationStore, fixture.source.paperId),
-    path.join(v3Root, fixture.source.paperId),
+    path.join(v4Root, fixture.source.paperId),
     { recursive: true },
   )
   const outputDir = provisionActualArtifacts
@@ -1223,6 +1266,7 @@ async function assertTicket35CompletePublication({ rootDir }) {
     v43Db.close()
   }
 
+  let screenObservation
   const fixtureDb = new DatabaseSync(path.join(ticket35PublicationStore, 'publication.sqlite'), {
     readOnly: true,
   })
@@ -1291,8 +1335,8 @@ async function assertTicket35CompletePublication({ rootDir }) {
     }
     const screenConsumption = runtime.load({ paperId: fixture.source.paperId, consumerId: 'screen' })
     assert.equal(screenConsumption.disposition, 'ready')
-    assert.equal(screenConsumption.sourceAssetVersion, 3)
-    assert.equal(screenConsumption.authorityRef?.manifestVersion, '44')
+    assert.equal(screenConsumption.sourceAssetVersion, 4)
+    assert.equal(screenConsumption.authorityRef?.manifestVersion, '45')
     const grammarFillScreenSurface = buildCanonicalConsumptionSurfaceData({
       consumption: screenConsumption,
       familyContractId: 'grammar-fill',
@@ -1310,7 +1354,9 @@ async function assertTicket35CompletePublication({ rootDir }) {
       invalidConsumption: null,
       outputDir: null,
       verifyRejection: false,
-      onReady: (page) => assertTicket35Screen(page, paperAsset, outputDir),
+      onReady: async (page) => {
+        screenObservation = await assertTicket35Screen(page, paperAsset, outputDir)
+      },
     })
   } finally {
     fixtureDb.close()
@@ -1319,8 +1365,8 @@ async function assertTicket35CompletePublication({ rootDir }) {
   await assertTicket35BatchAssetIdentity({ rootDir, paperAsset, canonicalReference })
 
   await withActualDraftApi({
-    fixtureRoot: path.join(rootDir, 'ticket-35-v3-http'),
-    paperAssetsRoot: v3Root,
+    fixtureRoot: path.join(rootDir, 'ticket-35-v4-http'),
+    paperAssetsRoot: v4Root,
     canonicalReference,
     groupIds: ticket35GroupIds,
   }, async ({ baseUrl, draftPaperId }) => {
@@ -1329,6 +1375,7 @@ async function assertTicket35CompletePublication({ rootDir }) {
     try {
       const page = await browser.newPage()
       const { notice, starters } = ticket35WritingSourceText(paperAsset)
+      const ownerQaPrintObservations = []
       for (const versionType of ['student', 'teacher']) {
         const htmlResponse = await fetchPublic(
           `${baseUrl}/api/draft-papers/${draftPaperId}/print-html?versionType=${versionType}`,
@@ -1336,7 +1383,13 @@ async function assertTicket35CompletePublication({ rootDir }) {
         const html = await htmlResponse.text()
         assert.equal(htmlResponse.status, 200, `v3 complete ${versionType} public Print HTML succeeds: ${html}`)
         await page.setContent(html, { waitUntil: 'load' })
-        const observation = await page.evaluate(({ noticeText, starterLines }) => {
+        const observation = await page.evaluate(({
+          noticeText,
+          starterLines,
+          ozoneText,
+          legacyOzoneText,
+          applicationTitle,
+        }) => {
           const application = document.querySelector('[data-canonical-group-id="group-2026-i-writing-application"]')
           const continuation = document.querySelector('[data-canonical-group-id="group-2026-i-writing-continuation"]')
           const grammarBlank = document.querySelector('[data-canonical-group-type="grammarFill"] .print-blank')
@@ -1362,6 +1415,27 @@ async function assertTicket35CompletePublication({ rootDir }) {
             const inside = matches.filter((node) => continuationResponse?.contains(node)).length
             return { total: matches.length, inside, outside: matches.length - inside }
           })
+          const blankGeometry = Object.fromEntries([
+            ['q36', 'q-2026-i-036'],
+            ['q41', 'q-2026-i-041'],
+            ['q56', 'q-2026-i-056'],
+          ].map(([key, questionId]) => {
+            const blank = document.querySelector(`[data-canonical-question-id="${questionId}"] .print-blank`)
+            const number = blank?.querySelector('.print-blank-num')
+            const blankStyle = blank ? getComputedStyle(blank) : null
+            const numberStyle = number ? getComputedStyle(number) : null
+            const blankRect = blank?.getBoundingClientRect()
+            const numberRect = number?.getBoundingClientRect()
+            const fontSize = Number.parseFloat(numberStyle?.fontSize || '')
+            return [key, {
+              blankWidthPx: blankRect?.width ?? Number.NaN,
+              blankLineHeightRatio: Number.parseFloat(blankStyle?.lineHeight || '') / fontSize,
+              numberLineHeightRatio: Number.parseFloat(numberStyle?.lineHeight || '') / fontSize,
+              numberBoxBottomGapPx: blankRect && numberRect
+                ? blankRect.bottom - numberRect.bottom
+                : Number.NaN,
+            }]
+          }))
           return {
             groupIds: [...document.querySelectorAll('[data-canonical-group-id]')].map((node) => node.getAttribute('data-canonical-group-id')),
             partHeadings: headingNodes.map((node) => node.textContent?.trim()),
@@ -1392,8 +1466,25 @@ async function assertTicket35CompletePublication({ rootDir }) {
               : Number.NaN,
             writingHeading: font(part),
             peerHeading: font(peer),
+            ownerQaContent: {
+              hasOzoneEmDash: document.body.innerText.includes(ozoneText),
+              hasLegacyOzoneText: document.body.innerText.includes(legacyOzoneText),
+              applicationTitleOccurrences: application
+                ? application.innerText.split(applicationTitle).length - 1
+                : 0,
+              applicationTitleInsideResponse: response
+                ? response.innerText.split(applicationTitle).length - 1
+                : 0,
+              blankGeometry,
+            },
           }
-        }, { noticeText: notice, starterLines: starters })
+        }, {
+          noticeText: notice,
+          starterLines: starters,
+          ozoneText: ownerQaOzoneText,
+          legacyOzoneText: ownerQaLegacyOzoneText,
+          applicationTitle: ownerQaApplicationTitle,
+        })
         assert.deepEqual(observation.groupIds.filter(Boolean), ticket35GroupIds, `v3 complete ${versionType} document retains all canonical groups in source order`)
         assert.equal(observation.partHeadings.some((text) => text?.includes('第二部分')), true, `v3 complete ${versionType} document retains Reading chrome`)
         assert.equal(observation.partHeadings.some((text) => text?.includes('第三部分')), true, `v3 complete ${versionType} document retains Language chrome`)
@@ -1413,6 +1504,10 @@ async function assertTicket35CompletePublication({ rootDir }) {
         assert.equal(Math.abs(observation.clozeNumberToPassageContinuationOffset) <= 0.5, true, `v3 complete ${versionType} Print aligns the Cloze qnum box with the passage continuation boundary`)
         assert.equal(Math.abs(observation.clozeNumberToFirstLabelGap) <= 0.5, true, `v3 complete ${versionType} Print has no added qnum-box→A layout gap`)
         assert.deepEqual(observation.writingHeading, observation.peerHeading, `v3 complete ${versionType} Print gives every part score run one typographic treatment`)
+        ownerQaPrintObservations.push({
+          versionType,
+          ...observation.ownerQaContent,
+        })
         const pdfResponse = await fetchPublic(
           `${baseUrl}/api/draft-papers/${draftPaperId}/print-pdf`,
           {
@@ -1434,6 +1529,55 @@ async function assertTicket35CompletePublication({ rootDir }) {
           writeFileSync(path.join(outputDir, `print-${versionType}.pdf`), pdfBytes)
         }
       }
+      const compactBlankGeometry = (geometry) => Object.entries(geometry).every(([key, value]) => (
+        Math.abs(value.blankWidthPx - ownerQaBlankWidthsPx[key]) <= 0.02
+        && Math.abs(value.blankLineHeightRatio - 1.05) <= 0.02
+        && Math.abs(value.numberLineHeightRatio - 1.05) <= 0.02
+        && Math.abs(value.numberBoxBottomGapPx) <= 0.02
+      ))
+      const sharedPrintLineHeight = (geometry) => {
+        const ratios = Object.values(geometry).map((value) => value.numberLineHeightRatio)
+        return Math.max(...ratios) - Math.min(...ratios) <= 0.001
+      }
+      assert.deepEqual(
+        {
+          screen: {
+            hasOzoneEmDash: screenObservation.ownerQaContent.hasOzoneEmDash,
+            hasLegacyOzoneText: screenObservation.ownerQaContent.hasLegacyOzoneText,
+            applicationTitleOccurrences: screenObservation.ownerQaContent.applicationTitleOccurrences,
+            applicationTitleInsideResponse: screenObservation.ownerQaContent.applicationTitleInsideResponse,
+            q36BottomRule: screenObservation.ownerQaContent.screenQ36BlankBottomRelation,
+          },
+          print: ownerQaPrintObservations.map((entry) => ({
+            versionType: entry.versionType,
+            hasOzoneEmDash: entry.hasOzoneEmDash,
+            hasLegacyOzoneText: entry.hasLegacyOzoneText,
+            applicationTitleOccurrences: entry.applicationTitleOccurrences,
+            applicationTitleInsideResponse: entry.applicationTitleInsideResponse,
+            compactBlankGeometry: compactBlankGeometry(entry.blankGeometry),
+            sharedPrintLineHeight: sharedPrintLineHeight(entry.blankGeometry),
+          })),
+        },
+        {
+          screen: {
+            hasOzoneEmDash: true,
+            hasLegacyOzoneText: false,
+            applicationTitleOccurrences: 1,
+            applicationTitleInsideResponse: 1,
+            q36BottomRule: { alignItems: 'flex-end', borderBottomWidth: '1px' },
+          },
+          print: ['student', 'teacher'].map((versionType) => ({
+            versionType,
+            hasOzoneEmDash: true,
+            hasLegacyOzoneText: false,
+            applicationTitleOccurrences: 1,
+            applicationTitleInsideResponse: 1,
+            compactBlankGeometry: true,
+            sharedPrintLineHeight: true,
+          })),
+        },
+        'Ticket 35 Owner QA content and shared Print blank geometry are source-true on every public surface',
+      )
     } finally {
       await browser.close()
     }
