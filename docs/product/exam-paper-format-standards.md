@@ -4,7 +4,7 @@
 
 本文件是唯一的人类可读索引；当前 canonical 编译、校验、发布和受支持的
 Screen / Print-PDF consumer 只从
-[`standards/paper-canonical/manifest-v36.json`](../../standards/paper-canonical/manifest-v36.json)
+[`standards/paper-canonical/manifest-v44.json`](../../standards/paper-canonical/manifest-v44.json)
 解析一份 digest-closed 的权威闭包。这里不复制卷型题号、分值、题组
 cardinality、清洗条件或字体/物理排版数值，也不能被 caller 当作第二套配置。
 
@@ -40,6 +40,8 @@ bearing 保留，不得拉伸或以墨迹边缘接触替代该布局关系。A/B
 0.411765em，四个选项使用金样归一化固定起点。
 七选五、完形与语法填空横线保持 Screen 1px、Print/PDF 0.5pt，并共用题号到
 横线的纵向关系：横线位于题号字形下方且不得跨过数字；语法填空不得另行上抬。
+Grammar Fill 的该关系由 digest-bound `grammar-fill-rhythm-v7` 直接绑定；共享
+blank ruling 只消费这个绑定值，不得以未版本化 token 覆盖它。
 各题型横线长度仍按 §6 独立取值。应用文标题到首个 prompt 为一个 baseline step；
 续写标题到 instruction 为一个 baseline step，instruction 到材料为 1.5
 baseline steps，二者由独立 authority 拥有。Normalization Rules v5 只在英文 token 邻接中文释义时收窄

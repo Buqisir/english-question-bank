@@ -7,6 +7,7 @@ import {
   trustedDocxCandidateAuthorityRef,
   trustedLegacyHistoricalCandidateAuthorityRef,
   trustedLegacyCaptureCandidateAuthorityRef,
+  paper2026IPrintSuccessorCandidateAuthorityRef,
   paper2026ISuccessorCandidateAuthorityRef,
 } from '../../shared/paper-canonical/authority.mjs'
 import {
@@ -30,12 +31,15 @@ const migrationManifestDigest =
   'sha256:9992329a6de0fa3dcbff9fea8a0d6d92b660f0e8049b7978ceb5ff0000610e41'
 const trustedDocxSourcePath =
   'test-fixtures/paper-import/paper-2025-i-docx-source-adapter/2025-nck1-answer-source.docx'
-const paper2026ISuccessorCorrectionPath =
+const paper2026IPrintSuccessorCorrectionPath =
   'docs/cuts/paper-canonical-unification/migration/paper-2026-i-successor-correction-v1.json'
+const paper2026ITicket35SuccessorCorrectionPath =
+  'docs/cuts/paper-canonical-unification/migration/paper-2026-i-ticket-35-authority-successor-v1.json'
 const admittedAuthorities = [
   trustedDocxCandidateAuthorityRef,
   trustedLegacyHistoricalCandidateAuthorityRef,
   trustedLegacyCaptureCandidateAuthorityRef,
+  paper2026IPrintSuccessorCandidateAuthorityRef,
   paper2026ISuccessorCandidateAuthorityRef,
 ]
 const admittedProofs = new WeakMap()
@@ -217,20 +221,20 @@ function registeredManifest() {
   return manifest
 }
 
-function paper2026ISuccessorRecord(paperId) {
+function paper2026IPrintSuccessorRecord(paperId) {
   if (paperId !== 'paper-2026-i') return null
   const bytes = repositoryBytes(
-    paper2026ISuccessorCorrectionPath,
-    'paper-2026-i successor correction registry',
+    paper2026IPrintSuccessorCorrectionPath,
+    'paper-2026-i print successor correction registry',
   )
-  const record = parseJson(bytes, 'paper-2026-i successor correction registry')
+  const record = parseJson(bytes, 'paper-2026-i print successor correction registry')
   if (
     record?.schemaVersion !== 'paper-2026-i-successor-correction-v1'
     || record.correctionId !== 'paper-2026-i-v42-public-oracle-successor'
     || record.paperId !== paperId
     || record.sourceType !== 'legacy-json'
     || record.evidenceDigest !== digestJson(withoutKey(record, 'evidenceDigest'))
-    || !sameAuthority(record.authority, paper2026ISuccessorCandidateAuthorityRef)
+    || !sameAuthority(record.authority, paper2026IPrintSuccessorCandidateAuthorityRef)
     || record.predecessor?.authority?.manifestVersion !== '42'
     || record.predecessor?.versionName !== 'v1'
     || record.predecessor?.sourceAssetVersion !== 1
@@ -240,7 +244,36 @@ function paper2026ISuccessorRecord(paperId) {
   ) {
     throw admissionError(
       'CANONICAL_PUBLICATION_REGISTERED_REGISTRY_INVALID',
-      'paper-2026-i successor correction registry is not the exact v43 immutable chain',
+      'paper-2026-i print successor correction registry is not the exact v43 immutable chain',
+    )
+  }
+  return record
+}
+
+function paper2026ITicket35SuccessorRecord(paperId) {
+  if (paperId !== 'paper-2026-i') return null
+  const bytes = repositoryBytes(
+    paper2026ITicket35SuccessorCorrectionPath,
+    'paper-2026-i Ticket 35 successor correction registry',
+  )
+  const record = parseJson(bytes, 'paper-2026-i Ticket 35 successor correction registry')
+  if (
+    record?.schemaVersion !== 'paper-2026-i-ticket-35-authority-successor-v1'
+    || record.correctionId !== 'paper-2026-i-v43-grammar-fill-rule-successor'
+    || record.paperId !== paperId
+    || record.sourceType !== 'legacy-json'
+    || record.evidenceDigest !== digestJson(withoutKey(record, 'evidenceDigest'))
+    || !sameAuthority(record.authority, paper2026ISuccessorCandidateAuthorityRef)
+    || record.predecessor?.authority?.manifestVersion !== '43'
+    || record.predecessor?.versionName !== 'v2'
+    || record.predecessor?.sourceAssetVersion !== 2
+    || record.sourceBinding?.officialAnswerInputKey !== 'latest_official_answer_lead'
+    || record.sourceBinding?.expectedProjectedOccurrenceDigest
+      !== 'sha256:f864c176a692e39611bd08f3574f2e626934554b7056057e54f78ac145b40cd4'
+  ) {
+    throw admissionError(
+      'CANONICAL_PUBLICATION_REGISTERED_REGISTRY_INVALID',
+      'paper-2026-i Ticket 35 successor correction registry is not the exact v44 immutable chain',
     )
   }
   return record
@@ -249,7 +282,12 @@ function paper2026ISuccessorRecord(paperId) {
 function registeredRecord(manifest, paperId, suppliedCandidateBytes) {
   const records = [
     ...manifest.papers.filter((record) => record?.paperId === paperId),
-    ...(paperId === 'paper-2026-i' ? [paper2026ISuccessorRecord(paperId)] : []),
+    ...(paperId === 'paper-2026-i'
+      ? [
+          paper2026IPrintSuccessorRecord(paperId),
+          paper2026ITicket35SuccessorRecord(paperId),
+        ]
+      : []),
   ]
   if (records.length < 1) {
     throw admissionError(

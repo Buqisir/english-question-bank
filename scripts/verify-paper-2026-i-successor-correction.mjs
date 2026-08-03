@@ -41,6 +41,10 @@ const accountingPath = path.join(
   repositoryRoot,
   'docs/cuts/paper-canonical-unification/migration/paper-2026-i-successor-publication-accounting-v1.json',
 )
+const ticket35AccountingPath = path.join(
+  repositoryRoot,
+  'docs/cuts/paper-canonical-unification/migration/paper-2026-i-ticket-35-authority-successor-publication-accounting-v1.json',
+)
 const expectedOccurrenceDigest =
   'sha256:f864c176a692e39611bd08f3574f2e626934554b7056057e54f78ac145b40cd4'
 
@@ -100,7 +104,7 @@ function sourceAnswerByQuestionId(rootDir) {
   const sourceCapture = json(path.join(
     rootDir,
     paperId,
-    'versions/v2/canonical/source-capture-v1.json',
+    'versions/v3/canonical/source-capture-v1.json',
   ))
   const documents = sourceCapture.documents.filter((document) =>
     document.inputKey === 'latest_official_answer_lead'
@@ -111,7 +115,7 @@ function sourceAnswerByQuestionId(rootDir) {
   const source = json(path.join(
     rootDir,
     paperId,
-    'versions/v2',
+    'versions/v3',
     documents[0].immutableArtifactRef.relativePath,
   ))
   assert.equal(typeof source.answers, 'object', 'official answer source must contain answers')
@@ -289,9 +293,9 @@ function copiedTargetStore() {
 }
 
 function rewriteSourceCapture(rootDir, mutate) {
-  const versionDir = path.join(rootDir, paperId, 'versions/v2')
+  const versionDir = path.join(rootDir, paperId, 'versions/v3')
   const capturePath = path.join(versionDir, 'canonical/source-capture-v1.json')
-  const publicationPath = path.join(versionDir, 'canonical/canonical-paper-publication-v43.json')
+  const publicationPath = path.join(versionDir, 'canonical/canonical-paper-publication-v44.json')
   const capture = json(capturePath)
   mutate(capture)
   const captureBytes = canonicalBytes(capture)
@@ -371,14 +375,14 @@ function assertPrintBindingAdversaries() {
   expectPublicRejection({
     label: 'swapped immutable source asset fails closed',
     mutate: (rootDir) => writeFileSync(
-      path.join(rootDir, paperId, 'versions/v2/paper-asset.json'),
-      readFileSync(path.join(rootDir, paperId, 'versions/v2/source-evidence/606e0c96b9b853826d8a8.bin')),
+      path.join(rootDir, paperId, 'versions/v3/paper-asset.json'),
+      readFileSync(path.join(rootDir, paperId, 'versions/v3/source-evidence/606e0c96b9b853826d8a8.bin')),
     ),
   })
   expectPublicRejection({
     label: 'tampered immutable source asset fails closed',
     mutate: (rootDir) => {
-      const assetPath = path.join(rootDir, paperId, 'versions/v2/paper-asset.json')
+      const assetPath = path.join(rootDir, paperId, 'versions/v3/paper-asset.json')
       const value = Buffer.from(readFileSync(assetPath))
       value[value.length - 1] ^= 0x01
       writeFileSync(assetPath, value)
@@ -416,6 +420,7 @@ function assertRegisteredAdmission(correction) {
 function assertSuccessorEvidence() {
   const correction = json(correctionPath)
   const accounting = json(accountingPath)
+  const ticket35Accounting = json(ticket35AccountingPath)
   assert.equal(correction.schemaVersion, 'paper-2026-i-successor-correction-v1')
   assert.equal(accounting.schemaVersion, 'paper-2026-i-successor-publication-accounting-v1')
   assert.equal(correction.evidenceDigest, digestJson(withoutKey(correction, 'evidenceDigest')), 'correction evidence digest must close')
@@ -466,8 +471,8 @@ function assertSuccessorEvidence() {
     accounting.predecessor.immutableVersionTree,
     'predecessor v1 immutable bytes must remain unchanged',
   )
-  const latest = assertArtifact(accounting.successor.latest, 'successor latest ref')
-  assert.deepEqual(JSON.parse(latest), accounting.successor.latest.identity, 'latest ref must name the successor exactly')
+  const latest = assertArtifact(ticket35Accounting.successor.latest, 'Ticket 35 current latest ref')
+  assert.deepEqual(JSON.parse(latest), ticket35Accounting.successor.latest.identity, 'latest ref must name the v44 successor exactly')
   const publication = JSON.parse(assertArtifact(accounting.successor.publication, 'successor Publication'))
   assert.equal(publication.publicationDigest, accounting.successor.publication.publicationDigest, 'successor Publication digest must close')
   assert.equal(publication.authority.manifestVersion, '43', 'successor Publication authority must be v43')
@@ -478,7 +483,7 @@ function assertSuccessorEvidence() {
   try {
     assert.equal(db.prepare('PRAGMA integrity_check').get().integrity_check, 'ok', 'SQLite integrity must close')
     const rows = db.prepare('SELECT version_name, source_asset_version, publication_digest, is_current FROM canonical_paper_publications WHERE paper_id = ? ORDER BY version_name').all(paperId).map((row) => ({ ...row }))
-    assert.deepEqual(rows, accounting.durableIndex.paper2026IRows, 'SQLite retains the exact predecessor and sole successor current identity')
+    assert.deepEqual(rows, ticket35Accounting.durableIndex.paper2026IRows, 'SQLite retains the exact V43 predecessor and V44 current identity')
     assert.equal(db.prepare('SELECT paper_id FROM canonical_paper_publications WHERE is_current = 1').all().length, 29, 'SQLite retains exactly 29 logical current identities')
   } finally {
     db.close()
@@ -492,11 +497,11 @@ function assertSuccessorEvidence() {
   assert.equal(questionCount(successorCanonical), questionCount(predecessorCanonical), 'successor must preserve predecessor question count')
   assert.deepEqual(accounting.logicalCounts.frozenCorpus, { papers: 33, groups: 273, questions: 1530, questionOwnedOptions: 4140 }, '33-paper aggregate logical counts must remain unchanged')
   assertRegisteredAdmission(correction)
-  return { correction, accounting }
+  return { correction, accounting, ticket35Accounting }
 }
 
 function assertIdempotentRetry() {
-  const output = execFileSync(process.execPath, ['scripts/materialize-paper-2026-i-successor-correction.mjs', '--check'], {
+  const output = execFileSync(process.execPath, ['scripts/materialize-paper-2026-i-ticket-35-authority-successor.mjs', '--check'], {
     cwd: repositoryRoot,
     encoding: 'utf8',
   })
@@ -510,8 +515,8 @@ const evidence = assertSuccessorEvidence()
 const retry = assertIdempotentRetry()
 const entries = withRuntime(storeRoot, (runtime) => {
   const consumption = runtime.load({ paperId, consumerId: 'print_pdf' })
-  assert.equal(consumption.authorityRef.manifestVersion, '43', 'public Print consumes the v43 successor')
-  assert.equal(consumption.sourceAssetVersion, 2, 'public Print consumes source asset v2')
+  assert.equal(consumption.authorityRef.manifestVersion, '44', 'public Print consumes the v44 successor')
+  assert.equal(consumption.sourceAssetVersion, 3, 'public Print consumes source asset v3')
   const payload = canonicalPrintPayload(consumption, sourceAnswerByQuestionId(storeRoot))
   return ['student', 'teacher'].map((versionType) => {
     const html = publicPrintHtml({ rootDir: storeRoot, consumption, versionType, payload: canonicalPrintPayload(consumption, sourceAnswerByQuestionId(storeRoot)) })
@@ -528,7 +533,7 @@ console.log(JSON.stringify({
     authority: evidence.correction.authority,
     expectedOccurrenceDigest,
     predecessor: evidence.accounting.predecessor.publication,
-    successor: evidence.accounting.successor.latest.identity,
+    successor: evidence.ticket35Accounting.successor.latest.identity,
   },
   idempotentRetry: retry.publication,
   publicPrintHtml: entries.map(({ versionType, observation }) => ({ versionType, ...observation })),

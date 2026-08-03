@@ -24,7 +24,10 @@ import paperTypographyV10 from '../standards/paper-canonical/rendering/paper-typ
 import { consumerContractRefs } from '../shared/paper-canonical/consumers.mjs'
 import { canonicalAuthorityRef } from '../shared/paper-canonical/authority.mjs'
 import { paperSurfaceTokens } from '../shared/papersurface/tokens.mjs'
-import { paperBlankRuling } from '../shared/papersurface/blankRuling.mjs'
+import {
+  grammarFillBlankRulingForRhythm,
+  paperBlankRuling,
+} from '../shared/papersurface/blankRuling.mjs'
 import {
   projectCanonicalConsumerGroup,
 } from '../shared/paper-canonical/consumerProjection.mjs'
@@ -1782,7 +1785,7 @@ function assertClozeReferenceEvidence() {
     [
       paperBlankRuling.sevenChoices,
       paperBlankRuling.cloze,
-      paperBlankRuling.grammarFill,
+      grammarFillBlankRulingForRhythm(grammarFillRhythm),
     ].every((ruling) => ruling.ruleVerticalAlignment === 'blank-bottom'),
     true,
     'all inline blank families select one shared bottom-aligned rule token',

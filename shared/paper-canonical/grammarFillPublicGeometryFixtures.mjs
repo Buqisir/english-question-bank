@@ -1,6 +1,6 @@
-import contract from '../../standards/paper-canonical/rendering/grammar-fill-public-geometry-fixtures-v15.json' with { type: 'json' }
+import contract from '../../standards/paper-canonical/rendering/grammar-fill-public-geometry-fixtures-v16.json' with { type: 'json' }
 
-import { canonicalAuthorityRef } from './authority.mjs'
+import { paper2026ISuccessorCandidateAuthorityRef } from './authority.mjs'
 import { resolveCanonicalConsumerOccurrence } from './consumerProjection.mjs'
 import { consumerContractRefs } from './consumers.mjs'
 
@@ -48,15 +48,17 @@ export function resolveGrammarFillPublicGeometryFixture(
     || variant.surface !== expectedSurface
     || consumption?.disposition !== 'ready'
     || consumption.authorityRef?.manifestId
-      !== canonicalAuthorityRef.manifestId
+      !== paper2026ISuccessorCandidateAuthorityRef.manifestId
     || consumption.authorityRef?.manifestVersion
-      !== canonicalAuthorityRef.manifestVersion
+      !== paper2026ISuccessorCandidateAuthorityRef.manifestVersion
     || consumption.authorityRef?.manifestDigest
-      !== canonicalAuthorityRef.manifestDigest
+      !== paper2026ISuccessorCandidateAuthorityRef.manifestDigest
     || grammarFillPublicGeometryFixtures.compatibleConsumptionPlan
-      .authorityManifestId !== canonicalAuthorityRef.manifestId
+      .authorityManifestId
+      !== paper2026ISuccessorCandidateAuthorityRef.manifestId
     || grammarFillPublicGeometryFixtures.compatibleConsumptionPlan
-      .authorityManifestVersion !== canonicalAuthorityRef.manifestVersion
+      .authorityManifestVersion
+      !== paper2026ISuccessorCandidateAuthorityRef.manifestVersion
     || consumption.paperId
       !== grammarFillPublicGeometryFixtures.compatibleConsumptionPlan.paperId
     || consumption.sourceAssetVersion

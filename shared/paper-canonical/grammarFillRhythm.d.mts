@@ -1,20 +1,21 @@
 export type GrammarFillRhythm = Readonly<{
-  schemaVersion: 'grammar-fill-rhythm-v5' | 'grammar-fill-rhythm-v6'
+  schemaVersion: 'grammar-fill-rhythm-v5' | 'grammar-fill-rhythm-v6' | 'grammar-fill-rhythm-v7'
   id: 'grammar-fill-rhythm'
-  version: '5' | '6'
+  version: '5' | '6' | '7'
   adjacencyGraph: ReadonlyArray<Readonly<Record<string, unknown>>>
   targets: Readonly<Record<string, Readonly<Record<string, number>>>>
   blankGeometry: Readonly<Record<string, string | number | boolean>>
   promptGeometry: Readonly<Record<string, string | number>>
   ruleVerticalGeometry: Readonly<{
     normalization: string
-    bodyVisibleBottomToRuleCenterRatio: number
-    ratioTolerance: number
+    verticalAlignment?: 'blank-bottom'
+    bodyVisibleBottomToRuleCenterRatio?: number
+    ratioTolerance?: number
     numberVisibleBottomAdjustmentEm: number
     screenRuleThicknessPx: number
     printPdfRuleThicknessPt: number
     strokePolicy: string
-    rendererMapping: Readonly<{
+    rendererMapping?: Readonly<{
       screenRuleLiftEm: number
       printPdfRuleLiftEm: number
     }>

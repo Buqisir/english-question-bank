@@ -527,7 +527,13 @@ export function buildCanonicalContinuationWritingConsumptionSurfaceData({
         }
       })
     : canonicalGroup.answerRegion.starterLines
-  const paragraphs = sourceBlocks.map((block) => {
+  const starterBlockRefs = new Set(
+    (starterLines || []).map((starter) => starter.contentRef || starter.starterId),
+  )
+  const materialBlocks = sourceBlocks.filter(
+    (block) => !starterBlockRefs.has(block.nodeId),
+  )
+  const paragraphs = materialBlocks.map((block) => {
     const segmented = segmentPaperText(block.text, {
       sectionId: block.nodeId,
     }).paragraphs[0]
@@ -569,7 +575,7 @@ export function buildCanonicalContinuationWritingConsumptionSurfaceData({
     ...(canonicalGroup.writingMode === 'legacy_opaque'
       ? { writingMode: canonicalGroup.writingMode }
       : {}),
-    materialBlocks: sourceBlocks,
+    materialBlocks,
     wordCountRuling: canonicalGroup.wordCountRuling,
     ...(canonicalGroup.writingMode === 'legacy_opaque'
       ? {

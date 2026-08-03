@@ -638,10 +638,6 @@ function CanonicalReadingBlocks({
             data-canonical-block-id={block.nodeId}
             data-canonical-block-kind="figure"
             data-canonical-media-id={block.mediaId}
-            data-canonical-media-sha256={block.media.sha256}
-            data-canonical-source-artifact-id={
-              block.media.sourceArtifactRef.artifactId
-            }
           >
             <img src={src} alt="" />
           </figure>

@@ -17,6 +17,7 @@ import { createDraftPaperStore } from './draft-paper/draftPaperStore.mjs'
 import { createExportImplementation } from './exports/exportImplementation.mjs'
 import { createExportRoutes } from './exports/exportRoutes.mjs'
 import { createCanonicalConsumerRuntime } from './paper-canonical/consumerRuntime.mjs'
+import { loadCanonicalSourceAssetRepresentation } from './paper-canonical/sourceAssetRepresentation.mjs'
 import { createPaperCanonicalConsumerRoutes } from './paper-canonical/consumerRoutes.mjs'
 import { ensurePaperImportDatabaseShape } from './paper-import/publisher.mjs'
 import { cleanupPaperImportTempArtifacts, listPaperAssetVersions, resolvePaperAssetReadPaths } from './paper-import/storage.mjs'
@@ -300,9 +301,17 @@ function findPaperAssetGroup(groupId) {
     const { assetPath } = resolvePaperAssetReadPaths(paperAssetsDir, entry.name)
     if (!existsSync(assetPath)) continue
     try {
-      const asset = readJsonFile(assetPath)
+      const sourceAsset = readJsonFile(assetPath)
+      const { asset } = loadCanonicalSourceAssetRepresentation({
+        sourceAsset,
+        versionDir: path.dirname(assetPath),
+        reject: (message) => { throw new Error(message) },
+        label: 'Canonical paper-asset group source',
+      })
       const group = asset?.content?.groups?.[groupId]
-      if (group) return { asset, group, paperId: entry.name }
+      if (group && asset?.paper?.paperId === entry.name) {
+        return { asset, group, paperId: entry.name }
+      }
     } catch {
       // Ignore invalid paper-asset files; import validation owns that error.
     }
@@ -451,7 +460,13 @@ function buildPaperAssetGroupIndex() {
     const { assetPath } = resolvePaperAssetReadPaths(paperAssetsDir, entry.name)
     if (!existsSync(assetPath)) continue
     try {
-      const asset = readJsonFile(assetPath)
+      const sourceAsset = readJsonFile(assetPath)
+      const { asset } = loadCanonicalSourceAssetRepresentation({
+        sourceAsset,
+        versionDir: path.dirname(assetPath),
+        reject: (message) => { throw new Error(message) },
+        label: 'Canonical paper-asset group source',
+      })
       const groups = asset?.content?.groups
       if (!groups || typeof groups !== 'object') continue
       for (const [groupId, group] of Object.entries(groups)) {

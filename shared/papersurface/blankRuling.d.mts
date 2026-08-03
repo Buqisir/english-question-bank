@@ -15,8 +15,15 @@ export type PaperBlankRuling = {
   readonly hintPlacement: 'immediately-after'
 }
 
+export function grammarFillBlankRulingForRhythm(rhythm: Readonly<{
+  ruleVerticalGeometry: Readonly<{
+    verticalAlignment?: 'blank-bottom'
+    screenRuleThicknessPx: number
+    printPdfRuleThicknessPt: number
+  }>
+}>): PaperBlankRuling
+
 export const paperBlankRuling: {
   readonly cloze: PaperBlankRuling
-  readonly grammarFill: PaperBlankRuling
   readonly sevenChoices: PaperBlankRuling
 }

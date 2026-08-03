@@ -40,7 +40,10 @@
 import path from 'node:path'
 import { paperSurfaceTokens } from '../shared/papersurface/tokens.mjs'
 import { paperBlankPattern } from '../shared/papersurface/blankPattern.mjs'
-import { paperBlankRuling } from '../shared/papersurface/blankRuling.mjs'
+import {
+  grammarFillBlankRulingForRhythm,
+  paperBlankRuling,
+} from '../shared/papersurface/blankRuling.mjs'
 import { headingKind } from '../shared/papersurface/headingKind.mjs'
 import { resolveFigureMarker } from '../shared/figures/resolveFigureMarker.mjs'
 import {
@@ -509,7 +512,7 @@ function renderCanonicalReadingBlocks(canonicalGroup) {
       return `<table class="canonical-reading-table" data-canonical-block-id="${escapeHtml(block.nodeId)}" data-canonical-block-kind="table" data-canonical-reading-rhythm-role="native_table_line" data-canonical-table-columns="${block.columnCount}"><tbody>${block.rows.map((row) => `<tr data-canonical-row-id="${escapeHtml(row.rowId)}">${row.cells.map((cell) => `<td colspan="${cell.columnSpan}" rowspan="${cell.rowSpan}" data-canonical-cell-id="${escapeHtml(cell.cellId)}" data-canonical-column-start="${cell.columnStart}">${renderCanonicalInlineNodes(cell.inlines)}</td>`).join('')}</tr>`).join('')}</tbody></table>`
     }
     const src = `data:${block.mediaArtifact.mimeType};base64,${block.mediaArtifact.encodedBytes}`
-    return `<figure class="canonical-reading-figure" data-canonical-block-id="${escapeHtml(block.nodeId)}" data-canonical-block-kind="figure" data-canonical-media-id="${escapeHtml(block.mediaId)}" data-canonical-media-sha256="${escapeHtml(block.media.sha256)}" data-canonical-source-artifact-id="${escapeHtml(block.media.sourceArtifactRef.artifactId)}"><img src="${escapeHtml(src)}" alt=""></figure>`
+    return `<figure class="canonical-reading-figure" data-canonical-block-id="${escapeHtml(block.nodeId)}" data-canonical-block-kind="figure" data-canonical-media-id="${escapeHtml(block.mediaId)}"><img src="${escapeHtml(src)}" alt=""></figure>`
   }).join('')}</div>`
 }
 
@@ -577,8 +580,13 @@ function renderCanonicalOpaqueWriting(
     family,
     previousFamilyBoundary,
   )
+  const sourceBlocks = canonicalGroup.sourceStarterLinesInResponse
+    ? canonicalGroup.sourceBlocks.filter(
+        (block) => !canonicalGroup.sourceStarterBlockRefs.includes(block.nodeId),
+      )
+    : canonicalGroup.sourceBlocks
   const source = [
-    ...canonicalGroup.sourceBlocks.map((block) =>
+    ...sourceBlocks.map((block) =>
       `<p data-canonical-block-id="${escapeHtml(block.nodeId)}" data-canonical-legacy-opaque-source-block="">${renderCanonicalInlineNodes(block.inlines)}</p>`),
     ...(
       application
@@ -864,6 +872,26 @@ export function buildPrintHtml({
     items,
     teacher: isTeacher,
   })
+  const hasCanonicalGrammarFill = canonicalConsumption?.selections?.some(
+    (selection) => selection.familyContractId === 'grammar-fill'
+      && selection.mode === 'canonical'
+      && selection.groupIds.some((groupId) => items.some((item) => item.detail.id === groupId)),
+  )
+  const activeGrammarFillRhythm = hasCanonicalGrammarFill
+    ? grammarFillRhythmForPaperAuthority({
+        paperId: canonicalConsumption.paperId,
+        manifestVersion: canonicalConsumption.authorityRef?.manifestVersion,
+      })
+    : grammarFillRhythm
+  const requiresBoundGrammarFillRule = hasCanonicalGrammarFill
+    && canonicalConsumption.paperId === 'paper-2026-i'
+    && Number(canonicalConsumption.authorityRef?.manifestVersion) >= 43
+  // v43 remains readable as immutable history, but its v6 lift is no longer a
+  // valid shared-rule mapping. It must fail closed rather than silently fall
+  // through to the unversioned blank ruling. v44 binds the replacement v7.
+  const sharedInlineBlankRuling = requiresBoundGrammarFillRule
+    ? grammarFillBlankRulingForRhythm(activeGrammarFillRhythm)
+    : paperBlankRuling.cloze
   if (
     (grammarFillGeometryVariantId == null)
       !== (grammarFillGeometrySurface == null)
@@ -2612,13 +2640,13 @@ body {
 /* standard §6 — 挖空: 定长下划线 + 题号居中于线上, 线不得跨行断开.
    七选五 ≈4.6em (10.5pt 下 ≈48pt/17mm); 完形/语法填空 ≈3.3em (≈35pt/12mm). */
 .print-blank-unit {
-  white-space: ${paperBlankRuling.cloze.whiteSpace};
+  white-space: ${sharedInlineBlankRuling.whiteSpace};
 }
 
 .print-blank-unit[data-canonical-grammar-fill-unit] {
   display: inline-grid;
-  grid-template-columns: ${grammarFillRhythm.blankGeometry.widthEm}em max-content;
-  column-gap: ${grammarFillRhythm.promptGeometry.gapEm}em;
+  grid-template-columns: ${activeGrammarFillRhythm.blankGeometry.widthEm}em max-content;
+  column-gap: ${activeGrammarFillRhythm.promptGeometry.gapEm}em;
   align-items: baseline;
   break-inside: avoid;
   text-align: left;
@@ -2641,9 +2669,9 @@ body {
 
 .print-blank {
   display: inline-block;
-  white-space: ${paperBlankRuling.cloze.whiteSpace};
-  background: ${cssBackgroundForBlankRuling(paperBlankRuling.cloze)};
-  text-align: ${paperBlankRuling.cloze.numberAlignment};
+  white-space: ${sharedInlineBlankRuling.whiteSpace};
+  background: ${cssBackgroundForBlankRuling(sharedInlineBlankRuling)};
+  text-align: ${sharedInlineBlankRuling.numberAlignment};
   vertical-align: baseline;
   margin: 0 0.15em;
   /* inline-block 会继承段落首行缩进并作用于自身首行，把题号推出横线（owner QA 实测撞字），必须归零 */

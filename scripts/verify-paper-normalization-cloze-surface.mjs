@@ -7,8 +7,10 @@ import {
   buildCanonicalClozeSurfaceData,
 } from '../shared/paper-normalization/canonicalPaperGroupSurfaceAdapter.mjs'
 import {
+  grammarFillBlankRulingForRhythm,
   paperBlankRuling,
 } from '../shared/papersurface/blankRuling.mjs'
+import { grammarFillRhythm } from '../shared/paper-canonical/grammarFillRhythm.mjs'
 import { paperSurfaceTokens } from '../shared/papersurface/tokens.mjs'
 
 const asset = JSON.parse(
@@ -104,7 +106,10 @@ assert.deepEqual(paperBlankRuling.cloze, {
   whiteSpace: 'nowrap',
   hintPlacement: 'immediately-after',
 })
-assert.deepEqual(paperBlankRuling.grammarFill, paperBlankRuling.cloze)
+assert.deepEqual(
+  grammarFillBlankRulingForRhythm(grammarFillRhythm),
+  paperBlankRuling.cloze,
+)
 assert.equal(paperBlankRuling.sevenChoices.width, '4.6em')
 assert.equal(paperBlankRuling.sevenChoices.ruleVerticalAlignment, 'blank-bottom')
 assert.equal(paperSurfaceTokens.paperBlankWidth, paperBlankRuling.sevenChoices.width)

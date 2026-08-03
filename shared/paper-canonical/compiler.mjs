@@ -5,6 +5,7 @@ import {
   trustedDocxCandidateAuthorityRef,
   trustedLegacyHistoricalCandidateAuthorityRef,
   trustedLegacyCaptureCandidateAuthorityRef,
+  paper2026IPrintSuccessorCandidateAuthorityRef,
   paper2026ISuccessorCandidateAuthorityRef,
   validateJsonSchema,
 } from './authority.mjs'
@@ -46,6 +47,7 @@ const blockingPriority = ['answer_conflict', 'incomplete_source', 'unsupported',
 const trustedLegacyCaptureCandidateAuthorities = [
   trustedLegacyHistoricalCandidateAuthorityRef,
   trustedLegacyCaptureCandidateAuthorityRef,
+  paper2026IPrintSuccessorCandidateAuthorityRef,
   paper2026ISuccessorCandidateAuthorityRef,
 ]
 const paper2026ISuccessorSourceCaptureSha256 =
@@ -69,6 +71,7 @@ function trustedLegacyCaptureCandidateAuthorityFor(
     ? trustedLegacyCaptureCandidateAuthorities
     : [
       trustedLegacyCaptureCandidateAuthorityRef,
+      paper2026IPrintSuccessorCandidateAuthorityRef,
       paper2026ISuccessorCandidateAuthorityRef,
     ]
   return candidates.find((candidate) =>

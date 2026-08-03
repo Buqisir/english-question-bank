@@ -35,5 +35,5 @@ Replaces old Ticket 78.
 ## Result
 
 Commit: candidate branch `codex/ticket-35-owner-qa-fixes-20260803` (exact tip recorded in the implementation handoff)
-Verify: affected public Screen plus complete immutable Publication v2 Student/Teacher Print HTML/PDF; focused writing, grammar geometry, canonical consumption, import-pilot, and frontend build checks pass.
-Notes: Fix candidate; independent Standards/Spec review pending. Owner QA remains FAIL pending owner re-QA of this candidate.
+Verify: affected public Screen plus complete immutable Publication v3 Student/Teacher Print HTML/PDF; focused writing, grammar geometry, canonical consumption, import-pilot, and frontend build checks pass.
+Notes: Fix candidate; focused re-review pending in the existing review lineage. Owner QA remains FAIL pending focused re-review and owner re-QA of this candidate.

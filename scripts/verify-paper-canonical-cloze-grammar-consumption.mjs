@@ -39,6 +39,12 @@ import {
 import {
   createCanonicalConsumerRuntime,
 } from '../server/paper-canonical/consumerRuntime.mjs'
+import {
+  grammarFillRhythmForPaperAuthority,
+} from '../shared/paper-canonical/grammarFillRhythm.mjs'
+import {
+  grammarFillBlankRulingForRhythm,
+} from '../shared/papersurface/blankRuling.mjs'
 import { clozeRhythm } from '../shared/paper-canonical/clozeRhythm.mjs'
 import {
   createPaperCanonicalConsumerRoutes,
@@ -825,12 +831,12 @@ const ticket35GroupIds = [
   'group-2026-i-writing-continuation',
 ]
 
-function ticket35V2Source() {
+function ticket35V3Source() {
   const versionRoot = path.join(
     ticket35PublicationStore,
     fixture.source.paperId,
     'versions',
-    'v2',
+    'v3',
   )
   const sourceCaptureBytes = readFileSync(path.join(versionRoot, 'paper-asset.json'))
   const sourceCapture = JSON.parse(sourceCaptureBytes)
@@ -840,7 +846,7 @@ function ticket35V2Source() {
   const assetDocument = sourceCapture.documents.find(
     (document) => document.documentId === assetObservation?.documentId,
   )
-  assert.ok(assetDocument?.encodedBytes, 'Ticket 35 v2 has one sealed asset-projection document')
+  assert.ok(assetDocument?.encodedBytes, 'Ticket 35 v3 has one sealed asset-projection document')
   const assetBytes = Buffer.from(assetDocument.encodedBytes, 'base64')
   assert.equal(assetBytes.byteLength, assetDocument.byteLength)
   assert.equal(sha256(assetBytes), assetDocument.sha256)
@@ -849,7 +855,7 @@ function ticket35V2Source() {
   return { versionRoot, paperAsset }
 }
 
-function ticket35V2Reference() {
+function ticket35V3Reference() {
   const db = new DatabaseSync(path.join(ticket35PublicationStore, 'publication.sqlite'), {
     readOnly: true,
   })
@@ -859,8 +865,9 @@ function ticket35V2Reference() {
       FROM canonical_paper_publications
       WHERE paper_id = ? AND is_current = 1
     `).get(fixture.source.paperId)
-    assert.ok(row, 'Ticket 35 v2 Publication is current in its immutable fixture store')
-    assert.equal(row.version_name, 'v2')
+    assert.ok(row, 'Ticket 35 v3 Publication is current in its immutable fixture store')
+    assert.equal(row.version_name, 'v3')
+    assert.equal(row.source_asset_version, 3)
     return {
       paperId: row.paper_id,
       versionName: row.version_name,
@@ -910,6 +917,13 @@ async function assertTicket35Screen(page, paperAsset, outputDir) {
     const normalize = (value) => value.replace(/\s+/g, ' ').trim()
     const prompt = application?.querySelector('.pi-writing-passage')
     const response = application?.querySelector('[data-canonical-answer-region-ref]')
+    const continuationResponse = continuation?.querySelector('[data-canonical-answer-region-ref]')
+    const starterOccurrences = starterLines.map((starter) => {
+      const matches = [...(continuation?.querySelectorAll('p') || [])]
+        .filter((node) => normalize(node.textContent || '').includes(normalize(starter)))
+      const inside = matches.filter((node) => continuationResponse?.contains(node)).length
+      return { total: matches.length, inside, outside: matches.length - inside }
+    })
     return {
       applicationNoticeBeforeResponse: Boolean(
         application && prompt && response
@@ -921,7 +935,11 @@ async function assertTicket35Screen(page, paperAsset, outputDir) {
           .find((node) => node.textContent?.trim() === starter)
           ?.closest('[data-canonical-answer-region-ref]'),
       )),
+      starterOccurrences,
       figureCaptions: [...document.querySelectorAll('figcaption')].map((node) => node.textContent?.trim()),
+      publicProvenanceAttributes: [...document.querySelectorAll(
+        '[data-canonical-media-sha256], [data-canonical-source-artifact-id]',
+      )].map((node) => node.getAttributeNames().filter((name) => name.startsWith('data-canonical-'))),
       grammarBorder: grammarBlank ? getComputedStyle(grammarBlank).borderBottomWidth : null,
       grammarPseudo: grammarBlank ? getComputedStyle(grammarBlank, '::after').content : null,
       clozeNumberOffset: clozeRow && clozeNumber
@@ -939,17 +957,23 @@ async function assertTicket35Screen(page, paperAsset, outputDir) {
       continuationPresent: Boolean(continuation),
     }
   }, { noticeText: notice, starterLines: starters })
-  assert.equal(observation.applicationPresent, true, 'v2 Screen contains Application Writing')
-  assert.equal(observation.continuationPresent, true, 'v2 Screen contains Continuation Writing')
-  assert.equal(observation.applicationNoticeBeforeResponse, true, `v2 Screen keeps the exact Application notice before the response box: ${JSON.stringify(observation)}`)
-  assert.equal(observation.startersInResponse, true, 'v2 Screen puts both Continuation starters inside the response box')
-  assert.deepEqual(observation.figureCaptions, [], 'v2 Screen hides internal figure provenance captions')
-  assert.equal(observation.grammarBorder, '1px', 'v2 Screen uses the shared inline blank rule for Grammar Fill')
-  assert.equal(observation.grammarPseudo, 'none', 'v2 Screen has no independent Grammar Fill rule lift')
-  assert.equal(Math.abs(observation.clozeNumberOffset) <= 0.5, true, 'v2 Screen starts Cloze question labels at the passage boundary')
-  assert.equal(Math.abs(observation.clozeNumberToPassageContinuationOffset) <= 0.5, true, 'v2 Screen aligns the Cloze qnum box with the passage continuation boundary')
-  assert.equal(Math.abs(observation.clozeNumberToFirstLabelGap) <= 0.5, true, 'v2 Screen has no added qnum-box→A layout gap')
-  assert.deepEqual(observation.writingHeading, observation.peerHeading, 'v2 Screen gives every part score run one typographic treatment')
+  assert.equal(observation.applicationPresent, true, 'v3 Screen contains Application Writing')
+  assert.equal(observation.continuationPresent, true, 'v3 Screen contains Continuation Writing')
+  assert.equal(observation.applicationNoticeBeforeResponse, true, `v3 Screen keeps the exact Application notice before the response box: ${JSON.stringify(observation)}`)
+  assert.equal(observation.startersInResponse, true, `v3 Screen puts both Continuation starters inside the response box: ${JSON.stringify(observation)}`)
+  assert.deepEqual(
+    observation.starterOccurrences,
+    starters.map(() => ({ total: 1, inside: 1, outside: 0 })),
+    `v3 Screen renders each Continuation starter exactly once inside its response box: ${JSON.stringify(observation)}`,
+  )
+  assert.deepEqual(observation.figureCaptions, [], 'v3 Screen hides internal figure provenance captions')
+  assert.deepEqual(observation.publicProvenanceAttributes, [], 'v3 Screen emits no public provenance attributes')
+  assert.equal(observation.grammarBorder, '1px', 'v3 Screen uses the shared inline blank rule for Grammar Fill')
+  assert.equal(observation.grammarPseudo, 'none', 'v3 Screen has no independent Grammar Fill rule lift')
+  assert.equal(Math.abs(observation.clozeNumberOffset) <= 0.5, true, 'v3 Screen starts Cloze question labels at the passage boundary')
+  assert.equal(Math.abs(observation.clozeNumberToPassageContinuationOffset) <= 0.5, true, 'v3 Screen aligns the Cloze qnum box with the passage continuation boundary')
+  assert.equal(Math.abs(observation.clozeNumberToFirstLabelGap) <= 0.5, true, 'v3 Screen has no added qnum-box→A layout gap')
+  assert.deepEqual(observation.writingHeading, observation.peerHeading, 'v3 Screen gives every part score run one typographic treatment')
   if (outputDir) {
     writeFileSync(path.join(outputDir, 'screen.html'), await page.content())
     await page.screenshot({ path: path.join(outputDir, 'screen.png'), fullPage: true })
@@ -957,12 +981,35 @@ async function assertTicket35Screen(page, paperAsset, outputDir) {
 }
 
 async function assertTicket35CompletePublication({ rootDir }) {
-  const { paperAsset } = ticket35V2Source()
-  const canonicalReference = ticket35V2Reference()
-  const v2Root = path.join(rootDir, 'ticket-35-v2-publication')
+  const { paperAsset } = ticket35V3Source()
+  const canonicalReference = ticket35V3Reference()
+  const grammarFillAuthority = grammarFillRhythmForPaperAuthority({
+    paperId: canonicalReference.paperId,
+    manifestVersion: 44,
+  })
+  assert.equal(grammarFillAuthority.version, '7', 'Ticket 35 selects the bound Grammar Fill v7 authority')
+  assert.equal(
+    grammarFillAuthority.ruleVerticalGeometry.verticalAlignment,
+    'blank-bottom',
+    'Ticket 35 Grammar Fill v7 retires the independent upward lift into the shared bottom rule relation',
+  )
+  assert.equal(
+    Object.hasOwn(grammarFillAuthority.ruleVerticalGeometry, 'rendererMapping'),
+    false,
+    'Ticket 35 Grammar Fill v7 has no independent Screen/Print rule lift',
+  )
+  assert.throws(
+    () => grammarFillBlankRulingForRhythm(grammarFillRhythmForPaperAuthority({
+      paperId: canonicalReference.paperId,
+      manifestVersion: 43,
+    })),
+    /bound bottom-rule authority/,
+    'the contradictory v6 lift cannot fall through to an unversioned shared blank ruling',
+  )
+  const v3Root = path.join(rootDir, 'ticket-35-v3-publication')
   cpSync(
     path.join(ticket35PublicationStore, fixture.source.paperId),
-    path.join(v2Root, fixture.source.paperId),
+    path.join(v3Root, fixture.source.paperId),
     { recursive: true },
   )
   const outputDir = provisionActualArtifacts
@@ -976,13 +1023,38 @@ async function assertTicket35CompletePublication({ rootDir }) {
     readOnly: true,
   })
   try {
+    let publicationScanAttempted = false
+    const unboundRuntime = createCanonicalConsumerRuntime({
+      rootDir: ticket35PublicationStore,
+      db: new Proxy(fixtureDb, {
+        get(target, property, receiver) {
+          if (property !== 'prepare') return Reflect.get(target, property, receiver)
+          return (sql) => {
+            if (/SELECT\s+paper_id\s+FROM\s+canonical_paper_publications/i.test(String(sql))) {
+              publicationScanAttempted = true
+            }
+            return target.prepare(sql)
+          }
+        },
+      }),
+    })
+    const unboundItems = ticket35GroupIds.map((groupId) => exportItem(groupId))
+    for (const item of unboundItems) delete item.detail.paperId
+    const unboundItemsBefore = stableStringify(unboundItems)
+    assert.throws(
+      () => unboundRuntime.resolveForItems({ consumerId: 'print_pdf', items: unboundItems }),
+      { code: 'CANONICAL_CONSUMPTION_REJECTED' },
+      'unbound public draft items fail closed instead of inferring a current Publication by group ID',
+    )
+    assert.equal(publicationScanAttempted, false, 'an unbound draft cannot scan another current Publication for identity')
+    assert.equal(stableStringify(unboundItems), unboundItemsBefore, 'unbound identity rejection mutates no draft input')
     const runtime = createCanonicalConsumerRuntime({
       rootDir: ticket35PublicationStore,
       db: fixtureDb,
     })
     const screenConsumption = runtime.load({ paperId: fixture.source.paperId, consumerId: 'screen' })
     assert.equal(screenConsumption.disposition, 'ready')
-    assert.equal(screenConsumption.sourceAssetVersion, 2)
+    assert.equal(screenConsumption.sourceAssetVersion, 3)
     await assertActualPaperBrowseBoundary({
       readyConsumption: screenConsumption,
       browserAssetSource: paperAsset,
@@ -997,8 +1069,8 @@ async function assertTicket35CompletePublication({ rootDir }) {
   }
 
   await withActualDraftApi({
-    fixtureRoot: path.join(rootDir, 'ticket-35-v2-http'),
-    paperAssetsRoot: v2Root,
+    fixtureRoot: path.join(rootDir, 'ticket-35-v3-http'),
+    paperAssetsRoot: v3Root,
     canonicalReference,
     groupIds: ticket35GroupIds,
   }, async ({ baseUrl, draftPaperId }) => {
@@ -1012,7 +1084,7 @@ async function assertTicket35CompletePublication({ rootDir }) {
           `${baseUrl}/api/draft-papers/${draftPaperId}/print-html?versionType=${versionType}`,
         )
         const html = await htmlResponse.text()
-        assert.equal(htmlResponse.status, 200, `v2 complete ${versionType} public Print HTML succeeds: ${html}`)
+        assert.equal(htmlResponse.status, 200, `v3 complete ${versionType} public Print HTML succeeds: ${html}`)
         await page.setContent(html, { waitUntil: 'load' })
         const observation = await page.evaluate(({ noticeText, starterLines }) => {
           const application = document.querySelector('[data-canonical-group-id="group-2026-i-writing-application"]')
@@ -1033,6 +1105,13 @@ async function assertTicket35CompletePublication({ rootDir }) {
           })() : null
           const normalize = (value) => value.replace(/\s+/g, ' ').trim()
           const response = application?.querySelector('[data-canonical-answer-region-ref]')
+          const continuationResponse = continuation?.querySelector('[data-canonical-answer-region-ref]')
+          const starterOccurrences = starterLines.map((starter) => {
+            const matches = [...(continuation?.querySelectorAll('p') || [])]
+              .filter((node) => normalize(node.textContent || '').includes(normalize(starter)))
+            const inside = matches.filter((node) => continuationResponse?.contains(node)).length
+            return { total: matches.length, inside, outside: matches.length - inside }
+          })
           return {
             groupIds: [...document.querySelectorAll('[data-canonical-group-id]')].map((node) => node.getAttribute('data-canonical-group-id')),
             partHeadings: headingNodes.map((node) => node.textContent?.trim()),
@@ -1047,7 +1126,11 @@ async function assertTicket35CompletePublication({ rootDir }) {
                 .find((node) => node.textContent?.trim() === starter)
                 ?.closest('[data-canonical-answer-region-ref]'),
             )),
+            starterOccurrences,
             figureCaptions: [...document.querySelectorAll('figcaption')].map((node) => node.textContent?.trim()),
+            publicProvenanceAttributes: [...document.querySelectorAll(
+              '[data-canonical-media-sha256], [data-canonical-source-artifact-id]',
+            )].map((node) => node.getAttributeNames().filter((name) => name.startsWith('data-canonical-'))),
             grammarRule: grammarBlank ? getComputedStyle(grammarBlank).backgroundImage : '',
             grammarPseudo: grammarBlank ? getComputedStyle(grammarBlank, '::after').content : null,
             clozeNumberOffset: clozeRow && clozeNumber ? clozeNumber.getBoundingClientRect().left - clozeRow.getBoundingClientRect().left : Number.NaN,
@@ -1061,19 +1144,25 @@ async function assertTicket35CompletePublication({ rootDir }) {
             peerHeading: font(peer),
           }
         }, { noticeText: notice, starterLines: starters })
-        assert.deepEqual(observation.groupIds.filter(Boolean), ticket35GroupIds, `v2 complete ${versionType} document retains all canonical groups in source order`)
-        assert.equal(observation.partHeadings.some((text) => text?.includes('第二部分')), true, `v2 complete ${versionType} document retains Reading chrome`)
-        assert.equal(observation.partHeadings.some((text) => text?.includes('第三部分')), true, `v2 complete ${versionType} document retains Language chrome`)
-        assert.equal(observation.partHeadings.some((text) => text?.includes('第四部分')), true, `v2 complete ${versionType} document retains Writing chrome: ${JSON.stringify(observation)}`)
-        assert.equal(observation.applicationNoticeBeforeResponse, true, `v2 complete ${versionType} Print keeps the exact Application notice before its response box`)
-        assert.equal(observation.startersInResponse, true, `v2 complete ${versionType} Print puts both Continuation starters inside the response box`)
-        assert.deepEqual(observation.figureCaptions, [], `v2 complete ${versionType} Print hides internal figure provenance captions`)
-        assert.equal(observation.grammarRule.includes('linear-gradient'), true, `v2 complete ${versionType} Print uses the shared inline blank rule for Grammar Fill`)
-        assert.equal(observation.grammarPseudo, 'none', `v2 complete ${versionType} Print has no independent Grammar Fill rule lift`)
-        assert.equal(Math.abs(observation.clozeNumberOffset) <= 0.5, true, `v2 complete ${versionType} Print starts Cloze question labels at the passage boundary`)
-        assert.equal(Math.abs(observation.clozeNumberToPassageContinuationOffset) <= 0.5, true, `v2 complete ${versionType} Print aligns the Cloze qnum box with the passage continuation boundary`)
-        assert.equal(Math.abs(observation.clozeNumberToFirstLabelGap) <= 0.5, true, `v2 complete ${versionType} Print has no added qnum-box→A layout gap`)
-        assert.deepEqual(observation.writingHeading, observation.peerHeading, `v2 complete ${versionType} Print gives every part score run one typographic treatment`)
+        assert.deepEqual(observation.groupIds.filter(Boolean), ticket35GroupIds, `v3 complete ${versionType} document retains all canonical groups in source order`)
+        assert.equal(observation.partHeadings.some((text) => text?.includes('第二部分')), true, `v3 complete ${versionType} document retains Reading chrome`)
+        assert.equal(observation.partHeadings.some((text) => text?.includes('第三部分')), true, `v3 complete ${versionType} document retains Language chrome`)
+        assert.equal(observation.partHeadings.some((text) => text?.includes('第四部分')), true, `v3 complete ${versionType} document retains Writing chrome: ${JSON.stringify(observation)}`)
+        assert.equal(observation.applicationNoticeBeforeResponse, true, `v3 complete ${versionType} Print keeps the exact Application notice before its response box`)
+        assert.equal(observation.startersInResponse, true, `v3 complete ${versionType} Print puts both Continuation starters inside the response box`)
+        assert.deepEqual(
+          observation.starterOccurrences,
+          starters.map(() => ({ total: 1, inside: 1, outside: 0 })),
+          `v3 complete ${versionType} Print renders each Continuation starter exactly once inside its response box: ${JSON.stringify(observation)}`,
+        )
+        assert.deepEqual(observation.figureCaptions, [], `v3 complete ${versionType} Print hides internal figure provenance captions`)
+        assert.deepEqual(observation.publicProvenanceAttributes, [], `v3 complete ${versionType} Print emits no public provenance attributes`)
+        assert.equal(observation.grammarRule.includes('linear-gradient'), true, `v3 complete ${versionType} Print uses the shared inline blank rule for Grammar Fill`)
+        assert.equal(observation.grammarPseudo, 'none', `v3 complete ${versionType} Print has no independent Grammar Fill rule lift`)
+        assert.equal(Math.abs(observation.clozeNumberOffset) <= 0.5, true, `v3 complete ${versionType} Print starts Cloze question labels at the passage boundary`)
+        assert.equal(Math.abs(observation.clozeNumberToPassageContinuationOffset) <= 0.5, true, `v3 complete ${versionType} Print aligns the Cloze qnum box with the passage continuation boundary`)
+        assert.equal(Math.abs(observation.clozeNumberToFirstLabelGap) <= 0.5, true, `v3 complete ${versionType} Print has no added qnum-box→A layout gap`)
+        assert.deepEqual(observation.writingHeading, observation.peerHeading, `v3 complete ${versionType} Print gives every part score run one typographic treatment`)
         const pdfResponse = await fetchPublic(
           `${baseUrl}/api/draft-papers/${draftPaperId}/print-pdf`,
           {
@@ -1083,12 +1172,12 @@ async function assertTicket35CompletePublication({ rootDir }) {
           },
         )
         const pdfBytes = Buffer.from(await pdfResponse.arrayBuffer())
-        assert.equal(pdfResponse.status, 200, `v2 complete ${versionType} public Print PDF succeeds: ${pdfBytes.toString('utf8')}`)
+        assert.equal(pdfResponse.status, 200, `v3 complete ${versionType} public Print PDF succeeds: ${pdfBytes.toString('utf8')}`)
         assert.equal(pdfBytes.subarray(0, 4).toString(), '%PDF')
         readPdfColumnStarts(
           pdfBytes,
           outputDir || rootDir,
-          `v2 complete ${versionType} public Print PDF`,
+          `v3 complete ${versionType} public Print PDF`,
         )
         if (outputDir) {
           writeFileSync(path.join(outputDir, `print-${versionType}.html`), html)

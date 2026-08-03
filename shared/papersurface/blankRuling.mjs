@@ -18,9 +18,20 @@ const shortBlankRuling = Object.freeze({
   hintPlacement: 'immediately-after',
 })
 
+export function grammarFillBlankRulingForRhythm(rhythm) {
+  const geometry = rhythm?.ruleVerticalGeometry
+  if (geometry?.verticalAlignment !== 'blank-bottom') {
+    throw new Error('Grammar Fill blank ruling requires a bound bottom-rule authority')
+  }
+  return Object.freeze({
+    ...shortBlankRuling,
+    screenLineWidthPx: geometry.screenRuleThicknessPx,
+    printLineWidthPt: geometry.printPdfRuleThicknessPt,
+  })
+}
+
 export const paperBlankRuling = Object.freeze({
   cloze: shortBlankRuling,
-  grammarFill: shortBlankRuling,
   sevenChoices: Object.freeze({
     ...shortBlankRuling,
     width: '4.6em',

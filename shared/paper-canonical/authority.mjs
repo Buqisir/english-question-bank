@@ -41,6 +41,7 @@ import manifestV40 from '../../standards/paper-canonical/manifest-v40.json' with
 import manifestV41 from '../../standards/paper-canonical/manifest-v41.json' with { type: 'json' }
 import manifestV42 from '../../standards/paper-canonical/manifest-v42.json' with { type: 'json' }
 import manifestV43 from '../../standards/paper-canonical/manifest-v43.json' with { type: 'json' }
+import manifestV44 from '../../standards/paper-canonical/manifest-v44.json' with { type: 'json' }
 import legacyRhythmManifestV13 from '../../standards/paper-canonical/history/manifest-v13-reading-rhythm/manifest-v13.json' with { type: 'json' }
 import legacyRhythmTypographyV3 from '../../standards/paper-canonical/history/manifest-v13-reading-rhythm/paper-typography-v3.json' with { type: 'json' }
 import legacyRhythmTypographyV3Schema from '../../standards/paper-canonical/history/manifest-v13-reading-rhythm/renderer-typography-v3.schema.json' with { type: 'json' }
@@ -127,6 +128,7 @@ import grammarFillRhythmV3 from '../../standards/paper-canonical/rendering/gramm
 import grammarFillRhythmV4 from '../../standards/paper-canonical/rendering/grammar-fill-rhythm-v4.json' with { type: 'json' }
 import grammarFillRhythmV5 from '../../standards/paper-canonical/rendering/grammar-fill-rhythm-v5.json' with { type: 'json' }
 import grammarFillRhythmV6 from '../../standards/paper-canonical/rendering/grammar-fill-rhythm-v6.json' with { type: 'json' }
+import grammarFillRhythmV7 from '../../standards/paper-canonical/rendering/grammar-fill-rhythm-v7.json' with { type: 'json' }
 import grammarFillPublicGeometryFixturesV1 from '../../standards/paper-canonical/rendering/grammar-fill-public-geometry-fixtures-v1.json' with { type: 'json' }
 import grammarFillPublicGeometryFixturesV2 from '../../standards/paper-canonical/rendering/grammar-fill-public-geometry-fixtures-v2.json' with { type: 'json' }
 import grammarFillPublicGeometryFixturesV3 from '../../standards/paper-canonical/rendering/grammar-fill-public-geometry-fixtures-v3.json' with { type: 'json' }
@@ -142,6 +144,7 @@ import grammarFillPublicGeometryFixturesV12 from '../../standards/paper-canonica
 import grammarFillPublicGeometryFixturesV13 from '../../standards/paper-canonical/rendering/grammar-fill-public-geometry-fixtures-v13.json' with { type: 'json' }
 import grammarFillPublicGeometryFixturesV14 from '../../standards/paper-canonical/rendering/grammar-fill-public-geometry-fixtures-v14.json' with { type: 'json' }
 import grammarFillPublicGeometryFixturesV15 from '../../standards/paper-canonical/rendering/grammar-fill-public-geometry-fixtures-v15.json' with { type: 'json' }
+import grammarFillPublicGeometryFixturesV16 from '../../standards/paper-canonical/rendering/grammar-fill-public-geometry-fixtures-v16.json' with { type: 'json' }
 import applicationWritingRhythmV1 from '../../standards/paper-canonical/rendering/application-writing-rhythm-v1.json' with { type: 'json' }
 import applicationWritingRhythmV2 from '../../standards/paper-canonical/rendering/application-writing-rhythm-v2.json' with { type: 'json' }
 import applicationWritingRhythmV3 from '../../standards/paper-canonical/rendering/application-writing-rhythm-v3.json' with { type: 'json' }
@@ -212,6 +215,7 @@ import grammarFillRhythmV3Schema from '../../schemas/paper-canonical/grammar-fil
 import grammarFillRhythmV4Schema from '../../schemas/paper-canonical/grammar-fill-rhythm-v4.schema.json' with { type: 'json' }
 import grammarFillRhythmV5Schema from '../../schemas/paper-canonical/grammar-fill-rhythm-v5.schema.json' with { type: 'json' }
 import grammarFillRhythmV6Schema from '../../schemas/paper-canonical/grammar-fill-rhythm-v6.schema.json' with { type: 'json' }
+import grammarFillRhythmV7Schema from '../../schemas/paper-canonical/grammar-fill-rhythm-v7.schema.json' with { type: 'json' }
 import grammarFillPublicGeometryFixturesV1Schema from '../../schemas/paper-canonical/grammar-fill-public-geometry-fixtures-v1.schema.json' with { type: 'json' }
 import grammarFillPublicGeometryFixturesV2Schema from '../../schemas/paper-canonical/grammar-fill-public-geometry-fixtures-v2.schema.json' with { type: 'json' }
 import grammarFillPublicGeometryFixturesV3Schema from '../../schemas/paper-canonical/grammar-fill-public-geometry-fixtures-v3.schema.json' with { type: 'json' }
@@ -227,6 +231,7 @@ import grammarFillPublicGeometryFixturesV12Schema from '../../schemas/paper-cano
 import grammarFillPublicGeometryFixturesV13Schema from '../../schemas/paper-canonical/grammar-fill-public-geometry-fixtures-v13.schema.json' with { type: 'json' }
 import grammarFillPublicGeometryFixturesV14Schema from '../../schemas/paper-canonical/grammar-fill-public-geometry-fixtures-v14.schema.json' with { type: 'json' }
 import grammarFillPublicGeometryFixturesV15Schema from '../../schemas/paper-canonical/grammar-fill-public-geometry-fixtures-v15.schema.json' with { type: 'json' }
+import grammarFillPublicGeometryFixturesV16Schema from '../../schemas/paper-canonical/grammar-fill-public-geometry-fixtures-v16.schema.json' with { type: 'json' }
 import applicationWritingRhythmV1Schema from '../../schemas/paper-canonical/application-writing-rhythm-v1.schema.json' with { type: 'json' }
 import applicationWritingRhythmV2Schema from '../../schemas/paper-canonical/application-writing-rhythm-v2.schema.json' with { type: 'json' }
 import applicationWritingRhythmV3Schema from '../../schemas/paper-canonical/application-writing-rhythm-v3.schema.json' with { type: 'json' }
@@ -1215,8 +1220,10 @@ function validateClozeRhythm(artifact, manifestVersion) {
 }
 
 function validateGrammarFillRhythm(artifact, manifestVersion) {
-  const expected = Number(manifestVersion) >= 43
-    ? grammarFillRhythmV6
+  const expected = Number(manifestVersion) >= 44
+    ? grammarFillRhythmV7
+    : Number(manifestVersion) >= 43
+      ? grammarFillRhythmV6
     : Number(manifestVersion) >= 33
     ? grammarFillRhythmV5
     : Number(manifestVersion) >= 24
@@ -1240,8 +1247,10 @@ function validateGrammarFillPublicGeometryFixtures(
   artifact,
   manifestVersion,
 ) {
-  const expected = Number(manifestVersion) >= 36
-    ? grammarFillPublicGeometryFixturesV15
+  const expected = Number(manifestVersion) >= 44
+    ? grammarFillPublicGeometryFixturesV16
+    : Number(manifestVersion) >= 36
+      ? grammarFillPublicGeometryFixturesV15
     : Number(manifestVersion) >= 35
     ? grammarFillPublicGeometryFixturesV14
     : Number(manifestVersion) >= 34
@@ -1873,6 +1882,11 @@ const artifactsV43 = {
   ...artifactsV42,
   'renderer-grammar-fill-rhythm': grammarFillRhythmV6,
 }
+const artifactsV44 = {
+  ...artifactsV43,
+  'renderer-grammar-fill-rhythm': grammarFillRhythmV7,
+  'renderer-grammar-fill-public-geometry-fixtures': grammarFillPublicGeometryFixturesV16,
+}
 const schemasV1 = { ...sharedSchemas, 'renderer-typography-v1': typographyV1Schema, 'normalization-rules-v1': normalizationSchema, 'normalization-report-v1': reportSchema, 'canonical-paper-publication-v1': publicationSchema }
 const schemasV2 = { ...sharedSchemas, 'renderer-typography-v1': typographyV1Schema, 'normalization-rules-v2': normalizationV2Schema, 'normalization-report-v2': reportV2Schema, 'canonical-paper-publication-v2': publicationV2Schema }
 const schemasV3 = { ...sharedSchemas, 'renderer-typography-v2': typographyV2Schema, 'normalization-rules-v2': normalizationV2Schema, 'normalization-report-v3': reportV3Schema, 'canonical-paper-publication-v3': publicationV3Schema }
@@ -2386,6 +2400,11 @@ const schemasV43 = {
   ...schemasV42,
   'grammar-fill-rhythm-v6': grammarFillRhythmV6Schema,
 }
+const schemasV44 = {
+  ...schemasV43,
+  'grammar-fill-rhythm-v7': grammarFillRhythmV7Schema,
+  'grammar-fill-public-geometry-fixtures-v16': grammarFillPublicGeometryFixturesV16Schema,
+}
 const validationV1 = validateAuthorityClosure({ manifest: manifestV1, artifacts: artifactsV1, schemas: schemasV1 })
 const validationV2 = validateAuthorityClosure({ manifest: manifestV2, artifacts: artifactsV2, schemas: schemasV2 })
 const validationV3 = validateAuthorityClosure({ manifest: manifestV3, artifacts: artifactsV3, schemas: schemasV3 })
@@ -2434,6 +2453,7 @@ const validationV40 = validateAuthorityClosure({ manifest: manifestV40, artifact
 const validationV41 = validateAuthorityClosure({ manifest: manifestV41, artifacts: artifactsV41, schemas: schemasV41 })
 const validationV42 = validateAuthorityClosure({ manifest: manifestV42, artifacts: artifactsV42, schemas: schemasV42 })
 const validationV43 = validateAuthorityClosure({ manifest: manifestV43, artifacts: artifactsV43, schemas: schemasV43 })
+const validationV44 = validateAuthorityClosure({ manifest: manifestV44, artifacts: artifactsV44, schemas: schemasV44 })
 const validations = [
   validationV1,
   validationV2,
@@ -2479,6 +2499,7 @@ const validations = [
   validationV41,
   validationV42,
   validationV43,
+  validationV44,
 ]
 if (validations.some((validation) => !validation.ok)) {
   throw new Error(`Invalid checked-in canonical authority: ${JSON.stringify(validations.flatMap((validation) => validation.issues))}`)
@@ -2537,6 +2558,7 @@ const authorities = [
   { manifest: manifestV41, artifacts: artifactsV41, schemas: schemasV41 },
   { manifest: manifestV42, artifacts: artifactsV42, schemas: schemasV42 },
   { manifest: manifestV43, artifacts: artifactsV43, schemas: schemasV43 },
+  { manifest: manifestV44, artifacts: artifactsV44, schemas: schemasV44 },
 ].map((authority) => ({
   ...authority,
   authorityRef: authorityRef(authority.manifest),
@@ -2556,9 +2578,11 @@ export const trustedLegacyHistoricalCandidateAuthorityRef = authorities.find((au
 // the same Candidate -> Teacher Confirmation seam under v42 without advancing
 // the v36 publication/current authority.
 export const trustedLegacyCaptureCandidateAuthorityRef = authorities.find((authority) => authority.manifest.version === '42').authorityRef
-// This is the one-paper successor authority for paper-2026-i. It carries the
-// corrected public occurrence oracle while preserving its v42 source capture.
-export const paper2026ISuccessorCandidateAuthorityRef = authorities.find((authority) => authority.manifest.version === '43').authorityRef
+// Ticket 34's one-paper successor authority remains an exact historical
+// admission chain. Ticket 35 adds a distinct, digest-bound successor rather
+// than changing the authority of those already-published immutable bytes.
+export const paper2026IPrintSuccessorCandidateAuthorityRef = authorities.find((authority) => authority.manifest.version === '43').authorityRef
+export const paper2026ISuccessorCandidateAuthorityRef = authorities.find((authority) => authority.manifest.version === '44').authorityRef
 
 export function resolveCanonicalAuthority(authorityRef) {
   const authority = authorities.find((candidate) => candidate.authorityRef.manifestId === authorityRef?.manifestId && candidate.authorityRef.manifestVersion === authorityRef?.manifestVersion && candidate.authorityRef.manifestDigest === authorityRef?.manifestDigest)
