@@ -175,6 +175,9 @@ export function QuestionGroupPaperSurface({ entry }: { entry: PeekModel }) {
   const surfaceEl = (
     <PaperSurface
       textMap={surfaceData.textMap}
+      mode="lecture"
+      lectureFocus={null}
+      onFocusIntent={() => {}}
       semanticParagraphs={
         'semanticParagraphs' in surfaceData
           ? surfaceData.semanticParagraphs
@@ -210,10 +213,7 @@ export function QuestionGroupPaperSurface({ entry }: { entry: PeekModel }) {
       }
       optionBank={entry.kind === 'sevenChoices' ? entry.model.options : undefined}
       optionBankIdentity={entry.kind === 'sevenChoices' ? entry.model.bankIdentity : undefined}
-      mode="lecture"
-      lectureFocus={null}
       readingFocusBySection={{}}
-      onFocusIntent={() => {}}
     />
   )
   return entry.kind === 'writing'
