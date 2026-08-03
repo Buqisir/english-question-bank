@@ -1,6 +1,6 @@
 # 34 — Retire legacy canonical fallbacks
 
-Status: ready
+Status: implementation candidate (independent review pending)
 Blocked by: Ticket 33 PASS
 Next on PASS: independent review
 Terminal: no
@@ -46,6 +46,6 @@ Collapses old Tickets 72–77 into one shared-behavior retirement gate.
 
 ## Result
 
-Commit:
-Verify:
-Notes:
+Commit: implementation candidate on `codex/ticket-34-retire-legacy-canonical-fallbacks-20260802`
+Verify: `pnpm --dir app run build` PASS; `node scripts/verify-paper-canonical-publication.mjs` PASS; `node scripts/verify-paper-canonical-cloze-grammar-publication.mjs` PASS; `node scripts/verify-paper-canonical-import-recovery.mjs` PASS; `node scripts/verify-paper-canonical-cloze-grammar-consumption.mjs` PASS; all six family rendered-behavior verifiers PASS; Ticket 32 `--check --exact-reload` PASS; Ticket 33 `--check` PASS; `git diff --check` PASS.
+Notes: Retired the runtime raw/DB-only selection, Publication legacy projection, Consumer Contract legacy capability, caller-supplied legacy family acceptance, and Print compatibility adapter. Screen and Print/PDF now fail closed before output without a selected, validated whole-paper Canonical Publication. Existing journaled immutable Publication version selection remains the only rollback path; no Source Capture, Canonical Paper, Publication, or Ticket 33 evidence bytes were restamped. Next: one Sol Medium Standards/Spec review since `23845457a7d7d655d7f9feac84c115af51ae9882`; review only this Ticket 34 lineage and do not start Ticket 35, Owner QA, or release work.

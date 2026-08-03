@@ -2692,11 +2692,10 @@ const legacyWritingBaseArgs = {
   }],
   questionNumberStart: 1,
 }
-const legacyPrintHtml = buildPrintHtml(legacyWritingBaseArgs)
-assert.equal(
-  compactText(legacyPrintHtml).includes('一、写作（每题25分）'),
-  true,
-  'legacy Print HTML preserves its renderer-local writing group heading',
+assert.throws(
+  () => buildPrintHtml(legacyWritingBaseArgs),
+  { code: 'CANONICAL_CONSUMPTION_REJECTED' },
+  'legacy-only writing fields expose no Print HTML',
 )
 const mixedPrintHtml = buildPrintHtml({
   ...mixedWritingBaseArgs,

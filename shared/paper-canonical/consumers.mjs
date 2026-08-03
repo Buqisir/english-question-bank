@@ -1,5 +1,5 @@
-import screen from '../../standards/paper-canonical/consumers/screen-v36.json' with { type: 'json' }
-import printPdf from '../../standards/paper-canonical/consumers/print-pdf-v37.json' with { type: 'json' }
+import screen from '../../standards/paper-canonical/consumers/screen-v37.json' with { type: 'json' }
+import printPdf from '../../standards/paper-canonical/consumers/print-pdf-v38.json' with { type: 'json' }
 
 import { canonicalAuthorityRef, resolveCanonicalAuthority, validateJsonSchema } from './authority.mjs'
 import { digestJson, withoutKey } from './stable.mjs'
@@ -15,7 +15,7 @@ function validateContract(contract) {
   const families = new Set()
   for (const entry of contract.families || []) {
     const family = authority.closure.families.get(entry.familyContractId)
-    if (!family || families.has(entry.familyContractId) || entry.version !== family.version || entry.digest !== digestJson(family) || typeof entry.canonical !== 'boolean' || !['available', 'retired'].includes(entry.legacyCapability)) {
+    if (!family || families.has(entry.familyContractId) || entry.version !== family.version || entry.digest !== digestJson(family) || entry.canonical !== true || Object.hasOwn(entry, 'legacyCapability')) {
       issues.push({ code: 'CONSUMER_FAMILY_CLOSURE_INVALID', family: entry.familyContractId })
     }
     families.add(entry.familyContractId)

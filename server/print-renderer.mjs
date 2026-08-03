@@ -82,7 +82,6 @@ import {
   assertCanonicalConsumptionVisibleStructure,
 } from '../shared/paper-canonical/visibleStructure.mjs'
 import { resolveGroupFigures } from './figures/paperFigures.mjs'
-import { resolveCanonicalPrintGroup } from './print-canonical-group-adapter.mjs'
 
 function renderSectionHeadingText(text) {
   return sectionHeadingTextRuns(text)
@@ -269,6 +268,43 @@ function canonicalGroupMatchesPrintDetail(canonicalGroup, detail) {
       (question, index) => question.questionId === detail.questions[index]?.id,
     )
   )
+}
+
+function canonicalFamilyForPrintDetail(detail, selectedFamilyContractId) {
+  if (detail.groupType === 'cloze') return 'cloze'
+  if (['grammarFill', 'grammar_cloze'].includes(detail.groupType)) {
+    return 'grammar-fill'
+  }
+  if (['sevenChoices', 'seven_choices'].includes(detail.groupType)) {
+    return 'seven-choices'
+  }
+  if (detail.groupType === 'reading') return 'reading'
+  if (
+    ['writing', 'continuation'].includes(detail.groupType)
+    && ['application-writing', 'continuation-writing'].includes(
+      selectedFamilyContractId,
+    )
+  ) return selectedFamilyContractId
+  return null
+}
+
+function requiresCanonicalPrintConsumption(detail) {
+  return [
+    'cloze',
+    'grammarFill',
+    'grammar_cloze',
+    'sevenChoices',
+    'seven_choices',
+    'reading',
+    'writing',
+    'continuation',
+  ].includes(detail?.groupType)
+}
+
+function rejectCanonicalPrint(message) {
+  const error = new Error(message)
+  error.code = 'CANONICAL_CONSUMPTION_REJECTED'
+  throw error
 }
 
 function rejectCanonicalGrammarFill(message) {
@@ -1204,7 +1240,6 @@ export function buildPrintHtml({
   // a directory scan, so it's memoized per groupId for the life of this
   // one buildPrintHtml call (never persisted across calls/requests).
   const figuresCache = new Map()
-  const canonicalGroupCache = new Map()
   function getFiguresInfo(groupId) {
     if (!paperAssetsDir) return null
     if (!figuresCache.has(groupId)) {
@@ -1221,40 +1256,23 @@ export function buildPrintHtml({
           consumption: canonicalConsumption,
           groupId,
         })
-      const familyContractId =
-        detail.groupType === 'cloze'
-          ? 'cloze'
-          : detail.groupType === 'grammar_cloze'
-            ? 'grammar-fill'
-            : detail.groupType === 'seven_choices'
-              ? 'seven-choices'
-              : detail.groupType === 'reading'
-                ? 'reading'
-                : detail.groupType === 'writing'
-                  && [
-                    'application-writing',
-                    'continuation-writing',
-                  ].includes(selectedFamilyContractId)
-                  ? selectedFamilyContractId
-                : null
-      if (!familyContractId) return null
+      const familyContractId = canonicalFamilyForPrintDetail(
+        detail,
+        selectedFamilyContractId,
+      )
+      if (!familyContractId) {
+        if (requiresCanonicalPrintConsumption(detail)) {
+          rejectCanonicalPrint(
+            `Canonical Print consumption does not select ${groupId}`,
+          )
+        }
+        return null
+      }
       const selection = selectConsumerGroupMode({
         consumption: canonicalConsumption,
         familyContractId,
         groupId,
       })
-      if (selection.mode === 'legacy') {
-        return {
-          status: 'legacy',
-          diagnostic: {
-            status: 'legacy',
-            source: 'whole-paper-consumption',
-            paperId: canonicalConsumption.paperId,
-            groupId,
-            reason: 'whole_family_legacy_selected',
-          },
-        }
-      }
       const canonicalGroup = projectCanonicalConsumerGroup({
         consumption: canonicalConsumption,
         familyContractId,
@@ -1276,15 +1294,12 @@ export function buildPrintHtml({
         },
       }
     }
-    if (!paperAssetsDir) return null
-    if (!canonicalGroupCache.has(groupId)) {
-      const resolved = resolveCanonicalPrintGroup({
-        paperAssetsDir,
-        groupId,
-      })
-      canonicalGroupCache.set(groupId, resolved)
+    if (requiresCanonicalPrintConsumption(detail)) {
+      rejectCanonicalPrint(
+        `Canonical Print consumption is required for ${groupId}`,
+      )
     }
-    return canonicalGroupCache.get(groupId)
+    return null
   }
 
   const sections = []

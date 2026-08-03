@@ -27,7 +27,10 @@ import {
   validateCanonicalPublicationBundle,
 } from '../server/paper-canonical/publication.mjs'
 import { compileCanonicalPaper } from '../shared/paper-canonical/compiler.mjs'
-import { projectCanonicalConsumerGroup } from '../shared/paper-canonical/consumerProjection.mjs'
+import {
+  projectCanonicalConsumerGroup,
+  selectConsumerGroupMode,
+} from '../shared/paper-canonical/consumerProjection.mjs'
 import { consumerContractRefs } from '../shared/paper-canonical/consumers.mjs'
 import { resolveCanonicalAuthority } from '../shared/paper-canonical/authority.mjs'
 import { digestJson, sha256, stableStringify } from '../shared/paper-canonical/stable.mjs'
@@ -570,16 +573,42 @@ try {
   assert.equal(ready.disposition, 'ready')
   assert.equal(ready.selections.every((selection) => selection.mode === 'canonical'), true)
   assert.equal(ready.selections.length, 6)
-  const legacyStore = {
+  const legacyFamilyCallerMirror = structuredClone(ready)
+  for (const selection of legacyFamilyCallerMirror.selections) {
+    selection.mode = 'legacy'
+    assert.throws(
+      () => selectConsumerGroupMode({
+        consumption: legacyFamilyCallerMirror,
+        familyContractId: selection.familyContractId,
+        groupId: selection.groupIds[0],
+      }),
+      { code: 'CANONICAL_CONSUMPTION_REJECTED' },
+      `caller legacy family mirror rejects ${selection.familyContractId}`,
+    )
+    selection.mode = 'canonical'
+  }
+  const wrongFamilyCallerMirror = structuredClone(ready)
+  wrongFamilyCallerMirror.selections[0].familyContractId = 'wrong-family'
+  assert.throws(
+    () => selectConsumerGroupMode({
+      consumption: wrongFamilyCallerMirror,
+      familyContractId: ready.selections[0].familyContractId,
+      groupId: ready.selections[0].groupIds[0],
+    }),
+    { code: 'CANONICAL_CONSUMPTION_REJECTED' },
+    'caller family mirrors cannot select a wrong canonical family',
+  )
+  const callerLegacyMirrorStore = {
     ...store,
     projectLegacyFamily: async ({ familyContractId }) => [{ kind: 'legacy_family', familyContractId }],
   }
-  const familyFallback = await loadPaperForConsumption({ paperId: fixture.source.paperId, consumerContract: consumerContractRefs.print_pdf }, legacyStore)
-  assert.equal(familyFallback.disposition, 'ready')
-  assert.equal(familyFallback.selections.filter((selection) => selection.mode === 'legacy').length, 0)
+  const callerLegacyMirror = await loadPaperForConsumption({ paperId: fixture.source.paperId, consumerContract: consumerContractRefs.print_pdf }, callerLegacyMirrorStore)
+  assert.equal(callerLegacyMirror.disposition, 'ready')
+  assert.equal(callerLegacyMirror.selections.some((selection) => selection.mode !== 'canonical'), false)
   assert.equal(
-    familyFallback.selections.find((selection) => selection.familyContractId === 'seven-choices').mode,
+    callerLegacyMirror.selections.find((selection) => selection.familyContractId === 'seven-choices').mode,
     'canonical',
+    'a caller-provided legacy projector cannot alter a complete canonical Publication',
   )
 
   assert.throws(
@@ -626,10 +655,10 @@ try {
   writeFileSync(corruptPath, '{"corrupt":true}\n')
   const corrupt = await loadPaperForConsumption({ paperId: fixture.source.paperId, version: 'v2', consumerContract: consumerContractRefs.screen }, store)
   assert.equal(corrupt.disposition, 'incompatible')
-  const corruptFallback = await loadPaperForConsumption({ paperId: fixture.source.paperId, version: 'v2', consumerContract: consumerContractRefs.screen }, legacyStore)
-  assert.equal(corruptFallback.disposition, 'ready')
-  assert.equal(corruptFallback.selections.every((selection) => selection.mode === 'legacy'), true)
-  assert.equal(corruptFallback.selections.length, 6)
+  const corruptCallerMirror = await loadPaperForConsumption({ paperId: fixture.source.paperId, version: 'v2', consumerContract: consumerContractRefs.screen }, callerLegacyMirrorStore)
+  assert.equal(corruptCallerMirror.disposition, 'incompatible')
+  const wrongPublication = await loadPaperForConsumption({ paperId: fixture.source.paperId, version: 'v999', consumerContract: consumerContractRefs.screen }, store)
+  assert.equal(wrongPublication.disposition, 'not_found')
   assert.equal(readFileSync(corruptPath, 'utf8').includes('corrupt'), true)
 } finally {
   db.close()

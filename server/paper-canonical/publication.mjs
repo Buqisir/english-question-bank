@@ -1301,51 +1301,6 @@ export function createFileSystemCanonicalPublicationStore({ rootDir, db }) {
   }
 }
 
-async function legacySelections({ ref, contract, familyIds, store, diagnostic }) {
-  const selections = []
-  for (const familyContractId of familyIds) {
-    if (!canProjectLegacyFamily(contract, familyContractId, store)) return null
-    const projectedOccurrences = await store.projectLegacyFamily({ ref, familyContractId })
-    if (!Array.isArray(projectedOccurrences)) return null
-    selections.push(legacySelection(familyContractId, projectedOccurrences, diagnostic))
-  }
-  return selections
-}
-
-function legacySelectionsSync({ ref, contract, familyIds, store, diagnostic }) {
-  const selections = []
-  for (const familyContractId of familyIds) {
-    if (!canProjectLegacyFamily(contract, familyContractId, store)) return null
-    const projectedOccurrences = store.projectLegacyFamily({ ref, familyContractId })
-    if (!Array.isArray(projectedOccurrences)) return null
-    selections.push(legacySelection(familyContractId, projectedOccurrences, diagnostic))
-  }
-  return selections
-}
-
-function canProjectLegacyFamily(contract, familyContractId, store) {
-  const capability = contract.families.find(
-    (entry) => entry.familyContractId === familyContractId,
-  )
-  return Boolean(
-    capability
-    && capability.legacyCapability !== 'retired'
-    && typeof store.projectLegacyFamily === 'function',
-  )
-}
-
-function legacySelection(familyContractId, projectedOccurrences, diagnostic) {
-  return {
-    mode: 'legacy',
-    familyContractId,
-    groupIds: projectedOccurrences
-      .filter((occurrence) => occurrence?.kind === 'group')
-      .map((occurrence) => occurrence.groupId),
-    projectedOccurrences,
-    diagnostic,
-  }
-}
-
 function canonicalSelections(validated, contract) {
   const groupIdsByFamily = new Map()
   for (const group of validated.groups) {
@@ -1355,12 +1310,13 @@ function canonicalSelections(validated, contract) {
     groupIdsByFamily.set(familyId, groupIds)
   }
   const selections = []
-  const legacyFamilies = []
   for (const [familyContractId, groupIds] of groupIdsByFamily) {
     const capability = contract.families.find((entry) => entry.familyContractId === familyContractId)
     if (!capability || !capability.canonical) {
-      legacyFamilies.push(familyContractId)
-      continue
+      throw publicationError(
+        'CANONICAL_CONSUMER_FAMILY_UNAVAILABLE',
+        `Consumer Contract cannot project canonical family ${familyContractId}`,
+      )
     }
     const projectedOccurrences = validated.projected.nodes.filter(
       (node) => node.kind === 'group' && groupIds.includes(node.groupId),
@@ -1390,7 +1346,7 @@ function canonicalSelections(validated, contract) {
         : {}),
     })
   }
-  return { selections, legacyFamilies, allFamilyIds: [...groupIdsByFamily.keys()] }
+  return { selections, allFamilyIds: [...groupIdsByFamily.keys()] }
 }
 
 function canonicalVisibleStructure(validated) {
@@ -1539,7 +1495,6 @@ function readyConsumption(
   ref,
   manifest,
   canonical,
-  legacy,
   visibleStructure,
   profileRef,
   mediaArtifacts,
@@ -1564,7 +1519,7 @@ function readyConsumption(
           }
         : {}
     ),
-    selections: [...canonical.selections, ...(legacy || [])],
+    selections: canonical.selections,
     ...(
       Number(manifest.authority.manifestVersion) >= 30
         ? { visibleStructure }
@@ -1648,20 +1603,11 @@ export async function loadPaperForConsumption(request, store) {
         store,
         contract: consumer.contract,
       })
-      const legacy = await legacySelections({
-        ref,
-        contract: consumer.contract,
-        familyIds: selection.legacyFamilies,
-        store,
-        diagnostic: { code: 'CONSUMER_FAMILY_CANONICAL_UNAVAILABLE' },
-      })
-      if (selection.legacyFamilies.length > 0 && !legacy) return { disposition: 'incompatible', diagnostics: [{ code: 'LEGACY_FAMILY_UNAVAILABLE' }] }
       return readyConsumption(
         request,
         ref,
         manifest,
         selection,
-        legacy,
         visibleStructure,
         profileRef,
         mediaArtifacts,
@@ -1669,15 +1615,6 @@ export async function loadPaperForConsumption(request, store) {
       )
     } catch (error) {
       const diagnostic = publicationDiagnostic(error)
-      const familyIds = consumer.contract.families.map((entry) => entry.familyContractId)
-      const legacy = await legacySelections({
-        ref,
-        contract: consumer.contract,
-        familyIds,
-        store,
-        diagnostic,
-      })
-      if (legacy) return { disposition: 'ready', paperId: request.paperId, sourceAssetVersion: ref.sourceAssetVersion, selections: legacy, diagnostics: [diagnostic] }
       return { disposition: 'incompatible', diagnostics: [diagnostic] }
     }
   }
@@ -1726,20 +1663,11 @@ export function loadPaperForConsumptionSync(request, store) {
         store,
         contract: consumer.contract,
       })
-      const legacy = legacySelectionsSync({
-        ref,
-        contract: consumer.contract,
-        familyIds: selection.legacyFamilies,
-        store,
-        diagnostic: { code: 'CONSUMER_FAMILY_CANONICAL_UNAVAILABLE' },
-      })
-      if (selection.legacyFamilies.length > 0 && !legacy) return { disposition: 'incompatible', diagnostics: [{ code: 'LEGACY_FAMILY_UNAVAILABLE' }] }
       return readyConsumption(
         request,
         ref,
         manifest,
         selection,
-        legacy,
         visibleStructure,
         profileRef,
         mediaArtifacts,

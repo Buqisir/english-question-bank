@@ -387,31 +387,15 @@ async function assertActualPaperBrowseBoundary({
 
     consumption = legacyConsumption
     await page.goto(qaUrl.href)
-    try {
-      await page.locator('[data-paper-question-id]').first().waitFor()
-    } catch (error) {
-      const visibleError = await page.locator(
-        '.paper-browse-error',
-      ).textContent().catch(() => null)
-      throw new Error(
-        `Legacy Screen fixture did not render: ${visibleError || error.message}`,
-      )
-    }
     await page.getByText(
-      clozeAnalysis.blanks['q-2026-i-041'].correctFit.reason,
-      { exact: true },
+      /whole-family selection|Family cloze has no unambiguous whole-family selection/,
     ).waitFor()
     assert.equal(
       await page.locator(
         '[data-paper-browse-anchor="group-2026-i-cloze"] [data-paper-question-id]',
       ).count(),
-      15,
-      'actual lecture-mode PaperBrowsePage honors an explicit whole-family legacy plan',
-    )
-    assert.equal(
-      await page.locator('[data-canonical-placement-signature]').count(),
       0,
-      'successful Analysis does not upgrade an explicit legacy selection',
+      'a caller-supplied legacy Screen plan exposes no question output',
     )
 
     consumption = invalidConsumption
@@ -733,44 +717,11 @@ async function assertActualDraftPrintPdfBoundary({
     )
     setCanonicalReference(bankDbPath, null)
 
-    const legacyPreview = await fetchPublic(
-      `${baseUrl}/api/draft-papers/${draftPaperId}/print-html?versionType=student`,
-    )
-    const legacyPreviewHtml = await legacyPreview.text()
-    assert.equal(legacyPreview.status, 200, 'real HTTP legacy Print preview succeeds')
-    assert.equal(
-      (legacyPreviewHtml.match(/data-canonical-placement-signature=/g) || []).length,
-      0,
-      'real HTTP Print preview preserves explicit whole-family legacy',
-    )
-    const legacyPaginationResponse = await fetchPublic(
-      `${baseUrl}/api/draft-papers/${draftPaperId}/pagination?versionType=student`,
-    )
-    const legacyPagination = await legacyPaginationResponse.json()
-    assert.equal(legacyPaginationResponse.status, 200)
-    assert.equal(
-      (legacyPagination.paginatedHtml.match(/data-canonical-placement-signature=/g) || []).length,
-      0,
-      'real HTTP pagination preserves explicit whole-family legacy',
-    )
-    assert.equal(
-      legacyPagination.reused,
-      false,
-      'real HTTP Consumption Plan change invalidates the physical artifact cache',
-    )
-    const legacyPdf = await fetchPublic(
-      `${baseUrl}/api/draft-papers/${draftPaperId}/print-pdf`,
-      {
-        method: 'POST',
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ versionType: 'student' }),
-      },
-    )
-    assert.equal(legacyPdf.status, 200, 'real HTTP legacy PDF succeeds')
-    assert.equal(
-      Buffer.from(await legacyPdf.arrayBuffer()).subarray(0, 4).toString(),
-      '%PDF',
-    )
+    await assertRejectedPhysicalRoutes({
+      baseUrl,
+      draftPaperId,
+      label: 'legacy-only raw asset',
+    })
   })
 
   await withActualDraftApi({
@@ -1094,7 +1045,8 @@ try {
       blocks,
       questionNumberStart: 41,
     }),
-    /in-text blank count/,
+    { code: 'CANONICAL_CONSUMPTION_REJECTED' },
+    'raw legacy fields cannot produce a Print artifact when canonical consumption is absent',
   )
 
   const complete = await loadPaperForConsumption({
@@ -1204,51 +1156,26 @@ try {
     rootDir: legacyRoot,
     db: legacyDb,
   })
-  const explicitLegacy = legacyRuntime.resolveForItems({
-    consumerId: 'screen',
-    items,
-  })
-  assert.deepEqual(
-    explicitLegacy.selections.map((selection) => selection.mode),
-    ['legacy', 'legacy'],
-    'runtime preserves the explicit whole-family legacy plan',
-  )
   assert.throws(
     () => legacyRuntime.resolveForItems({
       consumerId: 'screen',
-      items: [
-        items[0],
-        {
-          ...items[1],
-          detail: { ...items[1].detail, paperId: 'another-paper' },
-        },
-      ],
+      items,
     }),
     { code: 'CANONICAL_CONSUMPTION_REJECTED' },
+    'legacy-only raw fields do not create a Screen plan',
   )
   const databaseLegacyItems = structuredClone(items)
   for (const item of databaseLegacyItems) {
     delete item.detail.paperId
     item.sourcePaperId = 'legacy-paper-ticket-05'
   }
-  const databaseLegacy = legacyRuntime.resolveForItems({
-    consumerId: 'print_pdf',
-    items: databaseLegacyItems,
-  })
-  assert.deepEqual(
-    databaseLegacy.selections.map((selection) => selection.mode),
-    ['legacy', 'legacy'],
-    'DB-only groups retain an explicit contract-authorized whole-family legacy plan',
-  )
-  const mixedDatabaseLegacyItems = structuredClone(databaseLegacyItems)
-  mixedDatabaseLegacyItems[1].sourcePaperId = 'another-legacy-paper'
   assert.throws(
     () => legacyRuntime.resolveForItems({
       consumerId: 'print_pdf',
-      items: mixedDatabaseLegacyItems,
+      items: databaseLegacyItems,
     }),
     { code: 'CANONICAL_CONSUMPTION_REJECTED' },
-    'DB-only legacy selection rejects mixed source identity',
+    'DB-only legacy groups do not create a Print/PDF plan',
   )
   const legacyExports = createExportImplementation({
     rootDir,
@@ -1258,19 +1185,11 @@ try {
     buildPrintHtml,
     resolveCanonicalConsumption: legacyRuntime.resolveForItems,
   })
-  for (const result of [
-    legacyExports.exportPrintHtml(publicInput),
-  ]) {
-    assert.equal(
-      result.normalizationDiagnostics.filter(
-        (diagnostic) =>
-          diagnostic.source === 'whole-paper-consumption'
-          && diagnostic.status === 'legacy',
-      ).length,
-      2,
-      'public export honors explicit whole-family legacy selections',
-    )
-  }
+  assert.throws(
+    () => legacyExports.exportPrintHtml(publicInput),
+    { code: 'CANONICAL_CONSUMPTION_REJECTED' },
+    'public Print HTML exposes no artifact for legacy-only input',
+  )
   const actualOutputDir = provisionActualArtifacts
     ? path.resolve(
         '.scratch',
@@ -1281,7 +1200,22 @@ try {
       )
     : null
   if (actualOutputDir) mkdirSync(actualOutputDir, { recursive: true })
-  const browserLegacyConsumption = structuredClone(explicitLegacy)
+  const browserLegacyConsumption = {
+    disposition: 'ready',
+    paperId: fixture.source.paperId,
+    selections: [
+      {
+        familyContractId: 'cloze',
+        mode: 'legacy',
+        groupIds: ['group-2026-i-cloze'],
+      },
+      {
+        familyContractId: 'grammar-fill',
+        mode: 'legacy',
+        groupIds: ['group-2026-i-grammar-fill'],
+      },
+    ],
+  }
   for (const selection of screenRouteResult.body.selections) {
     if (browserLegacyConsumption.selections.some(
       (candidate) =>

@@ -1273,20 +1273,6 @@ async function assertPaperBrowseSelectionModes() {
       }],
     }
   }
-  const screenContract = JSON.parse(readFileSync(path.join(
-    repositoryRoot,
-    'standards/paper-canonical/consumers/screen-v15.json',
-  )))
-  for (const { familyContractId } of legacyCases) {
-    assert.equal(
-      screenContract.families.find(
-        (family) => family.familyContractId === familyContractId,
-      )?.legacyCapability,
-      'available',
-      `${familyContractId} legacy mode is authorized by the checked-in Screen contract`,
-    )
-  }
-
   const vite = await import('../app/node_modules/vite/dist/node/index.js')
   const viteServer = await vite.createServer({
     root: path.resolve('app'),
@@ -1348,32 +1334,18 @@ async function assertPaperBrowseSelectionModes() {
         consumptionForGroup(testCase, 'legacy'),
       )
       try {
-        await legacyPage.locator('.paper-browse-loading').waitFor({
-          state: 'detached',
-        })
+        await legacyPage.locator('.paper-browse-error').waitFor()
         const legacyBodyText = await legacyPage.locator('body').innerText()
         assert.equal(
           legacyBodyText.includes(testCase.expectedText),
-          true,
-          `authorized ${testCase.familyContractId} legacy selection renders its retained source:\n${legacyBodyText}`,
+          false,
+          `retired ${testCase.familyContractId} legacy selection exposes no raw source:\n${legacyBodyText}`,
         )
         assert.equal(
-          await legacyPage.locator('.paper-browse-placeholder').count(),
+          await legacyPage.locator('[data-paper-question-id]').count(),
           0,
-          `authorized ${testCase.familyContractId} legacy selection renders through PaperBrowse`,
+          `retired ${testCase.familyContractId} legacy selection exposes no questions`,
         )
-        if (testCase.familyContractId === 'reading') {
-          assert.equal(
-            await legacyPage.locator(
-              '[data-canonical-reading-rhythm-role],'
-              + '[data-canonical-reading-chrome],'
-              + '[data-canonical-reading-preceding-for],'
-              + '[data-canonical-reading-following-for]',
-            ).count(),
-            0,
-            'full-chrome legacy Reading receives no canonical rhythm attributes',
-          )
-        }
       } finally {
         await legacyPage.close()
       }

@@ -184,12 +184,8 @@ try {
   assert.equal(published.status, 'published')
   assert.equal(db.prepare('SELECT count(*) AS count FROM canonical_paper_publications').get().count, 1)
   const store = createFileSystemCanonicalPublicationStore({ rootDir, db })
-  const storeWithLegacy = {
-    ...store,
-    projectLegacyFamily: async ({ familyContractId }) => [{ kind: 'legacy_family', familyContractId }],
-  }
   for (const consumerContract of Object.values(consumerContractRefs)) {
-    const loaded = await loadPaperForConsumption({ paperId: fixture.source.paperId, consumerContract }, storeWithLegacy)
+    const loaded = await loadPaperForConsumption({ paperId: fixture.source.paperId, consumerContract }, store)
     assert.equal(loaded.disposition, 'ready')
     for (const family of ['cloze', 'grammar-fill']) {
       const selection = loaded.selections.find((candidate) => candidate.familyContractId === family)
@@ -200,15 +196,11 @@ try {
 
   const groupsPath = path.join(rootDir, fixture.source.paperId, 'versions', 'v1', 'canonical', 'canonical-question-groups-v1.json')
   writeFileSync(groupsPath, '{"partial":true}\n')
-  const partialFallbackStore = {
-    ...store,
-    projectLegacyFamily: async ({ familyContractId }) => familyContractId === 'grammar-fill' ? null : [{ kind: 'legacy_family', familyContractId }],
-  }
   const partial = await loadPaperForConsumption({
     paperId: fixture.source.paperId,
     version: 'v1',
     consumerContract: consumerContractRefs.screen,
-  }, partialFallbackStore)
+  }, store)
   assert.equal(partial.disposition, 'incompatible')
   assert.equal(Object.hasOwn(partial, 'selections'), false)
   assert.equal(readFileSync(groupsPath, 'utf8'), '{"partial":true}\n')

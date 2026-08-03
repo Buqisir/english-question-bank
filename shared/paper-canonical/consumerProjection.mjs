@@ -893,7 +893,7 @@ export function selectConsumerGroupMode({
   )
   if (
     familySelections.length !== 1
-    || !['canonical', 'legacy'].includes(familySelections[0].mode)
+    || familySelections[0].mode !== 'canonical'
   ) {
     throw rejected(`Family ${familyContractId} has no unambiguous whole-family selection`)
   }

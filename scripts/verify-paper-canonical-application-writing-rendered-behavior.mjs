@@ -906,23 +906,19 @@ for (const [label, consumption] of [
     questionGroupId: item.detail.id,
     score: item.score,
   }))
-  const mixedPrint = buildPrintHtml({
-    title: 'Mixed writing regression',
-    versionType: 'student',
-    printStyle: 'exam',
-    items,
-    blocks,
-    questionNumberStart: 1,
-    canonicalConsumption: consumption,
-  })
-  assert.equal(
-    (mixedPrint.match(/data-canonical-application-occurrence-signature=/g) || [])
-      .length,
-    1,
+  assert.throws(
+    () => buildPrintHtml({
+      title: 'Mixed writing regression',
+      versionType: 'student',
+      printStyle: 'exam',
+      items,
+      blocks,
+      questionNumberStart: 1,
+      canonicalConsumption: consumption,
+    }),
+    { code: 'CANONICAL_CONSUMPTION_REJECTED' },
+    'a canonical Application Writing plan cannot mix in a raw Continuation Writing group',
   )
-  assert.equal(mixedPrint.includes('CONTINUATION LEGACY MATERIAL'), true)
-  assert.equal(mixedPrint.includes('CONTINUATION STARTER ONE'), true)
-  assert.equal(mixedPrint.includes('CONTINUATION STARTER TWO'), true)
 }
 
 async function assertActualPaperSurfaceArtifacts() {
