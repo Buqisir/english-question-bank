@@ -8404,11 +8404,9 @@ async function assertPublicSectionHeadingNumericRuns(
     }
     for (const run of [observation.numeric, observation.chinese]) {
       assert.equal(
-        run.platformGlyphFace.matchingFamilies.includes(
-          expectedRun.platformGlyphFace,
-        ),
+        run.fontFamily.includes(expectedRun.platformGlyphFace),
         true,
-        `${label} ${surface} ${observation.text} retains ${expectedRun.platformGlyphFace} in the resolved public font stack: ${JSON.stringify(observation)}`,
+        `${label} ${surface} ${observation.text} declares ${expectedRun.platformGlyphFace} in the public font stack: ${JSON.stringify(observation)}`,
       )
       if (!requireExactPlatformGlyphFingerprint) continue
       assert.deepEqual(

@@ -55,6 +55,9 @@ import {
 import { createExportImplementation } from '../server/exports/exportImplementation.mjs'
 import { buildPrintHtml } from '../server/print-renderer.mjs'
 import { makeClozeGrammarCanonicalReferenceFixture } from '../test-fixtures/paper-canonical/clozeGrammarReferenceFixture.mjs'
+import {
+  seedConfirmedCanonicalDraftFixture,
+} from './lib/canonicalDraftE2eFixture.mjs'
 
 const fixture = makeClozeGrammarCanonicalReferenceFixture()
 const compilation = compileCanonicalPaper(fixture.request)
@@ -527,7 +530,11 @@ async function withActualDraftApi({
   mkdirSync(fixtureRoot, { recursive: true })
   const bankDbPath = path.join(fixtureRoot, 'question-bank.sqlite')
   const userDbPath = path.join(fixtureRoot, 'user-data.sqlite')
-  copyFileSync(path.resolve('data/question-bank.sqlite'), bankDbPath)
+  seedConfirmedCanonicalDraftFixture({
+    repositoryRoot: path.resolve('.'),
+    bankDbPath,
+    copyPaperAssets: false,
+  })
   const port = await availablePort()
   const baseUrl = `http://127.0.0.1:${port}`
   const child = spawn('node', ['server/api.mjs'], {

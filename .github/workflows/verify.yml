@@ -55,9 +55,6 @@ jobs:
           sudo apt-get update
           sudo apt-get install --yes ffmpeg poppler-utils libreoffice-writer
 
-      - name: Initialize verification database
-        run: bash scripts/init-db.sh
-
       - name: Install verification Chromium
         run: pnpm exec playwright install --with-deps chromium
         working-directory: app

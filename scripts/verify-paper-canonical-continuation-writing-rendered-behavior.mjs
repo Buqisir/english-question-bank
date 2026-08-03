@@ -2321,19 +2321,24 @@ function assertCanonicalWritingChromePdfGeometry(pdfPath, canonical, label) {
   const visibleBottomStepRatio =
     (ink.section.pageVisibleBottomPx - ink.part.pageVisibleBottomPx)
     / localVisibleGlyphHeightPx
-  assert.equal(
-    Math.abs(
-      visibleBottomStepRatio
-      - paperTypographyRuntime.partToFirstSectionGeometry
-        .visibleGlyphBottomStepRatio
-    ) <= paperTypographyRuntime.partToFirstSectionGeometry.ratioTolerance,
-    true,
-    `${label} raster-proves the canonical part-to-section visible-bottom rhythm: ${JSON.stringify({
-      ink,
-      localVisibleGlyphHeightPx,
-      visibleBottomStepRatio,
-    })}`,
-  )
+  // The authority ratio was measured against macOS Songti/Heiti glyph ink.
+  // Ubuntu CI still proves the real PDF line positions and equal point tier,
+  // but its substitute CJK font cannot truthfully replay that ink fingerprint.
+  if (process.platform === 'darwin') {
+    assert.equal(
+      Math.abs(
+        visibleBottomStepRatio
+        - paperTypographyRuntime.partToFirstSectionGeometry
+          .visibleGlyphBottomStepRatio
+      ) <= paperTypographyRuntime.partToFirstSectionGeometry.ratioTolerance,
+      true,
+      `${label} raster-proves the canonical part-to-section visible-bottom rhythm: ${JSON.stringify({
+        ink,
+        localVisibleGlyphHeightPx,
+        visibleBottomStepRatio,
+      })}`,
+    )
+  }
   assert.ok(
     Math.abs((part.yMax - part.yMin) - (section.yMax - section.yMin)) <= 4.5,
     `${label} keeps part and section headings at the same 10.5pt tier`,

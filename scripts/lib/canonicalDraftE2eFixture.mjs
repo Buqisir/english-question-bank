@@ -52,6 +52,7 @@ export function seedConfirmedCanonicalDraftFixture({
   paperId = DEFAULT_PAPER_ID,
   groupIds: requestedGroupIds = null,
   titlesByGroupId = {},
+  copyPaperAssets = true,
 }) {
   const sourceStore = path.join(repositoryRoot, DEFAULT_STORE)
   const sourceIndex = new DatabaseSync(
@@ -71,15 +72,18 @@ export function seedConfirmedCanonicalDraftFixture({
   const current = publicationRows.find((row) => row.is_current === 1)
   if (!current) throw new Error(`Confirmed Canonical fixture is missing ${paperId}`)
 
-  mkdirSync(paperAssetsDir, { recursive: true })
-  cpSync(
-    path.join(sourceStore, paperId),
-    path.join(paperAssetsDir, paperId),
-    { recursive: true },
-  )
+  if (copyPaperAssets) {
+    if (!paperAssetsDir) throw new Error('Canonical E2E paper-assets destination is required')
+    mkdirSync(paperAssetsDir, { recursive: true })
+    cpSync(
+      path.join(sourceStore, paperId),
+      path.join(paperAssetsDir, paperId),
+      { recursive: true },
+    )
+  }
 
   const versionDir = path.join(
-    paperAssetsDir,
+    copyPaperAssets ? paperAssetsDir : sourceStore,
     paperId,
     'versions',
     current.version_name,
