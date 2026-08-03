@@ -21,7 +21,7 @@ on:
 jobs:
   verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 25
 
     steps:
       - name: Check out repository
@@ -46,6 +46,18 @@ jobs:
       - name: Install server dependencies
         run: npm ci
         working-directory: server
+
+      # The full registry now includes real browser, PDF-source, and DOCX-source
+      # seams. Keep verify:all truthful in CI instead of reporting product
+      # failures when the runner is merely missing its declared tools.
+      - name: Install verification system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes poppler-utils libreoffice-writer
+
+      - name: Install verification Chromium
+        run: pnpm exec playwright install --with-deps chromium
+        working-directory: app
 
       - name: Run app build and core verify scripts
         run: pnpm run verify:all
