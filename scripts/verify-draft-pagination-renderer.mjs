@@ -10,7 +10,7 @@
 // NOT registered in verify-ci.mjs (see scripts/README.md "Runs in CI?" = no):
 // this script launches a real headless Chromium instance (playwright-core,
 // `channel: 'chromium'`, see chromiumPool.mjs). The main `verify` CI job
-// (`docs/ci/verify-workflow-template.yml` / `.github/workflows/verify.yml`)
+// (`.github/workflows/verify.yml`)
 // only runs `npm ci` in server/ — it does NOT install a Chromium binary.
 // `npm ci` alone never downloads a browser for `playwright-core` (unlike the
 // full `playwright` package, it ships no postinstall browser download) — a

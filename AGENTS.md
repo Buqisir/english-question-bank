@@ -33,36 +33,32 @@ Historical cuts are evidence, not current instructions.
 
 ## Verify the changed risk
 
-- Run the narrowest checks that exercise the affected behavior and its direct
-  consumers. `SKIP` is not `PASS`; report limitations literally.
-- A real high-risk shared-behavior change gets affected public-seam tests, one
-  final full suite, and an independent Standards/Spec review. This includes
-  shared schema or data-contract semantics, auth/permissions/isolation,
-  persistence or migrations, atomic publication, shared PaperSurface or
-  Screen/Print/PDF behavior, production configuration, and irreversible
-  cross-cut architecture.
-- Release checks run once on the final candidate. After merge, confirm `main`
-  CI; update `docs/STATUS.md` briefly only for a material release.
-- Prefer behavioral verification at a public seam. Source-regex assertions are
-  a last resort. Before deleting shared CSS, inventory every producer and
-  naming collision.
+Run the narrowest public-seam checks that exercise the changed behavior and its
+direct consumers. These routes are deterministic; unknown scope falls back to
+the full suite.
 
-### Known-shape Canonical Paper data
+| Change | During work | Final gate |
+| --- | --- | --- |
+| Atomic UI micro-change | `verify:changed` + exact-page real click | Owner QA when visible; no unrelated backend/Paper suite |
+| Known-shape Canonical Paper data | `verify:changed` strict input/publication canary | no authority bump, deep per-paper tri-surface proof, full suite, or independent review unless a shared shape changes |
+| Ordinary local feature | `verify:changed` + its focused behavioral check | affected build/public seam |
+| Shared renderer/Paper contract | `verify:paper` + affected real Screen/Print/PDF | one final `verify:all` and one independent Standards/Spec review |
+| Auth, isolation, persistence, migration, production config, or irreversible cross-cut | `verify:changed` security pack + affected public seam | one final `verify:all` and one independent Standards/Spec review |
 
-Adding paper data through unchanged accepted shared behavior requires strict
-input validation, candidate-bound Teacher Confirmation, deterministic data
-checks, atomic publication/reload behavior, and a light canary appropriate to
-the paper. It does not require a schema/authority bump, a full suite,
-independent code review, or deep per-paper Screen/Student/Teacher Print/PDF
-proof. If the paper exposes a need to change shared behavior, stop the data-only
-path and use the high-risk shared-change checks above.
+`SKIP` is not `PASS`; report its limitation literally. Run release checks once
+on the final candidate, confirm `main` CI after merge, and update
+`docs/STATUS.md` only for a material release. Prefer behavioral evidence;
+source-regex is a last resort. Before deleting shared CSS, inventory producers
+and naming collisions.
 
-### UI micro-changes
+Every new or retained verifier, process rule, or governance document must name
+in one sentence the real failure it uniquely prevents, or the independent
+detection layer other checks cannot supply. If that is uncertain, quarantine
+it outside daily packs instead of inventing a quota or deleting blindly.
 
-A local UI micro-change runs the affected frontend checks and real-click QA on
-the exact page and state, followed by Owner QA when visible. Do not run
-unrelated backend, canonical-paper, print/PDF, or full-repository suites unless
-the dependency trace shows shared impact.
+Evaluate a `VersionedRenderContract` only when the next real shared-renderer
+authority bump demonstrates resolver/fixture/consumer replay fan-out; do not
+pre-build it.
 
 ## Owner QA
 

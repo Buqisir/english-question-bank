@@ -4,6 +4,12 @@ Test weight follows actual blast radius, irreversibility, and automation
 authority. Run affected checks during development; do not use the full suite as
 a ritual. `SKIP` is never `PASS`.
 
+Use `pnpm -C app verify:changed` for the daily diff-selected pack,
+`pnpm -C app verify:paper` for shared Canonical Paper/Print seams, and
+`pnpm -C app verify:all` only for a final high-risk candidate or conservative
+fallback. Inspect a route without running it with
+`node scripts/verify-ci.mjs --plan-json --changed-file <path>`.
+
 ## Local and reversible
 
 Run the affected build/typecheck and focused behavioral check. A UI

@@ -26,7 +26,6 @@ console.log('Architecture housekeeping verify')
 
 for (const relPath of [
   '.github/workflows/verify.yml',
-  'docs/ci/verify-workflow-template.yml',
   'scripts/verify-ci.mjs',
   'app/package.json',
   'app/src/shared-ui/tokens.css',
@@ -39,11 +38,16 @@ assert(
   'app exposes the stable verify entrypoint',
   appPackage.scripts?.['verify:all'] === 'node ../scripts/verify-ci.mjs',
 )
+assert(
+  'app exposes the changed-risk verify entrypoint',
+  appPackage.scripts?.['verify:changed'] === 'node ../scripts/verify-ci.mjs --changed',
+)
+assert(
+  'app exposes the Paper seam verify entrypoint',
+  appPackage.scripts?.['verify:paper'] === 'node ../scripts/verify-ci.mjs --pack paper',
+)
 
-for (const relPath of [
-  '.github/workflows/verify.yml',
-  'docs/ci/verify-workflow-template.yml',
-]) {
+for (const relPath of ['.github/workflows/verify.yml']) {
   const workflow = read(relPath)
   assert(`${relPath} installs app dependencies`, workflow.includes('pnpm install --frozen-lockfile'))
   assert(
@@ -86,6 +90,56 @@ assert(
   'architecture housekeeping remains in the stable suite',
   scripts.includes('scripts/verify-architecture-housekeeping.mjs'),
 )
+const verifyReadme = read('scripts/README.md')
+const undocumentedScripts = scripts.filter(
+  (script) => ![
+    script.slice('scripts/'.length),
+    path.basename(script),
+  ].some((label) => verifyReadme.includes(`\`${label}\``)),
+)
+assert(
+  'every stable verifier states its named failure in the index',
+  undocumentedScripts.length === 0,
+  undocumentedScripts.join('\n'),
+)
+
+function routeFor(changedFile) {
+  const result = spawnSync(process.execPath, [
+    'scripts/verify-ci.mjs',
+    '--plan-json',
+    '--changed-file',
+    changedFile,
+  ], { cwd: rootDir, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] })
+  assert(
+    `verify route plans ${changedFile}`,
+    result.status === 0,
+    result.stderr || result.stdout,
+  )
+  if (result.status !== 0) return null
+  try {
+    return JSON.parse(result.stdout)
+  } catch (error) {
+    assert(`verify route for ${changedFile} is valid JSON`, false, String(error))
+    return null
+  }
+}
+
+for (const [changedFile, expectedRisk, expectedPack] of [
+  ['app/src/shared-ui/Button.tsx', 'ui-micro', 'ui'],
+  ['app/public/paper-assets/paper-new/latest/paper-asset.json', 'known-shape-paper-data', 'paper-data'],
+  ['server/services/questionBankSteward.mjs', 'ordinary-local-feature', 'feature'],
+  ['server/print-renderer.mjs', 'shared-renderer-contract', 'paper'],
+  ['data/sql/schema.sql', 'auth-persistence-migration', 'security'],
+  ['.github/workflows/verify.yml', 'unknown-fallback', 'all'],
+]) {
+  const plan = routeFor(changedFile)
+  if (!plan) continue
+  assert(
+    `${changedFile} selects ${expectedPack}`,
+    plan.risk === expectedRisk && plan.pack === expectedPack,
+    JSON.stringify(plan),
+  )
+}
 
 const indexCss = read('app/src/index.css')
 const tokensCss = read('app/src/shared-ui/tokens.css')

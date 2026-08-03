@@ -4,6 +4,10 @@ import { execFileSync, spawnSync } from 'node:child_process'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import {
+  changedFiles,
+  touchesAny,
+} from './lib/verifyScope.mjs'
+import {
   assertCanonicalImportPilotEvidenceRoot,
   assertCanonicalImportPilotTransientEvidenceRunsClean,
   inspectOfficialCanonicalImportPilotEvidenceRoot,
@@ -149,8 +153,168 @@ const registry = {
   ],
 }
 
+const uiScripts = [
+  'scripts/verify-architecture-housekeeping.mjs',
+  'scripts/verify-motion-tokens.mjs',
+  'scripts/verify-lecture-panel-css.mjs',
+  'scripts/verify-radius-family.mjs',
+]
+const paperDataScripts = [
+  'scripts/verify-paper-asset-v1.mjs',
+  'scripts/verify-paper-canonical-foundation.mjs',
+  'scripts/verify-paper-canonical-publication.mjs',
+  'scripts/verify-paper-canonical-import-admission.mjs',
+  'scripts/verify-paper-canonical-registered-confirmation-admission.mjs',
+  'scripts/verify-paper-canonical-import-recovery.mjs',
+  'scripts/verify-paper-canonical-import-pilot-fixes.mjs',
+]
+const securityScripts = [
+  'scripts/verify-ai-server-key-fallback.mjs',
+  'scripts/verify-auth-gate.mjs',
+  'scripts/verify-owner-gate.mjs',
+  'scripts/verify-user-scope.mjs',
+  'scripts/verify-ai-daily-limit.mjs',
+  'scripts/verify-launch-deploy.mjs',
+]
+const paperScriptPattern = /(?:paper|canonical|print|draft|export|docx|figure|cloze|grammar|seven-choices|writing|genre)/u
+const uniqueRegistered = (scripts) => [...new Set(scripts)].filter(
+  (script) => registry.scripts.includes(script),
+)
+const paperScripts = uniqueRegistered(
+  registry.scripts.filter((script) => paperScriptPattern.test(script)),
+)
+const featureScripts = uniqueRegistered(registry.scripts.filter(
+  (script) => !paperScripts.includes(script) && !securityScripts.includes(script),
+))
+const packs = Object.freeze({
+  ui: uniqueRegistered(uiScripts),
+  'paper-data': uniqueRegistered(paperDataScripts),
+  feature: featureScripts,
+  paper: paperScripts,
+  security: uniqueRegistered(securityScripts),
+  all: [...registry.scripts],
+})
+
+function argumentValues(flag) {
+  const values = []
+  for (let index = 0; index < process.argv.length; index += 1) {
+    if (process.argv[index] === flag && process.argv[index + 1]) {
+      values.push(process.argv[index + 1])
+    }
+  }
+  return values
+}
+
+function changedPlan(files) {
+  if (files.length === 0) {
+    return { risk: 'no-changes', pack: 'ui', scripts: [] }
+  }
+  const paperDataPatterns = [
+    'app/public/paper-assets/',
+    'test-fixtures/paper-canonical/publications/',
+    'test-fixtures/paper-import/',
+  ]
+  const paperPatterns = [
+    'shared/paper-canonical/',
+    'shared/paper-normalization/',
+    'shared/papersurface/',
+    'server/paper-canonical/',
+    'server/print-renderer.mjs',
+    'server/draft-paper/',
+    'app/src/features/paper-browse/',
+    'app/src/features/paper-intelligence/',
+    'standards/paper-canonical/',
+  ]
+  const securityPatterns = [
+    'data/sql/',
+    'server/auth/',
+    'server/user-data/',
+    'server/api.mjs',
+    'server/ai-daily-limit.mjs',
+  ]
+  if (files.every((file) => touchesAny([file], paperDataPatterns))) {
+    return { risk: 'known-shape-paper-data', pack: 'paper-data' }
+  }
+  if (touchesAny(files, securityPatterns)) {
+    return { risk: 'auth-persistence-migration', pack: 'security' }
+  }
+  if (touchesAny(files, paperPatterns)) {
+    return { risk: 'shared-renderer-contract', pack: 'paper' }
+  }
+  if (files.every((file) => file.startsWith('app/src/'))) {
+    return { risk: 'ui-micro', pack: 'ui' }
+  }
+  if (files.every((file) => [
+    'app/src/',
+    'server/',
+    'shared/',
+  ].some((prefix) => file.startsWith(prefix)))) {
+    return { risk: 'ordinary-local-feature', pack: 'feature' }
+  }
+  return { risk: 'unknown-fallback', pack: 'all' }
+}
+
+function verificationPlan() {
+  const explicitPack = argumentValues('--pack').at(-1)
+  const explicitFiles = argumentValues('--changed-file')
+  if (explicitPack) {
+    if (!Object.hasOwn(packs, explicitPack)) {
+      throw new Error(`Unknown verify pack: ${explicitPack}`)
+    }
+    return {
+      mode: explicitPack,
+      risk: explicitPack === 'paper' ? 'shared-renderer-contract' : explicitPack,
+      files: [],
+      pack: explicitPack,
+      preflight: registry.preflight,
+      scripts: packs[explicitPack],
+    }
+  }
+  if (process.argv.includes('--changed') || explicitFiles.length > 0) {
+    const baseRef = argumentValues('--base-ref').at(-1) || 'main'
+    if (!/^[A-Za-z0-9_./-]+$/u.test(baseRef)) {
+      throw new Error(`Invalid verify base ref: ${baseRef}`)
+    }
+    const files = explicitFiles.length > 0
+      ? [...new Set(explicitFiles)].sort()
+      : changedFiles(rootDir, { baseRef })
+    const selected = changedPlan(files)
+    return {
+      mode: 'changed',
+      risk: selected.risk,
+      files,
+      pack: selected.pack,
+      preflight: selected.pack === 'paper-data'
+        ? registry.preflight.filter((step) => step.label === 'git diff --check')
+        : registry.preflight,
+      scripts: selected.scripts ?? packs[selected.pack],
+    }
+  }
+  return {
+    mode: 'all',
+    risk: 'release-or-fallback',
+    files: [],
+    pack: 'all',
+    preflight: registry.preflight,
+    scripts: packs.all,
+  }
+}
+
+let plan
+try {
+  plan = verificationPlan()
+} catch (error) {
+  console.error(error.message)
+  process.exit(1)
+}
+
 if (process.argv.includes('--list-json')) {
-  console.log(JSON.stringify(registry, null, 2))
+  console.log(JSON.stringify({ ...registry, packs }, null, 2))
+  process.exit(0)
+}
+
+if (process.argv.includes('--plan-json')) {
+  console.log(JSON.stringify(plan, null, 2))
   process.exit(0)
 }
 
@@ -170,7 +334,7 @@ function run(command, args, label, options = {}) {
 }
 
 // Preflight stays hard-fail: a broken build makes the script results meaningless.
-for (const step of registry.preflight) {
+for (const step of plan.preflight) {
   const status = run(step.command, step.args, step.label)
   if (status !== 0) {
     console.error(`\nPreflight failed: ${step.label} (exit ${status})`)
@@ -181,31 +345,33 @@ for (const step of registry.preflight) {
 // Scripts run in collect mode: run every script, never exit early, so one
 // failure cannot hide the status of the scripts after it.
 const results = []
-for (const script of registry.scripts) {
+for (const script of plan.scripts) {
   const status = run(process.execPath, [script], script)
   results.push({ script, status })
 }
 
 let fullSuiteEvidenceRegressionFailure = null
-try {
-  if (officialEvidenceBefore) {
-    const officialEvidenceAfter = assertCanonicalImportPilotEvidenceRoot({
+if (plan.scripts.some((script) => script.startsWith('scripts/verify-paper-canonical-'))) {
+  try {
+    if (officialEvidenceBefore) {
+      const officialEvidenceAfter = assertCanonicalImportPilotEvidenceRoot({
+        repositoryRoot: rootDir,
+        rootDir: officialEvidenceBefore.rootDir,
+        expectedHead,
+      })
+      assert.deepEqual(
+        officialEvidenceAfter.snapshot,
+        officialEvidenceBefore.snapshot,
+        'verification leaves every sealed official evidence byte unchanged',
+      )
+    }
+    assertCanonicalImportPilotTransientEvidenceRunsClean({
       repositoryRoot: rootDir,
-      rootDir: officialEvidenceBefore.rootDir,
       expectedHead,
     })
-    assert.deepEqual(
-      officialEvidenceAfter.snapshot,
-      officialEvidenceBefore.snapshot,
-      'full-suite verification leaves every sealed official evidence byte unchanged',
-    )
+  } catch (error) {
+    fullSuiteEvidenceRegressionFailure = error
   }
-  assertCanonicalImportPilotTransientEvidenceRunsClean({
-    repositoryRoot: rootDir,
-    expectedHead,
-  })
-} catch (error) {
-  fullSuiteEvidenceRegressionFailure = error
 }
 
 const passed = results.filter((r) => r.status === 0)
@@ -213,9 +379,10 @@ const skipped = results.filter((r) => r.status === SKIP_EXIT_CODE)
 const failed = results.filter((r) => r.status !== 0 && r.status !== SKIP_EXIT_CODE)
 
 console.log('\n===== verify summary =====')
+console.log(`MODE ${plan.mode} / RISK ${plan.risk} / PACK ${plan.pack}`)
 console.log(`PASS ${passed.length} / SKIP ${skipped.length} / FAIL ${failed.length}`)
 if (skipped.length > 0) {
-  console.log('SKIPPED (off-repo fixture absent — not actually tested):')
+  console.log('SKIPPED (declared limitation — not actually tested):')
   for (const r of skipped) console.log(`  - ${r.script}`)
 }
 if (failed.length > 0) {

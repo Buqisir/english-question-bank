@@ -11,6 +11,8 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "prototype:abcd-options": "node ../docs/cuts/paper-canonical-unification/prototypes/abcd-option-layout-selector/selector-prototype.mjs",
+    "verify:changed": "node ../scripts/verify-ci.mjs --changed",
+    "verify:paper": "node ../scripts/verify-ci.mjs --pack paper",
     "verify:all": "node ../scripts/verify-ci.mjs"
   },
   "dependencies": {
