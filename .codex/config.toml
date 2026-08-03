@@ -1,0 +1,138 @@
+# Keep unrelated global workflows out of EQB agent startup context.
+# These overrides are project-scoped and do not uninstall the skills.
+
+[[skills.config]]
+path = "/Users/huangxuewei/.codex/skills/.system/plugin-creator/SKILL.md"
+enabled = false
+
+[[skills.config]]
+path = "/Users/huangxuewei/.codex/skills/.system/skill-creator/SKILL.md"
+enabled = false
+
+[[skills.config]]
+path = "/Users/huangxuewei/.codex/skills/.system/skill-installer/SKILL.md"
+enabled = false
+
+[[skills.config]]
+path = "/Users/huangxuewei/.agents/skills/agent-reach/SKILL.md"
+enabled = false
+
+[[skills.config]]
+path = "/Users/huangxuewei/.codex/skills/anypiece-ppt-board/SKILL.md"
+enabled = false
+
+[[skills.config]]
+path = "/Users/huangxuewei/.codex/skills/build-reading-scrapbook-keynote/SKILL.md"
+enabled = false
+
+[[skills.config]]
+path = "/Users/huangxuewei/.codex/skills/chronicle/SKILL.md"
+enabled = false
+
+[[skills.config]]
+path = "/Users/huangxuewei/.codex/skills/local-idea-inbox/SKILL.md"
+enabled = false
+
+[[skills.config]]
+path = "/Users/huangxuewei/.codex/plugins/cache/openai-curated-remote/openai-developers/1.2.3/skills/agents-sdk/SKILL.md"
+enabled = false
+
+[[skills.config]]
+path = "/Users/huangxuewei/.codex/plugins/cache/openai-curated-remote/openai-developers/1.2.3/skills/build-chatgpt-app/SKILL.md"
+enabled = false
+
+[[skills.config]]
+path = "/Users/huangxuewei/.codex/plugins/cache/openai-curated-remote/openai-developers/1.2.3/skills/chatgpt-app-submission/SKILL.md"
+enabled = false
+
+[[skills.config]]
+path = "/Users/huangxuewei/.codex/plugins/cache/openai-curated-remote/openai-developers/1.2.3/skills/openai-api-troubleshooting/SKILL.md"
+enabled = false
+
+[[skills.config]]
+path = "/Users/huangxuewei/.codex/plugins/cache/openai-curated-remote/openai-developers/1.2.3/skills/openai-platform-api-key/SKILL.md"
+enabled = false
+
+[[skills.config]]
+path = "/Users/huangxuewei/.codex/skills/ppt-master/SKILL.md"
+enabled = false
+
+[[skills.config]]
+path = "/Users/huangxuewei/.codex/plugins/cache/openai-bundled/sites/0.1.33/skills/sites-building/SKILL.md"
+enabled = false
+
+[[skills.config]]
+path = "/Users/huangxuewei/.codex/plugins/cache/openai-bundled/sites/0.1.33/skills/sites-hosting/SKILL.md"
+enabled = false
+
+[[skills.config]]
+path = "/Users/huangxuewei/.codex/plugins/cache/openai-primary-runtime/spreadsheets/26.802.11031/skills/spreadsheets/SKILL.md"
+enabled = false
+
+[[skills.config]]
+path = "/Users/huangxuewei/.codex/skills/super-teacher-external-brain-ops/SKILL.md"
+enabled = false
+
+[[skills.config]]
+path = "/Users/huangxuewei/.claude/skills/teach/SKILL.md"
+enabled = false
+
+[[skills.config]]
+path = "/Users/huangxuewei/.codex/skills/.system/imagegen/SKILL.md"
+enabled = false
+
+[[skills.config]]
+path = "/Users/huangxuewei/.codex/plugins/cache/openai-bundled/computer-use/1.0.1000550/skills/computer-use/SKILL.md"
+enabled = false
+
+[[skills.config]]
+path = "/Users/huangxuewei/.claude/skills/edit-article/SKILL.md"
+enabled = false
+
+[[skills.config]]
+path = "/Users/huangxuewei/.codex/skills/fireworks-tech-graph/SKILL.md"
+enabled = false
+
+[[skills.config]]
+path = "/Users/huangxuewei/.codex/skills/hatch-pet/SKILL.md"
+enabled = false
+
+[[skills.config]]
+path = "/Users/huangxuewei/.codex/skills/llm-wiki/SKILL.md"
+enabled = false
+
+[[skills.config]]
+path = "/Users/huangxuewei/.claude/skills/obsidian-vault/SKILL.md"
+enabled = false
+
+[[skills.config]]
+path = "/Users/huangxuewei/.codex/plugins/cache/openai-primary-runtime/presentations/26.802.11031/skills/presentations/SKILL.md"
+enabled = false
+
+[[skills.config]]
+path = "/Users/huangxuewei/.codex/plugins/cache/openai-primary-runtime/spreadsheets/26.802.11031/skills/excel-live-control/SKILL.md"
+enabled = false
+
+[[skills.config]]
+path = "/Users/huangxuewei/.codex/plugins/cache/openai-primary-runtime/template-creator/26.802.11031/skills/template-creator/SKILL.md"
+enabled = false
+
+[[skills.config]]
+path = "/Users/huangxuewei/.codex/plugins/cache/openai-bundled/visualize/1.0.16/skills/visualize/SKILL.md"
+enabled = false
+
+[[skills.config]]
+path = "/Users/huangxuewei/.claude/skills/writing-beats/SKILL.md"
+enabled = false
+
+[[skills.config]]
+path = "/Users/huangxuewei/.claude/skills/writing-fragments/SKILL.md"
+enabled = false
+
+[[skills.config]]
+path = "/Users/huangxuewei/.claude/skills/writing-great-skills/SKILL.md"
+enabled = false
+
+[[skills.config]]
+path = "/Users/huangxuewei/.claude/skills/writing-shape/SKILL.md"
+enabled = false
