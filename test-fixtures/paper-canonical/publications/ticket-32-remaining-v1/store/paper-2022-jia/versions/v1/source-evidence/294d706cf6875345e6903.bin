@@ -1,0 +1,3338 @@
+{
+  "schemaVersion": "paper-asset-v1",
+  "paper": {
+    "paperId": "paper-2022-jia",
+    "title": "2022年全国甲卷-答案版",
+    "subject": "English",
+    "source": "AI 导题",
+    "assetVersion": 1,
+    "status": "published"
+  },
+  "sources": {
+    "primarySourceType": "docx",
+    "docx": {
+      "fileName": "2022年全国甲卷-答案版.docx",
+      "sha256": "690f068167b4e0f8827716b830cc224fb171ab79d4970dfc4febf3df4b81be39",
+      "sourcePath": "",
+      "sourceNote": "未上传答案解析版"
+    }
+  },
+  "layoutTree": {
+    "parts": [
+      {
+        "partId": "part-2022-jia-reading",
+        "title": "第二部分 阅读",
+        "sections": [
+          {
+            "sectionId": "section-2022-jia-reading-choice",
+            "title": "第一节 阅读理解",
+            "groups": [
+              {
+                "groupId": "group-2022-jia-reading-a",
+                "title": "Reading A"
+              },
+              {
+                "groupId": "group-2022-jia-reading-b",
+                "title": "Reading B"
+              },
+              {
+                "groupId": "group-2022-jia-reading-c",
+                "title": "Reading C"
+              },
+              {
+                "groupId": "group-2022-jia-reading-d",
+                "title": "Reading D"
+              }
+            ]
+          },
+          {
+            "sectionId": "section-2022-jia-reading-seven",
+            "title": "第二节 七选五",
+            "groups": [
+              {
+                "groupId": "group-2022-jia-seven-choices",
+                "title": "七选五"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "partId": "part-2022-jia-language",
+        "title": "第三部分 语言运用",
+        "sections": [
+          {
+            "sectionId": "section-2022-jia-cloze",
+            "title": "第一节 完形填空",
+            "groups": [
+              {
+                "groupId": "group-2022-jia-cloze",
+                "title": "完形填空"
+              }
+            ]
+          },
+          {
+            "sectionId": "section-2022-jia-grammar-fill",
+            "title": "第二节 语法填空",
+            "groups": [
+              {
+                "groupId": "group-2022-jia-grammar-fill",
+                "title": "语法填空"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "content": {
+    "blocks": [
+      {
+        "type": "partHeading",
+        "partId": "part-2022-jia-reading",
+        "text": "第二部分 阅读理解（共两节，满分40分）"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-2022-jia-reading-choice",
+        "text": "第一节（共15小题；每小题2分，满分30分）"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2022-jia-reading-a"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2022-jia-reading-b"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2022-jia-reading-c"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2022-jia-reading-d"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-2022-jia-reading-seven",
+        "text": "第二节（共5小题；每小题2分，满分10分）"
+      },
+      {
+        "type": "instruction",
+        "text": "阅读下面短文，从短文后的选项中选出可以填入空白处的最佳选项。选项中有两项为多余选项。"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2022-jia-seven-choices"
+      },
+      {
+        "type": "pageBreakHint"
+      },
+      {
+        "type": "partHeading",
+        "partId": "part-2022-jia-language",
+        "text": "第三部分 语言知识运用（共两节，满分45分）"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-2022-jia-cloze",
+        "text": "第一节（共20小题；每小题1.5分，满分30分）"
+      },
+      {
+        "type": "instruction",
+        "text": "阅读下面短文，从每题所给的A、B、C、D四个选项中选出最佳选项。"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2022-jia-cloze"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-2022-jia-grammar-fill",
+        "text": "第二节(共10小题；每小题1.5分，满分15分)"
+      },
+      {
+        "type": "instruction",
+        "text": "阅读下面短文，在空白处填入1个适当的单词或括号内单词的正确形式。"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2022-jia-grammar-fill"
+      }
+    ],
+    "groups": {
+      "group-2022-jia-reading-a": {
+        "groupId": "group-2022-jia-reading-a",
+        "groupType": "reading",
+        "title": "Reading A",
+        "questionIds": [
+          "q-2022-jia-021",
+          "q-2022-jia-022",
+          "q-2022-jia-023"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2022-jia-reading-a-1",
+              "text": "Theatres and Entertainment"
+            },
+            {
+              "paragraphId": "para-2022-jia-reading-a-2",
+              "text": "St David’s Hall"
+            },
+            {
+              "paragraphId": "para-2022-jia-reading-a-3",
+              "text": "St David’s Hall is the award winning National Concert Hall of Wales standing at the very heart of Cardiff’s entertainment centre. With an impressive 2,000-seat concert hall, St David’s Hall is home to the annual Welsh Proms Cardiff. It presents live entertainment, including pop, rock, folk, jazz, musicals, dance, world music, films and classical music."
+            },
+            {
+              "paragraphId": "para-2022-jia-reading-a-4",
+              "text": "The Hayes, Cardiff CF10 1AHwww. stdavidshallcardiff. co. ukThe Glee Club"
+            },
+            {
+              "paragraphId": "para-2022-jia-reading-a-5",
+              "text": "Every weekend this is “Wales” premier comedy club where having a great time is the order for both audiences and comedy stars alike. It is hard to name a comedy star who hasn’t been on the stage here. If you are looking for the best comedies on tour and brilliant live music, you should start here."
+            },
+            {
+              "paragraphId": "para-2022-jia-reading-a-6",
+              "text": "Mermaid Quay, Cardiff Bay, Cardiff CF10 5BZwww. glee. co. uk/cardiffSherman Cymru"
+            },
+            {
+              "paragraphId": "para-2022-jia-reading-a-7",
+              "text": "Sherman Cymru’s theatre in the Cathays area of Cardiff reopened in February 2012. This special building is a place in which theatre is made and where children, artists, writers and anyone else have the opportunity (机会) to do creative things. Sherman Cymru is excited to present a packed programme of the very best theatre, dance, family shows and music from Wales and the rest of the world."
+            },
+            {
+              "paragraphId": "para-2022-jia-reading-a-8",
+              "text": "Senghennydd Road, Cardiff CF24 4YEwww. shermancymru. co. ukNew Theatre"
+            },
+            {
+              "paragraphId": "para-2022-jia-reading-a-9",
+              "text": "The New Theatre has been the home of quality drama, musicals, dance and children’s shows for more than 100 years. Presenting the best of the West End along with the pick of the UK’s touring shows, the New Theatre is Cardiff’s oldest surviving traditional theatre. Be sure to pay a visit as part of your stay in the city."
+            },
+            {
+              "paragraphId": "para-2022-jia-reading-a-10",
+              "text": "Park Place, Cardiff CF10 3LNwww. newtheatrecardiff. co. uk"
+            }
+          ]
+        }
+      },
+      "group-2022-jia-reading-b": {
+        "groupId": "group-2022-jia-reading-b",
+        "groupType": "reading",
+        "title": "Reading B",
+        "questionIds": [
+          "q-2022-jia-024",
+          "q-2022-jia-025",
+          "q-2022-jia-026",
+          "q-2022-jia-027"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2022-jia-reading-b-1",
+              "text": "Goffin’s cockatoos, a kind of small parrot native to Australasia, have been shown to have similar shape-recognition abilities to a human two-year-old. Though not known to use tools in the wild, the birds have proved skilful at tool use while kept in the cage. In a recent experiment, cockatoos were presented with a box with a nut inside it. The clear front of the box had a “keyhole” in a geometric shape, and the birds were given five differently shaped “keys” to choose from. Inserting the correct “key” would let out the nut."
+            },
+            {
+              "paragraphId": "para-2022-jia-reading-b-2",
+              "text": "In humans, babies can put a round shape in a round hole from around one year of age, but it will be another year before they are able to do the same with less symmetrical (对称的) shapes. This ability to recognize that a shape will need to be turned in a specific direction before it will fit is called an “allocentric frame of reference”. In the experiment, Goffin’s cockatoos were able to select the right tool for the job, in most cases, by visual recognition alone. Where trial-and-error was used, the cockatoos did better than monkeys in similar tests. This indicates that Goffin’s cockatoos do indeed possess an allocentric frame of reference when moving objects in space, similar to two-year-old babies."
+            },
+            {
+              "paragraphId": "para-2022-jia-reading-b-3",
+              "text": "The next step, according to the researchers, is to try and work out whether the cockatoos rely entirely on visual clues (线索) , or also use a sense of touch in making their shape selections."
+            }
+          ]
+        }
+      },
+      "group-2022-jia-reading-c": {
+        "groupId": "group-2022-jia-reading-c",
+        "groupType": "reading",
+        "title": "Reading C",
+        "questionIds": [
+          "q-2022-jia-028",
+          "q-2022-jia-029",
+          "q-2022-jia-030",
+          "q-2022-jia-031"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2022-jia-reading-c-1",
+              "text": "As Ginni Bazlinton reached Antarctica, she found herself greeted by a group of little Gentoo penguins (企鹅) longing to say hello. These gentle, lovely gatekeepers welcomed her and kick-started what was to be a trip Ginni would never forget."
+            },
+            {
+              "paragraphId": "para-2022-jia-reading-c-2",
+              "text": "Ever since her childhood, Ginni, now 71, has had a deep love for travel. Throughout her career (职业) as a professional dancer, she toured in the UK, but always longed to explore further. When she retired from dancing and her sons eventually flew the nest, she decided it was time to take the plunge."
+            },
+            {
+              "paragraphId": "para-2022-jia-reading-c-3",
+              "text": "After taking a degree at Chichester University in Related Arts, Ginni began to travel the world, eventually getting work teaching English in Japan and Chile. And it was in Chile she discovered she could get last-minute cheap deals on ships going to Antarctica from the islands off Tierra del Fuego, the southernmost tip of the South American mainland. “I just decided I wanted to go.” she says. “I had no idea about what I’d find there and I wasn’t nervous. I just wanted to do it. And I wanted to do it alone as I always prefer it that way.”"
+            },
+            {
+              "paragraphId": "para-2022-jia-reading-c-4",
+              "text": "In March 2008, Ginni boarded a ship with 48 passengers she’d never met before, to begin the journey towards Antarctica. “From seeing the wildlife to witnessing sunrises, the whole experience was amazing. Antarctica left an impression on me that no other place has,” Ginni says. “I remember the first time I saw a humpback whale; it just rose out of the water like some prehistoric creature and I thought it was smiling at us. You could still hear the operatic sounds it was making underwater. ”"
+            },
+            {
+              "paragraphId": "para-2022-jia-reading-c-5",
+              "text": "The realization that this is a precious land, to be respected by humans, was one of the biggest things that hit home to Ginni."
+            }
+          ]
+        }
+      },
+      "group-2022-jia-reading-d": {
+        "groupId": "group-2022-jia-reading-d",
+        "groupType": "reading",
+        "title": "Reading D",
+        "questionIds": [
+          "q-2022-jia-032",
+          "q-2022-jia-033",
+          "q-2022-jia-034",
+          "q-2022-jia-035"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2022-jia-reading-d-1",
+              "text": "Sometime in the early 1960s, a significant thing happened in Sydney, Australia. The city discovered its harbor. Then, one after another, Sydney discovered lots of things that were just sort of there – broad parks, superb beaches, and a culturally diverse population. But it is the harbor that makes the city."
+            },
+            {
+              "paragraphId": "para-2022-jia-reading-d-2",
+              "text": "Andrew Reynolds, a cheerful fellow in his early 30s, pilots Sydney ferryboats for a living. I spent the whole morning shuttling back and forth across the harbor. After our third run Andrew shut down the engine, and we went our separate ways – he for a lunch break, I to explore the city."
+            },
+            {
+              "paragraphId": "para-2022-jia-reading-d-3",
+              "text": "“I’ll miss these old boats,” he said as we parted."
+            },
+            {
+              "paragraphId": "para-2022-jia-reading-d-4",
+              "text": "“How do you mean?” I asked."
+            },
+            {
+              "paragraphId": "para-2022-jia-reading-d-5",
+              "text": "“Oh, they’re replacing them with catamarans. Catamarans are faster, but they’re not so elegant, and they’re not fun to pilot. But that’s progress, I guess.”"
+            },
+            {
+              "paragraphId": "para-2022-jia-reading-d-6",
+              "text": "Everywhere in Sydney these days, change and progress are the watchwords (口号) , and traditions are increasingly rare. Shirley Fitzgerald, the city’s official historian, told me that in its rush to modernity in the 1970s, Sydney swept aside much of its past, including many of its finest buildings. “Sydney is confused about itself,” she said. “We can’t seem to make up our minds whether we want a modern city or a traditional one. It’s a conflict that we aren’t getting any better at resolving  (解决) .”"
+            },
+            {
+              "paragraphId": "para-2022-jia-reading-d-7",
+              "text": "On the other hand, being young and old at the same time has its attractions. I considered this when I met a thoughtful young businessman named Anthony. “Many people say that we lack culture in this country,” he told me. “What people forget is that the Italians, when they came to Australia, brought 2000 years of their culture, the Greeks some 3000 years, and the Chinese more still. We’ve got a foundation built on ancient cultures but with a drive and dynamism of a young country. It’s a pretty hard combination to beat.”"
+            },
+            {
+              "paragraphId": "para-2022-jia-reading-d-8",
+              "text": "He is right, but I can’t help wishing they would keep those old ferries."
+            }
+          ]
+        }
+      },
+      "group-2022-jia-seven-choices": {
+        "groupId": "group-2022-jia-seven-choices",
+        "groupType": "sevenChoices",
+        "title": "七选五",
+        "questionIds": [
+          "q-2022-jia-036",
+          "q-2022-jia-037",
+          "q-2022-jia-038",
+          "q-2022-jia-039",
+          "q-2022-jia-040"
+        ],
+        "blankIds": [
+          "blank-2022-jia-036",
+          "blank-2022-jia-037",
+          "blank-2022-jia-038",
+          "blank-2022-jia-039",
+          "blank-2022-jia-040"
+        ],
+        "optionBank": [
+          {
+            "label": "A",
+            "text": "The more friends you make in your lifetime"
+          },
+          {
+            "label": "B",
+            "text": "The more time you spend in any given country"
+          },
+          {
+            "label": "C",
+            "text": "Mexicans consider it inappropriate to eat with utensils"
+          },
+          {
+            "label": "D",
+            "text": "Don’t get caught making an embarrassing mistake at a restaurant"
+          },
+          {
+            "label": "E",
+            "text": "It’s a good sign for the chef if you make a mess around your plate"
+          },
+          {
+            "label": "F",
+            "text": "Never stick them upright in your food or cross them as you use them"
+          },
+          {
+            "label": "G",
+            "text": "It may seem like a simple request to ask for salt and pepper at a meal"
+          }
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2022-jia-seven-title",
+              "text": "Important Things to Know When Dining Out"
+            },
+            {
+              "paragraphId": "para-2022-jia-seven-p1",
+              "text": "Cultural dining etiquette (礼节) might surprise you with some of its important rules. __36__ 1  . Knowing some tips will help ensure that you have an enjoyable meal with friends or family – no matter where you are in the world."
+            },
+            {
+              "paragraphId": "para-2022-jia-seven-p2",
+              "text": "Chopstick Rules"
+            },
+            {
+              "paragraphId": "para-2022-jia-seven-p3",
+              "text": "The way you handle chopsticks is important to avoid annoying your companions. When you put them down between bites, always put them down together so they are parallel with the edge of the table in front of you. __37__ 2  ."
+            },
+            {
+              "paragraphId": "para-2022-jia-seven-p4",
+              "text": "Hands or Utensils (餐具) "
+            },
+            {
+              "paragraphId": "para-2022-jia-seven-p5",
+              "text": "In India and the Middle East, it’s considered very rude to eat with your left hand. People in France expect you to eat with a utensil in each hand. __38__ 3  , instead preferring to use their hands. In Chile, you may never touch any food with your fingers. People in Thailand generally use their forks only to push food onto their spoons."
+            },
+            {
+              "paragraphId": "para-2022-jia-seven-p6",
+              "text": "Making Requests"
+            },
+            {
+              "paragraphId": "para-2022-jia-seven-p7",
+              "text": "__39__ 4  . In Portugal, this would be a serious mistake, because it shows the chef that you don’t like their seasoning skills. Similarly, in Italy, never ask for extra cheese to add to your food."
+            },
+            {
+              "paragraphId": "para-2022-jia-seven-p8",
+              "text": "Some of these cultural dining etiquette rules may seem random and strange, but they are important in various countries. __40__ 5  , the more comfortable you’ll begin to feel with its foreign cultural practices."
+            }
+          ]
+        }
+      },
+      "group-2022-jia-cloze": {
+        "groupId": "group-2022-jia-cloze",
+        "groupType": "cloze",
+        "title": "完形填空",
+        "questionIds": [
+          "q-2022-jia-041",
+          "q-2022-jia-042",
+          "q-2022-jia-043",
+          "q-2022-jia-044",
+          "q-2022-jia-045",
+          "q-2022-jia-046",
+          "q-2022-jia-047",
+          "q-2022-jia-048",
+          "q-2022-jia-049",
+          "q-2022-jia-050",
+          "q-2022-jia-051",
+          "q-2022-jia-052",
+          "q-2022-jia-053",
+          "q-2022-jia-054",
+          "q-2022-jia-055",
+          "q-2022-jia-056",
+          "q-2022-jia-057",
+          "q-2022-jia-058",
+          "q-2022-jia-059",
+          "q-2022-jia-060"
+        ],
+        "blankIds": [
+          "blank-2022-jia-041",
+          "blank-2022-jia-042",
+          "blank-2022-jia-043",
+          "blank-2022-jia-044",
+          "blank-2022-jia-045",
+          "blank-2022-jia-046",
+          "blank-2022-jia-047",
+          "blank-2022-jia-048",
+          "blank-2022-jia-049",
+          "blank-2022-jia-050",
+          "blank-2022-jia-051",
+          "blank-2022-jia-052",
+          "blank-2022-jia-053",
+          "blank-2022-jia-054",
+          "blank-2022-jia-055",
+          "blank-2022-jia-056",
+          "blank-2022-jia-057",
+          "blank-2022-jia-058",
+          "blank-2022-jia-059",
+          "blank-2022-jia-060"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2022-jia-cloze-title",
+              "text": "You can tell a lot about a man by how he treats his dogs."
+            },
+            {
+              "paragraphId": "para-2022-jia-cloze-p1",
+              "text": "For many years, I enjoyed living with my dogs, Tilly and Chance. Their __41__ was nearly enough to keep my loneliness at bay. Nearly. Last year, I started dating, but with __42__ . When I first dated Steve, I __43__ he had a dog, Molly, and a cat, Flora. While I was __44__ that he was an animal lover, I __45__ that three dogs were perhaps too many, and my dogs might attack __46__ , the cat."
+            },
+            {
+              "paragraphId": "para-2022-jia-cloze-p2",
+              "text": "The next week we __47__ our dogs together. It was a hot day. When we paused to catch our __48__ , Steve got down on one knee. Was he proposing (求婚) ? I liked him too, but so __49__ ? He poured water from a bottle into his hand and offered it to my dogs. __50__ , I began to fall for him."
+            },
+            {
+              "paragraphId": "para-2022-jia-cloze-p3",
+              "text": "We __51__ to date, though neither of us brought up the future. And then in late November, Tilly had an operation on her __52__ . I took the dogs out four times a day, and I worried that Tilly __53__ climbing the stairs could reopen the wound. Then Steve __54__ his house. All worked __55__ . The three dogs formed a pack that, with coaching, __56__ Flora’s space; Steve and I formed a good team __57__ for Tilly. We made good housemates."
+            },
+            {
+              "paragraphId": "para-2022-jia-cloze-p4",
+              "text": "A year later, much to my __58__ , this man produced a little box with a ring and proposed to me. He did not kneel (跪) down, nor did I __59__ him to. That’s only for giving __60__ to the dogs that brought us together."
+            }
+          ]
+        }
+      },
+      "group-2022-jia-grammar-fill": {
+        "groupId": "group-2022-jia-grammar-fill",
+        "groupType": "grammarFill",
+        "title": "语法填空",
+        "questionIds": [
+          "q-2022-jia-061",
+          "q-2022-jia-062",
+          "q-2022-jia-063",
+          "q-2022-jia-064",
+          "q-2022-jia-065",
+          "q-2022-jia-066",
+          "q-2022-jia-067",
+          "q-2022-jia-068",
+          "q-2022-jia-069",
+          "q-2022-jia-070"
+        ],
+        "blankIds": [
+          "blank-2022-jia-061",
+          "blank-2022-jia-062",
+          "blank-2022-jia-063",
+          "blank-2022-jia-064",
+          "blank-2022-jia-065",
+          "blank-2022-jia-066",
+          "blank-2022-jia-067",
+          "blank-2022-jia-068",
+          "blank-2022-jia-069",
+          "blank-2022-jia-070"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2022-jia-grammar-fill-title",
+              "text": "A visually-challenged man from Beijing recently hiked (徒步) 40 days to Xi’an, as a first step __61__ (journey) the Belt and Road route (路线) by foot."
+            },
+            {
+              "paragraphId": "para-2022-jia-grammar-fill-p1",
+              "text": "On the 1,100-kilometer journey, the man Cao Shengkang, __62__lost his eyesight at the age of eight in a car accident, crossed 40 cities and counties in three provinces. Inspired by the Belt and Road Forum for International Cooperation __63__ (hold) in Beijing, Cao decided to cover the route by hiking as a tribute (致敬) to the ancient Silk Road. __64__friend of his, Wu Fan, volunteered to be his companion during the trip."
+            },
+            {
+              "paragraphId": "para-2022-jia-grammar-fill-p2",
+              "text": "Cao and Wu also collected garbage along the road, in order to promote environmental __65__ (protect) . Cao believes this will make the hiking trip even more __66__ (meaning) . The two of them collected more than 1,000 plastic bottles along the 40-day journey."
+            },
+            {
+              "paragraphId": "para-2022-jia-grammar-fill-p3",
+              "text": "In the last five years, Cao __67__ (walk) through 34 countries in six continents, and in 2016, he reached the top of Kilimanjaro, Africa’s __68__ (high) mountain."
+            },
+            {
+              "paragraphId": "para-2022-jia-grammar-fill-p4",
+              "text": "Now, Cao has started the second part of his dream to walk along the Belt and Road route. He flew 4,700 kilometers __69__Xi’an to Kashgar on Sept. 20, __70__ (plan) to hike back to Xi’an in five months."
+            }
+          ]
+        }
+      }
+    },
+    "questions": {
+      "q-2022-jia-021": {
+        "questionId": "q-2022-jia-021",
+        "questionNo": 21,
+        "groupId": "group-2022-jia-reading-a",
+        "stem": "Where is the Welsh Proms Cardiff hosted?",
+        "options": [
+          {
+            "label": "A",
+            "text": "At the New Theatre."
+          },
+          {
+            "label": "B",
+            "text": "At the Glee Club."
+          },
+          {
+            "label": "C",
+            "text": "At Sherman Cymru."
+          },
+          {
+            "label": "D",
+            "text": "At St David's Hall."
+          }
+        ]
+      },
+      "q-2022-jia-022": {
+        "questionId": "q-2022-jia-022",
+        "questionNo": 22,
+        "groupId": "group-2022-jia-reading-a",
+        "stem": "What can people do at the Glee Club?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Watch musicals."
+          },
+          {
+            "label": "B",
+            "text": "Enjoy comedies."
+          },
+          {
+            "label": "C",
+            "text": "See family shows."
+          },
+          {
+            "label": "D",
+            "text": "Do creative things."
+          }
+        ]
+      },
+      "q-2022-jia-023": {
+        "questionId": "q-2022-jia-023",
+        "questionNo": 23,
+        "groupId": "group-2022-jia-reading-a",
+        "stem": "Which website can you visit to learn about Cardiff's oldest surviving theatre? B",
+        "options": [
+          {
+            "label": "A",
+            "text": "www. newtheatrecardiff. co. uk"
+          },
+          {
+            "label": "B",
+            "text": "www. shermancymru. co. uk"
+          },
+          {
+            "label": "C",
+            "text": "www. glee. co. uk/cardiff"
+          },
+          {
+            "label": "D",
+            "text": "www. stdavidshallcardiff. co. uk"
+          }
+        ]
+      },
+      "q-2022-jia-024": {
+        "questionId": "q-2022-jia-024",
+        "questionNo": 24,
+        "groupId": "group-2022-jia-reading-b",
+        "stem": "How did the cockatoos get the nut from the box in the experiment?",
+        "options": [
+          {
+            "label": "A",
+            "text": "By following instructions."
+          },
+          {
+            "label": "B",
+            "text": "By using a tool."
+          },
+          {
+            "label": "C",
+            "text": "By turning the box around."
+          },
+          {
+            "label": "D",
+            "text": "By removing the lid."
+          }
+        ]
+      },
+      "q-2022-jia-025": {
+        "questionId": "q-2022-jia-025",
+        "questionNo": 25,
+        "groupId": "group-2022-jia-reading-b",
+        "stem": "Which task can human one-year-olds most likely complete according to the text?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Using a key to unlock a door."
+          },
+          {
+            "label": "B",
+            "text": "Telling parrots from other birds."
+          },
+          {
+            "label": "C",
+            "text": "Putting a ball into a round hole."
+          },
+          {
+            "label": "D",
+            "text": "Grouping toys of different shapes."
+          }
+        ]
+      },
+      "q-2022-jia-026": {
+        "questionId": "q-2022-jia-026",
+        "questionNo": 26,
+        "groupId": "group-2022-jia-reading-b",
+        "stem": "What does the follow-up test aim to find out about the cockatoos?",
+        "options": [
+          {
+            "label": "A",
+            "text": "How far they are able to see."
+          },
+          {
+            "label": "B",
+            "text": "How they track moving objects."
+          },
+          {
+            "label": "C",
+            "text": "Whether they are smarter than monkeys."
+          },
+          {
+            "label": "D",
+            "text": "Whether they use a sense of touch in the test."
+          }
+        ]
+      },
+      "q-2022-jia-027": {
+        "questionId": "q-2022-jia-027",
+        "questionNo": 27,
+        "groupId": "group-2022-jia-reading-b",
+        "stem": "Which can be a suitable title for the text? C",
+        "options": [
+          {
+            "label": "A",
+            "text": "Cockatoos: Quick Error Checkers"
+          },
+          {
+            "label": "B",
+            "text": "Cockatoos: Independent Learners"
+          },
+          {
+            "label": "C",
+            "text": "Cockatoos: Clever Signal-Readers"
+          },
+          {
+            "label": "D",
+            "text": "Cockatoos: Skilful Shape-Sorters"
+          }
+        ]
+      },
+      "q-2022-jia-028": {
+        "questionId": "q-2022-jia-028",
+        "questionNo": 28,
+        "groupId": "group-2022-jia-reading-c",
+        "stem": "Which of the following best explains \"take the plunge\" underlined in Paragraph 2?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Try challenging things."
+          },
+          {
+            "label": "B",
+            "text": "Take a degree."
+          },
+          {
+            "label": "C",
+            "text": "Bring back lost memories."
+          },
+          {
+            "label": "D",
+            "text": "Stick to a promise."
+          }
+        ]
+      },
+      "q-2022-jia-029": {
+        "questionId": "q-2022-jia-029",
+        "questionNo": 29,
+        "groupId": "group-2022-jia-reading-c",
+        "stem": "What made Ginni decide on the trip to Antarctica?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Lovely penguins."
+          },
+          {
+            "label": "B",
+            "text": "Beautiful scenery."
+          },
+          {
+            "label": "C",
+            "text": "A discount fare."
+          },
+          {
+            "label": "D",
+            "text": "A friend's invitation."
+          }
+        ]
+      },
+      "q-2022-jia-030": {
+        "questionId": "q-2022-jia-030",
+        "questionNo": 30,
+        "groupId": "group-2022-jia-reading-c",
+        "stem": "What does Ginni think about Antarctica after the journey?",
+        "options": [
+          {
+            "label": "A",
+            "text": "It could be a home for her."
+          },
+          {
+            "label": "B",
+            "text": "It should be easily accessible."
+          },
+          {
+            "label": "C",
+            "text": "It should be well preserved."
+          },
+          {
+            "label": "D",
+            "text": "It needs to be fully introduced."
+          }
+        ]
+      },
+      "q-2022-jia-031": {
+        "questionId": "q-2022-jia-031",
+        "questionNo": 31,
+        "groupId": "group-2022-jia-reading-c",
+        "stem": "What is the text mainly about? D",
+        "options": [
+          {
+            "label": "A",
+            "text": "A childhood dream."
+          },
+          {
+            "label": "B",
+            "text": "An unforgettable experience."
+          },
+          {
+            "label": "C",
+            "text": "Sailing around the world."
+          },
+          {
+            "label": "D",
+            "text": "Meeting animals in Antarctica."
+          }
+        ]
+      },
+      "q-2022-jia-032": {
+        "questionId": "q-2022-jia-032",
+        "questionNo": 32,
+        "groupId": "group-2022-jia-reading-d",
+        "stem": "What is the first paragraph mainly about?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Sydney's striking architecture."
+          },
+          {
+            "label": "B",
+            "text": "The cultural diversity of Sydney."
+          },
+          {
+            "label": "C",
+            "text": "The key to Sydney's development."
+          },
+          {
+            "label": "D",
+            "text": "Sydney's tourist attractions in the 1960s."
+          }
+        ]
+      },
+      "q-2022-jia-033": {
+        "questionId": "q-2022-jia-033",
+        "questionNo": 33,
+        "groupId": "group-2022-jia-reading-d",
+        "stem": "What can we learn about Andrew Reynolds?",
+        "options": [
+          {
+            "label": "A",
+            "text": "He goes to work by boat."
+          },
+          {
+            "label": "B",
+            "text": "He looks forward to a new life."
+          },
+          {
+            "label": "C",
+            "text": "He pilots catamarans well."
+          },
+          {
+            "label": "D",
+            "text": "He is attached to the old ferries."
+          }
+        ]
+      },
+      "q-2022-jia-034": {
+        "questionId": "q-2022-jia-034",
+        "questionNo": 34,
+        "groupId": "group-2022-jia-reading-d",
+        "stem": "What does Shirley Fitzgerald think of Sydney?",
+        "options": [
+          {
+            "label": "A",
+            "text": "It is losing its traditions."
+          },
+          {
+            "label": "B",
+            "text": "It should speed up its progress."
+          },
+          {
+            "label": "C",
+            "text": "It should expand its population."
+          },
+          {
+            "label": "D",
+            "text": "It is becoming more international."
+          }
+        ]
+      },
+      "q-2022-jia-035": {
+        "questionId": "q-2022-jia-035",
+        "questionNo": 35,
+        "groupId": "group-2022-jia-reading-d",
+        "stem": "Which statement will the author probably agree with?",
+        "options": [
+          {
+            "label": "A",
+            "text": "A city can be young and old at the same time."
+          },
+          {
+            "label": "B",
+            "text": "A city built on ancient cultures is more dynamic."
+          },
+          {
+            "label": "C",
+            "text": "Modernity is usually achieved at the cost of elegance."
+          },
+          {
+            "label": "D",
+            "text": "Compromise should be made between the local and the foreign."
+          }
+        ]
+      },
+      "q-2022-jia-036": {
+        "questionId": "q-2022-jia-036",
+        "questionNo": 36,
+        "groupId": "group-2022-jia-seven-choices",
+        "stem": "36",
+        "blankId": "blank-2022-jia-036"
+      },
+      "q-2022-jia-037": {
+        "questionId": "q-2022-jia-037",
+        "questionNo": 37,
+        "groupId": "group-2022-jia-seven-choices",
+        "stem": "37",
+        "blankId": "blank-2022-jia-037"
+      },
+      "q-2022-jia-038": {
+        "questionId": "q-2022-jia-038",
+        "questionNo": 38,
+        "groupId": "group-2022-jia-seven-choices",
+        "stem": "38",
+        "blankId": "blank-2022-jia-038"
+      },
+      "q-2022-jia-039": {
+        "questionId": "q-2022-jia-039",
+        "questionNo": 39,
+        "groupId": "group-2022-jia-seven-choices",
+        "stem": "39",
+        "blankId": "blank-2022-jia-039"
+      },
+      "q-2022-jia-040": {
+        "questionId": "q-2022-jia-040",
+        "questionNo": 40,
+        "groupId": "group-2022-jia-seven-choices",
+        "stem": "40",
+        "blankId": "blank-2022-jia-040"
+      },
+      "q-2022-jia-041": {
+        "questionId": "q-2022-jia-041",
+        "questionNo": 41,
+        "groupId": "group-2022-jia-cloze",
+        "stem": "41",
+        "blankId": "blank-2022-jia-041",
+        "options": [
+          {
+            "label": "A",
+            "text": "ownership"
+          },
+          {
+            "label": "B",
+            "text": "membership"
+          },
+          {
+            "label": "C",
+            "text": "companionship"
+          },
+          {
+            "label": "D",
+            "text": "leadership"
+          }
+        ]
+      },
+      "q-2022-jia-042": {
+        "questionId": "q-2022-jia-042",
+        "questionNo": 42,
+        "groupId": "group-2022-jia-cloze",
+        "stem": "42",
+        "blankId": "blank-2022-jia-042",
+        "options": [
+          {
+            "label": "A",
+            "text": "reservations"
+          },
+          {
+            "label": "B",
+            "text": "expectations"
+          },
+          {
+            "label": "C",
+            "text": "confidence"
+          },
+          {
+            "label": "D",
+            "text": "prejudice"
+          }
+        ]
+      },
+      "q-2022-jia-043": {
+        "questionId": "q-2022-jia-043",
+        "questionNo": 43,
+        "groupId": "group-2022-jia-cloze",
+        "stem": "43",
+        "blankId": "blank-2022-jia-043",
+        "options": [
+          {
+            "label": "A",
+            "text": "feared"
+          },
+          {
+            "label": "B",
+            "text": "doubted"
+          },
+          {
+            "label": "C",
+            "text": "hoped"
+          },
+          {
+            "label": "D",
+            "text": "learned"
+          }
+        ]
+      },
+      "q-2022-jia-044": {
+        "questionId": "q-2022-jia-044",
+        "questionNo": 44,
+        "groupId": "group-2022-jia-cloze",
+        "stem": "44",
+        "blankId": "blank-2022-jia-044",
+        "options": [
+          {
+            "label": "A",
+            "text": "unsatisfied"
+          },
+          {
+            "label": "B",
+            "text": "amused"
+          },
+          {
+            "label": "C",
+            "text": "terrified"
+          },
+          {
+            "label": "D",
+            "text": "thrilled"
+          }
+        ]
+      },
+      "q-2022-jia-045": {
+        "questionId": "q-2022-jia-045",
+        "questionNo": 45,
+        "groupId": "group-2022-jia-cloze",
+        "stem": "45",
+        "blankId": "blank-2022-jia-045",
+        "options": [
+          {
+            "label": "A",
+            "text": "predicted"
+          },
+          {
+            "label": "B",
+            "text": "worried"
+          },
+          {
+            "label": "C",
+            "text": "regretted"
+          },
+          {
+            "label": "D",
+            "text": "insisted"
+          }
+        ]
+      },
+      "q-2022-jia-046": {
+        "questionId": "q-2022-jia-046",
+        "questionNo": 46,
+        "groupId": "group-2022-jia-cloze",
+        "stem": "46",
+        "blankId": "blank-2022-jia-046",
+        "options": [
+          {
+            "label": "A",
+            "text": "Flora"
+          },
+          {
+            "label": "B",
+            "text": "Chance"
+          },
+          {
+            "label": "C",
+            "text": "Molly"
+          },
+          {
+            "label": "D",
+            "text": "Tilly"
+          }
+        ]
+      },
+      "q-2022-jia-047": {
+        "questionId": "q-2022-jia-047",
+        "questionNo": 47,
+        "groupId": "group-2022-jia-cloze",
+        "stem": "47",
+        "blankId": "blank-2022-jia-047",
+        "options": [
+          {
+            "label": "A",
+            "text": "tied"
+          },
+          {
+            "label": "B",
+            "text": "walked"
+          },
+          {
+            "label": "C",
+            "text": "bathed"
+          },
+          {
+            "label": "D",
+            "text": "fed"
+          }
+        ]
+      },
+      "q-2022-jia-048": {
+        "questionId": "q-2022-jia-048",
+        "questionNo": 48,
+        "groupId": "group-2022-jia-cloze",
+        "stem": "48",
+        "blankId": "blank-2022-jia-048",
+        "options": [
+          {
+            "label": "A",
+            "text": "breath"
+          },
+          {
+            "label": "B",
+            "text": "balance"
+          },
+          {
+            "label": "C",
+            "text": "attention"
+          },
+          {
+            "label": "D",
+            "text": "imagination"
+          }
+        ]
+      },
+      "q-2022-jia-049": {
+        "questionId": "q-2022-jia-049",
+        "questionNo": 49,
+        "groupId": "group-2022-jia-cloze",
+        "stem": "49",
+        "blankId": "blank-2022-jia-049",
+        "options": [
+          {
+            "label": "A",
+            "text": "calm"
+          },
+          {
+            "label": "B",
+            "text": "sure"
+          },
+          {
+            "label": "C",
+            "text": "soon"
+          },
+          {
+            "label": "D",
+            "text": "real"
+          }
+        ]
+      },
+      "q-2022-jia-050": {
+        "questionId": "q-2022-jia-050",
+        "questionNo": 50,
+        "groupId": "group-2022-jia-cloze",
+        "stem": "50",
+        "blankId": "blank-2022-jia-050",
+        "options": [
+          {
+            "label": "A",
+            "text": "By the way"
+          },
+          {
+            "label": "B",
+            "text": "In that case"
+          },
+          {
+            "label": "C",
+            "text": "By all means"
+          },
+          {
+            "label": "D",
+            "text": "In that moment"
+          }
+        ]
+      },
+      "q-2022-jia-051": {
+        "questionId": "q-2022-jia-051",
+        "questionNo": 51,
+        "groupId": "group-2022-jia-cloze",
+        "stem": "51",
+        "blankId": "blank-2022-jia-051",
+        "options": [
+          {
+            "label": "A",
+            "text": "continued"
+          },
+          {
+            "label": "B",
+            "text": "decided"
+          },
+          {
+            "label": "C",
+            "text": "intended"
+          },
+          {
+            "label": "D",
+            "text": "pretended"
+          }
+        ]
+      },
+      "q-2022-jia-052": {
+        "questionId": "q-2022-jia-052",
+        "questionNo": 52,
+        "groupId": "group-2022-jia-cloze",
+        "stem": "52",
+        "blankId": "blank-2022-jia-052",
+        "options": [
+          {
+            "label": "A",
+            "text": "eye"
+          },
+          {
+            "label": "B",
+            "text": "tail"
+          },
+          {
+            "label": "C",
+            "text": "ear"
+          },
+          {
+            "label": "D",
+            "text": "leg"
+          }
+        ]
+      },
+      "q-2022-jia-053": {
+        "questionId": "q-2022-jia-053",
+        "questionNo": 53,
+        "groupId": "group-2022-jia-cloze",
+        "stem": "53",
+        "blankId": "blank-2022-jia-053",
+        "options": [
+          {
+            "label": "A",
+            "text": "secretly"
+          },
+          {
+            "label": "B",
+            "text": "constantly"
+          },
+          {
+            "label": "C",
+            "text": "eventually"
+          },
+          {
+            "label": "D",
+            "text": "unwillingly"
+          }
+        ]
+      },
+      "q-2022-jia-054": {
+        "questionId": "q-2022-jia-054",
+        "questionNo": 54,
+        "groupId": "group-2022-jia-cloze",
+        "stem": "54",
+        "blankId": "blank-2022-jia-054",
+        "options": [
+          {
+            "label": "A",
+            "text": "left"
+          },
+          {
+            "label": "B",
+            "text": "sold"
+          },
+          {
+            "label": "C",
+            "text": "suggested"
+          },
+          {
+            "label": "D",
+            "text": "searched"
+          }
+        ]
+      },
+      "q-2022-jia-055": {
+        "questionId": "q-2022-jia-055",
+        "questionNo": 55,
+        "groupId": "group-2022-jia-cloze",
+        "stem": "55",
+        "blankId": "blank-2022-jia-055",
+        "options": [
+          {
+            "label": "A",
+            "text": "late"
+          },
+          {
+            "label": "B",
+            "text": "hard"
+          },
+          {
+            "label": "C",
+            "text": "fine"
+          },
+          {
+            "label": "D",
+            "text": "free"
+          }
+        ]
+      },
+      "q-2022-jia-056": {
+        "questionId": "q-2022-jia-056",
+        "questionNo": 56,
+        "groupId": "group-2022-jia-cloze",
+        "stem": "56",
+        "blankId": "blank-2022-jia-056",
+        "options": [
+          {
+            "label": "A",
+            "text": "emptied"
+          },
+          {
+            "label": "B",
+            "text": "respected"
+          },
+          {
+            "label": "C",
+            "text": "occupied"
+          },
+          {
+            "label": "D",
+            "text": "discovered"
+          }
+        ]
+      },
+      "q-2022-jia-057": {
+        "questionId": "q-2022-jia-057",
+        "questionNo": 57,
+        "groupId": "group-2022-jia-cloze",
+        "stem": "57",
+        "blankId": "blank-2022-jia-057",
+        "options": [
+          {
+            "label": "A",
+            "text": "looking"
+          },
+          {
+            "label": "B",
+            "text": "caring"
+          },
+          {
+            "label": "C",
+            "text": "waiting"
+          },
+          {
+            "label": "D",
+            "text": "calling"
+          }
+        ]
+      },
+      "q-2022-jia-058": {
+        "questionId": "q-2022-jia-058",
+        "questionNo": 58,
+        "groupId": "group-2022-jia-cloze",
+        "stem": "58",
+        "blankId": "blank-2022-jia-058",
+        "options": [
+          {
+            "label": "A",
+            "text": "delight"
+          },
+          {
+            "label": "B",
+            "text": "credit"
+          },
+          {
+            "label": "C",
+            "text": "interest"
+          },
+          {
+            "label": "D",
+            "text": "disadvantage"
+          }
+        ]
+      },
+      "q-2022-jia-059": {
+        "questionId": "q-2022-jia-059",
+        "questionNo": 59,
+        "groupId": "group-2022-jia-cloze",
+        "stem": "59",
+        "blankId": "blank-2022-jia-059",
+        "options": [
+          {
+            "label": "A",
+            "text": "beg"
+          },
+          {
+            "label": "B",
+            "text": "trust"
+          },
+          {
+            "label": "C",
+            "text": "need"
+          },
+          {
+            "label": "D",
+            "text": "aid"
+          }
+        ]
+      },
+      "q-2022-jia-060": {
+        "questionId": "q-2022-jia-060",
+        "questionNo": 60,
+        "groupId": "group-2022-jia-cloze",
+        "stem": "60",
+        "blankId": "blank-2022-jia-060",
+        "options": [
+          {
+            "label": "A",
+            "text": "toys"
+          },
+          {
+            "label": "B",
+            "text": "awards"
+          },
+          {
+            "label": "C",
+            "text": "food"
+          },
+          {
+            "label": "D",
+            "text": "water"
+          }
+        ]
+      },
+      "q-2022-jia-061": {
+        "questionId": "q-2022-jia-061",
+        "questionNo": 61,
+        "groupId": "group-2022-jia-grammar-fill",
+        "stem": "61",
+        "blankId": "blank-2022-jia-061"
+      },
+      "q-2022-jia-062": {
+        "questionId": "q-2022-jia-062",
+        "questionNo": 62,
+        "groupId": "group-2022-jia-grammar-fill",
+        "stem": "62",
+        "blankId": "blank-2022-jia-062"
+      },
+      "q-2022-jia-063": {
+        "questionId": "q-2022-jia-063",
+        "questionNo": 63,
+        "groupId": "group-2022-jia-grammar-fill",
+        "stem": "63",
+        "blankId": "blank-2022-jia-063"
+      },
+      "q-2022-jia-064": {
+        "questionId": "q-2022-jia-064",
+        "questionNo": 64,
+        "groupId": "group-2022-jia-grammar-fill",
+        "stem": "64",
+        "blankId": "blank-2022-jia-064"
+      },
+      "q-2022-jia-065": {
+        "questionId": "q-2022-jia-065",
+        "questionNo": 65,
+        "groupId": "group-2022-jia-grammar-fill",
+        "stem": "65",
+        "blankId": "blank-2022-jia-065"
+      },
+      "q-2022-jia-066": {
+        "questionId": "q-2022-jia-066",
+        "questionNo": 66,
+        "groupId": "group-2022-jia-grammar-fill",
+        "stem": "66",
+        "blankId": "blank-2022-jia-066"
+      },
+      "q-2022-jia-067": {
+        "questionId": "q-2022-jia-067",
+        "questionNo": 67,
+        "groupId": "group-2022-jia-grammar-fill",
+        "stem": "67",
+        "blankId": "blank-2022-jia-067"
+      },
+      "q-2022-jia-068": {
+        "questionId": "q-2022-jia-068",
+        "questionNo": 68,
+        "groupId": "group-2022-jia-grammar-fill",
+        "stem": "68",
+        "blankId": "blank-2022-jia-068"
+      },
+      "q-2022-jia-069": {
+        "questionId": "q-2022-jia-069",
+        "questionNo": 69,
+        "groupId": "group-2022-jia-grammar-fill",
+        "stem": "69",
+        "blankId": "blank-2022-jia-069"
+      },
+      "q-2022-jia-070": {
+        "questionId": "q-2022-jia-070",
+        "questionNo": 70,
+        "groupId": "group-2022-jia-grammar-fill",
+        "stem": "70",
+        "blankId": "blank-2022-jia-070"
+      }
+    },
+    "blanks": {
+      "blank-2022-jia-061": {
+        "blankId": "blank-2022-jia-061",
+        "groupId": "group-2022-jia-grammar-fill",
+        "questionId": "q-2022-jia-061",
+        "prompt": "journey"
+      },
+      "blank-2022-jia-062": {
+        "blankId": "blank-2022-jia-062",
+        "groupId": "group-2022-jia-grammar-fill",
+        "questionId": "q-2022-jia-062"
+      },
+      "blank-2022-jia-063": {
+        "blankId": "blank-2022-jia-063",
+        "groupId": "group-2022-jia-grammar-fill",
+        "questionId": "q-2022-jia-063",
+        "prompt": "hold"
+      },
+      "blank-2022-jia-064": {
+        "blankId": "blank-2022-jia-064",
+        "groupId": "group-2022-jia-grammar-fill",
+        "questionId": "q-2022-jia-064"
+      },
+      "blank-2022-jia-065": {
+        "blankId": "blank-2022-jia-065",
+        "groupId": "group-2022-jia-grammar-fill",
+        "questionId": "q-2022-jia-065",
+        "prompt": "protect"
+      },
+      "blank-2022-jia-066": {
+        "blankId": "blank-2022-jia-066",
+        "groupId": "group-2022-jia-grammar-fill",
+        "questionId": "q-2022-jia-066",
+        "prompt": "meaning"
+      },
+      "blank-2022-jia-067": {
+        "blankId": "blank-2022-jia-067",
+        "groupId": "group-2022-jia-grammar-fill",
+        "questionId": "q-2022-jia-067",
+        "prompt": "walk"
+      },
+      "blank-2022-jia-068": {
+        "blankId": "blank-2022-jia-068",
+        "groupId": "group-2022-jia-grammar-fill",
+        "questionId": "q-2022-jia-068",
+        "prompt": "high"
+      },
+      "blank-2022-jia-069": {
+        "blankId": "blank-2022-jia-069",
+        "groupId": "group-2022-jia-grammar-fill",
+        "questionId": "q-2022-jia-069"
+      },
+      "blank-2022-jia-070": {
+        "blankId": "blank-2022-jia-070",
+        "groupId": "group-2022-jia-grammar-fill",
+        "questionId": "q-2022-jia-070",
+        "prompt": "plan"
+      }
+    }
+  },
+  "answerKey": {
+    "answers": {
+      "q-2022-jia-021": {
+        "questionId": "q-2022-jia-021",
+        "questionNo": 21,
+        "answer": "D",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2022-jia-022": {
+        "questionId": "q-2022-jia-022",
+        "questionNo": 22,
+        "answer": "B",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2022-jia-023": {
+        "questionId": "q-2022-jia-023",
+        "questionNo": 23,
+        "answer": "A",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2022-jia-024": {
+        "questionId": "q-2022-jia-024",
+        "questionNo": 24,
+        "answer": "B",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2022-jia-025": {
+        "questionId": "q-2022-jia-025",
+        "questionNo": 25,
+        "answer": "C",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2022-jia-026": {
+        "questionId": "q-2022-jia-026",
+        "questionNo": 26,
+        "answer": "D",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2022-jia-027": {
+        "questionId": "q-2022-jia-027",
+        "questionNo": 27,
+        "answer": "D",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2022-jia-028": {
+        "questionId": "q-2022-jia-028",
+        "questionNo": 28,
+        "answer": "A",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2022-jia-029": {
+        "questionId": "q-2022-jia-029",
+        "questionNo": 29,
+        "answer": "C",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2022-jia-030": {
+        "questionId": "q-2022-jia-030",
+        "questionNo": 30,
+        "answer": "C",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2022-jia-031": {
+        "questionId": "q-2022-jia-031",
+        "questionNo": 31,
+        "answer": "B",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2022-jia-032": {
+        "questionId": "q-2022-jia-032",
+        "questionNo": 32,
+        "answer": "C",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2022-jia-033": {
+        "questionId": "q-2022-jia-033",
+        "questionNo": 33,
+        "answer": "D",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2022-jia-034": {
+        "questionId": "q-2022-jia-034",
+        "questionNo": 34,
+        "answer": "A",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2022-jia-035": {
+        "questionId": "q-2022-jia-035",
+        "questionNo": 35,
+        "answer": "A",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2022-jia-036": {
+        "questionId": "q-2022-jia-036",
+        "questionNo": 36,
+        "answer": "D",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2022-jia-037": {
+        "questionId": "q-2022-jia-037",
+        "questionNo": 37,
+        "answer": "F",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2022-jia-038": {
+        "questionId": "q-2022-jia-038",
+        "questionNo": 38,
+        "answer": "C",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2022-jia-039": {
+        "questionId": "q-2022-jia-039",
+        "questionNo": 39,
+        "answer": "G",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2022-jia-040": {
+        "questionId": "q-2022-jia-040",
+        "questionNo": 40,
+        "answer": "B",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2022-jia-041": {
+        "questionId": "q-2022-jia-041",
+        "questionNo": 41,
+        "answer": "C",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2022-jia-042": {
+        "questionId": "q-2022-jia-042",
+        "questionNo": 42,
+        "answer": "A",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2022-jia-043": {
+        "questionId": "q-2022-jia-043",
+        "questionNo": 43,
+        "answer": "D",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2022-jia-044": {
+        "questionId": "q-2022-jia-044",
+        "questionNo": 44,
+        "answer": "D",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2022-jia-045": {
+        "questionId": "q-2022-jia-045",
+        "questionNo": 45,
+        "answer": "B",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2022-jia-046": {
+        "questionId": "q-2022-jia-046",
+        "questionNo": 46,
+        "answer": "A",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2022-jia-047": {
+        "questionId": "q-2022-jia-047",
+        "questionNo": 47,
+        "answer": "B",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2022-jia-048": {
+        "questionId": "q-2022-jia-048",
+        "questionNo": 48,
+        "answer": "A",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2022-jia-049": {
+        "questionId": "q-2022-jia-049",
+        "questionNo": 49,
+        "answer": "C",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2022-jia-050": {
+        "questionId": "q-2022-jia-050",
+        "questionNo": 50,
+        "answer": "D",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2022-jia-051": {
+        "questionId": "q-2022-jia-051",
+        "questionNo": 51,
+        "answer": "A",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2022-jia-052": {
+        "questionId": "q-2022-jia-052",
+        "questionNo": 52,
+        "answer": "D",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2022-jia-053": {
+        "questionId": "q-2022-jia-053",
+        "questionNo": 53,
+        "answer": "B",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2022-jia-054": {
+        "questionId": "q-2022-jia-054",
+        "questionNo": 54,
+        "answer": "C",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2022-jia-055": {
+        "questionId": "q-2022-jia-055",
+        "questionNo": 55,
+        "answer": "C",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2022-jia-056": {
+        "questionId": "q-2022-jia-056",
+        "questionNo": 56,
+        "answer": "B",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2022-jia-057": {
+        "questionId": "q-2022-jia-057",
+        "questionNo": 57,
+        "answer": "B",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2022-jia-058": {
+        "questionId": "q-2022-jia-058",
+        "questionNo": 58,
+        "answer": "A",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2022-jia-059": {
+        "questionId": "q-2022-jia-059",
+        "questionNo": 59,
+        "answer": "C",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2022-jia-060": {
+        "questionId": "q-2022-jia-060",
+        "questionNo": 60,
+        "answer": "D",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2022-jia-061": {
+        "questionId": "q-2022-jia-061",
+        "questionNo": 61,
+        "answer": "to journey",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2022-jia-062": {
+        "questionId": "q-2022-jia-062",
+        "questionNo": 62,
+        "answer": "who",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2022-jia-063": {
+        "questionId": "q-2022-jia-063",
+        "questionNo": 63,
+        "answer": "held",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2022-jia-064": {
+        "questionId": "q-2022-jia-064",
+        "questionNo": 64,
+        "answer": "A",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2022-jia-065": {
+        "questionId": "q-2022-jia-065",
+        "questionNo": 65,
+        "answer": "protection",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2022-jia-066": {
+        "questionId": "q-2022-jia-066",
+        "questionNo": 66,
+        "answer": "meaningful",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2022-jia-067": {
+        "questionId": "q-2022-jia-067",
+        "questionNo": 67,
+        "answer": "has walked",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2022-jia-068": {
+        "questionId": "q-2022-jia-068",
+        "questionNo": 68,
+        "answer": "highest",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2022-jia-069": {
+        "questionId": "q-2022-jia-069",
+        "questionNo": 69,
+        "answer": "from",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2022-jia-070": {
+        "questionId": "q-2022-jia-070",
+        "questionNo": 70,
+        "answer": "planning",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      }
+    }
+  },
+  "analysis": {
+    "meta": {
+      "generatedBy": "external-ai",
+      "promptVersion": "reading-choice-analysis-v1",
+      "reviewStatus": "reviewed",
+      "importMode": "paper-import-ai",
+      "model": "claude-opus-4-8",
+      "reviewedBy": "claude-opus-4-8",
+      "reviewedAt": "2026-06-19T00:00:00Z"
+    },
+    "groups": {
+      "group-2022-jia-reading-a": {
+        "overview": "应用文（旅游/娱乐场所介绍），介绍威尔士卡迪夫四个剧院与娱乐场所：St David's Hall、The Glee Club、Sherman Cymru、New Theatre，逐条给出特色、演出类型与地址网址。",
+        "discourseStructure": {
+          "summary": "总标题后按四个场所平行罗列，每个场所先给名称，再用一段介绍其定位与演出内容，随后给出地址与网址。",
+          "paragraphs": [
+            {
+              "paragraphId": "para-2022-jia-reading-a-1",
+              "summary": "全文总标题。",
+              "function": "点明主题：剧院与娱乐。"
+            },
+            {
+              "paragraphId": "para-2022-jia-reading-a-2",
+              "summary": "第一个场所名称：St David's Hall。",
+              "function": "小标题，引出第一处场所。"
+            },
+            {
+              "paragraphId": "para-2022-jia-reading-a-3",
+              "summary": "介绍 St David's Hall：威尔士国家音乐厅，设有2000座音乐厅，是年度 Welsh Proms Cardiff 的举办地，呈现多种现场演出。",
+              "function": "介绍第一处场所的定位与演出内容。"
+            },
+            {
+              "paragraphId": "para-2022-jia-reading-a-4",
+              "summary": "St David's Hall 的地址与网址，并接出第二处场所名称 The Glee Club。",
+              "function": "给出联系方式，并过渡到下一个场所。"
+            },
+            {
+              "paragraphId": "para-2022-jia-reading-a-5",
+              "summary": "介绍 The Glee Club：威尔士首屈一指的喜剧俱乐部，几乎所有喜剧明星都登过台，适合看巡演喜剧和现场音乐。",
+              "function": "介绍第二处场所的特色（喜剧）。"
+            },
+            {
+              "paragraphId": "para-2022-jia-reading-a-6",
+              "summary": "The Glee Club 的地址与网址，并接出第三处场所名称 Sherman Cymru。",
+              "function": "给出联系方式，并过渡到下一个场所。"
+            },
+            {
+              "paragraphId": "para-2022-jia-reading-a-7",
+              "summary": "介绍 Sherman Cymru：2012年2月重开的剧院，是创作戏剧、人人皆可参与创意活动的场所，呈现戏剧、舞蹈、家庭演出与音乐。",
+              "function": "介绍第三处场所的定位与演出内容。"
+            },
+            {
+              "paragraphId": "para-2022-jia-reading-a-8",
+              "summary": "Sherman Cymru 的地址与网址，并接出第四处场所名称 New Theatre。",
+              "function": "给出联系方式，并过渡到下一个场所。"
+            },
+            {
+              "paragraphId": "para-2022-jia-reading-a-9",
+              "summary": "介绍 New Theatre：百余年来上演优质戏剧、音乐剧、舞蹈与儿童剧，是卡迪夫现存最古老的传统剧院。",
+              "function": "介绍第四处场所的定位与历史地位。"
+            },
+            {
+              "paragraphId": "para-2022-jia-reading-a-10",
+              "summary": "New Theatre 的地址与网址。",
+              "function": "给出最后一处场所的联系方式。"
+            }
+          ]
+        }
+      },
+      "group-2022-jia-reading-b": {
+        "overview": "本文是一篇科普说明文，介绍了一项关于戈芬氏凤头鹦鹉（Goffin's cockatoos）形状识别能力的实验。研究发现这种鹦鹉具备与两岁人类幼儿类似的“以自我为参照系”的空间认知能力，能够通过视觉识别选择正确形状的“钥匙”取出箱中的坚果。",
+        "discourseStructure": {
+          "summary": "全文按“实验设置—实验发现与对照—后续研究方向”三段推进：先介绍实验装置与任务，再用人类婴儿的发展节点对比凤头鹦鹉的表现并得出结论，最后指出下一步待研究的问题。",
+          "paragraphs": [
+            {
+              "paragraphId": "para-2022-jia-reading-b-1",
+              "summary": "介绍戈芬氏凤头鹦鹉具有与两岁幼儿相似的形状识别能力，并描述实验装置：带几何形状“锁孔”的箱子、五把不同形状的“钥匙”，插入正确钥匙即可取出坚果。",
+              "function": "引出研究对象并交代实验设置（背景与任务）。"
+            },
+            {
+              "paragraphId": "para-2022-jia-reading-b-2",
+              "summary": "用人类婴儿放置圆形/非对称形状的发展节点引出“以自我为参照系”概念，并说明凤头鹦鹉多数情况下仅凭视觉识别即选对工具，试错时也优于猴子，由此推断其具备类似两岁幼儿的参照系能力。",
+              "function": "对比论证并得出研究结论（核心发现）。"
+            },
+            {
+              "paragraphId": "para-2022-jia-reading-b-3",
+              "summary": "指出研究者下一步要弄清凤头鹦鹉做形状选择时是完全依赖视觉线索，还是也用到触觉。",
+              "function": "提出后续研究方向（展望）。"
+            }
+          ]
+        }
+      },
+      "group-2022-jia-reading-c": {
+        "overview": "本文是一篇人物记叙文，讲述71岁的Ginni Bazlinton自幼热爱旅行，退休后独自前往南极的难忘经历，以及这段旅程让她意识到南极是一片应被人类尊重和保护的珍贵土地。",
+        "discourseStructure": {
+          "summary": "全文以时间和经历为线索展开：先以抵达南极被企鹅迎接的场景切入，回溯其热爱旅行的成长与职业背景，交代她如何在智利偶得廉价船票决定独自启程，再描写南极旅途中的震撼体验，最后升华到对南极应受尊重与保护的认识。",
+          "paragraphs": [
+            {
+              "paragraphId": "para-2022-jia-reading-c-1",
+              "summary": "Ginni抵达南极时受到一群Gentoo企鹅的迎接，开启了一段她终生难忘的旅程。",
+              "function": "以生动场景开篇，引出主人公与南极之旅，设置悬念吸引读者。"
+            },
+            {
+              "paragraphId": "para-2022-jia-reading-c-2",
+              "summary": "现年71岁的Ginni自幼热爱旅行，作为职业舞者曾在英国巡演但一直渴望走得更远，退休且儿子离巢后她决定放手一搏。",
+              "function": "交代主人公背景与旅行渴望，说明她启程的内在动因。"
+            },
+            {
+              "paragraphId": "para-2022-jia-reading-c-3",
+              "summary": "Ginni在奇切斯特大学进修后周游世界并在日本、智利教英语，在智利发现可买到前往南极的最后一刻廉价船票，于是决定独自前往。",
+              "function": "交代旅程的直接契机（廉价船票）及她偏爱独自出行的性格。"
+            },
+            {
+              "paragraphId": "para-2022-jia-reading-c-4",
+              "summary": "2008年3月Ginni与48名陌生乘客同船前往南极，野生动物、日出等整段体验令她震撼，尤其难忘第一次见到座头鲸跃出水面的情景。",
+              "function": "具体描写南极旅途中的难忘体验，凸显其独一无二的震撼。"
+            },
+            {
+              "paragraphId": "para-2022-jia-reading-c-5",
+              "summary": "Ginni最深的感悟之一是：南极是一片珍贵的土地，应当受到人类的尊重。",
+              "function": "结尾升华主题，点明旅程带给她的认识与情感落点。"
+            }
+          ]
+        }
+      },
+      "group-2022-jia-reading-d": {
+        "overview": "本文是一篇游记随笔，作者游历澳大利亚悉尼，通过与渡轮驾驶员 Andrew、城市官方历史学家 Shirley、年轻商人 Anthony 的交谈，探讨悉尼在现代化进程中传统与进步之间的矛盾，以及这座城市“既古老又年轻”的独特魅力。",
+        "discourseStructure": {
+          "summary": "全文以作者的悉尼之行为线索：先点出港湾成就了这座城市，再借三位人物之口（怀旧的渡轮驾驶员、忧虑传统流失的历史学家、乐观看待文化融合的年轻商人）层层展现现代化与传统的张力，结尾以作者个人的怀旧愿望收束。",
+          "paragraphs": [
+            {
+              "paragraphId": "para-2022-jia-reading-d-1",
+              "summary": "20 世纪 60 年代初悉尼“发现”了自己的港湾，随后又发现了公园、海滩和多元人口，但真正成就这座城市的是港湾。",
+              "function": "引入话题，点明港湾是悉尼的关键。"
+            },
+            {
+              "paragraphId": "para-2022-jia-reading-d-2",
+              "summary": "作者随渡轮驾驶员 Andrew Reynolds 在港湾来回穿梭一上午，午休时二人分别。",
+              "function": "引出人物 Andrew，铺垫下文对话。"
+            },
+            {
+              "paragraphId": "para-2022-jia-reading-d-3",
+              "summary": "Andrew 在告别时说他会怀念这些老船。",
+              "function": "引出 Andrew 对老渡轮的留恋。"
+            },
+            {
+              "paragraphId": "para-2022-jia-reading-d-4",
+              "summary": "作者追问 Andrew 此话何意。",
+              "function": "对话承接，推动信息展开。"
+            },
+            {
+              "paragraphId": "para-2022-jia-reading-d-5",
+              "summary": "Andrew 解释老渡轮将被双体船取代，双体船更快但不够优雅、驾驶起来没乐趣，他无奈称之为“进步”。",
+              "function": "揭示老渡轮被取代，体现进步与情感的矛盾。"
+            },
+            {
+              "paragraphId": "para-2022-jia-reading-d-6",
+              "summary": "悉尼如今以“变化与进步”为口号，传统日渐稀少；历史学家 Shirley Fitzgerald 指出悉尼在 70 年代追求现代化时抛弃了大量过去，包括许多最精美的建筑，城市在现代与传统之间难以抉择。",
+              "function": "借历史学家之口点明传统流失的忧虑。"
+            },
+            {
+              "paragraphId": "para-2022-jia-reading-d-7",
+              "summary": "另一方面，年轻商人 Anthony 认为悉尼兼具古老文化根基与年轻国家的活力，意大利、希腊、中国移民带来了悠久文化，这种组合难以匹敌。",
+              "function": "提供对立视角，肯定古今交融的魅力。"
+            },
+            {
+              "paragraphId": "para-2022-jia-reading-d-8",
+              "summary": "作者认同 Anthony 的看法，但仍忍不住希望能保留那些老渡轮。",
+              "function": "总结全文，回扣怀旧情感。"
+            }
+          ]
+        }
+      }
+    },
+    "questions": {
+      "q-2022-jia-021": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查 Welsh Proms Cardiff 这一活动的举办地点，需要在文中定位提到该活动的场所。",
+        "stemTranslationZh": "Welsh Proms Cardiff 在哪里举办？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "在 New Theatre。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "St David’s Hall is home to the annual Welsh Proms Cardiff.",
+              "sourceEntity": "St David’s Hall",
+              "optionText": "At the New Theatre.",
+              "optionEntity": "New Theatre",
+              "explanation": "原文明确说 Welsh Proms Cardiff 的举办地是 St David's Hall，而非 New Theatre，场所对象错配。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "在 The Glee Club。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "St David’s Hall is home to the annual Welsh Proms Cardiff.",
+              "sourceEntity": "St David’s Hall",
+              "optionText": "At the Glee Club.",
+              "optionEntity": "Glee Club",
+              "explanation": "Welsh Proms Cardiff 属于 St David's Hall，而 The Glee Club 是喜剧俱乐部，与该活动无关，场所对象错配。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "在 Sherman Cymru。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "St David’s Hall is home to the annual Welsh Proms Cardiff.",
+              "sourceEntity": "St David’s Hall",
+              "optionText": "At Sherman Cymru.",
+              "optionEntity": "Sherman Cymru",
+              "explanation": "举办 Welsh Proms Cardiff 的是 St David's Hall，Sherman Cymru 是另一处剧院，场所对象错配。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "在 St David's Hall。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2022-jia-reading-a-3",
+                "quote": "St David’s Hall is home to the annual Welsh Proms Cardiff.",
+                "anchor": "is home to the annual Welsh Proms Cardiff"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Where is the Welsh Proms Cardiff hosted",
+            "sourceRole": "stem",
+            "targetText": "St David’s Hall is home to the annual Welsh Proms Cardiff.",
+            "targetParagraphId": "para-2022-jia-reading-a-3",
+            "relationType": "paraphrase",
+            "note": "题干用 Where ... hosted 问举办地，原文用 is home to the annual Welsh Proms Cardiff 表示 St David's Hall 是该活动的所在地/举办地。"
+          }
+        ]
+      },
+      "q-2022-jia-022": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查在 The Glee Club 能做什么，需定位 The Glee Club 段落中的活动内容。",
+        "stemTranslationZh": "人们在 The Glee Club 可以做什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "观看音乐剧。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "St David’s Hall is home to the annual Welsh Proms Cardiff. It presents live entertainment, including pop, rock, folk, jazz, musicals, dance, world music, films and classical music.",
+              "sourceEntity": "St David’s Hall",
+              "optionText": "Watch musicals.",
+              "optionEntity": "the Glee Club",
+              "explanation": "musicals（音乐剧）出现在 St David's Hall 与 New Theatre 的介绍中，而非 The Glee Club，场所对象错配。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "欣赏喜剧。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2022-jia-reading-a-5",
+                "quote": "If you are looking for the best comedies on tour and brilliant live music, you should start here.",
+                "anchor": "the best comedies on tour ... start here"
+              },
+              {
+                "role": "secondary",
+                "paragraphId": "para-2022-jia-reading-a-5",
+                "quote": "this is “Wales” premier comedy club",
+                "anchor": "premier comedy club"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "观看家庭演出。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "Sherman Cymru is excited to present a packed programme of the very best theatre, dance, family shows and music from Wales and the rest of the world.",
+              "sourceEntity": "Sherman Cymru",
+              "optionText": "See family shows.",
+              "optionEntity": "the Glee Club",
+              "explanation": "family shows（家庭演出）属于 Sherman Cymru（及 New Theatre）的介绍，并非 The Glee Club 提供的内容，场所对象错配。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "做有创意的事情。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "children, artists, writers and anyone else have the opportunity (机会) to do creative things",
+              "sourceEntity": "Sherman Cymru",
+              "optionText": "Do creative things.",
+              "optionEntity": "the Glee Club",
+              "explanation": "do creative things 出自 Sherman Cymru 段落，描述的是该剧院让人创作的机会，与 The Glee Club 无关，场所对象错配。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Enjoy comedies",
+            "sourceRole": "correctOption",
+            "targetText": "If you are looking for the best comedies on tour and brilliant live music, you should start here.",
+            "targetParagraphId": "para-2022-jia-reading-a-5",
+            "relationType": "paraphrase",
+            "note": "正确项 Enjoy comedies 对应原文 the best comedies on tour，The Glee Club 是 premier comedy club，故人们在此可欣赏喜剧。"
+          }
+        ]
+      },
+      "q-2022-jia-023": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查卡迪夫现存最古老剧院的网址，先据 oldest surviving theatre 定位到对应场所，再找其网址。",
+        "stemTranslationZh": "你可以访问哪个网站来了解卡迪夫现存最古老的剧院？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "www. newtheatrecardiff. co. uk",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2022-jia-reading-a-9",
+                "quote": "the New Theatre is Cardiff’s oldest surviving traditional theatre",
+                "anchor": "Cardiff’s oldest surviving traditional theatre = New Theatre"
+              },
+              {
+                "role": "secondary",
+                "paragraphId": "para-2022-jia-reading-a-10",
+                "quote": "www. newtheatrecardiff. co. uk",
+                "anchor": "New Theatre 的网址"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "www. shermancymru. co. uk",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "Sherman Cymru’s theatre in the Cathays area of Cardiff reopened in February 2012.",
+              "sourceEntity": "Sherman Cymru",
+              "optionText": "www. shermancymru. co. uk",
+              "optionEntity": "Sherman Cymru",
+              "explanation": "该网址属于 2012 年才重开的 Sherman Cymru，并非现存最古老的剧院，定位的场所错配。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "www. glee. co. uk/cardiff",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "this is “Wales” premier comedy club",
+              "sourceEntity": "The Glee Club",
+              "optionText": "www. glee. co. uk/cardiff",
+              "optionEntity": "The Glee Club",
+              "explanation": "该网址属于 The Glee Club（喜剧俱乐部），并非最古老的剧院，定位的场所错配。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "www. stdavidshallcardiff. co. uk",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "St David’s Hall is the award winning National Concert Hall of Wales standing at the very heart of Cardiff’s entertainment centre.",
+              "sourceEntity": "St David’s Hall",
+              "optionText": "www. stdavidshallcardiff. co. uk",
+              "optionEntity": "St David’s Hall",
+              "explanation": "该网址属于音乐厅 St David's Hall，文中未称其为最古老的剧院，定位的场所错配。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Cardiff's oldest surviving theatre",
+            "sourceRole": "stem",
+            "targetText": "the New Theatre is Cardiff’s oldest surviving traditional theatre",
+            "targetParagraphId": "para-2022-jia-reading-a-9",
+            "relationType": "locationCue",
+            "note": "题干 Cardiff's oldest surviving theatre 与原文 Cardiff's oldest surviving traditional theatre 几乎同形，据此定位到 New Theatre。"
+          },
+          {
+            "sourceText": "Which website",
+            "sourceRole": "stem",
+            "targetText": "www. newtheatrecardiff. co. uk",
+            "targetParagraphId": "para-2022-jia-reading-a-10",
+            "relationType": "locationCue",
+            "note": "确定场所为 New Theatre 后，在其地址段找到对应网址 www. newtheatrecardiff. co. uk。"
+          }
+        ]
+      },
+      "q-2022-jia-024": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查对实验中凤头鹦鹉如何取出坚果这一具体细节的理解。",
+        "stemTranslationZh": "在实验中，凤头鹦鹉是如何从箱子里取出坚果的？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "通过遵循指令。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "凤头鹦鹉通过遵循指令取出坚果。",
+              "explanation": "原文未提及鹦鹉“遵循指令”，它们是靠视觉识别选择正确的钥匙，属无中生有。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "通过使用一种工具。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2022-jia-reading-b-1",
+                "quote": "the birds were given five differently shaped “keys” to choose from. Inserting the correct “key” would let out the nut.",
+                "anchor": "插入正确的“钥匙”放出坚果"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "通过把箱子转过来。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "凤头鹦鹉通过把箱子转过来取出坚果。",
+              "explanation": "原文中“转动方向”指的是钥匙形状需被转到特定方向才能契合，并未说鹦鹉转动箱子，属无中生有。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "通过移开盖子。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "凤头鹦鹉通过移开盖子取出坚果。",
+              "explanation": "原文只提到正面的“锁孔”和“钥匙”机制，从未提到盖子（lid），属无中生有。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "By using a tool.",
+            "sourceRole": "correctOption",
+            "targetText": "the birds were given five differently shaped “keys” to choose from. Inserting the correct “key” would let out the nut.",
+            "targetParagraphId": "para-2022-jia-reading-b-1",
+            "relationType": "paraphrase",
+            "note": "原文的 “keys” 与 inserting the correct “key” 即“使用工具”的具体体现，选项用 a tool 概括 “key” 这一工具。"
+          }
+        ]
+      },
+      "q-2022-jia-025": {
+        "skill": {
+          "primary": "detail",
+          "secondary": "inference"
+        },
+        "questionFocus": "考查对人类一岁婴儿最可能完成的任务这一细节的定位与同义转换。",
+        "stemTranslationZh": "根据文章，人类一岁婴儿最可能完成下列哪项任务？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "用钥匙开锁。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "the birds were given five differently shaped “keys” to choose from",
+              "optionText": "Using a key to unlock a door.",
+              "matchType": "exact",
+              "relationNote": "选项借用原文实验中描述鹦鹉的 “keys” 一词设套，但原文从未说人类一岁婴儿会用钥匙开锁。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2022-jia-reading-b-1",
+                "quote": "the birds were given five differently shaped “keys” to choose from",
+                "anchor": "实验中给鹦鹉五把“钥匙”"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "把鹦鹉与其他鸟区分开。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "人类一岁婴儿能把鹦鹉与其他鸟区分开。",
+              "explanation": "原文未提及婴儿辨认鸟类的能力，属无中生有。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "把球放进圆孔里。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2022-jia-reading-b-2",
+                "quote": "babies can put a round shape in a round hole from around one year of age",
+                "anchor": "一岁左右婴儿能把圆形放进圆孔"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "把不同形状的玩具分类。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overstatement",
+              "sourceQuote": "it will be another year before they are able to do the same with less symmetrical (对称的) shapes",
+              "sourceHighlight": "another year before they are able to do the same with less symmetrical",
+              "optionText": "Grouping toys of different shapes.",
+              "optionHighlight": "Grouping toys of different shapes",
+              "explanation": "处理非对称等多种形状要再过一年（约两岁）才行，把这描述为一岁婴儿能做的“给不同形状分类”夸大了一岁婴儿的能力。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Putting a ball into a round hole.",
+            "sourceRole": "correctOption",
+            "targetText": "babies can put a round shape in a round hole from around one year of age",
+            "targetParagraphId": "para-2022-jia-reading-b-2",
+            "relationType": "paraphrase",
+            "note": "选项中的 ball / round hole 对应原文 a round shape in a round hole；human one-year-olds 对应 from around one year of age。"
+          }
+        ]
+      },
+      "q-2022-jia-026": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查对后续研究目标这一细节的定位理解。",
+        "stemTranslationZh": "后续测试旨在弄清关于这些凤头鹦鹉的什么问题？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "它们能看多远。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "whether the cockatoos rely entirely on visual clues",
+              "optionText": "How far they are able to see.",
+              "matchType": "wordFamily",
+              "relationNote": "选项 see 与原文 visual 同属“视觉”语义场设套，但原文问的是是否“完全依赖视觉线索”，而非“能看多远”。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2022-jia-reading-b-3",
+                "quote": "whether the cockatoos rely entirely on visual clues (线索)",
+                "anchor": "是否完全依赖视觉线索"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "它们如何追踪移动的物体。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "后续测试要弄清鹦鹉如何追踪移动的物体。",
+              "explanation": "原文后续研究只涉及视觉与触觉的依赖问题，未提及“追踪移动物体”，属无中生有。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "它们是否比猴子更聪明。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "the cockatoos did better than monkeys in similar tests",
+              "optionText": "Whether they are smarter than monkeys.",
+              "matchType": "exact",
+              "relationNote": "选项借用上一段中 monkeys 一词设套，但与猴子的对比是已有结论，并非后续测试的目标。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2022-jia-reading-b-2",
+                "quote": "the cockatoos did better than monkeys in similar tests",
+                "anchor": "鹦鹉在类似测试中胜过猴子"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "它们在测试中是否使用触觉。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2022-jia-reading-b-3",
+                "quote": "or also use a sense of touch in making their shape selections",
+                "anchor": "或也用触觉做形状选择"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "What does the follow-up test aim to find out",
+            "sourceRole": "stem",
+            "targetText": "The next step, according to the researchers, is to try and work out whether the cockatoos rely entirely on visual clues (线索) , or also use a sense of touch in making their shape selections.",
+            "targetParagraphId": "para-2022-jia-reading-b-3",
+            "relationType": "locationCue",
+            "note": "题干 follow-up test / aim to find out 对应原文 The next step / try and work out，由此定位到末段；正答 use a sense of touch 即原文 use a sense of touch。"
+          }
+        ]
+      },
+      "q-2022-jia-027": {
+        "skill": {
+          "primary": "title"
+        },
+        "questionFocus": "考查对全文主旨的概括，选出最能体现凤头鹦鹉形状分拣能力的标题。",
+        "stemTranslationZh": "哪一个可以作为本文合适的标题？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "凤头鹦鹉：快速纠错者",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overstatement",
+              "sourceQuote": "Where trial-and-error was used, the cockatoos did better than monkeys in similar tests.",
+              "sourceHighlight": "trial-and-error",
+              "optionText": "Cockatoos: Quick Error Checkers",
+              "optionHighlight": "Quick Error Checkers",
+              "explanation": "原文仅提到“在使用试错时”鹦鹉表现优于猴子，且多数情况下是凭视觉直接选对，并未强调“快速纠错”，以偏概全且夸大。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2022-jia-reading-b-2",
+                "quote": "Where trial-and-error was used, the cockatoos did better than monkeys in similar tests.",
+                "anchor": "试错时鹦鹉胜过猴子"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "凤头鹦鹉：独立学习者",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "凤头鹦鹉是独立学习者。",
+              "explanation": "全文聚焦形状识别能力，并未讨论鹦鹉“独立学习”这一主题，属无中生有。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "凤头鹦鹉：聪明的信号读取者",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "understatement",
+              "sourceQuote": "whether the cockatoos rely entirely on visual clues (线索)",
+              "sourceHighlight": "visual clues",
+              "optionText": "Cockatoos: Clever Signal-Readers",
+              "optionHighlight": "Clever Signal-Readers",
+              "explanation": "“读取信号/线索”只是末段尚待研究的一个侧面，不能概括全文关于形状识别与分拣能力的核心，以偏概全。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2022-jia-reading-b-3",
+                "quote": "whether the cockatoos rely entirely on visual clues (线索)",
+                "anchor": "是否依赖视觉线索"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "凤头鹦鹉：技艺娴熟的形状分拣者",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2022-jia-reading-b-1",
+                "quote": "the birds have proved skilful at tool use while kept in the cage",
+                "anchor": "鹦鹉在笼养中善于使用工具"
+              },
+              {
+                "role": "secondary",
+                "paragraphId": "para-2022-jia-reading-b-2",
+                "quote": "Goffin’s cockatoos were able to select the right tool for the job, in most cases, by visual recognition alone",
+                "anchor": "多数情况下凭视觉识别选对工具"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Cockatoos: Skilful Shape-Sorters",
+            "sourceRole": "correctOption",
+            "targetText": "Goffin’s cockatoos were able to select the right tool for the job, in most cases, by visual recognition alone",
+            "targetParagraphId": "para-2022-jia-reading-b-2",
+            "relationType": "paraphrase",
+            "note": "标题中的 Skilful 对应原文 skilful，Shape-Sorters 概括 select the right tool for the job by visual recognition（按形状选对工具）这一全文核心能力。"
+          }
+        ]
+      },
+      "q-2022-jia-028": {
+        "skill": {
+          "primary": "wordMeaning"
+        },
+        "questionFocus": "考查对第二段画线短语\"take the plunge\"的词义推测，需结合上下文推断其含义为下决心去做一件需要勇气的事。",
+        "stemTranslationZh": "下列哪一项最能解释第二段中画线的\"take the plunge\"？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "尝试有挑战性的事情。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2022-jia-reading-c-2",
+                "quote": "but always longed to explore further. When she retired from dancing and her sons eventually flew the nest, she decided it was time to take the plunge.",
+                "anchor": "longed to explore further → take the plunge"
+              },
+              {
+                "role": "support",
+                "paragraphId": "para-2022-jia-reading-c-3",
+                "quote": "“I just decided I wanted to go.” she says.",
+                "anchor": "下定决心独自远行"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "获得一个学位。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "After taking a degree at Chichester University in Related Arts",
+              "optionText": "Take a degree.",
+              "matchType": "exact",
+              "relationNote": "选项搬用了下一段\"taking a degree\"的原文词组制造干扰，但攻读学位发生在决定\"take the plunge\"之后，并非画线短语的含义。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2022-jia-reading-c-3",
+                "quote": "After taking a degree at Chichester University in Related Arts, Ginni began to travel the world",
+                "anchor": "taking a degree 出现在第三段"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "找回失去的记忆。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Bring back lost memories.",
+              "explanation": "原文未提及\"找回失去的记忆\"，画线短语与回忆往事无关，属无中生有。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "信守承诺。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Stick to a promise.",
+              "explanation": "原文未提及任何承诺，\"take the plunge\"指下决心去做需要勇气的事，与\"信守承诺\"无关，属无中生有。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "take the plunge",
+            "sourceRole": "stem",
+            "targetText": "but always longed to explore further. When she retired from dancing and her sons eventually flew the nest, she decided it was time to take the plunge.",
+            "targetParagraphId": "para-2022-jia-reading-c-2",
+            "relationType": "locationCue",
+            "note": "由前文 longed to explore further（一直渴望走得更远）和退休、儿子离巢后\"decided it was time\"可知，take the plunge 指鼓起勇气、下决心去尝试有挑战的事，对应 A 的 Try challenging things。"
+          }
+        ]
+      },
+      "q-2022-jia-029": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查细节理解，定位是什么直接促使Ginni决定前往南极之旅。",
+        "stemTranslationZh": "是什么让Ginni决定了这趟南极之旅？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "可爱的企鹅。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "she found herself greeted by a group of little Gentoo penguins",
+              "optionText": "Lovely penguins.",
+              "matchType": "wordFamily",
+              "relationNote": "第一段提到可爱的企鹅迎接她，选项借用 penguins 制造干扰；但企鹅是她抵达南极后才遇见的，发生在决定出行之后，不是促使她决定的原因。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2022-jia-reading-c-1",
+                "quote": "she found herself greeted by a group of little Gentoo penguins",
+                "anchor": "企鹅在抵达后才出现"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "美丽的风景。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "From seeing the wildlife to witnessing sunrises, the whole experience was amazing.",
+              "optionText": "Beautiful scenery.",
+              "matchType": "wordFamily",
+              "relationNote": "第四段对日出、野生动物等美景的描写借用为干扰，但这些是旅途中的体验，属于决定出行之后所见，并非她做决定的原因。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2022-jia-reading-c-4",
+                "quote": "From seeing the wildlife to witnessing sunrises, the whole experience was amazing.",
+                "anchor": "美景属旅途体验"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "一张打折的船票。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2022-jia-reading-c-3",
+                "quote": "she discovered she could get last-minute cheap deals on ships going to Antarctica from the islands off Tierra del Fuego",
+                "anchor": "last-minute cheap deals → discount fare"
+              },
+              {
+                "role": "support",
+                "paragraphId": "para-2022-jia-reading-c-3",
+                "quote": "“I just decided I wanted to go.” she says.",
+                "anchor": "发现廉价船票后决定前往"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "朋友的邀请。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "A friend's invitation.",
+              "explanation": "原文未提及任何朋友的邀请，反而强调她偏爱独自出行（do it alone），属无中生有。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "A discount fare.",
+            "sourceRole": "correctOption",
+            "targetText": "she could get last-minute cheap deals on ships going to Antarctica",
+            "targetParagraphId": "para-2022-jia-reading-c-3",
+            "relationType": "paraphrase",
+            "note": "原文 last-minute cheap deals on ships（最后一刻的廉价船票）正是选项 A discount fare（打折船票）的同义替换，紧接其后 \"I just decided I wanted to go\" 表明这正是促使她决定的原因。"
+          }
+        ]
+      },
+      "q-2022-jia-030": {
+        "skill": {
+          "primary": "detail",
+          "secondary": "inference"
+        },
+        "questionFocus": "考查对全文末段的细节与态度理解，把握旅程结束后Ginni对南极的看法。",
+        "stemTranslationZh": "旅程结束后，Ginni对南极有什么看法？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "它可以成为她的家。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "It could be a home for her.",
+              "explanation": "原文未提及南极可作为她的家，末段只说南极是应受尊重的珍贵土地，属无中生有。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "它应当容易到达。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeAttitude",
+              "sourceQuote": "The realization that this is a precious land, to be respected by humans, was one of the biggest things that hit home to Ginni.",
+              "sourceHighlight": "to be respected by humans",
+              "optionText": "It should be easily accessible.",
+              "optionHighlight": "easily accessible",
+              "explanation": "原文强调南极是应受人类尊重的珍贵之地，意在保护、限制人类干扰；选项却称其应\"容易到达\"，与原文态度相反。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2022-jia-reading-c-5",
+                "quote": "The realization that this is a precious land, to be respected by humans, was one of the biggest things that hit home to Ginni.",
+                "anchor": "应受尊重 ≠ 易于到达"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "它应当得到妥善保护。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2022-jia-reading-c-5",
+                "quote": "The realization that this is a precious land, to be respected by humans, was one of the biggest things that hit home to Ginni.",
+                "anchor": "precious land, to be respected → well preserved"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "它需要被充分地介绍宣传。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "It needs to be fully introduced.",
+              "explanation": "原文未提及南极需要被充分介绍或宣传，末段表达的是尊重与保护，属无中生有。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "It should be well preserved.",
+            "sourceRole": "correctOption",
+            "targetText": "this is a precious land, to be respected by humans",
+            "targetParagraphId": "para-2022-jia-reading-c-5",
+            "relationType": "paraphrase",
+            "note": "原文 a precious land, to be respected by humans（珍贵的、应受人类尊重的土地）与选项 well preserved（得到妥善保护）同义替换，传达对南极应加以呵护保护的看法。"
+          }
+        ]
+      },
+      "q-2022-jia-031": {
+        "skill": {
+          "primary": "mainIdea"
+        },
+        "questionFocus": "考查对全文主旨大意的把握，需在概括整篇内容的选项与片面/局部信息之间作出区分。",
+        "stemTranslationZh": "这篇文章主要讲的是什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "一个童年的梦想。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "understatement",
+              "sourceQuote": "Ever since her childhood, Ginni, now 71, has had a deep love for travel.",
+              "sourceHighlight": "Ever since her childhood",
+              "optionText": "A childhood dream.",
+              "optionHighlight": "A childhood dream",
+              "explanation": "第二段仅提到她自幼热爱旅行，\"童年梦想\"只是背景中的局部信息，不能概括全文围绕南极之旅的主线，以偏概全。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2022-jia-reading-c-2",
+                "quote": "Ever since her childhood, Ginni, now 71, has had a deep love for travel.",
+                "anchor": "童年只是背景细节"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "一段难忘的经历。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2022-jia-reading-c-1",
+                "quote": "These gentle, lovely gatekeepers welcomed her and kick-started what was to be a trip Ginni would never forget.",
+                "anchor": "a trip Ginni would never forget → unforgettable experience"
+              },
+              {
+                "role": "support",
+                "paragraphId": "para-2022-jia-reading-c-4",
+                "quote": "Antarctica left an impression on me that no other place has,",
+                "anchor": "南极之旅令她终生难忘"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "环球航行。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overgeneralization",
+              "sourceQuote": "Ginni began to travel the world, eventually getting work teaching English in Japan and Chile.",
+              "sourceHighlight": "travel the world",
+              "optionText": "Sailing around the world.",
+              "optionHighlight": "Sailing around the world",
+              "explanation": "原文虽提到她周游世界，但全文聚焦于一次南极之旅，\"环球航行\"扩大了范围、偏离主线，以偏概全。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2022-jia-reading-c-3",
+                "quote": "Ginni began to travel the world, eventually getting work teaching English in Japan and Chile.",
+                "anchor": "周游世界只是背景"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "在南极与动物相遇。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "understatement",
+              "sourceQuote": "I remember the first time I saw a humpback whale; it just rose out of the water like some prehistoric creature",
+              "sourceHighlight": "I saw a humpback whale",
+              "optionText": "Meeting animals in Antarctica.",
+              "optionHighlight": "Meeting animals in Antarctica",
+              "explanation": "与企鹅、座头鲸等动物相遇只是旅途中的部分情节，不能概括整段南极经历及其感悟，以偏概全。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2022-jia-reading-c-4",
+                "quote": "I remember the first time I saw a humpback whale; it just rose out of the water like some prehistoric creature",
+                "anchor": "遇见动物只是局部情节"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "An unforgettable experience.",
+            "sourceRole": "correctOption",
+            "targetText": "a trip Ginni would never forget",
+            "targetParagraphId": "para-2022-jia-reading-c-1",
+            "relationType": "paraphrase",
+            "note": "首段 a trip Ginni would never forget（她永远不会忘记的旅程）与末段 Antarctica left an impression on me that no other place has 共同点明全文主旨，对应 B An unforgettable experience（难忘的经历）。"
+          }
+        ]
+      },
+      "q-2022-jia-032": {
+        "skill": {
+          "primary": "mainIdea"
+        },
+        "questionFocus": "考查第一段的段落主旨，需把握作者罗列港湾、公园、海滩、多元人口后的落脚点。",
+        "stemTranslationZh": "第一段主要讲的是什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "悉尼引人注目的建筑。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "第一段以悉尼的建筑为主旨。",
+              "explanation": "第一段并未提及建筑，原文未提及 striking architecture，属无中生有。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "悉尼的文化多样性。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "a culturally diverse population",
+              "optionText": "The cultural diversity of Sydney.",
+              "matchType": "wordFamily",
+              "relationNote": "选项借原文 culturally diverse 的同族表达 cultural diversity 设钩；但文化多样性只是被“发现”的若干事物之一，非段落主旨。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2022-jia-reading-d-1",
+                "quote": "broad parks, superb beaches, and a culturally diverse population",
+                "anchor": "文化多样只是并列项之一"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "悉尼发展的关键。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2022-jia-reading-d-1",
+                "quote": "But it is the harbor that makes the city.",
+                "anchor": "港湾成就了这座城市"
+              },
+              {
+                "role": "secondary",
+                "paragraphId": "para-2022-jia-reading-d-1",
+                "quote": "The city discovered its harbor.",
+                "anchor": "城市发现了港湾"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "悉尼在 20 世纪 60 年代的旅游景点。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overstatement",
+              "sourceQuote": "Then, one after another, Sydney discovered lots of things that were just sort of there – broad parks, superb beaches, and a culturally diverse population.",
+              "sourceHighlight": "broad parks, superb beaches",
+              "optionText": "Sydney's tourist attractions in the 1960s.",
+              "optionHighlight": "tourist attractions",
+              "explanation": "原文列举公园、海滩等是城市“发现”的事物，并非定性为“旅游景点”，选项将其拔高/偷换为 tourist attractions，且段落主旨在港湾而非这些并列项。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2022-jia-reading-d-1",
+                "quote": "broad parks, superb beaches, and a culturally diverse population",
+                "anchor": "并列事物非“旅游景点”定性"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "The key to Sydney's development.",
+            "sourceRole": "correctOption",
+            "targetText": "But it is the harbor that makes the city.",
+            "targetParagraphId": "para-2022-jia-reading-d-1",
+            "relationType": "paraphrase",
+            "note": "正确项 the key to Sydney's development 是原文 it is the harbor that makes the city 的同义概括：makes the city（成就这座城市）即发展的关键。"
+          }
+        ]
+      },
+      "q-2022-jia-033": {
+        "skill": {
+          "primary": "detail",
+          "secondary": "inference"
+        },
+        "questionFocus": "考查对人物 Andrew Reynolds 的细节理解，关键在他对老渡轮的情感态度。",
+        "stemTranslationZh": "关于 Andrew Reynolds，我们可以得知什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "他乘船去上班。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overstatement",
+              "sourceQuote": "Andrew Reynolds, a cheerful fellow in his early 30s, pilots Sydney ferryboats for a living.",
+              "sourceHighlight": "pilots Sydney ferryboats for a living",
+              "optionText": "He goes to work by boat.",
+              "optionHighlight": "goes to work by boat",
+              "explanation": "原文说他以驾驶渡轮“为生”（开船是工作内容），并不能推出他“乘船去上班”（船是通勤工具），选项偷换了船与他的关系。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2022-jia-reading-d-2",
+                "quote": "pilots Sydney ferryboats for a living",
+                "anchor": "驾船为生≠乘船通勤"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "他期待着一种新生活。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeAttitude",
+              "sourceQuote": "“I’ll miss these old boats,” he said as we parted.",
+              "sourceHighlight": "I’ll miss these old boats",
+              "optionText": "He looks forward to a new life.",
+              "optionHighlight": "looks forward to a new life",
+              "explanation": "Andrew 表达的是对老船被取代的留恋与不舍，态度怀旧；选项却说他“期待新生活”，情感方向相反。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2022-jia-reading-d-3",
+                "quote": "“I’ll miss these old boats,” he said as we parted.",
+                "anchor": "怀念老船，非期待新生活"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "他擅长驾驶双体船。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "they’re replacing them with catamarans",
+              "optionText": "He pilots catamarans well.",
+              "matchType": "exact",
+              "relationNote": "选项原词照搬原文出现的 catamarans 设钩；但原文只说老船将被双体船取代，从未提及 Andrew 驾驶双体船的水平，更未说他擅长。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2022-jia-reading-d-5",
+                "quote": "they’re replacing them with catamarans",
+                "anchor": "仅提双体船取代，未涉其驾驶水平"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "他对老渡轮怀有深厚感情。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2022-jia-reading-d-3",
+                "quote": "“I’ll miss these old boats,” he said as we parted.",
+                "anchor": "我会怀念这些老船"
+              },
+              {
+                "role": "secondary",
+                "paragraphId": "para-2022-jia-reading-d-5",
+                "quote": "they’re not so elegant, and they’re not fun to pilot",
+                "anchor": "嫌双体船不优雅、没驾驶乐趣"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "He is attached to the old ferries.",
+            "sourceRole": "correctOption",
+            "targetText": "“I’ll miss these old boats,” he said as we parted.",
+            "targetParagraphId": "para-2022-jia-reading-d-3",
+            "relationType": "paraphrase",
+            "note": "正确项 is attached to the old ferries（对老渡轮有感情）是原文 I’ll miss these old boats（会怀念老船）的同义替换，old ferries 对应 old boats。"
+          }
+        ]
+      },
+      "q-2022-jia-034": {
+        "skill": {
+          "primary": "attitude"
+        },
+        "questionFocus": "考查历史学家 Shirley Fitzgerald 对悉尼的观点，关键在她对传统流失的忧虑。",
+        "stemTranslationZh": "Shirley Fitzgerald 怎么看待悉尼？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "它正在失去自己的传统。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2022-jia-reading-d-6",
+                "quote": "Sydney swept aside much of its past, including many of its finest buildings",
+                "anchor": "为求现代化抛弃了大量过去"
+              },
+              {
+                "role": "secondary",
+                "paragraphId": "para-2022-jia-reading-d-6",
+                "quote": "traditions are increasingly rare",
+                "anchor": "传统日渐稀少"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "它应当加快自身的进步。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeAttitude",
+              "sourceQuote": "Sydney swept aside much of its past, including many of its finest buildings",
+              "sourceHighlight": "swept aside much of its past",
+              "optionText": "It should speed up its progress.",
+              "optionHighlight": "speed up its progress",
+              "explanation": "Shirley 对急于现代化、抛弃过去持批评态度，惋惜传统流失；选项却主张“加快进步”，与她的立场相反。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2022-jia-reading-d-6",
+                "quote": "swept aside much of its past, including many of its finest buildings",
+                "anchor": "她惋惜过去被抛弃，非主张加快"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "它应当扩大自身的人口。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Shirley 认为悉尼应当扩大人口。",
+              "explanation": "Shirley 的话只涉及现代与传统之争，原文未提及人口或扩大人口，属无中生有。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "它正变得更加国际化。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Shirley 认为悉尼正变得更加国际化。",
+              "explanation": "“更国际化”是后文年轻商人 Anthony 谈及移民文化的延伸，并非 Shirley 的观点；Shirley 谈的是现代与传统的矛盾，原文未提及她认为悉尼更国际化，属无中生有。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "It is losing its traditions.",
+            "sourceRole": "correctOption",
+            "targetText": "Sydney swept aside much of its past",
+            "targetParagraphId": "para-2022-jia-reading-d-6",
+            "relationType": "paraphrase",
+            "note": "正确项 losing its traditions 对应原文 swept aside much of its past 与 traditions are increasingly rare，均指传统/过去在现代化中流失。"
+          }
+        ]
+      },
+      "q-2022-jia-035": {
+        "skill": {
+          "primary": "inference"
+        },
+        "questionFocus": "考查作者最可能认同的观点，需综合作者对悉尼“既古老又年轻”这一组合的肯定态度。",
+        "stemTranslationZh": "作者很可能赞同下面哪一种说法？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "一座城市可以同时既年轻又古老。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2022-jia-reading-d-7",
+                "quote": "On the other hand, being young and old at the same time has its attractions.",
+                "anchor": "同时年轻又古老自有魅力"
+              },
+              {
+                "role": "secondary",
+                "paragraphId": "para-2022-jia-reading-d-8",
+                "quote": "He is right",
+                "anchor": "作者认同这一看法"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "建立在古老文化之上的城市更具活力。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overstatement",
+              "sourceQuote": "We’ve got a foundation built on ancient cultures but with a drive and dynamism of a young country.",
+              "sourceHighlight": "a foundation built on ancient cultures but with a drive and dynamism",
+              "optionText": "A city built on ancient cultures is more dynamic.",
+              "optionHighlight": "more dynamic",
+              "explanation": "原文说活力源于古老根基“与”年轻国家的冲劲二者结合，并非比较“更有活力”；选项把并存关系偷换成比较级 more dynamic 的过度论断。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2022-jia-reading-d-7",
+                "quote": "a drive and dynamism of a young country",
+                "anchor": "活力来自年轻国家，非仅古老文化"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "现代化通常以牺牲优雅为代价来实现。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overgeneralization",
+              "sourceQuote": "Catamarans are faster, but they’re not so elegant, and they’re not fun to pilot. But that’s progress, I guess.",
+              "sourceHighlight": "they’re not so elegant",
+              "optionText": "Modernity is usually achieved at the cost of elegance.",
+              "optionHighlight": "usually achieved at the cost of elegance",
+              "explanation": "原文仅就双体船这一具体事例说它不够优雅，选项却用 usually 推广为“现代化通常以牺牲优雅为代价”的普遍规律，属以偏概全；且这是 Andrew 的话，非作者最认同的核心观点。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2022-jia-reading-d-5",
+                "quote": "they’re not so elegant",
+                "anchor": "仅就双体船而言，非普遍规律"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "本土与外来文化之间应当作出妥协。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "本土与外来文化之间应当妥协。",
+              "explanation": "原文谈的是古老与年轻、传统与现代的结合，从未提出本土与外来文化需要 compromise，原文未提及，属无中生有。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "A city can be young and old at the same time.",
+            "sourceRole": "correctOption",
+            "targetText": "being young and old at the same time has its attractions",
+            "targetParagraphId": "para-2022-jia-reading-d-7",
+            "relationType": "paraphrase",
+            "note": "正确项 young and old at the same time 直接对应原文 being young and old at the same time，作者随后以 He is right 表明认同。"
+          }
+        ]
+      }
+    }
+  }
+}

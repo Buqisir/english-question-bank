@@ -1,0 +1,96 @@
+{
+  "schemaVersion": "import-meta-v1",
+  "paperId": "paper-zj-2020-jan",
+  "sourceFileName": "2020年浙江卷高考真题英语试卷（1月）-答案版.docx",
+  "sourceFileSha256": "d752ee191e73f37445d72b6a626bfa395b9dd74f72d576a2a692b8c7693c9c6a",
+  "importedBy": "paper-import-ai",
+  "importedAt": "2026-06-18T14:47:44.578Z",
+  "paper": {
+    "year": 2020,
+    "region": "浙江",
+    "paperName": "2020年1月浙江卷",
+    "examCode": "zj-2020-jan",
+    "subject": "English",
+    "sourceType": "真题",
+    "defaultTags": [
+      "真题",
+      "2020",
+      "浙江卷",
+      "1月"
+    ]
+  },
+  "groups": {
+    "group-zj-2020-jan-reading-a": {
+      "groupId": "group-zj-2020-jan-reading-a",
+      "difficulty": "中",
+      "summary": "本文是作家 Eudora Welty 的童年回忆散文，回忆她九岁时在 Jackson 的 Carnegie 图书馆借书读书的经历，刻画了严厉的图书管理员 Mrs. Calloway、支持她阅读的母亲，以及作者本人对阅读痴迷的“极度幸福”。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading A"
+    },
+    "group-zj-2020-jan-reading-b": {
+      "groupId": "group-zj-2020-jan-reading-b",
+      "difficulty": "中",
+      "summary": "本文是一篇说明文，介绍美国威斯康星州密尔沃基市用奶酪盐水（cheese brine）替代部分岩盐（rock salt）来给冬季道路除冰的新办法。文章从该做法的提出讲起，依次说明其工作原理（含盐降低水的冰点）、双重经济效益（既帮奶酪厂处理废料又帮城市省钱）、环保优势（减少岩盐对环境的污染），并以这一做法的小缺点（气味）收尾。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading B"
+    },
+    "group-zj-2020-jan-reading-c": {
+      "groupId": "group-zj-2020-jan-reading-c",
+      "difficulty": "中",
+      "summary": "本文是一篇说明文，介绍杨百翰大学（BYU）研究者的一项研究发现：父亲在帮助青少年子女培养毅力（persistence）方面具有独特作用，而毅力又与更好的学业成就相关。文章进一步解释了有助于培养毅力的“权威型”（authoritative）教养方式的特征，并指出未来研究可关注单亲家庭。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading C"
+    },
+    "group-zj-2020-jan-seven-choices": {
+      "groupId": "group-zj-2020-jan-seven-choices",
+      "difficulty": "中",
+      "summary": "本文是一篇说明文，主题为水资源的重要性与全球缺水问题。文章先指出人体需要水、可直接饮用洁净水，再引出我们也间接用水（农业、发电），随后转折说明世界上许多人喝不到洁净水所带来的疾病与失学问题，最后介绍“世界水日”及英国学校通过负重步行募捐帮助他人获得洁净水的活动。五个空分别考查段首主旨/过渡句、指代衔接和逻辑因果衔接。",
+      "tags": [
+        "七选五"
+      ],
+      "displayTitleOverride": "七选五"
+    },
+    "group-zj-2020-jan-cloze": {
+      "groupId": "group-zj-2020-jan-cloze",
+      "difficulty": "中",
+      "summary": "完形填空",
+      "tags": [
+        "完形填空"
+      ],
+      "displayTitleOverride": "完形填空"
+    },
+    "group-zj-2020-jan-grammar-fill": {
+      "groupId": "group-zj-2020-jan-grammar-fill",
+      "difficulty": "中",
+      "summary": "语法填空",
+      "tags": [
+        "语法填空"
+      ],
+      "displayTitleOverride": "语法填空"
+    },
+    "group-zj-2020-jan-writing-application": {
+      "groupId": "group-zj-2020-jan-writing-application",
+      "difficulty": "中",
+      "summary": "应用文写作",
+      "tags": [
+        "应用文写作"
+      ],
+      "displayTitleOverride": "应用文写作"
+    },
+    "group-zj-2020-jan-writing-continuation": {
+      "groupId": "group-zj-2020-jan-writing-continuation",
+      "difficulty": "中",
+      "summary": "读后续写",
+      "tags": [
+        "读后续写"
+      ],
+      "displayTitleOverride": "读后续写"
+    }
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "schemaVersion": "import-meta-v1",
+  "paperId": "paper-zj-2023-jan",
+  "sourceFileName": "2023年浙江卷高考真题英语试卷（1月）-答案版.docx",
+  "sourceFileSha256": "7b5972933e4deaa85b3b6874faa04e6595acc9c50008966cc1eab5ef8d1dedc5",
+  "importedBy": "paper-import-ai",
+  "importedAt": "2026-06-09T04:37:08.311Z",
+  "paper": {
+    "year": 2023,
+    "region": "浙江",
+    "paperName": "2023年1月浙江卷",
+    "examCode": "zj-2023-jan",
+    "subject": "English",
+    "sourceType": "真题",
+    "defaultTags": [
+      "真题",
+      "2023",
+      "浙江卷",
+      "1月"
+    ]
+  },
+  "groups": {
+    "group-zj-2023-jan-reading-a": {
+      "groupId": "group-zj-2023-jan-reading-a",
+      "difficulty": "中",
+      "summary": "本篇是一则名为 Explorers Camp 的暑期儿童营地招生广告，介绍了适龄人群、活动时间、费用与退款政策，以及营地的每日安排、课程内容和师资配置。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading A"
+    },
+    "group-zj-2023-jan-reading-b": {
+      "groupId": "group-zj-2023-jan-reading-b",
+      "difficulty": "中",
+      "summary": "本文是一篇记叙兼议论的个人经历类文章。作者讲述自己在不完全支持的家庭环境中坚持零废弃（zero waste）生活方式的经历，从最初遭遇家人质疑，到学会在自己可控的个人空间内做出改变，最后总结出“以行动示范”的建议。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading B"
+    },
+    "group-zj-2023-jan-reading-c": {
+      "groupId": "group-zj-2023-jan-reading-c",
+      "difficulty": "中",
+      "summary": "本文是一篇议论文，围绕人工智能辩论程序 Project Debater 展开，讨论机器虽能在辩论中击败人类，却始终无法理解“意义”，从而论证意义是区分人类与机器的根本所在。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading C"
+    },
+    "group-zj-2023-jan-reading-d": {
+      "groupId": "group-zj-2023-jan-reading-d",
+      "difficulty": "中",
+      "summary": "本文是一篇说明文，介绍太阳能发展带来的土地与生态问题，以及以 InSPIRE 项目为代表的“低影响”太阳能开发理念——尤其是把太阳能板下的空间改造成传粉昆虫的栖息地，从而兼顾清洁能源与农业生态。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading D"
+    },
+    "group-zj-2023-jan-seven-choices": {
+      "groupId": "group-zj-2023-jan-seven-choices",
+      "difficulty": "中",
+      "summary": "本文是一篇说明文，围绕“如何让坐火车旅行尽可能愉快”给出建议。每个段落以一个祈使短语小标题（Plan ahead / Use a travel agent / Bring a blanket / Arrive early / Have fun）开头，再展开具体做法。七选五要求在五个段落中各补一个最贴合上下文逻辑与话题场的句子。",
+      "tags": [
+        "七选五"
+      ],
+      "displayTitleOverride": "七选五"
+    },
+    "group-zj-2023-jan-cloze": {
+      "groupId": "group-zj-2023-jan-cloze",
+      "difficulty": "中",
+      "summary": "完形填空",
+      "tags": [
+        "完形填空"
+      ],
+      "displayTitleOverride": "完形填空"
+    },
+    "group-zj-2023-jan-grammar-fill": {
+      "groupId": "group-zj-2023-jan-grammar-fill",
+      "difficulty": "中",
+      "summary": "语法填空",
+      "tags": [
+        "语法填空"
+      ],
+      "displayTitleOverride": "语法填空"
+    },
+    "group-zj-2023-jan-writing-application": {
+      "groupId": "group-zj-2023-jan-writing-application",
+      "difficulty": "中",
+      "summary": "应用文写作",
+      "tags": [
+        "应用文写作"
+      ],
+      "displayTitleOverride": "应用文写作"
+    },
+    "group-zj-2023-jan-writing-continuation": {
+      "groupId": "group-zj-2023-jan-writing-continuation",
+      "difficulty": "中",
+      "summary": "读后续写",
+      "tags": [
+        "读后续写"
+      ],
+      "displayTitleOverride": "读后续写"
+    }
+  }
+}

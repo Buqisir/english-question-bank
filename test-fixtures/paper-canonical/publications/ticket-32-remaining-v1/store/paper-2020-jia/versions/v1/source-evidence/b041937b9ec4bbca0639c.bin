@@ -1,0 +1,86 @@
+{
+  "schemaVersion": "import-meta-v1",
+  "paperId": "paper-2020-jia",
+  "sourceFileName": "2020年全国甲卷-答案版.docx",
+  "sourceFileSha256": "602b1cf82f8b8d2392fc07f619089d8284152f001a7c95356ebb02938e128240",
+  "importedBy": "paper-import-ai",
+  "importedAt": "2026-06-19T08:55:52.745Z",
+  "paper": {
+    "year": 2020,
+    "region": "全国甲卷",
+    "paperName": "2020年全国甲卷",
+    "examCode": "2020-jia",
+    "subject": "English",
+    "sourceType": "真题",
+    "defaultTags": [
+      "真题",
+      "2020",
+      "全国甲卷"
+    ]
+  },
+  "groups": {
+    "group-2020-jia-reading-a": {
+      "groupId": "group-2020-jia-reading-a",
+      "difficulty": "中",
+      "summary": "本文是一篇对小说《The Snake-Stone》(作者 Berlie Doherty) 的书评。作者按照故事要素——背景、主题、人物、转折点、旅程——分条目介绍这部讲述少年 James 寻找生母、完成自我发现之旅的小说。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading A"
+    },
+    "group-2020-jia-reading-b": {
+      "groupId": "group-2020-jia-reading-b",
+      "difficulty": "中",
+      "summary": "一篇关于德国北部某城市匿名捐款者的新闻报道。神秘捐款者把装着现金的白色信封连同当地报纸的相关报道一起寄给需要帮助的人，引发全城猜测，被比作劫富济贫的罗宾汉。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading B"
+    },
+    "group-2020-jia-reading-c": {
+      "groupId": "group-2020-jia-reading-c",
+      "difficulty": "中",
+      "summary": "本文是一篇关于纪录片《Eye of the Pangolin》的说明性文章。穿山甲是世界上被贩卖最多的哺乳动物，濒临灭绝。该纪录片旨在唤起公众对穿山甲保护的关注，号召人们行动起来制止非法贩卖。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading C"
+    },
+    "group-2020-jia-reading-d": {
+      "groupId": "group-2020-jia-reading-d",
+      "difficulty": "中",
+      "summary": "本文是一篇科普说明文，介绍哈佛与麻省理工研究者关于“人对自身年龄的感知会影响健康”这一身心假说的研究。文章先引出俗语并点明研究结论，再列举多项研究证据，最后归纳总体结论与机制。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading D"
+    },
+    "group-2020-jia-seven-choices": {
+      "groupId": "group-2020-jia-seven-choices",
+      "difficulty": "中",
+      "summary": "本文是一篇说明文，围绕一次性塑料（single-use plastic）对环境与人体健康的危害展开。开头以厨房和办公室随处可见的塑料制品引入话题，随后用统计数据说明塑料产量失控增长，再分别论述塑料对海洋生物、对儿童健康的危害，最后聚焦塑料中的化学物质 BPA 并给出建议。七选五的五个空分别承担引出话题、补充数据、分论点起始等衔接功能。",
+      "tags": [
+        "七选五"
+      ],
+      "displayTitleOverride": "七选五"
+    },
+    "group-2020-jia-cloze": {
+      "groupId": "group-2020-jia-cloze",
+      "difficulty": "中",
+      "summary": "完形填空",
+      "tags": [
+        "完形填空"
+      ],
+      "displayTitleOverride": "完形填空"
+    },
+    "group-2020-jia-grammar-fill": {
+      "groupId": "group-2020-jia-grammar-fill",
+      "difficulty": "中",
+      "summary": "语法填空",
+      "tags": [
+        "语法填空"
+      ],
+      "displayTitleOverride": "语法填空"
+    }
+  }
+}

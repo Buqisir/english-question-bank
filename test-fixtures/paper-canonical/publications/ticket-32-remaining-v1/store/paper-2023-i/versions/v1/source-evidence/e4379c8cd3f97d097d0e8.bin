@@ -1,0 +1,104 @@
+{
+  "schemaVersion": "import-meta-v1",
+  "paperId": "paper-2023-i",
+  "sourceFileName": "2023年新课标Ⅰ卷-答案版.docx",
+  "sourceFileSha256": "791b4d659998c07f92e497ee2ffd5c29677861028dd510f564c6f661dcfc8db4",
+  "importedBy": "paper-import-ai",
+  "importedAt": "2026-06-05T07:27:41.526Z",
+  "paper": {
+    "year": 2023,
+    "region": "全国新课标Ⅰ",
+    "paperName": "2023年新课标Ⅰ卷",
+    "examCode": "2023-i",
+    "subject": "English",
+    "sourceType": "真题",
+    "defaultTags": [
+      "真题",
+      "2023",
+      "新课标Ⅰ卷"
+    ]
+  },
+  "groups": {
+    "group-2023-i-reading-a": {
+      "groupId": "group-2023-i-reading-a",
+      "difficulty": "中",
+      "summary": "本篇为阿姆斯特丹 MacBike 自行车租赁与导览游的应用文（广告/宣传材料），介绍公司优势、租车价格表以及城市导览游信息。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading A"
+    },
+    "group-2023-i-reading-b": {
+      "groupId": "group-2023-i-reading-b",
+      "difficulty": "中",
+      "summary": "本文是一篇人物记叙说明文，讲述 John Todd 如何从童年观察自然净化污水的现象出发，运用生态学原理设计出 eco-machine 来处理污泥与污水，并将其应用于实际工程，最终提出“生态设计”理念。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading B"
+    },
+    "group-2023-i-reading-c": {
+      "groupId": "group-2023-i-reading-c",
+      "difficulty": "中",
+      "summary": "本文是一本关于“数字极简主义”(digital minimalism) 的书的前言/导读，作者说明全书的写作目的与章节结构：先论证数字极简主义的哲学基础并提出“数字整理”(digital declutter) 方法，再在第二部分给出可操作的实践工具。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading C"
+    },
+    "group-2023-i-reading-d": {
+      "groupId": "group-2023-i-reading-d",
+      "difficulty": "中",
+      "summary": "本文是一篇科普说明文，介绍“群体智慧”（wisdom of crowds）效应及Navajas团队对这一经典现象的最新研究。文章先引出经典效应，再解释其内在机制，接着用新研究提出转折，最后通过后续实验探讨群体讨论如何降低误差并展望意义。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading D"
+    },
+    "group-2023-i-seven-choices": {
+      "groupId": "group-2023-i-seven-choices",
+      "difficulty": "中",
+      "summary": "本文是一篇关于“自我宽恕（Personal Forgiveness）”的说明文，主题是：犯错是人之常情，除了承担责任，更要学会原谅自己。文章给出一套书面练习——分别列出“个人优点”和“善举”，并可邀请亲友补充——来帮助读者重建自信、看待错误。五个空分别考查段首主题句、段内衔接句与段尾总结句。",
+      "tags": [
+        "七选五"
+      ],
+      "displayTitleOverride": "七选五"
+    },
+    "group-2023-i-cloze": {
+      "groupId": "group-2023-i-cloze",
+      "difficulty": "中",
+      "summary": "完形填空",
+      "tags": [
+        "完形填空"
+      ],
+      "displayTitleOverride": "完形填空"
+    },
+    "group-2023-i-grammar-fill": {
+      "groupId": "group-2023-i-grammar-fill",
+      "difficulty": "中",
+      "summary": "语法填空",
+      "tags": [
+        "语法填空"
+      ],
+      "displayTitleOverride": "语法填空"
+    },
+    "group-2023-i-writing-application": {
+      "groupId": "group-2023-i-writing-application",
+      "difficulty": "中",
+      "summary": "应用文写作",
+      "tags": [
+        "应用文写作"
+      ],
+      "displayTitleOverride": "应用文写作"
+    },
+    "group-2023-i-writing-continuation": {
+      "groupId": "group-2023-i-writing-continuation",
+      "difficulty": "中",
+      "summary": "读后续写",
+      "tags": [
+        "读后续写"
+      ],
+      "displayTitleOverride": "读后续写"
+    }
+  }
+}

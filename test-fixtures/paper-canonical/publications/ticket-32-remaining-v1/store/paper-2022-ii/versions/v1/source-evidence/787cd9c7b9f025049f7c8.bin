@@ -1,0 +1,104 @@
+{
+  "schemaVersion": "import-meta-v1",
+  "paperId": "paper-2022-ii",
+  "sourceFileName": "2022年新课标II-答案版.docx",
+  "sourceFileSha256": "b715de9a85ac10b2ba01c187c3ee6c4770d946b73a9e899b1d99b75d97a38884",
+  "importedBy": "paper-import-ai",
+  "importedAt": "2026-06-05T07:27:41.276Z",
+  "paper": {
+    "year": 2022,
+    "region": "全国新课标Ⅱ",
+    "paperName": "2022年新课标Ⅱ卷",
+    "examCode": "2022-ii",
+    "subject": "English",
+    "sourceType": "真题",
+    "defaultTags": [
+      "真题",
+      "2022",
+      "新课标Ⅱ卷"
+    ]
+  },
+  "groups": {
+    "group-2022-ii-reading-a": {
+      "groupId": "group-2022-ii-reading-a",
+      "difficulty": "中",
+      "summary": "本文是一则儿童探索博物馆（Children's Discovery Museum）团体游玩（Group Play）的应用文信息单，按板块介绍价格、奖学金、团体人数、开放时间、报名政策和行为准则。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading A"
+    },
+    "group-2022-ii-reading-b": {
+      "groupId": "group-2022-ii-reading-b",
+      "difficulty": "中",
+      "summary": "一位资深记者以第一人称记叙散文的方式，借给两岁孙子读纸质绘本时孙子反复戳书页的小事，引出「我们正处在多媒体讲故事的新时代」这一主题，并自嘲式地反思自己作为「老一辈」在数字时代的位置。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading B"
+    },
+    "group-2022-ii-reading-c": {
+      "groupId": "group-2022-ii-reading-c",
+      "difficulty": "中",
+      "summary": "本文是一篇说明文/新闻报道，围绕美国“开车发短信”这一现代驾驶陋习展开：尽管多数州已立法禁止且开展公益宣传，问题却愈演愈烈；为此立法者与公共卫生专家借鉴治理酒驾的旧思路，并提出用一种名为 Textalyzer 的新设备来检测司机事故前是否违规使用手机，以期改变人们的行为。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading C"
+    },
+    "group-2022-ii-reading-d": {
+      "groupId": "group-2022-ii-reading-d",
+      "difficulty": "中",
+      "summary": "本文是一篇科普说明文，介绍心脏专家 Dr. Ben Levine 关于运动改善衰老心脏的研究：随年龄增长心脏处理氧气效率下降，但中年阶段开始进行高强度有氧运动可以逆转心脏老化。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading D"
+    },
+    "group-2022-ii-seven-choices": {
+      "groupId": "group-2022-ii-seven-choices",
+      "difficulty": "中",
+      "summary": "本篇说明文介绍写好一篇文章的三种简单技巧：不停笔自由写作、快速写初稿不求完美、用三倍行距打印留白以便修改。全文为总分结构，每段开头点出一种技巧，七选五考查段首主题句、段中衔接句与上下文指代/话题呼应。",
+      "tags": [
+        "七选五"
+      ],
+      "displayTitleOverride": "七选五"
+    },
+    "group-2022-ii-cloze": {
+      "groupId": "group-2022-ii-cloze",
+      "difficulty": "中",
+      "summary": "完形填空",
+      "tags": [
+        "完形填空"
+      ],
+      "displayTitleOverride": "完形填空"
+    },
+    "group-2022-ii-grammar-fill": {
+      "groupId": "group-2022-ii-grammar-fill",
+      "difficulty": "中",
+      "summary": "语法填空",
+      "tags": [
+        "语法填空"
+      ],
+      "displayTitleOverride": "语法填空"
+    },
+    "group-2022-ii-writing-application": {
+      "groupId": "group-2022-ii-writing-application",
+      "difficulty": "中",
+      "summary": "应用文写作",
+      "tags": [
+        "应用文写作"
+      ],
+      "displayTitleOverride": "应用文写作"
+    },
+    "group-2022-ii-writing-continuation": {
+      "groupId": "group-2022-ii-writing-continuation",
+      "difficulty": "中",
+      "summary": "读后续写",
+      "tags": [
+        "读后续写"
+      ],
+      "displayTitleOverride": "读后续写"
+    }
+  }
+}

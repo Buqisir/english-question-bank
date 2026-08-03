@@ -1,0 +1,96 @@
+{
+  "schemaVersion": "import-meta-v1",
+  "paperId": "paper-zj-2021-jan",
+  "sourceFileName": "2021年浙江卷高考真题英语试卷（1月）-答案版.docx",
+  "sourceFileSha256": "959303190176d8624c7e4233d1ae3ea56e92d9fd853c1790ca3365be2e07a473",
+  "importedBy": "paper-import-ai",
+  "importedAt": "2026-06-18T14:47:44.840Z",
+  "paper": {
+    "year": 2021,
+    "region": "浙江",
+    "paperName": "2021年1月浙江卷",
+    "examCode": "zj-2021-jan",
+    "subject": "English",
+    "sourceType": "真题",
+    "defaultTags": [
+      "真题",
+      "2021",
+      "浙江卷",
+      "1月"
+    ]
+  },
+  "groups": {
+    "group-zj-2021-jan-reading-a": {
+      "groupId": "group-zj-2021-jan-reading-a",
+      "difficulty": "中",
+      "summary": "本文是一篇人物记叙文，讲述印度男孩 Saroo Brierley 四岁时与家人意外失散、被澳大利亚家庭收养，二十多年后借助数字地图卫星图像找到家乡、最终与母亲重逢的真实故事。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading A"
+    },
+    "group-zj-2021-jan-reading-b": {
+      "groupId": "group-zj-2021-jan-reading-b",
+      "difficulty": "中",
+      "summary": "本文是一篇议论性说明文，探讨现代儿童步行量（尤其是步行上学）减少的现象、原因及其代价，并由作者以母亲身份现身说法，指出与孩子一起步行的额外价值，最后倡导参加“步行校车”路线。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading B"
+    },
+    "group-zj-2021-jan-reading-c": {
+      "groupId": "group-zj-2021-jan-reading-c",
+      "difficulty": "中",
+      "summary": "本文是一篇科普说明文，报道研究者破译野生黑猩猩用手势进行交流的研究成果，并引入正反两方面专家观点：主导研究的 Hobaiter 博士强调黑猩猩与人类一样能有意图地传递信息，进化生物学家 Shultz 博士则认为研究虽有价值但结果有限，人猿之间的鸿沟依然存在。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading C"
+    },
+    "group-zj-2021-jan-seven-choices": {
+      "groupId": "group-zj-2021-jan-seven-choices",
+      "difficulty": "中",
+      "summary": "本文是一篇说明文，探讨超市结账时\"为什么你排的队总是最慢\"这一日常现象。作者先抛出生活共鸣的场景，再用数学概率（多条队列中你的队最快的概率仅为三分之一）解释这并非错觉，随后介绍研究者提出的\"蛇形队列\"（serpentine line）解决方案，最后说明为什么大多数商店没有采用——成本与空间限制。",
+      "tags": [
+        "七选五"
+      ],
+      "displayTitleOverride": "七选五"
+    },
+    "group-zj-2021-jan-cloze": {
+      "groupId": "group-zj-2021-jan-cloze",
+      "difficulty": "中",
+      "summary": "完形填空",
+      "tags": [
+        "完形填空"
+      ],
+      "displayTitleOverride": "完形填空"
+    },
+    "group-zj-2021-jan-grammar-fill": {
+      "groupId": "group-zj-2021-jan-grammar-fill",
+      "difficulty": "中",
+      "summary": "语法填空",
+      "tags": [
+        "语法填空"
+      ],
+      "displayTitleOverride": "语法填空"
+    },
+    "group-zj-2021-jan-writing-application": {
+      "groupId": "group-zj-2021-jan-writing-application",
+      "difficulty": "中",
+      "summary": "应用文写作",
+      "tags": [
+        "应用文写作"
+      ],
+      "displayTitleOverride": "应用文写作"
+    },
+    "group-zj-2021-jan-writing-continuation": {
+      "groupId": "group-zj-2021-jan-writing-continuation",
+      "difficulty": "中",
+      "summary": "读后续写",
+      "tags": [
+        "读后续写"
+      ],
+      "displayTitleOverride": "读后续写"
+    }
+  }
+}

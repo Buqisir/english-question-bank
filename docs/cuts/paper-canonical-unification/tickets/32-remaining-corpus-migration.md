@@ -1,6 +1,6 @@
 # 32 — Migrate the remaining confirmed corpus
 
-Status: ready
+Status: PASS
 Blocked by: Ticket 31 PASS
 Next on PASS: `docs/cuts/paper-canonical-unification/tickets/33-shared-screen-print-pdf-proof.md`
 Terminal: no
@@ -36,6 +36,6 @@ Collapses old Tickets 63–69 into one unchanged-adapter data migration.
 
 ## Result
 
-Commit:
-Verify:
-Notes:
+Commit: Ticket 32 serial migration join on `codex/ticket-32-remaining-corpus-migration-20260802`
+Verify: `node scripts/verify-paper-canonical-ticket-32-remaining-migration.mjs --produce` PASS; clean `node scripts/verify-paper-canonical-ticket-32-remaining-migration.mjs --check --exact-reload` PASS (29 papers / 240 groups / 1345 questions / 3640 question-owned options; six representative public consumer reloads); `node scripts/verify-paper-canonical-registered-confirmation-admission.mjs` PASS; `git diff --check` PASS
+Notes: The three committed admission allowlists were joined A → B → C into `test-fixtures/paper-canonical/publications/ticket-32-remaining-v1/store` with one SQLite writer. Every non-canary paper has one v1 immutable Publication/current identity, exact reopen, identical idempotent retry, zero residual recovery journal, and `no_prior_rollback_target`; Ticket 31's four-canary store bytes remain unchanged. Final exact accounting is `docs/cuts/paper-canonical-unification/migration/ticket-32-final-migration-accounting-v1.json`. Ticket 33 handoff: use this store and accounting as the exact 33-paper candidate for its shared Screen/Print/PDF proof; Ticket 32 does not begin Ticket 33.

@@ -1,0 +1,86 @@
+{
+  "schemaVersion": "import-meta-v1",
+  "paperId": "paper-2020-bing",
+  "sourceFileName": "2020年全国丙卷-答案版.docx",
+  "sourceFileSha256": "10b2966edaf89bf4dacb08774071a7c0da36606f8f2c8acc37c0e481d94414e7",
+  "importedBy": "paper-import-ai",
+  "importedAt": "2026-06-19T08:55:53.202Z",
+  "paper": {
+    "year": 2020,
+    "region": "全国丙卷",
+    "paperName": "2020年全国丙卷",
+    "examCode": "2020-bing",
+    "subject": "English",
+    "sourceType": "真题",
+    "defaultTags": [
+      "真题",
+      "2020",
+      "全国丙卷"
+    ]
+  },
+  "groups": {
+    "group-2020-bing-reading-a": {
+      "groupId": "group-2020-bing-reading-a",
+      "difficulty": "中",
+      "summary": "一则学者带队的文化旅游广告，介绍四条以历史古迹与人文景观为主题的深度游线路：法国普罗旺斯、西班牙南部、中国与突尼斯，每条线路由一位教授带队。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading A"
+    },
+    "group-2020-bing-reading-b": {
+      "groupId": "group-2020-bing-reading-b",
+      "difficulty": "中",
+      "summary": "本文讨论好莱坞电影中动物的使用问题。以《猩球崛起》采用动作捕捉技术制作数字猿类、避免使用真实动物为引子，对比指出好莱坞近来仍大量使用真实活体动物，并引发动物保护组织对动物待遇（尤其是片场外训练与生活条件、以及海外拍摄缺乏监管）的担忧。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading B"
+    },
+    "group-2020-bing-reading-c": {
+      "groupId": "group-2020-bing-reading-c",
+      "difficulty": "中",
+      "summary": "本文是一篇说明文，介绍英国多代同堂家庭（multigenerational families）的兴起。先以 Nick Bright 一家与岳母 Rita 同住的案例引入，再用官方数据和统计说明这一居住趋势正在上升。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading C"
+    },
+    "group-2020-bing-reading-d": {
+      "groupId": "group-2020-bing-reading-d",
+      "difficulty": "中",
+      "summary": "本文是一篇科普说明文，介绍人类近几千年来仍在进行的进化，重点报道东南亚巴瑶族（the Bajau）为适应海洋生活而进化出更强潜水能力的研究发现。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading D"
+    },
+    "group-2020-bing-seven-choices": {
+      "groupId": "group-2020-bing-seven-choices",
+      "difficulty": "中",
+      "summary": "本文是一篇说明文，介绍乔迁派对（housewarming party）：定义、由谁举办、送礼习俗、派对上的食物与活动安排，以及这一名称的历史由来。七选五考查对各段主题句、过渡句与衔接句的把握。",
+      "tags": [
+        "七选五"
+      ],
+      "displayTitleOverride": "七选五"
+    },
+    "group-2020-bing-cloze": {
+      "groupId": "group-2020-bing-cloze",
+      "difficulty": "中",
+      "summary": "完形填空",
+      "tags": [
+        "完形填空"
+      ],
+      "displayTitleOverride": "完形填空"
+    },
+    "group-2020-bing-grammar-fill": {
+      "groupId": "group-2020-bing-grammar-fill",
+      "difficulty": "中",
+      "summary": "语法填空",
+      "tags": [
+        "语法填空"
+      ],
+      "displayTitleOverride": "语法填空"
+    }
+  }
+}

@@ -1,0 +1,3257 @@
+{
+  "schemaVersion": "paper-asset-v1",
+  "paper": {
+    "paperId": "paper-2020-bing",
+    "title": "2020年全国丙卷-答案版",
+    "subject": "English",
+    "source": "AI 导题",
+    "assetVersion": 1,
+    "status": "published"
+  },
+  "sources": {
+    "primarySourceType": "docx",
+    "docx": {
+      "fileName": "2020年全国丙卷-答案版.docx",
+      "sha256": "10b2966edaf89bf4dacb08774071a7c0da36606f8f2c8acc37c0e481d94414e7",
+      "sourcePath": "",
+      "sourceNote": "未上传答案解析版"
+    }
+  },
+  "layoutTree": {
+    "parts": [
+      {
+        "partId": "part-2020-bing-reading",
+        "title": "第二部分 阅读",
+        "sections": [
+          {
+            "sectionId": "section-2020-bing-reading-choice",
+            "title": "第一节 阅读理解",
+            "groups": [
+              {
+                "groupId": "group-2020-bing-reading-a",
+                "title": "Reading A"
+              },
+              {
+                "groupId": "group-2020-bing-reading-b",
+                "title": "Reading B"
+              },
+              {
+                "groupId": "group-2020-bing-reading-c",
+                "title": "Reading C"
+              },
+              {
+                "groupId": "group-2020-bing-reading-d",
+                "title": "Reading D"
+              }
+            ]
+          },
+          {
+            "sectionId": "section-2020-bing-reading-seven",
+            "title": "第二节 七选五",
+            "groups": [
+              {
+                "groupId": "group-2020-bing-seven-choices",
+                "title": "七选五"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "partId": "part-2020-bing-language",
+        "title": "第三部分 语言运用",
+        "sections": [
+          {
+            "sectionId": "section-2020-bing-cloze",
+            "title": "第一节 完形填空",
+            "groups": [
+              {
+                "groupId": "group-2020-bing-cloze",
+                "title": "完形填空"
+              }
+            ]
+          },
+          {
+            "sectionId": "section-2020-bing-grammar-fill",
+            "title": "第二节 语法填空",
+            "groups": [
+              {
+                "groupId": "group-2020-bing-grammar-fill",
+                "title": "语法填空"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "content": {
+    "blocks": [
+      {
+        "type": "partHeading",
+        "partId": "part-2020-bing-reading",
+        "text": "第二部分 阅读理解（共两节，满分40分）"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-2020-bing-reading-choice",
+        "text": "第一节（共15小题；每小题2分，满分30分）"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2020-bing-reading-a"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2020-bing-reading-b"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2020-bing-reading-c"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2020-bing-reading-d"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-2020-bing-reading-seven",
+        "text": "第二节（共5小题；每小题2分，满分10分）"
+      },
+      {
+        "type": "instruction",
+        "text": "阅读下面短文，从短文后的选项中选出可以填入空白处的最佳选项。选项中有两项为多余选项。"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2020-bing-seven-choices"
+      },
+      {
+        "type": "pageBreakHint"
+      },
+      {
+        "type": "partHeading",
+        "partId": "part-2020-bing-language",
+        "text": "第三部分 语言知识运用（共两节，满分45分）"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-2020-bing-cloze",
+        "text": "第一节（共20小题；每小题1.5分，满分30分）"
+      },
+      {
+        "type": "instruction",
+        "text": "阅读下面短文，从每题所给的A、B、C、D四个选项中选出最佳选项。"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2020-bing-cloze"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-2020-bing-grammar-fill",
+        "text": "第二节(共10小题；每小题1.5分，满分15分)"
+      },
+      {
+        "type": "instruction",
+        "text": "阅读下面短文，在空白处填入1个适当的单词或括号内单词的正确形式。"
+      },
+      {
+        "type": "group",
+        "groupId": "group-2020-bing-grammar-fill"
+      }
+    ],
+    "groups": {
+      "group-2020-bing-reading-a": {
+        "groupId": "group-2020-bing-reading-a",
+        "groupType": "reading",
+        "title": "Reading A",
+        "questionIds": [
+          "q-2020-bing-021",
+          "q-2020-bing-022",
+          "q-2020-bing-023"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2020-bing-reading-a-1",
+              "text": "Journey Back in Time with Scholars\n Classical Provence (13 days)"
+            },
+            {
+              "paragraphId": "para-2020-bing-reading-a-2",
+              "text": "Journey through the beautiful countryside of Provence, France, with Prof. Ori Z. Soltes. We will visit some of the best-preserved Roman monuments in the world. Our tour also includes a chance to walk in the footsteps of Van Gogh and Gauguin. Fields of flowers, tile-roofed (瓦屋顶) villages and tasty meals enrich this wonderful experience.\n Southern Spain (15 days)"
+            },
+            {
+              "paragraphId": "para-2020-bing-reading-a-3",
+              "text": "Spain has lovely white towns and the scent (芳香) of oranges, but it is also a treasury of ancient remains including the cities left by the Greeks, Romans and Arabs. As we travel south from Madrid with Prof. Ronald Messier to historic Toledo, Roman Merida and into Andalucia, we explore historical monuments and architecture.\n China’s Sacred Landscapes (21 days)"
+            },
+            {
+              "paragraphId": "para-2020-bing-reading-a-4",
+              "text": "Discover the China of “past ages,” its walled cities, temples and mountain scenery with Prof. Robert Thorp. Highlights (精彩之处) include China’s most sacred peaks at Mount Tai and Hangzbou’s rolling hills, waterways and peaceful temples. We will wander in traditional small towns and end our tour with an exceptional museum in Shanghai.\n Tunisia (17 days)"
+            },
+            {
+              "paragraphId": "para-2020-bing-reading-a-5",
+              "text": "Join Prof. Pedar Foss on our in-depth Tunisian tour. Tour highlights include the Roman city of Dougga, the underground Numidian capital at Bulla Regia, Roman Sbeitla and the remote areas around Tataouine and Matmata, uique for underground cities. Our journey takes us to picturesque Berber villages and lovely beaches."
+            }
+          ]
+        }
+      },
+      "group-2020-bing-reading-b": {
+        "groupId": "group-2020-bing-reading-b",
+        "groupType": "reading",
+        "title": "Reading B",
+        "questionIds": [
+          "q-2020-bing-024",
+          "q-2020-bing-025",
+          "q-2020-bing-026",
+          "q-2020-bing-027"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2020-bing-reading-b-1",
+              "text": "When Rise of the Planet of the Apes was first shown to the public last month, a group of excited animal activists gathered on Hollywood Boulevard. But they weren’t there to throw red paint on fur-coat-wearing film stars. Instead, one activist, dressed in a full-body monkey suit, had arrived with a sign praising the filmmakers:“Thanks for not using real apes (猿) !”"
+            },
+            {
+              "paragraphId": "para-2020-bing-reading-b-2",
+              "text": "The creative team behind Apes used motion – capture (动作捕捉) technology to create digitalized animals, spending tens of millions of dollars on technology that records an actor’s performance and later processes it with computer graphics to create a final image (图像) . In this case, one of a realisticlooking ape."
+            },
+            {
+              "paragraphId": "para-2020-bing-reading-b-3",
+              "text": "Yet Apes is more exception than the rule. In fact, Hollywood has been hot on live animals lately. One nonprofit organization, which monitors the treatment of animals in filmed entertainment, is keeping tabs on more than 2 000 productions this year. Already, a number of films, including Water for Elephants, The Hangover Part Ⅱ and Zookeeper, have drawn the anger of activists who say the creatures acting in them haven’t been treated properly."
+            },
+            {
+              "paragraphId": "para-2020-bing-reading-b-4",
+              "text": "In some cases, it’s not so much the treatment of the animals on set in the studio that has activists worried; it’s the off-set training and living conditions that are raising concerns. And there are questions about the films made outside the States, which sometimes are not monitored as closely as productions filmed in the States."
+            }
+          ]
+        }
+      },
+      "group-2020-bing-reading-c": {
+        "groupId": "group-2020-bing-reading-c",
+        "groupType": "reading",
+        "title": "Reading C",
+        "questionIds": [
+          "q-2020-bing-028",
+          "q-2020-bing-029",
+          "q-2020-bing-030",
+          "q-2020-bing-031"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2020-bing-reading-c-1",
+              "text": "With the young unable to afford to leave home and the old at risk of isolation (孤独) , more families are choosing to live together."
+            },
+            {
+              "paragraphId": "para-2020-bing-reading-c-2",
+              "text": "The doorway to peace and quiet, for Nick Bright at least, leads straight to his mother-in-law: she lives on the ground floor, while he lives upstairs with his wife and their two daughters."
+            },
+            {
+              "paragraphId": "para-2020-bing-reading-c-3",
+              "text": "Four years ago they all moved into a three-storey Victorian house in Bristol – one of a growing number of multigenerational families in the UK living together under the same roof. They share a front door and a washing machine, but Rita Whitehead has her own kitchen, bathroom, bedroom and living room on the ground floor."
+            },
+            {
+              "paragraphId": "para-2020-bing-reading-c-4",
+              "text": "“We floated the idea to my mum of sharing a house,” says Kathryn Whitehead. Rita cuts in: “We spoke more with Nick because I think it’s a big thing for Nick to live with his mother-in-law.”"
+            },
+            {
+              "paragraphId": "para-2020-bing-reading-c-5",
+              "text": "And what does Nick think? “From my standpoint, it all seems to work very well. Would I recommend it? Yes, I think I would.”"
+            },
+            {
+              "paragraphId": "para-2020-bing-reading-c-6",
+              "text": "It’s hard to tell exactly how many people agree with him, but research indicates that the numbers have been rising for some time. Official reports suggest that the number of households with three generations living together had risen from 325,000 in 2001 to 419,000 in 2013."
+            },
+            {
+              "paragraphId": "para-2020-bing-reading-c-7",
+              "text": "Other varieties of multigenerational family are more common. Some people live with their elderly parents; many more adult children are returning to the family home, if they ever left. It is said that about 20% of 25-34-year-olds live with their parents, compared with 16% in 1991. The total number of all multigenerational households in Britain is thought to be about 1.8 million."
+            },
+            {
+              "paragraphId": "para-2020-bing-reading-c-8",
+              "text": "Stories like that are more common in parts of the world, where multigenerational living is more firmly rooted. In India, particularly outside cities, young women are expected to move in with their husband’s family when they get married."
+            }
+          ]
+        }
+      },
+      "group-2020-bing-reading-d": {
+        "groupId": "group-2020-bing-reading-d",
+        "groupType": "reading",
+        "title": "Reading D",
+        "questionIds": [
+          "q-2020-bing-032",
+          "q-2020-bing-033",
+          "q-2020-bing-034",
+          "q-2020-bing-035"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2020-bing-reading-d-1",
+              "text": "We are the products of evolution, and not just evolution that occurred billions of years ago. As scientists look deeper into our genes (基因) , they are finding examples of human evolution in just the past few thousand years. People in Ethiopian highlands have adapted to living at high altitudes. Cattle-raising people in East Africa and northern Europe have gained a mutation (突变) that helps them digest milk as adults."
+            },
+            {
+              "paragraphId": "para-2020-bing-reading-d-2",
+              "text": "On Thursday in an article published in Cell, a team of researchers reported a new kind of adaptation – not to air or to food, but to the ocean. A group of seadwelling people in Southeast Asia have evolved into better divers. The Bajau, as these people are known, number in the hundreds of thousands in Indonesia, Malaysia and the Philippines. They have traditionally lived on houseboats; in recent times, they’ve also built houses on stilts (支柱) in coastal waters.”They are simply a stranger to the land,” said Rodney C. Jubilado, a University of Hawaii researcher who studies the Bajau."
+            },
+            {
+              "paragraphId": "para-2020-bing-reading-d-3",
+              "text": "Dr. Jubilado first met the Bajau while growing up on Samal Island in the Philippines. They made a living as divers, spearfishing or harvesting shellfish.”We were so amazed that they could stay underwater much longer than us local islanders,” Dr. Jubilado said.”I could see them actually walking under the sea.”"
+            },
+            {
+              "paragraphId": "para-2020-bing-reading-d-4",
+              "text": "In 2015, Melissa Ilardo, then a graduate student in genetics at the University of Copenhagen, heard about the Bajau. She wondered if centuries of diving could have led to the evolution of physical characteristics that made the task easier for them.”It seemed like the perfect chance for natural selection to act on a population,” said Dr. Ilardo. She also said there were likely a number of other genes that help the Bajau dive."
+            }
+          ]
+        }
+      },
+      "group-2020-bing-seven-choices": {
+        "groupId": "group-2020-bing-seven-choices",
+        "groupType": "sevenChoices",
+        "title": "七选五",
+        "questionIds": [
+          "q-2020-bing-036",
+          "q-2020-bing-037",
+          "q-2020-bing-038",
+          "q-2020-bing-039",
+          "q-2020-bing-040"
+        ],
+        "blankIds": [
+          "blank-2020-bing-036",
+          "blank-2020-bing-037",
+          "blank-2020-bing-038",
+          "blank-2020-bing-039",
+          "blank-2020-bing-040"
+        ],
+        "optionBank": [
+          {
+            "label": "A",
+            "text": "This isn’t usual though."
+          },
+          {
+            "label": "B",
+            "text": "It is traditional to bring a gift to a housewarming party."
+          },
+          {
+            "label": "C",
+            "text": "You can also bring food or drinks to share with the other guests."
+          },
+          {
+            "label": "D",
+            "text": "If you’re lucky enough to receive gifts, keep them in a safe place."
+          },
+          {
+            "label": "E",
+            "text": "It also gives people a chance to see what the new home looks like."
+          },
+          {
+            "label": "F",
+            "text": "The best housewarming parties encourage old friends to get together."
+          },
+          {
+            "label": "G",
+            "text": "This was so that the person could keep their home warm for the winter."
+          }
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2020-bing-seven-title",
+              "text": "A housewarming party is a special party to be held when someone buys or moves into a new apartment or house. The person who bought the house or moved is the one who throws the party. The party is a chance for friends and family to congratulate the person on the new home. __36__   And it is a good time to fill the new space with love and hopefully presents."
+            },
+            {
+              "paragraphId": "para-2020-bing-seven-p1",
+              "text": "__37__   Some people register a list of things they want or need for their new home at a local store or stores. Some common things people will put on a gift registry include kitchen tools like knives and things like curtains. Even if there isn’t a registry, a good housewarming gift is something to decorate the new house with, like a piece of art or a plant."
+            },
+            {
+              "paragraphId": "para-2020-bing-seven-p2",
+              "text": "__38__   This is often appreciated since at a housewarming there isn’t a lot of food served. There are usually no planned activities like games at a housewarming party. The host or hostess of the party will, however, probably give all the guests a tour of their new home. Sometimes, because a housewarming party happens shortly after a person moves into their new home, people may be asked to help unpack boxes. __39__"
+            },
+            {
+              "paragraphId": "para-2020-bing-seven-p3",
+              "text": "Housewarming parties get their name from the fact that a long time ago people would actually bring firewood to a new home as a gift. __40__   Now most homes have central heating and don’t use fires to keep warm."
+            }
+          ]
+        }
+      },
+      "group-2020-bing-cloze": {
+        "groupId": "group-2020-bing-cloze",
+        "groupType": "cloze",
+        "title": "完形填空",
+        "questionIds": [
+          "q-2020-bing-041",
+          "q-2020-bing-042",
+          "q-2020-bing-043",
+          "q-2020-bing-044",
+          "q-2020-bing-045",
+          "q-2020-bing-046",
+          "q-2020-bing-047",
+          "q-2020-bing-048",
+          "q-2020-bing-049",
+          "q-2020-bing-050",
+          "q-2020-bing-051",
+          "q-2020-bing-052",
+          "q-2020-bing-053",
+          "q-2020-bing-054",
+          "q-2020-bing-055",
+          "q-2020-bing-056",
+          "q-2020-bing-057",
+          "q-2020-bing-058",
+          "q-2020-bing-059",
+          "q-2020-bing-060"
+        ],
+        "blankIds": [
+          "blank-2020-bing-041",
+          "blank-2020-bing-042",
+          "blank-2020-bing-043",
+          "blank-2020-bing-044",
+          "blank-2020-bing-045",
+          "blank-2020-bing-046",
+          "blank-2020-bing-047",
+          "blank-2020-bing-048",
+          "blank-2020-bing-049",
+          "blank-2020-bing-050",
+          "blank-2020-bing-051",
+          "blank-2020-bing-052",
+          "blank-2020-bing-053",
+          "blank-2020-bing-054",
+          "blank-2020-bing-055",
+          "blank-2020-bing-056",
+          "blank-2020-bing-057",
+          "blank-2020-bing-058",
+          "blank-2020-bing-059",
+          "blank-2020-bing-060"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2020-bing-cloze-title",
+              "text": "As s businesswoman, I care deeply about my customers. But like anyone for whom you feel affection, __41__ can also drive you mad. They’ll come rushing in, __42__ their handbag’s been stolen. They’ll __43__ that they left it in the changing room, create havoc (混乱) and then __44__ it had been in their car all the time. They’ll have out half the __45__ in the shop, and want the only style you don’t have left in a __46__ colour. I do know how upset the shop staff can get, but I try to persuade them to keep __47__ ."
+            },
+            {
+              "paragraphId": "para-2020-bing-cloze-p1",
+              "text": "I remember the first really __48__ customer we had at Covent Garden. She was __49__ absolutely everything, nothing was right and I was rather __50__ that she became a “regular”. After a while, she __51__ for the way she behaved at the beginning. She had split up with her husband the week before, was living in a flat __52__ , and since she’d found it too much to cope with (应对) , she’d taken it out on __53__ people."
+            },
+            {
+              "paragraphId": "para-2020-bing-cloze-p2",
+              "text": "That taught me a valuable __54__ and I pass it on to the people who __55__ in the market. Don’t take it __56__ . If a customer is rude or difficult, just think “Maybe she’s had a row with her husband. Maybe her child’s not __57__ .” Always water it down and don’t let your ego (自我) get __58__ . If you do, you won’ be able to __59__ it and the whole thing develops into an unpleasant scene and that __60__ everyone’s day."
+            }
+          ]
+        }
+      },
+      "group-2020-bing-grammar-fill": {
+        "groupId": "group-2020-bing-grammar-fill",
+        "groupType": "grammarFill",
+        "title": "语法填空",
+        "questionIds": [
+          "q-2020-bing-061",
+          "q-2020-bing-062",
+          "q-2020-bing-063",
+          "q-2020-bing-064",
+          "q-2020-bing-065",
+          "q-2020-bing-066",
+          "q-2020-bing-067",
+          "q-2020-bing-068",
+          "q-2020-bing-069",
+          "q-2020-bing-070"
+        ],
+        "blankIds": [
+          "blank-2020-bing-061",
+          "blank-2020-bing-062",
+          "blank-2020-bing-063",
+          "blank-2020-bing-064",
+          "blank-2020-bing-065",
+          "blank-2020-bing-066",
+          "blank-2020-bing-067",
+          "blank-2020-bing-068",
+          "blank-2020-bing-069",
+          "blank-2020-bing-070"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-2020-bing-grammar-fill-title",
+              "text": "In ancient China lived an artist __61__paintings were almost lifelike. The artist’s reputation had made him proud. One day the emperor wanted to get his portrait (画像) done so he called all great artists to come and present their __62__ (fine) work, so that he could choose the best. The artist was sure he would __63__ (choose) , but when he presented his masterpiece to the emperor’s chief minister, the old man laughed. The wise old man told him to travel to the Li River – perhaps he could learn a little from the greatest artist in the world."
+            },
+            {
+              "paragraphId": "para-2020-bing-grammar-fill-p1",
+              "text": "Filled with __64__ (curious) , the artist packed his bags and left. __65__he asked the villagers on the banks of the river where he could find the legendary (传奇的) artist, they smiled and __66__ (point) down the river. The next morning he hired a boat and set out __67__ (find) the well-known painter. As the small boat moved, __68__ (gentle) along the river he was left speechless by the mountains being silently reflected in the water. He passed milky white waterfalls and mountains in many shades of blue. And when he saw the mists rising from the river and the soft clouds __69__ (surround) the mountain tops, he was reduced to tears. The artist was finally humbled (谦卑) by the greatest artist __70__earth, Mother Nature."
+            }
+          ]
+        }
+      }
+    },
+    "questions": {
+      "q-2020-bing-021": {
+        "questionId": "q-2020-bing-021",
+        "questionNo": 21,
+        "groupId": "group-2020-bing-reading-a",
+        "stem": "What can visitors see in both Classical Provence and Southern Spain?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Historical monuments."
+          },
+          {
+            "label": "B",
+            "text": "Fields of flowers."
+          },
+          {
+            "label": "C",
+            "text": "Van Gogh's paintings."
+          },
+          {
+            "label": "D",
+            "text": "Greek buildings."
+          }
+        ]
+      },
+      "q-2020-bing-022": {
+        "questionId": "q-2020-bing-022",
+        "questionNo": 22,
+        "groupId": "group-2020-bing-reading-a",
+        "stem": "Which country is Prof. Thorp most knowledgeable about?",
+        "options": [
+          {
+            "label": "A",
+            "text": "France."
+          },
+          {
+            "label": "B",
+            "text": "Spain."
+          },
+          {
+            "label": "C",
+            "text": "China."
+          },
+          {
+            "label": "D",
+            "text": "Tunisia."
+          }
+        ]
+      },
+      "q-2020-bing-023": {
+        "questionId": "q-2020-bing-023",
+        "questionNo": 23,
+        "groupId": "group-2020-bing-reading-a",
+        "stem": "Which of the following highlight the Tunisian tour? B",
+        "options": [
+          {
+            "label": "A",
+            "text": "White towns."
+          },
+          {
+            "label": "B",
+            "text": "Underground cities."
+          },
+          {
+            "label": "C",
+            "text": "Tile-roofed villages."
+          },
+          {
+            "label": "D",
+            "text": "Rolling hills."
+          }
+        ]
+      },
+      "q-2020-bing-024": {
+        "questionId": "q-2020-bing-024",
+        "questionNo": 24,
+        "groupId": "group-2020-bing-reading-b",
+        "stem": "Why did the animal activists gather on Hollywood Boulevard?",
+        "options": [
+          {
+            "label": "A",
+            "text": "To see famous film stars."
+          },
+          {
+            "label": "B",
+            "text": "To oppose wearing fur coats."
+          },
+          {
+            "label": "C",
+            "text": "To raise money for animal protection."
+          },
+          {
+            "label": "D",
+            "text": "To express thanks to some filmmakers."
+          }
+        ]
+      },
+      "q-2020-bing-025": {
+        "questionId": "q-2020-bing-025",
+        "questionNo": 25,
+        "groupId": "group-2020-bing-reading-b",
+        "stem": "What does Paragraph 2 mainly talk about?",
+        "options": [
+          {
+            "label": "A",
+            "text": "The cost of making Apes."
+          },
+          {
+            "label": "B",
+            "text": "The creation of digitalized apes."
+          },
+          {
+            "label": "C",
+            "text": "The publicity about Apes."
+          },
+          {
+            "label": "D",
+            "text": "The performance of real apes."
+          }
+        ]
+      },
+      "q-2020-bing-026": {
+        "questionId": "q-2020-bing-026",
+        "questionNo": 26,
+        "groupId": "group-2020-bing-reading-b",
+        "stem": "What does the underlined phrase “keeping tabs on” in Paragraph 3 probably mean?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Listing completely."
+          },
+          {
+            "label": "B",
+            "text": "Directing professionally."
+          },
+          {
+            "label": "C",
+            "text": "Promoting successfully."
+          },
+          {
+            "label": "D",
+            "text": "Watching carefully."
+          }
+        ]
+      },
+      "q-2020-bing-027": {
+        "questionId": "q-2020-bing-027",
+        "questionNo": 27,
+        "groupId": "group-2020-bing-reading-b",
+        "stem": "What can we infer from the last paragraph about animal actors? C",
+        "options": [
+          {
+            "label": "A",
+            "text": "They may be badly treated."
+          },
+          {
+            "label": "B",
+            "text": "They should take further training."
+          },
+          {
+            "label": "C",
+            "text": "They could be traded illegally."
+          },
+          {
+            "label": "D",
+            "text": "They would lose popularity."
+          }
+        ]
+      },
+      "q-2020-bing-028": {
+        "questionId": "q-2020-bing-028",
+        "questionNo": 28,
+        "groupId": "group-2020-bing-reading-c",
+        "stem": "Who mainly uses the ground floor in the Victorian house in Bristol?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Nick."
+          },
+          {
+            "label": "B",
+            "text": "Rita."
+          },
+          {
+            "label": "C",
+            "text": "Kathryn."
+          },
+          {
+            "label": "D",
+            "text": "The daughters."
+          }
+        ]
+      },
+      "q-2020-bing-029": {
+        "questionId": "q-2020-bing-029",
+        "questionNo": 29,
+        "groupId": "group-2020-bing-reading-c",
+        "stem": "What is Nick's attitude towards sharing the house with his mother-in-law?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Positive."
+          },
+          {
+            "label": "B",
+            "text": "Carefree."
+          },
+          {
+            "label": "C",
+            "text": "Tolerant."
+          },
+          {
+            "label": "D",
+            "text": "Unwilling."
+          }
+        ]
+      },
+      "q-2020-bing-030": {
+        "questionId": "q-2020-bing-030",
+        "questionNo": 30,
+        "groupId": "group-2020-bing-reading-c",
+        "stem": "What is the author's statement about multigenerational family based on?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Family traditions."
+          },
+          {
+            "label": "B",
+            "text": "Financial reports."
+          },
+          {
+            "label": "C",
+            "text": "Published statistics."
+          },
+          {
+            "label": "D",
+            "text": "Public opinions."
+          }
+        ]
+      },
+      "q-2020-bing-031": {
+        "questionId": "q-2020-bing-031",
+        "questionNo": 31,
+        "groupId": "group-2020-bing-reading-c",
+        "stem": "What is the text mainly about? D",
+        "options": [
+          {
+            "label": "A",
+            "text": "Lifestyles in different countries."
+          },
+          {
+            "label": "B",
+            "text": "Conflicts between generations."
+          },
+          {
+            "label": "C",
+            "text": "A housing problem in Britain."
+          },
+          {
+            "label": "D",
+            "text": "A rising trend of living in the UK."
+          }
+        ]
+      },
+      "q-2020-bing-032": {
+        "questionId": "q-2020-bing-032",
+        "questionNo": 32,
+        "groupId": "group-2020-bing-reading-d",
+        "stem": "What does the author want to tell us by the examples in Paragraph 1?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Environmental adaptation of cattle raisers."
+          },
+          {
+            "label": "B",
+            "text": "New knowledge of human evolution."
+          },
+          {
+            "label": "C",
+            "text": "Recent findings of human origin."
+          },
+          {
+            "label": "D",
+            "text": "Significance of food selection."
+          }
+        ]
+      },
+      "q-2020-bing-033": {
+        "questionId": "q-2020-bing-033",
+        "questionNo": 33,
+        "groupId": "group-2020-bing-reading-d",
+        "stem": "Where do the Bajau build their houses?",
+        "options": [
+          {
+            "label": "A",
+            "text": "In valleys."
+          },
+          {
+            "label": "B",
+            "text": "Near rivers."
+          },
+          {
+            "label": "C",
+            "text": "On the beach."
+          },
+          {
+            "label": "D",
+            "text": "Off the coast."
+          }
+        ]
+      },
+      "q-2020-bing-034": {
+        "questionId": "q-2020-bing-034",
+        "questionNo": 34,
+        "groupId": "group-2020-bing-reading-d",
+        "stem": "Why was the young Jubilado astonished at the Bajau?",
+        "options": [
+          {
+            "label": "A",
+            "text": "They could walk on stilts all day."
+          },
+          {
+            "label": "B",
+            "text": "They had a superb way of fishing."
+          },
+          {
+            "label": "C",
+            "text": "They could stay long underwater."
+          },
+          {
+            "label": "D",
+            "text": "They lived on both land and water."
+          }
+        ]
+      },
+      "q-2020-bing-035": {
+        "questionId": "q-2020-bing-035",
+        "questionNo": 35,
+        "groupId": "group-2020-bing-reading-d",
+        "stem": "What can be a suitable title for the text?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Bodies Remodeled for a Life at Sea"
+          },
+          {
+            "label": "B",
+            "text": "Highlanders' Survival Skills"
+          },
+          {
+            "label": "C",
+            "text": "Basic Methods of Genetic Research"
+          },
+          {
+            "label": "D",
+            "text": "The World's Best Divers"
+          }
+        ]
+      },
+      "q-2020-bing-036": {
+        "questionId": "q-2020-bing-036",
+        "questionNo": 36,
+        "groupId": "group-2020-bing-seven-choices",
+        "stem": "36",
+        "blankId": "blank-2020-bing-036"
+      },
+      "q-2020-bing-037": {
+        "questionId": "q-2020-bing-037",
+        "questionNo": 37,
+        "groupId": "group-2020-bing-seven-choices",
+        "stem": "37",
+        "blankId": "blank-2020-bing-037"
+      },
+      "q-2020-bing-038": {
+        "questionId": "q-2020-bing-038",
+        "questionNo": 38,
+        "groupId": "group-2020-bing-seven-choices",
+        "stem": "38",
+        "blankId": "blank-2020-bing-038"
+      },
+      "q-2020-bing-039": {
+        "questionId": "q-2020-bing-039",
+        "questionNo": 39,
+        "groupId": "group-2020-bing-seven-choices",
+        "stem": "39",
+        "blankId": "blank-2020-bing-039"
+      },
+      "q-2020-bing-040": {
+        "questionId": "q-2020-bing-040",
+        "questionNo": 40,
+        "groupId": "group-2020-bing-seven-choices",
+        "stem": "40",
+        "blankId": "blank-2020-bing-040"
+      },
+      "q-2020-bing-041": {
+        "questionId": "q-2020-bing-041",
+        "questionNo": 41,
+        "groupId": "group-2020-bing-cloze",
+        "stem": "41",
+        "blankId": "blank-2020-bing-041",
+        "options": [
+          {
+            "label": "A",
+            "text": "shopkeepers"
+          },
+          {
+            "label": "B",
+            "text": "customers"
+          },
+          {
+            "label": "C",
+            "text": "salespersons"
+          },
+          {
+            "label": "D",
+            "text": "receptionists"
+          }
+        ]
+      },
+      "q-2020-bing-042": {
+        "questionId": "q-2020-bing-042",
+        "questionNo": 42,
+        "groupId": "group-2020-bing-cloze",
+        "stem": "42",
+        "blankId": "blank-2020-bing-042",
+        "options": [
+          {
+            "label": "A",
+            "text": "saying"
+          },
+          {
+            "label": "B",
+            "text": "pretending"
+          },
+          {
+            "label": "C",
+            "text": "guessing"
+          },
+          {
+            "label": "D",
+            "text": "replying"
+          }
+        ]
+      },
+      "q-2020-bing-043": {
+        "questionId": "q-2020-bing-043",
+        "questionNo": 43,
+        "groupId": "group-2020-bing-cloze",
+        "stem": "43",
+        "blankId": "blank-2020-bing-043",
+        "options": [
+          {
+            "label": "A",
+            "text": "agree"
+          },
+          {
+            "label": "B",
+            "text": "promise"
+          },
+          {
+            "label": "C",
+            "text": "imagine"
+          },
+          {
+            "label": "D",
+            "text": "swear"
+          }
+        ]
+      },
+      "q-2020-bing-044": {
+        "questionId": "q-2020-bing-044",
+        "questionNo": 44,
+        "groupId": "group-2020-bing-cloze",
+        "stem": "44",
+        "blankId": "blank-2020-bing-044",
+        "options": [
+          {
+            "label": "A",
+            "text": "forget"
+          },
+          {
+            "label": "B",
+            "text": "decide"
+          },
+          {
+            "label": "C",
+            "text": "discover"
+          },
+          {
+            "label": "D",
+            "text": "assume"
+          }
+        ]
+      },
+      "q-2020-bing-045": {
+        "questionId": "q-2020-bing-045",
+        "questionNo": 45,
+        "groupId": "group-2020-bing-cloze",
+        "stem": "45",
+        "blankId": "blank-2020-bing-045",
+        "options": [
+          {
+            "label": "A",
+            "text": "foods"
+          },
+          {
+            "label": "B",
+            "text": "catalogues"
+          },
+          {
+            "label": "C",
+            "text": "belongings"
+          },
+          {
+            "label": "D",
+            "text": "goods"
+          }
+        ]
+      },
+      "q-2020-bing-046": {
+        "questionId": "q-2020-bing-046",
+        "questionNo": 46,
+        "groupId": "group-2020-bing-cloze",
+        "stem": "46",
+        "blankId": "blank-2020-bing-046",
+        "options": [
+          {
+            "label": "A",
+            "text": "particular"
+          },
+          {
+            "label": "B",
+            "text": "different"
+          },
+          {
+            "label": "C",
+            "text": "matching"
+          },
+          {
+            "label": "D",
+            "text": "natural"
+          }
+        ]
+      },
+      "q-2020-bing-047": {
+        "questionId": "q-2020-bing-047",
+        "questionNo": 47,
+        "groupId": "group-2020-bing-cloze",
+        "stem": "47",
+        "blankId": "blank-2020-bing-047",
+        "options": [
+          {
+            "label": "A",
+            "text": "fighting"
+          },
+          {
+            "label": "B",
+            "text": "smiling"
+          },
+          {
+            "label": "C",
+            "text": "waiting"
+          },
+          {
+            "label": "D",
+            "text": "changing"
+          }
+        ]
+      },
+      "q-2020-bing-048": {
+        "questionId": "q-2020-bing-048",
+        "questionNo": 48,
+        "groupId": "group-2020-bing-cloze",
+        "stem": "48",
+        "blankId": "blank-2020-bing-048",
+        "options": [
+          {
+            "label": "A",
+            "text": "generous"
+          },
+          {
+            "label": "B",
+            "text": "polite"
+          },
+          {
+            "label": "C",
+            "text": "careless"
+          },
+          {
+            "label": "D",
+            "text": "difficult"
+          }
+        ]
+      },
+      "q-2020-bing-049": {
+        "questionId": "q-2020-bing-049",
+        "questionNo": 49,
+        "groupId": "group-2020-bing-cloze",
+        "stem": "49",
+        "blankId": "blank-2020-bing-049",
+        "options": [
+          {
+            "label": "A",
+            "text": "curious about"
+          },
+          {
+            "label": "B",
+            "text": "displeased with"
+          },
+          {
+            "label": "C",
+            "text": "patient with"
+          },
+          {
+            "label": "D",
+            "text": "uncertain about"
+          }
+        ]
+      },
+      "q-2020-bing-050": {
+        "questionId": "q-2020-bing-050",
+        "questionNo": 50,
+        "groupId": "group-2020-bing-cloze",
+        "stem": "50",
+        "blankId": "blank-2020-bing-050",
+        "options": [
+          {
+            "label": "A",
+            "text": "relaxed"
+          },
+          {
+            "label": "B",
+            "text": "delighted"
+          },
+          {
+            "label": "C",
+            "text": "surprised"
+          },
+          {
+            "label": "D",
+            "text": "embarrassed"
+          }
+        ]
+      },
+      "q-2020-bing-051": {
+        "questionId": "q-2020-bing-051",
+        "questionNo": 51,
+        "groupId": "group-2020-bing-cloze",
+        "stem": "51",
+        "blankId": "blank-2020-bing-051",
+        "options": [
+          {
+            "label": "A",
+            "text": "searched"
+          },
+          {
+            "label": "B",
+            "text": "argued"
+          },
+          {
+            "label": "C",
+            "text": "prayed"
+          },
+          {
+            "label": "D",
+            "text": "apologized"
+          }
+        ]
+      },
+      "q-2020-bing-052": {
+        "questionId": "q-2020-bing-052",
+        "questionNo": 52,
+        "groupId": "group-2020-bing-cloze",
+        "stem": "52",
+        "blankId": "blank-2020-bing-052",
+        "options": [
+          {
+            "label": "A",
+            "text": "by chance"
+          },
+          {
+            "label": "B",
+            "text": "by herself"
+          },
+          {
+            "label": "C",
+            "text": "on purpose"
+          },
+          {
+            "label": "D",
+            "text": "on duty"
+          }
+        ]
+      },
+      "q-2020-bing-053": {
+        "questionId": "q-2020-bing-053",
+        "questionNo": 53,
+        "groupId": "group-2020-bing-cloze",
+        "stem": "53",
+        "blankId": "blank-2020-bing-053",
+        "options": [
+          {
+            "label": "A",
+            "text": "rude"
+          },
+          {
+            "label": "B",
+            "text": "such"
+          },
+          {
+            "label": "C",
+            "text": "other"
+          },
+          {
+            "label": "D",
+            "text": "lonely"
+          }
+        ]
+      },
+      "q-2020-bing-054": {
+        "questionId": "q-2020-bing-054",
+        "questionNo": 54,
+        "groupId": "group-2020-bing-cloze",
+        "stem": "54",
+        "blankId": "blank-2020-bing-054",
+        "options": [
+          {
+            "label": "A",
+            "text": "lesson"
+          },
+          {
+            "label": "B",
+            "text": "trick"
+          },
+          {
+            "label": "C",
+            "text": "skill"
+          },
+          {
+            "label": "D",
+            "text": "trade"
+          }
+        ]
+      },
+      "q-2020-bing-055": {
+        "questionId": "q-2020-bing-055",
+        "questionNo": 55,
+        "groupId": "group-2020-bing-cloze",
+        "stem": "55",
+        "blankId": "blank-2020-bing-055",
+        "options": [
+          {
+            "label": "A",
+            "text": "work"
+          },
+          {
+            "label": "B",
+            "text": "shop"
+          },
+          {
+            "label": "C",
+            "text": "meet"
+          },
+          {
+            "label": "D",
+            "text": "quarrel"
+          }
+        ]
+      },
+      "q-2020-bing-056": {
+        "questionId": "q-2020-bing-056",
+        "questionNo": 56,
+        "groupId": "group-2020-bing-cloze",
+        "stem": "56",
+        "blankId": "blank-2020-bing-056",
+        "options": [
+          {
+            "label": "A",
+            "text": "kindly"
+          },
+          {
+            "label": "B",
+            "text": "secretly"
+          },
+          {
+            "label": "C",
+            "text": "personally"
+          },
+          {
+            "label": "D",
+            "text": "casually"
+          }
+        ]
+      },
+      "q-2020-bing-057": {
+        "questionId": "q-2020-bing-057",
+        "questionNo": 57,
+        "groupId": "group-2020-bing-cloze",
+        "stem": "57",
+        "blankId": "blank-2020-bing-057",
+        "options": [
+          {
+            "label": "A",
+            "text": "ready"
+          },
+          {
+            "label": "B",
+            "text": "away"
+          },
+          {
+            "label": "C",
+            "text": "up"
+          },
+          {
+            "label": "D",
+            "text": "well"
+          }
+        ]
+      },
+      "q-2020-bing-058": {
+        "questionId": "q-2020-bing-058",
+        "questionNo": 58,
+        "groupId": "group-2020-bing-cloze",
+        "stem": "58",
+        "blankId": "blank-2020-bing-058",
+        "options": [
+          {
+            "label": "A",
+            "text": "out of sight"
+          },
+          {
+            "label": "B",
+            "text": "in the way"
+          },
+          {
+            "label": "C",
+            "text": "behind the scene"
+          },
+          {
+            "label": "D",
+            "text": "above the law"
+          }
+        ]
+      },
+      "q-2020-bing-059": {
+        "questionId": "q-2020-bing-059",
+        "questionNo": 59,
+        "groupId": "group-2020-bing-cloze",
+        "stem": "59",
+        "blankId": "blank-2020-bing-059",
+        "options": [
+          {
+            "label": "A",
+            "text": "stress"
+          },
+          {
+            "label": "B",
+            "text": "expect"
+          },
+          {
+            "label": "C",
+            "text": "handle"
+          },
+          {
+            "label": "D",
+            "text": "blame"
+          }
+        ]
+      },
+      "q-2020-bing-060": {
+        "questionId": "q-2020-bing-060",
+        "questionNo": 60,
+        "groupId": "group-2020-bing-cloze",
+        "stem": "60",
+        "blankId": "blank-2020-bing-060",
+        "options": [
+          {
+            "label": "A",
+            "text": "ruins"
+          },
+          {
+            "label": "B",
+            "text": "makes"
+          },
+          {
+            "label": "C",
+            "text": "starts"
+          },
+          {
+            "label": "D",
+            "text": "saves"
+          }
+        ]
+      },
+      "q-2020-bing-061": {
+        "questionId": "q-2020-bing-061",
+        "questionNo": 61,
+        "groupId": "group-2020-bing-grammar-fill",
+        "stem": "61",
+        "blankId": "blank-2020-bing-061"
+      },
+      "q-2020-bing-062": {
+        "questionId": "q-2020-bing-062",
+        "questionNo": 62,
+        "groupId": "group-2020-bing-grammar-fill",
+        "stem": "62",
+        "blankId": "blank-2020-bing-062"
+      },
+      "q-2020-bing-063": {
+        "questionId": "q-2020-bing-063",
+        "questionNo": 63,
+        "groupId": "group-2020-bing-grammar-fill",
+        "stem": "63",
+        "blankId": "blank-2020-bing-063"
+      },
+      "q-2020-bing-064": {
+        "questionId": "q-2020-bing-064",
+        "questionNo": 64,
+        "groupId": "group-2020-bing-grammar-fill",
+        "stem": "64",
+        "blankId": "blank-2020-bing-064"
+      },
+      "q-2020-bing-065": {
+        "questionId": "q-2020-bing-065",
+        "questionNo": 65,
+        "groupId": "group-2020-bing-grammar-fill",
+        "stem": "65",
+        "blankId": "blank-2020-bing-065"
+      },
+      "q-2020-bing-066": {
+        "questionId": "q-2020-bing-066",
+        "questionNo": 66,
+        "groupId": "group-2020-bing-grammar-fill",
+        "stem": "66",
+        "blankId": "blank-2020-bing-066"
+      },
+      "q-2020-bing-067": {
+        "questionId": "q-2020-bing-067",
+        "questionNo": 67,
+        "groupId": "group-2020-bing-grammar-fill",
+        "stem": "67",
+        "blankId": "blank-2020-bing-067"
+      },
+      "q-2020-bing-068": {
+        "questionId": "q-2020-bing-068",
+        "questionNo": 68,
+        "groupId": "group-2020-bing-grammar-fill",
+        "stem": "68",
+        "blankId": "blank-2020-bing-068"
+      },
+      "q-2020-bing-069": {
+        "questionId": "q-2020-bing-069",
+        "questionNo": 69,
+        "groupId": "group-2020-bing-grammar-fill",
+        "stem": "69",
+        "blankId": "blank-2020-bing-069"
+      },
+      "q-2020-bing-070": {
+        "questionId": "q-2020-bing-070",
+        "questionNo": 70,
+        "groupId": "group-2020-bing-grammar-fill",
+        "stem": "70",
+        "blankId": "blank-2020-bing-070"
+      }
+    },
+    "blanks": {
+      "blank-2020-bing-061": {
+        "blankId": "blank-2020-bing-061",
+        "groupId": "group-2020-bing-grammar-fill",
+        "questionId": "q-2020-bing-061"
+      },
+      "blank-2020-bing-062": {
+        "blankId": "blank-2020-bing-062",
+        "groupId": "group-2020-bing-grammar-fill",
+        "questionId": "q-2020-bing-062",
+        "prompt": "fine"
+      },
+      "blank-2020-bing-063": {
+        "blankId": "blank-2020-bing-063",
+        "groupId": "group-2020-bing-grammar-fill",
+        "questionId": "q-2020-bing-063",
+        "prompt": "choose"
+      },
+      "blank-2020-bing-064": {
+        "blankId": "blank-2020-bing-064",
+        "groupId": "group-2020-bing-grammar-fill",
+        "questionId": "q-2020-bing-064",
+        "prompt": "curious"
+      },
+      "blank-2020-bing-065": {
+        "blankId": "blank-2020-bing-065",
+        "groupId": "group-2020-bing-grammar-fill",
+        "questionId": "q-2020-bing-065"
+      },
+      "blank-2020-bing-066": {
+        "blankId": "blank-2020-bing-066",
+        "groupId": "group-2020-bing-grammar-fill",
+        "questionId": "q-2020-bing-066",
+        "prompt": "point"
+      },
+      "blank-2020-bing-067": {
+        "blankId": "blank-2020-bing-067",
+        "groupId": "group-2020-bing-grammar-fill",
+        "questionId": "q-2020-bing-067",
+        "prompt": "find"
+      },
+      "blank-2020-bing-068": {
+        "blankId": "blank-2020-bing-068",
+        "groupId": "group-2020-bing-grammar-fill",
+        "questionId": "q-2020-bing-068",
+        "prompt": "gentle"
+      },
+      "blank-2020-bing-069": {
+        "blankId": "blank-2020-bing-069",
+        "groupId": "group-2020-bing-grammar-fill",
+        "questionId": "q-2020-bing-069",
+        "prompt": "surround"
+      },
+      "blank-2020-bing-070": {
+        "blankId": "blank-2020-bing-070",
+        "groupId": "group-2020-bing-grammar-fill",
+        "questionId": "q-2020-bing-070"
+      }
+    }
+  },
+  "answerKey": {
+    "answers": {
+      "q-2020-bing-021": {
+        "questionId": "q-2020-bing-021",
+        "questionNo": 21,
+        "answer": "A",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-bing-022": {
+        "questionId": "q-2020-bing-022",
+        "questionNo": 22,
+        "answer": "C",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-bing-023": {
+        "questionId": "q-2020-bing-023",
+        "questionNo": 23,
+        "answer": "B",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-bing-024": {
+        "questionId": "q-2020-bing-024",
+        "questionNo": 24,
+        "answer": "D",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-bing-025": {
+        "questionId": "q-2020-bing-025",
+        "questionNo": 25,
+        "answer": "B",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-bing-026": {
+        "questionId": "q-2020-bing-026",
+        "questionNo": 26,
+        "answer": "D",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-bing-027": {
+        "questionId": "q-2020-bing-027",
+        "questionNo": 27,
+        "answer": "A",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-bing-028": {
+        "questionId": "q-2020-bing-028",
+        "questionNo": 28,
+        "answer": "B",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-bing-029": {
+        "questionId": "q-2020-bing-029",
+        "questionNo": 29,
+        "answer": "A",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-bing-030": {
+        "questionId": "q-2020-bing-030",
+        "questionNo": 30,
+        "answer": "C",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-bing-031": {
+        "questionId": "q-2020-bing-031",
+        "questionNo": 31,
+        "answer": "D",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-bing-032": {
+        "questionId": "q-2020-bing-032",
+        "questionNo": 32,
+        "answer": "B",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-bing-033": {
+        "questionId": "q-2020-bing-033",
+        "questionNo": 33,
+        "answer": "D",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-bing-034": {
+        "questionId": "q-2020-bing-034",
+        "questionNo": 34,
+        "answer": "C",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-bing-035": {
+        "questionId": "q-2020-bing-035",
+        "questionNo": 35,
+        "answer": "A",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-bing-036": {
+        "questionId": "q-2020-bing-036",
+        "questionNo": 36,
+        "answer": "E",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-bing-037": {
+        "questionId": "q-2020-bing-037",
+        "questionNo": 37,
+        "answer": "B",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-bing-038": {
+        "questionId": "q-2020-bing-038",
+        "questionNo": 38,
+        "answer": "C",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-bing-039": {
+        "questionId": "q-2020-bing-039",
+        "questionNo": 39,
+        "answer": "A",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-bing-040": {
+        "questionId": "q-2020-bing-040",
+        "questionNo": 40,
+        "answer": "G",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-bing-041": {
+        "questionId": "q-2020-bing-041",
+        "questionNo": 41,
+        "answer": "B",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-bing-042": {
+        "questionId": "q-2020-bing-042",
+        "questionNo": 42,
+        "answer": "A",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-bing-043": {
+        "questionId": "q-2020-bing-043",
+        "questionNo": 43,
+        "answer": "D",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-bing-044": {
+        "questionId": "q-2020-bing-044",
+        "questionNo": 44,
+        "answer": "C",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-bing-045": {
+        "questionId": "q-2020-bing-045",
+        "questionNo": 45,
+        "answer": "D",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-bing-046": {
+        "questionId": "q-2020-bing-046",
+        "questionNo": 46,
+        "answer": "A",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-bing-047": {
+        "questionId": "q-2020-bing-047",
+        "questionNo": 47,
+        "answer": "B",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-bing-048": {
+        "questionId": "q-2020-bing-048",
+        "questionNo": 48,
+        "answer": "D",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-bing-049": {
+        "questionId": "q-2020-bing-049",
+        "questionNo": 49,
+        "answer": "B",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-bing-050": {
+        "questionId": "q-2020-bing-050",
+        "questionNo": 50,
+        "answer": "C",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-bing-051": {
+        "questionId": "q-2020-bing-051",
+        "questionNo": 51,
+        "answer": "D",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-bing-052": {
+        "questionId": "q-2020-bing-052",
+        "questionNo": 52,
+        "answer": "B",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-bing-053": {
+        "questionId": "q-2020-bing-053",
+        "questionNo": 53,
+        "answer": "C",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-bing-054": {
+        "questionId": "q-2020-bing-054",
+        "questionNo": 54,
+        "answer": "A",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-bing-055": {
+        "questionId": "q-2020-bing-055",
+        "questionNo": 55,
+        "answer": "A",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-bing-056": {
+        "questionId": "q-2020-bing-056",
+        "questionNo": 56,
+        "answer": "C",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-bing-057": {
+        "questionId": "q-2020-bing-057",
+        "questionNo": 57,
+        "answer": "D",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-bing-058": {
+        "questionId": "q-2020-bing-058",
+        "questionNo": 58,
+        "answer": "B",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-bing-059": {
+        "questionId": "q-2020-bing-059",
+        "questionNo": 59,
+        "answer": "C",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-bing-060": {
+        "questionId": "q-2020-bing-060",
+        "questionNo": 60,
+        "answer": "A",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-bing-061": {
+        "questionId": "q-2020-bing-061",
+        "questionNo": 61,
+        "answer": "whose",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-bing-062": {
+        "questionId": "q-2020-bing-062",
+        "questionNo": 62,
+        "answer": "finest",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-bing-063": {
+        "questionId": "q-2020-bing-063",
+        "questionNo": 63,
+        "answer": "be chosen",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-bing-064": {
+        "questionId": "q-2020-bing-064",
+        "questionNo": 64,
+        "answer": "curiosity",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-bing-065": {
+        "questionId": "q-2020-bing-065",
+        "questionNo": 65,
+        "answer": "When,As",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-bing-066": {
+        "questionId": "q-2020-bing-066",
+        "questionNo": 66,
+        "answer": "pointed",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-bing-067": {
+        "questionId": "q-2020-bing-067",
+        "questionNo": 67,
+        "answer": "to find",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-bing-068": {
+        "questionId": "q-2020-bing-068",
+        "questionNo": 68,
+        "answer": "gently",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-bing-069": {
+        "questionId": "q-2020-bing-069",
+        "questionNo": 69,
+        "answer": "surrounding",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-2020-bing-070": {
+        "questionId": "q-2020-bing-070",
+        "questionNo": 70,
+        "answer": "on",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      }
+    }
+  },
+  "analysis": {
+    "meta": {
+      "generatedBy": "external-ai",
+      "promptVersion": "reading-choice-analysis-v1",
+      "reviewStatus": "reviewed",
+      "importMode": "paper-import-ai",
+      "model": "claude-opus-4-8",
+      "reviewedBy": "claude-opus-4-8",
+      "reviewedAt": "2026-06-19T00:00:00Z"
+    },
+    "groups": {
+      "group-2020-bing-reading-a": {
+        "overview": "一则学者带队的文化旅游广告，介绍四条以历史古迹与人文景观为主题的深度游线路：法国普罗旺斯、西班牙南部、中国与突尼斯，每条线路由一位教授带队。",
+        "discourseStructure": {
+          "summary": "总-分式应用文广告：标题点明主题（与学者一起穿越时光），随后并列介绍四条旅游线路，每段一条线路，给出天数、带队教授和主要看点。",
+          "paragraphs": [
+            {
+              "paragraphId": "para-2020-bing-reading-a-1",
+              "summary": "广告主标题，并引出第一条线路“经典普罗旺斯（13天）”。",
+              "function": "标题，点明旅游产品主题并开启首条线路。"
+            },
+            {
+              "paragraphId": "para-2020-bing-reading-a-2",
+              "summary": "介绍普罗旺斯线路：由 Soltes 教授带队，游览世界上保存最完好的罗马古迹，重走梵高与高更的足迹，并引出“西班牙南部（15天）”。",
+              "function": "分述第一条线路的看点，并衔接第二条线路。"
+            },
+            {
+              "paragraphId": "para-2020-bing-reading-a-3",
+              "summary": "介绍西班牙南部线路：由 Messier 教授带队，西班牙拥有古迹宝库，含希腊人、罗马人和阿拉伯人留下的城市，探访历史古迹与建筑，并引出“中国神圣景观（21天）”。",
+              "function": "分述第二条线路的看点，并衔接第三条线路。"
+            },
+            {
+              "paragraphId": "para-2020-bing-reading-a-4",
+              "summary": "介绍中国线路：由 Robert Thorp 教授带队，探寻古城、寺庙与山景，看点包括泰山与杭州的山水寺庙，最后参观上海博物馆，并引出“突尼斯（17天）”。",
+              "function": "分述第三条线路的看点，并衔接第四条线路。"
+            },
+            {
+              "paragraphId": "para-2020-bing-reading-a-5",
+              "summary": "介绍突尼斯线路：由 Foss 教授带队，看点包括多处罗马古城、地下努米底亚都城，以及以地下城著称的 Tataouine 和 Matmata 地区，还有柏柏尔村庄与海滩。",
+              "function": "分述第四条线路的看点，收束全文。"
+            }
+          ]
+        }
+      },
+      "group-2020-bing-reading-b": {
+        "overview": "本文讨论好莱坞电影中动物的使用问题。以《猩球崛起》采用动作捕捉技术制作数字猿类、避免使用真实动物为引子，对比指出好莱坞近来仍大量使用真实活体动物，并引发动物保护组织对动物待遇（尤其是片场外训练与生活条件、以及海外拍摄缺乏监管）的担忧。",
+        "discourseStructure": {
+          "summary": "由具体事件（动物保护者在好莱坞大道集会致谢）引入，先介绍《猩球崛起》的技术做法，再转折指出该片只是例外、好莱坞仍偏好真实动物并引发争议，最后聚焦争议的具体来源——片场外条件与海外拍摄监管问题。",
+          "paragraphs": [
+            {
+              "paragraphId": "para-2020-bing-reading-b-1",
+              "summary": "《猩球崛起》上映时，一群动物保护者聚集在好莱坞大道，并非抗议，而是举牌感谢制片方没有使用真实的猿类。",
+              "function": "以具体场景切入，引出全文话题：电影中是否使用真实动物。"
+            },
+            {
+              "paragraphId": "para-2020-bing-reading-b-2",
+              "summary": "介绍《猩球崛起》幕后团队采用动作捕捉技术，花费数千万美元，将演员表演记录后用电脑图形处理，制作出逼真的数字化猿类形象。",
+              "function": "说明该片制作数字化动物的技术手段。"
+            },
+            {
+              "paragraphId": "para-2020-bing-reading-b-3",
+              "summary": "转折指出《猩球崛起》只是例外，好莱坞近来仍热衷使用活体动物；某非营利组织今年监管两千多部作品，已有多部影片因动物待遇问题激起保护者的愤怒。",
+              "function": "转折，揭示行业现状与争议。"
+            },
+            {
+              "paragraphId": "para-2020-bing-reading-b-4",
+              "summary": "指出令保护者担忧的往往不是片场内的待遇，而是片场外的训练与生活条件；并提出在美国境外拍摄的影片监管不如本土严格的问题。",
+              "function": "深入剖析争议的具体来源，收束全文。"
+            }
+          ]
+        }
+      },
+      "group-2020-bing-reading-c": {
+        "overview": "本文是一篇说明文，介绍英国多代同堂家庭（multigenerational families）的兴起。先以 Nick Bright 一家与岳母 Rita 同住的案例引入，再用官方数据和统计说明这一居住趋势正在上升。",
+        "discourseStructure": {
+          "summary": "文章由具体案例切入，过渡到当事人态度，再用官方报告与统计数据支撑趋势判断，最后简要提及世界其他地区多代同堂的情况。",
+          "paragraphs": [
+            {
+              "paragraphId": "para-2020-bing-reading-c-1",
+              "summary": "年轻人无力搬离、老年人面临孤独风险，越来越多家庭选择同住。",
+              "function": "开篇点出社会背景与文章主题——多代同堂家庭增多。"
+            },
+            {
+              "paragraphId": "para-2020-bing-reading-c-2",
+              "summary": "引入 Nick Bright 一家：岳母住一楼，他与妻子及两个女儿住楼上。",
+              "function": "以具体家庭案例引出多代同堂的居住安排。"
+            },
+            {
+              "paragraphId": "para-2020-bing-reading-c-3",
+              "summary": "四年前全家搬入布里斯托尔一栋三层维多利亚式房屋；共用前门和洗衣机，但 Rita 在一楼有独立的厨房、卫生间、卧室和起居室。",
+              "function": "补充居住细节，说明同住但保留各自空间。"
+            },
+            {
+              "paragraphId": "para-2020-bing-reading-c-4",
+              "summary": "Kathryn 说他们向母亲提出合住的想法，Rita 补充说更多是与 Nick 沟通，因为与岳母同住对 Nick 是件大事。",
+              "function": "呈现家庭成员对合住决定的讨论过程。"
+            },
+            {
+              "paragraphId": "para-2020-bing-reading-c-5",
+              "summary": "Nick 表示从他的角度看一切运转良好，并表示愿意推荐这种方式。",
+              "function": "给出当事人 Nick 的正面态度。"
+            },
+            {
+              "paragraphId": "para-2020-bing-reading-c-6",
+              "summary": "难以确切统计有多少人认同，但研究表明相关数字一段时间以来一直在上升；官方报告显示三代同堂家庭数由 2001 年的 32.5 万升至 2013 年的 41.9 万。",
+              "function": "用官方报告与统计数据支撑趋势上升的判断。"
+            },
+            {
+              "paragraphId": "para-2020-bing-reading-c-7",
+              "summary": "其他形式的多代同堂更常见；约 20% 的 25-34 岁人群与父母同住，高于 1991 年的 16%；英国多代同堂家庭总数约 180 万。",
+              "function": "用更多统计数据进一步说明多代同堂的普遍性与增长。"
+            },
+            {
+              "paragraphId": "para-2020-bing-reading-c-8",
+              "summary": "类似情形在多代同堂传统更根深蒂固的地区更常见，如印度城市以外，年轻女性婚后通常搬入丈夫家。",
+              "function": "拓展到世界其他地区，作为补充对比收尾。"
+            }
+          ]
+        }
+      },
+      "group-2020-bing-reading-d": {
+        "overview": "本文是一篇科普说明文，介绍人类近几千年来仍在进行的进化，重点报道东南亚巴瑶族（the Bajau）为适应海洋生活而进化出更强潜水能力的研究发现。",
+        "discourseStructure": {
+          "summary": "文章先以多个例子引出'人类至今仍在进化'这一新认知，再聚焦巴瑶族这一海上民族适应海洋的具体案例，通过研究者的亲历观察和遗传学研究层层展开。",
+          "paragraphs": [
+            {
+              "paragraphId": "para-2020-bing-reading-d-1",
+              "summary": "以埃塞俄比亚高原居民适应高海拔、东非和北欧养牛民族产生消化牛奶的突变为例，说明人类在过去几千年里仍在发生进化。",
+              "function": "引出全文主旨：人类进化至今仍在继续，并通过实例提供新认知。"
+            },
+            {
+              "paragraphId": "para-2020-bing-reading-d-2",
+              "summary": "介绍《细胞》杂志发表的研究：东南亚海上民族巴瑶族进化成更优秀的潜水者；说明其人口分布、传统居住方式（住船屋、在沿海水域用支柱建房）。",
+              "function": "由总到分，引入核心研究对象巴瑶族及其适应海洋的背景。"
+            },
+            {
+              "paragraphId": "para-2020-bing-reading-d-3",
+              "summary": "研究者Jubilado回忆儿时在菲律宾萨马尔岛初遇巴瑶族，惊讶于他们能在水下停留远比当地人久，仿佛在海底行走。",
+              "function": "用研究者的亲历观察，生动佐证巴瑶族超常的潜水能力。"
+            },
+            {
+              "paragraphId": "para-2020-bing-reading-d-4",
+              "summary": "2015年遗传学研究生Ilardo得知巴瑶族后，推测数百年潜水可能促成有利于潜水的身体特征进化，认为这是自然选择作用于人群的绝佳案例。",
+              "function": "从遗传学研究角度收束全文，将巴瑶族潜水能力与自然选择和基因进化关联。"
+            }
+          ]
+        }
+      }
+    },
+    "questions": {
+      "q-2020-bing-021": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查跨段对比细节：普罗旺斯与西班牙南部两条线路共同能看到的事物。",
+        "stemTranslationZh": "游客在经典普罗旺斯和西班牙南部都能看到什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "历史古迹。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2020-bing-reading-a-2",
+                "quote": "We will visit some of the best-preserved Roman monuments in the world.",
+                "anchor": "普罗旺斯：保存最完好的罗马古迹"
+              },
+              {
+                "role": "secondary",
+                "paragraphId": "para-2020-bing-reading-a-3",
+                "quote": "it is also a treasury of ancient remains including the cities left by the Greeks, Romans and Arabs",
+                "anchor": "西班牙：古迹宝库"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "花田。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "Fields of flowers, tile-roofed (瓦屋顶) villages and tasty meals enrich this wonderful experience.",
+              "sourceEntity": "Fields of flowers（仅普罗旺斯线路提及）",
+              "optionText": "Fields of flowers.",
+              "optionEntity": "Fields of flowers（被当作两条线路共有）",
+              "explanation": "花田只在普罗旺斯线路中出现，西班牙南部段并未提及花田，不满足“两地都能看到”的设问要求。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "梵高的画作。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overstatement",
+              "sourceQuote": "Our tour also includes a chance to walk in the footsteps of Van Gogh and Gauguin.",
+              "sourceHighlight": "walk in the footsteps of Van Gogh and Gauguin",
+              "optionText": "Van Gogh's paintings.",
+              "optionHighlight": "Van Gogh's paintings",
+              "explanation": "原文只说在普罗旺斯能“重走梵高与高更的足迹”，并未说能看到梵高的画作，且此项仅属普罗旺斯一地，被夸大为两地共有的看点。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "希腊建筑。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "including the cities left by the Greeks, Romans and Arabs",
+              "sourceEntity": "cities left by the Greeks（仅西班牙线路提及希腊人）",
+              "optionText": "Greek buildings.",
+              "optionEntity": "Greek buildings（被当作两地共有）",
+              "explanation": "希腊人留下的城市只在西班牙南部段提及，普罗旺斯段并未提到希腊建筑，不满足两地共有的条件。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Historical monuments.",
+            "sourceRole": "correctOption",
+            "targetText": "best-preserved Roman monuments",
+            "targetParagraphId": "para-2020-bing-reading-a-2",
+            "relationType": "paraphrase",
+            "note": "选项 Historical monuments 对应普罗旺斯段的 best-preserved Roman monuments，Roman monuments 即历史古迹。"
+          },
+          {
+            "sourceText": "Historical monuments.",
+            "sourceRole": "correctOption",
+            "targetText": "a treasury of ancient remains",
+            "targetParagraphId": "para-2020-bing-reading-a-3",
+            "relationType": "paraphrase",
+            "note": "西班牙段的 a treasury of ancient remains（古迹宝库）同样指向 historical monuments，与普罗旺斯共同构成两地皆有古迹的依据。"
+          }
+        ]
+      },
+      "q-2020-bing-022": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查细节定位：Thorp 教授最熟悉/带队前往的是哪个国家。",
+        "stemTranslationZh": "Thorp 教授对哪个国家最为了解？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "法国。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "Journey through the beautiful countryside of Provence, France, with Prof. Ori Z. Soltes.",
+              "sourceEntity": "France 对应 Prof. Ori Z. Soltes",
+              "optionText": "France.",
+              "optionEntity": "France 被错配给 Prof. Thorp",
+              "explanation": "法国（普罗旺斯）线路的带队者是 Soltes 教授，不是 Thorp 教授，属于教授与国家的错配。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "西班牙。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "As we travel south from Madrid with Prof. Ronald Messier to historic Toledo, Roman Merida and into Andalucia, we explore historical monuments and architecture.",
+              "sourceEntity": "Spain 对应 Prof. Ronald Messier",
+              "optionText": "Spain.",
+              "optionEntity": "Spain 被错配给 Prof. Thorp",
+              "explanation": "西班牙南部线路由 Messier 教授带队，并非 Thorp 教授。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "中国。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2020-bing-reading-a-4",
+                "quote": "Discover the China of “past ages,” its walled cities, temples and mountain scenery with Prof. Robert Thorp.",
+                "anchor": "中国线路由 Thorp 教授带队"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "突尼斯。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "Join Prof. Pedar Foss on our in-depth Tunisian tour.",
+              "sourceEntity": "Tunisia 对应 Prof. Pedar Foss",
+              "optionText": "Tunisia.",
+              "optionEntity": "Tunisia 被错配给 Prof. Thorp",
+              "explanation": "突尼斯线路的带队者是 Foss 教授，不是 Thorp 教授。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Prof. Thorp",
+            "sourceRole": "stem",
+            "targetText": "with Prof. Robert Thorp",
+            "targetParagraphId": "para-2020-bing-reading-a-4",
+            "relationType": "locationCue",
+            "note": "题干以 Prof. Thorp 为定位词，原文 China’s Sacred Landscapes 段出现 Prof. Robert Thorp，由此锁定其带队国家为中国。"
+          }
+        ]
+      },
+      "q-2020-bing-023": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查突尼斯线路看点的细节定位。",
+        "stemTranslationZh": "下列哪一项是突尼斯之旅的看点？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "白色小镇。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "Spain has lovely white towns and the scent (芳香) of oranges",
+              "sourceEntity": "white towns 属于西班牙",
+              "optionText": "White towns.",
+              "optionEntity": "White towns 被错配给突尼斯",
+              "explanation": "白色小镇是西班牙南部线路的描述，并非突尼斯之旅的看点。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "地下城。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2020-bing-reading-a-5",
+                "quote": "the remote areas around Tataouine and Matmata, uique for underground cities",
+                "anchor": "突尼斯：以地下城著称"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "瓦屋顶村庄。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "Fields of flowers, tile-roofed (瓦屋顶) villages and tasty meals enrich this wonderful experience.",
+              "sourceEntity": "tile-roofed villages 属于普罗旺斯",
+              "optionText": "Tile-roofed villages.",
+              "optionEntity": "Tile-roofed villages 被错配给突尼斯",
+              "explanation": "瓦屋顶村庄是普罗旺斯线路的描述，并非突尼斯之旅的看点。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "起伏的丘陵。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "Highlights (精彩之处) include China’s most sacred peaks at Mount Tai and Hangzbou’s rolling hills, waterways and peaceful temples.",
+              "sourceEntity": "rolling hills 属于中国（杭州）",
+              "optionText": "Rolling hills.",
+              "optionEntity": "Rolling hills 被错配给突尼斯",
+              "explanation": "起伏的丘陵是中国线路中杭州的描述，并非突尼斯之旅的看点。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Underground cities.",
+            "sourceRole": "correctOption",
+            "targetText": "uique for underground cities",
+            "targetParagraphId": "para-2020-bing-reading-a-5",
+            "relationType": "locationCue",
+            "note": "选项 Underground cities 与突尼斯段 Tataouine 和 Matmata 处的 underground cities 直接对应，是该线路的标志性看点。"
+          }
+        ]
+      },
+      "q-2020-bing-024": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查动物保护者聚集在好莱坞大道的原因这一细节。",
+        "stemTranslationZh": "动物保护者为什么聚集在好莱坞大道？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "为了见到著名影星。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "fur-coat-wearing film stars",
+              "optionText": "To see famous film stars.",
+              "matchType": "wordFamily",
+              "relationNote": "原文出现 film stars 仅用于说明保护者并非来向穿皮草的影星泼红漆，选项借用 film stars 一词制造干扰，实际并非聚集目的。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2020-bing-reading-b-1",
+                "quote": "But they weren’t there to throw red paint on fur-coat-wearing film stars.",
+                "anchor": "they weren’t there to throw red paint on film stars"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "为了反对穿皮草大衣。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeAction",
+              "sourceQuote": "But they weren’t there to throw red paint on fur-coat-wearing film stars.",
+              "sourceHighlight": "weren’t there to throw red paint on fur-coat-wearing film stars",
+              "optionText": "To oppose wearing fur coats.",
+              "optionHighlight": "To oppose wearing fur coats",
+              "explanation": "原文明确说他们并不是来向穿皮草的影星泼红漆（即并非来抗议穿皮草），选项却说他们是来反对穿皮草，与原文相反。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2020-bing-reading-b-1",
+                "quote": "But they weren’t there to throw red paint on fur-coat-wearing film stars.",
+                "anchor": "weren’t there to … fur-coat-wearing film stars"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "为了给动物保护募集资金。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "聚集是为了给动物保护募集资金。",
+              "explanation": "原文未提及募集资金一事，属无中生有。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "为了向一些电影制作人表达感谢。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2020-bing-reading-b-1",
+                "quote": "one activist, dressed in a full-body monkey suit, had arrived with a sign praising the filmmakers:“Thanks for not using real apes (猿) !”",
+                "anchor": "a sign praising the filmmakers: Thanks for not using real apes"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "To express thanks to some filmmakers.",
+            "sourceRole": "correctOption",
+            "targetText": "had arrived with a sign praising the filmmakers:“Thanks for not using real apes (猿) !”",
+            "targetParagraphId": "para-2020-bing-reading-b-1",
+            "relationType": "paraphrase",
+            "note": "选项 express thanks to some filmmakers 是原文 a sign praising the filmmakers 与 Thanks for not using real apes 的同义替换。"
+          }
+        ]
+      },
+      "q-2020-bing-025": {
+        "skill": {
+          "primary": "mainIdea"
+        },
+        "questionFocus": "考查第二段的段落主旨。",
+        "stemTranslationZh": "第二段主要讲了什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "制作《猩球崛起》的成本。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "understatement",
+              "sourceQuote": "spending tens of millions of dollars on technology that records an actor’s performance and later processes it with computer graphics to create a final image (图像)",
+              "sourceHighlight": "spending tens of millions of dollars on technology",
+              "optionText": "The cost of making Apes.",
+              "optionHighlight": "The cost of making Apes",
+              "explanation": "段落确实提到花费数千万美元，但这只是说明制作数字猿类技术的一个细节，并非全段主旨；以局部成本细节冒充段落主旨，范围偏窄。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2020-bing-reading-b-2",
+                "quote": "spending tens of millions of dollars on technology that records an actor’s performance and later processes it with computer graphics to create a final image (图像)",
+                "anchor": "spending tens of millions of dollars on technology"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "数字化猿类的制作。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2020-bing-reading-b-2",
+                "quote": "The creative team behind Apes used motion – capture (动作捕捉) technology to create digitalized animals",
+                "anchor": "used motion-capture technology to create digitalized animals"
+              },
+              {
+                "role": "secondary",
+                "paragraphId": "para-2020-bing-reading-b-2",
+                "quote": "In this case, one of a realisticlooking ape.",
+                "anchor": "a realistic-looking ape"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "关于《猩球崛起》的宣传。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "第二段主要讲关于《猩球崛起》的宣传。",
+              "explanation": "原文第二段只谈制作技术，未提及宣传一事，属无中生有。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "真实猿类的表演。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "technology that records an actor’s performance and later processes it with computer graphics to create a final image (图像)",
+              "sourceEntity": "an actor’s performance",
+              "optionText": "The performance of real apes.",
+              "optionEntity": "real apes",
+              "explanation": "第二段记录的是演员（actor）的表演用以生成数字猿类，并非真实猿类（real apes）的表演，对象错配。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2020-bing-reading-b-2",
+                "quote": "technology that records an actor’s performance and later processes it with computer graphics to create a final image (图像)",
+                "anchor": "records an actor’s performance"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "The creation of digitalized apes.",
+            "sourceRole": "correctOption",
+            "targetText": "used motion – capture (动作捕捉) technology to create digitalized animals",
+            "targetParagraphId": "para-2020-bing-reading-b-2",
+            "relationType": "paraphrase",
+            "note": "选项 creation of digitalized apes 对应原文 create digitalized animals 及末句 a realisticlooking ape，是段落主旨的同义概括。"
+          }
+        ]
+      },
+      "q-2020-bing-026": {
+        "skill": {
+          "primary": "wordMeaning"
+        },
+        "questionFocus": "考查第三段中划线短语 keeping tabs on 的词义推测。",
+        "stemTranslationZh": "第三段中划线短语 “keeping tabs on” 最可能是什么意思？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "完整地列出。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "keeping tabs on 意为完整地列出。",
+              "explanation": "原文语境是该组织监督动物在影视娱乐中的待遇，并无“列出清单”之意，属无中生有的释义。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "专业地指导。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "keeping tabs on 意为专业地指导。",
+              "explanation": "该组织是监督动物待遇，而非指导拍摄，原文无“指导”之意，属无中生有。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "成功地推广。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "keeping tabs on 意为成功地推广。",
+              "explanation": "该组织的职能是监督而非推广，原文无“推广”之意，属无中生有。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "仔细地关注。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2020-bing-reading-b-3",
+                "quote": "One nonprofit organization, which monitors the treatment of animals in filmed entertainment, is keeping tabs on more than 2 000 productions this year.",
+                "anchor": "which monitors the treatment of animals … keeping tabs on more than 2 000 productions"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Watching carefully.",
+            "sourceRole": "correctOption",
+            "targetText": "which monitors the treatment of animals in filmed entertainment, is keeping tabs on more than 2 000 productions this year",
+            "targetParagraphId": "para-2020-bing-reading-b-3",
+            "relationType": "paraphrase",
+            "note": "由前文 monitors（监督）可推知 keeping tabs on 表示密切关注、跟踪监督，与选项 Watching carefully 同义。"
+          }
+        ]
+      },
+      "q-2020-bing-027": {
+        "skill": {
+          "primary": "inference"
+        },
+        "questionFocus": "考查由最后一段对动物演员处境进行的推断。",
+        "stemTranslationZh": "关于动物演员，我们能从最后一段推断出什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "它们可能受到不好的对待。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2020-bing-reading-b-4",
+                "quote": "it’s the off-set training and living conditions that are raising concerns",
+                "anchor": "off-set training and living conditions that are raising concerns"
+              },
+              {
+                "role": "secondary",
+                "paragraphId": "para-2020-bing-reading-b-4",
+                "quote": "which sometimes are not monitored as closely as productions filmed in the States",
+                "anchor": "not monitored as closely as productions filmed in the States"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "它们应该接受进一步的训练。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "it’s the off-set training and living conditions that are raising concerns",
+              "optionText": "They should take further training.",
+              "matchType": "wordFamily",
+              "relationNote": "原文 training 是指片场外的训练与生活条件令人担忧，选项借 training 一词制造干扰，曲解为动物应接受进一步训练。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2020-bing-reading-b-4",
+                "quote": "it’s the off-set training and living conditions that are raising concerns",
+                "anchor": "off-set training and living conditions"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "它们可能被非法交易。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "动物演员可能被非法交易。",
+              "explanation": "最后一段只谈训练与生活条件、海外拍摄监管不严，未提及非法交易，属无中生有。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "它们会失去人气。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "动物演员会失去人气。",
+              "explanation": "原文未涉及动物演员人气变化，属无中生有。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "They may be badly treated.",
+            "sourceRole": "correctOption",
+            "targetText": "it’s the off-set training and living conditions that are raising concerns",
+            "targetParagraphId": "para-2020-bing-reading-b-4",
+            "relationType": "paraphrase",
+            "note": "由 off-set training and living conditions are raising concerns 及海外拍摄 not monitored as closely 可推断动物演员可能受到不当对待（badly treated）。"
+          }
+        ]
+      },
+      "q-2020-bing-028": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查谁主要使用布里斯托尔这栋维多利亚式房屋的一楼，属于细节定位题。",
+        "stemTranslationZh": "在布里斯托尔的这栋维多利亚式房屋里，主要是谁使用一楼？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "Nick。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "she lives on the ground floor, while he lives upstairs with his wife and their two daughters.",
+              "sourceEntity": "he lives upstairs",
+              "optionText": "Nick.",
+              "optionEntity": "Nick",
+              "explanation": "原文明确 Nick（he）住在楼上，使用的是楼上空间，而非一楼，对象错配。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2020-bing-reading-c-2",
+                "quote": "she lives on the ground floor, while he lives upstairs with his wife and their two daughters.",
+                "anchor": "he lives upstairs"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "Rita。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2020-bing-reading-c-3",
+                "quote": "Rita Whitehead has her own kitchen, bathroom, bedroom and living room on the ground floor.",
+                "anchor": "Rita on the ground floor"
+              },
+              {
+                "role": "support",
+                "paragraphId": "para-2020-bing-reading-c-2",
+                "quote": "she lives on the ground floor",
+                "anchor": "she lives on the ground floor"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "Kathryn。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Kathryn 主要使用一楼。",
+              "explanation": "原文未提及 Kathryn 使用一楼；一楼明确归 Rita 使用，Kathryn 是 Nick 的妻子，住在楼上。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "女儿们。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "he lives upstairs with his wife and their two daughters.",
+              "sourceEntity": "two daughters upstairs",
+              "optionText": "The daughters.",
+              "optionEntity": "The daughters",
+              "explanation": "原文说两个女儿与 Nick 夫妇一起住在楼上，并非使用一楼，对象错配。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2020-bing-reading-c-2",
+                "quote": "he lives upstairs with his wife and their two daughters.",
+                "anchor": "daughters upstairs"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "uses the ground floor",
+            "sourceRole": "stem",
+            "targetText": "Rita Whitehead has her own kitchen, bathroom, bedroom and living room on the ground floor.",
+            "targetParagraphId": "para-2020-bing-reading-c-3",
+            "relationType": "locationCue",
+            "note": "题干 uses the ground floor 对应原文 Rita 在 on the ground floor 拥有自己的 kitchen, bathroom, bedroom and living room，定位到使用一楼的人是 Rita。"
+          }
+        ]
+      },
+      "q-2020-bing-029": {
+        "skill": {
+          "primary": "attitude"
+        },
+        "questionFocus": "考查 Nick 对与岳母同住的态度，属于态度观点题。",
+        "stemTranslationZh": "Nick 对与岳母同住持什么态度？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "积极的。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2020-bing-reading-c-5",
+                "quote": "From my standpoint, it all seems to work very well. Would I recommend it? Yes, I think I would.",
+                "anchor": "it all seems to work very well; Yes, I would recommend"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "无忧无虑的。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Nick 对此感到无忧无虑。",
+              "explanation": "原文未提及 Nick 无忧无虑；他表达的是认可与推荐，而非carefree 的心境。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "勉强容忍的。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeAttitude",
+              "sourceQuote": "From my standpoint, it all seems to work very well. Would I recommend it? Yes, I think I would.",
+              "sourceHighlight": "it all seems to work very well",
+              "optionText": "Tolerant.",
+              "optionHighlight": "Tolerant",
+              "explanation": "tolerant 意为勉强忍受，是中性偏消极的态度，而原文 Nick 表示运转良好并愿意推荐，是明确的正面态度，态度方向相反。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2020-bing-reading-c-5",
+                "quote": "From my standpoint, it all seems to work very well. Would I recommend it? Yes, I think I would.",
+                "anchor": "works very well & would recommend"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "不情愿的。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeAttitude",
+              "sourceQuote": "Would I recommend it? Yes, I think I would.",
+              "sourceHighlight": "Yes, I think I would",
+              "optionText": "Unwilling.",
+              "optionHighlight": "Unwilling",
+              "explanation": "unwilling 表示不情愿，与原文 Nick 明确表示愿意推荐（Yes, I think I would）的正面意愿完全相反。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2020-bing-reading-c-5",
+                "quote": "Would I recommend it? Yes, I think I would.",
+                "anchor": "Yes, I think I would"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Positive",
+            "sourceRole": "correctOption",
+            "targetText": "From my standpoint, it all seems to work very well. Would I recommend it? Yes, I think I would.",
+            "targetParagraphId": "para-2020-bing-reading-c-5",
+            "relationType": "paraphrase",
+            "note": "正确项 Positive 对应原文 Nick 所说 it all seems to work very well 与 Yes, I think I would（愿意推荐），均体现积极正面的态度。"
+          }
+        ]
+      },
+      "q-2020-bing-030": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查作者关于多代同堂家庭的论断依据来自哪里，属于细节判断题。",
+        "stemTranslationZh": "作者关于多代同堂家庭的论断是基于什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "家庭传统。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overgeneralization",
+              "sourceQuote": "multigenerational living is more firmly rooted. In India, particularly outside cities, young women are expected to move in with their husband’s family when they get married.",
+              "sourceHighlight": "more firmly rooted",
+              "optionText": "Family traditions.",
+              "optionHighlight": "Family traditions",
+              "explanation": "原文末段提及印度的家庭传统只是补充对比，作者关于英国趋势上升的论断依据是官方报告与统计，而非家庭传统，把局部补充信息夸大为论断依据。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2020-bing-reading-c-8",
+                "quote": "multigenerational living is more firmly rooted. In India, particularly outside cities, young women are expected to move in with their husband’s family when they get married.",
+                "anchor": "tradition in India"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "财务报告。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "Official reports suggest that the number of households",
+              "optionText": "Financial reports.",
+              "matchType": "wordFamily",
+              "relationNote": "原文是 Official reports（官方报告），选项偷换为 Financial reports（财务报告），利用 reports 一词制造干扰，但报告性质不同。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2020-bing-reading-c-6",
+                "quote": "Official reports suggest that the number of households with three generations living together had risen from 325,000 in 2001 to 419,000 in 2013.",
+                "anchor": "Official reports"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "已发布的统计数据。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2020-bing-reading-c-6",
+                "quote": "Official reports suggest that the number of households with three generations living together had risen from 325,000 in 2001 to 419,000 in 2013.",
+                "anchor": "official reports with figures"
+              },
+              {
+                "role": "support",
+                "paragraphId": "para-2020-bing-reading-c-7",
+                "quote": "It is said that about 20% of 25-34-year-olds live with their parents, compared with 16% in 1991. The total number of all multigenerational households in Britain is thought to be about 1.8 million.",
+                "anchor": "statistics 20% & 1.8 million"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "公众意见。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "作者的论断基于公众意见。",
+              "explanation": "原文未提及作者依据公众意见；其论断依据是官方报告中公布的具体统计数字。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Published statistics",
+            "sourceRole": "correctOption",
+            "targetText": "Official reports suggest that the number of households with three generations living together had risen from 325,000 in 2001 to 419,000 in 2013.",
+            "targetParagraphId": "para-2020-bing-reading-c-6",
+            "relationType": "paraphrase",
+            "note": "正确项 Published statistics 对应原文 Official reports 公布的具体数字（325,000 → 419,000 等），统计数据即为作者论断的依据。"
+          }
+        ]
+      },
+      "q-2020-bing-031": {
+        "skill": {
+          "primary": "mainIdea"
+        },
+        "questionFocus": "考查全文主旨，要求概括文章主要内容，属于主旨题。",
+        "stemTranslationZh": "这篇文章主要讲的是什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "不同国家的生活方式。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overgeneralization",
+              "sourceQuote": "Stories like that are more common in parts of the world, where multigenerational living is more firmly rooted.",
+              "sourceHighlight": "parts of the world",
+              "optionText": "Lifestyles in different countries.",
+              "optionHighlight": "different countries",
+              "explanation": "原文仅在末段以印度为例作补充，全文聚焦英国的居住趋势，把末段局部对比夸大为全文主旨——不同国家的生活方式。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2020-bing-reading-c-8",
+                "quote": "Stories like that are more common in parts of the world, where multigenerational living is more firmly rooted.",
+                "anchor": "parts of the world"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "代际之间的冲突。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "文章主要讲代际之间的冲突。",
+              "explanation": "原文未提及代际冲突；案例反而表明同住运转良好，文章主旨是居住趋势而非冲突。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "英国的一个住房问题。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overstatement",
+              "sourceQuote": "more families are choosing to live together.",
+              "sourceHighlight": "choosing to live together",
+              "optionText": "A housing problem in Britain.",
+              "optionHighlight": "problem",
+              "explanation": "原文将多代同堂呈现为越来越多家庭主动选择的趋势（choosing），选项把它定性为住房问题（problem），将中性趋势夸大歪曲为负面问题。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2020-bing-reading-c-1",
+                "quote": "more families are choosing to live together.",
+                "anchor": "choosing to live together"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "英国一种正在兴起的居住趋势。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2020-bing-reading-c-1",
+                "quote": "more families are choosing to live together.",
+                "anchor": "more families living together"
+              },
+              {
+                "role": "support",
+                "paragraphId": "para-2020-bing-reading-c-6",
+                "quote": "research indicates that the numbers have been rising for some time.",
+                "anchor": "numbers have been rising"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "A rising trend of living in the UK",
+            "sourceRole": "correctOption",
+            "targetText": "research indicates that the numbers have been rising for some time.",
+            "targetParagraphId": "para-2020-bing-reading-c-6",
+            "relationType": "paraphrase",
+            "note": "正确项 A rising trend 对应原文 the numbers have been rising for some time，结合首段 more families are choosing to live together，概括出英国多代同堂这一正在兴起的居住趋势。"
+          }
+        ]
+      },
+      "q-2020-bing-032": {
+        "skill": {
+          "primary": "authorPurpose"
+        },
+        "questionFocus": "考查作者在第一段列举多个例子的写作意图，即这些例子要说明的中心观点。",
+        "stemTranslationZh": "作者想通过第一段的例子告诉我们什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "养牛者对环境的适应。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "understatement",
+              "sourceQuote": "Cattle-raising people in East Africa and northern Europe have gained a mutation (突变) that helps them digest milk as adults.",
+              "sourceHighlight": "Cattle-raising people in East Africa and northern Europe",
+              "optionText": "Environmental adaptation of cattle raisers.",
+              "optionHighlight": "cattle raisers",
+              "explanation": "养牛者只是第一段众多例子之一，把整段举例的总目的缩小为单个例子，以偏概全，未抓住'人类进化'这一总观点。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2020-bing-reading-d-1",
+                "quote": "Cattle-raising people in East Africa and northern Europe have gained a mutation (突变) that helps them digest milk as adults.",
+                "anchor": "养牛者只是其中一例"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "关于人类进化的新认知。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2020-bing-reading-d-1",
+                "quote": "they are finding examples of human evolution in just the past few thousand years",
+                "anchor": "人类进化的新例证"
+              },
+              {
+                "role": "secondary",
+                "paragraphId": "para-2020-bing-reading-d-1",
+                "quote": "We are the products of evolution, and not just evolution that occurred billions of years ago.",
+                "anchor": "进化不只发生在远古"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "关于人类起源的最新发现。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overgeneralization",
+              "sourceQuote": "they are finding examples of human evolution in just the past few thousand years",
+              "sourceHighlight": "human evolution",
+              "optionText": "Recent findings of human origin.",
+              "optionHighlight": "human origin",
+              "explanation": "原文谈的是近几千年人类'进化'（evolution）的例证，而非人类'起源'（origin）；把'进化'偷换为'起源'，话题范围发生偏移。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2020-bing-reading-d-1",
+                "quote": "they are finding examples of human evolution in just the past few thousand years",
+                "anchor": "讲进化而非起源"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "食物选择的重要性。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "第一段例子是为了说明食物选择的重要性。",
+              "explanation": "原文仅提及养牛民族进化出消化牛奶的突变，并未谈论'食物选择的重要性'，该说法原文未提及，属无中生有。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "New knowledge of human evolution",
+            "sourceRole": "correctOption",
+            "targetText": "they are finding examples of human evolution in just the past few thousand years",
+            "targetParagraphId": "para-2020-bing-reading-d-1",
+            "relationType": "paraphrase",
+            "note": "正确项的 New knowledge of human evolution 对应原文 finding examples of human evolution，finding examples 体现 new knowledge（新认知）。"
+          }
+        ]
+      },
+      "q-2020-bing-033": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查对巴瑶族建房地点这一细节信息的定位与理解。",
+        "stemTranslationZh": "巴瑶族在哪里建造他们的房子？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "在山谷里。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "巴瑶族在山谷里建房。",
+              "explanation": "原文说巴瑶族在沿海水域用支柱建房，从未提及山谷，该地点原文未提及，属无中生有。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "在河流附近。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "巴瑶族在河流附近建房。",
+              "explanation": "原文提到的是 coastal waters（沿海水域）和 ocean（海洋），并未提及河流，属无中生有。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "在海滩上。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "understatement",
+              "sourceQuote": "they’ve also built houses on stilts (支柱) in coastal waters.",
+              "sourceHighlight": "in coastal waters",
+              "optionText": "On the beach.",
+              "optionHighlight": "On the beach",
+              "explanation": "原文是在 coastal waters（沿海水域中、用支柱撑起）建房，即在水上离岸处，而非在 beach（海滩陆地）上；把'水中离岸'缩窄/错置为'海滩陆地'。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2020-bing-reading-d-2",
+                "quote": "they’ve also built houses on stilts (支柱) in coastal waters.",
+                "anchor": "建在沿海水域中"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "在离岸的海上。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2020-bing-reading-d-2",
+                "quote": "they’ve also built houses on stilts (支柱) in coastal waters",
+                "anchor": "在沿海水域用支柱建房"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Off the coast",
+            "sourceRole": "correctOption",
+            "targetText": "built houses on stilts (支柱) in coastal waters",
+            "targetParagraphId": "para-2020-bing-reading-d-2",
+            "relationType": "paraphrase",
+            "note": "正确项 Off the coast（离岸海上）对应原文 in coastal waters（在沿海水域），on stilts 说明房子立在水中，即离岸的海上。"
+          }
+        ]
+      },
+      "q-2020-bing-034": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查对Jubilado儿时对巴瑶族感到惊讶的具体原因这一细节的定位与理解。",
+        "stemTranslationZh": "年轻的Jubilado为什么对巴瑶族感到惊讶？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "他们能整天踩着支柱行走。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "houses on stilts (支柱)",
+              "optionText": "They could walk on stilts all day.",
+              "matchType": "exact",
+              "relationNote": "选项借用原文第二段 stilts（支柱）一词制造干扰，但 stilts 指房屋的支柱，与'踩高跷整天行走'无关，Jubilado惊讶的原因也并非如此。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2020-bing-reading-d-2",
+                "quote": "they’ve also built houses on stilts (支柱) in coastal waters",
+                "anchor": "stilts指房屋支柱"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "他们有一种高超的捕鱼方式。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "spearfishing or harvesting shellfish",
+              "optionText": "They had a superb way of fishing.",
+              "matchType": "wordFamily",
+              "relationNote": "选项用 fishing 呼应原文 spearfishing（叉鱼）一词，但原文只是说明巴瑶族以潜水捕鱼为生，令Jubilado惊讶的是他们能长时间潜水，而非捕鱼方式高超。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2020-bing-reading-d-3",
+                "quote": "They made a living as divers, spearfishing or harvesting shellfish.",
+                "anchor": "捕鱼是谋生方式非惊讶点"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "他们能在水下停留很长时间。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2020-bing-reading-d-3",
+                "quote": "We were so amazed that they could stay underwater much longer than us local islanders",
+                "anchor": "惊讶于水下停留更久"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "他们既在陆地也在水上生活。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "We were so amazed that they could stay underwater much longer than us local islanders",
+              "sourceEntity": "stay underwater much longer",
+              "optionText": "They lived on both land and water.",
+              "optionEntity": "lived on both land and water",
+              "explanation": "令Jubilado惊讶的是巴瑶族能长时间潜水，而非'既在陆地又在水上生活'；选项把惊讶的对象错配成居住方式，与原文惊讶点不符。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2020-bing-reading-d-3",
+                "quote": "We were so amazed that they could stay underwater much longer than us local islanders",
+                "anchor": "惊讶点是潜水时长"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "stay long underwater",
+            "sourceRole": "correctOption",
+            "targetText": "they could stay underwater much longer than us local islanders",
+            "targetParagraphId": "para-2020-bing-reading-d-3",
+            "relationType": "paraphrase",
+            "note": "正确项 stay long underwater 对应原文 stay underwater much longer than us local islanders，amazed（惊讶）对应题干 astonished。"
+          }
+        ]
+      },
+      "q-2020-bing-035": {
+        "skill": {
+          "primary": "title"
+        },
+        "questionFocus": "考查对全文主旨的概括，选出最能涵盖文章核心内容的标题。",
+        "stemTranslationZh": "什么可以作为本文合适的标题？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "为海洋生活而重塑的身体。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-2020-bing-reading-d-2",
+                "quote": "A group of seadwelling people in Southeast Asia have evolved into better divers.",
+                "anchor": "为海洋生活而进化"
+              },
+              {
+                "role": "secondary",
+                "paragraphId": "para-2020-bing-reading-d-4",
+                "quote": "centuries of diving could have led to the evolution of physical characteristics that made the task easier for them",
+                "anchor": "潜水促成身体特征进化"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "高原居民的生存技能。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "understatement",
+              "sourceQuote": "People in Ethiopian highlands have adapted to living at high altitudes.",
+              "sourceHighlight": "People in Ethiopian highlands",
+              "optionText": "Highlanders' Survival Skills",
+              "optionHighlight": "Highlanders'",
+              "explanation": "高原居民只是第一段的引子例证，并非全文主题；以这一次要细节作标题，范围过窄，未涵盖核心的巴瑶族海洋适应内容。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2020-bing-reading-d-1",
+                "quote": "People in Ethiopian highlands have adapted to living at high altitudes.",
+                "anchor": "高原居民仅为引例"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "基因研究的基本方法。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "a graduate student in genetics",
+              "optionText": "Basic Methods of Genetic Research",
+              "matchType": "wordFamily",
+              "relationNote": "选项用 Genetic 呼应原文 genetics/genes 等词，但全文讲的是巴瑶族适应海洋的进化现象，并未介绍'基因研究的基本方法'，借词族制造干扰。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2020-bing-reading-d-4",
+                "quote": "Melissa Ilardo, then a graduate student in genetics at the University of Copenhagen",
+                "anchor": "未讲研究方法"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "世界上最好的潜水者。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overstatement",
+              "sourceQuote": "A group of seadwelling people in Southeast Asia have evolved into better divers.",
+              "sourceHighlight": "better divers",
+              "optionText": "The World's Best Divers",
+              "optionHighlight": "The World's Best Divers",
+              "explanation": "原文说巴瑶族进化成'更好的'潜水者（better divers），选项夸大为'世界上最好的'（World's Best），且全文重心是身体为海洋生活而进化，而非评定潜水排名，言过其实。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-2020-bing-reading-d-2",
+                "quote": "A group of seadwelling people in Southeast Asia have evolved into better divers.",
+                "anchor": "原文为better非world's best"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Bodies Remodeled for a Life at Sea",
+            "sourceRole": "correctOption",
+            "targetText": "evolved into better divers",
+            "targetParagraphId": "para-2020-bing-reading-d-2",
+            "relationType": "paraphrase",
+            "note": "标题 Bodies Remodeled for a Life at Sea（身体为海上生活重塑）概括原文 evolved into better divers 及 evolution of physical characteristics，Remodeled 对应 evolution，a Life at Sea 对应 seadwelling/ocean。"
+          }
+        ]
+      }
+    }
+  }
+}

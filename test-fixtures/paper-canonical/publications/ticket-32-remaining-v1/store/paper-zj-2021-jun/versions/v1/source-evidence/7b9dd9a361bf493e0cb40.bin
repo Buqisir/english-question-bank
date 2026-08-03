@@ -1,0 +1,96 @@
+{
+  "schemaVersion": "import-meta-v1",
+  "paperId": "paper-zj-2021-jun",
+  "sourceFileName": "2021年浙江卷高考真题英语试卷（6月）-答案版.docx",
+  "sourceFileSha256": "77e48ff126b6dba429d26e169e6734f5b48e216ed40275e332f18fa51757e074",
+  "importedBy": "paper-import-ai",
+  "importedAt": "2026-06-18T14:47:44.960Z",
+  "paper": {
+    "year": 2021,
+    "region": "浙江",
+    "paperName": "2021年6月浙江卷",
+    "examCode": "zj-2021-jun",
+    "subject": "English",
+    "sourceType": "真题",
+    "defaultTags": [
+      "真题",
+      "2021",
+      "浙江卷",
+      "6月"
+    ]
+  },
+  "groups": {
+    "group-zj-2021-jun-reading-a": {
+      "groupId": "group-zj-2021-jun-reading-a",
+      "difficulty": "中",
+      "summary": "本文是一篇人物传记，记述著名演员 Leslie Nielsen 的演艺生涯。文章按时间顺序展开：从他童年受当演员的叔叔启发立志从艺，到历经多年奋斗终于在喜剧中找到归属，再到他一生从不退休、始终保持好奇心，最后点明他凭借坚持与努力成就了非凡人生。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading A"
+    },
+    "group-zj-2021-jun-reading-b": {
+      "groupId": "group-zj-2021-jun-reading-b",
+      "difficulty": "中",
+      "summary": "本文是一篇议论性说明文，针对当下儿童沉迷电子屏幕的问题，介绍了电影人David Bond如何把“自然”当作品牌推销给孩子（Project Wild Thing 与 Wild Network），呼吁让孩子走出户外、回归自然。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading B"
+    },
+    "group-zj-2021-jun-reading-c": {
+      "groupId": "group-zj-2021-jun-reading-c",
+      "difficulty": "中",
+      "summary": "本文是一篇科普说明文，介绍了一项关于狗能否分辨人类面部表情的新研究。研究发现，至少部分狗能够区分人类高兴和生气的面孔，并探讨了产生这一能力的可能原因。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading C"
+    },
+    "group-zj-2021-jun-seven-choices": {
+      "groupId": "group-zj-2021-jun-seven-choices",
+      "difficulty": "中",
+      "summary": "本文是一篇人物兼说明类记叙文，介绍葡萄牙工程师 Paulo Magalhaes 因热爱明信片而创办明信片交换网站 postcrossing.com 的经过，以及该网站的规模、运作和语言障碍问题。五个空分布在段尾总结、话题展开、数据补充和逻辑衔接等位置，重点考查总结句、指代衔接、逻辑连接词（In short / And / Similarly / That）以及话题场对齐。",
+      "tags": [
+        "七选五"
+      ],
+      "displayTitleOverride": "七选五"
+    },
+    "group-zj-2021-jun-cloze": {
+      "groupId": "group-zj-2021-jun-cloze",
+      "difficulty": "中",
+      "summary": "完形填空",
+      "tags": [
+        "完形填空"
+      ],
+      "displayTitleOverride": "完形填空"
+    },
+    "group-zj-2021-jun-grammar-fill": {
+      "groupId": "group-zj-2021-jun-grammar-fill",
+      "difficulty": "中",
+      "summary": "语法填空",
+      "tags": [
+        "语法填空"
+      ],
+      "displayTitleOverride": "语法填空"
+    },
+    "group-zj-2021-jun-writing-application": {
+      "groupId": "group-zj-2021-jun-writing-application",
+      "difficulty": "中",
+      "summary": "应用文写作",
+      "tags": [
+        "应用文写作"
+      ],
+      "displayTitleOverride": "应用文写作"
+    },
+    "group-zj-2021-jun-writing-continuation": {
+      "groupId": "group-zj-2021-jun-writing-continuation",
+      "difficulty": "中",
+      "summary": "读后续写",
+      "tags": [
+        "读后续写"
+      ],
+      "displayTitleOverride": "读后续写"
+    }
+  }
+}

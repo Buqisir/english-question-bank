@@ -1,0 +1,2814 @@
+{
+  "schemaVersion": "paper-asset-v1",
+  "paper": {
+    "paperId": "paper-zj-2020-jul",
+    "title": "2020年浙江卷高考真题英语试卷（7月）-答案版",
+    "subject": "English",
+    "source": "AI 导题",
+    "assetVersion": 1,
+    "status": "published"
+  },
+  "sources": {
+    "primarySourceType": "docx",
+    "docx": {
+      "fileName": "2020年浙江卷高考真题英语试卷（7月）-答案版.docx",
+      "sha256": "1a447b5dc7bdba349347d61080304eab55815e41db055b5c2ff9b43545b79cdc",
+      "sourcePath": "",
+      "sourceNote": "未上传答案解析版"
+    }
+  },
+  "layoutTree": {
+    "parts": [
+      {
+        "partId": "part-zj-2020-jul-reading",
+        "title": "第二部分 阅读",
+        "sections": [
+          {
+            "sectionId": "section-zj-2020-jul-reading-choice",
+            "title": "第一节 阅读理解",
+            "groups": [
+              {
+                "groupId": "group-zj-2020-jul-reading-a",
+                "title": "Reading A"
+              },
+              {
+                "groupId": "group-zj-2020-jul-reading-b",
+                "title": "Reading B"
+              },
+              {
+                "groupId": "group-zj-2020-jul-reading-c",
+                "title": "Reading C"
+              }
+            ]
+          },
+          {
+            "sectionId": "section-zj-2020-jul-reading-seven",
+            "title": "第二节 七选五",
+            "groups": [
+              {
+                "groupId": "group-zj-2020-jul-seven-choices",
+                "title": "七选五"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "partId": "part-zj-2020-jul-language",
+        "title": "第三部分 语言运用",
+        "sections": [
+          {
+            "sectionId": "section-zj-2020-jul-cloze",
+            "title": "第一节 完形填空",
+            "groups": [
+              {
+                "groupId": "group-zj-2020-jul-cloze",
+                "title": "完形填空"
+              }
+            ]
+          },
+          {
+            "sectionId": "section-zj-2020-jul-grammar-fill",
+            "title": "第二节 语法填空",
+            "groups": [
+              {
+                "groupId": "group-zj-2020-jul-grammar-fill",
+                "title": "语法填空"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "partId": "part-zj-2020-jul-writing",
+        "title": "第四部分 写作",
+        "sections": [
+          {
+            "sectionId": "section-zj-2020-jul-writing-application",
+            "title": "第一节 应用文写作",
+            "groups": [
+              {
+                "groupId": "group-zj-2020-jul-writing-application",
+                "title": "应用文写作"
+              }
+            ]
+          },
+          {
+            "sectionId": "section-zj-2020-jul-writing-continuation",
+            "title": "第二节 读后续写",
+            "groups": [
+              {
+                "groupId": "group-zj-2020-jul-writing-continuation",
+                "title": "读后续写"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "content": {
+    "blocks": [
+      {
+        "type": "partHeading",
+        "partId": "part-zj-2020-jul-reading",
+        "text": "第二部分 阅读理解（共两节，满分35分）"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-zj-2020-jul-reading-choice",
+        "text": "第一节（共10小题；每小题2.5分，满分25分）"
+      },
+      {
+        "type": "group",
+        "groupId": "group-zj-2020-jul-reading-a"
+      },
+      {
+        "type": "group",
+        "groupId": "group-zj-2020-jul-reading-b"
+      },
+      {
+        "type": "group",
+        "groupId": "group-zj-2020-jul-reading-c"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-zj-2020-jul-reading-seven",
+        "text": "第二节（共5小题；每小题2分，满分10分）"
+      },
+      {
+        "type": "instruction",
+        "text": "阅读下面短文，从短文后的选项中选出可以填入空白处的最佳选项。选项中有两项为多余选项。"
+      },
+      {
+        "type": "group",
+        "groupId": "group-zj-2020-jul-seven-choices"
+      },
+      {
+        "type": "pageBreakHint"
+      },
+      {
+        "type": "partHeading",
+        "partId": "part-zj-2020-jul-language",
+        "text": "第三部分 语言运用（共两节，满分45分）"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-zj-2020-jul-cloze",
+        "text": "第一节（共20小题；每小题1.5分，满分30分）"
+      },
+      {
+        "type": "instruction",
+        "text": "阅读下面短文，从每题所给的A、B、C、D四个选项中选出最佳选项。"
+      },
+      {
+        "type": "group",
+        "groupId": "group-zj-2020-jul-cloze"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-zj-2020-jul-grammar-fill",
+        "text": "第二节(共10小题；每小题1.5分，满分15分)"
+      },
+      {
+        "type": "instruction",
+        "text": "阅读下面短文，在空白处填入1个适当的单词或括号内单词的正确形式。"
+      },
+      {
+        "type": "group",
+        "groupId": "group-zj-2020-jul-grammar-fill"
+      },
+      {
+        "type": "pageBreakHint"
+      },
+      {
+        "type": "partHeading",
+        "partId": "part-zj-2020-jul-writing",
+        "text": "第四部分 写作（共两节，满分40分）"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-zj-2020-jul-writing-application",
+        "text": "第一节（满分15分）"
+      },
+      {
+        "type": "group",
+        "groupId": "group-zj-2020-jul-writing-application"
+      },
+      {
+        "type": "instruction",
+        "text": "注意：\n（1）写作词数应为80个左右；\n（2）请按如下格式在答题卡的相应位置作答。"
+      },
+      {
+        "type": "answerBox",
+        "writingTaskId": "wt-zj-2020-jul-application",
+        "label": "应用文写作答题区"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-zj-2020-jul-writing-continuation",
+        "text": "第二节（满分25分）"
+      },
+      {
+        "type": "instruction",
+        "text": "阅读下面材料，根据其内容和所给段落开头语续写两段，使之构成一篇完整的短文。"
+      },
+      {
+        "type": "group",
+        "groupId": "group-zj-2020-jul-writing-continuation"
+      },
+      {
+        "type": "instruction",
+        "text": "注意：\n（1）续写词数应为150个左右；\n（2）请按如下格式在答题卡的相应位置作答。"
+      },
+      {
+        "type": "answerBox",
+        "writingTaskId": "wt-zj-2020-jul-continuation",
+        "label": "读后续写答题区"
+      }
+    ],
+    "groups": {
+      "group-zj-2020-jul-reading-a": {
+        "groupId": "group-zj-2020-jul-reading-a",
+        "groupType": "reading",
+        "title": "Reading A",
+        "questionIds": [
+          "q-zj-2020-jul-021",
+          "q-zj-2020-jul-022",
+          "q-zj-2020-jul-023",
+          "q-zj-2020-jul-024"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-zj-2020-jul-reading-a-1",
+              "text": "I am an active playgoer and playreader, and perhaps my best reason for editing this book is a hope of sharing my enthusiasm for the theater with others. To do this I have searched through dozens of plays to find the ones that I think best show the power and purpose of the short play."
+            },
+            {
+              "paragraphId": "para-zj-2020-jul-reading-a-2",
+              "text": "Each play has a theme or central idea which the playwright (剧作家) hopes to get across through dialogue and action. A few characters are used to create a single impression growing out of the theme. It is not my intention to point out the central theme of each of the plays in this collection, for that would, indeed, ruin the pleasure of reading, discussing, and thinking about the plays and the effectiveness of the playwright. However, a variety of types is represented here. These include comedy, satire, poignant drama, historical and regional drama. To show the versatility (多面性) of the short play, I have included a guidance play, a radio play and a television play."
+            },
+            {
+              "paragraphId": "para-zj-2020-jul-reading-a-3",
+              "text": "Among the writers of the plays in this collection, Paul Green, Susan Glaspell, Maxwell Anderson, Thornton Wilder, William Saroyan, and Tennessee Williams have all received Pulitzer Prizes for their contributions to the theater. More information about the playwrights will be found at the end of this book."
+            },
+            {
+              "paragraphId": "para-zj-2020-jul-reading-a-4",
+              "text": "To get the most out of reading these plays, try to picture the play on stage, with you, the reader, in the audience. The houselights dim (变暗) . The curtains are about to open, and in a few minutes the action and dialogue will tell you the story."
+            }
+          ]
+        }
+      },
+      "group-zj-2020-jul-reading-b": {
+        "groupId": "group-zj-2020-jul-reading-b",
+        "groupType": "reading",
+        "title": "Reading B",
+        "questionIds": [
+          "q-zj-2020-jul-025",
+          "q-zj-2020-jul-026",
+          "q-zj-2020-jul-027"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-zj-2020-jul-reading-b-1",
+              "text": "The traffic signals along Factoria Boulevard in Bellevue, Washington, generally don’t flash the same length of green twice in a row, especially at rush hour. At 9:30 a. m., the full red/yellow/green signal cycle might be 140 seconds. By 9:33 a. m., a burst of additional traffic might push it to 145 seconds. Less traffic at 9:37 a. m. could push it down to Just like the traffic itself, the timing of the signals changes."
+            },
+            {
+              "paragraphId": "para-zj-2020-jul-reading-b-2",
+              "text": "That is by design. Bellevue, a fastgrowing city just east of Seattle, uses a system that is gaining popularity around the U. S.: intersection (十字路口) signals that can adjust in real time to traffic conditions. These lights, known as adaptive signals, have led to significant declines in both the trouble and cost of travels between work and home."
+            },
+            {
+              "paragraphId": "para-zj-2020-jul-reading-b-3",
+              "text": "“Adaptive signals can make sure that the traffic demand that is there is being addressed,” says Alex Stevanovic, a researcher at Florida Atlantic University."
+            },
+            {
+              "paragraphId": "para-zj-2020-jul-reading-b-4",
+              "text": "For all of Bellevue’s success, adaptive signals are not a cure-all for jammed roadways. Kevin Balke, a research engineer at the Texas A&M University Transportation Institute, says that while smart lights can be particularly beneficial for some cities, others are so jammed that only a sharp reduction in the number of cars on the road will make a meaningful difference. “It’s not going to fix everything, but adaptive signals have some benefits for smaller cities,” he says."
+            },
+            {
+              "paragraphId": "para-zj-2020-jul-reading-b-5",
+              "text": "In Bellevue, the switch to adaptive signals has been a lesson in the value of welcoming new approaches. In the past, there was often an automatic reaction to increased traffic: just widen the roads, says Mark Poch, the Bellevue Transportation Department’s traffic engineering manager. Now he hopes that other cities will consider making their streets run smarter instead of just making them bigger."
+            }
+          ]
+        }
+      },
+      "group-zj-2020-jul-reading-c": {
+        "groupId": "group-zj-2020-jul-reading-c",
+        "groupType": "reading",
+        "title": "Reading C",
+        "questionIds": [
+          "q-zj-2020-jul-028",
+          "q-zj-2020-jul-029",
+          "q-zj-2020-jul-030"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-zj-2020-jul-reading-c-1",
+              "text": "Challenging work that requires lots of analytical thinking, planning and other managerial skills might help your brain stay sharp as you age, a study published Wednesday in the journal Neurology suggests."
+            },
+            {
+              "paragraphId": "para-zj-2020-jul-reading-c-2",
+              "text": "Researchers from the University of Leipzig in Germany gathered more than 1000 retired workers who were over age 75 and assessed the volunteers’ memory and thinking skills through a battery of tests. Then, for eight years, the scientists asked the same group to come back to the lab every 18 months to take the same sorts of tests."
+            },
+            {
+              "paragraphId": "para-zj-2020-jul-reading-c-3",
+              "text": "Those who had held mentally stimulating (刺激) , demanding jobs before retirement tended to do the best on the tests. And they tended to lose cognitive (认知) function at a much slower rate than those with the least mentally challenging jobs. The results held true even after the scientists accounted for the participants’ overall health status."
+            },
+            {
+              "paragraphId": "para-zj-2020-jul-reading-c-4",
+              "text": "“This works just like physical exercise,” says Francisca Then, who led the study. “After a long run, you may feel like you’re in pain, you may feel tired. But it makes you fit. After a long day at work – sure, you will feel tired, but it can help your brain stay healthy.”"
+            },
+            {
+              "paragraphId": "para-zj-2020-jul-reading-c-5",
+              "text": "It’s not just corporate jobs, or even paid work that can help keep your brain fit, Then points out. A waiter’s job, for example, that requires multitasking, teamwork and decision-making could be just as stimulating as any high-level office work. And “running a family household requires high-level planning and coordinating (协调) , “ she says. “You have to organize the activities of the children and take care of the bills and groceries.”"
+            },
+            {
+              "paragraphId": "para-zj-2020-jul-reading-c-6",
+              "text": "Of course, our brains can decline as we grow older for lots of reasons – including other environmental influences or genetic factors. Still, continuing to challenge yourself mentally and keeping your mind busy can only help."
+            }
+          ]
+        }
+      },
+      "group-zj-2020-jul-seven-choices": {
+        "groupId": "group-zj-2020-jul-seven-choices",
+        "groupType": "sevenChoices",
+        "title": "七选五",
+        "questionIds": [
+          "q-zj-2020-jul-031",
+          "q-zj-2020-jul-032",
+          "q-zj-2020-jul-033",
+          "q-zj-2020-jul-034",
+          "q-zj-2020-jul-035"
+        ],
+        "blankIds": [
+          "blank-zj-2020-jul-031",
+          "blank-zj-2020-jul-032",
+          "blank-zj-2020-jul-033",
+          "blank-zj-2020-jul-034",
+          "blank-zj-2020-jul-035"
+        ],
+        "optionBank": [
+          {
+            "label": "A",
+            "text": "I wasn’t alone any longer."
+          },
+          {
+            "label": "B",
+            "text": "I enjoyed reading stories aloud."
+          },
+          {
+            "label": "C",
+            "text": "I was invited to play with another kid."
+          },
+          {
+            "label": "D",
+            "text": "I loved the colorful photographs in the books."
+          },
+          {
+            "label": "E",
+            "text": "Another habit I formed early was being outdoors."
+          },
+          {
+            "label": "F",
+            "text": "Thus, I began my lifelong interest in making things."
+          },
+          {
+            "label": "G",
+            "text": "My older brother couldn’t be bothered to play with me."
+          }
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-zj-2020-jul-seven-title",
+              "text": "I experienced years of loneliness as a child. __31__   His friends teased him about babysitting his sister and his interests were far different from mine. With no other kids of my age in the neighborhood, I had to spend hours by myself."
+            },
+            {
+              "paragraphId": "para-zj-2020-jul-seven-p1",
+              "text": "A bright spot for me turned out to be reading. My love of the written word began early as my mother read to me every evening. __32__   I started reading books on my own before age 5 and my mother took me to the public library once a week to borrow several books. I quickly graduated from typical children’s books to ones with fewer pictures and longer chapters. Reading opened new worlds to me. __33__"
+            },
+            {
+              "paragraphId": "para-zj-2020-jul-seven-p2",
+              "text": "My mother also encouraged me to make what I wanted. I tried making toy cars with cardboard boxes and constructing buildings from leftover cardboard and bits of wood my father gave me. When my mother saw my creations, she told me how creative my designs were. __34__   I learned a lot about how to extend the life of objects and transform them into something new and useful. It was a trait (特点) others found helpful, and I soon had friends who wanted to make things with me."
+            },
+            {
+              "paragraphId": "para-zj-2020-jul-seven-p3",
+              "text": "__35__   My parents made it a point for their two kids to spend time outside, no matter the weather or season. My brother, of course, raced off to be with his friends, while I had plenty to do myself. There was making leaf houses in autumn, ice skating in winter, and so much more. They’re all memories I treasure today."
+            }
+          ]
+        }
+      },
+      "group-zj-2020-jul-cloze": {
+        "groupId": "group-zj-2020-jul-cloze",
+        "groupType": "cloze",
+        "title": "完形填空",
+        "questionIds": [
+          "q-zj-2020-jul-036",
+          "q-zj-2020-jul-037",
+          "q-zj-2020-jul-038",
+          "q-zj-2020-jul-039",
+          "q-zj-2020-jul-040",
+          "q-zj-2020-jul-041",
+          "q-zj-2020-jul-042",
+          "q-zj-2020-jul-043",
+          "q-zj-2020-jul-044",
+          "q-zj-2020-jul-045",
+          "q-zj-2020-jul-046",
+          "q-zj-2020-jul-047",
+          "q-zj-2020-jul-048",
+          "q-zj-2020-jul-049",
+          "q-zj-2020-jul-050",
+          "q-zj-2020-jul-051",
+          "q-zj-2020-jul-052",
+          "q-zj-2020-jul-053",
+          "q-zj-2020-jul-054",
+          "q-zj-2020-jul-055"
+        ],
+        "blankIds": [
+          "blank-zj-2020-jul-036",
+          "blank-zj-2020-jul-037",
+          "blank-zj-2020-jul-038",
+          "blank-zj-2020-jul-039",
+          "blank-zj-2020-jul-040",
+          "blank-zj-2020-jul-041",
+          "blank-zj-2020-jul-042",
+          "blank-zj-2020-jul-043",
+          "blank-zj-2020-jul-044",
+          "blank-zj-2020-jul-045",
+          "blank-zj-2020-jul-046",
+          "blank-zj-2020-jul-047",
+          "blank-zj-2020-jul-048",
+          "blank-zj-2020-jul-049",
+          "blank-zj-2020-jul-050",
+          "blank-zj-2020-jul-051",
+          "blank-zj-2020-jul-052",
+          "blank-zj-2020-jul-053",
+          "blank-zj-2020-jul-054",
+          "blank-zj-2020-jul-055"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-zj-2020-jul-cloze-title",
+              "text": "I’ve been farming sheep on a hillside for 54 years. I use a small tractor to get about. My dog Don always sits beside me in the passenger seat."
+            },
+            {
+              "paragraphId": "para-zj-2020-jul-cloze-p1",
+              "text": "One morning I __36__ a lost lamb when I was in the top field, near where a motorway cuts through my land. The lamb had become separated from its __37__ , so I jumped out of the tractor to __38__ it while Don stayed in his seat."
+            },
+            {
+              "paragraphId": "para-zj-2020-jul-cloze-p2",
+              "text": "Lamb and mother __39__ , I turned back to the tractor only to see it move suddenly away from me. This was so __40__ because I had put the handbrake on when I jumped out. __41__ Don had somehow made the __42__ move."
+            },
+            {
+              "paragraphId": "para-zj-2020-jul-cloze-p3",
+              "text": "My heart froze in my chest as I __43__ the tractor heading towards the __44__ . I ran desperately but failed to __45__ . It crashed through a wooden fence and disappeared. The __46__ thing I saw was Don’s face, looking calmly back at me."
+            },
+            {
+              "paragraphId": "para-zj-2020-jul-cloze-p4",
+              "text": "Heart in mouth, I __47__ the fence and looked over. The tractor was __48__ against the crash barrier in the central reservation, having miraculously (奇迹般地) crossed the __49__ road with fast-flowing traffic. I couldn’t see Don, but as I __50__ the tractor he jumped out onto the road, apparently __51__ , and dashed back to me."
+            },
+            {
+              "paragraphId": "para-zj-2020-jul-cloze-p5",
+              "text": "The police __52__ and the motorway ran normally again. I couldn’t quite believe my __53__ it turned out no one got badly hurt, but the outcome could have been __54__ . Don was given a special __55__ that night – I didn’t want him thinking I was angry with him."
+            }
+          ]
+        }
+      },
+      "group-zj-2020-jul-grammar-fill": {
+        "groupId": "group-zj-2020-jul-grammar-fill",
+        "groupType": "grammarFill",
+        "title": "语法填空",
+        "questionIds": [
+          "q-zj-2020-jul-056",
+          "q-zj-2020-jul-057",
+          "q-zj-2020-jul-058",
+          "q-zj-2020-jul-059",
+          "q-zj-2020-jul-060",
+          "q-zj-2020-jul-061",
+          "q-zj-2020-jul-062",
+          "q-zj-2020-jul-063",
+          "q-zj-2020-jul-064",
+          "q-zj-2020-jul-065"
+        ],
+        "blankIds": [
+          "blank-zj-2020-jul-056",
+          "blank-zj-2020-jul-057",
+          "blank-zj-2020-jul-058",
+          "blank-zj-2020-jul-059",
+          "blank-zj-2020-jul-060",
+          "blank-zj-2020-jul-061",
+          "blank-zj-2020-jul-062",
+          "blank-zj-2020-jul-063",
+          "blank-zj-2020-jul-064",
+          "blank-zj-2020-jul-065"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-zj-2020-jul-grammar-fill-title",
+              "text": "Some time after 10000 B. C., people made the first real attempt to control the world they lived __56__, through agriculture. Over thousands of years, they began to depend less on __57__could be hunted or gathered from the wild, and more on animals they had raised and crops they had sown."
+            },
+            {
+              "paragraphId": "para-zj-2020-jul-grammar-fill-p1",
+              "text": "Farming produced more food per person __58__hunting and gathering, so people were able to raise more children. And, as more children were born, more food __59__ (need) . Agriculture gave people their first experience of the power of technology __60__ (change) lives."
+            },
+            {
+              "paragraphId": "para-zj-2020-jul-grammar-fill-p2",
+              "text": "By about 6000 B. C., people __61__ (discover) the best crops to grow and animals to raise. Later, they learned to work with the __62__ (season) , planting at the right time and, in dry areas, __63__ (make) use of annual floods to irrigate (灌溉) their fields."
+            },
+            {
+              "paragraphId": "para-zj-2020-jul-grammar-fill-p3",
+              "text": "This style of farming lasted for quite a long time. Then, with __64__rise of science, changes began. New methods __65__ (mean) that fewer people worked in farming. In the last century or so, these changes have accelerated. New power machinery and artificial fertilizers (化肥) have now totally transformed a way of life that started in the Stone Age."
+            }
+          ]
+        }
+      },
+      "group-zj-2020-jul-writing-application": {
+        "groupId": "group-zj-2020-jul-writing-application",
+        "groupType": "writing",
+        "title": "应用文写作",
+        "questionIds": [],
+        "writingTaskId": "wt-zj-2020-jul-application",
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-zj-2020-jul-writing-app-title",
+              "text": "假定你是李华，你校来自爱尔兰的外教Peter因病回国休假。请给他写一封电子邮件，内容包括：(1)询问近况；(2)分享班级最新消息；(3)表达祝愿。注意：(1)词数80左右；(2)可适当增加细节，以使行文连贯。"
+            }
+          ]
+        }
+      },
+      "group-zj-2020-jul-writing-continuation": {
+        "groupId": "group-zj-2020-jul-writing-continuation",
+        "groupType": "writing",
+        "title": "读后续写",
+        "questionIds": [],
+        "writingTaskId": "wt-zj-2020-jul-continuation",
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-zj-2020-jul-writing-cont-title",
+              "text": "阅读下面短文，根据所给情节进行续写，使之构成一个完整的故事。"
+            },
+            {
+              "paragraphId": "para-zj-2020-jul-writing-cont-p1",
+              "text": "One fall, my wife Elli and I had a single goal: to photograph polar bears. We were staying at a research camp outside “the polar bear capital of the world” – the town of Churchill in Manitoba, Canada."
+            },
+            {
+              "paragraphId": "para-zj-2020-jul-writing-cont-p2",
+              "text": "Taking pictures of polar bears is amazing but also dangerous. Polar bears – like all wild animals – should be photographed from a safe distance. When I’m face to face with a polar bear, I like it to be through a camera with a telephoto lens. But sometimes, that is easier said than done. This was one of those times."
+            },
+            {
+              "paragraphId": "para-zj-2020-jul-writing-cont-p3",
+              "text": "As Elli and I cooked dinner, a young male polar bear who was playing in a nearby lake sniffed, and smelled our garlic bread."
+            },
+            {
+              "paragraphId": "para-zj-2020-jul-writing-cont-p4",
+              "text": "The hungry bear followed his nose to our camp, which was surrounded by a high wire fence. He pulled and bit the wire. He stood on his back legs and pushed at the wooden fence posts."
+            },
+            {
+              "paragraphId": "para-zj-2020-jul-writing-cont-p5",
+              "text": "Terrified, Elli and I tried all the bear defense actions we knew. We yelled at the bear, hit pots hard, and fired blank shotgun shells into the air. Sometimes loud noises like these will scare bears off. Not this polar bear though – he just kept trying to tear down the fence with his massive paws (爪子) ."
+            },
+            {
+              "paragraphId": "para-zj-2020-jul-writing-cont-p6",
+              "text": "I radioed the camp manager for help. He told me a helicopter was on its way, but it would be 30 minutes before it arrived. Making the best of this close encounter (相遇) , I took some pictures of the bear."
+            },
+            {
+              "paragraphId": "para-zj-2020-jul-writing-cont-p7",
+              "text": "Elli and I feared the fence wouldn’t last through 30 more minutes of the bear’s punishment. The camp manager suggested I use pepper spray. The spray burns the bears’ eyes, but doesn’t hurt them. So I approached our uninvited guest slowly and, through the fence, sprayed him in the face. With an angry roar (吼叫) ， the bear ran to the lake to wash his eyes."
+            }
+          ]
+        }
+      }
+    },
+    "questions": {
+      "q-zj-2020-jul-021": {
+        "questionId": "q-zj-2020-jul-021",
+        "questionNo": 21,
+        "groupId": "group-zj-2020-jul-reading-a",
+        "stem": "What do we know about the author from the first paragraph?",
+        "options": [
+          {
+            "label": "A",
+            "text": "He has written dozens of plays."
+          },
+          {
+            "label": "B",
+            "text": "He has a deep love for the theater."
+          },
+          {
+            "label": "C",
+            "text": "He is a professional stage actor."
+          },
+          {
+            "label": "D",
+            "text": "He likes reading short plays to others."
+          }
+        ]
+      },
+      "q-zj-2020-jul-022": {
+        "questionId": "q-zj-2020-jul-022",
+        "questionNo": 22,
+        "groupId": "group-zj-2020-jul-reading-a",
+        "stem": "What does the author avoid doing in his work?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Stating the plays' central ideas."
+          },
+          {
+            "label": "B",
+            "text": "Selecting works by famous playwrights."
+          },
+          {
+            "label": "C",
+            "text": "Including various types of plays."
+          },
+          {
+            "label": "D",
+            "text": "Offering information on the playwrights."
+          }
+        ]
+      },
+      "q-zj-2020-jul-023": {
+        "questionId": "q-zj-2020-jul-023",
+        "questionNo": 23,
+        "groupId": "group-zj-2020-jul-reading-a",
+        "stem": "What does the author suggest readers do while reading the plays?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Control their feelings."
+          },
+          {
+            "label": "B",
+            "text": "Apply their acting skills."
+          },
+          {
+            "label": "C",
+            "text": "Use their imagination."
+          },
+          {
+            "label": "D",
+            "text": "Keep their audience in mind."
+          }
+        ]
+      },
+      "q-zj-2020-jul-024": {
+        "questionId": "q-zj-2020-jul-024",
+        "questionNo": 24,
+        "groupId": "group-zj-2020-jul-reading-a",
+        "stem": "What is this text? B",
+        "options": [
+          {
+            "label": "A",
+            "text": "A short story."
+          },
+          {
+            "label": "B",
+            "text": "An introduction to a book."
+          },
+          {
+            "label": "C",
+            "text": "A play review."
+          },
+          {
+            "label": "D",
+            "text": "An advertisement for a theater."
+          }
+        ]
+      },
+      "q-zj-2020-jul-025": {
+        "questionId": "q-zj-2020-jul-025",
+        "questionNo": 25,
+        "groupId": "group-zj-2020-jul-reading-b",
+        "stem": "What does the underlined word \"That\" in Paragraph 2 refer to?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Increased length of green lights."
+          },
+          {
+            "label": "B",
+            "text": "Shortened traffic signal cycle."
+          },
+          {
+            "label": "C",
+            "text": "Flexible timing of traffic signals."
+          },
+          {
+            "label": "D",
+            "text": "Smooth traffic flow on the road."
+          }
+        ]
+      },
+      "q-zj-2020-jul-026": {
+        "questionId": "q-zj-2020-jul-026",
+        "questionNo": 26,
+        "groupId": "group-zj-2020-jul-reading-b",
+        "stem": "What does Kevin Balke say about adaptive signals?",
+        "options": [
+          {
+            "label": "A",
+            "text": "They work better on broad roads."
+          },
+          {
+            "label": "B",
+            "text": "They should be used in other cities."
+          },
+          {
+            "label": "C",
+            "text": "They have greatly reduced traffic on the road."
+          },
+          {
+            "label": "D",
+            "text": "They are less helpful in cities seriously jammed."
+          }
+        ]
+      },
+      "q-zj-2020-jul-027": {
+        "questionId": "q-zj-2020-jul-027",
+        "questionNo": 27,
+        "groupId": "group-zj-2020-jul-reading-b",
+        "stem": "What can we learn from Bellevue's success? C",
+        "options": [
+          {
+            "label": "A",
+            "text": "It is rewarding to try new things."
+          },
+          {
+            "label": "B",
+            "text": "The old methods still work today."
+          },
+          {
+            "label": "C",
+            "text": "It pays to put theory into practice."
+          },
+          {
+            "label": "D",
+            "text": "The simplest way is the best way."
+          }
+        ]
+      },
+      "q-zj-2020-jul-028": {
+        "questionId": "q-zj-2020-jul-028",
+        "questionNo": 28,
+        "groupId": "group-zj-2020-jul-reading-c",
+        "stem": "Why did the scientists ask the volunteers to take the tests?",
+        "options": [
+          {
+            "label": "A",
+            "text": "To assess their health status."
+          },
+          {
+            "label": "B",
+            "text": "To evaluate their work habits."
+          },
+          {
+            "label": "C",
+            "text": "To analyze their personality."
+          },
+          {
+            "label": "D",
+            "text": "To measure their mental ability."
+          }
+        ]
+      },
+      "q-zj-2020-jul-029": {
+        "questionId": "q-zj-2020-jul-029",
+        "questionNo": 29,
+        "groupId": "group-zj-2020-jul-reading-c",
+        "stem": "How does Francisca Then explain her findings in Paragraph 4?",
+        "options": [
+          {
+            "label": "A",
+            "text": "By using an expert's words."
+          },
+          {
+            "label": "B",
+            "text": "By making a comparison."
+          },
+          {
+            "label": "C",
+            "text": "By referring to another study."
+          },
+          {
+            "label": "D",
+            "text": "By introducing a concept."
+          }
+        ]
+      },
+      "q-zj-2020-jul-030": {
+        "questionId": "q-zj-2020-jul-030",
+        "questionNo": 30,
+        "groupId": "group-zj-2020-jul-reading-c",
+        "stem": "Which of the following is the best title for the text?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Retired Workers Can Pick Up New Skills"
+          },
+          {
+            "label": "B",
+            "text": "Old People Should Take Challenging Jobs"
+          },
+          {
+            "label": "C",
+            "text": "Your Tough Job Might Help Keep You Sharp"
+          },
+          {
+            "label": "D",
+            "text": "Cognitive Function May Decline As You Age"
+          }
+        ]
+      },
+      "q-zj-2020-jul-031": {
+        "questionId": "q-zj-2020-jul-031",
+        "questionNo": 31,
+        "groupId": "group-zj-2020-jul-seven-choices",
+        "stem": "31",
+        "blankId": "blank-zj-2020-jul-031"
+      },
+      "q-zj-2020-jul-032": {
+        "questionId": "q-zj-2020-jul-032",
+        "questionNo": 32,
+        "groupId": "group-zj-2020-jul-seven-choices",
+        "stem": "32",
+        "blankId": "blank-zj-2020-jul-032"
+      },
+      "q-zj-2020-jul-033": {
+        "questionId": "q-zj-2020-jul-033",
+        "questionNo": 33,
+        "groupId": "group-zj-2020-jul-seven-choices",
+        "stem": "33",
+        "blankId": "blank-zj-2020-jul-033"
+      },
+      "q-zj-2020-jul-034": {
+        "questionId": "q-zj-2020-jul-034",
+        "questionNo": 34,
+        "groupId": "group-zj-2020-jul-seven-choices",
+        "stem": "34",
+        "blankId": "blank-zj-2020-jul-034"
+      },
+      "q-zj-2020-jul-035": {
+        "questionId": "q-zj-2020-jul-035",
+        "questionNo": 35,
+        "groupId": "group-zj-2020-jul-seven-choices",
+        "stem": "35",
+        "blankId": "blank-zj-2020-jul-035"
+      },
+      "q-zj-2020-jul-036": {
+        "questionId": "q-zj-2020-jul-036",
+        "questionNo": 36,
+        "groupId": "group-zj-2020-jul-cloze",
+        "stem": "36",
+        "blankId": "blank-zj-2020-jul-036",
+        "options": [
+          {
+            "label": "A",
+            "text": "dropped"
+          },
+          {
+            "label": "B",
+            "text": "spotted"
+          },
+          {
+            "label": "C",
+            "text": "carried"
+          },
+          {
+            "label": "D",
+            "text": "returned"
+          }
+        ]
+      },
+      "q-zj-2020-jul-037": {
+        "questionId": "q-zj-2020-jul-037",
+        "questionNo": 37,
+        "groupId": "group-zj-2020-jul-cloze",
+        "stem": "37",
+        "blankId": "blank-zj-2020-jul-037",
+        "options": [
+          {
+            "label": "A",
+            "text": "kids"
+          },
+          {
+            "label": "B",
+            "text": "friends"
+          },
+          {
+            "label": "C",
+            "text": "owner"
+          },
+          {
+            "label": "D",
+            "text": "mother"
+          }
+        ]
+      },
+      "q-zj-2020-jul-038": {
+        "questionId": "q-zj-2020-jul-038",
+        "questionNo": 38,
+        "groupId": "group-zj-2020-jul-cloze",
+        "stem": "38",
+        "blankId": "blank-zj-2020-jul-038",
+        "options": [
+          {
+            "label": "A",
+            "text": "ask about"
+          },
+          {
+            "label": "B",
+            "text": "play with"
+          },
+          {
+            "label": "C",
+            "text": "tend to"
+          },
+          {
+            "label": "D",
+            "text": "run into"
+          }
+        ]
+      },
+      "q-zj-2020-jul-039": {
+        "questionId": "q-zj-2020-jul-039",
+        "questionNo": 39,
+        "groupId": "group-zj-2020-jul-cloze",
+        "stem": "39",
+        "blankId": "blank-zj-2020-jul-039",
+        "options": [
+          {
+            "label": "A",
+            "text": "freed"
+          },
+          {
+            "label": "B",
+            "text": "switched"
+          },
+          {
+            "label": "C",
+            "text": "reunited"
+          },
+          {
+            "label": "D",
+            "text": "examined"
+          }
+        ]
+      },
+      "q-zj-2020-jul-040": {
+        "questionId": "q-zj-2020-jul-040",
+        "questionNo": 40,
+        "groupId": "group-zj-2020-jul-cloze",
+        "stem": "40",
+        "blankId": "blank-zj-2020-jul-040",
+        "options": [
+          {
+            "label": "A",
+            "text": "unexpected"
+          },
+          {
+            "label": "B",
+            "text": "dangerous"
+          },
+          {
+            "label": "C",
+            "text": "embarrassing"
+          },
+          {
+            "label": "D",
+            "text": "difficult"
+          }
+        ]
+      },
+      "q-zj-2020-jul-041": {
+        "questionId": "q-zj-2020-jul-041",
+        "questionNo": 41,
+        "groupId": "group-zj-2020-jul-cloze",
+        "stem": "41",
+        "blankId": "blank-zj-2020-jul-041",
+        "options": [
+          {
+            "label": "A",
+            "text": "Fortunately"
+          },
+          {
+            "label": "B",
+            "text": "Generally"
+          },
+          {
+            "label": "C",
+            "text": "Immediately"
+          },
+          {
+            "label": "D",
+            "text": "Obviously"
+          }
+        ]
+      },
+      "q-zj-2020-jul-042": {
+        "questionId": "q-zj-2020-jul-042",
+        "questionNo": 42,
+        "groupId": "group-zj-2020-jul-cloze",
+        "stem": "42",
+        "blankId": "blank-zj-2020-jul-042",
+        "options": [
+          {
+            "label": "A",
+            "text": "lamb"
+          },
+          {
+            "label": "B",
+            "text": "vehicle"
+          },
+          {
+            "label": "C",
+            "text": "seat"
+          },
+          {
+            "label": "D",
+            "text": "fence"
+          }
+        ]
+      },
+      "q-zj-2020-jul-043": {
+        "questionId": "q-zj-2020-jul-043",
+        "questionNo": 43,
+        "groupId": "group-zj-2020-jul-cloze",
+        "stem": "43",
+        "blankId": "blank-zj-2020-jul-043",
+        "options": [
+          {
+            "label": "A",
+            "text": "saw"
+          },
+          {
+            "label": "B",
+            "text": "stopped"
+          },
+          {
+            "label": "C",
+            "text": "remembered"
+          },
+          {
+            "label": "D",
+            "text": "drove"
+          }
+        ]
+      },
+      "q-zj-2020-jul-044": {
+        "questionId": "q-zj-2020-jul-044",
+        "questionNo": 44,
+        "groupId": "group-zj-2020-jul-cloze",
+        "stem": "44",
+        "blankId": "blank-zj-2020-jul-044",
+        "options": [
+          {
+            "label": "A",
+            "text": "crowd"
+          },
+          {
+            "label": "B",
+            "text": "motorway"
+          },
+          {
+            "label": "C",
+            "text": "field"
+          },
+          {
+            "label": "D",
+            "text": "hill"
+          }
+        ]
+      },
+      "q-zj-2020-jul-045": {
+        "questionId": "q-zj-2020-jul-045",
+        "questionNo": 45,
+        "groupId": "group-zj-2020-jul-cloze",
+        "stem": "45",
+        "blankId": "blank-zj-2020-jul-045",
+        "options": [
+          {
+            "label": "A",
+            "text": "take off"
+          },
+          {
+            "label": "B",
+            "text": "catch up"
+          },
+          {
+            "label": "C",
+            "text": "hold back"
+          },
+          {
+            "label": "D",
+            "text": "get out"
+          }
+        ]
+      },
+      "q-zj-2020-jul-046": {
+        "questionId": "q-zj-2020-jul-046",
+        "questionNo": 46,
+        "groupId": "group-zj-2020-jul-cloze",
+        "stem": "46",
+        "blankId": "blank-zj-2020-jul-046",
+        "options": [
+          {
+            "label": "A",
+            "text": "real"
+          },
+          {
+            "label": "B",
+            "text": "best"
+          },
+          {
+            "label": "C",
+            "text": "basic"
+          },
+          {
+            "label": "D",
+            "text": "last"
+          }
+        ]
+      },
+      "q-zj-2020-jul-047": {
+        "questionId": "q-zj-2020-jul-047",
+        "questionNo": 47,
+        "groupId": "group-zj-2020-jul-cloze",
+        "stem": "47",
+        "blankId": "blank-zj-2020-jul-047",
+        "options": [
+          {
+            "label": "A",
+            "text": "fixed"
+          },
+          {
+            "label": "B",
+            "text": "noticed"
+          },
+          {
+            "label": "C",
+            "text": "reached"
+          },
+          {
+            "label": "D",
+            "text": "closed"
+          }
+        ]
+      },
+      "q-zj-2020-jul-048": {
+        "questionId": "q-zj-2020-jul-048",
+        "questionNo": 48,
+        "groupId": "group-zj-2020-jul-cloze",
+        "stem": "48",
+        "blankId": "blank-zj-2020-jul-048",
+        "options": [
+          {
+            "label": "A",
+            "text": "resting"
+          },
+          {
+            "label": "B",
+            "text": "running"
+          },
+          {
+            "label": "C",
+            "text": "parking"
+          },
+          {
+            "label": "D",
+            "text": "turning"
+          }
+        ]
+      },
+      "q-zj-2020-jul-049": {
+        "questionId": "q-zj-2020-jul-049",
+        "questionNo": 49,
+        "groupId": "group-zj-2020-jul-cloze",
+        "stem": "49",
+        "blankId": "blank-zj-2020-jul-049",
+        "options": [
+          {
+            "label": "A",
+            "text": "steep"
+          },
+          {
+            "label": "B",
+            "text": "long"
+          },
+          {
+            "label": "C",
+            "text": "rough"
+          },
+          {
+            "label": "D",
+            "text": "busy"
+          }
+        ]
+      },
+      "q-zj-2020-jul-050": {
+        "questionId": "q-zj-2020-jul-050",
+        "questionNo": 50,
+        "groupId": "group-zj-2020-jul-cloze",
+        "stem": "50",
+        "blankId": "blank-zj-2020-jul-050",
+        "options": [
+          {
+            "label": "A",
+            "text": "abandoned"
+          },
+          {
+            "label": "B",
+            "text": "approached"
+          },
+          {
+            "label": "C",
+            "text": "recognized"
+          },
+          {
+            "label": "D",
+            "text": "repaired"
+          }
+        ]
+      },
+      "q-zj-2020-jul-051": {
+        "questionId": "q-zj-2020-jul-051",
+        "questionNo": 51,
+        "groupId": "group-zj-2020-jul-cloze",
+        "stem": "51",
+        "blankId": "blank-zj-2020-jul-051",
+        "options": [
+          {
+            "label": "A",
+            "text": "unclean"
+          },
+          {
+            "label": "B",
+            "text": "uncertain"
+          },
+          {
+            "label": "C",
+            "text": "unhurt"
+          },
+          {
+            "label": "D",
+            "text": "unhappy"
+          }
+        ]
+      },
+      "q-zj-2020-jul-052": {
+        "questionId": "q-zj-2020-jul-052",
+        "questionNo": 52,
+        "groupId": "group-zj-2020-jul-cloze",
+        "stem": "52",
+        "blankId": "blank-zj-2020-jul-052",
+        "options": [
+          {
+            "label": "A",
+            "text": "arrived"
+          },
+          {
+            "label": "B",
+            "text": "replied"
+          },
+          {
+            "label": "C",
+            "text": "survived"
+          },
+          {
+            "label": "D",
+            "text": "waited"
+          }
+        ]
+      },
+      "q-zj-2020-jul-053": {
+        "questionId": "q-zj-2020-jul-053",
+        "questionNo": 53,
+        "groupId": "group-zj-2020-jul-cloze",
+        "stem": "53",
+        "blankId": "blank-zj-2020-jul-053",
+        "options": [
+          {
+            "label": "A",
+            "text": "ability"
+          },
+          {
+            "label": "B",
+            "text": "dream"
+          },
+          {
+            "label": "C",
+            "text": "luck"
+          },
+          {
+            "label": "D",
+            "text": "idea"
+          }
+        ]
+      },
+      "q-zj-2020-jul-054": {
+        "questionId": "q-zj-2020-jul-054",
+        "questionNo": 54,
+        "groupId": "group-zj-2020-jul-cloze",
+        "stem": "54",
+        "blankId": "blank-zj-2020-jul-054",
+        "options": [
+          {
+            "label": "A",
+            "text": "common"
+          },
+          {
+            "label": "B",
+            "text": "confusing"
+          },
+          {
+            "label": "C",
+            "text": "desirable"
+          },
+          {
+            "label": "D",
+            "text": "awful"
+          }
+        ]
+      },
+      "q-zj-2020-jul-055": {
+        "questionId": "q-zj-2020-jul-055",
+        "questionNo": 55,
+        "groupId": "group-zj-2020-jul-cloze",
+        "stem": "55",
+        "blankId": "blank-zj-2020-jul-055",
+        "options": [
+          {
+            "label": "A",
+            "text": "meal"
+          },
+          {
+            "label": "B",
+            "text": "test"
+          },
+          {
+            "label": "C",
+            "text": "job"
+          },
+          {
+            "label": "D",
+            "text": "lesson"
+          }
+        ]
+      },
+      "q-zj-2020-jul-056": {
+        "questionId": "q-zj-2020-jul-056",
+        "questionNo": 56,
+        "groupId": "group-zj-2020-jul-grammar-fill",
+        "stem": "56",
+        "blankId": "blank-zj-2020-jul-056"
+      },
+      "q-zj-2020-jul-057": {
+        "questionId": "q-zj-2020-jul-057",
+        "questionNo": 57,
+        "groupId": "group-zj-2020-jul-grammar-fill",
+        "stem": "57",
+        "blankId": "blank-zj-2020-jul-057"
+      },
+      "q-zj-2020-jul-058": {
+        "questionId": "q-zj-2020-jul-058",
+        "questionNo": 58,
+        "groupId": "group-zj-2020-jul-grammar-fill",
+        "stem": "58",
+        "blankId": "blank-zj-2020-jul-058"
+      },
+      "q-zj-2020-jul-059": {
+        "questionId": "q-zj-2020-jul-059",
+        "questionNo": 59,
+        "groupId": "group-zj-2020-jul-grammar-fill",
+        "stem": "59",
+        "blankId": "blank-zj-2020-jul-059"
+      },
+      "q-zj-2020-jul-060": {
+        "questionId": "q-zj-2020-jul-060",
+        "questionNo": 60,
+        "groupId": "group-zj-2020-jul-grammar-fill",
+        "stem": "60",
+        "blankId": "blank-zj-2020-jul-060"
+      },
+      "q-zj-2020-jul-061": {
+        "questionId": "q-zj-2020-jul-061",
+        "questionNo": 61,
+        "groupId": "group-zj-2020-jul-grammar-fill",
+        "stem": "61",
+        "blankId": "blank-zj-2020-jul-061"
+      },
+      "q-zj-2020-jul-062": {
+        "questionId": "q-zj-2020-jul-062",
+        "questionNo": 62,
+        "groupId": "group-zj-2020-jul-grammar-fill",
+        "stem": "62",
+        "blankId": "blank-zj-2020-jul-062"
+      },
+      "q-zj-2020-jul-063": {
+        "questionId": "q-zj-2020-jul-063",
+        "questionNo": 63,
+        "groupId": "group-zj-2020-jul-grammar-fill",
+        "stem": "63",
+        "blankId": "blank-zj-2020-jul-063"
+      },
+      "q-zj-2020-jul-064": {
+        "questionId": "q-zj-2020-jul-064",
+        "questionNo": 64,
+        "groupId": "group-zj-2020-jul-grammar-fill",
+        "stem": "64",
+        "blankId": "blank-zj-2020-jul-064"
+      },
+      "q-zj-2020-jul-065": {
+        "questionId": "q-zj-2020-jul-065",
+        "questionNo": 65,
+        "groupId": "group-zj-2020-jul-grammar-fill",
+        "stem": "65",
+        "blankId": "blank-zj-2020-jul-065"
+      }
+    },
+    "blanks": {
+      "blank-zj-2020-jul-056": {
+        "blankId": "blank-zj-2020-jul-056",
+        "groupId": "group-zj-2020-jul-grammar-fill",
+        "questionId": "q-zj-2020-jul-056"
+      },
+      "blank-zj-2020-jul-057": {
+        "blankId": "blank-zj-2020-jul-057",
+        "groupId": "group-zj-2020-jul-grammar-fill",
+        "questionId": "q-zj-2020-jul-057"
+      },
+      "blank-zj-2020-jul-058": {
+        "blankId": "blank-zj-2020-jul-058",
+        "groupId": "group-zj-2020-jul-grammar-fill",
+        "questionId": "q-zj-2020-jul-058"
+      },
+      "blank-zj-2020-jul-059": {
+        "blankId": "blank-zj-2020-jul-059",
+        "groupId": "group-zj-2020-jul-grammar-fill",
+        "questionId": "q-zj-2020-jul-059",
+        "prompt": "need"
+      },
+      "blank-zj-2020-jul-060": {
+        "blankId": "blank-zj-2020-jul-060",
+        "groupId": "group-zj-2020-jul-grammar-fill",
+        "questionId": "q-zj-2020-jul-060",
+        "prompt": "change"
+      },
+      "blank-zj-2020-jul-061": {
+        "blankId": "blank-zj-2020-jul-061",
+        "groupId": "group-zj-2020-jul-grammar-fill",
+        "questionId": "q-zj-2020-jul-061",
+        "prompt": "discover"
+      },
+      "blank-zj-2020-jul-062": {
+        "blankId": "blank-zj-2020-jul-062",
+        "groupId": "group-zj-2020-jul-grammar-fill",
+        "questionId": "q-zj-2020-jul-062",
+        "prompt": "season"
+      },
+      "blank-zj-2020-jul-063": {
+        "blankId": "blank-zj-2020-jul-063",
+        "groupId": "group-zj-2020-jul-grammar-fill",
+        "questionId": "q-zj-2020-jul-063",
+        "prompt": "make"
+      },
+      "blank-zj-2020-jul-064": {
+        "blankId": "blank-zj-2020-jul-064",
+        "groupId": "group-zj-2020-jul-grammar-fill",
+        "questionId": "q-zj-2020-jul-064"
+      },
+      "blank-zj-2020-jul-065": {
+        "blankId": "blank-zj-2020-jul-065",
+        "groupId": "group-zj-2020-jul-grammar-fill",
+        "questionId": "q-zj-2020-jul-065",
+        "prompt": "mean"
+      }
+    },
+    "writingTasks": {
+      "wt-zj-2020-jul-application": {
+        "writingTaskId": "wt-zj-2020-jul-application",
+        "groupId": "group-zj-2020-jul-writing-application",
+        "taskType": "application",
+        "title": "应用文写作",
+        "instruction": "假定你是李华，你校来自爱尔兰的外教Peter因病回国休假。请给他写一封电子邮件，内容包括：(1)询问近况；(2)分享班级最新消息；(3)表达祝愿。注意：(1)词数80左右；(2)可适当增加细节，以使行文连贯。",
+        "wordCountTarget": 80
+      },
+      "wt-zj-2020-jul-continuation": {
+        "writingTaskId": "wt-zj-2020-jul-continuation",
+        "groupId": "group-zj-2020-jul-writing-continuation",
+        "taskType": "continuation",
+        "title": "读后续写",
+        "instruction": "阅读下面短文，根据所给情节进行续写，使之构成一个完整的故事。\nOne fall, my wife Elli and I had a single goal: to photograph polar bears. We were staying at a research camp outside “the polar bear capital of the world” – the town of Churchill in Manitoba, Canada.\nTaking pictures of polar bears is amazing but also dangerous. Polar bears – like all wild animals – should be photographed from a safe distance. When I’m face to face with a polar bear, I like it to be through a camera with a telephoto lens. But sometimes, that is easier said than done. This was one of those times.\nAs Elli and I cooked dinner, a young male polar bear who was playing in a nearby lake sniffed, and smelled our garlic bread.\nThe hungry bear followed his nose to our camp, which was surrounded by a high wire fence. He pulled and bit the wire. He stood on his back legs and pushed at the wooden fence posts.\nTerrified, Elli and I tried all the bear defense actions we knew. We yelled at the bear, hit pots hard, and fired blank shotgun shells into the air. Sometimes loud noises like these will scare bears off. Not this polar bear though – he just kept trying to tear down the fence with his massive paws (爪子) .\nI radioed the camp manager for help. He told me a helicopter was on its way, but it would be 30 minutes before it arrived. Making the best of this close encounter (相遇) , I took some pictures of the bear.\nElli and I feared the fence wouldn’t last through 30 more minutes of the bear’s punishment. The camp manager suggested I use pepper spray. The spray burns the bears’ eyes, but doesn’t hurt them. So I approached our uninvited guest slowly and, through the fence, sprayed him in the face. With an angry roar (吼叫) ， the bear ran to the lake to wash his eyes.",
+        "continuationStarters": [],
+        "materialText": "阅读下面短文，根据所给情节进行续写，使之构成一个完整的故事。\n\nOne fall, my wife Elli and I had a single goal: to photograph polar bears. We were staying at a research camp outside “the polar bear capital of the world” – the town of Churchill in Manitoba, Canada.\n\nTaking pictures of polar bears is amazing but also dangerous. Polar bears – like all wild animals – should be photographed from a safe distance. When I’m face to face with a polar bear, I like it to be through a camera with a telephoto lens. But sometimes, that is easier said than done. This was one of those times.\n\nAs Elli and I cooked dinner, a young male polar bear who was playing in a nearby lake sniffed, and smelled our garlic bread.\n\nThe hungry bear followed his nose to our camp, which was surrounded by a high wire fence. He pulled and bit the wire. He stood on his back legs and pushed at the wooden fence posts.\n\nTerrified, Elli and I tried all the bear defense actions we knew. We yelled at the bear, hit pots hard, and fired blank shotgun shells into the air. Sometimes loud noises like these will scare bears off. Not this polar bear though – he just kept trying to tear down the fence with his massive paws (爪子) .\n\nI radioed the camp manager for help. He told me a helicopter was on its way, but it would be 30 minutes before it arrived. Making the best of this close encounter (相遇) , I took some pictures of the bear.\n\nElli and I feared the fence wouldn’t last through 30 more minutes of the bear’s punishment. The camp manager suggested I use pepper spray. The spray burns the bears’ eyes, but doesn’t hurt them. So I approached our uninvited guest slowly and, through the fence, sprayed him in the face. With an angry roar (吼叫) ， the bear ran to the lake to wash his eyes.",
+        "wordCountTarget": 150
+      }
+    }
+  },
+  "answerKey": {
+    "answers": {
+      "q-zj-2020-jul-021": {
+        "questionId": "q-zj-2020-jul-021",
+        "questionNo": 21,
+        "answer": "B",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2020-jul-022": {
+        "questionId": "q-zj-2020-jul-022",
+        "questionNo": 22,
+        "answer": "A",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2020-jul-023": {
+        "questionId": "q-zj-2020-jul-023",
+        "questionNo": 23,
+        "answer": "C",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2020-jul-024": {
+        "questionId": "q-zj-2020-jul-024",
+        "questionNo": 24,
+        "answer": "B",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2020-jul-025": {
+        "questionId": "q-zj-2020-jul-025",
+        "questionNo": 25,
+        "answer": "C",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2020-jul-026": {
+        "questionId": "q-zj-2020-jul-026",
+        "questionNo": 26,
+        "answer": "D",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2020-jul-027": {
+        "questionId": "q-zj-2020-jul-027",
+        "questionNo": 27,
+        "answer": "A",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2020-jul-028": {
+        "questionId": "q-zj-2020-jul-028",
+        "questionNo": 28,
+        "answer": "D",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2020-jul-029": {
+        "questionId": "q-zj-2020-jul-029",
+        "questionNo": 29,
+        "answer": "B",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2020-jul-030": {
+        "questionId": "q-zj-2020-jul-030",
+        "questionNo": 30,
+        "answer": "C",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2020-jul-031": {
+        "questionId": "q-zj-2020-jul-031",
+        "questionNo": 31,
+        "answer": "G",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2020-jul-032": {
+        "questionId": "q-zj-2020-jul-032",
+        "questionNo": 32,
+        "answer": "D",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2020-jul-033": {
+        "questionId": "q-zj-2020-jul-033",
+        "questionNo": 33,
+        "answer": "A",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2020-jul-034": {
+        "questionId": "q-zj-2020-jul-034",
+        "questionNo": 34,
+        "answer": "F",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2020-jul-035": {
+        "questionId": "q-zj-2020-jul-035",
+        "questionNo": 35,
+        "answer": "E",
+        "score": 2,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2020-jul-036": {
+        "questionId": "q-zj-2020-jul-036",
+        "questionNo": 36,
+        "answer": "B",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2020-jul-037": {
+        "questionId": "q-zj-2020-jul-037",
+        "questionNo": 37,
+        "answer": "D",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2020-jul-038": {
+        "questionId": "q-zj-2020-jul-038",
+        "questionNo": 38,
+        "answer": "C",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2020-jul-039": {
+        "questionId": "q-zj-2020-jul-039",
+        "questionNo": 39,
+        "answer": "C",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2020-jul-040": {
+        "questionId": "q-zj-2020-jul-040",
+        "questionNo": 40,
+        "answer": "A",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2020-jul-041": {
+        "questionId": "q-zj-2020-jul-041",
+        "questionNo": 41,
+        "answer": "D",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2020-jul-042": {
+        "questionId": "q-zj-2020-jul-042",
+        "questionNo": 42,
+        "answer": "B",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2020-jul-043": {
+        "questionId": "q-zj-2020-jul-043",
+        "questionNo": 43,
+        "answer": "A",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2020-jul-044": {
+        "questionId": "q-zj-2020-jul-044",
+        "questionNo": 44,
+        "answer": "B",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2020-jul-045": {
+        "questionId": "q-zj-2020-jul-045",
+        "questionNo": 45,
+        "answer": "B",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2020-jul-046": {
+        "questionId": "q-zj-2020-jul-046",
+        "questionNo": 46,
+        "answer": "D",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2020-jul-047": {
+        "questionId": "q-zj-2020-jul-047",
+        "questionNo": 47,
+        "answer": "C",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2020-jul-048": {
+        "questionId": "q-zj-2020-jul-048",
+        "questionNo": 48,
+        "answer": "A",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2020-jul-049": {
+        "questionId": "q-zj-2020-jul-049",
+        "questionNo": 49,
+        "answer": "D",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2020-jul-050": {
+        "questionId": "q-zj-2020-jul-050",
+        "questionNo": 50,
+        "answer": "B",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2020-jul-051": {
+        "questionId": "q-zj-2020-jul-051",
+        "questionNo": 51,
+        "answer": "C",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2020-jul-052": {
+        "questionId": "q-zj-2020-jul-052",
+        "questionNo": 52,
+        "answer": "A",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2020-jul-053": {
+        "questionId": "q-zj-2020-jul-053",
+        "questionNo": 53,
+        "answer": "C",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2020-jul-054": {
+        "questionId": "q-zj-2020-jul-054",
+        "questionNo": 54,
+        "answer": "D",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2020-jul-055": {
+        "questionId": "q-zj-2020-jul-055",
+        "questionNo": 55,
+        "answer": "A",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2020-jul-056": {
+        "questionId": "q-zj-2020-jul-056",
+        "questionNo": 56,
+        "answer": "in",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2020-jul-057": {
+        "questionId": "q-zj-2020-jul-057",
+        "questionNo": 57,
+        "answer": "what",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2020-jul-058": {
+        "questionId": "q-zj-2020-jul-058",
+        "questionNo": 58,
+        "answer": "than",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2020-jul-059": {
+        "questionId": "q-zj-2020-jul-059",
+        "questionNo": 59,
+        "answer": "was needed",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2020-jul-060": {
+        "questionId": "q-zj-2020-jul-060",
+        "questionNo": 60,
+        "answer": "to change",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2020-jul-061": {
+        "questionId": "q-zj-2020-jul-061",
+        "questionNo": 61,
+        "answer": "had discovered",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2020-jul-062": {
+        "questionId": "q-zj-2020-jul-062",
+        "questionNo": 62,
+        "answer": "seasons",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2020-jul-063": {
+        "questionId": "q-zj-2020-jul-063",
+        "questionNo": 63,
+        "answer": "making",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2020-jul-064": {
+        "questionId": "q-zj-2020-jul-064",
+        "questionNo": 64,
+        "answer": "the",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-zj-2020-jul-065": {
+        "questionId": "q-zj-2020-jul-065",
+        "questionNo": 65,
+        "answer": "meant",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      }
+    }
+  },
+  "analysis": {
+    "meta": {
+      "generatedBy": "external-ai",
+      "promptVersion": "reading-choice-analysis-v1",
+      "reviewStatus": "reviewed",
+      "importMode": "paper-import-ai",
+      "model": "claude-opus-4-8",
+      "reviewedBy": "import-pipeline",
+      "reviewedAt": "2026-06-18T00:00:00Z"
+    },
+    "groups": {
+      "group-zj-2020-jul-reading-a": {
+        "overview": "本文是一本短剧选集（戏剧合集）的编者序言。作者作为一名热爱戏剧的看戏人和读剧人，说明了自己编辑此书的初衷、选材标准、所收录剧作的类型与作者，并在结尾邀请读者带着想象去阅读这些剧本。",
+        "discourseStructure": {
+          "summary": "全文按\"编书初衷—选材原则与剧目类型—剧作家荣誉—阅读建议\"的顺序展开，是一篇典型的书籍序言。",
+          "paragraphs": [
+            {
+              "paragraphId": "para-zj-2020-jul-reading-a-1",
+              "summary": "作者自述是一名热心的看戏人和读剧人，编书是为了与他人分享自己对戏剧的热爱，并说明从大量剧本中精选出最能体现短剧力量与意义的作品。",
+              "function": "引出编者身份与编书目的（开篇立意）。"
+            },
+            {
+              "paragraphId": "para-zj-2020-jul-reading-a-2",
+              "summary": "阐述每部剧都有通过对话与动作传达的主题，作者特意不点明各剧主题以免破坏读者的阅读乐趣；同时介绍所收录剧作类型多样，包括喜剧、讽刺剧、感人正剧、历史与地方剧，以及指导剧、广播剧和电视剧。",
+              "function": "说明选材原则（刻意不剧透主题）与剧目类型的多样性。"
+            },
+            {
+              "paragraphId": "para-zj-2020-jul-reading-a-3",
+              "summary": "列举本书收录的多位曾获普利策奖的剧作家，并指出书末附有关于这些剧作家的更多信息。",
+              "function": "以剧作家的荣誉与背景信息增强选集的权威性。"
+            },
+            {
+              "paragraphId": "para-zj-2020-jul-reading-a-4",
+              "summary": "建议读者在读剧时把自己想象成坐在观众席中、看着舞台上演出的人，并用大幕将启、灯光渐暗的场景渲染阅读体验。",
+              "function": "给出阅读建议并以舞台意象收束全文。"
+            }
+          ]
+        }
+      },
+      "group-zj-2020-jul-reading-b": {
+        "overview": "本文是一篇说明性的科普报道，介绍美国华盛顿州贝尔维尤市采用的“自适应信号灯”（adaptive signals）系统。文章先以 Factoria Boulevard 上随车流实时变化的红绿灯时长引入现象，再点明这是有意设计的自适应系统并说明其益处，随后引用两位专家观点（一位肯定其作用、一位指出其局限），最后落脚到贝尔维尤的经验启示——城市治堵应让街道“更聪明”而非一味“更宽”。",
+        "discourseStructure": {
+          "summary": "全文按“现象引入—揭示设计与益处—专家正面评价—专家指出局限—经验升华”的顺序展开，由具体案例过渡到一般性结论。",
+          "paragraphs": [
+            {
+              "paragraphId": "para-zj-2020-jul-reading-b-1",
+              "summary": "以 Factoria Boulevard 红绿灯在不同时刻（9:30、9:33、9:37）时长各不相同为例，说明信号灯时长会随车流而变化。",
+              "function": "用具体案例引入现象，制造悬念，引出下文的解释。"
+            },
+            {
+              "paragraphId": "para-zj-2020-jul-reading-b-2",
+              "summary": "点明上述变化是有意设计的，介绍贝尔维尤采用的可实时调整的自适应信号灯系统，并指出它能显著降低通勤的麻烦和成本。",
+              "function": "揭示现象成因，引出核心概念 adaptive signals 并概述其益处。"
+            },
+            {
+              "paragraphId": "para-zj-2020-jul-reading-b-3",
+              "summary": "引用研究者 Alex Stevanovic 的话，肯定自适应信号灯能确保现有交通需求得到应对。",
+              "function": "借专家之口正面评价自适应信号灯的作用。"
+            },
+            {
+              "paragraphId": "para-zj-2020-jul-reading-b-4",
+              "summary": "引用研究工程师 Kevin Balke 的话，指出自适应信号灯并非万能：对一些城市很有益，但对极度拥堵的城市作用有限，只有大幅减少车辆才有意义，它对较小城市更有好处。",
+              "function": "转折，指出自适应信号灯的局限性，使评价更客观全面。"
+            },
+            {
+              "paragraphId": "para-zj-2020-jul-reading-b-5",
+              "summary": "借交通工程经理 Mark Poch 的话，说明贝尔维尤从“一遇堵车就拓宽道路”转向接受新办法，希望其他城市也让街道运行得更聪明而非仅仅更大。",
+              "function": "升华主题，提炼贝尔维尤成功的经验启示——拥抱新方法。"
+            }
+          ]
+        }
+      },
+      "group-zj-2020-jul-reading-c": {
+        "overview": "本文是一篇科普说明文，介绍德国莱比锡大学的一项研究：退休前从事需要分析思维、规划等管理技能的高难度工作，有助于大脑随年龄增长保持敏锐、减缓认知功能衰退。文章先抛出结论，再依次说明研究方法、研究结果、研究者用类比的解释，并指出不只是公司白领工作、连服务员和操持家务也同样有益，最后给出客观提醒。",
+        "discourseStructure": {
+          "summary": "全文按\"结论先行—研究方法—研究结果—类比解释—范围拓展—客观补充\"的顺序展开。先点明核心发现，再用研究的设计与数据加以支撑，接着借研究者之口用体育锻炼作类比，进而把\"有益的脑力工作\"范围扩展到服务员、家务等，最后理性补充大脑衰退另有其他原因。",
+          "paragraphs": [
+            {
+              "paragraphId": "para-zj-2020-jul-reading-c-1",
+              "summary": "一项发表于《神经病学》期刊的研究表明，需要大量分析思维、规划和其他管理技能的高难度工作，可能有助于大脑随年龄增长保持敏锐。",
+              "function": "开篇点题，直接给出研究的核心结论。"
+            },
+            {
+              "paragraphId": "para-zj-2020-jul-reading-c-2",
+              "summary": "德国莱比锡大学的研究者招募了1000多名75岁以上的退休工人，通过一系列测试评估其记忆和思维能力，并在八年间每18个月让同一组人回实验室做同类测试。",
+              "function": "介绍研究的对象与方法（追踪式测试设计）。"
+            },
+            {
+              "paragraphId": "para-zj-2020-jul-reading-c-3",
+              "summary": "退休前从事高强度、高脑力工作的人在测试中表现最好，认知功能衰退速度也比从事脑力要求最低工作的人慢得多；在排除整体健康状况因素后结论依然成立。",
+              "function": "呈现研究结果，并说明结论的稳健性。"
+            },
+            {
+              "paragraphId": "para-zj-2020-jul-reading-c-4",
+              "summary": "研究负责人Francisca Then用体育锻炼作类比：长跑后会疲惫疼痛但能强身；劳累的一天工作后虽然累，却能帮助大脑保持健康。",
+              "function": "借研究者之口，用类比解释研究发现的机制。"
+            },
+            {
+              "paragraphId": "para-zj-2020-jul-reading-c-5",
+              "summary": "Then指出有益的不只是公司白领工作甚至有酬工作；需要多任务、团队协作和决策的服务员工作同样有刺激性，操持家务也需要高水平的规划与协调。",
+              "function": "拓展\"有益脑力工作\"的范围，举例佐证。"
+            },
+            {
+              "paragraphId": "para-zj-2020-jul-reading-c-6",
+              "summary": "文章补充指出大脑衰退也可能由环境影响或遗传因素等多种原因造成，但持续挑战自己、让大脑保持忙碌只会有益无害。",
+              "function": "客观补充并收束全文，重申主旨。"
+            }
+          ]
+        }
+      }
+    },
+    "questions": {
+      "q-zj-2020-jul-021": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查从第一段中能得知作者的哪一项信息，需在原文细节与选项之间做同义转换。",
+        "stemTranslationZh": "从第一段中我们可以了解到关于作者的什么信息？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "他写过几十部剧本。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overstatement",
+              "sourceQuote": "To do this I have searched through dozens of plays to find the ones that I think best show the power and purpose of the short play.",
+              "sourceHighlight": "searched through dozens of plays",
+              "optionText": "He has written dozens of plays.",
+              "optionHighlight": "written dozens of plays",
+              "explanation": "原文说作者\"查阅、筛选\"了几十部剧本（searched through dozens of plays）来选材，并非\"写过\"几十部剧本；选项把\"阅读筛选\"夸大并偷换成\"创作\"。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2020-jul-reading-a-1",
+                "quote": "To do this I have searched through dozens of plays to find the ones that I think best show the power and purpose of the short play.",
+                "anchor": "searched through dozens of plays"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "他对戏剧怀有深厚的热爱。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-zj-2020-jul-reading-a-1",
+                "quote": "perhaps my best reason for editing this book is a hope of sharing my enthusiasm for the theater with others",
+                "anchor": "enthusiasm for the theater"
+              },
+              {
+                "role": "secondary",
+                "paragraphId": "para-zj-2020-jul-reading-a-1",
+                "quote": "I am an active playgoer and playreader",
+                "anchor": "active playgoer and playreader"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "他是一名专业的舞台演员。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "He is a professional stage actor.",
+              "explanation": "原文未提及作者是专业舞台演员，只说他是\"看戏人和读剧人\"（playgoer and playreader）以及本书的编者；\"专业演员\"属无中生有。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "他喜欢把短剧读给别人听。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overstatement",
+              "sourceQuote": "perhaps my best reason for editing this book is a hope of sharing my enthusiasm for the theater with others",
+              "sourceHighlight": "sharing my enthusiasm for the theater with others",
+              "optionText": "He likes reading short plays to others.",
+              "optionHighlight": "reading short plays to others",
+              "explanation": "原文说作者希望与他人\"分享对戏剧的热爱\"，靠的是编辑此书这一方式；选项把\"分享热爱\"偷换成\"读短剧给别人听\"，曲解了分享的内容与方式。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2020-jul-reading-a-1",
+                "quote": "perhaps my best reason for editing this book is a hope of sharing my enthusiasm for the theater with others",
+                "anchor": "sharing my enthusiasm with others"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "He has a deep love for the theater.",
+            "sourceRole": "correctOption",
+            "targetText": "a hope of sharing my enthusiasm for the theater with others",
+            "targetParagraphId": "para-zj-2020-jul-reading-a-1",
+            "relationType": "paraphrase",
+            "note": "选项用 a deep love for the theater 概括原文的 enthusiasm for the theater，再结合 active playgoer and playreader，可知作者深爱戏剧。"
+          }
+        ]
+      },
+      "q-zj-2020-jul-022": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查作者在编书过程中刻意\"避免做\"的事，需定位第二段中表示\"无意做某事\"的句子。",
+        "stemTranslationZh": "在编书工作中，作者刻意避免做什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "点明各剧本的中心思想。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-zj-2020-jul-reading-a-2",
+                "quote": "It is not my intention to point out the central theme of each of the plays in this collection",
+                "anchor": "not my intention to point out the central theme"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "挑选著名剧作家的作品。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeAction",
+              "sourceQuote": "Paul Green, Susan Glaspell, Maxwell Anderson, Thornton Wilder, William Saroyan, and Tennessee Williams have all received Pulitzer Prizes for their contributions to the theater.",
+              "sourceHighlight": "have all received Pulitzer Prizes",
+              "optionText": "Selecting works by famous playwrights.",
+              "optionHighlight": "Selecting works by famous playwrights",
+              "explanation": "题干问的是作者\"避免做\"的事。原文第三段表明作者恰恰收录了多位普利策奖得主的作品，即\"挑选了著名剧作家的作品\"，这是作者做了的事，与题干\"avoid doing\"方向相反。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2020-jul-reading-a-3",
+                "quote": "Paul Green, Susan Glaspell, Maxwell Anderson, Thornton Wilder, William Saroyan, and Tennessee Williams have all received Pulitzer Prizes for their contributions to the theater.",
+                "anchor": "Pulitzer Prize winners included"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "收录多种类型的剧本。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeAction",
+              "sourceQuote": "However, a variety of types is represented here.",
+              "sourceHighlight": "a variety of types is represented here",
+              "optionText": "Including various types of plays.",
+              "optionHighlight": "Including various types of plays",
+              "explanation": "题干问\"避免做\"的事。原文明确说\"这里收录了多种类型\"（a variety of types is represented here），收录多类型正是作者所做的，与题干方向相反。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2020-jul-reading-a-2",
+                "quote": "However, a variety of types is represented here.",
+                "anchor": "a variety of types is represented"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "提供关于剧作家的信息。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeAction",
+              "sourceQuote": "More information about the playwrights will be found at the end of this book.",
+              "sourceHighlight": "More information about the playwrights will be found",
+              "optionText": "Offering information on the playwrights.",
+              "optionHighlight": "Offering information on the playwrights",
+              "explanation": "题干问\"避免做\"的事。原文第三段末说书末会提供更多关于剧作家的信息，说明作者提供了剧作家信息，与题干\"avoid doing\"方向相反。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2020-jul-reading-a-3",
+                "quote": "More information about the playwrights will be found at the end of this book.",
+                "anchor": "information about the playwrights at the end"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "What does the author avoid doing",
+            "sourceRole": "stem",
+            "targetText": "It is not my intention to point out the central theme of each of the plays in this collection",
+            "targetParagraphId": "para-zj-2020-jul-reading-a-2",
+            "relationType": "paraphrase",
+            "note": "题干 avoid doing 对应原文 It is not my intention to do（无意做某事）；选项 Stating the plays' central ideas 对应原文 point out the central theme，构成同义替换。"
+          }
+        ]
+      },
+      "q-zj-2020-jul-023": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查作者建议读者在读剧时怎么做，需定位末段的阅读建议并理解其内涵。",
+        "stemTranslationZh": "作者建议读者在阅读这些剧本时做什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "控制自己的情绪。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Control their feelings.",
+              "explanation": "原文末段建议读者去想象舞台演出，并未提及要\"控制情绪\"，属无中生有。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "运用他们的表演技巧。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "try to picture the play on stage, with you, the reader, in the audience",
+              "sourceEntity": "you, the reader, in the audience",
+              "optionText": "Apply their acting skills.",
+              "optionEntity": "their acting skills",
+              "explanation": "原文让读者把自己想象成坐在\"观众席\"中的观众（in the audience），而非舞台上的演员；选项\"运用表演技巧\"把读者错配成演员，对象错配。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2020-jul-reading-a-4",
+                "quote": "try to picture the play on stage, with you, the reader, in the audience",
+                "anchor": "the reader in the audience, not on stage"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "运用他们的想象力。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-zj-2020-jul-reading-a-4",
+                "quote": "try to picture the play on stage, with you, the reader, in the audience",
+                "anchor": "picture the play on stage"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "把他们的观众放在心上。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "try to picture the play on stage, with you, the reader, in the audience",
+              "sourceEntity": "you, the reader, in the audience",
+              "optionText": "Keep their audience in mind.",
+              "optionEntity": "their audience",
+              "explanation": "原文是让读者把自己想象成\"观众席中的观众\"（reader in the audience），选项却说要把\"他们的观众\"放在心上，把读者当成了拥有观众的表演者，对象关系被错配。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2020-jul-reading-a-4",
+                "quote": "try to picture the play on stage, with you, the reader, in the audience",
+                "anchor": "reader is in the audience"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Use their imagination.",
+            "sourceRole": "correctOption",
+            "targetText": "try to picture the play on stage, with you, the reader, in the audience",
+            "targetParagraphId": "para-zj-2020-jul-reading-a-4",
+            "relationType": "paraphrase",
+            "note": "原文 try to picture the play on stage（试着在脑海中描绘舞台上的演出）即调动想象力，对应选项 Use their imagination。"
+          }
+        ]
+      },
+      "q-zj-2020-jul-024": {
+        "skill": {
+          "primary": "mainIdea"
+        },
+        "questionFocus": "考查文本体裁/出处判断，需综合全文反复出现的\"编书、本书、书末\"等线索判断文本性质。",
+        "stemTranslationZh": "这是一篇什么样的文本？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "一篇短篇小说。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "A short story.",
+              "explanation": "全文是对一本短剧选集的介绍与阅读建议，没有任何故事情节或人物叙事，不是短篇小说，属无中生有。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "一本书的引言（序言）。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-zj-2020-jul-reading-a-1",
+                "quote": "perhaps my best reason for editing this book is a hope of sharing my enthusiasm for the theater with others",
+                "anchor": "editing this book"
+              },
+              {
+                "role": "secondary",
+                "paragraphId": "para-zj-2020-jul-reading-a-3",
+                "quote": "More information about the playwrights will be found at the end of this book.",
+                "anchor": "at the end of this book"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "一篇戏剧评论。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "the effectiveness of the playwright",
+              "optionText": "A play review.",
+              "matchType": "wordFamily",
+              "relationNote": "文中多次出现 play、playwright 等与戏剧相关的词，易诱导误选\"戏剧评论\"；但作者刻意不点评各剧主题（not my intention to point out the central theme），全文是编者序言而非对某部剧的评论。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2020-jul-reading-a-2",
+                "quote": "It is not my intention to point out the central theme of each of the plays in this collection",
+                "anchor": "not intending to evaluate each play"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "一则剧院广告。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "An advertisement for a theater.",
+              "explanation": "全文是为一本书所写的序言，没有任何宣传某家剧院、招揽观众或售票的广告内容，属无中生有。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "An introduction to a book.",
+            "sourceRole": "correctOption",
+            "targetText": "perhaps my best reason for editing this book is a hope of sharing my enthusiasm for the theater with others",
+            "targetParagraphId": "para-zj-2020-jul-reading-a-1",
+            "relationType": "locationCue",
+            "note": "原文反复出现 editing this book、this collection、at the end of this book 等表述，表明这是为一本书（短剧选集）所写的引言，对应 An introduction to a book。"
+          }
+        ]
+      },
+      "q-zj-2020-jul-025": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查对第二段首句指代词 That 的理解，即 That 回指上文哪一内容。",
+        "stemTranslationZh": "第二段中划线词 “That” 指的是什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "绿灯时长的增加。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "understatement",
+              "sourceQuote": "Just like the traffic itself, the timing of the signals changes.",
+              "sourceHighlight": "the timing of the signals changes",
+              "optionText": "Increased length of green lights.",
+              "optionHighlight": "Increased length of green lights",
+              "explanation": "原文说信号灯时长随车流“变化”（既可能变长也可能变短，第一段举例既有 145 秒的增加也有时长的回落），而 That 回指的是“时长会变化”这一整体现象；本项只截取“绿灯时长增加”这一片面情形，以偏概全，缩小了指代范围。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2020-jul-reading-b-1",
+                "quote": "Just like the traffic itself, the timing of the signals changes.",
+                "anchor": "时长随车流变化，并非单纯增加"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "缩短的信号灯周期。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "understatement",
+              "sourceQuote": "Just like the traffic itself, the timing of the signals changes.",
+              "sourceHighlight": "the timing of the signals changes",
+              "optionText": "Shortened traffic signal cycle.",
+              "optionHighlight": "Shortened traffic signal cycle",
+              "explanation": "原文强调的是信号灯周期“随车流变化”，第一段举例中周期既会被额外车流推高到 145 秒，也会在车少时下降；本项只取“缩短”这一单向情形，片面理解了 That 所指的“变化”现象。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2020-jul-reading-b-1",
+                "quote": "By 9:33 a. m., a burst of additional traffic might push it to 145 seconds.",
+                "anchor": "周期既会变长也会变短，并非仅缩短"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "交通信号灯时长的灵活变化。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-zj-2020-jul-reading-b-1",
+                "quote": "Just like the traffic itself, the timing of the signals changes.",
+                "anchor": "信号灯时长随车流变化"
+              },
+              {
+                "role": "supporting",
+                "paragraphId": "para-zj-2020-jul-reading-b-1",
+                "quote": "The traffic signals along Factoria Boulevard in Bellevue, Washington, generally don’t flash the same length of green twice in a row, especially at rush hour.",
+                "anchor": "不会连续两次给出相同的绿灯时长"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "道路上顺畅的交通流。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "That 指代道路上顺畅的交通流。",
+              "explanation": "第一段及 That 所在语境讲的是信号灯时长随车流“变化”这一现象，原文并未提及此时道路交通“顺畅”；“顺畅的交通流”属于无中生有，且与 That 的回指对象不符。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "That",
+            "sourceRole": "stem",
+            "targetText": "Just like the traffic itself, the timing of the signals changes.",
+            "targetParagraphId": "para-zj-2020-jul-reading-b-1",
+            "relationType": "locationCue",
+            "note": "指代题需回指第一段末句：That 紧承上文，指代 the timing of the signals changes（信号灯时长随车流变化），即正确项中的 Flexible timing of traffic signals。"
+          },
+          {
+            "sourceText": "Flexible timing of traffic signals.",
+            "sourceRole": "correctOption",
+            "targetText": "the timing of the signals changes",
+            "targetParagraphId": "para-zj-2020-jul-reading-b-1",
+            "relationType": "paraphrase",
+            "note": "正确项用 Flexible timing（灵活的时长）同义替换原文 the timing of the signals changes（时长会变化），保留 timing of (the) signals 这一核心表达。"
+          }
+        ]
+      },
+      "q-zj-2020-jul-026": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查对第四段中 Kevin Balke 关于自适应信号灯观点的细节理解。",
+        "stemTranslationZh": "关于自适应信号灯，Kevin Balke 说了什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "它们在宽阔的道路上效果更好。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "自适应信号灯在宽阔的道路上效果更好。",
+              "explanation": "第五段提到“拓宽道路”（widen the roads）是过去的旧做法，但 Kevin Balke 的话里只谈到信号灯对“较小城市”更有益，从未将其效果与道路“宽窄”挂钩；“在宽阔道路上效果更好”原文未提及，属无中生有。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "它们应当在其他城市使用。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "Now he hopes that other cities will consider making their streets run smarter instead of just making them bigger.",
+              "sourceEntity": "he (Mark Poch)",
+              "optionText": "They should be used in other cities.",
+              "optionEntity": "Kevin Balke",
+              "explanation": "“希望其他城市……让街道运行得更聪明”是第五段交通工程经理 Mark Poch 的观点，并非本题所问的 Kevin Balke 的话；本项将说话人张冠李戴，属对象错配。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2020-jul-reading-b-5",
+                "quote": "Now he hopes that other cities will consider making their streets run smarter instead of just making them bigger.",
+                "anchor": "“用于其他城市”是 Mark Poch 而非 Kevin Balke 之意"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "它们已大幅减少了道路上的交通量。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "causeEffectReversal",
+              "sourceQuote": "others are so jammed that only a sharp reduction in the number of cars on the road will make a meaningful difference",
+              "sourceHighlight": "only a sharp reduction in the number of cars on the road will make a meaningful difference",
+              "optionText": "They have greatly reduced traffic on the road.",
+              "optionHighlight": "They have greatly reduced traffic on the road",
+              "explanation": "原文说的是：对极堵城市而言，只有“大幅减少车辆数”才会带来明显改善——减少车辆是改善拥堵的前提条件，而非自适应信号灯所产生的结果；本项把“需要减少车辆”偷换成“信号灯已经减少了交通量”，颠倒了因果关系。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2020-jul-reading-b-4",
+                "quote": "others are so jammed that only a sharp reduction in the number of cars on the road will make a meaningful difference",
+                "anchor": "减少车辆是改善前提，非信号灯的成效"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "它们在严重拥堵的城市里作用较小。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-zj-2020-jul-reading-b-4",
+                "quote": "others are so jammed that only a sharp reduction in the number of cars on the road will make a meaningful difference",
+                "anchor": "极堵城市只有减少车辆才有意义，信号灯帮助有限"
+              },
+              {
+                "role": "supporting",
+                "paragraphId": "para-zj-2020-jul-reading-b-4",
+                "quote": "“It’s not going to fix everything, but adaptive signals have some benefits for smaller cities,” he says.",
+                "anchor": "信号灯非万能，对较小城市更有益"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "What does Kevin Balke say about adaptive signals?",
+            "sourceRole": "stem",
+            "targetText": "Kevin Balke, a research engineer at the Texas A&M University Transportation Institute, says that while smart lights can be particularly beneficial for some cities, others are so jammed that only a sharp reduction in the number of cars on the road will make a meaningful difference.",
+            "targetParagraphId": "para-zj-2020-jul-reading-b-4",
+            "relationType": "locationCue",
+            "note": "题干以人名 Kevin Balke 为定位线索，对应第四段；其观点是 smart lights 对某些城市有益，但对极堵城市（others are so jammed）作用有限。"
+          },
+          {
+            "sourceText": "They are less helpful in cities seriously jammed.",
+            "sourceRole": "correctOption",
+            "targetText": "others are so jammed that only a sharp reduction in the number of cars on the road will make a meaningful difference",
+            "targetParagraphId": "para-zj-2020-jul-reading-b-4",
+            "relationType": "paraphrase",
+            "note": "正确项用 less helpful in cities seriously jammed 同义替换原文 others are so jammed that only a sharp reduction... will make a meaningful difference，保留 jammed 这一核心词，概括出“对严重拥堵城市帮助有限”。"
+          }
+        ]
+      },
+      "q-zj-2020-jul-027": {
+        "skill": {
+          "primary": "inference"
+        },
+        "questionFocus": "考查对末段贝尔维尤经验的归纳与推断，即文章借其成功传递的启示。",
+        "stemTranslationZh": "从贝尔维尤的成功中我们能学到什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "尝试新事物是有回报的。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-zj-2020-jul-reading-b-5",
+                "quote": "In Bellevue, the switch to adaptive signals has been a lesson in the value of welcoming new approaches.",
+                "anchor": "贝尔维尤的经验在于拥抱新方法的价值"
+              },
+              {
+                "role": "supporting",
+                "paragraphId": "para-zj-2020-jul-reading-b-5",
+                "quote": "Now he hopes that other cities will consider making their streets run smarter instead of just making them bigger.",
+                "anchor": "用更聪明的新办法取代一味拓宽的旧做法"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "旧方法如今依然奏效。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeAttitude",
+              "sourceQuote": "In the past, there was often an automatic reaction to increased traffic: just widen the roads, says Mark Poch, the Bellevue Transportation Department’s traffic engineering manager.",
+              "sourceHighlight": "In the past, there was often an automatic reaction to increased traffic: just widen the roads",
+              "optionText": "The old methods still work today.",
+              "optionHighlight": "The old methods still work today",
+              "explanation": "末段把“一遇堵车就拓宽道路”定性为过去（In the past）的旧反应，并主张改用更聪明的新办法取而代之；文章对旧方法持否定态度，本项却称“旧方法依然奏效”，与原文态度相反。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2020-jul-reading-b-5",
+                "quote": "Now he hopes that other cities will consider making their streets run smarter instead of just making them bigger.",
+                "anchor": "主张以新办法取代旧做法，否定旧方法"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "把理论付诸实践才有回报。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "贝尔维尤的成功说明把理论付诸实践才有回报。",
+              "explanation": "末段强调的是“拥抱新方法”（welcoming new approaches）的价值，全文并未涉及“理论”与“实践”之间的转化关系；“把理论付诸实践”属于无中生有，偷换了启示的内涵。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "最简单的方法就是最好的方法。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "最简单的方法就是最好的方法。",
+              "explanation": "原文未对方法的“简单与否”作比较；相反，文章推崇的是更智能（run smarter）而非更简单的方案。“最简单的方法最好”原文未提及，属无中生有。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "What can we learn from Bellevue's success?",
+            "sourceRole": "stem",
+            "targetText": "In Bellevue, the switch to adaptive signals has been a lesson in the value of welcoming new approaches.",
+            "targetParagraphId": "para-zj-2020-jul-reading-b-5",
+            "relationType": "locationCue",
+            "note": "题干问 learn from ... success，对应末段首句 a lesson in the value of welcoming new approaches，即“拥抱新方法的价值”这一启示。"
+          },
+          {
+            "sourceText": "It is rewarding to try new things.",
+            "sourceRole": "correctOption",
+            "targetText": "the value of welcoming new approaches",
+            "targetParagraphId": "para-zj-2020-jul-reading-b-5",
+            "relationType": "paraphrase",
+            "note": "正确项用 rewarding to try new things 同义替换原文 the value of welcoming new approaches：welcoming new approaches 对应 try new things，the value（价值）对应 rewarding（有回报）。"
+          }
+        ]
+      },
+      "q-zj-2020-jul-028": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查科学家让志愿者做测试的目的，需定位第二段对测试用途的说明。",
+        "stemTranslationZh": "科学家为什么让志愿者做这些测试？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "为了评估他们的健康状况。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overgeneralization",
+              "sourceQuote": "The results held true even after the scientists accounted for the participants’ overall health status.",
+              "sourceHighlight": "overall health status",
+              "optionText": "To assess their health status.",
+              "optionHighlight": "health status",
+              "explanation": "原文第三段提到\"health status\"只是科学家在分析结果时排除的一个干扰变量，而非做测试的目的。测试的目的在第二段是评估记忆与思维能力，把\"健康状况\"当成测试目的属于范围偷换。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2020-jul-reading-c-3",
+                "quote": "The results held true even after the scientists accounted for the participants’ overall health status.",
+                "anchor": "健康状况是被排除的变量，非测试目的"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "为了评估他们的工作习惯。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "To evaluate their work habits.",
+              "explanation": "原文未提及测试是为了评估志愿者的工作习惯（work habits）。文中只说测试评估的是记忆与思维能力，\"工作习惯\"属无中生有。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "为了分析他们的性格。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "To analyze their personality.",
+              "explanation": "原文未提及测试是为了分析性格（personality）。测试针对的是记忆和思维能力，\"性格\"在文中没有任何依据，属无中生有。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "为了测量他们的心智能力。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-zj-2020-jul-reading-c-2",
+                "quote": "assessed the volunteers’ memory and thinking skills through a battery of tests",
+                "anchor": "通过测试评估记忆与思维能力"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "To measure their mental ability.",
+            "sourceRole": "correctOption",
+            "targetText": "assessed the volunteers’ memory and thinking skills through a battery of tests",
+            "targetParagraphId": "para-zj-2020-jul-reading-c-2",
+            "relationType": "paraphrase",
+            "note": "选项的 measure their mental ability 是原文 assessed ... memory and thinking skills 的同义替换：assess≈measure，memory and thinking skills≈mental ability。"
+          }
+        ]
+      },
+      "q-zj-2020-jul-029": {
+        "skill": {
+          "primary": "structure"
+        },
+        "questionFocus": "考查第四段Francisca Then解释研究发现所用的说明方法，需识别其论证手法。",
+        "stemTranslationZh": "Francisca Then在第四段是如何解释她的研究发现的？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "通过引用一位专家的话。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "“This works just like physical exercise,” says Francisca Then, who led the study.",
+              "sourceEntity": "Francisca Then, who led the study",
+              "optionText": "By using an expert's words.",
+              "optionEntity": "an expert",
+              "explanation": "第四段说话的是研究负责人Francisca Then本人，她是在用类比解释自己的发现，而非引用\"另一位专家\"的话。把发言者错配成\"an expert\"（他人专家）属对象错配。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2020-jul-reading-c-4",
+                "quote": "says Francisca Then, who led the study",
+                "anchor": "说话者是研究负责人本人，非他人专家"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "通过作比较。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-zj-2020-jul-reading-c-4",
+                "quote": "“This works just like physical exercise,” says Francisca Then, who led the study.",
+                "anchor": "把脑力工作类比为体育锻炼"
+              },
+              {
+                "role": "secondary",
+                "paragraphId": "para-zj-2020-jul-reading-c-4",
+                "quote": "After a long day at work – sure, you will feel tired, but it can help your brain stay healthy.",
+                "anchor": "长跑使人疲惫却强身 vs 工作使人累却健脑"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "通过提及另一项研究。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "By referring to another study.",
+              "explanation": "第四段Then只是用体育锻炼作类比来解释本研究发现，全段没有提到任何\"另一项研究\"，属无中生有。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "通过引入一个概念。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "By introducing a concept.",
+              "explanation": "第四段Then用的是生活化的类比（physical exercise），并未提出或引入任何新的术语或概念，\"introducing a concept\"在原文没有依据，属无中生有。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "By making a comparison.",
+            "sourceRole": "correctOption",
+            "targetText": "“This works just like physical exercise,” says Francisca Then, who led the study.",
+            "targetParagraphId": "para-zj-2020-jul-reading-c-4",
+            "relationType": "paraphrase",
+            "note": "原文 just like physical exercise 是把脑力工作与体育锻炼相类比，正是选项 making a comparison（作比较/类比）所指的论证手法。"
+          }
+        ]
+      },
+      "q-zj-2020-jul-030": {
+        "skill": {
+          "primary": "title"
+        },
+        "questionFocus": "考查全文最佳标题，需概括文章主旨：高难度工作有助于大脑保持敏锐。",
+        "stemTranslationZh": "下列哪一项是本文最佳标题？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "退休工人能学会新技能。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Retired Workers Can Pick Up New Skills",
+              "explanation": "文章讲的是退休前所从事工作的脑力强度如何影响日后认知，并未谈及退休工人\"学会/掌握新技能\"。该标题在原文没有依据，属无中生有。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "老年人应该从事有挑战性的工作。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overstatement",
+              "sourceQuote": "Still, continuing to challenge yourself mentally and keeping your mind busy can only help.",
+              "sourceHighlight": "continuing to challenge yourself mentally",
+              "optionText": "Old People Should Take Challenging Jobs",
+              "optionHighlight": "Should Take Challenging Jobs",
+              "explanation": "原文是客观说明高难度脑力工作有益认知，并以\"can only help\"作温和建议，并未发出\"老年人应该去从事挑战性工作\"这样的强制性主张；且文中受试者是退休工人，谈的是退休前的工作。用 should take 把客观发现夸大为强制建议属范围偷换（过度拔高）。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2020-jul-reading-c-6",
+                "quote": "continuing to challenge yourself mentally and keeping your mind busy can only help",
+                "anchor": "温和建议 can only help，非 should take jobs"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "你的高难度工作可能帮助你保持头脑敏锐。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-zj-2020-jul-reading-c-1",
+                "quote": "Challenging work that requires lots of analytical thinking, planning and other managerial skills might help your brain stay sharp as you age",
+                "anchor": "高难度工作可能助大脑保持敏锐（全文主旨）"
+              },
+              {
+                "role": "secondary",
+                "paragraphId": "para-zj-2020-jul-reading-c-3",
+                "quote": "Those who had held mentally stimulating (刺激) , demanding jobs before retirement tended to do the best on the tests.",
+                "anchor": "高脑力工作者认知表现最好，呼应主旨"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "认知功能可能随着年龄增长而衰退。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "understatement",
+              "sourceQuote": "Of course, our brains can decline as we grow older for lots of reasons – including other environmental influences or genetic factors.",
+              "sourceHighlight": "our brains can decline as we grow older",
+              "optionText": "Cognitive Function May Decline As You Age",
+              "optionHighlight": "Cognitive Function May Decline As You Age",
+              "explanation": "\"认知随年龄衰退\"只是文章末段顺带提及的客观背景信息，并非全文主旨；文章重心是高难度工作有助于减缓这种衰退、保持大脑敏锐。把次要信息当作标题以偏概全，属范围偷换。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-zj-2020-jul-reading-c-6",
+                "quote": "our brains can decline as we grow older for lots of reasons",
+                "anchor": "末段次要背景信息，非全文主旨"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Your Tough Job Might Help Keep You Sharp",
+            "sourceRole": "correctOption",
+            "targetText": "Challenging work that requires lots of analytical thinking, planning and other managerial skills might help your brain stay sharp as you age",
+            "targetParagraphId": "para-zj-2020-jul-reading-c-1",
+            "relationType": "paraphrase",
+            "note": "标题中的 Tough Job≈原文 Challenging work，Keep You Sharp≈help your brain stay sharp，正是首段点明、全文展开的核心主旨。"
+          }
+        ]
+      }
+    }
+  }
+}

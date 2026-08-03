@@ -1,0 +1,86 @@
+{
+  "schemaVersion": "import-meta-v1",
+  "paperId": "paper-2021-jia",
+  "sourceFileName": "2021年全国甲卷-答案版.docx",
+  "sourceFileSha256": "4ebf3956cbc41a10be8e3d0201cd50e35b0d554f689e8c8d8d19607f41a706fb",
+  "importedBy": "paper-import-ai",
+  "importedAt": "2026-06-19T08:55:53.641Z",
+  "paper": {
+    "year": 2021,
+    "region": "全国甲卷",
+    "paperName": "2021年全国甲卷",
+    "examCode": "2021-jia",
+    "subject": "English",
+    "sourceType": "真题",
+    "defaultTags": [
+      "真题",
+      "2021",
+      "全国甲卷"
+    ]
+  },
+  "groups": {
+    "group-2021-jia-reading-a": {
+      "groupId": "group-2021-jia-reading-a",
+      "difficulty": "中",
+      "summary": "本文是一则关于英国风景摄影大赛 Take a view（年度风景摄影师大奖）的介绍性文字，说明大赛缘起、定位与影响，属于应用文/介绍说明类语篇。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading A"
+    },
+    "group-2021-jia-reading-b": {
+      "groupId": "group-2021-jia-reading-b",
+      "difficulty": "中",
+      "summary": "本文是一篇新闻报道，讲述英国 Port Lympne Reserve 繁育中心成功繁育出一只稀有黑犀牛幼崽，并介绍该中心今年第二只黑犀牛的诞生情况以及黑犀牛在全球濒危的现状。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading B"
+    },
+    "group-2021-jia-reading-c": {
+      "groupId": "group-2021-jia-reading-c",
+      "difficulty": "中",
+      "summary": "记叙文。作者9岁随家从洛杉矶搬到伦敦，起初格格不入，直到在Southbank发现了滑板文化并融入其中，找到归属感；多年后重返伦敦，再次回到Southbank，与一位年轻滑手用滑板圈的暗语\"Safe\"完成跨越二十年的呼应。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading C"
+    },
+    "group-2021-jia-reading-d": {
+      "groupId": "group-2021-jia-reading-d",
+      "difficulty": "中",
+      "summary": "本文是一篇议论文，探讨“天才”的本质。作者指出历史上被认可的天才多为欧洲白人男性，因为评判标准由胜利者制定，导致女性及其他群体的天才贡献被忽视；并引用《科学》杂志的研究说明这种社会偏见从女孩六岁起就开始产生负面影响；最后指出在全球互联的时代，天才不受性别、种族、阶层等社会因素决定，呼吁人们看到各种形式的天才。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading D"
+    },
+    "group-2021-jia-seven-choices": {
+      "groupId": "group-2021-jia-seven-choices",
+      "difficulty": "中",
+      "summary": "本文是一篇说明文，主题为以旧换新的“换衣派对”（clothing swap），主张通过交换衣物代替购物来环保地处理旧衣。全文先点明换衣派对的概念与好处，再以要点形式给出举办换衣派对的若干操作建议。五个空均出现在“建议清单”结构中，需要依据指代关系与话题场来选择恰当的整句。",
+      "tags": [
+        "七选五"
+      ],
+      "displayTitleOverride": "七选五"
+    },
+    "group-2021-jia-cloze": {
+      "groupId": "group-2021-jia-cloze",
+      "difficulty": "中",
+      "summary": "完形填空",
+      "tags": [
+        "完形填空"
+      ],
+      "displayTitleOverride": "完形填空"
+    },
+    "group-2021-jia-grammar-fill": {
+      "groupId": "group-2021-jia-grammar-fill",
+      "difficulty": "中",
+      "summary": "语法填空",
+      "tags": [
+        "语法填空"
+      ],
+      "displayTitleOverride": "语法填空"
+    }
+  }
+}
