@@ -40,6 +40,57 @@ function formatGrammarFillAnalysis(entry) {
   ].filter(Boolean).join('\n')
 }
 
+function loadChromeSourceAsset({ sourceAsset, versionDir }) {
+  if (Array.isArray(sourceAsset?.content?.blocks)) {
+    return {
+      asset: sourceAsset,
+      digest: null,
+      kind: 'source_asset',
+    }
+  }
+  if (sourceAsset?.schemaVersion !== 'source-capture-v1') {
+    reject('Canonical Grammar Fill chrome immutable source blocks are invalid')
+  }
+  const documents = sourceAsset.documents?.filter(
+    (document) => document.roles?.includes('asset-projection'),
+  )
+  if (documents?.length !== 1) {
+    reject('Canonical Grammar Fill legacy structured source identity is ambiguous')
+  }
+  const document = documents[0]
+  const ref = document.immutableArtifactRef
+  assertSafeRelativePath(
+    ref?.relativePath,
+    'legacy structured source artifact',
+    'source-evidence/',
+  )
+  const sourcePath = path.join(versionDir, ref.relativePath)
+  if (!existsSync(sourcePath)) {
+    reject('Canonical Grammar Fill legacy structured source is unavailable')
+  }
+  const sourceBytes = readFileSync(sourcePath)
+  const sourceDigest = digestBytes(sourceBytes)
+  if (
+    sourceDigest !== document.sha256
+    || sourceDigest !== ref.sha256
+    || sourceBytes.byteLength !== ref.byteLength
+  ) {
+    reject('Canonical Grammar Fill legacy structured source digest disagrees')
+  }
+  const asset = readJson(
+    sourceBytes,
+    'legacy structured source asset',
+  )
+  if (!Array.isArray(asset?.content?.blocks)) {
+    reject('Canonical Grammar Fill legacy structured source blocks are invalid')
+  }
+  return {
+    asset,
+    digest: sourceDigest,
+    kind: 'legacy_source_capture',
+  }
+}
+
 export function loadCanonicalGrammarFillPrintChrome({
   exportItems,
   canonicalConsumption,
@@ -87,10 +138,21 @@ export function loadCanonicalGrammarFillPrintChrome({
     assetBytes,
     'chrome immutable source asset',
   )
-  const blocks = asset?.content?.blocks
-  if (!Array.isArray(blocks)) {
-    reject('Canonical Grammar Fill chrome immutable source blocks are invalid')
-  }
+  const chromeSource = loadChromeSourceAsset({
+    sourceAsset: asset,
+    versionDir,
+  })
+  const chromeAsset = chromeSource.asset
+  const chromeAssetDigest = chromeSource.digest || sourceAssetDigest
+  const publicOracle = grammarFillRhythm.publicArtifactOracle
+  const requiresPublicSourceBinding =
+    sourcePaperId === publicOracle.paperId
+    && Number(canonicalConsumption.authorityRef?.manifestVersion) >= 20
+  if (
+    chromeSource.kind === 'legacy_source_capture'
+    && !requiresPublicSourceBinding
+  ) return null
+  const blocks = chromeAsset.content.blocks
   const groupIndex = blocks.findIndex(
     (block) => block.type === 'group' && block.groupId === groupId,
   )
@@ -124,21 +186,17 @@ export function loadCanonicalGrammarFillPrintChrome({
     reject('Canonical Grammar Fill chrome source adjacency is incomplete')
   }
 
-  const publicOracle = grammarFillRhythm.publicArtifactOracle
   let sourceBinding = null
-  if (
-    sourcePaperId === publicOracle.paperId
-    && Number(canonicalConsumption.authorityRef?.manifestVersion) >= 20
-  ) {
+  if (requiresPublicSourceBinding) {
     if (
       sourceAssetVersion !== publicOracle.sourceAssetVersion
-      || sourceAssetDigest
+      || chromeAssetDigest
         !== `sha256:${publicOracle.sourceBindings.paperAsset.sha256}`
       || groupId !== publicOracle.grammarFill.groupId
     ) {
       reject('Canonical Grammar Fill public source authority disagrees')
     }
-    const group = asset.content?.groups?.[groupId]
+    const group = chromeAsset.content?.groups?.[groupId]
     if (
       !group
       || JSON.stringify(
@@ -263,8 +321,8 @@ export function loadCanonicalGrammarFillPrintChrome({
     const questionSupplements =
       publicOracle.grammarFill.questionIds.map((questionId, index) => {
         const blankId = publicOracle.grammarFill.blankIds[index]
-        const question = asset.content.questions?.[questionId]
-        const blank = asset.content.blanks?.[blankId]
+        const question = chromeAsset.content.questions?.[questionId]
+        const blank = chromeAsset.content.blanks?.[blankId]
         const projectedBlank = projectedBlankById.get(blankId)
         const answer = officialAnswers.answers?.[questionId]?.answer
         const prompt = blank?.prompt ?? null
@@ -285,7 +343,7 @@ export function loadCanonicalGrammarFillPrintChrome({
           answer,
         }
       })
-    if (versionType === 'teacher') {
+    if (versionType === 'teacher' && chromeSource.kind === 'source_asset') {
       const analysisAuthority = publicOracle.sourceBindings.teacherAnalysis
       const analysisPath = path.join(
         paperAssetsDir,
@@ -347,10 +405,15 @@ export function loadCanonicalGrammarFillPrintChrome({
         promptAttachment: grammarFillRhythm.promptGeometry.attachment,
       },
       sourceDigests: {
-        paperAsset: sourceAssetDigest,
+        paperAsset: chromeAssetDigest,
+        ...(
+          chromeSource.kind === 'legacy_source_capture'
+            ? { sourceCapture: sourceAssetDigest }
+            : {}
+        ),
         officialAnswers: officialAnswerDigest,
         ...(
-          versionType === 'teacher'
+          versionType === 'teacher' && chromeSource.kind === 'source_asset'
             ? {
                 teacherAnalysis:
                   `sha256:${publicOracle.sourceBindings.teacherAnalysis.sha256}`,

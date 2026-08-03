@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "ticket-31-canary-publication-accounting-v2",
+  "supersedes": "docs/cuts/paper-canonical-unification/migration/ticket-31-canary-publication-accounting-v1.json",
+  "ticket": {
+    "number": 31,
+    "baseHead": "e870bab4fd5d7c2cb92f83b672ba0f7b1a0f9527",
+    "publisherBridgeAncestor": "a58bc477536f91dfaf8176f98fb4e1a335332a5f"
+  },
+  "accounting": {
+    "paper": { "blocked": 0, "inScope": 33, "publishedCanary": 4, "readyUnpublished": 29, "rolledBack": 0 },
+    "publication": { "canonicalSelections": 4, "currentRefs": 4, "publications": 4, "rollbackTargets": 4 },
+    "source": { "completeCanonicalPapers": 33, "importCandidates": 33, "sourceCaptures": 33, "teacherConfirmations": 33 }
+  },
+  "approvedCanaryPublications": [
+    { "paperId": "paper-960d0f8d", "publicationDigest": "sha256:4f95c3ca8cbfb90daf59fc6fc2969737d8497ad83e040960769bf6c43b3a6b8a", "versionName": "v1" },
+    { "paperId": "paper-2025-ii", "publicationDigest": "sha256:afb4dba049207c0f04fa4431bd79616523c2d5155848fea6b9c9021e7bf89376", "versionName": "v1" },
+    { "paperId": "paper-2023-yi", "publicationDigest": "sha256:44b8a01624f4effc6f5b5a27ba5e873a7286f801c5828e90d4baf13df3533cbd", "versionName": "v1" },
+    { "paperId": "paper-zj-2022-jun", "publicationDigest": "sha256:efd74a62dd1062b6d9ba39aa4d2e21e39601cf711f560a525af949886e280143", "versionName": "v1" }
+  ],
+  "immutablePublicationStoreAudit": {
+    "root": "test-fixtures/paper-canonical/publications/ticket-31-canary-v1/store",
+    "recordedStoreDigest": "sha256:fd84cb508d64a34cd42276c63c3bb4a25e817a8cefcaf60bf1c6d3fb72288507",
+    "expectedFiles": 49,
+    "currentRowDigestAndLengthMismatches": 0,
+    "publicationSqliteByteLength": 20480,
+    "immutableSourceCandidateConfirmationCanonicalPublicationDiffFromBase": "none"
+  },
+  "invariants": {
+    "ledgerV2Unchanged": true,
+    "manifestV2Unchanged": true,
+    "noAuthorityVersionChange": true,
+    "noProductionOrR2": true,
+    "onlyApprovedCanariesPublished": true,
+    "sharedChange": "bounded Print/PDF legacy source-binding compatibility only"
+  },
+  "ticket31Outcome": {
+    "disposition": "blocked_final_full_suite",
+    "completePaperScreenStudentTeacherPrintAndDirectPdf": "passed",
+    "fullSuite": "FAIL: verify-paper-canonical-legacy-source-capture-adapter.mjs was SIGKILLed (exit 137) without an assertion message; direct resource reproduction reached 5372313600 maximum resident bytes",
+    "publicSurfaceEvidence": "docs/cuts/paper-canonical-unification/qa/ticket-31-canary-public-surface-evidence-v2.json"
+  },
+  "nextTicket": {
+    "number": 32,
+    "status": "not_started",
+    "startAuthorized": false,
+    "reason": "Ticket 30 remains a route prerequisite."
+  }
+}

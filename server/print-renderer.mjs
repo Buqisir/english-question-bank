@@ -385,6 +385,7 @@ function assertCanonicalGrammarFillSourceBinding({
         || question.answer !== expected.answer
         || (
           teacher
+          && Object.hasOwn(expected, 'explanation')
           && (
             typeof expected.explanation !== 'string'
             || question.explanation !== expected.explanation

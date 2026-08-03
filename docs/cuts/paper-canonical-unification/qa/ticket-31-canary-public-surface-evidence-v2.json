@@ -1,0 +1,89 @@
+{
+  "schemaVersion": "ticket-31-canary-public-surface-evidence-v2",
+  "supersedes": "docs/cuts/paper-canonical-unification/qa/ticket-31-canary-public-surface-evidence-v1.json",
+  "ticket": {
+    "number": 31,
+    "baseHead": "e870bab4fd5d7c2cb92f83b672ba0f7b1a0f9527",
+    "publisherBridgeAncestor": "a58bc477536f91dfaf8176f98fb4e1a335332a5f"
+  },
+  "disposition": "blocked_final_full_suite",
+  "isolation": {
+    "publicationStore": "test-fixtures/paper-canonical/publications/ticket-31-canary-v1/store",
+    "storeMutation": "none",
+    "productionOrR2Touched": false
+  },
+  "sharedCorrection": {
+    "seam": "server/paper-canonical/grammarFillPrintSourceBinding.mjs loadCanonicalGrammarFillPrintChrome",
+    "diagnosis": "The public Print/PDF loader treated rich paper-asset content.blocks as universal even though admitted Ticket 26 legacy Publications retain a source-capture-v1 envelope at paper-asset.json.",
+    "legacyCompatibility": "Only a source-capture-v1 envelope with exactly one digest- and byte-length-verified asset-projection artifact may provide legacy chrome. Canonical Consumption continues to supply every rendered group semantic projection.",
+    "richSourceAssetPath": "unchanged; it still requires the rich asset content.blocks and keeps its existing reviewed Teacher-analysis binding.",
+    "legacyTeacherBehavior": "Official grammar answers remain bound to the immutable official-answer source. No absent Teacher analysis is fabricated; an absent legacy explanation is not rendered."
+  },
+  "screen": {
+    "status": "passed",
+    "actualSurface": "app/canonical-consumption-qa.html via PaperBrowsePage and PaperSurface",
+    "assertion": "Each page mounted every Canonical Group and every card matched its Canonical semantic signature.",
+    "papers": [
+      {
+        "paperId": "paper-960d0f8d",
+        "groupCount": 9,
+        "screenshotSha256": "sha256:3b1ca6104b2f26223791abe5372052ea34d13b3697d9338e3a08afd22dedfe13"
+      },
+      {
+        "paperId": "paper-2025-ii",
+        "groupCount": 9,
+        "screenshotSha256": "sha256:9dee7b293087ea31be16fed86e909c090e8f5f3d839f3df695dd848730604342"
+      },
+      {
+        "paperId": "paper-2023-yi",
+        "groupCount": 7,
+        "screenshotSha256": "sha256:d9f707f1002b202881a2b0b5d926d4f2b9b0bbd0036aa71440a583d97f00d63c"
+      },
+      {
+        "paperId": "paper-zj-2022-jun",
+        "groupCount": 8,
+        "screenshotSha256": "sha256:c00036d929264b32d7d2b6b53b7461f87d014a9edc57142b6c4e56aae010e00d"
+      }
+    ]
+  },
+  "printAndPdf": {
+    "status": "passed",
+    "publicSeam": "createExportImplementation.exportPrintHtml -> loadCanonicalGrammarFillPrintChrome -> buildPrintHtml",
+    "pdf": "direct headless Chromium page.pdf({ format: 'A4', printBackground: true, preferCSSPageSize: true })",
+    "a4Geometry": "594.96 x 841.92 pts",
+    "papers": [
+      { "paperId": "paper-960d0f8d", "versionType": "student", "htmlSha256": "sha256:eb6ed37f49767d2e1b2d3d76772a96a60d602870c841e24d82c2c18c7c96b72f", "htmlAnswerMarkers": 0, "pdfSha256": "sha256:f8053a75d5cb8d0a5d8969e7516f18df374cc82fc286e0b40886429ac063c8c0", "pdfPages": 9, "pdfAnswerMarkers": 0 },
+      { "paperId": "paper-960d0f8d", "versionType": "teacher", "htmlSha256": "sha256:5afe636ab8facf4cfb9aefa92f1ac35ae37efa6bd53130251aea6ebaffee382f", "htmlAnswerMarkers": 45, "pdfSha256": "sha256:83f2d369ae87e618d46a184ecd262800e12bf5516b5bd47f51b568d35b0cc55a", "pdfPages": 10, "pdfAnswerMarkers": 45 },
+      { "paperId": "paper-2025-ii", "versionType": "student", "htmlSha256": "sha256:1ba2541e20e984320ba9bab78cc2d0be68b50bd96020a3ffc9887d37ca3ad68b", "htmlAnswerMarkers": 0, "pdfSha256": "sha256:e7326545b089d7bda1fbbc7be44639c50a8dde7bb9d009562b0fedf103c3dfa4", "pdfPages": 8, "pdfAnswerMarkers": 0 },
+      { "paperId": "paper-2025-ii", "versionType": "teacher", "htmlSha256": "sha256:f866af343e99a7618ac9b508d804a3f68373e6c4e869a9d77041eadc736a7d70", "htmlAnswerMarkers": 45, "pdfSha256": "sha256:f4d2eade531578da15d49e2491e183d194ac6c0f4710c6ca23201e8ae4e96def", "pdfPages": 9, "pdfAnswerMarkers": 45 },
+      { "paperId": "paper-2023-yi", "versionType": "student", "htmlSha256": "sha256:897b67ca53737eb60293959d5b981122fd1bb5495a60cafb1b4c863c858d40b0", "htmlAnswerMarkers": 0, "pdfSha256": "sha256:260001767cbf8b9894402dfe59c8329dda6ac6dc372b9770b891ef73b89d9493", "pdfPages": 6, "pdfAnswerMarkers": 0 },
+      { "paperId": "paper-2023-yi", "versionType": "teacher", "htmlSha256": "sha256:27d2b90e70f6c0d224cb2a4c0248332b25f599193c068912c71a8739c9d24d64", "htmlAnswerMarkers": 50, "pdfSha256": "sha256:a3650b0d8affd1ec908c5ed0267c97c1330ddb8fa2d658a5641685106f2bb423", "pdfPages": 7, "pdfAnswerMarkers": 50 },
+      { "paperId": "paper-zj-2022-jun", "versionType": "student", "htmlSha256": "sha256:75456a4925b446dacb83c5b17b40e79d9642610085167b2d48c3d616418c25e8", "htmlAnswerMarkers": 0, "pdfSha256": "sha256:39d61075d3d0240e8fa126b789f858b105c771ef9396b96ab67ef7ec96f33377", "pdfPages": 7, "pdfAnswerMarkers": 0 },
+      { "paperId": "paper-zj-2022-jun", "versionType": "teacher", "htmlSha256": "sha256:53aa35df2ccd39e97bf9204b8e373c792d796c1cbc5530ef14540591971a63e2", "htmlAnswerMarkers": 45, "pdfSha256": "sha256:1cc0ebc5cfb7b810a9baa1724226b528ba7571ea5c7b4caafcf1bc70392c88b4", "pdfPages": 9, "pdfAnswerMarkers": 45 }
+    ]
+  },
+  "adversarialPublicSeam": {
+    "validLegacyCanary": "passed",
+    "tamperedStructuredSource": "rejected",
+    "swappedStructuredSource": "rejected",
+    "missingStructuredSource": "rejected",
+    "richDocxRegression": "node scripts/verify-paper-canonical-cloze-grammar-consumption.mjs passed"
+  },
+  "verification": {
+    "wholePaperCommand": "node scripts/verify-ticket-31-canary-whole-paper-export.mjs",
+    "richSourceCommand": "node scripts/verify-paper-canonical-cloze-grammar-consumption.mjs",
+    "fullSuite": {
+      "command": "pnpm -C app verify:all",
+      "status": "FAIL",
+      "summary": "PASS 119 / SKIP 1 / FAIL 1",
+      "failingCommand": "scripts/verify-paper-canonical-legacy-source-capture-adapter.mjs",
+      "failure": "The child was terminated with SIGKILL (exit 137) without an assertion message. A standalone resource-recorded reproduction reached 5372313600 maximum resident bytes in 23.42 seconds before abnormal termination.",
+      "scope": "The candidate changes neither that verifier nor any of its direct compiler, trusted-import, or legacy-adapter imports; this is an unresolved final-suite resource termination, not evidence of a semantic pass."
+    }
+  },
+  "nextTicket": {
+    "number": 32,
+    "started": false,
+    "reason": "Ticket 30 remains an unmet route prerequisite; this correction does not authorize Ticket 32."
+  }
+}
