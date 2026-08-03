@@ -18,7 +18,6 @@ import { DatabaseSync } from 'node:sqlite'
 
 import { projectCanonicalConsumerGroup } from '../shared/paper-canonical/consumerProjection.mjs'
 import {
-  rederiveRegisteredConfirmedCanonicalPublicationSource,
   registeredConfirmedCanonicalAdmissionSchemaVersion,
   resolveRegisteredConfirmedCanonicalAdmission,
 } from '../server/paper-canonical/registeredConfirmedCanonicalAdmission.mjs'
@@ -236,6 +235,21 @@ function copiedTargetStore() {
   return rootDir
 }
 
+function fakeStructuredSourceAsset() {
+  return Buffer.from(JSON.stringify({
+    content: {
+      blocks: [
+        { type: 'partHeading', text: '第一部分' },
+        { type: 'group', groupId: 'group-2025-i-language-cloze' },
+        { type: 'sectionHeading', text: '第二部分' },
+        { type: 'instruction', text: '用括号内单词的正确形式填空。' },
+        { type: 'group', groupId: 'group-2025-i-grammar-fill' },
+        { type: 'partHeading', text: '第三部分' },
+      ],
+    },
+  }))
+}
+
 function expectPublicRejection({ rootDir, mutate, mutateConsumption = null, label }) {
   try {
     withRuntime(rootDir, (runtime) => {
@@ -260,6 +274,23 @@ function expectPublicRejection({ rootDir, mutate, mutateConsumption = null, labe
   }
 }
 
+function expectCanonicalConsumptionRejection({ rootDir, mutate, label }) {
+  try {
+    mutate(rootDir)
+    const before = treeSnapshot(rootDir)
+    withRuntime(rootDir, (runtime) => {
+      assert.throws(
+        () => runtime.load({ paperId, consumerId: 'print_pdf' }),
+        (error) => error?.code === 'CANONICAL_CONSUMPTION_REJECTED',
+        label,
+      )
+    })
+    assert.deepEqual(treeSnapshot(rootDir), before, `${label} has zero publication/output mutation on rejection`)
+  } finally {
+    rmSync(rootDir, { recursive: true, force: true })
+  }
+}
+
 function assertTrustedDocxPublicAdversaries() {
   const asset = (rootDir) => path.join(rootDir, paperId, 'versions', 'v1', 'paper-asset.json')
   const publication = (rootDir) => path.join(
@@ -271,6 +302,7 @@ function assertTrustedDocxPublicAdversaries() {
     'canonical-paper-publication-v37.json',
   )
   const originalAsset = readFileSync(asset(storeRoot))
+  const fakeStructuredAsset = fakeStructuredSourceAsset()
   expectPublicRejection({
     rootDir: copiedTargetStore(),
     label: 'tampered trusted DOCX bytes reject through public Print',
@@ -295,12 +327,12 @@ function assertTrustedDocxPublicAdversaries() {
   })
   expectPublicRejection({
     rootDir: copiedTargetStore(),
-    label: 'unparseable DOCX bytes reject through public Print',
+    label: 'unparseable DOCX replacement rejects against immutable Publication bytes',
     mutate: (rootDir) => writeFileSync(asset(rootDir), Buffer.from([0x50, 0x4b, 0x03, 0x04, 0x00])),
   })
-  expectPublicRejection({
+  expectCanonicalConsumptionRejection({
     rootDir: copiedTargetStore(),
-    label: 'wrong immutable Publication binding rejects through public Print',
+    label: 'wrong immutable Publication binding rejects at canonical consumption',
     mutate: (rootDir) => {
       const value = JSON.parse(readFileSync(publication(rootDir)))
       value.sourceAssetDigest = 'sha256:0000000000000000000000000000000000000000000000000000000000000000'
@@ -309,34 +341,58 @@ function assertTrustedDocxPublicAdversaries() {
   })
   expectPublicRejection({
     rootDir: copiedTargetStore(),
-    label: 'caller-supplied structured mirrors cannot bypass trusted DOCX derivation',
-    mutate: (rootDir) => writeFileSync(
-      asset(rootDir),
-      readFileSync(path.join(repositoryRoot, 'test-fixtures/paper-canonical/evidence/original-paper-zj-2020-jul.docx')),
-    ),
+    label: 'same-object source digest mutation cannot bypass immutable Publication authority',
+    mutate: (rootDir) => writeFileSync(asset(rootDir), fakeStructuredAsset),
     mutateConsumption: (consumption) => {
-      consumption.sourceAssetDigest = sha256(readFileSync(path.join(
-        repositoryRoot,
-        'test-fixtures/paper-canonical/evidence/original-paper-zj-2020-jul.docx',
-      )))
+      assert.throws(
+        () => {
+          consumption.sourceAssetDigest = sha256(fakeStructuredAsset)
+        },
+        TypeError,
+        'same-object canonical consumption mutation is rejected',
+      )
       return consumption
     },
   })
+  expectPublicRejection({
+    rootDir: copiedTargetStore(),
+    label: 'caller-supplied structured blocks cannot replace canonical Publication authority',
+    mutate: (rootDir) => writeFileSync(asset(rootDir), fakeStructuredAsset),
+    mutateConsumption: (consumption) => ({
+      ...structuredClone(consumption),
+      sourceAssetDigest: sha256(fakeStructuredAsset),
+      sourceAsset: { content: JSON.parse(fakeStructuredAsset).content },
+    }),
+  })
+}
 
-  const sourceBytes = new Uint8Array(originalAsset)
-  const registered = rederiveRegisteredConfirmedCanonicalPublicationSource({ paperId, sourceBytes })
-  const manifest = JSON.parse(readFileSync(path.join(repositoryRoot, 'docs/cuts/paper-canonical-unification/migration/manifest-v2.json')))
+function assertRegisteredAdmissionBindings() {
+  const manifest = JSON.parse(readFileSync(path.join(
+    repositoryRoot,
+    'docs/cuts/paper-canonical-unification/migration/manifest-v2.json',
+  )))
   const record = manifest.papers.find((candidate) => candidate.paperId === paperId)
-  const bytesFor = (descriptor) => new Uint8Array(readFileSync(path.join(repositoryRoot, descriptor.path)))
+  const bytesFor = (descriptor) => new Uint8Array(readFileSync(
+    path.join(repositoryRoot, descriptor.path),
+  ))
   const validEnvelope = {
     schemaVersion: registeredConfirmedCanonicalAdmissionSchemaVersion,
     paperId,
-    sourceBytes,
+    sourceBytes: new Uint8Array(readFileSync(path.join(
+      storeRoot,
+      paperId,
+      'versions',
+      'v1',
+      'paper-asset.json',
+    ))),
     candidateBytes: bytesFor(record.candidate),
     confirmationBytes: bytesFor(record.confirmation),
     canonicalPaperBytes: bytesFor(record.canonicalPaper),
   }
-  assert.equal(registered.identity.candidateDigest, record.candidate.candidateDigest, 'public DOCX derivation closes the registered Candidate identity')
+  assert.doesNotThrow(
+    () => resolveRegisteredConfirmedCanonicalAdmission(validEnvelope),
+    'registered DOCX Admission accepts the exact bound chain',
+  )
   for (const [label, field] of [
     ['candidate', 'candidateBytes'],
     ['confirmation', 'confirmationBytes'],
@@ -347,7 +403,7 @@ function assertTrustedDocxPublicAdversaries() {
     assert.throws(
       () => resolveRegisteredConfirmedCanonicalAdmission(forged),
       (error) => error?.code?.startsWith('CANONICAL_PUBLICATION_REGISTERED_'),
-      `wrong registered ${label} binding fails closed before Print consumes it`,
+      `wrong registered ${label} binding fails closed at Admission`,
     )
   }
 }
@@ -361,6 +417,7 @@ const entries = withRuntime(storeRoot, (runtime) => {
 })
 
 assertTrustedDocxPublicAdversaries()
+assertRegisteredAdmissionBindings()
 const pdf = await assertChromiumA4Pdfs(entries)
 
 console.log(JSON.stringify({
@@ -373,8 +430,9 @@ console.log(JSON.stringify({
     'truncated',
     'swapped-paper',
     'unparseable',
-    'wrong source/candidate/confirmation/canonical/publication binding',
-    'caller structured mirror and same-object mutation',
+    'wrong immutable Publication binding at canonical consumption',
+    'wrong candidate/confirmation/canonical binding at Admission',
+    'caller structured blocks and same-object mutation',
     'zero output/publication mutation on rejection',
   ],
 }))

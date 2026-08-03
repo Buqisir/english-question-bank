@@ -440,39 +440,6 @@ export function resolveRegisteredConfirmedCanonicalAdmission(envelope) {
   }
 }
 
-/**
- * Re-derive the one registered confirmation chain that owns immutable
- * publication bytes. Consumers may supply only the selected source bytes;
- * Candidate, Teacher Confirmation, and Canonical Paper evidence are resolved
- * from the pinned registry rather than from consumer input.
- */
-export function rederiveRegisteredConfirmedCanonicalPublicationSource({
-  paperId,
-  sourceBytes,
-}) {
-  if (
-    typeof paperId !== 'string'
-    || paperId.length === 0
-    || !(sourceBytes instanceof Uint8Array)
-    || sourceBytes.byteLength === 0
-  ) {
-    throw admissionError(
-      'CANONICAL_PUBLICATION_REGISTERED_ENVELOPE_INVALID',
-      'Registered publication source derivation requires one paper identity and immutable source bytes',
-    )
-  }
-  const manifest = registeredManifest()
-  const { record } = registeredRecord(manifest, paperId)
-  return resolveRegisteredConfirmedCanonicalAdmission({
-    schemaVersion: registeredConfirmedCanonicalAdmissionSchemaVersion,
-    paperId,
-    sourceBytes: new Uint8Array(sourceBytes),
-    candidateBytes: artifactBytes(record.candidate, `${paperId} Candidate`),
-    confirmationBytes: artifactBytes(record.confirmation, `${paperId} Teacher Confirmation`),
-    canonicalPaperBytes: artifactBytes(record.canonicalPaper, `${paperId} Canonical Paper`),
-  })
-}
-
 export function isRegisteredConfirmedCanonicalAdmission({
   proof,
   compilation,

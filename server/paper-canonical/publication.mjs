@@ -75,6 +75,7 @@ const publicationFileNames = [
 ]
 const latestRefFileName = 'canonical-paper-publication-ref-v1.json'
 const journalFileName = '.canonical-latest-swap-v1.json'
+const immutablePublicationSources = new WeakMap()
 const artifactPathBase = {
   source_capture: 'canonical/source-capture-v1.json',
   paper_plan: 'canonical/canonical-paper-plan-v1.json',
@@ -445,7 +446,11 @@ export function validateCanonicalPublicationBundle({ manifest, sourceAsset, read
   if (sourceCaptureIssues.length || planIssues.length || reportIssues.length || artifacts.question_groups?.schemaVersion !== 'canonical-question-groups-v1' || !Array.isArray(artifacts.question_groups?.groups)) throw publicationError('CANONICAL_PUBLICATION_ARTIFACT_SCHEMA_INVALID', 'One or more sealed artifacts violate their exact schemas')
   if (artifacts.normalization_report.disposition !== 'ready' || artifacts.normalization_report.captureDigest !== artifacts.source_capture.digest || artifacts.paper_plan.completeness.status !== 'complete') throw publicationError('CANONICAL_PUBLICATION_SEMANTIC_CLOSURE_INVALID', 'Publication does not contain a complete ready source closure')
   const legacyAuthority = closure.authorityRef.manifestVersion === '1'
-  validateSourceAssetBinding(artifacts.source_capture, sourceAsset, { requireEmbeddedEvidence: !legacyAuthority })
+  const sourceAssetDocument = validateSourceAssetBinding(
+    artifacts.source_capture,
+    sourceAsset,
+    { requireEmbeddedEvidence: !legacyAuthority },
+  )
   validatePublicationLineage({ sourceCapture: artifacts.source_capture, plan: artifacts.paper_plan, groups: artifacts.question_groups.groups, normalizationReport: artifacts.normalization_report, authorityClosure: closure })
   if (closure.authorityRef.manifestVersion === '1') {
     let projected
@@ -460,6 +465,7 @@ export function validateCanonicalPublicationBundle({ manifest, sourceAsset, read
       plan: artifacts.paper_plan,
       groups: artifacts.question_groups.groups,
       normalizationReport: artifacts.normalization_report,
+      sourceAssetDocument,
       projected,
     }
   }
@@ -471,8 +477,12 @@ export function validateCanonicalPublicationBundle({ manifest, sourceAsset, read
     const bytes = readArtifact(descriptor.relativePath)
     if (!(bytes instanceof Uint8Array) || bytes.byteLength !== descriptor.byteLength || sha256(bytes) !== descriptor.sha256) throw publicationError('CANONICAL_PUBLICATION_SOURCE_EVIDENCE_INVALID', `Source evidence ${descriptor.documentId} is missing or corrupt`)
   }
-  const sourceAssetDocument = artifacts.source_capture.documents.find((document) => document.documentId === manifest.sourceAssetDocumentId)
-  if (!sourceAssetDocument || sourceAssetDocument.sha256 !== manifest.sourceAssetDigest || sourceAssetDocument.sha256 !== sha256(sourceAsset)) throw publicationError('CANONICAL_PUBLICATION_SOURCE_UNBOUND', 'Publication source asset does not bind to captured source evidence')
+  if (
+    sourceAssetDocument.documentId !== manifest.sourceAssetDocumentId
+    || sourceAssetDocument.sha256 !== manifest.sourceAssetDigest
+    || sourceAssetDocument.sha256 !== sha256(sourceAsset)
+    || sourceAssetDocument.byteLength !== sourceAsset.byteLength
+  ) throw publicationError('CANONICAL_PUBLICATION_SOURCE_UNBOUND', 'Publication source asset does not bind to captured source evidence')
   let projected
   try {
     projected = projectCanonicalPaper({ plan: artifacts.paper_plan, groups: artifacts.question_groups.groups, sourceCapture: artifacts.source_capture, authorityClosure: closure })
@@ -485,6 +495,7 @@ export function validateCanonicalPublicationBundle({ manifest, sourceAsset, read
     plan: artifacts.paper_plan,
     groups: artifacts.question_groups.groups,
     normalizationReport: artifacts.normalization_report,
+    sourceAssetDocument,
     projected,
   }
 }
@@ -1509,6 +1520,16 @@ function validateConsumptionPublication({
     visibleStructure: canonicalVisibleStructure(validated),
     profileRef: structuredClone(validated.plan.profileRef),
     mediaArtifacts: canonicalMediaArtifacts(validated),
+    publicationSource: Object.freeze({
+      paperId: manifest.paperId,
+      sourceAssetVersion: ref.sourceAssetVersion,
+      publicationDigest: manifest.publicationDigest,
+      authorityRef: Object.freeze(structuredClone(manifest.authority)),
+      documentId: validated.sourceAssetDocument.documentId,
+      mediaType: validated.sourceAssetDocument.mediaType,
+      sha256: validated.sourceAssetDocument.sha256,
+      byteLength: validated.sourceAssetDocument.byteLength,
+    }),
   }
 }
 
@@ -1521,6 +1542,7 @@ function readyConsumption(
   visibleStructure,
   profileRef,
   mediaArtifacts,
+  publicationSource,
 ) {
   const consumption = {
     disposition: 'ready',
@@ -1561,7 +1583,20 @@ function readyConsumption(
   if (Number(manifest.authority.manifestVersion) >= 31) {
     assertCanonicalConsumptionVisibleStructure(consumption)
   }
-  return consumption
+  const immutableConsumption = Object.freeze(consumption)
+  if (publicationSource) {
+    immutablePublicationSources.set(immutableConsumption, publicationSource)
+  }
+  return immutableConsumption
+}
+
+/**
+ * Returns the exact Publication source identity produced while this canonical
+ * consumption was validated. Renderers use this opaque provenance instead of
+ * caller-owned source mirrors or raw-asset format guesses.
+ */
+export function immutablePublicationSourceForConsumption(consumption) {
+  return immutablePublicationSources.get(consumption) || null
 }
 
 function publicationDiagnostic(error) {
@@ -1603,6 +1638,7 @@ export async function loadPaperForConsumption(request, store) {
         visibleStructure,
         profileRef,
         mediaArtifacts,
+        publicationSource,
       } = validateConsumptionPublication({
         ref,
         manifestBytes,
@@ -1628,6 +1664,7 @@ export async function loadPaperForConsumption(request, store) {
         visibleStructure,
         profileRef,
         mediaArtifacts,
+        publicationSource,
       )
     } catch (error) {
       const diagnostic = publicationDiagnostic(error)
@@ -1679,6 +1716,7 @@ export function loadPaperForConsumptionSync(request, store) {
         visibleStructure,
         profileRef,
         mediaArtifacts,
+        publicationSource,
       } = validateConsumptionPublication({
         ref,
         manifestBytes,
@@ -1704,6 +1742,7 @@ export function loadPaperForConsumptionSync(request, store) {
         visibleStructure,
         profileRef,
         mediaArtifacts,
+        publicationSource,
       )
     } catch (error) {
       // Public synchronous consumers are strict: an admitted-but-invalid

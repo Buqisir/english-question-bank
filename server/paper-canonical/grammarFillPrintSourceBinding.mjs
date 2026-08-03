@@ -3,10 +3,10 @@ import { existsSync, readFileSync } from 'node:fs'
 import path from 'node:path'
 
 import { grammarFillRhythm } from '../../shared/paper-canonical/grammarFillRhythm.mjs'
-import { stableStringify } from '../../shared/paper-canonical/stable.mjs'
-import {
-  rederiveRegisteredConfirmedCanonicalPublicationSource,
-} from './registeredConfirmedCanonicalAdmission.mjs'
+import { immutablePublicationSourceForConsumption } from './publication.mjs'
+
+const docxMediaType =
+  'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
 
 function reject(message) {
   const error = new Error(message)
@@ -42,202 +42,6 @@ function formatGrammarFillAnalysis(entry) {
     entry?.reason ? `【${entry.answer}】${entry.reason}` : '',
     entry?.teachingNote ? `点拨：${entry.teachingNote}` : '',
   ].filter(Boolean).join('\n')
-}
-
-function sameBytes(left, right) {
-  return left instanceof Uint8Array
-    && right instanceof Uint8Array
-    && left.byteLength === right.byteLength
-    && left.every((byte, index) => byte === right[index])
-}
-
-function readPublishedArtifact({ versionDir, descriptor, label }) {
-  assertSafeRelativePath(descriptor?.relativePath, label, 'canonical/')
-  if (
-    !Number.isInteger(descriptor.byteLength)
-    || typeof descriptor.sha256 !== 'string'
-  ) {
-    reject(`Canonical Grammar Fill ${label} descriptor is invalid`)
-  }
-  const artifactPath = path.join(versionDir, descriptor.relativePath)
-  if (!existsSync(artifactPath)) {
-    reject(`Canonical Grammar Fill ${label} is unavailable`)
-  }
-  const bytes = readFileSync(artifactPath)
-  if (
-    bytes.byteLength !== descriptor.byteLength
-    || digestBytes(bytes) !== descriptor.sha256
-  ) {
-    reject(`Canonical Grammar Fill ${label} digest disagrees`)
-  }
-  return bytes
-}
-
-function isDocxPackage(bytes) {
-  return bytes?.byteLength >= 4
-    && bytes[0] === 0x50
-    && bytes[1] === 0x4b
-    && bytes[2] === 0x03
-    && bytes[3] === 0x04
-}
-
-/**
- * A published trusted-DOCX asset is raw ZIP bytes, never a JSON source
- * projection. Re-open it through the registered Candidate/Confirmation
- * authority and ensure that the re-derived Canonical Paper is exactly the one
- * selected by this immutable Publication before Print/PDF consumes it.
- */
-function verifyTrustedDocxPublicationSource({
-  assetBytes,
-  sourcePaperId,
-  sourceAssetVersion,
-  sourceAssetDigest,
-  canonicalConsumption,
-  versionDir,
-}) {
-  const authority = canonicalConsumption.authorityRef
-  const authorityVersion = authority?.manifestVersion
-  if (
-    typeof authority?.manifestId !== 'string'
-    || typeof authorityVersion !== 'string'
-    || typeof authority?.manifestDigest !== 'string'
-    || typeof canonicalConsumption.publicationDigest !== 'string'
-  ) {
-    reject('Canonical Grammar Fill trusted DOCX Publication identity is unavailable')
-  }
-  const publicationPath = path.join(
-    versionDir,
-    'canonical',
-    `canonical-paper-publication-v${authorityVersion}.json`,
-  )
-  if (!existsSync(publicationPath)) {
-    reject('Canonical Grammar Fill trusted DOCX Publication manifest is unavailable')
-  }
-  const publication = readJson(
-    readFileSync(publicationPath),
-    'trusted DOCX Publication manifest',
-  )
-  if (
-    publication?.paperId !== sourcePaperId
-    || publication.publicationDigest !== canonicalConsumption.publicationDigest
-    || publication.sourceAssetVersion !== sourceAssetVersion
-    || publication.sourceAssetDigest !== sourceAssetDigest
-    || publication.sourceAssetDocumentId === undefined
-    || publication.authority?.manifestId !== authority.manifestId
-    || publication.authority?.manifestVersion !== authorityVersion
-    || publication.authority?.manifestDigest !== authority.manifestDigest
-  ) {
-    reject('Canonical Grammar Fill trusted DOCX Publication envelope disagrees')
-  }
-  const artifacts = new Map(
-    Array.isArray(publication.artifacts)
-      ? publication.artifacts.map((artifact) => [artifact.role, artifact])
-      : [],
-  )
-  const sourceCaptureBytes = readPublishedArtifact({
-    versionDir,
-    descriptor: artifacts.get('source_capture'),
-    label: 'trusted DOCX Source Capture',
-  })
-  const planBytes = readPublishedArtifact({
-    versionDir,
-    descriptor: artifacts.get('paper_plan'),
-    label: 'trusted DOCX Canonical Paper Plan',
-  })
-  const groupsBytes = readPublishedArtifact({
-    versionDir,
-    descriptor: artifacts.get('question_groups'),
-    label: 'trusted DOCX Canonical Question Groups',
-  })
-  const sourceCapture = readJson(sourceCaptureBytes, 'trusted DOCX Source Capture')
-  const sourceDocument = sourceCapture?.documents?.filter(
-    (document) => document?.documentId === publication.sourceAssetDocumentId,
-  )
-  if (
-    sourceDocument?.length !== 1
-    || sourceDocument[0].mediaType
-      !== 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
-    || sourceDocument[0].sha256 !== sourceAssetDigest
-    || sourceDocument[0].byteLength !== assetBytes.byteLength
-    || ![
-      'question_source',
-      'official_answer_source',
-      'source_provenance',
-    ].every((role) => sourceDocument[0].roles?.includes(role))
-    || typeof sourceDocument[0].encodedBytes !== 'string'
-  ) {
-    reject('Canonical Grammar Fill trusted DOCX Source Capture binding is invalid')
-  }
-  const capturedBytes = new Uint8Array(Buffer.from(sourceDocument[0].encodedBytes, 'base64'))
-  if (!sameBytes(capturedBytes, assetBytes)) {
-    reject('Canonical Grammar Fill trusted DOCX Source Capture bytes disagree')
-  }
-  const sourceEvidence = publication.sourceEvidence?.filter(
-    (descriptor) => descriptor?.documentId === publication.sourceAssetDocumentId,
-  )
-  if (sourceEvidence?.length !== 1) {
-    reject('Canonical Grammar Fill trusted DOCX source evidence is ambiguous')
-  }
-  assertSafeRelativePath(
-    sourceEvidence[0].relativePath,
-    'trusted DOCX source evidence',
-    'source-evidence/',
-  )
-  const sourceEvidencePath = path.join(versionDir, sourceEvidence[0].relativePath)
-  if (!existsSync(sourceEvidencePath)) {
-    reject('Canonical Grammar Fill trusted DOCX source evidence is unavailable')
-  }
-  const sourceEvidenceBytes = readFileSync(sourceEvidencePath)
-  if (
-    sourceEvidence[0].byteLength !== assetBytes.byteLength
-    || sourceEvidence[0].sha256 !== sourceAssetDigest
-    || digestBytes(sourceEvidenceBytes) !== sourceEvidence[0].sha256
-    || !sameBytes(sourceEvidenceBytes, assetBytes)
-  ) {
-    reject('Canonical Grammar Fill trusted DOCX source evidence disagrees')
-  }
-  const envelopes = sourceCapture.documents?.filter(
-    (document) => document?.mediaType
-      === 'application/vnd.eqb.docx-source-envelope+json',
-  )
-  if (envelopes?.length !== 1 || typeof envelopes[0].encodedBytes !== 'string') {
-    reject('Canonical Grammar Fill trusted DOCX envelope is unavailable')
-  }
-  const envelope = readJson(
-    new Uint8Array(Buffer.from(envelopes[0].encodedBytes, 'base64')),
-    'trusted DOCX envelope',
-  )
-  if (
-    envelope?.schemaVersion !== 'docx-source-envelope-v2'
-    || envelope.sourceDocument?.inputKey !== sourceDocument[0].inputKey
-    || envelope.sourceDocument?.mediaType !== sourceDocument[0].mediaType
-    || envelope.sourceDocument?.sha256 !== sourceAssetDigest
-    || envelope.sourceDocument?.byteLength !== assetBytes.byteLength
-  ) {
-    reject('Canonical Grammar Fill trusted DOCX envelope binding disagrees')
-  }
-
-  let registered
-  try {
-    registered = rederiveRegisteredConfirmedCanonicalPublicationSource({
-      paperId: sourcePaperId,
-      sourceBytes: new Uint8Array(assetBytes),
-    })
-  } catch {
-    reject('Canonical Grammar Fill trusted DOCX authority derivation disagrees')
-  }
-  const canonicalPaper = registered?.compilation?.artifacts?.canonicalPaper
-  const plan = readJson(planBytes, 'trusted DOCX Canonical Paper Plan')
-  const groups = readJson(groupsBytes, 'trusted DOCX Canonical Question Groups')
-  if (
-    registered?.identity?.paperId !== sourcePaperId
-    || registered.identity?.sourceDigest !== sourceAssetDigest
-    || canonicalPaper?.paperPlan?.paperId !== sourcePaperId
-    || stableStringify(canonicalPaper.paperPlan) !== stableStringify(plan)
-    || stableStringify(canonicalPaper.questionGroups) !== stableStringify(groups?.groups)
-  ) {
-    reject('Canonical Grammar Fill trusted DOCX Canonical identity disagrees')
-  }
 }
 
 function loadChromeSourceAsset({ sourceAsset, versionDir }) {
@@ -312,8 +116,23 @@ export function loadCanonicalGrammarFillPrintChrome({
   if (typeof sourcePaperId !== 'string' || sourcePaperId.length === 0) {
     reject('Canonical Grammar Fill chrome paper identity is unavailable')
   }
-  const sourceAssetVersion = canonicalConsumption.sourceAssetVersion
-  const sourceAssetDigest = canonicalConsumption.sourceAssetDigest
+  const publicationSource = immutablePublicationSourceForConsumption(
+    canonicalConsumption,
+  )
+  if (
+    !publicationSource
+    || publicationSource.paperId !== sourcePaperId
+    || canonicalConsumption.paperId !== sourcePaperId
+    || publicationSource.sourceAssetVersion
+      !== canonicalConsumption.sourceAssetVersion
+    || publicationSource.publicationDigest
+      !== canonicalConsumption.publicationDigest
+    || publicationSource.sha256 !== canonicalConsumption.sourceAssetDigest
+  ) {
+    reject('Canonical Grammar Fill immutable Publication source is unavailable')
+  }
+  const sourceAssetVersion = publicationSource.sourceAssetVersion
+  const sourceAssetDigest = publicationSource.sha256
   if (
     !Number.isInteger(sourceAssetVersion)
     || typeof sourceAssetDigest !== 'string'
@@ -331,18 +150,13 @@ export function loadCanonicalGrammarFillPrintChrome({
     reject('Canonical Grammar Fill chrome immutable source asset is unavailable')
   }
   const assetBytes = readFileSync(assetPath)
-  if (digestBytes(assetBytes) !== sourceAssetDigest) {
+  if (
+    assetBytes.byteLength !== publicationSource.byteLength
+    || digestBytes(assetBytes) !== sourceAssetDigest
+  ) {
     reject('Canonical Grammar Fill chrome immutable source digest disagrees')
   }
-  if (isDocxPackage(assetBytes)) {
-    verifyTrustedDocxPublicationSource({
-      assetBytes,
-      sourcePaperId,
-      sourceAssetVersion,
-      sourceAssetDigest,
-      canonicalConsumption,
-      versionDir,
-    })
+  if (publicationSource.mediaType === docxMediaType) {
     return null
   }
   const asset = readJson(
@@ -358,7 +172,7 @@ export function loadCanonicalGrammarFillPrintChrome({
   const publicOracle = grammarFillRhythm.publicArtifactOracle
   const requiresPublicSourceBinding =
     sourcePaperId === publicOracle.paperId
-    && Number(canonicalConsumption.authorityRef?.manifestVersion) >= 20
+    && Number(publicationSource.authorityRef?.manifestVersion) >= 20
   if (
     chromeSource.kind === 'legacy_source_capture'
     && !requiresPublicSourceBinding
@@ -421,8 +235,7 @@ export function loadCanonicalGrammarFillPrintChrome({
       reject('Canonical Grammar Fill immutable source identity disagrees')
     }
 
-    const authorityVersion =
-      canonicalConsumption.authorityRef?.manifestVersion
+    const authorityVersion = publicationSource.authorityRef?.manifestVersion
     const publicationManifestPath = path.join(
       versionDir,
       'canonical',
@@ -437,10 +250,10 @@ export function loadCanonicalGrammarFillPrintChrome({
     )
     if (
       publicationManifest.publicationDigest
-        !== canonicalConsumption.publicationDigest
+        !== publicationSource.publicationDigest
       || publicationManifest.sourceAssetDigest !== sourceAssetDigest
       || publicationManifest.authority?.manifestDigest
-        !== canonicalConsumption.authorityRef?.manifestDigest
+        !== publicationSource.authorityRef?.manifestDigest
     ) {
       reject('Canonical Grammar Fill immutable Publication envelope disagrees')
     }
