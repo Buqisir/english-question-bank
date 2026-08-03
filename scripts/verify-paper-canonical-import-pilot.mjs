@@ -8129,6 +8129,11 @@ async function assertPublicSectionHeadingNumericRuns(
     { text: '12.5', platformGlyphFace: 'Songti SC', ...songtiFingerprint },
     { text: '50', platformGlyphFace: 'Heiti SC', ...heitiFingerprint },
   ]
+  // Songti SC and Heiti SC are macOS system faces. Keep their exact public
+  // glyph-fingerprint lock on the platform that supplies them; Linux CI still
+  // verifies the declared family, baseline, line box, and visible glyph
+  // geometry without pretending that a generic fallback is the Apple face.
+  const requireExactPlatformGlyphFingerprint = process.platform === 'darwin'
   const observations = await page.evaluate((expected) => {
     const lineBox = (rect) => ({
       left: rect.left,
@@ -8398,6 +8403,14 @@ async function assertPublicSectionHeadingNumericRuns(
       )
     }
     for (const run of [observation.numeric, observation.chinese]) {
+      assert.equal(
+        run.platformGlyphFace.matchingFamilies.includes(
+          expectedRun.platformGlyphFace,
+        ),
+        true,
+        `${label} ${surface} ${observation.text} retains ${expectedRun.platformGlyphFace} in the resolved public font stack: ${JSON.stringify(observation)}`,
+      )
+      if (!requireExactPlatformGlyphFingerprint) continue
       assert.deepEqual(
         run.platformGlyphFace.matchingFamilies,
         [expectedRun.platformGlyphFace],

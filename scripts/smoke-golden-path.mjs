@@ -8,7 +8,7 @@
 // creates real users and drives the login form.
 //
 // Skeleton copied from scripts/smoke-c8-draft-paper-composer.mjs (temp dir DB,
-// startProcess, waitForHttp, seed-via-DatabaseSync, cleanup). Key differences from
+// startProcess, waitForHttp, confirmed-Canonical seed, cleanup). Key differences from
 // that script:
 //   - Two users (e2e-owner / e2e-member) are created in the temp USER_DATA_DB via
 //     `scripts/create-user.mjs` BEFORE the API starts, so the users table is
@@ -19,11 +19,12 @@
 //     avoid local port clashes when smokes run in parallel.
 import { spawn, spawnSync } from 'node:child_process'
 import { createRequire } from 'node:module'
-import { existsSync, mkdtempSync, readFileSync, rmSync } from 'node:fs'
+import { existsSync, mkdtempSync, rmSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { DatabaseSync } from 'node:sqlite'
+
+import { seedConfirmedCanonicalDraftFixture } from './lib/canonicalDraftE2eFixture.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '..')
@@ -34,6 +35,7 @@ const { chromium } = require(playwrightPath)
 const tempRoot = mkdtempSync(path.join(tmpdir(), 'eqb-golden-path-'))
 const dbPath = path.join(tempRoot, 'question-bank.sqlite')
 const userDataDbPath = path.join(tempRoot, 'user-data.sqlite')
+const paperAssetsDir = path.join(tempRoot, 'paper-assets')
 const apiPort = 9899
 const vitePort = 5189
 const children = []
@@ -46,6 +48,8 @@ const WRONG_PASSWORD = 'definitely-not-the-password'
 
 const OWNER_GROUP_TITLE = '黄金路径E2E专用题组Owner'
 const MEMBER_GROUP_TITLE = '黄金路径E2E专用题组Member'
+const OWNER_GROUP_ID = 'group-2026-i-reading-a'
+const MEMBER_GROUP_ID = 'group-2026-i-reading-b'
 
 let passed = 0
 
@@ -125,55 +129,27 @@ function createTestUsers() {
 }
 
 function seedSmokeDatabase() {
-  const db = new DatabaseSync(dbPath)
-  db.exec(readFileSync(path.join(rootDir, 'data/sql/schema.sql'), 'utf8'))
-  db.exec(readFileSync(path.join(rootDir, 'data/sql/seed-v0.sql'), 'utf8'))
-  db.exec(`
-    INSERT OR REPLACE INTO sources (id, source_type, year, region, paper_name, section, note)
-    VALUES ('src-golden-path', 'self_made', 2026, 'GP', 'Golden Path Smoke', '完形填空', 'golden-path-e2e fixture');
-    INSERT OR REPLACE INTO passages (id, source_id, title, material_text, summary, theme, discourse_type, difficulty)
-    VALUES (
-      'passage-golden-path',
-      'src-golden-path',
-      '黄金路径E2E测试篇章',
-      'This passage exists purely to support the golden-path-e2e smoke test and has no pedagogical content beyond its one __41__ marker.',
-      '黄金路径E2E测试篇章',
-      '人与自我',
-      'cloze',
-      'medium'
-    );
-    INSERT OR REPLACE INTO question_groups (id, passage_id, group_type, title, instruction, display_order, default_score, difficulty, note)
-    VALUES ('g-golden-owner', 'passage-golden-path', 'cloze', '${OWNER_GROUP_TITLE}', 'Choose the best answer.', 99, 1, 'medium', 'golden-path-e2e owner group');
-    INSERT OR REPLACE INTO question_groups (id, passage_id, group_type, title, instruction, display_order, default_score, difficulty, note)
-    VALUES ('g-golden-member', 'passage-golden-path', 'cloze', '${MEMBER_GROUP_TITLE}', 'Choose the best answer.', 100, 1, 'medium', 'golden-path-e2e member group');
-  `)
-  const insertQuestion = db.prepare(`
-    INSERT OR REPLACE INTO questions (id, group_id, question_no, question_type, stem, answer, explanation, difficulty, score, display_order, note)
-    VALUES (?, ?, ?, ?, ?, 'A', 'golden-path-e2e smoke', 'medium', ?, ?, '')
-  `)
-  const insertOption = db.prepare(`
-    INSERT OR REPLACE INTO options (id, question_id, label, content, display_order)
-    VALUES (?, ?, ?, ?, ?)
-  `)
-  for (const groupId of ['g-golden-owner', 'g-golden-member']) {
-    const qid = `q-${groupId}-1`
-    insertQuestion.run(qid, groupId, '1', '完形语义', 'Smoke stem with printable content.', 1, 1)
-    for (const [optionIndex, label] of ['A', 'B', 'C', 'D'].entries()) {
-      insertOption.run(`opt-${groupId}-${label}`, qid, label, `Option ${label}`, optionIndex + 1)
-    }
-  }
-  db.close()
+  seedConfirmedCanonicalDraftFixture({
+    repositoryRoot: rootDir,
+    bankDbPath: dbPath,
+    paperAssetsDir,
+    groupIds: [OWNER_GROUP_ID, MEMBER_GROUP_ID],
+    titlesByGroupId: {
+      [OWNER_GROUP_ID]: OWNER_GROUP_TITLE,
+      [MEMBER_GROUP_ID]: MEMBER_GROUP_TITLE,
+    },
+  })
 }
 
 async function waitForConciergeDeskReady(page) {
   await page.getByPlaceholder(/找一道|正在连接|比如/).waitFor({ timeout: 15_000 })
   // Guard against the search racing the initial /api/question-groups fetch:
   // wait until both smoke fixture groups are present and addable before searching.
-  await page.waitForFunction(async () => {
+  await page.waitForFunction(async (expectedGroupIds) => {
     const data = await fetch('/api/question-groups').then((response) => response.json())
     const groups = new Map(data.questionGroups.map((group) => [group.id, group]))
-    return ['g-golden-owner', 'g-golden-member'].every((groupId) => groups.get(groupId)?.canAddToDraftPaper)
-  }, { timeout: 15_000 })
+    return expectedGroupIds.every((groupId) => groups.get(groupId)?.canAddToDraftPaper)
+  }, [OWNER_GROUP_ID, MEMBER_GROUP_ID], { timeout: 15_000 })
 }
 
 async function searchAndOpenGroupCard(page, searchText, groupId) {
@@ -223,7 +199,7 @@ async function runOwnerFlow(browser) {
 
     // C3: find -> expand -> detail. trust-cracks C3c: 详情 is a real link
     // (?view=detail&groupId=…) now, role=link not button — 中键/新标签可用.
-    const ownerCard = await searchAndOpenGroupCard(page, OWNER_GROUP_TITLE, 'g-golden-owner')
+    const ownerCard = await searchAndOpenGroupCard(page, OWNER_GROUP_TITLE, OWNER_GROUP_ID)
     await ownerCard.getByRole('link', { name: '详情' }).click()
     await page.locator('.detail-view').waitFor({ timeout: 10_000 })
     pass('Owner opens 题组详情 from the card')
@@ -252,7 +228,7 @@ async function runOwnerFlow(browser) {
     await page.locator('.basket-chip').click()
     await page.waitForURL(/view=draft-paper/)
     await page.locator('.draft-workbench-shell').waitFor({ timeout: 10_000 })
-    await page.locator('[data-draft-group-id="g-golden-owner"]').waitFor({ timeout: 10_000 })
+    await page.locator(`[data-draft-group-id="${OWNER_GROUP_ID}"]`).waitFor({ timeout: 10_000 })
     pass('Owner basket-chip opens the draft workbench with the added group in the outline')
 
     // Ticket 16: the teacher-facing output matrix is behavioral, not a source
@@ -330,7 +306,7 @@ async function runMemberFlow(browser, ownerDraftPaperId) {
       return { ok: response.ok, status: response.status, body: await response.json() }
     })
     if (memberDraftBeforeAdd.ok) {
-      const hasOwnerGroup = memberDraftBeforeAdd.body.draftPaper.items.some((item) => item.groupId === 'g-golden-owner')
+      const hasOwnerGroup = memberDraftBeforeAdd.body.draftPaper.items.some((item) => item.groupId === OWNER_GROUP_ID)
       if (hasOwnerGroup) {
         fail("Member's draft paper must not contain the owner's group", JSON.stringify(memberDraftBeforeAdd))
       }
@@ -343,7 +319,7 @@ async function runMemberFlow(browser, ownerDraftPaperId) {
     pass("Member's current draft paper is isolated from the owner's")
 
     // C4: member walks find -> detail -> add -> workbench with their own group.
-    const memberCard = await searchAndOpenGroupCard(page, MEMBER_GROUP_TITLE, 'g-golden-member')
+    const memberCard = await searchAndOpenGroupCard(page, MEMBER_GROUP_TITLE, MEMBER_GROUP_ID)
     await memberCard.getByRole('link', { name: '详情' }).click()
     await page.locator('.detail-view').waitFor({ timeout: 10_000 })
     pass('Member opens 题组详情 from the card')
@@ -378,8 +354,8 @@ async function runMemberFlow(browser, ownerDraftPaperId) {
     await page.locator('.basket-chip').click()
     await page.waitForURL(/view=draft-paper/)
     await page.locator('.draft-workbench-shell').waitFor({ timeout: 10_000 })
-    await page.locator('[data-draft-group-id="g-golden-member"]').waitFor({ timeout: 10_000 })
-    const memberOutlineHasOwnerGroup = await page.locator('[data-draft-group-id="g-golden-owner"]').count()
+    await page.locator(`[data-draft-group-id="${MEMBER_GROUP_ID}"]`).waitFor({ timeout: 10_000 })
+    const memberOutlineHasOwnerGroup = await page.locator(`[data-draft-group-id="${OWNER_GROUP_ID}"]`).count()
     if (memberOutlineHasOwnerGroup !== 0) {
       fail("Member's workbench outline must not contain the owner's group")
     }
@@ -405,6 +381,7 @@ async function main() {
       ...process.env,
       QUESTION_BANK_DB: dbPath,
       USER_DATA_DB: userDataDbPath,
+      QUESTION_BANK_PAPER_ASSET_ROOT: paperAssetsDir,
       QUESTION_BANK_API_PORT: String(apiPort),
     },
   })

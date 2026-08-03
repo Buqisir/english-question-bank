@@ -22,8 +22,8 @@
 //     firstPage%4 rule, independently re-derived here).
 //
 // Phase B (live, real dev server + real click — plan.md "必须真点实证，不
-// 许只靠源码断言"): seeds a temp DB with enough real reading-group content
-// to force multi-page pagination, boots api+vite against it, drives a real
+// 许只靠源码断言"): seeds a temp DB from one already confirmed Canonical
+// Paper to force multi-page pagination, boots api+vite against it, drives a real
 // Playwright browser through the actual DraftPaperWorkbench UI: A3 toggle,
 // persistent overlay buttons (上移/下移/前置分页), rail click-to-scroll,
 // scrollspy highlight-on-scroll, and (if the fixture produces one) a real
@@ -45,7 +45,8 @@ import { stripTypeScriptTypes } from 'node:module'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { DatabaseSync } from 'node:sqlite'
+
+import { seedConfirmedCanonicalDraftFixture } from './lib/canonicalDraftE2eFixture.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '..')
@@ -222,6 +223,7 @@ async function runPhaseB(browser) {
   const tempRoot = mkdtempSync(path.join(tmpdir(), 'eqb-a3-imposition-'))
   const dbPath = path.join(tempRoot, 'question-bank.sqlite')
   const userDataDbPath = path.join(tempRoot, 'user-data.sqlite')
+  const paperAssetsDir = path.join(tempRoot, 'paper-assets')
   const apiPort = 9897
   const vitePort = 5187
   const children = []
@@ -253,64 +255,22 @@ async function runPhaseB(browser) {
     throw new Error(`Timed out waiting for ${url}`)
   }
 
-  function seedFixtureDatabase() {
-    const db = new DatabaseSync(dbPath)
-    db.exec(readFileSync(path.join(rootDir, 'data/sql/schema.sql'), 'utf8'))
-    db.exec(readFileSync(path.join(rootDir, 'data/sql/seed-v0.sql'), 'utf8'))
-    db.exec(`
-      INSERT OR REPLACE INTO sources (id, source_type, year, region, paper_name, section, note)
-      VALUES ('src-a3-smoke', 'self_made', 2026, 'A3', 'A3 Imposition Smoke', '阅读理解', 'a3-imposition smoke fixture');
-    `)
-    const insertPassage = db.prepare(`
-      INSERT OR REPLACE INTO passages (id, source_id, title, material_text, summary, theme, discourse_type, difficulty)
-      VALUES (?, 'src-a3-smoke', ?, ?, ?, '人与社会', 'argumentation', 'medium')
-    `)
-    const insertGroup = db.prepare(`
-      INSERT OR REPLACE INTO question_groups (id, passage_id, group_type, title, instruction, display_order, default_score, difficulty, note)
-      VALUES (?, ?, 'reading', ?, 'Read the passage and choose the best answer.', ?, 2, 'medium', 'a3-imposition smoke')
-    `)
-    const insertQuestion = db.prepare(`
-      INSERT OR REPLACE INTO questions (id, group_id, question_no, question_type, stem, answer, explanation, difficulty, score, display_order, note)
-      VALUES (?, ?, ?, '细节理解', ?, 'A', 'a3-imposition smoke', 'medium', 2, ?, '')
-    `)
-    const insertOption = db.prepare(`
-      INSERT OR REPLACE INTO options (id, question_id, label, content, display_order)
-      VALUES (?, ?, ?, ?, ?)
-    `)
-    // A single long paragraph repeated/varied per group — enough real prose
-    // (paged.js measures actual rendered text) to reliably push the draft
-    // past several A4 pages across 10 groups so the a3 wrapper has real
-    // face/sheet/seam structure to exercise, not just a 1-2 page draft.
-    const paragraph =
-      'Across the city, community gardens have quietly become one of the most effective tools for bringing ' +
-      'neighbors together. What began as small plots tended by a handful of retirees has grown into a network ' +
-      'of shared spaces where children learn where vegetables actually come from, newcomers practice the local ' +
-      'language while pulling weeds, and long-time residents pass on techniques that predate any gardening app. ' +
-      'Researchers who study urban design increasingly point to these gardens as evidence that the built ' +
-      'environment shapes social trust just as much as any policy document, and city planners have started ' +
-      'reserving small parcels specifically for this purpose rather than treating them as leftover space.'
-    for (let g = 1; g <= 10; g += 1) {
-      const passageId = `passage-a3-smoke-${g}`
-      const groupId = `group-a3-smoke-${g}`
-      insertPassage.run(passageId, `A3 拼版压力测试 · 第 ${g} 篇`, `${paragraph} (variant ${g})`, `A3 拼版压力测试摘要 ${g}`)
-      insertGroup.run(groupId, passageId, `A3 拼版压力测试 · 第 ${g} 篇`, 100 + g)
-      for (let q = 1; q <= 4; q += 1) {
-        const qid = `q-a3-smoke-${g}-${q}`
-        insertQuestion.run(qid, groupId, String(q), `A3 smoke stem ${g}.${q} — what does the passage mainly suggest about community gardens?`, q)
-        for (const [optionIndex, label] of ['A', 'B', 'C', 'D'].entries()) {
-          insertOption.run(`opt-a3-smoke-${g}-${q}-${label}`, qid, label, `Option ${label} for A3 smoke ${g}.${q}`, optionIndex + 1)
-        }
-      }
-    }
-    db.close()
-  }
-
-  seedFixtureDatabase()
+  const { groupIds } = seedConfirmedCanonicalDraftFixture({
+    repositoryRoot: rootDir,
+    bankDbPath: dbPath,
+    paperAssetsDir,
+  })
 
   startProcess('node', ['server/api.mjs'], {
     cwd: rootDir,
     name: 'api',
-    env: { ...process.env, QUESTION_BANK_DB: dbPath, USER_DATA_DB: userDataDbPath, QUESTION_BANK_API_PORT: String(apiPort) },
+    env: {
+      ...process.env,
+      QUESTION_BANK_DB: dbPath,
+      USER_DATA_DB: userDataDbPath,
+      QUESTION_BANK_PAPER_ASSET_ROOT: paperAssetsDir,
+      QUESTION_BANK_API_PORT: String(apiPort),
+    },
   })
   await waitForHttp(`http://127.0.0.1:${apiPort}/api/health`)
 
@@ -332,19 +292,19 @@ async function runPhaseB(browser) {
     // (mirrors scripts/smoke-c8-draft-paper-composer.mjs's pattern) — the
     // slow search-and-click-add UI flow isn't what this script exists to
     // exercise; the a3 imposition/interaction surface is.
-    const addResult = await page.evaluate(async () => {
+    const addResult = await page.evaluate(async (canonicalGroupIds) => {
       const results = []
-      for (let g = 1; g <= 10; g += 1) {
+      for (const groupId of canonicalGroupIds) {
         const response = await fetch('/api/draft-papers/current/items', {
           method: 'POST',
           headers: { 'content-type': 'application/json' },
-          body: JSON.stringify({ groupId: `group-a3-smoke-${g}` }),
+          body: JSON.stringify({ groupId }),
         })
         results.push(response.ok)
       }
       return results
-    })
-    assert('all 10 smoke groups added to draft via API', addResult.every(Boolean), JSON.stringify(addResult))
+    }, groupIds)
+    assert('all confirmed Canonical groups added to draft via API', addResult.every(Boolean), JSON.stringify(addResult))
 
     const draftId = await page.evaluate(async () => {
       const response = await fetch('/api/draft-papers/current')
@@ -354,7 +314,11 @@ async function runPhaseB(browser) {
 
     await page.goto(`http://127.0.0.1:${vitePort}/?view=draft-paper&draftPaperId=${draftId}`, { waitUntil: 'networkidle' })
     await page.locator('.draft-a4-sheet iframe').waitFor({ timeout: 15_000 })
-    await page.waitForFunction(() => document.querySelectorAll('.draft-paper-rail-item').length >= 10, { timeout: 15_000 })
+    await page.waitForFunction(
+      (expected) => document.querySelectorAll('.draft-paper-rail-item').length >= expected,
+      groupIds.length,
+      { timeout: 15_000 },
+    )
 
     const a4PageCount = await page.evaluate(() => {
       const iframe = document.querySelector('.draft-a4-sheet iframe')

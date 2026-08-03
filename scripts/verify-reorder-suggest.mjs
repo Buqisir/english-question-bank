@@ -32,8 +32,8 @@
 //     still breaks and proposeReorder correctly returns null (宁缺勿假).
 //
 // Phase B (live, real Chromium + dev server, real click — plan.md "沿用
-// verify-a3-imposition e2e 段模式"): seeds 10 real reading groups (same
-// fixture shape as verify-a3-imposition.mjs, force multi-page) into a real
+// verify-a3-imposition e2e 段模式"): seeds one confirmed Canonical Paper
+// (same fixture seam as verify-a3-imposition.mjs, force multi-page) into a real
 // draft, then:
 //   ③ zero-DB-write: draft_papers/draft_paper_items row snapshots taken
 //     immediately before/after a real GET .../reorder-suggestion call are
@@ -57,11 +57,13 @@
 //     toast, assert a second PATCH restores the original order.
 import { spawn } from 'node:child_process'
 import { createRequire } from 'node:module'
-import { existsSync, mkdtempSync, readFileSync, rmSync } from 'node:fs'
+import { existsSync, mkdtempSync, rmSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { DatabaseSync } from 'node:sqlite'
+
+import { seedConfirmedCanonicalDraftFixture } from './lib/canonicalDraftE2eFixture.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '..')
@@ -240,6 +242,7 @@ async function runPhaseB(browser) {
   const tempRoot = mkdtempSync(path.join(tmpdir(), 'eqb-reorder-suggest-'))
   const dbPath = path.join(tempRoot, 'question-bank.sqlite')
   const userDataDbPath = path.join(tempRoot, 'user-data.sqlite')
+  const paperAssetsDir = path.join(tempRoot, 'paper-assets')
   const apiPort = 9898
   const vitePort = 5188
   const children = []
@@ -266,65 +269,22 @@ async function runPhaseB(browser) {
     throw new Error(`Timed out waiting for ${url}`)
   }
 
-  // Same fixture shape as scripts/verify-a3-imposition.mjs's seedFixtureDatabase
-  // (10 real reading groups, one long shared paragraph) — reused so this
-  // script exercises the SAME real multi-page pagination the a3-imposition
-  // seam-suggestion feature already relies on, giving the reorder evaluator a
-  // real shot at finding an actual fixable break.
-  function seedFixtureDatabase() {
-    const db = new DatabaseSync(dbPath)
-    db.exec(readFileSync(path.join(rootDir, 'data/sql/schema.sql'), 'utf8'))
-    db.exec(readFileSync(path.join(rootDir, 'data/sql/seed-v0.sql'), 'utf8'))
-    db.exec(`
-      INSERT OR REPLACE INTO sources (id, source_type, year, region, paper_name, section, note)
-      VALUES ('src-reorder-smoke', 'self_made', 2026, 'RS', 'Reorder Suggest Smoke', '阅读理解', 'reorder-suggest smoke fixture');
-    `)
-    const insertPassage = db.prepare(`
-      INSERT OR REPLACE INTO passages (id, source_id, title, material_text, summary, theme, discourse_type, difficulty)
-      VALUES (?, 'src-reorder-smoke', ?, ?, ?, '人与社会', 'argumentation', 'medium')
-    `)
-    const insertGroup = db.prepare(`
-      INSERT OR REPLACE INTO question_groups (id, passage_id, group_type, title, instruction, display_order, default_score, difficulty, note)
-      VALUES (?, ?, 'reading', ?, 'Read the passage and choose the best answer.', ?, 2, 'medium', 'reorder-suggest smoke')
-    `)
-    const insertQuestion = db.prepare(`
-      INSERT OR REPLACE INTO questions (id, group_id, question_no, question_type, stem, answer, explanation, difficulty, score, display_order, note)
-      VALUES (?, ?, ?, '细节理解', ?, 'A', 'reorder-suggest smoke', 'medium', 2, ?, '')
-    `)
-    const insertOption = db.prepare(`
-      INSERT OR REPLACE INTO options (id, question_id, label, content, display_order)
-      VALUES (?, ?, ?, ?, ?)
-    `)
-    const paragraph =
-      'Across the city, community gardens have quietly become one of the most effective tools for bringing ' +
-      'neighbors together. What began as small plots tended by a handful of retirees has grown into a network ' +
-      'of shared spaces where children learn where vegetables actually come from, newcomers practice the local ' +
-      'language while pulling weeds, and long-time residents pass on techniques that predate any gardening app. ' +
-      'Researchers who study urban design increasingly point to these gardens as evidence that the built ' +
-      'environment shapes social trust just as much as any policy document, and city planners have started ' +
-      'reserving small parcels specifically for this purpose rather than treating them as leftover space.'
-    for (let g = 1; g <= 10; g += 1) {
-      const passageId = `passage-reorder-smoke-${g}`
-      const groupId = `group-reorder-smoke-${g}`
-      insertPassage.run(passageId, `Reorder-Suggest 压力测试 · 第 ${g} 篇`, `${paragraph} (variant ${g})`, `Reorder-Suggest 压力测试摘要 ${g}`)
-      insertGroup.run(groupId, passageId, `Reorder-Suggest 压力测试 · 第 ${g} 篇`, 100 + g)
-      for (let q = 1; q <= 4; q += 1) {
-        const qid = `q-reorder-smoke-${g}-${q}`
-        insertQuestion.run(qid, groupId, String(q), `Reorder smoke stem ${g}.${q} — what does the passage mainly suggest about community gardens?`, q)
-        for (const [optionIndex, label] of ['A', 'B', 'C', 'D'].entries()) {
-          insertOption.run(`opt-reorder-smoke-${g}-${q}-${label}`, qid, label, `Option ${label} for reorder smoke ${g}.${q}`, optionIndex + 1)
-        }
-      }
-    }
-    db.close()
-  }
-
-  seedFixtureDatabase()
+  const { groupIds } = seedConfirmedCanonicalDraftFixture({
+    repositoryRoot: rootDir,
+    bankDbPath: dbPath,
+    paperAssetsDir,
+  })
 
   startProcess('node', ['server/api.mjs'], {
     cwd: rootDir,
     name: 'api',
-    env: { ...process.env, QUESTION_BANK_DB: dbPath, USER_DATA_DB: userDataDbPath, QUESTION_BANK_API_PORT: String(apiPort) },
+    env: {
+      ...process.env,
+      QUESTION_BANK_DB: dbPath,
+      USER_DATA_DB: userDataDbPath,
+      QUESTION_BANK_PAPER_ASSET_ROOT: paperAssetsDir,
+      QUESTION_BANK_API_PORT: String(apiPort),
+    },
   })
   await waitForHttp(`http://127.0.0.1:${apiPort}/api/health`)
 
@@ -342,19 +302,19 @@ async function runPhaseB(browser) {
   try {
     await page.goto(`http://127.0.0.1:${vitePort}/`, { waitUntil: 'networkidle' })
 
-    const addResult = await page.evaluate(async () => {
+    const addResult = await page.evaluate(async (canonicalGroupIds) => {
       const results = []
-      for (let g = 1; g <= 10; g += 1) {
+      for (const groupId of canonicalGroupIds) {
         const response = await fetch('/api/draft-papers/current/items', {
           method: 'POST',
           headers: { 'content-type': 'application/json' },
-          body: JSON.stringify({ groupId: `group-reorder-smoke-${g}` }),
+          body: JSON.stringify({ groupId }),
         })
         results.push(response.ok)
       }
       return results
-    })
-    assert('all 10 smoke groups added to draft via API', addResult.every(Boolean), JSON.stringify(addResult))
+    }, groupIds)
+    assert('all confirmed Canonical groups added to draft via API', addResult.every(Boolean), JSON.stringify(addResult))
 
     const draftId = await page.evaluate(async () => {
       const response = await fetch('/api/draft-papers/current')
@@ -450,7 +410,11 @@ async function runPhaseB(browser) {
     // ─── ⑦ real click (only if this run's fixture produced a card) ───
     await page.goto(`http://127.0.0.1:${vitePort}/?view=draft-paper&draftPaperId=${draftId}`, { waitUntil: 'networkidle' })
     await page.locator('.draft-a4-sheet iframe').waitFor({ timeout: 15_000 })
-    await page.waitForFunction(() => document.querySelectorAll('.draft-paper-rail-item').length >= 10, { timeout: 15_000 })
+    await page.waitForFunction(
+      (expected) => document.querySelectorAll('.draft-paper-rail-item').length >= expected,
+      groupIds.length,
+      { timeout: 15_000 },
+    )
     // The suggestion card is fetched only after pagination resolves with real
     // breakage — give it a moment, but don't fail if it never shows (plan.md
     // 拉取策略: null/cleared -> no card, a legitimate outcome).
