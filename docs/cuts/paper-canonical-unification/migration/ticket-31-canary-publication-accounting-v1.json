@@ -1,0 +1,182 @@
+{
+  "accounting": {
+    "paper": {
+      "blocked": 0,
+      "inScope": 33,
+      "publishedCanary": 4,
+      "readyUnpublished": 29,
+      "rolledBack": 0
+    },
+    "publication": {
+      "canonicalSelections": 4,
+      "currentRefs": 4,
+      "publications": 4,
+      "rollbackTargets": 4
+    },
+    "source": {
+      "completeCanonicalPapers": 33,
+      "importCandidates": 33,
+      "sourceCaptures": 33,
+      "teacherConfirmations": 33
+    }
+  },
+  "accountingDigest": "sha256:a4be861e789fd24228485fbee673eb758cd0665aaab8223aa101ad2d7ea1e824",
+  "approvedCanaries": [
+    {
+      "paperId": "paper-960d0f8d",
+      "publication": {
+        "authority": {
+          "manifestDigest": "sha256:b025bdc677a59a09548575e3df1e911ecd0273c5f6a9056d70603107c1970c83",
+          "manifestId": "paper-canonical",
+          "manifestVersion": "41"
+        },
+        "currentRefPath": "test-fixtures/paper-canonical/publications/ticket-31-canary-v1/store/paper-960d0f8d/latest/canonical-paper-publication-ref-v1.json",
+        "currentRefSha256": "sha256:d96b4037d0e0944c27732dfbd9a744ef8d799d709bc0d4c4dc7a070673f735bd",
+        "paperId": "paper-960d0f8d",
+        "printSelections": 6,
+        "publicationDigest": "sha256:4f95c3ca8cbfb90daf59fc6fc2969737d8497ad83e040960769bf6c43b3a6b8a",
+        "reopen": "exact_identity_ready",
+        "retry": "idempotent",
+        "screenSelections": 6,
+        "sourceAssetVersion": 1,
+        "versionName": "v1"
+      }
+    },
+    {
+      "paperId": "paper-2025-ii",
+      "publication": {
+        "authority": {
+          "manifestDigest": "sha256:b025bdc677a59a09548575e3df1e911ecd0273c5f6a9056d70603107c1970c83",
+          "manifestId": "paper-canonical",
+          "manifestVersion": "41"
+        },
+        "currentRefPath": "test-fixtures/paper-canonical/publications/ticket-31-canary-v1/store/paper-2025-ii/latest/canonical-paper-publication-ref-v1.json",
+        "currentRefSha256": "sha256:d55caa7843a960ac7674497cb62a5d0d125b2ad772d736e3cb8c8b79011233b4",
+        "paperId": "paper-2025-ii",
+        "printSelections": 6,
+        "publicationDigest": "sha256:afb4dba049207c0f04fa4431bd79616523c2d5155848fea6b9c9021e7bf89376",
+        "reopen": "exact_identity_ready",
+        "retry": "idempotent",
+        "screenSelections": 6,
+        "sourceAssetVersion": 1,
+        "versionName": "v1"
+      }
+    },
+    {
+      "paperId": "paper-2023-yi",
+      "publication": {
+        "authority": {
+          "manifestDigest": "sha256:b025bdc677a59a09548575e3df1e911ecd0273c5f6a9056d70603107c1970c83",
+          "manifestId": "paper-canonical",
+          "manifestVersion": "41"
+        },
+        "currentRefPath": "test-fixtures/paper-canonical/publications/ticket-31-canary-v1/store/paper-2023-yi/latest/canonical-paper-publication-ref-v1.json",
+        "currentRefSha256": "sha256:92bc6853dd72b119051fec7697417caef22f1c0b1f19cbd4e38d3e6f69e9cebd",
+        "paperId": "paper-2023-yi",
+        "printSelections": 4,
+        "publicationDigest": "sha256:44b8a01624f4effc6f5b5a27ba5e873a7286f801c5828e90d4baf13df3533cbd",
+        "reopen": "exact_identity_ready",
+        "retry": "idempotent",
+        "screenSelections": 4,
+        "sourceAssetVersion": 1,
+        "versionName": "v1"
+      }
+    },
+    {
+      "paperId": "paper-zj-2022-jun",
+      "publication": {
+        "authority": {
+          "manifestDigest": "sha256:b025bdc677a59a09548575e3df1e911ecd0273c5f6a9056d70603107c1970c83",
+          "manifestId": "paper-canonical",
+          "manifestVersion": "41"
+        },
+        "currentRefPath": "test-fixtures/paper-canonical/publications/ticket-31-canary-v1/store/paper-zj-2022-jun/latest/canonical-paper-publication-ref-v1.json",
+        "currentRefSha256": "sha256:ecac17167d0000fe5121c995939d51577141c3b6972e8c9be3e2ccc701bfcb58",
+        "paperId": "paper-zj-2022-jun",
+        "printSelections": 6,
+        "publicationDigest": "sha256:efd74a62dd1062b6d9ba39aa4d2e21e39601cf711f560a525af949886e280143",
+        "reopen": "exact_identity_ready",
+        "retry": "idempotent",
+        "screenSelections": 6,
+        "sourceAssetVersion": 1,
+        "versionName": "v1"
+      }
+    }
+  ],
+  "invariants": {
+    "ledgerV2Unchanged": true,
+    "manifestUnchanged": true,
+    "noAuthorityVersionChange": true,
+    "noProductionOrR2": true,
+    "noSharedAdapterSchemaPublisherRendererChange": true,
+    "onlyApprovedCanariesPublished": true
+  },
+  "nextTicket": {
+    "status": "not_started",
+    "startAuthorized": false,
+    "predecessorCompletion": "blocked",
+    "blockingEvidence": {
+      "path": "docs/cuts/paper-canonical-unification/qa/ticket-31-canary-public-surface-evidence-v1.json",
+      "reason": "Complete-paper Student/Teacher Print/PDF is fail-closed at Grammar Fill immutable source binding."
+    },
+    "allowedPaperIds": [
+      "paper-2020-bing",
+      "paper-2020-i",
+      "paper-2020-ii",
+      "paper-2020-jia",
+      "paper-2021-i",
+      "paper-2021-ii",
+      "paper-2021-jia",
+      "paper-2021-yi",
+      "paper-2022-i",
+      "paper-2022-ii",
+      "paper-2022-jia",
+      "paper-2022-yi",
+      "paper-2023-i",
+      "paper-2023-ii",
+      "paper-2023-jia",
+      "paper-2024-i",
+      "paper-2024-ii",
+      "paper-2024-jia",
+      "paper-2025-i",
+      "paper-2026-i",
+      "paper-zj-2020-jan",
+      "paper-zj-2020-jul",
+      "paper-zj-2021-jan",
+      "paper-zj-2021-jun",
+      "paper-zj-2022-jan",
+      "paper-zj-2023-jan",
+      "paper-zj-2024-jan",
+      "paper-zj-2025-jan",
+      "paper-zj-2026-jan"
+    ],
+    "expectedCount": 29,
+    "number": 32
+  },
+  "predecessor": {
+    "ledger": {
+      "ledgerDigest": "sha256:8b477e92c6a471337bf9b62e8fda97283faf4dc71ca4727e759168b96fd22fcf",
+      "path": "docs/cuts/paper-canonical-unification/migration/ledger-v2.json"
+    },
+    "manifest": {
+      "manifestDigest": "sha256:9992329a6de0fa3dcbff9fea8a0d6d92b660f0e8049b7978ceb5ff0000610e41",
+      "path": "docs/cuts/paper-canonical-unification/migration/manifest-v2.json"
+    },
+    "zeroWriteEvidence": {
+      "evidenceDigest": "sha256:e0ba615f2d7b1c9be61f23901a839a0cf58e9249579b2d94fb7707440db7f43f",
+      "path": "docs/cuts/paper-canonical-unification/migration/integrated-corpus-zero-write-evidence-v1.json"
+    }
+  },
+  "schemaVersion": "ticket-31-canary-publication-accounting-v1",
+  "ticket": {
+    "baseHead": "a58bc477536f91dfaf8176f98fb4e1a335332a5f",
+    "bridgeFixedPoint": "8d88101a0d7e6742cfe9d443f15276ae13605d5f",
+    "number": 31
+  },
+  "ticket31Outcome": {
+    "disposition": "blocked",
+    "approvedCanaryPublications": 4,
+    "completePaperExport": "fail_closed",
+    "publicSurfaceEvidence": "docs/cuts/paper-canonical-unification/qa/ticket-31-canary-public-surface-evidence-v1.json"
+  }
+}

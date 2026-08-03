@@ -1,0 +1,165 @@
+{
+  "schemaVersion": "ticket-31-canary-public-surface-evidence-v1",
+  "ticket": {
+    "number": 31,
+    "baseHead": "a58bc477536f91dfaf8176f98fb4e1a335332a5f",
+    "bridgeFixedPoint": "8d88101a0d7e6742cfe9d443f15276ae13605d5f"
+  },
+  "disposition": "blocked",
+  "isolation": {
+    "publicationStore": "test-fixtures/paper-canonical/publications/ticket-31-canary-v1/store",
+    "storage": "temporary local service database copied from the staged isolated publication store",
+    "productionOrR2Touched": false
+  },
+  "screen": {
+    "status": "passed",
+    "route": "app/canonical-reading-qa.html via GET /api/paper-canonical/consumption",
+    "actualSurface": "app/src/qa/mountCanonicalReadingSurface.tsx / PaperSurface",
+    "observations": [
+      {
+        "paperId": "paper-960d0f8d",
+        "groupId": "group-960d0f8d-reading-a",
+        "screenshotSha256": "sha256:f7ce9f414fe1da7e0ad4d63dab9325165c5f984e2252cb9128bb48762bc2f45e",
+        "screenshotByteLength": 180693
+      },
+      {
+        "paperId": "paper-2025-ii",
+        "groupId": "group-2025-ii-reading-a",
+        "screenshotSha256": "sha256:80ebd5e3d2d698875dbd43d45882c0b7a00aab79e988b351bc9095f7bb69c1d5",
+        "screenshotByteLength": 161382
+      },
+      {
+        "paperId": "paper-2023-yi",
+        "groupId": "group-2023-yi-reading-a",
+        "screenshotSha256": "sha256:296229559f85c7b3cb79957509c62042697df50d50526cd6c8b6d8fd9f6f6da2",
+        "screenshotByteLength": 132763
+      },
+      {
+        "paperId": "paper-zj-2022-jun",
+        "groupId": "group-zj-2022-jun-reading-a",
+        "screenshotSha256": "sha256:3805d474f995a78a6562f3c5a1eeecf31a53139ab487cb3aef86ff91e3d23e07",
+        "screenshotByteLength": 159744
+      }
+    ],
+    "limitation": "Temporary Vite proxy produced only HMR WebSocket and favicon 404 console noise; all four mounted PaperSurface contents loaded from the real isolated API."
+  },
+  "printAndPdf": {
+    "status": "whole_paper_blocked_limited_reading_diagnostic_passed",
+    "consumerContract": {
+      "id": "print_pdf",
+      "version": "37",
+      "digest": "sha256:30a0082ec94b75f5ee47a6e759cac21c5c151a58290322ca43ece2bf7320ee55"
+    },
+    "renderer": "server/print-renderer.mjs buildPrintHtml",
+    "representativeScope": "the first canonical reading group from each admitted paper, rendered as Student and Teacher HTML then directly to Chromium A4 PDF",
+    "papers": [
+      {
+        "paperId": "paper-960d0f8d",
+        "groupId": "group-960d0f8d-reading-a",
+        "publicationDigest": "sha256:4f95c3ca8cbfb90daf59fc6fc2969737d8497ad83e040960769bf6c43b3a6b8a",
+        "student": {
+          "htmlSha256": "sha256:273b9d1e0e9d596040597a1c32ea9ada35b511832472b9ec8d8acc8e67fa3b9d",
+          "htmlAnswerMarkers": 0,
+          "pdfSha256": "sha256:267ddfb256fc3393096f378e356d0239aa60c849e93335ace020a220b4760fca",
+          "pdfAnswerMarkers": 0,
+          "pdfPages": 2
+        },
+        "teacher": {
+          "htmlSha256": "sha256:0a4edef17e030ce18ccebe39959e7af56fbef9efe97223b55e92bb41db00ab67",
+          "htmlAnswerMarkers": 3,
+          "pdfSha256": "sha256:de3ccafe5926552dacf4aff27703c83b4d178d1b0d6b5c620599b6819a6a9ec6",
+          "pdfAnswerMarkers": 3,
+          "pdfPages": 2
+        }
+      },
+      {
+        "paperId": "paper-2025-ii",
+        "groupId": "group-2025-ii-reading-a",
+        "publicationDigest": "sha256:afb4dba049207c0f04fa4431bd79616523c2d5155848fea6b9c9021e7bf89376",
+        "student": {
+          "htmlSha256": "sha256:760c886789823d36f82b00b517e2c2d957413526d42cda3fc02d8dab98721afa",
+          "htmlAnswerMarkers": 0,
+          "pdfSha256": "sha256:274455a1878be5ee8075ec384825a9dc7fbdcb359853cd8829d39a0b551f29fd",
+          "pdfAnswerMarkers": 0,
+          "pdfPages": 1
+        },
+        "teacher": {
+          "htmlSha256": "sha256:bc5e1a4193c09a0e3aa88f8d6780c133e0c1530f074debec6551a6309d9854ff",
+          "htmlAnswerMarkers": 3,
+          "pdfSha256": "sha256:d7d922897b9f0291b1ecbf242f27e438621816fabdf4cfcb68b1d6155abc231a",
+          "pdfAnswerMarkers": 3,
+          "pdfPages": 2
+        }
+      },
+      {
+        "paperId": "paper-2023-yi",
+        "groupId": "group-2023-yi-reading-a",
+        "publicationDigest": "sha256:44b8a01624f4effc6f5b5a27ba5e873a7286f801c5828e90d4baf13df3533cbd",
+        "student": {
+          "htmlSha256": "sha256:382e5b6298c5398ceb75aae51c801d1fdb70e7fad4861d473d236a44c087475c",
+          "htmlAnswerMarkers": 0,
+          "pdfSha256": "sha256:bd5521291ee7175ae7910ba72d745e4666c245c4fac5e5edc7c31931575e2b08",
+          "pdfAnswerMarkers": 0,
+          "pdfPages": 1
+        },
+        "teacher": {
+          "htmlSha256": "sha256:e1bfe77ea08eb9222425c4291fdea89d0c584e80ad2c4e9376aec5d66642754f",
+          "htmlAnswerMarkers": 3,
+          "pdfSha256": "sha256:583d6605cb989253f0031065817d281eb9824dc9dec4adc835c8228ffd9c3d1f",
+          "pdfAnswerMarkers": 3,
+          "pdfPages": 1
+        }
+      },
+      {
+        "paperId": "paper-zj-2022-jun",
+        "groupId": "group-zj-2022-jun-reading-a",
+        "publicationDigest": "sha256:efd74a62dd1062b6d9ba39aa4d2e21e39601cf711f560a525af949886e280143",
+        "student": {
+          "htmlSha256": "sha256:92cc3648e0a9ab9a9422ff4de06f9abd9d20fe5caa74d8de1b8b72921ece8c0d",
+          "htmlAnswerMarkers": 0,
+          "pdfSha256": "sha256:761dcd41cdee53e3294ca7b21af25a3075828389f417ac773e2b574dd957f284",
+          "pdfAnswerMarkers": 0,
+          "pdfPages": 1
+        },
+        "teacher": {
+          "htmlSha256": "sha256:619435d787b1b206c4062fadc08bd80a67b9e065c70f447488f788cbf03c4948",
+          "htmlAnswerMarkers": 3,
+          "pdfSha256": "sha256:a61777df0238d3b5314e87bd0bb30e36550a0e86bff648e5c5fbc3e631f218e9",
+          "pdfAnswerMarkers": 3,
+          "pdfPages": 2
+        }
+      }
+    ],
+    "pdfGeometry": "Every direct Chromium PDF reports 594.96 x 841.92 pts (A4).",
+    "visualInspection": "Raster-inspected page 1 of paper-960d0f8d Student and paper-zj-2022-jun Teacher; content, choices, pagination, and Teacher answer visibility were present.",
+    "wholePaperBlocked": {
+      "paperId": "paper-960d0f8d",
+      "errorCode": "CANONICAL_CONSUMPTION_REJECTED",
+      "error": "Canonical Grammar Fill chrome immutable source blocks are invalid",
+      "failingSharedSeam": "server/paper-canonical/grammarFillPrintSourceBinding.mjs loadCanonicalGrammarFillPrintChrome",
+      "observedImmutableInput": {
+        "path": "test-fixtures/paper-canonical/publications/ticket-31-canary-v1/store/paper-960d0f8d/versions/v1/paper-asset.json",
+        "topLevelKeys": [
+          "schemaVersion",
+          "documents",
+          "observations",
+          "sourceSpans",
+          "assertions",
+          "captureId",
+          "digest"
+        ],
+        "hasContentBlocks": false
+      },
+      "consequence": "The source-binding seam expects content.blocks in paper-asset.json; the admitted Publication preserves the source capture there instead. Ticket 31 did not change the bridge, renderer, source, or Publication to make the full-paper path pass.",
+      "scopeBoundary": "Only the first exact reproduction was run. The remaining whole-paper calls were intentionally not repeated after the shared-seam defect was identified."
+    }
+  },
+  "outcome": {
+    "ticket31": "blocked",
+    "atomicPublicationAndRecovery": "passed",
+    "screen": "passed",
+    "diagnosticOnlyReadingStudentTeacherPrintAndDirectPdf": "passed_not_acceptance_substitute",
+    "fullPaperStudentTeacherPrintAndDirectPdf": "fail_closed"
+  },
+  "evidenceDigest": "sha256:3e6940b65e5ef4cd121e4c2736613e7705025ec3d5a26b24368bbcbaf2d0b506"
+}

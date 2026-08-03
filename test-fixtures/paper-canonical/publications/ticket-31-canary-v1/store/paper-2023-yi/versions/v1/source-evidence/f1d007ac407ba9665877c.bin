@@ -1,0 +1,86 @@
+{
+  "schemaVersion": "import-meta-v1",
+  "paperId": "paper-2023-yi",
+  "sourceFileName": "2023年全国乙卷-答案版.docx",
+  "sourceFileSha256": "a725c864ca048d0cf886e1fd1217a044a688af318d8a911b1e709dd1e58cac4f",
+  "importedBy": "paper-import-ai",
+  "importedAt": "2026-06-19T09:01:45.024Z",
+  "paper": {
+    "year": 2023,
+    "region": "全国乙卷",
+    "paperName": "2023年全国乙卷",
+    "examCode": "2023-yi",
+    "subject": "English",
+    "sourceType": "真题",
+    "defaultTags": [
+      "真题",
+      "2023",
+      "全国乙卷"
+    ]
+  },
+  "groups": {
+    "group-2023-yi-reading-a": {
+      "groupId": "group-2023-yi-reading-a",
+      "difficulty": "中",
+      "summary": "本文以 PRACTITIONERS（行医者）为题，介绍了历史上四位女性医生的事迹，按时间顺序逐位呈现：意大利的 Jacqueline、爱尔兰的 James Barry、中国的 Tan Yunxian、以及非裔美国人 Rebecca Lee Crumpler，突出女性从医所面对的阻碍与各自的成就。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading A"
+    },
+    "group-2023-yi-reading-b": {
+      "groupId": "group-2023-yi-reading-b",
+      "difficulty": "中",
+      "summary": "本文是一篇第一人称记叙文，作者讲述自己在地形单调的爱荷华州从事风景摄影的经历与心得，重点强调时间管理对风景摄影的决定性作用，并以一次去 Devil's Lake 拍摄日落的经历作为例证。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading B"
+    },
+    "group-2023-yi-reading-c": {
+      "groupId": "group-2023-yi-reading-c",
+      "difficulty": "中",
+      "summary": "本文探讨英国美食形象的转变：尽管英国饮食长期被认为乏善可陈，但电视烹饪节目和明星厨师正在改变英国人的烹饪习惯与观念，并用调研数据加以佐证。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading C"
+    },
+    "group-2023-yi-reading-d": {
+      "groupId": "group-2023-yi-reading-d",
+      "difficulty": "中",
+      "summary": "本文为一部以实物讲述世界历史的著作的导言。作者论述：仅凭文字无法书写不偏袒任何一方的全球史，因为世界上多数地区、多数时间并无文字记录；要听到失语者（非文字社会、失败一方）的声音，必须既读文本、也读实物。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading D"
+    },
+    "group-2023-yi-seven-choices": {
+      "groupId": "group-2023-yi-seven-choices",
+      "difficulty": "中",
+      "summary": "本文是一篇介绍室内植物（indoor plants）的说明文，采用标题—问答式结构，依次回答 What are indoor plants? / Why are indoor plants good for you? / Which plants can you grow? 三个小标题问题。七选五的五个空分布在引言段和三个主体板块，考查段首主题句、段尾衔接句以及引语内的概括与指代衔接。",
+      "tags": [
+        "七选五"
+      ],
+      "displayTitleOverride": "七选五"
+    },
+    "group-2023-yi-cloze": {
+      "groupId": "group-2023-yi-cloze",
+      "difficulty": "中",
+      "summary": "完形填空",
+      "tags": [
+        "完形填空"
+      ],
+      "displayTitleOverride": "完形填空"
+    },
+    "group-2023-yi-grammar-fill": {
+      "groupId": "group-2023-yi-grammar-fill",
+      "difficulty": "中",
+      "summary": "语法填空",
+      "tags": [
+        "语法填空"
+      ],
+      "displayTitleOverride": "语法填空"
+    }
+  }
+}

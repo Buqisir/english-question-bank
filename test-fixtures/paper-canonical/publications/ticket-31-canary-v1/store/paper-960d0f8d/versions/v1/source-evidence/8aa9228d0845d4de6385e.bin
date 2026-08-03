@@ -1,0 +1,102 @@
+{
+  "schemaVersion": "import-meta-v1",
+  "paperId": "paper-960d0f8d",
+  "sourceFileName": "26.3重庆市巴蜀中学高三月考（七）英语试卷.docx",
+  "sourceFileSha256": "960d0f8d6fddc3e6ccff22a15c9044170cb58f59a8b62f9870cf522df8cde25b",
+  "importedBy": "paper-import-ai",
+  "importedAt": "2026-05-30T08:10:23.420Z",
+  "paper": {
+    "year": 2026,
+    "region": "重庆市巴蜀中学",
+    "paperName": "26.3重庆市巴蜀中学高三月考（七）英语试卷",
+    "examCode": "960d0f8d",
+    "subject": "English",
+    "sourceType": "模拟题",
+    "defaultTags": [
+      "AI导题"
+    ]
+  },
+  "groups": {
+    "group-960d0f8d-reading-a": {
+      "groupId": "group-960d0f8d-reading-a",
+      "difficulty": "中",
+      "summary": "本文是一则夏季驾驶太阳镜广告，先指出阳光眩目会造成驾驶危险，再强调 Eagle Eyes® 太阳镜的镜片技术、防护效果、退款保证和优惠购买方式。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading A"
+    },
+    "group-960d0f8d-reading-b": {
+      "groupId": "group-960d0f8d-reading-b",
+      "difficulty": "中",
+      "summary": "文章介绍了Springside Chestnut Hill Academy的新闻教育体系：学生从低年级到高中阶段参与不同新闻项目，重点说明The Campus Lantern的复兴、新闻技能训练、专业讲座以及该新闻项目面向未来的重要意义。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading B"
+    },
+    "group-960d0f8d-reading-c": {
+      "groupId": "group-960d0f8d-reading-c",
+      "difficulty": "中",
+      "summary": "本文讨论 AI 聊天机器人正在改变购物方式：科技公司布局代理式电商，零售商积极应对；同时指出聊天机器人在不同商品类别中的适用性差异、广告可能带来的客观性问题，以及线下门店重新获得的重要性。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading C"
+    },
+    "group-960d0f8d-reading-d": {
+      "groupId": "group-960d0f8d-reading-d",
+      "difficulty": "中",
+      "summary": "本文介绍虚拟电厂（VPP）作为缓解电网压力的新兴方案，先说明电网面临需求、成本和极端天气压力，再解释VPP的组成、用户参与方式、调度机制、对电网可靠性的作用以及进一步发展所需的政策条件。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading D"
+    },
+    "group-960d0f8d-seven-choices": {
+      "groupId": "group-960d0f8d-seven-choices",
+      "difficulty": "中",
+      "summary": "本文以作者重新看待团队运动的个人经历开篇，随后介绍研究发现：参与运动，尤其是团队运动，对心理健康更有益；接着解释与他人一起运动可能提升出勤率、乐趣和表现，并用疲劳加工机制说明其原因；最后回到作者即将与好友一起跑半程马拉松的个人实践。七选五空格主要考查个人态度补全、研究发现递进、段落主题句、因果解释和结尾承接。",
+      "tags": [
+        "七选五"
+      ],
+      "displayTitleOverride": "七选五"
+    },
+    "group-960d0f8d-cloze": {
+      "groupId": "group-960d0f8d-cloze",
+      "difficulty": "中",
+      "summary": "完形填空",
+      "tags": [
+        "完形填空"
+      ],
+      "displayTitleOverride": "完形填空"
+    },
+    "group-960d0f8d-grammar-fill": {
+      "groupId": "group-960d0f8d-grammar-fill",
+      "difficulty": "中",
+      "summary": "语法填空",
+      "tags": [
+        "语法填空"
+      ],
+      "displayTitleOverride": "语法填空"
+    },
+    "group-960d0f8d-writing-application": {
+      "groupId": "group-960d0f8d-writing-application",
+      "difficulty": "中",
+      "summary": "应用文写作",
+      "tags": [
+        "应用文写作"
+      ],
+      "displayTitleOverride": "应用文写作"
+    },
+    "group-960d0f8d-writing-continuation": {
+      "groupId": "group-960d0f8d-writing-continuation",
+      "difficulty": "中",
+      "summary": "读后续写",
+      "tags": [
+        "读后续写"
+      ],
+      "displayTitleOverride": "读后续写"
+    }
+  }
+}
