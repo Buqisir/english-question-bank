@@ -9,17 +9,26 @@ import {
   readFileSync,
   readdirSync,
   rmSync,
+  writeFileSync,
 } from 'node:fs'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { DatabaseSync } from 'node:sqlite'
+import {
+  publishCanonicalPaperPublication,
+} from '../server/paper-canonical/publication.mjs'
+import {
+  makeClozeGrammarCanonicalReferenceFixture,
+} from '../test-fixtures/paper-canonical/clozeGrammarReferenceFixture.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '..')
 const tempRoot = mkdtempSync(path.join(tmpdir(), 'eqb-docx-disconnected-'))
 const dbPath = path.join(tempRoot, 'question-bank.sqlite')
 const userDataDbPath = path.join(tempRoot, 'user-data.sqlite')
+const paperAssetsDir = path.join(tempRoot, 'paper-assets')
+const userSpaceRoot = path.join(tempRoot, 'user-space')
 const apiPort = 9895
 const baseUrl = `http://127.0.0.1:${apiPort}`
 const exportDir = path.join(rootDir, 'exports')
@@ -57,36 +66,96 @@ async function waitForHttp(url, timeoutMs = 20_000) {
 }
 
 function seedDatabase() {
+  const fixture = makeClozeGrammarCanonicalReferenceFixture()
+  const asset = JSON.parse(new TextDecoder().decode(fixture.sourceAsset))
+  const groupIds = [
+    'group-2026-i-cloze',
+    'group-2026-i-grammar-fill',
+  ]
   const db = new DatabaseSync(dbPath)
   db.exec(readFileSync(path.join(rootDir, 'data/sql/schema.sql'), 'utf8'))
-  db.exec(readFileSync(path.join(rootDir, 'data/sql/seed-v0.sql'), 'utf8'))
   db.exec(`
-    INSERT OR REPLACE INTO sources (id, source_type, year, region, paper_name, section, note)
-    VALUES ('src-ticket-16', 'self_made', 2026, 'T16', 'Ticket 16', '阅读理解', 'public PDF fixture');
-    INSERT OR REPLACE INTO passages (id, source_id, title, material_text, summary, theme, discourse_type, difficulty)
-    VALUES (
-      'passage-ticket-16',
-      'src-ticket-16',
-      'Ticket 16 passage',
-      'This source feeds the direct Chromium PDF public-seam regression.',
-      'Ticket 16 passage',
-      '人与自我',
-      'expository',
-      'medium'
-    );
-    INSERT OR REPLACE INTO question_groups (id, passage_id, group_type, title, instruction, display_order, default_score, difficulty, note)
-    VALUES ('g-ticket-16', 'passage-ticket-16', 'reading', 'Ticket 16 group', 'Choose the best answer.', 1, 1, 'medium', '');
-    INSERT OR REPLACE INTO questions (id, group_id, question_no, question_type, stem, answer, explanation, difficulty, score, display_order, note)
-    VALUES ('q-ticket-16', 'g-ticket-16', '1', '细节理解', 'Ticket 16 PDF marker?', 'A', 'Ticket 16 teacher explanation.', 'medium', 1, 1, '');
+    INSERT INTO sources (id, source_type, year, region, paper_name, section, note)
+    VALUES ('src-ticket-16-canonical', 'self_made', 2026, 'T16', 'Ticket 16 Canonical', '语法填空', 'direct Print/PDF fixture');
+  `)
+  const insertPassage = db.prepare(`
+    INSERT INTO passages (id, source_id, title, material_text, summary, theme, discourse_type, difficulty)
+    VALUES (?, 'src-ticket-16-canonical', ?, ?, ?, '人与自我', ?, 'medium')
+  `)
+  const insertGroup = db.prepare(`
+    INSERT INTO question_groups (id, passage_id, group_type, title, instruction, display_order, default_score, difficulty, note)
+    VALUES (?, ?, ?, ?, 'Canonical fixture', ?, 1, 'medium', 'direct Print/PDF fixture')
+  `)
+  const insertQuestion = db.prepare(`
+    INSERT INTO questions (id, group_id, question_no, question_type, stem, answer, explanation, difficulty, score, display_order, note)
+    VALUES (?, ?, ?, 'Canonical fixture', ?, 'A', 'direct Print/PDF fixture', 'medium', 1, ?, '')
   `)
   const insertOption = db.prepare(`
-    INSERT OR REPLACE INTO options (id, question_id, label, content, display_order)
-    VALUES (?, 'q-ticket-16', ?, ?, ?)
+    INSERT INTO options (id, question_id, label, content, display_order)
+    VALUES (?, ?, ?, ?, ?)
   `)
-  for (const [index, label] of ['A', 'B', 'C', 'D'].entries()) {
-    insertOption.run(`opt-ticket-16-${label}`, label, `Option ${label}`, index + 1)
+  for (const [groupIndex, groupId] of groupIds.entries()) {
+    const group = asset.content.groups[groupId]
+    if (!group) throw new Error(`Canonical fixture group is missing: ${groupId}`)
+    const passageId = `passage-ticket-16-canonical-${groupIndex + 1}`
+    const paragraphs = group.passage?.paragraphs ?? []
+    insertPassage.run(
+      passageId,
+      group.title,
+      paragraphs.map((paragraph) => paragraph.text).join('\n'),
+      group.title,
+      group.groupType,
+    )
+    insertGroup.run(
+      groupId,
+      passageId,
+      group.groupType === 'grammarFill' ? 'grammar_cloze' : group.groupType,
+      group.title,
+      groupIndex + 1,
+    )
+    for (const [questionIndex, questionId] of group.questionIds.entries()) {
+      const question = asset.content.questions[questionId]
+      if (!question) throw new Error(`Canonical fixture question is missing: ${questionId}`)
+      insertQuestion.run(
+        questionId,
+        groupId,
+        String(question.questionNo),
+        String(question.stem ?? question.questionNo),
+        questionIndex + 1,
+      )
+      for (const [optionIndex, option] of (question.options ?? []).entries()) {
+        insertOption.run(
+          `${questionId}-${option.label}`,
+          questionId,
+          option.label,
+          option.text,
+          optionIndex + 1,
+        )
+      }
+    }
   }
+  const published = publishCanonicalPaperPublication({
+    rootDir: paperAssetsDir,
+    db,
+    request: fixture.request,
+    sourceAssetVersion: 1,
+    sourceAsset: fixture.sourceAsset,
+  })
+  if (published.status !== 'published') {
+    throw new Error(`Canonical fixture publication failed: ${JSON.stringify(published)}`)
+  }
+  writeFileSync(
+    path.join(
+      paperAssetsDir,
+      asset.paper.paperId,
+      'versions',
+      published.versionName,
+      'paper-asset.json',
+    ),
+    fixture.sourceAsset,
+  )
   db.close()
+  return { groupIds: [groupIds[1], groupIds[0]] }
 }
 
 function startApi() {
@@ -97,6 +166,8 @@ function startApi() {
       ...process.env,
       QUESTION_BANK_DB: dbPath,
       USER_DATA_DB: userDataDbPath,
+      QUESTION_BANK_PAPER_ASSET_ROOT: paperAssetsDir,
+      QUESTION_BANK_USER_SPACE_ROOT: userSpaceRoot,
       QUESTION_BANK_API_PORT: String(apiPort),
     },
   })
@@ -106,6 +177,19 @@ function startApi() {
 
 function exportDirectoryEntries() {
   return existsSync(exportDir) ? readdirSync(exportDir).sort() : []
+}
+
+function temporaryArtifactEntries() {
+  return existsSync(tempRoot) ? readdirSync(tempRoot, { recursive: true }).sort() : []
+}
+
+function artifactRows() {
+  const db = new DatabaseSync(userDataDbPath, { readOnly: true })
+  try {
+    return db.prepare('SELECT * FROM my_space_artifacts ORDER BY id').all()
+  } finally {
+    db.close()
+  }
 }
 
 async function post(pathname, body = {}) {
@@ -151,15 +235,40 @@ async function main() {
   assert('pagination renderer generates PDF with Playwright page.pdf', /await page\.pdf\(\{/.test(paginationRenderer))
   assert('pagination renderer pins Chromium CSS page geometry', /preferCSSPageSize:\s*true/.test(paginationRenderer))
 
-  seedDatabase()
+  const { groupIds } = seedDatabase()
   startApi()
   await waitForHttp(`${baseUrl}/api/health`)
   assert('API started with temporary databases', true)
 
-  const addResponse = await post('/api/draft-papers/current/items', { groupId: 'g-ticket-16' })
-  const addText = await addResponse.text()
-  assert('raw Reading draft fixture is rejected without a Canonical publication', addResponse.status === 400 && /CANONICAL_SOURCE_PAPER_ID_UNAVAILABLE/.test(addText), addText)
-  const draftPaperId = 'missing-draft-paper'
+  const addGrammarResponse = await post('/api/draft-papers/current/items', { groupId: groupIds[0] })
+  const addGrammarBody = await addGrammarResponse.json()
+  assert('confirmed Canonical grammar group enters the draft', addGrammarResponse.status === 201, JSON.stringify(addGrammarBody))
+  const addClozeResponse = await post('/api/draft-papers/current/items', { groupId: groupIds[1] })
+  const addClozeBody = await addClozeResponse.json()
+  assert('confirmed Canonical cloze group enters the draft', addClozeResponse.status === 201, JSON.stringify(addClozeBody))
+  const draftPaperId = addClozeBody?.draftPaper?.id
+  assert('confirmed Canonical additions identify one draft', typeof draftPaperId === 'string' && draftPaperId.length > 0)
+
+  const exportsBefore = exportDirectoryEntries()
+  const temporaryEntriesBefore = temporaryArtifactEntries()
+  const artifactRowsBefore = artifactRows()
+  const printHtmlResponse = await fetch(`${baseUrl}/api/draft-papers/${encodeURIComponent(draftPaperId)}/print-html?versionType=student`)
+  const printHtml = await printHtmlResponse.text()
+  assert(
+    'direct draft Print HTML uses confirmed Canonical content',
+    printHtmlResponse.status === 200 && printHtml.includes('data-canonical-group-id'),
+    printHtml.slice(0, 500),
+  )
+  const printPdfResponse = await post(`/api/draft-papers/${encodeURIComponent(draftPaperId)}/print-pdf`, { versionType: 'student' })
+  const printPdfBytes = new Uint8Array(await printPdfResponse.arrayBuffer())
+  assert(
+    'direct draft Print/PDF returns Chromium PDF bytes',
+    printPdfResponse.status === 200 && new TextDecoder().decode(printPdfBytes.slice(0, 4)) === '%PDF',
+    `status=${printPdfResponse.status}`,
+  )
+  assert('direct Print/PDF leaves no export directory artifact', JSON.stringify(exportDirectoryEntries()) === JSON.stringify(exportsBefore))
+  assert('direct Print/PDF leaves no temporary DOCX/PDF/converted artifact', JSON.stringify(temporaryArtifactEntries()) === JSON.stringify(temporaryEntriesBefore))
+  assert('direct Print/PDF leaves no My Space artifact row', JSON.stringify(artifactRows()) === JSON.stringify(artifactRowsBefore))
 
   for (const pathname of [
     '/api/exports/docx',

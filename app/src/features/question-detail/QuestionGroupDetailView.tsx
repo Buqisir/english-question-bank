@@ -19,8 +19,8 @@
  *
  * Internal state (4 useState, all narrow/deliberate — this component stays
  * otherwise props-driven):
- *   1-2. `load` / `expanded` — 一张纸 mount: async paper-asset fetch +
- *        build（五个现有 adapter 之一）+ 展开/收起 toggle.
+ *   1-2. `load` / `expanded` — 一张纸 mount: confirmed Canonical Consumption
+ *        projection + 展开/收起 toggle.
  *   3-4. `similarPassagesOpen` / `similarPassagesRequest` — 相似篇章 fetch-
  *        on-expand panel (carried over verbatim from similar-passages-entry
  *        E6 — App.tsx has no host fetch to piggyback on for either group).
@@ -51,28 +51,18 @@ import { PaperSurface } from '../../shared-ui/papersurface/PaperSurface'
 import { paperSurfaceTokens } from '../../../../shared/papersurface/tokens.mjs'
 import { WritingPaperPage } from '../paper-intelligence/WritingPaperPage'
 import {
-  buildPaperAssetSurfaceModel,
-  type PaperAssetSurfaceModel,
-  type ReviewedReadingChoiceAnalysisV1,
-  type PaperFigureManifestEntry,
-} from '../paper-intelligence/paperAssetSurfaceAdapter.ts'
+  buildCanonicalApplicationWritingConsumptionSurfaceData,
+  buildCanonicalConsumptionSurfaceData,
+  buildCanonicalContinuationWritingConsumptionSurfaceData,
+  buildCanonicalReadingConsumptionSurfaceData,
+} from '../../../../shared/paper-normalization/canonicalPaperGroupSurfaceAdapter.mjs'
 import {
-  buildSevenChoicesSurfaceModel,
-  type SevenChoicesSurfaceModel,
-  type ReviewedSevenChoicesAnalysisV1,
-} from '../paper-intelligence/sevenChoicesSurfaceAdapter.ts'
-import { buildClozePaperView, type ClozePaperViewModel } from '../paper-intelligence/clozePaperViewAdapter.ts'
-import {
-  buildGrammarFillPaperView,
-  type GrammarFillPaperViewModel,
-} from '../paper-intelligence/grammarFillPaperViewAdapter.ts'
+  selectedFamilyContractIdForGroup,
+} from '../../../../shared/paper-canonical/consumerProjection.mjs'
 import {
   canonicalConsumptionForGroup,
   loadScreenConsumption,
 } from '../paper-intelligence/canonicalConsumptionClient.ts'
-import { buildWritingPaperView, type WritingPaperViewModel } from '../paper-intelligence/writingPaperViewAdapter.ts'
-import { FACET_FRAMEWORKS } from '../paper-intelligence/grammarFillFacetRegistry.ts'
-import type { PaperAssetV1, PaperContentBlock } from '../../domain/paperAsset.ts'
 import './QuestionGroupDetailView.css'
 
 // similar-passages-entry (E6, was similar-entrypoints E3): the four
@@ -127,11 +117,53 @@ export type QuestionGroupDetailViewProps = {
 type Chip = { label: string; count?: number }
 
 type PeekModel =
-  | { kind: 'reading'; model: PaperAssetSurfaceModel }
-  | { kind: 'sevenChoices'; model: SevenChoicesSurfaceModel }
-  | { kind: 'cloze'; model: ClozePaperViewModel }
-  | { kind: 'grammarFill'; model: GrammarFillPaperViewModel; chips: Chip[] }
-  | { kind: 'writing'; model: WritingPaperViewModel }
+  | {
+      kind: 'reading'
+      model: {
+        surfaceData: ReturnType<typeof buildCanonicalReadingConsumptionSurfaceData>['surfaceData']
+        canonicalReadingBlocks: ReturnType<typeof buildCanonicalReadingConsumptionSurfaceData>['richBlocks']
+        canonicalReadingPassageLetter: ReturnType<typeof buildCanonicalReadingConsumptionSurfaceData>['passageLetter']
+        canonicalReadingSemanticSignature: string
+      }
+    }
+  | {
+      kind: 'sevenChoices'
+      model: {
+        surfaceData: ReturnType<typeof buildCanonicalConsumptionSurfaceData>['surfaceData']
+        options: NonNullable<ReturnType<typeof buildCanonicalConsumptionSurfaceData>['optionBank']>['options']
+        bankIdentity: {
+          bankId: string
+          semanticSignature: string
+          occurrenceSignature: string
+        }
+      }
+    }
+  | {
+      kind: 'cloze'
+      model: {
+        surfaceData: ReturnType<typeof buildCanonicalConsumptionSurfaceData>['surfaceData']
+      }
+    }
+  | {
+      kind: 'grammarFill'
+      model: {
+        surfaceData: ReturnType<typeof buildCanonicalConsumptionSurfaceData>['surfaceData']
+      }
+      chips: Chip[]
+    }
+  | {
+      kind: 'writing'
+      model: {
+        surfaceData:
+          | ReturnType<typeof buildCanonicalApplicationWritingConsumptionSurfaceData>['surfaceData']
+          | ReturnType<typeof buildCanonicalContinuationWritingConsumptionSurfaceData>['surfaceData']
+        pageModel:
+          | ReturnType<typeof buildCanonicalApplicationWritingConsumptionSurfaceData>['pageModel']
+          | ReturnType<typeof buildCanonicalContinuationWritingConsumptionSurfaceData>['pageModel']
+        canonicalPromptBlocks?: ReturnType<typeof buildCanonicalApplicationWritingConsumptionSurfaceData>['promptBlocks']
+        canonicalContinuationMaterialBlocks?: ReturnType<typeof buildCanonicalContinuationWritingConsumptionSurfaceData>['materialBlocks']
+      }
+    }
 
 type LoadState =
   | { status: 'loading' }
@@ -143,11 +175,41 @@ export function QuestionGroupPaperSurface({ entry }: { entry: PeekModel }) {
   const surfaceEl = (
     <PaperSurface
       textMap={surfaceData.textMap}
-      semanticParagraphs={surfaceData.semanticParagraphs}
+      semanticParagraphs={
+        'semanticParagraphs' in surfaceData
+          ? surfaceData.semanticParagraphs
+          : undefined
+      }
       annotations={[]}
       evidence={surfaceData.evidence}
       questions={surfaceData.questions}
+      canonicalReadingBlocks={
+        entry.kind === 'reading'
+          ? entry.model.canonicalReadingBlocks
+          : undefined
+      }
+      canonicalReadingPassageLetter={
+        entry.kind === 'reading'
+          ? entry.model.canonicalReadingPassageLetter
+          : undefined
+      }
+      canonicalReadingSemanticSignature={
+        entry.kind === 'reading'
+          ? entry.model.canonicalReadingSemanticSignature
+          : undefined
+      }
+      canonicalApplicationPromptBlocks={
+        entry.kind === 'writing'
+          ? entry.model.canonicalPromptBlocks
+          : undefined
+      }
+      canonicalContinuationMaterialBlocks={
+        entry.kind === 'writing'
+          ? entry.model.canonicalContinuationMaterialBlocks
+          : undefined
+      }
       optionBank={entry.kind === 'sevenChoices' ? entry.model.options : undefined}
+      optionBankIdentity={entry.kind === 'sevenChoices' ? entry.model.bankIdentity : undefined}
       mode="lecture"
       lectureFocus={null}
       readingFocusBySection={{}}
@@ -159,30 +221,9 @@ export function QuestionGroupPaperSurface({ entry }: { entry: PeekModel }) {
     : surfaceEl
 }
 
-// grammar-fill-analysis-v1.json 的 schemaVersion 字段值是 "grammar-fill-
-// analysis-v2"（D1 grammar-facets-v2 就地重铸内容，磁盘文件名未改——见
-// server/search/teachingFacets.mjs 的 analysisConfigs 注释）。spec 文中
-// "grammar-fill-analysis-v2.json" 指的是这份 v2 语义的内容，不是另一个文件；
-// 这里按磁盘实际文件名读取，不发明第二套路径。
-type GrammarFillAnalysisFileV2 = {
-  schemaVersion?: string
-  blanks?: Record<string, { facetKey?: string | null }>
-}
-
-function buildGrammarFacetChips(analysis: GrammarFillAnalysisFileV2, questionIds: string[]): Chip[] {
-  const counts = new Map<string, number>()
-  for (const qid of questionIds) {
-    const facetKey = analysis.blanks?.[qid]?.facetKey
-    if (!facetKey) continue
-    const label = FACET_FRAMEWORKS[facetKey]?.labelZh ?? facetKey
-    counts.set(label, (counts.get(label) ?? 0) + 1)
-  }
-  return [...counts.entries()].map(([label, count]) => ({ label, count }))
-}
-
 // chips 数据契约（阅读）：questionType 覆盖率——缺失显示「未标注」不造假
 // （原型实测该字段部分组缺失）。完形/七选五一期只显示题数（无对应成熟
-// 考点维度，不占位不造假）。语法填空走 buildGrammarFacetChips（见上）。
+// 考点维度，不占位不造假）。语法填空不以未确认 analysis 另造 paper content。
 function buildTypeChips(
   detail: QuestionGroupDetail,
   readingParse: ReadingParseQuestionGroupResult | null,
@@ -231,7 +272,7 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
     onAddSimilarToBasket,
   } = props
 
-  // ── 一张纸：async 挂载（paper-asset fetch → 五个现有 adapter 之一） ──
+  // ── 一张纸：async 挂载（confirmed Canonical Consumption only） ───────
   const paperId = parsePaperIdFromHref(selectedDetail?.paperSurfaceHref)
   const [load, setLoad] = useState<LoadState>({ status: 'loading' })
   const [expanded, setExpanded] = useState(false)
@@ -281,90 +322,128 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
     let cancelled = false
     async function loadModel(): Promise<void> {
       try {
-        let base = `/paper-assets/${resolvedPaperId}/latest`
-        let res = await fetch(`${base}/paper-asset.json`)
-        if (!res.ok) {
-          base = `/paper-assets/${resolvedPaperId}`
-          res = await fetch(`${base}/paper-asset.json`)
-        }
-        if (!res.ok) throw new Error('卷面暂未就绪，可点击「看整卷」预览原卷。')
-        const asset = (await res.json()) as PaperAssetV1
         const canonicalConsumption = await loadScreenConsumption(resolvedPaperId)
-        const block = asset.content.blocks.find(
-          (b): b is Extract<PaperContentBlock, { type: 'group' }> =>
-            b.type === 'group' && b.groupId === detail.id,
-        )
-        const group = block ? asset.content.groups[block.groupId] : undefined
-        if (!block || !group) throw new Error('本题组不在该卷面资产内，可点击「看整卷」预览原卷。')
-
-        let figures: PaperFigureManifestEntry[] = []
-        try {
-          const figRes = await fetch(`${base}/figures/manifest.json`)
-          if (figRes.ok) {
-            const manifest = (await figRes.json()) as { figures?: PaperFigureManifestEntry[] }
-            figures = Array.isArray(manifest.figures) ? manifest.figures : []
-          }
-        } catch {
-          /* best-effort：零图卷零断言 */
+        const familyContractId = selectedFamilyContractIdForGroup({
+          consumption: canonicalConsumption,
+          groupId: detail.id,
+        })
+        if (!familyContractId) {
+          throw new Error('该题组不在已确认的 Canonical Paper 内。')
         }
-
         let model: PeekModel
-        if (group.groupType === 'reading') {
-          const aRes = await fetch(`${base}/analyses/reading-choice-analysis-v1.json`)
-          if (!aRes.ok) throw new Error('未找到已审阅阅读解析，可点击「看整卷」预览原卷。')
-          const analysis = (await aRes.json()) as ReviewedReadingChoiceAnalysisV1
+        if (familyContractId === 'reading') {
+          const canonicalReading = buildCanonicalReadingConsumptionSurfaceData({
+            consumption: canonicalConsumptionForGroup(
+              canonicalConsumption,
+              'reading',
+              detail.id,
+            ),
+            groupId: detail.id,
+          })
           model = {
             kind: 'reading',
-            model: buildPaperAssetSurfaceModel({ asset, analysis, groupId: block.groupId, figures, assetBase: base }),
+            model: {
+              surfaceData: canonicalReading.surfaceData,
+              canonicalReadingBlocks: canonicalReading.richBlocks,
+              canonicalReadingPassageLetter: canonicalReading.passageLetter,
+              canonicalReadingSemanticSignature: canonicalReading.semanticDigest,
+            },
           }
-        } else if (group.groupType === 'sevenChoices') {
-          const aRes = await fetch(`${base}/analyses/seven-choices-analysis-v1.json`)
-          if (!aRes.ok) throw new Error('未找到已审阅七选五解析，可点击「看整卷」预览原卷。')
-          const analysis = (await aRes.json()) as ReviewedSevenChoicesAnalysisV1
-          model = { kind: 'sevenChoices', model: buildSevenChoicesSurfaceModel({ asset, analysis, groupId: block.groupId }) }
-        } else if (group.groupType === 'cloze') {
+        } else if (familyContractId === 'seven-choices') {
+          const canonicalSevenChoices = buildCanonicalConsumptionSurfaceData({
+            consumption: canonicalConsumptionForGroup(
+              canonicalConsumption,
+              'seven-choices',
+              detail.id,
+            ),
+            familyContractId: 'seven-choices',
+            groupId: detail.id,
+          })
+          if (!canonicalSevenChoices.optionBank) {
+            throw new Error('Canonical 七选五选项组不完整。')
+          }
+          model = {
+            kind: 'sevenChoices',
+            model: {
+              surfaceData: canonicalSevenChoices.surfaceData,
+              options: canonicalSevenChoices.optionBank.options,
+              bankIdentity: {
+                bankId: canonicalSevenChoices.optionBank.bankId,
+                semanticSignature: canonicalSevenChoices.semanticDigest,
+                occurrenceSignature:
+                  canonicalSevenChoices.occurrenceSignature
+                  ?? canonicalSevenChoices.semanticDigest,
+              },
+            },
+          }
+        } else if (familyContractId === 'cloze') {
+          const canonicalCloze = buildCanonicalConsumptionSurfaceData({
+            consumption: canonicalConsumptionForGroup(
+              canonicalConsumption,
+              'cloze',
+              detail.id,
+            ),
+            familyContractId: 'cloze',
+            groupId: detail.id,
+          })
           model = {
             kind: 'cloze',
-            model: buildClozePaperView({
-              asset,
-              groupId: block.groupId,
-              canonicalConsumption: canonicalConsumptionForGroup(
-                canonicalConsumption,
-                'cloze',
-                block.groupId,
-              ),
-            }),
+            model: { surfaceData: canonicalCloze.surfaceData },
           }
-        } else if (group.groupType === 'grammarFill') {
-          let grammarChips: Chip[] = []
-          try {
-            const gRes = await fetch(`${base}/analyses/grammar-fill-analysis-v1.json`)
-            if (gRes.ok) {
-              const analysis = (await gRes.json()) as GrammarFillAnalysisFileV2
-              if (analysis.schemaVersion === 'grammar-fill-analysis-v2') {
-                grammarChips = buildGrammarFacetChips(analysis, detail.questions.map((q) => q.id))
-              }
-            }
-          } catch {
-            /* best-effort：chips 数据源缺失就不显示，不造假 */
-          }
+        } else if (familyContractId === 'grammar-fill') {
+          const canonicalGrammarFill = buildCanonicalConsumptionSurfaceData({
+            consumption: canonicalConsumptionForGroup(
+              canonicalConsumption,
+              'grammar-fill',
+              detail.id,
+            ),
+            familyContractId: 'grammar-fill',
+            groupId: detail.id,
+          })
           model = {
             kind: 'grammarFill',
-            model: buildGrammarFillPaperView({
-              asset,
-              groupId: block.groupId,
-              canonicalConsumption: canonicalConsumptionForGroup(
-                canonicalConsumption,
-                'grammar-fill',
-                block.groupId,
-              ),
-            }),
-            chips: grammarChips,
+            model: { surfaceData: canonicalGrammarFill.surfaceData },
+            chips: [],
           }
-        } else if (group.groupType === 'writing') {
-          model = { kind: 'writing', model: buildWritingPaperView({ asset, groupId: block.groupId }) }
+        } else if (familyContractId === 'application-writing') {
+          const canonicalWriting = buildCanonicalApplicationWritingConsumptionSurfaceData({
+            consumption: canonicalConsumptionForGroup(
+              canonicalConsumption,
+              'application-writing',
+              detail.id,
+            ),
+            groupId: detail.id,
+            renderedGroupIds: [detail.id],
+          })
+          model = {
+            kind: 'writing',
+            model: {
+              surfaceData: canonicalWriting.surfaceData,
+              pageModel: canonicalWriting.pageModel,
+              canonicalPromptBlocks: canonicalWriting.promptBlocks,
+            },
+          }
+        } else if (familyContractId === 'continuation-writing') {
+          const canonicalWriting = buildCanonicalContinuationWritingConsumptionSurfaceData({
+            consumption: canonicalConsumptionForGroup(
+              canonicalConsumption,
+              'continuation-writing',
+              detail.id,
+            ),
+            groupId: detail.id,
+            renderedGroupIds: [detail.id],
+          })
+          model = {
+            kind: 'writing',
+            model: {
+              surfaceData: canonicalWriting.surfaceData,
+              pageModel: canonicalWriting.pageModel,
+              canonicalContinuationMaterialBlocks:
+                canonicalWriting.materialBlocks,
+            },
+          }
         } else {
-          throw new Error(`该题型（${group.groupType}）暂不支持卷面预览。`)
+          throw new Error(`Canonical 题族（${familyContractId}）暂不支持卷面预览。`)
         }
         if (!cancelled) setLoad({ status: 'ready', model })
       } catch (e) {

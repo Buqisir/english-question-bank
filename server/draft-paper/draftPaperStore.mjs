@@ -1034,19 +1034,25 @@ export function createDraftPaperStore({
     rows.forEach((row, index) => update.run(index + 1, row.id))
   }
 
-  // Canonical Paper is the only active source for printable families.  Resolve
+  // Canonical Paper is the only active source for printable families. Resolve
   // the whole prospective draft before its first write so an unavailable,
-  // corrupt, wrong-family, or legacy-only group cannot leave a newly-created
-  // draft or an inserted item behind when the public route rejects it.
-  function assertCanonicalDraftAddition(userDb, draftPaperId, groupId) {
+  // corrupt, wrong-family, or legacy-only group cannot leave a draft mutation
+  // behind when the public route rejects it.
+  function assertCanonicalProspectiveDraft(userDb, draftPaperId, {
+    addGroupId = null,
+    removeItemId = null,
+  } = {}) {
     if (!resolveCanonicalConsumption) return
-    const groupIds = draftPaperId
+    const existingItems = draftPaperId
       ? userDb
-        .prepare('SELECT group_id FROM draft_paper_items WHERE draft_paper_id = ? ORDER BY order_index ASC, created_at ASC')
+        .prepare('SELECT id, group_id FROM draft_paper_items WHERE draft_paper_id = ? ORDER BY order_index ASC, created_at ASC')
         .all(draftPaperId)
-        .map((item) => item.group_id)
       : []
-    const items = [...groupIds, groupId].map((candidateGroupId) => {
+    const groupIds = existingItems
+      .filter((item) => item.id !== removeItemId)
+      .map((item) => item.group_id)
+    if (addGroupId) groupIds.push(addGroupId)
+    const items = groupIds.map((candidateGroupId) => {
       const detail = getQuestionGroupDetail(candidateGroupId)
       if (!detail) throw new Error(`questionGroupId not found: ${candidateGroupId}`)
       return { detail }
@@ -1076,7 +1082,7 @@ export function createDraftPaperStore({
       .prepare('SELECT id FROM draft_paper_items WHERE draft_paper_id = ? AND group_id = ?')
       .get(draftPaperId, groupId)
     if (existing) return existing.id
-    assertCanonicalDraftAddition(userDb, draftPaperId, groupId)
+    assertCanonicalProspectiveDraft(userDb, draftPaperId, { addGroupId: groupId })
     const count = userDb
       .prepare('SELECT COUNT(*) AS count FROM draft_paper_items WHERE draft_paper_id = ?')
       .get(draftPaperId)?.count || 0
@@ -1127,7 +1133,7 @@ export function createDraftPaperStore({
       // `createDraftPaper` may add old-shape SQLite columns. Reject a raw
       // active-family input before that transaction begins, so a rollback
       // cannot leave its schema-presence cache out of sync with the database.
-      if (!current) assertCanonicalDraftAddition(userDb, null, groupId)
+      if (!current) assertCanonicalProspectiveDraft(userDb, null, { addGroupId: groupId })
       userDb.exec('BEGIN')
       try {
         current = getCurrentDraftPaperRow(userDb, userId)
@@ -1156,6 +1162,11 @@ export function createDraftPaperStore({
     try {
       userDb.exec('BEGIN')
       try {
+        const ownedDraft = userDb
+          .prepare("SELECT id FROM draft_papers WHERE id = ? AND user_id = ? AND status = 'active'")
+          .get(draftPaperId, userId)
+        if (!ownedDraft) throw new Error('Draft paper not found')
+        assertCanonicalProspectiveDraft(userDb, draftPaperId)
         const existing = getDraftPaper({ userDb, bankDb }, userId, draftPaperId, { includePrintHtml: false })
         if (!existing) throw new Error('Draft paper not found')
         if (Object.prototype.hasOwnProperty.call(input, 'title')) {
@@ -1229,6 +1240,7 @@ export function createDraftPaperStore({
           .prepare('SELECT id FROM draft_paper_items WHERE id = ? AND draft_paper_id = ?')
           .get(itemId, draftPaperId)
         if (!existing) throw new Error('Draft item not found')
+        assertCanonicalProspectiveDraft(userDb, draftPaperId)
         if (Object.prototype.hasOwnProperty.call(input, 'pageBreakBefore')) {
           userDb.prepare(
             'UPDATE draft_paper_items SET page_break_before = ?, updated_at = datetime(\'now\') WHERE id = ? AND draft_paper_id = ?',
@@ -1281,6 +1293,9 @@ export function createDraftPaperStore({
           )
           .get(itemId, draftPaperId)
         if (!row) throw new Error('Draft item not found')
+        assertCanonicalProspectiveDraft(userDb, draftPaperId, {
+          removeItemId: itemId,
+        })
         userDb.prepare('DELETE FROM draft_paper_items WHERE id = ? AND draft_paper_id = ?').run(itemId, draftPaperId)
         normalizeDraftItemOrder(userDb, draftPaperId)
         touchDraftPaper(userDb, userId, draftPaperId)

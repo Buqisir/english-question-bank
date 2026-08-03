@@ -23,11 +23,17 @@
 //      user_version still 2) -> ensure -> converges to v3 with folder data intact
 //      (PA MF-2 crash-reentry path).
 import { spawn } from 'node:child_process'
-import { mkdirSync, mkdtempSync, readFileSync, rmSync } from 'node:fs'
+import { mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { DatabaseSync } from 'node:sqlite'
+import {
+  publishCanonicalPaperPublication,
+} from '../server/paper-canonical/publication.mjs'
+import {
+  makeClozeGrammarCanonicalReferenceFixture,
+} from '../test-fixtures/paper-canonical/clozeGrammarReferenceFixture.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '..')
@@ -164,6 +170,99 @@ function seedBankDatabaseWithPrintableGroup(dbPath, groupId) {
   db.close()
 }
 
+function seedBankDatabaseWithConfirmedCanonicalGroups(dbPath, paperAssetsDir) {
+  const fixture = makeClozeGrammarCanonicalReferenceFixture()
+  const asset = JSON.parse(new TextDecoder().decode(fixture.sourceAsset))
+  const groupIds = [
+    'group-2026-i-cloze',
+    'group-2026-i-grammar-fill',
+  ]
+  const db = new DatabaseSync(dbPath)
+  db.exec(readFileSync(path.join(rootDir, 'data/sql/schema.sql'), 'utf8'))
+  db.exec(`
+    INSERT INTO sources (id, source_type, year, region, paper_name, section, note)
+    VALUES ('src-user-scope-canonical', 'self_made', 2026, 'M0-4', 'Canonical User Scope Verify', '完形填空', 'verified Canonical fixture');
+  `)
+  const insertPassage = db.prepare(`
+    INSERT INTO passages (id, source_id, title, material_text, summary, theme, discourse_type, difficulty)
+    VALUES (?, 'src-user-scope-canonical', ?, ?, ?, '人与自我', ?, 'medium')
+  `)
+  const insertGroup = db.prepare(`
+    INSERT INTO question_groups (id, passage_id, group_type, title, instruction, display_order, default_score, difficulty, note)
+    VALUES (?, ?, ?, ?, 'Canonical fixture', ?, 1, 'medium', 'verified Canonical fixture')
+  `)
+  const insertQuestion = db.prepare(`
+    INSERT INTO questions (id, group_id, question_no, question_type, stem, answer, explanation, difficulty, score, display_order, note)
+    VALUES (?, ?, ?, 'Canonical fixture', ?, 'A', 'verified Canonical fixture', 'medium', 1, ?, '')
+  `)
+  const insertOption = db.prepare(`
+    INSERT INTO options (id, question_id, label, content, display_order)
+    VALUES (?, ?, ?, ?, ?)
+  `)
+  for (const [groupIndex, groupId] of groupIds.entries()) {
+    const group = asset.content.groups[groupId]
+    if (!group) throw new Error(`Canonical fixture group is missing: ${groupId}`)
+    const passageId = `passage-user-scope-canonical-${groupIndex + 1}`
+    const paragraphs = group.passage?.paragraphs ?? []
+    insertPassage.run(
+      passageId,
+      group.title,
+      paragraphs.map((paragraph) => paragraph.text).join('\n'),
+      group.title,
+      group.groupType,
+    )
+    insertGroup.run(
+      groupId,
+      passageId,
+      group.groupType === 'grammarFill' ? 'grammar_cloze' : group.groupType,
+      group.title,
+      groupIndex + 1,
+    )
+    for (const [questionIndex, questionId] of group.questionIds.entries()) {
+      const question = asset.content.questions[questionId]
+      if (!question) throw new Error(`Canonical fixture question is missing: ${questionId}`)
+      insertQuestion.run(
+        questionId,
+        groupId,
+        String(question.questionNo),
+        String(question.stem ?? question.questionNo),
+        questionIndex + 1,
+      )
+      for (const [optionIndex, option] of (question.options ?? []).entries()) {
+        insertOption.run(
+          `${questionId}-${option.label}`,
+          questionId,
+          option.label,
+          option.text,
+          optionIndex + 1,
+        )
+      }
+    }
+  }
+  const published = publishCanonicalPaperPublication({
+    rootDir: paperAssetsDir,
+    db,
+    request: fixture.request,
+    sourceAssetVersion: 1,
+    sourceAsset: fixture.sourceAsset,
+  })
+  if (published.status !== 'published') {
+    throw new Error(`Canonical fixture publication failed: ${JSON.stringify(published)}`)
+  }
+  writeFileSync(
+    path.join(
+      paperAssetsDir,
+      asset.paper.paperId,
+      'versions',
+      published.versionName,
+      'paper-asset.json',
+    ),
+    fixture.sourceAsset,
+  )
+  db.close()
+  return { groupIds }
+}
+
 function makeTempFixture(prefix) {
   const tempRoot = mkdtempSync(path.join(tmpdir(), prefix))
   const dbPath = path.join(tempRoot, 'question-bank.sqlite')
@@ -251,7 +350,10 @@ async function verifyOpenModeRegression() {
 
 async function verifyTwoUserIsolation() {
   const fixture = makeTempFixture('eqb-verify-user-scope-multi-')
-  seedBankDatabaseWithPrintableGroup(fixture.dbPath, 'g-user-scope-raw')
+  const { groupIds: [, canonicalGrammarFillGroupId] } = seedBankDatabaseWithConfirmedCanonicalGroups(
+    fixture.dbPath,
+    fixture.paperAssetsDir,
+  )
 
   const apiPort = 9932
   const env = envFor(fixture, apiPort)
@@ -273,8 +375,7 @@ async function verifyTwoUserIsolation() {
     const cookieB = cookieHeaderFrom(loginB.setCookie)
 
     // A and B each create an empty current draft without colliding on the
-    // composite (user_id, current_marker) unique index. Raw family admission
-    // is covered above and is intentionally not part of this isolation proof.
+    // composite (user_id, current_marker) unique index.
     const addA = await req('/api/draft-papers/current?create=1', { cookie: cookieA })
     assert('2. A creates an empty current draft (no UNIQUE collision)', addA.status === 200, `status=${addA.status} body=${JSON.stringify(addA.json)}`)
     const draftIdA = addA.json?.draftPaper?.id
@@ -284,6 +385,18 @@ async function verifyTwoUserIsolation() {
     const draftIdB = addB.json?.draftPaper?.id
 
     assert('2. A and B got different draft ids', draftIdA && draftIdB && draftIdA !== draftIdB)
+
+    const addCanonicalA = await req('/api/draft-papers/current/items', {
+      method: 'POST',
+      body: { groupId: canonicalGrammarFillGroupId },
+      cookie: cookieA,
+    })
+    const itemIdA = addCanonicalA.json?.draftPaper?.items?.[0]?.id
+    assert(
+      '2. A adds a real confirmed Canonical child item',
+      addCanonicalA.status === 201 && typeof itemIdA === 'string',
+      `status=${addCanonicalA.status} body=${JSON.stringify(addCanonicalA.json)}`,
+    )
 
     const currentA = await req('/api/draft-papers/current', { cookie: cookieA })
     assert('2. GET current for A returns A\'s own draft', currentA.status === 200 && currentA.json?.draftPaper?.id === draftIdA)
@@ -305,15 +418,21 @@ async function verifyTwoUserIsolation() {
     const patchByB = await req(`/api/draft-papers/${draftIdA}`, { method: 'PATCH', body: { title: 'hijacked' }, cookie: cookieB })
     assert('2. B PATCH A\'s draftId -> 404', patchByB.status === 404, `status=${patchByB.status} body=${JSON.stringify(patchByB.json)}`)
 
-    // Empty current drafts keep this isolation fixture independent of legacy
-    // group admission; an arbitrary item id must still be unobservable to B.
-    const itemIdA = 'missing-item'
-
     const patchItemByB = await req(`/api/draft-papers/${draftIdA}/items/${itemIdA}`, { method: 'PATCH', body: { pageBreakBefore: true }, cookie: cookieB })
-    assert('2. B PATCH A\'s item -> 404', patchItemByB.status === 404, `status=${patchItemByB.status} body=${JSON.stringify(patchItemByB.json)}`)
+    assert('2. B PATCH A\'s existing item -> 404 by ownership', patchItemByB.status === 404, `status=${patchItemByB.status} body=${JSON.stringify(patchItemByB.json)}`)
 
     const deleteItemByB = await req(`/api/draft-papers/${draftIdA}/items/${itemIdA}`, { method: 'DELETE', cookie: cookieB })
-    assert('2. B DELETE A\'s item -> 404', deleteItemByB.status === 404, `status=${deleteItemByB.status} body=${JSON.stringify(deleteItemByB.json)}`)
+    assert('2. B DELETE A\'s existing item -> 404 by ownership', deleteItemByB.status === 404, `status=${deleteItemByB.status} body=${JSON.stringify(deleteItemByB.json)}`)
+
+    const aAfterCrossUserMutations = await req(`/api/draft-papers/${draftIdA}`, { cookie: cookieA })
+    assert(
+      '2. B item mutations leave A\'s existing Canonical child unchanged',
+      aAfterCrossUserMutations.status === 200
+        && aAfterCrossUserMutations.json?.draftPaper?.items?.length === 1
+        && aAfterCrossUserMutations.json?.draftPaper?.items?.[0]?.id === itemIdA
+        && aAfterCrossUserMutations.json?.draftPaper?.items?.[0]?.groupId === canonicalGrammarFillGroupId,
+      `status=${aAfterCrossUserMutations.status} body=${JSON.stringify(aAfterCrossUserMutations.json)}`,
+    )
 
     const printHtmlByB = await req(`/api/draft-papers/${draftIdA}/print-html`, { cookie: cookieB })
     assert('2. B GET A\'s print-html -> 404', printHtmlByB.status === 404, `status=${printHtmlByB.status}`)
@@ -406,7 +525,193 @@ async function verifyTwoUserIsolation() {
   }
 }
 
-// ── Fixture 3: migration ──────────────────────────────────────────────────────────
+function snapshotDraftMutationState(fixture) {
+  const userBytes = readFileSync(fixture.userDataDbPath)
+  const userDb = new DatabaseSync(fixture.userDataDbPath, { readOnly: true })
+  try {
+    return {
+      bytes: userBytes.toString('base64'),
+      userVersion: userDb.prepare('PRAGMA user_version').get().user_version,
+      drafts: userDb.prepare('SELECT * FROM draft_papers ORDER BY id').all(),
+      items: userDb.prepare('SELECT * FROM draft_paper_items ORDER BY id').all(),
+      artifacts: userDb.prepare('SELECT * FROM my_space_artifacts ORDER BY id').all(),
+      userSpaceEntries: readdirSync(fixture.userSpaceRoot).sort(),
+    }
+  } finally {
+    userDb.close()
+  }
+}
+
+function disableCanonicalPublication(fixture, mode) {
+  if (mode === 'corrupt') {
+    const canonicalGroupsPath = path.join(
+      fixture.paperAssetsDir,
+      'paper-2026-i',
+      'versions',
+      'v1',
+      'canonical',
+      'canonical-question-groups-v1.json',
+    )
+    writeFileSync(
+      canonicalGroupsPath,
+      `${readFileSync(canonicalGroupsPath, 'utf8')} `,
+    )
+    return
+  }
+  const bankDb = new DatabaseSync(fixture.dbPath)
+  try {
+    if (mode === 'missing') {
+      bankDb.exec('DELETE FROM canonical_paper_publications')
+    } else {
+      bankDb.exec('UPDATE canonical_paper_publications SET is_current = 0')
+    }
+  } finally {
+    bankDb.close()
+  }
+}
+
+// ── Fixture 3: prospective Canonical draft preflight ──────────────────────────────
+
+async function verifyCanonicalDraftMutationPreflight() {
+  for (const mode of ['missing', 'corrupt', 'unconfirmed']) {
+    const fixture = makeTempFixture(`eqb-verify-draft-canonical-${mode}-`)
+    const { groupIds: [clozeGroupId, grammarFillGroupId] } = seedBankDatabaseWithConfirmedCanonicalGroups(
+      fixture.dbPath,
+      fixture.paperAssetsDir,
+    )
+    const apiPort = mode === 'missing' ? 9933 : mode === 'corrupt' ? 9934 : 9935
+    const env = envFor(fixture, apiPort)
+    const req = makeReq(apiPort)
+    startServer(env)
+    try {
+      await waitForHttp(`http://127.0.0.1:${apiPort}/api/health`)
+      const current = await req('/api/draft-papers/current?create=1')
+      const draftPaperId = current.json?.draftPaper?.id
+      assert(
+        `3.${mode}: empty public draft setup succeeds`,
+        current.status === 200 && typeof draftPaperId === 'string',
+        `status=${current.status} body=${JSON.stringify(current.json)}`,
+      )
+      const addGrammar = await req('/api/draft-papers/current/items', {
+        method: 'POST',
+        body: { groupId: grammarFillGroupId },
+      })
+      const addCloze = await req('/api/draft-papers/current/items', {
+        method: 'POST',
+        body: { groupId: clozeGroupId },
+      })
+      const clozeItemId = addCloze.json?.draftPaper?.items?.find(
+        (item) => item.groupId === clozeGroupId,
+      )?.id
+      assert(
+        `3.${mode}: valid Canonical add succeeds before publication invalidation`,
+        addGrammar.status === 201
+          && addCloze.status === 201
+          && typeof clozeItemId === 'string',
+        `cloze=${JSON.stringify(addCloze.json)} grammar=${JSON.stringify(addGrammar.json)}`,
+      )
+
+      const directDraftId = `draft-canonical-add-${mode}`
+      const userDb = new DatabaseSync(fixture.userDataDbPath)
+      try {
+        userDb.prepare(`
+          INSERT INTO draft_papers (
+            id, user_id, title, subject, status, current_marker, print_form,
+            created_at, updated_at
+          ) VALUES (?, 'local', ?, 'english', 'active', 0, 'a4', datetime('now'), datetime('now'))
+        `).run(directDraftId, `Canonical add preflight ${mode}`)
+      } finally {
+        userDb.close()
+      }
+      const directValidAdd = await req(`/api/draft-papers/${directDraftId}/items`, {
+        method: 'POST',
+        body: { groupId: grammarFillGroupId },
+      })
+      const directGrammarItemId = directValidAdd.json?.draftPaper?.items?.[0]?.id
+      assert(
+        `3.${mode}: valid per-draft add succeeds before publication invalidation`,
+        directValidAdd.status === 201 && typeof directGrammarItemId === 'string',
+        `status=${directValidAdd.status} body=${JSON.stringify(directValidAdd.json)}`,
+      )
+
+      const validUpdate = await req(`/api/draft-papers/${draftPaperId}`, {
+        method: 'PATCH',
+        body: { title: 'validated Canonical update' },
+      })
+      assert(
+        `3.${mode}: valid Canonical update succeeds before publication invalidation`,
+        validUpdate.status === 200 && validUpdate.json?.draftPaper?.title === 'validated Canonical update',
+        `status=${validUpdate.status} body=${JSON.stringify(validUpdate.json)}`,
+      )
+      const validPatch = await req(`/api/draft-papers/${draftPaperId}/items/${clozeItemId}`, {
+        method: 'PATCH',
+        body: { pageBreakBefore: true },
+      })
+      assert(
+        `3.${mode}: valid Canonical item patch succeeds before publication invalidation`,
+        validPatch.status === 200
+          && validPatch.json?.draftPaper?.items?.find((item) => item.id === clozeItemId)?.pageBreakBefore === true,
+        `status=${validPatch.status} body=${JSON.stringify(validPatch.json)}`,
+      )
+      const validDelete = await req(`/api/draft-papers/${directDraftId}/items/${directGrammarItemId}`, {
+        method: 'DELETE',
+      })
+      assert(
+        `3.${mode}: valid Canonical item delete succeeds before publication invalidation`,
+        validDelete.status === 200 && validDelete.json?.draftPaper?.items?.length === 0,
+        `status=${validDelete.status} body=${JSON.stringify(validDelete.json)}`,
+      )
+
+      disableCanonicalPublication(fixture, mode)
+      const before = snapshotDraftMutationState(fixture)
+      const assertRejectedWithoutMutation = async (label, response) => {
+        assert(
+          `3.${mode}: ${label} rejects unavailable Canonical publication`,
+          response.status === 400,
+          `status=${response.status} body=${JSON.stringify(response.json)}`,
+        )
+        const after = snapshotDraftMutationState(fixture)
+        assert(
+          `3.${mode}: ${label} preserves exact user bytes, rows, version, and artifacts`,
+          JSON.stringify(after) === JSON.stringify(before),
+          `before=${JSON.stringify(before)} after=${JSON.stringify(after)}`,
+        )
+      }
+
+      await assertRejectedWithoutMutation(
+        'add',
+        await req(`/api/draft-papers/${directDraftId}/items`, {
+          method: 'POST',
+          body: { groupId: clozeGroupId },
+        }),
+      )
+      await assertRejectedWithoutMutation(
+        'update',
+        await req(`/api/draft-papers/${draftPaperId}`, {
+          method: 'PATCH',
+          body: { title: 'must not persist' },
+        }),
+      )
+      await assertRejectedWithoutMutation(
+        'patch item',
+        await req(`/api/draft-papers/${draftPaperId}/items/${clozeItemId}`, {
+          method: 'PATCH',
+          body: { pageBreakBefore: true },
+        }),
+      )
+      await assertRejectedWithoutMutation(
+        'delete item',
+        await req(`/api/draft-papers/${draftPaperId}/items/${clozeItemId}`, {
+          method: 'DELETE',
+        }),
+      )
+    } finally {
+      await stopServerAndCleanup(fixture)
+    }
+  }
+}
+
+// ── Fixture 4: migration ──────────────────────────────────────────────────────────
 
 function buildV2ShapeUserDb(dbPath) {
   const db = new DatabaseSync(dbPath)
@@ -643,6 +948,7 @@ async function verifyMigration() {
 async function main() {
   await verifyOpenModeRegression()
   await verifyTwoUserIsolation()
+  await verifyCanonicalDraftMutationPreflight()
   await verifyMigration()
 }
 

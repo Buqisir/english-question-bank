@@ -144,6 +144,7 @@ const registry = {
   'scripts/verify-generated-docx-disconnected.mjs',
   'scripts/verify-generated-docx-output-deleted.mjs',
   'scripts/verify-detail-redesign.mjs',
+  'scripts/verify-paper-canonical-detail-screen-consumption.mjs',
   'scripts/verify-reading-analysis-retire.mjs',
   'scripts/verify-r2-trap-audit.mjs',
   ],
