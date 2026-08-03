@@ -40,6 +40,7 @@ const repositoryRoot = fileURLToPath(new URL('..', import.meta.url)).replace(/\/
 const baseHead = 'a374dab8bf78efb99181bcb5bace06100d85c1ce'
 const manifestPath = 'docs/cuts/paper-canonical-unification/migration/manifest-v2.json'
 const accountingPath = 'docs/cuts/paper-canonical-unification/migration/ticket-32-final-migration-accounting-v1.json'
+const durabilityAccountingPath = 'docs/cuts/paper-canonical-unification/migration/ticket-32-publication-index-durability-v1.json'
 const publicationRoot = 'test-fixtures/paper-canonical/publications/ticket-32-remaining-v1/store'
 const ticket31CanaryRoot = 'test-fixtures/paper-canonical/publications/ticket-31-canary-v1/store'
 const trustedDocxSourcePath = 'test-fixtures/paper-import/paper-2025-i-docx-source-adapter/2025-nck1-answer-source.docx'
@@ -354,6 +355,74 @@ function findRecoveryJournals(relativeRoot) {
     .map((entry) => entry.path)
 }
 
+function inspectCurrentIndex({ ticket, acceptedSnapshotCommit, relativeRoot, expectedRecords }) {
+  const label = `Ticket ${ticket} publication index`
+  const sqlitePath = `${relativeRoot}/publication.sqlite`
+  const sqliteAbsolutePath = absolutePath(sqlitePath)
+  assert.equal(existsSync(sqliteAbsolutePath), true, `${label} snapshot must be present`)
+  for (const suffix of ['-wal', '-shm', '-journal']) {
+    assert.equal(existsSync(`${sqliteAbsolutePath}${suffix}`), false, `${label} cannot retain ${suffix.slice(1)} sidecar`)
+  }
+  assert.deepEqual(findRecoveryJournals(relativeRoot), [], `${label} must have zero recovery journals`)
+
+  const expectedIds = expectedRecords.map(({ record }) => record.paperId).sort()
+  const root = absolutePath(relativeRoot)
+  const db = new DatabaseSync(sqliteAbsolutePath, { readOnly: true })
+  let rows
+  try {
+    const integrity = db.prepare('PRAGMA integrity_check').get()
+    assert.equal(integrity.integrity_check, 'ok', `${label} SQLite integrity must close`)
+    rows = db.prepare(
+      'SELECT paper_id, version_name, source_asset_version, publication_digest, is_current FROM canonical_paper_publications ORDER BY paper_id, version_name',
+    ).all()
+  } finally {
+    db.close()
+  }
+
+  const currentRows = rows.filter((row) => row.is_current === 1)
+  assert.equal(rows.length, expectedIds.length, `${label} immutable row count must close`)
+  assert.equal(currentRows.length, expectedIds.length, `${label} current row count must close`)
+  assert.deepEqual(currentRows.map((row) => row.paper_id), expectedIds, `${label} current identities must have no missing, duplicate, or extra paper`)
+  const latestPaperIds = readdirSync(root, { withFileTypes: true })
+    .filter((entry) => entry.isDirectory())
+    .map((entry) => entry.name)
+    .filter((paperId) => existsSync(join(root, paperId, 'latest', latestRefFileName)))
+    .sort()
+  assert.deepEqual(latestPaperIds, expectedIds, `${label} latest refs must have no missing, duplicate, or extra paper`)
+  for (const row of currentRows) {
+    const latest = JSON.parse(readFileSync(join(root, row.paper_id, 'latest', latestRefFileName)))
+    assert.deepEqual(refForDatabaseRow(row), {
+      paperId: latest.paperId,
+      versionName: latest.versionName,
+      sourceAssetVersion: latest.sourceAssetVersion,
+      publicationDigest: latest.publicationDigest,
+    }, `${label} ${row.paper_id} current identity must match latest ref`)
+  }
+  const sqliteBytes = bytes(sqlitePath)
+  return {
+    ticket,
+    acceptedSnapshotCommit,
+    root: relativeRoot,
+    sqlite: {
+      path: sqlitePath,
+      fileSha256: sha256(sqliteBytes),
+      byteLength: sqliteBytes.byteLength,
+      immutableRows: rows.length,
+      currentRows: currentRows.length,
+      integrityCheck: 'ok',
+    },
+    paperIds: expectedIds,
+  }
+}
+
+function assertDurabilityAccounting({ canaryIndex, remainingIndex }) {
+  const accounting = json(durabilityAccountingPath)
+  assert.equal(accounting.schemaVersion, 'ticket-32-publication-index-durability-v1')
+  assert.equal(accounting.status, 'PASS')
+  assert.equal(accounting.evidenceDigest, digestJson(withoutKey(accounting, 'evidenceDigest')), 'Ticket 32 durability accounting digest must close')
+  assert.deepEqual(accounting.stores, [canaryIndex, remainingIndex], 'Ticket 32 durability accounting must pin both accepted current-index snapshots')
+}
+
 function refForDatabaseRow(row) {
   return {
     paperId: row.paper_id,
@@ -622,7 +691,40 @@ function check(input, { exactReload }) {
   assert.deepEqual(accounting.publication.order, laneConfigs.map((lane) => `${lane.id}:${lane.route}`))
   assert.equal(accounting.publication.papers.length, 29)
   assert.equal(accounting.publication.papers.every((paper) => paper.rollback?.disposition === 'no_prior_rollback_target'), true, 'Every Ticket 32 paper must record the absent prior rollback target')
+  const canaryIndex = inspectCurrentIndex({
+    ticket: 31,
+    acceptedSnapshotCommit: 'e870bab4fd5d7c2cb92f83b672ba0f7b1a0f9527',
+    relativeRoot: ticket31CanaryRoot,
+    expectedRecords: input.canaryRecords,
+  })
+  const remainingIndex = inspectCurrentIndex({
+    ticket: 32,
+    acceptedSnapshotCommit: '4e3d4f347bba84b5f2fa2aca4c11d02f1ab209b1',
+    relativeRoot: publicationRoot,
+    expectedRecords: input.remaining,
+  })
+  assertDurabilityAccounting({ canaryIndex, remainingIndex })
   const before = snapshotTree(publicationRoot)
+  const canaryBefore = snapshotTree(ticket31CanaryRoot)
+  const canaryDb = new DatabaseSync(join(absolutePath(ticket31CanaryRoot), 'publication.sqlite'))
+  try {
+    for (const { record } of input.canaryRecords) {
+      const latest = JSON.parse(readFileSync(join(absolutePath(ticket31CanaryRoot), record.paperId, 'latest', latestRefFileName)))
+      assertReadyReload({
+        rootDir: absolutePath(ticket31CanaryRoot),
+        db: canaryDb,
+        paperId: record.paperId,
+        expectedRef: {
+          paperId: latest.paperId,
+          versionName: latest.versionName,
+          sourceAssetVersion: latest.sourceAssetVersion,
+          publicationDigest: latest.publicationDigest,
+        },
+      })
+    }
+  } finally {
+    canaryDb.close()
+  }
   const db = new DatabaseSync(join(absolutePath(publicationRoot), 'publication.sqlite'))
   let representativeReload = []
   try {
@@ -646,6 +748,7 @@ function check(input, { exactReload }) {
   const after = snapshotTree(publicationRoot)
   assert.deepEqual(after.files, before.files, 'Check mode must not mutate the publication store')
   const canary = snapshotTree(ticket31CanaryRoot)
+  assert.deepEqual(canary.files, canaryBefore.files, 'Check mode must not mutate the Ticket 31 canary store')
   assert.deepEqual(compactSnapshot(canary), accounting.immutableTicket31CanaryStore.after, 'Ticket 31 canary store must remain byte-identical to produce evidence')
   assert.deepEqual(compactSnapshot(after), accounting.finalStore, 'Ticket 32 final store must exactly match produce evidence')
   return {
@@ -654,6 +757,7 @@ function check(input, { exactReload }) {
     exactReload,
     papers: input.remaining.length,
     counts: expectedCounts.remaining,
+    canaryReloads: input.canaryRecords.length * Object.keys(consumerContractRefs).length,
     representativeReloads: representativeReload.length,
   }
 }
