@@ -91,10 +91,6 @@ const paperSurfaceTokenStyle: PaperSurfaceStyle = {
     `${grammarFillRhythm.rendererMapping.screen.baselineStepPx}px`,
   '--ps-grammar-fill-prompt-gap':
     `${grammarFillRhythm.promptGeometry.gapEm}em`,
-  '--ps-grammar-fill-rule-lift':
-    `${grammarFillRhythm.ruleVerticalGeometry.rendererMapping.screenRuleLiftEm}em`,
-  '--ps-grammar-fill-rule-thickness':
-    `${grammarFillRhythm.ruleVerticalGeometry.screenRuleThicknessPx}px`,
   '--ps-reading-visible-weight':
     paperTypographyRuntime.visibleWeight.optionText,
   '--ps-cloze-visible-weight':

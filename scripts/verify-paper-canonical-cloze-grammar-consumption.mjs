@@ -586,49 +586,51 @@ function readPdfColumnStarts(pdfBytes, outputRoot, label) {
   writeFileSync(pdfPath, pdfBytes)
   execFileSync('pdftotext', ['-bbox', pdfPath, bboxPath])
   const source = readFileSync(bboxPath, 'utf8')
-  const words = [...source.matchAll(
-    /<word xMin="([^"]+)" yMin="([^"]+)" xMax="[^"]+" yMax="[^"]+">([^<]+)<\/word>/g,
-  )].map((match) => {
-    const combined = match[3].match(/^(?:([0-9]+)\.)?([A-D])\.$/)
-    return {
-      x: Number(match[1]),
-      y: Number(match[2]),
-      text: match[3],
-      questionNo: combined?.[1] || match[3].match(/^([0-9]+)\.$/)?.[1] || null,
-      label: combined?.[2] || null,
-    }
-  })
+  const words = source.split(/<page\b[^>]*>/).slice(1).flatMap(
+    (pageSource, page) => [...pageSource.matchAll(
+      /<word xMin="([^"]+)" yMin="([^"]+)" xMax="[^"]+" yMax="[^"]+">([^<]+)<\/word>/g,
+    )].map((match) => {
+      const combined = match[3].match(/^(?:([0-9]+)\.)?([A-D])\.$/)
+      return {
+        page,
+        x: Number(match[1]),
+        y: Number(match[2]),
+        text: match[3],
+        questionNo: combined?.[1] || match[3].match(/^([0-9]+)\.$/)?.[1] || null,
+        label: combined?.[2] || null,
+      }
+    }),
+  )
   const optionWords = words.filter((word) => word.label)
   const rows = []
   const questionStarts = []
-  for (let index = 0; index <= optionWords.length - 4; index += 1) {
-    const candidate = optionWords.slice(index, index + 4)
-    if (
-      candidate.map((word) => word.label || '').join('') === 'ABCD'
-      && Math.max(...candidate.map((word) => word.y))
-        - Math.min(...candidate.map((word) => word.y)) <= 0.5
-    ) {
-      const question = words.find(
-        (word) => word.questionNo && Math.abs(word.y - candidate[0].y) <= 0.5,
-      )
-      assert.equal(
-        question?.questionNo !== undefined,
-        true,
-        `${label}: every Cloze option row retains its question label`,
-      )
-      assert.equal(
-        Math.abs(
-          candidate[0].x
-          - question.x
-          - clozeRhythm.horizontalChoiceGeometry.rendererMapping.questionLabelWidthPt,
-        ) <= 1,
-        true,
-        `${label}: question label starts at the passage boundary rather than ending inside its column (actual ${candidate[0].x - question.x})`,
-      )
-      questionStarts.push(question.x)
-      rows.push(candidate.map((word) => word.x))
-      index += 3
-    }
+  const clozeQuestions = words.filter((word) =>
+    Number(word.questionNo) >= 41 && Number(word.questionNo) <= 55,
+  )
+  assert.equal(clozeQuestions.length, 15, `${label}: all 15 Cloze qnums render`)
+  for (const question of clozeQuestions) {
+    const candidate = optionWords.filter((word) =>
+      word.page === question.page && Math.abs(word.y - question.y) <= 0.5,
+    ).sort((left, right) => left.x - right.x)
+    assert.deepEqual(
+      candidate.map((word) => word.label),
+      ['A', 'B', 'C', 'D'],
+      `${label}: question ${question.questionNo} retains its A-D option labels`,
+    )
+    const firstOptionStart = candidate[0].questionNo
+      ? question.x + clozeRhythm.horizontalChoiceGeometry.rendererMapping.questionLabelWidthPt
+      : candidate[0].x
+    assert.equal(
+      Math.abs(
+        firstOptionStart
+        - question.x
+        - clozeRhythm.horizontalChoiceGeometry.rendererMapping.questionLabelWidthPt,
+      ) <= 1,
+      true,
+      `${label}: qnum box meets the A anchor with no added layout gap (actual ${firstOptionStart - question.x})`,
+    )
+    questionStarts.push(question.x)
+    rows.push([firstOptionStart, ...candidate.slice(1).map((word) => word.x)])
   }
   assert.equal(
     Math.max(...questionStarts) - Math.min(...questionStarts) <= 0.5,
@@ -897,6 +899,8 @@ async function assertTicket35Screen(page, paperAsset, outputDir) {
     const clozeOptions = document.querySelector('[data-canonical-group-type="cloze"] .ps-question-options-inline--four_columns')
     const clozeRow = clozeOptions?.closest('.ps-question-stem-button')
     const clozeNumber = clozeRow?.querySelector('.ps-question-no')
+    const clozeFirstLabel = clozeRow?.querySelector('[data-canonical-cloze-rhythm-role="choice_label"]')
+    const clozePassage = document.querySelector('[data-canonical-group-type="cloze"] [data-canonical-cloze-rhythm-role="passage_body_line"]')
     const part = [...document.querySelectorAll('h1, h2, h3')].find((node) => node.textContent?.includes('第四部分'))
     const peer = [...document.querySelectorAll('h1, h2, h3')].find((node) => node.textContent?.includes('第三部分'))
     const font = (node) => node ? (() => {
@@ -923,6 +927,12 @@ async function assertTicket35Screen(page, paperAsset, outputDir) {
       clozeNumberOffset: clozeRow && clozeNumber
         ? clozeNumber.getBoundingClientRect().left - clozeRow.getBoundingClientRect().left
         : Number.NaN,
+      clozeNumberToFirstLabelGap: clozeNumber && clozeFirstLabel
+        ? clozeFirstLabel.getBoundingClientRect().left - clozeNumber.getBoundingClientRect().right
+        : Number.NaN,
+      clozeNumberToPassageContinuationOffset: clozeNumber && clozePassage
+        ? clozeNumber.getBoundingClientRect().left - clozePassage.getBoundingClientRect().left
+        : Number.NaN,
       writingHeading: font(part),
       peerHeading: font(peer),
       applicationPresent: Boolean(application),
@@ -937,6 +947,8 @@ async function assertTicket35Screen(page, paperAsset, outputDir) {
   assert.equal(observation.grammarBorder, '1px', 'v2 Screen uses the shared inline blank rule for Grammar Fill')
   assert.equal(observation.grammarPseudo, 'none', 'v2 Screen has no independent Grammar Fill rule lift')
   assert.equal(Math.abs(observation.clozeNumberOffset) <= 0.5, true, 'v2 Screen starts Cloze question labels at the passage boundary')
+  assert.equal(Math.abs(observation.clozeNumberToPassageContinuationOffset) <= 0.5, true, 'v2 Screen aligns the Cloze qnum box with the passage continuation boundary')
+  assert.equal(Math.abs(observation.clozeNumberToFirstLabelGap) <= 0.5, true, 'v2 Screen has no added qnum-box→A layout gap')
   assert.deepEqual(observation.writingHeading, observation.peerHeading, 'v2 Screen gives every part score run one typographic treatment')
   if (outputDir) {
     writeFileSync(path.join(outputDir, 'screen.html'), await page.content())
@@ -1008,6 +1020,8 @@ async function assertTicket35CompletePublication({ rootDir }) {
           const grammarBlank = document.querySelector('[data-canonical-group-type="grammarFill"] .print-blank')
           const clozeRow = document.querySelector('[data-canonical-group-type="cloze"] .options-inline--numbered')
           const clozeNumber = clozeRow?.querySelector('.qnum')
+          const clozeFirstLabel = clozeRow?.querySelector('[data-canonical-cloze-rhythm-role="choice_label"]')
+          const clozePassage = document.querySelector('[data-canonical-group-type="cloze"] [data-canonical-cloze-rhythm-role="passage_body_line"]')
           const headingNodes = [...document.querySelectorAll(
             '.section-header, [data-canonical-writing-chrome-role="part_heading"]',
           )]
@@ -1037,6 +1051,12 @@ async function assertTicket35CompletePublication({ rootDir }) {
             grammarRule: grammarBlank ? getComputedStyle(grammarBlank).backgroundImage : '',
             grammarPseudo: grammarBlank ? getComputedStyle(grammarBlank, '::after').content : null,
             clozeNumberOffset: clozeRow && clozeNumber ? clozeNumber.getBoundingClientRect().left - clozeRow.getBoundingClientRect().left : Number.NaN,
+            clozeNumberToFirstLabelGap: clozeNumber && clozeFirstLabel
+              ? clozeFirstLabel.getBoundingClientRect().left - clozeNumber.getBoundingClientRect().right
+              : Number.NaN,
+            clozeNumberToPassageContinuationOffset: clozeNumber && clozePassage
+              ? clozeNumber.getBoundingClientRect().left - clozePassage.getBoundingClientRect().left
+              : Number.NaN,
             writingHeading: font(part),
             peerHeading: font(peer),
           }
@@ -1051,6 +1071,8 @@ async function assertTicket35CompletePublication({ rootDir }) {
         assert.equal(observation.grammarRule.includes('linear-gradient'), true, `v2 complete ${versionType} Print uses the shared inline blank rule for Grammar Fill`)
         assert.equal(observation.grammarPseudo, 'none', `v2 complete ${versionType} Print has no independent Grammar Fill rule lift`)
         assert.equal(Math.abs(observation.clozeNumberOffset) <= 0.5, true, `v2 complete ${versionType} Print starts Cloze question labels at the passage boundary`)
+        assert.equal(Math.abs(observation.clozeNumberToPassageContinuationOffset) <= 0.5, true, `v2 complete ${versionType} Print aligns the Cloze qnum box with the passage continuation boundary`)
+        assert.equal(Math.abs(observation.clozeNumberToFirstLabelGap) <= 0.5, true, `v2 complete ${versionType} Print has no added qnum-box→A layout gap`)
         assert.deepEqual(observation.writingHeading, observation.peerHeading, `v2 complete ${versionType} Print gives every part score run one typographic treatment`)
         const pdfResponse = await fetchPublic(
           `${baseUrl}/api/draft-papers/${draftPaperId}/print-pdf`,
@@ -1063,6 +1085,11 @@ async function assertTicket35CompletePublication({ rootDir }) {
         const pdfBytes = Buffer.from(await pdfResponse.arrayBuffer())
         assert.equal(pdfResponse.status, 200, `v2 complete ${versionType} public Print PDF succeeds: ${pdfBytes.toString('utf8')}`)
         assert.equal(pdfBytes.subarray(0, 4).toString(), '%PDF')
+        readPdfColumnStarts(
+          pdfBytes,
+          outputDir || rootDir,
+          `v2 complete ${versionType} public Print PDF`,
+        )
         if (outputDir) {
           writeFileSync(path.join(outputDir, `print-${versionType}.html`), html)
           writeFileSync(path.join(outputDir, `print-${versionType}.pdf`), pdfBytes)

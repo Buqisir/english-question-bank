@@ -24,6 +24,7 @@ import paperTypographyV10 from '../standards/paper-canonical/rendering/paper-typ
 import { consumerContractRefs } from '../shared/paper-canonical/consumers.mjs'
 import { canonicalAuthorityRef } from '../shared/paper-canonical/authority.mjs'
 import { paperSurfaceTokens } from '../shared/papersurface/tokens.mjs'
+import { paperBlankRuling } from '../shared/papersurface/blankRuling.mjs'
 import {
   projectCanonicalConsumerGroup,
 } from '../shared/paper-canonical/consumerProjection.mjs'
@@ -1777,6 +1778,15 @@ function assertClozeReferenceEvidence() {
   )
   assert.equal(clozeRhythm.blankGeometry.widthEm, 3.3)
   assert.equal(clozeRhythm.blankGeometry.verticalSpaceContribution, 0)
+  assert.equal(
+    [
+      paperBlankRuling.sevenChoices,
+      paperBlankRuling.cloze,
+      paperBlankRuling.grammarFill,
+    ].every((ruling) => ruling.ruleVerticalAlignment === 'blank-bottom'),
+    true,
+    'all inline blank families select one shared bottom-aligned rule token',
+  )
   assert.deepEqual(
     clozeRhythm.horizontalChoiceGeometry.rendererMapping,
     {
@@ -4986,7 +4996,10 @@ async function assertClozeDomGeometry(
         rowRect: row.getBoundingClientRect().toJSON(),
         questionText: question?.textContent || '',
         questionLines: visualLines(question),
+        questionLeft: question?.getBoundingClientRect().left ?? null,
         questionRight: question?.getBoundingClientRect().right ?? null,
+        questionToOptionsContinuous:
+          question?.nextSibling === placement,
         questionFontWeight: question
           ? Number.parseInt(getComputedStyle(question).fontWeight, 10)
           : null,
@@ -5300,6 +5313,10 @@ async function assertClozeDomGeometry(
     expected.oracle.publicIdentities.cloze.questionIds,
     `${label} renders source Questions 41-55 exactly once`,
   )
+  const passageContinuationLeft = Math.min(
+    ...observation.paragraphs.flatMap((paragraph) =>
+      paragraph.lines.map((line) => line.x)),
+  )
   for (const [index, row] of observation.rows.entries()) {
     const sourceRow = expectedRows[index]
     assert.deepEqual(
@@ -5344,17 +5361,28 @@ async function assertClozeDomGeometry(
       `${label} ${sourceRow.questionId} renders the number/A token pair without inserted whitespace`,
     )
     assert.equal(
+      row.questionToOptionsContinuous,
+      true,
+      `${label} ${sourceRow.questionId} keeps qnum and A in one continuous DOM run without a whitespace node`,
+    )
+    assert.equal(
       ['normal', '0px'].includes(row.placementColumnGap),
       true,
       `${label} ${sourceRow.questionId} adds no CSS gap between the question and A anchor tracks`,
     )
-    const questionToAGlyphGapPx =
+    const questionToABoxGapPx =
       row.labelXs[0] - row.questionRight
     assert.equal(
-      Math.abs(questionToAGlyphGapPx)
+      Math.abs(questionToABoxGapPx)
         <= clozeRhythm.targets.screen.oneStepTolerancePx / 3,
       true,
-      `${label} ${sourceRow.questionId} physically closes 41.→A. at visible DOM edges: ${questionToAGlyphGapPx}px`,
+      `${label} ${sourceRow.questionId} has no added qnum-box→A layout gap: ${questionToABoxGapPx}px`,
+    )
+    assert.equal(
+      Math.abs(row.questionLeft - passageContinuationLeft)
+        <= clozeRhythm.targets.screen.oneStepTolerancePx / 3,
+      true,
+      `${label} ${sourceRow.questionId} anchors its qnum box to the passage continuation edge: ${JSON.stringify({ questionLeft: row.questionLeft, passageContinuationLeft })}`,
     )
     const labelToTextGapEm = row.textXs.map(
       (textX, track) =>
@@ -11555,12 +11583,6 @@ function assertPdfClozeGeometry(
       questionWord,
       firstLabelWord:
         splitGeometry?.labelWord ?? rowWords[questionIndex + 1],
-      questionToFirstLabelGlyphGapPt:
-        splitGeometry?.glyphGapPt
-        ?? (
-          rowWords[questionIndex + 1].xMin
-          - rawQuestionWord.xMax
-        ),
       page: questionWord.page,
       y: (questionWord.yMin + questionWord.yMax) / 2,
       firstTextX: rowWords[firstTextIndex].xMin,
@@ -11574,7 +11596,6 @@ function assertPdfClozeGeometry(
       questionIndex,
       questionWord,
       firstLabelWord,
-      questionToFirstLabelGlyphGapPt,
       page,
       y,
       firstTextX,
@@ -11716,7 +11737,10 @@ function assertPdfClozeGeometry(
       answer: sourceRow.answer,
       questionIndex,
       questionWord,
-      questionToFirstLabelGlyphGapPt,
+      questionToFirstOptionLayoutGapPt:
+        firstLabelWord.xMin
+        - questionWord.xMin
+        - clozeRhythm.horizontalChoiceGeometry.rendererMapping.questionLabelWidthPt,
       page,
       y,
       tailY: Math.max(
@@ -11985,15 +12009,15 @@ function assertPdfClozeGeometry(
       toPage: firstRowLine.page,
     })
   }
-  const questionToFirstOptionGlyphGapsPt = rowProofs.map(
-    (row) => row.questionToFirstLabelGlyphGapPt,
+  const questionToFirstOptionLayoutGapsPt = rowProofs.map(
+    (row) => row.questionToFirstOptionLayoutGapPt,
   )
   assert.equal(
-    questionToFirstOptionGlyphGapsPt.every(
+    questionToFirstOptionLayoutGapsPt.every(
       (gap) => Math.abs(gap) <= 0.35,
     ),
     true,
-    `${label} physically emits 41.→A. with zero inter-token glyph gap in real PDF: ${JSON.stringify(questionToFirstOptionGlyphGapsPt)}`,
+    `${label} emits no added qnum-box→A layout gap in real PDF: ${JSON.stringify(questionToFirstOptionLayoutGapsPt)}`,
   )
   const physicalLabelToTextGapsEm = rowProofs.flatMap((row) =>
     row.options.map(
@@ -12016,7 +12040,7 @@ function assertPdfClozeGeometry(
     fromIdentity: rowProofs.map((row) => row.questionId),
     toIdentity: rowProofs.map((row) => `${row.questionId}:A`),
     horizontalRelation: 'gold_normalized_question_to_A_anchor',
-    actualGlyphGapsPt: questionToFirstOptionGlyphGapsPt,
+    actualLayoutGapsPt: questionToFirstOptionLayoutGapsPt,
   })
   observe('choice_label_to_text', {
     fromIdentity: rowProofs.flatMap((row) =>
@@ -12601,18 +12625,23 @@ function assertGrammarFillPdfArtifact(
       const numberBottomToBodyBottomRatio =
         Math.abs(numberInk.yMax - bodyInk.yMax) / bodyGlyphHeight
       assert.equal(
-        Math.abs(
-          bodyBottomToRuleCenterRatio
-          - grammarFillRhythm.ruleVerticalGeometry
-            .bodyVisibleBottomToRuleCenterRatio
-        ) <= grammarFillRhythm.ruleVerticalGeometry.ratioTolerance,
+        bodyBottomToRuleCenterRatio >= 0.75
+          && bodyBottomToRuleCenterRatio <= 1.2,
         true,
-        `${label} blank ${proof.questionId} independently raster-proves the raised rule against adjacent visible body glyphs: ${JSON.stringify({
+        `${label} blank ${proof.questionId} independently raster-proves the shared bottom rule instead of a Grammar Fill-only lift: ${JSON.stringify({
           adjacentBodyWord,
           bodyInk,
           numberInk,
           ruleCenterPx,
           bodyBottomToRuleCenterRatio,
+        })}`,
+      )
+      assert.equal(
+        ruleInkMinPx > numberInk.yMax,
+        true,
+        `${label} blank ${proof.questionId} keeps the shared rule below the number ink: ${JSON.stringify({
+          ruleInkMinPx,
+          numberInk,
         })}`,
       )
       assert.equal(
