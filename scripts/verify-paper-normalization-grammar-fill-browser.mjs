@@ -7,6 +7,7 @@ import { createServer } from '../app/node_modules/vite/dist/node/index.js'
 import {
   buildCanonicalPaperGroupSurfaceData,
 } from '../shared/paper-normalization/canonicalPaperGroupSurfaceAdapter.mjs'
+import { grammarFillRhythm } from '../shared/paper-canonical/grammarFillRhythm.mjs'
 
 const requireFromApp = createRequire(new URL('../app/package.json', import.meta.url))
 const { chromium } = requireFromApp('playwright')
@@ -189,24 +190,29 @@ try {
           if (!(blank instanceof HTMLElement)) throw new Error(`Missing blank ${blankId}`)
           const blankRect = blank.getBoundingClientRect()
           const blankStyle = getComputedStyle(blank)
+          const atomicBlank = blank.closest('.ps-paper-blank-unit') || blank
           const result = {
             blankId,
             hint,
+            fontSizePx: Number.parseFloat(blankStyle.fontSize),
             blankWidthEm: blankRect.width / Number.parseFloat(blankStyle.fontSize),
             hintTextIndent: null,
+            hintFontSizePx: null,
             glyphGap: null,
             hasUnit: blank.parentElement?.classList.contains('ps-paper-blank-unit') ?? false,
-            previousText: blank.previousElementSibling?.textContent ?? '',
-            nextText: blank.nextElementSibling?.textContent ?? '',
-            previousGlyphGap: adjacentGlyphGap(blank, 'before'),
-            nextGlyphGap: adjacentGlyphGap(blank, 'after'),
+            previousText: atomicBlank.previousElementSibling?.textContent ?? '',
+            nextText: atomicBlank.nextElementSibling?.textContent ?? '',
+            previousGlyphGap: adjacentGlyphGap(atomicBlank, 'before'),
+            nextGlyphGap: adjacentGlyphGap(atomicBlank, 'after'),
           }
           if (hint) {
             const unit = blank.closest('.ps-paper-blank-unit')
             const hintElement = unit?.querySelector('.ps-paper-blank-hint')
             if (!(unit instanceof HTMLElement)) throw new Error(`Missing unit ${blankId}`)
             if (!(hintElement instanceof HTMLElement)) throw new Error(`Missing hint ${blankId}`)
-            result.hintTextIndent = getComputedStyle(hintElement).textIndent
+            const hintStyle = getComputedStyle(hintElement)
+            result.hintTextIndent = hintStyle.textIndent
+            result.hintFontSizePx = Number.parseFloat(hintStyle.fontSize)
             result.glyphGap = textRangeRect(hintElement).left - blankRect.right
           }
           return result
@@ -227,13 +233,23 @@ try {
               + `hint text-indent ${measurement.hintTextIndent}`,
           )
           assert.ok(
-            measurement.glyphGap >= -0.1 && measurement.glyphGap <= 0.5,
+            Math.abs(
+              measurement.glyphGap
+              - measurement.hintFontSizePx * grammarFillRhythm.promptGeometry.gapEm,
+            ) <= 0.1,
             `${grammarCase.label} ${viewport.width}px ${measurement.blankId}: `
-              + `blank-to-hint glyph gap ${measurement.glyphGap}px`,
+              + `blank-to-hint glyph gap ${measurement.glyphGap}px consumes `
+              + `${grammarFillRhythm.promptGeometry.gapEm}em`,
           )
           assert.equal(measurement.hasUnit, true)
         } else {
-          assert.equal(measurement.hasUnit, false)
+          assert.equal(
+            measurement.hasUnit,
+            true,
+            `${grammarCase.label} ${viewport.width}px ${measurement.blankId}: `
+              + 'prompt-free Grammar Fill blank retains the canonical atomic unit',
+          )
+          assert.equal(measurement.glyphGap, null)
         }
       }
 
