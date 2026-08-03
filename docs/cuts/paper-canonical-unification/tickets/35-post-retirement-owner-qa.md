@@ -1,6 +1,6 @@
 # 35 — Post-retirement Owner QA
 
-Status: ready
+Status: done
 Blocked by: Ticket 34 independent review PASS
 Next on PASS: owner QA
 Terminal: no
@@ -24,9 +24,9 @@ pause for the owner verdict.
 
 ## Acceptance criteria
 
-- [ ] Every required URL and Student/Teacher Print/PDF artifact is provisioned from the exact reviewed HEAD and opened successfully.
-- [ ] The canonical Owner QA checklist names representative families, answer visibility, inactive Listening absence, rollback identity, and legacy absence.
-- [ ] The task stops at `QA Ready: yes` for the owner verdict and follows the canonical owner-QA handoff.
+- [x] Every required URL and Student/Teacher Print/PDF artifact is provisioned from the exact reviewed HEAD and opened successfully.
+- [x] The canonical Owner QA checklist names representative families, answer visibility, inactive Listening absence, rollback identity, and legacy absence.
+- [x] The task stops at `QA Ready: yes` for the owner verdict and follows the canonical owner-QA handoff.
 
 ## Superseded-ticket mapping
 
@@ -34,6 +34,6 @@ Replaces old Ticket 78.
 
 ## Result
 
-Commit: candidate branch `codex/ticket-35-owner-qa-fixes-20260803`; this bounded Owner-QA follow-up succeeds the focused-reviewed v44/v3 candidate without modifying its frozen bytes.
-Verify: scoped v45/v4 immutable content successor binds the source PDF correction and existing structured Application Writing evidence; Screen and complete Student/Teacher public Print/PDF assert the em dash, answer-region title, shared Print-only blank-number relation, existing Cloze geometry, continuation uniqueness, provenance absence, and fail-closed identity behavior.
-Notes: Fix candidate; focused re-review pending in the existing review lineage. Owner QA remains FAIL pending focused re-review and owner re-QA of this candidate.
+Commit: `f9737827d07e9e4626a8ffbcf0008ebbff22e3ca` on `codex/ticket-35-owner-qa-fixes-20260803`.
+Verify: focused re-review `Standards: PASS / Spec: PASS / Must Fix: None`; scoped v45/v4 Screen and complete Student/Teacher Print/PDF show the exact em dash, the Application Writing title inside the answer region, and the shared Print-only blank-number relation without changing line length.
+Notes: Owner QA PASS on 2026-08-03. Previously accepted visual items remained frozen; production, R2, and production data were untouched.
