@@ -59,6 +59,10 @@ jobs:
         run: pnpm exec playwright install --with-deps chromium
         working-directory: app
 
+      - name: Install server pagination Chromium
+        run: npx playwright-core install chromium
+        working-directory: server
+
       - name: Run app build and core verify scripts
         run: pnpm run verify:all
         working-directory: app
