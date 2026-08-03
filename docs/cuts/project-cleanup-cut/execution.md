@@ -172,6 +172,18 @@ The moves are history-preserving and individually reversible through Git.
 Uncertain, active, runtime-read, or unmerged initiative directories were not
 moved.
 
+## Final verification
+
+- `git diff --check`: PASS.
+- `node scripts/verify-architecture-housekeeping.mjs`: PASS 31 / FAIL 0,
+  including all six representative changed-risk routes and named-failure
+  coverage for every stable verifier.
+- `pnpm -C app verify:all`: `PASS 119 / SKIP 1 / FAIL 0`.
+- The one declared SKIP is
+  `scripts/verify-i16a-teaching-dimension-search.mjs`, whose required fixture
+  lives outside the repository. It is not a product, renderer, persistence, or
+  security failure.
+
 ## Deferred
 
 `VersionedRenderContract` remains unbuilt. Its sole trigger is the next real
