@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "ticket-33-input-preflight-v1",
+  "status": "FAIL_CLOSED",
+  "ticket": {
+    "number": 33,
+    "baseHead": "4e3d4f347bba84b5f2fa2aca4c11d02f1ab209b1"
+  },
+  "input": {
+    "ticket32PublicationStore": "test-fixtures/paper-canonical/publications/ticket-32-remaining-v1/store",
+    "immutableLatestRefs": 29,
+    "sqliteCurrentRowsExpected": 29,
+    "sqliteCurrentRowsObserved": null,
+    "sqlitePath": "test-fixtures/paper-canonical/publications/ticket-32-remaining-v1/store/publication.sqlite",
+    "sqliteTrackedAtBaseHead": false,
+    "sqliteFilePresentInFreshWorktree": false,
+    "sqliteIgnoredBy": ".gitignore:38:*.sqlite",
+    "diagnosticCurrentRowsAfterOpeningMissingPath": 0
+  },
+  "reproduction": {
+    "command": "node scripts/verify-paper-canonical-ticket-32-remaining-migration.mjs --check --exact-reload",
+    "outcome": "FAIL",
+    "assertion": "paper-2025-i SQLite current identity must close",
+    "actual": null,
+    "expected": {
+      "paperId": "paper-2025-i",
+      "versionName": "v1",
+      "sourceAssetVersion": 1,
+      "publicationDigest": "sha256:a914723ea33b8b54210fdcf0a2d3e6417b04e56fc0687c44d03c46c36090c7a6"
+    }
+  },
+  "disposition": {
+    "ticket33": "blocked before consumer or renderer proof",
+    "sharedBehaviorChanged": false,
+    "ticket32StoreChanged": false,
+    "ticket34Started": false,
+    "requiredRepair": "Restore a tracked or deterministically recreatable immutable Ticket 32 current-publication index, then re-run Ticket 32 exact reload before Ticket 33 consumes the corpus."
+  }
+}

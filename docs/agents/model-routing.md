@@ -8,22 +8,24 @@ scope or weaken the proportionate test, review, QA, or production rules in
 
 | Work | Model | Effort |
 | --- | --- | --- |
-| Coordinator, Wayfinder, product investigation including grilling, domain modeling, to-spec, to-tickets, and measured replanning | `gpt-5.6-sol` | `medium` |
-| Deterministic, repetitive, mechanically checkable work after its seam and expected result are already proven | `gpt-5.6-luna` | `max` |
-| Normal implementation and semantic fixes | `gpt-5.6-terra` | `high` |
-| First-of-kind source adapters; cross-cut persistence, migration, or rollback; full-corpus semantic closure; full Screen/Print/PDF closure | `gpt-5.6-terra` | `max` |
+| Planning, decomposition, and coordination | `gpt-5.6-sol` | `medium` |
+| Semantic, shared, or uncertain execution | `gpt-5.6-terra` | `xhigh` |
+| Clear, local, mechanical, or repetitive execution | `gpt-5.6-luna` | `xhigh` |
 | Independent Standards/Spec review and focused re-review | `gpt-5.6-sol` | `medium` |
-| High-risk aggregate review: full-corpus source closure, full Screen/Print/PDF closure, or final legacy-retirement closure | `gpt-5.6-sol` | `high` |
 
 Classify by the work that can make the result wrong, not by the artifact's file
 type. In particular:
 
-- a mechanical documentation or metadata fix uses Luna Max only when the seam,
-  desired bytes, and direct check are already proven;
-- a semantic or evidence fix uses Terra High;
-- a cross-cut closure fix uses Terra Max;
-- a focused re-review retains the Sol effort of its review gate: Medium by
-  default, or High for a high-risk aggregate lineage.
+- planning uses Sol Medium; use Sol High only when the planning itself is
+  genuinely complex;
+- use Terra xHigh for the ordinary execution pool when semantics, shared
+  behavior, or uncertainty can make the result wrong;
+- use Luna xHigh for the ordinary execution pool when the seam is clear and
+  the work is local, mechanical, or repetitive;
+- Terra Max and Luna Max are exceptional, not defaults: a fresh concrete
+  reason must establish that xHigh is insufficient;
+- one independent review lineage uses Sol Medium, including a focused
+  re-review.
 
 Classify the concrete work by its highest-risk part. A separately required
 independent reviewer uses the Sol review row. Model choice never lowers the
@@ -31,8 +33,9 @@ proof required by the changed behavior.
 
 ## Escalation and availability
 
-`gpt-5.6-sol` / `xhigh` requires fresh explicit owner direction and is limited
-to unresolved contradictory evidence, deeper arbitration after a failed
+Sol High requires a fresh concrete reason that the planning is genuinely
+complex. Sol xHigh requires fresh explicit owner direction and is limited to
+unresolved contradictory evidence, deeper arbitration after a failed
 high-level review, or a one-shot governance or design task. It is not a
 default. The standing owner cap is Sol xHigh; do not use Sol Max or Ultra
 unless fresh explicit owner direction changes that cap.

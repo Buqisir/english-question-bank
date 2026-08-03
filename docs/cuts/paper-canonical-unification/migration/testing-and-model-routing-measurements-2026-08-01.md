@@ -40,3 +40,16 @@ Ticket 22's reviewed semantic measurement remains
 The tickets differed in scope, risk, and failure shape, so these observations
 are not a controlled model comparison. Runtime billing, quota, and token-cost
 data were unavailable; wall time is not provider cost.
+
+## Ticket 32 lane observations
+
+- Luna xHigh Lane C: 9 papers; task duration 887.814 seconds; `PASS`; no
+  semantic rework; 0 nudges; one tool/shell retry.
+- Terra xHigh Lane A: 10 hardest papers, including trusted DOCX; task duration
+  946.075 seconds; `PASS`; 4 internal convergence corrections; 0 nudges.
+- Luna Max Lane B: 10 clear long-chain papers; task duration 1714.944 seconds;
+  `PASS`; 2 rework corrections; 1 coordinator nudge.
+
+The workloads differed. This observation is not a head-to-head equivalence and
+is used only to set the current default execution pool in the model-routing
+guidance.
