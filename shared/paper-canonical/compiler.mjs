@@ -5,6 +5,7 @@ import {
   trustedDocxCandidateAuthorityRef,
   trustedLegacyHistoricalCandidateAuthorityRef,
   trustedLegacyCaptureCandidateAuthorityRef,
+  paper2026ISuccessorCandidateAuthorityRef,
   validateJsonSchema,
 } from './authority.mjs'
 import { validateApplicationWritingContract } from './applicationWriting.mjs'
@@ -45,7 +46,10 @@ const blockingPriority = ['answer_conflict', 'incomplete_source', 'unsupported',
 const trustedLegacyCaptureCandidateAuthorities = [
   trustedLegacyHistoricalCandidateAuthorityRef,
   trustedLegacyCaptureCandidateAuthorityRef,
+  paper2026ISuccessorCandidateAuthorityRef,
 ]
+const paper2026ISuccessorSourceCaptureSha256 =
+  'sha256:398b386bd2a1d343a96623232d81914b5d5fb6f8308d188761bd9f224f4a84cd'
 
 function sameAuthorityRef(left, right) {
   return Boolean(
@@ -63,7 +67,10 @@ function trustedLegacyCaptureCandidateAuthorityFor(
 ) {
   const candidates = allowsHistoricalReplay
     ? trustedLegacyCaptureCandidateAuthorities
-    : [trustedLegacyCaptureCandidateAuthorityRef]
+    : [
+      trustedLegacyCaptureCandidateAuthorityRef,
+      paper2026ISuccessorCandidateAuthorityRef,
+    ]
   return candidates.find((candidate) =>
     sameAuthorityRef(authority, candidate)) || null
 }
@@ -3346,6 +3353,22 @@ function trustedLegacyCaptureCandidateFromBytes(
     },
     issues: [],
   }
+}
+
+export function importPaper2026ISuccessorCandidate(sourceCaptureBytes) {
+  if (
+    !(sourceCaptureBytes instanceof Uint8Array)
+    || sha256(sourceCaptureBytes) !== paper2026ISuccessorSourceCaptureSha256
+  ) {
+    return {
+      candidate: null,
+      issues: [trustedDocxIssue('TICKET_26_LEGACY_CAPTURE_UNTRUSTED', 'paper-2026-i successor import requires its exact committed source capture bytes')],
+    }
+  }
+  return trustedLegacyCaptureCandidateFromBytes(
+    sourceCaptureBytes,
+    paper2026ISuccessorCandidateAuthorityRef,
+  )
 }
 
 function suppliedTrustedCandidateBody(candidate) {

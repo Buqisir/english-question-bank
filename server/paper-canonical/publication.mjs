@@ -35,6 +35,7 @@ const publicationFileName =
   `canonical-paper-publication-v${canonicalAuthorityRef.manifestVersion}.json`
 const publicationFileNames = [
   publicationFileName,
+  'canonical-paper-publication-v43.json',
   'canonical-paper-publication-v42.json',
   'canonical-paper-publication-v41.json',
   'canonical-paper-publication-v37.json',

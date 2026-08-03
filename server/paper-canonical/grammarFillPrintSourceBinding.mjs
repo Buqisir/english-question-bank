@@ -2,7 +2,7 @@ import { createHash } from 'node:crypto'
 import { existsSync, readFileSync } from 'node:fs'
 import path from 'node:path'
 
-import { grammarFillRhythm } from '../../shared/paper-canonical/grammarFillRhythm.mjs'
+import { grammarFillRhythmForPaperAuthority } from '../../shared/paper-canonical/grammarFillRhythm.mjs'
 import { immutablePublicationSourceForConsumption } from './publication.mjs'
 
 const docxMediaType =
@@ -169,7 +169,11 @@ export function loadCanonicalGrammarFillPrintChrome({
   })
   const chromeAsset = chromeSource.asset
   const chromeAssetDigest = chromeSource.digest || sourceAssetDigest
-  const publicOracle = grammarFillRhythm.publicArtifactOracle
+  const rhythm = grammarFillRhythmForPaperAuthority({
+    paperId: sourcePaperId,
+    manifestVersion: publicationSource.authorityRef?.manifestVersion,
+  })
+  const publicOracle = rhythm.publicArtifactOracle
   const requiresPublicSourceBinding =
     sourcePaperId === publicOracle.paperId
     && Number(publicationSource.authorityRef?.manifestVersion) >= 20
@@ -284,13 +288,23 @@ export function loadCanonicalGrammarFillPrintChrome({
     )
     const officialAnswerDocuments = sourceCapture.documents?.filter(
       (document) =>
-        document.inputKey === 'official_answers'
-        && document.roles?.includes('official_answer_source'),
+        [
+          'official_answers',
+          'latest_official_answer_lead',
+        ].includes(document.inputKey)
+        && Array.isArray(document.roles)
+        && document.roles.includes('official_answer_source'),
     )
     if (officialAnswerDocuments?.length !== 1) {
       reject('Canonical Grammar Fill official-answer source identity is ambiguous')
     }
     const officialAnswerDocument = officialAnswerDocuments[0]
+    if (![
+      'official_answers',
+      'latest_official_answer_lead',
+    ].includes(officialAnswerDocument.inputKey)) {
+      reject('Canonical Grammar Fill official-answer source key is not accepted')
+    }
     const officialAnswerRef = officialAnswerDocument.immutableArtifactRef
     assertSafeRelativePath(
       officialAnswerRef?.relativePath,
@@ -424,9 +438,9 @@ export function loadCanonicalGrammarFillPrintChrome({
       groupId,
       projectedOccurrenceDigest,
       geometry: {
-        blankWidthEm: grammarFillRhythm.blankGeometry.widthEm,
-        promptGapEm: grammarFillRhythm.promptGeometry.gapEm,
-        promptAttachment: grammarFillRhythm.promptGeometry.attachment,
+        blankWidthEm: rhythm.blankGeometry.widthEm,
+        promptGapEm: rhythm.promptGeometry.gapEm,
+        promptAttachment: rhythm.promptGeometry.attachment,
       },
       sourceDigests: {
         paperAsset: chromeAssetDigest,

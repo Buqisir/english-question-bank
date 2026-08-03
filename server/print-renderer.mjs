@@ -56,7 +56,10 @@ import {
 } from '../shared/paper-canonical/readingPassageLetter.mjs'
 import { sevenChoicesRhythm } from '../shared/paper-canonical/sevenChoicesRhythm.mjs'
 import { clozeRhythm } from '../shared/paper-canonical/clozeRhythm.mjs'
-import { grammarFillRhythm } from '../shared/paper-canonical/grammarFillRhythm.mjs'
+import {
+  grammarFillRhythm,
+  grammarFillRhythmForPaperAuthority,
+} from '../shared/paper-canonical/grammarFillRhythm.mjs'
 import {
   paperTypographyRuntime,
   sectionHeadingRuntime,
@@ -286,7 +289,11 @@ function assertCanonicalGrammarFillSourceBinding({
       && candidate.mode === 'canonical',
   )
   if (!selection) return
-  const oracle = grammarFillRhythm.publicArtifactOracle
+  const rhythm = grammarFillRhythmForPaperAuthority({
+    paperId: canonicalConsumption.paperId,
+    manifestVersion: canonicalConsumption.authorityRef?.manifestVersion,
+  })
+  const oracle = rhythm.publicArtifactOracle
   const groupId = oracle.grammarFill.groupId
   if (!items.some((candidate) => candidate.detail.id === groupId)) return
   const requiresBinding =
@@ -335,11 +342,11 @@ function assertCanonicalGrammarFillSourceBinding({
   }
   if (
     binding.geometry?.blankWidthEm
-      !== grammarFillRhythm.blankGeometry.widthEm
+      !== rhythm.blankGeometry.widthEm
     || binding.geometry?.promptGapEm
-      !== grammarFillRhythm.promptGeometry.gapEm
+      !== rhythm.promptGeometry.gapEm
     || binding.geometry?.promptAttachment
-      !== grammarFillRhythm.promptGeometry.attachment
+      !== rhythm.promptGeometry.attachment
   ) {
     rejectCanonicalGrammarFill(
       'Canonical Grammar Fill prompt or blank geometry authority disagrees',

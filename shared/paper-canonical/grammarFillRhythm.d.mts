@@ -1,7 +1,7 @@
 export type GrammarFillRhythm = Readonly<{
-  schemaVersion: 'grammar-fill-rhythm-v5'
+  schemaVersion: 'grammar-fill-rhythm-v5' | 'grammar-fill-rhythm-v6'
   id: 'grammar-fill-rhythm'
-  version: '5'
+  version: '5' | '6'
   adjacencyGraph: ReadonlyArray<Readonly<Record<string, unknown>>>
   targets: Readonly<Record<string, Readonly<Record<string, number>>>>
   blankGeometry: Readonly<Record<string, string | number | boolean>>
@@ -58,3 +58,7 @@ export type GrammarFillRhythm = Readonly<{
 }>
 
 export declare const grammarFillRhythm: GrammarFillRhythm
+export declare function grammarFillRhythmForPaperAuthority(authority: Readonly<{
+  paperId: unknown
+  manifestVersion: unknown
+}>): GrammarFillRhythm

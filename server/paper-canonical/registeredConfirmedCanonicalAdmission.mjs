@@ -7,6 +7,7 @@ import {
   trustedDocxCandidateAuthorityRef,
   trustedLegacyHistoricalCandidateAuthorityRef,
   trustedLegacyCaptureCandidateAuthorityRef,
+  paper2026ISuccessorCandidateAuthorityRef,
 } from '../../shared/paper-canonical/authority.mjs'
 import {
   rederiveConfirmedCanonicalCandidate,
@@ -29,10 +30,13 @@ const migrationManifestDigest =
   'sha256:9992329a6de0fa3dcbff9fea8a0d6d92b660f0e8049b7978ceb5ff0000610e41'
 const trustedDocxSourcePath =
   'test-fixtures/paper-import/paper-2025-i-docx-source-adapter/2025-nck1-answer-source.docx'
+const paper2026ISuccessorCorrectionPath =
+  'docs/cuts/paper-canonical-unification/migration/paper-2026-i-successor-correction-v1.json'
 const admittedAuthorities = [
   trustedDocxCandidateAuthorityRef,
   trustedLegacyHistoricalCandidateAuthorityRef,
   trustedLegacyCaptureCandidateAuthorityRef,
+  paper2026ISuccessorCandidateAuthorityRef,
 ]
 const admittedProofs = new WeakMap()
 const registeredHistoricalReplayCapability = Object.freeze({})
@@ -213,15 +217,57 @@ function registeredManifest() {
   return manifest
 }
 
-function registeredRecord(manifest, paperId) {
-  const records = manifest.papers.filter((record) => record?.paperId === paperId)
-  if (records.length !== 1) {
+function paper2026ISuccessorRecord(paperId) {
+  if (paperId !== 'paper-2026-i') return null
+  const bytes = repositoryBytes(
+    paper2026ISuccessorCorrectionPath,
+    'paper-2026-i successor correction registry',
+  )
+  const record = parseJson(bytes, 'paper-2026-i successor correction registry')
+  if (
+    record?.schemaVersion !== 'paper-2026-i-successor-correction-v1'
+    || record.correctionId !== 'paper-2026-i-v42-public-oracle-successor'
+    || record.paperId !== paperId
+    || record.sourceType !== 'legacy-json'
+    || record.evidenceDigest !== digestJson(withoutKey(record, 'evidenceDigest'))
+    || !sameAuthority(record.authority, paper2026ISuccessorCandidateAuthorityRef)
+    || record.predecessor?.authority?.manifestVersion !== '42'
+    || record.predecessor?.versionName !== 'v1'
+    || record.predecessor?.sourceAssetVersion !== 1
+    || record.sourceBinding?.officialAnswerInputKey !== 'latest_official_answer_lead'
+    || record.sourceBinding?.expectedProjectedOccurrenceDigest
+      !== 'sha256:f864c176a692e39611bd08f3574f2e626934554b7056057e54f78ac145b40cd4'
+  ) {
     throw admissionError(
-      'CANONICAL_PUBLICATION_REGISTERED_PAPER_UNKNOWN',
-      `Paper ${paperId} does not resolve to one registered complete confirmation chain`,
+      'CANONICAL_PUBLICATION_REGISTERED_REGISTRY_INVALID',
+      'paper-2026-i successor correction registry is not the exact v43 immutable chain',
     )
   }
-  const record = records[0]
+  return record
+}
+
+function registeredRecord(manifest, paperId, suppliedCandidateBytes) {
+  const records = [
+    ...manifest.papers.filter((record) => record?.paperId === paperId),
+    ...(paperId === 'paper-2026-i' ? [paper2026ISuccessorRecord(paperId)] : []),
+  ]
+  if (records.length < 1) {
+    throw admissionError(
+      'CANONICAL_PUBLICATION_REGISTERED_PAPER_UNKNOWN',
+      `Paper ${paperId} does not resolve to a registered complete confirmation chain`,
+    )
+  }
+  const exactRecords = records.filter((record) => sameBytes(
+    suppliedCandidateBytes,
+    artifactBytes(record.candidate, `${paperId} Candidate`),
+  ))
+  if (exactRecords.length !== 1) {
+    throw admissionError(
+      'CANONICAL_PUBLICATION_REGISTERED_EVIDENCE_MISMATCH',
+      `Paper ${paperId} Candidate does not select one immutable registered confirmation chain`,
+    )
+  }
+  const record = exactRecords[0]
   const authority = registeredAuthority(record.authority)
   const resolved = authority && resolveCanonicalAuthority(authority)
   if (!authority || !resolved?.ok || !['trusted-docx', 'legacy-json'].includes(record.sourceType)) {
@@ -338,7 +384,11 @@ function expectedCanonicalFor(candidate, compilation, canonical) {
 export function resolveRegisteredConfirmedCanonicalAdmission(envelope) {
   const supplied = parseEnvelope(envelope)
   const manifest = registeredManifest()
-  const { record, authority } = registeredRecord(manifest, supplied.paperId)
+  const { record, authority } = registeredRecord(
+    manifest,
+    supplied.paperId,
+    supplied.candidateBytes,
+  )
   const candidateBytes = artifactBytes(record.candidate, `${record.paperId} Candidate`)
   const confirmationBytes = artifactBytes(record.confirmation, `${record.paperId} Teacher Confirmation`)
   const canonicalPaperBytes = artifactBytes(record.canonicalPaper, `${record.paperId} Canonical Paper`)
