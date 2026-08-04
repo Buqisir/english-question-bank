@@ -361,9 +361,11 @@ async function runPhaseB(browser) {
       (response) => response.url().includes('/api/draft-papers/') && response.request().method() === 'PATCH',
       { timeout: 10_000 },
     )
-    await page.getByRole('button', { name: '下移' }).first().click()
+    const firstGroupActions = page.locator('.draft-group-actions').first()
+    await firstGroupActions.getByRole('button', { name: '更多题组操作' }).click()
+    await firstGroupActions.getByRole('button', { name: '下移' }).click()
     const reorderResponse = await reorderMutation
-    assert('real click on 下移 overlay button in A3 mode triggers a successful PATCH', reorderResponse.ok(), String(reorderResponse.status()))
+    assert('real click on 下移 menu action in A3 mode triggers a successful PATCH', reorderResponse.ok(), String(reorderResponse.status()))
 
     // ── Real click: rail item scrolls the desk to the target group's face ──
     const scrollYBefore = await page.evaluate(() => window.scrollY)
