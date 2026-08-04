@@ -581,9 +581,10 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
                   id={thinkingToggleId}
                   checked={thinkingMode ?? false}
                   onChange={(event) => onThinkingModeChange?.(event.target.checked)}
+                  aria-label="思考模式：理解复杂描述"
                   aria-describedby={thinkingHintId}
                 />
-                <label htmlFor={thinkingToggleId}>思考模式</label>
+                <label htmlFor={thinkingToggleId}>理解复杂描述</label>
                 <span id={thinkingHintId} className="visually-hidden">用 AI 理解你的描述，更准但稍慢</span>
               </div>
             )}
@@ -781,7 +782,12 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
       )}
 
       {state.kind === 'error' && (
-        <p className="concierge-error">取题台暂时出错了，可以稍后再试。</p>
+        <div className="concierge-error" role="alert">
+          <span>取题台暂时没连上，原来的描述已经保留。</span>
+          <button type="button" onClick={() => void actions.submit(state.query)}>
+            重新取题
+          </button>
+        </div>
       )}
 
       <div className="concierge-results" aria-live="polite">

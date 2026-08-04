@@ -94,9 +94,9 @@
   max-width: 320px;
 }
 
-/* workbench-header-unify Locked Decision 2: click-to-edit hint. Pencil is
-   quiet (not always-on) — reveals on hover/focus of the title button, same
-   restraint as the wordmark's own hover-only accent color above. */
+/* workbench-header-unify Locked Decision 2: click-to-edit hint. Pencil stays
+   lightly visible, then strengthens on hover/focus so editability need not be
+   guessed while the title itself remains visually quiet. */
 .topbar-page-title-editable {
   align-items: center;
   background: none;
@@ -121,7 +121,7 @@
 
 .topbar-page-title-pencil {
   flex-shrink: 0;
-  opacity: 0;
+  opacity: 0.55;
   transition: opacity var(--motion-fast) var(--ease-hover);
 }
 
@@ -3104,7 +3104,7 @@ button:disabled {
 
 /* 窄屏：五个命令行元素挤在一行会互相重叠。搜索框独占一行，思考模式/筛选/
    计数换到第二行——沿用 .concierge-paper-row 已定的 640px 断点。 */
-@media (max-width: 640px) {
+@media screen and (max-width: 640px) {
   .concierge-command-bar {
     gap: 8px 10px;
   }
@@ -3290,7 +3290,27 @@ button:disabled {
 }
 
 .concierge-error {
+  align-items: center;
   color: #dc2626;
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.concierge-error button {
+  background: transparent;
+  border: 1px solid currentColor;
+  border-radius: 6px;
+  color: inherit;
+  cursor: pointer;
+  flex: 0 0 auto;
+  font: inherit;
+  min-height: 34px;
+  padding: 5px 10px;
+}
+
+.concierge-error button:hover {
+  background: color-mix(in srgb, currentColor 8%, transparent);
 }
 
 /* Result list */
@@ -3685,6 +3705,9 @@ button:disabled {
   max-width: 920px;
   margin: 0 auto;
   padding: 24px;
+  box-sizing: border-box;
+  min-width: 0;
+  width: 100%;
 
   /* teal-repaint C3: this block used to re-scope --ink / --ink-strong /
      --muted / --surface / --surface-strong / --panel / --line /
@@ -3694,6 +3717,12 @@ button:disabled {
      cold blue. C1 (tokens.css) + C2 (index.css) now make :root/index.css
      themselves neutral + teal, so the detail view inherits the new palette
      directly — these per-subtree color remaps are gone. */
+}
+
+@media (max-width: 640px) {
+  .app-shell.home-mode-ai .detail-view {
+    padding: 16px;
+  }
 }
 
 /* ── Basket: lightweight floating chip + slide-in drawer in AI mode ────── */

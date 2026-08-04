@@ -1815,6 +1815,19 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     setLectureSelection({ groupId, questionId, evidenceId: null, optionLabel: null })
   }
 
+  function toggleLecturePanel(): void {
+    if (!lectureOpen && !lectureSelection) {
+      const defaultGroupId = panelGroupId ?? railGroups[0]?.anchor ?? null
+      const defaultQuestionId = defaultGroupId
+        ? asset?.content.groups[defaultGroupId]?.questionIds[0]
+        : null
+      if (defaultGroupId && defaultQuestionId) {
+        selectLectureQuestion(defaultGroupId, defaultQuestionId)
+      }
+    }
+    setLectureOpen((open) => !open)
+  }
+
   function handleGroupFocusIntent(groupId: string, intent: PaperSurfaceFocusIntent): void {
     applyPaperSurfaceFocusIntent({
       groupId,
@@ -3156,7 +3169,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     return (
       <div className="paper-browse-page">
         <AppTopbar {...shellNav} pageTitle="整卷预览" onBack={onBackToWorkbench} />
-        <div className="paper-browse-loading">加载中…</div>
+        <div className="paper-browse-loading" role="status" aria-live="polite">正在打开整卷…</div>
       </div>
     )
   }
@@ -3165,7 +3178,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     return (
       <div className="paper-browse-page">
         <AppTopbar {...shellNav} pageTitle="整卷预览" onBack={onBackToWorkbench} />
-        <div className="paper-browse-error">
+        <div className="paper-browse-error" role="main">
           <h2>没找到这份卷面</h2>
           <p>{error || '卷面数据为空，回到找题页重新打开吧。'}</p>
         </div>
@@ -3181,7 +3194,10 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
           lectureOpen ? ' paper-browse-shell--lecture-open' : ''
         }`}
         ref={shellRef}
+        role="main"
+        aria-labelledby="paper-browse-title"
       >
+        <h1 id="paper-browse-title" className="visually-hidden">{asset.paper.title}</h1>
         <nav
           className={`paper-browse-rail${lectureOpen ? ' paper-browse-rail--compact' : ''}`}
           aria-label="目录"
@@ -3329,7 +3345,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
         className={`paper-browse-lecture-handle${
           lectureOpen ? ' paper-browse-lecture-handle--open' : ''
         }`}
-        onClick={() => setLectureOpen((open) => !open)}
+        onClick={toggleLecturePanel}
         aria-pressed={lectureOpen}
         aria-expanded={lectureOpen}
       >

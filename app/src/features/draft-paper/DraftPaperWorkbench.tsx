@@ -133,6 +133,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   const removedItemToast = useToastPresence(removedItem, 120)
   const savedToastPresence = useToastPresence(savedToastMessage, 120)
   const [draggedItemId, setDraggedItemId] = useState<string | null>(null)
+  const [openGroupActionsItemId, setOpenGroupActionsItemId] = useState<string | null>(null)
   const [exportMenuOpen, setExportMenuOpen] = useState(false)
   // workbench-header-unify Locked Decision 2: the retired `.draft-toolbar`'s
   // 学生（可选）/ 最近草稿卷 / 自动保存状态 三项 now live behind this quiet
@@ -1250,7 +1251,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     return (
       <>
         <AppTopbar {...props.shellNav} pageTitle="草稿卷" onBack={onBackToWorkbench} />
-        <div className="draft-workbench-shell"><p className="draft-loading">正在打开草稿卷...</p></div>
+        <main className="draft-workbench-shell"><p className="draft-loading" role="status" aria-live="polite">正在打开草稿卷…</p></main>
       </>
     )
   }
@@ -1259,9 +1260,9 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     return (
       <>
         <AppTopbar {...props.shellNav} pageTitle="草稿卷" onBack={onBackToWorkbench} />
-        <div className="draft-workbench-shell">
+        <main className="draft-workbench-shell">
           <p className="draft-error">{loadError || '没找到这份草稿卷，可能已被删除。回到找题页重新组一份吧。'}</p>
-        </div>
+        </main>
       </>
     )
   }
@@ -1469,6 +1470,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       )}
 
       <main className="draft-workbench-layout">
+        <h1 className="visually-hidden">{draftPaper.title}</h1>
         <section className="draft-preview-desk" aria-label="A4 预览">
           <div className={`draft-paper-col${draftPaper.printForm === 'a3' ? ' is-a3' : ''}`} ref={paperColRef}>
             <div
@@ -1583,38 +1585,87 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
                       <ArrowLeftRight size={14} />
                     </button>
                   )}
-                  <button
-                    type="button"
-                    aria-label="上移"
-                    title="上移"
-                    disabled={fullIndex <= 0}
-                    onClick={() => moveItem(item.id, -1)}
+                  <div
+                    className="draft-group-actions-menu"
+                    onBlur={(event) => {
+                      if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
+                        setOpenGroupActionsItemId(null)
+                      }
+                    }}
+                    onKeyDown={(event) => {
+                      if (event.key === 'Escape') {
+                        setOpenGroupActionsItemId(null)
+                        event.currentTarget.querySelector<HTMLButtonElement>('.draft-group-actions-menu-trigger')?.focus()
+                      }
+                    }}
                   >
-                    <ArrowUp size={14} />
-                  </button>
-                  <button
-                    type="button"
-                    aria-label="下移"
-                    title="下移"
-                    disabled={fullIndex >= draftPaper.items.length - 1}
-                    onClick={() => moveItem(item.id, 1)}
-                  >
-                    <ArrowDown size={14} />
-                  </button>
-                  {canPageBreakBefore && (
                     <button
                       type="button"
-                      aria-label={item.pageBreakBefore ? '取消分页' : '前置分页'}
-                      title={item.pageBreakBefore ? '取消分页' : '前置分页'}
-                      aria-pressed={item.pageBreakBefore}
-                      onClick={() => void togglePageBreak(item, !item.pageBreakBefore)}
+                      className="draft-group-actions-menu-trigger"
+                      aria-label="更多题组操作"
+                      title="更多题组操作"
+                      aria-expanded={openGroupActionsItemId === item.id}
+                      aria-controls={`draft-group-actions-${item.id}`}
+                      onClick={() => setOpenGroupActionsItemId((openId) => openId === item.id ? null : item.id)}
                     >
-                      <SeparatorHorizontal size={14} />
+                      <MoreHorizontal size={16} aria-hidden="true" />
                     </button>
-                  )}
-                  <button type="button" className="danger" aria-label="移除" title="移除" onClick={() => void deleteItem(item)}>
-                    <Trash2 size={14} />
-                  </button>
+                    {openGroupActionsItemId === item.id && (
+                      <div
+                        id={`draft-group-actions-${item.id}`}
+                        className="draft-group-actions-menu-panel"
+                        role="group"
+                        aria-label="题组操作"
+                      >
+                        <button
+                          type="button"
+                          disabled={fullIndex <= 0}
+                          onClick={() => {
+                            setOpenGroupActionsItemId(null)
+                            moveItem(item.id, -1)
+                          }}
+                        >
+                          <ArrowUp size={14} aria-hidden="true" />
+                          上移
+                        </button>
+                        <button
+                          type="button"
+                          disabled={fullIndex >= draftPaper.items.length - 1}
+                          onClick={() => {
+                            setOpenGroupActionsItemId(null)
+                            moveItem(item.id, 1)
+                          }}
+                        >
+                          <ArrowDown size={14} aria-hidden="true" />
+                          下移
+                        </button>
+                        {canPageBreakBefore && (
+                          <button
+                            type="button"
+                            aria-pressed={item.pageBreakBefore}
+                            onClick={() => {
+                              setOpenGroupActionsItemId(null)
+                              void togglePageBreak(item, !item.pageBreakBefore)
+                            }}
+                          >
+                            <SeparatorHorizontal size={14} aria-hidden="true" />
+                            {item.pageBreakBefore ? '取消分页' : '前置分页'}
+                          </button>
+                        )}
+                        <button
+                          type="button"
+                          className="danger"
+                          onClick={() => {
+                            setOpenGroupActionsItemId(null)
+                            void deleteItem(item)
+                          }}
+                        >
+                          <Trash2 size={14} aria-hidden="true" />
+                          移除
+                        </button>
+                      </div>
+                    )}
+                  </div>
                 </div>
               )
             })}

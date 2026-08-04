@@ -20,6 +20,9 @@
   gap: 20px;
   max-width: 900px;
   margin: 0 auto;
+  box-sizing: border-box;
+  min-width: 0;
+  width: 100%;
 }
 
 /* ── 速览头（工具侧，中性） ───────────────────────────────── */
@@ -28,6 +31,7 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  min-width: 0;
 }
 
 .peek-meta-line {
@@ -47,6 +51,7 @@
   font-size: 22px;
   font-weight: 650;
   color: var(--ink-strong);
+  overflow-wrap: anywhere;
   text-wrap: balance;
 }
 
@@ -56,6 +61,7 @@
   font-size: 14.5px;
   line-height: 1.6;
   color: var(--ink);
+  overflow-wrap: anywhere;
 }
 
 .peek-chips,
@@ -153,6 +159,9 @@
 
 .peek-paper {
   position: relative;
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
   border: 1px solid var(--line);
   border-radius: 8px;
   background: #fff;
@@ -212,4 +221,68 @@
   font-size: 13.5px;
   color: var(--muted);
   text-align: center;
+}
+
+@media screen and (max-width: 640px) {
+  .peek-meta-line {
+    flex-wrap: wrap;
+  }
+
+  .peek-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .peek-btn {
+    justify-content: center;
+    min-width: 0;
+  }
+
+  .peek-btn--minor,
+  .peek-btn--minor + .peek-btn--minor {
+    margin-left: 0;
+  }
+
+  .peek-paper-clip {
+    min-width: 0;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+  }
+
+  .peek-paper .ps-surface {
+    min-width: 0;
+    padding: 12px;
+  }
+
+  .peek-paper .ps-page {
+    box-sizing: border-box;
+    max-width: 100%;
+    min-width: 0;
+    padding: 32px 24px;
+    width: 100%;
+  }
+
+  .peek-paper .ps-question,
+  .peek-paper .ps-question-stem-button {
+    box-sizing: border-box;
+    max-width: 100%;
+    min-width: 0;
+    width: 100%;
+  }
+
+  .peek-paper .ps-option-list,
+  .peek-paper .ps-question-options-inline {
+    grid-template-columns: minmax(0, 1fr) !important;
+    margin-left: 0 !important;
+    max-width: 100% !important;
+    white-space: normal;
+    width: 100% !important;
+  }
+
+  .peek-paper .ps-option,
+  .peek-paper .ps-option-text,
+  .peek-paper .ps-question-options-inline-item {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
 }

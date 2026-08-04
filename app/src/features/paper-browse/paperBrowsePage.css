@@ -1066,6 +1066,54 @@
   }
 }
 
+/* 手机屏幕只改变交互预览的折行与页边距；Print/PDF 继续使用共享
+ * PaperSurface 的金样卷几何，不被这组页面级覆盖影响。 */
+@media screen and (max-width: 700px) {
+  .paper-browse-shell {
+    gap: 16px;
+    padding: 12px 12px 80px;
+  }
+
+  .paper-browse-content {
+    --ps-page-margin-top: 32px;
+    --ps-page-margin-x: 24px;
+  }
+
+  .paper-browse-section-heading {
+    white-space: normal;
+  }
+
+  .paper-browse-content .ps-question,
+  .paper-browse-content .ps-question-stem-button {
+    box-sizing: border-box;
+    max-width: 100%;
+    min-width: 0;
+    width: 100%;
+  }
+
+  .paper-browse-content .ps-option-list,
+  .paper-browse-content .ps-question-options-inline {
+    grid-template-columns: minmax(0, 1fr) !important;
+    margin-left: 0 !important;
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+
+  .paper-browse-content .ps-option-list--four_columns,
+  .paper-browse-content .ps-option-list--two_by_two,
+  .paper-browse-content .ps-question-options-inline--four_columns,
+  .paper-browse-content .ps-question-options-inline--two_by_two {
+    white-space: normal;
+  }
+
+  .paper-browse-content .ps-option,
+  .paper-browse-content .ps-option-text,
+  .paper-browse-content .ps-question-options-inline-item {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+}
+
 /* ─── 刀 2 修复轮 ③: 阅读跨栏证据动线 ───
  *
  * `PaperIntelligenceEvidenceLine`（import-only, geometry+组件零修改）emits
