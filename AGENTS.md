@@ -8,10 +8,9 @@ Historical cuts are evidence, not current instructions.
 
 - Follow the owner's current request and the named spec or ticket. Do not add
   adjacent features or revive historical work.
-- When the owner supplies a worktree, branch, expected HEAD, fixed point, or
-  allowed dirty file, verify those facts before writing.
-- Preserve unrelated changes. Do not stash, clean, reset, rebase, merge, or
-  delete another task's work.
+- Verify any owner-supplied worktree, branch, expected HEAD, fixed point, or
+  allowed dirty file before writing. Preserve unrelated changes; do not stash,
+  clean, reset, rebase, merge, or delete another task's work.
 - Only one task writes a worktree at a time. Explicit parallel work needs
   separate worktrees and non-overlapping write surfaces.
 - Never store secrets, account data, private student data, or full copyrighted
@@ -23,11 +22,10 @@ Historical cuts are evidence, not current instructions.
   affected checks, review the diff, and commit when requested.
 - Use a tracked spec and tickets only when the work genuinely needs more than
   one context. Use Wayfinder only when the route to a spec is genuinely foggy.
-- Do not create governance-only phase, receipt, manifest/digest-approval,
-  publication, recovery, review-of-prose, or ticket-management work.
-- The owner starts top-level tasks. A handoff is needed only when the owner asks
-  for one or a real work boundary requires it; include the exact path, branch,
-  HEAD, spec, and ticket without restating a governance ceremony.
+- Do not create governance-only tasks, approvals, publication/recovery stages,
+  repeated reviews, or automatic task chains. The owner starts top-level tasks.
+- Use a handoff only when the owner asks or a real work boundary requires it;
+  follow `docs/agents/dispatch-protocols.md`.
 - Durable product scope and decisions belong in the relevant spec, ticket, or
   ADR. `.scratch/` is same-task scratch only.
 
@@ -39,34 +37,22 @@ the full suite.
 
 | Change | During work | Final gate |
 | --- | --- | --- |
-| Atomic UI micro-change | `verify:changed` + exact-page real click | Owner QA when visible; no unrelated backend/Paper suite |
-| Known-shape Canonical Paper data | `verify:changed` strict input/publication canary | no authority bump, deep per-paper tri-surface proof, full suite, or independent review unless a shared shape changes |
-| Ordinary local feature | `verify:changed` + its focused behavioral check | affected build/public seam |
-| Shared renderer/Paper contract | `verify:paper` + affected real Screen/Print/PDF | one final `verify:all` and one independent Standards/Spec review |
-| Auth, isolation, persistence, migration, production config, or irreversible cross-cut | `verify:changed` security pack + affected public seam | one final `verify:all` and one independent Standards/Spec review |
+| Atomic UI micro-change | `pnpm -C app verify:changed` + exact-page real click | Owner QA when visible; no unrelated backend/Paper suite |
+| Known-shape Canonical Paper data | `pnpm -C app verify:changed` strict input/publication canary | no authority bump, deep per-paper tri-surface proof, full suite, or independent review unless a shared shape changes |
+| Ordinary local feature | `pnpm -C app verify:changed` + its focused behavioral check | affected build/public seam |
+| Shared renderer/Paper contract | `pnpm -C app verify:paper` + affected real Screen/Print/PDF | one final `pnpm -C app verify:all` and one independent Standards/Spec review |
+| Auth, isolation, persistence, migration, production config, or irreversible cross-cut | `pnpm -C app verify:changed` security pack + affected public seam | one final `pnpm -C app verify:all` and one independent Standards/Spec review |
 
-`SKIP` is not `PASS`; report its limitation literally. Run release checks once
-on the final candidate, confirm `main` CI after merge, and update
-`docs/STATUS.md` only for a material release. Prefer behavioral evidence;
-source-regex is a last resort. Before deleting shared CSS, inventory producers
-and naming collisions.
-
-Every new or retained verifier, process rule, or governance document must name
-in one sentence the real failure it uniquely prevents, or the independent
-detection layer other checks cannot supply. If that is uncertain, quarantine
-it outside daily packs instead of inventing a quota or deleting blindly.
-
-Evaluate a `VersionedRenderContract` only when the next real shared-renderer
-authority bump demonstrates resolver/fixture/consumer replay fan-out; do not
-pre-build it.
+`SKIP` is not `PASS`; report its limitation literally. Retain a verifier or
+process rule only when it names the failure or independent detection layer it
+uniquely supplies; otherwise keep it outside daily packs.
 
 ## Owner QA
 
-Visible behavior requires real browser interaction and owner acceptance. The
-task prepares the service, data/login, exact URL, and first checklist state,
-then smoke-checks the page before reporting it ready. The owner should not have
-to start services, find fixtures, or reconstruct the route. Use
-`docs/agents/owner-qa-handoff-template.md` for the compact format.
+For visible behavior, prepare and smoke-check the exact service, data/login,
+URL, and first state before Owner QA. Use
+`docs/agents/owner-qa-handoff-template.md`; the owner does not reconstruct the
+test state.
 
 ## Product boundaries
 
@@ -92,6 +78,9 @@ product or visual decision. UI direction follows `PRODUCT.md` and
 `docs/agents/ui-collaboration.md`. Visual polish must not silently change
 domain, schema, adapters, PaperSurface, server behavior, paper assets, or
 print/export behavior.
+
+For domain or architecture changes, read `CONTEXT.md` and relevant ADRs, use
+their established vocabulary, and flag conflicts before editing.
 
 ## Production and repository facts
 
