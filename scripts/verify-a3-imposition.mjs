@@ -296,11 +296,20 @@ async function runPhaseB(browser) {
           headers: { 'content-type': 'application/json' },
           body: JSON.stringify({ groupId }),
         })
-        results.push(response.ok)
+        results.push({
+          groupId,
+          ok: response.ok,
+          status: response.status,
+          ...(response.ok ? {} : { body: await response.text() }),
+        })
       }
       return results
     }, groupIds)
-    assert('all confirmed Canonical groups added to draft via API', addResult.every(Boolean), JSON.stringify(addResult))
+    assert(
+      'all confirmed Canonical groups added to draft via API',
+      addResult.every((result) => result.ok),
+      JSON.stringify(addResult),
+    )
 
     const draftId = await page.evaluate(async () => {
       const response = await fetch('/api/draft-papers/current')

@@ -81,7 +81,9 @@ export function loadCanonicalGrammarFillPrintChrome({
   }
   const groupId = sourceGroupIds[0]
   const item = exportItems.find((candidate) => candidate.detail.id === groupId)
-  const sourcePaperId = item?.detail.paperId
+  const sourcePaperId = isDraftComposition
+    ? item?.detail.paperId
+    : canonicalConsumption?.paperId
   if (typeof sourcePaperId !== 'string' || sourcePaperId.length === 0) {
     reject('Canonical Grammar Fill chrome paper identity is unavailable')
   }
