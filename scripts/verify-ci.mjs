@@ -235,23 +235,42 @@ function changedPlan(files) {
   if (files.every((file) => touchesAny([file], paperDataPatterns))) {
     return { risk: 'known-shape-paper-data', pack: 'paper-data' }
   }
-  if (touchesAny(files, securityPatterns)) {
+
+  const domains = new Set(files.map((file) => {
+    if (touchesAny([file], securityPatterns)) return 'security'
+    if (touchesAny([file], paperPatterns)) return 'paper'
+    if (touchesAny([file], paperDataPatterns)) return 'paper-data'
+    if (file.startsWith('app/src/') && file.endsWith('.css')) return 'ui'
+    if ([
+      'app/src/',
+      'server/',
+      'shared/',
+    ].some((prefix) => file.startsWith(prefix))) return 'feature'
+    return 'unknown'
+  }))
+
+  if (domains.has('unknown')) {
+    return { risk: 'unknown-fallback', pack: 'all' }
+  }
+  if (domains.has('paper-data')) {
+    return { risk: 'mixed-high-risk-fallback', pack: 'all' }
+  }
+  if (domains.has('security') && domains.size > 1) {
+    return { risk: 'mixed-high-risk-fallback', pack: 'all' }
+  }
+  if (domains.has('paper') && domains.size > 1) {
+    return { risk: 'mixed-high-risk-fallback', pack: 'all' }
+  }
+  if (domains.has('security')) {
     return { risk: 'auth-persistence-migration', pack: 'security' }
   }
-  if (touchesAny(files, paperPatterns)) {
+  if (domains.has('paper')) {
     return { risk: 'shared-renderer-contract', pack: 'paper' }
   }
-  if (files.every((file) => file.startsWith('app/src/'))) {
-    return { risk: 'ui-micro', pack: 'ui' }
-  }
-  if (files.every((file) => [
-    'app/src/',
-    'server/',
-    'shared/',
-  ].some((prefix) => file.startsWith(prefix)))) {
+  if (domains.has('feature')) {
     return { risk: 'ordinary-local-feature', pack: 'feature' }
   }
-  return { risk: 'unknown-fallback', pack: 'all' }
+  return { risk: 'ui-micro', pack: 'ui' }
 }
 
 function verificationPlan() {
@@ -275,9 +294,29 @@ function verificationPlan() {
     if (!/^[A-Za-z0-9_./-]+$/u.test(baseRef)) {
       throw new Error(`Invalid verify base ref: ${baseRef}`)
     }
-    const files = explicitFiles.length > 0
-      ? [...new Set(explicitFiles)].sort()
-      : changedFiles(rootDir, { baseRef })
+    let files
+    let detectionError = null
+    if (explicitFiles.length > 0) {
+      files = [...new Set(explicitFiles)].sort()
+    } else {
+      try {
+        files = changedFiles(rootDir, { baseRef })
+      } catch (error) {
+        files = []
+        detectionError = error instanceof Error ? error.message : String(error)
+      }
+    }
+    if (detectionError) {
+      return {
+        mode: 'changed',
+        risk: 'git-diff-fallback',
+        files: [],
+        pack: 'all',
+        detectionError,
+        preflight: registry.preflight,
+        scripts: packs.all,
+      }
+    }
     const selected = changedPlan(files)
     return {
       mode: 'changed',

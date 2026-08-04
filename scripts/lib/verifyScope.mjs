@@ -1,4 +1,4 @@
-import { execSync } from 'node:child_process'
+import { execFileSync, execSync } from 'node:child_process'
 import { readFileSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -60,34 +60,21 @@ export function createVerifier(name) {
   }
 }
 
-export function safeGitNames(root, args) {
-  try {
-    const out = execSync(`git diff --name-only ${args}`, {
-      cwd: root,
-      encoding: 'utf8',
-    }).trim()
-    return out ? out.split('\n').filter(Boolean) : []
-  } catch {
-    return []
-  }
-}
-
-export function safeGitOutput(root, command) {
-  try {
-    return execSync(command, { cwd: root, encoding: 'utf8' }).trim()
-  } catch {
-    return ''
-  }
+function gitOutput(root, args) {
+  return execFileSync('git', args, {
+    cwd: root,
+    encoding: 'utf8',
+  }).trim()
 }
 
 export function changedFiles(root, { baseRef = 'main', includeUntracked = true } = {}) {
   const names = new Set()
-
-  for (const name of safeGitNames(root, baseRef)) names.add(name)
-  for (const name of safeGitNames(root, `--cached ${baseRef}`)) names.add(name)
+  const mergeBase = gitOutput(root, ['merge-base', baseRef, 'HEAD'])
+  const changed = gitOutput(root, ['diff', '--name-only', mergeBase])
+  for (const name of changed.split('\n').filter(Boolean)) names.add(name)
 
   if (includeUntracked) {
-    const untracked = safeGitOutput(root, 'git ls-files --others --exclude-standard')
+    const untracked = gitOutput(root, ['ls-files', '--others', '--exclude-standard'])
     for (const name of untracked.split('\n').filter(Boolean)) names.add(name)
   }
 

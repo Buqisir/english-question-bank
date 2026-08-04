@@ -240,7 +240,7 @@ function assertPublicHtml({ html, consumption, versionType }) {
 async function assertChromiumA4Pdfs(entries) {
   const outputDir = mkdtempSync(path.join(tmpdir(), 'eqb-paper-2026-i-successor-pdf-'))
   const playwright = await import('../app/node_modules/playwright/index.js')
-  const browser = await playwright.default.chromium.launch({ headless: true })
+  const browser = await playwright.default.chromium.launch({ headless: true, channel: 'chromium' })
   const observations = []
   try {
     for (const entry of entries) {

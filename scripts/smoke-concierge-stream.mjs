@@ -57,7 +57,7 @@ const INTERNAL_SLUG_PATTERNS = [
 async function main() {
   const browser = await chromium.launch({
     headless: true,
-    channel: process.env.CONCIERGE_SMOKE_CHANNEL || undefined,
+    channel: 'chromium',
   })
   const context = await browser.newContext({ viewport: { width: 1440, height: 900 } })
   const apiKey = process.env.AI_API_KEY || ''

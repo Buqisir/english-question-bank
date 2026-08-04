@@ -197,7 +197,7 @@ async function searchUntilTwoGroupCards(page) {
  * ────────────────────────────────────────────────────────────────────────── */
 
 async function main() {
-  const browser = await chromium.launch({ headless: true })
+  const browser = await chromium.launch({ headless: true, channel: 'chromium' })
   const context = await browser.newContext({ viewport: { width: 1440, height: 1000 } })
   const apiKey = process.env.AI_API_KEY || ''
   await context.addInitScript((seed) => {

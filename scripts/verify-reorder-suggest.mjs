@@ -6,13 +6,12 @@
 // same reason as scripts/verify-draft-pagination-dom-contract.mjs /
 // scripts/verify-a3-imposition.mjs: Phase B below drives
 // getDraftPaperPagination (via getReorderSuggestion, which reuses it) —
-// that launches a real headless Chromium (server's playwright-core), which
-// the main `verify` CI job's `npm ci` never provisions. Plan.md's own
-// verify section says to reuse "verify-a3-imposition e2e 段模式" for the
+// that launches the shared full Chromium. Plan.md's own verify section says
+// to reuse "verify-a3-imposition e2e 段模式" for the
 // e2e portion — that mode IS the e2e-job-only, Chromium-requiring pattern,
 // so this script follows the SAME registration precedent those scripts set
 // (runs as its own step in the `e2e` job, `.github/workflows/verify.yml`,
-// after both Chromium installs) rather than joining verify-ci.mjs.
+// after the Chromium install) rather than joining verify-ci.mjs.
 //
 // Phase A (pure, no Chromium, no dev server — always runs, fast):
 //   ① buildReorderCandidates: determinism, hard cap 6, candidates identical
@@ -524,7 +523,7 @@ async function runPhaseB(browser) {
 async function main() {
   await runPhaseA()
 
-  const browser = await chromium.launch({ headless: true })
+  const browser = await chromium.launch({ headless: true, channel: 'chromium' })
   try {
     await runPhaseB(browser)
   } finally {

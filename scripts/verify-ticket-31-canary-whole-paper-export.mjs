@@ -253,7 +253,7 @@ function assertLegacySourceBindingAdversaries() {
 async function assertDirectChromiumPdfs(exports) {
   const outputDir = mkdtempSync(path.join(tmpdir(), 'eqb-ticket-31-pdf-'))
   const playwright = await import('../app/node_modules/playwright/index.js')
-  const browser = await playwright.default.chromium.launch({ headless: true })
+  const browser = await playwright.default.chromium.launch({ headless: true, channel: 'chromium' })
   const observations = []
   try {
     for (const entry of exports) {
@@ -302,7 +302,7 @@ async function assertWholePaperScreen(consumptions) {
   const appUrl = viteServer.resolvedUrls?.local?.[0]
   assert.ok(appUrl)
   const playwright = await import('../app/node_modules/playwright/index.js')
-  const browser = await playwright.default.chromium.launch({ headless: true })
+  const browser = await playwright.default.chromium.launch({ headless: true, channel: 'chromium' })
   const observations = []
   try {
     for (const consumption of consumptions) {

@@ -124,7 +124,7 @@ async function main() {
   await waitForHttp(`http://127.0.0.1:${vitePort}/`)
   pass('Vite app started')
 
-  const browser = await chromium.launch({ headless: true })
+  const browser = await chromium.launch({ headless: true, channel: 'chromium' })
   const page = await browser.newPage({ viewport: { width: 1440, height: 920 } })
   const pageErrors = []
   page.on('pageerror', (error) => pageErrors.push(error.message))

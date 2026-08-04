@@ -5,17 +5,8 @@
 // figure-image fix (draftPaperStore.mjs's inlineFigureImages /
 // buildDraftPaginationPrintHtml, cr-step1-lite.md "步2/4 必验").
 //
-// NOT registered in verify-ci.mjs (see scripts/README.md "Runs in CI?" = no) —
-// same reason as scripts/verify-draft-pagination-renderer.mjs and
-// scripts/verify-draft-pagination-perf.mjs: this launches a real headless
-// Chromium instance (playwright-core, channel:'chromium') and the main `verify`
-// CI job's `npm ci` never installs a Chromium binary for server/'s
-// playwright-core. See scripts/verify-draft-pagination-renderer.mjs's header
-// for the full explanation.
-//
-// draft-desk-b step5 (SW-B): runs as a dedicated step in the `e2e` job
-// instead (see scripts/verify-draft-pagination-renderer.mjs header) — that
-// job already installs server's playwright-core Chromium (step4).
+// Runs as a dedicated `e2e` job step against the one pinned full Chromium;
+// see scripts/verify-draft-pagination-renderer.mjs for the registry split.
 import { readFileSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'

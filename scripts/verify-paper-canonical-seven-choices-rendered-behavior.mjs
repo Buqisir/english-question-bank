@@ -289,7 +289,7 @@ for (const versionType of ['student', 'teacher']) {
 
 async function assertActualPrintPdfArtifacts() {
   const playwright = await import('../app/node_modules/playwright/index.js')
-  const browser = await playwright.default.chromium.launch({ headless: true })
+  const browser = await playwright.default.chromium.launch({ headless: true, channel: 'chromium' })
   try {
     for (const printCase of printCases) {
       const page = await browser.newPage()
@@ -369,7 +369,7 @@ async function assertActualPaperSurface() {
   const appUrl = viteServer.resolvedUrls?.local?.[0]
   assert.ok(appUrl)
   const playwright = await import('../app/node_modules/playwright/index.js')
-  const browser = await playwright.default.chromium.launch({ headless: true })
+  const browser = await playwright.default.chromium.launch({ headless: true, channel: 'chromium' })
   const signatures = []
   try {
     for (const { analysisCase, lecture } of [

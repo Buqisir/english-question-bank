@@ -1282,7 +1282,7 @@ async function assertPaperBrowseSelectionModes() {
   const appUrl = viteServer.resolvedUrls?.local?.[0]
   assert.ok(appUrl)
   const playwright = await import('../app/node_modules/playwright/index.js')
-  const browser = await playwright.default.chromium.launch({ headless: true })
+  const browser = await playwright.default.chromium.launch({ headless: true, channel: 'chromium' })
 
   async function openPaperBrowse(asset, consumption) {
     const page = await browser.newPage({

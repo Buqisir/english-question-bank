@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { spawnSync } from 'node:child_process'
-import { existsSync, readFileSync } from 'node:fs'
+import { existsSync, readFileSync, readdirSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -34,6 +34,8 @@ for (const relPath of [
 }
 
 const appPackage = JSON.parse(read('app/package.json'))
+const serverPackage = JSON.parse(read('server/package.json'))
+const serverLock = JSON.parse(read('server/package-lock.json'))
 assert(
   'app exposes the stable verify entrypoint',
   appPackage.scripts?.['verify:all'] === 'node ../scripts/verify-ci.mjs',
@@ -46,6 +48,14 @@ assert(
   'app exposes the Paper seam verify entrypoint',
   appPackage.scripts?.['verify:paper'] === 'node ../scripts/verify-ci.mjs --pack paper',
 )
+assert('app pins Playwright exactly', appPackage.devDependencies?.playwright === '1.60.0')
+assert('server pins playwright-core to the same version', serverPackage.dependencies?.['playwright-core'] === appPackage.devDependencies?.playwright)
+assert(
+  'Vivliostyle reuses the pinned playwright-core authority',
+  serverPackage.overrides?.['@vivliostyle/cli']?.['playwright-core'] === appPackage.devDependencies?.playwright &&
+    serverLock.packages?.['node_modules/playwright-core']?.version === appPackage.devDependencies?.playwright &&
+    !serverLock.packages?.['node_modules/@vivliostyle/cli/node_modules/playwright-core'],
+)
 
 for (const relPath of ['.github/workflows/verify.yml']) {
   const workflow = read(relPath)
@@ -55,7 +65,47 @@ for (const relPath of ['.github/workflows/verify.yml']) {
     workflow.includes('npm ci') && workflow.includes('server'),
   )
   assert(`${relPath} runs verify:all`, workflow.includes('pnpm run verify:all'))
+  assert(
+    `${relPath} installs one full Chromium per job`,
+    (workflow.match(/playwright install --with-deps --no-shell chromium/g) ?? []).length === 2 &&
+      !workflow.includes('playwright-core install'),
+  )
 }
+
+function sourceFiles(relDir) {
+  const files = []
+  const visit = (relPath) => {
+    for (const entry of readdirSync(path.join(rootDir, relPath), { withFileTypes: true })) {
+      if (entry.name === 'node_modules' || entry.name === 'dist') continue
+      const child = path.join(relPath, entry.name)
+      if (entry.isDirectory()) visit(child)
+      else if (/\.(?:js|mjs|ts|tsx)$/.test(entry.name)) files.push(child)
+    }
+  }
+  visit(relDir)
+  return files
+}
+
+const unpinnedChromiumLaunches = []
+let chromiumLaunchCount = 0
+for (const relPath of ['scripts', 'server', 'app/src'].flatMap(sourceFiles)) {
+  const source = read(relPath)
+  for (const match of source.matchAll(/chromium\.launch\(\{/g)) {
+    chromiumLaunchCount += 1
+    const callEnd = source.indexOf('})', match.index)
+    const call = callEnd === -1 ? '' : source.slice(match.index, callEnd + 2)
+    if (!/channel:\s*['"]chromium['"]/.test(call)) {
+      const line = source.slice(0, match.index).split('\n').length
+      unpinnedChromiumLaunches.push(`${relPath}:${line}`)
+    }
+  }
+}
+assert('browser-backed checks have launch coverage', chromiumLaunchCount > 0)
+assert(
+  'every direct browser launch selects the pinned full Chromium',
+  unpinnedChromiumLaunches.length === 0,
+  unpinnedChromiumLaunches.join('\n'),
+)
 
 const registryResult = spawnSync(
   process.execPath,
@@ -103,15 +153,15 @@ assert(
   undocumentedScripts.join('\n'),
 )
 
-function routeFor(changedFile) {
+function routeFor(...changedFiles) {
   const result = spawnSync(process.execPath, [
     'scripts/verify-ci.mjs',
     '--plan-json',
-    '--changed-file',
-    changedFile,
+    ...changedFiles.flatMap((changedFile) => ['--changed-file', changedFile]),
   ], { cwd: rootDir, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] })
+  const label = changedFiles.join(' + ')
   assert(
-    `verify route plans ${changedFile}`,
+    `verify route plans ${label}`,
     result.status === 0,
     result.stderr || result.stdout,
   )
@@ -119,13 +169,14 @@ function routeFor(changedFile) {
   try {
     return JSON.parse(result.stdout)
   } catch (error) {
-    assert(`verify route for ${changedFile} is valid JSON`, false, String(error))
+    assert(`verify route for ${label} is valid JSON`, false, String(error))
     return null
   }
 }
 
 for (const [changedFile, expectedRisk, expectedPack] of [
-  ['app/src/shared-ui/Button.tsx', 'ui-micro', 'ui'],
+  ['app/src/shared-ui/tokens.css', 'ui-micro', 'ui'],
+  ['app/src/shared-ui/Button.tsx', 'ordinary-local-feature', 'feature'],
   ['app/public/paper-assets/paper-new/latest/paper-asset.json', 'known-shape-paper-data', 'paper-data'],
   ['server/services/questionBankSteward.mjs', 'ordinary-local-feature', 'feature'],
   ['server/print-renderer.mjs', 'shared-renderer-contract', 'paper'],
@@ -140,6 +191,52 @@ for (const [changedFile, expectedRisk, expectedPack] of [
     JSON.stringify(plan),
   )
 }
+
+const mixedHighRiskPlan = routeFor(
+  'server/auth/sessionStore.mjs',
+  'server/print-renderer.mjs',
+)
+if (mixedHighRiskPlan) {
+  assert(
+    'mixed security and Paper changes fall back to all',
+    mixedHighRiskPlan.risk === 'mixed-high-risk-fallback' && mixedHighRiskPlan.pack === 'all',
+    JSON.stringify(mixedHighRiskPlan),
+  )
+}
+
+const mixedUiPlan = routeFor(
+  'app/src/shared-ui/tokens.css',
+  'app/src/shared-ui/Button.tsx',
+)
+if (mixedUiPlan) {
+  assert(
+    'CSS plus frontend behavior promotes to feature',
+    mixedUiPlan.risk === 'ordinary-local-feature' && mixedUiPlan.pack === 'feature',
+    JSON.stringify(mixedUiPlan),
+  )
+}
+
+const missingBaseResult = spawnSync(process.execPath, [
+  'scripts/verify-ci.mjs',
+  '--plan-json',
+  '--changed',
+  '--base-ref',
+  'refs/heads/definitely-missing-verification-base',
+], { cwd: rootDir, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] })
+let missingBasePlan = null
+try {
+  missingBasePlan = JSON.parse(missingBaseResult.stdout)
+} catch {
+  // The assertions below report the raw output.
+}
+assert(
+  'missing Git base fails closed to the full pack',
+  missingBaseResult.status === 0 &&
+    missingBasePlan?.risk === 'git-diff-fallback' &&
+    missingBasePlan?.pack === 'all' &&
+    typeof missingBasePlan?.detectionError === 'string',
+  missingBaseResult.stderr || missingBaseResult.stdout,
+)
 
 const indexCss = read('app/src/index.css')
 const tokensCss = read('app/src/shared-ui/tokens.css')

@@ -482,7 +482,7 @@ async function verifyActualPaperSurface({
   const appUrl = viteServer.resolvedUrls?.local?.[0]
   assert.ok(appUrl)
   const playwright = await import('../app/node_modules/playwright/index.js')
-  const browser = await playwright.default.chromium.launch({ headless: true })
+  const browser = await playwright.default.chromium.launch({ headless: true, channel: 'chromium' })
   try {
     const firstGroup = projectedGroups(consumption)[0].group
     for (const lecture of [false, true]) {
@@ -587,7 +587,7 @@ async function verifyPrintArtifacts({
 }) {
   const { items, blocks } = canonicalExportPayload(consumption)
   const playwright = await import('../app/node_modules/playwright/index.js')
-  const browser = await playwright.default.chromium.launch({ headless: true })
+  const browser = await playwright.default.chromium.launch({ headless: true, channel: 'chromium' })
   try {
     for (const versionType of ['student', 'teacher']) {
       const html = buildPrintHtml({

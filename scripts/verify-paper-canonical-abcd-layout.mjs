@@ -608,7 +608,7 @@ function hostFontClosure() {
 async function verifyActualArtifacts() {
   const outputRoot = mkdtempSync(path.join(tmpdir(), 'eqb-abcd-artifacts-'))
   const playwright = await import('../app/node_modules/playwright/index.js')
-  const browser = await playwright.default.chromium.launch({ headless: true })
+  const browser = await playwright.default.chromium.launch({ headless: true, channel: 'chromium' })
   const actualFont = hostFontClosure()
   const embeddedFont = readFileSync(actualFont.primaryFile).toString('base64')
   try {

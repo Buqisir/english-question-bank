@@ -13,8 +13,8 @@
 //
 // NOT registered in verify-ci.mjs (see scripts/README.md "Runs in CI?" =
 // no), and — draft-desk-b step5 (SW-B) — deliberately kept OUT of the `e2e`
-// job too, even though that job now installs server's playwright-core
-// Chromium (step4) and does run this script's two siblings
+// job too, even though that job installs the shared full Chromium and runs
+// this script's two siblings
 // (verify-draft-pagination-renderer.mjs / verify-draft-pagination-dom-contract.mjs).
 // The reason is specific to this script, not an environment gap:
 //   - an absolute-latency assertion against a real headless-Chromium render

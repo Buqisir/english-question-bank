@@ -147,7 +147,7 @@ try {
     groupId: sevenChoicesGroupId,
   })
 
-  browser = await chromium.launch({ headless: true })
+  browser = await chromium.launch({ headless: true, channel: 'chromium' })
   const page = await browser.newPage()
 
   for (const viewport of [

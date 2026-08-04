@@ -445,7 +445,7 @@ async function inspectRepresentativeScreen(records) {
   const appUrl = viteServer.resolvedUrls?.local?.[0]
   assert.ok(appUrl, 'Ticket 33 requires a real Vite Screen surface URL')
   const playwright = await import('../app/node_modules/playwright/index.js')
-  const browser = await playwright.default.chromium.launch({ headless: true })
+  const browser = await playwright.default.chromium.launch({ headless: true, channel: 'chromium' })
   const observations = []
   try {
     for (const record of records) {
@@ -497,7 +497,7 @@ async function inspectRepresentativeScreen(records) {
 async function inspectRepresentativePdfs(records) {
   const outputDir = mkdtempSync(path.join(tmpdir(), 'eqb-ticket-33-pdf-'))
   const playwright = await import('../app/node_modules/playwright/index.js')
-  const browser = await playwright.default.chromium.launch({ headless: true })
+  const browser = await playwright.default.chromium.launch({ headless: true, channel: 'chromium' })
   const observations = []
   try {
     for (const record of records) {

@@ -69,20 +69,9 @@ function registerExitHookOnce() {
 
 async function launchBrowser() {
   const { chromium } = require('playwright-core')
-  // `channel: 'chromium'` pins the full Chromium build rather than the
-  // "chromium_headless_shell" split build playwright-core defaults
-  // `headless: true` to since ~1.49 — this production host only has the
-  // full chromium-1194 build + its system libs installed (go-live-record.md
-  // 追记 2026-07-09（二）, for the existing vivliostyle→playwright-core PDF
-  // line), and NOT the headless_shell variant. Reusing the exact build the
-  // production host already has avoids downloading a second browser /
-  // introducing a new system-library surface there. Verified locally:
-  // `headless: true` alone fails with "Executable doesn't exist at
-  // .../chromium_headless_shell-1194/..." on this same playwright-core
-  // version; `channel: 'chromium'` launches the already-cached build. This
-  // build is measurably heavier per-page than the headless_shell build
-  // (see paginationRenderer.mjs latency note) — the resident BrowserContext
-  // below exists specifically to claw back some of that gap.
+  // All browser-backed routes use the same pinned full Chromium. The explicit
+  // channel prevents Playwright from selecting the separately downloaded
+  // headless-shell build.
   const launched = await chromium.launch({ headless: true, channel: 'chromium' })
   launched.on('disconnected', () => {
     if (browser === launched) {

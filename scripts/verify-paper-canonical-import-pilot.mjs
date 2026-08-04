@@ -2870,7 +2870,7 @@ async function assertScreenInstructionWeightAuthorityMutation({
     const appUrl = mutatedVite.resolvedUrls?.local?.[0]
     assert.ok(appUrl, 'mutated Vite exposes the actual PaperBrowse public route')
     const playwright = await import('../app/node_modules/playwright/index.js')
-    browser = await playwright.default.chromium.launch({ headless: true })
+    browser = await playwright.default.chromium.launch({ headless: true, channel: 'chromium' })
     const page = await browser.newPage({ viewport: { width: 1280, height: 900 } })
     const plainUrl = new URL('canonical-consumption-qa.html', appUrl)
     plainUrl.searchParams.set('paperId', paperId)
@@ -2956,7 +2956,7 @@ async function assertPrintInstructionWeightAuthorityMutation({
   let browser = null
   try {
     const playwright = await import('../app/node_modules/playwright/index.js')
-    browser = await playwright.default.chromium.launch({ headless: true })
+    browser = await playwright.default.chromium.launch({ headless: true, channel: 'chromium' })
     const page = await browser.newPage({ viewport: { width: 1280, height: 900 } })
     const observations = {}
     for (const versionType of ['student', 'teacher']) {
@@ -14814,7 +14814,7 @@ async function renderSupportedArtifacts({
     assert.ok(appUrl, 'Vite exposes the real PaperBrowse pilot route')
 
     const playwright = await import('../app/node_modules/playwright/index.js')
-    const browser = await playwright.default.chromium.launch({ headless: true })
+    const browser = await playwright.default.chromium.launch({ headless: true, channel: 'chromium' })
     try {
       const page = await browser.newPage({
         viewport: { width: 1280, height: 900 },

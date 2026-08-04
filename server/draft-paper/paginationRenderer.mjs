@@ -40,21 +40,9 @@
 // module MUST go through renderPaginatedPaper(); do not add a second
 // entry point that calls page.pdf() directly on unpaginated content.
 //
-// Latency budget (plan.md: warm <=1s, cold first-render <=3s). NOTE this
-// module measures SLOWER than spike-gate-dp1.md's ~490ms warm figure — that
-// number was produced against the "chromium_headless_shell" build (the
-// spike script borrowed app/'s `playwright` devDependency's default
-// `headless: true`, which resolves to the lighter headless_shell binary).
-// chromiumPool.mjs deliberately launches with `channel: 'chromium'` (the
-// FULL Chromium build) instead, because that is the ONLY Chromium build
-// production actually has installed (go-live-record.md 追记 2026-07-09
-// （二）, for the existing vivliostyle→playwright-core PDF line) — plan.md
-// step1 explicitly requires following the repo's existing chromium
-// acquisition method rather than starting a new one. The full build is
-// measurably heavier per page (`newPage()` ~140-195ms vs headless_shell's
-// ~45-50ms; `page.pdf()` ~340-395ms vs ~105-125ms, measured locally on the
-// same content). Real numbers on this module, measured locally with the
-// resident-BrowserContext optimization in chromiumPool.mjs: warm-instance
+// Latency budget (plan.md: warm <=1s, cold first-render <=3s). All browser
+// routes now use the same pinned full Chromium; the resident BrowserContext
+// keeps its per-render setup cost bounded. Measured locally: warm-instance
 // single render ~700-800ms end-to-end (still inside the <=1s budget, but
 // with materially less margin than spike-gate-dp1.md implied — flagged as
 // a Should-Watch, not a blocker: production hardware performance is

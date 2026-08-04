@@ -31,13 +31,9 @@
 // mutation response or an actual measured DOM/scroll position, never a
 // source-only assertion.
 //
-// Requires TWO real Chromium binaries (CR SW-3 correction — the original
-// claim "never touches server's playwright-core" was wrong): Phase A/B's own
-// clicks drive `app`'s Playwright Chromium, but Phase B boots server/api.mjs,
-// whose pagination render path spawns server/draft-paper/chromiumPool.mjs
-// (server's playwright-core Chromium). In CI both are provisioned by earlier
-// `e2e` job steps — do not reorder this step above either install step. Same
-// verify-ci.mjs non-registration convention as verify-draft-pagination-*.mjs.
+// Phase A/B clicks and server pagination both use the one pinned full Chromium
+// installed by the e2e job. This stays outside verify-ci.mjs with the other
+// browser-heavy pagination routes.
 import { spawn } from 'node:child_process'
 import { createRequire } from 'node:module'
 import { existsSync, mkdtempSync, readFileSync, rmSync } from 'node:fs'
@@ -436,7 +432,7 @@ function pass(name) {
 }
 
 async function main() {
-  const browser = await chromium.launch({ headless: true })
+  const browser = await chromium.launch({ headless: true, channel: 'chromium' })
   try {
     await runPhaseA(browser)
     await runPhaseB(browser)

@@ -11,6 +11,11 @@
     "busboy": "^1.6.0",
     "mammoth": "^1.12.0",
     "pagedjs": "^0.4.3",
-    "playwright-core": "^1.56.1"
+    "playwright-core": "1.60.0"
+  },
+  "overrides": {
+    "@vivliostyle/cli": {
+      "playwright-core": "1.60.0"
+    }
   }
 }

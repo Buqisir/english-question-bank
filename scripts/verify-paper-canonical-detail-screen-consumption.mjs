@@ -84,7 +84,7 @@ await viteServer.listen()
 const appUrl = viteServer.resolvedUrls?.local?.[0]
 assert.ok(appUrl, 'Vite must expose the public detail Screen seam')
 const playwright = await import('../app/node_modules/playwright/index.js')
-const browser = await playwright.default.chromium.launch({ headless: true })
+const browser = await playwright.default.chromium.launch({ headless: true, channel: 'chromium' })
 
 async function openDetail({ groupId, response, rawMirror }) {
   const page = await browser.newPage()

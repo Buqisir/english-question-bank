@@ -56,12 +56,8 @@ jobs:
           sudo apt-get install --yes ffmpeg poppler-utils libreoffice-writer
 
       - name: Install verification Chromium
-        run: pnpm exec playwright install --with-deps chromium
+        run: pnpm exec playwright install --with-deps --no-shell chromium
         working-directory: app
-
-      - name: Install server pagination Chromium
-        run: npx playwright-core install chromium
-        working-directory: server
 
       - name: Run app build and core verify scripts
         run: pnpm run verify:all
@@ -95,23 +91,16 @@ jobs:
         run: npm ci
         working-directory: server
 
-      - name: Install Playwright Chromium
-        run: pnpm exec playwright install --with-deps chromium
+      # app/playwright, server/playwright-core, and Vivliostyle are pinned to
+      # the same Playwright release, so one full Chromium install serves every
+      # browser-backed verification route in this job.
+      - name: Install verification Chromium
+        run: pnpm exec playwright install --with-deps --no-shell chromium
         working-directory: app
 
-      # draft-desk-b step4: the draft-paper pagination/PDF pipeline
-      # (server/draft-paper/chromiumPool.mjs) launches through server/'s own
-      # playwright-core with channel 'chromium'. The app-side install above
-      # provisions app's pinned browser revision, which playwright-core does
-      # not necessarily share — the smoke's PDF-export step needs the revision
-      # server/'s playwright-core resolves.
-      - name: Install server pagination Chromium (playwright-core)
-        run: npx playwright-core install --with-deps chromium
-        working-directory: server
-
-      # draft-desk-b step5 (SW-B): these two need a real server-side Chromium
-      # (installed above) that the main verify job's `npm ci` never
-      # provisions — the e2e job is the only place that cost is already paid.
+      # draft-desk-b step5 (SW-B): these routes use the full Chromium installed
+      # above. The absolute-latency verifier remains local-only because shared
+      # runner load would make its timing threshold noisy.
       # verify-draft-pagination-perf.mjs deliberately stays out of CI: its
       # absolute-latency assertions are exactly the "易抖动" case plan.md's
       # own Verify 要求 flags as CI-exempt on a shared runner (see
@@ -122,10 +111,6 @@ jobs:
       - name: Run draft pagination DOM contract verify
         run: node scripts/verify-draft-pagination-dom-contract.mjs
 
-      # a3-imposition (plan.md Must Do 5): uses app's own Playwright browser
-      # (installed above), not server's playwright-core — doesn't need the
-      # "Install server pagination Chromium" step at all, but sits after it
-      # anyway to keep this job's Chromium-dependent steps grouped together.
       - name: Run a3 imposition verify
         run: node scripts/verify-a3-imposition.mjs
 

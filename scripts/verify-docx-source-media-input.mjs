@@ -356,7 +356,7 @@ try {
     },
   )
   const { chromium } = requireFromApp('playwright')
-  const browser = await chromium.launch({ headless: true })
+  const browser = await chromium.launch({ headless: true, channel: 'chromium' })
   const page = await browser.newPage()
   const figureBytesById = new Map()
   try {
@@ -432,7 +432,7 @@ try {
         onFocusIntent() {},
       }),
     )
-    const screenBrowser = await chromium.launch({ headless: true })
+    const screenBrowser = await chromium.launch({ headless: true, channel: 'chromium' })
     let screenImages
     try {
       const screenPage = await screenBrowser.newPage()

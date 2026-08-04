@@ -931,7 +931,7 @@ async function assertActualPaperSurfaceArtifacts() {
   const appUrl = viteServer.resolvedUrls?.local?.[0]
   assert.ok(appUrl)
   const playwright = await import('../app/node_modules/playwright/index.js')
-  const browser = await playwright.default.chromium.launch({ headless: true })
+  const browser = await playwright.default.chromium.launch({ headless: true, channel: 'chromium' })
   try {
     for (const { label, consumption } of [
       { label: 'absent', consumption: absentScreenConsumption },

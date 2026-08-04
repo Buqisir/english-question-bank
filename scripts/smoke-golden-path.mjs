@@ -399,7 +399,7 @@ async function main() {
   await waitForHttp(`http://127.0.0.1:${vitePort}/`)
   pass('Vite app started')
 
-  const browser = await chromium.launch({ headless: true })
+  const browser = await chromium.launch({ headless: true, channel: 'chromium' })
   try {
     const { draftPaperId } = await runOwnerFlow(browser)
     await runMemberFlow(browser, draftPaperId)

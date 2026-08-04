@@ -267,7 +267,7 @@ async function assertActualPaperBrowseBoundary({
   assert.ok(appUrl, 'Vite exposes the PaperBrowse QA mount')
 
   const playwright = await import('../app/node_modules/playwright/index.js')
-  const browser = await playwright.default.chromium.launch({ headless: true })
+  const browser = await playwright.default.chromium.launch({ headless: true, channel: 'chromium' })
   try {
     const page = await browser.newPage({ viewport: { width: 1280, height: 900 } })
     let consumption = readyConsumption
@@ -723,7 +723,7 @@ async function assertActualDraftPrintPdfBoundary({
     const pagination = await paginationResponse.json()
     assert.equal(paginationResponse.status, 200, 'real HTTP pagination succeeds')
     const playwright = await import('../app/node_modules/playwright/index.js')
-    const browser = await playwright.default.chromium.launch({ headless: true })
+    const browser = await playwright.default.chromium.launch({ headless: true, channel: 'chromium' })
     try {
       const page = await browser.newPage()
       await page.setContent(pagination.paginatedHtml, { waitUntil: 'load' })
@@ -1385,7 +1385,7 @@ async function assertTicket35CompletePublication({ rootDir }) {
     groupIds: ticket35GroupIds,
   }, async ({ baseUrl, draftPaperId }) => {
     const playwright = await import('../app/node_modules/playwright/index.js')
-    const browser = await playwright.default.chromium.launch({ headless: true })
+    const browser = await playwright.default.chromium.launch({ headless: true, channel: 'chromium' })
     try {
       const page = await browser.newPage()
       const { notice, starters } = ticket35WritingSourceText(paperAsset)
@@ -2148,7 +2148,7 @@ try {
     writeFileSync(printTeacherPath, artifactProof.print.teacher)
 
     const playwright = await import('../app/node_modules/playwright/index.js')
-    const browser = await playwright.default.chromium.launch({ headless: true })
+    const browser = await playwright.default.chromium.launch({ headless: true, channel: 'chromium' })
     try {
       const printPage = await browser.newPage()
       await printPage.goto(new URL(`file://${printStudentPath}`).href)
