@@ -579,6 +579,7 @@ export function createDraftPaperStore({
     canonicalConsumption,
     pageBreakAfterGroupIds,
   ) {
+    if (canonicalConsumption?.composition?.kind === 'draft-paper') return null
     if (!Array.isArray(canonicalConsumption?.visibleStructure)) {
       if (
         Number(canonicalConsumption?.authorityRef?.manifestVersion) >= 30

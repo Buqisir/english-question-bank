@@ -85,6 +85,9 @@ import {
 import {
   assertCanonicalConsumptionVisibleStructure,
 } from '../shared/paper-canonical/visibleStructure.mjs'
+import {
+  canonicalSourceConsumptionForGroup,
+} from './paper-canonical/consumerRuntime.mjs'
 import { resolveGroupFigures } from './figures/paperFigures.mjs'
 
 function renderSectionHeadingText(text) {
@@ -329,17 +332,26 @@ function assertCanonicalGrammarFillSourceBinding({
       && candidate.mode === 'canonical',
   )
   if (!selection) return
+  const groupId = grammarFillRhythm.publicArtifactOracle.grammarFill.groupId
+  if (!items.some((candidate) => candidate.detail.id === groupId)) return
+  const sourceConsumption = canonicalSourceConsumptionForGroup(
+    canonicalConsumption,
+    groupId,
+  )
   const rhythm = grammarFillRhythmForPaperAuthority({
-    paperId: canonicalConsumption.paperId,
-    manifestVersion: canonicalConsumption.authorityRef?.manifestVersion,
+    paperId: sourceConsumption.paperId,
+    manifestVersion: sourceConsumption.authorityRef?.manifestVersion,
   })
   const oracle = rhythm.publicArtifactOracle
-  const groupId = oracle.grammarFill.groupId
-  if (!items.some((candidate) => candidate.detail.id === groupId)) return
+  const sourceSelection = sourceConsumption?.selections?.find(
+    (candidate) =>
+      candidate.familyContractId === 'grammar-fill'
+      && candidate.mode === 'canonical',
+  )
   const requiresBinding =
-    Number(canonicalConsumption.authorityRef?.manifestVersion) >= 20
-    && canonicalConsumption.paperId === oracle.paperId
-    && selection.groupIds.includes(oracle.grammarFill.groupId)
+    Number(sourceConsumption.authorityRef?.manifestVersion) >= 20
+    && sourceConsumption.paperId === oracle.paperId
+    && sourceSelection?.groupIds.includes(oracle.grammarFill.groupId)
   const binding = grammarFillChrome?.sourceBinding
   if (!binding) {
     if (requiresBinding) {
@@ -351,21 +363,21 @@ function assertCanonicalGrammarFillSourceBinding({
   }
   if (
     binding.paperId !== oracle.paperId
-    || binding.sourceAssetVersion !== canonicalConsumption.sourceAssetVersion
+    || binding.sourceAssetVersion !== sourceConsumption.sourceAssetVersion
     || binding.sourceDigests?.paperAsset
       !== `sha256:${oracle.sourceBindings.paperAsset.sha256}`
     || binding.groupId !== groupId
-    || selection.groupIds.length !== 1
-    || selection.groupIds[0] !== groupId
+    || sourceSelection?.groupIds.length !== 1
+    || sourceSelection.groupIds[0] !== groupId
   ) {
     rejectCanonicalGrammarFill(
       'Canonical Grammar Fill public artifact identity disagrees',
     )
   }
-  const occurrence = selection.projectedOccurrences?.find(
+  const occurrence = sourceSelection.projectedOccurrences?.find(
     (candidate) => candidate.groupId === groupId,
   )
-  const occurrenceDigest = selection.projectedOccurrenceDigests?.find(
+  const occurrenceDigest = sourceSelection.projectedOccurrenceDigests?.find(
     (candidate) => candidate.groupId === groupId,
   )?.digest
   const expectedOccurrenceDigest = binding.proofVariantId
@@ -395,7 +407,7 @@ function assertCanonicalGrammarFillSourceBinding({
     )
   }
   const canonicalGroup = projectCanonicalConsumerGroup({
-    consumption: canonicalConsumption,
+    consumption: sourceConsumption,
     familyContractId: 'grammar-fill',
     groupId,
   })
@@ -447,6 +459,48 @@ function assertCanonicalGrammarFillSourceBinding({
       `Canonical Grammar Fill ${teacher ? 'Teacher' : 'Student'} supplements disagree with source-bound answers or analysis`,
     )
   }
+}
+
+function grammarFillRenderMappingForConsumption({ consumption, items }) {
+  const selection = consumption?.selections?.find(
+    (candidate) =>
+      candidate.familyContractId === 'grammar-fill'
+      && candidate.mode === 'canonical',
+  )
+  const groupIds = selection?.groupIds.filter((groupId) =>
+    items.some((item) => item.detail.id === groupId),
+  ) || []
+  if (groupIds.length === 0) {
+    return { rhythm: grammarFillRhythm, ruling: paperBlankRuling.cloze }
+  }
+  const mappings = groupIds.map((groupId) => {
+    const source = canonicalSourceConsumptionForGroup(consumption, groupId)
+    const rhythm = grammarFillRhythmForPaperAuthority({
+      paperId: source.paperId,
+      manifestVersion: source.authorityRef?.manifestVersion,
+    })
+    const requiresBoundRule = source.paperId === 'paper-2026-i'
+      && Number(source.authorityRef?.manifestVersion) >= 43
+    const ruling = requiresBoundRule
+      ? grammarFillBlankRulingForRhythm(rhythm)
+      : paperBlankRuling.cloze
+    const renderKey = JSON.stringify({
+      blankWidthEm: rhythm.blankGeometry.widthEm,
+      promptGapEm: rhythm.promptGeometry.gapEm,
+      numberAlignment: ruling.numberAlignment,
+      printLineWidthPt: ruling.printLineWidthPt,
+      ruleVerticalAlignment: ruling.ruleVerticalAlignment,
+      screenLineWidthPx: ruling.screenLineWidthPx,
+      whiteSpace: ruling.whiteSpace,
+    })
+    return { rhythm, ruling, renderKey }
+  })
+  if (mappings.some(({ renderKey }) => renderKey !== mappings[0].renderKey)) {
+    rejectCanonicalGrammarFill(
+      'Mixed-source Grammar Fill renderer mappings are incompatible',
+    )
+  }
+  return mappings[0]
 }
 
 function renderCanonicalSharedBank(canonicalGroup, {
@@ -858,7 +912,10 @@ export function buildPrintHtml({
 }) {
   if (
     Array.isArray(canonicalConsumption?.visibleStructure)
-    || Number(canonicalConsumption?.authorityRef?.manifestVersion) >= 30
+    || (
+      canonicalConsumption?.composition?.kind !== 'draft-paper'
+      && Number(canonicalConsumption?.authorityRef?.manifestVersion) >= 30
+    )
   ) {
     assertCanonicalConsumptionVisibleStructure(canonicalConsumption)
   }
@@ -874,21 +931,14 @@ export function buildPrintHtml({
       && selection.mode === 'canonical'
       && selection.groupIds.some((groupId) => items.some((item) => item.detail.id === groupId)),
   )
-  const activeGrammarFillRhythm = hasCanonicalGrammarFill
-    ? grammarFillRhythmForPaperAuthority({
-        paperId: canonicalConsumption.paperId,
-        manifestVersion: canonicalConsumption.authorityRef?.manifestVersion,
+  const grammarFillRenderMapping = hasCanonicalGrammarFill
+    ? grammarFillRenderMappingForConsumption({
+        consumption: canonicalConsumption,
+        items,
       })
-    : grammarFillRhythm
-  const requiresBoundGrammarFillRule = hasCanonicalGrammarFill
-    && canonicalConsumption.paperId === 'paper-2026-i'
-    && Number(canonicalConsumption.authorityRef?.manifestVersion) >= 43
-  // v43 remains readable as immutable history, but its v6 lift is no longer a
-  // valid shared-rule mapping. It must fail closed rather than silently fall
-  // through to the unversioned blank ruling. v44 binds the replacement v7.
-  const sharedInlineBlankRuling = requiresBoundGrammarFillRule
-    ? grammarFillBlankRulingForRhythm(activeGrammarFillRhythm)
-    : paperBlankRuling.cloze
+    : { rhythm: grammarFillRhythm, ruling: paperBlankRuling.cloze }
+  const activeGrammarFillRhythm = grammarFillRenderMapping.rhythm
+  const sharedInlineBlankRuling = grammarFillRenderMapping.ruling
   if (
     (grammarFillGeometryVariantId == null)
       !== (grammarFillGeometrySurface == null)
@@ -1300,6 +1350,7 @@ export function buildPrintHtml({
     && blockIndex < firstReadingGroupBlockIndex
   const canonicalWritingChromeOwnsDocument =
     canonicalConsumption !== null
+    && canonicalConsumption?.composition?.kind !== 'draft-paper'
     && canonicalWritingChromeOwnsRenderedDocument({
       consumption: canonicalConsumption,
       renderedGroupIds,
@@ -1321,9 +1372,13 @@ export function buildPrintHtml({
 
   function getCanonicalGroup(groupId, detail) {
     if (canonicalConsumption) {
+      const sourceConsumption = canonicalSourceConsumptionForGroup(
+        canonicalConsumption,
+        groupId,
+      )
       const selectedFamilyContractId =
         selectedFamilyContractIdForGroup({
-          consumption: canonicalConsumption,
+          consumption: sourceConsumption,
           groupId,
         })
       const familyContractId = canonicalFamilyForPrintDetail(
@@ -1339,12 +1394,12 @@ export function buildPrintHtml({
         return null
       }
       const selection = selectConsumerGroupMode({
-        consumption: canonicalConsumption,
+        consumption: sourceConsumption,
         familyContractId,
         groupId,
       })
       const canonicalGroup = projectCanonicalConsumerGroup({
-        consumption: canonicalConsumption,
+        consumption: sourceConsumption,
         familyContractId,
         groupId,
       })
@@ -1359,7 +1414,7 @@ export function buildPrintHtml({
         diagnostic: {
           status: 'ready',
           source: 'whole-paper-consumption',
-          paperId: canonicalConsumption.paperId,
+          paperId: sourceConsumption.paperId,
           groupId,
         },
       }
@@ -1574,7 +1629,10 @@ export function buildPrintHtml({
           canonicalGroup
           && ['writing', 'continuation'].includes(canonicalGroup.groupType)
             ? projectCanonicalWritingChrome({
-                consumption: canonicalConsumption,
+                consumption: canonicalSourceConsumptionForGroup(
+                  canonicalConsumption,
+                  canonicalGroup.groupId,
+                ),
                 groupId: canonicalGroup.groupId,
                 renderedGroupIds,
               })

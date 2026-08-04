@@ -53,6 +53,7 @@ import {
   loadCanonicalGrammarFillPrintChrome,
 } from '../server/paper-canonical/grammarFillPrintSourceBinding.mjs'
 import { createExportImplementation } from '../server/exports/exportImplementation.mjs'
+import { createDraftPaperStore } from '../server/draft-paper/draftPaperStore.mjs'
 import { buildPrintHtml } from '../server/print-renderer.mjs'
 import { makeClozeGrammarCanonicalReferenceFixture } from '../test-fixtures/paper-canonical/clozeGrammarReferenceFixture.mjs'
 import {
@@ -826,6 +827,154 @@ async function assertWritingDraftGateDoesNotRequireQuestions({
 const ticket35PublicationStore = path.resolve(
   'test-fixtures/paper-canonical/publications/ticket-32-remaining-v1/store',
 )
+
+function mixedDraftDetail(consumption, groupId) {
+  const familyContractId = consumption.selections.find(
+    (selection) => selection.groupIds.includes(groupId),
+  )?.familyContractId
+  assert.ok(familyContractId, `${groupId} has one canonical family`)
+  const group = projectCanonicalConsumerGroup({
+    consumption,
+    familyContractId,
+    groupId,
+  })
+  return {
+    id: groupId,
+    paperId: consumption.paperId,
+    title: groupId,
+    source: consumption.paperId,
+    groupType: group.groupType === 'grammarFill'
+      ? 'grammar_cloze'
+      : group.groupType,
+    defaultScore: 1,
+    passage: { title: groupId, materialText: '', summary: '' },
+    questions: group.questions.map((question) => ({
+      id: question.questionId,
+      questionNo: String(question.questionNo),
+      stem: question.stem || '',
+      answer: '',
+      explanation: '',
+      note: '',
+      options: (question.options || []).map((option) => ({
+        label: option.label,
+        content: option.text,
+      })),
+    })),
+  }
+}
+
+function assertMixedSourceDraftCanonicalComposition() {
+  const mixedDb = new DatabaseSync(
+    path.join(ticket35PublicationStore, 'publication.sqlite'),
+    { readOnly: true },
+  )
+  try {
+    const runtime = createCanonicalConsumerRuntime({
+      rootDir: ticket35PublicationStore,
+      db: mixedDb,
+    })
+    const sourceGroups = [
+      ['paper-2023-i', 'group-2023-i-grammar-fill'],
+      ['paper-2026-i', 'group-2026-i-grammar-fill'],
+    ]
+    const details = new Map(sourceGroups.map(([paperId, groupId]) => {
+      const consumption = runtime.load({ paperId, consumerId: 'print_pdf' })
+      return [groupId, mixedDraftDetail(consumption, groupId)]
+    }))
+    const publicGrammarConsumption = runtime.load({
+      paperId: 'paper-2026-i',
+      consumerId: 'print_pdf',
+    })
+    const publicGrammarDetail = details.get('group-2026-i-grammar-fill')
+    const publicGrammarChrome = loadCanonicalGrammarFillPrintChrome({
+      exportItems: [{ detail: publicGrammarDetail }],
+      canonicalConsumption: publicGrammarConsumption,
+      paperAssetsDir: ticket35PublicationStore,
+      versionType: 'student',
+    })
+    for (const supplement of publicGrammarChrome.sourceBinding.questionSupplements) {
+      const question = publicGrammarDetail.questions.find(
+        (candidate) => candidate.id === supplement.questionId,
+      )
+      question.answer = supplement.answer
+      question.explanation = supplement.explanation || ''
+    }
+    const mixedExportItems = sourceGroups.map(([, groupId]) => ({
+      detail: details.get(groupId),
+    }))
+    const mixedConsumption = runtime.resolveForItems({
+      consumerId: 'print_pdf',
+      items: mixedExportItems,
+    })
+    assert.equal(mixedConsumption.composition.kind, 'draft-paper')
+    assert.equal(mixedConsumption.paperId, undefined)
+    assert.equal(mixedConsumption.authorityRef, undefined)
+    assert.deepEqual(
+      mixedConsumption.composition.sources.map((source) => ({
+        paperId: source.paperId,
+        groupIds: source.groupIds,
+      })),
+      sourceGroups.map(([paperId, groupId]) => ({
+        paperId,
+        groupIds: [groupId],
+      })),
+    )
+    for (const source of mixedConsumption.composition.sources) {
+      const original = runtime.load({
+        paperId: source.paperId,
+        consumerId: 'print_pdf',
+      })
+      assert.equal(source.publicationDigest, original.publicationDigest)
+      assert.equal(source.sourceAssetDigest, original.sourceAssetDigest)
+      assert.deepEqual(source.authorityRef, original.authorityRef)
+    }
+    const changedSecondarySource = structuredClone(mixedConsumption)
+    changedSecondarySource.composition.sources[0].publicationDigest =
+      'sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff'
+    assert.notEqual(
+      sha256(JSON.stringify(mixedConsumption)),
+      sha256(JSON.stringify(changedSecondarySource)),
+      'a secondary Publication digest invalidates the Draft pagination signature',
+    )
+    const store = createDraftPaperStore({
+      exportDir: path.join(tmpdir(), 'eqb-mixed-source-draft-export'),
+      getQuestionGroupDetail: (groupId) => details.get(groupId) || null,
+      groupTypeLabels: { grammar_cloze: '语法填空' },
+      isGroupPrintReady: () => ({ ok: true, reason: null }),
+      openDatabase: () => {
+        throw new Error('mixed-source render fixture does not open the bank DB')
+      },
+      paperAssetsDir: ticket35PublicationStore,
+      resolveCanonicalConsumption: runtime.resolveForItems,
+      rootDir,
+      selectQuestionGroupCards: () => [],
+    })
+    const draftPaper = {
+      id: 'draft-paper-mixed-source',
+      title: 'Mixed source draft',
+      items: sourceGroups.map(([, groupId], index) => ({
+        id: `item-${index + 1}`,
+        groupId,
+        sourcePaperId: details.get(groupId).paperId,
+        orderIndex: index + 1,
+        pageBreakBefore: false,
+        groupType: 'grammar_cloze',
+        defaultScore: 1,
+        questionGroup: { groupType: 'grammar_cloze', defaultScore: 1 },
+      })),
+    }
+    const html = store.buildDraftPrintHtml(draftPaper)
+    for (const [, groupId] of sourceGroups) {
+      assert.match(
+        html,
+        new RegExp(`data-canonical-group-id="${groupId}"`),
+        `mixed-source Draft Paper renders ${groupId} canonically`,
+      )
+    }
+  } finally {
+    mixedDb.close()
+  }
+}
 const ticket35GroupIds = [
   'group-2026-i-reading-a',
   'group-2026-i-reading-b',
@@ -2115,6 +2264,7 @@ try {
     canonicalReference,
   })
   await assertTicket35CompletePublication({ rootDir })
+  assertMixedSourceDraftCanonicalComposition()
   legacyDb.close()
   const mismatchedBlankJoin = structuredClone(complete)
   const clozeOccurrence = mismatchedBlankJoin.selections

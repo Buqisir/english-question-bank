@@ -2,8 +2,12 @@ import { createHash } from 'node:crypto'
 import { existsSync, readFileSync } from 'node:fs'
 import path from 'node:path'
 
-import { grammarFillRhythmForPaperAuthority } from '../../shared/paper-canonical/grammarFillRhythm.mjs'
+import {
+  grammarFillRhythm,
+  grammarFillRhythmForPaperAuthority,
+} from '../../shared/paper-canonical/grammarFillRhythm.mjs'
 import { immutablePublicationSourceForConsumption } from './publication.mjs'
+import { canonicalSourceConsumptionForPaper } from './consumerRuntime.mjs'
 import { loadCanonicalSourceAssetRepresentation } from './sourceAssetRepresentation.mjs'
 
 const docxMediaType =
@@ -55,29 +59,56 @@ export function loadCanonicalGrammarFillPrintChrome({
       && candidate.mode === 'canonical',
   )
   if (!selection) return null
-  if (selection.groupIds.length !== 1 || !paperAssetsDir) {
+  const isDraftComposition =
+    canonicalConsumption?.composition?.kind === 'draft-paper'
+  const publicGroupIdentity = grammarFillRhythm.publicArtifactOracle
+  const publicGroupId = publicGroupIdentity.grammarFill.groupId
+  const hasPublicGroup = selection.groupIds.includes(publicGroupId)
+    && exportItems.some((candidate) =>
+      candidate.detail.id === publicGroupId
+      && candidate.detail.paperId === publicGroupIdentity.paperId,
+    )
+  const sourceGroupIds = isDraftComposition
+    ? hasPublicGroup
+      ? [publicGroupId]
+      : selection.groupIds.length === 1
+        ? selection.groupIds
+        : []
+    : selection.groupIds
+  if (isDraftComposition && sourceGroupIds.length === 0) return null
+  if (sourceGroupIds.length !== 1 || !paperAssetsDir) {
     reject('Canonical Grammar Fill chrome source identity is unavailable')
   }
-  const groupId = selection.groupIds[0]
+  const groupId = sourceGroupIds[0]
   const item = exportItems.find((candidate) => candidate.detail.id === groupId)
-  const itemPaperId = item?.detail.paperId
-  const sourcePaperId = canonicalConsumption?.paperId
+  const sourcePaperId = item?.detail.paperId
   if (typeof sourcePaperId !== 'string' || sourcePaperId.length === 0) {
     reject('Canonical Grammar Fill chrome paper identity is unavailable')
   }
-  const publicationSource = immutablePublicationSourceForConsumption(
+  const sourceConsumption = canonicalSourceConsumptionForPaper(
     canonicalConsumption,
+    sourcePaperId,
+  )
+  if (!sourceConsumption) {
+    reject('Canonical Grammar Fill chrome source identity is unavailable')
+  }
+  const sourceSelection = sourceConsumption.selections.find(
+    (candidate) =>
+      candidate.familyContractId === 'grammar-fill'
+      && candidate.mode === 'canonical',
+  )
+  const publicationSource = immutablePublicationSourceForConsumption(
+    sourceConsumption,
   )
   if (
     !publicationSource
     || publicationSource.paperId !== sourcePaperId
-    || canonicalConsumption.paperId !== sourcePaperId
-    || (typeof itemPaperId === 'string' && itemPaperId.length > 0 && itemPaperId !== sourcePaperId)
+    || sourceConsumption.paperId !== sourcePaperId
     || publicationSource.sourceAssetVersion
-      !== canonicalConsumption.sourceAssetVersion
+      !== sourceConsumption.sourceAssetVersion
     || publicationSource.publicationDigest
-      !== canonicalConsumption.publicationDigest
-    || publicationSource.sha256 !== canonicalConsumption.sourceAssetDigest
+      !== sourceConsumption.publicationDigest
+    || publicationSource.sha256 !== sourceConsumption.sourceAssetDigest
   ) {
     reject('Canonical Grammar Fill immutable Publication source is unavailable')
   }
@@ -285,7 +316,7 @@ export function loadCanonicalGrammarFillPrintChrome({
       'official answers',
     )
     const projectedOccurrenceDigest =
-      selection.projectedOccurrenceDigests?.find(
+      sourceSelection?.projectedOccurrenceDigests?.find(
         (candidate) => candidate.groupId === groupId,
       )?.digest
     if (
@@ -294,7 +325,7 @@ export function loadCanonicalGrammarFillPrintChrome({
     ) {
       reject('Canonical Grammar Fill projected occurrence source digest disagrees')
     }
-    const projectedOccurrence = selection.projectedOccurrences?.find(
+    const projectedOccurrence = sourceSelection?.projectedOccurrences?.find(
       (candidate) =>
         candidate?.kind === 'group' && candidate.groupId === groupId,
     )

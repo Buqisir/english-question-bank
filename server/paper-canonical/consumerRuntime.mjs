@@ -17,6 +17,18 @@ const FAMILY_BY_GROUP_TYPE = new Map([
   ['reading', 'reading'],
 ])
 const SAFE_PAPER_ID = /^[a-z0-9][a-z0-9._-]{0,127}$/
+const sourceConsumptionsByComposite = new WeakMap()
+const sourceConsumptionsByGroup = new WeakMap()
+
+function freezeTree(value) {
+  if (Array.isArray(value)) return Object.freeze(value.map(freezeTree))
+  if (value && typeof value === 'object') {
+    return Object.freeze(Object.fromEntries(
+      Object.entries(value).map(([key, child]) => [key, freezeTree(child)]),
+    ))
+  }
+  return value
+}
 
 function rejected(result) {
   const error = new Error(
@@ -30,6 +42,122 @@ function rejected(result) {
 function isActiveCanonicalItem(item) {
   return FAMILY_BY_GROUP_TYPE.has(item?.detail?.groupType)
     || ['writing', 'continuation'].includes(item?.detail?.groupType)
+}
+
+export function canonicalSourceConsumptionForGroup(consumption, groupId) {
+  return sourceConsumptionsByGroup.get(consumption)?.get(groupId)
+    || consumption
+}
+
+export function canonicalSourceConsumptionForPaper(consumption, paperId) {
+  const sourceConsumptions = sourceConsumptionsByComposite.get(consumption)
+  if (sourceConsumptions) return sourceConsumptions.get(paperId) || null
+  return consumption?.paperId === paperId ? consumption : null
+}
+
+function composeConsumptions({ candidates, consumptionsByPaperId }) {
+  const selectionsByFamily = new Map()
+  const consumptionsByGroupId = new Map()
+  const mediaIds = new Set()
+
+  for (const item of candidates) {
+    const groupId = item.detail.id
+    if (consumptionsByGroupId.has(groupId)) throw rejected({
+      disposition: 'incompatible',
+      diagnostics: [{ code: 'CANONICAL_CONSUMER_GROUP_AMBIGUOUS' }],
+    })
+    const sourceConsumption = consumptionsByPaperId.get(item.detail.paperId)
+    const familyContractId = selectedFamilyContractIdForGroup({
+      consumption: sourceConsumption,
+      groupId,
+    })
+    const sourceSelection = selectConsumerGroupMode({
+      consumption: sourceConsumption,
+      familyContractId,
+      groupId,
+    })
+    const targetSelection = selectionsByFamily.get(familyContractId) || {
+      mode: 'canonical',
+      familyContractId,
+      groupIds: [],
+      projectedOccurrences: [],
+      projectedOccurrenceDigests: [],
+    }
+    const occurrence = sourceSelection.projectedOccurrences?.find(
+      (candidate) => candidate.groupId === groupId,
+    )
+    const occurrenceDigest = sourceSelection.projectedOccurrenceDigests?.find(
+      (candidate) => candidate.groupId === groupId,
+    )
+    targetSelection.groupIds.push(groupId)
+    if (occurrence) {
+      targetSelection.projectedOccurrences.push(structuredClone(occurrence))
+      for (const media of occurrence.media || []) mediaIds.add(media.mediaId)
+    }
+    if (occurrenceDigest) {
+      targetSelection.projectedOccurrenceDigests.push(
+        structuredClone(occurrenceDigest),
+      )
+    }
+    selectionsByFamily.set(familyContractId, targetSelection)
+    consumptionsByGroupId.set(groupId, sourceConsumption)
+  }
+
+  const mediaById = new Map()
+  for (const sourceConsumption of consumptionsByPaperId.values()) {
+    for (const artifact of sourceConsumption.mediaArtifacts || []) {
+      if (!mediaIds.has(artifact.mediaId)) continue
+      const existing = mediaById.get(artifact.mediaId)
+      if (existing && JSON.stringify(existing) !== JSON.stringify(artifact)) {
+        throw rejected({
+          disposition: 'incompatible',
+          diagnostics: [{ code: 'CANONICAL_CONSUMER_MEDIA_AMBIGUOUS' }],
+        })
+      }
+      mediaById.set(artifact.mediaId, structuredClone(artifact))
+    }
+  }
+  const selections = [...selectionsByFamily.values()].map((selection) => ({
+    ...selection,
+    ...(
+      selection.projectedOccurrences.length === selection.groupIds.length
+        ? {}
+        : { projectedOccurrences: undefined }
+    ),
+    ...(
+      selection.projectedOccurrenceDigests.length > 0
+        ? {}
+        : { projectedOccurrenceDigests: undefined }
+    ),
+  }))
+  const sourceBindings = [...consumptionsByPaperId.entries()]
+    .sort(([leftPaperId], [rightPaperId]) =>
+      leftPaperId.localeCompare(rightPaperId),
+    )
+    .map(([paperId, consumption]) => ({
+      paperId,
+      sourceAssetVersion: consumption.sourceAssetVersion,
+      publicationDigest: consumption.publicationDigest,
+      consumerContractRef: consumption.consumerContractRef,
+      sourceAssetDigest: consumption.sourceAssetDigest,
+      authorityRef: consumption.authorityRef,
+      groupIds: candidates
+        .filter((item) => item.detail.paperId === paperId)
+        .map((item) => item.detail.id),
+    }))
+  const composite = freezeTree({
+    disposition: 'ready',
+    selections,
+    mediaArtifacts: [...mediaById.values()],
+    composition: {
+      kind: 'draft-paper',
+      sources: sourceBindings,
+    },
+    diagnostics: [],
+  })
+  sourceConsumptionsByComposite.set(composite, consumptionsByPaperId)
+  sourceConsumptionsByGroup.set(composite, consumptionsByGroupId)
+  return composite
 }
 
 export function createCanonicalConsumerRuntime({ rootDir, db }) {
@@ -62,21 +190,24 @@ export function createCanonicalConsumerRuntime({ rootDir, db }) {
   function resolveForItems({ consumerId, items }) {
     const candidates = items.filter(isActiveCanonicalItem)
     if (candidates.length === 0) return null
-    const paperIds = new Set(
-      candidates.map((item) => item.detail?.paperId).filter(Boolean),
-    )
-    if (
-      paperIds.size !== 1
-      || candidates.some((item) => !item.detail?.paperId)
-    ) throw rejected({
+    if (candidates.some(
+      (item) =>
+        typeof item.detail?.paperId !== 'string'
+        || !SAFE_PAPER_ID.test(item.detail.paperId)
+        || !item.detail?.id,
+    )) throw rejected({
       disposition: 'incompatible',
       diagnostics: [{ code: 'CANONICAL_SOURCE_PAPER_ID_UNAVAILABLE' }],
     })
-    const consumption = load({
-      paperId: [...paperIds][0],
-      consumerId,
-    })
+    const paperIds = [...new Set(
+      candidates.map((item) => item.detail.paperId),
+    )]
+    const consumptionsByPaperId = new Map(paperIds.map((paperId) => [
+      paperId,
+      load({ paperId, consumerId }),
+    ]))
     for (const item of candidates) {
+      const consumption = consumptionsByPaperId.get(item.detail.paperId)
       const selectedFamilyContractId = selectedFamilyContractIdForGroup({
         consumption,
         groupId: item.detail.id,
@@ -107,7 +238,8 @@ export function createCanonicalConsumerRuntime({ rootDir, db }) {
         groupId: item.detail.id,
       })
     }
-    return consumption
+    if (paperIds.length === 1) return consumptionsByPaperId.get(paperIds[0])
+    return composeConsumptions({ candidates, consumptionsByPaperId })
   }
 
   return Object.freeze({ load, resolveForItems })
