@@ -97,12 +97,25 @@ Only `app/public/paper-assets/<bundle>/latest/**` (parsed JSON) ships in git.
 
 ## 7. Install dependencies and build
 
+Install Chromium's Linux dependencies once with elevated privileges. Run the
+repository installs, browser download, smoke, and build as `eqb`, matching the
+systemd service account and its user-scoped Playwright browser cache.
+
 ```
+sudo corepack enable
+sudo -iu eqb
 cd /opt/eqb/english-question-bank
-corepack enable
 pnpm -C app install --frozen-lockfile
 npm --prefix server ci
+exit
+cd /opt/eqb/english-question-bank
+sudo pnpm -C app exec playwright install-deps chromium
+sudo -iu eqb
+cd /opt/eqb/english-question-bank
+pnpm -C app exec playwright install --no-shell chromium
+node scripts/smoke-production-chromium.mjs
 pnpm -C app build
+exit
 ```
 
 ## 8. Create `.env`

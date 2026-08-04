@@ -108,11 +108,59 @@ const nvmrc = readText(ROOT, '.nvmrc').trim()
 assert(nvmrc === '24', `.nvmrc pins Node 24 (found "${nvmrc}")`)
 
 const deploySh = readText(ROOT, 'scripts/deploy.sh')
+const deployRemoteSh = readText(ROOT, 'scripts/deploy-remote.sh')
+const chromiumSmoke = readText(ROOT, 'scripts/smoke-production-chromium.mjs')
+const deployRunbook = readText(ROOT, 'docs/cuts/launch-deploy/runbook.md')
 assert(deploySh.includes('/api/health'), 'deploy.sh smoke-checks /api/health after restart')
 assert(/systemctl restart eqb/.test(deploySh), 'deploy.sh restarts the eqb service')
 assert(/pnpm -C .*app.* build/.test(deploySh), 'deploy.sh builds the app')
+assert(
+  deploySh.includes('playwright install --no-shell chromium'),
+  'deploy.sh installs the Playwright-matched full Chromium',
+)
+assert(
+  deploySh.includes('smoke-production-chromium.mjs'),
+  'deploy.sh launches Chromium and checks PDF bytes before restart',
+)
+assert(
+  deploySh.includes('id -un') && deploySh.includes('!= "eqb"'),
+  'deploy.sh requires the same eqb user that runs the systemd service',
+)
+assert(
+  deployRemoteSh.includes('runuser -u eqb -- pnpm -C app exec playwright install --no-shell chromium'),
+  'deploy-remote.sh installs Chromium as the eqb service user',
+)
+assert(
+  deployRemoteSh.includes('runuser -u eqb -- node scripts/smoke-production-chromium.mjs'),
+  'deploy-remote.sh runs the production Chromium smoke as the eqb service user',
+)
+assert(
+  chromiumSmoke.includes("from '../server/draft-paper/chromiumPool.mjs'") &&
+    chromiumSmoke.includes('page.pdf(') &&
+    chromiumSmoke.includes("'%PDF-'"),
+  'production Chromium smoke exercises the real pool and verifies PDF bytes',
+)
+assert(
+  deployRunbook.includes('playwright install-deps chromium'),
+  'first-time runbook installs Chromium system dependencies',
+)
+const runbookAppInstall = deployRunbook.indexOf('pnpm -C app install --frozen-lockfile')
+const runbookSystemDeps = deployRunbook.indexOf('playwright install-deps chromium')
+const runbookEqbBrowserSession = deployRunbook.lastIndexOf('sudo -iu eqb')
+const runbookBrowserInstall = deployRunbook.indexOf('playwright install --no-shell chromium')
+const runbookBrowserSmoke = deployRunbook.indexOf('node scripts/smoke-production-chromium.mjs')
+assert(
+  runbookAppInstall >= 0 &&
+    runbookAppInstall < runbookSystemDeps &&
+    runbookSystemDeps < runbookEqbBrowserSession &&
+    runbookEqbBrowserSession < runbookBrowserInstall &&
+    runbookBrowserInstall < runbookBrowserSmoke,
+  'first-time runbook installs system deps, then downloads and smokes Chromium in an eqb login shell',
+)
 const bashCheck = spawnSync('bash', ['-n', resolve(ROOT, 'scripts/deploy.sh')], { encoding: 'utf8' })
 assert(bashCheck.status === 0, `deploy.sh passes bash -n${bashCheck.stderr ? ' — ' + bashCheck.stderr.trim() : ''}`)
+const remoteBashCheck = spawnSync('bash', ['-n', resolve(ROOT, 'scripts/deploy-remote.sh')], { encoding: 'utf8' })
+assert(remoteBashCheck.status === 0, `deploy-remote.sh passes bash -n${remoteBashCheck.stderr ? ' — ' + remoteBashCheck.stderr.trim() : ''}`)
 
 // ── Slice 3: backup-to-r2.sh (R2 daily backup) ───────────────────────────────
 section('Slice 3 — backup-to-r2.sh')

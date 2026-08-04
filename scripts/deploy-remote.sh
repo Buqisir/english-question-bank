@@ -32,7 +32,7 @@ echo "== 1/5 pull =="
 run "sudo runuser -u eqb -- git -C $REPO pull --ff-only"
 
 echo "== 2/5 install =="
-run "cd $REPO && sudo runuser -u eqb -- pnpm -C app install --frozen-lockfile && sudo runuser -u eqb -- npm --prefix server ci" | tail -3
+run "cd $REPO && sudo runuser -u eqb -- pnpm -C app install --frozen-lockfile && sudo runuser -u eqb -- npm --prefix server ci && sudo runuser -u eqb -- pnpm -C app exec playwright install --no-shell chromium && sudo runuser -u eqb -- node scripts/smoke-production-chromium.mjs" | tail -5
 
 echo "== 3/5 build =="
 run "cd $REPO && sudo runuser -u eqb -- pnpm -C app build" | tail -3

@@ -221,15 +221,19 @@ function changedPlan(files) {
     'server/paper-canonical/',
     'server/print-renderer.mjs',
     'server/draft-paper/',
+    'app/src/shared-ui/papersurface/',
+    'app/src/features/draft-paper/DraftPaperWorkbench.css',
     'app/src/features/paper-browse/',
     'app/src/features/paper-intelligence/',
     'standards/paper-canonical/',
+  ]
+  const uiMicroPatterns = [
+    'app/src/shared-ui/tokens.css',
   ]
   const securityPatterns = [
     'data/sql/',
     'server/auth/',
     'server/user-data/',
-    'server/api.mjs',
     'server/ai-daily-limit.mjs',
   ]
   if (files.every((file) => touchesAny([file], paperDataPatterns))) {
@@ -237,10 +241,11 @@ function changedPlan(files) {
   }
 
   const domains = new Set(files.map((file) => {
+    if (file === 'server/api.mjs') return 'unknown'
     if (touchesAny([file], securityPatterns)) return 'security'
     if (touchesAny([file], paperPatterns)) return 'paper'
     if (touchesAny([file], paperDataPatterns)) return 'paper-data'
-    if (file.startsWith('app/src/') && file.endsWith('.css')) return 'ui'
+    if (touchesAny([file], uiMicroPatterns)) return 'ui'
     if ([
       'app/src/',
       'server/',
