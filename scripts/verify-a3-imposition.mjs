@@ -354,6 +354,8 @@ async function runPhaseB(browser) {
     )
 
     // ── Real click: persistent overlay buttons re-anchor correctly in A3 ──
+    const firstGroupActions = page.locator('.draft-group-actions').first()
+    await firstGroupActions.waitFor({ state: 'attached', timeout: 10_000 })
     const overlayButtonCountBefore = await page.locator('.draft-group-actions').count()
     assert('persistent overlay button clusters render in A3 mode', overlayButtonCountBefore > 0, String(overlayButtonCountBefore))
 
@@ -361,7 +363,6 @@ async function runPhaseB(browser) {
       (response) => response.url().includes('/api/draft-papers/') && response.request().method() === 'PATCH',
       { timeout: 10_000 },
     )
-    const firstGroupActions = page.locator('.draft-group-actions').first()
     await firstGroupActions.getByRole('button', { name: '更多题组操作' }).click()
     await firstGroupActions.getByRole('button', { name: '下移' }).click()
     const reorderResponse = await reorderMutation
