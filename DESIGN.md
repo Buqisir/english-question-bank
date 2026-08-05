@@ -168,10 +168,13 @@ components:
 ### Hierarchy
 - **Display 标题** (Inter, 600, 28px): 页面/区块主标题。固定 rem，不用 clamp 流体缩放。
 - **Body 正文** (Inter, 400, 16px, 1.5): 工具侧正文与说明。
+- **Compact Body 紧凑正文** (Inter, 400, 14px, 1.5): 讲评侧栏、紧凑卡片与高密度工具内容；只在空间受限的操作区使用。
 - **Label 标签** (Inter, 500, 12px): 字段名、chip、徽标、表头。
 - **Paper Body 卷面正文** (衬线, 16px, 1.7): 题干、篇章、解析；行高更松，便于通读。
 
 ### Named Rules
+**The Four-Step UI Type Ramp（工具界面四级字号）.** 工具界面只使用 **28px Display / 16px Body / 14px Compact Body / 12px Label** 四档；14px 只服务于空间受限的侧栏和紧凑卡片。不得为局部组件现场发明 11px / 13px / 15px 等半档。卷面正文属于独立的 Paper Font 字道，不受这条工具界面字号规则改写。
+
 **The Two-Font-Lanes Rule（双字道铁律）.** Inter 管工具界面，衬线只在渲染卷面内容时登场，绝不互换。工具里乱用衬线即为错；卷面正文用无衬线即丢质感。
 
 ## 4. Elevation
@@ -224,6 +227,10 @@ components:
 
 **The Single-Radius-Family Rule（圆角单一家族，design-canon-v2 2026-07-16，源 Geist「one radius family per view」）.** 全站圆角只取阶梯 **{4px sm / 6px md / 8px lg / 999px pill}**，外加两个结构值：`0`（直角）与 `50%`（仅圆形控件——头像、圆点、圆形按钮）。方向性 shorthand（如 `0 8px 8px 0`）各分量在族内即合法。同一视图内保持一个圆角家族——卡 8 / 控件 6 / 微件 4 / 胶囊 999 是同一家族的四档，不是四个家族；**禁止**为单个组件现场发明 5px / 7px / 10px / 12px 这类族外档（要新档走 `docs/design-gaps.md`，见 §7 禁兜底法）。机器守门：`scripts/verify-radius-family.mjs`（挂 CI）——现存 32 处族外历史值按 文件×值 baseline 祖父化，只减不增，清到 0 即删 baseline。
 
+**The No Side-Stripe Rule（禁侧条原则）.** 工具界面与卷面讲评不得用超过 1px 的彩色左右边线充当通用的选中、引用或提示语法。纸面题目定位采用页边上下范围角标 + 题号强调；跨栏证据采用轻底纹 + 与虚线同位的连接点。结构性 1px 发丝线仍可用于真实分隔，不为追求形式独特而牺牲可识别性。
+
+**The No-Emoji-Icon Rule（禁 Emoji 图标原则）.** 产品界面的按钮、导航、状态与提示不得用 Emoji 或 Unicode 象形字符代替图标。需要图标时统一使用项目既有的 Lucide 线性图标或正式 SVG；图标不增加信息时直接使用文字。试题原文、用户输入与导入材料属于内容真值，不因本规则改写。
+
 ## 6. Do's and Don'ts
 
 ### Do:
@@ -248,6 +255,7 @@ components:
 - **Don't** 做成 **塞满的后台管理系统**：把筛选控件做成视觉主角的表单墙、信息过载的表格。
 - **Don't** 做成 **幼稚的教育 App**：卡通、超大圆角、糖果配色。
 - **Don't** 用 `border-left/right` 粗于 1px 的色条做卡片/列表/提示的强调（宜用整边/底色/前置图标）。
+- **Don't** 用 Emoji 或 Unicode 象形字符充当按钮、状态、导航或提示图标；统一使用 Lucide / 正式 SVG，或直接用文字。
 - **Don't** 在工具界面乱用衬线，或在卷面正文用无衬线（The Two-Font-Lanes Rule）。
 - **Don't** 把"不空"做成"堆筛选控件" — 用内容（题库本身）填空，用 AI 口吻 chip 收窄（已验证的方向教训）。
 

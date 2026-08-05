@@ -1,0 +1,14 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "design-system-font-size",
+        "value": "14px",
+        "createdAt": "2026-08-05T01:57:44.776Z",
+        "reason": "User confirmed 14px Compact Body is intentional"
+      }
+    ]
+  }
+}

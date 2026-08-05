@@ -37,7 +37,6 @@
   padding: 24px 24px 96px;
   box-sizing: border-box;
   position: relative;
-  transition: grid-template-columns var(--motion-slow) var(--ease-in-out);
 }
 
 /* 挑题态卷面视口居中（owner 2026-07-15「卷子在视觉中心不够居中」）：
@@ -69,18 +68,12 @@
   gap: 4px;
   max-height: calc(100vh - 48px);
   overflow-y: auto;
-  /* 讲评开关的列宽过渡期间，面板钉最终宽（见下方 min-1200 规则）会短暂
-   * 超出/不满列宽——横向裁掉，读成「列边缘滑过面板」的揭示感，不出横条。 */
+  /* 讲评开关的列宽过渡期间，同一架 220px 钢琴会短暂超出 rail 列；
+   * 横向裁掉多余部分，不生成滚动条。 */
   overflow-x: hidden;
 }
 
-/* ─── 目录分段面板（rail-panel，owner 拍板 2026-07-15）───
- *
- * 原版扁平三级列表（部分/节/题组全是缩进按钮，.paper-browse-rail-item*）
- * 退役：节标题带整串分值长句会换行发毛、层级只靠缩进、选中灰块突兀。
- * B 案「分段面板」胜出——rail 自己成一张浅纸浮在暖纸桌上，部分之间淡线
- * 分段，部分行右侧收「满分N分」小字，题号做胶囊章、选中翻实心墨底。
- * 讲评态紧凑 rail 同一张卡片语言（--compact 档：整行即题号章）。 */
+/* ─── 目录面板基础层；钢琴外观从下方 --piano 修饰档追加 ─── */
 
 .paper-browse-rail-panel {
   /* 半透明白：读作「桌上又一张纸」，与卷面 A4 白同族。--paper-* 家族
@@ -89,36 +82,14 @@
   border: 1px solid var(--paper-border);
   border-radius: 8px;
   padding: 8px;
-  /* 讲评开关时面板整树重挂（挑题全档 ↔ 紧凑档是两棵子树），列宽的
-   * grid 过渡在滑而内容瞬换会「跳一跳」（owner 2026-07-15）——新内容
-   * 以同节奏淡入，宽度滑动期间的换装/重排被盖在渐显里。挑题态首载
-   * 也会淡入一次，与页面入场观感一致，无需另开关。reduced-motion
-   * 由 App.css 全局重置兜底。 */
-  animation: paper-browse-rail-swap-in var(--motion-slow) var(--ease-in-out);
   box-sizing: border-box;
 }
 
-@keyframes paper-browse-rail-swap-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-/* 面板宽度钉死在各自的最终列宽（owner 2026-07-15「先变长再缩短」修）：
- * 若面板跟列宽 width:100%，讲评开关时新内容会在还没滑完的旧列宽里
- * 摆出来再跟着缩放变形（紧凑章被拉成长条）。钉最终宽后，列宽过渡只
- * 负责揭开/盖上空间，内容从第一帧起就是最终形状。只在 ≥1200px 生效
- * ——那是唯一有 88px 紧凑列的档位；<1200px 讲评是抽屉，列宽不变。 */
+/* 桌面钢琴保持唯一的 220px 内部几何；讲评态的 88px 宽度由外层 viewport
+ * 裁切得到。窄屏在下方改为 100% 横排。 */
 @media (min-width: 1200px) {
   .paper-browse-rail-panel {
     width: 220px;
-  }
-
-  .paper-browse-rail-panel--compact {
-    width: 88px;
   }
 }
 
@@ -203,32 +174,222 @@
   color: var(--paper-bg);
 }
 
-/* 讲评态紧凑档：88px 窄栏里没地方摆「题组名 + 章」两件，整行自己就是
- * 题号章——居中、等宽数字、溢出省略（写作组无题号退回题组名）。 */
-.paper-browse-rail-panel--compact {
-  padding: 6px;
+/* 两种页面姿态共用同一架钢琴；讲评态把同一块 220px 琴身平移并裁成
+ * 88px 切片，琴键内部从不换尺寸或重排。transform + clip-path 同步过渡
+ * 保持左缘在原位，也允许快速反向点击从当前帧继续，不会重启动画。
+ * 卷面、Print/PDF 与 PaperSurface 不消费这些样式。 */
+.paper-browse-piano-viewport {
+  position: fixed;
+  top: 50vh;
+  left: 24px;
+  width: 220px;
+  max-height: calc(100vh - 48px);
+  pointer-events: none;
+  clip-path: inset(0 0 0 0);
+  transform: translate3d(0, -50%, 0);
+  transition:
+    transform var(--motion-slow) var(--ease-in-out),
+    clip-path var(--motion-slow) var(--ease-in-out);
+}
+
+.paper-browse-piano-viewport--cropped {
+  clip-path: inset(0 0 0 132px);
+  transform: translate3d(-132px, -50%, 0);
+}
+
+.paper-browse-rail-panel--piano {
+  position: relative;
+  width: 220px;
+  max-height: calc(100vh - 48px);
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 10px 9px;
+  pointer-events: auto;
+  background: color-mix(in srgb, var(--panel) 68%, var(--paper-bg));
+  border-color: color-mix(in srgb, var(--paper-border) 88%, var(--paper-ink));
+  box-shadow:
+    inset 4px 0 0 color-mix(in srgb, var(--paper-ink-strong) 54%, var(--paper-bg)),
+    0 1px 2px rgba(var(--paper-ink-strong-rgb), 0.06);
+}
+
+.paper-browse-rail-panel--piano .paper-browse-rail-part {
+  position: relative;
+}
+
+.paper-browse-rail-panel--piano .paper-browse-rail-part + .paper-browse-rail-part {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
+}
+
+.paper-browse-rail-panel--piano .paper-browse-rail-part-head,
+.paper-browse-rail-panel--piano .paper-browse-rail-group {
+  position: relative;
+  isolation: isolate;
   display: flex;
-  flex-direction: column;
-  gap: 4px;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: 40px;
+  min-height: 40px;
+  margin: 0;
+  padding: 7px 9px 7px 136px;
+  overflow: visible;
+  font-family: inherit;
+  text-align: left;
+  color: var(--paper-ink);
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--panel) 74%, var(--paper-bg)) 0%,
+    color-mix(in srgb, var(--panel) 70%, var(--paper-bg)) 82%,
+    color-mix(in srgb, var(--panel) 82%, var(--paper-bg)) 100%
+  );
+  border: 1px solid color-mix(in srgb, var(--paper-border) 82%, var(--paper-ink));
+  border-top: 0;
+  border-left: 0;
+  border-radius: 0;
+  box-shadow:
+    inset -1px 0 0 rgba(var(--paper-ink-strong-rgb), 0.035),
+    inset 0 -1px 0 rgba(var(--paper-ink-strong-rgb), 0.035),
+    0 1px 2px rgba(var(--paper-ink-strong-rgb), 0.025);
+  cursor: pointer;
+  touch-action: manipulation;
+  transition:
+    transform 130ms cubic-bezier(0.23, 1, 0.32, 1),
+    background 130ms cubic-bezier(0.23, 1, 0.32, 1),
+    box-shadow 130ms cubic-bezier(0.23, 1, 0.32, 1),
+    border-color 130ms cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-.paper-browse-rail-group--compact {
-  display: block;
-  text-align: center;
-  padding: 3px 8px;
-  font-size: 12px;
-  font-variant-numeric: tabular-nums;
+.paper-browse-rail-panel--piano .paper-browse-rail-part--first .paper-browse-rail-part-head {
+  border-top: 1px solid color-mix(in srgb, var(--paper-border) 82%, var(--paper-ink));
+  border-radius: 6px 6px 0 0;
+}
+
+.paper-browse-rail-panel--piano .paper-browse-rail-part:last-child .paper-browse-rail-group:last-child {
+  border-radius: 0 0 6px 6px;
+}
+
+.paper-browse-rail-panel--piano .paper-browse-rail-part-name {
+  padding: 0;
+  font-weight: 400;
+  letter-spacing: normal;
+  color: var(--paper-ink);
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  border-radius: 999px;
+  cursor: inherit;
 }
 
-/* 本条覆盖 .paper-browse-rail-group--active 的浅墨底：紧凑档整行即章，
- * 选中翻实心墨底反白——与挑题态章的选中语言同款（Explicit-Cascade 备案）。 */
-.paper-browse-rail-group--compact.paper-browse-rail-group--active {
-  background: var(--paper-ink-strong);
-  color: var(--paper-bg);
+.paper-browse-rail-panel--piano .paper-browse-rail-part + .paper-browse-rail-part .paper-browse-rail-part-head {
+  border-top: 1px solid color-mix(in srgb, var(--paper-border) 58%, var(--paper-ink));
+}
+
+.paper-browse-rail-panel--piano .paper-browse-rail-group-title {
+  white-space: nowrap;
+}
+
+.paper-browse-rail-panel--piano .paper-browse-rail-group--letter {
+  justify-content: center;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .paper-browse-rail-panel--piano .paper-browse-rail-part-head:hover,
+  .paper-browse-rail-panel--piano .paper-browse-rail-group:hover {
+    color: var(--paper-ink);
+    background: color-mix(in srgb, var(--panel) 82%, var(--paper-bg));
+    border-color: var(--paper-border);
+  }
+}
+
+.paper-browse-rail-panel--piano .paper-browse-rail-part-head:active,
+.paper-browse-rail-panel--piano .paper-browse-rail-group:active {
+  transform: translateY(2px) scale(0.996);
+  box-shadow:
+    inset 0 5px 7px rgba(var(--paper-ink-strong-rgb), 0.13),
+    inset 0 -1px 0 rgba(var(--paper-ink-strong-rgb), 0.035);
+}
+
+.paper-browse-rail-panel--piano .paper-browse-rail-group--active {
+  z-index: 1;
+  color: var(--paper-ink-strong);
+  font-weight: 600;
+  transform: translateY(1px);
+  background: color-mix(in srgb, var(--panel) 74%, var(--paper-bg));
+  border-color: color-mix(in srgb, var(--paper-border) 82%, var(--paper-ink));
+  box-shadow:
+    inset 0 3px 5px rgba(var(--paper-ink-strong-rgb), 0.075),
+    0 1px 2px rgba(var(--paper-ink-strong-rgb), 0.025);
+}
+
+.paper-browse-rail-panel--piano .paper-browse-rail-part-head:focus-visible,
+.paper-browse-rail-panel--piano .paper-browse-rail-group:focus-visible {
+  outline: 1px solid color-mix(in srgb, var(--accent) 68%, transparent);
+  outline-offset: -2px;
+}
+
+.paper-browse-piano-black-key-layer {
+  position: absolute;
+  z-index: 6;
+  inset: 0;
+  pointer-events: none;
+}
+
+.paper-browse-piano-black-key {
+  position: absolute;
+  left: 9px;
+  width: 124px;
+  height: 22px;
+  border-radius: 0 4px 4px 0;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--paper-ink-strong) 68%, var(--paper-bg)),
+    color-mix(in srgb, var(--paper-ink-strong) 78%, var(--paper-bg)) 62%,
+    color-mix(in srgb, var(--paper-ink-strong) 73%, var(--paper-bg))
+  );
+  box-shadow:
+    inset -4px 0 4px rgba(var(--paper-ink-strong-rgb), 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    inset 0 -2px 0 rgba(var(--paper-ink-strong-rgb), 0.2),
+    0 2px 3px rgba(var(--paper-ink-strong-rgb), 0.22),
+    0 3px 5px rgba(var(--paper-ink-strong-rgb), 0.1);
+  transform-origin: left center;
+  transition: transform var(--motion-slow) var(--ease-in-out);
+}
+
+/* 完整黑键在裁切终点只会露出 1px；轻微水平延展让最终切片保留 16px
+ * 琴键尖，同时仍只动画合成层 transform，不改黑键布局宽度。 */
+.paper-browse-piano-viewport--cropped .paper-browse-piano-black-key {
+  transform: scaleX(1.12);
+}
+
+.paper-browse-piano-black-key::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  bottom: 3px;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .paper-browse-piano-viewport {
+    transition: none;
+  }
+
+  .paper-browse-piano-black-key {
+    transition: none;
+  }
+
+  .paper-browse-rail-panel--piano .paper-browse-rail-part-head,
+  .paper-browse-rail-panel--piano .paper-browse-rail-group {
+    transition: none;
+  }
+
+  .paper-browse-rail-panel--piano .paper-browse-rail-part-head:active,
+  .paper-browse-rail-panel--piano .paper-browse-rail-group:active,
+  .paper-browse-rail-panel--piano .paper-browse-rail-group--active {
+    transform: none;
+  }
 }
 
 .paper-browse-content {
@@ -528,21 +689,41 @@
  * 自身的静息线隐去，同位改画选区罩的边界虚线，避免同位双线。 */
 .paper-browse-scissor-line {
   position: absolute;
-  top: calc(var(--pb-block-gap) / -2);
+  top: var(--pb-scissor-top);
   left: 24px;
   right: 24px;
   height: 0;
   border-top: 1px dashed rgba(var(--paper-ink-rgb), 0.18);
   opacity: 1;
-  transition: opacity var(--motion-base) var(--ease-out);
   pointer-events: none;
 }
 
 .paper-browse-group-card {
+  --pb-scissor-top: calc(var(--pb-block-gap) / -2);
   position: relative;
 }
 
-.paper-browse-group-card:hover > .paper-browse-scissor-line,
+/* Optical cut-line correction from the real paper surface. Reading A's
+ * canonical letter rises 8px into the preceding gap, so its line moves to
+ * the letter's top edge. Single-group section cards begin flush against the
+ * section heading; like Writing Section 2, their line sits on the next
+ * content block's top edge, visually centered between the heading glyphs and
+ * the instruction glyphs. The resting inset line and the full-width
+ * hover/focus boundary share this one anchor variable. */
+.paper-browse-group-card[data-canonical-group-type='reading']:has(
+  .ps-canonical-reading-passage-letter[data-canonical-passage-letter='A']
+) {
+  --pb-scissor-top: calc(var(--pb-block-gap) * -1);
+}
+
+.paper-browse-group-card:is(
+  [data-canonical-group-type='sevenChoices'],
+  [data-canonical-group-type='cloze'],
+  [data-canonical-group-type='grammarFill']
+) {
+  --pb-scissor-top: 0;
+}
+
 .paper-browse-group-card:focus-within > .paper-browse-scissor-line {
   opacity: 0;
 }
@@ -556,28 +737,24 @@
   bottom: calc(var(--pb-block-gap) / -2);
 }
 
-/* hover = 纸条显影：选区罩上下缘在块间隙正中（±gap/2），左右通宽到纸的
+/* hover/focus = 全宽虚线边界：上下缘沿可剪单元边界，左右通宽到纸的
  * 物理边缘（± --ps-page-margin-x，剪刀剪的是整张纸宽），直角。罩色取自
- * teal-600「墨·淡」档（owner 终选）——DESIGN.md 签名色「当前选中」本职，
- * 色值全部取自 teal 梯子，单色相/绿笔原则不破。边界虚线各一条，通宽。
- * 单个伪元素同时画罩色 fill + 上下边界虚线，避免额外 DOM 节点。写作卡的
- * 罩上缘另行定位（--pb-writing-cut-top，见下方写作段），不再整卡显影。 */
+ * teal-600 的边界虚线保留；owner 2026-08-04 取消悬停/选中时的整块淡绿
+ * 填色，纸面内容本身不再变色。写作卡的上缘另行定位
+ * （--pb-writing-cut-top，见下方写作段），不再整卡显影。 */
 .paper-browse-group-card::after {
   content: '';
   position: absolute;
-  top: calc(var(--pb-block-gap) / -2);
+  top: var(--pb-scissor-top);
   bottom: calc(var(--pb-block-gap) / -2);
   left: calc(var(--ps-page-margin-x, 91px) * -1);
   right: calc(var(--ps-page-margin-x, 91px) * -1);
-  background: rgba(44, 110, 86, 0.02); /* teal-600「墨·淡」— owner 终选 v3 */
   border-top: 1px dashed rgba(44, 110, 86, 0.55);
   border-bottom: 1px dashed rgba(44, 110, 86, 0.55);
   opacity: 0;
   pointer-events: none;
-  transition: opacity var(--motion-base) var(--ease-out);
 }
 
-.paper-browse-group-card:hover::after,
 .paper-browse-group-card:focus-within::after {
   opacity: 1;
 }
@@ -601,10 +778,8 @@
   margin-right: calc(-1 * (var(--ps-page-margin-x, 91px) - 8px));
   opacity: 0;
   pointer-events: none;
-  transition: opacity var(--motion-fast) var(--ease-out);
 }
 
-.paper-browse-group-card:hover .paper-browse-group-actions,
 .paper-browse-group-card:focus-within .paper-browse-group-actions {
   opacity: 1;
   pointer-events: auto;
@@ -681,7 +856,6 @@
   left: 24px;
   right: 24px;
   border-top: 1px dashed rgba(var(--paper-ink-rgb), 0.18);
-  transition: opacity var(--motion-base) var(--ease-out);
 }
 
 /* 切口=提示起始线：罩上缘用量好的偏移；量不到时兜底回卡顶（等同旧行为，
@@ -691,9 +865,34 @@
 }
 
 /* 同位双线规避：hover 本卡时内部静息线隐去，罩的上缘虚线接管。 */
-.paper-browse-group-card--writing:hover .pi-writing-section + *::before,
 .paper-browse-group-card--writing:focus-within .pi-writing-section + *::before {
   opacity: 0;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .paper-browse-scissor-line,
+  .paper-browse-group-card::after,
+  .paper-browse-content .pi-writing-section + *::before {
+    transition: opacity var(--motion-base) var(--ease-out);
+  }
+
+  .paper-browse-group-actions {
+    transition: opacity var(--motion-fast) var(--ease-out);
+  }
+
+  .paper-browse-group-card:hover > .paper-browse-scissor-line,
+  .paper-browse-group-card--writing:hover .pi-writing-section + *::before {
+    opacity: 0;
+  }
+
+  .paper-browse-group-card:hover::after {
+    opacity: 1;
+  }
+
+  .paper-browse-group-card:hover .paper-browse-group-actions {
+    opacity: 1;
+    pointer-events: auto;
+  }
 }
 
 .paper-browse-loading,
@@ -705,7 +904,7 @@
 
 .paper-browse-placeholder {
   padding: 24px;
-  font-size: 13px;
+  font-size: 12px;
   color: var(--eqb-color-text-muted, #6a6a64);
 }
 
@@ -724,7 +923,7 @@
   background: #ffffff;
   color: #1e1e1c;
   font-family: inherit;
-  font-size: 13px;
+  font-size: 12px;
   letter-spacing: 0.05em;
   cursor: pointer;
   z-index: 31;
@@ -753,7 +952,7 @@
   flex-direction: column;
   background: #ffffff;
   border: 1px solid var(--paper-border);
-  border-radius: 12px;
+  border-radius: 8px;
   /* 底部 72px 净空：全局草稿卷 chip（App.css .basket-chip，fixed
    * right:20/bottom:20）永久压住本栏底缘——栏内最后一个元素（配相似
    * CTA / 结果底栏 / 面板尾巴）必须能滚到 chip 上方（owner QA 两报，
@@ -773,7 +972,7 @@
 
 .paper-browse-lecture-empty {
   margin: 0;
-  font-size: 13px;
+  font-size: 14px;
   color: var(--eqb-color-text-muted, #6a6a64);
 }
 
@@ -785,7 +984,7 @@
 
 .paper-browse-lecture-title {
   margin: 0;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 700;
   color: var(--paper-ink-strong);
 }
@@ -797,7 +996,7 @@
 
 .paper-browse-answer-row {
   margin: 0;
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.6;
   color: var(--paper-ink);
 }
@@ -825,6 +1024,92 @@
   overflow-x: auto;
 }
 
+/*
+ * Paper annotation grammar. These page-local rules deliberately override the
+ * shared PaperSurface active rail and lecture quote bars: Paper Browse marks a
+ * bounded range with corners, and reserves a socket for cross-column evidence.
+ */
+.paper-browse-content .ps-question--active::before,
+.paper-browse-content .ps-question--active::after {
+  position: absolute;
+  left: -8px;
+  width: 8px;
+  height: 8px;
+  box-sizing: border-box;
+  pointer-events: none;
+  content: '';
+  background: transparent;
+}
+
+.paper-browse-content .ps-question--active::before {
+  top: -1px;
+  bottom: auto;
+  border-top: 1px solid var(--eqb-color-primary);
+  border-left: 1px solid var(--eqb-color-primary);
+  transition: none;
+}
+
+.paper-browse-content .ps-question--active::after {
+  bottom: -1px;
+  border-bottom: 1px solid var(--eqb-color-primary);
+  border-left: 1px solid var(--eqb-color-primary);
+}
+
+.paper-browse-content .ps-question--active .ps-question-no {
+  color: var(--eqb-color-primary-text);
+}
+
+.paper-browse-lecture-panel .pi-ps-analysis-evidence,
+.paper-browse-lecture-panel .pi-ps-analysis-distractor {
+  position: relative;
+}
+
+.paper-browse-lecture-panel .pi-ps-analysis-evidence blockquote,
+.paper-browse-lecture-panel .pi-ps-analysis-distractor-quote {
+  padding: var(--eqb-space-2) var(--eqb-space-3);
+  border-left: 0;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--eqb-color-desk) 55%, transparent);
+}
+
+/* Selected evidence overrides the neutral quote wash with its semantic tint. */
+.paper-browse-lecture-panel .pi-ps-analysis-evidence--selected blockquote {
+  background: var(--eqb-color-success-soft);
+}
+
+/* The quote owns the trap tint here, so the enclosing button remains neutral. */
+.paper-browse-lecture-panel button.pi-ps-analysis-distractor--selected {
+  background: transparent;
+}
+
+.paper-browse-lecture-panel .pi-ps-analysis-distractor--selected .pi-ps-analysis-distractor-quote {
+  background: var(--eqb-color-warning-soft);
+}
+
+.paper-browse-lecture-panel .pi-ps-analysis-evidence--selected::before,
+.paper-browse-lecture-panel .pi-ps-analysis-distractor--selected::before {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  z-index: 6;
+  width: 8px;
+  height: 8px;
+  box-sizing: border-box;
+  border: 2px solid var(--eqb-color-paper);
+  border-radius: 999px;
+  content: '';
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+}
+
+.paper-browse-lecture-panel [data-pi-evidence-kind='support'][aria-pressed='true']::before {
+  background: var(--eqb-color-success);
+}
+
+.paper-browse-lecture-panel [data-pi-evidence-kind='trap'][aria-pressed='true']::before {
+  background: var(--eqb-color-warning);
+}
+
 .retained-writing-card {
   overflow: hidden;
   border: 1px solid var(--eqb-color-border);
@@ -832,7 +1117,7 @@
   background: var(--eqb-color-paper);
   box-shadow: 0 1px 2px color-mix(in srgb, var(--eqb-color-text-strong) 6%, transparent);
   color: var(--eqb-color-text);
-  font-size: 0.875rem;
+  font-size: 14px;
   line-height: 1.55;
 }
 
@@ -873,14 +1158,14 @@
 
 .retained-writing-card-row dt {
   color: var(--eqb-color-text-muted);
-  font-size: 0.6875rem;
+  font-size: 12px;
   font-weight: 600;
 }
 
 .retained-writing-card-row dd {
   margin: 0;
   color: var(--eqb-color-text-strong);
-  font-size: 0.8125rem;
+  font-size: 14px;
   line-height: 1.45;
   overflow-wrap: anywhere;
 }
@@ -917,7 +1202,7 @@
   align-items: start;
   gap: 8px;
   color: var(--eqb-color-text-strong);
-  font-size: 0.8125rem;
+  font-size: 14px;
   line-height: 1.5;
   counter-increment: retained-writing-point;
 }
@@ -970,7 +1255,7 @@
   border-radius: 0 4px 4px 0;
   background: var(--eqb-color-paper);
   color: var(--eqb-color-text-strong);
-  font-size: 0.8125rem;
+  font-size: 14px;
   line-height: 1.55;
   overflow-wrap: anywhere;
   padding: 8px 12px;
@@ -1055,6 +1340,25 @@
     width: 100%;
   }
 
+  .paper-browse-piano-viewport,
+  .paper-browse-piano-viewport--cropped {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    max-height: none;
+    pointer-events: auto;
+    clip-path: none;
+    transform: none;
+    transition: none;
+  }
+
+  .paper-browse-piano-viewport .paper-browse-rail-panel--piano {
+    width: 100%;
+    max-height: none;
+    overflow: hidden;
+  }
+
   .paper-browse-rail-part {
     flex: 1 1 200px;
   }
@@ -1063,6 +1367,19 @@
     border-top: none;
     margin-top: 0;
     padding-top: 0;
+  }
+
+  .paper-browse-piano-black-key-layer {
+    display: none;
+  }
+
+  .paper-browse-rail-panel--piano .paper-browse-rail-part-head,
+  .paper-browse-rail-panel--piano .paper-browse-rail-group {
+    padding-left: 9px;
+  }
+
+  .paper-browse-rail-panel--piano .paper-browse-rail-group--letter {
+    justify-content: flex-start;
   }
 }
 
@@ -1171,7 +1488,10 @@
 }
 
 .similar-btn {
-  font: 600 12.5px/1 -apple-system, 'PingFang SC', sans-serif;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font: 600 12px/1 -apple-system, 'PingFang SC', sans-serif;
   border-radius: 8px;
   padding: 9px 14px;
   cursor: pointer;
@@ -1249,7 +1569,7 @@
 
 .similar-rcard {
   border: 1px solid #e8e8e4;
-  border-radius: 10px;
+  border-radius: 8px;
   padding: 10px 12px;
   display: flex;
   gap: 10px;
@@ -1284,7 +1604,7 @@
 
 .similar-rcard-title {
   font-weight: 600;
-  font-size: 13px;
+  font-size: 14px;
   color: #1e1e1c;
 }
 
@@ -1301,7 +1621,7 @@
 }
 
 .similar-chip {
-  font-size: 11px;
+  font-size: 12px;
   border-radius: 999px;
   padding: 2px 8px;
   background: #ededea;
@@ -1358,9 +1678,14 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .similar-rcard,
-  .similar-toast {
-    transition: none !important;
+  .similar-rcard {
+    transition: none;
+  }
+
+  .similar-toast,
+  .similar-toast--on {
+    transform: translateX(-50%);
+    transition: opacity var(--motion-micro) var(--ease-hover);
   }
 }
 

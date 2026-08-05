@@ -82,6 +82,7 @@ const registry = {
   'scripts/verify-motion-tokens.mjs',
   'scripts/verify-lecture-panel-css.mjs',
   'scripts/verify-radius-family.mjs',
+  'scripts/verify-no-ui-emoji.mjs',
   'scripts/verify-h1-router-skeleton.mjs',
   'scripts/verify-h1d-analysis-availability.mjs',
   'scripts/verify-i0e-seven-choices-entry.mjs',
@@ -158,6 +159,7 @@ const uiScripts = [
   'scripts/verify-motion-tokens.mjs',
   'scripts/verify-lecture-panel-css.mjs',
   'scripts/verify-radius-family.mjs',
+  'scripts/verify-no-ui-emoji.mjs',
 ]
 const paperDataScripts = [
   'scripts/verify-paper-asset-v1.mjs',

@@ -694,45 +694,6 @@
 }
 
 /*
- * One-shot draw-in animation when the evidence id activates or
- * switches. We use `stroke-dashoffset` instead of opacity so the line
- * appears to "draw itself" from source to target — the gentlest cue
- * we can use to tell the teacher "this is the new connection".
- *
- * The pathLength fallback: SVG paths don't have a uniform length;
- * a path of 800px would otherwise need a different starting offset
- * than a path of 200px. We pick a generous offset (1000) that's
- * larger than any plausible path; the animation simply settles into
- * its final dasharray once the offset reaches 0.
- */
-@keyframes pi-line-draw {
-  from {
-    stroke-dashoffset: 1000;
-    opacity: 0.4;
-  }
-  to {
-    stroke-dashoffset: 0;
-    opacity: 1;
-  }
-}
-
-.pi-line-path--animated {
-  animation: pi-line-draw var(--motion-entrance) var(--ease-out);
-}
-
-/*
- * Reduced-motion: drop the draw-in animation entirely. The hook
- * already detects `prefers-reduced-motion` and refuses to add the
- * `--animated` class; this rule is belt-and-braces in case a future
- * refactor adds the class unconditionally.
- */
-@media (prefers-reduced-motion: reduce) {
-  .pi-line-path--animated {
-    animation: none;
-  }
-}
-
-/*
  * Small-screen strategy: when the shell collapses to one column, the
  * line would have to run vertically through the passage body — the
  * Bezier loses its semantic value. Hide the overlay outright; the

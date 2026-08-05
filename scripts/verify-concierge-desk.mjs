@@ -276,10 +276,6 @@ console.log('\nTest 9: V1.1 IA — desk maps paperResults; old expandedHitId/onP
   const deskSource = readFileSync(path.join(srcRoot, 'concierge', 'ConciergeDesk.tsx'), 'utf8')
   const hookSource = readFileSync(path.join(srcRoot, 'concierge', 'useConciergeDesk.ts'), 'utf8')
   const paperRowSource = readFileSync(path.join(srcRoot, 'concierge', 'ConciergePaperRow.tsx'), 'utf8')
-  const reducedMotionScrollSource = readFileSync(
-    path.join(srcRoot, 'features', 'shared', 'reducedMotionScroll.ts'),
-    'utf8',
-  )
   const groupCardSource = readFileSync(path.join(srcRoot, 'concierge', 'ConciergeGroupCard.tsx'), 'utf8')
   const appSource = readFileSync(path.join(srcRoot, 'App.tsx'), 'utf8')
   const aggSource = readFileSync(path.join(srcRoot, 'concierge', 'aggregatePaperResults.ts'), 'utf8')
@@ -457,14 +453,10 @@ console.log('\nTest 9: V1.1 IA — desk maps paperResults; old expandedHitId/onP
   assert('Paper row does NOT say 共 N 组', !/共\s*\{paper\.hitCount\}\s*组/.test(paperRowSource), '')
   assert('Paper row does NOT use the old "命中 N 组" template (Cut 6 dropped it)', !/命中\s*\{paper\.hitCount\}\s*组(?!\w)/.test(paperRowSource), '')
   assert('Paper row reads paper.hitContext.scope for badge wording', /paper\.hitContext\.scope/.test(paperRowSource), '')
-  // motion-press-exit: the hardcoded `behavior: 'smooth'` now routes through
-  // a shared reduced-motion-aware helper (features/shared/reducedMotionScroll.ts,
-  // reused by 3 other call sites) instead of a literal — check the call site
-  // uses the helper and the helper itself honors prefers-reduced-motion.
+  // High-frequency expansion navigation is immediate for pointer and keyboard.
   assert(
     'Paper row scrolls primary hit into view on expand',
-    /scrollIntoView\(\{\s*behavior:\s*scrollBehavior\(\)\s*,\s*block:\s*['"]nearest['"]\s*\}\)/.test(paperRowSource) &&
-      /matchMedia\(['"]\(prefers-reduced-motion:\s*reduce\)['"]\)\.matches/.test(reducedMotionScrollSource),
+    /scrollIntoView\(\{\s*behavior:\s*['"]auto['"]\s*,\s*block:\s*['"]nearest['"]\s*\}\)/.test(paperRowSource),
     '',
   )
   assert('Paper row tags hit <li> with data-hit', /data-hit=\{isHit\s*\?\s*['"]true['"]\s*:\s*undefined\}/.test(paperRowSource), '')
@@ -776,6 +768,11 @@ console.log('\nTest 14: Paper row hover + clickable + 草稿卷 wording in App')
   // surviving draft-paper entry point) carries the same "草稿卷" wording in
   // a template-literal aria-label instead of a static one.
   assert('App.tsx basket-chip aria-label still carries 草稿卷 wording', /aria-label=\{`打开草稿卷/.test(app), '')
+  assert('draft count updates without a duplicate chip pulse',
+    !/chipTick|prevDraftCountRef|\.animate\(/.test(app) &&
+      !/basket-count-in-(?:up|down)/.test(css), '')
+  assert('basket chip renders the current count directly',
+    /草稿卷 · \{currentDraftGroupCount\} 题组/.test(app), '')
 }
 
 // ------------------------------------------------------------------ Test 15
@@ -848,7 +845,7 @@ console.log('\nTest 18: cut ai-key-server-fallback — runSearch dep array + ser
 }
 
 // ------------------------------------------------------------------ Test 19
-console.log('\nTest 19: cut a11y-concierge-three-gaps — focus-ring visibility + global reduced-motion reset')
+console.log('\nTest 19: cut a11y-concierge-three-gaps — focus-ring visibility + component reduced-motion')
 {
   const here = path.dirname(new URL(import.meta.url).pathname)
   const css = readFileSync(path.resolve(here, '..', 'app', 'src', 'App.css'), 'utf8')
@@ -861,12 +858,11 @@ console.log('\nTest 19: cut a11y-concierge-three-gaps — focus-ring visibility 
   const stillInvisible = focusVisibleRules.filter((rule) => /rgba\(26,\s*26,\s*26,\s*0\.08\)/.test(rule))
   assert('no :focus-visible rule still uses rgba(26, 26, 26, 0.08)', stillInvisible.length === 0, `offending rules: ${JSON.stringify(stillInvisible)}`)
 
-  // Global prefers-reduced-motion reset replaces the old 5-selector block.
-  const reducedMotionBlock = css.match(/@media \(prefers-reduced-motion: reduce\) \{[\s\S]*?\n\}/)?.[0] || ''
-  assert('prefers-reduced-motion block exists', reducedMotionBlock.length > 0, '')
-  assert('reduced-motion block is the global *, *::before, *::after reset', /\*,\s*\*::before,\s*\*::after/.test(reducedMotionBlock), reducedMotionBlock)
-  assert('reduced-motion block sets animation-duration: 0.01ms', /animation-duration:\s*0\.01ms\s*!important/.test(reducedMotionBlock), reducedMotionBlock)
-  assert('old 5-selector reduced-motion block is gone', !/\.concierge-skeleton-line\s*\{\s*animation:\s*none/.test(css), '')
+  assert('prefers-reduced-motion block exists', /@media \(prefers-reduced-motion: reduce\)/.test(css), '')
+  assert('reduced-motion does not use a global wildcard kill switch', !/@media \(prefers-reduced-motion: reduce\)\s*\{\s*\*,\s*\*::before,\s*\*::after/.test(css), '')
+  assert('reduced-motion has no 0.01ms duration override', !/0\.01ms/.test(css), '')
+  assert('reduced-motion removes group-card movement', /@media \(prefers-reduced-motion: reduce\)[\s\S]{0,1200}\.group-card\s*\{[^}]*animation:\s*none/.test(css), '')
+  assert('reduced-motion stops skeleton shimmer while keeping a static placeholder', /@media \(prefers-reduced-motion: reduce\)[\s\S]{0,1800}\.concierge-skeleton-line::after,[\s\S]{0,200}animation:\s*none/.test(css), '')
 
   // Keyboard-equivalent path contract: the expand button must keep aria-expanded.
   const expandButtonMatch = paperRow.match(/className=\{`concierge-row-expand[\s\S]*?<\/button>/)

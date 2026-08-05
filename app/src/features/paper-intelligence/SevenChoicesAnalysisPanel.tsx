@@ -1,5 +1,4 @@
 import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
-import { scrollBehavior } from '../shared/reducedMotionScroll.ts'
 import type {
   SevenChoicesChainView,
   SevenChoicesMechanismSignal,
@@ -25,8 +24,6 @@ export function SevenChoicesAnalysisPanel({
 }: Props): ReactNode {
   const [expandedDetails, setExpandedDetails] = useState<Set<string>>(() => new Set())
   const optionCardRefs = useRef<Record<string, HTMLElement | null>>({})
-  const jumpedCardRef = useRef<HTMLElement | null>(null)
-  const jumpResetRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const openSet = useMemo(() => new Set(openQuestionIds), [openQuestionIds])
   const openCount = openQuestionIds.length
 
@@ -34,35 +31,12 @@ export function SevenChoicesAnalysisPanel({
     return new Map(chains.map((chain) => [chain.correctOptionLabel, chain]))
   }, [chains])
 
-  const flashOption = (label: string): void => {
-    const target = optionCardRefs.current[label]
-    jumpedCardRef.current?.removeAttribute('data-jumped')
-    target?.removeAttribute('data-jumped')
-    if (target) {
-      // Restart the short attention animation even when the teacher clicks the same chip twice.
-      window.getComputedStyle(target).opacity
-      target.setAttribute('data-jumped', 'true')
-      jumpedCardRef.current = target
-    }
-    if (jumpResetRef.current) {
-      clearTimeout(jumpResetRef.current)
-    }
-    jumpResetRef.current = setTimeout(() => {
-      target?.removeAttribute('data-jumped')
-      if (jumpedCardRef.current === target) {
-        jumpedCardRef.current = null
-      }
-      jumpResetRef.current = null
-    }, 1000)
-  }
-
   const scrollToOption = (label: string): void => {
     const target = optionCardRefs.current[label]
     target?.scrollIntoView({
       block: 'center',
-      behavior: scrollBehavior(),
+      behavior: 'auto',
     })
-    flashOption(label)
   }
 
   const jumpToOption = (label: string, chain: SevenChoicesChainView | undefined): void => {
@@ -78,8 +52,9 @@ export function SevenChoicesAnalysisPanel({
 
   // 点谁看谁 (owner 2026-07-09): whenever exactly ONE chain transitions
   // closed→open — chip click, card-header click, paper click / deep-link
-  // seeding openQuestionIds from the page — scroll that card into view with
-  // the same center+flash treatment the jump chips always had. Bulk opens
+  // seeding openQuestionIds from the page — scroll that card into view. The
+  // open card's existing border/background are the target indication; no
+  // replayed attention animation. Bulk opens
   // (全部显示) don't scroll: there is no single card the teacher asked for.
   const prevOpenRef = useRef<Set<string> | null>(null)
   useEffect(() => {
@@ -95,8 +70,8 @@ export function SevenChoicesAnalysisPanel({
     const chain = chains.find((c) => c.questionId === newlyOpened[0])
     if (!chain) return
     scrollToOption(chain.correctOptionLabel)
-    // scrollToOption reads refs + mutates DOM attributes only — safe in an
-    // effect; smooth behavior is inherited from the existing implementation.
+    // scrollToOption only reads the mounted option ref and performs an
+    // immediate high-frequency navigation jump.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [openSet, chains])
 

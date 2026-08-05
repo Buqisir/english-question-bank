@@ -159,8 +159,8 @@ async function runPhaseA(browser) {
   // ③ sheet/seam copy matches prototype.html's 方案C wording.
   assert('③ sheet label reads "─── 第 N 张 A3 ───"', analysis.sheetLabels.every((t) => /─── 第 \d 张 A3 ───/.test(t)), JSON.stringify(analysis.sheetLabels))
   assert('③ seam count is 3 (between the 4 faces)', analysis.seams.length === 3, JSON.stringify(analysis.seams))
-  assert('③ flip seam reads "翻面 ⟲"', analysis.seams.filter((s) => s.kind === 'flip').every((s) => s.text.includes('翻面 ⟲')), JSON.stringify(analysis.seams))
-  assert('③ cut seam reads "换张 ✂"', analysis.seams.filter((s) => s.kind === 'cut').every((s) => s.text.includes('换张 ✂')), JSON.stringify(analysis.seams))
+  assert('③ flip seam reads "翻面" without a Unicode glyph icon', analysis.seams.filter((s) => s.kind === 'flip').every((s) => s.text.trim() === '翻面'), JSON.stringify(analysis.seams))
+  assert('③ cut seam reads "换张" without a Unicode glyph icon', analysis.seams.filter((s) => s.kind === 'cut').every((s) => s.text.trim() === '换张'), JSON.stringify(analysis.seams))
 
   // ④ seam groupId matches the group that actually starts the next page —
   // independently re-derived from evaluatePageBreakAcrossPages's firstPage%4

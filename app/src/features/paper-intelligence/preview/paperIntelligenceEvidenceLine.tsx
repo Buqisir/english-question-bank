@@ -17,12 +17,12 @@
  *     Either gate failing → the overlay renders an empty `<svg>` with
  *     `data-empty="true"`. The component never renders a `<path>` it
  *     can't anchor.
- *   - Honors `prefers-reduced-motion` by skipping the draw-in animation
- *     class (the path still appears immediately).
+ *   - The dotted path appears fully formed. It is a static relationship,
+ *     not a directional flow, so changing evidence never replays a draw-in.
  *
  * Architecture:
  *   - Pure helpers (`findFirstDomOccurrence`, `findEvidenceSource`,
- *     `computeOverlayGeometry`, `detectReducedMotion`) live in the
+ *     `computeOverlayGeometry`) live in the
  *     companion `.ts` file `paperIntelligenceEvidenceLineGeometry.ts`.
  *     This split lets Node's strip-types ESM loader (used by the
  *     verify scripts) exercise the helpers in isolation, since it
@@ -52,7 +52,6 @@ import {
 } from 'react'
 import {
   computeOverlayGeometry,
-  detectReducedMotion,
   findEvidenceSource,
   findFirstDomOccurrence,
   type EvidenceLineLeftSelectorPreset,
@@ -63,7 +62,6 @@ import {
 // without learning about the `.ts` split.
 export {
   computeOverlayGeometry,
-  detectReducedMotion,
   findEvidenceSource,
   findFirstDomOccurrence,
 }
@@ -126,10 +124,6 @@ export type UsePaperIntelligenceEvidenceLineResult = {
    *  otherwise. The component renders this as `data-pi-evidence-id`
    *  on the `<path>` for smoke-test selectors. */
   drawnEvidenceId: string | null
-  /** Whether reduced motion is on at the moment of the latest
-   *  recompute. The component uses this to skip the draw-in
-   *  animation class. */
-  reducedMotion: boolean
 }
 
 export function usePaperIntelligenceEvidenceLine(
@@ -146,7 +140,6 @@ export function usePaperIntelligenceEvidenceLine(
 
   const [geometry, setGeometry] = useState<LineGeometry | null>(null)
   const [drawnEvidenceId, setDrawnEvidenceId] = useState<string | null>(null)
-  const [reducedMotion, setReducedMotion] = useState(false)
 
   // Mounted guard so listener-driven setState never fires after
   // unmount (StrictMode + late rAF callback edge case).
@@ -206,7 +199,6 @@ export function usePaperIntelligenceEvidenceLine(
     if (!mountedRef.current) return
     setGeometry(next)
     setDrawnEvidenceId(activeEvidenceId)
-    setReducedMotion(detectReducedMotion())
   }, [
     activeEvidenceId,
     activeQuestionId,
@@ -222,9 +214,9 @@ export function usePaperIntelligenceEvidenceLine(
     recompute()
   }, [recompute])
 
-  // Listener path: scroll inside the left scroller, scroll inside the
-  // right panel, window resize, container size change. All routed
-  // through a single rAF coalescer.
+  // Listener path: document scroll (for sticky-column hosts), scroll
+  // inside either column, window resize, container size change. All
+  // routed through a single rAF coalescer.
   const rafIdRef = useRef<number | null>(null)
   const scheduleRecompute = useCallback((): void => {
     if (rafIdRef.current !== null) return
@@ -247,6 +239,7 @@ export function usePaperIntelligenceEvidenceLine(
     const container = containerRef.current
 
     window.addEventListener('resize', handler)
+    window.addEventListener('scroll', handler, { passive: true })
     if (left) left.addEventListener('scroll', handler, { passive: true })
     if (right) right.addEventListener('scroll', handler, { passive: true })
 
@@ -258,6 +251,7 @@ export function usePaperIntelligenceEvidenceLine(
 
     return (): void => {
       window.removeEventListener('resize', handler)
+      window.removeEventListener('scroll', handler)
       if (left) left.removeEventListener('scroll', handler)
       if (right) right.removeEventListener('scroll', handler)
       ro?.disconnect()
@@ -278,7 +272,7 @@ export function usePaperIntelligenceEvidenceLine(
     scheduleRecompute,
   ])
 
-  return { geometry, drawnEvidenceId, reducedMotion }
+  return { geometry, drawnEvidenceId }
 }
 
 /* ─────────────────────────── React component ────────────────────────── */
@@ -307,8 +301,6 @@ export type PaperIntelligenceEvidenceLineProps =
  *     (Issue #21-C3.6) — kind-specific modifier hook used by harness
  *     CSS to switch the stroke palette without relying on attribute
  *     selectors. Present only when `activeEvidenceKind` is set.
- *   - `class="pi-line-path--animated"` (only when reduced motion is
- *     OFF) — triggers the one-shot `pi-line-draw` keyframe animation.
  *
  * When no geometry is available, the component returns an empty
  * `<svg data-empty="true">`. We keep the wrapper in the DOM so the
@@ -318,8 +310,7 @@ export type PaperIntelligenceEvidenceLineProps =
 export function PaperIntelligenceEvidenceLine(
   props: PaperIntelligenceEvidenceLineProps,
 ): ReactNode {
-  const { geometry, drawnEvidenceId, reducedMotion } =
-    usePaperIntelligenceEvidenceLine(props)
+  const { geometry, drawnEvidenceId } = usePaperIntelligenceEvidenceLine(props)
   const { activeEvidenceKind } = props
 
   if (!geometry || !drawnEvidenceId) {
@@ -332,21 +323,19 @@ export function PaperIntelligenceEvidenceLine(
     )
   }
 
-  // Compose the path's className from three independent axes:
+  // Compose the path's className from two independent axes:
   //   - base       : always present
   //   - kind hook  : 'pi-line-path--support' | 'pi-line-path--trap'
   //                  | '' when the host did not pass a kind. The
   //                  default PI route's call site stays in the
   //                  no-kind branch so its visual remains identical.
-  //   - animation  : 'pi-line-path--animated' iff reduced motion off
   const kindClass =
     activeEvidenceKind === 'trap'
       ? ' pi-line-path--trap'
       : activeEvidenceKind === 'support'
         ? ' pi-line-path--support'
         : ''
-  const animClass = reducedMotion ? '' : ' pi-line-path--animated'
-  const pathClass = `pi-line-path${kindClass}${animClass}`
+  const pathClass = `pi-line-path${kindClass}`
 
   return (
     <svg

@@ -3,9 +3,8 @@
 // (excluding shared-ui/papersurface/PaperSurface.css, a contract file this cut
 // does not touch) and asserts the motion token discipline landed by this cut
 // holds: no `ease-in` direction bugs, no `transition: all` perf smell, and no
-// bare hand-written duration literals outside the documented exemptions
-// (signature moments tagged `token-exempt`, and the reduced-motion `0.01ms`
-// global reset value).
+// bare hand-written duration literals outside documented `token-exempt`
+// loading or signature moments.
 import { readFileSync, readdirSync, statSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -55,8 +54,7 @@ const TRANSITION_ALL_RE = /transition(-property)?\s*:\s*(?:[^;]*,\s*)?all\b/
 
 // Bare duration literal (`123ms` or `1.23s`) inside a transition/animation
 // shorthand or a `*-duration` longhand. Token-exempt lines (signature moments)
-// carry a trailing `token-exempt` comment; the global reduced-motion reset's
-// `0.01ms` is exempt by value since it is not a hand-picked design duration.
+// carry a trailing `token-exempt` comment.
 const DURATION_RE = /\d+(?:\.\d+)?m?s\b/g
 
 for (const file of cssFiles) {
@@ -90,7 +88,6 @@ for (const file of cssFiles) {
 
     const matches = trimmed.match(DURATION_RE) || []
     for (const m of matches) {
-      if (m === '0.01ms') continue
       fileHasBareDuration = true
       console.error(`  bare duration "${m}" found: ${rel}:${lineNo}: ${trimmed}`)
     }

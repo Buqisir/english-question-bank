@@ -230,7 +230,7 @@ function buildSeam(doc: Document, kind: 'flip' | 'cut', groupId: string | null):
   seam.className = `a3-seam a3-seam-${kind}`
   if (groupId) seam.setAttribute('data-seam-before-group', groupId)
   const label = doc.createElement('span')
-  label.textContent = kind === 'flip' ? '翻面 ⟲' : '换张 ✂'
+  label.textContent = kind === 'flip' ? '翻面' : '换张'
   seam.appendChild(label)
   return seam
 }

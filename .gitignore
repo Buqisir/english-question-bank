@@ -33,6 +33,10 @@ dist-ssr/
 server/logs/
 .playwright-cli/
 app/.playwright-cli/
+.impeccable/hook.cache.json
+.impeccable/hook.pending.json
+.impeccable/live/
+app/.impeccable/
 
 # Local databases and scratch work
 *.sqlite

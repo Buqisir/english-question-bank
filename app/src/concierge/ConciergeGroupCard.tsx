@@ -141,7 +141,7 @@ export function ConciergeGroupCard(props: ConciergeGroupCardProps): ReactNode {
   const draftState = group.draftPaperButtonState || (alreadyInBasket ? 'in_current_draft' : 'add')
   const draftButtonLabel =
     draftState === 'in_current_draft'
-      ? '✓ 已在草稿卷中'
+      ? '已在草稿卷中'
       : draftState === 'disabled'
         ? '暂不可组卷'
         : '加入草稿卷'

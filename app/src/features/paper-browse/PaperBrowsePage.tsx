@@ -56,7 +56,7 @@
  * out of scope per aggregatePaperResults.ts:8-11).
  */
 import { Fragment, useEffect, useLayoutEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react'
-import { ClipboardList } from 'lucide-react'
+import { ClipboardList, RefreshCw } from 'lucide-react'
 import { PaperSurface } from '../../shared-ui/papersurface/PaperSurface'
 // one-sheet-paper: 卷面字体/边距 token 只读消费——同 PaperSurface.tsx /
 // WritingPaperPage.tsx 的注入手法（CSS custom properties on a shared
@@ -168,7 +168,6 @@ import type {
 import type { QuestionGroupCard } from '../../domain/questionBank'
 import type { LectureFocus, PaperSurfaceFocusIntent } from '../../../../shared/papersurface/types'
 import { fetchSimilarPassages, fetchSimilarQuestions } from '../../services/similarQuestions.ts'
-import { scrollBehavior } from '../shared/reducedMotionScroll.ts'
 import {
   SimilarQuestionsRailView,
   type SimilarRailRequestState,
@@ -476,6 +475,78 @@ const paperBrowseContentStyle: PaperBrowseContentStyle = {
   '--ps-page-margin-top': paperSurfaceTokens.pageMarginTop,
 }
 
+const PIANO_RAIL_WHITE_KEY_HEIGHT = 40
+const PIANO_RAIL_BLACK_BOUNDARIES = new Set([1, 2, 4, 5, 6])
+
+function pianoRailGroupLabel(title: string): string {
+  const trimmed = title.trim()
+  const readingLetter = trimmed.match(/^Reading\s+([A-D])$/i)
+  if (readingLetter) return readingLetter[1].toUpperCase()
+  return trimmed.replace(/\s*[（(]\s*满分\s*[\d.]+\s*分\s*[）)]\s*$/, '')
+}
+
+function mountCanonicalReadingEvidenceAnchor(
+  card: HTMLElement,
+  input: {
+    evidenceId: string
+    kind: 'support' | 'trap' | null
+    quote: string
+  },
+): (() => void) | null {
+  const compact = (value: string) => value.replace(/\s+/g, ' ').trim()
+  const target = compact(input.quote)
+  if (!target) return null
+
+  const inlineCandidates = [...card.querySelectorAll<HTMLElement>(
+    '.ps-canonical-reading [data-canonical-content-node-id]',
+  )]
+  const blockCandidates = [...card.querySelectorAll<HTMLElement>(
+    '.ps-canonical-reading [data-canonical-block-id]',
+  )]
+  const anchor = [...inlineCandidates, ...blockCandidates]
+    .find((element) => compact(element.textContent ?? '').includes(target))
+  if (!anchor) return null
+
+  const walker = document.createTreeWalker(anchor, NodeFilter.SHOW_TEXT)
+  let textNode = walker.nextNode() as Text | null
+  while (textNode) {
+    const start = textNode.data.indexOf(input.quote)
+    if (start >= 0) {
+      const match = textNode.splitText(start)
+      match.splitText(input.quote.length)
+      const mark = document.createElement('mark')
+      mark.className = 'ps-evidence-anchor ps-evidence-anchor--active'
+      mark.setAttribute('data-paper-evidence-id', input.evidenceId)
+      mark.setAttribute('data-paper-browse-evidence-line-anchor', input.evidenceId)
+      if (input.kind) mark.setAttribute('data-paper-evidence-kind', input.kind)
+      match.replaceWith(mark)
+      mark.append(match)
+      return () => {
+        if (!mark.isConnected) return
+        const parent = mark.parentElement
+        mark.replaceWith(match)
+        parent?.normalize()
+      }
+    }
+    textNode = walker.nextNode() as Text | null
+  }
+
+  // A reviewed quote can span adjacent canonical inlines. In that case the
+  // smallest owning block is still a truthful visual anchor; never guess a
+  // different passage node merely to make the connector appear.
+  anchor.setAttribute('data-paper-evidence-id', input.evidenceId)
+  anchor.setAttribute('data-paper-browse-evidence-line-anchor', input.evidenceId)
+  return () => {
+    if (
+      anchor.getAttribute('data-paper-browse-evidence-line-anchor')
+        === input.evidenceId
+    ) {
+      anchor.removeAttribute('data-paper-evidence-id')
+      anchor.removeAttribute('data-paper-browse-evidence-line-anchor')
+    }
+  }
+}
+
 function renderSectionHeadingText(text: string): ReactNode {
   return sectionHeadingTextRuns(text).map((run, index) =>
     run.kind === 'numeric'
@@ -601,6 +672,8 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
   const [lectureAnalysisLoading, setLectureAnalysisLoading] = useState(false)
   // 刀 2: 讲评态下的显式点题选择；null = 跟随 scrollspy 显示组级概览。
   const [lectureSelection, setLectureSelection] = useState<LectureSelection | null>(null)
+  const [readingEvidenceAnchorReadyId, setReadingEvidenceAnchorReadyId] =
+    useState<string | null>(null)
   const [openSevenChoiceQuestionIds, setOpenSevenChoiceQuestionIds] = useState<string[]>([])
   // similar-rail (E2): 讲评栏 body 的视图态 — 'analysis'(解析)/'similar'
   // (配相似结果列表)。只在 selectLectureQuestion 换题或用户点「返回解析」
@@ -1540,7 +1613,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     )
     if (!target) return
     suppressScrollspyClear()
-    target.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: scrollBehavior() })
+    target.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'auto' })
   }, [lectureOpen, lectureSelection, groupModels])
 
   // rail-panel（owner 拍板 2026-07-15，原型 B「分段面板」胜出——四变体实拍
@@ -1639,8 +1712,17 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     return parts
   }, [asset, canonicalConsumption, writingSkipIndices])
 
-  // 讲评态紧凑 rail 的扁平题组表：题号区间当短标签，无题号退回题组名。
-  const railGroups = useMemo(() => railParts.flatMap((part) => part.groups), [railParts])
+  // 挑题态钢琴目录：白键按可见的部分头 + 题组逐行计数；黑键沿真实钢琴
+  // 的 2+3 节奏落在相邻白键接缝上；讲评态继续复用同一层琴键结构。
+  const pianoRailBlackKeyTops = useMemo(() => {
+    const whiteKeyCount = railParts.reduce(
+      (count, part) => count + part.groups.length + (part.name ? 1 : 0),
+      0,
+    )
+    return Array.from({ length: Math.max(0, whiteKeyCount - 1) }, (_, index) => index + 1)
+      .filter((boundary) => PIANO_RAIL_BLACK_BOUNDARIES.has(((boundary - 1) % 7) + 1))
+      .map((boundary) => boundary * PIANO_RAIL_WHITE_KEY_HEIGHT - 1)
+  }, [railParts])
 
   // 刀 2: 讲评栏的目标题组 —— 显式点题选中的题组优先，否则退回 scrollspy
   // 当前锚点(仅当锚点本身就是一个题组 id 时)。
@@ -1686,18 +1768,71 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
   // 控（activeQuestionId && activeEvidenceId 双非空）自然不画线——不需要额外
   // 判断 groupType 来阻止它们，双重保险。
   const readingEvidenceLineContext = useMemo((): {
+    groupId: string | null
     questionId: string | null
     evidenceId: string | null
     kind: 'support' | 'trap' | null
+    quote: string | null
   } => {
-    if (!lectureOpen) return { questionId: null, evidenceId: null, kind: null }
-    if (!lectureSelection) return { questionId: null, evidenceId: null, kind: null }
-    if (panelGroupId !== lectureSelection.groupId) return { questionId: null, evidenceId: null, kind: null }
-    if (panelGroupModel?.kind !== 'reading') return { questionId: null, evidenceId: null, kind: null }
+    const empty = {
+      groupId: null,
+      questionId: null,
+      evidenceId: null,
+      kind: null,
+      quote: null,
+    } as const
+    if (!lectureOpen) return empty
+    if (!lectureSelection) return empty
+    if (panelGroupId !== lectureSelection.groupId) return empty
+    if (panelGroupModel?.kind !== 'reading') return empty
     const evidenceId = lectureSelection.evidenceId
     const kind = evidenceId ? panelGroupModel.model.evidenceKindById[evidenceId] ?? null : null
-    return { questionId: lectureSelection.questionId, evidenceId, kind }
+    const analysis = panelGroupModel.model.analysisByQuestionId[lectureSelection.questionId]
+    const evidenceRows = analysis
+      ? [
+          ...analysis.supportEvidenceRows,
+          ...analysis.options.flatMap((option) => option.trapEvidenceRows),
+        ]
+      : []
+    const quote = evidenceRows.find((row) => row.evidenceId === evidenceId)?.quote ?? null
+    return {
+      groupId: lectureSelection.groupId,
+      questionId: lectureSelection.questionId,
+      evidenceId,
+      kind,
+      quote,
+    }
   }, [lectureOpen, lectureSelection, panelGroupId, panelGroupModel])
+
+  // Canonical Reading renders its semantic blocks directly and therefore
+  // does not mount the legacy textMap evidence spans that the shared dotted
+  // connector targets. Add one page-local, display-only anchor to the exact
+  // canonical inline (or its smallest owning block when a quote spans
+  // inlines), then mount the connector on the following commit. This keeps
+  // the shared PaperSurface contract and renderer untouched.
+  useLayoutEffect(() => {
+    const {
+      groupId,
+      evidenceId,
+      quote,
+    } = readingEvidenceLineContext
+    setReadingEvidenceAnchorReadyId(null)
+    if (!groupId || !evidenceId || !quote) return
+    const scroller = scrollerRef.current
+    if (!scroller) return
+    const card = [...scroller.querySelectorAll<HTMLElement>(
+      '.paper-browse-group-card[data-paper-browse-anchor]',
+    )].find((candidate) => candidate.dataset.paperBrowseAnchor === groupId)
+    if (!card) return
+    const releaseAnchor = mountCanonicalReadingEvidenceAnchor(card, {
+      evidenceId,
+      kind: readingEvidenceLineContext.kind,
+      quote,
+    })
+    if (!releaseAnchor) return
+    setReadingEvidenceAnchorReadyId(evidenceId)
+    return releaseAnchor
+  }, [readingEvidenceLineContext])
 
   function scrollToAnchor(anchor: string): void {
     const scroller = scrollerRef.current
@@ -1712,14 +1847,10 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     scrollSettleCancelRef.current?.()
     const target = queryTarget()
     suppressScrollspyClear()
-    target?.scrollIntoView({ block: 'start', inline: 'nearest', behavior: scrollBehavior() })
-    // 留观① QA 定性后按实修（triage 拍板「再现按竞态修」）：两种真实
-    // 失效都收——① 冷加载沉降期题组模型异步落地，scrollIntoView 只按
-    // 当下位置算一次，目标被后续布局推走；② smooth 滚动动画由渲染帧
-    // 驱动，窗口被遮挡/后台时 rAF 冻结，动画永远走不完（QA 实测
-    // rafRan=false，正是「高亮动了、卷面不动」的机制）。故沉降循环用
+    // 冷加载沉降期题组模型可能异步落地，scrollIntoView 只按当下位置算
+    // 一次，目标会被后续布局推走。高频目录导航直接定位；沉降循环继续用
     // setTimeout（遮挡态照跑）每 150ms 巡检 5s：位置静止 ≥3 拍仍明显
-    // 偏离才用 behavior:'auto' 硬校准（不打断进行中的 smooth 动画）；
+    // 偏离才再次用 behavior:'auto' 校准；
     // 用户 wheel/touchstart/keydown 立即让位；每拍重查询锚点（沉降期
     // 节点可能尚未挂载或被替换，捕获引用会拿到 detached 节点）。
     const deadline = performance.now() + 5000
@@ -1737,6 +1868,9 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     window.addEventListener('wheel', cancel, { passive: true })
     window.addEventListener('touchstart', cancel, { passive: true })
     window.addEventListener('keydown', cancel)
+
+    target?.scrollIntoView({ block: 'start', inline: 'nearest', behavior: 'auto' })
+
     let lastTop = Number.NaN
     let stillChecks = 0
     const settle = () => {
@@ -1817,7 +1951,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
 
   function toggleLecturePanel(): void {
     if (!lectureOpen && !lectureSelection) {
-      const defaultGroupId = panelGroupId ?? railGroups[0]?.anchor ?? null
+      const defaultGroupId = panelGroupId ?? railParts[0]?.groups[0]?.anchor ?? null
       const defaultQuestionId = defaultGroupId
         ? asset?.content.groups[defaultGroupId]?.questionIds[0]
         : null
@@ -2818,7 +2952,8 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
                 })
               }}
             >
-              🔁 {SIMILAR_PASSAGES_MODE_GROUP_TYPES.has(group.groupType) ? '相似篇章' : '配相似'}
+              <RefreshCw aria-hidden="true" size={15} strokeWidth={2} />
+              {SIMILAR_PASSAGES_MODE_GROUP_TYPES.has(group.groupType) ? '相似篇章' : '配相似'}
             </button>
             <span className="similar-cta-why">——从库里配同配方的相似题</span>
           </div>
@@ -3165,6 +3300,68 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     }
   }
 
+  function renderPianoRail(cropped: boolean): ReactNode {
+    return (
+      <div
+        className={`paper-browse-piano-viewport${
+          cropped ? ' paper-browse-piano-viewport--cropped' : ''
+        }`}
+      >
+        <div className="paper-browse-rail-panel paper-browse-rail-panel--piano">
+          <div className="paper-browse-piano-black-key-layer" aria-hidden="true">
+            {pianoRailBlackKeyTops.map((top) => (
+              <span
+                key={top}
+                className="paper-browse-piano-black-key"
+                style={{ top }}
+              />
+            ))}
+          </div>
+          {railParts.map((part, partIndex) => (
+            <div
+              key={part.anchor}
+              className={`paper-browse-rail-part${
+                partIndex === 0 ? ' paper-browse-rail-part--first' : ''
+              }`}
+            >
+              {part.name && (
+                <button
+                  type="button"
+                  className="paper-browse-rail-part-head"
+                  aria-label={`${part.name}，前往本部分第一个题组`}
+                  onClick={() => scrollToAnchor(part.anchor)}
+                >
+                  <span className="paper-browse-rail-part-name">{part.name}</span>
+                </button>
+              )}
+              {part.groups.map((g) => {
+                const isActive = g.anchor === activeAnchor
+                const displayTitle = pianoRailGroupLabel(g.title)
+                const isReadingLetter = /^[A-D]$/.test(displayTitle)
+                return (
+                  <button
+                    key={g.anchor}
+                    type="button"
+                    className={`paper-browse-rail-group${
+                      isReadingLetter ? ' paper-browse-rail-group--letter' : ''
+                    }${
+                      isActive ? ' paper-browse-rail-group--active' : ''
+                    }`}
+                    aria-current={isActive ? 'true' : undefined}
+                    aria-label={displayTitle === g.title ? undefined : g.title}
+                    onClick={() => scrollToAnchor(g.anchor)}
+                  >
+                    <span className="paper-browse-rail-group-title">{displayTitle}</span>
+                  </button>
+                )
+              })}
+            </div>
+          ))}
+        </div>
+      </div>
+    )
+  }
+
   if (loading) {
     return (
       <div className="paper-browse-page">
@@ -3198,73 +3395,9 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
         aria-labelledby="paper-browse-title"
       >
         <h1 id="paper-browse-title" className="visually-hidden">{asset.paper.title}</h1>
-        <nav
-          className={`paper-browse-rail${lectureOpen ? ' paper-browse-rail--compact' : ''}`}
-          aria-label="目录"
-        >
-          {lectureOpen ? (
-            // 讲评态 rail 收窄给卷面让宽：只留题组项（题号区间），部分头
-            // 隐去；完整名走 title tooltip。卡片语言与挑题态同款（owner
-            // 2026-07-15「按完讲评之后也是一块卡片」）：同一张浅纸面板，
-            // 整行即题号章，选中翻实心。
-            <div className="paper-browse-rail-panel paper-browse-rail-panel--compact">
-              {railGroups.map((g) => {
-                const isActive = g.anchor === activeAnchor
-                return (
-                  <button
-                    key={g.anchor}
-                    type="button"
-                    className={`paper-browse-rail-group paper-browse-rail-group--compact${
-                      isActive ? ' paper-browse-rail-group--active' : ''
-                    }`}
-                    aria-current={isActive ? 'true' : undefined}
-                    title={g.range ? `${g.title} · ${g.range}` : g.title}
-                    onClick={() => scrollToAnchor(g.anchor)}
-                  >
-                    {g.range || g.title}
-                  </button>
-                )
-              })}
-            </div>
-          ) : (
-            // 挑题态分段面板（rail-panel，owner 拍板 2026-07-15）：rail 是
-            // 一张浅纸面板，部分之间淡线分段，题号做胶囊章、选中翻实心。
-            <div className="paper-browse-rail-panel">
-              {railParts.map((part) => (
-                <div key={part.anchor} className="paper-browse-rail-part">
-                  {part.name && (
-                    <div className="paper-browse-rail-part-head">
-                      <button
-                        type="button"
-                        className="paper-browse-rail-part-name"
-                        onClick={() => scrollToAnchor(part.anchor)}
-                      >
-                        {part.name}
-                      </button>
-                      {part.score && <span className="paper-browse-rail-part-score">{part.score}</span>}
-                    </div>
-                  )}
-                  {part.groups.map((g) => {
-                    const isActive = g.anchor === activeAnchor
-                    return (
-                      <button
-                        key={g.anchor}
-                        type="button"
-                        className={`paper-browse-rail-group${
-                          isActive ? ' paper-browse-rail-group--active' : ''
-                        }`}
-                        aria-current={isActive ? 'true' : undefined}
-                        onClick={() => scrollToAnchor(g.anchor)}
-                      >
-                        <span className="paper-browse-rail-group-title">{g.title}</span>
-                        {g.range && <span className="paper-browse-rail-group-chip">{g.range}</span>}
-                      </button>
-                    )
-                  })}
-                </div>
-              ))}
-            </div>
-          )}
+        <nav className="paper-browse-rail" aria-label="目录">
+          {/* 讲评态不是另一套胶囊导航：同一架钢琴只把可见宽度裁窄。 */}
+          {renderPianoRail(lectureOpen)}
         </nav>
         <div className="paper-browse-content" ref={scrollerRef} style={paperBrowseContentStyle}>
           {grammarFillGeometryFixture && (
@@ -3318,7 +3451,10 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
           一一对应。抽屉态（<1200px）几何意义不大——讲评栏离开文档流叠在
           卷面上，见 paperBrowsePage.css 里同断点的 display:none 收紧。
         */}
-        {lectureOpen && panelGroupModel?.kind === 'reading' && (
+        {lectureOpen
+          && panelGroupModel?.kind === 'reading'
+          && readingEvidenceAnchorReadyId === readingEvidenceLineContext.evidenceId
+          && (
           <PaperIntelligenceEvidenceLine
             containerRef={shellRef}
             leftScrollerRef={scrollerRef}

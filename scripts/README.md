@@ -28,9 +28,10 @@ must be confirmed green (AGENTS.md RM gate).
 | --- | --- | --- |
 | `verify-ci.mjs` | Selects changed/Paper/all packs deterministically and reports PASS/SKIP/FAIL without hiding later failures | yes |
 | `verify-architecture-housekeeping.mjs` | Prevents missing entrypoints, undocumented verifier registration, stale workflow ownership, and six risk-route regressions | yes |
-| `verify-motion-tokens.mjs` | motion-pass gate: `app/src/**/*.css` (excluding PaperSurface.css contract file) has no `ease-in`, no `transition: all`, no bare hand-written transition/animation durations outside `token-exempt`-tagged signature moments and the `0.01ms` reduced-motion reset | yes |
+| `verify-motion-tokens.mjs` | motion-pass gate: `app/src/**/*.css` (excluding PaperSurface.css contract file) has no `ease-in`, no `transition: all`, and no bare hand-written transition/animation durations outside `token-exempt`-tagged loading or signature moments | yes |
 | `verify-lecture-panel-css.mjs` | lecture-css-restore gate: 讲评五解析面板 (pi-ps-analysis/cloze/gf/seven/writing) 活 TSX 用到的每个类必须有 CSS 定义或在 hook-only 白名单（含白名单防陈旧 + paperBrowsePage.css @import 加载链断言）——retire 刀样式陪葬事故的可执行形态 | yes |
 | `verify-radius-family.mjs` | design-canon-v2 gate: every `border-radius` in `app/src/**/*.css` is in the DESIGN.md radius ladder {0, 4, 6, 8, 999px, 50%}; 32 historical off-family literals grandfathered per file×value as a shrink-only ratchet | yes |
+| `verify-no-ui-emoji.mjs` | design-canon UI icon gate: `app/src` interface source contains no hard-coded Emoji/Dingbat pictographs used as icons, and DESIGN.md retains The No-Emoji-Icon Rule; imported paper/user content remains outside this source-level gate | yes |
 | `verify-h1-router-skeleton.mjs` | H1-A minimal route registry contract | yes |
 | `verify-h1d-analysis-availability.mjs` | H1-D PaperSurface analysis availability owner contract | yes |
 | `verify-i0e-seven-choices-entry.mjs` | I0-E 七选五 PaperSurface entry availability and label gate | yes |

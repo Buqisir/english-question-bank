@@ -11,7 +11,6 @@
  *     anchor policy.
  *   - `findEvidenceSource` — find the right-panel source button.
  *   - `computeOverlayGeometry` — pure rect math, returns SVG geometry.
- *   - `detectReducedMotion` — single-shot media-query lookup.
  *
  * Does NOT own:
  *   - The React hook (`usePaperIntelligenceEvidenceLine`).
@@ -211,24 +210,4 @@ export function computeOverlayGeometry(
 
   const d = `M ${tx.toFixed(2)} ${ty.toFixed(2)} C ${c1x.toFixed(2)} ${c1y.toFixed(2)}, ${c2x.toFixed(2)} ${c2y.toFixed(2)}, ${sx.toFixed(2)} ${sy.toFixed(2)}`
   return { width, height, d }
-}
-
-/* ─────────────────────────── reduced motion ─────────────────────────── */
-
-/**
- * Read `prefers-reduced-motion` lazily at the moment we need it. We
- * never cache the result so the overlay tracks OS-level changes
- * without needing `matchMedia.addEventListener`.
- *
- * Returns false in non-browser environments (the verify-script unit
- * tests don't have `window`).
- */
-export function detectReducedMotion(): boolean {
-  if (typeof window === 'undefined') return false
-  if (typeof window.matchMedia !== 'function') return false
-  try {
-    return window.matchMedia('(prefers-reduced-motion: reduce)').matches
-  } catch {
-    return false
-  }
 }

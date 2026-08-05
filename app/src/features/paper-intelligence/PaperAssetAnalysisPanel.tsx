@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import { Check } from 'lucide-react'
 import type { PaperAssetQuestionAnalysisView } from './paperAssetSurfaceAdapter.ts'
 
 export type PaperAssetAnalysisPanelProps = {
@@ -100,7 +101,7 @@ export function PaperAssetAnalysisPanel({
                 </span>
                 {isCorrect ? (
                   <span className="pi-ps-analysis-option-badge pi-ps-analysis-option-badge--correct">
-                    ✓
+                    <Check aria-hidden="true" size={16} strokeWidth={2.25} />
                   </span>
                 ) : !hideTypeBadgeAndMeta && option.trapLabel ? (
                   <span className="pi-ps-analysis-option-badge pi-ps-analysis-option-badge--trap">

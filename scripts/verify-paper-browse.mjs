@@ -189,9 +189,8 @@
  * 39-43. flow-panel 刀 2 修复轮 ③ (阅读跨栏证据动线 — the third dao2-fix
  *        layer, owner 2026-07-09 实测拍板):
  *     39. PaperBrowsePage imports `PaperIntelligenceEvidenceLine` from
- *         `paper-intelligence/preview/paperIntelligenceEvidenceLine`
- *         (import-only contract — the component + its geometry helper
- *         module are never edited by this cut).
+ *         `paper-intelligence/preview/paperIntelligenceEvidenceLine`; the
+ *         shared connector renders a static relationship, not a draw-in.
  *     40. The component mounts only when 讲评开 AND the current讲评栏
  *         target题组 is a reading group (`lectureOpen && panelGroupModel
  *         ?.kind === 'reading'`) — 卷面显影原则: 完形/语法填空(原位型)只给
@@ -285,12 +284,15 @@ console.log('paper-browse verify: whole-paper preview page (刀B v1)')
 const appSrc = read('app/src/App.tsx')
 const detailViewSrc = read('app/src/features/question-detail/QuestionGroupDetailView.tsx')
 const pageSrc = read('app/src/features/paper-browse/PaperBrowsePage.tsx')
-const reducedMotionScrollSrc = read('app/src/features/shared/reducedMotionScroll.ts')
+const evidenceLineSrc = read(
+  'app/src/features/paper-intelligence/preview/paperIntelligenceEvidenceLine.tsx',
+)
 const conciergeGroupCardSrc = read('app/src/concierge/ConciergeGroupCard.tsx')
 const verifyCiSrc = read('scripts/verify-ci.mjs')
 const readmeSrc = read('scripts/README.md')
 const railViewSrc = read('app/src/features/paper-browse/SimilarQuestionsRailView.tsx')
 const similarServiceSrc = read('app/src/services/similarQuestions.ts')
+const designSrc = read('DESIGN.md')
 const asset = JSON.parse(
   read('app/public/paper-assets/paper-2026-i/latest/paper-asset.json'),
 )
@@ -1072,6 +1074,9 @@ assert(
 // ─── 22-25. flow-panel 刀 1: 一页两姿态布局 + 讲评栏骨架 ───
 
 const pageCssSrc = read('app/src/features/paper-browse/paperBrowsePage.css')
+const sevenChoicesAnalysisSrc = read('app/src/features/paper-intelligence/SevenChoicesAnalysisPanel.tsx')
+const lectureAnalysisCssSrc = read('app/src/features/paper-intelligence/lectureAnalysisPanels.css')
+const paperIntelligenceCssSrc = read('app/src/features/paper-intelligence/paperIntelligence.css')
 
 assert(
   'PaperBrowsePage renders a 讲评 handle button unconditionally (always visible)',
@@ -1314,17 +1319,38 @@ assert(
     /groupModels\[lectureSelection\.groupId\]\?\.kind\s*!==\s*['"]reading['"]\)\s*return/.test(pageSrc),
   'missing the evidence-scroll effect, or it is not gated to reading-only groups',
 )
-// motion-press-exit: the inline matchMedia/reduced ternary that used to
-// live directly in this effect was pulled into a shared helper
-// (`features/shared/reducedMotionScroll.ts`, reused by 4 call sites incl.
-// this one) — check the reduced-motion branch lives in the helper AND this
-// page's effect actually calls it, instead of requiring the pattern inline.
 assert(
-  '阅读动线 effect honors prefers-reduced-motion (smooth by default, auto when reduced)',
-  /matchMedia\(['"]\(prefers-reduced-motion:\s*reduce\)['"]\)\.matches/.test(reducedMotionScrollSrc) &&
-    /reduced\s*\?\s*['"]auto['"]\s*:\s*['"]smooth['"]/.test(reducedMotionScrollSrc) &&
-    /scrollIntoView\(\{[^}]*behavior:\s*scrollBehavior\(\)/.test(pageSrc),
-  'missing the reduced-motion branch on the evidence-scroll effect',
+  '阅读动线 effect uses immediate high-frequency navigation',
+  /scrollIntoView\(\{[^}]*behavior:\s*['"]auto['"]/.test(pageSrc) &&
+    !/scrollBehavior\(\)/.test(pageSrc),
+  'the evidence-scroll effect still animates a frequent navigation jump',
+)
+
+assert(
+  'Paper Browse rail navigation has no long-distance rAF scroll animation',
+  !/Math\.min\(520/.test(pageSrc) &&
+    !/requestAnimationFrame\(animate\)/.test(pageSrc),
+  'the long-distance custom scroll animation is still present',
+)
+
+assert(
+  'Paper Browse shell does not animate grid-template-columns',
+  !/transition:\s*grid-template-columns/.test(pageCssSrc),
+  'layout-driving grid-template-columns transition is still present',
+)
+
+assert(
+  'Evidence connector stays static instead of replaying a draw-in class',
+  !/pi-line-path--animated/.test(evidenceLineSrc) &&
+    !/pi-line-draw|stroke-dashoffset/.test(paperIntelligenceCssSrc),
+  'evidence line still attaches an animated class',
+)
+
+assert(
+  '七选五跳卡使用静态打开态，不再重播 900ms attention keyframe',
+  !/data-jumped/.test(sevenChoicesAnalysisSrc) &&
+    !/pi-seven-card-jump|data-jumped/.test(lectureAnalysisCssSrc),
+  'the replayed seven-choices jump animation is still present',
 )
 
 assert(
@@ -1359,10 +1385,18 @@ assert(
 )
 assert(
   'PaperIntelligenceEvidenceLine mounts only when 讲评开 AND the panel目标题组是阅读题组 (卷面显影原则: 完形/语法填空/七选五/写作 do not get the motion line)',
-  /\{lectureOpen\s*&&\s*panelGroupModel\?\.kind\s*===\s*['"]reading['"]\s*&&\s*\(\s*\n\s*<PaperIntelligenceEvidenceLine/.test(
+  /\{lectureOpen[\s\S]{0,160}panelGroupModel\?\.kind\s*===\s*['"]reading['"][\s\S]{0,220}<PaperIntelligenceEvidenceLine/.test(
     pageSrc,
   ),
   'evidence line render condition is missing or not gated to lectureOpen+reading',
+)
+assert(
+  'Canonical Reading restores one exact page-local evidence anchor before mounting the shared connector (no PaperSurface contract change)',
+  /function mountCanonicalReadingEvidenceAnchor\(/.test(pageSrc) &&
+    /\.ps-canonical-reading \[data-canonical-content-node-id\]/.test(pageSrc) &&
+    /mark\.setAttribute\('data-paper-evidence-id', input\.evidenceId\)/.test(pageSrc) &&
+    /readingEvidenceAnchorReadyId === readingEvidenceLineContext\.evidenceId/.test(pageSrc),
+  'missing the Canonical Reading quote anchor bridge or connector-ready gate',
 )
 assert(
   'PaperIntelligenceEvidenceLine wired with shellRef/scrollerRef/rightPanelRef + leftSelectorPreset="paper-surface"',
@@ -1371,6 +1405,12 @@ assert(
     /rightPanelRef=\{rightPanelRef\}/.test(pageSrc) &&
     /leftSelectorPreset="paper-surface"/.test(pageSrc),
   'missing one or more of the containerRef/leftScrollerRef/rightPanelRef/leftSelectorPreset props',
+)
+assert(
+  'PaperIntelligenceEvidenceLine recomputes on document scroll so its endpoint follows the sticky lecture panel',
+  /window\.addEventListener\('scroll', handler, \{ passive: true \}\)/.test(evidenceLineSrc) &&
+    /window\.removeEventListener\('scroll', handler\)/.test(evidenceLineSrc),
+  'missing the passive window scroll listener or its cleanup',
 )
 assert(
   '.paper-browse-shell carries ref={shellRef} and the 讲评栏 <aside> carries ref={rightPanelRef}',
@@ -1885,7 +1925,7 @@ assert(
   'missing the fill-gaps-only supplemental blankQuestionIdByNo merge',
 )
 assert(
-  '70. scrollToAnchor 沉降巡检修（留观① QA 定性归刀）：setTimeout 驱动（遮挡态 rAF 冻结时 smooth 动画走不完，定时器照跑）、每拍重查询锚点（detached 节点防御）、静止 ≥3 拍且偏离 >4px 才 behavior:auto 硬校准、wheel/touchstart/keydown 立即取消、5s 到点退出',
+  '70. scrollToAnchor 沉降巡检修：setTimeout 驱动（遮挡态也能运行）、每拍重查询锚点（detached 节点防御）、静止 ≥3 拍且偏离 >4px 才 behavior:auto 校准、wheel/touchstart/keydown 立即取消、5s 到点退出',
   /stillChecks >= 3 && Math\.abs\(top\) > 4/.test(pageSrc) &&
     /timer = setTimeout\(settle, 150\)/.test(pageSrc) &&
     /scrollerRef\.current\?\.querySelector<HTMLElement>/.test(pageSrc) &&
@@ -1902,6 +1942,134 @@ assert(
     /scrollSettleCancelRef\.current = cancel/.test(pageSrc) &&
     /if \(scrollSettleCancelRef\.current === cancel\) scrollSettleCancelRef\.current = null/.test(pageSrc),
   'missing the retire-then-replace reentry guard on the settle loop',
+)
+
+// ─── 72-76. piano rail (owner-approved prototype migration) ───
+
+assert(
+  '72. 挑题态与讲评态复用同一架 220px 钢琴；讲评态以同位移的 transform + clip-path 连续裁成 88px，琴键不重排且旧胶囊 DOM 退役',
+  pageSrc.includes('function renderPianoRail(cropped: boolean)') &&
+    pageSrc.includes("cropped ? ' paper-browse-piano-viewport--cropped' : ''") &&
+    /paper-browse-piano-black-key-layer" aria-hidden="true"/.test(pageSrc) &&
+    pageSrc.includes('renderPianoRail(lectureOpen)') &&
+    !pageSrc.includes('paper-browse-rail-panel--compact') &&
+    /\.paper-browse-piano-viewport\s*\{[^}]*width:\s*220px[^}]*clip-path:\s*inset\(0 0 0 0\)[^}]*transform:\s*translate3d\(0, -50%, 0\)[^}]*transition:[^}]*transform var\(--motion-slow\) var\(--ease-in-out\),[^}]*clip-path var\(--motion-slow\) var\(--ease-in-out\)/s.test(pageCssSrc) &&
+    /\.paper-browse-piano-viewport--cropped\s*\{[^}]*clip-path:\s*inset\(0 0 0 132px\)[^}]*transform:\s*translate3d\(-132px, -50%, 0\)/.test(pageCssSrc) &&
+    !pageCssSrc.includes('.paper-browse-rail-panel--piano-cropped'),
+  'the lecture rail is not an interruptible same-geometry crop of the full piano, or the retired compact variants remain',
+)
+assert(
+  '73. 黑键按可见白键行数动态生成真实 2+3 节奏，不硬编码某一套卷',
+  /count \+ part\.groups\.length \+ \(part\.name \? 1 : 0\)/.test(pageSrc) &&
+    /PIANO_RAIL_BLACK_BOUNDARIES\.has\(\(\(boundary - 1\) % 7\) \+ 1\)/.test(pageSrc) &&
+    /\.paper-browse-piano-black-key-layer\s*\{[^}]*pointer-events:\s*none/.test(pageCssSrc),
+  'missing dynamic white-key counting, 2+3 boundary rhythm, or click-through black keys',
+)
+assert(
+  '74. Reading A-D 显示为 A-D 并在白键露出区居中，其他题组不套字母布局',
+  /\^Reading\\s\+\(\[A-D\]\)\$\/i/.test(pageSrc) &&
+    /isReadingLetter \? ' paper-browse-rail-group--letter'/.test(pageSrc) &&
+    /\.paper-browse-rail-panel--piano \.paper-browse-rail-group--letter\s*\{[^}]*justify-content:\s*center/.test(pageCssSrc),
+  'missing Reading label normalization or A-D centering',
+)
+assert(
+  '75. 钢琴目录只显示部分名与无分数节名；分数和题号章从挑题态 DOM 退役，卷面正文不受影响',
+  !pageSrc.includes('paper-browse-rail-part-score') &&
+    !pageSrc.includes('paper-browse-rail-group-chip') &&
+    /trimmed\.replace\(\/\\s\*\[（\(\][\s\S]*满分[\s\S]*\$\/, ''\)/.test(pageSrc) &&
+    /paper-browse-rail-panel--piano \.paper-browse-rail-part-head,[\s\S]{0,900}border-left:\s*0/.test(pageCssSrc),
+  'score/range chrome remains in the full rail, score suffixes are not normalized, or the approved open-left white-key edge is missing',
+)
+assert(
+  '76. 高频钢琴目录点键直接定位，不播放原生或自绘 smooth 滚动',
+  /target\?\.scrollIntoView\(\{ block: 'start', inline: 'nearest', behavior: 'auto' \}\)/.test(pageSrc) &&
+    !/behavior:\s*['"]smooth['"]/.test(pageSrc) &&
+    !/requestAnimationFrame\(animate\)/.test(pageSrc),
+  'rail navigation still animates a frequent scroll jump',
+)
+
+// ─── 77-79. owner 2026-08-04 cut-line optical correction ───
+
+assert(
+  '77. hover/focus keeps the full-width dashed boundary but no longer tints the whole question-group band',
+  /\.paper-browse-group-card::after\s*\{[^}]*border-top:\s*1px dashed[^}]*border-bottom:\s*1px dashed/.test(pageCssSrc) &&
+    !/\.paper-browse-group-card::after\s*\{[^}]*background(?:-color)?:/.test(pageCssSrc),
+  'the full dashed selection boundary is missing or the retired hover/focus fill remains',
+)
+assert(
+  '78. Reading A resting/full-width cut line moves to the passage-letter top edge',
+  /data-canonical-group-type='reading'\]:has\([\s\S]{0,180}data-canonical-passage-letter='A'[\s\S]{0,120}--pb-scissor-top:\s*calc\(var\(--pb-block-gap\) \* -1\)/.test(pageCssSrc),
+  'missing the Reading A upward optical correction',
+)
+assert(
+  '79. 七选五/完形/语法填空 resting/full-width cut line matches Writing Section 2 at the next content block edge',
+  /data-canonical-group-type='sevenChoices'[\s\S]{0,160}data-canonical-group-type='cloze'[\s\S]{0,160}data-canonical-group-type='grammarFill'[\s\S]{0,140}--pb-scissor-top:\s*0\s*;/.test(pageCssSrc),
+  'missing the Writing Section 2-aligned cut-line position for one or more single-group sections',
+)
+
+// ─── 80-81. owner 2026-08-04 compact UI type ramp ───
+
+assert(
+  '80. DESIGN.md defines the approved four-step UI type ramp including 14px Compact Body',
+  /Compact Body 紧凑正文[^\n]*14px/.test(designSrc) &&
+    /28px Display \/ 16px Body \/ 14px Compact Body \/ 12px Label/.test(designSrc),
+  'the approved 12/14/16/28 role scale is missing from DESIGN.md',
+)
+
+const expectedPaperBrowseTypeRoles = [
+  ['.paper-browse-placeholder', '12px'],
+  ['.paper-browse-lecture-handle', '12px'],
+  ['.paper-browse-lecture-empty', '14px'],
+  ['.paper-browse-lecture-title', '16px'],
+  ['.paper-browse-answer-row', '14px'],
+  ['.retained-writing-card', '14px'],
+  ['.retained-writing-card-row dt', '12px'],
+  ['.retained-writing-card-row dd', '14px'],
+  ['.retained-writing-card-points li', '14px'],
+  ['.retained-writing-card-value', '14px'],
+  ['.similar-rcard-title', '14px'],
+  ['.similar-chip', '12px'],
+]
+assert(
+  '81. paper-browse assigns the twelve approved UI declarations to Label, Compact Body, and Body roles',
+  expectedPaperBrowseTypeRoles.every(([selector, fontSize]) => {
+    const escapedSelector = selector.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+    return new RegExp(`${escapedSelector}\\s*\\{[^}]*font-size:\\s*${fontSize}`).test(pageCssSrc)
+  }),
+  'one or more paper-browse type roles drifted from the approved 12/14/16 mapping',
+)
+
+// ─── 82-84. owner 2026-08-04 paper annotation grammar ───
+
+assert(
+  '82. DESIGN.md names the durable no-side-stripe rule and its paper/evidence replacements',
+  designSrc.includes('The No Side-Stripe Rule（禁侧条原则）') &&
+    designSrc.includes('上下范围角标 + 题号强调') &&
+    designSrc.includes('轻底纹 + 与虚线同位的连接点'),
+  'the approved no-side-stripe annotation rule is missing from DESIGN.md',
+)
+assert(
+  '83. active questions replace the continuous shared rail with static top/bottom range corners plus question-number emphasis',
+  /\.paper-browse-content \.ps-question--active::before,\s*\n\.paper-browse-content \.ps-question--active::after\s*\{[^}]*left:\s*-8px[^}]*width:\s*8px[^}]*height:\s*8px[^}]*background:\s*transparent/s.test(pageCssSrc) &&
+    /\.paper-browse-content \.ps-question--active::before\s*\{[^}]*bottom:\s*auto[^}]*border-top:\s*1px solid var\(--eqb-color-primary\)[^}]*border-left:\s*1px solid var\(--eqb-color-primary\)[^}]*transition:\s*none/s.test(pageCssSrc) &&
+    /\.paper-browse-content \.ps-question--active::after\s*\{[^}]*border-bottom:\s*1px solid var\(--eqb-color-primary\)[^}]*border-left:\s*1px solid var\(--eqb-color-primary\)/s.test(pageCssSrc) &&
+    /\.paper-browse-content \.ps-question--active \.ps-question-no\s*\{[^}]*color:\s*var\(--eqb-color-primary-text\)/s.test(pageCssSrc),
+  'the bounded active-question corners, rail reset, or question-number emphasis is missing',
+)
+assert(
+  '84. lecture evidence removes quote side bars, keeps semantic washes, and aligns a selected socket with the dashed connector endpoint',
+  /\.paper-browse-lecture-panel \.pi-ps-analysis-evidence blockquote,\s*\n\.paper-browse-lecture-panel \.pi-ps-analysis-distractor-quote\s*\{[^}]*border-left:\s*0[^}]*border-radius:\s*4px/s.test(pageCssSrc) &&
+    /\.paper-browse-lecture-panel \.pi-ps-analysis-evidence--selected::before,\s*\n\.paper-browse-lecture-panel \.pi-ps-analysis-distractor--selected::before\s*\{[^}]*top:\s*50%[^}]*left:\s*0[^}]*width:\s*8px[^}]*height:\s*8px[^}]*border:\s*2px solid var\(--eqb-color-paper\)[^}]*transform:\s*translate\(-50%, -50%\)/s.test(pageCssSrc) &&
+    /\.paper-browse-lecture-panel \[data-pi-evidence-kind='support'\]\[aria-pressed='true'\]::before\s*\{[^}]*background:\s*var\(--eqb-color-success\)/s.test(pageCssSrc) &&
+    /\.paper-browse-lecture-panel \[data-pi-evidence-kind='trap'\]\[aria-pressed='true'\]::before\s*\{[^}]*background:\s*var\(--eqb-color-warning\)/s.test(pageCssSrc),
+  'the quote-bar removal, selected connector socket, or semantic socket colors are missing',
+)
+assert(
+  '85. the similar CTA uses the shared Lucide icon system instead of an Emoji glyph',
+  /import\s*\{[^}]*RefreshCw[^}]*\}\s*from\s*['"]lucide-react['"]/.test(pageSrc) &&
+    /<RefreshCw\s+aria-hidden="true"\s+size=\{15\}\s+strokeWidth=\{2\}\s*\/>/.test(pageSrc) &&
+    !pageSrc.includes('🔁'),
+  'the similar CTA is missing its Lucide RefreshCw icon or still contains the retired Emoji glyph',
 )
 
 if (failed > 0) {

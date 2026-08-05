@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>目录琴键 Live 预览</title>
+    <link rel="stylesheet" href="/src/index.css" />
+    <link rel="stylesheet" href="/src/features/paper-browse/paperBrowsePage.css" />
+    <style>
+      .paper-browse-page {
+        --paper-bg: #f4f1ea;
+        --paper-desk-bg: var(--paper-bg);
+        --paper-ink: #4a4438;
+        --paper-ink-rgb: 74, 68, 56;
+        --paper-ink-strong: #2c2820;
+        --paper-ink-strong-rgb: 44, 40, 32;
+        --paper-border: #e6e2d7;
+      }
+
+      .paper-browse-rail {
+        padding-left: 6px;
+      }
+
+      .paper-browse-shell {
+        grid-template-columns: 240px minmax(0, 1fr);
+      }
+
+      @media (min-width: 1360px) {
+        .paper-browse-shell:not(.paper-browse-shell--lecture-open) {
+          grid-template-columns: 240px minmax(0, 1fr);
+        }
+      }
+
+      .paper-browse-rail-panel {
+        position: relative;
+        overflow: hidden;
+        width: 228px;
+        padding: 10px 9px;
+        background: color-mix(in srgb, var(--panel) 68%, var(--paper-bg));
+        border-color: color-mix(in srgb, var(--paper-border) 88%, var(--paper-ink));
+        box-shadow:
+          inset 4px 0 0 color-mix(in srgb, var(--paper-ink-strong) 54%, var(--paper-bg)),
+          0 1px 2px rgba(var(--paper-ink-strong-rgb), 0.06);
+      }
+
+      .paper-browse-rail-part {
+        position: relative;
+      }
+
+      .paper-browse-rail-part + .paper-browse-rail-part {
+        margin-top: 0;
+        padding-top: 0;
+        border-top: 0;
+      }
+
+      .paper-browse-rail-part-head {
+        font-family: inherit;
+      }
+
+      .paper-browse-rail-part-head,
+      .paper-browse-rail-group {
+        position: relative;
+        isolation: isolate;
+        width: 100%;
+        height: 40px;
+        min-height: 40px;
+        margin-top: 0;
+        padding: 7px 9px 7px 140px;
+        overflow: visible;
+        background: linear-gradient(
+          90deg,
+          color-mix(in srgb, var(--panel) 74%, var(--paper-bg)) 0%,
+          color-mix(in srgb, var(--panel) 70%, var(--paper-bg)) 82%,
+          color-mix(in srgb, var(--panel) 82%, var(--paper-bg)) 100%
+        );
+        border: 1px solid color-mix(in srgb, var(--paper-border) 82%, var(--paper-ink));
+        border-top: 0;
+        border-left: 0;
+        border-radius: 0;
+        box-shadow:
+          inset -1px 0 0 rgba(var(--paper-ink-strong-rgb), 0.035),
+          inset 0 -1px 0 rgba(var(--paper-ink-strong-rgb), 0.035),
+          0 1px 2px rgba(var(--paper-ink-strong-rgb), 0.025);
+        transition:
+          transform 130ms cubic-bezier(0.23, 1, 0.32, 1),
+          background 130ms cubic-bezier(0.23, 1, 0.32, 1),
+          box-shadow 130ms cubic-bezier(0.23, 1, 0.32, 1),
+          border-color 130ms cubic-bezier(0.23, 1, 0.32, 1);
+        touch-action: manipulation;
+      }
+
+      .paper-browse-rail-part--first .paper-browse-rail-part-head {
+        border-radius: 6px 6px 0 0;
+        border-top: 1px solid color-mix(in srgb, var(--paper-border) 82%, var(--paper-ink));
+      }
+
+      .paper-browse-rail-part:last-child .paper-browse-rail-group:last-child {
+        border-radius: 0 0 6px 6px;
+      }
+
+      .paper-browse-rail-part-head {
+        cursor: pointer;
+        font-weight: 700;
+        letter-spacing: 0.015em;
+      }
+
+      .paper-browse-rail-part + .paper-browse-rail-part .paper-browse-rail-part-head {
+        border-top: 1px solid color-mix(in srgb, var(--paper-border) 58%, var(--paper-ink));
+      }
+
+      .paper-browse-rail-part-head,
+      .paper-browse-rail-group {
+        justify-content: flex-start;
+      }
+
+      .paper-browse-rail-group--letter {
+        justify-content: center;
+      }
+
+      @media (hover: hover) and (pointer: fine) {
+        .paper-browse-rail-part-head:hover,
+        .paper-browse-rail-group:hover {
+          background: color-mix(in srgb, var(--panel) 82%, var(--paper-bg));
+          border-color: var(--paper-border);
+        }
+      }
+
+      .paper-browse-rail-part-head:active,
+      .paper-browse-rail-group:active {
+        transform: translateY(2px) scale(0.996);
+        box-shadow:
+          inset 0 5px 7px rgba(var(--paper-ink-strong-rgb), 0.13),
+          inset 0 -1px 0 rgba(var(--paper-ink-strong-rgb), 0.035);
+      }
+
+      .paper-browse-rail-group--active {
+        z-index: 1;
+        transform: translateY(1px);
+        background: color-mix(in srgb, var(--panel) 74%, var(--paper-bg));
+        border-color: color-mix(in srgb, var(--paper-border) 82%, var(--paper-ink));
+        box-shadow:
+          inset 0 3px 5px rgba(var(--paper-ink-strong-rgb), 0.075),
+          0 1px 2px rgba(var(--paper-ink-strong-rgb), 0.025);
+      }
+
+      .piano-black-key-layer {
+        position: absolute;
+        z-index: 6;
+        inset: 0;
+        pointer-events: none;
+      }
+
+      .piano-black-key {
+        position: absolute;
+        top: var(--piano-black-top);
+        left: 9px;
+        width: 128px;
+        height: 22px;
+        border-radius: 0 4px 4px 0;
+        background: linear-gradient(
+          180deg,
+          color-mix(in srgb, var(--paper-ink-strong) 68%, var(--paper-bg)),
+          color-mix(in srgb, var(--paper-ink-strong) 78%, var(--paper-bg)) 62%,
+          color-mix(in srgb, var(--paper-ink-strong) 73%, var(--paper-bg))
+        );
+        box-shadow:
+          inset -4px 0 4px rgba(var(--paper-ink-strong-rgb), 0.16),
+          inset 0 1px 0 rgba(255, 255, 255, 0.18),
+          inset 0 -2px 0 rgba(var(--paper-ink-strong-rgb), 0.2),
+          0 2px 3px rgba(var(--paper-ink-strong-rgb), 0.22),
+          0 3px 5px rgba(var(--paper-ink-strong-rgb), 0.1);
+      }
+
+      .piano-black-key::after {
+        content: "";
+        position: absolute;
+        top: 3px;
+        right: 3px;
+        bottom: 3px;
+        width: 1px;
+        background: rgba(255, 255, 255, 0.12);
+      }
+
+      .paper-browse-rail-group-title {
+        white-space: nowrap;
+      }
+
+      .paper-browse-rail-part-head:focus-visible,
+      .paper-browse-rail-group:focus-visible {
+        outline: 1px solid color-mix(in srgb, var(--accent) 68%, transparent);
+        outline-offset: -2px;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .paper-browse-rail-part-head,
+        .paper-browse-rail-group {
+          transition: none;
+        }
+
+        .paper-browse-rail-part-head:active,
+        .paper-browse-rail-group:active,
+        .paper-browse-rail-group--active {
+          transform: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="paper-browse-page">
+      <main class="paper-browse-shell">
+        <nav class="paper-browse-rail" aria-label="目录">
+          <div class="paper-browse-rail-panel">
+            <div class="piano-black-key-layer" aria-hidden="true">
+              <span class="piano-black-key" style="--piano-black-top: 39px"></span>
+              <span class="piano-black-key" style="--piano-black-top: 79px"></span>
+              <span class="piano-black-key" style="--piano-black-top: 159px"></span>
+              <span class="piano-black-key" style="--piano-black-top: 199px"></span>
+              <span class="piano-black-key" style="--piano-black-top: 239px"></span>
+              <span class="piano-black-key" style="--piano-black-top: 319px"></span>
+              <span class="piano-black-key" style="--piano-black-top: 359px"></span>
+              <span class="piano-black-key" style="--piano-black-top: 439px"></span>
+            </div>
+            <div class="paper-browse-rail-part paper-browse-rail-part--first">
+              <button type="button" class="paper-browse-rail-part-head" aria-label="阅读，前往本部分第一个题组">
+                <span class="paper-browse-rail-part-name">阅读</span>
+              </button>
+              <button type="button" class="paper-browse-rail-group paper-browse-rail-group--letter paper-browse-rail-group--active" aria-current="true" data-piano-black>
+                <span class="paper-browse-rail-group-title">A</span>
+              </button>
+              <button type="button" class="paper-browse-rail-group paper-browse-rail-group--letter" data-piano-black>
+                <span class="paper-browse-rail-group-title">B</span>
+              </button>
+              <button type="button" class="paper-browse-rail-group paper-browse-rail-group--letter">
+                <span class="paper-browse-rail-group-title">C</span>
+              </button>
+              <button type="button" class="paper-browse-rail-group paper-browse-rail-group--letter" data-piano-black>
+                <span class="paper-browse-rail-group-title">D</span>
+              </button>
+              <button type="button" class="paper-browse-rail-group" data-piano-black>
+                <span class="paper-browse-rail-group-title">七选五</span>
+              </button>
+            </div>
+
+            <div class="paper-browse-rail-part">
+              <button type="button" class="paper-browse-rail-part-head" aria-label="语言运用，前往本部分第一个题组" data-piano-black>
+                <span class="paper-browse-rail-part-name">语言运用</span>
+              </button>
+              <button type="button" class="paper-browse-rail-group">
+                <span class="paper-browse-rail-group-title">完形填空</span>
+              </button>
+              <button type="button" class="paper-browse-rail-group" data-piano-black>
+                <span class="paper-browse-rail-group-title">语法填空</span>
+              </button>
+            </div>
+
+            <div class="paper-browse-rail-part">
+              <button type="button" class="paper-browse-rail-part-head" aria-label="写作，前往本部分第一个题组" data-piano-black>
+                <span class="paper-browse-rail-part-name">写作</span>
+              </button>
+              <button type="button" class="paper-browse-rail-group">
+                <span class="paper-browse-rail-group-title">第一节</span>
+              </button>
+              <button type="button" class="paper-browse-rail-group" data-piano-black>
+                <span class="paper-browse-rail-group-title">第二节</span>
+              </button>
+            </div>
+          </div>
+        </nav>
+
+        <article class="paper-browse-content" aria-label="卷面空间参照">
+          <h2>第二部分 阅读（共两节，满分50分）</h2>
+          <h3>第一节 （共 15 小题；每小题 2.5 分，满分 37.5 分）</h3>
+          <p>阅读下列短文，从每题所给的A、B、C、D 四个选项中选出最佳选项。</p>
+          <p>SoFi Stadium is the go-to destination in the heart of Los Angeles for sports fans. Its calendar is always packed with headline-grabbing events.</p>
+          <p>Upcoming Football Events</p>
+          <p>When attending an event at SoFi Stadium, you’re just a short walk or ride from several comfortable and classy hotels.</p>
+        </article>
+      </main>
+    </div>
+    <script>
+      document.querySelectorAll('.paper-browse-rail-group').forEach((group) => {
+        group.addEventListener('click', () => {
+          document.querySelectorAll('.paper-browse-rail-group').forEach((item) => {
+            item.classList.remove('paper-browse-rail-group--active')
+            item.removeAttribute('aria-current')
+          })
+          group.classList.add('paper-browse-rail-group--active')
+          group.setAttribute('aria-current', 'true')
+        })
+      })
+
+      document.querySelectorAll('.paper-browse-rail-part-head').forEach((part) => {
+        part.addEventListener('click', () => {
+          part.parentElement.querySelector('.paper-browse-rail-group')?.click()
+        })
+      })
+    </script>
+</body>
+</html>

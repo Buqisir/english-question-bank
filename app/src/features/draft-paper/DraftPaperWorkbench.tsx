@@ -28,7 +28,6 @@ import {
 } from '../../paperAssembly/basketPersistence'
 import { fetchSimilarPassages } from '../../services/similarQuestions.ts'
 import { describeError } from '../shared/errorCopy'
-import { scrollBehavior } from '../shared/reducedMotionScroll.ts'
 import { useToastPresence, usePresence } from '../shared/useToastPresence.ts'
 import { similarPassagesRecipeSummary, type SimilarPassagesRequestState } from '../similar-passages/SimilarPassagesPanel'
 import { DraftPaperRail } from './DraftPaperRail'
@@ -699,7 +698,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     }
     const initial = computeTarget()
     if (initial == null) return
-    window.scrollTo({ top: Math.max(0, initial), behavior: scrollBehavior() })
+    window.scrollTo({ top: Math.max(0, initial), behavior: 'auto' })
 
     const deadline = performance.now() + 5000
     let cancelled = false

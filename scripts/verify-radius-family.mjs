@@ -28,7 +28,6 @@ const FAMILY = new Set(['0', '4px', '6px', '8px', '999px', '50%'])
 const BASELINE = {
   'features/draft-paper/DraftPaperWorkbench.css': { '5px': 1, '7px': 1 },
   'features/my-space/MySpacePage.css': { '10px': 1, '2px': 1 },
-  'features/paper-browse/paperBrowsePage.css': { '10px': 1, '12px': 1 },
   'features/paper-intelligence/paperIntelligence.css': { '10px': 2, '12px': 3, '2px': 1, '3px': 5 },
   'features/paper-intelligence/paperSurfaceLectureHighlights.css': { '3px': 1 },
 }

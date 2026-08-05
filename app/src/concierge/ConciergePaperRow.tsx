@@ -44,7 +44,6 @@ import { type QuestionGroupCard } from '../domain/questionBank.ts'
 import type { PaperHitContext, PaperResult, PaperResultGroup } from './aggregatePaperResults.ts'
 import { ConciergeGroupCard } from './ConciergeGroupCard.tsx'
 import { parsePaperIdFromHref } from './paperSurfaceHref.ts'
-import { scrollBehavior } from '../features/shared/reducedMotionScroll.ts'
 import type { SimilarPassagesRequestState } from '../features/similar-passages/SimilarPassagesPanel'
 
 const SOURCE_TYPE_LABEL: Record<string, string> = {
@@ -299,7 +298,7 @@ export function ConciergePaperRow(props: ConciergePaperRowProps): ReactNode {
     // box before we scroll. `block: 'nearest'` keeps a row at the top
     // from over-scrolling the page when it's already in view.
     requestAnimationFrame(() => {
-      el.scrollIntoView({ behavior: scrollBehavior(), block: 'nearest' })
+      el.scrollIntoView({ behavior: 'auto', block: 'nearest' })
     })
   }, [expanded, paper.hitContext.primaryGroupId])
 

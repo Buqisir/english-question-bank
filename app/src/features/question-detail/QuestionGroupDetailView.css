@@ -172,8 +172,6 @@
 .peek-paper-clip {
   max-height: 340px;
   overflow: hidden;
-  /* 复评工艺账：量高手风琴（TSX 以 scrollHeight 实测值做过渡目标） */
-  transition: max-height var(--motion-slow) var(--ease-out);
 }
 
 /* 露一角的下缘渐隐：白纸淡出到白纸（卡内自体渐隐，不透出页底色，
@@ -190,7 +188,7 @@
 }
 
 .peek-paper--expanded .peek-paper-clip {
-  /* max-height 由 TSX 量高手风琴管（内联样式），此处只留展开态排版 */
+  max-height: none;
   padding-bottom: 48px;
 }
 

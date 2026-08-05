@@ -5,13 +5,12 @@
 :root {
   --focus-ring: 2px solid var(--accent, #2C6E56);
 
-  /* Motion tokens（motion-pass 2026-07-12）。五档时长 + 三曲线；
-     签名时刻（七选五 0.9s 跳卡、skeleton 1.6s shimmer）豁免留字面值。 */
+  /* Motion tokens（motion-pass 2026-07-12）。五档时长 + 三曲线。 */
   --motion-micro: 80ms;     /* 高频密集微反馈（pi chip 类）；不用于面板/抽屉级过渡（那用 --motion-slow） */
   --motion-fast: 120ms;     /* hover / 颜色 / 小反馈；不用于页面级入场（那用 --motion-entrance） */
   --motion-base: 160ms;     /* toast、显形、小入场；不用于高频密集反馈（那用 --motion-micro） */
   --motion-slow: 220ms;     /* 面板 / rail / 抽屉级；不用于常规 hover（那用 --motion-fast） */
-  --motion-entrance: 260ms; /* 页面级入场（fadeInUp、画线）；不用于常规 hover/toast（那用 --motion-fast/--motion-base） */
+  --motion-entrance: 260ms; /* 低频页面级入场；不用于常规 hover/toast（那用 --motion-fast/--motion-base） */
   --ease-hover: ease;                             /* 颜色/hover；不用于位移类入场（那用 --ease-out） */
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);     /* 入场/位移（强）；不用于纯颜色过渡（那用 --ease-hover） */
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1); /* 在屏形变（强）；不用于一次性入场（那用 --ease-out） */
@@ -258,17 +257,15 @@ button:disabled {
   color: #ffffff;
   background: var(--accent);
   font-weight: 600;
-  transition: filter var(--motion-slow) var(--ease-hover), box-shadow var(--motion-slow) var(--ease-hover), transform var(--motion-slow) var(--ease-out);
+  transition: transform var(--motion-fast) var(--ease-out);
   box-shadow: 0 1px 2px var(--accent-glow);
 }
 
-.primary-button:hover,
-.add-button:hover,
-.save-button:hover,
-.export-button:hover {
-  filter: brightness(1.06);
-  box-shadow: 0 3px 8px var(--accent-glow);
-  transform: translateY(-1px);
+.primary-button:active:not(:disabled),
+.add-button:active:not(:disabled),
+.save-button:active:not(:disabled),
+.export-button:active:not(:disabled) {
+  transform: scale(0.97);
 }
 
 .ghost-button {
@@ -493,13 +490,12 @@ button:disabled {
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   box-shadow: 0 1px 2px rgba(30, 30, 28, 0.06);
-  transition: transform var(--motion-slow) var(--ease-out), box-shadow var(--motion-slow) var(--ease-hover), border-color var(--motion-slow) var(--ease-hover);
 }
 
-.group-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 1px 2px rgba(30, 30, 28, 0.06);
-  border-color: var(--accent);
+@media (hover: hover) and (pointer: fine) {
+  .group-card:hover {
+    border-color: var(--accent);
+  }
 }
 
 .source-line {
@@ -2356,16 +2352,8 @@ button:disabled {
   }
 }
 
-.group-card,
-.basket-item {
+.group-card {
   animation: fadeInUp var(--motion-entrance) var(--ease-out) both;
-}
-
-/* emil-processing: 详情打开一天开几十次（高频档）——原 260ms 整块
-   fadeInUp 无级联，付了入场档成本却零级联收益。降到 motion-base(160ms)，
-   sections 不再单独入场（findings 表条目）。 */
-.detail-hero {
-  animation: fadeInUp var(--motion-base) var(--ease-out) both;
 }
 
 .group-card:nth-child(1) { animation-delay: 0s; }
@@ -2985,8 +2973,8 @@ button:disabled {
    is a centered narrow column (wordmark + searchbox + whisper) in the pure
    -blank static state; `--risen` widens it back to the full command-bar row
    once showListSurface flips true (submit / browse / active filters), per
-   plan.md 硬契约 "切换节拍 = 提交拍". margin-top is the one moving property —
-   token-driven (--motion-entrance + --ease-out), no bare ms values. */
+   plan.md 硬契约 "切换节拍 = 提交拍". The vertical change uses
+   compositor-only transform; max-width still snaps because none cannot interpolate. */
 .concierge-stage {
   display: flex;
   flex-direction: column;
@@ -2997,16 +2985,16 @@ button:disabled {
 .concierge-stage-inner {
   width: 100%;
   max-width: 720px;
-  margin: 26vh auto 0;
+  margin: 0 auto;
+  transform: translateY(26vh);
   /* CR SW-3: max-width stays OUT of the transition list — 720px↔none cannot
-     interpolate (the width snaps on the frame the list surface mounts);
-     margin-top is the one animated property (提交拍上移). */
-  transition: margin-top var(--motion-entrance) var(--ease-out);
+     interpolate (the width snaps on the frame the list surface mounts). */
+  transition: transform var(--motion-entrance) var(--ease-out);
 }
 
 .concierge-stage-inner--risen {
   max-width: none;
-  margin-top: 0;
+  transform: translateY(0);
 }
 
 .concierge-wordmark {
@@ -3205,7 +3193,6 @@ button:disabled {
   border-radius: 999px;
   background: var(--surface-strong, #EDEDEA);
   cursor: pointer;
-  transition: background-color var(--motion-slow) var(--ease-hover), border-color var(--motion-slow) var(--ease-hover);
 }
 
 .concierge-thinking-toggle input[type='checkbox']::before {
@@ -3218,7 +3205,18 @@ button:disabled {
   border-radius: 50%;
   background: #fff;
   box-shadow: 0 1px 2px rgba(30, 30, 28, 0.2);
-  transition: transform var(--motion-slow) var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .concierge-thinking-toggle input[type='checkbox'] {
+    transition:
+      background-color var(--motion-base) var(--ease-hover),
+      border-color var(--motion-base) var(--ease-hover);
+  }
+
+  .concierge-thinking-toggle input[type='checkbox']::before {
+    transition: transform var(--motion-base) var(--ease-out);
+  }
 }
 
 .concierge-thinking-toggle input[type='checkbox']:checked {
@@ -3233,6 +3231,11 @@ button:disabled {
 .concierge-thinking-toggle input[type='checkbox']:focus-visible {
   outline: var(--focus-ring);
   outline-offset: 2px;
+  transition: none;
+}
+
+.concierge-thinking-toggle input[type='checkbox']:focus-visible::before {
+  transition: none;
 }
 
 .concierge-thinking-toggle label {
@@ -3761,57 +3764,6 @@ button:disabled {
   opacity: 0.55;
 }
 
-/* basket-chip-tick（签名微动效，owner 拍板 2026-07-10）：计数变化时数字
-   滑入（加题从下来，减题从上来），配合 App.tsx 里 WAAPI 的 chip 脉冲。
-   窗口 overflow:hidden 裁掉滑动过程；时长压在 180ms 内，连点时 key
-   重挂载天然打断上一次。 */
-.basket-chip-count-window {
-  display: inline-block;
-  /* 裁剪滑入过程用 clip-path 而非 overflow:hidden——inline-block 一旦
-     overflow 非 visible，基线会掉到盒底边，数字比汉字矮半截（owner
-     2026-07-10 实报）。clip-path 不改变基线。 */
-  clip-path: inset(0);
-}
-
-.basket-chip-count {
-  display: inline-block;
-  min-width: 1ch;
-  text-align: center;
-}
-
-.basket-chip-count--up {
-  animation: basket-count-in-up var(--motion-base) var(--ease-out);
-}
-
-.basket-chip-count--down {
-  animation: basket-count-in-down var(--motion-base) var(--ease-out);
-}
-
-@keyframes basket-count-in-up {
-  from {
-    transform: translateY(0.9em);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-@keyframes basket-count-in-down {
-  from {
-    transform: translateY(-0.9em);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-/* reduced-motion：滑入动画由文件尾部的全局 * 重置（animation-duration
-   0.01ms）覆盖，无需专属块；WAAPI 脉冲在 App.tsx 里 matchMedia 自查。 */
-
 .basket-drawer-backdrop {
   position: fixed;
   inset: 0;
@@ -4242,28 +4194,66 @@ button:disabled {
 }
 
 .concierge-skeleton-line {
+  position: relative;
+  overflow: hidden;
   height: 12px;
   border-radius: 6px;
-  background: linear-gradient(90deg, #F6F6F4 0%, #EDEDEA 50%, #F6F6F4 100%);
-  background-size: 200% 100%;
-  animation: concierge-skeleton-shimmer 1.6s ease-in-out infinite; /* signature, token-exempt */
+  background: #F6F6F4;
 }
 
 .concierge-skeleton-line.short {
   width: 60%;
 }
 
+.concierge-skeleton-line::after,
+.concierge-skeleton-chip::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 0%, #EDEDEA 50%, transparent 100%);
+  transform: translateX(100%);
+  animation: concierge-skeleton-shimmer 1.6s linear infinite; /* loading-loop, token-exempt */
+}
+
 @keyframes concierge-skeleton-shimmer {
-  0% { background-position: 100% 0; }
-  100% { background-position: -100% 0; }
+  from { transform: translateX(100%); }
+  to { transform: translateX(-100%); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
+  .group-card {
+    animation: none;
+  }
+
+  .analysis-disclosure-chevron,
+  .concierge-stage-inner,
+  .concierge-thinking-toggle input[type='checkbox'],
+  .concierge-thinking-toggle input[type='checkbox']::before,
+  .basket-panel.basket-panel-drawer {
+    transition: none;
+  }
+
+  .concierge-filter-row,
+  .concierge-filter-row[data-visible='true'] {
+    transform: none;
+    transition: opacity var(--motion-micro) var(--ease-hover);
+  }
+
+  .concierge-skeleton-line::after,
+  .concierge-skeleton-chip::after {
+    animation: none;
+    opacity: 0;
+  }
+
+  .primary-button:active:not(:disabled),
+  .add-button:active:not(:disabled),
+  .save-button:active:not(:disabled),
+  .export-button:active:not(:disabled),
+  .concierge-intent-submit:active:not(:disabled),
+  .concierge-action:active:not(:disabled),
+  .basket-chip:active:not(:disabled),
+  .concierge-command-filter-toggle:active {
+    transform: scale(0.995);
   }
 }
 
@@ -4402,12 +4392,12 @@ button:disabled {
 }
 
 .concierge-skeleton-chip {
+  position: relative;
+  overflow: hidden;
   width: 76px;
   height: 24px;
   border-radius: 999px;
-  background: linear-gradient(90deg, #F6F6F4 0%, #EDEDEA 50%, #F6F6F4 100%);
-  background-size: 200% 100%;
-  animation: concierge-skeleton-shimmer 1.6s ease-in-out infinite; /* signature, token-exempt */
+  background: #F6F6F4;
 }
 
 .concierge-skeleton-chip:nth-child(2) { width: 96px; }

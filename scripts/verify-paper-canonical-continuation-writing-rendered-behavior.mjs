@@ -70,6 +70,10 @@ const nck1WritingChrome = Object.freeze({
   continuationInstruction:
     '阅读下面材料，根据其内容和所给段落开头语续写两段话，使之构成一篇完整的短文。',
 })
+const pianoRailWritingLabels = Object.freeze({
+  application: '第一节',
+  continuation: '第二节',
+})
 const zhejiangWritingChrome = Object.freeze({
   part: '第四部分 写作（共两节，满分40分）',
   application: '第一节 应用文写作（满分15分）',
@@ -2967,14 +2971,20 @@ async function assertBrowserArtifacts() {
       }
       for (const expectedChrome of [
         '写作',
-        '满分40分',
-        nck1WritingChrome.application,
-        nck1WritingChrome.continuation,
+        pianoRailWritingLabels.application,
+        pianoRailWritingLabels.continuation,
       ]) {
         assert.equal(
           countCompactText(mixedRailText, expectedChrome),
           1,
           `authenticated whole-paper Screen navigation contains canonical ${expectedChrome} exactly once`,
+        )
+      }
+      for (const scoreText of ['满分40分', '满分15分', '满分25分']) {
+        assert.equal(
+          countCompactText(mixedRailText, scoreText),
+          0,
+          `authenticated whole-paper Screen piano navigation omits ${scoreText}`,
         )
       }
       assert.equal(
