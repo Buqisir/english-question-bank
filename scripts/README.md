@@ -109,6 +109,7 @@ must be confirmed green (AGENTS.md RM gate).
 | `verify-i3-cloze-ai-import.mjs` | I3 完形填空 AI 导题接入：splitter / package / route contracts | yes |
 | `verify-i4-grammar-fill-ai-import.mjs` | I4 语法填空 AI 导题接入：splitter / package / route contracts | yes |
 | `verify-i5-writing-ai-import.mjs` | I5 应用文写作 + 读后续写 AI 导题接入：splitter / package / publish path contracts | yes |
+| `verify-application-model-answer-prompt.mjs` | 应用文参考范文生产护栏：运行时精确加载正式 V3 Prompt、附加完整重建题面、保留但不再使用 V2，并钉住交际对象推演与最小充分关系动作 | yes |
 | `verify-i6-writing-render.mjs` | I6 写作卷面版面还原：从 content.blocks 派生写作页模型（题面外壳归属 / 续写开头句折叠进答题框 / 应用文空框 / 不串味） | yes |
 | `verify-i7-application-given.mjs` | I7 应用文给定上下格式解析：末尾纯英文 + 正向信号守卫切给定骨架（信件/标题/无给定/负向守卫/称呼型），情境剔除、夹注不误判 | yes |
 | `verify-i8-cloze-analysis.mjs` | I8 完形填空 AI 解析生成：prompt 合约、validate 校验器成功与阻断用例（stub provider）、路由 + 包构建 + 存储接线、磁盘 latest/analyses/cloze-analysis-v1.json 断言 | yes |

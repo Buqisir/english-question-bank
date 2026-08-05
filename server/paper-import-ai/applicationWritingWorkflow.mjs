@@ -3,7 +3,7 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
-const promptPath = path.join(repoRoot, 'prompts/application-writing-model-answer-v2.md')
+const promptPath = path.join(repoRoot, 'prompts/application-writing-model-answer-v3.md')
 const SPEC_CONTRADICTS = 'SPEC CONTRADICTS: cannot reconstruct complete application task'
 const APPLICATION_CJK = /[　-〿㐀-䶿一-鿿豈-﫿＀-￯]/
 const APPLICATION_SALUTATION = /^(dear|to|hi|hello)\b/i

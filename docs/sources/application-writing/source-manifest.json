@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "application-writing-source-manifest-v1",
+  "sourceProject": "应用文写作指导",
+  "scope": "two research papers plus an application-writing-specific curriculum crosswalk",
+  "papers": [
+    {
+      "author": "朱京力",
+      "title": "高考英语应用文审题破解的技巧——从命题底层逻辑到高分写作策略",
+      "sourcePdfName": "高考英语应用文审题破解的技巧——从命题底层逻辑到高分写作策略_朱京力.pdf",
+      "pdfPath": "papers/zhu-jingli-task-analysis.pdf",
+      "pdfSha256": "a43c46db5d4fcced18a4bcf1a25e859873bc3b62b854800af2bbde25f4f36854",
+      "markdownPath": "papers/zhu-jingli-task-analysis.md",
+      "markdownSha256": "2168a103ffe06491cf2c26d12d619938840b660d250694564bd5fc93c1919824"
+    },
+    {
+      "authors": ["唐邦顺", "袁汉邦", "赵春丽"],
+      "title": "高考英语应用文写作的思辨化转型：趋势解读与教学策略",
+      "sourcePdfName": "高考英语应用文写作的思辨化转型：趋势解读与教学策略_唐邦顺.pdf",
+      "pdfPath": "papers/tang-bangshun-critical-turn.pdf",
+      "pdfSha256": "37d6eb21eefc254253d382077fe29e7043dc99e3ecb965777e046f6744402349",
+      "markdownPath": "papers/tang-bangshun-critical-turn.md",
+      "markdownSha256": "8f7c3ddfe4750011c44fccbbfb26dae6b4f78b75dc090304de774a8f8a2357fc"
+    }
+  ],
+  "curriculum": {
+    "title": "普通高中英语课程标准（2017年版2025年修订）",
+    "sourcePdfSha256": "4d2d0f33e511dc0d239d2cdc53fe16f38a107afde9bd1ae557cec9ce7bb1bba0",
+    "sourceMarkdownPart1Sha256": "13964d0242dcee25eb46ca744a0734b9b32cd627ac008c6796079a18c17f77c3",
+    "sourceMarkdownPart2Sha256": "8d3f43ceb2a753d686966bf8da3ac745ddc864e940ced731f220174da06a6cc9",
+    "copiedArtifact": "curriculum/application-writing-crosswalk.md",
+    "copyPolicy": "Only application-writing-relevant sections are carried into this repository; the full curriculum files remain in the source project."
+  },
+  "excludedCategories": [
+    "courses and lesson materials",
+    "student data and student work",
+    "question banks and model-answer collections",
+    "generic teaching-persona skills",
+    "unrelated project notes and generated artifacts"
+  ]
+}
