@@ -1,0 +1,7 @@
+{
+  "version": "eqb-british-cori-high-v1",
+  "entryCount": 1600,
+  "fileNamePattern": "{entryId}.mp3",
+  "manifestSha256": "3765e8fad6b779ab212b967c29740b780298ffad28e97b05ba357472df179b5b",
+  "ownerQa": "approved"
+}

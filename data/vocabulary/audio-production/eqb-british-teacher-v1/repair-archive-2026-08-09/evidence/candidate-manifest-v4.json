@@ -1,0 +1,219 @@
+{
+  "schemaVersion": "wanwei-vocabulary-audio-repair-listen-v4",
+  "prototype": true,
+  "formalAssetsChanged": false,
+  "entryCount": 2,
+  "assetCount": 10,
+  "entries": [
+    {
+      "entryId": "wanwei-core-0085-create",
+      "headword": "create",
+      "phonetic": "/kriˈeɪt/",
+      "teachingSense": "创造",
+      "check": "句中动词 create，第二音节重读 /kriˈeɪt/",
+      "original": {
+        "path": "originals/wanwei-core-0085-create.mp3",
+        "sha256": "00e852d3232eeae11d2072ab12b771e79010f2b829cdc735845ac71134041997"
+      },
+      "candidates": [
+        {
+          "label": "M",
+          "seed": 14107,
+          "path": "candidates/wanwei-core-0085-create--M.mp3",
+          "bytes": 8496,
+          "sha256": "2b51dc86d3dc7f338b64c503381511b6a5ae96f589fdbd14721de8f8854eefaa",
+          "prompt": "We will...\n\ncreate...\n\nsomething new.",
+          "pauseStyle": 0,
+          "boundaries": {
+            "threshold": 0.001,
+            "firstGapSeconds": 0.26,
+            "secondGapSeconds": 0.04,
+            "targetStartSeconds": 0.93,
+            "targetEndSeconds": 1.64,
+            "activeSafetySeconds": 0.1
+          },
+          "durationSeconds": 1.416,
+          "activeDurationSeconds": 0.4,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.576,
+          "peak": 0.486877,
+          "rms": 0.072184
+        },
+        {
+          "label": "N",
+          "seed": 15101,
+          "path": "candidates/wanwei-core-0085-create--N.mp3",
+          "bytes": 9216,
+          "sha256": "facdf3d05443e0e86a113e62adad0bd76492da27a9ffcb44624420894707c89c",
+          "prompt": "Students can...\n\ncreate...\n\nnew designs.",
+          "pauseStyle": 0,
+          "boundaries": {
+            "threshold": 0.0005,
+            "firstGapSeconds": 0.11,
+            "secondGapSeconds": 0.14,
+            "targetStartSeconds": 1.37,
+            "targetEndSeconds": 2.13,
+            "activeSafetySeconds": 0.1
+          },
+          "durationSeconds": 1.536,
+          "activeDurationSeconds": 0.5,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.596,
+          "peak": 0.458649,
+          "rms": 0.065199
+        },
+        {
+          "label": "O",
+          "seed": 16111,
+          "path": "candidates/wanwei-core-0085-create--O.mp3",
+          "bytes": 9216,
+          "sha256": "0ca56e32206a5dfe2cc8767b47e9b58aa0732a161304ba5e85100c14795158a4",
+          "prompt": "Artists often...\n\ncreate...\n\nbeautiful work.",
+          "pauseStyle": 0,
+          "boundaries": {
+            "threshold": 0.0005,
+            "firstGapSeconds": 0.13,
+            "secondGapSeconds": 0.09,
+            "targetStartSeconds": 1.53,
+            "targetEndSeconds": 2.53,
+            "activeSafetySeconds": 0.1
+          },
+          "durationSeconds": 1.536,
+          "activeDurationSeconds": 0.5,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.596,
+          "peak": 0.447327,
+          "rms": 0.058832
+        },
+        {
+          "label": "P",
+          "seed": 17107,
+          "path": "candidates/wanwei-core-0085-create--P.mp3",
+          "bytes": 9360,
+          "sha256": "9780d1639d8c3650d125df19943adaac17bc2fa769bfeee26e91726c3b785837",
+          "prompt": "Good tools help us...\n\ncreate...\n\nbetter lessons.",
+          "pauseStyle": 0,
+          "boundaries": {
+            "threshold": 0.0005,
+            "firstGapSeconds": 0.19,
+            "secondGapSeconds": 0.26,
+            "targetStartSeconds": 1.67,
+            "targetEndSeconds": 2.65,
+            "activeSafetySeconds": 0.1
+          },
+          "durationSeconds": 1.56,
+          "activeDurationSeconds": 0.52,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.6,
+          "peak": 0.415131,
+          "rms": 0.056957
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-core-0204-increase",
+      "headword": "increase",
+      "phonetic": "/ˌɪnˈkriːs/",
+      "teachingSense": "增加；增长",
+      "check": "句中动词 increase，第二音节重读 /ɪnˈkriːs/",
+      "original": {
+        "path": "originals/wanwei-core-0204-increase.mp3",
+        "sha256": "7a6c2aabc573586d1992740fd11a4067cc0f8c12e962a2d7c8f4a945d5f30dea"
+      },
+      "candidates": [
+        {
+          "label": "M",
+          "seed": 14107,
+          "path": "candidates/wanwei-core-0204-increase--M.mp3",
+          "bytes": 9792,
+          "sha256": "c0c861742ce73be2b0ad862e624f4508265a30a0bc47c4737739f3471c9b8d59",
+          "prompt": "Prices may.\n\nincrease.\n\nnext year.",
+          "pauseStyle": 1,
+          "boundaries": {
+            "threshold": 0.0005,
+            "firstGapSeconds": 0.05,
+            "secondGapSeconds": 0.17,
+            "targetStartSeconds": 1.12,
+            "targetEndSeconds": 2.12,
+            "activeSafetySeconds": 0.1
+          },
+          "durationSeconds": 1.632,
+          "activeDurationSeconds": 0.64,
+          "leadingSilenceSeconds": 0.4,
+          "trailingSilenceSeconds": 0.592,
+          "peak": 0.272522,
+          "rms": 0.042713
+        },
+        {
+          "label": "N",
+          "seed": 15101,
+          "path": "candidates/wanwei-core-0204-increase--N.mp3",
+          "bytes": 10512,
+          "sha256": "bb4b180c3eefb8d6e96307a2d803ecc303b17f669fdaa3223994278133a75f20",
+          "prompt": "The numbers will...\n\nincrease...\n\nslowly.",
+          "pauseStyle": 0,
+          "boundaries": {
+            "threshold": 0.0005,
+            "firstGapSeconds": 0.35,
+            "secondGapSeconds": 0.51,
+            "targetStartSeconds": 1.4,
+            "targetEndSeconds": 2.99,
+            "activeSafetySeconds": 0.1
+          },
+          "durationSeconds": 1.752,
+          "activeDurationSeconds": 0.72,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.592,
+          "peak": 0.444763,
+          "rms": 0.071511
+        },
+        {
+          "label": "O",
+          "seed": 16111,
+          "path": "candidates/wanwei-core-0204-increase--O.mp3",
+          "bytes": 10080,
+          "sha256": "115ef82d6c8a5e48198e8588e2554f79af5336fe4fde89b3b916fc217a70b3e4",
+          "prompt": "Exercise can.\n\nincrease.\n\nyour energy.",
+          "pauseStyle": 1,
+          "boundaries": {
+            "threshold": 0.0005,
+            "firstGapSeconds": 0.08,
+            "secondGapSeconds": 0.16,
+            "targetStartSeconds": 1.75,
+            "targetEndSeconds": 2.81,
+            "activeSafetySeconds": 0.1
+          },
+          "durationSeconds": 1.68,
+          "activeDurationSeconds": 0.64,
+          "leadingSilenceSeconds": 0.42,
+          "trailingSilenceSeconds": 0.62,
+          "peak": 0.528107,
+          "rms": 0.080754
+        },
+        {
+          "label": "P",
+          "seed": 17107,
+          "path": "candidates/wanwei-core-0204-increase--P.mp3",
+          "bytes": 10224,
+          "sha256": "2b7921bc4eb40978daf34a9b9c2ead9a80d534c4e087606f63ead611f93a852a",
+          "prompt": "We expect sales to...\n\nincrease...\n\nagain.",
+          "pauseStyle": 0,
+          "boundaries": {
+            "threshold": 0.0005,
+            "firstGapSeconds": 0.22,
+            "secondGapSeconds": 0.07,
+            "targetStartSeconds": 1.82,
+            "targetEndSeconds": 2.78,
+            "activeSafetySeconds": 0.1
+          },
+          "durationSeconds": 1.704,
+          "activeDurationSeconds": 0.66,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.604,
+          "peak": 0.460236,
+          "rms": 0.065753
+        }
+      ]
+    }
+  ]
+}

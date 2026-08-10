@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "wanwei-example-overrides-v1",
+  "reviewedBy": "global-independent-review",
+  "entries": [
+    {"sourceOrder": 217, "headword": "keep", "reason": "global-duplicate", "example": {"english": "Keep the milk cold in the fridge.", "chinese": "把牛奶放在冰箱里冷藏。", "highlight": "Keep", "reviewStatus": "approved"}},
+    {"sourceOrder": 383, "headword": "sit", "reason": "global-duplicate", "example": {"english": "Sit near the window if you need more light.", "chinese": "如果你需要更多光线，就坐在窗边。", "highlight": "Sit", "reviewStatus": "approved"}},
+    {"sourceOrder": 471, "headword": "wonderful", "reason": "global-duplicate", "example": {"english": "The choir gave a wonderful performance.", "chinese": "合唱团带来了一场精彩的演出。", "highlight": "wonderful", "reviewStatus": "approved"}},
+    {"sourceOrder": 674, "headword": "dress", "reason": "global-duplicate", "example": {"english": "The red dress has two deep pockets.", "chinese": "这条红色连衣裙有两个深口袋。", "highlight": "dress", "reviewStatus": "approved"}},
+    {"sourceOrder": 718, "headword": "favourite (AmE favorite)", "reason": "global-duplicate", "example": {"english": "Autumn is my favourite season for hiking.", "chinese": "秋天是我最喜欢的徒步季节。", "highlight": "favourite", "reviewStatus": "approved"}},
+    {"sourceOrder": 776, "headword": "here", "reason": "global-duplicate", "example": {"english": "Your seat is here, next to mine.", "chinese": "你的座位在这里，就在我的座位旁边。", "highlight": "here", "reviewStatus": "approved"}},
+    {"sourceOrder": 787, "headword": "homework", "reason": "global-duplicate", "example": {"english": "It took me twenty minutes to do my maths homework.", "chinese": "我花了二十分钟做数学家庭作业。", "highlight": "homework", "reviewStatus": "approved"}},
+    {"sourceOrder": 1010, "headword": "road", "reason": "global-duplicate", "example": {"english": "This road leads directly to the village.", "chinese": "这条路直通那个村庄。", "highlight": "road", "reviewStatus": "approved"}},
+    {"sourceOrder": 1276, "headword": "below", "reason": "global-duplicate", "example": {"english": "Please write your name below the picture.", "chinese": "请把你的名字写在图片下面。", "highlight": "below", "reviewStatus": "approved"}},
+    {"sourceOrder": 1328, "headword": "cough", "reason": "global-duplicate", "example": {"english": "His cough kept him awake at night.", "chinese": "他的咳嗽让他夜里无法入睡。", "highlight": "cough", "reviewStatus": "approved"}},
+    {"sourceOrder": 1596, "headword": "yellow", "reason": "global-duplicate", "example": {"english": "The leaves turn yellow in late autumn.", "chinese": "深秋时树叶会变黄。", "highlight": "yellow", "reviewStatus": "approved"}},
+    {"sourceOrder": 1600, "headword": "zero", "reason": "global-duplicate", "example": {"english": "Zero comes before one on the number line.", "chinese": "在数轴上，零在一的前面。", "highlight": "Zero", "reviewStatus": "approved"}}
+  ]
+}

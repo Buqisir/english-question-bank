@@ -1,0 +1,114 @@
+{
+  "schemaVersion": "eqb-vocabulary-voice-profile-v1",
+  "voiceId": "eqb-british-teacher-v1",
+  "displayName": "EQBank 美式教师音",
+  "accent": "american",
+  "identity": {
+    "kind": "synthetic",
+    "imitatesRealPerson": false,
+    "description": "不对应任何真人的清晰、温和、克制的英语女教师音色"
+  },
+  "ownerApproval": {
+    "status": "approved",
+    "approvedAt": "2026-08-09",
+    "scope": "Owner 已完成 1600 词逐词试听及问题词修复复检；产品界面按实际听感标为美音"
+  },
+  "runtime": {
+    "name": "mlx-audio",
+    "version": "0.4.7",
+    "platform": "Apple Silicon",
+    "quantization": "6bit"
+  },
+  "licensing": {
+    "qwenModel": "Apache-2.0",
+    "mlxAudioRuntime": "MIT",
+    "referenceOrigin": "由 VoiceDesign 根据非真人描述本地生成",
+    "distribution": "网站只发布固定 MP3，不分发模型权重"
+  },
+  "voiceDesign": {
+    "model": "mlx-community/Qwen3-TTS-12Hz-1.7B-VoiceDesign-6bit",
+    "revision": "ffc6545dc9cb086950aa46c6cd3db490e6ece3e1",
+    "modelSha256": "fb3c35f8ca4165f8824ddfd3f4ba97266bd699b3fb003e3a39084f9d3664ce87",
+    "speechTokenizerSha256": "836b7b357f5ea43e889936a3709af68dfe3751881acefe4ecf0dbd30ba571258",
+    "instruction": "An adult British English female teacher in her early thirties, with an educated Southern British accent and contemporary Received Pronunciation. Warm, calm and clear; medium pitch; natural classroom pace; crisp consonants and precise vowels. Professional but friendly, with no exaggerated emotion, breathiness, vocal fry, or American rhoticity. A synthetic educational voice that does not imitate any real person.",
+    "referenceText": "Good morning. Today we are learning a few useful words. Listen carefully to each sound, notice the stress, and repeat after me: answer, class, water, bird, and world.",
+    "generation": {
+      "language": "English",
+      "temperature": 0.7,
+      "topP": 0.9,
+      "topK": 50,
+      "maxTokens": 1200
+    }
+  },
+  "base": {
+    "model": "mlx-community/Qwen3-TTS-12Hz-1.7B-Base-6bit",
+    "revision": "34ff5318365b59cba9c03ff729f2eee0814caf72",
+    "modelSha256": "b043693cb63f38f4e0ae5fe39a5cfdb466ef199dc5a767991a4a46235ac27e67",
+    "speechTokenizerSha256": "836b7b357f5ea43e889936a3709af68dfe3751881acefe4ecf0dbd30ba571258"
+  },
+  "sourceReference": {
+    "path": "data/vocabulary/audio-production/eqb-british-teacher-v1/reference-source.wav",
+    "sha256": "1358ebcaea2fe254f8464d97f1cb3f9f0841730d751086e072d6f481f7c506c5",
+    "codec": "pcm_s16le",
+    "sampleRate": 24000,
+    "channels": 1,
+    "durationSeconds": 13.76,
+    "bytes": 660524
+  },
+  "reference": {
+    "path": "data/vocabulary/audio-production/eqb-british-teacher-v1/reference.wav",
+    "sha256": "e20214731a10c71682a59d537ece4bc96b500e6318ae595377dedeff945808cf",
+    "codec": "pcm_s16le",
+    "sampleRate": 24000,
+    "channels": 1,
+    "durationSeconds": 3.8,
+    "bytes": 182478,
+    "sourceExcerpt": {
+      "startSeconds": 0,
+      "endSeconds": 3.8,
+      "referenceText": "Good morning. Today we are learning a few useful words."
+    }
+  },
+  "formalOutput": {
+    "version": "eqb-british-teacher-v1",
+    "format": "audio-24khz-48kbitrate-mono-mp3",
+    "sampleRate": 24000,
+    "bitrateKbps": 48,
+    "channels": 1,
+    "edgeSilence": {
+      "threshold": 0.003,
+      "leadingSafetySeconds": 0.12,
+      "trailingSafetySeconds": 0.18
+    },
+    "pathTemplate": "/vocabulary-assets/wanwei-round-one-v1/audio/eqb-british-teacher-v1/{entryId}.mp3"
+  },
+  "goldenWordGate": {
+    "status": "approved",
+    "formalAssetChecks": {
+      "checkedAt": "2026-08-08",
+      "entryCount": 56,
+      "uniqueHashes": 56,
+      "durationSeconds": {
+        "min": 0.6,
+        "max": 4.032
+      },
+      "minPeak": 0.315735,
+      "minRms": 0.05197,
+      "maxLeadingSilenceSeconds": 0.18,
+      "maxTrailingSilenceSeconds": 0.204,
+      "verdict": "passed"
+    },
+    "ownerAuditoryReview": {
+      "status": "approved",
+      "scope": "Owner 已完成完整 1600 词的起音、尾音、重音、目标读音与跨词音色复检"
+    },
+    "requiredChecks": [
+      "start",
+      "ending",
+      "stress",
+      "target-accent-vowel",
+      "target-sense-pronunciation",
+      "voice-consistency"
+    ]
+  }
+}

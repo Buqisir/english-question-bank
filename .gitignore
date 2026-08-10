@@ -18,6 +18,8 @@
 *API_KEY*
 rclone.conf
 rclone*.conf
+!app/public/vocabulary-assets/**/*.svg
+!app/public/vocabulary-assets/**/*.mp3
 
 # Dependencies / builds
 node_modules/
@@ -46,8 +48,11 @@ data/*
 !data/.gitkeep
 !data/sql/
 !data/sql/**
+!data/vocabulary/
+!data/vocabulary/**
 data/user-space/files/
 .scratch/
+__pycache__/
 
 # Imported source files, generated exports, reports, and browser output
 真题例卷/

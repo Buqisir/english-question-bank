@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "eqb-british-cori-audio-finalization-v1",
+  "verdict": "passed",
+  "version": "eqb-british-cori-high-v1",
+  "entryCount": 1600,
+  "uniqueEntryIds": 1600,
+  "uniquePaths": 1600,
+  "uniqueHashes": 1600,
+  "lineageCounts": {
+    "owner-pass": 1525,
+    "repair-75": 69,
+    "repair-6": 4,
+    "repair-2": 2
+  },
+  "manifestSha256": "3765e8fad6b779ab212b967c29740b780298ffad28e97b05ba357472df179b5b",
+  "profileSha256": "da989fbc314a196ec30862e6f7a22cad474e56c932df5f337f135095b215d915",
+  "sourceEvidence": {
+    "full": {
+      "manifestSha256": "f85672cba9d0bbfc1fd9830c2e09c92b883af179e03101efa2eee780a1367dc7",
+      "qaStateSha256": "bad1767f5f8434906d80e8669c8ea49c09878003cc46522350353c8fa880e2de"
+    },
+    "repair75": {
+      "manifestSha256": "1dc7a936a3d16fdb0c07db18854e03810a3f0b94ad26e7d4b37c05e02e5d4310",
+      "qaStateSha256": "90e112232810b80e5fd6385dc943e6bb4bbd0bcc36ee998a057e938bc073ffa0"
+    },
+    "repair6": {
+      "manifestSha256": "f36b9a98065d8b3cbe4efbc24f6a3e2475272cec7dd6fe1f1598250e5fdc6934",
+      "qaStateSha256": "fa8ec7338ac1cba88bf9623fae0c6ba0012a0bcb2c2cd5c99618ef40f75195e9"
+    },
+    "repair2": {
+      "manifestSha256": "20de1ea5d80bc1489e9c618c824bf3d688b1fcd7e9fbb8b52206b8aa24f1e888",
+      "qaStateSha256": "4c2b6ee7feeb0487b3b1e88c9ed1042bbdf4e52b282ed81bae101a889ee16110"
+    }
+  },
+  "formalAmericanAssetsChanged": false,
+  "databaseChanged": false
+}

@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "wanwei-vocabulary-audio-repair-owner-decisions-v4",
+  "decidedAt": "2026-08-09",
+  "selected": [
+    {
+      "entryId": "wanwei-core-0204-increase",
+      "headword": "increase",
+      "candidate": "N"
+    }
+  ],
+  "unresolved": [
+    "wanwei-core-0085-create"
+  ]
+}

@@ -17,6 +17,31 @@ such a row is not registrable. `--list-json` shows the registry and packs;
 Install app dependencies with `pnpm install --frozen-lockfile` from `app/` and
 server dependencies with `npm ci` from `server/` before a clean release run.
 
+## Vocabulary audio Owner QA
+
+Run `node scripts/vocabulary/serve-audio-owner-qa.mjs --port 5417` to open the
+local 1600-word listening pass against the frozen formal audio assets. The tool
+binds only to `127.0.0.1`, stores progress in
+`.scratch/vocabulary-audio-owner-qa-state.json`, and exports the full decision
+ledger plus the problem-word list. It never overwrites formal MP3 assets or the
+audio manifest.
+
+Displayed IPA is supplied by the versioned General American overlay at
+`data/vocabulary/wanwei-american-phonetics-v1.json`; the source-book British
+IPA remains unchanged in the shared database and source ledger. Rebuild the
+overlay from the pinned official CMUdict and `ipa-dict` alignment file with
+`node scripts/vocabulary/build-wanwei-american-phonetics.mjs --dictionary /absolute/path/to/ipa-dict-en_US.txt --cmudict /absolute/path/to/cmudict.dict`.
+
+After a completed first pass, build the frozen repair batch with
+`node scripts/vocabulary/build-audio-repair-batch.mjs`. Generate the four
+non-formal candidates per failed word with `generate-qwen-audio-repair.py`
+from an `mlx-audio==0.4.7` environment, using the pinned Base model cache and
+the approved voice profile. Then run
+`node scripts/vocabulary/serve-audio-repair-qa.mjs --port 5418` for the
+original/A-D comparison pass. Its batch, candidates, and state all live under
+`.scratch/vocabulary-audio-repair-v1/`; neither pass changes formal MP3 assets
+until the owner has selected the replacements.
+
 The sole workflow authority is `.github/workflows/verify.yml`; it runs on
 pushes and PRs. Before any
 merge to `main` the run must be green, and the post-merge `main` run
@@ -27,6 +52,15 @@ must be confirmed green (AGENTS.md RM gate).
 | Script | Scope | Runs in CI? |
 | --- | --- | --- |
 | `verify-ci.mjs` | Selects changed/Paper/all packs deterministically and reports PASS/SKIP/FAIL without hiding later failures | yes |
+| `verify-vocabulary-closed-loop.mjs` | Validates the 1600-entry Wanwei source/content/unique Koboyo visual, formal American and Owner-approved Cori British audio contracts, plus isolated progress, frozen-set, share/revoke, and temporary-scope persistence | yes |
+| `vocabulary/build-wanwei-american-phonetics.mjs` | Rebuilds the pinned 1600-entry learner-facing General American IPA overlay without rewriting source-book evidence | no |
+| `vocabulary/build-wanwei-audio-golden-set.mjs` | Builds the fixed 56-word isolated-pronunciation gate from reviewed Wanwei content | no |
+| `vocabulary/generate-qwen-audio.py` | Generates resumable local Qwen3-TTS Base MP3 assets from the approved synthetic British teacher reference, with model/reference hash checks and a manifest receipt | no |
+| `vocabulary/build-audio-repair-batch.mjs` | Freezes the 70 first-pass Owner-QA failures into an ordered repair batch without changing formal MP3 assets | no |
+| `vocabulary/generate-qwen-audio-repair.py` | Generates four cue-protected Qwen repair candidates per failed word under `.scratch/`; formal MP3 assets remain unchanged | no |
+| `vocabulary/serve-audio-repair-qa.mjs` | Serves the isolated 70-word original/A-D comparison QA and saves second-pass progress separately from first-pass QA | no |
+| `verify-vocabulary-migration.mjs` | Replays the legacy vocabulary-entry constraint migration and proves successful row/index/FK preservation plus full rollback and FK restoration on a rejected legacy row | yes |
+| `verify-vocabulary-rendered-behavior.mjs` | Uses real Chromium to verify one-audio playback timing/cancellation/retry/end behavior and 1/15/60-word 2x3 A4 print pagination with a first-page-only QR | yes |
 | `verify-architecture-housekeeping.mjs` | Prevents missing entrypoints, undocumented verifier registration, stale workflow ownership, and six risk-route regressions | yes |
 | `verify-motion-tokens.mjs` | motion-pass gate: `app/src/**/*.css` (excluding PaperSurface.css contract file) has no `ease-in`, no `transition: all`, and no bare hand-written transition/animation durations outside `token-exempt`-tagged loading or signature moments | yes |
 | `verify-lecture-panel-css.mjs` | lecture-css-restore gate: 讲评五解析面板 (pi-ps-analysis/cloze/gf/seven/writing) 活 TSX 用到的每个类必须有 CSS 定义或在 hook-only 白名单（含白名单防陈旧 + paperBrowsePage.css @import 加载链断言）——retire 刀样式陪葬事故的可执行形态 | yes |

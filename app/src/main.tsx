@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
 import { AuthGate } from './auth/AuthGate.tsx'
+import { VocabularyListenPage } from './features/vocabulary-listen/VocabularyListenPage.tsx'
 
 /**
  * reading-analysis-retire (2026-07-16): boot-time self-heal for the two
@@ -55,10 +56,27 @@ function healRetiredOrphanRoutes(): void {
 
 healRetiredOrphanRoutes()
 
+function getPublicVocabularyShareId(): string | null {
+  if (typeof window === 'undefined') return null
+  const match = window.location.pathname.match(/^\/vocabulary\/listen\/([^/]+)\/?$/)
+  if (!match) return null
+  try {
+    return decodeURIComponent(match[1])
+  } catch {
+    return ''
+  }
+}
+
+const publicVocabularyShareId = getPublicVocabularyShareId()
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <AuthGate>
-      <App />
-    </AuthGate>
+    {publicVocabularyShareId !== null ? (
+      <VocabularyListenPage shareId={publicVocabularyShareId} />
+    ) : (
+      <AuthGate>
+        <App />
+      </AuthGate>
+    )}
   </StrictMode>,
 )

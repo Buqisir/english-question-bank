@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <link rel="icon" href="data:," />
+    <title>万唯一轮语音修复复检</title>
+    <link rel="stylesheet" href="/shared-tokens.css" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="qa-shell">
+      <header class="qa-header">
+        <div>
+          <h1>70 词修复复检</h1>
+          <p class="subtitle">原版保留不动。听 A–D，选一个完整、重音正确的修复版。</p>
+        </div>
+        <div class="save-status" id="save-status" aria-live="polite">正在读取进度</div>
+      </header>
+
+      <section class="progress-panel" aria-label="复检进度">
+        <div class="progress-copy">
+          <span><strong id="reviewed-count">0</strong> / <span id="review-total">70</span> 已复检</span>
+          <span id="entry-progress">问题词 1 / 70</span>
+        </div>
+        <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progress-fill"></div></div>
+        <div class="progress-stats">
+          <span>已选修复 <strong id="selected-count">0</strong></span>
+          <span>仍需处理 <strong id="unresolved-count">0</strong></span>
+          <span>待听 <strong id="pending-count">70</strong></span>
+        </div>
+      </section>
+
+      <section class="word-card" aria-labelledby="word-heading">
+        <div class="word-meta">
+          <span id="word-order">原书第 2 词</span>
+          <span id="decision-mark" class="decision-mark">待复检</span>
+        </div>
+
+        <div class="word-content">
+          <div>
+            <div class="word-heading" id="word-heading" role="heading" aria-level="2">—</div>
+            <p class="phonetic" id="word-phonetic">—</p>
+          </div>
+          <div class="meaning">
+            <span id="word-part-of-speech">—</span>
+            <strong id="word-sense">—</strong>
+          </div>
+        </div>
+
+        <audio id="word-audio" preload="auto"></audio>
+        <p class="audio-error" id="audio-error" role="alert" hidden>音频没有成功载入，请重播；仍失败就标为仍需处理。</p>
+
+        <div class="audio-choices" aria-label="音频版本">
+          <button class="audio-choice original" id="original-button" type="button" data-source="original">
+            <span><b>原版</b><small>只作对照</small></span><kbd>0</kbd>
+          </button>
+          <button class="audio-choice" type="button" data-candidate="A"><span><b>修复 A</b><small>播放</small></span><kbd>1</kbd></button>
+          <button class="audio-choice" type="button" data-candidate="B"><span><b>修复 B</b><small>播放</small></span><kbd>2</kbd></button>
+          <button class="audio-choice" type="button" data-candidate="C"><span><b>修复 C</b><small>播放</small></span><kbd>3</kbd></button>
+          <button class="audio-choice" type="button" data-candidate="D"><span><b>修复 D</b><small>播放</small></span><kbd>4</kbd></button>
+        </div>
+
+        <label class="note-field" for="problem-note">
+          <span id="problem-note-label">若候选都不行，可顺手写一句原因</span>
+          <input id="problem-note" type="text" maxlength="200" placeholder="例如：重音仍然不对（可不填）" />
+        </label>
+
+        <div class="primary-controls">
+          <button class="control-button select" id="select-button" type="button"><span>采用当前修复版</span><kbd>↑</kbd></button>
+          <button class="control-button unresolved" id="unresolved-button" type="button"><span>A / B / C 都不行</span><kbd>↓</kbd></button>
+        </div>
+
+        <div class="secondary-controls">
+          <button id="undo-button" type="button"><span>撤销上一项</span><kbd>←</kbd></button>
+          <button id="replay-button" type="button"><span>重播当前版本</span><kbd>→</kbd></button>
+          <button id="play-button" type="button"><span>播放 / 暂停</span><kbd>空格</kbd></button>
+        </div>
+      </section>
+
+      <footer class="qa-footer">
+        <p>数字键只切换并播放；确认无吞头、吞尾、重音或元音问题后，再按 ↑ 采用。</p>
+        <div class="footer-actions">
+          <form id="jump-form" class="jump-form">
+            <label for="jump-index">跳到第</label>
+            <input id="jump-index" type="number" min="1" max="70" inputmode="numeric" />
+            <button type="submit">项</button>
+          </form>
+          <button id="export-button" type="button">导出复检结果</button>
+        </div>
+      </footer>
+    </main>
+    <script src="/app.js" type="module"></script>
+  </body>
+</html>

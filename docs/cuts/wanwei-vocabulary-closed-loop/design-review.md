@@ -1,0 +1,19 @@
+# Vocabulary closed-loop design review
+
+Review date: 2026-08-07
+
+The vocabulary review, printable cards, and public listening page were reviewed with the Impeccable interface criteria and Emil Kowalski's design-engineering principles. This record describes only changes within the accepted vocabulary surfaces; it does not authorize a wider redesign.
+
+| Surface | Before | After | Why |
+| --- | --- | --- | --- |
+| Review progress | The overall meter could briefly follow a temporary run and visually reset the teacher's main course position. | Main progress remains a stable course-level value while the current run reports its own decision count. | Preserve spatial and state continuity; temporary work must not make durable progress appear to move backwards. |
+| Prompt card | The accepted 30-word interaction already had a calm paper hierarchy. | The hierarchy, keyboard model, typography, and decision flow remain unchanged; formal word-specific visuals and accurate Chinese alternatives occupy the existing image seam. | Polish should reinforce the accepted interaction rather than introduce novelty or extra cognitive load. |
+| Syllables and forms | A single separator could imply that alternate forms were syllables. | Syllables use a tight middle dot; alternate forms use a slash and an explicit form-oriented accessible label. | The visual grammar now matches the linguistic meaning without adding explanatory chrome. |
+| Print cards | Cards lacked an explicit whole-word IPA line and could be printed before a stable listening link existed. | Every card contains the whole-word IPA, compact breakdown, approved example, and local formal visual; print remains unavailable until the frozen Set has a stable share and first-page QR. | The paper and listening experience now form one predictable object instead of two loosely related outputs. |
+| Print layout | Pagination had been manually accepted but was not protected from regression. | A fixed two-column, three-row A4 grid uses row-major order; incomplete final pages retain empty slots, and only page one reserves the 22 mm QR area. | Stable geometry is more valuable than filling every centimetre; repeated cards should never jump between layouts. |
+| Listening controls | Playback behavior was visually correct but imperative media callbacks could be cleared during React rerenders. | One hidden semantic audio element uses stable event listeners; pause, selection, retry, repeat gaps, word gaps, and end-state restart are covered in real Chromium. | Playback feedback must be immediate and deterministic. Invisible state errors are more damaging than missing decorative motion. |
+| Mobile listening | A nested-scroll player would compete with the page and obscure the current word. | The page uses natural document scrolling and reveals a compact sticky player after the main card leaves view. | Mobile controls remain reachable without turning the word list into a second scrolling surface. |
+| Motion | Progress and controls used restrained transitions. | Progress uses transform-based animation, hover is limited to hover-capable pointers, and no decorative continuous motion was added. | Motion communicates state and remains interruptible; it does not compete with reading or printing. |
+| Accessibility | Icon controls and media state needed exact semantics across main and sticky controls. | Operations are real buttons/ranges with Chinese labels; images have word-specific Chinese alt text; error, revoked, missing, paused, playing, and ended states have explicit copy. | The same state model should remain understandable without relying on icon shape, colour, hover, or sound alone. |
+
+Current visual evidence lives under `output/playwright/` and includes desktop review, 390 px listening, sticky listening, and 15/60-word A4 PDFs with contact sheets. Automated rendered-behavior evidence is provided by `scripts/verify-vocabulary-rendered-behavior.mjs`.

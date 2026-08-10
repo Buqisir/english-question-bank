@@ -1,0 +1,201 @@
+{
+  "schemaVersion": "eqb-create-restored-voice-trial-v1",
+  "formalAssetsChanged": false,
+  "entry": {
+    "entryId": "wanwei-core-0085-create",
+    "headword": "create",
+    "phonetic": "/kriˈeɪt/",
+    "assets": [
+      {
+        "label": "原版",
+        "path": "audio/original.mp3",
+        "description": "原来的正式音色；重音不够清楚。",
+        "bytes": 4608,
+        "sha256": "00e852d3232eeae11d2072ab12b771e79010f2b829cdc735845ac71134041997",
+        "durationSeconds": 0.768,
+        "sampleRate": 24000,
+        "channels": 1
+      },
+      {
+        "label": "X",
+        "path": "audio/create-X.mp3",
+        "description": "重音正确的 X；新音色，仅作重音参照。",
+        "bytes": 9648,
+        "sha256": "ec019430cf6d7685e9e91a1cb215417dd85841ccd6dd5e50d418c30577754382",
+        "durationSeconds": 1.608,
+        "sampleRate": 24000,
+        "channels": 1
+      },
+      {
+        "label": "Z",
+        "path": "audio/create-Z.mp3",
+        "description": "重音正确的 Z；新音色，仅作重音参照。",
+        "bytes": 9648,
+        "sha256": "05e5adf0e0bc43f1a05205f2fce4f8e09724d1047faf4a90fb3bf7a1c8e01bf9",
+        "durationSeconds": 1.608,
+        "sampleRate": 24000,
+        "channels": 1
+      },
+      {
+        "label": "X短",
+        "path": "audio/create-X短.mp3",
+        "description": "原音色短参考为主，借 X 的正确重音作提示。",
+        "donor": "X",
+        "identityReference": "short",
+        "referenceSha256": "849500ba6ab6a3bb785663d47b81c4b72bc95ccc7238f24b1ab769e7e9ddc538",
+        "bytes": 9504,
+        "sha256": "6d9476375ebf800ab6fdba51a51459f37aba776055941799ac9b9feab5daef09",
+        "durationSeconds": 1.584,
+        "sampleRate": 24000,
+        "channels": 1
+      },
+      {
+        "label": "X长",
+        "path": "audio/create-X长.mp3",
+        "description": "原音色长参考为主，借 X 的正确重音作提示。",
+        "donor": "X",
+        "identityReference": "long",
+        "referenceSha256": "fa319d8538f8d61c800875aed55e5683afdb96cf009b5aafa313981600dbf56c",
+        "bytes": 9792,
+        "sha256": "ba75532631e16049501791d29a2b421144ac9acce3c4bd2408017ed7dbda3756",
+        "durationSeconds": 1.632,
+        "sampleRate": 24000,
+        "channels": 1
+      },
+      {
+        "label": "Z短",
+        "path": "audio/create-Z短.mp3",
+        "description": "原音色短参考为主，借 Z 的正确重音作提示。",
+        "donor": "Z",
+        "identityReference": "short",
+        "referenceSha256": "d15a765f1a03c4f01b1dd1c3ded1782b1985fc1be0585a7c425a56e59a0e6abc",
+        "bytes": 10080,
+        "sha256": "48c1436178e14eb29d15787b80c68da622bb350f108dcbeb34e7da3faadee10e",
+        "durationSeconds": 1.68,
+        "sampleRate": 24000,
+        "channels": 1
+      },
+      {
+        "label": "Z长",
+        "path": "audio/create-Z长.mp3",
+        "description": "原音色长参考为主，借 Z 的正确重音作提示。",
+        "donor": "Z",
+        "identityReference": "long",
+        "referenceSha256": "b655e998d15f91d2c0ec2d8a1ab8727321a1af7c1d6a8d50d42aa6a5191e6f14",
+        "bytes": 8928,
+        "sha256": "35ba2b7a66a9266494417e9d184307d6fd94ce0b97d21ebd82f4929f84653dc5",
+        "durationSeconds": 1.488,
+        "sampleRate": 24000,
+        "channels": 1
+      },
+      {
+        "label": "HX短",
+        "path": "audio/create-HX短.mp3",
+        "description": "混合条件：X 只提供正确重音编码，原音色短参考只提供说话人嵌入。",
+        "donorProsody": "X",
+        "speakerEmbedding": "original-short",
+        "conditioningMode": "separate-ref-code-and-speaker-embedding",
+        "bytes": 10080,
+        "sha256": "67388139081ea1bd017c51923acb8ca33db23698541870eb01f203d906c87d07",
+        "durationSeconds": 1.68,
+        "sampleRate": 24000,
+        "channels": 1
+      },
+      {
+        "label": "HX长",
+        "path": "audio/create-HX长.mp3",
+        "description": "混合条件：X 只提供正确重音编码，原音色长参考只提供说话人嵌入。",
+        "donorProsody": "X",
+        "speakerEmbedding": "original-long",
+        "conditioningMode": "separate-ref-code-and-speaker-embedding",
+        "bytes": 9648,
+        "sha256": "f1cc6ad250c978a30fdc12cfbae8b3c6f94330fd8c3237badf30b594aa421569",
+        "durationSeconds": 1.608,
+        "sampleRate": 24000,
+        "channels": 1
+      },
+      {
+        "label": "HZ短",
+        "path": "audio/create-HZ短.mp3",
+        "description": "混合条件：Z 只提供正确重音编码，原音色短参考只提供说话人嵌入。",
+        "donorProsody": "Z",
+        "speakerEmbedding": "original-short",
+        "conditioningMode": "separate-ref-code-and-speaker-embedding",
+        "bytes": 8928,
+        "sha256": "d0f066137bec7ef0ad4fba51f8a997253cda90d7818daa4180ac2e0611e26a47",
+        "durationSeconds": 1.488,
+        "sampleRate": 24000,
+        "channels": 1
+      },
+      {
+        "label": "HZ长",
+        "path": "audio/create-HZ长.mp3",
+        "description": "混合条件：Z 只提供正确重音编码，原音色长参考只提供说话人嵌入。",
+        "donorProsody": "Z",
+        "speakerEmbedding": "original-long",
+        "conditioningMode": "separate-ref-code-and-speaker-embedding",
+        "bytes": 9504,
+        "sha256": "d553e607c5ccfad6b094ed1487b711e92c037ebdf4825869b1aa790d785d86bf",
+        "durationSeconds": 1.584,
+        "sampleRate": 24000,
+        "channels": 1
+      },
+      {
+        "label": "VC轻",
+        "path": "audio/create-VC轻.mp3",
+        "description": "OpenVoice 波形转换，tau=0.15。Z 保留完整字音和重音，转换器只换向原正式音色。",
+        "source": "Z",
+        "targetToneColor": "original-formal-reference",
+        "converter": "OpenVoiceV2",
+        "tau": 0.15,
+        "bytes": 10224,
+        "sha256": "a564535175e98393016c9b19b8c964b0b9b24cb7e030d7c04e172bb432c117c2",
+        "durationSeconds": 1.704,
+        "sampleRate": 24000,
+        "channels": 1
+      },
+      {
+        "label": "VC中",
+        "path": "audio/create-VC中.mp3",
+        "description": "OpenVoice 波形转换，tau=0.30。Z 保留完整字音和重音，转换器只换向原正式音色。",
+        "source": "Z",
+        "targetToneColor": "original-formal-reference",
+        "converter": "OpenVoiceV2",
+        "tau": 0.3,
+        "bytes": 10224,
+        "sha256": "7ede9f457ea6f514c624aa199695deff0e3c408438400ff74d1ced0931cb5d6d",
+        "durationSeconds": 1.704,
+        "sampleRate": 24000,
+        "channels": 1
+      },
+      {
+        "label": "VC强",
+        "path": "audio/create-VC强.mp3",
+        "description": "OpenVoice 波形转换，tau=0.50。Z 保留完整字音和重音，转换器只换向原正式音色。",
+        "source": "Z",
+        "targetToneColor": "original-formal-reference",
+        "converter": "OpenVoiceV2",
+        "tau": 0.5,
+        "bytes": 10224,
+        "sha256": "8a3e5a70427c228a0a1a26e56c830268aa10a3885949e915091ce03139f505d4",
+        "durationSeconds": 1.704,
+        "sampleRate": 24000,
+        "channels": 1
+      }
+    ]
+  },
+  "hybridExperiment": {
+    "formalAssetsChanged": false,
+    "basis": "Qwen separates reference codec codes from speaker embedding; this trial injects them from different approved sources.",
+    "assetCount": 4
+  },
+  "voiceConversionExperiment": {
+    "formalAssetsChanged": false,
+    "sourceWaveform": "Z",
+    "targetToneColor": "original-formal-reference",
+    "converter": "myshell-ai/OpenVoiceV2",
+    "converterLicense": "MIT",
+    "converterCheckpointSha256": "9652c27e92b6b2a91632590ac9962ef7ae2b712e5c5b7f4c34ec55ee2b37ab9e",
+    "assetCount": 3
+  }
+}

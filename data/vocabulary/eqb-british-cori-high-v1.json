@@ -1,0 +1,65 @@
+{
+  "schemaVersion": "eqb-vocabulary-voice-profile-v1",
+  "voiceId": "eqb-british-cori-high-v1",
+  "displayName": "EQBank 英式教师音 · Cori High 参考版",
+  "accent": "british",
+  "identity": {
+    "kind": "synthetic",
+    "imitatesRealPerson": false,
+    "description": "不对应任何真人的清晰、温和、克制的英国女教师音色"
+  },
+  "ownerApproval": {
+    "status": "approved",
+    "approvedAt": "2026-08-09",
+    "scope": "Owner 逐词听完 1600 词，并完成 75、6、2 三轮定向修复复检"
+  },
+  "runtime": {
+    "name": "mlx-audio",
+    "version": "0.4.7",
+    "platform": "Apple Silicon",
+    "quantization": "6bit"
+  },
+  "base": {
+    "model": "mlx-community/Qwen3-TTS-12Hz-1.7B-Base-6bit",
+    "revision": "34ff5318365b59cba9c03ff729f2eee0814caf72",
+    "modelSha256": "b043693cb63f38f4e0ae5fe39a5cfdb466ef199dc5a767991a4a46235ac27e67",
+    "speechTokenizerSha256": "836b7b357f5ea43e889936a3709af68dfe3751881acefe4ecf0dbd30ba571258"
+  },
+  "reference": {
+    "path": "data/vocabulary/audio-production/eqb-british-cori-high-v1/reference.wav",
+    "sha256": "fbddae455a1ff94806c0a1781159a371978c2f195983a9411029d0ff7327de62",
+    "bytes": 547454,
+    "codec": "pcm_s16le",
+    "sampleRate": 24000,
+    "channels": 1,
+    "durationSeconds": 11.403667,
+    "referenceText": "A rainbow is a meteorological phenomenon that is caused by reflection, refraction and dispersion of light in water droplets resulting in a spectrum of light appearing in the sky."
+  },
+  "licensing": {
+    "qwenModel": "Apache-2.0",
+    "mlxAudioRuntime": "MIT",
+    "referenceOrigin": "Piper en_GB-cori-high 官方样音；训练数据来自 LibriVox public domain",
+    "distribution": "网站只发布固定 MP3，不分发模型权重"
+  },
+  "formalOutput": {
+    "version": "eqb-british-cori-high-v1",
+    "manifest": "data/vocabulary/wanwei-british-cori-audio-manifest-v1.json",
+    "receipt": "data/vocabulary/wanwei-british-cori-audio-receipt-v1.json",
+    "pathTemplate": "/vocabulary-assets/wanwei-round-one-v1/audio/eqb-british-cori-high-v1/{entryId}.mp3",
+    "format": "audio-24khz-48kbitrate-mono-mp3",
+    "sampleRate": 24000,
+    "bitrateKbps": 48,
+    "channels": 1
+  },
+  "ownerQa": {
+    "verdict": "approved",
+    "entryCount": 1600,
+    "lineageCounts": {
+      "owner-pass": 1525,
+      "repair-75": 69,
+      "repair-6": 4,
+      "repair-2": 2
+    },
+    "manifestSha256": "3765e8fad6b779ab212b967c29740b780298ffad28e97b05ba357472df179b5b"
+  }
+}
