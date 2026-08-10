@@ -77,6 +77,7 @@ export function VocabularyDictationPage({
   const [currentIndex, setCurrentIndex] = useState(0)
   const [repeatCount, setRepeatCount] = useState<1 | 2 | 3>(savedSettings.repeatCount)
   const [gapSeconds, setGapSeconds] = useState(savedSettings.gapSeconds)
+  const [gapInputValue, setGapInputValue] = useState(String(savedSettings.gapSeconds))
   const [volume, setVolume] = useState(1)
   const [playedRepeat, setPlayedRepeat] = useState(0)
   const [countdown, setCountdown] = useState<number | null>(null)
@@ -474,11 +475,48 @@ export function VocabularyDictationPage({
                 <fieldset>
                   <legend>词间书写时间</legend>
                   {[3, 5, 8].map((seconds) => (
-                    <button key={seconds} type="button" className={gapSeconds === seconds ? 'is-selected' : undefined} onClick={() => setGapSeconds(seconds)} aria-pressed={gapSeconds === seconds}>{seconds}秒</button>
+                    <button
+                      key={seconds}
+                      type="button"
+                      className={gapSeconds === seconds ? 'is-selected' : undefined}
+                      onClick={() => {
+                        setGapSeconds(seconds)
+                        setGapInputValue(String(seconds))
+                      }}
+                      aria-pressed={gapSeconds === seconds}
+                    >
+                      {seconds}秒
+                    </button>
                   ))}
                   <label className={![3, 5, 8].includes(gapSeconds) ? 'is-selected' : undefined}>
                     <span>自定义</span>
-                    <input type="number" min="3" max="15" value={gapSeconds} onChange={(event) => setGapSeconds(clampGap(Number(event.target.value) || 3))} aria-label="自定义词间书写时间，3到15秒" />
+                    <input
+                      type="number"
+                      min="3"
+                      max="15"
+                      step="1"
+                      value={gapInputValue}
+                      onChange={(event) => {
+                        const nextInput = event.target.value
+                        setGapInputValue(nextInput)
+                        if (!nextInput.trim()) return
+                        const nextGap = Number(nextInput)
+                        if (Number.isFinite(nextGap) && nextGap >= 3 && nextGap <= 15) {
+                          setGapSeconds(Math.round(nextGap))
+                        }
+                      }}
+                      onBlur={() => {
+                        const nextGap = gapInputValue.trim()
+                          ? clampGap(Number(gapInputValue))
+                          : gapSeconds
+                        setGapSeconds(nextGap)
+                        setGapInputValue(String(nextGap))
+                      }}
+                      onKeyDown={(event) => {
+                        if (event.key === 'Enter') event.currentTarget.blur()
+                      }}
+                      aria-label="自定义词间书写时间，3到15秒"
+                    />
                   </label>
                 </fieldset>
                 <label className="vocabulary-dictation-volume">

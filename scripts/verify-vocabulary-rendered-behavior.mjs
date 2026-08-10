@@ -896,7 +896,13 @@ async function verifyDictationPlayer(page) {
   assert.equal(await page.getByText('上升；升起；提高；起床；变得更加成功（或重要、强大等）；升起；增加；提高', { exact: true }).count(), 1)
 
   await page.getByRole('button', { name: '3遍' }).click()
-  await page.getByLabel('自定义词间书写时间，3到15秒').fill('7')
+  const customGapInput = page.getByLabel('自定义词间书写时间，3到15秒')
+  await customGapInput.click()
+  await customGapInput.press(process.platform === 'darwin' ? 'Meta+A' : 'Control+A')
+  await customGapInput.press('Backspace')
+  assert.equal(await customGapInput.inputValue(), '', '自定义间隔必须允许先清空旧值')
+  await customGapInput.type('7')
+  assert.equal(await customGapInput.inputValue(), '7', '清空后输入 7 不得被拼成 37 再压成 15')
   assert.deepEqual(await page.evaluate(() => JSON.parse(window.localStorage.getItem('eqb-vocabulary-dictation-settings-v1'))), { repeatCount: 3, gapSeconds: 7 })
   pass('扫码页隐藏答案，3秒倒计时后按锁定英音播放，0.8秒重复、5秒书写，末题等待完成后才允许确认看答案')
 }
