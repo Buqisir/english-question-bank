@@ -60,7 +60,7 @@ const REVIEW_ACCENT_STORAGE_KEY = 'eqb-vocabulary-review-accent-wanwei-round-one
 const PAUSED_RUN_STORAGE_KEY = 'eqb-vocabulary-review-paused-wanwei-round-one-v1'
 const TARGET_UNFAMILIAR_COUNT = 15
 const CARD_PRINT_ENTRIES_PER_PAGE = 6
-const DICTATION_PRINT_ENTRIES_PER_PAGE = 15
+const DICTATION_PRINT_ENTRIES_PER_PAGE = 16
 const PUBLIC_LISTEN_ORIGIN = 'https://eqbank.cc'
 
 type VocabularyReviewPageProps = {
@@ -253,6 +253,11 @@ function paginateVocabularyEntries(entries: VocabularyEntry[], entriesPerPage: n
     pages.push(entries.slice(index, index + entriesPerPage))
   }
   return pages
+}
+
+function splitVocabularyDictationColumns(entries: VocabularyEntry[]): [VocabularyEntry[], VocabularyEntry[]] {
+  const leftColumnCount = Math.ceil(entries.length / 2)
+  return [entries.slice(0, leftColumnCount), entries.slice(leftColumnCount)]
 }
 
 function getVocabularyDictationAnswer(entry: VocabularyEntry): string {
@@ -958,7 +963,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
       {downloadMenuOpen && (
         <div id="vocabulary-download-options" role="group" aria-label="选择下载内容">
           <button type="button" onClick={() => void downloadVocabularySheet('cards')}>单词纸<span>带图片、音节和例句</span></button>
-          <button type="button" onClick={() => void downloadVocabularySheet('dictation')}>听写纸<span>15题一页，扫码自动听写</span></button>
+          <button type="button" onClick={() => void downloadVocabularySheet('dictation')}>听写纸<span>16题一页，扫码自动听写</span></button>
           <button type="button" onClick={() => void downloadVocabularySheet('answer')}>教师答案<span>与听写纸逐题对应</span></button>
         </div>
       )}
@@ -1419,20 +1424,42 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
                 <span>日期：</span><i />
                 <span>得分：</span><i />
               </div>
-              <div className="vocabulary-dictation-print-table" role="table" aria-label={printRequest.kind === 'answer' ? '教师答案' : '学生听写纸'}>
-                <div className="vocabulary-dictation-print-table-head" role="row">
-                  <span role="columnheader">序号</span>
-                  <span role="columnheader">英文单词</span>
-                  <span role="columnheader">词性</span>
-                  <span role="columnheader">中文意思</span>
-                </div>
-                {pageEntries.map((entry, entryIndex) => (
-                  <div className="vocabulary-dictation-print-row" role="row" key={entry.id}>
-                    <span role="cell">{pageIndex * DICTATION_PRINT_ENTRIES_PER_PAGE + entryIndex + 1}</span>
-                    <strong role="cell">{printRequest.kind === 'answer' ? getVocabularyDictationAnswer(entry) : ''}</strong>
-                    <i role="cell">{printRequest.kind === 'answer' ? entry.partOfSpeech : ''}</i>
-                    <p role="cell">{printRequest.kind === 'answer' ? formatCoreMeanings(entry) : ''}</p>
-                  </div>
+              <div
+                className={`vocabulary-dictation-print-table is-${printRequest.kind}`}
+                role="table"
+                aria-label={printRequest.kind === 'answer' ? '教师答案' : '学生听写纸'}
+              >
+                {splitVocabularyDictationColumns(pageEntries).map((columnEntries, columnIndex, columns) => (
+                  <section className="vocabulary-dictation-print-column" role="rowgroup" key={`dictation-column-${columnIndex + 1}`}>
+                    <div className="vocabulary-dictation-print-table-head" role="row">
+                      <span role="columnheader">序号</span>
+                      <span role="columnheader">英文单词</span>
+                      <span role="columnheader">词性</span>
+                      <span role="columnheader">中文意思</span>
+                    </div>
+                    {columnEntries.map((entry, entryIndex) => {
+                      const columnOffset = columnIndex === 0 ? 0 : columns[0].length
+                      const number = pageIndex * DICTATION_PRINT_ENTRIES_PER_PAGE + columnOffset + entryIndex + 1
+                      return (
+                        <div className="vocabulary-dictation-print-row" role="row" key={entry.id}>
+                          <span className="vocabulary-dictation-number" role="cell">{number}</span>
+                          <div className="vocabulary-dictation-word-cell" role="cell">
+                            {printRequest.kind === 'answer' ? (
+                              <strong>{getVocabularyDictationAnswer(entry)}</strong>
+                            ) : (
+                              <span className="vocabulary-dictation-writing-guide" aria-hidden="true">
+                                <i /><i /><i /><i />
+                              </span>
+                            )}
+                          </div>
+                          <span className="vocabulary-dictation-part-of-speech" role="cell">
+                            {printRequest.kind === 'answer' ? entry.partOfSpeech : ''}
+                          </span>
+                          <p role="cell">{printRequest.kind === 'answer' ? formatCoreMeanings(entry) : ''}</p>
+                        </div>
+                      )
+                    })}
+                  </section>
                 ))}
               </div>
               <footer className="vocabulary-dictation-print-footer">
